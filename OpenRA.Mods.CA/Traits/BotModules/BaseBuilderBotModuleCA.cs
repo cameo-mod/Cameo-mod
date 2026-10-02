@@ -150,6 +150,14 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Maximum range at which to build defensive structures near a combat hotspot.")]
 		public readonly int MaximumDefenseRadius = 20;
 
+		[Desc("Cells of empty space required between the edge of a newly placed building's footprint",
+			"and the footprint edge of any other own building. Keeps bases spread out instead of",
+			"packing buildings edge-to-edge (fewer traffic jams, cheaper pathfinding). 0 disables.")]
+		public readonly int MinBuildingGapCells = 2;
+
+		[Desc("Building gap used for defense-type placements so defensive lines can still form.")]
+		public readonly int MinBuildingGapDefensesCells = 1;
+
 		[Desc("Try to build another production building if there is too much cash.")]
 		public readonly int NewProductionCashThreshold = 10000;
 
@@ -158,6 +166,15 @@ namespace OpenRA.Mods.CA.Traits
 
 		[Desc("Only queue construction of a new defense when above this requirement.")]
 		public readonly int DefenseProductionMinCashRequirement = 2250;
+
+		[Desc("Army-first production: while the player owns fewer combat units (non-building actors",
+			"with an attack trait) than this, non-essential building requests are deferred whenever",
+			"cash is above ArmyFirstMinCash so unit production keeps the money. Construction yards,",
+			"refineries, power and the first production building always pass. 0 disables.")]
+		public readonly int MinArmyUnitsBeforeBuildings = 0;
+
+		[Desc("Cash level above which the MinArmyUnitsBeforeBuildings deferral applies.")]
+		public readonly int ArmyFirstMinCash = 2000;
 
 		[Desc("Radius in cells around a factory scanned for rally points by the AI.")]
 		public readonly int RallyPointScanRadius = 8;
@@ -823,6 +840,24 @@ namespace OpenRA.Mods.CA.Traits
 		public bool HasAdequateProductionCount() =>
 			Info.ProductionTypes.Count == 0 ||
 			AIUtils.CountActorByCommonName(ProductionBuildings) > 0;
+
+		int armyUnitsCacheTick = -1;
+		int armyUnitsCount;
+
+		// Cameo (army-first): combat units are own, non-building actors carrying an attack trait
+		// (ActorsHavingTrait<AttackBase> matches every armed subclass; buildings with weapons don't
+		// count as army). Cached per world tick and shared by every queue manager of this module.
+		public int OwnedArmyUnitCount()
+		{
+			if (armyUnitsCacheTick != world.WorldTick)
+			{
+				armyUnitsCacheTick = world.WorldTick;
+				armyUnitsCount = world.ActorsHavingTrait<AttackBase>()
+					.Count(a => a.Owner == player && !a.IsDead && !a.Info.HasTraitInfo<BuildingInfo>());
+			}
+
+			return armyUnitsCount;
+		}
 
 		public bool HasCompletedPowerPlant() => AIUtils.CountActorByCommonName(powerBuildings) > 0;
 

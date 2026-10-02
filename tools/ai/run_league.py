@@ -349,8 +349,8 @@ def main() -> int:
             "--support-dir", str(cell_dir),
             "--stall-timeout", str(args.stall_timeout),
         ]
-        if team_size == 2:
-            cmd += ["--team-size", "2"]
+        if team_size >= 2:
+            cmd += ["--team-size", str(team_size)]
         if spec["swap_bots"]:
             cmd.append("--swap-bots")
         print(f"[{index}/{len(cells)}] {cell['name']} ...", flush=True)

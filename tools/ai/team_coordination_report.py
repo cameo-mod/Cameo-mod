@@ -120,7 +120,7 @@ def analyse(missions, team):
     # Shared pushes: same enemy target_player attacked by >=2 teammates
     # within `window` ticks. Pair the attempts by target+tick bucket.
     shared_push_windows = 0
-    push_events = collections.defaultdict(list)  # (target, bucket) -> players
+    push_events = collections.defaultdict(set)  # (target, bucket) -> players
     window = analyse.window
     for r in attempts:
         kind, _, tgt = mission_of(r)
@@ -149,8 +149,29 @@ def analyse(missions, team):
 
 
 def main(argv):
-    args = [a for a in argv[1:] if not a.startswith("--")]
-    opts = {a.split("=")[0]: a.split("=", 1)[1] for a in argv[1:] if "=" in a}
+    # Collect team specs in both forms: `--team A=Multi0,Multi1` (separate
+    # token) and `--team=A=Multi0,Multi1`. Everything else `--` goes to opts,
+    # everything else is positional.
+    team_specs = []
+    args = []
+    opts = {}
+    i = 1
+    while i < len(argv):
+        a = argv[i]
+        if a == "--team" and i + 1 < len(argv):
+            team_specs.append(argv[i + 1])
+            i += 2
+        elif a.startswith("--team="):
+            team_specs.append(a.split("=", 1)[1])
+            i += 1
+        elif a.startswith("--"):
+            if "=" in a:
+                k, v = a.split("=", 1)
+                opts[k] = v
+            i += 1
+        else:
+            args.append(a)
+            i += 1
     if not args:
         sys.exit(__doc__)
     analyse.window = int(opts.get("--window", 1500))
@@ -159,7 +180,12 @@ def main(argv):
     if not missions:
         sys.exit(f"no mission records under {support}/Logs")
 
-    teams = teams_from_matches(matches)
+    # Explicit team lists override inference — needed to score a still-running
+    # match, before cameo-ai-matches.jsonl is written at match end.
+    if team_specs:
+        teams = [sorted(s.split("=", 1)[-1].split(",")) for s in team_specs]
+    else:
+        teams = teams_from_matches(matches)
     if not teams:
         players = sorted({r.get("player") for r in missions})
         teams = [players]

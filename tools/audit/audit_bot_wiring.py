@@ -208,20 +208,33 @@ def load_profiles(rs):
     return profiles, bot_types, grants, granted_tokens, personalities
 
 
-def armed_profiles(profiles, grants):
-    """Second regime: increment switches rewrite grant Bots lists to generic tiers."""
-    extra = collections.defaultdict(set)
+def armed_profiles(profiles, grants, rs):
+    """Second regime: increment switches rewrite grant Bots lists to generic tiers.
+
+    Each group in tools/ai/increment_switches.yaml names a
+    `GrantConditionOnBotOwner@<key>` instance plus the `Bots:` list the arm
+    rewrites it to, so the grant's Condition token becomes live on those bot
+    types. Model the union: all groups armed at once. A module reachable only
+    under this regime is dormant-on-master but has an arm path."""
+    key_token = {}
+    for c in rs.resolve("Player").children:
+        if c.key.startswith("GrantConditionOnBotOwner") and c.get("Condition"):
+            key_token[c.key.split("@")[-1]] = c.get("Condition")
+    armed = {p: set(toks) for p, toks in profiles.items()}
     sw = REPO / "tools" / "ai" / "increment_switches.yaml"
-    if sw.exists():
-        # crude parse: under a GrantConditionOnBotOwner@X key inside groups,
-        # the Bots: list is the armed set.
-        txt = sw.read_text(encoding="utf-8", errors="replace")
-        for m in re.finditer(r"GrantConditionOnBotOwner@(\w+):\s*\n\s*Bots:\s*([^\n]+)", txt):
-            for b in m.group(2).split(","):
-                extra[b.strip()]  # bot type key only; token resolved below via grant key
-    # map grant instance key -> condition token
-    rs2 = None
-    return extra
+    if not sw.exists():
+        return armed
+    txt = sw.read_text(encoding="utf-8", errors="replace")
+    for m in re.finditer(r"GrantConditionOnBotOwner@(\w+):\s*\n\s*Bots:\s*([^\n]+)", txt):
+        token = key_token.get(m.group(1))
+        if not token:
+            continue
+        for b in m.group(2).split(","):
+            b = b.strip()
+            for pname in armed:
+                if pname == b or pname.startswith(b + ":"):
+                    armed[pname].add(token)
+    return armed
 
 
 def hidden_consumers():
@@ -267,21 +280,31 @@ def main():
         for actor, key, gate in insts:
             rows.append({"type": t, "actor": actor, "key": key, "gate": gate})
 
-    # evaluate gates per profile
-    regimes = {"master": profiles}
-    reach = {}   # instance key -> set of regimes where reachable
+    # evaluate gates per profile, under master grants and the armed-increment regime
+    armed = armed_profiles(profiles, grants, rs)
+    reach = {}   # instance key -> reachability per regime
     for inst in rows:
         tree = Expr(inst["gate"]).parse() if inst["gate"] else None
         atoms = Expr(inst["gate"]).atoms() if inst["gate"] else set()
-        ok_master, ungranted = [], set(atoms) - granted_tokens - set(personalities)
+        ok_master, ok_armed = [], []
+        ungranted = set(atoms) - granted_tokens - set(personalities)
         for pname, toks in profiles.items():
             if tree is None or evaluate(tree, toks):
                 ok_master.append(pname)
+        for pname, toks in armed.items():
+            if tree is None or evaluate(tree, toks):
+                ok_armed.append(pname)
         reach[inst["key"]] = {"gate": inst["gate"], "type": inst["type"],
                               "master_profiles": ok_master,
+                              "armed_profiles": ok_armed,
                               "ungranted_tokens": sorted(ungranted)}
 
-    r1 = [k for k, v in reach.items() if not v["master_profiles"]]
+    # unreachable = no profile in EITHER regime; armed-only = dormant on master
+    # but an increment switch group arms the gate token (by design)
+    r1 = [k for k, v in reach.items()
+          if not v["master_profiles"] and not v["armed_profiles"]]
+    r1_armed = [k for k, v in reach.items()
+                if not v["master_profiles"] and v["armed_profiles"]]
     r2 = sorted({t for v in reach.values() for t in v["ungranted_tokens"]})
     r6 = sorted(g for g in granted_tokens
                 if not any(g in (Expr(i["gate"]).atoms() if i["gate"] else set())
@@ -397,6 +420,7 @@ def main():
         "profiles": {k: sorted(v) for k, v in profiles.items()},
         "instances": len(rows),
         "R1_unreachable_instances": r1,
+        "R1_armed_only_via_increment_switch": r1_armed,
         "R2_ungranted_gate_tokens": r2,
         "R3_missing_provider_in_profile": {
             f"{k[0]} cons={list(k[1])} prov={list(k[2])}": sorted(v) for k, v in r3.items()},
@@ -415,8 +439,11 @@ def main():
 
     print(f"profiles: {len(profiles)} bot-type/personality states across {len(bot_types)} ModularBot types")
     print(f"instances evaluated: {len(rows)}")
-    print(f"R1 unreachable instances: {len(r1)}")
+    print(f"R1 unreachable instances (master + all increments armed): {len(r1)}")
     for k in r1:
+        print(f"   - {k}  gate={reach[k]['gate']!r}")
+    print(f"R1 dormant on master, armed by increment switch: {len(r1_armed)}")
+    for k in r1_armed:
         print(f"   - {k}  gate={reach[k]['gate']!r}")
     print(f"R2 gate tokens never granted anywhere: {r2 or 'none'}")
     print(f"R3 consumed-without-provider inside a profile:")

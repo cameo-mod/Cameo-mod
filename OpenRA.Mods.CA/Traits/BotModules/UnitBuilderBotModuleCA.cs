@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Linq;
 using OpenRA.Mods.Common;
 using OpenRA.Mods.Common.Traits;
+using OpenRA.Support;
 using OpenRA.Traits;
 
 namespace OpenRA.Mods.CA.Traits
@@ -63,6 +64,21 @@ namespace OpenRA.Mods.CA.Traits
 
 		[Desc("If true, will always attempt to match the number of enemy air threats.")]
 		public readonly bool MaintainAirSuperiority = false;
+
+		[ConsumedConditionReference]
+		[Desc("Increment switches on this shared instance (CountQueuedAircraft, ObservedAirThreats) take effect only while this condition is true",
+			"(e.g. genericbot), so a shared module can be A/B-switched without changing the classic reference. Null = switches apply to every owner.")]
+		public readonly BooleanExpression SwitchCondition = null;
+
+		[Desc("CA F2p2 (71754fc06): aircraft already queued for production count towards the aircraft limits,",
+			"and allied air-to-air aircraft count as part of the current air-to-air count instead of lowering the limit.",
+			"Default false keeps the previous behaviour.")]
+		public readonly bool CountQueuedAircraft = false;
+
+		[Desc("CA F2p2 / DESIGN 19.5: count enemy air threats (for MaintainAirSuperiority) from the observed enemy composition instead of",
+			"scanning every actor in the world. Bots without a fog-observing composition provider (classic) keep the world count.",
+			"Default false keeps the previous behaviour.")]
+		public readonly bool ObservedAirThreats = false;
 
 		[Desc("If MaintainAirSuperiority is true and this is non-zero,",
 			"sets an upper limit for the number of air superiority aircraft.")]
@@ -117,6 +133,11 @@ namespace OpenRA.Mods.CA.Traits
 		readonly World world;
 		readonly Player player;
 
+		// SwitchCondition result; true when no condition is configured.
+		bool switchesActive;
+		bool CountQueued => Info.CountQueuedAircraft && switchesActive;
+		bool ObservedThreats => Info.ObservedAirThreats && switchesActive;
+
 		UnitComposition activeComposition;
 		int activeCompositionProducedValue;
 		int activeCompositionSelectedTick;
@@ -169,6 +190,21 @@ namespace OpenRA.Mods.CA.Traits
 			world = self.World;
 			player = self.Owner;
 			counters = new AdaptiveCounterProduction(world, player);
+			switchesActive = info.SwitchCondition == null;
+		}
+
+		public override IEnumerable<VariableObserver> GetVariableObservers()
+		{
+			foreach (var observer in base.GetVariableObservers())
+				yield return observer;
+
+			if (Info.SwitchCondition != null)
+				yield return new VariableObserver(SwitchConditionChanged, Info.SwitchCondition.Variables);
+		}
+
+		void SwitchConditionChanged(Actor self, IReadOnlyDictionary<string, int> conditions)
+		{
+			switchesActive = Info.SwitchCondition.Evaluate(conditions);
 		}
 
 		protected override void Created(Actor self)
@@ -849,28 +885,82 @@ namespace OpenRA.Mods.CA.Traits
 
 			var limit = Info.MaxAircraft;
 			var currentCount = 0;
+			var isAirToAir = Info.AirToAirUnits.Contains(actorInfo.Name);
+
+			// One enumeration of our own and allied aircraft (own/allied actors are always visible: not a fog read).
+			var alliedAircraft = AIUtils.GetActorsWithTrait<Aircraft>(player.World)
+				.Where(a => a.Owner.RelationshipWith(player) == PlayerRelationship.Ally || a.Owner == player).ToList();
+			var ownAllAircraft = alliedAircraft.Where(a => a.Owner == player).ToList();
+			var ownAircraft = ownAllAircraft.Where(a => a.Info.HasTraitInfo<BuildableInfo>()).ToList();
+
+			// CA F2p2 (71754fc06): aircraft already in a production queue count towards the limit.
+			var queued = CountQueued ? QueuedAircraft(!Info.MaintainAirSuperiority || !isAirToAir) : null;
 
 			if (Info.MaintainAirSuperiority)
 			{
-				var numAirToAirUnits = AIUtils.GetActorsWithTrait<Aircraft>(player.World).Count(a => a.Owner == player && Info.AirToAirUnits.Contains(a.Info.Name));
+				var numAirToAirUnits = ownAllAircraft.Count(a => Info.AirToAirUnits.Contains(a.Info.Name));
 
-				if (Info.AirToAirUnits.Contains(actorInfo.Name))
+				if (isAirToAir)
 				{
 					currentCount = numAirToAirUnits;
-					var numFriendlyAirToAirUnits = player.World.Actors.Count(a => a.Owner.RelationshipWith(player) == PlayerRelationship.Ally && Info.AirToAirUnits.Contains(a.Info.Name));
-					var numEnemyAirThreatUnits = player.World.Actors.Count(a => a.Owner.RelationshipWith(player) == PlayerRelationship.Enemy && Info.AirThreatUnits.Contains(a.Info.Name));
-					limit = Math.Max(numEnemyAirThreatUnits - numFriendlyAirToAirUnits + 1, limit);
+					var numFriendlyAirToAirUnits = alliedAircraft.Count(a => a.Owner.RelationshipWith(player) == PlayerRelationship.Ally && Info.AirToAirUnits.Contains(a.Info.Name));
+					var numEnemyAirThreatUnits = EnemyAirThreatCount();
 
-					if (Info.MaxAirSuperiority > 0)
-						limit = Math.Min(Info.MaxAirSuperiority, limit);
+					if (CountQueued)
+					{
+						// Upstream: friendly (allied) A2A plus everything queued by the team is the current count.
+						currentCount = numFriendlyAirToAirUnits + queued.Count(n => Info.AirToAirUnits.Contains(n));
+					}
+
+					limit = AirLimits.AirSuperiorityLimit(limit, numEnemyAirThreatUnits, numFriendlyAirToAirUnits, CountQueued, Info.MaxAirSuperiority);
 				}
 				else
-					currentCount = AIUtils.GetActorsWithTrait<Aircraft>(player.World).Count(a => a.Owner == player && a.Info.HasTraitInfo<BuildableInfo>()) - numAirToAirUnits;
+				{
+					currentCount = ownAircraft.Count - numAirToAirUnits;
+					if (CountQueued)
+						currentCount += queued.Count(n => !Info.AirToAirUnits.Contains(n));
+				}
 			}
 			else
-				currentCount = AIUtils.GetActorsWithTrait<Aircraft>(player.World).Count(a => a.Owner == player && a.Info.HasTraitInfo<BuildableInfo>());
+			{
+				currentCount = ownAircraft.Count;
+				if (CountQueued)
+					currentCount += queued.Count;
+			}
 
 			return currentCount < limit;
+		}
+
+		// Names of aircraft sitting in production queues: our own queues, plus allied queues unless `ownOnly`
+		// (the air-to-air pool is shared with allies, upstream counts their queues too).
+		List<string> QueuedAircraft(bool ownOnly)
+		{
+			var result = new List<string>();
+			foreach (var p in world.Players)
+			{
+				if (p != player && (ownOnly || !p.IsAlliedWith(player)))
+					continue;
+
+				foreach (var group in OpenRA.Mods.Common.AIUtils.FindQueuesByCategory(p))
+					foreach (var q in group)
+						foreach (var item in q.AllQueued())
+							if (world.Map.Rules.Actors.TryGetValue(item.Item, out var ai) && ai.HasTraitInfo<AircraftInfo>())
+								result.Add(item.Item);
+			}
+
+			return result;
+		}
+
+		// CA F2p2 / DESIGN 19.5: with ObservedAirThreats the enemy air threats come from the OBSERVED enemy composition
+		// (fog memory). Without a provider that observes through fog (the classic bot) - or with the switch off - the
+		// legacy omniscient world count stays, so the classic A/B reference is unchanged.
+		int EnemyAirThreatCount()
+		{
+			if (ObservedThreats && compositionProvider != null && compositionProvider.TryGetEnemyComposition(out var valueByType))
+				return AirLimits.EstimateObservedThreatCount(valueByType, Info.AirThreatUnits,
+					type => world.Map.Rules.Actors.TryGetValue(type, out var ai) ? ai.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? 0 : 0);
+
+			return player.World.Actors.Count(a => a.Owner.RelationshipWith(player) == PlayerRelationship.Enemy && Info.AirThreatUnits.Contains(a.Info.Name));
 		}
 
 		List<MiniYamlNode> IGameSaveTraitData.IssueTraitData(Actor self)

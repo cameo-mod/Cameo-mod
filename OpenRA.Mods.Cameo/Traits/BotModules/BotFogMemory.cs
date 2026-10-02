@@ -277,6 +277,13 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public bool Infantry;
 		public bool Vehicle;
 		public bool Naval;
+
+		// CN3: the actor carries an enabled-by-default DetectCloaked — the
+		// stealth doctrine's remembered detector coverage. DetectorRangeCells is
+		// the observed type's longest such range in cells (public ruleset data
+		// for a seen type — fog-honest).
+		public bool Detector;
+		public int DetectorRangeCells;
 	}
 
 	/// <summary>
@@ -365,6 +372,20 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			return Table(enemy).Values;
 		}
 
+		// CN3: the remembered DetectCloaked carriers across every enemy table,
+		// aged by their last sighting — the detector coverage the stealth squads
+		// route around. `Enemy` is the table's owner. Sightings older than
+		// maxAgeTicks are treated as gone; empty means none observed, never
+		// "no detectors exist".
+		internal IEnumerable<BotKnownDetector> KnownDetectors(int maxAgeTicks)
+		{
+			var tick = viewer.World.WorldTick;
+			foreach (var (enemy, table) in tables)
+				foreach (var seen in table.Values)
+					if (seen.Detector && seen.DetectorRangeCells > 0 && tick - seen.LastSeenTick <= maxAgeTicks)
+						yield return new BotKnownDetector(seen.Location, seen.DetectorRangeCells, seen.LastSeenTick, enemy);
+		}
+
 		Dictionary<uint, ObservedActor> Table(OpenRA.Player enemy)
 		{
 			if (!tables.TryGetValue(enemy, out var table))
@@ -377,6 +398,14 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		{
 			var building = actorInfo.HasTraitInfo<BuildingInfo>();
 			var hasAttack = actorInfo.HasTraitInfo<AttackBaseInfo>();
+
+			// Only traits enabled by default count: a condition-gated detector
+			// (RequiresCondition unmet at rules load) may never come online, and
+			// the memory cannot observe condition state through fog anyway.
+			var detectorRanges = actorInfo.TraitInfos<DetectCloakedInfo>()
+				.Where(t => t.EnabledByDefault)
+				.Select(t => (t.Range.Length + 1023) / 1024)
+				.ToList();
 			return new ObservedActor
 			{
 				Info = actorInfo,
@@ -397,7 +426,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				AntiAir = HasAntiAirWeapon(actorInfo),
 				Infantry = targetTypes.Overlaps(info.InfantryTargetTypes),
 				Vehicle = targetTypes.Overlaps(info.VehicleTargetTypes),
-				Naval = targetTypes.Overlaps(info.NavalTargetTypes)
+				Naval = targetTypes.Overlaps(info.NavalTargetTypes),
+				Detector = detectorRanges.Count > 0,
+				DetectorRangeCells = detectorRanges.Count > 0 ? detectorRanges.Max() : 0
 			};
 		}
 

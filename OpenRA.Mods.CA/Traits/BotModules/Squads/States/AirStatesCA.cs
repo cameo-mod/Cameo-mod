@@ -408,7 +408,8 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			if (needRoute)
 				routedCurrentTarget = true;
 
-			var canBuildMoreOfAircraft = leader != null ? !limitOne && owner.SquadManager.CanBuildMoreOfAircraft(leader.Info) : false;
+			// CA F2p2 (71754fc06): evaluated lazily - the limit check is only needed when the squad would otherwise keep waiting.
+			System.Func<bool> canBuildMoreOfAircraft = () => leader != null && !limitOne && owner.SquadManager.CanBuildMoreOfAircraft(leader.Info);
 			var waitingCount = owner.WaitingUnits.Count();
 
 			var waitingPatience = 99;
@@ -492,7 +493,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 					owner.WaitingUnits.Add(a.Actor);
 			}
 
-			if ((!canBuildMoreOfAircraft || noPatience) && owner.WaitingUnits.Count > 0 && owner.WaitingUnits.Count >= owner.RearmingUnits.Count)
+			if (owner.WaitingUnits.Count > 0 && owner.WaitingUnits.Count >= owner.RearmingUnits.Count && (noPatience || !canBuildMoreOfAircraft()))
 			{
 				foreach (var a in owner.WaitingUnits)
 					if (CanAttackTarget(a, owner.TargetActor))
