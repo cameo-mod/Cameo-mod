@@ -3254,3 +3254,11 @@ looked finished and passed weaker gates:
 **Rule:** after any bulk yaml rewrite, gate on (a) resolved-diff of actors+weapons, (b) a
 strict-removal replay over the OUTPUT files, (c) the boot gate — each catches a class the others
 miss.
+
+## `launch-game.cmd` fails from Git Bash — GNU `find` shadows Windows `find.exe` (2026-10-02, EMBER)
+
+The batch file's `find %ENGINE_VERSION% %ENGINE_DIRECTORY%\VERSION` check resolves `find`
+against PATH; under Git Bash that's GNU find, which treats the hash as a path
+(`find: 'd5d8b2a…': No such file or directory`) and the launcher exits with "Required
+engine files not found" even when `engine/` is fine. Run the batch via PowerShell/cmd, or
+launch `engine\bin\OpenRA.exe` directly as WORKFLOW.md already prescribes.

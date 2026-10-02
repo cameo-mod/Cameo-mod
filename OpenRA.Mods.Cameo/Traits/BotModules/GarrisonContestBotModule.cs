@@ -164,24 +164,32 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		void TickContests(IBot bot, IBotUnitLeases leases)
 		{
 			// Housekeeping first: drop walkers that arrived, died, lost their lease, or whose target stopped being neutral.
-			var prune = new List<uint>();
+			var prune = new List<(uint Building, bool AnyInside)>();
 			foreach (var (building, walkers) in claimWalkers)
 			{
+				var anyInside = false;
 				walkers.RemoveAll(w =>
 				{
-					var done = w.IsDead || !w.IsInWorld || w.Owner != player || IsInside(w)
+					var inside = IsInside(w);
+					var done = w.IsDead || !w.IsInWorld || w.Owner != player || inside
 						|| leases == null || !leases.TryClaim(w, LeaseOwner, BotLeasePurpose.Garrison, LeaseHeartbeatTicks());
 					if (done)
+					{
+						anyInside |= inside;
 						leases?.Release(w, LeaseOwner);
+					}
 
 					return done;
 				});
 				if (walkers.Count == 0)
-					prune.Add(building);
+					prune.Add((building, anyInside));
 			}
 
-			foreach (var id in prune)
+			foreach (var (id, anyInside) in prune)
+			{
 				claimWalkers.Remove(id);
+				WriteClaimClosed(id, anyInside);
+			}
 
 			if (claimWalkers.Count >= Info.MaxConcurrentClaims)
 				return;
@@ -281,6 +289,34 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			}
 		}
 
+		// Every resolved contest claim writes a terminal card line - occupied, lost to the enemy, target
+		// destroyed, or the walkers died in transit. Without it the archive holds open claims forever.
+		void WriteClaimClosed(uint building, bool anyInside)
+		{
+			var actor = world.GetActorById(building);
+			string reason;
+			if (anyInside || (actor != null && !actor.IsDead && actor.Owner == player))
+				reason = BotMissionReasons.Done;
+			else if (actor == null || actor.IsDead)
+				reason = BotMissionReasons.TargetGone;
+			else if (actor.Owner.RelationshipWith(player) == PlayerRelationship.Enemy)
+				reason = "x_contest_lost";
+			else
+				reason = BotMissionReasons.LostUnits;
+
+			BotMissionLog.Write(new BotMissionRecord
+			{
+				Player = player,
+				MissionId = $"garrison_contest:a{building}",
+				Event = BotMissionEvent.Dormant,
+				Reason = reason,
+				Executor = nameof(GarrisonContestBotModule),
+				MissionType = "garrison_contest",
+				TargetCell = actor?.Location,
+				Tick = world.WorldTick
+			});
+		}
+
 		void TickClearMissions()
 		{
 			raidReservations.Keys
@@ -353,6 +389,20 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					Tick = world.WorldTick
 				});
 			}
+
+			// A card that vanished from the scan while not reserved resolved itself - the garrison was
+			// destroyed or captured - so shelf it; reserved cards are live attempts owned by the executor.
+			foreach (var retired in previous.Except(next.Select(m => m.MissionId)).Where(id => !raidReservations.ContainsKey(id)))
+				BotMissionLog.Write(new BotMissionRecord
+				{
+					Player = player,
+					MissionId = retired,
+					Event = BotMissionEvent.Dormant,
+					Reason = BotMissionReasons.TargetGone,
+					Executor = nameof(GarrisonContestBotModule),
+					MissionType = "raid",
+					Tick = world.WorldTick
+				});
 
 			missions = next;
 		}

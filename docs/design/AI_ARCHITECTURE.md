@@ -2850,6 +2850,11 @@ never *aimed* at it.
   genericbot (`classicbot || (genericbot && !garrison_contest)`) — the same yield pattern
   as `cn3_bridge_repair` (EngineerBotModule's RepairBridge job). Classic keeps the CA
   loader untouched, so the A/B control is preserved.
+- *Terminal cards:* every contest claim ends in a DORMANT card line — `done` (walkers
+  inside / building ours), `target_gone` (destroyed), `x_contest_lost` (flipped enemy),
+  or `lost_units` (walkers died in transit). Raid cards that leave the scan without a
+  reservation are shelved `target_gone`; reserved ones stay live under the executor. The
+  archive therefore has a close-out for every card this module publishes.
 
 **EX-4 — cover the whole map** (`ExpansionPlannerBotModule.CoverAllFields`, switch
 `AC_cover_map_expansion`).
