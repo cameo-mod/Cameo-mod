@@ -404,6 +404,21 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("CV (12.7a): ticks after a commit or abort before the squad may deploy a concave again.")]
 		public readonly int ConcaveCooldownTicks = 750;
 
+		[Desc("Assault fan (Rush, inside FormationMovement): radius in cells around the squad target at which the approach arc slots sit.")]
+		public readonly int AssaultFanRadiusCells = 10;
+
+		[Desc("Assault fan: minimum number of distinct approach headings (arc slots) a Rush squad spreads across for the final approach.")]
+		public readonly int AssaultFanMinSlots = 3;
+
+		[Desc("Assault fan: maximum number of distinct approach headings (arc slots) a Rush squad spreads across for the final approach.")]
+		public readonly int AssaultFanMaxSlots = 8;
+
+		[Desc("Assault fan: distance in cells to the squad target at which a Rush squad breaks column into the arc fan instead of marching on.")]
+		public readonly int AssaultEngageRadiusCells = 18;
+
+		[Desc("Assault fan: ticks early arrivers hold at their arc slot while another prong is still inbound, before the synchronized push anyway.")]
+		public readonly int AssaultSyncHoldTicks = 125;
+
 		[Desc("MI: Rush squads micro inside a fight - focus-fire the fastest-kill observed target, damaged members pull back behind the formation anchor, outranging members hold a kite standoff. Micro orders spend IBotActionBudget actions when a producer is present. Own cell, independent of FormationMovement.")]
 		public readonly bool SquadMicroEnabled = false;
 
