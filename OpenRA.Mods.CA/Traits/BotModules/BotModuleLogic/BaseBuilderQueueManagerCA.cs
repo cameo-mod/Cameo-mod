@@ -103,8 +103,20 @@ namespace OpenRA.Mods.CA.Traits
 			? scaled : productionTypeLimit;
 
 		// BotLimits carries the per-difficulty value on the DESIGN §19.1 line; negative there means the module's own.
-		int NewProductionCashThreshold => botLimits != null && botLimits.Info.NewProductionCashThreshold >= 0
-			? botLimits.Info.NewProductionCashThreshold : baseBuilder.Info.NewProductionCashThreshold;
+		// Build-order knobs (12.25): greed raises the cash the production priority override waits for (economy first), production lowers it.
+		int NewProductionCashThreshold
+		{
+			get
+			{
+				var threshold = botLimits != null && botLimits.Info.NewProductionCashThreshold >= 0
+					? botLimits.Info.NewProductionCashThreshold : baseBuilder.Info.NewProductionCashThreshold;
+				var knobs = baseBuilder.BuildOrderKnobs;
+				if (knobs == null || threshold <= 0)
+					return threshold;
+
+				return DivideByKnob(BotBuildOrderKnobs.Scale(threshold, knobs.KnobMilli(BuildOrderKnob.Greed)), knobs.KnobMilli(BuildOrderKnob.Production));
+			}
+		}
 
 		public void Tick(IBot bot)
 		{
@@ -200,6 +212,11 @@ namespace OpenRA.Mods.CA.Traits
 			var excessPowerBonus = baseBuilder.Info.ExcessPowerIncrement * (playerBuildings.Count() / baseBuilder.Info.ExcessPowerIncreaseThreshold.Clamp(1, int.MaxValue));
 			minimumExcessPower = (baseBuilder.Info.MinimumExcessPower + excessPowerBonus).Clamp(baseBuilder.Info.MinimumExcessPower, baseBuilder.Info.MaximumExcessPower);
 
+			// Build-order knobs (12.25): power_margin scales the surplus target (no provider = unchanged).
+			var knobs = baseBuilder.BuildOrderKnobs;
+			if (knobs != null)
+				minimumExcessPower = BotBuildOrderKnobs.Scale(minimumExcessPower, knobs.KnobMilli(BuildOrderKnob.PowerMargin));
+
 			// PERF: Queue only one actor at a time per category
 			itemQueuedThisTick = false;
 			var active = false;
@@ -215,6 +232,10 @@ namespace OpenRA.Mods.CA.Traits
 
 			WaitTicks = active ? baseBuilder.Info.StructureProductionActiveDelay + randomFactor
 				: baseBuilder.Info.StructureProductionInactiveDelay + randomFactor;
+
+			// Build-order knobs (12.25): tempo shortens (above 1000) or lengthens the general build interval.
+			if (knobs != null)
+				WaitTicks = DivideByKnob(WaitTicks, knobs.KnobMilli(BuildOrderKnob.Tempo));
 		}
 
 		bool TickQueue(IBot bot, ProductionQueue queue)
@@ -247,6 +268,7 @@ namespace OpenRA.Mods.CA.Traits
 				}
 
 				baseBuilder.RecordOpeningStructureQueued(queue, item);
+				baseBuilder.BuildOrderKnobs?.NotifyQueued(item.Name);
 				bot.QueueOrder(Order.StartProduction(queue.Actor, item.Name, 1));
 				queuedAt[queue.Actor.ActorID] = (item.Name, world.WorldTick);
 				itemQueuedThisTick = true;
@@ -437,7 +459,92 @@ namespace OpenRA.Mods.CA.Traits
 		bool HasSufficientPowerForActor(ActorInfo actorInfo)
 		{
 			return playerPower == null || (actorInfo.TraitInfos<PowerInfo>().Where(i => i.EnabledByDefault)
-				.Sum(p => p.Amount) + playerPower.ExcessPower) >= baseBuilder.Info.MinimumExcessPower;
+				.Sum(p => p.Amount) + playerPower.ExcessPower) >= ScaledBaseMinimumExcessPower();
+		}
+
+		// Build-order knobs (12.25): power_margin scales the configured surplus floor too.
+		int ScaledBaseMinimumExcessPower()
+		{
+			var knobs = baseBuilder.BuildOrderKnobs;
+			return knobs == null ? baseBuilder.Info.MinimumExcessPower
+				: BotBuildOrderKnobs.Scale(baseBuilder.Info.MinimumExcessPower, knobs.KnobMilli(BuildOrderKnob.PowerMargin));
+		}
+
+		// Build-order knobs (12.25): the milli multiplier of a building's fraction by its rules-derived category (1000 = none).
+		int FractionMilli(string actorName)
+		{
+			var knobs = baseBuilder.BuildOrderKnobs;
+			if (knobs == null)
+				return BuildOrderKnob.Neutral;
+
+			var knob = BuildOrderCategory.KnobFor(knobs.CategoryOf(actorName));
+			return knob == null ? BuildOrderKnob.Neutral : knobs.KnobMilli(knob);
+		}
+
+		// Build-order knobs (12.25): the opening's next wanted building, preferred over the fraction table. It runs AFTER the
+		// low-power and refinery priority overrides, so an opening never blocks a power or refinery emergency, and it respects
+		// the same limits and the power check as every other choice. Null = no opening, nothing wanted here, or nothing buildable
+		// in this queue (another queue's manager may take the step).
+		ActorInfo ChooseOpeningBuilding(IBotBuildOrderKnobs knobs, IEnumerable<ActorInfo> buildableThings, ActorInfo power)
+		{
+			var wanted = knobs.OpeningWanted;
+			if (wanted == null)
+				return null;
+
+			ActorInfo best = null;
+			var bestFraction = -1;
+			foreach (var candidate in buildableThings)
+			{
+				var name = candidate.Name;
+				if (!BuildOrderCategory.Satisfies(wanted, knobs.CategoryOf(name)))
+					continue;
+
+				if (baseBuilder.Info.NavalProductionTypes.Contains(name) || baseBuilder.Info.RefineryTypes.Contains(name) && baseBuilder.HasMaxRefineriesFor(candidate))
+					continue;
+
+				var count = playerBuildings.Count(a => a.Info.Name == name) +
+					(baseBuilder.BuildingsBeingProduced.TryGetValue(name, out var num) ? num : 0);
+
+				if (botLimits != null && baseBuilder.Info.ProductionTypes.Contains(name) && count >= ProductionTypeLimit)
+					continue;
+
+				if (baseBuilder.TryGetBuildingLimit(name, out var limit) && limit <= count)
+					continue;
+
+				var fraction = baseBuilder.Info.BuildingFractions != null && baseBuilder.Info.BuildingFractions.TryGetValue(name, out var f) ? f : 0;
+				if (best == null || fraction > bestFraction || fraction == bestFraction && string.CompareOrdinal(name, best.Name) < 0)
+				{
+					best = candidate;
+					bestFraction = fraction;
+				}
+			}
+
+			if (best == null)
+				return null;
+
+			if (!HasSufficientPowerForActor(best))
+				return power != null && power.TraitInfos<PowerInfo>().Where(i => i.EnabledByDefault).Sum(pi => pi.Amount) > 0 ? power : null;
+
+			AIUtils.BotDebug("{0} decided to build {1}: opening step {2}", player, best.Name, wanted);
+			return best;
+		}
+
+		static int DivideByKnob(int ticks, int milli) => milli == BuildOrderKnob.Neutral ? ticks : (int)(ticks * 1000L / Math.Max(1, milli));
+
+		// Build-order knobs (12.25): a delay or interval in ticks for one building. tempo divides every one (above 1000 = faster);
+		// a tech/superweapon building's also divides by the tech knob, a refinery's by greed. No provider = unchanged.
+		int KnobTicks(int ticks, string actorName)
+		{
+			var knobs = baseBuilder.BuildOrderKnobs;
+			if (knobs == null)
+				return ticks;
+
+			ticks = DivideByKnob(ticks, knobs.KnobMilli(BuildOrderKnob.Tempo));
+			var knob = BuildOrderCategory.KnobFor(knobs.CategoryOf(actorName));
+			if (knob == BuildOrderKnob.Tech || knob == BuildOrderKnob.Greed)
+				ticks = DivideByKnob(ticks, knobs.KnobMilli(knob));
+
+			return ticks;
 		}
 
 		// Cameo (army-first): buildings that stay allowed while the army-first vote holds
@@ -540,6 +647,15 @@ namespace OpenRA.Mods.CA.Traits
 				}
 			}
 
+			// Build-order knobs (12.25): the active opening's next wanted building.
+			var buildOrderKnobs = baseBuilder.BuildOrderKnobs;
+			if (buildOrderKnobs != null)
+			{
+				var opening = ChooseOpeningBuilding(buildOrderKnobs, buildableThings, power);
+				if (opening != null)
+					return opening;
+			}
+
 			// Make sure that we can spend as fast as we are earning
 			if (NewProductionCashThreshold > 0 && playerResources.GetCashAndResources() > NewProductionCashThreshold)
 			{
@@ -605,7 +721,7 @@ namespace OpenRA.Mods.CA.Traits
 				// Does this building have initial delay, if so have we passed it?
 				if (baseBuilder.Info.BuildingDelays != null &&
 					baseBuilder.Info.BuildingDelays.TryGetValue(name, out var delay) &&
-					delay * buildingDelayModifier / 100 > world.WorldTick)
+					KnobTicks(delay * buildingDelayModifier / 100, name) > world.WorldTick)
 					continue;
 
 				// Does this building have an interval which hasn't elapsed yet?
@@ -628,7 +744,8 @@ namespace OpenRA.Mods.CA.Traits
 					(baseBuilder.BuildingsBeingProduced.TryGetValue(name, out var num) ? num : 0);
 
 				// Do we want to build this structure?
-				if (count * 100 > frac.Value * playerBuildings.Length)
+				// Build-order knobs (12.25): production/tech/defence/support/greed scale the fraction of their categories (milli = 1000 without a provider).
+				if (count * 100L * 1000 > (long)frac.Value * FractionMilli(name) * playerBuildings.Length)
 					continue;
 
 				if (botLimits != null && baseBuilder.Info.ProductionTypes.Contains(name) && count >= ProductionTypeLimit)
@@ -1052,7 +1169,7 @@ namespace OpenRA.Mods.CA.Traits
 			if (baseBuilder.Info.BuildingIntervals == null || !baseBuilder.Info.BuildingIntervals.ContainsKey(name))
 				return;
 
-			activeBuildingIntervals[name] = baseBuilder.Info.BuildingIntervals[name] * buildingIntervalModifier / 100;
+			activeBuildingIntervals[name] = KnobTicks(baseBuilder.Info.BuildingIntervals[name] * buildingIntervalModifier / 100, name);
 		}
 	}
 }

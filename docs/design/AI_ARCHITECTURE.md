@@ -1358,7 +1358,7 @@ this incrementally shippable — each phase in 10.6 is a complete, playable stat
 Verified on 2026-09-07 from the active `mods/cameo/mod.yaml` manifest and resolved
 `Player` / `World`, against upstream base `291052380`. Scope here is the decision modules,
 their explicit coordination adapter, and the three data/limit providers named below:
-**67 distinct trait types, 92 Player instances plus one World instance** (2026-10-02d: ST adds `ScaleTargetsBotModule` (genericbot, behind `scale_targets`), the §12.22 size-target provider, +1 type / +1 instance (#770 left it uncounted); 2026-10-02c: PP-1 adds `ParallelProductionBotModule` (genericbot, behind `parallel_production`), the settings-only IBotProductionWidth provider, and ATK-1 adds `AssaultFormationBotModule` (genericbot, behind `assault_fanout`), the settings-only provider of the unified CV/ATK-1 deploy state (§12.7a), and ST adds `ScaleTargetsBotModule` (genericbot, behind `scale_targets`, §12.22), +3 types / +3 instances; 2026-10-02b: SP-1/AF-1 add `SpacingAdvisorBotModule` + `ArmyFirstBotModule` (genericbot, behind `spaced_base`/`army_first`) and the `HarvesterBotModuleCA@generic`/@classic split adds one more instance, +3 types / +4 instances — the count also absorbs +2/+2 drift other merges left uncounted; 2026-10-02: CN3 adds `BridgeRepairBotModule` (genericbot, behind `cn3_bridge_repair`), the CN bridge-hut repair port claiming repairers per §19.6, +1 type / +1 instance — the count also absorbs a +1 drift RV2's `SupportPowerBotASModule@wc2` left uncounted; 2026-10-01: CN3 adds `DeployBotModule` (genericbot, behind `cn3_deploy`), the CN unified deploy-driving port, +1 type / +1 instance; CN2 adds `UnitRepairBotModule` (genericbot, behind `cn2_unit_repair`) and `GarrisonDefenseBotModule` (genericbot, behind `cn2_garrison_defense`), the crystallized-nexus repair-manager and threat-adaptive garrison ports claiming units per §19.6, +2 types / +2 instances; ZG adds `TacticalMapBotModule` (genericbot), +1 type / +1 instance; 2026-09-30: RV1 adds `BaseRepairBotModule`, the merged repair owner of DESIGN §19.3, and unloads the Common `BuildingRepairBotModule`, ±0; #656 adds `SiegeEvaluatorBotModule` (CA-2a siege telemetry) and splits the Fransbot `FransGroundCommanderBotModule` into six instances `@ground1`…`@ground6`, +1 type / +6 instances; 2026-09-29: `ExpansionPlannerBotModule`, EX-0 of §12.13, +1 type / +1 instance; 2026-09-28: #621 adds
+**68 distinct trait types, 93 Player instances plus one World instance** (2026-10-02e: BO-1 adds `BuildOrderKnobsBotModule` (genericbot, behind `build_order_knobs`), the §12.25 build-order knob provider, +1 type / +1 instance; 2026-10-02d: ST adds `ScaleTargetsBotModule` (genericbot, behind `scale_targets`), the §12.22 size-target provider, +1 type / +1 instance (#770 left it uncounted); 2026-10-02c: PP-1 adds `ParallelProductionBotModule` (genericbot, behind `parallel_production`), the settings-only IBotProductionWidth provider, and ATK-1 adds `AssaultFormationBotModule` (genericbot, behind `assault_fanout`), the settings-only provider of the unified CV/ATK-1 deploy state (§12.7a), and ST adds `ScaleTargetsBotModule` (genericbot, behind `scale_targets`, §12.22), +3 types / +3 instances; 2026-10-02b: SP-1/AF-1 add `SpacingAdvisorBotModule` + `ArmyFirstBotModule` (genericbot, behind `spaced_base`/`army_first`) and the `HarvesterBotModuleCA@generic`/@classic split adds one more instance, +3 types / +4 instances — the count also absorbs +2/+2 drift other merges left uncounted; 2026-10-02: CN3 adds `BridgeRepairBotModule` (genericbot, behind `cn3_bridge_repair`), the CN bridge-hut repair port claiming repairers per §19.6, +1 type / +1 instance — the count also absorbs a +1 drift RV2's `SupportPowerBotASModule@wc2` left uncounted; 2026-10-01: CN3 adds `DeployBotModule` (genericbot, behind `cn3_deploy`), the CN unified deploy-driving port, +1 type / +1 instance; CN2 adds `UnitRepairBotModule` (genericbot, behind `cn2_unit_repair`) and `GarrisonDefenseBotModule` (genericbot, behind `cn2_garrison_defense`), the crystallized-nexus repair-manager and threat-adaptive garrison ports claiming units per §19.6, +2 types / +2 instances; ZG adds `TacticalMapBotModule` (genericbot), +1 type / +1 instance; 2026-09-30: RV1 adds `BaseRepairBotModule`, the merged repair owner of DESIGN §19.3, and unloads the Common `BuildingRepairBotModule`, ±0; #656 adds `SiegeEvaluatorBotModule` (CA-2a siege telemetry) and splits the Fransbot `FransGroundCommanderBotModule` into six instances `@ground1`…`@ground6`, +1 type / +6 instances; 2026-09-29: `ExpansionPlannerBotModule`, EX-0 of §12.13, +1 type / +1 instance; 2026-09-28: #621 adds
 `SquadManagerBotModuleCA@guerrilla`, the 69th instance; #607 adds `ResourceMapBotModule@fransbot` and `SquadManagerBotModuleCA@classic`, the 67th–68th instances; #578's Route-A Fransbot port adds 24 vendored `Frans*BotModule` types / 24 instances, the 28th–51st / 43rd–66th, which run only under the `fransbot` bot type; `BeaconResponderBotModule` (#580) is the 27th type / 42nd instance; `CncEngineerBotModule` (#562), `CombatAnalysisBotModule` (#564) and `HumanPaceBotModule` added the 24th–26th types / 39th–41st instances; `ScoutBotModule` was the 23rd/38th). Conditional instances
 are loaded, not necessarily enabled simultaneously. This replaces the old unqualified
 "20 loaded modules" claim. The scope does not count `ModularBot` dispatchers,
@@ -3218,6 +3218,49 @@ and timers. Route 3 "chosen" is the opening bandit. Everything follows §19.2's 
 * a match is scored as **win plus margin**.
 
 Units are out of scope until the rebalance.
+
+**BO-1 - Implemented (2026-10-02, branch `claude/bo1_2026_10_02`; switch `AK_build_order_knobs`, default off).**
+* `IBotBuildOrderKnobs` (Mods.CA: `Enabled`, `KnobMilli(knob)`, `CategoryOf(actor)`, `OpeningWanted`, `NotifyQueued(actor)`) +
+  `BuildOrderKnobsBotModule` (Mods.Cameo, `RequiresCondition: genericbot && build_order_knobs`, `GrantConditionOnBotOwner@buildorderknobs`
+  `Bots: fransbot` = inert on master). The shared `BaseBuilderBotModuleCA` reads `BuildOrderKnobs` (first enabled provider, else null:
+  classic and switch-off are bit-identical). Pure math, opening, react rules and the learned-file model are in `BuildOrderKnobsEval.cs`
+  (unit-tested). All knobs are integer thousandths.
+* **Knob -> consumer** (`BaseBuilderQueueManagerCA`; categories are rules-derived by the provider: the base builder's own type lists, then
+  `BotTargetTags`, radar/repair traits and the `tech` role - no actor-id list):
+  | knob | what it does |
+  |---|---|
+  | `tempo` | **speed** of the build clock: `BuildingDelays`, `BuildingIntervals` and the general build interval (`StructureProduction*Delay`) are divided by it, so 1150 = 15% faster |
+  | `greed` | refinery-category fractions, refinery delay (divided), and `NewProductionCashThreshold` x greed (economy before more factories) |
+  | `production` | fractions of barracks / factory / production buildings; `NewProductionCashThreshold` / production |
+  | `tech` | fractions and delays (divided) of `tech` and `superweapon` buildings |
+  | `defence` | fractions of defence / anti-air buildings |
+  | `support` | fractions of radar / repair buildings |
+  | `power_margin` | the power surplus target (`MinimumExcessPower` and its bonus, and the per-building power check) |
+  | `expansion` | published only (`KnobMilli("expansion")`); the expansion planner reads it later - the base builder does not |
+  Fractions compare as `count x 100 x 1000 > fraction x knob x buildings` (no rounding of small fractions).
+* **Opening:** yaml `Openings` (`eco`, `barracks_first`, `fast_tech`, `defence_first`) = ordered categories (`production` = any production
+  building). The base builder asks `OpeningWanted` AFTER the low-power and refinery priority overrides and before the cash-threshold
+  production override, picks the highest-fraction buildable building of that category that respects `BuildingLimits`, the production limit
+  and the power check (building power first when it would brown out), and calls `NotifyQueued` for every queued building so any path
+  advances the step. Ends: completed, `OpeningMaxTicks`, a step stuck `OpeningStepTimeoutTicks` (skipped), or the react layer.
+* **Value** = `Presets[personality]` x learned (`ai/learned/build_order_knobs.yaml`, only with `UseLearnedBuildOrder`; lookup per personality:
+  faction, `family_<prefix before the first underscore>`, `any`, then `any__any`; missing = 1000) x jitter (one `LocalRandom` draw per knob,
+  +-`JitterPct`, once per match), clamped to [`KnobMin`, `KnobMax`]. Presets: Rush tempo/production up, greed down; Turtle defence up;
+  Tech tech up (and its delays shorter); Expansion greed + expansion up; Steamroller production up; Guerrilla production/support light.
+  The opening is Thompson-sampled: score = preset weight x Beta(alpha, beta) of the matchup posterior (no posterior = Beta(1, 1)).
+* **React** (every `ReactEvalTicks`, from the published `BotSituation`, fog memory only): air = summed seen enemy `AirValue`; rush =
+  seen enemy value near our base before `ReactRushWindowTicks` (also invalidates the opening); turtle = seen defence value and share;
+  out-earned = the 12.14 economy proxy (harvesters + 2 x refineries) vs ours. Each reaction has a target factor per knob (`ReactTargets`);
+  the factor approaches it by `ReactStep` per evaluation, is bounded [`ReactMin`, `ReactMax`], and decays at `ReactDecayPerMinute` once
+  no reaction holds.
+* **Log:** `own.build_order` in the situation log (personality, faction, enemy faction, opening + end reason, `base_<knob>`/`now_<knob>`,
+  reaction flags, events `tick:name+/-`).
+* **Tuner:** `tools/ai/tune_build_order.py` (tests `tools/tests/test_tune_build_order.py`): score = win + margin + speed bonus; arms named
+  `bo__<personality>__<faction>__base` / `__<knob>__up|dn100` (batch dir name minus `_N`); `--propose` writes the next one-knob pair as
+  learned-file copies plus an `increment_switches`-style spec for `apply_increment_switches.py --spec`; `--write` accepts at most one
+  arm per (personality, faction) with >= 20 matches per arm and Welch z >= 1.96, step +-10% clamped to a learned multiplier in
+  [800, 1250], updates opening posteriors (matchups with >= 20 new matches, cap 200 then halve), each game used once. Not yet exercised:
+  no match has run with the switch on; the presets, thresholds and openings are starting values for the A/B.
 
 **BO-0 telemetry (always on, behaviour-neutral):**
 * The placement log (§12.24) is the **build order**. Each line also carries the tick the item entered the queue and the

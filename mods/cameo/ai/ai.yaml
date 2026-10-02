@@ -105,6 +105,12 @@
 	GrantConditionOnBotOwner@scaletargets:
 		Condition: scale_targets
 		Bots: fransbot
+	# Build-order knobs (DESIGN 19.2, AI_ARCHITECTURE 12.25): eight bounded multipliers + an opening for the shared base builder, from the
+	# personality preset x learned x jitter, with a fog-honest react layer. The arm flips this to the genericbot tier list (switch group
+	# AK_build_order_knobs); default fransbot-only - inert on master.
+	GrantConditionOnBotOwner@buildorderknobs:
+		Condition: build_order_knobs
+		Bots: fransbot
 	# DIFFICULTY SCALE (DESIGN §19.1, maintainer 2026-09-28): every number below lies on ONE straight line
 	# from easiest to cameogod, in EQUAL steps; an integer that cannot split evenly is the rounded line.
 	# Every field is written in every tier, so no tier silently falls back to a C# default.
@@ -3666,6 +3672,152 @@ Player:
 				tech: 1500
 			rush:
 				army: 800
+	# BUILD-ORDER KNOBS (DESIGN 19.2, AI_ARCHITECTURE 12.25): HOW and WHEN the shared base builder builds. Value = Presets[personality] x learned
+	# (ai/learned/build_order_knobs.yaml, only with UseLearnedBuildOrder) x per-match jitter (+-JitterPct, drawn once from the host's random),
+	# clamped to [KnobMin, KnobMax]; the react layer multiplies it mid-match (bounded [ReactMin, ReactMax]) and decays back.
+	# FIXED POINT: every number in the dictionaries is THOUSANDTHS (1000 = x1.0). What each knob scales (BaseBuilderQueueManagerCA):
+	#   tempo        - speed of the build clock: BuildingDelays, BuildingIntervals and the general build interval are DIVIDED by it (1150 = 15% faster)
+	#   greed        - refinery fractions and the refinery delay (divided); also raises NewProductionCashThreshold (economy before factories)
+	#   production   - fractions of barracks/factory/production buildings; also lowers NewProductionCashThreshold
+	#   tech         - fractions AND delays (divided) of tech/superweapon buildings
+	#   defence      - fractions of defence/anti-air buildings
+	#   power_margin - the power surplus target (MinimumExcessPower and its bonus)
+	#   expansion    - published for the expansion planner (IBotBuildOrderKnobs.KnobMilli); the base builder does not read it
+	#   support      - fractions of radar/repair buildings
+	# Categories are rules-derived (the base builder's own type lists, then BotTargetTags/roles); no actor id is typed here.
+	# `genericbot && build_order_knobs`: off on master until the increment A/B arms it (switch group AK_build_order_knobs).
+	BuildOrderKnobsBotModule:
+		RequiresCondition: genericbot && build_order_knobs
+		KnobMin: 600
+		KnobMax: 1600
+		JitterPct: 8
+		UseLearnedBuildOrder: false
+		LearnedFile: ai/learned/build_order_knobs.yaml
+		ReactEvalTicks: 125
+		ReactStep: 100
+		ReactDecayPerMinute: 150
+		ReactMin: 700
+		ReactMax: 1500
+		ReactAirValue: 600
+		ReactRushWindowTicks: 9000
+		ReactRushPressureValue: 800
+		ReactTurtleDefenceValue: 1500
+		ReactTurtleDefenceSharePct: 40
+		ReactOutEarnPct: 130
+		ReactOutEarnMinEconomy: 6
+		OpeningMaxTicks: 7500
+		OpeningStepTimeoutTicks: 1500
+		OpeningDecideTicks: 250
+		# One flavour per personality (DESIGN 19.1c): Rush tempo/production up and greed down; Turtle defence up; Tech tech up with a faster tech clock;
+		# Expansion greed + expansion up; Steamroller production up; Guerrilla light on production and support.
+		Presets:
+			rush:
+				tempo: 1150
+				greed: 850
+				production: 1250
+				tech: 850
+				defence: 900
+				power_margin: 900
+				expansion: 850
+				support: 850
+			turtle:
+				tempo: 950
+				greed: 1000
+				production: 900
+				tech: 1000
+				defence: 1400
+				power_margin: 1150
+				expansion: 950
+				support: 1100
+			tech:
+				tempo: 1050
+				greed: 1050
+				production: 900
+				tech: 1400
+				defence: 950
+				power_margin: 1200
+				expansion: 900
+				support: 1150
+			expansion:
+				tempo: 1000
+				greed: 1300
+				production: 950
+				tech: 950
+				defence: 900
+				power_margin: 1000
+				expansion: 1350
+				support: 900
+			steamroller:
+				tempo: 1050
+				greed: 1000
+				production: 1400
+				tech: 950
+				defence: 900
+				power_margin: 1050
+				expansion: 1000
+				support: 900
+			guerrilla:
+				tempo: 1100
+				greed: 1000
+				production: 850
+				tech: 900
+				defence: 950
+				power_margin: 900
+				expansion: 1050
+				support: 850
+		# Ordered first-N building categories. `production` is any production building; power/refinery emergencies and the
+		# first construction needs are never blocked (the opening runs after those overrides) and a stuck step is skipped.
+		Openings:
+			eco: power, refinery, production, refinery, factory, support, tech
+			barracks_first: power, barracks, refinery, factory, production, tech
+			fast_tech: power, refinery, factory, tech, tech, production, support
+			defence_first: power, refinery, defence, barracks, defence, factory, tech
+		OpeningWeights:
+			rush:
+				barracks_first: 5
+				eco: 2
+				fast_tech: 1
+				defence_first: 0
+			turtle:
+				defence_first: 5
+				eco: 3
+				fast_tech: 1
+				barracks_first: 1
+			tech:
+				fast_tech: 5
+				eco: 3
+				barracks_first: 1
+				defence_first: 1
+			expansion:
+				eco: 6
+				fast_tech: 2
+				barracks_first: 1
+				defence_first: 1
+			steamroller:
+				barracks_first: 4
+				eco: 3
+				fast_tech: 1
+				defence_first: 1
+			guerrilla:
+				barracks_first: 3
+				eco: 3
+				fast_tech: 1
+				defence_first: 2
+		# What the bot SAW (BotSituation, fog memory) -> a target react factor per knob; the factor approaches it by ReactStep per evaluation
+		# while the reaction holds and decays back at ReactDecayPerMinute. Several reactions on one knob multiply.
+		ReactTargets:
+			air:
+				defence: 1300
+			rush:
+				defence: 1300
+				production: 1250
+				greed: 800
+			turtle:
+				tech: 1250
+				defence: 800
+			out_earned:
+				greed: 1300
+				expansion: 1300
 	# SP-1 + DAWN building gap (AI_ARCHITECTURE §12.20), ONE owner of base spacing (maintainer 2026-10-02). Loaded for
 	# genericbot: the HARD gap findPos applies (MinBuildingGapCells 2 / MinBuildingGapDefensesCells 1) is LIVE. classicbot
 	# has no advisor, hence no gap - it places edge-to-edge as before 10-02. The re-ranking of findPos' first placeable
