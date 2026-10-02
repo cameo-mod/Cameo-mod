@@ -1,3 +1,32 @@
+# 2026-10-02 — DAWN: first working destructible/repairable bridge placed on a map
+
+- New map `mods/cameo/maps/tworivervillages_bridge.oramap` — clone of
+  `Tworivervillages.oramap` (RA_TEMPERAT, 98x98), title `Two rivers villages
+  (Bridge)`, plus a `BRIDGE`-family actor spanning the river at rows 20-21.
+- **Architecture correction:** Cameo's legacy bridges are NOT placed as
+  map.yaml actors. `LegacyBridgeLayer` (world.yaml `Bridges: bridge1..4`)
+  scans `map.bin` at WorldLoaded and auto-creates the bridge actor + huts from
+  painted bridge terrain templates. A bare `bridge1` in `Actors:` would never
+  get `Bridge.Create()` (footprint stays null). Correct wiring = paint the
+  template, matching every upstream RA map. Ownership is `Neutral` via
+  `OwnerInit(world owner)` (this map's `OwnsWorld` player).
+- Painted upstream recipe, verified against shipped RA maps
+  (outdoor-trails / countercross): actor template 131 (`bridge1.tem`, 5x3) at
+  origin (41,19) with subtiles {1-9,12}; approach template 382
+  (`bridge1x.tem`, 5x4) at (41,18) with subtiles {2,3,4,5,15,16,18,19}.
+  `map.bin` layout: format-2, 17-byte header, column-major cells,
+  `TilesOffset + 3*(x*98+y)` = `<u16 template, u8 subtile>`.
+- Footprint = the ten painted 131 cells over the y20-21 water rows; north hut
+  on beach (43,18), south hut on the bridge's own rock-rampart cell (41,20)
+  via `FreeActor` spawn offsets (2,-1)/(0,1) — same as upstream.
+- Established map-Lua convention used for a self-check: bundled `rules.yaml`
+  adds `World: LuaScript: Scripts: bridge_check.lua`, which prints
+  `BRIDGE_CHECK bridge1=1 bridgehut=2` to lua.log ~2s after WorldLoaded.
+- Verified in-engine (real game boot, `Launch.Map=tworivervillages_bridge.oramap`):
+  "Game started", lua.log shows exactly `bridge1=1 bridgehut=2`,
+  no new exception-*.log. Boot used the worktree's `engine/bin` binaries with
+  `Engine.ModSearchPaths` covering the worktree `mods/` + shared engine `mods/`.
+
 # 2026-10-02 — NOVA: DEF-3 remote-outpost defence coverage (switch Z_def3_remote_outpost_coverage)
 
 - `DefenseCoveragePlanner.CoverRemoteOutposts`: own building cells cluster into
