@@ -120,47 +120,5 @@ namespace OpenRA.Mods.Cameo.Test
 		{
 			Assert.That(EngineerBotModule.DemandCapturersDesired(9, -2, 0), Is.EqualTo(0));
 		}
-
-		// TC-2e (switch AL): the outranks-us arbitration for capture claims — an allied claim on the
-		// target cell wins only from a lower ClientIndex, so every bot folds the identical result.
-		static bool Claimed(int ownIndex, WPos target, params (int ClientIndex, WPos Claim)[] claims) =>
-			EngineerBotModule.OutrankingAllyClaims(claims, ownIndex, target, 2);
-
-		[Test]
-		public void AClaimFromALowerIndexOnTheTargetCellWins()
-		{
-			var cell = new WPos(10 * 1024, 10 * 1024, 0);
-			Assert.That(Claimed(3, cell, (1, cell)), Is.True);
-			Assert.That(Claimed(3, cell, (5, cell)), Is.False, "a higher index never outranks us");
-			Assert.That(Claimed(3, cell, (3, cell)), Is.False, "our own rank cannot contest itself");
-		}
-
-		[Test]
-		public void AClaimBeyondTheRadiusDoesNotContest()
-		{
-			var cell = new WPos(10 * 1024, 10 * 1024, 0);
-			var near = new WPos(11 * 1024, 10 * 1024, 0);
-			var far = new WPos(20 * 1024, 20 * 1024, 0);
-			Assert.That(Claimed(3, cell, (1, near)), Is.True, "inside the 2-cell radius");
-			Assert.That(Claimed(3, cell, (1, far)), Is.False);
-		}
-
-		[Test]
-		public void NoClaimsOrANullBoardNeverContest()
-		{
-			var cell = new WPos(10 * 1024, 10 * 1024, 0);
-			Assert.That(Claimed(3, cell), Is.False);
-			Assert.That(EngineerBotModule.OutrankingAllyClaims(null, 3, cell, 2), Is.False);
-		}
-
-		[Test]
-		public void AnyOutrankingClaimContestsEvenAmongHigherOnes()
-		{
-			// Two allies on the same cell: only the lower of them outranks — the losing bot
-			// yields to index 1, never to index 4, and the fold is deterministic either way.
-			var cell = new WPos(10 * 1024, 10 * 1024, 0);
-			Assert.That(Claimed(3, cell, (4, cell), (1, cell)), Is.True);
-			Assert.That(Claimed(3, cell, (4, cell)), Is.False);
-		}
 	}
 }

@@ -9,6 +9,7 @@
 #endregion
 
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using NUnit.Framework;
 using OpenRA.Mods.CA.Traits;
@@ -30,9 +31,10 @@ namespace OpenRA.Mods.Cameo.Test
 		static TeamBroadcast Broadcast(int clientIndex, int ownArmyValue = 0, int urgencyLevel = 0,
 			int directorTension = 0, DirectorPhase directorPhase = DirectorPhase.BuildUp,
 			OpenRA.Player mainTarget = null, bool requestsDefence = false, WPos defendPosition = default,
-			WPos armyCentroid = default, WPos spawnPoint = default) =>
+			WPos armyCentroid = default, WPos spawnPoint = default, string participantId = null) =>
 			new(1500, ownArmyValue, urgencyLevel, directorTension, directorPhase, mainTarget,
-				requestsDefence, defendPosition, clientIndex, default, armyCentroid, default, spawnPoint);
+				requestsDefence, defendPosition, clientIndex, default, armyCentroid, default, spawnPoint,
+				null, participantId);
 
 		[Test]
 		public void EmptyInputYieldsEmptyDirective()
@@ -148,31 +150,43 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
-		public void OneResponderAnswersAtMostOneRequestPerFold()
+		public void RescueElectionConsumesThePool()
 		{
-			// Review 4.3: two simultaneous calls, both nearest the same free army — the
-			// elected responder leaves the pool, so the second call elects a different
-			// ally (or none when the pool is spent).
-			var a = new WPos(1000, 1000, 0);
-			var b = new WPos(1100, 1100, 0);
+			// Post-merge audit 4.3: two simultaneous requests elect DISTINCT responders —
+			// an elected responder leaves the free pool instead of answering twice.
 			var allies = new List<TeamBroadcast>
 			{
-				Broadcast(0, urgencyLevel: 2, requestsDefence: true, defendPosition: a),
-				Broadcast(1, urgencyLevel: 2, requestsDefence: true, defendPosition: b),
-				Broadcast(2, armyCentroid: new WPos(1050, 1050, 0)), // nearest to both
-				Broadcast(3, armyCentroid: new WPos(8000, 8000, 0)),
+				Broadcast(0, urgencyLevel: 2, requestsDefence: true, defendPosition: new WPos(1000, 1000, 0)),
+				Broadcast(1, urgencyLevel: 2, requestsDefence: true, defendPosition: new WPos(1200, 1000, 0)),
+				Broadcast(2, armyCentroid: new WPos(1100, 1000, 0)),
+				Broadcast(3, armyCentroid: new WPos(5000, 5000, 0)),
 			};
 
 			var d = CoalitionFold.Compute(null, allies);
 			Assert.That(d.RescueAssignments.Count, Is.EqualTo(2));
-			Assert.That(d.RescueAssignments[0].ResponderClientIndex, Is.EqualTo(2));
-			Assert.That(d.RescueAssignments[1].ResponderClientIndex, Is.EqualTo(3),
-				"the second request cannot reuse the army already elected for the first");
+			Assert.That(d.RescueAssignments[0].ResponderClientIndex,
+				Is.Not.EqualTo(d.RescueAssignments[1].ResponderClientIndex));
 
-			// A pool of one still answers only the first call.
-			var thin = new List<TeamBroadcast> { allies[0], allies[1], allies[2] };
-			var d2 = CoalitionFold.Compute(null, thin);
-			Assert.That(d2.RescueAssignments.Count, Is.EqualTo(1));
+			// More requests than responders: the pool runs dry, nobody double-books.
+			var d2 = CoalitionFold.Compute(null, new List<TeamBroadcast>(allies) { allies[0] });
+			Assert.That(d2.RescueAssignments.Select(a => a.ResponderClientIndex).Distinct().Count(),
+				Is.EqualTo(d2.RescueAssignments.Count));
+		}
+
+		[Test]
+		public void SameClientIndexMapBotsStayDistinct()
+		{
+			// Post-merge audit 4.4: map-side bots can inherit the host's ClientIndex —
+			// participant id keeps them distinct in elections and sectors.
+			var allies = new List<TeamBroadcast>
+			{
+				Broadcast(0, spawnPoint: new WPos(512, 512, 0), participantId: "MapBotA"),
+				Broadcast(0, spawnPoint: new WPos(8000, 512, 0), participantId: "MapBotB"),
+			};
+			var d = CoalitionFold.Compute(null, allies);
+			Assert.That(d.SectorAnchors.Count, Is.EqualTo(2));
+			Assert.That(d.SectorAnchors["MapBotA"], Is.EqualTo(new WPos(512, 512, 0)));
+			Assert.That(d.SectorAnchors["MapBotB"], Is.EqualTo(new WPos(8000, 512, 0)));
 		}
 
 		[Test]
@@ -185,28 +199,28 @@ namespace OpenRA.Mods.Cameo.Test
 			};
 			var d = CoalitionFold.Compute(Broadcast(9, spawnPoint: new WPos(512, 8000, 0)), allies);
 			Assert.That(d.SectorAnchors.Count, Is.EqualTo(3));
-			Assert.That(d.SectorAnchors[7], Is.EqualTo(new WPos(512, 512, 0)));
-			Assert.That(d.SectorAnchors[2], Is.EqualTo(new WPos(8000, 512, 0)));
-			Assert.That(d.SectorAnchors[9], Is.EqualTo(new WPos(512, 8000, 0)));
+			Assert.That(d.SectorAnchors["#7"], Is.EqualTo(new WPos(512, 512, 0)));
+			Assert.That(d.SectorAnchors["#2"], Is.EqualTo(new WPos(8000, 512, 0)));
+			Assert.That(d.SectorAnchors["#9"], Is.EqualTo(new WPos(512, 8000, 0)));
 		}
 
 		[Test]
 		public void SectorScorePercentOwnsNearestAnchor()
 		{
-			var anchors = new Dictionary<int, WPos>
+			var anchors = new Dictionary<string, WPos>
 			{
-				[0] = new WPos(0, 0, 0),
-				[1] = new WPos(10000, 0, 0),
+				["a"] = new WPos(0, 0, 0),
+				["b"] = new WPos(10000, 0, 0),
 			};
 
 			Assert.That(OpenRA.Mods.Cameo.Traits.BotModules.ExpansionPlannerBotModule.SectorScorePercent(
-				new WPos(100, 0, 0), anchors, 0, 35), Is.EqualTo(100));
+				new WPos(100, 0, 0), anchors, "a", 35), Is.EqualTo(100));
 			Assert.That(OpenRA.Mods.Cameo.Traits.BotModules.ExpansionPlannerBotModule.SectorScorePercent(
-				new WPos(100, 0, 0), anchors, 1, 35), Is.EqualTo(35));
+				new WPos(100, 0, 0), anchors, "b", 35), Is.EqualTo(35));
 
 			// No anchors: everything scores full.
 			Assert.That(OpenRA.Mods.Cameo.Traits.BotModules.ExpansionPlannerBotModule.SectorScorePercent(
-				new WPos(100, 0, 0), new Dictionary<int, WPos>(), 0, 35), Is.EqualTo(100));
+				new WPos(100, 0, 0), new Dictionary<string, WPos>(), "a", 35), Is.EqualTo(100));
 		}
 	}
 }

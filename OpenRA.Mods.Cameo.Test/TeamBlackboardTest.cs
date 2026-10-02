@@ -240,18 +240,18 @@ namespace OpenRA.Mods.Cameo.Test
 			var p = FakePlayer(); // uninitialised Player reads WinState.Undefined (0) = still in the game
 			var fresh = Broadcast(snapshotTick: 1400);
 
-			Assert.That(TeamBlackboard.ValidBroadcast(p, fresh, 1500), Is.True);
-			Assert.That(TeamBlackboard.ValidBroadcast(p, fresh, 1400 + TeamBlackboard.MaxBroadcastAgeTicks),
+			Assert.That(TeamBlackboard.IsLive(fresh, p, 1500), Is.True);
+			Assert.That(TeamBlackboard.IsLive(fresh, p, 1400 + TeamBlackboard.BroadcastMaxAgeTicks),
 				Is.True, "the window boundary itself is still valid");
-			Assert.That(TeamBlackboard.ValidBroadcast(p, fresh, 1401 + TeamBlackboard.MaxBroadcastAgeTicks),
+			Assert.That(TeamBlackboard.IsLive(fresh, p, 1401 + TeamBlackboard.BroadcastMaxAgeTicks),
 				Is.False, "one tick past the window is stale");
 
-			Assert.That(TeamBlackboard.ValidBroadcast(p, TeamBroadcast.Empty, 1500), Is.False,
+			Assert.That(TeamBlackboard.IsLive(TeamBroadcast.Empty, p, 1500), Is.False,
 				"SnapshotTick 0 = never published");
-			Assert.That(TeamBlackboard.ValidBroadcast(p, null, 1500), Is.False);
+			Assert.That(TeamBlackboard.IsLive(null, p, 1500), Is.False);
 
 			p.WinState = WinState.Lost;
-			Assert.That(TeamBlackboard.ValidBroadcast(p, fresh, 1500), Is.False,
+			Assert.That(TeamBlackboard.IsLive(fresh, p, 1500), Is.False,
 				"a defeated ally's last broadcast cannot hold a claim open");
 		}
 	}

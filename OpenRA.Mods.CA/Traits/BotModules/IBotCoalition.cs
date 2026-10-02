@@ -8,6 +8,7 @@
  */
 #endregion
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -29,7 +30,7 @@ namespace OpenRA.Mods.CA.Traits
 	}
 
 	/// <summary>
-	/// One elected rescue: which client index answers which defend request.
+	/// One elected rescue: which participant answers which defend request.
 	/// </summary>
 	public sealed class CoalitionRescueAssignment
 	{
@@ -42,11 +43,24 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>ClientIndex of the elected responder — the nearest free ally by ArmyCentroid.</summary>
 		public readonly int ResponderClientIndex;
 
-		public CoalitionRescueAssignment(int requesterClientIndex, WPos defendPosition, int responderClientIndex)
+		/// <summary>
+		/// Post-merge audit 4.4: participant identity is Player.InternalName, not
+		/// ClientIndex — map-side bots can share the host's client index. Falls back
+		/// to a marked ClientIndex key when a publisher carried no ParticipantId.
+		/// </summary>
+		public readonly string RequesterId;
+
+		/// <summary>Participant id of the elected responder, same rule as <see cref="RequesterId"/>.</summary>
+		public readonly string ResponderId;
+
+		public CoalitionRescueAssignment(int requesterClientIndex, WPos defendPosition, int responderClientIndex,
+			string requesterId = null, string responderId = null)
 		{
 			RequesterClientIndex = requesterClientIndex;
 			DefendPosition = defendPosition;
 			ResponderClientIndex = responderClientIndex;
+			RequesterId = requesterId;
+			ResponderId = responderId;
 		}
 	}
 
@@ -67,12 +81,12 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>One elected responder per allied defend request (empty when none).</summary>
 		public readonly List<CoalitionRescueAssignment> RescueAssignments;
 
-		/// <summary>Allied spawn anchors in Voronoi sector order: ClientIndex -> anchor.</summary>
-		public readonly Dictionary<int, WPos> SectorAnchors;
+		/// <summary>Allied spawn anchors in Voronoi sector order: participant id -> anchor.</summary>
+		public readonly Dictionary<string, WPos> SectorAnchors;
 
-		public static readonly CoalitionDirective Empty = new(null, CoalitionPhase.BuildUp, new List<CoalitionRescueAssignment>(), new Dictionary<int, WPos>());
+		public static readonly CoalitionDirective Empty = new(null, CoalitionPhase.BuildUp, new List<CoalitionRescueAssignment>(), new Dictionary<string, WPos>());
 
-		public CoalitionDirective(Player mainTarget, CoalitionPhase phase, List<CoalitionRescueAssignment> rescueAssignments, Dictionary<int, WPos> sectorAnchors)
+		public CoalitionDirective(Player mainTarget, CoalitionPhase phase, List<CoalitionRescueAssignment> rescueAssignments, Dictionary<string, WPos> sectorAnchors)
 		{
 			MainTarget = mainTarget;
 			Phase = phase;
@@ -94,6 +108,15 @@ namespace OpenRA.Mods.CA.Traits
 		/// by enumeration order. Null/empty input degrades to own-only behaviour —
 		/// a solo bot's directive is its own broadcast.
 		/// </summary>
+		/// <summary>
+		/// Match-local participant identity: the publisher's InternalName, else a
+		/// marked ClientIndex fallback for old-version broadcasts. ClientIndex alone
+		/// cannot be the identity — map-side bots can share the host's index
+		/// (post-merge audit 4.4); lobby ordering still uses ClientIndex.
+		/// </summary>
+		public static string ParticipantKey(TeamBroadcast b) =>
+			b.ParticipantId ?? "#" + b.ClientIndex;
+
 		public static CoalitionDirective Compute(TeamBroadcast own, IEnumerable<TeamBroadcast> allies)
 		{
 			var all = new List<TeamBroadcast>();
@@ -117,30 +140,32 @@ namespace OpenRA.Mods.CA.Traits
 			var mainTarget = votes.Count > 0 ? votes[0].Target : null;
 
 			// Rescue: one elected responder per defend request — the nearest free
-			// ally by ArmyCentroid. A requester does not rescue (it is under attack);
-			// a Zero centroid (old-version ally or no army) cannot be elected.
+			// ally by ArmyCentroid, elected ONCE (it leaves the pool). A requester
+			// does not rescue (it is under attack); a Zero centroid (old-version
+			// ally or no army) cannot be elected. Identity is the participant key,
+			// not ClientIndex — map-side bots can share the host's index.
 			var requesters = all.Where(b => b.RequestsDefence && b.DefendPosition != WPos.Zero)
-				.OrderBy(b => b.ClientIndex)
+				.OrderBy(b => ParticipantKey(b), StringComparer.Ordinal)
 				.ToList();
-			var requesterIds = new HashSet<int>(requesters.Select(b => b.ClientIndex));
-			var freePool = all.Where(b => !requesterIds.Contains(b.ClientIndex) && b.ArmyCentroid != WPos.Zero)
+			var requesterIds = new HashSet<string>(requesters.Select(ParticipantKey), StringComparer.Ordinal);
+			var freePool = all.Where(b => !requesterIds.Contains(ParticipantKey(b)) && b.ArmyCentroid != WPos.Zero)
 				.ToList();
 			var rescue = new List<CoalitionRescueAssignment>();
 			foreach (var req in requesters)
 			{
 				var responder = freePool
 					.OrderBy(b => (b.ArmyCentroid - req.DefendPosition).LengthSquared)
-					.ThenBy(b => b.ClientIndex)
+					.ThenBy(b => ParticipantKey(b), StringComparer.Ordinal)
 					.FirstOrDefault();
-				if (responder != null)
-				{
-					rescue.Add(new CoalitionRescueAssignment(req.ClientIndex, req.DefendPosition, responder.ClientIndex));
+				if (responder == null)
+					continue;
 
-					// Review 4.3: one participant answers at most one call per fold — an
-					// elected responder leaves the pool so two simultaneous requests
-					// cannot both claim the same army.
-					freePool.Remove(responder);
-				}
+				// One participant answers at most one request per fold: the elected
+				// responder leaves the free pool, so simultaneous requests elect
+				// distinct responders (or none once the pool runs dry).
+				freePool.Remove(responder);
+				rescue.Add(new CoalitionRescueAssignment(req.ClientIndex, req.DefendPosition, responder.ClientIndex,
+					ParticipantKey(req), ParticipantKey(responder)));
 			}
 
 			// Phase: Defend overrides Push; Push needs a target and a synchronized wave.
@@ -153,10 +178,11 @@ namespace OpenRA.Mods.CA.Traits
 				phase = CoalitionPhase.BuildUp;
 
 			// Sectors: the Voronoi anchors are the allied spawn positions — public map
-			// data, published once via the broadcast field SpawnPoint.
+			// data, published once via the broadcast field SpawnPoint. Keyed by
+			// participant id so same-ClientIndex map bots keep distinct sectors.
 			var anchors = all.Where(b => b.SpawnPoint != WPos.Zero)
-				.GroupBy(b => b.ClientIndex)
-				.ToDictionary(g => g.Key, g => g.First().SpawnPoint);
+				.GroupBy(ParticipantKey)
+				.ToDictionary(g => g.Key, g => g.First().SpawnPoint, StringComparer.Ordinal);
 
 			return new CoalitionDirective(mainTarget, phase, rescue, anchors);
 		}

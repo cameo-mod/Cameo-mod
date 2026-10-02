@@ -129,6 +129,7 @@ decision do so through a provider seam; the owner emits the order.
 | Scout routes | ScoutBotModule | threat regions, influence layers, leads |
 | Resource-field memory | BotFogMemory / ResourceMapBotModule | zone topology (TacticalMapBotModule) |
 | Team posture | BotSituation broadcast | allied claims, role split (TC-2d), defend requests, TC-3 coalition fold (§12.18, switches BB-BE) |
+| Capture-claim arbitration (TC-2e) | the claiming module (`EngineerBotModule`, `GarrisonContestBotModule`) stands its own claim down | `IBotCaptureClaimSource` → `TeamBroadcast.CaptureClaims` → `TeamBlackboard.ClaimsAheadOf` — lower ClientIndex wins (BF) |
 | Coalition directive | MasterAiBotModule (BB) | `CoalitionFold.Compute` — publish-only; consumers are SquadManagerBotModuleCA (BC rescue election, BE target), ExpansionPlannerBotModule (BD sectors) |
 | Support powers | SupportPowerBotASModule | (RV2 merge pending — OpenRA copy gated classicbot) |
 
@@ -240,15 +241,17 @@ two brains side by side.
   can never tech past hatchery (`~zerg_lair` gates mutalisk/spire/hive) and
   WC2 stalls at greathall. The earlier "no plug content / safe to delete"
   rationale was wrong on both counts — corrected verdict: keep + arm.
-- **Capture-claim gap (6v6 evidence, 2026-10-02, EMBER):** the first
-  `run_ai_match_batch.py --team-size 6` run (dusttown-battle-6v6, 6×hard vs
-  6×classic) shows 27 contested capture claims — up to all six genericbot
-  teammates COMMIT the same `capture:` mission and five RELEASE after leases
-  resolve (`tools/ai/team_coordination_report.py`). One-owner correctness
-  holds, but every bot still burns an engineer dispatch on one target —
-  TC-2c deconflicts *expansion fields*; the same claim channel needs to
-  cover capturable actors. TC-3 `CoalitionDirective.RescueAssignments` is
-  the planned general claim arbiter (§12.18).
+- **Capture-claim gap (6v6 evidence, 2026-10-02, EMBER) — CLOSED by TC-2e
+  (NOVA, switch `BF_team_capture_claims`, §12.26):** the claim channel now
+  covers capturable actors. `IBotCaptureClaimSource` publishes every live
+  capture/contest cell on `TeamBroadcast.CaptureClaims`;
+  `TeamBlackboard.ClaimsAheadOf` gives each consumer the cells a
+  lower-ClientIndex ally already holds, so the winner keeps walking and the
+  rest skip the candidate or release in-flight (`Released`/`superseded`).
+  Original finding: the first `run_ai_match_batch.py --team-size 6` run
+  (dusttown-battle-6v6, 6×hard vs 6×classic) showed 27 contested capture
+  claims — up to all six genericbot teammates COMMITting the same
+  `capture:` mission (`tools/ai/team_coordination_report.py`).
 
 **CN4 addition (2026-10-02, switch `AA_cn4_region_roles`):** `RegionRolesBotModule` — port of
 `CNRegionManagerBotModule` onto `IBotZoneTopology`'s belief surface. Each held zone gets a role

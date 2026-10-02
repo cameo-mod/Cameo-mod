@@ -2670,8 +2670,9 @@ enumerates enemy actors.
   The ally's position sits outside our base radius, so the CA-2 reserve still keeps a
   floor at home, and `TeamDefendAnswerMinPoolUnits` (default 8) means a thin pool stays
   home entirely. `CollectBroadcasts` exposes the per-ally detail the summary drops.
-  The answer emits `defend:c<requesterIndex>` attempt records (Committed at the rally,
-  Released on hold expiry/supersede, Failed if the squad dies) so
+  The answer emits `defend_answer:<requesterKey>:<rallyCell>` attempt records (Committed
+  at the confirmed rally, Released on hold expiry/supersede, Failed if the squad dies —
+  one open attempt per id, so the rolling hold refresh extends instead of spamming) so
   `team_coordination_report`'s `defend_missions` counts the answers this path makes —
   the protection channel predates the mission-card grammar and otherwise wrote nothing.
   Switch group `S_tc2_defend_answers`; inert in 1v1.
@@ -2698,18 +2699,15 @@ enumerates enemy actors.
   expander+techer by construction, no oscillation possible. No new broadcast
   field: `ClientIndex` arrived with TC-2c. Switch group `W_tc2_role_split`;
   inert in 1v1.
-- **Fifth consumer (TC-2e — capture-claim deconfliction):** `TeamBroadcast.CaptureClaim`
-  publishes the engineer owner's live capture target — the active escort plan else
-  the newest committed `EngineerJob.Capture` — via `IBotCaptureClaimProvider`
-  (Cameo-side `EngineerBotModule` implements it; classic runs `CaptureManagerBotModuleCA`
-  and publishes nothing). `EngineerBotModuleInfo.UseTeamCaptureClaims` (default false)
-  then drops a candidate a lower-`ClientIndex` ally claims within
-  `AllyCaptureClaimRadiusCells` (2) — every filter in the assign pass (the priority
-  list, the capturable pool, the per-engineer `open` set, and the transport-run pool
-  it feeds) falls through to the next candidate instead of racing an ally's engineer
-  into the same building. `OutrankingAllyClaims` is the pure precedence fold both
-  sides compute identically; the 6v6 smoke logged 49 contested `capture:` mission
-  ids before it. Switch group `AL_tc2e_capture_claims`; inert in 1v1.
+- **Fifth consumer (TC-2e — capture-claim arbitration):** the broadcast gains
+  `CaptureClaims` (the union of every enabled `IBotCaptureClaimSource`'s live
+  target cell centres — `EngineerBotModule`'s capture missions and
+  `GarrisonContestBotModule`'s contest claims; own-side intent, publish-always).
+  `TeamBlackboard.ClaimsAheadOf` folds the allied half into the position set of
+  every outranking publisher (strictly lower `ClientIndex`), and each module's
+  `UseTeamCaptureClaims` (default false) gates the stand-down: new claims on a
+  claimed cell are skipped, in-flight ones are released (superseded). Switch
+  group `BF_team_capture_claims`; inert in 1v1. See §12.26.
 **Telemetry (2026-10-01, NOVA):** the §13.1 discipline counters are published on every
 snapshot — `own.banked_cash` (`PlayerResources.Cash + Resources`), `own.brownout_ticks`
 (per-tick `PowerManager.ExcessPower < 0`), `own.idle_production_ticks` (per-tick, one count
@@ -2833,6 +2831,23 @@ ordered by `ClientIndex`). This is strictly stronger than leader election: a dea
   `Allies:` within teams and `Enemies:` across; needs a map with ≥2N `PlayerReference`s
   and ≥2N mpspawns (dusttown-battle-6v6, moldova-6v6 verified at 12). `run_league.py`
   takes `"team_size": N` the same way.
+
+**Post-merge audit amendments (independent architecture review 2026-10-02, P1 items 4.1-4.4 — all shipped):**
+
+- **Consistency model — stated honestly:** members publish on a *staggered* snapshot cadence
+  (phase = `ClientIndex * 37 % SnapshotInterval`), so two members can fold different broadcast
+  *generations* inside one interval. The contract is identical-output-for-identical-input plus
+  convergence within `BroadcastMaxAgeTicks` — NOT a shared epoch. Every consumer treats the
+  directive as a bias, so a transient mixed-generation fold is tolerated, never an order fight.
+- **Freshness is central:** `TeamBlackboard.IsLive` — publisher `WinState == Undefined`,
+  `SnapshotTick > 0`, age <= `BroadcastMaxAgeTicks` (500) — filters every aggregation in
+  `CollectBroadcasts`, so a defeated ally's last broadcast stops electing responders, holding
+  sectors and claiming fields. No consumer implements its own freshness.
+- **Rescue capacity is explicit:** the elected responder leaves the free pool, so one participant
+  answers at most one request per fold; extra requests stand down until the next snapshot refolds.
+- **Identity is `ParticipantId`:** `Player.InternalName` carried on the broadcast; rescue
+  elections and sector anchors key on it (`#ClientIndex` marks old-version publishers).
+  `ClientIndex` remains only where *lobby ordering* is the rule — claim arbitration precedence.
 
 ### 12.19 GC-1 + EX-4 — garrison contest and cover-the-map expansion (EMBER, 2026-10-02)
 
@@ -3359,3 +3374,20 @@ knob vector (`player.knobs` / `knobs` of the match record once BO-1 writes it; `
   * §19.10 scale targets decide HOW BIG;
   * the leads (§12.14) decide the BUDGET lean;
   * the knob module reads those, it does not redo them.
+
+### 12.26 TC-2e — capture-claim arbitration (NOVA, 2026-10-02; switch BF_team_capture_claims)
+
+The 6v6 smoke showed every allied bot independently publishing capture missions on the same neutral
+targets — 49 contested claims, up to all six teammates committing one engineer to one building. TC-2c's
+channel now covers actors: `IBotCaptureClaimSource` (OpenRA.Mods.CA) is implemented by
+`EngineerBotModule` (in-flight `capture:` mission targets and the waiting escort plan — never repair or
+bridge jobs) and `GarrisonContestBotModule` (live contest claims, one cell per claimed garrisonable).
+`BotSituation` unions every enabled source's cell centres into `TeamBroadcast.CaptureClaims`
+(publish-always, own-side only — a claim the bot itself already chose, so no enemy enumeration). The
+consumer half reads `TeamBlackboard.ClaimsAheadOf(broadcasts, myClientIndex)` — the position union of
+every strictly-lower-`ClientIndex` publisher — once per module pass behind `UseTeamCaptureClaims`
+(default off on both): a new claim on a claimed cell is skipped, and an in-flight claim whose cell lost
+arbitration stands down through the stale-claim/release path (`Released`/`superseded`, walkers and
+engineers stopped so queued orders cannot complete the claim anyway). Deterministic — ordering is the
+integer compare only — and inert in 1v1, where no allied broadcasts exist. Classic is bit-identical: its
+stack has no claim-source modules.

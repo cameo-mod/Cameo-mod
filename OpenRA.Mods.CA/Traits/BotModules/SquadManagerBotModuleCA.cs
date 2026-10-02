@@ -693,7 +693,11 @@ namespace OpenRA.Mods.CA.Traits
 		// on the ally-answer protect rally — null while the squad serves an own threat or
 		// escort. The record lets team_coordination_report count the answers its
 		// defend_missions metric exists for.
-		int? allyDefendOpen;
+		// TC-2b/TC-3 (§12.17/§12.18): the mission id of the defend_answer attempt open
+		// on the protect rally — null while the squad serves an own threat or escort.
+		// One open attempt per id: the rolling hold refresh extends it, a new requester
+		// or a new rally cell supersedes it.
+		string allyDefendOpen;
 
 		// The mission id of the open shared-push (secure:<player>) attempt — each
 		// Rush launch supersedes the last wave's record; a destroyed wave closes it.
@@ -1652,7 +1656,7 @@ namespace OpenRA.Mods.CA.Traits
 			// draft, AttackMove and hold-expiry all reuse the escort path verbatim —
 			// the rolling hold lets a retracted request release within one interval.
 			// A thin home pool stays home regardless of how loud the request is.
-			int? teamAnswerIndex = null;
+			TeamBroadcast allyDefendAnswer = null;
 			if (threat == null && request == null && teamAnswersOn &&
 				unitsHangingAroundTheBase.Count >= Info.TeamDefendAnswerMinPoolUnits)
 			{
@@ -1664,30 +1668,36 @@ namespace OpenRA.Mods.CA.Traits
 				var election = Info.UseCoalitionRescue
 					? Player.PlayerActor.TraitsImplementing<IBotCoalition>().FirstEnabledTraitOrDefault()?.Coalition?.RescueAssignments
 					: null;
+				TeamBroadcast answered = null;
 				if (election is { Count: > 0 })
 				{
-					var elected = election.FirstOrDefault(a => a.ResponderClientIndex == Player.ClientIndex);
+					// Participant identity is InternalName (map-side bots can share a
+					// ClientIndex); a null id on the assignment is the pre-id broadcast,
+					// matched by the marked ClientIndex fallback.
+					var myId = Player.InternalName ?? "#" + Player.ClientIndex;
+					var elected = election.FirstOrDefault(a =>
+						a.ResponderId == myId || (a.ResponderId == null && a.ResponderClientIndex == Player.ClientIndex));
 					if (elected != null)
 					{
 						var broadcasts = TeamBlackboard.CollectBroadcasts(Player);
-						var requester = broadcasts.FirstOrDefault(b => b != null && b.ClientIndex == elected.RequesterClientIndex);
-						var armyValue = requester?.OwnArmyValue
+						answered = broadcasts.FirstOrDefault(b => b != null
+							&& (CoalitionFold.ParticipantKey(b) == elected.RequesterId
+								|| (elected.RequesterId == null && b.ClientIndex == elected.RequesterClientIndex)));
+						var armyValue = answered?.OwnArmyValue
 							?? broadcasts.Where(b => b != null).Select(b => b.OwnArmyValue).DefaultIfEmpty().Max();
 						request = new BotProtectionRequest(World.Map.CellContaining(elected.DefendPosition),
 							armyValue, World.WorldTick + Info.ProtectInterval * 10);
-						teamAnswerIndex = elected.RequesterClientIndex;
 					}
 				}
 				else
 				{
-					var ally = TeamBlackboard.TopDefendRequest(TeamBlackboard.CollectBroadcasts(Player));
-					if (ally != null)
-					{
-						request = new BotProtectionRequest(World.Map.CellContaining(ally.DefendPosition),
-							ally.OwnArmyValue, World.WorldTick + Info.ProtectInterval * 10);
-						teamAnswerIndex = ally.ClientIndex;
-					}
+					answered = TeamBlackboard.TopDefendRequest(TeamBlackboard.CollectBroadcasts(Player));
+					if (answered != null)
+						request = new BotProtectionRequest(World.Map.CellContaining(answered.DefendPosition),
+							answered.OwnArmyValue, World.WorldTick + Info.ProtectInterval * 10);
 				}
+
+				allyDefendAnswer = answered;
 			}
 
 			if (threat == null && request == null)
@@ -1745,8 +1755,8 @@ namespace OpenRA.Mods.CA.Traits
 			bot.QueueOrder(new Order("AttackMove", null, Target.FromCell(World, rally), false,
 				groupedActors: protectSq.Units.Select(u => u.Actor).ToArray()));
 
-			if (teamAnswerIndex.HasValue)
-				CommitAllyDefend(teamAnswerIndex.Value, rally, protectSq.Units.Count);
+			if (allyDefendAnswer != null)
+				CommitAllyDefend(allyDefendAnswer, rally, protectSq.Units.Count);
 			else
 				CloseAllyDefend(BotMissionAttemptState.Released, BotMissionReasons.Superseded);
 
@@ -1755,22 +1765,24 @@ namespace OpenRA.Mods.CA.Traits
 		}
 
 		// The ally-answer protect squad is a defend action the mission-card grammar
-		// can't see through providers — emit it directly so the coordination report's
-		// defend_missions counts the answers TC-2b/TC-3 actually make. One open
-		// attempt per requester: a rolling hold refresh extends the answer, a new
-		// requester supersedes it.
-		void CommitAllyDefend(int requesterIndex, CPos rally, int units)
+		// can't see through providers — the answer writes a `defend_answer` record so
+		// the team report can count it (without it this channel is invisible in
+		// cameo-ai-missions.jsonl by construction). Written at the confirmed rally, not
+		// the synthesis — a rally the squad can't take commits nothing. One open attempt
+		// per requester+rally id: the rolling hold refresh extends it, a new requester
+		// or a new rally cell supersedes it.
+		void CommitAllyDefend(TeamBroadcast answered, CPos rally, int units)
 		{
-			if (allyDefendOpen == requesterIndex)
+			var id = $"defend_answer:{CoalitionFold.ParticipantKey(answered)}:{rally}";
+			if (allyDefendOpen == id)
 				return;
 
-			if (allyDefendOpen.HasValue)
+			if (allyDefendOpen != null)
 				CloseAllyDefend(BotMissionAttemptState.Released, BotMissionReasons.Superseded);
 
-			var id = $"defend:c{requesterIndex}";
 			var attempt = missionAttemptCounters.GetValueOrDefault(id) + 1;
 			missionAttemptCounters[id] = attempt;
-			allyDefendOpen = requesterIndex;
+			allyDefendOpen = id;
 			BotMissionLog.Write(new BotMissionRecord
 			{
 				Player = Player,
@@ -1778,27 +1790,27 @@ namespace OpenRA.Mods.CA.Traits
 				Attempt = attempt,
 				State = BotMissionAttemptState.Committed,
 				Executor = "Squads",
-				MissionType = "defend",
+				MissionType = "defend_answer",
 				TargetCell = rally,
-				Units = units
+				Units = units,
+				Value = answered.OwnArmyValue
 			});
 		}
 
 		void CloseAllyDefend(BotMissionAttemptState state, string reason)
 		{
-			if (!allyDefendOpen.HasValue)
+			if (allyDefendOpen == null)
 				return;
 
-			var id = $"defend:c{allyDefendOpen.Value}";
 			BotMissionLog.Write(new BotMissionRecord
 			{
 				Player = Player,
-				MissionId = id,
-				Attempt = missionAttemptCounters.GetValueOrDefault(id),
+				MissionId = allyDefendOpen,
+				Attempt = missionAttemptCounters.GetValueOrDefault(allyDefendOpen),
 				State = state,
 				Reason = reason,
 				Executor = "Squads",
-				MissionType = "defend"
+				MissionType = "defend_answer"
 			});
 			allyDefendOpen = null;
 		}
