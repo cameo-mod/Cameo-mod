@@ -1,3 +1,31 @@
+# 2026-10-02 — DAWN: maintainer-review integration + AI improvement work
+
+Maintainer reviewed live matches and ordered four fixes: contest garrisonables
+(GC-1 covers it), never stop expanding (EX-4 covers it), attack in a spread
+concave from multiple fronts instead of a suicide column (CV covers the
+concave; multi-heading prongs extended on `devin/dawn/ai-assault`), and stop
+packing buildings edge-to-edge / piling harvesters onto one field / building
+over army (new work on `devin/dawn/ai-assault`).
+
+**Merges to master this session** (each boot-gated: perf.log `PostWorldLoaded`,
+zero new exceptions):
+- `2be0c6155` — bridge test map `tworivervillages_bridge.oramap` (painted
+  legacy bridge + Lua self-check; in-engine verified `bridge1=1 bridgehut=2`).
+- `0e54de07a` — cn3-stealth-squads (switch `Y_cn3_stealth_squads`).
+- `c60d106d0` — CV concave engagement (switch `ConcaveEngagement`, group
+  `F_concave`): Rush squads deploy a range-matched concave arc that widens with
+  army size, ranks by weapon range, staggered commit so every member reaches
+  firing range on the same tick.
+- `def3-remote-coverage` follow-up — `BridgeRepairBotModule` now scans
+  `LegacyBridgeHut` too (Cameo maps carry legacy flat bridges; the CN donor
+  scanned only `BridgeHut`, so the module could never fire on Cameo maps).
+
+**Infrastructure fix:** `mods/cameo/OpenRA.Mods.Cameo.dll` is a TRACKED binary
+that shadows `engine/bin` at runtime — it had gone stale (Aug 23), so master
+crashed at boot with `Cannot locate type: GarrisonContestBotModuleInfo` after
+GC-1 landed the yaml ref. Rebuilt + committed (`12b438ab5`). Rule of thumb:
+the tracked dll must be rebuilt whenever master ai.yaml gains a trait ref.
+
 # 2026-10-02 — EMBER: garrison contest + cover-the-map expansion (GC-1 / EX-4)
 
 Maintainer-observed failures on master: genericbot loses every neutral
