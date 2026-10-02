@@ -163,6 +163,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		// BO-1 (AI_ARCHITECTURE 12.25), record-only: the build-order knob vector, opening and react events of the provider's last update.
 		// Null (and omitted from the log) while no BuildOrderKnobsBotModule is enabled.
 		internal BuildOrderSnapshot BuildOrder;
+		// FE-0 (AI_ARCHITECTURE 12.24), record-only: the field-economy picture as of this snapshot (the `expansion` object).
+		internal ExpansionSnapshot Expansion;
 
 		// TC-1 (AI_ARCHITECTURE §12.17), record-only: the allied team blackboard as of
 		// this snapshot — the caller's own broadcast is never folded in, so these read
@@ -578,6 +580,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		internal int DeathsCostWindow { get; private set; }
 		internal int KillsCostWindow { get; private set; }
 		internal IReadOnlyList<BotSituation> PendingSituations => pendingSituations;
+
+		// FE-0 (12.24), record-only: the field-economy collector the snapshots and the placement log share.
+		ExpansionTelemetry expansionTelemetry;
+		internal ExpansionTelemetry ExpansionTelemetry => expansionTelemetry ??= new ExpansionTelemetry();
 		OpenRA.Player IBotMainTargetProvider.MainTarget => IsTraitDisabled ? null : Situation?.MainTarget;
 
 		// UT-1: the cooked posture axes for consumers; a disabled master reads as neutral.
@@ -1400,7 +1406,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				IdleProductionTicks = idleProductionTicks,
 				ProductionQueues = productionQueueCount,
 				ScaleTargets = player.PlayerActor.TraitsImplementing<ScaleTargetsBotModule>().FirstEnabledTraitOrDefault()?.Snapshot,
-				BuildOrder = player.PlayerActor.TraitsImplementing<BuildOrderKnobsBotModule>().FirstEnabledTraitOrDefault()?.Snapshot
+				BuildOrder = player.PlayerActor.TraitsImplementing<BuildOrderKnobsBotModule>().FirstEnabledTraitOrDefault()?.Snapshot,
+				Expansion = ExpansionTelemetry.Capture(player, ownLiveBuildings)
 			};
 			Situation = situation;
 			pendingSituations.Add(situation);

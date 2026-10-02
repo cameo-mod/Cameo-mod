@@ -832,6 +832,10 @@ def build_parser() -> argparse.ArgumentParser:
 
 
 def main() -> int:
+    # Windows consoles default to cp1252; a shard label with a non-ASCII character crashed the driver before any launch.
+    for stream in (sys.stdout, sys.stderr):
+        if hasattr(stream, "reconfigure"):
+            stream.reconfigure(encoding="utf-8", errors="replace")
     args = build_parser().parse_args()
     args.out = args.out.resolve()
     arms, shards, smoke = build_plan(args)

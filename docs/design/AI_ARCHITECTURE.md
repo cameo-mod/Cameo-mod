@@ -1358,7 +1358,7 @@ this incrementally shippable — each phase in 10.6 is a complete, playable stat
 Verified on 2026-09-07 from the active `mods/cameo/mod.yaml` manifest and resolved
 `Player` / `World`, against upstream base `291052380`. Scope here is the decision modules,
 their explicit coordination adapter, and the three data/limit providers named below:
-**67 distinct trait types, 92 Player instances plus one World instance** (2026-10-02d: ST adds `ScaleTargetsBotModule` (genericbot, behind `scale_targets`), the §12.22 size-target provider, +1 type / +1 instance (#770 left it uncounted); 2026-10-02c: PP-1 adds `ParallelProductionBotModule` (genericbot, behind `parallel_production`), the settings-only IBotProductionWidth provider, and ATK-1 adds `AssaultFormationBotModule` (genericbot, behind `assault_fanout`), the settings-only provider of the unified CV/ATK-1 deploy state (§12.7a), and ST adds `ScaleTargetsBotModule` (genericbot, behind `scale_targets`, §12.22), +3 types / +3 instances; 2026-10-02b: SP-1/AF-1 add `SpacingAdvisorBotModule` + `ArmyFirstBotModule` (genericbot, behind `spaced_base`/`army_first`) and the `HarvesterBotModuleCA@generic`/@classic split adds one more instance, +3 types / +4 instances — the count also absorbs +2/+2 drift other merges left uncounted; 2026-10-02: CN3 adds `BridgeRepairBotModule` (genericbot, behind `cn3_bridge_repair`), the CN bridge-hut repair port claiming repairers per §19.6, +1 type / +1 instance — the count also absorbs a +1 drift RV2's `SupportPowerBotASModule@wc2` left uncounted; 2026-10-01: CN3 adds `DeployBotModule` (genericbot, behind `cn3_deploy`), the CN unified deploy-driving port, +1 type / +1 instance; CN2 adds `UnitRepairBotModule` (genericbot, behind `cn2_unit_repair`) and `GarrisonDefenseBotModule` (genericbot, behind `cn2_garrison_defense`), the crystallized-nexus repair-manager and threat-adaptive garrison ports claiming units per §19.6, +2 types / +2 instances; ZG adds `TacticalMapBotModule` (genericbot), +1 type / +1 instance; 2026-09-30: RV1 adds `BaseRepairBotModule`, the merged repair owner of DESIGN §19.3, and unloads the Common `BuildingRepairBotModule`, ±0; #656 adds `SiegeEvaluatorBotModule` (CA-2a siege telemetry) and splits the Fransbot `FransGroundCommanderBotModule` into six instances `@ground1`…`@ground6`, +1 type / +6 instances; 2026-09-29: `ExpansionPlannerBotModule`, EX-0 of §12.13, +1 type / +1 instance; 2026-09-28: #621 adds
+**68 distinct trait types, 93 Player instances plus one World instance** (2026-10-02e: BO-1 adds `BuildOrderKnobsBotModule` (genericbot, behind `build_order_knobs`), the §12.25 build-order knob provider, +1 type / +1 instance; 2026-10-02d: ST adds `ScaleTargetsBotModule` (genericbot, behind `scale_targets`), the §12.22 size-target provider, +1 type / +1 instance (#770 left it uncounted); 2026-10-02c: PP-1 adds `ParallelProductionBotModule` (genericbot, behind `parallel_production`), the settings-only IBotProductionWidth provider, and ATK-1 adds `AssaultFormationBotModule` (genericbot, behind `assault_fanout`), the settings-only provider of the unified CV/ATK-1 deploy state (§12.7a), and ST adds `ScaleTargetsBotModule` (genericbot, behind `scale_targets`, §12.22), +3 types / +3 instances; 2026-10-02b: SP-1/AF-1 add `SpacingAdvisorBotModule` + `ArmyFirstBotModule` (genericbot, behind `spaced_base`/`army_first`) and the `HarvesterBotModuleCA@generic`/@classic split adds one more instance, +3 types / +4 instances — the count also absorbs +2/+2 drift other merges left uncounted; 2026-10-02: CN3 adds `BridgeRepairBotModule` (genericbot, behind `cn3_bridge_repair`), the CN bridge-hut repair port claiming repairers per §19.6, +1 type / +1 instance — the count also absorbs a +1 drift RV2's `SupportPowerBotASModule@wc2` left uncounted; 2026-10-01: CN3 adds `DeployBotModule` (genericbot, behind `cn3_deploy`), the CN unified deploy-driving port, +1 type / +1 instance; CN2 adds `UnitRepairBotModule` (genericbot, behind `cn2_unit_repair`) and `GarrisonDefenseBotModule` (genericbot, behind `cn2_garrison_defense`), the crystallized-nexus repair-manager and threat-adaptive garrison ports claiming units per §19.6, +2 types / +2 instances; ZG adds `TacticalMapBotModule` (genericbot), +1 type / +1 instance; 2026-09-30: RV1 adds `BaseRepairBotModule`, the merged repair owner of DESIGN §19.3, and unloads the Common `BuildingRepairBotModule`, ±0; #656 adds `SiegeEvaluatorBotModule` (CA-2a siege telemetry) and splits the Fransbot `FransGroundCommanderBotModule` into six instances `@ground1`…`@ground6`, +1 type / +6 instances; 2026-09-29: `ExpansionPlannerBotModule`, EX-0 of §12.13, +1 type / +1 instance; 2026-09-28: #621 adds
 `SquadManagerBotModuleCA@guerrilla`, the 69th instance; #607 adds `ResourceMapBotModule@fransbot` and `SquadManagerBotModuleCA@classic`, the 67th–68th instances; #578's Route-A Fransbot port adds 24 vendored `Frans*BotModule` types / 24 instances, the 28th–51st / 43rd–66th, which run only under the `fransbot` bot type; `BeaconResponderBotModule` (#580) is the 27th type / 42nd instance; `CncEngineerBotModule` (#562), `CombatAnalysisBotModule` (#564) and `HumanPaceBotModule` added the 24th–26th types / 39th–41st instances; `ScoutBotModule` was the 23rd/38th). Conditional instances
 are loaded, not necessarily enabled simultaneously. This replaces the old unqualified
 "20 loaded modules" claim. The scope does not count `ModularBot` dispatchers,
@@ -3140,6 +3140,30 @@ independently, so they often point the same way.
 * `tools/ai/expansion_report.py <match dirs>`: per bot and per match, the numbers above over time (first refinery, fields
   harvested at minutes 5/10/20, peak, excess refineries, mean anchor distance, crawl/MCV angle distribution).
 
+**Implemented (FE-0, 2026-10-02, worktree `claude/tel_2026_10_02`, not boot-gated):**
+* `OpenRA.Mods.CA/Traits/BotModules/IBotPlacementObserver.cs` is the record-only hook. `BaseBuilderQueueManagerCA` records the queue tick per producer
+  (`queuedAt`) and calls the observers when it issues the `PlaceBuilding` order. `reason` comes from the placement path it already took:
+  `refinery_claim` (the EX-2 claim returned a cell, flag `refineryClaimed`), `crawl` (`BuildingType.BaseCrawl`), `defence` (`Defense` or an advised
+  defence cell), `other` (a plug), else `base`. No decision reads any of it.
+* `OpenRA.Mods.Cameo/Traits/AiPlacementLogWriter.cs` (world trait `AiPlacementLogWriter`, `world.yaml`) appends `cameo-ai-placements.jsonl` at game
+  over. Line: `schema, kind:"placement", game_uid, record_id, map_uid, seed, player, faction, bot_type, personality, tick, queued_tick,
+  placed_tick, actor, cell:"x,y", category, reason` and, for refineries, `anchor_kind` (`spreader` | `field`), `anchor_cell`, `anchor_dist` (cells).
+  `category` = `ExpansionMath.Category` over `BotTargetTags` (conyard, refinery, superweapon, power, defence, production) then the `IBotUnitRoles`
+  `tech` / `support` roles, else `other`; no actor id is typed.
+* `OpenRA.Mods.Cameo/Traits/AiLogExpansion.cs`: `ExpansionTelemetry` (one per `MasterAiBotModule`, shared by the snapshots and the placement log) and the
+  pure `ExpansionMath`. It reads the existing `ResourceMapBotModule` (it only remembers each field's first-seen centre) and
+  `ExpansionPlannerBotModule.Target` / the new read-only `LastMcvSite`; spreaders = `ActorsWithTrait<ISeedableResource>` (public map data, the one
+  enumeration site, manifested in `fog_honesty_manifest.json`). Anchors = spreaders, then fields with no spreader within 12 cells. A refinery serves its
+  nearest anchor within 12 cells; excess = refineries beyond one per anchor plus the unassigned ones. In reach = field centre within the planner's
+  `ReachCells` of a buildable-area building; served = own refinery within `ClaimRadiusCells`; harvested = own harvester on the field (resource map);
+  coverage = (in reach or served) / known. Main base = the first yard seen; outposts = yards more than 20 cells from it; the angle is between the
+  bearings (clockwise from north) of the crawl target and the MCV site from the centroid of own buildings within 20 cells of the main yard (-1 = n/a).
+* Situation snapshot: top-level `expansion` object (`AiSituationLogWriter.AppendExpansion`): `fields_known, fields_in_reach, fields_served,
+  fields_harvested, anchors_spreader, anchors_field, refineries, excess_refineries, unassigned_refineries, anchor_dist_mean, anchor_dist_max, conyards,
+  outposts, crawl_target, mcv_site, crawl_mcv_angle, coverage_milli`.
+* `tools/ai/expansion_report.py <match dirs> [--json]` (shared readers in `tools/ai/ai_log_common.py`); tests `tools/tests/test_expansion_and_build_order_reports.py`
+  and `OpenRA.Mods.Cameo.Test/ExpansionTelemetryTest.cs`.
+
 **FE-1 behaviour (one switch `AJ_field_coverage`, default off; classic unchanged):**
 1. **Refinery law:** one refinery per anchor (see DESIGN). A refinery is wanted while an anchor in building reach is
    unserved, and only then. Under this switch it replaces the yard-based cap, `OptimalRefineryCount` and the §19.10
@@ -3154,6 +3178,30 @@ independently, so they often point the same way.
 4. **Spread:** both scores gain `× (1 + SpreadBonus × distance to our nearest building / map size)`, so unexplored
    ground wins ties.
 5. **Aggression:** earlier and more MCVs, via the existing EX-4 knobs in the switch values. No new driver.
+
+**Implemented (FE-1, 2026-10-02, switch `AJ_field_coverage`, default off; `ExpansionPlannerBotModule.FieldCoverage`):**
+* Anchors = `ISeedableResource` actors (spreaders, public map data) plus first-seen centres of fields with no spreader within
+  `SpreaderFieldRadiusCells` (12). `AssignRefineries` pairs each own refinery with at most one anchor within the serve radius
+  (`AnchorServeRadiusCells`, 0 = `ClaimRadiusCells`); `WantedAnchor` wants a refinery iff an unserved, unparked anchor lies
+  within `ReachCells` of a buildable-area building AND placed + queued refineries < anchors. A claim wanted for
+  `AnchorStuckReplans` (12) re-plans with nothing placed or queued parks the anchor for `ParkTicks`.
+* The planner publishes it through new default-false members of `IBotExpansionTargetProvider` (`RefineryLawActive`,
+  `RefineryAnchorCount`, `UnservedAnchorsInReach`, `RefineryClaimFieldCenter`; `RefineryClaimTarget` becomes the anchor).
+  `BaseBuilderBotModuleCA` reads only these: under the law `HasMaxRefineriesFor` ignores the yard cap, `RefineryLimit` and the
+  scale-target refinery cap (the first `InititalMinimumRefineryCount` refineries still pass), `HasAdequateRefineryCount` uses the
+  initial minimum instead of `OptimalRefineryCount`, and `ExpansionWantsRefinery` no longer needs a crawl target. No provider
+  (classic) or switch off = every line is the old one.
+* Placement: `findPos(anchorOrder: true)` sorts the claim annulus (radius `ExpansionTargetClaimRadius` around the anchor) by
+  distance to the anchor, then to the field's resource centre, takes the first valid cell (the spacing advisor's re-rank is
+  skipped; refineries were already exempt from the gap) and does not fall back to a home placement.
+* Directions: `McvSite` takes an optional weight = `SeparationFactor` (x `MinSeparationFactor` 0.25 when the bearing from the main
+  base is within `CrawlSeparationDegrees` 35 of the crawl target, an own yard or another in-flight MCV site; `WAngle.ArcTan`) x
+  `SpreadFactor`. The crawl score takes the spread factor and x `MinSeparationFactor` for a field an in-flight MCV site holds.
+* Spread: `1 + SpreadBonus (1.0) x distance to our nearest building / map diagonal`, for both scores.
+* Aggression (switch values): `CoverAllFields` true, `CoverAllFieldsMaxInflight` 3 (was 2), `McvRequestReserve` 1000 (was 1500),
+  `McvTargetCount` 4 (was 3). Unmeasured guesses: the FE-0 report (`expansion_report.py`) and the increment A/B decide them.
+* Tests: `OpenRA.Mods.Cameo.Test/FieldCoverageTest.cs` (anchors, assignment, wanted rule incl. never more than anchors, separation,
+  spread). Fog manifest: `ExpansionPlannerBotModule.cs` 4 -> 5 (neutral spreader scan).
 
 ### 12.25 BO — the building build-order lab: log, score, tune, personalise, learn, react (maintainer 2026-10-02; owner Claude)
 
@@ -3224,6 +3272,13 @@ Units are out of scope until the rebalance.
   * the outcome: win, game length, `kills_cost` / `deaths_cost` (destroyed-to-lost), and **score = win + margin**.
     margin = (killed − lost) / (killed + lost), plus a speed bonus for a faster win.
   * Grouped by personality and by knob vector (BO-1).
+
+**Implemented (BO-0, 2026-10-02, worktree `claude/tel_2026_10_02`):** the build order is the placement log above. `tools/ai/build_order_report.py <match dirs>
+[--json]` prints per bot and match the ordered list (mm:ss, actor, category, reason), the time to the first of each category and the outcome from
+`cameo-ai-matches.jsonl`. **Score** = `win + margin + speed`: `win` = 1 for outcome `won` else 0; `margin` = `(killed - lost) / (killed + lost)` over
+`stats.kills_cost` / `stats.deaths_cost` (0 when both are 0); `speed` = `0.5 * max(0, (30 - length_min) / 30)` for a win only, `length_min` =
+`duration_ticks * timestep / 60000`. Range -1 to 2.5; the constants are `SPEED_WEIGHT` / `SPEED_REF_MIN` in the tool. Aggregates by personality and by
+knob vector (`player.knobs` / `knobs` of the match record once BO-1 writes it; `(none)` before).
 
 **BO-1 knobs (switch `AK_build_order_knobs`, default off).** `BuildOrderKnobsBotModule` (genericbot) publishes about
 8 bounded multipliers through `IBotBuildOrderKnobs`. The base builder reads them where it reads its raw numbers:

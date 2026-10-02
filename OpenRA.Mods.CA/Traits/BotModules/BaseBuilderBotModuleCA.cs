@@ -325,7 +325,7 @@ namespace OpenRA.Mods.CA.Traits
 				return null;
 
 			foreach (var provider in expansionTargetProviders)
-				if (provider.WantsRefineryAtExpansionTarget && provider.ExpansionTarget != null)
+				if (provider.WantsRefineryAtExpansionTarget && (provider.ExpansionTarget != null || provider.RefineryLawActive))
 					return provider;
 
 			return null;
@@ -334,6 +334,20 @@ namespace OpenRA.Mods.CA.Traits
 		// Cameo (§12.13, EX-2): an expansion planner is mounted at all (genericbot). Classic shares this module but
 		// mounts no provider, so refinery placement keyed on this stays bit-identical there.
 		public bool HasExpansionGuidance => expansionTargetProviders is { Length: > 0 };
+
+		// Cameo (§12.24, FE-1): the provider enforcing one refinery per anchor, if its switch is on. Null = every refinery
+		// rule below is the old one (classic mounts no provider; genericbot with the switch off publishes false).
+		public IBotExpansionTargetProvider RefineryLawProvider()
+		{
+			if (expansionTargetProviders == null)
+				return null;
+
+			foreach (var provider in expansionTargetProviders)
+				if (provider.RefineryLawActive)
+					return provider;
+
+			return null;
+		}
 
 		/// <summary>
 		/// §12.13 EX-2: keep only the resource cells whose field no own refinery serves — a field counts as served
@@ -832,6 +846,25 @@ namespace OpenRA.Mods.CA.Traits
 
 			var currentRefineryCount = AIUtils.CountActorByCommonName(RefineryBuildings);
 
+			// FE-1 (§12.24): one refinery per anchor. DESIGN §19.1b binds every field to its refinery, so the yard-based
+			// ceiling (RefineriesPerBase x yards + MaxExtraRefineries), BotLimits.RefineryLimit and the §19.10 scale-target
+			// refinery cap are all bypassed: the physical cap is the number of anchors, and a refinery is allowed only while
+			// an anchor in building reach is unserved. The very first refinery keeps InititalMinimumRefineryCount.
+			var law = RefineryLawProvider();
+			if (law != null)
+			{
+				var inProduction = 0;
+				foreach (var r in Info.RefineryTypes)
+					if (BuildingsBeingProduced != null && BuildingsBeingProduced.TryGetValue(r, out var n))
+						inProduction += n;
+
+				var total = currentRefineryCount + inProduction;
+				if (total < Info.InititalMinimumRefineryCount)
+					return false;
+
+				return total >= law.RefineryAnchorCount || law.UnservedAnchorsInReach <= inProduction;
+			}
+
 			// Scale targets (DESIGN 19.10): an enabled provider's refinery target replaces BotLimits.RefineryLimit.
 			var limit = TryGetScaleTarget("refinery", out var scaledRefineries) ? scaledRefineries : refineryLimit;
 			if (limit != 0 && currentRefineryCount >= limit)
@@ -849,7 +882,8 @@ namespace OpenRA.Mods.CA.Traits
 		// Require at least one refinery, unless we can't build it.
 		public bool HasAdequateRefineryCount() =>
 			Info.RefineryTypes.Count == 0 ||
-			(AIUtils.CountActorByCommonName(RefineryBuildings) >= OptimalRefineryCount() && ExpansionWantsRefinery() == null) ||
+			(AIUtils.CountActorByCommonName(RefineryBuildings) >= (RefineryLawProvider() != null ? Info.InititalMinimumRefineryCount : OptimalRefineryCount())
+				&& ExpansionWantsRefinery() == null) ||
 			AIUtils.CountActorByCommonName(powerBuildings) == 0 ||
 			AIUtils.CountActorByCommonName(ConstructionYardBuildings) == 0;
 
