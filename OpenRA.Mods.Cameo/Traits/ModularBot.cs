@@ -159,7 +159,7 @@ namespace OpenRA.Mods.Cameo.Traits
 			if (verdict == BotModules.BotOrderVerdict.Preempt)
 				((IBotUnitLeases)registry).Preempt(unit, issuer, BotLeasePurpose.Emergency, ri.EmergencyLeaseTicks);
 
-			var earlier = gate.NoteIssued(unit, issuer, world.WorldTick, ri.CrossedOrderWindowTicks);
+			var earlier = gate.NoteIssued(unit, issuer, world.WorldTick, ri.CrossedOrderWindowTicks, holder);
 			if (earlier != null && gate.CrossedPairs[(earlier, issuer)] == 1)
 				Log.Write("debug", $"AI {player.InternalName}: ORDERGATE CROSSED {earlier} then {issuer} ordered {unit.Info.Name} {unit.ActorID} within {ri.CrossedOrderWindowTicks} ticks (tick {world.WorldTick}; first of this pair)");
 

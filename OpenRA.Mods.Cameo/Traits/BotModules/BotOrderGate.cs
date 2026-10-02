@@ -37,7 +37,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 	/// </summary>
 	public sealed class BotOrderGate<TKey>
 	{
-		readonly Dictionary<TKey, (string Issuer, int Tick)> lastIssuer = new();
+		readonly Dictionary<TKey, (string Issuer, int Tick, bool Held)> lastIssuer = new();
 		readonly Dictionary<(string Issuer, string Holder, BotOrderVerdict Verdict), int> pairs = new();
 		readonly Dictionary<(string First, string Second), int> crossed = new();
 
@@ -93,11 +93,14 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		}
 
 		/// <summary>
-		/// Crossed orders, claims or not: a unit ordered by one module and then by a different module within `window` ticks
-		/// is two owners in fact. Returns the earlier issuer when this order crosses one (null otherwise). Call only for
-		/// orders that will be issued.
+		/// Crossed orders: a unit ordered by one module and then by a different module within `window` ticks is two
+		/// owners in fact — unless the earlier issuer's claim ended in between. `holder` is the unit's lease owner at
+		/// this order; the earlier issuer holding the lease at ITS order and holding it no longer (squad dissolved,
+		/// escort finished, the pool re-drafted the unit) is a clean hand-off, not a fight. An earlier issuer that
+		/// never held the lease cannot prove a release, so it keeps the old "two issuers" signal. Returns the earlier
+		/// issuer when this order crosses one (null otherwise). Call only for orders that will be issued.
 		/// </summary>
-		public string NoteIssued(TKey unit, string issuer, int tick, int window)
+		public string NoteIssued(TKey unit, string issuer, int tick, int window, string holder)
 		{
 			if (issuer == null || window <= 0)
 				return null;
@@ -105,12 +108,16 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			string earlier = null;
 			if (lastIssuer.TryGetValue(unit, out var last) && last.Issuer != issuer && tick - last.Tick <= window)
 			{
-				earlier = last.Issuer;
-				Crossed++;
-				crossed[(last.Issuer, issuer)] = crossed.GetValueOrDefault((last.Issuer, issuer)) + 1;
+				var released = last.Held && holder != last.Issuer;
+				if (!released)
+				{
+					earlier = last.Issuer;
+					Crossed++;
+					crossed[(last.Issuer, issuer)] = crossed.GetValueOrDefault((last.Issuer, issuer)) + 1;
+				}
 			}
 
-			lastIssuer[unit] = (issuer, tick);
+			lastIssuer[unit] = (issuer, tick, issuer == holder);
 			return earlier;
 		}
 
