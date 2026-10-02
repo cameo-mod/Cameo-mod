@@ -17028,3 +17028,32 @@ Boot-gate + team-match A/B queued per workflow.
 - Launch hazard noted: launch-game.cmd fails from Git Bash — `find` resolves to GNU find
   which mangles the VERSION check args. Launch OpenRA.exe directly (per WORKFLOW) or via
   PowerShell.
+
+## 2026-10-02 EMBER — post-merge review fixes (Codex review @ 9926b5841)
+
+Reviewed `CAMEO_AI_ARCHITECTURE_REVIEW_2026-10-02_POST_MERGE.md`; took the tooling-lane
+findings, flagged the rest to their owners.
+
+**Fixed:**
+- increment_switches.yaml: deleted stale groups `AD_army_first` + `AE_spread_assault`
+  (P0-3.2) — they wrote `MinArmyUnitsBeforeBuildings`/`ArmyFirstMinCash`/`MinBuildingGapCells`
+  to BaseBuilderBotModuleCA, fields the one-owner consolidation deleted (engine silently
+  drops them). Worse: `AE_spread_assault`'s unscoped `HarvesterBotModuleCA` target matches
+  BOTH @generic and @classic — arming it would flip @classic's `MaxHarvestersPerResourceIndice: 0`
+  opt-out and contaminate the A/B control. Both groups are superseded by
+  AD_spaced_base_placement / AE_army_first / AF_harvester_spread / AG_assault_fanout.
+- Regenerated AI_MODULE_MAP.md + AI_ARCH_COVERAGE.md on the merged tree (P0-3.1);
+  ai_arch_audit --check: 0 ERROR / 31 WARN (advisory class).
+- New audit `audit_ai_arch_freshness.py` wired into run_all.sh's blocking loop —
+  stale generated architecture evidence is now a per-commit failure, not drift.
+- Unified the match-score objective: `ai_log_common.match_score` (win + margin +
+  speed_bonus on raw ticks; tuner's 0.25/54000 constants canonical since the tuner is
+  the acceptance gate). build_order_report.py + tune_build_order.py now share it (6.2).
+
+**Verified:** LC8 match-end closure already exists — BotMissionAttemptTracker is wired at
+ai.yaml:3945 (genericbot||classicbot); out4's open attempts ran on pre-tracker dlls. The
+checker's 5000-tick grace covers legacy logs.
+
+**Flagged to owners (not mine):** BO-1 `out_earned` player-count normalization, TC-3
+consistency/liveness/rescue-capacity/ClientIndex findings (§4), tuner paired-stats + opening
+bandit confound (§6.3/6.4) — Claude's lanes.
