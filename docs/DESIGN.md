@@ -5048,6 +5048,16 @@ best from both. There should only be one bot module per type and no competing du
   as upstream CA does (maintainer, same day: *"Classic should only use the CA modules where duplicates
   exist"*). Where no CA copy exists (support powers: OpenRA vs AS) the pair is merged as for any bot.
   Moving classic moves the benchmark: the first A/B after such a change is the new baseline.
+* **Parallel duplicates from two agents (maintainer rulings 2026-10-02):** when two lanes build the same behaviour, the
+  pair is MERGED into one owner (best of each). What a maintainer directive made live **stays live** for genericbot; the
+  rest stays behind its switch until the increment A/B. **classic opts out** of directive-live changes. It keeps its
+  pre-change behaviour through its own instance, or through having no provider: classic stays the reference.
+  Applied 2026-10-02:
+  * formation: §12.7a + ATK-1 + DAWN's assault fan → one deploy state with army/objective shapes;
+  * spacing → `SpacingAdvisorBotModule`;
+  * the harvester field cap → `HarvesterBotModuleCA`;
+  * army-first → `ArmyFirstBotModule`.
+  The "fight is on" test is one predicate (`NearestEngagedEnemy`, AI_ARCHITECTURE §12.7b).
 
 ### 19.4 Bot modules held for content that is coming (2026-09-30) — binding
 

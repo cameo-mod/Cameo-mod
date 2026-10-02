@@ -29,6 +29,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 	// DesiredGapCells to an existing building are only taken when nothing better places at all, so placement
 	// never deadlocks on spacing alone: worst case is the widest cell left.
 	//
+	// ONE OWNER of base spacing (maintainer 2026-10-02, merged with DAWN's BaseBuilder MinBuildingGapCells):
+	// besides the re-ranking above (off until RerankCandidates is armed by the AD_spaced_base_placement switch), this
+	// module owns the HARD building gap findPos applies - cells whose footprint lands within MinBuildingGapCells of
+	// an own footprint (MinBuildingGapDefensesCells for defences) are rejected. The gap is live whenever the module
+	// is loaded (genericbot); classic has no advisor, so it keeps the old edge-to-edge placement.
+	//
 	// Refineries keep their own placement owner (the expansion planner's field claim wins — a refinery sited
 	// for spacing instead of field reach would undo EX-2). Defense cells keep DefenseCoveragePlanner (DEF-3) —
 	// when an IBotDefensePlacementAdvisor is active it already picks, so this advisor is never asked for them.
@@ -36,6 +42,16 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 	[Desc("Re-ranks candidate building-placement cells toward maximum distance from existing own buildings, keeping bases open.")]
 	public class SpacingAdvisorBotModuleInfo : ConditionalTraitInfo
 	{
+		[Desc("HARD gap: cells of empty space between a new building's footprint and every own footprint (0 disables).",
+			"Live whenever the module is loaded; findPos rejects the cells, an exhausted annulus returns null and retries later.")]
+		public readonly int MinBuildingGapCells = 2;
+
+		[Desc("The hard gap for defence placements, so walls and turrets can still form tighter lines.")]
+		public readonly int MinBuildingGapDefensesCells = 1;
+
+		[Desc("Arm the re-ranking of findPos' first placeable candidates (the SP-1 part; the hard gap is always on).")]
+		public readonly bool RerankCandidates = false;
+
 		[Desc("Cells of clear gap a placement tries to keep to the nearest own building. Candidates inside this gap",
 			"are only used when nothing wider places at all.")]
 		public readonly int DesiredGapCells = 3;
@@ -68,6 +84,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		}
 
 		bool IBotPlacementAdvisor.IsActive => !IsTraitDisabled;
+		bool IBotPlacementAdvisor.RanksCandidates => !IsTraitDisabled && Info.RerankCandidates;
+		int IBotPlacementAdvisor.MinBuildingGapCells => Info.MinBuildingGapCells;
+		int IBotPlacementAdvisor.MinBuildingGapDefensesCells => Info.MinBuildingGapDefensesCells;
 
 		void EnsureResourceRefs()
 		{
@@ -108,7 +127,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		CPos? IBotPlacementAdvisor.ChooseCell(ActorInfo building, IReadOnlyList<CPos> candidates, Func<CPos, bool> stillPlaceable)
 		{
-			if (IsTraitDisabled || candidates == null || candidates.Count == 0)
+			if (IsTraitDisabled || !Info.RerankCandidates || candidates == null || candidates.Count == 0)
 				return null;
 
 			// Refineries keep their own placement owner (the expansion planner's field claim wins — a

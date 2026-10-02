@@ -82,11 +82,9 @@
 		Condition: cn3_stealth_squads
 		Bots: fransbot
 
-	# SP-1/AF-1 (AI_ARCHITECTURE §12.20): spacing advisor + army-first building gate for genericbot.
+	# AF-1 (AI_ARCHITECTURE §12.20): army-first building gate for genericbot (the spacing advisor needs no condition:
+	# its building gap is live for genericbot, only its re-ranking is switched, by a field).
 	# Same inert-on-master pattern - the switch arm flips Bots: to the genericbot tier list.
-	GrantConditionOnBotOwner@spacedbase:
-		Condition: spaced_base
-		Bots: fransbot
 	GrantConditionOnBotOwner@armyfirst:
 		Condition: army_first
 		Bots: fransbot
@@ -3472,7 +3470,8 @@ Player:
 					CheckRadius: 9000
 	# HS-1 (AI_ARCHITECTURE §12.20): the harvester module is split into named instances so the increment
 	# switch can retune the field-deficit redirect cadence on genericbot only - @classic stays the
-	# upstream A/B reference. Fields today are byte-identical between the two.
+	# upstream A/B reference. The per-field cap (MaxHarvestersPerResourceIndice, default 4: saturated fields get no new
+	# harvesters, surplus is pushed to lacking fields) is LIVE for genericbot; classic opts out (maintainer 2026-10-02).
 	HarvesterBotModuleCA@generic:
 		RequiresCondition: genericbot
 		HarvestersPerRefinery: 3
@@ -3481,6 +3480,7 @@ Player:
 		ScanForIdleHarvestersInterval: 1000
 	HarvesterBotModuleCA@classic:
 		RequiresCondition: classicbot
+		MaxHarvestersPerResourceIndice: 0
 		HarvestersPerRefinery: 3
 		MaxHarvesters: 24
 		AdditionalHarvesters: 1
@@ -3666,17 +3666,18 @@ Player:
 				tech: 1500
 			rush:
 				army: 800
-	# SP-1 (AI_ARCHITECTURE §12.20): the base-spacing advisor. findPos still owns validity (CanPlaceBuilding,
-	# base radius, distance requirements); this re-ranks its first N placeable candidates by distance to the
-	# nearest own building, so bases grow outward with gaps instead of packing into a traffic-jam monolith.
+	# SP-1 + DAWN building gap (AI_ARCHITECTURE §12.20), ONE owner of base spacing (maintainer 2026-10-02). Loaded for
+	# genericbot: the HARD gap findPos applies (MinBuildingGapCells 2 / MinBuildingGapDefensesCells 1) is LIVE. classicbot
+	# has no advisor, hence no gap - it places edge-to-edge as before 10-02. The re-ranking of findPos' first placeable
+	# candidates (bases grow outward instead of packing) is off until switch group AD arms RerankCandidates.
 	# Refineries and defenses keep their own placement owners (EX-2 field claims / DEF-3 coverage).
-	# `genericbot && spaced_base`: off on master until the increment A/B arms it (switch group AD).
 	SpacingAdvisorBotModule:
-		RequiresCondition: genericbot && spaced_base
-	# AF-1 (AI_ARCHITECTURE §12.20): the army-first vote. While cash sits under ArmyReserveLowCash the
-	# base builder's queues hold new non-refinery buildings so unit production eats the income first;
-	# resumes above ArmyReserveHighCash (hysteresis, no flicker). Refineries stay exempt - they ARE the
-	# economy - and the vote is inert until a unit producer exists, so tech sequencing cannot stall.
+		RequiresCondition: genericbot
+	# AF-1 + DAWN army-first (AI_ARCHITECTURE §12.20), ONE owner (maintainer 2026-10-02). The base builder's queues hold new
+	# non-essential buildings while cash sits under ArmyReserveLowCash (resumes above ArmyReserveHighCash) OR while owned
+	# combat units are below MinArmyUnitsBeforeBuildings with cash above ArmyFirstMinCash (gate off until the switch sets it).
+	# Conyards, refineries, power and the first factory are essential and always pass; the vote is inert until a unit
+	# producer exists, so tech sequencing cannot stall.
 	# `genericbot && army_first`: off on master until the increment A/B arms it (switch group AE).
 	ArmyFirstBotModule:
 		RequiresCondition: genericbot && army_first

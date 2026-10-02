@@ -150,6 +150,77 @@ namespace OpenRA.Mods.CA.Traits
 			return result;
 		}
 
+		/// <summary>
+		/// Objective shape (12.7a, DAWN's assault fan merged in): how many approach prongs a squad
+		/// of <paramref name="memberCount"/> splits into, half its size clamped to [min, max]
+		/// (never fewer than one).
+		/// </summary>
+		public static int ProngCount(int memberCount, int minProngs, int maxProngs)
+		{
+			return Math.Max(1, Math.Min(maxProngs, Math.Max(minProngs, memberCount / 2)));
+		}
+
+		/// <summary>
+		/// Objective shape: <paramref name="prongCount"/> prong positions on a ring of
+		/// <paramref name="radius"/> around <paramref name="objective"/>, fanned over
+		/// <paramref name="frontDegrees"/> centred on the bearing objective to
+		/// <paramref name="approachFrom"/>, outermost prongs first and last. Wings mirror exactly.
+		/// A single prong sits on the approach axis.
+		/// </summary>
+		public static WPos[] ObjectiveProngs(WPos objective, WPos approachFrom, int radius, int frontDegrees, int prongCount)
+		{
+			var count = Math.Max(1, prongCount);
+			var axis = approachFrom - objective;
+			var axisLen = (long)axis.HorizontalLength;
+			if (axisLen <= 0)
+			{
+				axis = new WVec(1024, 0, 0);
+				axisLen = 1024;
+			}
+
+			var result = new WPos[count];
+			for (var i = 0; i < count; i++)
+			{
+				var offset = count == 1 ? 0 : frontDegrees * i / (count - 1) - frontDegrees / 2;
+
+				// Rotate by |offset| and conjugate for the negative wing so mirrored prongs stay exactly mirrored.
+				var rot = WRot.FromYaw(WAngle.FromDegrees(Math.Abs(offset)));
+				if (offset < 0)
+					rot = -rot;
+
+				var dir = axis.Rotate(rot);
+				result[i] = objective + new WVec(
+					(int)(dir.X * (long)radius / axisLen),
+					(int)(dir.Y * (long)radius / axisLen),
+					0);
+			}
+
+			return result;
+		}
+
+		/// <summary>
+		/// Objective shape: one prong slot per member, in input order. A member takes prong
+		/// <c>Id % prongs</c> (stable across runs and peers); <see cref="ConcaveSlot.Rank"/> is the
+		/// prong index, <see cref="ConcaveSlot.Pos"/> its position (terrain snap is the caller's).
+		/// </summary>
+		public static ConcaveSlot[] PlanObjective(WPos objective, WPos approachFrom, int radius, int frontDegrees,
+			IReadOnlyList<uint> memberIds, int minProngs, int maxProngs)
+		{
+			var result = new ConcaveSlot[memberIds.Count];
+			if (memberIds.Count == 0)
+				return result;
+
+			var prongs = ObjectiveProngs(objective, approachFrom, radius, frontDegrees,
+				ProngCount(memberIds.Count, minProngs, maxProngs));
+			for (var i = 0; i < memberIds.Count; i++)
+			{
+				var prong = (int)(memberIds[i] % (uint)prongs.Length);
+				result[i] = new ConcaveSlot(i, prongs[prong], prong);
+			}
+
+			return result;
+		}
+
 		static long Width(ConcaveMember m, int spacing)
 		{
 			return m.IsInfantry ? spacing / 2 : spacing;

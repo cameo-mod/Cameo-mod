@@ -1358,7 +1358,7 @@ this incrementally shippable — each phase in 10.6 is a complete, playable stat
 Verified on 2026-09-07 from the active `mods/cameo/mod.yaml` manifest and resolved
 `Player` / `World`, against upstream base `291052380`. Scope here is the decision modules,
 their explicit coordination adapter, and the three data/limit providers named below:
-**66 distinct trait types, 91 Player instances plus one World instance** (2026-10-02c: PP-1 adds `ParallelProductionBotModule` (genericbot, behind `parallel_production`), the settings-only IBotProductionWidth provider, and ATK-1 adds `AssaultFormationBotModule` (genericbot, behind `assault_fanout`), the settings-only provider of the unified CV/ATK-1 deploy state (§12.7a), and ST adds `ScaleTargetsBotModule` (genericbot, behind `scale_targets`, §12.22), +3 types / +3 instances; 2026-10-02b: SP-1/AF-1 add `SpacingAdvisorBotModule` + `ArmyFirstBotModule` (genericbot, behind `spaced_base`/`army_first`) and the `HarvesterBotModuleCA@generic`/@classic split adds one more instance, +3 types / +4 instances — the count also absorbs +2/+2 drift other merges left uncounted; 2026-10-02: CN3 adds `BridgeRepairBotModule` (genericbot, behind `cn3_bridge_repair`), the CN bridge-hut repair port claiming repairers per §19.6, +1 type / +1 instance — the count also absorbs a +1 drift RV2's `SupportPowerBotASModule@wc2` left uncounted; 2026-10-01: CN3 adds `DeployBotModule` (genericbot, behind `cn3_deploy`), the CN unified deploy-driving port, +1 type / +1 instance; CN2 adds `UnitRepairBotModule` (genericbot, behind `cn2_unit_repair`) and `GarrisonDefenseBotModule` (genericbot, behind `cn2_garrison_defense`), the crystallized-nexus repair-manager and threat-adaptive garrison ports claiming units per §19.6, +2 types / +2 instances; ZG adds `TacticalMapBotModule` (genericbot), +1 type / +1 instance; 2026-09-30: RV1 adds `BaseRepairBotModule`, the merged repair owner of DESIGN §19.3, and unloads the Common `BuildingRepairBotModule`, ±0; #656 adds `SiegeEvaluatorBotModule` (CA-2a siege telemetry) and splits the Fransbot `FransGroundCommanderBotModule` into six instances `@ground1`…`@ground6`, +1 type / +6 instances; 2026-09-29: `ExpansionPlannerBotModule`, EX-0 of §12.13, +1 type / +1 instance; 2026-09-28: #621 adds
+**67 distinct trait types, 92 Player instances plus one World instance** (2026-10-02d: ST adds `ScaleTargetsBotModule` (genericbot, behind `scale_targets`), the §12.22 size-target provider, +1 type / +1 instance (#770 left it uncounted); 2026-10-02c: PP-1 adds `ParallelProductionBotModule` (genericbot, behind `parallel_production`), the settings-only IBotProductionWidth provider, and ATK-1 adds `AssaultFormationBotModule` (genericbot, behind `assault_fanout`), the settings-only provider of the unified CV/ATK-1 deploy state (§12.7a), and ST adds `ScaleTargetsBotModule` (genericbot, behind `scale_targets`, §12.22), +3 types / +3 instances; 2026-10-02b: SP-1/AF-1 add `SpacingAdvisorBotModule` + `ArmyFirstBotModule` (genericbot, behind `spaced_base`/`army_first`) and the `HarvesterBotModuleCA@generic`/@classic split adds one more instance, +3 types / +4 instances — the count also absorbs +2/+2 drift other merges left uncounted; 2026-10-02: CN3 adds `BridgeRepairBotModule` (genericbot, behind `cn3_bridge_repair`), the CN bridge-hut repair port claiming repairers per §19.6, +1 type / +1 instance — the count also absorbs a +1 drift RV2's `SupportPowerBotASModule@wc2` left uncounted; 2026-10-01: CN3 adds `DeployBotModule` (genericbot, behind `cn3_deploy`), the CN unified deploy-driving port, +1 type / +1 instance; CN2 adds `UnitRepairBotModule` (genericbot, behind `cn2_unit_repair`) and `GarrisonDefenseBotModule` (genericbot, behind `cn2_garrison_defense`), the crystallized-nexus repair-manager and threat-adaptive garrison ports claiming units per §19.6, +2 types / +2 instances; ZG adds `TacticalMapBotModule` (genericbot), +1 type / +1 instance; 2026-09-30: RV1 adds `BaseRepairBotModule`, the merged repair owner of DESIGN §19.3, and unloads the Common `BuildingRepairBotModule`, ±0; #656 adds `SiegeEvaluatorBotModule` (CA-2a siege telemetry) and splits the Fransbot `FransGroundCommanderBotModule` into six instances `@ground1`…`@ground6`, +1 type / +6 instances; 2026-09-29: `ExpansionPlannerBotModule`, EX-0 of §12.13, +1 type / +1 instance; 2026-09-28: #621 adds
 `SquadManagerBotModuleCA@guerrilla`, the 69th instance; #607 adds `ResourceMapBotModule@fransbot` and `SquadManagerBotModuleCA@classic`, the 67th–68th instances; #578's Route-A Fransbot port adds 24 vendored `Frans*BotModule` types / 24 instances, the 28th–51st / 43rd–66th, which run only under the `fransbot` bot type; `BeaconResponderBotModule` (#580) is the 27th type / 42nd instance; `CncEngineerBotModule` (#562), `CombatAnalysisBotModule` (#564) and `HumanPaceBotModule` added the 24th–26th types / 39th–41st instances; `ScoutBotModule` was the 23rd/38th). Conditional instances
 are loaded, not necessarily enabled simultaneously. This replaces the old unqualified
 "20 loaded modules" claim. The scope does not count `ModularBot` dispatchers,
@@ -2102,11 +2102,34 @@ plus `StageMarginCells`, `RankBandCells`, `Spacing`, `MinSpacing`, `RankGap`, `M
 section's values (min 4 / contact 16 / formed 80% / 150 ticks / arc cap 150°) — ATK-1's ring-tuned 12 / 60 / 500 / 180 were
 measured on the old fixed ring and do not carry over (coordinator 2026-10-02); the next increment A/B measures the unified state.
 
+**Objective shape (merged DAWN's assault fan, 2026-10-02).** The §12.20b assault fan was a second implementation of
+"deploy before the first shot" inside `GroundUnitsAttackMoveStateCA` (§19.3: one module per decision). It is now the
+second SHAPE of this state, chosen by the anchor: `GroundUnitsConcaveStateCA.ShouldEnter(owner, out shape)` returns
+**Army** (observed armed enemies within `FanoutTriggerCells`; the range-matched concave above; gate = the
+`IBotAssaultFormation` provider, `AG_assault_fanout`, off on master), **Objective** or none. *Objective* = no armed enemy
+in contact (none in the attack scan either, `NearestEngagedEnemy` null), the squad target within
+`AssaultEngageRadiusCells` (18) of the frontline centroid, `FormationMovement` on, siege advisors say Advance, squad off its
+cooldown. Gate = today's fan gate (`FormationMovement` + Rush), so it stays LIVE exactly where the fan was (genericbot
+personalities) and needs no provider; classic sets neither `FormationMovement` nor a provider, so it is unchanged. Settings
+stay `AssaultFanRadiusCells` / `AssaultFanMinSlots` / `AssaultFanMaxSlots` / `AssaultEngageRadiusCells` /
+`AssaultSyncHoldTicks` (same names and defaults). One planner: `ConcaveEvalCA.ProngCount` (members/2 clamped 3..8),
+`ObjectiveProngs` (prongs on a 200-degree front around the objective, centred on objective -> centroid, wings mirrored with
+the `WRot` conjugate, integer math) and `PlanObjective` (member -> prong by `ActorID % prongs`, as the fan did); the state
+terrain-snaps each slot like the concave's (off-map prongs project onto the ring). Machinery shared with the army shape:
+form (`AttackMove` to the prong, re-issued while idle, late joiners re-plan), commit on formed / hold expiry /
+under fire (`NearestEngagedEnemy`), the pending-order commit, hand-over to `GroundUnitsAttackState`, and the same
+orders-only micro-action spend. Differences: the commit is "formed" when every prong is within 6 cells of its slot or
+`AssaultSyncHoldTicks` expired, the push is zero-delay (together, as the fan) - no stagger; the same-ground cooldown (750
+ticks, the provider's `RefanoutCooldownTicks` default, same radius = `AssaultEngageRadiusCells`) is kept ON THE SQUAD
+(`SquadCA.DeployCooldownCell/Tick`), not the provider: the objective shape runs with no provider, and a squad-scoped record
+dies with its squad with nothing to prune. The attack-move state has ONE entry into the deploy state (after the contact-first
+all-in) and no fan fields.
+
 ### 12.7b Contact-first all-in (maintainer 2026-10-02) — and the ONE "the fight is on" test
 
 > *Maintainer, spectating a 6v6:* a large blob stood in formation while part of the force was already trading fire.
 
-Formation (the march §12.7, the concave §12.7a, the assault fan §12.20b) is for BEFORE the first shot. When the fight is
+Formation (the march §12.7, the concave §12.7a incl. its objective shape = the former assault fan) is for BEFORE the first shot. When the fight is
 on for ANY member, a Rush squad commits wholesale on the same tick (Lanchester: staging while the local fight runs feeds
 the enemy one prong at a time). `GroundStatesCA.NearestEngagedEnemy` is the single definition, used by the attack-move
 state's all-in, the concave's entry (declines) and the concave's commit (zero-delay under-fire commit):
@@ -2833,20 +2856,22 @@ never *aimed* at it.
 
 ### 12.20b The 2026-10-02 maintainer review round — assault fan, base spacing, harvester caps, army-first (DAWN)
 
+> **Merged 2026-10-02 (maintainer ruling, DESIGN 19.3 one module per decision).** The three DAWN knobs that duplicated
+> EMBER's SP-1/HS-1/AF-1 now have ONE owner each; the BaseBuilder fields `MinBuildingGapCells`,
+> `MinBuildingGapDefensesCells`, `MinArmyUnitsBeforeBuildings`, `ArmyFirstMinCash` and the groups `AD_army_first` and
+> `AE_spread_assault` are gone. **Spacing:** `SpacingAdvisorBotModule` (genericbot only) owns the hard gap (2 / 1, LIVE;
+> `findPos` asks `IBotPlacementAdvisor`, no advisor = no gap) and the switched re-ranking. **Harvester:**
+> `HarvesterBotModuleCA.MaxHarvestersPerResourceIndice` (4, LIVE; 0 = unlimited) stays the core, the HS-1 cadence is the
+> one switch `AF_harvester_spread`. **Army-first:** `ArmyFirstBotModule` owns both the DAWN army-count gate and the AF-1
+> cash vote, behind the one switch `AE_army_first`. **classic opts out:** no advisor, `MaxHarvestersPerResourceIndice: 0`
+> on `@classic`, no army-first (it behaves as before 10-02). Details below describe the original rules; the owners are above.
+
 Four more maintainer-observed failures, all "the stack does the simple thing wrong"
 class. Merged via `devin/dawn/ai-assault` (commit `2dfc153e6`, merge `ef010523b`).
 
-**Assault fan** (`GroundUnitsAttackMoveStateCA.IssueAssaultFanOrders`, gated under
-`FormationMovement` — already on for genericbot tiers). The §12.7a concave fixes
-*contact* geometry; this fixes *approach* geometry: inside `AssaultEngageRadiusCells`
-(18) the Rush column breaks into `AssaultFanMin..MaxSlots` (3–8) prongs assigned by
-stable `ActorID % slots` hashing, each ordered to an arc slot on a ~200-degree front
-`AssaultFanRadiusCells` (10) around the target — so the squad arrives on several
-headings instead of filing down one route. Early arrivers `Stop`-hold at their slot
-while any prong is >6 cells out, up to `AssaultSyncHoldTicks` (125), then the push
-latches and everyone `AttackMove`s the target center together. Fan state rebuilds if
-the target moves >8 cells. Outside the engage radius the §12.7 column march still
-applies, so guerrilla/harass squads are untouched.
+**Assault fan** - merged on 2026-10-02 into the unified deploy state as its *objective shape*: see **§12.7a "Objective
+shape (merged DAWN's assault fan)"**. `IssueAssaultFanOrders` and the fan fields are gone; the settings
+(`AssaultFan*`, `AssaultEngageRadiusCells`, `AssaultSyncHoldTicks`) and the `FormationMovement` gate are unchanged.
 
 **Building spacing** (`BaseBuilderQueueManagerCA.findPos`, `MinBuildingGapCells` = 2
 default-on, `MinBuildingGapDefensesCells` = 1). The golden rule made mechanical: a
@@ -2879,6 +2904,17 @@ _garrison_defense` (contest + man-own), `AC_cover_map_expansion`, `AD_army_first
 
 
 ### 12.20 SP-1 + AF-1 + HS-1 — spread bases, army-first cash, harvester redistribution (EMBER, 2026-10-02)
+
+**Single owners (2026-10-02 merge with DAWN 12.20b).**
+- *Spacing* — `SpacingAdvisorBotModule` loads on `genericbot` alone and always exposes the hard gap
+  (`MinBuildingGapCells` 2, `MinBuildingGapDefensesCells` 1; `BuildingGapRule` is the pure check); the SP-1 re-ranking
+  runs only when `RerankCandidates` is true (switch `AD_spaced_base_placement`, no longer a granted condition).
+- *Harvester* — one mechanism in `HarvesterBotModuleCA`: the per-field cap (`HarvesterFieldCap`, 0 = unlimited) is live,
+  `ScanForLowEffectHarvestersInterval` (HS-1 cadence) stays behind `AF_harvester_spread`; `@classic` sets the cap to 0.
+- *Army-first* — `ArmyFirstBotModule` = AF-1 cash hysteresis OR DAWN army-count gate (`MinArmyUnitsBeforeBuildings` 0 off by
+  default, 14 / `ArmyFirstMinCash` 1500 under `AE_army_first`). `IBotRequestPauseBuildingProduction.PausesBuilding(building,
+  essential)`: the base builder classifies essentials (conyard, refinery, power, first factory), the module decides.
+  Own units only (fog honest); `ArmyFirstEval` is the pure logic.
 
 Three switch-gated patches for the maintainer's second failure report (the 6v6 review):
 buildings packed wall-to-wall into a pathfinder jam, dozens of harvesters queueing on one

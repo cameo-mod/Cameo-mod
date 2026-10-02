@@ -285,14 +285,6 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 		const int MakeWayTicks = 3;
 		const int KickStuckTicks = 4;
 
-		// Assault fan: at-slot tolerance for the sync hold, the distance a prong
-		// is still inbound, the front the arc slots spread over, and the target
-		// displacement that rebuilds the arc.
-		const int FanArriveCells = 3;
-		const int FanStraggleCells = 6;
-		const int FanFrontDegrees = 200;
-		const int FanRetargetCells = 8;
-
 		// Give tolerance for AI grouping team at start
 		int shouldMakeWayPossibility = -(MaxMakeWayPossibility * 6);
 		int shouldKickStuckPossibility = -(MaxSquadStuckPossibility * 6);
@@ -311,17 +303,6 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 		int currentWaypointIndex;
 		int lastWaypointUpdateTick;
 		Target lastRoutingTarget;
-
-		// Assault fan state: the cached arc slots and per-slot order buckets are
-		// built once per activation; fanStartTick < 0 means no fan is active.
-		// fanAnchor records the target position the arc was built around so a
-		// moved target rebuilds it; fanPush latches once the squad commits.
-		CPos[] fanSlots;
-		List<Actor>[] fanBuckets;
-		readonly List<Actor> fanHolding = new();
-		int fanStartTick = -1;
-		WPos fanAnchor;
-		bool fanPush;
 
 		public void Activate(SquadCA owner) { }
 
@@ -430,11 +411,12 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				}
 			}
 
-			// CV (12.7a, unified with ATK-1): on contact a Rush squad deploys a concave before the
-			// first shot - only when an enabled IBotAssaultFormation provider arms it (ShouldEnter).
-			if (GroundUnitsConcaveStateCA.ShouldEnter(owner))
+			// CV (12.7a, unified with ATK-1 and the assault fan): before the first shot a Rush squad
+			// deploys - the army shape (provider-armed concave against observed enemies) or the
+			// objective shape (FormationMovement prongs around the squad target). ShouldEnter chooses.
+			if (GroundUnitsConcaveStateCA.ShouldEnter(owner, out var deployShape))
 			{
-				owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsConcaveStateCA(), false);
+				owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsConcaveStateCA(deployShape), false);
 				return;
 			}
 
@@ -713,10 +695,9 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			// 12.7: assault squads keep formation steps - frontline leads, anti-air
 			// inside, the rest trails the frontline centroid. Other squad types keep
 			// the plain straggler catch-up (guerrilla/harass mobility is doctrinal).
-			// Assault fan: inside AssaultEngageRadiusCells the Rush column instead
-			// breaks into arc prongs around the target and pushes together.
+			// (The final-approach assault fan is the concave state's objective shape, 12.7a.)
 			if (owner.SquadManager.Info.FormationMovement && owner.Type == SquadCAType.Rush
-				&& (IssueAssaultFanOrders(owner) || IssueFormationOrders(owner, leader, routeTarget)))
+				&& IssueFormationOrders(owner, leader, routeTarget))
 				return;
 
 			var unitsHurryUp = owner.Units.Where(u => (u.Actor.CenterPosition - leader.Actor.CenterPosition).HorizontalLengthSquared >= occupiedArea * 2).Select(u => u.Actor).ToArray();
@@ -904,164 +885,6 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			}
 
 			return true;
-		}
-
-		// Assault fan, once per squad tick (orders only, no activities): inside
-		// AssaultEngageRadiusCells the Rush column breaks into
-		// AssaultFan{Min,Max}Slots prongs that run to arc slots spread on a
-		// ~200-degree front AssaultFanRadiusCells around the target, so the
-		// squad strikes from several headings at once instead of filing down a
-		// single route into the defenses. Early arrivers hold (Stop) at their
-		// slot while any prong is still inbound, up to AssaultSyncHoldTicks,
-		// then the whole squad pushes the target center together. Returns false
-		// while the squad is outside the engage radius so the caller keeps the
-		// march formation for the approach.
-		bool IssueAssaultFanOrders(SquadCA owner)
-		{
-			var info = owner.SquadManager.Info;
-			var map = owner.World.Map;
-			var targetPos = owner.Target.CenterPosition;
-
-			// Squad centroid anchors both the engage check and the approach bearing.
-			long cx = 0, cy = 0;
-			foreach (var u in owner.Units)
-			{
-				cx += u.Actor.CenterPosition.X;
-				cy += u.Actor.CenterPosition.Y;
-			}
-
-			var centroid = new WPos((int)(cx / owner.Units.Count), (int)(cy / owner.Units.Count), 0);
-			var engageRangeSq = (long)WDist.FromCells(info.AssaultEngageRadiusCells).LengthSquared;
-			if ((centroid - targetPos).HorizontalLengthSquared > engageRangeSq)
-			{
-				// Outside the final approach: no fan yet, clear any stale one.
-				fanStartTick = -1;
-				fanPush = false;
-				return false;
-			}
-
-			// (Re)build the arc on activation and when the target has moved
-			// materially — the cached slots would otherwise aim at the old spot.
-			if (fanStartTick < 0
-				|| (targetPos - fanAnchor).HorizontalLengthSquared > (long)WDist.FromCells(FanRetargetCells).LengthSquared)
-			{
-				// Approach bearing: target -> squad centroid. The arc sits on
-				// the squad-facing side of the target; the ~200-degree front
-				// wraps the outer prongs slightly around the flanks.
-				var axis = centroid - targetPos;
-				var axisLen = Math.Max(1, axis.HorizontalLength);
-				var slotCount = Math.Max(1, Math.Min(info.AssaultFanMaxSlots,
-					Math.Max(info.AssaultFanMinSlots, owner.Units.Count / 2)));
-				var radius = WDist.FromCells(info.AssaultFanRadiusCells).Length;
-				var targetCell = map.CellContaining(targetPos);
-
-				fanSlots = new CPos[slotCount];
-				fanBuckets = new List<Actor>[slotCount];
-
-				for (var i = 0; i < slotCount; i++)
-				{
-					var offset = slotCount == 1
-						? WAngle.Zero
-						: WAngle.FromDegrees(FanFrontDegrees * i / (slotCount - 1) - FanFrontDegrees / 2);
-					var dir = axis.Rotate(WRot.FromYaw(offset));
-					var slotPos = targetPos + new WVec(
-						(int)(dir.X * (long)radius / axisLen),
-						(int)(dir.Y * (long)radius / axisLen),
-						0);
-
-					var cell = map.CellContaining(slotPos);
-					if (!map.Contains(cell))
-						cell = NearestAnnulusCell(map, targetCell, info.AssaultFanRadiusCells, cell);
-
-					fanSlots[i] = cell;
-					fanBuckets[i] = new List<Actor>();
-				}
-
-				fanAnchor = targetPos;
-				fanStartTick = owner.World.WorldTick;
-				fanPush = false;
-			}
-
-			if (fanPush)
-			{
-				// Already committed: keep the whole squad pushing the target.
-				owner.Bot.QueueOrder(new Order("AttackMove", null, Target.FromPos(targetPos), false,
-					groupedActors: owner.Units.Select(u => u.Actor).ToArray()));
-				return true;
-			}
-
-			var arriveSq = (long)WDist.FromCells(FanArriveCells).LengthSquared;
-			var straggleSq = (long)WDist.FromCells(FanStraggleCells).LengthSquared;
-			var anyStraggler = false;
-
-			foreach (var b in fanBuckets)
-				b.Clear();
-
-			fanHolding.Clear();
-
-			foreach (var u in owner.Units)
-				AssignFanSlot(map, u.Actor, arriveSq, straggleSq, ref anyStraggler);
-
-			// The synchronized push: every prong in place or the hold expired —
-			// the whole squad strikes the target at once.
-			if (!anyStraggler || owner.World.WorldTick - fanStartTick >= info.AssaultSyncHoldTicks)
-			{
-				fanPush = true;
-				owner.Bot.QueueOrder(new Order("AttackMove", null, Target.FromPos(targetPos), false,
-					groupedActors: owner.Units.Select(u => u.Actor).ToArray()));
-				return true;
-			}
-
-			for (var i = 0; i < fanBuckets.Length; i++)
-				if (fanBuckets[i].Count > 0)
-					owner.Bot.QueueOrder(new Order("AttackMove", null,
-						Target.FromCell(owner.World, fanSlots[i]), false, groupedActors: fanBuckets[i].ToArray()));
-
-			if (fanHolding.Count > 0)
-				owner.Bot.QueueOrder(new Order("Stop", null, false, groupedActors: fanHolding.ToArray()));
-
-			return true;
-		}
-
-		// Slot assignment is a stable ActorID hash (Actor.GetHashCode is not
-		// deterministic across runs). Units already at their slot join the hold
-		// group; the rest march on, and any beyond FanStraggleCells keeps the
-		// early arrivers waiting.
-		void AssignFanSlot(Map map, Actor actor, long arriveSq, long straggleSq, ref bool anyStraggler)
-		{
-			var slot = (int)(actor.ActorID % (uint)fanSlots.Length);
-			var distSq = (actor.CenterPosition - map.CenterOfCell(fanSlots[slot])).HorizontalLengthSquared;
-			if (distSq <= arriveSq)
-				fanHolding.Add(actor);
-			else
-			{
-				fanBuckets[slot].Add(actor);
-				if (distSq > straggleSq)
-					anyStraggler = true;
-			}
-		}
-
-		// Project an out-of-bounds arc slot onto the ring around the target —
-		// FindTilesInAnnulus only yields contained cells, so the nearest one
-		// keeps roughly the desired bearing and radius. Falls back to the
-		// target cell itself when the ring is empty.
-		static CPos NearestAnnulusCell(Map map, CPos center, int radiusCells, CPos desired)
-		{
-			var maxRange = Math.Min(radiusCells + 2, map.Grid.MaximumTileSearchRange - 1);
-			var minRange = Math.Max(0, Math.Min(radiusCells - 2, maxRange));
-			var best = center;
-			var bestSq = int.MaxValue;
-			foreach (var c in map.FindTilesInAnnulus(center, minRange, maxRange))
-			{
-				var distSq = (c - desired).LengthSquared;
-				if (distSq < bestSq)
-				{
-					bestSq = distSq;
-					best = c;
-				}
-			}
-
-			return best;
 		}
 
 		public void Deactivate(SquadCA owner) { }
