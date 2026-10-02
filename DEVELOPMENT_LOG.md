@@ -1,3 +1,24 @@
+# 2026-10-02 — DAWN: runtime evidence + follow-on merges
+
+Test: `hard` (switches F_concave + AB_garrison_contest + AC_cover_map_expansion +
+AD_army_first + AE_spread_assault armed) vs `classic` on `trial-of-possession`
+(22 garrisonable civilians), 3 mirror shards, `--render fast`.
+
+- Result: classic 2-1 in <8k-tick games (its early rush still lands before the
+  economy pays off); **hard won the long game** (17.2k ticks, td_nod mirror)
+  64-43 kills with **12 refineries vs classic's 7** — cover-the-map expansion
+  producing the intended out-scaling.
+- Garrison system live: 32 `garrison_contest` records, 4 capture missions
+  SUCCESS, `raid:garrison_18_61` published for an enemy-held garrison.
+- Ownership audit clean across all records (double_owner=0, orphan=0).
+
+Also merged `devin/dawn/ai-arch-audit` (wiring-audit switch-arm fix,
+run_league 1-8 generalisation, coordination-report set buckets) — `b051c5442`.
+
+**Still open from the review:** verified visual check of the concave/fan shapes
+needs a spectate pass; allied multi-front coordination needs a team match
+(TC-2/TC-3 switches) — the 1v1 test can't exercise it.
+
 # 2026-10-02 — DAWN: maintainer-review integration + AI improvement work
 
 Maintainer reviewed live matches and ordered four fixes: contest garrisonables
