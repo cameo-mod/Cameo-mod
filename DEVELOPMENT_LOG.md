@@ -1,3 +1,16 @@
+# 2026-10-03 — phase-B adapter: EMBER's BotEngagementPriors schema consumed (d4570b54f)
+
+*Devin (nova) — third commit on devin/nova/combat-veto-delta.*
+
+PR #793 (EMBER tier-1 fitter) writes ai/learned/engagement_priors.yaml as BotEngagementPriors:
+(DeliveryArmour@d__x__a residuals, DefenceState@ per-delivery, IntoDefencesMilli, LedgerHash) —
+#790's parser expected EngagementPriors:/Factor@d|a/StatFingerprint; unadapted the produced file
+would silently yield all-neutral priors. EngagementPriors.Parse now merges both roots into one
+multiplier space; Factor() applies DefenceState per delivery (flat fallback) + IntoDefences on
+building targets, product clamped 500-2000. LedgerHash stored but unverifiable in-match (ledgers
+not in mounted paths) — asked EMBER to also emit StatFingerprint, the ruleset-level gate.
+3 new parse tests; 819/819, build clean. Contract review posted on #793.
+
 # 2026-10-03 — delta branch: launch-edge consult + remembered defences on #790
 
 *Devin (nova) — `devin/nova/combat-veto-delta`@b4868cdf8, stacked on nova/t2_combat_veto (821d7083e).*
