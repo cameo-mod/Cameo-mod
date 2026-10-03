@@ -4153,6 +4153,11 @@ Player:
 		UseUtilityDefendReserve: false
 		UseTeamSyncAttacks: false
 		UseTeamDefendAnswers: false
+		# TC-3 (AI_ARCHITECTURE 12.28): the fold's second election pass — an ally's
+		# contested expansion claim elects one free ally to escort it; the protect
+		# squad rallies the field through the same channel, strictly below a defend
+		# answer. Election-only (no fallback); shared capacity with rescue. Group BH.
+		UseCoalitionAssist: false
 		# TC-2f (AI_ARCHITECTURE 12.27): EMBER's raid dead-end - a Raid card may ride a
 		# launching wave up to the overcommit cap; the wave commits anyway, so steering
 		# changes where it lands, not whether it goes. Group BG.
@@ -4235,6 +4240,11 @@ Player:
 		UseUtilityDefendReserve: false
 		UseTeamSyncAttacks: false
 		UseTeamDefendAnswers: false
+		# TC-3 (AI_ARCHITECTURE 12.28): the fold's second election pass — an ally's
+		# contested expansion claim elects one free ally to escort it; the protect
+		# squad rallies the field through the same channel, strictly below a defend
+		# answer. Election-only (no fallback); shared capacity with rescue. Group BH.
+		UseCoalitionAssist: false
 		# TC-2f (AI_ARCHITECTURE 12.27): EMBER's raid dead-end - a Raid card may ride a
 		# launching wave up to the overcommit cap; the wave commits anyway, so steering
 		# changes where it lands, not whether it goes. Group BG.
@@ -4316,6 +4326,11 @@ Player:
 		UseUtilityDefendReserve: false
 		UseTeamSyncAttacks: false
 		UseTeamDefendAnswers: false
+		# TC-3 (AI_ARCHITECTURE 12.28): the fold's second election pass — an ally's
+		# contested expansion claim elects one free ally to escort it; the protect
+		# squad rallies the field through the same channel, strictly below a defend
+		# answer. Election-only (no fallback); shared capacity with rescue. Group BH.
+		UseCoalitionAssist: false
 		# TC-2f (AI_ARCHITECTURE 12.27): EMBER's raid dead-end - a Raid card may ride a
 		# launching wave up to the overcommit cap; the wave commits anyway, so steering
 		# changes where it lands, not whether it goes. Group BG.
@@ -4399,6 +4414,11 @@ Player:
 		UseUtilityDefendReserve: false
 		UseTeamSyncAttacks: false
 		UseTeamDefendAnswers: false
+		# TC-3 (AI_ARCHITECTURE 12.28): the fold's second election pass — an ally's
+		# contested expansion claim elects one free ally to escort it; the protect
+		# squad rallies the field through the same channel, strictly below a defend
+		# answer. Election-only (no fallback); shared capacity with rescue. Group BH.
+		UseCoalitionAssist: false
 		# TC-2f (AI_ARCHITECTURE 12.27): EMBER's raid dead-end - a Raid card may ride a
 		# launching wave up to the overcommit cap; the wave commits anyway, so steering
 		# changes where it lands, not whether it goes. Group BG.
@@ -4481,6 +4501,11 @@ Player:
 		UseUtilityDefendReserve: false
 		UseTeamSyncAttacks: false
 		UseTeamDefendAnswers: false
+		# TC-3 (AI_ARCHITECTURE 12.28): the fold's second election pass — an ally's
+		# contested expansion claim elects one free ally to escort it; the protect
+		# squad rallies the field through the same channel, strictly below a defend
+		# answer. Election-only (no fallback); shared capacity with rescue. Group BH.
+		UseCoalitionAssist: false
 		# TC-2f (AI_ARCHITECTURE 12.27): EMBER's raid dead-end - a Raid card may ride a
 		# launching wave up to the overcommit cap; the wave commits anyway, so steering
 		# changes where it lands, not whether it goes. Group BG.
@@ -4561,6 +4586,11 @@ Player:
 		UseUtilityDefendReserve: false
 		UseTeamSyncAttacks: false
 		UseTeamDefendAnswers: false
+		# TC-3 (AI_ARCHITECTURE 12.28): the fold's second election pass — an ally's
+		# contested expansion claim elects one free ally to escort it; the protect
+		# squad rallies the field through the same channel, strictly below a defend
+		# answer. Election-only (no fallback); shared capacity with rescue. Group BH.
+		UseCoalitionAssist: false
 		# TC-2f (AI_ARCHITECTURE 12.27): EMBER's raid dead-end - a Raid card may ride a
 		# launching wave up to the overcommit cap; the wave commits anyway, so steering
 		# changes where it lands, not whether it goes. Group BG.

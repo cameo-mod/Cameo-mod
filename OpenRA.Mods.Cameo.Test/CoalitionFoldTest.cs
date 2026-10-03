@@ -31,9 +31,10 @@ namespace OpenRA.Mods.Cameo.Test
 		static TeamBroadcast Broadcast(int clientIndex, int ownArmyValue = 0, int urgencyLevel = 0,
 			int directorTension = 0, DirectorPhase directorPhase = DirectorPhase.BuildUp,
 			OpenRA.Player mainTarget = null, bool requestsDefence = false, WPos defendPosition = default,
-			WPos armyCentroid = default, WPos spawnPoint = default, string participantId = null) =>
+			WPos armyCentroid = default, WPos spawnPoint = default, string participantId = null,
+			WPos expansionAssist = default) =>
 			new(1500, ownArmyValue, urgencyLevel, directorTension, directorPhase, mainTarget,
-				requestsDefence, defendPosition, clientIndex, default, armyCentroid, default, spawnPoint,
+				requestsDefence, defendPosition, clientIndex, default, armyCentroid, expansionAssist, spawnPoint,
 				null, participantId);
 
 		[Test]
@@ -221,6 +222,120 @@ namespace OpenRA.Mods.Cameo.Test
 			// No anchors: everything scores full.
 			Assert.That(OpenRA.Mods.Cameo.Traits.BotModules.ExpansionPlannerBotModule.SectorScorePercent(
 				new WPos(100, 0, 0), new Dictionary<string, WPos>(), "a", 35), Is.EqualTo(100));
+		}
+
+		[Test]
+		public void AssistElectionPicksNearestFreeAlly()
+		{
+			// §12.28: the second election pass routes an escort to a contested claim —
+			// nearest ArmyCentroid to the published ExpansionAssist, ParticipantKey
+			// tie-break, same arithmetic as the rescue pass.
+			var assistAt = new WPos(4000, 4000, 0);
+			var requester = Broadcast(0, expansionAssist: assistAt);
+			var near = Broadcast(1, armyCentroid: new WPos(4200, 4000, 0));
+			var far = Broadcast(2, armyCentroid: new WPos(9000, 9000, 0));
+
+			var d = CoalitionFold.Compute(requester, new List<TeamBroadcast> { near, far });
+			Assert.That(d.AssistAssignments.Count, Is.EqualTo(1));
+			Assert.That(d.AssistAssignments[0].RequesterClientIndex, Is.EqualTo(0));
+			Assert.That(d.AssistAssignments[0].ResponderClientIndex, Is.EqualTo(1));
+			Assert.That(d.AssistAssignments[0].AssistPosition, Is.EqualTo(assistAt));
+			Assert.That(d.AssistAssignments[0].RequesterId, Is.EqualTo("#0"));
+			Assert.That(d.AssistAssignments[0].ResponderId, Is.EqualTo("#1"));
+
+			// Every member computes the same election — swap own/allies roles.
+			var d2 = CoalitionFold.Compute(near, new List<TeamBroadcast> { requester, far });
+			Assert.That(d2.AssistAssignments[0].ResponderClientIndex, Is.EqualTo(1));
+		}
+
+		[Test]
+		public void AssistRequesterNeverElectsItself()
+		{
+			// Assist requesters were never excluded from the free pool (only defend
+			// requesters are) — without the self-skip an army at its own claim would
+			// escort itself, the nearest possible responder.
+			var allies = new List<TeamBroadcast>
+			{
+				Broadcast(1, expansionAssist: new WPos(4000, 4000, 0),
+					armyCentroid: new WPos(4100, 4000, 0)),
+				Broadcast(2, armyCentroid: new WPos(9000, 9000, 0)),
+			};
+
+			var d = CoalitionFold.Compute(null, allies);
+			Assert.That(d.AssistAssignments.Count, Is.EqualTo(1));
+			Assert.That(d.AssistAssignments[0].ResponderClientIndex, Is.EqualTo(2));
+
+			// The requester alone in the pool: no responder exists at all.
+			var solo = CoalitionFold.Compute(null, new List<TeamBroadcast> { allies[0] });
+			Assert.That(solo.AssistAssignments, Is.Empty);
+		}
+
+		[Test]
+		public void AssistElectsOnlyWhatRescueLeaves()
+		{
+			// Shared capacity, survival first: the rescue pass drains the pool before
+			// assist elects, so the one free army answers the defend request and the
+			// contested claim stands down until the next fold.
+			var allies = new List<TeamBroadcast>
+			{
+				Broadcast(0, urgencyLevel: 2, requestsDefence: true, defendPosition: new WPos(1000, 1000, 0)),
+				Broadcast(1, expansionAssist: new WPos(4000, 4000, 0)),
+				Broadcast(2, armyCentroid: new WPos(3000, 3000, 0)),
+			};
+
+			var d = CoalitionFold.Compute(null, allies);
+			Assert.That(d.RescueAssignments.Count, Is.EqualTo(1));
+			Assert.That(d.RescueAssignments[0].ResponderClientIndex, Is.EqualTo(2));
+			Assert.That(d.AssistAssignments, Is.Empty);
+
+			// A second free army frees one answer for the assist — and still nobody
+			// answers two requests in one fold.
+			var d2 = CoalitionFold.Compute(null, new List<TeamBroadcast>(allies)
+			{
+				Broadcast(3, armyCentroid: new WPos(4500, 3000, 0)),
+			});
+			Assert.That(d2.RescueAssignments.Count, Is.EqualTo(1));
+			Assert.That(d2.AssistAssignments.Count, Is.EqualTo(1));
+			Assert.That(d2.AssistAssignments[0].ResponderClientIndex, Is.EqualTo(3));
+			Assert.That(d2.AssistAssignments[0].ResponderClientIndex,
+				Is.Not.EqualTo(d2.RescueAssignments[0].ResponderClientIndex));
+		}
+
+		[Test]
+		public void AssistElectionConsumesTheSharedPool()
+		{
+			// Two simultaneous assist requests elect DISTINCT responders from what
+			// the rescue pass left — the elected escort leaves the pool, so requests
+			// beyond the pool's depth go unanswered this fold.
+			var allies = new List<TeamBroadcast>
+			{
+				Broadcast(0, expansionAssist: new WPos(4000, 4000, 0)),
+				Broadcast(1, expansionAssist: new WPos(6000, 6000, 0)),
+				Broadcast(2, armyCentroid: new WPos(4100, 4000, 0)),
+				Broadcast(3, armyCentroid: new WPos(6100, 6000, 0)),
+			};
+
+			var d = CoalitionFold.Compute(null, allies);
+			Assert.That(d.AssistAssignments.Count, Is.EqualTo(2));
+			Assert.That(d.AssistAssignments.Select(a => a.ResponderClientIndex).Distinct().Count(),
+				Is.EqualTo(2));
+		}
+
+		[Test]
+		public void NoAssistRequestYieldsEmptyAssistList()
+		{
+			// Staleness is not the fold's concern — CollectBroadcasts filters dead or
+			// expired publishers before Compute ever sees them, so the fold only needs
+			// the Zero-field contract: no published assist, no assignments.
+			var allies = new List<TeamBroadcast>
+			{
+				Broadcast(0, armyCentroid: new WPos(1000, 1000, 0)),
+				Broadcast(1, armyCentroid: new WPos(2000, 2000, 0)),
+			};
+
+			Assert.That(CoalitionFold.Compute(null, allies).AssistAssignments, Is.Empty);
+			Assert.That(CoalitionFold.Compute(null, null).AssistAssignments, Is.Empty);
+			Assert.That(CoalitionDirective.Empty.AssistAssignments, Is.Empty);
 		}
 	}
 }

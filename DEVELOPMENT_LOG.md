@@ -47,6 +47,37 @@ row reads `ok` (EngineerBotModule + GarrisonContestBotModule → MasterAiBotModu
 **Next:** armed-match telemetry (BF_team_capture_claims + TC-2/3 groups) — contested `capture:` ids,
 `defend_answer` commits, `secure:` shared-push windows.
 
+# 2026-10-03 — TC-3 assist election: the ExpansionAssist publish-without-consume dead-end closed
+
+*Devin (nova), worktree `nova-tc2`, branch `devin/nova/def3-remote-coverage` — §12.18 published `TeamBroadcast.ExpansionAssist` (a contested expansion field that wants a bodyguard) but nothing consumed it; the same dead-end class EMBER diagnosed for Raid cards in §12.27.*
+
+**Done:**
+- `CoalitionFold.Compute` gains a second election pass after rescue: every broadcast
+  with a non-Zero `ExpansionAssist` elects the nearest free `ArmyCentroid` from the
+  pool the rescue pass left — shared capacity, so one participant answers at most
+  one request total across rescue + assist, and survival strictly outranks economy.
+  Assist requesters were never excluded from the pool, so the pass adds a self-skip
+  (a bot cannot escort its own claim).
+- `CoalitionDirective.AssistAssignments` (`CoalitionAssistAssignment` mirrors the
+  rescue record); ctor param defaults to null so `Empty` and existing callers are
+  unchanged.
+- `SquadManagerBotModuleCAInfo.UseCoalitionAssist` (default off): the elected
+  responder rallies the claim through the same protect-squad channel as a defend
+  answer — same `BotProtectionRequest` synthesis, rolling hold, min-pool floor —
+  strictly below a defend answer, election-only (no `TopDefendRequest`-style
+  fallback exists to preserve). Writes `assist_answer:<requesterKey>:<cell>`
+  records on a separate `allyAssistOpen` so defend<->assist switches supersede
+  cleanly.
+- `DEFEND_KINDS` in `team_coordination_report.py` counts `assist_answer`; six
+  genericbot SquadManager instances carry `UseCoalitionAssist: false` (@classic
+  untouched, global `skip` still protects it); switch group `BH_tc3_assist_election`;
+  AI_ARCHITECTURE §12.28 documents the pass, ordering and grammar.
+
+**Verified:** build + tests below; `apply_increment_switches.py --groups
+BH_tc3_assist_election --dry-run` arms the six personality instances only. Off =
+bit-identical: the new fold pass writes an empty list and the consumer path is
+flag-gated before it touches `request`.
+
 # 2026-10-03 — raid-mission steering: a Raid card may ride the wave that commits anyway (TC-2f)
 
 *Devin (nova), worktree `nova-tc2`, branch `devin/nova/def3-remote-coverage` — the squad-layer fix for EMBER's documented dead-end: Raid cards publish but never commit, because `BestAffordableMission` gates `RequiredValue <= idleForceValue` on the idle pool and a provider's RequiredValue is sized for a dedicated force, not for a wave that already passed the launch bar.*

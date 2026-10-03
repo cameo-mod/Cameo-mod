@@ -188,3 +188,6 @@ groups:
       UseRaidMissionSteering: true
       RaidMissionSteerOvercommitPercent: 300
       RaidMissionSteerMinValue: 0
+  BH_tc3_assist_election:            # NOVA TC-3 - the coalition fold's second election pass (AI_ARCHITECTURE 12.28): a contested expansion claim elects the nearest free ally as escort, strictly after rescue drains the shared pool; the elected protect squad rallies the field as an assist_answer (inert in 1v1)
+    SquadManagerBotModuleCA:
+      UseCoalitionAssist: true
