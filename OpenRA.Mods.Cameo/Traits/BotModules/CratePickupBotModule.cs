@@ -106,7 +106,7 @@ namespace OpenRA.Mods.Cameo.Traits
 
 			// LC1: an idle unit may still belong to a scout, a beacon response or a capture — never take a claimed one.
 			var leases = BotUnitLeases.Of(player);
-			var idleUnits = world.ActorsHavingTrait<Mobile>().Where(a => a.Owner == player && a.IsIdle
+			var idleUnits = world.ActorsHavingTrait<Mobile>().Where(a => a.Owner == player && a.IsInWorld && a.IsIdle
 				&& (Info.IncludedUnitTypes.Contains(a.Info.Name) || (Info.IncludedUnitTypes.Count < 1 && !Info.ExcludedUnitTypes.Contains(a.Info.Name)))
 				&& !BotUnitLeases.IsClaimedByOther(leases, a, LeaseOwner)).ToList();
 

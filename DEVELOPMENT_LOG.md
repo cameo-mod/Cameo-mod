@@ -17483,3 +17483,15 @@ exactly one `RELEASED match_end` record landed — a `capture` mission in flight
 game end, the same dangling class out7 flagged. Round-trip: outcomes PASS
 (0 dangling, 0 in-flight — first clean line), storm PASS, fog PASS, execution PASS;
 only learning WARNs (tuner needs >=20 matches). Fix proven end-to-end in `99e52f474`.
+
+## 2026-10-03 — ember lane: crossed=1 explained — crate picker poached garrisoned walkers
+
+out9's only `crossed` pair was `GarrisonContestBotModule → CratePickupBotModule`
+(1 order). Mechanism: `World.Remove` (garrison entry) leaves the actor in the
+trait dictionary — `world.ActorsHavingTrait<Mobile>()` still returns it — and
+garrisoned units read `IsIdle`, so a walker released by GC-1 on entering was a
+valid crate candidate: claimed, Move-ordered, possibly dragged out of the
+garrison. `CratePickupBotModule`'s idle filter was the only `IsIdle` consumer
+missing `IsInWorld` (its own `collectorGone` check already treats `!IsInWorld`
+as gone — the filter just missed the same guard). One-line fix + rebuilt dll,
+boot-gate PASS (private engine, shared bin locked by a foreign game).
