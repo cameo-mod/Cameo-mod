@@ -17624,3 +17624,14 @@ garrison. `CratePickupBotModule`'s idle filter was the only `IsIdle` consumer
 missing `IsInWorld` (its own `collectorGone` check already treats `!IsInWorld`
 as gone — the filter just missed the same guard). One-line fix + rebuilt dll,
 boot-gate PASS (private engine, shared bin locked by a foreign game).
+
+2026-10-03 — ai(secure): a pushed enemy's defeat books Success/done, not a dangling commit
+
+Third half of the ember review flag closed: `secure:<player>` now tracks its named
+target player and closes `Success`/`done` the tick that player's WinState decides —
+the wave's objective resolved. Scoreboard state only, no fog peek. A wave still
+supersedes on the next launch, fails when genuinely wiped, releases when dismissed
+intact, and match_end catches whatever survives — but a decided enemy no longer
+leaves the attempt open for thousands of ticks.
+
+Generated with [Devin](https://devin.ai)

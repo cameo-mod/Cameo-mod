@@ -724,6 +724,7 @@ namespace OpenRA.Mods.CA.Traits
 		// The mission id of the open shared-push (secure:<player>) attempt — each
 		// Rush launch supersedes the last wave's record; a destroyed wave closes it.
 		string securePushOpen;
+		Player securePushTarget;
 		int nextPrepositionTick;
 		IBotThreatPredictionProvider[] threatPredictionProviders;
 		IBotProtectionRequestProvider[] protectionRequestProviders;
@@ -1468,6 +1469,12 @@ namespace OpenRA.Mods.CA.Traits
 				actionBudget ??= Player.PlayerActor.TraitsImplementing<IBotActionBudget>().FirstEnabledTraitOrDefault();
 			}
 
+			// A secure push resolves when its named enemy is decided — the wave's objective
+			// is gone either way, so the open attempt books done rather than dangle to
+			// supersede or match_end. WinState is scoreboard state, not a fog peek.
+			if (securePushTarget != null && securePushTarget.WinState != WinState.Undefined)
+				CloseSecurePush(BotMissionAttemptState.Success, BotMissionReasons.Done);
+
 			AssignRolesToIdleUnits(bot);
 		}
 
@@ -1937,6 +1944,7 @@ namespace OpenRA.Mods.CA.Traits
 			var attempt = missionAttemptCounters.GetValueOrDefault(id) + 1;
 			missionAttemptCounters[id] = attempt;
 			securePushOpen = id;
+			securePushTarget = target;
 			BotMissionLog.Write(new BotMissionRecord
 			{
 				Player = Player,
@@ -1965,6 +1973,7 @@ namespace OpenRA.Mods.CA.Traits
 				MissionType = "secure"
 			});
 			securePushOpen = null;
+			securePushTarget = null;
 		}
 
 		/// <summary>The most valuable live protection request, or null. Requests refresh
