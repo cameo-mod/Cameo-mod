@@ -74,14 +74,19 @@ namespace OpenRA.Mods.CA.Traits
 		public readonly BitSet<TargetableType> Invalid;
 		public readonly IReadOnlyDictionary<string, int> Versus;
 
+		/// <summary>Coarse delivery class of the main warhead (warhead class name, lowercased, minus the "Warhead" suffix)
+		/// — the stat-normalized key tier-1's delivery×armour priors are fitted against (AI_ARCHITECTURE 12.31).</summary>
+		public readonly string Delivery;
+
 		public BotWeaponProfile(double damagePerTick, WDist range, BitSet<TargetableType> valid, BitSet<TargetableType> invalid,
-			IReadOnlyDictionary<string, int> versus)
+			IReadOnlyDictionary<string, int> versus, string delivery = null)
 		{
 			DamagePerTick = damagePerTick;
 			Range = range;
 			Valid = valid;
 			Invalid = invalid;
 			Versus = versus ?? new Dictionary<string, int>();
+			Delivery = delivery;
 		}
 
 		public bool CanTarget(BitSet<TargetableType> targetTypes) => Valid.Overlaps(targetTypes) && !Invalid.Overlaps(targetTypes);
@@ -128,8 +133,12 @@ namespace OpenRA.Mods.CA.Traits
 					continue;
 
 				var cycle = BotWeaponProfile.CycleTicks(weapon.ReloadDelay, weapon.Burst, weapon.BurstDelays);
+				var delivery = main.GetType().Name;
+				if (delivery.EndsWith("Warhead", StringComparison.Ordinal))
+					delivery = delivery.Substring(0, delivery.Length - "Warhead".Length);
+
 				weapons.Add(new BotWeaponProfile((double)main.Damage * Math.Max(1, weapon.Burst) / cycle, weapon.Range,
-					weapon.ValidTargets, weapon.InvalidTargets, main.Versus));
+					weapon.ValidTargets, weapon.InvalidTargets, main.Versus, delivery.ToLowerInvariant()));
 			}
 
 			var speed = actor.TraitInfoOrDefault<MobileInfo>()?.Speed ?? actor.TraitInfoOrDefault<AircraftInfo>()?.Speed ?? 0;
@@ -189,8 +198,21 @@ namespace OpenRA.Mods.CA.Traits
 			return Predict(DamagePerTick(own, enemy, enemyHp), ownHp, DamagePerTick(enemy, own, ownHp), enemyHp);
 		}
 
+		/// <summary>
+		/// The same square law with a per-(attacker, weapon, target) damage multiplier — the ONE consumption point
+		/// for tier-1 fitted priors (12.31). Null factor = the plain call; nobody else re-implements this formula.
+		/// </summary>
+		public static Prediction Predict(IReadOnlyList<(BotUnitProfile Unit, int Count)> own, IReadOnlyList<(BotUnitProfile Unit, int Count)> enemy,
+			Func<BotUnitProfile, BotWeaponProfile, BotUnitProfile, double> factor)
+		{
+			var ownHp = own.Sum(u => (double)u.Unit.Hp * u.Count);
+			var enemyHp = enemy.Sum(u => (double)u.Unit.Hp * u.Count);
+			return Predict(DamagePerTick(own, enemy, enemyHp, factor), ownHp, DamagePerTick(enemy, own, ownHp, factor), enemyHp);
+		}
+
 		static double DamagePerTick(IReadOnlyList<(BotUnitProfile Unit, int Count)> attackers,
-			IReadOnlyList<(BotUnitProfile Unit, int Count)> targets, double targetHp)
+			IReadOnlyList<(BotUnitProfile Unit, int Count)> targets, double targetHp,
+			Func<BotUnitProfile, BotWeaponProfile, BotUnitProfile, double> factor = null)
 		{
 			if (targetHp <= 0)
 				return 0;
@@ -198,7 +220,14 @@ namespace OpenRA.Mods.CA.Traits
 			var total = 0.0;
 			foreach (var (attacker, count) in attackers)
 				foreach (var (target, targetCount) in targets)
-					total += count * attacker.DamagePerTickAgainst(target) * target.Hp * targetCount / targetHp;
+					if (factor == null)
+						total += count * attacker.DamagePerTickAgainst(target) * target.Hp * targetCount / targetHp;
+					else
+						foreach (var w in attacker.Weapons)
+							if (w.CanTarget(target.TargetTypes))
+								total += count * factor(attacker, w, target) * w.DamagePerTick
+									* (target.Armor == null ? 100 : w.Versus.GetValueOrDefault(target.Armor, 100)) / 100.0
+									* target.Hp * targetCount / targetHp;
 
 			return total;
 		}

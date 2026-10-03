@@ -762,6 +762,8 @@ namespace OpenRA.Mods.CA.Traits
 		// Looked up once per tick; the planner only plans, this module remains the one that orders the idle pool.
 		IBotArmyStaging armyStaging;
 		int armyStagingTick = -1;
+		IBotCombatVeto combatVeto;
+		int combatVetoTick = -1;
 		int nextStagingTick;
 		readonly Dictionary<Actor, (CPos Cell, int Tick)> stagingOrders = new();
 
@@ -776,6 +778,22 @@ namespace OpenRA.Mods.CA.Traits
 				}
 
 				return armyStaging;
+			}
+		}
+
+		// Tier-2 (DESIGN 19.13, AI_ARCHITECTURE 12.31): the enabled combat-veto provider this tick.
+		// Absent (classic, switch off, personality rotation) = PredictsWin/PredictsLoss run bit-identical.
+		internal IBotCombatVeto CombatVeto
+		{
+			get
+			{
+				if (combatVetoTick != World.WorldTick)
+				{
+					combatVetoTick = World.WorldTick;
+					combatVeto = Player.PlayerActor.TraitsImplementing<IBotCombatVeto>().FirstEnabledTraitOrDefault();
+				}
+
+				return combatVeto;
 			}
 		}
 		IBotProtectionRequestProvider[] protectionRequestProviders;
@@ -2785,11 +2803,69 @@ namespace OpenRA.Mods.CA.Traits
 
 		int RetreatRatioPct => botLimits?.Info.RetreatRatioPct ?? Info.DefaultRetreatRatioPct;
 
-		internal bool PredictsLoss(SquadCA squad, IEnumerable<Actor> enemies) =>
-			PredictedRatio(squad, enemies) * 100 < RetreatRatioPct;
+		internal bool PredictsLoss(SquadCA squad, IEnumerable<Actor> enemies)
+		{
+			var enemyList = enemies as IReadOnlyList<Actor> ?? enemies.ToList();
+			if (PredictedRatio(squad, enemyList) * 100 >= RetreatRatioPct)
+				return false;
 
-		internal bool PredictsWin(SquadCA squad, IEnumerable<Actor> enemies) =>
-			PredictedRatio(squad, enemies) * 100 >= (double)RetreatRatioPct * Info.EngageMarginPct / 100;
+			// Tier-2 veto (12.31): the loss is real, but a retreat that cannot outrun the
+			// threat just dies tired — the provider may order the squad to stand and trade.
+			var veto = CombatVeto;
+			if (veto != null)
+			{
+				CanaryObservedAll(enemyList, "combat-veto-retreat");
+				if (veto.TryVetoRetreat(squad.Units.ConvertAll(u => u.Actor), enemyList, out var verdict))
+				{
+					EmitCombatVeto(squad, "retreat", verdict);
+					return false;
+				}
+			}
+
+			return true;
+		}
+
+		internal bool PredictsWin(SquadCA squad, IEnumerable<Actor> enemies)
+		{
+			var enemyList = enemies as IReadOnlyList<Actor> ?? enemies.ToList();
+
+			// Tier-2 veto (12.31): a predicted trade below the provider's threshold blocks the
+			// commit — the caller's !engage path (retreat/rearm) stays exactly what it was.
+			var veto = CombatVeto;
+			if (veto != null)
+			{
+				CanaryObservedAll(enemyList, "combat-veto-attack");
+				var targetPos = squad.IsTargetValid ? squad.Target.CenterPosition : squad.CenterPosition;
+				if (veto.TryVetoAttack(squad.Units.ConvertAll(u => u.Actor), enemyList, targetPos, out var verdict))
+				{
+					EmitCombatVeto(squad, "attack", verdict);
+					return false;
+				}
+			}
+
+			return PredictedRatio(squad, enemyList) * 100 >= (double)RetreatRatioPct * Info.EngageMarginPct / 100;
+		}
+
+		// Tier-2 (12.31): every veto lands on the mission card as a DENIED event, one contract,
+		// so EL can score vetoed decisions against the engagements that did happen.
+		void EmitCombatVeto(SquadCA squad, string kind, CombatVetoVerdict verdict)
+		{
+			var cell = World.Map.CellContaining(squad.CenterPosition);
+			BotMissionLog.Write(new BotMissionRecord
+			{
+				Player = Player,
+				MissionId = $"combat_veto:{kind}:{cell.X},{cell.Y}",
+				Event = BotMissionEvent.Denied,
+				Reason = verdict.Reason,
+				Executor = "CombatVeto",
+				MissionType = "combat_veto",
+				UnitCell = cell,
+				TargetCell = squad.IsTargetValid ? World.Map.CellContaining(squad.Target.CenterPosition) : cell,
+				Units = squad.Units.Count,
+				Value = verdict.OwnValue,
+				Detail = verdict.Detail
+			});
+		}
 
 		// CN3: remembered DetectCloaked coverage, aggregated across the enabled
 		// stealth-doctrine providers. Empty when `cn3_stealth_squads` arms no

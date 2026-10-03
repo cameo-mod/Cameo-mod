@@ -134,6 +134,9 @@ namespace OpenRA.Mods.Cameo.Traits
 			if (r.Value.HasValue)
 				AiMatchLogWriter.AppendNumber(b, "value", r.Value.Value);
 
+			if (r.Detail != null)
+				AiMatchLogWriter.AppendString(b, "detail", r.Detail);
+
 			b.Append('}');
 			return b.ToString();
 		}

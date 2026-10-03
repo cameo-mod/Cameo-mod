@@ -3585,3 +3585,52 @@ enumeration. Estimated well under 0.1 ms per tick average.
 engagements (seen block only), reset every match, gains are tuned knobs (DESIGN 19.2). The tier-1 fitter: per weapon-delivery x
 armour coefficients from `outcome` vs `seen.predicted_*` (truth for calibration only), and the response and suicide priors from
 `response` and `tactics`. `tools/ai/engagement_report.py` is the human view of both.
+
+### 12.31 CV — the combat-prediction veto: variety proposes, the veto disposes (NOVA tier 2)
+
+Binding ruling: DESIGN 19.13 (the five learning tiers). One provider, `IBotCombatVeto` (OpenRA.Mods.CA), consulted at the
+two points where a squad's fate is already decided by the shared predictor: inside `SquadManagerBotModuleCA.PredictsWin`
+(the attack commit, `GroundUnitsIdleStateCA` — `UseCombatPredictor` is unconditional on genericbot) and inside
+`PredictsLoss` (the retreat commit — `ShouldFlee`, including the mid-attack disengage, and the protection squad's pull-out).
+Both consults live in the squad manager, which stays the ONE owner of the decision, the fog canary and the mission card.
+No provider (classic, switch off, personality rotation) = the two methods run bit-identical.
+
+**The predictor is not duplicated.** The verdict consumes `BotCombatPredictor.Predict` — the same Lanchester authority the
+commit checks, `SiegeEvaluator` and EL-0's `seen.predicted_*` already read. A factored overload takes a
+per-(attacker, weapon, target) damage multiplier: the ONE consumption point for tier-1's fitted corrections, applied
+inside the predictor's own spread-over-HP-share formula, never a second model.
+
+**Attack veto.** The enemy force is the seen commit list PLUS seen enemy static defences within `DefenceScanCells` of the
+target (the fights squads actually lose walking in); the defence scan honours the same fog standard as the squad scans
+(`CanBeViewedByPlayer`, lifted only when no fog provider is armed — the manager's own degradation rule). Predicted trade
+is scored on the engagement log's own scale, `EngagementScore.PredictedTrade(ownValue, enemyValue, surviving‰)`, so a
+vetoed decision and a fought engagement share units. `predictedTrade < MinPredictedTradeMilli` (default -350 = worse
+than roughly 2:1 against) and at least one fighter seen -> veto: the caller's !engage path (retreat/rearm) is unchanged.
+
+**Retreat veto.** Consulted only when the loss is already predicted. A squad that cannot outrun the threat — fastest seen
+fighter x `OutrunMarginPercent`/100 >= our slowest runner — is told to stand and trade instead of dying tired; a squad
+with no weapon is never told to stand. `PredictsLoss` returns false and the state machine keeps fighting.
+
+**Every veto is a mission card.** The squad manager writes a `DENIED` `combat_veto` event record (mission id
+`combat_veto:<kind>:<cell>`, reasons `below_threshold` / `cant_outrun`, units + own value + target/unit cells) with the
+predicted numbers in the record's new optional `Detail` field (`"detail"` in `cameo-ai-missions.jsonl`) — additive,
+readers that ignore unknown fields are unaffected. EL scores vetoed decisions against engagements that did happen.
+
+**Tier-1 priors contract (`ai/learned/engagement_priors.yaml`, MiniYaml `engagement_priors/1`).** Frozen at match start,
+loaded once, written by `tools/ai/fit_engagement_coefficients.py`:
+
+```yaml
+EngagementPriors:
+	StatFingerprint: <16-hex>                       # FNV-1a-64 over the canonical stat string below
+	StaticDefenceFactorPermille: <permille>          # multiplier on every armed building's damage, 1000 = neutral
+	Factor@<delivery>|<armor>: <permille>            # delivery = warhead class minus "Warhead" lowercased (BotWeaponProfile.Delivery)
+	Factor@*|<armor>: <permille>                     # armour-wide fallback row
+```
+
+Canonical stat string (the fingerprint's input — C# `CombatVetoMath.StatFingerprint` and the Python fitter produce the
+same value): for every `ActorInfo` with `AttackBaseInfo`, name-sorted: `name;cost;hp;armor|` then per weapon
+`delivery,dptMilli,range|` then `armor=vs,` sorted; FNV-1a-64 (offset 14695981039346656037, prime 1099511628211) over the
+whole string. Fingerprint mismatch or missing file -> all priors neutral (the veto still runs on the raw predictor).
+Stat-normalized keys only — no unit ids — so the file survives roster churn; a rebalance changes the fingerprint and the
+file discounts itself. The response-time priors the fitter may also emit are reserved (the commit consult happens at
+contact, where response has already materialized in the seen list).

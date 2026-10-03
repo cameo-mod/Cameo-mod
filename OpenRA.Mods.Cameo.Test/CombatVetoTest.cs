@@ -1,0 +1,154 @@
+#region Copyright & License Information
+/*
+ * Copyright (c) The OpenRA Developers and Contributors
+ * This file is part of OpenRA, which is free software. It is made
+ * available to you under the terms of the GNU General Public License
+ * as published by the Free Software Foundation, either version 3 of
+ * the License, or (at your option) any later version. For more
+ * information, see COPYING.
+ */
+#endregion
+
+using System.Collections.Generic;
+using NUnit.Framework;
+using OpenRA.Mods.CA.Traits;
+using OpenRA.Mods.CA.Traits.BotModules;
+using OpenRA.Mods.Cameo.Traits;
+using OpenRA.Mods.Cameo.Traits.BotModules;
+using OpenRA.Primitives;
+using OpenRA.Traits;
+
+namespace OpenRA.Mods.Cameo.Test
+{
+	// AN combat veto (AI_ARCHITECTURE 12.31): the priors file, the pure verdicts, the factored predictor path and
+	// the mission-card detail field — every branch of the veto that does not need a World.
+	[TestFixture]
+	public sealed class CombatVetoTest
+	{
+		const string Yaml = "# GENERATED\nEngagementPriors:\n\tStatFingerprint: deadbeefcafe1234\n\tStaticDefenceFactorPermille: 1100\n\tFactor@spreaddamage|heavy: 1250\n\tFactor@*|light: 900\n";
+
+		static readonly BitSet<TargetableType> Ground = new("Ground");
+		static readonly BitSet<TargetableType> None = default;
+
+		static EngagementPriors Load(string yaml) => EngagementPriors.Parse(MiniYaml.FromString(yaml, "priors"));
+
+		static BotUnitProfile Unit(string name, int hp, string armor, int speed, int dpt, bool building = false)
+		{
+			var weapons = dpt > 0 ? new[] { new BotWeaponProfile(dpt, WDist.FromCells(5), Ground, None, new Dictionary<string, int>(), "spreaddamage") } : [];
+			return new BotUnitProfile(name, 100, hp, armor, speed, false, building, Ground, weapons);
+		}
+
+		[Test]
+		public void PriorsParseFactorsAndScalars()
+		{
+			var priors = Load(Yaml);
+			Assert.That(priors.StatFingerprint, Is.EqualTo("deadbeefcafe1234"));
+			Assert.That(priors.StaticDefenceFactorPermille, Is.EqualTo(1100));
+			Assert.That(priors.FactorCount, Is.EqualTo(2));
+			Assert.That(priors.FactorPermille("spreaddamage", "heavy"), Is.EqualTo(1250));
+			Assert.That(priors.FactorPermille("gravity", "light"), Is.EqualTo(900));
+		}
+
+		[Test]
+		public void PriorsUnknownIsNeutral()
+		{
+			var priors = Load(Yaml);
+			Assert.That(priors.FactorPermille("spreaddamage", "none"), Is.EqualTo(EngagementPriors.Neutral));
+			Assert.That(priors.FactorPermille("nothing", "nothing"), Is.EqualTo(EngagementPriors.Neutral));
+			Assert.That(Load("").FactorCount, Is.EqualTo(0));
+			Assert.That(Load("").StaticDefenceFactorPermille, Is.EqualTo(EngagementPriors.Neutral));
+			Assert.That(Load("").StatFingerprint, Is.Null);
+		}
+
+		[Test]
+		public void AttackVetoNeedsSeenFightersAndBadTrade()
+		{
+			Assert.That(CombatVetoMath.VetoAttackVerdict(-400, -350, 3), Is.True);
+			Assert.That(CombatVetoMath.VetoAttackVerdict(-350, -350, 3), Is.False, "threshold is strict-below");
+			Assert.That(CombatVetoMath.VetoAttackVerdict(-800, -350, 0), Is.False, "nothing seen = nothing to veto");
+			Assert.That(CombatVetoMath.VetoAttackVerdict(600, -350, 5), Is.False);
+		}
+
+		[Test]
+		public void RetreatVetoNeedsPursuerAndTeeth()
+		{
+			Assert.That(CombatVetoMath.VetoRetreatVerdict(50, 60, true, 100), Is.True);
+			Assert.That(CombatVetoMath.VetoRetreatVerdict(60, 60, true, 100), Is.True, "equal speed still runs down the tail");
+			Assert.That(CombatVetoMath.VetoRetreatVerdict(70, 60, true, 100), Is.False, "outruns: retreat stands");
+			Assert.That(CombatVetoMath.VetoRetreatVerdict(50, 60, false, 100), Is.False, "cannot fight back: never told to stand");
+			Assert.That(CombatVetoMath.VetoRetreatVerdict(0, 60, true, 100), Is.True, "immobile: fleeing is meaningless");
+			Assert.That(CombatVetoMath.VetoRetreatVerdict(50, 60, true, 50), Is.False, "margin shrinks the pursuer's effective speed");
+		}
+
+		[Test]
+		public void PredictedTradeMatchesEngagementScale()
+		{
+			// The veto judges on the same scale EL scores: identical inputs, identical number.
+			Assert.That(CombatVetoMath.PredictedTradeMilli(1000, 1000, 0.6, 0.0), Is.EqualTo(428));
+			Assert.That(CombatVetoMath.PredictedTradeMilli(1000, 800, 0.6, 0.0), Is.EqualTo(333));
+			Assert.That(CombatVetoMath.SurvivingPermille(0.6), Is.EqualTo(600));
+			Assert.That(CombatVetoMath.SurvivingPermille(2.0), Is.EqualTo(1000));
+			Assert.That(CombatVetoMath.SurvivingPermille(-1.0), Is.EqualTo(0));
+		}
+
+		[Test]
+		public void FactoredPredictEqualsPlainAtNeutral()
+		{
+			var own = new List<(BotUnitProfile, int)> { (Unit("e1", 500, "heavy", 60, 10), 4) };
+			var foe = new List<(BotUnitProfile, int)> { (Unit("e2", 400, "light", 70, 8), 4) };
+			var plain = BotCombatPredictor.Predict(own, foe);
+			var factored = BotCombatPredictor.Predict(own, foe, (a, w, t) => 1.0);
+			Assert.That(factored.Ratio, Is.EqualTo(plain.Ratio).Within(1e-9));
+			Assert.That(factored.OwnSurvivingFraction, Is.EqualTo(plain.OwnSurvivingFraction).Within(1e-9));
+		}
+
+		[Test]
+		public void FactoredPredictShiftsWithPriors()
+		{
+			var own = new List<(BotUnitProfile, int)> { (Unit("e1", 500, "heavy", 60, 10), 4) };
+			var foe = new List<(BotUnitProfile, int)> { (Unit("e2", 400, "light", 70, 8), 4) };
+			var plain = BotCombatPredictor.Predict(own, foe);
+
+			// Enemy weapons corrected DOWN (the fitted file says they overperform less than predicted).
+			var discounted = BotCombatPredictor.Predict(own, foe, (a, w, t) => a.Name == "e2" ? 0.5 : 1.0);
+			Assert.That(discounted.Ratio, Is.GreaterThan(plain.Ratio));
+
+			// Enemy weapons corrected UP — the veto is where a bad fitted truth still gets blocked.
+			var amplified = BotCombatPredictor.Predict(own, foe, (a, w, t) => a.Name == "e2" ? 2.0 : 1.0);
+			Assert.That(amplified.Ratio, Is.LessThan(plain.Ratio));
+		}
+
+		[Test]
+		public void VetoReasonsAreContractValid()
+		{
+			Assert.That(BotMissionReasons.IsValid(BotMissionReasons.BelowThreshold), Is.True);
+			Assert.That(BotMissionReasons.IsValid(BotMissionReasons.CantOutrun), Is.True);
+			Assert.That(BotMissionReasons.Shared, Does.Contain(BotMissionReasons.BelowThreshold));
+			Assert.That(BotMissionReasons.Shared, Does.Contain(BotMissionReasons.CantOutrun));
+		}
+
+		[Test]
+		public void DeniedRecordCarriesDetail()
+		{
+			var record = new BotMissionRecord
+			{
+				MissionId = "combat_veto:attack:12,34",
+				Event = BotMissionEvent.Denied,
+				Reason = BotMissionReasons.BelowThreshold,
+				Executor = "CombatVeto",
+				MissionType = "combat_veto",
+				Units = 6,
+				Value = 3200,
+				Detail = "trade=-452;ratio=0.71;ownv=3200;foev=5100;defences=2",
+				Tick = 500
+			};
+
+			var line = AiMissionLogWriter.BuildLine(record, "g", "m", "A Nuclear Winter", new System.DateTime(2026, 10, 3, 0, 0, 0, System.DateTimeKind.Utc));
+			Assert.That(line, Does.Contain("\"record_kind\":\"mission\""));
+			Assert.That(line, Does.Contain("\"event\":\"DENIED\""));
+			Assert.That(line, Does.Contain("\"type\":\"combat_veto\""));
+			Assert.That(line, Does.Contain("\"reason\":\"below_threshold\""));
+			Assert.That(line, Does.Contain("\"detail\":\"trade=-452;ratio=0.71;ownv=3200;foev=5100;defences=2\""));
+		}
+	}
+}

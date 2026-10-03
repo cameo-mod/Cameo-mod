@@ -52,9 +52,14 @@ namespace OpenRA.Mods.CA.Traits
 		/// <see cref="BotMissionAttemptTracker"/>, never by an executor.</summary>
 		public const string MatchEnd = "match_end";
 
+		// Tier-2 combat veto (12.31): the predictor's verdict that blocked a commit.
+		public const string BelowThreshold = "below_threshold";
+		public const string CantOutrun = "cant_outrun";
+
 		public static readonly IReadOnlyCollection<string> Shared = new[]
 		{
-			NoUnits, Unreachable, Undeployable, Reserved, Outmatched, TargetGone, Timeout, Stuck, Superseded, LostUnits, Done, Dropped, MatchEnd
+			NoUnits, Unreachable, Undeployable, Reserved, Outmatched, TargetGone, Timeout, Stuck, Superseded, LostUnits, Done, Dropped, MatchEnd,
+			BelowThreshold, CantOutrun
 		};
 
 		/// <summary>Null (no reason), one of the shared reasons, or an `x_` private reason of lowercase words.</summary>
@@ -86,6 +91,9 @@ namespace OpenRA.Mods.CA.Traits
 		public CPos? UnitCell;
 		public int? Units;
 		public int? Value;
+
+		/// <summary>Optional evidence string for event records (e.g. a veto's predicted trade), emitted as "detail".</summary>
+		public string Detail;
 		public int Tick;
 	}
 

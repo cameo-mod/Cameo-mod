@@ -1,3 +1,35 @@
+# 2026-10-03 — feat(ai): NOVA tier 2, the combat-prediction veto (AN_combat_veto, default off)
+
+*Devin (nova), worktree `nova-clean`, branch `nova/t2_combat_veto` @ master `dbd7b3b83` — ORDERS
+`Cameo-mod-fleet/ORDERS_2026-10-03_claude_learning_tiers.md`, spec `AI_ARCHITECTURE.md` §12.31.*
+
+One provider `IBotCombatVeto` (OpenRA.Mods.CA) consulted at the two decision points the shared
+predictor already gates — `SquadManagerBotModuleCA.PredictsWin` (attack commit) and `PredictsLoss`
+(retreat commit, incl. the mid-attack disengage and the protection pull-out). The squad manager stays
+the one owner of the decision, the fog canary and the mission card; no provider (classic, switch off)
+= bit-identical.
+
+- **Predictor not duplicated:** verdicts consume `BotCombatPredictor.Predict` — new factored overload
+  applies a per-(attacker, weapon, target) multiplier inside the predictor's own formula; that is the
+  ONE consumption point for tier-1's fitted priors.
+- **Attack veto:** enemy force = the seen commit list + seen static defences within `DefenceScanCells`
+  of the target (`CanBeViewedByPlayer`, the squad scans' own fog standard). Trade scored on the EL
+  scale via `EngagementScore.PredictedTrade`; below `MinPredictedTradeMilli` (-350) → veto, caller's
+  !engage path unchanged.
+- **Retreat veto:** loss already predicted; enemy fastest × margin ≥ our slowest → stand and trade
+  (`cant_outrun`); a weaponless squad is never told to stand.
+- **Mission card:** the manager writes a `DENIED combat_veto` record (`below_threshold`/`cant_outrun`
+  reasons in the shared set) with the predicted numbers in the new optional `BotMissionRecord.Detail`
+  → `"detail"` in `cameo-ai-missions.jsonl` for EL's vetoed-vs-fought scoring.
+- **Priors hook:** `ai/learned/engagement_priors.yaml` (`engagement_priors/1`, MiniYaml — schema +
+  FNV-1a-64 stat fingerprint canonical form spec'd in §12.31 for EMBER's fitter); fingerprint mismatch
+  or missing file = neutral. Frozen at match start; nothing learned in-match.
+- `BotWeaponProfile.Delivery` = warhead class minus "Warhead" (the stat-normalized delivery key).
+- Verified: 816/816 tests (9 new `CombatVetoTest`), arch audit 0 ERROR/31 pre-existing WARN, fog audit
+  PASS (new defence-scan site manifested + 2 canary sites), direct-mutation PASS (zero order sites —
+  the provider issues none), boot gate PASS (menu, 0 new exceptions). Switch `AN_combat_veto` dry-run:
+  1 change, `genericbot && combatveto`, classic untouched.
+
 # 2026-10-03 — fransotto post-merge review re-verified: all 8 findings closed or documented
 
 *Devin (nova), worktree `nova-logverify` — fransotto's second review (`c936108d1`,

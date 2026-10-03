@@ -116,6 +116,11 @@
 	GrantConditionOnBotOwner@armystaging:
 		Condition: armystaging
 		Bots:
+	# Combat veto (DESIGN 19.13, AI_ARCHITECTURE 12.31): the tier-2 prediction veto on squad attack/retreat commits.
+	# The arm sets Bots (switch group AN_combat_veto); empty by default - inert on master.
+	GrantConditionOnBotOwner@combatveto:
+		Condition: combatveto
+		Bots:
 	# DIFFICULTY SCALE (DESIGN §19.1, maintainer 2026-09-28): every number below lies on ONE straight line
 	# from easiest to cameogod, in EQUAL steps; an integer that cannot split evenly is the rounded line.
 	# Every field is written in every tier, so no tier silently falls back to a C# default.
@@ -3697,6 +3702,12 @@ Player:
 	# ARMY STAGING (DESIGN 19.12, AI_ARCHITECTURE 12.29): a pure planner (IBotArmyStaging) - one staging point per threatened side on the rim,
 	# a few cells inside the own armed buildings; groups only when several sides are hit; a centre reserve for attacks from inside the ring.
 	# It issues no orders: the squad manager stages the idle pool and the base builder rallies new units at its primary cell.
+	# COMBAT VETO (DESIGN 19.13, AI_ARCHITECTURE 12.31): the tier-2 prediction veto - a squad's attack commit whose
+	# predicted trade is below MinPredictedTradeMilli is blocked, and a retreat that cannot outrun the threat is
+	# blocked. Pure provider (IBotCombatVeto): the squad manager owns the consult and writes the DENIED mission card.
+	# `genericbot && combatveto`: off on master until the increment A/B arms it (switch group AN_combat_veto).
+	CombatVetoBotModule:
+		RequiresCondition: genericbot && combatveto
 	# `genericbot && armystaging`: off on master until the increment A/B arms it (switch group AM_army_staging).
 	ArmyStagingBotModule:
 		RequiresCondition: genericbot && armystaging
