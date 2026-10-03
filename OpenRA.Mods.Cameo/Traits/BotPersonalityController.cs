@@ -85,18 +85,28 @@ namespace OpenRA.Mods.Cameo.Traits
 			if (pinnedTo == null)
 			{
 				var botType = self.Owner.IsBot ? self.Owner.BotType : null;
-				pinnedTo = PinnedPersonality(Info.PinnedPersonalities, botType) ?? "";
+				pinnedTo = PinnedPersonality(Info.PinnedPersonalities, botType) ?? BanditPin(self) ?? "";
 			}
 
 			return pinnedTo.Length > 0 ? pinnedTo : null;
+		}
+
+		// Tier-3: a plan-bandit personality arm pins the same way as a harness pin. The bandit resolves
+		// lazily on first read, so this is safe no matter which trait enables first. Harness pins win.
+		static string BanditPin(Actor self)
+		{
+			var bandit = self.TraitsImplementing<BotModules.PlanBanditBotModule>().FirstOrDefault(t => !t.IsTraitDisabled);
+			var arm = bandit?.PinnedPersonalityArm;
+			return arm != null && arm.Length > 0 ? arm : null;
 		}
 
 		protected override void TraitEnabled(Actor self)
 		{
 			var pinned = PinnedPersonality(self);
 			var condition = pinned != null
-				? Info.Conditions.First(c => PersonalityName(c, Info.PersonalityPrefix) == pinned)
-				: Info.Conditions.Random(self.World.SharedRandom);
+				? Info.Conditions.FirstOrDefault(c => PersonalityName(c, Info.PersonalityPrefix) == pinned)
+				: null;
+			condition ??= Info.Conditions.Random(self.World.SharedRandom);
 			personalityToken = self.GrantCondition(condition);
 			CurrentPersonality = PersonalityName(condition, Info.PersonalityPrefix);
 		}

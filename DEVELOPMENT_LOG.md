@@ -1,3 +1,224 @@
+# 2026-10-03 — coordinator: INC 2026-10-03 A/B result — switches stay OFF (no measured difference)
+
+*Claude (Opus 5.5).* `C:/cameo-wt/ab_inc_1003` (`ab_increment.py`, ctrl 5e5639cd2 / half a711d5a95 defaults / all a711d5a95
+`--groups all`; hard vs classic, A Nuclear Winter, mirrors td_gdi + td_nod separately, 16 planned per arm). **Win rate, first
+16 planned matches: ctrl 9/16, half 9/16, all 9/16** (GDI 6/8, Nod 3/8 in ctrl and all) — defaults inert (ctrl = half);
+no win-rate effect of the switch groups at n=16 (95% CI ~33–77%). **EL per-fight (new metric):** hard−classic mean `total`
+ctrl −35, half −58, all −25; hard attacks 190 vs classic 97 in `all` (ctrl 123/124) — consistent with the tier-2 veto (14
+`veto:` cards in all_td_gdi) but fights are correlated within matches: a hint, not a result. Safety: 0 exceptions in every
+arm; `all` hard ownership watchdog `double_owner=1` (ctrl/half 0) → investigation dispatched. **Ruling: no default flip.**
+Harness bugs found and fixed on master during the run: driver cap (`2d3bcfa0c`, 5 drivers had run), early-stop tally counted
+rows beyond `planned` (`12b726b8c`, falsely decided ctrl>half), re-run replayed complete shards (`2a7d73c28`).
+
+# 2026-10-03 — coordinator: INC 2026-10-03b (F2 fog fix, tier-1 PriorPct, tier-3 armed set, veto scorecard)
+
+*Claude (Opus 5.5).* Merged: `devin/f2-public-faction@3fc5f7230` (`BotFactionView.PublicFactionOf`, DisplayFaction; a Random
+enemy yields "" → parent pool; classic + fixed-faction games bit-identical), `devin/tier1-priorpct@a21f90369` (per-cell
+`PriorPct@` for in-match staleness, orders F1(b)), DAWN `9ba79466f` (`bandit.armed` via IObservesVariables, record-only),
+`nova/veto_scorecard@e12d2cc4f` (offline tool). NOT merged: `nova/el1_inmatch_adapt`, `devin/nova/combat-veto-delta` — both
+sit on the superseded #790 base; NOVA ports them onto master's tier 2 (orders F1(c)). Gates: build 0 err, 834/834, pytest 51,
+freshness/fog/mutation PASS, doc_claims no mismatch. Also on master today: `fix(ab)` caps batch DRIVERS (`2d3bcfa0c`) —
+the A/B harness had over-launched to 5 drivers.
+
+# 2026-10-03 — coordinator: INC 2026-10-03 landed on master (tiers 1–4, P0 guard, #791)
+
+*Claude (Opus 5.5), AionUI team lead.* Increment `inc/2026_10_03` → master: am-nre-guard, #791, tier 2 + disabled-guard fix,
+tier 3 (to `f9914bb2c`), tier 1 phase A (+ renumber `49643408d`), tier 4 SPSA (`1e91617de`), F3 doc, lead docs. Gates on the
+merged tree: build 0 err, 830/830, pytest 53/53 (touched tools), fog/mutation/warhead/freshness PASS, doc_claims 43/43,
+boot gate PASS (34 s, isolated `Engine.SupportDir`). Two earlier boot verdicts were void: NOVA's parallel launches truncate the
+shared perf.log. G: is a USB HDD (queue 16) — work moved to `C:/cameo-wt`. Next: the increment A/B; tier-1 schema ruling.
+
+# 2026-10-03 — P0 found+fixed: ArmyStagingBotModule RespondToAttack NRE (2v2 only)
+
+*Devin (nova) — the 2v2 armed smoke (`C:/tmp/elsmoke`, el1@75831d996 + AM_army_staging)
+died at ~321s: `NullReferenceException` at ArmyStagingBotModule.cs:156
+(`attacker.Location` via `OccupiesSpace.TopLeft`). `Damaged`'s `self` (the victim)
+was never guarded — an actor killed by the very hit, or any damaged actor with no
+IOccupySpace, throws on `.Location`. LightningZap SpreadDamage on the denser doubles
+map hit it; every 1v1 batch stayed clean.*
+
+**Fix on `devin/nova/am-nre-guard` (`28573b84d`, pushed, hand-in):** the same guard
+extended — `self` null/dead/in-world + `OccupiesSpace` null on both sides;
+bit-identical for every event that passed before. **Verified by repro:** the
+identical 2v2 that NRE'd at 321s now runs 305s clean (4 records, 0 exceptions,
+hard+hard 1-0). Receipt on #782. Team-play bonus: 93 engagements, 230 postures,
+`army_to_staging_cells` median 4 — armies sit on their staging cells.
+# 2026-10-03 — parallel lane: PR #790 `nova/t2_combat_veto` is a second tier-2 veto
+
+*Devin (nova) — a second NOVA instance committed `821d7083e` (17:05) on `nova/t2_combat_veto`,
+independent of my `devin/nova/inc-n-combat-veto` (~16:5x). Same order, different cuts.*
+
+Their version is the better base: the `Predict(own, enemy, factor)` overload keeps Lanchester in
+the one class, `BotWeaponProfile.Delivery` enables delivery x armour priors, `StatFingerprint`
+auto-discounts stale priors on a rebalance, consults inside `PredictsWin`/`PredictsLoss` cover
+every call site, cards carry `below_threshold`/`cant_outrun` + a `Detail` evidence field, and the
+retreat veto guards `ownCanFight`. Mine adds three things theirs lacks: the launch consult at
+`CreateAttackForce`, remembered-defence inclusion (`IBotRememberedDefenceProvider` vs their
+visible-only `CanBeViewedByPlayer` scan), and the committed-approach hysteresis (enter <50 / abort
+<35). Full comparison posted as a review on #790; recommendation: theirs merges first, I layer the
+delta. Coordinator decides.
+
+# 2026-10-03 — INC-N: the combat veto (DESIGN 19.13 tier 2) — `devin/nova/inc-n-combat-veto@150429f3f`
+
+*Devin (nova), fleet `ORDERS_2026-10-03_claude_learning_tiers.md` tier-2 lane:*
+
+**INC-N ready: devin/nova/inc-n-combat-veto@150429f3f — switch: AN_combat_veto (default off)**
+
+One provider (`IBotCombatVeto`, CA seam after `IBotSiegeAdvisor`) consulted at every
+commit edge: the idle engage check, the committed approach (lower abort line),
+the wave launch vs remembered defences (parity-floored at own value — a loss must
+be proven, never assumed), and `ShouldFlee` (a retreat the pursuit outruns is
+blocked — the squad stands and fights instead of being run down). The prediction
+is `BotCombatPredictor` itself on the SEEN forces + `IBotRememberedDefenceProvider`
+within `DefenceIncludeCells`; `EngagementPriorsBotModule` multiplies tier-1 priors
+into the HP-share assembly (own side only — the file measures own-faction trades),
+serving EMBER's `ai/learned/arsenal_priors.yaml` through the same `ArsenalPriors`
+parser. Pure advisor: no orders, no learning; every veto is a Denied mission card
+(`veto:<kind>:<tick>`, `outmatched` / `x_no_outrun`) for the EL score. `genericbot
+&& combatveto`; classic never sees the provider — every consult answers false.
+
+Design §12.31 (hysteresis enter <50 / abort <35, launch <60, flee margin 100%,
+cache 25t, defences 12 cells, card dedup 250t). 7 new eval tests (predictor
+parity, hysteresis, launch/engage/flee lines, prior shift). Build 0 errors;
+814/814 tests; fog-honesty + direct-mutation audits PASS (one new reviewed
+radius-circle site registered); boot gate green (menu marker, zero new
+exceptions). One caveat for reviewers: `engine/` in the smoke worktrees is a
+junction to the main checkout's engine dir — bin/ is shared, so builds and boot
+gates serialize across lanes by construction.
+# 2026-10-03 — DAWN: tier-3 post-merge + collision fix + contract docs
+
+*Devin (dawn) — merged `origin/master` `5e5639cd2` (nova's armed-smoke logs; devlog unioned),
+build 0E, 822/822. Coordination outcomes this round:*
+
+- **Switch collision resolved**: nova claimed `AN_combat_veto` at the same insertion point I had
+  used for `AN_tier3_bandits` — renamed mine `AO_tier3_bandits` (grant id `@planbandits` and
+  condition `plan_bandits` unchanged). Nova's EL-1 claim then double-booked `AN_` themselves
+  (`AN_inmatch_adapt` next to `AN_combat_veto`) — flagged in `REPLY_2026-10-03_dawn_to_nova_inc5.md`.
+- **Reviewed nova's tier-2 veto** (`821d7083e`, PR #790): per-tick-cached provider (armyStaging
+  precedent), `PredictsWin`/`PredictsLoss` bit-identical without provider, fog canary before the
+  enemy list, DENIED cards correctly bypass the attempt tracker — no blockers. Their ledger resync
+  (#791) is extract-only (`mods/` diff = 0 lines), `balance_drift` 35/35 clean.
+- **`AI_ARCHITECTURE §12.33`** written (§12.31/§12.32 are nova's); `PlanBanditBotModule` registered
+  STRATEGY in `ai_arch_audit.LAYER_OF` and `AI_ARCH_COVERAGE` regenerated — `ai_arch_audit --check`
+  0 ERROR, 31 WARN (all pre-existing, identical to nova's count).
+- **Tier-2×3 interaction recorded**: under both arms, vetoed fights emit DENIED but no engagement —
+  posteriors are survivorship-filtered *by design*; counterfactual scoring would need EL on DENIED
+  cards (coordinator's call, not implemented).
+- HANDOFF updated with the INC-ready line at current hash.
+
+# 2026-10-03 — DAWN: tier-3 bandits implemented (INC-ready, `devin/dawn/tier3-bandits`)
+
+*Devin (dawn) — spec above, coded in `dawn-t3`. Build 0 errors, 822/822 tests (15 new
+`PlanBanditMathTest`), audits clean except the KNOWN `ledgers_drifted` 33 (master finding
+`612014a74`, balance lane, pipeline re-extract), boot-gate PASS (menu marker, 0 new exceptions).*
+
+- `PlanBanditMath.cs` + `PlanBanditBotModule.cs`/`PlanBanditLearned` (new): Student-t Thompson
+  draws over Normal-mean posteriors (continuous `total_milli` — Beta cannot express it);
+  hierarchical pooling `matchup -> faction -> family -> any`, each parent capped at `PriorCount`
+  pseudo-obs; safety floor binds on `EvidenceN` (own-scope plays) not pooled n — the fitter rolls
+  one observation into every chain level, so pooled n over-counts by design.
+- `BotPersonalityController`: bandit pin consults `PlanBanditBotModule.PinnedPersonalityArm`
+  (lazy resolve, ordering-free); harness `PinnedPersonalities` still wins; bandit arm that names no
+  `personality-*` condition falls back to the random draw.
+- `BuildOrderKnobsBotModule`: plan overlay as a 4th multiplier (preset x learned x plan x jitter,
+  clamped); `EnemyFaction` extracted to `PlanBanditBotModule.EnemyFactionOf` (shared, verbatim).
+- Attribution: `bandit` block on `BotSituation` snapshots AND on `engagement` records
+  (scope + both frozen arms) — the fitter joins on it directly; unarmed games contribute nothing.
+- `tune_plan_bandits.py` (new): folds `bandit`-attributed engagement records into
+  `<bandit>@<scope>` stats at all 4 chain levels, decayed sliding-window (`--decay`), `Processed`
+  ids keep re-runs idempotent; smoke-verified (2 obs -> 8 scope rows, rerun folds 0).
+- `ai.yaml`: `GrantConditionOnBotOwner@planbandits` (empty Bots, inert) + `PlanBanditBotModule`
+  block `genericbot && plan_bandits` — 5 plan arms (`balanced` no-op, `press`, `fortify`, `boom`,
+  `surge`, all inside the existing knob clamp) + 6 personality arms.
+- `increment_switches.yaml`: `AO_tier3_bandits` (grant only — classic is not genericbot =
+  bit-identical when off).
+
+# 2026-10-03 — DAWN: tier-3 bandits implementation spec (branch `devin/dawn/tier3-bandits`, worktree `dawn-t3`)
+
+*Devin (dawn) — base `43ba77109` (PR #789 on master, tier-3 gate cleared). Fleet order
+`ORDERS_2026-10-03_claude_learning_tiers.md` + my design note `NOTE_2026-10-03_dawn_tier3_bandit_design.md`.
+Spec checkpointed before coding (WORKFLOW 1.7):*
+
+## Two bandits, one learned file
+
+- `mods/cameo/ai/learned/plan_bandits.yaml` — `BotPlanBandits: Personality@<scope>: / Plan@<scope>: <arm>: n, mean_milli, m2`.
+- Scopes `any | family_<f> | <faction> | <faction>_vs_<enemy>` (adds matchup level per order).
+- Posterior: Normal-Gamma via Student-t (n<2 → prior). `total_milli` is continuous so Bernoulli Beta is wrong;
+  wins/fails derived from the normal arm for the schema's compatibility fields.
+- Choice at match start, frozen: Thompson sample per arm, then exclude any arm whose LCB
+  (`mean - z*sd`) clears `LcbFloor` and is below `MinSafetyLcb` — per order, "safety floor" = arms that
+  must not be selectable below an evidence-backed minimum.
+- Personality bandit arms = `PersonalityArms` list (default all `personality-*` presets). Winner pins via
+  `BotPersonalityController` (extends the existing PinnedPersonalities block to also block switches).
+- Plan bandit arms = named knob-overlay presets (`PlanArms:<name>:<knob>:<milli>`) applied as an extra
+  multiplier inside `BuildOrderKnobsBotModule.RecomputeBase` (preset x learned x plan x jitter). No new
+  order channels — plan arms only reshape the bounded knob vector.
+- Attribution: `BotSituation` gains a `bandit` snapshot section (`personality_arm`, `plan_arm`, `scope`,
+  `pinned`) so offline tuning maps engagement/1 records -> the arm that produced them. Personality arm
+  is additionally visible as constant `personality` on every record.
+
+## New/changed files
+
+- NEW `OpenRA.Mods.Cameo/Traits/BotModules/PlanBanditBotModule.cs` — `genericbot && plan_bandits`-gated
+  (arm via switch group, matching ArmyStagingBotModule convention — no `Use*` bool), fields
+  `LearnedFile`, `PersonalityArms`, `PlanArms` (named knob overlays incl. explicit `balanced` no-op),
+  `PriorCount`, `LcbZ` (x100), `MinEvidence`, `MinSafetyLcb`. Exposes `PinnedPersonalityArm` +
+  `PlanOverlayMilli` + `Snapshot`. (`MaxDrawAttempts` dropped: the t-draw caps df at 64 instead.)
+- NEW `OpenRA.Mods.Cameo/Traits/BotModules/PlanBanditMath.cs` — pure functions: parse, pool, sample,
+  LCB filter, decay update (testable without World).
+- `PlanBanditLearned` (same file): scope chain `matchup -> faction -> family -> any`, each parent
+  downweighted to `PriorCount` pseudo-obs. `Pooled` feeds the Thompson draw; `EvidenceN` (own-scope n:
+  matchup first, else faction) feeds the floor — the fitter rolls one observation into every chain
+  level, so pooled n over-counts and must NOT gate the floor.
+- `EngagementLogBotModule`/`EngagementRecord`: `bandit` block (scope + both arms) on engagement
+  records when armed — the offline fitter's attribution join. Fitter `tune_plan_bandits.py` folds ONLY
+  attributed records (unattributed skipped as processed) at all 4 chain levels; `Processed` game ids
+  keep it idempotent; decay = sliding-window discount.
+- NEW `OpenRA.Mods.Cameo/Traits/BotModules/PlanBanditMath.cs` — pure functions: parse, pool, sample,
+  LCB filter, decay update (testable without World).
+- `BotPersonalityController.cs` — consult `PlanBanditBotModule.PinnedPersonality` (lazy resolve) at
+  TraitEnabled and in SetBotPersonality.
+- `BuildOrderKnobsBotModule.cs` — combine `planOverlay` in RecomputeBase.
+- `BotSituation.cs` + `AiSituationLogWriter.cs` — `bandit` section.
+- `mods/cameo/ai/ai.yaml` — module block (default off) beside BuildOrderKnobsBotModule.
+- `tools/ai/tune_plan_bandits.py` — offline updater: groups engagement records by (bandit, arm, scope),
+  decayed Welford, writes learned file.
+- `tools/ai/increment_switches.yaml` — `AO_tier3_bandits`.
+- `OpenRA.Mods.Cameo.Test/PlanBanditMathTest.cs` — pooling/floor/determinism/parse/decay tests.
+# 2026-10-03 — coordinator (AionUI team): review round for the tier-2/3 hand-ins + tier-1 spec started
+
+*Claude (Opus 5.5), lead of an AionUI team of 4 Devin agents; worktree `G:/cameo-wt/claude-lead`, branch `claude/lead_1003_reviews`.*
+
+**State found:** master `5e5639cd2` = origin, #788 + #789 merged, main-checkout staged merge already resolved (tree clean).
+Hand-ins waiting: `devin/nova/am-nre-guard@28573b84d` (P0 NRE guard — reviewed, correct, merge-ready), NOVA tier 2
+**built twice** (#790 `nova/t2_combat_veto`, 4 behind master, vs `devin/nova/inc-n-combat-veto@150429f3f`, 0 behind),
+DAWN tier 3 `devin/dawn/tier3-bandits@17fc9d8e2`, NOVA #791 ledger re-extract. Tier 1 (EMBER) has no branch; the
+HANDOFF's `ORDERS_2026-10-03_claude_learning_tiers.md` does not exist anywhere in the repo.
+**Dispatched (read-only verifiers, no commits):** T2-VERIFY (which tier-2 lands), T3-VERIFY, LEDGER-VERIFY (#791 reproducible
+from `extract_stats`?); TIER1-SPEC → `docs/design/TIER1_FITTER_SPEC.md` on `devin/tier1-fitter` (spec first, lead approves).
+**Disk:** C: was at 1.1 GB free (≈200 worktrees under `C:/tmp`, ~2 GB each) — a `git worktree add` failed mid-checkout.
+All new worktrees go to **`G:/cameo-wt/`** (865 GB free). Pruning stale `C:/tmp` worktrees needs a maintainer decision.
+**Results (later):** LEDGER-VERIFY: #791 byte-identical to a fresh `extract_stats` on its parent (71/71 files), drift
+33 → 0, docs/balance only → merge-ready. T3-VERIFY: tier 3 `17fc9d8e2` builds 0 err, 822/822 tests, fog/mutation PASS →
+ACCEPTED for the increment (its "LocalRandom desync" flag is a false positive: bots activate host-only, `Player.cs:223`;
+SharedRandom there WOULD desync; DEVELOPMENT_LOG conflict + stale module map are increment-time chores). Tier-1 spec
+`40cbe9d0d` APPROVED with rulings (Random-slot faction is not public → `enemy_faction_public`); phase A dispatched.
+**Found — fog leak, post-increment fix:** enemy-faction reads use `Player.Faction` (a Random slot's RESOLVED faction) not
+`DisplayFaction` (lobby choice, `Player.cs:65/177`): `BotLearnedPriors.cs:141,145`, `BotSituation.cs:1660,1732`,
+`BuildOrderKnobsBotModule.cs:398,402`, tier-3 `EnemyFactionOf`. One shared helper after INC-N lands (overlaps DAWN now).
+**C:/tmp cleanup (maintainer-approved):** 112 clean, fully-pushed, >24 h idle worktrees removed with plain `git worktree
+remove` (no --force); 56 kept (unpushed / dirty / active today); stale unreferenced loose files deleted; inventory and
+logs in `G:/cameo-wt/_cleanup/`.
+**T2-VERIFY → land B** (`devin/nova/inc-n-combat-veto@e58c030b4`; #790 = divergent older version, superseded). REAL BUG
+confirmed: `CombatVetoBotModule` Veto* have no `IsTraitDisabled` guard and `SquadManagerBotModuleCA.cs:1751-1790` consults
+disabled providers → with `AN_combat_veto` OFF every bot incl. classic would veto (WORKFLOW §3.2). Fix dispatched as
+`devin/t2-veto-disabled-guard` on top of B (self-guard + `IsTraitEnabled()` call-site filter, the master stealth pattern).
+Tier 3 checked for the same class: all consumers use `FirstEnabledTraitOrDefault` → clean.
+**Tier-1 impl `3c07947f7`:** C# writer approved; fitter fixes requested — apply `resolved_firepower_modifiers` to priced
+dpt (132 actors; else biased cells), report + exclude the 8/139 tags with no Versus prior, name the 2 collisions.
+**C:/tmp done:** rescue = 47 refs `refs/rescue/2026-10-03/*` + `G:/cameo-tmp-rescue/` (bundle verified, manifest, README,
+evidence copies). 152 worktrees removed in total, 16 deferred (agent-owned `.agent-id` or active < 6 h). C: 1 → 340 GB free.
+
 # 2026-10-03 — armed smokes: AM_army_staging on master + EL-0 (#789) live validation
 
 *Devin (nova) — two frozen worktrees, sequential batches (one game driver at a time):*
@@ -17877,6 +18098,25 @@ Generated with [Devin](https://devin.ai)
 * DAWN's `81fa5a3c5` sat only in the shared main checkout (+ a staged origin/master merge) → reviewed (inert cooldown,
   log-identity fix) → PR #788 from `claude/land_dawn_answer_tracker` (direct push to master is denied: PR + maintainer).
 
+## 2026-10-03 — Devin/DAWN: armed-set attribution on tier-3 bandit records (nova review)
+
+* Nova's INC5 review caught the survivorship-bias hole: `combatveto` and `inmatchadapt` filter which
+  engagements ever exist, so a bandit arm fitted on raw engagement records is conditioned on the armed
+  decision-side module set — silently.
+* Fix — record the filter on the record: `PlanBanditBotModule` gains `WatchConditions` (yaml-declared
+  condition names, zero coupling to nova's types) + `IObservesVariables`; the granted subset is frozen
+  into `PlanBanditSnapshot.ArmedModules` ("+"-joined, sorted; `none`) at draw time and emitted as
+  `bandit.armed` on both the situation snapshot and every engagement record.
+* Fitter side: `tune_plan_bandits.py --armed-only SET` folds only records whose `armed` matches exactly
+  and leaves mismatched rows UNPROCESSED (a different armed-set fit still sees them); `game_key` is
+  per-(game,player) so same-game mixed-armed players split cleanly. Plain runs pool all sets —
+  documented default, A/B decides whether to split.
+* Verified: build 0E; 822/822; fitter smoke (fold 1 / hold 1 / second-filter pass folds the held row /
+  no-filter folds both / idempotent re-run); boot-gate PASS via private `Engine.SupportDir` (the shared
+  %APPDATA% log dir rotates under another lane's driver — menu marker verified in the private dir,
+  0 exceptions).
+* AI_ARCHITECTURE §12.33 gains the armed-set paragraph.
+
 ## 2026-10-03 — Devin-Tier1: TIER1-IMPL-A landed on `devin/tier1-fitter` (draft PR #793); consumer key-space finding
 
 * Phase A complete @ `3786e8974`: EL `composition` maps + `enemy_faction`/`enemy_faction_public` (additive, truth stays
@@ -17967,3 +18207,8 @@ Generated with [Devin](https://devin.ai)
   early resolves (inside the Player ctor, pre-SetPlayers) fall back to `PlayerReference.Enemies` →
   `MapPlayers` — map-declared data, fog-honest, "Random" verbatim → generic pool (deterministic). Also
   merges NOVA's `GetVariableObservers` fix (`5520a1ea7`, the dead-module CS0114 bug).
+* **INC 2026-10-03(+b) LANDED on master (`2863fa0a6`):** `tier1-priorpct` merged via `7505d574d` — the
+  `PriorPct@` fitter is live (consumer port `t1-priors-port` still pending on its branch); `f2-public-faction`,
+  `tier3-bandits`, `veto_scorecard` landed alongside. A/B: 9/16 per arm, defaults inert, switches stay off.
+  This branch merged master forward: `AI_ARCHITECTURE.md` → master's (my delta is zero; §12.33 armed-set
+  paragraph is master's), devlog union-resolved (DAWN armed-set block + this block, chronological).

@@ -126,7 +126,14 @@
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Repairable.HpPerStep",
      "v": "30000"
     },
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
      "v": "240"
@@ -228,7 +235,14 @@
     "queue": [
      "SCZergInfantry"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
      "v": "20"
@@ -318,7 +332,14 @@
     "queue": [
      "SCZergInfantry"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
      "v": "40"
@@ -432,7 +453,14 @@
     "queue": [
      "SCZergInfantry"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
      "v": "100"
@@ -568,7 +596,14 @@
     "queue": [
      "SCZergInfantry"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
      "v": "24"
@@ -658,7 +693,14 @@
     "queue": [
      "SCZergInfantry"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
      "v": "150"
@@ -767,7 +809,14 @@
     "queue": [
      "SCZergInfantry"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
      "v": "60"
@@ -890,6 +939,12 @@
      "SCZergInfantry"
     ],
     "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
      {
       "modifier": 25,
       "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#FirepowerMultiplier@MultiWeapon.Modifier",
@@ -1065,7 +1120,14 @@
     "queue": [
      "SCZergInfantry"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
      "v": "50"
@@ -1150,7 +1212,14 @@
     "queue": [
      "SCZergInfantry"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
      "v": "10"
@@ -2119,7 +2188,14 @@
      "Building",
      "RABuilding"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "inherited",
      "v": "10"
@@ -2279,7 +2355,14 @@
      "Defence",
      "RADefence"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "inherited",
      "v": "10"
@@ -2440,7 +2523,14 @@
      "Defence",
      "RADefence"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "inherited",
      "v": "10"
@@ -2600,7 +2690,14 @@
      "Defence",
      "RADefence"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "inherited",
      "v": "10"
@@ -2683,7 +2780,14 @@
     "queue": [
      "SCZergInfantry"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
      "v": "80"
@@ -2808,6 +2912,12 @@
     ],
     "resolved_firepower_modifiers": [
      {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
       "modifier": 99,
       "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#FirepowerMultiplier.Modifier",
       "trait": "FirepowerMultiplier",
@@ -2892,7 +3002,14 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
      "v": "60"
@@ -2980,7 +3097,14 @@
     "queue": [
      "SCZergInfantry"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
      "v": "300"
@@ -3067,6 +3191,12 @@
      "SCZergInfantry"
     ],
     "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
      {
       "modifier": 50,
       "src": "inherited",
@@ -3236,7 +3366,14 @@
     "queue": [
      "SCZergInfantry"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
      "v": "40"
@@ -3393,6 +3530,12 @@
      {
       "modifier": 50,
       "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 50,
+      "src": "inherited",
       "trait": "FirepowerMultiplier@FlyingInfantry",
       "types": []
      }
@@ -3486,7 +3629,14 @@
     "queue": [
      "SCZergInfantry"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
      "v": "32"
@@ -3571,7 +3721,14 @@
     "queue": [
      "SCZergInfantry"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
      "v": "160"
@@ -3667,6 +3824,12 @@
      "SCZergInfantry"
     ],
     "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
      {
       "modifier": 150,
       "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#FirepowerMultiplier@zergling.Modifier",
@@ -4438,6 +4601,12 @@
     },
     "resolved_firepower_modifiers": [
      {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
       "modifier": 25,
       "src": "inherited",
       "trait": "FirepowerMultiplier@repair",
@@ -4538,7 +4707,14 @@
     "queue": [
      "SCZergInfantry"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
      "v": "60"
@@ -4757,6 +4933,12 @@
     ],
     "resolved_firepower_modifiers": [
      {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
       "modifier": 40,
       "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/vehicles.yaml#FirepowerMultiplier@MultiWeapon.Modifier",
       "trait": "FirepowerMultiplier@MultiWeapon",
@@ -4859,7 +5041,14 @@
     "queue": [
      "SCZergInfantry"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
      "v": "50"
@@ -4980,7 +5169,14 @@
     "queue": [
      "SCZergInfantry"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
      "v": "10"

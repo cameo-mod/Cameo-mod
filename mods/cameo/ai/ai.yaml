@@ -116,6 +116,18 @@
 	GrantConditionOnBotOwner@armystaging:
 		Condition: armystaging
 		Bots:
+	# Combat veto (AI_ARCHITECTURE 12.31, INC-N): one fog-honest provider consulted where a squad commits an
+	# attack or a retreat — predicted-loss attacks and outrun retreats are blocked, every veto a mission card.
+	# The arm sets Bots (switch group AN_combat_veto); empty by default - inert on master.
+	GrantConditionOnBotOwner@combatveto:
+		Condition: combatveto
+		Bots:
+	# Tier-3 pooled bandits (fleet orders 2026-10-03): Thompson-samples a personality arm + an attack-plan overlay
+	# over the EL engagement posteriors in ai/learned/plan_bandits.yaml, with a safety floor. The arm sets Bots
+	# (switch group AO_tier3_bandits); empty by default - inert on master.
+	GrantConditionOnBotOwner@planbandits:
+		Condition: plan_bandits
+		Bots:
 	# DIFFICULTY SCALE (DESIGN §19.1, maintainer 2026-09-28): every number below lies on ONE straight line
 	# from easiest to cameogod, in EQUAL steps; an integer that cannot split evenly is the rounded line.
 	# Every field is written in every tier, so no tier silently falls back to a C# default.
@@ -3850,6 +3862,44 @@ Player:
 			out_earned:
 				greed: 1300
 				expansion: 1300
+	# Tier-3 pooled bandits (fleet orders 2026-10-03): Thompson-samples a personality arm + an attack-plan overlay over
+	# the EL engagement posteriors in ai/learned/plan_bandits.yaml, pooled any -> family -> faction -> matchup, with a
+	# safety floor (an evidenced arm whose LCB is below MinSafetyLcb cannot win). `genericbot && plan_bandits`: off on
+	# master until the increment A/B arms it (switch group AO_tier3_bandits).
+	PlanBanditBotModule:
+		RequiresCondition: genericbot && plan_bandits
+		LearnedFile: ai/learned/plan_bandits.yaml
+		PersonalityArms: rush, turtle, tech, expansion, steamroller, guerrilla
+		PriorCount: 8
+		LcbZ: 164
+		MinEvidence: 4
+		MinSafetyLcb: -250
+		# Armed-set attribution (nova review 2026-10-03): decision-side conditions that filter which engagements
+		# exist are recorded as `bandit.armed` so a fitter pass can condition on the survivorship filter.
+		WatchConditions: plan_bandits, build_order_knobs, combatveto, inmatchadapt, armystaging
+		# Attack-plan arms: one bounded knob overlay multiplied into the build-order vector (preset x learned x plan x
+		# jitter), frozen at match start. `balanced` is the explicit no-op arm so the bandit can choose not to overlay.
+		PlanArms:
+			balanced:
+			press:
+				tempo: 1125
+				production: 1125
+				defence: 875
+				tech: 875
+			fortify:
+				defence: 1200
+				power_margin: 1150
+				tempo: 875
+				expansion: 875
+			boom:
+				greed: 1150
+				expansion: 1150
+				production: 900
+				defence: 850
+			surge:
+				tech: 1150
+				support: 1100
+				greed: 900
 	# SP-1 + DAWN building gap (AI_ARCHITECTURE §12.20), ONE owner of base spacing (maintainer 2026-10-02). Loaded for
 	# genericbot: the HARD gap findPos applies (MinBuildingGapCells 2 / MinBuildingGapDefensesCells 1) is LIVE. classicbot
 	# has no advisor, hence no gap - it places edge-to-edge as before 10-02. The re-ranking of findPos' first placeable
@@ -5123,6 +5173,20 @@ Player:
 		# the region and later evaluations read the wall as heavier. Own A/B
 		# variable -- keep false while the CA-2b gate is measured.
 		SiegeMemoryEnabled: false
+	# COMBAT VETO (AI_ARCHITECTURE 12.31, INC-N): the one IBotCombatVeto — consulted where a squad commits an
+	# attack (the idle engage check, the committed approach at the lower abort line, the wave launch against
+	# remembered defences) or a retreat the pursuit outruns. It issues NO orders and learns nothing: the same
+	# BotCombatPredictor every consumer already uses, on the SEEN forces plus remembered static defences, with
+	# the tier-1 priors multiplied in when EngagementPriorsBotModule is enabled. Every veto is a Denied mission
+	# card so the engagement report can score vetoed vs non-vetoed attacks.
+	# `genericbot && combatveto`: off on master until the increment A/B arms it (switch group AN_combat_veto).
+	CombatVetoBotModule:
+		RequiresCondition: genericbot && combatveto
+	# The veto's tier-1 prior source: the same committed ai/learned/arsenal_priors.yaml BotLearnedPriors
+	# reads, mapped onto IBotEngagementPriors corrections (percent x 10, bounded). Missing file = 1000,
+	# the pure predictor numbers — the veto then runs unfitted but still armed.
+	EngagementPriorsBotModule:
+		RequiresCondition: genericbot && combatveto
 
 World:
 	BeaconTracker:

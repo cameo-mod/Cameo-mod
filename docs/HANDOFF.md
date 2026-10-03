@@ -1,5 +1,51 @@
 # Cameo — THE HANDOFF
 
+## 2026-10-03 (evening) — Claude (coordinator, AionUI team): INC 2026-10-03 lands — learning tiers 1–4 + the P0 fixes
+
+`Agent: Claude (Opus 5.5) · coordinator · increment branch inc/2026_10_03 → master · worktrees on C:/cameo-wt (SSD)`
+
+**Landed (all default-off; classic bit-identical):** P0 staging NRE guard (`devin/nova/am-nre-guard`); #791 ledgers
+re-extracted after FirepowerMultiplier 50 (byte-identical to `extract_stats`, `ledgers_drifted` 33 → 0); tier 2 combat
+veto `AN_combat_veto` (`devin/nova/inc-n-combat-veto` + the review fix `devin/t2-veto-disabled-guard` — the disabled
+provider vetoed for every bot incl. classic); tier 3 pooled bandits `AO_tier3_bandits` (DAWN, through `f9914bb2c`);
+tier 1 fitter phase A (`devin/tier1-fitter`, `AP_tier1_priors` reserved for phase B); tier 4 SPSA proposer
+(`devin/tier4-spsa`, offline, `--spsa` beside coordinate descent, constants from the seeded `spsa_calibration.py`).
+Orders + state table: `docs/ORDERS_2026-10-03_claude_learning_tiers.md` (the file HANDOFF cited, now real).
+**Gates (on the merged tree):** build 0 errors · `dotnet test` 830/830 · pytest (touched tools) green · fog / direct
+mutation / empty warhead / AI-arch freshness PASS · `doc_claims` AI contract 73/98 updated with §10.2 · boot gate PASS
+(menu in 34 s, isolated support dir, no new exception).
+**Not in this increment (next one):** DAWN `9ba79466f` (bandit attribution, C#), NOVA `devin/nova/combat-veto-delta`,
+`nova/veto_scorecard`, `nova/el1_inmatch_adapt` — unreviewed. #790 closed as superseded.
+
+**A/B DONE (2026-10-03 night):** ctrl 9/16 · half 9/16 · all 9/16 — no measured win-rate effect, defaults inert; EL
+per-fight hints favour `all` (attacks 190 vs 97). Switches stay OFF. `double_owner=1` in `all` under investigation.
+**Next (in order):** (1) a LARGER A/B (≥ 48 per arm) or an EL-scored A/B per group once the double_owner is explained.
+(2) Ruling: tier-1 priors schema (`BotEngagementPriors`/`DeliveryArmour@`/`LedgerHash`) vs NOVA's
+`combat-veto-delta` (`EngagementPriors`/`Factor@`/`StatFingerprint`) — one format before tier-1 phase B (F1).
+(3) F2 fog fix (`BotFactionView.PublicFactionOf`, survey done; PlanBandit/EngagementPriors adopt via their owners).
+(4) Baseline the 124 pre-existing `tools/tests` failures on master (full suite needs ~22 GB; run in chunks).
+**Machine lessons (proposed for WORKFLOW §5, needs a maintainer ruling):** G: is a USB HDD — never build there; boot
+gates should pass `Engine.SupportDir=<isolated copy>` because every launch truncates the shared `perf.log` (two
+false verdicts today while NOVA booted in parallel). `C:/tmp` cleanup: 152 worktrees removed, rescue refs
+`refs/rescue/2026-10-03/*` + `G:/cameo-tmp-rescue/`.
+
+## 2026-10-03 — DAWN (tier-3): pooled bandits INC-ready — `AO_tier3_bandits`
+
+`Agent: Devin (dawn) · branch devin/dawn/tier3-bandits @ 5f8770120 · worktree C:/tmp/dawn-t3`
+
+**INC-N ready: `devin/dawn/tier3-bandits`@`5f8770120` — switch: `AO_tier3_bandits`** (was AN; renamed —
+NOVA took `AN_combat_veto` at the same insertion point; grant id `@planbandits`, condition
+`plan_bandits` unchanged). Base `5e5639cd2`. Design spec + impl receipt in branch DEVELOPMENT_LOG
+top entries; contract in `AI_ARCHITECTURE §12.33`. `PlanBanditBotModule` (`genericbot && plan_bandits`)
+Thompson-samples a personality arm (pins `BotPersonalityController`; harness pins win) + a bounded
+plan overlay (preset x learned x plan x jitter, clamped) at match start, frozen. Student-t posteriors
+over `total_milli`; pooling matchup→faction→family→any (parents capped `PriorCount`); safety floor
+binds on own-scope `EvidenceN` (roll-up inflation documented). `bandit` block on situation + engagement
+records feeds `tools/ai/tune_plan_bandits.py` (decayed, idempotent). Build 0E, 822/822, boot PASS,
+audits clean except the known `ledgers_drifted` 33 (nova's #791 fixed it via extract-only — `mods/` diff 0).
+Fleet: `CHECKIN_2026-10-03_dawn_tier3_bandits_inc.md`, `REPLY_2026-10-03_dawn_to_nova_inc5.md`
+(#790 review: no blockers; survivorship-filtered posteriors under AN_combat_veto noted as intended).
+
 ## 2026-10-03 — Claude (coordinator): EL-0 engagement log (learning tier 0) + the five learning tiers handed to Devin
 
 `Agent: Claude-Local (Opus 5.5) · coordinator · branch claude/el1_engagement_log → PR`

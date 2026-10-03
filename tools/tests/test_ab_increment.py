@@ -176,6 +176,16 @@ class ShardRetryTests(unittest.TestCase):
             s = self._shard(td, [[row] * 5, [row] * 3])
             self.assertEqual(ab_increment.shard_progress(s, "hard"), (8, 8))
 
+    def test_progress_counts_only_the_first_planned_rows(self):
+        # A relaunched shard can append a whole second batch to its dir; the early-stop rule
+        # compares win counts, so rows beyond `planned` must not count (2026-10-03: 21 rows / 16).
+        with tempfile.TemporaryDirectory() as td:
+            win = {"bot_outcomes": [{"bot_type": "hard", "outcome": "won"}]}
+            loss = {"bot_outcomes": [{"bot_type": "hard", "outcome": "lost"}]}
+            s = self._shard(td, [[loss] * 6 + [win] * 2 + [win] * 5])   # 13 rows, planned 8
+            self.assertEqual(ab_increment.shard_progress(s, "hard"), (8, 2))
+            self.assertEqual(ab_increment.shard_remaining(s), 0)
+
     def test_fingerprints_pool_retry_dirs(self):
         with tempfile.TemporaryDirectory() as td:
             s = self._shard(td, [[{"fingerprint": "fp-a"}], [{"fingerprint": "fp-a"}]])
@@ -213,6 +223,20 @@ class TasklistParseTests(unittest.TestCase):
     def test_no_match_info_line_is_zero(self):
         self.assertEqual(ab_increment.parse_tasklist_count(
             "INFO: No tasks are running which match the specified criteria.\r\n"), 0)
+
+
+class DriverCountTests(unittest.TestCase):
+    def test_counts_batch_drivers_not_other_python(self):
+        out = (
+            "python tools\\ai\\run_ai_match_batch.py --factions td_gdi --support-dir C:\\a\r\n"
+            "python tools/ai/ab_increment.py --ctrl abc --cand def --out C:/x\r\n"
+            "C:\\Python312\\python.exe C:/t/tools/ai/run_ai_match_batch.py --factions td_nod\r\n"
+            "python -m pytest -q tools/tests\r\n"
+        )
+        self.assertEqual(ab_increment.parse_driver_count(out), 2)
+
+    def test_empty_is_zero(self):
+        self.assertEqual(ab_increment.parse_driver_count(""), 0)
 
 
 class SmokeVerificationTests(unittest.TestCase):

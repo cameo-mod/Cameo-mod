@@ -209,6 +209,22 @@ namespace OpenRA.Mods.Cameo.Traits
 			builder.Append('}');
 		}
 
+		// Tier-3 (fleet orders 2026-10-03): the frozen bandit choice of this match; omitted when no PlanBanditBotModule ran.
+		internal static void AppendBandit(StringBuilder builder, PlanBanditSnapshot snapshot)
+		{
+			if (snapshot == null)
+				return;
+
+			AiMatchLogWriter.AppendObjectPropertyStart(builder, "bandit");
+			AiMatchLogWriter.AppendNumber(builder, "tick", snapshot.Tick, true);
+			AiMatchLogWriter.AppendString(builder, "scope", snapshot.Scope ?? "");
+			AiMatchLogWriter.AppendString(builder, "personality_arm", snapshot.PersonalityArm ?? "");
+			AiMatchLogWriter.AppendString(builder, "plan_arm", snapshot.PlanArm ?? "");
+			AiMatchLogWriter.AppendString(builder, "armed", snapshot.ArmedModules ?? "none");
+			AiMatchLogWriter.AppendBoolean(builder, "pinned", snapshot.PersonalityPinned);
+			builder.Append('}');
+		}
+
 		// FE-0 (12.24): the field-economy picture of one snapshot; omitted when none was captured.
 		internal static void AppendExpansion(StringBuilder builder, ExpansionSnapshot e)
 		{
@@ -375,6 +391,7 @@ namespace OpenRA.Mods.Cameo.Traits
 			AppendThreats(builder, situation.Threats);
 			AppendScaleTargets(builder, situation.ScaleTargets);
 			AppendBuildOrder(builder, situation.BuildOrder);
+			AppendBandit(builder, situation.Bandit);
 			builder.Append('}');
 			AppendExpansion(builder, situation.Expansion);
 

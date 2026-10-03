@@ -281,3 +281,231 @@ def test_perturbed_arm_matches_do_not_move_the_opening_posterior_but_are_consume
     base = [row(BASE, 1.0, win=1.0, opening="eco", game=f"b{i}") for i in range(25)]
     assert tbo.update_openings(learned, perturbed + base) != []
     assert learned["openings"][("rush", "ra1_allies", "ra1_soviets")]["eco"] == [26, 1]
+
+
+# ---------------------------------------------------------------- tier 4: SPSA (TIER4_SPSA_SPEC.md section 9)
+
+import math  # noqa: E402
+
+P_, F_ = "rush", "ra1_allies"
+
+
+def spsa_rows(learned, step, n_per_arm, score_of, noise=None, knob_override=None):
+    """Fabricate n_per_arm measured rows per arm for one SPSA step, scored by score_of(knob vector milli)."""
+    exp = tbo.next_spsa_experiment([], learned, P_, F_, n_per_arm)
+    assert exp["step"] == step
+    rows = []
+    for side in ("plus", "minus"):
+        vec = {k: (knob_override or exp["values"])[k][side] for k in tbo.TUNABLE}
+        for i in range(n_per_arm):
+            eps = noise(side, i) if noise else 0.0
+            r = row(exp[f"{side}_arm"], score_of(vec) + eps, game=f"s{step}{side}{i}", personality=P_, faction=F_)
+            r["knobs"] = {**{k: 1000 for k in tbo.KNOBS}, **vec}
+            rows.append(r)
+    return exp, rows
+
+
+def quadratic(theta_star):
+    def j(vec):
+        return -sum((math.log(vec[k]) - math.log(theta_star[k])) ** 2 for k in tbo.TUNABLE)
+    return j
+
+
+def test_spsa_converges_on_a_synthetic_quadratic():
+    theta_star = {"tempo": 1100, "greed": 1150, "production": 1050, "tech": 1180,
+                  "defence": 920, "power_margin": 880, "support": 1080}
+
+    def noise(side, i):
+        return 0.11 * (math.sin(i * 1.3) if side == "plus" else math.cos(i * 2.1))
+
+    learned = tbo.empty_learned()
+    steps = 60
+    for k in range(steps):
+        _, rows = spsa_rows(learned, k, tbo.MIN_MATCHES, quadratic(theta_star), noise)
+        tbo.write_spsa_update(rows, learned, tbo.MIN_MATCHES)
+    final = learned["knobs"][(P_, F_)]
+    assert learned["spsa_steps"][(P_, F_)] == steps
+    for knob, target in theta_star.items():
+        assert abs(final.get(knob, 1000) - target) <= 200, f"{knob}: {final.get(knob)} vs {target}"
+    dist = math.sqrt(sum((math.log(final.get(k, 1000)) - math.log(t)) ** 2 for k, t in theta_star.items()))
+    assert dist < 0.20, f"the committed fixture lands ~0.105 at sigma 0.16, got {dist:.3f}"
+    assert all(tbo.LEARN_MIN <= v <= tbo.LEARN_MAX for v in final.values())
+
+
+def test_spsa_zero_noise_approaches_the_target_monotonically():
+    theta_star = {"tempo": 1100, "greed": 1150, "production": 1050, "tech": 1180,
+                  "defence": 920, "power_margin": 880, "support": 1080}
+    j = quadratic(theta_star)
+    learned = tbo.empty_learned()
+
+    def dist():
+        f = learned["knobs"][(P_, F_)]
+        return math.sqrt(sum((math.log(f.get(k, 1000)) - math.log(t)) ** 2 for k, t in theta_star.items()))
+
+    for k in range(60):
+        _, rows = spsa_rows(learned, k, tbo.MIN_MATCHES, j)
+        tbo.write_spsa_update(rows, learned, tbo.MIN_MATCHES)
+    assert dist() < 0.10, "zero noise proves the update direction, not just damping (fixture: ~0.058)"
+    for k in range(60, 250):
+        _, rows = spsa_rows(learned, k, tbo.MIN_MATCHES, j)
+        tbo.write_spsa_update(rows, learned, tbo.MIN_MATCHES)
+    assert dist() < 0.05
+
+
+def test_spsa_perturbation_is_deterministic_signed_and_step_dependent():
+    a = tbo.spsa_delta(P_, F_, 0)
+    assert a == tbo.spsa_delta(P_, F_, 0), "same (personality, faction, k) -> same vector on any machine"
+    assert len(a) == len(tbo.TUNABLE) and all(v in (1, -1) for v in a)
+    vectors = {tuple(tbo.spsa_delta(P_, F_, k)) for k in range(8)}
+    assert len(vectors) > 1, "different steps change the perturbation"
+    scopes = {tuple(tbo.spsa_delta(p, f, 0)) for p, f in ((P_, F_), ("turtle", F_), (P_, "td_gdi"))}
+    assert len(scopes) > 1, "different scopes get different vectors"
+
+
+def test_spsa_two_arm_proposal_naming_files_and_switch_output():
+    learned = tbo.empty_learned()
+    exp = tbo.next_spsa_experiment([], learned, P_, F_)
+    assert (exp["plus_arm"], exp["minus_arm"]) == ("bo__rush__ra1_allies__spsa__k0__plus",
+                                                 "bo__rush__ra1_allies__spsa__k0__minus")
+    files = tbo.spsa_experiment_files(learned, P_, F_, exp)
+    assert set(files) == {exp["plus_arm"], exp["minus_arm"]}
+    for knob, d in exp["delta"].items():
+        pv, mv = exp["values"][knob]["plus"], exp["values"][knob]["minus"]
+        assert (pv - 1000) * d >= 0 or pv == tbo.LEARN_MAX, "the plus arm moves each knob along its delta sign"
+        assert (mv - 1000) * d <= 0 or mv == tbo.LEARN_MIN, "the minus arm moves opposite"
+        assert f"{knob}: {pv}" in files[exp["plus_arm"]] and f"{knob}: {mv}" in files[exp["minus_arm"]]
+    assert "# spsa step 0 plus" in files[exp["plus_arm"]]
+    spec = tbo.switches_text([exp["plus_arm"], exp["minus_arm"]])
+    assert spec.count("BuildOrderKnobsBotModule") == 2, "one existing-Seam group per arm - no new switch letter (R4)"
+    assert f"      LearnedFile: ai/learned/{exp['minus_arm']}.yaml" in spec
+
+
+def test_spsa_measured_step_waits_for_write_and_k_advances_exactly_once():
+    learned = tbo.empty_learned()
+    _, rows = spsa_rows(learned, 0, tbo.MIN_MATCHES, lambda v: 0.0)
+    assert tbo.next_spsa_experiment(rows, learned, P_, F_) is None, "a measured pair is not re-proposed"
+    tbo.write_spsa_update(rows, learned)
+    assert learned["spsa_steps"][(P_, F_)] == 1
+    n_processed = len(learned["processed_knobs"])
+    changes = tbo.write_spsa_update(rows, learned)
+    assert changes["spsa"] == [] and learned["spsa_steps"][(P_, F_)] == 1
+    assert len(learned["processed_knobs"]) == n_processed, "consumed games are not reprocessed"
+    assert tbo.next_spsa_experiment([], learned, P_, F_)["step"] == 1
+
+
+def test_spsa_under_sampled_pairs_do_not_write_or_advance_k():
+    learned = tbo.empty_learned()
+    _, rows = spsa_rows(learned, 0, tbo.MIN_MATCHES - 1, lambda v: 1.0)
+    changes = tbo.write_spsa_update(rows, learned)
+    assert changes["spsa"] == [] and learned["spsa_steps"].get((P_, F_)) is None
+    assert learned["knobs"] == {} and learned["processed_knobs"] == [], "the pair waits for more matches"
+
+
+def test_spsa_significantly_negative_z_still_updates_toward_the_minus_arm():
+    """R1 regression: when the minus arm wins, the update follows the measured direction - it is not dropped."""
+    learned = tbo.empty_learned()
+    probe = tbo.next_spsa_experiment([], learned, P_, F_)
+    knob = next(k for k in tbo.TUNABLE if probe["delta"][k] == 1)  # plus arm raises it -> -score makes minus win
+    exp, rows = spsa_rows(learned, 0, tbo.MIN_MATCHES, lambda v: -v[knob])
+    [d] = tbo.write_spsa_update(rows, learned)["spsa"]
+    assert d["z"] < -tbo.Z_CRIT and d["step_scale"] == tbo.SPSA_SCALE_FULL, "negative z is directional evidence"
+    moved = {m["knob"]: (m["old"], m["new"]) for m in d["moves"]}
+    old, new = moved[knob]
+    minus = exp["values"][knob]["minus"]
+    assert (new - old) * (minus - old) > 0, "the step moves toward the winning minus side (may overshoot to the bound)"
+    for m in d["moves"]:  # every moved knob goes toward its minus-arm side (delta sign handled by signed eff)
+        tgt = exp["values"][m["knob"]]["minus"]
+        assert (m["new"] - m["old"]) * (tgt - m["old"]) > 0
+    assert learned["spsa_steps"][(P_, F_)] == 1
+
+
+def test_spsa_weak_evidence_damps_but_still_updates():
+    learned = tbo.empty_learned()
+
+    def big_noise(side, i):  # paired diff noise ~1.0 swamps the tiny signal -> |z| small
+        return (0.5 if i % 2 else -0.5) * (1 if side == "plus" else -1)
+
+    _, rows = spsa_rows(learned, 0, tbo.MIN_MATCHES, lambda v: 0.001 * (v["tempo"] - 1000), big_noise)
+    [d] = tbo.write_spsa_update(rows, learned)["spsa"]
+    assert abs(d["z"]) < d["z_crit_used"] and d["step_scale"] == tbo.SPSA_SCALE_WEAK
+    assert learned["spsa_steps"][(P_, F_)] == 1, "a damped step still consumes its measured pair"
+
+
+def test_spsa_never_leaves_the_bounds_and_masks_clamped_deltas():
+    learned = tbo.empty_learned()
+    learned["knobs"][(P_, F_)] = {k: tbo.LEARN_MAX for k in tbo.TUNABLE}
+    vals = tbo.spsa_arm_values(learned, P_, F_, 0)
+    for k in tbo.TUNABLE:
+        assert tbo.LEARN_MIN <= min(vals[k]["minus"], vals[k]["plus"])
+        assert max(vals[k]["minus"], vals[k]["plus"]) <= tbo.LEARN_MAX
+    _, rows = spsa_rows(learned, 0, tbo.MIN_MATCHES, lambda v: sum(v.values()))
+    tbo.write_spsa_update(rows, learned)
+    assert all(tbo.LEARN_MIN <= v <= tbo.LEARN_MAX for v in learned["knobs"][(P_, F_)].values())
+
+    learned = tbo.empty_learned()
+    _, rows = spsa_rows(learned, 0, tbo.MIN_MATCHES, lambda v: 0.0,
+                        knob_override={k: {"plus": 1249, "minus": 1251} for k in tbo.TUNABLE})
+    [d] = tbo.write_spsa_update(rows, learned)["spsa"]
+    assert set(d["masked"]) == set(tbo.TUNABLE) and d["moves"] == []
+    assert learned["spsa_steps"][(P_, F_)] == 1, "a fully-masked pair still consumed its matches"
+
+
+def test_spsa_and_coordinate_arms_share_the_holm_family():
+    learned = tbo.empty_learned()
+    _, rows = spsa_rows(learned, 0, tbo.MIN_MATCHES, lambda v: -v["tempo"])
+    rows += arm_rows(BASE, [0.5] * tbo.MIN_MATCHES)
+    rows += arm_rows(UP, [0.5] * tbo.MIN_MATCHES)  # a coordinate arm with z ~ 0 sharing the scope
+    spsa_decs = tbo.spsa_decisions(rows, learned)
+    coord_decs = tbo.decisions(rows, learned)
+    tbo.combined_verdicts(coord_decs, spsa_decs)
+    [d] = [x for x in spsa_decs if x["enough"]]
+    assert d["z_crit_used"] > tbo.Z_CRIT, "family = coord arms + spsa pair widens the critical z"
+
+
+def test_spsa_composite_objective_and_load_matches_el_join(tmp_path):
+    r = row("a", 1.0)
+    r["el_mean_milli"] = 600.0
+    assert abs(tbo.composite_score(r) - (1.0 + tbo.EL_WEIGHT * 0.6)) < 1e-9
+    assert tbo.composite_score(row("a", 1.0)) == 1.0, "no engagement data -> neutral term"
+
+    logs = tmp_path / "bo__rush__ra1_allies__base_1" / "Logs"
+    logs.mkdir(parents=True)
+    match = {"game_uid": "g1", "duration_ticks": 27000, "allies": [], "opponents": [{"faction": "ra1_soviets"}],
+             "player": {"name": "Multi0", "faction": "ra1_allies", "outcome": "won", "personality": "rush"},
+             "stats": {"kills_cost": 9000, "deaths_cost": 1000}}
+    situation = {"game_uid": "g1", "player": "Multi0", "tick": 900,
+                 "own": {"build_order": {"personality": "rush", "opening": "eco"}}}
+    engagements = [
+        {"game_uid": "g1", "player": "Multi0", "score": {"total_milli": 400}},
+        {"game_uid": "g1", "player": "Multi0", "score": {"total_milli": 200}},
+        {"game_uid": "g1", "player": "Multi0", "score": {"total_milli": 900}, "skirmish": True},
+    ]
+    (logs / "cameo-ai-matches.jsonl").write_text(json.dumps(match), encoding="utf-8")
+    (logs / "cameo-ai-situations.jsonl").write_text(json.dumps(situation), encoding="utf-8")
+    (logs / "cameo-ai-engagements.jsonl").write_text("\n".join(json.dumps(e) for e in engagements), encoding="utf-8")
+    [r] = tbo.load_matches([tmp_path / "bo__rush__ra1_allies__base_1"])
+    assert r["el_n"] == 2 and abs(r["el_mean_milli"] - 300) < 1e-9, "skirmish records are excluded"
+    assert abs(tbo.composite_score(r) - (r["score"] + tbo.EL_WEIGHT * 0.3)) < 1e-9
+
+
+def test_spsa_steps_round_trip_and_are_invisible_to_the_game_parser():
+    learned = tbo.empty_learned()
+    learned["spsa_steps"][(P_, F_)] = 3
+    text = tbo.format_learned(learned)
+    assert "\tSpsaSteps:\n\t\tStep@rush__ra1_allies: 3\n" in text
+    assert tbo.parse_learned(text)["spsa_steps"] == {(P_, F_): 3}
+    # BuildOrderLearned.Parse reads only Knobs@*/Openings@* children of the root
+    # (BuildOrderKnobsEval.cs:361-403, no else clause): SpsaSteps is ignored by the game (R6).
+    assert tbo.parse_learned(tbo.format_learned(tbo.empty_learned())) == tbo.empty_learned()
+
+
+def test_spsa_trajectory_is_deterministic_end_to_end():
+    def run():
+        learned = tbo.empty_learned()
+        for k in range(5):
+            _, rows = spsa_rows(learned, k, tbo.MIN_MATCHES, lambda v: -v["tempo"],
+                                lambda s, i: 0.1 * (i % 3 - 1))
+            tbo.write_spsa_update(rows, learned)
+        return learned["knobs"], learned["spsa_steps"]
+
+    assert run() == run()

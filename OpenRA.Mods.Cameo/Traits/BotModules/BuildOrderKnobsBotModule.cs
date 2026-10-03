@@ -211,6 +211,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		bool resolved;
 		MasterAiBotModule master;
 		BotPersonalityController personalityController;
+		PlanBanditBotModule planBandit;
 		BaseBuilderBotModuleCA baseBuilder;
 		IBotUnitRoles roles;
 		IReadOnlyDictionary<string, HashSet<string>> tags;
@@ -314,6 +315,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var playerActor = player.PlayerActor;
 			master = playerActor.TraitsImplementing<MasterAiBotModule>().FirstEnabledTraitOrDefault();
 			personalityController = playerActor.TraitOrDefault<BotPersonalityController>();
+			planBandit = playerActor.TraitsImplementing<PlanBanditBotModule>().FirstEnabledTraitOrDefault();
 			baseBuilder = playerActor.TraitsImplementing<BaseBuilderBotModuleCA>().FirstEnabledTraitOrDefault();
 			roles = playerActor.TraitsImplementing<IBotUnitRoles>().FirstEnabledTraitOrDefault();
 			tags = BotTargetTags.BuildTagMap(world.Map.Rules);
@@ -357,7 +359,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				var presetMilli = preset != null && preset.TryGetValue(Knobs[i], out var p) ? p : BuildOrderKnob.Neutral;
 				var learnedMilli = Info.UseLearnedBuildOrder ? learned.Multiplier(personality, faction, Knobs[i]) : BuildOrderKnob.Neutral;
 				var jitter = BuildOrderKnobsEval.JitterMilli(Info.JitterPct, jitterDraws?[i] ?? 1000);
-				baseKnobs[i] = BuildOrderKnobsEval.Combine(presetMilli, learnedMilli, jitter, Info.KnobMin, Info.KnobMax);
+				var planMilli = planBandit?.PlanOverlayMilli(Knobs[i]) ?? BuildOrderKnob.Neutral;
+				baseKnobs[i] = BuildOrderKnobsEval.Clamp(
+					(int)(BuildOrderKnobsEval.Combine(presetMilli, learnedMilli, jitter, Info.KnobMin, Info.KnobMax) * (long)planMilli / BuildOrderKnob.Neutral),
+					Info.KnobMin, Info.KnobMax);
 			}
 
 			ApplyReact();
@@ -392,16 +397,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		// Player-level information only (the lobby faction of the main target, else the most common enemy faction), never actors.
 		string EnemyFaction()
 		{
-			var main = player.PlayerActor.TraitsImplementing<IBotMainTargetProvider>()
-				.Select(p => p.MainTarget).FirstOrDefault(t => t != null);
-			if (main != null)
-				return main.Faction?.InternalName ?? "";
-
-			return world.Players
-				.Where(p => p != player && !p.NonCombatant && !p.Spectating && player.RelationshipWith(p) == PlayerRelationship.Enemy)
-				.GroupBy(p => p.Faction?.InternalName).Where(g => g.Key != null)
-				.OrderByDescending(g => g.Count()).ThenBy(g => g.Key, StringComparer.Ordinal)
-				.Select(g => g.Key).FirstOrDefault() ?? "";
+			return PlanBanditBotModule.EnemyFactionOf(world, player);
 		}
 
 		void React(int tick)

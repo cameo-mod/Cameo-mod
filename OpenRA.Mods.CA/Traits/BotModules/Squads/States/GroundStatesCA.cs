@@ -135,6 +135,12 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			var engage = owner.SquadManager.Info.UseCombatPredictor
 				? owner.SquadManager.PredictsWin(owner, enemyUnits)
 				: AttackOrFleeFuzzyCA.Default.CanAttack(owner.Units.ConvertAll(u => u.Actor), enemyUnits);
+
+			// INC-N combat veto (§12.31): the veto cancels a commit the provider predicts loses — the squad
+			// takes the same retreat path as a losing fuzzy call. No provider = false, nothing changes.
+			if (engage && owner.SquadManager.VetoEngage(owner, enemyUnits, alreadyCommitted: false, out _))
+				engage = false;
+
 			if (engage)
 			{
 				// 6f: assault waves stage before committing so slow units catch
@@ -450,6 +456,20 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 						foreach (var u in owner.Units)
 							owner.Bot.QueueOrder(new Order("Move", u.Actor, Target.FromCell(owner.World, standOffCell), false));
 					return;
+				}
+
+				// INC-N combat veto (§12.31): an already-committed approach can still be cancelled at the
+				// lower abort line — the squad retreats instead of marching into the remembered wall.
+				// No provider = false, nothing changes.
+				if (siegeVerdict == SiegeVerdict.Advance && owner.IsTargetValid)
+				{
+					var vetoEnemies = owner.World.FindActorsInCircle(owner.Target.CenterPosition, WDist.FromCells(owner.SquadManager.Info.IdleScanRadius))
+						.Where(owner.SquadManager.IsPreferredObservedEnemyUnit).ToList();
+					if (owner.SquadManager.VetoEngage(owner, vetoEnemies, alreadyCommitted: true, out _))
+					{
+						owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsFleeStateCA(), false);
+						return;
+					}
 				}
 			}
 
