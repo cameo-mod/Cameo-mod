@@ -3585,3 +3585,48 @@ enumeration. Estimated well under 0.1 ms per tick average.
 engagements (seen block only), reset every match, gains are tuned knobs (DESIGN 19.2). The tier-1 fitter: per weapon-delivery x
 armour coefficients from `outcome` vs `seen.predicted_*` (truth for calibration only), and the response and suicide priors from
 `response` and `tactics`. `tools/ai/engagement_report.py` is the human view of both.
+
+### 12.31 CV — the combat veto: one predictor, one authority, every refusal a card (fleet ORDERS_2026-10-03 tier 2; owner NOVA)
+
+**Ruling** (DESIGN §19.13 tier 2): a provider consulted where a squad commits an attack or a retreat. It blocks
+(a) an attack whose predicted trade on SEEN forces — including remembered static defences — falls below threshold,
+and (b) a retreat that cannot outrun. It learns nothing ("variety proposes, the veto disposes"). **One authority:**
+the same `BotCombatPredictor` every predictor consumer already calls — the veto changes WHO decides, never the math
+(the existing `PredictsWin`/`PredictsLoss`/`CanAttack` paths stay when the provider is absent ⇒ bit-identical,
+`IBotSiegeAdvisor` pattern; resolved as `PlayerActor.TraitsImplementing<IBotCombatVeto>()`).
+
+**Seams** (all provider-absent ⇒ today's behaviour):
+- `GroundUnitsIdleStateCA` engage check (`GroundStatesCA` ~135): armed veto decides engage-or-veto, replacing the
+  raw `PredictsWin`/`CanAttack` call at this one point (same verdict semantics + cards).
+- `GroundUnitsAttackMoveStateCA` beside `EvaluateSiege` (~437): a vetoed approach stands down through the existing
+  `Retreat(flee)` de-commit path — catches "approaching a losing fight" before contact.
+- `CreateAttackForce` pre-commit: the wave's armed pool vs remembered defences at the target + remembered enemy
+  army, **parity-floored at own value** (`max(remembered, own)` per CP §2.3 — a loss must be *proven*, fog-honest).
+  Veto ⇒ skip the launch this interval + `Denied` card (the force keeps staging and reconsiders next interval).
+- `ShouldFlee`→flee sites: when flee is chosen and the pursuit outruns the squad (mean `BotUnitProfile.Speed` of the
+  seen pursuers ≥ own mean × `VetoFleeSpeedMarginPct` — the fuzzy's `RelativeSpeed` lifted into the predictor path),
+  veto ⇒ stand and fight (`AttackMove` at the threat): a retreat that cannot outrun trades 0, a stand trades
+  something.
+
+**Cards** (the one contract): `veto:<kind>:<tick>` mission ids; launch/engage vetoes = `Denied`/`outmatched`,
+flee vetoes = `Denied`/`x_no_outrun`, a stood-down committed squad closes `Released`/`outmatched` via `DismissSquad`.
+EL scores vetoed vs non-vetoed attacks off these records.
+
+**Priors seam** (tier-1 hook): `IBotEngagementPriors.CorrectionMilli(attackerProfile, targetProfile)` (1000
+neutral) applied inside the HP-share damage assembly before the Lanchester core runs — the formula stays in
+`BotCombatPredictor`. `EngagementPriorsBotModule` loads the same committed `ai/learned/arsenal_priors.yaml`
+`BotLearnedPriors` serves (`PriorsFile` knob, mod-relative), once at match start, frozen for the match, absent
+file ⇒ neutral; EMBER's `ArsenalPriors` parser is reused so there is one file format. The fitted file's
+granularity is (faction pair, own unit type) — `target` is unused at this granularity and stays in the API for
+the finer attacker×target table a later fitter may write. The code stays stat-normalised per fleet rule.
+
+**Perf**: per-squad verdict cached `VetoCacheTicks` (25); the launch check runs once per `AttackForceInterval`;
+no per-tick world enumeration beyond what the consult sites already compute.
+
+**Knobs** (`CombatVetoBotModule`, genericbot-only): `VetoEngageRatioPct` 50, `VetoAbortRatioPct` 35
+(hysteresis: enter ≥50, exit <35), `VetoLaunchRatioPct` 60, `VetoFleeSpeedMarginPct` 100, `VetoCacheTicks` 25,
+`DefenceIncludeCells` 12. `EngagementPriorsBotModule`: `PriorsFile` `ai/learned/arsenal_priors.yaml`,
+`MinCorrectionMilli` 500, `MaxCorrectionMilli` 2000.
+
+**Switch**: `AN_combat_veto` — `GrantConditionOnBotOwner@combatveto` + `RequiresCondition: genericbot && combatveto`
+on both modules. Default off; classic never sees the provider.
