@@ -25,7 +25,8 @@ same file out.
     python tools/ai/fit_engagement_priors.py <batch-dir> [...] [--write mods/cameo/ai/learned/engagement_priors.yaml]
 
 Without --write it prints a report. The yaml is a committed, reviewed data file read frozen at
-match start (DESIGN 19.2); no game code reads it until the phase-B consumer lands.
+match start (DESIGN 19.2); no game code reads it until the phase-B consumer lands behind the
+default-OFF `AP_tier1_priors` increment group.
 """
 from __future__ import annotations
 

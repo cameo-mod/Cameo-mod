@@ -3596,5 +3596,5 @@ per-type census, so `engagement/1` gained record-only `composition` maps (`seen.
 them. A Random lobby slot resolves invisibly to the opponent, so any in-match faction-keyed lookup honours
 `enemy_faction_public` (false -> family/global pool; ruling 2). Output: `mods/cameo/ai/learned/engagement_priors.yaml`,
 `LedgerHash`-versioned so a rebalance reverts moved cells to neutral; consumed by the tier-2 veto predictor once that lands
-(phase B), gated by a default-OFF `AO_tier1_priors` switch (letter provisional). Shrinkage is pseudo-evidence K = 5000 damage
+(phase B), gated by the default-OFF `AP_tier1_priors` switch. Shrinkage is pseudo-evidence K = 5000 damage
 credit toward the pipeline prior, clamped [500, 2000] milli, one record capped at 4x the median record's traded value.

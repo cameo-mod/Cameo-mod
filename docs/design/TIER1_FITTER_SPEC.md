@@ -211,7 +211,7 @@ at match start (frozen, §19.2); bots run host-only so there is no sync surface 
 
 ## 7. The switch
 
-Increment group `AO_tier1_priors` (letter provisional — next free group at merge time), arming
+Increment group `AP_tier1_priors` (letter assigned by the lead; DAWN took `AO` for tier 3), arming
 condition `tier1_priors` on the priors provider (`genericbot && tier1_priors`, classic never sees
 it — same seam as `combatveto`). Default OFF: with the group unarmed the provider is disabled and
 `CorrectionMilli` returns 1000 — pure `BotCombatPredictor`, bit-identical.
@@ -233,7 +233,7 @@ log additions are record-only and need no switch.)
 - `docs/design/AI_ARCHITECTURE.md` — new §12.32 describing tier 1 (short, §12.30/§12.31 style).
 - `OpenRA.Mods.Cameo/Traits/BotModules/EngagementPriorsBotModule.cs` — serve the new table
   (consumer-side; coordinates with NOVA's branch — lands after/incorporates it).
-- `tools/ai/increment_switches.yaml` — group `AO_tier1_priors`.
+- `tools/ai/increment_switches.yaml` — group `AP_tier1_priors`.
 
 ## 9. Acceptance tests
 
@@ -264,7 +264,7 @@ log additions are record-only and need no switch.)
    consumers keyed by enemy faction use only lobby view → Random falls back to game-family/global.
    The offline fitter may use the real faction.
 3. Separate output file `mods/cameo/ai/learned/engagement_priors.yaml`: **approved**.
-4. Switch: `AO_tier1_priors` provisional, default OFF; final letter assigned at increment time.
+4. Switch: `AP_tier1_priors`, default OFF (letter assigned by the lead once DAWN took `AO` for tier 3).
 5. Queue: coordinator records tier 1 moved from EMBER to Devin-Tier1 in HANDOFF.
 
 Scope split (one owner per file-set): `EngagementPriorsBotModule.cs` lives on NOVA's unlanded
