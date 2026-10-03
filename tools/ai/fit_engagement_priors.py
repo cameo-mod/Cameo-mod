@@ -41,6 +41,7 @@ sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1] / "audit"))
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1] / "balance"))
 import ai_log_common as c  # noqa: E402
+from firepower import armament_firepower  # noqa: E402
 
 REPO = pathlib.Path(__file__).resolve().parents[2]
 PHASE_TICKS = 6000
@@ -76,7 +77,7 @@ def load_profiles(repo: pathlib.Path) -> tuple[dict, dict, str]:
     """name.lower() -> {cost, hp, armor, weapons: [(tag, dpt)]}; delivery tag -> Versus table;
     the ledger hash. Built from docs/balance/*.json raw ledgers only."""
     profiles: dict[str, dict] = {}
-    collisions = 0
+    collisions: list[str] = []
     ledger_files = []
     for path in sorted((repo / "docs" / "balance").glob("*.json")):
         try:
@@ -94,7 +95,7 @@ def load_profiles(repo: pathlib.Path) -> tuple[dict, dict, str]:
                     continue
                 key = name.lower()
                 if key in profiles:
-                    collisions += 1
+                    collisions.append(key)
                     continue
                 weapons = []
                 for arm in a.get("armaments") or []:
@@ -105,7 +106,11 @@ def load_profiles(repo: pathlib.Path) -> tuple[dict, dict, str]:
                     delays = [_int(x) for x in str(arm.get("burstdelays") or "").split(",") if str(x).strip()]
                     burst = max(1, _int(arm.get("burst"), 1))
                     cycle = cycle_ticks(_int(arm.get("reloaddelay"), 1), burst, delays)
-                    weapons.append((main.get("tag") or "", _int(main.get("damage")) * burst / cycle))
+                    # dpt carries the actor's resolved unconditional firepower product
+                    # (firepower.armament_firepower): a buffed unit's real output differs
+                    # from its raw damage and must not leak into the delivery x armour cells.
+                    dpt = _int(main.get("damage")) * burst / cycle * armament_firepower(a, arm)
+                    weapons.append((main.get("tag") or "", dpt))
                 profiles[key] = {
                     "cost": _int((a.get("cost") or {}).get("v")),
                     "hp": _int((a.get("hp") or {}).get("v")),
@@ -119,14 +124,17 @@ def load_profiles(repo: pathlib.Path) -> tuple[dict, dict, str]:
     return profiles, {"collisions": collisions, "ledger_files": len(ledger_files)}, digest.hexdigest()
 
 
-def versus_priors(repo: pathlib.Path, tags: list[str]) -> dict[str, dict[str, int]]:
-    """delivery tag -> {armor -> percent}, resolved through miniyaml.Ruleset (rule 8e).
+def versus_priors(repo: pathlib.Path, tags: list[str]) -> tuple[dict[str, dict[str, int]], list[str]]:
+    """delivery tag -> {armor -> percent}, resolved through miniyaml.Ruleset (rule 8e), plus the
+    sorted tags whose table came out EMPTY. Empty-prior tags are excluded from the cell fit
+    entirely - fitting them against the default-100 prior would fake residuals (lead review).
     Tags already carry the level (Bullet_Medium); unresolved tags get the family template."""
     from miniyaml import Ruleset
     from percentage_damage import versus_table
 
     rules = Ruleset(repo)
     priors: dict[str, dict[str, int]] = {}
+    excluded: list[str] = []
     for tag in tags:
         table: dict[str, int] = {}
         for name in (f"^Warhead_{tag}", f"^Warhead_{tag.rsplit('_', 1)[0]}"):
@@ -137,8 +145,11 @@ def versus_priors(repo: pathlib.Path, tags: list[str]) -> dict[str, dict[str, in
             table = versus_table(wh) if wh is not None else {}
             if table:
                 break
-        priors[tag] = table
-    return priors
+        if table:
+            priors[tag] = table
+        else:
+            excluded.append(tag)
+    return priors, sorted(excluded)
 
 
 # ── the fit ────────────────────────────────────────────────────────────────────────────────
@@ -272,6 +283,8 @@ def fit(data: dict, profiles: dict, priors: dict) -> dict:
                         if not p:
                             continue
                         for tag, dpt in p["weapons"]:
+                            if tag not in priors:  # empty Versus prior: excluded, never fitted
+                                continue
                             w = n * dpt * priors.get(tag, {}).get(a, 100) / 100.0
                             e = power.setdefault(tag, [0.0, 0.0])
                             e[1 if is_def else 0] += w
@@ -362,8 +375,13 @@ def fit(data: dict, profiles: dict, priors: dict) -> dict:
 
 def report(result: dict) -> str:
     s = result["skipped"]
+    meta = result.get("meta") or {}
     out = [f"{result['fitted']} fitted engagements "
            f"({s['skirmish']} skirmish, {s['no_composition']} pre-composition, {s['unmapped']} unmapped skipped)"]
+    if result.get("excluded_tags"):
+        out.append(f"excluded delivery tags (empty Versus prior, not fitted): {', '.join(result['excluded_tags'])}")
+    if meta.get("collisions"):
+        out.append(f"profile-name collisions (first ledger wins): {', '.join(meta['collisions'])}")
     out.append(f"attrition exponent: {result['exponent_milli']} milli | into-defences: {result['into_defences_milli']} milli")
     moved = [(k, v, result["evidence"][k]) for k, v in result["cells"].items() if v != 1000]
     moved.sort(key=lambda x: -abs(x[1] - 1000))
@@ -388,7 +406,10 @@ def report(result: dict) -> str:
 def to_yaml(result: dict, ledger_hash: str) -> str:
     lines = ["# GENERATED by tools/ai/fit_engagement_priors.py - do not edit by hand; regenerate and review.",
              "# Tier-1 offline priors (TIER1_FITTER_SPEC, DESIGN 19.13/19.2): read at match start, frozen.",
-             f"# {result['fitted']} fitted engagements.", "BotEngagementPriors:", "\tSchema: 1",
+             f"# {result['fitted']} fitted engagements."]
+    if result.get("excluded_tags"):
+        lines.append(f"# excluded delivery tags (empty Versus prior, not fitted): {', '.join(result['excluded_tags'])}")
+    lines += ["BotEngagementPriors:", "\tSchema: 1",
              f"\tLedgerHash: {ledger_hash}", f"\tEngagements: {result['fitted']}",
              f"\tAttritionExponentMilli: {result['exponent_milli']}",
              f"\tIntoDefencesMilli: {result['into_defences_milli']}"]
@@ -416,9 +437,10 @@ def main() -> int:
 
     profiles, meta, ledger_hash = load_profiles(args.repo)
     tags = sorted({tag for p in profiles.values() for tag, _ in p["weapons"]})
-    priors = versus_priors(args.repo, tags)
+    priors, excluded = versus_priors(args.repo, tags)
     result = fit(c.load(args.dirs), profiles, priors)
     result["meta"] = meta
+    result["excluded_tags"] = excluded
     if args.json:
         print(json.dumps(result, indent=2, default=str))
     else:

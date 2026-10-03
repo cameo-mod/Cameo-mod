@@ -155,3 +155,90 @@ def test_armour_share_and_quantiles():
     assert fp.armour_share({"tank": 2, "rifle": 1}, PROFILES) == {"Heavy": 1600, "None": 100}
     assert fp.quantiles([1, 2, 3, 4, 5], (50,)) == [3]
     assert fp.quantiles([], (50, 90)) == [None, None]
+
+
+def _write_ledger(root, name, actor):
+    import json
+    (root / "docs" / "balance").mkdir(parents=True, exist_ok=True)
+    (root / "docs" / "balance" / name).write_text(json.dumps(
+        {"ledger": {}, "sections": {"g": {actor["name"]: actor}}}), encoding="utf-8")
+
+
+def _arm(damage=12000, burst=1, reloaddelay=30, tag="CannonAP_Medium", **kw):
+    a = {"damage_warheads": [{"damage": str(damage), "tag": tag}],
+         "burst": str(burst), "reloaddelay": str(reloaddelay)}
+    a.update(kw)
+    return a
+
+
+def test_firepower_modifier_scales_priced_dpt(tmp_path):
+    # armament_firepower(unit, arm): modifier/100 per applicable entry, armament_name-scoped.
+    actor = {"name": "buffed", "armaments": [_arm(tag="Bullet_Light"), _arm(tag="CannonHE_Light", armament_name="secondary")],
+             "resolved_firepower_modifiers": [{"modifier": 50, "types": []},
+                                            {"modifier": 200, "types": ["secondary"]}]}
+    _write_ledger(tmp_path, "f.json", actor)
+    profiles, _, _ = fp.load_profiles(tmp_path)
+    w = dict(profiles["buffed"]["weapons"])
+    raw = 12000 / 30
+    assert w["Bullet_Light"] == pytest.approx(raw * 0.5)         # global 50 applies
+    assert w["CannonHE_Light"] == pytest.approx(raw * 0.5 * 2)   # global 50 + secondary 200
+
+
+def test_firepower_modifier_does_not_move_the_cell():
+    # two identical units, one priced with modifier 50: same record, same outcome -> the
+    # delivery cell must read identically; the modifier scales BOTH sides of the ratio.
+    def rec_with(u):
+        r = _rec()
+        r["seen"]["start"]["composition"]["own_units"] = {u: 1}
+        return r
+
+    buffed = dict(PROFILES, tankb={"cost": 800, "hp": 400, "armor": "Heavy",
+                                   "weapons": [("CannonAP_Medium", 20.0)]})  # dpt halved at pricing
+    unbuffed = dict(PROFILES, tankb={"cost": 800, "hp": 400, "armor": "Heavy",
+                                     "weapons": [("CannonAP_Medium", 40.0)]})
+    cells_b = fp.fit({"engagements": [rec_with("tankb")] * 12, "matches": []}, buffed, PRIORS)["cells"]
+    cells_u = fp.fit({"engagements": [rec_with("tankb")] * 12, "matches": []}, unbuffed, PRIORS)["cells"]
+    assert cells_b == cells_u
+
+
+def test_halved_dpt_rescales_mixed_force_attribution():
+    # Within one record obs and exp share the dpt weight (it cancels). Where pricing matters
+    # is pooled across records: two fights, same expected, different overperformance. Halving
+    # D2's priced dpt pushes more of both records' credit mass onto D1's cell.
+    prof = dict(PROFILES)
+    prof["twin1"] = {"cost": 400, "hp": 200, "armor": "Heavy", "weapons": [("CannonAP_Medium", 40.0)]}
+
+    def rec_pair(dpt2):
+        p2 = dict(prof, twin2={"cost": 400, "hp": 200, "armor": "Heavy",
+                               "weapons": [("CannonHE_Light", dpt2)]})
+        recs = []
+        for killed in (100, 300):
+            r = _rec()
+            r["seen"]["start"]["composition"]["own_units"] = {"twin1": 1, "twin2": 1}
+            r["seen"]["start"]["predicted_enemy_surviving_permille"] = 0  # expected 100
+            r["outcome"]["enemy_killed_value"] = killed
+            recs.append(r)
+        return fp.fit({"engagements": recs * 10, "matches": []}, p2, PRIORS)["cells"]
+
+    key = ("CannonAP_Medium", "None")
+    assert rec_pair(20.0)[key] > rec_pair(40.0)[key]
+
+
+def test_empty_versus_prior_tags_are_excluded():
+    priors = dict(PRIORS)
+    del priors["CannonAP_Medium"]  # tank's only delivery now has no resolved Versus table
+    res = fp.fit({"engagements": [_rec()] * 10, "matches": []}, PROFILES, priors)
+    assert all(k[0] != "CannonAP_Medium" for k in res["cells"])
+
+
+def test_profile_collisions_are_named():
+    import json
+    import tempfile
+    with tempfile.TemporaryDirectory() as td:
+        root = pathlib.Path(td)
+        (root / "docs" / "balance").mkdir(parents=True)
+        for ledger in ("a.json", "b.json"):
+            (root / "docs" / "balance" / ledger).write_text(json.dumps(
+                {"ledger": {}, "sections": {"g": {"dup_unit": {"armaments": []}}}}))
+        _, meta, _ = fp.load_profiles(root)
+    assert meta["collisions"] == ["dup_unit"]
