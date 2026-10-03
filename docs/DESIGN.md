@@ -5122,6 +5122,11 @@ into the enemy army."*
   (own actors, `Shroud.IsVisible`, `CanBeViewedByPlayer`, frozen/fog memory), never on an enumeration of enemy
   actors it cannot see, and never sets a visibility switch (`Check…Visibility: false`,
   `UseFoggedObservation: false`) off.
+* **An attacker is fair information — not an exception (maintainer 2026-10-03).** A unit or defence that fires is
+  revealed to the player it hits (`RevealOnFire` on the base templates, e.g. `^DefaultSoldier`, `^BasicDefense`).
+  That is a game rule for players and bots alike, made so the victim can return fire. A bot may therefore read
+  `AttackInfo.Attacker` (its position, type and owner) in `IBotRespondToAttack`. This includes artillery firing
+  from the fog. Reviews and audits must not flag it as omniscience.
 * **`classic`** stays the omniscient A/B reference (the Nuclear Winter gate is fog-blind Frankenstein vs
   omniscient `classic`).
 * **Guard:** `tools/audit/audit_fog_honesty.py` fails when a `genericbot` module switches a visibility check off
@@ -5242,6 +5247,66 @@ every few seconds:
   entries are ignored for every building a category covers; entries left (genuinely one-of-a-kind buildings) stay until
   reviewed.
 * `classic` keeps its fixed limits (the A/B reference). Spec and owners: `design/AI_ARCHITECTURE.md` §12.22.
+
+### 19.11 Emergency means losing, and it never rewrites the posture (maintainer 2026-10-03) — binding
+
+**The measurement that forced it.** In a 16-match smoke on master (`hard` vs `classic`, A Nuclear Winter, 2026-10-02),
+`hard` sat in `Emergency` in 1,928 of 2,739 situation snapshots (70%), and every match ended in `turtle`. 84% of those
+Emergency snapshots had a combat ratio ≥ 100%: the bot was winning. The trigger was a fixed 600-credit loss inside
+`LossWindowTicks` (750) with no reference to the bot's own army or to its kills. That is about 5% of a mid-game army
+(the median Emergency snapshot had lost 4,500 against an army of 12,400 and had killed 3,470).
+
+**The law.**
+* **Emergency means losing.** The loss trigger needs both a loss that is large *relative to the bot's own army*
+  (losses in the window as a % of own army + those losses) and a net loss (losses > kills in the same window). The
+  absolute 600 stays as a floor, so early skirmishes never qualify. Losing a production building still triggers
+  Emergency on its own. The trigger keeps its on/off hysteresis (clear at half the on-value).
+* **An emergency changes urgency and the target, never the personality.** This answers AI_ARCHITECTURE open question
+  #10. An emergency does not force `turtle`. The personality follows the normal candidates and the sustained-candidate
+  delay, exactly as under `Pressured`, so the terminal "turtle under pressure" fallback still exists, earned the slow
+  way.
+* Ships behind `AL_emergency_net_loss` (default off; `classic` has no `MasterAiBotModule`); the defaults reproduce
+  the old rule bit for bit until the increment's A/B.
+
+### 19.12 The army waits at the front, with the defences, and splits only when the base is hit from several sides (maintainer 2026-10-03) — binding
+
+> *"The bots like to have their army far back in their base instead at the front line and then react too late when
+> someone attacks them … there should always be a bias towards positioning the army on the outer edge of the base where
+> also the base defenses are … The only acceptable situation [for the centre] is if a lot of sneak attacks happen that
+> bypass the defenses."* — and — *"have several smaller defense squads ready if the base is attacked from multiple
+> directions at once over the game … but then if they are attacked only from one side all should immediately go to
+> that side to defend. The bots need to be more dynamic and react to what's happening in game."*
+
+**Why (and how it compares).** Damage taken before help arrives grows with the distance help has to travel, and towers
+plus an army are far stronger together than apart (§19.7 puts ~75% of the defences on the rim). Before this ruling a
+new unit waited at a random cell within 8 of its factory (`ChooseRallyLocationNear`), and a squad that fled or went
+idle walked to a random own building (`GoToRandomOwnBuilding`). Both points are deep inside the base, so the rim
+defences fought alone until the army arrived. Every RTS we compared stages the main army forward on the threat axis.
+StarCraft II armies wait at the natural or third base, C&C armies at the main approach among the towers, and Age of
+Empires armies at the walls. Raids are answered by static defence plus a small home reserve, never by pulling the main
+army back. A central position ("interior lines") is right only against threats from every side at once.
+
+**The law.**
+* **One staging point per threatened side, on the rim, just inside the defence line.** For the side's direction the
+  point sits a few cells inside the median radius of the armed buildings there (or the outermost buildings if it has
+  no defences). The army waits concentrated at that point and is never staged beyond tower range.
+* **Where threats come from is SEEN, never known (§19.5).** The prior is the directions to enemy spawn candidates
+  (public map data, allied spawns excluded) and to seen enemy buildings. In team games that means the enemy team's
+  side, not the geometric rim. The bot then learns from its own attack events: each ground attack on an own actor in
+  or near the base adds weight to its direction sector, with a decay so the picture follows the game. Air attacks are
+  the anti-air defences' job and add no weight.
+* **Several sides hit over the game → several defence groups.** Each sector that carries a real share of the recent
+  attack weight gets its own defence group, sized by that share and staged on its rim. A group too small to fight
+  merges into its neighbour, so the bot never splinters into pieces that lose one at a time.
+* **Attacks from behind (inside the defence ring) → a centre reserve**, sized by the inside share of the attack weight
+  and capped. The whole army waits in the centre only when inside attacks clearly outweigh rim attacks.
+* **Live reaction beats the plan.** If an attack is live on ONE side, every group and the reserve converge on it at
+  once. If several sides are hit at once, each group answers its own side and the reserve goes to the heaviest attack.
+  When the attack is over, the groups return to their staging points.
+* **One owner, orders only (§19.3, §19.6, §19.8).** A staging provider computes the plan (sectors, groups, points,
+  live assignments). The squad manager remains the only module that holds and orders the units, and the base builder
+  points factory rally points at the staging point. No provider (`classic`, switch off) = today's behaviour bit for
+  bit. Switch `AM_army_staging`; spec and constants in `design/AI_ARCHITECTURE.md` §12.28.
 
 ## 20. AI bot unit compositions
 

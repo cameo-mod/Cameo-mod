@@ -854,7 +854,7 @@ for the main target unless stated.
 | Stealth reliance | (keep) | detector demand |
 | Economic boom, no army | Rush | punish now; the window closes |
 | Superweapon under construction | Rush/Guerrilla | urgency override on hold time |
-| We lost production structures | Turtle | rebuild before committing |
+| We lost production structures | Turtle (as a candidate, never forced — DESIGN §19.11) | rebuild before committing |
 | Two enemies focusing one ally | (keep) | target the aggressor, not the score leader |
 | No contact / nothing known | Expansion | scout; take map while blind |
 | No signal crosses a threshold (terminal fallback) | Turtle if Pressured, else Expansion | the candidate set always yields a posture; the incumbent is no longer a silent default |
@@ -876,7 +876,7 @@ document.
 ### 4.5 Switching policy
 
 Copy CN's shape, with numbers as tunable fields, not constants: slow re-evaluation cadence
-(~1500 ticks); a fast emergency check (~25 ticks) that can force Turtle on a danger spike; a
+(~1500 ticks); a fast emergency check (~25 ticks) that raises urgency on a danger spike (it forced Turtle until DESIGN §19.11, 2026-10-03); a
 minimum hold time (~3000 ticks); an incumbent momentum bonus small enough not to mask the signal
 each personality exists for; earliest-tick and army-ratio gates so Steamroller cannot be chosen
 before a mass exists; and a per-personality coverage penalty across allied bots so a team of bots
@@ -1286,8 +1286,9 @@ weights, hence bandits with exploration rather than fixed tables), and **distrib
    emergency cadence is not.
 10. **What may an emergency override change** — target and urgency only, or the personality too? CN
     switches the personality straight to Turtle on a danger spike (§1.6); the review reply argues an
-    emergency should never rewrite the strategic posture. Unresolved conflict, and the answer decides
-    whether §4.5's fast path needs its own hold time.
+    emergency should never rewrite the strategic posture. **RULED 2026-10-03 (DESIGN §19.11): target and
+    urgency only.** An emergency never rewrites the personality, and it fires only on a net loss that is
+    large relative to the bot's own army. Switch `AL_emergency_net_loss`.
 11. **Do CN's hysteresis constants ship as Cameo's defaults**, or get re-fitted from phase-2 logs
     before phase 3 turns switching on? Leaning: ship CN's as the starting point, since they were
     tuned against a switching bot in this engine family, and re-fit after the first logged matches.
@@ -1630,7 +1631,7 @@ cadence limits in §4.5 are not just anti-thrash tuning, they are the cost contr
 
 | Loop | Cadence | Work |
 |---|---|---|
-| Emergency check | ~25 ticks | danger delta only; can force Urgency=Emergency and Turtle |
+| Emergency check | ~25 ticks | danger delta only; can force Urgency=Emergency, never the personality (DESIGN §19.11) |
 | Snapshot rebuild | ~150 ticks | per-enemy signal scan, counter demand, hints |
 | Target + personality decision | ~1500 ticks | scoring, hysteresis, the order |
 | Log flush | match end + on switch | append JSONL (§6) |
