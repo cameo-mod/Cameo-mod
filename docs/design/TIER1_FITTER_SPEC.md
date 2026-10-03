@@ -59,14 +59,20 @@ Rules:
 
 - `composition` object inside `seen.start`, `seen.end`, `truth.start`, `truth.end`:
   `{"units": {"<actor_name>": <count>}, "defences": {"<actor_name>": <count>}}`.
+  Uncapped, types with count > 0 only, keys sorted (deterministic records) — **ruling 1**.
   `seen` keeps the existing visibility filter (visible or frozen enemies only); `truth` stays
   unfogged. Unit ids in the *input* log are permitted — the "never per-unit ids" rule binds the
   OUTPUT coefficient keys, and the existing `arsenal_priors.yaml` precedent already keys on names.
-- `enemy_faction` on the record header. The opponent's faction is lobby-public information (chosen
-  openly), so this is fog-honest and removes the need to pair records across players for faction
-  identity. (Record pairing on `game_uid` + overlapping `(centroid, start_tick)` remains the
-  fallback for logs written before this field exists, cross-checked against
-  `cameo-ai-matches.jsonl` which lists both players' factions per `game_uid`.)
+- `enemy_faction` on the record header — the REAL faction of the dominant enemy participant
+  (by committed value), record-only/offline — plus `enemy_faction_public` (bool: the enemy's
+  lobby slot showed a concrete faction) — **ruling 2**. A lobby slot set to "Random" resolves at
+  game start and is NOT public to opponents in-match, so `enemy_faction` is not lobby-public in
+  that case. Any in-match lookup keyed by enemy faction (`AttackTiming@`, `SuicideIndex@`, …)
+  may use only what the bot's lobby view shows; if the slot is Random the consumer falls back to
+  the game-family / global pool. The offline fitter may use the real `enemy_faction` freely.
+  (Record pairing on `game_uid` + overlapping `(centroid, start_tick)` remains the fallback for
+  logs written before this field exists, cross-checked against `cameo-ai-matches.jsonl` which
+  lists both players' factions per `game_uid`.)
 - JSONL readers ignore unknown keys; old records still parse (they fit nothing new — only new
   records with `composition` feed the cell grid). Version stays `engagement/1` (additive fields,
   no semantic change), matching how schema-2 situation records were added under the same writer rule.
@@ -118,7 +124,10 @@ applies uniformly. Bounded [0.5, 2.0], shrinks to 1.0 (square law) without evide
 - `AttackTiming[enemy_faction][phase]`: distribution over director phases / 6000-tick buckets of
   first `attack`-kind engagements that faction initiates (their record's `kind` mirrored: an
   engagement that is `defend` for us is `attack` for them — the cross-record pair supplies it; or
-  directly from `enemy_faction`'s own records in the same `game_uid`).
+  directly from `enemy_faction`'s own records in the same `game_uid`). **Ruling 2 applies:**
+  in-match, a lookup keyed by enemy faction uses only lobby-public faction knowledge — a Random
+  slot (`enemy_faction_public: false`) falls back to the game-family / global pool. The offline
+  fit itself uses the real faction.
 - `Response[own_faction][phase]`: `response_ticks` quantiles (p50/p90) and
   `army_dist_at_start_cells` medians for `defend` records — the expected-defence calibration.
 - `SuicideIndex[faction-pair]`: shrunk median of `tactics.suicide_index_milli` for attack records.
@@ -246,13 +255,17 @@ log additions are record-only and need no switch.)
 4. Report mode (`--json`) prints per-cell evidence counts so the reviewer sees which cells moved
    and why (the "review the new file" gate of §19.2).
 
-## 10. Open questions for the coordinator
+## 10. Rulings (coordinator, 2026-10-03 — spec approved)
 
-1. Composition logging adds ~1–3 KB per engagement record. Acceptable, or cap at top-N types?
-2. `enemy_faction` in the header: faction is lobby-public — confirm no fog objection. (Pairing
-   fallback exists either way.)
-3. Own output file vs folding residuals into `arsenal_priors.yaml` — spec keeps them separate
-   (different granularity and consumers); OK?
-4. Switch letter `AO` is provisional against whatever lands first (NOVA used `AN_combat_veto`,
-   DAWN `AN_tier3_bandits` on branches).
-5. EMBER's HANDOFF slot vs this assignment — flagging so the queue doesn't double-assign.
+1. Composition logging: **uncapped** (types with count > 0 only), key order **sorted** for
+   deterministic records.
+2. `enemy_faction` header: **approved record-only/offline**. A lobby "Random" slot resolves at
+   game start and is not public in-match: `enemy_faction_public` (bool) distinguishes it. In-match
+   consumers keyed by enemy faction use only lobby view → Random falls back to game-family/global.
+   The offline fitter may use the real faction.
+3. Separate output file `mods/cameo/ai/learned/engagement_priors.yaml`: **approved**.
+4. Switch: `AO_tier1_priors` provisional, default OFF; final letter assigned at increment time.
+5. Queue: coordinator records tier 1 moved from EMBER to Devin-Tier1 in HANDOFF.
+
+Scope split (one owner per file-set): `EngagementPriorsBotModule.cs` lives on NOVA's unlanded
+tier-2 branch — the consumer change is PHASE B, a separate task after tier 2 lands.
