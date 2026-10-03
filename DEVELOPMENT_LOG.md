@@ -135,6 +135,40 @@ Spec checkpointed before coding (WORKFLOW 1.7):*
   decayed Welford, writes learned file.
 - `tools/ai/increment_switches.yaml` — `AO_tier3_bandits`.
 - `OpenRA.Mods.Cameo.Test/PlanBanditMathTest.cs` — pooling/floor/determinism/parse/decay tests.
+# 2026-10-03 — coordinator (AionUI team): review round for the tier-2/3 hand-ins + tier-1 spec started
+
+*Claude (Opus 5.5), lead of an AionUI team of 4 Devin agents; worktree `G:/cameo-wt/claude-lead`, branch `claude/lead_1003_reviews`.*
+
+**State found:** master `5e5639cd2` = origin, #788 + #789 merged, main-checkout staged merge already resolved (tree clean).
+Hand-ins waiting: `devin/nova/am-nre-guard@28573b84d` (P0 NRE guard — reviewed, correct, merge-ready), NOVA tier 2
+**built twice** (#790 `nova/t2_combat_veto`, 4 behind master, vs `devin/nova/inc-n-combat-veto@150429f3f`, 0 behind),
+DAWN tier 3 `devin/dawn/tier3-bandits@17fc9d8e2`, NOVA #791 ledger re-extract. Tier 1 (EMBER) has no branch; the
+HANDOFF's `ORDERS_2026-10-03_claude_learning_tiers.md` does not exist anywhere in the repo.
+**Dispatched (read-only verifiers, no commits):** T2-VERIFY (which tier-2 lands), T3-VERIFY, LEDGER-VERIFY (#791 reproducible
+from `extract_stats`?); TIER1-SPEC → `docs/design/TIER1_FITTER_SPEC.md` on `devin/tier1-fitter` (spec first, lead approves).
+**Disk:** C: was at 1.1 GB free (≈200 worktrees under `C:/tmp`, ~2 GB each) — a `git worktree add` failed mid-checkout.
+All new worktrees go to **`G:/cameo-wt/`** (865 GB free). Pruning stale `C:/tmp` worktrees needs a maintainer decision.
+**Results (later):** LEDGER-VERIFY: #791 byte-identical to a fresh `extract_stats` on its parent (71/71 files), drift
+33 → 0, docs/balance only → merge-ready. T3-VERIFY: tier 3 `17fc9d8e2` builds 0 err, 822/822 tests, fog/mutation PASS →
+ACCEPTED for the increment (its "LocalRandom desync" flag is a false positive: bots activate host-only, `Player.cs:223`;
+SharedRandom there WOULD desync; DEVELOPMENT_LOG conflict + stale module map are increment-time chores). Tier-1 spec
+`40cbe9d0d` APPROVED with rulings (Random-slot faction is not public → `enemy_faction_public`); phase A dispatched.
+**Found — fog leak, post-increment fix:** enemy-faction reads use `Player.Faction` (a Random slot's RESOLVED faction) not
+`DisplayFaction` (lobby choice, `Player.cs:65/177`): `BotLearnedPriors.cs:141,145`, `BotSituation.cs:1660,1732`,
+`BuildOrderKnobsBotModule.cs:398,402`, tier-3 `EnemyFactionOf`. One shared helper after INC-N lands (overlaps DAWN now).
+**C:/tmp cleanup (maintainer-approved):** 112 clean, fully-pushed, >24 h idle worktrees removed with plain `git worktree
+remove` (no --force); 56 kept (unpushed / dirty / active today); stale unreferenced loose files deleted; inventory and
+logs in `G:/cameo-wt/_cleanup/`.
+**T2-VERIFY → land B** (`devin/nova/inc-n-combat-veto@e58c030b4`; #790 = divergent older version, superseded). REAL BUG
+confirmed: `CombatVetoBotModule` Veto* have no `IsTraitDisabled` guard and `SquadManagerBotModuleCA.cs:1751-1790` consults
+disabled providers → with `AN_combat_veto` OFF every bot incl. classic would veto (WORKFLOW §3.2). Fix dispatched as
+`devin/t2-veto-disabled-guard` on top of B (self-guard + `IsTraitEnabled()` call-site filter, the master stealth pattern).
+Tier 3 checked for the same class: all consumers use `FirstEnabledTraitOrDefault` → clean.
+**Tier-1 impl `3c07947f7`:** C# writer approved; fitter fixes requested — apply `resolved_firepower_modifiers` to priced
+dpt (132 actors; else biased cells), report + exclude the 8/139 tags with no Versus prior, name the 2 collisions.
+**C:/tmp done:** rescue = 47 refs `refs/rescue/2026-10-03/*` + `G:/cameo-tmp-rescue/` (bundle verified, manifest, README,
+evidence copies). 152 worktrees removed in total, 16 deferred (agent-owned `.agent-id` or active < 6 h). C: 1 → 340 GB free.
+
 # 2026-10-03 — armed smokes: AM_army_staging on master + EL-0 (#789) live validation
 
 *Devin (nova) — two frozen worktrees, sequential batches (one game driver at a time):*
