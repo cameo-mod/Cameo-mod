@@ -1,3 +1,31 @@
+# 2026-10-03 — INC-N: the combat veto (DESIGN 19.13 tier 2) — `devin/nova/inc-n-combat-veto@150429f3f`
+
+*Devin (nova), fleet `ORDERS_2026-10-03_claude_learning_tiers.md` tier-2 lane:*
+
+**INC-N ready: devin/nova/inc-n-combat-veto@150429f3f — switch: AN_combat_veto (default off)**
+
+One provider (`IBotCombatVeto`, CA seam after `IBotSiegeAdvisor`) consulted at every
+commit edge: the idle engage check, the committed approach (lower abort line),
+the wave launch vs remembered defences (parity-floored at own value — a loss must
+be proven, never assumed), and `ShouldFlee` (a retreat the pursuit outruns is
+blocked — the squad stands and fights instead of being run down). The prediction
+is `BotCombatPredictor` itself on the SEEN forces + `IBotRememberedDefenceProvider`
+within `DefenceIncludeCells`; `EngagementPriorsBotModule` multiplies tier-1 priors
+into the HP-share assembly (own side only — the file measures own-faction trades),
+serving EMBER's `ai/learned/arsenal_priors.yaml` through the same `ArsenalPriors`
+parser. Pure advisor: no orders, no learning; every veto is a Denied mission card
+(`veto:<kind>:<tick>`, `outmatched` / `x_no_outrun`) for the EL score. `genericbot
+&& combatveto`; classic never sees the provider — every consult answers false.
+
+Design §12.31 (hysteresis enter <50 / abort <35, launch <60, flee margin 100%,
+cache 25t, defences 12 cells, card dedup 250t). 7 new eval tests (predictor
+parity, hysteresis, launch/engage/flee lines, prior shift). Build 0 errors;
+814/814 tests; fog-honesty + direct-mutation audits PASS (one new reviewed
+radius-circle site registered); boot gate green (menu marker, zero new
+exceptions). One caveat for reviewers: `engine/` in the smoke worktrees is a
+junction to the main checkout's engine dir — bin/ is shared, so builds and boot
+gates serialize across lanes by construction.
+
 # 2026-10-03 — armed smokes: AM_army_staging on master + EL-0 (#789) live validation
 
 *Devin (nova) — two frozen worktrees, sequential batches (one game driver at a time):*
