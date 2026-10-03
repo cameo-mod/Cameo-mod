@@ -1,3 +1,27 @@
+# 2026-10-03 — feat(ai): NOVA EL-1, bounded in-match adaptation (AN_inmatch_adapt, default off)
+
+*Devin (nova), worktree `nova-clean`, branch `nova/el1_inmatch_adapt` stacked on `nova/t2_combat_veto`
+@ `821d7083e` — DESIGN §19.13 "in-match vs between matches" + `AI_ARCHITECTURE.md` §12.30's named next
+reader. Spec §12.32.*
+
+The in-game half of "learn in game and between games": a bounded rule reads this match's own closed
+engagement scores and biases the one bar that already gates both commits — `RetreatRatioPct` (the bar
+`PredictsLoss` flees under and `PredictsWin` commits over). Losing form tightens it (bail earlier,
+demand more advantage); winning form loosens it toward today's value.
+
+- **Tally:** `EngagementLogBotModule` keeps `RunningTotalMilli`/`ClosedEngagementCount` over
+  non-skirmish records — `BuildEngagement(h, s, out, out)` surfaces numbers it already computed;
+  record-only kept (same lines, same seen/truth split, no orders).
+- **Rule** (`InMatchAdaptMath`, pure): `clamp(-form × GainPermille/1000, ±MaxDeltaPct)`, recomputed on
+  the 250-tick posture cadence. Defaults 15/±20 → effective bar stays in [30,70] around the default 50.
+- **Consumer:** `IBotInMatchAdaptation` (Mods.CA) `RetreatRatioDeltaPct` added to the `RetreatRatioPct`
+  getter — one property covering both directions of discretion; composes at the same seam as the
+  combat veto. Resets each match (tally starts empty); no enumeration (zero new fog sites); absent
+  provider (classic, switch off) = bit-identical.
+- Verified: 821/821 tests (5 new `InMatchAdaptTest`), arch audit 0 ERROR/31 pre-existing WARN,
+  fog audit PASS unchanged (no enumeration sites), direct-mutation PASS, boot gate PASS.
+  Switch `AN_inmatch_adapt`: `genericbot && inmatchadapt`, classic untouched.
+
 # 2026-10-03 — feat(ai): NOVA tier 2, the combat-prediction veto (AN_combat_veto, default off)
 
 *Devin (nova), worktree `nova-clean`, branch `nova/t2_combat_veto` @ master `dbd7b3b83` — ORDERS

@@ -764,6 +764,8 @@ namespace OpenRA.Mods.CA.Traits
 		int armyStagingTick = -1;
 		IBotCombatVeto combatVeto;
 		int combatVetoTick = -1;
+		IBotInMatchAdaptation inMatchAdaptation;
+		int inMatchAdaptationTick = -1;
 		int nextStagingTick;
 		readonly Dictionary<Actor, (CPos Cell, int Tick)> stagingOrders = new();
 
@@ -794,6 +796,22 @@ namespace OpenRA.Mods.CA.Traits
 				}
 
 				return combatVeto;
+			}
+		}
+
+		// EL-1 (DESIGN 19.13, AI_ARCHITECTURE 12.32): the enabled in-match adaptation provider this tick.
+		// Absent (classic, switch off) = RetreatRatioPct runs bit-identical.
+		internal IBotInMatchAdaptation InMatchAdaptation
+		{
+			get
+			{
+				if (inMatchAdaptationTick != World.WorldTick)
+				{
+					inMatchAdaptationTick = World.WorldTick;
+					inMatchAdaptation = Player.PlayerActor.TraitsImplementing<IBotInMatchAdaptation>().FirstEnabledTraitOrDefault();
+				}
+
+				return inMatchAdaptation;
 			}
 		}
 		IBotProtectionRequestProvider[] protectionRequestProviders;
@@ -2801,7 +2819,7 @@ namespace OpenRA.Mods.CA.Traits
 			return BotCombatPredictor.Predict(own, foes).Ratio;
 		}
 
-		int RetreatRatioPct => botLimits?.Info.RetreatRatioPct ?? Info.DefaultRetreatRatioPct;
+		int RetreatRatioPct => Math.Max(0, (botLimits?.Info.RetreatRatioPct ?? Info.DefaultRetreatRatioPct) + (InMatchAdaptation?.RetreatRatioDeltaPct ?? 0));
 
 		internal bool PredictsLoss(SquadCA squad, IEnumerable<Actor> enemies)
 		{

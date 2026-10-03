@@ -3634,3 +3634,31 @@ whole string. Fingerprint mismatch or missing file -> all priors neutral (the ve
 Stat-normalized keys only — no unit ids — so the file survives roster churn; a rebalance changes the fingerprint and the
 file discounts itself. The response-time priors the fitter may also emit are reserved (the commit consult happens at
 contact, where response has already materialized in the seen list).
+
+### 12.32 AD — in-match adaptation: form tunes the bar (NOVA EL-1)
+
+Binding ruling: DESIGN 19.13 "in-match vs between matches" — *within* a match a bounded rule reacts to the engagement
+scores so far and resets every match; its gains are tuned knobs (19.2). This is the in-game half of "learn in game
+and between games": tiers 1/3 learn between matches, EL-1 reacts inside the match while it still matters.
+
+**The tally (EL-0 extension, still record-only).** `EngagementLogBotModule` already computes `total_milli` per closed
+record; `BuildEngagement` now surfaces it (`out totalMilli, out isSkirmish`) and the module keeps a running
+`RunningTotalMilli` / `ClosedEngagementCount` over **non-skirmish** records — the same exclusion the report makes.
+Same lines written, same `seen`/`truth` split; the tally reads `seen`-side scores only. Still no orders, no
+conditions; the gated consumer lives in a separate module.
+
+**The rule** (`InMatchAdaptMath`, pure): `bias = clamp(-RunningTotalMilli * GainPermille / 1000, ±MaxDeltaPct)`
+recomputed on the posture cadence (`IntervalTicks` 250). Losing form (negative running score) tightens the bar;
+winning form loosens it toward today's value. Defaults: gain 15 (one clearly lost engagement ~ +15 points), bound
+±20 — with the default 50 bar the effective bar stays inside [30, 70]: tighten never reaches a full-health hold,
+loosen never reaches suicide.
+
+**The consumer.** `IBotInMatchAdaptation` (OpenRA.Mods.CA) exposes `RetreatRatioDeltaPct`; the squad manager adds it
+to `RetreatRatioPct` — the ONE bar both `PredictsLoss` (ratio < bar → flee) and `PredictsWin` (ratio ≥ bar ×
+`EngageMarginPct` → commit) already read. One property, both directions of discretion, no new decision points, no
+new order channels — the bias rides the same consulted path the combat veto uses, so armed together they compose:
+the veto disposes of bad fights, form decides how much proof a good one needs.
+
+**Resets every match** by construction — the tally starts empty per match and the provider recomputes from it; no
+state leaves the match. `genericbot && inmatchadapt`, switch `AN_inmatch_adapt` (default off); absent provider =
+the bar runs bit-identical and classic is untouched. Enumerates no actors — zero new fog sites.
