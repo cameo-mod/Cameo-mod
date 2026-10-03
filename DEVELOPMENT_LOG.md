@@ -17510,3 +17510,19 @@ PASS. GC-1's C#-level backoff remains the prevention; this layer is the tripwire
 Flagged to SquadManager owner (unchanged from out7 review): `secure:<player>` pushes
 commit but write no terminal record — in a *won* match the push stayed open 15.8k
 ticks; every secure attempt is structurally dangling. Not my file; owner aware.
+
+2026-10-03 — ai(LC8-sink): post-GameOver records flush themselves — match_end terminals reach the jsonl
+
+Reviewer flag confirmed and root-caused wider: `secure:` pushes weren't the only dangle —
+ZERO `match_end` records reached `cameo-ai-missions.jsonl` in either armed run (ab2: 7
+dangling attempts incl. capture ids; ab3: 2). The records WERE written — debug.log shows
+`Released(match_end)` at tick 24217 — but `AiMissionLogWriter` flushes from `ITick` and a
+`GameOver` burst; `World.EndGame` pauses before teardown, so player-actor `Disposing`
+records (the tracker releasing every still-open attempt) sat in `pending` forever.
+
+Fix: the writer sets `gameOver` in `IGameOver.GameOver` and `MissionRecorded` flushes
+immediately for any record arriving after it. Sink-local; no record-shape change, no
+tracker change — the contract ("no attempt stays dangling past GameOver") now holds in
+the archive it was written for.
+
+Generated with [Devin](https://devin.ai)

@@ -49,6 +49,8 @@ namespace OpenRA.Mods.Cameo.Traits
 		int nextRetryTick;
 		AiLogFileAppender appender;
 		string inFlight;
+		bool gameOver;
+		int gameOverTick;
 
 		public int Dropped { get; private set; }
 
@@ -79,6 +81,10 @@ namespace OpenRA.Mods.Cameo.Traits
 
 			pending.Append(BuildLine(record, gameUid, mapUid, mapTitle, DateTime.UtcNow)).Append('\n');
 			pendingLines++;
+
+			// A paused post-GameOver world never ticks: teardown records (match_end releases) must flush here or they dangle in pending.
+			if (gameOver)
+				TryFlush(gameOverTick);
 		}
 
 		/// <summary>One JSONL line, free of world state beyond the record so it can be tested.</summary>
@@ -159,6 +165,9 @@ namespace OpenRA.Mods.Cameo.Traits
 		void IGameOver.GameOver(World world)
 		{
 			// World.EndGame pauses before IGameOver and a paused world does not tick: flush now, retries included.
+			// Records still arrive after this (player-actor teardown writes match_end releases) — MissionRecorded flushes them itself.
+			gameOver = true;
+			gameOverTick = world.WorldTick;
 			for (var i = 0; i < 8 && (inFlight != null || pendingLines > 0); i++)
 				TryFlush(world.WorldTick);
 		}
