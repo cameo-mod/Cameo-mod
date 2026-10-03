@@ -18116,3 +18116,27 @@ Generated with [Devin](https://devin.ai)
   %APPDATA% log dir rotates under another lane's driver — menu marker verified in the private dir,
   0 exceptions).
 * AI_ARCHITECTURE §12.33 gains the armed-set paragraph.
+
+## 2026-10-03 — Devin/DAWN: nova's ship-blocker merged + early-resolve scope fixed in-game
+
+* **Nova's review caught a ship-blocker**: my `GetVariableObservers` hid `ConditionalTrait`'s virtual
+  (CS0114) — the engine resolves observers through the interface to the most-derived method, so the
+  base's `RequiresCondition` watcher never registered and the module NEVER enabled. Every check I had
+  (yaml, parse, math tests, tuner smoke) runs without the trait enabling — only an armed-match log
+  exposes it. Merged `devin/nova/t3-observer-fix` (override + base chain, the UnitBuilderBotModuleCA
+  pattern). **Armed-match verification is now on my smoke list** — the bug class was "green but dead".
+* **Second in-game bug found by the same smoke**: `bandit.scope` was always bare faction. Root cause:
+  `BotPersonalityController.TraitEnabled` reads the bandit pin during `PlayerActor` creation, which
+  happens INSIDE `new Player()` — before `w.SetPlayers` and `SetupPlayerMasks`, so `world.Players` is
+  empty and `LobbyInfo.Clients` holds only the controller (bots are map players, not clients). Fix:
+  `EnemyFactionOf` falls back to `player.PlayerReference.Enemies` → `MapPlayers` ref lookup → enemy
+  `Faction` (NonCombatant refs skipped, "Random" used verbatim). Diag log line kept (one per match).
+* Nova minor 1 fixed: `PersonalityArms` validated against `BotPersonalityControllerInfo.Conditions` at
+  `RulesetLoaded` — a typo'd arm now throws instead of silently drawing random.
+* Nova minor 2 documented: `bandit.personality_arm` records the DRAW; harness-pinned bots can differ —
+  §12.33 notes to compare the record's `personality` field.
+* **In-game proof** (`t3_smoke4`, plan_bandits armed for hard): 3/3 clean matches, `bandit` on every
+  situation + engagement record — scope `td_gdi__vs__td_gdi`/`td_gdi__vs__td_nod`/`td_nod__vs__td_nod`,
+  distinct seeded arms per match, `pinned:true`, `armed:"plan_bandits"`. 822/822, boot-gate PASS.
+* Incident: one file's uncommitted edits were reverted by an external process mid-session (IDE/other
+  agent). Detected via dll content check before the smoke; re-applied via shell and committed promptly.

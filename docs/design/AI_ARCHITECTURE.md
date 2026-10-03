@@ -3656,7 +3656,9 @@ n over-counts and must not gate the floor.
 **Attribution.** The frozen choice lands on every situation snapshot (`bandit` block) and every engagement record
 (`bandit`: scope + both arms + `armed`), so `tools/ai/tune_plan_bandits.py --write` folds `bandit`-attributed records
 into the posteriors at all four chain levels — unattributed records are processed-but-skipped (they never played an
-arm). `--decay` discounts retained stats (sliding window); `Processed` ids keep re-runs idempotent.
+arm). `bandit.personality_arm` records the DRAW; harness-pinned bots (`PinnedPersonalities`) may run a different
+effective personality — compare the record's own `personality` field if exact effect matters (nova review).
+`--decay` discounts retained stats (sliding window); `Processed` ids keep re-runs idempotent.
 
 **Armed-set (nova review 2026-10-03).** Every armed decision-side module filters which engagements ever exist, so the
 same arm fitted under different armed sets is not the same arm. `WatchConditions` (yaml: `plan_bandits,

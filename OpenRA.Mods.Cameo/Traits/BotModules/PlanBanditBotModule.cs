@@ -107,6 +107,14 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			foreach (var arm in PersonalityArms)
 				if (arm.IndexOf('@') >= 0 || arm.IndexOf("__", StringComparison.Ordinal) >= 0)
 					throw new YamlException($"PlanBanditBotModule: PersonalityArms entry '{arm}' must be a bare personality name.");
+
+			// Nova review 2026-10-03: an arm naming no controller condition silently falls back to the
+			// random draw — fail loud instead, the same check PinnedPersonalities gets.
+			var controller = ai.TraitInfos<BotPersonalityControllerInfo>().FirstOrDefault();
+			if (controller != null)
+				foreach (var arm in PersonalityArms)
+					if (!controller.Conditions.Any(c => BotPersonalityController.PersonalityName(c, controller.PersonalityPrefix) == arm))
+						throw new YamlException($"PlanBanditBotModule: PersonalityArms entry '{arm}' has no matching personality-* condition.");
 		}
 
 		public override object Create(ActorInitializer init) { return new PlanBanditBotModule(init.Self, this); }
@@ -169,6 +177,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var scope = ownFaction.Length > 0 && enemyFaction.Length > 0 ? $"{ownFaction}__vs__{enemyFaction}" : ownFaction;
 			snapshot.Scope = scope;
 			snapshot.ArmedModules = ArmedModules();
+			Log.Write("debug", $"AI {player.InternalName}: plan-bandit resolve diag: tick={world.WorldTick} players={world.Players.Count()} lobby={world.LobbyInfo?.Clients.Count ?? -1} me={world.LobbyInfo?.Clients.FirstOrDefault(c => c.Index == player.ClientIndex)?.Index ?? -1} enemy='{enemyFaction}'");
 
 			LoadLearned();
 
@@ -234,8 +243,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			conditionCounts = variables;
 		}
 
-		public IEnumerable<VariableObserver> GetVariableObservers()
+		public override IEnumerable<VariableObserver> GetVariableObservers()
 		{
+			foreach (var observer in base.GetVariableObservers())
+				yield return observer;
+
 			if (Info.WatchConditions.Length > 0)
 				yield return new VariableObserver(ConditionsChanged, Info.WatchConditions);
 		}
@@ -257,9 +269,37 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (main != null)
 				return main.Faction?.InternalName ?? "";
 
+			// The bandit resolves inside the Player ctor (PlayerActor creation), before w.SetPlayers ran —
+			// world.Players is still empty there. Lobby clients ARE populated by then, so early resolves
+			// fall back to lobby-level enemies. Lobby factions may name a random group ("Random"); an
+			// unmatched scope string simply pools to the generic levels — deterministic and safe.
+			if (!world.Players.Any())
+				return LobbyEnemyFaction(world, player);
+
 			return world.Players
 				.Where(p => p != player && !p.NonCombatant && !p.Spectating && player.RelationshipWith(p) == PlayerRelationship.Enemy)
 				.GroupBy(p => p.Faction?.InternalName).Where(g => g.Key != null)
+				.OrderByDescending(g => g.Count()).ThenBy(g => g.Key, StringComparer.Ordinal)
+				.Select(g => g.Key).FirstOrDefault() ?? "";
+		}
+
+		// Enemy faction from map data alone (used only while world.Players is unpopulated — the bandit resolves
+		// inside the Player ctor, before SetPlayers/SetupPlayerMasks): the owning PlayerReference.Enemies names
+		// the enemy player refs; each ref's own Faction field is the enemy faction. NonCombatant refs (Creeps)
+		// are skipped the same way the live-players path skips them. "Random" factions are used verbatim — an
+		// unmatched scope string simply pools to the generic levels, deterministic and honest about what was
+		// known at draw time.
+		static string LobbyEnemyFaction(World world, OpenRA.Player player)
+		{
+			var pr = player.PlayerReference;
+			if (pr == null || pr.Enemies.Length == 0)
+				return "";
+
+			var mapPlayers = new MapPlayers(world.Map.PlayerDefinitions).Players;
+			return pr.Enemies
+				.Select(name => mapPlayers.TryGetValue(name, out var ep) && !ep.NonCombatant ? ep.Faction : null)
+				.Where(f => !string.IsNullOrEmpty(f))
+				.GroupBy(f => f)
 				.OrderByDescending(g => g.Count()).ThenBy(g => g.Key, StringComparer.Ordinal)
 				.Select(g => g.Key).FirstOrDefault() ?? "";
 		}
