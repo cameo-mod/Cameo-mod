@@ -16,7 +16,9 @@ Research basis: `design/AI_LEARNING_RESEARCH_2026-10-03.md`. The maintainer adop
 
 **#788 (open, maintainer merges):** DAWN's `81fa5a3c5` (per-player answer tracker) was committed only in the SHARED main
 checkout with an origin/master merge left staged there; #788 lands that exact commit (gated). After it merges, the main
-checkout's staged merge must be aborted and fast-forwarded (the sync job refuses while it is dirty).
+checkout's staged merge must be aborted and fast-forwarded (the sync job refuses while it is dirty). **Maintainer
+authorised Claude (2026-10-03) to do exactly that once #788 is on master:** `git merge --abort`, then fast-forward to
+origin/master, then confirm `sync_main_checkout.log` runs clean.
 
 **Next (in order):** (1) merge this PR + #788. (2) Devin builds tiers 1–3 (fleet `ORDERS_2026-10-03_claude_learning_tiers.md`):
 EMBER tier-1 fitter, NOVA tier-2 veto, DAWN tier-3 pooled bandits. (3) ONE increment A/B of every default-off group
