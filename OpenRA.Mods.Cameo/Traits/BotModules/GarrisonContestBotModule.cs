@@ -229,11 +229,14 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				// still outside get a Stop or a queued EnterGarrison would capture the building anyway.
 				void StandDownWalkers()
 				{
+					// Order before release: a Stop issued while the lease is still held reads as the claim's
+					// own last act at the order gate; releasing first would leave the Stop unattributed and
+					// the next module's order inside the window counts as crossed, not a hand-off.
 					foreach (var w in walkers)
 					{
-						leases?.Release(w, LeaseOwner);
 						if (!w.IsDead && w.IsInWorld && w.Owner == player && !IsInside(w))
 							bot.QueueOrder(new Order("Stop", w, false));
+						leases?.Release(w, LeaseOwner);
 					}
 
 					walkers.Clear();

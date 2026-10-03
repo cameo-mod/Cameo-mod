@@ -17521,3 +17521,21 @@ garrison. `CratePickupBotModule`'s idle filter was the only `IsIdle` consumer
 missing `IsInWorld` (its own `collectorGone` check already treats `!IsInWorld`
 as gone — the filter just missed the same guard). One-line fix + rebuilt dll,
 boot-gate PASS (private engine, shared bin locked by a foreign game).
+
+## 2026-10-03 — ember lane: out11 4/4 clean + crossed-order root cause + execution grace
+
+out11 (cd0865a0c + crate/stand-down fixes, all 44 groups incl. Z_def3 + BF-2 shards):
+4/4 clean, 2-2, zero exceptions. match_end flush holds at scale (2 records landed;
+outcomes PASS: 119 attempts, 0 dangling, 0 in-flight). storm PASS, fog PASS.
+
+The residual `crossed=1` (GC-1 -> CratePickup) decoded via BotOrderGate.NoteIssued:
+a clean hand-off is proven by `last.Held && holder != earlier`; GC-1's stand-down
+RELEASED the lease before queuing Stop, so the Stop recorded Held=false and the
+crate picker's order inside the window counted as a fight. Reordered: Stop while
+still holder, release after — the gate now sees a provable release.
+
+round_trip_check execution layer gained an open-horizon grace: a PUBLISHED card only
+dead-ends if it stayed open >7500t past the last record of ITS game (per-game
+last-tick — a global max understates age in multi-game batches). out7 still WARNs
+correctly (3 real dead-ends); out9/out11 PASS with 3 live-at-end cards each —
+contest cards still marching inside their own claim timeout are work, not debt.
