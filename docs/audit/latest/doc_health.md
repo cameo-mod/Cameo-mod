@@ -1,6 +1,6 @@
 # audit_doc_health — is the documentation structurally sound?
 
-Documents scanned: **471**
+Documents scanned: **474**
 
 `audit_doc_claims.py` checks whether the NUMBERS are still true. This checks whether the documents themselves are intact.
 
@@ -53,7 +53,7 @@ _clean_
 
 ## D8 — Citation points at the wrong law (1)
 
-- `DEVELOPMENT_LOG.md`:930 — cites §19.3 (One bot module per decision: merge dupli) but names `OpenRA`, which is §17 (Dune 2000 to OpenRA Sprite Conversion)
+- `DEVELOPMENT_LOG.md`:1301 — cites §19.3 (One bot module per decision: merge dupli) but names `OpenRA`, which is §17 (Dune 2000 to OpenRA Sprite Conversion)
 
 
 **FAIL — 3 finding(s).** Fix the document; none of these are cosmetic. D1/D2 are corruption, D6 makes a cited law ambiguous, D3–D5 send a reader to the wrong place, D7 means a document is hiding its own content from the person who was told to read it, and D8 means a citation resolves — to the wrong law.

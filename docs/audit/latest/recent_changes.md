@@ -1,12 +1,12 @@
 # audit_recent_changes — last 14 day(s) of history
 
-Commits reviewed: **666**, files touched: **4912**
+Commits reviewed: **724**, files touched: **4932**
 
 | code | meaning | count | blocking |
 |---|---|---|---|
 | R1 | balance yaml edited without the ledger | 24 | yes |
 | R2 | audit script never run by run_all.sh | 10 | yes |
-| R3 | provenance (wrong-identity trailer blocks; missing one on the shared identity is review-only) | 29 | partly |
+| R3 | provenance (wrong-identity trailer blocks; missing one on the shared identity is review-only) | 33 | partly |
 | R4 | engine/mod.config change (needs boot gate) | 5 | no |
 
 
@@ -56,10 +56,14 @@ Commits reviewed: **666**, files touched: **4912**
 | tools/audit/audit_weapon_identity.py | not invoked by run_all.sh |
 
 
-## R3 — commits without provenance (29)
+## R3 — commits without provenance (33)
 
 | commit | date | author | problem | severity |
 |---|---|---|---|---|
+| 8fd71f6b | 2026-10-03 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
+| a382470b | 2026-10-03 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
+| 612014a7 | 2026-10-03 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
+| 509db870 | 2026-10-03 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
 | 8a86238b | 2026-10-01 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
 | 27de8684 | 2026-10-01 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
 | be34aa6d | 2026-10-01 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
@@ -106,21 +110,21 @@ Commits reviewed: **666**, files touched: **4912**
 
 | file | commits touching it |
 |---|---|
-| DEVELOPMENT_LOG.md | 206 |
-| docs/design/AI_ARCHITECTURE.md | 120 |
-| mods/cameo/ai/ai.yaml | 118 |
-| docs/HANDOFF.md | 103 |
-| OpenRA.Mods.CA/Traits/BotModules/SquadManagerBotModuleCA.cs | 72 |
+| DEVELOPMENT_LOG.md | 240 |
+| docs/design/AI_ARCHITECTURE.md | 132 |
+| mods/cameo/ai/ai.yaml | 126 |
+| docs/HANDOFF.md | 105 |
+| OpenRA.Mods.CA/Traits/BotModules/SquadManagerBotModuleCA.cs | 79 |
+| docs/DESIGN.md | 68 |
 | docs/LESSONS_LEARNED.md | 68 |
-| docs/DESIGN.md | 63 |
-| OpenRA.Mods.Cameo/Traits/BotModules/BotSituation.cs | 60 |
-| docs/design/ROADMAP.md | 53 |
-| tools/ai/increment_switches.yaml | 45 |
-| docs/design/AI_MODULE_MAP.md | 34 |
-| tools/audit/fog_honesty_manifest.json | 34 |
-| docs/audit/doc_claims.yaml | 32 |
+| OpenRA.Mods.Cameo/Traits/BotModules/BotSituation.cs | 63 |
+| docs/design/ROADMAP.md | 54 |
+| tools/ai/increment_switches.yaml | 53 |
+| docs/design/AI_MODULE_MAP.md | 38 |
+| tools/audit/fog_honesty_manifest.json | 36 |
+| docs/audit/doc_claims.yaml | 34 |
+| OpenRA.Mods.Cameo.Test/MasterAiBotModuleTest.cs | 32 |
 | docs/balance/derived/tiberiandawn_nod.json | 32 |
-| OpenRA.Mods.Cameo.Test/MasterAiBotModuleTest.cs | 30 |
 
 
 ## Reviewer checklist (not machine-checkable)
@@ -134,7 +138,7 @@ Commits reviewed: **666**, files touched: **4912**
 
 ## Enforcement
 
-R1/R3 block only for commits on or after **2026-08-12**: 24 R1 and 0 R3 of 24/29 findings are in scope; the rest predate the gate.
+R1/R3 block only for commits on or after **2026-08-12**: 24 R1 and 0 R3 of 24/33 findings are in scope; the rest predate the gate.
 
 
 ## FAIL

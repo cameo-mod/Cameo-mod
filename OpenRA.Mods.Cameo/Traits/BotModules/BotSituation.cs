@@ -163,6 +163,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		// BO-1 (AI_ARCHITECTURE 12.25), record-only: the build-order knob vector, opening and react events of the provider's last update.
 		// Null (and omitted from the log) while no BuildOrderKnobsBotModule is enabled.
 		internal BuildOrderSnapshot BuildOrder;
+
+		// Tier-3 (fleet orders 2026-10-03), record-only: the frozen personality/plan bandit arms drawn at match start.
+		// Null (and omitted from the log) while no PlanBanditBotModule is enabled.
+		internal PlanBanditSnapshot Bandit;
 		// FE-0 (AI_ARCHITECTURE 12.24), record-only: the field-economy picture as of this snapshot (the `expansion` object).
 		internal ExpansionSnapshot Expansion;
 
@@ -1436,6 +1440,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				ProductionQueues = productionQueueCount,
 				ScaleTargets = player.PlayerActor.TraitsImplementing<ScaleTargetsBotModule>().FirstEnabledTraitOrDefault()?.Snapshot,
 				BuildOrder = player.PlayerActor.TraitsImplementing<BuildOrderKnobsBotModule>().FirstEnabledTraitOrDefault()?.Snapshot,
+				Bandit = player.PlayerActor.TraitsImplementing<PlanBanditBotModule>().FirstEnabledTraitOrDefault()?.Snapshot,
 				Expansion = ExpansionTelemetry.Capture(player, ownLiveBuildings)
 			};
 			Situation = situation;

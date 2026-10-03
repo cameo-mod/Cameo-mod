@@ -116,6 +116,12 @@
 	GrantConditionOnBotOwner@armystaging:
 		Condition: armystaging
 		Bots:
+	# Tier-3 pooled bandits (fleet orders 2026-10-03): Thompson-samples a personality arm + an attack-plan overlay
+	# over the EL engagement posteriors in ai/learned/plan_bandits.yaml, with a safety floor. The arm sets Bots
+	# (switch group AN_tier3_bandits); empty by default - inert on master.
+	GrantConditionOnBotOwner@planbandits:
+		Condition: plan_bandits
+		Bots:
 	# DIFFICULTY SCALE (DESIGN §19.1, maintainer 2026-09-28): every number below lies on ONE straight line
 	# from easiest to cameogod, in EQUAL steps; an integer that cannot split evenly is the rounded line.
 	# Every field is written in every tier, so no tier silently falls back to a C# default.
@@ -3850,6 +3856,41 @@ Player:
 			out_earned:
 				greed: 1300
 				expansion: 1300
+	# Tier-3 pooled bandits (fleet orders 2026-10-03): Thompson-samples a personality arm + an attack-plan overlay over
+	# the EL engagement posteriors in ai/learned/plan_bandits.yaml, pooled any -> family -> faction -> matchup, with a
+	# safety floor (an evidenced arm whose LCB is below MinSafetyLcb cannot win). `genericbot && plan_bandits`: off on
+	# master until the increment A/B arms it (switch group AN_tier3_bandits).
+	PlanBanditBotModule:
+		RequiresCondition: genericbot && plan_bandits
+		LearnedFile: ai/learned/plan_bandits.yaml
+		PersonalityArms: rush, turtle, tech, expansion, steamroller, guerrilla
+		PriorCount: 8
+		LcbZ: 164
+		MinEvidence: 4
+		MinSafetyLcb: -250
+		# Attack-plan arms: one bounded knob overlay multiplied into the build-order vector (preset x learned x plan x
+		# jitter), frozen at match start. `balanced` is the explicit no-op arm so the bandit can choose not to overlay.
+		PlanArms:
+			balanced:
+			press:
+				tempo: 1125
+				production: 1125
+				defence: 875
+				tech: 875
+			fortify:
+				defence: 1200
+				power_margin: 1150
+				tempo: 875
+				expansion: 875
+			boom:
+				greed: 1150
+				expansion: 1150
+				production: 900
+				defence: 850
+			surge:
+				tech: 1150
+				support: 1100
+				greed: 900
 	# SP-1 + DAWN building gap (AI_ARCHITECTURE §12.20), ONE owner of base spacing (maintainer 2026-10-02). Loaded for
 	# genericbot: the HARD gap findPos applies (MinBuildingGapCells 2 / MinBuildingGapDefensesCells 1) is LIVE. classicbot
 	# has no advisor, hence no gap - it places edge-to-edge as before 10-02. The re-ranking of findPos' first placeable

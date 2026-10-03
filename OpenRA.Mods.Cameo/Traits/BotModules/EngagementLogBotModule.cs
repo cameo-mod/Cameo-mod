@@ -692,6 +692,15 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				Urgency = player.PlayerActor.TraitOrDefault<MasterAiBotModule>()?.Situation?.Urgency.ToString().ToLowerInvariant() ?? "",
 			};
 
+			// Tier-3 (fleet orders 2026-10-03): which frozen bandit arms produced this fight — record-only attribution.
+			var bandit = player.PlayerActor.TraitsImplementing<PlanBanditBotModule>().FirstEnabledTraitOrDefault()?.Snapshot;
+			if (bandit != null)
+			{
+				header.BanditScope = bandit.Scope;
+				header.BanditPersonalityArm = bandit.PersonalityArm;
+				header.BanditPlanArm = bandit.PlanArm;
+			}
+
 			sink.Append(EngagementRecord.BuildEngagement(header, s));
 		}
 
@@ -791,6 +800,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 	public sealed class EngagementHeader
 	{
 		public string GameUid, MapUid, Player, BotType, Faction, Personality, CloseReason = "", Kind = "field", DirectorPhase = "", Urgency = "";
+		public string BanditScope = "", BanditPersonalityArm = "", BanditPlanArm = "";
 		public int EndTick, DistOwnBase = -1, DistEnemyBase = -1, DirectorTension = -1, OwnBaseX = -1, OwnBaseY = -1;
 	}
 
@@ -852,6 +862,15 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			AiMatchLogWriter.AppendString(b, "bot_type", h.BotType);
 			AiMatchLogWriter.AppendString(b, "faction", h.Faction);
 			AiMatchLogWriter.AppendString(b, "personality", h.Personality);
+			if (h.BanditScope.Length > 0 || h.BanditPersonalityArm.Length > 0 || h.BanditPlanArm.Length > 0)
+			{
+				AiMatchLogWriter.AppendObjectPropertyStart(b, "bandit");
+				AiMatchLogWriter.AppendString(b, "scope", h.BanditScope, true);
+				AiMatchLogWriter.AppendString(b, "personality_arm", h.BanditPersonalityArm);
+				AiMatchLogWriter.AppendString(b, "plan_arm", h.BanditPlanArm);
+				b.Append('}');
+			}
+
 			AiMatchLogWriter.AppendNumber(b, "engagement_id", s.Id);
 			AiMatchLogWriter.AppendNumber(b, "start_tick", s.StartTick);
 			AiMatchLogWriter.AppendNumber(b, "end_tick", h.EndTick);
