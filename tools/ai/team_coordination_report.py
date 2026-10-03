@@ -19,13 +19,16 @@ and reports, per team and per match, the §12.18 acceptance metrics:
     contested_claims  same `mission_id` (same capturable actor id) attempted
                       by >=2 teammates — two bots racing one expansion;
                       TC-2c should drive this to ~0 when armed.
-    defend_answers    defend_kind mission attempts (COMMITTED only). Two
+    defend_answers    defend_kind mission attempts (COMMITTED only). Three
                       sources: `defend:self:rN` = own-base Defend BotMission
                       provider cards; `defend_answer:<requesterKey>:<cell>` =
                       TC-2b/TC-3 ally answers through the protection-squad
                       path — requesterKey is the participant's InternalName
                       (or #ClientIndex), the cell its defended position —
-                      direct attribution, not proximity.
+                      direct attribution, not proximity; and
+                      `assist_answer:<requesterKey>:<cell>` = the TC-3 assist
+                      election's escort answer to a contested expansion claim,
+                      same channel, strictly below a defend answer.
     coverage          distinct target players / regions touched per team.
 
 Team membership is inferred from cameo-ai-matches.jsonl `allies` records
@@ -42,7 +45,7 @@ import pathlib
 import sys
 
 ATTACK_KINDS = {"raid", "recon", "secure"}
-DEFEND_KINDS = {"defend", "defend_answer"}  # defend_answer = TC-2b/TC-3 ally rescue answers (SquadManager, post-merge review instrumentation)
+DEFEND_KINDS = {"defend", "defend_answer", "assist_answer"}  # defend_answer/assist_answer = TC-2b/TC-3 ally rescue + escort answers (SquadManager, post-merge review instrumentation)
 
 
 def iter_jsonl(path):

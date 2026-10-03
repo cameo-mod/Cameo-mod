@@ -65,6 +65,43 @@ namespace OpenRA.Mods.CA.Traits
 	}
 
 	/// <summary>
+	/// TC-3 (AI_ARCHITECTURE.md §12.28): one elected assist — which participant
+	/// answers which expansion-assist request. Mirrors <see cref="CoalitionRescueAssignment"/>;
+	/// the position carried is the contested field that wants a bodyguard.
+	/// </summary>
+	public sealed class CoalitionAssistAssignment
+	{
+		/// <summary>ClientIndex of the broadcast that published the assist request.</summary>
+		public readonly int RequesterClientIndex;
+
+		/// <summary>The field the requester wants escorted (its published ExpansionAssist).</summary>
+		public readonly WPos AssistPosition;
+
+		/// <summary>ClientIndex of the elected responder — the nearest free ally by ArmyCentroid.</summary>
+		public readonly int ResponderClientIndex;
+
+		/// <summary>
+		/// Participant identity is Player.InternalName, not ClientIndex — map-side bots
+		/// can share the host's client index. Falls back to a marked ClientIndex key
+		/// when a publisher carried no ParticipantId (same rule as the rescue pass).
+		/// </summary>
+		public readonly string RequesterId;
+
+		/// <summary>Participant id of the elected responder, same rule as <see cref="RequesterId"/>.</summary>
+		public readonly string ResponderId;
+
+		public CoalitionAssistAssignment(int requesterClientIndex, WPos assistPosition, int responderClientIndex,
+			string requesterId = null, string responderId = null)
+		{
+			RequesterClientIndex = requesterClientIndex;
+			AssistPosition = assistPosition;
+			ResponderClientIndex = responderClientIndex;
+			RequesterId = requesterId;
+			ResponderId = responderId;
+		}
+	}
+
+	/// <summary>
 	/// TC-3 (AI_ARCHITECTURE.md §12.18): the coalition general's output — a pure
 	/// publication computed by every team member from the same broadcast set, so
 	/// all members hold the identical directive without an electable command unit.
@@ -84,14 +121,23 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>Allied spawn anchors in Voronoi sector order: participant id -> anchor.</summary>
 		public readonly Dictionary<string, WPos> SectorAnchors;
 
+		/// <summary>
+		/// TC-3 (§12.28): one elected responder per allied expansion-assist request
+		/// (empty when none). Elected strictly after the rescue pass from the pool
+		/// it leaves — survival outranks economy.
+		/// </summary>
+		public readonly List<CoalitionAssistAssignment> AssistAssignments;
+
 		public static readonly CoalitionDirective Empty = new(null, CoalitionPhase.BuildUp, new List<CoalitionRescueAssignment>(), new Dictionary<string, WPos>());
 
-		public CoalitionDirective(Player mainTarget, CoalitionPhase phase, List<CoalitionRescueAssignment> rescueAssignments, Dictionary<string, WPos> sectorAnchors)
+		public CoalitionDirective(Player mainTarget, CoalitionPhase phase, List<CoalitionRescueAssignment> rescueAssignments,
+			Dictionary<string, WPos> sectorAnchors, List<CoalitionAssistAssignment> assistAssignments = null)
 		{
 			MainTarget = mainTarget;
 			Phase = phase;
 			RescueAssignments = rescueAssignments;
 			SectorAnchors = sectorAnchors;
+			AssistAssignments = assistAssignments ?? new List<CoalitionAssistAssignment>();
 		}
 	}
 
@@ -168,6 +214,35 @@ namespace OpenRA.Mods.CA.Traits
 					ParticipantKey(req), ParticipantKey(responder)));
 			}
 
+			// Assist (§12.28): a second election pass over what the rescue left —
+			// survival outranks economy, so a contested expansion claim gets an
+			// escort only from the free capacity that remains. The requesters are
+			// the broadcasts carrying a non-Zero ExpansionAssist, ordered by the
+			// same participant key; the responder is the nearest free ArmyCentroid
+			// to that field. An assist requester was never excluded from the pool
+			// (only defend requesters were), so it must not elect itself — the
+			// self-skip is this pass's own rule. The shared-pool Remove holds too:
+			// one participant answers at most one request across rescue + assist.
+			var assistRequesters = all.Where(b => b.ExpansionAssist != WPos.Zero)
+				.OrderBy(b => ParticipantKey(b), StringComparer.Ordinal)
+				.ToList();
+			var assist = new List<CoalitionAssistAssignment>();
+			foreach (var req in assistRequesters)
+			{
+				var requesterKey = ParticipantKey(req);
+				var responder = freePool
+					.Where(b => ParticipantKey(b) != requesterKey)
+					.OrderBy(b => (b.ArmyCentroid - req.ExpansionAssist).LengthSquared)
+					.ThenBy(b => ParticipantKey(b), StringComparer.Ordinal)
+					.FirstOrDefault();
+				if (responder == null)
+					continue;
+
+				freePool.Remove(responder);
+				assist.Add(new CoalitionAssistAssignment(req.ClientIndex, req.ExpansionAssist, responder.ClientIndex,
+					requesterKey, ParticipantKey(responder)));
+			}
+
 			// Phase: Defend overrides Push; Push needs a target and a synchronized wave.
 			CoalitionPhase phase;
 			if (rescue.Count > 0 || all.Any(b => b.UrgencyLevel >= 2 && b.RequestsDefence))
@@ -184,7 +259,7 @@ namespace OpenRA.Mods.CA.Traits
 				.GroupBy(ParticipantKey)
 				.ToDictionary(g => g.Key, g => g.First().SpawnPoint, StringComparer.Ordinal);
 
-			return new CoalitionDirective(mainTarget, phase, rescue, anchors);
+			return new CoalitionDirective(mainTarget, phase, rescue, anchors, assist);
 		}
 	}
 

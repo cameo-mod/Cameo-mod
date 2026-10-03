@@ -3436,3 +3436,51 @@ high-priced card still never fires; (c) a new assault verb — the grammar has t
 gap was affordability not vocabulary; (d) relaxing `BestAffordableMission` itself — it is public
 static with other callers and its publish-order contract stays bit-identical, so the steer got its
 own selector.
+
+### 12.28 TC-3 assist election — the ExpansionAssist dead-end closed (switch BH_tc3_assist_election)
+
+§12.18 published `TeamBroadcast.ExpansionAssist` — a contested expansion field's WPos
+that wants a bodyguard — and never folded it: the rescue pass consumed `DefendPosition`
+requests but assist requests published into a dead-end (the same class EMBER diagnosed
+for Raid cards, §12.27 — a channel that publishes without a consumer). The fold's second
+election pass closes it.
+
+**The fold (`CoalitionFold.Compute`).** After the rescue pass, every broadcast carrying
+a non-Zero `ExpansionAssist` is a requester (ordered by `ParticipantKey`); each elects
+the nearest `ArmyCentroid` to the claim from the **same free pool the rescue pass left**,
+with two additions to the rescue rules: (a) a requester cannot elect itself — assist
+requesters were never excluded from the pool the way defend requesters are, so the
+self-skip is this pass's own rule; (b) the shared-pool `Remove` holds across both
+passes — one participant answers at most one request total per fold, whether rescue or
+assist. Rescue strictly precedes assist: survival outranks economy, so a contested
+claim waits for capacity a defence did not need. `CoalitionDirective` gains
+`AssistAssignments` (`CoalitionAssistAssignment` mirrors `CoalitionRescueAssignment`:
+RequesterClientIndex / AssistPosition / ResponderClientIndex / RequesterId /
+ResponderId); `Empty` and 1v1 degrade to an empty list, and staleness stays outside the
+fold — `CollectBroadcasts`' `IsLive` gate is the only freshness rule.
+
+**The consumer (`SquadManagerBotModuleCA.UseCoalitionAssist`, default off).** The
+ally-answer channel gains an assist match strictly below the defend match inside the
+same protect-squad rally path: own threat and own escort outrank both, a defend answer
+(own election pick or the `TopDefendRequest` fallback) claims the rally first, and only
+an unanswered channel checks `directive.AssistAssignments` for our participant key. An
+elected assist synthesises the same `BotProtectionRequest` the defend path builds —
+rally at the claim's cell, `AttackMove`, the rolling `ProtectInterval * 10` hold — so
+the escort releases within one interval once the requester's assist broadcast retracts
+or goes stale. Election-only by construction: `ExpansionAssist` exists only through the
+fold, so there is no pre-fold fallback to preserve. The same `TeamDefendAnswerMinPoolUnits`
+floor applies — a thin home pool never escorts.
+
+**Record grammar.** `assist_answer:<requesterParticipantKey>:<rallyCell>` (MissionType
+`assist_answer`), written at the confirmed rally exactly like `defend_answer`; the
+open-attempt id is tracked in `allyAssistOpen` separately from `allyDefendOpen` so a
+defend↔assist switch supersedes the prior record under its own kind instead of
+crossing grammars. `DEFEND_KINDS` in `tools/ai/team_coordination_report.py` counts
+`assist_answer` with the defend kinds — an escort IS defence-shaped work.
+
+**Rejected alternatives:** (a) routing the escort through a squad channel of its own —
+the protect-squad rally/hold/draft machinery is the existing answer channel and a second
+one would double the release triggers; (b) a separate responder pool for assist —
+rescues and escorts draw on the same armies, so shared capacity is the honest model of
+"one army, one job per snapshot"; (c) letting assist outrank a `TopDefendRequest`
+fallback — survival outranks economy at both layers, fold and consumer alike.
