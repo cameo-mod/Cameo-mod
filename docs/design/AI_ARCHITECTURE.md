@@ -3401,3 +3401,38 @@ arbitration stands down through the stale-claim/release path (`Released`/`supers
 engineers stopped so queued orders cannot complete the claim anyway). Deterministic — ordering is the
 integer compare only — and inert in 1v1, where no allied broadcasts exist. Classic is bit-identical: its
 stack has no claim-source modules.
+### 12.27 TC-2f — raid-mission steering: the wave commits anyway (EMBER's dead-end; switch BG_raid_mission_steering)
+
+EMBER's GC-1 evidence exposed a structural dead-end in the assign layer: Raid cards publish but are
+never taken. `BestAffordableMission` gates `RequiredValue <= idleForceValue` on the idle pool at
+launch time, and a provider's `RequiredValue` is honestly sized for a *dedicated* force (GC-1 prices
+remembered defence x `ClearRaidForcePercent`; the master's raids price region army + defence x
+`RaidForceRatioPercent`). The launch bar itself is the formation threshold (`SquadValue`/
+`MaxIdleUnits`), so a wave that already passed it routinely holds less than the card asks — the card
+sits published forever, and the wave goes out cardless as a `secure:` push.
+
+Steering (`SquadManagerBotModuleCAInfo.UseRaidMissionSteering`, default off) is the squad-layer fix.
+When the Defend-hold loop resolves `mission == null` — nothing affordable won — a second selector,
+`BestRaidForSteering(providers, cap)`, re-picks among `BotMissionType.Raid` cards alone under the
+relaxed cap `max(idleForceValue x RaidMissionSteerOvercommitPercent / 100,
+RaidMissionSteerMinValue)` (defaults 300/0 = up to 3x overcommit, ratio only). The pick is
+deterministic — Priority desc, then RequiredValue asc, then publish order — and needs no exclusion
+set: the only filter in the path is Defend-hold exhaustion, which can never match a Raid. A steered
+Raid lands above the non-Defend clearing on purpose: it IS a real commit, so it releases the hold
+machinery exactly like a won card, then flows through the unchanged Raid path — target resolution
+(`FindClosestEnemy`, fogged `FindFrozenEnemyTarget`), `MissionTaken`, provider reservation, attempt
+records. If no target resolves it still names `mission.TargetPlayer` in the `secure:` fallback, the
+same "card it couldn't afford" semantics as before.
+
+**Why overcommit is not feeding:** the launch gate already fired — the wave commits regardless, so
+steering changes WHERE it goes, not WHETHER it goes. No extra units are drawn, no launch happens
+earlier, and the card's `RequiredValue` keeps meaning "the dedicated-force price" for reservation
+and scoring; the steer only grants the card's target to a wave that was leaving anyway.
+
+**Rejected alternatives:** (a) lowering providers' `RequiredValue` — the number is the provider's
+honest dedicated-force sizing and feeds reservations and the dormant shelf, cheapening it would lie;
+(b) holding waves until the pool covers the card — re-opens the formation-starvation class and a
+high-priced card still never fires; (c) a new assault verb — the grammar has the verb already, the
+gap was affordability not vocabulary; (d) relaxing `BestAffordableMission` itself — it is public
+static with other callers and its publish-order contract stays bit-identical, so the steer got its
+own selector.

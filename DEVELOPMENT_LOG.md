@@ -1,3 +1,24 @@
+# 2026-10-03 — raid-mission steering: a Raid card may ride the wave that commits anyway (TC-2f)
+
+*Devin (nova), worktree `nova-tc2`, branch `devin/nova/def3-remote-coverage` — the squad-layer fix for EMBER's documented dead-end: Raid cards publish but never commit, because `BestAffordableMission` gates `RequiredValue <= idleForceValue` on the idle pool and a provider's RequiredValue is sized for a dedicated force, not for a wave that already passed the launch bar.*
+
+**Done:**
+- `SquadManagerBotModuleCAInfo` gains `UseRaidMissionSteering` (default off) +
+  `RaidMissionSteerOvercommitPercent` (300) + `RaidMissionSteerMinValue` (0).
+- New pure selector `SquadManagerBotModuleCA.BestRaidForSteering(providers, cap)`
+  — Raids only, deterministic (Priority desc, RequiredValue asc, publish order).
+  `BestAffordableMission` untouched.
+- The formation path calls it only when the Defend-hold loop left `mission` null;
+  a steered Raid lands above the non-Defend clearing (it IS a real commit) and
+  flows through the unchanged Raid target-resolution + `MissionTaken` path.
+- Six genericbot `SquadManagerBotModuleCA` instances carry the fields at default;
+  @classic untouched. Switch group `BG_raid_mission_steering`; AI_ARCHITECTURE
+  §12.27 documents the gate, semantics and rejected alternatives.
+
+**Verified:** build + tests below; `apply_increment_switches.py --dry-run` arms
+the six personality instances only. Off = bit-identical: `SelectRaidForSteering`
+returns null before touching anything.
+
 # 2026-10-02 — order-gate fix: a released lease is a hand-off, not a cross (EMBER's seam finding)
 
 *Devin (dawn), worktree `dawn-tc2e`, branch `devin/dawn/team-liveness-rescue` — the `crossed` WARN decode EMBER flagged to the squad-layer owner.*
