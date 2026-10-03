@@ -2889,9 +2889,19 @@ never *aimed* at it.
   loader untouched, so the A/B control is preserved.
 - *Terminal cards:* every contest claim ends in a DORMANT card line — `done` (walkers
   inside / building ours), `target_gone` (destroyed), `x_contest_lost` (flipped enemy),
-  or `lost_units` (walkers died in transit). Raid cards that leave the scan without a
-  reservation are shelved `target_gone`; reserved ones stay live under the executor. The
-  archive therefore has a close-out for every card this module publishes.
+  `lost_units` (walkers died in transit), `superseded` (TC-2e: an outranking ally's claim
+  landed on the cell; the walkers are stood down — release + `Stop`, or the queued
+  `EnterGarrison` would capture anyway), or `stuck` (`ClaimTimeoutTicks`, default 7500:
+  no walker inside and the claim ran past the timeout — a wedged but living walker renews
+  its lease forever, so without the timeout the claim never prunes). Raid cards that leave
+  the scan without a reservation are shelved `target_gone`; reserved ones stay live under
+  the executor. The archive therefore has a close-out for every card this module publishes.
+- *Bleeding suppression:* a consecutive `lost_units`/`x_contest_lost`/`stuck` streak on the
+  same building imposes an escalating re-contest backoff (`ContestRetryCooldownTicks`,
+  default 2500, × streak — a stuck close counts because a wedged path is topological and
+  the next walkers would re-wedge). A `done` clears the streak; `superseded` is neutral.
+  Smoke evidence: one defended building ate `lost_units` 7× in ~5000 ticks before this gate
+  existed — the suicidal re-claim loop the module was built to avoid.
 
 **EX-4 — cover the whole map** (`ExpansionPlannerBotModule.CoverAllFields`, switch
 `AC_cover_map_expansion`).
