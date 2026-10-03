@@ -1662,7 +1662,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			{
 				Player = enemy,
 				Name = enemy.InternalName,
-				FactionName = enemy.Faction?.InternalName ?? "",
+				FactionName = BotFactionView.PublicFactionOf(enemy),
 				Alive = enemy.WinState == WinState.Undefined && enemyActors.Length > 0,
 				NearestCells = -1,
 				LastSeenTick = tick,
@@ -1734,7 +1734,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			{
 				Player = enemy,
 				Name = enemy.InternalName,
-				FactionName = enemy.Faction?.InternalName ?? "",
+				FactionName = BotFactionView.PublicFactionOf(enemy),
 				Alive = enemy.WinState == WinState.Undefined && observed.Count > 0,
 				NearestCells = -1,
 				LastSeenTick = 0

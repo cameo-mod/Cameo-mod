@@ -27,6 +27,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public string Scope = "";
 		public string PersonalityArm = "", PlanArm = "";
 		public bool PersonalityPinned;
+
+		/// <summary>Which watched decision-side module conditions were granted when the bandits resolved
+		/// (combatveto, inmatchadapt, ...), "+"-joined and sorted; "none" when none were. Record-only: every armed
+		/// decision module filters which engagements ever exist, so a fitter pass must be able to condition on the set.</summary>
+		public string ArmedModules = "none";
 	}
 
 	[TraitLocation(SystemActors.Player)]
@@ -34,7 +39,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		"over the engagement-log posteriors in LearnedFile, pooled any -> family -> faction -> matchup with a safety floor (arms whose",
 		"evidence-backed LCB is below MinSafetyLcb cannot win). The personality arm pins BotPersonalityController for the match; the plan arm",
 		"adds one bounded knob overlay inside BuildOrderKnobsBotModule. Both choices freeze at draw time, are deterministic per match seed,",
-		"and are recorded on the situation snapshot for the offline fitter. No orders, no actor access — record and steering only.")]
+		"and are recorded on the situation snapshot for the offline fitter — along with which WatchConditions decision-side modules were",
+		"armed, so the fitter can condition on survivorship filters. No orders, no actor access — record and steering only.")]
 	public class PlanBanditBotModuleInfo : ConditionalTraitInfo
 	{
 		[Desc("Mod-relative path of the learned posteriors written by tools/ai/tune_plan_bandits.py --write.")]
@@ -60,6 +66,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		[Desc("Safety floor, in engagement milli: an evidenced arm whose LCB is below this cannot be chosen.")]
 		public readonly int MinSafetyLcb = -250;
+
+		[Desc("Conditions of decision-side modules that filter which engagements exist (e.g. combatveto, inmatchadapt).",
+			"Granted ones are recorded on the bandit attribution as the armed set, so the fitter can condition on survivorship filters.")]
+		public readonly string[] WatchConditions = [];
 
 		static bool IsKnob(string name) => Array.IndexOf(BuildOrderKnob.All, name) >= 0;
 
@@ -102,13 +112,14 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public override object Create(ActorInitializer init) { return new PlanBanditBotModule(init.Self, this); }
 	}
 
-	public class PlanBanditBotModule : ConditionalTrait<PlanBanditBotModuleInfo>
+	public class PlanBanditBotModule : ConditionalTrait<PlanBanditBotModuleInfo>, IObservesVariables
 	{
 		readonly World world;
 		readonly OpenRA.Player player;
 
 		bool resolved;
 		PlanBanditLearned learned = new();
+		IReadOnlyDictionary<string, int> conditionCounts = new Dictionary<string, int>(0);
 
 		public PlanBanditSnapshot Snapshot { get; private set; }
 
@@ -157,6 +168,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var enemyFaction = EnemyFactionOf(world, player);
 			var scope = ownFaction.Length > 0 && enemyFaction.Length > 0 ? $"{ownFaction}__vs__{enemyFaction}" : ownFaction;
 			snapshot.Scope = scope;
+			snapshot.ArmedModules = ArmedModules();
 
 			LoadLearned();
 
@@ -214,6 +226,26 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		{
 			while (true)
 				yield return world.LocalRandom.NextFloat();
+		}
+
+		// IObservesVariables: the engine hands the full granted-condition map at create and after every grant/revoke.
+		void ConditionsChanged(Actor self, IReadOnlyDictionary<string, int> variables)
+		{
+			conditionCounts = variables;
+		}
+
+		public IEnumerable<VariableObserver> GetVariableObservers()
+		{
+			if (Info.WatchConditions.Length > 0)
+				yield return new VariableObserver(ConditionsChanged, Info.WatchConditions);
+		}
+
+		string ArmedModules()
+		{
+			var armed = Info.WatchConditions
+				.Where(c => conditionCounts.TryGetValue(c, out var n) && n > 0)
+				.OrderBy(c => c, StringComparer.Ordinal);
+			return string.Join("+", armed) is { Length: > 0 } s ? s : "none";
 		}
 
 		// Player-level information only (the lobby faction of the main target, else the most common enemy faction), never actors.

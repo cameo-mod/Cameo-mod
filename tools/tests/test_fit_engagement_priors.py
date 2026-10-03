@@ -231,6 +231,77 @@ def test_empty_versus_prior_tags_are_excluded():
     assert all(k[0] != "CannonAP_Medium" for k in res["cells"])
 
 
+def test_priorpct_written_next_to_every_cell():
+    # F1(b): every DeliveryArmour@ line is immediately followed by its PriorPct@ twin;
+    # DefenceState@ carries none (pooled across victim armours - no single resolved prior).
+    r = _rec()
+    r["seen"]["start"]["composition"]["own_defences"] = {"gunpit": 1}
+    res = _fit([r])
+    assert res["defence_state"]  # fixture actually emits DefenceState lines
+    lines = fp.to_yaml(res, "h").splitlines()
+    cell_lines = [l for l in lines if l.startswith("\tDeliveryArmour@")]
+    assert len(cell_lines) == len(res["cells"]) > 0
+    prior_lines = [l for l in lines if l.startswith("\tPriorPct@")]
+    assert len(prior_lines) == len(cell_lines)
+    for i, l in enumerate(lines):
+        if l.startswith("\tDeliveryArmour@"):
+            key = l.split("@", 1)[1].split(":")[0]
+            assert lines[i + 1].startswith(f"\tPriorPct@{key}:")
+        if l.startswith("\tDefenceState@"):
+            assert not lines[i + 1].startswith("\tPriorPct@")
+
+
+def test_priorpct_equals_resolved_versus_prior():
+    res = _fit([_rec()])
+    assert res["cell_prior"][("CannonAP_Medium", "None")] == 50   # PRIORS["CannonAP_Medium"]["None"]
+    # an armour row the tag's table does not carry -> the default-100 the weight consumed
+    priors = {t: dict(v) for t, v in PRIORS.items()}
+    del priors["CannonAP_Medium"]["None"]
+    res2 = fp.fit({"engagements": [_rec()], "matches": []}, PROFILES, priors)
+    assert res2["cell_prior"][("CannonAP_Medium", "None")] == 100
+
+
+def _write_warhead_repo(root: pathlib.Path, bullet_light_none: int):
+    (root / "mods" / "cameo").mkdir(parents=True, exist_ok=True)
+    (root / "mods" / "cameo" / "mod.yaml").write_text("Weapons:\n\tw.yaml\n", encoding="utf-8")
+    (root / "mods" / "cameo" / "w.yaml").write_text(
+        "^Warhead_Bullet_Light:\n"
+        "\tWarhead@Bullet_Light: SpreadDamage\n"
+        "\t\tVersus:\n"
+        f"\t\t\tNone: {bullet_light_none}\n"
+        "\t\t\tHeavy: 50\n"
+        "^Warhead_CannonAP_Medium:\n"
+        "\tWarhead@CannonAP_Medium: SpreadDamage\n"
+        "\t\tVersus:\n"
+        "\t\t\tNone: 60\n"
+        "\t\t\tHeavy: 100\n", encoding="utf-8")
+
+
+def test_priorpct_detects_cell_level_staleness(tmp_path):
+    # two fixture rulesets differing in ONE Versus row -> exactly that cell's PriorPct differs.
+    r = _rec()
+    r["seen"]["start"]["composition"]["own_units"] = {"tank": 1, "rifle": 1}
+    data = {"engagements": [r] * 4, "matches": []}
+    priors = {}
+    for pct in (25, 40):
+        _write_warhead_repo(tmp_path, pct)
+        priors[pct], _ = fp.versus_priors(tmp_path, ["Bullet_Light", "CannonAP_Medium"])
+    a = fp.fit(data, PROFILES, priors[25])["cell_prior"]
+    b = fp.fit(data, PROFILES, priors[40])["cell_prior"]
+    assert a[("Bullet_Light", "None")] == 25 != b[("Bullet_Light", "None")] == 40
+    assert a[("CannonAP_Medium", "None")] == b[("CannonAP_Medium", "None")] == 60
+    assert {k for k in a if a[k] != b[k]} == {("Bullet_Light", "None")}
+
+
+def test_jsonable_flattens_tuple_keys():
+    import json
+    res = _fit([_rec()])
+    j = fp.jsonable(res)
+    json.dumps(j)  # must not raise on tuple keys
+    assert j["cell_prior"]["CannonAP_Medium|None"] == 50
+    assert ("CannonAP_Medium" + "|" + "None") in j["cells"]
+
+
 def test_profile_collisions_are_named():
     import json
     import tempfile
