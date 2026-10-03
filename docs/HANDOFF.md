@@ -1,5 +1,15 @@
 # Cameo — THE HANDOFF
 
+## 2026-10-03 (later) — Claude (coordinator, AionUI team): review round in progress
+
+`Agent: Claude (Opus 5.5) · coordinator · worktree G:/cameo-wt/claude-lead · branch claude/lead_1003_reviews`
+
+**Next (in order):** (1) land `devin/nova/am-nre-guard@28573b84d` (reviewed OK). (2) pick ONE tier-2 branch (#790 vs
+`devin/nova/inc-n-combat-veto`) from T2-VERIFY; close the other. (3) T3-VERIFY → DAWN tier 3. (4) LEDGER-VERIFY → #791.
+(5) approve `docs/design/TIER1_FITTER_SPEC.md` (`devin/tier1-fitter`), then tier-1 implementation. (6) INC-N increment of
+all default-off groups + ONE A/B (mirrors only, ≤ 3 drivers). **New worktrees: `G:/cameo-wt/` only** (C: nearly full).
+The orders file named in the entry below was never committed; the tier assignments live in this HANDOFF only.
+
 ## 2026-10-03 — Claude (coordinator): EL-0 engagement log (learning tier 0) + the five learning tiers handed to Devin
 
 `Agent: Claude-Local (Opus 5.5) · coordinator · branch claude/el1_engagement_log → PR`

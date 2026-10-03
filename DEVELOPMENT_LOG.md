@@ -1,3 +1,17 @@
+# 2026-10-03 — coordinator (AionUI team): review round for the tier-2/3 hand-ins + tier-1 spec started
+
+*Claude (Opus 5.5), lead of an AionUI team of 4 Devin agents; worktree `G:/cameo-wt/claude-lead`, branch `claude/lead_1003_reviews`.*
+
+**State found:** master `5e5639cd2` = origin, #788 + #789 merged, main-checkout staged merge already resolved (tree clean).
+Hand-ins waiting: `devin/nova/am-nre-guard@28573b84d` (P0 NRE guard — reviewed, correct, merge-ready), NOVA tier 2
+**built twice** (#790 `nova/t2_combat_veto`, 4 behind master, vs `devin/nova/inc-n-combat-veto@150429f3f`, 0 behind),
+DAWN tier 3 `devin/dawn/tier3-bandits@17fc9d8e2`, NOVA #791 ledger re-extract. Tier 1 (EMBER) has no branch; the
+HANDOFF's `ORDERS_2026-10-03_claude_learning_tiers.md` does not exist anywhere in the repo.
+**Dispatched (read-only verifiers, no commits):** T2-VERIFY (which tier-2 lands), T3-VERIFY, LEDGER-VERIFY (#791 reproducible
+from `extract_stats`?); TIER1-SPEC → `docs/design/TIER1_FITTER_SPEC.md` on `devin/tier1-fitter` (spec first, lead approves).
+**Disk:** C: was at 1.1 GB free (≈200 worktrees under `C:/tmp`, ~2 GB each) — a `git worktree add` failed mid-checkout.
+All new worktrees go to **`G:/cameo-wt/`** (865 GB free). Pruning stale `C:/tmp` worktrees needs a maintainer decision.
+
 # 2026-10-03 — armed smokes: AM_army_staging on master + EL-0 (#789) live validation
 
 *Devin (nova) — two frozen worktrees, sequential batches (one game driver at a time):*
