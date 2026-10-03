@@ -3868,6 +3868,9 @@ Player:
 		LcbZ: 164
 		MinEvidence: 4
 		MinSafetyLcb: -250
+		# Armed-set attribution (nova review 2026-10-03): decision-side conditions that filter which engagements
+		# exist are recorded as `bandit.armed` so a fitter pass can condition on the survivorship filter.
+		WatchConditions: plan_bandits, build_order_knobs, combatveto, inmatchadapt, armystaging
 		# Attack-plan arms: one bounded knob overlay multiplied into the build-order vector (preset x learned x plan x
 		# jitter), frozen at match start. `balanced` is the explicit no-op arm so the bandit can choose not to overlay.
 		PlanArms:

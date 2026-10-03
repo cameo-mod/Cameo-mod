@@ -17976,3 +17976,22 @@ Generated with [Devin](https://devin.ai)
   hits with no per-unit trait; per-hit work O(1); `Ready()` gates humans out; truth scan only at start/close.
 * DAWN's `81fa5a3c5` sat only in the shared main checkout (+ a staged origin/master merge) → reviewed (inert cooldown,
   log-identity fix) → PR #788 from `claude/land_dawn_answer_tracker` (direct push to master is denied: PR + maintainer).
+
+## 2026-10-03 — Devin/DAWN: armed-set attribution on tier-3 bandit records (nova review)
+
+* Nova's INC5 review caught the survivorship-bias hole: `combatveto` and `inmatchadapt` filter which
+  engagements ever exist, so a bandit arm fitted on raw engagement records is conditioned on the armed
+  decision-side module set — silently.
+* Fix — record the filter on the record: `PlanBanditBotModule` gains `WatchConditions` (yaml-declared
+  condition names, zero coupling to nova's types) + `IObservesVariables`; the granted subset is frozen
+  into `PlanBanditSnapshot.ArmedModules` ("+"-joined, sorted; `none`) at draw time and emitted as
+  `bandit.armed` on both the situation snapshot and every engagement record.
+* Fitter side: `tune_plan_bandits.py --armed-only SET` folds only records whose `armed` matches exactly
+  and leaves mismatched rows UNPROCESSED (a different armed-set fit still sees them); `game_key` is
+  per-(game,player) so same-game mixed-armed players split cleanly. Plain runs pool all sets —
+  documented default, A/B decides whether to split.
+* Verified: build 0E; 822/822; fitter smoke (fold 1 / hold 1 / second-filter pass folds the held row /
+  no-filter folds both / idempotent re-run); boot-gate PASS via private `Engine.SupportDir` (the shared
+  %APPDATA% log dir rotates under another lane's driver — menu marker verified in the private dir,
+  0 exceptions).
+* AI_ARCHITECTURE §12.33 gains the armed-set paragraph.
