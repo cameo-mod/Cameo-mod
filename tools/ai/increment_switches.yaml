@@ -201,3 +201,6 @@ groups:
   BH_tc3_assist_election:            # NOVA TC-3 - the coalition fold's second election pass (AI_ARCHITECTURE 12.28): a contested expansion claim elects the nearest free ally as escort, strictly after rescue drains the shared pool; the elected protect squad rallies the field as an assist_answer (inert in 1v1)
     SquadManagerBotModuleCA:
       UseCoalitionAssist: true
+  AN_combat_veto:                    # DESIGN 19.13 tier 2 / AI_ARCHITECTURE 12.31, INC-N (NOVA): arms CombatVetoBotModule + EngagementPriorsBotModule - one fog-honest veto consulted where a squad commits an attack (idle engage, committed approach at the lower abort line, wave launch vs remembered defences) or a retreat the pursuit outruns; SEEN forces only, the same BotCombatPredictor, tier-1 priors multiplied in when present; every veto a Denied mission card. No provider (classic, switch off) = bit-identical
+    GrantConditionOnBotOwner@combatveto:
+      Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla
