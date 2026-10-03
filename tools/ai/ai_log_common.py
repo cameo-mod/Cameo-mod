@@ -12,6 +12,7 @@ import sys
 MATCH_LOG = "cameo-ai-matches.jsonl"
 SITUATION_LOG = "cameo-ai-situations.jsonl"
 PLACEMENT_LOG = "cameo-ai-placements.jsonl"
+ENGAGEMENT_LOG = "cameo-ai-engagements.jsonl"
 DEFAULT_TIMESTEP_MS = 40
 
 

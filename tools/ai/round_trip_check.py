@@ -3,7 +3,7 @@
 
 Reads one or more batch support dirs (each has Logs/ with debug.log, cameo-ai-matches.jsonl,
 cameo-ai-missions.jsonl, cameo-ai-situations.jsonl) and prints one PASS/WARN/FAIL row per layer with the
-evidence count: load, perception, missions, ownership, order gate, outcomes, execution, storm, write-back, team, fog, learning, tools.
+evidence count: load, perception, missions, ownership, order gate, outcomes, execution, storm, write-back, team, engagements, fog, learning, tools.
 Exit 1 on any FAIL. A genericbot player is any player whose bot_type is not a reference bot (classic, classic_hard).
 
 Usage:
@@ -195,6 +195,31 @@ def check(dirs: list[pathlib.Path]) -> list[tuple[str, str, str]]:
     rows.append(("team", WARN if silent else PASS,
                  f"{len(team_games)} team game(s), {len(team_games) - len(silent)} with team-stack artifacts"
                  + (f" — silent: {sorted(silent)}" if silent else "")))
+
+    # 7c. engagements — the EL-0 record-only log (cameo-ai-engagements.jsonl, AI_ARCHITECTURE 12.30).
+    # Absent file = a pre-EL-0 build, not a failure. When present: every engagement needs a close_reason and a
+    # scored score block; posture samples should cover every logged game; a generic-bot batch with games but
+    # zero engagement records means the tracking never closed anything.
+    engagements = jsonl(dirs, "cameo-ai-engagements.jsonl")
+    if not engagements:
+        rows.append(("engagements", PASS, "no cameo-ai-engagements.jsonl (pre-EL-0 build)"))
+    else:
+        eng_recs = [r for r in engagements if r.get("record") == "engagement"]
+        posture_games = {r.get("game_uid") for r in engagements if r.get("record") == "posture"}
+        eng_games = {r.get("game_uid") for r in engagements}
+        unclosed = [r.get("record_id") for r in eng_recs if not r.get("close_reason")]
+        scored = sum(1 for r in eng_recs
+                     if isinstance(r.get("score"), dict) and r["score"].get("total_milli") is not None)
+        no_posture = eng_games - posture_games
+        silent_eng = {m.get("game_uid") for m in generic} - eng_games
+        problems = ([f"{len(unclosed)} missing close_reason"] if unclosed else []) \
+            + ([f"{len(eng_recs) - scored} unscored"] if eng_recs and scored < len(eng_recs) else []) \
+            + ([f"no posture: {sorted(no_posture)}"] if no_posture else [])
+        state = WARN if (problems or silent_eng) else PASS
+        rows.append(("engagements", state,
+                     f"{len(eng_recs)} engagement(s) ({scored} scored) + {sum(1 for r in engagements if r.get('record') == 'posture')} posture sample(s) over {len(eng_games)} game(s)"
+                     + (f" — {'; '.join(problems)}" if problems else "")
+                     + (f" — no log: {sorted(silent_eng)}" if silent_eng else "")))
 
     # 8. fog
     violations = sum(1 for ln in lines if "FOGCANARY-VIOLATION" in ln)
