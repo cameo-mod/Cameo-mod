@@ -1,3 +1,15 @@
+# 2026-10-03 — delta branch: launch-edge consult + remembered defences on #790
+
+*Devin (nova) — `devin/nova/combat-veto-delta`@b4868cdf8, stacked on nova/t2_combat_veto (821d7083e).*
+
+Verified the parallel tier-2 implementation first (build 0 err, 816/816 tests). Two gaps from the
+comparison review closed on a stacked branch, zero edits to their lane: the LAUNCH edge
+(CreateAttackForce never calls PredictsWin — the wave now consults TryVetoAttack on the resolved
+mission target before the squad forms; veto keeps the pool staged, Defend never consults) and
+remembered defences (IBotRememberedDefenceProvider statics near the target join the predicted enemy
+force, deduped by cell). EmitCombatVeto refactored to a cells+count core for the pre-squad emit.
+Gates: 0 err/0 warn, 816/816, fog-honesty + direct-mutation PASS, boot gate PASS. Receipt on #790.
+
 # 2026-10-03 — feat(ai): NOVA tier 2, the combat-prediction veto (AN_combat_veto, default off)
 
 *Devin (nova), worktree `nova-clean`, branch `nova/t2_combat_veto` @ master `dbd7b3b83` — ORDERS
