@@ -68,7 +68,7 @@ claims:
       print(sum(included(n.key) for n in rs.resolve('world').children))
 
   - id: shield_versus_mean
-    value: 97.6157
+    value: 184.71
     tolerance: 0.01
     what: Mean Versus-vs-Shield across all main flat warheads. Drives shield_hp_factor.
     docs: [docs/DESIGN.md, docs/design/ARMOR_LAYERS.md]
@@ -79,7 +79,7 @@ claims:
       print(tm.pseudo_armor_mean('Shield'))
 
   - id: shield_hp_factor
-    value: 1.02443
+    value: 0.541389
     tolerance: 0.01
     what: What one shield point is worth as HP (100 / mean Versus vs Shield).
     docs: [docs/DESIGN.md, docs/design/ARMOR_LAYERS.md]
@@ -90,7 +90,7 @@ claims:
       print(tm.shield_hp_factor())
 
   - id: shield_damage_share
-    value: 0.0183167
+    value: 0.0160276
     tolerance: 0.05
     what: >
       Fraction of roster raw damage landing on the Shield row at BASELINE. The claim that
@@ -228,7 +228,7 @@ claims:
       print(inventory(rs)['counts']['stacked_main_direct_actor_armament'])
 
   - id: percentage_denominator_unset
-    value: 436
+    value: 423
     tolerance: 0
     what: >
       Raw authored PercentageDenominator occurrences in active weapon files, despite
@@ -683,11 +683,11 @@ claims:
                 if p['peer'].get('role') is None))
 
   - id: armament_reference_tier_original
-    value: 140
+    value: 141
     tolerance: 0
     what: >
       Actors that reference a peer's BASE weapon because an original-shipping mod matched them by
-      name; the remaining 174 of 314 are EXPANDED and reference the elite/upgraded replacement
+      name; the remaining 173 of 314 are EXPANDED and reference the elite/upgraded replacement
       instead (maintainer, 2026-09-13). The split is what keeps a replacement from voting beside
       the weapon it replaces, so a move here means the original/expanded boundary shifted and every
       DTA elite weapon changed hands.
@@ -699,7 +699,7 @@ claims:
       print(doc['stats']['actors_tier_original'])
 
   - id: armament_pairing_input_fingerprints
-    value: 476
+    value: 514
     tolerance: 0
     what: >
       Complete input closure whose sha256 armament_pairing.json records so a consumer can refuse a
