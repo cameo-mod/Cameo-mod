@@ -17918,3 +17918,9 @@ Generated with [Devin](https://devin.ai)
   provider maps profile→tag mod-side (Versus-dict identity is bijective per `audit_family_uniqueness.py`, or
   `armament.Weapon`→`Warhead@tag`). Spec §6 updated; `Factor@` coarse cells kept as hedge. Remaining PR delta:
   coarse cells + `jsonable` + doc updates.
+* **F1 ruling landed (`6bce16baf` orders):** (a) one schema — `EngagementPriors`/`Factor@` parse path retired;
+  (b) staleness is per-cell `PriorPct@` twin (LedgerHash = offline provenance, game can't mount ledgers);
+  (c) NOVA ports the consumer onto landed tier 2 with a `WarheadTag@` bridge. Phase-B fitter work moved to
+  `devin/tier1-priorpct` @ `521a843ad` (PriorPct@ per cell; DefenceState@ exempt — pooled across armours; pytest
+  23/23). This branch scoped back: `Factor@` emission, `tag_class`, and superseded spec text removed per F1(a);
+  `jsonable` lives on the priorpct branch. Remaining delta here = this log only.

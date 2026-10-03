@@ -183,11 +183,6 @@ BotEngagementPriors:
         AttackTiming@<enemy_faction>: p10_tick,p50_tick,p90_tick
         Response@<own_faction>: p50_ticks,p90_ticks,army_dist_cells
         SuicideIndex@<mine>__vs__<theirs>: <milli>
-        # consumer-fallback cells, same residual pooled per warhead CLASS x armour
-        # (the delta consumer's FactorPermille keys by class name, not the family tag):
-        Factor@<warhead_class>|<armour>: <milli>
-        ...
-        StaticDefenceFactorPermille: <milli>   # flat pooled defence residual (their fallback)
 ```
 
 Versioning against the balance ledger: `LedgerHash` plus, per cell, the prior the cell was fitted
@@ -203,25 +198,19 @@ at match start (frozen, §19.2); bots run host-only so there is no sync surface 
 
 ## 6. Who reads it
 
-- **Tier-2 veto (consumer, landed in INC 2026-10-03)**: `CombatVetoEval.Predict` multiplies
-  `DamagePerTickAgainst` by `priors.CorrectionMilli(attacker, target)` on the own side;
-  `IBotEngagementPriors` (`Mods.CA`) declares that one call and explicitly delegates the
-  unit→delivery-key mapping to the provider ("the file that feeds an implementation owns the
-  unit→delivery-key mapping"). `EngagementPriorsBotModule` (master) maps it to per-unit-type
-  `TradePercent` from `arsenal_priors.yaml` today.
-  > 2026-10-03 integration note (resolved): the alternative `combat-veto-delta` design —
-  > module-internal `EngagementPriors` with `FactorPermille(weapon.Delivery, armour)` keyed by
-  > warhead class name — did **not** land; Design A did. `BotWeaponProfile` on master carries no
-  > `Delivery` field at all (dpt, Range, target sets, the warhead's resolved `Versus` dict), so
-  > the phase-B provider maps profile → delivery family tag itself, mod-side, no engine change:
-  > match `BotWeaponProfile.Versus` to the `^Warhead_*` template's resolved Versus table
-  > (bijective — `audit_family_uniqueness.py` keeps every family distinct), or map
-  > `armament.Weapon` → `Warhead@<tag>` from the weapon yaml nodes. The fitter also emits pooled
-  > `Factor@<class>|<armour>` + `StaticDefenceFactorPermille` cells as a hedge for any
-  > class-grain implementation; fine `DeliveryArmour@` cells stay primary.
-  Spec'd consumer change (phase B, small): extend `EngagementPriorsBotModule` to prefer the
-  delivery×armour table when the new file exists — map `BotUnitProfile` → its main
-  warhead family (above) × `target.Armor` → `C[d][a]`; fall back to `TradePercent`, else 1000.
+- **Tier-2 veto (consumer, already built)**: `CombatVetoEval.Predict` multiplies
+  `DamagePerTickAgainst` by `priors.CorrectionMilli(attacker, target)` on the own side.
+  `EngagementPriorsBotModule` (NOVA branch) currently maps that call to per-unit-type
+  `TradePercent` from `arsenal_priors.yaml`; its own comment says a finer attacker×target table
+  lands later "without an API change". Spec'd consumer change (small): extend the module to
+  prefer the delivery×armour table when the new file exists — map `BotUnitProfile` → its main
+  warhead family × `target.Armor` → `C[d][a]`; fall back to `TradePercent`, else 1000.
+  > 2026-10-03 integration note: NOVA's newer `devin/nova/combat-veto-delta` branch folds the
+  > priors load into `CombatVetoBotModule` itself (no provider/interface; gated by `AN_combat_veto`)
+  > and parses a different schema — `EngagementPriors:` root, `Factor@<delivery>|<armour>` with
+  > `*|<armour>` wildcards, `StaticDefenceFactorPermille`, `StatFingerprint` (FNV-1a-64 over
+  > runtime-resolved stats). This spec's `BotEngagementPriors`/`DeliveryArmour@`/`LedgerHash`
+  > schema needs a lead ruling on which side adapts before phase B.
 - **Later tiers**: the tier-5 engagement network's inputs include "fog-honest ratios of tier-1
   strength split by range band" (research doc) — same provider seam.
 - `BotLearnedPriors` (production weighting) keeps `arsenal_priors.yaml` — unchanged.
