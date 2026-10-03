@@ -260,6 +260,29 @@ def count_openra_processes() -> int:
         return 0
 
 
+def parse_driver_count(output: str) -> int:
+    """Lines naming a run_ai_match_batch.py command line (one per batch driver)."""
+    return sum(1 for line in output.splitlines() if "run_ai_match_batch" in line)
+
+
+def count_batch_drivers() -> int:
+    """Machine-wide run_ai_match_batch.py drivers — ours AND foreign. A driver holds its
+    slot for the whole batch, including the gaps between matches when no OpenRA.exe runs."""
+    if os.name == "nt":
+        try:
+            proc = subprocess.run(
+                ["powershell", "-NoProfile", "-Command",
+                 "Get-CimInstance Win32_Process -Filter \"Name='python.exe'\" "
+                 "| Select-Object -ExpandProperty CommandLine"],
+                capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=30)
+        except (OSError, subprocess.SubprocessError):
+            return 0
+        return parse_driver_count(proc.stdout)
+    proc = subprocess.run(["pgrep", "-fa", "run_ai_match_batch"],
+                          capture_output=True, text=True, timeout=30)
+    return parse_driver_count(proc.stdout)
+
+
 def recent_credit(running: list[Shard], grace: float) -> int:
     """Shards launched within `grace` seconds whose OpenRA child has not had time to
     appear in tasklist yet — counting them anyway is what keeps a launch burst under
@@ -606,7 +629,10 @@ def drive(shards: list[Shard], args: argparse.Namespace,
                 if s.arm in stopped:
                     pending.remove(s)   # already marked done+early_stopped inside evaluate
         while pending:
-            load = count_openra_processes() + recent_credit(running, args.spawn_grace)
+            # WORKFLOW §4 caps DRIVERS, not games: a driver between matches has no OpenRA.exe for a
+            # moment, so a games-only count over-launched (5 drivers on the box, 2026-10-03).
+            load = max(count_openra_processes() + recent_credit(running, args.spawn_grace),
+                       count_batch_drivers())
             if load >= args.max_instances:
                 break
             shard = pending.popleft()

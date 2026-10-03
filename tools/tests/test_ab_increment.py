@@ -215,6 +215,20 @@ class TasklistParseTests(unittest.TestCase):
             "INFO: No tasks are running which match the specified criteria.\r\n"), 0)
 
 
+class DriverCountTests(unittest.TestCase):
+    def test_counts_batch_drivers_not_other_python(self):
+        out = (
+            "python tools\\ai\\run_ai_match_batch.py --factions td_gdi --support-dir C:\\a\r\n"
+            "python tools/ai/ab_increment.py --ctrl abc --cand def --out C:/x\r\n"
+            "C:\\Python312\\python.exe C:/t/tools/ai/run_ai_match_batch.py --factions td_nod\r\n"
+            "python -m pytest -q tools/tests\r\n"
+        )
+        self.assertEqual(ab_increment.parse_driver_count(out), 2)
+
+    def test_empty_is_zero(self):
+        self.assertEqual(ab_increment.parse_driver_count(""), 0)
+
+
 class SmokeVerificationTests(unittest.TestCase):
     def _smoke_dir(self, td, records, results_rows):
         support = pathlib.Path(td) / "smoke" / "ctrl_td_gdi"
