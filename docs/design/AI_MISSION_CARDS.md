@@ -107,6 +107,14 @@ logged `MISSION <id> DORMANT until tick N`) — fransotto's dormant shelf, owned
 executes captures. Both ship OFF (0) until their A/B (AI_MASTER_PLAN §1.2 step 6); the candidate sets 1 and 2. For
 missions the master AI chooses and squads execute, the shelf is LC8.
 
+*2026-10-03 (NOVA, armed 2v2 smoke):* the shelf counts deaths only — a voluntary `outmatched` retreat is
+not a failure and never did reach it, so a target whose ROUTE stays hot storms silently: commit-retreat every
+few hundred ticks, forever (`capture:td_nod_airstrip:306` — four commits by one bot over ~28k ticks). The new
+**retreat shelf** counts consecutive `Released/outmatched` closes per mission id on a parallel streak
+(`CaptureRetreatsBeforeDormant`, genericbot armed at 4 — a transient hot route must not shelve a good target);
+`Failed` and `Success` both clear it, a `Failed` still feeds the death streak. Same `CaptureDormantTicks` rest.
+The dormant record is identical (`DORMANT`, reason `outmatched`) — the round-trip storm layer sees it either way.
+
 **Escorted captures — one mission, two executors (maintainer 2026-09-30, `EscortDefendedCaptures`, off until its A/B).**
 **Maintainer's rule: escorts are only for TECH buildings in an unsafe area; the enemy base is taken by stealth.** A
 building in the enemy's base is never escorted — an escort gives the engineer away; it sneaks in alone along

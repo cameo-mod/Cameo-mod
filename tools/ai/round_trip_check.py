@@ -117,15 +117,26 @@ def check(dirs: list[pathlib.Path]) -> list[tuple[str, str, str]]:
     rows.append(("outcomes", FAIL if dangling else PASS,
                  f"{attempts} attempt(s), {dangling} dangling, {in_flight} in flight at match end"))
 
-    # 6b. execution coverage — a published card that still has no attempt, no denial and no
-    # terminal event at match end was produced but never consumed (provider dead-end, or the
-    # card simply outlived the match; unaffordable/unreachable cards legitimately sit open).
-    published = {r.get("mission_id") for r in missions if r.get("event") == "PUBLISHED"}
-    closed_or_taken = {r.get("mission_id") for r in missions
+    # 6b. execution coverage — a published card with no attempt, no denial and no terminal event
+    # that sat open past the executors' resolution horizon was produced but never consumed
+    # (provider dead-end; unaffordable/unreachable cards legitimately sit open). Cards younger
+    # than the horizon at the last record are in-flight work, same grace as open attempts.
+    open_grace_ticks = 7500
+    last_tick_of = {}
+    for r in missions:
+        g = r.get("game_uid")
+        last_tick_of[g] = max(last_tick_of.get(g, 0), r.get("tick") or 0)
+    published_tick = {(r.get("game_uid"), r.get("mission_id")): r.get("tick") or 0
+                      for r in missions if r.get("event") == "PUBLISHED"}
+    closed_or_taken = {(r.get("game_uid"), r.get("mission_id")) for r in missions
                        if r.get("event") in ("DENIED", "DORMANT") or (r.get("event") is None and r.get("state"))}
-    unclaimed = published - closed_or_taken
+    unclaimed = [m for g, m in published_tick
+                 if (g, m) not in closed_or_taken and last_tick_of.get(g, 0) - published_tick[g, m] > open_grace_ticks]
+    live_at_end = [m for g, m in published_tick
+                   if (g, m) not in closed_or_taken and last_tick_of.get(g, 0) - published_tick[g, m] <= open_grace_ticks]
     rows.append(("execution", WARN if unclaimed else PASS,
-                 f"{len(unclaimed)} published card(s) still open with no attempt at match end (of {len(published)})"))
+                 f"{len(unclaimed)} published card(s) dead-ended past the {open_grace_ticks}t open horizon, "
+                 f"{len(live_at_end)} still live at match end (of {len(published_tick)})"))
 
     # 6c. republish storm — consecutive bleeding closes on the same mission arriving FASTER than a sane
     # backoff would allow. Executor-agnostic: catches the killbox pattern (claim -> walkers die ->

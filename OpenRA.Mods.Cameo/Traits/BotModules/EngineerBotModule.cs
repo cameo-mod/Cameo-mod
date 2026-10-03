@@ -163,6 +163,13 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		[Desc("Ticks a dormant capture mission rests before its target may be tried again.")]
 		public readonly int CaptureDormantTicks = 3000;
 
+		[Desc("Consecutive released/outmatched retreats on the same capture mission that shelve it for",
+			"CaptureDormantTicks. The death streak (CaptureFailuresBeforeDormant) is unchanged — a voluntary",
+			"retreat is still not a failure — but a target whose route stays hot through every recheck produces",
+			"commit-retreat churn the shelf otherwise never sees (armed 2v2 smoke: one defended airstrip committed",
+			"4x by the same bot across ~28k ticks). Higher than the death threshold on purpose. 0 disables.")]
+		public readonly int CaptureRetreatsBeforeDormant = 0;
+
 		[Desc("Escort as ONE mission (maintainer 2026-09-30): a TECH building (neutral, or a PriorityCapturableActorTypes",
 			"entry) defended by enemy armed units (within EnemyAvoidanceRadius) is not attempted solo; a building in the",
 			"enemy base is never escorted — the engineer sneaks in alone (SafePath), an escort would give it away. The mission is PUBLISHED and a protection request is raised at the",
@@ -240,6 +247,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		readonly IBotRequestUnitProduction[] unitBuilders;
 		readonly Dictionary<string, int> missionAttempts = [];
 		readonly Dictionary<string, int> missionFailStreak = [];
+		readonly Dictionary<string, int> missionRetreatStreak = [];
 		readonly Dictionary<string, int> dormantUntil = [];
 
 		// The one escorted capture in progress: the mission waits (no attempt) until the escort holds the target area.
@@ -1385,16 +1393,37 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				UnitCell = world.Map.CellContaining(engineer.CenterPosition)
 			});
 
-			// The dormant shelf: a success clears the streak; consecutive losses rest the mission.
+			// The dormant shelf: a success clears both streaks; consecutive losses rest the mission.
+			// A consecutive `Released/outmatched` run feeds the retreat shelf instead — a voluntary
+			// retreat is not a failure, but sustained commit-retreat churn still rests the target.
 			if (state == BotMissionAttemptState.Success)
+			{
 				missionFailStreak.Remove(job.MissionId);
+				missionRetreatStreak.Remove(job.MissionId);
+			}
 			else if (state == BotMissionAttemptState.Failed)
 			{
+				missionRetreatStreak.Remove(job.MissionId);
 				var streak = missionFailStreak.GetValueOrDefault(job.MissionId) + 1;
 				missionFailStreak[job.MissionId] = streak;
 				if (GoesDormant(streak, Info.CaptureFailuresBeforeDormant))
 				{
 					missionFailStreak.Remove(job.MissionId);
+					dormantUntil[job.MissionId] = world.WorldTick + Info.CaptureDormantTicks;
+					BotMissionLog.Write(new BotMissionRecord
+					{
+						Player = player, MissionId = job.MissionId, Event = BotMissionEvent.Dormant, Reason = BotMissionReasons.Outmatched,
+						Executor = "Engineers", MissionType = "capture", TargetCell = target?.Location
+					});
+				}
+			}
+			else if (state == BotMissionAttemptState.Released && reason == BotMissionReasons.Outmatched)
+			{
+				var retreats = missionRetreatStreak.GetValueOrDefault(job.MissionId) + 1;
+				missionRetreatStreak[job.MissionId] = retreats;
+				if (GoesDormant(retreats, Info.CaptureRetreatsBeforeDormant))
+				{
+					missionRetreatStreak.Remove(job.MissionId);
 					dormantUntil[job.MissionId] = world.WorldTick + Info.CaptureDormantTicks;
 					BotMissionLog.Write(new BotMissionRecord
 					{

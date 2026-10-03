@@ -1,3 +1,30 @@
+# 2026-10-03 — capture retreat shelf + the armed 2v2 round-trip
+
+*Devin (nova), worktree `nova-tc2` — the armed 2v2 smoke ran the full TC stack for real
+(`hard,hard` vs `classic,classic`, 3 variants, `support-2v2-smoke/`): every channel produced
+live records — `assist_answer` (Multi1 rallied to Multi0's contested field, t39058),
+`defend_answer` x62, `raid:` x8 — and `round_trip_check` passed 9 layers with three findings:
+`crossed=1`, `fit() over 0 matches`, and one republish storm.*
+
+**Done:**
+- The storm (`capture:td_nod_airstrip:306`, four commits by one bot over ~28k ticks) is the
+  class the dormant shelf cannot see: `Released/outmatched` is a voluntary retreat, not a
+  failure, so it never fed `missionFailStreak`. New parallel `missionRetreatStreak` counts
+  consecutive outmatched closes per mission id; `CaptureRetreatsBeforeDormant` (default 0,
+  genericbot armed at 4) shelves the target for `CaptureDormantTicks`. `Failed`/`Success`
+  clear it; `Failed` still feeds the death streak. Maintainer ruling preserved — a retreat
+  is still not a failure, the retreat threshold just catches sustained churn.
+- Verified mid-smoke that the death shelf DOES work (Multi0's two consecutive lost_units on
+  the same target hit `GoesDormant` at the configured 2).
+- `round_trip_check.py` now reports `contested_claims` (claim-kind races) separately from
+  `shared_objectives` (attack-kind ids shared by allies = coordinated strikes) — landed with
+  BF-2 in #784.
+
+**Verified:** 750/750 tests on the BF-2 branch; dry-run BF = 4 genericbot changes;
+boot-gate passed; `exec_guard.py` worktree-resolution fix carried in #784 (the running
+copy keyed the gate off the main checkout's index — any lane's staged files there blocked
+every other lane's commit; bash_guard's resolution ported).
+
 # 2026-10-03 — BF-2 prefer-shard capture targets: the simultaneous-pick race window closed
 
 *Devin (nova), worktree `nova-tc2`, branch `devin/nova/def3-remote-coverage` — armed 2v2 smoke
@@ -17646,3 +17673,29 @@ loser RELEASED `superseded` inside ~100-180t). Sequential retries no longer read
 arbitration failures.
 
 Generated with [Devin](https://devin.ai)
+
+## 2026-10-03 — ember lane: out11 4/4 clean + crossed-order root cause + execution grace
+
+out11 (cd0865a0c + crate/stand-down fixes, all 44 groups incl. Z_def3 + BF-2 shards):
+4/4 clean, 2-2, zero exceptions. match_end flush holds at scale (2 records landed;
+outcomes PASS: 119 attempts, 0 dangling, 0 in-flight). storm PASS, fog PASS.
+
+The residual `crossed=1` (GC-1 -> CratePickup) decoded via BotOrderGate.NoteIssued:
+a clean hand-off is proven by `last.Held && holder != earlier`; GC-1's stand-down
+RELEASED the lease before queuing Stop, so the Stop recorded Held=false and the
+crate picker's order inside the window counted as a fight. Reordered: Stop while
+still holder, release after — the gate now sees a provable release.
+
+round_trip_check execution layer gained an open-horizon grace: a PUBLISHED card only
+dead-ends if it stayed open >7500t past the last record of ITS game (per-game
+last-tick — a global max understates age in multi-game batches). out7 still WARNs
+correctly (3 real dead-ends); out9/out11 PASS with 3 live-at-end cards each —
+contest cards still marching inside their own claim timeout are work, not debt.
+
+Flag for the engineer owner (NOVA — file active today): the same release-before-
+order shape GC-1 just fixed exists at two sites in EngineerBotModule —
+`EngineerCheck.Stuck` (release, then QueueOrder Stop) and the capture-supersede
+path (`EndMission` + `leases.Release`, then Stop). Each Stop records Held=false at
+the order gate, so a take-over inside the window reads as crossed instead of a
+provable hand-off. Reordering Stop before Release is the proven shape
+(GC-1 `StandDownWalkers`, `3fefa249e`).
