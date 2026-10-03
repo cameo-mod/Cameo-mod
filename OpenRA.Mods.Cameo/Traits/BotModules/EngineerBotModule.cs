@@ -720,7 +720,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			// no-op it is today.
 			HashSet<WPos> claimsAhead = null;
 			if (Info.UseTeamCaptureClaims)
-				claimsAhead = TeamBlackboard.ClaimsAheadOf(TeamBlackboard.CollectBroadcasts(player), player.ClientIndex);
+				claimsAhead = TeamBlackboard.ClaimsAheadOf(TeamBlackboard.CollectBroadcasts(player), player.InternalName);
 
 			bool ClaimedByOutrankingAlly(Actor target) =>
 				claimsAhead != null && claimsAhead.Contains(world.Map.CenterOfCell(target.Location));

@@ -18,66 +18,90 @@ namespace OpenRA.Mods.Cameo.Test
 	// TC-2e (AI_ARCHITECTURE.md §12.17): capture-claim arbitration on the team
 	// blackboard. ClaimsAheadOf is the pure half — the union of every allied
 	// CaptureClaims position whose publisher outranks the caller (strictly lower
-	// ClientIndex wins). The module ticks that consume it stay integration-side.
+	// participant key — InternalName, not ClientIndex — wins; map-side bots share
+	// the host's ClientIndex, post-merge audit 4.4). The module ticks that consume
+	// it stay integration-side.
 	[TestFixture]
 	public sealed class TeamCaptureClaimsTest
 	{
 		static readonly WPos ClaimA = new(1024, 2048, 0);
 		static readonly WPos ClaimB = new(5120, 4096, 0);
 
-		static TeamBroadcast Broadcast(int clientIndex, params WPos[] captureClaims) =>
+		static TeamBroadcast Broadcast(string participantId, params WPos[] captureClaims) =>
 			new(1500, 0, 0, 0, DirectorPhase.BuildUp, null, false, WPos.Zero,
-				clientIndex, default, default, default, default, captureClaims);
+				0, default, default, default, default, captureClaims, participantId);
 
 		[Test]
 		public void NullOrEmptyInputYieldsNoClaims()
 		{
-			Assert.That(TeamBlackboard.ClaimsAheadOf(null, 3), Is.Empty);
-			Assert.That(TeamBlackboard.ClaimsAheadOf(new List<TeamBroadcast>(), 3), Is.Empty);
+			Assert.That(TeamBlackboard.ClaimsAheadOf(null, "Multi3"), Is.Empty);
+			Assert.That(TeamBlackboard.ClaimsAheadOf(new List<TeamBroadcast>(), "Multi3"), Is.Empty);
+			Assert.That(TeamBlackboard.ClaimsAheadOf(new[] { Broadcast("Multi1", ClaimA) }, null), Is.Empty);
 		}
 
 		[Test]
-		public void LowerIndexAllyClaimsAhead()
+		public void LowerKeyAllyClaimsAhead()
 		{
-			var claims = TeamBlackboard.ClaimsAheadOf(new[] { Broadcast(1, ClaimA) }, 3);
+			var claims = TeamBlackboard.ClaimsAheadOf(new[] { Broadcast("Multi1", ClaimA) }, "Multi3");
 			Assert.That(claims, Does.Contain(ClaimA));
 			Assert.That(claims, Has.Count.EqualTo(1));
 		}
 
 		[Test]
-		public void HigherIndexAllyNeverOutranks()
+		public void HigherKeyAllyNeverOutranks()
 		{
-			var claims = TeamBlackboard.ClaimsAheadOf(new[] { Broadcast(5, ClaimA) }, 3);
+			var claims = TeamBlackboard.ClaimsAheadOf(new[] { Broadcast("Multi5", ClaimA) }, "Multi3");
 			Assert.That(claims, Is.Empty,
-				"an ally that publishes the same cell but indexes below ours keeps its claim unchallenged");
+				"an ally that publishes the same cell but keys below ours keeps its claim unchallenged");
 		}
 
 		[Test]
-		public void SameIndexIsNotAhead()
+		public void SameKeyIsNotAhead()
 		{
-			// Two broadcasts can never share a ClientIndex in a live match — CollectBroadcasts
-			// reads one member per Player — but the helper itself must still hold strictly-lower.
-			var claims = TeamBlackboard.ClaimsAheadOf(new[] { Broadcast(3, ClaimA) }, 3);
+			var claims = TeamBlackboard.ClaimsAheadOf(new[] { Broadcast("Multi3", ClaimA) }, "Multi3");
 			Assert.That(claims, Is.Empty);
+		}
+
+		[Test]
+		public void SharedClientIndexMapSideBotsStillArbitrate()
+		{
+			// Audit 4.4 regression: every broadcast here carries ClientIndex 0 — the
+			// map-side reality the int ordering could not see. Multi1 must still
+			// outrank Multi3.
+			var claims = TeamBlackboard.ClaimsAheadOf(new[] { Broadcast("Multi1", ClaimA) }, "Multi3");
+			Assert.That(claims, Does.Contain(ClaimA),
+				"identical ClientIndex must not disable precedence — participant key decides");
+		}
+
+		[Test]
+		public void MissingParticipantIdFallsBackToClientIndex()
+		{
+			// An old-version broadcast (no ParticipantId) keys as "#<ClientIndex>" —
+			// ordinal "#" < "M", so it outranks every InternalName publisher. The
+			// order stays total and deterministic across a mixed-version board.
+			var old = new TeamBroadcast(1500, 0, 0, 0, DirectorPhase.BuildUp, null, false,
+				WPos.Zero, 7, default, default, default, default, new[] { ClaimA });
+			var claims = TeamBlackboard.ClaimsAheadOf(new[] { old }, "Multi0");
+			Assert.That(claims, Does.Contain(ClaimA));
 		}
 
 		[Test]
 		public void MultipleClaimantsOnOnePositionStillResolveToLowest()
 		{
-			// Two allies claim the same cell: index 1 outranks index 3, so member 4 and
-			// member 3 both read the cell as claimed-ahead while the winner (1) reads none.
-			var broadcasts = new[] { Broadcast(3, ClaimA), Broadcast(1, ClaimA) };
-			Assert.That(TeamBlackboard.ClaimsAheadOf(broadcasts, 4), Does.Contain(ClaimA));
-			Assert.That(TeamBlackboard.ClaimsAheadOf(broadcasts, 2), Does.Contain(ClaimA));
-			Assert.That(TeamBlackboard.ClaimsAheadOf(broadcasts, 1), Is.Empty,
-				"the lowest-index claimant sees nothing ahead — it is the winner by construction");
+			// Two allies claim the same cell: Multi1 outranks Multi3, so Multi4 and
+			// Multi3 both read the cell as claimed-ahead while Multi1 reads none.
+			var broadcasts = new[] { Broadcast("Multi3", ClaimA), Broadcast("Multi1", ClaimA) };
+			Assert.That(TeamBlackboard.ClaimsAheadOf(broadcasts, "Multi4"), Does.Contain(ClaimA));
+			Assert.That(TeamBlackboard.ClaimsAheadOf(broadcasts, "Multi2"), Does.Contain(ClaimA));
+			Assert.That(TeamBlackboard.ClaimsAheadOf(broadcasts, "Multi1"), Is.Empty,
+				"the lowest-key claimant sees nothing ahead — it is the winner by construction");
 		}
 
 		[Test]
 		public void ClaimsUnionAcrossBroadcastsAndSkipNulls()
 		{
-			var broadcasts = new TeamBroadcast[] { null, Broadcast(0, ClaimA), Broadcast(1, ClaimB) };
-			var claims = TeamBlackboard.ClaimsAheadOf(broadcasts, 2);
+			var broadcasts = new TeamBroadcast[] { null, Broadcast("Multi0", ClaimA), Broadcast("Multi1", ClaimB) };
+			var claims = TeamBlackboard.ClaimsAheadOf(broadcasts, "Multi2");
 			Assert.That(claims, Is.EquivalentTo(new[] { ClaimA, ClaimB }));
 		}
 
@@ -85,7 +109,7 @@ namespace OpenRA.Mods.Cameo.Test
 		public void BroadcastWithoutClaimsContributesNothing()
 		{
 			// captureClaims left at the ctor default stores an empty list, never null.
-			var claims = TeamBlackboard.ClaimsAheadOf(new[] { Broadcast(0) }, 2);
+			var claims = TeamBlackboard.ClaimsAheadOf(new[] { Broadcast("Multi0") }, "Multi2");
 			Assert.That(claims, Is.Empty);
 		}
 	}

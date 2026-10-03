@@ -16,9 +16,11 @@ and reports, per team and per match, the §12.18 acceptance metrics:
                       taken provider cards; secure:<player> is emitted when a
                       cardless Rush wave commits against the named enemy
                       (mission target or main-target steering).
-    contested_claims  same `mission_id` (same capturable actor id) attempted
-                      by >=2 teammates — two bots racing one expansion;
-                      TC-2c should drive this to ~0 when armed.
+    contested_claims  same exclusive-claim `mission_id` with genuinely
+                      overlapping open attempts by >=2 teammates — a real race
+                      for one capturable. A release-then-recommit is succession
+                      (claim timeouts legitimately reopen finished targets);
+                      arbitration resolves overlaps via superseded stand-downs.
     defend_answers    defend_kind mission attempts (COMMITTED only). Three
                       sources: `defend:self:rN` = own-base Defend BotMission
                       provider cards; `defend_answer:<requesterKey>:<cell>` =
@@ -128,12 +130,41 @@ def analyse(missions, team):
     CLAIM_KINDS = {"capture", "garrison_contest"}
     by_mid = collections.defaultdict(set)
     kind_of = {}
+    # mid -> [(player, commit_tick, close_tick_or_None)] per claim attempt
+    claim_open = collections.defaultdict(list)
     for r in attempts:
         kind, mid, _ = mission_of(r)
         by_mid[mid].add(r.get("player"))
         kind_of[mid] = kind
+        if kind not in CLAIM_KINDS:
+            continue
+        if r.get("state") == "COMMITTED":
+            claim_open[mid].append([r.get("player"), r.get("attempt"), r.get("tick") or 0, None])
+        elif claim_open.get(mid):
+            for o in reversed(claim_open[mid]):
+                if o[0] == r.get("player") and o[1] == r.get("attempt") and o[3] is None:
+                    o[3] = r.get("tick") or 0
+                    break
+
     shared = {mid: ps for mid, ps in by_mid.items() if len(ps) > 1}
-    contested = {m: p for m, p in shared.items() if kind_of[m] in CLAIM_KINDS}
+    window = analyse.window
+
+    # Contested = genuinely overlapping opens: two teammates held the same claim
+    # open at once. A release-then-recommit is succession, not a race — claim
+    # timeouts legitimately reopen a target a teammate already finished with.
+    def racing(opens):
+        for i, a in enumerate(opens):
+            for b in opens[i + 1:]:
+                if a[0] == b[0]:
+                    continue
+                a_end = a[3] if a[3] is not None else 1 << 30
+                b_end = b[3] if b[3] is not None else 1 << 30
+                if a[2] <= b_end and b[2] <= a_end:
+                    return True
+        return False
+
+    contested = {m: p for m, p in shared.items()
+                 if kind_of[m] in CLAIM_KINDS and racing(claim_open.get(m, []))}
     shared_objectives = {m: p for m, p in shared.items() if kind_of[m] in ATTACK_KINDS}
 
     # Shared pushes: same enemy target_player attacked by >=2 teammates
@@ -141,7 +172,6 @@ def analyse(missions, team):
     # later window must not extend the push's apparent duration.
     shared_push_windows = 0
     push_events = collections.defaultdict(set)  # (target, bucket) -> players
-    window = analyse.window
     for r in attempts:
         kind, _, tgt = mission_of(r)
         if kind in ATTACK_KINDS and tgt and tgt not in team and r.get("state") == "COMMITTED":

@@ -205,7 +205,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			// one read per pass. Flag off or 1v1 leaves null and every gate below is the no-op it is today.
 			HashSet<WPos> claimsAhead = null;
 			if (Info.UseTeamCaptureClaims)
-				claimsAhead = TeamBlackboard.ClaimsAheadOf(TeamBlackboard.CollectBroadcasts(player), player.ClientIndex);
+				claimsAhead = TeamBlackboard.ClaimsAheadOf(TeamBlackboard.CollectBroadcasts(player), player.InternalName);
 
 			// BF-2 (§12.26): the deterministic shard tier — in-shard targets sort first,
 			// out-of-shard stays eligible after them. Size 1 makes every tier 0, the no-op.

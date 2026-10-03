@@ -79,6 +79,65 @@ before either claim reaches the blackboard).*
 
 **Verified:** armed smoke — 4 contested ids of which 3 were simultaneous-commit races and 1 a
 shared raid; report re-run shows `contested_claims=4 shared_objectives=1` after the split.
+
+# 2026-10-03 — armed 2v2 forensics: claim arbitration ordered by participant key, not ClientIndex
+
+*Devin (dawn), main checkout — the armed-run follow-up the merge receipt queued. Fixes review §4.4's residual: the TC-3 identity fix reached rescue/sectors but not TC-2e precedence or TC-2d rank.*
+
+**Finding:** the armed 2v2 (BF_team_capture_claims + coalition groups, gdi/nod/mixed 3-match set) still
+showed 27 allied contested capture ids. Cause: `ClaimsAheadOf` ordered by `ClientIndex` — map-side
+bots share the host's index, so `broadcast.ClientIndex >= myClientIndex` filtered every broadcast and
+no claim was ever "ahead". The arbitration ran every pass and could never fire. `TeamRoleRank` had the
+same blind spot (a shared index collapses every map-side team to rank 0 → one role for the team).
+
+**Fix:** ordering moves to `CoalitionFold.ParticipantKey` (`Player.InternalName`; `#ClientIndex`
+fallback marks old-version publishers). `ClaimsAheadOf(broadcasts, string)`; EngineerBotModule +
+GarrisonContestBotModule pass `player.InternalName`; `TeamRoleRank` string-keyed the same way. Report
+coherence: `contested_claims` counts exclusive-claim kinds only — a shared `secure:<enemy>` is the
+coordinated push and lands under `shared_push_windows`, not contested.
+
+**Verified:** build 0W/0E; tests 745/745 (incl. shared-ClientIndex regression + fallback + same-key
+cases). Armed gdi-mirror 2v2 on the fixed build: superseded stand-downs on capture ids 0→8 — every
+contested race now resolves by arbitration inside ~125-500 ticks (the documented staggered-broadcast
+window), not by outmatched/lost_units attrition. Residual contested ids = the ~1-commit propagation
+overlap; `defend_answer` commits 25, `secure` push counted under shared_push_windows. One watch-item:
+a standing defend request produced 16 commit/release cycles on one requester+cell id — honest records,
+but the protection squad releases and re-rallies on the same continuous request; worth a hold-time
+look in the TC-3 lane.
+
+**Second armed run (TC-3 assist election added, `BH_tc3_assist_election`):** same build plus the fold's
+second pass armed — capture superseded stand-downs 8, `raid` COMMITTED→SUCCESS fired once (TC-2f
+steering landing), `defend_answer` 23 committed / 14 superseded-closed, zero order-gate `crossed`/
+orphan/double-owner events across all four bots. `assist_answer` never fired: the publisher only
+emits when the planner's *current* field target carries remembered threat, and this mirror produced
+no contested expansion picks — the election itself is ParticipantKey-clean (requester order,
+self-skip, shared pool), so 0 records is the publisher condition unmet, not a defect. Runtime
+exercise of the assist channel still wants a contested-field map or a 6v6.
+
+# 2026-10-03 — merge receipt: canonical TC-2e (`02a2a73e0`) + DAWN telemetry/gate preserves
+
+*Devin (dawn), main checkout, merge commit `56aba20bd`.*
+
+**Resolution:** origin's canonical TC-2e won every overlapping file — plural
+`TeamBroadcast.CaptureClaims` over the `IBotCaptureClaimSource` seam (Engineer + GarrisonContest
+providers), `Player.InternalName` participant identity (closes review §4.4), `TeamBlackboard.IsLive`
++ `BroadcastMaxAgeTicks=500`, active stand-down on lost arbitration (lease release, walker stop,
+superseded engineer mission end), `BF_team_capture_claims` switch. The local first pass's
+`IBotCaptureClaimProvider` file is deleted; `AL_tc2e_capture_claims` is gone with it.
+
+**Preserved local:** lease-aware order-gate `crossed` suppression; `secure:<player>` cardless
+Rush-wave records; `defend_answer` moved to commit-at-confirmed-rally with one open attempt per
+requester+rally id (the synthesis-time write would spam Committed on a pressured ally); report
+counts `COMMITTED` only; the `ValidBroadcast` test ported onto `IsLive`/`BroadcastMaxAgeTicks`.
+
+**Verified on the merged tree:** build 0W/0E; tests 734/734 (+4 `TeamCaptureClaimsTest`);
+`run_all.sh` PASS incl. fog/frankenstein/direct-mutation/personalities; arch freshness gate
+flagged the seam delta → `AI_MODULE_MAP.md`/`AI_ARCH_COVERAGE.md` regenerated, `IBotCaptureClaimSource`
+row reads `ok` (EngineerBotModule + GarrisonContestBotModule → MasterAiBotModule).
+
+**Next:** armed-match telemetry (BF_team_capture_claims + TC-2/3 groups) — contested `capture:` ids,
+`defend_answer` commits, `secure:` shared-push windows.
+
 # 2026-10-03 — TC-3 assist election: the ExpansionAssist publish-without-consume dead-end closed
 
 *Devin (nova), worktree `nova-tc2`, branch `devin/nova/def3-remote-coverage` — §12.18 published `TeamBroadcast.ExpansionAssist` (a contested expansion field that wants a bodyguard) but nothing consumed it; the same dead-end class EMBER diagnosed for Raid cards in §12.27.*
@@ -17534,6 +17593,26 @@ Flagged to SquadManager owner (unchanged from out7 review): `secure:<player>` pu
 commit but write no terminal record — in a *won* match the push stayed open 15.8k
 ticks; every secure attempt is structurally dangling. Not my file; owner aware.
 
+2026-10-03 — ai(LC8-sink): post-GameOver records flush themselves — match_end terminals reach the jsonl
+
+Reviewer flag confirmed and root-caused wider: `secure:` pushes weren't the only dangle —
+ZERO `match_end` records reached `cameo-ai-missions.jsonl` in either armed run (ab2: 7
+dangling attempts incl. capture ids; ab3: 2). The records WERE written — debug.log shows
+`Released(match_end)` at tick 24217 — but `AiMissionLogWriter` flushes from `ITick` and a
+`GameOver` burst; `World.EndGame` pauses before teardown, so player-actor `Disposing`
+records (the tracker releasing every still-open attempt) sat in `pending` forever.
+
+Fix: the writer sets `gameOver` in `IGameOver.GameOver` and `MissionRecorded` flushes
+immediately for any record arriving after it. Sink-local; no record-shape change, no
+tracker change — the contract ("no attempt stays dangling past GameOver") now holds in
+the archive it was written for.
+
+NOTE (merged): superseded by the ember entry below — their world-actor-dispose flush is
+the single canonical mechanism; this per-record variant was dropped in the merge (same
+root cause, same contract). Kept for provenance.
+
+Generated with [Devin](https://devin.ai)
+
 ## 2026-10-03 — ember lane: LC8 match_end records were unflushable — fixed in writer
 
 out9 (43 groups, BH merge): 4/4 clean, 2-2, zero exceptions — and zero `match_end`
@@ -17559,6 +17638,30 @@ stand-down) later hits `CleanSquads`'s `CloseSecurePush(Failed, LostUnits)` —
 a mislabeled terminal, since `IsValid => Units.Count > 0` makes dismissal look like
 wiped. Evidence: out7 `secure:Multi1` COMMITTED t=20930, open 15.8k ticks.
 
+2026-10-03 — ai(squads): dismissed-intact squads stop booking Failed/LostUnits on open records
+
+Second half of the ember review flag: `DismissSquad` (flee-state deactivate, personality
+handoff) clears `Units` so `CleanSquads` read the squad as wiped — open `secure:` /
+`defend_answer` / `assist_answer` attempts got `Failed/LostUnits` on an intact stand-down.
+`DismissSquad` now closes the squad-channel records `Released/Superseded` first, matching
+the card-mission resolution it already did. A wave that stands down intact now reads as
+released; only a genuinely wiped squad books `LostUnits`.
+
+Generated with [Devin](https://devin.ai)
+
+2026-10-03 — ai(LC8) runtime: ab4 armed re-run confirms the dispose-flush — 0 dangling attempts
+
+2v2 hard mirror on ecbeeaf66 (all TC switches armed), clean 1-1. The fix verifies:
+142 records, SIX `match_end` terminals now reach the jsonl (ab2/ab3 had zero), and
+every COMMITTED attempt reaches a terminal — 0 dangling. Reason spread is healthy
+(outmatched 21, superseded 18, target_gone 12, lost_units 8, done 6, match_end 6) —
+dismissed-intact waves book Released/Superseded, only real wipes book LostUnits.
+
+Capture arbitration pattern holds: contested commits still appear (broadcasts are
+staggered ~125-500t so allies CAN commit the same target) but the loser's RELEASED
+lands `superseded` inside ~125-170 ticks — commit-then-yield as designed.
+
+Generated with [Devin](https://devin.ai)
 Verified live (tmpab-smoke-out10, armed single match on 2876dde32 + fixed dll):
 exactly one `RELEASED match_end` record landed — a `capture` mission in flight at
 game end, the same dangling class out7 flagged. Round-trip: outcomes PASS
@@ -17576,6 +17679,28 @@ garrison. `CratePickupBotModule`'s idle filter was the only `IsIdle` consumer
 missing `IsInWorld` (its own `collectorGone` check already treats `!IsInWorld`
 as gone — the filter just missed the same guard). One-line fix + rebuilt dll,
 boot-gate PASS (private engine, shared bin locked by a foreign game).
+
+2026-10-03 — ai(secure): a pushed enemy's defeat books Success/done, not a dangling commit
+
+Third half of the ember review flag closed: `secure:<player>` now tracks its named
+target player and closes `Success`/`done` the tick that player's WinState decides —
+the wave's objective resolved. Scoreboard state only, no fog peek. A wave still
+supersedes on the next launch, fails when genuinely wiped, releases when dismissed
+intact, and match_end catches whatever survives — but a decided enemy no longer
+leaves the attempt open for thousands of ticks.
+
+Generated with [Devin](https://devin.ai)
+
+2026-10-03 — ai(obs): contested_claims now means a race — cross-player commits inside `window`
+
+ab5 post-BF-2 read: contested 6+5->4+3 raw, but two of the "contested" ids were the
+same capturable retried 22k+ ticks apart — sequential work, not a race. The metric
+now requires two teammates' COMMITTED records within `window` ticks (1500 default);
+every id that still reports shows the arbitration pattern (commit pair <600t apart,
+loser RELEASED `superseded` inside ~100-180t). Sequential retries no longer read as
+arbitration failures.
+
+Generated with [Devin](https://devin.ai)
 
 ## 2026-10-03 — ember lane: out11 4/4 clean + crossed-order root cause + execution grace
 
