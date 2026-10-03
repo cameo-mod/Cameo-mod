@@ -120,5 +120,19 @@ namespace OpenRA.Mods.Cameo.Test
 		{
 			Assert.That(EngineerBotModule.DemandCapturersDesired(9, -2, 0), Is.EqualTo(0));
 		}
+
+		// The dormant shelf's threshold — shared by the death streak (CaptureFailuresBeforeDormant)
+		// and the retreat streak (CaptureRetreatsBeforeDormant, the outmatched-only storm class the
+		// 2v2 smoke exposed: consecutive voluntary retreats never reached the death shelf). 0 disables.
+		[Test]
+		public void DormantThresholdCountsStreaksAndZeroDisables()
+		{
+			Assert.That(EngineerBotModule.GoesDormant(0, 2), Is.False);
+			Assert.That(EngineerBotModule.GoesDormant(1, 2), Is.False);
+			Assert.That(EngineerBotModule.GoesDormant(2, 2), Is.True);
+			Assert.That(EngineerBotModule.GoesDormant(5, 2), Is.True);
+			Assert.That(EngineerBotModule.GoesDormant(10, 0), Is.False,
+				"a zero threshold is the off switch — a retreat/death run never rests");
+		}
 	}
 }
