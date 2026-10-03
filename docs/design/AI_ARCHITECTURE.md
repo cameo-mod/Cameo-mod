@@ -3675,3 +3675,9 @@ posteriors at all four chain levels — unattributed records are processed-but-s
 conditioned on fights the veto let through (intended composition; counterfactual scoring would need EL on DENIED
 cards, not implemented). EL-1 `inmatchadapt`: adjusts `RetreatRatioPct` inside whatever personality the pin picked —
 orthogonal axes. `BotPersonalityController` reads the pin lazily, so trait enable order cannot race it.
+
+**Tests / rulings.** `PlanBanditMathTest` pins the pure contract: Welford/Chan stats, parent downweighting,
+deterministic Thompson draws from an explicit uniform stream, the LCB safety floor (and its sparse-arm exemption),
+decay, malformed learned rows, the matchup -> faction -> family -> any chain and own-scope `EvidenceN`.
+`BuildOrderKnobsEvalTest` keeps unmatched learned opening posteriors neutral (1,1). Switch ruling: `genericbot &&
+plan_bandits`; OFF/classic stays bit-identical.
