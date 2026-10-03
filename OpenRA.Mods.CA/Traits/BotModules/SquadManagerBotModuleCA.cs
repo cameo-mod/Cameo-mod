@@ -729,6 +729,27 @@ namespace OpenRA.Mods.CA.Traits
 		// The mission id of the open shared-push (secure:<player>) attempt — each
 		// Rush launch supersedes the last wave's record; a destroyed wave closes it.
 		string securePushOpen;
+
+		// Attempt numbering prefers the per-player BotMissionAttemptTracker: a
+		// personality rotation swaps this instance for a sibling with an empty
+		// missionAttemptCounters, and attempt 1 re-issued collides the
+		// (mission_id, attempt) identity the jsonl schema declares unique.
+		int NextMissionAttempt(string id)
+		{
+			var tracker = Player.PlayerActor.TraitOrDefault<BotMissionAttemptTracker>();
+			if (tracker != null)
+				return tracker.NextAttemptNumber(id);
+
+			var attempt = missionAttemptCounters.GetValueOrDefault(id) + 1;
+			missionAttemptCounters[id] = attempt;
+			return attempt;
+		}
+
+		int CurrentMissionAttempt(string id)
+		{
+			return Player.PlayerActor.TraitOrDefault<BotMissionAttemptTracker>()?.CurrentAttemptNumber(id)
+				?? missionAttemptCounters.GetValueOrDefault(id);
+		}
 		Player securePushTarget;
 
 		// Answer ids released while the squad pivoted away — re-picking them inside the
@@ -1961,8 +1982,7 @@ namespace OpenRA.Mods.CA.Traits
 			if (allyDefendOpen != null)
 				CloseAllyDefend(BotMissionAttemptState.Released, BotMissionReasons.Superseded);
 
-			var attempt = missionAttemptCounters.GetValueOrDefault(id) + 1;
-			missionAttemptCounters[id] = attempt;
+			var attempt = NextMissionAttempt(id);
 			allyDefendOpen = id;
 			BotMissionLog.Write(new BotMissionRecord
 			{
@@ -1987,7 +2007,7 @@ namespace OpenRA.Mods.CA.Traits
 			{
 				Player = Player,
 				MissionId = allyDefendOpen,
-				Attempt = missionAttemptCounters.GetValueOrDefault(allyDefendOpen),
+				Attempt = CurrentMissionAttempt(allyDefendOpen),
 				State = state,
 				Reason = reason,
 				Executor = "Squads",
@@ -1995,7 +2015,11 @@ namespace OpenRA.Mods.CA.Traits
 			});
 			if (state == BotMissionAttemptState.Released && reason == BotMissionReasons.Superseded
 				&& Info.AllyAnswerCooldownTicks > 0)
-				allyAnswerCooldownUntil[allyDefendOpen] = World.WorldTick + Info.AllyAnswerCooldownTicks;
+			{
+				var until = World.WorldTick + Info.AllyAnswerCooldownTicks;
+				allyAnswerCooldownUntil[allyDefendOpen] = until;
+				Player.PlayerActor.TraitOrDefault<BotMissionAttemptTracker>()?.CoolAnswer(allyDefendOpen, until);
+			}
 			allyDefendOpen = null;
 		}
 
@@ -2013,8 +2037,7 @@ namespace OpenRA.Mods.CA.Traits
 			if (allyAssistOpen != null)
 				CloseAllyAssist(BotMissionAttemptState.Released, BotMissionReasons.Superseded);
 
-			var attempt = missionAttemptCounters.GetValueOrDefault(id) + 1;
-			missionAttemptCounters[id] = attempt;
+			var attempt = NextMissionAttempt(id);
 			allyAssistOpen = id;
 			BotMissionLog.Write(new BotMissionRecord
 			{
@@ -2032,9 +2055,14 @@ namespace OpenRA.Mods.CA.Traits
 
 		bool AnswerOnCooldown(string kind, string requesterKey, CPos rally)
 		{
-			return Info.AllyAnswerCooldownTicks > 0
-				&& allyAnswerCooldownUntil.TryGetValue($"{kind}:{requesterKey}:{rally}", out var until)
-				&& World.WorldTick < until;
+			if (Info.AllyAnswerCooldownTicks <= 0)
+				return false;
+
+			var id = $"{kind}:{requesterKey}:{rally}";
+			if (allyAnswerCooldownUntil.TryGetValue(id, out var until) && World.WorldTick < until)
+				return true;
+
+			return Player.PlayerActor.TraitOrDefault<BotMissionAttemptTracker>()?.AnswerCooling(id, World.WorldTick) ?? false;
 		}
 
 		void CloseAllyAssist(BotMissionAttemptState state, string reason)
@@ -2046,7 +2074,7 @@ namespace OpenRA.Mods.CA.Traits
 			{
 				Player = Player,
 				MissionId = allyAssistOpen,
-				Attempt = missionAttemptCounters.GetValueOrDefault(allyAssistOpen),
+				Attempt = CurrentMissionAttempt(allyAssistOpen),
 				State = state,
 				Reason = reason,
 				Executor = "Squads",
@@ -2054,7 +2082,11 @@ namespace OpenRA.Mods.CA.Traits
 			});
 			if (state == BotMissionAttemptState.Released && reason == BotMissionReasons.Superseded
 				&& Info.AllyAnswerCooldownTicks > 0)
-				allyAnswerCooldownUntil[allyAssistOpen] = World.WorldTick + Info.AllyAnswerCooldownTicks;
+			{
+				var until = World.WorldTick + Info.AllyAnswerCooldownTicks;
+				allyAnswerCooldownUntil[allyAssistOpen] = until;
+				Player.PlayerActor.TraitOrDefault<BotMissionAttemptTracker>()?.CoolAnswer(allyAssistOpen, until);
+			}
 			allyAssistOpen = null;
 		}
 
@@ -2064,8 +2096,7 @@ namespace OpenRA.Mods.CA.Traits
 		{
 			CloseSecurePush(BotMissionAttemptState.Released, BotMissionReasons.Superseded);
 			var id = $"secure:{target.InternalName}";
-			var attempt = missionAttemptCounters.GetValueOrDefault(id) + 1;
-			missionAttemptCounters[id] = attempt;
+			var attempt = NextMissionAttempt(id);
 			securePushOpen = id;
 			securePushTarget = target;
 			BotMissionLog.Write(new BotMissionRecord
@@ -2089,7 +2120,7 @@ namespace OpenRA.Mods.CA.Traits
 			{
 				Player = Player,
 				MissionId = securePushOpen,
-				Attempt = missionAttemptCounters.GetValueOrDefault(securePushOpen),
+				Attempt = CurrentMissionAttempt(securePushOpen),
 				State = state,
 				Reason = reason,
 				Executor = "Squads",
@@ -2425,8 +2456,7 @@ namespace OpenRA.Mods.CA.Traits
 				{
 					provider.MissionTaken(mission);
 					var id = mission.EffectiveMissionId;
-					var attempt = missionAttemptCounters.GetValueOrDefault(id) + 1;
-					missionAttemptCounters[id] = attempt;
+					var attempt = NextMissionAttempt(id);
 					squadMissions[taker] = new MissionAttempt
 					{
 						Mission = mission,
