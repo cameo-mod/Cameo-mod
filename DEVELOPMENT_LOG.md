@@ -1,3 +1,24 @@
+# 2026-10-03 — DAWN: tier-3 post-merge + collision fix + contract docs
+
+*Devin (dawn) — merged `origin/master` `5e5639cd2` (nova's armed-smoke logs; devlog unioned),
+build 0E, 822/822. Coordination outcomes this round:*
+
+- **Switch collision resolved**: nova claimed `AN_combat_veto` at the same insertion point I had
+  used for `AN_tier3_bandits` — renamed mine `AO_tier3_bandits` (grant id `@planbandits` and
+  condition `plan_bandits` unchanged). Nova's EL-1 claim then double-booked `AN_` themselves
+  (`AN_inmatch_adapt` next to `AN_combat_veto`) — flagged in `REPLY_2026-10-03_dawn_to_nova_inc5.md`.
+- **Reviewed nova's tier-2 veto** (`821d7083e`, PR #790): per-tick-cached provider (armyStaging
+  precedent), `PredictsWin`/`PredictsLoss` bit-identical without provider, fog canary before the
+  enemy list, DENIED cards correctly bypass the attempt tracker — no blockers. Their ledger resync
+  (#791) is extract-only (`mods/` diff = 0 lines), `balance_drift` 35/35 clean.
+- **`AI_ARCHITECTURE §12.33`** written (§12.31/§12.32 are nova's); `PlanBanditBotModule` registered
+  STRATEGY in `ai_arch_audit.LAYER_OF` and `AI_ARCH_COVERAGE` regenerated — `ai_arch_audit --check`
+  0 ERROR, 31 WARN (all pre-existing, identical to nova's count).
+- **Tier-2×3 interaction recorded**: under both arms, vetoed fights emit DENIED but no engagement —
+  posteriors are survivorship-filtered *by design*; counterfactual scoring would need EL on DENIED
+  cards (coordinator's call, not implemented).
+- HANDOFF updated with the INC-ready line at current hash.
+
 # 2026-10-03 — DAWN: tier-3 bandits implemented (INC-ready, `devin/dawn/tier3-bandits`)
 
 *Devin (dawn) — spec above, coded in `dawn-t3`. Build 0 errors, 822/822 tests (15 new

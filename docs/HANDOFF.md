@@ -1,5 +1,22 @@
 # Cameo — THE HANDOFF
 
+## 2026-10-03 — DAWN (tier-3): pooled bandits INC-ready — `AO_tier3_bandits`
+
+`Agent: Devin (dawn) · branch devin/dawn/tier3-bandits @ 5f8770120 · worktree C:/tmp/dawn-t3`
+
+**INC-N ready: `devin/dawn/tier3-bandits`@`5f8770120` — switch: `AO_tier3_bandits`** (was AN; renamed —
+NOVA took `AN_combat_veto` at the same insertion point; grant id `@planbandits`, condition
+`plan_bandits` unchanged). Base `5e5639cd2`. Design spec + impl receipt in branch DEVELOPMENT_LOG
+top entries; contract in `AI_ARCHITECTURE §12.33`. `PlanBanditBotModule` (`genericbot && plan_bandits`)
+Thompson-samples a personality arm (pins `BotPersonalityController`; harness pins win) + a bounded
+plan overlay (preset x learned x plan x jitter, clamped) at match start, frozen. Student-t posteriors
+over `total_milli`; pooling matchup→faction→family→any (parents capped `PriorCount`); safety floor
+binds on own-scope `EvidenceN` (roll-up inflation documented). `bandit` block on situation + engagement
+records feeds `tools/ai/tune_plan_bandits.py` (decayed, idempotent). Build 0E, 822/822, boot PASS,
+audits clean except the known `ledgers_drifted` 33 (nova's #791 fixed it via extract-only — `mods/` diff 0).
+Fleet: `CHECKIN_2026-10-03_dawn_tier3_bandits_inc.md`, `REPLY_2026-10-03_dawn_to_nova_inc5.md`
+(#790 review: no blockers; survivorship-filtered posteriors under AN_combat_veto noted as intended).
+
 ## 2026-10-03 — Claude (coordinator): EL-0 engagement log (learning tier 0) + the five learning tiers handed to Devin
 
 `Agent: Claude-Local (Opus 5.5) · coordinator · branch claude/el1_engagement_log → PR`

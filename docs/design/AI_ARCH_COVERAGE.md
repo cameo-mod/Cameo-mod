@@ -32,7 +32,7 @@ Dataflow direction: `PERCEPTION -> SITUATION -> STRATEGY -> EXECUTION` with `PRO
 | `FransEconomicSaturationBotModule` | Fransbot | `FransEconomicSaturationBotModule` (enable-fransbot || inc3_frans_services) | `IBotTick` | — |
 | `SiegeEvaluatorBotModule` | CA | `SiegeEvaluatorBotModule` (genericbot) | `IBotSiegeAdvisor`, `IBotTick` | `IBotRegionThreatProvider`, `IBotRememberedDefenceProvider`, `IBotSiegeFailureMemory`, `SquadManagerBotModuleCA` |
 
-### STRATEGY (8)
+### STRATEGY (9)
 
 | Module | Asm | Instances (gate) | Provides | Consumes |
 |---|---|---|---|---|
@@ -42,8 +42,9 @@ Dataflow direction: `PERCEPTION -> SITUATION -> STRATEGY -> EXECUTION` with `PRO
 | `FransCommanderCoreBotModule` | Fransbot | `FransCommanderCoreBotModule` (enable-fransbot || inc3_frans_services) | `IBotTick` | — |
 | `FransGeneralBotModule` | Fransbot | `FransGeneralBotModule` (enable-fransbot || inc3_frans_services) | `IBotRespondToAttack`, `IBotTick` | — |
 | `FransbotControllerBotModule` | Fransbot | `FransbotControllerBotModule` (enable-fransbot) | `IBotEnabled`, `IBotTick` | — |
-| `MasterAiBotModule` | Cameo | `MasterAiBotModule` (genericbot) | `IBotCoalition`, `IBotDirector`, `IBotEnemyCompositionProvider`, `IBotFoggedEnemyProvider`, `IBotMainTargetProvider`, `IBotMissionOutcomeSink`, `IBotMissionProvider`, `IBotPersonalityLeadProvider`, `IBotRegionThreatProvider`, `IBotRememberedDefenceProvider`, `IBotRouteThreatRouter`, `IBotSiegeFailureMemory`, `IBotTeamMember`, `IBotThreatPredictionProvider`, `IBotTick`, `IBotUtilityAxes` | `BaseRepairBotModule`, `BotCounterDemandController`, `BotLimits`, `BotPersonalityController`, `BuildOrderKnobsBotModule`, `IBotCaptureClaimSource`, `IBotExpansionAssistProvider`, `IBotExpansionTargetProvider`, `IBotMissionAssignmentProvider`, `IBotThreatAnalysis`, `ResourceMapBotModule`, `ScaleTargetsBotModule`, `ScoutBotModule`, `SquadManagerBotModuleCA`, `TacticalMapBotModule` |
+| `MasterAiBotModule` | Cameo | `MasterAiBotModule` (genericbot) | `IBotCoalition`, `IBotDirector`, `IBotEnemyCompositionProvider`, `IBotFoggedEnemyProvider`, `IBotMainTargetProvider`, `IBotMissionOutcomeSink`, `IBotMissionProvider`, `IBotPersonalityLeadProvider`, `IBotRegionThreatProvider`, `IBotRememberedDefenceProvider`, `IBotRouteThreatRouter`, `IBotSiegeFailureMemory`, `IBotTeamMember`, `IBotThreatPredictionProvider`, `IBotTick`, `IBotUtilityAxes` | `BaseRepairBotModule`, `BotCounterDemandController`, `BotLimits`, `BotPersonalityController`, `BuildOrderKnobsBotModule`, `IBotCaptureClaimSource`, `IBotExpansionAssistProvider`, `IBotExpansionTargetProvider`, `IBotMissionAssignmentProvider`, `IBotThreatAnalysis`, `PlanBanditBotModule`, `ResourceMapBotModule`, `ScaleTargetsBotModule`, `ScoutBotModule`, `SquadManagerBotModuleCA`, `TacticalMapBotModule` |
 | `ModularBot` | Cameo | `ModularBot@EasiestAI`<br>`ModularBot@VeryEasyAI`<br>`ModularBot@EasyAI`<br>`ModularBot@MediumAI`<br>`ModularBot@HardAI`<br>`ModularBot@VeryHardAI`<br>… 15 total | `IBot` | `IBotActionBudget`, `IBotEnabled`, `IBotRespondToAttack`, `IBotTick` |
+| `PlanBanditBotModule` | Cameo | `PlanBanditBotModule` (genericbot && plan_bandits) | — | `IBotMainTargetProvider` |
 
 ### EXECUTION (28)
 
@@ -100,7 +101,7 @@ Dataflow direction: `PERCEPTION -> SITUATION -> STRATEGY -> EXECUTION` with `PRO
 | `ExternalBotOrdersManager` | AS | `ExternalBotOrdersManager` (genericbot) | `IBotTick` | — |
 | `FransSupportCoordinatorBotModule` | Fransbot | `FransSupportCoordinatorBotModule` (enable-fransbot) | `IBotTick` | — |
 | `FransSupportPowerBotModule` | Fransbot | `FransSupportPowerBotModule` (enable-fransbot) | `IBotTick` | — |
-| `GrantConditionOnBotOwner` | Common | `GrantConditionOnBotOwner@generic`<br>`GrantConditionOnBotOwner@easiest`<br>`GrantConditionOnBotOwner@veryeasy`<br>`GrantConditionOnBotOwner@easy`<br>`GrantConditionOnBotOwner@medium`<br>`GrantConditionOnBotOwner@hard`<br>… 32 total | — | — |
+| `GrantConditionOnBotOwner` | Common | `GrantConditionOnBotOwner@generic`<br>`GrantConditionOnBotOwner@easiest`<br>`GrantConditionOnBotOwner@veryeasy`<br>`GrantConditionOnBotOwner@easy`<br>`GrantConditionOnBotOwner@medium`<br>`GrantConditionOnBotOwner@hard`<br>… 33 total | — | — |
 | `HumanPaceBotModule` | Cameo | `HumanPaceBotModule` (genericbot) | `IBotActionBudget` | — |
 | `PowerDownBotModule` | AS | `PowerDownBotModule` (genericbot || classicbot) | `IBotTick` | — |
 | `SupportPowerBotASModule` | AS | `SupportPowerBotASModule` (genericbot || classicbot)<br>`SupportPowerBotASModule@wc2` (genericbot) | `IBotTick` | — |
@@ -120,7 +121,7 @@ Dataflow direction: `PERCEPTION -> SITUATION -> STRATEGY -> EXECUTION` with `PRO
 | `ArmyFirstBotModule` | Cameo | `ArmyFirstBotModule` (genericbot && army_first) | `IBotRequestPauseBuildingProduction`, `IBotTick` | — |
 | `ArmyStagingBotModule` | Cameo | `ArmyStagingBotModule` (genericbot && armystaging) | `IBotArmyStaging`, `IBotRespondToAttack`, `IBotTick` | — |
 | `AssaultFormationBotModule` | Cameo | `AssaultFormationBotModule` (genericbot && assault_fanout) | `IBotAssaultFormation` | — |
-| `BuildOrderKnobsBotModule` | Cameo | `BuildOrderKnobsBotModule` (genericbot && build_order_knobs) | `IBotBuildOrderKnobs`, `IBotTick` | `BaseBuilderBotModuleCA`, `BotPersonalityController`, `IBotMainTargetProvider`, `IBotUnitRoles`, `MasterAiBotModule` |
+| `BuildOrderKnobsBotModule` | Cameo | `BuildOrderKnobsBotModule` (genericbot && build_order_knobs) | `IBotBuildOrderKnobs`, `IBotTick` | `BaseBuilderBotModuleCA`, `BotPersonalityController`, `IBotUnitRoles`, `MasterAiBotModule`, `PlanBanditBotModule` |
 | `EngagementLogBotModule` | Cameo | `EngagementLogBotModule` | `IBotRespondToAttack`, `IBotTick` | — |
 | `GarrisonContestBotModule` | Cameo | `GarrisonContestBotModule` (genericbot && garrison_contest) | `IBotCaptureClaimSource`, `IBotMissionProvider`, `IBotTick` | `IBotRememberedDefenceProvider`, `IBotZoneTopology` |
 | `ParallelProductionBotModule` | Cameo | `ParallelProductionBotModule` (genericbot && parallel_production) | `IBotProductionWidth` | — |
@@ -153,7 +154,7 @@ Each `IBot*` seam: who provides it, who consumes it. `STARVED` = consumed but no
 | `IBotExpansionAssistProvider` | `ExpansionPlannerBotModule` | `MasterAiBotModule` | ok |
 | `IBotExpansionTargetProvider` | `ExpansionPlannerBotModule` | `BaseBuilderBotModuleCA`, `MasterAiBotModule` | ok |
 | `IBotFoggedEnemyProvider` | `MasterAiBotModule` | `SquadManagerBotModuleCA` | ok |
-| `IBotMainTargetProvider` | `MasterAiBotModule` | `BotLearnedPriors`, `BuildOrderKnobsBotModule`, `DefenseCoveragePlanner`, `ScoutBotModule`, `SquadManagerBotModuleCA` | ok |
+| `IBotMainTargetProvider` | `MasterAiBotModule` | `BotLearnedPriors`, `DefenseCoveragePlanner`, `PlanBanditBotModule`, `ScoutBotModule`, `SquadManagerBotModuleCA` | ok |
 | `IBotMcvExpansionSiteProvider` | `ExpansionPlannerBotModule` | `McvExpansionManagerBotModule` | ok |
 | `IBotMissionAssignmentProvider` | `SquadManagerBotModuleCA` | `MasterAiBotModule` | ok |
 | `IBotMissionOutcomeSink` | `MasterAiBotModule` | `SquadManagerBotModuleCA` | ok |
@@ -241,8 +242,8 @@ Each `IBot*` seam: who provides it, who consumes it. `STARVED` = consumed but no
 
 | check | severity | finding |
 |---|---|---|
-| R1 | ok | 100 gated instances checked; 0 dormant on master until their increment arm |
-| R2 | ok | 61 switch targets verified |
+| R1 | ok | 101 gated instances checked; 0 dormant on master until their increment arm |
+| R2 | ok | 62 switch targets verified |
 | R3 | WARN | DEAD-END `IBotAssaultFormation`: provided by `AssaultFormationBotModule`; no consumer |
 | R3 | WARN | DEAD-END `IBotCaptureTransportProvider`: provided by `FransTransportCommanderBotModule`; no consumer |
 | R3 | WARN | DEAD-END `IBotDefensePlacementAdvisor`: provided by `DefenseCoveragePlanner`; no consumer |
@@ -278,4 +279,4 @@ Each `IBot*` seam: who provides it, who consumes it. `STARVED` = consumed but no
 
 0 ERROR, 31 WARN
 
-R1 checked 100 gated bot-module instances; R2 checked 61 switch targets. Modules marked *(no source)* live in `engine/` assemblies absent from this worktree — they are listed from yaml only, and C#-side checks skip them rather than fail.
+R1 checked 101 gated bot-module instances; R2 checked 62 switch targets. Modules marked *(no source)* live in `engine/` assemblies absent from this worktree — they are listed from yaml only, and C#-side checks skip them rather than fail.
