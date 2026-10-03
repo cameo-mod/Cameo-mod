@@ -3408,6 +3408,18 @@ engineers stopped so queued orders cannot complete the claim anyway). Determinis
 ordinal key compare only — and inert in 1v1, where no allied broadcasts exist. Classic is bit-identical:
 its stack has no claim-source modules.
 
+**BF-2 prefer-shard** (NOVA, 2026-10-03; same `BF_team_capture_claims` group, field
+`PreferShardCaptureTargets` on both modules, default off). The armed 2v2 smoke showed the residual
+class arbitration cannot reach: claims publish only on the snapshot cadence, so two allies can commit
+the same capturable inside one interval — the blackboard can't arbitrate a claim that isn't published
+yet (observed: same-cell commits 5 ticks apart). The fix is zero-communication pre-partitioning —
+`TeamBlackboard.CaptureShard(cell, size)` = `(cell.X*31 + cell.Y) % size` and `ClaimRank` = the
+caller's position in the ordinal-sorted union of own + allied participant keys — prepended as the
+first ordering tier at every capture/contest pick site. The shard is a tier, not a wall: out-of-shard
+targets stay eligible once the in-shard list is consumed (TargetFull/Dormant/escort exhaust it), so
+coverage can't starve. In-shard ordering is unchanged, and `size <= 1` (1v1 or no live allies) makes
+every tier 0 — bit-identical to off. The residual race shrinks to the genuinely unavoidable case (the
+own-shard owner picks later), which the participant-key arbitration then resolves.
 ### 12.27 TC-2f — raid-mission steering: the wave commits anyway (EMBER's dead-end; switch BG_raid_mission_steering)
 
 EMBER's GC-1 evidence exposed a structural dead-end in the assign layer: Raid cards publish but are

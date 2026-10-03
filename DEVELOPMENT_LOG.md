@@ -1,3 +1,30 @@
+# 2026-10-03 — BF-2 prefer-shard capture targets: the simultaneous-pick race window closed
+
+*Devin (nova), worktree `nova-tc2`, branch `devin/nova/def3-remote-coverage` — armed 2v2 smoke
+(`hard,hard` vs `classic,classic`, full TC stack armed, `support-2v2-smoke/`) verified every armed
+channel fires live — `assist_answer` (first live record: Multi1 answered Multi0's contested field at
+t39058), `defend_answer` x62, `secure`/`raid` shared strikes — and isolated the one residual race
+class: simultaneous commits inside one snapshot interval (same-cell captures picked 5 ticks apart,
+before either claim reaches the blackboard).*
+
+**Done:**
+- `TeamBlackboard.ClaimRank` (own + allied participant keys, ordinal sort — the caller's rank is
+  its shard) and `CaptureShard(cell, size)` = `(cell.X*31 + cell.Y) % size`, pure for the tests.
+- `PreferShardCaptureTargets` (default off, armed inside `BF_team_capture_claims`) prepends the
+  shard tier at every capture pick site: EngineerBotModule priority list, capturable pool
+  truncation, escort input, per-capturer nearest; GarrisonContestBotModule candidate ordering.
+  Orders, never filters — out-of-shard stays eligible once the own tier is exhausted; size <= 1
+  keeps 1v1 bit-identical.
+- `team_coordination_report.py` splits `contested_claims` (claim-kind ids = real races) from
+  `shared_objectives` (attack-kind ids taken by >1 bot = the desired coordinated strike, not a
+  race). The smoke's `raid:Multi2:r36` contested id was the latter — both allies riding the same
+  deterministic card.
+- ai.yaml documents both GC-1 fields (its `UseTeamCaptureClaims` was never yaml'd after the merge)
+  and fixes a stale `switch group AL` comment left by the canonical merge (the group is BF).
+
+**Verified:** armed smoke — 4 contested ids of which 3 were simultaneous-commit races and 1 a
+shared raid; report re-run shows `contested_claims=4 shared_objectives=1` after the split.
+
 # 2026-10-03 — armed 2v2 forensics: claim arbitration ordered by participant key, not ClientIndex
 
 *Devin (dawn), main checkout — the armed-run follow-up the merge receipt queued. Fixes review §4.4's residual: the TC-3 identity fix reached rescue/sectors but not TC-2e precedence or TC-2d rank.*
@@ -17580,3 +17607,20 @@ staggered ~125-500t so allies CAN commit the same target) but the loser's RELEAS
 lands `superseded` inside ~125-170 ticks — commit-then-yield as designed.
 
 Generated with [Devin](https://devin.ai)
+Verified live (tmpab-smoke-out10, armed single match on 2876dde32 + fixed dll):
+exactly one `RELEASED match_end` record landed — a `capture` mission in flight at
+game end, the same dangling class out7 flagged. Round-trip: outcomes PASS
+(0 dangling, 0 in-flight — first clean line), storm PASS, fog PASS, execution PASS;
+only learning WARNs (tuner needs >=20 matches). Fix proven end-to-end in `99e52f474`.
+
+## 2026-10-03 — ember lane: crossed=1 explained — crate picker poached garrisoned walkers
+
+out9's only `crossed` pair was `GarrisonContestBotModule → CratePickupBotModule`
+(1 order). Mechanism: `World.Remove` (garrison entry) leaves the actor in the
+trait dictionary — `world.ActorsHavingTrait<Mobile>()` still returns it — and
+garrisoned units read `IsIdle`, so a walker released by GC-1 on entering was a
+valid crate candidate: claimed, Move-ordered, possibly dragged out of the
+garrison. `CratePickupBotModule`'s idle filter was the only `IsIdle` consumer
+missing `IsInWorld` (its own `collectorGone` check already treats `!IsInWorld`
+as gone — the filter just missed the same guard). One-line fix + rebuilt dll,
+boot-gate PASS (private engine, shared bin locked by a foreign game).
