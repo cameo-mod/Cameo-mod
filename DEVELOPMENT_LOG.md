@@ -22,6 +22,15 @@ SharedRandom there WOULD desync; DEVELOPMENT_LOG conflict + stale module map are
 **C:/tmp cleanup (maintainer-approved):** 112 clean, fully-pushed, >24 h idle worktrees removed with plain `git worktree
 remove` (no --force); 56 kept (unpushed / dirty / active today); stale unreferenced loose files deleted; inventory and
 logs in `G:/cameo-wt/_cleanup/`.
+**T2-VERIFY → land B** (`devin/nova/inc-n-combat-veto@e58c030b4`; #790 = divergent older version, superseded). REAL BUG
+confirmed: `CombatVetoBotModule` Veto* have no `IsTraitDisabled` guard and `SquadManagerBotModuleCA.cs:1751-1790` consults
+disabled providers → with `AN_combat_veto` OFF every bot incl. classic would veto (WORKFLOW §3.2). Fix dispatched as
+`devin/t2-veto-disabled-guard` on top of B (self-guard + `IsTraitEnabled()` call-site filter, the master stealth pattern).
+Tier 3 checked for the same class: all consumers use `FirstEnabledTraitOrDefault` → clean.
+**Tier-1 impl `3c07947f7`:** C# writer approved; fitter fixes requested — apply `resolved_firepower_modifiers` to priced
+dpt (132 actors; else biased cells), report + exclude the 8/139 tags with no Versus prior, name the 2 collisions.
+**C:/tmp done:** rescue = 47 refs `refs/rescue/2026-10-03/*` + `G:/cameo-tmp-rescue/` (bundle verified, manifest, README,
+evidence copies). 152 worktrees removed in total, 16 deferred (agent-owned `.agent-id` or active < 6 h). C: 1 → 340 GB free.
 
 # 2026-10-03 — armed smokes: AM_army_staging on master + EL-0 (#789) live validation
 
