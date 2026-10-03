@@ -131,18 +131,18 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			Log.Write("debug", $"AI {player.InternalName}: LEARNED priors: {priors.PairCount} pairs, {priors.TypeCount} types");
 		}
 
-		// The enemy faction: the main target's if a provider names one, else the most common faction among enemy
-		// PLAYERS (never actors - nothing here enumerates the world's units).
+		// The public enemy faction: the main target's if a provider names one, else the most common non-empty
+		// lobby-visible faction among enemy PLAYERS (never actors - nothing here enumerates the world's units).
 		string EnemyFaction()
 		{
 			var main = player.PlayerActor.TraitsImplementing<IBotMainTargetProvider>()
 				.Select(p => p.MainTarget).FirstOrDefault(t => t != null);
 			if (main != null)
-				return main.Faction?.InternalName;
+				return BotFactionView.PublicFactionOf(main);
 
 			return world.Players
 				.Where(p => p != player && !p.NonCombatant && !p.Spectating && player.RelationshipWith(p) == PlayerRelationship.Enemy)
-				.GroupBy(p => p.Faction?.InternalName).Where(g => g.Key != null)
+				.GroupBy(BotFactionView.PublicFactionOf).Where(g => g.Key.Length > 0)
 				.OrderByDescending(g => g.Count()).ThenBy(g => g.Key, StringComparer.Ordinal)
 				.Select(g => g.Key).FirstOrDefault();
 		}
