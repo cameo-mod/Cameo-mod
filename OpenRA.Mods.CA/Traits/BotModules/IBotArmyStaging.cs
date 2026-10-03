@@ -32,7 +32,7 @@ namespace OpenRA.Mods.CA.Traits
 	}
 
 	/// <summary>
-	/// DESIGN 19.12 / AI_ARCHITECTURE 12.27: the planner's last result, an immutable-by-convention value for the units that
+	/// DESIGN 19.12 / AI_ARCHITECTURE 12.28: the planner's last result, an immutable-by-convention value for the units that
 	/// consume it and for the situation log. Weights are in value units (an attacker's cost), already decayed.
 	/// </summary>
 	public sealed class ArmyStagingPlan

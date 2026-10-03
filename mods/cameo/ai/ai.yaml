@@ -111,7 +111,7 @@
 	GrantConditionOnBotOwner@buildorderknobs:
 		Condition: build_order_knobs
 		Bots: fransbot
-	# Army staging (DESIGN 19.12, AI_ARCHITECTURE 12.27): the idle army waits at the front with the defences, split by threatened side.
+	# Army staging (DESIGN 19.12, AI_ARCHITECTURE 12.28): the idle army waits at the front with the defences, split by threatened side.
 	# The arm sets Bots (switch group AM_army_staging); empty by default - inert on master.
 	GrantConditionOnBotOwner@armystaging:
 		Condition: armystaging
@@ -3690,7 +3690,7 @@ Player:
 	#   expansion    - published for the expansion planner (IBotBuildOrderKnobs.KnobMilli); the base builder does not read it
 	#   support      - fractions of radar/repair buildings
 	# Categories are rules-derived (the base builder's own type lists, then BotTargetTags/roles); no actor id is typed here.
-	# ARMY STAGING (DESIGN 19.12, AI_ARCHITECTURE 12.27): a pure planner (IBotArmyStaging) - one staging point per threatened side on the rim,
+	# ARMY STAGING (DESIGN 19.12, AI_ARCHITECTURE 12.28): a pure planner (IBotArmyStaging) - one staging point per threatened side on the rim,
 	# a few cells inside the own armed buildings; groups only when several sides are hit; a centre reserve for attacks from inside the ring.
 	# It issues no orders: the squad manager stages the idle pool and the base builder rallies new units at its primary cell.
 	# `genericbot && armystaging`: off on master until the increment A/B arms it (switch group AM_army_staging).
@@ -4181,6 +4181,12 @@ Player:
 		UseUtilityDefendReserve: false
 		UseTeamSyncAttacks: false
 		UseTeamDefendAnswers: false
+		# TC-2f (AI_ARCHITECTURE 12.27): EMBER's raid dead-end - a Raid card may ride a
+		# launching wave up to the overcommit cap; the wave commits anyway, so steering
+		# changes where it lands, not whether it goes. Group BG.
+		UseRaidMissionSteering: false
+		RaidMissionSteerOvercommitPercent: 300
+		RaidMissionSteerMinValue: 0
 		AirDoctrineEnabled: true
 		EnsureArtillerySiege: true
 		EnsureAntiAirEscort: true
@@ -4257,6 +4263,12 @@ Player:
 		UseUtilityDefendReserve: false
 		UseTeamSyncAttacks: false
 		UseTeamDefendAnswers: false
+		# TC-2f (AI_ARCHITECTURE 12.27): EMBER's raid dead-end - a Raid card may ride a
+		# launching wave up to the overcommit cap; the wave commits anyway, so steering
+		# changes where it lands, not whether it goes. Group BG.
+		UseRaidMissionSteering: false
+		RaidMissionSteerOvercommitPercent: 300
+		RaidMissionSteerMinValue: 0
 		AirDoctrineEnabled: true
 		EnsureArtillerySiege: true
 		EnsureAntiAirEscort: true
@@ -4332,6 +4344,12 @@ Player:
 		UseUtilityDefendReserve: false
 		UseTeamSyncAttacks: false
 		UseTeamDefendAnswers: false
+		# TC-2f (AI_ARCHITECTURE 12.27): EMBER's raid dead-end - a Raid card may ride a
+		# launching wave up to the overcommit cap; the wave commits anyway, so steering
+		# changes where it lands, not whether it goes. Group BG.
+		UseRaidMissionSteering: false
+		RaidMissionSteerOvercommitPercent: 300
+		RaidMissionSteerMinValue: 0
 		AirDoctrineEnabled: true
 		EnsureArtillerySiege: true
 		EnsureAntiAirEscort: true
@@ -4409,6 +4427,12 @@ Player:
 		UseUtilityDefendReserve: false
 		UseTeamSyncAttacks: false
 		UseTeamDefendAnswers: false
+		# TC-2f (AI_ARCHITECTURE 12.27): EMBER's raid dead-end - a Raid card may ride a
+		# launching wave up to the overcommit cap; the wave commits anyway, so steering
+		# changes where it lands, not whether it goes. Group BG.
+		UseRaidMissionSteering: false
+		RaidMissionSteerOvercommitPercent: 300
+		RaidMissionSteerMinValue: 0
 		AirDoctrineEnabled: true
 		EnsureArtillerySiege: true
 		EnsureAntiAirEscort: true
@@ -4485,6 +4509,12 @@ Player:
 		UseUtilityDefendReserve: false
 		UseTeamSyncAttacks: false
 		UseTeamDefendAnswers: false
+		# TC-2f (AI_ARCHITECTURE 12.27): EMBER's raid dead-end - a Raid card may ride a
+		# launching wave up to the overcommit cap; the wave commits anyway, so steering
+		# changes where it lands, not whether it goes. Group BG.
+		UseRaidMissionSteering: false
+		RaidMissionSteerOvercommitPercent: 300
+		RaidMissionSteerMinValue: 0
 		AirDoctrineEnabled: true
 		EnsureArtillerySiege: true
 		EnsureAntiAirEscort: true
@@ -4559,6 +4589,12 @@ Player:
 		UseUtilityDefendReserve: false
 		UseTeamSyncAttacks: false
 		UseTeamDefendAnswers: false
+		# TC-2f (AI_ARCHITECTURE 12.27): EMBER's raid dead-end - a Raid card may ride a
+		# launching wave up to the overcommit cap; the wave commits anyway, so steering
+		# changes where it lands, not whether it goes. Group BG.
+		UseRaidMissionSteering: false
+		RaidMissionSteerOvercommitPercent: 300
+		RaidMissionSteerMinValue: 0
 		AirDoctrineEnabled: true
 		EnsureArtillerySiege: true
 		EnsureAntiAirEscort: true

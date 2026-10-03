@@ -431,6 +431,16 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Maximum number of ticks a Defend mission may hold an otherwise ready attack force.")]
 		public readonly int MissionDefendHoldTicks = 1500;
 
+		[Desc("TC-2f (AI_ARCHITECTURE.md 12.27): when no published mission is affordable, a Raid card may still",
+			"ride the launching wave up to the overcommit cap - the wave commits anyway, steering changes where,",
+			"not whether. Off = unchanged classic behaviour.")]
+		public readonly bool UseRaidMissionSteering = false;
+		[Desc("Percent of the idle force value a steered Raid's RequiredValue may reach (300 = up to 3x overcommit;",
+			"RequiredValue is calibrated for a dedicated force).")]
+		public readonly int RaidMissionSteerOvercommitPercent = 300;
+		[Desc("Floor for the steered-raid cap regardless of the idle pool's value. 0 = ratio only.")]
+		public readonly int RaidMissionSteerMinValue = 0;
+
 		[Desc("6g (CN A3): rules-derived BotTargetTags each squad type prefers when choosing targets (artillery, harvester, production, superweapon).")]
 		public readonly HashSet<string> AssaultPriorityTags = [];
 		public readonly HashSet<string> RushPriorityTags = [];
@@ -2109,6 +2119,25 @@ namespace OpenRA.Mods.CA.Traits
 			return null;
 		}
 
+		// TC-2f (§12.27): the affordability gate leaves Raid cards published but
+		// never taken - their RequiredValue is sized for a dedicated force, the
+		// launch bar is not. Steering re-picks among Raids alone under a relaxed
+		// cap; deterministic: Priority desc, RequiredValue asc, publish order.
+		// No exclude: the only filter in the launch path is Defend-hold
+		// exhaustion, which can never match a Raid.
+		public static BotMission BestRaidForSteering(IEnumerable<IBotMissionProvider> providers, int valueCap)
+		{
+			if (providers == null)
+				return null;
+
+			return providers
+				.SelectMany(provider => provider?.Missions ?? Array.Empty<BotMission>())
+				.Where(mission => mission != null && mission.Type == BotMissionType.Raid && mission.RequiredValue <= valueCap)
+				.OrderByDescending(mission => mission.Priority)
+				.ThenBy(mission => mission.RequiredValue)
+				.FirstOrDefault();
+		}
+
 		// MissionCard lineage (fransotto's model): a MissionId identifies the
 		// strategic reason; every take is a numbered attempt carried by the squad
 		// for its lifetime, so "General -> commander -> actors -> result" resolves
@@ -2836,6 +2865,12 @@ namespace OpenRA.Mods.CA.Traits
 						mission = SelectMission();
 					}
 
+					// TC-2f (§12.27): nothing affordable won — a Raid card may still
+					// ride this wave at the overcommit cap. It lands above the
+					// Defend-clear below on purpose: a steered Raid IS a non-Defend
+					// commit, so it releases the hold machinery like any won card.
+					mission ??= SelectRaidForSteering();
+
 					// Null is "no mission published this tick", not "a non-Defend won" —
 					// clearing here would re-arm an exhausted region between publishes.
 					if (mission != null && mission.Type != BotMissionType.Defend)
@@ -2859,6 +2894,19 @@ namespace OpenRA.Mods.CA.Traits
 					return BestAffordableMission(missionProviders, idleUnitsValue,
 						m => m.Type == BotMissionType.Defend
 							&& defendMissionExhaustedRegions.Contains(m.RegionIndex));
+				}
+
+				// TC-2f (§12.27): the cap is the larger of the overcommit ratio and
+				// the flat floor; long math, a deep pool x the percent passes int.
+				BotMission SelectRaidForSteering()
+				{
+					if (!Info.UseRaidMissionSteering)
+						return null;
+
+					var cap = (int)Math.Min(int.MaxValue, Math.Max(
+						(long)idleUnitsValue * Info.RaidMissionSteerOvercommitPercent / 100,
+						(long)Info.RaidMissionSteerMinValue));
+					return BestRaidForSteering(missionProviders, cap);
 				}
 
 				var attackForce = RegisterNewSquad(bot, SquadCAType.Rush);

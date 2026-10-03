@@ -15,7 +15,7 @@ using OpenRA.Mods.Cameo.Traits.BotModules;
 
 namespace OpenRA.Mods.Cameo.Test
 {
-	// DESIGN 19.12 / AI_ARCHITECTURE 12.27: the pure arithmetic of the army staging planner.
+	// DESIGN 19.12 / AI_ARCHITECTURE 12.28: the pure arithmetic of the army staging planner.
 	[TestFixture]
 	public sealed class ArmyStagingEvalTest
 	{

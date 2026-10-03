@@ -1,3 +1,24 @@
+# 2026-10-03 — raid-mission steering: a Raid card may ride the wave that commits anyway (TC-2f)
+
+*Devin (nova), worktree `nova-tc2`, branch `devin/nova/def3-remote-coverage` — the squad-layer fix for EMBER's documented dead-end: Raid cards publish but never commit, because `BestAffordableMission` gates `RequiredValue <= idleForceValue` on the idle pool and a provider's RequiredValue is sized for a dedicated force, not for a wave that already passed the launch bar.*
+
+**Done:**
+- `SquadManagerBotModuleCAInfo` gains `UseRaidMissionSteering` (default off) +
+  `RaidMissionSteerOvercommitPercent` (300) + `RaidMissionSteerMinValue` (0).
+- New pure selector `SquadManagerBotModuleCA.BestRaidForSteering(providers, cap)`
+  — Raids only, deterministic (Priority desc, RequiredValue asc, publish order).
+  `BestAffordableMission` untouched.
+- The formation path calls it only when the Defend-hold loop left `mission` null;
+  a steered Raid lands above the non-Defend clearing (it IS a real commit) and
+  flows through the unchanged Raid target-resolution + `MissionTaken` path.
+- Six genericbot `SquadManagerBotModuleCA` instances carry the fields at default;
+  @classic untouched. Switch group `BG_raid_mission_steering`; AI_ARCHITECTURE
+  §12.27 documents the gate, semantics and rejected alternatives.
+
+**Verified:** build + tests below; `apply_increment_switches.py --dry-run` arms
+the six personality instances only. Off = bit-identical: `SelectRaidForSteering`
+returns null before touching anything.
+
 # 2026-10-02 — order-gate fix: a released lease is a hand-off, not a cross (EMBER's seam finding)
 
 *Devin (dawn), worktree `dawn-tc2e`, branch `devin/dawn/team-liveness-rescue` — the `crossed` WARN decode EMBER flagged to the squad-layer owner.*
@@ -17338,3 +17359,39 @@ the shared push needs.
 Round-trip on out7 summary: execution PASS (0 uncommitted cards of 40), order-gate crossed=0,
 write-back PASS, outcomes FAIL on the dangling secure push + engineer captures (in-flight at
 match end are separately reported, not counted).
+
+## 2026-10-03 — ember lane: GC-1 fix verification smoke (ab-smoke-out8)
+
+Verification batch on `448fc3c0e` + GC-1 timeout/backoff fixes, all 41 groups armed,
+hard vs classic td_gdi x4: **4/4 clean, zero exceptions, 2-2** (hard won 57,251t and
+16,256t games; classic won 16,323t and 25,559t — small-sample directional only).
+
+The fixes fired exactly as designed:
+
+- `DORMANT stuck` x7 — `garrison_contest:a550` wedged identically in 3 separate games
+  (~7500 ticks post-publish each: the claim timeout catching the same topologically
+  unwalkable garrison). Pre-fix: card open forever. Now: closed, stand-down, retry
+  throttled by backoff.
+- Backoff worked: a550's second stuck in f7a96546 came ~10k ticks after the first
+  (streak=2 → 5000t block). Zero republishes inside a cooldown window across all matches.
+- Round-trip: **outcomes PASS, 0 dangling** (73 attempts, 1 in flight at match end —
+  the secure-push dangling class did not recur), execution PASS (0/46 uncommitted),
+  write-back PASS (137 terminal events), order-gate crossed=1 (one residual second-issuer
+  blip vs 0 last batch — same SquadManager/Scout seam class, owner flagged before).
+
+Contest close mix across the batch: 35 done / 30 lost_units / 7 stuck / 3 x_contest_lost
+— real contests, real attrition, all terminalized.
+
+## 2026-10-03 — ember lane: TC-2f merge review (NOVA raid steering)
+
+Merged `b05f7e9de` (PR #778): TC-2f raid-mission steering, `BG_raid_mission_steering`,
+default-off, all six genericbot personalities, classic untouched — NOVA's fix for the
+raid-execution gap my execution layer surfaced (8/8 raid cards never committed in out4).
+Design is the right shape: `SelectMission` unchanged; when nothing affordable wins, a
+launching Rush wave re-picks among Raid cards under an overcommit cap (idle x 300% +
+flat floor) — steering changes WHERE the wave lands, not WHETHER it goes; a steered
+Raid releases the Defend-hold machinery like any won card. `BestRaidForSteering` is
+null-safe and deterministic (Priority desc, RequiredValue asc, publish order). +9
+RaidSteeringTest. Verified post-merge: tests 9/9, freshness audit regen PASS (the merge
+staleness it flagged is exactly what the gate exists for), BG switch arms 6 writes,
+boot-gate PASS, 743/743 suite total per NOVA.

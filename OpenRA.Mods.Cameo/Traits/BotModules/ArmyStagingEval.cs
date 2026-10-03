@@ -39,7 +39,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 	}
 
 	/// <summary>
-	/// DESIGN 19.12 / AI_ARCHITECTURE 12.27: the pure arithmetic of the army staging planner. Integer math only (the bots run in
+	/// DESIGN 19.12 / AI_ARCHITECTURE 12.28: the pure arithmetic of the army staging planner. Integer math only (the bots run in
 	/// lockstep): sectors are the eight 45-degree octants around the base centre, index 0 = east, clockwise on screen (y grows
 	/// downward). No world access, so every rule is unit-testable.
 	/// </summary>

@@ -19,7 +19,7 @@ using OpenRA.Traits;
 namespace OpenRA.Mods.Cameo.Traits.BotModules
 {
 	[TraitLocation(SystemActors.Player)]
-	[Desc("Army staging planner (DESIGN 19.12, AI_ARCHITECTURE 12.27): WHERE the idle army waits. One staging point per threatened side, on the",
+	[Desc("Army staging planner (DESIGN 19.12, AI_ARCHITECTURE 12.28): WHERE the idle army waits. One staging point per threatened side, on the",
 		"rim a few cells inside the own armed buildings; several defence groups only when the base is hit from several sides; a small centre",
 		"reserve for attacks that come from inside the ring. The prior is the direction of the enemy spawn candidates and of seen enemy defences;",
 		"the picture then follows the bot's own attack events (decaying weight per 45-degree sector).",
