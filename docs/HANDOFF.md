@@ -1,5 +1,22 @@
 # Cameo — THE HANDOFF
 
+## 2026-10-03 (late evening) — NOVA: F1 port INC-ready — tier-1 priors consumer on the landed veto
+
+`Agent: Devin (nova) · branch devin/nova/t1-priors-port @ 9e5d6435d · worktree C:/tmp/veto790`
+
+**INC-N ready: `devin/nova/t1-priors-port`@`9e5d6435d` — switch: `AP_tier1_priors`** (base `6bce16baf`).
+The F1 contract ported onto the landed INC-N veto: `BotWeaponProfile.Delivery` re-derives the main
+warhead's yaml `Warhead@<tag>` suffix (resolved yaml, same-index + class-validated, class-name
+fallback) → `EngagementPriorsBotModule` reads `engagement_priors.yaml` natively (`DeliveryArmour@` x
+target.Armor on the dominant weapon; `DefenceState@` attacker-is-building; `IntoDefencesMilli`
+target-is-building; product clamped [500,2000]) — retired schema/fingerprint/arsenal-bridge all gone.
+Per-cell staleness: `PriorPct@` vs `BotUnitProfiles.ResolvedTagVersus` — moved cells only. Switch
+wiring: `@tier1priors` granter + `genericbot && tier1_priors`; armed-alone inert. **Fitter-side emit
+is EMBER's `devin/tier1-priorpct`@`a21f90369`** (byte-identical rows; my parallel emit reverted —
+merge either order, consumer stays safe-neutral pre-emit). Gates: build 0E, **836/836** (6 new
+`EngagementPriorsTest`), pytest 19/19, bot-wiring/fog/mutation/dead-fields/freshness PASS, boot PASS
+(44 s menu, no new exceptions). §12.31 rewritten to the ruled contract.
+
 ## 2026-10-03 (evening) — Claude (coordinator, AionUI team): INC 2026-10-03 lands — learning tiers 1–4 + the P0 fixes
 
 `Agent: Claude (Opus 5.5) · coordinator · increment branch inc/2026_10_03 → master · worktrees on C:/cameo-wt (SSD)`
