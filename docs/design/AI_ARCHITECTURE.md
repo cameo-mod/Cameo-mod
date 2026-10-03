@@ -3631,19 +3631,6 @@ no per-tick world enumeration beyond what the consult sites already compute.
 **Switch**: `AN_combat_veto` — `GrantConditionOnBotOwner@combatveto` + `RequiresCondition: genericbot && combatveto`
 on both modules. Default off; classic never sees the provider.
 
-### 12.34 T1 — the tier-1 'measured from logs' fitter (Devin, 2026-10-03; TIER1_FITTER_SPEC)
-
-`tools/ai/fit_engagement_priors.py` (stdlib only, deterministic) fits the tier-1 coefficient table offline: residuals on the
-resolved `^Warhead_*` Versus prior indexed by delivery tag x armour class (never per-unit ids), static-defence fire states, one
-attrition exponent on the predicted ratio, and faction-scoped timing/response/suicide priors. Attribution needs the record's
-per-type census, so `engagement/1` gained record-only `composition` maps (`seen.start/end`, `truth.start/end`) plus the
-`enemy_faction` / `enemy_faction_public` header fields — additive fields only, zero orders, zero conditions, no decision reads
-them. A Random lobby slot resolves invisibly to the opponent, so any in-match faction-keyed lookup honours
-`enemy_faction_public` (false -> family/global pool; ruling 2). Output: `mods/cameo/ai/learned/engagement_priors.yaml`,
-`LedgerHash`-versioned so a rebalance reverts moved cells to neutral; consumed by the tier-2 veto predictor once that lands
-(phase B), gated by the default-OFF `AP_tier1_priors` switch. Shrinkage is pseudo-evidence K = 5000 damage
-credit toward the pipeline prior, clamped [500, 2000] milli, one record capped at 4x the median record's traded value.
-
 ### 12.33 T3 — pooled bandits: personality + attack plan, safety floor (fleet orders 2026-10-03; owner dawn)
 
 `PlanBanditBotModule` (Player, `genericbot && plan_bandits`; switch `AO_tier3_bandits`, default off — no provider =
@@ -3675,3 +3662,18 @@ posteriors at all four chain levels — unattributed records are processed-but-s
 conditioned on fights the veto let through (intended composition; counterfactual scoring would need EL on DENIED
 cards, not implemented). EL-1 `inmatchadapt`: adjusts `RetreatRatioPct` inside whatever personality the pin picked —
 orthogonal axes. `BotPersonalityController` reads the pin lazily, so trait enable order cannot race it.
+
+### 12.34 T1 — the tier-1 'measured from logs' fitter (Devin, 2026-10-03; TIER1_FITTER_SPEC)
+
+`tools/ai/fit_engagement_priors.py` (stdlib only, deterministic) fits the tier-1 coefficient table offline: residuals on the
+resolved `^Warhead_*` Versus prior indexed by delivery tag x armour class (never per-unit ids), static-defence fire states, one
+attrition exponent on the predicted ratio, and faction-scoped timing/response/suicide priors. Attribution needs the record's
+per-type census, so `engagement/1` gained record-only `composition` maps (`seen.start/end`, `truth.start/end`) plus the
+`enemy_faction` / `enemy_faction_public` header fields — additive fields only, zero orders, zero conditions, no decision reads
+them. A Random lobby slot resolves invisibly to the opponent, so any in-match faction-keyed lookup honours
+`enemy_faction_public` (false -> family/global pool; ruling 2). Output: `mods/cameo/ai/learned/engagement_priors.yaml`,
+`LedgerHash`-versioned so a rebalance reverts moved cells to neutral; consumed by the tier-2 veto predictor once that lands
+(phase B), gated by the default-OFF `AP_tier1_priors` switch. Shrinkage is pseudo-evidence K = 5000 damage
+credit toward the pipeline prior, clamped [500, 2000] milli, one record capped at 4x the median record's traded value.
+
+
