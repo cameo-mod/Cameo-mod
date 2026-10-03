@@ -634,7 +634,7 @@ Two families were credited to the wrong counter in the first draft:
 So the pricing rule is:
 
 ```
-effective_HP = HP + shield_strength x (100 / mean_versus_shield)      # **x1.024 measured 2026-09-27 (#534+#539+#543+#544 merged tree)** — x0.617 pre-#490
+effective_HP = HP + shield_strength x (100 / mean_versus_shield)      # **x0.541 measured 2026-10-01 (post-dupkey-collapse `3e14d9b4a`; x1.024 on 2026-09-27 counted dead duplicate `Warhead@*` blocks)** — x0.617 pre-#490
 ```
 
 and a plating contributes **nothing** to effective HP on average — it redistributes only.
