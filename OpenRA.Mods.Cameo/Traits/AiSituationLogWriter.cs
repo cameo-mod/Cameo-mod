@@ -220,6 +220,7 @@ namespace OpenRA.Mods.Cameo.Traits
 			AiMatchLogWriter.AppendString(builder, "scope", snapshot.Scope ?? "");
 			AiMatchLogWriter.AppendString(builder, "personality_arm", snapshot.PersonalityArm ?? "");
 			AiMatchLogWriter.AppendString(builder, "plan_arm", snapshot.PlanArm ?? "");
+			AiMatchLogWriter.AppendString(builder, "armed", snapshot.ArmedModules ?? "none");
 			AiMatchLogWriter.AppendBoolean(builder, "pinned", snapshot.PersonalityPinned);
 			builder.Append('}');
 		}

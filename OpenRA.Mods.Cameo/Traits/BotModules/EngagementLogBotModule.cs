@@ -695,7 +695,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				CloseReason = reason,
 				EndTick = tick,
 				EnemyFaction = enemyFaction,
-				EnemyFactionPublic = LobbyShowsFaction(owner),
+				EnemyFactionPublic = BotFactionView.PublicFactionOf(owner) != "",
 				DistOwnBase = distOwn,
 				DistEnemyBase = distEnemy,
 				OwnBaseX = ownBases.Count > 0 ? NearestOf(ownBases, s.CentroidX, s.CentroidY).X : -1,
@@ -713,6 +713,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				header.BanditScope = bandit.Scope;
 				header.BanditPersonalityArm = bandit.PersonalityArm;
 				header.BanditPlanArm = bandit.PlanArm;
+				header.BanditArmed = bandit.ArmedModules;
 			}
 
 			sink.Append(EngagementRecord.BuildEngagement(header, s));
@@ -731,18 +732,6 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				.First().Key;
 			t.Owners.TryGetValue(faction, out var owner);
 			return (owner, faction);
-		}
-
-		// enemy_faction_public: the same test GameInformation applies (resolved faction == lobby pick).
-		// A Random slot resolves after the lobby, so it reports false — in-match consumers of
-		// faction-keyed priors fall back to the family/global pool (TIER1_FITTER_SPEC ruling 2).
-		bool LobbyShowsFaction(OpenRA.Player p)
-		{
-			if (p == null)
-				return false;
-
-			var client = world.LobbyInfo?.ClientWithIndex(p.ClientIndex);
-			return client != null && client.Faction == p.Faction.InternalName;
 		}
 
 		void WritePosture(int tick)
@@ -841,7 +830,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 	public sealed class EngagementHeader
 	{
 		public string GameUid, MapUid, Player, BotType, Faction, Personality, CloseReason = "", Kind = "field", DirectorPhase = "", Urgency = "";
-		public string BanditScope = "", BanditPersonalityArm = "", BanditPlanArm = "";
+		public string BanditScope = "", BanditPersonalityArm = "", BanditPlanArm = "", BanditArmed = "";
 		public string EnemyFaction = "";
 		public bool EnemyFactionPublic;
 		public int EndTick, DistOwnBase = -1, DistEnemyBase = -1, DirectorTension = -1, OwnBaseX = -1, OwnBaseY = -1;
@@ -911,6 +900,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				AiMatchLogWriter.AppendString(b, "scope", h.BanditScope, true);
 				AiMatchLogWriter.AppendString(b, "personality_arm", h.BanditPersonalityArm);
 				AiMatchLogWriter.AppendString(b, "plan_arm", h.BanditPlanArm);
+				AiMatchLogWriter.AppendString(b, "armed", h.BanditArmed.Length > 0 ? h.BanditArmed : "none");
 				b.Append('}');
 			}
 

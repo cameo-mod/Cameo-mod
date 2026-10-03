@@ -3668,14 +3668,22 @@ max-LCB arm. Evidence counts own-scope plays only — the fitter rolls one obser
 n over-counts and must not gate the floor.
 
 **Attribution.** The frozen choice lands on every situation snapshot (`bandit` block) and every engagement record
-(`bandit`: scope + both arms), so `tools/ai/tune_plan_bandits.py --write` folds `bandit`-attributed records into the
-posteriors at all four chain levels — unattributed records are processed-but-skipped (they never played an arm).
-`--decay` discounts retained stats (sliding window); `Processed` ids keep re-runs idempotent.
+(`bandit`: scope + both arms + `armed`), so `tools/ai/tune_plan_bandits.py --write` folds `bandit`-attributed records
+into the posteriors at all four chain levels — unattributed records are processed-but-skipped (they never played an
+arm). `--decay` discounts retained stats (sliding window); `Processed` ids keep re-runs idempotent.
+
+**Armed-set (nova review 2026-10-03).** Every armed decision-side module filters which engagements ever exist, so the
+same arm fitted under different armed sets is not the same arm. `WatchConditions` (yaml: `plan_bandits,
+build_order_knobs, combatveto, inmatchadapt, armystaging`) is observed via `IObservesVariables`; the granted subset,
+frozen at draw time, is emitted as `bandit.armed` ("+"-joined, sorted; `none` when empty). `tune_plan_bandits.py
+--armed-only SET` folds only records produced under that exact set — the honest way to split posteriors by
+survivorship filter; a plain run pools all sets (documented, current default).
 
 **Interactions.** Tier-2 `combatveto`: vetoed fights emit DENIED records but no engagement — posteriors are
-conditioned on fights the veto let through (intended composition; counterfactual scoring would need EL on DENIED
-cards, not implemented). EL-1 `inmatchadapt`: adjusts `RetreatRatioPct` inside whatever personality the pin picked —
-orthogonal axes. `BotPersonalityController` reads the pin lazily, so trait enable order cannot race it.
+conditioned on fights the veto let through (intended composition; `armed` makes the conditioning explicit and
+fitter-addressable, counterfactual scoring would need EL on DENIED cards, not implemented). EL-1 `inmatchadapt`:
+adjusts `RetreatRatioPct` inside whatever personality the pin picked — orthogonal axes. `BotPersonalityController`
+reads the pin lazily, so trait enable order cannot race it.
 
 **Tests / rulings.** `PlanBanditMathTest` pins the pure contract: Welford/Chan stats, parent downweighting,
 deterministic Thompson draws from an explicit uniform stream, the LCB safety floor (and its sparse-arm exemption),
@@ -3692,8 +3700,11 @@ per-type census, so `engagement/1` gained record-only `composition` maps (`seen.
 `enemy_faction` / `enemy_faction_public` header fields — additive fields only, zero orders, zero conditions, no decision reads
 them. A Random lobby slot resolves invisibly to the opponent, so any in-match faction-keyed lookup honours
 `enemy_faction_public` (false -> family/global pool; ruling 2). Output: `mods/cameo/ai/learned/engagement_priors.yaml`,
-`LedgerHash`-versioned so a rebalance reverts moved cells to neutral; consumed by the tier-2 veto predictor once that lands
-(phase B), gated by the default-OFF `AP_tier1_priors` switch. Shrinkage is pseudo-evidence K = 5000 damage
+per-cell staleness (F1(b)): every `DeliveryArmour@` cell carries a `PriorPct@` twin recording the resolved Versus prior at
+fit time — the consumer recomputes the current prior and reverts only cells whose percent moved; `LedgerHash` stays as
+offline provenance (the game cannot read the ledgers; a global StatFingerprint is rejected — any rebalance would discard
+every cell). Consumed by the tier-2 veto predictor behind the default-OFF `AP_tier1_priors` switch (phase B: NOVA's port).
+Shrinkage is pseudo-evidence K = 5000 damage
 credit toward the pipeline prior, clamped [500, 2000] milli, one record capped at 4x the median record's traded value.
 
 

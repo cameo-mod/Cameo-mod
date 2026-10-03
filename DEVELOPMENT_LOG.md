@@ -1,3 +1,25 @@
+# 2026-10-03 — coordinator: INC 2026-10-03 A/B result — switches stay OFF (no measured difference)
+
+*Claude (Opus 5.5).* `C:/cameo-wt/ab_inc_1003` (`ab_increment.py`, ctrl 5e5639cd2 / half a711d5a95 defaults / all a711d5a95
+`--groups all`; hard vs classic, A Nuclear Winter, mirrors td_gdi + td_nod separately, 16 planned per arm). **Win rate, first
+16 planned matches: ctrl 9/16, half 9/16, all 9/16** (GDI 6/8, Nod 3/8 in ctrl and all) — defaults inert (ctrl = half);
+no win-rate effect of the switch groups at n=16 (95% CI ~33–77%). **EL per-fight (new metric):** hard−classic mean `total`
+ctrl −35, half −58, all −25; hard attacks 190 vs classic 97 in `all` (ctrl 123/124) — consistent with the tier-2 veto (14
+`veto:` cards in all_td_gdi) but fights are correlated within matches: a hint, not a result. Safety: 0 exceptions in every
+arm; `all` hard ownership watchdog `double_owner=1` (ctrl/half 0) → investigation dispatched. **Ruling: no default flip.**
+Harness bugs found and fixed on master during the run: driver cap (`2d3bcfa0c`, 5 drivers had run), early-stop tally counted
+rows beyond `planned` (`12b726b8c`, falsely decided ctrl>half), re-run replayed complete shards (`2a7d73c28`).
+
+# 2026-10-03 — coordinator: INC 2026-10-03b (F2 fog fix, tier-1 PriorPct, tier-3 armed set, veto scorecard)
+
+*Claude (Opus 5.5).* Merged: `devin/f2-public-faction@3fc5f7230` (`BotFactionView.PublicFactionOf`, DisplayFaction; a Random
+enemy yields "" → parent pool; classic + fixed-faction games bit-identical), `devin/tier1-priorpct@a21f90369` (per-cell
+`PriorPct@` for in-match staleness, orders F1(b)), DAWN `9ba79466f` (`bandit.armed` via IObservesVariables, record-only),
+`nova/veto_scorecard@e12d2cc4f` (offline tool). NOT merged: `nova/el1_inmatch_adapt`, `devin/nova/combat-veto-delta` — both
+sit on the superseded #790 base; NOVA ports them onto master's tier 2 (orders F1(c)). Gates: build 0 err, 834/834, pytest 51,
+freshness/fog/mutation PASS, doc_claims no mismatch. Also on master today: `fix(ab)` caps batch DRIVERS (`2d3bcfa0c`) —
+the A/B harness had over-launched to 5 drivers.
+
 * **F1(c) review follow-up (EMBER's hardening notes, `10c309544`):** `ResolvedTagVersus` now answers
   the fitter's exact question — `^Warhead_<tag>` template's `Warhead@<tag>` Versus, else the one-level
   `^Warhead_<family>` fallback — instead of scanning every weapon's children per call (the veto hot
@@ -18111,3 +18133,22 @@ Generated with [Devin](https://devin.ai)
   hits with no per-unit trait; per-hit work O(1); `Ready()` gates humans out; truth scan only at start/close.
 * DAWN's `81fa5a3c5` sat only in the shared main checkout (+ a staged origin/master merge) → reviewed (inert cooldown,
   log-identity fix) → PR #788 from `claude/land_dawn_answer_tracker` (direct push to master is denied: PR + maintainer).
+
+## 2026-10-03 — Devin/DAWN: armed-set attribution on tier-3 bandit records (nova review)
+
+* Nova's INC5 review caught the survivorship-bias hole: `combatveto` and `inmatchadapt` filter which
+  engagements ever exist, so a bandit arm fitted on raw engagement records is conditioned on the armed
+  decision-side module set — silently.
+* Fix — record the filter on the record: `PlanBanditBotModule` gains `WatchConditions` (yaml-declared
+  condition names, zero coupling to nova's types) + `IObservesVariables`; the granted subset is frozen
+  into `PlanBanditSnapshot.ArmedModules` ("+"-joined, sorted; `none`) at draw time and emitted as
+  `bandit.armed` on both the situation snapshot and every engagement record.
+* Fitter side: `tune_plan_bandits.py --armed-only SET` folds only records whose `armed` matches exactly
+  and leaves mismatched rows UNPROCESSED (a different armed-set fit still sees them); `game_key` is
+  per-(game,player) so same-game mixed-armed players split cleanly. Plain runs pool all sets —
+  documented default, A/B decides whether to split.
+* Verified: build 0E; 822/822; fitter smoke (fold 1 / hold 1 / second-filter pass folds the held row /
+  no-filter folds both / idempotent re-run); boot-gate PASS via private `Engine.SupportDir` (the shared
+  %APPDATA% log dir rotates under another lane's driver — menu marker verified in the private dir,
+  0 exceptions).
+* AI_ARCHITECTURE §12.33 gains the armed-set paragraph.

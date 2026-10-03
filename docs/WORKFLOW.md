@@ -79,10 +79,17 @@ Rules here change only by a maintainer ruling; record the quote and the date whe
 
 ## 5. Gates that are easy to get wrong
 
-* **Boot gate:** launch `engine/bin/OpenRA.exe` directly (`Game.Mod=cameo Engine.EngineDir=.. Engine.ModSearchPaths=…`)
-  with the default support dir, snapshot `exception-*.log` first, wait for `MenuPostProcessEffect.PostWorldLoaded` in
-  `perf.log`, kill your PID. NOT `launch-game.cmd` from Git Bash (MSYS `find` shadows cmd's — a false PASS was recorded).
-  Under load allow up to 10 minutes. **Rebuild after every branch switch** — stale DLLs fail with "Cannot locate type".
+* **Boot gate:** `powershell -ExecutionPolicy Bypass -File tools\boot_gate.ps1 -Tree <worktree>` — it launches
+  `engine/bin/OpenRA.exe` directly (`Game.Mod=cameo Engine.EngineDir=.. Engine.ModSearchPaths=… Engine.SupportDir=…`)
+  with an **isolated support dir** (a copy of `%APPDATA%\OpenRA` minus `Logs/`/`Replays/`, made on first use), snapshots
+  `exception-*.log`, waits for `MenuPostProcessEffect.PostWorldLoaded` in `perf.log`, kills only its own PID. Never the
+  shared default support dir: every launch truncates `perf.log`, and another agent's parallel boot voided two verdicts on
+  2026-10-03. NOT `launch-game.cmd` from Git Bash (MSYS `find` shadows cmd's — a false PASS was recorded). Under load
+  allow up to 10 minutes. **Rebuild after every branch switch** — stale DLLs fail with "Cannot locate type".
+* **Where worktrees live:** `C:/cameo-wt/<task>` on the C: SSD. Never on `G:` (a USB hard disk: builds, git and boots
+  crawl at queue 16) and never under `C:/tmp` (cleaned 2026-10-03; rescue refs `refs/rescue/2026-10-03/*`). Copy the
+  engine with PowerShell `robocopy … /E` — Git Bash rewrites robocopy's `/E` switches as paths.
+  Maintainer, 2026-10-03, on these two rules: *"yes do it!"*
 * **Fog honesty (DESIGN §19.5):** run `audit_fog_honesty.py` on your branch; a new site needs `--write` plus the
   reasoning in the PR; master must never go red.
 * **Never** parse yaml by hand (`miniyaml.Ruleset`), never `git stash`, never `git add -A`, sign commits as yourself.

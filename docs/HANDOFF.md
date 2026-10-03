@@ -34,7 +34,9 @@ mutation / empty warhead / AI-arch freshness PASS · `doc_claims` AI contract 73
 **Not in this increment (next one):** DAWN `9ba79466f` (bandit attribution, C#), NOVA `devin/nova/combat-veto-delta`,
 `nova/veto_scorecard`, `nova/el1_inmatch_adapt` — unreviewed. #790 closed as superseded.
 
-**Next (in order):** (1) ONE increment A/B of every default-off group (AK…AO) with EL on both arms (WORKFLOW §4).
+**A/B DONE (2026-10-03 night):** ctrl 9/16 · half 9/16 · all 9/16 — no measured win-rate effect, defaults inert; EL
+per-fight hints favour `all` (attacks 190 vs 97). Switches stay OFF. `double_owner=1` in `all` under investigation.
+**Next (in order):** (1) a LARGER A/B (≥ 48 per arm) or an EL-scored A/B per group once the double_owner is explained.
 (2) Ruling: tier-1 priors schema (`BotEngagementPriors`/`DeliveryArmour@`/`LedgerHash`) vs NOVA's
 `combat-veto-delta` (`EngagementPriors`/`Factor@`/`StatFingerprint`) — one format before tier-1 phase B (F1).
 (3) F2 fog fix (`BotFactionView.PublicFactionOf`, survey done; PlanBandit/EngagementPriors adopt via their owners).
