@@ -140,7 +140,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		{
 			var plan = Plan;
 			var attacker = e.Attacker;
-			if (IsTraitDisabled || plan == null || attacker == null || attacker.IsDead || !attacker.IsInWorld)
+			if (IsTraitDisabled || plan == null || attacker == null || attacker.IsDead || !attacker.IsInWorld
+				|| self == null || self.IsDead || !self.IsInWorld
+				|| attacker.OccupiesSpace == null || self.OccupiesSpace == null)
 				return;
 
 			// Own attack events only: an enemy ground unit that just hurt one of our actors near the base. Air raids are the anti-air
