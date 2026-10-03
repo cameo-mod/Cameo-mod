@@ -214,3 +214,70 @@ def test_load_matches_reads_logs_groups_by_arm_and_scores(tmp_path):
     assert [(r["arm"], r["opening"], round(r["win"])) for r in rows] == [(BASE, "eco", 1), (BASE, "fast_tech", 0)]
     assert rows[0]["knobs"]["tempo"] == 1000 and rows[0]["knobs"]["support"] == 1007
     assert tbo.report(rows, tbo.empty_learned()).startswith("2 scored matches")
+
+
+def cell_row(arm, score, spawn, i, **kw):
+    r = row(arm, score, game=f"{arm}{spawn}_{i}", **kw)
+    r.update({"map": "m1", "spawn": spawn})
+    return r
+
+
+def correlated_rows(n_per_cell=15, gain=0.05):
+    """Two spawn cells with a huge cell effect (+-2) and a tiny, consistent arm gain: pairing cancels the cell effect."""
+    rows = []
+    for spawn, offset in ((0, 2.0), (1, -2.0)):
+        for i in range(n_per_cell):
+            noise = 0.01 * (i % 3)
+            rows.append(cell_row(BASE, offset + noise, spawn, i))
+            rows.append(cell_row(UP, offset + noise + gain + 0.002 * (i % 2), spawn, i))
+    return rows
+
+
+def test_paired_beats_welch_on_correlated_data():
+    rows = correlated_rows()
+    [d] = tbo.decisions(rows, tbo.empty_learned())
+    assert d["test"] == "paired" and d["n_pairs"] == 30
+    assert d["significant"], "paired z is huge"
+    welch = tbo.welch_z(tbo.arm_stats(rows)[("rush", "ra1_allies", UP)], tbo.arm_stats(rows)[("rush", "ra1_allies", BASE)])
+    assert welch < 1.96 < d["z"], "the cell effect swamps the unpaired test"
+
+
+def test_unpairable_data_falls_back_to_welch_and_says_so():
+    [d] = tbo.decisions(good_rows(), tbo.empty_learned())  # rows carry no map/spawn but share the empty cell -> still pairs by order
+    assert d["test"] in ("paired", "welch")
+    rows = [dict(r, spawn=i % 2, map=f"m{i}") for i, r in enumerate(good_rows())]  # every row in its own cell: no shared key
+    [d] = tbo.decisions(rows, tbo.empty_learned())
+    assert d["test"] == "welch" and d["n_pairs"] == 0
+
+
+def test_holm_critical_values_and_m1_reproduces_196():
+    assert tbo.holm_critical_z(1) == [1.96]
+    crits = tbo.holm_critical_z(4)
+    assert crits[0] > 2.4 and crits[0] > crits[1] > crits[2] > crits[3] == 1.96
+
+
+def test_holm_rejects_a_lone_z2_among_four_candidates_but_accepts_it_for_one(monkeypatch):
+    def fake(z_by_arm):
+        zs = iter(z_by_arm)
+        monkeypatch.setattr(tbo, "paired_z", lambda a, b, n: (next(zs), 30))
+        rows = []
+        for knob in ("tempo", "greed", "production", "tech")[:len(z_by_arm)]:
+            arm = f"bo__rush__ra1_allies__{knob}__up100"
+            rows += arm_rows(arm, [0.5] * 25)
+        rows += arm_rows(BASE, [0.4] * 25)
+        return tbo.decisions(rows, tbo.empty_learned())
+
+    four = fake([2.0, 0.1, 0.2, 0.3])
+    assert not any(d["significant"] for d in four)
+    one = fake([2.0])
+    assert one[0]["significant"] and one[0]["z_crit_used"] == 1.96
+
+
+def test_perturbed_arm_matches_do_not_move_the_opening_posterior_but_are_consumed():
+    perturbed = [row(UP, 1.0, win=1.0, opening="eco", game=f"p{i}") for i in range(25)]
+    learned = tbo.empty_learned()
+    assert tbo.update_openings(learned, perturbed) == [] and learned["openings"] == {}
+    assert len(set(learned["processed_openings"])) == 25, "skipped games are recorded so they are not reconsidered"
+    base = [row(BASE, 1.0, win=1.0, opening="eco", game=f"b{i}") for i in range(25)]
+    assert tbo.update_openings(learned, perturbed + base) != []
+    assert learned["openings"][("rush", "ra1_allies", "ra1_soviets")]["eco"] == [26, 1]

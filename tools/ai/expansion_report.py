@@ -35,12 +35,8 @@ METRICS = ["first_refinery_min", "harvested_5", "harvested_10", "harvested_20", 
            "max_excess", "anchor_dist_mean", "anchor_dist_max", "angle_median", "angle_lt45", "conyards_peak"]
 
 
-def _timestep(match: dict | None) -> int:
-    return int((match or {}).get("timestep") or c.DEFAULT_TIMESTEP_MS)
-
-
 def summarise_match(snaps: list[dict], placements: list[dict], match: dict | None) -> dict:
-    ts = _timestep(match)
+    # Game time is always the nominal clock (DEFAULT_TIMESTEP_MS); the recorded engine `timestep` is the speed setting, not game time.
     snaps = sorted((s for s in snaps if s.get("expansion")), key=lambda s: s["tick"])
     first_ref = min((p["tick"] for p in placements if p.get("category") == "refinery"), default=None)
     if first_ref is None:
@@ -48,7 +44,7 @@ def summarise_match(snaps: list[dict], placements: list[dict], match: dict | Non
     last_tick = snaps[-1]["tick"] if snaps else 0
 
     def harvested_at(minute: int):
-        limit = minute * 60000 / ts
+        limit = minute * 60000 / c.DEFAULT_TIMESTEP_MS
         if last_tick < limit:
             return None
         before = [s for s in snaps if s["tick"] <= limit]
@@ -59,7 +55,7 @@ def summarise_match(snaps: list[dict], placements: list[dict], match: dict | Non
     with_ref = [e for e in ex if e.get("refineries", 0) > 0]
     return {
         "first_refinery_tick": first_ref,
-        "first_refinery_min": None if first_ref is None else round(c.minutes(first_ref, ts), 2),
+        "first_refinery_min": None if first_ref is None else round(c.minutes(first_ref), 2),
         "harvested_5": harvested_at(5), "harvested_10": harvested_at(10), "harvested_20": harvested_at(20),
         "peak_harvested": max((e.get("fields_harvested", 0) for e in ex), default=None),
         "peak_coverage": max((e.get("coverage_milli", 0) for e in ex), default=None) if ex else None,
