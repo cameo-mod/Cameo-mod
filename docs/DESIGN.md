@@ -5122,6 +5122,11 @@ into the enemy army."*
   (own actors, `Shroud.IsVisible`, `CanBeViewedByPlayer`, frozen/fog memory), never on an enumeration of enemy
   actors it cannot see, and never sets a visibility switch (`Check…Visibility: false`,
   `UseFoggedObservation: false`) off.
+* **An attacker is fair information — not an exception (maintainer 2026-10-03).** A unit or defence that fires is
+  revealed to the player it hits (`RevealOnFire` on the base templates, e.g. `^DefaultSoldier`, `^BasicDefense`).
+  That is a game rule for players and bots alike, made so the victim can return fire. A bot may therefore read
+  `AttackInfo.Attacker` (its position, type and owner) in `IBotRespondToAttack`. This includes artillery firing
+  from the fog. Reviews and audits must not flag it as omniscience.
 * **`classic`** stays the omniscient A/B reference (the Nuclear Winter gate is fog-blind Frankenstein vs
   omniscient `classic`).
 * **Guard:** `tools/audit/audit_fog_honesty.py` fails when a `genericbot` module switches a visibility check off
