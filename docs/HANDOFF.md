@@ -27,6 +27,20 @@ gates should pass `Engine.SupportDir=<isolated copy>` because every launch trunc
 false verdicts today while NOVA booted in parallel). `C:/tmp` cleanup: 152 worktrees removed, rescue refs
 `refs/rescue/2026-10-03/*` + `G:/cameo-tmp-rescue/`.
 
+## 2026-10-03 — NOVA (EL-1): in-match adaptation ported onto post-INC-N master — `AQ_inmatch_adapt`
+
+`Agent: Devin (nova) · branch devin/nova/el1-import @ 842fb2602 · worktree C:/tmp/veto790`
+
+**INC-N ready: `devin/nova/el1-import`@`842fb2602` — switch: `AQ_inmatch_adapt`** (relettered from
+`AN_inmatch_adapt` — `AN_*` is the landed combat veto on this base). Cherry-pick of `02f48abae`
+(`nova/el1_inmatch_adapt`, pre-INC-N base) resolved onto `origin/master`@`2d3bcfa0c`: master's
+`IBotCombatVeto[]` array pattern kept (the stale single-provider accessor dropped), tier-3 bandit
+attribution composes ahead of `BuildEngagement(h, s, out, out)` running-total accumulation,
+`planbandits`/`combatveto` yaml blocks preserved verbatim. §12.32 doc kept; the cherry-pick's stale
+`StatFingerprint` paragraph dropped (F1 ruled per-cell `PriorPct` staleness). Build 0E, 835/835
+tests (5 `InMatchAdaptTest`), wiring/fog/direct-mutation/arch-freshness PASS, boot gate PASS
+(isolated `Engine.SupportDir`, menu marker ~31s, no new exceptions; coordinator's A/B untouched).
+
 ## 2026-10-03 — DAWN (tier-3): pooled bandits INC-ready — `AO_tier3_bandits`
 
 `Agent: Devin (dawn) · branch devin/dawn/tier3-bandits @ 5f8770120 · worktree C:/tmp/dawn-t3`
