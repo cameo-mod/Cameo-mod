@@ -1,3 +1,18 @@
+# 2026-10-03 — parallel lane: PR #790 `nova/t2_combat_veto` is a second tier-2 veto
+
+*Devin (nova) — a second NOVA instance committed `821d7083e` (17:05) on `nova/t2_combat_veto`,
+independent of my `devin/nova/inc-n-combat-veto` (~16:5x). Same order, different cuts.*
+
+Their version is the better base: the `Predict(own, enemy, factor)` overload keeps Lanchester in
+the one class, `BotWeaponProfile.Delivery` enables delivery x armour priors, `StatFingerprint`
+auto-discounts stale priors on a rebalance, consults inside `PredictsWin`/`PredictsLoss` cover
+every call site, cards carry `below_threshold`/`cant_outrun` + a `Detail` evidence field, and the
+retreat veto guards `ownCanFight`. Mine adds three things theirs lacks: the launch consult at
+`CreateAttackForce`, remembered-defence inclusion (`IBotRememberedDefenceProvider` vs their
+visible-only `CanBeViewedByPlayer` scan), and the committed-approach hysteresis (enter <50 / abort
+<35). Full comparison posted as a review on #790; recommendation: theirs merges first, I layer the
+delta. Coordinator decides.
+
 # 2026-10-03 — INC-N: the combat veto (DESIGN 19.13 tier 2) — `devin/nova/inc-n-combat-veto@150429f3f`
 
 *Devin (nova), fleet `ORDERS_2026-10-03_claude_learning_tiers.md` tier-2 lane:*
