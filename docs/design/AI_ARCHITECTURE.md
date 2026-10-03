@@ -3663,6 +3663,12 @@ conditioned on fights the veto let through (intended composition; counterfactual
 cards, not implemented). EL-1 `inmatchadapt`: adjusts `RetreatRatioPct` inside whatever personality the pin picked —
 orthogonal axes. `BotPersonalityController` reads the pin lazily, so trait enable order cannot race it.
 
+**Tests / rulings.** `PlanBanditMathTest` pins the pure contract: Welford/Chan stats, parent downweighting,
+deterministic Thompson draws from an explicit uniform stream, the LCB safety floor (and its sparse-arm exemption),
+decay, malformed learned rows, the matchup -> faction -> family -> any chain and own-scope `EvidenceN`.
+`BuildOrderKnobsEvalTest` keeps unmatched learned opening posteriors neutral (1,1). Switch ruling: `genericbot &&
+plan_bandits`; OFF/classic stays bit-identical.
+
 ### 12.34 T1 — the tier-1 'measured from logs' fitter (Devin, 2026-10-03; TIER1_FITTER_SPEC)
 
 `tools/ai/fit_engagement_priors.py` (stdlib only, deterministic) fits the tier-1 coefficient table offline: residuals on the
