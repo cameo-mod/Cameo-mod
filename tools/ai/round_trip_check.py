@@ -3,7 +3,7 @@
 
 Reads one or more batch support dirs (each has Logs/ with debug.log, cameo-ai-matches.jsonl,
 cameo-ai-missions.jsonl, cameo-ai-situations.jsonl) and prints one PASS/WARN/FAIL row per layer with the
-evidence count: load, perception, missions, ownership, order gate, outcomes, execution, storm, write-back, fog, learning, tools.
+evidence count: load, perception, missions, ownership, order gate, outcomes, execution, storm, write-back, team, fog, learning, tools.
 Exit 1 on any FAIL. A genericbot player is any player whose bot_type is not a reference bot (classic, classic_hard).
 
 Usage:
@@ -177,9 +177,24 @@ def check(dirs: list[pathlib.Path]) -> list[tuple[str, str, str]]:
         detail += f" (worst {worst[1]} x{worst[0]})"
     rows.append(("storm", WARN if storms else PASS, detail))
 
-    # 7. write-back
+    # 7. write-back — dormant-shelf events only become expected once cards exist; a match with
+    # no published cards shelves nothing (team matches can run entirely on attempt records).
     shelf = [r for r in missions if r.get("record_kind") == "mission" and r.get("event") in ("DORMANT", "REOPENED")]
-    rows.append(("write-back", PASS if shelf else WARN, f"{len(shelf)} DORMANT/REOPENED event(s)"))
+    rows.append(("write-back", WARN if not shelf and published_tick else PASS,
+                 f"{len(shelf)} DORMANT/REOPENED event(s)"))
+
+    # 7b. team — a match with >=2 genericbot players on one side should leave SOME team-stack
+    # artifact: an assist/defend answer, a superseded claim close, or a shared secure push.
+    # Zero artifacts on a team game means the blackboard/election path never fired at all.
+    team_games = {m["game_uid"] for m in generic
+                  if any(a.get("is_bot") for a in (m.get("allies") or []))}
+    team_artifacts = {r.get("game_uid") for r in missions
+                      if str(r.get("mission_id", "")).startswith(("assist_answer:", "defend_answer:", "secure:"))
+                      or r.get("reason") == "superseded"}
+    silent = team_games - team_artifacts
+    rows.append(("team", WARN if silent else PASS,
+                 f"{len(team_games)} team game(s), {len(team_games) - len(silent)} with team-stack artifacts"
+                 + (f" — silent: {sorted(silent)}" if silent else "")))
 
     # 8. fog
     violations = sum(1 for ln in lines if "FOGCANARY-VIOLATION" in ln)

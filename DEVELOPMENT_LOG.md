@@ -17741,3 +17741,47 @@ an expired hold completing and a wiped squad are different events than a pivot.
 Key matches the record id exactly (`<kind>:<requesterKey>:<rallyCell>`).
 
 Generated with [Devin](https://devin.ai)
+
+## 2026-10-03 — ai(obs): team layer + write-back calibration; 2v2 team evidence verified
+
+**2v2 armed smoke (tmpab-smoke-2v2-b, 44 groups, 2 matches, 1-1):** the team
+stack finally has live evidence — assist_answer + defend_answer commits/releases,
+raid + secure attempts, 10 contested capture claims across Multi0/Multi1 (shard
+tier orders, ties still reach ClaimsAheadOf arbitration — designed shape).
+**outcomes: 0 dangling, 0 in flight at match end; order gate crossed=0** — the
+order-before-release stand-down and crate IsInWorld guard hold under team load.
+
+**round_trip_check gains a `team` layer:** a game where a genericbot has a bot
+ally must leave *some* team artifact (assist_answer:/defend_answer:/secure:
+record or a superseded close) or WARN. Both 2v2 games carry artifacts; 1v1
+batches skip (0 team games). Also calibrated `write-back`: 0 DORMANT/REOPENED
+now WARNs only when mission cards were published — the 2v2 ran on attempt
+records alone, shelving nothing legitimately.
+
+## 2026-10-03 — ai(review): engineer Stop-before-Release landed via PR #786; coordination flags
+
+**NOVA landed the flagged fix** (`a69ec56fb`): `EngineerCheck.Stuck` and the
+capture-supersede stand-down now queue `Stop` while the lease is still held,
+`Release` after — the proven GC-1 `StandDownWalkers` shape. Third site
+(`EngineerCheck.Done`) verified release-only with no Stop, so all three flagged
+sites are accounted for.
+
+**Race-detection rework reviewed** (`3989f5410` + `509db8708`, other lane):
+contested_claims now counts genuinely-overlapping open claim windows instead of
+commits inside a fixed tick window — release-then-recommit reads as succession.
+Correct on the 2v2 data: 10 real overlaps, each resolved via superseded inside
+~100-180t per the ab5 read.
+
+**Flags for owners:**
+- `509db8708` restored `FirepowerMultiplier@GlobalBuffs Modifier: 25` in
+  defaults.yaml — likely the maintainer's own in-progress working-tree edit
+  swept into the commit; W17 retires FirepowerMultiplier and rule 3 requires
+  the balance pipeline, so the maintainer should confirm it was intentional.
+- `docs/reference/~$warhead_matrix.xlsx` (Excel lock file) was committed by the
+  same change — junk artifact, safe to untrack.
+
+**out12 verified (44 groups, 4/4, hard 4-0, zero exceptions):** outcomes 0
+dangling / 0 in-flight; execution 0 dead-ended of 98 cards (1 live-at-end);
+storm 0 (backoff holding); order gate crossed=0; no stall — every match
+decided in ~31k ticks. Combined with the 2v2 batch, the armed tree is green
+on every lane the check measures.
