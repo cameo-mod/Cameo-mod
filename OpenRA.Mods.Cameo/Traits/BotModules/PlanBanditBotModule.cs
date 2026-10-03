@@ -234,8 +234,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			conditionCounts = variables;
 		}
 
-		public IEnumerable<VariableObserver> GetVariableObservers()
+		public override IEnumerable<VariableObserver> GetVariableObservers()
 		{
+			foreach (var observer in base.GetVariableObservers())
+				yield return observer;
+
 			if (Info.WatchConditions.Length > 0)
 				yield return new VariableObserver(ConditionsChanged, Info.WatchConditions);
 		}
