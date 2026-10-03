@@ -17566,3 +17566,11 @@ dead-ends if it stayed open >7500t past the last record of ITS game (per-game
 last-tick — a global max understates age in multi-game batches). out7 still WARNs
 correctly (3 real dead-ends); out9/out11 PASS with 3 live-at-end cards each —
 contest cards still marching inside their own claim timeout are work, not debt.
+
+Flag for the engineer owner (NOVA — file active today): the same release-before-
+order shape GC-1 just fixed exists at two sites in EngineerBotModule —
+`EngineerCheck.Stuck` (release, then QueueOrder Stop) and the capture-supersede
+path (`EndMission` + `leases.Release`, then Stop). Each Stop records Held=false at
+the order gate, so a take-over inside the window reads as crossed instead of a
+provable hand-off. Reordering Stop before Release is the proven shape
+(GC-1 `StandDownWalkers`, `3fefa249e`).
