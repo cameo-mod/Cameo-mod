@@ -1,3 +1,24 @@
+# 2026-10-03 — raid-mission steering: a Raid card may ride the wave that commits anyway (TC-2f)
+
+*Devin (nova), worktree `nova-tc2`, branch `devin/nova/def3-remote-coverage` — the squad-layer fix for EMBER's documented dead-end: Raid cards publish but never commit, because `BestAffordableMission` gates `RequiredValue <= idleForceValue` on the idle pool and a provider's RequiredValue is sized for a dedicated force, not for a wave that already passed the launch bar.*
+
+**Done:**
+- `SquadManagerBotModuleCAInfo` gains `UseRaidMissionSteering` (default off) +
+  `RaidMissionSteerOvercommitPercent` (300) + `RaidMissionSteerMinValue` (0).
+- New pure selector `SquadManagerBotModuleCA.BestRaidForSteering(providers, cap)`
+  — Raids only, deterministic (Priority desc, RequiredValue asc, publish order).
+  `BestAffordableMission` untouched.
+- The formation path calls it only when the Defend-hold loop left `mission` null;
+  a steered Raid lands above the non-Defend clearing (it IS a real commit) and
+  flows through the unchanged Raid target-resolution + `MissionTaken` path.
+- Six genericbot `SquadManagerBotModuleCA` instances carry the fields at default;
+  @classic untouched. Switch group `BG_raid_mission_steering`; AI_ARCHITECTURE
+  §12.27 documents the gate, semantics and rejected alternatives.
+
+**Verified:** build + tests below; `apply_increment_switches.py --dry-run` arms
+the six personality instances only. Off = bit-identical: `SelectRaidForSteering`
+returns null before touching anything.
+
 # 2026-10-02 — order-gate fix: a released lease is a hand-off, not a cross (EMBER's seam finding)
 
 *Devin (dawn), worktree `dawn-tc2e`, branch `devin/dawn/team-liveness-rescue` — the `crossed` WARN decode EMBER flagged to the squad-layer owner.*
@@ -17276,3 +17297,65 @@ groups (new: BF_team_capture_claims, BD_tc3_sectors, BE_tc3_main_target — the 
 upstream added) with 121 changes and no stale targets; arch freshness audit caught the merge's
 own staleness (map regen on merged tree → PASS); boot-gate PASS with `Engine.SupportDir` pointed
 at a private logs dir so a concurrent main-checkout boot could not overwrite my perf.log evidence.
+
+## 2026-10-03 — ember lane: GC-1 lifecycle hole + killbox bleeding (smoke-evidence fixes)
+
+The merged-master armed smoke (ab-smoke-out7, all 41 groups armed, hard vs classic td_gdi x4)
+finished **3-0 for hard** (37,002 / 29,185 / +1 ticks, zero exceptions). Round-trip on the new
+evidence: execution layer PASS (all 40 published cards got attempts — the earlier 8-card raid
+gap is gone), order gate crossed=0 (refused=49 — gate declining second issuers correctly),
+write-back PASS (101 terminal events), 2 dangling engineer capture attempts + 3 in-flight at
+match end (flagged to the engineer owner).
+
+The GC-1 card stream also surfaced two defects in MY module, now fixed:
+
+1. **Claim lifecycle hole** — `garrison_contest:a550` published t=90 and stayed open for the
+   entire 37k-tick match. A wedged-but-alive walker keeps renewing its lease in the housekeeping
+   pass (`done` stays false: alive, owned, outside, claimable), so the claim never prunes. New
+   `ClaimTimeoutTicks` (7500): claims with no walker inside past the timeout stand the walkers
+   down (release + Stop, same shape as the TC-2e supersede path — factored into a shared
+   `StandDownWalkers`) and close `DORMANT stuck`.
+2. **Re-contest bleeding** — building `a166` in match cf428c10 ate `lost_units` SEVEN times in
+   ~5000 ticks: claim, walkers die approaching, republish, repeat. The suicidal killbox loop the
+   module was built to avoid. New `ContestRetryCooldownTicks` (2500 base): consecutive
+   `lost_units`/`x_contest_lost` closes on a building impose an escalating backoff
+   (cooldown x streak) checked in the candidate filter; a `done` close clears the streak.
+   `superseded`/`stuck` are neutral — no bleeding recorded.
+
+Also verified in the merge review: upstream's GC-1 TC-2e integration is sound (blackboard
+arbitration degrades to no-op with flag off or in 1v1; claimCells lifecycle complete), and
+02a2a73e0 closed all four Codex TC-3 findings (central IsLive, rescue consumes responder,
+InternalName identity, §12.18 eventual-consistency doc).
+
+Verification: Cameo build clean (deploy locked by other lanes' games — obj dlls copied to the
+private engine + tracked dll), boot-gate PASS with isolated SupportDir.
+
+Post-commit review: `stuck` also counts toward the backoff streak (a wedged path is
+topological — a re-claim sends the next walkers into the same dead end); only `superseded`
+stays neutral.
+
+## 2026-10-03 — ember lane: smoke forensics — the stalled match and the silent finisher
+
+Forensic read on `ab-smoke-out7` match cf428c10 (runner verdict "stalled", 0 records):
+
+- **Not a refusal**: hard issued `raid` missions continuously (priorities 40-87) and ground
+  classic from 14 buildings/10k army to 1 building/0 army between t=17851 and t=19351. The
+  enemy collapse was fast and total; hard was winning, not turtling.
+- **The finisher gates late**: after the collapse (enemy `army_value=0`, `buildings=1`,
+  `defence_count=0`, `last_seen` fresh, `main_target=Multi1` score 272), the situation record
+  sat at `mission=None` for ~1600 ticks before SquadManager's shared push `secure:Multi1`
+  finally committed at t=20930 — right before the runner's stall kill. The push exists and
+  was en route; it gates on something beyond total enemy collapse. **SquadManager lane flag.**
+- **secure pushes never terminalize**: in match a4195e79 (a hard WIN), `secure:Multi1`
+  committed at t=20930 and wrote no terminal record for the remaining ~15.8k ticks — the
+  checker's outcomes layer FAILs on exactly this class. Every `secure:<player>` attempt is
+  effectively dangling forever. Same owner. Fix shape: the push should DORMANT done/target_gone
+  like every other mission (or RELEASED when the squad disbands).
+
+GC-1 contrast for the same window: my contest/raid cards all terminalized (the a550 hang is
+the fixed ClaimTimeoutTicks case). The mission-lifecycle discipline GC-1 follows is the model
+the shared push needs.
+
+Round-trip on out7 summary: execution PASS (0 uncommitted cards of 40), order-gate crossed=0,
+write-back PASS, outcomes FAIL on the dangling secure push + engineer captures (in-flight at
+match end are separately reported, not counted).

@@ -183,3 +183,8 @@ groups:
       UseTeamCaptureClaims: true
     EngineerBotModule:
       UseTeamCaptureClaims: true
+  BG_raid_mission_steering:          # TC-2f - EMBER's raid dead-end (AI_ARCHITECTURE 12.27): a Raid card may ride a launching wave up to the overcommit cap - the wave commits anyway, steering changes where not whether
+    SquadManagerBotModuleCA:
+      UseRaidMissionSteering: true
+      RaidMissionSteerOvercommitPercent: 300
+      RaidMissionSteerMinValue: 0
