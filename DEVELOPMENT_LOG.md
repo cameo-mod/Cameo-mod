@@ -17381,3 +17381,17 @@ The fixes fired exactly as designed:
 
 Contest close mix across the batch: 35 done / 30 lost_units / 7 stuck / 3 x_contest_lost
 — real contests, real attrition, all terminalized.
+
+## 2026-10-03 — ember lane: TC-2f merge review (NOVA raid steering)
+
+Merged `b05f7e9de` (PR #778): TC-2f raid-mission steering, `BG_raid_mission_steering`,
+default-off, all six genericbot personalities, classic untouched — NOVA's fix for the
+raid-execution gap my execution layer surfaced (8/8 raid cards never committed in out4).
+Design is the right shape: `SelectMission` unchanged; when nothing affordable wins, a
+launching Rush wave re-picks among Raid cards under an overcommit cap (idle x 300% +
+flat floor) — steering changes WHERE the wave lands, not WHETHER it goes; a steered
+Raid releases the Defend-hold machinery like any won card. `BestRaidForSteering` is
+null-safe and deterministic (Priority desc, RequiredValue asc, publish order). +9
+RaidSteeringTest. Verified post-merge: tests 9/9, freshness audit regen PASS (the merge
+staleness it flagged is exactly what the gate exists for), BG switch arms 6 writes,
+boot-gate PASS, 743/743 suite total per NOVA.
