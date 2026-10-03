@@ -1,0 +1,78 @@
+#region Copyright & License Information
+/*
+ * Copyright (c) The OpenRA Developers and Contributors
+ * This file is part of OpenRA, which is free software. It is made
+ * available to you under the terms of the GNU General Public License
+ * as published by the Free Software Foundation, either version 3 of
+ * the License, or (at your option) any later version. For more
+ * information, see COPYING.
+ */
+#endregion
+
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using NUnit.Framework;
+using OpenRA.Mods.Cameo.Traits.BotModules;
+using OpenRA.Traits;
+
+namespace OpenRA.Mods.Cameo.Test
+{
+	[TestFixture]
+	public class BotFactionViewTest
+	{
+		const string PriorsYaml = "BotArsenalPriors:\n\tTradePercent@td_gdi__vs__td_nod:\n\t\ttd_gdi_mediumtank: 135\n";
+
+		[UnsafeAccessor(UnsafeAccessorKind.Field, Name = "DisplayFaction")]
+		static extern ref FactionInfo DisplayFaction(OpenRA.Player player);
+
+		static OpenRA.Player PlayerWithDisplayFaction(FactionInfo faction)
+		{
+			var player = (OpenRA.Player)RuntimeHelpers.GetUninitializedObject(typeof(OpenRA.Player));
+			DisplayFaction(player) = faction;
+			return player;
+		}
+
+		static FactionInfo Faction(string internalName, params string[] randomMembers)
+		{
+			var nodes = new List<MiniYamlNode>
+			{
+				new("InternalName", new MiniYaml(internalName))
+			};
+			if (randomMembers.Length > 0)
+				nodes.Add(new MiniYamlNode("RandomFactionMembers", new MiniYaml(string.Join(", ", randomMembers))));
+
+			return FieldLoader.Load<FactionInfo>(new MiniYaml("", nodes));
+		}
+
+		[Test]
+		public void FixedLobbyFactionIsPublic()
+		{
+			var enemy = PlayerWithDisplayFaction(Faction("td_nod"));
+			Assert.That(BotFactionView.PublicFactionOf(enemy), Is.EqualTo("td_nod"));
+		}
+
+		[Test]
+		public void RandomLobbyFactionIsNotPublic()
+		{
+			var enemy = PlayerWithDisplayFaction(Faction("random", "td_gdi", "td_nod"));
+			Assert.That(BotFactionView.PublicFactionOf(enemy), Is.EqualTo(""));
+		}
+
+		[Test]
+		public void NullPlayerAndDisplayFactionAreNotPublic()
+		{
+			Assert.That(BotFactionView.PublicFactionOf(null), Is.EqualTo(""));
+			Assert.That(BotFactionView.PublicFactionOf(PlayerWithDisplayFaction(null)), Is.EqualTo(""));
+		}
+
+		[Test]
+		public void RandomEnemyFindsNoLearnedMatchup()
+		{
+			var priors = ArsenalPriors.Parse(MiniYaml.FromString(PriorsYaml, "priors"));
+			var publicFaction = BotFactionView.PublicFactionOf(PlayerWithDisplayFaction(Faction("random", "td_gdi", "td_nod")));
+			Assert.That(publicFaction, Is.EqualTo(""));
+			Assert.That(priors.TradePercent("td_gdi", publicFaction, "td_gdi_mediumtank"), Is.EqualTo(100),
+				"a hidden Random pick cannot key td_gdi__vs__td_nod and stays neutral");
+		}
+	}
+}

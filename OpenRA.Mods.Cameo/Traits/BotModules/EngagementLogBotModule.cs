@@ -695,7 +695,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				CloseReason = reason,
 				EndTick = tick,
 				EnemyFaction = enemyFaction,
-				EnemyFactionPublic = LobbyShowsFaction(owner),
+				EnemyFactionPublic = BotFactionView.PublicFactionOf(owner) != "",
 				DistOwnBase = distOwn,
 				DistEnemyBase = distEnemy,
 				OwnBaseX = ownBases.Count > 0 ? NearestOf(ownBases, s.CentroidX, s.CentroidY).X : -1,
@@ -731,18 +731,6 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				.First().Key;
 			t.Owners.TryGetValue(faction, out var owner);
 			return (owner, faction);
-		}
-
-		// enemy_faction_public: the same test GameInformation applies (resolved faction == lobby pick).
-		// A Random slot resolves after the lobby, so it reports false — in-match consumers of
-		// faction-keyed priors fall back to the family/global pool (TIER1_FITTER_SPEC ruling 2).
-		bool LobbyShowsFaction(OpenRA.Player p)
-		{
-			if (p == null)
-				return false;
-
-			var client = world.LobbyInfo?.ClientWithIndex(p.ClientIndex);
-			return client != null && client.Faction == p.Faction.InternalName;
 		}
 
 		void WritePosture(int tick)
