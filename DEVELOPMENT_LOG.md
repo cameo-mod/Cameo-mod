@@ -1,3 +1,30 @@
+# 2026-10-03 — capture retreat shelf + the armed 2v2 round-trip
+
+*Devin (nova), worktree `nova-tc2` — the armed 2v2 smoke ran the full TC stack for real
+(`hard,hard` vs `classic,classic`, 3 variants, `support-2v2-smoke/`): every channel produced
+live records — `assist_answer` (Multi1 rallied to Multi0's contested field, t39058),
+`defend_answer` x62, `raid:` x8 — and `round_trip_check` passed 9 layers with three findings:
+`crossed=1`, `fit() over 0 matches`, and one republish storm.*
+
+**Done:**
+- The storm (`capture:td_nod_airstrip:306`, four commits by one bot over ~28k ticks) is the
+  class the dormant shelf cannot see: `Released/outmatched` is a voluntary retreat, not a
+  failure, so it never fed `missionFailStreak`. New parallel `missionRetreatStreak` counts
+  consecutive outmatched closes per mission id; `CaptureRetreatsBeforeDormant` (default 0,
+  genericbot armed at 4) shelves the target for `CaptureDormantTicks`. `Failed`/`Success`
+  clear it; `Failed` still feeds the death streak. Maintainer ruling preserved — a retreat
+  is still not a failure, the retreat threshold just catches sustained churn.
+- Verified mid-smoke that the death shelf DOES work (Multi0's two consecutive lost_units on
+  the same target hit `GoesDormant` at the configured 2).
+- `round_trip_check.py` now reports `contested_claims` (claim-kind races) separately from
+  `shared_objectives` (attack-kind ids shared by allies = coordinated strikes) — landed with
+  BF-2 in #784.
+
+**Verified:** 750/750 tests on the BF-2 branch; dry-run BF = 4 genericbot changes;
+boot-gate passed; `exec_guard.py` worktree-resolution fix carried in #784 (the running
+copy keyed the gate off the main checkout's index — any lane's staged files there blocked
+every other lane's commit; bash_guard's resolution ported).
+
 # 2026-10-03 — BF-2 prefer-shard capture targets: the simultaneous-pick race window closed
 
 *Devin (nova), worktree `nova-tc2`, branch `devin/nova/def3-remote-coverage` — armed 2v2 smoke
