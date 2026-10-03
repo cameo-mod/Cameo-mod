@@ -1,3 +1,15 @@
+# 2026-10-03 — coordinator: INC 2026-10-03 A/B result — switches stay OFF (no measured difference)
+
+*Claude (Opus 5.5).* `C:/cameo-wt/ab_inc_1003` (`ab_increment.py`, ctrl 5e5639cd2 / half a711d5a95 defaults / all a711d5a95
+`--groups all`; hard vs classic, A Nuclear Winter, mirrors td_gdi + td_nod separately, 16 planned per arm). **Win rate, first
+16 planned matches: ctrl 9/16, half 9/16, all 9/16** (GDI 6/8, Nod 3/8 in ctrl and all) — defaults inert (ctrl = half);
+no win-rate effect of the switch groups at n=16 (95% CI ~33–77%). **EL per-fight (new metric):** hard−classic mean `total`
+ctrl −35, half −58, all −25; hard attacks 190 vs classic 97 in `all` (ctrl 123/124) — consistent with the tier-2 veto (14
+`veto:` cards in all_td_gdi) but fights are correlated within matches: a hint, not a result. Safety: 0 exceptions in every
+arm; `all` hard ownership watchdog `double_owner=1` (ctrl/half 0) → investigation dispatched. **Ruling: no default flip.**
+Harness bugs found and fixed on master during the run: driver cap (`2d3bcfa0c`, 5 drivers had run), early-stop tally counted
+rows beyond `planned` (`12b726b8c`, falsely decided ctrl>half), re-run replayed complete shards (`2a7d73c28`).
+
 # 2026-10-03 — coordinator: INC 2026-10-03b (F2 fog fix, tier-1 PriorPct, tier-3 armed set, veto scorecard)
 
 *Claude (Opus 5.5).* Merged: `devin/f2-public-faction@3fc5f7230` (`BotFactionView.PublicFactionOf`, DisplayFaction; a Random
