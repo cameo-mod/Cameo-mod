@@ -1,3 +1,19 @@
+# 2026-10-03 — P0 found+fixed: ArmyStagingBotModule RespondToAttack NRE (2v2 only)
+
+*Devin (nova) — the 2v2 armed smoke (`C:/tmp/elsmoke`, el1@75831d996 + AM_army_staging)
+died at ~321s: `NullReferenceException` at ArmyStagingBotModule.cs:156
+(`attacker.Location` via `OccupiesSpace.TopLeft`). `Damaged`'s `self` (the victim)
+was never guarded — an actor killed by the very hit, or any damaged actor with no
+IOccupySpace, throws on `.Location`. LightningZap SpreadDamage on the denser doubles
+map hit it; every 1v1 batch stayed clean.*
+
+**Fix on `devin/nova/am-nre-guard` (`28573b84d`, pushed, hand-in):** the same guard
+extended — `self` null/dead/in-world + `OccupiesSpace` null on both sides;
+bit-identical for every event that passed before. **Verified by repro:** the
+identical 2v2 that NRE'd at 321s now runs 305s clean (4 records, 0 exceptions,
+hard+hard 1-0). Receipt on #782. Team-play bonus: 93 engagements, 230 postures,
+`army_to_staging_cells` median 4 — armies sit on their staging cells.
+
 # 2026-10-03 — armed smokes: AM_army_staging on master + EL-0 (#789) live validation
 
 *Devin (nova) — two frozen worktrees, sequential batches (one game driver at a time):*
