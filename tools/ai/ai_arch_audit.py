@@ -90,6 +90,7 @@ LAYER_OF = {
     "FransGeneralBotModule": "STRATEGY",
     "FransCommanderCoreBotModule": "STRATEGY",
     "FransCommandBidBotModule": "STRATEGY",
+    "PlanBanditBotModule": "STRATEGY",
     # EXECUTION — squad manager, mission consumers, engineers/capturers/garrison/repair,
     # crate/beacon, harvesters, MCV drivers, commanders
     "SquadManagerBotModuleCA": "EXECUTION",

@@ -3643,3 +3643,35 @@ them. A Random lobby slot resolves invisibly to the opponent, so any in-match fa
 `LedgerHash`-versioned so a rebalance reverts moved cells to neutral; consumed by the tier-2 veto predictor once that lands
 (phase B), gated by the default-OFF `AP_tier1_priors` switch. Shrinkage is pseudo-evidence K = 5000 damage
 credit toward the pipeline prior, clamped [500, 2000] milli, one record capped at 4x the median record's traded value.
+
+### 12.33 T3 — pooled bandits: personality + attack plan, safety floor (fleet orders 2026-10-03; owner dawn)
+
+`PlanBanditBotModule` (Player, `genericbot && plan_bandits`; switch `AO_tier3_bandits`, default off — no provider =
+bit-identical) draws two Thompson samples once at match start and freezes them: a **personality arm** (the six
+`personality-*` presets; the winner pins `BotPersonalityController` the same way a harness pin does — harness pins win,
+an arm naming no condition falls back to the random draw) and a **plan arm** (a named knob overlay multiplied into the
+build-order vector as preset x learned x plan x jitter, clamped — `balanced` is the explicit no-op arm). No orders, no
+actor access, no new decision channels.
+
+**Posterior.** Continuous reward (`score.total_milli`, [-1000, 1000]) — a Normal-mean posterior, sampled as Student-t
+(df = n-1, loc = mean, scale^2 = s^2/n; df > 64 uses the normal approximation). Beta posteriors cannot express a signed
+continuous reward. Stats are `(n, mean, m2)` triples (Welford; `PlanBanditArmStats.Merge` = Chan parallel combine).
+
+**Pooling.** `ai/learned/plan_bandits.yaml` holds `<bandit>@<scope>` nodes (scope = `any` | `family_<f>` | `<faction>` |
+`<faction>__vs__<enemy>`). The draw pools the most specific scope with each parent capped at `PriorCount`
+pseudo-observations, so sparse matchups shrink toward global evidence.
+
+**Safety floor.** A sampled winner whose own-scope evidence (`EvidenceN`: matchup scope, else faction) reaches
+`MinEvidence` AND whose pooled LCB (`mean - LcbZ x SE`) is below `MinSafetyLcb` cannot be chosen; the floor returns the
+max-LCB arm. Evidence counts own-scope plays only — the fitter rolls one observation into every chain level, so pooled
+n over-counts and must not gate the floor.
+
+**Attribution.** The frozen choice lands on every situation snapshot (`bandit` block) and every engagement record
+(`bandit`: scope + both arms), so `tools/ai/tune_plan_bandits.py --write` folds `bandit`-attributed records into the
+posteriors at all four chain levels — unattributed records are processed-but-skipped (they never played an arm).
+`--decay` discounts retained stats (sliding window); `Processed` ids keep re-runs idempotent.
+
+**Interactions.** Tier-2 `combatveto`: vetoed fights emit DENIED records but no engagement — posteriors are
+conditioned on fights the veto let through (intended composition; counterfactual scoring would need EL on DENIED
+cards, not implemented). EL-1 `inmatchadapt`: adjusts `RetreatRatioPct` inside whatever personality the pin picked —
+orthogonal axes. `BotPersonalityController` reads the pin lazily, so trait enable order cannot race it.
