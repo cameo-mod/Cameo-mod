@@ -214,6 +214,13 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public int EnemyUnitValue, EnemyUnits, EnemyDefenceValue, EnemyDefenceCount, EnemyArtilleryValue;
 		public int PredictedRatioMilli, PredictedOwnSurvivingPermille, PredictedEnemySurvivingPermille;
 		public int ArmyDistCells = -1;
+
+		// TIER-1 (TIER1_FITTER_SPEC §2.2): per-type counts of the same state, record-only — the
+		// offline fitter maps type names onto stat cells; nothing in-match reads these back.
+		public readonly SortedDictionary<string, int> OwnUnitTypes = new(StringComparer.Ordinal);
+		public readonly SortedDictionary<string, int> OwnDefenceTypes = new(StringComparer.Ordinal);
+		public readonly SortedDictionary<string, int> EnemyUnitTypes = new(StringComparer.Ordinal);
+		public readonly SortedDictionary<string, int> EnemyDefenceTypes = new(StringComparer.Ordinal);
 	}
 
 	/// <summary>The real unfogged state, offline scoring only (DESIGN §19.13, "truth block, logging only"). Nothing reads it back.</summary>
@@ -222,6 +229,15 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public int Tick;
 		public int EnemyUnitValue, EnemyUnits, EnemyDefenceValue, EnemyDefenceCount;
 		public int EnemyLossValue;
+
+		// TIER-1: same composition split as EngagementSeen, for the unfogged enemy side only.
+		public readonly SortedDictionary<string, int> UnitTypes = new(StringComparer.Ordinal);
+		public readonly SortedDictionary<string, int> DefenceTypes = new(StringComparer.Ordinal);
+
+		// Committed value and one owner actor per enemy faction — the header's enemy_faction /
+		// enemy_faction_public resolve from these; offline fields only.
+		public readonly SortedDictionary<string, int> FactionValue = new(StringComparer.Ordinal);
+		public readonly Dictionary<string, OpenRA.Player> Owners = new(StringComparer.Ordinal);
 	}
 
 	/// <summary>One open engagement: the running cluster plus every accumulator the record needs.</summary>

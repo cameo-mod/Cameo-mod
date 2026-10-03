@@ -598,6 +598,13 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			seen.PredictedRatioMilli = (int)Math.Round(prediction.Ratio * 1000);
 			seen.PredictedOwnSurvivingPermille = (int)Math.Round(prediction.OwnSurvivingFraction * 1000);
 			seen.PredictedEnemySurvivingPermille = (int)Math.Round(prediction.EnemySurvivingFraction * 1000);
+
+			// TIER-1 (TIER1_FITTER_SPEC §2.2): the same composition as per-type counts, record-only.
+			foreach (var kv in own)
+				(kv.Key.Defence ? seen.OwnDefenceTypes : seen.OwnUnitTypes)[kv.Key.Name] = kv.Value;
+			foreach (var kv in enemy)
+				(kv.Key.Defence ? seen.EnemyDefenceTypes : seen.EnemyUnitTypes)[kv.Key.Name] = kv.Value;
+
 			return seen;
 		}
 
@@ -641,15 +648,19 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				{
 					truth.EnemyDefenceValue += f.Value;
 					truth.EnemyDefenceCount++;
+					truth.DefenceTypes[f.Name] = truth.DefenceTypes.GetValueOrDefault(f.Name) + 1;
 				}
 				else if (f.Combat)
 				{
 					truth.EnemyUnitValue += f.Value;
 					truth.EnemyUnits++;
+					truth.UnitTypes[f.Name] = truth.UnitTypes.GetValueOrDefault(f.Name) + 1;
 				}
 				else
 					continue;
 
+				truth.FactionValue[a.Owner.Faction.InternalName] = truth.FactionValue.GetValueOrDefault(a.Owner.Faction.InternalName) + f.Value;
+				truth.Owners.TryAdd(a.Owner.Faction.InternalName, a.Owner);
 				actors.Add((a, f.Value));
 			}
 
@@ -672,6 +683,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var distEnemy = NearestCells(enemyBases.Values.Select(v => (v.X, v.Y)), s.CentroidX, s.CentroidY);
 			var kind = EngagementRecord.KindOf(distOwn, distEnemy);
 
+			var (owner, enemyFaction) = DominantEnemy(s);
 			var header = new EngagementHeader
 			{
 				GameUid = gameUid,
@@ -682,6 +694,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				Personality = PersonalityNow(),
 				CloseReason = reason,
 				EndTick = tick,
+				EnemyFaction = enemyFaction,
+				EnemyFactionPublic = LobbyShowsFaction(owner),
 				DistOwnBase = distOwn,
 				DistEnemyBase = distEnemy,
 				OwnBaseX = ownBases.Count > 0 ? NearestOf(ownBases, s.CentroidX, s.CentroidY).X : -1,
@@ -702,6 +716,33 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			}
 
 			sink.Append(EngagementRecord.BuildEngagement(header, s));
+		}
+
+		// TIER-1 (TIER1_FITTER_SPEC §2.2): the enemy participant with the most committed value at the
+		// fight's real start (offline field; falls back to the end scan when the start scan is missing).
+		static (OpenRA.Player Owner, string Faction) DominantEnemy(EngagementState s)
+		{
+			var t = s.TruthStart ?? s.TruthEnd;
+			if (t == null || t.FactionValue.Count == 0)
+				return (null, "");
+
+			var faction = t.FactionValue
+				.OrderByDescending(kv => kv.Value).ThenBy(kv => kv.Key, StringComparer.Ordinal)
+				.First().Key;
+			t.Owners.TryGetValue(faction, out var owner);
+			return (owner, faction);
+		}
+
+		// enemy_faction_public: the same test GameInformation applies (resolved faction == lobby pick).
+		// A Random slot resolves after the lobby, so it reports false — in-match consumers of
+		// faction-keyed priors fall back to the family/global pool (TIER1_FITTER_SPEC ruling 2).
+		bool LobbyShowsFaction(OpenRA.Player p)
+		{
+			if (p == null)
+				return false;
+
+			var client = world.LobbyInfo?.ClientWithIndex(p.ClientIndex);
+			return client != null && client.Faction == p.Faction.InternalName;
 		}
 
 		void WritePosture(int tick)
@@ -801,6 +842,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 	{
 		public string GameUid, MapUid, Player, BotType, Faction, Personality, CloseReason = "", Kind = "field", DirectorPhase = "", Urgency = "";
 		public string BanditScope = "", BanditPersonalityArm = "", BanditPlanArm = "";
+		public string EnemyFaction = "";
+		public bool EnemyFactionPublic;
 		public int EndTick, DistOwnBase = -1, DistEnemyBase = -1, DirectorTension = -1, OwnBaseX = -1, OwnBaseY = -1;
 	}
 
@@ -871,6 +914,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				b.Append('}');
 			}
 
+			AiMatchLogWriter.AppendString(b, "enemy_faction", h.EnemyFaction);
+			AiMatchLogWriter.AppendBoolean(b, "enemy_faction_public", h.EnemyFactionPublic);
 			AiMatchLogWriter.AppendNumber(b, "engagement_id", s.Id);
 			AiMatchLogWriter.AppendNumber(b, "start_tick", s.StartTick);
 			AiMatchLogWriter.AppendNumber(b, "end_tick", h.EndTick);
@@ -978,6 +1023,14 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			AiMatchLogWriter.AppendNumber(b, "predicted_own_surviving_permille", seen.PredictedOwnSurvivingPermille);
 			AiMatchLogWriter.AppendNumber(b, "predicted_enemy_surviving_permille", seen.PredictedEnemySurvivingPermille);
 			AiMatchLogWriter.AppendNumber(b, "army_dist_cells", seen.ArmyDistCells);
+
+			// TIER-1 composition (TIER1_FITTER_SPEC §2.2): per-type counts, keys already sorted.
+			AiMatchLogWriter.AppendObjectPropertyStart(b, "composition");
+			AppendTypeMap(b, "own_units", seen.OwnUnitTypes, true);
+			AppendTypeMap(b, "own_defences", seen.OwnDefenceTypes);
+			AppendTypeMap(b, "enemy_units", seen.EnemyUnitTypes);
+			AppendTypeMap(b, "enemy_defences", seen.EnemyDefenceTypes);
+			b.Append('}');
 			b.Append('}');
 		}
 
@@ -990,6 +1043,23 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			AiMatchLogWriter.AppendNumber(b, "enemy_units", truth.EnemyUnits);
 			AiMatchLogWriter.AppendNumber(b, "enemy_defence_value", truth.EnemyDefenceValue);
 			AiMatchLogWriter.AppendNumber(b, "enemy_defence_count", truth.EnemyDefenceCount);
+			AiMatchLogWriter.AppendObjectPropertyStart(b, "composition");
+			AppendTypeMap(b, "units", truth.UnitTypes, true);
+			AppendTypeMap(b, "defences", truth.DefenceTypes);
+			b.Append('}');
+			b.Append('}');
+		}
+
+		static void AppendTypeMap(StringBuilder b, string name, SortedDictionary<string, int> types, bool first = false)
+		{
+			AiMatchLogWriter.AppendObjectPropertyStart(b, name, first);
+			var innerFirst = true;
+			foreach (var kv in types)
+			{
+				AiMatchLogWriter.AppendNumber(b, kv.Key, kv.Value, innerFirst);
+				innerFirst = false;
+			}
+
 			b.Append('}');
 		}
 
