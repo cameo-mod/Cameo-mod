@@ -17452,3 +17452,54 @@ null-safe and deterministic (Priority desc, RequiredValue asc, publish order). +
 RaidSteeringTest. Verified post-merge: tests 9/9, freshness audit regen PASS (the merge
 staleness it flagged is exactly what the gate exists for), BG switch arms 6 writes,
 boot-gate PASS, 743/743 suite total per NOVA.
+
+## 2026-10-03 — ember lane: BH merge review + round-trip "storm" layer
+
+Merged `2876dde32` (BH TC-3 assist election, PR #781): `IBotExpansionAssistProvider`
+publishes contested expansion fields; the coalition fold runs a second election after
+rescue — nearest free ally by `ArmyCentroid`, self-election forbidden, one participant
+answers at most one request across rescue+assist passes (survival outranks economy),
+responder reuses the ally-defend channel (`assist_answer:<requester>:<rally>` logging),
+holds release on retract/stale. Same class of fix as TC-2f — a provider with no
+consumer now has an elected executor. `BH_tc3_assist_election` default-off on all six
+genericbot personalities, classic untouched. Verified post-merge: focused suite 25/25,
+switch arms clean, arch coverage regen (upstream left it stale — gate catches it every
+time), boot-gate PASS from private engine while two foreign games held the shared bin.
+
+New observability: `round_trip_check.py` gains a `storm` layer — the killbox-bleeding
+pattern GC-1's backoff fixes (same mission re-attempting into repeated lost_units)
+can occur on ANY mission type/executor, so it now lives in the checker too. A mission
+WARNs at >=3 fast-consecutive bleeding closes (lost_units, x_contest_lost, stuck,
+timeout); rate-aware so backoff-spaced retries don't false-positive; peak streak
+tracked so a later successful close can't erase evidence. Validated: out7 WARN
+(worst `garrison_contest:a166` x9 — the original bug, caught retroactively), out8/out5
+PASS. GC-1's C#-level backoff remains the prevention; this layer is the tripwire.
+
+Flagged to SquadManager owner (unchanged from out7 review): `secure:<player>` pushes
+commit but write no terminal record — in a *won* match the push stayed open 15.8k
+ticks; every secure attempt is structurally dangling. Not my file; owner aware.
+
+## 2026-10-03 — ember lane: LC8 match_end records were unflushable — fixed in writer
+
+out9 (43 groups, BH merge): 4/4 clean, 2-2, zero exceptions — and zero `match_end`
+records, same as out7/out8. Root cause found in the dispose chain: the LC8
+`BotMissionAttemptTracker` (player trait) writes `Released(match_end)` records from
+`INotifyActorDisposing.Disposing`, which `Actor.Dispose` defers into FrameEndTasks
+drained inside `World.Dispose` — AFTER `IGameOver.GameOver` already ran the writer's
+last flush. The records landed in `AiMissionLogWriter.pending` and died there: the
+writer had no flush path after GameOver (no ticks on a disposing world).
+
+Fix (my lane, Cameo file): `AiMissionLogWriter` now implements `INotifyActorDisposing`
+and runs the same bounded `TryFlush` loop on `Disposing`. Engine order guarantees it
+sees the records — `World.Dispose` disposes newest actors first and the world actor
+LAST (`actors.Values.Reverse()` + FrameEndTask drain preserves that order), so every
+player-actor tracker has written before the world-actor writer flushes. Sink
+resolution also holds: `BotMissionLog.Write` resolves sinks off `WorldActor`'s trait
+dict, which stays intact until the world actor itself disposes. No engine change.
+
+Two adjacent findings stay with the SquadManager owner (not my file):
+`secure:<player>` pushes close only on supersede/lost_units/match_end — a winning
+wave never books `done`; and a Rush squad emptied via `DismissSquad` (intact
+stand-down) later hits `CleanSquads`'s `CloseSecurePush(Failed, LostUnits)` —
+a mislabeled terminal, since `IsValid => Units.Count > 0` makes dismissal look like
+wiped. Evidence: out7 `secure:Multi1` COMMITTED t=20930, open 15.8k ticks.

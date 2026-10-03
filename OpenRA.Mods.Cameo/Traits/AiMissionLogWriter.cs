@@ -34,7 +34,7 @@ namespace OpenRA.Mods.Cameo.Traits
 		public override object Create(ActorInitializer init) { return new AiMissionLogWriter(this); }
 	}
 
-	public class AiMissionLogWriter : IWorldLoaded, IGameOver, ITick, IBotMissionRecordSink
+	public class AiMissionLogWriter : IWorldLoaded, IGameOver, ITick, IBotMissionRecordSink, INotifyActorDisposing
 	{
 		public const string Schema = "mission-card/1";
 
@@ -161,6 +161,16 @@ namespace OpenRA.Mods.Cameo.Traits
 			// World.EndGame pauses before IGameOver and a paused world does not tick: flush now, retries included.
 			for (var i = 0; i < 8 && (inFlight != null || pendingLines > 0); i++)
 				TryFlush(world.WorldTick);
+		}
+
+		void INotifyActorDisposing.Disposing(Actor self)
+		{
+			// World.Dispose disposes newest actors first and the world actor last, so every
+			// player-actor BotMissionAttemptTracker has already written its Released(match_end)
+			// records into pending by now. The last GameOver flush ran before them — flush once
+			// more or those terminal lines die in the buffer.
+			for (var i = 0; i < 8 && (inFlight != null || pendingLines > 0); i++)
+				TryFlush(self.World.WorldTick);
 		}
 
 		void TryFlush(int tick)
