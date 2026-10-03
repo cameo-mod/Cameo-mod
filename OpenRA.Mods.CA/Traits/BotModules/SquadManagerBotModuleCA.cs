@@ -254,6 +254,13 @@ namespace OpenRA.Mods.CA.Traits
 			"A null coalition target keeps today's provider pick, bit-identical.")]
 		public readonly bool UseCoalitionTarget = false;
 
+		[Desc("TC-3 (12.18, assist pass 12.28): answer our own elected expansion-assist",
+			"assignment — a protect squad rallies at the ally's published ExpansionAssist",
+			"field, strictly below a defend answer (the fold drains the rescue pool first,",
+			"and this channel never overrides an own threat or escort). Same pool floor as",
+			"UseTeamDefendAnswers. False = assist requests are never answered, bit-identical.")]
+		public readonly bool UseCoalitionAssist = false;
+
 		[Desc("Percent of the desired attack force bar required while the Director is in BuildUp.",
 			"A disabled/absent Director also reads BuildUp — 100 keeps the baseline bar.")]
 		public readonly int DirectorBuildUpForceScalePercent = 100;
@@ -708,6 +715,11 @@ namespace OpenRA.Mods.CA.Traits
 		// One open attempt per id: the rolling hold refresh extends it, a new requester
 		// or a new rally cell supersedes it.
 		string allyDefendOpen;
+
+		// TC-3 (§12.28): the mission id of the assist_answer attempt open on the same
+		// rally — tracked apart from allyDefendOpen so a defend<->assist switch closes
+		// the superseded record with its own kind instead of crossing the grammars.
+		string allyAssistOpen;
 
 		// The mission id of the open shared-push (secure:<player>) attempt — each
 		// Rush launch supersedes the last wave's record; a destroyed wave closes it.
@@ -1648,7 +1660,8 @@ namespace OpenRA.Mods.CA.Traits
 			var prepositionOn = Info.PrepositionDefence && threatPredictionProviders is { Length: > 0 };
 			var requestsOn = Info.UseProtectionRequests && protectionRequestProviders is { Length: > 0 };
 			var teamAnswersOn = Info.UseTeamDefendAnswers;
-			if ((!prepositionOn && !requestsOn && !teamAnswersOn) || World.WorldTick < nextPrepositionTick)
+			var assistAnswersOn = Info.UseCoalitionAssist;
+			if ((!prepositionOn && !requestsOn && !teamAnswersOn && !assistAnswersOn) || World.WorldTick < nextPrepositionTick)
 				return;
 
 			nextPrepositionTick = World.WorldTick + Math.Max(1, Info.ProtectInterval);
@@ -1708,6 +1721,42 @@ namespace OpenRA.Mods.CA.Traits
 				}
 
 				allyDefendAnswer = answered;
+			}
+
+			// TC-3 (§12.28): the fold's second election pass — an ally's contested
+			// expansion claim elects the nearest free army as its escort. Strictly
+			// below a defend answer: a defend pick above already claimed `request`,
+			// and the fold itself drained the rescue pool before electing assists.
+			// Election-only, no fallback — the assist field exists only through the
+			// coalition fold, so there is no pre-fold pick to preserve. Same thin-pool
+			// floor; the answer holds while the requester's assist broadcast stays
+			// live (CollectBroadcasts freshness + the next refold retracting it).
+			CoalitionAssistAssignment allyAssistAssignment = null;
+			TeamBroadcast allyAssistAnswer = null;
+			if (threat == null && request == null && assistAnswersOn &&
+				unitsHangingAroundTheBase.Count >= Info.TeamDefendAnswerMinPoolUnits)
+			{
+				var assistElection = Player.PlayerActor.TraitsImplementing<IBotCoalition>()
+					.FirstEnabledTraitOrDefault()?.Coalition?.AssistAssignments;
+				if (assistElection is { Count: > 0 })
+				{
+					var myId = Player.InternalName ?? "#" + Player.ClientIndex;
+					var elected = assistElection.FirstOrDefault(a =>
+						a.ResponderId == myId || (a.ResponderId == null && a.ResponderClientIndex == Player.ClientIndex));
+					if (elected != null)
+					{
+						var broadcasts = TeamBlackboard.CollectBroadcasts(Player);
+						var requester = broadcasts.FirstOrDefault(b => b != null
+							&& (CoalitionFold.ParticipantKey(b) == elected.RequesterId
+								|| (elected.RequesterId == null && b.ClientIndex == elected.RequesterClientIndex)));
+						var armyValue = requester?.OwnArmyValue
+							?? broadcasts.Where(b => b != null).Select(b => b.OwnArmyValue).DefaultIfEmpty().Max();
+						request = new BotProtectionRequest(World.Map.CellContaining(elected.AssistPosition),
+							armyValue, World.WorldTick + Info.ProtectInterval * 10);
+						allyAssistAssignment = elected;
+						allyAssistAnswer = requester;
+					}
+				}
 			}
 
 			if (threat == null && request == null)
@@ -1770,6 +1819,11 @@ namespace OpenRA.Mods.CA.Traits
 			else
 				CloseAllyDefend(BotMissionAttemptState.Released, BotMissionReasons.Superseded);
 
+			if (allyAssistAssignment != null)
+				CommitAllyAssist(allyAssistAssignment, allyAssistAnswer, rally, protectSq.Units.Count);
+			else
+				CloseAllyAssist(BotMissionAttemptState.Released, BotMissionReasons.Superseded);
+
 			if (request == null && Info.FastSquadsReactToThreats)
 				ReactWithFastSquads(bot, protectSq, rally, threat.Value.EtaTicks);
 		}
@@ -1823,6 +1877,55 @@ namespace OpenRA.Mods.CA.Traits
 				MissionType = "defend_answer"
 			});
 			allyDefendOpen = null;
+		}
+
+		// The elected assist answer is the same grammar gap as the defend answer: the
+		// record is `assist_answer:<requesterKey>:<rallyCell>` so the team report can
+		// count escorts separately from rescues. The requester broadcast can be null
+		// (stale between the fold and this tick) — the assignment still carries the
+		// requester's participant key, so the record never goes anonymous.
+		void CommitAllyAssist(CoalitionAssistAssignment assignment, TeamBroadcast requester, CPos rally, int units)
+		{
+			var id = $"assist_answer:{assignment.RequesterId ?? "#" + assignment.RequesterClientIndex}:{rally}";
+			if (allyAssistOpen == id)
+				return;
+
+			if (allyAssistOpen != null)
+				CloseAllyAssist(BotMissionAttemptState.Released, BotMissionReasons.Superseded);
+
+			var attempt = missionAttemptCounters.GetValueOrDefault(id) + 1;
+			missionAttemptCounters[id] = attempt;
+			allyAssistOpen = id;
+			BotMissionLog.Write(new BotMissionRecord
+			{
+				Player = Player,
+				MissionId = id,
+				Attempt = attempt,
+				State = BotMissionAttemptState.Committed,
+				Executor = "Squads",
+				MissionType = "assist_answer",
+				TargetCell = rally,
+				Units = units,
+				Value = requester?.OwnArmyValue ?? 0
+			});
+		}
+
+		void CloseAllyAssist(BotMissionAttemptState state, string reason)
+		{
+			if (allyAssistOpen == null)
+				return;
+
+			BotMissionLog.Write(new BotMissionRecord
+			{
+				Player = Player,
+				MissionId = allyAssistOpen,
+				Attempt = missionAttemptCounters.GetValueOrDefault(allyAssistOpen),
+				State = state,
+				Reason = reason,
+				Executor = "Squads",
+				MissionType = "assist_answer"
+			});
+			allyAssistOpen = null;
 		}
 
 		// The cardless assault wave still needs a record for the shared-push metric:
@@ -1922,6 +2025,7 @@ namespace OpenRA.Mods.CA.Traits
 			protectionHoldUntilTick = -1;
 			protectionQuietSinceTick = -1;
 			CloseAllyDefend(BotMissionAttemptState.Released, BotMissionReasons.Done);
+			CloseAllyAssist(BotMissionAttemptState.Released, BotMissionReasons.Done);
 			foreach (var n in notifyIdleBaseUnits)
 				n.UpdatedIdleBaseUnits(unitsHangingAroundTheBase);
 		}
@@ -2232,7 +2336,10 @@ namespace OpenRA.Mods.CA.Traits
 			{
 				ResolveMissionAttempt(s, BotMissionAttemptState.Failed, BotMissionReasons.LostUnits);
 				if (s.Type == SquadCAType.Protection)
+				{
 					CloseAllyDefend(BotMissionAttemptState.Failed, BotMissionReasons.LostUnits);
+					CloseAllyAssist(BotMissionAttemptState.Failed, BotMissionReasons.LostUnits);
+				}
 				else if (s.Type == SquadCAType.Rush)
 					CloseSecurePush(BotMissionAttemptState.Failed, BotMissionReasons.LostUnits);
 			}
