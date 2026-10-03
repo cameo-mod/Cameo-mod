@@ -56,6 +56,85 @@ exceptions). One caveat for reviewers: `engine/` in the smoke worktrees is a
 junction to the main checkout's engine dir — bin/ is shared, so builds and boot
 gates serialize across lanes by construction.
 
+# 2026-10-03 — DAWN: tier-3 bandits implemented (INC-ready, `devin/dawn/tier3-bandits`)
+
+*Devin (dawn) — spec above, coded in `dawn-t3`. Build 0 errors, 822/822 tests (15 new
+`PlanBanditMathTest`), audits clean except the KNOWN `ledgers_drifted` 33 (master finding
+`612014a74`, balance lane, pipeline re-extract), boot-gate PASS (menu marker, 0 new exceptions).*
+
+- `PlanBanditMath.cs` + `PlanBanditBotModule.cs`/`PlanBanditLearned` (new): Student-t Thompson
+  draws over Normal-mean posteriors (continuous `total_milli` — Beta cannot express it);
+  hierarchical pooling `matchup -> faction -> family -> any`, each parent capped at `PriorCount`
+  pseudo-obs; safety floor binds on `EvidenceN` (own-scope plays) not pooled n — the fitter rolls
+  one observation into every chain level, so pooled n over-counts by design.
+- `BotPersonalityController`: bandit pin consults `PlanBanditBotModule.PinnedPersonalityArm`
+  (lazy resolve, ordering-free); harness `PinnedPersonalities` still wins; bandit arm that names no
+  `personality-*` condition falls back to the random draw.
+- `BuildOrderKnobsBotModule`: plan overlay as a 4th multiplier (preset x learned x plan x jitter,
+  clamped); `EnemyFaction` extracted to `PlanBanditBotModule.EnemyFactionOf` (shared, verbatim).
+- Attribution: `bandit` block on `BotSituation` snapshots AND on `engagement` records
+  (scope + both frozen arms) — the fitter joins on it directly; unarmed games contribute nothing.
+- `tune_plan_bandits.py` (new): folds `bandit`-attributed engagement records into
+  `<bandit>@<scope>` stats at all 4 chain levels, decayed sliding-window (`--decay`), `Processed`
+  ids keep re-runs idempotent; smoke-verified (2 obs -> 8 scope rows, rerun folds 0).
+- `ai.yaml`: `GrantConditionOnBotOwner@planbandits` (empty Bots, inert) + `PlanBanditBotModule`
+  block `genericbot && plan_bandits` — 5 plan arms (`balanced` no-op, `press`, `fortify`, `boom`,
+  `surge`, all inside the existing knob clamp) + 6 personality arms.
+- `increment_switches.yaml`: `AO_tier3_bandits` (grant only — classic is not genericbot =
+  bit-identical when off).
+
+# 2026-10-03 — DAWN: tier-3 bandits implementation spec (branch `devin/dawn/tier3-bandits`, worktree `dawn-t3`)
+
+*Devin (dawn) — base `43ba77109` (PR #789 on master, tier-3 gate cleared). Fleet order
+`ORDERS_2026-10-03_claude_learning_tiers.md` + my design note `NOTE_2026-10-03_dawn_tier3_bandit_design.md`.
+Spec checkpointed before coding (WORKFLOW 1.7):*
+
+## Two bandits, one learned file
+
+- `mods/cameo/ai/learned/plan_bandits.yaml` — `BotPlanBandits: Personality@<scope>: / Plan@<scope>: <arm>: n, mean_milli, m2`.
+- Scopes `any | family_<f> | <faction> | <faction>_vs_<enemy>` (adds matchup level per order).
+- Posterior: Normal-Gamma via Student-t (n<2 → prior). `total_milli` is continuous so Bernoulli Beta is wrong;
+  wins/fails derived from the normal arm for the schema's compatibility fields.
+- Choice at match start, frozen: Thompson sample per arm, then exclude any arm whose LCB
+  (`mean - z*sd`) clears `LcbFloor` and is below `MinSafetyLcb` — per order, "safety floor" = arms that
+  must not be selectable below an evidence-backed minimum.
+- Personality bandit arms = `PersonalityArms` list (default all `personality-*` presets). Winner pins via
+  `BotPersonalityController` (extends the existing PinnedPersonalities block to also block switches).
+- Plan bandit arms = named knob-overlay presets (`PlanArms:<name>:<knob>:<milli>`) applied as an extra
+  multiplier inside `BuildOrderKnobsBotModule.RecomputeBase` (preset x learned x plan x jitter). No new
+  order channels — plan arms only reshape the bounded knob vector.
+- Attribution: `BotSituation` gains a `bandit` snapshot section (`personality_arm`, `plan_arm`, `scope`,
+  `pinned`) so offline tuning maps engagement/1 records -> the arm that produced them. Personality arm
+  is additionally visible as constant `personality` on every record.
+
+## New/changed files
+
+- NEW `OpenRA.Mods.Cameo/Traits/BotModules/PlanBanditBotModule.cs` — `genericbot && plan_bandits`-gated
+  (arm via switch group, matching ArmyStagingBotModule convention — no `Use*` bool), fields
+  `LearnedFile`, `PersonalityArms`, `PlanArms` (named knob overlays incl. explicit `balanced` no-op),
+  `PriorCount`, `LcbZ` (x100), `MinEvidence`, `MinSafetyLcb`. Exposes `PinnedPersonalityArm` +
+  `PlanOverlayMilli` + `Snapshot`. (`MaxDrawAttempts` dropped: the t-draw caps df at 64 instead.)
+- NEW `OpenRA.Mods.Cameo/Traits/BotModules/PlanBanditMath.cs` — pure functions: parse, pool, sample,
+  LCB filter, decay update (testable without World).
+- `PlanBanditLearned` (same file): scope chain `matchup -> faction -> family -> any`, each parent
+  downweighted to `PriorCount` pseudo-obs. `Pooled` feeds the Thompson draw; `EvidenceN` (own-scope n:
+  matchup first, else faction) feeds the floor — the fitter rolls one observation into every chain
+  level, so pooled n over-counts and must NOT gate the floor.
+- `EngagementLogBotModule`/`EngagementRecord`: `bandit` block (scope + both arms) on engagement
+  records when armed — the offline fitter's attribution join. Fitter `tune_plan_bandits.py` folds ONLY
+  attributed records (unattributed skipped as processed) at all 4 chain levels; `Processed` game ids
+  keep it idempotent; decay = sliding-window discount.
+- NEW `OpenRA.Mods.Cameo/Traits/BotModules/PlanBanditMath.cs` — pure functions: parse, pool, sample,
+  LCB filter, decay update (testable without World).
+- `BotPersonalityController.cs` — consult `PlanBanditBotModule.PinnedPersonality` (lazy resolve) at
+  TraitEnabled and in SetBotPersonality.
+- `BuildOrderKnobsBotModule.cs` — combine `planOverlay` in RecomputeBase.
+- `BotSituation.cs` + `AiSituationLogWriter.cs` — `bandit` section.
+- `mods/cameo/ai/ai.yaml` — module block (default off) beside BuildOrderKnobsBotModule.
+- `tools/ai/tune_plan_bandits.py` — offline updater: groups engagement records by (bandit, arm, scope),
+  decayed Welford, writes learned file.
+- `tools/ai/increment_switches.yaml` — `AO_tier3_bandits`.
+- `OpenRA.Mods.Cameo.Test/PlanBanditMathTest.cs` — pooling/floor/determinism/parse/decay tests.
 # 2026-10-03 — armed smokes: AM_army_staging on master + EL-0 (#789) live validation
 
 *Devin (nova) — two frozen worktrees, sequential batches (one game driver at a time):*

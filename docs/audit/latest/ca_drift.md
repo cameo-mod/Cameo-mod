@@ -11,7 +11,7 @@ Upstream: `C:\Users\AedisToru\Documents\GitHub\CAmod` at `b67e28746` (`origin/HE
 | MODIFIED | 27 |
 | MODIFIED+STALE | 45 |
 | MOVED/REMOVED | 13 |
-| CAMEO_ONLY | 68 |
+| CAMEO_ONLY | 70 |
 | MISSING (upstream files never copied) | 313 |
 
 ## MODIFIED+STALE: port the upstream diff by hand (45)
@@ -76,7 +76,7 @@ Upstream: `C:\Users\AedisToru\Documents\GitHub\CAmod` at `b67e28746` (`origin/HE
     - 2026-06-05 Add Glow Effect to CA Projectiles
     - 2025-07-02 Engine update part 10 (projectiles).
     - 2025-07-02 Engine update fixes part 3.
-- `OpenRA.Mods.CA/Traits/BotModules/SquadManagerBotModuleCA.cs`: base 2025-07-02, 6 upstream commits since, Cameo diff 2695 lines
+- `OpenRA.Mods.CA/Traits/BotModules/SquadManagerBotModuleCA.cs`: base 2025-07-02, 6 upstream commits since, Cameo diff 3171 lines
     - 2026-02-12 - Increased IFV HP from 30k to 32k. - Tiger Guard IFV prioritizes vehicle targets. - Increased Peacemaker damage vs defenses. - Clean up V3 upgrade remnants. - AI tweaks.
     - 2026-02-09 Compositions.
     - 2026-02-08 Updated AI routing.
@@ -132,7 +132,7 @@ Upstream: `C:\Users\AedisToru\Documents\GitHub\CAmod` at `b67e28746` (`origin/HE
     - 2025-05-24 ReloadAmmoPoolCA refactoring.
     - 2025-05-24 - Obliterator charge drains gradually instead of immediately if targeting is interrupted. Added minimum range to prevent direction bug. - EMP Grenadiers don't get range bonus from Heroes of the Union. - Fixed Voidspike visual glitch if hit by weapons which flash the target. - Added Health to Mind Spark so its death animation plays.
     - 2023-12-29 Buggy decoy upgrade.
-- `OpenRA.Mods.CA/Traits/BotModules/Squads/States/StateBaseCA.cs`: base 2023-05-27, 3 upstream commits since, Cameo diff 216 lines
+- `OpenRA.Mods.CA/Traits/BotModules/Squads/States/StateBaseCA.cs`: base 2023-05-27, 3 upstream commits since, Cameo diff 234 lines
     - 2026-02-08 Updated AI routing.
     - 2026-02-08 Skirmish AI indirect routes of attack.
     - 2025-08-10 AI updates.
@@ -170,7 +170,7 @@ Upstream: `C:\Users\AedisToru\Documents\GitHub\CAmod` at `b67e28746` (`origin/HE
     - 2024-05-18 Scrin allegiances, Eviscerator, Obliterator, Nullifier, Overlord's Wrath, Gateway & Watcher.
 - `OpenRA.Mods.CA/Traits/Attack/AttackFrontalCharged.cs`: base 2025-10-06, 1 upstream commits since, Cameo diff 3 lines
     - 2025-12-07 Clean up trait lookups.
-- `OpenRA.Mods.CA/Traits/BotModules/BaseBuilderBotModuleCA.cs`: base 2025-07-02, 1 upstream commits since, Cameo diff 913 lines
+- `OpenRA.Mods.CA/Traits/BotModules/BaseBuilderBotModuleCA.cs`: base 2025-07-02, 1 upstream commits since, Cameo diff 922 lines
     - 2025-08-10 AI updates.
 - `OpenRA.Mods.CA/Traits/BotModules/BotModuleLogic/BaseBuilderQueueManagerCA.cs`: base 2023-05-27, 1 upstream commits since, Cameo diff 977 lines
     - 2025-08-10 AI updates.

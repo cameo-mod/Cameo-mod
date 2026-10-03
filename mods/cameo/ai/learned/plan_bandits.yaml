@@ -1,0 +1,7 @@
+# Tier-3 pooled bandit posteriors (fleet orders 2026-10-03), written by
+# tools/ai/tune_plan_bandits.py --write. Each node is <bandit>@<scope>; scope is
+# `any`, `family_<f>`, `<faction>`, or `<faction>__vs__<enemy>` (the enemy may itself
+# be family_-scoped). Children are `<arm>: n mean m2` — the observation count,
+# sample mean and sum of squared deviations of the EL `total_milli` reward.
+# An empty file means prior-only draws (uniform exploration over the arms).
+BotPlanBandits:

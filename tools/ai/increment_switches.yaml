@@ -162,6 +162,9 @@ groups:
   AM_army_staging:                   # DESIGN 19.12 / AI_ARCHITECTURE 12.29, maintainer 2026-10-03: arms the ArmyStagingBotModule planner - the idle army waits at the front with the defences, split by threatened side; the squad manager stages the pool, the base builder rallies at the primary cell. No provider (classic, switch off) = bit-identical
     GrantConditionOnBotOwner@armystaging:
       Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla
+  AO_tier3_bandits:                  # fleet orders 2026-10-03, DAWN tier-3: arms PlanBanditBotModule - Thompson-samples one personality arm (pins BotPersonalityController) + one attack-plan knob overlay at match start over the EL engagement posteriors in ai/learned/plan_bandits.yaml, pooled any->family->faction->matchup with a safety floor. Classic is not genericbot = bit-identical
+    GrantConditionOnBotOwner@planbandits:
+      Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla
   F2_ca_f2p2:                        # CA F2 part 2 hand-ports (WP-A1/A3/A4): air limits, route start, squad state tweaks
     UnitBuilderBotModuleCA:        # one instance is shared by genericbot AND classicbot (34 ContentPacks extend it), so it cannot be split
       SwitchCondition: genericbot  # the two switches below take effect only while this holds: classic stays the A/B reference
