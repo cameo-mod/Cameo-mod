@@ -78,8 +78,12 @@ namespace OpenRA.Mods.CA.Traits
 		/// — the stat-normalized key tier-1's delivery×armour priors are fitted against (AI_ARCHITECTURE 12.31).</summary>
 		public readonly string Delivery;
 
+		/// <summary>Yaml weapon name the profile was built from — the join key to the fitter's
+		/// <c>WarheadTag@</c> map (ledger tags are per-weapon yaml fields, lost from the warhead object).</summary>
+		public readonly string WeaponName;
+
 		public BotWeaponProfile(double damagePerTick, WDist range, BitSet<TargetableType> valid, BitSet<TargetableType> invalid,
-			IReadOnlyDictionary<string, int> versus, string delivery = null)
+			IReadOnlyDictionary<string, int> versus, string delivery = null, string weaponName = null)
 		{
 			DamagePerTick = damagePerTick;
 			Range = range;
@@ -87,6 +91,7 @@ namespace OpenRA.Mods.CA.Traits
 			Invalid = invalid;
 			Versus = versus ?? new Dictionary<string, int>();
 			Delivery = delivery;
+			WeaponName = weaponName;
 		}
 
 		public bool CanTarget(BitSet<TargetableType> targetTypes) => Valid.Overlaps(targetTypes) && !Invalid.Overlaps(targetTypes);
@@ -138,7 +143,7 @@ namespace OpenRA.Mods.CA.Traits
 					delivery = delivery.Substring(0, delivery.Length - "Warhead".Length);
 
 				weapons.Add(new BotWeaponProfile((double)main.Damage * Math.Max(1, weapon.Burst) / cycle, weapon.Range,
-					weapon.ValidTargets, weapon.InvalidTargets, main.Versus, delivery.ToLowerInvariant()));
+					weapon.ValidTargets, weapon.InvalidTargets, main.Versus, delivery.ToLowerInvariant(), armament.Weapon));
 			}
 
 			var speed = actor.TraitInfoOrDefault<MobileInfo>()?.Speed ?? actor.TraitInfoOrDefault<AircraftInfo>()?.Speed ?? 0;

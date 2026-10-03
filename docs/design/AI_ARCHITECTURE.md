@@ -3635,9 +3635,10 @@ BotEngagementPriors:                                 # tier-1 fitter schema (can
 	                                                  # mounted in-match; the in-game staleness gate is StatFingerprint)
 	Engagements: <n>                                   # informational
 	AttritionExponentMilli: <milli>                    # reserved — the predictor's ratio is not yet re-exponented
-	DeliveryArmour@<delivery>__x__<armor>: <milli>     # residual on the resolved Versus prior (500-2000)
-	DefenceState@<delivery>: <milli>                   # static-defence fire effectiveness, per delivery
+	DeliveryArmour@<tag>__x__<armor>: <milli>          # residual on the resolved Versus prior (500-2000)
+	DefenceState@<tag>: <milli>                        # static-defence fire effectiveness, per delivery tag
 	IntoDefencesMilli: <milli>                         # global own-fire-into-defences correction
+	WarheadTag@<weapon>: <tag>                         # weapon yaml name -> main warhead's ledger tag
 	AttackTiming@<faction> / Response@ / SuicideIndex@ # reserved — later tiers
 
 EngagementPriors:                                    # design schema (also accepted)
@@ -3646,6 +3647,14 @@ EngagementPriors:                                    # design schema (also accep
 	Factor@<delivery>|<armor>: <permille>              # delivery = warhead class minus "Warhead" lowercased (BotWeaponProfile.Delivery)
 	Factor@*|<armor>: <permille>                       # armour-wide fallback row
 ```
+
+The `<tag>` key is the ledger warhead tag — the `Warhead@X` yaml field name (`Bullet_Medium`, `CannonAP_Heavy`),
+which the engine discards when it instantiates the warhead class: `BotWeaponProfile.Delivery` only knows the class
+(`SpreadDamageWarhead` -> `spreaddamage`). `WarheadTag@` closes that gap: `BotWeaponProfile.WeaponName` (the
+armament's declared weapon name) -> ledger tag -> cell. A file without `WarheadTag@` rows leaves tag-keyed cells
+unreachable and quietly neutral — the fitter must emit it (one row per armed weapon, derivable from the ledgers it
+already reads). The `Factor@` design schema stays keyed on `Delivery` (the class) — a coarser but self-consistent
+namespace.
 
 Cell semantics are one shared multiplier space: `FactorPermille(delivery, armor)` reads
 `DeliveryArmour@d__x__a` == `Factor@d|a`; `DefenceFactorPermille(delivery)` reads `DefenceState@d` else falls back to

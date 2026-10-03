@@ -32,6 +32,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		readonly Dictionary<string, int> factors = new(StringComparer.Ordinal);
 		readonly Dictionary<string, int> defenceFactors = new(StringComparer.Ordinal);
+		readonly Dictionary<string, string> weaponTags = new(StringComparer.OrdinalIgnoreCase);
 
 		public string StatFingerprint { get; private set; }
 		public string LedgerHash { get; private set; }
@@ -52,6 +53,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		/// <summary>Static-defence correction in permille — per-delivery <c>DefenceState@</c> when fitted, else the flat factor.</summary>
 		public int DefenceFactorPermille(string delivery) =>
 			defenceFactors.TryGetValue(delivery ?? "-", out var v) ? v : StaticDefenceFactorPermille;
+
+		/// <summary>The fitter's ledger tag for one weapon's main warhead, when the file carries the map — else null.</summary>
+		public string WeaponTag(string weaponName) =>
+			weaponName != null && weaponTags.TryGetValue(weaponName, out var tag) ? tag : null;
 
 		public static EngagementPriors Parse(IEnumerable<MiniYamlNode> nodes)
 		{
@@ -90,6 +95,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				priors.factors[node.Key["DeliveryArmour@".Length..].Replace("__x__", "|", StringComparison.Ordinal)] = cell;
 			else if (node.Key.StartsWith("DefenceState@", StringComparison.Ordinal) && TryMilli(v, out var ds))
 				priors.defenceFactors[node.Key["DefenceState@".Length..]] = ds;
+			else if (node.Key.StartsWith("WarheadTag@", StringComparison.Ordinal))
+				priors.weaponTags[node.Key["WarheadTag@".Length..]] = v;
 		}
 
 		static bool TryMilli(string v, out int milli) =>
@@ -231,9 +238,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		double Factor(BotUnitProfile attacker, BotWeaponProfile weapon, BotUnitProfile target)
 		{
-			var f = priors.FactorPermille(weapon.Delivery, target.Armor);
+			// The delivery key: the fitter's per-weapon ledger tag when the file carries the map
+			// (WarheadTag@), else the warhead class the design schema is keyed on.
+			var delivery = priors.WeaponTag(weapon.WeaponName) ?? weapon.Delivery;
+			var f = priors.FactorPermille(delivery, target.Armor);
 			if (attacker.IsBuilding)
-				f = (int)(f * (long)priors.DefenceFactorPermille(weapon.Delivery) / 1000);
+				f = (int)(f * (long)priors.DefenceFactorPermille(delivery) / 1000);
 			if (target.IsBuilding)
 				f = (int)(f * (long)priors.IntoDefencesPermille / 1000);
 
