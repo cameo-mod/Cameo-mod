@@ -2657,7 +2657,9 @@ enumerates enemy actors.
   bit-identical. Switch group `R_tc2_sync_attacks`.
   Every Rush launch that commits without a taken provider card emits a
   `secure:<enemyPlayer>` attempt record (Committed at launch, Superseded by the next
-  wave, Failed if the wave dies) — the massed assault predates the mission grammar,
+  wave, Released when the squad stands down intact, Success/`done` the tick the named
+  enemy's WinState decides, Failed only if the wave dies) — the massed assault
+  predates the mission grammar,
   and without the record `team_coordination_report`'s `shared_push` sees only the
   rare economy-raid path. The record names the enemy the wave steers toward
   (the card it couldn't afford, else `EffectiveMainTarget`); classic has no mission
@@ -2690,24 +2692,28 @@ enumerates enemy actors.
   outside shared vision; the claim broadcast is the honest channel.)
 - **Fourth consumer (TC-2d — role split):** `MasterAiBotModuleInfo.
   UseTeamRoleSplit` (default false) spreads the TechRush&harr;Expansion RESTING
-  point across the allied bots by `ClientIndex` rank — `TeamRoleRank` counts
-  allied indices below mine, `RoleSplitBias(rank, teamSize, shift)` spreads the
-  endpoints to ±`TeamRoleSplitShift` (20), rank 0 taking the Expansion pole.
-  The bias moves the effective rest itself, so the axis parks on it and decays
-  back to it like an authored rest. Computed from static indices, never from
-  the drifting axes — a mirrored `hard`/`hard` team converges to
+  point across the allied bots by participant-key rank — `TeamRoleRank` counts
+  allied `ParticipantKey`s ordinally below mine, `RoleSplitBias(rank, teamSize,
+  shift)` spreads the endpoints to ±`TeamRoleSplitShift` (20), rank 0 taking the
+  Expansion pole. The bias moves the effective rest itself, so the axis parks on
+  it and decays back to it like an authored rest. Computed from static keys,
+  never from the drifting axes — a mirrored `hard`/`hard` team converges to
   expander+techer by construction, no oscillation possible. No new broadcast
-  field: `ClientIndex` arrived with TC-2c. Switch group `W_tc2_role_split`;
+  field: `ParticipantId` arrived with the TC-3 identity fix (map-side bots
+  share the host `ClientIndex`, review 4.4 — an index rank would collapse
+  every map-side team to rank 0). Switch group `W_tc2_role_split`;
   inert in 1v1.
 - **Fifth consumer (TC-2e — capture-claim arbitration):** the broadcast gains
   `CaptureClaims` (the union of every enabled `IBotCaptureClaimSource`'s live
   target cell centres — `EngineerBotModule`'s capture missions and
   `GarrisonContestBotModule`'s contest claims; own-side intent, publish-always).
   `TeamBlackboard.ClaimsAheadOf` folds the allied half into the position set of
-  every outranking publisher (strictly lower `ClientIndex`), and each module's
-  `UseTeamCaptureClaims` (default false) gates the stand-down: new claims on a
-  claimed cell are skipped, in-flight ones are released (superseded). Switch
-  group `BF_team_capture_claims`; inert in 1v1. See §12.26.
+  every outranking publisher (strictly lower `ParticipantKey`, the same
+  InternalName identity the coalition fold uses — `ClientIndex` cannot order
+  map-side bots), and each module's `UseTeamCaptureClaims` (default false)
+  gates the stand-down: new claims on a claimed cell are skipped, in-flight
+  ones are released (superseded). Switch group `BF_team_capture_claims`;
+  inert in 1v1. See §12.26.
 **Telemetry (2026-10-01, NOVA):** the §13.1 discipline counters are published on every
 snapshot — `own.banked_cash` (`PlayerResources.Cash + Resources`), `own.brownout_ticks`
 (per-tick `PowerManager.ExcessPower < 0`), `own.idle_production_ticks` (per-tick, one count
@@ -2846,8 +2852,10 @@ ordered by `ClientIndex`). This is strictly stronger than leader election: a dea
 - **Rescue capacity is explicit:** the elected responder leaves the free pool, so one participant
   answers at most one request per fold; extra requests stand down until the next snapshot refolds.
 - **Identity is `ParticipantId`:** `Player.InternalName` carried on the broadcast; rescue
-  elections and sector anchors key on it (`#ClientIndex` marks old-version publishers).
-  `ClientIndex` remains only where *lobby ordering* is the rule — claim arbitration precedence.
+  elections, sector anchors, claim precedence (TC-2e) and the role-split rank (TC-2d)
+  all key on it (`#ClientIndex` marks old-version publishers). `ClientIndex` remains
+  only where *lobby ordering* is the rule — snapshot stagger phase and MainTarget
+  vote tie-breaks.
 
 ### 12.19 GC-1 + EX-4 — garrison contest and cover-the-map expansion (EMBER, 2026-10-02)
 
@@ -3394,13 +3402,13 @@ channel now covers actors: `IBotCaptureClaimSource` (OpenRA.Mods.CA) is implemen
 bridge jobs) and `GarrisonContestBotModule` (live contest claims, one cell per claimed garrisonable).
 `BotSituation` unions every enabled source's cell centres into `TeamBroadcast.CaptureClaims`
 (publish-always, own-side only — a claim the bot itself already chose, so no enemy enumeration). The
-consumer half reads `TeamBlackboard.ClaimsAheadOf(broadcasts, myClientIndex)` — the position union of
-every strictly-lower-`ClientIndex` publisher — once per module pass behind `UseTeamCaptureClaims`
+consumer half reads `TeamBlackboard.ClaimsAheadOf(broadcasts, myParticipantKey)` — the position union of
+every strictly-lower-`ParticipantKey` publisher — once per module pass behind `UseTeamCaptureClaims`
 (default off on both): a new claim on a claimed cell is skipped, and an in-flight claim whose cell lost
 arbitration stands down through the stale-claim/release path (`Released`/`superseded`, walkers and
-engineers stopped so queued orders cannot complete the claim anyway). Deterministic — ordering is the
-integer compare only — and inert in 1v1, where no allied broadcasts exist. Classic is bit-identical: its
-stack has no claim-source modules.
+engineers stopped so queued orders cannot complete the claim anyway). Deterministic — ordering is an
+ordinal key compare only — and inert in 1v1, where no allied broadcasts exist. Classic is bit-identical:
+its stack has no claim-source modules.
 
 **BF-2 prefer-shard** (NOVA, 2026-10-03; same `BF_team_capture_claims` group, field
 `PreferShardCaptureTargets` on both modules, default off). The armed 2v2 smoke showed the residual
@@ -3413,7 +3421,7 @@ first ordering tier at every capture/contest pick site. The shard is a tier, not
 targets stay eligible once the in-shard list is consumed (TargetFull/Dormant/escort exhaust it), so
 coverage can't starve. In-shard ordering is unchanged, and `size <= 1` (1v1 or no live allies) makes
 every tier 0 — bit-identical to off. The residual race shrinks to the genuinely unavoidable case (the
-own-shard owner picks later), which the ClientIndex arbitration then resolves.
+own-shard owner picks later), which the participant-key arbitration then resolves.
 ### 12.27 TC-2f — raid-mission steering: the wave commits anyway (EMBER's dead-end; switch BG_raid_mission_steering)
 
 EMBER's GC-1 evidence exposed a structural dead-end in the assign layer: Raid cards publish but are
