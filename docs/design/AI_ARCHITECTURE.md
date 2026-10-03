@@ -3401,3 +3401,46 @@ arbitration stands down through the stale-claim/release path (`Released`/`supers
 engineers stopped so queued orders cannot complete the claim anyway). Deterministic — ordering is the
 integer compare only — and inert in 1v1, where no allied broadcasts exist. Classic is bit-identical: its
 stack has no claim-source modules.
+
+### 12.27 AS — army staging: front with the defences, split by threatened side (maintainer 2026-10-03; owner Claude)
+
+Binding text: DESIGN 19.12. A new unit used to wait at a random cell within 8 of its factory and a fled or idle squad walked to a
+random own building; both are deep in the base, so the rim defences fought alone. Switch `AM_army_staging` (module
+`ArmyStagingBotModule`, condition `armystaging`, `Bots:` empty by default = inert on master).
+
+**Seam (who owns what).** `ArmyStagingBotModule` (Cameo) is a pure PLANNER behind `IBotArmyStaging` (OpenRA.Mods.CA, like
+`IBotTeamMember`); it issues no order. `SquadManagerBotModuleCA` stays the one owner of the idle pool and of squads: `StageIdlePool`
+(each `StagingInterval`) offers the pool (ground combat units, no unit leased by another module) to `AssignIdlePool`, gets a cell per unit
+and queues ONE grouped AttackMove per cell, only for units farther than `StagingRadiusCells` that are idle or were sent elsewhere
+(order gate and leases of DESIGN 19.6 unchanged). `BaseBuilderBotModuleCA.ChooseRallyLocationNear` uses `PrimaryStagingCell` (biggest
+group) for producers whose units can walk there. `StateBaseCA.HomeLocation` (GoToRandomOwnBuilding, flee, idle return) sends a ground
+squad to `StagingCellNear` its position; air and naval keep the random building. DF-2 stays one live-attack INPUT: the planner reads
+`IBotThreatPredictionProvider` (ETA within `LiveAttackTicks`), and the squad manager no longer drafts the pool for a predicted threat
+whose target lies inside the base (`Covers`); a forward threat and escort/ally requests keep their draft. No provider = old code paths.
+
+**Data flow (every `PlanIntervalTicks`).** Own buildings give the centre (mean) and, per 45-degree sector (octant, 0 = east, clockwise,
+integer tan 0.414 test), the ring = median radius of own ARMED buildings (else outermost building of the sector, else the same over the
+whole base). Staging cell = `ring - StagingInsetCells` along the sector centre line, pulled back until on the map (passability is not
+checked yet). Rim weight = learned + prior. Learned: `RespondToAttack` of an enemy ground attacker (aircraft ignored) on an own actor within
+`BaseRadiusCells`; weight = attacker cost (damage if unpriced), once per attacker per `EventDedupeTicks`, into the attacker's sector, or into
+the INSIDE weight when the attacker already stands within that sector's ring; linear decay with half-life `WeightHalfLifeTicks`. Prior
+(`PriorWeightValue` shared): enemy spawn candidates (map `mpspawn` minus every start within `SpawnMatchCells` of an own or ALLIED home,
+so a team game faces the enemy team) plus seen enemy defences (`IBotRememberedDefenceProvider`, fog memory); with neither, the map centre.
+Active sectors hold >= `ActiveSectorSharePct` of the rim weight, at most `MaxDefenceGroups`, shares by weight. A group below
+`MinGroupValue` of idle value merges into the nearest group (the bigger on a tie). Reserve = min(`ReserveMaxPct`, inside share); inside
+share >= `CentreSwitchPct` puts the whole army in the centre. Live (an event within `LiveAttackTicks`): one live sector, every group and
+the reserve converge on its point; several, each group holds its own sector and the reserve takes the largest live value; an inside
+attack sends the reserve to the centre. The last live assignment is held until `ReturnAfterTicks` pass without one. Units are split by
+value in ActorID order. All math is integer (`ArmyStagingEval`, pure, tested in `ArmyStagingEvalTest`).
+
+**Constants (Info fields, genericbot).** StagingInsetCells 3, ActiveSectorSharePct 20, MaxDefenceGroups 3, MinGroupValue 1500,
+ReserveMaxPct 35, CentreSwitchPct 60, LiveAttackTicks 150, ReturnAfterTicks 375, StagingInterval 50, StagingRadiusCells 5,
+WeightHalfLifeTicks 3000, PlanIntervalTicks 25, PriorWeightValue 2000, EventDedupeTicks 150, BaseRadiusCells 30, SpawnMatchCells 8.
+Starting values for the increment A/B, not settled numbers.
+
+**What is logged.** Not wired into `BotSituation` (another branch edits it). The plan is on `IBotArmyStaging.Plan` for the situation
+snapshot to add: tick, centre, `RimValue`/`PriorValue`/`InsideValue` per sector, `RingRadius`, `LiveValue`/`LiveInsideValue`, groups
+(sector, share, cell, target sector), reserve (share, cell, target), `CentreMode`, `Live`.
+
+**A/B metric** (mirror matches, one increment A/B): buildings lost per enemy attack, response time from the first attack event to the
+first own unit engaging, and win rate. Compare the arm against the same increment without `AM_army_staging`.

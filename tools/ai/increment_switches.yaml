@@ -154,6 +154,9 @@ groups:
   AK_build_order_knobs:              # DESIGN 19.2 / AI_ARCHITECTURE 12.25 BO-1: arms the BuildOrderKnobsBotModule provider - eight bounded multipliers (tempo, greed, production, tech, defence, power_margin, expansion, support) + a named opening from personality preset x learned x jitter with a fog-honest react layer; the shared base builder reads it only from an enabled provider (BuildingDelays/Intervals, BuildingFractions by category, power surplus, opening step). No provider (classic, switch off) = bit-identical
     GrantConditionOnBotOwner@buildorderknobs:
       Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla
+  AM_army_staging:                   # DESIGN 19.12 / AI_ARCHITECTURE 12.27, maintainer 2026-10-03: arms the ArmyStagingBotModule planner - the idle army waits at the front with the defences, split by threatened side; the squad manager stages the pool, the base builder rallies at the primary cell. No provider (classic, switch off) = bit-identical
+    GrantConditionOnBotOwner@armystaging:
+      Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla
   F2_ca_f2p2:                        # CA F2 part 2 hand-ports (WP-A1/A3/A4): air limits, route start, squad state tweaks
     UnitBuilderBotModuleCA:        # one instance is shared by genericbot AND classicbot (34 ContentPacks extend it), so it cannot be split
       SwitchCondition: genericbot  # the two switches below take effect only while this holds: classic stays the A/B reference
