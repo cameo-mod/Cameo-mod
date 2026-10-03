@@ -17937,3 +17937,19 @@ Generated with [Devin](https://devin.ai)
   (`6c6855abe`) must not merge: it emits the F1(a)-retired `Factor@` class-axis inside MY fitter file, and
   their `Parse` prefers the `EngagementPriors` root — coarse ~2-class cells would shadow the fine
   `DeliveryArmour@` cells entirely.
+* **F1(c) port review (`devin/nova/t1-priors-port` @ `63911351c`) — contract correctly implemented:**
+  `BotEngagementPriors.Parse` reads the canonical schema natively (`DeliveryArmour@`/`PriorPct@`/`DefenceState@`/
+  `IntoDefencesMilli`/`LedgerHash`; `Factor@`/`StatFingerprint` retired); per-cell staleness = `fittedPriors[d|a]`
+  vs `ResolvedTagVersus(d)[a]` with the fitter's exact default-100 absent-row convention (their tests pin it:
+  PriorPct 100→fresh, 50→stale, absent→unfitted→neutral); `DefenceState@`/`IntoDefencesMilli` wired to
+  attacker/target-building cases, trusted as committed (no PriorPct, per spec); residual clamped [500,2000];
+  `DominantDelivery` picks per-(attacker weapon × target) delivery — more precise than unit-main; switch chain
+  `AP_tier1_priors`→`tier1_priors` granter, `genericbot`-gated, veto-independent. Fitter-emit commit
+  `9e5d6435d` correctly reverted to my lane.
+* **Two hardening notes for NOVA:** (1) `ResolvedTagVersus` nested-scans `warheadYaml.Values` (~2,785 weapons ×
+  children) PER `FactorPermille` call — per-cell staleness is on the veto's hot path; precompute a
+  `tag → table` index. (2) First-match-wins across `^Warhead_*` template and weapon children sharing the tag —
+  fine while template nodes precede pack weapons in manifest order (template = canonical = my `PriorPct`), but
+  arbitrary for tags whose weapon children carry inline `Versus` overrides (592/961 tags have ≥1; almost all
+  `*Percentage`/`_Flat` secondaries, never main warheads — residual risk bounded to `_Flat`-main cells).
+  (3) `static warheadYaml` lifetime unchanged.
