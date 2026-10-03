@@ -166,6 +166,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		IBotFoggedEnemyProvider[] fogProviders = [];
 		bool loaded;
 
+		/// <inheritdoc/>
+		public string PriorsState { get; private set; }
+
 		public CombatVetoBotModule(Actor self, CombatVetoBotModuleInfo info)
 			: base(info)
 		{
@@ -191,22 +194,34 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var fs = Game.ModData.DefaultFileSystem;
 			if (!fs.Exists(Info.PriorsFile))
 			{
+				PriorsState = "none";
 				Log.Write("debug", $"AI {player.InternalName}: COMBAT_VETO priors: none ({Info.PriorsFile} missing), neutral");
 				return;
 			}
 
 			EngagementPriors parsed;
-			using (var stream = fs.Open(Info.PriorsFile))
-				parsed = EngagementPriors.Parse(MiniYaml.FromStream(stream, Info.PriorsFile));
+			try
+			{
+				using (var stream = fs.Open(Info.PriorsFile))
+					parsed = EngagementPriors.Parse(MiniYaml.FromStream(stream, Info.PriorsFile));
+			}
+			catch (Exception e)
+			{
+				PriorsState = "error";
+				Log.Write("debug", $"AI {player.InternalName}: COMBAT_VETO priors: error ({e.Message}), neutral");
+				return;
+			}
 
 			var fingerprint = CombatVetoMath.StatFingerprint(world.Map.Rules);
-			if (parsed.StatFingerprint != null && parsed.StatFingerprint != fingerprint)
+			if (parsed.StatFingerprint != fingerprint)
 			{
-				Log.Write("debug", $"AI {player.InternalName}: COMBAT_VETO priors: discounted (fingerprint {parsed.StatFingerprint} != {fingerprint})");
+				PriorsState = "discounted";
+				Log.Write("debug", $"AI {player.InternalName}: COMBAT_VETO priors: discounted (fingerprint {parsed.StatFingerprint ?? "missing"} != {fingerprint})");
 				return;
 			}
 
 			priors = parsed;
+			PriorsState = $"fitted:{priors.FactorCount}";
 			Log.Write("debug", $"AI {player.InternalName}: COMBAT_VETO priors: {priors.FactorCount} factors, static-defence {priors.StaticDefenceFactorPermille}‰");
 		}
 

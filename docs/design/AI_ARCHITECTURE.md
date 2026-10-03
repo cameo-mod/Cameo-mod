@@ -3641,7 +3641,10 @@ the node value, class-name fallback when unresolved). That is the same key space
 Canonical stat string (the fingerprint's input — C# `CombatVetoMath.StatFingerprint` and the Python fitter produce the
 same value): for every `ActorInfo` with `AttackBaseInfo`, name-sorted: `name;cost;hp;armor|` then per weapon
 `delivery,dptMilli,range|` then `armor=vs,` sorted; FNV-1a-64 (offset 14695981039346656037, prime 1099511628211) over the
-whole string. Fingerprint mismatch or missing file -> all priors neutral (the veto still runs on the raw predictor).
+whole string. Fingerprint mismatch, an unfingerprinted file, or a missing file -> all priors neutral (the veto still
+runs on the raw predictor). The load outcome is written per player per match as `priors_state` in
+`cameo-ai-matches.jsonl` (`none` / `error` / `discounted` / `fitted:N`, field omitted when no provider is armed), so a
+stale priors file is visible in the match record rather than only in debug logs.
 Stat-normalized keys only — no unit ids — so the file survives roster churn; a rebalance changes the fingerprint and the
 file discounts itself. The response-time priors the fitter may also emit are reserved (the commit consult happens at
 contact, where response has already materialized in the seen list).

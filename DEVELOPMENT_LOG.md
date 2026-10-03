@@ -1,3 +1,14 @@
+# 2026-10-03 — feat(ai): priors_state observability + strict fingerprint gate (PR #795)
+
+*Devin (nova), worktree `nova-clean`, branch `nova/t1_tag_axis`.*
+
+Robustness pass after the tag-axis review: an unfingerprinted file previously loaded unconditionally —
+a stale `BotEngagementPriors` would have applied learned values across rebalances forever. Now
+`StatFingerprint != live` (including absent) -> `discounted`. Load outcome surfaced per player per
+match as `priors_state` in `cameo-ai-matches.jsonl` (`none`/`error`/`discounted`/`fitted:N` via
+`IBotCombatVeto.PriorsState`; field omitted when no provider armed — classic rows byte-identical).
+817/817.
+
 # 2026-10-03 — feat(ai): NOVA tag-axis delivery + EMBER native priors consumption (PR #795)
 
 *Devin (nova), worktree `nova-clean`, branch `nova/t1_tag_axis` stacked on `nova/t2_combat_veto` —
