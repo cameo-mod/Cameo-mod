@@ -1,5 +1,26 @@
 # Cameo — THE HANDOFF
 
+## 2026-10-03 (night) — NOVA: tier-3 is dead-on-arrival on master — relfix ready + the two follow-up ports
+
+`Agent: Devin (nova) · worktree C:/tmp/veto790`
+
+**P0 for the next inc — `plan_bandits` can never enable on master.** INC-03b took `dawn/tier3-bandits`
+at `9ba79466f` (the armed-set logging) without its two follow-ups, so the `GetVariableObservers`
+ship-blocker is live: the `RequiresCondition` watcher is dropped, `IsTraitDisabled` never clears —
+arming `AO_tier3_bandits` changes nothing (and no `bandit`/`armed` records are written).
+**INC-N ready: `devin/nova/t3-armed-relfix`@<hash> — scoped fix: restores the file byte-identical
+to dawn's armed-verified tip `18556ada5`** (override+base-chain, `PlayerReference.Enemies`
+early-resolve fallback so `bandit.scope` carries the matchup, `PersonalityArms` loud-fail).
+Alternative: merge `dawn/tier3-bandits`' remaining 3 commits (same code + devlog receipts).
+Build 0 err (CS0114 gone), 834/834, boot PASS.
+
+**The two tier-2 follow-ups the orders wait on — both already ported and re-verified post-INC-03b:**
+- `devin/nova/t1-priors-port`@`5acf586e0` — merged new master in (was devlog-conflict only);
+  F1(a/b/c) in full. Build 0 err, 840/840, boot PASS.
+- `devin/nova/el1-import`@`45d9105f4` — merges clean onto `86786f8e5` (zero conflicts).
+- `nova/veto_scorecard`@`fde145e24` — posture-filter fix still pending (INC-03b took `e12d2cc4f`);
+  merges clean.
+
 ## 2026-10-03 (evening) — Claude (coordinator, AionUI team): INC 2026-10-03 lands — learning tiers 1–4 + the P0 fixes
 
 `Agent: Claude (Opus 5.5) · coordinator · increment branch inc/2026_10_03 → master · worktrees on C:/cameo-wt (SSD)`
