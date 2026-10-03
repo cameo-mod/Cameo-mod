@@ -34,7 +34,7 @@ namespace OpenRA.Mods.Cameo.Traits
 		public override object Create(ActorInitializer init) { return new AiMissionLogWriter(this); }
 	}
 
-	public class AiMissionLogWriter : IWorldLoaded, IGameOver, ITick, IBotMissionRecordSink
+	public class AiMissionLogWriter : IWorldLoaded, IGameOver, ITick, IBotMissionRecordSink, INotifyActorDisposing
 	{
 		public const string Schema = "mission-card/1";
 
@@ -49,8 +49,6 @@ namespace OpenRA.Mods.Cameo.Traits
 		int nextRetryTick;
 		AiLogFileAppender appender;
 		string inFlight;
-		bool gameOver;
-		int gameOverTick;
 
 		public int Dropped { get; private set; }
 
@@ -81,10 +79,6 @@ namespace OpenRA.Mods.Cameo.Traits
 
 			pending.Append(BuildLine(record, gameUid, mapUid, mapTitle, DateTime.UtcNow)).Append('\n');
 			pendingLines++;
-
-			// A paused post-GameOver world never ticks: teardown records (match_end releases) must flush here or they dangle in pending.
-			if (gameOver)
-				TryFlush(gameOverTick);
 		}
 
 		/// <summary>One JSONL line, free of world state beyond the record so it can be tested.</summary>
@@ -165,11 +159,18 @@ namespace OpenRA.Mods.Cameo.Traits
 		void IGameOver.GameOver(World world)
 		{
 			// World.EndGame pauses before IGameOver and a paused world does not tick: flush now, retries included.
-			// Records still arrive after this (player-actor teardown writes match_end releases) — MissionRecorded flushes them itself.
-			gameOver = true;
-			gameOverTick = world.WorldTick;
 			for (var i = 0; i < 8 && (inFlight != null || pendingLines > 0); i++)
 				TryFlush(world.WorldTick);
+		}
+
+		void INotifyActorDisposing.Disposing(Actor self)
+		{
+			// World.Dispose disposes newest actors first and the world actor last, so every
+			// player-actor BotMissionAttemptTracker has already written its Released(match_end)
+			// records into pending by now. The last GameOver flush ran before them — flush once
+			// more or those terminal lines die in the buffer.
+			for (var i = 0; i < 8 && (inFlight != null || pendingLines > 0); i++)
+				TryFlush(self.World.WorldTick);
 		}
 
 		void TryFlush(int tick)

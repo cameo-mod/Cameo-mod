@@ -141,7 +141,7 @@ def check(dirs: list[pathlib.Path]) -> list[tuple[str, str, str]]:
     worst = None
     storms = 0
     for (_g, _mid), evs in per_mission.items():
-        evs.sort()
+        evs.sort(key=lambda e: e[0])
         streak = 0
         last_bleed = None
         stormed = False

@@ -2389,6 +2389,17 @@ namespace OpenRA.Mods.CA.Traits
 						leases.Release(u.Actor, LeaseOwner);
 
 			ResolveMissionAttempt(squad, BotMissionAttemptState.Released, BotMissionReasons.Superseded);
+
+			// An intact stand-down is not a wipe: close the squad's open telemetry here or
+			// CleanSquads sees the empty Units list and books it Failed/LostUnits.
+			if (squad.Type == SquadCAType.Protection)
+			{
+				CloseAllyDefend(BotMissionAttemptState.Released, BotMissionReasons.Superseded);
+				CloseAllyAssist(BotMissionAttemptState.Released, BotMissionReasons.Superseded);
+			}
+			else if (squad.Type == SquadCAType.Rush)
+				CloseSecurePush(BotMissionAttemptState.Released, BotMissionReasons.Superseded);
+
 			unitsHangingAroundTheBase.AddRange(squad.Units);
 
 			squad.Units.Clear();

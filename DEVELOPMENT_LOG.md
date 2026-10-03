@@ -17525,4 +17525,44 @@ immediately for any record arriving after it. Sink-local; no record-shape change
 tracker change — the contract ("no attempt stays dangling past GameOver") now holds in
 the archive it was written for.
 
+NOTE (merged): superseded by the ember entry below — their world-actor-dispose flush is
+the single canonical mechanism; this per-record variant was dropped in the merge (same
+root cause, same contract). Kept for provenance.
+
+Generated with [Devin](https://devin.ai)
+
+## 2026-10-03 — ember lane: LC8 match_end records were unflushable — fixed in writer
+
+out9 (43 groups, BH merge): 4/4 clean, 2-2, zero exceptions — and zero `match_end`
+records, same as out7/out8. Root cause found in the dispose chain: the LC8
+`BotMissionAttemptTracker` (player trait) writes `Released(match_end)` records from
+`INotifyActorDisposing.Disposing`, which `Actor.Dispose` defers into FrameEndTasks
+drained inside `World.Dispose` — AFTER `IGameOver.GameOver` already ran the writer's
+last flush. The records landed in `AiMissionLogWriter.pending` and died there: the
+writer had no flush path after GameOver (no ticks on a disposing world).
+
+Fix (my lane, Cameo file): `AiMissionLogWriter` now implements `INotifyActorDisposing`
+and runs the same bounded `TryFlush` loop on `Disposing`. Engine order guarantees it
+sees the records — `World.Dispose` disposes newest actors first and the world actor
+LAST (`actors.Values.Reverse()` + FrameEndTask drain preserves that order), so every
+player-actor tracker has written before the world-actor writer flushes. Sink
+resolution also holds: `BotMissionLog.Write` resolves sinks off `WorldActor`'s trait
+dict, which stays intact until the world actor itself disposes. No engine change.
+
+Two adjacent findings stay with the SquadManager owner (not my file):
+`secure:<player>` pushes close only on supersede/lost_units/match_end — a winning
+wave never books `done`; and a Rush squad emptied via `DismissSquad` (intact
+stand-down) later hits `CleanSquads`'s `CloseSecurePush(Failed, LostUnits)` —
+a mislabeled terminal, since `IsValid => Units.Count > 0` makes dismissal look like
+wiped. Evidence: out7 `secure:Multi1` COMMITTED t=20930, open 15.8k ticks.
+
+2026-10-03 — ai(squads): dismissed-intact squads stop booking Failed/LostUnits on open records
+
+Second half of the ember review flag: `DismissSquad` (flee-state deactivate, personality
+handoff) clears `Units` so `CleanSquads` read the squad as wiped — open `secure:` /
+`defend_answer` / `assist_answer` attempts got `Failed/LostUnits` on an intact stand-down.
+`DismissSquad` now closes the squad-channel records `Released/Superseded` first, matching
+the card-mission resolution it already did. A wave that stands down intact now reads as
+released; only a genuinely wiped squad books `LostUnits`.
+
 Generated with [Devin](https://devin.ai)
