@@ -176,9 +176,39 @@ namespace OpenRA.Mods.CA.Traits
 		// (missionId, attempt) -> executor name, for every attempt whose last record was non-terminal.
 		readonly Dictionary<(string, int), string> openAttempts = new();
 
+		// Answer ids released by a pivot, keyed per-player so the cooldown survives the
+		// personality-conditioned SquadManagerBotModuleCA instance rotating out — a fresh
+		// instance's own map is empty and would re-draft the same standing request.
+		readonly Dictionary<string, int> answerCooldownUntil = new();
+
+		// Highest attempt number seen per mission id — attempt numbering lives here so a
+		// personality rotation can't re-issue attempt 1 and collide the (mission, attempt)
+		// identity the jsonl schema keys on.
+		readonly Dictionary<string, int> lastAttempt = new();
+
 		public BotMissionAttemptTracker(Actor self, BotMissionAttemptTrackerInfo info)
 		{
 			player = self.Owner;
+		}
+
+		public int NextAttemptNumber(string missionId)
+		{
+			return lastAttempt.GetValueOrDefault(missionId) + 1;
+		}
+
+		public int CurrentAttemptNumber(string missionId)
+		{
+			return lastAttempt.GetValueOrDefault(missionId);
+		}
+
+		public void CoolAnswer(string missionId, int untilTick)
+		{
+			answerCooldownUntil[missionId] = untilTick;
+		}
+
+		public bool AnswerCooling(string missionId, int tick)
+		{
+			return answerCooldownUntil.TryGetValue(missionId, out var until) && tick < until;
 		}
 
 		public void Note(BotMissionRecord record)
@@ -187,6 +217,7 @@ namespace OpenRA.Mods.CA.Traits
 				return;
 
 			var key = (record.MissionId, record.Attempt);
+			lastAttempt[record.MissionId] = System.Math.Max(lastAttempt.GetValueOrDefault(record.MissionId), record.Attempt);
 			if (BotMissionLog.IsTerminal(record.State))
 				openAttempts.Remove(key);
 			else
