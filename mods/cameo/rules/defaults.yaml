@@ -1,4 +1,4 @@
-^ExistsInWorld:
+﻿^ExistsInWorld:
 	AppearsOnRadar:
 	UpdatesPlayerStatistics:
 	CombatDebugOverlay:
@@ -1032,12 +1032,10 @@
 ^GlobalBuffs:
 	Inherits: ^GPSSatelliteSupport
 	Inherits@2: ^WayOfTheDragon
-	# FirepowerMultiplier@GlobalBuffs:
-	# 	Modifier: 85
-	# FirepowerMultiplier@GlobalBuffs:
-		# Modifier: 50
+	FirepowerMultiplier@GlobalBuffs:
+		Modifier: 25
 	# DamageMultiplier@GlobalBuffs:
-		# Modifier: 150
+	# 	Modifier: 150
 
 ^InfantryBuffs:
 	Inherits@GlobalBuffs: ^GlobalBuffs
