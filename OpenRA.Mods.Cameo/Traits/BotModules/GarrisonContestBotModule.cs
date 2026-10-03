@@ -393,14 +393,15 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			else
 				reason = BotMissionReasons.LostUnits;
 
-			// Bleeding memory: a consecutive lost_units/x_contest_lost streak backs off re-contests on the same
-			// building; a landed claim clears it. Superseded/stuck are neutral - nothing bled.
+			// Bleeding memory: a consecutive lost_units/x_contest_lost/stuck streak backs off re-contests on
+			// the same building; a landed claim clears it. Stuck counts - a wedged path is topological, so a
+			// re-claim sends the next walkers into the same dead end. Superseded is neutral - nothing bled.
 			if (reason == BotMissionReasons.Done)
 			{
 				contestFailures.Remove(building);
 				contestBlockedUntil.Remove(building);
 			}
-			else if (reason == BotMissionReasons.LostUnits || reason == "x_contest_lost")
+			else if (reason == BotMissionReasons.LostUnits || reason == BotMissionReasons.Stuck || reason == "x_contest_lost")
 			{
 				var streak = contestFailures.TryGetValue(building, out var f) ? f + 1 : 1;
 				contestFailures[building] = streak;

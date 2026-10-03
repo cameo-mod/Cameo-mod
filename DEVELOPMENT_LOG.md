@@ -17308,3 +17308,7 @@ InternalName identity, §12.18 eventual-consistency doc).
 
 Verification: Cameo build clean (deploy locked by other lanes' games — obj dlls copied to the
 private engine + tracked dll), boot-gate PASS with isolated SupportDir.
+
+Post-commit review: `stuck` also counts toward the backoff streak (a wedged path is
+topological — a re-claim sends the next walkers into the same dead end); only `superseded`
+stays neutral.
