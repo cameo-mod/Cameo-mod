@@ -41,6 +41,13 @@ attribution composes ahead of `BuildEngagement(h, s, out, out)` running-total ac
 tests (5 `InMatchAdaptTest`), wiring/fog/direct-mutation/arch-freshness PASS, boot gate PASS
 (isolated `Engine.SupportDir`, menu marker ~31s, no new exceptions; coordinator's A/B untouched).
 
+*Merge matrix vs the fleet (merge-tree, dry-run):* × `t1-priors-port`: conflicts only in the two
+regen docs (resolve by re-running `ai_arch_audit.py --write` + `ai_module_map.py --write`; code/yaml
+all clean). × `tier1-priorpct`, × `veto_scorecard`: clean. × `dawn/tier3-bandits`: 2 conflicts —
+`EngagementLogBotModule.cs` (compose bandit header enrichment FIRST, then `BuildEngagement(h, s,
+out, out)` + accumulate — exactly the resolution already in this branch) and `AI_ARCHITECTURE.md`
+(§12.32/§12.33 adjacency; keep both). `t1-priors-port` × master: clean.
+
 ## 2026-10-03 — DAWN (tier-3): pooled bandits INC-ready — `AO_tier3_bandits`
 
 `Agent: Devin (dawn) · branch devin/dawn/tier3-bandits @ 5f8770120 · worktree C:/tmp/dawn-t3`
