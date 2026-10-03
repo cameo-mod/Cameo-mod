@@ -1,6 +1,6 @@
 # audit_multiplier_modifiers — *Multiplier Modifier integer percent check
 
-*Multiplier trait families seen: 1757
+*Multiplier trait families seen: 1758
 
 | trait family |
 |---|
@@ -530,6 +530,7 @@
 | `FirepowerMultiplier@Flakpower2up` |
 | `FirepowerMultiplier@FlyingInfantry` |
 | `FirepowerMultiplier@Freed` |
+| `FirepowerMultiplier@GlobalBuffs` |
 | `FirepowerMultiplier@HCannonUpg` |
 | `FirepowerMultiplier@HCannonUpg2` |
 | `FirepowerMultiplier@Harrier` |

@@ -3623,9 +3623,20 @@ loaded once, written by `tools/ai/fit_engagement_coefficients.py`:
 EngagementPriors:
 	StatFingerprint: <16-hex>                       # FNV-1a-64 over the canonical stat string below
 	StaticDefenceFactorPermille: <permille>          # multiplier on every armed building's damage, 1000 = neutral
-	Factor@<delivery>|<armor>: <permille>            # delivery = warhead class minus "Warhead" lowercased (BotWeaponProfile.Delivery)
+	Factor@<delivery>|<armor>: <permille>            # delivery = the main warhead's yaml Warhead@<tag> suffix
+	                                                 # (BotWeaponProfile.Delivery) — the balance-pipeline delivery
+	                                                 # taxonomy; falls back to the warhead class name lowercased
 	Factor@*|<armor>: <permille>                     # armour-wide fallback row
 ```
+
+The parser also accepts the EMBER fitter's native spellings verbatim — a `BotEngagementPriors` root and
+`DeliveryArmour@<tag>__x__<armour>` cells — so its output file is consumable unmodified once it carries a
+`StatFingerprint` line (or the fingerprint check is waived by contract). Delivery resolution: `BotWeaponProfile`
+maps the main damage warhead back to its `Warhead@<tag>` yaml child (the resolved weapon node, positionally —
+`WeaponInfo.LoadWarheads` fills `Warheads` from the same child list in order; validated against the class name in
+the node value, class-name fallback when unresolved). That is the same key space the balance ledger writes to
+`damage_warheads[].tag`, so `Factor@MissileHE_Heavy|Light` and the fitter's
+`DeliveryArmour@MissileHE_Heavy__x__Light` denote the identical cell.
 
 Canonical stat string (the fingerprint's input — C# `CombatVetoMath.StatFingerprint` and the Python fitter produce the
 same value): for every `ActorInfo` with `AttackBaseInfo`, name-sorted: `name;cost;hp;armor|` then per weapon

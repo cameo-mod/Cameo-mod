@@ -1,13 +1,13 @@
 # audit_error_handling — Python tooling error handling
 
-Files scanned: **806**
+Files scanned: **808**
 
 | code | meaning | count | baseline |
 |---|---|---|---|
 | E1 | bare except / except BaseException | 5 | 2 |
-| E2 | handler discards the error | 141 | 30 |
+| E2 | handler discards the error | 142 | 30 |
 | E3 | open() without encoding= | 161 | 90 |
-| E4 | subprocess call without check= | 62 | 9 |
+| E4 | subprocess call without check= | 63 | 9 |
 
 
 ## Files that do not parse
@@ -28,7 +28,7 @@ Files scanned: **806**
 | tools/balance/apply_harvester_durability.py | 420 | `except BaseException` |
 
 
-## E2 — 141 finding(s)
+## E2 — 142 finding(s)
 
 | file | line | detail |
 |---|---|---|
@@ -43,8 +43,8 @@ Files scanned: **806**
 | tools/ai/fit_arsenal_priors.py | 44 | handler body discards the error |
 | tools/ai/gen_fransbot_lists.py | 140 | handler body discards the error |
 | tools/ai/run_ai_match_batch.py | 719 | handler body discards the error |
-| tools/ai/team_coordination_report.py | 48 | handler body discards the error |
-| tools/ai/tune_build_order.py | 75 | handler body discards the error |
+| tools/ai/team_coordination_report.py | 60 | handler body discards the error |
+| tools/ai/tune_build_order.py | 84 | handler body discards the error |
 | tools/audit/audit_ai.py | 45 | handler body discards the error |
 | tools/audit/audit_armor_upgrade_harm.py | 101 | handler body discards the error |
 | tools/audit/audit_balance_sheet.py | 134 | handler body discards the error |
@@ -143,6 +143,7 @@ Files scanned: **806**
 | tools/hooks/bash_guard.py | 140 | handler body discards the error |
 | tools/hooks/bash_guard.py | 154 | handler body discards the error |
 | tools/hooks/bash_guard.py | 214 | handler body discards the error |
+| tools/hooks/exec_guard.py | 74 | handler body discards the error |
 | tools/packs/migrate_assets.py | 226 | handler body discards the error |
 | tools/packs/split_ai_rows.py | 66 | handler body discards the error |
 | tools/reference/aggregate_archetype.py | 898 | handler body discards the error |
@@ -203,7 +204,7 @@ Files scanned: **806**
 | tools/extract_insignias.py | 113 | `Image.open()` without encoding= |
 | tools/hooks/bash_guard.py | 206 | `read_text()` without encoding= |
 | tools/hooks/bash_guard.py | 232 | `perf.read_text()` without encoding= |
-| tools/hooks/exec_guard.py | 69 | `perf.read_text()` without encoding= |
+| tools/hooks/exec_guard.py | 101 | `perf.read_text()` without encoding= |
 | tools/make_syndicate_insignia.py | 41 | `Image.open()` without encoding= |
 | tools/make_syndicate_insignia.py | 63 | `Image.open()` without encoding= |
 | tools/packs/migrate_assets.py | 149 | `cy.read_text()` without encoding= |
@@ -342,7 +343,7 @@ Files scanned: **806**
 | tools/tilesets/transfer_ai_cliff_style.py | 101 | `Image.open()` without encoding= |
 
 
-## E4 — 62 finding(s)
+## E4 — 63 finding(s)
 
 | file | line | detail |
 |---|---|---|
@@ -393,7 +394,8 @@ Files scanned: **806**
 | tools/hooks/bash_guard.py | 186 | `subprocess.run()` without check= |
 | tools/hooks/bash_guard.py | 196 | `subprocess.run()` without check= |
 | tools/hooks/bash_guard.py | 201 | `subprocess.run()` without check= |
-| tools/hooks/exec_guard.py | 45 | `subprocess.run()` without check= |
+| tools/hooks/exec_guard.py | 69 | `subprocess.run()` without check= |
+| tools/hooks/exec_guard.py | 77 | `subprocess.run()` without check= |
 | tools/hooks/test_bash_guard.py | 43 | `subprocess.run()` without check= |
 | tools/hooks/test_bash_guard.py | 50 | `subprocess.run()` without check= |
 | tools/hooks/test_bash_guard.py | 58 | `subprocess.run()` without check= |
@@ -413,8 +415,8 @@ Files scanned: **806**
 ## FAIL
 
 - E1: 5 > baseline 2
-- E2: 141 > baseline 30
+- E2: 142 > baseline 30
 - E3: 161 > baseline 90
-- E4: 62 > baseline 9
+- E4: 63 > baseline 9
 - 1 file(s) do not parse
 

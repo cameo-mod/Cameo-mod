@@ -48,7 +48,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public static EngagementPriors Parse(IEnumerable<MiniYamlNode> nodes)
 		{
 			var priors = new EngagementPriors();
-			var root = nodes.FirstOrDefault(n => n.Key == "EngagementPriors");
+			var root = nodes.FirstOrDefault(n => n.Key == "EngagementPriors")
+				?? nodes.FirstOrDefault(n => n.Key == "BotEngagementPriors");
 			if (root == null)
 				return priors;
 
@@ -64,6 +65,15 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				else if (node.Key.StartsWith("Factor@", StringComparison.Ordinal)
 					&& int.TryParse(node.Value.Value, NumberStyles.Integer, CultureInfo.InvariantCulture, out var pct))
 					priors.factors[node.Key["Factor@".Length..]] = pct;
+				else if (node.Key.StartsWith("DeliveryArmour@", StringComparison.Ordinal)
+					&& int.TryParse(node.Value.Value, NumberStyles.Integer, CultureInfo.InvariantCulture, out var dpct))
+				{
+					// EMBER's native fitter key DeliveryArmour@<tag>__x__<armour> — the same axis verbatim.
+					var cell = node.Key["DeliveryArmour@".Length..];
+					var sep = cell.IndexOf("__x__", StringComparison.Ordinal);
+					if (sep > 0)
+						priors.factors[cell[..sep] + "|" + cell[(sep + 5)..]] = dpct;
+				}
 			}
 
 			return priors;

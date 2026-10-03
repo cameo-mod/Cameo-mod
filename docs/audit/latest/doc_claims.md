@@ -6,17 +6,17 @@ A number in prose is true only on the day it is written. These are the claims a 
 
 | claim | documented | measured | status |
 |---|--:|--:|---|
-| `ai_contract_distinct_module_types` | 68 | 68 | ✅ |
-| `ai_contract_player_module_instances` | 93 | 93 | ✅ |
+| `ai_contract_distinct_module_types` | 68 | 71 | **MISMATCH** |
+| `ai_contract_player_module_instances` | 93 | 96 | **MISMATCH** |
 | `ai_contract_world_module_instances` | 1 | 1 | ✅ |
-| `shield_versus_mean` | 97.6157 | 184.71 | **MISMATCH** |
-| `shield_hp_factor` | 1.02443 | 0.541389 | **MISMATCH** |
-| `shield_damage_share` | 0.0183167 | 0.0160276 | **MISMATCH** |
+| `shield_versus_mean` | 184.71 | 184.71 | ✅ |
+| `shield_hp_factor` | 0.541389 | 0.541389 | ✅ |
+| `shield_damage_share` | 0.0160276 | 0.0160276 | ✅ |
 | `always_on_shield_actors` | 58 | 58 | ✅ |
 | `always_on_shielded_buildings` | 16 | 16 | ✅ |
 | `live_damage_multipliers` | 326 | 326 | ✅ |
 | `multi_main_fired_weapons` | 1 | 1 | ✅ |
-| `percentage_denominator_unset` | 436 | 423 | **MISMATCH** |
+| `percentage_denominator_unset` | 423 | 423 | ✅ |
 | `unmigrated_scout_damage_multiplier` | 0 | 0 | ✅ |
 | `meters_filling_before_death` | 329 | 329 | ✅ |
 | `corrosion_meter_actors` | 856 | 856 | ✅ |
@@ -27,14 +27,14 @@ A number in prose is true only on the day it is written. These are the claims a 
 | `signed_off_class_anchors` | 0 | 0 | ✅ |
 | `warhead_family_reach` | 1509 | 1509 | ✅ |
 | `unconverted_template_inheritors` | 402 | 402 | ✅ |
-| `ledgers_drifted` | 0 | 1 | **MISMATCH** |
+| `ledgers_drifted` | 0 | 33 | **MISMATCH** |
 | `armament_multi_role_actors` | 104 | 104 | ✅ |
 | `armament_air_role_invisible_to_the_name_test` | 41 | 41 | ✅ |
 | `dta_projectile_roles_resolved` | 60 | 60 | ✅ |
 | `dta_elite_weapons_reachable` | 131 | 131 | ✅ |
 | `armament_unproven_peer_votes` | 0 | 0 | ✅ |
-| `armament_reference_tier_original` | 140 | 141 | **MISMATCH** |
-| `armament_pairing_input_fingerprints` | 476 | 514 | **MISMATCH** |
+| `armament_reference_tier_original` | 141 | 141 | ✅ |
+| `armament_pairing_input_fingerprints` | 514 | 514 | ✅ |
 | `shared_attack_cycle_actors` | 15 | 15 | ✅ |
 | `mammoth_armament_voters` | 3 | 3 | ✅ |
 | `ini_armament_views_eligible` | 1388 | 1388 | ✅ |
