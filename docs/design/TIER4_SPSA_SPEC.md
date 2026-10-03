@@ -93,9 +93,11 @@ When both arms are measured (each >= MIN_MATCHES scored matches):
    spawn / matchup effects; the same pairing powers the plus-vs-minus contrast. Welch fallback when pairing
    fails, as today.
 2. **Effective perturbation** per knob: `eff_i = (log plus_i - log minus_i) / 2` computed from the **clamped**
-   arm values. At a bound, one arm may equal the base (eff_i = c_k or ~0): the estimate divides by the step
-   actually taken, not by c_k — otherwise bound-adjacent knobs get inflated gradients. Knobs with
-   `|eff_i| < 0.005` contribute nothing this step (masked; reported).
+   arm values, **signed** — it carries the sign of `Delta_i` (plus is +c_k*Delta_i, minus is -c_k*Delta_i), so
+   `g_i` below points toward the winning arm per knob; an unsigned `eff_i` would march every component in the
+   direction of `d_bar` and only get ~half the update right. At a bound, one arm may equal the base
+   (eff_i ~ c_k or ~0): the estimate divides by the step actually taken, not by c_k — otherwise bound-adjacent
+   knobs get inflated gradients. Knobs with `|eff_i| < 0.005` contribute nothing this step (masked; reported).
 3. **Gradient estimate** (standard two-sided SPSA):
        g_i = d_bar / (2 x eff_i)        per unmasked knob
    One paired contrast identifies the whole direction — that is the point of simultaneous perturbation.
