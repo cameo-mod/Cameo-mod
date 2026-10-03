@@ -116,7 +116,14 @@
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#Repairable.HpPerStep",
      "v": "11250"
     },
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
      "v": "90"
@@ -210,7 +217,14 @@
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#Repairable.HpPerStep",
      "v": "15000"
     },
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
      "v": "120"
@@ -372,7 +386,14 @@
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#Repairable.HpPerStep",
      "v": "6250"
     },
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
      "v": "50"
@@ -659,6 +680,12 @@
     "resolved_firepower_modifiers": [
      {
       "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 50,
       "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#FirepowerMultiplier@DualWeapon.Modifier",
       "trait": "FirepowerMultiplier@DualWeapon",
       "types": []
@@ -853,6 +880,12 @@
      "v": "5000"
     },
     "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
      {
       "modifier": 50,
       "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#FirepowerMultiplier@DualWeapon.Modifier",
@@ -1125,7 +1158,14 @@
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#Repairable.HpPerStep",
      "v": "3750"
     },
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
      "v": "30"
@@ -1370,6 +1410,12 @@
     },
     "resolved_firepower_modifiers": [
      {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
       "modifier": 75,
       "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#FirepowerMultiplier@Cryo.Modifier",
       "trait": "FirepowerMultiplier@Cryo",
@@ -1538,6 +1584,12 @@
      "v": "3500"
     },
     "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
      {
       "modifier": 9,
       "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#FirepowerMultiplier@Cryo.Modifier",
@@ -2663,7 +2715,14 @@
      "Defence",
      "RADefence"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "inherited",
      "v": "10"
@@ -2798,7 +2857,14 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
      "v": "30"
@@ -2893,7 +2959,14 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
      "v": "70"
@@ -2988,7 +3061,14 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
      "v": "50"
@@ -3294,7 +3374,14 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
      "v": "35"
@@ -3389,7 +3476,14 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
      "v": "60"
@@ -3613,7 +3707,14 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
      "v": "75"
@@ -3710,7 +3811,14 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
      "v": "40"
@@ -3808,7 +3916,14 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
      "v": "250"
@@ -4635,7 +4750,14 @@
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/vehicles.yaml#Repairable.HpPerStep",
      "v": "3000"
     },
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
      "v": "24"
@@ -4741,7 +4863,14 @@
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/vehicles.yaml#Repairable.HpPerStep",
      "v": "17500"
     },
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
      "v": "140"
@@ -4872,7 +5001,14 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
      "v": "100"
@@ -5007,6 +5143,12 @@
      "v": "3750"
     },
     "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
      {
       "modifier": 50,
       "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/vehicles.yaml#FirepowerMultiplier@DualWeapon.Modifier",
@@ -5204,6 +5346,12 @@
     },
     "resolved_firepower_modifiers": [
      {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
       "modifier": 223,
       "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/vehicles.yaml#FirepowerMultiplier@TripleBeam.Modifier",
       "trait": "FirepowerMultiplier@TripleBeam",
@@ -5342,7 +5490,14 @@
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/vehicles.yaml#Repairable.HpPerStep",
      "v": "1250"
     },
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
      "v": "10"
@@ -5568,6 +5723,12 @@
     "resolved_firepower_modifiers": [
      {
       "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 50,
       "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/vehicles.yaml#FirepowerMultiplier@DualWeapon.Modifier",
       "trait": "FirepowerMultiplier@DualWeapon",
       "types": []
@@ -5682,6 +5843,12 @@
      "v": "2250"
     },
     "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
      {
       "modifier": 25,
       "src": "inherited",
@@ -5842,7 +6009,14 @@
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/vehicles.yaml#Repairable.HpPerStep",
      "v": "13750"
     },
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
      "v": "110"

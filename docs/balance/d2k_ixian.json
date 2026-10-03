@@ -59,7 +59,14 @@
      "v": "100"
     },
     "name": "Alfayrus",
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
      "v": "10"
@@ -274,7 +281,14 @@
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/aircraft.yaml#Repairable.HpPerStep",
      "v": "3125"
     },
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
      "v": "25"
@@ -398,7 +412,14 @@
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/aircraft.yaml#Repairable.HpPerStep",
      "v": "5555"
     },
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
      "v": "44"
@@ -609,7 +630,14 @@
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/aircraft.yaml#Repairable.HpPerStep",
      "v": "12500"
     },
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
      "v": "100"
@@ -738,7 +766,14 @@
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/aircraft.yaml#Repairable.HpPerStep",
      "v": "1500"
     },
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
      "v": "12"
@@ -846,7 +881,14 @@
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/aircraft.yaml#Repairable.HpPerStep",
      "v": "1250"
     },
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
      "v": "10"
@@ -1105,7 +1147,14 @@
      "Defence",
      "RADefence"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "inherited",
      "v": "10"
@@ -1388,7 +1437,14 @@
      "Defence",
      "RADefence"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "inherited",
      "v": "10"
@@ -1691,7 +1747,14 @@
      "Defence",
      "RADefence"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "inherited",
      "v": "10"
@@ -1888,7 +1951,14 @@
      "Defence",
      "RADefence"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "inherited",
      "v": "10"
@@ -2353,7 +2423,14 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
      "v": "32"
@@ -2530,6 +2607,12 @@
     ],
     "resolved_firepower_modifiers": [
      {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
       "modifier": 100,
       "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/infantry.yaml#FirepowerMultiplier@ScoutInfantryBuff.Modifier",
       "trait": "FirepowerMultiplier@ScoutInfantryBuff",
@@ -2703,7 +2786,14 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
      "v": "12"
@@ -2822,7 +2912,14 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
      "v": "36"
@@ -2941,7 +3038,14 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
      "v": "44"
@@ -3132,7 +3236,14 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
      "v": "24"
@@ -3760,7 +3871,14 @@
      "v": "100"
     },
     "name": "Apparition",
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
      "v": "30"
@@ -4061,6 +4179,12 @@
     "resolved_firepower_modifiers": [
      {
       "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 50,
       "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#FirepowerMultiplier@DualWeapon.Modifier",
       "trait": "FirepowerMultiplier@DualWeapon",
       "types": []
@@ -4244,6 +4368,12 @@
     "resolved_firepower_modifiers": [
      {
       "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 50,
       "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#FirepowerMultiplier@DualWeapon.Modifier",
       "trait": "FirepowerMultiplier@DualWeapon",
       "types": []
@@ -4352,7 +4482,14 @@
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Repairable.HpPerStep",
      "v": "4750"
     },
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
      "v": "38"
@@ -4477,7 +4614,14 @@
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Repairable.HpPerStep",
      "v": "4000"
     },
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
      "v": "32"
@@ -4580,7 +4724,14 @@
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Repairable.HpPerStep",
      "v": "2500"
     },
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
      "v": "20"
@@ -4711,7 +4862,14 @@
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Repairable.HpPerStep",
      "v": "5000"
     },
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
      "v": "40"
@@ -4852,7 +5010,14 @@
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Repairable.HpPerStep",
      "v": "3000"
     },
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
      "v": "24"
@@ -4956,7 +5121,14 @@
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Repairable.HpPerStep",
      "v": "3250"
     },
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
      "v": "26"
@@ -5182,7 +5354,14 @@
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Repairable.HpPerStep",
      "v": "3750"
     },
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
      "v": "30"
@@ -5345,6 +5524,12 @@
     "resolved_firepower_modifiers": [
      {
       "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 50,
       "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#FirepowerMultiplier@DualWeapon.Modifier",
       "trait": "FirepowerMultiplier@DualWeapon",
       "types": []
@@ -5460,7 +5645,14 @@
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Repairable.HpPerStep",
      "v": "1250"
     },
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
      "v": "10"
@@ -5564,7 +5756,14 @@
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Repairable.HpPerStep",
      "v": "2000"
     },
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
      "v": "16"
@@ -5777,6 +5976,12 @@
      "v": "3000"
     },
     "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
      {
       "modifier": 50,
       "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#FirepowerMultiplier@StormEffect.Modifier",

@@ -856,6 +856,12 @@
     ],
     "resolved_firepower_modifiers": [
      {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
       "modifier": 100,
       "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/infantry.yaml#FirepowerMultiplier@ScoutInfantryBuff.Modifier",
       "trait": "FirepowerMultiplier@ScoutInfantryBuff",
@@ -1032,7 +1038,14 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
      "v": "12"
@@ -1341,7 +1354,14 @@
      "RAVehicle",
      "Starport"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "inherited",
      "v": "10"
