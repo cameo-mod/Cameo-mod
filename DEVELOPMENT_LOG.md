@@ -17902,3 +17902,11 @@ Generated with [Devin](https://devin.ai)
 * Gates: build 0 errors · `dotnet test` 807/807 · pytest 22/22 · fog PASS (262 sites) · direct-mutation PASS · boot
   gate PASS (pre-fixup; Python-only since). Smoke fits on both elsmoke dirs: clean parse, 0 fitted (logs predate
   `composition` — expected).
+* **First real end-to-end fit:** one headless `hard` vs `classic` duel on this branch's build
+  (`run_ai_match_batch.py --factions td_gdi --repeats 1`, `C:\tmp\tier1-fit-e2e`) produced 200 `engagement` records
+  carrying `composition`/`enemy_faction`/`enemy_faction_public` — the C# writer verified on live play. Fit: 41
+  fitted / 130 skirmish / 29 unmapped skipped → 121 `DeliveryArmour@` cells, 13 `Factor@areadamage|*` coarse cells
+  (all deliveries in-match resolved AreaDamage, matching the 146/148 static count), `StaticDefenceFactorPermille`,
+  timing/response/suicide priors, `--json` clean on non-empty cells. Note: first batch attempt was killed by the
+  stall detector during cold-cache load (fresh support dir, ~100s map cache; `--stall-timeout 900` fixed). Cells
+  pegged at bounds (n=41) are expected small-sample behaviour — the corpus fit is what shrinks them.
