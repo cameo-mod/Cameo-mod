@@ -82,6 +82,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		int nextPostureTick = EngagementConstants.PostureIntervalTicks;
 		int postureCount;
 
+		/// <summary>Running sum of total_milli over this match's closed non-skirmish engagements (seen-side only).
+		/// Read by the gated InMatchAdaptBotModule; the log itself stays record-only.</summary>
+		public int RunningTotalMilli { get; private set; }
+
+		public int ClosedEngagementCount { get; private set; }
+
 		public EngagementLogBotModule(Actor self, EngagementLogBotModuleInfo info)
 			: base(info)
 		{
@@ -715,7 +721,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				header.BanditPlanArm = bandit.PlanArm;
 			}
 
-			sink.Append(EngagementRecord.BuildEngagement(header, s));
+			sink.Append(EngagementRecord.BuildEngagement(header, s, out var totalMilli, out var isSkirmish));
+			if (!isSkirmish)
+			{
+				RunningTotalMilli += totalMilli;
+				ClosedEngagementCount++;
+			}
 		}
 
 		// TIER-1 (TIER1_FITTER_SPEC §2.2): the enemy participant with the most committed value at the
@@ -863,6 +874,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		public static string BuildEngagement(EngagementHeader h, EngagementState s)
 		{
+			return BuildEngagement(h, s, out _, out _);
+		}
+
+		public static string BuildEngagement(EngagementHeader h, EngagementState s, out int totalMilli, out bool isSkirmish)
+		{
 			var ownBuildings = s.Buildings.Values.Where(b => b.Own).ToList();
 			var enemyBuildings = s.Buildings.Values.Where(b => !b.Own).ToList();
 			var ownBuildingLossMilli = EngagementScore.BuildingsLoss(ownBuildings.Select(b => (b.Value, EngagementScore.HpLost(b.HpStart, b.HpEnd, b.MaxHp), b.Dead)).ToList());
@@ -1002,6 +1018,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			AiMatchLogWriter.AppendNumber(b, "objective_milli", objective);
 			AiMatchLogWriter.AppendNumber(b, "total_milli", total);
 			b.Append("}}\n");
+			totalMilli = total;
+			isSkirmish = skirmish;
 			return b.ToString();
 		}
 

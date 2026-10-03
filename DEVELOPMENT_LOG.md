@@ -1,5 +1,34 @@
 # 2026-10-03 — coordinator: INC 2026-10-03 landed on master (tiers 1–4, P0 guard, #791)
 
+# 2026-10-03 — feat(ai): NOVA EL-1, bounded in-match adaptation (AQ_inmatch_adapt, default off)
+
+*Devin (nova), worktree `C:\tmp\veto790`, branch `devin/nova/el1-import` — the EL-1 cherry-pick
+(`02f48abae`, `nova/el1_inmatch_adapt` @ pre-INC-N base) resolved onto post-INC-N `origin/master`:
+the veto fields it anchored on landed differently (master's `IBotCombatVeto[]` array pattern kept),
+the tier-3 bandit-attribution block composes ahead of the new running-total accumulation, and the
+switch is relettered `AN_inmatch_adapt` → `AQ_inmatch_adapt` (`AN_*` is the landed combat veto).
+DESIGN §19.13 "in-match vs between matches" + §12.30's named next reader. Spec §12.32.*
+
+The in-game half of "learn in game and between games": a bounded rule reads this match's own closed
+engagement scores and biases the one bar that already gates both commits — `RetreatRatioPct` (the bar
+`PredictsLoss` flees under and `PredictsWin` commits over). Losing form tightens it (bail earlier,
+demand more advantage); winning form loosens it toward today's value.
+
+- **Tally:** `EngagementLogBotModule` keeps `RunningTotalMilli`/`ClosedEngagementCount` over
+  non-skirmish records — `BuildEngagement(h, s, out, out)` surfaces numbers it already computed;
+  record-only kept (same lines, same seen/truth split, no orders).
+- **Rule** (`InMatchAdaptMath`, pure): `clamp(-form × GainPermille/1000, ±MaxDeltaPct)`, recomputed on
+  the 250-tick posture cadence. Defaults 15/±20 → effective bar stays in [30,70] around the default 50.
+- **Consumer:** `IBotInMatchAdaptation` (Mods.CA) `RetreatRatioDeltaPct` added to the `RetreatRatioPct`
+  getter — one property covering both directions of discretion; composes at the same seam as the
+  combat veto. Resets each match (tally starts empty); no enumeration (zero new fog sites); absent
+  provider (classic, switch off) = bit-identical.
+- Verified: 821/821 tests (5 new `InMatchAdaptTest`), arch audit 0 ERROR/31 pre-existing WARN,
+  fog audit PASS unchanged (no enumeration sites), direct-mutation PASS, boot gate PASS.
+  Switch `AQ_inmatch_adapt`: `genericbot && inmatchadapt`, classic untouched.
+
+
+
 *Claude (Opus 5.5), AionUI team lead.* Increment `inc/2026_10_03` → master: am-nre-guard, #791, tier 2 + disabled-guard fix,
 tier 3 (to `f9914bb2c`), tier 1 phase A (+ renumber `49643408d`), tier 4 SPSA (`1e91617de`), F3 doc, lead docs. Gates on the
 merged tree: build 0 err, 830/830, pytest 53/53 (touched tools), fog/mutation/warhead/freshness PASS, doc_claims 43/43,

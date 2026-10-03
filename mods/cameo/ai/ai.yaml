@@ -128,6 +128,11 @@
 	GrantConditionOnBotOwner@planbandits:
 		Condition: plan_bandits
 		Bots:
+	# EL-1 in-match adaptation (DESIGN 19.13, AI_ARCHITECTURE 12.32): bounded bias on the commit/retreat bar
+	# from this match's own closed engagement scores. The arm sets Bots (switch group AQ_inmatch_adapt).
+	GrantConditionOnBotOwner@inmatchadapt:
+		Condition: inmatchadapt
+		Bots:
 	# DIFFICULTY SCALE (DESIGN §19.1, maintainer 2026-09-28): every number below lies on ONE straight line
 	# from easiest to cameogod, in EQUAL steps; an integer that cannot split evenly is the rounded line.
 	# Every field is written in every tier, so no tier silently falls back to a C# default.
@@ -3709,6 +3714,11 @@ Player:
 	# ARMY STAGING (DESIGN 19.12, AI_ARCHITECTURE 12.29): a pure planner (IBotArmyStaging) - one staging point per threatened side on the rim,
 	# a few cells inside the own armed buildings; groups only when several sides are hit; a centre reserve for attacks from inside the ring.
 	# It issues no orders: the squad manager stages the idle pool and the base builder rallies new units at its primary cell.
+	# EL-1 (DESIGN 19.13, AI_ARCHITECTURE 12.32): reads the running total_milli of this match's closed
+	# non-skirmish engagements and biases the squad manager's retreat/commit bar by a bounded delta.
+	# `genericbot && inmatchadapt`: off on master until the increment A/B arms it (switch group AQ_inmatch_adapt).
+	InMatchAdaptBotModule:
+		RequiresCondition: genericbot && inmatchadapt
 	# `genericbot && armystaging`: off on master until the increment A/B arms it (switch group AM_army_staging).
 	ArmyStagingBotModule:
 		RequiresCondition: genericbot && armystaging
