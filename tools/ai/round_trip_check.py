@@ -3,7 +3,7 @@
 
 Reads one or more batch support dirs (each has Logs/ with debug.log, cameo-ai-matches.jsonl,
 cameo-ai-missions.jsonl, cameo-ai-situations.jsonl) and prints one PASS/WARN/FAIL row per layer with the
-evidence count: load, perception, missions, ownership, order gate, outcomes, execution, write-back, fog, learning, tools.
+evidence count: load, perception, missions, ownership, order gate, outcomes, execution, storm, write-back, fog, learning, tools.
 Exit 1 on any FAIL. A genericbot player is any player whose bot_type is not a reference bot (classic, classic_hard).
 
 Usage:
@@ -126,6 +126,45 @@ def check(dirs: list[pathlib.Path]) -> list[tuple[str, str, str]]:
     unclaimed = published - closed_or_taken
     rows.append(("execution", WARN if unclaimed else PASS,
                  f"{len(unclaimed)} published card(s) still open with no attempt at match end (of {len(published)})"))
+
+    # 6c. republish storm — consecutive bleeding closes on the same mission arriving FASTER than a sane
+    # backoff would allow. Executor-agnostic: catches the killbox pattern (claim -> walkers die ->
+    # republish -> repeat) wherever it appears, not just garrison contests. GC-1's ContestRetryCooldownTicks
+    # spaces retries to >=2500t per streak step, so rate, not raw streak, is the suicide measure.
+    bleed_reasons = {"lost_units", "x_contest_lost", "stuck", "timeout"}
+    storm_gap_ticks = 2000
+    per_mission: dict = {}
+    for r in missions:
+        if r.get("record_kind") == "attempt" or r.get("event") in ("DORMANT",):
+            per_mission.setdefault((r.get("game_uid"), r.get("mission_id")), []).append(
+                (r.get("tick") or 0, r.get("reason")))
+    worst = None
+    storms = 0
+    for (_g, _mid), evs in per_mission.items():
+        evs.sort()
+        streak = 0
+        last_bleed = None
+        stormed = False
+        for t, reason in evs:
+            if reason in bleed_reasons:
+                if last_bleed is None or t - last_bleed <= storm_gap_ticks:
+                    streak += 1
+                else:
+                    streak = 1  # slow retry after a backoff is persistence, not a storm
+                last_bleed = t
+                if streak >= 3:
+                    stormed = True
+                    if worst is None or streak > worst[0]:
+                        worst = (streak, _mid)
+            elif reason:
+                streak = 0
+                last_bleed = None
+        if stormed:
+            storms += 1
+    detail = f"{storms} mission(s) with >=3 fast-consecutive bleeding closes"
+    if worst:
+        detail += f" (worst {worst[1]} x{worst[0]})"
+    rows.append(("storm", WARN if storms else PASS, detail))
 
     # 7. write-back
     shelf = [r for r in missions if r.get("record_kind") == "mission" and r.get("event") in ("DORMANT", "REOPENED")]
