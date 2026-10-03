@@ -181,8 +181,10 @@ groups:
   BF_team_capture_claims:            # NOVA TC-2e - capture-claim arbitration over the team blackboard: live capture/contest target cells are published; a lower-ClientIndex claimant wins, the rest stand down (DAWN 6v6 follow-up)
     GarrisonContestBotModule:
       UseTeamCaptureClaims: true
+      PreferShardCaptureTargets: true
     EngineerBotModule:
       UseTeamCaptureClaims: true
+      PreferShardCaptureTargets: true
   BG_raid_mission_steering:          # TC-2f - EMBER's raid dead-end (AI_ARCHITECTURE 12.27): a Raid card may ride a launching wave up to the overcommit cap - the wave commits anyway, steering changes where not whether
     SquadManagerBotModuleCA:
       UseRaidMissionSteering: true
