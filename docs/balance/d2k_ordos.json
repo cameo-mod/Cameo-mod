@@ -236,7 +236,14 @@
      "Aircraft",
      "RAAircraft"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "inherited",
      "v": "10"
@@ -452,7 +459,14 @@
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#Repairable.HpPerStep",
      "v": "1875"
     },
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
      "v": "15"
@@ -716,7 +730,14 @@
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#Repairable.HpPerStep",
      "v": "7500"
     },
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
      "v": "60"
@@ -857,7 +878,14 @@
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#Repairable.HpPerStep",
      "v": "1000"
     },
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
      "v": "20"
@@ -997,7 +1025,14 @@
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#Repairable.HpPerStep",
      "v": "18750"
     },
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
      "v": "150"
@@ -1129,7 +1164,14 @@
      "Defence",
      "RADefence"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "inherited",
      "v": "10"
@@ -1217,7 +1259,14 @@
      "Defence",
      "RADefence"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "inherited",
      "v": "10"
@@ -1359,7 +1408,14 @@
      "Defence",
      "RADefence"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "inherited",
      "v": "10"
@@ -1668,7 +1724,14 @@
      "Defence",
      "RADefence"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "inherited",
      "v": "10"
@@ -2273,7 +2336,14 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
      "v": "15"
@@ -2391,7 +2461,14 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
      "v": "30"
@@ -2509,7 +2586,14 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
      "v": "75"
@@ -2739,7 +2823,14 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
      "v": "90"
@@ -2823,7 +2914,14 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
      "v": "20"
@@ -3020,6 +3118,12 @@
     ],
     "resolved_firepower_modifiers": [
      {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
       "modifier": 100,
       "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/infantry.yaml#FirepowerMultiplier@ScoutInfantryBuff.Modifier",
       "trait": "FirepowerMultiplier@ScoutInfantryBuff",
@@ -3215,7 +3319,14 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
      "v": "20"
@@ -3373,7 +3484,14 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
      "v": "12"
@@ -4204,7 +4322,14 @@
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Repairable.HpPerStep",
      "v": "3375"
     },
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
      "v": "27"
@@ -4400,7 +4525,14 @@
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Repairable.HpPerStep",
      "v": "2250"
     },
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
      "v": "18"
@@ -4541,6 +4673,12 @@
     },
     "resolved_firepower_modifiers": [
      {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
       "modifier": 25,
       "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#FirepowerMultiplier@MultiWeapon.Modifier",
       "trait": "FirepowerMultiplier@MultiWeapon",
@@ -4649,7 +4787,14 @@
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Repairable.HpPerStep",
      "v": "4250"
     },
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
      "v": "34"
@@ -4785,7 +4930,14 @@
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Repairable.HpPerStep",
      "v": "2750"
     },
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
      "v": "22"
@@ -4908,7 +5060,14 @@
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Repairable.HpPerStep",
      "v": "4250"
     },
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
      "v": "34"
@@ -5035,7 +5194,14 @@
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Repairable.HpPerStep",
      "v": "1625"
     },
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
      "v": "13"
@@ -5178,6 +5344,12 @@
     },
     "resolved_firepower_modifiers": [
      {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
       "modifier": 40,
       "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#FirepowerMultiplier@MultiWeapon.Modifier",
       "trait": "FirepowerMultiplier@MultiWeapon",
@@ -5316,7 +5488,14 @@
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Repairable.HpPerStep",
      "v": "5750"
     },
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
      "v": "46"
@@ -5545,7 +5724,14 @@
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Repairable.HpPerStep",
      "v": "6875"
     },
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
      "v": "55"
@@ -5678,7 +5864,14 @@
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Repairable.HpPerStep",
      "v": "5250"
     },
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
      "v": "42"
@@ -5945,7 +6138,14 @@
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Repairable.HpPerStep",
      "v": "3500"
     },
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
      "v": "28"
@@ -6090,7 +6290,14 @@
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Repairable.HpPerStep",
      "v": "3000"
     },
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
      "v": "24"
@@ -6315,7 +6522,14 @@
      "src": "inherited",
      "v": "3000"
     },
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "inherited",
      "v": "24"
@@ -6440,7 +6654,14 @@
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Repairable.HpPerStep",
      "v": "4000"
     },
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
      "v": "32"

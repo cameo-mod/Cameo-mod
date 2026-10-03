@@ -246,7 +246,14 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml#Repairable.HpPerStep",
      "v": "4500"
     },
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
      "v": "36"
@@ -319,7 +326,14 @@
      "v": "100"
     },
     "name": "Kamikaze",
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
      "v": "3"
@@ -392,7 +406,14 @@
      "v": "100"
     },
     "name": "Airstrike Kamikaze",
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "inherited",
      "v": "3"
@@ -508,7 +529,14 @@
      "v": "100"
     },
     "name": "Chemical Attack Plane",
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
      "v": "6"
@@ -695,7 +723,14 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml#Repairable.HpPerStep",
      "v": "2000"
     },
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
      "v": "16"
@@ -829,7 +864,14 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml#Repairable.HpPerStep",
      "v": "4500"
     },
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
      "v": "36"
@@ -1225,7 +1267,14 @@
      "Defence",
      "RADefence"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "inherited",
      "v": "10"
@@ -1414,7 +1463,14 @@
      "Defence",
      "RADefence"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "inherited",
      "v": "10"
@@ -1589,7 +1645,14 @@
      "Defence",
      "RADefence"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "inherited",
      "v": "10"
@@ -1893,7 +1956,14 @@
      "Defence",
      "RADefence"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "inherited",
      "v": "10"
@@ -2071,7 +2141,14 @@
      "Defence",
      "RADefence"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "inherited",
      "v": "10"
@@ -2226,7 +2303,14 @@
      "Defence",
      "RADefence"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "inherited",
      "v": "10"
@@ -2313,7 +2397,14 @@
      "Defence",
      "RADefence"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "inherited",
      "v": "10"
@@ -2469,7 +2560,14 @@
      "Defence",
      "RADefence"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "inherited",
      "v": "10"
@@ -2697,7 +2795,14 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
      "v": "27"
@@ -2919,6 +3024,12 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
      {
       "modifier": 109,
       "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#FirepowerMultiplier.Modifier",
@@ -3316,7 +3427,14 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
      "v": "50"
@@ -3650,6 +3768,12 @@
     ],
     "resolved_firepower_modifiers": [
      {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
       "modifier": 100,
       "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#FirepowerMultiplier.Modifier",
       "trait": "FirepowerMultiplier",
@@ -3908,6 +4032,12 @@
     "resolved_firepower_modifiers": [
      {
       "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
+      "modifier": 50,
       "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#FirepowerMultiplier@MultiWeapon.Modifier",
       "trait": "FirepowerMultiplier@MultiWeapon",
       "types": []
@@ -4060,7 +4190,14 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
      "v": "40"
@@ -4356,6 +4493,12 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
      {
       "modifier": 100,
       "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#FirepowerMultiplier@ScoutInfantryBuff.Modifier",
@@ -4752,7 +4895,14 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
      "v": "64"
@@ -4929,7 +5079,14 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
      "v": "20"
@@ -5219,7 +5376,14 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
      "v": "17"
@@ -5557,7 +5721,14 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
      "v": "14"
@@ -5692,7 +5863,10 @@
       "requires": "!rank-elite",
       "slot": "Armament@AA",
       "versus_templates": [
-       "RA2FlakTrackGun",
+       "^Warhead_Flak_Medium",
+       "^Projectile_Flak_Medium",
+       "^Effect_Flak_Puff_RA2",
+       "^Effect_Watersplash_Small_RA2",
        "^Warhead_Flak_Medium_Flat"
       ],
       "warheads": [
@@ -5839,7 +6013,14 @@
      "Naval",
      "RANaval"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/naval.yaml#ChangesHealth@SelfHealing.Step",
      "v": "36"
@@ -5921,7 +6102,14 @@
      "Naval",
      "RANaval"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/naval.yaml#ChangesHealth@SelfHealing.Step",
      "v": "70"
@@ -6000,7 +6188,14 @@
      "Naval",
      "RANaval"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "inherited",
      "v": "10"
@@ -6096,7 +6291,14 @@
      "Naval",
      "RANaval"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/naval.yaml#ChangesHealth@SelfHealing.Step",
      "v": "96"
@@ -6230,7 +6432,14 @@
      "Naval",
      "RANaval"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/naval.yaml#ChangesHealth@SelfHealing.Step",
      "v": "40"
@@ -6518,7 +6727,14 @@
      "Naval",
      "RANaval"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/naval.yaml#ChangesHealth@SelfHealing.Step",
      "v": "55"
@@ -6600,7 +6816,14 @@
      "Naval",
      "RANaval"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/naval.yaml#ChangesHealth@SelfHealing.Step",
      "v": "110"
@@ -7542,6 +7765,12 @@
     },
     "resolved_firepower_modifiers": [
      {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
       "modifier": 75,
       "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#FirepowerMultiplier@MultiWeapon.Modifier",
       "trait": "FirepowerMultiplier@MultiWeapon",
@@ -7691,7 +7920,14 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Repairable.HpPerStep",
      "v": "12500"
     },
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
      "v": "100"
@@ -7823,7 +8059,14 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Repairable.HpPerStep",
      "v": "2000"
     },
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
      "v": "16"
@@ -8082,7 +8325,14 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Repairable.HpPerStep",
      "v": "6000"
     },
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
      "v": "48"
@@ -8462,7 +8712,14 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Repairable.HpPerStep",
      "v": "6500"
     },
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
      "v": "52"
@@ -8589,7 +8846,14 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Repairable.HpPerStep",
      "v": "4250"
     },
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
      "v": "34"
@@ -8742,7 +9006,14 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Repairable.HpPerStep",
      "v": "14250"
     },
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
      "v": "114"
@@ -9025,7 +9296,14 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Repairable.HpPerStep",
      "v": "2750"
     },
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
      "v": "22"
@@ -9169,7 +9447,14 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Repairable.HpPerStep",
      "v": "8000"
     },
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
      "v": "64"
@@ -9283,7 +9568,14 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Repairable.HpPerStep",
      "v": "2000"
     },
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
      "v": "16"
@@ -9480,7 +9772,14 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Repairable.HpPerStep",
      "v": "1250"
     },
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
      "v": "10"
@@ -9587,7 +9886,14 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Repairable.HpPerStep",
      "v": "12500"
     },
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
      "v": "100"

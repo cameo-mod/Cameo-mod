@@ -170,7 +170,14 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/aircraft.yaml#Repairable.HpPerStep",
      "v": "4000"
     },
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
      "v": "32"
@@ -366,7 +373,14 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/aircraft.yaml#Repairable.HpPerStep",
      "v": "45000"
     },
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
      "v": "360"
@@ -500,6 +514,12 @@
      "v": "7625"
     },
     "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
      {
       "modifier": 25,
       "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/aircraft.yaml#FirepowerMultiplier@AmmoCompensation.Modifier",
@@ -635,7 +655,14 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/aircraft.yaml#Repairable.HpPerStep",
      "v": "3125"
     },
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
      "v": "25"
@@ -764,7 +791,14 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/aircraft.yaml#Repairable.HpPerStep",
      "v": "3500"
     },
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
      "v": "28"
@@ -1672,7 +1706,14 @@
      "Defence",
      "RADefence"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "inherited",
      "v": "10"
@@ -1807,7 +1848,14 @@
      "Defence",
      "RADefence"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "inherited",
      "v": "10"
@@ -1895,7 +1943,14 @@
      "Defence",
      "RADefence"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "inherited",
      "v": "10"
@@ -2012,7 +2067,14 @@
      "Defence",
      "RADefence"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "inherited",
      "v": "10"
@@ -2195,7 +2257,14 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
      "v": "12"
@@ -2353,7 +2422,14 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "inherited",
      "v": "10"
@@ -2578,6 +2654,12 @@
     ],
     "resolved_firepower_modifiers": [
      {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
+     {
       "modifier": 95,
       "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/infantry.yaml#FirepowerMultiplier.Modifier",
       "trait": "FirepowerMultiplier",
@@ -2675,6 +2757,12 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
      {
       "modifier": 50,
       "src": "inherited",
@@ -2798,7 +2886,14 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "inherited",
      "v": "16"
@@ -2931,7 +3026,14 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "inherited",
      "v": "10"
@@ -3172,7 +3274,14 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
      "v": "100"
@@ -3384,7 +3493,14 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
      "v": "54"
@@ -3614,7 +3730,14 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "inherited",
      "v": "10"
@@ -3789,7 +3912,14 @@
      "Naval",
      "RANaval"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/naval.yaml#ChangesHealth@SelfHealing.Step",
      "v": "90"
@@ -4070,7 +4200,14 @@
      "Naval",
      "RANaval"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/naval.yaml#ChangesHealth@SelfHealing.Step",
      "v": "90"
@@ -4238,7 +4375,14 @@
      "Naval",
      "RANaval"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/naval.yaml#ChangesHealth@SelfHealing.Step",
      "v": "50"
@@ -4449,7 +4593,14 @@
      "v": "100"
     },
     "name": "Strike Orca",
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/naval.yaml#ChangesHealth@SelfHealing.Step",
      "v": "4"
@@ -4971,7 +5122,14 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Repairable.HpPerStep",
      "v": "4000"
     },
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
      "v": "32"
@@ -5096,7 +5254,14 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Repairable.HpPerStep",
      "v": "12500"
     },
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
      "v": "100"
@@ -5216,7 +5381,14 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Repairable.HpPerStep",
      "v": "1500"
     },
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
      "v": "12"
@@ -5335,7 +5507,14 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Repairable.HpPerStep",
      "v": "1750"
     },
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
      "v": "14"
@@ -5437,7 +5616,14 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Repairable.HpPerStep",
      "v": "2500"
     },
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
      "v": "20"
@@ -5662,7 +5848,14 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Repairable.HpPerStep",
      "v": "60000"
     },
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
      "v": "480"
@@ -5859,7 +6052,14 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Repairable.HpPerStep",
      "v": "40000"
     },
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
      "v": "320"
@@ -6029,7 +6229,14 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Repairable.HpPerStep",
      "v": "7500"
     },
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
      "v": "60"
@@ -6192,7 +6399,14 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Repairable.HpPerStep",
      "v": "1375"
     },
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
      "v": "11"
@@ -6404,7 +6618,14 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Repairable.HpPerStep",
      "v": "5000"
     },
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
      "v": "40"
@@ -6540,7 +6761,14 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Repairable.HpPerStep",
      "v": "6000"
     },
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
      "v": "48"
@@ -6676,7 +6904,14 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Repairable.HpPerStep",
      "v": "1500"
     },
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
      "v": "12"
@@ -6811,7 +7046,14 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Repairable.HpPerStep",
      "v": "2500"
     },
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
      "v": "20"
