@@ -17276,3 +17276,35 @@ groups (new: BF_team_capture_claims, BD_tc3_sectors, BE_tc3_main_target — the 
 upstream added) with 121 changes and no stale targets; arch freshness audit caught the merge's
 own staleness (map regen on merged tree → PASS); boot-gate PASS with `Engine.SupportDir` pointed
 at a private logs dir so a concurrent main-checkout boot could not overwrite my perf.log evidence.
+
+## 2026-10-03 — ember lane: GC-1 lifecycle hole + killbox bleeding (smoke-evidence fixes)
+
+The merged-master armed smoke (ab-smoke-out7, all 41 groups armed, hard vs classic td_gdi x4)
+finished **3-0 for hard** (37,002 / 29,185 / +1 ticks, zero exceptions). Round-trip on the new
+evidence: execution layer PASS (all 40 published cards got attempts — the earlier 8-card raid
+gap is gone), order gate crossed=0 (refused=49 — gate declining second issuers correctly),
+write-back PASS (101 terminal events), 2 dangling engineer capture attempts + 3 in-flight at
+match end (flagged to the engineer owner).
+
+The GC-1 card stream also surfaced two defects in MY module, now fixed:
+
+1. **Claim lifecycle hole** — `garrison_contest:a550` published t=90 and stayed open for the
+   entire 37k-tick match. A wedged-but-alive walker keeps renewing its lease in the housekeeping
+   pass (`done` stays false: alive, owned, outside, claimable), so the claim never prunes. New
+   `ClaimTimeoutTicks` (7500): claims with no walker inside past the timeout stand the walkers
+   down (release + Stop, same shape as the TC-2e supersede path — factored into a shared
+   `StandDownWalkers`) and close `DORMANT stuck`.
+2. **Re-contest bleeding** — building `a166` in match cf428c10 ate `lost_units` SEVEN times in
+   ~5000 ticks: claim, walkers die approaching, republish, repeat. The suicidal killbox loop the
+   module was built to avoid. New `ContestRetryCooldownTicks` (2500 base): consecutive
+   `lost_units`/`x_contest_lost` closes on a building impose an escalating backoff
+   (cooldown x streak) checked in the candidate filter; a `done` close clears the streak.
+   `superseded`/`stuck` are neutral — no bleeding recorded.
+
+Also verified in the merge review: upstream's GC-1 TC-2e integration is sound (blackboard
+arbitration degrades to no-op with flag off or in 1v1; claimCells lifecycle complete), and
+02a2a73e0 closed all four Codex TC-3 findings (central IsLive, rescue consumes responder,
+InternalName identity, §12.18 eventual-consistency doc).
+
+Verification: Cameo build clean (deploy locked by other lanes' games — obj dlls copied to the
+private engine + tracked dll), boot-gate PASS with isolated SupportDir.

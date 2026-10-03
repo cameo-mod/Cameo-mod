@@ -85,6 +85,15 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			"when an outranking ally's claim lands on its cell. Inert in 1v1 - no allied broadcasts exist.")]
 		public readonly bool UseTeamCaptureClaims = false;
 
+		[Desc("Ticks a contest claim may run with no walker inside before it stands down (DORMANT stuck).",
+			"A wedged but living walker renews its lease forever - the claim would otherwise never close.")]
+		public readonly int ClaimTimeoutTicks = 7500;
+
+		[Desc("Base tick backoff per consecutive lost_units/x_contest_lost close on the same building;",
+			"the wait scales with the failure streak and clears when a claim lands. Feeding walkers into",
+			"a defended approach is the suicide this module exists to avoid.")]
+		public readonly int ContestRetryCooldownTicks = 2500;
+
 		public override object Create(ActorInitializer init) { return new GarrisonContestBotModule(init.Self, this); }
 	}
 
@@ -102,6 +111,15 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		// TC-2e: the claimed garrison's cell per ActorID - buildings do not move, so it is written once at claim
 		// time and dropped with the claim. This is what CaptureClaimPositions publishes to the blackboard.
 		readonly Dictionary<uint, CPos> claimCells = new();
+
+		// Tick each claim was issued - a claim whose walkers never arrive (wedged but alive renews the lease
+		// forever) must still terminalize, or its card hangs open for the rest of the match.
+		readonly Dictionary<uint, int> claimStartTicks = new();
+
+		// Consecutive bleeding closes per building and the resulting re-contest block - escalating backoff on
+		// lost_units/x_contest_lost, cleared when a claim lands.
+		readonly Dictionary<uint, int> contestFailures = new();
+		readonly Dictionary<uint, int> contestBlockedUntil = new();
 		readonly Dictionary<string, int> raidReservations = new();
 		List<BotMission> missions = [];
 		IBotZoneTopology zoneTopology;
@@ -126,6 +144,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			claimWalkers.Clear();
 			claimCells.Clear();
+			claimStartTicks.Clear();
+			contestFailures.Clear();
+			contestBlockedUntil.Clear();
 		}
 
 		void IBotTick.BotTick(IBot bot)
@@ -181,21 +202,17 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				claimsAhead = TeamBlackboard.ClaimsAheadOf(TeamBlackboard.CollectBroadcasts(player), player.ClientIndex);
 
 			// Housekeeping first: drop walkers that arrived, died, lost their lease, or whose target stopped being neutral.
-			var prune = new List<(uint Building, bool AnyInside, bool Superseded)>();
+			var prune = new List<(uint Building, bool AnyInside, bool Superseded, bool TimedOut)>();
 			foreach (var (building, walkers) in claimWalkers)
 			{
 				var anyInside = false;
 				var superseded = false;
+				var timedOut = false;
 
-				// TC-2e: the claim lost arbitration to a lower-index ally. The walkers stand down through the
-				// stale-claim path — released, the entry pruned — plus a Stop, or the queued EnterGarrison
-				// would still run and the stand-down would capture the building anyway.
-				if (claimsAhead != null && claimCells.TryGetValue(building, out var claimedCell)
-					&& claimsAhead.Contains(world.Map.CenterOfCell(claimedCell)))
+				// Standing down a claim is the same shape whoever asks: leases released, the walkers that are
+				// still outside get a Stop or a queued EnterGarrison would capture the building anyway.
+				void StandDownWalkers()
 				{
-					superseded = true;
-					// IsInside calls TraitOrDefault on destroyed actors, so the guards run inside the predicate.
-					anyInside = walkers.Any(w => !w.IsDead && w.IsInWorld && w.Owner == player && IsInside(w));
 					foreach (var w in walkers)
 					{
 						leases?.Release(w, LeaseOwner);
@@ -204,6 +221,25 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					}
 
 					walkers.Clear();
+				}
+
+				// TC-2e: the claim lost arbitration to a lower-index ally. The walkers stand down through the
+				// stale-claim path — released, the entry pruned.
+				if (claimsAhead != null && claimCells.TryGetValue(building, out var claimedCell)
+					&& claimsAhead.Contains(world.Map.CenterOfCell(claimedCell)))
+				{
+					superseded = true;
+					// IsInside calls TraitOrDefault on destroyed actors, so the guards run inside the predicate.
+					anyInside = walkers.Any(w => !w.IsDead && w.IsInWorld && w.Owner == player && IsInside(w));
+					StandDownWalkers();
+				}
+				else if (claimStartTicks.TryGetValue(building, out var started)
+					&& world.WorldTick - started > Info.ClaimTimeoutTicks)
+				{
+					// The walkers never arrived and never died - wedged on a dead-end path but still alive, so
+					// the lease heartbeat renews forever. Stand them down and close the card honestly.
+					timedOut = true;
+					StandDownWalkers();
 				}
 				else
 				{
@@ -225,14 +261,15 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 
 				if (walkers.Count == 0)
-					prune.Add((building, anyInside, superseded));
+					prune.Add((building, anyInside, superseded, timedOut));
 			}
 
-			foreach (var (id, anyInside, superseded) in prune)
+			foreach (var (id, anyInside, superseded, timedOut) in prune)
 			{
 				claimWalkers.Remove(id);
 				claimCells.Remove(id);
-				WriteClaimClosed(id, anyInside, superseded);
+				claimStartTicks.Remove(id);
+				WriteClaimClosed(id, anyInside, superseded, timedOut);
 			}
 
 			if (claimWalkers.Count >= Info.MaxConcurrentClaims)
@@ -253,6 +290,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					&& a.Owner.RelationshipWith(player) == PlayerRelationship.Neutral
 					&& a.Trait<Garrisonable>().HasSpace(1)
 					&& !claimWalkers.ContainsKey(a.ActorID)
+					&& !(contestBlockedUntil.TryGetValue(a.ActorID, out var blockedUntil) && world.WorldTick < blockedUntil)
 					&& (claimsAhead == null || !claimsAhead.Contains(world.Map.CenterOfCell(a.Location)))
 					&& shroud.IsExplored(a.Location)
 					&& (a.Location - anchor.Value).LengthSquared <= radiusSq)
@@ -315,6 +353,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 				claimWalkers[garrison.ActorID] = claimed;
 				claimCells[garrison.ActorID] = garrison.Location;
+				claimStartTicks[garrison.ActorID] = world.WorldTick;
 				bot.QueueOrder(new Order("AttackMove", null, Target.FromCell(world, garrison.Location), false, groupedActors: claimed.ToArray()));
 				bot.QueueOrder(new Order("EnterGarrison", null, Target.FromActor(garrison), true, groupedActors: claimed.ToArray()));
 
@@ -337,12 +376,14 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		// Every resolved contest claim writes a terminal card line - occupied, lost to the enemy, target
 		// destroyed, or the walkers died in transit. Without it the archive holds open claims forever.
-		void WriteClaimClosed(uint building, bool anyInside, bool superseded = false)
+		void WriteClaimClosed(uint building, bool anyInside, bool superseded = false, bool timedOut = false)
 		{
 			var actor = world.GetActorById(building);
 			string reason;
 			if (superseded)
 				reason = BotMissionReasons.Superseded;   // TC-2e: outranked ally holds the claim — nothing was lost
+			else if (timedOut)
+				reason = BotMissionReasons.Stuck;        // walkers wedged en route - never arrived, never died
 			else if (anyInside || (actor != null && !actor.IsDead && actor.Owner == player))
 				reason = BotMissionReasons.Done;
 			else if (actor == null || actor.IsDead)
@@ -351,6 +392,20 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				reason = "x_contest_lost";
 			else
 				reason = BotMissionReasons.LostUnits;
+
+			// Bleeding memory: a consecutive lost_units/x_contest_lost streak backs off re-contests on the same
+			// building; a landed claim clears it. Superseded/stuck are neutral - nothing bled.
+			if (reason == BotMissionReasons.Done)
+			{
+				contestFailures.Remove(building);
+				contestBlockedUntil.Remove(building);
+			}
+			else if (reason == BotMissionReasons.LostUnits || reason == "x_contest_lost")
+			{
+				var streak = contestFailures.TryGetValue(building, out var f) ? f + 1 : 1;
+				contestFailures[building] = streak;
+				contestBlockedUntil[building] = world.WorldTick + Info.ContestRetryCooldownTicks * streak;
+			}
 
 			BotMissionLog.Write(new BotMissionRecord
 			{
