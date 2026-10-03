@@ -17785,3 +17785,16 @@ dangling / 0 in-flight; execution 0 dead-ended of 98 cards (1 live-at-end);
 storm 0 (backoff holding); order gate crossed=0; no stall — every match
 decided in ~31k ticks. Combined with the 2v2 batch, the armed tree is green
 on every lane the check measures.
+
+## 2026-10-03 — Claude: resume after a session cut-off; EL-0 finished; DAWN's stranded commit landed as #788
+
+* The 10-03 morning session was cut off at 12:52 mid-task; recovering it from the raw transcript cost ~40 tool calls →
+  WORKFLOW §1.7 (checkpoint as you go) + §1.8 (Devin is free), maintainer rulings.
+* EL-0's coder was cut off too; its ~1,700 uncommitted lines moved from `C:/tmp/claude-el0` (old base `8b5baa423`) to
+  `C:/tmp/claude-el1` on master `f07023d03` (one DESIGN conflict: §19.11/19.12 from master + §19.13 kept in order). A
+  resumed Sonnet coder finished it: 807/807 tests, 15 pytest, fog (80 files, 262 sites) / mutation / freshness PASS.
+  It fixed one wrong C# test vector (`PredictedTrade(1000,1000,600,0)` = 428, not 500).
+* Reviewed: `INotifyAppliedDamage` fires on the attacker's player actor (`Health.cs:230`), so the module sees its own
+  hits with no per-unit trait; per-hit work O(1); `Ready()` gates humans out; truth scan only at start/close.
+* DAWN's `81fa5a3c5` sat only in the shared main checkout (+ a staged origin/master merge) → reviewed (inert cooldown,
+  log-identity fix) → PR #788 from `claude/land_dawn_answer_tracker` (direct push to master is denied: PR + maintainer).
