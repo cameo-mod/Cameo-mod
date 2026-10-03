@@ -262,6 +262,11 @@ winners), but needed iterative fine-tuning and **per-map transfer learning**
 ([arXiv:2402.08112](https://arxiv.org/abs/2402.08112)) — on a toy RTS. With 25 factions and a
 moving balance, round 1's Stage E deferral stands.
 
+> **Amended 2026-10-03 (DESIGN §19.13, research round 3: `AI_LEARNING_RESEARCH_2026-10-03.md`).** The verdict still
+> holds for a whole-game policy, which is two to three orders of magnitude beyond one PC. It no longer holds for one
+> narrow decision. A small engagement network (~5k weights, the Supreme Commander 2 platoon pattern) choosing assault /
+> flank / siege-first / retreat per fight is adopted as tier 5, once ~50k engagements are logged.
+
 ### 6.4 LLMs: offline analyst — **LA**
 
 TextStarCraft II agents with chain-of-summarization beat the level-5 built-in AI; human experts

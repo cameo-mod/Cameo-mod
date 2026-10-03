@@ -916,6 +916,8 @@ World:
 	AiPlacementLogWriter:
 	# MC1: record-only mission-card archive, cameo-ai-missions.jsonl (docs/design/AI_MISSION_CARDS.md, DESIGN §21.1).
 	AiMissionLogWriter:
+	# EL-0: record-only engagement + army posture log, cameo-ai-engagements.jsonl (AI_ARCHITECTURE 12.30, DESIGN 19.13).
+	AiEngagementLogWriter:
 	ChatCommands:
 	DevCommands:
 	DebugVisualizationCommands:

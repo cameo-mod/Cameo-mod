@@ -4065,6 +4065,9 @@ Player:
 	# FOG-HONEST belief on top (territory claim, doors, region ownership from BotFogMemory
 	# sightings — a never-scouted enemy claims nothing). Produced for ZG-c consumers
 	# (BotFogMemory/RegionRouter/BotSituation).
+	# EL-0 (AI_ARCHITECTURE 12.30, DESIGN 19.13): record-only engagement + posture log. NO RequiresCondition on purpose: logging is not
+	# behaviour, so genericbot, classic and any other bot are measured identically. No orders, no conditions.
+	EngagementLogBotModule:
 	TacticalMapBotModule:
 		RequiresCondition: genericbot
 		TopologyLocomotors: tracked

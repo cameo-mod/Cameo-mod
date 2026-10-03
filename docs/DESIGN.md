@@ -5308,6 +5308,48 @@ army back. A central position ("interior lines") is right only against threats f
   points factory rally points at the staging point. No provider (`classic`, switch off) = today's behaviour bit for
   bit. Switch `AM_army_staging`; spec and constants in `design/AI_ARCHITECTURE.md` §12.29.
 
+### 19.13 Score every fight: the engagement log and the five learning tiers (maintainer 2026-10-03) — binding
+
+> *"Add a lot more logging about army behavior and how well fights go for each bot and give each engagement a score so
+> they can learn in game and also between games. Bot learning should be very important."* — and — *"can you make the
+> smartest possible bot … deep reinforced machine learning for as many parameters as possible … they never feel the
+> same each game … but should still be always successful and never try something stupid … and adjust to the new
+> balance automatically."*
+
+**The research answer** (`design/AI_LEARNING_RESEARCH_2026-10-03.md`, five research threads, every number sourced):
+whole-game deep RL needs two to three orders of magnitude more play than one PC gives. The cheapest documented
+full-game learner needed ~60k games just to beat StarCraft II's Easy AI; Cameo plays ~36k–55k matches a year over ~325
+faction pairings, on a ruleset that changes every few weeks. Learning is therefore spent where the signal is dense.
+
+**The five tiers (adopted), in build order, each behind a switch and measured by the increment A/B:**
+1. **Measured from logs:** ~1,000 coefficients: combat-strength corrections per weapon-delivery × armour cell,
+   static-defence states, timing and response priors. About 500 logged battles fit them.
+2. **A combat-prediction veto that learns nothing itself:** it blocks predicted-losing attacks (no suicide into
+   defences) and retreats that cannot succeed. "Variety proposes, the veto disposes."
+3. **Bandits:** personality, opening and attack plan, Thompson-sampled only among options whose lower confidence
+   bound clears a floor, pooled global → game family → faction → matchup.
+4. **Tuned knobs:** SPSA / Bayesian optimisation on ~8 knobs per faction (§19.2), paired matches, a continuous score.
+5. **One small engagement network** (~5k weights per platoon type, the Supreme Commander 2 pattern) choosing assault /
+   flank / siege-first / harass / retreat when a squad meets resistance. Trained offline once ~50k engagements are
+   logged, fixed weights in release. A whole-game neural policy stays out.
+
+**The engagement log (first deliverable, record-only).** Every fight is one closed record: who, where, when, kind
+(defend / attack / field), the forces at the start, the predicted outcome, the tactics used (approach angle against
+the defences, artillery before contact, attacking into defences), the response time to a base attack, and the result.
+Each record carries a score: value traded (zero-sum), the result minus the prediction (play quality, not army size),
+and objective terms (buildings count two-thirds by HP lost and one-third on death).
+* **Two blocks per record: `seen` and `truth`.** `seen` is what the bot knew. It is the only input any in-match
+  learning may use (§19.5). `truth` is the real, unfogged state, written for offline scoring and predictor calibration
+  only (maintainer 2026-10-03). Between-game learned files hold per-faction priors, never in-game omniscience.
+* **In-match vs between matches.** Learned values are still frozen at match start (§19.2). Within a match, a bounded
+  rule reacts to the engagement scores so far and resets every match; its gains are tuned knobs.
+* **Rebalance.** Features are cost- and stat-normalised (value, DPS × HP, the Versus matrix), never per-unit ids. The
+  balance pipeline regenerates the bot's prior table on every run, and bots learn only bounded corrections on top. A
+  rebalance is a known change point: bandits partly reset, and corrections fitted on changed stats are discounted.
+
+Spec: `design/AI_ARCHITECTURE.md` §12.30 (EL). The "deep RL: not now" verdict of `AI_DEEP_RESEARCH.md` §6.3 is amended
+accordingly.
+
 ## 20. AI bot unit compositions
 
 Unit compositions are opt-in through `UseCompositions: true` on

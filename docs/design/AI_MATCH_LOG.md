@@ -380,3 +380,42 @@ they read as "hard's squad machinery carries it anyway", not as a fair test.
 | ca2b2+ca2b3 (pooled, FINAL) | hard vs classic (td_gdi+td_nod matrix) | pre-#660 lane base (372b67825 lineage) + BehaviourEnabled off/on, maximum, phantom-retry | **ctrl hard 10-7 (58%, Wilson 36-78%) / cand hard 6-11 (35%, Wilson 17-59%)** | n=17/arm across 2 identical-base runs; mirror-faction cells ctrl 8-4 vs cand 4-8 (pooled recount); the loss pattern is faction pairing, not spawn — hard-as-td_gdi went 0-6 vs classic td_nod pooled while hard-as-td_nod went 4-0 vs classic td_gdi, so 'who sits on the strong pairing' drove the mirror-adjacent cells. ca2b3 ran every hard match from home '11,45' (no position swap; coordinator recount on #670 — `player.home`, not `spawn`, is the side key) so the A/B is still fair between arms but silent about spawns; the earlier 'spawn' label was wrong. Verdict telemetry: ctrl computed 220 retreat/29 stand-off/35 commit unserved; cand served verdicts dissolve squads at first retreat -> only 29 retreat/4 stand-off/102 commit recorded and matches end 23% faster (28.8k vs 37.4k ticks). **FLAG VERDICT: BehaviourEnabled LOSES the A/B — stays off.** The advisor reads losing fights correctly but stand-off/retreat cycles cede initiative to the omniscient snowball; §12.6's artillery-first precondition is unmet (army mix: 77% infantry / 5% heavy / 4% artillery) |
 | w3ab-ctrl/w3ab-cand (FINAL) | hard vs classic (td_gdi+td_nod matrix) | 66f098f3b + W3 economy swap (cand: 4 CA producers off / 5 Frans producers on), maximum, swap-bots | **cand hard 0-24 (0%) / ctrl hard 9-6 (60% of 15)** | 24-match design per arm (8/8 g/n mirrors + 4/4 cross); cand completed all 24 — lost EVERY match, including all 16 mirror-cell games. Forensics: production starvation, not tactics — FransMcvExpansion never tasks an MCV (`task=0/None, stage=Idle, mcv=0` heartbeat all game), queues idle (idle_queues 3+ from mid-game), deaths_cost ~4-5x kills_cost, army_value 0 at end. ctrl driver died at 15/24 (host restart); n-mirror backfill in flight (matrix 8/8/4/3 -> full). Tally method: filter `player.bot_type=='hard'` — each match writes a row per side, counting both forces a fake 1:1. **F1 VERDICT: FAIL — Frans producer stack stays donor-only; CA economy producers remain armed on `hard`; dawn-w3 arm set never merges.** The §19.1 shared `BotDifficultyLadder` (CA, #672) survives as infrastructure for future controlled ramps. |
 | inc3ab-{ctrl,base,all} (FINAL, 2026-10-01) | hard vs classic, td_gdi + td_nod MIRRORS ×8 swapped, A Nuclear Winter, --render fast | ctrl `bea5573a2` / base `dfef889b6` / all = base + 53 switch changes (groups A+B+C) | **ctrl 12-4 (75%, 51-90) · base 9-7 (56%, 33-77) · all 13-3 (81%, 57-93)**; mean length 31,562 / 32,777 / 26,770 t; double-owned units 216 / 0 / 0; order gate base would-refuse 264 crossed 119, all refused 325 crossed 13. **VERDICT: `all` does not lose (leads, wins faster) → groups A+B+C shipped as defaults** (minus the engt-transport re-arm, §19.8; C on every tier, §19.1). `base` alone trails: the machinery pays off with its switches. |
+
+## Engagement log (schema `engagement/1`, EL-0, AI_ARCHITECTURE 12.30)
+
+File `Logs/cameo-ai-engagements.jsonl`, written by `AiEngagementLogWriter` (World actor) from `EngagementLogBotModule`
+(Player actor, runs for genericbot AND classic, no `RequiresCondition`). Same writer rules as above: host only, non-replay,
+append-only, flushed at game over. Record-only: no orders, no conditions. Every value is an integer; `*_milli` are thousandths.
+Two record kinds share the file, told apart by `record`.
+
+**Common ids (both kinds):** `schema`, `record` (`engagement` | `posture`), `game_uid`, `record_id`, `map_uid`, `player`,
+`bot_type`, `faction`, `personality` (current).
+
+**`engagement` (one line per closed fight):** `engagement_id`, `start_tick`, `end_tick`, `duration_ticks`, `close_reason`
+(`quiet` | `side_gone` | `match_end`), `centroid` ("x,y" cell), `kind` (`defend` | `attack` | `field`), `skirmish` (below 300 value
+traded or fewer than 2 deaths; still written).
+* `context`: `dist_own_base`, `dist_enemy_base` (cells, -1 unknown), `director_phase`, `director_tension`, `urgency`.
+* `seen` (what the bot knew): `predicted_method`, then `start` and `end`, each with `tick`, `own_committed_value`,
+  `own_committed_units`, `own_defence_value`, `own_artillery_value`, `enemy_unit_value`, `enemy_units`, `enemy_defence_value`,
+  `enemy_defence_count`, `enemy_artillery_value`, `predicted_ratio_milli`, `predicted_own_surviving_permille`,
+  `predicted_enemy_surviving_permille`. Visible or frozen enemies only.
+* `response` (defend only): `first_own_hurt_tick`, `first_own_mobile_dealt_tick`, `response_ticks` (-1 none), `army_dist_at_start_cells`.
+* `tactics`: `approach_angle_deg` (-1 unknown), `approach_units`, `artillery_first`, `defence_killed_before_direct_entry`,
+  `into_defences_value`, `suicide_index_milli` (into_defences / max(1, enemy defence value destroyed)), `defence_points`,
+  `own_hurt_events`, `own_dealt_events`.
+* `outcome`: `own_lost_value`, `own_lost_unit_value`, `own_lost_units`, `own_lost_building_value`, `own_buildings_lost`,
+  `enemy_killed_value`, `enemy_killed_unit_value`, `enemy_killed_units`, `enemy_killed_defence_value`, `enemy_killed_defences`,
+  `enemy_killed_building_value`, `enemy_buildings_killed`, `enemy_killed_harvester_value`, `enemy_harvesters_killed`,
+  `own_lost_by_role` (object role -> value).
+* `truth` (OFFLINE ONLY, unfogged, DESIGN 19.13): `start` and `end` with `tick`, `enemy_unit_value`, `enemy_units`,
+  `enemy_defence_value`, `enemy_defence_count`; `enemy_loss_value`. Never an input to any decision.
+* `score`: `trade_milli` = 1000 (killed - lost) / max(1, killed + lost); `predicted_trade_milli`; `vs_prediction_milli` = trade -
+  predicted; `own_building_loss_milli`, `enemy_building_loss_milli` (value-weighted, 2/3 HP fraction lost + 1/3 on death);
+  `objective_milli` (defend: 1000 - 2 x own loss; attack: 2 x enemy loss - 1000; field: 0); `total_milli` = (500 trade + 250
+  vs_prediction + 250 objective) / 1000 clamped to +-1000. Mirror: `ai_log_common.engagement_score`.
+
+**`posture` (every 250 ticks):** `tick`, `army_centroid`, `army_units`, `army_value`, `dist_own_base`,
+`dist_building_under_attack` (last 500 ticks, -1 none), `dispersion_cells`, `dist_seen_enemy_army`, `idle_share_milli`,
+`staging_cell` and `army_to_staging_cells` (AI_ARCHITECTURE 12.29 via `IBotArmyStaging`; null when no provider or plan).
+
+Report: `python tools/ai/engagement_report.py <dirs...> [--json]`.

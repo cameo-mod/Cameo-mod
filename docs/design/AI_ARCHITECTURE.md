@@ -3549,3 +3549,39 @@ snapshot to add: tick, centre, `RimValue`/`PriorValue`/`InsideValue` per sector,
 
 **A/B metric** (mirror matches, one increment A/B): buildings lost per enemy attack, response time from the first attack event to the
 first own unit engaging, and win rate. Compare the arm against the same increment without `AM_army_staging`.
+
+### 12.30 EL — the engagement log: score every fight (maintainer 2026-10-03; owner Claude)
+
+Binding ruling: DESIGN 19.13. EL-0 is record-only: `EngagementLogBotModule` (Player, no `RequiresCondition`, so genericbot, classic
+and any bot are measured identically) issues no orders, grants no conditions and no other module reads its state. The writer is
+`AiEngagementLogWriter` (World): host only, non-replay, append-only `cameo-ai-engagements.jsonl`, schema `engagement/1`
+(fields: `AI_MATCH_LOG.md`).
+
+**Hooks.** Own actor hurt by an enemy: `IBotRespondToAttack`. Own actor hurting an enemy (and enemy kills): `INotifyAppliedDamage`
+(the hook `CombatAnalysisBotModule` already uses), and `AttackInfo.Attacker` (revealed on fire, DESIGN 19.5, fair) for the first mobile dealer.
+No trait is added to any unit template.
+
+**Segmentation** (`EngagementConstants`, pure `EngagementTracker`, unit-tested): events cluster in space and time. Join an open
+engagement within 10 cells of its centroid (a unit's weapon reach plus a squad's spread). Close after 150 quiet ticks (6 s: longer than
+a reload, shorter than a regroup), at match end, or when one side has nothing left in radius. Under 300 value traded or fewer than
+2 deaths: `skirmish` (written, flagged, excluded by the report). Kind: defend = centroid within 20 cells of an own construction
+yard; attack = within 20 cells of a SEEN enemy yard (fog memory); else field.
+
+**Scores** (`EngagementScore`, mirrored in `ai_log_common.engagement_score`, same test vectors in both languages):
+trade (zero-sum), vs_prediction (result minus the Lanchester-style `BotCombatPredictor` expectation: play quality, not army size),
+objective (buildings 2/3 by HP fraction lost, 1/3 on death), total = 500/250/250 weighting in thousandths. Tactics: approach angle
+against the own-base-to-enemy-defence line, `artillery_first`, `suicide_index`.
+
+**Fog split.** `seen` uses visible or frozen enemies only (`CanBeViewedByPlayer`). `truth` is computed by ONE method,
+`OmniscientTruthScan`, at engagement start and close only, used by the writer alone and never stored where a decision reads it
+(manifest: `fog_honesty_manifest.json`, DESIGN 19.13 "truth block, logging only"). The other enumeration sites list own
+actors only, or are fog-filtered.
+
+**Perf budget.** O(own events) per tick. Once per 50 ticks: one pass over own armed actors (ring buffers, 5 samples). Once per 250
+ticks: posture line, own-base refresh, one fog-filtered circle scan. Truth scan: twice per engagement. No per-tick world
+enumeration. Estimated well under 0.1 ms per tick average.
+
+**What reads this next.** EL-1 (in-match adaptation): a bounded rule reading the running `total_milli` of this match's closed
+engagements (seen block only), reset every match, gains are tuned knobs (DESIGN 19.2). The tier-1 fitter: per weapon-delivery x
+armour coefficients from `outcome` vs `seen.predicted_*` (truth for calibration only), and the response and suicide priors from
+`response` and `tactics`. `tools/ai/engagement_report.py` is the human view of both.
