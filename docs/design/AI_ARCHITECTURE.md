@@ -3586,7 +3586,7 @@ engagements (seen block only), reset every match, gains are tuned knobs (DESIGN 
 armour coefficients from `outcome` vs `seen.predicted_*` (truth for calibration only), and the response and suicide priors from
 `response` and `tactics`. `tools/ai/engagement_report.py` is the human view of both.
 
-### 12.32 T1 — the tier-1 'measured from logs' fitter (Devin, 2026-10-03; TIER1_FITTER_SPEC)
+### 12.34 T1 — the tier-1 'measured from logs' fitter (Devin, 2026-10-03; TIER1_FITTER_SPEC)
 
 `tools/ai/fit_engagement_priors.py` (stdlib only, deterministic) fits the tier-1 coefficient table offline: residuals on the
 resolved `^Warhead_*` Versus prior indexed by delivery tag x armour class (never per-unit ids), static-defence fire states, one
