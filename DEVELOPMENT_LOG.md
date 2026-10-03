@@ -1,3 +1,27 @@
+# 2026-10-03 — merge receipt: canonical TC-2e (`02a2a73e0`) + DAWN telemetry/gate preserves
+
+*Devin (dawn), main checkout, merge commit `56aba20bd`.*
+
+**Resolution:** origin's canonical TC-2e won every overlapping file — plural
+`TeamBroadcast.CaptureClaims` over the `IBotCaptureClaimSource` seam (Engineer + GarrisonContest
+providers), `Player.InternalName` participant identity (closes review §4.4), `TeamBlackboard.IsLive`
++ `BroadcastMaxAgeTicks=500`, active stand-down on lost arbitration (lease release, walker stop,
+superseded engineer mission end), `BF_team_capture_claims` switch. The local first pass's
+`IBotCaptureClaimProvider` file is deleted; `AL_tc2e_capture_claims` is gone with it.
+
+**Preserved local:** lease-aware order-gate `crossed` suppression; `secure:<player>` cardless
+Rush-wave records; `defend_answer` moved to commit-at-confirmed-rally with one open attempt per
+requester+rally id (the synthesis-time write would spam Committed on a pressured ally); report
+counts `COMMITTED` only; the `ValidBroadcast` test ported onto `IsLive`/`BroadcastMaxAgeTicks`.
+
+**Verified on the merged tree:** build 0W/0E; tests 734/734 (+4 `TeamCaptureClaimsTest`);
+`run_all.sh` PASS incl. fog/frankenstein/direct-mutation/personalities; arch freshness gate
+flagged the seam delta → `AI_MODULE_MAP.md`/`AI_ARCH_COVERAGE.md` regenerated, `IBotCaptureClaimSource`
+row reads `ok` (EngineerBotModule + GarrisonContestBotModule → MasterAiBotModule).
+
+**Next:** armed-match telemetry (BF_team_capture_claims + TC-2/3 groups) — contested `capture:` ids,
+`defend_answer` commits, `secure:` shared-push windows.
+
 # 2026-10-02 — order-gate fix: a released lease is a hand-off, not a cross (EMBER's seam finding)
 
 *Devin (dawn), worktree `dawn-tc2e`, branch `devin/dawn/team-liveness-rescue` — the `crossed` WARN decode EMBER flagged to the squad-layer owner.*
