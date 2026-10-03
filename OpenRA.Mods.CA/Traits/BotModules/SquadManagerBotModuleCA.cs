@@ -1748,14 +1748,26 @@ namespace OpenRA.Mods.CA.Traits
 
 		// INC-N combat veto (AI_ARCHITECTURE §12.31): the one provider consulted where a squad commits an
 		// attack or a retreat. No enabled provider = every consult answers false, today's behaviour bit-identical.
+		/// <summary>Enabled combat-veto providers only; a disabled ConditionalTrait must stay completely inert.</summary>
+		public static IEnumerable<IBotCombatVeto> EnabledCombatVetoes(IBotCombatVeto[] vetoes)
+		{
+			if (vetoes == null)
+				yield break;
+
+			foreach (var veto in vetoes)
+				if (veto.IsTraitEnabled())
+					yield return veto;
+		}
+
 		internal bool VetoEngage(SquadCA squad, IReadOnlyList<Actor> enemies, bool alreadyCommitted, out string reason)
 		{
 			reason = null;
-			if (combatVetoes == null)
+			var enabledVetoes = EnabledCombatVetoes(combatVetoes).ToArray();
+			if (enabledVetoes.Length == 0)
 				return false;
 
 			CanaryObservedAll(enemies, "combat-veto-engage");
-			foreach (var veto in combatVetoes)
+			foreach (var veto in enabledVetoes)
 				if (veto.VetoEngage(squad, enemies, alreadyCommitted, out reason))
 					return true;
 
@@ -1765,10 +1777,11 @@ namespace OpenRA.Mods.CA.Traits
 		internal bool VetoLaunch(IReadOnlyList<Actor> force, CPos targetCell, out string reason)
 		{
 			reason = null;
-			if (combatVetoes == null)
+			var enabledVetoes = EnabledCombatVetoes(combatVetoes).ToArray();
+			if (enabledVetoes.Length == 0)
 				return false;
 
-			foreach (var veto in combatVetoes)
+			foreach (var veto in enabledVetoes)
 				if (veto.VetoLaunch(force, targetCell, out reason))
 					return true;
 
@@ -1778,11 +1791,12 @@ namespace OpenRA.Mods.CA.Traits
 		internal bool VetoFlee(SquadCA squad, IReadOnlyList<Actor> pursuers, out string reason)
 		{
 			reason = null;
-			if (combatVetoes == null)
+			var enabledVetoes = EnabledCombatVetoes(combatVetoes).ToArray();
+			if (enabledVetoes.Length == 0)
 				return false;
 
 			CanaryObservedAll(pursuers, "combat-veto-flee");
-			foreach (var veto in combatVetoes)
+			foreach (var veto in enabledVetoes)
 				if (veto.VetoFlee(squad, pursuers, out reason))
 					return true;
 
