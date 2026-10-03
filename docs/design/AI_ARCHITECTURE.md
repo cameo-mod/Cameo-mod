@@ -2657,7 +2657,9 @@ enumerates enemy actors.
   bit-identical. Switch group `R_tc2_sync_attacks`.
   Every Rush launch that commits without a taken provider card emits a
   `secure:<enemyPlayer>` attempt record (Committed at launch, Superseded by the next
-  wave, Failed if the wave dies) — the massed assault predates the mission grammar,
+  wave, Released when the squad stands down intact, Success/`done` the tick the named
+  enemy's WinState decides, Failed only if the wave dies) — the massed assault
+  predates the mission grammar,
   and without the record `team_coordination_report`'s `shared_push` sees only the
   rare economy-raid path. The record names the enemy the wave steers toward
   (the card it couldn't afford, else `EffectiveMainTarget`); classic has no mission

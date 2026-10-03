@@ -17635,3 +17635,14 @@ intact, and match_end catches whatever survives — but a decided enemy no longe
 leaves the attempt open for thousands of ticks.
 
 Generated with [Devin](https://devin.ai)
+
+2026-10-03 — ai(obs): contested_claims now means a race — cross-player commits inside `window`
+
+ab5 post-BF-2 read: contested 6+5->4+3 raw, but two of the "contested" ids were the
+same capturable retried 22k+ ticks apart — sequential work, not a race. The metric
+now requires two teammates' COMMITTED records within `window` ticks (1500 default);
+every id that still reports shows the arbitration pattern (commit pair <600t apart,
+loser RELEASED `superseded` inside ~100-180t). Sequential retries no longer read as
+arbitration failures.
+
+Generated with [Devin](https://devin.ai)

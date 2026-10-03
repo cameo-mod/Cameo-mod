@@ -16,9 +16,12 @@ and reports, per team and per match, the §12.18 acceptance metrics:
                       taken provider cards; secure:<player> is emitted when a
                       cardless Rush wave commits against the named enemy
                       (mission target or main-target steering).
-    contested_claims  same `mission_id` (same capturable actor id) attempted
-                      by >=2 teammates — two bots racing one expansion;
-                      TC-2c should drive this to ~0 when armed.
+    contested_claims  same exclusive-claim `mission_id` COMMITTED by >=2
+                      teammates within `window` ticks — two bots racing one
+                      capture in the same broadcast interval. Arbitration
+                      resolves these via superseded stand-downs; retries far
+                      apart in time are sequential work, not a race, and do
+                      not count.
     defend_answers    defend_kind mission attempts (COMMITTED only). Three
                       sources: `defend:self:rN` = own-base Defend BotMission
                       provider cards; `defend_answer:<requesterKey>:<cell>` =
@@ -128,12 +131,31 @@ def analyse(missions, team):
     CLAIM_KINDS = {"capture", "garrison_contest"}
     by_mid = collections.defaultdict(set)
     kind_of = {}
+    claim_commits = collections.defaultdict(lambda: collections.defaultdict(list))
     for r in attempts:
         kind, mid, _ = mission_of(r)
         by_mid[mid].add(r.get("player"))
         kind_of[mid] = kind
+        if kind in CLAIM_KINDS and r.get("state") == "COMMITTED":
+            claim_commits[mid][r.get("player")].append(r.get("tick") or 0)
+
     shared = {mid: ps for mid, ps in by_mid.items() if len(ps) > 1}
-    contested = {m: p for m, p in shared.items() if kind_of[m] in CLAIM_KINDS}
+    window = analyse.window
+
+    # Contested = a RACE, not just a shared id: two teammates must COMMITTED the
+    # same claim within `window` ticks of each other. Retries minutes apart are
+    # sequential work, not arbitration fodder, and must not count.
+    def racing(commits_by_player):
+        owners = list(commits_by_player)
+        for i, p1 in enumerate(owners):
+            for p2 in owners[i + 1:]:
+                for t1 in commits_by_player[p1]:
+                    if any(abs(t1 - t2) <= window for t2 in commits_by_player[p2]):
+                        return True
+        return False
+
+    contested = {m: p for m, p in shared.items()
+                 if kind_of[m] in CLAIM_KINDS and racing(claim_commits.get(m, {}))}
     shared_objectives = {m: p for m, p in shared.items() if kind_of[m] in ATTACK_KINDS}
 
     # Shared pushes: same enemy target_player attacked by >=2 teammates
@@ -141,7 +163,6 @@ def analyse(missions, team):
     # later window must not extend the push's apparent duration.
     shared_push_windows = 0
     push_events = collections.defaultdict(set)  # (target, bucket) -> players
-    window = analyse.window
     for r in attempts:
         kind, _, tgt = mission_of(r)
         if kind in ATTACK_KINDS and tgt and tgt not in team and r.get("state") == "COMMITTED":
