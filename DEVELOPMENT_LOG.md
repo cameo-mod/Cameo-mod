@@ -77,6 +77,32 @@ Spec checkpointed before coding (WORKFLOW 1.7):*
   decayed Welford, writes learned file.
 - `tools/ai/increment_switches.yaml` — `AO_tier3_bandits`.
 - `OpenRA.Mods.Cameo.Test/PlanBanditMathTest.cs` — pooling/floor/determinism/parse/decay tests.
+# 2026-10-03 — armed smokes: AM_army_staging on master + EL-0 (#789) live validation
+
+*Devin (nova) — two frozen worktrees, sequential batches (one game driver at a time):*
+
+**Batch A — master `67fabccfe` + `AM_army_staging` armed** (`C:/tmp/amsmoke`,
+2×1v1 hard vs classic, td_gdi mirror, 3-min cap): 2/2 clean, 0 exceptions, hard 2-0.
+`ArmyStagingBotModule=3.2ms/300t` in the module timing rollup — the planner is live
+under the armed condition. Round-trip: all layers PASS incl. `engagements PASS —
+no cameo-ai-engagements.jsonl (pre-EL-0 build)` — the graceful-skip path verified
+live. Staging review of `bc613c509` posted on #782: spec-faithful (planner zero
+orders, all four consumers bit-identical without provider, fog reads all sanctioned);
+flagged no explicit CentreMode hysteresis band + five minor items.
+
+**Batch B — #789 `75831d996` + `AM_army_staging` armed** (`C:/tmp/elsmoke`,
+same matrix): 2/2 clean, 0 exceptions, hard 2-0 (one attempt died ~95s with no
+exception — phantom external kill during a concurrent build; retry ran 315s clean).
+EL-0 records live: **186 engagements, 100% scored, 236 posture samples**, mirrored
+±pairs per side, close_reason on all. Round-trip engagements layer: PASS live for
+the first time. Metrics populate: `response.army_dist_at_start_cells` n=26 mean
+13.2, `response_ticks` mean 101, `army_to_staging_cells` n=125 mean 17.7.
+**Schema note: `army_dist_at_start_cells` is nested under `response`, not
+top-level.** Receipt posted on #789.
+
+**Flagged items closed:** `~$warhead_matrix.xlsx` untracked (`e75575a6b`),
+`FirepowerMultiplier` 25→50 by maintainer (`612014a74`), Zeruel87 push/PR forbidden
+(`a382470bd`; upstream pushurl already FORBIDDEN here, pre-push hook verified present).
 
 # 2026-10-03 — fransotto post-merge review re-verified: all 8 findings closed or documented
 
