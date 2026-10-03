@@ -17921,6 +17921,19 @@ Generated with [Devin](https://devin.ai)
 * **F1 ruling landed (`6bce16baf` orders):** (a) one schema — `EngagementPriors`/`Factor@` parse path retired;
   (b) staleness is per-cell `PriorPct@` twin (LedgerHash = offline provenance, game can't mount ledgers);
   (c) NOVA ports the consumer onto landed tier 2 with a `WarheadTag@` bridge. Phase-B fitter work moved to
-  `devin/tier1-priorpct` @ `521a843ad` (PriorPct@ per cell; DefenceState@ exempt — pooled across armours; pytest
-  23/23). This branch scoped back: `Factor@` emission, `tag_class`, and superseded spec text removed per F1(a);
-  `jsonable` lives on the priorpct branch. Remaining delta here = this log only.
+  `devin/tier1-priorpct` @ `a21f90369` (PriorPct@ per cell; DefenceState@ exempt — pooled across armours; pytest
+  23/23; rebased onto `2d3bcfa0c`). This branch scoped back: `Factor@` emission, `tag_class`, and superseded
+  spec text removed per F1(a); `jsonable` lives on the priorpct branch. Remaining delta here = this log only.
+* **NOVA port review (`nova/t1_tag_axis` @ `028afeb35`) — verified sound:** `BotWeaponProfile.Delivery` resolves
+  `Warhead@<tag>` via a positional map over `MiniYaml.Load(Manifest.Weapons)` — engine `MiniYaml.Merge`/
+  `ResolveInherits` handles the 5,300 `Inherits` + 1,414 `-Warhead@` removals in pack yaml, so the map sees the
+  same resolved children `WeaponInfo.LoadWarheads` consumes. `main` = max-damage `DamageWarhead` (W24, same as
+  the extractor); armour axis is `ArmorInfo.Type` verbatim TitleCase = ledger `armor.v`; `DeliveryArmour@` keys
+  parse verbatim (`Tag|Armour`). `PriorPct@` values are directly comparable to `main.Versus` — no casing or
+  unit mismatch for the F1(b) consumer half.
+* **Flags for NOVA/lead:** (1) `PriorPct@` consumed nowhere — per-cell staleness not yet wired (their F1(c)
+  remainder). (2) `static warheadTags` survives across in-process matches — stale if faction packs differ
+  between games in one process (batch harness is per-process, so minor). (3) `nova/tier1_emit_bridge`
+  (`6c6855abe`) must not merge: it emits the F1(a)-retired `Factor@` class-axis inside MY fitter file, and
+  their `Parse` prefers the `EngagementPriors` root — coarse ~2-class cells would shadow the fine
+  `DeliveryArmour@` cells entirely.
