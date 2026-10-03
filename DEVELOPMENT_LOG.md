@@ -17958,3 +17958,12 @@ Generated with [Devin](https://devin.ai)
   family fallback (`tag.rsplit('_',1)[0]`); weapon children with inline Versus overrides are never consulted —
   template-canonical by construction, matching `PriorPct` semantics. O(1) per call. Remaining minor flag:
   `static warheadYaml` still survives across in-process matches on different faction packs.
+* **`nova/veto_scorecard@fde145e24` reviewed — schema-compatible.** Second consumer of the EL-0 engagement
+  stream: filters `record=="engagement"` (their second commit fixes the posture-row contamination —
+  unfiltered posture rows inflated taken_n ~2.2x and pinned personality to "" via setdefault); reads
+  `score.trade_milli`, `bot_type`, `personality`, `game_uid`, `player`, `skirmish` — all verbatim emit
+  fields. Survivorship counterfactual (DESIGN §19.13 note): vetoed_trade vs taken_trade per bot×personality.
+* **`dawn/tier3-bandits@18556ada5` reviewed — no fitter impact.** F2-adjacent fix in the bandit lane:
+  early resolves (inside the Player ctor, pre-SetPlayers) fall back to `PlayerReference.Enemies` →
+  `MapPlayers` — map-declared data, fog-honest, "Random" verbatim → generic pool (deterministic). Also
+  merges NOVA's `GetVariableObservers` fix (`5520a1ea7`, the dead-module CS0114 bug).
