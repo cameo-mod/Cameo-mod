@@ -8,7 +8,10 @@ Reads engagement/1 records (Logs/cameo-ai-engagements.jsonl) plus the balance le
 1. Delivery x armour strength residuals: the resolved ^Warhead_* Versus table is the pipeline
    prior; the fit measures how much better or worse each delivery family actually trades against
    each armour class than the Lanchester predictor expected. Cells = damage_warheads[].tag
-   (e.g. Bullet_Medium) x resolved Armor.Type - never per-unit ids.
+   (e.g. Bullet_Medium) x resolved Armor.Type - never per-unit ids. The same residual is also
+   pooled per warhead CLASS x armour (Factor@<class>|<a>) + a flat StaticDefenceFactorPermille,
+   the coarser key space the delta consumer's FactorPermille actually looks up - a fallback so
+   the file applies under either consumer resolution (TIER1_FITTER_SPEC section 6 note).
 2. Static-defence state strengths: the same residual pooled over cells where the attacker was a
    static defence (defence fire effectiveness), plus a global attacking-into-defences correction.
 3. One attrition exponent on the predicted ratio (square law = 1000).
@@ -125,16 +128,19 @@ def load_profiles(repo: pathlib.Path) -> tuple[dict, dict, str]:
     return profiles, {"collisions": collisions, "ledger_files": len(ledger_files)}, digest.hexdigest()
 
 
-def versus_priors(repo: pathlib.Path, tags: list[str]) -> tuple[dict[str, dict[str, int]], list[str]]:
+def versus_priors(repo: pathlib.Path, tags: list[str]) -> tuple[dict[str, dict[str, int]], list[str], dict[str, str]]:
     """delivery tag -> {armor -> percent}, resolved through miniyaml.Ruleset (rule 8e), plus the
-    sorted tags whose table came out EMPTY. Empty-prior tags are excluded from the cell fit
-    entirely - fitting them against the default-100 prior would fake residuals (lead review).
+    sorted tags whose table came out EMPTY and each tag's warhead class (the `Warhead@<tag>:
+    <Class>` node value, lowercased - the key space the delta-branch consumer looks up).
+    Empty-prior tags are excluded from the cell fit entirely - fitting them against the
+    default-100 prior would fake residuals (lead review).
     Tags already carry the level (Bullet_Medium); unresolved tags get the family template."""
     from miniyaml import Ruleset
     from percentage_damage import versus_table
 
     rules = Ruleset(repo)
     priors: dict[str, dict[str, int]] = {}
+    tag_class: dict[str, str] = {}
     excluded: list[str] = []
     for tag in tags:
         table: dict[str, int] = {}
@@ -143,14 +149,19 @@ def versus_priors(repo: pathlib.Path, tags: list[str]) -> tuple[dict[str, dict[s
             if node is None:
                 continue
             wh = node.child(f"Warhead@{name[len('^Warhead_'):]}")
-            table = versus_table(wh) if wh is not None else {}
+            if wh is None:
+                continue
+            table = versus_table(wh)
+            cls = (wh.value or "").strip().lower()
+            if cls:
+                tag_class.setdefault(tag, cls)
             if table:
                 break
         if table:
             priors[tag] = table
         else:
             excluded.append(tag)
-    return priors, sorted(excluded)
+    return priors, sorted(excluded), tag_class
 
 
 # ── the fit ────────────────────────────────────────────────────────────────────────────────
@@ -230,7 +241,7 @@ def record_facts(r: dict, profiles: dict, matches_factions: dict) -> dict | None
     }
 
 
-def fit(data: dict, profiles: dict, priors: dict) -> dict:
+def fit(data: dict, profiles: dict, priors: dict, tag_class: dict[str, str] | None = None) -> dict:
     matches_factions: dict[str, list[str]] = {}
     for m in data.get("matches", []):
         pl = m.get("player") or {}
@@ -259,8 +270,11 @@ def fit(data: dict, profiles: dict, priors: dict) -> dict:
 
     obs: dict[tuple[str, str], float] = {}
     exp: dict[tuple[str, str], float] = {}
+    obs_c: dict[tuple[str, str], float] = {}  # same attribution pooled at warhead-class grain
+    exp_c: dict[tuple[str, str], float] = {}
     ds_obs: dict[str, float] = {}
     ds_exp: dict[str, float] = {}
+    sdf_obs = sdf_exp = 0.0  # flat static-defence residual (consumer's StaticDefenceFactorPermille)
     into_obs = into_exp = 0.0
     ratios: list[tuple[float, float]] = []
     attack_ticks: dict[str, list[int]] = {}
@@ -278,6 +292,7 @@ def fit(data: dict, profiles: dict, priors: dict) -> dict:
                 expected_a = min(v_value, cap) * (1000 - min(1000, max(0, surviving_pm))) / 1000.0 * share
                 # delivery -> [mobile power, defence power] against this armour class
                 power: dict[str, list[float]] = {}
+                class_power: dict[str, list[float]] = {}
                 for comp_map, is_def in ((attacker_units, False), (attacker_defs, True)):
                     for t, n in comp_map.items():
                         p = profiles.get(t.lower())
@@ -289,6 +304,10 @@ def fit(data: dict, profiles: dict, priors: dict) -> dict:
                             w = n * dpt * priors.get(tag, {}).get(a, 100) / 100.0
                             e = power.setdefault(tag, [0.0, 0.0])
                             e[1 if is_def else 0] += w
+                            cls = (tag_class or {}).get(tag)
+                            if cls:
+                                ce = class_power.setdefault(cls, [0.0, 0.0])
+                                ce[1 if is_def else 0] += w
                 total_p = sum(sum(pw) for pw in power.values())
                 if total_p <= 0:
                     continue
@@ -300,6 +319,13 @@ def fit(data: dict, profiles: dict, priors: dict) -> dict:
                     if def_w > 0:
                         ds_obs[d] = ds_obs.get(d, 0.0) + killed_a * def_w / total_p
                         ds_exp[d] = ds_exp.get(d, 0.0) + expected_a * def_w / total_p
+                        sdf_obs += killed_a * def_w / total_p
+                        sdf_exp += expected_a * def_w / total_p
+                for cls, (unit_w, def_w) in class_power.items():
+                    weight = (unit_w + def_w) / total_p
+                    key = (cls, a)
+                    obs_c[key] = obs_c.get(key, 0.0) + killed_a * weight
+                    exp_c[key] = exp_c.get(key, 0.0) + expected_a * weight
 
         if f["into_defences"]:  # the toll our fire paid while their defences were live
             into_obs += min(f["killed_total"], cap)
@@ -324,8 +350,11 @@ def fit(data: dict, profiles: dict, priors: dict) -> dict:
 
     cells = {k: max(MIN_MILLI, min(MAX_MILLI, round(1000 * shrunk(obs.get(k, 0.0), exp.get(k, 0.0)))))
              for k in set(obs) | set(exp)}
+    coarse_cells = {k: max(MIN_MILLI, min(MAX_MILLI, round(1000 * shrunk(obs_c.get(k, 0.0), exp_c.get(k, 0.0)))))
+                    for k in set(obs_c) | set(exp_c)}
     defence_state = {d: max(MIN_MILLI, min(MAX_MILLI, round(1000 * shrunk(ds_obs.get(d, 0.0), ds_exp.get(d, 0.0)))))
                      for d in set(ds_obs) | set(ds_exp)}
+    sdf_milli = max(MIN_MILLI, min(MAX_MILLI, round(1000 * shrunk(sdf_obs, sdf_exp))))
     into_defences_milli = max(MIN_MILLI, min(MAX_MILLI, round(1000 * shrunk(into_obs, into_exp))))
 
     # attrition exponent: corrected_ratio = ratio ** alpha; grid search the error on surviving
@@ -367,7 +396,9 @@ def fit(data: dict, profiles: dict, priors: dict) -> dict:
 
     return {
         "cells": cells, "evidence": {k: (obs.get(k, 0.0), exp.get(k, 0.0)) for k in cells},
-        "defence_state": defence_state, "into_defences_milli": into_defences_milli,
+        "coarse_cells": coarse_cells,
+        "defence_state": defence_state, "static_defence_milli": sdf_milli,
+        "into_defences_milli": into_defences_milli,
         "exponent_milli": exponent_milli,
         "attack_timing": attack_timing, "response": response_q, "suicide": suicide_q,
         "fitted": len(facts), "record_cap": cap, "skipped": skipped,
@@ -383,7 +414,8 @@ def report(result: dict) -> str:
         out.append(f"excluded delivery tags (empty Versus prior, not fitted): {', '.join(result['excluded_tags'])}")
     if meta.get("collisions"):
         out.append(f"profile-name collisions (first ledger wins): {', '.join(meta['collisions'])}")
-    out.append(f"attrition exponent: {result['exponent_milli']} milli | into-defences: {result['into_defences_milli']} milli")
+    out.append(f"attrition exponent: {result['exponent_milli']} milli | into-defences: {result['into_defences_milli']} milli"
+               f" | static-defence: {result['static_defence_milli']} milli | coarse cells: {len(result['coarse_cells'])}")
     moved = [(k, v, result["evidence"][k]) for k, v in result["cells"].items() if v != 1000]
     moved.sort(key=lambda x: -abs(x[1] - 1000))
     out.append(f"\n## delivery x armour: {len(result['cells'])} cells, {len(moved)} moved")
@@ -404,6 +436,15 @@ def report(result: dict) -> str:
     return "\n".join(out)
 
 
+def jsonable(result: dict) -> dict:
+    """result with tuple-keyed maps flattened to yaml-style string keys for --json output."""
+    out = dict(result)
+    for k in ("cells", "evidence", "coarse_cells"):
+        out[k] = {"|".join(map(str, key)): v for key, v in result[k].items()}
+    out["suicide"] = {"__vs__".join(map(str, key)): v for key, v in result["suicide"].items()}
+    return out
+
+
 def to_yaml(result: dict, ledger_hash: str) -> str:
     lines = ["# GENERATED by tools/ai/fit_engagement_priors.py - do not edit by hand; regenerate and review.",
              "# Tier-1 offline priors (TIER1_FITTER_SPEC, DESIGN 19.13/19.2): read at match start, frozen.",
@@ -413,9 +454,15 @@ def to_yaml(result: dict, ledger_hash: str) -> str:
     lines += ["BotEngagementPriors:", "\tSchema: 1",
              f"\tLedgerHash: {ledger_hash}", f"\tEngagements: {result['fitted']}",
              f"\tAttritionExponentMilli: {result['exponent_milli']}",
-             f"\tIntoDefencesMilli: {result['into_defences_milli']}"]
+             f"\tIntoDefencesMilli: {result['into_defences_milli']}",
+             f"\tStaticDefenceFactorPermille: {result['static_defence_milli']}"]
     for (d, a), milli in sorted(result["cells"].items()):
         lines.append(f"\tDeliveryArmour@{d}__x__{a}: {milli}")
+    # consumer-fallback cells at the warhead-CLASS grain (the delta consumer's FactorPermille
+    # lookup keys by class name - e.g. areadamage - not by ^Warhead_* family tag): the same
+    # residual pooled per class x armour so a class-keyed reader still gets a fitted prior.
+    for (cls, a), milli in sorted(result["coarse_cells"].items()):
+        lines.append(f"\tFactor@{cls}|{a}: {milli}")
     for d, milli in sorted(result["defence_state"].items()):
         lines.append(f"\tDefenceState@{d}: {milli}")
     for f, q in result["attack_timing"].items():
@@ -438,12 +485,12 @@ def main() -> int:
 
     profiles, meta, ledger_hash = load_profiles(args.repo)
     tags = sorted({tag for p in profiles.values() for tag, _ in p["weapons"]})
-    priors, excluded = versus_priors(args.repo, tags)
-    result = fit(c.load(args.dirs), profiles, priors)
+    priors, excluded, tag_class = versus_priors(args.repo, tags)
+    result = fit(c.load(args.dirs), profiles, priors, tag_class)
     result["meta"] = meta
     result["excluded_tags"] = excluded
     if args.json:
-        print(json.dumps(result, indent=2, default=str))
+        print(json.dumps(jsonable(result), indent=2, default=str))
     else:
         print(report(result))
     if args.write:

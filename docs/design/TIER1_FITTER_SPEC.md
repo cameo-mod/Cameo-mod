@@ -183,6 +183,11 @@ BotEngagementPriors:
         AttackTiming@<enemy_faction>: p10_tick,p50_tick,p90_tick
         Response@<own_faction>: p50_ticks,p90_ticks,army_dist_cells
         SuicideIndex@<mine>__vs__<theirs>: <milli>
+        # consumer-fallback cells, same residual pooled per warhead CLASS x armour
+        # (the delta consumer's FactorPermille keys by class name, not the family tag):
+        Factor@<warhead_class>|<armour>: <milli>
+        ...
+        StaticDefenceFactorPermille: <milli>   # flat pooled defence residual (their fallback)
 ```
 
 Versioning against the balance ledger: `LedgerHash` plus, per cell, the prior the cell was fitted
@@ -206,11 +211,15 @@ at match start (frozen, §19.2); bots run host-only so there is no sync surface 
   prefer the delivery×armour table when the new file exists — map `BotUnitProfile` → its main
   warhead family × `target.Armor` → `C[d][a]`; fall back to `TradePercent`, else 1000.
   > 2026-10-03 integration note: NOVA's newer `devin/nova/combat-veto-delta` branch folds the
-  > priors load into `CombatVetoBotModule` itself (no provider/interface; gated by `AN_combat_veto`)
-  > and parses a different schema — `EngagementPriors:` root, `Factor@<delivery>|<armour>` with
-  > `*|<armour>` wildcards, `StaticDefenceFactorPermille`, `StatFingerprint` (FNV-1a-64 over
-  > runtime-resolved stats). This spec's `BotEngagementPriors`/`DeliveryArmour@`/`LedgerHash`
-  > schema needs a lead ruling on which side adapts before phase B.
+  > priors load into `CombatVetoBotModule` itself (no provider/interface; gated by `AN_combat_veto`).
+  > Their `d4570b54f` adapter already parses this spec's schema (`BotEngagementPriors:`,
+  > `DeliveryArmour@`, `DefenceState@`, `LedgerHash`, `IntoDefencesMilli`). One open item: their
+  > `FactorPermille` lookup keys by warhead CLASS name (`weapon.Delivery`, e.g. `areadamage`) —
+  > the engine drops `Warhead@<tag>` keys at `WeaponInfo.LoadWarheads`, and only ~2 classes cover
+  > the 139-tag fit, so a class-keyed lookup cannot reach `DeliveryArmour@` cells. The fitter
+  > therefore emits pooled `Factor@<class>|<armour>` + `StaticDefenceFactorPermille` fallback
+  > cells (same residual, coarser grain) so the file is useful under either outcome; the fine
+  > cells stay primary pending their `Delivery` remap (lead ruling pending).
 - **Later tiers**: the tier-5 engagement network's inputs include "fog-honest ratios of tier-1
   strength split by range band" (research doc) — same provider seam.
 - `BotLearnedPriors` (production weighting) keeps `arsenal_priors.yaml` — unchanged.

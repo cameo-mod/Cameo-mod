@@ -231,6 +231,47 @@ def test_empty_versus_prior_tags_are_excluded():
     assert all(k[0] != "CannonAP_Medium" for k in res["cells"])
 
 
+def test_coarse_cells_pool_at_warhead_class_grain():
+    # consumer-fallback cells: the delta consumer's FactorPermille looks up by warhead CLASS
+    # (weapon.Delivery = class name, e.g. areadamage), so tags sharing a class must pool.
+    profiles = dict(PROFILES)
+    profiles["tank2"] = {"cost": 800, "hp": 400, "armor": "Heavy", "weapons": [("CannonHE_Heavy", 40.0)]}
+    priors = dict(PRIORS, CannonHE_Heavy={"None": 100, "Heavy": 100, "Wood": 100})
+    tag_class = {t: "areadamage" for t in priors}
+    tag_class["Bullet_Light"] = "spreaddamage"
+    r = _rec()
+    r["seen"]["start"]["composition"]["own_units"] = {"tank": 1, "tank2": 1}
+    res = fp.fit({"engagements": [r] * 12, "matches": []}, profiles, priors, tag_class)
+    assert ("areadamage", "None") in res["coarse_cells"]
+    assert all(k[0] != "CannonAP_Medium" for k in res["coarse_cells"])  # class grain only
+    y = fp.to_yaml(res, "deadbeef")
+    assert "\n\tFactor@areadamage|None:" in y
+    # no tag_class map -> no coarse keys anywhere
+    res2 = _fit([r])
+    assert res2["coarse_cells"] == {}
+    assert "Factor@" not in fp.to_yaml(res2, "deadbeef")
+
+
+def test_flat_static_defence_permille_emits():
+    r = _rec()
+    r["seen"]["start"]["composition"]["own_defences"] = {"gunpit": 1}
+    r["outcome"]["enemy_killed_value"] = 200  # defence fire earned double the expectation
+    res = _fit([r] * 15)
+    assert res["static_defence_milli"] > 1000
+    assert "StaticDefenceFactorPermille:" in fp.to_yaml(res, "deadbeef")
+
+
+def test_jsonable_flattens_tuple_keys():
+    import json
+    res = _fit([_rec()])
+    res["coarse_cells"] = {("areadamage", "None"): 1100}
+    res["suicide"] = {("td_gdi", "td_nod"): 700}
+    j = fp.jsonable(res)
+    json.dumps(j)  # must not raise on tuple keys
+    assert j["coarse_cells"] == {"areadamage|None": 1100}
+    assert j["suicide"] == {"td_gdi__vs__td_nod": 700}
+
+
 def test_profile_collisions_are_named():
     import json
     import tempfile
