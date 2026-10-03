@@ -1,3 +1,25 @@
+# 2026-10-03 — feat(ai): NOVA tag-axis delivery + EMBER native priors consumption (PR #795)
+
+*Devin (nova), worktree `nova-clean`, branch `nova/t1_tag_axis` stacked on `nova/t2_combat_veto` —
+fleet ruling request `REPLY_2026-10-03_nova_tier1_contract_review.md`.*
+
+EMBER's tier-1 fitter (#793) emits `DeliveryArmour@<tag>__x__<armour>` cells keyed on the balance
+ledger's `damage_warheads[].tag` — the `Warhead@<tag>` yaml suffix — while the veto keyed priors on
+the warhead C# class name. Probing showed the class axis collapses ~20 delivery families into ~5
+keys (everything `AreaDamage`), so the bridge direction flipped: **the runtime adopts the tag axis**
+instead of flattening the fitter's grid.
+
+- `BotWeaponProfile.Delivery` resolves `main` back to its `Warhead@<tag>` child in the resolved
+  weapon yaml (`MiniYaml.Load` over `manifest.Weapons`, same resolved children `LoadWarheads` sees,
+  positional index validated against the node-value class name; class-name fallback otherwise).
+- `EngagementPriors.Parse` accepts `BotEngagementPriors` root + `DeliveryArmour@` keys verbatim —
+  the fitter's file is consumable unmodified once it carries `StatFingerprint` (EMBER-side TODO).
+- Emit-side fallback kept as PR #796 (`nova/tier1_emit_bridge` on `devin/tier1-fitter`): derived
+  `EngagementPriors` block via tag→class map — works, coarser; drop if #795 lands.
+- Verified: 817/817 (+1 `PriorsParseEmberNativeKeys`), arch freshness + fog + direct-mutation PASS,
+  `AI_MODULE_MAP.md` regenerated, boot gate PASS (138→138; foreign `veto790` invalid-mod exception
+  during the window noted, not this binary).
+
 # 2026-10-03 — feat(ai): NOVA tier 2, the combat-prediction veto (AN_combat_veto, default off)
 
 *Devin (nova), worktree `nova-clean`, branch `nova/t2_combat_veto` @ master `dbd7b3b83` — ORDERS
