@@ -74,7 +74,9 @@ namespace OpenRA.Mods.CA.Traits
 		public readonly BitSet<TargetableType> Invalid;
 		public readonly IReadOnlyDictionary<string, int> Versus;
 
-		/// <summary>Coarse delivery class of the main warhead (warhead class name, lowercased, minus the "Warhead" suffix)
+		/// <summary>Delivery key of the main warhead: its yaml <c>Warhead@&lt;tag&gt;</c> suffix when the weapon yaml
+		/// resolves (the balance-pipeline delivery taxonomy the tier-1 fitter fits), else the warhead class name
+		/// lowercased minus the "Warhead" suffix.
 		/// — the stat-normalized key tier-1's delivery×armour priors are fitted against (AI_ARCHITECTURE 12.31).</summary>
 		public readonly string Delivery;
 
@@ -133,12 +135,9 @@ namespace OpenRA.Mods.CA.Traits
 					continue;
 
 				var cycle = BotWeaponProfile.CycleTicks(weapon.ReloadDelay, weapon.Burst, weapon.BurstDelays);
-				var delivery = main.GetType().Name;
-				if (delivery.EndsWith("Warhead", StringComparison.Ordinal))
-					delivery = delivery.Substring(0, delivery.Length - "Warhead".Length);
 
 				weapons.Add(new BotWeaponProfile((double)main.Damage * Math.Max(1, weapon.Burst) / cycle, weapon.Range,
-					weapon.ValidTargets, weapon.InvalidTargets, main.Versus, delivery.ToLowerInvariant()));
+					weapon.ValidTargets, weapon.InvalidTargets, main.Versus, DeliveryKey(armament.Weapon, weapon, main)));
 			}
 
 			var speed = actor.TraitInfoOrDefault<MobileInfo>()?.Speed ?? actor.TraitInfoOrDefault<AircraftInfo>()?.Speed ?? 0;
@@ -151,6 +150,61 @@ namespace OpenRA.Mods.CA.Traits
 				actor.HasTraitInfo<BuildingInfo>(),
 				actor.GetAllTargetTypes(),
 				weapons.ToArray());
+		}
+
+		// The balance pipeline keys deliveries on the warhead's yaml Warhead@<tag> suffix, which resolved
+		// WeaponInfo objects do not retain. Re-derive it once from the raw weapon yaml: WeaponInfo.LoadWarheads
+		// fills Warheads from the same Warhead@* child list in order, so the resolved index maps back to the
+		// child and its tag. Validated against the warhead class name (the node value); unresolvable weapons
+		// fall back to the lowercased class name, a coarser but still consistent axis.
+		static Dictionary<string, (string Tag, string Class)[]> warheadTags;
+
+		static Dictionary<string, (string Tag, string Class)[]> WarheadTagMap()
+		{
+			if (warheadTags != null)
+				return warheadTags;
+
+			var map = new Dictionary<string, (string, string)[]>();
+			var modData = Game.ModData;
+			if (modData != null)
+			{
+				try
+				{
+					foreach (var node in MiniYaml.Load(modData.DefaultFileSystem, modData.Manifest.Weapons, null))
+						map[node.Key.ToLowerInvariant()] = (node.Value?.Nodes ?? [])
+							.Where(n => n.Key.StartsWith("Warhead", StringComparison.Ordinal))
+							.Select(n => (n.Key.StartsWith("Warhead@", StringComparison.Ordinal) ? n.Key.Substring(8) : null, n.Value.Value))
+							.ToArray();
+				}
+				catch
+				{
+					// No file system (unit tests): Delivery falls back to the class name below.
+				}
+			}
+
+			return warheadTags = map;
+		}
+
+		static string DeliveryKey(string weaponName, WeaponInfo weapon, DamageWarhead main)
+		{
+			var cls = main.GetType().Name;
+			if (cls.EndsWith("Warhead", StringComparison.Ordinal))
+				cls = cls.Substring(0, cls.Length - "Warhead".Length);
+
+			if (WarheadTagMap().TryGetValue(weaponName.ToLowerInvariant(), out var tags))
+			{
+				var idx = weapon.Warheads.IndexOf(main);
+				if (idx >= 0 && idx < tags.Length && tags[idx].Tag != null
+					&& string.Equals(tags[idx].Class, cls, StringComparison.OrdinalIgnoreCase))
+					return tags[idx].Tag;
+
+				// A null CreateObject earlier in the list shifts indices — fall back to matching by class.
+				foreach (var (tag, @class) in tags)
+					if (tag != null && string.Equals(@class, cls, StringComparison.OrdinalIgnoreCase))
+						return tag;
+			}
+
+			return cls.ToLowerInvariant();
 		}
 	}
 

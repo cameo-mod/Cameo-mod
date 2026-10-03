@@ -50,6 +50,19 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void PriorsParseEmberNativeKeys()
+		{
+			// EMBER's fitter emits DeliveryArmour@<tag>__x__<armour> under a BotEngagementPriors root —
+			// the same tag axis BotWeaponProfile.Delivery now carries verbatim.
+			const string EmberYaml = "BotEngagementPriors:\n\tSchema: 1\n\tDeliveryArmour@CannonHE_Medium__x__Light: 1400\n\tDeliveryArmour@Flak_Medium__x__None: 850\n";
+			var priors = Load(EmberYaml);
+			Assert.That(priors.FactorCount, Is.EqualTo(2));
+			Assert.That(priors.FactorPermille("CannonHE_Medium", "Light"), Is.EqualTo(1400));
+			Assert.That(priors.FactorPermille("Flak_Medium", "None"), Is.EqualTo(850));
+			Assert.That(priors.FactorPermille("CannonHE_Medium", "Heavy"), Is.EqualTo(EngagementPriors.Neutral));
+		}
+
+		[Test]
 		public void PriorsUnknownIsNeutral()
 		{
 			var priors = Load(Yaml);

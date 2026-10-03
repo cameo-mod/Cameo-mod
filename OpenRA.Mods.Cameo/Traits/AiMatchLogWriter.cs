@@ -349,6 +349,13 @@ namespace OpenRA.Mods.Cameo.Traits
 				AppendNumber(lines, "composition_switches", recorder?.CompositionSwitches ?? 0);
 				AppendCompositionTimeline(lines, recorder?.CompositionTimeline);
 				AppendEpisodeTimeline(lines, recorder?.EpisodeTimeline);
+
+				// Tier-1 observability: which priors state the veto loaded ("none"/"error"/"discounted"/"fitted:N").
+				// Omitted when the player arms no veto provider — classic rows stay byte-identical.
+				var priorsState = player.PlayerActor.TraitsImplementing<OpenRA.Mods.CA.Traits.IBotCombatVeto>()
+					.FirstOrDefault()?.PriorsState;
+				if (priorsState != null)
+					AppendString(lines, "priors_state", priorsState);
 				lines.Append('}');
 
 				AppendObjectPropertyStart(lines, "stats");

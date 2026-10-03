@@ -3623,14 +3623,28 @@ loaded once, written by `tools/ai/fit_engagement_coefficients.py`:
 EngagementPriors:
 	StatFingerprint: <16-hex>                       # FNV-1a-64 over the canonical stat string below
 	StaticDefenceFactorPermille: <permille>          # multiplier on every armed building's damage, 1000 = neutral
-	Factor@<delivery>|<armor>: <permille>            # delivery = warhead class minus "Warhead" lowercased (BotWeaponProfile.Delivery)
+	Factor@<delivery>|<armor>: <permille>            # delivery = the main warhead's yaml Warhead@<tag> suffix
+	                                                 # (BotWeaponProfile.Delivery) — the balance-pipeline delivery
+	                                                 # taxonomy; falls back to the warhead class name lowercased
 	Factor@*|<armor>: <permille>                     # armour-wide fallback row
 ```
+
+The parser also accepts the EMBER fitter's native spellings verbatim — a `BotEngagementPriors` root and
+`DeliveryArmour@<tag>__x__<armour>` cells — so its output file is consumable unmodified once it carries a
+`StatFingerprint` line (or the fingerprint check is waived by contract). Delivery resolution: `BotWeaponProfile`
+maps the main damage warhead back to its `Warhead@<tag>` yaml child (the resolved weapon node, positionally —
+`WeaponInfo.LoadWarheads` fills `Warheads` from the same child list in order; validated against the class name in
+the node value, class-name fallback when unresolved). That is the same key space the balance ledger writes to
+`damage_warheads[].tag`, so `Factor@MissileHE_Heavy|Light` and the fitter's
+`DeliveryArmour@MissileHE_Heavy__x__Light` denote the identical cell.
 
 Canonical stat string (the fingerprint's input — C# `CombatVetoMath.StatFingerprint` and the Python fitter produce the
 same value): for every `ActorInfo` with `AttackBaseInfo`, name-sorted: `name;cost;hp;armor|` then per weapon
 `delivery,dptMilli,range|` then `armor=vs,` sorted; FNV-1a-64 (offset 14695981039346656037, prime 1099511628211) over the
-whole string. Fingerprint mismatch or missing file -> all priors neutral (the veto still runs on the raw predictor).
+whole string. Fingerprint mismatch, an unfingerprinted file, or a missing file -> all priors neutral (the veto still
+runs on the raw predictor). The load outcome is written per player per match as `priors_state` in
+`cameo-ai-matches.jsonl` (`none` / `error` / `discounted` / `fitted:N`, field omitted when no provider is armed), so a
+stale priors file is visible in the match record rather than only in debug logs.
 Stat-normalized keys only — no unit ids — so the file survives roster churn; a rebalance changes the fingerprint and the
 file discounts itself. The response-time priors the fitter may also emit are reserved (the commit consult happens at
 contact, where response has already materialized in the seen list).

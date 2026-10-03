@@ -49,5 +49,12 @@ namespace OpenRA.Mods.CA.Traits
 		/// Return true to block the retreat — the squad stands and fights.
 		/// </summary>
 		bool TryVetoRetreat(IReadOnlyList<Actor> ownUnits, IReadOnlyList<Actor> seenEnemies, out CombatVetoVerdict verdict);
+
+		/// <summary>
+		/// Load state of the tier-1 priors file for observability — "none", "error", "discounted" (fingerprint
+		/// mismatch after a rebalance) or "fitted:N" — read once per match by the match-log writer, never a
+		/// decision input. Null when the provider has no priors concept.
+		/// </summary>
+		string PriorsState { get; }
 	}
 }
