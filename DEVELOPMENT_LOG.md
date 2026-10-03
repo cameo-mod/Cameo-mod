@@ -17452,3 +17452,28 @@ PASS. GC-1's C#-level backoff remains the prevention; this layer is the tripwire
 Flagged to SquadManager owner (unchanged from out7 review): `secure:<player>` pushes
 commit but write no terminal record — in a *won* match the push stayed open 15.8k
 ticks; every secure attempt is structurally dangling. Not my file; owner aware.
+
+## 2026-10-03 — ember lane: LC8 match_end records were unflushable — fixed in writer
+
+out9 (43 groups, BH merge): 4/4 clean, 2-2, zero exceptions — and zero `match_end`
+records, same as out7/out8. Root cause found in the dispose chain: the LC8
+`BotMissionAttemptTracker` (player trait) writes `Released(match_end)` records from
+`INotifyActorDisposing.Disposing`, which `Actor.Dispose` defers into FrameEndTasks
+drained inside `World.Dispose` — AFTER `IGameOver.GameOver` already ran the writer's
+last flush. The records landed in `AiMissionLogWriter.pending` and died there: the
+writer had no flush path after GameOver (no ticks on a disposing world).
+
+Fix (my lane, Cameo file): `AiMissionLogWriter` now implements `INotifyActorDisposing`
+and runs the same bounded `TryFlush` loop on `Disposing`. Engine order guarantees it
+sees the records — `World.Dispose` disposes newest actors first and the world actor
+LAST (`actors.Values.Reverse()` + FrameEndTask drain preserves that order), so every
+player-actor tracker has written before the world-actor writer flushes. Sink
+resolution also holds: `BotMissionLog.Write` resolves sinks off `WorldActor`'s trait
+dict, which stays intact until the world actor itself disposes. No engine change.
+
+Two adjacent findings stay with the SquadManager owner (not my file):
+`secure:<player>` pushes close only on supersede/lost_units/match_end — a winning
+wave never books `done`; and a Rush squad emptied via `DismissSquad` (intact
+stand-down) later hits `CleanSquads`'s `CloseSecurePush(Failed, LostUnits)` —
+a mislabeled terminal, since `IsValid => Units.Count > 0` makes dismissal look like
+wiped. Evidence: out7 `secure:Multi1` COMMITTED t=20930, open 15.8k ticks.
