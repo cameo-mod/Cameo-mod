@@ -78,6 +78,11 @@ Rules here change only by a maintainer ruling; record the quote and the date whe
 * **Fog honesty (DESIGN §19.5):** run `audit_fog_honesty.py` on your branch; a new site needs `--write` plus the
   reasoning in the PR; master must never go red.
 * **Never** parse yaml by hand (`miniyaml.Ruleset`), never `git stash`, never `git add -A`, sign commits as yourself.
+* **Push/PR target is `cameo-mod/Cameo-mod` (origin) — pushing or opening PRs against `Zeruel87/Cameo-mod`
+  (`upstream`) is FORBIDDEN unless the maintainer explicitly orders it** (maintainer ruling 2026-10-03; `upstream`
+  is fetch-only provenance). Enforced: `remote.upstream.pushurl` is disabled and `.git/hooks/pre-push` rejects
+  Zeruel87 URLs (bypass only with `NO_ZERUEL87_GUARD=1` on maintainer order). `gh repo set-default` is pinned to
+  `cameo-mod/Cameo-mod` so `gh pr create` can never default to the fork parent again (wrong-repo PRs #178/#179).
 
 ## 6. Upstream references — keep them ALL current, harvest everything, check each ENGINE once (standing duty)
 
