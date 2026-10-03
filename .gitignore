@@ -75,3 +75,9 @@ docs/audit/degraded/
 
 # Generated review artifact (published to claude.ai, not repo content)
 report_td_ra1.html
+
+# Working-tree artifacts that must never be committed (509db8708 swept them in once):
+# compiled mod assemblies hand-copied into the mod dir (build output lives in engine/bin),
+# and Office lockfiles (~$*.xlsx) left by an open workbook.
+/mods/cameo/*.dll
+~$*
