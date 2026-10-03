@@ -17876,3 +17876,29 @@ Generated with [Devin](https://devin.ai)
   hits with no per-unit trait; per-hit work O(1); `Ready()` gates humans out; truth scan only at start/close.
 * DAWN's `81fa5a3c5` sat only in the shared main checkout (+ a staged origin/master merge) → reviewed (inert cooldown,
   log-identity fix) → PR #788 from `claude/land_dawn_answer_tracker` (direct push to master is denied: PR + maintainer).
+
+## 2026-10-03 — Devin-Tier1: TIER1-IMPL-A landed on `devin/tier1-fitter` (draft PR #793); consumer key-space finding
+
+* Phase A complete @ `3786e8974`: EL `composition` maps + `enemy_faction`/`enemy_faction_public` (additive, truth stays
+  inside `OmniscientTruthScan`); `tools/ai/fit_engagement_priors.py` (stdlib, deterministic, capped per-record
+  contribution); `BotEngagementPriors` schema 1, `LedgerHash`-versioned; spec `TIER1_FITTER_SPEC.md` + AI_MATCH_LOG
+  fields + AI_ARCHITECTURE §12.34. No `increment_switches.yaml` entry — phase A is record-only; `AP_tier1_priors`
+  group letter reserved for phase B (DAWN took `AO` for `AO_tier3_bandits`, `eadc51549`).
+* Lead fixups @ `7c3e4c004`: dpt priced via `firepower.armament_firepower` (`resolved_firepower_modifiers`, /
+  armament_name scoping — imported, not re-implemented); 8 empty-Versus delivery tags excluded from the cell fit and
+  listed (report/JSON/YAML header); both profile-name collisions named (`ra1_allies_rifleinfantry`,
+  `ra1_allies_rocketsoldier`).
+* Cross-branch review (`49643408d`): two tier-2 consumer designs — `inc-n-combat-veto` provider/IBotEngagementPriors
+  vs `combat-veto-delta` module-internal `EngagementPriors`. NOVA's `d4570b54f` adapter parses my schema fully.
+  Renumbered my arch section 12.32 → 12.34 (NOVA adapt claims .32, DAWN .33). Flagged: `nova/el1_inmatch_adapt`
+  registers `AN_combat_veto` AND `AN_inmatch_adapt` in one registry (letter dup); their comment cites a nonexistent
+  `fit_engagement_coefficients.py`; 3-way `EngagementLogBotModule.cs` overlap (DAWN header / NOVA adapt out-params /
+  mine) — additive, trivially mergeable.
+* **Key-space finding (ruling pending):** consumer `FactorPermille(weapon.Delivery, armour)` keys on warhead CLASS
+  names — engine drops `Warhead@<tag>` at `WeaponInfo.LoadWarheads`; 148 resolvable tags map to only 2 classes →
+  class roll-up would destroy the 139-family fit. Hedge @ `3786e8974`: fitter also emits pooled `Factor@<class>|
+  <armour>` + `StaticDefenceFactorPermille` (their lookup grain); fine cells stay primary. Also fixed `--json`
+  crashing on tuple-keyed maps once cells are non-empty (`jsonable()`).
+* Gates: build 0 errors · `dotnet test` 807/807 · pytest 22/22 · fog PASS (262 sites) · direct-mutation PASS · boot
+  gate PASS (pre-fixup; Python-only since). Smoke fits on both elsmoke dirs: clean parse, 0 fitted (logs predate
+  `composition` — expected).
