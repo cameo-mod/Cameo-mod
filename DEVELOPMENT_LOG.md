@@ -17953,3 +17953,8 @@ Generated with [Devin](https://devin.ai)
   arbitrary for tags whose weapon children carry inline `Versus` overrides (592/961 tags have ≥1; almost all
   `*Percentage`/`_Flat` secondaries, never main warheads — residual risk bounded to `_Flat`-main cells).
   (3) `static warheadYaml` lifetime unchanged.
+* **Both notes resolved (`fd0c63ae5`):** `ResolvedTagVersus` now mirrors `versus_priors` exactly — two
+  `map.TryGetValue` lookups (`^warhead_<tag>` template node → its `Warhead@<tag>` child), then the one-level
+  family fallback (`tag.rsplit('_',1)[0]`); weapon children with inline Versus overrides are never consulted —
+  template-canonical by construction, matching `PriorPct` semantics. O(1) per call. Remaining minor flag:
+  `static warheadYaml` still survives across in-process matches on different faction packs.
