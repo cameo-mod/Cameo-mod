@@ -356,6 +356,11 @@ def shard_progress(shard: Shard, bot_a: str) -> tuple[int, int]:
                 row = json.loads(line)
             except json.JSONDecodeError:
                 continue
+            # Only the first `planned` rows count: a relaunched shard can append a whole new batch
+            # (2026-10-03: ctrl reached 21 rows for 16 planned), and the early-stop rule compares raw
+            # win COUNTS, so an arm with extra rows would win pairs it has not earned.
+            if shard.planned and played >= shard.planned:
+                break
             played += 1
             for bo in row.get("bot_outcomes") or []:
                 if bo.get("bot_type") == bot_a and bo.get("outcome") == "won":
