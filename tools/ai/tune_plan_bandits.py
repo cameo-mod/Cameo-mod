@@ -8,6 +8,9 @@ every engagement record that carries a `bandit` block (written by PlanBanditBotM
    `any` <- `family_<own family>` <- `<own faction>` <- `<own faction>__vs__<enemy faction>`.
    A record whose `bandit.personality_arm` or `bandit.plan_arm` is empty contributes nothing for
    that bandit (a missing arm was never drawn — attributing it would fabricate evidence).
+   `bandit.armed` (the "+"-joined set of granted decision-side module conditions, e.g.
+   combatveto+inmatchadapt) is carried for survivorship conditioning: `--armed-only SET` folds only
+   records produced under that exact armed set and leaves the rest unprocessed for a different fit.
 2. **Decays** retained stats by --decay-factor before folding new records (the sliding-window
    discount of the order): n, mean and m2 are all scaled so a stale posterior widens instead of
    just fading.
@@ -138,13 +141,25 @@ def decay(stats: dict, factor: float) -> None:
                 arms[key] = [n, mean * factor, m2 * factor * factor]
 
 
-def update(rows: list[dict], learned: dict, decay_factor: float = DECAY_FACTOR) -> dict:
-    """Fold unprocessed bandit-attributed engagements into the posteriors. Returns {"folded", "skipped"}."""
+def update(rows: list[dict], learned: dict, decay_factor: float = DECAY_FACTOR,
+           armed_only: str | None = None) -> dict:
+    """Fold unprocessed bandit-attributed engagements into the posteriors.
+
+    armed_only (nova review 2026-10-03): when set, only records whose `bandit.armed` set matches exactly
+    are folded; mismatched records are left unprocessed so a differently-filtered pass on another learned
+    file still sees them. Armed decision-side modules (combatveto, inmatchadapt, ...) filter which fights
+    ever exist — conditioning the fit on the set is how survivorship bias is kept honest.
+    Returns {"folded", "skipped", "filtered"}."""
     done = set(learned["processed"])
-    fresh = [r for r in rows if r.get("bandit") and r.get("record") == "engagement" and game_key(r) not in done]
-    skipped = [r for r in rows if r.get("record") == "engagement" and not r.get("bandit") and game_key(r) not in done]
+    def eligible(r: dict) -> bool:
+        return r.get("record") == "engagement" and game_key(r) not in done
+    fresh = [r for r in rows if r.get("bandit") and eligible(r)
+             and (armed_only is None or (r["bandit"].get("armed") or "none") == armed_only)]
+    filtered = [r for r in rows if r.get("bandit") and eligible(r)
+                and armed_only is not None and (r["bandit"].get("armed") or "none") != armed_only]
+    skipped = [r for r in rows if eligible(r) and not r.get("bandit")]
     if not fresh:
-        return {"folded": 0, "skipped": 0}
+        return {"folded": 0, "skipped": len(skipped), "filtered": len(filtered)}
 
     decay(learned["stats"], decay_factor)
     for r in fresh:
@@ -162,7 +177,8 @@ def update(rows: list[dict], learned: dict, decay_factor: float = DECAY_FACTOR) 
     for r in skipped:
         learned["processed"].append(game_key(r))
         done.add(game_key(r))
-    return {"folded": len(fresh), "skipped": len(skipped)}
+    # `filtered` rows are deliberately NOT marked processed: a mismatched armed-set belongs to a different fit.
+    return {"folded": len(fresh), "skipped": len(skipped), "filtered": len(filtered)}
 
 
 # ---------------------------------------------------------------- report
@@ -183,14 +199,18 @@ def main() -> int:
     ap.add_argument("--decay", type=float, default=DECAY_FACTOR,
                     help="retained-evidence discount per pass (sliding window); 1 keeps everything")
     ap.add_argument("--write", action="store_true", help="apply the decayed update to the learned file")
+    ap.add_argument("--armed-only", default=None, metavar="SET",
+                    help="fold only records whose bandit.armed equals SET exactly (e.g. 'combatveto+plan_bandits'; "
+                         "'none' for unarmed-set records). Mismatched records stay unprocessed for other fits.")
     args = ap.parse_args()
 
     rows = c.load(args.batch_dirs)["engagements"] if args.batch_dirs else []
     learned = parse_learned(args.learned.read_text(encoding="utf-8")) if args.learned.exists() else empty_learned()
 
-    result = update(rows, learned, args.decay)
+    result = update(rows, learned, args.decay, armed_only=args.armed_only)
     print(f"folded {result['folded']} bandit-attributed engagements"
-          + (f", skipped {result['skipped']} unattributed" if result["skipped"] else ""))
+          + (f", skipped {result['skipped']} unattributed" if result["skipped"] else "")
+          + (f", held {result['filtered']} for a different armed-set" if result["filtered"] else ""))
     print(report(learned))
 
     if args.write:
