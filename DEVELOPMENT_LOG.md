@@ -17566,3 +17566,17 @@ the card-mission resolution it already did. A wave that stands down intact now r
 released; only a genuinely wiped squad books `LostUnits`.
 
 Generated with [Devin](https://devin.ai)
+
+2026-10-03 — ai(LC8) runtime: ab4 armed re-run confirms the dispose-flush — 0 dangling attempts
+
+2v2 hard mirror on ecbeeaf66 (all TC switches armed), clean 1-1. The fix verifies:
+142 records, SIX `match_end` terminals now reach the jsonl (ab2/ab3 had zero), and
+every COMMITTED attempt reaches a terminal — 0 dangling. Reason spread is healthy
+(outmatched 21, superseded 18, target_gone 12, lost_units 8, done 6, match_end 6) —
+dismissed-intact waves book Released/Superseded, only real wipes book LostUnits.
+
+Capture arbitration pattern holds: contested commits still appear (broadcasts are
+staggered ~125-500t so allies CAN commit the same target) but the loser's RELEASED
+lands `superseded` inside ~125-170 ticks — commit-then-yield as designed.
+
+Generated with [Devin](https://devin.ai)
