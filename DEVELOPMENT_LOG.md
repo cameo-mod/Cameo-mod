@@ -17338,3 +17338,25 @@ the shared push needs.
 Round-trip on out7 summary: execution PASS (0 uncommitted cards of 40), order-gate crossed=0,
 write-back PASS, outcomes FAIL on the dangling secure push + engineer captures (in-flight at
 match end are separately reported, not counted).
+
+## 2026-10-03 — ember lane: GC-1 fix verification smoke (ab-smoke-out8)
+
+Verification batch on `448fc3c0e` + GC-1 timeout/backoff fixes, all 41 groups armed,
+hard vs classic td_gdi x4: **4/4 clean, zero exceptions, 2-2** (hard won 57,251t and
+16,256t games; classic won 16,323t and 25,559t — small-sample directional only).
+
+The fixes fired exactly as designed:
+
+- `DORMANT stuck` x7 — `garrison_contest:a550` wedged identically in 3 separate games
+  (~7500 ticks post-publish each: the claim timeout catching the same topologically
+  unwalkable garrison). Pre-fix: card open forever. Now: closed, stand-down, retry
+  throttled by backoff.
+- Backoff worked: a550's second stuck in f7a96546 came ~10k ticks after the first
+  (streak=2 → 5000t block). Zero republishes inside a cooldown window across all matches.
+- Round-trip: **outcomes PASS, 0 dangling** (73 attempts, 1 in flight at match end —
+  the secure-push dangling class did not recur), execution PASS (0/46 uncommitted),
+  write-back PASS (137 terminal events), order-gate crossed=1 (one residual second-issuer
+  blip vs 0 last batch — same SquadManager/Scout seam class, owner flagged before).
+
+Contest close mix across the batch: 35 done / 30 lost_units / 7 stuck / 3 x_contest_lost
+— real contests, real attrition, all terminalized.
