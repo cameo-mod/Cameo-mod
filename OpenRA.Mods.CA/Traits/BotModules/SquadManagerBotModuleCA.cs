@@ -736,6 +736,27 @@ namespace OpenRA.Mods.CA.Traits
 		readonly Dictionary<string, int> allyAnswerCooldownUntil = new();
 		int nextPrepositionTick;
 		IBotThreatPredictionProvider[] threatPredictionProviders;
+
+		// DESIGN 19.12: the army staging planner, null while no enabled provider exists (classic, switch off = today's behaviour).
+		// Looked up once per tick; the planner only plans, this module remains the one that orders the idle pool.
+		IBotArmyStaging armyStaging;
+		int armyStagingTick = -1;
+		int nextStagingTick;
+		readonly Dictionary<Actor, (CPos Cell, int Tick)> stagingOrders = new();
+
+		internal IBotArmyStaging ArmyStaging
+		{
+			get
+			{
+				if (armyStagingTick != World.WorldTick)
+				{
+					armyStagingTick = World.WorldTick;
+					armyStaging = Player.PlayerActor.TraitsImplementing<IBotArmyStaging>().FirstEnabledTraitOrDefault();
+				}
+
+				return armyStaging;
+			}
+		}
 		IBotProtectionRequestProvider[] protectionRequestProviders;
 		IBotRequestUnitProduction[] unitRequesters;
 		IBotUtilityAxes[] utilityAxesProviders;
@@ -1485,6 +1506,66 @@ namespace OpenRA.Mods.CA.Traits
 				CloseSecurePush(BotMissionAttemptState.Success, BotMissionReasons.Done);
 
 			AssignRolesToIdleUnits(bot);
+			StageIdlePool(bot);
+		}
+
+		// DESIGN 19.12: the idle pool waits at the front. The provider says which group each unit joins and where that group stands;
+		// this module (the pool's one owner) issues the AttackMove, at most once per StagingInterval per unit and only to units
+		// that are far from their point. Units another module holds a lease on are left alone (DESIGN 19.6).
+		void StageIdlePool(IBot bot)
+		{
+			var staging = ArmyStaging;
+			if (staging == null || World.WorldTick < nextStagingTick)
+				return;
+
+			var interval = Math.Max(1, staging.StagingIntervalTicks);
+			nextStagingTick = World.WorldTick + interval;
+
+			var leases = BotUnitLeases.Of(Player);
+			var pool = new List<ArmyStagingUnit>();
+			foreach (var u in unitsHangingAroundTheBase)
+			{
+				var a = u.Actor;
+				if (unitCannotBeOrdered(a) || Info.ExcludeFromSquadsTypes.Contains(a.Info.Name)
+					|| !a.Info.HasTraitInfo<AttackBaseInfo>() || a.Info.HasTraitInfo<BuildingInfo>()
+					|| a.Info.HasTraitInfo<HarvesterInfo>() || a.Info.HasTraitInfo<AircraftInfo>() || IsNavalUnit(a)
+					|| BotUnitLeases.IsClaimedByOther(leases, a, LeaseOwner))
+					continue;
+
+				pool.Add(new ArmyStagingUnit(a, UnitValue(a)));
+			}
+
+			var assigned = new List<ArmyStagingOrder>();
+			staging.AssignIdlePool(pool, assigned);
+
+			var radius = (long)staging.StagingRadiusCells * staging.StagingRadiusCells;
+			var byCell = new Dictionary<CPos, List<Actor>>();
+			foreach (var o in assigned)
+			{
+				if ((o.Actor.Location - o.Cell).LengthSquared <= radius)
+				{
+					stagingOrders.Remove(o.Actor);
+					continue;
+				}
+
+				// A unit already walking to this very cell keeps walking; an idle one (or one sent elsewhere) is re-ordered.
+				if (stagingOrders.TryGetValue(o.Actor, out var last) && last.Cell == o.Cell && !o.Actor.IsIdle
+					&& World.WorldTick - last.Tick < interval * 4)
+					continue;
+
+				if (!byCell.TryGetValue(o.Cell, out var list))
+					byCell[o.Cell] = list = new List<Actor>();
+
+				list.Add(o.Actor);
+				stagingOrders[o.Actor] = (o.Cell, World.WorldTick);
+			}
+
+			foreach (var kv in byCell)
+				bot.QueueOrder(new Order("AttackMove", null, Target.FromCell(World, kv.Key), false, groupedActors: kv.Value.ToArray()));
+
+			if (stagingOrders.Count > 256)
+				foreach (var dead in stagingOrders.Keys.Where(a => a.IsDead || !a.IsInWorld).ToList())
+					stagingOrders.Remove(dead);
 		}
 
 		internal Actor FindClosestEnemy(Actor sourceActor, SquadCA owner = null)
@@ -1685,6 +1766,13 @@ namespace OpenRA.Mods.CA.Traits
 				? SelectPrepositionThreat(threatPredictionProviders.SelectMany(p => p.PredictedThreats),
 					Info.PrepositionMaxEtaTicks, Info.PrepositionMinThreatValue)
 				: null;
+
+			// DESIGN 19.12: with a staging provider the live-reaction assignment decides which idle units answer an attack that
+			// aims inside the base, so DF-2's prediction there is an input of that plan (it feeds the provider) and not a second
+			// owner of the same pool. A threat aimed at a forward asset outside the ring keeps the draft below.
+			var staging = ArmyStaging;
+			if (threat != null && staging != null && staging.Covers(threat.Value.Target))
+				threat = null;
 
 			// An escort request is a standing defence job on the same army_value
 			// scale - but a real incoming attack always outranks a guard job.

@@ -1284,7 +1284,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 			if (!ordered)
 			{
-				owner.Bot.QueueOrder(new Order("Move", null, Target.FromCell(owner.World, RandomBuildingLocation(owner)), false, groupedActors: owner.Units.Select(u => u.Actor).ToArray()));
+				owner.Bot.QueueOrder(new Order("Move", null, Target.FromCell(owner.World, HomeLocation(owner)), false, groupedActors: owner.Units.Select(u => u.Actor).ToArray()));
 				ordered = true;
 			}
 		}

@@ -759,6 +759,15 @@ namespace OpenRA.Mods.CA.Traits
 		CPos ChooseRallyLocationNear(Actor producer)
 		{
 			var locomotors = LocomotorsForProducibles(producer);
+
+			// DESIGN 19.12: with a staging provider new ground units wait at the front with the defences (the biggest group's
+			// point), not at a random cell beside the factory. A producer whose units cannot walk there (shipyard, helipad)
+			// keeps the old choice. No provider = the random cell below, bit for bit.
+			var staging = player.PlayerActor.TraitsImplementing<IBotArmyStaging>().FirstEnabledTraitOrDefault()?.PrimaryStagingCell;
+			if (staging != null && locomotors.Length > 0
+				&& (pathFinder == null || locomotors.All(l => pathFinder.PathMightExistForLocomotorBlockedByImmovable(l, producer.Location, staging.Value))))
+				return staging.Value;
+
 			var possibleRallyPoints = world.Map.FindTilesInCircle(producer.Location, Info.RallyPointScanRadius)
 				.Where(c => IsRallyPointValid(producer.Location, c, locomotors, producer.Info.TraitInfoOrDefault<BuildingInfo>()))
 				.ToList();

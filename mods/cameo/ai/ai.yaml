@@ -111,6 +111,11 @@
 	GrantConditionOnBotOwner@buildorderknobs:
 		Condition: build_order_knobs
 		Bots: fransbot
+	# Army staging (DESIGN 19.12, AI_ARCHITECTURE 12.29): the idle army waits at the front with the defences, split by threatened side.
+	# The arm sets Bots (switch group AM_army_staging); empty by default - inert on master.
+	GrantConditionOnBotOwner@armystaging:
+		Condition: armystaging
+		Bots:
 	# DIFFICULTY SCALE (DESIGN §19.1, maintainer 2026-09-28): every number below lies on ONE straight line
 	# from easiest to cameogod, in EQUAL steps; an integer that cannot split evenly is the rounded line.
 	# Every field is written in every tier, so no tier silently falls back to a C# default.
@@ -3689,6 +3694,29 @@ Player:
 	#   expansion    - published for the expansion planner (IBotBuildOrderKnobs.KnobMilli); the base builder does not read it
 	#   support      - fractions of radar/repair buildings
 	# Categories are rules-derived (the base builder's own type lists, then BotTargetTags/roles); no actor id is typed here.
+	# ARMY STAGING (DESIGN 19.12, AI_ARCHITECTURE 12.29): a pure planner (IBotArmyStaging) - one staging point per threatened side on the rim,
+	# a few cells inside the own armed buildings; groups only when several sides are hit; a centre reserve for attacks from inside the ring.
+	# It issues no orders: the squad manager stages the idle pool and the base builder rallies new units at its primary cell.
+	# `genericbot && armystaging`: off on master until the increment A/B arms it (switch group AM_army_staging).
+	ArmyStagingBotModule:
+		RequiresCondition: genericbot && armystaging
+		StagingInsetCells: 3
+		ActiveSectorSharePct: 20
+		MaxDefenceGroups: 3
+		MinGroupValue: 1500
+		ReserveMaxPct: 35
+		CentreSwitchPct: 60
+		LiveAttackTicks: 150
+		ReturnAfterTicks: 375
+		StagingInterval: 50
+		StagingRadiusCells: 5
+		WeightHalfLifeTicks: 3000
+		PlanIntervalTicks: 25
+		PriorWeightValue: 2000
+		EventDedupeTicks: 150
+		BaseRadiusCells: 30
+		SpawnMatchCells: 8
+		UsePrediction: true
 	# `genericbot && build_order_knobs`: off on master until the increment A/B arms it (switch group AK_build_order_knobs).
 	BuildOrderKnobsBotModule:
 		RequiresCondition: genericbot && build_order_knobs

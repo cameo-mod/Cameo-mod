@@ -22,11 +22,27 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 	{
 		protected static void GoToRandomOwnBuilding(SquadCA squad)
 		{
-			var loc = RandomBuildingLocation(squad);
+			var loc = HomeLocation(squad);
 			// CA F2p2 (2bad89a77): AttackMove instead of Move, so the squad fights on the way home.
 			var orderName = squad.SquadManager.Info.UseUpstreamStateTweaks ? "AttackMove" : "Move";
 			foreach (var a in squad.Units)
 				squad.Bot.QueueOrder(new Order(orderName, a.Actor, Target.FromCell(squad.World, loc), false));
+		}
+
+		// DESIGN 19.12: a ground squad that falls back or goes idle returns to the staging point nearest to it (the front, with the
+		// defences) when a staging provider is enabled. Air and naval squads, and every squad without a provider, keep the random
+		// own building (the provider branch draws no random number).
+		protected static CPos HomeLocation(SquadCA squad)
+		{
+			if (squad.Type != SquadCAType.Air && squad.Type != SquadCAType.Naval && squad.Units.Count > 0)
+			{
+				var from = squad.Units[0].Actor.Location;
+				var cell = squad.SquadManager.ArmyStaging?.StagingCellNear(from);
+				if (cell != null)
+					return cell.Value;
+			}
+
+			return RandomBuildingLocation(squad);
 		}
 
 		protected static CPos RandomBuildingLocation(SquadCA squad)
@@ -309,7 +325,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				squad.Bot.QueueOrder(new Order("ReturnToBase", null, true, groupedActors: rearmingUnits.ToArray()));
 
 			if (fleeingUnits.Count > 0)
-				squad.Bot.QueueOrder(new Order("Move", null, Target.FromCell(squad.World, RandomBuildingLocation(squad)), false, groupedActors: fleeingUnits.ToArray()));
+				squad.Bot.QueueOrder(new Order("Move", null, Target.FromCell(squad.World, HomeLocation(squad)), false, groupedActors: fleeingUnits.ToArray()));
 		}
 
 		protected static UnitWposWrapper GetPathfindLeader(SquadCA squad, HashSet<string> locomotorTypes)
