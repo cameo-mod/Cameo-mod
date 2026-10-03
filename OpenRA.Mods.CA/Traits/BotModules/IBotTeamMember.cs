@@ -303,5 +303,42 @@ namespace OpenRA.Mods.CA.Traits
 
 			return claims;
 		}
+
+		/// <summary>
+		/// BF-2 prefer-shard (AI_ARCHITECTURE §12.26): the deterministic ownership tier that
+		/// closes the simultaneous-pick window — two allies committing the same capturable
+		/// inside one snapshot interval can't be arbitrated by claims that aren't published
+		/// yet, so the targets are pre-partitioned instead. Rank is the caller's position in
+		/// the ordinal-sorted union of own + allied participant keys; CaptureShard maps a cell
+		/// to a shard index. A bot prefers in-shard targets; out-of-shard stays eligible once
+		/// the own tier is exhausted, so the shard orders but never walls off. Pure, for the
+		/// tests — 1v1 or no allies yields (0,1) and every cell is in-shard.
+		/// </summary>
+		public static (int Rank, int Size) ClaimRank(string ownKey, IEnumerable<string> alliedKeys)
+		{
+			var keys = new List<string> { ownKey };
+			if (alliedKeys != null)
+				keys.AddRange(alliedKeys.Where(k => k != null && k != ownKey));
+
+			keys.Sort(StringComparer.Ordinal);
+			var rank = keys.IndexOf(ownKey);
+			return (rank < 0 ? 0 : rank, keys.Count);
+		}
+
+		public static (int Rank, int Size) ClaimRank(Player player)
+		{
+			var broadcasts = CollectBroadcasts(player);
+			var ownKey = player.InternalName ?? "#" + player.ClientIndex;
+			var alliedKeys = broadcasts.Where(b => b != null).Select(CoalitionFold.ParticipantKey);
+			return ClaimRank(ownKey, alliedKeys);
+		}
+
+		public static int CaptureShard(CPos cell, int size)
+		{
+			if (size <= 0)
+				return 0;
+
+			return ((cell.X * 31 + cell.Y) % size + size) % size;
+		}
 	}
 }

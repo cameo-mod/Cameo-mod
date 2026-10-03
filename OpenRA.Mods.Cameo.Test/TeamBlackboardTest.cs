@@ -254,5 +254,52 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(TeamBlackboard.IsLive(fresh, p, 1500), Is.False,
 				"a defeated ally's last broadcast cannot hold a claim open");
 		}
+
+		// BF-2 (§12.26): the shard is a pure function of the cell — same input, same shard,
+		// every result inside [0, size), negative coordinates safe, size 0 guarded.
+		[Test]
+		public void CaptureShardIsDeterministicAndBounded()
+		{
+			var seen = new HashSet<int>();
+			for (var size = 1; size <= 6; size++)
+			{
+				seen.Clear();
+				for (var x = -40; x <= 40; x += 13)
+					for (var y = -40; y <= 40; y += 17)
+					{
+						var shard = TeamBlackboard.CaptureShard(new CPos(x, y), size);
+						Assert.That(shard, Is.InRange(0, size - 1));
+						Assert.That(TeamBlackboard.CaptureShard(new CPos(x, y), size), Is.EqualTo(shard),
+							"the shard is deterministic — both allies must compute the same owner");
+						seen.Add(shard);
+					}
+
+				Assert.That(seen.Count, Is.EqualTo(size),
+					$"size {size}: the partition actually splits the map, not collapses to one tier");
+			}
+
+			Assert.That(TeamBlackboard.CaptureShard(new CPos(7, 3), 0), Is.EqualTo(0),
+				"size 0 cannot divide-by-zero");
+		}
+
+		// BF-2 (§12.26): rank is the caller's position in the ordinal-sorted union of own +
+		// allied participant keys; the marked-ClientIndex fallback sorts with real ids.
+		[Test]
+		public void ClaimRankSortsOrdinalAndDeduplicates()
+		{
+			Assert.That(TeamBlackboard.ClaimRank("b", new[] { "a", "c" }), Is.EqualTo((1, 3)));
+			Assert.That(TeamBlackboard.ClaimRank("a", new[] { "b", "c" }), Is.EqualTo((0, 3)));
+			Assert.That(TeamBlackboard.ClaimRank("c", new[] { "a", "b" }), Is.EqualTo((2, 3)));
+
+			Assert.That(TeamBlackboard.ClaimRank("solo", null), Is.EqualTo((0, 1)),
+				"1v1 / no allies: everything in-shard");
+			Assert.That(TeamBlackboard.ClaimRank("solo", new List<string>()), Is.EqualTo((0, 1)));
+
+			Assert.That(TeamBlackboard.ClaimRank("a", new[] { "a", "b" }), Is.EqualTo((0, 2)),
+				"the own key must not double-count when a broadcast echoes it");
+
+			Assert.That(TeamBlackboard.ClaimRank("#3", new[] { "#1", "#7" }), Is.EqualTo((1, 3)),
+				"publishers without a ParticipantId still partition deterministically");
+		}
 	}
 }

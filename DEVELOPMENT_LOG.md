@@ -1,3 +1,29 @@
+# 2026-10-03 — BF-2 prefer-shard capture targets: the simultaneous-pick race window closed
+
+*Devin (nova), worktree `nova-tc2`, branch `devin/nova/def3-remote-coverage` — armed 2v2 smoke
+(`hard,hard` vs `classic,classic`, full TC stack armed, `support-2v2-smoke/`) verified every armed
+channel fires live — `assist_answer` (first live record: Multi1 answered Multi0's contested field at
+t39058), `defend_answer` x62, `secure`/`raid` shared strikes — and isolated the one residual race
+class: simultaneous commits inside one snapshot interval (same-cell captures picked 5 ticks apart,
+before either claim reaches the blackboard).*
+
+**Done:**
+- `TeamBlackboard.ClaimRank` (own + allied participant keys, ordinal sort — the caller's rank is
+  its shard) and `CaptureShard(cell, size)` = `(cell.X*31 + cell.Y) % size`, pure for the tests.
+- `PreferShardCaptureTargets` (default off, armed inside `BF_team_capture_claims`) prepends the
+  shard tier at every capture pick site: EngineerBotModule priority list, capturable pool
+  truncation, escort input, per-capturer nearest; GarrisonContestBotModule candidate ordering.
+  Orders, never filters — out-of-shard stays eligible once the own tier is exhausted; size <= 1
+  keeps 1v1 bit-identical.
+- `team_coordination_report.py` splits `contested_claims` (claim-kind ids = real races) from
+  `shared_objectives` (attack-kind ids taken by >1 bot = the desired coordinated strike, not a
+  race). The smoke's `raid:Multi2:r36` contested id was the latter — both allies riding the same
+  deterministic card.
+- ai.yaml documents both GC-1 fields (its `UseTeamCaptureClaims` was never yaml'd after the merge)
+  and fixes a stale `switch group AL` comment left by the canonical merge (the group is BF).
+
+**Verified:** armed smoke — 4 contested ids of which 3 were simultaneous-commit races and 1 a
+shared raid; report re-run shows `contested_claims=4 shared_objectives=1` after the split.
 # 2026-10-03 — TC-3 assist election: the ExpansionAssist publish-without-consume dead-end closed
 
 *Devin (nova), worktree `nova-tc2`, branch `devin/nova/def3-remote-coverage` — §12.18 published `TeamBroadcast.ExpansionAssist` (a contested expansion field that wants a bodyguard) but nothing consumed it; the same dead-end class EMBER diagnosed for Raid cards in §12.27.*

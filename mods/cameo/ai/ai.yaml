@@ -3524,6 +3524,10 @@ Player:
 	# increment A/B arms it (switch group AB).
 	GarrisonContestBotModule:
 		RequiresCondition: genericbot && garrison_contest
+		# TC-2e: yield a contested target to the outranking ally's published claim (switch group BF).
+		UseTeamCaptureClaims: false
+		# BF-2: prefer in-shard contest targets (deterministic cell hash mod team size); orders, never filters.
+		PreferShardCaptureTargets: false
 	# The line-of-death fix (AI_ARCHITECTURE 12.7a, CV concave unified with ATK-1): a Rush squad that
 	# meets the enemy deploys into a range-matched concave arc (ConcaveEvalCA: per-member radius =
 	# enemy front depth + own range + margin, wider for bigger armies) and commits with staggered
@@ -4117,9 +4121,11 @@ Player:
 		MaxEngineersPerTarget: 1
 		# FB2: Frans SpecOps demand-capturers — safe targets justify building a specialist (switch T).
 		UseDemandCapturers: false
-		# TC-2e: yield a capture target to the outranking ally's published claim (switch group AL).
+		# TC-2e: yield a capture target to the outranking ally's published claim (switch group BF).
 		# Lowest ClientIndex keeps its claim; the loser falls through to another candidate. Inert in 1v1.
 		UseTeamCaptureClaims: false
+		# BF-2: prefer in-shard capture targets (deterministic cell hash mod team size); orders, never filters.
+		PreferShardCaptureTargets: false
 		RequiresCondition: genericbot # every tier (DESIGN §19.1; DAWN's #672 ungates the parents the same way)
 		# Capturer and target ids: read from CaptureManagerBotModuleCA above (one copy in the central file).
 		PriorityCaptureChance: 75
