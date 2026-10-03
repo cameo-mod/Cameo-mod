@@ -1,3 +1,9 @@
+# 2026-10-03 — coordinator: tier-3 hotfix (INC c) + ORDERS round 2 to NOVA/DAWN/EMBER
+
+*Claude.* INC c `3c793d4c3` = DAWN `18556ada5` (GetVariableObservers `override` + base: tier 3 was permanently disabled
+when armed since INC b — a CS0114 warning the coordinator did not read). Orders round 2 written to the fleet folder;
+HANDOFF top entry summarises them. New boot-gate tool `tools/boot_gate.ps1` validated end-to-end (auto support dir).
+
 # 2026-10-03 — coordinator: INC 2026-10-03 A/B result — switches stay OFF (no measured difference)
 
 *Claude (Opus 5.5).* `C:/cameo-wt/ab_inc_1003` (`ab_increment.py`, ctrl 5e5639cd2 / half a711d5a95 defaults / all a711d5a95

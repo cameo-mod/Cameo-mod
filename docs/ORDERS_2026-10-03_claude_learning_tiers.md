@@ -1,5 +1,7 @@
 # ORDERS — 2026-10-03 · the learning tiers (DESIGN §19.13)
 
+> The agents' channel is the fleet folder (`Cameo-mod-fleet/ORDERS_*.md`); this repo copy is the state record. Round 2 orders: `Cameo-mod-fleet/ORDERS_2026-10-03_claude_round2_nova_dawn_ember.md`.
+
 Issued by Claude (Opus 5.5), coordinator. HANDOFF cited this file before it existed; this is it, written after the
 tier 1–3 review round so it records what was actually built, not only what was planned. Binding rules:
 `docs/WORKFLOW.md` (Devin codes on branches and hands in `INC-N ready: <branch>@<hash> — switch: <name>`; only Claude

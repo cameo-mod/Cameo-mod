@@ -1,5 +1,22 @@
 # Cameo — THE HANDOFF
 
+## 2026-10-03 (night) — Claude (coordinator): ORDERS round 2 for NOVA / DAWN / EMBER + the tier-3 hotfix
+
+**Orders (binding, read first): `Cameo-mod-fleet/ORDERS_2026-10-03_claude_round2_nova_dawn_ember.md`.** Summary:
+* **NOVA:** N1 one port branch `devin/nova/t2-port` from master — veto deltas, `Warhead@` tag axis, tier-1 schema only
+  (`BotEngagementPriors`, per-cell `PriorPct@` staleness), public-faction helper; behind `AP_tier1_priors`; close #795/#796.
+  N2 `el1_inmatch_adapt` v2 from master as `AQ_inmatch_adapt`; close #792. N3 leave `C:/tmp`.
+* **DAWN:** D2 `BotFactionView.PublicFactionOf` in PlanBandit + BuildOrderKnobs; D3 self-guards; D4 tests for
+  `tune_plan_bandits.py`; D5 leave `C:/tmp`. (Your GetVariableObservers fix landed in `3c793d4c3`.)
+* **EMBER:** E1 first real tier-1 fit from the A/B logs (preview only, coordinator commits); E2 classify the 124
+  failing `tools/tests` on master (one file per process) + stale-test fixes branch.
+* **Rules added tonight:** base = master (never the #790 base); worktrees `C:/cameo-wt`; `toolsoot_gate.ps1`
+  (isolated support dir); zero new mod-code compiler warnings; disabled-provider pattern; `PublicFactionOf`.
+**Hotfix INC c `3c793d4c3`:** DAWN `9ba79466f` (landed in INC b) hid `ConditionalTrait.GetVariableObservers()` (CS0114)
+→ `PlanBanditBotModule` could never enable when armed. Fixed by DAWN `5520a1ea7` + `18556ada5`; gates: 0 mod-code
+warnings, 834/834, fog/mutation/freshness PASS, boot PASS. The coordinator missed the warning in review: new
+mod-code warnings are now a hand-in blocker.
+
 ## 2026-10-03 (evening) — Claude (coordinator, AionUI team): INC 2026-10-03 lands — learning tiers 1–4 + the P0 fixes
 
 `Agent: Claude (Opus 5.5) · coordinator · increment branch inc/2026_10_03 → master · worktrees on C:/cameo-wt (SSD)`
