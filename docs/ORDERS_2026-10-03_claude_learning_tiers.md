@@ -19,11 +19,17 @@ merges, pushes master and runs A/B tests), CLAUDE.md rules 1–10. New worktrees
 
 ## 2. Open items (in order; one owner each — rule 6)
 
-**F1 · Tier 1 phase B — the consumer (owner: Devin-Tier1).** `EngagementPriorsBotModule` serves the
-delivery×armour table from `mods/cameo/ai/learned/engagement_priors.yaml` when present (cell → `TradePercent` → 1000),
-behind `AP_tier1_priors` (`genericbot && tier1_priors`, classic never sees it). Re-price a cell only when its prior
-is unchanged since `LedgerHash` (stale cells → neutral). Faction-keyed lookups honour `enemy_faction_public` (Random
-slot → family/global pool). Tests: parse, lookup, fallback chain, clamp, stale-cell revert; `CombatVetoEvalTest` vectors.
+**F1 · Tier 1 phase B — RULED 2026-10-03 (evening): one schema, per-cell staleness, NOVA ports.** NOVA's
+`devin/nova/combat-veto-delta` already consumes the tier-1 file (`d4570b54f`) but sits on the superseded #790 base. Rulings:
+(a) **One format:** tier 1's `BotEngagementPriors` (`DeliveryArmour@<d>__x__<a>`, `DefenceState@`, `IntoDefencesMilli`). The
+older `EngagementPriors`/`Factor@` parse path is retired in the port (one file format, as `ArsenalPriors` before it).
+(b) **Staleness is per cell and checkable in-match:** the fitter writes, per cell, the resolved Versus % it was fitted on
+(`PriorPct@<d>__x__<a>`); the game recomputes the current resolved prior of that cell and reverts only the cells whose prior
+moved. `LedgerHash` stays as offline provenance (the game cannot read ledgers); a global `StatFingerprint` is not used — it
+would discard every cell on any rebalance.
+(c) **Owners (rule 6):** NOVA ports its deltas (launch-edge consult, remembered defences, `WarheadTag@` bridge, phase-B adapter)
+as small commits on top of master's tier 2 (`CombatVetoBotModule`/`EngagementPriorsBotModule`), behind `AP_tier1_priors`;
+Devin-Tier1 changes the fitter + spec for (b). Faction-keyed lookups honour `enemy_faction_public` / F2's helper.
 
 **F2 · Fog: the public faction of an enemy (owner: Devin-T3Verify).** Enemy-faction reads use `Player.Faction` (a
 Random slot's RESOLVED faction) instead of what the lobby shows (`Player.DisplayFaction`, `Player.cs:65/177`):
