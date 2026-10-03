@@ -1,3 +1,9 @@
+* **F1(c) review follow-up (EMBER's hardening notes, `10c309544`):** `ResolvedTagVersus` now answers
+  the fitter's exact question — `^Warhead_<tag>` template's `Warhead@<tag>` Versus, else the one-level
+  `^Warhead_<family>` fallback — instead of scanning every weapon's children per call (the veto hot
+  path: O(1) lookups now) and instead of first-match-wins across inline-Versus children the fitter
+  never reads. Same null semantics (unresolvable = fitter-excluded = stale-safe). 836/836, boot PASS.
+
 # 2026-10-03 — F1 port: canonical BotEngagementPriors onto the landed INC-N veto
 
 *Devin (nova) — `devin/nova/t1-priors-port` off master@6bce16baf.* The lead ruled one schema

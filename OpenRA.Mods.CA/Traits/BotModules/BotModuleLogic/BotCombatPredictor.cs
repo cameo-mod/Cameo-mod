@@ -204,15 +204,33 @@ namespace OpenRA.Mods.CA.Traits
 			return versus;
 		}
 
-		/// <summary>The resolved Versus table of a warhead tag (`^Warhead_&lt;tag&gt;`'s `Warhead@&lt;tag&gt;` child),
-		/// read once from the resolved weapon yaml — the in-match baseline the tier-1 per-cell staleness compares
-		/// against (AI_ARCHITECTURE 12.31). Null when the tag resolves nowhere.</summary>
+		/// <summary>The resolved Versus table the tier-1 fitter fitted this delivery tag on (AI_ARCHITECTURE
+		/// 12.31, F1-b) — `^Warhead_&lt;tag&gt;`'s `Warhead@&lt;tag&gt;` child, else the one-level family
+		/// fallback `^Warhead_&lt;tag minus the last _segment&gt;`: the fitter's exact resolution
+		/// (fit_engagement_priors.versus_priors). Template tables are canonical (Versus lives only in
+		/// `^Warhead_*`); weapon children sharing the tag may carry inline overrides the fitter never
+		/// reads, so they are not consulted. Null when the tag resolves nowhere — fitter-excluded tags
+		/// emit no cells, so an unfitted lookup can only come from an unverifiable (stale-safe) cell.</summary>
 		public static IReadOnlyDictionary<string, int> ResolvedTagVersus(string tag)
 		{
-			foreach (var entries in WarheadYamlMap().Values)
-				foreach (var (t, _, versus) in entries)
-					if (t != null && string.Equals(t, tag, StringComparison.Ordinal))
-						return versus;
+			var map = WarheadYamlMap();
+			var versus = TemplateVersus(map, tag);
+			if (versus != null)
+				return versus;
+
+			var cut = tag.LastIndexOf('_');
+			return cut > 0 ? TemplateVersus(map, tag[..cut]) : null;
+		}
+
+		static IReadOnlyDictionary<string, int> TemplateVersus(
+			Dictionary<string, (string Tag, string Class, IReadOnlyDictionary<string, int> Versus)[]> map, string templateTag)
+		{
+			if (!map.TryGetValue("^warhead_" + templateTag.ToLowerInvariant(), out var entries))
+				return null;
+
+			foreach (var (t, _, versus) in entries)
+				if (string.Equals(t, templateTag, StringComparison.Ordinal))
+					return versus;
 
 			return null;
 		}
