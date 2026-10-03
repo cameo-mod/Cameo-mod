@@ -142,6 +142,23 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 	{
 		public const int One = BuildOrderKnob.Neutral;
 
+		/// <summary>Mean observed economy per enemy, rounded half up, over enemies whose observed economy is above 0 (an
+		/// unscouted enemy reads 0 under fog; counting it would understate the enemy). None observed: 0.</summary>
+		public static int EnemyEconomyPerEnemy(IEnumerable<int> observedEconomies)
+		{
+			long sum = 0;
+			var count = 0;
+			foreach (var e in observedEconomies)
+			{
+				if (e <= 0)
+					continue;
+				sum += e;
+				count++;
+			}
+
+			return count == 0 ? 0 : (int)((sum * 2 + count) / (count * 2));
+		}
+
 		public static int Clamp(int value, int min, int max) => Math.Max(min, Math.Min(max, value));
 
 		/// <summary>

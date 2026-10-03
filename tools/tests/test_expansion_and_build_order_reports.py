@@ -6,6 +6,7 @@ import sys
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1] / "ai"))
 import build_order_report as bor  # noqa: E402
 import expansion_report as exr  # noqa: E402
+import ai_log_common as c  # noqa: E402
 
 TICKS_PER_MIN = 1500  # timestep 40 ms
 
@@ -88,15 +89,32 @@ def test_build_order_orders_by_time_and_scores(tmp_path):
     o = row["outcome"]
     assert o["win"] == 1
     assert abs(o["margin"] - 0.6) < 1e-9  # (8000 - 2000) / 10000
-    assert abs(o["speed_bonus"] - 0.5 * (30 - 12) / 30) < 1e-9
-    assert abs(o["score"] - (1 + 0.6 + 0.3)) < 1e-3
+    bonus = c.SCORE_SPEED_WEIGHT * (1 - 12 * TICKS_PER_MIN / c.SCORE_SPEED_REF_TICKS)
+    assert abs(o["speed_bonus"] - bonus) < 1e-3
+    assert abs(o["score"] - (1 + 0.6 + bonus)) < 1e-3
     assert row["knobs"] == '{"tempo": 1.1}'
     assert result["by_personality"][0]["win_rate"] == 1.0
     assert "score" in bor.render(result)
 
 
 def test_score_formula_edges():
-    assert bor.score("lost", 0, 0, 40)["score"] == 0
-    assert bor.score("lost", 1000, 3000, 10)["score"] == -0.5
-    assert bor.score("won", 100, 0, 0)["score"] == 2.5
-    assert bor.score("won", 0, 0, 45)["speed_bonus"] == 0
+    ms = c.match_score
+    assert ms("lost", 0, 0, 40)["score"] == 0
+    assert ms("lost", 1000, 3000, 10)["score"] == -0.5
+    assert ms("won", 0, 0, c.SCORE_SPEED_REF_TICKS)["speed_bonus"] == 0
+
+
+def test_game_time_ignores_the_recorded_timestep(tmp_path):
+    """Fast-speed batches record `timestep: 1`; minutes are still the nominal 40 ms game clock (tick 7500 = 5 min)."""
+    snaps = [snap("Multi0", 7500, expansion(2, 1, 0, 30, 500)), snap("Multi0", 7600, expansion(3, 1, 0, 30, 500))]
+    places = [place("Multi0", 1500, "proc", "refinery", "base")]
+    m = match("Multi0", "won", 12, 8000, 2000)
+    m["timestep"] = 1
+    path = write(tmp_path, "cameo-ai-situations.jsonl", snaps)
+    write(tmp_path, "cameo-ai-placements.jsonl", places)
+    write(tmp_path, "cameo-ai-matches.jsonl", [m])
+    [row_] = exr.build(exr.c.load([path]))["matches"]
+    assert row_["harvested_5"] == 2
+    assert abs(row_["first_refinery_min"] - 1.0) < 0.01
+    rep = bor.build(bor.c.load([path]))
+    assert rep is not None

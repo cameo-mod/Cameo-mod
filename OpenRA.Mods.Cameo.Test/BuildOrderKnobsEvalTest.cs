@@ -34,6 +34,18 @@ namespace OpenRA.Mods.Cameo.Test
 		};
 
 		[Test]
+		public void EnemyEconomyIsTheMeanOverScoutedEnemiesNotTheSum()
+		{
+			Assert.That(BuildOrderKnobsEval.EnemyEconomyPerEnemy(new[] { 10 }), Is.EqualTo(10), "1v1 unchanged");
+			Assert.That(BuildOrderKnobsEval.EnemyEconomyPerEnemy(new[] { 10, 10 }), Is.EqualTo(10), "two equal enemies == one");
+			Assert.That(BuildOrderKnobsEval.EnemyEconomyPerEnemy(new[] { 10, 0, 10, 0 }), Is.EqualTo(10), "unscouted ignored");
+			Assert.That(BuildOrderKnobsEval.EnemyEconomyPerEnemy(new[] { 0, 0 }), Is.EqualTo(0), "all unscouted");
+			Assert.That(BuildOrderKnobsEval.EnemyEconomyPerEnemy(new int[0]), Is.EqualTo(0));
+			Assert.That(BuildOrderKnobsEval.EnemyEconomyPerEnemy(new[] { 5, 6 }), Is.EqualTo(6), "5.5 rounds half up");
+			Assert.That(BuildOrderKnobsEval.EnemyEconomyPerEnemy(new[] { 5, 5, 6 }), Is.EqualTo(5), "5.33 rounds down");
+		}
+
+		[Test]
 		public void JitterSpansPlusMinusPercentAndIsNeutralAtTheMiddleDraw()
 		{
 			Assert.That(BuildOrderKnobsEval.JitterMilli(8, 1000), Is.EqualTo(1000));

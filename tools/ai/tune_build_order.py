@@ -17,14 +17,22 @@ Reads match directories (each a `run_ai_match_batch.py --support-dir`, holding `
        bo__<personality>__<faction>__base
        bo__<personality>__<faction>__<knob>__up<delta>   /   ...__dn<delta>
 4. **Writes** (`--write`) `mods/cameo/ai/learned/build_order_knobs.yaml`, bounded and only with enough evidence:
-   * knobs: an arm replaces the base only when BOTH arms have >= MIN_MATCHES matches AND the mean-score gain is significant:
-     Welch z = (mean_arm - mean_base) / sqrt(var_arm/n_arm + var_base/n_base) >= Z_CRIT (1.96, one-sided 97.5% by the
-     normal approximation; the n >= MIN_MATCHES floor keeps that approximation honest). Per (personality, faction) at most the
-     single best significant arm is accepted per write (coordinate descent: one step, then re-measure). The learned multiplier is
-     the old one x (1 +/- delta) clamped to [LEARN_MIN, LEARN_MAX] thousandths: a bounded multiplier on the default.
-   * openings: Beta(alpha, beta) per (personality, own faction, enemy faction, opening); a matchup with >= MIN_MATCHES matches adds
-     wins to alpha and losses to beta; when alpha + beta exceeds POSTERIOR_CAP both halve (recency discount). Each game is used once
-     (the file keeps the processed game ids), so a re-run on the same directories changes nothing.
+   * knobs: an arm replaces the base only when BOTH arms have >= MIN_MATCHES matches AND the mean-score gain is significant.
+     The test is PAIRED when the arm and base matches can be matched one-to-one by experimental cell (same enemy faction, map and
+     spawn side; the k-th replicate of a cell in the arm against the k-th in the base) with >= MIN_MATCHES pairs:
+     z = mean_d / (sd_d / sqrt(n_pairs)) on the per-pair score differences (this cancels the map / spawn-side effect). Otherwise it
+     falls back to Welch z = (mean_arm - mean_base) / sqrt(var_arm/n_arm + var_base/n_base). Each decision says which (`test`).
+     z is one-sided, by the normal approximation (the n >= MIN_MATCHES floor keeps that honest). Several candidate arms of one
+     (personality, faction) are tested against the SAME base, so the family is Holm-Bonferroni corrected at one-sided alpha =
+     1 - Phi(Z_CRIT) (0.025): the k-th best z must reach the critical z of alpha / (m - k); m == 1 is plain Z_CRIT (1.96).
+     Per (personality, faction) at most the single best significant arm is accepted per write (coordinate descent: one step, then
+     re-measure). The learned multiplier is the old one x (1 +/- delta) clamped to [LEARN_MIN, LEARN_MAX] thousandths: a bounded
+     multiplier on the default.
+   * openings: Beta(alpha, beta) per (personality, own faction, enemy faction, opening); only matches played at the current-best
+     knobs (the base / control arm, never a knob-perturbed experiment arm, whose result is confounded by the knob change) are
+     folded in: a matchup with >= MIN_MATCHES such matches adds wins to alpha and losses to beta; when alpha + beta exceeds
+     POSTERIOR_CAP both halve (recency discount). Each game is used once (the file keeps the processed game ids; perturbed-arm
+     games are recorded there as skipped), so a re-run on the same directories changes nothing.
    Without --write nothing is changed.
 
 Pure python (stdlib only). The yaml is a committed, reviewed data file (DESIGN 19.2: frozen in release, trained on dev).
@@ -35,6 +43,7 @@ import argparse
 import hashlib
 import json
 import math
+import statistics
 import pathlib
 import re
 import sys
@@ -136,6 +145,8 @@ def load_matches(batch_dirs: list[pathlib.Path]) -> list[dict]:
                 "personality": personality,
                 "faction": player.get("faction", ""),
                 "enemy_faction": opponents[0].get("faction", ""),
+                "map": r.get("map_uid", "") or "",
+                "spawn": player.get("spawn", -1),
                 "opening": last.get("opening", "") or "",
                 "knobs": {k: first.get(f"base_{k}", 1000) for k in KNOBS},
                 "score": scored[0],
@@ -172,6 +183,41 @@ def welch_z(arm: Stats, base: Stats) -> float:
     if se == 0:
         return 0.0 if diff == 0 else math.copysign(math.inf, diff)
     return diff / se
+
+
+def paired_z(arm_rows: list[dict], base_rows: list[dict], min_pairs: int) -> tuple[float, int] | None:
+    """Paired z of (arm - base) on score, or None when fewer than `min_pairs` matches can be paired one-to-one.
+
+    A pair is the k-th replicate (in log order) of one experimental cell - (enemy faction, map, spawn side) - in each arm. The
+    harness records no per-match seed, so replicates of a cell are exchangeable; pairing removes the cell effect (a spawn-side or
+    matchup advantage) that the unpaired Welch test leaves in its variance. Returns (z, n_pairs).
+    """
+    def by_cell(rows: list[dict]) -> dict[tuple, list[float]]:
+        cells: dict[tuple, list[float]] = {}
+        for r in rows:
+            cells.setdefault((r.get("enemy_faction", ""), r.get("map", ""), r.get("spawn", -1)), []).append(r["score"])
+        return cells
+
+    a, b = by_cell(arm_rows), by_cell(base_rows)
+    diffs = [x - y for cell in sorted(a.keys() & b.keys(), key=repr) for x, y in zip(a[cell], b[cell])]
+    if len(diffs) < max(2, min_pairs):
+        return None
+    n = len(diffs)
+    mean_d = sum(diffs) / n
+    sd = math.sqrt(sum((d - mean_d) ** 2 for d in diffs) / (n - 1))
+    if sd == 0:
+        return (0.0 if mean_d == 0 else math.copysign(math.inf, mean_d)), n
+    return mean_d / (sd / math.sqrt(n)), n
+
+
+def holm_critical_z(m: int, z_crit: float = Z_CRIT) -> list[float]:
+    """Critical z per rank (best z first) for m comparisons, Holm-Bonferroni at the one-sided alpha 1 - Phi(z_crit).
+
+    m == 1 is exactly `z_crit`. Rank k (0-based) uses alpha / (m - k); reject down the ranking until one fails.
+    """
+    nd = statistics.NormalDist()
+    alpha = 1 - nd.cdf(z_crit)
+    return [z_crit if m - k == 1 else nd.inv_cdf(1 - alpha / (m - k)) for k in range(m)]
 
 
 def arm_stats(rows: list[dict]) -> dict[tuple[str, str, str], Stats]:
@@ -277,29 +323,54 @@ def current_multiplier(learned: dict, personality: str, faction: str, knob: str)
 
 
 def decisions(rows: list[dict], learned: dict, min_matches: int = MIN_MATCHES, z_crit: float = Z_CRIT) -> list[dict]:
-    """For every (personality, faction): each perturbed arm vs its base arm, with the accept verdict."""
+    """For every (personality, faction): each perturbed arm vs its base arm, with the accept verdict.
+
+    Paired z where the matches pair up by cell, Welch otherwise (`test`); the arms of one scope share the base, so their
+    significance is Holm-Bonferroni corrected over the arms that have enough matches (`z_crit_used` is the threshold applied).
+    """
     stats = arm_stats(rows)
+    by_arm: dict[tuple[str, str, str], list[dict]] = {}
+    for r in rows:
+        by_arm.setdefault((r["personality"], r["faction"], r["arm"]), []).append(r)
     out = []
     for (personality, faction, arm), s in sorted(stats.items()):
         m = ARM_RE.match(arm)
         if not m or not m.group("knob") or (m.group("personality"), m.group("faction")) != (personality, faction):
             continue
-        base = stats.get((personality, faction, f"bo__{personality}__{faction}__base"))
+        base_arm = f"bo__{personality}__{faction}__base"
+        base = stats.get((personality, faction, base_arm))
         if base is None:
             continue
         knob, direction, delta = m.group("knob"), m.group("dir"), int(m.group("delta"))
         if knob not in KNOBS:
             continue
-        z = welch_z(s, base)
         enough = s.n >= min_matches and base.n >= min_matches
+        z, test, n_pairs = welch_z(s, base), "welch", 0
+        paired = paired_z(by_arm[(personality, faction, arm)], by_arm[(personality, faction, base_arm)], min_matches) if enough else None
+        if paired is not None:
+            z, n_pairs = paired
+            test = "paired"
         old = current_multiplier(learned, personality, faction, knob)
         step = delta if direction == "up" else -delta
         new = clamp(old * (1000 + step) // 1000, LEARN_MIN, LEARN_MAX)
         out.append({
             "personality": personality, "faction": faction, "arm": arm, "knob": knob, "direction": direction, "delta": delta,
-            "n_arm": s.n, "n_base": base.n, "mean_arm": s.mean, "mean_base": base.mean, "z": z,
-            "enough": enough, "significant": enough and z >= z_crit, "old": old, "new": new,
+            "n_arm": s.n, "n_base": base.n, "mean_arm": s.mean, "mean_base": base.mean, "z": z, "test": test, "n_pairs": n_pairs,
+            "enough": enough, "significant": False, "z_crit_used": z_crit, "old": old, "new": new,
         })
+
+    scopes: dict[tuple[str, str], list[dict]] = {}
+    for d in out:
+        if d["enough"]:
+            scopes.setdefault((d["personality"], d["faction"]), []).append(d)
+    for family in scopes.values():
+        family.sort(key=lambda d: -d["z"])
+        for d, crit in zip(family, holm_critical_z(len(family), z_crit)):
+            d["z_crit_used"] = crit
+        for d in family:  # Holm step-down: stop at the first failure
+            if d["z"] < d["z_crit_used"]:
+                break
+            d["significant"] = True
     return out
 
 
@@ -315,13 +386,28 @@ def accepted(decs: list[dict]) -> dict[tuple[str, str], dict]:
     return best
 
 
+def is_perturbed_arm(arm: str) -> bool:
+    """True for a knob-experiment arm (`bo__<p>__<f>__<knob>__up/dn<delta>`); the base arm and plain batches are controls."""
+    m = ARM_RE.match(arm)
+    return bool(m and m.group("knob"))
+
+
 def update_openings(learned: dict, rows: list[dict], min_matches: int = MIN_MATCHES) -> list[tuple]:
-    """Fold unprocessed matches into the opening posteriors, one matchup at a time. Returns the matchups updated."""
+    """Fold unprocessed matches into the opening posteriors, one matchup at a time. Returns the matchups updated.
+
+    Only matches at the current-best knobs (the base / control arm) count: a perturbed-arm match mixes the opening's effect with a
+    deliberate knob change. Those are recorded as processed (skipped) so they are never reconsidered.
+    """
     done = set(learned["processed_openings"])
     by_matchup: dict[tuple[str, str, str], list[dict]] = {}
     for r in rows:
-        if r["opening"] and game_key(r) not in done:
-            by_matchup.setdefault((r["personality"], r["faction"], r["enemy_faction"]), []).append(r)
+        if not r["opening"] or game_key(r) in done:
+            continue
+        if is_perturbed_arm(r["arm"]):
+            learned["processed_openings"].append(game_key(r))
+            done.add(game_key(r))
+            continue
+        by_matchup.setdefault((r["personality"], r["faction"], r["enemy_faction"]), []).append(r)
 
     updated = []
     for matchup, group in sorted(by_matchup.items()):
@@ -423,7 +509,7 @@ def report(rows: list[dict], learned: dict, min_matches: int = MIN_MATCHES) -> s
     for d in decs:
         verdict = "ACCEPT" if d["significant"] and d["new"] != d["old"] else ("under-sampled" if not d["enough"] else "reject")
         out.append(f"- {d['personality']} {d['faction']} {d['knob']} {d['direction']}{d['delta']}: arm n={d['n_arm']} mean={d['mean_arm']:.3f} "
-                   f"vs base n={d['n_base']} mean={d['mean_base']:.3f} z={d['z']:.2f} -> {verdict} ({d['old']} -> {d['new']})")
+                   f"vs base n={d['n_base']} mean={d['mean_base']:.3f} z={d['z']:.2f} ({d['test']}) -> {verdict} ({d['old']} -> {d['new']})")
     if not decs:
         out.append("- none: no arm named bo__<personality>__<faction>__<knob>__up|dn<delta> with a base arm in these directories")
     return "\n".join(out)

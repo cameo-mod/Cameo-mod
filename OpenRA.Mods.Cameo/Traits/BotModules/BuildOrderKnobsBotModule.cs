@@ -94,7 +94,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		[Desc("Turtle: and the defence must be at least this percent of the defence plus army value seen.")]
 		public readonly int ReactTurtleDefenceSharePct = 40;
 
-		[Desc("Out-earned: the seen enemy economy proxy (harvesters + 2 x refineries) must exceed ours by this percent (130 = 30% more).")]
+		[Desc("Out-earned: the seen economy proxy (harvesters + 2 x refineries) of the average scouted enemy must exceed ours by this percent (130 = 30% more).")]
 		public readonly int ReactOutEarnPct = 130;
 
 		[Desc("Out-earned: and be at least this many proxy points.")]
@@ -448,10 +448,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		}
 
 		// What the bot SAW, from the published snapshot: the personality-lead inputs (BotSituation enemy profiles, the same
-		// economy proxy as the Expansion lead), summed over living enemies. Own side is the bot's own state.
+		// economy proxy as the Expansion lead). Air/pressure/defence/army are summed over living enemies; the economy is the MEAN
+		// over living enemies with an observed economy (so out_earned does not depend on the player count). Own side is the bot's own state.
 		BuildOrderReactInputs ReactInputs(BotSituation situation, int tick)
 		{
-			int air = 0, pressure = 0, defence = 0, army = 0, enemyEconomy = 0;
+			int air = 0, pressure = 0, defence = 0, army = 0;
+			var enemyEconomies = new List<int>();
 			foreach (var enemy in situation.Enemies.Values)
 			{
 				if (!enemy.Alive)
@@ -461,11 +463,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				pressure += enemy.PressureValue;
 				defence += enemy.DefenceValue;
 				army += enemy.ArmyValue;
-				enemyEconomy += enemy.Harvesters + enemy.Refineries * 2;
+				enemyEconomies.Add(enemy.Harvesters + enemy.Refineries * 2);
 			}
 
 			var ownRefineries = baseBuilder?.RefineryBuildings.Actors.Count(a => !a.IsDead) ?? 0;
-			return new BuildOrderReactInputs(tick, air, pressure, defence, army, enemyEconomy, situation.OwnHarvesters + ownRefineries * 2);
+			return new BuildOrderReactInputs(tick, air, pressure, defence, army, BuildOrderKnobsEval.EnemyEconomyPerEnemy(enemyEconomies), situation.OwnHarvesters + ownRefineries * 2);
 		}
 
 		void ApplyReact()

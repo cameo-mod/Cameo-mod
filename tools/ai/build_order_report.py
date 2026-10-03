@@ -52,7 +52,6 @@ def build(data: dict[str, list[dict]]) -> dict:
     for key in sorted(by_place, key=lambda k: (str(k[0]), str(k[1]))):
         places = sorted(by_place[key], key=lambda p: (p.get("placed_tick", p["tick"]), p.get("actor", "")))
         match = matches.get(key)
-        ts = int((match or {}).get("timestep") or c.DEFAULT_TIMESTEP_MS)
         first = {}
         for p in places:
             first.setdefault(p["category"], p.get("placed_tick", p["tick"]))
@@ -60,15 +59,15 @@ def build(data: dict[str, list[dict]]) -> dict:
             "game_uid": key[0], "player": key[1], "bot_type": places[0].get("bot_type", ""),
             "personality": (match or {}).get("player", {}).get("personality") or places[0].get("personality", ""),
             "knobs": knob_vector(match),
-            "order": [{"time": c.mmss(p.get("placed_tick", p["tick"]), ts), "tick": p.get("placed_tick", p["tick"]),
+            "order": [{"time": c.mmss(p.get("placed_tick", p["tick"])), "tick": p.get("placed_tick", p["tick"]),
                        "queued_tick": p.get("queued_tick"), "actor": p["actor"], "category": p["category"],
                        "reason": p["reason"]} for p in places],
-            "first_by_category": {cat: round(c.minutes(t, ts), 2) for cat, t in first.items()},
+            "first_by_category": {cat: round(c.minutes(t), 2) for cat, t in first.items()},
             "outcome": None,
         }
         if match:
             stats = match.get("stats", {})
-            length = c.minutes(match.get("duration_ticks", 0), ts)
+            length = c.minutes(match.get("duration_ticks", 0))
             row["outcome"] = {"result": match.get("player", {}).get("outcome", ""), "length_min": round(length, 2),
                               "kills_cost": stats.get("kills_cost", 0), "deaths_cost": stats.get("deaths_cost", 0)}
             row["outcome"].update(c.match_score(row["outcome"]["result"], row["outcome"]["kills_cost"],
