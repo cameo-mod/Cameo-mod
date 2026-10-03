@@ -5306,7 +5306,7 @@ army back. A central position ("interior lines") is right only against threats f
 * **One owner, orders only (§19.3, §19.6, §19.8).** A staging provider computes the plan (sectors, groups, points,
   live assignments). The squad manager remains the only module that holds and orders the units, and the base builder
   points factory rally points at the staging point. No provider (`classic`, switch off) = today's behaviour bit for
-  bit. Switch `AM_army_staging`; spec and constants in `design/AI_ARCHITECTURE.md` §12.27.
+  bit. Switch `AM_army_staging`; spec and constants in `design/AI_ARCHITECTURE.md` §12.28.
 
 ## 20. AI bot unit compositions
 
