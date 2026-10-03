@@ -17574,3 +17574,19 @@ path (`EndMission` + `leases.Release`, then Stop). Each Stop records Held=false 
 the order gate, so a take-over inside the window reads as crossed instead of a
 provable hand-off. Reordering Stop before Release is the proven shape
 (GC-1 `StandDownWalkers`, `3fefa249e`).
+
+## 2026-10-03 — ai(obs): team layer + write-back calibration; 2v2 team evidence verified
+
+**2v2 armed smoke (tmpab-smoke-2v2-b, 44 groups, 2 matches, 1-1):** the team
+stack finally has live evidence — assist_answer + defend_answer commits/releases,
+raid + secure attempts, 10 contested capture claims across Multi0/Multi1 (shard
+tier orders, ties still reach ClaimsAheadOf arbitration — designed shape).
+**outcomes: 0 dangling, 0 in flight at match end; order gate crossed=0** — the
+order-before-release stand-down and crate IsInWorld guard hold under team load.
+
+**round_trip_check gains a `team` layer:** a game where a genericbot has a bot
+ally must leave *some* team artifact (assist_answer:/defend_answer:/secure:
+record or a superseded close) or WARN. Both 2v2 games carry artifacts; 1v1
+batches skip (0 team games). Also calibrated `write-back`: 0 DORMANT/REOPENED
+now WARNs only when mission cards were published — the 2v2 ran on attempt
+records alone, shelving nothing legitimately.
