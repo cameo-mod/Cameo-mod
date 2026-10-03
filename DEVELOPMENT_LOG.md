@@ -14,7 +14,10 @@ independent of `AN_combat_veto`. Ported:
   lookup; DefenceState when attacker is a building, IntoDefences when the target is; product
   clamps [500, 2000].
 - **Per-cell staleness**: `PriorPct@d__x__a` vs `BotUnitProfiles.ResolvedTagVersus(tag)` — a moved
-  Versus neutralizes exactly that cell. Fitter emits the rows (new `to_yaml` arg: `priors`).
+  Versus neutralizes exactly that cell. The fitter-side emit is EMBER's lane per F1(c): their
+  `devin/tier1-priorpct@a21f90369` emits byte-identical `PriorPct@` twins (I reverted my parallel
+  emit + spec edits so the two branches merge clean in either order — consumer stays safe-neutral
+  on a pre-emit file).
 - **Switch**: `AP_tier1_priors` → `GrantConditionOnBotOwner@tier1priors` → `tier1_priors`;
   module gated `genericbot && tier1_priors`; armed-alone inert (the veto is the only consumer).
 

@@ -104,7 +104,7 @@ def test_one_record_cannot_dominate():
 
 def test_deterministic_output():
     recs = [_rec(), _rec(kind="defend", start_tick=6000)]
-    assert fp.to_yaml(_fit(recs), "h", PRIORS) == fp.to_yaml(_fit(recs), "h", PRIORS)  # byte-identical refit
+    assert fp.to_yaml(_fit(recs), "h") == fp.to_yaml(_fit(recs), "h")  # byte-identical refit
     assert fp.fit({"engagements": recs, "matches": []}, PROFILES, PRIORS)["cells"] == \
         fp.fit({"engagements": recs, "matches": []}, PROFILES, PRIORS)["cells"]
 
@@ -128,12 +128,10 @@ def test_timing_response_and_suicide_tables():
 
 
 def test_yaml_shape_and_neutral_defaults():
-    y = fp.to_yaml(_fit([_rec()]), "abc123", PRIORS)
+    y = fp.to_yaml(_fit([_rec()]), "abc123")
     assert y.startswith("# GENERATED") and "BotEngagementPriors:" in y
     assert "\tSchema: 1" in y and "\tLedgerHash: abc123" in y
     assert "DeliveryArmour@CannonAP_Medium__x__None: " in y
-    # F1-b: every cell carries the resolved prior it was fitted on (CannonAP_Medium vs None = 50).
-    assert "\tPriorPct@CannonAP_Medium__x__None: 50" in y
     assert "-" not in "\n".join(l for l in y.splitlines() if not l.startswith("#"))  # rule 9
 
 
