@@ -17312,3 +17312,29 @@ private engine + tracked dll), boot-gate PASS with isolated SupportDir.
 Post-commit review: `stuck` also counts toward the backoff streak (a wedged path is
 topological — a re-claim sends the next walkers into the same dead end); only `superseded`
 stays neutral.
+
+## 2026-10-03 — ember lane: smoke forensics — the stalled match and the silent finisher
+
+Forensic read on `ab-smoke-out7` match cf428c10 (runner verdict "stalled", 0 records):
+
+- **Not a refusal**: hard issued `raid` missions continuously (priorities 40-87) and ground
+  classic from 14 buildings/10k army to 1 building/0 army between t=17851 and t=19351. The
+  enemy collapse was fast and total; hard was winning, not turtling.
+- **The finisher gates late**: after the collapse (enemy `army_value=0`, `buildings=1`,
+  `defence_count=0`, `last_seen` fresh, `main_target=Multi1` score 272), the situation record
+  sat at `mission=None` for ~1600 ticks before SquadManager's shared push `secure:Multi1`
+  finally committed at t=20930 — right before the runner's stall kill. The push exists and
+  was en route; it gates on something beyond total enemy collapse. **SquadManager lane flag.**
+- **secure pushes never terminalize**: in match a4195e79 (a hard WIN), `secure:Multi1`
+  committed at t=20930 and wrote no terminal record for the remaining ~15.8k ticks — the
+  checker's outcomes layer FAILs on exactly this class. Every `secure:<player>` attempt is
+  effectively dangling forever. Same owner. Fix shape: the push should DORMANT done/target_gone
+  like every other mission (or RELEASED when the squad disbands).
+
+GC-1 contrast for the same window: my contest/raid cards all terminalized (the a550 hang is
+the fixed ClaimTimeoutTicks case). The mission-lifecycle discipline GC-1 follows is the model
+the shared push needs.
+
+Round-trip on out7 summary: execution PASS (0 uncommitted cards of 40), order-gate crossed=0,
+write-back PASS, outcomes FAIL on the dangling secure push + engineer captures (in-flight at
+match end are separately reported, not counted).
