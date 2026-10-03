@@ -683,11 +683,11 @@ claims:
                 if p['peer'].get('role') is None))
 
   - id: armament_reference_tier_original
-    value: 140
+    value: 141
     tolerance: 0
     what: >
       Actors that reference a peer's BASE weapon because an original-shipping mod matched them by
-      name; the remaining 174 of 314 are EXPANDED and reference the elite/upgraded replacement
+      name; the remaining 173 of 314 are EXPANDED and reference the elite/upgraded replacement
       instead (maintainer, 2026-09-13). The split is what keeps a replacement from voting beside
       the weapon it replaces, so a move here means the original/expanded boundary shifted and every
       DTA elite weapon changed hands.

@@ -226,7 +226,7 @@ and, stated as a constraint: *"A replacement must not also count beside its base
 | `original` | an original-shipping mod matched it BY NAME | the **base** weapon only |
 | `expanded` | promotion units, Cameo additions, CA/DTA inventions | the **elite/upgraded replacement**, *in place of* the weapon it replaces |
 
-Measured: **140 original, 174 expanded** of the 314 priced actors with an assignment.
+Measured: **141 original, 173 expanded** of the 314 priced actors with an assignment (2026-10-03 re-measure; the earlier 140/174 stats predated an assignment update and were corrected by the 6b61d242b regen).
 
 ⛔ **`Elite=` REPLACES the slot it is declared against, so benching it beside its base weapon lets
 one gun vote twice.** Astra found exactly that on FRIGATE, BEHEMOTH, YAK and HTNKARTY (blocker 1).
@@ -485,7 +485,7 @@ the same row displays a rejected proposal.
 | | |
 |---|---|
 | actors with a priced armament in the assignment | 314 |
-| …referencing a peer's BASE weapon (original) | 140 |
+| …referencing a peer's BASE weapon (original) | 141 |
 | …referencing the elite/upgraded replacement (expanded) | 174 |
 | actors firing in more than one role | 45 |
 | **reference rows contaminated by the fold** | **44** |
