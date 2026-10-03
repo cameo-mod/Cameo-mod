@@ -6,55 +6,15 @@ Upstream: `C:\Users\AedisToru\Documents\GitHub\CAmod` at `b67e28746` (`origin/HE
 
 | status | files |
 |---|--:|
-| IDENTICAL | 67 |
-| STALE | 9 |
-| MODIFIED | 23 |
-| MODIFIED+STALE | 47 |
+| IDENTICAL | 80 |
+| STALE | 0 |
+| MODIFIED | 27 |
+| MODIFIED+STALE | 45 |
 | MOVED/REMOVED | 13 |
-| CAMEO_ONLY | 54 |
-| MISSING (upstream files never copied) | 319 |
+| CAMEO_ONLY | 68 |
+| MISSING (upstream files never copied) | 313 |
 
-## STALE: safe verbatim syncs (upstream changes, no Cameo edits) (9)
-
-- `OpenRA.Mods.CA/Traits/AttachableTo.cs`: base 2023-05-27, 9 upstream commits since
-    - 2026-06-10 - Prevent Nanite Repair from targeting attached Mini Drones. - Added missing Mobile Sensor discount for ARC. - Cap Ichor Spike to affecting 3 resource nodes. - AI uses IC on damaged units only. - SSM voice. - Speculative fix for failed Mini Drone detachment.
-    - 2026-05-30 - Allow Burster to force fire ground. - Strafing Run targeting circle. - Fixed Interceptors camera duration. Show radius while interceptors are active. - Watcher parasites can attach to infantry. A watched unit can be struck again to refresh the parasite duration. - Additional Collector-73 bonus - Watcher attack applies suppression to multiple targets.
-    - 2025-11-02 Attachable crash fix.
-    - 2025-10-29 - Mini Drones inherit cloak from parent. - Corrected TD Harvester palette. - Fixed Mini Drone attach sound.
-    - 2025-06-22 Fix stuck Mini Drone after host is sold.
-- `OpenRA.Mods.CA/Traits/ProductionQueueFromSelectionCA.cs`: base 2023-05-27, 5 upstream commits since
-    - 2025-12-12 - More generic trait for conditions based on lobby options. - Queue selection from selecting allied production structures in co-op. - Mission prerequisite cleanup. - Campaign GPS timer correction (w/ no fog). - Increase Seeker speed from 113 to 126.
-    - 2025-10-18 - Rebel Gateway can be linked to any number of production structures. Can now be linked either from the source or the gateway. Increased cooldown from 3:00 to 4:00. - Scrin basic infantry can benefit from Commissar buff (Warrior, Disintegrator, Assimilator, Rejuvenator, Artificer).
-    - 2025-07-02 Engine update part 7.
-    - 2025-05-04 - Renamed Dragonguard to Tiger Guard. - Fixed Gateway crash when no production structures exist. - Replaced Defense -10% power consumption bonus with +15% power generation. - Corrected build radius increase bonus to be on Economy policy.
-    - 2025-05-03 - Make EMP Missile force shieldable. - Selecting Cloning Vat will select the queue of the linked production structure. - Gateway tooltip & reduced cooldown.
-- `OpenRA.Mods.CA/Traits/Infiltration/InfiltrateToAttach.cs`: base 2023-05-27, 4 upstream commits since
-    - 2025-10-29 - Mini Drones inherit cloak from parent. - Corrected TD Harvester palette. - Fixed Mini Drone attach sound.
-    - 2025-06-19 Grant 15XP for Spy/Infiltrator infiltrations and for Thief captures.
-    - 2024-05-19 Reworked Attachable/AttachableTo traits. Allows multiple AttachableTo traits, each for a different type of attachable.
-    - 2024-02-03 Overhauled mini drone attachment. Improvements to Upgradeable trait and Upgrade activity.
-- `OpenRA.Mods.CA/Traits/Modifiers/WithPalettedOverlay.cs`: base 2023-05-27, 4 upstream commits since
-    - 2026-01-09 Encyclopedia effects fix.
-    - 2025-12-02 Encyclopedia updates.
-    - 2025-11-14 - Voidspike ambient sound now audible through fog. Added sound effect when created. Reduced initial timer from 2 minutes to 30 seconds. Visual effect applied to resource spawners no longer visible through fog. - Reduced Chem Mortar damage vs cyborgs. All mortars now affected by flak vest mitigation. - Adjusted Crossrip/Schism ending phase scaling.
-    - 2023-12-29 Buggy decoy upgrade.
-- `OpenRA.Mods.CA/Traits/AttachOnTransform.cs`: base 2023-05-27, 3 upstream commits since
-    - 2025-12-07 Clean up trait lookups.
-    - 2025-10-29 - Mini Drones inherit cloak from parent. - Corrected TD Harvester palette. - Fixed Mini Drone attach sound.
-    - 2023-07-24 Fixed crash when deploying an MCV with Mini Drone attached.
-- `OpenRA.Mods.CA/Traits/Render/WithColoredSelectionBox.cs`: base 2023-06-18, 3 upstream commits since
-    - 2026-09-12 - Increased Cryo Trooper damage vs defenses. - Easy difficulty tweak. - Selection box trait improvements (currently unused).
-    - 2025-07-02 Engine update part 7.
-    - 2025-01-01 - Player coloured selection box for mines. - Troop Crawler dummy weapon no longer targets vehicles. - Increase Hoplite blind duration by 1s. Increase radius vs infantry slightly. Reset weapon after not attacking for a few seconds. - Corrected Scrin unit palettes in campaign so they appear grey when built by Nod.
-- `OpenRA.Mods.CA/Traits/AttachOnCreation.cs`: base 2023-05-27, 2 upstream commits since
-    - 2025-10-29 - Mini Drones inherit cloak from parent. - Corrected TD Harvester palette. - Fixed Mini Drone attach sound.
-    - 2024-05-19 Reworked Attachable/AttachableTo traits. Allows multiple AttachableTo traits, each for a different type of attachable.
-- `OpenRA.Mods.CA/Traits/Player/LobbyPrerequisiteDropdown.cs`: base 2025-07-02, 1 upstream commits since
-    - 2025-07-11 - Reworked CountManager and related traits. - Removed unused/redundant traits. - Yaml fixes.
-- `OpenRA.Mods.CA/Traits/PopControlled.cs`: base 2023-05-27, 1 upstream commits since
-    - 2025-05-21 - Increased Killzone duration from 30s to 1 min. Reduced cooldown from 4 min to 3 min. - Improved PopControlled trait so it can deal with actors created in the same tick. - Improved SpawnActorWarhead so it doesn't create then dispose an actor if it's not positionable.
-
-## MODIFIED+STALE: port the upstream diff by hand (47)
+## MODIFIED+STALE: port the upstream diff by hand (45)
 
 - `OpenRA.Mods.CA/Traits/MindController.cs`: base 2023-09-01, 17 upstream commits since, Cameo diff 91 lines
     - 2026-01-10 Mind control trait improvements.
@@ -62,12 +22,6 @@ Upstream: `C:\Users\AedisToru\Documents\GitHub\CAmod` at `b67e28746` (`origin/HE
     - 2025-07-02 Engine update part 7.
     - 2025-05-19 - Fixed crash when manually releasing mind controlled slaves. - Added target painter ability to Pitbull. - Added minimum range to Aurora so it will circle back instead of missing. - Increased Killzone duration from 16s to 30s. - FlashTarget warhead. - WithFlashEffect trait. - Tooltip tweaks.
     - 2025-05-15 - Reduced speed of Tiger Guard IFV. - Fixed Hacker IFV permanently controlling targets. - Tooltip tweaks. - Removed debugging.
-- `OpenRA.Mods.CA/Traits/Attachable.cs`: base 2023-05-27, 14 upstream commits since, Cameo diff 4 lines
-    - 2026-07-03 Warning fix.
-    - 2026-06-27 Improved responsiveness of Mini Drone attachment.
-    - 2026-06-12 Vulcan voice.
-    - 2026-06-04 - The full XP of any destroyed ARC drones will now be added to a singular reclaimable XP pool. On production of new drones, this XP will be drawn from up to veterancy level 2. - Mini Drones will transfer their XP to the parent unit on attaching. They will then inherit the veterancy level of the parent unit, and any damage dealt will be given to the parent unit. - Suppression Field can be applied as long as one valid unit is visible within the target circle (non-visible units within the circle will then be affected upon activation). - Made Templar laser with Quantum Capacitors more visually distinct. - Red skull icon for Assassins. - Fixed triple SSM with Black Napalm burst count. Adjusted reload to bring DPS into line. - Removed duplicate lasher warhead.
-    - 2025-10-29 - Mini Drones inherit cloak from parent. - Corrected TD Harvester palette. - Fixed Mini Drone attach sound.
 - `OpenRA.Mods.CA/Traits/MindControllable.cs`: base 2023-05-27, 10 upstream commits since, Cameo diff 28 lines
     - 2026-05-10 Mind controlled MGG original owner defeated crash workaround fix.
     - 2026-01-10 Mind control trait improvements.
@@ -80,7 +34,7 @@ Upstream: `C:\Users\AedisToru\Documents\GitHub\CAmod` at `b67e28746` (`origin/HE
     - 2025-05-23 - Mind Sparks and Decoy Projectors are now targeted abilities, where the target is where the sparks/decoys will move to after spawning. - Reduced Mind Spark suppression duration, rate of fire, and increased cooldown by 5s. Increase hitbox size for easier selection. - Pitbull target painter can target buildings under fog. - Heroes of the Union applies to Grenadiers and Flamethrowers.
     - 2025-05-19 - Fixed crash when manually releasing mind controlled slaves. - Added target painter ability to Pitbull. - Added minimum range to Aurora so it will circle back instead of missing. - Increased Killzone duration from 16s to 30s. - FlashTarget warhead. - WithFlashEffect trait. - Tooltip tweaks.
     - 2025-05-18 - Loyalist growth bonus applies to full build radius. - Enforcer deals damage in a line. - Enforcer IFV gains 50% damage reduction (up from 30%). Fires double shot. - Increased Hoplite IFV rate of fire, splash radius and damage. - Simplified Hoplite recharge yaml. - Floating Disc drain targeted via ability.
-- `OpenRA.Mods.CA/TraitsInterfaces.cs`: base 2023-06-07, 9 upstream commits since, Cameo diff 3 lines
+- `OpenRA.Mods.CA/TraitsInterfaces.cs`: base 2023-06-07, 9 upstream commits since, Cameo diff 19 lines
     - 2026-09-07 Drain resources power updates.
     - 2026-07-08 Ion Cannon & Lightning Storm always strikes center with first shot.
     - 2025-12-02 Encyclopedia updates.
@@ -122,13 +76,13 @@ Upstream: `C:\Users\AedisToru\Documents\GitHub\CAmod` at `b67e28746` (`origin/HE
     - 2026-06-05 Add Glow Effect to CA Projectiles
     - 2025-07-02 Engine update part 10 (projectiles).
     - 2025-07-02 Engine update fixes part 3.
-- `OpenRA.Mods.CA/Traits/BotModules/SquadManagerBotModuleCA.cs`: base 2025-07-02, 6 upstream commits since, Cameo diff 2521 lines
+- `OpenRA.Mods.CA/Traits/BotModules/SquadManagerBotModuleCA.cs`: base 2025-07-02, 6 upstream commits since, Cameo diff 2695 lines
     - 2026-02-12 - Increased IFV HP from 30k to 32k. - Tiger Guard IFV prioritizes vehicle targets. - Increased Peacemaker damage vs defenses. - Clean up V3 upgrade remnants. - AI tweaks.
     - 2026-02-09 Compositions.
     - 2026-02-08 Updated AI routing.
     - 2026-02-08 AI harasser squads.
     - 2026-02-08 Skirmish AI indirect routes of attack.
-- `OpenRA.Mods.CA/Traits/BotModules/Squads/States/GroundStatesCA.cs`: base 2023-12-22, 6 upstream commits since, Cameo diff 1254 lines
+- `OpenRA.Mods.CA/Traits/BotModules/Squads/States/GroundStatesCA.cs`: base 2023-12-22, 6 upstream commits since, Cameo diff 1361 lines
     - 2026-02-09 Compositions.
     - 2026-02-08 Updated AI routing.
     - 2026-02-08 - V3 now Ukraine unique unit. - Siege Tank now replaces V2 for Ukraine. - Yaml fixes.
@@ -146,12 +100,6 @@ Upstream: `C:\Users\AedisToru\Documents\GitHub\CAmod` at `b67e28746` (`origin/HE
     - 2025-07-02 Engine update part 7.
     - 2025-07-02 Engine update fixes.
     - 2025-05-25 - Make Anathema affect MAD tank thump interval. - Improve Mothership crash explosion. - Increase Basilisk range from 5 to 8. - After 4 pulses Desolator eruption radius increases by 1 cell. - Fixed Decoy Projectors crash. - Fixed actor spawning abilities ordering by distance. - Fixed targeted weapon abilities no longer being targetable on ground. - Changed bulk transport loading cursor to yellow to make it easier to distinguish.
-- `OpenRA.Mods.CA/Activities/InstantTransform.cs`: base 2023-05-27, 5 upstream commits since, Cameo diff 2 lines
-    - 2026-06-10 - Prevent Nanite Repair from targeting attached Mini Drones. - Added missing Mobile Sensor discount for ARC. - Cap Ichor Spike to affecting 3 resource nodes. - AI uses IC on damaged units only. - SSM voice. - Speculative fix for failed Mini Drone detachment.
-    - 2025-10-18 - Fixed Engineer not defusing SEAL C4. - Fixed Tib Stealth not applying to attached Mini Drones. - Fixed Entrenchment prerequisite display in chapter 8 missions. - Speculative fix for Mini Drones not detaching properly if parent is killed. - Corrected fake War Factory selection bounds.
-    - 2025-06-21 - Make Tech Buildings hackable, chillable and affected by target painter & watcher parasite. - Fix Mini Drone not detaching when attached to an MCV which deploys. - Mini Drones can now survive their host being destroyed.
-    - 2024-12-19 Avenger & Ceramic Armor upgrades for Warthog on Bombardment & Hold the Line strategies respectively. Sidewinders for Seek & Destroy only.
-    - 2024-02-03 Overhauled mini drone attachment. Improvements to Upgradeable trait and Upgrade activity.
 - `OpenRA.Mods.CA/Traits/ChronoshiftableCA.cs`: base 2024-02-09, 5 upstream commits since, Cameo diff 11 lines
     - 2025-12-07 Clean up trait lookups.
     - 2025-10-19 Speculative fix for interrupted Chronoshift.
@@ -169,12 +117,12 @@ Upstream: `C:\Users\AedisToru\Documents\GitHub\CAmod` at `b67e28746` (`origin/HE
     - 2025-07-02 Engine update part 7.
     - 2025-07-02 Engine update fixes part 3.
     - 2024-12-07 - Added voice announcement for when Covenants become available. - Added tracers effects to Wolverine & updated firing sound. - Increased Chrono Tank rate of fire, damage vs light/buildings, range (+1) and turn speed. Reduced HP from 45k to 32k. - Increased JumpJet/Bombardier speed. - Ships targetable by Anathema. - Tripled PAC damage vs buildings. - Reduced duration of Cyborg Reaper snare from 8s to 6s. - Zone Defender shield stacks up to 6 times providing between 25% and 50% damage reduction. - Updated Stromberg maps.
-- `OpenRA.Mods.CA/Traits/BotModules/Squads/SquadCA.cs`: base 2023-05-27, 4 upstream commits since, Cameo diff 93 lines
+- `OpenRA.Mods.CA/Traits/BotModules/Squads/SquadCA.cs`: base 2023-05-27, 4 upstream commits since, Cameo diff 104 lines
     - 2026-02-08 Updated AI routing.
     - 2026-02-08 AI harasser squads.
     - 2026-02-08 Skirmish AI indirect routes of attack.
     - 2025-08-10 AI updates.
-- `OpenRA.Mods.CA/Traits/BotModules/Squads/States/AirStatesCA.cs`: base 2023-05-27, 4 upstream commits since, Cameo diff 335 lines
+- `OpenRA.Mods.CA/Traits/BotModules/Squads/States/AirStatesCA.cs`: base 2023-05-27, 4 upstream commits since, Cameo diff 344 lines
     - 2026-01-09 Fix AI aircraft limits.
     - 2025-08-10 AI updates.
     - 2025-06-08 AI crash fix.
@@ -184,7 +132,7 @@ Upstream: `C:\Users\AedisToru\Documents\GitHub\CAmod` at `b67e28746` (`origin/HE
     - 2025-05-24 ReloadAmmoPoolCA refactoring.
     - 2025-05-24 - Obliterator charge drains gradually instead of immediately if targeting is interrupted. Added minimum range to prevent direction bug. - EMP Grenadiers don't get range bonus from Heroes of the Union. - Fixed Voidspike visual glitch if hit by weapons which flash the target. - Added Health to Mind Spark so its death animation plays.
     - 2023-12-29 Buggy decoy upgrade.
-- `OpenRA.Mods.CA/Traits/BotModules/Squads/States/StateBaseCA.cs`: base 2023-05-27, 3 upstream commits since, Cameo diff 203 lines
+- `OpenRA.Mods.CA/Traits/BotModules/Squads/States/StateBaseCA.cs`: base 2023-05-27, 3 upstream commits since, Cameo diff 216 lines
     - 2026-02-08 Updated AI routing.
     - 2026-02-08 Skirmish AI indirect routes of attack.
     - 2025-08-10 AI updates.
@@ -222,9 +170,9 @@ Upstream: `C:\Users\AedisToru\Documents\GitHub\CAmod` at `b67e28746` (`origin/HE
     - 2024-05-18 Scrin allegiances, Eviscerator, Obliterator, Nullifier, Overlord's Wrath, Gateway & Watcher.
 - `OpenRA.Mods.CA/Traits/Attack/AttackFrontalCharged.cs`: base 2025-10-06, 1 upstream commits since, Cameo diff 3 lines
     - 2025-12-07 Clean up trait lookups.
-- `OpenRA.Mods.CA/Traits/BotModules/BaseBuilderBotModuleCA.cs`: base 2025-07-02, 1 upstream commits since, Cameo diff 841 lines
+- `OpenRA.Mods.CA/Traits/BotModules/BaseBuilderBotModuleCA.cs`: base 2025-07-02, 1 upstream commits since, Cameo diff 913 lines
     - 2025-08-10 AI updates.
-- `OpenRA.Mods.CA/Traits/BotModules/BotModuleLogic/BaseBuilderQueueManagerCA.cs`: base 2023-05-27, 1 upstream commits since, Cameo diff 693 lines
+- `OpenRA.Mods.CA/Traits/BotModules/BotModuleLogic/BaseBuilderQueueManagerCA.cs`: base 2023-05-27, 1 upstream commits since, Cameo diff 977 lines
     - 2025-08-10 AI updates.
 - `OpenRA.Mods.CA/Traits/BotModules/Squads/States/NavyStatesCA.cs`: base 2025-07-02, 1 upstream commits since, Cameo diff 437 lines
     - 2025-08-10 AI updates.
@@ -267,21 +215,21 @@ Upstream: `C:\Users\AedisToru\Documents\GitHub\CAmod` at `b67e28746` (`origin/HE
 - `OpenRA.Mods.CA/Traits/TransferStanceToDeathActor.cs`: base 2023-05-27, 0 upstream commits since
 - `OpenRA.Mods.CA/Traits/World/RevealedPlayersManager.cs`: base 2023-07-02, 0 upstream commits since
 
-## MISSING: upstream files never adopted (319), by area
+## MISSING: upstream files never adopted (313), by area
 
-- `Traits`: **82**
+- `Traits`: **80**
 - `Traits/SupportPowers`: **26**
 - `Traits/Conditions`: **25**
 - `Warheads`: **23**
 - `Widgets/Logic`: **22**
-- `Traits/Player`: **18**
 - `Traits/Render`: **18**
-- `Activities`: **17**
+- `Traits/Player`: **17**
+- `Activities`: **16**
 - `Scripting`: **16**
 - `Projectiles`: **13**
-- `Graphics`: **11**
-- `Effects`: **9**
+- `Graphics`: **10**
 - `Widgets`: **9**
+- `Effects`: **8**
 - `Traits/Multipliers`: **5**
 - `Orders`: **4**
 - `Traits/Attack`: **4**
@@ -298,7 +246,6 @@ Upstream: `C:\Users\AedisToru\Documents\GitHub\CAmod` at `b67e28746` (`origin/HE
 
 ### Every missing file
 
-- `OpenRA.Mods.CA/Activities/Attach.cs`
 - `OpenRA.Mods.CA/Activities/AttackFrontalFollowActivity.cs`
 - `OpenRA.Mods.CA/Activities/BallisticMissileFly.cs`
 - `OpenRA.Mods.CA/Activities/ChronoResourceTeleport.cs`
@@ -320,7 +267,6 @@ Upstream: `C:\Users\AedisToru\Documents\GitHub\CAmod` at `b67e28746` (`origin/HE
 - `OpenRA.Mods.CA/Effects/FlashTargetCA.cs`
 - `OpenRA.Mods.CA/Effects/GPSRadarDotEffect.cs`
 - `OpenRA.Mods.CA/Effects/GpsSatelliteCA.cs`
-- `OpenRA.Mods.CA/Effects/LinkedProducerIndicator.cs`
 - `OpenRA.Mods.CA/Effects/MultiWeaponImpactEffect.cs`
 - `OpenRA.Mods.CA/Effects/SatelliteLaunchCA.cs`
 - `OpenRA.Mods.CA/Effects/SmokeParticle.cs`
@@ -331,7 +277,6 @@ Upstream: `C:\Users\AedisToru\Documents\GitHub\CAmod` at `b67e28746` (`origin/HE
 - `OpenRA.Mods.CA/Graphics/KKNDLaserRenderable.cs`
 - `OpenRA.Mods.CA/Graphics/RadBeamRenderable.cs`
 - `OpenRA.Mods.CA/Graphics/RailgunHelixRenderableCA.cs`
-- `OpenRA.Mods.CA/Graphics/SelectionBoxAnnotationRenderableCA.cs`
 - `OpenRA.Mods.CA/Graphics/TeslaZapRenderableCA.cs`
 - `OpenRA.Mods.CA/Graphics/TintedCell.cs`
 - `OpenRA.Mods.CA/Graphics/UIModifyableSpriteRenderable.cs`
@@ -444,8 +389,6 @@ Upstream: `C:\Users\AedisToru\Documents\GitHub\CAmod` at `b67e28746` (`origin/HE
 - `OpenRA.Mods.CA/Traits/InheritsExperienceLevelOfMaster.cs`
 - `OpenRA.Mods.CA/Traits/InitiallyHunts.cs`
 - `OpenRA.Mods.CA/Traits/LaysMinefield.cs`
-- `OpenRA.Mods.CA/Traits/LinkedProducerSource.cs`
-- `OpenRA.Mods.CA/Traits/LinkedProducerTarget.cs`
 - `OpenRA.Mods.CA/Traits/MissileSpawnerSlave.cs`
 - `OpenRA.Mods.CA/Traits/Modifiers/WithColoredOverlayCA.cs`
 - `OpenRA.Mods.CA/Traits/Multipliers/FlatHealthDamageMultiplier.cs`
@@ -467,7 +410,6 @@ Upstream: `C:\Users\AedisToru\Documents\GitHub\CAmod` at `b67e28746` (`origin/HE
 - `OpenRA.Mods.CA/Traits/Player/PlayerBountyPool.cs`
 - `OpenRA.Mods.CA/Traits/Player/PlayerConnectionStatus.cs`
 - `OpenRA.Mods.CA/Traits/Player/PlayerExperienceLevels.cs`
-- `OpenRA.Mods.CA/Traits/Player/PopController.cs`
 - `OpenRA.Mods.CA/Traits/Player/ProvidesPrerequisiteIfAlliesExist.cs`
 - `OpenRA.Mods.CA/Traits/Player/ProvidesPrerequisitesOnCount.cs`
 - `OpenRA.Mods.CA/Traits/Player/ProvidesPrerequisitesOnTimeline.cs`

@@ -1,3 +1,28 @@
+# 2026-10-03 — armed 2v2 forensics: claim arbitration ordered by participant key, not ClientIndex
+
+*Devin (dawn), main checkout — the armed-run follow-up the merge receipt queued. Fixes review §4.4's residual: the TC-3 identity fix reached rescue/sectors but not TC-2e precedence or TC-2d rank.*
+
+**Finding:** the armed 2v2 (BF_team_capture_claims + coalition groups, gdi/nod/mixed 3-match set) still
+showed 27 allied contested capture ids. Cause: `ClaimsAheadOf` ordered by `ClientIndex` — map-side
+bots share the host's index, so `broadcast.ClientIndex >= myClientIndex` filtered every broadcast and
+no claim was ever "ahead". The arbitration ran every pass and could never fire. `TeamRoleRank` had the
+same blind spot (a shared index collapses every map-side team to rank 0 → one role for the team).
+
+**Fix:** ordering moves to `CoalitionFold.ParticipantKey` (`Player.InternalName`; `#ClientIndex`
+fallback marks old-version publishers). `ClaimsAheadOf(broadcasts, string)`; EngineerBotModule +
+GarrisonContestBotModule pass `player.InternalName`; `TeamRoleRank` string-keyed the same way. Report
+coherence: `contested_claims` counts exclusive-claim kinds only — a shared `secure:<enemy>` is the
+coordinated push and lands under `shared_push_windows`, not contested.
+
+**Verified:** build 0W/0E; tests 745/745 (incl. shared-ClientIndex regression + fallback + same-key
+cases). Armed gdi-mirror 2v2 on the fixed build: superseded stand-downs on capture ids 0→8 — every
+contested race now resolves by arbitration inside ~125-500 ticks (the documented staggered-broadcast
+window), not by outmatched/lost_units attrition. Residual contested ids = the ~1-commit propagation
+overlap; `defend_answer` commits 25, `secure` push counted under shared_push_windows. One watch-item:
+a standing defend request produced 16 commit/release cycles on one requester+cell id — honest records,
+but the protection squad releases and re-rallies on the same continuous request; worth a hold-time
+look in the TC-3 lane.
+
 # 2026-10-03 — merge receipt: canonical TC-2e (`02a2a73e0`) + DAWN telemetry/gate preserves
 
 *Devin (dawn), main checkout, merge commit `56aba20bd`.*
@@ -21,6 +46,27 @@ row reads `ok` (EngineerBotModule + GarrisonContestBotModule → MasterAiBotModu
 
 **Next:** armed-match telemetry (BF_team_capture_claims + TC-2/3 groups) — contested `capture:` ids,
 `defend_answer` commits, `secure:` shared-push windows.
+
+# 2026-10-03 — raid-mission steering: a Raid card may ride the wave that commits anyway (TC-2f)
+
+*Devin (nova), worktree `nova-tc2`, branch `devin/nova/def3-remote-coverage` — the squad-layer fix for EMBER's documented dead-end: Raid cards publish but never commit, because `BestAffordableMission` gates `RequiredValue <= idleForceValue` on the idle pool and a provider's RequiredValue is sized for a dedicated force, not for a wave that already passed the launch bar.*
+
+**Done:**
+- `SquadManagerBotModuleCAInfo` gains `UseRaidMissionSteering` (default off) +
+  `RaidMissionSteerOvercommitPercent` (300) + `RaidMissionSteerMinValue` (0).
+- New pure selector `SquadManagerBotModuleCA.BestRaidForSteering(providers, cap)`
+  — Raids only, deterministic (Priority desc, RequiredValue asc, publish order).
+  `BestAffordableMission` untouched.
+- The formation path calls it only when the Defend-hold loop left `mission` null;
+  a steered Raid lands above the non-Defend clearing (it IS a real commit) and
+  flows through the unchanged Raid target-resolution + `MissionTaken` path.
+- Six genericbot `SquadManagerBotModuleCA` instances carry the fields at default;
+  @classic untouched. Switch group `BG_raid_mission_steering`; AI_ARCHITECTURE
+  §12.27 documents the gate, semantics and rejected alternatives.
+
+**Verified:** build + tests below; `apply_increment_switches.py --dry-run` arms
+the six personality instances only. Off = bit-identical: `SelectRaidForSteering`
+returns null before touching anything.
 
 # 2026-10-02 — order-gate fix: a released lease is a hand-off, not a cross (EMBER's seam finding)
 
@@ -17260,3 +17306,141 @@ bandit confound (§6.3/6.4) — Claude's lanes.
   shared deletion merges clean vs cb0e02194; their extra AF_harvester_spread
   `MaxHarvestersPerResourceIndice: 4` on @generic is a documented no-op (C# default is
   already 4). No conflict expected.
+
+## 2026-10-02 EMBER — armed smoke caught a real crash in GC-1 close-out (fixed)
+
+The all-39-groups armed smoke (tmpab-smoke @ 0e03d4238) died in all 4 matches:
+`InvalidOperationException: Attempted to get trait from destroyed object` at
+`GarrisonContestBotModule.IsInside` — my terminal-card refactor hoisted
+`IsInside(w)` into a separate local evaluated BEFORE the IsDead/IsInWorld
+guards; TraitOrDefault on a destroyed actor throws. Fixed: `inside` is now
+computed after the liveness checks inside the same expression, preserving the
+original short-circuit reachability. Lesson: `List.RemoveAll` predicate bodies
+must keep the destroyed-actor guards FIRST — hoisting a trait call into a local
+silently reorders them.
+
+Verification: compile clean; boot-gate PASS from a private engine copy
+(C:/tmp/aiwork-engine — bin + glsl + mods + VERSION + geoip; glsl/ is REQUIRED,
+shader compile fails without it) since the shared bin was held by other lanes.
+Re-running the armed smoke on the fixed build next.
+
+## 2026-10-02 late — ember lane: origin/master merge (110823350), GC-1 conflict + crash-fix re-application
+
+Merged `origin/master` (through 977ee08ea — NOVA's `def3-remote-coverage` PR #777 carrying
+DAWN's TC-2e capture-claim arbitration + TC-3 lifecycle hardening, commit 02a2a73e0).
+
+One conflict: `GarrisonContestBotModule.cs`. Upstream had already integrated my GC-1 terminal
+cards and EXTENDED them — `claimsAhead` (TeamBlackboard.ClaimsAheadOf arbitration off the team
+capture-claim board), `claimCells` tracking, a supersede stand-down path (release + Stop order so
+the queued EnterGarrison cannot capture anyway), and `WriteClaimClosed(id, anyInside, superseded)`
+mapping superseded to `BotMissionReasons.Superseded`. Resolution: take their block wholesale and
+RE-APPLY the destroyed-actor guard fix in the two places their merge re-captured the pre-fix
+ordering — `walkers.Any(IsInside)` in the supersede path and `var inside = IsInside(w)` in the
+else-branch RemoveAll now both check IsDead/IsInWorld/owner BEFORE the trait call. The crash they
+inherited would have thrown on the first dead walker — merge resolution had to re-fix it, not
+just pick a side.
+
+Post-merge verification: Cameo + Cameo.Test builds clean; TeamCaptureClaims + CoalitionFold +
+Mission filters = 50/50 pass; `apply_increment_switches --groups all --dry-run` arms all 41
+groups (new: BF_team_capture_claims, BD_tc3_sectors, BE_tc3_main_target — the TC-2e/TC-3 groups
+upstream added) with 121 changes and no stale targets; arch freshness audit caught the merge's
+own staleness (map regen on merged tree → PASS); boot-gate PASS with `Engine.SupportDir` pointed
+at a private logs dir so a concurrent main-checkout boot could not overwrite my perf.log evidence.
+
+## 2026-10-03 — ember lane: GC-1 lifecycle hole + killbox bleeding (smoke-evidence fixes)
+
+The merged-master armed smoke (ab-smoke-out7, all 41 groups armed, hard vs classic td_gdi x4)
+finished **3-0 for hard** (37,002 / 29,185 / +1 ticks, zero exceptions). Round-trip on the new
+evidence: execution layer PASS (all 40 published cards got attempts — the earlier 8-card raid
+gap is gone), order gate crossed=0 (refused=49 — gate declining second issuers correctly),
+write-back PASS (101 terminal events), 2 dangling engineer capture attempts + 3 in-flight at
+match end (flagged to the engineer owner).
+
+The GC-1 card stream also surfaced two defects in MY module, now fixed:
+
+1. **Claim lifecycle hole** — `garrison_contest:a550` published t=90 and stayed open for the
+   entire 37k-tick match. A wedged-but-alive walker keeps renewing its lease in the housekeeping
+   pass (`done` stays false: alive, owned, outside, claimable), so the claim never prunes. New
+   `ClaimTimeoutTicks` (7500): claims with no walker inside past the timeout stand the walkers
+   down (release + Stop, same shape as the TC-2e supersede path — factored into a shared
+   `StandDownWalkers`) and close `DORMANT stuck`.
+2. **Re-contest bleeding** — building `a166` in match cf428c10 ate `lost_units` SEVEN times in
+   ~5000 ticks: claim, walkers die approaching, republish, repeat. The suicidal killbox loop the
+   module was built to avoid. New `ContestRetryCooldownTicks` (2500 base): consecutive
+   `lost_units`/`x_contest_lost` closes on a building impose an escalating backoff
+   (cooldown x streak) checked in the candidate filter; a `done` close clears the streak.
+   `superseded`/`stuck` are neutral — no bleeding recorded.
+
+Also verified in the merge review: upstream's GC-1 TC-2e integration is sound (blackboard
+arbitration degrades to no-op with flag off or in 1v1; claimCells lifecycle complete), and
+02a2a73e0 closed all four Codex TC-3 findings (central IsLive, rescue consumes responder,
+InternalName identity, §12.18 eventual-consistency doc).
+
+Verification: Cameo build clean (deploy locked by other lanes' games — obj dlls copied to the
+private engine + tracked dll), boot-gate PASS with isolated SupportDir.
+
+Post-commit review: `stuck` also counts toward the backoff streak (a wedged path is
+topological — a re-claim sends the next walkers into the same dead end); only `superseded`
+stays neutral.
+
+## 2026-10-03 — ember lane: smoke forensics — the stalled match and the silent finisher
+
+Forensic read on `ab-smoke-out7` match cf428c10 (runner verdict "stalled", 0 records):
+
+- **Not a refusal**: hard issued `raid` missions continuously (priorities 40-87) and ground
+  classic from 14 buildings/10k army to 1 building/0 army between t=17851 and t=19351. The
+  enemy collapse was fast and total; hard was winning, not turtling.
+- **The finisher gates late**: after the collapse (enemy `army_value=0`, `buildings=1`,
+  `defence_count=0`, `last_seen` fresh, `main_target=Multi1` score 272), the situation record
+  sat at `mission=None` for ~1600 ticks before SquadManager's shared push `secure:Multi1`
+  finally committed at t=20930 — right before the runner's stall kill. The push exists and
+  was en route; it gates on something beyond total enemy collapse. **SquadManager lane flag.**
+- **secure pushes never terminalize**: in match a4195e79 (a hard WIN), `secure:Multi1`
+  committed at t=20930 and wrote no terminal record for the remaining ~15.8k ticks — the
+  checker's outcomes layer FAILs on exactly this class. Every `secure:<player>` attempt is
+  effectively dangling forever. Same owner. Fix shape: the push should DORMANT done/target_gone
+  like every other mission (or RELEASED when the squad disbands).
+
+GC-1 contrast for the same window: my contest/raid cards all terminalized (the a550 hang is
+the fixed ClaimTimeoutTicks case). The mission-lifecycle discipline GC-1 follows is the model
+the shared push needs.
+
+Round-trip on out7 summary: execution PASS (0 uncommitted cards of 40), order-gate crossed=0,
+write-back PASS, outcomes FAIL on the dangling secure push + engineer captures (in-flight at
+match end are separately reported, not counted).
+
+## 2026-10-03 — ember lane: GC-1 fix verification smoke (ab-smoke-out8)
+
+Verification batch on `448fc3c0e` + GC-1 timeout/backoff fixes, all 41 groups armed,
+hard vs classic td_gdi x4: **4/4 clean, zero exceptions, 2-2** (hard won 57,251t and
+16,256t games; classic won 16,323t and 25,559t — small-sample directional only).
+
+The fixes fired exactly as designed:
+
+- `DORMANT stuck` x7 — `garrison_contest:a550` wedged identically in 3 separate games
+  (~7500 ticks post-publish each: the claim timeout catching the same topologically
+  unwalkable garrison). Pre-fix: card open forever. Now: closed, stand-down, retry
+  throttled by backoff.
+- Backoff worked: a550's second stuck in f7a96546 came ~10k ticks after the first
+  (streak=2 → 5000t block). Zero republishes inside a cooldown window across all matches.
+- Round-trip: **outcomes PASS, 0 dangling** (73 attempts, 1 in flight at match end —
+  the secure-push dangling class did not recur), execution PASS (0/46 uncommitted),
+  write-back PASS (137 terminal events), order-gate crossed=1 (one residual second-issuer
+  blip vs 0 last batch — same SquadManager/Scout seam class, owner flagged before).
+
+Contest close mix across the batch: 35 done / 30 lost_units / 7 stuck / 3 x_contest_lost
+— real contests, real attrition, all terminalized.
+
+## 2026-10-03 — ember lane: TC-2f merge review (NOVA raid steering)
+
+Merged `b05f7e9de` (PR #778): TC-2f raid-mission steering, `BG_raid_mission_steering`,
+default-off, all six genericbot personalities, classic untouched — NOVA's fix for the
+raid-execution gap my execution layer surfaced (8/8 raid cards never committed in out4).
+Design is the right shape: `SelectMission` unchanged; when nothing affordable wins, a
+launching Rush wave re-picks among Raid cards under an overcommit cap (idle x 300% +
+flat floor) — steering changes WHERE the wave lands, not WHETHER it goes; a steered
+Raid releases the Defend-hold machinery like any won card. `BestRaidForSteering` is
+null-safe and deterministic (Priority desc, RequiredValue asc, publish order). +9
+RaidSteeringTest. Verified post-merge: tests 9/9, freshness audit regen PASS (the merge
+staleness it flagged is exactly what the gate exists for), BG switch arms 6 writes,
+boot-gate PASS, 743/743 suite total per NOVA.

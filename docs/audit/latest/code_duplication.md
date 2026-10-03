@@ -1,6 +1,6 @@
 # audit_code_duplication — copy-paste clone groups
 
-Python files: **797** (min 5 statements), C# files: **443** (min 8 lines)
+Python files: **806** (min 5 statements), C# files: **475** (min 8 lines)
 
 
 ## Files that do not parse (not scanned)
@@ -12,7 +12,7 @@ Python files: **797** (min 5 statements), C# files: **443** (min 8 lines)
 | code | meaning | clone groups | baseline |
 |---|---|---|---|
 | C1 | identical Python function bodies | 29 | 10 |
-| C2 | identical C# method bodies | 21 | 14 |
+| C2 | identical C# method bodies | 22 | 14 |
 | C3 | identical module-level literal tables | 43 | 10 |
 
 
@@ -51,31 +51,32 @@ Python files: **797** (min 5 statements), C# files: **443** (min 8 lines)
 | 2 | f7586bdb04bd3e37 | tools/balance/consolidate_exact_profile_duplicates.py:231 remove_node(); tools/balance/consolidate_laser_heavy_routes.py:212 remove_node() |
 
 
-## C2 — C# method clones (21 group(s))
+## C2 — C# method clones (22 group(s))
 
 | copies | fingerprint | sites |
 |---|---|---|
-| 4 | 6def834d295492bb | OpenRA.Mods.Cameo/Traits/BotModules/EngineerBotModule.cs:1096 EscortReady(); OpenRA.Mods.Cameo/Traits/BotModules/EngineerBotModule.cs:1103 DefenceValue(); OpenRA.Mods.Cameo/Traits/BotModules/EngineerBotModule.cs:1108 OwnArmedValueNear(); OpenRA.Mods.Cameo/Traits/BotModules/EngineerBotModule.cs:1128 BlockedByEscort() |
+| 4 | 6def834d295492bb | OpenRA.Mods.Cameo/Traits/BotModules/EngineerBotModule.cs:1164 EscortReady(); OpenRA.Mods.Cameo/Traits/BotModules/EngineerBotModule.cs:1171 DefenceValue(); OpenRA.Mods.Cameo/Traits/BotModules/EngineerBotModule.cs:1176 OwnArmedValueNear(); OpenRA.Mods.Cameo/Traits/BotModules/EngineerBotModule.cs:1196 BlockedByEscort() |
 | 3 | 2049c109832a37b5 | OpenRA.Mods.Cameo/Widgets/ObserverBuildOrderIconsWidget.cs:184 Tick(); OpenRA.Mods.Cameo/Widgets/ObserverPromotionsIconsWidget.cs:158 Tick(); OpenRA.Mods.Cameo/Widgets/PlayerUpgradesIconsWidget.cs:151 Tick() |
-| 3 | ec2ad77fd06bf5bb | OpenRA.Mods.Cameo/Traits/BotModules/BotSituation.cs:1787 TargetScore(); OpenRA.Mods.Cameo/Traits/BotModules/BotSituation.cs:1790 TargetScore(); OpenRA.Mods.Cameo/Traits/BotModules/BotSituation.cs:1794 TargetScore() |
+| 3 | ec2ad77fd06bf5bb | OpenRA.Mods.Cameo/Traits/BotModules/BotSituation.cs:1906 TargetScore(); OpenRA.Mods.Cameo/Traits/BotModules/BotSituation.cs:1909 TargetScore(); OpenRA.Mods.Cameo/Traits/BotModules/BotSituation.cs:1913 TargetScore() |
 | 2 | 05372eb40e5f4542 | OpenRA.Mods.Cameo/UtilityCommands/FactionBuildableReportCommand.cs:292 ExpandTransforms(); OpenRA.Mods.Cameo/UtilityCommands/TildeAuditCommand.cs:470 ExpandTransforms() |
-| 2 | 07c66d79766bf896 | OpenRA.Mods.CA/Traits/BotModules/SquadManagerBotModuleCA.cs:955 CanEscortArtillery(); OpenRA.Mods.CA/Traits/BotModules/SquadManagerBotModuleCA.cs:968 CanHitAir() |
+| 2 | 07c66d79766bf896 | OpenRA.Mods.CA/Traits/BotModules/SquadManagerBotModuleCA.cs:1032 CanEscortArtillery(); OpenRA.Mods.CA/Traits/BotModules/SquadManagerBotModuleCA.cs:1045 CanHitAir() |
 | 2 | 1c600b09b51924b2 | OpenRA.Mods.Cameo/Widgets/ClickMaskWidget.cs:28 HandleMouseInput(); OpenRA.Mods.Cameo/Widgets/CommanderTreeDismissWidget.cs:24 HandleMouseInput() |
 | 2 | 1fe354611923a401 | OpenRA.Mods.Cameo/Traits/DroneSpawnerMasterCA.cs:235 SpawnIntoWorld(); OpenRA.Mods.Cameo/Traits/ShadeMaster.cs:139 SpawnIntoWorld() |
 | 2 | 2a3b5caf2a992b8b | OpenRA.Mods.Cameo/Traits/DroneSpawnerMasterCA.cs:282 MoveSlaves(); OpenRA.Mods.Cameo/Traits/SlaveMinerSpawnerMaster.cs:193 MoveSlaves() |
-| 2 | 2ed6818d4fa1dcc1 | OpenRA.Mods.CA/Traits/AttachOnCreation.cs:43 Attach(); OpenRA.Mods.CA/Traits/AttachOnTransform.cs:45 Attach() |
 | 2 | 36919d259764fdb5 | OpenRA.Mods.Cameo/Traits/DroneSpawnerMasterCA.cs:297 AssignSlaveActivity(); OpenRA.Mods.Cameo/Traits/SlaveMinerSpawnerMaster.cs:208 AssignSlaveActivity() |
-| 2 | 3ccd15bbfaebfe44 | OpenRA.Mods.Cameo/Traits/BotModules/EngineerBotModule.cs:535 GuardingEnemies(); OpenRA.Mods.Cameo/Traits/BotModules/EngineerBotModule.cs:542 RankBySafety() |
+| 2 | 3ccd15bbfaebfe44 | OpenRA.Mods.Cameo/Traits/BotModules/EngineerBotModule.cs:561 GuardingEnemies(); OpenRA.Mods.Cameo/Traits/BotModules/EngineerBotModule.cs:568 RankBySafety() |
+| 2 | 45a43547d43ff3d8 | OpenRA.Mods.CA/Traits/BotModules/SquadManagerBotModuleCA.cs:2402 IsStealthDraftable(); OpenRA.Mods.CA/Traits/BotModules/SquadManagerBotModuleCA.cs:2404 FindNewUnits() |
 | 2 | 522ab179c848a0ef | OpenRA.Mods.Cameo/Traits/DroneSpawnerMasterCA.cs:103 Created(); OpenRA.Mods.Cameo/Traits/SlaveMinerSpawnerMaster.cs:85 Created() |
+| 2 | 5659cbf6c3b6a99d | OpenRA.Mods.CA/Traits/BotModules/Squads/States/GroundConcaveStateCA.cs:411 Valid(); OpenRA.Mods.CA/Traits/BotModules/Squads/States/GroundConcaveStateCA.cs:420 ShouldCommit() |
 | 2 | 61d619290028a34b | OpenRA.Mods.CA/Projectiles/LinearPulse.cs:1509 TryProjectOntoCenterLine(); OpenRA.Mods.CA/Projectiles/LinearPulse.cs:1520 CalculateFalloffDistance() |
 | 2 | 8ab419c8b1877522 | OpenRA.Mods.Cameo/Traits/BotModules/TacticalMapBotModule.cs:1684 GetUsefulChokepoints(); OpenRA.Mods.Cameo/Traits/BotModules/TacticalMapBotModule.cs:1705 GetDoorHotspots() |
 | 2 | 918c59746a74f5f7 | OpenRA.Mods.CA/Projectiles/LinearPulse.cs:1531 TryProjectOntoCenterLine(); OpenRA.Mods.CA/Projectiles/LinearPulse.cs:1542 GetFalloffModifier() |
 | 2 | 9b5c59ffeffd6c33 | OpenRA.Mods.Cameo/Widgets/CommanderTreeWidget.cs:338 HandleRightClick(); OpenRA.Mods.Cameo/Widgets/CommanderTreeWidget.cs:354 HandleMiddleClick() |
-| 2 | 9f8a4e4f976a99f2 | OpenRA.Mods.CA/Traits/Render/WithColoredSelectionBox.cs:108 Update(); OpenRA.Mods.CA/Traits/Render/WithNameTagDecorationCA.cs:121 Update() |
 | 2 | b0d2492b62a8c3b9 | OpenRA.Mods.Cameo/Widgets/ObserverBuildOrderIconsWidget.cs:64 ObserverBuildOrderIconsWidget(); OpenRA.Mods.Cameo/Widgets/ObserverPromotionsIconsWidget.cs:62 ObserverPromotionsIconsWidget() |
 | 2 | cfb1b41e7feda062 | OpenRA.Mods.Cameo/Traits/BotModules/TacticalMapBotModule.cs:1783 DoorApproachAxis(); OpenRA.Mods.Cameo/Traits/BotModules/TacticalMapBotModule.cs:1795 GetDoorKillZoneCells() |
 | 2 | d2d42569b726aee5 | OpenRA.Mods.Cameo/Traits/AiMatchLogWriter.cs:93 CaptureAndAppend(); OpenRA.Mods.Cameo/Traits/AiSituationLogWriter.cs:75 CaptureAndAppend() |
-| 2 | edf49e24a44c5bb8 | OpenRA.Mods.CA/Traits/BotModules/BaseBuilderBotModuleCA.cs:896 CountQueuedBuildings(); OpenRA.Mods.CA/Traits/BotModules/BaseBuilderBotModuleCA.cs:904 SellUselessRefinery() |
+| 2 | da8e9cfda4c70a44 | OpenRA.Mods.CA/Traits/BotModules/BaseBuilderBotModuleCA.cs:883 HasAdequateRefineryCount(); OpenRA.Mods.CA/Traits/BotModules/BaseBuilderBotModuleCA.cs:920 RecordOpeningStructureQueued() |
+| 2 | edf49e24a44c5bb8 | OpenRA.Mods.CA/Traits/BotModules/BaseBuilderBotModuleCA.cs:971 CountQueuedBuildings(); OpenRA.Mods.CA/Traits/BotModules/BaseBuilderBotModuleCA.cs:979 SellUselessRefinery() |
 
 
 ## C3 — Duplicated constant tables (43 group(s))
@@ -130,6 +131,6 @@ Python files: **797** (min 5 statements), C# files: **443** (min 8 lines)
 ## FAIL
 
 - C1: 29 > baseline 10
-- C2: 21 > baseline 14
+- C2: 22 > baseline 14
 - C3: 43 > baseline 10
 

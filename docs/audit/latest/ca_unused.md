@@ -2,10 +2,10 @@
 
 | kind | declared | unused in Cameo | of those, used by CA |
 |---|--:|--:|--:|
-| activity | 15 | 4 | 1 |
+| activity | 16 | 3 | 0 |
 | logic | 19 | 19 | 0 |
 | projectile | 9 | 0 | 0 |
-| trait | 283 | 84 | 54 |
+| trait | 292 | 87 | 57 |
 | warhead | 16 | 0 | 0 |
 | widget | 21 | 6 | 5 |
 
@@ -29,7 +29,6 @@
 - **OverlayPlayerColorPalette** (trait, `OpenRA.Mods.CA/Traits/Palettes/OverlayPlayerColorPalette.cs`): CA uses it 8x, e.g. `mods/ca/rules/custom/two-tone-nod.yaml`, `mods/ca/rules/palettes.yaml`
 - **OverlayPlayerColorPalette** (trait, `OpenRA.Mods.Cameo/Traits/Render/OverlayPlayerColorPalette.cs`): CA uses it 8x, e.g. `mods/ca/rules/custom/two-tone-nod.yaml`, `mods/ca/rules/palettes.yaml`
 - **AttackSoundsCA** (trait, `OpenRA.Mods.CA/Traits/Sound/AttackSoundsCA.cs`): CA uses it 7x, e.g. `mods/ca/maps/tfca/tfca-rules-base.yaml`, `mods/ca/rules/infantry.yaml`, `mods/ca/rules/scrin.yaml`
-- **InstantTransform** (activity, `OpenRA.Mods.CA/Activities/InstantTransform.cs`): CA uses it 7x, e.g. `OpenRA.Mods.CA/Activities/Attach.cs`, `OpenRA.Mods.CA/Activities/Upgrade.cs`, `OpenRA.Mods.CA/Traits/Air/FallsDownAndTransforms.cs`
 - **TracksCapturedFaction** (trait, `OpenRA.Mods.CA/Traits/TracksCapturedFaction.cs`): CA uses it 7x, e.g. `mods/ca/rules/scrin.yaml`, `mods/ca/rules/structures.yaml`
 - **AttachableTo** (trait, `OpenRA.Mods.CA/Traits/AttachableTo.cs`): CA uses it 6x, e.g. `mods/ca/rules/defaults.yaml`, `mods/ca/rules/ships.yaml`, `mods/ca/rules/vehicles.yaml`
 - **Attachable** (trait, `OpenRA.Mods.CA/Traits/Attachable.cs`): CA uses it 5x, e.g. `mods/ca/missions/coop-campaign/ca27-emancipation-coop/emancipation-coop-rules.yaml`, `mods/ca/rules/misc.yaml`, `mods/ca/rules/vehicles.yaml`
@@ -49,6 +48,7 @@
 - **GrantConditionOnPrerequisiteCA** (trait, `OpenRA.Mods.CA/Traits/Conditions/GrantConditionOnPrerequisiteCA.cs`): CA uses it 2x, e.g. `mods/ca/rules/defaults.yaml`
 - **GrantThermalCondition** (trait, `OpenRA.Mods.CA/Traits/Conditions/GrantThermalCondition.cs`): CA uses it 2x, e.g. `mods/ca/rules/aircraft.yaml`
 - **ImageCA** (widget, `OpenRA.Mods.CA/Widgets/ImageCAWidget.cs`): CA uses it 2x, e.g. `mods/ca/chrome/mainmenu.yaml`
+- **LinkedProducerSource** (trait, `OpenRA.Mods.CA/Traits/LinkedProducerSource.cs`): CA uses it 2x, e.g. `mods/ca/rules/defaults.yaml`
 - **ResourcePurifierCA** (trait, `OpenRA.Mods.CA/Traits/ResourcePurifierCA.cs`): CA uses it 2x, e.g. `mods/ca/rules/structures.yaml`
 - **WithCargoHatchAnimation** (trait, `OpenRA.Mods.CA/Traits/Render/WithCargoHatchAnimation.cs`): CA uses it 2x, e.g. `mods/ca/rules/aircraft.yaml`
 - **WithProductionDoorOverlayCA** (trait, `OpenRA.Mods.CA/Traits/Render/WithProductionDoorOverlayCA.cs`): CA uses it 2x, e.g. `mods/ca/rules/structures.yaml`
@@ -60,6 +60,8 @@
 - **GrantTimedConditionOnCrushWarning** (trait, `OpenRA.Mods.CA/Traits/Conditions/GrantTimedConditionOnCrushWarning.cs`): CA uses it 1x, e.g. `mods/ca/rules/defaults.yaml`
 - **GuidedMissile** (trait, `OpenRA.Mods.CA/Traits/GuidedMissile.cs`): CA uses it 1x, e.g. `mods/ca/rules/vehicles.yaml`
 - **ImmobileWithFacing** (trait, `OpenRA.Mods.CA/Traits/ImmobileWithFacing.cs`): CA uses it 1x, e.g. `mods/ca/rules/infantry.yaml`
+- **LinkedProducerTarget** (trait, `OpenRA.Mods.CA/Traits/LinkedProducerTarget.cs`): CA uses it 1x, e.g. `mods/ca/rules/scrin.yaml`
+- **PopController** (trait, `OpenRA.Mods.CA/Traits/Player/PopController.cs`): CA uses it 1x, e.g. `mods/ca/rules/player.yaml`
 - **PortableChronoModifier** (trait, `OpenRA.Mods.CA/Traits/Multipliers/PortableChronoModifier.cs`): CA uses it 1x, e.g. `mods/ca/rules/vehicles.yaml`
 - **ProductionPaletteCA** (widget, `OpenRA.Mods.CA/Widgets/ProductionPaletteCAWidget.cs`): CA uses it 1x, e.g. `mods/ca/chrome/ingame-player.yaml`
 - **ReflectsDamage** (trait, `OpenRA.Mods.CA/Traits/ReflectsDamage.cs`): CA uses it 1x, e.g. `mods/ca/rules/scrin.yaml`

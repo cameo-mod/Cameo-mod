@@ -2,9 +2,9 @@
 
 | metric | meaning | value | floor/baseline |
 |---|---|---|---|
-| T1 | NUnit [Test] cases in OpenRA.Mods.Cameo.Test (57 file(s)) | 625 | >= 24 |
-| T2 | `def test_*` in tools/tests (292 file(s)) | 2946 | >= 177 |
-| T3 | modules with no test mentioning them | 327 | <= 224 |
+| T1 | NUnit [Test] cases in OpenRA.Mods.Cameo.Test (67 file(s)) | 731 | >= 24 |
+| T2 | `def test_*` in tools/tests (294 file(s)) | 2966 | >= 177 |
+| T3 | modules with no test mentioning them | 336 | <= 224 |
 
 
 ## How to run the real suites (periodic run must paste output here)
@@ -15,7 +15,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 ```
 
 
-## T3 — untested modules (327)
+## T3 — untested modules (336)
 
 | kind | file | type(s)/module |
 |---|---|---|
@@ -46,18 +46,25 @@ python -m unittest discover -s tools/tests -t tools/tests
 | C# | OpenRA.Mods.Cameo/Traits/AdaptiveSpeedController.cs | AdaptiveSpeedController |
 | C# | OpenRA.Mods.Cameo/Traits/AiLogFileAppender.cs | AiLogFileAppender |
 | C# | OpenRA.Mods.Cameo/Traits/AiMatchLogRecorder.cs | AiMatchLogRecorder |
+| C# | OpenRA.Mods.Cameo/Traits/AiPlacementLogWriter.cs | AiPlacementLogWriter |
 | C# | OpenRA.Mods.Cameo/Traits/AnnounceOnDamageState.cs | AnnounceOnDamageState |
 | C# | OpenRA.Mods.Cameo/Traits/ArmorPlating.cs | ArmorPlating, ArmorPlatingInit |
 | C# | OpenRA.Mods.Cameo/Traits/Attack/AttackInfectCA.cs | AttackInfectCA |
 | C# | OpenRA.Mods.Cameo/Traits/BotCounterDemandController.cs | BotCounterDemandController |
 | C# | OpenRA.Mods.Cameo/Traits/BotGlobalUnitBudget.cs | BotGlobalUnitBudget |
 | C# | OpenRA.Mods.Cameo/Traits/BotInsurance.cs | BotInsurance |
+| C# | OpenRA.Mods.Cameo/Traits/BotModules/AssaultFormationBotModule.cs | AssaultFormationBotModule |
+| C# | OpenRA.Mods.Cameo/Traits/BotModules/BuildOrderKnobsBotModule.cs | BuildOrderSnapshot, BuildOrderKnobsBotModule |
 | C# | OpenRA.Mods.Cameo/Traits/BotModules/CombatAnalysisBotModule.cs | CombatAnalysisBotModule |
 | C# | OpenRA.Mods.Cameo/Traits/BotModules/DeployBotModule.cs | DeployBotGroup, DeployBotModule |
 | C# | OpenRA.Mods.Cameo/Traits/BotModules/GarrisonContestBotModule.cs | GarrisonContestBotModule |
 | C# | OpenRA.Mods.Cameo/Traits/BotModules/GarrisonDefenseBotModule.cs | GarrisonDefenseBotModule |
 | C# | OpenRA.Mods.Cameo/Traits/BotModules/HumanPaceBotModule.cs | HumanPaceBotModule |
+| C# | OpenRA.Mods.Cameo/Traits/BotModules/ParallelProductionBotModule.cs | ParallelProductionBotModule |
 | C# | OpenRA.Mods.Cameo/Traits/BotModules/PlugSpawnerBotModuleCA.cs | PlugSpawnerBotModuleCA |
+| C# | OpenRA.Mods.Cameo/Traits/BotModules/ScaleTargetsBotModule.cs | ScaleCategory, ScaleTargetsSnapshot, ScaleTargetsBotModule |
+| C# | OpenRA.Mods.Cameo/Traits/BotModules/SpacingAdvisorBotModule.cs | SpacingAdvisorBotModule |
+| C# | OpenRA.Mods.Cameo/Traits/BotModules/StealthDoctrineBotModule.cs | StealthDoctrineBotModule |
 | C# | OpenRA.Mods.Cameo/Traits/BotModules/UnitRepairBotModule.cs | UnitRepairBotModule |
 | C# | OpenRA.Mods.Cameo/Traits/CameoSettings.cs | CameoSettings |
 | C# | OpenRA.Mods.Cameo/Traits/ChangesPhysicalState.cs | ChangesPhysicalState |
@@ -184,6 +191,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 | C# | OpenRA.Mods.Cameo/Widgets/RoundedImageWidget.cs | RoundedImageWidget |
 | C# | OpenRA.Mods.Cameo/Widgets/ScaledImageWidget.cs | ScaledImageWidget |
 | python | tools/audit/audit_ai.py | audit_ai |
+| python | tools/audit/audit_ai_arch_freshness.py | audit_ai_arch_freshness |
 | python | tools/audit/audit_ai_frankenstein.py | audit_ai_frankenstein |
 | python | tools/audit/audit_ai_personalities.py | audit_ai_personalities |
 | python | tools/audit/audit_ammo_cadence.py | audit_ammo_cadence |
@@ -218,6 +226,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/audit/audit_fog_honesty.py | audit_fog_honesty |
 | python | tools/audit/audit_fransbot_drift.py | audit_fransbot_drift |
 | python | tools/audit/audit_fransbot_lists.py | audit_fransbot_lists |
+| python | tools/audit/audit_fransbot_orders.py | audit_fransbot_orders |
 | python | tools/audit/audit_garrison_weapons.py | audit_garrison_weapons |
 | python | tools/audit/audit_guerrilla_roles.py | audit_guerrilla_roles |
 | python | tools/audit/audit_hex_shield_routing.py | audit_hex_shield_routing |
@@ -350,5 +359,5 @@ python -m unittest discover -s tools/tests -t tools/tests
 
 ## FAIL
 
-- T3: 327 untested > baseline 224
+- T3: 336 untested > baseline 224
 
