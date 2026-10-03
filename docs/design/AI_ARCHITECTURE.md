@@ -3585,3 +3585,16 @@ enumeration. Estimated well under 0.1 ms per tick average.
 engagements (seen block only), reset every match, gains are tuned knobs (DESIGN 19.2). The tier-1 fitter: per weapon-delivery x
 armour coefficients from `outcome` vs `seen.predicted_*` (truth for calibration only), and the response and suicide priors from
 `response` and `tactics`. `tools/ai/engagement_report.py` is the human view of both.
+
+### 12.32 T1 — the tier-1 'measured from logs' fitter (Devin, 2026-10-03; TIER1_FITTER_SPEC)
+
+`tools/ai/fit_engagement_priors.py` (stdlib only, deterministic) fits the tier-1 coefficient table offline: residuals on the
+resolved `^Warhead_*` Versus prior indexed by delivery tag x armour class (never per-unit ids), static-defence fire states, one
+attrition exponent on the predicted ratio, and faction-scoped timing/response/suicide priors. Attribution needs the record's
+per-type census, so `engagement/1` gained record-only `composition` maps (`seen.start/end`, `truth.start/end`) plus the
+`enemy_faction` / `enemy_faction_public` header fields — additive fields only, zero orders, zero conditions, no decision reads
+them. A Random lobby slot resolves invisibly to the opponent, so any in-match faction-keyed lookup honours
+`enemy_faction_public` (false -> family/global pool; ruling 2). Output: `mods/cameo/ai/learned/engagement_priors.yaml`,
+`LedgerHash`-versioned so a rebalance reverts moved cells to neutral; consumed by the tier-2 veto predictor once that lands
+(phase B), gated by a default-OFF `AO_tier1_priors` switch (letter provisional). Shrinkage is pseudo-evidence K = 5000 damage
+credit toward the pipeline prior, clamped [500, 2000] milli, one record capped at 4x the median record's traded value.
