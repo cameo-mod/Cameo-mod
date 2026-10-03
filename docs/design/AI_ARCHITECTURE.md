@@ -1359,7 +1359,7 @@ this incrementally shippable — each phase in 10.6 is a complete, playable stat
 Verified on 2026-09-07 from the active `mods/cameo/mod.yaml` manifest and resolved
 `Player` / `World`, against upstream base `291052380`. Scope here is the decision modules,
 their explicit coordination adapter, and the three data/limit providers named below:
-**73 distinct trait types, 98 Player instances plus one World instance** (2026-10-03: INC 2026-10-03 adds `CombatVetoBotModule` + `EngagementPriorsBotModule` (genericbot, behind `combatveto`, §12.31) and `PlanBanditBotModule` (genericbot, behind `plan_bandits`, §12.33), +3 types / +3 instances — the count also absorbs +2/+2 that #782 `ArmyStagingBotModule` (§12.29) and #789 `EngagementLogBotModule` (§12.30) left uncounted; 2026-10-02e: BO-1 adds `BuildOrderKnobsBotModule` (genericbot, behind `build_order_knobs`), the §12.25 build-order knob provider, +1 type / +1 instance; 2026-10-02d: ST adds `ScaleTargetsBotModule` (genericbot, behind `scale_targets`), the §12.22 size-target provider, +1 type / +1 instance (#770 left it uncounted); 2026-10-02c: PP-1 adds `ParallelProductionBotModule` (genericbot, behind `parallel_production`), the settings-only IBotProductionWidth provider, and ATK-1 adds `AssaultFormationBotModule` (genericbot, behind `assault_fanout`), the settings-only provider of the unified CV/ATK-1 deploy state (§12.7a), and ST adds `ScaleTargetsBotModule` (genericbot, behind `scale_targets`, §12.22), +3 types / +3 instances; 2026-10-02b: SP-1/AF-1 add `SpacingAdvisorBotModule` + `ArmyFirstBotModule` (genericbot, behind `spaced_base`/`army_first`) and the `HarvesterBotModuleCA@generic`/@classic split adds one more instance, +3 types / +4 instances — the count also absorbs +2/+2 drift other merges left uncounted; 2026-10-02: CN3 adds `BridgeRepairBotModule` (genericbot, behind `cn3_bridge_repair`), the CN bridge-hut repair port claiming repairers per §19.6, +1 type / +1 instance — the count also absorbs a +1 drift RV2's `SupportPowerBotASModule@wc2` left uncounted; 2026-10-01: CN3 adds `DeployBotModule` (genericbot, behind `cn3_deploy`), the CN unified deploy-driving port, +1 type / +1 instance; CN2 adds `UnitRepairBotModule` (genericbot, behind `cn2_unit_repair`) and `GarrisonDefenseBotModule` (genericbot, behind `cn2_garrison_defense`), the crystallized-nexus repair-manager and threat-adaptive garrison ports claiming units per §19.6, +2 types / +2 instances; ZG adds `TacticalMapBotModule` (genericbot), +1 type / +1 instance; 2026-09-30: RV1 adds `BaseRepairBotModule`, the merged repair owner of DESIGN §19.3, and unloads the Common `BuildingRepairBotModule`, ±0; #656 adds `SiegeEvaluatorBotModule` (CA-2a siege telemetry) and splits the Fransbot `FransGroundCommanderBotModule` into six instances `@ground1`…`@ground6`, +1 type / +6 instances; 2026-09-29: `ExpansionPlannerBotModule`, EX-0 of §12.13, +1 type / +1 instance; 2026-09-28: #621 adds
+**73 distinct trait types, 98 Player instances plus one World instance** (2026-10-03: INC 2026-10-03 adds `CombatVetoBotModule` (genericbot, behind `combatveto`) + `EngagementPriorsBotModule` (genericbot, behind `tier1_priors`, §12.31) and `PlanBanditBotModule` (genericbot, behind `plan_bandits`, §12.33), +3 types / +3 instances — the count also absorbs +2/+2 that #782 `ArmyStagingBotModule` (§12.29) and #789 `EngagementLogBotModule` (§12.30) left uncounted; 2026-10-02e: BO-1 adds `BuildOrderKnobsBotModule` (genericbot, behind `build_order_knobs`), the §12.25 build-order knob provider, +1 type / +1 instance; 2026-10-02d: ST adds `ScaleTargetsBotModule` (genericbot, behind `scale_targets`), the §12.22 size-target provider, +1 type / +1 instance (#770 left it uncounted); 2026-10-02c: PP-1 adds `ParallelProductionBotModule` (genericbot, behind `parallel_production`), the settings-only IBotProductionWidth provider, and ATK-1 adds `AssaultFormationBotModule` (genericbot, behind `assault_fanout`), the settings-only provider of the unified CV/ATK-1 deploy state (§12.7a), and ST adds `ScaleTargetsBotModule` (genericbot, behind `scale_targets`, §12.22), +3 types / +3 instances; 2026-10-02b: SP-1/AF-1 add `SpacingAdvisorBotModule` + `ArmyFirstBotModule` (genericbot, behind `spaced_base`/`army_first`) and the `HarvesterBotModuleCA@generic`/@classic split adds one more instance, +3 types / +4 instances — the count also absorbs +2/+2 drift other merges left uncounted; 2026-10-02: CN3 adds `BridgeRepairBotModule` (genericbot, behind `cn3_bridge_repair`), the CN bridge-hut repair port claiming repairers per §19.6, +1 type / +1 instance — the count also absorbs a +1 drift RV2's `SupportPowerBotASModule@wc2` left uncounted; 2026-10-01: CN3 adds `DeployBotModule` (genericbot, behind `cn3_deploy`), the CN unified deploy-driving port, +1 type / +1 instance; CN2 adds `UnitRepairBotModule` (genericbot, behind `cn2_unit_repair`) and `GarrisonDefenseBotModule` (genericbot, behind `cn2_garrison_defense`), the crystallized-nexus repair-manager and threat-adaptive garrison ports claiming units per §19.6, +2 types / +2 instances; ZG adds `TacticalMapBotModule` (genericbot), +1 type / +1 instance; 2026-09-30: RV1 adds `BaseRepairBotModule`, the merged repair owner of DESIGN §19.3, and unloads the Common `BuildingRepairBotModule`, ±0; #656 adds `SiegeEvaluatorBotModule` (CA-2a siege telemetry) and splits the Fransbot `FransGroundCommanderBotModule` into six instances `@ground1`…`@ground6`, +1 type / +6 instances; 2026-09-29: `ExpansionPlannerBotModule`, EX-0 of §12.13, +1 type / +1 instance; 2026-09-28: #621 adds
 `SquadManagerBotModuleCA@guerrilla`, the 69th instance; #607 adds `ResourceMapBotModule@fransbot` and `SquadManagerBotModuleCA@classic`, the 67th–68th instances; #578's Route-A Fransbot port adds 24 vendored `Frans*BotModule` types / 24 instances, the 28th–51st / 43rd–66th, which run only under the `fransbot` bot type; `BeaconResponderBotModule` (#580) is the 27th type / 42nd instance; `CncEngineerBotModule` (#562), `CombatAnalysisBotModule` (#564) and `HumanPaceBotModule` added the 24th–26th types / 39th–41st instances; `ScoutBotModule` was the 23rd/38th). Conditional instances
 are loaded, not necessarily enabled simultaneously. This replaces the old unqualified
 "20 loaded modules" claim. The scope does not count `ModularBot` dispatchers,
@@ -3612,24 +3612,38 @@ the same `BotCombatPredictor` every predictor consumer already calls — the vet
 flee vetoes = `Denied`/`x_no_outrun`, a stood-down committed squad closes `Released`/`outmatched` via `DismissSquad`.
 EL scores vetoed vs non-vetoed attacks off these records.
 
-**Priors seam** (tier-1 hook): `IBotEngagementPriors.CorrectionMilli(attackerProfile, targetProfile)` (1000
-neutral) applied inside the HP-share damage assembly before the Lanchester core runs — the formula stays in
-`BotCombatPredictor`. `EngagementPriorsBotModule` loads the same committed `ai/learned/arsenal_priors.yaml`
-`BotLearnedPriors` serves (`PriorsFile` knob, mod-relative), once at match start, frozen for the match, absent
-file ⇒ neutral; EMBER's `ArsenalPriors` parser is reused so there is one file format. The fitted file's
-granularity is (faction pair, own unit type) — `target` is unused at this granularity and stays in the API for
-the finer attacker×target table a later fitter may write. The code stays stat-normalised per fleet rule.
+**Priors seam** (tier-1 hook, contract ruling F1 2026-10-03): `IBotEngagementPriors.CorrectionMilli(attackerProfile,
+targetProfile)` (1000 neutral) applied inside the HP-share damage assembly before the Lanchester core runs — the
+formula stays in `BotCombatPredictor`. `EngagementPriorsBotModule` loads `ai/learned/engagement_priors.yaml`
+(`PriorsFile` knob, mod-relative) once at match start, frozen for the match, absent file ⇒ neutral. **One canonical
+schema** (F1-a): the `BotEngagementPriors` root — `DeliveryArmour@<delivery>__x__<armor>` fitted residuals on the
+resolved Versus prior (per-cell factor in thousandths, composed then clamped), per-delivery `DefenceState@<delivery>`
+static-defence factors (applied when the attacker is a building) and the global `IntoDefencesMilli` (applied when the
+target is a building). The retired `EngagementPriors`/`Factor@` schema and the `arsenal_priors.yaml` bridge are gone —
+one format, one parser. The **delivery axis**: `BotWeaponProfile.Delivery` re-derives the main warhead's yaml
+`Warhead@<tag>` suffix from the resolved weapon yaml (`MiniYaml.Load` merges `Inherits`, so the child list is exactly
+what `WeaponInfo.LoadWarheads` iterated; same-index first, class-name-validated, fallback to the lowercased warhead
+class — the balance-pipeline taxonomy the fitter fits). The attacker's dominant weapon against the target supplies the
+cell's delivery key. **Per-cell staleness** (F1-b): the fitter also writes `PriorPct@<d>__x__<a>` = the resolved Versus
+percent the cell was fitted on (fitter default 100). At match start `BotUnitProfiles.ResolvedTagVersus(tag)` re-reads
+the tag's resolved Versus table; a cell whose prior moved reverts to neutral — a rebalance invalidates exactly the
+cells that shifted, not the whole file (the earlier global `StatFingerprint` gate is retired). `LedgerHash` remains
+offline provenance only — the balance ledgers are not mounted in-match. The code stays stat-normalised per fleet rule.
 
 **Perf**: per-squad verdict cached `VetoCacheTicks` (25); the launch check runs once per `AttackForceInterval`;
-no per-tick world enumeration beyond what the consult sites already compute.
+the delivery-tag map resolves once per mod load (`BotUnitProfiles` static); no per-tick world enumeration beyond
+what the consult sites already compute.
 
 **Knobs** (`CombatVetoBotModule`, genericbot-only): `VetoEngageRatioPct` 50, `VetoAbortRatioPct` 35
 (hysteresis: enter ≥50, exit <35), `VetoLaunchRatioPct` 60, `VetoFleeSpeedMarginPct` 100, `VetoCacheTicks` 25,
-`DefenceIncludeCells` 12. `EngagementPriorsBotModule`: `PriorsFile` `ai/learned/arsenal_priors.yaml`,
-`MinCorrectionMilli` 500, `MaxCorrectionMilli` 2000.
+`DefenceIncludeCells` 12. `EngagementPriorsBotModule`: `PriorsFile` `ai/learned/engagement_priors.yaml`,
+`MinCorrectionMilli` 500, `MaxCorrectionMilli` 2000 (the fitter's own [500, 2000] bound, applied to the composed
+product: delivery x armour cell x DefenceState x IntoDefences).
 
-**Switch**: `AN_combat_veto` — `GrantConditionOnBotOwner@combatveto` + `RequiresCondition: genericbot && combatveto`
-on both modules. Default off; classic never sees the provider.
+**Switches**: `AN_combat_veto` — `GrantConditionOnBotOwner@combatveto` + `RequiresCondition: genericbot && combatveto`
+on `CombatVetoBotModule`; `AP_tier1_priors` — `GrantConditionOnBotOwner@tier1priors` + `RequiresCondition: genericbot
+&& tier1_priors` on `EngagementPriorsBotModule` (F1-c: gated independently so a pure-predictor A/B can run unfitted;
+armed alone it is inert — the veto is its only consumer). Both default off; classic never sees either provider.
 
 ### 12.33 T3 — pooled bandits: personality + attack plan, safety floor (fleet orders 2026-10-03; owner dawn)
 
@@ -3678,8 +3692,10 @@ per-type census, so `engagement/1` gained record-only `composition` maps (`seen.
 `enemy_faction` / `enemy_faction_public` header fields — additive fields only, zero orders, zero conditions, no decision reads
 them. A Random lobby slot resolves invisibly to the opponent, so any in-match faction-keyed lookup honours
 `enemy_faction_public` (false -> family/global pool; ruling 2). Output: `mods/cameo/ai/learned/engagement_priors.yaml`,
-`LedgerHash`-versioned so a rebalance reverts moved cells to neutral; consumed by the tier-2 veto predictor once that lands
-(phase B), gated by the default-OFF `AP_tier1_priors` switch. Shrinkage is pseudo-evidence K = 5000 damage
+`LedgerHash`-versioned so a rebalance reverts moved cells to neutral; consumed by the tier-2 veto predictor via
+`EngagementPriorsBotModule` (§12.31 priors seam — `DeliveryArmour@` cells gated per cell by `PriorPct@` staleness,
+`DefenceState@`/`IntoDefencesMilli` applied directionally), gated by the default-OFF `AP_tier1_priors` switch.
+`PriorPct@d__x__a` rows emit the resolved Versus percent each cell was fitted on. Shrinkage is pseudo-evidence K = 5000 damage
 credit toward the pipeline prior, clamped [500, 2000] milli, one record capped at 4x the median record's traded value.
 
 

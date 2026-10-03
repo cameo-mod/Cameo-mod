@@ -177,6 +177,9 @@ BotEngagementPriors:
         AttritionExponentMilli: 1000
         # per-cell residual thousandths on the resolved Versus prior; absent cell = neutral
         DeliveryArmour@<delivery>__x__<armour>: <milli>
+        # F1-b: the resolved Versus percent the cell was fitted on (fitter default 100); the consumer
+        # recomputes it and reverts THIS cell to neutral on a mismatch — per-cell staleness.
+        PriorPct@<delivery>__x__<armour>: <pct>
         ...
         DefenceState@<delivery>: <milli>
         IntoDefencesMilli: <milli>
@@ -185,12 +188,14 @@ BotEngagementPriors:
         SuicideIndex@<mine>__vs__<theirs>: <milli>
 ```
 
-Versioning against the balance ledger: `LedgerHash` plus, per cell, the prior the cell was fitted
-on is recoverable from the ledger itself. At load the consumer recomputes current priors:
-`applied[d][a] = clamp(current_prior[d][a] × residual[d][a])`. A cell whose pipeline prior moved
-since `LedgerHash` is marked stale and reverts to neutral until the next fit — a rebalance
-discounts old fits automatically instead of poisoning them (research doc §"rebalances reset only
-the residuals"; DESIGN §19.2 fingerprint ruling).
+Versioning against the balance ledger (as ruled F1-b, 2026-10-03): `LedgerHash` stays offline
+provenance (the ledgers are not mounted in-match); the shipped staleness mechanism is per-cell —
+each `DeliveryArmour` cell emits `PriorPct@` = the resolved Versus percent it was fitted on
+(`priors.get(d, {}).get(a, 100)`). At load the consumer recomputes the current resolved prior:
+`applied[d][a] = residual[d][a]` only while `PriorPct[d][a] == current_prior[d][a]`, else neutral.
+A rebalance marks stale exactly the cells whose Versus moved, not the whole file — old fits discount
+automatically instead of poisoning them (research doc §"rebalances reset only the residuals";
+DESIGN §19.2 fingerprint ruling, superseding the earlier global `StatFingerprint` gate).
 
 Determinism: the file is committed, so every client loads identical bytes; parsing is
 `MiniYaml.FromStream` (same as `ArsenalPriors.Parse`) — no randomness, no I/O variance. Read once
@@ -198,19 +203,19 @@ at match start (frozen, §19.2); bots run host-only so there is no sync surface 
 
 ## 6. Who reads it
 
-- **Tier-2 veto (consumer, already built)**: `CombatVetoEval.Predict` multiplies
+- **Tier-2 veto (consumer, shipped)**: `CombatVetoEval.Predict` multiplies
   `DamagePerTickAgainst` by `priors.CorrectionMilli(attacker, target)` on the own side.
-  `EngagementPriorsBotModule` (NOVA branch) currently maps that call to per-unit-type
-  `TradePercent` from `arsenal_priors.yaml`; its own comment says a finer attacker×target table
-  lands later "without an API change". Spec'd consumer change (small): extend the module to
-  prefer the delivery×armour table when the new file exists — map `BotUnitProfile` → its main
-  warhead family × `target.Armor` → `C[d][a]`; fall back to `TradePercent`, else 1000.
-  > 2026-10-03 integration note: NOVA's newer `devin/nova/combat-veto-delta` branch folds the
-  > priors load into `CombatVetoBotModule` itself (no provider/interface; gated by `AN_combat_veto`)
-  > and parses a different schema — `EngagementPriors:` root, `Factor@<delivery>|<armour>` with
-  > `*|<armour>` wildcards, `StaticDefenceFactorPermille`, `StatFingerprint` (FNV-1a-64 over
-  > runtime-resolved stats). This spec's `BotEngagementPriors`/`DeliveryArmour@`/`LedgerHash`
-  > schema needs a lead ruling on which side adapts before phase B.
+  `EngagementPriorsBotModule` maps that call onto this file's delivery×armour cells — the
+  attacker's dominant weapon's `Delivery` tag × `target.Armor` → `DeliveryArmour[d][a]`, gated by
+  `PriorPct[d][a]` per-cell staleness; `DefenceState[d]` when the attacker is a building,
+  `IntoDefencesMilli` when the target is; the product clamps to [500, 2000]. Missing file, missing
+  cell or stale prior → 1000.
+  > 2026-10-03 ruling F1 (lead): the canonical schema is `BotEngagementPriors`/`DeliveryArmour@` —
+  > the `EngagementPriors`/`Factor@`/`StatFingerprint` schema is retired, no compat parser. NOVA
+  > ported the consumer onto the landed INC-N veto (`devin/nova/t1-priors-port`): delivery = the
+  > warhead's resolved yaml `Warhead@<tag>` suffix (class-name fallback), staleness = per-cell
+  > `PriorPct@` against `BotUnitProfiles.ResolvedTagVersus`, gated by `AP_tier1_priors`
+  > independently of `AN_combat_veto`.
 - **Later tiers**: the tier-5 engagement network's inputs include "fog-honest ratios of tier-1
   strength split by range band" (research doc) — same provider seam.
 - `BotLearnedPriors` (production weighting) keeps `arsenal_priors.yaml` — unchanged.
@@ -251,9 +256,10 @@ log additions are record-only and need no switch.)
    - missing `composition` → record skipped, no crash; skirmishes excluded;
    - stale `LedgerHash` → affected cells revert to neutral;
    - determinism: two runs on the same fixture produce byte-identical yaml.
-2. **C# side** (consumer change): extend `ArsenalPriorsTest`-style coverage —
-   parse the new file, delivery×armour lookup, fallback chain (cell → TradePercent → 1000),
-   clamp bounds; `CombatVetoEvalTest` prior-shift vector still passes.
+2. **C# side** (consumer, `EngagementPriorsTest`): parse the canonical file,
+   delivery×armour lookup, `PriorPct` fresh/stale per-cell gating, unfitted-cell and
+   missing-file neutrality, `DefenceState`/`IntoDefencesMilli` reads; `CombatVetoEvalTest`
+   prior-shift vector still passes.
 3. **Smoke fit**: run the fitter on existing logs — `C:/tmp/elsmoke-out/Logs` +
    `elsmoke-out-2v2` hold `engagement/1` records (~420 lines incl. posture). Records predate
    `composition`, so acceptance = clean parse, correct skips, sane report; a short batch with the

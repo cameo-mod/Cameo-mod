@@ -1,3 +1,30 @@
+# 2026-10-03 — F1 port: canonical BotEngagementPriors onto the landed INC-N veto
+
+*Devin (nova) — `devin/nova/t1-priors-port` off master@6bce16baf.* The lead ruled one schema
+(`BotEngagementPriors`/`DeliveryArmour@`), per-cell `PriorPct@` staleness, `AP_tier1_priors`
+independent of `AN_combat_veto`. Ported:
+
+- **Delivery axis**: `BotWeaponProfile.Delivery` re-derives the main warhead's yaml
+  `Warhead@<tag>` suffix from the resolved weapon yaml (`MiniYaml.Load` merges `Inherits`,
+  same-index first, class-validated, lowercased-class fallback) — joins EMBER's ledger tags.
+- **Canonical consumer**: `EngagementPriorsBotModule` reads `ai/learned/engagement_priors.yaml`
+  natively (DeliveryArmour@/PriorPct@/DefenceState@/IntoDefencesMilli); the
+  `EngagementPriors`/`Factor@`/`StatFingerprint` schema and the `arsenal_priors.yaml` bridge are
+  retired. `LedgerHash` = offline provenance only. Dominant-weapon delivery x target.Armor cell
+  lookup; DefenceState when attacker is a building, IntoDefences when the target is; product
+  clamps [500, 2000].
+- **Per-cell staleness**: `PriorPct@d__x__a` vs `BotUnitProfiles.ResolvedTagVersus(tag)` — a moved
+  Versus neutralizes exactly that cell. Fitter emits the rows (new `to_yaml` arg: `priors`).
+- **Switch**: `AP_tier1_priors` → `GrantConditionOnBotOwner@tier1priors` → `tier1_priors`;
+  module gated `genericbot && tier1_priors`; armed-alone inert (the veto is the only consumer).
+
+Verified: 0 err build, **836/836** Cameo tests (6 new `EngagementPriorsTest` + `PriorsShiftTheVerdict`
+intact), fitter pytest 19/19 (+PriorPct emit assert), bot-wiring/fog/mutation/dead-fields audits PASS,
+arch freshness PASS (regen map+coverage; `IBotEngagementPriors` DEAD-END flag is a pre-existing tool
+blind spot — `TraitsImplementing<>` in `Priors()` isn't scanned). Docs: §12.31 rewritten to the ruled
+contract, §12.34 + TIER1_FITTER_SPEC schema/ruling updated. **Boot gate PASS** (52 s, isolated
+`Engine.SupportDir`, no new exceptions, PID-scoped kill).
+
 # 2026-10-03 — coordinator: INC 2026-10-03 landed on master (tiers 1–4, P0 guard, #791)
 
 *Claude (Opus 5.5), AionUI team lead.* Increment `inc/2026_10_03` → master: am-nre-guard, #791, tier 2 + disabled-guard fix,
