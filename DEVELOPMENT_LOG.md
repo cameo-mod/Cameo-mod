@@ -1,3 +1,30 @@
+# 2026-10-03 — fransotto post-merge review re-verified: all 8 findings closed or documented
+
+*Devin (nova), worktree `nova-logverify` — fransotto's second review (`c936108d1`,
+`CAMEO_AI_ARCHITECTURE_REVIEW_2026-10-02_POST_MERGE.md`, review base `192ed5701`)
+re-checked finding-by-finding against current `origin/master`. Verified closed:*
+
+- 3.1 stale arch evidence → regenerated in merges, freshness gate holds.
+- 3.2 stale switch groups → `AD_army_first`/`AE_spread_assault` deleted.
+- 4.2 broadcast liveness → `TeamBlackboard.IsLive` + `BroadcastMaxAgeTicks=500`,
+  `CollectBroadcasts` filters live-only, alive-player loop.
+- 4.3 rescue double-assign → `freePool.Remove(responder)` in both passes.
+- 4.4 ClientIndex → `ParticipantKey` (Player.InternalName) throughout.
+- 6.2 divergent score fns → unified on `ai_log_common.match_score`
+  (`SCORE_SPEED_WEIGHT=0.25`, `SCORE_SPEED_REF_TICKS=54000`).
+- §7 match-end lifecycle → LC8 match_end flush fix (`99e52f474`).
+- 4.1 → documented rather than fixed (valid per review): §12.28 states the
+  staggered-cadence consistency model honestly.
+- 6.1/6.3/6.4 → closed by `0b1b8c8da` (BO-2 lab contract): `EnemyEconomyPerEnemy`
+  (mean over observed enemies, fog-honest), `paired_z` by (enemy faction, map,
+  spawn side) cell + Holm-Bonferroni, bandit folds control-arm only, reports use
+  the 40 ms game clock.
+
+*Flagged items also cleared:* `~$warhead_matrix.xlsx` untracked (`e75575a6b`);
+`FirepowerMultiplier` 25→50 by maintainer (`612014a74`); Zeruel87 push/PR forbidden
+(`a382470bd`, upstream pushurl already FORBIDDEN here). Remaining standing constraint:
+SCG dispatch must stay a neutral relay — flag if a future SCG PR emits orders.
+
 # 2026-10-03 — engineer stop-before-release + armed 2v2 game 2
 
 *Devin (nova), worktree `nova-tc2` — follow-up to the devlog flag (4267ea94e): the two
