@@ -1,3 +1,44 @@
+# 2026-10-03 — DAWN: tier-3 bandits implementation spec (branch `devin/dawn/tier3-bandits`, worktree `dawn-t3`)
+
+*Devin (dawn) — base `43ba77109` (PR #789 on master, tier-3 gate cleared). Fleet order
+`ORDERS_2026-10-03_claude_learning_tiers.md` + my design note `NOTE_2026-10-03_dawn_tier3_bandit_design.md`.
+Spec checkpointed before coding (WORKFLOW 1.7):*
+
+## Two bandits, one learned file
+
+- `mods/cameo/ai/learned/plan_bandits.yaml` — `BotPlanBandits: Personality@<scope>: / Plan@<scope>: <arm>: n, mean_milli, m2`.
+- Scopes `any | family_<f> | <faction> | <faction>_vs_<enemy>` (adds matchup level per order).
+- Posterior: Normal-Gamma via Student-t (n<2 → prior). `total_milli` is continuous so Bernoulli Beta is wrong;
+  wins/fails derived from the normal arm for the schema's compatibility fields.
+- Choice at match start, frozen: Thompson sample per arm, then exclude any arm whose LCB
+  (`mean - z*sd`) clears `LcbFloor` and is below `MinSafetyLcb` — per order, "safety floor" = arms that
+  must not be selectable below an evidence-backed minimum.
+- Personality bandit arms = `PersonalityArms` list (default all `personality-*` presets). Winner pins via
+  `BotPersonalityController` (extends the existing PinnedPersonalities block to also block switches).
+- Plan bandit arms = named knob-overlay presets (`PlanArms:<name>:<knob>:<milli>`) applied as an extra
+  multiplier inside `BuildOrderKnobsBotModule.RecomputeBase` (preset x learned x plan x jitter). No new
+  order channels — plan arms only reshape the bounded knob vector.
+- Attribution: `BotSituation` gains a `bandit` snapshot section (`personality_arm`, `plan_arm`, `scope`,
+  `pinned`) so offline tuning maps engagement/1 records -> the arm that produced them. Personality arm
+  is additionally visible as constant `personality` on every record.
+
+## New/changed files
+
+- NEW `OpenRA.Mods.Cameo/Traits/BotModules/PlanBanditBotModule.cs` — `genericbot`-gated, fields
+  `UsePlanBandits:false`, `LearnedFile`, `PersonalityArms`, `LcbFloor`, `MinSafetyLcb`, `MinEvidence`,
+  `PriorCount`, `MaxDrawAttempts`. Exposes `PinnedPersonality` + `PlanOverlay` + `Snapshot`.
+- NEW `OpenRA.Mods.Cameo/Traits/BotModules/PlanBanditMath.cs` — pure functions: parse, pool, sample,
+  LCB filter, decay update (testable without World).
+- `BotPersonalityController.cs` — consult `PlanBanditBotModule.PinnedPersonality` (lazy resolve) at
+  TraitEnabled and in SetBotPersonality.
+- `BuildOrderKnobsBotModule.cs` — combine `planOverlay` in RecomputeBase.
+- `BotSituation.cs` + `AiSituationLogWriter.cs` — `bandit` section.
+- `mods/cameo/ai/ai.yaml` — module block (default off) beside BuildOrderKnobsBotModule.
+- `tools/ai/tune_plan_bandits.py` — offline updater: groups engagement records by (bandit, arm, scope),
+  decayed Welford, writes learned file.
+- `tools/ai/increment_switches.yaml` — `AN_tier3_bandits`.
+- `OpenRA.Mods.Cameo.Test/PlanBanditMathTest.cs` — pooling/floor/determinism/parse/decay tests.
+
 # 2026-10-03 — fransotto post-merge review re-verified: all 8 findings closed or documented
 
 *Devin (nova), worktree `nova-logverify` — fransotto's second review (`c936108d1`,
