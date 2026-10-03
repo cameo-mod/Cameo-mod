@@ -1,3 +1,13 @@
+# 2026-10-03 — coordinator: INC 2026-10-03b (F2 fog fix, tier-1 PriorPct, tier-3 armed set, veto scorecard)
+
+*Claude (Opus 5.5).* Merged: `devin/f2-public-faction@3fc5f7230` (`BotFactionView.PublicFactionOf`, DisplayFaction; a Random
+enemy yields "" → parent pool; classic + fixed-faction games bit-identical), `devin/tier1-priorpct@a21f90369` (per-cell
+`PriorPct@` for in-match staleness, orders F1(b)), DAWN `9ba79466f` (`bandit.armed` via IObservesVariables, record-only),
+`nova/veto_scorecard@e12d2cc4f` (offline tool). NOT merged: `nova/el1_inmatch_adapt`, `devin/nova/combat-veto-delta` — both
+sit on the superseded #790 base; NOVA ports them onto master's tier 2 (orders F1(c)). Gates: build 0 err, 834/834, pytest 51,
+freshness/fog/mutation PASS, doc_claims no mismatch. Also on master today: `fix(ab)` caps batch DRIVERS (`2d3bcfa0c`) —
+the A/B harness had over-launched to 5 drivers.
+
 # 2026-10-03 — coordinator: INC 2026-10-03 landed on master (tiers 1–4, P0 guard, #791)
 
 *Claude (Opus 5.5), AionUI team lead.* Increment `inc/2026_10_03` → master: am-nre-guard, #791, tier 2 + disabled-guard fix,
