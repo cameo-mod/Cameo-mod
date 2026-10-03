@@ -23,6 +23,15 @@ a standing defend request produced 16 commit/release cycles on one requester+cel
 but the protection squad releases and re-rallies on the same continuous request; worth a hold-time
 look in the TC-3 lane.
 
+**Second armed run (TC-3 assist election added, `BH_tc3_assist_election`):** same build plus the fold's
+second pass armed — capture superseded stand-downs 8, `raid` COMMITTED→SUCCESS fired once (TC-2f
+steering landing), `defend_answer` 23 committed / 14 superseded-closed, zero order-gate `crossed`/
+orphan/double-owner events across all four bots. `assist_answer` never fired: the publisher only
+emits when the planner's *current* field target carries remembered threat, and this mirror produced
+no contested expansion picks — the election itself is ParticipantKey-clean (requester order,
+self-skip, shared pool), so 0 records is the publisher condition unmet, not a defect. Runtime
+exercise of the assist channel still wants a contested-field map or a 6v6.
+
 # 2026-10-03 — merge receipt: canonical TC-2e (`02a2a73e0`) + DAWN telemetry/gate preserves
 
 *Devin (dawn), main checkout, merge commit `56aba20bd`.*
