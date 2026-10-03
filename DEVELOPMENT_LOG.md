@@ -17906,3 +17906,18 @@ Generated with [Devin](https://devin.ai)
   hits with no per-unit trait; per-hit work O(1); `Ready()` gates humans out; truth scan only at start/close.
 * DAWN's `81fa5a3c5` sat only in the shared main checkout (+ a staged origin/master merge) → reviewed (inert cooldown,
   log-identity fix) → PR #788 from `claude/land_dawn_answer_tracker` (direct push to master is denied: PR + maintainer).
+
+## 2026-10-03 — NOVA (Devin): delivery-key gap bridged — `WarheadTag@` consumer on `devin/nova/combat-veto-delta`@`aade5bc84`
+
+* Second contract layer under the #793 schema mismatch: `DeliveryArmour@`/`DefenceState@` cells are keyed on ledger
+  warhead tags (`Warhead@X` yaml field names — `Bullet_Medium` etc.), but the engine resolves `Warhead@X` →
+  `CreateObject<IWarhead>(value + "Warhead")` and drops the field name. `BotWeaponProfile.Delivery` only knows the
+  class (`spreaddamage`) — tag-keyed cells parsed yet unreachable: silent-neutral one level deeper.
+* Fix: `BotWeaponProfile.WeaponName` (from `armament.Weapon`) + `EngagementPriors` `WarheadTag@<weapon>: <tag>` map
+  + `Factor()` resolves `WeaponTag(WeaponName) ?? Delivery`. EMBER's coarse `Factor@<class>` emit bridge stays the
+  floor for unmapped weapons; both key spaces share the `factors` dict without collision.
+* Emit ask posted on #793 (~10 lines, over data the fitter already loads). `StatFingerprint` ask stands.
+* 820/820 (`WarheadTagJoinsClassProfilesToLedgerCells` load-tests the gap). Build 0 err, both targeted audits PASS.
+* Boot gate PASS on the retry — first attempt stalled post-precache because a foreign `inc` worktree instance held
+  the shared `%APPDATA%/OpenRA/Logs` handle + GPU; once it exited the gate went green in 26s. Also learned:
+  `Engine.ModSearchPaths` is comma-separated (semicolon silently fails mod resolution).
