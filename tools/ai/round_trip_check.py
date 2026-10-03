@@ -3,7 +3,7 @@
 
 Reads one or more batch support dirs (each has Logs/ with debug.log, cameo-ai-matches.jsonl,
 cameo-ai-missions.jsonl, cameo-ai-situations.jsonl) and prints one PASS/WARN/FAIL row per layer with the
-evidence count: load, perception, missions, ownership, order gate, outcomes, execution, write-back, fog, learning, tools.
+evidence count: load, perception, missions, ownership, order gate, outcomes, execution, storm, write-back, fog, learning, tools.
 Exit 1 on any FAIL. A genericbot player is any player whose bot_type is not a reference bot (classic, classic_hard).
 
 Usage:
