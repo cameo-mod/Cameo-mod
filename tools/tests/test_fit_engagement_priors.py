@@ -242,3 +242,29 @@ def test_profile_collisions_are_named():
                 {"ledger": {}, "sections": {"g": {"dup_unit": {"armaments": []}}}}))
         _, meta, _ = fp.load_profiles(root)
     assert meta["collisions"] == ["dup_unit"]
+
+
+def test_consumer_block_flattens_to_class_keys():
+    # nova §12.31 bridge: family-level cells flatten onto the C# warhead-class axis.
+    result = {"cells": {("CannonHE_Light", "Heavy"): 1200, ("CannonHE_Heavy", "Heavy"): 1400,
+                        ("Flak_Medium", "None"): 800, ("NoClass_X", "Heavy"): 999},
+              "defence_state": {"CannonHE_Light": 1100, "Flak_Medium": 1300}}
+    lines = fp.consumer_block(result, {"CannonHE_Light": "spreaddamage", "CannonHE_Heavy": "spreaddamage",
+                                       "Flak_Medium": "flak"})
+    text = "\n".join(lines)
+    assert "EngagementPriors:" in text
+    # two level-tags of the same class average to one class cell: (1200+1400)//2 = 1300
+    assert "\tFactor@spreaddamage|heavy: 1300" in text
+    assert "\tFactor@flak|none: 800" in text
+    assert "NoClass" not in text                      # tags without a resolved class are dropped
+    assert "\tStaticDefenceFactorPermille: 1200" in text  # mean of 1100, 1300
+
+
+def test_to_yaml_emits_both_roots():
+    res = {"fitted": 3, "cells": {("CannonHE_Light", "Heavy"): 1100}, "defence_state": {},
+           "attack_timing": {}, "response": {}, "suicide": {}, "excluded_tags": [],
+           "exponent_milli": 1000, "into_defences_milli": 1000, "meta": {"collisions": []}}
+    out = fp.to_yaml(res, "abc123", {"CannonHE_Light": "spreaddamage"})
+    assert "BotEngagementPriors:" in out and "EngagementPriors:" in out
+    assert "\tDeliveryArmour@CannonHE_Light__x__Heavy: 1100" in out
+    assert "\tFactor@spreaddamage|heavy: 1100" in out
