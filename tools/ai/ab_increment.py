@@ -903,8 +903,14 @@ def main() -> int:
     skipped = [s for s in shards if s.arm in aborted]
     for s in skipped:
         s.done = True  # arm aborted in smoke: its shards never enter the queue
+    # A re-run (--skip-build after an interruption) must not replay shards whose planned
+    # matches are already recorded: the 2026-10-03 restart relaunched a finished ctrl arm.
+    complete = [s for s in live_shards if shard_remaining(s) == 0]
+    for s in complete:
+        s.done = True
+    live_shards = [s for s in live_shards if s not in complete]
     print(f"\n=== full shards: {len(live_shards)} queued "
-          f"({len(skipped)} skipped on smoke-aborted arms) ===", flush=True)
+          f"({len(skipped)} skipped on smoke-aborted arms, {len(complete)} already complete) ===", flush=True)
     drive(live_shards, args, stop_ctx=(arms, shards, decided))
 
     return summarize(args.out, arms, shards, smoke, args, decided, started)
