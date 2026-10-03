@@ -3589,23 +3589,30 @@ armour coefficients from `outcome` vs `seen.predicted_*` (truth for calibration 
 ### 12.31 CV — the combat-prediction veto: variety proposes, the veto disposes (NOVA tier 2)
 
 Binding ruling: DESIGN 19.13 (the five learning tiers). One provider, `IBotCombatVeto` (OpenRA.Mods.CA), consulted at the
-two points where a squad's fate is already decided by the shared predictor: inside `SquadManagerBotModuleCA.PredictsWin`
-(the attack commit, `GroundUnitsIdleStateCA` — `UseCombatPredictor` is unconditional on genericbot) and inside
-`PredictsLoss` (the retreat commit — `ShouldFlee`, including the mid-attack disengage, and the protection squad's pull-out).
-Both consults live in the squad manager, which stays the ONE owner of the decision, the fog canary and the mission card.
-No provider (classic, switch off, personality rotation) = the two methods run bit-identical.
+three edges where a squad's fate is already decided by the shared predictor: inside `SquadManagerBotModuleCA.PredictsWin`
+(the attack commit, `GroundUnitsIdleStateCA` — `UseCombatPredictor` is unconditional on genericbot), inside
+`PredictsLoss` (the retreat commit — `ShouldFlee`, including the mid-attack disengage, and the protection squad's pull-out),
+and in `CreateAttackForce` after the mission target resolves (the wave launch — `PredictsWin` never runs there, so the
+launch edge needs its own consult). All consults live in the squad manager, which stays the ONE owner of the decision,
+the fog canary and the mission card. No provider (classic, switch off, personality rotation) = bit-identical.
 
 **The predictor is not duplicated.** The verdict consumes `BotCombatPredictor.Predict` — the same Lanchester authority the
 commit checks, `SiegeEvaluator` and EL-0's `seen.predicted_*` already read. A factored overload takes a
 per-(attacker, weapon, target) damage multiplier: the ONE consumption point for tier-1's fitted corrections, applied
 inside the predictor's own spread-over-HP-share formula, never a second model.
 
-**Attack veto.** The enemy force is the seen commit list PLUS seen enemy static defences within `DefenceScanCells` of the
-target (the fights squads actually lose walking in); the defence scan honours the same fog standard as the squad scans
-(`CanBeViewedByPlayer`, lifted only when no fog provider is armed — the manager's own degradation rule). Predicted trade
+**Attack veto.** The enemy force is the seen commit list PLUS enemy static defences within `DefenceScanCells` of the
+target (the fights squads actually lose walking in): live ones through the same fog standard as the squad scans
+(`CanBeViewedByPlayer`, lifted only when no fog provider is armed — the manager's own degradation rule) and remembered
+ones from `IBotRememberedDefenceProvider` (observed earlier, fogged now — the provider resolves the observed ActorInfo
+for the predictor, deduped by cell so a re-observed turret never counts twice). Predicted trade
 is scored on the engagement log's own scale, `EngagementScore.PredictedTrade(ownValue, enemyValue, surviving‰)`, so a
 vetoed decision and a fought engagement share units. `predictedTrade < MinPredictedTradeMilli` (default -350 = worse
 than roughly 2:1 against) and at least one fighter seen -> veto: the caller's !engage path (retreat/rearm) is unchanged.
+
+**Launch veto.** `CreateAttackForce` consults the provider on the resolved mission target (live actor, frozen ghost or
+the mission's cell) before the Rush squad forms — the wave stays staged and the next dispatch check re-evaluates.
+A Defend mission never consults (defending is not a trade decision) and an unresolvable target launches unchanged.
 
 **Retreat veto.** Consulted only when the loss is already predicted. A squad that cannot outrun the threat — fastest seen
 fighter x `OutrunMarginPercent`/100 >= our slowest runner — is told to stand and trade instead of dying tired; a squad

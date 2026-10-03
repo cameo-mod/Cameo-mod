@@ -154,6 +154,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		readonly OpenRA.Player player;
 		EngagementPriors priors = new();
 		IBotFoggedEnemyProvider[] fogProviders = [];
+		IBotRememberedDefenceProvider[] defenceProviders = [];
 		bool loaded;
 
 		public CombatVetoBotModule(Actor self, CombatVetoBotModuleInfo info)
@@ -177,6 +178,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			loaded = true;
 			fogProviders = player.PlayerActor.TraitsImplementing<IBotFoggedEnemyProvider>().ToArray();
+			defenceProviders = player.PlayerActor.TraitsImplementing<IBotRememberedDefenceProvider>().ToArray();
 
 			var fs = Game.ModData.DefaultFileSystem;
 			if (!fs.Exists(Info.PriorsFile))
@@ -241,6 +243,25 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var own = Force(ownUnits, rules, a => !a.IsDead);
 			var enemy = Force(foes, rules, a => a.Info.HasTraitInfo<AttackBaseInfo>());
 
+			// Remembered static defences near the target: seen earlier, fogged now — the same
+			// provider class SiegeEvaluator trusts for its stand-off line. Dedup by cell so a
+			// re-observed turret never counts twice; the provider owns memory expiry.
+			var remembered = 0;
+			if (defenceProviders.Length > 0)
+			{
+				var coveredCells = new HashSet<CPos>(foes.Select(f => world.Map.CellContaining(f.CenterPosition)));
+				var maxDefenceDist = WDist.FromCells(Info.DefenceScanCells).Length;
+				foreach (var d in defenceProviders.SelectMany(p => p.RememberedDefences()))
+				{
+					if (!d.Observed.HasTraitInfo<AttackBaseInfo>() || !coveredCells.Add(d.Cell))
+						continue;
+					if ((world.Map.CenterOfCell(d.Cell) - targetPos).Length > maxDefenceDist)
+						continue;
+					enemy.Add((BotUnitProfiles.Get(rules, d.Observed), 1));
+					remembered++;
+				}
+			}
+
 			var prediction = BotCombatPredictor.Predict(own, enemy, Factor);
 			var ownValue = ForceValue(own);
 			var enemyValue = ForceValue(enemy);
@@ -253,7 +274,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			{
 				Reason = BotMissionReasons.BelowThreshold,
 				OwnValue = ownValue,
-				Detail = $"trade={trade};ratio={prediction.Ratio.ToString("F2", CultureInfo.InvariantCulture)};ownv={ownValue};foev={enemyValue};defences={foes.Count - seenEnemies.Count}"
+				Detail = $"trade={trade};ratio={prediction.Ratio.ToString("F2", CultureInfo.InvariantCulture)};ownv={ownValue};foev={enemyValue};defences={foes.Count - seenEnemies.Count};remembered={remembered}"
 			};
 
 			return true;

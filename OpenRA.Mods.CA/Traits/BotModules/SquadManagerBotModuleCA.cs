@@ -2851,17 +2851,24 @@ namespace OpenRA.Mods.CA.Traits
 		void EmitCombatVeto(SquadCA squad, string kind, CombatVetoVerdict verdict)
 		{
 			var cell = World.Map.CellContaining(squad.CenterPosition);
+			EmitCombatVeto(cell, squad.IsTargetValid ? World.Map.CellContaining(squad.Target.CenterPosition) : cell,
+				squad.Units.Count, kind, verdict);
+		}
+
+		// The launch consult fires before the squad exists — emit from cells directly.
+		void EmitCombatVeto(CPos unitCell, CPos targetCell, int units, string kind, CombatVetoVerdict verdict)
+		{
 			BotMissionLog.Write(new BotMissionRecord
 			{
 				Player = Player,
-				MissionId = $"combat_veto:{kind}:{cell.X},{cell.Y}",
+				MissionId = $"combat_veto:{kind}:{unitCell.X},{unitCell.Y}",
 				Event = BotMissionEvent.Denied,
 				Reason = verdict.Reason,
 				Executor = "CombatVeto",
 				MissionType = "combat_veto",
-				UnitCell = cell,
-				TargetCell = squad.IsTargetValid ? World.Map.CellContaining(squad.Target.CenterPosition) : cell,
-				Units = squad.Units.Count,
+				UnitCell = unitCell,
+				TargetCell = targetCell,
+				Units = units,
 				Value = verdict.OwnValue,
 				Detail = verdict.Detail
 			});
@@ -3175,6 +3182,45 @@ namespace OpenRA.Mods.CA.Traits
 						(long)idleUnitsValue * Info.RaidMissionSteerOvercommitPercent / 100,
 						(long)Info.RaidMissionSteerMinValue));
 					return BestRaidForSteering(missionProviders, cap);
+				}
+
+				// Tier-2 (12.31): the wave's real commit edge — predict the trade at the resolved
+				// mission target before the squad forms. A veto leaves the pool staged for the
+				// next dispatch check instead of marching it into a fortress. No provider, no
+				// resolved target, or a Defend = unchanged (defending never consults a trade).
+				var launchVeto = CombatVeto;
+				if (launchVeto != null && mission?.Type != BotMissionType.Defend)
+				{
+					var commitPos = missionTarget?.CenterPosition
+						?? missionFrozenTarget?.CenterPosition
+						?? (mission != null ? World.Map.CenterOfCell(mission.Location) : (WPos?)null);
+					if (commitPos.HasValue)
+					{
+						var launchUnits = unitsHangingAroundTheBase
+							.Where(u => u.Actor.Info.HasTraitInfo<AttackBaseInfo>())
+							.Select(u => u.Actor)
+							.ToList();
+						if (launchUnits.Count > 0)
+						{
+							var seenAtTarget = World.FindActorsInCircle(commitPos.Value, WDist.FromCells(Info.IdleScanRadius))
+								.Where(IsPreferredObservedEnemyUnit)
+								.ToList();
+							CanaryObservedAll(seenAtTarget, "combat-veto-launch");
+							if (launchVeto.TryVetoAttack(launchUnits, seenAtTarget, commitPos.Value, out var launchVerdict))
+							{
+								var poolCell = World.Map.CellContaining(new WPos(
+									(int)(launchUnits.Sum(a => (long)a.CenterPosition.X) / launchUnits.Count),
+									(int)(launchUnits.Sum(a => (long)a.CenterPosition.Y) / launchUnits.Count),
+									launchUnits[0].CenterPosition.Z));
+								EmitCombatVeto(poolCell, World.Map.CellContaining(commitPos.Value), launchUnits.Count, "launch", launchVerdict);
+								AIUtils.BotDebug("AI ({0}): combat veto holds {1} staged units back from {2},{3} ({4})",
+									Player.ClientIndex, launchUnits.Count,
+									World.Map.CellContaining(commitPos.Value).X, World.Map.CellContaining(commitPos.Value).Y,
+									launchVerdict.Reason);
+								return;
+							}
+						}
+					}
 				}
 
 				var attackForce = RegisterNewSquad(bot, SquadCAType.Rush);
