@@ -96,25 +96,40 @@ When both arms are measured (each >= MIN_MATCHES scored matches):
        g_i = d_bar / (2 x eff_i)        per unmasked knob
    One paired contrast identifies the whole direction — that is the point of simultaneous perturbation.
 4. **Step size** a_k = a / (k + 1 + A)^0.602 (Spall's alpha = 0.602; A is the stability constant).
-   Proposed `a = 0.05`, `A = 25`: a_0 ~= 0.014 in log space so a clean gradient moves each knob ~1.4%;
-   at k = 50, a_k ~= 0.007.
-5. **Update (in log space, then clamp):**
-       new_i = clamp(round(1000 x exp(log(old_i) + STEP_SCALE x a_k x g_i)), LEARN_MIN, LEARN_MAX)
+   Proposed `a = 0.10`, `A = 10`: a_0 ~= 0.025 in log space, ~2.5% per-knob move on a clean gradient;
+   at k = 50, a_k ~= 0.012. (An earlier draft said a = 0.05, A = 25; the simulation below showed that
+   converges visibly too slowly at our noise level — ~30% more residual distance at k = 60.)
+5. **Gradient smoothing** — an EMA over successive estimates (heavy-ball flavour, cheap variance
+   reduction against the random-sign cross terms of one-step SPSA):
+       g_bar_k = G_EMA x g_k + (1 - G_EMA) x g_bar_(k-1),   g_bar_0 = 0
+   Proposed `G_EMA = 0.4`. Simulation: at paired-diff noise sigma = 0.5 this cut the damped
+   trajectory's final distance to target ~20% (0.425 -> 0.343); at sigma = 0.16 it is neutral-to-better.
+   The EMA state lives beside `k` in `SpsaSteps` (per knob milli-of-log, i.e. plain floats).
+6. **Update (in log space, then clamp):**
+       new_i = clamp(round(1000 x exp(log(old_i) + STEP_SCALE x a_k x g_bar_i)), LEARN_MIN, LEARN_MAX)
    `STEP_SCALE` is the significance damping of section 5. All knobs update together — one write moves the
    whole vector, not the single best knob. That is the deliberate behavioural difference from coordinate
    descent: correlated improvements (tempo up + production down) are found directly.
+7. **Expected accuracy (simulation-backed).** On a 7-knob quadratic target inside [800, 1250] with
+   paired-diff noise sigma_d in [0.16, 0.5] (realistic for MIN_MATCHES = 20: per-pair sd ~0.3-0.6 over
+   >= 20 pairs), 60 steps land the vector ~0.28-0.34 log-units from target damped — i.e. each knob
+   settles within roughly +-10-20% of optimal. That is the honest noise floor of 20-match arms; more
+   matches per arm lower it, and the "settled-scope" re-sweep of section 10.6 polishes individual knobs.
 6. **k increments exactly once** when the pair is fully measured and `--write` runs — regardless of verdict.
    A rejected step still consumed its matches; re-proposing the same k would resend identical arms.
 
 ### Step counter state
 
 `k` lives **in the learned file**, per scope — the file is the single committed state (same precedent as
-`processed_knobs` / posterior counts; a sidecar would drift out of sync on checkout):
+`processed_knobs` / posterior counts; a sidecar would drift out of sync on checkout). The gradient EMA
+(`g_bar`, one float per tunable knob) is stored beside it so a later step continues the smoothed direction:
 
     SpsaSteps:
         Step@<personality>__<faction>: <k>
+        GBar@<personality>__<faction>: <g1>,<g2>,...   # floats, same order as TUNABLE
 
-Absent = 0. The parse/write round-trip ignores unknown nodes, so older tool versions tolerate the field.
+Absent = 0 / zero vector. The parse/write round-trip ignores unknown nodes, so older tool versions
+tolerate the fields.
 
 ## 5. Significance: how the gate and Holm apply to one-direction steps
 
@@ -182,9 +197,12 @@ plus direction beats the minus direction" — a single paired contrast, not a pe
 
 ## 9. Acceptance tests (pytest, `test_tune_build_order.py`)
 
-1. **Synthetic quadratic convergence:** objective `J(theta) = -sum((theta_i - theta*_i)^2)` + seeded noise;
-   theta* interior. After <= 40 SPSA steps at test-scaled floors, every knob is within 25 milli of theta* and
-   inside [800, 1250]. Re-running gives the identical trajectory (determinism end-to-end).
+1. **Synthetic quadratic convergence:** objective `J(theta) = -sum((theta_i - theta*_i)^2)` + seeded noise
+   (sigma_d = 0.16, the optimistic-realistic end); theta* interior. After <= 60 SPSA steps at test floors,
+   every knob is within 200 milli of theta* (the simulation's damped noise floor is ~100-160) and inside
+   [800, 1250]; total distance < 0.35 log-units. Re-running gives the identical trajectory (determinism
+   end-to-end). A zero-noise run must reach the target region much tighter (< 50 milli) — proves the update
+   direction is right, not just damped.
 2. **Deterministic perturbation:** same (personality, faction, k) -> same Delta across two runs; k and k+1
    differ in at least one component; Delta entries are all +-1.
 3. **Bounds:** theta* beyond LEARN_MAX -> the converged vector sits at 1250, never above; clamped-arm
@@ -212,8 +230,10 @@ plus direction beats the minus direction" — a single paired contrast, not a pe
 4. **If SPSA proves too noisy** at 20-match arms: fall back to a small GP/expected-improvement proposer over
    the same arm grammar — the spec's pairing, bounds, file format and switch seam carry over unchanged.
    Decide after the first real batch.
-5. **Gains:** a = 0.05, c = 0.08, A = 25, exponents 0.602/0.101 per Spall (refs below). Alternatives welcome —
-   they are three module constants, not a redesign.
+5. **Gains (simulation-calibrated):** a = 0.10, A = 10, c = 0.08, G_EMA = 0.4; exponents 0.602/0.101 per
+   Spall (refs below). My scratch sim on a 7-knob quadratic inside the bounds: a = 0.05 stalls (~30% more
+   residual at k = 60), a = 0.10 + EMA is the sweet spot among {0.05, 0.10} x {raw, EMA} at sigma_d 0.16-0.5.
+   The sim is a scratch script, not committed; happy to rerun under other priors.
 6. **Settled-scope rule (optional):** after 3 consecutive writes moving no knob > 25 milli, mark the scope
    settled and stop proposing (re-checkable with one coordinate sweep). Saves match budget; adds a state flag.
    Default spec: not implemented.
