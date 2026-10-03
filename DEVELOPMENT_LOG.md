@@ -11,6 +11,17 @@ HANDOFF's `ORDERS_2026-10-03_claude_learning_tiers.md` does not exist anywhere i
 from `extract_stats`?); TIER1-SPEC → `docs/design/TIER1_FITTER_SPEC.md` on `devin/tier1-fitter` (spec first, lead approves).
 **Disk:** C: was at 1.1 GB free (≈200 worktrees under `C:/tmp`, ~2 GB each) — a `git worktree add` failed mid-checkout.
 All new worktrees go to **`G:/cameo-wt/`** (865 GB free). Pruning stale `C:/tmp` worktrees needs a maintainer decision.
+**Results (later):** LEDGER-VERIFY: #791 byte-identical to a fresh `extract_stats` on its parent (71/71 files), drift
+33 → 0, docs/balance only → merge-ready. T3-VERIFY: tier 3 `17fc9d8e2` builds 0 err, 822/822 tests, fog/mutation PASS →
+ACCEPTED for the increment (its "LocalRandom desync" flag is a false positive: bots activate host-only, `Player.cs:223`;
+SharedRandom there WOULD desync; DEVELOPMENT_LOG conflict + stale module map are increment-time chores). Tier-1 spec
+`40cbe9d0d` APPROVED with rulings (Random-slot faction is not public → `enemy_faction_public`); phase A dispatched.
+**Found — fog leak, post-increment fix:** enemy-faction reads use `Player.Faction` (a Random slot's RESOLVED faction) not
+`DisplayFaction` (lobby choice, `Player.cs:65/177`): `BotLearnedPriors.cs:141,145`, `BotSituation.cs:1660,1732`,
+`BuildOrderKnobsBotModule.cs:398,402`, tier-3 `EnemyFactionOf`. One shared helper after INC-N lands (overlaps DAWN now).
+**C:/tmp cleanup (maintainer-approved):** 112 clean, fully-pushed, >24 h idle worktrees removed with plain `git worktree
+remove` (no --force); 56 kept (unpushed / dirty / active today); stale unreferenced loose files deleted; inventory and
+logs in `G:/cameo-wt/_cleanup/`.
 
 # 2026-10-03 — armed smokes: AM_army_staging on master + EL-0 (#789) live validation
 
