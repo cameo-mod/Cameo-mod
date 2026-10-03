@@ -31,9 +31,13 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public const int Neutral = 1000;
 
 		readonly Dictionary<string, int> factors = new(StringComparer.Ordinal);
+		readonly Dictionary<string, int> defenceFactors = new(StringComparer.Ordinal);
 
 		public string StatFingerprint { get; private set; }
+		public string LedgerHash { get; private set; }
+		public int AttritionExponentMilli { get; private set; } = Neutral;
 		public int StaticDefenceFactorPermille { get; private set; } = Neutral;
+		public int IntoDefencesPermille { get; private set; } = Neutral;
 		public int FactorCount => factors.Count;
 
 		/// <summary>Delivery×armour correction in permille; the <c>*|armor</c> row is the armour-wide fallback.</summary>
@@ -45,29 +49,51 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				: Neutral;
 		}
 
+		/// <summary>Static-defence correction in permille — per-delivery <c>DefenceState@</c> when fitted, else the flat factor.</summary>
+		public int DefenceFactorPermille(string delivery) =>
+			defenceFactors.TryGetValue(delivery ?? "-", out var v) ? v : StaticDefenceFactorPermille;
+
 		public static EngagementPriors Parse(IEnumerable<MiniYamlNode> nodes)
 		{
 			var priors = new EngagementPriors();
 			var root = nodes.FirstOrDefault(n => n.Key == "EngagementPriors");
-			if (root == null)
-				return priors;
+			if (root != null)
+				foreach (var node in root.Value.Nodes)
+					ParseNode(priors, node);
 
-			foreach (var node in root.Value.Nodes)
-			{
-				if (node.Key == "StatFingerprint")
-					priors.StatFingerprint = node.Value.Value;
-				else if (node.Key == "StaticDefenceFactorPermille")
-				{
-					if (int.TryParse(node.Value.Value, NumberStyles.Integer, CultureInfo.InvariantCulture, out var sdf))
-						priors.StaticDefenceFactorPermille = sdf;
-				}
-				else if (node.Key.StartsWith("Factor@", StringComparison.Ordinal)
-					&& int.TryParse(node.Value.Value, NumberStyles.Integer, CultureInfo.InvariantCulture, out var pct))
-					priors.factors[node.Key["Factor@".Length..]] = pct;
-			}
+			// Tier-1 fitter schema (TIER1_FITTER_SPEC §5): the producer's contract — same file,
+			// `BotEngagementPriors:` root, DeliveryArmour@ cells in the same residual milli space.
+			var tier1 = nodes.FirstOrDefault(n => n.Key == "BotEngagementPriors");
+			if (tier1 != null)
+				foreach (var node in tier1.Value.Nodes)
+					ParseNode(priors, node);
 
 			return priors;
 		}
+
+		static void ParseNode(EngagementPriors priors, MiniYamlNode node)
+		{
+			var v = node.Value.Value;
+			if (node.Key == "StatFingerprint")
+				priors.StatFingerprint = v;
+			else if (node.Key == "LedgerHash")
+				priors.LedgerHash = v;
+			else if (node.Key == "AttritionExponentMilli" && TryMilli(v, out var exp))
+				priors.AttritionExponentMilli = exp;
+			else if (node.Key == "StaticDefenceFactorPermille" && TryMilli(v, out var sdf))
+				priors.StaticDefenceFactorPermille = sdf;
+			else if (node.Key == "IntoDefencesMilli" && TryMilli(v, out var into))
+				priors.IntoDefencesPermille = into;
+			else if (node.Key.StartsWith("Factor@", StringComparison.Ordinal) && TryMilli(v, out var pct))
+				priors.factors[node.Key["Factor@".Length..]] = pct;
+			else if (node.Key.StartsWith("DeliveryArmour@", StringComparison.Ordinal) && TryMilli(v, out var cell))
+				priors.factors[node.Key["DeliveryArmour@".Length..].Replace("__x__", "|", StringComparison.Ordinal)] = cell;
+			else if (node.Key.StartsWith("DefenceState@", StringComparison.Ordinal) && TryMilli(v, out var ds))
+				priors.defenceFactors[node.Key["DefenceState@".Length..]] = ds;
+		}
+
+		static bool TryMilli(string v, out int milli) =>
+			int.TryParse(v, NumberStyles.Integer, CultureInfo.InvariantCulture, out milli);
 	}
 
 	/// <summary>The pure verdict half of the veto — no World, no Actor, so tests drive every branch directly.</summary>
@@ -199,16 +225,19 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			}
 
 			priors = parsed;
-			Log.Write("debug", $"AI {player.InternalName}: COMBAT_VETO priors: {priors.FactorCount} factors, static-defence {priors.StaticDefenceFactorPermille}‰");
+			Log.Write("debug", $"AI {player.InternalName}: COMBAT_VETO priors: {priors.FactorCount} factors, static-defence {priors.StaticDefenceFactorPermille}‰" +
+				$"{(priors.LedgerHash != null ? $", ledger {priors.LedgerHash} (staleness gate: fingerprint only — ledgers are not mounted in-match)" : "")}");
 		}
 
 		double Factor(BotUnitProfile attacker, BotWeaponProfile weapon, BotUnitProfile target)
 		{
 			var f = priors.FactorPermille(weapon.Delivery, target.Armor);
 			if (attacker.IsBuilding)
-				f = (int)(f * (long)priors.StaticDefenceFactorPermille / 1000);
+				f = (int)(f * (long)priors.DefenceFactorPermille(weapon.Delivery) / 1000);
+			if (target.IsBuilding)
+				f = (int)(f * (long)priors.IntoDefencesPermille / 1000);
 
-			return f / 1000.0;
+			return Math.Clamp(f, EngagementPriors.Neutral / 2, EngagementPriors.Neutral * 2) / 1000.0;
 		}
 
 		static List<(BotUnitProfile Unit, int Count)> Force(IEnumerable<Actor> actors, Ruleset rules, Func<Actor, bool> filter) =>

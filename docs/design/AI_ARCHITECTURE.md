@@ -3623,21 +3623,40 @@ with no weapon is never told to stand. `PredictsLoss` returns false and the stat
 predicted numbers in the record's new optional `Detail` field (`"detail"` in `cameo-ai-missions.jsonl`) — additive,
 readers that ignore unknown fields are unaffected. EL scores vetoed decisions against engagements that did happen.
 
-**Tier-1 priors contract (`ai/learned/engagement_priors.yaml`, MiniYaml `engagement_priors/1`).** Frozen at match start,
-loaded once, written by `tools/ai/fit_engagement_coefficients.py`:
+**Tier-1 priors contract (`ai/learned/engagement_priors.yaml`).** Frozen at match start, loaded once. The producer is
+EMBER's `tools/ai/fit_engagement_priors.py` (TIER1_FITTER_SPEC §5), which writes the `BotEngagementPriors:` root; the
+consumer's `EngagementPriors.Parse` accepts BOTH roots — the fitter's schema plus the original `EngagementPriors:`
+design schema — so either file shape feeds the same cells:
 
 ```yaml
-EngagementPriors:
-	StatFingerprint: <16-hex>                       # FNV-1a-64 over the canonical stat string below
-	StaticDefenceFactorPermille: <permille>          # multiplier on every armed building's damage, 1000 = neutral
-	Factor@<delivery>|<armor>: <permille>            # delivery = warhead class minus "Warhead" lowercased (BotWeaponProfile.Delivery)
-	Factor@*|<armor>: <permille>                     # armour-wide fallback row
+BotEngagementPriors:                                 # tier-1 fitter schema (canonical producer)
+	Schema: 1
+	LedgerHash: <sha256 over docs/balance/*.json>      # fit-side versioning marker (ledgers are not
+	                                                  # mounted in-match; the in-game staleness gate is StatFingerprint)
+	Engagements: <n>                                   # informational
+	AttritionExponentMilli: <milli>                    # reserved — the predictor's ratio is not yet re-exponented
+	DeliveryArmour@<delivery>__x__<armor>: <milli>     # residual on the resolved Versus prior (500-2000)
+	DefenceState@<delivery>: <milli>                   # static-defence fire effectiveness, per delivery
+	IntoDefencesMilli: <milli>                         # global own-fire-into-defences correction
+	AttackTiming@<faction> / Response@ / SuicideIndex@ # reserved — later tiers
+
+EngagementPriors:                                    # design schema (also accepted)
+	StatFingerprint: <16-hex>                          # FNV-1a-64 over the canonical stat string below
+	StaticDefenceFactorPermille: <permille>            # flat static-defence multiplier (fallback when no DefenceState)
+	Factor@<delivery>|<armor>: <permille>              # delivery = warhead class minus "Warhead" lowercased (BotWeaponProfile.Delivery)
+	Factor@*|<armor>: <permille>                       # armour-wide fallback row
 ```
 
-Canonical stat string (the fingerprint's input — C# `CombatVetoMath.StatFingerprint` and the Python fitter produce the
-same value): for every `ActorInfo` with `AttackBaseInfo`, name-sorted: `name;cost;hp;armor|` then per weapon
-`delivery,dptMilli,range|` then `armor=vs,` sorted; FNV-1a-64 (offset 14695981039346656037, prime 1099511628211) over the
-whole string. Fingerprint mismatch or missing file -> all priors neutral (the veto still runs on the raw predictor).
-Stat-normalized keys only — no unit ids — so the file survives roster churn; a rebalance changes the fingerprint and the
-file discounts itself. The response-time priors the fitter may also emit are reserved (the commit consult happens at
-contact, where response has already materialized in the seen list).
+Cell semantics are one shared multiplier space: `FactorPermille(delivery, armor)` reads
+`DeliveryArmour@d__x__a` == `Factor@d|a`; `DefenceFactorPermille(delivery)` reads `DefenceState@d` else falls back to
+`StaticDefenceFactorPermille`; `IntoDefencesPermille` multiplies own damage into building targets. The applied product
+stays clamped to the fitter's own 500-2000 bound — a prior nudges, it never inverts a fight.
+
+Canonical stat string (the fingerprint's input — C# `CombatVetoMath.StatFingerprint`; the fitter is asked to emit the
+same value as `StatFingerprint` so the in-game gate works for its schema too): for every `ActorInfo` with
+`AttackBaseInfo`, name-sorted: `name;cost;hp;armor|` then per weapon `delivery,dptMilli,range|` then `armor=vs,` sorted;
+FNV-1a-64 (offset 14695981039346656037, prime 1099511628211) over the whole string. Fingerprint mismatch or missing
+file -> all priors neutral (the veto still runs on the raw predictor). Stat-normalized keys only — no unit ids — so the
+file survives roster churn. `LedgerHash` is stored and logged but cannot be verified in-match (the ledgers live in
+`docs/balance`, outside the mounted mod paths); until the fitter emits `StatFingerprint`, tier-1-schema files load
+ungated — bounded by the same 500-2000 clamp.
