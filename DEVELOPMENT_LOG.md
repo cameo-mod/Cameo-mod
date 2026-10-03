@@ -17903,10 +17903,18 @@ Generated with [Devin](https://devin.ai)
   gate PASS (pre-fixup; Python-only since). Smoke fits on both elsmoke dirs: clean parse, 0 fitted (logs predate
   `composition` — expected).
 * **First real end-to-end fit:** one headless `hard` vs `classic` duel on this branch's build
-  (`run_ai_match_batch.py --factions td_gdi --repeats 1`, `C:\tmp\tier1-fit-e2e`) produced 200 `engagement` records
+  (`run_ai_match_batch.py --factions td_gdi --repeats 1`, e2e logs moved to `C:\cameo-wt\tier1-fit-e2e`) produced 200 `engagement` records
   carrying `composition`/`enemy_faction`/`enemy_faction_public` — the C# writer verified on live play. Fit: 41
   fitted / 130 skirmish / 29 unmapped skipped → 121 `DeliveryArmour@` cells, 13 `Factor@areadamage|*` coarse cells
   (all deliveries in-match resolved AreaDamage, matching the 146/148 static count), `StaticDefenceFactorPermille`,
   timing/response/suicide priors, `--json` clean on non-empty cells. Note: first batch attempt was killed by the
   stall detector during cold-cache load (fresh support dir, ~100s map cache; `--stall-timeout 900` fixed). Cells
   pegged at bounds (n=41) are expected small-sample behaviour — the corpus fit is what shrinks them.
+* **Increment merge (`643ad47b7`):** all tier-1 work through `49643408d` is on master — EL composition/faction
+  fields (3-way merged with DAWN's Bandit* header), fitter w/ fixups, spec, AP letter, §12.34 (lead-condensed,
+  ordering 12.30/31/33/34 with 12.32 reserved for NOVA's adapt). Design A landed: `IBotEngagementPriors.
+  CorrectionMilli(profile, target)` + `EngagementPriorsBotModule` reading `arsenal_priors.yaml` — the delta
+  `FactorPermille` consumer did NOT land. Key-space resolution: `BotWeaponProfile` has no Delivery field; phase-B
+  provider maps profile→tag mod-side (Versus-dict identity is bijective per `audit_family_uniqueness.py`, or
+  `armament.Weapon`→`Warhead@tag`). Spec §6 updated; `Factor@` coarse cells kept as hedge. Remaining PR delta:
+  coarse cells + `jsonable` + doc updates.

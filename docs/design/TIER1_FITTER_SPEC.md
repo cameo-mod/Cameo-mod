@@ -203,23 +203,25 @@ at match start (frozen, §19.2); bots run host-only so there is no sync surface 
 
 ## 6. Who reads it
 
-- **Tier-2 veto (consumer, already built)**: `CombatVetoEval.Predict` multiplies
-  `DamagePerTickAgainst` by `priors.CorrectionMilli(attacker, target)` on the own side.
-  `EngagementPriorsBotModule` (NOVA branch) currently maps that call to per-unit-type
-  `TradePercent` from `arsenal_priors.yaml`; its own comment says a finer attacker×target table
-  lands later "without an API change". Spec'd consumer change (small): extend the module to
-  prefer the delivery×armour table when the new file exists — map `BotUnitProfile` → its main
-  warhead family × `target.Armor` → `C[d][a]`; fall back to `TradePercent`, else 1000.
-  > 2026-10-03 integration note: NOVA's newer `devin/nova/combat-veto-delta` branch folds the
-  > priors load into `CombatVetoBotModule` itself (no provider/interface; gated by `AN_combat_veto`).
-  > Their `d4570b54f` adapter already parses this spec's schema (`BotEngagementPriors:`,
-  > `DeliveryArmour@`, `DefenceState@`, `LedgerHash`, `IntoDefencesMilli`). One open item: their
-  > `FactorPermille` lookup keys by warhead CLASS name (`weapon.Delivery`, e.g. `areadamage`) —
-  > the engine drops `Warhead@<tag>` keys at `WeaponInfo.LoadWarheads`, and only ~2 classes cover
-  > the 139-tag fit, so a class-keyed lookup cannot reach `DeliveryArmour@` cells. The fitter
-  > therefore emits pooled `Factor@<class>|<armour>` + `StaticDefenceFactorPermille` fallback
-  > cells (same residual, coarser grain) so the file is useful under either outcome; the fine
-  > cells stay primary pending their `Delivery` remap (lead ruling pending).
+- **Tier-2 veto (consumer, landed in INC 2026-10-03)**: `CombatVetoEval.Predict` multiplies
+  `DamagePerTickAgainst` by `priors.CorrectionMilli(attacker, target)` on the own side;
+  `IBotEngagementPriors` (`Mods.CA`) declares that one call and explicitly delegates the
+  unit→delivery-key mapping to the provider ("the file that feeds an implementation owns the
+  unit→delivery-key mapping"). `EngagementPriorsBotModule` (master) maps it to per-unit-type
+  `TradePercent` from `arsenal_priors.yaml` today.
+  > 2026-10-03 integration note (resolved): the alternative `combat-veto-delta` design —
+  > module-internal `EngagementPriors` with `FactorPermille(weapon.Delivery, armour)` keyed by
+  > warhead class name — did **not** land; Design A did. `BotWeaponProfile` on master carries no
+  > `Delivery` field at all (dpt, Range, target sets, the warhead's resolved `Versus` dict), so
+  > the phase-B provider maps profile → delivery family tag itself, mod-side, no engine change:
+  > match `BotWeaponProfile.Versus` to the `^Warhead_*` template's resolved Versus table
+  > (bijective — `audit_family_uniqueness.py` keeps every family distinct), or map
+  > `armament.Weapon` → `Warhead@<tag>` from the weapon yaml nodes. The fitter also emits pooled
+  > `Factor@<class>|<armour>` + `StaticDefenceFactorPermille` cells as a hedge for any
+  > class-grain implementation; fine `DeliveryArmour@` cells stay primary.
+  Spec'd consumer change (phase B, small): extend `EngagementPriorsBotModule` to prefer the
+  delivery×armour table when the new file exists — map `BotUnitProfile` → its main
+  warhead family (above) × `target.Armor` → `C[d][a]`; fall back to `TradePercent`, else 1000.
 - **Later tiers**: the tier-5 engagement network's inputs include "fog-honest ratios of tier-1
   strength split by range band" (research doc) — same provider seam.
 - `BotLearnedPriors` (production weighting) keeps `arsenal_priors.yaml` — unchanged.
