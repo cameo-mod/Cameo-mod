@@ -17785,3 +17785,27 @@ dangling / 0 in-flight; execution 0 dead-ended of 98 cards (1 live-at-end);
 storm 0 (backoff holding); order gate crossed=0; no stall — every match
 decided in ~31k ticks. Combined with the 2v2 batch, the armed tree is green
 on every lane the check measures.
+
+## 2026-10-03 — fix(ai): cooldown + attempt numbering moved to per-player tracker (ab6 finding)
+
+**ab6 armed verification (5c53925eb + AllyAnswerCooldownTicks:750, 2v2 gdi, 1-1):**
+churn dropped hard — max 4 commits per requester+cell id vs the ab2 baseline of
+16 — but one id (`defend_answer:Multi0:8,12`) re-committed 51 ticks after a
+superseded release, inside the 750 window, and the record showed `attempt:1`
+again (should have been 2). Both anomalies have one cause: **BotSituation
+rotated Multi1's personality mid-match** — `TraitDisabled` dismissed the squad
+(honest Released/superseded close) and the *sibling* personality-conditioned
+`SquadManagerBotModuleCA@<other>` instance enabled with an empty cooldown map
+AND an empty missionAttemptCounters. Per-instance state cannot survive the
+rotation the design already permits.
+
+**Fix:** the per-PlayerActor `BotMissionAttemptTracker` (already bookkeeping-only,
+survives instance swaps) now owns (a) `answerCooldownUntil` — `CoolAnswer`/
+`AnswerCooling` — written on superseded closes beside the instance map, read at
+all three pick sites; and (b) `lastAttempt` per mission id — `NextAttemptNumber`/
+`CurrentAttemptNumber` — so a rotated instance never re-issues attempt 1 and the
+`(mission_id, attempt)` schema identity stays unique per match. Module-local
+`missionAttemptCounters`/`allyAnswerCooldownUntil` remain as the absent-tracker
+fallback (classic stacks). Tests 753/753.
+
+Generated with [Devin](https://devin.ai)
