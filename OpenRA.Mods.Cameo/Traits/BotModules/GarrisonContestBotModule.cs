@@ -85,6 +85,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			"when an outranking ally's claim lands on its cell. Inert in 1v1 - no allied broadcasts exist.")]
 		public readonly bool UseTeamCaptureClaims = false;
 
+		[Desc("BF-2 (AI_ARCHITECTURE §12.26): prefer contest targets in the caller's deterministic",
+			"shard (hash of the target cell mod team size) - two allies picking the same garrison",
+			"inside one snapshot interval can't be arbitrated by an unpublished claim. Orders, never",
+			"filters: out-of-shard targets stay eligible once the own tier is exhausted.")]
+		public readonly bool PreferShardCaptureTargets = false;
+
 		[Desc("Ticks a contest claim may run with no walker inside before it stands down (DORMANT stuck).",
 			"A wedged but living walker renews its lease forever - the claim would otherwise never close.")]
 		public readonly int ClaimTimeoutTicks = 7500;
@@ -201,6 +207,16 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (Info.UseTeamCaptureClaims)
 				claimsAhead = TeamBlackboard.ClaimsAheadOf(TeamBlackboard.CollectBroadcasts(player), player.ClientIndex);
 
+			// BF-2 (§12.26): the deterministic shard tier — in-shard targets sort first,
+			// out-of-shard stays eligible after them. Size 1 makes every tier 0, the no-op.
+			var shardSize = 1;
+			var shardRank = 0;
+			if (Info.PreferShardCaptureTargets)
+				(shardRank, shardSize) = TeamBlackboard.ClaimRank(player);
+
+			int ShardTier(Actor garrison) =>
+				shardSize <= 1 ? 0 : (TeamBlackboard.CaptureShard(garrison.Location, shardSize) == shardRank ? 0 : 1);
+
 			// Housekeeping first: drop walkers that arrived, died, lost their lease, or whose target stopped being neutral.
 			var prune = new List<(uint Building, bool AnyInside, bool Superseded, bool TimedOut)>();
 			foreach (var (building, walkers) in claimWalkers)
@@ -294,7 +310,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					&& (claimsAhead == null || !claimsAhead.Contains(world.Map.CenterOfCell(a.Location)))
 					&& shroud.IsExplored(a.Location)
 					&& (a.Location - anchor.Value).LengthSquared <= radiusSq)
-				.OrderBy(a => ((a.Location - anchor.Value).LengthSquared)
+				.OrderBy(ShardTier).ThenBy(a => ((a.Location - anchor.Value).LengthSquared)
 					/ Math.Max(1, a.Trait<Garrisonable>().Info.MaxWeight))
 				.ToList();
 			if (candidates.Count == 0)

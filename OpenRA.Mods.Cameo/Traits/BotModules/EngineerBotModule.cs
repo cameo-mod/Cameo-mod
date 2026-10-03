@@ -197,6 +197,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			"when an outranking ally's claim lands on its cell. Inert in 1v1 — no allied broadcasts exist.")]
 		public readonly bool UseTeamCaptureClaims = false;
 
+		[Desc("BF-2 (AI_ARCHITECTURE §12.26): prefer capture targets in the caller's deterministic",
+			"shard (hash of the target cell mod team size) — two allies picking the same building",
+			"inside one snapshot interval can't be arbitrated by an unpublished claim. Orders, never",
+			"filters: out-of-shard targets stay eligible once the own tier is exhausted.")]
+		public readonly bool PreferShardCaptureTargets = false;
+
 		public override object Create(ActorInitializer init) { return new EngineerBotModule(init.Self, this); }
 	}
 
@@ -707,6 +713,16 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			bool ClaimedByOutrankingAlly(Actor target) =>
 				claimsAhead != null && claimsAhead.Contains(world.Map.CenterOfCell(target.Location));
 
+			// BF-2 (AI_ARCHITECTURE §12.26): the deterministic shard tier — in-shard targets sort
+			// first, out-of-shard stays eligible after them. Size 1 makes every tier 0, the no-op.
+			var shardSize = 1;
+			var shardRank = 0;
+			if (Info.PreferShardCaptureTargets)
+				(shardRank, shardSize) = TeamBlackboard.ClaimRank(player);
+
+			int ShardTier(Actor target) =>
+				shardSize <= 1 ? 0 : (TeamBlackboard.CaptureShard(target.Location, shardSize) == shardRank ? 0 : 1);
+
 			if (claimsAhead != null && claimsAhead.Count > 0)
 			{
 				// Stand down an in-flight capture whose target an outranking ally now claims — the same
@@ -768,7 +784,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				if (Info.CheckCaptureTargetsForVisibility)
 					priorityTargets = priorityTargets.Where(a => a.CanBeViewedByPlayer(player));
 
-				var candidates = priorityTargets.Where(t => !TargetFull(t) && !Dormant(t) && !ClaimedByOutrankingAlly(t)).OrderBy(a => (a.CenterPosition - baseCenter).LengthSquared).ToList();
+				var candidates = priorityTargets.Where(t => !TargetFull(t) && !Dormant(t) && !ClaimedByOutrankingAlly(t)).OrderBy(ShardTier).ThenBy(a => (a.CenterPosition - baseCenter).LengthSquared).ToList();
 				ConsiderEscort(candidates);
 				var ordered = candidates.Where(t => !BlockedByEscort(t)).ToList();
 
@@ -806,7 +822,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					var captureManager = target.TraitOrDefault<CaptureManager>();
 					return captureManager != null && remaining.Any(tp => tp.Trait.CanTarget(captureManager));
 				})
-				.OrderByDescending(target => target.GetSellValue())
+				.OrderBy(ShardTier).ThenByDescending(target => target.GetSellValue())
 				.Take(maximumCaptureTargetOptions);
 
 			if (capturableTypes.Count > 0)
@@ -819,7 +835,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			for (var ci = 0; ci < remaining.Count; ci++)
 			{
 				var capturer = remaining[ci];
-				ConsiderEscort(targets.Where(t => !TargetFull(t) && !Dormant(t)).OrderByDescending(t => t.GetSellValue()));
+				ConsiderEscort(targets.Where(t => !TargetFull(t) && !Dormant(t)).OrderBy(ShardTier).ThenByDescending(t => t.GetSellValue()));
 
 				// Nearest first. A full, dormant, escort-blocked or unsafe target passes the engineer on to the next one, so
 				// with MaxEngineersPerTarget 1 engineers spread over DIFFERENT targets (TargetFull is re-read per engineer:
@@ -827,7 +843,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var open = targets.Where(t => !TargetFull(t) && !Dormant(t) && !BlockedByEscort(t));
 				var tries = Info.RankTargetsBySafety
 					? RankBySafety(capturer.Actor, open)
-					: open.OrderBy(t => (t.CenterPosition - capturer.Actor.CenterPosition).LengthSquared)
+					: open.OrderBy(ShardTier).ThenBy(t => (t.CenterPosition - capturer.Actor.CenterPosition).LengthSquared)
 						.Take(Math.Max(1, Info.CaptureTargetTries))
 						.ToList();
 				foreach (var target in tries)

@@ -121,11 +121,20 @@ def analyse(missions, team):
     attempts = [r for r in recs if r.get("record_kind") == "attempt"]
 
     # Contested claims: identical mission_id attempted by >=2 teammates.
+    # CLAIM_KINDS are races — a capture/garrison claim should have one owner;
+    # attack-kind ids (raid:/secure:/recon:) are deterministic (type:enemy:region),
+    # so two bots taking the same card is a SHARED STRIKE, not a race — counted
+    # as shared_objectives instead, the behaviour the metric wants to see.
+    CLAIM_KINDS = {"capture", "garrison_contest"}
     by_mid = collections.defaultdict(set)
+    kind_of = {}
     for r in attempts:
-        _, mid, _ = mission_of(r)
+        kind, mid, _ = mission_of(r)
         by_mid[mid].add(r.get("player"))
-    contested = {mid: ps for mid, ps in by_mid.items() if len(ps) > 1}
+        kind_of[mid] = kind
+    shared = {mid: ps for mid, ps in by_mid.items() if len(ps) > 1}
+    contested = {m: p for m, p in shared.items() if kind_of[m] in CLAIM_KINDS}
+    shared_objectives = {m: p for m, p in shared.items() if kind_of[m] in ATTACK_KINDS}
 
     # Shared pushes: same enemy target_player attacked by >=2 teammates
     # within `window` ticks — COMMITTED records only: a terminal record in a
@@ -154,6 +163,7 @@ def analyse(missions, team):
         "players": sorted(team),
         "attempts": len(attempts),
         "contested_claims": {m: sorted(p) for m, p in contested.items()},
+        "shared_objectives": {m: sorted(p) for m, p in shared_objectives.items()},
         "shared_push_windows": shared_push_windows,
         "shared_push_detail": {f"{t}@w{w}": sorted(p) for (t, w), p in sorted(shared_pushes.items())},
         "distinct_enemy_targets": sorted(targets_hit),
@@ -210,7 +220,7 @@ def main(argv):
         rep = analyse(missions, set(team))
         print(f"  attempts={rep['attempts']}  defend_missions={rep['defend_missions']}")
         print(f"  shared_push_windows={rep['shared_push_windows']}  {rep['shared_push_detail']}")
-        print(f"  contested_claims={len(rep['contested_claims'])}")
+        print(f"  contested_claims={len(rep['contested_claims'])}  shared_objectives={len(rep['shared_objectives'])}")
         for mid, ps in rep["contested_claims"].items():
             print(f"    CONTESTED {mid}: {', '.join(ps)}")
         print(f"  distinct_enemy_targets={rep['distinct_enemy_targets']}")
