@@ -326,9 +326,9 @@ def test_spsa_converges_on_a_synthetic_quadratic():
     final = learned["knobs"][(P_, F_)]
     assert learned["spsa_steps"][(P_, F_)] == steps
     for knob, target in theta_star.items():
-        assert abs(final.get(knob, 1000) - target) <= 250, f"{knob}: {final.get(knob)} vs {target}"
+        assert abs(final.get(knob, 1000) - target) <= 200, f"{knob}: {final.get(knob)} vs {target}"
     dist = math.sqrt(sum((math.log(final.get(k, 1000)) - math.log(t)) ** 2 for k, t in theta_star.items()))
-    assert dist < 0.40, f"the simulated damped noise floor is ~0.26-0.35, got {dist:.3f}"
+    assert dist < 0.20, f"the committed fixture lands ~0.105 at sigma 0.16, got {dist:.3f}"
     assert all(tbo.LEARN_MIN <= v <= tbo.LEARN_MAX for v in final.values())
 
 
@@ -345,11 +345,11 @@ def test_spsa_zero_noise_approaches_the_target_monotonically():
     for k in range(60):
         _, rows = spsa_rows(learned, k, tbo.MIN_MATCHES, j)
         tbo.write_spsa_update(rows, learned, tbo.MIN_MATCHES)
-    assert dist() < 0.25, "zero noise proves the update direction, not just damping"
+    assert dist() < 0.10, "zero noise proves the update direction, not just damping (fixture: ~0.058)"
     for k in range(60, 250):
         _, rows = spsa_rows(learned, k, tbo.MIN_MATCHES, j)
         tbo.write_spsa_update(rows, learned, tbo.MIN_MATCHES)
-    assert dist() < 0.10
+    assert dist() < 0.05
 
 
 def test_spsa_perturbation_is_deterministic_signed_and_step_dependent():

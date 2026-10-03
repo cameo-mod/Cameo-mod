@@ -102,22 +102,35 @@ When both arms are measured (each >= MIN_MATCHES scored matches):
        g_i = d_bar / (2 x eff_i)        per unmasked knob
    One paired contrast identifies the whole direction — that is the point of simultaneous perturbation.
 4. **Step size** a_k = a / (k + 1 + A)^0.602 (Spall's alpha = 0.602; A is the stability constant).
-   Constants (approved, R2): `a = 0.05`, `A = 25` — so a_0 = 0.05 / (0 + 1 + 25)^0.602 = 0.05 / 7.11 ~=
-   **0.0070**, and a_50 = 0.05 / 76^0.602 ~= 0.0037. Worked example: a clean step d_bar = 0.2 over
-   eff_i = 0.08 gives g_i = 0.2 / (2 x 0.08) = 1.25, and the first full step moves each knob by
-   STEP_SCALE x a_0 x g_i = 1.0 x 0.007 x 1.25 ~= 0.0088, i.e. **~0.9%** in multiplier space.
+   Constants (final, per the R1 re-run in 4.7): `a = 0.10`, `A = 10` — so a_0 = 0.10 / (0 + 1 + 10)^0.602
+   = 0.10 / 4.24 ~= **0.0236**, and a_50 = 0.10 / 61^0.602 ~= 0.0084. Worked example: a clean step
+   d_bar = 0.2 over eff_i = 0.08 gives g_i = 0.2 / (2 x 0.08) = 1.25, and the first full step moves each
+   knob by STEP_SCALE x a_0 x g_i = 1.0 x 0.0236 x 1.25 ~= 0.030, i.e. **~3.0%** in multiplier space.
 5. **Update (in log space, then clamp):**
        new_i = clamp(round(1000 x exp(log(old_i) + STEP_SCALE x a_k x g_i)), LEARN_MIN, LEARN_MAX)
    `STEP_SCALE` is the significance damping of section 5. All knobs update together — one write moves the
    whole vector, not the single best knob. That is the deliberate behavioural difference from coordinate
    descent: correlated improvements (tempo up + production down) are found directly.
-6. **Expected accuracy (simulation-backed).** On a 7-knob quadratic target inside [800, 1250] with
-   paired-diff noise sigma_d in [0.16, 0.5] (realistic for MIN_MATCHES = 20), the R1-gated walk lands
-   ~0.26-0.35 log-units from target at k = 60 — each knob within roughly +-10-20% of optimal. The noise
-   floor (~0.21 at sigma_d = 0.16) is reached by k ~= 120 and does not improve further at constant
-   MIN_MATCHES; even at zero noise the small a keeps convergence gradual (dist 0.22 at k = 60, 0.10 at
-   k = 250). SPSA moves the whole vector into the right neighbourhood cheaply; per-knob polish is what
-   the coordinate follow-up sweep is for (section 7).
+6. **Expected accuracy (simulation-backed, R1 policy).** The committed fixture
+   `tools/ai/spsa_calibration.py` (seeded, reuses this tool's delta/gain/arm-value/gate code) simulates the
+   update loop on a 7-knob quadratic target inside [800, 1250] with paired-diff noise sigma_d. Under the
+   R1 gate (|z| >= 1.96 -> full step, else 0.25) at k = 60, final log-distance to target:
+
+   | preset | EMA | sigma 0.0 | 0.16 | 0.30 | 0.50 |
+   |---|---|---|---|---|---|
+   | a=0.05, A=25 | off | 0.155 | 0.167 | 0.194 | 0.212 |
+   | a=0.05, A=25 | 0.4 | 0.156 | 0.188 | 0.201 | 0.224 |
+   | **a=0.10, A=10** | **off** | **0.058** | **0.105** | **0.128** | **0.162** |
+   | a=0.10, A=10 | 0.4 | 0.060 | 0.116 | 0.145 | 0.163 |
+
+   `a=0.10, A=10` wins at every noise level (R1's gate already recovers the direction information the
+   older design discarded, so the larger gain no longer stalls; part of the earlier "a=0.05" choice was an
+   artefact of the pre-R1 policy). The gradient EMA is **not** a gain under R1 (worse at sigma <= 0.3,
+   neutral at 0.5), so its conditional approval is declined: no `GBar` state is implemented. At the chosen
+   preset the damped walk lands ~0.10-0.16 log-units from target at k = 60 — most knobs within ~10-15% —
+   and keeps improving to ~0.06 at sigma_d = 0.16 by k = 250 (the 20-match noise floor). Longer runs:
+   sigma 0.0 -> 0.027 at k = 120, 0.023 at k = 250; sigma 0.16 -> 0.078 / 0.061; sigma 0.5 -> 0.136 /
+   0.114. Per-knob polish beyond the floor is what the coordinate follow-up sweep is for (section 7).
 7. **k increments exactly once** when the pair is fully measured and `--write` runs — regardless of step
    scale. A damped step still consumed its matches; re-proposing the same k would resend identical arms.
 
@@ -204,10 +217,10 @@ plus direction beats the minus direction" — a single paired contrast, not a pe
 
 1. **Synthetic quadratic convergence:** objective `J(theta) = -sum((theta_i - theta*_i)^2)` + seeded noise
    (sigma_d = 0.16, the optimistic-realistic end); theta* interior. After <= 60 SPSA steps at test floors,
-   every knob is within 250 milli of theta* and inside [800, 1250]; total distance < 0.40 log-units (the
-   simulation's damped floor is ~0.26-0.35). Re-running gives the identical trajectory (determinism
-   end-to-end). Zero-noise must show monotone approach: dist < 0.25 at k = 60 and < 0.10 at k = 250 —
-   proves the update direction is right, not just damped.
+   every knob is within 200 milli of theta* (approved threshold; the §4.7 fixture lands ~0.10 dist) and
+   inside [800, 1250]; total distance < 0.20 log-units. Re-running gives the identical trajectory
+   (determinism end-to-end). Zero-noise must show monotone approach: dist < 0.10 at k = 60 and < 0.05 at
+   k = 250 — proves the update direction is right, not just damped.
 2. **Deterministic perturbation:** same (personality, faction, k) -> same Delta across two runs; k and k+1
    differ in at least one component; Delta entries are all +-1.
 3. **Bounds:** theta* beyond LEARN_MAX -> the converged vector sits at 1250, never above; clamped-arm
@@ -232,8 +245,8 @@ plus direction beats the minus direction" — a single paired contrast, not a pe
 2. **STEP_SCALE damping** — ruled (R1): |z| gate, 1.0 / 0.25, never 0 for a measured pair.
 3. **Switch letter:** none — ruled (R4); offline tool through the existing AK seam.
 4. **GP fallback:** deferred until after the first real SPSA batch (R5).
-5. **Gains:** a = 0.05, A = 25, c = 0.08 (R2); exponents 0.602/0.101 per Spall (refs below). A post-review
-   gradient-EMA variant from my calibration sim was dropped — it was not in the approved spec text.
+5. **Gains:** a = 0.10, A = 10, c = 0.08 (R2 as superseded by the R1 re-run, §4.7 and §11); exponents
+   0.602/0.101 per Spall (refs below).
 6. **Settled-scope rule:** not now (R5).
 
 References: Spall, J.C., "Multivariate stochastic approximation using a simultaneous perturbation gradient
@@ -250,6 +263,13 @@ Systems 34(3):817-823, 1998 (source of the 0.602/0.101 exponents and the stabili
   a measured pair. Two-sided at alpha = 0.05 -> critical |z| = 1.96 (same Z_CRIT).
 - **R2 (§4 arithmetic).** a_0 = 0.05/(1+25)^0.602 ~= 0.0070; a_50 ~= 0.0037 — the earlier "~1.4%" was wrong.
   Constants: a = 0.05, c = 0.08, A = 25. Worked example in §4.
+  **Superseded (same review, follow-up):** re-run the sim under R1's gate and keep whatever it supports;
+  the R1 re-run (§4.7, committed fixture `tools/ai/spsa_calibration.py`) shows a = 0.10, A = 10 dominating
+  at every noise level. Final: **a = 0.10, c = 0.08, A = 10** — a_0 ~= 0.0236, a_50 ~= 0.0084, first full
+  step ~3.0% per knob (worked example, §4).
+- **R2b (gradient EMA, conditional).** G_EMA = 0.4 was approved only if the R1 re-run showed a gain. It does
+  not (§4.7: worse at sigma <= 0.3, neutral at 0.5), so the EMA and `GBar@` state are **not** implemented.
+  Had it been kept, the spec noted it would need a reset on LedgerHash change (tier-1 precedent); moot now.
 - **R3.** EL_WEIGHT = 0.5 approved; the normalisation range is stated from measured EL logs (§2), not assumed.
 - **R4.** No switch letter — offline tool, existing `AK_build_order_knobs` + `LearnedFile` seam.
 - **R5.** GP fallback deferred until after the first real SPSA batch; settled-scope rule: not now.

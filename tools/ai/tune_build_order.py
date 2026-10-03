@@ -70,7 +70,7 @@ POSTERIOR_CAP = 200
 MIN_DURATION_TICKS = 3000  # a match that ended before the bots did anything carries no signal
 
 # ---- tier 4 (SPSA; docs/design/TIER4_SPSA_SPEC.md) ---------------------------
-SPSA_GAIN_A, SPSA_GAIN_C, SPSA_STAB = 0.05, 0.08, 25  # a, c, stability constant A (ruling R2)
+SPSA_GAIN_A, SPSA_GAIN_C, SPSA_STAB = 0.10, 0.08, 10  # a, c, stability constant A (R1 re-run, spec 4.7)
 SPSA_SCALE_FULL, SPSA_SCALE_WEAK = 1.0, 0.25          # |z| >= crit -> full step, else damped (ruling R1)
 SPSA_MASK_LOG = 0.005                               # clamped effective perturbations below this contribute nothing
 EL_WEIGHT = 0.5                                     # composite = match score + 0.5 x mean total_milli/1000 (R3)
