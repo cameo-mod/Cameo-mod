@@ -176,6 +176,16 @@ class ShardRetryTests(unittest.TestCase):
             s = self._shard(td, [[row] * 5, [row] * 3])
             self.assertEqual(ab_increment.shard_progress(s, "hard"), (8, 8))
 
+    def test_progress_counts_only_the_first_planned_rows(self):
+        # A relaunched shard can append a whole second batch to its dir; the early-stop rule
+        # compares win counts, so rows beyond `planned` must not count (2026-10-03: 21 rows / 16).
+        with tempfile.TemporaryDirectory() as td:
+            win = {"bot_outcomes": [{"bot_type": "hard", "outcome": "won"}]}
+            loss = {"bot_outcomes": [{"bot_type": "hard", "outcome": "lost"}]}
+            s = self._shard(td, [[loss] * 6 + [win] * 2 + [win] * 5])   # 13 rows, planned 8
+            self.assertEqual(ab_increment.shard_progress(s, "hard"), (8, 2))
+            self.assertEqual(ab_increment.shard_remaining(s), 0)
+
     def test_fingerprints_pool_retry_dirs(self):
         with tempfile.TemporaryDirectory() as td:
             s = self._shard(td, [[{"fingerprint": "fp-a"}], [{"fingerprint": "fp-a"}]])
