@@ -1,3 +1,24 @@
+# 2026-10-03 — raid-mission steering: a Raid card may ride the wave that commits anyway (TC-2f)
+
+*Devin (nova), worktree `nova-tc2`, branch `devin/nova/def3-remote-coverage` — the squad-layer fix for EMBER's documented dead-end: Raid cards publish but never commit, because `BestAffordableMission` gates `RequiredValue <= idleForceValue` on the idle pool and a provider's RequiredValue is sized for a dedicated force, not for a wave that already passed the launch bar.*
+
+**Done:**
+- `SquadManagerBotModuleCAInfo` gains `UseRaidMissionSteering` (default off) +
+  `RaidMissionSteerOvercommitPercent` (300) + `RaidMissionSteerMinValue` (0).
+- New pure selector `SquadManagerBotModuleCA.BestRaidForSteering(providers, cap)`
+  — Raids only, deterministic (Priority desc, RequiredValue asc, publish order).
+  `BestAffordableMission` untouched.
+- The formation path calls it only when the Defend-hold loop left `mission` null;
+  a steered Raid lands above the non-Defend clearing (it IS a real commit) and
+  flows through the unchanged Raid target-resolution + `MissionTaken` path.
+- Six genericbot `SquadManagerBotModuleCA` instances carry the fields at default;
+  @classic untouched. Switch group `BG_raid_mission_steering`; AI_ARCHITECTURE
+  §12.27 documents the gate, semantics and rejected alternatives.
+
+**Verified:** build + tests below; `apply_increment_switches.py --dry-run` arms
+the six personality instances only. Off = bit-identical: `SelectRaidForSteering`
+returns null before touching anything.
+
 # 2026-10-02 — order-gate fix: a released lease is a hand-off, not a cross (EMBER's seam finding)
 
 *Devin (dawn), worktree `dawn-tc2e`, branch `devin/dawn/team-liveness-rescue` — the `crossed` WARN decode EMBER flagged to the squad-layer owner.*
@@ -17312,3 +17333,29 @@ private engine + tracked dll), boot-gate PASS with isolated SupportDir.
 Post-commit review: `stuck` also counts toward the backoff streak (a wedged path is
 topological — a re-claim sends the next walkers into the same dead end); only `superseded`
 stays neutral.
+
+## 2026-10-03 — ember lane: smoke forensics — the stalled match and the silent finisher
+
+Forensic read on `ab-smoke-out7` match cf428c10 (runner verdict "stalled", 0 records):
+
+- **Not a refusal**: hard issued `raid` missions continuously (priorities 40-87) and ground
+  classic from 14 buildings/10k army to 1 building/0 army between t=17851 and t=19351. The
+  enemy collapse was fast and total; hard was winning, not turtling.
+- **The finisher gates late**: after the collapse (enemy `army_value=0`, `buildings=1`,
+  `defence_count=0`, `last_seen` fresh, `main_target=Multi1` score 272), the situation record
+  sat at `mission=None` for ~1600 ticks before SquadManager's shared push `secure:Multi1`
+  finally committed at t=20930 — right before the runner's stall kill. The push exists and
+  was en route; it gates on something beyond total enemy collapse. **SquadManager lane flag.**
+- **secure pushes never terminalize**: in match a4195e79 (a hard WIN), `secure:Multi1`
+  committed at t=20930 and wrote no terminal record for the remaining ~15.8k ticks — the
+  checker's outcomes layer FAILs on exactly this class. Every `secure:<player>` attempt is
+  effectively dangling forever. Same owner. Fix shape: the push should DORMANT done/target_gone
+  like every other mission (or RELEASED when the squad disbands).
+
+GC-1 contrast for the same window: my contest/raid cards all terminalized (the a550 hang is
+the fixed ClaimTimeoutTicks case). The mission-lifecycle discipline GC-1 follows is the model
+the shared push needs.
+
+Round-trip on out7 summary: execution PASS (0 uncommitted cards of 40), order-gate crossed=0,
+write-back PASS, outcomes FAIL on the dangling secure push + engineer captures (in-flight at
+match end are separately reported, not counted).
