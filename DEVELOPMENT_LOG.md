@@ -17477,3 +17477,9 @@ wave never books `done`; and a Rush squad emptied via `DismissSquad` (intact
 stand-down) later hits `CleanSquads`'s `CloseSecurePush(Failed, LostUnits)` —
 a mislabeled terminal, since `IsValid => Units.Count > 0` makes dismissal look like
 wiped. Evidence: out7 `secure:Multi1` COMMITTED t=20930, open 15.8k ticks.
+
+Verified live (tmpab-smoke-out10, armed single match on 2876dde32 + fixed dll):
+exactly one `RELEASED match_end` record landed — a `capture` mission in flight at
+game end, the same dangling class out7 flagged. Round-trip: outcomes PASS
+(0 dangling, 0 in-flight — first clean line), storm PASS, fog PASS, execution PASS;
+only learning WARNs (tuner needs >=20 matches). Fix proven end-to-end in `99e52f474`.
