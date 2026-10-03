@@ -17921,3 +17921,10 @@ Generated with [Devin](https://devin.ai)
 * Boot gate PASS on the retry — first attempt stalled post-precache because a foreign `inc` worktree instance held
   the shared `%APPDATA%/OpenRA/Logs` handle + GPU; once it exited the gate went green in 26s. Also learned:
   `Engine.ModSearchPaths` is comma-separated (semicolon silently fails mod resolution).
+* DAWN's tier-3 bandits reviewed (`devin/dawn/tier3-bandits`@`9ba79466f`): math/seams/fog all sound, but
+  `GetVariableObservers()` hid `ConditionalTrait`'s virtual (CS0114) — the interface map resolves to the
+  most-derived method, so the base's RequiresCondition watcher never registered and the module was
+  permanently disabled in-game. Fixed on `devin/nova/t3-observer-fix` (override + base-chain, the
+  UnitBuilderBotModuleCA pattern); proven with a minimal interface-dispatch repro. Fleet note posted.
+  Sweep: no other module hides the method. Minors flagged: PersonalityArms existence check, drawn-vs-
+  effective personality on harness pins.
