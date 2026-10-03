@@ -118,7 +118,7 @@
 		Bots:
 	# Tier-3 pooled bandits (fleet orders 2026-10-03): Thompson-samples a personality arm + an attack-plan overlay
 	# over the EL engagement posteriors in ai/learned/plan_bandits.yaml, with a safety floor. The arm sets Bots
-	# (switch group AN_tier3_bandits); empty by default - inert on master.
+	# (switch group AO_tier3_bandits); empty by default - inert on master.
 	GrantConditionOnBotOwner@planbandits:
 		Condition: plan_bandits
 		Bots:
@@ -3859,7 +3859,7 @@ Player:
 	# Tier-3 pooled bandits (fleet orders 2026-10-03): Thompson-samples a personality arm + an attack-plan overlay over
 	# the EL engagement posteriors in ai/learned/plan_bandits.yaml, pooled any -> family -> faction -> matchup, with a
 	# safety floor (an evidenced arm whose LCB is below MinSafetyLcb cannot win). `genericbot && plan_bandits`: off on
-	# master until the increment A/B arms it (switch group AN_tier3_bandits).
+	# master until the increment A/B arms it (switch group AO_tier3_bandits).
 	PlanBanditBotModule:
 		RequiresCondition: genericbot && plan_bandits
 		LearnedFile: ai/learned/plan_bandits.yaml

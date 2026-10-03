@@ -22,7 +22,7 @@
 - `ai.yaml`: `GrantConditionOnBotOwner@planbandits` (empty Bots, inert) + `PlanBanditBotModule`
   block `genericbot && plan_bandits` — 5 plan arms (`balanced` no-op, `press`, `fortify`, `boom`,
   `surge`, all inside the existing knob clamp) + 6 personality arms.
-- `increment_switches.yaml`: `AN_tier3_bandits` (grant only — classic is not genericbot =
+- `increment_switches.yaml`: `AO_tier3_bandits` (grant only — classic is not genericbot =
   bit-identical when off).
 
 # 2026-10-03 — DAWN: tier-3 bandits implementation spec (branch `devin/dawn/tier3-bandits`, worktree `dawn-t3`)
@@ -75,7 +75,7 @@ Spec checkpointed before coding (WORKFLOW 1.7):*
 - `mods/cameo/ai/ai.yaml` — module block (default off) beside BuildOrderKnobsBotModule.
 - `tools/ai/tune_plan_bandits.py` — offline updater: groups engagement records by (bandit, arm, scope),
   decayed Welford, writes learned file.
-- `tools/ai/increment_switches.yaml` — `AN_tier3_bandits`.
+- `tools/ai/increment_switches.yaml` — `AO_tier3_bandits`.
 - `OpenRA.Mods.Cameo.Test/PlanBanditMathTest.cs` — pooling/floor/determinism/parse/decay tests.
 
 # 2026-10-03 — fransotto post-merge review re-verified: all 8 findings closed or documented
