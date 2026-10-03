@@ -178,7 +178,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			// one read per pass. Flag off or 1v1 leaves null and every gate below is the no-op it is today.
 			HashSet<WPos> claimsAhead = null;
 			if (Info.UseTeamCaptureClaims)
-				claimsAhead = TeamBlackboard.ClaimsAheadOf(TeamBlackboard.CollectBroadcasts(player), player.ClientIndex);
+				claimsAhead = TeamBlackboard.ClaimsAheadOf(TeamBlackboard.CollectBroadcasts(player), player.InternalName);
 
 			// Housekeeping first: drop walkers that arrived, died, lost their lease, or whose target stopped being neutral.
 			var prune = new List<(uint Building, bool AnyInside, bool Superseded)>();

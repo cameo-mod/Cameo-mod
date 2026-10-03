@@ -1063,16 +1063,19 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		// TC-2d (AI_ARCHITECTURE.md 12.17): role split — allied bots spread the
-		// TechRush<->Expansion rest by ClientIndex rank. Static per team, so the
+		// TechRush<->Expansion rest by participant-key rank (InternalName: map-side
+		// bots share the host ClientIndex, audit 4.4). Static per team, so the
 		// precedence converges by construction and cannot oscillate.
 		[Test]
-		public void RoleRankCountsLowerClientIndices()
+		public void RoleRankCountsLowerParticipantKeys()
 		{
-			Assert.That(MasterAiBotModule.TeamRoleRank(2, new[] { 0, 1, 3 }), Is.EqualTo(2));
-			Assert.That(MasterAiBotModule.TeamRoleRank(0, new[] { 1, 2 }), Is.EqualTo(0),
-				"the lowest index on the team is rank 0 — it takes the Expansion pole");
-			Assert.That(MasterAiBotModule.TeamRoleRank(3, System.Array.Empty<int>()), Is.EqualTo(0),
+			Assert.That(MasterAiBotModule.TeamRoleRank("Multi2", new[] { "Multi0", "Multi1", "Multi3" }), Is.EqualTo(2));
+			Assert.That(MasterAiBotModule.TeamRoleRank("Multi0", new[] { "Multi1", "Multi2" }), Is.EqualTo(0),
+				"the lowest key on the team is rank 0 — it takes the Expansion pole");
+			Assert.That(MasterAiBotModule.TeamRoleRank("Multi3", System.Array.Empty<string>()), Is.EqualTo(0),
 				"no allied bots — a 1v1 or a solo team — is rank 0 of a team of one");
+			Assert.That(MasterAiBotModule.TeamRoleRank("Multi1", new[] { "Multi1" }), Is.EqualTo(0),
+				"a same-key broadcast is never below the caller — strictly-lower holds");
 		}
 
 		[Test]

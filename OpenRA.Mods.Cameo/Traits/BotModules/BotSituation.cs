@@ -1244,7 +1244,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			// TC-2e (§12.17): the live capture/contest claims of every enabled claim source,
 			// unioned — own-side intent published unconditionally, exactly like ExpansionClaim.
-			// Consumers arbitrate on ClientIndex (TeamBlackboard.ClaimsAheadOf); nothing reading
+			// Consumers arbitrate on participant key (TeamBlackboard.ClaimsAheadOf); nothing reading
 			// it means no behaviour change.
 			var captureClaims = player.PlayerActor.TraitsImplementing<IBotCaptureClaimSource>()
 				.Where(t => t.IsTraitEnabled())
@@ -1337,18 +1337,18 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				OwnDeathsCostWindow = DeathsCostWindow,
 				OwnKillsCostWindow = KillsCostWindow
 			};
-			// TC-2d (§12.17): role split — spread the TechRush<->Expansion rest by ClientIndex rank
+			// TC-2d (§12.17): role split — spread the TechRush<->Expansion rest by participant rank
 			// among allied bots (static per team composition, so it converges by construction;
 			// a 1v1 collects no allied broadcasts and passes 0).
 			var roleBias = 0;
 			if (Info.UseTeamRoleSplit)
 			{
-				var allyIndices = TeamBlackboard.CollectBroadcasts(player)
+				var allyKeys = TeamBlackboard.CollectBroadcasts(player)
 					.Where(b => b != null && b.SnapshotTick > 0)
-					.Select(b => b.ClientIndex)
+					.Select(CoalitionFold.ParticipantKey)
 					.ToList();
-				roleBias = RoleSplitBias(TeamRoleRank(player.ClientIndex, allyIndices),
-					allyIndices.Count + 1, Info.TeamRoleSplitShift);
+				roleBias = RoleSplitBias(TeamRoleRank(player.InternalName, allyKeys),
+					allyKeys.Count + 1, Info.TeamRoleSplitShift);
 			}
 
 			utilityAxes.Observe(utilitySample, currentPersonality, Info, roleBias);
@@ -1877,15 +1877,17 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		}
 
 		/// <summary>
-		/// TC-2d (§12.17): this bot's rank among the allied bots by ClientIndex — the count of
-		/// allied indices below mine. Static per team composition: the precedence can never
-		/// oscillate however the axes drift. Pure, for the tests.
+		/// TC-2d (§12.17): this bot's rank among the allied bots by participant key —
+		/// the count of allied keys below mine ordinally. InternalName is the identity:
+		/// map-side bots share the host ClientIndex (audit 4.4), which would collapse
+		/// every rank to 0 and give the whole team one role. Static per team composition:
+		/// the precedence can never oscillate however the axes drift. Pure, for the tests.
 		/// </summary>
-		internal static int TeamRoleRank(int myClientIndex, IEnumerable<int> allyClientIndices)
+		internal static int TeamRoleRank(string myParticipantKey, IEnumerable<string> allyParticipantKeys)
 		{
 			var rank = 0;
-			foreach (var index in allyClientIndices)
-				if (index < myClientIndex)
+			foreach (var key in allyParticipantKeys)
+				if (string.Compare(key, myParticipantKey, StringComparison.Ordinal) < 0)
 					rank++;
 
 			return rank;

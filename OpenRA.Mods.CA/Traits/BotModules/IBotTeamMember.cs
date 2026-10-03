@@ -282,19 +282,23 @@ namespace OpenRA.Mods.CA.Traits
 
 		/// <summary>
 		/// TC-2e (AI_ARCHITECTURE §12.17): positions claimed by allied broadcasts whose
-		/// publisher outranks the caller — lower ClientIndex wins, so a contested capture
-		/// or contest target converges on one claimant instead of every ally walking at
-		/// it. Pure, for the tests; null or empty input yields an empty set.
+		/// publisher outranks the caller — lower <see cref="CoalitionFold.ParticipantKey"/>
+		/// (InternalName, ClientIndex only as an old-broadcast fallback) wins, so a
+		/// contested capture or contest target converges on one claimant instead of
+		/// every ally walking at it. ClientIndex alone cannot order this: map-side
+		/// bots share the host's index (post-merge audit 4.4). Pure, for the tests;
+		/// null or empty input yields an empty set.
 		/// </summary>
-		public static HashSet<WPos> ClaimsAheadOf(IEnumerable<TeamBroadcast> broadcasts, int myClientIndex)
+		public static HashSet<WPos> ClaimsAheadOf(IEnumerable<TeamBroadcast> broadcasts, string myParticipantKey)
 		{
 			var claims = new HashSet<WPos>();
-			if (broadcasts == null)
+			if (broadcasts == null || myParticipantKey == null)
 				return claims;
 
 			foreach (var broadcast in broadcasts)
 			{
-				if (broadcast == null || broadcast.ClientIndex >= myClientIndex || broadcast.CaptureClaims == null)
+				if (broadcast == null || broadcast.CaptureClaims == null
+					|| string.Compare(CoalitionFold.ParticipantKey(broadcast), myParticipantKey, StringComparison.Ordinal) >= 0)
 					continue;
 
 				foreach (var claim in broadcast.CaptureClaims)

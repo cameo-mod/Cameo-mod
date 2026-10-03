@@ -16,9 +16,11 @@ and reports, per team and per match, the §12.18 acceptance metrics:
                       taken provider cards; secure:<player> is emitted when a
                       cardless Rush wave commits against the named enemy
                       (mission target or main-target steering).
-    contested_claims  same `mission_id` (same capturable actor id) attempted
-                      by >=2 teammates — two bots racing one expansion;
-                      TC-2c should drive this to ~0 when armed.
+    contested_claims  same exclusive-claim `mission_id` (capturable actor id)
+                      attempted by >=2 teammates — two bots racing one capture;
+                      TC-2e should drive this to ~0 when armed. Attack kinds
+                      (raid/recon/secure) shared by teammates are the intended
+                      shared push and count under shared_push, not here.
     defend_answers    defend_kind mission attempts (COMMITTED only). Two
                       sources: `defend:self:rN` = own-base Defend BotMission
                       provider cards; `defend_answer:<requesterKey>:<cell>` =
@@ -117,10 +119,15 @@ def analyse(missions, team):
     recs = [r for r in missions if r.get("player") in team]
     attempts = [r for r in recs if r.get("record_kind") == "attempt"]
 
-    # Contested claims: identical mission_id attempted by >=2 teammates.
+    # Contested claims: identical mission_id attempted by >=2 teammates —
+    # exclusive-claim kinds only. Attack ids (raid/recon/secure) shared by
+    # teammates are the coordinated push itself, not a race; defend ids are
+    # per-requester answers.
     by_mid = collections.defaultdict(set)
     for r in attempts:
-        _, mid, _ = mission_of(r)
+        kind, mid, _ = mission_of(r)
+        if kind in ATTACK_KINDS or kind in DEFEND_KINDS:
+            continue
         by_mid[mid].add(r.get("player"))
     contested = {mid: ps for mid, ps in by_mid.items() if len(ps) > 1}
 
