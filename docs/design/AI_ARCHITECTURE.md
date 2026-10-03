@@ -3631,7 +3631,7 @@ no per-tick world enumeration beyond what the consult sites already compute.
 **Switch**: `AN_combat_veto` — `GrantConditionOnBotOwner@combatveto` + `RequiresCondition: genericbot && combatveto`
 on both modules. Default off; classic never sees the provider.
 
-### 12.32 T1 — the tier-1 'measured from logs' fitter (Devin, 2026-10-03; TIER1_FITTER_SPEC)
+### 12.34 T1 — the tier-1 'measured from logs' fitter (Devin, 2026-10-03; TIER1_FITTER_SPEC)
 
 `tools/ai/fit_engagement_priors.py` (stdlib only, deterministic) fits the tier-1 coefficient table offline: residuals on the
 resolved `^Warhead_*` Versus prior indexed by delivery tag x armour class (never per-unit ids), static-defence fire states, one

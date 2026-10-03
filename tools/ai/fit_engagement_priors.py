@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """fit_engagement_priors.py - the tier-1 'measured from logs' fitter (DESIGN 19.13 tier 1,
-TIER1_FITTER_SPEC; AI_ARCHITECTURE 12.30/12.32).
+TIER1_FITTER_SPEC; AI_ARCHITECTURE 12.30/12.34).
 
 Reads engagement/1 records (Logs/cameo-ai-engagements.jsonl) plus the balance ledger
 (docs/balance/*.json raw stat ledgers) and fits ~1000 stat-normalised coefficients:

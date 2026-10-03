@@ -205,6 +205,12 @@ at match start (frozen, §19.2); bots run host-only so there is no sync surface 
   lands later "without an API change". Spec'd consumer change (small): extend the module to
   prefer the delivery×armour table when the new file exists — map `BotUnitProfile` → its main
   warhead family × `target.Armor` → `C[d][a]`; fall back to `TradePercent`, else 1000.
+  > 2026-10-03 integration note: NOVA's newer `devin/nova/combat-veto-delta` branch folds the
+  > priors load into `CombatVetoBotModule` itself (no provider/interface; gated by `AN_combat_veto`)
+  > and parses a different schema — `EngagementPriors:` root, `Factor@<delivery>|<armour>` with
+  > `*|<armour>` wildcards, `StaticDefenceFactorPermille`, `StatFingerprint` (FNV-1a-64 over
+  > runtime-resolved stats). This spec's `BotEngagementPriors`/`DeliveryArmour@`/`LedgerHash`
+  > schema needs a lead ruling on which side adapts before phase B.
 - **Later tiers**: the tier-5 engagement network's inputs include "fog-honest ratios of tier-1
   strength split by range band" (research doc) — same provider seam.
 - `BotLearnedPriors` (production weighting) keeps `arsenal_priors.yaml` — unchanged.
@@ -230,7 +236,8 @@ log additions are record-only and need no switch.)
 - `OpenRA.Mods.Cameo/Traits/BotModules/EngagementLogBotModule.cs` — emit `composition` in
   seen/truth blocks and `enemy_faction` in the header (record-only; no decisions read it).
 - `docs/design/AI_MATCH_LOG.md` — document the new fields.
-- `docs/design/AI_ARCHITECTURE.md` — new §12.32 describing tier 1 (short, §12.30/§12.31 style).
+- `docs/design/AI_ARCHITECTURE.md` — new §12.34 describing tier 1 (short, §12.30/§12.31 style;
+  12.32 is claimed by NOVA's in-match-adaptation doc, 12.33 by DAWN's tier-3).
 - `OpenRA.Mods.Cameo/Traits/BotModules/EngagementPriorsBotModule.cs` — serve the new table
   (consumer-side; coordinates with NOVA's branch — lands after/incorporates it).
 - `tools/ai/increment_switches.yaml` — group `AP_tier1_priors`.
