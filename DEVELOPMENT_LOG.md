@@ -1,3 +1,11 @@
+# 2026-10-03 — coordinator: INC 2026-10-03 landed on master (tiers 1–4, P0 guard, #791)
+
+*Claude (Opus 5.5), AionUI team lead.* Increment `inc/2026_10_03` → master: am-nre-guard, #791, tier 2 + disabled-guard fix,
+tier 3 (to `f9914bb2c`), tier 1 phase A (+ renumber `49643408d`), tier 4 SPSA (`1e91617de`), F3 doc, lead docs. Gates on the
+merged tree: build 0 err, 830/830, pytest 53/53 (touched tools), fog/mutation/warhead/freshness PASS, doc_claims 43/43,
+boot gate PASS (34 s, isolated `Engine.SupportDir`). Two earlier boot verdicts were void: NOVA's parallel launches truncate the
+shared perf.log. G: is a USB HDD (queue 16) — work moved to `C:/cameo-wt`. Next: the increment A/B; tier-1 schema ruling.
+
 # 2026-10-03 — P0 found+fixed: ArmyStagingBotModule RespondToAttack NRE (2v2 only)
 
 *Devin (nova) — the 2v2 armed smoke (`C:/tmp/elsmoke`, el1@75831d996 + AM_army_staging)

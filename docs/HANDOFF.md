@@ -1,14 +1,31 @@
 # Cameo — THE HANDOFF
 
-## 2026-10-03 (later) — Claude (coordinator, AionUI team): review round in progress
+## 2026-10-03 (evening) — Claude (coordinator, AionUI team): INC 2026-10-03 lands — learning tiers 1–4 + the P0 fixes
 
-`Agent: Claude (Opus 5.5) · coordinator · worktree G:/cameo-wt/claude-lead · branch claude/lead_1003_reviews`
+`Agent: Claude (Opus 5.5) · coordinator · increment branch inc/2026_10_03 → master · worktrees on C:/cameo-wt (SSD)`
 
-**Next (in order):** (1) land `devin/nova/am-nre-guard@28573b84d` (reviewed OK). (2) pick ONE tier-2 branch (#790 vs
-`devin/nova/inc-n-combat-veto`) from T2-VERIFY; close the other. (3) T3-VERIFY → DAWN tier 3. (4) LEDGER-VERIFY → #791.
-(5) approve `docs/design/TIER1_FITTER_SPEC.md` (`devin/tier1-fitter`), then tier-1 implementation. (6) INC-N increment of
-all default-off groups + ONE A/B (mirrors only, ≤ 3 drivers). **New worktrees: `G:/cameo-wt/` only** (C: nearly full).
-The orders file named in the entry below was never committed; the tier assignments live in this HANDOFF only.
+**Landed (all default-off; classic bit-identical):** P0 staging NRE guard (`devin/nova/am-nre-guard`); #791 ledgers
+re-extracted after FirepowerMultiplier 50 (byte-identical to `extract_stats`, `ledgers_drifted` 33 → 0); tier 2 combat
+veto `AN_combat_veto` (`devin/nova/inc-n-combat-veto` + the review fix `devin/t2-veto-disabled-guard` — the disabled
+provider vetoed for every bot incl. classic); tier 3 pooled bandits `AO_tier3_bandits` (DAWN, through `f9914bb2c`);
+tier 1 fitter phase A (`devin/tier1-fitter`, `AP_tier1_priors` reserved for phase B); tier 4 SPSA proposer
+(`devin/tier4-spsa`, offline, `--spsa` beside coordinate descent, constants from the seeded `spsa_calibration.py`).
+Orders + state table: `docs/ORDERS_2026-10-03_claude_learning_tiers.md` (the file HANDOFF cited, now real).
+**Gates (on the merged tree):** build 0 errors · `dotnet test` 830/830 · pytest (touched tools) green · fog / direct
+mutation / empty warhead / AI-arch freshness PASS · `doc_claims` AI contract 73/98 updated with §10.2 · boot gate PASS
+(menu in 34 s, isolated support dir, no new exception).
+**Not in this increment (next one):** DAWN `9ba79466f` (bandit attribution, C#), NOVA `devin/nova/combat-veto-delta`,
+`nova/veto_scorecard`, `nova/el1_inmatch_adapt` — unreviewed. #790 closed as superseded.
+
+**Next (in order):** (1) ONE increment A/B of every default-off group (AK…AO) with EL on both arms (WORKFLOW §4).
+(2) Ruling: tier-1 priors schema (`BotEngagementPriors`/`DeliveryArmour@`/`LedgerHash`) vs NOVA's
+`combat-veto-delta` (`EngagementPriors`/`Factor@`/`StatFingerprint`) — one format before tier-1 phase B (F1).
+(3) F2 fog fix (`BotFactionView.PublicFactionOf`, survey done; PlanBandit/EngagementPriors adopt via their owners).
+(4) Baseline the 124 pre-existing `tools/tests` failures on master (full suite needs ~22 GB; run in chunks).
+**Machine lessons (proposed for WORKFLOW §5, needs a maintainer ruling):** G: is a USB HDD — never build there; boot
+gates should pass `Engine.SupportDir=<isolated copy>` because every launch truncates the shared `perf.log` (two
+false verdicts today while NOVA booted in parallel). `C:/tmp` cleanup: 152 worktrees removed, rescue refs
+`refs/rescue/2026-10-03/*` + `G:/cameo-tmp-rescue/`.
 
 ## 2026-10-03 — DAWN (tier-3): pooled bandits INC-ready — `AO_tier3_bandits`
 
