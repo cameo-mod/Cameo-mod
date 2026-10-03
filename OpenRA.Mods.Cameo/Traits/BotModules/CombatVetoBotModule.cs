@@ -83,6 +83,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public bool VetoEngage(SquadCA squad, IReadOnlyList<Actor> enemies, bool alreadyCommitted, out string reason)
 		{
 			reason = null;
+			if (IsTraitDisabled)
+				return false;
+
 			var key = (squad, "engage");
 			if (cache.TryGetValue(key, out var cached) && world.WorldTick - cached.Tick < Info.VetoCacheTicks)
 			{
@@ -110,6 +113,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public bool VetoLaunch(IReadOnlyList<Actor> force, CPos targetCell, out string reason)
 		{
 			reason = null;
+			if (IsTraitDisabled)
+				return false;
+
 			var rules = world.Map.Rules;
 			var own = force
 				.Where(a => a != null && !a.IsDead && a.IsInWorld)
@@ -137,6 +143,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public bool VetoFlee(SquadCA squad, IReadOnlyList<Actor> pursuers, out string reason)
 		{
 			reason = null;
+			if (IsTraitDisabled)
+				return false;
+
 			var key = (squad, "flee");
 			if (cache.TryGetValue(key, out var cached) && world.WorldTick - cached.Tick < Info.VetoCacheTicks)
 			{

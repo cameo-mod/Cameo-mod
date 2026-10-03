@@ -9,10 +9,13 @@
  */
 #endregion
 
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using NUnit.Framework;
 using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.CA.Traits.BotModuleLogic;
+using OpenRA.Mods.CA.Traits.BotModules.Squads;
 using OpenRA.Mods.Cameo.Traits.BotModules;
 using OpenRA.Primitives;
 using OpenRA.Traits;
@@ -36,6 +39,16 @@ namespace OpenRA.Mods.Cameo.Test
 			readonly int milli;
 			public StubPriors(int milli) { this.milli = milli; }
 			public int CorrectionMilli(BotUnitProfile attacker, BotUnitProfile target) => milli;
+		}
+
+		sealed class StubCombatVeto : IBotCombatVeto, IDisabledTrait
+		{
+			public int Calls;
+			public StubCombatVeto(bool disabled) { IsTraitDisabled = disabled; }
+			public bool IsTraitDisabled { get; }
+			public bool VetoEngage(SquadCA squad, IReadOnlyList<Actor> enemies, bool alreadyCommitted, out string reason) { Calls++; reason = "stub"; return true; }
+			public bool VetoLaunch(IReadOnlyList<Actor> force, CPos targetCell, out string reason) { Calls++; reason = "stub"; return true; }
+			public bool VetoFlee(SquadCA squad, IReadOnlyList<Actor> pursuers, out string reason) { Calls++; reason = "stub"; return true; }
 		}
 
 		[Test]
@@ -108,6 +121,30 @@ namespace OpenRA.Mods.Cameo.Test
 		{
 			var slow = Unit("slow", 400, "Heavy", 2, speed: 40);
 			Assert.That(CombatVetoEval.CannotOutrun(new[] { (slow, 5) }, new (BotUnitProfile, int)[0], 100), Is.False);
+		}
+
+		[Test]
+		public void DisabledCombatVetoProviderIsNotConsulted()
+		{
+			var disabled = new StubCombatVeto(disabled: true);
+			var enabled = new StubCombatVeto(disabled: false);
+			var vetoes = new IBotCombatVeto[] { disabled, enabled };
+			Assert.That(SquadManagerBotModuleCA.EnabledCombatVetoes(vetoes).ToArray(), Is.EqualTo(new[] { enabled }));
+
+			var consulted = 0;
+			foreach (var veto in SquadManagerBotModuleCA.EnabledCombatVetoes(vetoes))
+			{
+				if (veto.VetoEngage(null, Array.Empty<Actor>(), false, out _))
+					consulted++;
+				if (veto.VetoLaunch(Array.Empty<Actor>(), CPos.Zero, out _))
+					consulted++;
+				if (veto.VetoFlee(null, Array.Empty<Actor>(), out _))
+					consulted++;
+			}
+
+			Assert.That(consulted, Is.EqualTo(3));
+			Assert.That(disabled.Calls, Is.Zero);
+			Assert.That(enabled.Calls, Is.EqualTo(3));
 		}
 	}
 }
