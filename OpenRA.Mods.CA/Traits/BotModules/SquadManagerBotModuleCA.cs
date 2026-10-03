@@ -243,6 +243,11 @@ namespace OpenRA.Mods.CA.Traits
 			"pool stays home regardless of how loud the request is.")]
 		public readonly int TeamDefendAnswerMinPoolUnits = 8;
 
+		[Desc("Ticks a released defend_answer/assist_answer id stays unanswerable — a standing",
+			"request the squad kept getting pulled off otherwise re-drafts every pass (observed",
+			"16 commit/release cycles on one requester+cell). 0 = off, bit-identical.")]
+		public readonly int AllyAnswerCooldownTicks = 0;
+
 		[Desc("TC-3 (12.18): the coalition fold elects exactly one allied responder per defend",
 			"request (nearest ArmyCentroid to the defend position) — answer only our own",
 			"assignment; the unelected allies stand down. Needs UseTeamDefendAnswers. A missing",
@@ -725,6 +730,10 @@ namespace OpenRA.Mods.CA.Traits
 		// Rush launch supersedes the last wave's record; a destroyed wave closes it.
 		string securePushOpen;
 		Player securePushTarget;
+
+		// Answer ids released while the squad pivoted away — re-picking them inside the
+		// cooldown reproduces the commit/release churn the metric flagged (off at 0).
+		readonly Dictionary<string, int> allyAnswerCooldownUntil = new();
 		int nextPrepositionTick;
 		IBotThreatPredictionProvider[] threatPredictionProviders;
 		IBotProtectionRequestProvider[] protectionRequestProviders;
@@ -1710,18 +1719,26 @@ namespace OpenRA.Mods.CA.Traits
 					if (elected != null)
 					{
 						var broadcasts = TeamBlackboard.CollectBroadcasts(Player);
-						answered = broadcasts.FirstOrDefault(b => b != null
-							&& (CoalitionFold.ParticipantKey(b) == elected.RequesterId
-								|| (elected.RequesterId == null && b.ClientIndex == elected.RequesterClientIndex)));
-						var armyValue = answered?.OwnArmyValue
-							?? broadcasts.Where(b => b != null).Select(b => b.OwnArmyValue).DefaultIfEmpty().Max();
-						request = new BotProtectionRequest(World.Map.CellContaining(elected.DefendPosition),
-							armyValue, World.WorldTick + Info.ProtectInterval * 10);
+						var rallyCell = World.Map.CellContaining(elected.DefendPosition);
+						if (!AnswerOnCooldown("defend_answer",
+							elected.RequesterId ?? "#" + elected.RequesterClientIndex, rallyCell))
+						{
+							answered = broadcasts.FirstOrDefault(b => b != null
+								&& (CoalitionFold.ParticipantKey(b) == elected.RequesterId
+									|| (elected.RequesterId == null && b.ClientIndex == elected.RequesterClientIndex)));
+							var armyValue = answered?.OwnArmyValue
+								?? broadcasts.Where(b => b != null).Select(b => b.OwnArmyValue).DefaultIfEmpty().Max();
+							request = new BotProtectionRequest(rallyCell,
+								armyValue, World.WorldTick + Info.ProtectInterval * 10);
+						}
 					}
 				}
 				else
 				{
-					answered = TeamBlackboard.TopDefendRequest(TeamBlackboard.CollectBroadcasts(Player));
+					answered = TeamBlackboard.TopDefendRequest(TeamBlackboard.CollectBroadcasts(Player)
+						.Where(b => b == null || b.DefendPosition == WPos.Zero
+							|| !AnswerOnCooldown("defend_answer", CoalitionFold.ParticipantKey(b),
+								World.Map.CellContaining(b.DefendPosition))));
 					if (answered != null)
 						request = new BotProtectionRequest(World.Map.CellContaining(answered.DefendPosition),
 							answered.OwnArmyValue, World.WorldTick + Info.ProtectInterval * 10);
@@ -1753,15 +1770,20 @@ namespace OpenRA.Mods.CA.Traits
 					if (elected != null)
 					{
 						var broadcasts = TeamBlackboard.CollectBroadcasts(Player);
-						var requester = broadcasts.FirstOrDefault(b => b != null
-							&& (CoalitionFold.ParticipantKey(b) == elected.RequesterId
-								|| (elected.RequesterId == null && b.ClientIndex == elected.RequesterClientIndex)));
-						var armyValue = requester?.OwnArmyValue
-							?? broadcasts.Where(b => b != null).Select(b => b.OwnArmyValue).DefaultIfEmpty().Max();
-						request = new BotProtectionRequest(World.Map.CellContaining(elected.AssistPosition),
-							armyValue, World.WorldTick + Info.ProtectInterval * 10);
-						allyAssistAssignment = elected;
-						allyAssistAnswer = requester;
+						var rallyCell = World.Map.CellContaining(elected.AssistPosition);
+						if (!AnswerOnCooldown("assist_answer",
+							elected.RequesterId ?? "#" + elected.RequesterClientIndex, rallyCell))
+						{
+							var requester = broadcasts.FirstOrDefault(b => b != null
+								&& (CoalitionFold.ParticipantKey(b) == elected.RequesterId
+									|| (elected.RequesterId == null && b.ClientIndex == elected.RequesterClientIndex)));
+							var armyValue = requester?.OwnArmyValue
+								?? broadcasts.Where(b => b != null).Select(b => b.OwnArmyValue).DefaultIfEmpty().Max();
+							request = new BotProtectionRequest(rallyCell,
+								armyValue, World.WorldTick + Info.ProtectInterval * 10);
+							allyAssistAssignment = elected;
+							allyAssistAnswer = requester;
+						}
 					}
 				}
 			}
@@ -1883,6 +1905,9 @@ namespace OpenRA.Mods.CA.Traits
 				Executor = "Squads",
 				MissionType = "defend_answer"
 			});
+			if (state == BotMissionAttemptState.Released && reason == BotMissionReasons.Superseded
+				&& Info.AllyAnswerCooldownTicks > 0)
+				allyAnswerCooldownUntil[allyDefendOpen] = World.WorldTick + Info.AllyAnswerCooldownTicks;
 			allyDefendOpen = null;
 		}
 
@@ -1917,6 +1942,13 @@ namespace OpenRA.Mods.CA.Traits
 			});
 		}
 
+		bool AnswerOnCooldown(string kind, string requesterKey, CPos rally)
+		{
+			return Info.AllyAnswerCooldownTicks > 0
+				&& allyAnswerCooldownUntil.TryGetValue($"{kind}:{requesterKey}:{rally}", out var until)
+				&& World.WorldTick < until;
+		}
+
 		void CloseAllyAssist(BotMissionAttemptState state, string reason)
 		{
 			if (allyAssistOpen == null)
@@ -1932,6 +1964,9 @@ namespace OpenRA.Mods.CA.Traits
 				Executor = "Squads",
 				MissionType = "assist_answer"
 			});
+			if (state == BotMissionAttemptState.Released && reason == BotMissionReasons.Superseded
+				&& Info.AllyAnswerCooldownTicks > 0)
+				allyAnswerCooldownUntil[allyAssistOpen] = World.WorldTick + Info.AllyAnswerCooldownTicks;
 			allyAssistOpen = null;
 		}
 

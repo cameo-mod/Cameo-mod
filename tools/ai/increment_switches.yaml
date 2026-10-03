@@ -88,6 +88,7 @@ groups:
   S_tc2_defend_answers:              # NOVA TC-2b — answer an ally's broadcast defend request: protect squad rallies at the ally's position (third channel below own threat/escort; inert in 1v1)
     SquadManagerBotModuleCA:
       UseTeamDefendAnswers: true
+      AllyAnswerCooldownTicks: 750   # re-draft cooldown after a superseded answer — damps the commit/release churn on standing requests (0 = off, bit-identical)
   T_fb2_demand_capturers:            # DAWN FB2 (Frans SpecOps demand) — safe capturable targets justify building a specialist; zero engineers no longer means zero demand forever
     EngineerBotModule:
       UseDemandCapturers: true

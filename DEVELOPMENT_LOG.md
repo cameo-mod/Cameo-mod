@@ -17727,3 +17727,17 @@ path (`EndMission` + `leases.Release`, then Stop). Each Stop records Held=false 
 the order gate, so a take-over inside the window reads as crossed instead of a
 provable hand-off. Reordering Stop before Release is the proven shape
 (GC-1 `StandDownWalkers`, `3fefa249e`).
+
+2026-10-03 — ai(squads): AllyAnswerCooldownTicks — a superseded answer can't re-draft instantly
+
+ab2 evidence: one standing defend request produced 16 commit/release cycles on a
+single requester+cell id — the protect squad kept getting pulled to own-threat,
+released `superseded`, then re-picked the same still-standing request the next
+pass. New `AllyAnswerCooldownTicks` (default 0 = off, bit-identical; armed at 750
+inside S_tc2_defend_answers) puts a released-superseded answer id on cooldown:
+the elected path skips it, TopDefendRequest filters its broadcast, the assist
+election skips the same shape. Released/done and failed closes do NOT cool —
+an expired hold completing and a wiped squad are different events than a pivot.
+Key matches the record id exactly (`<kind>:<requesterKey>:<rallyCell>`).
+
+Generated with [Devin](https://devin.ai)
