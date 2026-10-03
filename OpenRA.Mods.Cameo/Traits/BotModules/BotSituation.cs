@@ -220,6 +220,19 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			"interval, which starved the sustained-candidate timer and latched the " +
 			"personality (observed: turtle held ~38k ticks while the candidate stayed rush).")]
 		public readonly int EmergencyLossClearThreshold = 300;
+
+		[Desc("Emergency means LOSING (maintainer ruling 2026-10-03, AI_ARCHITECTURE open question 10). " +
+			"0 keeps the legacy rule: a loss window above EmergencyLossThreshold alone is an emergency. " +
+			"Above 0 the loss branch also needs losses > this percentage of (current own army + losses in the " +
+			"window), so a wiped army reads 100%, AND a net loss (deaths > kills in the same window). " +
+			"EmergencyLossThreshold stays as an absolute floor; a lost production building still triggers. " +
+			"An active emergency clears at half this percentage (or once the window is no longer a net loss).")]
+		public readonly int EmergencyLossArmyPct = 0;
+
+		[Desc("When true an emergency changes urgency (and what keys off it) but never the personality: " +
+			"no forced turtle at the transition and no turtle candidate just because urgency is Emergency; " +
+			"candidates proceed as under Pressured. False keeps the legacy emergency-turtle override.")]
+		public readonly bool EmergencyKeepsPersonality = false;
 		public readonly int PressuredArmyRatio = 60;
 		public readonly int EmergencyCheckInterval = 25;
 		public readonly int SnapshotInterval = 150;
@@ -548,6 +561,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		int personalityCandidateSince;
 		string sustainedCandidate = "";
 		bool emergencyPersonalityHandled;
+		// Own combat-army value from the latest snapshot (the emergency check runs more often than Rebuild).
+		// Not persisted: -1 after a load means "unknown", which blocks the relative loss test until the next snapshot.
+		int emergencyOwnArmy = -1;
 		readonly Dictionary<string, int> counterDemandCandidateSince = new(StringComparer.Ordinal);
 		string[] lastIssuedCounterDemands = Array.Empty<string>();
 
@@ -931,6 +947,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var ownActors = actorsByOwner.TryGetValue(player, out var ownedActors) ? ownedActors : Array.Empty<Actor>();
 			var ownBuildings = ownActors.Where(IsBuilding).ToArray();
 			var ownArmy = ownActors.Where(IsCombatUnit).Sum(Value);
+			emergencyOwnArmy = ownArmy;
 			var combatRatios = CombatRatios(ownActors);
 			var ownDefence = ownBuildings.Where(IsDefence).Sum(Value);
 			var ownHarvesters = ownActors.Count(a => a.Info.HasTraitInfo<HarvesterInfo>());
@@ -1123,7 +1140,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				personalityCandidateSince, tick);
 			sustainedCandidate = candidatePersonality;
 
-			var emergencyTransition = urgency == BotUrgency.Emergency && !emergencyPersonalityHandled;
+			var emergencyTransition = urgency == BotUrgency.Emergency && !emergencyPersonalityHandled &&
+				!Info.EmergencyKeepsPersonality;
 			var botLimits = player.PlayerActor.TraitsImplementing<BotLimits>().FirstEnabledTraitOrDefault();
 			var reactionDelay = botLimits?.Info.PersonalityReactionDelay ?? Info.DefaultPersonalityReactionDelay;
 			if (ShouldSwitchPersonality(currentPersonality, candidatePersonality, lastPersonalitySwitchTick, tick,
@@ -1441,6 +1459,24 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				: controller.Info.Conditions.Select(c => BotPersonalityController.PersonalityName(c, controller.Info.PersonalityPrefix));
 		}
 
+		// Pure emergency decision. ownArmy < 0 = unknown (relative test cannot pass).
+		internal static bool IsLossEmergency(int deaths, int kills, int ownArmy, bool wasEmergency,
+			bool productionLost, MasterAiBotModuleInfo info)
+		{
+			if (productionLost)
+				return true;
+
+			if (info.EmergencyLossArmyPct <= 0)
+				return deaths > (wasEmergency ? info.EmergencyLossClearThreshold : info.EmergencyLossThreshold);
+
+			if (ownArmy < 0 || deaths <= (wasEmergency ? info.EmergencyLossClearThreshold : info.EmergencyLossThreshold))
+				return false;
+
+			var pct = wasEmergency ? info.EmergencyLossArmyPct / 2 : info.EmergencyLossArmyPct;
+			var lossPct = (long)deaths * 100 / ((long)ownArmy + deaths);
+			return lossPct > pct && deaths > kills;
+		}
+
 		void CheckEmergency(int tick)
 		{
 			var stats = player.PlayerActor.TraitOrDefault<PlayerStatistics>();
@@ -1472,9 +1508,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			DeathsCostWindow = lossSamples.Sum(s => s.Delta);
 			KillsCostWindow = killSamples.Sum(s => s.Delta);
-			var emergency = DeathsCostWindow > Info.EmergencyLossThreshold || productionLossTicks.Count > 0;
-			if (!emergency && currentUrgency == BotUrgency.Emergency)
-				emergency = DeathsCostWindow > Info.EmergencyLossClearThreshold;
+			var emergency = IsLossEmergency(DeathsCostWindow, KillsCostWindow, emergencyOwnArmy,
+				currentUrgency == BotUrgency.Emergency, productionLossTicks.Count > 0, Info);
 			currentUrgency = emergency ? BotUrgency.Emergency : BotUrgency.Normal;
 		}
 
@@ -2003,7 +2038,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		static IEnumerable<string> PersonalityCandidates(BotUrgency urgency, EnemyProfile target, int ownArmy,
 			IEnumerable<EnemyProfile> enemies, MasterAiBotModuleInfo info)
 		{
-			if (urgency == BotUrgency.Emergency)
+			if (urgency == BotUrgency.Emergency && !info.EmergencyKeepsPersonality)
 				yield return "turtle";
 			if (target != null && target.DefenceCount >= info.FortifiedDefenceCount && ownArmy >= info.SteamrollerMinArmyValue)
 				yield return "steamroller";

@@ -386,6 +386,84 @@ namespace OpenRA.Mods.Cameo.Test
 				1000 + info.MinimumHoldTicks + 1, info), Is.SameAs(incumbent));
 		}
 
+		static MasterAiBotModuleInfo EmergencyInfo(int armyPct, bool keepsPersonality)
+		{
+			return FieldLoader.Load<MasterAiBotModuleInfo>(new MiniYaml("", new[]
+			{
+				new MiniYamlNode("EmergencyLossArmyPct", new MiniYaml(armyPct.ToString())),
+				new MiniYamlNode("EmergencyKeepsPersonality", new MiniYaml(keepsPersonality ? "true" : "false"))
+			}));
+		}
+
+		[Test]
+		public void LossEmergencyLegacyModeKeepsAbsoluteRule()
+		{
+			var info = new MasterAiBotModuleInfo();
+			Assert.That(MasterAiBotModule.IsLossEmergency(601, 5000, 100000, false, false, info), Is.True);
+			Assert.That(MasterAiBotModule.IsLossEmergency(600, 0, 0, false, false, info), Is.False);
+			Assert.That(MasterAiBotModule.IsLossEmergency(400, 0, 0, true, false, info), Is.True);
+			Assert.That(MasterAiBotModule.IsLossEmergency(300, 0, 0, true, false, info), Is.False);
+		}
+
+		[Test]
+		public void LossEmergencyNeedsRelativeLossAndNetLoss()
+		{
+			var info = EmergencyInfo(25, true);
+			// Winning trade is never an emergency, however large the loss.
+			Assert.That(MasterAiBotModule.IsLossEmergency(4500, 6000, 12400, false, false, info), Is.False);
+			// Big army absorbing a loss: 700 / (50000 + 700) = 1%.
+			Assert.That(MasterAiBotModule.IsLossEmergency(700, 0, 50000, false, false, info), Is.False);
+			// Absolute floor: a wiped tiny army below the floor does not qualify.
+			Assert.That(MasterAiBotModule.IsLossEmergency(600, 0, 0, false, false, info), Is.False);
+			// Small army wiped (100%) and net losing.
+			Assert.That(MasterAiBotModule.IsLossEmergency(900, 100, 0, false, false, info), Is.True);
+			// 4500 / (12400 + 4500) = 26% > 25 and net loss.
+			Assert.That(MasterAiBotModule.IsLossEmergency(4500, 3470, 12400, false, false, info), Is.True);
+			// Unknown army (-1, just loaded) cannot pass the relative test.
+			Assert.That(MasterAiBotModule.IsLossEmergency(4500, 0, -1, false, false, info), Is.False);
+		}
+
+		[Test]
+		public void LossEmergencyHysteresisClearsAtHalfPercentage()
+		{
+			var info = EmergencyInfo(25, true);
+			// 1000 / (6000 + 1000) = 14%: below the on-percentage, above the clear one (12%).
+			Assert.That(MasterAiBotModule.IsLossEmergency(1000, 0, 6000, false, false, info), Is.False);
+			Assert.That(MasterAiBotModule.IsLossEmergency(1000, 0, 6000, true, false, info), Is.True);
+			// 1000 / (9000 + 1000) = 10% clears; so does a window that stopped being a net loss.
+			Assert.That(MasterAiBotModule.IsLossEmergency(1000, 0, 9000, true, false, info), Is.False);
+			Assert.That(MasterAiBotModule.IsLossEmergency(1000, 1500, 0, true, false, info), Is.False);
+			// Absolute clear threshold still applies.
+			Assert.That(MasterAiBotModule.IsLossEmergency(300, 0, 0, true, false, info), Is.False);
+		}
+
+		[Test]
+		public void LossEmergencyProductionLossStillTriggers()
+		{
+			Assert.That(MasterAiBotModule.IsLossEmergency(0, 9000, 99999, false, true, EmergencyInfo(25, true)), Is.True);
+			Assert.That(MasterAiBotModule.IsLossEmergency(0, 0, 0, false, true, new MasterAiBotModuleInfo()), Is.True);
+		}
+
+		[Test]
+		public void EmergencyKeepsPersonalityDropsTheTurtleOverride()
+		{
+			var available = new[] { "rush", "turtle", "tech", "expansion", "steamroller" };
+			var target = new EnemyProfile { Alive = true, NearestCells = 10, ArmyValue = 1000 };
+			var legacy = new MasterAiBotModuleInfo();
+			Assert.That(MasterAiBotModule.CandidatePersonality(BotUrgency.Emergency, target, 0, new[] { target }, "rush",
+				available, legacy), Is.EqualTo("turtle"));
+			var keeps = EmergencyInfo(25, true);
+			// Same candidate as under Pressured (terminal turtle fallback), but reached through the normal chain.
+			var weak = new EnemyProfile { Alive = true, NearestCells = 10, ArmyValue = 100 };
+			Assert.That(MasterAiBotModule.CandidatePersonality(BotUrgency.Emergency, weak, 0, new[] { weak }, "",
+				available, keeps), Is.EqualTo("rush"));
+			Assert.That(MasterAiBotModule.CandidatePersonality(BotUrgency.Emergency, target, 0, new[] { target }, "",
+				available, keeps), Is.EqualTo(MasterAiBotModule.CandidatePersonality(BotUrgency.Pressured, target, 0,
+				new[] { target }, "", available, keeps)));
+			Assert.That(MasterAiBotModule.UnfilteredCandidatePersonality(BotUrgency.Emergency, weak, 0, new[] { weak }, "", keeps),
+				Is.EqualTo("rush"));
+		}
+
 		[Test]
 		public void CandidatePersonalityRulesAreOrdered()
 		{

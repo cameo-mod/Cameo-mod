@@ -239,7 +239,7 @@ Each `IBot*` seam: who provides it, who consumes it. `STARVED` = consumed but no
 | check | severity | finding |
 |---|---|---|
 | R1 | ok | 99 gated instances checked; 0 dormant on master until their increment arm |
-| R2 | ok | 57 switch targets verified |
+| R2 | ok | 58 switch targets verified |
 | R3 | WARN | DEAD-END `IBotAssaultFormation`: provided by `AssaultFormationBotModule`; no consumer |
 | R3 | WARN | DEAD-END `IBotCaptureTransportProvider`: provided by `FransTransportCommanderBotModule`; no consumer |
 | R3 | WARN | DEAD-END `IBotDefensePlacementAdvisor`: provided by `DefenseCoveragePlanner`; no consumer |
@@ -275,4 +275,4 @@ Each `IBot*` seam: who provides it, who consumes it. `STARVED` = consumed but no
 
 0 ERROR, 31 WARN
 
-R1 checked 99 gated bot-module instances; R2 checked 57 switch targets. Modules marked *(no source)* live in `engine/` assemblies absent from this worktree — they are listed from yaml only, and C#-side checks skip them rather than fail.
+R1 checked 99 gated bot-module instances; R2 checked 58 switch targets. Modules marked *(no source)* live in `engine/` assemblies absent from this worktree — they are listed from yaml only, and C#-side checks skip them rather than fail.
