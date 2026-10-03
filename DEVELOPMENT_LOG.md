@@ -17809,3 +17809,19 @@ all three pick sites; and (b) `lastAttempt` per mission id — `NextAttemptNumbe
 fallback (classic stacks). Tests 753/753.
 
 Generated with [Devin](https://devin.ai)
+
+## 2026-10-03 — verify(ai): ab7 — rotation-proof cooldown holds airtight
+
+**ab7 (81fa5a3c5 + AllyAnswerCooldownTicks:750, 2v2 gdi, 1-1, 106 records):**
+zero re-commits inside the cooldown window — min post-supersede gap 751 ticks
+(ab6's miss was 51, caused by a BotSituation personality rotation spawning a
+sibling module instance with empty maps). Every answer-id attempt sequence is
+monotonic (1..N, no resets); zero same-player (mission_id, attempt) collisions —
+the only att1 duplicates are cross-PLAYER capture races, which arbitration
+legitimately produces. `assist_answer:Multi3:56,34` committed and closed `done`
+— the TC-3 channel exercised end-to-end again. 0 dangling, match_end terminals
+present. Residual churn (max 7 commits on a standing request) is all post-expiry
+re-drafts — the requester still broadcasts, so re-answering after the cool
+period is the designed shape, not suppression.
+
+Generated with [Devin](https://devin.ai)
