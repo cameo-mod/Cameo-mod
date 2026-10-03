@@ -486,10 +486,14 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					case EngineerCheck.Stuck:
 						assigned.Remove(a);
 						EndMission(a, job, check);
-						leases?.Release(a, LeaseOwner);
 						stuckUntil[a] = tick + Info.StuckRetryTicks;
 						StuckStops++;
+
+						// Order before release: a Stop issued while the lease is still held reads as the
+						// claim's own last act at the order gate; releasing first would leave the Stop
+						// unattributed and the next module's order counted crossed (GC-1 StandDownWalkers).
 						bot.QueueOrder(new Order("Stop", a, false));
+						leases?.Release(a, LeaseOwner);
 						Log.Write("debug", $"AI ({player.ClientIndex}): ENG stuck {a.Info.Name} {a.ActorID} on {job.Job}, stopped and released (tick {tick})");
 						break;
 					default:
@@ -742,9 +746,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 					assigned.Remove(a);
 					EndMission(a, job, EngineerCheck.Working, superseded: true);
-					leases?.Release(a, LeaseOwner);
 					SupersededCaptures++;
+
+					// Order before release (same shape as the Stuck path above).
 					bot.QueueOrder(new Order("Stop", a, false));
+					leases?.Release(a, LeaseOwner);
 					Log.Write("debug", $"AI ({player.ClientIndex}): ENG capture superseded {a.Info.Name} {a.ActorID} -> {job.Target.Info.Name} {job.Target.ActorID} (tick {world.WorldTick}; superseded {SupersededCaptures})");
 				}
 

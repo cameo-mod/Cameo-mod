@@ -1,3 +1,31 @@
+# 2026-10-03 — engineer stop-before-release + armed 2v2 game 2
+
+*Devin (nova), worktree `nova-tc2` — follow-up to the devlog flag (4267ea94e): the two
+EngineerBotModule release-before-Stop sites reordered to the proven GC-1 shape
+(`3fefa249e` `StandDownWalkers`). Second armed 2v2 ran BF-2 live: hard+hard won the gdi
+mirror 1-0; contested claims came from sequential re-picks 71-446t apart (claim-timeout
+reopens + exhausted-shard pools), not the sub-snapshot simultaneous window the shard
+pre-partitions; `DORMANT outmatched` and `REOPENED timeout` records confirm both shelves
+and the claim lifecycle live. Batch self-aborted game 2 on fingerprint drift when this
+checkout moved under it — the harness guard working as designed.*
+
+**Done:**
+- `EngineerCheck.Stuck`: Stop now queues while the lease is still held, then Release —
+  the Stop reads as the claim's own last act at the order gate instead of an unattributed
+  order that makes the next module's take-over count crossed.
+- Capture-supersede path (claims-ahead stand-down): same reorder — Stop, then Release.
+- Sweep of the module's other Release sites: batch-capture fallback (line ~942) releases
+  with no following order (no unattribution possible); the retreat Move orders already
+  precede their Release — proven shape already held there.
+- EngineerBotModule is the §19.5 Exception-1 omniscient module (maintainer 2026-09-30):
+  `DefenceValue`/`OwnArmedValueNear` unfiltered scans are sanctioned, not a fog leak —
+  verified against the ruling before touching.
+
+**Verification:** build clean; Cameo suite 751/751; boot-gate: menu markers, zero new
+exceptions. Armed smoke game 1: hard+hard 1-0 over classic+classic (2nd smoke where a
+hard side wins); contested_claims=4 all sequential re-picks, zero simultaneous-window
+races observed post-BF-2.
+
 # 2026-10-03 — capture retreat shelf + the armed 2v2 round-trip
 
 *Devin (nova), worktree `nova-tc2` — the armed 2v2 smoke ran the full TC stack for real
