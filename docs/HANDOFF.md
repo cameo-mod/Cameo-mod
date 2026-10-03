@@ -1,5 +1,34 @@
 # Cameo — THE HANDOFF
 
+## 2026-10-03 — Claude (coordinator): EL-0 engagement log (learning tier 0) + the five learning tiers handed to Devin
+
+`Agent: Claude-Local (Opus 5.5) · coordinator · branch claude/el1_engagement_log → PR`
+
+**Landed earlier today (master `f07023d03`, via NOVA's master-sync):** #779 emergency = losing (§19.11, `AL_emergency_net_loss`),
+#780 BO-2 lab contract, #782 army staging (§19.12 / AI_ARCHITECTURE §12.29, `AM_army_staging`), #783 claims re-pin, #787
+binaries untracked. All default-off. Master verified: build 0 errors, 794/794 tests, fog / direct-mutation / arch-freshness PASS.
+
+**This PR — EL-0, the record-only engagement log (DESIGN §19.13, AI_ARCHITECTURE §12.30):** every fight is one scored
+line in `Logs/cameo-ai-engagements.jsonl` (`engagement/1`, plus a `posture` record every 250 ticks with the army's
+distance to its staging point). `seen` vs `truth` blocks (truth = offline only, one manifested site). Runs for every
+bot incl. classic (logging is not behaviour; zero orders, zero conditions). Report: `tools/ai/engagement_report.py`.
+Research basis: `design/AI_LEARNING_RESEARCH_2026-10-03.md`. The maintainer adopted the **five learning tiers** (§19.13).
+
+**#788 (open, maintainer merges):** DAWN's `81fa5a3c5` (per-player answer tracker) was committed only in the SHARED main
+checkout with an origin/master merge left staged there; #788 lands that exact commit (gated). After it merges, the main
+checkout's staged merge must be aborted and fast-forwarded (the sync job refuses while it is dirty). **Maintainer
+authorised Claude (2026-10-03) to do exactly that once #788 is on master:** `git merge --abort`, then fast-forward to
+origin/master, then confirm `sync_main_checkout.log` runs clean.
+
+**Next (in order):** (1) merge this PR + #788. (2) Devin builds tiers 1–3 (fleet `ORDERS_2026-10-03_claude_learning_tiers.md`):
+EMBER tier-1 fitter, NOVA tier-2 veto, DAWN tier-3 pooled bandits. (3) ONE increment A/B of every default-off group
+(D, E, AG, F2, ST, AL, AM, …) with EL logging on both arms — EL's scores are the A/B's new per-fight metric.
+(1b of 10-02, the coherence pass, is DONE: §12.20 gives SP-1/HS-1/AF-1 one owner each; CV+ATK-1 are one state.)
+**Open (balance lane, not measured yet):** `audit_doc_claims` on master: `ledgers_drifted` 0 → **33** (was 1 this
+morning). Suspect the maintainer's `FirepowerMultiplier@GlobalBuffs` 25 → 50 (`612014a74`) — ledgers price effective DPS;
+re-extract via the pipeline (rule 3), never by hand.
+**Process (WORKFLOW §1.7–1.8, maintainer today):** checkpoint HANDOFF + DEVELOPMENT_LOG at every milestone; Devin is free.
+
 ## 2026-10-02 — Claude (coordinator): INC-4 claude batch lands; the two formations are one; scale targets ruled
 
 `Agent: Claude-Local (Opus 5.5) · coordinator · branch inc/2026_10_02_claude → master`

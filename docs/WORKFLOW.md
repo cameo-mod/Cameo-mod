@@ -27,6 +27,14 @@ Rules here change only by a maintainer ruling; record the quote and the date whe
    hashes; cite `path:line` and counts instead of pasting diffs or logs.
 6. **Keep the always-loaded context small:** `CLAUDE.md` is a core (full text: `docs/AGENT_CONTRACT.md`); memory index
    lines stay one short line each.
+7. **Checkpoint as you go — a session can be cut off at any moment** (maintainer 2026-10-03: *"always important to
+   record everything in the handoff document and the development log … so that you can resume cleanly even when your
+   tokens run out"*). After every milestone (sub-agent spawned, PR opened, ruling recorded) append 3–5 lines to
+   `DEVELOPMENT_LOG.md` and refresh the `HANDOFF.md` "Next" line: worktree + branch, spec path (specs live in a file, not
+   only in a prompt), open PRs, what is next. Recovering an uncheckpointed session from its transcript cost ~40 tool calls.
+8. **Devin agents are free** (maintainer 2026-10-03: *"the 3 Devin agents will work for free so they are not limited to
+   tokens"*): coding work that does not need the coordinator's tight review loop goes to NOVA / EMBER / DAWN through a
+   fleet ORDERS file; Sonnet sub-agents are for work the coordinator must review inside the session.
 
 ## 2. Roles
 

@@ -17839,3 +17839,40 @@ dangling / 0 in-flight; execution 0 dead-ended of 98 cards (1 live-at-end);
 storm 0 (backoff holding); order gate crossed=0; no stall — every match
 decided in ~31k ticks. Combined with the 2v2 batch, the armed tree is green
 on every lane the check measures.
+
+## 2026-10-03 — fix(ai): cooldown + attempt numbering moved to per-player tracker (ab6 finding)
+
+**ab6 armed verification (5c53925eb + AllyAnswerCooldownTicks:750, 2v2 gdi, 1-1):**
+churn dropped hard — max 4 commits per requester+cell id vs the ab2 baseline of
+16 — but one id (`defend_answer:Multi0:8,12`) re-committed 51 ticks after a
+superseded release, inside the 750 window, and the record showed `attempt:1`
+again (should have been 2). Both anomalies have one cause: **BotSituation
+rotated Multi1's personality mid-match** — `TraitDisabled` dismissed the squad
+(honest Released/superseded close) and the *sibling* personality-conditioned
+`SquadManagerBotModuleCA@<other>` instance enabled with an empty cooldown map
+AND an empty missionAttemptCounters. Per-instance state cannot survive the
+rotation the design already permits.
+
+**Fix:** the per-PlayerActor `BotMissionAttemptTracker` (already bookkeeping-only,
+survives instance swaps) now owns (a) `answerCooldownUntil` — `CoolAnswer`/
+`AnswerCooling` — written on superseded closes beside the instance map, read at
+all three pick sites; and (b) `lastAttempt` per mission id — `NextAttemptNumber`/
+`CurrentAttemptNumber` — so a rotated instance never re-issues attempt 1 and the
+`(mission_id, attempt)` schema identity stays unique per match. Module-local
+`missionAttemptCounters`/`allyAnswerCooldownUntil` remain as the absent-tracker
+fallback (classic stacks). Tests 753/753.
+
+Generated with [Devin](https://devin.ai)
+
+## 2026-10-03 — Claude: resume after a session cut-off; EL-0 finished; DAWN's stranded commit landed as #788
+
+* The 10-03 morning session was cut off at 12:52 mid-task; recovering it from the raw transcript cost ~40 tool calls →
+  WORKFLOW §1.7 (checkpoint as you go) + §1.8 (Devin is free), maintainer rulings.
+* EL-0's coder was cut off too; its ~1,700 uncommitted lines moved from `C:/tmp/claude-el0` (old base `8b5baa423`) to
+  `C:/tmp/claude-el1` on master `f07023d03` (one DESIGN conflict: §19.11/19.12 from master + §19.13 kept in order). A
+  resumed Sonnet coder finished it: 807/807 tests, 15 pytest, fog (80 files, 262 sites) / mutation / freshness PASS.
+  It fixed one wrong C# test vector (`PredictedTrade(1000,1000,600,0)` = 428, not 500).
+* Reviewed: `INotifyAppliedDamage` fires on the attacker's player actor (`Health.cs:230`), so the module sees its own
+  hits with no per-unit trait; per-hit work O(1); `Ready()` gates humans out; truth scan only at start/close.
+* DAWN's `81fa5a3c5` sat only in the shared main checkout (+ a staged origin/master merge) → reviewed (inert cooldown,
+  log-identity fix) → PR #788 from `claude/land_dawn_answer_tracker` (direct push to master is denied: PR + maintainer).
