@@ -260,6 +260,29 @@ def count_openra_processes() -> int:
         return 0
 
 
+def parse_driver_count(output: str) -> int:
+    """Lines naming a run_ai_match_batch.py command line (one per batch driver)."""
+    return sum(1 for line in output.splitlines() if "run_ai_match_batch" in line)
+
+
+def count_batch_drivers() -> int:
+    """Machine-wide run_ai_match_batch.py drivers — ours AND foreign. A driver holds its
+    slot for the whole batch, including the gaps between matches when no OpenRA.exe runs."""
+    if os.name == "nt":
+        try:
+            proc = subprocess.run(
+                ["powershell", "-NoProfile", "-Command",
+                 "Get-CimInstance Win32_Process -Filter \"Name='python.exe'\" "
+                 "| Select-Object -ExpandProperty CommandLine"],
+                capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=30)
+        except (OSError, subprocess.SubprocessError):
+            return 0
+        return parse_driver_count(proc.stdout)
+    proc = subprocess.run(["pgrep", "-fa", "run_ai_match_batch"],
+                          capture_output=True, text=True, timeout=30)
+    return parse_driver_count(proc.stdout)
+
+
 def recent_credit(running: list[Shard], grace: float) -> int:
     """Shards launched within `grace` seconds whose OpenRA child has not had time to
     appear in tasklist yet — counting them anyway is what keeps a launch burst under
@@ -333,6 +356,11 @@ def shard_progress(shard: Shard, bot_a: str) -> tuple[int, int]:
                 row = json.loads(line)
             except json.JSONDecodeError:
                 continue
+            # Only the first `planned` rows count: a relaunched shard can append a whole new batch
+            # (2026-10-03: ctrl reached 21 rows for 16 planned), and the early-stop rule compares raw
+            # win COUNTS, so an arm with extra rows would win pairs it has not earned.
+            if shard.planned and played >= shard.planned:
+                break
             played += 1
             for bo in row.get("bot_outcomes") or []:
                 if bo.get("bot_type") == bot_a and bo.get("outcome") == "won":
@@ -606,7 +634,10 @@ def drive(shards: list[Shard], args: argparse.Namespace,
                 if s.arm in stopped:
                     pending.remove(s)   # already marked done+early_stopped inside evaluate
         while pending:
-            load = count_openra_processes() + recent_credit(running, args.spawn_grace)
+            # WORKFLOW §4 caps DRIVERS, not games: a driver between matches has no OpenRA.exe for a
+            # moment, so a games-only count over-launched (5 drivers on the box, 2026-10-03).
+            load = max(count_openra_processes() + recent_credit(running, args.spawn_grace),
+                       count_batch_drivers())
             if load >= args.max_instances:
                 break
             shard = pending.popleft()
@@ -872,8 +903,14 @@ def main() -> int:
     skipped = [s for s in shards if s.arm in aborted]
     for s in skipped:
         s.done = True  # arm aborted in smoke: its shards never enter the queue
+    # A re-run (--skip-build after an interruption) must not replay shards whose planned
+    # matches are already recorded: the 2026-10-03 restart relaunched a finished ctrl arm.
+    complete = [s for s in live_shards if shard_remaining(s) == 0]
+    for s in complete:
+        s.done = True
+    live_shards = [s for s in live_shards if s not in complete]
     print(f"\n=== full shards: {len(live_shards)} queued "
-          f"({len(skipped)} skipped on smoke-aborted arms) ===", flush=True)
+          f"({len(skipped)} skipped on smoke-aborted arms, {len(complete)} already complete) ===", flush=True)
     drive(live_shards, args, stop_ctx=(arms, shards, decided))
 
     return summarize(args.out, arms, shards, smoke, args, decided, started)

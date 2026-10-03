@@ -1359,7 +1359,7 @@ this incrementally shippable — each phase in 10.6 is a complete, playable stat
 Verified on 2026-09-07 from the active `mods/cameo/mod.yaml` manifest and resolved
 `Player` / `World`, against upstream base `291052380`. Scope here is the decision modules,
 their explicit coordination adapter, and the three data/limit providers named below:
-**68 distinct trait types, 93 Player instances plus one World instance** (2026-10-02e: BO-1 adds `BuildOrderKnobsBotModule` (genericbot, behind `build_order_knobs`), the §12.25 build-order knob provider, +1 type / +1 instance; 2026-10-02d: ST adds `ScaleTargetsBotModule` (genericbot, behind `scale_targets`), the §12.22 size-target provider, +1 type / +1 instance (#770 left it uncounted); 2026-10-02c: PP-1 adds `ParallelProductionBotModule` (genericbot, behind `parallel_production`), the settings-only IBotProductionWidth provider, and ATK-1 adds `AssaultFormationBotModule` (genericbot, behind `assault_fanout`), the settings-only provider of the unified CV/ATK-1 deploy state (§12.7a), and ST adds `ScaleTargetsBotModule` (genericbot, behind `scale_targets`, §12.22), +3 types / +3 instances; 2026-10-02b: SP-1/AF-1 add `SpacingAdvisorBotModule` + `ArmyFirstBotModule` (genericbot, behind `spaced_base`/`army_first`) and the `HarvesterBotModuleCA@generic`/@classic split adds one more instance, +3 types / +4 instances — the count also absorbs +2/+2 drift other merges left uncounted; 2026-10-02: CN3 adds `BridgeRepairBotModule` (genericbot, behind `cn3_bridge_repair`), the CN bridge-hut repair port claiming repairers per §19.6, +1 type / +1 instance — the count also absorbs a +1 drift RV2's `SupportPowerBotASModule@wc2` left uncounted; 2026-10-01: CN3 adds `DeployBotModule` (genericbot, behind `cn3_deploy`), the CN unified deploy-driving port, +1 type / +1 instance; CN2 adds `UnitRepairBotModule` (genericbot, behind `cn2_unit_repair`) and `GarrisonDefenseBotModule` (genericbot, behind `cn2_garrison_defense`), the crystallized-nexus repair-manager and threat-adaptive garrison ports claiming units per §19.6, +2 types / +2 instances; ZG adds `TacticalMapBotModule` (genericbot), +1 type / +1 instance; 2026-09-30: RV1 adds `BaseRepairBotModule`, the merged repair owner of DESIGN §19.3, and unloads the Common `BuildingRepairBotModule`, ±0; #656 adds `SiegeEvaluatorBotModule` (CA-2a siege telemetry) and splits the Fransbot `FransGroundCommanderBotModule` into six instances `@ground1`…`@ground6`, +1 type / +6 instances; 2026-09-29: `ExpansionPlannerBotModule`, EX-0 of §12.13, +1 type / +1 instance; 2026-09-28: #621 adds
+**73 distinct trait types, 98 Player instances plus one World instance** (2026-10-03: INC 2026-10-03 adds `CombatVetoBotModule` + `EngagementPriorsBotModule` (genericbot, behind `combatveto`, §12.31) and `PlanBanditBotModule` (genericbot, behind `plan_bandits`, §12.33), +3 types / +3 instances — the count also absorbs +2/+2 that #782 `ArmyStagingBotModule` (§12.29) and #789 `EngagementLogBotModule` (§12.30) left uncounted; 2026-10-02e: BO-1 adds `BuildOrderKnobsBotModule` (genericbot, behind `build_order_knobs`), the §12.25 build-order knob provider, +1 type / +1 instance; 2026-10-02d: ST adds `ScaleTargetsBotModule` (genericbot, behind `scale_targets`), the §12.22 size-target provider, +1 type / +1 instance (#770 left it uncounted); 2026-10-02c: PP-1 adds `ParallelProductionBotModule` (genericbot, behind `parallel_production`), the settings-only IBotProductionWidth provider, and ATK-1 adds `AssaultFormationBotModule` (genericbot, behind `assault_fanout`), the settings-only provider of the unified CV/ATK-1 deploy state (§12.7a), and ST adds `ScaleTargetsBotModule` (genericbot, behind `scale_targets`, §12.22), +3 types / +3 instances; 2026-10-02b: SP-1/AF-1 add `SpacingAdvisorBotModule` + `ArmyFirstBotModule` (genericbot, behind `spaced_base`/`army_first`) and the `HarvesterBotModuleCA@generic`/@classic split adds one more instance, +3 types / +4 instances — the count also absorbs +2/+2 drift other merges left uncounted; 2026-10-02: CN3 adds `BridgeRepairBotModule` (genericbot, behind `cn3_bridge_repair`), the CN bridge-hut repair port claiming repairers per §19.6, +1 type / +1 instance — the count also absorbs a +1 drift RV2's `SupportPowerBotASModule@wc2` left uncounted; 2026-10-01: CN3 adds `DeployBotModule` (genericbot, behind `cn3_deploy`), the CN unified deploy-driving port, +1 type / +1 instance; CN2 adds `UnitRepairBotModule` (genericbot, behind `cn2_unit_repair`) and `GarrisonDefenseBotModule` (genericbot, behind `cn2_garrison_defense`), the crystallized-nexus repair-manager and threat-adaptive garrison ports claiming units per §19.6, +2 types / +2 instances; ZG adds `TacticalMapBotModule` (genericbot), +1 type / +1 instance; 2026-09-30: RV1 adds `BaseRepairBotModule`, the merged repair owner of DESIGN §19.3, and unloads the Common `BuildingRepairBotModule`, ±0; #656 adds `SiegeEvaluatorBotModule` (CA-2a siege telemetry) and splits the Fransbot `FransGroundCommanderBotModule` into six instances `@ground1`…`@ground6`, +1 type / +6 instances; 2026-09-29: `ExpansionPlannerBotModule`, EX-0 of §12.13, +1 type / +1 instance; 2026-09-28: #621 adds
 `SquadManagerBotModuleCA@guerrilla`, the 69th instance; #607 adds `ResourceMapBotModule@fransbot` and `SquadManagerBotModuleCA@classic`, the 67th–68th instances; #578's Route-A Fransbot port adds 24 vendored `Frans*BotModule` types / 24 instances, the 28th–51st / 43rd–66th, which run only under the `fransbot` bot type; `BeaconResponderBotModule` (#580) is the 27th type / 42nd instance; `CncEngineerBotModule` (#562), `CombatAnalysisBotModule` (#564) and `HumanPaceBotModule` added the 24th–26th types / 39th–41st instances; `ScoutBotModule` was the 23rd/38th). Conditional instances
 are loaded, not necessarily enabled simultaneously. This replaces the old unqualified
 "20 loaded modules" claim. The scope does not count `ModularBot` dispatchers,
@@ -3586,6 +3586,51 @@ engagements (seen block only), reset every match, gains are tuned knobs (DESIGN 
 armour coefficients from `outcome` vs `seen.predicted_*` (truth for calibration only), and the response and suicide priors from
 `response` and `tactics`. `tools/ai/engagement_report.py` is the human view of both.
 
+### 12.31 CV — the combat veto: one predictor, one authority, every refusal a card (fleet ORDERS_2026-10-03 tier 2; owner NOVA)
+
+**Ruling** (DESIGN §19.13 tier 2): a provider consulted where a squad commits an attack or a retreat. It blocks
+(a) an attack whose predicted trade on SEEN forces — including remembered static defences — falls below threshold,
+and (b) a retreat that cannot outrun. It learns nothing ("variety proposes, the veto disposes"). **One authority:**
+the same `BotCombatPredictor` every predictor consumer already calls — the veto changes WHO decides, never the math
+(the existing `PredictsWin`/`PredictsLoss`/`CanAttack` paths stay when the provider is absent ⇒ bit-identical,
+`IBotSiegeAdvisor` pattern; resolved as `PlayerActor.TraitsImplementing<IBotCombatVeto>()`).
+
+**Seams** (all provider-absent ⇒ today's behaviour):
+- `GroundUnitsIdleStateCA` engage check (`GroundStatesCA` ~135): armed veto decides engage-or-veto, replacing the
+  raw `PredictsWin`/`CanAttack` call at this one point (same verdict semantics + cards).
+- `GroundUnitsAttackMoveStateCA` beside `EvaluateSiege` (~437): a vetoed approach stands down through the existing
+  `Retreat(flee)` de-commit path — catches "approaching a losing fight" before contact.
+- `CreateAttackForce` pre-commit: the wave's armed pool vs remembered defences at the target + remembered enemy
+  army, **parity-floored at own value** (`max(remembered, own)` per CP §2.3 — a loss must be *proven*, fog-honest).
+  Veto ⇒ skip the launch this interval + `Denied` card (the force keeps staging and reconsiders next interval).
+- `ShouldFlee`→flee sites: when flee is chosen and the pursuit outruns the squad (mean `BotUnitProfile.Speed` of the
+  seen pursuers ≥ own mean × `VetoFleeSpeedMarginPct` — the fuzzy's `RelativeSpeed` lifted into the predictor path),
+  veto ⇒ stand and fight (`AttackMove` at the threat): a retreat that cannot outrun trades 0, a stand trades
+  something.
+
+**Cards** (the one contract): `veto:<kind>:<tick>` mission ids; launch/engage vetoes = `Denied`/`outmatched`,
+flee vetoes = `Denied`/`x_no_outrun`, a stood-down committed squad closes `Released`/`outmatched` via `DismissSquad`.
+EL scores vetoed vs non-vetoed attacks off these records.
+
+**Priors seam** (tier-1 hook): `IBotEngagementPriors.CorrectionMilli(attackerProfile, targetProfile)` (1000
+neutral) applied inside the HP-share damage assembly before the Lanchester core runs — the formula stays in
+`BotCombatPredictor`. `EngagementPriorsBotModule` loads the same committed `ai/learned/arsenal_priors.yaml`
+`BotLearnedPriors` serves (`PriorsFile` knob, mod-relative), once at match start, frozen for the match, absent
+file ⇒ neutral; EMBER's `ArsenalPriors` parser is reused so there is one file format. The fitted file's
+granularity is (faction pair, own unit type) — `target` is unused at this granularity and stays in the API for
+the finer attacker×target table a later fitter may write. The code stays stat-normalised per fleet rule.
+
+**Perf**: per-squad verdict cached `VetoCacheTicks` (25); the launch check runs once per `AttackForceInterval`;
+no per-tick world enumeration beyond what the consult sites already compute.
+
+**Knobs** (`CombatVetoBotModule`, genericbot-only): `VetoEngageRatioPct` 50, `VetoAbortRatioPct` 35
+(hysteresis: enter ≥50, exit <35), `VetoLaunchRatioPct` 60, `VetoFleeSpeedMarginPct` 100, `VetoCacheTicks` 25,
+`DefenceIncludeCells` 12. `EngagementPriorsBotModule`: `PriorsFile` `ai/learned/arsenal_priors.yaml`,
+`MinCorrectionMilli` 500, `MaxCorrectionMilli` 2000.
+
+**Switch**: `AN_combat_veto` — `GrantConditionOnBotOwner@combatveto` + `RequiresCondition: genericbot && combatveto`
+on both modules. Default off; classic never sees the provider.
+
 ### 12.33 T3 — pooled bandits: personality + attack plan, safety floor (fleet orders 2026-10-03; owner dawn)
 
 `PlanBanditBotModule` (Player, `genericbot && plan_bandits`; switch `AO_tier3_bandits`, default off — no provider =
@@ -3627,3 +3672,27 @@ conditioned on fights the veto let through (intended composition; `armed` makes 
 fitter-addressable, counterfactual scoring would need EL on DENIED cards, not implemented). EL-1 `inmatchadapt`:
 adjusts `RetreatRatioPct` inside whatever personality the pin picked — orthogonal axes. `BotPersonalityController`
 reads the pin lazily, so trait enable order cannot race it.
+
+**Tests / rulings.** `PlanBanditMathTest` pins the pure contract: Welford/Chan stats, parent downweighting,
+deterministic Thompson draws from an explicit uniform stream, the LCB safety floor (and its sparse-arm exemption),
+decay, malformed learned rows, the matchup -> faction -> family -> any chain and own-scope `EvidenceN`.
+`BuildOrderKnobsEvalTest` keeps unmatched learned opening posteriors neutral (1,1). Switch ruling: `genericbot &&
+plan_bandits`; OFF/classic stays bit-identical.
+
+### 12.34 T1 — the tier-1 'measured from logs' fitter (Devin, 2026-10-03; TIER1_FITTER_SPEC)
+
+`tools/ai/fit_engagement_priors.py` (stdlib only, deterministic) fits the tier-1 coefficient table offline: residuals on the
+resolved `^Warhead_*` Versus prior indexed by delivery tag x armour class (never per-unit ids), static-defence fire states, one
+attrition exponent on the predicted ratio, and faction-scoped timing/response/suicide priors. Attribution needs the record's
+per-type census, so `engagement/1` gained record-only `composition` maps (`seen.start/end`, `truth.start/end`) plus the
+`enemy_faction` / `enemy_faction_public` header fields — additive fields only, zero orders, zero conditions, no decision reads
+them. A Random lobby slot resolves invisibly to the opponent, so any in-match faction-keyed lookup honours
+`enemy_faction_public` (false -> family/global pool; ruling 2). Output: `mods/cameo/ai/learned/engagement_priors.yaml`,
+per-cell staleness (F1(b)): every `DeliveryArmour@` cell carries a `PriorPct@` twin recording the resolved Versus prior at
+fit time — the consumer recomputes the current prior and reverts only cells whose percent moved; `LedgerHash` stays as
+offline provenance (the game cannot read the ledgers; a global StatFingerprint is rejected — any rebalance would discard
+every cell). Consumed by the tier-2 veto predictor behind the default-OFF `AP_tier1_priors` switch (phase B: NOVA's port).
+Shrinkage is pseudo-evidence K = 5000 damage
+credit toward the pipeline prior, clamped [500, 2000] milli, one record capped at 4x the median record's traded value.
+
+

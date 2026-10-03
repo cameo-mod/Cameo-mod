@@ -389,7 +389,12 @@ append-only, flushed at game over. Record-only: no orders, no conditions. Every 
 Two record kinds share the file, told apart by `record`.
 
 **Common ids (both kinds):** `schema`, `record` (`engagement` | `posture`), `game_uid`, `record_id`, `map_uid`, `player`,
-`bot_type`, `faction`, `personality` (current).
+`bot_type`, `faction`, `personality` (current), `enemy_faction`, `enemy_faction_public`. `enemy_faction` is the
+**record-only / offline** resolved faction of the engagement's dominant enemy (the enemy that carried the most
+committed value; `""` when none is known) — a Random lobby slot resolves at game start and is NOT visible to the
+opponent in match, so in-match consumers keyed by enemy faction may read it only when `enemy_faction_public` is
+true (the lobby showed a concrete faction) and must otherwise fall back to family/global pools (tier-1 ruling 2).
+The offline fitter always uses the real value.
 
 **`engagement` (one line per closed fight):** `engagement_id`, `start_tick`, `end_tick`, `duration_ticks`, `close_reason`
 (`quiet` | `side_gone` | `match_end`), `centroid` ("x,y" cell), `kind` (`defend` | `attack` | `field`), `skirmish` (below 300 value
@@ -398,7 +403,10 @@ traded or fewer than 2 deaths; still written).
 * `seen` (what the bot knew): `predicted_method`, then `start` and `end`, each with `tick`, `own_committed_value`,
   `own_committed_units`, `own_defence_value`, `own_artillery_value`, `enemy_unit_value`, `enemy_units`, `enemy_defence_value`,
   `enemy_defence_count`, `enemy_artillery_value`, `predicted_ratio_milli`, `predicted_own_surviving_permille`,
-  `predicted_enemy_surviving_permille`. Visible or frozen enemies only.
+  `predicted_enemy_surviving_permille`. Visible or frozen enemies only. `composition` (in BOTH `start` and
+  `end`) adds the tier-1 per-type census — `own_units`, `own_defences`, `enemy_units`, `enemy_defences`:
+  `actor-type -> count` maps, keys ordinal-sorted, types with count 0 omitted — the attribution input of
+  `tools/ai/fit_engagement_priors.py` (TIER1_FITTER_SPEC).
 * `response` (defend only): `first_own_hurt_tick`, `first_own_mobile_dealt_tick`, `response_ticks` (-1 none), `army_dist_at_start_cells`.
 * `tactics`: `approach_angle_deg` (-1 unknown), `approach_units`, `artillery_first`, `defence_killed_before_direct_entry`,
   `into_defences_value`, `suicide_index_milli` (into_defences / max(1, enemy defence value destroyed)), `defence_points`,
@@ -408,7 +416,9 @@ traded or fewer than 2 deaths; still written).
   `enemy_killed_building_value`, `enemy_buildings_killed`, `enemy_killed_harvester_value`, `enemy_harvesters_killed`,
   `own_lost_by_role` (object role -> value).
 * `truth` (OFFLINE ONLY, unfogged, DESIGN 19.13): `start` and `end` with `tick`, `enemy_unit_value`, `enemy_units`,
-  `enemy_defence_value`, `enemy_defence_count`; `enemy_loss_value`. Never an input to any decision.
+  `enemy_defence_value`, `enemy_defence_count`; `enemy_loss_value`. `composition` (in BOTH `start` and `end`)
+  adds `units` / `defences` — the real enemy type census; victims for the residual fit. Written inside the
+  one manifested `OmniscientTruthScan` site only. Never an input to any decision.
 * `score`: `trade_milli` = 1000 (killed - lost) / max(1, killed + lost); `predicted_trade_milli`; `vs_prediction_milli` = trade -
   predicted; `own_building_loss_milli`, `enemy_building_loss_milli` (value-weighted, 2/3 HP fraction lost + 1/3 on death);
   `objective_milli` (defend: 1000 - 2 x own loss; attack: 2 x enemy loss - 1000; field: 0); `total_milli` = (500 trade + 250

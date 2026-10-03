@@ -687,6 +687,7 @@ namespace OpenRA.Mods.CA.Traits
 		IBotMissionProvider[] missionProviders;
 		IBotMissionOutcomeSink[] missionOutcomeSinks;
 		IBotSiegeAdvisor[] siegeAdvisors;
+		IBotCombatVeto[] combatVetoes;
 		IBotUnitRoles unitRoles;
 
 		// The merged roles provider (§12.4, Cameo assembly) is a genericbot-gated
@@ -1444,6 +1445,7 @@ namespace OpenRA.Mods.CA.Traits
 			missionProviders = self.Owner.PlayerActor.TraitsImplementing<IBotMissionProvider>().ToArray();
 			missionOutcomeSinks = self.Owner.PlayerActor.TraitsImplementing<IBotMissionOutcomeSink>().ToArray();
 			siegeAdvisors = self.Owner.PlayerActor.TraitsImplementing<IBotSiegeAdvisor>().ToArray();
+			combatVetoes = self.Owner.PlayerActor.TraitsImplementing<IBotCombatVeto>().ToArray();
 			utilityAxesProviders = self.Owner.PlayerActor.TraitsImplementing<IBotUtilityAxes>().ToArray();
 			scaleTargetProviders = self.Owner.PlayerActor.TraitsImplementing<IBotScaleTargets>().ToArray();
 			stealthDoctrines = self.Owner.PlayerActor.TraitsImplementing<IBotStealthDoctrine>().ToArray();
@@ -1742,6 +1744,63 @@ namespace OpenRA.Mods.CA.Traits
 
 			standOffCell = CPos.Zero;
 			return SiegeVerdict.Advance;
+		}
+
+		// INC-N combat veto (AI_ARCHITECTURE §12.31): the one provider consulted where a squad commits an
+		// attack or a retreat. No enabled provider = every consult answers false, today's behaviour bit-identical.
+		/// <summary>Enabled combat-veto providers only; a disabled ConditionalTrait must stay completely inert.</summary>
+		public static IEnumerable<IBotCombatVeto> EnabledCombatVetoes(IBotCombatVeto[] vetoes)
+		{
+			if (vetoes == null)
+				yield break;
+
+			foreach (var veto in vetoes)
+				if (veto.IsTraitEnabled())
+					yield return veto;
+		}
+
+		internal bool VetoEngage(SquadCA squad, IReadOnlyList<Actor> enemies, bool alreadyCommitted, out string reason)
+		{
+			reason = null;
+			var enabledVetoes = EnabledCombatVetoes(combatVetoes).ToArray();
+			if (enabledVetoes.Length == 0)
+				return false;
+
+			CanaryObservedAll(enemies, "combat-veto-engage");
+			foreach (var veto in enabledVetoes)
+				if (veto.VetoEngage(squad, enemies, alreadyCommitted, out reason))
+					return true;
+
+			return false;
+		}
+
+		internal bool VetoLaunch(IReadOnlyList<Actor> force, CPos targetCell, out string reason)
+		{
+			reason = null;
+			var enabledVetoes = EnabledCombatVetoes(combatVetoes).ToArray();
+			if (enabledVetoes.Length == 0)
+				return false;
+
+			foreach (var veto in enabledVetoes)
+				if (veto.VetoLaunch(force, targetCell, out reason))
+					return true;
+
+			return false;
+		}
+
+		internal bool VetoFlee(SquadCA squad, IReadOnlyList<Actor> pursuers, out string reason)
+		{
+			reason = null;
+			var enabledVetoes = EnabledCombatVetoes(combatVetoes).ToArray();
+			if (enabledVetoes.Length == 0)
+				return false;
+
+			CanaryObservedAll(pursuers, "combat-veto-flee");
+			foreach (var veto in enabledVetoes)
+				if (veto.VetoFlee(squad, pursuers, out reason))
+					return true;
+
+			return false;
 		}
 
 		internal Actor FindClosestEnemy(Actor sourceActor, WDist radius, SquadCA owner = null)
@@ -3099,6 +3158,25 @@ namespace OpenRA.Mods.CA.Traits
 						(long)idleUnitsValue * Info.RaidMissionSteerOvercommitPercent / 100,
 						(long)Info.RaidMissionSteerMinValue));
 					return BestRaidForSteering(missionProviders, cap);
+				}
+
+				// INC-N combat veto (§12.31): a provider can hold the wave when the remembered wall at the
+				// mission target provably out-trades the drafted force — the pool stays idle and the next
+				// interval re-evaluates. No provider or no mission target = today's path, bit-identical.
+				var vetoCell = missionTarget != null
+					? (missionTarget.OccupiesSpace != null ? missionTarget.Location : World.Map.CellContaining(missionTarget.CenterPosition))
+					: missionFrozenTarget != null ? World.Map.CellContaining(missionFrozenTarget.CenterPosition) : (CPos?)null;
+				if (vetoCell is CPos cell)
+				{
+					var draft = unitsHangingAroundTheBase
+						.Where(u => !IsArtilleryUnit(u.Actor) && !Info.FireSupportTypes.Contains(u.Actor.Info.Name)
+							&& u.Actor.Info.HasTraitInfo<AttackBaseInfo>())
+						.Select(u => u.Actor).ToList();
+					if (VetoLaunch(draft, cell, out _))
+					{
+						AIUtils.BotDebug("AI ({0}): combat veto held the attack wave (predicted loss at {1})", Player.ClientIndex, cell);
+						return;
+					}
 				}
 
 				var attackForce = RegisterNewSquad(bot, SquadCAType.Rush);

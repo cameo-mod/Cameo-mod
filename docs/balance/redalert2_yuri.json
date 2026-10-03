@@ -168,7 +168,14 @@
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/aircraft.yaml#Repairable.HpPerStep",
      "v": "6250"
     },
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/aircraft.yaml#ChangesHealth@SelfHealing.Step",
      "v": "50"
@@ -1008,7 +1015,14 @@
      "Defence",
      "RADefence"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "inherited",
      "v": "10"
@@ -1204,7 +1218,14 @@
      "Defence",
      "RADefence"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "inherited",
      "v": "10"
@@ -1293,7 +1314,14 @@
      "Building",
      "RABuilding"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/defenses.yaml#ChangesHealth@SelfHealing.Step",
      "v": "80"
@@ -1603,7 +1631,14 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
      "v": "96"
@@ -1719,7 +1754,14 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
      "v": "45"
@@ -1799,7 +1841,14 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
      "v": "5"
@@ -1931,6 +1980,12 @@
      "RAAircraft"
     ],
     "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
      {
       "modifier": 50,
       "src": "inherited",
@@ -2152,6 +2207,12 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
      {
       "modifier": 108,
       "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml#FirepowerMultiplier.Modifier",
@@ -2428,6 +2489,12 @@
      "RAInfantry"
     ],
     "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     },
      {
       "modifier": 50,
       "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml#FirepowerMultiplier@SplashCompensation.Modifier",
@@ -2784,7 +2851,14 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
      "v": "12"
@@ -2914,7 +2988,14 @@
      "Infantry",
      "RAInfantry"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml#ChangesHealth@SelfHealing.Step",
      "v": "20"
@@ -3031,7 +3112,14 @@
      "Naval",
      "RANaval"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/naval.yaml#ChangesHealth@SelfHealing.Step",
      "v": "40"
@@ -3944,7 +4032,14 @@
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#Repairable.HpPerStep",
      "v": "625"
     },
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
      "v": "5"
@@ -4197,7 +4292,14 @@
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#Repairable.HpPerStep",
      "v": "2250"
     },
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
      "v": "18"
@@ -4680,7 +4782,14 @@
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#Repairable.HpPerStep",
      "v": "3500"
     },
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
      "v": "28"
@@ -4906,7 +5015,14 @@
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#Repairable.HpPerStep",
      "v": "3250"
     },
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
      "v": "26"
@@ -5002,7 +5118,14 @@
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#Repairable.HpPerStep",
      "v": "5000"
     },
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
      "v": "40"
@@ -5179,7 +5302,14 @@
      "Vehicle",
      "RAVehicle"
     ],
-    "resolved_firepower_modifiers": [],
+    "resolved_firepower_modifiers": [
+     {
+      "modifier": 50,
+      "src": "inherited",
+      "trait": "FirepowerMultiplier@GlobalBuffs",
+      "types": []
+     }
+    ],
     "self_heal_step": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#ChangesHealth@SelfHealing.Step",
      "v": "80"

@@ -116,6 +116,12 @@
 	GrantConditionOnBotOwner@armystaging:
 		Condition: armystaging
 		Bots:
+	# Combat veto (AI_ARCHITECTURE 12.31, INC-N): one fog-honest provider consulted where a squad commits an
+	# attack or a retreat — predicted-loss attacks and outrun retreats are blocked, every veto a mission card.
+	# The arm sets Bots (switch group AN_combat_veto); empty by default - inert on master.
+	GrantConditionOnBotOwner@combatveto:
+		Condition: combatveto
+		Bots:
 	# Tier-3 pooled bandits (fleet orders 2026-10-03): Thompson-samples a personality arm + an attack-plan overlay
 	# over the EL engagement posteriors in ai/learned/plan_bandits.yaml, with a safety floor. The arm sets Bots
 	# (switch group AO_tier3_bandits); empty by default - inert on master.
@@ -5167,6 +5173,20 @@ Player:
 		# the region and later evaluations read the wall as heavier. Own A/B
 		# variable -- keep false while the CA-2b gate is measured.
 		SiegeMemoryEnabled: false
+	# COMBAT VETO (AI_ARCHITECTURE 12.31, INC-N): the one IBotCombatVeto — consulted where a squad commits an
+	# attack (the idle engage check, the committed approach at the lower abort line, the wave launch against
+	# remembered defences) or a retreat the pursuit outruns. It issues NO orders and learns nothing: the same
+	# BotCombatPredictor every consumer already uses, on the SEEN forces plus remembered static defences, with
+	# the tier-1 priors multiplied in when EngagementPriorsBotModule is enabled. Every veto is a Denied mission
+	# card so the engagement report can score vetoed vs non-vetoed attacks.
+	# `genericbot && combatveto`: off on master until the increment A/B arms it (switch group AN_combat_veto).
+	CombatVetoBotModule:
+		RequiresCondition: genericbot && combatveto
+	# The veto's tier-1 prior source: the same committed ai/learned/arsenal_priors.yaml BotLearnedPriors
+	# reads, mapped onto IBotEngagementPriors corrections (percent x 10, bounded). Missing file = 1000,
+	# the pure predictor numbers — the veto then runs unfitted but still armed.
+	EngagementPriorsBotModule:
+		RequiresCondition: genericbot && combatveto
 
 World:
 	BeaconTracker:

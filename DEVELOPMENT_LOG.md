@@ -1,3 +1,90 @@
+# 2026-10-03 — coordinator: INC 2026-10-03 A/B result — switches stay OFF (no measured difference)
+
+*Claude (Opus 5.5).* `C:/cameo-wt/ab_inc_1003` (`ab_increment.py`, ctrl 5e5639cd2 / half a711d5a95 defaults / all a711d5a95
+`--groups all`; hard vs classic, A Nuclear Winter, mirrors td_gdi + td_nod separately, 16 planned per arm). **Win rate, first
+16 planned matches: ctrl 9/16, half 9/16, all 9/16** (GDI 6/8, Nod 3/8 in ctrl and all) — defaults inert (ctrl = half);
+no win-rate effect of the switch groups at n=16 (95% CI ~33–77%). **EL per-fight (new metric):** hard−classic mean `total`
+ctrl −35, half −58, all −25; hard attacks 190 vs classic 97 in `all` (ctrl 123/124) — consistent with the tier-2 veto (14
+`veto:` cards in all_td_gdi) but fights are correlated within matches: a hint, not a result. Safety: 0 exceptions in every
+arm; `all` hard ownership watchdog `double_owner=1` (ctrl/half 0) → investigation dispatched. **Ruling: no default flip.**
+Harness bugs found and fixed on master during the run: driver cap (`2d3bcfa0c`, 5 drivers had run), early-stop tally counted
+rows beyond `planned` (`12b726b8c`, falsely decided ctrl>half), re-run replayed complete shards (`2a7d73c28`).
+
+# 2026-10-03 — coordinator: INC 2026-10-03b (F2 fog fix, tier-1 PriorPct, tier-3 armed set, veto scorecard)
+
+*Claude (Opus 5.5).* Merged: `devin/f2-public-faction@3fc5f7230` (`BotFactionView.PublicFactionOf`, DisplayFaction; a Random
+enemy yields "" → parent pool; classic + fixed-faction games bit-identical), `devin/tier1-priorpct@a21f90369` (per-cell
+`PriorPct@` for in-match staleness, orders F1(b)), DAWN `9ba79466f` (`bandit.armed` via IObservesVariables, record-only),
+`nova/veto_scorecard@e12d2cc4f` (offline tool). NOT merged: `nova/el1_inmatch_adapt`, `devin/nova/combat-veto-delta` — both
+sit on the superseded #790 base; NOVA ports them onto master's tier 2 (orders F1(c)). Gates: build 0 err, 834/834, pytest 51,
+freshness/fog/mutation PASS, doc_claims no mismatch. Also on master today: `fix(ab)` caps batch DRIVERS (`2d3bcfa0c`) —
+the A/B harness had over-launched to 5 drivers.
+
+# 2026-10-03 — coordinator: INC 2026-10-03 landed on master (tiers 1–4, P0 guard, #791)
+
+*Claude (Opus 5.5), AionUI team lead.* Increment `inc/2026_10_03` → master: am-nre-guard, #791, tier 2 + disabled-guard fix,
+tier 3 (to `f9914bb2c`), tier 1 phase A (+ renumber `49643408d`), tier 4 SPSA (`1e91617de`), F3 doc, lead docs. Gates on the
+merged tree: build 0 err, 830/830, pytest 53/53 (touched tools), fog/mutation/warhead/freshness PASS, doc_claims 43/43,
+boot gate PASS (34 s, isolated `Engine.SupportDir`). Two earlier boot verdicts were void: NOVA's parallel launches truncate the
+shared perf.log. G: is a USB HDD (queue 16) — work moved to `C:/cameo-wt`. Next: the increment A/B; tier-1 schema ruling.
+
+# 2026-10-03 — P0 found+fixed: ArmyStagingBotModule RespondToAttack NRE (2v2 only)
+
+*Devin (nova) — the 2v2 armed smoke (`C:/tmp/elsmoke`, el1@75831d996 + AM_army_staging)
+died at ~321s: `NullReferenceException` at ArmyStagingBotModule.cs:156
+(`attacker.Location` via `OccupiesSpace.TopLeft`). `Damaged`'s `self` (the victim)
+was never guarded — an actor killed by the very hit, or any damaged actor with no
+IOccupySpace, throws on `.Location`. LightningZap SpreadDamage on the denser doubles
+map hit it; every 1v1 batch stayed clean.*
+
+**Fix on `devin/nova/am-nre-guard` (`28573b84d`, pushed, hand-in):** the same guard
+extended — `self` null/dead/in-world + `OccupiesSpace` null on both sides;
+bit-identical for every event that passed before. **Verified by repro:** the
+identical 2v2 that NRE'd at 321s now runs 305s clean (4 records, 0 exceptions,
+hard+hard 1-0). Receipt on #782. Team-play bonus: 93 engagements, 230 postures,
+`army_to_staging_cells` median 4 — armies sit on their staging cells.
+# 2026-10-03 — parallel lane: PR #790 `nova/t2_combat_veto` is a second tier-2 veto
+
+*Devin (nova) — a second NOVA instance committed `821d7083e` (17:05) on `nova/t2_combat_veto`,
+independent of my `devin/nova/inc-n-combat-veto` (~16:5x). Same order, different cuts.*
+
+Their version is the better base: the `Predict(own, enemy, factor)` overload keeps Lanchester in
+the one class, `BotWeaponProfile.Delivery` enables delivery x armour priors, `StatFingerprint`
+auto-discounts stale priors on a rebalance, consults inside `PredictsWin`/`PredictsLoss` cover
+every call site, cards carry `below_threshold`/`cant_outrun` + a `Detail` evidence field, and the
+retreat veto guards `ownCanFight`. Mine adds three things theirs lacks: the launch consult at
+`CreateAttackForce`, remembered-defence inclusion (`IBotRememberedDefenceProvider` vs their
+visible-only `CanBeViewedByPlayer` scan), and the committed-approach hysteresis (enter <50 / abort
+<35). Full comparison posted as a review on #790; recommendation: theirs merges first, I layer the
+delta. Coordinator decides.
+
+# 2026-10-03 — INC-N: the combat veto (DESIGN 19.13 tier 2) — `devin/nova/inc-n-combat-veto@150429f3f`
+
+*Devin (nova), fleet `ORDERS_2026-10-03_claude_learning_tiers.md` tier-2 lane:*
+
+**INC-N ready: devin/nova/inc-n-combat-veto@150429f3f — switch: AN_combat_veto (default off)**
+
+One provider (`IBotCombatVeto`, CA seam after `IBotSiegeAdvisor`) consulted at every
+commit edge: the idle engage check, the committed approach (lower abort line),
+the wave launch vs remembered defences (parity-floored at own value — a loss must
+be proven, never assumed), and `ShouldFlee` (a retreat the pursuit outruns is
+blocked — the squad stands and fights instead of being run down). The prediction
+is `BotCombatPredictor` itself on the SEEN forces + `IBotRememberedDefenceProvider`
+within `DefenceIncludeCells`; `EngagementPriorsBotModule` multiplies tier-1 priors
+into the HP-share assembly (own side only — the file measures own-faction trades),
+serving EMBER's `ai/learned/arsenal_priors.yaml` through the same `ArsenalPriors`
+parser. Pure advisor: no orders, no learning; every veto is a Denied mission card
+(`veto:<kind>:<tick>`, `outmatched` / `x_no_outrun`) for the EL score. `genericbot
+&& combatveto`; classic never sees the provider — every consult answers false.
+
+Design §12.31 (hysteresis enter <50 / abort <35, launch <60, flee margin 100%,
+cache 25t, defences 12 cells, card dedup 250t). 7 new eval tests (predictor
+parity, hysteresis, launch/engage/flee lines, prior shift). Build 0 errors;
+814/814 tests; fog-honesty + direct-mutation audits PASS (one new reviewed
+radius-circle site registered); boot gate green (menu marker, zero new
+exceptions). One caveat for reviewers: `engine/` in the smoke worktrees is a
+junction to the main checkout's engine dir — bin/ is shared, so builds and boot
+gates serialize across lanes by construction.
 # 2026-10-03 — DAWN: tier-3 post-merge + collision fix + contract docs
 
 *Devin (dawn) — merged `origin/master` `5e5639cd2` (nova's armed-smoke logs; devlog unioned),
@@ -98,6 +185,40 @@ Spec checkpointed before coding (WORKFLOW 1.7):*
   decayed Welford, writes learned file.
 - `tools/ai/increment_switches.yaml` — `AO_tier3_bandits`.
 - `OpenRA.Mods.Cameo.Test/PlanBanditMathTest.cs` — pooling/floor/determinism/parse/decay tests.
+# 2026-10-03 — coordinator (AionUI team): review round for the tier-2/3 hand-ins + tier-1 spec started
+
+*Claude (Opus 5.5), lead of an AionUI team of 4 Devin agents; worktree `G:/cameo-wt/claude-lead`, branch `claude/lead_1003_reviews`.*
+
+**State found:** master `5e5639cd2` = origin, #788 + #789 merged, main-checkout staged merge already resolved (tree clean).
+Hand-ins waiting: `devin/nova/am-nre-guard@28573b84d` (P0 NRE guard — reviewed, correct, merge-ready), NOVA tier 2
+**built twice** (#790 `nova/t2_combat_veto`, 4 behind master, vs `devin/nova/inc-n-combat-veto@150429f3f`, 0 behind),
+DAWN tier 3 `devin/dawn/tier3-bandits@17fc9d8e2`, NOVA #791 ledger re-extract. Tier 1 (EMBER) has no branch; the
+HANDOFF's `ORDERS_2026-10-03_claude_learning_tiers.md` does not exist anywhere in the repo.
+**Dispatched (read-only verifiers, no commits):** T2-VERIFY (which tier-2 lands), T3-VERIFY, LEDGER-VERIFY (#791 reproducible
+from `extract_stats`?); TIER1-SPEC → `docs/design/TIER1_FITTER_SPEC.md` on `devin/tier1-fitter` (spec first, lead approves).
+**Disk:** C: was at 1.1 GB free (≈200 worktrees under `C:/tmp`, ~2 GB each) — a `git worktree add` failed mid-checkout.
+All new worktrees go to **`G:/cameo-wt/`** (865 GB free). Pruning stale `C:/tmp` worktrees needs a maintainer decision.
+**Results (later):** LEDGER-VERIFY: #791 byte-identical to a fresh `extract_stats` on its parent (71/71 files), drift
+33 → 0, docs/balance only → merge-ready. T3-VERIFY: tier 3 `17fc9d8e2` builds 0 err, 822/822 tests, fog/mutation PASS →
+ACCEPTED for the increment (its "LocalRandom desync" flag is a false positive: bots activate host-only, `Player.cs:223`;
+SharedRandom there WOULD desync; DEVELOPMENT_LOG conflict + stale module map are increment-time chores). Tier-1 spec
+`40cbe9d0d` APPROVED with rulings (Random-slot faction is not public → `enemy_faction_public`); phase A dispatched.
+**Found — fog leak, post-increment fix:** enemy-faction reads use `Player.Faction` (a Random slot's RESOLVED faction) not
+`DisplayFaction` (lobby choice, `Player.cs:65/177`): `BotLearnedPriors.cs:141,145`, `BotSituation.cs:1660,1732`,
+`BuildOrderKnobsBotModule.cs:398,402`, tier-3 `EnemyFactionOf`. One shared helper after INC-N lands (overlaps DAWN now).
+**C:/tmp cleanup (maintainer-approved):** 112 clean, fully-pushed, >24 h idle worktrees removed with plain `git worktree
+remove` (no --force); 56 kept (unpushed / dirty / active today); stale unreferenced loose files deleted; inventory and
+logs in `G:/cameo-wt/_cleanup/`.
+**T2-VERIFY → land B** (`devin/nova/inc-n-combat-veto@e58c030b4`; #790 = divergent older version, superseded). REAL BUG
+confirmed: `CombatVetoBotModule` Veto* have no `IsTraitDisabled` guard and `SquadManagerBotModuleCA.cs:1751-1790` consults
+disabled providers → with `AN_combat_veto` OFF every bot incl. classic would veto (WORKFLOW §3.2). Fix dispatched as
+`devin/t2-veto-disabled-guard` on top of B (self-guard + `IsTraitEnabled()` call-site filter, the master stealth pattern).
+Tier 3 checked for the same class: all consumers use `FirstEnabledTraitOrDefault` → clean.
+**Tier-1 impl `3c07947f7`:** C# writer approved; fitter fixes requested — apply `resolved_firepower_modifiers` to priced
+dpt (132 actors; else biased cells), report + exclude the 8/139 tags with no Versus prior, name the 2 collisions.
+**C:/tmp done:** rescue = 47 refs `refs/rescue/2026-10-03/*` + `G:/cameo-tmp-rescue/` (bundle verified, manifest, README,
+evidence copies). 152 worktrees removed in total, 16 deferred (agent-owned `.agent-id` or active < 6 h). C: 1 → 340 GB free.
+
 # 2026-10-03 — armed smokes: AM_army_staging on master + EL-0 (#789) live validation
 
 *Devin (nova) — two frozen worktrees, sequential batches (one game driver at a time):*

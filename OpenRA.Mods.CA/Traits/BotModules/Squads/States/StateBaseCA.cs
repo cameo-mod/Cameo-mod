@@ -159,11 +159,13 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				if ((u.Owner == squad.Bot.Player && u.Info.HasTraitInfo<BuildingInfo>()))
 					return false;
 
-			var enemyAroundUnit = units.Where(unit => squad.SquadManager.IsPreferredObservedEnemyUnit(unit) && unit.Info.HasTraitInfo<AttackBaseInfo>());
-			if (!enemyAroundUnit.Any())
+			var enemyAroundUnit = units.Where(unit => squad.SquadManager.IsPreferredObservedEnemyUnit(unit) && unit.Info.HasTraitInfo<AttackBaseInfo>()).ToList();
+			if (enemyAroundUnit.Count == 0)
 				return false;
 
-			return flee(enemyAroundUnit);
+			// INC-N combat veto (§12.31): the veto blocks a retreat the pursuit would outrun — the squad
+			// stands and fights instead of being run down with its back turned. No provider = false.
+			return flee(enemyAroundUnit) && !squad.SquadManager.VetoFlee(squad, enemyAroundUnit, out _);
 		}
 
 		protected virtual bool ShouldFleeSimple(SquadCA squad)

@@ -69,6 +69,12 @@ LEARN_MAX = 1250
 POSTERIOR_CAP = 200
 MIN_DURATION_TICKS = 3000  # a match that ended before the bots did anything carries no signal
 
+# ---- tier 4 (SPSA; docs/design/TIER4_SPSA_SPEC.md) ---------------------------
+SPSA_GAIN_A, SPSA_GAIN_C, SPSA_STAB = 0.10, 0.08, 10  # a, c, stability constant A (R1 re-run, spec 4.7)
+SPSA_SCALE_FULL, SPSA_SCALE_WEAK = 1.0, 0.25          # |z| >= crit -> full step, else damped (ruling R1)
+SPSA_MASK_LOG = 0.005                               # clamped effective perturbations below this contribute nothing
+EL_WEIGHT = 0.5                                     # composite = match score + 0.5 x mean total_milli/1000 (R3)
+
 ARM_RE = re.compile(r"^bo__(?P<personality>[a-z0-9]+)__(?P<faction>[a-z0-9_]+?)__(?:base|(?P<knob>[a-z_]+?)__(?P<dir>up|dn)(?P<delta>\d+))$")
 
 
@@ -105,8 +111,27 @@ def build_order_of(situation: dict) -> dict | None:
     return bo if isinstance(bo, dict) else None
 
 
+def load_engagement_means(batch_dirs: list[pathlib.Path]) -> dict[tuple[str, str], list]:
+    """(game_uid, player) -> [total_milli sum, n] over non-skirmish engagement records (spec 2, R3).
+
+    `score.total_milli` is the per-fight verdict clamped to +-1000 (AI_MATCH_LOG.md); skirmish records carry
+    no decision signal and are skipped."""
+    means: dict[tuple[str, str], list] = {}
+    for d in batch_dirs:
+        for r in read_jsonl(d / "Logs" / "cameo-ai-engagements.jsonl"):
+            score = r.get("score") or {}
+            total = score.get("total_milli")
+            if total is None or r.get("skirmish"):
+                continue
+            s = means.setdefault((r.get("game_uid", ""), r.get("player", "")), [0.0, 0])
+            s[0] += total
+            s[1] += 1
+    return means
+
+
 def load_matches(batch_dirs: list[pathlib.Path]) -> list[dict]:
     """One row per scored 1v1 bot match: arm, personality, faction, enemy faction, opening, base knob vector, score, win."""
+    el_means = load_engagement_means(batch_dirs)
     rows: list[dict] = []
     for d in batch_dirs:
         records = read_jsonl(d / "Logs" / "cameo-ai-matches.jsonl")
@@ -151,6 +176,8 @@ def load_matches(batch_dirs: list[pathlib.Path]) -> list[dict]:
                 "knobs": {k: first.get(f"base_{k}", 1000) for k in KNOBS},
                 "score": scored[0],
                 "win": scored[1],
+                "el_mean_milli": (el_means.get(key) or [0.0, 0])[0] / max(1, (el_means.get(key) or [0.0, 0])[1]),
+                "el_n": (el_means.get(key) or [0.0, 0])[1],
             })
     return rows
 
@@ -185,21 +212,20 @@ def welch_z(arm: Stats, base: Stats) -> float:
     return diff / se
 
 
-def paired_z(arm_rows: list[dict], base_rows: list[dict], min_pairs: int) -> tuple[float, int] | None:
-    """Paired z of (arm - base) on score, or None when fewer than `min_pairs` matches can be paired one-to-one.
-
-    A pair is the k-th replicate (in log order) of one experimental cell - (enemy faction, map, spawn side) - in each arm. The
-    harness records no per-match seed, so replicates of a cell are exchangeable; pairing removes the cell effect (a spawn-side or
-    matchup advantage) that the unpaired Welch test leaves in its variance. Returns (z, n_pairs).
-    """
+def paired_diffs(arm_rows: list[dict], base_rows: list[dict], key=lambda r: r["score"]) -> list[float]:
+    """Per-pair score differences (arm - base); a pair is the k-th replicate of one experimental cell -
+    (enemy faction, map, spawn side) - in each arm."""
     def by_cell(rows: list[dict]) -> dict[tuple, list[float]]:
         cells: dict[tuple, list[float]] = {}
         for r in rows:
-            cells.setdefault((r.get("enemy_faction", ""), r.get("map", ""), r.get("spawn", -1)), []).append(r["score"])
+            cells.setdefault((r.get("enemy_faction", ""), r.get("map", ""), r.get("spawn", -1)), []).append(key(r))
         return cells
 
     a, b = by_cell(arm_rows), by_cell(base_rows)
-    diffs = [x - y for cell in sorted(a.keys() & b.keys(), key=repr) for x, y in zip(a[cell], b[cell])]
+    return [x - y for cell in sorted(a.keys() & b.keys(), key=repr) for x, y in zip(a[cell], b[cell])]
+
+
+def _diffs_z(diffs: list[float], min_pairs: int) -> tuple[float, int] | None:
     if len(diffs) < max(2, min_pairs):
         return None
     n = len(diffs)
@@ -208,6 +234,15 @@ def paired_z(arm_rows: list[dict], base_rows: list[dict], min_pairs: int) -> tup
     if sd == 0:
         return (0.0 if mean_d == 0 else math.copysign(math.inf, mean_d)), n
     return mean_d / (sd / math.sqrt(n)), n
+
+
+def paired_z(arm_rows: list[dict], base_rows: list[dict], min_pairs: int) -> tuple[float, int] | None:
+    """Paired z of (arm - base) on score, or None when fewer than `min_pairs` matches can be paired one-to-one.
+
+    The harness records no per-match seed, so replicates of a cell are exchangeable; pairing removes the cell effect (a
+    spawn-side or matchup advantage) that the unpaired Welch test leaves in its variance. Returns (z, n_pairs).
+    """
+    return _diffs_z(paired_diffs(arm_rows, base_rows), min_pairs)
 
 
 def holm_critical_z(m: int, z_crit: float = Z_CRIT) -> list[float]:
@@ -231,7 +266,7 @@ def arm_stats(rows: list[dict]) -> dict[tuple[str, str, str], Stats]:
 # ---------------------------------------------------------------- the learned file
 
 def empty_learned() -> dict:
-    return {"knobs": {}, "openings": {}, "processed_knobs": [], "processed_openings": []}
+    return {"knobs": {}, "openings": {}, "processed_knobs": [], "processed_openings": [], "spsa_steps": {}}
 
 
 def parse_learned(text: str) -> dict:
@@ -265,12 +300,19 @@ def parse_learned(text: str) -> dict:
                 learned["processed_knobs"] = [v for v in value.split(",") if v]
             elif key == "ProcessedOpenings":
                 learned["processed_openings"] = [v for v in value.split(",") if v]
-        elif in_root and depth == 2 and scope is not None:
-            if kind == "knobs":
-                learned["knobs"][scope][key] = int(value)
-            else:
-                alpha, beta = value.split()
-                learned["openings"][scope][key] = [int(alpha), int(beta)]
+            elif key == "SpsaSteps":
+                kind = "spsa_steps"
+        elif in_root and depth == 2:
+            if kind == "spsa_steps":
+                if key.startswith("Step@"):
+                    personality, _, sc = key[len("Step@"):].partition("__")
+                    learned["spsa_steps"][(personality, sc)] = int(value)
+            elif scope is not None:
+                if kind == "knobs":
+                    learned["knobs"][scope][key] = int(value)
+                else:
+                    alpha, beta = value.split()
+                    learned["openings"][scope][key] = [int(alpha), int(beta)]
     return learned
 
 
@@ -299,6 +341,11 @@ def format_learned(learned: dict) -> str:
         lines.append("\tProcessedKnobs: " + ",".join(sorted(set(learned["processed_knobs"]))))
     if learned["processed_openings"]:
         lines.append("\tProcessedOpenings: " + ",".join(sorted(set(learned["processed_openings"]))))
+    spsa_steps = learned.get("spsa_steps") or {}
+    if spsa_steps:
+        lines.append("\tSpsaSteps:")
+        for (personality, scope), step in sorted(spsa_steps.items()):
+            lines.append(f"\t\tStep@{personality}__{scope}: {step}")
     return "\n".join(lines) + "\n"
 
 
@@ -387,9 +434,9 @@ def accepted(decs: list[dict]) -> dict[tuple[str, str], dict]:
 
 
 def is_perturbed_arm(arm: str) -> bool:
-    """True for a knob-experiment arm (`bo__<p>__<f>__<knob>__up/dn<delta>`); the base arm and plain batches are controls."""
+    """True for a knob-experiment arm (`bo__<p>__<f>__<knob>__up/dn<delta>`) or an SPSA arm; base/plain batches are controls."""
     m = ARM_RE.match(arm)
-    return bool(m and m.group("knob"))
+    return bool(m and m.group("knob")) or spsa_arm(arm) is not None
 
 
 def update_openings(learned: dict, rows: list[dict], min_matches: int = MIN_MATCHES) -> list[tuple]:
@@ -435,9 +482,10 @@ def write_update(rows: list[dict], learned: dict, min_matches: int = MIN_MATCHES
         learned["knobs"].setdefault((personality, faction), {})[d["knob"]] = d["new"]
         changes["knobs"].append(d)
     # Every game of a (personality, faction) that reached a verdict is consumed: its arms were measured against each other.
+    # SPSA-arm games are excluded: only a --spsa write can consume them (their verdict lives in write_spsa_update).
     decided = {(d["personality"], d["faction"]) for d in decs if d["enough"]}
     for r in fresh:
-        if (r["personality"], r["faction"]) in decided:
+        if (r["personality"], r["faction"]) in decided and spsa_arm(r["arm"]) is None:
             learned["processed_knobs"].append(game_key(r))
     changes["openings"] = update_openings(learned, rows, min_matches)
     return changes
@@ -483,6 +531,233 @@ def switches_text(arms: list[str]) -> str:
     return "\n".join(lines) + "\n"
 
 
+# ---------------------------------------------------------------- tier 4: SPSA (--spsa; docs/design/TIER4_SPSA_SPEC.md)
+
+def spsa_arm(arm: str) -> tuple[str, str, int, str] | None:
+    """Parse `bo__<p>__<f>__spsa__k<step>__plus|minus` -> (personality, faction, step, side); None otherwise."""
+    parts = arm.split("__")
+    if (len(parts) == 6 and parts[0] == "bo" and parts[3] == "spsa" and len(parts[4]) > 1
+            and parts[4][0] == "k" and parts[4][1:].isdigit() and parts[5] in ("plus", "minus")):
+        return parts[1], parts[2], int(parts[4][1:]), parts[5]
+    return None
+
+
+def spsa_step(learned: dict, personality: str, faction: str) -> int:
+    return learned.get("spsa_steps", {}).get((personality, faction), 0)
+
+
+def spsa_delta(personality: str, faction: str, step: int) -> list[int]:
+    """Deterministic +-1 Rademacher vector over TUNABLE for (personality, faction, step): the same step
+    regenerates the same proposal on any machine (spec section 3.1)."""
+    digest = hashlib.sha256("\0".join(["spsa", personality, faction, str(step)]).encode()).digest()
+    return [1 if digest[i] & 1 else -1 for i in range(len(TUNABLE))]
+
+
+def spsa_perturb(step: int) -> float:  # c_k = c / (k + 1)^0.101
+    return SPSA_GAIN_C / (step + 1) ** 0.101
+
+
+def spsa_gain(step: int) -> float:  # a_k = a / (k + 1 + A)^0.602
+    return SPSA_GAIN_A / (step + 1 + SPSA_STAB) ** 0.602
+
+
+def spsa_arm_name(personality: str, faction: str, step: int, side: str) -> str:
+    return f"bo__{personality}__{faction}__spsa__k{step}__{side}"
+
+
+def spsa_arm_values(learned: dict, personality: str, faction: str, step: int) -> dict[str, dict[str, int]]:
+    """{knob: {"plus": milli, "minus": milli}} - the clamped values each arm plays this step (spec 3.2)."""
+    c = spsa_perturb(step)
+    values = {}
+    for knob, d in zip(TUNABLE, spsa_delta(personality, faction, step)):
+        lo = math.log(current_multiplier(learned, personality, faction, knob) / 1000.0)
+        values[knob] = {"plus": int(clamp(round(1000 * math.exp(lo + c * d)), LEARN_MIN, LEARN_MAX)),
+                        "minus": int(clamp(round(1000 * math.exp(lo - c * d)), LEARN_MIN, LEARN_MAX))}
+    return values
+
+
+def next_spsa_experiment(rows: list[dict], learned: dict, personality: str, faction: str,
+                         min_matches: int = MIN_MATCHES) -> dict | None:
+    """The current step's plus/minus pair while either side is under-sampled; None once measured (a measured
+    step waits for --write: re-proposing it would resend identical arms, and k+1 only exists after the write)."""
+    step = spsa_step(learned, personality, faction)
+    stats = arm_stats(rows)
+    counts = {s: stats.get((personality, faction, spsa_arm_name(personality, faction, step, s)), Stats()).n
+              for s in ("plus", "minus")}
+    if counts["plus"] >= min_matches and counts["minus"] >= min_matches:
+        return None
+    return {"step": step, "c": spsa_perturb(step),
+            "delta": dict(zip(TUNABLE, spsa_delta(personality, faction, step))),
+            "values": spsa_arm_values(learned, personality, faction, step),
+            "plus_arm": spsa_arm_name(personality, faction, step, "plus"),
+            "minus_arm": spsa_arm_name(personality, faction, step, "minus"),
+            "n_plus": counts["plus"], "n_minus": counts["minus"]}
+
+
+def spsa_experiment_files(learned: dict, personality: str, faction: str, exp: dict) -> dict[str, str]:
+    """One learned-file copy per arm with the whole perturbed vector stamped; a comment records the step (spec 6)."""
+    files = {}
+    tag = ",".join(f"{k}{'+' if d > 0 else '-'}" for k, d in exp["delta"].items())
+    for side in ("plus", "minus"):
+        perturbed = {"knobs": {k: dict(v) for k, v in learned["knobs"].items()}, "openings": learned["openings"],
+                     "processed_knobs": [], "processed_openings": []}
+        perturbed["knobs"].setdefault((personality, faction), {}).update(
+            {knob: exp["values"][knob][side] for knob in TUNABLE})
+        other = exp["minus_arm" if side == "plus" else "plus_arm"]
+        files[exp[f"{side}_arm"]] = (f"# spsa step {exp['step']} {side} (c={exp['c']:.4f}, delta={tag}), paired with {other}\n"
+                                    + format_learned(perturbed))
+    return files
+
+
+def composite_score(row: dict) -> float:
+    """What SPSA optimizes: match score + EL_WEIGHT x normalised mean engagement verdict (spec 2, ruling R3)."""
+    return row["score"] + EL_WEIGHT * row.get("el_mean_milli", 0.0) / 1000.0
+
+
+def _score_stats(rows: list[dict], key) -> Stats:
+    s = Stats()
+    for r in rows:
+        s.add(key(r))
+    return s
+
+
+def spsa_decisions(rows: list[dict], learned: dict, min_matches: int = MIN_MATCHES) -> list[dict]:
+    """One decision per SPSA step pair: plus-vs-minus paired z on the composite objective (spec 4-5).
+
+    `d_bar` is the mean paired (or unpaired-fallback) difference plus - minus; its sign IS the gradient
+    direction (ruling R1). Steps are evaluated lowest-first and an under-sampled step stops the scope - a
+    later step was measured at a later point and must not leapfrog."""
+    groups: dict[tuple[str, str], dict[int, dict[str, list[dict]]]] = {}
+    for r in rows:
+        parsed = spsa_arm(r["arm"])
+        if parsed is not None:
+            p, f, step, side = parsed
+            groups.setdefault((p, f), {}).setdefault(step, {}).setdefault(side, []).append(r)
+    decs = []
+    for (p, f), by_step in sorted(groups.items()):
+        for step in sorted(by_step):
+            sides = by_step[step]
+            plus, minus = sides.get("plus", []), sides.get("minus", [])
+            d = {"kind": "spsa", "personality": p, "faction": f, "step": step,
+                 "plus_arm": spsa_arm_name(p, f, step, "plus"), "minus_arm": spsa_arm_name(p, f, step, "minus"),
+                 "n_plus": len(plus), "n_minus": len(minus), "plus_rows": plus, "minus_rows": minus,
+                 "enough": len(plus) >= min_matches and len(minus) >= min_matches,
+                 "z": 0.0, "test": "none", "n_pairs": 0, "d_bar": 0.0, "z_crit_used": Z_CRIT, "step_scale": 0.0}
+            decs.append(d)
+            if not d["enough"]:
+                break
+            diffs = paired_diffs(plus, minus, composite_score)
+            paired = _diffs_z(diffs, min_matches)
+            if paired is not None:
+                d["z"], d["n_pairs"] = paired
+                d["test"] = "paired"
+                d["d_bar"] = sum(diffs) / len(diffs)
+            else:
+                ps, ms = _score_stats(plus, composite_score), _score_stats(minus, composite_score)
+                d["z"], d["test"], d["n_pairs"] = welch_z(ps, ms), "welch", len(diffs)
+                d["d_bar"] = ps.mean - ms.mean
+    return decs
+
+
+def combined_verdicts(coord_decs: list[dict], spsa_decs: list[dict], z_crit: float = Z_CRIT) -> None:
+    """Re-rank each scope's hypotheses under the widened Holm family (spec 5: coordinate arms and SPSA pairs
+    share the base, so the family is all of them). Sorts by each hypothesis's own statistic - signed z for
+    coordinate arms, |z| for SPSA pairs - and marks coordinate `significant` / SPSA `step_scale` in place."""
+    for d in coord_decs:
+        d["significant"] = False
+    for d in spsa_decs:
+        if d["enough"]:
+            d["step_scale"] = SPSA_SCALE_WEAK  # a measured pair always updates - full or damped, never zero (R1)
+    families: dict[tuple[str, str], list[dict]] = {}
+    for d in coord_decs + spsa_decs:
+        if d["enough"]:
+            families.setdefault((d["personality"], d["faction"]), []).append(d)
+    for family in families.values():
+        family.sort(key=lambda d: -(abs(d["z"]) if d.get("kind") == "spsa" else d["z"]))
+        for d, crit in zip(family, holm_critical_z(len(family), z_crit)):
+            d["z_crit_used"] = crit
+        for d in family:  # Holm step-down: stop at the first failure
+            stat = abs(d["z"]) if d.get("kind") == "spsa" else d["z"]
+            if stat < d["z_crit_used"]:
+                break
+            if d.get("kind") == "spsa":
+                d["step_scale"] = SPSA_SCALE_FULL
+            else:
+                d["significant"] = True
+
+
+def apply_spsa_step(d: dict, learned: dict) -> dict:
+    """One SPSA update at the current learned vector: g_i = d_bar / (2 x eff_i) per unmasked knob, in log space.
+
+    eff_i is the perturbation the games actually played (half the SIGNED plus/minus log gap of the REPORTED
+    knob values), so clamping at the bounds shrinks it honestly instead of pretending the full c_k landed.
+    The sign matters: eff_i has the sign of Delta_i, so g_i = d_bar / (2 x eff_i) points toward the winning
+    arm per knob - an unsigned eff would march every component in the direction of d_bar."""
+    personality, faction, step = d["personality"], d["faction"], d["step"]
+    a_k = spsa_gain(step)
+    moves, masked = [], []
+    for knob in TUNABLE:
+        lp = [math.log(r["knobs"].get(knob, 1000)) for r in d["plus_rows"]]
+        lm = [math.log(r["knobs"].get(knob, 1000)) for r in d["minus_rows"]]
+        eff = (sum(lp) / len(lp) - sum(lm) / len(lm)) / 2.0
+        if abs(eff) < SPSA_MASK_LOG:
+            masked.append(knob)
+            continue
+        g = d["d_bar"] / (2.0 * eff)
+        old = current_multiplier(learned, personality, faction, knob)
+        new = int(clamp(round(1000 * math.exp(math.log(old / 1000.0) + d["step_scale"] * a_k * g)), LEARN_MIN, LEARN_MAX))
+        if new != old:
+            learned["knobs"].setdefault((personality, faction), {})[knob] = new
+            moves.append({"knob": knob, "old": old, "new": new, "g": g})
+    return {"moves": moves, "masked": masked, "a_k": a_k, "d_bar": d["d_bar"], "step_scale": d["step_scale"]}
+
+
+def write_spsa_update(rows: list[dict], learned: dict, min_matches: int = MIN_MATCHES, z_crit: float = Z_CRIT) -> dict:
+    """--write in SPSA mode: coordinate and SPSA decisions under the widened Holm family, then the updates."""
+    done = set(learned["processed_knobs"])
+    fresh = [r for r in rows if game_key(r) not in done]
+    coord_decs = decisions(fresh, learned, min_matches, z_crit)
+    spsa_decs = spsa_decisions(fresh, learned, min_matches)
+    combined_verdicts(coord_decs, spsa_decs, z_crit)
+    changes = {"knobs": [], "openings": [], "spsa": []}
+    for (personality, faction), d in sorted(accepted(coord_decs).items()):
+        learned["knobs"].setdefault((personality, faction), {})[d["knob"]] = d["new"]
+        changes["knobs"].append(d)
+    decided = {(d["personality"], d["faction"]) for d in coord_decs if d["enough"]}
+    for r in fresh:
+        if (r["personality"], r["faction"]) in decided and spsa_arm(r["arm"]) is None:
+            learned["processed_knobs"].append(game_key(r))
+    learned.setdefault("spsa_steps", {})
+    for d in spsa_decs:
+        if not d["enough"]:
+            continue  # its games stay unprocessed: the pair is re-proposed until it reaches MIN_MATCHES
+        changes["spsa"].append({**{k: d[k] for k in ("personality", "faction", "step", "z", "test", "n_pairs",
+                                                     "d_bar", "z_crit_used", "step_scale")},
+                                **apply_spsa_step(d, learned)})
+        learned["spsa_steps"][(d["personality"], d["faction"])] = d["step"] + 1
+        for r in d["plus_rows"] + d["minus_rows"]:
+            learned["processed_knobs"].append(game_key(r))
+    changes["openings"] = update_openings(learned, rows, min_matches)
+    return changes
+
+
+def spsa_report(rows: list[dict], learned: dict, min_matches: int = MIN_MATCHES, z_crit: float = Z_CRIT) -> str:
+    """The SPSA decisions block, shown only in --spsa mode."""
+    decs = spsa_decisions(rows, learned, min_matches)
+    combined_verdicts(decisions(rows, learned, min_matches, z_crit), decs, z_crit)
+    out = [f"\n## SPSA steps (two-sided |z| >= crit -> full step x{SPSA_SCALE_FULL}, else damped x{SPSA_SCALE_WEAK})"]
+    for d in decs:
+        if not d["enough"]:
+            out.append(f"- {d['personality']} {d['faction']} k{d['step']}: plus n={d['n_plus']} minus n={d['n_minus']} -> under-sampled")
+            continue
+        band = "full" if d["step_scale"] == SPSA_SCALE_FULL else "damped"
+        out.append(f"- {d['personality']} {d['faction']} k{d['step']}: plus n={d['n_plus']} minus n={d['n_minus']} "
+                   f"z={d['z']:.2f} ({d['test']}) d_bar={d['d_bar']:.3f} -> {band} step (|z| vs {d['z_crit_used']:.2f})")
+    if not decs:
+        out.append("- none: no arm named bo__<personality>__<faction>__spsa__k<step>__plus|minus in these directories")
+    return "\n".join(out)
+
+
 # ---------------------------------------------------------------- reporting
 
 def report(rows: list[dict], learned: dict, min_matches: int = MIN_MATCHES) -> str:
@@ -524,36 +799,57 @@ def main() -> int:
     ap.add_argument("--pair", action="append", default=[], metavar="PERSONALITY:FACTION", help="a (personality, faction) to propose for; repeatable")
     ap.add_argument("--min-matches", type=int, default=MIN_MATCHES)
     ap.add_argument("--z", type=float, default=Z_CRIT)
+    ap.add_argument("--spsa", action="store_true",
+                    help="tier-4 mode: simultaneous-perturbation pairs (bo__<p>__<f>__spsa__k<step>__plus|minus) "
+                         "instead of coordinate descent; coordinate mode stays the default")
     args = ap.parse_args()
     sys.stdout.reconfigure(encoding="utf-8")
 
     learned = parse_learned(args.learned.read_text(encoding="utf-8")) if args.learned.exists() else empty_learned()
     rows = load_matches([d for d in args.batch_dirs if d.is_dir()])
     print(report(rows, learned, args.min_matches))
+    if args.spsa:
+        print(spsa_report(rows, learned, args.min_matches, args.z))
 
     if args.propose:
         args.propose.mkdir(parents=True, exist_ok=True)
         arms: list[str] = []
         for pair in args.pair:
             personality, _, faction = pair.partition(":")
-            exp = next_experiment(rows, learned, personality, faction, args.min_matches)
-            if exp is None:
-                print(f"\npropose {pair}: every pair is measured; run --write")
-                continue
-            for arm, text in experiment_files(learned, personality, faction, exp).items():
-                (args.propose / f"{arm}.yaml").write_text(text, encoding="utf-8", newline="\n")
-                arms.append(arm)
-            print(f"\npropose {pair}: {exp['knob']} {exp['direction']}{DELTA} ({exp['old']} -> {exp['new']}) vs base; arms {exp['base_arm']}, {exp['arm']}")
+            if args.spsa:
+                exp = next_spsa_experiment(rows, learned, personality, faction, args.min_matches)
+                if exp is None:
+                    print(f"\npropose {pair}: step {spsa_step(learned, personality, faction)} already measured; run --spsa --write")
+                    continue
+                for arm, text in spsa_experiment_files(learned, personality, faction, exp).items():
+                    (args.propose / f"{arm}.yaml").write_text(text, encoding="utf-8", newline="\n")
+                    arms.append(arm)
+                print(f"\npropose {pair}: spsa step {exp['step']} (c={exp['c']:.4f}); "
+                      f"arms {exp['plus_arm']}, {exp['minus_arm']}")
+            else:
+                exp = next_experiment(rows, learned, personality, faction, args.min_matches)
+                if exp is None:
+                    print(f"\npropose {pair}: every pair is measured; run --write")
+                    continue
+                for arm, text in experiment_files(learned, personality, faction, exp).items():
+                    (args.propose / f"{arm}.yaml").write_text(text, encoding="utf-8", newline="\n")
+                    arms.append(arm)
+                print(f"\npropose {pair}: {exp['knob']} {exp['direction']}{DELTA} ({exp['old']} -> {exp['new']}) vs base; arms {exp['base_arm']}, {exp['arm']}")
         (args.propose / "experiment_switches.yaml").write_text(switches_text(arms), encoding="utf-8", newline="\n")
         print(f"\nwrote {args.propose / 'experiment_switches.yaml'}")
 
     if args.write:
-        changes = write_update(rows, learned, args.min_matches, args.z)
+        changes = (write_spsa_update(rows, learned, args.min_matches, args.z) if args.spsa
+                   else write_update(rows, learned, args.min_matches, args.z))
         args.learned.parent.mkdir(parents=True, exist_ok=True)
         args.learned.write_text(format_learned(learned), encoding="utf-8", newline="\n")
         print(f"\nwrote {args.learned}: {len(changes['knobs'])} knob change(s), {len(changes['openings'])} matchup posterior update(s)")
         for d in changes["knobs"]:
             print(f"- {d['personality']} {d['faction']} {d['knob']}: {d['old']} -> {d['new']} (z={d['z']:.2f}, n={d['n_arm']}/{d['n_base']})")
+        for d in changes.get("spsa", []):
+            moved = ", ".join(f"{m['knob']} {m['old']}->{m['new']}" for m in d["moves"]) or "no knob moved"
+            print(f"- {d['personality']} {d['faction']} spsa k{d['step']}: z={d['z']:.2f} d_bar={d['d_bar']:.3f} "
+                  f"scale={d['step_scale']} -> {moved} (masked: {','.join(d['masked']) or 'none'})")
     return 0
 
 

@@ -143,6 +143,9 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(root.GetProperty("outcome").GetProperty("own_lost_by_role").GetProperty("frontline").GetInt32(), Is.EqualTo(400));
 			Assert.That(root.TryGetProperty("truth", out _), Is.True);
 			Assert.That(root.GetProperty("skirmish").GetBoolean(), Is.False);
+			Assert.That(root.GetProperty("enemy_faction_public").ValueKind, Is.EqualTo(JsonValueKind.False));
+			Assert.That(root.GetProperty("seen").GetProperty("start").GetProperty("composition").GetProperty("own_units").ValueKind,
+				Is.EqualTo(JsonValueKind.Object));
 
 			h.Kind = "field";
 			using var field = JsonDocument.Parse(EngagementRecord.BuildEngagement(h, s));
