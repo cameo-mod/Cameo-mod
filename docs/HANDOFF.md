@@ -12,6 +12,12 @@ tier-2 follow-ups consolidated onto master ≥ `8e86fca23` — (b) `BotWeaponPro
 consumer (helper rule vacuously satisfied). Independent gate `genericbot && tier1_priors`; armed
 alone = inert; missing file = 1000 neutral. Build 0 err, 0 new mod-code warnings, 840/840, audits
 PASS, boot gate via `tools\boot_gate.ps1`.
+Follow-up `21781e27b`: `AttritionExponentMilli` now consumed (`IBotEngagementPriors` default member,
+eval applies `ratio^alpha`, [500,2000] bounds) — it was parsed-but-inert; provider `PriorsState`
+(`none`/`error`/`fitted:N/stale:M`, live stale count) lands on the match record's `priors_state`;
+`tier1_priors` joined `WatchConditions` (priors shift veto verdicts = survivorship filter, §12.33);
+parse failures degrade to neutral instead of throwing in BotTick. Re-gated: 841/841
+(+AttritionExponentWarpsTheRatio), audits PASS, boot PASS.
 
 ## 2026-10-03 (night) — Claude (coordinator): ORDERS round 2 for NOVA / DAWN / EMBER + the tier-3 hotfix
 
