@@ -10,6 +10,10 @@ The hand-written module table in AI_ARCHITECTURE.md fell behind within days (26 
              bot type's C# class implements;
 * CONSUMES - the bot interfaces and concrete bot types each class looks up through
              TraitsImplementing<> / TraitOrDefault<> / Trait<> / TraitInfo(s)<> / TraitInfoOrDefault<>.
+             A lookup inside a nested helper class counts for its enclosing module; a lookup in a
+             non-module class (queue managers, squad states, static helpers) counts as a helper
+             consumer (marked `+` in the table), so phase-A producers are only flagged when truly
+             nothing reads them.
 
 Checks (reported, never auto-fixed):
   C1 an interface that is consumed but has no LOADED provider   -> a consumer reads nothing
@@ -68,9 +72,32 @@ def strip_generics(s: str) -> str:
     return "".join(out)
 
 
+def class_spans(text, matches):
+    """Each class match -> (body_end, depth). A class's body ends at the next class declared at its
+    own brace depth or shallower, so a module's body extends across its nested helper classes
+    (EngineerBotModule's `sealed class EscortPlan` must not swallow the module's own lookups)."""
+    depths, depth, pos = [], 0, 0
+    for m in matches:
+        depth += text.count("{", pos, m.start()) - text.count("}", pos, m.start())
+        pos = m.start()
+        depths.append(depth)
+    spans = []
+    for i, m in enumerate(matches):
+        end = len(text)
+        for j in range(i + 1, len(matches)):
+            if depths[j] <= depths[i]:
+                end = matches[j].start()
+                break
+        spans.append((end, depths[i]))
+    return spans
+
+
 def scan_csharp():
-    """Return (classes, interfaces). classes: name -> list of dict(asm, file, bases, body)."""
+    """Return (classes, interfaces, helper_lookups).
+    classes: name -> list of dict(asm, file, bases, body).
+    helper_lookups: outermost class name -> set of types it looks up (consumption by non-modules)."""
     classes = collections.defaultdict(list)
+    helper_lookups = collections.defaultdict(set)
     bot_interfaces = set()
     for asm, root in SOURCES:
         if not root.is_dir():
@@ -87,8 +114,9 @@ def scan_csharp():
                 if n.startswith("IBot") or (in_bot_dir and "Bot" in n):
                     bot_interfaces.add(n)
             matches = list(CLASS.finditer(text))
+            spans = class_spans(text, matches)
             for i, m in enumerate(matches):
-                end = matches[i + 1].start() if i + 1 < len(matches) else len(text)
+                end, _ = spans[i]
                 raw_bases = m.group("bases") or ""
                 bases = [b.strip() for b in strip_generics(raw_bases).split(",") if b.strip()]
                 # the yaml key is the INFO class minus "Info"; the trait class may be named differently
@@ -99,7 +127,13 @@ def scan_csharp():
                     "info": info.group(1) if info else None,
                     "body": text[m.start():end], "bot_dir": "BotModules" in p.parts,
                 })
-    return classes, bot_interfaces
+            for lm in LOOKUP.finditer(text):
+                enclosing = [(matches[i], spans[i]) for i in range(len(matches))
+                             if matches[i].start() <= lm.start() < spans[i][0]]
+                if enclosing:
+                    outer = min(enclosing, key=lambda x: x[1][1])[0].group("name")
+                    helper_lookups[outer].add(lm.group("t"))
+    return classes, bot_interfaces, helper_lookups
 
 
 MODULE_NAME = re.compile(
@@ -131,7 +165,7 @@ def loaded_instances():
 
 
 def build():
-    classes, bot_interfaces = scan_csharp()
+    classes, bot_interfaces, helper_lookups = scan_csharp()
     loaded = loaded_instances()
 
     # bot types = implementation classes (…BotModule / anything implementing a bot interface)
@@ -147,7 +181,9 @@ def build():
 
     rows = []
     provides = collections.defaultdict(set)   # interface -> loaded providers
-    consumers = collections.defaultdict(set)  # interface/type -> consumers (loaded)
+    consumers = collections.defaultdict(set)  # interface/type -> consumers (loaded modules)
+    helpers = collections.defaultdict(set)    # interface/type -> consumers (non-module classes)
+    loaded_names = set()
     for name in sorted(bot_types):
         d = winner(name)
         yaml_key = d["info"][:-4] if d.get("info") else name
@@ -159,25 +195,37 @@ def build():
         rows.append({"name": name, "asm": d["asm"], "file": d["file"], "inst": inst,
                      "impl": impl, "cons": cons, "shadow": sorted({x["asm"] for x in bot_types[name]})})
         if inst:
+            loaded_names.add(name)
             for i in impl:
                 provides[i].add(name)
             for c in cons:
                 consumers[c.removesuffix("Info")].add(name)
 
+    # consumption by non-module classes (queue managers, squad states, static helpers in interface
+    # files): a producer IS read when one of these does the lookup, so they keep a row out of C2.
+    # Lookups attributed to a loaded module's outermost class are already in `consumers` above.
+    for cls_name, targets in helper_lookups.items():
+        if cls_name in loaded_names:
+            continue
+        for t in targets:
+            t = t.removesuffix("Info")
+            if t in bot_interfaces or t in bot_types:
+                helpers[t].add(cls_name)
+
     loaded_rows = [r for r in rows if r["inst"]]
     c1 = sorted(i for i in consumers if i in bot_interfaces and i not in provides
                 and i not in ("IBot", "IBotInfo", "IBotCA", "IBotCAInfo", "IBotTick", "IBotEnabled"))
-    c2 = sorted(i for i in provides if i not in consumers
+    c2 = sorted(i for i in provides if i not in consumers and i not in helpers
                 and i not in ("IBot", "IBotTick", "IBotEnabled", "IBotRespondToAttack", "IBotPositionsUpdated",
                               "IBotNotifyIdleBaseUnits", "IBotRequestUnitProduction",
                               "IBotRequestPauseUnitProduction", "IBotSuggestRefineryProduction",
                               "IBotBaseExpansion", "IBotAircraftBuilder"))
     c3 = sorted(r["name"] for r in rows if not r["inst"])
     c4 = sorted(r["name"] for r in rows if len(r["shadow"]) > 1)
-    return rows, loaded_rows, provides, consumers, c1, c2, c3, c4
+    return rows, loaded_rows, provides, consumers, helpers, c1, c2, c3, c4
 
 
-def render(rows, loaded_rows, provides, consumers, c1, c2, c3, c4):
+def render(rows, loaded_rows, provides, consumers, helpers, c1, c2, c3, c4):
     L = []
     L.append("# AI module map (generated)")
     L.append("")
@@ -201,14 +249,16 @@ def render(rows, loaded_rows, provides, consumers, c1, c2, c3, c4):
         L.append(f"| `{r['name']}` | {r['asm']} | {inst} | {', '.join(f'`{i}`' for i in r['impl']) or '—'} "
                  f"| {', '.join(f'`{c}`' for c in r['cons']) or '—'} |")
     L.append("")
-    L.append("## Interfaces: providers and consumers (loaded modules only)")
+    L.append("## Interfaces: providers and consumers (loaded modules only, `+` = non-module class)")
     L.append("")
     L.append("| Interface / type | Provided by | Consumed by |")
     L.append("|---|---|---|")
     keys = sorted(set(provides) | {k for k in consumers})
     for k in keys:
+        used = [f"`{x}`" for x in sorted(consumers.get(k, []))]
+        used += [f"`{x}`+" for x in sorted(helpers.get(k, []))]
         L.append(f"| `{k}` | {', '.join(f'`{x}`' for x in sorted(provides.get(k, []))) or '—'} "
-                 f"| {', '.join(f'`{x}`' for x in sorted(consumers.get(k, []))) or '—'} |")
+                 f"| {', '.join(used) or '—'} |")
     L.append("")
     L.append("## Checks")
     L.append("")

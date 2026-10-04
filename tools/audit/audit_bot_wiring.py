@@ -259,7 +259,7 @@ def main():
     args = ap.parse_args()
 
     rs = miniyaml.Ruleset(REPO)
-    classes, bot_interfaces = ai_module_map.scan_csharp()
+    classes, bot_interfaces, _helper_lookups = ai_module_map.scan_csharp()
     loaded = ai_module_map.loaded_instances()
     profiles, bot_types, grants, granted_tokens, personalities = load_profiles(rs)
 
