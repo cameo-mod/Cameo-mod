@@ -1,3 +1,22 @@
+# 2026-10-04 — Devin-T2Verify: AR-8 — issuer identity Type@N; the order gate judges at issue time
+
+*Devin-T2Verify.* Branch `devin/t2verify/ar8-issuer-identity@71d7a209d` (stacked on
+`devin/t2verify/ar1-grouped-gate@62d12d71c`). DESIGN §19.6 AR-8 bullet added; fleet
+`NOTE_2026-10-04_devin-t2verify_ar8_issuer_identity.md`.
+- `BotIssuer` (Mods.CA — Fransbot sees it): `Type@ordinal` instanced issuer, `TypeOf` owner
+  normalization, `IssueAs` ambient provider scope.
+- ModularBot: queued items carry `(Order, Issuer, Emergency)`; the gate now judges at ISSUE time
+  (a deferred order faces the leases that hold when it acts); `ORDERGATE DROPPED` line per
+  full-queue drop; LinkedList front-requeue on action-budget stop (was: silent discard); `Preempt`
+  keeps lease owners type-named via `TypeOf`.
+- Gate: `Decide`/`NoteIssued` TypeOf-normalized — six SquadManager instances are ONE subsystem;
+  `EmergencyModules` accepts a type or an instance; crossed pairs record instanced names.
+- FransTransport: `IssueAs` on every emitting provider entry point — the caller-issuer refusal
+  class (E_engt_transport) closed; read-only service methods deliberately unscoped.
+
+Gates: build 0/0; tests 952/952 (+9 `BotIssuerTest`); fog / mutation / arch-freshness / wiring PASS;
+boot gate PASS (watchdog, no orphan, zero new exceptions).
+
 # 2026-10-04 — Claude (lead): INC 2026-10-04e lands — INC-d completed (P0 raid gate), LC5 admission claims, checker v2, E2 test baseline
 
 *Claude.* Branch `inc/2026_10_04e` from master `1fbd239ff`:
