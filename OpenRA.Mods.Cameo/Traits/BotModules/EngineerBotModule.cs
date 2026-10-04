@@ -38,6 +38,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 	//            owner re-claim, so it cannot catch that); a stuck engineer is stopped, released and retried after
 	//            StuckRetryTicks (the AS module benched it for the rest of the match); an optional visibility check
 	//            for bridge huts (the AS module had none).
+	//   sync:    ONE-WAY — upstream CA/AS edits land in the parents via re-vendor/engine-pin bumps and
+	//            audit_merged_bot_modules fails until ported here. Fixes made here NEVER go back into the
+	//            vendored parents: classic runs the CA copy verbatim, so classic-only capture bugs are
+	//            part of the frozen baseline by design.
 	[TraitLocation(SystemActors.Player)]
 	[Desc("The ONE owner of the bot's engineers (DESIGN §19.3): replaces CaptureManagerBotModuleCA + CncEngineerBotModule,",
 		"which ordered the same idle engineers side by side. classic keeps running the CA copy alone.")]
@@ -733,7 +737,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				(shardRank, shardSize) = TeamBlackboard.ClaimRank(player);
 
 			int ShardTier(Actor target) =>
-				shardSize <= 1 ? 0 : (TeamBlackboard.CaptureShard(target.Location, shardSize) == shardRank ? 0 : 1);
+				CaptureRules.CaptureShardTier(shardRank, shardSize, TeamBlackboard.CaptureShard(target.Location, shardSize));
 
 			if (claimsAhead != null && claimsAhead.Count > 0)
 			{
@@ -741,7 +745,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				// release path as a finished job (unassigned, mission ended, lease out) plus a Stop.
 				foreach (var (a, job) in assigned.ToList())
 				{
-					if (job.Job != EngineerJob.Capture || job.Target == null || !ClaimedByOutrankingAlly(job.Target))
+					if (!CaptureRules.SupersedesCapture(job.Job == EngineerJob.Capture, job.Target != null, () => ClaimedByOutrankingAlly(job.Target)))
 						continue;
 
 					assigned.Remove(a);
@@ -756,7 +760,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 				// The waiting escort plan is the same claim without a walking engineer — deny it too.
 				// (A committed plan is ended by the stand-down above through its MissionId.)
-				if (escort != null && escort.Target != null && ClaimedByOutrankingAlly(escort.Target))
+				if (escort != null && CaptureRules.SupersedesCapture(true, escort.Target != null, () => ClaimedByOutrankingAlly(escort.Target)))
 				{
 					BotMissionLog.Write(new BotMissionRecord
 					{
@@ -788,7 +792,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var next = 0;
 			var baseCenter = world.Map.CenterOfCell(initialBaseCenter);
 
-			if (world.LocalRandom.Next(100) < Info.PriorityCaptureChance)
+			if (CaptureRules.UsesPriorityPass(world.LocalRandom.Next(100), Info.PriorityCaptureChance))
 			{
 				var priorityTargets = world.Actors.Where(a =>
 					!a.IsDead && a.IsInWorld && Info.CapturableRelationships.HasRelationship(player.RelationshipWith(a.Owner))
@@ -854,7 +858,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				// Nearest first. A full, dormant, escort-blocked or unsafe target passes the engineer on to the next one, so
 				// with MaxEngineersPerTarget 1 engineers spread over DIFFERENT targets (TargetFull is re-read per engineer:
 				// the previous engineer's Assign already counts). CaptureTargetTries 1 = the parents' single nearest target.
-			var open = targets.Where(t => !TargetFull(t) && !Dormant(t) && !BlockedByEscort(t));
+			var open = targets.Where(t => CaptureRules.IsOpenTarget(TargetFull(t), Dormant(t), () => BlockedByEscort(t)));
 				var tries = Info.RankTargetsBySafety
 					? RankBySafety(capturer.Actor, open)
 					: open.OrderBy(ShardTier).ThenBy(t => (t.CenterPosition - capturer.Actor.CenterPosition).LengthSquared)
@@ -869,7 +873,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					// so the roll precedes the route check; the provider plans its own way in, and a refused run falls
 					// through to the foot path. The roll is drawn only when it can matter, so a chance of 0 leaves
 					// LocalRandom's sequence — and every later random choice — exactly as before.
-					if (Info.TransportChance > 0 && !EscortEligible(target)
+					if (CaptureRules.ShouldRollForTransport(Info.TransportChance, EscortEligible(target))
 						&& WantsTransport(true, world.LocalRandom.Next(100), Info.TransportChance)
 						&& TransportProvider() is IBotCaptureTransportProvider provider)
 					{
