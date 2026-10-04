@@ -194,6 +194,7 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 
 **Process, tooling and platform**
 
+- [`launch-game.cmd` fails from Git Bash — GNU `find` shadows Windows `find.exe` (2026-10-02, EMBER)](#launch-gamecmd-fails-from-git-bash--gnu-find-shadows-windows-findexe-2026-10-02-ember)
 - [⛔ The pinned engine commit is NOT on `cameo-engine` — branch an engine change from the PIN (2026-09-29)](#-the-pinned-engine-commit-is-not-on-cameo-engine--branch-an-engine-change-from-the-pin-2026-09-29)
 - [Switching a worktree branch mid-batch corrupts the REST of the batch — yaml is re-read per match (2026-09-29)](#switching-a-worktree-branch-mid-batch-corrupts-the-rest-of-the-batch--yaml-is-re-read-per-match-2026-09-29)
 - [Never run a batch from the auto-synced main checkout — the 15-minute sync lands new yaml under old DLLs (2026-09-30, EMBER)](#never-run-a-batch-from-the-auto-synced-main-checkout--the-15-minute-sync-lands-new-yaml-under-old-dlls-2026-09-30-ember)

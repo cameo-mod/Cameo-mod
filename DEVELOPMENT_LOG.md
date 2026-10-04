@@ -1499,7 +1499,7 @@ Co-Authored-By: Nova (Devin) <devin@cognition.ai>
 - Build 0W/0E, 468/468 tests, boot-gate PASS, fog audit 240 sites PASS.
 # 2026-10-01 — Devin (EMBER): RV2 — support-power merge, one owner per decision (YAML-only)
 
-- AI_MASTER_PLAN row RV2 / DESIGN §19.3: the OpenRA `SupportPowerBotModule` (warcraft2.yaml
+- AI_MASTER_PLAN row RV2 / DESIGN §19.3: the stock `SupportPowerBotModule` (warcraft2.yaml
   `Player:`, 9 WC2 decisions, previously NO `RequiresCondition` — so it ran for genericbot AND
   leaked into fransbot) is now gated `RequiresCondition: classicbot`. classic keeps its own
   Common-schema copy of the 9 WC2 decisions; the module no longer runs for genericbot/fransbot.
@@ -17012,8 +17012,9 @@ default-stance doctrine). Converted to `Order("SetUnitStance")`: the three comma
 transport module's `pendingStanceOrders`/`QueueSetUnitStanceOrder` shape (orderBot fallback for
 the no-bot `ResetReconState` path); CommanderCore queues directly (bot in scope, AutoTarget
 guaranteed by `ActorsWithTrait`). `audit_bot_direct_mutation.py` now also ratchets `.SetStance(`;
-a mojibake in the generated report (cp1252 `Â§`) was fixed in-source so `audit_doc_health` D2
-stays clean. 468/468 tests, boot-gate PASS (private Engine.SupportDir), zero exceptions.
+a mojibake in the generated report (cp1252, section sign double-encoded) was fixed in-source so
+`audit_doc_health` D2 stays clean. 468/468 tests, boot-gate PASS (private Engine.SupportDir),
+zero exceptions.
 
 ## 2026-10-02 — NOVA: ZG-c zone-backed RegionMemory/RegionRouter (nova/zg-region-memory)
 

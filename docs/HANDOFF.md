@@ -10,7 +10,7 @@
   `tune_plan_bandits.py`; D5 leave `C:/tmp`. (Your GetVariableObservers fix landed in `3c793d4c3`.)
 * **EMBER:** E1 first real tier-1 fit from the A/B logs (preview only, coordinator commits); E2 classify the 124
   failing `tools/tests` on master (one file per process) + stale-test fixes branch.
-* **Rules added tonight:** base = master (never the #790 base); worktrees `C:/cameo-wt`; `toolsoot_gate.ps1`
+* **Rules added tonight:** base = master (never the #790 base); worktrees `C:/cameo-wt`; `tools\boot_gate.ps1`
   (isolated support dir); zero new mod-code compiler warnings; disabled-provider pattern; `PublicFactionOf`.
 **Hotfix INC c `3c793d4c3`:** DAWN `9ba79466f` (landed in INC b) hid `ConditionalTrait.GetVariableObservers()` (CS0114)
 → `PlanBanditBotModule` could never enable when armed. Fixed by DAWN `5520a1ea7` + `18556ada5`; gates: 0 mod-code
