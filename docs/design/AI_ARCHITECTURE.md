@@ -3619,6 +3619,9 @@ neutral) applied inside the HP-share damage assembly before the Lanchester core 
 file ⇒ neutral; EMBER's `ArsenalPriors` parser is reused so there is one file format. The fitted file's
 granularity is (faction pair, own unit type) — `target` is unused at this granularity and stays in the API for
 the finer attacker×target table a later fitter may write. The code stays stat-normalised per fleet rule.
+Calibration note (E1b, 2026-10-04): dir-0 of the tier-1 fit prices its expected losses on the real `truth.start`
+victim force — correct for offline calibration — while the seen-vs-truth gap in game is a separate scouting effect
+that the cells must not absorb.
 
 **Perf**: per-squad verdict cached `VetoCacheTicks` (25); the launch check runs once per `AttackForceInterval`;
 no per-tick world enumeration beyond what the consult sites already compute.
