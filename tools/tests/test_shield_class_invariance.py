@@ -40,8 +40,9 @@ import target_model as tm          # noqa: E402
 import extract_stats as es         # noqa: E402
 
 # Measured on the tree that carries R12, with semantic selection restored.
-SHIELD_MEAN = 180.2842
-SHIELD_FACTOR = 0.5547
+# Re-pinned after the authorized HP/armor rebalance waves moved the ladder.
+SHIELD_MEAN = 184.7102
+SHIELD_FACTOR = 0.5414
 INERT_TEMPLATES = 33
 
 

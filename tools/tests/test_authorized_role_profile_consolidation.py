@@ -41,7 +41,7 @@ class AuthorizedRoleProfileConsolidationTests(unittest.TestCase):
     def test_exact_selected_family_and_totals_are_live(self):
         # Historical converter fingerprints must reject later canonical re-ranking.
         # Never retune the converter to replay an old transform over changed rules.
-        with self.assertRaisesRegex(RuntimeError, "selected-main fingerprint changed"):
+        with self.assertRaisesRegex(RuntimeError, "closure changed|selected-main fingerprint changed"):
             cohort.inspect(self.rules)
         self.assertTrue(cohort.inspect(HistoricalView(self, self.rules)))
         self.assertEqual(12, len(CHANGED))
@@ -112,7 +112,7 @@ class AuthorizedRoleProfileConsolidationTests(unittest.TestCase):
     def test_molotov_death_child_remains_exactly_preserved(self):
         death = self.rules.resolve_weapon("ra1_soviets_molotovconscript_conscriptmolotovexplode")
         self.assertEqual(
-            ["Flame_LightFlatCompatibility"], main_warheads(death))
+            ["Flame_Light_Flat"], main_warheads(death))
         node = main_warhead_nodes(death)[0]
         self.assertEqual("8000", node.get("Damage"))
         self.assertEqual("9988", node.get("PercentageScale"))

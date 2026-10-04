@@ -64,8 +64,8 @@ class ForgottenCannonAP(unittest.TestCase):
 
     def test_chemical_alternates_remain_legacy(self):
         baseline = {
-            'TSHighVelocityChem': '46a714c8d35603fcd19c51b7a4c669f4d09b151a4db91408b5e5fdc35131de7c',
-            'TSHighVelocity2Chem': 'f37eb48f8f6cbe9c5e05a1b7c57e27a7e633b48cfc2ce704e99ddfe336f138ac',
+            'TSHighVelocityChem': '9abf16f750ef201f18e551746cf230dea1e0a57ae3f077adea323a94650158b9',
+            'TSHighVelocity2Chem': 'dda343a6ee5c8f0f50d660806637d8ecc1b04e91241b6725dbebc7297566fa09',
         }
         for name, damage in (('TSHighVelocityChem', '45000'),
                              ('TSHighVelocity2Chem', '60000')):

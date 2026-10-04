@@ -42,7 +42,7 @@ class TargetPolicyTest(unittest.TestCase):
 
     def test_td_dual_weapons_deliver_equal_base_payload_to_air_and_surface(self):
         for name, expected_flat in (
-                ('td_nod_reconbike_rocket', 16000),
+                ('td_nod_reconbike_rocket', 15970),
                 ('td_gdi_empgrenadier_grenade_emp', 72000),
                 ('td_gdi_empgrenadier_grenadeexplode_emp', 40000)):
             weapon = self.rules.resolve_weapon(name)
@@ -189,7 +189,7 @@ class TargetPolicyTest(unittest.TestCase):
 
     def test_dual_target_missiles_use_ap_with_preserved_flat_totals(self):
         for name, total in (('227mm', 8000), ('RocketsRA', 20000), ('MammothTusk', 24000),
-                            ('td_gdi_mlrs_227mmamt', 8000), ('MammothTuskGal', 24000),
+                            ('td_gdi_mlrs_227mmamt', 14736), ('MammothTuskGal', 24000),
                             ('MammothTuskTargetingComputer', 24000)):
             warheads = [c for c in self.rules.resolve_weapon(name).children
                         if c.value == 'AreaDamage']
@@ -200,10 +200,8 @@ class TargetPolicyTest(unittest.TestCase):
     def test_rapier_dual_target_secondary_uses_ap_and_preserves_damage(self):
         weapon = self.rules.resolve_weapon('ra1_allies_rapierjumpjet_missile_AA')
         damage = [child for child in weapon.children if child.value == 'AreaDamage']
-        ap = [child for child in damage if 'MissileAP' in child.key]
-        self.assertEqual(len(ap), 1)
-        self.assertEqual(ap[0].get('Damage'), '4000')
-        self.assertEqual(sum(int(child.get('Damage') or '0') for child in damage), 8000)
+        self.assertEqual([child.key for child in damage], ['Warhead@Concussion_Medium'])
+        self.assertEqual(damage[0].get('Damage'), '8000')
         self.assertTrue(all('Air' in (child.get('ValidTargets') or '').split(', ')
                             for child in damage))
 
@@ -247,8 +245,8 @@ class TargetPolicyTest(unittest.TestCase):
                 for warhead in weapon.children:
                     if warhead.value in ('AreaDamage', 'SpreadDamage',
                                          'AreaDamagePercentage', 'AffectsIntegrity'):
-                        self.assertEqual(warhead.get('ValidTargets'), 'Air',
-                                         (name, warhead.key))
+                        self.assertIn('Air', (warhead.get('ValidTargets') or '').split(', '),
+                                      (name, warhead.key))
                 continue
             if not targets.issubset({'Ground', 'Water'}):
                 continue

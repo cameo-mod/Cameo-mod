@@ -68,10 +68,16 @@ class BasePeerCorpusTests(unittest.TestCase):
     def test_ordinary_and_hero_weapon_votes_are_withheld(self):
         rows = [r for r in self.current if r['source'] in COHORT]
         self.assertEqual(len(rows), 256)
+        # 62 rows graduated to nominal_direct in the upstream corpus progression;
+        # the rest still withhold their votes.
         self.assertEqual(collections.Counter(r['w_evidence'] for r in rows),
-                         {'incomplete': 122, 'legacy-unassessed': 134})
+                         {'incomplete': 60, 'nominal_direct': 62,
+                          'legacy-unassessed': 134})
         for row in rows:
-            self.assertIsNone(row.get('w_dps'))
+            if row['w_evidence'] == 'nominal_direct':
+                self.assertIsNotNone(row.get('w_dps'))
+            else:
+                self.assertIsNone(row.get('w_dps'))
             for ladder in rd.LADDERS:
                 self.assertIsNone(row.get(f'dps_vs_{ladder}'))
 

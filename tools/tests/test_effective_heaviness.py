@@ -221,8 +221,23 @@ class ByteEquivalenceGoldenTest(unittest.TestCase):
         # checkpoint as well as the original template set for this legacy test.
         from reviewed_weapon_history import (
             missile_role_changes, missile_parent_role_changes, restore_missile_role)
+        # Renamed weapons resolve under their current id; restore under the
+        # fixture's own key so the gate and the golden both see the old name.
+        renames = {}
+        for line in (ROOT / "tools" / "rename" / "rename_map_x3_aa.yaml"
+                     ).read_text(encoding="utf-8").splitlines():
+            old, sep, new = line.partition(":")
+            if sep and line[:1] in " \t" and old.strip() and new.strip():
+                renames[old.strip()] = new.strip()
         for name in missile_role_changes().keys() | missile_parent_role_changes().keys():
-            rs.weapons[name] = restore_missile_role(self, rs.weapon(name), source=True)
+            node = rs.weapon(name)
+            if node is None and name in renames:
+                node = rs.weapon(renames[name])
+                if node is not None:
+                    node = node.deep_copy()
+                    node.key = name
+            self.assertIsNotNone(node, name)
+            rs.weapons[name] = restore_missile_role(self, node, source=True)
         rs.weapons.pop("^Warhead_CannonAP", None)
         # The later Sonic additions alter the live diagnostic shield census.
         # This frozen wiring-equivalence test retains its original family set.
@@ -291,7 +306,8 @@ class PricingWiringTest(unittest.TestCase):
         self.addCleanup(tm.use_ruleset, tm._INJECTED)
         def rules(shield):
             return SimpleNamespace(actors={}, weapons={"W": field("W", children=[
-                field("Warhead@Main", "AreaDamage", [table("Versus", Shield=shield)])])})
+                field("Warhead@Main", "AreaDamage", [
+                    field("Damage", 2000), table("Versus", Shield=shield)])])})
         tm.use_ruleset(rules(200))
         self.assertEqual(tm.pseudo_armor_mean("Shield"), 200)
         self.assertEqual(tm.shield_damage_share(), 0)

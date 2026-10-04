@@ -127,8 +127,9 @@ class WeaponCorrectnessFollowupTests(unittest.TestCase):
         weapon = self.rules.resolve_weapon("^RepairWeapon")
         defuse = weapon.child("Warhead@Defuse1")
         self.assertEqual("DetachDelayedWeapon", defuse.value)
-        self.assertEqual("2000", defuse.get("Spread"))
-        self.assertEqual("100, 50", defuse.get("Falloff"))
+        # Spread/Falloff were dead fields on DetachDelayedWeapon and were
+        # stripped by the dead-warhead-field cleanup; the merged geometry
+        # contract is Range/Types/ValidRelationships.
         self.assertEqual("2000", defuse.get("Range"))
         self.assertEqual("defilerplague", defuse.get("Types"))
         self.assertEqual("Ally", defuse.get("ValidRelationships"))
@@ -225,7 +226,7 @@ class WeaponCorrectnessFollowupTests(unittest.TestCase):
             "asianalliance_chaostower": {"Selectable"},
             "cabal_constructionyard": {"Selectable"},
             "cabal_core": {"Selectable", "WithIdleOverlay@LIGHTS2"},
-            "duelist_tank.ixian": {"ActorStatValues"},
+            "ixian_duelist_tank": {"ActorStatValues"},
             "ixian_ixcombatsiege": {"ActorStatValues"},
             "ixian_rocketturret": {"AttackTurreted"},
             "japan_japaneseflamethrower": {"UpdatesPlayerStatistics"},

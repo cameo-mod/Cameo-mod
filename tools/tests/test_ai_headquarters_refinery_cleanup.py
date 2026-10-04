@@ -12,8 +12,17 @@ class HeadquartersRefineryCleanupTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.rules = Ruleset(ROOT)
-        cls.ai = cls.rules.resolve("Player").child("BaseBuilderBotModuleCA@generic")
-        cls.protected = set(cls.ai.get("ConstructionYardTypes").split(", "))
+        player = cls.rules.resolve("Player")
+        # The roster split into per-profile BaseBuilderBotModuleCA slots
+        # (@generic now carries only the zerg pair, @classic the full list);
+        # the sell-cleanup guard applies to whichever profile runs, so the
+        # protected set is the union across slots.
+        cls.protected = set()
+        for module in player.children:
+            if module.key.startswith("BaseBuilderBotModuleCA@"):
+                types = module.get("ConstructionYardTypes")
+                if types:
+                    cls.protected.update(types.split(", "))
 
     def test_all_starcraft_and_warcraft_headquarters_are_protected(self):
         for name in ("protoss_nexus", "terran_commandcenter", "zerg_hatchery",

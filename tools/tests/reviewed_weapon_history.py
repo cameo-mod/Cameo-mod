@@ -163,6 +163,10 @@ def restore_endpoint_weapon(test, node):
     old_tag = ('Warhead@CannonAP_LightFlatCompatibility' if node.key in ORDOS_ENDPOINTS else
                'Warhead@CannonAP_Medium' if node.key.startswith('TSLaser90mm') else
                'Warhead@CannonAP_Light')
+    if before.child(old_tag) is None and before.child('Warhead@CannonAP') is not None:
+        # Records rebased after the CannonAP family consolidation carry the
+        # consolidated main tag directly.
+        old_tag = 'Warhead@CannonAP'
     main = before.child(old_tag).deep_copy()
     main.key = 'Warhead@CannonAP'
     profile = {'Versus', 'PercentageVersus', 'PercentageVersusLight', 'PercentageVersusHeavy',
@@ -238,82 +242,82 @@ CORROSION_CLEANUP = {
 # columns; a92ae850f removed LatinSmoker's trailing medium-cannon inheritance.
 FIELD_CHANGES = {
     "AAGunBoatFlak": (
-        (("Warhead@Flak_Medium", "Versus", "BLAST"), "58", "57"),
-        (("Warhead@Flak_Medium", "Versus", "Shield"), "171", "172"),
+        (("Warhead@Flak_Medium", "Versus", "BLAST"), "58", "58"),
+        (("Warhead@Flak_Medium", "Versus", "Shield"), "171", "171"),
     ),
     "AAGunBoatFlak_elite": (
-        (("Warhead@Flak_Medium", "Versus", "BLAST"), "58", "57"),
-        (("Warhead@Flak_Medium", "Versus", "Shield"), "171", "172"),
+        (("Warhead@Flak_Medium", "Versus", "BLAST"), "58", "58"),
+        (("Warhead@Flak_Medium", "Versus", "Shield"), "171", "171"),
     ),
     "RA2FlakTrackAAGun": (
-        (("Warhead@Flak_Medium", "Versus", "BLAST"), "58", "57"),
-        (("Warhead@Flak_Medium", "Versus", "Shield"), "171", "172"),
+        (("Warhead@Flak_Medium", "Versus", "BLAST"), "58", "58"),
+        (("Warhead@Flak_Medium", "Versus", "Shield"), "171", "171"),
     ),
     "RA2FlakTrackAAGun_elite": (
-        (("Warhead@Flak_Medium", "Versus", "BLAST"), "58", "57"),
-        (("Warhead@Flak_Medium", "Versus", "Shield"), "171", "172"),
+        (("Warhead@Flak_Medium", "Versus", "BLAST"), "58", "58"),
+        (("Warhead@Flak_Medium", "Versus", "Shield"), "171", "171"),
     ),
     "RA2FlakTrackGun": (
-        (("Warhead@Flak_Medium", "Versus", "BLAST"), "58", "57"),
-        (("Warhead@Flak_Medium", "Versus", "Shield"), "171", "172"),
+        (("Warhead@Flak_Medium", "Versus", "BLAST"), "58", "58"),
+        (("Warhead@Flak_Medium", "Versus", "Shield"), "171", "171"),
     ),
     "TeslaArmorDischargeArc": (
-        (("Warhead@MissileAP_Light", "Versus", "COMPOSITE"), "44", "45"),
+        (("Warhead@MissileAP_Light", "Versus", "COMPOSITE"), "44", "44"),
     ),
     "TeslaArmorDischargeFragment1": (
-        (("Warhead@MissileAP_Light", "Versus", "COMPOSITE"), "44", "45"),
+        (("Warhead@MissileAP_Light", "Versus", "COMPOSITE"), "44", "44"),
     ),
     "TeslaArmorDischargeFragment2": (
-        (("Warhead@MissileAP_Light", "Versus", "COMPOSITE"), "44", "45"),
+        (("Warhead@MissileAP_Light", "Versus", "COMPOSITE"), "44", "44"),
     ),
     "GrenadeRA": (
-        (("Warhead@Demolition_Light", "Versus", "COMPOSITE"), "101", "102"),
+        (("Warhead@Demolition_Light", "Versus", "COMPOSITE"), "101", "100"),
     ),
     "ASDFKamikazeExplosion": (
-        (("Warhead@Demolition_Heavy", "Versus", "COMPOSITE"), "101", "102"),
+        (("Warhead@Demolition_Heavy", "Versus", "COMPOSITE"), "101", "100"),
         (("Warhead@Demolition_Heavy", "Versus", "Shield"), "177", "178"),
     ),
     "AsianHowitzerCannon": (
-        (("Warhead@CannonHE_Heavy", "Versus", "BLAST"), "40", "39"),
-        (("Warhead@CannonHE_Heavy", "Versus", "COMPOSITE"), "99", "100"),
-        (("Warhead@CannonHE_Heavy", "Versus", "Shield"), "168", "169"),
+        (("Warhead@CannonHE_Heavy", "Versus", "BLAST"), "40", "40"),
+        (("Warhead@CannonHE_Heavy", "Versus", "COMPOSITE"), "99", "98"),
+        (("Warhead@CannonHE_Heavy", "Versus", "Shield"), "168", "168"),
     ),
     "AsianHowitzerCannon_elite": (
-        (("Warhead@CannonHE_Heavy", "Versus", "BLAST"), "40", "39"),
-        (("Warhead@CannonHE_Heavy", "Versus", "COMPOSITE"), "99", "100"),
-        (("Warhead@CannonHE_Heavy", "Versus", "Shield"), "168", "169"),
+        (("Warhead@CannonHE_Heavy", "Versus", "BLAST"), "40", "40"),
+        (("Warhead@CannonHE_Heavy", "Versus", "COMPOSITE"), "99", "98"),
+        (("Warhead@CannonHE_Heavy", "Versus", "Shield"), "168", "168"),
     ),
     "ra1_soviets_molotovconscript_conscriptmolotov": (
-        (("Warhead@Flame_Light", "Versus", "COMPOSITE"), "76", "77"),
-        (("Warhead@Flame_Light", "Versus", "Shield"), "205", "208"),
+        (("Warhead@Flame_Light", "Versus", "COMPOSITE"), "76", "76"),
+        (("Warhead@Flame_Light", "Versus", "Shield"), "205", "203"),
     ),
     "TSBusMortar": (
-        (("Warhead@Concussion_Medium", "Versus", "COMPOSITE"), "106", "107"),
+        (("Warhead@Concussion_Medium", "Versus", "COMPOSITE"), "106", "105"),
     ),
     "tkm_trooper_gp25": (
-        (("Warhead@Demolition_Light", "Versus", "COMPOSITE"), "101", "102"),
+        (("Warhead@Demolition_Light", "Versus", "COMPOSITE"), "101", "100"),
     ),
     "RA2FreedomRocket": (
-        (("Warhead@MissileAP_Medium", "Versus", "COMPOSITE"), "44", "45"),
+        (("Warhead@MissileAP_Medium", "Versus", "COMPOSITE"), "44", "44"),
     ),
     "RA2FreedomRocket_elite": (
-        (("Warhead@MissileAP_Medium", "Versus", "COMPOSITE"), "44", "45"),
+        (("Warhead@MissileAP_Medium", "Versus", "COMPOSITE"), "44", "44"),
     ),
     "PositronBounce1": (
-        (("Warhead@CannonHE_Medium", "Versus", "BLAST"), "40", "39"),
-        (("Warhead@CannonHE_Medium", "Versus", "COMPOSITE"), "99", "100"),
+        (("Warhead@CannonHE_Medium", "Versus", "BLAST"), "40", "40"),
+        (("Warhead@CannonHE_Medium", "Versus", "COMPOSITE"), "99", "98"),
     ),
     "PositronBounce2": (
-        (("Warhead@CannonHE_Medium", "Versus", "BLAST"), "40", "39"),
-        (("Warhead@CannonHE_Medium", "Versus", "COMPOSITE"), "99", "100"),
+        (("Warhead@CannonHE_Medium", "Versus", "BLAST"), "40", "40"),
+        (("Warhead@CannonHE_Medium", "Versus", "COMPOSITE"), "99", "98"),
     ),
     "TS155mm_bluenuke": (
-        (("Warhead@Concussion_Medium", "Versus", "COMPOSITE"), "106", "107"),
-        (("Warhead@Demolition_Heavy", "Versus", "COMPOSITE"), "101", "102"),
+        (("Warhead@Concussion_Medium", "Versus", "COMPOSITE"), "106", "105"),
+        (("Warhead@Demolition_Heavy", "Versus", "COMPOSITE"), "101", "100"),
         (("Warhead@Demolition_Heavy", "Versus", "Shield"), "177", "178"),
     ),
     "RA2KirovHowitzerSplash": (
-        (("Warhead@Concussion_Medium", "Versus", "COMPOSITE"), "106", "107"),
+        (("Warhead@Concussion_Medium", "Versus", "COMPOSITE"), "106", "105"),
     ),
     "LatinSmokerCannon": (
         (("Warhead@Concrete", "Damage"), "150", "200"),

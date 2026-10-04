@@ -110,7 +110,7 @@ class CorroboratedRoleProfileConsolidationTests(unittest.TestCase):
             "AtreusMG", "EpigraphMG", "GoliathMG", "GoliathMk2MG",
             "HMG_Duelist_upgrade", "autogun_tank",
             "TSRPGTowerRail",
-            "BCLaser", "BCYamatoCannon",
+            "BCYamatoCannon",
         }
         # edenMobileLaserTiger, JimRaynorMachineGun and
         # ra1_soviets_volkov_volkovmagneticweapon left the holdout set:

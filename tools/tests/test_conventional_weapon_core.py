@@ -23,7 +23,7 @@ from miniyaml import Ruleset  # noqa: E402
 
 EXPECTED = {
     "DeviatorMissile": ("MissileAP_Heavy", 40000, 4998),
-    "DeviatorMissile_Artillery": ("MissileAP_Heavy", 60000, 3332),
+    "DeviatorMissile_Artillery": ("MissileHE_Heavy", 60000, 3332),
     "Wraith_ToxinMissiles": ("MissileAP_Heavy", 60000, 3332),
     "FlakbusAA": ("Flak_Medium", 32000, 9997),
     "RA2KirovHowitzerSplash": ("Concussion_Medium", 40000, 9998),
@@ -54,9 +54,11 @@ class ConventionalWeaponCoreTests(unittest.TestCase):
         cls.report = json.loads(REPORT.read_text(encoding="utf-8"))
 
     def test_deviator_closure_is_complete_and_paid_aphid_is_out_of_scope(self):
+        # The closure root moved to the namespaced pack template when the
+        # DeviatorMissile parent chain was templated in the ContentPack wave.
         self.assertEqual(
             {"DeviatorMissile_Artillery", "Wraith_ToxinMissiles"},
-            descendants(self.rules, "DeviatorMissile"),
+            descendants(self.rules, "^d2k_ordos_deviator_art"),
         )
         self.assertNotIn("Aphid_AA", EXPECTED)
         self.assertNotIn("AphidCryo_AA", EXPECTED)

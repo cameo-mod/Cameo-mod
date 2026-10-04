@@ -23,7 +23,8 @@ class ExactProfileDuplicateConsolidationTests(unittest.TestCase):
         # Never reattach those families to replay this historical converter.
         with self.assertRaisesRegex(RuntimeError, "RA2120xmm: descendant closure changed"):
             cohort.validate_result()
-        self.assertEqual({"RA2120xmm_elite"}, cohort.descendants(self.rules, "RA2120xmm"))
+        # The elite now inherits the 3-way-split templates directly.
+        self.assertEqual(set(), cohort.descendants(self.rules, "RA2120xmm"))
         self.assertEqual(cohort.FLAK_DESCENDANTS, cohort.descendants(self.rules, "RA2FlakTrackGun"))
         self.assertEqual(cohort.TESLA_ARMOR - {"TeslaArmorDischargeArc"},
                          cohort.descendants(self.rules, "TeslaArmorDischargeArc"))
@@ -92,13 +93,11 @@ class ExactProfileDuplicateConsolidationTests(unittest.TestCase):
     def test_protected_role_branches_are_exact(self):
         expected_flak = {
             "RA2FlakTrackGun_elite": {
-                "Flak_MediumFlatCompatibility": (8000, 2488, "Ground, Water")},
+                "Flak_Medium_Flat": (8000, 2488, "Ground, Water")},
             "AAGunBoatFlak": {
-                "Flak_Medium": (2000, 10000, "Ground, Water, Air"),
-                "Flak_MediumFlatCompatibility": (6000, 0, "Ground, Water, Air")},
+                "Flak_Medium": (8000, 10000, "Ground, Water, Air")},
             "AAGunBoatFlak_elite": {
-                "Flak_Medium": (2000, 10000, "Ground, Water, Air"),
-                "Flak_MediumFlatCompatibility": (6000, 0, "Ground, Water, Air")},
+                "Flak_Medium": (8000, 10000, "Ground, Water, Air")},
         }
         for name, expected in expected_flak.items():
             resolved = self.rules.resolve_weapon(name)
@@ -112,7 +111,7 @@ class ExactProfileDuplicateConsolidationTests(unittest.TestCase):
             set(main_warheads(self.rules.resolve_weapon("RA2120xmm_rad"))),
         )
         self.assertEqual(
-            {"Flak_MediumFlatCompatibility", "Flak_Medium"},
+            {"Flak_Medium"},
             set(main_warheads(self.rules.resolve_weapon("AAGunBoatFlak"))),
         )
         self.assertEqual(

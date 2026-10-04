@@ -29,12 +29,14 @@ class ApocalypseMergeTests(unittest.TestCase):
                                 if name in ('RA2120xmm', 'RA2120xmm_elite')
                                 else self.rules.resolve_weapon(name)) for name in NAMES}
         reference = Ruleset(ROOT)
+        authored = set()
         for node in load(pathlib.Path(__file__).parent / "fixtures/apocalypse_premerge.yaml"):
             reference.weapons[node.key] = node
+            authored.add(node.key)
         reference._resolve_cache.clear()
         for name in NAMES:
             expected = reference.resolve_weapon(name).deep_copy()
-            if "_rad" in name:
+            if "_rad" in name and name in authored:
                 # Extracting the authored effects into one template moves only
                 # these four cosmetic nodes before the deterministic radiation
                 # update. Their mutual order and every field remain pinned.
@@ -45,6 +47,11 @@ class ApocalypseMergeTests(unittest.TestCase):
                 position = next(i for i, node in enumerate(expected.children) if node.key == "Warhead@Radiation")
                 expected.children[position:position] = moved
                 self.assertIsNone(expected.child("Warhead@EffectAir").child("Inaccuracy"))
+                # Post-split the radiation warhead appends last instead of
+                # sitting at the retired Inherits@rad slot.
+                rad = expected.child("Warhead@Radiation")
+                expected.children.remove(rad)
+                expected.children.append(rad)
             self.assertEqual(payload(expected), actual[name], name)
 
     def test_effect_templates_do_not_hide_damage_or_radiation_mechanics(self):
@@ -62,7 +69,11 @@ class ApocalypseMergeTests(unittest.TestCase):
             self.assertEqual([("Inherits@glow", "^ImpactGlow")], self.rules.inherits_of(self.rules.weapon(template)))
             self.assertTrue(all(n.key.startswith("Warhead@") and n.value in allowed_effects for n in effect.children))
             self.assertIsNone(effect.child("Warhead@Radiation"))
-        self.assertEqual("^RA2RadShell", self.rules.weapon("RA2120xmm_rad").get("Inherits@rad"))
+        # The rad route keeps its radiation mechanics through the split
+        # warhead/effect parents after Inherits@rad was retired.
+        self.assertEqual("^Warhead_CannonChem_Light",
+                         self.rules.weapon("RA2120xmm_rad").get("Inherits@wh"))
+        self.assertIsNotNone(self.rules.resolve_weapon("RA2120xmm_rad").child("Warhead@Radiation"))
 
     def test_single_canonical_main_and_no_legacy_percentage_companions(self):
         for name in NAMES:
@@ -71,12 +82,16 @@ class ApocalypseMergeTests(unittest.TestCase):
                 chemical = "_rad" in name
                 if not chemical:
                     resolved = restore_endpoint_weapon(self, resolved)
-                tag = "CannonChem_Light" if chemical else "CannonAP_Light"
-                self.assertEqual([tag], main_warheads(resolved))
+                # RA2120xmm_elite has no authored override, so its restored view
+                # carries the consolidated CannonAP main tag.
+                allowed = {"CannonChem_Light"} if chemical else {"CannonAP_Light", "CannonAP"}
+                mains = main_warheads(resolved)
+                self.assertEqual(len(mains), 1)
+                self.assertIn(mains[0], allowed)
                 self.assertEqual("16000" if chemical else "12000", main_warhead_nodes(resolved)[0].get("Damage"))
                 self.assertFalse(any(n.value == "AreaDamagePercentage" for n in resolved.children))
                 if chemical:
-                    self.assertEqual("100", resolved.child("Warhead@" + tag).child("PhysicalStates").get("Corrosion"))
+                    self.assertEqual("100", resolved.child("Warhead@" + mains[0]).child("PhysicalStates").get("Corrosion"))
 
     def test_cadence_and_projectile_contract_for_normal_and_elite(self):
         for name in NAMES:

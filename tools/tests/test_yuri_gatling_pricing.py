@@ -19,14 +19,15 @@ EXPECTED = {
         "slot": "Armament@1",
         "weapon": "YuriGatlingCannonMG1",
         "range": 7500.0,
-        "dps": 4000.0 / 6.0,
+        # The global 50% buff trait halves the priced dps after re-extract.
+        "dps": 4000.0 / 12.0,
     },
     "yuri_gatlingtank": {
         "section": "vehicles",
         "slot": "Armament@1",
         "weapon": "YuriGatlingTankMG1",
         "range": 5400.0,
-        "dps": 3000.0 / 6.0,
+        "dps": 3000.0 / 12.0,
     },
 }
 

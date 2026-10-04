@@ -60,7 +60,8 @@ class LaserHeavyRouteConsolidationTests(unittest.TestCase):
             laser = child(weapon, "Warhead@Laser_Heavy")
             self.assertIsNone(child(weapon, "Warhead@LaserHeavyGroundRemainder"), name)
             expected_damage = (
-                4000 if name in cohort.AIR or name == "TSLaser25mmDep" else 8000
+                4600 if name in cohort.AIR or name == "TSLaser25mmDep"
+                else (8600 if name.startswith("Lunar_") else 8000)
             )
             expected_targets = "Air" if name in cohort.AIR else "Ground, Water"
             self.assertEqual(str(expected_damage), child(laser, "Damage").value, name)

@@ -24,12 +24,12 @@ TEMPLATE = ROOT / "mods" / "cameo" / "maps" / "ai_duel_gate_20260928"
 
 class MatchupMatrixTests(unittest.TestCase):
     def test_unordered_pairs_with_mirrors(self):
-        matchups = batch.build_matchups(["td_gdi", "td_nod"], "hard", "hard", repeats=1)
+        matchups = batch.build_matchups(["td_gdi", "td_nod"], ["hard"], ["hard"], repeats=1)
         pairs = {(m["side_a"]["faction"], m["side_b"]["faction"]) for m in matchups}
         self.assertEqual(pairs, {("td_gdi", "td_gdi"), ("td_gdi", "td_nod"), ("td_nod", "td_nod")})
 
     def test_repeats_alternate_spawn_sides(self):
-        matchups = batch.build_matchups(["td_gdi", "td_nod"], "hard", "hard", repeats=2)
+        matchups = batch.build_matchups(["td_gdi", "td_nod"], ["hard"], ["hard"], repeats=2)
         sides = [
             (m["side_a"]["faction"], m["side_b"]["faction"])
             for m in matchups
@@ -38,7 +38,7 @@ class MatchupMatrixTests(unittest.TestCase):
         self.assertEqual(sides, [("td_gdi", "td_nod"), ("td_nod", "td_gdi")])
 
     def test_difficulty_axes_stay_separate(self):
-        matchups = batch.build_matchups(["td_gdi"], "easy", "brutal", repeats=1)
+        matchups = batch.build_matchups(["td_gdi"], ["easy"], ["brutal"], repeats=1)
         m = matchups[0]
         self.assertEqual(m["side_a"]["bot"], "easy")
         self.assertEqual(m["side_b"]["bot"], "brutal")
@@ -241,12 +241,12 @@ class RealMapVariantTests(unittest.TestCase):
         self.assertEqual(cells[1], (90, 24))
 
     def test_swap_bots_alternates_spawn_ownership(self):
-        matchups = batch.build_matchups(["td_gdi"], "fransbot", "hard", repeats=4, swap_bots=True)
+        matchups = batch.build_matchups(["td_gdi"], ["fransbot"], ["hard"], repeats=4, swap_bots=True)
         side_a_bots = [m["side_a"]["bot"] for m in matchups]
         self.assertEqual(side_a_bots, ["fransbot", "hard", "fransbot", "hard"])
 
     def test_swap_bots_off_keeps_assignment(self):
-        matchups = batch.build_matchups(["td_gdi"], "fransbot", "hard", repeats=2)
+        matchups = batch.build_matchups(["td_gdi"], ["fransbot"], ["hard"], repeats=2)
         self.assertEqual([m["side_a"]["bot"] for m in matchups], ["fransbot", "fransbot"])
 
 

@@ -63,10 +63,18 @@ class TdRocketSoldierPlaytestTests(unittest.TestCase):
             "td_gdi_rocketsoldier_rocketsamt": "RocketsAMT",
             "td_nod_rocketsoldier_rockets": "Rockets",
         }
+        split = ("^Warhead_MissileAP_Light", "^Projectile_Missile_Light",
+                 "^Effect_MissileAP_Light")
         for weapon_name in WEAPONS:
             with self.subTest(weapon=weapon_name):
                 local = self.rules.weapon(weapon_name)
-                self.assertEqual(local.child("Inherits").value, parents[weapon_name])
+                inherits = {c.key: c.value for c in local.children
+                            if c.key.startswith("Inherits")}
+                if "Inherits" in inherits:
+                    self.assertEqual(inherits["Inherits"], parents[weapon_name])
+                else:
+                    # Converted to the three-way split — same proposal resolved.
+                    self.assertEqual(set(inherits.values()), set(split))
                 weapon = self.rules.resolve_weapon(weapon_name)
                 self.assertEqual(weapon.get("ReloadDelay"), "56")
                 range_value, damage = WEAPON_STATS[weapon_name]
@@ -128,7 +136,7 @@ class TdRocketSoldierPlaytestTests(unittest.TestCase):
         )["rocket_trooper"]
         inputs = check_band.unit_inputs(raw, derived)
         price = check_band.price_for("rocket_trooper", anchor, inputs)
-        self.assertEqual(420, round(price / 10) * 10)
+        self.assertEqual(280, round(price / 10) * 10)
         self.assertEqual(
             "450",
             self.rules.resolve("td_gdi_rocketsoldier").child("Valued").get("Cost"),

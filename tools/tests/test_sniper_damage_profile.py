@@ -124,11 +124,15 @@ class SniperDamageProfileTests(unittest.TestCase):
                         f"{name}: {warhead.key}.{radius_override}",
                     )
                 spread = child(warhead, "Spread")
-                falloff = child(warhead, "Falloff")
                 self.assertIsNotNone(spread, f"{name}: {warhead.key}")
-                self.assertIsNotNone(falloff, f"{name}: {warhead.key}")
                 self.assertEqual("1", spread.value, f"{name}: {warhead.key}")
-                self.assertEqual("100, 0", falloff.value, f"{name}: {warhead.key}")
+                # OpenToppedDamage does not consume Falloff; the dead-field
+                # cleanup removed it there. Falloff only matters on the
+                # area/spread types.
+                if warhead.value != "OpenToppedDamage":
+                    falloff = child(warhead, "Falloff")
+                    self.assertIsNotNone(falloff, f"{name}: {warhead.key}")
+                    self.assertEqual("100, 0", falloff.value, f"{name}: {warhead.key}")
 
     def test_root_snipers_use_infantry_favoured_heavy_bullet_profile(self):
         for name in ROOT_SNIPERS:

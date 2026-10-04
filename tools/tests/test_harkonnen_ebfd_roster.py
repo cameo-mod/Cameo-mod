@@ -56,7 +56,7 @@ BRANCHES = (
 )
 
 CLASSIC_SEQUENCE_STARTS = {
-    "combat_tank.harkonnen": {
+    "harkonnen_combat_tank": {
         "idle": 2051,
         "turret": 2115,
         "muzzle": 4028,
@@ -67,21 +67,21 @@ CLASSIC_SEQUENCE_STARTS = {
 }
 
 D2K_UPGRADE_IMAGES = {
-    "upgrade_conyard.harkonnen": "conyard.harkonnen",
-    "upgrade_barracks.harkonnen": "barracks.harkonnen",
-    "upgrade_light.harkonnen": "light.harkonnen",
-    "upgrade_heavy.harkonnen": "heavy.harkonnen",
-    "upgrade_radar.harkonnen": "outpost.harkonnen",
-    "upgrade_conyard.atreides": "conyard.atreides",
-    "upgrade_barracks.atreides": "barracks.atreides",
-    "upgrade_light.atreides": "light.atreides",
-    "upgrade_heavy.atreides": "heavy.atreides",
-    "upgrade_radar.atreides": "outpost.atreides",
-    "upgrade_conyard.corrino": "conyard.harkonnen",
-    "upgrade_barracks.corrino": "barracks.harkonnen",
-    "upgrade_light.corrino": "light.harkonnen",
-    "upgrade_heavy.corrino": "heavy.harkonnen",
-    "upgrade_radar.corrino": "outpost.harkonnen",
+    "harkonnen_upgrade_conyard": "harkonnen_conyard",
+    "harkonnen_upgrade_barracks": "harkonnen_barracks",
+    "harkonnen_upgrade_light": "harkonnen_light",
+    "harkonnen_upgrade_heavy": "harkonnen_heavy",
+    "harkonnen_upgrade_radar": "harkonnen_outpost",
+    "atreides_upgrade_conyard": "atreides_conyard",
+    "atreides_upgrade_barracks": "atreides_barracks",
+    "atreides_upgrade_light": "atreides_light",
+    "atreides_upgrade_heavy": "atreides_heavy",
+    "atreides_upgrade_radar": "atreides_outpost",
+    "corrino_upgrade_conyard": "harkonnen_conyard",
+    "corrino_upgrade_barracks": "harkonnen_barracks",
+    "corrino_upgrade_light": "harkonnen_light",
+    "corrino_upgrade_heavy": "harkonnen_heavy",
+    "corrino_upgrade_radar": "harkonnen_outpost",
 }
 
 
@@ -101,6 +101,13 @@ class HarkonnenEbfdRosterTests(unittest.TestCase):
         cls.rules = Ruleset(ROOT)
         cls.ebfd_dir = ROOT / "mods/cameo/ContentPacks/D2k/Harkonnen/yaml"
         cls.asset_dir = ROOT / "mods/cameo/bits/d2k"
+
+    def asset_path(self, ref):
+        if "|" not in ref:
+            return self.asset_dir / ref
+        namespace, name = ref.split("|", 1)
+        kind = namespace.rsplit("_", 1)[1]
+        return self.ebfd_dir.parent / "files" / kind / name
 
     def test_nine_distinct_actors_and_sequences(self):
         self.assertEqual(9, len(set(EBFD_ACTORS)))
@@ -146,7 +153,7 @@ class HarkonnenEbfdRosterTests(unittest.TestCase):
                     self.assertEqual("DATA.R16", child.get("Filename"))
                     self.assertEqual(str(start), child.get("Start"))
 
-        for actor_name in ("combat_tank.harkonnen", "missile_tank", "devastator"):
+        for actor_name in ("harkonnen_combat_tank", "missile_tank", "devastator"):
             prerequisites = self.rules.resolve(actor_name).get("Buildable", "Prerequisites")
             self.assertNotIn("harkonnen_promotion_", prerequisites or "", actor_name)
 
@@ -198,13 +205,13 @@ class HarkonnenEbfdRosterTests(unittest.TestCase):
             body = sequence.child("Defaults").get("Filename")
             icon = sequence.child("icon").get("Filename")
             with self.subTest(actor=actor_name, asset=body):
-                self.assertTrue((self.asset_dir / body).is_file())
+                self.assertTrue(self.asset_path(body).is_file())
             with self.subTest(actor=actor_name, asset=icon):
-                self.assertTrue((self.asset_dir / icon).is_file())
+                self.assertTrue(self.asset_path(icon).is_file())
 
         assault_sequence_text = (self.ebfd_dir / "sequences.yaml").read_text(encoding="utf-8")
-        self.assertIn("Filename: harkonnen_assaulttank.png", assault_sequence_text)
-        self.assertIn("Filename: harkonnen_assaulttank_icon.png", assault_sequence_text)
+        self.assertIn("Filename: d2k_harkonnen_sprites|harkonnen_assaulttank.png", assault_sequence_text)
+        self.assertIn("Filename: d2k_harkonnen_icons|harkonnen_assaulttank_icon.png", assault_sequence_text)
 
     def test_d2k_building_upgrades_have_production_palette_icons(self):
         for actor_name, image_name in D2K_UPGRADE_IMAGES.items():

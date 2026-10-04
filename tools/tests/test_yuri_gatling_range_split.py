@@ -168,7 +168,7 @@ class YuriGatlingRangeSplitTests(unittest.TestCase):
                 self.assertIsNone(local.child("RangeMultiplier@GatlingBuff"))
                 self.assertIsNone(resolved.child("RangeMultiplier@GatlingBuff"))
                 self.assertEqual(
-                    [],
+                    ["FirepowerMultiplier@GlobalBuffs"],
                     [
                         child.key
                         for child in resolved.children

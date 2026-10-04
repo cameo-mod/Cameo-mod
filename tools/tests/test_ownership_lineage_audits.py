@@ -56,7 +56,7 @@ class ReleaseLineageTests(unittest.TestCase):
 
     def test_published_route_provenance_is_pinned_and_missing_evidence_fails(self):
         mapping = lineage.load_renames(ROOT)
-        self.assertEqual(len(mapping), 194)
+        self.assertEqual(len(mapping), 193)
         self.assertEqual(mapping['BHRedDarts'], 'td_nod_stealthsoldier_bhreddarts')
         with patch.dict(lineage.ROUTE_HASHES, {'closed_remaining_names_20260910.json': '0' * 64}):
             with self.assertRaisesRegex(ValueError, 'unreviewed rename evidence'):

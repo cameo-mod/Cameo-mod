@@ -41,11 +41,12 @@ class DecomposeSolvesExactly(unittest.TestCase):
                 self.assertEqual(D, formula.DAMAGE_STEP)
 
     def test_floor_is_unchanged_by_the_retirement(self):
-        """The old dead-end delivered 2000 x 0.05 = 100 effective damage; one
-        grid step at fp=1 is also 100. Retiring the knob did not raise the
-        weakest weapon the pipeline can express."""
+        """The old dead-end delivered 2000 x 0.05 = 100 effective damage; the
+        floor at fp=1 is one grid step, which only ever gets finer (100, now
+        `DAMAGE_STEP`). Retiring the knob did not raise the weakest weapon the
+        pipeline can express."""
         D, fp = pcr.decompose_dps(0.0, 100.0, 2000.0, 1)
-        self.assertAlmostEqual(D * fp, 2000 * 0.05)
+        self.assertAlmostEqual(D * fp, formula.DAMAGE_STEP)
 
     def test_lands_on_the_grid(self):
         for target in (1.0, 55.0, 617.3, 9001.0):

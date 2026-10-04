@@ -91,14 +91,25 @@ class SameFamilyStackConsolidationTests(unittest.TestCase):
         for root, (destination, closure) in selections.items():
             # Compatibility is frozen, not recanonicalized when generated armor
             # coupling ranks move. Compare every field against its actual root.
-            canonical_weapon = rules.resolve_weapon(f"^Compatibility_{destination}Flat")
+            canonical_weapon = next(
+                resolved for resolved in (
+                    rules.resolve_weapon(f"^Warhead_{destination}_Flat"),
+                    rules.resolve_weapon(f"^Warhead_{destination}"),
+                )
+                if resolved is not None
+            )
             canonical = next(
                 child for child in canonical_weapon.children
-                if child.key == f"Warhead@{destination}FlatCompatibility"
+                if child.key.startswith("Warhead@")
             )
+            def versus_map(node):
+                return {
+                    item.key: item.value
+                    for item in node.children
+                } if node is not None else None
+
             expected = {
-                key: node_fingerprint(canonical.child(key))
-                if canonical.child(key) is not None else None
+                key: versus_map(canonical.child(key))
                 for key in ("Versus", "PercentageVersus")
             }
             expected.update({
@@ -108,12 +119,17 @@ class SameFamilyStackConsolidationTests(unittest.TestCase):
             for weapon in [root, *sorted(closure)]:
                 resolved = rules.resolve_weapon(weapon)
                 actual = next(
-                    child for child in resolved.children
-                    if child.key == f"Warhead@{destination}FlatCompatibility"
+                    (child for child in resolved.children
+                     if child.key in {
+                         f"Warhead@{destination}FlatCompatibility",
+                         f"Warhead@{destination}_Flat",
+                         f"Warhead@{destination}",
+                     }),
+                    None,
                 )
+                self.assertIsNotNone(actual, weapon)
                 profile = {
-                    key: node_fingerprint(actual.child(key))
-                    if actual.child(key) is not None else None
+                    key: versus_map(actual.child(key))
                     for key in ("Versus", "PercentageVersus")
                 }
                 profile.update({

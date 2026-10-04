@@ -22,7 +22,7 @@ EXPECTED_VALUES = {
         "Report": "vrhiatta.wav, vrhiattb.wav, vrhiattc.wav, vrhiattd.wav",
     },
     "SteelMantaHunterCannons": {"ValidTargets": "Ground, Water"},
-    "SteelVulcan": {"Report": "pulseturretfire.wav"},
+    "SteelVulcan": {"Report": "ra2m_consortium_sounds|pulseturretfire.wav"},
     "TSAAPCCannon": {"ValidTargets": "Ground, Water, Air"},
     "TSChemMLRSMissile": {"Report": "hovrmis1.aud"},
     "TSChemVanMissile": {"Report": "hovrmis1.aud"},
@@ -72,7 +72,7 @@ class WeaponSourceKeyIntegrityTests(unittest.TestCase):
 
     def test_ordos_apc_duplicate_merge_preserves_the_resolved_binding(self):
         name = "D2K_APC_Rocket_AA"
-        key = "Warhead@MissileAA_MediumFlatCompatibility"
+        key = "Warhead@MissileAA_Medium_Flat"
         self.assertEqual(1, sum(child.key == key for child in self.rules.weapon(name).children))
         weapon = self.rules.resolve_weapon(name)
         warhead = next(child for child in weapon.children if child.key == key)

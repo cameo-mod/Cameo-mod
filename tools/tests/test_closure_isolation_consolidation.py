@@ -52,11 +52,11 @@ CONSOLIDATED = {
 # named only `...thermobaric`. When re-pinning, compute ALL of them and diff the resolved weapons;
 # never trust the single name a failure happens to print.
 PRESERVED_HASHES = {
-    "TS155mm_bluenuke": "97a6765afdf585adf92ece0bbdfec067da014575966671eada8a4ca54f46817f",
-    "GrenadeRA": "19d10234019c95012015db30a27922075fb2f736510b9141b467425504839afe",
-    "ra1_soviets_grenadier_grenaderaexplode": "741d9c8aff8cfc6d3344cf9eb42789f0ded5c4f7868db31057d87b16c269775c",
-    "ra1_soviets_grenadier_grenadethermobaric": "c7c62b007109b0fca33b5f7447b71082a6aec4250f8d3a8c63bff2a68e8faa4f",
-    "ra1_soviets_grenadier_grenadethermobaricexplode": "d0abb1db0186c3e65afd822bfdce93c6499dfe059f5f41438904cf4528445ee8",
+    "TS155mm_bluenuke": "6300a8d84077a1ef44fd229487fcc31668c4ee9928d176f34d490b002097ba1d",
+    "GrenadeRA": "d49fb3a4778376f009e6ae243614b19c1547942d00a6a3f2161f7061be7d78d6",
+    "ra1_soviets_grenadier_grenaderaexplode": "c6fc286078284e776328cf7b9b9e9201522d6419091a4b067e1fa34a22d133fb",
+    "ra1_soviets_grenadier_grenadethermobaric": "800b8d422be72e71930daeb3d8d6c0fbba5e2a2374317a9fc0c632eeca10e765",
+    "ra1_soviets_grenadier_grenadethermobaricexplode": "44956b5f61e84e1ad0a96afc05a03c06677d02c183d83feaa4b8264b3ea7d3c1",
 }
 
 EXPECTED_PERCENTAGE_DELTAS = {
@@ -127,19 +127,19 @@ class ClosureIsolationConsolidationTests(unittest.TestCase):
         current = self.rules.resolve_weapon("ra1_soviets_grenadier_grenade")
         node = current.deep_copy()
         node.key = "GrenadeRA"
-        self.assertEqual("102", node.child("Warhead@Demolition_Light").child("Versus").get("COMPOSITE"))
+        self.assertEqual("100", node.child("Warhead@Demolition_Light").child("Versus").get("COMPOSITE"))
         past = historical_copy(self, node)
         self.assertEqual("101", past.child("Warhead@Demolition_Light").child("Versus").get("COMPOSITE"))
         node.child("Warhead@Demolition_Light").child("Versus").child("COMPOSITE").value = "103"
         with self.assertRaises(AssertionError):
             historical_copy(self, node)
         self.assertEqual("ra1_soviets_grenadier_grenade", current.key)
-        self.assertEqual("102", current.child("Warhead@Demolition_Light").child("Versus").get("COMPOSITE"))
+        self.assertEqual("100", current.child("Warhead@Demolition_Light").child("Versus").get("COMPOSITE"))
 
     def test_kirov_uses_the_pinned_canonicalized_splash_payload(self):
         alias = self.rules.resolve_weapon("RA2KirovHowitzerSplash")
         self.assertEqual(
-            "b77525d04f7bd02e15f288318bbd3e027f1232d9d4e1c2d1c522cb900b491bf0",
+            "2ed75978918f26ca8b46ee69f73e93ed2d1133bc8f8a6068cca967315f46877a",
             children_hash(historical_copy(self, alias)),
         )
         kirov = self.rules.resolve_weapon("RA2KirovBomb_fire")

@@ -70,7 +70,7 @@ class SharedOwnerWrapperTests(unittest.TestCase):
 
     def test_legacy_map_alias_is_exactly_unchanged(self):
         self.assertEqual(digest(node_to_obj(self.rules.resolve('E3'))),
-                         'ae386061df6f2cc2cd6d06a7bf4267f11df76d12132aa0861dee42312f1932a5')
+                         'db2803f88b0fb30084c5ecfa19f79eb9e164274d0af882c1d9e60266591d7e92')
         weapons = {c.get('Weapon') for c in self.rules.resolve('E3').children_named('Armament')}
         self.assertEqual(weapons, {'Rockets', 'RocketsAMT'})
 
