@@ -344,6 +344,11 @@ namespace OpenRA.Mods.Cameo.Traits
 				AppendString(lines, "outcome", Outcome(player.WinState));
 				AppendString(lines, "personality", recorder?.CurrentPersonality ?? "");
 				AppendNumber(lines, "personality_switches", recorder?.PersonalitySwitches ?? 0);
+				var priorsStates = player.PlayerActor.TraitsImplementing<OpenRA.Mods.CA.Traits.BotModuleLogic.IBotEngagementPriors>()
+					.Select(p => p.PriorsState).Where(s => s != null).ToArray();
+				if (priorsStates.Length > 0)
+					AppendString(lines, "priors_state", string.Join("+", priorsStates));
+
 				AppendTimeline(lines, recorder?.PersonalityTimeline);
 				AppendString(lines, "composition", recorder?.CurrentComposition ?? "");
 				AppendNumber(lines, "composition_switches", recorder?.CompositionSwitches ?? 0);

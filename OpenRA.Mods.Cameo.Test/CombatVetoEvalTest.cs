@@ -41,6 +41,14 @@ namespace OpenRA.Mods.Cameo.Test
 			public int CorrectionMilli(BotUnitProfile attacker, BotUnitProfile target) => milli;
 		}
 
+		sealed class StubExponent : IBotEngagementPriors
+		{
+			readonly int alpha;
+			public StubExponent(int alpha) { this.alpha = alpha; }
+			public int CorrectionMilli(BotUnitProfile attacker, BotUnitProfile target) => 1000;
+			public int AttritionExponentMilli => alpha;
+		}
+
 		sealed class StubCombatVeto : IBotCombatVeto, IDisabledTrait
 		{
 			public int Calls;
@@ -105,6 +113,26 @@ namespace OpenRA.Mods.Cameo.Test
 			var corrected = CombatVetoEval.Predict(forces, forces, new StubPriors(500)).Ratio;
 			Assert.That(neutral, Is.EqualTo(1).Within(1e-9));
 			Assert.That(corrected, Is.LessThan(neutral));
+		}
+
+		[Test]
+		public void AttritionExponentWarpsTheRatio()
+		{
+			// The fitter's AttritionExponentMilli applies as ratio^alpha on the aggregate, fractions
+			// re-derived; alpha>1000 sharpens a predicted win, alpha<1000 dampens it, 1000 is inert.
+			var tank = Unit("tank", 400, "Heavy", 2);
+			var own = new[] { (tank, 12) };
+			var foes = new[] { (tank, 10) };
+			var square = CombatVetoEval.Predict(own, foes, null).Ratio;
+			var sharpened = CombatVetoEval.Predict(own, foes, new StubExponent(1500));
+			var dampened = CombatVetoEval.Predict(own, foes, new StubExponent(500));
+			var inert = CombatVetoEval.Predict(own, foes, new StubExponent(1000));
+			Assert.That(square, Is.GreaterThan(1));
+			Assert.That(sharpened.Ratio, Is.EqualTo(Math.Pow(square, 1.5)).Within(1e-9));
+			Assert.That(dampened.Ratio, Is.EqualTo(Math.Sqrt(square)).Within(1e-9));
+			Assert.That(inert.Ratio, Is.EqualTo(square).Within(1e-9));
+			Assert.That(sharpened.OwnSurvivingFraction, Is.EqualTo(Math.Sqrt(1 - 1 / sharpened.Ratio)).Within(1e-9));
+			Assert.That(sharpened.EnemySurvivingFraction, Is.EqualTo(0));
 		}
 
 		[Test]

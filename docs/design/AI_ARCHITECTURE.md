@@ -3629,6 +3629,12 @@ percent the cell was fitted on (fitter default 100). At match start `BotUnitProf
 the tag's resolved Versus table; a cell whose prior moved reverts to neutral — a rebalance invalidates exactly the
 cells that shifted, not the whole file (the earlier global `StatFingerprint` gate is retired). `LedgerHash` remains
 offline provenance only — the balance ledgers are not mounted in-match. The code stays stat-normalised per fleet rule.
+The fitter's `AttritionExponentMilli` is consumed through `IBotEngagementPriors.AttritionExponentMilli` (default
+1000): `CombatVetoEval` applies `ratio^alpha` on the aggregate prediction and re-derives surviving fractions, bounded
+to the same [500, 2000] knob range — alpha in [0.5, 2.0], the pure square law when absent or disabled. Observability:
+the provider's `PriorsState` (`none` / `error` / `fitted:N/stale:M`, stale read live) lands on the match record's
+`priors_state` player field, and `tier1_priors` joined `UnitCompositionsBotModule.WatchConditions` — the priors shift
+veto verdicts, so they belong in the armed-set attribution (§12.33) alongside `combatveto` itself.
 
 **Perf**: per-squad verdict cached `VetoCacheTicks` (25); the launch check runs once per `AttackForceInterval`;
 the delivery-tag map resolves once per mod load (`BotUnitProfiles` static); no per-tick world enumeration beyond
