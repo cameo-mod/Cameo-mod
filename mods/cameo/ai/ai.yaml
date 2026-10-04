@@ -3967,7 +3967,8 @@ Player:
 	# bridge huts - worst damage first, one repairer per hut - and a production request asks for a
 	# repairer when none exists at all (capped by MaximumRepairers, gated on RepairsBridgesInfo +
 	# BuildableInfo). Claims each repairer (BotLeasePurpose.Repair) so squads cannot re-draft it
-	# mid-walk. EngineerBotModule keeps its own RepairBridge job meanwhile.
+	# mid-walk. While this module is enabled, EngineerBotModule drops its own RepairBridge job
+	# (repairJobs excludes it via the enabled-trait check) - one owner per hut.
 	# `genericbot && cn3_bridge_repair`: off on master until the increment A/B arms it.
 	BridgeRepairBotModule:
 		RequiresCondition: genericbot && cn3_bridge_repair
@@ -4864,27 +4865,44 @@ Player:
 	# GC-1 (AI_ARCHITECTURE §12.19): when the garrison-contest switch arms, the CA loader yields the genericbot
 	# slice to GarrisonContestBotModule - it picks targets nearest-first with leases, not map-random, and its
 	# infantry cannot be squad-drafted mid-walk. One owner per decision, same pattern as cn3_bridge_repair.
+	# AR-12: cn2_garrison_defense yields the same slice for own garrisons - GarrisonDefenseBotModule mans own
+	# buildings with leases and threat-matched specialists, so both successor scopes exclude the CA loader.
+	# With only one successor armed the other scope (neutral or own) stays unmanned on genericbot until the
+	# second switch arms; classicbot keeps the CA loader untouched either way.
 	LoadGarrisonerBotModuleCA@Infantry:
-		RequiresCondition: classicbot || (genericbot && !garrison_contest)
+		RequiresCondition: classicbot || (genericbot && !garrison_contest && !cn2_garrison_defense)
 		PassengersPerScan: 6
 		GarrisonerUnit: td_gdi_minigunner, td_nod_minigunner, td_gdi_grenadier, td_gdi_rocketsoldier, td_nod_rocketsoldier, td_nod_flamethrower, td_nod_chemicalwarrior, e3chem, td_nod_lasertrooper, td_nod_blackhandflamer, td_nod_stealthsoldier, td_gdi_shotgunner, td_gdi_sonicmissilesoldier, td_gdi_heavysniper, ra1_allies_rifleinfantry, ra1_soviets_rifleinfantry, japan_imperialscoutsman, ra1_soviets_rocketsoldier, japan_tankbuster, ra1_soviets_shocktrooper, ra1_soviets_mortarsoldier, japan_archermaiden, ra1_soviets_grenadier, ra1_soviets_flamethrower, japan_japaneseflamethrower, ra1_allies_sniper, ra1_allies_machinegunner, ra1_soviets_firerocketsoldier, ra2_allies_gi, ra2ggi, ra2_allies_seal, ra2_soviets_conscript, ra2_soviets_teslatrooper, ra2_soviets_flaktrooper, ra2_soviets_desolator, ra2_allies_sniper, yuri_initiate, yuri_virus, asianalliance_militia, asianalliance_tankkiller, asianalliance_flametrooper, asianalliance_plasmatrooper, asianalliance_fanatic, asianalliance_veteranarcher, asianalliance_asdf, light_inf, ixian_heavy_inf, trooper, ixian_shockinfantry, ixian_storminfantry, steelconsortium_clonetrooper, steelconsortium_hoverboardgrenadier, steelconsortium_quantummissiletrooper, latinsyndicate_latinmilitia, latinsyndicate_tankkiller, latinsyndicate_freedomfighter, latinsyndicate_latinflametrooper, latinsyndicate_narco, naxis_naxiriflesoldier, naxis_naxiriflerecruit, naxis_sssoldier, naxis_naximercenarysniper, naxis_panzerschreck, naxis_panzerfausttrooper, schwarzermond_lunarsoldier, schwarzermond_lunarrocket, schwarzermond_ubermensch, futuretech_enforcer, futuretech_javelinsoldier, terran_marine, terran_firebat, terran_marauder, terran_ghost, terran_madcap, terran_harakan, terran_specter, zerg_spithid, wc2_humans_elvenarcher, wc2_humans_elvenranger, wc2_orcs_trollaxethrower, wc2_orcs_trollberserker, tkm_rifleman, tkm_juggernaut, tkm_trooper, tkm_rocketeer, tkm_spetsnaz, atreides_lightinfantry, corrino_lightinfantry, harkonnen_lightinfantry
 	LoadCargoBotModule@Infantry:
-		RequiresCondition: genericbot || classicbot
+		# AR-9: classicbot only — genericbot runs LoadCargoBotModuleAS (lease-aware port); the classic
+		# module has no lease claim and its "All" load requirement can yank mid-mission squad infantry.
+		RequiresCondition: classicbot
 		TransportTypesAndLoadRequirement:
 			miss: All
 			ramiss: All
 			fcom: All
 		PassengerTypes: td_gdi_minigunner, td_nod_minigunner, td_gdi_grenadier, td_gdi_rocketsoldier, td_nod_rocketsoldier, td_nod_flamethrower, td_nod_chemicalwarrior, e3chem, td_nod_lasertrooper, td_nod_blackhandflamer, td_nod_stealthsoldier, td_gdi_shotgunner, td_gdi_sonicmissilesoldier, td_gdi_heavysniper, ra1_allies_rifleinfantry, ra1_soviets_rifleinfantry, japan_imperialscoutsman, ra1_soviets_rocketsoldier, japan_tankbuster, ra1_soviets_shocktrooper, ra1_soviets_mortarsoldier, japan_archermaiden, ra1_soviets_grenadier, ra1_soviets_flamethrower, japan_japaneseflamethrower, ra1_allies_sniper, ra1_allies_machinegunner, ra1_soviets_firerocketsoldier, ra2_allies_gi, ra2ggi, ra2_allies_seal, ra2_soviets_conscript, ra2_soviets_teslatrooper, ra2_soviets_flaktrooper, ra2_soviets_desolator, ra2_allies_sniper, yuri_initiate, yuri_virus, asianalliance_militia, asianalliance_tankkiller, asianalliance_flametrooper, asianalliance_plasmatrooper, asianalliance_fanatic, asianalliance_veteranarcher, asianalliance_asdf, light_inf, ixian_heavy_inf, trooper, ixian_shockinfantry, ixian_storminfantry, steelconsortium_clonetrooper, steelconsortium_hoverboardgrenadier, steelconsortium_quantummissiletrooper, latinsyndicate_latinmilitia, latinsyndicate_tankkiller, latinsyndicate_freedomfighter, latinsyndicate_latinflametrooper, latinsyndicate_narco, naxis_naxiriflesoldier, naxis_naxiriflerecruit, naxis_sssoldier, naxis_naximercenarysniper, naxis_panzerschreck, naxis_panzerfausttrooper, schwarzermond_lunarsoldier, schwarzermond_lunarrocket, schwarzermond_ubermensch, futuretech_enforcer, futuretech_javelinsoldier, terran_marine, terran_firebat, terran_marauder, terran_ghost, terran_madcap, terran_harakan, terran_specter, zerg_spithid, wc2_humans_elvenarcher, wc2_humans_elvenranger, wc2_orcs_trollaxethrower, wc2_orcs_trollberserker, tkm_rifleman, tkm_juggernaut, tkm_trooper, tkm_rocketeer, tkm_spetsnaz, atreides_lightinfantry, atreides_rockettrooper, atreides_engineer, atreides_fremen, harkonnen_lightinfantry, harkonnen_rockettrooper, harkonnen_engineer, harkonnen_sardaukar, corrino_lightinfantry, corrino_engineer, corrino_trooper, corrino_sardaukar_bazooka, corrino_sardaukar_berserker, corrino_sardaukar_sword, corrino_sardaukar_javelin, corrino_sardaukar_laser
 		ValidTransportOwner: AlliedBot
+	LoadCargoBotModuleAS@Infantry:
+		# AR-9 genericbot twin: lease-aware port; empty lists resolve from the @Infantry classic block.
+		RequiresCondition: genericbot
+		ValidTransportOwner: AlliedBot
 	LoadCargoBotModule@TankBunker:
-		RequiresCondition: genericbot || classicbot
+		RequiresCondition: classicbot
 		TransportTypesAndLoadRequirement:
 		PassengerTypes: td_nod_reconbike, td_nod_lighttank, td_gdi_battletank, td_gdi_mammothtank, td_nod_artillery, td_gdi_mlrs, td_gdi_archerartillery, td_nod_ssmlauncher, td_gdi_predatortank, td_gdi_mammothtankmkiii, td_nod_chemicalattackbike, td_nod_lighttankmkii, ra1_allies_lighttank, ra1_allies_mediumtank, ra1_soviets_heavytank, ra1_soviets_mammothtank, ra1_allies_artillery, ra1_allies_sheridanassaulttank, modtnkd2, ra1_allies_tigerheavytank, ra1_soviets_v1rockettruck, ra1_soviets_v2rocketlauncher, ra1_soviets_gatlingtank, ra1_soviets_teslatank, ra1_soviets_heavyteslatank, ra1_soviets_siegemammothtank, ra1_soviets_kotinnucleartank, ra1_soviets_nuclearv2launcher, japan_igomediumtank, japan_nanodronebuggy, japan_armoredcar, japan_chihaheavytank, japan_hovercraftflametank,  japan_grenadebuggy, japan_waveforcetank, japan_waveforceartillery, ra2_allies_grizzlytank, ra2_allies_miragetank, ra2_allies_prismtank, ra2_allies_ifv, ra2_allies_tankdestroyer, yrrobo, ra2_soviets_flaktrack, ra2_soviets_rhinoheavytank, ra2_soviets_apocalypsetank, ra2_soviets_teslatank, ra2_soviets_v3rocketlauncher, yuri_lashertank, yuri_gatlingtank, yuri_magnetron, asianalliance_quasar, asianalliance_lynxtank, asianalliance_pulverizer, asianalliance_ptnk, asianalliance_howitzer, asianalliance_viper, asianalliance_pulverizermecha, asianalliance_railguntank, asianalliance_heavyrailguntank, siege_tank, ixian_ixcombatsiege, ixian_duelist_tank, ixian_kodatank, ixian_ixmissiletank, steel_qutnk, terran_vulture, terran_siegetank, terran_goliath, terran_matador, terran_goliathmk2
 		ValidTransportOwner: AlliedBot
+	LoadCargoBotModuleAS@TankBunker:
+		RequiresCondition: genericbot
+		ValidTransportOwner: AlliedBot
 	LoadCargoBotModule@Battery:
-		RequiresCondition: genericbot || classicbot
+		RequiresCondition: classicbot
 		TransportTypesAndLoadRequirement:
 		PassengerTypes: td_gdi_minigunner, td_nod_minigunner, ra1_allies_rifleinfantry, ra1_soviets_rifleinfantry, japan_imperialscoutsman, ra2_allies_gi, ra2_soviets_conscript, yuri_initiate, light_inf, asianalliance_militia, steelconsortium_clonetrooper, latinsyndicate_latinmilitia, naxis_naxiriflesoldier, naxis_naxiriflerecruit, schwarzermond_lunarsoldier, terran_marine, tkm_rifleman, futuretech_enforcer
+		ValidTransportOwner: AlliedBot
+		ScanTick: 799
+	LoadCargoBotModuleAS@Battery:
+		RequiresCondition: genericbot
 		ValidTransportOwner: AlliedBot
 		ScanTick: 799
 	MinelayerBotModule:
