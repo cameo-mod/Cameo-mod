@@ -1,3 +1,15 @@
+# 2026-10-04 (later) — NOVA N1 follow-up `21781e27b`: exponent consumed + priors observability
+
+*Devin (nova), same branch `devin/nova/t2-port`.* The first pass parsed `AttritionExponentMilli`
+but never applied it — the pair-level `CorrectionMilli` seam cannot express a ratio warp. Added
+`IBotEngagementPriors.AttritionExponentMilli` (default 1000); `CombatVetoEval` applies
+`ratio^alpha` and re-derives surviving fractions (Lanchester invariant preserved), clamped to the
+existing [500, 2000] bounds. Provider `PriorsState` (`none`/`error`/`fitted:N/stale:M`, live stale
+count) now lands on the match record's `priors_state` so the A/B review sees unfitted/stale matches
+without digging debug logs; parse failure = `error` + neutral instead of a BotTick throw.
+`tier1_priors` added to `WatchConditions` — it shifts veto verdicts, so it filters which
+engagements exist (§12.33 armed-set attribution). 841/841, audits + boot PASS.
+
 # 2026-10-04 — feat(ai): NOVA round-2 N1 — the tier-2 follow-up port, one branch off master
 
 *Devin (nova), worktree `C:/cameo-wt/nova-t2port`, branch `devin/nova/t2-port` off `origin/master` @
