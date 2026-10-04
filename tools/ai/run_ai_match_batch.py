@@ -369,10 +369,11 @@ def mp_spawn_cells(map_text: str) -> list[tuple[int, int]]:
     the same order, so entry 0 is Multi0's home cell, entry 1 is Multi1's."""
     cells = []
     for match in re.finditer(
-        r"^\t\w+: mpspawn\n\t\tOwner: \w+\n\t\tLocation: (\d+),(\d+)$",
+        r"^\t\w+: mpspawn\n(?:\t\tOwner: \w+\n\t\tLocation: (\d+),(\d+)|\t\tLocation: (\d+),(\d+)\n\t\tOwner: \w+)$",
         map_text, re.MULTILINE,
     ):
-        cells.append((int(match.group(1)), int(match.group(2))))
+        # yaml field order is not semantic — deterring-democracy writes Location before Owner.
+        cells.append((int(match.group(1) or match.group(3)), int(match.group(2) or match.group(4))))
     if len(cells) < 2:
         fail("real-map mode needs a map with at least two mpspawn actors")
     return cells
