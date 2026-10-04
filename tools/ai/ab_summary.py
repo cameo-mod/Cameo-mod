@@ -103,7 +103,7 @@ def main(argv: list[str]) -> int:
     # Watchdog counters (LC5 `ownership`, §19.6 `order_gate`): summed per bot
     # type across the corpus. Absent fields (pre-#695/#699 records, classic)
     # contribute nothing, so the block prints only what the data carries.
-    health = collections.defaultdict(lambda: {"own": collections.Counter(), "gate": collections.Counter()})
+    health = collections.defaultdict(lambda: {"own": collections.Counter(), "gate": collections.Counter(), "ex": {}})
     for uid, recs in games.items():
         if len(recs) != 2:
             continue
@@ -130,6 +130,11 @@ def main(argv: list[str]) -> int:
                 for k, v in own.items():
                     if k != "by_type" and isinstance(v, int):
                         health[bot]["own"][k] += v
+                # First example per kind names a concrete unit behind a count
+                # (LC5-DETAIL: counts alone left a double_owner unrecoverable).
+                for e in own.get("examples") or []:
+                    if isinstance(e, dict):
+                        health[bot]["ex"].setdefault(e.get("kind"), (r.get("game_uid"), e))
             gate = r.get("order_gate")
             if isinstance(gate, dict):
                 for k, v in gate.items():
@@ -161,6 +166,9 @@ def main(argv: list[str]) -> int:
         if h["gate"]:
             parts.append("order_gate[" + " ".join(f"{k}={v}" for k, v in sorted(h["gate"].items())) + "]")
         print(f"watchdogs `{bot}`: " + " ".join(parts))
+        for kind, (uid, e) in sorted(h["ex"].items()):
+            print(f"  first {kind}: {e.get('type')}#{e.get('actor_id')}@{e.get('tick')} "
+                  f"\"{e.get('detail', '')}\" (game {uid})")
     mixed = False
     for f, arms in arm_fingerprints(paths):
         fps = sorted(k for k in arms if k) or [None]

@@ -1,3 +1,15 @@
+# 2026-10-03 — LC5-DETAIL: ownership examples in the match record (unrecoverable double_owner)
+
+*Devin (T2Verify), `devin/lc5-violation-detail` on master@8e86fca23.* The A/B `all` arm's `double_owner=1`
+(4e90ba7a, Multi0 hard, td_gdi_minigunner) could not be traced: `BotOwnershipWatchdog` built the holder detail
+but only `Log.Write("debug")` received it and every launch rewrites `debug.log`. The match record now carries
+`ownership.examples`: the first `ViolationExamplesPerKind` (Info, default 5) violations per kind as
+`{kind, tick, type, actor_id, detail}` — `detail` names the holders (`rush/Assault#0 + lease
+GarrisonContestBotModule`). `BotOwnershipViolationExamples` caps per kind; `AppendOwnership` emits it sorted
+(kind, tick, type, id) next to `by_type`; `ab_summary.py` prints the first example per kind under the watchdog
+line; AI_MATCH_LOG.md documents the block. Record-only: no orders, no behaviour change. Gates: build 0 err /
+0 mod warnings (8 engine StyleCop), 835/835 tests, fog 80f/263s PASS, mutation 156f/0 PASS, boot gate PASS.
+
 # 2026-10-03 — coordinator: tier-3 hotfix (INC c) + ORDERS round 2 to NOVA/DAWN/EMBER
 
 *Claude.* INC c `3c793d4c3` = DAWN `18556ada5` (GetVariableObservers `override` + base: tier 3 was permanently disabled

@@ -146,18 +146,20 @@ namespace OpenRA.Mods.Cameo.Traits
 		// destroyed, and what it destroyed by victim type — the input of the offline fitter (CA-1b) and the
 		// per-enemy-faction profiles (DESIGN.md §19.2).
 		/// <summary>
-		/// LC5: the ownership watchdog's distinct violations for this bot, by kind and by actor type. Absent when the
-		/// watchdog did not run (a match with a human, or a bot without it), so "no field" never reads as "no violations".
+		/// LC5: the ownership watchdog's distinct violations for this bot, by kind and by actor type, plus the first
+		/// few violations of each kind with the holder detail (`examples`). Absent when the watchdog did not run
+		/// (a match with a human, or a bot without it), so "no field" never reads as "no violations".
 		/// </summary>
 		internal static void AppendOwnership(StringBuilder builder, BotModules.BotOwnershipWatchdog watchdog)
 		{
 			if (watchdog != null)
-				AppendOwnership(builder, watchdog.Passes, watchdog.Counts, watchdog.CountsByType);
+				AppendOwnership(builder, watchdog.Passes, watchdog.Counts, watchdog.CountsByType, watchdog.ExamplesByKind);
 		}
 
 		internal static void AppendOwnership(StringBuilder builder, int checks,
 			IReadOnlyDictionary<BotModules.BotOwnershipViolation, int> counts,
-			IReadOnlyDictionary<(BotModules.BotOwnershipViolation Kind, string Type), int> byType)
+			IReadOnlyDictionary<(BotModules.BotOwnershipViolation Kind, string Type), int> byType,
+			IReadOnlyDictionary<BotModules.BotOwnershipViolation, List<(int Tick, string Type, uint ActorId, string Detail)>> examples = null)
 		{
 			AppendObjectPropertyStart(builder, "ownership");
 			AppendNumber(builder, "checks", checks, true);
@@ -178,6 +180,25 @@ namespace OpenRA.Mods.Cameo.Traits
 				AppendNumber(builder, "units", count);
 				builder.Append('}');
 			}
+
+			builder.Append(']');
+			AppendArrayPropertyStart(builder, "examples");
+			i = 0;
+			if (examples != null)
+				foreach (var (kind, list) in examples.OrderBy(kv => kv.Key))
+					foreach (var e in list.OrderBy(e => e.Tick).ThenBy(e => e.Type, StringComparer.Ordinal).ThenBy(e => e.ActorId))
+					{
+						if (i++ > 0)
+							builder.Append(',');
+
+						AppendObjectStart(builder);
+						AppendString(builder, "kind", SnakeCase(kind.ToString()), true);
+						AppendNumber(builder, "tick", e.Tick);
+						AppendString(builder, "type", e.Type);
+						AppendNumber(builder, "actor_id", (long)e.ActorId);
+						AppendString(builder, "detail", e.Detail);
+						builder.Append('}');
+					}
 
 			builder.Append("]}");
 		}

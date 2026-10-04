@@ -176,6 +176,36 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		}
 	}
 
+	/// <summary>
+	/// The bounded holder detail behind the match record's `ownership.examples`: the first `limit`
+	/// violations of each kind, in report order. The counts alone could not name their unit — a
+	/// `double_owner=1` line was unrecoverable once the debug log rolled, which is why this exists.
+	/// </summary>
+	public sealed class BotOwnershipViolationExamples
+	{
+		readonly Dictionary<BotOwnershipViolation, List<(int Tick, string Type, uint ActorId, string Detail)>> byKind = new();
+		readonly int limit;
+
+		public BotOwnershipViolationExamples(int limit)
+		{
+			this.limit = Math.Max(0, limit);
+		}
+
+		public IReadOnlyDictionary<BotOwnershipViolation, List<(int Tick, string Type, uint ActorId, string Detail)>> ByKind => byKind;
+
+		/// <summary>Keeps the violation while its kind is under the cap; report order is the kept order.</summary>
+		public void Add(BotOwnershipViolation kind, int tick, string type, uint actorId, string detail)
+		{
+			if (limit == 0)
+				return;
+
+			if (!byKind.TryGetValue(kind, out var list))
+				byKind[kind] = list = new List<(int Tick, string Type, uint ActorId, string Detail)>();
+			if (list.Count < limit)
+				list.Add((tick, type, actorId, detail));
+		}
+	}
+
 	[TraitLocation(SystemActors.Player)]
 	[Desc("LC5 (AI_MASTER_PLAN §3): the ownership watchdog. Every CheckIntervalTicks it reads who holds each of this bot's",
 		"units — the LC1 lease registry, every squad manager's squads and idle pool — and logs, once per unit, any broken",
@@ -198,6 +228,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		[Desc("Also run in matches with a human player (normally only bot-only matches and Debug.BotDebug).")]
 		public readonly bool AlwaysActive = false;
 
+		[Desc("The first N violations of each kind kept with their holder detail for the match record's",
+			"ownership.examples — 0 records counts only.")]
+		public readonly int ViolationExamplesPerKind = 5;
+
 		public override object Create(ActorInitializer init) { return new BotOwnershipWatchdog(init.Self, this); }
 	}
 
@@ -206,6 +240,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		readonly World world;
 		readonly OpenRA.Player player;
 		readonly BotOwnershipLedger<Actor> ledger = new();
+		readonly BotOwnershipViolationExamples examples;
 
 		// Each squad manager hands its live idle-pool list to every IBotNotifyIdleBaseUnits; the lists are the managers'
 		// own, so reading them each pass sees the current pool without touching the squad manager.
@@ -220,6 +255,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		{
 			world = self.World;
 			player = self.Owner;
+			examples = new BotOwnershipViolationExamples(info.ViolationExamplesPerKind);
 		}
 
 		public int Passes => ledger.Passes;
@@ -228,6 +264,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		/// <summary>(violation, actor type) → distinct units, for the match log.</summary>
 		public IReadOnlyDictionary<(BotOwnershipViolation Kind, string Type), int> CountsByType => byType;
+
+		/// <summary>kind → the first ViolationExamplesPerKind violations with tick, actor type, id and holders.</summary>
+		public IReadOnlyDictionary<BotOwnershipViolation, List<(int Tick, string Type, uint ActorId, string Detail)>> ExamplesByKind => examples.ByKind;
 
 		void IBotNotifyIdleBaseUnits.UpdatedIdleBaseUnits(List<UnitWposWrapper> unitsHangingAroundTheBase)
 		{
@@ -308,6 +347,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			{
 				var type = actor.Info.Name;
 				byType[(kind, type)] = byType.GetValueOrDefault((kind, type)) + 1;
+				examples.Add(kind, world.WorldTick, type, actor.ActorID, detail);
 				Log.Write("debug", $"AI {player.InternalName}: LC5 OWNERSHIP {kind.ToString().ToUpperInvariant()} {type} {actor.ActorID}: {detail} tick={world.WorldTick}");
 			}
 
