@@ -1,3 +1,22 @@
+# 2026-10-04 — REF-1 silo containment (maintainer report: "silos everywhere")
+
+*Devin (T2Verify), branch `devin/ref1-refinery-law-v2`.* Maintainer observed bots spamming silos everywhere.
+Root cause: REF-1's healthy refinery economy keeps resource storage above the classic 80% override
+(`BaseBuilderQueueManagerCA` "head room for resource storage") permanently, so the silo priority override won
+nearly every building pick — and every produced silo (non-`GivesBuildableArea`, useless as a link per the B1
+ruling) then took the 50% organic `BaseCrawl` roll onto the frontier. Two law-scoped fixes: (a) production —
+the override fires only when storage is >95% full AND no silo is already in production, otherwise the queue
+spends on production/defence (maintainer: "better to just build more production buildings and spend the
+money"); (b) placement — the organic `BaseCrawl` roll requires `GivesBuildableArea` under the law, so a
+produced silo places at home instead of crawling (the check precedes the draw — no random consumed).
+Classic and switch-off keep the 80% override and the unfiltered roll. Build 0 err / 8 pre-existing warns,
+856/856 tests, fog + mutation audits PASS, boot gate PASS. AI_ARCHITECTURE §12.24 records the ruling.
+Takeover-stance (peer): user-reported "takeover AI won't attack buildings" is already fixed on
+`devin/t3verify/bot-takeover@c05e247bd` (+f475f1881) — `AutoTarget` resolved human `InitialStance` (Defend)
+because `Player.IsBot` stays false for taken-over seats; not yet on master. Army stutter (peer): prime
+suspect is §12.7 `IssueFormationOrders` pace-lock + `leaderWaitCheck` stop alternation
+(`GroundStatesCA`), secondary the live concave deploy prong re-issues — flagged to the squad owners.
+
 # 2026-10-04 — REF-1 smoke verdicts on d578534c3 (B1 correction build)
 
 *Devin (T2Verify), branch `devin/ref1-refinery-law-v2`.* Re-smoke after the B1 link-legality correction:

@@ -357,7 +357,13 @@ namespace OpenRA.Mods.CA.Traits
 								type = BuildingType.Defense;
 						}
 					}
-					else if (!limitBuildRadius && valueInfo != null && valueInfo.Cost < baseBuilder.Info.BaseCrawlCostThreshold && world.LocalRandom.Next(100) < baseBuilder.Info.BaseCrawlChance)
+					// REF-1 (B1 maintainer ruling): a crawl placement must extend the buildable area —
+					// under the law, buildings without GivesBuildableArea (silos) never take the
+					// organic crawl roll and place at home instead; the GBA check precedes the draw
+					// so it consumes no randoms on the law path.
+					else if (!limitBuildRadius && valueInfo != null && valueInfo.Cost < baseBuilder.Info.BaseCrawlCostThreshold
+						&& (law == null || actorInfo.HasTraitInfo<GivesBuildableAreaInfo>())
+						&& world.LocalRandom.Next(100) < baseBuilder.Info.BaseCrawlChance)
 						type = BuildingType.BaseCrawl;
 
 					// REF-1 B1 (crawl-trace §8): under the law a crawl placement with no aim holds — returning
@@ -754,7 +760,16 @@ namespace OpenRA.Mods.CA.Traits
 			}
 
 			// Create some head room for resource storage if we really need it
-			if (playerResources.Resources > 0.8 * playerResources.ResourceCapacity)
+			// REF-1 (maintainer): under the law the 80% override spammed silos — a healthy refinery
+			// economy keeps storage above 80% permanently, so the override won every pick. Silos stay
+			// wanted only when storage is nearly full and no silo is already in production; otherwise
+			// the queue spends on production/defence instead.
+			var wantSilo = playerResources.Resources > 0.8 * playerResources.ResourceCapacity;
+			if (wantSilo && law != null)
+				wantSilo = playerResources.Resources > 0.95 * playerResources.ResourceCapacity
+					&& !(baseBuilder.BuildingsBeingProduced?.Keys.Any(baseBuilder.Info.SiloTypes.Contains) ?? false);
+
+			if (wantSilo)
 			{
 				var silo = GetProducibleBuilding(baseBuilder.Info.SiloTypes, buildableThings);
 				if (silo != null && HasSufficientPowerForActor(silo))

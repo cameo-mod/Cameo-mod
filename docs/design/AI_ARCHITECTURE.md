@@ -3346,6 +3346,12 @@ placement ("base" reason, 4-14 cells from the spreader). v2:
   `LinkBuildingWanted`, `McvDue`, `MissingPrerequisiteTokens`, `RefineryEstimateOrFallback`,
   `RefineryLawNudge.Due`, `CrawlLinkRequiresBuildableAreaAndPrefersPowerPlants`, and the two new `ClaimOrder`
   counters.
+* **Silo containment (maintainer report 2026-10-04):** the law's healthy refinery economy kept resource storage
+  above the classic 80% override permanently, so the silo priority override won nearly every building pick and
+  each produced silo (non-GBA, useless as a link) took the organic crawl roll onto the frontier. Under the law
+  the override fires only when storage is nearly full (>95%) AND no silo is already in production, and the
+  organic `BaseCrawl` roll requires `GivesBuildableArea` — silos place at home and the queue spends on
+  production/defence instead. Classic and switch-off keep the 80% override and the unfiltered roll.
 
 ### 12.25 BO — the building build-order lab: log, score, tune, personalise, learn, react (maintainer 2026-10-02; owner Claude)
 
