@@ -362,7 +362,7 @@ namespace OpenRA.Mods.CA.Traits
 					// organic crawl roll and place at home instead; the GBA check precedes the draw
 					// so it consumes no randoms on the law path.
 					else if (!limitBuildRadius && valueInfo != null && valueInfo.Cost < baseBuilder.Info.BaseCrawlCostThreshold
-						&& (law == null || actorInfo.HasTraitInfo<GivesBuildableAreaInfo>())
+						&& RefineryLawCrawlRoll.LegalLink(law != null, actorInfo)
 						&& world.LocalRandom.Next(100) < baseBuilder.Info.BaseCrawlChance)
 						type = BuildingType.BaseCrawl;
 

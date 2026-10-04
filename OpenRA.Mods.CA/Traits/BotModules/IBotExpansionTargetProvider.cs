@@ -10,6 +10,7 @@
 #endregion
 
 using System.Collections.Generic;
+using OpenRA.Mods.Common.Traits;
 
 namespace OpenRA.Mods.CA.Traits
 {
@@ -153,5 +154,18 @@ namespace OpenRA.Mods.CA.Traits
 			lawActive
 				? resources > 0.95 * capacity && !siloInProduction
 				: resources > 0.8 * capacity;
+	}
+
+	/// <summary>
+	/// REF-1 silo containment, placement side (B1 maintainer ruling): a crawl placement must extend the
+	/// buildable area, so under the law only buildings with GivesBuildableArea may take the organic
+	/// BaseCrawl roll. The predicate is checked before the roll's random draw — a law-blocked building
+	/// consumes no randoms (determinism: the draw count must not depend on which building is produced).
+	/// Classic and switch-off keep the unfiltered roll.
+	/// </summary>
+	public static class RefineryLawCrawlRoll
+	{
+		public static bool LegalLink(bool lawActive, ActorInfo actorInfo) =>
+			!lawActive || actorInfo.HasTraitInfo<GivesBuildableAreaInfo>();
 	}
 }
