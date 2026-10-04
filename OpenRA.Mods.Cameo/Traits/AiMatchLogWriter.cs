@@ -43,6 +43,7 @@ namespace OpenRA.Mods.Cameo.Traits
 		bool written;
 		bool eligibleAtWorldLoad;
 		int nextAttemptTick;
+		BotTakeoverTracker takeover;
 		readonly Dictionary<OpenRA.Player, List<int[]>> samples = new();
 
 		public AiMatchLogWriter(AiMatchLogWriterInfo info)
@@ -52,9 +53,13 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		void IWorldLoaded.WorldLoaded(World world, WorldRenderer worldRenderer)
 		{
+			takeover = world.WorldActor.TraitOrDefault<BotTakeoverTracker>();
+
 			// Save replay-in eventually clears IsLoadingGameSave. Keep the exclusion
 			// for this world's entire lifetime, including its eventual GameOver.
-			eligibleAtWorldLoad = Eligible(world.Type, world.IsReplay, world.IsLoadingGameSave, Game.IsHost);
+			// The owner check (admin host or elected takeover controller) is deferred to
+			// capture: the controller is only elected once the tracker itself loads.
+			eligibleAtWorldLoad = Eligible(world.Type, world.IsReplay, world.IsLoadingGameSave, host: true);
 			if (!eligibleAtWorldLoad)
 			{
 				written = true;
@@ -96,7 +101,7 @@ namespace OpenRA.Mods.Cameo.Traits
 			if (written)
 				return;
 
-			if (!eligibleAtWorldLoad || world.Type != WorldType.Regular || world.IsReplay || !Game.IsHost)
+			if (!eligibleAtWorldLoad || world.Type != WorldType.Regular || world.IsReplay || !IsLogOwner())
 			{
 				written = true;
 				return;
@@ -122,11 +127,27 @@ namespace OpenRA.Mods.Cameo.Traits
 			}
 		}
 
+		// Log ownership follows the elected takeover controller when the admin host drops
+		// mid-game: on a dedicated server a non-admin client can then be the only process
+		// still able to write the match record. While the admin is still connected the
+		// admin's process writes as before, so records never double up.
+		bool IsLogOwner()
+		{
+			return Game.IsHost || (takeover != null && takeover.IsLocalClientController && !takeover.AdminConnected);
+		}
+
+		// A seat converted to the takeover AI is a bot for logging purposes even though
+		// Player.IsBot stays false (the field is read-only engine state).
+		bool IsLoggedPlayer(OpenRA.Player player)
+		{
+			return IsLoggableBot(player) || (takeover != null && takeover.IsTakenOver(player));
+		}
+
 		// Fixed tick cadence, unlike PlayerStatistics' own graph samples, which follow wall-clock
 		// game time (every 3000 ticks at the harness's maximum speed, 750 at normal speed).
 		void Sample(World world)
 		{
-			foreach (var player in world.Players.Where(IsLoggableBot))
+			foreach (var player in world.Players.Where(IsLoggedPlayer))
 			{
 				var stats = player.PlayerActor.TraitOrDefault<PlayerStatistics>();
 				var resources = player.PlayerActor.TraitOrDefault<PlayerResources>();
@@ -293,10 +314,10 @@ namespace OpenRA.Mods.Cameo.Traits
 			builder.Append(']');
 		}
 
-		static bool AllBotsResolved(World world)
+		bool AllBotsResolved(World world)
 		{
 			return world.Players
-				.Where(IsLoggableBot)
+				.Where(IsLoggedPlayer)
 				.All(p => p.WinState != WinState.Undefined);
 		}
 
@@ -312,12 +333,14 @@ namespace OpenRA.Mods.Cameo.Traits
 				gameUid = fallbackGameUid;
 
 			var lines = new StringBuilder();
-			foreach (var player in world.Players.Where(IsLoggableBot))
+			foreach (var player in world.Players.Where(IsLoggedPlayer))
 			{
 				var recorder = player.PlayerActor.TraitOrDefault<AiMatchLogRecorder>();
 				var stats = player.PlayerActor.TraitOrDefault<PlayerStatistics>();
 				var resources = player.PlayerActor.TraitOrDefault<PlayerResources>();
 				var team = world.LobbyInfo.ClientWithIndex(player.ClientIndex)?.Team ?? 0;
+				TakeoverRecord takeoverRecord = null;
+				takeover?.TryGetTakeoverRecord(player, out takeoverRecord);
 
 				AppendObjectStart(lines);
 				AppendNumber(lines, "schema", 2, true);
@@ -332,7 +355,7 @@ namespace OpenRA.Mods.Cameo.Traits
 
 				AppendObjectPropertyStart(lines, "player");
 				AppendString(lines, "name", player.InternalName, true);
-				AppendString(lines, "bot_type", player.BotType);
+				AppendString(lines, "bot_type", player.BotType ?? takeoverRecord?.BotType);
 				AppendString(lines, "faction", player.Faction.InternalName);
 				AppendNumber(lines, "team", team);
 				AppendNumber(lines, "handicap", player.Handicap);
@@ -350,6 +373,17 @@ namespace OpenRA.Mods.Cameo.Traits
 				AppendCompositionTimeline(lines, recorder?.CompositionTimeline);
 				AppendEpisodeTimeline(lines, recorder?.EpisodeTimeline);
 				lines.Append('}');
+
+				// Takeover provenance for learning/A-B exclusion; absent for ordinary bots.
+				if (takeoverRecord != null)
+				{
+					AppendObjectPropertyStart(lines, "takeover");
+					AppendNumber(lines, "taken_over_at", takeoverRecord.Tick, true);
+					AppendString(lines, "trigger", takeoverRecord.Trigger == TakeoverTrigger.Surrender ? "surrender" : "disconnect");
+					AppendString(lines, "bot_type", takeoverRecord.BotType);
+					AppendNumber(lines, "controller_client", takeoverRecord.ControllerClientId);
+					lines.Append('}');
+				}
 
 				AppendObjectPropertyStart(lines, "stats");
 				AppendNumber(lines, "units_killed", stats?.UnitsKilled ?? 0, true);

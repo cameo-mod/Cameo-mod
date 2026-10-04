@@ -1,3 +1,18 @@
+# 2026-10-04 — Devin-T3Verify: TAKEOVER-IMPL phase 1 (hard AI replaces disconnected/surrendered players)
+
+*Devin.* `devin/t3verify/bot-takeover` in `C:/cameo-wt/takeover` (base origin/master `8e86fca23`). Phase 1 of the
+V2 survey design, maintainer rules 2026-10-04 (R4 rev 2: last undefeated PLAYER of any kind; disconnect always
+takeover). New: `BotTakeoverTracker` (world; synced connected-set, seat binding via `Player.InternalName == client.Slot`,
+deterministic controller = lowest electable client index, re-elected on every synced disconnect; last-player disconnect
+policy point default Takeover), `CameoValidateOrder` (stock `ValidateOrder` replaced in world.yaml — takeover seats pass
+only from the current controller), `CameoMissionObjectives : MissionObjectives, IResolveOrder` (re-listed interface;
+intercepts Surrender before ForceDefeat), lobby checkbox `bot_takeover` (LobbySystemActorConditionCheckbox, default ON),
+`AiMatchLogWriter` takeover block + log ownership follows elected controller once the admin drops (no double writes).
+MP-only (`EnableSingleplayer` gates the classic path). Gates: build 0 warn/0 err, 846/846 tests, fog + bot
+direct-mutation audits PASS, boot gate PASS. Multi-client smoke NOT run — the harness (`run_ai_match_batch.py`) is
+headless `Launch.Map` local-server, no real lobby human clients; needs a manual dedicated-server 2-client test.
+Phase 2 (lobby-bot failover on admin drop) explicitly out of scope.
+
 # 2026-10-03 — coordinator: tier-3 hotfix (INC c) + ORDERS round 2 to NOVA/DAWN/EMBER
 
 *Claude.* INC c `3c793d4c3` = DAWN `18556ada5` (GetVariableObservers `override` + base: tier 3 was permanently disabled
