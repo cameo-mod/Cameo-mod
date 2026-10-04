@@ -90,7 +90,11 @@ def scan_csharp():
             for i, m in enumerate(matches):
                 end = matches[i + 1].start() if i + 1 < len(matches) else len(text)
                 raw_bases = m.group("bases") or ""
-                bases = [b.strip() for b in strip_generics(raw_bases).split(",") if b.strip()]
+                # normalize namespace-qualified base names (FransCombatIntelBotModule
+                # implements OpenRA.Mods.CA.Traits.IBotEnemyCompositionProvider) — a
+                # qualified provider must still count as a provider.
+                bases = [b.strip().rsplit(".", 1)[-1]
+                         for b in strip_generics(raw_bases).split(",") if b.strip()]
                 # the yaml key is the INFO class minus "Info"; the trait class may be named differently
                 # (CncEngineerBotModuleInfo -> CncEngineerManagerBotModule), so remember which Info it takes
                 info = re.search(r"<\s*(\w+Info)\s*>", raw_bases)

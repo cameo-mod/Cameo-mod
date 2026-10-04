@@ -283,7 +283,7 @@ namespace OpenRA.Mods.Common.Traits
 
 		IBotRequestPauseUnitProduction[] requestPause;
 		AdaptiveCounterProduction counters;
-		IBotEnemyCompositionProvider compositionProvider;
+		IBotEnemyCompositionProvider[] compositionProviders;
 		IFransEconomicSaturationService economicSaturationService;
 		IFransBaseBuilderService openingBuildOrderService;
 		IFransCombatIntelService combatIntelService;
@@ -338,7 +338,7 @@ namespace OpenRA.Mods.Common.Traits
 			groundCommanderService = self.Owner.PlayerActor.TraitsImplementing<IFransCommanderCoreService>().FirstOrDefault()
 				?? throw new InvalidOperationException("FransUnitBuilderBotModule requires Ground Commander service.");
 			playerResources = self.Owner.PlayerActor.Trait<PlayerResources>();
-			compositionProvider = self.Owner.PlayerActor.TraitsImplementing<IBotEnemyCompositionProvider>().FirstOrDefault();
+			compositionProviders = self.Owner.PlayerActor.TraitsImplementing<IBotEnemyCompositionProvider>().ToArray();
 		}
 
 		protected override void TraitEnabled(Actor self)
@@ -369,7 +369,10 @@ namespace OpenRA.Mods.Common.Traits
 			var economicState = economicSaturationService.State;
 			UpdateEconomicStateTransition(economicState);
 
-			counters.Observe(Info.AdaptiveCounterObservationInterval, compositionProvider);
+			// AR-6: resolve the enabled provider at use time — a conditional provider
+			// disabled at Created (or later) must not serve; two providers can mount
+			// under inc3_frans_services (FransCombatIntel + MasterAi), first-enabled wins.
+			counters.Observe(Info.AdaptiveCounterObservationInterval, compositionProviders.FirstEnabledTraitOrDefault());
 
 			var hasHarvesterDebt = queuedBuildRequests.Any(Info.HarvesterTypes.Contains);
 

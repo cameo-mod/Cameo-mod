@@ -20,6 +20,9 @@ the static gap between them:
      vs TryClaim/Preempt/Transfer sites.                                            WARN
   R6 dead knobs — `public readonly bool Use*`/`int Max*`/`FrozenSet|string HashSet<string>`
      Info fields never referenced outside their declaration.                       WARN
+  R7 provider precedence — every bot seam implemented by >1 loaded module type must
+     declare its merge semantics in PROVIDER_MERGES below; the consumers' code must
+     express it.                                                                 ERROR
 
 `--write` emits docs/design/AI_ARCH_COVERAGE.md (fully regenerated); `--check` exits 1 when that
 doc is stale or any ERROR finding exists. A missing `engine/` tree is tolerated: the
@@ -143,6 +146,43 @@ LAYER_OF = {
     "HumanPaceBotModule": "SUPPORT",
     # TELEMETRY — log writers, record sinks
     "AiMissionLogWriter": "TELEMETRY",
+}
+
+# ----------------------------------------------------------------------------- #
+# R7 declared provider merges
+# ----------------------------------------------------------------------------- #
+#
+# A seam consumed through `TraitsImplementing<I>` with more than one loaded provider
+# type is a shared decision surface: unless its merge is declared, consumers drift
+# into each picking their own (AR-5's sum-vs-max divergence) or silently depending
+# on trait order (AR-7). The declared kinds in use:
+#
+#   multicast      — every enabled provider is invoked/notified (lifecycle & sinks)
+#   union          — every enabled provider's values are concatenated
+#   any            — a boolean vote OR-ed across enabled providers
+#   max            — the largest enabled-provider reading wins
+#   first-enabled  — the first IsTraitEnabled() provider; providers are gate-disjoint
+#   first-non-null — first enabled provider publishing a non-null value
+#   priority-merge — all enabled providers' items compete on one shared ordering
+#
+# Add a row when mounting a second provider on a seam, or when a consumer changes
+# the declared semantics — the row is what the generated coverage doc prints.
+PROVIDER_MERGES = {
+    "IBotTick": "multicast (ModularBot ticks every enabled module)",
+    "IBotEnabled": "multicast (ModularBot notifies every enabled module)",
+    "IBotRespondToAttack": "multicast (ModularBot fans the event to every enabled module)",
+    "IBotPositionsUpdated": "multicast (every publisher's updates are consumed)",
+    "IBotNotifyIdleBaseUnits": "multicast (every publisher's idle-unit list is consumed)",
+    "IBotMissionOutcomeSink": "multicast (every sink is notified)",
+    "IBotCaptureClaimSource": "union (every enabled source's claim cells, arbitrated downstream by participant key)",
+    "IBotRequestPauseUnitProduction": "any (any enabled voter holds production)",
+    "IBotRegionThreatProvider": "max (BotRegionThreatMerge.MergedThreatAt over enabled providers)",
+    "IBotMissionProvider": "priority-merge (Priority desc, RequiredValue asc, publish order — BestAffordableMission/BestRaidForSteering)",
+    "IBotMissionAssignmentProvider": "first-non-null among enabled providers (personality-gated instances are disjoint)",
+    "IBotEnemyCompositionProvider": "first-enabled (observation providers are gate-disjoint; inc3_frans_services can co-mount)",
+    "IBotRequestUnitProduction": "first-enabled (genericbot vs fransbot builders are gate-disjoint)",
+    "IBotSuggestRefineryProduction": "first-enabled (CA vs Frans base builders are gate-disjoint)",
+    "IBotBaseExpansion": "first-enabled (CA vs Frans MCV expansion are gate-disjoint)",
 }
 
 # ----------------------------------------------------------------------------- #
@@ -764,7 +804,32 @@ def audit():
         for f, fl in dead:
             findings.append(("R6", "WARN", f"`{f}` in {fl}: declared, never read anywhere"))
 
+    # ---- R7: provider precedence ------------------------------------------------
+    n_multi = 0
+    for i in sorted(provides):
+        ps = provides[i]
+        if len(ps) < 2:
+            continue
+        n_multi += 1
+        names = ", ".join(f"`{p}`" for p in sorted(ps))
+        merge = PROVIDER_MERGES.get(i)
+        if merge is None:
+            findings.append(("R7", "ERROR",
+                             f"`{i}` has {len(ps)} loaded providers ({names}) and no declared "
+                             "merge — add the semantics to PROVIDER_MERGES and make every "
+                             "consumer express it"))
+        else:
+            findings.append(("R7", "ok",
+                             f"`{i}` ({len(ps)} providers: {names}) — {merge}"))
+    for i, merge in sorted(PROVIDER_MERGES.items()):
+        if i in provides and len(provides[i]) >= 2:
+            continue  # already reported above
+        findings.append(("R7", "ok",
+                         f"`{i}` declared `{merge}` (single/no loaded provider today — "
+                         "row guards the day a second one mounts)"))
+
     # coverage rows: even a clean check states what it looked at
+    findings.append(("R7", "ok", f"{n_multi} multi-provider seams checked against PROVIDER_MERGES"))
     n_armed = sum(1 for v in reachable_note.values() if v == "armed")
     findings.append(("R1", "ok", f"{n_gated} gated instances checked; {n_armed} dormant "
                                  "on master until their increment arm"))
@@ -844,17 +909,20 @@ def render_doc(res):
     L.append("## Interface seams")
     L.append("")
     L.append("Each `IBot*` seam: who provides it, who consumes it. `STARVED` = consumed but no "
-             "loaded provider (R3/C1); `DEAD-END` = provided but no consumer (R3/C2).")
+             "loaded provider (R3/C1); `DEAD-END` = provided but no consumer (R3/C2). `Merge` = "
+             "the declared multi-provider semantics (R7 — `PROVIDER_MERGES` in "
+             "`tools/ai/ai_arch_audit.py`); a seam with >1 loaded provider and no declaration "
+             "fails the audit.")
     L.append("")
-    L.append("| Interface | Provided by | Consumed by | Status |")
-    L.append("|---|---|---|---|")
+    L.append("| Interface | Provided by | Consumed by | Merge | Status |")
+    L.append("|---|---|---|---|---|")
     provides, consumers = res["provides"], res["consumers"]
     for i in sorted(k for k in set(provides) | set(consumers)
                     if k in res["bot_interfaces"]):
         status = "STARVED" if i in res["c1"] else "DEAD-END" if i in res["c2"] else "ok"
         L.append(f"| `{i}` | {', '.join(f'`{x}`' for x in sorted(provides.get(i, []))) or '—'} "
                  f"| {', '.join(f'`{x}`' for x in sorted(consumers.get(i, []))) or '—'} "
-                 f"| {status} |")
+                 f"| {PROVIDER_MERGES.get(i, '—')} | {status} |")
     L.append("")
     L.append("## Order-issuer matrix")
     L.append("")

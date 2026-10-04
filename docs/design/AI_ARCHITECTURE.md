@@ -1658,6 +1658,31 @@ phase. The assign layer must never become a second owner of a unit.
 
 The mission consumer revalidates each cycle: an exhausted Defend posture is skipped so a later affordable Raid remains eligible, and a cleared threat releases the hold immediately. Raid target lookup first uses visible actors; in fogged mode the consumer may use the existing remembered frozen-actor path. With `FoggedScans` disabled, the fallback can select unseen actors because it inherits the existing omniscient behavior of that mode rather than introducing a mission-layer cheat. The permanent `ai_raid_gate_20260928` fixture proves Raid publication and target-bearing assignment with reachable enemy economy under fog; it does not assert frozen assignment because that path is not reliably reproducible in the fixture.
 
+### 10.5b Provider precedence — the declared merges (AR-5/AR-7; audit R7)
+
+A seam with more than one loaded provider is a shared decision surface: without a declared
+merge, consumers silently pick their own — the AR-5 review found `IBotRegionThreatProvider`
+read by `Sum` in four modules and `Max` in a fifth, and AR-7 found `IBotMissionProvider`'s
+affordability pick deferring to trait order. `tools/ai/ai_arch_audit.py` now fails (R7, ERROR)
+when a seam has >1 loaded provider and no entry in its `PROVIDER_MERGES` table; the coverage
+doc's seam table prints the declaration. The declared merges:
+
+| Seam | Merge |
+|---|---|
+| `IBotRegionThreatProvider` | **max** across enabled providers (`BotRegionThreatMerge.MergedThreatAt`) — the providers publish overlapping estimates of the same strength, so summing double-counts a region both memories observed |
+| `IBotMissionProvider` | **priority-merge** across enabled providers — one ordering (Priority desc, RequiredValue asc, publish order) shared by `BestAffordableMission` and `BestRaidForSteering`; a provider's trait position no longer outranks another's missions |
+| `IBotMissionAssignmentProvider` | **first-non-null** among enabled providers — a disabled personality manager's stale assignment cannot shadow the live one's |
+| `IBotCaptureClaimSource` | **union** across enabled sources — `BotSituation` folds every claim cell into `TeamBroadcast.CaptureClaims`; `ClaimsAheadOf` arbitrates by participant key |
+| `IBotEnemyCompositionProvider` | **first-enabled** — the providers are gate-disjoint stacks (genericbot vs fransbot); `inc3_frans_services` can co-mount them |
+| `IBotRequestUnitProduction`, `IBotSuggestRefineryProduction`, `IBotBaseExpansion` | **first-enabled** — CA vs Frans providers are gate-disjoint |
+| `IBotRequestPauseUnitProduction` | **any** — any enabled voter's pause holds production |
+| `IBotTick`, `IBotEnabled`, `IBotRespondToAttack`, `IBotPositionsUpdated`, `IBotNotifyIdleBaseUnits`, `IBotMissionOutcomeSink` | **multicast** — every enabled provider is invoked; these are fan-out seams, not competing providers |
+
+Resolution rule for every seam: the enabled provider is chosen **at use time**
+(`FirstEnabledTraitOrDefault` or an explicit `IsTraitEnabled()` filter), never cached at
+`Created` — a `ConditionalTrait` is still disabled while its siblings are being constructed,
+and a later grant or personality switch must take effect without a rebuild.
+
 ### 10.6 Build order, each phase shippable on its own
 
 1. **Match logging, record-only.** No behaviour change. Writes the match record (§6.2) including

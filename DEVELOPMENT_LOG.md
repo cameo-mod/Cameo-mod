@@ -1,3 +1,39 @@
+# 2026-10-04 — Devin-T3Verify: AR-5/6/7 provider precedence — declared merges for every multi-provider bot seam (INC-N candidate)
+
+*Devin.* Branch `devin/t3verify/ar567-provider-precedence` from master `3ba05ede7`. The arch review's
+provider-precedence findings, closed end to end:
+
+- **AR-5** `IBotRegionThreatProvider` (MasterAi region memory + Scout danger marks — overlapping estimates of
+  one quantity): the four `Sum` consumers double-counted; `BeaconResponder` took `Max`. Declared merge = **max
+  over enabled providers**, implemented once as `BotRegionThreatMerge.MergedThreatAt` in the interface file;
+  all five consumers (`SquadManagerBotModuleCA:1742`, `SiegeEvaluatorBotModule:122`, `CombatVetoBotModule:129`,
+  `ExpansionPlannerBotModule:1529`, `BeaconResponderBotModule:149`) now call it.
+- **AR-7** `IBotMissionProvider` (MasterAi + GarrisonContest): `BestAffordableMission` iterated providers in
+  trait order — a provider's yaml position silently outranked every mission another published. Declared merge =
+  **one ordering across all enabled providers** (Priority desc, RequiredValue asc, publish order), the same
+  keys `BestRaidForSteering` already used; both pickers now filter `IsTraitEnabled()`. `MissionTaken` stays
+  `ReferenceEquals`-routed (order-irrelevant). `IBotMissionAssignmentProvider`: `BotSituation` now reads the
+  first non-null assignment among ENABLED providers — a disabled personality manager's stale assignment can
+  no longer shadow the live one. `IBotCaptureClaimSource`: verified already union-of-enabled (`BotSituation:1271`).
+- **AR-6** the site NOVA's held `seam-hygiene` does not cover: `FransUnitBuilderBotModule` resolves
+  `IBotEnemyCompositionProvider` by `FirstEnabledTraitOrDefault()` at use time (array cached at `Created`,
+  resolved per `BotTick`) — not at construction, where ConditionalTraits are still disabled (the flaw the lead
+  held `seam-hygiene` for). `FransCombatIntelBotModule.TryGetEnemyComposition` now honours the contract and
+  returns false while disabled.
+- **Audit**: `ai_arch_audit.py` gains **R7** — every seam with >1 loaded provider must declare its merge in
+  `PROVIDER_MERGES` (ERROR otherwise); the coverage doc's seam table carries a Merge column. `ai_module_map.py`
+  normalizes namespace-qualified base names, surfacing `FransCombatIntelBotModule` as a provider the scan had
+  been blind to. 13 multi-provider seams, all declared; both generated docs regenerated.
+
+Gates: Release build 0/0; tests 942/942 (new `ProviderMergeTest` ×9 + updated
+`BestAffordableMissionUsesTheDeclaredPriorityOrdering`); arch audit 0 ERROR (R1/R2 ok, R7 all declared);
+fog-honesty 80f/263s PASS; bot direct-mutation PASS; boot gate PASS.
+
+Residuals (noted for NOVA/lead): `IBotRegionRoles.RolesReady`, `IBotArmyStaging.PrimaryStagingCell` and
+`IBotZoneTopology` members don't self-guard while disabled — same bug class as `LastMissionAssignment`, left
+to the seam-hygiene pass. The `IFrans*` service lookups in `FransUnitBuilderBotModule.Created` keep their
+fail-fast `FirstOrDefault() ?? throw` — different seam family, fransbot-gated at spawn.
+
 # 2026-10-04 — Claude (lead): INC 2026-10-04e lands — INC-d completed (P0 raid gate), LC5 admission claims, checker v2, E2 test baseline
 
 *Claude.* Branch `inc/2026_10_04e` from master `1fbd239ff`:

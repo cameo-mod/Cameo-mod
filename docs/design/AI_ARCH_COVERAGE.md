@@ -11,7 +11,7 @@ Dataflow direction: `PERCEPTION -> SITUATION -> STRATEGY -> EXECUTION` with `PRO
 | Module | Asm | Instances (gate) | Provides | Consumes |
 |---|---|---|---|---|
 | `CombatAnalysisBotModule` | Cameo | `CombatAnalysisBotModule` (genericbot) | `IBotRespondToAttack`, `IBotThreatAnalysis`, `IBotTick` | — |
-| `FransCombatIntelBotModule` | Fransbot | `FransCombatIntelBotModule` (enable-fransbot || inc3_frans_services) | `IBotTick` | — |
+| `FransCombatIntelBotModule` | Fransbot | `FransCombatIntelBotModule` (enable-fransbot || inc3_frans_services) | `IBotEnemyCompositionProvider`, `IBotTick` | — |
 | `FransMineClusterBotModule` | Fransbot | `FransMineClusterBotModule` (enable-fransbot || inc3_frans_services) | `IBotTick` | — |
 | `FransRiskModelBotModule` | Fransbot | `FransRiskModelBotModule` (enable-fransbot || inc3_frans_services) | — | — |
 | `FransStrategicMapBotModule` | Fransbot | `FransStrategicMapBotModule` (enable-fransbot || inc3_frans_services) | `IBotTick` | — |
@@ -43,7 +43,7 @@ Dataflow direction: `PERCEPTION -> SITUATION -> STRATEGY -> EXECUTION` with `PRO
 | `FransGeneralBotModule` | Fransbot | `FransGeneralBotModule` (enable-fransbot || inc3_frans_services) | `IBotRespondToAttack`, `IBotTick` | — |
 | `FransbotControllerBotModule` | Fransbot | `FransbotControllerBotModule` (enable-fransbot) | `IBotEnabled`, `IBotTick` | — |
 | `MasterAiBotModule` | Cameo | `MasterAiBotModule` (genericbot) | `IBotCoalition`, `IBotDirector`, `IBotEnemyCompositionProvider`, `IBotFoggedEnemyProvider`, `IBotMainTargetProvider`, `IBotMissionOutcomeSink`, `IBotMissionProvider`, `IBotPersonalityLeadProvider`, `IBotRegionThreatProvider`, `IBotRememberedDefenceProvider`, `IBotRouteThreatRouter`, `IBotSiegeFailureMemory`, `IBotTeamMember`, `IBotThreatPredictionProvider`, `IBotTick`, `IBotUtilityAxes` | `BaseRepairBotModule`, `BotCounterDemandController`, `BotLimits`, `BotPersonalityController`, `BuildOrderKnobsBotModule`, `IBotCaptureClaimSource`, `IBotExpansionAssistProvider`, `IBotExpansionTargetProvider`, `IBotMissionAssignmentProvider`, `IBotThreatAnalysis`, `PlanBanditBotModule`, `ResourceMapBotModule`, `ScaleTargetsBotModule`, `ScoutBotModule`, `SquadManagerBotModuleCA`, `TacticalMapBotModule` |
-| `ModularBot` | Cameo | `ModularBot@EasiestAI`<br>`ModularBot@VeryEasyAI`<br>`ModularBot@EasyAI`<br>`ModularBot@MediumAI`<br>`ModularBot@HardAI`<br>`ModularBot@VeryHardAI`<br>… 15 total | `IBot` | `IBotActionBudget`, `IBotEnabled`, `IBotRespondToAttack`, `IBotTick` |
+| `ModularBot` | Cameo | `ModularBot@EasiestAI`<br>`ModularBot@VeryEasyAI`<br>`ModularBot@EasyAI`<br>`ModularBot@MediumAI`<br>`ModularBot@HardAI`<br>`ModularBot@VeryHardAI`<br>… 18 total | `IBot` | `IBotActionBudget`, `IBotEnabled`, `IBotRespondToAttack`, `IBotTick` |
 | `PlanBanditBotModule` | Cameo | `PlanBanditBotModule` (genericbot && plan_bandits) | — | `IBotMainTargetProvider` |
 
 ### EXECUTION (28)
@@ -113,7 +113,7 @@ Dataflow direction: `PERCEPTION -> SITUATION -> STRATEGY -> EXECUTION` with `PRO
 |---|---|---|---|---|
 | `AiMissionLogWriter` | Cameo | `AiMissionLogWriter` | `IBotMissionRecordSink` | — |
 
-### UNMAPPED (16)
+### UNMAPPED (17)
 
 | Module | Asm | Instances (gate) | Provides | Consumes |
 |---|---|---|---|---|
@@ -121,6 +121,7 @@ Dataflow direction: `PERCEPTION -> SITUATION -> STRATEGY -> EXECUTION` with `PRO
 | `ArmyFirstBotModule` | Cameo | `ArmyFirstBotModule` (genericbot && army_first) | `IBotRequestPauseBuildingProduction`, `IBotTick` | — |
 | `ArmyStagingBotModule` | Cameo | `ArmyStagingBotModule` (genericbot && armystaging) | `IBotArmyStaging`, `IBotRespondToAttack`, `IBotTick` | — |
 | `AssaultFormationBotModule` | Cameo | `AssaultFormationBotModule` (genericbot && assault_fanout) | `IBotAssaultFormation` | — |
+| `BaseFrontBackPlannerBotModule` | Cameo | `BaseFrontBackPlannerBotModule` (genericbot) | `IBotFrontBackAdvisor` | `BaseBuilderBotModuleCA`, `IBotBuildOrderKnobs`, `IBotExpansionTargetProvider`, `IBotMainTargetProvider`, `IBotRememberedDefenceProvider` |
 | `BuildOrderKnobsBotModule` | Cameo | `BuildOrderKnobsBotModule` (genericbot && build_order_knobs) | `IBotBuildOrderKnobs`, `IBotTick` | `BaseBuilderBotModuleCA`, `BotPersonalityController`, `IBotUnitRoles`, `MasterAiBotModule`, `PlanBanditBotModule` |
 | `CombatVetoBotModule` | Cameo | `CombatVetoBotModule` (genericbot && combatveto) | `IBotCombatVeto` | — |
 | `EngagementLogBotModule` | Cameo | `EngagementLogBotModule` | `IBotRespondToAttack`, `IBotTick` | — |
@@ -136,66 +137,67 @@ Dataflow direction: `PERCEPTION -> SITUATION -> STRATEGY -> EXECUTION` with `PRO
 
 ## Interface seams
 
-Each `IBot*` seam: who provides it, who consumes it. `STARVED` = consumed but no loaded provider (R3/C1); `DEAD-END` = provided but no consumer (R3/C2).
+Each `IBot*` seam: who provides it, who consumes it. `STARVED` = consumed but no loaded provider (R3/C1); `DEAD-END` = provided but no consumer (R3/C2). `Merge` = the declared multi-provider semantics (R7 — `PROVIDER_MERGES` in `tools/ai/ai_arch_audit.py`); a seam with >1 loaded provider and no declaration fails the audit.
 
-| Interface | Provided by | Consumed by | Status |
-|---|---|---|---|
-| `IBot` | `ModularBot` | — | ok |
-| `IBotActionBudget` | `HumanPaceBotModule` | `ModularBot`, `SquadManagerBotModuleCA` | ok |
-| `IBotAircraftBuilder` | `UnitBuilderBotModuleCA` | `SquadManagerBotModuleCA` | ok |
-| `IBotArmyStaging` | `ArmyStagingBotModule` | `BaseBuilderBotModuleCA`, `SquadManagerBotModuleCA` | ok |
-| `IBotAssaultFormation` | `AssaultFormationBotModule` | — | DEAD-END |
-| `IBotBaseExpansion` | `FransMcvExpansionManagerBotModule`, `McvExpansionManagerBotModule` | `BaseBuilderBotModuleCA`, `FransBaseBuilderBotModule` | ok |
-| `IBotBuildOrderKnobs` | `BuildOrderKnobsBotModule` | `BaseBuilderBotModuleCA` | ok |
-| `IBotCaptureClaimSource` | `EngineerBotModule`, `GarrisonContestBotModule` | `MasterAiBotModule` | ok |
-| `IBotCaptureTransportProvider` | `FransTransportCommanderBotModule` | — | DEAD-END |
-| `IBotCoalition` | `MasterAiBotModule` | `ExpansionPlannerBotModule`, `SquadManagerBotModuleCA` | ok |
-| `IBotCombatVeto` | `CombatVetoBotModule` | `SquadManagerBotModuleCA` | ok |
-| `IBotDefensePlacementAdvisor` | `DefenseCoveragePlanner` | — | DEAD-END |
-| `IBotDirector` | `MasterAiBotModule` | — | DEAD-END |
-| `IBotEnabled` | `BeaconResponderBotModule`, `FransAirCommanderBotModule`, `FransBaseBuilderBotModule`, `FransGroundCommanderBotModule`, `FransGroundTransferBotModule`, `FransMcvExpansionManagerBotModule`, `FransSeaCommanderBotModule`, `FransSpecOpsCommanderBotModule`, `FransTransportCommanderBotModule`, `FransbotControllerBotModule`, `ScoutBotModule`, `SquadManagerBotModuleCA` | `ModularBot` | ok |
-| `IBotEnemyCompositionProvider` | `MasterAiBotModule` | `FransUnitBuilderBotModule`, `SquadManagerBotModuleCA`, `UnitBuilderBotModuleCA` | ok |
-| `IBotEngagementPriors` | `EngagementPriorsBotModule` | — | DEAD-END |
-| `IBotExpansionAssistProvider` | `ExpansionPlannerBotModule` | `MasterAiBotModule` | ok |
-| `IBotExpansionTargetProvider` | `ExpansionPlannerBotModule` | `BaseBuilderBotModuleCA`, `MasterAiBotModule` | ok |
-| `IBotFoggedEnemyProvider` | `MasterAiBotModule` | `SquadManagerBotModuleCA` | ok |
-| `IBotInMatchAdaptation` | `InMatchAdaptBotModule` | `SquadManagerBotModuleCA` | ok |
-| `IBotMainTargetProvider` | `MasterAiBotModule` | `BotLearnedPriors`, `DefenseCoveragePlanner`, `EngagementPriorsBotModule`, `PlanBanditBotModule`, `ScoutBotModule`, `SquadManagerBotModuleCA` | ok |
-| `IBotMcvExpansionSiteProvider` | `ExpansionPlannerBotModule` | `McvExpansionManagerBotModule` | ok |
-| `IBotMissionAssignmentProvider` | `SquadManagerBotModuleCA` | `MasterAiBotModule` | ok |
-| `IBotMissionOutcomeSink` | `MasterAiBotModule` | `SquadManagerBotModuleCA` | ok |
-| `IBotMissionProvider` | `GarrisonContestBotModule`, `MasterAiBotModule` | `SquadManagerBotModuleCA` | ok |
-| `IBotMissionRecordSink` | `AiMissionLogWriter` | — | DEAD-END |
-| `IBotNotifyIdleBaseUnits` | `BeaconResponderBotModule`, `BotOwnershipWatchdog`, `ScoutBotModule`, `UnitBuilderBotModuleCA`, `UnitRepairBotModule` | `SquadManagerBotModuleCA` | ok |
-| `IBotPersonalityLeadProvider` | `MasterAiBotModule` | `ScoutBotModule`, `SquadManagerBotModuleCA`, `UnitBuilderBotModuleCA` | ok |
-| `IBotPlacementAdvisor` | `SpacingAdvisorBotModule` | — | DEAD-END |
-| `IBotPlacementObserver` | `AiPlacementLogWriter` | — | DEAD-END |
-| `IBotPositionsUpdated` | `BaseBuilderBotModuleCA`, `CaptureManagerBotModuleCA`, `EngineerBotModule`, `ExpansionPlannerBotModule`, `FransBaseBuilderBotModule`, `SquadManagerBotModuleCA` | `BaseBuilderBotModuleCA`, `FransBaseBuilderBotModule`, `McvExpansionManagerBotModule`, `SquadManagerBotModuleCA` | ok |
-| `IBotProductionWeight` | `BotLearnedPriors` | `UnitBuilderBotModuleCA` | ok |
-| `IBotProductionWidth` | `ParallelProductionBotModule` | `UnitBuilderBotModuleCA` | ok |
-| `IBotProtectionRequestProvider` | `EngineerBotModule` | `SquadManagerBotModuleCA` | ok |
-| `IBotRegionRoles` | `RegionRolesBotModule` | `DefenseCoveragePlanner` | ok |
-| `IBotRegionThreatProvider` | `MasterAiBotModule`, `ScoutBotModule` | `BeaconResponderBotModule`, `ExpansionPlannerBotModule`, `SiegeEvaluatorBotModule`, `SquadManagerBotModuleCA` | ok |
-| `IBotRememberedDefenceProvider` | `MasterAiBotModule` | `DefenseCoveragePlanner`, `GarrisonContestBotModule`, `SiegeEvaluatorBotModule` | ok |
-| `IBotRequestPauseBuildingProduction` | `ArmyFirstBotModule` | — | DEAD-END |
-| `IBotRequestPauseUnitProduction` | `BaseBuilderBotModuleCA`, `BotGlobalUnitBudget`, `FransBaseBuilderBotModule` | `FransUnitBuilderBotModule`, `UnitBuilderBotModuleCA` | ok |
-| `IBotRequestUnitProduction` | `FransUnitBuilderBotModule`, `UnitBuilderBotModuleCA` | `BridgeRepairBotModule`, `ExpansionPlannerBotModule`, `FransBaseBuilderBotModule`, `FransSupplyTruckBotModule`, `McvExpansionManagerBotModule`, `ScoutBotModule`, `SquadManagerBotModuleCA` | ok |
-| `IBotRespondToAttack` | `ArmyStagingBotModule`, `BaseBuilderBotModuleCA`, `BaseRepairBotModule`, `BuildingRepairBotModuleCA`, `CombatAnalysisBotModule`, `EngagementLogBotModule`, `FransAirCommanderBotModule`, `FransBaseBuilderBotModule`, `FransDefenseCommanderBotModule`, `FransGeneralBotModule`, `FransGroundCommanderBotModule`, `FransHarvesterBotModule`, `FransMinelayerBotModule`, `FransSeaCommanderBotModule`, `FransSpecOpsCommanderBotModule`, `HarvesterBotModuleCA`, `McvExpansionManagerBotModule`, `MinelayerBotModule`, `ScoutBotModule`, `SquadManagerBotModuleCA` | `ModularBot` | ok |
-| `IBotRouteThreatRouter` | `MasterAiBotModule` | `SquadManagerBotModuleCA` | ok |
-| `IBotScaleTargets` | `ScaleTargetsBotModule` | `BaseBuilderBotModuleCA`, `ExpansionPlannerBotModule`, `SquadManagerBotModuleCA`, `UnitBuilderBotModuleCA` | ok |
-| `IBotSiegeAdvisor` | `SiegeEvaluatorBotModule` | `SquadManagerBotModuleCA` | ok |
-| `IBotSiegeFailureMemory` | `MasterAiBotModule` | `SiegeEvaluatorBotModule` | ok |
-| `IBotStealthDoctrine` | `StealthDoctrineBotModule` | `SquadManagerBotModuleCA` | ok |
-| `IBotSuggestRefineryProduction` | `BaseBuilderBotModuleCA`, `FransBaseBuilderBotModule` | `McvExpansionManagerBotModule` | ok |
-| `IBotTeamMember` | `MasterAiBotModule` | — | DEAD-END |
-| `IBotThreatAnalysis` | `CombatAnalysisBotModule` | `MasterAiBotModule` | ok |
-| `IBotThreatPredictionProvider` | `MasterAiBotModule` | `SquadManagerBotModuleCA` | ok |
-| `IBotTick` | `ArmyFirstBotModule`, `ArmyStagingBotModule`, `BaseBuilderBotModuleCA`, `BaseRepairBotModule`, `BeaconResponderBotModule`, `BotLearnedPriors`, `BotOwnershipWatchdog`, `BotUnitLeaseRegistry`, `BridgeRepairBotModule`, `BuildOrderKnobsBotModule`, `CaptureManagerBotModuleCA`, `CombatAnalysisBotModule`, `CratePickupBotModule`, `DeployBotModule`, `EngagementLogBotModule`, `EngagementPriorsBotModule`, `EngineerBotModule`, `ExpansionPlannerBotModule`, `ExternalBotOrdersManager`, `FransAirCommanderBotModule`, `FransBaseBuilderBotModule`, `FransCombatIntelBotModule`, `FransCommandBidBotModule`, `FransCommanderCoreBotModule`, `FransDefenseCommanderBotModule`, `FransEconomicSaturationBotModule`, `FransGeneralBotModule`, `FransGroundCommanderBotModule`, `FransGroundTransferBotModule`, `FransHarvesterBotModule`, `FransMcvExpansionManagerBotModule`, `FransMineClusterBotModule`, `FransMinelayerBotModule`, `FransSeaCommanderBotModule`, `FransSpecOpsCommanderBotModule`, `FransStrategicMapBotModule`, `FransSupplyTruckBotModule`, `FransSupportCoordinatorBotModule`, `FransSupportPowerBotModule`, `FransTransportCommanderBotModule`, `FransUnitBuilderBotModule`, `FransbotControllerBotModule`, `GarrisonContestBotModule`, `GarrisonDefenseBotModule`, `HarvesterBotModuleCA`, `InMatchAdaptBotModule`, `LoadCargoBotModule`, `LoadGarrisonerBotModuleCA`, `MasterAiBotModule`, `McvExpansionManagerBotModule`, `MinelayerBotModule`, `PlugSpawnerBotModuleCA`, `PowerDownBotModule`, `RegionRolesBotModule`, `ResourceMapBotModule`, `ScaleTargetsBotModule`, `ScoutBotModule`, `SendUnitToAttackBotModule`, `SiegeEvaluatorBotModule`, `SquadManagerBotModuleCA`, `SupportPowerBotASModule`, `SupportPowerBotModule`, `TacticalMapBotModule`, `UnitBuilderBotModuleCA`, `UnitRepairBotModule` | `ModularBot` | ok |
-| `IBotUnitLeaseLost` | `BridgeRepairBotModule` | `BotUnitLeaseRegistry` | ok |
-| `IBotUnitLeases` | `BotUnitLeaseRegistry` | — | DEAD-END |
-| `IBotUnitRoles` | `BotUnitRoles` | `AiPlacementLogWriter`, `BuildOrderKnobsBotModule`, `ScaleTargetsBotModule`, `SquadManagerBotModuleCA`, `UnitBuilderBotModuleCA` | ok |
-| `IBotUtilityAxes` | `MasterAiBotModule` | `ExpansionPlannerBotModule`, `ScaleTargetsBotModule`, `SquadManagerBotModuleCA` | ok |
-| `IBotZoneTopology` | `TacticalMapBotModule` | `GarrisonContestBotModule`, `ScaleTargetsBotModule` | ok |
+| Interface | Provided by | Consumed by | Merge | Status |
+|---|---|---|---|---|
+| `IBot` | `ModularBot` | — | — | ok |
+| `IBotActionBudget` | `HumanPaceBotModule` | `ModularBot`, `SquadManagerBotModuleCA` | — | ok |
+| `IBotAircraftBuilder` | `UnitBuilderBotModuleCA` | `SquadManagerBotModuleCA` | — | ok |
+| `IBotArmyStaging` | `ArmyStagingBotModule` | `BaseBuilderBotModuleCA`, `SquadManagerBotModuleCA` | — | ok |
+| `IBotAssaultFormation` | `AssaultFormationBotModule` | — | — | DEAD-END |
+| `IBotBaseExpansion` | `FransMcvExpansionManagerBotModule`, `McvExpansionManagerBotModule` | `BaseBuilderBotModuleCA`, `FransBaseBuilderBotModule` | first-enabled (CA vs Frans MCV expansion are gate-disjoint) | ok |
+| `IBotBuildOrderKnobs` | `BuildOrderKnobsBotModule` | `BaseBuilderBotModuleCA`, `BaseFrontBackPlannerBotModule` | — | ok |
+| `IBotCaptureClaimSource` | `EngineerBotModule`, `GarrisonContestBotModule` | `MasterAiBotModule` | union (every enabled source's claim cells, arbitrated downstream by participant key) | ok |
+| `IBotCaptureTransportProvider` | `FransTransportCommanderBotModule` | — | — | DEAD-END |
+| `IBotCoalition` | `MasterAiBotModule` | `ExpansionPlannerBotModule`, `SquadManagerBotModuleCA` | — | ok |
+| `IBotCombatVeto` | `CombatVetoBotModule` | `SquadManagerBotModuleCA` | — | ok |
+| `IBotDefensePlacementAdvisor` | `DefenseCoveragePlanner` | — | — | DEAD-END |
+| `IBotDirector` | `MasterAiBotModule` | — | — | DEAD-END |
+| `IBotEnabled` | `BeaconResponderBotModule`, `FransAirCommanderBotModule`, `FransBaseBuilderBotModule`, `FransGroundCommanderBotModule`, `FransGroundTransferBotModule`, `FransMcvExpansionManagerBotModule`, `FransSeaCommanderBotModule`, `FransSpecOpsCommanderBotModule`, `FransTransportCommanderBotModule`, `FransbotControllerBotModule`, `ScoutBotModule`, `SquadManagerBotModuleCA` | `ModularBot` | multicast (ModularBot notifies every enabled module) | ok |
+| `IBotEnemyCompositionProvider` | `FransCombatIntelBotModule`, `MasterAiBotModule` | `FransUnitBuilderBotModule`, `SquadManagerBotModuleCA`, `UnitBuilderBotModuleCA` | first-enabled (observation providers are gate-disjoint; inc3_frans_services can co-mount) | ok |
+| `IBotEngagementPriors` | `EngagementPriorsBotModule` | — | — | DEAD-END |
+| `IBotExpansionAssistProvider` | `ExpansionPlannerBotModule` | `MasterAiBotModule` | — | ok |
+| `IBotExpansionTargetProvider` | `ExpansionPlannerBotModule` | `BaseBuilderBotModuleCA`, `BaseFrontBackPlannerBotModule`, `MasterAiBotModule` | — | ok |
+| `IBotFoggedEnemyProvider` | `MasterAiBotModule` | `SquadManagerBotModuleCA` | — | ok |
+| `IBotFrontBackAdvisor` | `BaseFrontBackPlannerBotModule` | — | — | DEAD-END |
+| `IBotInMatchAdaptation` | `InMatchAdaptBotModule` | `SquadManagerBotModuleCA` | — | ok |
+| `IBotMainTargetProvider` | `MasterAiBotModule` | `BaseFrontBackPlannerBotModule`, `BotLearnedPriors`, `DefenseCoveragePlanner`, `EngagementPriorsBotModule`, `PlanBanditBotModule`, `ScoutBotModule`, `SquadManagerBotModuleCA` | — | ok |
+| `IBotMcvExpansionSiteProvider` | `ExpansionPlannerBotModule` | `McvExpansionManagerBotModule` | — | ok |
+| `IBotMissionAssignmentProvider` | `SquadManagerBotModuleCA` | `MasterAiBotModule` | first-non-null among enabled providers (personality-gated instances are disjoint) | ok |
+| `IBotMissionOutcomeSink` | `MasterAiBotModule` | `SquadManagerBotModuleCA` | multicast (every sink is notified) | ok |
+| `IBotMissionProvider` | `GarrisonContestBotModule`, `MasterAiBotModule` | `SquadManagerBotModuleCA` | priority-merge (Priority desc, RequiredValue asc, publish order — BestAffordableMission/BestRaidForSteering) | ok |
+| `IBotMissionRecordSink` | `AiMissionLogWriter` | — | — | DEAD-END |
+| `IBotNotifyIdleBaseUnits` | `BeaconResponderBotModule`, `BotOwnershipWatchdog`, `ScoutBotModule`, `UnitBuilderBotModuleCA`, `UnitRepairBotModule` | `SquadManagerBotModuleCA` | multicast (every publisher's idle-unit list is consumed) | ok |
+| `IBotPersonalityLeadProvider` | `MasterAiBotModule` | `ScoutBotModule`, `SquadManagerBotModuleCA`, `UnitBuilderBotModuleCA` | — | ok |
+| `IBotPlacementAdvisor` | `SpacingAdvisorBotModule` | — | — | DEAD-END |
+| `IBotPlacementObserver` | `AiPlacementLogWriter` | — | — | DEAD-END |
+| `IBotPositionsUpdated` | `BaseBuilderBotModuleCA`, `CaptureManagerBotModuleCA`, `EngineerBotModule`, `ExpansionPlannerBotModule`, `FransBaseBuilderBotModule`, `SquadManagerBotModuleCA` | `BaseBuilderBotModuleCA`, `FransBaseBuilderBotModule`, `McvExpansionManagerBotModule`, `SquadManagerBotModuleCA` | multicast (every publisher's updates are consumed) | ok |
+| `IBotProductionWeight` | `BotLearnedPriors` | `UnitBuilderBotModuleCA` | — | ok |
+| `IBotProductionWidth` | `ParallelProductionBotModule` | `UnitBuilderBotModuleCA` | — | ok |
+| `IBotProtectionRequestProvider` | `EngineerBotModule` | `SquadManagerBotModuleCA` | — | ok |
+| `IBotRegionRoles` | `RegionRolesBotModule` | `DefenseCoveragePlanner` | — | ok |
+| `IBotRegionThreatProvider` | `MasterAiBotModule`, `ScoutBotModule` | `BeaconResponderBotModule`, `ExpansionPlannerBotModule`, `SiegeEvaluatorBotModule`, `SquadManagerBotModuleCA` | max (BotRegionThreatMerge.MergedThreatAt over enabled providers) | ok |
+| `IBotRememberedDefenceProvider` | `MasterAiBotModule` | `BaseFrontBackPlannerBotModule`, `DefenseCoveragePlanner`, `GarrisonContestBotModule`, `SiegeEvaluatorBotModule` | — | ok |
+| `IBotRequestPauseBuildingProduction` | `ArmyFirstBotModule` | — | — | DEAD-END |
+| `IBotRequestPauseUnitProduction` | `BaseBuilderBotModuleCA`, `BotGlobalUnitBudget`, `FransBaseBuilderBotModule` | `FransUnitBuilderBotModule`, `UnitBuilderBotModuleCA` | any (any enabled voter holds production) | ok |
+| `IBotRequestUnitProduction` | `FransUnitBuilderBotModule`, `UnitBuilderBotModuleCA` | `BridgeRepairBotModule`, `ExpansionPlannerBotModule`, `FransBaseBuilderBotModule`, `FransSupplyTruckBotModule`, `McvExpansionManagerBotModule`, `ScoutBotModule`, `SquadManagerBotModuleCA` | first-enabled (genericbot vs fransbot builders are gate-disjoint) | ok |
+| `IBotRespondToAttack` | `ArmyStagingBotModule`, `BaseBuilderBotModuleCA`, `BaseRepairBotModule`, `BuildingRepairBotModuleCA`, `CombatAnalysisBotModule`, `EngagementLogBotModule`, `FransAirCommanderBotModule`, `FransBaseBuilderBotModule`, `FransDefenseCommanderBotModule`, `FransGeneralBotModule`, `FransGroundCommanderBotModule`, `FransHarvesterBotModule`, `FransMinelayerBotModule`, `FransSeaCommanderBotModule`, `FransSpecOpsCommanderBotModule`, `HarvesterBotModuleCA`, `McvExpansionManagerBotModule`, `MinelayerBotModule`, `ScoutBotModule`, `SquadManagerBotModuleCA` | `ModularBot` | multicast (ModularBot fans the event to every enabled module) | ok |
+| `IBotRouteThreatRouter` | `MasterAiBotModule` | `SquadManagerBotModuleCA` | — | ok |
+| `IBotScaleTargets` | `ScaleTargetsBotModule` | `BaseBuilderBotModuleCA`, `ExpansionPlannerBotModule`, `SquadManagerBotModuleCA`, `UnitBuilderBotModuleCA` | — | ok |
+| `IBotSiegeAdvisor` | `SiegeEvaluatorBotModule` | `SquadManagerBotModuleCA` | — | ok |
+| `IBotSiegeFailureMemory` | `MasterAiBotModule` | `SiegeEvaluatorBotModule` | — | ok |
+| `IBotStealthDoctrine` | `StealthDoctrineBotModule` | `SquadManagerBotModuleCA` | — | ok |
+| `IBotSuggestRefineryProduction` | `BaseBuilderBotModuleCA`, `FransBaseBuilderBotModule` | `McvExpansionManagerBotModule` | first-enabled (CA vs Frans base builders are gate-disjoint) | ok |
+| `IBotTeamMember` | `MasterAiBotModule` | — | — | DEAD-END |
+| `IBotThreatAnalysis` | `CombatAnalysisBotModule` | `MasterAiBotModule` | — | ok |
+| `IBotThreatPredictionProvider` | `MasterAiBotModule` | `SquadManagerBotModuleCA` | — | ok |
+| `IBotTick` | `ArmyFirstBotModule`, `ArmyStagingBotModule`, `BaseBuilderBotModuleCA`, `BaseRepairBotModule`, `BeaconResponderBotModule`, `BotLearnedPriors`, `BotOwnershipWatchdog`, `BotUnitLeaseRegistry`, `BridgeRepairBotModule`, `BuildOrderKnobsBotModule`, `CaptureManagerBotModuleCA`, `CombatAnalysisBotModule`, `CratePickupBotModule`, `DeployBotModule`, `EngagementLogBotModule`, `EngagementPriorsBotModule`, `EngineerBotModule`, `ExpansionPlannerBotModule`, `ExternalBotOrdersManager`, `FransAirCommanderBotModule`, `FransBaseBuilderBotModule`, `FransCombatIntelBotModule`, `FransCommandBidBotModule`, `FransCommanderCoreBotModule`, `FransDefenseCommanderBotModule`, `FransEconomicSaturationBotModule`, `FransGeneralBotModule`, `FransGroundCommanderBotModule`, `FransGroundTransferBotModule`, `FransHarvesterBotModule`, `FransMcvExpansionManagerBotModule`, `FransMineClusterBotModule`, `FransMinelayerBotModule`, `FransSeaCommanderBotModule`, `FransSpecOpsCommanderBotModule`, `FransStrategicMapBotModule`, `FransSupplyTruckBotModule`, `FransSupportCoordinatorBotModule`, `FransSupportPowerBotModule`, `FransTransportCommanderBotModule`, `FransUnitBuilderBotModule`, `FransbotControllerBotModule`, `GarrisonContestBotModule`, `GarrisonDefenseBotModule`, `HarvesterBotModuleCA`, `InMatchAdaptBotModule`, `LoadCargoBotModule`, `LoadGarrisonerBotModuleCA`, `MasterAiBotModule`, `McvExpansionManagerBotModule`, `MinelayerBotModule`, `PlugSpawnerBotModuleCA`, `PowerDownBotModule`, `RegionRolesBotModule`, `ResourceMapBotModule`, `ScaleTargetsBotModule`, `ScoutBotModule`, `SendUnitToAttackBotModule`, `SiegeEvaluatorBotModule`, `SquadManagerBotModuleCA`, `SupportPowerBotASModule`, `SupportPowerBotModule`, `TacticalMapBotModule`, `UnitBuilderBotModuleCA`, `UnitRepairBotModule` | `ModularBot` | multicast (ModularBot ticks every enabled module) | ok |
+| `IBotUnitLeaseLost` | `BridgeRepairBotModule` | `BotUnitLeaseRegistry` | — | ok |
+| `IBotUnitLeases` | `BotUnitLeaseRegistry` | — | — | DEAD-END |
+| `IBotUnitRoles` | `BotUnitRoles` | `AiPlacementLogWriter`, `BuildOrderKnobsBotModule`, `ScaleTargetsBotModule`, `SquadManagerBotModuleCA`, `UnitBuilderBotModuleCA` | — | ok |
+| `IBotUtilityAxes` | `MasterAiBotModule` | `ExpansionPlannerBotModule`, `ScaleTargetsBotModule`, `SquadManagerBotModuleCA` | — | ok |
+| `IBotZoneTopology` | `TacticalMapBotModule` | `GarrisonContestBotModule`, `ScaleTargetsBotModule` | — | ok |
 
 ## Order-issuer matrix
 
@@ -248,13 +250,14 @@ Each `IBot*` seam: who provides it, who consumes it. `STARVED` = consumed but no
 
 | check | severity | finding |
 |---|---|---|
-| R1 | ok | 104 gated instances checked; 0 dormant on master until their increment arm |
-| R2 | ok | 64 switch targets verified |
+| R1 | ok | 105 gated instances checked; 0 dormant on master until their increment arm |
+| R2 | ok | 65 switch targets verified |
 | R3 | WARN | DEAD-END `IBotAssaultFormation`: provided by `AssaultFormationBotModule`; no consumer |
 | R3 | WARN | DEAD-END `IBotCaptureTransportProvider`: provided by `FransTransportCommanderBotModule`; no consumer |
 | R3 | WARN | DEAD-END `IBotDefensePlacementAdvisor`: provided by `DefenseCoveragePlanner`; no consumer |
 | R3 | WARN | DEAD-END `IBotDirector`: provided by `MasterAiBotModule`; no consumer |
 | R3 | WARN | DEAD-END `IBotEngagementPriors`: provided by `EngagementPriorsBotModule`; no consumer |
+| R3 | WARN | DEAD-END `IBotFrontBackAdvisor`: provided by `BaseFrontBackPlannerBotModule`; no consumer |
 | R3 | WARN | DEAD-END `IBotMissionRecordSink`: provided by `AiMissionLogWriter`; no consumer |
 | R3 | WARN | DEAD-END `IBotPlacementAdvisor`: provided by `SpacingAdvisorBotModule`; no consumer |
 | R3 | WARN | DEAD-END `IBotPlacementObserver`: provided by `AiPlacementLogWriter`; no consumer |
@@ -283,7 +286,23 @@ Each `IBot*` seam: who provides it, who consumes it. `STARVED` = consumed but no
 | R5 | WARN | BotLeasePurpose.McvExpansion: no TryClaim/Preempt/Transfer site |
 | R5 | ok | SquadCAType/BotLeasePurpose members checked against their switch/draft/claim sites |
 | R6 | WARN | `ProtectionTypes` in OpenRA.Mods.CA/Traits/BotModules/SquadManagerBotModuleCA.cs: declared, never read anywhere |
+| R7 | ok | 13 multi-provider seams checked against PROVIDER_MERGES |
+| R7 | ok | `IBotBaseExpansion` (2 providers: `FransMcvExpansionManagerBotModule`, `McvExpansionManagerBotModule`) — first-enabled (CA vs Frans MCV expansion are gate-disjoint) |
+| R7 | ok | `IBotCaptureClaimSource` (2 providers: `EngineerBotModule`, `GarrisonContestBotModule`) — union (every enabled source's claim cells, arbitrated downstream by participant key) |
+| R7 | ok | `IBotEnabled` (12 providers: `BeaconResponderBotModule`, `FransAirCommanderBotModule`, `FransBaseBuilderBotModule`, `FransGroundCommanderBotModule`, `FransGroundTransferBotModule`, `FransMcvExpansionManagerBotModule`, `FransSeaCommanderBotModule`, `FransSpecOpsCommanderBotModule`, `FransTransportCommanderBotModule`, `FransbotControllerBotModule`, `ScoutBotModule`, `SquadManagerBotModuleCA`) — multicast (ModularBot notifies every enabled module) |
+| R7 | ok | `IBotEnemyCompositionProvider` (2 providers: `FransCombatIntelBotModule`, `MasterAiBotModule`) — first-enabled (observation providers are gate-disjoint; inc3_frans_services can co-mount) |
+| R7 | ok | `IBotMissionAssignmentProvider` declared `first-non-null among enabled providers (personality-gated instances are disjoint)` (single/no loaded provider today — row guards the day a second one mounts) |
+| R7 | ok | `IBotMissionOutcomeSink` declared `multicast (every sink is notified)` (single/no loaded provider today — row guards the day a second one mounts) |
+| R7 | ok | `IBotMissionProvider` (2 providers: `GarrisonContestBotModule`, `MasterAiBotModule`) — priority-merge (Priority desc, RequiredValue asc, publish order — BestAffordableMission/BestRaidForSteering) |
+| R7 | ok | `IBotNotifyIdleBaseUnits` (5 providers: `BeaconResponderBotModule`, `BotOwnershipWatchdog`, `ScoutBotModule`, `UnitBuilderBotModuleCA`, `UnitRepairBotModule`) — multicast (every publisher's idle-unit list is consumed) |
+| R7 | ok | `IBotPositionsUpdated` (6 providers: `BaseBuilderBotModuleCA`, `CaptureManagerBotModuleCA`, `EngineerBotModule`, `ExpansionPlannerBotModule`, `FransBaseBuilderBotModule`, `SquadManagerBotModuleCA`) — multicast (every publisher's updates are consumed) |
+| R7 | ok | `IBotRegionThreatProvider` (2 providers: `MasterAiBotModule`, `ScoutBotModule`) — max (BotRegionThreatMerge.MergedThreatAt over enabled providers) |
+| R7 | ok | `IBotRequestPauseUnitProduction` (3 providers: `BaseBuilderBotModuleCA`, `BotGlobalUnitBudget`, `FransBaseBuilderBotModule`) — any (any enabled voter holds production) |
+| R7 | ok | `IBotRequestUnitProduction` (2 providers: `FransUnitBuilderBotModule`, `UnitBuilderBotModuleCA`) — first-enabled (genericbot vs fransbot builders are gate-disjoint) |
+| R7 | ok | `IBotRespondToAttack` (20 providers: `ArmyStagingBotModule`, `BaseBuilderBotModuleCA`, `BaseRepairBotModule`, `BuildingRepairBotModuleCA`, `CombatAnalysisBotModule`, `EngagementLogBotModule`, `FransAirCommanderBotModule`, `FransBaseBuilderBotModule`, `FransDefenseCommanderBotModule`, `FransGeneralBotModule`, `FransGroundCommanderBotModule`, `FransHarvesterBotModule`, `FransMinelayerBotModule`, `FransSeaCommanderBotModule`, `FransSpecOpsCommanderBotModule`, `HarvesterBotModuleCA`, `McvExpansionManagerBotModule`, `MinelayerBotModule`, `ScoutBotModule`, `SquadManagerBotModuleCA`) — multicast (ModularBot fans the event to every enabled module) |
+| R7 | ok | `IBotSuggestRefineryProduction` (2 providers: `BaseBuilderBotModuleCA`, `FransBaseBuilderBotModule`) — first-enabled (CA vs Frans base builders are gate-disjoint) |
+| R7 | ok | `IBotTick` (65 providers: `ArmyFirstBotModule`, `ArmyStagingBotModule`, `BaseBuilderBotModuleCA`, `BaseRepairBotModule`, `BeaconResponderBotModule`, `BotLearnedPriors`, `BotOwnershipWatchdog`, `BotUnitLeaseRegistry`, `BridgeRepairBotModule`, `BuildOrderKnobsBotModule`, `CaptureManagerBotModuleCA`, `CombatAnalysisBotModule`, `CratePickupBotModule`, `DeployBotModule`, `EngagementLogBotModule`, `EngagementPriorsBotModule`, `EngineerBotModule`, `ExpansionPlannerBotModule`, `ExternalBotOrdersManager`, `FransAirCommanderBotModule`, `FransBaseBuilderBotModule`, `FransCombatIntelBotModule`, `FransCommandBidBotModule`, `FransCommanderCoreBotModule`, `FransDefenseCommanderBotModule`, `FransEconomicSaturationBotModule`, `FransGeneralBotModule`, `FransGroundCommanderBotModule`, `FransGroundTransferBotModule`, `FransHarvesterBotModule`, `FransMcvExpansionManagerBotModule`, `FransMineClusterBotModule`, `FransMinelayerBotModule`, `FransSeaCommanderBotModule`, `FransSpecOpsCommanderBotModule`, `FransStrategicMapBotModule`, `FransSupplyTruckBotModule`, `FransSupportCoordinatorBotModule`, `FransSupportPowerBotModule`, `FransTransportCommanderBotModule`, `FransUnitBuilderBotModule`, `FransbotControllerBotModule`, `GarrisonContestBotModule`, `GarrisonDefenseBotModule`, `HarvesterBotModuleCA`, `InMatchAdaptBotModule`, `LoadCargoBotModule`, `LoadGarrisonerBotModuleCA`, `MasterAiBotModule`, `McvExpansionManagerBotModule`, `MinelayerBotModule`, `PlugSpawnerBotModuleCA`, `PowerDownBotModule`, `RegionRolesBotModule`, `ResourceMapBotModule`, `ScaleTargetsBotModule`, `ScoutBotModule`, `SendUnitToAttackBotModule`, `SiegeEvaluatorBotModule`, `SquadManagerBotModuleCA`, `SupportPowerBotASModule`, `SupportPowerBotModule`, `TacticalMapBotModule`, `UnitBuilderBotModuleCA`, `UnitRepairBotModule`) — multicast (ModularBot ticks every enabled module) |
 
-0 ERROR, 32 WARN
+0 ERROR, 33 WARN
 
-R1 checked 104 gated bot-module instances; R2 checked 64 switch targets. Modules marked *(no source)* live in `engine/` assemblies absent from this worktree — they are listed from yaml only, and C#-side checks skip them rather than fail.
+R1 checked 105 gated bot-module instances; R2 checked 65 switch targets. Modules marked *(no source)* live in `engine/` assemblies absent from this worktree — they are listed from yaml only, and C#-side checks skip them rather than fail.
