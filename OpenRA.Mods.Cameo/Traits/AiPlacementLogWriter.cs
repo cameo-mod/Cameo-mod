@@ -92,7 +92,8 @@ namespace OpenRA.Mods.Cameo.Traits
 				written = true;
 		}
 
-		void IBotPlacementObserver.BuildingPlaced(OpenRA.Player owner, int tick, string actor, CPos cell, string reason, int queuedTick)
+		void IBotPlacementObserver.BuildingPlaced(OpenRA.Player owner, int tick, string actor, CPos cell, string reason, int queuedTick,
+			FrontBackClass? frontBackClass, FrontBackPick? frontBackPick)
 		{
 			if (written || !eligibleAtWorldLoad || !AiMatchLogWriter.IsLoggableBot(owner))
 				return;
@@ -130,6 +131,23 @@ namespace OpenRA.Mods.Cameo.Traits
 			AiMatchLogWriter.AppendString(builder, "cell", cell.X.ToString(CultureInfo.InvariantCulture) + "," + cell.Y.ToString(CultureInfo.InvariantCulture));
 			AiMatchLogWriter.AppendString(builder, "category", category);
 			AiMatchLogWriter.AppendString(builder, "reason", reason);
+
+			// BP-2 (§19.15): the front/back advisor's class label for every placement while one is
+			// active, plus the pick diagnostics (front, score, radar coverage) when it claimed the cell.
+			if (frontBackClass.HasValue)
+				AiMatchLogWriter.AppendString(builder, "class", frontBackClass.Value.ToString().ToLowerInvariant());
+			if (frontBackPick.HasValue)
+			{
+				var pick = frontBackPick.Value;
+				AiMatchLogWriter.AppendNumber(builder, "fb_front", pick.FrontId);
+				AiMatchLogWriter.AppendNumber(builder, "fb_score", pick.FrontBackScore);
+				if (pick.NewCoverageCells > 0 || pick.OverlapCells > 0 || pick.SetbackCells > 0)
+				{
+					AiMatchLogWriter.AppendNumber(builder, "fb_new_coverage", pick.NewCoverageCells);
+					AiMatchLogWriter.AppendNumber(builder, "fb_overlap", pick.OverlapCells);
+					AiMatchLogWriter.AppendNumber(builder, "fb_setback", pick.SetbackCells);
+				}
+			}
 
 			// Refineries: the nearest anchor (a spreader, else the centre of a spreaderless field) and the distance in
 			// cells. REF-1 (§12.24 v2): the anchor's field id, the claim tier (1 = the field's first refinery, 2 = an
