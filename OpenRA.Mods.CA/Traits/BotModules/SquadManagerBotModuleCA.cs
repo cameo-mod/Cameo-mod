@@ -1070,6 +1070,16 @@ namespace OpenRA.Mods.CA.Traits
 		internal bool IsNavalUnit(Actor a) =>
 			a != null && (a.Info.TraitInfoOrDefault<MobileInfo>()?.Locomotor == "naval" || Info.NavalUnitsTypes.Contains(a.Info.Name));
 
+		// LC5: one defender-draft predicate for every draft site — trait/exclusion checks and the
+		// lease check together, so a pool unit another module claims between reconcile passes can
+		// never be drafted into a squad behind its owner's back (the `all`-arm double_owner the
+		// 10-03 A/B sampled once: squad membership plus a foreign lease).
+		bool IsDefenderDraftable(UnitWposWrapper u, IBotUnitLeases leases) =>
+			!Info.ExcludeFromSquadsTypes.Contains(u.Actor.Info.Name)
+			&& u.Actor.Info.HasTraitInfo<AttackBaseInfo>() && !u.Actor.Info.HasTraitInfo<BuildingInfo>()
+			&& !u.Actor.Info.HasTraitInfo<HarvesterInfo>() && !u.Actor.Info.HasTraitInfo<AircraftInfo>()
+			&& !IsNavalUnit(u.Actor) && !BotUnitLeases.IsClaimedByOther(leases, u.Actor, LeaseOwner);
+
 		// CA-5 (12.8): air-family squad bookkeeping (NewUnits/Waiting/Rearming) applies
 		// to the generic Air squads and the three doctrine types alike.
 		internal static bool IsAirFamily(SquadCAType type) =>
@@ -1995,10 +2005,8 @@ namespace OpenRA.Mods.CA.Traits
 			}
 
 			var protectSq = GetSquadOfType(SquadCAType.Protection) ?? RegisterNewSquad(bot, SquadCAType.Protection);
-			var draftable = unitsHangingAroundTheBase.Where(u => !Info.ExcludeFromSquadsTypes.Contains(u.Actor.Info.Name)
-				&& u.Actor.Info.HasTraitInfo<AttackBaseInfo>() && !u.Actor.Info.HasTraitInfo<BuildingInfo>()
-				&& !u.Actor.Info.HasTraitInfo<HarvesterInfo>() && !u.Actor.Info.HasTraitInfo<AircraftInfo>()
-				&& !IsNavalUnit(u.Actor)).ToList();
+			var leases = BotUnitLeases.Of(Player);
+			var draftable = unitsHangingAroundTheBase.Where(u => IsDefenderDraftable(u, leases)).ToList();
 
 			// CA-2: forward defence keeps a reserve too — the rally outside the base
 			// radius is the donor's non-emergency case; a rally inside it means the
@@ -2762,6 +2770,12 @@ namespace OpenRA.Mods.CA.Traits
 				ProtectOwn(protectOwnFrom);
 
 			PrepositionDefenceTick(bot);
+
+			// LC5: claim fresh squad members before returning — a member still unclaimed when a
+			// foreign module ticks next is a free lease target (the admit→claim window the 10-03
+			// A/B `all` arm sampled as double_owner=1). The per-path claim above renews holds;
+			// this pass picks up everyone FindNewUnits/CreateAttackForce/drafts just admitted.
+			ReconcileSquadLeases();
 		}
 
 		public void SetAirStrikeTarget(Actor target)
@@ -3398,11 +3412,12 @@ namespace OpenRA.Mods.CA.Traits
 			{
 				// Draft from the idle pool only. activeUnits contains both squad members
 				// and hanging units, so a world scan would draft units already assigned
-				// to Rush/Guerrilla/etc. — dual membership and competing orders.
+				// to Rush/Guerrilla/etc. — dual membership and competing orders. The lease
+				// check inside IsDefenderDraftable is what this path needs that the pool
+				// sweep can't guarantee: RespondToAttack reaches here between reconciles.
+				var leases = BotUnitLeases.Of(Player);
 				var draftable = unitsHangingAroundTheBase
-					.Where(u => !Info.ExcludeFromSquadsTypes.Contains(u.Actor.Info.Name) && u.Actor.Info.HasTraitInfo<AttackBaseInfo>()
-						&& !u.Actor.Info.HasTraitInfo<BuildingInfo>() && !u.Actor.Info.HasTraitInfo<HarvesterInfo>() && !u.Actor.Info.HasTraitInfo<AircraftInfo>()
-						&& !IsNavalUnit(u.Actor))
+					.Where(u => IsDefenderDraftable(u, leases))
 					.ToList();
 
 				// CA-2 (§12.6): keep a reserve when the response would strip the idle pool —
@@ -3424,6 +3439,11 @@ namespace OpenRA.Mods.CA.Traits
 
 			if (protectSq.IsValid && !protectSq.IsTargetValid && protectTarget != null)
 				protectSq.TargetActor = protectTarget;
+
+			// LC5: reachable from INotifyDamage between reconcile passes — claim the draft now,
+			// not at the next heartbeat, so nobody leases a fresh defender out from under the
+			// squad.
+			ReconcileSquadLeases();
 		}
 
 		// CA-2: how much of the draftable idle pool a protect-squad refill may take.
