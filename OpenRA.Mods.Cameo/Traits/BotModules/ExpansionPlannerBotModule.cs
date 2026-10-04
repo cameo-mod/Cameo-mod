@@ -1526,7 +1526,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 				var distance = buildingCells.Min(c => (c - center).Length);
 				var hops = Hops(distance, reach, Info.LinkStepCells);
-				var threat = threatProviders.Sum(p => p.RememberedEnemyThreatAt(center));
+				var threat = threatProviders.MergedThreatAt(center);
 				var guardValue = guards.Where(g => (g.Cell - center).LengthSquared <= Info.GuardRadiusCells * Info.GuardRadiusCells)
 					.Sum(g => g.Value);
 				var cost = refinery.Cost + hops * link.Cost;

@@ -126,7 +126,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var foes = new List<(BotUnitProfile Unit, int Count)>();
 			var defenceValue = AddDefencesNear(foes, targetCell);
 			regionThreats ??= player.PlayerActor.TraitsImplementing<IBotRegionThreatProvider>().ToArray();
-			var threatValue = regionThreats.Sum(t => t.RememberedEnemyThreatAt(targetCell));
+			var threatValue = regionThreats.MergedThreatAt(targetCell);
 
 			// CP §2.3 parity floor: assume the enemy is at least as strong as we are unless proven otherwise — a loss
 			// must be proven, never assumed. Below own value the remembered evidence predicts a mirror (ratio ~1).

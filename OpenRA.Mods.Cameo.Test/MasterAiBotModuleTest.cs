@@ -1016,18 +1016,22 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
-		public void BestAffordableMissionUsesProviderAndPublishedOrder()
+		public void BestAffordableMissionUsesTheDeclaredPriorityOrdering()
 		{
-			var first = new BotMission { RequiredValue = 500, RegionIndex = 1 };
-			var second = new BotMission { RequiredValue = 100, RegionIndex = 2 };
-			var third = new BotMission { RequiredValue = 50, RegionIndex = 3 };
+			var first = new BotMission { RequiredValue = 500, RegionIndex = 1, Priority = 90 };
+			var second = new BotMission { RequiredValue = 100, RegionIndex = 2, Priority = 10 };
+			var third = new BotMission { RequiredValue = 50, RegionIndex = 3, Priority = 80 };
 			var providers = new[]
 			{
 				new StubMissionProvider { Missions = new[] { first, second } },
 				new StubMissionProvider { Missions = new[] { third } }
 			};
 
-			Assert.That(SquadManagerBotModuleCA.BestAffordableMission(providers, 100), Is.SameAs(second));
+			// AR-7: every enabled provider's cards compete on one ordering — Priority
+			// desc, RequiredValue asc, publish order. `first` is unaffordable; `third`
+			// outranks `second` despite sitting on a later provider (the old code
+			// silently yielded to provider order).
+			Assert.That(SquadManagerBotModuleCA.BestAffordableMission(providers, 100), Is.SameAs(third));
 			Assert.That(SquadManagerBotModuleCA.BestAffordableMission(providers, 25), Is.Null);
 		}
 

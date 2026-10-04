@@ -66,6 +66,67 @@ legality. Variant keeps findPos's non-facing random draw (facing variants stay 0
 Gates: build 0 err / 8 pre-existing engine StyleCop warnings; Cameo tests **933/933**; boot gate PASS
 (menu reached, 0 new exceptions — an earlier launch-args miss produced `Unknown or invalid mod 'cameo'`,
 diagnosed + corrected, not a code fault). Audits + MP smoke: pending in this session.
+# 2026-10-04 — Devin-T3Verify: AR-10 tick phases — the resolved Player order is the contract (INC-N candidate)
+
+*Devin.* Branch `devin/t3verify/ar10-tick-phases` off `ar567-provider-precedence@4b00d9b99`. The arch review's
+sense→decide→act question, closed as documentation + audit rather than a reorder:
+
+- **Finding**: `ModularBot` ticks enabled `IBotTick` modules in resolved `Player` child order — merged across
+  every loaded rules file. `ContentPacks/*/ai.yaml` files load before `mods/cameo/ai/ai.yaml` and the first
+  pack merged wins position: `TiberianDawn/Shared`+`GDI` hoist `UnitBuilderBotModuleCA` (0), the six
+  `SquadManagerBotModuleCA` personalities (1–5, 9) and `BaseBuilderBotModuleCA` (8) ahead of every
+  sense/decide module — the act modules tick first. 48 consumer-before-provider read edges result; all are
+  one-tick-old snapshot reads, safe because every seam publishes on its own cadence (25–125 ticks) which
+  bounds the lag regardless. `ScaleTargets`/`BuildOrderKnobs` (pos 244/247) lag `MasterAi` (263) in the
+  *feedback* direction — the good side: all their consumers (the early builders) read them fresh.
+- **Audit**: `ai_arch_audit.py` gains **R8** — every loaded `IBotTick` type must declare its layer in
+  `LAYER_OF` (PERCEPTION+SITUATION=sense, STRATEGY=decide, EXECUTION+PRODUCTION=act, SUPPORT=infra,
+  TELEMETRY=observe; ERROR if missing), and `FRESH_EDGES` declares any seam requiring same-tick freshness
+  (empty today; ERROR if a declared edge ever reads stale). The coverage doc now prints the full per-instance
+  tick-order table (82 ticking instances) plus the 48 documented last-tick read edges and 10 call-time
+  provider reads — `--check` ratchets any yaml/include reorder. `docs/design/AI_ARCHITECTURE.md` gains
+  §10.5c with the contract and the reasoning (explicit reorder or snapshot stamps would annotate the same
+  staleness without removing it — cadence already bounds it).
+
+Gates: Release build 0/0; arch audit 0 ERROR, 33 WARN (R8 ok, 82 instances / 48 stale / 10 call-time / 0
+fresh declared); `ai_arch_audit --check` clean; `ai_module_map --check` clean; doc_claims 43/43;
+fog-honesty 80f/263s PASS; bot direct-mutation PASS; boot gate PASS. Test suite unchanged (no C#).
+
+# 2026-10-04 — Devin-T3Verify: AR-5/6/7 provider precedence — declared merges for every multi-provider bot seam (INC-N candidate)
+
+*Devin.* Branch `devin/t3verify/ar567-provider-precedence` from master `3ba05ede7`. The arch review's
+provider-precedence findings, closed end to end:
+
+- **AR-5** `IBotRegionThreatProvider` (MasterAi region memory + Scout danger marks — overlapping estimates of
+  one quantity): the four `Sum` consumers double-counted; `BeaconResponder` took `Max`. Declared merge = **max
+  over enabled providers**, implemented once as `BotRegionThreatMerge.MergedThreatAt` in the interface file;
+  all five consumers (`SquadManagerBotModuleCA:1742`, `SiegeEvaluatorBotModule:122`, `CombatVetoBotModule:129`,
+  `ExpansionPlannerBotModule:1529`, `BeaconResponderBotModule:149`) now call it.
+- **AR-7** `IBotMissionProvider` (MasterAi + GarrisonContest): `BestAffordableMission` iterated providers in
+  trait order — a provider's yaml position silently outranked every mission another published. Declared merge =
+  **one ordering across all enabled providers** (Priority desc, RequiredValue asc, publish order), the same
+  keys `BestRaidForSteering` already used; both pickers now filter `IsTraitEnabled()`. `MissionTaken` stays
+  `ReferenceEquals`-routed (order-irrelevant). `IBotMissionAssignmentProvider`: `BotSituation` now reads the
+  first non-null assignment among ENABLED providers — a disabled personality manager's stale assignment can
+  no longer shadow the live one. `IBotCaptureClaimSource`: verified already union-of-enabled (`BotSituation:1271`).
+- **AR-6** the site NOVA's held `seam-hygiene` does not cover: `FransUnitBuilderBotModule` resolves
+  `IBotEnemyCompositionProvider` by `FirstEnabledTraitOrDefault()` at use time (array cached at `Created`,
+  resolved per `BotTick`) — not at construction, where ConditionalTraits are still disabled (the flaw the lead
+  held `seam-hygiene` for). `FransCombatIntelBotModule.TryGetEnemyComposition` now honours the contract and
+  returns false while disabled.
+- **Audit**: `ai_arch_audit.py` gains **R7** — every seam with >1 loaded provider must declare its merge in
+  `PROVIDER_MERGES` (ERROR otherwise); the coverage doc's seam table carries a Merge column. `ai_module_map.py`
+  normalizes namespace-qualified base names, surfacing `FransCombatIntelBotModule` as a provider the scan had
+  been blind to. 13 multi-provider seams, all declared; both generated docs regenerated.
+
+Gates: Release build 0/0; tests 942/942 (new `ProviderMergeTest` ×9 + updated
+`BestAffordableMissionUsesTheDeclaredPriorityOrdering`); arch audit 0 ERROR (R1/R2 ok, R7 all declared);
+fog-honesty 80f/263s PASS; bot direct-mutation PASS; boot gate PASS.
+
+Residuals (noted for NOVA/lead): `IBotRegionRoles.RolesReady`, `IBotArmyStaging.PrimaryStagingCell` and
+`IBotZoneTopology` members don't self-guard while disabled — same bug class as `LastMissionAssignment`, left
+to the seam-hygiene pass. The `IFrans*` service lookups in `FransUnitBuilderBotModule.Created` keep their
+fail-fast `FirstOrDefault() ?? throw` — different seam family, fransbot-gated at spawn.
 
 # 2026-10-04 — Claude (lead): INC 2026-10-04e lands — INC-d completed (P0 raid gate), LC5 admission claims, checker v2, E2 test baseline
 

@@ -1658,6 +1658,72 @@ phase. The assign layer must never become a second owner of a unit.
 
 The mission consumer revalidates each cycle: an exhausted Defend posture is skipped so a later affordable Raid remains eligible, and a cleared threat releases the hold immediately. Raid target lookup first uses visible actors; in fogged mode the consumer may use the existing remembered frozen-actor path. With `FoggedScans` disabled, the fallback can select unseen actors because it inherits the existing omniscient behavior of that mode rather than introducing a mission-layer cheat. The permanent `ai_raid_gate_20260928` fixture proves Raid publication and target-bearing assignment with reachable enemy economy under fog; it does not assert frozen assignment because that path is not reliably reproducible in the fixture.
 
+### 10.5b Provider precedence — the declared merges (AR-5/AR-7; audit R7)
+
+A seam with more than one loaded provider is a shared decision surface: without a declared
+merge, consumers silently pick their own — the AR-5 review found `IBotRegionThreatProvider`
+read by `Sum` in four modules and `Max` in a fifth, and AR-7 found `IBotMissionProvider`'s
+affordability pick deferring to trait order. `tools/ai/ai_arch_audit.py` now fails (R7, ERROR)
+when a seam has >1 loaded provider and no entry in its `PROVIDER_MERGES` table; the coverage
+doc's seam table prints the declaration. The declared merges:
+
+| Seam | Merge |
+|---|---|
+| `IBotRegionThreatProvider` | **max** across enabled providers (`BotRegionThreatMerge.MergedThreatAt`) — the providers publish overlapping estimates of the same strength, so summing double-counts a region both memories observed |
+| `IBotMissionProvider` | **priority-merge** across enabled providers — one ordering (Priority desc, RequiredValue asc, publish order) shared by `BestAffordableMission` and `BestRaidForSteering`; a provider's trait position no longer outranks another's missions |
+| `IBotMissionAssignmentProvider` | **first-non-null** among enabled providers — a disabled personality manager's stale assignment cannot shadow the live one's |
+| `IBotCaptureClaimSource` | **union** across enabled sources — `BotSituation` folds every claim cell into `TeamBroadcast.CaptureClaims`; `ClaimsAheadOf` arbitrates by participant key |
+| `IBotEnemyCompositionProvider` | **first-enabled** — the providers are gate-disjoint stacks (genericbot vs fransbot); `inc3_frans_services` can co-mount them |
+| `IBotRequestUnitProduction`, `IBotSuggestRefineryProduction`, `IBotBaseExpansion` | **first-enabled** — CA vs Frans providers are gate-disjoint |
+| `IBotRequestPauseUnitProduction` | **any** — any enabled voter's pause holds production |
+| `IBotTick`, `IBotEnabled`, `IBotRespondToAttack`, `IBotPositionsUpdated`, `IBotNotifyIdleBaseUnits`, `IBotMissionOutcomeSink` | **multicast** — every enabled provider is invoked; these are fan-out seams, not competing providers |
+
+Resolution rule for every seam: the enabled provider is chosen **at use time**
+(`FirstEnabledTraitOrDefault` or an explicit `IsTraitEnabled()` filter), never cached at
+`Created` — a `ConditionalTrait` is still disabled while its siblings are being constructed,
+and a later grant or personality switch must take effect without a rebuild.
+
+### 10.5c Tick phases — the declared order (AR-10; audit R8)
+
+`ModularBot` calls each enabled `IBotTick` module in **resolved `Player` child order** — the
+merged yaml order across every rules file that adds a `Player` child. That has a consequence
+the AR-10 review made visible: `ContentPacks/*/ai.yaml` row-injection files load **before**
+`mods/cameo/ai/ai.yaml`, and the pack that merges first wins the leading positions. Today
+`TiberianDawn/Shared` + `TiberianDawn/GDI` hoist the unit builder, the squad managers and the
+base builder to tick positions 0–10 — the act modules tick before every sense/decide module.
+The effective order is printed per instance in `AI_ARCH_COVERAGE.md` ("Tick order"); it is
+the contract, and `--check` fails when a yaml or include reorder changes it silently.
+
+The semantics of the order: a consumer positioned **before** a provider reads that provider's
+**previous** `BotTick` output — a one-tick-old snapshot. That is the standing behaviour, and
+it is safe: every seam publishes on its own cadence (situation rebuilds, 25–125-tick
+recomputes, squad intervals) and is consumed as a snapshot, so one extra tick sits inside the
+cadence window either way. The two lags the review cited are the feedback direction of
+producer/consumer pairs and are already the better direction: `ScaleTargets` (pos 244) and
+`BuildOrderKnobs` (pos 247) read `MasterAiBotModule`/`BaseBuilderBotModuleCA` one tick old,
+but every consumer of `IBotScaleTargets`/`IBotBuildOrderKnobs` — the builders at positions
+0 and 8 — reads them fresh. Moving the two modules later would only move the lag into the
+forward direction.
+
+The rule that holds the order honest (`ai_arch_audit.py` R8, ERROR):
+
+- **R8a** — every loaded `IBotTick` module type declares its layer in `LAYER_OF`:
+  `PERCEPTION`+`SITUATION` = sense, `STRATEGY` = decide, `EXECUTION`+`PRODUCTION` = act,
+  `SUPPORT` = infra, `TELEMETRY` = observe. A new ticking module without a declared layer
+  fails the audit.
+- **R8b** — `FRESH_EDGES` declares any seam that ever requires same-tick freshness
+  (consumer, interface, provider). None exists today; the audit errors if a declared edge
+  ever reads one tick late.
+- The full stale-read table (48 edges today) is generated into the coverage doc — the
+  ratchet is `--check`: any reorder regenerates the table deliberately.
+
+Why documentation and not a code reorder: an explicit sense→decide→act yaml reorder is
+deterministic and sync-safe (the same resolved ruleset reaches every client) but it changes
+read freshness on every provider edge at once — an unswitchable behavioural shift owned by
+the lead's increment call, not by this audit. Explicit snapshot versioning (a
+`snapshot.ComputedTick` stamp) was considered and rejected: it would annotate the same
+staleness without removing it, and the cadence windows already bound it.
+
 ### 10.6 Build order, each phase shippable on its own
 
 1. **Match logging, record-only.** No behaviour change. Writes the match record (§6.2) including

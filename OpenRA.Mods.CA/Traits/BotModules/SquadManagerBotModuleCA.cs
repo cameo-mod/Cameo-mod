@@ -1745,7 +1745,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		internal bool PassesRiskGate(CPos cell, int attackerValue)
 		{
-			var threat = threatProviders?.Sum(p => p.RememberedEnemyThreatAt(cell)) ?? 0;
+			var threat = threatProviders.MergedThreatAt(cell);
 			var pass = PassesRiskGate(attackerValue, threat, Info.AttackRiskMargin);
 			if (!pass)
 				AIUtils.BotDebug("AI ({0}): risk gate held a {1}-value squad off {2} (remembered threat {3}, margin {4}%)",
@@ -2374,18 +2374,25 @@ namespace OpenRA.Mods.CA.Traits
 			return preferred.Count > 0 ? preferred : candidates;
 		}
 
+		// The declared multi-provider merge (AR-7; ai_arch_audit R7): every enabled
+		// provider's cards compete on one ordering — Priority desc, RequiredValue
+		// asc, publish order on a full tie — identical to BestRaidForSteering's.
+		// Before this, a provider's yaml position silently outranked every mission
+		// another provider published.
 		public static BotMission BestAffordableMission(IEnumerable<IBotMissionProvider> providers, int idleForceValue,
 			Func<BotMission, bool> exclude = null)
 		{
 			if (providers == null)
 				return null;
 
-			foreach (var provider in providers)
-				foreach (var mission in provider?.Missions ?? Array.Empty<BotMission>())
-					if (mission != null && mission.RequiredValue <= idleForceValue && (exclude == null || !exclude(mission)))
-						return mission;
-
-			return null;
+			return providers
+				.Where(provider => provider != null && provider.IsTraitEnabled())
+				.SelectMany(provider => provider.Missions ?? Array.Empty<BotMission>())
+				.Where(mission => mission != null && mission.RequiredValue <= idleForceValue
+					&& (exclude == null || !exclude(mission)))
+				.OrderByDescending(mission => mission.Priority)
+				.ThenBy(mission => mission.RequiredValue)
+				.FirstOrDefault();
 		}
 
 		// TC-2f (§12.27): the affordability gate leaves Raid cards published but
@@ -2400,7 +2407,8 @@ namespace OpenRA.Mods.CA.Traits
 				return null;
 
 			return providers
-				.SelectMany(provider => provider?.Missions ?? Array.Empty<BotMission>())
+				.Where(provider => provider != null && provider.IsTraitEnabled())
+				.SelectMany(provider => provider.Missions ?? Array.Empty<BotMission>())
 				.Where(mission => mission != null && mission.Type == BotMissionType.Raid && mission.RequiredValue <= valueCap)
 				.OrderByDescending(mission => mission.Priority)
 				.ThenBy(mission => mission.RequiredValue)

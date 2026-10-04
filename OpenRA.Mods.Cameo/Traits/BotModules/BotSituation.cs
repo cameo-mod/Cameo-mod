@@ -1209,7 +1209,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			var squadCount = 0;
 			var squadUnitCount = 0;
+			// AR-7 (ai_arch_audit R7): first non-null assignment across ENABLED providers —
+			// a disabled personality manager's stale LastMissionAssignment must not
+			// shadow the live one's (the auto-property outlives the disable).
 			var missionAssignment = player.PlayerActor.TraitsImplementing<IBotMissionAssignmentProvider>()
+				.Where(p => p.IsTraitEnabled())
 				.Select(p => p.LastMissionAssignment)
 				.FirstOrDefault(a => a != null);
 			foreach (var sm in player.PlayerActor.TraitsImplementing<SquadManagerBotModuleCA>())

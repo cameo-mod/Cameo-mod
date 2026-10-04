@@ -119,7 +119,7 @@ namespace OpenRA.Mods.CA.Traits
 					.Where(d => (d.Cell - targetCell).LengthSquared <= radiusSq)
 					.ToArray();
 
-				var rememberedThreat = threatProviders.Sum(p => p.RememberedEnemyThreatAt(targetCell));
+				var rememberedThreat = threatProviders.MergedThreatAt(targetCell);
 				var defenceValue = covering.Sum(d => d.Value);
 
 				// CA-2c: regions that already beat a siege read heavier — the
