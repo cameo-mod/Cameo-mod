@@ -111,5 +111,24 @@ namespace OpenRA.Mods.CA.Traits
 				(int)(away.Y * (long)distance.Length / len),
 				0);
 		}
+
+		/// <summary>
+		/// 12.7 formation hold classification with a dead band (2026-10-04 stutter fix):
+		/// <paramref name="over"/> is how far the member's remaining distance-to-target is ahead of
+		/// the slowest member's, in <see cref="WDist.Length"/>. Enters hold above
+		/// <paramref name="lead"/> + <paramref name="hysteresis"/>, leaves at/below
+		/// <paramref name="lead"/>, and keeps its previous class inside the band — the hard
+		/// pre-hysteresis cut flipped members between Stop and AttackMove every squad tick.
+		/// </summary>
+		public static bool ClassifyHolding(long over, long lead, long hysteresis, bool wasHolding)
+		{
+			if (over > lead + hysteresis)
+				return true;
+
+			if (over <= lead)
+				return false;
+
+			return wasHolding;
+		}
 	}
 }

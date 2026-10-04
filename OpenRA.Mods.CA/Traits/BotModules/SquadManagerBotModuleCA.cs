@@ -385,6 +385,12 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("CA-4 (12.7): cells a frontline member may outrun the slowest frontline member before it holds.")]
 		public readonly int FormationMaxLeadCells = 6;
 
+		[Desc("Dead band added on top of FormationMaxLeadCells before a leading frontline member is ordered to hold, so members hovering at the threshold do not flip between hold and advance every squad tick (2026-10-04 stutter fix). Only read while UseFormationHysteresis is armed.")]
+		public readonly int FormationHoldHysteresisCells = 2;
+
+		[Desc("AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only squad orders and the latched leader wait — the per-tick identical Stop/AttackMove re-issues cancelled every MoveTo. Off keeps the classic per-tick order stream bit-identical.")]
+		public readonly bool UseFormationHysteresis = false;
+
 		[Desc("CA-4 (12.7, fransbot donor): temporary lead cells granted when the rear frontline member has not moved for a while (chokepoint stall). Reverts to FormationMaxLeadCells the moment the rear moves again.")]
 		public readonly int FormationMaxStalledLeadCells = 12;
 

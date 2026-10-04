@@ -213,3 +213,7 @@ groups:
   BI_front_back_placement:           # T3VERIFY BP-1 (DESIGN 19.15, BP-SPEC rev 2 + maintainer rulings 2026-10-04): arms BaseFrontBackPlannerBotModule - one radar per defended front strictly behind its defence line, spread for NEW approach coverage (union scoring); production at the front except air-only producers; tech/superweapon/passive-income in the back. Phase 1 adds the planner + seams only; the QM class cases + FragileTypes edits land with REF-1. No advisor active (classic, switch off) = bit-identical
     BaseFrontBackPlannerBotModule:
       Enabled: true
+  BJ_squad_hysteresis:               # EMBER AR-S (maintainer report: army stutter-steps 2026-10-04): the formation hold/push split gets a 2-cell dead band, squad orders are only re-issued on class/quantized-target change, and the leader wait latches (enter >5x occupiedArea, release <3x) - the per-tick identical Stop/AttackMove re-issues cancelled every MoveTo and repathed the whole army each tick. Unarmed = the old hard cut + per-tick stream; @classic skipped = bit-identical
+    SquadManagerBotModuleCA:
+      UseFormationHysteresis: true
+      FormationHoldHysteresisCells: 2

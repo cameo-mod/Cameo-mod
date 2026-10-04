@@ -304,13 +304,33 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 		int formationRearStallTicks;
 		int formationRearHp = -1;
 
+		// Formation hysteresis (2026-10-04, user-reported stutter): the hold/push split is a
+		// dead band — a member holds only when it exceeds the lead by FormationHoldHysteresisCells
+		// and resumes once it falls back under the lead. Orders are re-issued only when a member's
+		// class or its quantized order target actually changed: per-tick identical Stop/AttackMove
+		// orders cancelled the unit's MoveTo each tick and produced the stop-start stutter.
+		enum FormationClass { Push, Hold, AntiAir, Scout, Trail, Retreat, RetreatRear, HurryUp }
+
+		readonly Dictionary<Actor, (FormationClass Class, CPos Target)> formationOrders = new();
+		bool leaderWaiting;
+		Actor leaderOrderActor;
+		CPos? leaderOrderCell;
+
 		// Indirect/harass routing state
 		List<CPos> currentRoute;
 		int currentWaypointIndex;
 		int lastWaypointUpdateTick;
 		Target lastRoutingTarget;
 
-		public void Activate(SquadCA owner) { }
+		public void Activate(SquadCA owner)
+		{
+			// A fresh march carries no formation memory: every member re-orders once on
+			// entry, then transitions only on real class/target changes.
+			formationOrders.Clear();
+			leaderWaiting = false;
+			leaderOrderActor = null;
+			leaderOrderCell = null;
+		}
 
 		// "The fight is on" — ONE definition shared by contact-first all-in (this state) and the
 		// concave (§12.7a entry and commit): a visible enemy and a member are within weapon range of
@@ -707,10 +727,47 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 			// Leader will wait squad members that left behind, unless
 			// next tick is kick stuck unit (we need leader move in advance).
-			if (leaderWaitCheck && kickStuck <= 0)
+			if (owner.SquadManager.Info.UseFormationHysteresis)
+			{
+				// Hysteresis on the wait (AR-S 2026-10-04): latch the wait when a member trails
+				// beyond occupiedArea * 5 and only release once everyone is back within
+				// occupiedArea * 3 — the old per-tick re-issue stopped and restarted the leader
+				// on every squad tick. A freshly armed kickStuck also releases: the kick block
+				// drives the leader for its duration, matching the old code's detection-tick
+				// AttackMove.
+				if (!leaderWaiting && leaderWaitCheck && kickStuck <= 0)
+				{
+					leaderWaiting = true;
+					leaderOrderCell = null;
+					owner.Bot.QueueOrder(new Order("Stop", leader.Actor, false));
+				}
+				else if (leaderWaiting && (kickStuck > 0 || !owner.Units.Any(u =>
+					(u.Actor.CenterPosition - leader.Actor.CenterPosition).HorizontalLengthSquared > occupiedArea * 3)))
+				{
+					leaderWaiting = false;
+				}
+
+				if (!leaderWaiting)
+				{
+					// The leader churns too: re-issue only when the leader itself or the route
+					// cell changed — the old per-tick re-issue repathed it every squad tick.
+					var leaderCell = owner.World.Map.CellContaining(routeTarget.CenterPosition);
+					if (leaderOrderActor != leader.Actor || leaderOrderCell != leaderCell)
+					{
+						leaderOrderActor = leader.Actor;
+						leaderOrderCell = leaderCell;
+						owner.Bot.QueueOrder(new Order("AttackMove", leader.Actor, routeTarget, false));
+					}
+				}
+			}
+			else if (leaderWaitCheck && kickStuck <= 0)
+			{
 				owner.Bot.QueueOrder(new Order("Stop", leader.Actor, false));
+			}
 			else
+			{
 				owner.Bot.QueueOrder(new Order("AttackMove", leader.Actor, routeTarget, false));
+			}
 
 			// 12.7: assault squads keep formation steps - frontline leads, anti-air
 			// inside, the rest trails the frontline centroid. Other squad types keep
@@ -721,7 +778,43 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				return;
 
 			var unitsHurryUp = owner.Units.Where(u => (u.Actor.CenterPosition - leader.Actor.CenterPosition).HorizontalLengthSquared >= occupiedArea * 2).Select(u => u.Actor).ToArray();
-			owner.Bot.QueueOrder(new Order("AttackMove", null, Target.FromCell(owner.World, leader.Actor.Location), false, groupedActors: unitsHurryUp));
+			if (owner.SquadManager.Info.UseFormationHysteresis)
+			{
+				// Same dedup lattice as the march (AR-S 2026-10-04): a straggler keeps its
+				// in-flight catch-up until the leader's cell actually moved — the per-tick
+				// re-issue repathed it into the move-one-tile/stand pattern. A member that
+				// catches up is left to run its order out, exactly like the old code.
+				var hurryCell = leader.Actor.Location;
+				PruneStaleFormationOrders(owner);
+				var hurryChanged = new List<Actor>();
+				foreach (var a in unitsHurryUp)
+				{
+					if (formationOrders.TryGetValue(a, out var prev)
+						&& prev.Class == FormationClass.HurryUp && prev.Target == hurryCell)
+						continue;
+
+					formationOrders[a] = (FormationClass.HurryUp, hurryCell);
+					hurryChanged.Add(a);
+				}
+
+				if (hurryChanged.Count > 0)
+					owner.Bot.QueueOrder(new Order("AttackMove", null, Target.FromCell(owner.World, hurryCell), false, groupedActors: hurryChanged.ToArray()));
+			}
+			else
+			{
+				owner.Bot.QueueOrder(new Order("AttackMove", null, Target.FromCell(owner.World, leader.Actor.Location), false, groupedActors: unitsHurryUp));
+			}
+		}
+
+		// Drop the memory of units that left the squad so a rejoining member starts clean.
+		void PruneStaleFormationOrders(SquadCA owner)
+		{
+			if (formationOrders.Count == 0)
+				return;
+
+			var members = new HashSet<Actor>(owner.Units.Select(u => u.Actor));
+			foreach (var stale in formationOrders.Keys.Where(a => !members.Contains(a)).ToList())
+				formationOrders.Remove(stale);
 		}
 
 		// 12.7 formation step, once per squad tick (orders only, no activities):
@@ -832,13 +925,44 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 					lead = WDist.FromCells(owner.SquadManager.Info.FormationMaxStalledLeadCells).Length;
 			}
 
+			// AR-S (switch BJ_squad_hysteresis): armed = dead band + transition-only orders;
+			// unarmed = zero-width band (the old hard cut) and the order re-issued every tick,
+			// which keeps the classic order stream bit-identical.
+			var armed = owner.SquadManager.Info.UseFormationHysteresis;
+			var hysteresis = armed ? (long)WDist.FromCells(owner.SquadManager.Info.FormationHoldHysteresisCells).Length : 0;
+
 			var holdFront = new List<Actor>();
 			var pushFront = new List<Actor>();
+			var pullFront = new List<Actor>();
+			Actor pullRear = null;
+			var retreatPct = owner.SquadManager.Info.SquadMicroRetreatPct;
 			foreach (var u in frontline)
 			{
 				var delta = routePos - u.Actor.CenterPosition;
 				var rem = ((long)delta.X * axis.X + (long)delta.Y * axis.Y + (long)delta.Z * axis.Z) / axisLen;
-				if (slowestRemaining - rem > lead)
+				var wasHolding = formationOrders.TryGetValue(u.Actor, out var prev) && prev.Class == FormationClass.Hold;
+
+				// AR-S armed path: a wounded or under-fire member is pulled back this
+				// tick instead of being pushed — the old code issued the formation
+				// AttackMove and the micro Move in the same tick, so the unit flip-flopped
+				// between them every squad tick (the dominant AttackMove<->Move stutter).
+				if (armed && owner.SquadManager.Info.SquadMicroEnabled)
+				{
+					var health = u.Actor.TraitOrDefault<IHealth>();
+					if (stalledRearUnderFire && u == rear)
+					{
+						pullRear = u.Actor;
+						continue;
+					}
+
+					if (health != null && SquadMicroEvalCA.ShouldPullBack(health.HP, health.MaxHP, retreatPct))
+					{
+						pullFront.Add(u.Actor);
+						continue;
+					}
+				}
+
+				if (SquadMicroEvalCA.ClassifyHolding(slowestRemaining - rem, lead, hysteresis, wasHolding))
 					holdFront.Add(u.Actor);
 				else
 					pushFront.Add(u.Actor);
@@ -849,20 +973,111 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			var trailPos = SquadMicroEvalCA.PullBackPoint(centroid, routePos,
 				WDist.FromCells(owner.SquadManager.Info.FormationTrailCells));
 
-			if (pushFront.Count > 0)
-				owner.Bot.QueueOrder(new Order("AttackMove", null, routeTarget, false, groupedActors: pushFront.ToArray()));
-			if (holdFront.Count > 0)
-				owner.Bot.QueueOrder(new Order("Stop", null, false, groupedActors: holdFront.ToArray()));
-
+			var routeCell = owner.World.Map.CellContaining(routeTarget.CenterPosition);
 			var centroidCell = owner.World.Map.CellContaining(centroid);
-			if (antiAir.Count > 0)
-				owner.Bot.QueueOrder(new Order("AttackMove", null, Target.FromCell(owner.World, centroidCell), false, groupedActors: antiAir.Select(u => u.Actor).ToArray()));
+			var trailCell = owner.World.Map.CellContaining(trailPos);
 
-			if (scouts.Count > 0)
-				owner.Bot.QueueOrder(new Order("AttackMove", null, routeTarget, false, groupedActors: scouts.Select(u => u.Actor).ToArray()));
+			// The stalled rear pulls back past itself (break contact in the chokepoint),
+			// not to the shared trail line.
+			var rearPullPos = WPos.Zero;
+			var rearPullCell = CPos.Zero;
+			if (pullRear != null)
+			{
+				rearPullPos = SquadMicroEvalCA.PullBackPoint(pullRear.CenterPosition, routePos,
+					WDist.FromCells(owner.SquadManager.Info.FormationTrailCells));
+				rearPullCell = owner.World.Map.CellContaining(rearPullPos);
+			}
 
-			if (trailing.Count > 0)
-				owner.Bot.QueueOrder(new Order("AttackMove", null, Target.FromPos(trailPos), false, groupedActors: trailing.Select(u => u.Actor).ToArray()));
+			// Order churn guard (2026-10-04 stutter fix): queue an order only for members whose
+			// class or quantized target actually changed since the last squad tick. Identical
+			// re-issued orders cancelled the unit's active MoveTo every tick — the visible
+			// stop-start "stutter step" of the whole march. A held member's stored target stays
+			// at CPos.Zero: route drift must not re-fire its Stop.
+			var orderChanges = new List<(Actor Actor, FormationClass Class, CPos Target)>(
+				frontline.Count + antiAir.Count + scouts.Count + trailing.Count);
+			foreach (var a in pushFront)
+				orderChanges.Add((a, FormationClass.Push, routeCell));
+
+			foreach (var a in holdFront)
+				orderChanges.Add((a, FormationClass.Hold, CPos.Zero));
+
+			foreach (var a in pullFront)
+				orderChanges.Add((a, FormationClass.Retreat, trailCell));
+
+			if (pullRear != null)
+				orderChanges.Add((pullRear, FormationClass.RetreatRear, rearPullCell));
+
+			foreach (var u in antiAir)
+				orderChanges.Add((u.Actor, FormationClass.AntiAir, centroidCell));
+
+			foreach (var u in scouts)
+				orderChanges.Add((u.Actor, FormationClass.Scout, routeCell));
+
+			foreach (var u in trailing)
+			{
+				// Armed path: a wounded trailing member falls back to the trail
+				// line (Move) instead of the trail AttackMove — same dedup lattice.
+				if (armed && owner.SquadManager.Info.SquadMicroEnabled
+					&& u.Actor.TraitOrDefault<IHealth>() is { } th
+					&& SquadMicroEvalCA.ShouldPullBack(th.HP, th.MaxHP, retreatPct))
+				{
+					orderChanges.Add((u.Actor, FormationClass.Retreat, trailCell));
+					continue;
+				}
+
+				orderChanges.Add((u.Actor, FormationClass.Trail, trailCell));
+			}
+
+			var stopChanged = new List<Actor>();
+			var pushChanged = new List<Actor>();
+			var antiAirChanged = new List<Actor>();
+			var scoutChanged = new List<Actor>();
+			var trailChanged = new List<Actor>();
+			var retreatChanged = new List<Actor>();
+			var retreatRearChanged = new List<Actor>();
+			foreach (var change in orderChanges)
+			{
+				if (armed
+					&& formationOrders.TryGetValue(change.Actor, out var prev)
+					&& prev.Class == change.Class && prev.Target == change.Target)
+					continue;
+
+				// Pull-backs stay budgeted (MI per-order cap); a denied member keeps
+				// its previous order — its memory only updates on a real issue.
+				if (armed
+					&& (change.Class == FormationClass.Retreat || change.Class == FormationClass.RetreatRear)
+					&& !owner.SquadManager.TryConsumeMicroActions())
+					continue;
+
+				formationOrders[change.Actor] = (change.Class, change.Target);
+				switch (change.Class)
+				{
+					case FormationClass.Hold: stopChanged.Add(change.Actor); break;
+					case FormationClass.AntiAir: antiAirChanged.Add(change.Actor); break;
+					case FormationClass.Scout: scoutChanged.Add(change.Actor); break;
+					case FormationClass.Trail: trailChanged.Add(change.Actor); break;
+					case FormationClass.Retreat: retreatChanged.Add(change.Actor); break;
+					case FormationClass.RetreatRear: retreatRearChanged.Add(change.Actor); break;
+					default: pushChanged.Add(change.Actor); break;
+				}
+			}
+
+			PruneStaleFormationOrders(owner);
+
+			if (pushChanged.Count > 0)
+				owner.Bot.QueueOrder(new Order("AttackMove", null, routeTarget, false, groupedActors: pushChanged.ToArray()));
+			if (stopChanged.Count > 0)
+				owner.Bot.QueueOrder(new Order("Stop", null, false, groupedActors: stopChanged.ToArray()));
+			if (antiAirChanged.Count > 0)
+				owner.Bot.QueueOrder(new Order("AttackMove", null, Target.FromCell(owner.World, centroidCell), false, groupedActors: antiAirChanged.ToArray()));
+			if (scoutChanged.Count > 0)
+				owner.Bot.QueueOrder(new Order("AttackMove", null, routeTarget, false, groupedActors: scoutChanged.ToArray()));
+			if (trailChanged.Count > 0)
+				owner.Bot.QueueOrder(new Order("AttackMove", null, Target.FromPos(trailPos), false, groupedActors: trailChanged.ToArray()));
+			if (retreatChanged.Count > 0)
+				owner.Bot.QueueOrder(new Order("Move", null, Target.FromPos(trailPos), false, groupedActors: retreatChanged.ToArray()));
+			if (retreatRearChanged.Count > 0)
+				owner.Bot.QueueOrder(new Order("Move", null, Target.FromPos(rearPullPos), false, groupedActors: retreatRearChanged.ToArray()));
 
 			// MI pull-back (budgeted per order): members at/below
 			// SquadMicroRetreatPct fall back to the trail line — behind the
@@ -870,10 +1085,11 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			// taking fire pulls back past itself to break contact in the
 			// chokepoint. Queued after the formation orders so the micro order
 			// wins for that member this tick; a denied member keeps its
-			// formation order.
-			if (owner.SquadManager.Info.SquadMicroEnabled)
+			// formation order. The armed path instead folds pulls into the
+			// deduped order stream above (Retreat/RetreatRear) so a pulled
+			// member is never pushed in the same tick.
+			if (owner.SquadManager.Info.SquadMicroEnabled && !armed)
 			{
-				var retreatPct = owner.SquadManager.Info.SquadMicroRetreatPct;
 				foreach (var u in frontline)
 				{
 					var hp = u.Actor.TraitOrDefault<IHealth>();
