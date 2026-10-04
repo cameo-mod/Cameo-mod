@@ -1,12 +1,12 @@
 # audit_doc_health — is the documentation structurally sound?
 
-Documents scanned: **474**
+Documents scanned: **477**
 
 `audit_doc_claims.py` checks whether the NUMBERS are still true. This checks whether the documents themselves are intact.
 
 | code | what | count |
 |---|---|--:|
-| D1 | literal control characters | 0 |
+| D1 | literal control characters | 1 |
 | D2 | mojibake (UTF-8 read as cp1252) | 1 |
 | D3 | markdown link to a missing file | 0 |
 | D4 | same-file anchor with no heading | 0 |
@@ -16,9 +16,9 @@ Documents scanned: **474**
 | D8 | citation names a different section's law | 1 |
 
 
-## D1 — Control characters (0)
+## D1 — Control characters (1)
 
-_clean_
+- `docs/HANDOFF.md`:13 — control character 0x8
 
 
 ## D2 — Mojibake (1)
@@ -53,7 +53,7 @@ _clean_
 
 ## D8 — Citation points at the wrong law (1)
 
-- `DEVELOPMENT_LOG.md`:1301 — cites §19.3 (One bot module per decision: merge dupli) but names `OpenRA`, which is §17 (Dune 2000 to OpenRA Sprite Conversion)
+- `DEVELOPMENT_LOG.md`:1502 — cites §19.3 (One bot module per decision: merge dupli) but names `OpenRA`, which is §17 (Dune 2000 to OpenRA Sprite Conversion)
 
 
-**FAIL — 3 finding(s).** Fix the document; none of these are cosmetic. D1/D2 are corruption, D6 makes a cited law ambiguous, D3–D5 send a reader to the wrong place, D7 means a document is hiding its own content from the person who was told to read it, and D8 means a citation resolves — to the wrong law.
+**FAIL — 4 finding(s).** Fix the document; none of these are cosmetic. D1/D2 are corruption, D6 makes a cited law ambiguous, D3–D5 send a reader to the wrong place, D7 means a document is hiding its own content from the person who was told to read it, and D8 means a citation resolves — to the wrong law.

@@ -74,5 +74,35 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(priors.TradePercent("td_gdi", publicFaction, "td_gdi_mediumtank"), Is.EqualTo(100),
 				"a hidden Random pick cannot key td_gdi__vs__td_nod and stays neutral");
 		}
+
+		// D2 (orders 2026-10-03): the name-level predicate the map-ref faction path shares with PublicFactionOf —
+		// a Random-ref name and an unresolvable name are both "".
+		[Test]
+		public void PublicNamePredicate()
+		{
+			Assert.That(BotFactionView.PublicName(null), Is.EqualTo(""));
+			Assert.That(BotFactionView.PublicName(new FactionInfo()), Is.EqualTo(""), "InternalName null");
+			Assert.That(BotFactionView.PublicName(Faction("td_gdi")), Is.EqualTo("td_gdi"));
+			Assert.That(BotFactionView.PublicName(Faction("random", "td_gdi", "td_nod")), Is.EqualTo(""),
+				"a faction name that picks randomly is hidden, same rule as the lobby view");
+		}
+
+		// D2: the dominant-faction pick shared by the live-players and map-ref paths of
+		// PlanBanditBotModule.EnemyFactionOf (BuildOrderKnobsBotModule delegates to it).
+		[Test]
+		public void DominantFactionPicksMostCommonThenOrdinal()
+		{
+			Assert.That(PlanBanditBotModule.DominantFaction(new[] { "td_nod", "td_gdi", "td_nod" }), Is.EqualTo("td_nod"));
+			Assert.That(PlanBanditBotModule.DominantFaction(new[] { "td_nod", "td_gdi" }), Is.EqualTo("td_gdi"),
+				"a tie breaks by ordinal faction name, deterministically");
+		}
+
+		[Test]
+		public void DominantFactionSkipsUnknownAndRandom()
+		{
+			Assert.That(PlanBanditBotModule.DominantFaction(new[] { "", null, "td_gdi" }), Is.EqualTo("td_gdi"));
+			Assert.That(PlanBanditBotModule.DominantFaction(new[] { "", null }), Is.EqualTo(""),
+				"all-Random lobbies yield no public enemy faction");
+		}
 	}
 }

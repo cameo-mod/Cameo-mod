@@ -1,6 +1,6 @@
 # audit_code_duplication — copy-paste clone groups
 
-Python files: **808** (min 5 statements), C# files: **481** (min 8 lines)
+Python files: **814** (min 5 statements), C# files: **489** (min 8 lines)
 
 
 ## Files that do not parse (not scanned)
@@ -59,14 +59,14 @@ Python files: **808** (min 5 statements), C# files: **481** (min 8 lines)
 | 3 | 2049c109832a37b5 | OpenRA.Mods.Cameo/Widgets/ObserverBuildOrderIconsWidget.cs:184 Tick(); OpenRA.Mods.Cameo/Widgets/ObserverPromotionsIconsWidget.cs:158 Tick(); OpenRA.Mods.Cameo/Widgets/PlayerUpgradesIconsWidget.cs:151 Tick() |
 | 3 | ec2ad77fd06bf5bb | OpenRA.Mods.Cameo/Traits/BotModules/BotSituation.cs:1948 TargetScore(); OpenRA.Mods.Cameo/Traits/BotModules/BotSituation.cs:1951 TargetScore(); OpenRA.Mods.Cameo/Traits/BotModules/BotSituation.cs:1955 TargetScore() |
 | 2 | 05372eb40e5f4542 | OpenRA.Mods.Cameo/UtilityCommands/FactionBuildableReportCommand.cs:292 ExpandTransforms(); OpenRA.Mods.Cameo/UtilityCommands/TildeAuditCommand.cs:470 ExpandTransforms() |
-| 2 | 07c66d79766bf896 | OpenRA.Mods.CA/Traits/BotModules/SquadManagerBotModuleCA.cs:1120 CanEscortArtillery(); OpenRA.Mods.CA/Traits/BotModules/SquadManagerBotModuleCA.cs:1133 CanHitAir() |
+| 2 | 07c66d79766bf896 | OpenRA.Mods.CA/Traits/BotModules/SquadManagerBotModuleCA.cs:1121 CanEscortArtillery(); OpenRA.Mods.CA/Traits/BotModules/SquadManagerBotModuleCA.cs:1134 CanHitAir() |
 | 2 | 1b388f55c56ddd71 | OpenRA.Mods.Cameo/Traits/AiEngagementLogWriter.cs:89 TryAppend(); OpenRA.Mods.Cameo/Traits/AiPlacementLogWriter.cs:80 TryAppend() |
 | 2 | 1c600b09b51924b2 | OpenRA.Mods.Cameo/Widgets/ClickMaskWidget.cs:28 HandleMouseInput(); OpenRA.Mods.Cameo/Widgets/CommanderTreeDismissWidget.cs:24 HandleMouseInput() |
 | 2 | 1fe354611923a401 | OpenRA.Mods.Cameo/Traits/DroneSpawnerMasterCA.cs:235 SpawnIntoWorld(); OpenRA.Mods.Cameo/Traits/ShadeMaster.cs:139 SpawnIntoWorld() |
 | 2 | 2a3b5caf2a992b8b | OpenRA.Mods.Cameo/Traits/DroneSpawnerMasterCA.cs:282 MoveSlaves(); OpenRA.Mods.Cameo/Traits/SlaveMinerSpawnerMaster.cs:193 MoveSlaves() |
 | 2 | 36919d259764fdb5 | OpenRA.Mods.Cameo/Traits/DroneSpawnerMasterCA.cs:297 AssignSlaveActivity(); OpenRA.Mods.Cameo/Traits/SlaveMinerSpawnerMaster.cs:208 AssignSlaveActivity() |
 | 2 | 3ccd15bbfaebfe44 | OpenRA.Mods.Cameo/Traits/BotModules/EngineerBotModule.cs:579 GuardingEnemies(); OpenRA.Mods.Cameo/Traits/BotModules/EngineerBotModule.cs:586 RankBySafety() |
-| 2 | 45a43547d43ff3d8 | OpenRA.Mods.CA/Traits/BotModules/SquadManagerBotModuleCA.cs:2812 IsStealthDraftable(); OpenRA.Mods.CA/Traits/BotModules/SquadManagerBotModuleCA.cs:2814 FindNewUnits() |
+| 2 | 45a43547d43ff3d8 | OpenRA.Mods.CA/Traits/BotModules/SquadManagerBotModuleCA.cs:2871 IsStealthDraftable(); OpenRA.Mods.CA/Traits/BotModules/SquadManagerBotModuleCA.cs:2873 FindNewUnits() |
 | 2 | 522ab179c848a0ef | OpenRA.Mods.Cameo/Traits/DroneSpawnerMasterCA.cs:103 Created(); OpenRA.Mods.Cameo/Traits/SlaveMinerSpawnerMaster.cs:85 Created() |
 | 2 | 5659cbf6c3b6a99d | OpenRA.Mods.CA/Traits/BotModules/Squads/States/GroundConcaveStateCA.cs:411 Valid(); OpenRA.Mods.CA/Traits/BotModules/Squads/States/GroundConcaveStateCA.cs:420 ShouldCommit() |
 | 2 | 61d619290028a34b | OpenRA.Mods.CA/Projectiles/LinearPulse.cs:1509 TryProjectOntoCenterLine(); OpenRA.Mods.CA/Projectiles/LinearPulse.cs:1520 CalculateFalloffDistance() |

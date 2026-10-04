@@ -2,9 +2,9 @@
 
 | metric | meaning | value | floor/baseline |
 |---|---|---|---|
-| T1 | NUnit [Test] cases in OpenRA.Mods.Cameo.Test (70 file(s)) | 807 | >= 24 |
-| T2 | `def test_*` in tools/tests (295 file(s)) | 2978 | >= 177 |
-| T3 | modules with no test mentioning them | 338 | <= 224 |
+| T1 | NUnit [Test] cases in OpenRA.Mods.Cameo.Test (73 file(s)) | 837 | >= 24 |
+| T2 | `def test_*` in tools/tests (297 file(s)) | 3022 | >= 177 |
+| T3 | modules with no test mentioning them | 339 | <= 224 |
 
 
 ## How to run the real suites (periodic run must paste output here)
@@ -15,7 +15,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 ```
 
 
-## T3 — untested modules (338)
+## T3 — untested modules (339)
 
 | kind | file | type(s)/module |
 |---|---|---|
@@ -56,9 +56,10 @@ python -m unittest discover -s tools/tests -t tools/tests
 | C# | OpenRA.Mods.Cameo/Traits/BotInsurance.cs | BotInsurance |
 | C# | OpenRA.Mods.Cameo/Traits/BotModules/ArmyStagingBotModule.cs | ArmyStagingBotModule |
 | C# | OpenRA.Mods.Cameo/Traits/BotModules/AssaultFormationBotModule.cs | AssaultFormationBotModule |
-| C# | OpenRA.Mods.Cameo/Traits/BotModules/BuildOrderKnobsBotModule.cs | BuildOrderSnapshot, BuildOrderKnobsBotModule |
 | C# | OpenRA.Mods.Cameo/Traits/BotModules/CombatAnalysisBotModule.cs | CombatAnalysisBotModule |
+| C# | OpenRA.Mods.Cameo/Traits/BotModules/CombatVetoBotModule.cs | CombatVetoBotModule |
 | C# | OpenRA.Mods.Cameo/Traits/BotModules/DeployBotModule.cs | DeployBotGroup, DeployBotModule |
+| C# | OpenRA.Mods.Cameo/Traits/BotModules/EngagementPriorsBotModule.cs | EngagementPriorsBotModule |
 | C# | OpenRA.Mods.Cameo/Traits/BotModules/GarrisonContestBotModule.cs | GarrisonContestBotModule |
 | C# | OpenRA.Mods.Cameo/Traits/BotModules/GarrisonDefenseBotModule.cs | GarrisonDefenseBotModule |
 | C# | OpenRA.Mods.Cameo/Traits/BotModules/HumanPaceBotModule.cs | HumanPaceBotModule |
@@ -361,5 +362,5 @@ python -m unittest discover -s tools/tests -t tools/tests
 
 ## FAIL
 
-- T3: 338 untested > baseline 224
+- T3: 339 untested > baseline 224
 

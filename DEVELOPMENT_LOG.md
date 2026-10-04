@@ -18171,3 +18171,21 @@ Generated with [Devin](https://devin.ai)
   distinct seeded arms per match, `pinned:true`, `armed:"plan_bandits"`. 822/822, boot-gate PASS.
 * Incident: one file's uncommitted edits were reverted by an external process mid-session (IDE/other
   agent). Detected via dll content check before the smoke; re-applied via shell and committed promptly.
+
+### 2026-10-04 DAWN round-2: public-faction adoption + disabled guards + tuner tests (D2/D3/D4)
+
+Branch `devin/dawn/t3-public-faction` off master `8e86fca23`, worktree `C:/cameo-wt/dawn-t3pf`.
+* **D2**: `EnemyFactionOf` live path and the `PlayerReference.Enemies` early-resolve both map through
+  `BotFactionView.PublicFactionOf` / new name-level `PublicFactionName` — a Random or hidden pick is ""
+  and the scope pools to generic levels (was: `Faction?.InternalName` truth / verbatim "Random" strings).
+  `BuildOrderKnobsBotModule.EnemyFaction()` already delegates to `EnemyFactionOf`, so one edit covers both
+  modules; shared dominant-faction pick extracted as `DominantFaction` (count desc, ordinal tie-break).
+* **D3**: `PinnedPersonalityArm`/`PlanOverlayMilli`/`Snapshot` self-guard `IsTraitDisabled` -> neutral
+  (null / 1000 / null) — rule 5 belt; a disabled bandit never even draws.
+* **D4**: `tools/tests/test_tune_plan_bandits.py` (15 tests): pooling chain, Welford, decay-drop,
+  --armed-only hold/unhold, Processed idempotency, malformed rows (missing score/scope default,
+  missing ids fail loud). **Real bug the tests caught**: `update()`'s early `if not fresh` return skipped
+  the skipped-rows Processed marking — unattributed rows re-scanned forever. Moved marking above the return.
+* Verify: build 0E, **mod-code warnings 0**; 837/837 NUnit (+3 BotFactionView/DominantFaction);
+  pytest 15/15 new file; `tools/boot_gate.ps1` PASS (menu, 0 exceptions, exit 0); audit regen: fog_honesty
+  +1 site (263), ai_arch_freshness FAIL->PASS (master's committed report was stale), rest master drift.

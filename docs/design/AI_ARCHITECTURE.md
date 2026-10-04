@@ -3698,6 +3698,15 @@ frozen at draw time, is emitted as `bandit.armed` ("+"-joined, sorted; `none` wh
 --armed-only SET` folds only records produced under that exact set — the honest way to split posteriors by
 survivorship filter; a plain run pools all sets (documented, current default).
 
+**Fog + self-guards (round-2 orders 2026-10-03).** The scope's enemy faction is `BotFactionView.PublicFactionOf`
+everywhere: the live path groups enemy players by lobby-visible `DisplayFaction`, and the early-resolve fallback
+(the draw runs inside the `Player` ctor, before `SetPlayers`) resolves `PlayerReference.Enemies` faction names
+through `PublicFactionName` — a Random or hidden pick yields "" and the scope pools to the generic levels instead
+of keying a matchup the bot could not publicly know. `BuildOrderKnobsBotModule.EnemyFaction()` delegates to the
+same `EnemyFactionOf`, so the bandit and the build-order scope can never disagree. Every public reader self-guards
+`IsTraitDisabled` (rule 5): `PinnedPersonalityArm` -> null, `PlanOverlayMilli` -> 1000, `Snapshot` -> null — a
+disabled bandit never draws, pins, overlays or logs, even if a consumer forgets the `IsTraitEnabled` filter.
+
 **Interactions.** Tier-2 `combatveto`: vetoed fights emit DENIED records but no engagement — posteriors are
 conditioned on fights the veto let through (intended composition; `armed` makes the conditioning explicit and
 fitter-addressable, counterfactual scoring would need EL on DENIED cards, not implemented). EL-1 `inmatchadapt`:
@@ -3707,8 +3716,10 @@ reads the pin lazily, so trait enable order cannot race it.
 **Tests / rulings.** `PlanBanditMathTest` pins the pure contract: Welford/Chan stats, parent downweighting,
 deterministic Thompson draws from an explicit uniform stream, the LCB safety floor (and its sparse-arm exemption),
 decay, malformed learned rows, the matchup -> faction -> family -> any chain and own-scope `EvidenceN`.
-`BuildOrderKnobsEvalTest` keeps unmatched learned opening posteriors neutral (1,1). Switch ruling: `genericbot &&
-plan_bandits`; OFF/classic stays bit-identical.
+`BotFactionViewTest` pins the public-faction predicate (Random -> "", dominant-faction tie-break);
+`tools/tests/test_tune_plan_bandits.py` pins the fitter's pooling, decay, `--armed-only`, `Processed` idempotency
+and malformed rows. `BuildOrderKnobsEvalTest` keeps unmatched learned opening posteriors neutral (1,1). Switch
+ruling: `genericbot && plan_bandits`; OFF/classic stays bit-identical.
 
 ### 12.34 T1 — the tier-1 'measured from logs' fitter (Devin, 2026-10-03; TIER1_FITTER_SPEC)
 

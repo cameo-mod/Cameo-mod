@@ -9,15 +9,31 @@
  */
 #endregion
 
+using System.Linq;
+using OpenRA.Traits;
+
 namespace OpenRA.Mods.Cameo.Traits.BotModules
 {
 	public static class BotFactionView
 	{
 		/// <summary>DESIGN §19.5 + engine Player.cs:65/175-177/196-198: the lobby-visible faction; Random or hidden picks return "".</summary>
-		public static string PublicFactionOf(OpenRA.Player player)
+		public static string PublicFactionOf(OpenRA.Player player) => PublicName(player?.DisplayFaction);
+
+		/// <summary>
+		/// The public view of a faction NAME — a map PlayerReference's faction string, resolved against the
+		/// map ruleset the way engine ResolveDisplayFaction resolves it (Player.cs:151): "" for Random/hidden
+		/// or unresolvable names, under the same predicate PublicFactionOf applies to players.
+		/// </summary>
+		public static string PublicFactionName(World world, string factionName)
 		{
-			var faction = player?.DisplayFaction;
-			return faction == null || faction.InternalName == null || faction.RandomFactionMembers?.Count > 0 ? "" : faction.InternalName;
+			var factions = world.Map.Rules.Actors[SystemActors.World].TraitInfos<FactionInfo>();
+			return PublicName(factions.FirstOrDefault(f => f.InternalName == factionName));
 		}
+
+		/// <summary>The shared predicate: a faction is publicly known only when it has a concrete InternalName
+		/// and is not a Random picker (a FactionInfo whose RandomFactionMembers holds the real candidates).</summary>
+		internal static string PublicName(FactionInfo faction) =>
+			faction == null || faction.InternalName == null || faction.RandomFactionMembers?.Count > 0
+				? "" : faction.InternalName;
 	}
 }
