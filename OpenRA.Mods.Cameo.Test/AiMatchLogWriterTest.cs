@@ -197,6 +197,41 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(first.GetProperty("type").GetString(), Is.EqualTo("td_gdi_humveemkii"));
 			Assert.That(first.GetProperty("units").GetInt32(), Is.EqualTo(2));
 			Assert.That(o.GetProperty("by_type").GetArrayLength(), Is.EqualTo(3));
+			Assert.That(o.GetProperty("examples").GetArrayLength(), Is.EqualTo(0), "no examples without a store, but the field is always present");
+		}
+
+		[Test]
+		public void OwnershipExamplesAreCappedPerKindAndNameTheHolders()
+		{
+			var counts = new Dictionary<BotOwnershipViolation, int> { [BotOwnershipViolation.DoubleOwner] = 3, [BotOwnershipViolation.Orphan] = 1 };
+			var byType = new Dictionary<(BotOwnershipViolation, string), int>
+			{
+				[(BotOwnershipViolation.DoubleOwner, "td_gdi_minigunner")] = 3,
+				[(BotOwnershipViolation.Orphan, "td_gdi_apc")] = 1,
+			};
+
+			var examples = new BotOwnershipViolationExamples(2);
+			examples.Add(BotOwnershipViolation.DoubleOwner, 100, "td_gdi_minigunner", 11, "rush/Assault#0 + lease GarrisonContestBotModule");
+			examples.Add(BotOwnershipViolation.DoubleOwner, 200, "td_gdi_minigunner", 12, "rush/Assault#0 + lease GarrisonContestBotModule");
+			examples.Add(BotOwnershipViolation.DoubleOwner, 300, "td_gdi_minigunner", 13, "rush/Assault#1 + lease ScoutBotModule");
+			examples.Add(BotOwnershipViolation.Orphan, 400, "td_gdi_apc", 14, "unowned for 900 ticks");
+
+			var b = new StringBuilder("{");
+			AiMatchLogWriter.AppendNumber(b, "schema", 2, true);
+			AiMatchLogWriter.AppendOwnership(b, 240, counts, byType, examples.ByKind);
+			b.Append('}');
+
+			using var doc = JsonDocument.Parse(b.ToString());
+			var ex = doc.RootElement.GetProperty("ownership").GetProperty("examples");
+			Assert.That(ex.GetArrayLength(), Is.EqualTo(3), "the third double_owner is dropped by the cap");
+			var first = ex[0];
+			Assert.That(first.GetProperty("kind").GetString(), Is.EqualTo("double_owner"));
+			Assert.That(first.GetProperty("tick").GetInt32(), Is.EqualTo(100));
+			Assert.That(first.GetProperty("type").GetString(), Is.EqualTo("td_gdi_minigunner"));
+			Assert.That(first.GetProperty("actor_id").GetInt64(), Is.EqualTo(11));
+			Assert.That(first.GetProperty("detail").GetString(), Does.Contain("GarrisonContestBotModule"));
+			Assert.That(ex[1].GetProperty("actor_id").GetInt64(), Is.EqualTo(12));
+			Assert.That(ex[2].GetProperty("kind").GetString(), Is.EqualTo("orphan"), "kinds emit in enum order");
 		}
 	}
 }
