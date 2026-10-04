@@ -1,3 +1,24 @@
+# 2026-10-04 — REF-1 B-items: crawl supply want, MCV prereq want, ungated planner, coverage nudge
+
+*Devin (T2Verify), branch `devin/ref1-refinery-law-v2`.* Consolidated scope from the crawl trace
+(`NOTE_2026-10-04_devin-t3verify_crawl-trace.md`: frontier froze ~26 cells short once `nuk2` retired power-driven
+crawl; td_gdi's MCV sat gated on a repair facility for ~10k ticks): **B1** — while the crawl target's field is out
+of reach and no anchor is claimable in reach, the planner publishes `WantedLinkBuilding` (cheapest buildable) and
+`CrawlTargetEdge` (the target field's resource cell nearest the frontier); the queue takes the want after
+refineries, and the cash gate lets it through at its own price. **B2** — `McvDue` drops the cash gate from the
+request (it rides under `McvRequestReserve`; production is cash-gated downstream) and a due-but-unproducible MCV
+surfaces its cheapest unmet prerequisite provider as `WantedMcvPrerequisite` via `TechTree.HasPrerequisites`.
+**B3** — `refinery.Info == null` no longer nulls `Target`/`LastScores` or skips `RequestMcv`:
+`RefineryEstimateOrFallback` uses the last-seen buildable, then a rules-listed refinery, for the payback estimate.
+**B4** — the post-placement expansion nudge is `RefineryLawNudge.Due` = all anchors in reach served AND unserved
+anchors beyond reach (`UnservedAnchorsBeyondReach` — new `ClaimOrder` counter), replacing the raw
+`numRef >= Initial + Additional` under the law only. All new provider members publish only under `RefineryLawActive`;
+queue changes are confined to refinery/crawl/MCV triggers. Tests 855/855 (6 new: `LinkBuildingWanted`, the two
+ClaimOrder counters, `McvDue`, `MissingPrerequisiteTokens`, `RefineryEstimateOrFallback`, `RefineryLawNudge.Due`).
+Build 0 err / 0 mod warnings; fog + mutation audits PASS; boot gate PASS. Harness fix: `run_ai_match_batch.py`
+`mp_spawn_cells` accepts Owner/Location in either yaml order (unblocks deterring-democracy, whose map.yaml writes
+Location first). Pending: the 2-map ≥20k-tick re-smoke + `refinery_law_check.py` verdicts.
+
 # 2026-10-04 — REF-1 checkpoint: smoke findings fixed (first refinery, field counters, reach)
 
 *Devin (T2Verify), branch `devin/ref1-refinery-law-v2`.* The isolated td_gdi hard-vs-hard smoke (12,642 ticks)

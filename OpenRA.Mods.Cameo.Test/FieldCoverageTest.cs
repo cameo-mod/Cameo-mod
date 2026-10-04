@@ -11,6 +11,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
+using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.Cameo.Traits;
 using OpenRA.Mods.Cameo.Traits.BotModules;
 
@@ -111,7 +112,7 @@ namespace OpenRA.Mods.Cameo.Test
 
 			var order = ExpansionPlannerBotModule.ClaimOrder(anchors, fieldOf, fieldCells,
 				new[] { C(21, 21) }, null, buildings, 8, 80, null, null, null,
-				out var unservedAnchors, out var unservedFields, out var tiers);
+				out var unservedAnchors, out var unservedFields, out var tiers, out _, out _);
 
 			Assert.That(order[0], Is.EqualTo(3));
 			Assert.That(tiers[3], Is.EqualTo(1));
@@ -133,7 +134,7 @@ namespace OpenRA.Mods.Cameo.Test
 
 			var order = ExpansionPlannerBotModule.ClaimOrder(anchors, fieldOf, fieldCells,
 				new[] { C(21, 21) }, null, new[] { C(10, 20) }, 8, 80, null, null, null,
-				out var unservedAnchors, out var unservedFields, out var tiers);
+				out var unservedAnchors, out var unservedFields, out var tiers, out _, out _);
 
 			Assert.That(order, Is.EqualTo(new[] { 2, 1 }));
 			Assert.That(tiers[2], Is.EqualTo(2));
@@ -151,7 +152,7 @@ namespace OpenRA.Mods.Cameo.Test
 
 			var order = ExpansionPlannerBotModule.ClaimOrder(anchors, fieldOf, fieldCells,
 				new CPos[0], null, new[] { C(8, 10) }, 8, 80, null, null, null,
-				out _, out _, out var tiers);
+				out _, out _, out var tiers, out _, out _);
 
 			Assert.That(order, Is.EqualTo(new[] { 1 }));
 			Assert.That(tiers[1], Is.EqualTo(1));
@@ -168,7 +169,7 @@ namespace OpenRA.Mods.Cameo.Test
 
 			var order = ExpansionPlannerBotModule.ClaimOrder(anchors, fieldOf, fieldCells,
 				new CPos[0], null, new[] { C(10, 20) }, 8, 80, i => i == 0, i => i == 0, null,
-				out var unservedAnchors, out var unservedFields, out var tiers);
+				out var unservedAnchors, out var unservedFields, out var tiers, out _, out _);
 
 			Assert.That(order, Is.EqualTo(new[] { 2, 1 }));
 			Assert.That(tiers[2], Is.EqualTo(1));
@@ -187,7 +188,7 @@ namespace OpenRA.Mods.Cameo.Test
 
 			var order = ExpansionPlannerBotModule.ClaimOrder(anchors, fieldOf, fieldCells,
 				new[] { C(13, 10) }, null, new[] { C(10, 10), C(45, 10) }, 8, 10, null, null, null,
-				out var unservedAnchors, out var unservedFields, out _);
+				out var unservedAnchors, out var unservedFields, out _, out _, out _);
 
 			Assert.That(order, Is.EqualTo(new[] { 1 }));
 			Assert.That(unservedAnchors, Is.EqualTo(1));
@@ -206,7 +207,7 @@ namespace OpenRA.Mods.Cameo.Test
 
 			var order = ExpansionPlannerBotModule.ClaimOrder(anchors, fieldOf, fieldCells,
 				stack, null, new[] { C(5, 10), C(55, 10) }, 8, 10, null, null, null,
-				out var unservedAnchors, out var unservedFields, out _);
+				out var unservedAnchors, out var unservedFields, out _, out _, out _);
 
 			Assert.That(order, Is.EqualTo(new[] { 1 }));
 			Assert.That(unservedAnchors, Is.EqualTo(1));
@@ -223,7 +224,7 @@ namespace OpenRA.Mods.Cameo.Test
 
 			var order = ExpansionPlannerBotModule.ClaimOrder(anchors, fieldOf, fieldCells,
 				new CPos[0], null, new[] { C(12, 10) }, 8, 10, i => i == 0, null, null,
-				out var unservedAnchors, out var unservedFields, out var tiers);
+				out var unservedAnchors, out var unservedFields, out var tiers, out _, out _);
 
 			Assert.That(order, Is.EqualTo(new[] { 1 }));
 			Assert.That(tiers[0], Is.EqualTo(0));
@@ -242,7 +243,7 @@ namespace OpenRA.Mods.Cameo.Test
 
 			var order = ExpansionPlannerBotModule.ClaimOrder(anchors, fieldOf, fieldCells,
 				new CPos[0], null, new[] { C(10, 20) }, 8, 80, null, null, C(58, 22),
-				out _, out _, out _);
+				out _, out _, out _, out _, out _);
 
 			Assert.That(order[0], Is.EqualTo(1));
 		}
@@ -266,7 +267,7 @@ namespace OpenRA.Mods.Cameo.Test
 			var order = ExpansionPlannerBotModule.ClaimOrder(anchors, new[] { 0, 1 },
 				Fields(new[] { C(10, 9) }, new[] { C(18, 9) }),
 				new CPos[0], null, new[] { C(12, 10) }, 8, 10, i => i == 0, null, null,
-				out var unserved, out _, out _);
+				out var unserved, out _, out _, out _, out _);
 			Assert.That(order, Is.EqualTo(new[] { 1 }));
 			Assert.That(unserved, Is.EqualTo(2));
 		}
@@ -283,7 +284,7 @@ namespace OpenRA.Mods.Cameo.Test
 
 			var order = ExpansionPlannerBotModule.ClaimOrder(anchors, fieldOf, fieldCells,
 				new CPos[0], null, new[] { C(44, 20) }, 8, 6, null, null, null,
-				out var unservedAnchors, out var unservedFields, out _);
+				out var unservedAnchors, out var unservedFields, out _, out _, out _);
 
 			Assert.That(order, Is.EqualTo(new[] { 0 }));
 			Assert.That(unservedAnchors, Is.EqualTo(1));
@@ -301,7 +302,7 @@ namespace OpenRA.Mods.Cameo.Test
 
 			var order = ExpansionPlannerBotModule.ClaimOrder(anchors, new[] { 1 }, fieldCells,
 				new[] { C(40, 20) }, null, new[] { C(44, 20) }, 8, 6, null, null, null,
-				out var unservedAnchors, out var unservedFields, out _);
+				out var unservedAnchors, out var unservedFields, out _, out _, out _);
 
 			Assert.That(order, Is.Empty);
 			Assert.That(unservedAnchors, Is.EqualTo(0));
@@ -319,7 +320,7 @@ namespace OpenRA.Mods.Cameo.Test
 
 			var order = ExpansionPlannerBotModule.ClaimOrder(anchors, new[] { 0, 1 }, fieldCells,
 				new CPos[0], null, new[] { C(44, 20) }, 8, 6, null, null, null,
-				out _, out _, out var tiers);
+				out _, out _, out var tiers, out _, out _);
 
 			Assert.That(order, Is.EqualTo(new[] { 0 }));
 			Assert.That(tiers[0], Is.EqualTo(1));
@@ -334,7 +335,7 @@ namespace OpenRA.Mods.Cameo.Test
 			var order = ExpansionPlannerBotModule.ClaimOrder(anchors, new[] { 0, 1 },
 				Fields(new[] { C(53, 20) }, new[] { C(61, 20) }),
 				new CPos[0], null, new[] { C(44, 20) }, 8, 6, i => i == 0, i => i == 0, null,
-				out _, out _, out _);
+				out _, out _, out _, out _, out _);
 
 			Assert.That(order, Is.Empty);
 		}
@@ -423,6 +424,118 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(ExpansionPlannerBotModule.TakenByMcvSite(C(100, 50), new[] { C(98, 50) }, 8), Is.True);
 			Assert.That(ExpansionPlannerBotModule.TakenByMcvSite(C(100, 50), new[] { C(50, 5) }, 8), Is.False);
 			Assert.That(ExpansionPlannerBotModule.TakenByMcvSite(C(100, 50), Enumerable.Empty<CPos>(), 8), Is.False);
+		}
+
+		[Test]
+		public void LinkBuildingWantedOnlyWhileTargetOutOfReachAndNothingClaimable()
+		{
+			// REF-1 B1: a far target + zero claimable anchors in reach -> the crawl wants its supply building.
+			Assert.That(ExpansionPlannerBotModule.LinkBuildingWanted(true, 3, 0, true), Is.True);
+
+			// ...and only then: drive off, no target, target already in reach, an anchor claimable, or no link
+			// buildable each silence it.
+			Assert.That(ExpansionPlannerBotModule.LinkBuildingWanted(false, 3, 0, true), Is.False);
+			Assert.That(ExpansionPlannerBotModule.LinkBuildingWanted(true, null, 0, true), Is.False);
+			Assert.That(ExpansionPlannerBotModule.LinkBuildingWanted(true, 0, 0, true), Is.False);
+			Assert.That(ExpansionPlannerBotModule.LinkBuildingWanted(true, 3, 1, true), Is.False);
+			Assert.That(ExpansionPlannerBotModule.LinkBuildingWanted(true, 3, 0, false), Is.False);
+		}
+
+		[Test]
+		public void ClaimOrderCountsClaimableInReachAndUnservedBeyond()
+		{
+			// B1's gate metric and B4's nudge metric: field A in reach and unserved is claimable; field B's
+			// anchor sits beyond reach and unserved.
+			var anchors = new[] { C(10, 10), C(60, 10) };
+			var fieldOf = new[] { 0, 1 };
+			var fieldCells = Fields(new[] { C(11, 10) }, new[] { C(61, 10) });
+
+			ExpansionPlannerBotModule.ClaimOrder(anchors, fieldOf, fieldCells,
+				new CPos[0], null, new[] { C(10, 12) }, 8, 6, null, null, null,
+				out _, out _, out _, out var claimable, out var beyond);
+
+			Assert.That(claimable, Is.EqualTo(1));
+			Assert.That(beyond, Is.EqualTo(1));
+
+			// A refinery serving A: nothing claimable remains, B stays unserved beyond reach.
+			ExpansionPlannerBotModule.ClaimOrder(anchors, fieldOf, fieldCells,
+				new[] { C(11, 10) }, null, new[] { C(10, 12) }, 8, 6, null, null, null,
+				out _, out _, out _, out var claimableServed, out var beyondServed);
+
+			Assert.That(claimableServed, Is.EqualTo(0));
+			Assert.That(beyondServed, Is.EqualTo(1));
+		}
+
+		[Test]
+		public void McvDueRidesUnderTheReserve()
+		{
+			// REF-1 B2: the request is free — no cash term at all; a far free field and pipeline room decide.
+			Assert.That(ExpansionPlannerBotModule.McvDue(true, 1, 3), Is.True);
+			Assert.That(ExpansionPlannerBotModule.McvDue(false, 1, 3), Is.False);
+			Assert.That(ExpansionPlannerBotModule.McvDue(true, 3, 3), Is.False);
+		}
+
+		[Test]
+		public void MissingPrerequisiteTokensSkipsMetAndForbiddenEntries()
+		{
+			var met = new HashSet<string> { "a" };
+			var missing = ExpansionPlannerBotModule.MissingPrerequisiteTokens(
+				new[] { "~b", "a", "!c", "d" }, raw => met.Contains(raw.Replace("~", string.Empty)));
+
+			// "~b" unmet but fixable; "a" met; "!c" is satisfied by absence (nothing builds it away); "d" missing.
+			Assert.That(missing.ToList(), Is.EqualTo(new[] { "b", "d" }));
+		}
+
+		[Test]
+		public void RefineryEstimateFallsBackInsteadOfGoingSilent()
+		{
+			// REF-1 B3: a transiently unbuildable refinery keeps the remembered estimate, then the rules-listed
+			// one — only a mod with no refinery at all yields none.
+			var live = (new ActorInfo("refinery.live"), 800, 100);
+			var remembered = (new ActorInfo("refinery.remembered"), 900, 110);
+			var rules = (new ActorInfo("refinery.rules"), 700, 90);
+			var none = ((ActorInfo)null, 0, 0);
+
+			Assert.That(ExpansionPlannerBotModule.RefineryEstimateOrFallback(live, remembered, () => rules).Info.Name,
+				Is.EqualTo("refinery.live"));
+			Assert.That(ExpansionPlannerBotModule.RefineryEstimateOrFallback(none, remembered, () => rules).Info.Name,
+				Is.EqualTo("refinery.remembered"));
+			Assert.That(ExpansionPlannerBotModule.RefineryEstimateOrFallback(none, none, () => rules).Info.Name,
+				Is.EqualTo("refinery.rules"));
+			Assert.That(ExpansionPlannerBotModule.RefineryEstimateOrFallback(none, none, () => none).Info, Is.Null);
+		}
+
+		[Test]
+		public void RefineryLawNudgeReplacesTheRefineryCount()
+		{
+			// Classic / switch-off (no provider): the old refinery total decides verbatim.
+			Assert.That(RefineryLawNudge.Due(null, 3, 3), Is.True);
+			Assert.That(RefineryLawNudge.Due(null, 2, 3), Is.False);
+
+			// REF-1 B4 under the law: coverage decides — all anchors in reach served AND unserved anchors beyond
+			// reach. The raw refinery count is irrelevant in both directions.
+			Assert.That(RefineryLawNudge.Due(new LawStub(0, 2), 0, 3), Is.True);
+			Assert.That(RefineryLawNudge.Due(new LawStub(1, 2), 5, 3), Is.False);
+			Assert.That(RefineryLawNudge.Due(new LawStub(0, 0), 5, 3), Is.False);
+		}
+
+		sealed class LawStub : IBotExpansionTargetProvider
+		{
+			readonly int unservedInReach;
+			readonly int beyond;
+
+			public LawStub(int unservedInReach, int beyond)
+			{
+				this.unservedInReach = unservedInReach;
+				this.beyond = beyond;
+			}
+
+			public CPos? ExpansionTarget => null;
+			public bool WantsRefineryAtExpansionTarget => false;
+			public int ExpansionTargetClaimRadius => 0;
+			public CPos? RefineryClaimTarget => null;
+			public int UnservedAnchorsInReach => unservedInReach;
+			public int UnservedAnchorsBeyondReach => beyond;
 		}
 	}
 }

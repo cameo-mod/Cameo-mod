@@ -3314,6 +3314,33 @@ placement ("base" reason, 4-14 cells from the spreader). v2:
 * Fransbot note (report-only): `FransBaseBuilderBotModule`/`FransQueueManager` keep the same base-centre refinery
   placement; untouched in this task per the rules.
 
+**REF-1 B1–B4 — crawl supply, MCV unlock, ungated planner (maintainer 2026-10-04, consolidated scope):**
+* **B1 — the planner wants its own crawl link.** While the crawl target's field is out of reach and no anchor is
+  claimable in reach (`ClaimOrder`'s `claimableAnchorsInReach` = unserved, in reach, neither parked nor pending),
+  the provider publishes `WantedLinkBuilding` — the cheapest building its own building queues could produce —
+  instead of relying on power demand (which retired the moment a bigger plant unlocked; the trace's frontier froze
+  ~26 cells short). The queue manager takes the want after refineries and before the fraction roll, skips one
+  already in production, and the cash gate lets a want through at its own price — the link IS the economy
+  investment. Placement aims at `CrawlTargetEdge` — the target field's resource cell nearest our frontier — so
+  every placement closes the gap.
+* **B2 — the MCV's missing prerequisite becomes a want, and the request rides under the reserve.** `RequestMcv`
+  no longer gates on `McvRequestReserve` (the request is free; production is cash-gated downstream) — the `due`
+  test is `McvDue` = a far field free AND pipeline room. When the MCV is due but no queue can produce it,
+  `MissingMcvPrerequisite` names the cheapest currently-buildable provider of an unmet prerequisite (td_gdi: the
+  repair facility) and publishes it as `WantedMcvPrerequisite` — the same production-want channel as the link.
+* **B3 — the planner never goes silent.** A transiently unbuildable refinery no longer nulls `Target`/`LastScores`
+  and skips `RequestMcv`: `RefineryEstimateOrFallback` substitutes the last seen buildable, then a rules-listed
+  refinery, purely for the scoring estimate. Target publication, anchor claims and the MCV request all keep
+  running; only a mod with no refinery at all still early-returns (and even then requests the MCV first).
+* **B4 — the expansion nudge keys off coverage.** Under the law the queue's post-placement nudge replaces
+  `numRef >= InititalMinimumRefineryCount + AdditionalMinimumRefineryCount` with `RefineryLawNudge.Due` =
+  `UnservedAnchorsInReach == 0 && UnservedAnchorsBeyondReach > 0` (all anchors in reach served, more anchors
+  beyond reach). Classic and switch-off keep the raw count.
+* Classic and switch-off see the interface defaults — every new provider member publishes only under
+  `RefineryLawActive` — and the queue changes touch only refinery, crawl and MCV triggers. Tests:
+  `LinkBuildingWanted`, `McvDue`, `MissingPrerequisiteTokens`, `RefineryEstimateOrFallback`,
+  `RefineryLawNudge.Due`, and the two new `ClaimOrder` counters.
+
 ### 12.25 BO — the building build-order lab: log, score, tune, personalise, learn, react (maintainer 2026-10-02; owner Claude)
 
 > *Maintainer:* "log the build order, then try to switch it around until the result is optimal … for all the buildings

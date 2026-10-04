@@ -92,10 +92,51 @@ namespace OpenRA.Mods.CA.Traits
 		void RefineryClaimCommitted(CPos anchor) { }
 
 		/// <summary>
-		/// REF-1: anchors in reach that are claimable right now — unserved, not parked, not pending. The production gate:
+		/// REF-1: anchors claimable right now — unserved, not parked, not pending. The production gate:
 		/// a refinery is allowed only while this exceeds the in-flight refinery count, never by comparing global totals
-		/// (a duplicate at home must not eat the quota of a forward anchor).
+		/// (a duplicate at home must not eat the quota of a forward anchor). The first-refinery fallback claim (an
+		/// unserved anchor beyond reach, claimed when nothing else is) counts too, so the first refinery is never
+		/// cap-blocked.
 		/// </summary>
 		int UnclaimedAnchorsInReach => 0;
+
+		/// <summary>
+		/// REF-1 B1 (§12.24 v2): the name of the cheapest crawl-eligible building the planner wants produced while
+		/// the crawl target's field sits beyond reach and no anchor is claimable — the crawl's own supply, instead of
+		/// power demand's accident. Null = no want (classic, switch off, nothing to do).
+		/// </summary>
+		string WantedLinkBuilding => null;
+
+		/// <summary>
+		/// REF-1 B1: the crawl aim refined to the target field's resource cell nearest our frontier — every building
+		/// placed to close the gap. Null = <see cref="ExpansionTarget"/> (the field centre) remains the aim.
+		/// </summary>
+		CPos? CrawlTargetEdge => null;
+
+		/// <summary>
+		/// REF-1 B2: the name of the cheapest currently-buildable provider of a due construction MCV's missing
+		/// prerequisite (td_gdi: the repair facility). Null = none — the MCV is producible or none is due.
+		/// </summary>
+		string WantedMcvPrerequisite => null;
+
+		/// <summary>
+		/// REF-1 B4: anchors with no serving refinery whose field edge sits beyond building reach — the law's
+		/// expansion-nudge condition ("all anchors in reach served and unserved anchors exist beyond reach").
+		/// </summary>
+		int UnservedAnchorsBeyondReach => 0;
+	}
+
+	/// <summary>
+	/// REF-1 B4: the expansion nudge. Under the refinery law the old raw refinery total
+	/// (<c>numRef &gt;= InititalMinimumRefineryCount + AdditionalMinimumRefineryCount</c>) is replaced by coverage:
+	/// fire when every anchor in reach is served and unserved anchors still exist beyond reach. Classic and
+	/// switch-off keep the refinery-count test verbatim.
+	/// </summary>
+	public static class RefineryLawNudge
+	{
+		public static bool Due(IBotExpansionTargetProvider law, int refineryCount, int refineryMinimum) =>
+			law != null
+				? law.UnservedAnchorsInReach == 0 && law.UnservedAnchorsBeyondReach > 0
+				: refineryCount >= refineryMinimum;
 	}
 }

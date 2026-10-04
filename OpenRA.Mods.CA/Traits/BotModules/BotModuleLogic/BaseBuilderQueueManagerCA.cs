@@ -252,8 +252,17 @@ namespace OpenRA.Mods.CA.Traits
 				if (item == null)
 					return false;
 
-				// We shouldn't be queueing new buildings (other than refineries) when we're low on cash
-				if ((playerResources.GetCashAndResources() < minCashRequirement && !baseBuilder.Info.RefineryTypes.Contains(item.Name)) || itemQueuedThisTick)
+				// We shouldn't be queueing new buildings (other than refineries) when we're low on cash.
+				// REF-1 B1/B2: under the refinery law the planner's own wants (the crawl link and the due MCV's
+				// prerequisite) ride at their own cost floor — a crawl link IS the economy investment, and the
+				// reserve-sized gate starved the frontier in the trace.
+				var lawWants = baseBuilder.RefineryLawProvider();
+				var plannerWant = lawWants != null
+					&& (item.Name == lawWants.WantedLinkBuilding || item.Name == lawWants.WantedMcvPrerequisite);
+				if ((playerResources.GetCashAndResources() < minCashRequirement
+						&& !baseBuilder.Info.RefineryTypes.Contains(item.Name)
+						&& !(plannerWant && playerResources.GetCashAndResources() >= queue.GetProductionCost(item)))
+					|| itemQueuedThisTick)
 					return false;
 
 				// Cameo (§12.20): the army-first vote - a provider (ArmyFirstBotModule, the one owner) can hold new
@@ -397,7 +406,11 @@ namespace OpenRA.Mods.CA.Traits
 
 						var tolerateOnCash = playerResources.GetCashAndResources() / Math.Max(baseBuilder.Info.PerExpansionTolerateOnCash, 1);
 
-						if (numRef >= baseBuilder.Info.InititalMinimumRefineryCount + baseBuilder.Info.AdditionalMinimumRefineryCount
+						// REF-1 B4 (§12.24 v2): under the refinery law the raw refinery total is replaced by
+						// coverage — nudge an expansion when every anchor in reach is served and unserved anchors
+						// still exist beyond reach. Classic/switch-off keep the old count.
+						if (RefineryLawNudge.Due(baseBuilder.RefineryLawProvider(), numRef,
+								baseBuilder.Info.InititalMinimumRefineryCount + baseBuilder.Info.AdditionalMinimumRefineryCount)
 							&& numProd > 0 && numProd + numTech - RandomTolerance(baseBuilder.Info.ExpansionTolerate) - tolerateOnCash >= numRef)
 						{
 							var undeployEvenNoBase = numProd + numTech - RandomTolerance(baseBuilder.Info.ForceExpansionTolerate) - tolerateOnCash >= numRef;
@@ -642,6 +655,36 @@ namespace OpenRA.Mods.CA.Traits
 					if (power != null && !HasSufficientPowerForActor(refinery))
 					{
 						AIUtils.BotDebug("{0} decided to build {1}: Priority override (would be low power)", queue.Actor.Owner, power.Name);
+						return power;
+					}
+				}
+			}
+
+			// REF-1 B1/B2 (§12.24 v2): the planner's own wants, after refineries but before the fraction roll —
+			// the due MCV's missing prerequisite, then the cheapest crawl-eligible link building while the crawl
+			// target is out of reach. Only under the refinery law (the provider publishes nulls otherwise), and
+			// only when the wanted building isn't already in production.
+			var law = baseBuilder.RefineryLawProvider();
+			if (law != null)
+			{
+				foreach (var want in new[] { law.WantedMcvPrerequisite, law.WantedLinkBuilding })
+				{
+					if (want == null || (baseBuilder.BuildingsBeingProduced?.ContainsKey(want) ?? false))
+						continue;
+
+					var pick = GetProducibleBuilding(new HashSet<string> { want }, buildableThings, a => 0);
+					if (pick == null)
+						continue;
+
+					if (HasSufficientPowerForActor(pick))
+					{
+						AIUtils.BotDebug("{0} decided to build {1}: Priority override (REF-1 planner want)", queue.Actor.Owner, pick.Name);
+						return pick;
+					}
+
+					if (power != null)
+					{
+						AIUtils.BotDebug("{0} decided to build {1}: Priority override (planner want would be low power)", queue.Actor.Owner, power.Name);
 						return power;
 					}
 				}
@@ -1221,11 +1264,15 @@ namespace OpenRA.Mods.CA.Traits
 					var expansionTarget = baseBuilder.ExpansionTarget();
 					if (expansionTarget != null)
 					{
-						var toward = findPos(actorType, distanceToBaseIsImportant, producer, baseCenter, expansionTarget.Value,
+						// REF-1 B1: under the law the aim is the target field's resource EDGE nearest our frontier —
+						// every building placed to close the gap; the field centre remains the aim when no edge is
+						// published (classic, switch-off, fields without cells).
+						var crawlAim = baseBuilder.RefineryLawProvider()?.CrawlTargetEdge ?? expansionTarget;
+						var toward = findPos(actorType, distanceToBaseIsImportant, producer, baseCenter, crawlAim.Value,
 							baseBuilder.Info.MinBaseRadius, baseBuilder.Info.BaseCrawlRadius);
 						if (toward.Location != null)
 						{
-							Log.Write("debug", $"AI ({player.ClientIndex}): EX-1 BaseCrawl {actorType} at {toward.Location.Value} toward field {expansionTarget.Value} at tick {world.WorldTick}");
+							Log.Write("debug", $"AI ({player.ClientIndex}): EX-1 BaseCrawl {actorType} at {toward.Location.Value} toward field {crawlAim.Value} at tick {world.WorldTick}");
 							return toward;
 						}
 					}

@@ -82,8 +82,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			"The engine module still decides where to send it (EX-3) and placement/dedup is unchanged.")]
 		public readonly bool DriveMcvRequests = false;
 
-		[Desc("Greedy expansion: request a construction MCV only while cash+resources stays above this reserve.",
-			"Well below the MCV module's own cash trigger, so a second MCV comes early.")]
+		[Desc("Greedy expansion: DEPRECATED as a request gate (REF-1 B2 — the request is free and rides under the",
+			"reserve; production is cash-gated at the queue). Kept for yaml compatibility; currently unused.")]
 		public readonly int McvRequestReserve = 1500;
 
 		[Desc("Greedy expansion: construction yards + construction MCVs + queued MCVs the driver aims for.",
@@ -282,6 +282,20 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		int[] lastRefineryFields = Array.Empty<int>();
 		int unclaimedAnchorsInReach;
 		int unservedFieldsInReach;
+		int claimableAnchorsInReach;
+		int unservedBeyondReach;
+
+		// REF-1 B1 (§12.24 v2): the planner's own crawl supply — the cheapest crawl-eligible building it wants
+		// produced while the target field is out of reach, and the aim refined to the field's resource edge.
+		string wantedLinkBuilding;
+		CPos? crawlTargetEdge;
+
+		// REF-1 B2: the cheapest buildable provider of a due MCV's missing prerequisite (td_gdi: the repair
+		// facility). REF-1 B3: the last refinery estimate seen, kept so a transiently unbuildable refinery no
+		// longer silences Target, the anchor claim and RequestMcv.
+		string wantedMcvPrerequisite;
+		(ActorInfo Info, int Cost, int BuildTicks) lastRefineryEstimate;
+
 		readonly Dictionary<CPos, int> anchorParkedUntil = new();
 		readonly Dictionary<uint, CPos> inflightMcvSites = new();
 		List<CPos> ownBuildingCells = new();
@@ -369,6 +383,20 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		}
 
 		int IBotExpansionTargetProvider.UnclaimedAnchorsInReach => LawActive ? unclaimedAnchorsInReach : 0;
+
+		// REF-1 B1/B2/B4 (§12.24 v2): the planner's crawl-supply want, the refined edge aim, the due MCV's
+		// missing prerequisite, and the expansion-nudge metric — published only while the law runs, so classic
+		// and switch-off see the interface defaults (unchanged behaviour).
+		string IBotExpansionTargetProvider.WantedLinkBuilding =>
+			LawActive && Info.DriveBaseCrawl ? wantedLinkBuilding : null;
+
+		CPos? IBotExpansionTargetProvider.CrawlTargetEdge =>
+			LawActive && Info.DriveBaseCrawl ? crawlTargetEdge : null;
+
+		string IBotExpansionTargetProvider.WantedMcvPrerequisite =>
+			LawActive && Info.DriveMcvRequests ? wantedMcvPrerequisite : null;
+
+		int IBotExpansionTargetProvider.UnservedAnchorsBeyondReach => LawActive ? unservedBeyondReach : 0;
 
 		// REF-1: the field model for the telemetry (same assembly, record-only reads) — the provider's model so the
 		// logged field ids are exactly the ones the law claimed with. Null until the first re-plan builds it.
@@ -725,10 +753,13 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			IReadOnlyList<CPos> refineries, IReadOnlyList<int> refineryFields, IReadOnlyList<CPos> buildingTiles,
 			int serveRadiusCells, int reachCells,
 			Func<int, bool> blocked, Func<int, bool> committed, CPos? near,
-			out int unservedAnchorsInReach, out int unservedFieldsInReach, out int[] anchorTier)
+			out int unservedAnchorsInReach, out int unservedFieldsInReach, out int[] anchorTier,
+			out int claimableAnchorsInReach, out int unservedAnchorsBeyondReach)
 		{
 			unservedAnchorsInReach = 0;
 			unservedFieldsInReach = 0;
+			claimableAnchorsInReach = 0;
+			unservedAnchorsBeyondReach = 0;
 			var order = new List<int>();
 			var n = anchorCells.Count;
 			anchorTier = new int[n];
@@ -804,6 +835,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					fieldInReach[field] = true;
 				if (!served[a] && inReach)
 					unservedAnchorsInReach++;
+				if (!served[a] && !inReach)
+					unservedAnchorsBeyondReach++;
 				if (served[a] || (committed != null && committed(a)))
 					fieldCovered[field] = true;
 			}
@@ -815,6 +848,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					unservedFieldsInReach++;
 
 			Func<int, bool> claimable = a => !served[a] && reachDist[a] <= reachCells && (blocked == null || !blocked(a));
+			for (var a = 0; a < n; a++)
+				if (claimable(a))
+					claimableAnchorsInReach++;
 
 			// Tier 1: one representative per field that has no refinery yet — the claimable anchor covering the most of
 			// the field's cells (ties: rank, then lowest index). Fields ordered by their rep's rank, then field id.
@@ -1039,6 +1075,67 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		}
 
 		/// <summary>
+		/// REF-1 B2: an MCV request is due when a far field is free and the pipeline has room — cash does NOT gate
+		/// the request itself (production is cash-gated at the queue; a standing request rides under the reserve
+		/// instead of waiting for a re-plan with high cash). Pure, for the tests.
+		/// </summary>
+		public static bool McvDue(bool farFieldFree, int activePlusQueued, int targetCount) =>
+			farFieldFree && activePlusQueued < targetCount;
+
+		/// <summary>
+		/// REF-1 B2: the prerequisite entries of <paramref name="prerequisites"/> currently unmet AND fixable by
+		/// building — '~' (any-provider group) and plain entries count; '!' entries are satisfied by absence, so
+		/// nothing can build them away. Pure, for the tests.
+		/// </summary>
+		public static IEnumerable<string> MissingPrerequisiteTokens(IEnumerable<string> prerequisites, Func<string, bool> isMet)
+		{
+			foreach (var raw in prerequisites)
+			{
+				var token = raw.Replace("~", string.Empty);
+				if (token.StartsWith("!", StringComparison.Ordinal) || isMet(raw))
+					continue;
+
+				yield return token;
+			}
+		}
+
+		/// <summary>
+		/// REF-1 B2: a construction MCV is due but no production queue offers it — find its unmet prerequisites
+		/// and return the name of the cheapest building an enabled building queue could produce that provides one.
+		/// Null = nothing actionable (all prereqs met yet still unproducible, or no buildable provider).
+		/// </summary>
+		string MissingMcvPrerequisite()
+		{
+			var techTree = player.PlayerActor.TraitOrDefault<TechTree>();
+			if (techTree == null)
+				return null;
+
+			var missing = MissingPrerequisiteTokens(
+					constructionMcvTypes
+						.Select(n => world.Map.Rules.Actors.TryGetValue(n, out var ai) ? ai : null)
+						.Where(ai => ai != null)
+						.SelectMany(ai => ai.TraitInfos<BuildableInfo>().SelectMany(bi => bi.Prerequisites)),
+					raw => techTree.HasPrerequisites(new[] { raw }))
+				.ToHashSet();
+			if (missing.Count == 0)
+				return null;
+
+			// Cheapest provider currently buildable on an enabled building queue — its own prereqs are met, so the
+			// want can actually be produced. Ties by name keep the pick deterministic.
+			return BuildingQueueTypes()
+				.SelectMany(t => CAAIUtils.FindQueues(player, t))
+				.Distinct()
+				.Where(q => q.Enabled)
+				.SelectMany(q => q.BuildableItems())
+				.Where(b => b.HasTraitInfo<BuildingInfo>()
+					&& b.TraitInfos<ITechTreePrerequisiteInfo>().Any(i => i.Prerequisites(b).Any(missing.Contains)))
+				.OrderBy(b => b.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? int.MaxValue)
+				.ThenBy(b => b.Name, StringComparer.Ordinal)
+				.Select(b => b.Name)
+				.FirstOrDefault();
+		}
+
+		/// <summary>
 		/// UT-4: the effective MCV appetite under the TechRush&lt;-&gt;Expansion axis — Expansion leans add up to
 		/// +expansionBonus at the pole, TechRush leans subtract up to -techrushMinus (floor 1: never zero appetite).
 		/// Neutral (50) returns the base count verbatim. Pure, for the tests.
@@ -1053,6 +1150,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		void RequestMcv(IBot bot)
 		{
+			wantedMcvPrerequisite = null;
 			if (unitBuilders == null || resources == null)
 				return;
 
@@ -1098,7 +1196,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				targetCount = Math.Max(targetCount, active + inflightCap);
 			}
 
-			if (!ShouldRequestMcv(resources.GetCashAndResources(), Info.McvRequestReserve, farFieldFree, active + queued, targetCount))
+			// REF-1 B2: the request rides under the cash reserve — queueing the MCV costs nothing until
+			// production starts, so the standing want must not wait for a re-plan that happens to see cash.
+			if (!McvDue(farFieldFree, active + queued, targetCount))
 				return;
 
 			var unitBuilder = unitBuilders.FirstEnabledTraitOrDefault();
@@ -1113,7 +1213,14 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				.Distinct()
 				.ToArray();
 			if (producible.Length == 0)
+			{
+				// REF-1 B2: the MCV is due but not producible — its missing prerequisite becomes a building
+				// want (td_gdi: the repair facility gating the MCV for ~10k ticks of the trace).
+				wantedMcvPrerequisite = MissingMcvPrerequisite();
+				if (wantedMcvPrerequisite != null)
+					Log.Write("debug", $"AI ({player.ClientIndex}): REF-1 MCV due but not producible — wants prerequisite building {wantedMcvPrerequisite} at tick {world.WorldTick}");
 				return;
+			}
 
 			var mcvType = producible.Random(world.LocalRandom);
 			if (unitBuilder.RequestedProductionCount(bot, mcvType) > 0)
@@ -1267,10 +1374,22 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		void Replan(IBot bot)
 		{
 			var (refinery, link, queues) = CheapestBuildables();
+
+			// REF-1 B3 (§12.24 v2): a transiently unbuildable refinery (prerequisite missing, queue disabled)
+			// must not silence the planner — the estimate only feeds field scoring's payback term, so the last
+			// known buildable, then any rules-listed refinery, stands in. Target, the anchor claim and
+			// RequestMcv all keep running.
+			if (refinery.Info != null)
+				lastRefineryEstimate = refinery;
+			refinery = RefineryEstimateOrFallback(refinery, lastRefineryEstimate, RulesRefineryEstimate);
+
 			if (refinery.Info == null)
 			{
-				Target = null;
-				LastScores = Array.Empty<FieldScore>();
+				// No refinery exists at all (a mod without one). The last target and scores stay published —
+				// a stale crawl aim beats none — and a standing MCV want still fires: the request is free and
+				// production is cash-gated downstream.
+				if (Info.DriveMcvRequests)
+					RequestMcv(bot);
 				Idle($"no refinery buildable ({queues} building queue(s) searched)");
 				return;
 			}
@@ -1449,7 +1568,15 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			// field that keeps being missed.
 			// FE-1 (§12.24): with the switch on, one refinery per anchor replaces this field-based claim.
 			if (Info.FieldCoverage && Info.DriveRefineries)
+			{
 				UpdateAnchorClaim(refineryCells, refineryTiles, buildingTiles);
+				UpdateCrawlWant(link, buildingTiles);
+			}
+			else
+			{
+				wantedLinkBuilding = null;
+				crawlTargetEdge = null;
+			}
 
 			var lawClaims = LawActive;
 			claimField = lawClaims ? null : BestClaimField(scores);
@@ -1497,6 +1624,56 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		}
 
 		/// <summary>
+		/// REF-1 B1: the planner's own crawl-supply want — while the crawl target's field sits beyond reach and no
+		/// anchor is claimable in reach, the cheapest crawl-eligible building should be produced and placed to close
+		/// the gap. Power demand alone was the only supply before, and it retired the moment a bigger power plant
+		/// unlocked (the trace's frontier freeze). Pure, for the tests.
+		/// </summary>
+		public static bool LinkBuildingWanted(bool driveBaseCrawl, int? targetHops, int claimableAnchorsInReach, bool linkAvailable) =>
+			driveBaseCrawl && linkAvailable && targetHops > 0 && claimableAnchorsInReach == 0;
+
+		void UpdateCrawlWant((ActorInfo Info, int Cost, int BuildTicks) link, List<CPos> buildingTiles)
+		{
+			wantedLinkBuilding = null;
+			crawlTargetEdge = null;
+			if (!LinkBuildingWanted(Info.DriveBaseCrawl, Target?.Hops, claimableAnchorsInReach, link.Info != null))
+				return;
+
+			wantedLinkBuilding = link.Info.Name;
+			crawlTargetEdge = LinkTargetEdge(Target.Value, buildingTiles);
+		}
+
+		/// <summary>
+		/// REF-1 B1: the target field's resource cell nearest our frontier — the aim every crawl placement closes
+		/// the gap toward (the maintainer's "every building placed to close the gap"). The field models differ
+		/// (ResourceMap field vs the law's map-true component), so the law field nearest the target's centre supplies
+		/// the cells; with no usable cells the centre stays the aim.
+		/// </summary>
+		CPos? LinkTargetEdge(FieldScore target, List<CPos> buildingTiles)
+		{
+			if (fields == null || fields.Count == 0 || buildingTiles == null || buildingTiles.Count == 0)
+				return null;
+
+			var field = fields.OrderBy(f => (f.Center - target.Center).LengthSquared).First();
+			if (field.Cells == null || field.Cells.Count == 0)
+				return null;
+
+			CPos? best = null;
+			var bestD = int.MaxValue;
+			foreach (var c in field.Cells)
+			{
+				var d = buildingTiles.Min(b => (b - c).LengthSquared);
+				if (d < bestD)
+				{
+					bestD = d;
+					best = c;
+				}
+			}
+
+			return best;
+		}
+
+		/// <summary>
 		/// REF-1 (§12.24 v2): the field model — the map's valuable resource cells grouped into 8-connected components,
 		/// scanned once (public map data: the initial geometry, never re-read for depletion — DESIGN §19.1b).
 		/// </summary>
@@ -1532,7 +1709,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				i => (anchorParkedUntil.TryGetValue(anchors[i], out var until) && tick < until)
 					|| (anchorPendingUntil.TryGetValue(anchors[i], out var pend) && tick < pend),
 				i => anchorPendingUntil.TryGetValue(anchors[i], out var pend) && tick < pend,
-				near, out _, out _, out var tiers);
+				near, out _, out _, out var tiers, out _, out _);
 			if (order.Count == 0)
 				return null;
 
@@ -1582,6 +1759,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			unservedInReach = 0;
 			unservedFieldsInReach = 0;
 			unclaimedAnchorsInReach = 0;
+			claimableAnchorsInReach = 0;
+			unservedBeyondReach = 0;
 			if (anchors.Count == 0)
 				return;
 
@@ -1613,7 +1792,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				i => (anchorParkedUntil.TryGetValue(anchors[i], out var until) && tick < until)
 					|| (anchorPendingUntil.TryGetValue(anchors[i], out var pend) && tick < pend),
 				i => anchorPendingUntil.TryGetValue(anchors[i], out var pend) && tick < pend,
-				null, out unservedInReach, out unservedFieldsInReach, out _);
+				null, out unservedInReach, out unservedFieldsInReach, out _,
+				out claimableAnchorsInReach, out unservedBeyondReach);
 			unclaimedAnchorsInReach = order.Count;
 
 			// A refinery is wanted only while more anchors are claimable than refineries already in flight — never by
@@ -1656,14 +1836,45 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			AIUtils.BotDebug(line);
 		}
 
+		/// <summary>The planner's building-queue types, resolved per call: the base builder's condition may
+		/// switch on after ours.</summary>
+		IEnumerable<string> BuildingQueueTypes() =>
+			Info.BuildingQueues.Count > 0 ? Info.BuildingQueues
+				: baseBuilders.FirstOrDefault(t => t.IsTraitEnabled())?.Info.BuildingQueues ?? (IEnumerable<string>)new[] { "Building" };
+
+		/// <summary>
+		/// REF-1 B3: the refinery estimate for field scoring — the live buildable, else the remembered one, else the
+		/// rules-listed fallback (evaluated lazily). A tuple with a null Info marks "none". Pure, for the tests.
+		/// </summary>
+		public static (ActorInfo Info, int Cost, int BuildTicks) RefineryEstimateOrFallback(
+			(ActorInfo Info, int Cost, int BuildTicks) buildable, (ActorInfo Info, int Cost, int BuildTicks) remembered,
+			Func<(ActorInfo Info, int Cost, int BuildTicks)> rulesFallback) =>
+			buildable.Info != null ? buildable : remembered.Info != null ? remembered : rulesFallback();
+
+		/// <summary>
+		/// REF-1 B3: a refinery the faction could field once its prerequisites are met — the estimate only feeds
+		/// field scoring's payback term, never a build decision. Cheapest rules-listed refinery wins; ties by name
+		/// keep it deterministic.
+		/// </summary>
+		(ActorInfo Info, int Cost, int BuildTicks) RulesRefineryEstimate()
+		{
+			var cheapest = world.Map.Rules.Actors.Values
+				.Where(a => a.HasTraitInfo<RefineryInfo>() && a.HasTraitInfo<BuildableInfo>() && a.HasTraitInfo<BuildingInfo>())
+				.OrderBy(a => a.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? int.MaxValue)
+				.ThenBy(a => a.Name, StringComparer.Ordinal)
+				.FirstOrDefault();
+			if (cheapest == null)
+				return default;
+
+			return (cheapest, cheapest.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? 0,
+				Math.Max(0, cheapest.TraitInfoOrDefault<BuildableInfo>()?.BuildDuration ?? 0));
+		}
+
 		((ActorInfo Info, int Cost, int BuildTicks) Refinery, (ActorInfo Info, int Cost, int BuildTicks) Link, int Queues) CheapestBuildables()
 		{
 			(ActorInfo Info, int Cost, int BuildTicks) refinery = default, link = default;
 			var queues = 0;
-			// Resolved per re-plan: the base builder's condition may switch on after ours.
-			var types = Info.BuildingQueues.Count > 0 ? Info.BuildingQueues
-				: baseBuilders.FirstOrDefault(t => t.IsTraitEnabled())?.Info.BuildingQueues ?? (IEnumerable<string>)new[] { "Building" };
-			foreach (var queue in types.SelectMany(type => CAAIUtils.FindQueues(player, type)).Distinct())
+			foreach (var queue in BuildingQueueTypes().SelectMany(type => CAAIUtils.FindQueues(player, type)).Distinct())
 			{
 				queues++;
 				foreach (var item in queue.BuildableItems())

@@ -4996,6 +4996,13 @@ from one tier up, never on-off-on), and it must say why it cannot scale.
     untouched. Placement records carry `field_id` and `tier`; the snapshot tracks `refineries_per_anchor_max`,
     `anchors_in_reach_unserved` and `fields_in_reach_unserved` (the tier-1 backlog — drains to 0 before any field's
     second refinery).
+  * **The crawl has its own supply and the MCV its unlock (2026-10-04 B-items).** While the crawl target's field is
+    out of reach and nothing is claimable in reach, the planner wants the cheapest crawl-eligible building produced
+    and every such placement aims at the field's resource edge — *"every building placed to close the gap"*. A due
+    MCV's missing prerequisite becomes a building want (td_gdi: the repair facility), and the MCV request rides
+    under the cash reserve — the request is free; production is cash-gated at the queue. A transiently unbuildable
+    refinery never silences the planner (target, claims and MCV requests keep running). The expansion nudge keys
+    off coverage: all anchors in reach served plus unserved anchors beyond reach — never the raw refinery count.
 * **Building build order lab (maintainer 2026-10-02):** buildings' build order, timers and intervals are LOGGED every match,
   scored (win + margin, speed, destroyed-to-lost) and TUNED through §19.2 route 2 (knobs, paired experiments) and route 3
   (opening bandit). Each personality has its own preset, every match a random jitter, and the knobs react mid-match to
