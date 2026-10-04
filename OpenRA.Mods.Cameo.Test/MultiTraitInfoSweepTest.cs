@@ -9,8 +9,11 @@
  */
 #endregion
 
+using System.Reflection;
 using NUnit.Framework;
 using OpenRA.Mods.AS.Traits;
+using OpenRA.Mods.CA.Traits;
+using OpenRA.Mods.Cameo.Test.TestFixtures;
 using OpenRA.Mods.Cameo.Traits.BotModules;
 using OpenRA.Mods.Common.Traits;
 
@@ -40,6 +43,26 @@ namespace OpenRA.Mods.Cameo.Test
 			return info;
 		}
 
+		// A live trait instance without a world: constructor never ran, so Info and
+		// IsTraitDisabled are pinned directly — exactly what the enabled-filter reads.
+		static RangedGpsProvider LiveProvider(int cells, bool disabled)
+		{
+			var trait = Uninitialized.Of<RangedGpsProvider>();
+			var cond = typeof(ConditionalTrait<RangedGpsProviderInfo>);
+			cond.GetField("Info").SetValue(trait, GpsProvider(cells));
+			cond.GetField("<IsTraitDisabled>k__BackingField", BindingFlags.Instance | BindingFlags.NonPublic)
+				.SetValue(trait, disabled);
+			return trait;
+		}
+
+		static Carryable CarryableWith(Actor carrier)
+		{
+			var carryable = Uninitialized.Of<Carryable>();
+			typeof(Carryable).GetField("<Carrier>k__BackingField", BindingFlags.Instance | BindingFlags.NonPublic)
+				.SetValue(carryable, carrier);
+			return carryable;
+		}
+
 		[Test]
 		public void FransClassifierToleratesMultiPowerActors()
 		{
@@ -57,9 +80,10 @@ namespace OpenRA.Mods.Cameo.Test
 		[Test]
 		public void RadarRangeTakesTheStrongestProvider()
 		{
-			// ra1_allies_radardome / yuri_psychicsensor carry two providers —
-			// the effective dot radius is the max, and single-instance lookups
-			// must not throw while asking for it.
+			// Prospective placement is deliberately OPTIMISTIC: info-level Max counts
+			// every declared provider variant, including the condition-gated twin that
+			// spawns disabled (the dome/sensor carry mutually exclusive 20000/30000
+			// ranges). Live actors go through EnabledRadarRangeCells — pinned below.
 			var dual = new ActorInfo("dome", new BuildingInfo(), GpsProvider(12), GpsProvider(8));
 			Assert.DoesNotThrow(() => BaseFrontBackPlannerBotModule.RadarRangeCells(dual));
 			Assert.That(BaseFrontBackPlannerBotModule.RadarRangeCells(dual), Is.EqualTo(12));
@@ -71,6 +95,37 @@ namespace OpenRA.Mods.Cameo.Test
 			var none = new ActorInfo("none", new BuildingInfo());
 			Assert.That(BaseFrontBackPlannerBotModule.RadarRangeCells(none), Is.EqualTo(0));
 			Assert.That(BaseFrontBackPlannerBotModule.IsRadarProvider(none), Is.False);
+		}
+
+		[Test]
+		public void LiveRadarCountsOnlyEnabledProviders()
+		{
+			// The review-flagged bug: an un-upgraded dome/sensor spawns with the strong
+			// variant DISABLED — the live radius is the enabled provider's range, not
+			// the info-level Max (~19 cells, not ~29).
+			var unUpgraded = new[] { LiveProvider(19, disabled: false), LiveProvider(29, disabled: true) };
+			Assert.That(BaseFrontBackPlannerBotModule.EnabledRadarRangeCells(unUpgraded), Is.EqualTo(19));
+
+			var upgraded = new[] { LiveProvider(19, disabled: true), LiveProvider(29, disabled: false) };
+			Assert.That(BaseFrontBackPlannerBotModule.EnabledRadarRangeCells(upgraded), Is.EqualTo(29));
+
+			var poweredDown = new[] { LiveProvider(19, disabled: true), LiveProvider(29, disabled: true) };
+			Assert.That(BaseFrontBackPlannerBotModule.EnabledRadarRangeCells(poweredDown), Is.EqualTo(0));
+		}
+
+		[Test]
+		public void CarryableAnyChecksEveryInstance()
+		{
+			// ordos_pythontank carries AutoCarryable plus Carryable: whichever instance
+			// holds the carrier, the existential check must see it — FirstOrDefault can
+			// pick the inactive twin.
+			var carrier = Uninitialized.Actor();
+			var free = CarryableWith(null);
+			var carrying = CarryableWith(carrier);
+			Assert.That(AttachableTo.AnyCarrierAttached(new[] { free, carrying }), Is.True);
+			Assert.That(AttachableTo.AnyCarrierAttached(new[] { carrying, free }), Is.True);
+			Assert.That(AttachableTo.AnyCarrierAttached(new[] { free, CarryableWith(null) }), Is.False);
+			Assert.That(AttachableTo.AnyCarrierAttached(System.Array.Empty<Carryable>()), Is.False);
 		}
 	}
 }

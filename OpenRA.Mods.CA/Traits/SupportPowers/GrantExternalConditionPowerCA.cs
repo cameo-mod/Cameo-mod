@@ -178,7 +178,7 @@ namespace OpenRA.Mods.CA.Traits
 				activeToken = self.GrantCondition(info.ActiveCondition);
 			}
 
-			var wsb = self.TraitsImplementing<WithSpriteBody>().FirstOrDefault();
+			var wsb = self.TraitsImplementing<WithSpriteBody>().FirstOrDefault(t => !t.IsTraitDisabled) ?? self.TraitsImplementing<WithSpriteBody>().FirstOrDefault();
 			if (wsb != null && wsb.DefaultAnimation.HasSequence(info.ActiveSequence))
 				wsb.PlayCustomAnimation(self, info.ActiveSequence);
 

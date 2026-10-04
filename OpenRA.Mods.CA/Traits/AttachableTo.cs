@@ -82,7 +82,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		void INotifyCreated.Created(Actor self)
 		{
-			Carryable = self.TraitsImplementing<Carryable>().FirstOrDefault();
+			Carryable = self.TraitsImplementing<Carryable>().FirstOrDefault(t => !t.IsTraitDisabled) ?? self.TraitsImplementing<Carryable>().FirstOrDefault();
 			notifyAttached = self.TraitsImplementing<INotifyAttachedTo>().ToArray();
 		}
 
@@ -248,18 +248,23 @@ namespace OpenRA.Mods.CA.Traits
 				attachable.HostExitedCargo();
 		}
 
+		// Any instance may hold the carrier — ordos_pythontank carries AutoCarryable
+		// plus Carryable, and checking only the first instance can miss the active one.
+		public static bool AnyCarrierAttached(IEnumerable<Carryable> carryables)
+		{
+			return carryables.Any(c => c.Carrier != null);
+		}
+
 		void INotifyRemovedFromWorld.RemovedFromWorld(Actor self)
 		{
-			var carryable = self.TraitsImplementing<Carryable>().FirstOrDefault();
-			if (carryable != null && carryable.Carrier != null)
+			if (AnyCarrierAttached(self.TraitsImplementing<Carryable>()))
 				foreach (var attachable in attached)
 					attachable.HostEnteredCargo();
 		}
 
 		void INotifyAddedToWorld.AddedToWorld(Actor self)
 		{
-			var carryable = self.TraitsImplementing<Carryable>().FirstOrDefault();
-			if (carryable != null && carryable.Carrier != null)
+			if (AnyCarrierAttached(self.TraitsImplementing<Carryable>()))
 				foreach (var attachable in attached)
 					attachable.HostExitedCargo();
 		}

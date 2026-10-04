@@ -1001,7 +1001,10 @@ namespace OpenRA.Mods.CA.Traits
 				zone1.ExceptWith(zone0);
 			}
 
-			var dockOffset = actorInfo.TraitInfos<DockHostInfo>().FirstOrDefault()?.DockOffset ?? WVec.Zero;
+			// Every dock counts: nexus/hatchery/assimilator carry DockHost + @DOCK2 + @DOCK3,
+			// and checking only the first instance can reject a cell whose other docks are fine.
+			// No DockHost falls back to a zero offset, exactly as before.
+			var dockOffsets = actorInfo.TraitInfos<DockHostInfo>().Select(d => d.DockOffset).DefaultIfEmpty(WVec.Zero).ToList();
 			var valuable = baseBuilder.ResourceMapModule?.Info.ValuableResourceTypes;
 
 			CPos? gap1 = null;
@@ -1014,7 +1017,7 @@ namespace OpenRA.Mods.CA.Traits
 				if (distanceToBaseIsImportant && !bi.IsCloseEnoughToBase(world, player, actorInfo, producer, cell))
 					continue;
 
-				if (!DockReachable(actorInfo, bi, cell, dockOffset, valuable))
+				if (!dockOffsets.Any(off => DockReachable(actorInfo, bi, cell, off, valuable)))
 					continue;
 
 				if (zone0 == null)

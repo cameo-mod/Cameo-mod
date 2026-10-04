@@ -54,7 +54,9 @@ namespace OpenRA.Mods.Cameo.Traits.Render
 			this.info = info;
 
 			// The base keeps its own copy privately, so resolve our own rather than
-			// reaching into it.
+			// reaching into it. NOTE: this conversion is functionally moot — the
+			// engine base constructor runs first and still calls Trait<Interactable>(),
+			// so a multi-Interactable actor throws before this line is reached.
 			interactable = self.TraitsImplementing<Interactable>().First();
 		}
 

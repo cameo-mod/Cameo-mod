@@ -115,7 +115,7 @@ namespace OpenRA.Mods.CA.Activities
 
 			if (teleporter != null && self != teleporter && !teleporter.Disposed)
 			{
-				var building = teleporter.TraitsImplementing<WithSpriteBody>().FirstOrDefault();
+				var building = teleporter.TraitsImplementing<WithSpriteBody>().FirstOrDefault(t => !t.IsTraitDisabled) ?? teleporter.TraitsImplementing<WithSpriteBody>().FirstOrDefault();
 				if (building != null && building.DefaultAnimation.HasSequence("active"))
 					building.PlayCustomAnimation(teleporter, "active");
 			}

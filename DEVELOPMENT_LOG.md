@@ -1,4 +1,35 @@
-# 2026-10-04 — Devin-T2Verify (+Tier4 draft): multi-TraitInfo sweep — ratchet + 16 hazard conversions
+# 2026-10-04 — Devin-T2Verify: multi-TraitInfo sweep review fixes — enabled-trait aggregation
+
+*Devin.* Fixup on `devin/t2verify/multi-traitinfo-sweep` after independent review REQUEST CHANGES
+(P2×1, P3×3, P4×1) on `inc/2026_10_04g @ 4cbc73cbf`.
+
+- **P2 radar range (the real bug):** `RadarRangeCells` info-level Max was applied to live actors —
+  `ra1_allies_radardome`/the Yuri sensor carry mutually exclusive 20000/30000 ranges under
+  `!upgrade`/`upgrade`, so an un-upgraded dome was booked at ~29 cells instead of 19 (2.25× the
+  area → under-building). `EnabledRadarProviders` now takes Max over
+  `TraitsImplementing<RangedGpsProvider>().Where(!IsTraitDisabled)` via a new
+  `EnabledRadarRangeCells` seam; the `ActorInfo` overload stays as the deliberately OPTIMISTIC
+  prospective-placement estimate (commented).
+- **P3 docks:** refinery placement checks every `DockHost` offset (`@DOCK2`/`@DOCK3` exist on
+  nexus/hatchery/assimilator) — Any reachable; no-DockHost keeps the zero-offset fallback.
+- **P3 enabled preference:** `FirstOrDefault(!IsTraitDisabled) ?? FirstOrDefault()` (or `?? First()`
+  to preserve throw-on-absent) at TeleportCA, DetonateWeaponPowerCA, GrantExternalConditionPowerCA,
+  MadTankCA, ChargingSelfDestruct, AttachableTo; `Any(Carrier != null)` for the two Carryable
+  site checks (ordos_pythontank has AutoCarryable + Carryable) — extracted as
+  `AttachableTo.AnyCarrierAttached` for tests.
+- **P3 audit:** `CLASS_RE` now accepts `:`/base lists/`where` on following lines (~102 missed
+  declarations recovered); a real comment/string stripper stops `//` inside literals from eating
+  code; `.Single()`/`.SingleOrDefault()` on `TraitsImplementing`/`TraitInfos` chains scanned —
+  surfaced 3 latent `Single(name==Body)` sites (WithActivateAnimation, WithCargoHatchAnimation,
+  WithEnabledAnimation), converted to the enabled-first pattern. Devlog corrected: the audit is a
+  zero-tolerance gate, not a ratchet.
+- **P4:** `SelectionDecorations` documents that the engine base ctor still calls
+  `Trait<Interactable>()` first, so the subclass conversion is moot. Live-trait tests:
+  `EnabledRadarRangeCells` over fabricated disabled providers (`Uninitialized` + reflection),
+  `AnyCarrierAttached` over fabricated Carryables. The `Max==12` pin is reframed as the
+  optimistic prospective semantic.
+
+# 2026-10-04 — Devin-T2Verify (+Tier4 draft): multi-TraitInfo sweep — zero-tolerance gate + 16 hazard conversions
 
 *Devin-T2Verify, taking over Tier4's parked draft audit (`tools/audit/audit_multi_traitinfo*.py`
 in their `t4-multi` worktree).* Branch `devin/t2verify/multi-traitinfo-sweep` on
@@ -9,7 +40,7 @@ in their `t4-multi` worktree).* Branch `devin/t2verify/multi-traitinfo-sweep` on
   EMBER crash class), a dead O(types²) `impl_cache` precompute (hang), and `SCAN_ROOTS` pointing at
   `engine/` instead of the mod-side CA/Cameo/Fransbot assemblies. Added the `X`/`XInfo` name-strip
   fallback so `ConditionalTraitInfo : TraitInfo` (non-generic) descendants map to their produced
-  trait. Now a multiset-based blocking ratchet wired into `run_all.sh`.
+  trait. Now a multiset-based zero-tolerance gate wired into `run_all.sh`.
 - Landscape: 982 single-instance lookup sites scanned, 224 multi-capable trait types, **16 real
   hazards** converted to collection APIs with per-site aggregates — `Any` (PowerInfo power-plant,
   AttackFollow target match iterates ALL instances), `Max` (RangedGpsProvider radar range),

@@ -35,10 +35,13 @@ Checks
 
 Call sites are scanned in the mod-owned runtime assemblies (OpenRA.Mods.CA,
 OpenRA.Mods.Cameo, OpenRA.Mods.Fransbot); engine call sites are upstream's
-problem since the fetched ``engine/`` tree is not editable here.
+problem since the fetched ``engine/`` tree is not editable here. Same-line
+``.Single()``/``.SingleOrDefault()`` chains on ``TraitsImplementing<T>()`` /
+``TraitInfos<T>()`` count as single-instance lookups too.
 
-Exit 1 when dangerous call sites remain. ``--report`` prints the full
-multi-capable-type table; ``--json`` dumps machine-readable detail.
+This is a zero-tolerance gate, not a ratchet: exit 1 on ANY dangerous call
+site. ``--report`` prints the full multi-capable-type table; ``--json`` dumps
+machine-readable detail.
 """
 
 from __future__ import annotations
@@ -57,8 +60,14 @@ import miniyaml
 # C# type model
 # --------------------------------------------------------------------------- #
 
+# Declarations may put the ':' and/or the base list on following lines, and a
+# `where` clause may sit between the bases and '{'. Bases are captured lazily
+# up to '{' (where-clauses are consumed separately, not into the base list).
+# The type model only needs declared-type names + direct bases + the
+# TraitInfo<Y> production, so a single permissive match suffices.
 CLASS_RE = re.compile(
-    r"\b(?:class|interface)\s+([A-Z_]\w*)\s*(?:<[^>{]*>)?\s*:\s*([^\n{]+)")
+    r"\b(?:class|interface)\s+([A-Z_]\w*)\s*(?:<[^{};]*>)?"
+    r"(?:\s*:\s*([^{};]*?))?\s*(?:where\b[^{};]*?)?\{")
 TRAITINFO_ARG_RE = re.compile(r"\bTraitInfo\s*<\s*([A-Z_]\w*)\s*>")
 IFACE_RE = re.compile(r"^I[A-Z]")
 
@@ -80,13 +89,82 @@ SCAN_ROOTS = (
 INFO_LOOKUP = re.compile(r"\.(TraitInfoOrDefault|TraitInfo)\s*<\s*([A-Z_]\w*)\s*>")
 TRAIT_LOOKUP = re.compile(r"\.(TraitOrDefault|Trait)\s*<\s*([A-Z_]\w*)\s*>")
 
-# Ratchet scope: every runtime assembly the mod repo owns (engine call sites are
+# `.Single()`/`.SingleOrDefault()` on a TraitsImplementing<T>()/TraitInfos<T>()
+# enumeration is the same crash class as the single-lookup APIs. Chained on the
+# same line (cross-line chains are a documented limitation).
+SINGLE_LOOKUP = re.compile(
+    r"\.(TraitsImplementing|TraitInfos)\s*<\s*([A-Z_]\w*)\s*>[^;\n]*?\.Single(?:OrDefault)?\s*\(")
+
+# Gate scope: every runtime assembly the mod repo owns (engine call sites are
 # upstream's problem — the fetched engine/ tree is not editable).
 CALL_SITE_ROOTS = (
     "OpenRA.Mods.CA",
     "OpenRA.Mods.Cameo",
     "OpenRA.Mods.Fransbot",
 )
+
+
+def clean_code(text: str) -> str:
+    """Blank comments and string/char literal contents to spaces, keeping
+    newlines so line numbers survive. Without this, a ``//`` inside a string
+    literal truncates the line (hiding real code) and comment text can parse
+    as declarations."""
+    out = list(text)
+    i, n = 0, len(text)
+    while i < n:
+        c = text[i]
+        if c == "/" and i + 1 < n and text[i + 1] == "/":
+            while i < n and text[i] != "\n":
+                out[i] = " "
+                i += 1
+        elif c == "/" and i + 1 < n and text[i + 1] == "*":
+            out[i] = out[i + 1] = " "
+            i += 2
+            while i < n and not (text[i] == "*" and i + 1 < n and text[i + 1] == "/"):
+                if text[i] != "\n":
+                    out[i] = " "
+                i += 1
+            if i + 1 < n:
+                out[i] = out[i + 1] = " "
+            i += 2
+        elif c == "@" and i + 1 < n and text[i + 1] == '"':
+            # Verbatim string: ends at a '"' not followed by another '"'.
+            out[i] = out[i + 1] = " "
+            i += 2
+            while i < n:
+                if text[i] == '"' and i + 1 < n and text[i + 1] == '"':
+                    out[i] = out[i + 1] = " "
+                    i += 2
+                    continue
+                if text[i] == '"':
+                    out[i] = " "
+                    i += 1
+                    break
+                if text[i] != "\n":
+                    out[i] = " "
+                i += 1
+        elif c == '"' or c == "'":
+            quote = c
+            out[i] = " "
+            i += 1
+            while i < n:
+                if text[i] == "\\":
+                    out[i] = " "
+                    if i + 1 < n and text[i + 1] != "\n":
+                        out[i + 1] = " "
+                    i += 2
+                    continue
+                if text[i] == quote:
+                    out[i] = " "
+                    i += 1
+                    break
+                if text[i] == "\n":
+                    break  # unterminated literal — resync on the next line
+                out[i] = " "
+                i += 1
+        else:
+            i += 1
+    return "".join(out)
 
 
 def parse_type_model(root: pathlib.Path):
@@ -99,16 +177,17 @@ def parse_type_model(root: pathlib.Path):
     for rel in SCAN_ROOTS:
         for path in (root / rel).rglob("*.cs"):
             try:
-                text = path.read_text(encoding="utf-8", errors="replace")
+                text = clean_code(path.read_text(encoding="utf-8", errors="replace"))
             except OSError:
                 continue
             for m in CLASS_RE.finditer(text):
                 name = m.group(1)
-                bases = {b.strip().split("<")[0].strip() for b in m.group(2).split(",")}
+                raw = m.group(2) or ""
+                bases = {b.strip().split("<")[0].strip() for b in raw.split(",")}
                 bases = {b for b in bases if b and b[0].isupper() and not b.startswith("where")}
                 supers.setdefault(name, set()).update(bases)
-                decl_kind[name] = "interface" if "interface" in m.group(0).split(name)[0].split() else "class"
-                prod = TRAITINFO_ARG_RE.search(m.group(2))
+                decl_kind[name] = "interface" if m.group(0).startswith("interface") else "class"
+                prod = TRAITINFO_ARG_RE.search(raw)
                 if prod:
                     produced[name] = prod.group(1)
 
@@ -215,15 +294,16 @@ def scan_call_sites(root: pathlib.Path):
         for path in (root / rel_root).rglob("*.cs"):
             rel = path.relative_to(root).as_posix()
             try:
-                lines = path.read_text(encoding="utf-8", errors="replace").splitlines()
+                lines = clean_code(path.read_text(encoding="utf-8", errors="replace")).splitlines()
             except OSError:
                 continue
             for i, line in enumerate(lines, 1):
-                code = line.split("//")[0]
-                for m in INFO_LOOKUP.finditer(code):
+                for m in INFO_LOOKUP.finditer(line):
                     yield rel, i, "info", m.group(2)
-                for m in TRAIT_LOOKUP.finditer(code):
+                for m in TRAIT_LOOKUP.finditer(line):
                     yield rel, i, "trait", m.group(2)
+                for m in SINGLE_LOOKUP.finditer(line):
+                    yield rel, i, "trait" if m.group(1) == "TraitsImplementing" else "info", m.group(2)
 
 
 # --------------------------------------------------------------------------- #
