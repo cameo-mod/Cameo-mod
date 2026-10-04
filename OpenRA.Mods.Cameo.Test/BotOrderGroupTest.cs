@@ -175,6 +175,7 @@ namespace OpenRA.Mods.Cameo.Test
 
 			Assert.That(rebuilt, Is.Not.SameAs(order));
 			Assert.That(rebuilt.OrderString, Is.EqualTo("AttackMove"));
+			Assert.That(rebuilt.Type, Is.EqualTo(order.Type));
 			Assert.That(rebuilt.Subject, Is.Null);
 			Assert.That(rebuilt.Queued, Is.True);
 			Assert.That(rebuilt.Target.Type, Is.EqualTo(order.Target.Type));
