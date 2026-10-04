@@ -1,3 +1,22 @@
+# 2026-10-04 — Devin-T3Verify: BP-IMPL phase 1 (front/back placement planner — new files only, no QM seams)
+
+*Devin.* `devin/t3verify/bp-front-back` in `C:/cameo-wt/bp` (base origin/master `8e86fca23`). Phase 1 of the accepted
+BP-SPEC rev 2 (fleet NOTE_2026-10-04_devin-t3verify_bp-spec.md) under the maintainer's final rulings: one radar per
+DEFENDED front (the "2+" floor is dropped), a second only when a candidate adds >= `RadarMinNewCoverageCells` (30) NEW
+union-approach cells; radars strictly behind the front's defence line (setback [2,8], wait-then-back, never forward);
+ground/naval production at the front with air-only producers exempt; tech/superweapon/`CashTrickler` passive income in
+the back; yards untouched (MCVs expand outward). New: `IBotFrontBackAdvisor` (OpenRA.Mods.CA — the shared QM consumes it
+in phase 2), `BaseFrontBackPlannerBotModule` (genericbot, `Enabled: false`; per-cluster fronts from fog-honest anchors —
+remembered-defence centroids, last attack, public enemy `HomeLocation`, map centre, plus the expansion aim; 45° merge,
+<=3 fronts; approach cones; union-coverage scoring; `front.FirstSeenTick` wait-then-back; Upgrades-queue collision pick;
++60 power margin/provider), 24 statics tests, `ai.yaml` mount, switch group `BI_front_back_placement` (default OFF),
+DESIGN §19.15, AI_ARCHITECTURE §12.35 (phase-2 seam list). Zero edits to REF-1-owned files — the QM seams, the
+`FragileTypes` radar-carrier removal (23 names, resolved via `miniyaml.Ruleset`, incl. templeofnod/templeprime +
+spysatelliteuplink), and the 2-map smoke are phase 2 after REF-1 lands (prep: fleet
+PREP_2026-10-04_devin-t3verify_bp-impl-phase2.md). Gates: build 0 warn/0 err; 858/858 tests; fog-honesty +
+bot-direct-mutation + ai-arch R1/R2 audits PASS (R3 dead-end flag on `IBotFrontBackAdvisor` expected until phase 2);
+boot gate PASS (isolated support dir `C:/cameo-wt/_support_bp`).
+
 # 2026-10-03 — coordinator: tier-3 hotfix (INC c) + ORDERS round 2 to NOVA/DAWN/EMBER
 
 *Claude.* INC c `3c793d4c3` = DAWN `18556ada5` (GetVariableObservers `override` + base: tier 3 was permanently disabled
