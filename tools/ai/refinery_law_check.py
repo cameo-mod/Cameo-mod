@@ -14,7 +14,10 @@ refinery of every unserved field in reach, home first then each newly reached fi
 Per genericbot player x match:
   refineries_per_anchor_max   most refineries on one spreader anchor (anchor_cell; field_id is the tier-2
                               unit and may lawfully hold several refineries) -> FAIL when > 1; the
-                              snapshot field of the same name is folded in
+                              snapshot field of the same name is folded in. Rebuild-aware: a 2nd+
+                              same-anchor placement is not counted when the field was in
+                              fields_in_reach_unserved_ids between the previous binding and this tick
+                              (the earlier refinery died or was captured — rebuilds re-serve legally).
   base_reason_count           refinery placements with reason "base"           -> FAIL when > 0
   resource_gap histogram      placements' resource_gap cells                   -> FAIL when any > 1
   tier_order_violations       tier>=2 placements while fields_in_reach_unserved > 0 at that tick -> FAIL when > 0
@@ -30,7 +33,8 @@ Per genericbot player x match:
 Old logs lack field_id/tier/resource_gap and the *_unserved snapshot counters: those metrics print "n/a"
 and a match that cannot be fully checked never earns PASS. classic rows are informational and never
 fail. Exit 1 when any genericbot match FAILs, 0 when all pass, 2 when nothing was found (dir typo or
-an empty campaign dir must never read as a verdict).
+an empty campaign dir must never read as a verdict) — and also 2 when records exist but no genericbot
+match reaches a checkable verdict (all n/a), so an unchecked campaign can never read as a pass.
 
 Usage: python tools/ai/refinery_law_check.py <match dirs...> [--json] [--warn-latency TICKS]
   dir args may be globs (expanded here so CMD users can pass e.g. refcamp_* unquoted).
@@ -72,7 +76,9 @@ def tier_of(p: dict) -> int | None:
 
 def anchor_key(p: dict) -> str:
     """The law's unit is the SPREADER anchor, never the field: tier-2 refineries are extra spreaders on an
-    already-served field, so a field_id may legitimately appear on several refineries."""
+    already-served field, so a field_id may legitimately appear on several refineries. Placements lacking
+    both anchor_cell and field_id (pre-anchor logs) all group under "?" — they count as ONE anchor, so
+    those vintages FAIL on several placements rather than printing n/a (fails closed by design)."""
     v = p.get("anchor_cell")
     return str(v) if v not in (None, "") else str(p.get("field_id") or "?")
 
@@ -88,8 +94,31 @@ def check_match(snaps: list[dict], places: list[dict], warn_latency: int = DEFAU
     refs = sorted((p for p in places if p.get("category") == "refinery"), key=ptick)
     ex = [s["expansion"] for s in snaps]
 
-    # refineries per spreader anchor: computed from placements AND the snapshot's own maximum
-    per_field = collections.Counter(anchor_key(p) for p in refs)
+    # refineries per spreader anchor: computed from placements AND the snapshot's own maximum.
+    # Rebuilds after a loss are legal and must not double-count an anchor: a second+ placement on
+    # the same anchor is skipped when the field was listed in fields_in_reach_unserved_ids in a
+    # snapshot taken after the previous same-anchor placement and at-or-before this one — the
+    # earlier refinery died or was captured and the field legitimately went unserved again
+    # (the REF-1 dd smoke showed refs 4->3->2 before each same-anchor re-placement). Logs without
+    # fields_in_reach_unserved_ids can't prove a rebuild and count every placement (fails closed).
+    unserved_by_tick = {}
+    for s in snaps:
+        ids = s["expansion"].get("fields_in_reach_unserved_ids")
+        unserved_by_tick[s["tick"]] = {str(f) for f in ids} if ids is not None else None
+    snap_ticks = sorted(unserved_by_tick)
+    anchor_last: dict[str, int] = {}
+    per_field = collections.Counter()
+    for p in refs:
+        key = anchor_key(p)
+        fid = p.get("field_id")
+        if key in anchor_last and fid is not None:
+            t0, t1 = anchor_last[key], ptick(p)
+            if any(unserved_by_tick[t] is not None and str(fid) in unserved_by_tick[t]
+                   for t in snap_ticks if t0 < t <= t1):
+                anchor_last[key] = t1
+                continue
+        per_field[key] += 1
+        anchor_last[key] = ptick(p)
     computed_max = max(per_field.values(), default=0)
     snapshot_max = max((e.get("refineries_per_anchor_max", 0) for e in ex), default=0)
     ref_max = max(computed_max, snapshot_max) if (refs or any("refineries_per_anchor_max" in e for e in ex)) else None
@@ -326,7 +355,16 @@ def main(argv=None) -> int:
         print("no situation or placement records found", file=sys.stderr)
         return 2
     print(json.dumps(result, indent=2) if args.json else render(result, args.warn_latency))
-    return 1 if any(r["verdict"] == "FAIL" and is_genericbot(r["bot_type"]) for r in result["matches"]) else 0
+    gen = [r for r in result["matches"] if is_genericbot(r["bot_type"])]
+    if any(r["verdict"] == "FAIL" for r in gen):
+        return 1
+    # P3 (peer review): a dir whose genericbot rows are all n/a — records exist but nothing is
+    # checkable — must not exit 0 like an all-PASS run. WARN counts as checkable (it is a verdict,
+    # only n/a is not); classic-only dirs have no genericbot evidence at all.
+    if not any(r["verdict"] in ("PASS", "WARN") for r in gen):
+        print("genericbot records found but none reach a checkable verdict (all n/a)", file=sys.stderr)
+        return 2
+    return 0
 
 
 if __name__ == "__main__":

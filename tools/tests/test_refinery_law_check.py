@@ -117,6 +117,41 @@ class RefineryLawCheckTests(unittest.TestCase):
         self.assertEqual(r["refineries_per_anchor_max"], 2)
         self.assertEqual(r["verdict"], "FAIL")
 
+    def test_rebuild_after_loss_not_double_counted(self):
+        # anchor "9,61" dies ~t300: f1 re-enters unserved; the rebuild at t500 is a legal re-serve
+        res = self.build_one(
+            [snap("g1", "Multi0", 100, fields_in_reach_unserved=0, fields_in_reach_unserved_ids=[]),
+             snap("g1", "Multi0", 350, fields_in_reach_unserved=1, fields_in_reach_unserved_ids=["f1"]),
+             snap("g1", "Multi0", 900, fields_in_reach_unserved=0, fields_in_reach_unserved_ids=[],
+                  refineries_per_anchor_max=1)],
+            [place("g1", "Multi0", 200, field_id="f1", anchor_cell="9,61"),
+             place("g1", "Multi0", 500, field_id="f1", anchor_cell="9,61")])
+        r = self.row(res)
+        self.assertEqual(r["refineries_per_anchor_max"], 1)
+        self.assertNotIn("refineries_per_anchor_max", ";".join(r["fails"]))
+
+    def test_same_anchor_while_still_served_still_fails(self):
+        # the field never re-entered unserved between bindings = a real double-bind
+        res = self.build_one(
+            [snap("g1", "Multi0", 100, fields_in_reach_unserved=0, fields_in_reach_unserved_ids=[]),
+             snap("g1", "Multi0", 600, fields_in_reach_unserved=0, fields_in_reach_unserved_ids=[])],
+            [place("g1", "Multi0", 200, field_id="f1", anchor_cell="9,61"),
+             place("g1", "Multi0", 500, field_id="f1", anchor_cell="9,61")])
+        r = self.row(res)
+        self.assertEqual(r["refineries_per_anchor_max"], 2)
+        self.assertEqual(r["verdict"], "FAIL")
+
+    def test_rebuild_unprovable_without_unserved_ids_counts(self):
+        # logs without fields_in_reach_unserved_ids can't prove a rebuild: fails closed
+        res = self.build_one(
+            [snap("g1", "Multi0", 100, fields_in_reach_unserved=0),
+             snap("g1", "Multi0", 600, fields_in_reach_unserved=0)],
+            [place("g1", "Multi0", 200, field_id="f1", anchor_cell="9,61"),
+             place("g1", "Multi0", 500, field_id="f1", anchor_cell="9,61")])
+        r = self.row(res)
+        self.assertEqual(r["refineries_per_anchor_max"], 2)
+        self.assertEqual(r["verdict"], "FAIL")
+
     def test_old_log_fields_mark_na_and_never_pass(self):
         p = place("g1", "Multi0", 200)
         for k in ("field_id", "tier", "resource_gap"):
@@ -270,6 +305,35 @@ class RefineryLawCheckTests(unittest.TestCase):
         r = self.row(res)
         self.assertNotIn("no_expansion", r["warns"])
         self.assertEqual(r["verdict"], "PASS")
+
+    def test_uncheckable_genericbot_rows_exit_2(self):
+        # P3: records exist but every genericbot row verdicts n/a -> must not exit 0 like all-PASS
+        with tempfile.TemporaryDirectory() as tmp:
+            old = place("g1", "Multi0", 200)
+            for k in ("field_id", "tier", "resource_gap"):
+                old.pop(k)
+            na = write_dir(pathlib.Path(tmp), "oldschema",
+                           [snap("g1", "Multi0", 100), snap("g1", "Multi0", 500)],
+                           [old], [match("g1", "Multi0")])
+            self.assertEqual(rlc.main([str(na)]), 2)
+
+    def test_classic_only_dir_exit_2(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            cls = write_dir(pathlib.Path(tmp), "conly",
+                            [snap("g1", "Multi1", 100, bot_type="classic")],
+                            [place("g1", "Multi1", 200, bot_type="classic")],
+                            [match("g1", "Multi1", bot="classic")])
+            self.assertEqual(rlc.main([str(cls)]), 2)
+
+    def test_warn_only_run_still_exit_0(self):
+        # WARN is a checkable verdict — warnings alone must not read as uncheckable
+        with tempfile.TemporaryDirectory() as tmp:
+            wd = write_dir(pathlib.Path(tmp), "warned",
+                           [snap("g1", "Multi0", 100, fields_in_reach_unserved=1),
+                            snap("g1", "Multi0", 6000, fields_in_reach_unserved=0)],
+                           [place("g1", "Multi0", 6000, field_id="f1")],
+                           [match("g1", "Multi0")])
+            self.assertEqual(rlc.main([str(wd), "--warn-latency", "1000"]), 0)
 
     def test_glob_expansion_and_no_records_exit_2(self):
         with tempfile.TemporaryDirectory() as tmp:
