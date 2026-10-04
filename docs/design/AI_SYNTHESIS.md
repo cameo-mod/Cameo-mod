@@ -8,9 +8,11 @@ the plan for **combining** the five sources of Cameo's bot code. The binding des
 the code wins._
 
 > **2026-09-28 review: read §7 first.** It measures what actually runs in the Frankenstein
-> `hard` bot today (0 Fransbot modules, 1 CN module), picks the best source per layer, lists
-> two real defects, and gives the merge order that **supersedes §6**. Fransbot upstream is now
-> V1.29.31 on `main`, not `V1.29.19-RC` as §1 says.
+> `hard` bot on that date (0 Fransbot modules, 1 CN module — since grown: 8 Frans services arm via
+> `inc3_frans_services`, ~8 CN-derived modules run as code; `HARVEST_LEDGER.md` is the
+> per-file truth), picks the best source per layer, lists two real defects, and gives the merge
+> order that **supersedes §6**. Fransbot upstream is now
+> v1.29.55+4 on `main`, not `V1.29.19-RC` as §1 says (V1.29.31 was already stale).
 
 ---
 
@@ -59,8 +61,8 @@ the code wins._
 | **RV engine** (`engine/OpenRA.Mods.Common`, `engine/OpenRA.Mods.AS` bot modules) | the engine (`mod.config` `ENGINE_VERSION`) | engine-side | guerrilla squad states; stuck-unit kick / make-way; base expansion (`McvExpansionManagerBotModule`); `LoadCargo`, `ExternalBotOrdersManager`, `SendUnitToAttack`; `CncEngineerManagerBotModule` (bridge repair, loaded as `CncEngineerBotModule`); **unused**: `BevManagerBotModule`, `SharedCargoBotModule` (AI_MASTER_PLAN RV1) | engine updates (automatic) |
 | **CA** (`OpenRA.Mods.CA/Traits/BotModules/`) | **copied by hand** | 24 files | squad manager and states, base/unit builders, compositions, fuzzy attack-or-flee | `audit_ca_drift` + `ca_vendor_sync` (§3) |
 | **Cameo** (`OpenRA.Mods.Cameo/Traits/BotModules`, `Traits/Bot*`) | own | phases 1–6f | master module + snapshot, personality switching, counter demand, fog memory, `ScoutBotModule`, risk gate, risk routing, artillery squads, match logs | own |
-| **Crystallized Nexus** (`~/Documents/GitHub/crystallized-nexus`, `30cf70a`, GPLv3) | not yet | 18 modules, ~20k lines | terrain topology (chokepoints and doors from the pathfinder graph), region roles, combat analysis + nemesis, coordinated and pincer waves, observer-gated artillery, transports | port by module |
-| **Fransbot** (`~/Documents/GitHub/OpenRA-Fransbot`, branch `V1.29.19-RC` = V1.29.23, GPLv3 headers) | not yet | 24 modules, 49,709 lines | General → Broker → Commanders hierarchy; risk model; strategic map (from live Shroud); combat intel memory; economic saturation; **MCV expansion incl. sea / island (11,600 lines)**; transport, ground transfer, SpecOps; YAML personalities | its own git; the same drift tooling can track it |
+| **Crystallized Nexus** (`~/Documents/GitHub/crystallized-nexus`, `30cf70a`, GPLv3) | ~8 of 18 derived (2 code ports + CN3 items + idea re-implementations; `HARVEST_LEDGER.md`) | 18 modules, ~20k lines | terrain topology (chokepoints and doors from the pathfinder graph), region roles, combat analysis + nemesis, coordinated and pincer waves, observer-gated artillery, transports | port by module |
+| **Fransbot** (`~/Documents/GitHub/OpenRA-Fransbot`, `main` = V1.29.31; in-tree harvest was against V1.29.23, GPLv3 headers) | vendored in-tree; 8 services arm via `inc3_frans_services`, executors stay `enable-fransbot` | 24 modules, 49,709 lines | General → Broker → Commanders hierarchy; risk model; strategic map (from live Shroud); combat intel memory; economic saturation; **MCV expansion incl. sea / island (11,600 lines)**; transport, ground transfer, SpecOps; YAML personalities | its own git; the same drift tooling can track it |
 
 ### 1.1 The Frankenstein, located precisely
 
@@ -220,7 +222,8 @@ Unused ≠ dead: implement the purpose, or delete only when CA doesn't use it ei
 ### 4.1 Measured facts
 
 * **Access:** `AedisToru` has `pull` + `push` + `triage` on `f850484/OpenRA-Fransbot` (private).
-  Newest code: branch `V1.29.19-RC` (V1.29.23, 2026-09-26). Tags `V1.29.18-Baseline`,
+  Newest code: `main` = V1.29.31 (the in-tree harvest predates it — harvested against
+  `V1.29.19-RC` = V1.29.23, 2026-09-26; drift refresh is H-9). Tags `V1.29.18-Baseline`,
   `V1.29.19-external-baseline`.
 * **Integration contract** (`integration/README.md`): a separate assembly, added **last** to
   `Assemblies`, plus `rules/fransbot-ai.yaml` + `rules/fransbot-personalities.yaml` + a Fluent

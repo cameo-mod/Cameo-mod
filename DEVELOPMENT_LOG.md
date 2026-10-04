@@ -1,3 +1,20 @@
+# 2026-10-04 — EMBER: HARVEST_LEDGER (H-0) + doc staleness + H-9 upstream refresh
+
+*EMBER (Devin).* Branch `devin/ember/harvest-ledger` off master `3ba05ede7` — docs only:
+- `docs/design/HARVEST_LEDGER.md` (new): one row per upstream bot file across vanilla, CA, CN,
+  Fransbot, SP, GA, HV, DR, OP2 + surveyed-empty repos, each with a disposition
+  (`HARVESTED`/`MERGED`/`IDEA`/`REJECTED`/`OPEN`/`NONE`), where it landed, or why it was refused.
+  Encodes the harvest rule: a port merges only when it names the decision it owns and the
+  consumer/seam it feeds. Cheat-class traits (cash/handicap multipliers) are REJECTED by design law.
+- `AI_MASTER_PLAN.md` §1 item 2: CN "1 of ~16" → "~8 of ~16" (CombatAnalysis + TacticalMap ports,
+  Deploy + BridgeRepair CN3 items, 4 idea re-implementations).
+- `AI_SYNTHESIS.md`: §7 callout annotated as a dated snapshot; source table rows updated
+  (CN "not yet" → ~8 derived; Fransbot "not yet, V1.29.19-RC" → vendored, 8 services arm via
+  `inc3_frans_services`, upstream `main` = V1.29.31+); §4.1 newest-code line corrected.
+- `WORKFLOW.md` upstream-status line (H-9 weekly refresh): Fransbot 33 new commits
+  (v1.29.55-4 — new VD-1 "Victory Drive" series, harvest-review candidate), GA 58, CN 0, RV 0;
+  openra ≈+17 (baseline sha absent, re-pin on next survey regen); absent clones noted.
+
 # 2026-10-04 — Claude (lead): INC 2026-10-04e lands — INC-d completed (P0 raid gate), LC5 admission claims, checker v2, E2 test baseline
 
 *Claude.* Branch `inc/2026_10_04e` from master `1fbd239ff`:

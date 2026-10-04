@@ -23,8 +23,11 @@
    reading it, port it under Cameo's contracts, switch it on behind a yaml flag, and keep it only if it
    **wins a Nuclear Winter A/B** against master (§1).
 2. **Harvest so far:** RV and CA are fully merged (140 protected symbols); Cameo's own phases 1–7a and
-   the combined-arms foundations ship. From **CN only 1 of ~16 modules** runs as code
-   (`CombatAnalysisBotModule`; three more re-implemented from its ideas). From **Fransbot, 8 of 24**
+   the combined-arms foundations ship. From **CN, ~8 of ~16 modules** now run as code —
+   `CombatAnalysisBotModule` and `TacticalMapBotModule` are header-credited ports, `DeployBotModule`
+   and `BridgeRepairBotModule` shipped as CN3 items, and four more are re-implemented ideas
+   (`GarrisonDefenseBotModule`, `RegionRolesBotModule`, `UnitRepairBotModule`,
+   `StealthDoctrineBotModule`; see `HARVEST_LEDGER.md`). From **Fransbot, 8 of 24**
    modules run in the Frankenstein bot, and only as record-only services on `hard` (#656).
 3. **Research status (§2):** of the research round's ten headline changes, **1 is done, 4 are
    partial, 5 are not started**. Of the twelve "beat the best humans" items, **0 are done, 9 are
