@@ -1,3 +1,16 @@
+# 2026-10-04 — NOVA N2: EL-1 v2 ported onto current master (`devin/nova/el1-v2`)
+
+*Devin (NOVA).* Round-2 order N2: rebuild the in-match adaptation lane off master ≥ `3c793d4c3` — supersedes
+`devin/nova/el1-import` (whose base predates INC b/c and F2). Applied as hunks, not file-checkout: el1-import's files
+would have reverted `BotFactionView.PublicFactionOf` (F2), `bandit.armed`/`WatchConditions` (INC b) and the newer
+§12.33/§12.34 doc text. Took only the EL-1 delta: `RunningTotalMilli`/`ClosedEngagementCount` on the engagement log
+(`BuildEngagement` out-params; non-skirmish only), the `InMatchAdaptMath` pure rule + `InMatchAdaptBotModule`
+provider (own-bot `TraitOrDefault<EngagementLogBotModule>`; `IsTraitDisabled` self-guards added per the round-2
+provider rule), `IBotInMatchAdaptation` (CA seam), and the squad manager's lazy `InMatchAdaptation` accessor +
+`RetreatRatioPct` additive delta. Switch `AQ_inmatch_adapt` / condition `inmatchadapt` (no `AN_` collision). §12.32
+inserted into master's doc unchanged. Gates: build 0 err / 0 mod-code warnings, 839/839 tests, arch coverage +
+module map regenerated, wiring/fog/direct-mutation PASS, `tools/boot_gate.ps1` PASS.
+
 # 2026-10-03 — coordinator: tier-3 hotfix (INC c) + ORDERS round 2 to NOVA/DAWN/EMBER
 
 *Claude.* INC c `3c793d4c3` = DAWN `18556ada5` (GetVariableObservers `override` + base: tier 3 was permanently disabled
