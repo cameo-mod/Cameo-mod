@@ -9,6 +9,7 @@
  */
 #endregion
 
+using System;
 using System.Collections.Generic;
 using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.CA.Traits.BotModuleLogic;
@@ -34,9 +35,20 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var enemyHp = SumHp(enemy);
 			// The fitted file measures OUR faction's trades: it corrects own-side damage only. The enemy
 			// direction stays unfitted (null = neutral), so a uniform prior can't cancel itself out.
-			return BotCombatPredictor.Predict(
+			var pred = BotCombatPredictor.Predict(
 				DamagePerTick(own, enemy, enemyHp, priors), ownHp,
 				DamagePerTick(enemy, own, ownHp, null), enemyHp);
+
+			// The fitted attrition exponent warps the aggregate ratio (the fitter's AttritionExponentMilli);
+			// fractions re-derive from the warped ratio so the Lanchester invariant holds. Neutral = 1000.
+			var alpha = priors?.AttritionExponentMilli ?? 1000;
+			if (alpha == 1000)
+				return pred;
+
+			var ratio = Math.Min(BotCombatPredictor.MaxRatio, Math.Pow(pred.Ratio, alpha / 1000.0));
+			return ratio >= 1
+				? new BotCombatPredictor.Prediction(ratio, Math.Sqrt(1 - 1 / ratio), 0)
+				: new BotCombatPredictor.Prediction(ratio, 0, Math.Sqrt(1 - ratio));
 		}
 
 		static double SumHp(IReadOnlyList<(BotUnitProfile Unit, int Count)> force)

@@ -10,6 +10,7 @@
 #endregion
 
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using OpenRA.Mods.CA.Traits;
@@ -20,16 +21,140 @@ using OpenRA.Traits;
 
 namespace OpenRA.Mods.Cameo.Traits.BotModules
 {
+	/// <summary>
+	/// The tier-1 fitted priors (tools/ai/fit_engagement_priors.py), one schema per the 2026-10-03
+	/// contract ruling (F1): a `BotEngagementPriors` root with `DeliveryArmour@&lt;tag&gt;__x__&lt;armor&gt;`
+	/// cells (residuals on the resolved Versus prior, clamped to the fitter's own bound), per-delivery
+	/// `DefenceState@&lt;tag&gt;` factors and a global `IntoDefencesMilli`. Stat-normalized keys — warhead
+	/// tags and armour classes, no unit ids — so the file survives roster churn.
+	///
+	/// Per-cell staleness (F1-b): the fitter also writes `PriorPct@&lt;tag&gt;__x__&lt;armor&gt;` = the resolved
+	/// Versus percent the cell was fitted on. The game recomputes the same resolved prior from
+	/// `^Warhead_&lt;tag&gt;`'s Versus table; a cell whose prior moved since the fit reverts to neutral —
+	/// a rebalance invalidates exactly the cells that shifted instead of the whole file. A cell with no
+	/// PriorPct row is treated as unfitted and stays neutral. `LedgerHash` remains offline provenance
+	/// only — the ledgers live outside the mounted mod paths and cannot be verified in-match.
+	/// </summary>
+	public sealed class BotEngagementPriors
+	{
+		public const int Neutral = 1000;
+
+		// The fitter's per-cell bound (MIN_MILLI/MAX_MILLI in fit_engagement_priors.py) and the
+		// MinCorrectionMilli/MaxCorrectionMilli defaults — a scaled cell must stay inside it too.
+		const int MinFittedMilli = 500;
+		const int MaxFittedMilli = 2000;
+
+		readonly Dictionary<string, int> factors = new(StringComparer.Ordinal);
+		readonly Dictionary<string, int> fittedPriors = new(StringComparer.Ordinal);
+		readonly Dictionary<string, int> defenceFactors = new(StringComparer.Ordinal);
+		readonly HashSet<string> staleCells = new(StringComparer.Ordinal);
+
+		int? intoDefences;
+
+		/// <summary>Residual into static defences (permille) applied when the TARGET is a building. Neutral = 1000
+		/// (absent row = unfitted, never the global scale).</summary>
+		public int IntoDefencesPermille => intoDefences == null ? Neutral : Scale(intoDefences.Value);
+
+		/// <summary>Optional global obs/exp scale the fitted factors are relative to (permille; default 1000 =
+		/// absolute factors). When the fitter emits it, every lookup multiplies it back in so relative factors
+		/// reproduce measured performance; absent keeps Schema-1 absolute semantics.</summary>
+		public int GlobalScaleMilli { get; private set; } = Neutral;
+
+		public int FactorCount => factors.Count;
+		public int StaleCount => staleCells.Count;
+		public string LedgerHash { get; private set; }
+		public int? AttritionExponentMilli { get; private set; }
+
+		public static BotEngagementPriors Parse(IEnumerable<MiniYamlNode> nodes)
+		{
+			var priors = new BotEngagementPriors();
+			var root = nodes.FirstOrDefault(n => n.Key == "BotEngagementPriors");
+			if (root == null)
+				return priors;
+
+			foreach (var node in root.Value.Nodes)
+			{
+				var v = node.Value.Value;
+				if (node.Key == "LedgerHash")
+					priors.LedgerHash = v;
+				else if (node.Key == "AttritionExponentMilli" && int.TryParse(v, NumberStyles.Integer, CultureInfo.InvariantCulture, out var ae))
+					priors.AttritionExponentMilli = ae;
+				else if (node.Key == "IntoDefencesMilli" && int.TryParse(v, NumberStyles.Integer, CultureInfo.InvariantCulture, out var id))
+					priors.intoDefences = id;
+				else if (node.Key == "GlobalScaleMilli" && int.TryParse(v, NumberStyles.Integer, CultureInfo.InvariantCulture, out var gs))
+					priors.GlobalScaleMilli = gs;
+				else if (node.Key.StartsWith("DeliveryArmour@", StringComparison.Ordinal) && int.TryParse(v, NumberStyles.Integer, CultureInfo.InvariantCulture, out var f))
+				{
+					var cell = CellKey(node.Key["DeliveryArmour@".Length..]);
+					if (cell != null)
+						priors.factors[cell] = f;
+				}
+				else if (node.Key.StartsWith("PriorPct@", StringComparison.Ordinal) && int.TryParse(v, NumberStyles.Integer, CultureInfo.InvariantCulture, out var pp))
+				{
+					var cell = CellKey(node.Key["PriorPct@".Length..]);
+					if (cell != null)
+						priors.fittedPriors[cell] = pp;
+				}
+				else if (node.Key.StartsWith("DefenceState@", StringComparison.Ordinal) && int.TryParse(v, NumberStyles.Integer, CultureInfo.InvariantCulture, out var ds))
+					priors.defenceFactors[node.Key["DefenceState@".Length..]] = ds;
+			}
+
+			return priors;
+		}
+
+		static string CellKey(string raw)
+		{
+			// `<delivery>__x__<armor>` — both sides are stat-normalized names, never ids.
+			var sep = raw.IndexOf("__x__", StringComparison.Ordinal);
+			return sep <= 0 ? null : raw[..sep] + "|" + raw[(sep + 5)..];
+		}
+
+		/// <summary>Fitted correction in thousandths for (delivery tag, armour); Neutral for an unknown cell
+		/// or a cell whose resolved prior moved since the fit (per-cell staleness, F1-b).</summary>
+		public int FactorPermille(string delivery, string armor)
+		{
+			if (delivery == null || armor == null || !factors.TryGetValue(delivery + "|" + armor, out var v))
+				return Neutral;
+
+			// Per-cell staleness: the fitter's baseline prior must exist and still equal the resolved
+			// Versus percent for this cell — else the fit rode a stat that has since moved.
+			if (!fittedPriors.TryGetValue(delivery + "|" + armor, out var fitted))
+				return Neutral;
+
+			var current = BotUnitProfiles.ResolvedTagVersus(delivery);
+			var now = current != null && current.TryGetValue(armor, out var pct) ? pct : 100;
+			if (now != fitted)
+			{
+				staleCells.Add(delivery + "|" + armor);
+				return Neutral;
+			}
+
+			return Scale(v);
+		}
+
+		/// <summary>Per-delivery static-defence effectiveness in thousandths; Neutral when the delivery
+		/// was never fitted (these rows carry no PriorPct — the scalar is trusted as committed).</summary>
+		public int DefenceFactorPermille(string delivery) =>
+			delivery != null && defenceFactors.TryGetValue(delivery, out var v) ? Scale(v) : Neutral;
+
+		// Fitted values come back absolute: the optional global obs/exp scale the fitter wrote them
+		// relative to is multiplied back in. Neutral stays Neutral — a stale or missing cell reads
+		// the pure predictor, not the corrected global level.
+		// Re-clamp after GlobalScaleMilli: a cell fitted at the bound (e.g. 2000) scaled by g > 1000
+		// would otherwise sit outside the documented [500, 2000] cell range.
+		int Scale(int fittedMilli) => (int)Math.Clamp((long)fittedMilli * GlobalScaleMilli / Neutral, MinFittedMilli, MaxFittedMilli);
+	}
+
 	[TraitLocation(SystemActors.Player)]
-	[Desc("The combat veto's tier-1 prior source (AI_ARCHITECTURE §12.31): reads the same committed",
-		"ai/learned/arsenal_priors.yaml the unit builder's BotLearnedPriors serves, and maps the fitted",
-		"trade percents onto IBotEngagementPriors corrections (percent x 10 = thousandths). Frozen at match",
-		"start; a missing file or an unknown unit means 1000 — the pure BotCombatPredictor numbers.",
-		"genericbot && combatveto only — classic never sees the provider.")]
+	[Desc("The combat veto's tier-1 prior source (AI_ARCHITECTURE §12.31, contract ruling F1): serves the",
+		"delivery×armour residual table from ai/learned/engagement_priors.yaml on IBotEngagementPriors",
+		"(thousandths, bounded 500–2000 like the fit). Frozen at match start; a missing file, a missing cell",
+		"or a stale PriorPct row means 1000 — the pure BotCombatPredictor numbers.",
+		"genericbot && tier1_priors only — classic never sees the provider.")]
 	public class EngagementPriorsBotModuleInfo : ConditionalTraitInfo
 	{
-		[Desc("Mod-relative path of the priors file written by tools/ai/fit_arsenal_priors.py --write.")]
-		public readonly string PriorsFile = "ai/learned/arsenal_priors.yaml";
+		[Desc("Mod-relative path of the priors file written by tools/ai/fit_engagement_priors.py --write.")]
+		public readonly string PriorsFile = "ai/learned/engagement_priors.yaml";
 
 		[Desc("Lowest correction (thousandths) a fitted prior may give an attacker's damage.")]
 		public readonly int MinCorrectionMilli = 500;
@@ -42,17 +167,19 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 	public class EngagementPriorsBotModule : ConditionalTrait<EngagementPriorsBotModuleInfo>, IBotTick, IBotEngagementPriors
 	{
-		readonly World world;
 		readonly OpenRA.Player player;
-		ArsenalPriors priors = new();
+		BotEngagementPriors priors = new();
 		bool loaded;
 
 		public EngagementPriorsBotModule(Actor self, EngagementPriorsBotModuleInfo info)
 			: base(info)
 		{
-			world = self.World;
 			player = self.Owner;
 		}
+
+		string priorsState; // "none" | "error" | "fitted" — StaleCount is read live so the match record shows end-of-match staleness
+		public string PriorsState =>
+			priorsState == "fitted" ? $"fitted:{priors.FactorCount}/stale:{priors.StaleCount}" : priorsState;
 
 		void IBotTick.BotTick(IBot bot)
 		{
@@ -62,39 +189,72 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			loaded = true;
 			var fs = Game.ModData.DefaultFileSystem;
 			if (!fs.Exists(Info.PriorsFile))
+			{
+				priorsState = "none";
+				Log.Write("debug", $"AI {player.InternalName}: TIER1 priors: none ({Info.PriorsFile} missing), neutral");
 				return;
+			}
 
-			using (var stream = fs.Open(Info.PriorsFile))
-				priors = ArsenalPriors.Parse(MiniYaml.FromStream(stream, Info.PriorsFile));
+			try
+			{
+				using (var stream = fs.Open(Info.PriorsFile))
+					priors = BotEngagementPriors.Parse(MiniYaml.FromStream(stream, Info.PriorsFile));
 
-			Log.Write("debug", $"AI {player.InternalName}: COMBAT VETO priors: {priors.PairCount} pairs, {priors.TypeCount} types");
+				priorsState = "fitted";
+				Log.Write("debug", $"AI {player.InternalName}: TIER1 priors: {priors.FactorCount} cells, into-defences {priors.IntoDefencesPermille}‰" +
+					$"{(priors.LedgerHash != null ? $", ledger {priors.LedgerHash} (provenance only — unverifiable in-match)" : "")}");
+			}
+			catch (Exception e)
+			{
+				priors = new BotEngagementPriors();
+				priorsState = "error";
+				Log.Write("debug", $"AI {player.InternalName}: TIER1 priors: error ({e.Message}), neutral");
+			}
 		}
 
 		int IBotEngagementPriors.CorrectionMilli(BotUnitProfile attacker, BotUnitProfile target)
 		{
-			if (IsTraitDisabled || !loaded)
-				return 1000;
+			if (IsTraitDisabled || !loaded || attacker == null || target == null)
+				return BotEngagementPriors.Neutral;
 
-			// The fitted file is per (faction pair, own unit type) — the target profile is unused at this
-			// granularity; a finer attacker x target table lands with a later fitter without an API change.
-			var pct = priors.TradePercent(player.Faction?.InternalName, EnemyFaction(), attacker.Name);
-			return Math.Clamp(pct * 10, Info.MinCorrectionMilli, Info.MaxCorrectionMilli);
+			// The fitted cells are per (delivery tag, armour): the attacker's dominant weapon against this
+			// target supplies the delivery key — the same scoring DamagePerTickAgainst applies per weapon.
+			var delivery = DominantDelivery(attacker, target);
+			var f = (long)priors.FactorPermille(delivery, target.Armor);
+			if (attacker.IsBuilding)
+				f = f * priors.DefenceFactorPermille(delivery) / BotEngagementPriors.Neutral;
+			if (target.IsBuilding)
+				f = f * priors.IntoDefencesPermille / BotEngagementPriors.Neutral;
+
+			return (int)Math.Clamp(f, Info.MinCorrectionMilli, Info.MaxCorrectionMilli);
 		}
 
-		// Same enemy-faction resolution as BotLearnedPriors: the main target's if a provider names one,
-		// else the most common faction among enemy PLAYERS (never actors).
-		string EnemyFaction()
-		{
-			var main = player.PlayerActor.TraitsImplementing<IBotMainTargetProvider>()
-				.Select(p => p.MainTarget).FirstOrDefault(t => t != null);
-			if (main != null)
-				return main.Faction?.InternalName;
+		// The fitter's attrition exponent warps the predicted ratio (CombatVetoEval applies ratio^alpha);
+		// absent or disabled stays the pure square law. Same bounds as a correction: alpha in [0.5, 2.0].
+		int IBotEngagementPriors.AttritionExponentMilli =>
+			IsTraitDisabled || priors.AttritionExponentMilli == null ? 1000
+				: Math.Clamp(priors.AttritionExponentMilli.Value, Info.MinCorrectionMilli, Info.MaxCorrectionMilli);
 
-			return world.Players
-				.Where(p => p != player && !p.NonCombatant && !p.Spectating && player.RelationshipWith(p) == PlayerRelationship.Enemy)
-				.GroupBy(p => p.Faction?.InternalName).Where(g => g.Key != null)
-				.OrderByDescending(g => g.Count()).ThenBy(g => g.Key, StringComparer.Ordinal)
-				.Select(g => g.Key).FirstOrDefault();
+		// The weapon that would do most of the damage against this target decides the delivery cell —
+		// the per-pair correction cannot see inside DamagePerTickAgainst's weapon sum either way.
+		static string DominantDelivery(BotUnitProfile attacker, BotUnitProfile target)
+		{
+			var best = -1.0;
+			string delivery = null;
+			foreach (var w in attacker.Weapons)
+			{
+				if (!w.CanTarget(target.TargetTypes))
+					continue;
+
+				var score = w.DamagePerTick * (target.Armor == null ? 100 : w.Versus.GetValueOrDefault(target.Armor, 100));
+				if (score > best)
+				{
+					best = score;
+					delivery = w.Delivery;
+				}
+			}
+
+			return delivery;
 		}
 	}
 }
