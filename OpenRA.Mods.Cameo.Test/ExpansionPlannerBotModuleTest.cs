@@ -8,6 +8,7 @@
  */
 #endregion
 
+using System.Collections.Generic;
 using NUnit.Framework;
 using OpenRA.Mods.Cameo.Traits.BotModules;
 
@@ -175,6 +176,129 @@ namespace OpenRA.Mods.Cameo.Test
 				"a StarCraft command centre is a construction MCV that also accepts resources: still an expansion");
 			Assert.That(ExpansionPlannerBotModule.ClassifyMcv(constructionMcv: false, deploysIntoRefinery: true), Is.EqualTo(McvRole.FieldRefinery));
 			Assert.That(ExpansionPlannerBotModule.ClassifyMcv(constructionMcv: false, deploysIntoRefinery: false), Is.EqualTo(McvRole.BaseBuilding));
+		}
+
+		[Test]
+		public void AFieldStaysInPlayWhileLiveOrRemembered()
+		{
+			Assert.That(ExpansionPlannerBotModule.FieldPresent(false, 50, true), Is.False, "no indice at all");
+			Assert.That(ExpansionPlannerBotModule.FieldPresent(true, 50, false), Is.True);
+			Assert.That(ExpansionPlannerBotModule.FieldPresent(true, 0, false), Is.False);
+			Assert.That(ExpansionPlannerBotModule.FieldPresent(true, 0, true), Is.True,
+				"a depleted but remembered field stays in play: resources regrow, the location does not move");
+		}
+
+		[Test]
+		public void AFieldIsTakenOnceOursOrWorthless()
+		{
+			Assert.That(ExpansionPlannerBotModule.FieldTaken(0, false, 40), Is.False);
+			Assert.That(ExpansionPlannerBotModule.FieldTaken(1, false, 40), Is.True, "our refinery sits in the indice");
+			Assert.That(ExpansionPlannerBotModule.FieldTaken(0, true, 40), Is.True, "claimed by a refinery in radius");
+			Assert.That(ExpansionPlannerBotModule.FieldTaken(0, false, 0), Is.True, "never worth anything");
+		}
+
+		[Test]
+		public void OnlyAnOutrankingAllyClaimSteersUsOffAField()
+		{
+			var me = 3;
+			var field = new WPos(5120, 5120, 0);
+			var near = new WPos(5120 + 4096, 5120, 0);
+			Assert.That(ExpansionPlannerBotModule.YieldToAllyClaim(null, field, me, 10), Is.False, "claims off");
+			Assert.That(ExpansionPlannerBotModule.YieldToAllyClaim(new List<(int, WPos)>(), field, me, 10), Is.False, "no claims");
+			Assert.That(ExpansionPlannerBotModule.YieldToAllyClaim(new List<(int, WPos)> { (1, near) }, field, me, 10), Is.True,
+				"lower ClientIndex outranks us in radius");
+			Assert.That(ExpansionPlannerBotModule.YieldToAllyClaim(new List<(int, WPos)> { (5, near) }, field, me, 10), Is.False,
+				"a higher ClientIndex never outranks us");
+			Assert.That(ExpansionPlannerBotModule.YieldToAllyClaim(new List<(int, WPos)> { (1, new WPos(5120 + 40960, 5120, 0)) }, field, me, 10), Is.False,
+				"out of the claim radius");
+		}
+
+		[Test]
+		public void ScoreModifiersApplyOnlyTheOnesPresent()
+		{
+			Assert.That(ExpansionPlannerBotModule.ApplyFieldScoreModifiers(100, null, null, null), Is.EqualTo(100));
+			Assert.That(ExpansionPlannerBotModule.ApplyFieldScoreModifiers(100, 60, null, null), Is.EqualTo(60));
+			Assert.That(ExpansionPlannerBotModule.ApplyFieldScoreModifiers(100, null, 1.5, null), Is.EqualTo(150));
+			Assert.That(ExpansionPlannerBotModule.ApplyFieldScoreModifiers(100, null, null, 0.25), Is.EqualTo(25));
+			Assert.That(ExpansionPlannerBotModule.ApplyFieldScoreModifiers(100, 50, 2.0, 0.5), Is.EqualTo(50));
+		}
+
+		[Test]
+		public void AGoneOrForeignSiteHolderReleasesItsClaim()
+		{
+			Assert.That(ExpansionPlannerBotModule.SiteHolderGone(true, false, true, true), Is.False);
+			Assert.That(ExpansionPlannerBotModule.SiteHolderGone(false, false, true, true), Is.True, "deployed or sold: the id no longer resolves");
+			Assert.That(ExpansionPlannerBotModule.SiteHolderGone(true, true, true, true), Is.True, "dead");
+			Assert.That(ExpansionPlannerBotModule.SiteHolderGone(true, false, false, true), Is.True, "left the world");
+			Assert.That(ExpansionPlannerBotModule.SiteHolderGone(true, false, true, false), Is.True, "captured: a foreign MCV holds no claim of ours");
+		}
+
+		[Test]
+		public void APendingCommitClearsOnExpiryOrService()
+		{
+			Assert.That(ExpansionPlannerBotModule.PendingCommitCleared(10, 20, false), Is.False);
+			Assert.That(ExpansionPlannerBotModule.PendingCommitCleared(20, 20, false), Is.True, "the commit expired");
+			Assert.That(ExpansionPlannerBotModule.PendingCommitCleared(10, 20, true), Is.True, "its refinery landed early");
+		}
+
+		[Test]
+		public void ARefineryIsWantedWhileAnchorsOutnumberProduction()
+		{
+			Assert.That(ExpansionPlannerBotModule.AnchorRefineryWanted(2, 1), Is.True);
+			Assert.That(ExpansionPlannerBotModule.AnchorRefineryWanted(1, 1), Is.False);
+			Assert.That(ExpansionPlannerBotModule.AnchorRefineryWanted(0, 0), Is.False);
+		}
+
+		[Test]
+		public void AStuckAnchorCountsOnlyIdleReplans()
+		{
+			Assert.That(ExpansionPlannerBotModule.AnchorStuckNext(false, 2, 1, 0, 3, 5).Replans, Is.EqualTo(0), "a different anchor restarts");
+			Assert.That(ExpansionPlannerBotModule.AnchorStuckNext(true, 3, 2, 0, 3, 5).Replans, Is.EqualTo(0), "a refinery gained is progress");
+			Assert.That(ExpansionPlannerBotModule.AnchorStuckNext(true, 2, 2, 1, 3, 5).Replans, Is.EqualTo(0), "one in production is progress");
+			Assert.That(ExpansionPlannerBotModule.AnchorStuckNext(true, 2, 2, 0, 3, 5), Is.EqualTo((4, false)));
+			Assert.That(ExpansionPlannerBotModule.AnchorStuckNext(true, 2, 2, 0, 4, 5), Is.EqualTo((5, true)));
+			Assert.That(ExpansionPlannerBotModule.AnchorStuckNext(true, 2, 2, 0, 9, 0).Park, Is.False, "0 disables parking");
+		}
+
+		[Test]
+		public void TheLawDisablesFieldClaimsAndKeepsItsOwnWant()
+		{
+			var best = Field(1, 10, 10, 80, 0);
+			var (claim, want) = ExpansionPlannerBotModule.ClaimSelection(true, true, best);
+			Assert.That(claim, Is.Null, "the law claims anchors, not fields");
+			Assert.That(want, Is.True, "the law's own want passes through");
+
+			(claim, want) = ExpansionPlannerBotModule.ClaimSelection(true, false, best);
+			Assert.That(claim, Is.Null);
+			Assert.That(want, Is.False);
+
+			(claim, want) = ExpansionPlannerBotModule.ClaimSelection(false, true, best);
+			Assert.That(claim, Is.EqualTo(best), "classic claims the best in-reach field");
+			Assert.That(want, Is.True);
+
+			(claim, want) = ExpansionPlannerBotModule.ClaimSelection(false, true, null);
+			Assert.That(claim, Is.Null);
+			Assert.That(want, Is.False, "no in-reach field: classic wants nothing, whatever the law last said");
+		}
+
+		[Test]
+		public void TheCrawlAimsAtTheFieldCellNearestOurFrontier()
+		{
+			var frontier = new List<CPos> { new CPos(30, 10) };
+			var target = Field(0, 40, 10, 90, 1);
+			var fields = new List<RefineryField>
+			{
+				new(0, new List<CPos> { new(40, 10), new(41, 10) }),
+				new(1, new List<CPos> { new(10, 40) })
+			};
+			Assert.That(ExpansionPlannerBotModule.LinkTargetEdge(fields, target, frontier), Is.EqualTo(new CPos(40, 10)),
+				"field 0 is the target's field; its cell (40,10) is nearest the frontier");
+
+			Assert.That(ExpansionPlannerBotModule.LinkTargetEdge(null, target, frontier), Is.Null);
+			Assert.That(ExpansionPlannerBotModule.LinkTargetEdge(new List<RefineryField>(), target, frontier), Is.Null);
+			Assert.That(ExpansionPlannerBotModule.LinkTargetEdge(fields, target, new List<CPos>()), Is.Null);
+			Assert.That(ExpansionPlannerBotModule.LinkTargetEdge(new List<RefineryField> { new(0, new List<CPos>()) }, target, frontier), Is.Null,
+				"the nearest field has no usable cells: the centre stays the aim, no fall-through to the next field");
 		}
 	}
 }
