@@ -1,3 +1,7 @@
+# 2026-10-04 — Boss (Devin): independent review and durable recovery
+
+Coordinated checkpoint reviews with the active owners. Static review of takeover `9a0348101` found four actionable issues; see `docs/review_2026_10_04_takeover_bp.md`. Findings sent to T3Verify and the coordinator; smoke owner warned about the logging blocker. BP `63cd1c372` phase-1 static review is complete with changes requested; fixes and re-review are pending. BP static review identified B1-B4 (target semantics, per-cluster line ownership, fallback safety, extra-radar coverage); sent as one batch to T3Verify. No source changes or game drivers. Next: review corrective checkpoint and BP, then available REF-1/stale-test checkpoints. Durable recovery branch: `devin/boss_review_2026_10_04` in `C:/cameo-wt/boss_review`. The review record also preserves owner/task routing and queued dependencies for REF-1, baseline tests, dedicated smoke and radar work; BP latest reported head bd9ee1eac only adds its development log.
+
 # 2026-10-03 — coordinator: tier-3 hotfix (INC c) + ORDERS round 2 to NOVA/DAWN/EMBER
 
 *Claude.* INC c `3c793d4c3` = DAWN `18556ada5` (GetVariableObservers `override` + base: tier 3 was permanently disabled
