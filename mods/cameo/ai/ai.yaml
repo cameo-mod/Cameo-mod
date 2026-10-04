@@ -4295,6 +4295,7 @@ Player:
 		EnsureArtillerySiege: true
 		EnsureAntiAirEscort: true
 		SquadMicroEnabled: true
+		UseSquadOrderDedup: false
 		FormationMovement: true
 		RequiresCondition: genericbot && personality-rush
 		# CA-3 starting mix (§12.5): % of own mobile combat units per role; unlisted roles still produce at
@@ -4383,6 +4384,7 @@ Player:
 		EnsureArtillerySiege: true
 		EnsureAntiAirEscort: true
 		SquadMicroEnabled: true
+		UseSquadOrderDedup: false
 		FormationMovement: true
 		RequiresCondition: genericbot && personality-turtle
 		# CA-3 starting mix (§12.5): % of own mobile combat units per role; unlisted roles still produce at
@@ -4470,6 +4472,7 @@ Player:
 		EnsureArtillerySiege: true
 		EnsureAntiAirEscort: true
 		SquadMicroEnabled: true
+		UseSquadOrderDedup: false
 		FormationMovement: true
 		RequiresCondition: genericbot && personality-tech
 		# CA-3 starting mix (§12.5): % of own mobile combat units per role; unlisted roles still produce at
@@ -4559,6 +4562,7 @@ Player:
 		EnsureArtillerySiege: true
 		EnsureAntiAirEscort: true
 		SquadMicroEnabled: true
+		UseSquadOrderDedup: false
 		FormationMovement: true
 		RequiresCondition: genericbot && personality-expansion
 		# CA-3 starting mix (§12.5): % of own mobile combat units per role; unlisted roles still produce at
@@ -4647,6 +4651,7 @@ Player:
 		EnsureArtillerySiege: true
 		EnsureAntiAirEscort: true
 		SquadMicroEnabled: true
+		UseSquadOrderDedup: false
 		FormationMovement: true
 		RequiresCondition: genericbot && personality-steamroller
 		# CA-3 starting mix (§12.5): % of own mobile combat units per role; unlisted roles still produce at
@@ -4733,6 +4738,7 @@ Player:
 		EnsureArtillerySiege: true
 		EnsureAntiAirEscort: true
 		SquadMicroEnabled: true
+		UseSquadOrderDedup: false
 		FormationMovement: true
 		RequiresCondition: genericbot && personality-guerrilla
 		# CA-3 starting mix (§12.5): % of own mobile combat units per role; unlisted roles still produce at

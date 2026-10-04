@@ -277,7 +277,9 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				if ((u.Actor.CenterPosition - parentPos).LengthSquared <= followRangeSquared)
 					continue;
 
-				owner.Bot.QueueOrder(new Order("Move", u.Actor, Target.FromPos(parentPos), false));
+				var cell = owner.World.Map.CellContaining(parentPos);
+				if (owner.OrderChanged(u.Actor, SquadOrderKey.ForCell("Move", cell)))
+					owner.Bot.QueueOrder(new Order("Move", u.Actor, Target.FromPos(parentPos), false));
 			}
 		}
 
@@ -1005,7 +1007,9 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				if (micro && TryIssueMicroOrder(owner, a.Actor, focus, focusProfile))
 					continue;
 
-				owner.Bot.QueueOrder(new Order("AttackMove", a.Actor, Target.FromActor(owner.TargetActor), false));
+				if (owner.TargetActor != null
+					&& owner.OrderChanged(a.Actor, SquadOrderKey.ForActor("AttackMove", owner.TargetActor)))
+					owner.Bot.QueueOrder(new Order("AttackMove", a.Actor, Target.FromActor(owner.TargetActor), false));
 			}
 
 			if (ShouldFlee(owner))
@@ -1273,8 +1277,11 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 					owner.FuzzyStateMachine.ChangeState(owner, new GuerrillaUnitsRunState(), true);
 			}
 
-			owner.Bot.QueueOrder(new Order("AttackMove", null, Target.FromCell(owner.World, leader.Location), false, groupedActors: followingUnits.ToArray()));
-			owner.Bot.QueueOrder(new Order("AttackMove", null, Target.FromActor(owner.TargetActor), false, groupedActors: attackingUnits.ToArray()));
+			QueueDeduped(owner, "AttackMove", SquadOrderKey.ForCell("AttackMove", leader.Location),
+				Target.FromCell(owner.World, leader.Location), followingUnits);
+			if (owner.TargetActor != null)
+				QueueDeduped(owner, "AttackMove", SquadOrderKey.ForActor("AttackMove", owner.TargetActor),
+					Target.FromActor(owner.TargetActor), attackingUnits);
 
 			isFirstTick = false;
 		}

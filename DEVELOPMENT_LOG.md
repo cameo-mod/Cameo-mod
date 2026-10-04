@@ -1,3 +1,38 @@
+# 2026-10-04 — NOVA: AR-S residual — squad order dedup + flee-episode home latch (BK_squad_order_dedup)
+
+*NOVA.* Branch `devin/nova/ars-stutter` from master `3ba05ede7`, off EMBER's march-lattice
+hysteresis lane (local-only `devin/ember/formation-hysteresis@0895768eb`, t3verify-approved).
+The residual from EMBER's post-fold trace — protection rally/lure flap, quiet-defender
+Flee->Idle->Attack random-Move cycles, guerrilla/navy grouped per-tick re-issues — plus the
+class their alternation metric could not see: **identical-order re-issue spam**.
+
+- `SquadOrderDedup` (pure rule + `SquadOrderKey`, all branches pinned by `SquadOrderDedupTest`):
+  an order to a member queues only when (order, quantized target) actually changed. Mobile
+  orders re-issue on idle (a real retry); terminal orders (Stop/Scatter/ReturnToBase) never
+  repeat to the same effect. Memory lives on `SquadCA` so it survives state transitions and
+  is pruned of departed members.
+- `QueueDeduped` on `StateBaseCA`: grouped orders carry only members whose key changed —
+  empty groups queue nothing.
+- Protection rally/lure `rallyMode` latch (mode 1 hold < mode 2 lure, monotonic, cleared back
+  inside the rally radius); armed quiet defenders hold post instead of re-rolling.
+- `Retreat` flee-episode home latch (`SquadCA.FleeHomeCell`, cleared when the whole squad is
+  idle): `HomeLocation` -> `RandomBuildingLocation` re-rolled a fresh building every pass,
+  each re-roll cancelling the in-flight leg — the dominant Move spam.
+- Maintainer clarification folded in: per-tick orders are fine while units progress; the
+  defect is path-reset stop-start. Dedup suppresses only identical in-flight re-issues.
+
+Trace (td_gdi hard mirror, `order_trace.py` + issue-rate extension): alternations 459 -> 99
+(-78%), Move orders 1553 -> 484 (-69%), order-spam units 23 -> 11, alternating stutter units
+37 -> 16. Residual flagged units are queued waypoint chains (air strike routes, `queued:true`
+route legs — benign) and support-follow parent drift; the per-frame Move emitters outside the
+squad lattice (harvester retreat, deploy/scout/engineer/beacon modules) are a new fleet
+finding — flagged for the AR table.
+
+Gates: build 0 errors; Cameo tests 940/940; boot gate PASS (menu, zero new exceptions);
+unarmed path bit-identical by construction (`armed` short-circuits before memory reads);
+ai.yaml mounts all `false` — `BK_squad_order_dedup` in `increment_switches.yaml` arms it.
+INC-ready.
+
 # 2026-10-04 — Claude (lead): INC 2026-10-04e lands — INC-d completed (P0 raid gate), LC5 admission claims, checker v2, E2 test baseline
 
 *Claude.* Branch `inc/2026_10_04e` from master `1fbd239ff`:

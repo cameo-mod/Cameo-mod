@@ -213,3 +213,6 @@ groups:
   BI_front_back_placement:           # T3VERIFY BP-1 (DESIGN 19.15, BP-SPEC rev 2 + maintainer rulings 2026-10-04): arms BaseFrontBackPlannerBotModule - one radar per defended front strictly behind its defence line, spread for NEW approach coverage (union scoring); production at the front except air-only producers; tech/superweapon/passive-income in the back. Phase 1 adds the planner + seams only; the QM class cases + FragileTypes edits land with REF-1. No advisor active (classic, switch off) = bit-identical
     BaseFrontBackPlannerBotModule:
       Enabled: true
+  BK_squad_order_dedup:              # NOVA AR-S residual (maintainer stutter clarification 2026-10-04): squad states queue an order only when a member's (order, quantized target) actually changed; protection rally/lure mode latch; quiet defenders hold post instead of the Flee->Idle->Attack cycle; the shared Retreat flee-home pick latches per episode instead of re-rolling a random building every pass. Mobile orders re-issue on idle (real retry); terminal orders never repeat. Off = pre-change stream
+    SquadManagerBotModuleCA:
+      UseSquadOrderDedup: true

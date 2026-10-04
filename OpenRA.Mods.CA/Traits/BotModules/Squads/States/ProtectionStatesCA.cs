@@ -30,9 +30,17 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 		internal int Backoff = BackoffTicks;
 		int tryAttack = 0;
 
+		// AR-S (2026-10-04): the rally-return mode latch. 0 = not returning; 1 = holding
+		// (AttackMove to rally); 2 = luring (Move to rally). A fog-edge flicker otherwise
+		// alternates AttackMove<->Move to the same cell every squad tick — each issue cancels
+		// the in-flight path. The lure mode wins once entered (a losing squad keeps falling
+		// back); the latch clears when the leader is back inside the rally radius.
+		int rallyMode;
+
 		public void Activate(SquadCA owner)
 		{
 			tryAttackTick = owner.SquadManager.Info.ProtectionScanRadius;
+			rallyMode = 0;
 		}
 
 		public void Tick(SquadCA owner)
@@ -48,6 +56,9 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			var closestEnemy = owner.SquadManager.FindClosestEnemy(leader, protectionScanRadius);
 
 			var holding = owner.SquadManager.TryGetProtectionRally(out var rally);
+			if (!holding || (leader.Location - rally).LengthSquared <= owner.SquadManager.Info.LureRallyRadiusCells * owner.SquadManager.Info.LureRallyRadiusCells)
+				rallyMode = 0;
+
 			// "Quiet" also covers a target that is still valid but invisible (fled into fog): the squad cannot
 			// fight it and would otherwise loop Attack→Flee forever with the release timer reset every pass.
 			if (closestEnemy == null && (!owner.IsTargetValid || !owner.IsTargetVisible))
@@ -56,8 +67,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				if (holding)
 				{
 					if ((leader.Location - rally).LengthSquared > owner.SquadManager.Info.LureRallyRadiusCells * owner.SquadManager.Info.LureRallyRadiusCells)
-						owner.Bot.QueueOrder(new Order("AttackMove", null, Target.FromCell(owner.World, rally), false,
-							groupedActors: owner.Units.Select(u => u.Actor).ToArray()));
+						QueueRallyOrder(owner, 1, rally);
 					return;
 				}
 
@@ -67,6 +77,12 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 					owner.SquadManager.ReleaseDefenders(owner.Bot, owner);
 					return;
 				}
+
+				// AR-S armed: hold position instead of fleeing — the Flee->Idle->Attack cycle issued a
+				// fresh random-building Move every pass while the release timer counted down.
+				// Quiet defenders keep their post until the release fires or the enemy returns.
+				if (owner.SquadManager.Info.UseSquadOrderDedup)
+					return;
 
 				owner.FuzzyStateMachine.ChangeState(owner, new UnitsForProtectionFleeState(), false);
 				return;
@@ -79,8 +95,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				&& (leader.Location - rally).LengthSquared > owner.SquadManager.Info.LureRallyRadiusCells * owner.SquadManager.Info.LureRallyRadiusCells
 				&& owner.SquadManager.PredictsLoss(owner, owner.SquadManager.VisibleEnemiesNear(leader.CenterPosition, protectionScanRadius)))
 			{
-				owner.Bot.QueueOrder(new Order("Move", null, Target.FromCell(owner.World, rally), false,
-					groupedActors: owner.Units.Select(u => u.Actor).ToArray()));
+				QueueRallyOrder(owner, 2, rally);
 				return;
 			}
 			else if (closestEnemy != null && owner.TargetActor != closestEnemy)
@@ -185,9 +200,25 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 			tryAttack++;
 
-			owner.Bot.QueueOrder(new Order("ReturnToBase", null, false, groupedActors: resupplyingUnits.ToArray()));
-			owner.Bot.QueueOrder(new Order("AttackMove", null, Target.FromCell(owner.World, leader.Location), false, groupedActors: followingUnits.ToArray()));
-			owner.Bot.QueueOrder(new Order("AttackMove", null, Target.FromActor(owner.TargetActor), false, groupedActors: attackingUnits.ToArray()));
+			QueueDeduped(owner, "ReturnToBase", SquadOrderKey.Plain("ReturnToBase"), Target.Invalid, resupplyingUnits, terminal: true);
+			QueueDeduped(owner, "AttackMove", SquadOrderKey.ForCell("AttackMove", leader.Location), Target.FromCell(owner.World, leader.Location), followingUnits);
+			if (owner.TargetActor != null)
+				QueueDeduped(owner, "AttackMove", SquadOrderKey.ForActor("AttackMove", owner.TargetActor), Target.FromActor(owner.TargetActor), attackingUnits);
+		}
+
+		// AR-S: the latch wins over the freshly computed mode — a lure that goes quiet keeps
+		// falling back (Move), never downgrades to fighting on the way; a holding squad that
+		// starts losing upgrades to the lure run. Grouped order only carries changed members.
+		void QueueRallyOrder(SquadCA owner, int mode, CPos rally)
+		{
+			rallyMode = System.Math.Max(rallyMode, mode);
+
+			var orderName = rallyMode == 2 ? "Move" : "AttackMove";
+			var changed = owner.Units.Select(u => u.Actor)
+				.Where(a => owner.OrderChanged(a, SquadOrderKey.ForCell(orderName, rally))).ToArray();
+			if (changed.Length > 0)
+				owner.Bot.QueueOrder(new Order(orderName, null, Target.FromCell(owner.World, rally), false,
+					groupedActors: changed));
 		}
 
 		public void Deactivate(SquadCA owner) { }

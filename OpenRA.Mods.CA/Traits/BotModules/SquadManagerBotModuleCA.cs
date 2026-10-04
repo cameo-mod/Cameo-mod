@@ -574,6 +574,13 @@ namespace OpenRA.Mods.CA.Traits
 			"0 (Turtle) x1.5. Off, or no enabled provider, keeps the unchanged delay.")]
 		public readonly bool UseUtilityAxes = false;
 
+		[Desc("AR-S residual (2026-10-04): squad states only queue an order to a member when the " +
+			"(order, quantized target) actually changed — identical per-tick re-issues cancel the " +
+			"in-flight activity and read as stop-start stutter. Also latches the protection " +
+			"rally/lure mode and the shared Retreat flee-home pick per episode. " +
+			"Off = pre-change order stream.")]
+		public readonly bool UseSquadOrderDedup = false;
+
 		public override void RulesetLoaded(Ruleset rules, ActorInfo ai)
 		{
 			base.RulesetLoaded(rules, ai);

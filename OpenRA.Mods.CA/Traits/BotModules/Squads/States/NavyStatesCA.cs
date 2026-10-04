@@ -217,9 +217,12 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				{
 					leader = GetPathfindLeader(owner, owner.SquadManager.Info.SuggestedNavyLeaderLocomotor);
 					leader.WPos = leader.Actor.CenterPosition;
-					owner.Bot.QueueOrder(new Order("AttackMove", leader.Actor, Target.FromPos(owner.Target.CenterPosition), false));
-					owner.Bot.QueueOrder(new Order("Stop", null, false, groupedActors: stopUnits.ToArray()));
-					owner.Bot.QueueOrder(new Order("AttackMove", null, Target.FromCell(owner.World, leader.Actor.Location), false, groupedActors: otherUnits.ToArray()));
+					var kickTargetCell = owner.World.Map.CellContaining(owner.Target.CenterPosition);
+					if (owner.OrderChanged(leader.Actor, SquadOrderKey.ForCell("AttackMove", kickTargetCell)))
+						owner.Bot.QueueOrder(new Order("AttackMove", leader.Actor, Target.FromPos(owner.Target.CenterPosition), false));
+					QueueDeduped(owner, "Stop", SquadOrderKey.Plain("Stop"), Target.Invalid, stopUnits.ToList(), terminal: true);
+					QueueDeduped(owner, "AttackMove", SquadOrderKey.ForCell("AttackMove", leader.Actor.Location),
+						Target.FromCell(owner.World, leader.Actor.Location), otherUnits.ToList());
 					kickStuck--;
 				}
 				else if (kickStuck == 1)
@@ -242,8 +245,10 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				if (makeWay > 1)
 				{
 					var others = owner.Units.Where(u => u.Actor != leader.Actor).Select(u => u.Actor);
-					owner.Bot.QueueOrder(new Order("Scatter", null, false, groupedActors: others.ToArray()));
-					owner.Bot.QueueOrder(new Order("AttackMove", leader.Actor, Target.FromPos(owner.Target.CenterPosition), false));
+					QueueDeduped(owner, "Scatter", SquadOrderKey.Plain("Scatter"), Target.Invalid, others.ToList(), terminal: true);
+					var makeWayTargetCell = owner.World.Map.CellContaining(owner.Target.CenterPosition);
+					if (owner.OrderChanged(leader.Actor, SquadOrderKey.ForCell("AttackMove", makeWayTargetCell)))
+						owner.Bot.QueueOrder(new Order("AttackMove", leader.Actor, Target.FromPos(owner.Target.CenterPosition), false));
 					makeWay--;
 				}
 				else if (makeWay == 1)
@@ -304,12 +309,20 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			// Leader will wait squad members that left behind, unless
 			// next tick is kick stuck unit (we need leader move in advance).
 			if (leaderWaitCheck && kickStuck <= 0)
-				owner.Bot.QueueOrder(new Order("Stop", leader.Actor, false));
+			{
+				if (owner.OrderChanged(leader.Actor, SquadOrderKey.Plain("Stop"), terminal: true))
+					owner.Bot.QueueOrder(new Order("Stop", leader.Actor, false));
+			}
 			else
-				owner.Bot.QueueOrder(new Order("AttackMove", leader.Actor, Target.FromPos(owner.Target.CenterPosition), false));
+			{
+				var driveCell = owner.World.Map.CellContaining(owner.Target.CenterPosition);
+				if (owner.OrderChanged(leader.Actor, SquadOrderKey.ForCell("AttackMove", driveCell)))
+					owner.Bot.QueueOrder(new Order("AttackMove", leader.Actor, Target.FromPos(owner.Target.CenterPosition), false));
+			}
 
-			var unitsHurryUp = owner.Units.Where(u => (u.Actor.CenterPosition - leader.Actor.CenterPosition).HorizontalLengthSquared >= occupiedArea * 2).Select(u => u.Actor);
-			owner.Bot.QueueOrder(new Order("AttackMove", null, Target.FromCell(owner.World, leader.Actor.Location), false, groupedActors: unitsHurryUp.ToArray()));
+			var unitsHurryUp = owner.Units.Where(u => (u.Actor.CenterPosition - leader.Actor.CenterPosition).HorizontalLengthSquared >= occupiedArea * 2).Select(u => u.Actor).ToList();
+			QueueDeduped(owner, "AttackMove", SquadOrderKey.ForCell("AttackMove", leader.Actor.Location),
+				Target.FromCell(owner.World, leader.Actor.Location), unitsHurryUp);
 		}
 
 		public void Deactivate(SquadCA owner) { }
@@ -415,8 +428,11 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 			tryAttack++;
 
-			owner.Bot.QueueOrder(new Order("AttackMove", null, Target.FromCell(owner.World, leader.Location), false, groupedActors: followingUnits.ToArray()));
-			owner.Bot.QueueOrder(new Order("AttackMove", null, Target.FromActor(owner.TargetActor), false, groupedActors: attackingUnits.ToArray()));
+			QueueDeduped(owner, "AttackMove", SquadOrderKey.ForCell("AttackMove", leader.Location),
+				Target.FromCell(owner.World, leader.Location), followingUnits);
+			if (owner.TargetActor != null)
+				QueueDeduped(owner, "AttackMove", SquadOrderKey.ForActor("AttackMove", owner.TargetActor),
+					Target.FromActor(owner.TargetActor), attackingUnits);
 		}
 
 		public void Deactivate(SquadCA owner) { }

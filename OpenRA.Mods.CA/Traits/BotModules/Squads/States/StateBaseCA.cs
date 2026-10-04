@@ -56,6 +56,19 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			return location;
 		}
 
+		/// <summary>
+		/// AR-S (2026-10-04): grouped order over only the members whose (order, quantized target)
+		/// actually changed — an identical re-issue cancels the member's in-flight activity, the
+		/// stop-start stutter the maintainer reported. With UseSquadOrderDedup off every member
+		/// "changed", reproducing the pre-change stream (minus empty orders, which carry nothing).
+		/// </summary>
+		protected static void QueueDeduped(SquadCA owner, string orderName, SquadOrderKey key, Target target, IReadOnlyList<Actor> members, bool terminal = false)
+		{
+			var changed = members.Where(a => owner.OrderChanged(a, key, terminal)).ToArray();
+			if (changed.Length > 0)
+				owner.Bot.QueueOrder(new Order(orderName, null, target, false, groupedActors: changed));
+		}
+
 		protected static bool BusyAttack(Actor a)
 		{
 			if (a.IsIdle)
@@ -311,7 +324,9 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 						if (repairBuilding != null)
 						{
-							squad.Bot.QueueOrder(new Order(orderId, u.Actor, Target.FromActor(repairBuilding), orderQueued));
+							if (squad.OrderChanged(u.Actor, SquadOrderKey.ForActor(orderId, repairBuilding)))
+								squad.Bot.QueueOrder(new Order(orderId, u.Actor, Target.FromActor(repairBuilding), orderQueued));
+
 							orderQueued = true;
 							alreadyRepair = true;
 						}
@@ -324,10 +339,27 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			}
 
 			if (rearmingUnits.Count > 0)
-				squad.Bot.QueueOrder(new Order("ReturnToBase", null, true, groupedActors: rearmingUnits.ToArray()));
+			{
+				var rearmChanged = rearmingUnits.Where(a => squad.OrderChanged(a, SquadOrderKey.Plain("ReturnToBase"), terminal: true)).ToArray();
+				if (rearmChanged.Length > 0)
+					squad.Bot.QueueOrder(new Order("ReturnToBase", null, true, groupedActors: rearmChanged));
+			}
 
 			if (fleeingUnits.Count > 0)
-				squad.Bot.QueueOrder(new Order("Move", null, Target.FromCell(squad.World, HomeLocation(squad)), false, groupedActors: fleeingUnits.ToArray()));
+			{
+				// Armed: one home pick per flee episode — a fresh random building per
+				// tick cancels the leg every time (the wander the maintainer saw).
+				var home = HomeLocation(squad);
+				if (squad.SquadManager.Info.UseSquadOrderDedup)
+				{
+					if (squad.FleeHomeCell == null)
+						squad.FleeHomeCell = home;
+					else
+						home = squad.FleeHomeCell.Value;
+				}
+
+				QueueDeduped(squad, "Move", SquadOrderKey.ForCell("Move", home), Target.FromCell(squad.World, home), fleeingUnits);
+			}
 		}
 
 		protected static UnitWposWrapper GetPathfindLeader(SquadCA squad, HashSet<string> locomotorTypes)
