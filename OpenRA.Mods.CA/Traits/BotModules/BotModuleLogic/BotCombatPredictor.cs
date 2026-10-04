@@ -215,6 +215,11 @@ namespace OpenRA.Mods.CA.Traits
 		/// `^Warhead_*`); weapon children sharing the tag may carry inline overrides the fitter never
 		/// reads, so they are not consulted. Null when the tag resolves nowhere — fitter-excluded tags
 		/// emit no cells, so an unfitted lookup can only come from an unverifiable (stale-safe) cell.</summary>
+		/// <summary>True once the resolved warhead template map actually loaded — false under unit
+		/// tests or headless tools, where an unresolved tag means "unverifiable" rather than "the
+		/// delivery's Versus row is gone".</summary>
+		public static bool VersusTableLoaded => WarheadYamlMap().Count > 0;
+
 		public static IReadOnlyDictionary<string, int> ResolvedTagVersus(string tag)
 		{
 			var map = WarheadYamlMap();

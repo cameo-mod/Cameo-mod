@@ -119,8 +119,9 @@ schema-1 records in the same file remain valid and the aggregator pools both
   timeline is still detectable.
 - `priors_state` — `"+"`-joined `IBotEngagementPriors.PriorsState` across the player's
   priors providers, one entry per implemented provider: `none` (yaml missing), `error`
-  (parse failure — the provider degrades to neutral), or `fitted:N/stale:M` (N cells
-  loaded, M stale at match end). Absent when no priors provider exists on the player.
+  (parse failure — the provider degrades to neutral), or `fitted:N/carried:M/decay:D`
+  (N cells loaded, M carried over a moved `PriorPct@` at match end with mean decay D
+  permille). Absent when no priors provider exists on the player.
 - `composition` — `UnitCompositionsBotModule` composition `Id` active at the END
   of the match; `""` for the baseline build order. Composition transitions are
   observed via `UnitBuilderBotModuleCA.ActiveCompositionChanged`, a read-only
@@ -137,9 +138,11 @@ schema-1 records in the same file remain valid and the aggregator pools both
   unattributed. Cap: 128 entries (keep first 64 / last 64).
 - `priors_state` — the tier-1 priors provider's load verdict (AI_ARCHITECTURE §12.31):
   `none` (no file found), `error` (load/parse failed; provider inert), or
-  `fitted:N/stale:M` (N fitted cells live at match end, M invalidated by `PriorPct@`
-  staleness). With several providers the states join with `+`. Omitted when no
-  provider is armed, so a classic row is unchanged.
+  `fitted:N/carried:M/decay:D` (N fitted cells live at match end; M carried their
+  residual over a `PriorPct@` that moved since the fit — PRIORS-CARRY decay
+  `exp(-|ln(now/fitted)|/tau)` — at mean decay D permille). With several providers
+  the states join with `+`. Omitted when no provider is armed, so a classic row is
+  unchanged.
 - `stats` — from `PlayerStatistics` on that player, plus `PlayerResources`
   (`Earned`/`Spent`) for `resources_earned`/`resources_spent`; `0` when the
   trait is absent.

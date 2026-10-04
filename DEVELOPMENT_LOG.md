@@ -413,6 +413,21 @@ Flagged for owners (no test-side repin without a ruling):
   all 8 CannonAP endpoints + forgotten-cannonap; freedom-elite gate unsatisfiable after the
   coupling-regen revert (fixture canonical 45 vs live 44); GhostSniperLockdown/VonSniperLockdown
   fixture-completeness gaps; `test_firepower_consumers` unresolved-armament divergence.
+# 2026-10-04 (later) — NOVA PRIORS-CARRY: decayed carry-over replaces hard staleness
+
+*Devin (nova), `devin/nova/priors-carry` off `devin/nova/t2-port-v2`.* Maintainer spec:
+a rebalance must not zero the learned residual table. `FactorPermille` now decays a
+moved cell by `exp(-|ln(now/fitted)| / StalenessTauMilli)` (default 350‰ of the
+exponent — a 10% Versus move keeps ~76% of the residual, a 2x redesign ~14%) instead
+of hard-invalidating it. Only a delivery whose Versus row resolves nowhere while the
+warhead map IS loaded — the new `BotUnitProfiles.VersusTableLoaded` discriminator —
+or a non-positive prior still returns neutral. Unverifiable (no map: tests, headless
+tools) reads as the Versus-default 100, matching the old `now=100` fallback, so the
+decay math stays unit-testable. Telemetry moves `fitted:N/stale:M` to
+`fitted:N/carried:M/decay:D` (mean decay permille across carried cells);
+`AI_MATCH_LOG.md` both copies updated. `StalenessTauMilli` parses from the priors
+file (>0 only). 848/848, boot gate PASS (isolated support dir), arch freshness PASS.
+
 # 2026-10-04 (later) — NOVA N1 `2cdfdbac8`: parse-tolerance test vs the real emitted file
 
 *Devin (nova), same branch `devin/nova/t2-port`.* EMBER's first real fit (`ember-fit`,
