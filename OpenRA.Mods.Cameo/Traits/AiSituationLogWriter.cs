@@ -400,6 +400,13 @@ namespace OpenRA.Mods.Cameo.Traits
 			AiMatchLogWriter.AppendNumber(builder, "team_any_climax", situation.TeamAnyClimax);
 			AiMatchLogWriter.AppendNumber(builder, "coalition_phase", situation.CoalitionPhase);
 			AiMatchLogWriter.AppendString(builder, "coalition_main_target", situation.CoalitionMainTarget);
+
+			// BP-2 (§19.15): the front/back advisor's own diagnostics — publish-always;
+			// all zeros while no advisor is active, the honest answer.
+			AiMatchLogWriter.AppendNumber(builder, "fb_fronts", situation.FrontBackFronts);
+			AiMatchLogWriter.AppendNumber(builder, "fb_fronts_without_radar", situation.FrontBackFrontsWithoutRadar);
+			AiMatchLogWriter.AppendNumber(builder, "fb_radar_union_cells", situation.FrontBackRadarUnionCells);
+			AiMatchLogWriter.AppendNumber(builder, "fb_radar_approach_cells", situation.FrontBackRadarApproachCells);
 			AppendThreats(builder, situation.Threats);
 			AppendScaleTargets(builder, situation.ScaleTargets);
 			AppendBuildOrder(builder, situation.BuildOrder);

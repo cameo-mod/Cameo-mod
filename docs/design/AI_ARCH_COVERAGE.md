@@ -42,7 +42,7 @@ Dataflow direction: `PERCEPTION -> SITUATION -> STRATEGY -> EXECUTION` with `PRO
 | `FransCommanderCoreBotModule` | Fransbot | `FransCommanderCoreBotModule` (enable-fransbot || inc3_frans_services) | `IBotTick` | — |
 | `FransGeneralBotModule` | Fransbot | `FransGeneralBotModule` (enable-fransbot || inc3_frans_services) | `IBotRespondToAttack`, `IBotTick` | — |
 | `FransbotControllerBotModule` | Fransbot | `FransbotControllerBotModule` (enable-fransbot) | `IBotEnabled`, `IBotTick` | — |
-| `MasterAiBotModule` | Cameo | `MasterAiBotModule` (genericbot) | `IBotCoalition`, `IBotDirector`, `IBotEnemyCompositionProvider`, `IBotFoggedEnemyProvider`, `IBotMainTargetProvider`, `IBotMissionOutcomeSink`, `IBotMissionProvider`, `IBotPersonalityLeadProvider`, `IBotRegionThreatProvider`, `IBotRememberedDefenceProvider`, `IBotRouteThreatRouter`, `IBotSiegeFailureMemory`, `IBotTeamMember`, `IBotThreatPredictionProvider`, `IBotTick`, `IBotUtilityAxes` | `BaseRepairBotModule`, `BotCounterDemandController`, `BotLimits`, `BotPersonalityController`, `BuildOrderKnobsBotModule`, `IBotCaptureClaimSource`, `IBotExpansionAssistProvider`, `IBotExpansionTargetProvider`, `IBotMissionAssignmentProvider`, `IBotThreatAnalysis`, `PlanBanditBotModule`, `ResourceMapBotModule`, `ScaleTargetsBotModule`, `ScoutBotModule`, `SquadManagerBotModuleCA`, `TacticalMapBotModule` |
+| `MasterAiBotModule` | Cameo | `MasterAiBotModule` (genericbot) | `IBotCoalition`, `IBotDirector`, `IBotEnemyCompositionProvider`, `IBotFoggedEnemyProvider`, `IBotMainTargetProvider`, `IBotMissionOutcomeSink`, `IBotMissionProvider`, `IBotPersonalityLeadProvider`, `IBotRegionThreatProvider`, `IBotRememberedDefenceProvider`, `IBotRouteThreatRouter`, `IBotSiegeFailureMemory`, `IBotTeamMember`, `IBotThreatPredictionProvider`, `IBotTick`, `IBotUtilityAxes` | `BaseRepairBotModule`, `BotCounterDemandController`, `BotLimits`, `BotPersonalityController`, `BuildOrderKnobsBotModule`, `IBotCaptureClaimSource`, `IBotExpansionAssistProvider`, `IBotExpansionTargetProvider`, `IBotFrontBackAdvisor`, `IBotMissionAssignmentProvider`, `IBotThreatAnalysis`, `PlanBanditBotModule`, `ResourceMapBotModule`, `ScaleTargetsBotModule`, `ScoutBotModule`, `SquadManagerBotModuleCA`, `TacticalMapBotModule` |
 | `ModularBot` | Cameo | `ModularBot@EasiestAI`<br>`ModularBot@VeryEasyAI`<br>`ModularBot@EasyAI`<br>`ModularBot@MediumAI`<br>`ModularBot@HardAI`<br>`ModularBot@VeryHardAI`<br>… 18 total | `IBot` | `IBotActionBudget`, `IBotEnabled`, `IBotRespondToAttack`, `IBotTick` |
 | `PlanBanditBotModule` | Cameo | `PlanBanditBotModule` (genericbot && plan_bandits) | — | `IBotMainTargetProvider` |
 
@@ -160,7 +160,7 @@ Each `IBot*` seam: who provides it, who consumes it. `STARVED` = consumed but no
 | `IBotExpansionAssistProvider` | `ExpansionPlannerBotModule` | `MasterAiBotModule` | ok |
 | `IBotExpansionTargetProvider` | `ExpansionPlannerBotModule` | `BaseBuilderBotModuleCA`, `BaseFrontBackPlannerBotModule`, `MasterAiBotModule` | ok |
 | `IBotFoggedEnemyProvider` | `MasterAiBotModule` | `SquadManagerBotModuleCA` | ok |
-| `IBotFrontBackAdvisor` | `BaseFrontBackPlannerBotModule` | — | DEAD-END |
+| `IBotFrontBackAdvisor` | `BaseFrontBackPlannerBotModule` | `MasterAiBotModule` | ok |
 | `IBotInMatchAdaptation` | `InMatchAdaptBotModule` | `SquadManagerBotModuleCA` | ok |
 | `IBotMainTargetProvider` | `MasterAiBotModule` | `BaseFrontBackPlannerBotModule`, `BotLearnedPriors`, `DefenseCoveragePlanner`, `EngagementPriorsBotModule`, `PlanBanditBotModule`, `ScoutBotModule`, `SquadManagerBotModuleCA` | ok |
 | `IBotMcvExpansionSiteProvider` | `ExpansionPlannerBotModule` | `McvExpansionManagerBotModule` | ok |
@@ -257,7 +257,6 @@ Each `IBot*` seam: who provides it, who consumes it. `STARVED` = consumed but no
 | R3 | WARN | DEAD-END `IBotDefensePlacementAdvisor`: provided by `DefenseCoveragePlanner`; no consumer |
 | R3 | WARN | DEAD-END `IBotDirector`: provided by `MasterAiBotModule`; no consumer |
 | R3 | WARN | DEAD-END `IBotEngagementPriors`: provided by `EngagementPriorsBotModule`; no consumer |
-| R3 | WARN | DEAD-END `IBotFrontBackAdvisor`: provided by `BaseFrontBackPlannerBotModule`; no consumer |
 | R3 | WARN | DEAD-END `IBotMissionRecordSink`: provided by `AiMissionLogWriter`; no consumer |
 | R3 | WARN | DEAD-END `IBotPlacementAdvisor`: provided by `SpacingAdvisorBotModule`; no consumer |
 | R3 | WARN | DEAD-END `IBotPlacementObserver`: provided by `AiPlacementLogWriter`; no consumer |
@@ -287,6 +286,6 @@ Each `IBot*` seam: who provides it, who consumes it. `STARVED` = consumed but no
 | R5 | ok | SquadCAType/BotLeasePurpose members checked against their switch/draft/claim sites |
 | R6 | WARN | `ProtectionTypes` in OpenRA.Mods.CA/Traits/BotModules/SquadManagerBotModuleCA.cs: declared, never read anywhere |
 
-0 ERROR, 33 WARN
+0 ERROR, 32 WARN
 
 R1 checked 105 gated bot-module instances; R2 checked 65 switch targets. Modules marked *(no source)* live in `engine/` assemblies absent from this worktree — they are listed from yaml only, and C#-side checks skip them rather than fail.
