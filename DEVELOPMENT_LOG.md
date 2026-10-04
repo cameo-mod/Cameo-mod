@@ -1,3 +1,14 @@
+# 2026-10-04 — NOVA: round_trip_check engagements row rescued + stale dangling test fixed
+
+*Devin (NOVA).* `tools/ai/round_trip_check.py` gains the EL-0 layer: `engagements` PASS/WARN from
+`cameo-ai-engagements.jsonl` — every engagement record needs `close_reason` + a scored `score.total_milli`,
+posture samples should cover every logged game, a generic-bot batch with zero engagement records warns
+(tracking never closed anything). Absent file = pre-EL-0 build = PASS. Rescued from the retired `C:/tmp/amsmoke`
+worktree (never landed); field names re-verified against the current writer. Also fixed the stale
+`test_dangling_attempt_fails`: the outcomes layer counts dangling only when the executor went quiet >5000
+ticks before the last mission record — the fixture needed a later record to make PROGRESSING go quiet.
++`test_engagements_row` (absent=PASS, scored+posture=PASS, unclosed/missing-posture=WARN). 3/3 pytest.
+
 # 2026-10-03 — coordinator: tier-3 hotfix (INC c) + ORDERS round 2 to NOVA/DAWN/EMBER
 
 *Claude.* INC c `3c793d4c3` = DAWN `18556ada5` (GetVariableObservers `override` + base: tier 3 was permanently disabled
