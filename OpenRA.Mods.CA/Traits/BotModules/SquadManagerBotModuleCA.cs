@@ -1917,7 +1917,7 @@ namespace OpenRA.Mods.CA.Traits
 					// matched by the marked ClientIndex fallback.
 					var myId = Player.InternalName ?? "#" + Player.ClientIndex;
 					var elected = election.FirstOrDefault(a =>
-						a.ResponderId == myId || (a.ResponderId == null && a.ResponderClientIndex == Player.ClientIndex));
+						PrepositionDecisionEvalCA.IsElectedResponder(a.ResponderId, a.ResponderClientIndex, myId, Player.ClientIndex));
 					if (elected != null)
 					{
 						var broadcasts = TeamBlackboard.CollectBroadcasts(Player);
@@ -1968,7 +1968,7 @@ namespace OpenRA.Mods.CA.Traits
 				{
 					var myId = Player.InternalName ?? "#" + Player.ClientIndex;
 					var elected = assistElection.FirstOrDefault(a =>
-						a.ResponderId == myId || (a.ResponderId == null && a.ResponderClientIndex == Player.ClientIndex));
+						PrepositionDecisionEvalCA.IsElectedResponder(a.ResponderId, a.ResponderClientIndex, myId, Player.ClientIndex));
 					if (elected != null)
 					{
 						var broadcasts = TeamBlackboard.CollectBroadcasts(Player);
@@ -1993,23 +1993,21 @@ namespace OpenRA.Mods.CA.Traits
 			if (threat == null && request == null)
 				return;
 
-			CPos rally;
-			if (request.HasValue)
-			{
-				// Escorts go TO the guarded point - no defensive-building snap:
-				// the MCV/outpost is usually nowhere near a building.
-				rally = request.Value.Location;
-			}
-			else
+			// Escorts go TO the guarded point - no defensive-building snap:
+			// the MCV/outpost is usually nowhere near a building.
+			var nearestOrTarget = CPos.Zero;
+			if (!request.HasValue)
 			{
 				var target = threat.Value.Target;
 				var searchSquared = Info.PrepositionDefenceSearchCells * Info.PrepositionDefenceSearchCells;
-				rally = World.ActorsHavingTrait<AttackBase>()
+				nearestOrTarget = World.ActorsHavingTrait<AttackBase>()
 					.Where(a => a.Owner == Player && !a.IsDead && a.Info.HasTraitInfo<BuildingInfo>()
 						&& (a.Location - target).LengthSquared <= searchSquared)
 					.OrderBy(a => (a.Location - target).LengthSquared)
 					.Select(a => (CPos?)a.Location).FirstOrDefault() ?? target;
 			}
+
+			var rally = PrepositionDecisionEvalCA.RallyFor(request, threat, nearestOrTarget);
 
 			var protectSq = GetSquadOfType(SquadCAType.Protection) ?? RegisterNewSquad(bot, SquadCAType.Protection);
 			var leases = BotUnitLeases.Of(Player);
@@ -2018,8 +2016,7 @@ namespace OpenRA.Mods.CA.Traits
 			// CA-2: forward defence keeps a reserve too — the rally outside the base
 			// radius is the donor's non-emergency case; a rally inside it means the
 			// threat is at the doorstep and gets the full pool.
-			var emergency = (rally - initialBaseCenter).LengthSquared <=
-				(long)Info.MaxBaseRadius * Info.MaxBaseRadius;
+			var emergency = PrepositionDecisionEvalCA.IsEmergencyRally(rally, initialBaseCenter, Info.MaxBaseRadius);
 			var toDraft = DefendDraftLimit(draftable.Count, emergency, Info, utilityAxesProviders);
 			for (var i = 0; i < toDraft; i++)
 			{
@@ -2037,9 +2034,7 @@ namespace OpenRA.Mods.CA.Traits
 			// publisher refreshes its request every ProtectInterval, so the hold is a
 			// rolling window - a retracted request lets the escort release within one
 			// interval, and ExpiresTick is the failsafe bound for a dead publisher.
-			protectionHoldUntilTick = request.HasValue
-				? Math.Min(request.Value.ExpiresTick, World.WorldTick + Info.ProtectInterval * 10)
-				: World.WorldTick + threat.Value.EtaTicks + Info.ProtectInterval * 10;
+			protectionHoldUntilTick = PrepositionDecisionEvalCA.HoldUntilTick(request, threat, World.WorldTick, Info.ProtectInterval);
 			bot.QueueOrder(new Order("AttackMove", null, Target.FromCell(World, rally), false,
 				groupedActors: protectSq.Units.Select(u => u.Actor).ToArray()));
 
