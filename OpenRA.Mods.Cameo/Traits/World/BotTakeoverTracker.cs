@@ -9,6 +9,7 @@
  */
 #endregion
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using OpenRA.Graphics;
@@ -406,7 +407,7 @@ namespace OpenRA.Mods.Cameo.Traits
 			// AutoTarget resolves Owner.IsBot at actor creation, and that stays false for a
 			// taken-over slot. A coarse periodic pass re-imposes the bot stance on every unit
 			// a takeover seat owns; deterministic on all clients (same scan, same tick).
-			if (!enabled || records.Count == 0 || world.WorldTick % info.StanceRefreshIntervalTicks != 0)
+			if (!enabled || records.Count == 0 || world.WorldTick % Math.Max(1, info.StanceRefreshIntervalTicks) != 0)
 				return;
 
 			foreach (var seat in records.Keys)
