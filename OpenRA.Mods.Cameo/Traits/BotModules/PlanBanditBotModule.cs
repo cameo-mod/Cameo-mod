@@ -50,6 +50,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			"Empty = the personality bandit does not run and nothing is pinned.")]
 		public readonly string[] PersonalityArms = { "rush", "turtle", "tech", "expansion", "steamroller", "guerrilla" };
 
+		/// <summary>The PersonalityArms the personality controller still offers on this ruleset (a map may narrow it).</summary>
+		[FieldLoader.Ignore]
+		public string[] OfferedPersonalityArms = [];
+
 		[FieldLoader.LoadUsing(nameof(LoadPlanArms))]
 		[Desc("Attack-plan arms: plan name -> knob -> multiplier in thousandths (1000 = neutral). The chosen overlay multiplies the",
 			"build-order knob vector next to preset x learned x jitter. Empty = the plan bandit does not run.")]
@@ -108,13 +112,15 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				if (arm.IndexOf('@') >= 0 || arm.IndexOf("__", StringComparison.Ordinal) >= 0)
 					throw new YamlException($"PlanBanditBotModule: PersonalityArms entry '{arm}' must be a bare personality name.");
 
-			// Nova review 2026-10-03: an arm naming no controller condition silently falls back to the
-			// random draw — fail loud instead, the same check PinnedPersonalities gets.
+			// A map may narrow the controller to fewer personalities (the Raid gate pins personality-rush), so the bandit
+			// draws only among the arms the controller still offers. This runs at rules load even with the module off,
+			// so a narrowed map must not fail here (INC d: the Raid gate map stopped loading). Fail loud only when NO
+			// arm matches: then every arm is a misconfiguration (Nova review 2026-10-03, same spirit as PinnedPersonalities).
 			var controller = ai.TraitInfos<BotPersonalityControllerInfo>().FirstOrDefault();
-			if (controller != null)
-				foreach (var arm in PersonalityArms)
-					if (!controller.Conditions.Any(c => BotPersonalityController.PersonalityName(c, controller.PersonalityPrefix) == arm))
-						throw new YamlException($"PlanBanditBotModule: PersonalityArms entry '{arm}' has no matching personality-* condition.");
+			OfferedPersonalityArms = controller == null ? PersonalityArms
+				: PersonalityArms.Where(arm => controller.Conditions.Any(c => BotPersonalityController.PersonalityName(c, controller.PersonalityPrefix) == arm)).ToArray();
+			if (controller != null && PersonalityArms.Length > 0 && OfferedPersonalityArms.Length == 0)
+				throw new YamlException($"PlanBanditBotModule: no PersonalityArms entry ({string.Join(", ", PersonalityArms)}) has a matching personality-* condition.");
 		}
 
 		public override object Create(ActorInitializer init) { return new PlanBanditBotModule(init.Self, this); }
@@ -192,9 +198,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			LoadLearned();
 
-			if (Info.PersonalityArms.Length > 0)
+			if (Info.OfferedPersonalityArms.Length > 0)
 			{
-				var arm = Choose("Personality", ownFaction, enemyFaction, Info.PersonalityArms);
+				var arm = Choose("Personality", ownFaction, enemyFaction, Info.OfferedPersonalityArms);
 				if (arm != null)
 				{
 					snapshot.PersonalityArm = arm;
