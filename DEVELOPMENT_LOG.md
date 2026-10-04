@@ -1,3 +1,33 @@
+# 2026-10-04 — Devin-T2Verify: INC-g stack — hs5/hs6 seams + standalone BP-2 fold rebased onto INC-f
+
+*Devin.* The agreed merge order landed: BP-2 is in INC-f (`5e67eb6ec`), radar-contacts too
+(`a42a09e7c`), so the hs5×BP-2 stack rebases as seams + standalone fold — `7befd921c` (the BP-2
+cherry-pick) dropped. Pick chain on `inc/2026_10_04f @ 249b36be6`: hs6 + hs5 seams → fold →
+F1 anchor-granular gate → determinism tie-breaks → AR-8 + AR-1.
+
+The QueueManager conflict resolved as designed: hs5's `ClassifyPlacement` chain replaces BP-2's
+inline else-if ladder; the organic-crawl legality routes through INC-f's `RefineryLawCrawlRoll.LegalLink`
+(semantically identical to the picked inline GBA check, single-sourced). The fold routes BP-2's
+three duplicated decisions through `BaseBuilderQueueEvalCA` exactly as `4c363b6a8` did:
+radar priority → `PickOrPower`; `AdvisorLegalCells` → `PlacementCellAdmitted`; random-variant →
+`PicksRandomVariant` shared by `findPos` and `FrontBackVariant`.
+
+*Devin.* The fold content (unchanged by the rebase):
+
+* radar priority override → `PickOrPower` (radar when power-sufficient, else `power`; the debug
+  line names which arm returned — the same two messages as before);
+* `AdvisorLegalCells` → `PlacementCellAdmitted` with the requirement-distance clause `() => true`
+  (the advisor's front/back distance semantics cover that axis); short-circuit order and the
+  own-building spacing check preserved;
+* random-variant choice → new seam `PicksRandomVariant(hasVariants, hasFacings)`, shared by
+  `findPos` and `FrontBackVariant`: draw only when variants exist and no facings are configured;
+  facing-aimed placement still goes through `PickFacingVariant`. RNG draw order unchanged.
+
+No behavior change intended — same branches, same laziness, same draw order.
+
+Gates (at stack tip, see below): the full set re-run on INC-f — build, tests, fog, mutation,
+arch-freshness, wiring, doc-claims, boot.
+
 # 2026-10-04 — Devin-Tier4: RADAR-A — IBotRadarContacts provider + situation-log fields (no consumers)
 
 *Devin.* The bot-side radar screen: `RadarContactsBotModule` (genericbot-only via
@@ -32,6 +62,7 @@ negative path honestly: no provider built in a 14k-tick rush wipe => `providers:
 *Post-rebase (lead order 2026-10-04):* rebased onto `3ba05ede7` after INC-04e landed RADAR-ALLY; conflicts
 were append-only (devlog/HANDOFF top entries, ai.yaml grants — `@inmatchadapt` and `@radarcontacts` each
 kept their `Bots:`). Re-verified: build 0 errors, 939/939 tests, all four audits PASS, boot gate PASS.
+
 # 2026-10-04 — Devin-T3Verify: BP-IMPL phase 2 (front/back advisor wired into the shared queue manager)
 
 *Devin.* `devin/t3verify/bp-front-back-p2` in `C:/cameo-wt/bp` (base `3ba05ede7` — master after INC 2026-10-04e,
