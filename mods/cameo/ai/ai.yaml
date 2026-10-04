@@ -139,6 +139,12 @@
 	GrantConditionOnBotOwner@inmatchadapt:
 		Condition: inmatchadapt
 		Bots:
+	# Radar contacts (RADAR-A): the bot-side read of the ranged-GPS dots — anonymous cell/tick/
+	# velocity/class/owner records computed from the renderer's own visibility gate, provider-proximity
+	# enumeration only. The arm sets Bots (switch group AI_radar_contacts); empty by default - inert on master.
+	GrantConditionOnBotOwner@radarcontacts:
+		Condition: radar_contacts
+		Bots:
 	# DIFFICULTY SCALE (DESIGN §19.1, maintainer 2026-09-28): every number below lies on ONE straight line
 	# from easiest to cameogod, in EQUAL steps; an integer that cannot split evenly is the rounded line.
 	# Every field is written in every tier, so no tier silently falls back to a C# default.
@@ -3757,6 +3763,15 @@ Player:
 		BaseRadiusCells: 30
 		SpawnMatchCells: 8
 		UsePrediction: true
+	# RADAR CONTACTS (RADAR-A): the bot-side radar screen — anonymous enemy contacts (cell, tick, drift,
+	# icon class, owner colour) enumerated through the own/allied ranged-GPS providers' proximity lists
+	# and filtered by the render effect's own visibility predicate. Pure provider: publishes
+	# IBotRadarContacts + the situation-log snapshot, issues no orders, phase A has no consumers.
+	# `genericbot && radar_contacts`: off on master until the increment A/B arms it (switch group AI_radar_contacts).
+	RadarContactsBotModule:
+		RequiresCondition: genericbot && radar_contacts
+		ContactsIntervalTicks: 25
+		TrackGraceTicks: 250
 	# `genericbot && build_order_knobs`: off on master until the increment A/B arms it (switch group AK_build_order_knobs).
 	BuildOrderKnobsBotModule:
 		RequiresCondition: genericbot && build_order_knobs

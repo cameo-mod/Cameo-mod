@@ -1,3 +1,38 @@
+# 2026-10-04 — Devin-Tier4: RADAR-A — IBotRadarContacts provider + situation-log fields (no consumers)
+
+*Devin.* The bot-side radar screen: `RadarContactsBotModule` (genericbot-only via
+`genericbot && radar_contacts`; `GrantConditionOnBotOwner@radarcontacts` ships `Bots:` empty =
+inert on master; switch group `AI_radar_contacts` arms the genericbot tier list) publishes
+`IBotRadarContacts` — anonymous `BotRadarContact {Cell, Tick, VXPerKilotick, VYPerKilotick,
+Class, Owner}` records, exactly what a human writing down the radar dots could capture and
+never more (no type, no health, no ActorID). Enumeration is provider-proximity only:
+`world.Players` -> own/allied `RangedGpsWatcher.Providers` -> `CameoRangedGpsProvider.ActorsInRange`
+(the synced proximity list, exposed internally); **zero** global-actor-scan sites, so the
+fog-honesty manifest needed no new entry. Visibility is the renderer's own predicate —
+`CameoRangedGpsDotEffect.ShouldRenderDot` evaluated branch-for-branch against the bot player —
+so a contact exists iff the human would see the dot (incl. the RADAR-ALLY shared-disc semantics).
+Velocity is a per-ActorID internal track folded to cells x1000/tick; dead/disabled/powered-off
+providers contribute nothing because `TraitDisabled` clears the lists. Situation log gains
+`own.contacts {tick, providers, live:[{x,y,tick,vx_per_kilotick,vy_per_kilotick,class,owner}]}`
+(additive; absent when no module runs). NO consumers in phase A — no squad/scout/expansion/veto changes.
+
+*Evidence:* build 0 errors; `OpenRA.Mods.Cameo.Test` 851/851 (6 new: payload-shape contract via
+reflection, velocity math, track semantics); fog audit PASS (80 files, 263 sites, no new
+omniscience — new files register zero enumeration sites); `audit_bot_wiring` shows
+`RadarContactsBotModule gate='genericbot && radar_contacts'` under "dormant on master, armed by
+increment switch"; `audit_ai_personalities` PASS; `audit_merged_bot_modules` PASS; boot gate PASS;
+switch dry-run applies `AI_radar_contacts` -> the genericbot tier list. **Live check PASS** —
+switch armed transiently, `run_ai_match_batch` ra1_allies hard-vs-hard (support `_support_radara2`):
+`contacts` block present in all 442 situation records; at tick 23701 Multi0's radar dome produced
+6 live contacts (5 Infantry drifting -40/-40 cells/kt, 1 Vehicle fresh sighting at 0) all
+`owner: Multi1` — enemy-only, cell/tick/drift/class/owner exactly per contract. The arm was
+reverted after the run (switches live in frozen A/B trees only). First td_gdi attempt proved the
+negative path honestly: no provider built in a 14k-tick rush wipe => `providers: 0`, `live: []`.
+
+*Post-rebase (lead order 2026-10-04):* rebased onto `3ba05ede7` after INC-04e landed RADAR-ALLY; conflicts
+were append-only (devlog/HANDOFF top entries, ai.yaml grants — `@inmatchadapt` and `@radarcontacts` each
+kept their `Bots:`). Re-verified: build 0 errors, 939/939 tests, all four audits PASS, boot gate PASS.
+
 # 2026-10-04 — Claude (lead): INC 2026-10-04e lands — INC-d completed (P0 raid gate), LC5 admission claims, checker v2, E2 test baseline
 
 *Claude.* Branch `inc/2026_10_04e` from master `1fbd239ff`:

@@ -209,6 +209,38 @@ namespace OpenRA.Mods.Cameo.Traits
 			builder.Append('}');
 		}
 
+		// RADAR-A: the live ranged-GPS contacts — cell, age, drift and the icon class/owner colour a
+		// human would read off the radar; omitted while no RadarContactsBotModule runs. Anonymous by
+		// contract: no type, no health, no ActorID.
+		internal static void AppendContacts(StringBuilder builder, RadarContactsSnapshot snapshot)
+		{
+			if (snapshot == null)
+				return;
+
+			AiMatchLogWriter.AppendObjectPropertyStart(builder, "contacts");
+			AiMatchLogWriter.AppendNumber(builder, "tick", snapshot.Tick, true);
+			AiMatchLogWriter.AppendNumber(builder, "providers", snapshot.Providers);
+			AiMatchLogWriter.AppendArrayPropertyStart(builder, "live");
+			for (var i = 0; i < snapshot.Contacts.Length; i++)
+			{
+				if (i > 0)
+					builder.Append(',');
+				var c = snapshot.Contacts[i];
+				AiMatchLogWriter.AppendObjectStart(builder);
+				AiMatchLogWriter.AppendNumber(builder, "x", c.Cell.X, true);
+				AiMatchLogWriter.AppendNumber(builder, "y", c.Cell.Y);
+				AiMatchLogWriter.AppendNumber(builder, "tick", c.Tick);
+				AiMatchLogWriter.AppendNumber(builder, "vx_per_kilotick", c.VXPerKilotick);
+				AiMatchLogWriter.AppendNumber(builder, "vy_per_kilotick", c.VYPerKilotick);
+				AiMatchLogWriter.AppendString(builder, "class", c.Class ?? "");
+				AiMatchLogWriter.AppendString(builder, "owner", c.Owner?.InternalName ?? "");
+				builder.Append('}');
+			}
+
+			builder.Append(']');
+			builder.Append('}');
+		}
+
 		// Tier-3 (fleet orders 2026-10-03): the frozen bandit choice of this match; omitted when no PlanBanditBotModule ran.
 		internal static void AppendBandit(StringBuilder builder, PlanBanditSnapshot snapshot)
 		{
@@ -404,6 +436,7 @@ namespace OpenRA.Mods.Cameo.Traits
 			AppendScaleTargets(builder, situation.ScaleTargets);
 			AppendBuildOrder(builder, situation.BuildOrder);
 			AppendBandit(builder, situation.Bandit);
+			AppendContacts(builder, situation.Contacts);
 			builder.Append('}');
 			AppendExpansion(builder, situation.Expansion);
 
