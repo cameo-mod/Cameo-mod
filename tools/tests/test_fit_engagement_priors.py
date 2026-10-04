@@ -24,6 +24,10 @@ def _rec(kind="attack", skirmish=False, composition=True, **kw):
     r = {"record": "engagement", "kind": kind, "skirmish": skirmish,
          "faction": "td_gdi", "enemy_faction": "td_nod", "enemy_faction_public": True,
          "game_uid": "g1", "start_tick": 12000,
+         # Tier4's PRIORS-CARRY log field: the record's own resolved stats. The fixtures
+         # stake the same percents as PRIORS (today's table) -> cell decay = 1.
+         "balance": {"fingerprint": "fixture",
+                     "versus": {f"{d}|{a}": p for d, vs in PRIORS.items() for a, p in vs.items()}},
          "seen": {"start": {
              "own_committed_value": 800, "own_defence_value": 0,
              "enemy_unit_value": 100, "enemy_defence_value": 0,
@@ -359,6 +363,167 @@ def test_profile_collisions_are_named():
                 {"ledger": {}, "sections": {"g": {"dup_unit": {"armaments": []}}}}))
         _, meta, _ = fp.load_profiles(root)
     assert meta["collisions"] == ["dup_unit"]
+
+
+# ── PRIORS-CARRY (fitter item 2): per-log stats, posterior anchor, decay ─────────────────────
+
+def _legacy(rec):
+    """A record without the balance stats block (pre-Tier4 logs)."""
+    r = {k: v for k, v in rec.items()}
+    del r["balance"]
+    return r
+
+
+def test_legacy_records_are_weighted_down_not_repriced():
+    # The same evidence at full weight vs legacy weight: the legacy cell pulls less toward
+    # its (identical) ratio because the shrink constant is relatively larger — unverifiable
+    # logs count less, they are never silently re-priced at full confidence.
+    recs = [_rec3x()] * 40
+    hot = _rec3x()
+    hot["seen"]["start"]["composition"]["own_units"] = {"rifle": 1}
+    hot["truth"]["start"]["enemy_unit_value"] = 100000
+    hot["truth"]["enemy_loss_value"] = 100000
+    hot["seen"]["start"]["predicted_enemy_surviving_permille"] = 990
+    key = ("Bullet_Light", "None")
+    own = fp.fit({"engagements": recs + [hot], "matches": []}, PROFILES, PRIORS)["cells"][key]
+    leg = fp.fit({"engagements": [_legacy(r) for r in recs + [hot]], "matches": []},
+                 PROFILES, PRIORS)["cells"][key]
+    assert leg < own and leg > 1000
+    res = fp.fit({"engagements": [_legacy(_rec())], "matches": []}, PROFILES, PRIORS)
+    assert res["skipped"]["legacy_stats"] == 1
+
+
+def test_own_versus_records_price_their_own_cells():
+    # A record whose staked Versus differs from today's contributes decayed evidence to
+    # that cell (exp(-|ln(rec/now)|*1000/tau) < 1) — verifiable via eff_evidence mass.
+    recs = [_rec() for _ in range(10)]
+    moved = [_rec() for _ in range(10)]
+    for r in moved:
+        r["balance"]["versus"]["CannonAP_Medium|None"] = 200   # today: 50 -> 4x move
+    key = ("CannonAP_Medium", "None")
+    a = fp.fit({"engagements": recs + moved, "matches": []}, PROFILES, PRIORS)
+    # the moved records' evidence on that cell decays hard (4x -> ~0.14) — less effective
+    # evidence than the same records staked at today's percent
+    same = fp.fit({"engagements": recs * 2, "matches": []}, PROFILES, PRIORS)
+    assert a["eff_evidence"][key] < same["eff_evidence"][key]
+
+
+def _prev_yaml(cells, prior, evidence, gs=1000, lh="oldhash", fv=1):
+    lines = ["BotEngagementPriors:", f"\tGlobalScaleMilli: {gs}", f"\tLedgerHash: {lh}",
+             f"\tFitVersion: {fv}"]
+    for (d, a), m in cells.items():
+        lines.append(f"\tDeliveryArmour@{d}__x__{a}: {m}")
+        lines.append(f"\tPriorPct@{d}__x__{a}: {prior[(d, a)]}")
+        lines.append(f"\tEvidence@{d}__x__{a}: {evidence[(d, a)]}")
+    return lines
+
+
+def test_prev_posterior_anchors_cells_with_no_new_evidence(tmp_path):
+    # A cell that saw no fights this batch keeps its previous residual, decayed — the
+    # maintainer's ask: training data carries over instead of resetting to neutral.
+    prev_file = tmp_path / "prev.yaml"
+    prev_file.write_text("\n".join(_prev_yaml(
+        {("CannonAP_Medium", "None"): 1500}, {("CannonAP_Medium", "None"): 50},
+        {("CannonAP_Medium", "None"): 8000})), encoding="utf-8")
+    prev = fp.load_prev(prev_file)
+    res = fp.fit({"engagements": [_rec()] * 20, "matches": []}, PROFILES, PRIORS,
+                 prev=prev, ledger_hash="newhash")
+    assert res["cells"][("CannonAP_Medium", "None")] > 1000
+    assert res["boundary"] is True and res["fit_version"] == 2
+
+
+def test_carried_evidence_decays_with_prior_move_and_boundary(tmp_path):
+    # Same prev cell under three drift levels: no move, 10% move, 2x move -> the carried
+    # anchor mass drops (boundary decay * exp(-|ln d|*1000/tau)).
+    prev_file = tmp_path / "prev.yaml"
+    key = ("CannonAP_Medium", "None")
+    prev_file.write_text("\n".join(_prev_yaml(
+        {key: 1500}, {key: 50}, {key: 8000})), encoding="utf-8")
+    prev = fp.load_prev(prev_file)
+    same = fp.fit({"engagements": [], "matches": []}, PROFILES, PRIORS,
+                  prev=prev, ledger_hash="oldhash")
+    moved10 = fp.fit({"engagements": [], "matches": []}, PROFILES,
+                     dict(PRIORS, **{"CannonAP_Medium": dict(PRIORS["CannonAP_Medium"], **{"None": 55})}),
+                     prev=prev, ledger_hash="oldhash")
+    moved2x = fp.fit({"engagements": [], "matches": []}, PROFILES,
+                     dict(PRIORS, **{"CannonAP_Medium": dict(PRIORS["CannonAP_Medium"], **{"None": 100})}),
+                     prev=prev, ledger_hash="oldhash")
+    e_same = same["carried"][key][0]
+    e_10 = moved10["carried"][key][0]
+    e_2x = moved2x["carried"][key][0]
+    assert e_same > e_10 > e_2x
+    assert e_same == 8000  # no boundary, no move: full carry
+    assert moved10["cells"][key] > moved2x["cells"][key] > 1000
+
+
+def test_dead_delivery_row_carries_nothing(tmp_path):
+    # A delivery whose Versus row vanished entirely gets w_carry = 0 — same neutral as the
+    # consumer's disappeared-row rule.
+    key = ("CannonAP_Medium", "None")
+    prev_file = tmp_path / "prev.yaml"
+    prev_file.write_text("\n".join(_prev_yaml({key: 1500}, {key: 50}, {key: 8000})),
+                         encoding="utf-8")
+    prev = fp.load_prev(prev_file)
+    priors = {t: dict(v) for t, v in PRIORS.items()}
+    del priors["CannonAP_Medium"]
+    res = fp.fit({"engagements": [], "matches": []}, PROFILES, priors,
+                 prev=prev, ledger_hash="oldhash")
+    assert res["carried"][key][2] == 0.0
+    assert res["cells"][key] == 1000
+
+
+def test_evidence_rows_roundtrip_through_load_prev(tmp_path):
+    out = tmp_path / "p.yaml"
+    res = _fit([_rec()] * 10)
+    out.write_text(fp.to_yaml(res, "h"), encoding="utf-8")
+    back = fp.load_prev(out)
+    key = ("CannonAP_Medium", "None")
+    assert back["cells"][key] == res["cells"][key]
+    assert back["cell_prior"][key] == 50
+    assert back["evidence"][key] == res["eff_evidence"][key] > 0
+    assert back["ledger_hash"] == "h" and back["fit_version"] == res["fit_version"]
+
+
+def test_yaml_emits_carry_keys():
+    y = fp.to_yaml(_fit([_rec()]), "h")
+    assert "\tFitVersion: 1" in y
+    assert "\tStalenessTauMilli: 350" in y
+    for l in y.splitlines():
+        if l.startswith("\tPriorPct@"):
+            key = l.split("@", 1)[1].split(":")[0]
+            assert f"\tEvidence@{key}:" in y
+
+
+def test_family_pool_borrows_from_sibling_cells():
+    # A thin cell in a family with hot siblings borrows the family-measured level instead
+    # of sitting at its own thin observation (hierarchical pooling cell -> family -> global).
+    # Control: the same data with the delivery renamed into a family of one -> the thin
+    # cell keeps only the global anchor and stays near neutral.
+    fam_priors = dict(PRIORS)
+    fam_priors["Bullet_Heavy"] = {"None": 100, "Heavy": 25, "Wood": 50}
+    prof = dict(PROFILES)
+    prof["hmg"] = {"cost": 200, "hp": 60, "armor": "None",
+                   "weapons": [("Bullet_Heavy", 20.0)]}
+    hot = _rec()
+    hot["seen"]["start"]["composition"]["own_units"] = {"rifle": 40}
+    hot["truth"]["start"]["enemy_unit_value"] = 400
+    hot["truth"]["enemy_loss_value"] = 2000          # clipped to the 400 census -> obs 400
+    hot["seen"]["start"]["predicted_enemy_surviving_permille"] = 800   # exp 80 -> 5x sibling
+    thin = _rec()
+    thin["seen"]["start"]["composition"]["own_units"] = {"hmg": 1}
+    thin["truth"]["start"]["enemy_unit_value"] = 400
+    thin["truth"]["enemy_loss_value"] = 400          # ~1x -> thin cell at global level
+    recs = [_rec() for _ in range(40)] + [hot] * 8 + [thin] * 3
+    res = fp.fit({"engagements": recs, "matches": []}, prof, fam_priors)
+    iso_priors = dict(fam_priors)
+    iso_priors["Zap_Heavy"] = iso_priors.pop("Bullet_Heavy")
+    iso_prof = dict(prof)
+    iso_prof["hmg"] = dict(prof["hmg"], weapons=[("Zap_Heavy", 20.0)])
+    iso = fp.fit({"engagements": recs, "matches": []}, iso_prof, iso_priors)
+    fam_cell = res["cells"][("Bullet_Heavy", "None")]
+    iso_cell = iso["cells"][("Zap_Heavy", "None")]
+    assert fam_cell > iso_cell
+    assert fam_cell > 1000 >= iso_cell - 100
 
 
 def test_global_scale_milli_key_emitted_and_clamped():
