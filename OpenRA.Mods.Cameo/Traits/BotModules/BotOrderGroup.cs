@@ -77,6 +77,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			return new Order(order.OrderString, order.Subject, order.Target, order.Queued,
 				order.ExtraActors, members)
 			{
+				Type = order.Type,
 				TargetString = order.TargetString,
 				ExtraLocation = order.ExtraLocation,
 				ExtraData = order.ExtraData,
