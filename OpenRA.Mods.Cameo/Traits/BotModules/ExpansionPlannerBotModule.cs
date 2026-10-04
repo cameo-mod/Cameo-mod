@@ -1329,6 +1329,51 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			return gap <= 0 ? 0 : (gap + Math.Max(stepCells, 1) - 1) / Math.Max(stepCells, 1);
 		}
 
+		/// <summary>
+		/// Field gate A: a live indice (its own cells) or a remembered one stays in play — regrowth keeps a
+		/// depleted field worth revisiting. Pure, for the tests.
+		/// </summary>
+		public static bool FieldPresent(bool hasIndice, int liveResourceCells, bool remembered) =>
+			hasIndice && (liveResourceCells > 0 || remembered);
+
+		/// <summary>
+		/// Field gate B: already ours (a refinery in the indice or within claim radius) or worthless —
+		/// `value` is the first-seen cell count, so a live field never reaches this gate with zero.
+		/// Pure, for the tests.
+		/// </summary>
+		public static bool FieldTaken(int playerRefineries, bool claimed, int value) =>
+			playerRefineries > 0 || claimed || value <= 0;
+
+		/// <summary>
+		/// TC-2c (§12.17): yield to an outranking ally's broadcast claim; null or empty claims never yield.
+		/// Pure, for the tests.
+		/// </summary>
+		public static bool YieldToAllyClaim(IReadOnlyCollection<(int ClientIndex, WPos Claim)> allyClaims,
+			WPos field, int myClientIndex, int radiusCells) =>
+			allyClaims != null && allyClaims.Count > 0 && AllyClaimWins(field, allyClaims, myClientIndex, radiusCells);
+
+		/// <summary>
+		/// The post-score multipliers in their fixed order — coalition-sector percent (TC-3), unexplored-spread
+		/// bonus and MCV separation (FE-1). A null factor means "not applicable this plan". Pure, for the tests.
+		/// </summary>
+		public static double ApplyFieldScoreModifiers(double score, int? sectorPercent, double? spreadFactor, double? separationFactor)
+		{
+			if (sectorPercent.HasValue)
+				score *= sectorPercent.Value / 100.0;
+
+			if (spreadFactor.HasValue)
+				score *= spreadFactor.Value;
+
+			if (separationFactor.HasValue)
+				score *= separationFactor.Value;
+
+			return score;
+		}
+
+		/// <summary>An in-flight MCV's site claim releases when the holder is gone, dead or no longer ours.</summary>
+		public static bool SiteHolderGone(bool found, bool dead, bool inWorld, bool owned) =>
+			!found || dead || !inWorld || !owned;
+
 		int MapDiagonalCells()
 		{
 			var size = world.Map.MapSize;
@@ -1452,7 +1497,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				foreach (var id in inflightMcvSites.Keys.ToArray())
 				{
 					var heading = world.GetActorById(id);
-					if (heading == null || heading.IsDead || !heading.IsInWorld || heading.Owner != player)
+					if (SiteHolderGone(heading != null, heading?.IsDead ?? false, heading?.IsInWorld ?? false, heading?.Owner == player))
 						inflightMcvSites.Remove(id);
 				}
 			}
@@ -1492,7 +1537,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			for (var i = 0; i < resourceMap.GetIndicesLength(); i++)
 			{
 				var field = resourceMap.GetIndice(i);
-				if (field == null || (field.ResourceCellsCount <= 0 && !initialCells.ContainsKey(i)))
+				if (!FieldPresent(field != null, field?.ResourceCellsCount ?? 0, initialCells.ContainsKey(i)))
 					continue;
 
 				// Ruling (c): the field's size at match start is public map data. The first scan of a field
@@ -1510,7 +1555,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				var center = EffectiveCenter(field.ResourceCellsCount, field.ResourceCellsCenter, initialCenters[i]);
 				var claimed = Claimed(center, refineryCells, Info.ClaimRadiusCells)
 					|| Claimed(initialCenters[i], refineryCells, Info.ClaimRadiusCells);
-				if (field.PlayerRefineryCount > 0 || claimed || value <= 0)
+				if (FieldTaken(field.PlayerRefineryCount, claimed, value))
 				{
 					owned += value > 0 ? 1 : 0;
 					continue;
@@ -1520,8 +1565,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					continue;
 
 				// TC-2c: an outranking ally already aims at this field — yield instead of stacking.
-				if (allyClaims != null && allyClaims.Count > 0
-					&& AllyClaimWins(world.Map.CenterOfCell(center), allyClaims, player.ClientIndex, Info.AllyClaimRadiusCells))
+				if (YieldToAllyClaim(allyClaims, world.Map.CenterOfCell(center), player.ClientIndex, Info.AllyClaimRadiusCells))
 					continue;
 
 				var distance = buildingCells.Min(c => (c - center).Length);
@@ -1536,17 +1580,14 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				// TC-3 / BD: own-sector fields keep their full score, foreign-sector fields keep
 				// CoalitionForeignSectorPercent of it — deprioritized, never forbidden: the argmax
 				// still picks a foreign field when no own-sector field is left.
-				if (sectorAnchors != null)
-					score *= SectorScorePercent(world.Map.CenterOfCell(center), sectorAnchors,
-						player.InternalName ?? "#" + player.ClientIndex, Info.CoalitionForeignSectorPercent) / 100.0;
-
 				// FE-1: unexplored ground wins ties (spread), and the crawl prefers fields no MCV is already heading to.
-				if (Info.FieldCoverage)
-				{
-					score *= SpreadFactor(allBuildingCells.Count > 0 ? allBuildingCells.Min(c => (c - center).Length) : distance, diagonalCells, Info.SpreadBonus);
-					if (inflightMcvSites.Count > 0 && TakenByMcvSite(center, inflightMcvSites.Values, Info.ClaimRadiusCells))
-						score *= Info.MinSeparationFactor;
-				}
+				score = ApplyFieldScoreModifiers(score,
+					sectorAnchors != null ? SectorScorePercent(world.Map.CenterOfCell(center), sectorAnchors,
+						player.InternalName ?? "#" + player.ClientIndex, Info.CoalitionForeignSectorPercent) : (int?)null,
+					Info.FieldCoverage ? SpreadFactor(allBuildingCells.Count > 0 ? allBuildingCells.Min(c => (c - center).Length) : distance,
+						diagonalCells, Info.SpreadBonus) : (double?)null,
+					Info.FieldCoverage && inflightMcvSites.Count > 0 && TakenByMcvSite(center, inflightMcvSites.Values, Info.ClaimRadiusCells)
+						? Info.MinSeparationFactor : (double?)null);
 
 				scores.Add(new FieldScore(i, center, value, hops, payback, threat, score, Safety(threat, guardValue)));
 			}
@@ -1576,9 +1617,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			}
 
 			var lawClaims = LawActive;
-			claimField = lawClaims ? null : BestClaimField(scores);
-			if (!lawClaims)
-				wantsRefinery = claimField.HasValue;
+			(claimField, wantsRefinery) = ClaimSelection(lawClaims, wantsRefinery,
+				lawClaims ? (FieldScore?)null : BestClaimField(scores));
 
 			if (lawClaims)
 			{
@@ -1629,6 +1669,38 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public static bool LinkBuildingWanted(bool driveBaseCrawl, int? targetHops, int claimableAnchorsInReach, bool linkAvailable) =>
 			driveBaseCrawl && linkAvailable && targetHops > 0 && claimableAnchorsInReach == 0;
 
+		/// <summary>
+		/// REF-1: a pending anchor commit clears on expiry or the moment its refinery landed (the anchor is
+		/// served). Pure, for the tests.
+		/// </summary>
+		public static bool PendingCommitCleared(int tick, int until, bool served) => tick >= until || served;
+
+		/// <summary>
+		/// REF-1: a refinery is wanted only while claimable anchors outnumber refineries already in production —
+		/// never by comparing totals (a duplicate stacked at home must not spend a forward anchor's quota).
+		/// Pure, for the tests.
+		/// </summary>
+		public static bool AnchorRefineryWanted(int claimable, int queued) => claimable > queued;
+
+		/// <summary>
+		/// REF-1 loop guard: the same anchor wanted replan after replan with no refinery gained and none in
+		/// production counts a stuck re-plan; anything else restarts the count. `max` of 0 disables parking.
+		/// Pure, for the tests.
+		/// </summary>
+		public static (int Replans, bool Park) AnchorStuckNext(bool sameAnchor, int refineryCount,
+			int previousRefineries, int queued, int previousReplans, int maxReplans)
+		{
+			var replans = sameAnchor && refineryCount <= previousRefineries && queued == 0 ? previousReplans + 1 : 0;
+			return (replans, maxReplans > 0 && replans >= maxReplans);
+		}
+
+		/// <summary>
+		/// R7: under the anchor law the field claim is always null and the law's want carries through; classic
+		/// claims the best in-reach field and wants a refinery exactly when one exists. Pure, for the tests.
+		/// </summary>
+		public static (FieldScore? Claim, bool Want) ClaimSelection(bool lawActive, bool lawWanted, FieldScore? bestClaim) =>
+			lawActive ? (null, lawWanted) : (bestClaim, bestClaim.HasValue);
+
 		void UpdateCrawlWant((ActorInfo Info, int Cost, int BuildTicks) link, List<CPos> buildingTiles)
 		{
 			wantedLinkBuilding = null;
@@ -1637,7 +1709,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				return;
 
 			wantedLinkBuilding = link.Info.Name;
-			crawlTargetEdge = LinkTargetEdge(Target.Value, buildingTiles);
+			crawlTargetEdge = LinkTargetEdge(fields, Target.Value, buildingTiles);
 		}
 
 		/// <summary>
@@ -1646,7 +1718,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		/// (ResourceMap field vs the law's map-true component), so the law field nearest the target's centre supplies
 		/// the cells; with no usable cells the centre stays the aim.
 		/// </summary>
-		CPos? LinkTargetEdge(FieldScore target, List<CPos> buildingTiles)
+		internal static CPos? LinkTargetEdge(IReadOnlyList<RefineryField> fields, FieldScore target, IReadOnlyList<CPos> buildingTiles)
 		{
 			if (fields == null || fields.Count == 0 || buildingTiles == null || buildingTiles.Count == 0)
 				return null;
@@ -1773,7 +1845,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			foreach (var kv in anchorPendingUntil.ToList())
 			{
 				var index = anchors.IndexOf(kv.Key);
-				if (tick >= kv.Value || (index >= 0 && assigned[index] >= 0))
+				if (PendingCommitCleared(tick, kv.Value, index >= 0 && assigned[index] >= 0))
 					anchorPendingUntil.Remove(kv.Key);
 			}
 
@@ -1795,7 +1867,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			// A refinery is wanted only while more anchors are claimable than refineries already in flight — never by
 			// comparing totals (a duplicate stacked at home must not spend a forward anchor's quota).
-			wantsRefinery = order.Count > queued;
+			wantsRefinery = AnchorRefineryWanted(order.Count, queued);
 			if (order.Count == 0)
 			{
 				anchorStuck = (null, 0, refineryCells.Count);
@@ -1805,9 +1877,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var anchor = anchors[order[0]];
 
 			// Loop guard: the same anchor wanted replan after replan with no refinery gained and none in production.
-			var replans = anchorStuck.Anchor == anchor && refineryCells.Count <= anchorStuck.Refineries && queued == 0 ? anchorStuck.Replans + 1 : 0;
+			var (replans, parkAnchor) = AnchorStuckNext(anchorStuck.Anchor == anchor, refineryCells.Count,
+				anchorStuck.Refineries, queued, anchorStuck.Replans, Info.AnchorStuckReplans);
 			anchorStuck = (anchor, replans, refineryCells.Count);
-			if (Info.AnchorStuckReplans > 0 && replans >= Info.AnchorStuckReplans)
+			if (parkAnchor)
 			{
 				anchorParkedUntil[anchor] = tick + Info.ParkTicks;
 				anchorStuck = (null, 0, refineryCells.Count);
