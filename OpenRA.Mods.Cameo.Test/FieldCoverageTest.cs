@@ -15,6 +15,7 @@ using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.Cameo.Traits;
 using OpenRA.Mods.Cameo.Traits.BotModules;
 using OpenRA.Mods.Common.Traits;
+using OpenRA.Support;
 
 namespace OpenRA.Mods.Cameo.Test
 {
@@ -574,6 +575,33 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(RefineryLawSilo.Wanted(false, 85, 100, false), Is.True);
 			Assert.That(RefineryLawSilo.Wanted(false, 85, 100, true), Is.True);
 			Assert.That(RefineryLawSilo.Wanted(false, 80, 100, false), Is.False);
+		}
+
+		[Test]
+		public void CrawlRollGateBlocksNonGbaWithoutDrawingRandom()
+		{
+			var silo = new ActorInfo("silo", new BuildableInfo(), new BuildingInfo());
+			var rax = new ActorInfo("rax", new BuildableInfo(), new BuildingInfo(), new GivesBuildableAreaInfo());
+
+			Assert.That(RefineryLawCrawlRoll.LegalLink(true, silo), Is.False);
+			Assert.That(RefineryLawCrawlRoll.LegalLink(true, rax), Is.True);
+			Assert.That(RefineryLawCrawlRoll.LegalLink(false, silo), Is.True);
+			Assert.That(RefineryLawCrawlRoll.LegalLink(false, rax), Is.True);
+
+			// The gate precedes the roll in the queue's && chain, so a law-blocked building consumes no
+			// randoms — the deterministic stream must not depend on which building the queue produced.
+			var rng = new MersenneTwister(42);
+			var rollTaken = RefineryLawCrawlRoll.LegalLink(true, silo) && rng.Next(100) < 50;
+			Assert.That(rollTaken, Is.False);
+			Assert.That(rng.TotalCount, Is.EqualTo(0));
+
+			// A legal link takes the roll exactly once.
+			_ = RefineryLawCrawlRoll.LegalLink(true, rax) && rng.Next(100) < 50;
+			Assert.That(rng.TotalCount, Is.EqualTo(1));
+
+			// Classic path is unfiltered: a non-GBA building still reaches the draw when the law is off.
+			_ = RefineryLawCrawlRoll.LegalLink(false, silo) && rng.Next(100) < 50;
+			Assert.That(rng.TotalCount, Is.EqualTo(2));
 		}
 
 		sealed class LawStub : IBotExpansionTargetProvider
