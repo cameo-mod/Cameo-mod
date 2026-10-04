@@ -1,3 +1,33 @@
+## 2026-10-04 — Devin-Tier4: PRIORS-CARRY engagement-log balance block (Tier4 lane, spec §ownership)
+
+`Agent: Devin-Tier4 · branch devin/tier4/takeover-smoke · worktree C:/cameo-wt/t4-smoke · base master 3ba05ede7 (stacked on AR-T3 commits)`
+
+**INC-ready, NOT merged** (no merge authority; lead decides).
+Per `SPEC_2026-10-04_claude_priors_carry_over.md` the tier-1 fitter re-priced old
+logs under *today's* Versus — every engagement record now carries an additive
+`balance` block so old logs price under their own rules:
+`balance.fingerprint` = sha256(mod id + mod version + map uid + per-file sha256 of
+manifest weapons/rules); `balance.versus` = resolved percent for every
+`delivery-tag|armour-class` cell the engagement touched (seen compositions only).
+Tag identity recovered from resolved weapon yaml (`WeaponInfo` drops the
+`Warhead@` suffix at load) — **parity 1568/1568 weapons, 0 mismatch** vs
+`extract_stats.py`; main-warhead pick restricted to the ledger's five damage
+types. One-sided engagements emit **fingerprint-only** = T3Verify's declared
+legacy-weight path. Consumer contract confirmed peer→peer:
+`r["balance"]["versus"]["<Tag>|<Armor>"]` (`__x__` also accepted).
+
+**Live evidence** (3-match batch): 618/618 engagement records carry `balance`;
+295 with versus (254 distinct cells, 0 malformed); 323 fingerprint-only;
+3 fingerprints = 3 map variants. `engagement_report` + on-branch fitter parse
+unchanged (additive field).
+**Gates:** build 0/0; 971/971 tests (4 new); fog/wiring/personalities/merged/
+mutation/arch audits PASS; module map current; boot gate PASS.
+**Files:** `EngagementMath.cs` +83, `EngagementLogBotModule.cs` +164,
+`EngagementMathTest.cs` +103 — additive only, no yaml/balance numbers.
+**Next (not mine):** NOVA consumer read path; lead's fit + A/B integration.
+T3Verify review notes: `boundary=False` on missing prev `LedgerHash`
+undocumented; parsed `prev.staleness_tau_milli` unused.
+
 ## 2026-10-04 — Devin-Tier4: AR-T3 bundle — round-trip gate, AR-2 desync regression RED, hotspot #1, module-map fix
 
 `Agent: Devin-Tier4 · branch devin/tier4/takeover-smoke · worktree C:/cameo-wt/t4-smoke · base master 3ba05ede7`

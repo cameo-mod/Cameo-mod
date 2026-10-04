@@ -1,3 +1,54 @@
+# 2026-10-04 — Devin-Tier4: PRIORS-CARRY — engagement records carry the balance that produced them
+
+*Devin.* `devin/tier4/takeover-smoke` in `C:/cameo-wt/t4-smoke` (stacked on AR-T3 tip
+`e2e13e250`, base `3ba05ede7`). Spec `SPEC_2026-10-04_claude_priors_carry_over.md`
+(Tier4 lane: engagement-log field; T3Verify: fitter; NOVA: consumer; lead: integration).
+The tier-1 fitter re-priced old logs under *today's* Versus and got cells wrong whenever
+balance moved — every engagement record now carries an additive `balance` block:
+
+```json
+"balance": {"fingerprint": "sha256:…", "versus": {"Bullet_Light|Flak": 163, …}}
+```
+
+- **Fingerprint** = sha256 over mod id + mod version + map uid + sha256 of every
+  manifest weapon/rules file — identifies the exact rules revision that produced
+  the record (map uid is deliberately included: map yaml can overlay weapons).
+- **`versus`** = the resolved Versus percent for every `delivery-tag|armour-class`
+  cell the engagement touched (seen start/end compositions only — never the truth
+  scan). One-sided engagements (lone scout dies, no enemy ever tracked) emit
+  **fingerprint-only** — the fitter's declared legacy-weight (0.4) path, still
+  provenance-bearing. `versus` is omitted rather than emitted `{}` (ambiguous).
+- **Tag identity has exact ledger parity:** runtime `WeaponInfo` discards the
+  `Warhead@<suffix>` key, so tags are recovered from the resolved weapon yaml
+  (`MiniYaml.Load` of manifest weapons + `world.Map.WeaponDefinitions`), matching
+  `extract_stats.py` `damage_warheads[].tag` — parity-checked **1568/1568 weapons,
+  0 mismatch**. Main-warhead pick = max positive damage restricted to the ledger's
+  five damage types (`AffectsIntegrityWarhead` excluded, as the extractor does).
+- New `EngagementBalance` helpers in `EngagementMath.cs` (`Fingerprint`,
+  `WarheadTable`, `WarheadTag`, `AddCells`); ruleset-scoped `BalanceStatsCache`
+  inside `EngagementLogBotModule` (record-only, unsynced — zero sim cost share).
+- **T3Verify contract:** `r["balance"]["versus"]["<Tag>|<Armor>"]` (also accepts
+  `__x__`); fingerprint-only → legacy weight. Peer review of their fitter: contract
+  compatible; minor notes filed (`boundary=False` on missing prev `LedgerHash`
+  undocumented; parsed `prev.staleness_tau_milli` unused).
+
+**Live evidence** (`tools/ai/run_ai_match_batch.py --repeats 1 --time-limit 1`, 3 clean
+matches, `elcheck` support dir): 1128 log lines → **618/618 engagement records carry
+`balance`** — 295 with touched-cell versus (254 distinct `Tag|Armor` keys, 0 malformed,
+resolved values e.g. `Bullet_Heavy|None=200`, `1Dam|*=100`), 323 fingerprint-only
+one-sided records. Three distinct fingerprints = one per batch map variant, as designed.
+Backward compat: `engagement_report.py` and the on-branch `fit_engagement_priors.py`
+parse the new records unchanged (fitter reports "50 empty-side", matching the class).
+
+Gates: build 0 err/0 warn; focused fixture **17/17**; full suite **971/971** (967 + 4
+new balance tests); fog audit PASS (263 sites, 0 new — ruleset yaml is not actor state);
+wiring / personalities / merged / direct-mutation / arch audits PASS (R3–R6
+informational); `ai_module_map --check` current; **boot gate PASS** (menu reached,
+0 new exceptions).
+
+Files: `EngagementMath.cs` (+83), `EngagementLogBotModule.cs` (+164),
+`EngagementMathTest.cs` (+103) — all additive; no yaml, no balance numbers touched.
+
 # 2026-10-04 — Devin-Tier4: AR-T3 — batch --round-trip, AR-2 MP desync regression RED on master, hotspot #1 extraction, module-map consumer fix
 
 *Devin.* `devin/tier4/takeover-smoke` in `C:/cameo-wt/t4-smoke` (base `3ba05ede7`).
