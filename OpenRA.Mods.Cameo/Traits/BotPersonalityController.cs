@@ -53,10 +53,22 @@ namespace OpenRA.Mods.Cameo.Traits
 			if (Conditions.Any(c => !c.StartsWith(PersonalityPrefix, StringComparison.Ordinal)))
 				throw new YamlException($"Every personality condition must start with '{PersonalityPrefix}'.");
 
-			if (PinnedPersonalities != null)
-				foreach (var kv in PinnedPersonalities)
-					if (!Conditions.Any(c => BotPersonalityController.PersonalityName(c, PersonalityPrefix) == kv.Value))
-						throw new YamlException($"PinnedPersonalities[{kv.Key}] names '{kv.Value}', which has no matching personality-* condition.");
+			// A map may narrow Conditions (the Raid gate pins personality-rush), so a pin naming a personality the
+			// controller doesn't offer is dead-but-legal config: TraitEnabled's lookup falls through to the random
+			// offered draw. Fail loud only when NO pin matches — then every pin is a misconfiguration (the same
+			// OfferedPersonalityArms rule 6ae83cae1 applied to PlanBanditBotModule's arm list, which threw first).
+			ValidatePinnedPersonalities(Conditions, PersonalityPrefix, PinnedPersonalities);
+		}
+
+		internal static void ValidatePinnedPersonalities(string[] conditions, string prefix, Dictionary<string, string> pins)
+		{
+			if (pins == null || pins.Count == 0)
+				return;
+
+			var matches = pins.Count(kv =>
+				conditions.Any(c => BotPersonalityController.PersonalityName(c, prefix) == kv.Value));
+			if (matches == 0)
+				throw new YamlException($"PinnedPersonalities has no entry ({string.Join(", ", pins.Values)}) with a matching personality-* condition.");
 		}
 
 		public override object Create(ActorInitializer init) { return new BotPersonalityController(init.Self, this); }

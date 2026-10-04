@@ -679,6 +679,33 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(BotPersonalityController.PinnedPersonality(null, "exploit_rush"), Is.Null);
 		}
 
+		[Test]
+		public void PersonalityPinValidationToleratesNarrowedConditions()
+		{
+			// The Raid gate map narrows Conditions to personality-rush; ai.yaml's exploit_* pins
+			// keep matching entries dead-but-legal — the gate map must load (INC-d P0 follow-up).
+			var pins = new System.Collections.Generic.Dictionary<string, string>
+			{
+				["exploit_rush"] = "rush",
+				["exploit_turtle"] = "turtle",
+				["exploit_guerrilla"] = "guerrilla",
+				["exploit_expansion"] = "expansion",
+				["exploit_steamroller"] = "steamroller",
+				["exploit_tech"] = "tech",
+			};
+			var narrowed = new[] { "personality-rush" };
+			Assert.DoesNotThrow(() =>
+				BotPersonalityControllerInfo.ValidatePinnedPersonalities(narrowed, "personality-", pins));
+			Assert.DoesNotThrow(() =>
+				BotPersonalityControllerInfo.ValidatePinnedPersonalities(narrowed, "personality-", null));
+			Assert.DoesNotThrow(() =>
+				BotPersonalityControllerInfo.ValidatePinnedPersonalities(narrowed, "personality-",
+					new System.Collections.Generic.Dictionary<string, string>()));
+			Assert.Throws<YamlException>(() =>
+				BotPersonalityControllerInfo.ValidatePinnedPersonalities(
+					new[] { "personality-berserker" }, "personality-", pins));
+		}
+
 		[TestCase("rush", "turtle", 1000, 1000 + 2999, false, 3000, 1000, false)]
 		[TestCase("rush", "turtle", 1001, 1000 + 3000, false, 3000, 1000, false)]
 		[TestCase("rush", "turtle", 1000, 1000 + 3000, false, 3000, 1000, true)]
