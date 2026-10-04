@@ -36,8 +36,9 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		// REF-1 (§12.24 v2): the most refineries serving one anchor (the law's cap: must stay 1), the anchors in reach
 		// still waiting for a refinery, and the fields in reach with no refinery yet (the tier-1 backlog — it must
-		// drain to 0 before any second-refinery-on-a-field placement).
+		// drain to 0 before any second-refinery-on-a-field placement). The ids list is that backlog spelled out.
 		public int RefineriesPerAnchorMax, AnchorsInReachUnserved, FieldsInReachUnserved;
+		public int[] FieldsInReachUnservedIds = Array.Empty<int>();
 	}
 
 	internal readonly struct RefineryAssignment
@@ -353,7 +354,6 @@ namespace OpenRA.Mods.Cameo.Traits
 			var map = player.PlayerActor.TraitsImplementing<ResourceMapBotModule>().FirstOrDefault(t => t.IsTraitEnabled());
 			var planner = player.PlayerActor.TraitsImplementing<ExpansionPlannerBotModule>().FirstEnabledTraitOrDefault();
 			var reach = planner?.Info.ReachCells ?? 6;
-			var claimRadius = planner?.Info.ClaimRadiusCells ?? 8;
 
 			var buildableArea = new List<CPos>();
 			var refineries = new List<CPos>();
@@ -390,23 +390,11 @@ namespace OpenRA.Mods.Cameo.Traits
 				Conyards = conyards.Count
 			};
 
-			var covered = 0;
+			// FieldsHarvested stays on the bot's seen-fields model (ResourceMapBotModule) — it is the fog-limited
+			// half of the report; reach/served below run on the law's own field ids so the three counters agree.
 			foreach (var kv in fieldCenters)
-			{
-				var center = kv.Value;
-				var inReach = buildableArea.Any(c => ExpansionMath.Distance(c, center) <= reach);
-				var served = refineries.Any(r => ExpansionMath.Distance(r, center) <= claimRadius);
-				if (inReach)
-					snapshot.FieldsInReach++;
-				if (served)
-					snapshot.FieldsServed++;
-				if (inReach || served)
-					covered++;
 				if (map != null && map.GetIndice(kv.Key)?.PlayerHarvetserCount > 0)
 					snapshot.FieldsHarvested++;
-			}
-
-			snapshot.CoverageMilli = fieldCenters.Count == 0 ? 0 : covered * 1000 / fieldCenters.Count;
 
 			var activeAnchors = ActiveAnchors;
 			var assignment = ExpansionMath.AssignRefineries(refineries, activeAnchors, ExpansionMath.AnchorRadiusCells);
@@ -492,7 +480,7 @@ namespace OpenRA.Mods.Cameo.Traits
 					? fieldReach.GetValueOrDefault(fid, double.MaxValue)
 					: buildableArea.Count == 0 ? double.MaxValue : buildableArea.Min(b => ExpansionMath.Distance(b, activeAnchors[a]));
 				var inReach = reachD <= reach;
-				var servedAnchor = servedPerAnchor[a] > 0;
+				var servedAnchor = assigned[a] >= 0;
 				if (inReach && !servedAnchor)
 					snapshot.AnchorsInReachUnserved++;
 
@@ -500,9 +488,31 @@ namespace OpenRA.Mods.Cameo.Traits
 				fieldInReach[fid] = fieldInReach.GetValueOrDefault(fid) || inReach;
 			}
 
-			foreach (var fid in fieldServed.Keys)
-				if (!fieldServed[fid] && fieldInReach.GetValueOrDefault(fid))
+			// All three field counters run on the law's own field ids and reach model: in reach = the field's
+			// resource edge within `reach` of a buildable-area tile (or an orphan anchor's own cell); served =
+			// a refinery bound to one of its anchors (proximity or flush); unserved = in reach and not served.
+			var covered = 0;
+			var unservedIds = new List<int>();
+			foreach (var fid in fieldInReach.Keys)
+			{
+				var inReach = fieldInReach[fid];
+				var servedField = fieldServed.GetValueOrDefault(fid);
+				if (inReach)
+					snapshot.FieldsInReach++;
+				if (servedField)
+					snapshot.FieldsServed++;
+				if (inReach || servedField)
+					covered++;
+				if (inReach && !servedField)
+				{
 					snapshot.FieldsInReachUnserved++;
+					unservedIds.Add(fid);
+				}
+			}
+
+			unservedIds.Sort();
+			snapshot.FieldsInReachUnservedIds = unservedIds.ToArray();
+			snapshot.CoverageMilli = fieldInReach.Count == 0 ? 0 : covered * 1000 / fieldInReach.Count;
 
 			// The main base: the first construction yard seen (kept for the match); outposts are the yards beyond MainBaseRadiusCells of it.
 			if (mainConyard == null && conyards.Count > 0)

@@ -294,17 +294,49 @@ namespace OpenRA.Mods.Cameo.Test
 		public void ClaimOrderOrphanAnchorKeepsItsOwnCellAsTheReachMeasure()
 		{
 			// A spreader with no recorded field cells (synthetic id 1 beyond the single real field) measures
-			// reach from its own cell — 8 away is out of reach even though a field exists nearer.
+			// reach from its own cell — 8 away is out of reach even though a field exists nearer. A refinery
+			// already exists, so the first-refinery fallback does not fire and reach alone decides.
 			var anchors = new[] { C(52, 20) };
 			var fieldCells = Fields(new[] { C(47, 20), C(48, 20) });
 
 			var order = ExpansionPlannerBotModule.ClaimOrder(anchors, new[] { 1 }, fieldCells,
-				new CPos[0], null, new[] { C(44, 20) }, 8, 6, null, null, null,
+				new[] { C(40, 20) }, null, new[] { C(44, 20) }, 8, 6, null, null, null,
 				out var unservedAnchors, out var unservedFields, out _);
 
 			Assert.That(order, Is.Empty);
 			Assert.That(unservedAnchors, Is.EqualTo(0));
 			Assert.That(unservedFields, Is.EqualTo(0));
+		}
+
+		[Test]
+		public void ClaimOrderFirstRefineryIgnoresTheReachTest()
+		{
+			// The first refinery is never hostage to the reach test: with nothing in reach and no refinery
+			// anywhere, the unblocked unserved anchor nearest our buildings is claimed anyway — a far home
+			// field cannot starve the law (the smoke match's losing seat built zero refineries all game).
+			var anchors = new[] { C(52, 20), C(60, 20) };
+			var fieldCells = Fields(new[] { C(53, 20) }, new[] { C(61, 20) });
+
+			var order = ExpansionPlannerBotModule.ClaimOrder(anchors, new[] { 0, 1 }, fieldCells,
+				new CPos[0], null, new[] { C(44, 20) }, 8, 6, null, null, null,
+				out _, out _, out var tiers);
+
+			Assert.That(order, Is.EqualTo(new[] { 0 }));
+			Assert.That(tiers[0], Is.EqualTo(1));
+		}
+
+		[Test]
+		public void ClaimOrderCommittedAnchorSuppressesTheFirstRefineryFallback()
+		{
+			// One refinery already claimed and in production: the fallback must not queue a second.
+			var anchors = new[] { C(52, 20), C(60, 20) };
+
+			var order = ExpansionPlannerBotModule.ClaimOrder(anchors, new[] { 0, 1 },
+				Fields(new[] { C(53, 20) }, new[] { C(61, 20) }),
+				new CPos[0], null, new[] { C(44, 20) }, 8, 6, i => i == 0, i => i == 0, null,
+				out _, out _, out _);
+
+			Assert.That(order, Is.Empty);
 		}
 
 		[Test]

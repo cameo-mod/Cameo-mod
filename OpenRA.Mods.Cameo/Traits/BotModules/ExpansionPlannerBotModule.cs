@@ -873,6 +873,44 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			foreach (var f in tier2Fields.OrderBy(t => t.Rank).ThenBy(t => t.Field))
 				order.AddRange(f.Anchors);
 
+			// The first refinery is never hostage to the reach test: with none built and none committed,
+			// claim the unblocked unserved anchor nearest our base (or the requested yard) even beyond reach —
+			// placement may still fail and park the anchor, and the next call walks to the next field.
+			if (order.Count == 0 && refineries.Count == 0)
+			{
+				var anyCommitted = false;
+				for (var a = 0; a < n; a++)
+					if (committed != null && committed(a))
+					{
+						anyCommitted = true;
+						break;
+					}
+
+				if (!anyCommitted)
+				{
+					var first = -1;
+					var firstRank = int.MaxValue;
+					for (var a = 0; a < n; a++)
+					{
+						if (served[a] || (blocked != null && blocked(a)))
+							continue;
+
+						var r = rank(a);
+						if (r < firstRank)
+						{
+							first = a;
+							firstRank = r;
+						}
+					}
+
+					if (first >= 0)
+					{
+						anchorTier[first] = 1;
+						order.Add(first);
+					}
+				}
+			}
+
 			return order;
 		}
 

@@ -1,3 +1,21 @@
+# 2026-10-04 — REF-1 checkpoint: smoke findings fixed (first refinery, field counters, reach)
+
+*Devin (T2Verify), branch `devin/ref1-refinery-law-v2`.* The isolated td_gdi hard-vs-hard smoke (12,642 ticks)
+exposed three defects in the first cut: (1) **zero refineries on one seat** — the reach test measured
+spreader→building *top-left* ≤ ReachCells(6); the seat's home spreader sat 8 cells from its yard's origin while
+the field's resource edge was ~4 from the yard *footprint*, so a legal gap-0 placement existed but no claim ever
+fired and the per-anchor cap blocked the first refinery outright. Reach is now field-edge→buildable-area
+footprint tiles (the model `IsCloseEnoughToBase` uses), **and** a first-refinery fallback claims the unblocked
+anchor nearest the base even past reach when zero refineries exist and none is committed. (2) **`fields_in_reach`
+vs `fields_in_reach_unserved` disagreement** — telemetry counted field *centre* distance while the claim measured
+edge/anchor reach; all field counters now run on the law's field ids and edge reach (served = refinery bound by
+proximity OR flush), plus `fields_in_reach_unserved_ids` is emitted for the campaign checker's exact claim
+latency. (3) Mis-binding risk fixed with the same model: `AssignRefineries`/`RefineryFlushFields` bind a
+gap≤1-flush refinery to its field's nearest anchor beyond the plain serve radius. Tests 849/849 (incl. orphan-anchor
+IndexOutOfRange via `CellsOf`, field-edge reach, flush binding, first-refinery fallback, committed suppression).
+Build 0 err/0 mod warnings. Pending: 2-map ≥20k re-smoke + `refinery_law_check.py` verdicts, then hand-in.
+Fransbot report (read-only): `FransQueueManager` shares the same global-total/top-left-reach flaw — unchanged.
+
 # 2026-10-03 — coordinator: tier-3 hotfix (INC c) + ORDERS round 2 to NOVA/DAWN/EMBER
 
 *Claude.* INC c `3c793d4c3` = DAWN `18556ada5` (GetVariableObservers `override` + base: tier 3 was permanently disabled
