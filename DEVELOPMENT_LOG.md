@@ -1,3 +1,21 @@
+# 2026-10-04 — nova: hotspot #4 — BuildRegions seams extracted + own-building scans narrowed
+
+*Devin (nova), `devin/nova/tactmap-seams` off INC-e.* ORDERS_2026-10-04b hotspot #4
+(TacticalMap.BuildRegions 231/41 + the `world.Actors` scans): the decision content moves to
+`TacticalMapRegionEval` — `ClassifySlope`, `GrowRampSeal`, `TerrainCensus`, `RampPieces`,
+`EligibleDrops`, `PickMergeDrops`, `BoundaryCells`, `ConnectedComponent` (was the module's
+`internal static`; `ZoneTopologyTest` refs follow the move). BuildRegions keeps map plumbing
+(passability/height predicates, the flood itself); every decision is now a pure function of
+cells + predicates, testable on synthetic grids. `TacticalMapRegionEvalTest`: 9 tests covering
+the merge-drop batching (worst-first + disjoint-touching claim — the anti-"67 of 120" rule),
+ramp bound, dilation ring, eligibility filters, boundary edge cases. 942/942, boot gate PASS,
+arch freshness PASS after regen (the regen also carries master's pre-existing
+BaseFrontBackPlanner UNMAPPED row — INC-e staleness, not this change). Side item: the three
+own-building enumerations (`GetOwnBaseReference`, `TickRegionOwnershipRefresh`,
+`OwnBuildingCells`) scanned `world.Actors` + owner + `HasTraitInfo<BuildingInfo>` — now
+`world.ActorsHavingTrait<Building>` + owner, the trait-indexed idiom the enemy side already
+documents. BuildRegions itself: −152/−163 net lines in the module.
+
 # 2026-10-04 — Claude (lead): INC 2026-10-04e lands — INC-d completed (P0 raid gate), LC5 admission claims, checker v2, E2 test baseline
 
 *Claude.* Branch `inc/2026_10_04e` from master `1fbd239ff`:

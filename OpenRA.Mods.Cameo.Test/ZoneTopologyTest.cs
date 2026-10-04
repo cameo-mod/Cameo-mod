@@ -26,7 +26,7 @@ namespace OpenRA.Mods.Cameo.Test
 			var cells = new HashSet<CPos> { new(0, 0), new(1, 0), new(2, 0), new(5, 5) };
 			var visited = new HashSet<CPos> { new(0, 0) };
 
-			var comp = TacticalMapBotModule.ConnectedComponent(new CPos(0, 0), cells, visited);
+			var comp = TacticalMapRegionEval.ConnectedComponent(new CPos(0, 0), cells, visited);
 
 			Assert.That(comp, Is.EquivalentTo(new[] { new CPos(0, 0), new CPos(1, 0), new CPos(2, 0) }));
 			Assert.That(comp, Does.Not.Contain(new CPos(5, 5)), "a disjoint cell belongs to another component");
@@ -38,7 +38,7 @@ namespace OpenRA.Mods.Cameo.Test
 		{
 			// CVec.Directions is 8-connected; a diagonal chain is one component.
 			var cells = new HashSet<CPos> { new(0, 0), new(1, 1), new(2, 2) };
-			var comp = TacticalMapBotModule.ConnectedComponent(new CPos(0, 0), cells, new HashSet<CPos> { new(0, 0) });
+			var comp = TacticalMapRegionEval.ConnectedComponent(new CPos(0, 0), cells, new HashSet<CPos> { new(0, 0) });
 
 			Assert.That(comp.Count, Is.EqualTo(3));
 		}

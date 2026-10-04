@@ -756,75 +756,26 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			// map and the seal carpeted open ground - see the terrain census logged below, which is what
 			// any further attempt here should be decided on rather than on what a ramp "ought" to look
 			// like.
-			var slopeCells = new HashSet<CPos>();
-			var rampCells = new HashSet<CPos>();
-			foreach (var c in world.Map.AllCells)
-			{
-				if (!IsPassable(c) || !IsHeightTransition(c))
-					continue;
-
-				slopeCells.Add(c);
-
-				// Seeded from the cliff, so a hillside nowhere near one is never barrier however much it
-				// slopes.
-				if (HasCliffAbove(c))
-					rampCells.Add(c);
-			}
+			var (slopeCells, rampSeeds) = TacticalMapRegionEval.ClassifySlope(
+				world.Map.AllCells, IsPassable, IsHeightTransition, HasCliffAbove);
 
 			// What the map is actually made of, because three attempts at sealing ramps were each argued
 			// from a different guess about that and each was wrong in a different direction. Once per map,
 			// alongside the region census below.
-			var passableCells = 0;
-			var slopeTileCells = 0;
-			var transitionCells = 0;
-			var cliffAdjacentCells = 0;
-			var heightCensus = new Dictionary<byte, int>();
-			foreach (var c in world.Map.AllCells)
-			{
-				if (!IsPassable(c))
-					continue;
-
-				passableCells++;
-				var h = world.Map.Height[c];
-				heightCensus[h] = heightCensus.GetValueOrDefault(h) + 1;
-
-				if (world.Map.Ramp[c] != 0)
-					slopeTileCells++;
-
-				if (IsHeightTransition(c))
-					transitionCells++;
-
-				if (HasCliffAbove(c))
-					cliffAdjacentCells++;
-			}
+			var census = TacticalMapRegionEval.TerrainCensus(
+				world.Map.AllCells, IsPassable, c => world.Map.Height[c], c => world.Map.Ramp[c],
+				IsHeightTransition, HasCliffAbove);
 
 			CAAIUtils.BotDebug("terrain: {0} passable, {1} slope tiles, {2} height transitions, {3} cliff-adjacent | heights {4}",
-				passableCells, slopeTileCells, transitionCells, cliffAdjacentCells,
-				string.Join(" ", heightCensus.OrderBy(kv => kv.Key).Select(kv => $"{kv.Key}:{kv.Value}")));
+				census.PassableCells, census.SlopeTileCells, census.TransitionCells, census.CliffAdjacentCells,
+				string.Join(" ", census.Heights.OrderBy(kv => kv.Key).Select(kv => $"{kv.Key}:{kv.Value}")));
 
 			// Bounded, because slope tiles are not rare on rolling terrain: their connected run reaches
 			// across half a map, and an unbounded growth swallowed it whole - the barrier covered open
 			// ground everywhere and left regions of one and two cells behind. A ramp is a cut through a
 			// cliff and is only so wide, and both of its edges seed, so the bound closes a ramp up to
 			// roughly twice RampSealMaxSpread across while leaving open hillside alone.
-			var maxSpread = Math.Max(1, Info.RampSealMaxSpread);
-			var rampQueue = new Queue<(CPos Cell, int Depth)>();
-			foreach (var seed in rampCells)
-				rampQueue.Enqueue((seed, 0));
-
-			while (rampQueue.Count > 0)
-			{
-				var (cell, depth) = rampQueue.Dequeue();
-				if (depth >= maxSpread)
-					continue;
-
-				foreach (var dir in CVec.Directions)
-				{
-					var next = cell + dir;
-					if (slopeCells.Contains(next) && rampCells.Add(next))
-						rampQueue.Enqueue((next, depth + 1));
-				}
-			}
+			var rampCells = TacticalMapRegionEval.GrowRampSeal(slopeCells, rampSeeds, Math.Max(1, Info.RampSealMaxSpread));
 
 			// The barrier is kept as individually droppable pieces - one per resolved corridor, one per
 			// chokepoint that never resolved to one, one per physical ramp - because merging undersized
@@ -852,30 +803,18 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			// first overlay pass. Dilating by one ring closes both: thick enough that no diagonal gap fits,
 			// and wide enough to cover the ramp's open ends too. Per ramp rather than over one combined
 			// blob - same cells, but each physical ramp can then be dropped on its own.
-			var rampVisited = new HashSet<CPos>();
-			var rampPieces = 0;
-			foreach (var start in rampCells)
-			{
-				if (!rampVisited.Add(start))
-					continue;
-
-				var component = ConnectedComponent(start, rampCells, rampVisited);
-				var piece = new HashSet<CPos>(component);
-				foreach (var cell in component)
-					foreach (var dir in CVec.Directions)
-					{
-						var n = cell + dir;
-						if (world.Map.Contains(n) && IsPassable(n))
-							piece.Add(n);
-					}
-
+			var rampPieceList = TacticalMapRegionEval.RampPieces(rampCells, c => world.Map.Contains(c) && IsPassable(c));
+			var rampPieces = rampPieceList.Count;
+			foreach (var piece in rampPieceList)
 				pieces.Add((piece, false));
-				rampPieces++;
-			}
 
 			var active = new bool[pieces.Count];
 			for (var i = 0; i < active.Length; i++)
 				active[i] = true;
+
+			var droppable = new bool[pieces.Count];
+			for (var i = 0; i < droppable.Length; i++)
+				droppable[i] = pieces[i].Droppable;
 
 			var minRegionSize = Math.Max(0, Info.MinRegionSize);
 			var piecesDropped = 0;
@@ -916,38 +855,15 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				// load" without anyone measuring it.
 				// An undersized pocket with nothing to merge into keeps its pieces and stays small, the
 				// same way MinDomainNodes leaves unreachable pockets alone.
-				var eligible = new List<(int Index, int Separated, HashSet<int> Touching)>();
-				for (var i = 0; i < pieces.Count; i++)
-				{
-					if (!active[i] || !pieces[i].Droppable)
-						continue;
-
-					var touching = TouchedRegions(pieces[i].Cells);
-					if (touching.Count < 2)
-						continue;
-
-					var separated = int.MaxValue;
-					foreach (var id in touching)
-						separated = Math.Min(separated, regions[id].Size);
-
-					if (separated < minRegionSize)
-						eligible.Add((i, separated, touching));
-				}
-
+				var eligible = TacticalMapRegionEval.EligibleDrops(
+					active, droppable, i => TouchedRegions(pieces[i].Cells), id => regions[id].Size, minRegionSize);
 				if (eligible.Count == 0)
 					break;
 
 				// Worst first, so where two genuinely do conflict the more urgent one goes this round and
 				// the other is re-measured in the next.
-				eligible.Sort((a, b) => a.Separated.CompareTo(b.Separated));
-
-				var claimed = new HashSet<int>();
-				foreach (var (index, _, touching) in eligible)
+				foreach (var index in TacticalMapRegionEval.PickMergeDrops(eligible))
 				{
-					if (touching.Overlaps(claimed))
-						continue;
-
-					claimed.UnionWith(touching);
 					active[index] = false;
 					piecesDropped++;
 				}
@@ -1070,22 +986,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				// neighbour failing visited.Add there could mean either "already ours" or "someone else's
 				// region", and only this region's own finished cell set can tell the two apart.
 				var cellSet = new HashSet<CPos>(cells);
-				var boundary = new List<CPos>();
-				foreach (var cell in cells)
-				{
-					var isBoundary = false;
-					foreach (var dir in CVec.Directions)
-					{
-						if (world.Map.Contains(cell + dir) && cellSet.Contains(cell + dir))
-							continue;
-
-						isBoundary = true;
-						break;
-					}
-
-					if (isBoundary)
-						boundary.Add(cell);
-				}
+				var boundary = TacticalMapRegionEval.BoundaryCells(cellSet, c => world.Map.Contains(c));
 
 				regions.Add(new Zone(id, cells.ToArray(), gateIndices.ToArray(), [], resourceCells,
 					buildableCells, boundary.ToArray()));
@@ -1270,7 +1171,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				if (!visited.Add(start))
 					continue;
 
-				var (bottom, top) = RampEndpoints(Centroid(ConnectedComponent(start, rampCells, visited)));
+				var (bottom, top) = RampEndpoints(Centroid(TacticalMapRegionEval.ConnectedComponent(start, rampCells, visited)));
 				if (bottom != null)
 					endpoints.Add(bottom.Value);
 				if (top != null)
@@ -1330,7 +1231,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				if (!visited.Add(start))
 					continue;
 
-				centers.Add(Centroid(ConnectedComponent(start, bridgeCells, visited)));
+				centers.Add(Centroid(TacticalMapRegionEval.ConnectedComponent(start, bridgeCells, visited)));
 			}
 
 			return centers;
@@ -1339,28 +1240,6 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		// One 8-connected component of `cells`, grown from `start`. The caller must already have
 		// added `start` to `visited` — the donors all do `if (!visited.Add(start)) continue;` —
 		// otherwise the walk re-enters through a neighbour and `start` is collected twice.
-		internal static List<CPos> ConnectedComponent(CPos start, HashSet<CPos> cells, HashSet<CPos> visited)
-		{
-			var comp = new List<CPos> { start };
-			var queue = new Queue<CPos>();
-			queue.Enqueue(start);
-			while (queue.Count > 0)
-			{
-				var c = queue.Dequeue();
-				foreach (var d in CVec.Directions)
-				{
-					var n = c + d;
-					if (cells.Contains(n) && visited.Add(n))
-					{
-						comp.Add(n);
-						queue.Enqueue(n);
-					}
-				}
-			}
-
-			return comp;
-		}
-
 		internal static CPos Centroid(IReadOnlyList<CPos> cells)
 		{
 			long sx = 0;
@@ -1851,13 +1730,14 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		CPos? GetOwnBaseReference()
 		{
 			// Own buildings only: the bot always knows its own (fog hides the enemy, not us), so this
-			// enumeration stays live and is identical to the donor's.
+			// enumeration stays live and is identical to the donor's. The trait index narrows it to
+			// buildings (the donor's own enemy-side idiom) instead of scanning every actor alive.
 			var sumX = 0L;
 			var sumY = 0L;
 			var n = 0;
-			foreach (var a in world.Actors)
+			foreach (var a in world.ActorsHavingTrait<Building>())
 			{
-				if (a.IsDead || !a.IsInWorld || a.Owner != player || !a.Info.HasTraitInfo<BuildingInfo>())
+				if (a.IsDead || !a.IsInWorld || a.Owner != player)
 					continue;
 
 				sumX += a.Location.X;
@@ -2358,10 +2238,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				byPlayer[owner] = byPlayer.GetValueOrDefault(owner) + 1;
 			}
 
-			// Own buildings: the bot always knows its own (fog hides the enemy, not us).
-			foreach (var a in world.Actors)
+			// Own buildings: the bot always knows its own (fog hides the enemy, not us). The trait index
+			// narrows the scan to buildings instead of every actor alive (same idiom as the enemy side).
+			foreach (var a in world.ActorsHavingTrait<Building>())
 			{
-				if (a.IsDead || !a.IsInWorld || a.Owner != player || !a.Info.HasTraitInfo<BuildingInfo>())
+				if (a.IsDead || !a.IsInWorld || a.Owner != player)
 					continue;
 
 				Count(a.Location, player);
@@ -2943,8 +2824,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			// Own buildings only: fog hides the enemy, never us, so this enumeration stays live and is
 			// identical to the donor's.
 			var cells = new HashSet<CPos>();
-			foreach (var a in world.Actors)
-				if (!a.IsDead && a.IsInWorld && a.Owner == player && a.Info.HasTraitInfo<BuildingInfo>())
+			foreach (var a in world.ActorsHavingTrait<Building>())
+				if (!a.IsDead && a.IsInWorld && a.Owner == player)
 					cells.Add(a.Location);
 
 			return cells;
