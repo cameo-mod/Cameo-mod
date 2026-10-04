@@ -32,6 +32,40 @@ negative path honestly: no provider built in a 14k-tick rush wipe => `providers:
 *Post-rebase (lead order 2026-10-04):* rebased onto `3ba05ede7` after INC-04e landed RADAR-ALLY; conflicts
 were append-only (devlog/HANDOFF top entries, ai.yaml grants — `@inmatchadapt` and `@radarcontacts` each
 kept their `Bots:`). Re-verified: build 0 errors, 939/939 tests, all four audits PASS, boot gate PASS.
+# 2026-10-04 — Devin-T3Verify: BP-IMPL phase 2 (front/back advisor wired into the shared queue manager)
+
+*Devin.* `devin/t3verify/bp-front-back-p2` in `C:/cameo-wt/bp` (base `3ba05ede7` — master after INC 2026-10-04e,
+which carries phase 1 + REF-1). The phase-2 integration from PREP_2026-10-04_devin-t3verify_bp-impl-phase2.md,
+now unblocked by the REF-1 merge:
+
+* `BaseBuilderQueueManagerCA` consults `IBotFrontBackAdvisor` (resolved once, `IsActive` re-checked per call —
+  `Enabled: false` ⇒ every seam inert, classic draw-for-draw). Classes claimed on the `Building`/`Fragile`
+  paths only: **Radar** (one per defended front + justified extra, strictly behind the front's defence line),
+  **Production** (ground/naval at the front; air-only exempt via the planner's classify), **Valuable**
+  (tech/superweapon/`CashTrickler` in the back). `FrontBackPick.Hold` → `return false` — produced building
+  stays queued, no failure budget (same construction as the REF-1 crawl hold); the advisor never sees
+  `BaseCrawl` placements, so its legal-cell filter can't starve the law's aimed crawls.
+* Radar want slots after the economy overrides (production, naval, silo) and before the fraction roll:
+  fires only when `WantedRadarProviders > owned+producing`; `PreferredRadarProvider` picks among the
+  limit-respecting producibles; power-short falls back to `power` like every other want.
+* `ScaledBaseMinimumExcessPower` gains the advisor's `RadarPowerMargin` (+60/provider in phase 1),
+  refreshed once per queue tick — a planned radar never blinds an owned one.
+* `IBotPlacementObserver.BuildingPlaced` extended `(FrontBackClass?, FrontBackPick?)` — sole implementer
+  `AiPlacementLogWriter` emits `class` on every placement while an advisor is active plus `fb_front`,
+  `fb_score`, `fb_new_coverage`, `fb_overlap`, `fb_setback` when the advisor claimed the cell.
+* `BotSituation` gains 4 record-only ints (`FrontBackFronts`, `FrontBackFrontsWithoutRadar`,
+  `FrontBackRadarUnionCells`, `FrontBackRadarApproachCells`); `AiSituationLogWriter` publishes them
+  always (all zeros without an advisor — the honest answer).
+* `ai.yaml` `FragileTypes`: the 23 radar-carrier names removed (101→78, resolved via `miniyaml.Ruleset`
+  in phase 1) so radars leave the sortMax fragile path and reach the advisor as `Radar`, not `Fragile`.
+
+Candidate set for `ChooseCell` = the full `FindTilesInAnnulus` filtered by the exact findPos legality
+trio (CanPlaceBuilding, IsCloseEnoughToBase, spacing-advisor gap) — the advisor ranks, it never widens
+legality. Variant keeps findPos's non-facing random draw (facing variants stay 0 for now).
+
+Gates: build 0 err / 8 pre-existing engine StyleCop warnings; Cameo tests **933/933**; boot gate PASS
+(menu reached, 0 new exceptions — an earlier launch-args miss produced `Unknown or invalid mod 'cameo'`,
+diagnosed + corrected, not a code fault). Audits + MP smoke: pending in this session.
 
 # 2026-10-04 — Claude (lead): INC 2026-10-04e lands — INC-d completed (P0 raid gate), LC5 admission claims, checker v2, E2 test baseline
 

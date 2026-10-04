@@ -13,8 +13,10 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Xml.Linq;
+using OpenRA.Mods.AS.Traits;
 using OpenRA.Mods.Common;
 using OpenRA.Mods.Common.Traits;
+using OpenRA.Mods.Common.Traits.Radar;
 using OpenRA.Traits;
 
 namespace OpenRA.Mods.CA.Traits
@@ -217,6 +219,9 @@ namespace OpenRA.Mods.CA.Traits
 			if (knobs != null)
 				minimumExcessPower = BotBuildOrderKnobs.Scale(minimumExcessPower, knobs.KnobMilli(BuildOrderKnob.PowerMargin));
 
+			// BP-2 (§19.15): the advisor's radar power reserve — one Refresh-priced read per queue tick.
+			radarPowerMargin = FrontBackAdvisor()?.RadarPowerMargin ?? 0;
+
 			// PERF: Queue only one actor at a time per category
 			itemQueuedThisTick = false;
 			var active = false;
@@ -313,6 +318,8 @@ namespace OpenRA.Mods.CA.Traits
 				var distanceToBaseIsImportant = true;
 				CPos? advisedDefense = null;
 				refineryClaimed = false;
+				lastFrontBackPick = null;
+				frontBackHold = false;
 				if (plugInfo != null)
 				{
 					var possibleBuilding = world.ActorsWithTrait<Pluggable>().FirstOrDefault(a =>
@@ -376,7 +383,15 @@ namespace OpenRA.Mods.CA.Traits
 					if (advisedDefense != null)
 						location = advisedDefense;
 					else
+					{
 						(location, baseCenterKeepsFailing, actorVariant) = ChooseBuildLocation(currentBuilding.Item, distanceToBaseIsImportant, queue.Actor, type);
+
+						// BP-2 (§19.15): the front/back advisor's hold — no legal cell and no fallback
+						// (a radar on a front with no defence line waits; it never goes forward). Same
+						// semantics as the REF-1 crawl hold above: queued, no failure budget spent.
+						if (frontBackHold)
+							return false;
+					}
 				}
 
 				if (location == null)
@@ -397,7 +412,7 @@ namespace OpenRA.Mods.CA.Traits
 				else
 				{
 					failCount = 0;
-					NotifyPlacement(currentBuilding.Item, location.Value, queue.Actor.ActorID, orderString, type, advisedDefense != null);
+					NotifyPlacement(currentBuilding.Item, location.Value, queue.Actor.ActorID, orderString, type, advisedDefense != null, lastFrontBackPick);
 
 					bot.QueueOrder(new Order(orderString, player.PlayerActor, Target.FromCell(world, location.Value), false)
 					{
@@ -452,7 +467,24 @@ namespace OpenRA.Mods.CA.Traits
 		bool refineryClaimed;
 		IBotPlacementObserver[] placementObservers;
 
-		void NotifyPlacement(string item, CPos cell, uint producerId, string orderString, BuildingType type, bool advisedDefence)
+		// BP-2 (§19.15): the front/back advisor seam. The trait array is cached once; IsActive is
+		// re-checked per call so a condition-disabled planner never claims a class. lastFrontBackPick
+		// carries the pick diagnostics of the placement attempt in flight to the placement log;
+		// frontBackHold means "wait — no legal cell, do not fall back" (the produced building stays
+		// queued and spends no failure budget, like the REF-1 crawl hold). radarPowerMargin is the
+		// advisor's power reserve for the radars it plans, refreshed once per queue tick.
+		IBotFrontBackAdvisor[] frontBackAdvisors;
+		FrontBackPick? lastFrontBackPick;
+		bool frontBackHold;
+		int radarPowerMargin;
+
+		IBotFrontBackAdvisor FrontBackAdvisor()
+		{
+			frontBackAdvisors ??= player.PlayerActor.TraitsImplementing<IBotFrontBackAdvisor>().ToArray();
+			return frontBackAdvisors.FirstOrDefault(a => a.IsActive);
+		}
+
+		void NotifyPlacement(string item, CPos cell, uint producerId, string orderString, BuildingType type, bool advisedDefence, FrontBackPick? frontBackPick)
 		{
 			placementObservers ??= world.WorldActor.TraitsImplementing<IBotPlacementObserver>().ToArray();
 			if (placementObservers.Length == 0)
@@ -463,9 +495,20 @@ namespace OpenRA.Mods.CA.Traits
 				: type == BuildingType.BaseCrawl ? "crawl"
 				: type == BuildingType.Refinery && refineryClaimed ? "refinery_claim"
 				: "base";
+
+			// BP-2 (§19.15): the advisor's class label for every placement while one is active. The
+			// queue's own type wins for crawl (a crawl link is role, not identity — Classify sees a
+			// plain building); every other class is the advisor's rules-derived verdict.
+			FrontBackClass? frontBackClass = null;
+			var frontBack = FrontBackAdvisor();
+			if (frontBack != null)
+				frontBackClass = type == BuildingType.BaseCrawl ? FrontBackClass.Crawl
+					: world.Map.Rules.Actors.TryGetValue(item, out var placedInfo) ? frontBack.Classify(placedInfo)
+					: FrontBackClass.Building;
+
 			var queued = queuedAt.TryGetValue(producerId, out var q) && q.Item == item ? q.Tick : world.WorldTick;
 			foreach (var observer in placementObservers)
-				observer.BuildingPlaced(player, world.WorldTick, item, cell, reason, queued);
+				observer.BuildingPlaced(player, world.WorldTick, item, cell, reason, queued, frontBackClass, frontBackPick);
 		}
 
 		ActorInfo GetProducibleBuilding(IReadOnlySet<string> actors, IEnumerable<ActorInfo> buildables, Func<ActorInfo, int> orderBy = null)
@@ -489,6 +532,46 @@ namespace OpenRA.Mods.CA.Traits
 			return available.RandomOrDefault(world.LocalRandom);
 		}
 
+		// BP-2 (§19.15): a rules-derived radar provider — same two-trait check the Cameo planner runs
+		// (the assemblies cannot share the helper; keep the expression identical).
+		static bool IsRadarProvider(ActorInfo info)
+		{
+			return info.HasTraitInfo<RangedGpsProviderInfo>() || info.HasTraitInfo<ProvidesRadarInfo>();
+		}
+
+		// Owned + already-in-production radar providers — the count the advisor's absolute target is
+		// met against, so a queued provider is never double-wanted.
+		int OwnedRadarProviders()
+		{
+			var owned = playerBuildings.Count(a => IsRadarProvider(a.Info));
+			if (baseBuilder.BuildingsBeingProduced != null)
+				owned += baseBuilder.BuildingsBeingProduced
+					.Where(kv => world.Map.Rules.Actors.TryGetValue(kv.Key, out var produced) && IsRadarProvider(produced))
+					.Sum(kv => kv.Value);
+			return owned;
+		}
+
+		// Radar providers the queue can actually start: trait-filtered and under the same
+		// BuildingLimits rule every other want honours.
+		List<ActorInfo> GetRadarProducibles(IEnumerable<ActorInfo> buildables)
+		{
+			var list = new List<ActorInfo>();
+			foreach (var actor in buildables)
+			{
+				if (!IsRadarProvider(actor))
+					continue;
+
+				if (baseBuilder.TryGetBuildingLimit(actor.Name, out var limit)
+					&& playerBuildings.Count(a => a.Info.Name == actor.Name)
+						+ (baseBuilder.BuildingsBeingProduced.TryGetValue(actor.Name, out var beingProduced) ? beingProduced : 0) >= limit)
+					continue;
+
+				list.Add(actor);
+			}
+
+			return list;
+		}
+
 		bool HasSufficientPowerForActor(ActorInfo actorInfo)
 		{
 			return playerPower == null || (actorInfo.TraitInfos<PowerInfo>().Where(i => i.EnabledByDefault)
@@ -496,11 +579,14 @@ namespace OpenRA.Mods.CA.Traits
 		}
 
 		// Build-order knobs (12.25): power_margin scales the configured surplus floor too.
+		// BP-2 (§19.15): the front/back advisor's radar reserve rides the same floor — a queued
+		// radar's drain is held back so an owned or planned provider is never built blind.
 		int ScaledBaseMinimumExcessPower()
 		{
 			var knobs = baseBuilder.BuildOrderKnobs;
-			return knobs == null ? baseBuilder.Info.MinimumExcessPower
+			var floor = knobs == null ? baseBuilder.Info.MinimumExcessPower
 				: BotBuildOrderKnobs.Scale(baseBuilder.Info.MinimumExcessPower, knobs.KnobMilli(BuildOrderKnob.PowerMargin));
+			return floor + radarPowerMargin;
 		}
 
 		// Build-order knobs (12.25): the milli multiplier of a building's fraction by its rules-derived category (1000 = none).
@@ -780,6 +866,29 @@ namespace OpenRA.Mods.CA.Traits
 				{
 					AIUtils.BotDebug("{0} decided to build {1}: Priority override (would be low power)", queue.Actor.Owner, power.Name);
 					return power;
+				}
+			}
+
+			// BP-2 (§19.15): the front/back advisor's radar want — one provider per defended front plus
+			// justified extras. It slots after the economy overrides (production, naval, silo) and before
+			// the fraction roll: radar never starves spending, but a met need never eats the build slot.
+			var frontBack = FrontBackAdvisor();
+			if (frontBack != null && frontBack.WantedRadarProviders > OwnedRadarProviders())
+			{
+				var radar = frontBack.PreferredRadarProvider(GetRadarProducibles(buildableThings));
+				if (radar != null)
+				{
+					if (HasSufficientPowerForActor(radar))
+					{
+						AIUtils.BotDebug("{0} decided to build {1}: Priority override (radar for front)", queue.Actor.Owner, radar.Name);
+						return radar;
+					}
+
+					if (power != null)
+					{
+						AIUtils.BotDebug("{0} decided to build {1}: Priority override (radar would be low power)", queue.Actor.Owner, power.Name);
+						return power;
+					}
 				}
 			}
 
@@ -1136,9 +1245,79 @@ namespace OpenRA.Mods.CA.Traits
 					&& (ownBuildingBuffer == null || bi.AllowInvalidPlacement || !bi.Tiles(cell).Any(ownBuildingBuffer.Contains)));
 		}
 
+		// BP-2 (§19.15): every cell in the base annulus that already passes the checks findPos applies —
+		// CanPlaceBuilding, IsCloseEnoughToBase, the spacing-advisor gap. The advisor picks among these;
+		// an empty list means "no legal cell anywhere", which the planner reads as its hold case.
+		List<CPos> AdvisorLegalCells(ActorInfo actorInfo, bool distanceToBaseIsImportant, Actor producer)
+		{
+			var bi = actorInfo.TraitInfoOrDefault<BuildingInfo>();
+			var legal = new List<CPos>();
+			if (bi == null)
+				return legal;
+
+			var baseCenter = baseBuilder.GetBaseCenterForActor(actorInfo);
+			var spacingAdvisor = player.PlayerActor.TraitsImplementing<IBotPlacementAdvisor>().FirstOrDefault(a => a.IsActive);
+			var gap = BuildingGapRule.Resolve(spacingAdvisor, false);
+			var ownBuildingBuffer = gap > 0 ? OwnBuildingBufferCells(gap) : null;
+
+			foreach (var cell in world.Map.FindTilesInAnnulus(baseCenter, baseBuilder.Info.MinBaseRadius,
+				Math.Max(baseBuilder.Info.MaxBaseRadius, baseBuilder.Info.MaximumDefenseRadius)))
+			{
+				if (!world.CanPlaceBuilding(cell, actorInfo, bi, null))
+					continue;
+
+				if (distanceToBaseIsImportant && !bi.IsCloseEnoughToBase(world, player, actorInfo, producer, cell))
+					continue;
+
+				if (ownBuildingBuffer != null && !bi.AllowInvalidPlacement && bi.Tiles(cell).Any(ownBuildingBuffer.Contains))
+					continue;
+
+				legal.Add(cell);
+			}
+
+			return legal;
+		}
+
+		// The variant an advisor-claimed placement uses: findPos's non-facing random draw, 0 otherwise
+		// (a front-side facing is the advisor's to encode later; the default facing is honest today).
+		int FrontBackVariant(ActorInfo actorInfo)
+		{
+			var variants = actorInfo.TraitInfoOrDefault<PlaceBuildingVariantsInfo>();
+			return variants?.Actors != null && variants.Facings == null ? world.LocalRandom.Next(variants.Actors.Length + 1) : 0;
+		}
+
 		(CPos? Location, CPos? BaseCenter, int Variant) ChooseBuildLocation(string actorType, bool distanceToBaseIsImportant, Actor producer, BuildingType type)
 		{
-			var baseCenter = baseBuilder.GetBaseCenterForActor(world.Map.Rules.Actors[actorType]);
+			var actorInfo = world.Map.Rules.Actors[actorType];
+			var baseCenter = baseBuilder.GetBaseCenterForActor(actorInfo);
+
+			// BP-2 (§19.15): an active front/back advisor owns the Radar, Production and Valuable cells —
+			// the classes the Building/Fragile names only approximated. The pick carries the diagnostics
+			// for the placement log. Hold keeps the produced building queued (a radar on a front with no
+			// defence line waits — it never goes forward); a null cell without Hold falls back to the
+			// classic path below. Every other class — and every placement with no active advisor — is
+			// untouched, draw for draw.
+			if (type == BuildingType.Building || type == BuildingType.Fragile)
+			{
+				var frontBack = FrontBackAdvisor();
+				if (frontBack != null)
+				{
+					var cls = frontBack.Classify(actorInfo);
+					if (cls == FrontBackClass.Radar || cls == FrontBackClass.Production || cls == FrontBackClass.Valuable)
+					{
+						var pick = frontBack.ChooseCell(cls, actorInfo, baseCenter, AdvisorLegalCells(actorInfo, distanceToBaseIsImportant, producer));
+						lastFrontBackPick = pick;
+						if (pick.Hold)
+						{
+							frontBackHold = true;
+							return (null, null, 0);
+						}
+
+						if (pick.Cell != null)
+							return (pick.Cell, baseCenter, FrontBackVariant(actorInfo));
+					}
+				}
+			}
 
 			switch (type)
 			{

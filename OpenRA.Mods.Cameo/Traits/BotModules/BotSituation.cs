@@ -175,6 +175,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		// FE-0 (AI_ARCHITECTURE 12.24), record-only: the field-economy picture as of this snapshot (the `expansion` object).
 		internal ExpansionSnapshot Expansion;
 
+		// BP-2 (DESIGN §19.15), record-only: the front/back advisor's own diagnostics as of this
+		// snapshot — fronts, fronts still missing their radar, and the union/approach coverage the
+		// existing providers already give. All zeros while no advisor is active — the honest answer.
+		internal int FrontBackFronts, FrontBackFrontsWithoutRadar, FrontBackRadarUnionCells, FrontBackRadarApproachCells;
+
 		// TC-1 (AI_ARCHITECTURE §12.17), record-only: the allied team blackboard as of
 		// this snapshot — the caller's own broadcast is never folded in, so these read
 		// the allies' half only; all zeros in 1v1 or without an allied bot.
@@ -1380,6 +1385,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			utilityAxes.Observe(utilitySample, currentPersonality, Info, roleBias);
 
+			// BP-2 (§19.15): the active front/back advisor, if any — its diagnostics are record-only.
+			var frontBackAdvisor = player.PlayerActor.TraitsImplementing<IBotFrontBackAdvisor>().FirstOrDefault(a => a.IsActive);
+
 			var situation = new BotSituation
 			{
 				Tick = tick,
@@ -1447,7 +1455,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				BuildOrder = player.PlayerActor.TraitsImplementing<BuildOrderKnobsBotModule>().FirstEnabledTraitOrDefault()?.Snapshot,
 				Bandit = player.PlayerActor.TraitsImplementing<PlanBanditBotModule>().FirstEnabledTraitOrDefault()?.Snapshot,
 				Contacts = player.PlayerActor.TraitsImplementing<RadarContactsBotModule>().FirstEnabledTraitOrDefault()?.Snapshot,
-				Expansion = ExpansionTelemetry.Capture(player, ownLiveBuildings)
+				Expansion = ExpansionTelemetry.Capture(player, ownLiveBuildings),
+				FrontBackFronts = frontBackAdvisor?.FrontCount ?? 0,
+				FrontBackFrontsWithoutRadar = frontBackAdvisor?.FrontsWithoutRadar ?? 0,
+				FrontBackRadarUnionCells = frontBackAdvisor?.RadarUnionCells ?? 0,
+				FrontBackRadarApproachCells = frontBackAdvisor?.RadarApproachCells ?? 0
 			};
 			Situation = situation;
 			pendingSituations.Add(situation);
