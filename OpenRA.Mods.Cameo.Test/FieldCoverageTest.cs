@@ -14,6 +14,7 @@ using NUnit.Framework;
 using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.Cameo.Traits;
 using OpenRA.Mods.Cameo.Traits.BotModules;
+using OpenRA.Mods.Common.Traits;
 
 namespace OpenRA.Mods.Cameo.Test
 {
@@ -517,6 +518,46 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(RefineryLawNudge.Due(new LawStub(0, 2), 0, 3), Is.True);
 			Assert.That(RefineryLawNudge.Due(new LawStub(1, 2), 5, 3), Is.False);
 			Assert.That(RefineryLawNudge.Due(new LawStub(0, 0), 5, 3), Is.False);
+		}
+
+		static PowerInfo Power(int amount)
+		{
+			var info = new PowerInfo();
+			typeof(PowerInfo).GetField("Amount").SetValue(info, amount);
+			return info;
+		}
+
+		[Test]
+		public void CrawlLinkRequiresBuildableAreaAndPrefersPowerPlants()
+		{
+			// REF-1 B1 (maintainer correction): a link must extend the buildable area — a silo placed forward
+			// closes no gap — and power plants are preferred because they feed defences too. Cost never excludes
+			// a power plant: the advanced plant is a valid link when it is the only one.
+			var silo = new ActorInfo("silo", new BuildableInfo(), new BuildingInfo());
+			var barracks = new ActorInfo("rax", new BuildableInfo(), new BuildingInfo(), new GivesBuildableAreaInfo());
+			var nuke = new ActorInfo("nuke", new BuildableInfo(), new BuildingInfo(), new GivesBuildableAreaInfo(),
+				Power(100));
+			var nuk2 = new ActorInfo("nuk2", new BuildableInfo(), new BuildingInfo(), new GivesBuildableAreaInfo(),
+				Power(250));
+			var refinery = new ActorInfo("ref", new BuildableInfo(), new BuildingInfo(), new GivesBuildableAreaInfo(),
+				new RefineryInfo());
+
+			Assert.That(ExpansionPlannerBotModule.IsCrawlLink(silo), Is.False);
+			Assert.That(ExpansionPlannerBotModule.IsCrawlLink(barracks), Is.True);
+			Assert.That(ExpansionPlannerBotModule.IsCrawlLink(nuke), Is.True);
+			Assert.That(ExpansionPlannerBotModule.IsCrawlLink(refinery), Is.False);
+			Assert.That(ExpansionPlannerBotModule.IsPowerPlant(nuk2), Is.True);
+			Assert.That(ExpansionPlannerBotModule.IsPowerPlant(barracks), Is.False);
+
+			var none = ((ActorInfo)null, 0, 0);
+
+			// A power plant wins over a cheaper non-power link; the expensive advanced plant is still picked
+			// when it is the only power plant.
+			Assert.That(ExpansionPlannerBotModule.PickCrawlLink((nuk2, 1000, 200), (barracks, 100, 5)).Info.Name,
+				Is.EqualTo("nuk2"));
+			Assert.That(ExpansionPlannerBotModule.PickCrawlLink(none, (barracks, 100, 5)).Info.Name,
+				Is.EqualTo("rax"));
+			Assert.That(ExpansionPlannerBotModule.PickCrawlLink(none, none).Info, Is.Null);
 		}
 
 		sealed class LawStub : IBotExpansionTargetProvider

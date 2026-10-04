@@ -326,8 +326,15 @@ namespace OpenRA.Mods.CA.Traits
 				}
 				else
 				{
+					var law = baseBuilder.RefineryLawProvider();
+
 					// Check if Building is a defense and if we should place it towards the enemy or not.
-					if (baseBuilder.Info.RefineryTypes.Contains(actorInfo.Name))
+					// REF-1 B1 (§12.24 v2): the planner's crawl want is always a BaseCrawl placement — the want
+					// exists to close the gap to the target field, so the chance roll and cost threshold that
+					// gate organic crawl never apply to it (no random draw is consumed on this path).
+					if (law != null && currentBuilding.Item == law.WantedLinkBuilding)
+						type = BuildingType.BaseCrawl;
+					else if (baseBuilder.Info.RefineryTypes.Contains(actorInfo.Name))
 					{
 						type = BuildingType.Refinery;
 					}
@@ -352,6 +359,13 @@ namespace OpenRA.Mods.CA.Traits
 					}
 					else if (!limitBuildRadius && valueInfo != null && valueInfo.Cost < baseBuilder.Info.BaseCrawlCostThreshold && world.LocalRandom.Next(100) < baseBuilder.Info.BaseCrawlChance)
 						type = BuildingType.BaseCrawl;
+
+					// REF-1 B1 (crawl-trace §8): under the law a crawl placement with no aim holds — returning
+					// keeps the produced building queued (and spends no failure budget) instead of wasting the
+					// link on an un-aimed fallback cell.
+					if (type == BuildingType.BaseCrawl && law != null
+						&& law.CrawlTargetEdge == null && baseBuilder.ExpansionTarget() == null)
+						return false;
 
 					if (advisedDefense != null)
 						location = advisedDefense;
@@ -929,7 +943,7 @@ namespace OpenRA.Mods.CA.Traits
 		// Find the buildable cell that is closest to pos and centered around center.
 		// The building gap belongs to the placement advisor (BuildingGapRule.Resolve; no advisor = no gap);
 		// defense-style callers pass defenseGap so walls/turrets can still form tighter lines.
-		(CPos? Location, CPos Center, int Variant) findPos(string actorType, bool distanceToBaseIsImportant, Actor producer, CPos center, CPos target, int minRange, int maxRange, int distanceRequirement = 0, bool sortMax = false, bool defenseGap = false, CPos? anchorTieBreak = null, bool anchorOrder = false)
+		(CPos? Location, CPos Center, int Variant) findPos(string actorType, bool distanceToBaseIsImportant, Actor producer, CPos center, CPos target, int minRange, int maxRange, int distanceRequirement = 0, bool sortMax = false, bool defenseGap = false, CPos? anchorTieBreak = null, bool anchorOrder = false, bool bypassAdvisor = false)
 		{
 			var actorInfo = world.Map.Rules.Actors[actorType];
 			var actorVariant = 0;
@@ -1019,7 +1033,9 @@ namespace OpenRA.Mods.CA.Traits
 			// Cameo (§12.20): an advisor that ranks re-ranks a bounded prefix of placeable, gap-valid cells
 			// (spread-out bases instead of first-valid packing). No ranking advisor = first valid cell wins,
 			// exactly as upstream.
-			if (advisor != null && advisor.RanksCandidates && !anchorOrder)
+			// REF-1 B1 (crawl-trace §8): an aimed placement keeps its distance sort — the spacing advisor's
+			// re-rank would override the aim, so anchor-order and bypassAdvisor calls skip it.
+			if (advisor != null && advisor.RanksCandidates && !anchorOrder && !bypassAdvisor)
 			{
 				var candidates = new List<CPos>();
 				foreach (var cell in cells)
@@ -1266,10 +1282,12 @@ namespace OpenRA.Mods.CA.Traits
 					{
 						// REF-1 B1: under the law the aim is the target field's resource EDGE nearest our frontier —
 						// every building placed to close the gap; the field centre remains the aim when no edge is
-						// published (classic, switch-off, fields without cells).
-						var crawlAim = baseBuilder.RefineryLawProvider()?.CrawlTargetEdge ?? expansionTarget;
+						// published (classic, switch-off, fields without cells). The re-rank advisor is bypassed
+						// on this aimed path so the distance sort survives (crawl-trace §8).
+						var crawlLaw = baseBuilder.RefineryLawProvider();
+						var crawlAim = crawlLaw?.CrawlTargetEdge ?? expansionTarget;
 						var toward = findPos(actorType, distanceToBaseIsImportant, producer, baseCenter, crawlAim.Value,
-							baseBuilder.Info.MinBaseRadius, baseBuilder.Info.BaseCrawlRadius);
+							baseBuilder.Info.MinBaseRadius, baseBuilder.Info.BaseCrawlRadius, bypassAdvisor: crawlLaw != null);
 						if (toward.Location != null)
 						{
 							Log.Write("debug", $"AI ({player.ClientIndex}): EX-1 BaseCrawl {actorType} at {toward.Location.Value} toward field {crawlAim.Value} at tick {world.WorldTick}");

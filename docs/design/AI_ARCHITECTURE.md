@@ -3322,7 +3322,12 @@ placement ("base" reason, 4-14 cells from the spreader). v2:
   ~26 cells short). The queue manager takes the want after refineries and before the fraction roll, skips one
   already in production, and the cash gate lets a want through at its own price — the link IS the economy
   investment. Placement aims at `CrawlTargetEdge` — the target field's resource cell nearest our frontier — so
-  every placement closes the gap.
+  every placement closes the gap. **Link legality (maintainer correction):** a link must extend the buildable
+  area (`Buildable` + `Building` + `GivesBuildableArea`, never a refinery — a silo placed forward closes no gap),
+  power-producing links (`PowerInfo.Amount > 0`) are preferred because they feed the defences too, and no cost
+  threshold excludes a power plant — the advanced plant is a valid link when it is the only one. The aimed
+  placement bypasses the spacing-advisor re-rank (which would override the distance sort), and a directed crawl
+  with no aim holds the item rather than placing an un-aimed fallback.
 * **B2 — the MCV's missing prerequisite becomes a want, and the request rides under the reserve.** `RequestMcv`
   no longer gates on `McvRequestReserve` (the request is free; production is cash-gated downstream) — the `due`
   test is `McvDue` = a far field free AND pipeline room. When the MCV is due but no queue can produce it,
@@ -3339,7 +3344,8 @@ placement ("base" reason, 4-14 cells from the spreader). v2:
 * Classic and switch-off see the interface defaults — every new provider member publishes only under
   `RefineryLawActive` — and the queue changes touch only refinery, crawl and MCV triggers. Tests:
   `LinkBuildingWanted`, `McvDue`, `MissingPrerequisiteTokens`, `RefineryEstimateOrFallback`,
-  `RefineryLawNudge.Due`, and the two new `ClaimOrder` counters.
+  `RefineryLawNudge.Due`, `CrawlLinkRequiresBuildableAreaAndPrefersPowerPlants`, and the two new `ClaimOrder`
+  counters.
 
 ### 12.25 BO — the building build-order lab: log, score, tune, personalise, learn, react (maintainer 2026-10-02; owner Claude)
 

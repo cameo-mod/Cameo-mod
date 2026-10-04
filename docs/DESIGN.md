@@ -4998,7 +4998,9 @@ from one tier up, never on-off-on), and it must say why it cannot scale.
     second refinery).
   * **The crawl has its own supply and the MCV its unlock (2026-10-04 B-items).** While the crawl target's field is
     out of reach and nothing is claimable in reach, the planner wants the cheapest crawl-eligible building produced
-    and every such placement aims at the field's resource edge — *"every building placed to close the gap"*. A due
+    and every such placement aims at the field's resource edge — *"every building placed to close the gap"*. A link
+    must extend the buildable area (never a silo), power plants are preferred and never excluded by cost, the aimed
+    placement ignores the spacing advisor, and a directed crawl with no aim waits rather than placing blind. A due
     MCV's missing prerequisite becomes a building want (td_gdi: the repair facility), and the MCV request rides
     under the cash reserve — the request is free; production is cash-gated at the queue. A transiently unbuildable
     refinery never silences the planner (target, claims and MCV requests keep running). The expansion nudge keys

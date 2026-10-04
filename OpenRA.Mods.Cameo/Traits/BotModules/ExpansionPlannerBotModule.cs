@@ -1373,7 +1373,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		void Replan(IBot bot)
 		{
-			var (refinery, link, queues) = CheapestBuildables();
+			var (refinery, link, crawlLink, queues) = CheapestBuildables();
 
 			// REF-1 B3 (§12.24 v2): a transiently unbuildable refinery (prerequisite missing, queue disabled)
 			// must not silence the planner — the estimate only feeds field scoring's payback term, so the last
@@ -1570,7 +1570,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (Info.FieldCoverage && Info.DriveRefineries)
 			{
 				UpdateAnchorClaim(refineryCells, refineryTiles, buildingTiles);
-				UpdateCrawlWant(link, buildingTiles);
+				UpdateCrawlWant(crawlLink, buildingTiles);
 			}
 			else
 			{
@@ -1870,9 +1870,25 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				Math.Max(0, cheapest.TraitInfoOrDefault<BuildableInfo>()?.BuildDuration ?? 0));
 		}
 
-		((ActorInfo Info, int Cost, int BuildTicks) Refinery, (ActorInfo Info, int Cost, int BuildTicks) Link, int Queues) CheapestBuildables()
+		/// <summary>
+		/// REF-1 B1 (maintainer ruling): a crawl link must EXTEND the buildable area (GivesBuildableArea — a silo or
+		/// other non-provider placed forward closes no gap) and should be useful — power plants are preferred since
+		/// they also feed defences. No cost cap: the advanced plant is still a valid link when it is the only one.
+		/// </summary>
+		public static bool IsCrawlLink(ActorInfo a) =>
+			a.HasTraitInfo<BuildableInfo>() && a.HasTraitInfo<BuildingInfo>()
+			&& a.HasTraitInfo<GivesBuildableAreaInfo>() && !a.HasTraitInfo<RefineryInfo>();
+
+		public static bool IsPowerPlant(ActorInfo a) => (a.TraitInfoOrDefault<PowerInfo>()?.Amount ?? 0) > 0;
+
+		public static (ActorInfo Info, int Cost, int BuildTicks) PickCrawlLink(
+			(ActorInfo Info, int Cost, int BuildTicks) power, (ActorInfo Info, int Cost, int BuildTicks) other) =>
+			power.Info != null ? power : other;
+
+		((ActorInfo Info, int Cost, int BuildTicks) Refinery, (ActorInfo Info, int Cost, int BuildTicks) Link,
+			(ActorInfo Info, int Cost, int BuildTicks) CrawlLink, int Queues) CheapestBuildables()
 		{
-			(ActorInfo Info, int Cost, int BuildTicks) refinery = default, link = default;
+			(ActorInfo Info, int Cost, int BuildTicks) refinery = default, link = default, linkPower = default, linkOther = default;
 			var queues = 0;
 			foreach (var queue in BuildingQueueTypes().SelectMany(type => CAAIUtils.FindQueues(player, type)).Distinct())
 			{
@@ -1891,12 +1907,27 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 						if (refinery.Info == null || cost < refinery.Cost)
 							refinery = entry;
 					}
-					else if (cost > 0 && (link.Info == null || cost < link.Cost))
-						link = entry;
+					else
+					{
+						if (cost > 0 && (link.Info == null || cost < link.Cost))
+							link = entry;
+
+						// REF-1 B1: the law's crawl link is the cheapest GBA structure, power plants first.
+						if (IsCrawlLink(item))
+						{
+							if (IsPowerPlant(item))
+							{
+								if (linkPower.Info == null || cost < linkPower.Cost)
+									linkPower = entry;
+							}
+							else if (linkOther.Info == null || cost < linkOther.Cost)
+								linkOther = entry;
+						}
+					}
 				}
 			}
 
-			return (refinery, link, queues);
+			return (refinery, link, PickCrawlLink(linkPower, linkOther), queues);
 		}
 	}
 }

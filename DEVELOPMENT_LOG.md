@@ -1,3 +1,17 @@
+# 2026-10-04 — REF-1 B1 correction: legal crawl links (GivesBuildableArea, power preferred)
+
+*Devin (T2Verify), branch `devin/ref1-refinery-law-v2`.* Maintainer correction to B1: a crawl link must extend the
+buildable area — the first implementation let `CheapestBuildables`' cheapest-of-anything win, which could pick a
+silo (no build radius, closes no gap). `CheapestBuildables` now also returns a `CrawlLink` candidate filtered to
+`Buildable` + `Building` + `GivesBuildableArea` (never `Refinery`), picked by `PickCrawlLink` = power-producing
+(`PowerInfo.Amount > 0`) first, else the cheapest eligible — cost never excludes a power plant, so the advanced
+plant stays a valid link when it is the only one. Placement-side rules landed with it (crawl-trace §8): the aim
+is the target field's resource EDGE (`CrawlTargetEdge`), aimed crawl placements bypass the spacing-advisor
+re-rank (`findPos` `bypassAdvisor` — an armed advisor would override the distance sort), and a directed crawl
+with no aim holds the item instead of wasting it on an un-aimed fallback. Classic/switch-off untouched (interface
+defaults). Test: `CrawlLinkRequiresBuildableAreaAndPrefersPowerPlants` — 856/856. Build 0 err; fog + mutation
+audits PASS; boot gate PASS.
+
 # 2026-10-04 — REF-1 B-items: crawl supply want, MCV prereq want, ungated planner, coverage nudge
 
 *Devin (T2Verify), branch `devin/ref1-refinery-law-v2`.* Consolidated scope from the crawl trace
