@@ -2,7 +2,7 @@
 
 ## 2026-10-04 — NOVA: N1 one-branch port INC-ready — `AP_tier1_priors`
 
-`Agent: Devin (nova) · branch devin/nova/t2-port @ 2cdfdbac8 · worktree C:/cameo-wt/nova-t2port`
+`Agent: Devin (nova) · branch devin/nova/t2-port @ 1a8ffab97 · worktree C:/cameo-wt/nova-t2port`
 
 **INC-N ready: `devin/nova/t2-port` — switch: `AP_tier1_priors` (default off).** Round-2 N1: the
 tier-2 follow-ups consolidated onto master ≥ `8e86fca23` — (b) `BotWeaponProfile.Delivery` tag axis,
