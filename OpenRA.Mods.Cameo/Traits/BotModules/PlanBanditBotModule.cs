@@ -108,13 +108,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				if (arm.IndexOf('@') >= 0 || arm.IndexOf("__", StringComparison.Ordinal) >= 0)
 					throw new YamlException($"PlanBanditBotModule: PersonalityArms entry '{arm}' must be a bare personality name.");
 
-			// Nova review 2026-10-03: an arm naming no controller condition silently falls back to the
-			// random draw — fail loud instead, the same check PinnedPersonalities gets.
-			var controller = ai.TraitInfos<BotPersonalityControllerInfo>().FirstOrDefault();
-			if (controller != null)
-				foreach (var arm in PersonalityArms)
-					if (!controller.Conditions.Any(c => BotPersonalityController.PersonalityName(c, controller.PersonalityPrefix) == arm))
-						throw new YamlException($"PlanBanditBotModule: PersonalityArms entry '{arm}' has no matching personality-* condition.");
+			// Nova review 2026-10-03 / arch review 2026-10-04 P0: an arm naming no controller condition
+			// silently falls back to the random draw — but the check cannot run here: at load time the
+			// module does not know whether it is armed, and a map may legitimately narrow the
+			// controller's personality set (the raid gate pins personality-rush). The check moved to
+			// the armed-only resolve path — see DrawablePersonalityArms.
 		}
 
 		public override object Create(ActorInitializer init) { return new PlanBanditBotModule(init.Self, this); }
@@ -183,7 +181,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			if (Info.PersonalityArms.Length > 0)
 			{
-				var arm = Choose("Personality", ownFaction, enemyFaction, Info.PersonalityArms);
+				var arm = Choose("Personality", ownFaction, enemyFaction, DrawablePersonalityArms());
 				if (arm != null)
 				{
 					snapshot.PersonalityArm = arm;
@@ -220,6 +218,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		string Choose(string bandit, string ownFaction, string enemyFaction, string[] arms)
 		{
+			if (arms.Length == 0)
+				return null;
+
 			var pooled = new Dictionary<string, PlanBanditArmStats>(StringComparer.Ordinal);
 			var evidence = new Dictionary<string, long>(StringComparer.Ordinal);
 			foreach (var arm in arms)
@@ -258,6 +259,29 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				.Where(c => conditionCounts.TryGetValue(c, out var n) && n > 0)
 				.OrderBy(c => c, StringComparer.Ordinal);
 			return string.Join("+", armed) is { Length: > 0 } s ? s : "none";
+		}
+
+		// Armed-only validation (arch review 2026-10-04 P0): an arm is drawable only when the controller
+		// declares its personality-* condition, but the check can only run here — at rules load the module
+		// does not know whether it is armed, and a map may legitimately narrow the controller set (the raid
+		// gate pins personality-rush). Undrawable arms are excluded with a logged error — an arm that can
+		// never pin must not win draws or earn posteriors for a personality it did not run.
+		string[] DrawablePersonalityArms()
+		{
+			var controller = world.Map.Rules.Actors[SystemActors.Player]
+				.TraitInfos<BotPersonalityControllerInfo>().FirstOrDefault();
+			if (controller == null)
+			{
+				Log.Write("debug", $"AI {player.InternalName}: plan-bandit: no BotPersonalityController — personality bandit inert");
+				return [];
+			}
+
+			var drawable = Info.PersonalityArms
+				.Where(arm => controller.Conditions.Any(c => BotPersonalityController.PersonalityName(c, controller.PersonalityPrefix) == arm))
+				.ToArray();
+			foreach (var arm in Info.PersonalityArms.Except(drawable, StringComparer.Ordinal))
+				Log.Write("debug", $"AI {player.InternalName}: plan-bandit: personality arm '{arm}' has no matching personality-* condition — excluded from the draw");
+			return drawable;
 		}
 
 		// Player-level information only (the lobby faction of the main target, else the most common enemy faction), never actors.

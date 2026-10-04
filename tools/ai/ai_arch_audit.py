@@ -81,6 +81,8 @@ LAYER_OF = {
     "BotUnitRoles": "SITUATION",
     "SiegeEvaluatorBotModule": "SITUATION",
     "FransEconomicSaturationBotModule": "SITUATION",
+    "EngagementPriorsBotModule": "SITUATION",
+    "RegionRolesBotModule": "SITUATION",
     # STRATEGY — master AI, director, team role split, expansion planner, mission providers
     "MasterAiBotModule": "STRATEGY",
     "ModularBot": "STRATEGY",
@@ -91,6 +93,8 @@ LAYER_OF = {
     "FransCommanderCoreBotModule": "STRATEGY",
     "FransCommandBidBotModule": "STRATEGY",
     "PlanBanditBotModule": "STRATEGY",
+    "ArmyStagingBotModule": "STRATEGY",
+    "StealthDoctrineBotModule": "STRATEGY",
     # EXECUTION — squad manager, mission consumers, engineers/capturers/garrison/repair,
     # crate/beacon, harvesters, MCV drivers, commanders
     "SquadManagerBotModuleCA": "EXECUTION",
@@ -121,6 +125,9 @@ LAYER_OF = {
     "FransTransportCommanderBotModule": "EXECUTION",
     "FransGroundTransferBotModule": "EXECUTION",
     "FransSupplyTruckBotModule": "EXECUTION",
+    "CombatVetoBotModule": "EXECUTION",
+    "AssaultFormationBotModule": "EXECUTION",
+    "GarrisonContestBotModule": "EXECUTION",
     # PRODUCTION — base builder, unit builder, production requesters/pause
     "BaseBuilderBotModuleCA": "PRODUCTION",
     "UnitBuilderBotModuleCA": "PRODUCTION",
@@ -128,6 +135,12 @@ LAYER_OF = {
     "FransBaseBuilderBotModule": "PRODUCTION",
     "FransUnitBuilderBotModule": "PRODUCTION",
     "BotGlobalUnitBudget": "PRODUCTION",
+    "ArmyFirstBotModule": "PRODUCTION",
+    "BuildOrderKnobsBotModule": "PRODUCTION",
+    "ParallelProductionBotModule": "PRODUCTION",
+    "PlugSpawnerBotModuleCA": "PRODUCTION",
+    "ScaleTargetsBotModule": "PRODUCTION",
+    "SpacingAdvisorBotModule": "PRODUCTION",
     # SUPPORT — support powers, insurance, watchdogs, plumbing
     "SupportPowerBotModule": "SUPPORT",
     "SupportPowerBotASModule": "SUPPORT",
@@ -143,6 +156,8 @@ LAYER_OF = {
     "HumanPaceBotModule": "SUPPORT",
     # TELEMETRY — log writers, record sinks
     "AiMissionLogWriter": "TELEMETRY",
+    "AiPlacementLogWriter": "TELEMETRY",
+    "EngagementLogBotModule": "TELEMETRY",
 }
 
 # ----------------------------------------------------------------------------- #

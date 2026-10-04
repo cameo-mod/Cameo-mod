@@ -3667,6 +3667,13 @@ frozen at draw time, is emitted as `bandit.armed` ("+"-joined, sorted; `none` wh
 --armed-only SET` folds only records produced under that exact set — the honest way to split posteriors by
 survivorship filter; a plain run pools all sets (documented, current default).
 
+**Arm validation (P0, arch review 2026-10-04).** An arm is drawable only when the controller declares its
+`personality-*` condition — checked at resolve (armed-only), never at `RulesetLoaded`: the module cannot
+know at load whether it is armed, and a map may legitimately narrow the controller set (the raid gate pins
+`personality-rush`; before this fix its rules failed to load at all). Undrawable arms are excluded with a
+logged error — an arm that can never pin must not win draws or earn posteriors for a personality it did
+not run. The gate also pins `PlanBanditBotModule.PersonalityArms: rush` explicitly for determinism.
+
 **Interactions.** Tier-2 `combatveto`: vetoed fights emit DENIED records but no engagement — posteriors are
 conditioned on fights the veto let through (intended composition; `armed` makes the conditioning explicit and
 fitter-addressable, counterfactual scoring would need EL on DENIED cards, not implemented). EL-1 `inmatchadapt`:

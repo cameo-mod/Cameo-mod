@@ -11,6 +11,10 @@ Player:
 	-ConquestVictoryConditions:
 	BotPersonalityController:
 		Conditions: personality-rush
+	PlanBanditBotModule:
+		# The bandit draws among controller-pinnable arms only; this gate's controller is
+		# rush-only, so the pin stays deterministic even if plan_bandits is ever armed here.
+		PersonalityArms: rush
 	SquadManagerBotModuleCA@rush:
 		# The gate proves the publish -> consume -> assign pipeline; a remembered
 		# guard-post threat must not turn the raid target away. -1 disables the

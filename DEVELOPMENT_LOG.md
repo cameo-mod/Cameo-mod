@@ -18146,3 +18146,25 @@ Generated with [Devin](https://devin.ai)
   distinct seeded arms per match, `pinned:true`, `armed:"plan_bandits"`. 822/822, boot-gate PASS.
 * Incident: one file's uncommitted edits were reverted by an external process mid-session (IDE/other
   agent). Detected via dll content check before the smoke; re-applied via shell and committed promptly.
+
+### 2026-10-04 DAWN P0: raid-gate rules-load fix (arch review) + P3 layer mapping
+
+Branch `devin/dawn/p0-bandit-arm-gate` off master `8e86fca23`.
+* **P0 (mine, from `18556ada5`)**: `PlanBanditBotModuleInfo.RulesetLoaded` validated every
+  PersonalityArms entry against the controller's `Conditions` unconditionally — any map narrowing
+  the personality set (raid gate pins `personality-rush`) failed rules load even though
+  `plan_bandits` can never be armed there. Fix (b): the check moved to `DrawablePersonalityArms()`,
+  called from `Resolve()` — armed-only, so unarmed maps can't trip it; undrawable arms are excluded
+  from the draw with a logged error (an unpinnable arm must not win draws or earn posteriors).
+  Fix (a): the gate map pins `PersonalityArms: rush` explicitly (determinism even if armed).
+* **Verified against the P0 repro**: `tools/tests/ai_raid_gate.py` — the map now loads and the
+  match runs to completion (situation records written, `td_nod`, personality resolved). The gate
+  still ASSERTS `no Raid mission published` — that is the documented P1 (MissionTaken only fires
+  at `CreateAttackForce`; another agent's adoption re-port), not the load failure.
+* **P3**: `LAYER_OF` gained all 15 UNMAPPED modules — SITUATION +2 (EngagementPriors, RegionRoles),
+  STRATEGY +2 (ArmyStaging, StealthDoctrine), EXECUTION +3 (CombatVeto, AssaultFormation,
+  GarrisonContest), PRODUCTION +6 (ArmyFirst, BuildOrderKnobs, ParallelProduction, PlugSpawner,
+  ScaleTargets, SpacingAdvisor), TELEMETRY +2 (AiPlacementLogWriter, EngagementLog).
+  `AI_ARCH_COVERAGE.md` regenerated: UNMAPPED 15 -> 0.
+* Verify: build 0E / mod-code warnings 0; 834/834 NUnit; arch audit 0 ERROR / 32 WARN (+1 is the
+  pre-existing `ProtectionTypes` R6 master drift); boot_gate.ps1 PASS.

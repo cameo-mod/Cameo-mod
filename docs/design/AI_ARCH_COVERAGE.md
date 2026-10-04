@@ -19,7 +19,7 @@ Dataflow direction: `PERCEPTION -> SITUATION -> STRATEGY -> EXECUTION` with `PRO
 | `ScoutBotModule` | Cameo | `ScoutBotModule` (genericbot) | `IBotEnabled`, `IBotNotifyIdleBaseUnits`, `IBotRegionThreatProvider`, `IBotRespondToAttack`, `IBotTick` | `IBotMainTargetProvider`, `IBotPersonalityLeadProvider`, `IBotRequestUnitProduction`, `MasterAiBotModule`, `ResourceMapBotModule`, `SquadManagerBotModuleCA` |
 | `TacticalMapBotModule` | Cameo | `TacticalMapBotModule` (genericbot) | `IBotTick`, `IBotZoneTopology` | `MasterAiBotModule` |
 
-### SITUATION (8)
+### SITUATION (10)
 
 | Module | Asm | Instances (gate) | Provides | Consumes |
 |---|---|---|---|---|
@@ -29,13 +29,16 @@ Dataflow direction: `PERCEPTION -> SITUATION -> STRATEGY -> EXECUTION` with `PRO
 | `BotPersonalityController` | Cameo | `BotPersonalityController` (genericbot) | — | — |
 | `BotRoleSets` | Cameo | `BotRoleSets` | — | — |
 | `BotUnitRoles` | Cameo | `BotUnitRoles` (genericbot) | `IBotUnitRoles` | — |
+| `EngagementPriorsBotModule` | Cameo | `EngagementPriorsBotModule` (genericbot && combatveto) | `IBotEngagementPriors`, `IBotTick` | `IBotMainTargetProvider` |
 | `FransEconomicSaturationBotModule` | Fransbot | `FransEconomicSaturationBotModule` (enable-fransbot || inc3_frans_services) | `IBotTick` | — |
+| `RegionRolesBotModule` | Cameo | `RegionRolesBotModule` (genericbot && cn4_region_roles) | `IBotRegionRoles`, `IBotTick` | `TacticalMapBotModule` |
 | `SiegeEvaluatorBotModule` | CA | `SiegeEvaluatorBotModule` (genericbot) | `IBotSiegeAdvisor`, `IBotTick` | `IBotRegionThreatProvider`, `IBotRememberedDefenceProvider`, `IBotSiegeFailureMemory`, `SquadManagerBotModuleCA` |
 
-### STRATEGY (9)
+### STRATEGY (11)
 
 | Module | Asm | Instances (gate) | Provides | Consumes |
 |---|---|---|---|---|
+| `ArmyStagingBotModule` | Cameo | `ArmyStagingBotModule` (genericbot && armystaging) | `IBotArmyStaging`, `IBotRespondToAttack`, `IBotTick` | — |
 | `DefenseCoveragePlanner` | Cameo | `DefenseCoveragePlanner` (genericbot) | `IBotDefensePlacementAdvisor` | `BaseBuilderBotModuleCA`, `IBotMainTargetProvider`, `IBotRegionRoles`, `IBotRememberedDefenceProvider` |
 | `ExpansionPlannerBotModule` | Cameo | `ExpansionPlannerBotModule` (genericbot) | `IBotExpansionAssistProvider`, `IBotExpansionTargetProvider`, `IBotMcvExpansionSiteProvider`, `IBotPositionsUpdated`, `IBotTick` | `BaseBuilderBotModuleCA`, `IBotCoalition`, `IBotRegionThreatProvider`, `IBotRequestUnitProduction`, `IBotScaleTargets`, `IBotUtilityAxes`, `McvExpansionManagerBotModuleInfo`, `ResourceMapBotModule` |
 | `FransCommandBidBotModule` | Fransbot | `FransCommandBidBotModule` (enable-fransbot || inc3_frans_services) | `IBotTick` | — |
@@ -44,17 +47,20 @@ Dataflow direction: `PERCEPTION -> SITUATION -> STRATEGY -> EXECUTION` with `PRO
 | `FransbotControllerBotModule` | Fransbot | `FransbotControllerBotModule` (enable-fransbot) | `IBotEnabled`, `IBotTick` | — |
 | `MasterAiBotModule` | Cameo | `MasterAiBotModule` (genericbot) | `IBotCoalition`, `IBotDirector`, `IBotEnemyCompositionProvider`, `IBotFoggedEnemyProvider`, `IBotMainTargetProvider`, `IBotMissionOutcomeSink`, `IBotMissionProvider`, `IBotPersonalityLeadProvider`, `IBotRegionThreatProvider`, `IBotRememberedDefenceProvider`, `IBotRouteThreatRouter`, `IBotSiegeFailureMemory`, `IBotTeamMember`, `IBotThreatPredictionProvider`, `IBotTick`, `IBotUtilityAxes` | `BaseRepairBotModule`, `BotCounterDemandController`, `BotLimits`, `BotPersonalityController`, `BuildOrderKnobsBotModule`, `IBotCaptureClaimSource`, `IBotExpansionAssistProvider`, `IBotExpansionTargetProvider`, `IBotMissionAssignmentProvider`, `IBotThreatAnalysis`, `PlanBanditBotModule`, `ResourceMapBotModule`, `ScaleTargetsBotModule`, `ScoutBotModule`, `SquadManagerBotModuleCA`, `TacticalMapBotModule` |
 | `ModularBot` | Cameo | `ModularBot@EasiestAI`<br>`ModularBot@VeryEasyAI`<br>`ModularBot@EasyAI`<br>`ModularBot@MediumAI`<br>`ModularBot@HardAI`<br>`ModularBot@VeryHardAI`<br>… 15 total | `IBot` | `IBotActionBudget`, `IBotEnabled`, `IBotRespondToAttack`, `IBotTick` |
-| `PlanBanditBotModule` | Cameo | `PlanBanditBotModule` (genericbot && plan_bandits) | — | `IBotMainTargetProvider` |
+| `PlanBanditBotModule` | Cameo | `PlanBanditBotModule` (genericbot && plan_bandits) | — | `BotPersonalityControllerInfo`, `IBotMainTargetProvider` |
+| `StealthDoctrineBotModule` | Cameo | `StealthDoctrineBotModule` (genericbot && cn3_stealth_squads) | `IBotStealthDoctrine` | `MasterAiBotModule` |
 
-### EXECUTION (28)
+### EXECUTION (31)
 
 | Module | Asm | Instances (gate) | Provides | Consumes |
 |---|---|---|---|---|
+| `AssaultFormationBotModule` | Cameo | `AssaultFormationBotModule` (genericbot && assault_fanout) | `IBotAssaultFormation` | — |
 | `BaseRepairBotModule` | Cameo | `BaseRepairBotModule` (genericbot) | `IBotRespondToAttack`, `IBotTick` | — |
 | `BeaconResponderBotModule` | Cameo | `BeaconResponderBotModule` (genericbot) | `IBotEnabled`, `IBotNotifyIdleBaseUnits`, `IBotTick` | `IBotRegionThreatProvider`, `SquadManagerBotModuleCA` |
 | `BridgeRepairBotModule` | Cameo | `BridgeRepairBotModule` (genericbot && cn3_bridge_repair) | `IBotTick`, `IBotUnitLeaseLost` | `IBotRequestUnitProduction` |
 | `BuildingRepairBotModuleCA` | CA | `BuildingRepairBotModuleCA` (classicbot) | `IBotRespondToAttack` | — |
 | `CaptureManagerBotModuleCA` | CA | `CaptureManagerBotModuleCA` (classicbot) | `IBotPositionsUpdated`, `IBotTick` | — |
+| `CombatVetoBotModule` | Cameo | `CombatVetoBotModule` (genericbot && combatveto) | `IBotCombatVeto` | — |
 | `CratePickupBotModule` | Cameo | `CratePickupBotModule` (classicbot || genericbot) | `IBotTick` | — |
 | `DeployBotModule` | Cameo | `DeployBotModule` (genericbot && cn3_deploy) | `IBotTick` | — |
 | `EngineerBotModule` | Cameo | `EngineerBotModule` (genericbot) | `IBotCaptureClaimSource`, `IBotPositionsUpdated`, `IBotProtectionRequestProvider`, `IBotTick` | — |
@@ -69,6 +75,7 @@ Dataflow direction: `PERCEPTION -> SITUATION -> STRATEGY -> EXECUTION` with `PRO
 | `FransSpecOpsCommanderBotModule` | Fransbot | `FransSpecOpsCommanderBotModule` (enable-fransbot) | `IBotEnabled`, `IBotRespondToAttack`, `IBotTick` | — |
 | `FransSupplyTruckBotModule` | Fransbot | `FransSupplyTruckBotModule` (enable-fransbot) | `IBotTick` | `IBotRequestUnitProduction` |
 | `FransTransportCommanderBotModule` | Fransbot | `FransTransportCommanderBotModule` (enable-fransbot || engt-transport) | `IBotCaptureTransportProvider`, `IBotEnabled`, `IBotTick` | — |
+| `GarrisonContestBotModule` | Cameo | `GarrisonContestBotModule` (genericbot && garrison_contest) | `IBotCaptureClaimSource`, `IBotMissionProvider`, `IBotTick` | `IBotRememberedDefenceProvider`, `IBotZoneTopology` |
 | `GarrisonDefenseBotModule` | Cameo | `GarrisonDefenseBotModule` (genericbot && cn2_garrison_defense) | `IBotTick` | — |
 | `HarvesterBotModuleCA` | CA | `HarvesterBotModuleCA@generic` (genericbot)<br>`HarvesterBotModuleCA@classic` (classicbot) | `IBotRespondToAttack`, `IBotTick` | — |
 | `LoadCargoBotModule` | AS | `LoadCargoBotModule@Infantry` (genericbot || classicbot)<br>`LoadCargoBotModule@TankBunker` (genericbot || classicbot)<br>`LoadCargoBotModule@Battery` (genericbot || classicbot) | `IBotTick` | — |
@@ -79,14 +86,20 @@ Dataflow direction: `PERCEPTION -> SITUATION -> STRATEGY -> EXECUTION` with `PRO
 | `SquadManagerBotModuleCA` | CA | `SquadManagerBotModuleCA@rush` (genericbot && personality-rush)<br>`SquadManagerBotModuleCA@turtle` (genericbot && personality-turtle)<br>`SquadManagerBotModuleCA@tech` (genericbot && personality-tech)<br>`SquadManagerBotModuleCA@expansion` (genericbot && personality-expansion)<br>`SquadManagerBotModuleCA@steamroller` (genericbot && personality-steamroller)<br>`SquadManagerBotModuleCA@classic` (classicbot)<br>… 7 total | `IBotEnabled`, `IBotMissionAssignmentProvider`, `IBotPositionsUpdated`, `IBotRespondToAttack`, `IBotTick` | `BotLimits`, `IBotActionBudget`, `IBotAircraftBuilder`, `IBotArmyStaging`, `IBotCoalition`, `IBotCombatVeto`, `IBotEnemyCompositionProvider`, `IBotFoggedEnemyProvider`, `IBotMainTargetProvider`, `IBotMissionOutcomeSink`, `IBotMissionProvider`, `IBotNotifyIdleBaseUnits`, `IBotPersonalityLeadProvider`, `IBotPositionsUpdated`, `IBotProtectionRequestProvider`, `IBotRegionThreatProvider`, `IBotRequestUnitProduction`, `IBotRouteThreatRouter`, `IBotScaleTargets`, `IBotSiegeAdvisor`, `IBotStealthDoctrine`, `IBotThreatPredictionProvider`, `IBotUnitRoles`, `IBotUtilityAxes` |
 | `UnitRepairBotModule` | Cameo | `UnitRepairBotModule` (genericbot && cn2_unit_repair) | `IBotNotifyIdleBaseUnits`, `IBotTick` | — |
 
-### PRODUCTION (6)
+### PRODUCTION (12)
 
 | Module | Asm | Instances (gate) | Provides | Consumes |
 |---|---|---|---|---|
+| `ArmyFirstBotModule` | Cameo | `ArmyFirstBotModule` (genericbot && army_first) | `IBotRequestPauseBuildingProduction`, `IBotTick` | — |
 | `BaseBuilderBotModuleCA` | CA | `BaseBuilderBotModuleCA@generic` (genericbot || classicbot) | `IBotPositionsUpdated`, `IBotRequestPauseUnitProduction`, `IBotRespondToAttack`, `IBotSuggestRefineryProduction`, `IBotTick` | `BotLimits`, `IBotArmyStaging`, `IBotBaseExpansion`, `IBotBuildOrderKnobs`, `IBotExpansionTargetProvider`, `IBotPositionsUpdated`, `IBotScaleTargets`, `ResourceMapBotModule` |
 | `BotGlobalUnitBudget` | Cameo | `BotGlobalUnitBudget` | `IBotRequestPauseUnitProduction` | — |
+| `BuildOrderKnobsBotModule` | Cameo | `BuildOrderKnobsBotModule` (genericbot && build_order_knobs) | `IBotBuildOrderKnobs`, `IBotTick` | `BaseBuilderBotModuleCA`, `BotPersonalityController`, `IBotUnitRoles`, `MasterAiBotModule`, `PlanBanditBotModule` |
 | `FransBaseBuilderBotModule` | Fransbot | `FransBaseBuilderBotModule` (enable-fransbot) | `IBotEnabled`, `IBotPositionsUpdated`, `IBotRequestPauseUnitProduction`, `IBotRespondToAttack`, `IBotSuggestRefineryProduction`, `IBotTick` | `IBotBaseExpansion`, `IBotPositionsUpdated`, `IBotRequestUnitProduction`, `ResourceMapBotModule` |
 | `FransUnitBuilderBotModule` | Fransbot | `FransUnitBuilderBotModule` (enable-fransbot) | `IBotRequestUnitProduction`, `IBotTick` | `IBotEnemyCompositionProvider`, `IBotRequestPauseUnitProduction` |
+| `ParallelProductionBotModule` | Cameo | `ParallelProductionBotModule` (genericbot && parallel_production) | `IBotProductionWidth` | — |
+| `PlugSpawnerBotModuleCA` | Cameo | `PlugSpawnerBotModuleCA` (genericbot && plug_spawn) | `IBotTick` | — |
+| `ScaleTargetsBotModule` | Cameo | `ScaleTargetsBotModule` (genericbot && scale_targets) | `IBotScaleTargets`, `IBotTick` | `BaseBuilderBotModuleCA`, `BotGlobalUnitBudget`, `BotPersonalityController`, `IBotUnitRoles`, `IBotUtilityAxes`, `IBotZoneTopology`, `MasterAiBotModule` |
+| `SpacingAdvisorBotModule` | Cameo | `SpacingAdvisorBotModule` (genericbot) | `IBotPlacementAdvisor` | `ResourceMapBotModule` |
 | `UnitBuilderBotModuleCA` | CA | `UnitBuilderBotModuleCA@generic` (genericbot || classicbot) | `IBotAircraftBuilder`, `IBotNotifyIdleBaseUnits`, `IBotRequestUnitProduction`, `IBotTick` | `BaseBuilderBotModuleCA`, `BotLimits`, `IBotEnemyCompositionProvider`, `IBotPersonalityLeadProvider`, `IBotProductionWeight`, `IBotProductionWidth`, `IBotRequestPauseUnitProduction`, `IBotScaleTargets`, `IBotUnitRoles`, `SquadManagerBotModuleCA`, `UnitCompositionsBotModule` |
 | `UnitCompositionsBotModule` | CA | `UnitCompositionsBotModule` | — | — |
 
@@ -107,31 +120,17 @@ Dataflow direction: `PERCEPTION -> SITUATION -> STRATEGY -> EXECUTION` with `PRO
 | `SupportPowerBotASModule` | AS | `SupportPowerBotASModule` (genericbot || classicbot)<br>`SupportPowerBotASModule@wc2` (genericbot) | `IBotTick` | — |
 | `SupportPowerBotModule` | Common | `SupportPowerBotModule` (classicbot) | `IBotTick` | — |
 
-### TELEMETRY (1)
+### TELEMETRY (3)
 
 | Module | Asm | Instances (gate) | Provides | Consumes |
 |---|---|---|---|---|
 | `AiMissionLogWriter` | Cameo | `AiMissionLogWriter` | `IBotMissionRecordSink` | — |
-
-### UNMAPPED (15)
-
-| Module | Asm | Instances (gate) | Provides | Consumes |
-|---|---|---|---|---|
 | `AiPlacementLogWriter` | Cameo | `AiPlacementLogWriter` | `IBotPlacementObserver` | `BotPersonalityController`, `IBotUnitRoles`, `MasterAiBotModule` |
-| `ArmyFirstBotModule` | Cameo | `ArmyFirstBotModule` (genericbot && army_first) | `IBotRequestPauseBuildingProduction`, `IBotTick` | — |
-| `ArmyStagingBotModule` | Cameo | `ArmyStagingBotModule` (genericbot && armystaging) | `IBotArmyStaging`, `IBotRespondToAttack`, `IBotTick` | — |
-| `AssaultFormationBotModule` | Cameo | `AssaultFormationBotModule` (genericbot && assault_fanout) | `IBotAssaultFormation` | — |
-| `BuildOrderKnobsBotModule` | Cameo | `BuildOrderKnobsBotModule` (genericbot && build_order_knobs) | `IBotBuildOrderKnobs`, `IBotTick` | `BaseBuilderBotModuleCA`, `BotPersonalityController`, `IBotUnitRoles`, `MasterAiBotModule`, `PlanBanditBotModule` |
-| `CombatVetoBotModule` | Cameo | `CombatVetoBotModule` (genericbot && combatveto) | `IBotCombatVeto` | — |
 | `EngagementLogBotModule` | Cameo | `EngagementLogBotModule` | `IBotRespondToAttack`, `IBotTick` | — |
-| `EngagementPriorsBotModule` | Cameo | `EngagementPriorsBotModule` (genericbot && combatveto) | `IBotEngagementPriors`, `IBotTick` | `IBotMainTargetProvider` |
-| `GarrisonContestBotModule` | Cameo | `GarrisonContestBotModule` (genericbot && garrison_contest) | `IBotCaptureClaimSource`, `IBotMissionProvider`, `IBotTick` | `IBotRememberedDefenceProvider`, `IBotZoneTopology` |
-| `ParallelProductionBotModule` | Cameo | `ParallelProductionBotModule` (genericbot && parallel_production) | `IBotProductionWidth` | — |
-| `PlugSpawnerBotModuleCA` | Cameo | `PlugSpawnerBotModuleCA` (genericbot && plug_spawn) | `IBotTick` | — |
-| `RegionRolesBotModule` | Cameo | `RegionRolesBotModule` (genericbot && cn4_region_roles) | `IBotRegionRoles`, `IBotTick` | `TacticalMapBotModule` |
-| `ScaleTargetsBotModule` | Cameo | `ScaleTargetsBotModule` (genericbot && scale_targets) | `IBotScaleTargets`, `IBotTick` | `BaseBuilderBotModuleCA`, `BotGlobalUnitBudget`, `BotPersonalityController`, `IBotUnitRoles`, `IBotUtilityAxes`, `IBotZoneTopology`, `MasterAiBotModule` |
-| `SpacingAdvisorBotModule` | Cameo | `SpacingAdvisorBotModule` (genericbot) | `IBotPlacementAdvisor` | `ResourceMapBotModule` |
-| `StealthDoctrineBotModule` | Cameo | `StealthDoctrineBotModule` (genericbot && cn3_stealth_squads) | `IBotStealthDoctrine` | `MasterAiBotModule` |
+
+### UNMAPPED (0)
+
+_none_
 
 ## Interface seams
 
