@@ -560,6 +560,22 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(ExpansionPlannerBotModule.PickCrawlLink(none, none).Info, Is.Null);
 		}
 
+		[Test]
+		public void SiloOverrideThrottledUnderTheLaw()
+		{
+			// Law on: 85% capacity wants nothing, 96% wants a silo, 96% with one already in
+			// production still wants nothing (the queue spends on production instead).
+			Assert.That(RefineryLawSilo.Wanted(true, 85, 100, false), Is.False);
+			Assert.That(RefineryLawSilo.Wanted(true, 96, 100, false), Is.True);
+			Assert.That(RefineryLawSilo.Wanted(true, 96, 100, true), Is.False);
+			Assert.That(RefineryLawSilo.Wanted(true, 95, 100, false), Is.False);
+
+			// Law off / classic: the plain 80% test is unchanged.
+			Assert.That(RefineryLawSilo.Wanted(false, 85, 100, false), Is.True);
+			Assert.That(RefineryLawSilo.Wanted(false, 85, 100, true), Is.True);
+			Assert.That(RefineryLawSilo.Wanted(false, 80, 100, false), Is.False);
+		}
+
 		sealed class LawStub : IBotExpansionTargetProvider
 		{
 			readonly int unservedInReach;

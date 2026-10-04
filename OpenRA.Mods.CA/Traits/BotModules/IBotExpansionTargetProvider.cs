@@ -139,4 +139,19 @@ namespace OpenRA.Mods.CA.Traits
 				? law.UnservedAnchorsInReach == 0 && law.UnservedAnchorsBeyondReach > 0
 				: refineryCount >= refineryMinimum;
 	}
+
+	/// <summary>
+	/// REF-1 silo containment (maintainer report 2026-10-04): the classic "head room for resource
+	/// storage" priority override fires whenever resources exceed 80% of capacity — under the law a
+	/// healthy refinery economy stays above 80% permanently, so the override won every pick and
+	/// spammed silos. Under the law a silo is wanted only at &gt;95% capacity with none already in
+	/// production; classic and switch-off keep the plain 80% test.
+	/// </summary>
+	public static class RefineryLawSilo
+	{
+		public static bool Wanted(bool lawActive, int resources, int capacity, bool siloInProduction) =>
+			lawActive
+				? resources > 0.95 * capacity && !siloInProduction
+				: resources > 0.8 * capacity;
+	}
 }

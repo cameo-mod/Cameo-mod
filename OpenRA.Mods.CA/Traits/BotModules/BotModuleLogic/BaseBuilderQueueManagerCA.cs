@@ -764,10 +764,8 @@ namespace OpenRA.Mods.CA.Traits
 			// economy keeps storage above 80% permanently, so the override won every pick. Silos stay
 			// wanted only when storage is nearly full and no silo is already in production; otherwise
 			// the queue spends on production/defence instead.
-			var wantSilo = playerResources.Resources > 0.8 * playerResources.ResourceCapacity;
-			if (wantSilo && law != null)
-				wantSilo = playerResources.Resources > 0.95 * playerResources.ResourceCapacity
-					&& !(baseBuilder.BuildingsBeingProduced?.Keys.Any(baseBuilder.Info.SiloTypes.Contains) ?? false);
+			var wantSilo = RefineryLawSilo.Wanted(law != null, playerResources.Resources, playerResources.ResourceCapacity,
+				baseBuilder.BuildingsBeingProduced?.Keys.Any(baseBuilder.Info.SiloTypes.Contains) ?? false);
 
 			if (wantSilo)
 			{
