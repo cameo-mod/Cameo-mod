@@ -562,6 +562,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		bool costCountersInitialized;
 		BotUrgency currentUrgency;
 		int lastPersonalitySwitchTick;
+		int lastBanditPinOrderTick = -25;
 		int personalityCandidateSince;
 		string sustainedCandidate = "";
 		bool emergencyPersonalityHandled;
@@ -1148,8 +1149,25 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				!Info.EmergencyKeepsPersonality;
 			var botLimits = player.PlayerActor.TraitsImplementing<BotLimits>().FirstEnabledTraitOrDefault();
 			var reactionDelay = botLimits?.Info.PersonalityReactionDelay ?? Info.DefaultPersonalityReactionDelay;
-			if (ShouldSwitchPersonality(currentPersonality, candidatePersonality, lastPersonalitySwitchTick, tick,
-				emergencyTransition, reactionDelay, personalityCandidateSince, Info))
+			// AR-2 (fleet orders 2026-10-04b): the bandit's personality pin is host-side state — it
+			// reaches the world only as a synced SetBotPersonality order, never read in TraitEnabled.
+			// While pinned the pin IS the personality: candidate switching stays silent, exactly as
+			// the old ResolveOrder pin suppression behaved, now provably sync-safe.
+			var banditArm = player.PlayerActor.TraitsImplementing<PlanBanditBotModule>()
+				.FirstEnabledTraitOrDefault()?.PinnedPersonalityArm;
+			var pinOrder = BanditPinOrder(banditArm, currentPersonality, tick, lastBanditPinOrderTick);
+			if (pinOrder != null)
+			{
+				bot.QueueOrder(new Order("SetBotPersonality", player.PlayerActor, false)
+				{
+					TargetString = pinOrder,
+					SuppressVisualFeedback = true
+				});
+				lastBanditPinOrderTick = tick;
+			}
+			else if (banditArm == null
+				&& ShouldSwitchPersonality(currentPersonality, candidatePersonality, lastPersonalitySwitchTick, tick,
+					emergencyTransition, reactionDelay, personalityCandidateSince, Info))
 			{
 				bot.QueueOrder(new Order("SetBotPersonality", player.PlayerActor, false)
 				{
@@ -1892,6 +1910,17 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var hold = Math.Min(info.PersonalityHoldTicks, reactionDelayTicks);
 			return tick - candidateSince >= reactionDelayTicks &&
 				tick - lastSwitchTick >= hold;
+		}
+
+		// AR-2 (fleet orders 2026-10-04b): the personality the host must put on the wire, or null.
+		// Re-issued while the controller has not reflected it (a lost enable/reset can drop one),
+		// throttled to one order per sim second — orders are the only channel that carries
+		// host-side bandit state into the synced world.
+		internal static string BanditPinOrder(string banditArm, string currentPersonality, int tick, int lastIssuedTick)
+		{
+			if (banditArm == null || banditArm == currentPersonality || tick - lastIssuedTick < 25)
+				return null;
+			return banditArm;
 		}
 
 		internal static int Saturate(int x, int k)

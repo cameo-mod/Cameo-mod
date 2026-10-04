@@ -1,3 +1,37 @@
+# 2026-10-04 — EMBER AR-2: the personality-pin desync, fixed per spec (`devin/ember/ar2-personality-pin`)
+
+*Devin-Tier1.* Branch `devin/ember/ar2-personality-pin` from master `3ba05ede7`, worktree `ember-ar2`.
+P0 of the 2026-10-04b architecture review; live only with `AO_tier3_bandits` armed.
+
+**The bug.** `BotPersonalityController.TraitEnabled` is synced — it runs on every client at PlayerActor
+creation — and it read `PlanBanditBotModule.PinnedPersonalityArm`, which resolves lazily from
+`world.LocalRandom` (per-client, cosmetic RNG) plus a local learned file. Each client Thompson-sampled a
+different personality arm and granted a different `personality-*` condition → divergent bot behaviour.
+Same-shape hazard twice over: a pinned client also skipped `Info.Conditions.Random(SharedRandom)`, so the
+shared stream itself diverged.
+
+**The fix (per orders spec).** The pin travels only as a synced order:
+- `BotPersonalityController.TraitEnabled` now calls the pure seam `ChooseInitialCondition`, which draws
+  `SharedRandom` **exactly once, unconditionally**, then applies a harness `PinnedPersonalities` pin over
+  the draw. The bandit read (`BanditPin`) is gone — a synced context can no longer reach host-side state.
+- `MasterAiBotModule.BotTick` (host-only, where `SetBotPersonality` orders already originate) reads
+  `PinnedPersonalityArm` and issues `SetBotPersonality` via the pure seam `BanditPinOrder` — re-issued
+  once per sim second while the controller has not reflected it. While a bandit pin is in effect,
+  candidate personality switching stays silent — the same suppression the old `ResolveOrder` pin gave,
+  now provably sync-safe.
+- Harness `PinnedPersonalities` still wins over the draw and still blocks orders (synced yaml config).
+
+All other bandit readers were already host-only (`IBotTick` modules, log sinks) — audited every
+`PinnedPersonalityArm`/`PlanOverlayMilli`/`Snapshot` callsite. `Resolve()` stays lazy; first read is now
+the host's first BotTick rather than the `Player` ctor, so `EnemyFactionOf` takes its live-players path
+(the pre-`SetPlayers` lobby fallback remains for any earlier reader).
+
+**Tests (+5).** `ChooseInitialCondition`: exactly one `SharedRandom` call pinned or not (asserted on
+`MersenneTwister.TotalCount`, the engine's own sync counter), determinism across twin-seeded "clients",
+pin-overrides-draw, pin-miss-falls-back. `BanditPinOrder`: null arm, already-reflected, inside/outside
+the throttle window. The true 2-client proof is Tier4's AR-T3 armed-bandits sync smoke (assigned).
+Gates: builds 0/0, NUnit **938/938**.
+
 # 2026-10-04 — Claude (lead): INC 2026-10-04e lands — INC-d completed (P0 raid gate), LC5 admission claims, checker v2, E2 test baseline
 
 *Claude.* Branch `inc/2026_10_04e` from master `1fbd239ff`:

@@ -3740,10 +3740,11 @@ the bar runs bit-identical and classic is untouched. Enumerates no actors — ze
 
 `PlanBanditBotModule` (Player, `genericbot && plan_bandits`; switch `AO_tier3_bandits`, default off — no provider =
 bit-identical) draws two Thompson samples once at match start and freezes them: a **personality arm** (the six
-`personality-*` presets; the winner pins `BotPersonalityController` the same way a harness pin does — harness pins win,
-an arm naming no condition falls back to the random draw) and a **plan arm** (a named knob overlay multiplied into the
-build-order vector as preset x learned x plan x jitter, clamped — `balanced` is the explicit no-op arm). No orders, no
-actor access, no new decision channels.
+`personality-*` presets; the winner reaches `BotPersonalityController` as a synced `SetBotPersonality` order issued
+from the host's BotTick — AR-2: the draw is host-side `LocalRandom` state, so it must never be read in a synced
+context; harness `PinnedPersonalities` pins are synced config and still override in `TraitEnabled`) and a **plan arm**
+(a named knob overlay multiplied into the build-order vector as preset x learned x plan x jitter, clamped —
+`balanced` is the explicit no-op arm). No orders, no actor access, no new decision channels.
 
 **Posterior.** Continuous reward (`score.total_milli`, [-1000, 1000]) — a Normal-mean posterior, sampled as Student-t
 (df = n-1, loc = mean, scale^2 = s^2/n; df > 64 uses the normal approximation). Beta posteriors cannot express a signed
@@ -3774,18 +3775,23 @@ survivorship filter; a plain run pools all sets (documented, current default).
 
 **Fog + self-guards (round-2 orders 2026-10-03).** The scope's enemy faction is `BotFactionView.PublicFactionOf`
 everywhere: the live path groups enemy players by lobby-visible `DisplayFaction`, and the early-resolve fallback
-(the draw runs inside the `Player` ctor, before `SetPlayers`) resolves `PlayerReference.Enemies` faction names
+(the draw may run before `SetPlayers`) resolves `PlayerReference.Enemies` faction names
 through `PublicFactionName` — a Random or hidden pick yields "" and the scope pools to the generic levels instead
 of keying a matchup the bot could not publicly know. `BuildOrderKnobsBotModule.EnemyFaction()` delegates to the
 same `EnemyFactionOf`, so the bandit and the build-order scope can never disagree. Every public reader self-guards
 `IsTraitDisabled` (rule 5): `PinnedPersonalityArm` -> null, `PlanOverlayMilli` -> 1000, `Snapshot` -> null — a
 disabled bandit never draws, pins, overlays or logs, even if a consumer forgets the `IsTraitEnabled` filter.
+**Sync (AR-2, 2026-10-04b).** All bandit readers are host-only (`IBotTick` / log sinks); the personality pin travels
+as a synced `SetBotPersonality` order throttled to one issue per sim second while the controller has not reflected
+it, and candidate personality switching stays silent while a pin is in effect. `BotPersonalityController.TraitEnabled`
+therefore draws `SharedRandom` exactly once, unconditionally (`ChooseInitialCondition`), then applies a harness pin
+over the draw — the shared stream can never diverge on pin state.
 
 **Interactions.** Tier-2 `combatveto`: vetoed fights emit DENIED records but no engagement — posteriors are
 conditioned on fights the veto let through (intended composition; `armed` makes the conditioning explicit and
 fitter-addressable, counterfactual scoring would need EL on DENIED cards, not implemented). EL-1 `inmatchadapt`:
-adjusts `RetreatRatioPct` inside whatever personality the pin picked — orthogonal axes. `BotPersonalityController`
-reads the pin lazily, so trait enable order cannot race it.
+adjusts `RetreatRatioPct` inside whatever personality the pin picked — orthogonal axes. The bandit resolves lazily
+on the host's first reader, so trait/tick ordering cannot race it.
 
 **Tests / rulings.** `PlanBanditMathTest` pins the pure contract: Welford/Chan stats, parent downweighting,
 deterministic Thompson draws from an explicit uniform stream, the LCB safety floor (and its sparse-arm exemption),

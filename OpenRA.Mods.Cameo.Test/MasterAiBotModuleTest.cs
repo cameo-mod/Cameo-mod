@@ -20,6 +20,7 @@ using OpenRA;
 using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.Cameo.Traits;
 using OpenRA.Mods.Cameo.Traits.BotModules;
+using OpenRA.Support;
 
 namespace OpenRA.Mods.Cameo.Test
 {
@@ -704,6 +705,73 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.Throws<YamlException>(() =>
 				BotPersonalityControllerInfo.ValidatePinnedPersonalities(
 					new[] { "personality-berserker" }, "personality-", pins));
+		}
+
+		// AR-2 (fleet orders 2026-10-04b): the initial personality draw is unconditional —
+		// exactly one SharedRandom call, pinned or not, so the shared stream cannot diverge
+		// on pin state. TotalCount is the engine's own sync-report counter.
+		[Test]
+		public void InitialPersonalityConsumesOneSharedRandomCallPinnedOrNot()
+		{
+			var conditions = new BotPersonalityControllerInfo().Conditions;
+			var prefix = new BotPersonalityControllerInfo().PersonalityPrefix;
+
+			var unpinned = new MersenneTwister(42);
+			var pinned = new MersenneTwister(42);
+			BotPersonalityController.ChooseInitialCondition(conditions, prefix, null, unpinned);
+			BotPersonalityController.ChooseInitialCondition(conditions, prefix, "turtle", pinned);
+
+			Assert.That(unpinned.TotalCount, Is.EqualTo(1));
+			Assert.That(pinned.TotalCount, Is.EqualTo(unpinned.TotalCount),
+				"pinned and unpinned clients must leave the shared stream aligned");
+		}
+
+		[Test]
+		public void InitialPersonalityIsDeterministicAcrossClients()
+		{
+			// The two-client equivalence: same seed, same inputs -> same condition on both.
+			var conditions = new BotPersonalityControllerInfo().Conditions;
+			var prefix = new BotPersonalityControllerInfo().PersonalityPrefix;
+			foreach (var pinned in new string[] { null, "rush", "turtle", "tech", "expansion", "steamroller", "guerrilla" })
+			{
+				var a = BotPersonalityController.ChooseInitialCondition(conditions, prefix, pinned, new MersenneTwister(7));
+				var b = BotPersonalityController.ChooseInitialCondition(conditions, prefix, pinned, new MersenneTwister(7));
+				Assert.That(a, Is.EqualTo(b), $"pin '{pinned}'");
+			}
+		}
+
+		[Test]
+		public void InitialPersonalityPinOverridesTheDraw()
+		{
+			var conditions = new BotPersonalityControllerInfo().Conditions;
+			var prefix = new BotPersonalityControllerInfo().PersonalityPrefix;
+			Assert.That(BotPersonalityController.ChooseInitialCondition(conditions, prefix, "rush", new MersenneTwister(42)),
+				Is.EqualTo("personality-rush"));
+		}
+
+		[Test]
+		public void InitialPersonalityPinMissFallsBackToTheDraw()
+		{
+			// A map may narrow Conditions so the pin names no offered personality —
+			// dead-but-legal config: the random draw stands (same rule the pin validation documents).
+			var conditions = new[] { "personality-rush" };
+			Assert.That(BotPersonalityController.ChooseInitialCondition(conditions, "personality-", "turtle", new MersenneTwister(42)),
+				Is.EqualTo("personality-rush"));
+		}
+
+		// AR-2 order path: the bandit pin is the only personality the host may put on the wire
+		// while it is in effect — one issue per sim second until the controller reflects it.
+		[Test]
+		public void BanditPinOrderReissuesUntilReflected()
+		{
+			Assert.That(MasterAiBotModule.BanditPinOrder("rush", "turtle", 1000, -25), Is.EqualTo("rush"));
+			Assert.That(MasterAiBotModule.BanditPinOrder("rush", "rush", 1000, -25), Is.Null,
+				"already reflected — nothing to put on the wire");
+			Assert.That(MasterAiBotModule.BanditPinOrder("rush", "turtle", 1000, 990), Is.Null,
+				"inside the one-per-second throttle window");
+			Assert.That(MasterAiBotModule.BanditPinOrder("rush", "turtle", 1000, 975), Is.EqualTo("rush"));
+			Assert.That(MasterAiBotModule.BanditPinOrder(null, "turtle", 1000, -25), Is.Null,
+				"no bandit pin — the candidate-switch path decides instead");
 		}
 
 		[TestCase("rush", "turtle", 1000, 1000 + 2999, false, 3000, 1000, false)]
