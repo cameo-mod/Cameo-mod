@@ -1,3 +1,19 @@
+# 2026-10-04 — REF-1 smoke verdicts on d578534c3 (B1 correction build)
+
+*Devin (T2Verify), branch `devin/ref1-refinery-law-v2`.* Re-smoke after the B1 link-legality correction:
+4 matches per map (hard vs hard, td_gdi, `--render fast`, `--time-limit 3`), 8 seat-records each.
+**tiberium-rift: 0 FAIL / 8 WARN** — `per_anchor_max=1`, `base=0`, `gap_max=1`, `tier_viol=0`; durations
+20851/16951/29401/26251 (3 ≥ 20k). **deterring-democracy: 3 FAIL / 5 WARN** — all three are the checker's
+cumulative-per-anchor counter counting rebuild-after-loss: `f8e513e2` Multi0 refs dropped 4→3→2 at
+t9151–9901 with fields 2+13 re-entering `fields_in_reach_unserved_ids` before rebuilds at t10461/t11679/
+t15396; `2dd92ff1` Multi1 and `c46a85d6` Multi0 identical pattern. Live `refineries_per_anchor_max`
+stayed 1 throughout — the law held at every instant. Checker fix (tier4 file-set): skip a same-anchor
+placement whose `field_id` was in `fields_in_reach_unserved_ids`. B1 evidence: 52+74 `power/crawl`
+placements — nukes marching aimed lines toward field edges (organic silo crawls unchanged, out of
+scope). Acceptance: first refinery placed on every seat; winners conyards 2–6, coverage 312–555 milli,
+fields_in_reach up to 8. Peer-review nit fixed at d578534c3; T3Verify's rev-2 branches approved in
+reciprocal review (fleet `REVIEW_2026-10-04_devin-t2verify_on-t3verify.md`).
+
 # 2026-10-04 — REF-1 B1 correction: legal crawl links (GivesBuildableArea, power preferred)
 
 *Devin (T2Verify), branch `devin/ref1-refinery-law-v2`.* Maintainer correction to B1: a crawl link must extend the
