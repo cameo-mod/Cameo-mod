@@ -117,6 +117,30 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void FitterMetadataBlocksAreSkipped()
+		{
+			// The real fitter appends header and analysis blocks beyond the consumption contract —
+			// Schema/LedgerHash/Engagements + AttackTiming@/Response@/SuicideIndex@ (comma-list and
+			// matchup values) — and yaml comments. The consumer must skip all of them, not throw.
+			var yaml = "BotEngagementPriors:\n" +
+				"\tSchema: 1\n" +
+				"\tLedgerHash: b2da2f1f2f5a499c7768a43872a65981fee666013789f258124af3ecdb7f272f\n" +
+				"\tEngagements: 2182\n" +
+				"\t# global_scale 1.130 — relative factors below (v2 fitter)\n" +
+				"\tDeliveryArmour@Bullet_Medium__x__Plate: 2000\n" +
+				"\tPriorPct@Bullet_Medium__x__Plate: 100\n" +
+				"\tDefenceState@Flak_Heavy: 2000\n" +
+				"\tAttackTiming@td_gdi: 7944, 13615, 24084\n" +
+				"\tAttackTiming@td_nod: 9219, 15874, 34130\n" +
+				"\tResponse@td_gdi: 72, 419, 17\n" +
+				"\tSuicideIndex@td_nod__vs__td_nod: 620\n";
+			var priors = Load(yaml);
+			Assert.That(priors.FactorPermille("Bullet_Medium", "Plate"), Is.EqualTo(2000));
+			Assert.That(priors.DefenceFactorPermille("Flak_Heavy"), Is.EqualTo(2000));
+			Assert.That(priors.IntoDefencesPermille, Is.EqualTo(BotEngagementPriors.Neutral));
+		}
+
+		[Test]
 		public void AbsentGlobalScaleKeepsAbsoluteSemantics()
 		{
 			// A file with no GlobalScaleMilli row reads factors verbatim (Schema-1 absolute).
