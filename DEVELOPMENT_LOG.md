@@ -1,3 +1,29 @@
+# 2026-10-04 — EMBER AR-4: PlugSpawner ownership check + scan cache (`devin/ember/ar4-plugspawner`)
+
+*Devin-Tier1.* Branch `devin/ember/ar4-plugspawner` from master `3ba05ede7`, worktree `ember-ar4`.
+P0 of the 2026-10-04b architecture review — two findings in `PlugSpawnerBotModuleCA`, both fixed
+per orders §2.5 ("an owner check (`targetActor.Owner == self.Owner`, the ordering player) + a
+scan cache. Plus a test.").
+
+**The bugs.** (1) The synced `IResolveOrder.ResolveOrder` for `PlacePlugAI` verified the target
+was alive and had an accepting `Pluggable` trait but never checked it belonged to the ordering
+player — any client could place an AI plug on anyone's building. (2) `BotTick` enumerated
+`world.Actors` once per plug type on every interval.
+
+**The fix.** `ResolveOrder`'s frame-end task now rejects the order when
+`!PlugTargetIsOwned(targetActor, self.Owner)` — the trait lives on the ordering player's
+PlayerActor, so `self.Owner` IS the ordering player; the check runs before cost/prereq/enable.
+`BotTick` collects the bot's live own actors once per interval via `CollectOwnedActors`
+(one `world.Actors` pass for all plug kinds) and filters per plug in memory. Both helpers are
+`internal static` pure seams. Placement eligibility (prereq gate, accepting pluggable, first
+match) unchanged.
+
+**Tests (+3, new `PlugSpawnerBotModuleTest`).** `PlugTargetIsOwned`: own/other-player/
+unowned/null targets. `CollectOwnedActors`: keeps only the ordering player's live in-world
+actors; enumerates the source exactly once regardless of plug-kind count. Fixtures use
+uninitialized `Player`/`Actor` with `UnsafeAccessor`-set `Owner`/`IsInWorld`/`Disposed`
+(the same trick as TeamBlackboardTest/ScoutBotModuleTest). Gates: builds 0/0, NUnit **936/936**.
+
 # 2026-10-04 — Claude (lead): INC 2026-10-04e lands — INC-d completed (P0 raid gate), LC5 admission claims, checker v2, E2 test baseline
 
 *Claude.* Branch `inc/2026_10_04e` from master `1fbd239ff`:

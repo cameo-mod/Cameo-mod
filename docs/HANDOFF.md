@@ -1,5 +1,15 @@
 # Cameo — THE HANDOFF
 
+## 2026-10-04 — EMBER AR-4: PlugSpawner owner check + scan cache (INC-ready)
+
+**INC-N ready: `devin/ember/ar4-plugspawner` — switch: none (correctness fix; valid ordering
+unchanged).** P0 of the 2026-10-04b architecture review. `PlacePlugAI`'s synced resolve path
+never verified target ownership — any client could plug anyone's building — and `BotTick`
+re-scanned `world.Actors` once per plug type. Now: `PlugTargetIsOwned(targetActor, self.Owner)`
+gates the resolve before cost/prereq/enable, and one `CollectOwnedActors` pass per interval
+feeds every plug kind. +3 NUnit (`PlugSpawnerBotModuleTest`, UnsafeAccessor fixtures).
+Gates: builds 0/0, **936/936**, boot gate PASS.
+
 ## 2026-10-04 — NOVA N2 receipt: EL-1 v2 on current master
 
 **INC-N ready: `devin/nova/el1-v2` — switch: `AQ_inmatch_adapt` (default off).** Round-2 N2: the EL-1 in-match
