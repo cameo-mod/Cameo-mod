@@ -5350,6 +5350,52 @@ and objective terms (buildings count two-thirds by HP lost and one-third on deat
 Spec: `design/AI_ARCHITECTURE.md` §12.30 (EL). The "deep RL: not now" verdict of `AI_DEEP_RESEARCH.md` §6.3 is amended
 accordingly.
 
+### 19.15 Front and back: production faces the enemy, valuables hide, one radar behind every defence line (maintainer 2026-10-04) — binding
+
+> *"Make sure the base crawling minimizes the distance to the next resource field, so every building is placed
+> effectively to close the gap, but more valuable buildings should still be built in the back and not in the front,
+> because those high-priority targets at the front are easy targets for the opponent and are painful to lose. Radars
+> should be placed in the front, and the AI should also try to build 2+ of them behind the defenses."* — and — *"construction
+> yards are placed from MCVs, and MCVs try to expand as much as possible, so they need to move out! Production should
+> also be in the front, because you want production as close to the enemy as possible, unless it's an airfield, because
+> aircraft is fast! What's really valuable is tech buildings, superweapons and passive income buildings."* — and —
+> *"one for each front, because the radar allows you to see into the fog of war with the GPS dot, so you want one radar
+> on each side behind the defenses, covering all fronts towards the enemy."* — and — *"radars go BEHIND the defense line
+> because they are easy to destroy!"* — and — *"make sure the radars are placed far enough apart, since overlapping
+> radars don't give you more information and are wasted; the more they are apart, the more area they cover."*
+
+**The building classes, and exactly one placement owner each (§19.3):**
+* **Refinery** — the refinery law (§19.1b / FE-1) keeps its anchor placement. Crawl keeps the expansion-target aim:
+  the cheap link building takes the placeable cell that minimises the distance to the target field's resource edge,
+  under the spacing and passability rules (the CRAWL-TRACE fix, REF-1 scope).
+* **Defence** — `DefenseCoveragePlanner` keeps its perimeter quota. Its fronts are the model: a base's fronts are
+  bearings toward the seen enemy (remembered defences per enemy, main target first; else the last attack; else the
+  public enemy spawn; else map centre) merged with the expansion aim inside 45 degrees, at most three per base
+  cluster. Each front owns its arc and its defence line (the foremost and rearmost perimeter defence projections).
+* **Radar** — one radar provider per defended front (maintainer ruling: the "2+" wording becomes one per front; a
+  second on one wide front only when it adds `RadarMinNewCoverageCells` of new approach coverage). The cell sits
+  strictly BEHIND that front's rearmost defence, set back 2–8 cells — never in the line, never beyond it — and its
+  ~19.5-cell `RangedGpsProvider` radius must reach past the line over the front's approach. Among legal cells the
+  score maximises the UNION of approach coverage: overlap with an existing own circle is waste and earns nothing
+  (the dot effect is binary in-range — two radars covering the same ground literally add nothing). A front with no
+  defence line yet waits (`RadarWaitForDefenceTicks`) then takes a back slot — never forward. Each provider holds a
+  ~+60 power margin: low power blinds it. The queued building prefers one whose production queues do not collide
+  with an owned producer (the Upgrades queue is singleton — a second commcenter would double it).
+* **Production** — ground and naval producers go to the enemy front, the most forward cell still at or behind the
+  line (the foremost defence, or the foremost own building in the arc while no line exists). Air-only producers are
+  exempt — "aircraft is fast" — detected rules-side when every produced queue is aircraft.
+* **Valuable** — tech, superweapons and passive-income (`CashTrickler`) buildings only (production and construction
+  yards are NOT valuable: production fights, yards are MCV business). Placed farthest from EVERY front — the
+  multi-front generalisation of the old Fragile sortMax.
+* **Residue** — everything else keeps the neutral placement.
+
+One owner per class: `BaseFrontBackPlannerBotModule` answers Radar / Production / Valuable through
+`IBotFrontBackAdvisor`; everything else stays with today's owners. Radar carriers leave `FragileTypes` — the list
+placed them AWAY from the last attack, exactly backwards. Classic is bit-identical: the advisor is genericbot-only
+behind `Enabled` (switch group `BI_front_back_placement`).
+
+Spec: `design/AI_ARCHITECTURE.md` §12.35 (BP).
+
 ## 20. AI bot unit compositions
 
 Unit compositions are opt-in through `UseCompositions: true` on
