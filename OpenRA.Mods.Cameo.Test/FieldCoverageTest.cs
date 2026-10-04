@@ -562,6 +562,25 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void MultiInstanceTraitInfosDoNotCrashThePlanner()
+		{
+			// Packs model conditional power as second instances (Power@upgraded: ~190 actors carry
+			// two or more Power lines). TraitInfoOrDefault throws on multi-instance TypeDictionary
+			// entries; the planner's buildable-item scans must tolerate them — observed live crash
+			// on "A Nuclear Winter" (EMBER flag, 2026-10-04).
+			var variantPlant = new ActorInfo("pp", new BuildableInfo(), new BuildingInfo(), new GivesBuildableAreaInfo(),
+				Power(100), Power(40));
+			Assert.DoesNotThrow(() => ExpansionPlannerBotModule.IsPowerPlant(variantPlant));
+			Assert.That(ExpansionPlannerBotModule.IsPowerPlant(variantPlant), Is.True);
+			Assert.That(ExpansionPlannerBotModule.IsCrawlLink(variantPlant), Is.True);
+
+			// All-negative variant (a sink, not a plant) and single-instance still behave.
+			var sink = new ActorInfo("sink", new BuildableInfo(), new BuildingInfo(), new GivesBuildableAreaInfo(),
+				Power(-50), Power(-20));
+			Assert.That(ExpansionPlannerBotModule.IsPowerPlant(sink), Is.False);
+		}
+
+		[Test]
 		public void SiloOverrideThrottledUnderTheLaw()
 		{
 			// Law on: 85% capacity wants nothing, 96% wants a silo, 96% with one already in

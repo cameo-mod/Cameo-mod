@@ -340,7 +340,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (mcvRoles.TryGetValue(vehicle.Name, out var role))
 				return role;
 
-			var into = vehicle.TraitInfoOrDefault<TransformsInfo>()?.IntoActor;
+			var into = vehicle.TraitInfos<TransformsInfo>().FirstOrDefault()?.IntoActor;
 			var intoInfo = into != null && world.Map.Rules.Actors.TryGetValue(into, out var ai) ? ai : null;
 			role = ClassifyMcv(constructionMcvTypes.Contains(vehicle.Name), intoInfo?.HasTraitInfo<RefineryInfo>() ?? false);
 			mcvRoles[vehicle.Name] = role;
@@ -1131,7 +1131,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				.SelectMany(q => q.BuildableItems())
 				.Where(b => b.HasTraitInfo<BuildingInfo>()
 					&& b.TraitInfos<ITechTreePrerequisiteInfo>().Any(i => i.Prerequisites(b).Any(missing.Contains)))
-				.OrderBy(b => b.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? int.MaxValue)
+				.OrderBy(b => b.TraitInfos<ValuedInfo>().FirstOrDefault()?.Cost ?? int.MaxValue)
 				.ThenBy(b => b.Name, StringComparer.Ordinal)
 				.Select(b => b.Name)
 				.FirstOrDefault();
@@ -1479,7 +1479,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				{
 					refineryCells.Add(a.Location);
 					if (Info.FieldCoverage)
-						refineryTiles.Add(a.Info.TraitInfoOrDefault<BuildingInfo>()?.Tiles(a.Location).ToList());
+						refineryTiles.Add(a.Info.TraitInfos<BuildingInfo>().FirstOrDefault()?.Tiles(a.Location).ToList());
 				}
 
 				if (Info.FieldCoverage)
@@ -1494,13 +1494,13 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				if (a.Info.HasTraitInfo<GivesBuildableAreaInfo>())
 				{
 					buildingCells.Add(a.Location);
-					if (Info.FieldCoverage && a.Info.TraitInfoOrDefault<BuildingInfo>() is BuildingInfo abi)
+					if (Info.FieldCoverage && a.Info.TraitInfos<BuildingInfo>().FirstOrDefault() is { } abi)
 						buildingTiles.AddRange(abi.Tiles(a.Location));
 				}
 				else if (a.Info.HasTraitInfo<BuildingInfo>())
 					continue;
 				else if (a.Info.HasTraitInfo<AttackBaseInfo>() && !a.Info.HasTraitInfo<HarvesterInfo>())
-					guards.Add((a.Location, a.Info.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? 0));
+					guards.Add((a.Location, a.Info.TraitInfos<ValuedInfo>().FirstOrDefault()?.Cost ?? 0));
 			}
 
 			if (buildingCells.Count == 0)
@@ -1984,14 +1984,14 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		{
 			var cheapest = world.Map.Rules.Actors.Values
 				.Where(a => a.HasTraitInfo<RefineryInfo>() && a.HasTraitInfo<BuildableInfo>() && a.HasTraitInfo<BuildingInfo>())
-				.OrderBy(a => a.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? int.MaxValue)
+				.OrderBy(a => a.TraitInfos<ValuedInfo>().FirstOrDefault()?.Cost ?? int.MaxValue)
 				.ThenBy(a => a.Name, StringComparer.Ordinal)
 				.FirstOrDefault();
 			if (cheapest == null)
 				return default;
 
-			return (cheapest, cheapest.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? 0,
-				Math.Max(0, cheapest.TraitInfoOrDefault<BuildableInfo>()?.BuildDuration ?? 0));
+			return (cheapest, cheapest.TraitInfos<ValuedInfo>().FirstOrDefault()?.Cost ?? 0,
+				Math.Max(0, cheapest.TraitInfos<BuildableInfo>().FirstOrDefault()?.BuildDuration ?? 0));
 		}
 
 		/// <summary>
@@ -2003,7 +2003,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			a.HasTraitInfo<BuildableInfo>() && a.HasTraitInfo<BuildingInfo>()
 			&& a.HasTraitInfo<GivesBuildableAreaInfo>() && !a.HasTraitInfo<RefineryInfo>();
 
-		public static bool IsPowerPlant(ActorInfo a) => (a.TraitInfoOrDefault<PowerInfo>()?.Amount ?? 0) > 0;
+		public static bool IsPowerPlant(ActorInfo a) => a.TraitInfos<PowerInfo>().Any(p => p.Amount > 0);
 
 		public static (ActorInfo Info, int Cost, int BuildTicks) PickCrawlLink(
 			(ActorInfo Info, int Cost, int BuildTicks) power, (ActorInfo Info, int Cost, int BuildTicks) other) =>
@@ -2019,11 +2019,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				queues++;
 				foreach (var item in queue.BuildableItems())
 				{
-					var bi = item.TraitInfoOrDefault<BuildableInfo>();
+					var bi = item.TraitInfos<BuildableInfo>().FirstOrDefault();
 					if (bi == null || !item.HasTraitInfo<BuildingInfo>())
 						continue;
 
-					var cost = item.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? 0;
+					var cost = item.TraitInfos<ValuedInfo>().FirstOrDefault()?.Cost ?? 0;
 					var entry = (item, cost, queue.GetBuildTime(item, bi));
 					// The Refinery trait, from rules: the by-name lists were emptied by the role rollout (§2.8).
 					if (item.HasTraitInfo<RefineryInfo>())

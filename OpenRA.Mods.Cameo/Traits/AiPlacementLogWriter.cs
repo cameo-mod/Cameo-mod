@@ -314,7 +314,7 @@ namespace OpenRA.Mods.Cameo.Traits
 						AiMatchLogWriter.AppendNumber(builder, "anchor_dist", Math.Round(distance, 1));
 
 						var footprint = world.Map.Rules.Actors.TryGetValue(actor, out var placed)
-							? placed.TraitInfoOrDefault<BuildingInfo>()?.Tiles(cell).ToList()
+							? placed.TraitInfos<BuildingInfo>().FirstOrDefault()?.Tiles(cell).ToList()
 							: null;
 						var (fieldId, tier, gap) = telemetry.PlacementFieldContext(owner, cell, footprint);
 						if (fieldId >= 0)
