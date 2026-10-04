@@ -1,3 +1,29 @@
+# 2026-10-04 — Devin-T2Verify (+Tier4 draft): multi-TraitInfo sweep — ratchet + 16 hazard conversions
+
+*Devin-T2Verify, taking over Tier4's parked draft audit (`tools/audit/audit_multi_traitinfo*.py`
+in their `t4-multi` worktree).* Branch `devin/t2verify/multi-traitinfo-sweep` on
+`origin/inc/2026_10_04g` (rebased after the lead pushed INC-g).
+
+- The draft already modeled C# type hierarchy + yaml-resolved actor trait sets; the takeover fixed
+  three gaps: `actor_info_types` collected into a `set()` (deduped `Power@a`+`Power@b` — the exact
+  EMBER crash class), a dead O(types²) `impl_cache` precompute (hang), and `SCAN_ROOTS` pointing at
+  `engine/` instead of the mod-side CA/Cameo/Fransbot assemblies. Added the `X`/`XInfo` name-strip
+  fallback so `ConditionalTraitInfo : TraitInfo` (non-generic) descendants map to their produced
+  trait. Now a multiset-based blocking ratchet wired into `run_all.sh`.
+- Landscape: 982 single-instance lookup sites scanned, 224 multi-capable trait types, **16 real
+  hazards** converted to collection APIs with per-site aggregates — `Any` (PowerInfo power-plant,
+  AttackFollow target match iterates ALL instances), `Max` (RangedGpsProvider radar range),
+  `FirstOrDefault` (optional render/dock/attach lookups), `First` (required traits — preserves
+  throw-on-absent). Single-instance actors behave bit-identically.
+- Regression pins in `MultiTraitInfoSweepTest` (two fabricated `PowerInfo`/`RangedGpsProviderInfo`
+  instances via the `new ActorInfo(...)` trick; Fransbot ref added to the test csproj for the exact
+  `FransActorClass.IsPowerPlant` crash shape).
+
+Gates: build 0/0 all four assemblies; tests 1122/1122 (+2 new); fog PASS 82/266; mutation PASS
+169/0; arch-freshness PASS (regen folds INC-g's own merge drift); wiring 0 ERROR; doc_claims
+_clean_; `audit_multi_traitinfo` PASS 0 dangerous; boot gate re-run under the per-run-SupportDir
+method after the false-pass ruling below.
+
 # 2026-10-04 — Claude (lead): INC-f doc re-pin, INC-g built and pushed, boot-gate false pass
 
 *Claude.* `inc/2026_10_04g` @ 3a661c8b0 (pushed with `inc/2026_10_04f`).

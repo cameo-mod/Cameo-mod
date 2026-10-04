@@ -10,6 +10,7 @@
 #endregion
 
 using System.Collections.Generic;
+using System.Linq;
 using OpenRA.Graphics;
 using OpenRA.Mods.Cameo.Graphics;
 using OpenRA.Mods.Common.Traits;
@@ -54,7 +55,7 @@ namespace OpenRA.Mods.Cameo.Traits.Render
 
 			// The base keeps its own copy privately, so resolve our own rather than
 			// reaching into it.
-			interactable = self.Trait<Interactable>();
+			interactable = self.TraitsImplementing<Interactable>().First();
 		}
 
 		protected override IEnumerable<IRenderable> RenderSelectionBars(Actor self, WorldRenderer wr, bool displayHealth, bool displayExtra)

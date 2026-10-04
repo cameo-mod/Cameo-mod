@@ -479,7 +479,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		/// <summary>The provider's dot radius in whole cells (Range is a WDist; floors — a partial cell does not count).</summary>
 		public static int RadarRangeCells(ActorInfo info)
 		{
-			return info.TraitInfoOrDefault<RangedGpsProviderInfo>()?.Range.Length / 1024 ?? 0;
+			// Max over providers: an actor's effective dot radius is its strongest coverage
+			// (multi-provider actors like ra1_allies_radardome crash single-instance lookups).
+			return info.TraitInfos<RangedGpsProviderInfo>().Select(p => p.Range.Length).DefaultIfEmpty().Max() / 1024;
 		}
 
 		static bool IsAircraftQueueName(string name, ProductionQueueInfo[] queues)

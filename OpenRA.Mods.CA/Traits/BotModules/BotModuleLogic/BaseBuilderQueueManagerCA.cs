@@ -1001,7 +1001,7 @@ namespace OpenRA.Mods.CA.Traits
 				zone1.ExceptWith(zone0);
 			}
 
-			var dockOffset = actorInfo.TraitInfoOrDefault<DockHostInfo>()?.DockOffset ?? WVec.Zero;
+			var dockOffset = actorInfo.TraitInfos<DockHostInfo>().FirstOrDefault()?.DockOffset ?? WVec.Zero;
 			var valuable = baseBuilder.ResourceMapModule?.Info.ValuableResourceTypes;
 
 			CPos? gap1 = null;

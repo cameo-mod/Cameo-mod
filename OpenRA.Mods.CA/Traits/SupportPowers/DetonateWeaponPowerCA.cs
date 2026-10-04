@@ -121,7 +121,7 @@ namespace OpenRA.Mods.CA.Traits
 
 			if (!string.IsNullOrEmpty(Info.ActivationSequence))
 			{
-				var wsb = self.Trait<WithSpriteBody>();
+				var wsb = self.TraitsImplementing<WithSpriteBody>().First();
 				wsb.PlayCustomAnimation(self, Info.ActivationSequence);
 			}
 

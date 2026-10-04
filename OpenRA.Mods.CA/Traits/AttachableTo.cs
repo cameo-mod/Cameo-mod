@@ -82,7 +82,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		void INotifyCreated.Created(Actor self)
 		{
-			Carryable = self.TraitOrDefault<Carryable>();
+			Carryable = self.TraitsImplementing<Carryable>().FirstOrDefault();
 			notifyAttached = self.TraitsImplementing<INotifyAttachedTo>().ToArray();
 		}
 
@@ -250,7 +250,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		void INotifyRemovedFromWorld.RemovedFromWorld(Actor self)
 		{
-			var carryable = self.TraitOrDefault<Carryable>();
+			var carryable = self.TraitsImplementing<Carryable>().FirstOrDefault();
 			if (carryable != null && carryable.Carrier != null)
 				foreach (var attachable in attached)
 					attachable.HostEnteredCargo();
@@ -258,7 +258,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		void INotifyAddedToWorld.AddedToWorld(Actor self)
 		{
-			var carryable = self.TraitOrDefault<Carryable>();
+			var carryable = self.TraitsImplementing<Carryable>().FirstOrDefault();
 			if (carryable != null && carryable.Carrier != null)
 				foreach (var attachable in attached)
 					attachable.HostExitedCargo();
