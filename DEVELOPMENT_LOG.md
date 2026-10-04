@@ -1,3 +1,22 @@
+# 2026-10-04 — NOVA: hotspot #3 — CreateAttackForce decision extraction (AttackForceEvalCA)
+
+*NOVA.* Branch `devin/nova/hotspot3-attackforce` stacked on `hotspot8-preposition@d332aead8`
+(same-file chain per ORDERS_2026-10-04b). CreateAttackForce decision atoms -> pure static
+`AttackForceEvalCA`: `ShouldLaunch` (the MaxIdleUnits overflow arm OR value+count gate,
+with the ValueOnlyAttackLaunch count-waiver requiring SquadValue>0), `DefendHoldActive`
+(hold-window boundary, <= Max(0,hold)), `RaidSteerCap` (overcommit-% vs flat floor,
+long-math, int.MaxValue clamp), `EscortsNeeded` (per-artillery escorts capped at a third
+of the assault, computed on the pre-removal count). Bit-identical wire-in at 4 sites.
+
+Findings (fleet NOTE_2026-10-04_nova_hotspot3_tree): F1 pool.Clear() drops undrafted
+members into FindNewUnits rescan churn (P3, lead ruling); F2 a vetoed wave still exhausts
+held Defend regions (P4, defensible, flagged); F3 per-iteration mission reselect churn (P4).
+Checked-and-clear: quiet-tick re-arm guard, region-change clock reset, Parent IsValid
+ternaries, monotone Defend-loop termination.
+
+`AttackForceEvalTest`: 9 tests, every arm + boundary. 954/954 suite, build 0 errors,
+boot gate PASS.
+
 # 2026-10-04 — NOVA: AR-S residual — squad order dedup + flee-episode home latch (BK_squad_order_dedup)
 
 *NOVA.* Branch `devin/nova/ars-stutter` from master `3ba05ede7`, off EMBER's march-lattice

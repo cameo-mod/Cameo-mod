@@ -3093,8 +3093,8 @@ namespace OpenRA.Mods.CA.Traits
 			var requiredSize = ApplyForceScale(desiredAttackForceSize, forceScale);
 
 			// CA F2p2 (A5-2): ValueOnlyAttackLaunch drops the unit-count gate when a squad value threshold is configured; MaxIdleUnits still applies.
-			var countGateMet = (Info.ValueOnlyAttackLaunch && Info.SquadValue > 0) || unitsHangingAroundTheBase.Count >= requiredSize;
-			if (unitsHangingAroundTheBase.Count >= maxIdleUnits || (idleUnitsValue >= requiredValue && countGateMet))
+			if (AttackForceEvalCA.ShouldLaunch(unitsHangingAroundTheBase.Count, maxIdleUnits,
+					idleUnitsValue, requiredValue, requiredSize, Info.ValueOnlyAttackLaunch, Info.SquadValue))
 			{
 				// 12.5: squads form to the same mix production builds - an assault
 				// missing a required role stages until the pool covers it, bounded
@@ -3134,7 +3134,7 @@ namespace OpenRA.Mods.CA.Traits
 						}
 
 						var heldTicks = World.WorldTick - defendMissionHeldSince;
-						if (heldTicks <= Math.Max(0, Info.MissionDefendHoldTicks))
+						if (AttackForceEvalCA.DefendHoldActive(heldTicks, Info.MissionDefendHoldTicks))
 						{
 							AIUtils.BotDebug("AI ({0}): holding {1} idle units for Defend mission in region {2} ({3}/{4} ticks)",
 								Player.ClientIndex, unitsHangingAroundTheBase.Count, mission.RegionIndex, heldTicks, Info.MissionDefendHoldTicks);
@@ -3187,9 +3187,8 @@ namespace OpenRA.Mods.CA.Traits
 					if (!Info.UseRaidMissionSteering)
 						return null;
 
-					var cap = (int)Math.Min(int.MaxValue, Math.Max(
-						(long)idleUnitsValue * Info.RaidMissionSteerOvercommitPercent / 100,
-						(long)Info.RaidMissionSteerMinValue));
+					var cap = AttackForceEvalCA.RaidSteerCap(idleUnitsValue,
+						Info.RaidMissionSteerOvercommitPercent, Info.RaidMissionSteerMinValue);
 					return BestRaidForSteering(missionProviders, cap);
 				}
 
@@ -3264,8 +3263,8 @@ namespace OpenRA.Mods.CA.Traits
 						// Ground vehicles that can hit ground, at most a third of the
 						// assault: the screen must win the flanker fight without
 						// stripping the raid itself (12.4a review item).
-						var escortsNeeded = Math.Min(artilleryParent.Units.Count * Info.FireSupportEscortPerArtillery,
-							attackForce.Units.Count / 3);
+						var escortsNeeded = AttackForceEvalCA.EscortsNeeded(
+							artilleryParent.Units.Count, attackForce.Units.Count, Info.FireSupportEscortPerArtillery);
 						foreach (var escort in attackForce.Units
 							.Where(u => !Info.FireSupportTypes.Contains(u.Actor.Info.Name) && CanEscortArtillery(u.Actor))
 							.OrderByDescending(u => UnitValue(u.Actor))
