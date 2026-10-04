@@ -1,5 +1,9 @@
 # Cameo — THE HANDOFF
 
+## 2026-10-04 — Boss (Devin): corrective review leaves T4 and B1 open
+
+Reviewed takeover `3d6c39ae3`: T1/T2/T3 resolved statically; T4 still loses logs when a spectator admin departs. A mod-side exclusive-controller writer policy and regression matrix were sent to T3Verify. BP `7690ddd07` still has B1 allocation open; B2/B3/B4 resolved. [Current verdict](review_2026_10_04_takeover_bp.md) preserves both remaining issues and author-reported validation. Both corrective tasks remain active; no gameplay or merge approval.
+
 ## 2026-10-04 — Boss (Devin): BP corrective re-review, one blocker remains
 
 Reviewed BP `7690ddd07`: cluster filtering, safe back fallback and extra-radar coverage gating resolve B2/B3/B4. B1 still fails uneven allocation: two radars on one served front can suppress the first radar on another; aggregate regression requested from T3Verify. [Current review verdict](review_2026_10_04_takeover_bp.md) records the exact counterexample and author-reported gates. Takeover T1-T4 remain pending. No gameplay or merge approval; REF-1 still gates BP phase 2.

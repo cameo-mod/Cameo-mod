@@ -1,3 +1,7 @@
+# 2026-10-04 — Boss (Devin): corrective review leaves T4 and B1 open
+
+Reviewed takeover `3d6c39ae3` (all six files: implementation, tests, DESIGN/AI_MATCH_LOG/development log): T1/T2/T3 resolved statically; T4 still loses logs when a spectator admin departs because AdminConnected never clears. A mod-side exclusive-controller writer policy and regression matrix were sent to T3Verify. BP `7690ddd07` still has B1 allocation open; B2/B3/B4 resolved. `docs/review_2026_10_04_takeover_bp.md` preserves both remaining issues and author-reported validation. Both corrective tasks remain active; no gameplay or merge approval; no source/game work by reviewer.
+
 # 2026-10-04 — Boss (Devin): BP corrective re-review at 7690ddd07
 
 Inspected the entire correction diff and added tests. B2/B3 and B4's extra-radar candidate gate are resolved statically. B1 remains open because aggregate target/owned comparison ignores per-front allocation (A has2, B has0, target2 suppresses B). Sent one consolidated remaining-blocker response and updated corrective task 01a106a7-0231-70c0-9d35-ba91cf698e2b. Requested aggregate regression cases; owner-reported gates are recorded separately from review evidence. Next: review B1 correction and takeover T1-T4 checkpoint; no source/game work by reviewer.

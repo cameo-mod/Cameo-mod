@@ -1,6 +1,22 @@
 # 2026-10-04 independent review recovery record
 
-## Current verdict: BP re-review at 7690ddd07
+## Current verdict: takeover 3d6c39ae3 and BP 7690ddd07
+
+Takeover T1 (capture window), T2 (lobby-team snapshots, including logged relationships after departure), and T3 (resolved hard-bot condition grants) are resolved by static review of 3d6c39ae3. T4's duplicate writer with a connected spectator admin is fixed, but spectator-admin departure still loses the match record because AdminConnected never clears. This is documented by the author and remains an open review issue. BP B1 remains open for aggregate radar allocation; B2/B3/B4 were resolved statically at 7690ddd07. Earlier findings/verdicts below are history.
+
+T4 can be addressed mod-side without observing spectator disconnects: for enabled takeover with an elected controller, make that controller the exclusive writer from match start; otherwise retain Game.IsHost. The suggested IsLogOwner body sent to T3Verify was:
+
+```csharp
+if (takeover != null && takeover.Enabled && takeover.Controller >= 0)
+    return takeover.IsLocalClientController;
+return Game.IsHost;
+```
+
+Requested owner-selection regressions: spectator admin connected and absent leave the same sole player writer; a playing controller disconnect elects the next writer; a surrendered admin cannot duplicate the active controller; disabled takeover and single-player preserve host ownership. Update DESIGN/AI_MATCH_LOG to the selected policy rather than describing loss of the record as an unavoidable engine-pin limitation. No engine change requested.
+
+Author-reported takeover validation at 3d6c39ae3: 852/852 tests, zero build warnings/errors, fog/direct-mutation audits PASS, architecture R1/R2 OK, boot gate PASS. Reviewer inspected code/test/doc changes and did not rerun gates or multiplayer smoke. Corrective tasks remain open: T4 = 01a106a7-01f8-79b0-9cb6-0cd86896758f; B1 = 01a106a7-0231-70c0-9d35-ba91cf698e2b. Both remaining concerns were sent together to T3Verify; merge/campaign authority stays with Claude.
+
+## Earlier verdict: BP re-review at 7690ddd07
 
 B2 (cluster membership), B3 (safe back fallback), and B4's extra-radar candidate coverage gate are resolved by static code review. B1 remains open: the number is now an absolute target, but existing radar allocation can still prevent an unserved front receiving its first provider. Takeover T1-T4 remain pending. The original findings below are checkpoint history, superseded by this current verdict where stated.
 
@@ -52,6 +68,6 @@ The user asked every owner to preserve exact checkpoints, verification actually 
 ## Next session
 
 1. Read this record and the fleet status note before relying on mailbox history.
-2. Obtain T3Verify corrective checkpoint, review all four fixes, and preserve Tier4 dedicated-client smoke results.
+2. Obtain the remaining T4 writer-selection correction, review the ownership regressions, and preserve Tier4 dedicated-client smoke results.
 3. Review BP corrective checkpoint against remaining B1; B2/B3/B4 resolved statically at 7690ddd07; keep QM/FragileTypes phase 2 blocked until REF-1 lands under Claude coordination.
 4. Review available REF-1/baseline checkpoints. Claude retains merge and campaign authority.
