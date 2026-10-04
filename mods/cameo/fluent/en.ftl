@@ -24,6 +24,10 @@ checkbox_crates =
    .label = Crates
    .description = Collect crates with units to receive random bonuses.
 
+checkbox_bot_takeover =
+   .label = Replace disconnected players with AI
+   .description = When a player disconnects or surrenders, a hard AI takes over their forces. In two-team games the last undefeated player of a team still loses normally.
+
 button_tab_container_asengine = Attacque Supérior
 
 ## ingame_observer.yaml

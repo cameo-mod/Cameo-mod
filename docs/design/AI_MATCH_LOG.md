@@ -40,6 +40,12 @@ Strings are the internal names, never the display/translated names.
     "episode_timeline": [ { "tick": 0, "personality": "rush", "composition": "", "kills_cost": 0, "deaths_cost": 0 },
                           { "tick": 9000, "personality": "rush", "composition": "tdgdi_armorpush", "kills_cost": 1500, "deaths_cost": 800 } ]
   },
+  "takeover": {
+    "taken_over_at": 12340,
+    "trigger": "disconnect",
+    "bot_type": "hard",
+    "controller_client": 3
+  },
   "stats": {
     "units_killed": 0,
     "units_lost": 0,
@@ -78,6 +84,17 @@ Strings are the internal names, never the display/translated names.
 `schema` is `2` for records carrying the composition/episode fields; older
 schema-1 records in the same file remain valid and the aggregator pools both
 (they simply contribute no composition/episode rows).
+
+- `takeover` — present only when the seat was a lobby human replaced by the
+  takeover AI (DESIGN §19.14). `taken_over_at` is the world tick of the synced
+  trigger, `trigger` is `disconnect` or `surrender`, `bot_type` is the activated
+  bot stack (`hard`), and `controller_client` is the elected client running the
+  bot at takeover time. `player.bot_type` repeats the assigned stack for these
+  seats (the field is normally `player.BotType`, which stays null on a former
+  human). Any record carrying this block must be excluded from learning and A/B
+  pools. Log ownership follows the elected takeover controller, not just the
+  lobby admin, so a dedicated-server match keeps its record when the admin
+  drops mid-game.
 
 - `record_id` — `game_uid + "|" + player.InternalName`. When `game_uid` is empty
   (skirmish without one), substitute a per-match `Guid.NewGuid().ToString("N")`

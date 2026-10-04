@@ -1323,7 +1323,18 @@ World:
 		Actors: World, Player
 		Condition: crates_enabled
 	PathFinder:
-	ValidateOrder:
+	# Stock ValidateOrder removed: CameoValidateOrder shadows it below with identical
+	# authority plus takeover seats (validator order can't veto, only tighten).
+	CameoValidateOrder:
+	BotTakeoverTracker:
+	LobbySystemActorConditionCheckbox@BOT_TAKEOVER:
+		ID: bot_takeover
+		Label: checkbox_bot_takeover.label
+		Description: checkbox_bot_takeover.description
+		Enabled: true
+		DisplayOrder: 8
+		Actors: World
+		Condition: takeover_enabled
 	DebugPauseState:
 	ObjectivesPanel:
 		PanelName: SKIRMISH_STATS
