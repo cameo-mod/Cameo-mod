@@ -11,6 +11,11 @@ Player:
 	-ConquestVictoryConditions:
 	BotPersonalityController:
 		Conditions: personality-rush
+	# The bandit module validates every PersonalityArms entry against the controller's set at
+	# rules load, even though it is off by default — narrow its arms to this map's one personality
+	# or the map fails to load at all (P0, architecture review 2026-10-04).
+	PlanBanditBotModule:
+		PersonalityArms: rush
 	SquadManagerBotModuleCA@rush:
 		# The gate proves the publish -> consume -> assign pipeline; a remembered
 		# guard-post threat must not turn the raid target away. -1 disables the
