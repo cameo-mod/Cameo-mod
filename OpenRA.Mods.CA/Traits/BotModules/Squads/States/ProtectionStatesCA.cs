@@ -209,11 +209,15 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 		// AR-S: the latch wins over the freshly computed mode — a lure that goes quiet keeps
 		// falling back (Move), never downgrades to fighting on the way; a holding squad that
 		// starts losing upgrades to the lure run. Grouped order only carries changed members.
+		// EMBER review 2026-10-04: the latch itself is armed-gated — unarmed takes the fresh
+		// mode every call, preserving the pre-change order stream.
 		void QueueRallyOrder(SquadCA owner, int mode, CPos rally)
 		{
-			rallyMode = System.Math.Max(rallyMode, mode);
+			if (owner.SquadManager.Info.UseSquadOrderDedup)
+				rallyMode = System.Math.Max(rallyMode, mode);
 
-			var orderName = rallyMode == 2 ? "Move" : "AttackMove";
+			var m = owner.SquadManager.Info.UseSquadOrderDedup ? rallyMode : mode;
+			var orderName = m == 2 ? "Move" : "AttackMove";
 			var changed = owner.Units.Select(u => u.Actor)
 				.Where(a => owner.OrderChanged(a, SquadOrderKey.ForCell(orderName, rally))).ToArray();
 			if (changed.Length > 0)
