@@ -1,3 +1,17 @@
+# 2026-10-04 (later) — NOVA P0: raid-gate map loads again (`devin/nova/raidgate-armfix`)
+
+*Devin (nova).* Claude's master review flagged the 2026-10-03 `PersonalityArms` loud-fail
+(my own nova-review hardening): `RulesetLoaded` validated every arm against
+`BotPersonalityController.Conditions`, which maps may legitimately narrow — the
+`ai_raid_gate_20260928` map pins `personality-rush` and could not load at all.
+The cross-check moved out of `RulesetLoaded` (map-overridable sets are no
+load-time invariant); `Resolve()` now early-outs on `IsTraitDisabled` and warns
+once per unreachable arm when the bandit is actually armed — an arm with no
+matching `personality-*` on the map can't pin; the controller re-randomizes at
+enable (`TraitEnabled` condition ??= random). Sibling session carries the
+one-line map override (`devin/nova/raid-gate-mapfix`). Verified: the gate map
+loads, game starts, match completes, 0 bandit lines with the switch off.
+
 # 2026-10-03 — coordinator: tier-3 hotfix (INC c) + ORDERS round 2 to NOVA/DAWN/EMBER
 
 *Claude.* INC c `3c793d4c3` = DAWN `18556ada5` (GetVariableObservers `override` + base: tier 3 was permanently disabled

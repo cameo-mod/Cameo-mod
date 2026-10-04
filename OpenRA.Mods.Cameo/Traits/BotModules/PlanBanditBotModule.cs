@@ -108,13 +108,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				if (arm.IndexOf('@') >= 0 || arm.IndexOf("__", StringComparison.Ordinal) >= 0)
 					throw new YamlException($"PlanBanditBotModule: PersonalityArms entry '{arm}' must be a bare personality name.");
 
-			// Nova review 2026-10-03: an arm naming no controller condition silently falls back to the
-			// random draw — fail loud instead, the same check PinnedPersonalities gets.
-			var controller = ai.TraitInfos<BotPersonalityControllerInfo>().FirstOrDefault();
-			if (controller != null)
-				foreach (var arm in PersonalityArms)
-					if (!controller.Conditions.Any(c => BotPersonalityController.PersonalityName(c, controller.PersonalityPrefix) == arm))
-						throw new YamlException($"PlanBanditBotModule: PersonalityArms entry '{arm}' has no matching personality-* condition.");
+			// The arm↔controller cross-check deliberately does NOT live here: Conditions is
+			// map-overridable, so a map that narrows the personality set (ai_raid_gate pins
+			// personality-rush) is legal and must still load. Unreachable arms are warned
+			// once at arm time instead — see Resolve().
 		}
 
 		public override object Create(ActorInitializer init) { return new PlanBanditBotModule(init.Self, this); }
@@ -165,7 +162,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		/// (personality first, then plan) and frozen for the match.</summary>
 		void Resolve()
 		{
-			if (resolved)
+			// A disabled bandit never resolves (plan_bandits is off by default): no draw, no pin,
+			// no warn. The gate retries cheaply until the trait is enabled or the match ends.
+			if (resolved || IsTraitDisabled)
 				return;
 
 			resolved = true;
@@ -183,6 +182,16 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			if (Info.PersonalityArms.Length > 0)
 			{
+				// Arm-time check (the load-time version broke maps that narrow the controller's
+				// personality set, e.g. ai_raid_gate -> personality-rush): an arm with no matching
+				// personality-* condition on THIS map can never pin — TraitEnabled falls back to a
+				// random pick. Warn once when the bandit is actually armed; still draw.
+				var controller = player.PlayerActor.TraitOrDefault<BotPersonalityController>();
+				if (controller != null)
+					foreach (var candidate in Info.PersonalityArms)
+						if (!controller.Info.Conditions.Any(c => BotPersonalityController.PersonalityName(c, controller.Info.PersonalityPrefix) == candidate))
+							Log.Write("debug", $"AI {player.InternalName}: plan-bandit personality arm '{candidate}' has no matching personality-* condition on this map — it cannot pin and re-randomizes");
+
 				var arm = Choose("Personality", ownFaction, enemyFaction, Info.PersonalityArms);
 				if (arm != null)
 				{
