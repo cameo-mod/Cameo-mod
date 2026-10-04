@@ -1,5 +1,15 @@
 # Cameo — THE HANDOFF
 
+## 2026-10-04 — NOVA N2 receipt: EL-1 v2 on current master
+
+**INC-N ready: `devin/nova/el1-v2` — switch: `AQ_inmatch_adapt` (default off).** Round-2 N2: the EL-1 in-match
+adaptation lane rebuilt from master `8e86fca23` (supersedes `devin/nova/el1-import`, pre-F2/INC-b base). Ported as
+hunks onto master's files — checkout would have reverted `BotFactionView.PublicFactionOf`, `bandit.armed`/
+`WatchConditions`, and §12.33/§12.34. Own-bot log lookup; `IsTraitDisabled` self-guards on provider + tick;
+`IBotInMatchAdaptation` consumed only via `FirstEnabledTraitOrDefault`. Gates: build 0 err / 0 mod-code warnings,
+839/839 tests (+5 `InMatchAdaptTest`), arch coverage + module map regenerated, wiring/fog/direct-mutation audits
+PASS, `tools/boot_gate.ps1` PASS. #792 closed as superseded.
+
 ## 2026-10-03 (night) — Claude (coordinator): ORDERS round 2 for NOVA / DAWN / EMBER + the tier-3 hotfix
 
 **Orders (binding, read first): `Cameo-mod-fleet/ORDERS_2026-10-03_claude_round2_nova_dawn_ember.md`.** Summary:
