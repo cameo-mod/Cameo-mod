@@ -61,3 +61,35 @@ jobs:
           $ENV:TREAT_WARNINGS_AS_ERRORS = "false"
           .\make.ps1 check-scripts
           .\make.ps1 test
+
+  # Cameo-specific: the NUnit suite in OpenRA.Mods.Cameo.Test plus the
+  # bot-module line-coverage ratchet (tools/audit/audit_test_coverage.py T4).
+  # NOTE: coverlet's collector/msbuild/console drivers all record zero hits in
+  # this EngineRootPath layout; dotnet-coverage (CLR profiler) is the working
+  # collector — see tools/ai/coverage_report.py.
+  cameo-tests:
+    name: Cameo NUnit + bot-module coverage
+    runs-on: windows-2022
+
+    steps:
+      - name: Clone Repository
+        uses: actions/checkout@v4
+
+      - name: Install .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Build engine and mods
+        run: .\make.ps1 all
+        env:
+          TREAT_WARNINGS_AS_ERRORS: 'false'
+
+      - name: Run Cameo NUnit suite
+        run: dotnet test OpenRA.Mods.Cameo.Test/OpenRA.Mods.Cameo.Test.csproj -c Release
+
+      - name: Bot-module coverage ratchet
+        run: |
+          dotnet tool install -g dotnet-coverage
+          python tools/ai/coverage_report.py --collect --xml TestResults/coverage.cobertura.xml
+          python tools/audit/audit_test_coverage.py --coverage-xml TestResults/coverage.cobertura.xml

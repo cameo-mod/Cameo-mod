@@ -1,5 +1,17 @@
 # Cameo — THE HANDOFF
 
+## 2026-10-04 — EMBER receipt: AR-T1 coverage infrastructure
+
+**INC-N ready: `devin/ember/coverage-infra` — no switch (test/audit tooling only, no gameplay code).** From master
+`3ba05ede7`. `dotnet-coverage` is the working collector (coverlet's three drivers all record 0% in the
+`EngineRootPath` layout — instrumented copies never reach the vstest testhost). New: `tools/ai/coverage_report.py`
+(collect/parse → per-file table + `tools/tests/coverage_baseline.json`), T4 flag in `audit_test_coverage.py`
+(`--coverage-xml` per-file line-rate ratchet, ε=0.1pt), C# scan widened to `OpenRA.Mods.CA`, floors re-measured at
+truth (933/3076/496 — T3's +272 is the recorded CA debt). Baseline evidence: `docs/audit/coverage_botmodules.md`,
+106 bot-module files, **line 19.4% / branch 17.2%**. CI: additive `cameo-tests` job in `ci.yml` (org CI disabled —
+runs when enabled). Gates: 13/13 new py tests, bare audit exit 0, self-check 0 regressions/106 baselined,
+`dotnet-coverage` run: 933/933 NUnit. Next: AR-T2 shared fixtures, AR-2 personality-pin, AR-4 PlugSpawner.
+
 ## 2026-10-04 — NOVA N2 receipt: EL-1 v2 on current master
 
 **INC-N ready: `devin/nova/el1-v2` — switch: `AQ_inmatch_adapt` (default off).** Round-2 N2: the EL-1 in-match

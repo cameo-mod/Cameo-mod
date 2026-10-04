@@ -1,0 +1,534 @@
+{
+ "files": {
+  "OpenRA.Mods.CA/Traits/BotModules/BaseBuilderBotModuleCA.cs": {
+   "line_rate": 2.14,
+   "branch_rate": 1.49,
+   "lines": 1026
+  },
+  "OpenRA.Mods.CA/Traits/BotModules/BotDifficultyLadder.cs": {
+   "line_rate": 11.54,
+   "branch_rate": 6.25,
+   "lines": 52
+  },
+  "OpenRA.Mods.CA/Traits/BotModules/BotLimits.cs": {
+   "line_rate": 0.0,
+   "branch_rate": 0.0,
+   "lines": 30
+  },
+  "OpenRA.Mods.CA/Traits/BotModules/BotLimitsResolver.cs": {
+   "line_rate": 0.0,
+   "branch_rate": 0.0,
+   "lines": 12
+  },
+  "OpenRA.Mods.CA/Traits/BotModules/BotMission.cs": {
+   "line_rate": 100.0,
+   "branch_rate": 83.33,
+   "lines": 4
+  },
+  "OpenRA.Mods.CA/Traits/BotModules/BotMissionLog.cs": {
+   "line_rate": 28.12,
+   "branch_rate": 46.43,
+   "lines": 128
+  },
+  "OpenRA.Mods.CA/Traits/BotModules/BotModuleLogic/AdaptiveCounterProduction.cs": {
+   "line_rate": 9.39,
+   "branch_rate": 7.84,
+   "lines": 213
+  },
+  "OpenRA.Mods.CA/Traits/BotModules/BotModuleLogic/AirLimits.cs": {
+   "line_rate": 100.0,
+   "branch_rate": 100.0,
+   "lines": 28
+  },
+  "OpenRA.Mods.CA/Traits/BotModules/BotModuleLogic/BaseBuilderQueueManagerCA.cs": {
+   "line_rate": 0.0,
+   "branch_rate": 0.0,
+   "lines": 1314
+  },
+  "OpenRA.Mods.CA/Traits/BotModules/BotModuleLogic/BotCombatPredictor.cs": {
+   "line_rate": 64.67,
+   "branch_rate": 52.86,
+   "lines": 167
+  },
+  "OpenRA.Mods.CA/Traits/BotModules/BotModuleLogic/ConcaveEvalCA.cs": {
+   "line_rate": 96.93,
+   "branch_rate": 88.89,
+   "lines": 326
+  },
+  "OpenRA.Mods.CA/Traits/BotModules/BotModuleLogic/DerivedUnitWeights.cs": {
+   "line_rate": 100.0,
+   "branch_rate": 100.0,
+   "lines": 70
+  },
+  "OpenRA.Mods.CA/Traits/BotModules/BotModuleLogic/SpreadRules.cs": {
+   "line_rate": 100.0,
+   "branch_rate": 75.0,
+   "lines": 24
+  },
+  "OpenRA.Mods.CA/Traits/BotModules/BotModuleLogic/SquadMicroEvalCA.cs": {
+   "line_rate": 100.0,
+   "branch_rate": 82.14,
+   "lines": 68
+  },
+  "OpenRA.Mods.CA/Traits/BotModules/BotTargetTags.cs": {
+   "line_rate": 32.08,
+   "branch_rate": 37.5,
+   "lines": 106
+  },
+  "OpenRA.Mods.CA/Traits/BotModules/BuildingRepairBotModuleCA.cs": {
+   "line_rate": 0.0,
+   "branch_rate": 0.0,
+   "lines": 22
+  },
+  "OpenRA.Mods.CA/Traits/BotModules/CaptureManagerBotModuleCA.cs": {
+   "line_rate": 0.0,
+   "branch_rate": 0.0,
+   "lines": 280
+  },
+  "OpenRA.Mods.CA/Traits/BotModules/HarvesterBotModuleCA.cs": {
+   "line_rate": 0.0,
+   "branch_rate": 0.0,
+   "lines": 569
+  },
+  "OpenRA.Mods.CA/Traits/BotModules/IBotArmyStaging.cs": {
+   "line_rate": 0.0,
+   "branch_rate": 0.0,
+   "lines": 14
+  },
+  "OpenRA.Mods.CA/Traits/BotModules/IBotAssaultFormation.cs": {
+   "line_rate": 0.0,
+   "branch_rate": 0.0,
+   "lines": 26
+  },
+  "OpenRA.Mods.CA/Traits/BotModules/IBotBuildOrderKnobs.cs": {
+   "line_rate": 73.68,
+   "branch_rate": 66.67,
+   "lines": 38
+  },
+  "OpenRA.Mods.CA/Traits/BotModules/IBotCoalition.cs": {
+   "line_rate": 100.0,
+   "branch_rate": 98.72,
+   "lines": 181
+  },
+  "OpenRA.Mods.CA/Traits/BotModules/IBotExpansionTargetProvider.cs": {
+   "line_rate": 26.09,
+   "branch_rate": 100.0,
+   "lines": 46
+  },
+  "OpenRA.Mods.CA/Traits/BotModules/IBotFrontBackAdvisor.cs": {
+   "line_rate": 100.0,
+   "branch_rate": 0.0,
+   "lines": 18
+  },
+  "OpenRA.Mods.CA/Traits/BotModules/IBotPersonalityLeadProvider.cs": {
+   "line_rate": 100.0,
+   "branch_rate": 100.0,
+   "lines": 16
+  },
+  "OpenRA.Mods.CA/Traits/BotModules/IBotRememberedDefenceProvider.cs": {
+   "line_rate": 0.0,
+   "branch_rate": 0.0,
+   "lines": 14
+  },
+  "OpenRA.Mods.CA/Traits/BotModules/IBotScaleTargets.cs": {
+   "line_rate": 0.0,
+   "branch_rate": 0.0,
+   "lines": 36
+  },
+  "OpenRA.Mods.CA/Traits/BotModules/IBotStealthDoctrine.cs": {
+   "line_rate": 100.0,
+   "branch_rate": 0.0,
+   "lines": 10
+  },
+  "OpenRA.Mods.CA/Traits/BotModules/IBotTeamMember.cs": {
+   "line_rate": 81.07,
+   "branch_rate": 67.07,
+   "lines": 169
+  },
+  "OpenRA.Mods.CA/Traits/BotModules/IBotUnitLeases.cs": {
+   "line_rate": 0.0,
+   "branch_rate": 0.0,
+   "lines": 10
+  },
+  "OpenRA.Mods.CA/Traits/BotModules/IBotUnitRoles.cs": {
+   "line_rate": 100.0,
+   "branch_rate": 0.0,
+   "lines": 12
+  },
+  "OpenRA.Mods.CA/Traits/BotModules/LoadGarrisonerBotModuleCA.cs": {
+   "line_rate": 0.0,
+   "branch_rate": 0.0,
+   "lines": 136
+  },
+  "OpenRA.Mods.CA/Traits/BotModules/SiegeEvaluatorBotModule.cs": {
+   "line_rate": 0.0,
+   "branch_rate": 0.0,
+   "lines": 243
+  },
+  "OpenRA.Mods.CA/Traits/BotModules/SquadManagerBotModuleCA.cs": {
+   "line_rate": 13.05,
+   "branch_rate": 8.51,
+   "lines": 3340
+  },
+  "OpenRA.Mods.CA/Traits/BotModules/Squads/AttackOrFleeFuzzyCA.cs": {
+   "line_rate": 0.0,
+   "branch_rate": 0.0,
+   "lines": 374
+  },
+  "OpenRA.Mods.CA/Traits/BotModules/Squads/SquadCA.cs": {
+   "line_rate": 0.0,
+   "branch_rate": 0.0,
+   "lines": 156
+  },
+  "OpenRA.Mods.CA/Traits/BotModules/Squads/StateMachineCA.cs": {
+   "line_rate": 0.0,
+   "branch_rate": 0.0,
+   "lines": 30
+  },
+  "OpenRA.Mods.CA/Traits/BotModules/Squads/States/AirDoctrineStatesCA.cs": {
+   "line_rate": 0.0,
+   "branch_rate": 0.0,
+   "lines": 274
+  },
+  "OpenRA.Mods.CA/Traits/BotModules/Squads/States/AirStatesCA.cs": {
+   "line_rate": 0.0,
+   "branch_rate": 0.0,
+   "lines": 498
+  },
+  "OpenRA.Mods.CA/Traits/BotModules/Squads/States/GroundConcaveStateCA.cs": {
+   "line_rate": 0.0,
+   "branch_rate": 0.0,
+   "lines": 589
+  },
+  "OpenRA.Mods.CA/Traits/BotModules/Squads/States/GroundStatesCA.cs": {
+   "line_rate": 0.0,
+   "branch_rate": 0.0,
+   "lines": 1346
+  },
+  "OpenRA.Mods.CA/Traits/BotModules/Squads/States/NavyStatesCA.cs": {
+   "line_rate": 0.0,
+   "branch_rate": 0.0,
+   "lines": 406
+  },
+  "OpenRA.Mods.CA/Traits/BotModules/Squads/States/ProtectionStatesCA.cs": {
+   "line_rate": 0.0,
+   "branch_rate": 0.0,
+   "lines": 180
+  },
+  "OpenRA.Mods.CA/Traits/BotModules/Squads/States/StateBaseCA.cs": {
+   "line_rate": 0.0,
+   "branch_rate": 0.0,
+   "lines": 370
+  },
+  "OpenRA.Mods.CA/Traits/BotModules/Squads/States/StealthStatesCA.cs": {
+   "line_rate": 11.86,
+   "branch_rate": 9.59,
+   "lines": 371
+  },
+  "OpenRA.Mods.CA/Traits/BotModules/UnitBuilderBotModuleCA.cs": {
+   "line_rate": 0.0,
+   "branch_rate": 0.0,
+   "lines": 1013
+  },
+  "OpenRA.Mods.CA/Traits/BotModules/UnitCompositionsBotModule.cs": {
+   "line_rate": 0.0,
+   "branch_rate": 0.0,
+   "lines": 95
+  },
+  "OpenRA.Mods.Cameo/Traits/BotCounterDemandController.cs": {
+   "line_rate": 0.0,
+   "branch_rate": 0.0,
+   "lines": 92
+  },
+  "OpenRA.Mods.Cameo/Traits/BotGlobalUnitBudget.cs": {
+   "line_rate": 0.0,
+   "branch_rate": 0.0,
+   "lines": 102
+  },
+  "OpenRA.Mods.Cameo/Traits/BotInsurance.cs": {
+   "line_rate": 0.0,
+   "branch_rate": 0.0,
+   "lines": 48
+  },
+  "OpenRA.Mods.Cameo/Traits/BotModules/ArmyFirstBotModule.cs": {
+   "line_rate": 14.71,
+   "branch_rate": 35.71,
+   "lines": 68
+  },
+  "OpenRA.Mods.Cameo/Traits/BotModules/ArmyStagingBotModule.cs": {
+   "line_rate": 0.0,
+   "branch_rate": 0.0,
+   "lines": 491
+  },
+  "OpenRA.Mods.Cameo/Traits/BotModules/ArmyStagingEval.cs": {
+   "line_rate": 95.29,
+   "branch_rate": 90.83,
+   "lines": 297
+  },
+  "OpenRA.Mods.Cameo/Traits/BotModules/AssaultFormationBotModule.cs": {
+   "line_rate": 0.0,
+   "branch_rate": 0.0,
+   "lines": 78
+  },
+  "OpenRA.Mods.Cameo/Traits/BotModules/BaseFrontBackPlannerBotModule.cs": {
+   "line_rate": 42.25,
+   "branch_rate": 41.15,
+   "lines": 871
+  },
+  "OpenRA.Mods.Cameo/Traits/BotModules/BaseRepairBotModule.cs": {
+   "line_rate": 14.29,
+   "branch_rate": 18.18,
+   "lines": 126
+  },
+  "OpenRA.Mods.Cameo/Traits/BotModules/BeaconResponderBotModule.cs": {
+   "line_rate": 0.0,
+   "branch_rate": 0.0,
+   "lines": 237
+  },
+  "OpenRA.Mods.Cameo/Traits/BotModules/BotDirector.cs": {
+   "line_rate": 97.62,
+   "branch_rate": 97.37,
+   "lines": 84
+  },
+  "OpenRA.Mods.Cameo/Traits/BotModules/BotFactionView.cs": {
+   "line_rate": 50.0,
+   "branch_rate": 90.0,
+   "lines": 12
+  },
+  "OpenRA.Mods.Cameo/Traits/BotModules/BotFogMemory.cs": {
+   "line_rate": 47.17,
+   "branch_rate": 37.88,
+   "lines": 318
+  },
+  "OpenRA.Mods.Cameo/Traits/BotModules/BotInfluenceLayers.cs": {
+   "line_rate": 87.62,
+   "branch_rate": 61.84,
+   "lines": 210
+  },
+  "OpenRA.Mods.Cameo/Traits/BotModules/BotLearnedPriors.cs": {
+   "line_rate": 42.19,
+   "branch_rate": 45.45,
+   "lines": 128
+  },
+  "OpenRA.Mods.Cameo/Traits/BotModules/BotModuleFieldDump.cs": {
+   "line_rate": 50.0,
+   "branch_rate": 54.0,
+   "lines": 88
+  },
+  "OpenRA.Mods.Cameo/Traits/BotModules/BotOrderGate.cs": {
+   "line_rate": 83.33,
+   "branch_rate": 81.08,
+   "lines": 72
+  },
+  "OpenRA.Mods.Cameo/Traits/BotModules/BotOwnershipWatchdog.cs": {
+   "line_rate": 51.18,
+   "branch_rate": 43.38,
+   "lines": 297
+  },
+  "OpenRA.Mods.Cameo/Traits/BotModules/BotRoleSets.cs": {
+   "line_rate": 22.29,
+   "branch_rate": 33.33,
+   "lines": 341
+  },
+  "OpenRA.Mods.Cameo/Traits/BotModules/BotSituation.cs": {
+   "line_rate": 28.64,
+   "branch_rate": 21.61,
+   "lines": 2758
+  },
+  "OpenRA.Mods.Cameo/Traits/BotModules/BotThreatTracker.cs": {
+   "line_rate": 95.65,
+   "branch_rate": 87.5,
+   "lines": 92
+  },
+  "OpenRA.Mods.Cameo/Traits/BotModules/BotUnitLeaseRegistry.cs": {
+   "line_rate": 37.35,
+   "branch_rate": 40.91,
+   "lines": 166
+  },
+  "OpenRA.Mods.Cameo/Traits/BotModules/BotUnitRoles.cs": {
+   "line_rate": 25.58,
+   "branch_rate": 33.33,
+   "lines": 391
+  },
+  "OpenRA.Mods.Cameo/Traits/BotModules/BotUtilityAxes.cs": {
+   "line_rate": 100.0,
+   "branch_rate": 100.0,
+   "lines": 100
+  },
+  "OpenRA.Mods.Cameo/Traits/BotModules/BridgeRepairBotModule.cs": {
+   "line_rate": 4.48,
+   "branch_rate": 7.02,
+   "lines": 268
+  },
+  "OpenRA.Mods.Cameo/Traits/BotModules/BuildOrderKnobsBotModule.cs": {
+   "line_rate": 0.0,
+   "branch_rate": 0.0,
+   "lines": 552
+  },
+  "OpenRA.Mods.Cameo/Traits/BotModules/BuildOrderKnobsEval.cs": {
+   "line_rate": 96.45,
+   "branch_rate": 96.67,
+   "lines": 338
+  },
+  "OpenRA.Mods.Cameo/Traits/BotModules/CombatAnalysisBotModule.cs": {
+   "line_rate": 0.0,
+   "branch_rate": 0.0,
+   "lines": 353
+  },
+  "OpenRA.Mods.Cameo/Traits/BotModules/CombatVetoBotModule.cs": {
+   "line_rate": 0.0,
+   "branch_rate": 0.0,
+   "lines": 248
+  },
+  "OpenRA.Mods.Cameo/Traits/BotModules/CombatVetoEval.cs": {
+   "line_rate": 96.55,
+   "branch_rate": 95.45,
+   "lines": 58
+  },
+  "OpenRA.Mods.Cameo/Traits/BotModules/CratePickupBotModule.cs": {
+   "line_rate": 6.1,
+   "branch_rate": 11.11,
+   "lines": 164
+  },
+  "OpenRA.Mods.Cameo/Traits/BotModules/DefenseCoveragePlanner.cs": {
+   "line_rate": 35.35,
+   "branch_rate": 32.18,
+   "lines": 396
+  },
+  "OpenRA.Mods.Cameo/Traits/BotModules/DeployBotModule.cs": {
+   "line_rate": 0.0,
+   "branch_rate": 0.0,
+   "lines": 484
+  },
+  "OpenRA.Mods.Cameo/Traits/BotModules/EngagementLogBotModule.cs": {
+   "line_rate": 29.56,
+   "branch_rate": 9.14,
+   "lines": 1326
+  },
+  "OpenRA.Mods.Cameo/Traits/BotModules/EngagementMath.cs": {
+   "line_rate": 98.25,
+   "branch_rate": 94.64,
+   "lines": 228
+  },
+  "OpenRA.Mods.Cameo/Traits/BotModules/EngagementPriorsBotModule.cs": {
+   "line_rate": 0.0,
+   "branch_rate": 0.0,
+   "lines": 67
+  },
+  "OpenRA.Mods.Cameo/Traits/BotModules/EngineerBotModule.cs": {
+   "line_rate": 7.92,
+   "branch_rate": 9.94,
+   "lines": 1440
+  },
+  "OpenRA.Mods.Cameo/Traits/BotModules/ExpansionPlannerBotModule.cs": {
+   "line_rate": 36.9,
+   "branch_rate": 36.89,
+   "lines": 1764
+  },
+  "OpenRA.Mods.Cameo/Traits/BotModules/GarrisonContestBotModule.cs": {
+   "line_rate": 0.0,
+   "branch_rate": 0.0,
+   "lines": 580
+  },
+  "OpenRA.Mods.Cameo/Traits/BotModules/GarrisonDefenseBotModule.cs": {
+   "line_rate": 0.0,
+   "branch_rate": 0.0,
+   "lines": 245
+  },
+  "OpenRA.Mods.Cameo/Traits/BotModules/HumanPaceBotModule.cs": {
+   "line_rate": 0.0,
+   "branch_rate": 0.0,
+   "lines": 112
+  },
+  "OpenRA.Mods.Cameo/Traits/BotModules/IBotZoneTopology.cs": {
+   "line_rate": 43.24,
+   "branch_rate": 0.0,
+   "lines": 74
+  },
+  "OpenRA.Mods.Cameo/Traits/BotModules/InMatchAdaptBotModule.cs": {
+   "line_rate": 18.75,
+   "branch_rate": 0.0,
+   "lines": 32
+  },
+  "OpenRA.Mods.Cameo/Traits/BotModules/ParallelProductionBotModule.cs": {
+   "line_rate": 0.0,
+   "branch_rate": 0.0,
+   "lines": 10
+  },
+  "OpenRA.Mods.Cameo/Traits/BotModules/PlanBanditBotModule.cs": {
+   "line_rate": 25.8,
+   "branch_rate": 30.23,
+   "lines": 345
+  },
+  "OpenRA.Mods.Cameo/Traits/BotModules/PlanBanditMath.cs": {
+   "line_rate": 89.29,
+   "branch_rate": 78.0,
+   "lines": 168
+  },
+  "OpenRA.Mods.Cameo/Traits/BotModules/PlugSpawnerBotModuleCA.cs": {
+   "line_rate": 0.0,
+   "branch_rate": 0.0,
+   "lines": 205
+  },
+  "OpenRA.Mods.Cameo/Traits/BotModules/RegionRolesBotModule.cs": {
+   "line_rate": 33.33,
+   "branch_rate": 42.06,
+   "lines": 462
+  },
+  "OpenRA.Mods.Cameo/Traits/BotModules/RegionRouter.cs": {
+   "line_rate": 97.53,
+   "branch_rate": 95.83,
+   "lines": 162
+  },
+  "OpenRA.Mods.Cameo/Traits/BotModules/ScaleTargetsBotModule.cs": {
+   "line_rate": 0.0,
+   "branch_rate": 0.0,
+   "lines": 450
+  },
+  "OpenRA.Mods.Cameo/Traits/BotModules/ScaleTargetsEval.cs": {
+   "line_rate": 97.14,
+   "branch_rate": 91.67,
+   "lines": 70
+  },
+  "OpenRA.Mods.Cameo/Traits/BotModules/ScoutBotModule.cs": {
+   "line_rate": 13.45,
+   "branch_rate": 11.76,
+   "lines": 476
+  },
+  "OpenRA.Mods.Cameo/Traits/BotModules/SpacingAdvisorBotModule.cs": {
+   "line_rate": 0.0,
+   "branch_rate": 0.0,
+   "lines": 168
+  },
+  "OpenRA.Mods.Cameo/Traits/BotModules/StealthDoctrineBotModule.cs": {
+   "line_rate": 0.0,
+   "branch_rate": 0.0,
+   "lines": 14
+  },
+  "OpenRA.Mods.Cameo/Traits/BotModules/TacticalMapBotModule.cs": {
+   "line_rate": 3.65,
+   "branch_rate": 3.17,
+   "lines": 2688
+  },
+  "OpenRA.Mods.Cameo/Traits/BotModules/UnitRepairBotModule.cs": {
+   "line_rate": 0.0,
+   "branch_rate": 0.0,
+   "lines": 219
+  },
+  "OpenRA.Mods.Cameo/Traits/BotPersonalityController.cs": {
+   "line_rate": 29.14,
+   "branch_rate": 21.67,
+   "lines": 151
+  },
+  "OpenRA.Mods.Cameo/Traits/DynamicBotInsurance.cs": {
+   "line_rate": 27.19,
+   "branch_rate": 8.11,
+   "lines": 456
+  },
+  "OpenRA.Mods.Cameo/Traits/ModularBot.cs": {
+   "line_rate": 0.0,
+   "branch_rate": 0.0,
+   "lines": 266
+  }
+ }
+}
