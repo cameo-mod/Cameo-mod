@@ -3695,4 +3695,56 @@ every cell). Consumed by the tier-2 veto predictor behind the default-OFF `AP_ti
 Shrinkage is pseudo-evidence K = 5000 damage
 credit toward the pipeline prior, clamped [500, 2000] milli, one record capped at 4x the median record's traded value.
 
+### 12.35 BP — front/back base placement: production forward, valuables back, a radar behind every front's line (Devin-T3Verify, 2026-10-04; DESIGN §19.15; switch BI_front_back_placement)
+
+`BaseFrontBackPlannerBotModule` (genericbot, `RequiresCondition: genericbot`, `Enabled` field — default OFF) is the
+single owner of the front/back classes, advising the shared `BaseBuilderQueueManagerCA` through
+`IBotFrontBackAdvisor` (`OpenRA.Mods.CA` — the QM asks an interface, never the module; with no ACTIVE advisor every
+placement stays today's, classic bit-identical). REF-1 owns the QM seams; phase 1 ships the advisor, interface,
+mount, switch and tests only.
+
+**Fronts.** Own building cells cluster into bases (`ClusterFronts`, link radius 14). Each cluster's anchors, in
+priority order: per-enemy remembered-defence centroids (main target first — `IBotRememberedDefenceProvider`,
+fog-honest like `ThreatCell`), else `DefenseCenter` (last attack), else the nearest enemy `Player.HomeLocation`
+(public spawn data), else map centre; the `IBotExpansionTargetProvider.ExpansionTarget` appends as the crawl
+anchor. Anchors within `FrontMergeDegrees` (45) merge; a cluster holds at most three fronts. A front = a bearing +
+its defence line: perimeter defences (edgeness >= 70%) aligned to its axis define `FrontProj`/`RearProj`, and own
+buildings in its arc define `ArcEdgeProj` (the production limit while the front has no line). Front ids are
+`cluster*64 + bearing bucket` — stable enough for wait-then-back timers without actor references.
+
+**Classes (`Classify`, rules-derived, precedence order):** Refinery (label only — the refinery law places it) >
+Radar (`RangedGpsProvider`/`ProvidesRadar` carriers) > Defence (`AttackBase`) > Production (has produced queues AND
+not air-only — every produced queue name/queue-type/group matching aircraft exempts it: helipads, airfields,
+`^IsAircraftFactory`) > Valuable (`FragileTypes` name, `tech`/`superweapon` category via `IBotBuildOrderKnobs`, or
+`CashTrickler`) > Crawl (cost < `BaseCrawlCostThreshold`) > Building residue.
+
+**Picks.** Radar: strictly inside the setback band `[RearProj-8, RearProj-2]` of the front that needs it (undefended
+defended-front nearest the build site first, else a wide-approach front earning its `RadarMaxPerFront` extra),
+scored by NEWLY covered approach cells over ALL fronts' approaches union (approach = the band [FrontProj,
+FrontProj+14] inside the 45-degree cone — enemy-facing ground, not the back field), minus setback; a front with no
+line, or no legal band cell, waits `RadarWaitForDefenceTicks` (1500) then takes the back pick — never forward.
+Production: argmax projection subject to `proj <= limit - setback` (limit = `FrontProj`, or `ArcEdgeProj` without a
+line). Valuable: argmin of the MAXIMUM projection over all fronts. `FrontBackPick` carries the cell plus the log
+fields (front id, front/back score, new/overlap coverage, setback); `Hold=true` tells the QM to wait rather than
+fall back. `WantedRadarProviders` = defended fronts + justified extras (rebuilt on loss — a dead provider stops
+counting via its disabled/removed state); `RadarPowerMargin` = +60 per max(owned, wanted) provider so low power
+never blinds a want; `PreferredRadarProvider` prefers a building whose produced queues do not collide with owned
+producers (the `Production@Upgrades` queue is singleton — a second commcenter doubles upgrade speed; colliding
+providers only when nothing else exists). Diagnostics: `FrontCount`, `FrontsWithoutRadar`, `RadarUnionCells`,
+`RadarApproachCells` for the situation snapshot (phase-2 fields land with the seams).
+
+**Phase-2 seams (after REF-1 lands on master):** the QM's findPos switch gets cases for the three advisor classes;
+the re-rank advisor bypasses crawl/radar cells (a re-rank that undoes the aim is the spacing-advisor waste the
+CRAWL-TRACE measured); `ChooseBuildingToBuild` adds the radar want next to the defence want; `FragileTypes` loses
+its radar carriers (the list puts them in the back, opposite the ruling) — edits prepared, uncommitted.
+Determinism: all scoring is integer/double math over own cells and remembered anchors, tie-broken by cell ordinal —
+no randomness, no actor identity.
+
+Tests (`BaseFrontBackPlannerTest`, 24): anchor merge/split/cap, defence-line assignment and projections, approach
+band + cone + no-line-empty, radar strictly-behind-line (beyond/on/inside-line all refused; wait on empty band),
+union-coverage scoring and the overlap-is-waste tie, setback/ordinal tie-breaks, determinism under shuffled
+candidates, production at-or-behind-limit and neutral fallback, valuable farthest-from-every-front, class order
+(air-only exempt, tech/superweapon/CashTrickler valuable, cheap crawl), provider non-collide > cheapest, range
+floor to cells.
+
 

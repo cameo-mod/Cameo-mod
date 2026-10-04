@@ -71,6 +71,61 @@ MP-only (`EnableSingleplayer` gates the classic path). Gates: build 0 warn/0 err
 direct-mutation audits PASS, boot gate PASS. Multi-client smoke NOT run — the harness (`run_ai_match_batch.py`) is
 headless `Launch.Map` local-server, no real lobby human clients; needs a manual dedicated-server 2-client test.
 Phase 2 (lobby-bot failover on admin drop) explicitly out of scope.
+# 2026-10-04 — Devin-T3Verify: BP-IMPL B1 rev-2 (per-front allocation in the absolute radar target)
+
+*Devin.* `devin/t3verify/bp-front-back` (on top of `7690ddd07`). Boss re-review closed B2/B3/B4 but caught the
+remaining B1 allocation bug: `WantedForFront` ignored existing per-front counts and `Refresh` summed fresh wants
+while the PREP consumer subtracts ALL owned providers — front A at 2/1 + defended front B at 0 summed to target=2
+against owned=2 and B's first radar was never requested; radars surviving at a now-undefended base could also
+suppress a new defended front. New static `AggregateRadarTarget(owned, wantPerFront, assignedPerFront)` =
+owned + Σ max(0, want − assigned): surplus/unassigned providers stay owned but never consume another front's first
+slot; no under-served defended front requests zero. `WantedRadarProviders` now returns that aggregate (interface
+doc updated: "owned + unmet per-front need"); power margin still follows the target (≥ owned always). +2 statics
+tests incl. the reviewer's required cases (A=2/B=0, survivors at a dead base assigned and unassigned, target
+exceeds owned by one). Gates: build 0/0, focused planner suite 33/33, boot gate PASS (isolated support dir).
+Sent to `01a10697` for re-review.
+
+# 2026-10-04 — Devin-T3Verify: BP-IMPL review corrections B1-B4 (boss_review static findings)
+
+*Devin.* `devin/t3verify/bp-front-back` (fixes on top of `63cd1c372`). Independent static review
+(`C:/cameo-wt/boss_review/docs/review_2026_10_04_takeover_bp.md`) found four live-assembly gaps the
+pure-helper tests missed — all fixed in the advisor/planner, no QM files touched:
+
+* **B1** `WantedRadarProviders` returned a deficit (missing providers); contract is an ABSOLUTE target
+  (`WantedForFront` static: 1 per defended front + 1 justified extra capped `RadarMaxPerFront`) — the
+  phase-2 consumer subtracts owned/planned itself; interface doc now says target-not-deficit.
+* **B2** every cluster's perimeter was built from ALL owned defences — a remote expansion's towers moved
+  the home line. `ClusterDefences` filters to cluster-footprint members before `BuildFronts`.
+* **B3** wait-then-back fell back to unconstrained `ChooseValuableCell` — an all-forward candidate set
+  still placed a forward radar. `SafeBackCells` (strictly behind `RearProj`, or `<=0` with no line)
+  filters first; empty => Hold.
+* **B4** extras were justified by TOTAL uncovered approach while the pick could add 0 — now the first
+  provider needs positive approach reach (`RequiredNewCoverage` = 1) and extras need the candidate's own
+  `NewCoverageCells >= RadarMinNewCoverageCells`; a failing extra Holds (it is optional and earns nothing
+  elsewhere), a failing first provider takes the same wait-then-back path.
+
+7 new statics tests (31/31 planner file, 865/865 suite). Gates: build 0 warn/0 err; fog-honesty +
+direct-mutation PASS; ai_arch R1/R2 PASS (R3 dead-end expected until phase 2); boot gate PASS isolated
+support dir. Sent to `01a10697` for re-review.
+
+# 2026-10-04 — Devin-T3Verify: BP-IMPL phase 1 (front/back placement planner — new files only, no QM seams)
+
+*Devin.* `devin/t3verify/bp-front-back` in `C:/cameo-wt/bp` (base origin/master `8e86fca23`). Phase 1 of the accepted
+BP-SPEC rev 2 (fleet NOTE_2026-10-04_devin-t3verify_bp-spec.md) under the maintainer's final rulings: one radar per
+DEFENDED front (the "2+" floor is dropped), a second only when a candidate adds >= `RadarMinNewCoverageCells` (30) NEW
+union-approach cells; radars strictly behind the front's defence line (setback [2,8], wait-then-back, never forward);
+ground/naval production at the front with air-only producers exempt; tech/superweapon/`CashTrickler` passive income in
+the back; yards untouched (MCVs expand outward). New: `IBotFrontBackAdvisor` (OpenRA.Mods.CA — the shared QM consumes it
+in phase 2), `BaseFrontBackPlannerBotModule` (genericbot, `Enabled: false`; per-cluster fronts from fog-honest anchors —
+remembered-defence centroids, last attack, public enemy `HomeLocation`, map centre, plus the expansion aim; 45° merge,
+<=3 fronts; approach cones; union-coverage scoring; `front.FirstSeenTick` wait-then-back; Upgrades-queue collision pick;
++60 power margin/provider), 24 statics tests, `ai.yaml` mount, switch group `BI_front_back_placement` (default OFF),
+DESIGN §19.15, AI_ARCHITECTURE §12.35 (phase-2 seam list). Zero edits to REF-1-owned files — the QM seams, the
+`FragileTypes` radar-carrier removal (23 names, resolved via `miniyaml.Ruleset`, incl. templeofnod/templeprime +
+spysatelliteuplink), and the 2-map smoke are phase 2 after REF-1 lands (prep: fleet
+PREP_2026-10-04_devin-t3verify_bp-impl-phase2.md). Gates: build 0 warn/0 err; 858/858 tests; fog-honesty +
+bot-direct-mutation + ai-arch R1/R2 audits PASS (R3 dead-end flag on `IBotFrontBackAdvisor` expected until phase 2);
+boot gate PASS (isolated support dir `C:/cameo-wt/_support_bp`).
 
 # 2026-10-03 — coordinator: tier-3 hotfix (INC c) + ORDERS round 2 to NOVA/DAWN/EMBER
 
