@@ -576,6 +576,28 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(RefineryLawSilo.Wanted(false, 80, 100, false), Is.False);
 		}
 
+		[Test]
+		public void RefineryLifecycleClassifiesTheDiff()
+		{
+			// Owner change in world: a capture — the victim logs a loss and the capturer an acquisition.
+			var capture = RefineryLifecycle.Classify(true, true, false);
+			Assert.That(capture.LostCause, Is.EqualTo("captured"));
+			Assert.That(capture.Acquired, Is.True);
+
+			// Same owner in world: nothing happened.
+			var quiet = RefineryLifecycle.Classify(false, true, false);
+			Assert.That(quiet.LostCause, Is.Null);
+			Assert.That(quiet.Acquired, Is.False);
+
+			// Gone from the world: the death flag splits killed from sold.
+			var killed = RefineryLifecycle.Classify(false, false, true);
+			Assert.That(killed.LostCause, Is.EqualTo("killed"));
+			Assert.That(killed.Acquired, Is.False);
+			var sold = RefineryLifecycle.Classify(false, false, false);
+			Assert.That(sold.LostCause, Is.EqualTo("sold"));
+			Assert.That(sold.Acquired, Is.False);
+		}
+
 		sealed class LawStub : IBotExpansionTargetProvider
 		{
 			readonly int unservedInReach;
