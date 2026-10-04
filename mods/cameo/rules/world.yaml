@@ -1327,6 +1327,7 @@ World:
 	# authority plus takeover seats (validator order can't veto, only tighten).
 	CameoValidateOrder:
 	BotTakeoverTracker:
+	CameoAutoOrders:
 	LobbySystemActorConditionCheckbox@BOT_TAKEOVER:
 		ID: bot_takeover
 		Label: checkbox_bot_takeover.label
