@@ -1,5 +1,24 @@
 # Cameo — THE HANDOFF
 
+## 2026-10-04 — Devin-Tier4: RADAR-A INC-ready — `AI_radar_contacts` (IBotRadarContacts provider, no consumers)
+
+`Agent: Devin-Tier4 · branch devin/tier4/radar-contacts · worktree C:/cameo-wt/t4-radar-a · base 3ba05ede7 (master, post-INC-04e)`
+
+**INC-ready: `devin/tier4/radar-contacts` — switch: `AI_radar_contacts`** (grant id `@radarcontacts`, condition
+`radar_contacts`; `genericbot && radar_contacts` gate). Stacks on RADAR-ALLY `646bddf51` (landed on master in INC 2026-10-04).
+`RadarContactsBotModule` publishes `IBotRadarContacts` — anonymous `{Cell, Tick, VXPerKilotick, VYPerKilotick,
+Class, Owner}` contacts computed from `CameoRangedGpsDotEffect.ShouldRenderDot` (the renderer's own gate,
+evaluated per bot player) over the own/allied `RangedGpsWatcher.Providers` -> `CameoRangedGpsProvider.ActorsInRange`
+proximity lists. No type, no HP, no ActorID; zero global-actor-scan sites (fog manifest unchanged, 0 new sites).
+Phase A is provider + situation log only — `own.contacts {tick, providers, live:[{x,y,tick,vx,vy,class,owner}]}`
+additive, absent when no module. No consumers wired (squads/scout/expansion/veto untouched).
+*Evidence:* build 0 errors · 851/851 tests (6 new) · fog/personalities/merged-modules audits PASS ·
+boot gate PASS · dry-run arm resolves · **live check PASS**: armed ra1_allies hard-v-hard produced
+`contacts` in all 442 situation records; tick 23701 = 6 live enemy contacts with real drift (RADAR-A
+details in DEVELOPMENT_LOG top entry). *Post-rebase re-verify* (base moved to `3ba05ede7`): build 0 errors,
+939/939 tests, fog/wiring/personalities/merged audits PASS, boot gate PASS. Consumers for phase B per the
+RADAR-DOTS note: early-warning -> scout-ID -> expansion -> veto -> EL scalar features.
+
 ## 2026-10-04 — NOVA N2 receipt: EL-1 v2 on current master
 
 **INC-N ready: `devin/nova/el1-v2` — switch: `AQ_inmatch_adapt` (default off).** Round-2 N2: the EL-1 in-match

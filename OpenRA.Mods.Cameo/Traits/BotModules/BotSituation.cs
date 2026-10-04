@@ -167,6 +167,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		// Tier-3 (fleet orders 2026-10-03), record-only: the frozen personality/plan bandit arms drawn at match start.
 		// Null (and omitted from the log) while no PlanBanditBotModule is enabled.
 		internal PlanBanditSnapshot Bandit;
+
+		// RADAR-A, record-only: the live ranged-GPS contact picture as of this snapshot — what the
+		// bot's own/allied radar discs show. Null (and omitted from the log) while no
+		// RadarContactsBotModule is enabled.
+		internal RadarContactsSnapshot Contacts;
 		// FE-0 (AI_ARCHITECTURE 12.24), record-only: the field-economy picture as of this snapshot (the `expansion` object).
 		internal ExpansionSnapshot Expansion;
 
@@ -1441,6 +1446,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				ScaleTargets = player.PlayerActor.TraitsImplementing<ScaleTargetsBotModule>().FirstEnabledTraitOrDefault()?.Snapshot,
 				BuildOrder = player.PlayerActor.TraitsImplementing<BuildOrderKnobsBotModule>().FirstEnabledTraitOrDefault()?.Snapshot,
 				Bandit = player.PlayerActor.TraitsImplementing<PlanBanditBotModule>().FirstEnabledTraitOrDefault()?.Snapshot,
+				Contacts = player.PlayerActor.TraitsImplementing<RadarContactsBotModule>().FirstEnabledTraitOrDefault()?.Snapshot,
 				Expansion = ExpansionTelemetry.Capture(player, ownLiveBuildings)
 			};
 			Situation = situation;
