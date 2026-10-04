@@ -1,6 +1,8 @@
 # 2026-10-04 — Devin-T2Verify: AR-8 — issuer identity Type@N; the order gate judges at issue time
 
-*Devin-T2Verify.* DESIGN §19.6 AR-8 bullet added; fleet `NOTE_2026-10-04_devin-t2verify_ar8_issuer_identity.md`.
+*Devin-T2Verify.* Branch `devin/t2verify/ar8-issuer-identity` (stacked on
+`devin/t2verify/ar1-grouped-gate`, rebased onto INC-f; current tip in the fleet STATUS file).
+DESIGN §19.6 AR-8 bullet added; fleet `NOTE_2026-10-04_devin-t2verify_ar8_issuer_identity.md`.
 - `BotIssuer` (Mods.CA — Fransbot sees it): `Type@ordinal` instanced issuer, `TypeOf` owner
   normalization, `IssueAs` ambient provider scope.
 - ModularBot: queued items carry `(Order, Issuer, Emergency)`; the gate now judges at ISSUE time

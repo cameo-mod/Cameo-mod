@@ -1409,6 +1409,7 @@ namespace OpenRA.Mods.Common.Traits
 
 		bool IFransCaptureTransportService.TryReserveStrategicExpansionTransport(Actor transport, Actor reservationOwner)
 		{
+			using var _ = BotIssuer.IssueAs(IssuerName);
 			if (!IsLiveOwnedTransport(transport) || reservationOwner == null ||
 				!Info.LandingCraftTypes.Contains(transport.Info.Name))
 				return false;
