@@ -189,10 +189,17 @@ namespace OpenRA.Mods.Cameo.Traits
 			}
 
 			if (!enabled || !IsTakeoverCandidate(p))
+			{
+				if (CameoDevArgs.IsEnabled("Cameo.DevAutoOrders"))
+					Log.Write("debug", $"bot_takeover: disconnect of {p.InternalName} client {p.ClientIndex} skipped " +
+						$"(enabled={enabled}, candidate={IsTakeoverCandidate(p)})");
 				return;
+			}
 
 			var decision = Decide(CountTeamsAlive(Seats()), HasUndefeatedTeammate(Seats(), SeatOf(p)),
 				TakeoverTrigger.Disconnect, info.LastPlayerDisconnect);
+			if (CameoDevArgs.IsEnabled("Cameo.DevAutoOrders"))
+				Log.Write("debug", $"bot_takeover: disconnect of {p.InternalName} client {p.ClientIndex} -> {decision}");
 			ApplyDecision(p, decision, TakeoverTrigger.Disconnect);
 		}
 

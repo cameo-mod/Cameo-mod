@@ -62,6 +62,89 @@ truth (933/3076/496 — T3's +272 is the recorded CA debt). Baseline evidence: `
 runs when enabled). Gates: 13/13 new py tests, bare audit exit 0, self-check 0 regressions/106 baselined,
 `dotnet-coverage` run: 933/933 NUnit. Next: AR-T2 shared fixtures, AR-2 personality-pin, AR-4 PlugSpawner.
 
+## 2026-10-04 — Devin-Tier4: PRIORS-CARRY engagement-log balance block (Tier4 lane, spec §ownership)
+
+`Agent: Devin-Tier4 · branch devin/tier4/takeover-smoke · worktree C:/cameo-wt/t4-smoke · base master 3ba05ede7 (stacked on AR-T3 commits)`
+
+**INC-ready, NOT merged** (no merge authority; lead decides).
+Per `SPEC_2026-10-04_claude_priors_carry_over.md` the tier-1 fitter re-priced old
+logs under *today's* Versus — every engagement record now carries an additive
+`balance` block so old logs price under their own rules:
+`balance.fingerprint` = sha256(mod id + mod version + map uid + per-file sha256 of
+manifest weapons/rules); `balance.versus` = resolved percent for every
+`delivery-tag|armour-class` cell the engagement touched (seen compositions only).
+Tag identity recovered from resolved weapon yaml (`WeaponInfo` drops the
+`Warhead@` suffix at load) — **parity 1568/1568 weapons, 0 mismatch** vs
+`extract_stats.py`; main-warhead pick restricted to the ledger's five damage
+types. One-sided engagements emit **fingerprint-only** = T3Verify's declared
+legacy-weight path. Consumer contract confirmed peer→peer:
+`r["balance"]["versus"]["<Tag>|<Armor>"]` (`__x__` also accepted).
+
+**Live evidence** (3-match batch): 618/618 engagement records carry `balance`;
+295 with versus (254 distinct cells, 0 malformed); 323 fingerprint-only;
+3 fingerprints = 3 map variants. `engagement_report` + on-branch fitter parse
+unchanged (additive field).
+**Gates:** build 0/0; 971/971 tests (4 new); fog/wiring/personalities/merged/
+mutation/arch audits PASS; module map current; boot gate PASS.
+**Files:** `EngagementMath.cs` +83, `EngagementLogBotModule.cs` +164,
+`EngagementMathTest.cs` +103 — additive only, no yaml/balance numbers.
+**Next (not mine):** NOVA consumer read path; lead's fit + A/B integration.
+T3Verify review notes: `boundary=False` on missing prev `LedgerHash`
+undocumented; parsed `prev.staleness_tau_milli` unused.
+
+## 2026-10-04 — Devin-Tier4: AR-T3 bundle — round-trip gate, AR-2 desync regression RED, hotspot #1, module-map fix
+
+`Agent: Devin-Tier4 · branch devin/tier4/takeover-smoke · worktree C:/cameo-wt/t4-smoke · base master 3ba05ede7`
+
+**INC-ready pieces, NOT merged** (no merge authority; lead decides).
+1. `run_ai_match_batch --round-trip` — runs `round_trip_check.py` on the batch
+   support dir post-summary, records `summary["round_trip"].exit`, fails the
+   batch on nonzero; 3 unit tests (`test_ai_batch_harness.py` 36/36).
+2. **AR-2 red-first MP regression:** `takeover_smoke.py --scenario desync` — 2
+   clients opposite teams + `hard` generic bots + transient `AO_tier3_bandits`
+   (snapshot/apply/finally-restore). Judge = pin equality across clients +
+   0 sync reports. Engine analysis: bots tick host-only inside
+   `Sync.RunUnsynced`, conditions carry no `[VerifySync]` → divergent pins can
+   never reach the order hash; pin divergence IS the defect. **Official run:
+   FAIL `pin divergence (AR-2)` on both bots, 0 exceptions/0 sync reports**
+   (`_support_t4_smoke/scenario_desync/RESULT.json`). Excluded from `all`;
+   goes GREEN when the pin moves to shared deterministic RNG (AR-2 fix lane).
+3. **Hotspot #1 `Rebuild`:** 12 pure decision seams → `MasterAiEval`
+   (bit-identical; gathering/publication stay in `BotSituation.cs`); decision-
+   tree NOTE at `Rebuild`; 34 NUnit tests in `MasterAiEvalTest.cs`.
+4. **`ai_module_map.py` C2 fix:** nested-class body slicing + non-module
+   consumers were invisible → 11/12 "no consumer" rows were false; now
+   brace-depth spans + helper consumers marked `+`. C2 12→1 (only true
+   phase-A `IBotFrontBackAdvisor`).
+
+**Gates:** build 0/0; 967/967 tests; fog/wiring/personalities/merged/mutation/
+arch audits PASS; boot gate PASS.
+**Found, not in scope:** `ExpansionPlannerBotModule.IsPowerPlant` throws
+`TypeDictionary … multiple instances of PowerInfo` on `_ra_doubles` — crashed
+2 desync runs (deterministic map+actor combo); needs an owner.
+**Next:** AR-2 pin→shared-RNG fix lane (this regression turns green on it);
+`--round-trip` opt-in until the lead wires it into the batch defaults.
+
+## 2026-10-04 — Devin-Tier4: TAKEOVER-SMOKE handed in (all six scenarios PASS on real processes)
+
+`Agent: Devin-Tier4 · branch devin/tier4/takeover-smoke @ da8595dac · worktree C:/cameo-wt/t4-smoke · base devin/t3verify/bot-takeover@9a0348101 (pre-rev-2)`
+
+**INC-ready for review, NOT merged** (no merge authority; lead/coordinator decides).
+Double-gated dev harness + five takeover scenarios on a real dedicated server with
+2 real clients: inert PASS · c defeat PASS · d disconnect-takeover PASS
+(`controller_client:0`) · a 2v2-kill PASS · b 2v2-surrender PASS · e admin-kill
+re-election PASS (`controller_client:1` on the survivor). 0 sync reports, 0
+exceptions. Build 0/0; harness `tools/ai/takeover_smoke.py --scenario {a..e,inert}`;
+evidence `C:/cameo-wt/_support_t4_smoke/scenario_*`; fleet NOTE+STATUS same date.
+**Real bug on this branch:** `AiMatchLogWriter.AllBotsResolved` vacuous-true on an
+empty logged set burned the one-shot record at world load — takeovers in all-human
+matches were unrecordable (boss-review blocker, corroborated live; rev-2's
+controller-exclusive writer may supersede the fix — do not double-apply).
+**Peer-queue note:** T3Verify asked for the exactly-one-record assertion + a
+spectator-admin scenario f against `ae7075cd8`; maintainer's passive-takeover
+report matches the boss's omitted-service-condition finding (harness can repro).
+**Next in queue (lead's ordering):** RADAR-ALLY → mpspawn order-independent fix →
+RADAR-A (`IBotRadarContacts` + situation-log fields, switch `AI_radar_contacts`).
 ## 2026-10-04 — NOVA N2 receipt: EL-1 v2 on current master
 
 **INC-N ready: `devin/nova/el1-v2` — switch: `AQ_inmatch_adapt` (default off).** Round-2 N2: the EL-1 in-match

@@ -494,3 +494,48 @@ class ArmFingerprintSummaryTests(unittest.TestCase):
             rc, out = self._run(td)
         self.assertEqual(rc, 0)
         self.assertIn("none recorded (pre-LC7)", out)
+
+
+class RoundTripGateTests(unittest.TestCase):
+    """--round-trip: run_round_trip folds the learning-loop checker into the
+    batch verdict — a FAIL layer fails the batch and persists in the summary."""
+
+    def _support(self, td):
+        import json as _json
+        p = pathlib.Path(td)
+        (p / "Logs").mkdir(exist_ok=True)
+        (p / "batch_summary.json").write_text(
+            _json.dumps({"results": 3}), encoding="utf-8")
+        return p
+
+    def _read_summary(self, support):
+        import json as _json
+        return _json.loads((support / "batch_summary.json").read_text(encoding="utf-8"))
+
+    def test_fail_layer_returns_nonzero_and_persists_exit(self):
+        # An empty support dir fails the real checker's load/perception layers
+        # — the round-trip gate must report nonzero and record it.
+        with tempfile.TemporaryDirectory() as td:
+            support = self._support(td)
+            rc = batch.run_round_trip(support, {"results": 3})
+            self.assertNotEqual(rc, 0)
+            data = self._read_summary(support)
+            self.assertEqual(data["round_trip"]["exit"], rc)
+            self.assertEqual(data["results"], 3)
+
+    def test_clean_check_returns_zero(self):
+        import contextlib
+        import io
+        import round_trip_check
+        orig = round_trip_check.main
+        try:
+            round_trip_check.main = lambda argv: 0
+            with tempfile.TemporaryDirectory() as td:
+                support = self._support(td)
+                with contextlib.redirect_stdout(io.StringIO()):
+                    rc = batch.run_round_trip(support, {"results": 3})
+                data = self._read_summary(support)
+        finally:
+            round_trip_check.main = orig
+        self.assertEqual(rc, 0)
+        self.assertEqual(data["round_trip"]["exit"], 0)

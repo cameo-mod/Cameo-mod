@@ -568,8 +568,8 @@ def cs_corpus():
 # ----------------------------------------------------------------------------- #
 
 def audit():
-    classes, bot_interfaces = ai_module_map.scan_csharp()
-    rows, loaded_rows, provides, consumers, c1, c2, _c3, _c4 = ai_module_map.build()
+    classes, bot_interfaces, _helper_lookups = ai_module_map.scan_csharp()
+    rows, loaded_rows, provides, consumers, _helpers, c1, c2, _c3, _c4 = ai_module_map.build()
     rs, actors, loaded, granters, bot_types = load_yaml_side()
     skip, groups = switch_spec()
 

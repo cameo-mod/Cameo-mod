@@ -9,6 +9,7 @@
  */
 #endregion
 
+using System.Collections.Generic;
 using System.Text.Json;
 using NUnit.Framework;
 using OpenRA.Mods.Cameo.Traits.BotModules;
@@ -157,6 +158,108 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(posture.RootElement.GetProperty("army_to_staging_cells").GetInt32(), Is.EqualTo(7));
 			using var noStaging = JsonDocument.Parse(EngagementRecord.BuildPosture(h, 1, 10, 11, 5, 3000, 20, -1, 4, 30, 250, null, -1));
 			Assert.That(noStaging.RootElement.GetProperty("staging_cell").ValueKind, Is.EqualTo(JsonValueKind.Null));
+		}
+
+		// ── PRIORS-CARRY balance block ────────────────────────────────────────────────────────────────────────
+
+		[Test]
+		public void BalanceFingerprintIsDeterministicAndSensitive()
+		{
+			var parts = new[] { "mod:cameo", "version:1.0", "map:abc", "weapons:w.yaml:ff", "rules:r.yaml:ee" };
+			var a = EngagementBalance.Fingerprint(parts);
+			Assert.That(a, Is.EqualTo(EngagementBalance.Fingerprint(parts)));
+			Assert.That(a, Does.StartWith("sha256:"));
+			Assert.That(a, Is.Not.EqualTo(EngagementBalance.Fingerprint(new[] { "mod:cameo", "version:1.1", "map:abc", "weapons:w.yaml:ff", "rules:r.yaml:ee" })));
+			Assert.That(a, Is.Not.EqualTo(EngagementBalance.Fingerprint(new[] { "rules:r.yaml:ee", "weapons:w.yaml:ff" })));
+		}
+
+		static MiniYamlNode WeaponNode(string name, params (string Key, string Type)[] children)
+		{
+			var nodes = new List<MiniYamlNode>();
+			foreach (var (key, type) in children)
+				nodes.Add(new MiniYamlNode(key, new MiniYaml(type)));
+
+			return new MiniYamlNode(name, new MiniYaml(null, nodes));
+		}
+
+		[Test]
+		public void WarheadTableAndTagFollowLoaderOrder()
+		{
+			var table = EngagementBalance.WarheadTable(new List<MiniYamlNode>
+			{
+				WeaponNode("Ra2mg0",
+					("Warhead@Bullet_Light", "SpreadDamage"),
+					("Warhead@Effect", "CreateEffect"),
+					("Warhead@Secondary", "AreaDamage")),
+			});
+
+			Assert.That(table.ContainsKey("ra2mg0"), Is.True);
+			var refs = table["ra2mg0"];
+			Assert.That(refs.Count, Is.EqualTo(3));
+
+			// The loader emits one object per resolvable node, in order: tag follows the array index.
+			var names = new[] { "SpreadDamageWarhead", "CreateEffectWarhead", "AreaDamageWarhead" };
+			Assert.That(EngagementBalance.WarheadTag(refs, names, 0), Is.EqualTo("Bullet_Light"));
+			Assert.That(EngagementBalance.WarheadTag(refs, names, 1), Is.EqualTo("Effect"));
+			Assert.That(EngagementBalance.WarheadTag(refs, names, 2), Is.EqualTo("Secondary"));
+
+			// A node the loader produced no object for (null warhead) consumes no slot:
+			// the same array now matches nodes 0 and 2, so index 1 is still tagged "Secondary".
+			var skipped = new[] { "SpreadDamageWarhead", "AreaDamageWarhead" };
+			Assert.That(EngagementBalance.WarheadTag(refs, skipped, 1), Is.EqualTo("Secondary"));
+
+			Assert.That(EngagementBalance.WarheadTag(refs, names, 3), Is.EqualTo(""));
+			Assert.That(EngagementBalance.WarheadTag(refs, new[] { "UnknownWarhead" }, 0), Is.EqualTo(""));
+		}
+
+		[Test]
+		public void AddCellsCrossesOnlyTouchedTagArmourPairs()
+		{
+			var versus = new Dictionary<string, int> { ["Medium"] = 80, ["None"] = 200 };
+			var attacker = new List<IReadOnlyList<(string Tag, IReadOnlyDictionary<string, int> Versus)>>
+			{
+				new List<(string, IReadOnlyDictionary<string, int>)> { ("CannonHE_Medium", versus), ("", versus) },
+				new List<(string, IReadOnlyDictionary<string, int>)> { ("Bullet_Light", versus) },
+			};
+
+			var cells = new SortedDictionary<string, int>(System.StringComparer.Ordinal);
+			EngagementBalance.AddCells(cells, attacker, new[] { "Medium", "Plate" });
+
+			// Only the attacker's tags against the defender's armours: no duplicate or unrelated cells.
+			Assert.That(cells.Count, Is.EqualTo(4));
+			Assert.That(cells["CannonHE_Medium|Medium"], Is.EqualTo(80));
+			Assert.That(cells["CannonHE_Medium|Plate"], Is.EqualTo(100)); // armour absent from the table is the engine default
+			Assert.That(cells["Bullet_Light|Medium"], Is.EqualTo(80));
+			Assert.That(cells.ContainsKey("|Medium"), Is.False); // untagged weapons drop out
+		}
+
+		[Test]
+		public void EngagementRecordEmitsBalanceBlock()
+		{
+			var s = new EngagementState { Id = 1, StartTick = 10, EventCount = 1 };
+			s.SeenStart = new EngagementSeen { Tick = 10 };
+			s.SeenEnd = new EngagementSeen { Tick = 40 };
+			var h = new EngagementHeader { GameUid = "g", MapUid = "m", Player = "Multi0", BotType = "genericbot", Faction = "td_gdi", EndTick = 40 };
+
+			// Legacy records without the fields keep emitting no block.
+			using (var legacy = JsonDocument.Parse(EngagementRecord.BuildEngagement(h, s)))
+				Assert.That(legacy.RootElement.TryGetProperty("balance", out _), Is.False);
+
+			h.BalanceFingerprint = "sha256:abc123";
+			h.BalanceVersus = new SortedDictionary<string, int>(System.StringComparer.Ordinal) { ["CannonHE_Medium|Medium"] = 80, ["Bullet_Light|None"] = 200 };
+			using var doc = JsonDocument.Parse(EngagementRecord.BuildEngagement(h, s));
+			var bal = doc.RootElement.GetProperty("balance");
+			Assert.That(bal.GetProperty("fingerprint").GetString(), Is.EqualTo("sha256:abc123"));
+			var versus = bal.GetProperty("versus");
+			Assert.That(versus.GetProperty("CannonHE_Medium|Medium").GetInt32(), Is.EqualTo(80));
+			Assert.That(versus.GetProperty("Bullet_Light|None").GetInt32(), Is.EqualTo(200));
+
+			// Fingerprint-only emits no `versus` key — the fitter's declared legacy-weight path.
+			h.BalanceVersus = new SortedDictionary<string, int>(System.StringComparer.Ordinal);
+			using var provenance = JsonDocument.Parse(EngagementRecord.BuildEngagement(h, s));
+			var pbal = provenance.RootElement.GetProperty("balance");
+			Assert.That(pbal.GetProperty("fingerprint").GetString(), Is.EqualTo("sha256:abc123"));
+			Assert.That(pbal.TryGetProperty("versus", out _), Is.False);
 		}
 	}
 }

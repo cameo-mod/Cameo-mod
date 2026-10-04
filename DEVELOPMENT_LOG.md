@@ -349,6 +349,140 @@ no engine content, no game yaml — boot-gate not applicable.
 - Tests: `tools/tests/test_coverage_report.py` (13 tests: scope, multi-class accumulation, parser agreement,
   ratchet edges). Verified: bare audit exit 0 (run_all compat), `--coverage-xml` self-check 0 regressions/106 baselined.
 
+# 2026-10-04 — Devin-Tier4: PRIORS-CARRY — engagement records carry the balance that produced them
+
+*Devin.* `devin/tier4/takeover-smoke` in `C:/cameo-wt/t4-smoke` (stacked on AR-T3 tip
+`e2e13e250`, base `3ba05ede7`). Spec `SPEC_2026-10-04_claude_priors_carry_over.md`
+(Tier4 lane: engagement-log field; T3Verify: fitter; NOVA: consumer; lead: integration).
+The tier-1 fitter re-priced old logs under *today's* Versus and got cells wrong whenever
+balance moved — every engagement record now carries an additive `balance` block:
+
+```json
+"balance": {"fingerprint": "sha256:…", "versus": {"Bullet_Light|Flak": 163, …}}
+```
+
+- **Fingerprint** = sha256 over mod id + mod version + map uid + sha256 of every
+  manifest weapon/rules file — identifies the exact rules revision that produced
+  the record (map uid is deliberately included: map yaml can overlay weapons).
+- **`versus`** = the resolved Versus percent for every `delivery-tag|armour-class`
+  cell the engagement touched (seen start/end compositions only — never the truth
+  scan). One-sided engagements (lone scout dies, no enemy ever tracked) emit
+  **fingerprint-only** — the fitter's declared legacy-weight (0.4) path, still
+  provenance-bearing. `versus` is omitted rather than emitted `{}` (ambiguous).
+- **Tag identity has exact ledger parity:** runtime `WeaponInfo` discards the
+  `Warhead@<suffix>` key, so tags are recovered from the resolved weapon yaml
+  (`MiniYaml.Load` of manifest weapons + `world.Map.WeaponDefinitions`), matching
+  `extract_stats.py` `damage_warheads[].tag` — parity-checked **1568/1568 weapons,
+  0 mismatch**. Main-warhead pick = max positive damage restricted to the ledger's
+  five damage types (`AffectsIntegrityWarhead` excluded, as the extractor does).
+- New `EngagementBalance` helpers in `EngagementMath.cs` (`Fingerprint`,
+  `WarheadTable`, `WarheadTag`, `AddCells`); ruleset-scoped `BalanceStatsCache`
+  inside `EngagementLogBotModule` (record-only, unsynced — zero sim cost share).
+- **T3Verify contract:** `r["balance"]["versus"]["<Tag>|<Armor>"]` (also accepts
+  `__x__`); fingerprint-only → legacy weight. Peer review of their fitter: contract
+  compatible; minor notes filed (`boundary=False` on missing prev `LedgerHash`
+  undocumented; parsed `prev.staleness_tau_milli` unused).
+
+**Live evidence** (`tools/ai/run_ai_match_batch.py --repeats 1 --time-limit 1`, 3 clean
+matches, `elcheck` support dir): 1128 log lines → **618/618 engagement records carry
+`balance`** — 295 with touched-cell versus (254 distinct `Tag|Armor` keys, 0 malformed,
+resolved values e.g. `Bullet_Heavy|None=200`, `1Dam|*=100`), 323 fingerprint-only
+one-sided records. Three distinct fingerprints = one per batch map variant, as designed.
+Backward compat: `engagement_report.py` and the on-branch `fit_engagement_priors.py`
+parse the new records unchanged (fitter reports "50 empty-side", matching the class).
+
+Gates: build 0 err/0 warn; focused fixture **17/17**; full suite **971/971** (967 + 4
+new balance tests); fog audit PASS (263 sites, 0 new — ruleset yaml is not actor state);
+wiring / personalities / merged / direct-mutation / arch audits PASS (R3–R6
+informational); `ai_module_map --check` current; **boot gate PASS** (menu reached,
+0 new exceptions).
+
+Files: `EngagementMath.cs` (+83), `EngagementLogBotModule.cs` (+164),
+`EngagementMathTest.cs` (+103) — all additive; no yaml, no balance numbers touched.
+
+# 2026-10-04 — Devin-Tier4: AR-T3 — batch --round-trip, AR-2 MP desync regression RED on master, hotspot #1 extraction, module-map consumer fix
+
+*Devin.* `devin/tier4/takeover-smoke` in `C:/cameo-wt/t4-smoke` (base `3ba05ede7`).
+Four pieces of the AR-T3 bundle:
+
+- **`run_ai_match_batch --round-trip`:** new flag runs `round_trip_check.py` on the
+  batch's support dir after `batch_summary.json` is written, stores
+  `summary["round_trip"] = {"exit": rc}`, rewrites the summary and fails the batch
+  on a nonzero checker exit. Extracted into `run_round_trip()` for testability;
+  3 tests in `tools/tests/test_ai_batch_harness.py` (36/36 file PASS).
+- **AR-2 MP regression (`desync` scenario, RED on master as required):** two real
+  clients on opposite teams, `hard` generic bots each side, `AO_tier3_bandits`
+  armed transiently (byte snapshot → apply → finally-restore, launch inside the
+  try). Judge asserts 0 sync reports AND identical plan-bandit pins per bot
+  across clients — pin equality is the honest observable: `Player.cs` activates
+  bot brains host-side only, `Sync.RunUnsynced` wraps bot ticks, and granted
+  conditions carry no `[VerifySync]` state, so a divergent pin can never reach
+  the order hash today (a sync-report-only assert is green-by-construction).
+  **Live run on master: FAIL — Multi2 `steamroller`/`surge` (c0) vs
+  `guerrilla`/`press` (c1); Multi3 `steamroller`/`surge` (c0) vs
+  `turtle`/`balanced` (c1); 0 sync reports, 0 exceptions** — evidence
+  `C:/cameo-wt/_support_t4_smoke/scenario_desync/RESULT.json`. GREEN once the
+  pin moves to shared deterministic random state (AR-2 fix lane). Harness
+  hardening: clients are killed inside `actions` before `finish()` collects, so
+  buffered debug.log pin lines flush to disk before the judge reads them
+  (a live client's log buffer hid c1's pins in an earlier run).
+- **Hotspot #1 `MasterAiBotModule.Rebuild`:** pure decision branches extracted to
+  new `MasterAiEval` (12 functions — urgency latch, coalition-target bias,
+  nemesis override, emergency personality transition, held demands + demand-order
+  gate, region-intel counts, ledger/window deltas, per-game-minute rate, defence
+  fraction + expansion appetite hints, defence request). Rebuild keeps gathering,
+  publication and orders; a REBUILD DECISION TREE comment now documents
+  inputs/outputs/branch ownership and the manifested omniscient read. New
+  `OpenRA.Mods.Cameo.Test/MasterAiEvalTest.cs` — 34 NUnit tests covering every
+  branch incl. boundary/short-circuit/sentinel paths; bit-identical behaviour
+  (no World/Actor/trait reads in the eval file).
+- **`ai_module_map.py` consumer fix (false "no consumer" rows):** two bugs —
+  (a) class body slicing stopped at the next `class` keyword, so a nested helper
+  (`EngineerBotModule`'s `EscortPlan`, `SquadManagerBotModuleCA`'s
+  `MissionAttempt`, `CombatVetoBotModule`'s `CachedVerdict`) swallowed the rest
+  of the module's lookups; spans now close at the next class at the same-or-
+  shallower brace depth. (b) Lookups in non-module classes were invisible;
+  outermost-enclosing-class attribution adds helper consumers
+  (`BaseBuilderQueueManagerCA`, squad states, `BotMissionLog`, `TeamBlackboard`,
+  `BotUnitLeases` statics) shown with `+` in the map. **C2 false positives
+  12→1** — only the genuine phase-A `IBotFrontBackAdvisor` row remains.
+  `audit_bot_wiring.py`/`ai_arch_audit.py` updated for the widened signature.
+
+Gates: build 0 err/0 warn; **967/967 tests** (933 + 34 new); fog audit PASS
+(263 manifested sites, 0 new — eval file registers none); bot-wiring,
+personalities, merged-modules, direct-mutation, ai_arch audits PASS (R3–R6
+informational only); boot gate PASS. Desync stays out of `all` — it is red until
+the AR-2 fix lands. Also surfaced (not this lane): latent
+`TypeDictionary contains multiple instances of PowerInfo` crash in
+`ExpansionPlannerBotModule.IsPowerPlant` on `_ra_doubles` — deterministic on
+that map for a dual-Power-trait actor; crashed two desync runs, filed to lead.
+
+# 2026-10-04 — Devin-Tier4: TAKEOVER-SMOKE (real multi-client takeover smoke, all six scenarios PASS)
+
+*Devin.* `devin/tier4/takeover-smoke` @ `da8595dac` in `C:/cameo-wt/t4-smoke` (base
+`devin/t3verify/bot-takeover@9a0348101`, pre-rev-2). The multi-client smoke T3Verify's
+phase 1 could not run: real `OpenRA.Server.exe` + real `Launch.Connect` clients in
+isolated support dirs, driven by two DEV-ONLY double-gated hooks (`CameoDevArgs` argv
+gate + per-process plan file; `CameoLobbyAutopilot` ServerTrait drives the lobby via
+`Server.InterpretCommand`; `CameoAutoOrders` world trait issues timed orders incl. the
+pause-menu Surrender shape). Harness `tools/ai/takeover_smoke.py` (stale-proc kill,
+3-driver cap via tasklist, uid-in-debug.log start detection, record/block/sync-report/
+exception collection, per-scenario RESULT.json). **Bug found + fixed on this branch:**
+`AiMatchLogWriter.AllBotsResolved` vacuously true on an empty logged set → the
+single-shot record burned at world load → takeovers in all-human matches could never
+be recorded (the boss review's blocker, corroborated live). **Results:** inert PASS
+(both gates hold) · c PASS (solo surrender → defeat) · d PASS (disconnect →
+`controller_client:0`) · a PASS (2v2 kill → disconnect) · b PASS (2v2 surrender) ·
+e PASS (admin-kill → re-election `controller_client:1` on the survivor). 0 sync
+reports, 0 exceptions everywhere. Evidence `C:/cameo-wt/_support_t4_smoke/scenario_*`;
+fleet `NOTE_2026-10-04_devin-tier4_takeover-smoke.md` +
+`STATUS_2026-10-04_devin-tier4_takeover-smoke.md`. Engine findings: mid-game disconnect
+never reassigns `BotControllerClientIndex` (Server.cs:1252, WaitingPlayers only) →
+orphaned lobby bots go inert (scenario e is a 1v1 for that reason); `EnableSingleplayer`
+disables the tracker; `easiest` bots cannot end a match, `brutal` resolves a 2v2 in ~4 min.
+Open vs rev-2 (`ae7075cd8`): exactly-one-record assertion + scenario f (spectator-admin
+server) per T3Verify; maintainer's passive-takeover observation matches the boss's
+omitted-service-condition finding — harness can repro on the corrected checkpoint.
 # 2026-10-04 — Claude (lead): INC 2026-10-04e lands — INC-d completed (P0 raid gate), LC5 admission claims, checker v2, E2 test baseline
 
 *Claude.* Branch `inc/2026_10_04e` from master `1fbd239ff`:

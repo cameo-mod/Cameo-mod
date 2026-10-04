@@ -113,6 +113,7 @@ import time
 import zipfile
 
 REPO_ROOT = pathlib.Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 
 # OpenAL Soft AVs in alcOpenDevice on this host since the .NET 10 / bleed
 # update; the null driver gives headless matches a silent device. Same
@@ -975,6 +976,22 @@ def fingerprint_drift(baseline: dict, current: dict) -> dict:
     }
 
 
+def run_round_trip(support: pathlib.Path, summary: dict) -> int:
+    """Run round_trip_check.py on the batch's own support dir and fold the
+    verdict into batch_summary.json. Returns the checker exit code — any FAIL
+    layer is nonzero and the caller fails the batch."""
+    import round_trip_check
+
+    print("\nround-trip check (every learning-loop layer must leave evidence):")
+    rc = round_trip_check.main([str(support)])
+    summary["round_trip"] = {"exit": rc}
+    (support / "batch_summary.json").write_text(
+        json.dumps(summary, indent=2), encoding="utf-8")
+    if rc != 0:
+        print("round-trip: FAIL layer(s) above — the batch fails even if every match was clean")
+    return rc
+
+
 def _short_hash(value: str | None) -> str:
     return value[:12] if value else "null"
 
@@ -1013,6 +1030,10 @@ def main() -> int:
                         help="log arm drift between attempts and keep running "
                              "(default: abort the batch — a changed arm voids the A/B)")
     parser.add_argument("--keep-variants", action="store_true", help="do not delete variant map dirs on success")
+    parser.add_argument("--round-trip", action="store_true",
+                        help="after the batch, run round_trip_check.py on this support dir; "
+                             "any FAIL layer fails the batch (the learning-loop audit in the run, "
+                             "not an afterthought)")
     parser.add_argument("--render", choices=("fast", "default"), default="fast",
                         help="fast (default): VSync off + a 640x480 window. The engine renders once after EVERY logic tick, "
                              "so with VSync on a match is held to the monitor refresh (~50 ticks/s measured 2026-10-01). "
@@ -1342,9 +1363,13 @@ def main() -> int:
         for name in variants:
             shutil.rmtree(variants_root / name, ignore_errors=True)
 
+    round_trip_failed = args.round_trip and run_round_trip(support, summary) != 0
+
     if drift_aborted is not None:
         return 1
     if new_exceptions:
+        return 1
+    if round_trip_failed:
         return 1
     if not any(r["records"] for r in results):
         return 2

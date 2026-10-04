@@ -955,6 +955,42 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			Rebuild(tick, bot);
 		}
 
+		// REBUILD DECISION TREE (hotspot #1 audit): gathering + publishing stay
+		// here; every branch below names the pure eval that now owns it
+		// (MasterAiEval — plain values in, decision out, bit-identical).
+		//   inputs : actor scan (manifested world read, fog-gated via
+		//            UseFoggedObservation), profiles, regions, threats, ledger,
+		//            trait lookups, previous-snapshot fields (incumbent*, prev*).
+		//   urgency    := Emergency latch else Pressured else Normal
+		//                 → MasterAiEval.ClassifyUrgency
+		//   target     := interval-gated ChooseTarget over alive+reached
+		//                 profiles; coalition bias adopts the shared MainTarget
+		//                 iff still a candidate → ChooseTarget /
+		//                 MasterAiEval.CoalitionBiasTarget
+		//   nemesis    := score ≥ NemesisOverrideWeight bypasses interval+hold
+		//                 iff alive+reached → MasterAiEval.NemesisOverrideTarget
+		//   personality:= unfiltered (log) + filtered candidate;
+		//                 ShouldSwitchPersonality queues SetBotPersonality;
+		//                 once-per-emergency transition → MasterAiEval.
+		//                 EmergencyTransition
+		//   demands    := BuildDemand → ResolveDemands over HeldDemands;
+		//                 SetBotCounterDemand iff controller + set differs
+		//                 → MasterAiEval.HeldDemands/ShouldIssueDemandOrder
+		//   intel      := fresh/presence region counts over enemy-table union
+		//                 → MasterAiEval.CountRegionIntel
+		//   windows    := ledger/econ/attack deltas + per-game-min rates
+		//                 → MasterAiEval.LedgerWindowDelta/WindowDelta/PerGameMin
+		//   hints      := defence fraction / expansion appetite / defence request
+		//                 → MasterAiEval.DefenceFractionHint/
+		//                 ExpansionAppetiteHint/RequestsDefence
+		//   outputs : Situation snapshot, broadcast, coalition directive, orders
+		//             (SetBotPersonality, SetBotCounterDemand), durable fields.
+		//   dead/contradictory branches: none — the Emergency latch, the
+		//             decision-interval gate and the nemesis bypass are all
+		//             reachable; coalition bias is unreachable only while
+		//             UseCoalitionTargetBias is off in yaml.
+		//   omniscient reads: the actor scan at the top is the manifested site;
+		//             fogged mode routes enemy intel through fogMemory instead.
 		void Rebuild(int tick, IBot bot)
 		{
 			var actors = player.World.Actors.Where(a => a.IsInWorld && !a.IsDead).ToArray();
@@ -1050,38 +1086,14 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			// behind another's fresh look and two enemies in one region still count once.
 			var staleAfterTicks = player.PlayerActor.TraitsImplementing<ScoutBotModule>()
 				.FirstEnabledTraitOrDefault()?.Info.StaleAfterTicks ?? 2500;
-			var regionsFresh = 0;
-			var regionsEnemyPresence = 0;
-			for (var i = 0; i < regions.CellCount; i++)
-			{
-				var fresh = false;
-				var presence = false;
-				foreach (var enemyRegions in regions.ByEnemy.Values)
-				{
-					if (i >= enemyRegions.Length)
-						continue;
-					var r = enemyRegions[i];
-					if (r == null)
-						continue;
-					if (!fresh && r.EverSeen && tick - r.LastSeenTick <= staleAfterTicks)
-						fresh = true;
-					if (!presence && r.ArmyValue + r.DefenceValue + r.EconomyValue > 0)
-						presence = true;
-					if (fresh && presence)
-						break;
-				}
-
-				regionsFresh += fresh ? 1 : 0;
-				regionsEnemyPresence += presence ? 1 : 0;
-			}
+			var (regionsFresh, regionsEnemyPresence) = MasterAiEval.CountRegionIntel(
+				regions.ByEnemy, regions.CellCount, tick, staleAfterTicks);
 
 			var threats = TrackThreats(tick, enemies, actorsByOwner, ownBuildings, fogged);
 			var enemyArmy = profiles.Values.Sum(p => p.ArmyValue);
-			var urgency = currentUrgency == BotUrgency.Emergency
-				? BotUrgency.Emergency
-				: profiles.Values.Any(p => p.PressureValue > 0) ||
-					(enemyArmy > 0 && (long)ownArmy * 100 < (long)enemyArmy * Info.PressuredArmyRatio)
-					? BotUrgency.Pressured : BotUrgency.Normal;
+			var urgency = MasterAiEval.ClassifyUrgency(currentUrgency,
+				profiles.Values.Any(p => p.PressureValue > 0), enemyArmy, ownArmy,
+				Info.PressuredArmyRatio);
 			currentUrgency = urgency;
 			if (urgency != BotUrgency.Emergency)
 				emergencyPersonalityHandled = false;
@@ -1115,33 +1127,29 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				// attackable candidates (an alive, reached enemy per this snapshot's
 				// profiles); otherwise keep the chosen target. The nemesis override
 				// below and the next decision interval still trump it.
-				if (Info.UseCoalitionTargetBias && coalition.MainTarget != null)
+				var coalitionProfile = MasterAiEval.CoalitionBiasTarget(
+					Info.UseCoalitionTargetBias, coalition.MainTarget, candidates);
+				if (coalitionProfile != null)
 				{
-					var coalitionProfile = candidates.FirstOrDefault(p => p.Player == coalition.MainTarget);
-					if (coalitionProfile != null)
-					{
-						if (coalitionProfile.Player != incumbentTarget)
-							incumbentSince = tick;
-						target = incumbentTarget = coalitionProfile.Player;
-						targetProfile = coalitionProfile;
-					}
+					if (coalitionProfile.Player != incumbentTarget)
+						incumbentSince = tick;
+					target = incumbentTarget = coalitionProfile.Player;
+					targetProfile = coalitionProfile;
 				}
 			}
 
 			// §4.3 override: a player actively killing our base is the mandatory target,
 			// bypassing both the decision interval and MinimumHoldTicks.
 			var nemesis = threatAnalysis?.GetNemesis();
-			if (nemesis != null && nemesis != incumbentTarget &&
-				threatAnalysis.GetNemesisScore(nemesis) >= Info.NemesisOverrideWeight)
+			var nemesisProfile = MasterAiEval.NemesisOverrideTarget(nemesis,
+				nemesis == null ? 0 : threatAnalysis.GetNemesisScore(nemesis),
+				Info.NemesisOverrideWeight, incumbentTarget, profiles.Values);
+			if (nemesisProfile != null)
 			{
-				var nemesisProfile = profiles.Values.FirstOrDefault(p => p.Alive && p.NearestCells >= 0 && p.Player == nemesis);
-				if (nemesisProfile != null)
-				{
-					incumbentTarget = nemesis;
-					incumbentSince = tick;
-					target = nemesis;
-					targetProfile = nemesisProfile;
-				}
+				incumbentTarget = nemesis;
+				incumbentSince = tick;
+				target = nemesis;
+				targetProfile = nemesisProfile;
 			}
 
 			var currentPersonality = CurrentPersonality();
@@ -1155,8 +1163,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				personalityCandidateSince, tick);
 			sustainedCandidate = candidatePersonality;
 
-			var emergencyTransition = urgency == BotUrgency.Emergency && !emergencyPersonalityHandled &&
-				!Info.EmergencyKeepsPersonality;
+			var emergencyTransition = MasterAiEval.EmergencyTransition(urgency,
+				emergencyPersonalityHandled, Info.EmergencyKeepsPersonality);
 			var botLimits = player.PlayerActor.TraitsImplementing<BotLimits>().FirstEnabledTraitOrDefault();
 			var reactionDelay = botLimits?.Info.PersonalityReactionDelay ?? Info.DefaultPersonalityReactionDelay;
 			// AR-2 (fleet orders 2026-10-04b): the bandit's personality pin is host-side state — it
@@ -1197,11 +1205,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var demandController = player.PlayerActor.TraitOrDefault<BotCounterDemandController>();
 			var activeDemands = demandController?.ActiveDemands.ToHashSet(StringComparer.Ordinal) ??
 				new HashSet<string>(StringComparer.Ordinal);
-			var heldDemands = activeDemands.Count > 0 ? activeDemands :
-				lastIssuedCounterDemands.ToHashSet(StringComparer.Ordinal);
+			var heldDemands = MasterAiEval.HeldDemands(activeDemands, lastIssuedCounterDemands);
 			var resolvedDemands = ResolveDemands(demand, heldDemands, tick, reactionDelay,
 				counterDemandCandidateSince, Info);
-			if (demandController != null && !activeDemands.SetEquals(resolvedDemands))
+			if (MasterAiEval.ShouldIssueDemandOrder(demandController != null, activeDemands, resolvedDemands))
 			{
 				bot.QueueOrder(new Order("SetBotCounterDemand", player.PlayerActor, false)
 				{
@@ -1268,13 +1275,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var ledger = player.PlayerActor.TraitOrDefault<BotArsenalLedger>();
 			var ledgerCreatedCost = LedgerCreatedCost(ledger);
 			var econDestroyed = EconValueDestroyed(ledger);
-			var productionWindow = prevLedgerCreatedCost < 0 || ledgerCreatedCost < 0
-				? 0 : Math.Max(0, ledgerCreatedCost - prevLedgerCreatedCost);
-			var econWindow = Math.Max(0, econDestroyed - prevEconDestroyed);
+			var productionWindow = MasterAiEval.LedgerWindowDelta(prevLedgerCreatedCost, ledgerCreatedCost);
+			var econWindow = MasterAiEval.WindowDelta(prevEconDestroyed, econDestroyed);
 			if (ledgerCreatedCost >= 0)
 				prevLedgerCreatedCost = ledgerCreatedCost;
 			prevEconDestroyed = econDestroyed;
-			var attacksDelta = Math.Max(0, attacksLaunched - prevAttacksLaunched);
+			var attacksDelta = MasterAiEval.WindowDelta(prevAttacksLaunched, attacksLaunched);
 			prevAttacksLaunched = attacksLaunched;
 			if (firstAttackTick < 0 && attacksLaunched > 0)
 				firstAttackTick = tick;
@@ -1292,7 +1298,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			// chosen target), never new enemy data. The defend position is the own
 			// base centre while under pressure, Zero when help isn't needed or no
 			// base stands.
-			var requestsDefence = urgency >= BotUrgency.Pressured;
+			var requestsDefence = MasterAiEval.RequestsDefence(urgency);
 			var expansionClaim = player.PlayerActor.TraitsImplementing<IBotExpansionTargetProvider>()
 				.FirstEnabledTraitOrDefault()?.ExpansionTarget;
 
@@ -1352,8 +1358,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var actualDeltaTicks = prevSnapshotTick < 0 ? 0 : tick - prevSnapshotTick;
 			prevSnapshotTick = tick;
 			var ticksPerGameMin = 60000L / Math.Max(1, player.World.Timestep);
-			var productionPerGameMin = actualDeltaTicks > 0 ? productionWindow * ticksPerGameMin / actualDeltaTicks : 0;
-			var attacksPerGameMin = actualDeltaTicks > 0 ? (long)attacksDelta * ticksPerGameMin / actualDeltaTicks : 0;
+			var productionPerGameMin = MasterAiEval.PerGameMin(productionWindow, actualDeltaTicks, ticksPerGameMin);
+			var attacksPerGameMin = MasterAiEval.PerGameMin(attacksDelta, actualDeltaTicks, ticksPerGameMin);
 
 			// §12.14 PL-1: the leads over every seen enemy combined, computed always —
 			// UsePersonalityLeads only gates the consumers that lean on them.
@@ -1423,8 +1429,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				Regions = regions,
 				Influence = Info.UseInfluenceLayers ? influenceLayers : null,
 				FogMemory = fogMemory,
-				DefenceFractionHint = Clamp(urgency == BotUrgency.Emergency ? 80 : urgency == BotUrgency.Pressured ? 55 : 30),
-				ExpansionAppetiteHint = Clamp(urgency == BotUrgency.Normal && ownArmy > 0 ? 60 : 20),
+				DefenceFractionHint = MasterAiEval.DefenceFractionHint(urgency),
+				ExpansionAppetiteHint = MasterAiEval.ExpansionAppetiteHint(urgency, ownArmy),
 				OwnArmyValue = ownArmy,
 				OwnDefenceValue = ownDefence,
 				OwnBuildings = ownBuildings.Length,
