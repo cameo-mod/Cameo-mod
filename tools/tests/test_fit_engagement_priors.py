@@ -359,3 +359,26 @@ def test_profile_collisions_are_named():
                 {"ledger": {}, "sections": {"g": {"dup_unit": {"armaments": []}}}}))
         _, meta, _ = fp.load_profiles(root)
     assert meta["collisions"] == ["dup_unit"]
+
+
+def test_global_scale_milli_key_emitted_and_clamped():
+    # Adopted ruling (was: header comment only): consumers multiply g back into FITTED
+    # cells while stale/missing cells stay at neutral 1000, so mixed tables need g as a
+    # real key - clamped to the same [MIN_MILLI, MAX_MILLI] bounds as factor cells.
+    res = _fit([_rec3x()] * 20)
+    assert res["global_scale_milli"] == fp.MAX_MILLI   # g ~3.0 -> 3000 clamps to 2000
+    assert "\tGlobalScaleMilli: 2000" in fp.to_yaml(res, "h").splitlines()
+
+    half = _rec3x()
+    half["truth"]["enemy_loss_value"] = 4500       # dir-0 obs 4500 vs exp 3000
+    half["outcome"]["own_lost_unit_value"] = 150   # dir-1 obs 150 vs exp 100 -> g = 1.5
+    res2 = _fit([half] * 20)
+    assert res2["global_scale_milli"] == 1500
+    assert "\tGlobalScaleMilli: 1500" in fp.to_yaml(res2, "h").splitlines()
+
+    cold = _rec3x()
+    cold["truth"]["enemy_loss_value"] = 500        # obs 800 total
+    # expected loss = full min(census, record-cap) when surviving is 0 -> g ~0.24
+    cold["seen"]["start"]["predicted_enemy_surviving_permille"] = 0
+    res3 = _fit([cold] * 20)
+    assert res3["global_scale_milli"] == fp.MIN_MILLI

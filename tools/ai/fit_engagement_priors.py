@@ -431,6 +431,7 @@ def fit(data: dict, profiles: dict, priors: dict) -> dict:
     return {
         "cells": cells, "evidence": {k: (obs.get(k, 0.0), exp.get(k, 0.0)) for k in cells},
         "cell_prior": cell_prior, "global_scale": global_scale,
+        "global_scale_milli": max(MIN_MILLI, min(MAX_MILLI, round(1000 * global_scale))),
         "defence_state": defence_state, "into_defences_milli": into_defences_milli,
         "exponent_milli": exponent_milli,
         "attack_timing": attack_timing, "response": response_q, "suicide": suicide_q,
@@ -487,7 +488,13 @@ def to_yaml(result: dict, ledger_hash: str) -> str:
     if result.get("excluded_tags"):
         lines.append(f"# excluded delivery tags (empty Versus prior, not fitted): {', '.join(result['excluded_tags'])}")
     lines += ["BotEngagementPriors:", "\tSchema: 1",
-             f"\tLedgerHash: {ledger_hash}", f"\tEngagements: {result['fitted']}",
+             f"\tLedgerHash: {ledger_hash}",
+             # The global scale fitted cells are relative to: consumers multiply it back
+             # into FITTED lookups (missing/stale cells stay at neutral 1000), so mixed
+             # tables need it as a key - a comment would not reach MiniYaml. Clamped to
+             # the same [MIN_MILLI, MAX_MILLI] bounds as the factor cells.
+             f"\tGlobalScaleMilli: {result['global_scale_milli']}",
+             f"\tEngagements: {result['fitted']}",
              f"\tAttritionExponentMilli: {result['exponent_milli']}",
              f"\tIntoDefencesMilli: {result['into_defences_milli']}"]
     for (d, a), milli in sorted(result["cells"].items()):
