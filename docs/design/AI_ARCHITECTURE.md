@@ -3634,7 +3634,11 @@ The fitter's `AttritionExponentMilli` is consumed through `IBotEngagementPriors.
 to the same [500, 2000] knob range — alpha in [0.5, 2.0], the pure square law when absent or disabled. Observability:
 the provider's `PriorsState` (`none` / `error` / `fitted:N/stale:M`, stale read live) lands on the match record's
 `priors_state` player field, and `tier1_priors` joined `UnitCompositionsBotModule.WatchConditions` — the priors shift
-veto verdicts, so they belong in the armed-set attribution (§12.33) alongside `combatveto` itself.
+veto verdicts, so they belong in the armed-set attribution (§12.33) alongside `combatveto` itself. The consumer also
+reads the optional `GlobalScaleMilli` header key (default 1000): the v2 fitter emits cell/defence/into-defences factors
+RELATIVE to a global obs/exp scale (the accounting-fixed ~1.13), and the consumer multiplies it back in so a
+relative-fitted file reproduces measured performance — an absent key keeps Schema-1 absolute semantics, and an
+unfitted lookup never fabricates a correction from `g` alone.
 
 **Perf**: per-squad verdict cached `VetoCacheTicks` (25); the launch check runs once per `AttackForceInterval`;
 the delivery-tag map resolves once per mod load (`BotUnitProfiles` static); no per-tick world enumeration beyond

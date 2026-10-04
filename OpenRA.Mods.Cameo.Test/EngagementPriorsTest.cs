@@ -96,5 +96,33 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(priors.FactorCount, Is.EqualTo(0));
 			Assert.That(priors.FactorPermille("d", "a"), Is.EqualTo(BotEngagementPriors.Neutral));
 		}
+
+		[Test]
+		public void GlobalScaleMilliReabsolutizesRelativeFactors()
+		{
+			// The fixed fitter emits cell/defence/into-defences factors RELATIVE to a global obs/exp
+			// scale g; GlobalScaleMilli multiplies g back in so the consumer reproduces measured
+			// performance. Absent key = Schema-1 absolute semantics; unfitted lookups stay Neutral.
+			var yaml = "BotEngagementPriors:\n" +
+				"\tGlobalScaleMilli: 1130\n" +
+				"\tIntoDefencesMilli: 1006\n" +
+				"\tDeliveryArmour@CannonAP_Medium__x__Heavy: 1250\n" +
+				"\tPriorPct@CannonAP_Medium__x__Heavy: 100\n" +
+				"\tDefenceState@CannonAP_Medium: 800\n";
+			var priors = Load(yaml);
+			Assert.That(priors.FactorPermille("CannonAP_Medium", "Heavy"), Is.EqualTo(1412));   // 1250 x 1.13
+			Assert.That(priors.DefenceFactorPermille("CannonAP_Medium"), Is.EqualTo(904));      // 800 x 1.13
+			Assert.That(priors.IntoDefencesPermille, Is.EqualTo(1136));                         // 1006 x 1.13
+			Assert.That(priors.FactorPermille("Bullet_Light", "Heavy"), Is.EqualTo(BotEngagementPriors.Neutral));
+		}
+
+		[Test]
+		public void AbsentGlobalScaleKeepsAbsoluteSemantics()
+		{
+			// A file with no GlobalScaleMilli row reads factors verbatim (Schema-1 absolute).
+			Assert.That(Load(Yaml).FactorPermille("CannonAP_Medium", "Heavy"), Is.EqualTo(1250));
+			Assert.That(Load("BotEngagementPriors:\n\tGlobalScaleMilli: 900\n").IntoDefencesPermille,
+				Is.EqualTo(BotEngagementPriors.Neutral));  // no fitted row: g alone never fabricates a correction
+		}
 	}
 }

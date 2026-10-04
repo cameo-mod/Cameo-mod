@@ -44,8 +44,16 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		readonly Dictionary<string, int> defenceFactors = new(StringComparer.Ordinal);
 		readonly HashSet<string> staleCells = new(StringComparer.Ordinal);
 
-		/// <summary>Residual into static defences (permille) applied when the TARGET is a building. Neutral = 1000.</summary>
-		public int IntoDefencesPermille { get; private set; } = Neutral;
+		int? intoDefences;
+
+		/// <summary>Residual into static defences (permille) applied when the TARGET is a building. Neutral = 1000
+		/// (absent row = unfitted, never the global scale).</summary>
+		public int IntoDefencesPermille => intoDefences == null ? Neutral : Scale(intoDefences.Value);
+
+		/// <summary>Optional global obs/exp scale the fitted factors are relative to (permille; default 1000 =
+		/// absolute factors). When the fitter emits it, every lookup multiplies it back in so relative factors
+		/// reproduce measured performance; absent keeps Schema-1 absolute semantics.</summary>
+		public int GlobalScaleMilli { get; private set; } = Neutral;
 
 		public int FactorCount => factors.Count;
 		public int StaleCount => staleCells.Count;
@@ -67,7 +75,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				else if (node.Key == "AttritionExponentMilli" && int.TryParse(v, NumberStyles.Integer, CultureInfo.InvariantCulture, out var ae))
 					priors.AttritionExponentMilli = ae;
 				else if (node.Key == "IntoDefencesMilli" && int.TryParse(v, NumberStyles.Integer, CultureInfo.InvariantCulture, out var id))
-					priors.IntoDefencesPermille = id;
+					priors.intoDefences = id;
+				else if (node.Key == "GlobalScaleMilli" && int.TryParse(v, NumberStyles.Integer, CultureInfo.InvariantCulture, out var gs))
+					priors.GlobalScaleMilli = gs;
 				else if (node.Key.StartsWith("DeliveryArmour@", StringComparison.Ordinal) && int.TryParse(v, NumberStyles.Integer, CultureInfo.InvariantCulture, out var f))
 				{
 					var cell = CellKey(node.Key["DeliveryArmour@".Length..]);
@@ -114,13 +124,18 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				return Neutral;
 			}
 
-			return v;
+			return Scale(v);
 		}
 
 		/// <summary>Per-delivery static-defence effectiveness in thousandths; Neutral when the delivery
 		/// was never fitted (these rows carry no PriorPct — the scalar is trusted as committed).</summary>
 		public int DefenceFactorPermille(string delivery) =>
-			delivery != null && defenceFactors.TryGetValue(delivery, out var v) ? v : Neutral;
+			delivery != null && defenceFactors.TryGetValue(delivery, out var v) ? Scale(v) : Neutral;
+
+		// Fitted values come back absolute: the optional global obs/exp scale the fitter wrote them
+		// relative to is multiplied back in. Neutral stays Neutral — a stale or missing cell reads
+		// the pure predictor, not the corrected global level.
+		int Scale(int fittedMilli) => (int)((long)fittedMilli * GlobalScaleMilli / Neutral);
 	}
 
 	[TraitLocation(SystemActors.Player)]
