@@ -5187,6 +5187,11 @@ override": *"Refuse, but emergencies can override."*
 * **Scope.** Units only (actors that can move); buildings and production are not leased. Bots without a lease registry
   — `classic`, the omniscient A/B reference — pass untouched. Orders queued outside a module call are never refused
   (counted as `unattributed`).
+* **Grouped orders (AR-1, 2026-10-04).** A grouped order — null `Subject`, a `GroupedActors` array — resolves per
+  member (`Order.FromGroupedOrder`), so the gate judges each member on its own lease. A refused member is **stripped**,
+  not used to kill the order: refusing the whole group would drop a twenty-unit AttackMove over one conflicted member,
+  a stall worse than the fight the gate exists to prevent; stripping still keeps the usurped unit under its holder.
+  The order is rebuilt over the survivors (`BotOrderGroup`); it dies only when no member survives.
 * **Rollout (AI_MASTER_PLAN §1.2 step 6).** `BotUnitLeaseRegistry.EnforceAtOrderGate` is false until its A/B: the gate then
   only COUNTS (`conflicts`) and records crossed orders (two modules ordering one unit inside `CrossedOrderWindowTicks`).
   A cross is two owners in fact: when the earlier issuer's lease has ended since its order — the holder is now the new
