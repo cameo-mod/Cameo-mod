@@ -1,3 +1,33 @@
+# 2026-10-04 — Devin-T2Verify: hs5×BP-2 fold (BP-2's duplicated decisions absorbed into the queue seams)
+
+*Devin.* `devin/t2verify/hs5-bp2-fold@4c363b6a8` in `C:/cameo-wt/ref1` — stacked branch:
+`8c8fe1b02` (hotspot #5 seams) + `7befd921c` (BP-2 `08d288591` cherry-picked + arch docs regen)
++ `4c363b6a8` (the fold). This is the artifact for the agreed merge order — BP-2 lands on master,
+the rebase/fold follows; the fold work is already done and gated here.
+
+Three duplicated predicates BP-2 re-stated are routed through `BaseBuilderQueueEvalCA`:
+
+* radar priority override → `PickOrPower` (radar when power-sufficient, else `power`; the debug
+  line names which arm returned — the same two messages as before);
+* `AdvisorLegalCells` → `PlacementCellAdmitted` with the requirement-distance clause `() => true`
+  (the advisor's front/back distance semantics cover that axis); short-circuit order and the
+  own-building spacing check preserved;
+* random-variant choice → new seam `PicksRandomVariant(hasVariants, hasFacings)`, shared by
+  `findPos` and `FrontBackVariant`: draw only when variants exist and no facings are configured;
+  facing-aimed placement still goes through `PickFacingVariant`. RNG draw order unchanged.
+
+No behavior change intended — same branches, same laziness, same draw order.
+
+Gates: build 0 err / 0 warn; Cameo tests **972/972** (971 + 1 new `PicksRandomVariant` branch
+test); fog audit PASS (263 manifested sites, no new enumeration); direct-mutation PASS;
+arch-freshness PASS after regen (the regen records BP-2's `IBotFrontBackAdvisor` consumer —
+`MasterAiBotModule` — clearing its DEAD-END warn, 33→32); bot wiring PASS; boot gate PASS
+(menu reached, PID-scoped kill, no orphan, no new exceptions).
+
+Merge-order note for the lead: this stack is one way to land the pair; if BP-2 lands first from
+T3Verify's own branch, `4c363b6a8` rebases as the standalone fold. `BotSituation.cs` conflict
+with Tier4 radar-contacts is unchanged by this commit (flagged separately).
+
 # 2026-10-04 — Devin-T3Verify: BP-IMPL phase 2 (front/back advisor wired into the shared queue manager)
 
 *Devin.* `devin/t3verify/bp-front-back-p2` in `C:/cameo-wt/bp` (base `3ba05ede7` — master after INC 2026-10-04e,
