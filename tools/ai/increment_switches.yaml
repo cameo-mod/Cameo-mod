@@ -19,7 +19,7 @@ groups:
       UseZoneTopology: true
   E_engt_transport:                  # re-arm the Frans transport provider ONLY after #716 (orders-only, DESIGN §19.8) lands
     GrantConditionOnBotOwner@engttransport:
-      Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla
+      Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla, exploit_expansion, exploit_steamroller, exploit_tech
   H_influence_layers:                # NOVA IM-1 — BotInfluenceLayers on the situation snapshot + scout consumption
     MasterAiBotModule:
       UseInfluenceLayers: true
@@ -61,13 +61,13 @@ groups:
       UseUtilityAxes: true
   K_cn2_unit_repair:                 # DAWN CN2 - UnitRepairBotModule (CN port): depots/repair-near/mobile repairers for damaged units
     GrantConditionOnBotOwner@cn2unitrepair:
-      Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla
+      Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla, exploit_expansion, exploit_steamroller, exploit_tech
   L_cn2_garrison_defense:            # DAWN CN2 - GarrisonDefenseBotModule (CN port): mans own garrisons, threat-matched specialists
     GrantConditionOnBotOwner@cn2garrison:
-      Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla
+      Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla, exploit_expansion, exploit_steamroller, exploit_tech
   M_cn3_deploy:                      # DAWN CN3 - DeployBotModule (CN port): artillery/stat/support/ability deploy driving
     GrantConditionOnBotOwner@cn3deploy:
-      Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla
+      Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla, exploit_expansion, exploit_steamroller, exploit_tech
   N_ca6_target_intel:                # DAWN CA-6 - scout<->target loop: stale intel loses score; scouts refresh the main target's footprint
     MasterAiBotModule:
       WeightIntelAge: 120
@@ -103,24 +103,24 @@ groups:
       UseTeamRoleSplit: true
   X_cn3_bridge_repair:               # DAWN CN3 - BridgeRepairBotModule (CN port): idle engineers enter damaged bridge huts; demand builds one when none exist
     GrantConditionOnBotOwner@cn3bridgerepair:
-      Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla
+      Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla, exploit_expansion, exploit_steamroller, exploit_tech
   Y_cn3_stealth_squads:              # DAWN CN3 — stealth squads (CN port): cloak-capable armed ground ambushes around remembered detector coverage
     GrantConditionOnBotOwner@cn3stealthsquads:
-      Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla
+      Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla, exploit_expansion, exploit_steamroller, exploit_tech
   Z_def3_remote_outpost_coverage:    # NOVA DEF-3 — defences advise around the most-uncovered expansion front, not just the picked yard
     DefenseCoveragePlanner:
       CoverRemoteOutposts: true
   F_plug_spawn:                      # NOVA — restore the vendored PlugSpawnerBotModuleCA (plug->hosts map, prereq-gated): WC2/Zerg tech chains, TS uplinks, temple nuke
     GrantConditionOnBotOwner@plugspawn:
-      Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla
+      Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla, exploit_expansion, exploit_steamroller, exploit_tech
   AA_cn4_region_roles:               # NOVA CN4 - RegionRolesBotModule (CN port): zone-graph regions get Core/Economy/Military/Outpost roles; defence fronts prefer Military/Outpost ground (needs D_zone_topology)
     GrantConditionOnBotOwner@cn4regionroles:
-      Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla
+      Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla, exploit_expansion, exploit_steamroller, exploit_tech
     DefenseCoveragePlanner:
       UseRegionRoles: true
   AB_garrison_contest:               # EMBER GC-1 - leased infantry claim scouted neutral garrisonables + Raid missions clear enemy-occupied ones (artillery stand-off via the siege evaluator); LoadGarrisonerCA@Infantry yields genericbot while armed
     GrantConditionOnBotOwner@garrisoncontest:
-      Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla
+      Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla, exploit_expansion, exploit_steamroller, exploit_tech
   AC_cover_map_expansion:            # EMBER EX-4 - MCV appetite tracks free far fields, not McvTargetCount: expand until every reachable field is claimed; difficulty paces speed, never the ceiling
     ExpansionPlannerBotModule:
       CoverAllFields: true
@@ -136,7 +136,7 @@ groups:
       RerankCandidates: true
   AE_army_first:                     # the ONE army-first switch (ArmyFirstBotModule, AF-1 + DAWN merged): holds non-essential buildings while cash < 2500 (resume >= 4000) OR while combat units < 14 with cash > 1500; conyard/refinery/power/first factory always pass
     GrantConditionOnBotOwner@armyfirst:
-      Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla
+      Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla, exploit_expansion, exploit_steamroller, exploit_tech
     ArmyFirstBotModule:
       MinArmyUnitsBeforeBuildings: 14
       ArmyFirstMinCash: 1500
@@ -145,29 +145,29 @@ groups:
       ScanForLowEffectHarvestersInterval: 125
   AH_parallel_production:            # EMBER PP-1 - IBotProductionWidth provider: BuildUnit fills up to 4 idle queues per category per call (3 war factories produce in parallel); provider-seam so shared @generic never hands it to classic
     GrantConditionOnBotOwner@parallelprod:
-      Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla
+      Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla, exploit_expansion, exploit_steamroller, exploit_tech
   AG_assault_fanout:                 # the line-of-death fix, ONE switch (CV concave 12.7a unified with NOVA ATK-1, 2026-10-02): arms the AssaultFormationBotModule provider so Rush squads deploy a range-matched concave arc (wider for bigger armies) and commit staggered before engaging. Provider tunables live on its Info; classic has no provider = bit-identical
     GrantConditionOnBotOwner@assaultfanout:
-      Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla
+      Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla, exploit_expansion, exploit_steamroller, exploit_tech
   ST_scale_targets:                  # DESIGN 19.10 / AI_ARCHITECTURE 12.22: arms the ScaleTargetsBotModule provider - harvester/refinery/production/conyard/tech/superweapon/aircraft targets and the army value target grow with the seen enemy, the unscouted map, difficulty, personality and game time, and replace the fixed per-tier limits (HarvesterLimit, RefineryLimit, ProductionTypeLimit, McvTargetCount, tech/superweapon BuildingLimits, MaxAircraft, SquadValue). No provider (classic, switch off) = every consumer keeps its limit, bit-identical
     GrantConditionOnBotOwner@scaletargets:
-      Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla
+      Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla, exploit_expansion, exploit_steamroller, exploit_tech
   AK_build_order_knobs:              # DESIGN 19.2 / AI_ARCHITECTURE 12.25 BO-1: arms the BuildOrderKnobsBotModule provider - eight bounded multipliers (tempo, greed, production, tech, defence, power_margin, expansion, support) + a named opening from personality preset x learned x jitter with a fog-honest react layer; the shared base builder reads it only from an enabled provider (BuildingDelays/Intervals, BuildingFractions by category, power surplus, opening step). No provider (classic, switch off) = bit-identical
     GrantConditionOnBotOwner@buildorderknobs:
-      Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla
+      Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla, exploit_expansion, exploit_steamroller, exploit_tech
   AL_emergency_net_loss:             # maintainer ruling 2026-10-03, AI_ARCHITECTURE open question 10 - Emergency means LOSING (loss >25% of army+loss AND deaths > kills in the window; clears at 12%) and never rewrites the personality (no forced turtle); target + urgency only
     MasterAiBotModule:
       EmergencyLossArmyPct: 25
       EmergencyKeepsPersonality: true
   AM_army_staging:                   # DESIGN 19.12 / AI_ARCHITECTURE 12.29, maintainer 2026-10-03: arms the ArmyStagingBotModule planner - the idle army waits at the front with the defences, split by threatened side; the squad manager stages the pool, the base builder rallies at the primary cell. No provider (classic, switch off) = bit-identical
     GrantConditionOnBotOwner@armystaging:
-      Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla
+      Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla, exploit_expansion, exploit_steamroller, exploit_tech
   AO_tier3_bandits:                  # fleet orders 2026-10-03, DAWN tier-3: arms PlanBanditBotModule - Thompson-samples one personality arm (pins BotPersonalityController) + one attack-plan knob overlay at match start over the EL engagement posteriors in ai/learned/plan_bandits.yaml, pooled any->family->faction->matchup with a safety floor. Classic is not genericbot = bit-identical
     GrantConditionOnBotOwner@planbandits:
-      Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla
+      Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla, exploit_expansion, exploit_steamroller, exploit_tech
   AQ_inmatch_adapt:                  # DESIGN 19.13 / AI_ARCHITECTURE 12.32 (NOVA EL-1): arms the InMatchAdaptBotModule provider - reads the running total_milli of this match's closed non-skirmish engagements (seen side) and biases the squad manager's retreat/commit bar by a bounded delta (losing tightens, winning loosens). Resets each match. No provider (classic, switch off) = bit-identical
     GrantConditionOnBotOwner@inmatchadapt:
-      Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla
+      Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla, exploit_expansion, exploit_steamroller, exploit_tech
   F2_ca_f2p2:                        # CA F2 part 2 hand-ports (WP-A1/A3/A4): air limits, route start, squad state tweaks
     UnitBuilderBotModuleCA:        # one instance is shared by genericbot AND classicbot (34 ContentPacks extend it), so it cannot be split
       SwitchCondition: genericbot  # the two switches below take effect only while this holds: classic stays the A/B reference
@@ -209,4 +209,4 @@ groups:
       UseCoalitionAssist: true
   AN_combat_veto:                    # DESIGN 19.13 tier 2 / AI_ARCHITECTURE 12.31, INC-N (NOVA): arms CombatVetoBotModule + EngagementPriorsBotModule - one fog-honest veto consulted where a squad commits an attack (idle engage, committed approach at the lower abort line, wave launch vs remembered defences) or a retreat the pursuit outruns; SEEN forces only, the same BotCombatPredictor, tier-1 priors multiplied in when present; every veto a Denied mission card. No provider (classic, switch off) = bit-identical
     GrantConditionOnBotOwner@combatveto:
-      Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla
+      Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla, exploit_expansion, exploit_steamroller, exploit_tech

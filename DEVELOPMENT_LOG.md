@@ -23,6 +23,18 @@ provider rule), `IBotInMatchAdaptation` (CA seam), and the squad manager's lazy 
 inserted into master's doc unchanged. Gates: build 0 err / 0 mod-code warnings, 839/839 tests, arch coverage +
 module map regenerated, wiring/fog/direct-mutation PASS, `tools/boot_gate.ps1` PASS.
 
+# 2026-10-04 — devin-tier4: exploit_expansion / exploit_steamroller / exploit_tech pins (SPSA harness)
+
+*Devin (tier4).* The SPSA batch needs any one (personality, faction) pinned per arm; the exploit_* route
+designed for the league covers only rush/turtle/guerrilla, so the three remaining poles get the same hidden
+`ModularBot@Exploit*AI` treatment — `genericbot` + `hardbot` grants, `HiddenInLobby`, one
+`PinnedPersonalities` entry each, `DifficultyAliases` -> hard (insurance parity), the `bot_ai.*` locale
+names, and every `GrantConditionOnBotOwner` `Bots:` list that named the trio (ai.yaml x3 +
+tools/ai/increment_switches.yaml x17). Equivalence proven by `tools/audit/audit_bot_wiring.py --json`:
+identical granted-token sets to `exploit_rush` across all six personality profiles; `audit_bot_insurance.py`
+PASS (aliased, not uninsured); 834/834 dotnet test; boot gate PASS. Usage: `--bot-a exploit_expansion`
+pins (expansion) for the whole batch — same type on plus and minus trees, different learned files.
+
 # 2026-10-03 — coordinator: tier-3 hotfix (INC c) + ORDERS round 2 to NOVA/DAWN/EMBER
 
 *Claude.* INC c `3c793d4c3` = DAWN `18556ada5` (GetVariableObservers `override` + base: tier 3 was permanently disabled

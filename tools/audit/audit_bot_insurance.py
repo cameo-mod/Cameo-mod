@@ -62,8 +62,9 @@ INSURANCE_RE = re.compile(r"\b\w+botinsurance\b")
 # `HiddenInLobby` harness/donor types per their yaml comments: `classic` is the A/B reference
 # (insuring it moves the baseline), the `exploit_*` trio are harness-only league testbeds
 # whose exposure purpose an income drip would blunt, and `fransbot` is the module donor.
-UNINSURED_BOT_TYPES = {"campaign", "classic", "exploit_guerrilla", "exploit_rush",
-                       "exploit_turtle", "fransbot"}
+UNINSURED_BOT_TYPES = {"campaign", "classic", "exploit_expansion",
+                       "exploit_guerrilla", "exploit_rush", "exploit_steamroller",
+                       "exploit_tech", "exploit_turtle", "fransbot"}
 
 CS_TRAIT = pathlib.Path("OpenRA.Mods.Cameo/Traits/DynamicBotInsurance.cs")
 TOKEN_RE = re.compile(r"[A-Za-z_][A-Za-z0-9_.-]*|\(|\)|&&|\|\||!")

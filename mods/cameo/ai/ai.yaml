@@ -43,12 +43,12 @@
 		Condition: engt-transport
 		Bots: fransbot
 	# INC-3 (the F1 question as a switch): arms the eight Frans pure-service modules on the
-	# bots named below — the arm sets `Bots: hard, exploit_rush, exploit_turtle, exploit_guerrilla`
+	# bots named below — the arm sets `Bots: hard, exploit_rush, exploit_turtle, exploit_guerrilla, exploit_expansion, exploit_steamroller, exploit_tech`
 	# (genericbot && hardbot, exactly the F1-ctrl population; classic stays Frans-free).
 	# Default grants to `fransbot` only, where the flag is already implied — inert on master.
 	GrantConditionOnBotOwner@inc3f1:
 		Condition: inc3_frans_services
-		Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla
+		Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla, exploit_expansion, exploit_steamroller, exploit_tech
 	# CN2 unit-repair manager + garrison defence: the arm flips these to the genericbot tier list in the
 	# increment A/B (tools/ai/increment_switches.yaml); default grants to fransbot only - inert on master.
 	GrantConditionOnBotOwner@cn2unitrepair:
@@ -465,12 +465,24 @@ Player:
 		Name: bot_ai.exploit_guerrilla
 		Type: exploit_guerrilla
 		HiddenInLobby: True
+	ModularBot@ExploitExpansionAI:
+		Name: bot_ai.exploit_expansion
+		Type: exploit_expansion
+		HiddenInLobby: True
+	ModularBot@ExploitSteamrollerAI:
+		Name: bot_ai.exploit_steamroller
+		Type: exploit_steamroller
+		HiddenInLobby: True
+	ModularBot@ExploitTechAI:
+		Name: bot_ai.exploit_tech
+		Type: exploit_tech
+		HiddenInLobby: True
 	GrantConditionOnBotOwner@exploitstack:
 		Condition: genericbot
-		Bots: exploit_rush, exploit_turtle, exploit_guerrilla
+		Bots: exploit_rush, exploit_turtle, exploit_guerrilla, exploit_expansion, exploit_steamroller, exploit_tech
 	GrantConditionOnBotOwner@exploittier:
 		Condition: hardbot
-		Bots: exploit_rush, exploit_turtle, exploit_guerrilla
+		Bots: exploit_rush, exploit_turtle, exploit_guerrilla, exploit_expansion, exploit_steamroller, exploit_tech
 	ProvidesPrerequisite@botplayer:
 		Prerequisite: botplayer
 		RequiresCondition: genericbot || classicbot
@@ -4044,6 +4056,9 @@ Player:
 			exploit_rush: rush
 			exploit_turtle: turtle
 			exploit_guerrilla: guerrilla
+			exploit_expansion: expansion
+			exploit_steamroller: steamroller
+			exploit_tech: tech
 	BotCounterDemandController:
 		RequiresCondition: genericbot
 	MasterAiBotModule:
