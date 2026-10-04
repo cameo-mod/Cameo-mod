@@ -2,7 +2,7 @@
 
 ## 2026-10-04 — NOVA: N1 one-branch port INC-ready — `AP_tier1_priors`
 
-`Agent: Devin (nova) · branch devin/nova/t2-port @ <hash> · worktree C:/cameo-wt/nova-t2port`
+`Agent: Devin (nova) · branch devin/nova/t2-port @ 70879b038 · worktree C:/cameo-wt/nova-t2port`
 
 **INC-N ready: `devin/nova/t2-port` — switch: `AP_tier1_priors` (default off).** Round-2 N1: the
 tier-2 follow-ups consolidated onto master ≥ `8e86fca23` — (b) `BotWeaponProfile.Delivery` tag axis,
@@ -18,6 +18,10 @@ eval applies `ratio^alpha`, [500,2000] bounds) — it was parsed-but-inert; prov
 `tier1_priors` joined `WatchConditions` (priors shift veto verdicts = survivorship filter, §12.33);
 parse failures degrade to neutral instead of throwing in BotTick. Re-gated: 841/841
 (+AttritionExponentWarpsTheRatio), audits PASS, boot PASS.
+Follow-up `70879b038`: `GlobalScaleMilli` consumed — the v2 fitter's relative factors go absolute at
+every fitted lookup (`v × g / 1000`); absent key = Schema-1 semantics; stale/unfitted stays Neutral —
+g never fabricates. Emit side is one yaml line pending the coordinator's ruling (fleet
+`REPLY_2026-10-04_nova_to_t3verify_globalscale.md`). 843/843.
 
 ## 2026-10-03 (night) — Claude (coordinator): ORDERS round 2 for NOVA / DAWN / EMBER + the tier-3 hotfix
 
