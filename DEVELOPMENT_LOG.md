@@ -1,3 +1,29 @@
+# 2026-10-04 — Devin-T3Verify: AR-10 tick phases — the resolved Player order is the contract (INC-N candidate)
+
+*Devin.* Branch `devin/t3verify/ar10-tick-phases` off `ar567-provider-precedence@4b00d9b99`. The arch review's
+sense→decide→act question, closed as documentation + audit rather than a reorder:
+
+- **Finding**: `ModularBot` ticks enabled `IBotTick` modules in resolved `Player` child order — merged across
+  every loaded rules file. `ContentPacks/*/ai.yaml` files load before `mods/cameo/ai/ai.yaml` and the first
+  pack merged wins position: `TiberianDawn/Shared`+`GDI` hoist `UnitBuilderBotModuleCA` (0), the six
+  `SquadManagerBotModuleCA` personalities (1–5, 9) and `BaseBuilderBotModuleCA` (8) ahead of every
+  sense/decide module — the act modules tick first. 48 consumer-before-provider read edges result; all are
+  one-tick-old snapshot reads, safe because every seam publishes on its own cadence (25–125 ticks) which
+  bounds the lag regardless. `ScaleTargets`/`BuildOrderKnobs` (pos 244/247) lag `MasterAi` (263) in the
+  *feedback* direction — the good side: all their consumers (the early builders) read them fresh.
+- **Audit**: `ai_arch_audit.py` gains **R8** — every loaded `IBotTick` type must declare its layer in
+  `LAYER_OF` (PERCEPTION+SITUATION=sense, STRATEGY=decide, EXECUTION+PRODUCTION=act, SUPPORT=infra,
+  TELEMETRY=observe; ERROR if missing), and `FRESH_EDGES` declares any seam requiring same-tick freshness
+  (empty today; ERROR if a declared edge ever reads stale). The coverage doc now prints the full per-instance
+  tick-order table (82 ticking instances) plus the 48 documented last-tick read edges and 10 call-time
+  provider reads — `--check` ratchets any yaml/include reorder. `docs/design/AI_ARCHITECTURE.md` gains
+  §10.5c with the contract and the reasoning (explicit reorder or snapshot stamps would annotate the same
+  staleness without removing it — cadence already bounds it).
+
+Gates: Release build 0/0; arch audit 0 ERROR, 33 WARN (R8 ok, 82 instances / 48 stale / 10 call-time / 0
+fresh declared); `ai_arch_audit --check` clean; `ai_module_map --check` clean; doc_claims 43/43;
+fog-honesty 80f/263s PASS; bot direct-mutation PASS; boot gate PASS. Test suite unchanged (no C#).
+
 # 2026-10-04 — Devin-T3Verify: AR-5/6/7 provider precedence — declared merges for every multi-provider bot seam (INC-N candidate)
 
 *Devin.* Branch `devin/t3verify/ar567-provider-precedence` from master `3ba05ede7`. The arch review's

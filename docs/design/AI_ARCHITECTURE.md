@@ -1683,6 +1683,47 @@ Resolution rule for every seam: the enabled provider is chosen **at use time**
 `Created` — a `ConditionalTrait` is still disabled while its siblings are being constructed,
 and a later grant or personality switch must take effect without a rebuild.
 
+### 10.5c Tick phases — the declared order (AR-10; audit R8)
+
+`ModularBot` calls each enabled `IBotTick` module in **resolved `Player` child order** — the
+merged yaml order across every rules file that adds a `Player` child. That has a consequence
+the AR-10 review made visible: `ContentPacks/*/ai.yaml` row-injection files load **before**
+`mods/cameo/ai/ai.yaml`, and the pack that merges first wins the leading positions. Today
+`TiberianDawn/Shared` + `TiberianDawn/GDI` hoist the unit builder, the squad managers and the
+base builder to tick positions 0–10 — the act modules tick before every sense/decide module.
+The effective order is printed per instance in `AI_ARCH_COVERAGE.md` ("Tick order"); it is
+the contract, and `--check` fails when a yaml or include reorder changes it silently.
+
+The semantics of the order: a consumer positioned **before** a provider reads that provider's
+**previous** `BotTick` output — a one-tick-old snapshot. That is the standing behaviour, and
+it is safe: every seam publishes on its own cadence (situation rebuilds, 25–125-tick
+recomputes, squad intervals) and is consumed as a snapshot, so one extra tick sits inside the
+cadence window either way. The two lags the review cited are the feedback direction of
+producer/consumer pairs and are already the better direction: `ScaleTargets` (pos 244) and
+`BuildOrderKnobs` (pos 247) read `MasterAiBotModule`/`BaseBuilderBotModuleCA` one tick old,
+but every consumer of `IBotScaleTargets`/`IBotBuildOrderKnobs` — the builders at positions
+0 and 8 — reads them fresh. Moving the two modules later would only move the lag into the
+forward direction.
+
+The rule that holds the order honest (`ai_arch_audit.py` R8, ERROR):
+
+- **R8a** — every loaded `IBotTick` module type declares its layer in `LAYER_OF`:
+  `PERCEPTION`+`SITUATION` = sense, `STRATEGY` = decide, `EXECUTION`+`PRODUCTION` = act,
+  `SUPPORT` = infra, `TELEMETRY` = observe. A new ticking module without a declared layer
+  fails the audit.
+- **R8b** — `FRESH_EDGES` declares any seam that ever requires same-tick freshness
+  (consumer, interface, provider). None exists today; the audit errors if a declared edge
+  ever reads one tick late.
+- The full stale-read table (48 edges today) is generated into the coverage doc — the
+  ratchet is `--check`: any reorder regenerates the table deliberately.
+
+Why documentation and not a code reorder: an explicit sense→decide→act yaml reorder is
+deterministic and sync-safe (the same resolved ruleset reaches every client) but it changes
+read freshness on every provider edge at once — an unswitchable behavioural shift owned by
+the lead's increment call, not by this audit. Explicit snapshot versioning (a
+`snapshot.ComputedTick` stamp) was considered and rejected: it would annotate the same
+staleness without removing it, and the cadence windows already bound it.
+
 ### 10.6 Build order, each phase shippable on its own
 
 1. **Match logging, record-only.** No behaviour change. Writes the match record (§6.2) including
