@@ -139,13 +139,24 @@ namespace OpenRA.Mods.Cameo.Traits
 			}
 		}
 
-		// Log ownership follows the elected takeover controller when the admin host drops
-		// mid-game: on a dedicated server a non-admin client can then be the only process
-		// still able to write the match record. While the admin is still connected the
-		// admin's process writes as before, so records never double up.
+		// Log ownership in a takeover-enabled match belongs to the elected controller from
+		// match start (boss_review T4 rev-2): a bound client re-elected on every synced
+		// disconnect is the sole writer, so spectator connectivity — including a departed
+		// spectator admin no notify can ever report — never governs the record. Every client
+		// computes the same controller from synced state, so exactly one process writes.
+		// Without takeover (or with no electable client left) the host writes as before.
 		bool IsLogOwner()
 		{
-			return Game.IsHost || (takeover != null && takeover.IsLocalClientController && !takeover.AdminConnected);
+			return OwnerIsLocal(Game.IsHost, takeover != null && takeover.Enabled,
+				takeover?.Controller ?? -1, Game.LocalClientId);
+		}
+
+		internal static bool OwnerIsLocal(bool host, bool takeoverEnabled, int controller, int localClientId)
+		{
+			if (takeoverEnabled && controller >= 0)
+				return controller == localClientId;
+
+			return host;
 		}
 
 		// A seat converted to the takeover AI is a bot for logging purposes even though

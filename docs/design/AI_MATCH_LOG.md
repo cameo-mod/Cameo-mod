@@ -92,15 +92,14 @@ schema-1 records in the same file remain valid and the aggregator pools both
   bot at takeover time. `player.bot_type` repeats the assigned stack for these
   seats (the field is normally `player.BotType`, which stays null on a former
   human). Any record carrying this block must be excluded from learning and A/B
-  pools. Log ownership follows the elected takeover controller, not just the
-  lobby admin, so a dedicated-server match keeps its record when the admin
-  drops mid-game. A spectator admin counts as connected for this: connectivity
-  is the whole human session (all non-bot clients), while only bound players
-  can elect the controller. Known engine-pin limitation: a spectator's
+  pools. Log ownership in a takeover-enabled match belongs to the elected
+  takeover controller from match start — a bound client, re-elected on every
+  synced disconnect — so the record is written by exactly one player's process
+  and can never be stranded by admin connectivity. A spectator admin's
   DEPARTURE produces no playable player, so the synced disconnect notify never
-  reaches the tracker — a departed spectator admin still reads AdminConnected
-  and the record stays on that dead process. A playable admin's departure is
-  tracked normally and hands the record to the controller.
+  reaches the tracker; under this policy it is harmless by construction —
+  spectator connectivity never governs the record. Without takeover (or with
+  no electable client left) the host process writes as before.
 
 - `record_id` — `game_uid + "|" + player.InternalName`. When `game_uid` is empty
   (skirmish without one), substitute a per-match `Guid.NewGuid().ToString("N")`

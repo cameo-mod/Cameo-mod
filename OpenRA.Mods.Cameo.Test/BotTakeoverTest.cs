@@ -329,5 +329,75 @@ namespace OpenRA.Mods.Cameo.Test
 				BotTakeoverTracker.ElectableClients(connected, bound, new HashSet<int> { 2 }));
 			Assert.That(afterTwo, Is.EqualTo(3), "a taken-over bound client leaves the electable set");
 		}
+
+		// ---------------------------------------------------------------------
+		// boss_review T4 rev-2: log owner = the elected controller from match start;
+		// spectator connectivity never governs. Exactly one writer, always a bound
+		// client while one electable remains.
+		// ---------------------------------------------------------------------
+
+		static int Writers(bool takeoverEnabled, int controller, params int[] clients)
+		{
+			return clients.Count(id => AiMatchLogWriter.OwnerIsLocal(host: false, takeoverEnabled, controller, id));
+		}
+
+		[Test]
+		public void LogOwnerIsAlwaysTheElectedController()
+		{
+			// Spectator admin (client 0) present or departed: the inputs never carry admin
+			// connectivity, so the sole writer is identical in both states — the bound
+			// controller (client 5). The admin can never write and never strand the record.
+			Assert.That(Writers(true, 5, 0, 2, 3, 5), Is.EqualTo(1), "spectator admin present");
+			Assert.That(Writers(true, 5, 2, 3, 5), Is.EqualTo(1), "spectator admin departed");
+			Assert.That(AiMatchLogWriter.OwnerIsLocal(true, true, 5, 0), Is.False,
+				"the admin — even when it is also the host — does not write in a takeover match");
+			Assert.That(AiMatchLogWriter.OwnerIsLocal(false, true, 5, 5), Is.True);
+		}
+
+		[Test]
+		public void LogOwnerFollowsReElection()
+		{
+			// The playing controller disconnects: the electee moves to the next bound client
+			// and the writer moves with it — still exactly one, and on a live process.
+			var connected = new HashSet<int> { 2, 3, 5 };
+			var bound = new HashSet<int> { 2, 3, 5 };
+			var first = BotTakeoverTracker.ElectController(
+				BotTakeoverTracker.ElectableClients(connected, bound, new HashSet<int>()));
+			Assert.That(Writers(true, first, 2, 3, 5), Is.EqualTo(1));
+
+			connected.Remove(first);                                    // synced disconnect marker
+			var second = BotTakeoverTracker.ElectController(
+				BotTakeoverTracker.ElectableClients(connected, bound, new HashSet<int>()));
+			Assert.That(second, Is.EqualTo(3));
+			Assert.That(Writers(true, second, 2, 3, 5), Is.EqualTo(1));
+			Assert.That(AiMatchLogWriter.OwnerIsLocal(false, true, second, first), Is.False,
+				"the departed former controller no longer writes");
+		}
+
+		[Test]
+		public void SurrenderedAdminCannotDuplicateTheController()
+		{
+			// The admin (client 1) surrenders and is taken over: it leaves the electable set,
+			// the bound client 3 controls — and only client 3 writes.
+			var electable = BotTakeoverTracker.ElectableClients(
+				new HashSet<int> { 1, 3 }, new HashSet<int> { 1, 3 }, new HashSet<int> { 1 });
+			var controller = BotTakeoverTracker.ElectController(electable);
+			Assert.That(controller, Is.EqualTo(3));
+			Assert.That(Writers(true, controller, 1, 3), Is.EqualTo(1));
+			Assert.That(AiMatchLogWriter.OwnerIsLocal(true, true, controller, 1), Is.False,
+				"the surrendered admin host is not a writer — no duplicate record");
+		}
+
+		[Test]
+		public void DisabledOrSinglePlayerKeepsTheHostWriter()
+		{
+			// No takeover: the host writes exactly like the classic path, whatever the
+			// tracker state happens to be.
+			Assert.That(AiMatchLogWriter.OwnerIsLocal(true, false, -1, 0), Is.True);
+			Assert.That(AiMatchLogWriter.OwnerIsLocal(false, false, -1, 7), Is.False);
+			Assert.That(AiMatchLogWriter.OwnerIsLocal(true, true, -1, 0), Is.True,
+				"takeover enabled but no electable client left: host fallback");
+			Assert.That(AiMatchLogWriter.OwnerIsLocal(false, true, -1, 9), Is.False);
+		}
 	}
 }

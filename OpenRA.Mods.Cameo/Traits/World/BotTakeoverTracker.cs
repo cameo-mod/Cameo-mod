@@ -105,7 +105,6 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		World world;
 		bool enabled;
-		int adminClientIndex = -1;
 
 		/// <summary>Client index running every takeover bot; -1 when no electable client remains.</summary>
 		public int Controller { get; private set; } = -1;
@@ -113,8 +112,6 @@ namespace OpenRA.Mods.Cameo.Traits
 		public bool Enabled => enabled;
 		public bool IsLocalClientController => Controller >= 0 && Controller == Game.LocalClientId;
 
-		/// <summary>False once the lobby admin's client leaves the synced connected-set.</summary>
-		public bool AdminConnected => adminClientIndex >= 0 && connectedClients.Contains(adminClientIndex);
 		public bool IsTakenOver(OpenRA.Player p) => records.ContainsKey(p);
 		public bool TryGetTakeoverRecord(OpenRA.Player p, out TakeoverRecord record) => records.TryGetValue(p, out record);
 
@@ -143,9 +140,9 @@ namespace OpenRA.Mods.Cameo.Traits
 			// Connectivity is the whole human session — spectators (a spectator admin included) are
 			// connected clients too, even though they bind no player (boss_review T4). Caveat: a
 			// spectator's DEPARTURE produces no playable player, so the synced disconnect notify never
-			// reaches it — the set can retain a ghost spectator. Harmless for controller eligibility
-			// (only bound clients elect) but a departed spectator admin still reads AdminConnected and
-			// keeps the match record on a dead process: an engine-pin limitation, not a choice.
+			// reaches it — the set can retain a ghost spectator. Harmless: only bound clients elect
+			// the controller, and log ownership follows the elected controller, never admin
+			// connectivity (boss_review T4 rev-2).
 			foreach (var client in w.LobbyInfo.NonBotClients)
 			{
 				connectedClients.Add(client.Index);
@@ -159,8 +156,6 @@ namespace OpenRA.Mods.Cameo.Traits
 					boundClients.Add(client.Index);
 				}
 			}
-
-			adminClientIndex = w.LobbyInfo.Clients.FirstOrDefault(c => c.IsAdmin)?.Index ?? -1;
 
 			// Teams come from the lobby client for EVERY slot-bound player, bots included (boss_review
 			// T2): the engine builds players from the unchanged map reference (CreateMapPlayers) and

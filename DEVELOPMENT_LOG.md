@@ -1,3 +1,16 @@
+# 2026-10-04 — Devin-T3Verify: TAKEOVER T4 rev-2 (controller-exclusive log ownership)
+
+*Devin.* `devin/t3verify/bot-takeover` (on top of `3d6c39ae3`). Boss re-review closed T1/T2/T3 and the T4
+duplicate-write but kept T4 open on the stranded-record residual — and ruled it does NOT need an engine change:
+the elected bound controller is the sole writer from match start whenever takeover is enabled and Controller>=0,
+so spectator connectivity never governs ownership. `IsLogOwner` = `OwnerIsLocal(host, takeoverEnabled, controller,
+localClientId)`: `takeoverEnabled && controller >= 0 → controller == localClientId; else host`. `AdminConnected` /
+`adminClientIndex` removed (dead under this policy); the ghost-spectator caveat stays as an informational note —
+unobservable departure, now harmless by construction. Docs rewritten to the new policy (AI_MATCH_LOG.md,
+DESIGN §19.14) — no more "engine-pin limitation" claim. +4 owner-selection matrix tests (spectator admin
+present/departed → same sole writer; controller disconnect → writer re-elects; surrendered admin can't duplicate;
+disabled/single-player keeps host). Focused suite 22/22, build 0/0, boot gate PASS (isolated support dir).
+
 # 2026-10-04 — Devin-T3Verify: TAKEOVER review corrections T1-T4 (boss static review @9a0348101)
 
 *Devin.* `devin/t3verify/bot-takeover` in `C:/cameo-wt/takeover`. Four findings from the independent review

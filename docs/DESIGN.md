@@ -5385,9 +5385,10 @@ bot's set (R6), plus `IBot.Activate` on the elected client. Teams are snapshotte
 EVERY slot-bound player, bots included — a lobby bot never keeps its map team id (the engine only applies lobby teams in
 `SetupPlayerMasks`). Single-player
 games keep the classic path. The match log records `takeover.taken_over_at`, `trigger`, `bot_type`,
-`controller_client`, keeps its capture open while a bound human seat can still convert, and log ownership follows the
-elected controller — spectator admins count as connected; their departure has no synced notify and stays pinned
-(engine limitation, AI_MATCH_LOG.md). Phase 2 (re-hosting pre-existing lobby bots
+`controller_client`, keeps its capture open while a bound human seat can still convert, and log ownership IS the
+elected controller from match start — spectator connectivity (a departed spectator admin produces no synced notify)
+never governs the record; with no electable client left the host writes (AI_MATCH_LOG.md). Phase 2 (re-hosting
+pre-existing lobby bots
 when their controller drops) is out of scope.
 
 ## 20. AI bot unit compositions
