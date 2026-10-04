@@ -1,5 +1,23 @@
-# Cameo — THE HANDOFF
+## 2026-10-04 — Devin-Tier4: TAKEOVER-SMOKE handed in (all six scenarios PASS on real processes)
 
+`Agent: Devin-Tier4 · branch devin/tier4/takeover-smoke @ da8595dac · worktree C:/cameo-wt/t4-smoke · base devin/t3verify/bot-takeover@9a0348101 (pre-rev-2)`
+
+**INC-ready for review, NOT merged** (no merge authority; lead/coordinator decides).
+Double-gated dev harness + five takeover scenarios on a real dedicated server with
+2 real clients: inert PASS · c defeat PASS · d disconnect-takeover PASS
+(`controller_client:0`) · a 2v2-kill PASS · b 2v2-surrender PASS · e admin-kill
+re-election PASS (`controller_client:1` on the survivor). 0 sync reports, 0
+exceptions. Build 0/0; harness `tools/ai/takeover_smoke.py --scenario {a..e,inert}`;
+evidence `C:/cameo-wt/_support_t4_smoke/scenario_*`; fleet NOTE+STATUS same date.
+**Real bug on this branch:** `AiMatchLogWriter.AllBotsResolved` vacuous-true on an
+empty logged set burned the one-shot record at world load — takeovers in all-human
+matches were unrecordable (boss-review blocker, corroborated live; rev-2's
+controller-exclusive writer may supersede the fix — do not double-apply).
+**Peer-queue note:** T3Verify asked for the exactly-one-record assertion + a
+spectator-admin scenario f against `ae7075cd8`; maintainer's passive-takeover
+report matches the boss's omitted-service-condition finding (harness can repro).
+**Next in queue (lead's ordering):** RADAR-ALLY → mpspawn order-independent fix →
+RADAR-A (`IBotRadarContacts` + situation-log fields, switch `AI_radar_contacts`).
 ## 2026-10-04 — NOVA N2 receipt: EL-1 v2 on current master
 
 **INC-N ready: `devin/nova/el1-v2` — switch: `AQ_inmatch_adapt` (default off).** Round-2 N2: the EL-1 in-match

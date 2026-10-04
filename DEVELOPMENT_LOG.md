@@ -1,3 +1,29 @@
+# 2026-10-04 — Devin-Tier4: TAKEOVER-SMOKE (real multi-client takeover smoke, all six scenarios PASS)
+
+*Devin.* `devin/tier4/takeover-smoke` @ `da8595dac` in `C:/cameo-wt/t4-smoke` (base
+`devin/t3verify/bot-takeover@9a0348101`, pre-rev-2). The multi-client smoke T3Verify's
+phase 1 could not run: real `OpenRA.Server.exe` + real `Launch.Connect` clients in
+isolated support dirs, driven by two DEV-ONLY double-gated hooks (`CameoDevArgs` argv
+gate + per-process plan file; `CameoLobbyAutopilot` ServerTrait drives the lobby via
+`Server.InterpretCommand`; `CameoAutoOrders` world trait issues timed orders incl. the
+pause-menu Surrender shape). Harness `tools/ai/takeover_smoke.py` (stale-proc kill,
+3-driver cap via tasklist, uid-in-debug.log start detection, record/block/sync-report/
+exception collection, per-scenario RESULT.json). **Bug found + fixed on this branch:**
+`AiMatchLogWriter.AllBotsResolved` vacuously true on an empty logged set → the
+single-shot record burned at world load → takeovers in all-human matches could never
+be recorded (the boss review's blocker, corroborated live). **Results:** inert PASS
+(both gates hold) · c PASS (solo surrender → defeat) · d PASS (disconnect →
+`controller_client:0`) · a PASS (2v2 kill → disconnect) · b PASS (2v2 surrender) ·
+e PASS (admin-kill → re-election `controller_client:1` on the survivor). 0 sync
+reports, 0 exceptions everywhere. Evidence `C:/cameo-wt/_support_t4_smoke/scenario_*`;
+fleet `NOTE_2026-10-04_devin-tier4_takeover-smoke.md` +
+`STATUS_2026-10-04_devin-tier4_takeover-smoke.md`. Engine findings: mid-game disconnect
+never reassigns `BotControllerClientIndex` (Server.cs:1252, WaitingPlayers only) →
+orphaned lobby bots go inert (scenario e is a 1v1 for that reason); `EnableSingleplayer`
+disables the tracker; `easiest` bots cannot end a match, `brutal` resolves a 2v2 in ~4 min.
+Open vs rev-2 (`ae7075cd8`): exactly-one-record assertion + scenario f (spectator-admin
+server) per T3Verify; maintainer's passive-takeover observation matches the boss's
+omitted-service-condition finding — harness can repro on the corrected checkpoint.
 # 2026-10-04 — Claude (lead): INC 2026-10-04e lands — INC-d completed (P0 raid gate), LC5 admission claims, checker v2, E2 test baseline
 
 *Claude.* Branch `inc/2026_10_04e` from master `1fbd239ff`:
