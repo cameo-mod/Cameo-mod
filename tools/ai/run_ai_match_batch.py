@@ -368,11 +368,25 @@ def mp_spawn_cells(map_text: str) -> list[tuple[int, int]]:
     """mpspawn actor locations in file order — the lobby binds Multi slots in
     the same order, so entry 0 is Multi0's home cell, entry 1 is Multi1's."""
     cells = []
+    # yaml field order is not semantic: deterring-democracy writes Location
+    # before Owner, proto_*/AlpineAssault interleave Faction between them, and
+    # _d2k_Desert_Valley mixes orders within one map. Parse each actor block's
+    # keys instead of regexing a fixed order.
     for match in re.finditer(
-        r"^\t\w+: mpspawn\n\t\tOwner: \w+\n\t\tLocation: (\d+),(\d+)$",
+        r"^\t\w+: mpspawn\n((?:\t\t[^\n]*\n)+)",
         map_text, re.MULTILINE,
     ):
-        cells.append((int(match.group(1)), int(match.group(2))))
+        fields = dict(
+            line.strip().split(":", 1)
+            for line in match.group(1).splitlines()
+        )
+        if "Owner" not in fields or "Location" not in fields:
+            continue
+        try:
+            x, y = fields["Location"].strip().split(",")
+            cells.append((int(x), int(y)))
+        except ValueError:
+            continue
     if len(cells) < 2:
         fail("real-map mode needs a map with at least two mpspawn actors")
     return cells
