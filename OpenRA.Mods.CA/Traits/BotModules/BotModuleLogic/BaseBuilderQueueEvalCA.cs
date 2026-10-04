@@ -157,6 +157,13 @@ namespace OpenRA.Mods.CA.Traits
 		}
 
 		/// <summary>
+		/// FP2/FB: a placement draws a random variant index exactly when the actor has variants
+		/// but no configured facings — the aimed path uses PickFacingVariant instead; the front/back
+		/// advisor uses the same gate (a front-side facing is the advisor's to encode later).
+		/// </summary>
+		public static bool PicksRandomVariant(bool hasVariants, bool hasFacings) => hasVariants && !hasFacings;
+
+		/// <summary>
 		/// FP6/FP7: a candidate cell survives placeable, base-distance, requirement-distance and
 		/// own-building spacing checks — the identical gate both candidate loops apply, in the
 		/// same short-circuit order (each check is consulted only when the previous passed).
