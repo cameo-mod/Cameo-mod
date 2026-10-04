@@ -157,6 +157,10 @@ namespace OpenRA.Mods.CA.Traits
 		// in order — the resolved index maps back to the child and its tag. Validated against the warhead
 		// class name (the node value); unresolvable weapons fall back to the lowercased class name, a
 		// coarser but still consistent axis (the fitter's coarse Factor@ floor, if any, still reaches it).
+		// The static cache never invalidates — valid within one process lifetime: mod yaml is fixed at
+		// load, and every match resolves the same warhead set.
+		// Process-lifetime cache, deliberately never invalidated: weapon yaml is immutable within a
+		// match and the map only ever loads once per process (bot matches are one world per launch).
 		static Dictionary<string, (string Tag, string Class, IReadOnlyDictionary<string, int> Versus)[]> warheadYaml;
 
 		static Dictionary<string, (string Tag, string Class, IReadOnlyDictionary<string, int> Versus)[]> WarheadYamlMap()
