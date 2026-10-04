@@ -141,6 +141,23 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void GlobalScaleCannotPushACellPastTheFitterBound()
+		{
+			// Coordinator review 2026-10-04: a cell fitted at the 2000 bound scaled by g > 1000 must
+			// re-clamp to [500, 2000] so the per-cell contract holds.
+			var yaml = "BotEngagementPriors:\n" +
+				"\tGlobalScaleMilli: 2000\n" +
+				"\tDeliveryArmour@CannonAP_Medium__x__Heavy: 2000\n" +
+				"\tPriorPct@CannonAP_Medium__x__Heavy: 100\n" +
+				"\tDefenceState@CannonAP_Medium: 100\n" +
+				"\tIntoDefencesMilli: 2000\n";
+			var priors = Load(yaml);
+			Assert.That(priors.FactorPermille("CannonAP_Medium", "Heavy"), Is.EqualTo(2000));  // 4000 -> 2000
+			Assert.That(priors.DefenceFactorPermille("CannonAP_Medium"), Is.EqualTo(500));    // 200 -> 500
+			Assert.That(priors.IntoDefencesPermille, Is.EqualTo(2000));                       // 4000 -> 2000
+		}
+
+		[Test]
 		public void AbsentGlobalScaleKeepsAbsoluteSemantics()
 		{
 			// A file with no GlobalScaleMilli row reads factors verbatim (Schema-1 absolute).
