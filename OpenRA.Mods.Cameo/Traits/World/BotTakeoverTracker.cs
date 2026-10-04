@@ -81,6 +81,12 @@ namespace OpenRA.Mods.Cameo.Traits
 		[Desc("Conditions granted on the player actor so the matching genericbot module stack wakes up.")]
 		public readonly string[] Conditions = { "genericbot", "hardbot" };
 
+		[Desc("Ticks between bot-stance re-applies on takeover seats. Units produced after takeover " +
+			"still arrive with the human default stance because AutoTarget reads Owner.IsBot at " +
+			"creation and that stays false for a taken-over slot; this interval re-imposes the " +
+			"bot stance so the seat fights like a real bot.")]
+		public readonly int StanceRefreshIntervalTicks = 25;
+
 		[Desc("DISCONNECT of the last undefeated player of a team while <= 2 teams remain: " +
 			"Takeover replaces them anyway (default, maintainer 2026-10-04), Defeat runs today's " +
 			"ForceDefeat path, Idle leaves the forces inert. The single switchable decision point.")]
@@ -89,7 +95,7 @@ namespace OpenRA.Mods.Cameo.Traits
 		public override object Create(ActorInitializer init) { return new BotTakeoverTracker(this); }
 	}
 
-	public class BotTakeoverTracker : IWorldLoaded, INotifyPlayerDisconnected
+	public class BotTakeoverTracker : IWorldLoaded, INotifyPlayerDisconnected, ITick
 	{
 		readonly BotTakeoverTrackerInfo info;
 
@@ -381,6 +387,10 @@ namespace OpenRA.Mods.Cameo.Traits
 				p.PlayerActor.Info.TraitInfos<GrantConditionOnBotOwnerInfo>(), info.BotType))
 				p.PlayerActor.GrantCondition(condition);
 
+			// The inherited army keeps the human default stance: re-impose the bot stance
+			// now (post-takeover production is covered by the periodic pass below).
+			ApplyBotStances(p);
+
 			// The electee may have just changed (a surrendered client was running earlier
 			// seats): this client re-activates every takeover bot it now controls.
 			if (IsLocalClientController)
@@ -388,6 +398,36 @@ namespace OpenRA.Mods.Cameo.Traits
 					ActivateBotHere(seat);
 
 			TextNotificationsManager.AddSystemLine("Server", $"{p.ResolvedPlayerName} was replaced by a hard AI.");
+		}
+
+		void ITick.Tick(Actor self)
+		{
+			// Units produced after the takeover still arrive with the human default stance —
+			// AutoTarget resolves Owner.IsBot at actor creation, and that stays false for a
+			// taken-over slot. A coarse periodic pass re-imposes the bot stance on every unit
+			// a takeover seat owns; deterministic on all clients (same scan, same tick).
+			if (!enabled || records.Count == 0 || world.WorldTick % info.StanceRefreshIntervalTicks != 0)
+				return;
+
+			foreach (var seat in records.Keys)
+				ApplyBotStances(seat);
+		}
+
+		void ApplyBotStances(OpenRA.Player seat)
+		{
+			// A bot-built unit's AutoTarget stance comes from InitialStanceAI; a takeover seat's
+			// units (inherited army plus new production) hold the human default. Re-apply the
+			// per-type bot stance — SetStance itself is a no-op when already matching, and it
+			// keeps ConditionByStance consumers and stance-change listeners consistent.
+			foreach (var a in world.ActorsHavingTrait<AutoTarget>())
+			{
+				if (a.Owner != seat || a.IsDead || !a.IsInWorld)
+					continue;
+
+				var at = a.Trait<AutoTarget>();
+				if (at.Stance != at.Info.InitialStanceAI)
+					at.SetStance(a, at.Info.InitialStanceAI);
+			}
 		}
 
 		void ActivateBotHere(OpenRA.Player p)
@@ -404,6 +444,7 @@ namespace OpenRA.Mods.Cameo.Traits
 				return;
 			}
 
+			Log.Write("debug", $"bot_takeover: activated '{info.BotType}' bot for {p.InternalName} on controller client {Controller}");
 			logic.Activate(p);
 		}
 

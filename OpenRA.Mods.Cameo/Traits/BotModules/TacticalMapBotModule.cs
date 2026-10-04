@@ -377,7 +377,16 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		void IBotTick.BotTick(IBot bot)
 		{
 			if (!TopologyReady)
-				return;
+			{
+				// A module enabled after WorldLoaded (e.g. a takeover seat's stack) never ran the
+				// eager frame-end build — the player.IsBot gate above stays false for taken-over
+				// slots. Build lazily here instead: BotTick only runs on the controlling client,
+				// and EnsureBuilt/BuildOwnTopology stays retryable while the abstract graph is
+				// still absent, so a not-ready early-out costs nothing.
+				EnsureBuilt();
+				if (!TopologyReady)
+					return;
+			}
 
 			// Another bot rebuilt the shared topology (e.g. after a bridge change) -> adopt the newer version.
 			// FIRST, before anything below reads a region id: the shared Regions list is already the new cut

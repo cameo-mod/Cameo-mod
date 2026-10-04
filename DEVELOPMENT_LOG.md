@@ -1,3 +1,21 @@
+# 2026-10-04 — Devin-T3Verify: TAKEOVER bot-stance fix + tactical-map lazy build (user-reported passivity)
+
+*Devin.* `devin/t3verify/bot-takeover` (on top of `fe4a43131`). Maintainer report: a taken-over seat's army "stays in
+guard stance and never attacks" — literally correct. `AutoTarget` resolves `Owner.IsBot || !Owner.Playable` at actor
+creation to pick `InitialStanceAI` (AttackAnything) vs `InitialStance` (Defend); `Player.IsBot`/`BotType` are fixed at
+construction from the client's `Bot:` slot field, which is permanently null for a taken-over human seat — so the
+inherited army AND all post-takeover production hold `Defend` forever (and the same `IsBot` read gates the
+`botmicro` unit conditions, `IBotTeamMember` enumeration, transport loading, frozen-target firing, and
+`DynamicBotInsurance` rank — all degrade, none block). `BotTakeoverTracker` now (a) re-imposes each unit's
+`AutoTargetInfo.InitialStanceAI` at `PerformTakeover` and (b) repeats the pass every `StanceRefreshIntervalTicks`
+(default 25) so post-takeover production gets the bot stance too — deterministic synced scan on every client.
+`TacticalMapBotModule.BotTick` builds its topology lazily when `!TopologyReady` — the `player.IsBot` WorldLoaded
+frame task never fires for takeover seats and bot ticks only run on the controller, so the lazy build costs
+nothing for normal bots and self-heals the takeover case. `ActivateBotHere` logs one `bot_takeover: activated`
+debug line for observability. Full `player.IsBot` parity (team channels, botmicro, frozen-target, insurance rank)
+needs an engine `Player.AssignBotType` seam — filed as the follow-up; the mod-side fixes cover the reported
+symptom. Build 0/0, focused suite 22/22, boot gate PASS (isolated support dir).
+
 # 2026-10-04 — Devin-T3Verify: TAKEOVER T4 rev-2 (controller-exclusive log ownership)
 
 *Devin.* `devin/t3verify/bot-takeover` (on top of `3d6c39ae3`). Boss re-review closed T1/T2/T3 and the T4
