@@ -280,6 +280,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		List<CPos> lastRefineryCells = new();
 		List<CPos> lastBuildingTiles = new();
 		int[] lastRefineryFields = Array.Empty<int>();
+
+		// F1: the anchor model also feeds gate B's anchor-granular taken test — the assignment of the
+		// last model build and the tick it ran on (built once per re-plan, before the scores loop).
+		int[] lastAssigned = Array.Empty<int>();
+		int anchorModelTick = -1;
 		int unclaimedAnchorsInReach;
 		int unservedFieldsInReach;
 		int claimableAnchorsInReach;
@@ -1339,10 +1344,14 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		/// <summary>
 		/// Field gate B: already ours (a refinery in the indice or within claim radius) or worthless —
 		/// `value` is the first-seen cell count, so a live field never reaches this gate with zero.
+		/// Under the refinery law the take is anchor-granular (F1): an indice that still holds an
+		/// unserved anchor is not "ours" no matter how many refineries its other anchors already have —
+		/// one refinery per ANCHOR means a multi-spreader single-indice field must stay claimable.
+		/// Classic keeps the old shape: `lawActive` false makes the extra terms fall away entirely.
 		/// Pure, for the tests.
 		/// </summary>
-		public static bool FieldTaken(int playerRefineries, bool claimed, int value) =>
-			playerRefineries > 0 || claimed || value <= 0;
+		public static bool FieldTaken(int playerRefineries, bool claimed, int value, bool lawActive = false, bool indiceHasUnservedAnchor = false) =>
+			value <= 0 || ((claimed || playerRefineries > 0) && !(lawActive && indiceHasUnservedAnchor));
 
 		/// <summary>
 		/// TC-2c (§12.17): yield to an outranking ally's broadcast claim; null or empty claims never yield.
@@ -1534,6 +1543,23 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					sectorAnchors = anchors;
 			}
 
+			// F1 (lead ruling): the law's service is per ANCHOR, so gate B's indice-level refinery count
+			// must not starve the second anchor of a multi-spreader single-indice field — the anchor
+			// model builds before the scores loop and every indice still holding an unserved anchor
+			// stays in play (crawl aim and MCV pipeline keep driving at it).
+			var lawClaims = false;
+			HashSet<ResourceIndice> unservedAnchorIndices = null;
+			if (Info.FieldCoverage && Info.DriveRefineries)
+			{
+				EnsureAnchorModel(refineryCells, refineryTiles, buildingTiles);
+				lawClaims = LawActive;
+				if (lawClaims && fieldIndexCount > 0)
+					for (var a = 0; a < this.anchors.Count; a++)
+						if (lastAssigned[a] < 0)
+							(unservedAnchorIndices ??= new HashSet<ResourceIndice>())
+								.Add(resourceMap.FindClosestIndiceFromCPos(this.anchors[a]));
+			}
+
 			for (var i = 0; i < resourceMap.GetIndicesLength(); i++)
 			{
 				var field = resourceMap.GetIndice(i);
@@ -1555,7 +1581,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				var center = EffectiveCenter(field.ResourceCellsCount, field.ResourceCellsCenter, initialCenters[i]);
 				var claimed = Claimed(center, refineryCells, Info.ClaimRadiusCells)
 					|| Claimed(initialCenters[i], refineryCells, Info.ClaimRadiusCells);
-				if (FieldTaken(field.PlayerRefineryCount, claimed, value))
+				if (FieldTaken(field.PlayerRefineryCount, claimed, value, lawClaims,
+						unservedAnchorIndices != null && unservedAnchorIndices.Contains(field)))
 				{
 					owned += value > 0 ? 1 : 0;
 					continue;
@@ -1616,7 +1643,6 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				crawlTargetEdge = null;
 			}
 
-			var lawClaims = LawActive;
 			(claimField, wantsRefinery) = ClaimSelection(lawClaims, wantsRefinery,
 				lawClaims ? (FieldScore?)null : BestClaimField(scores));
 
@@ -1789,13 +1815,17 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		}
 
 		/// <summary>
-		/// REF-1 (§12.24 v2): rebuild the anchors (spreaders are public map data, like the spawn points, plus the centres of
-		/// spreaderless fields), attach each to its resource field, and publish the claim order — tier 1: every unserved
-		/// field's best spreader in reach, home first; tier 2: covered fields' extra spreaders. A claim that keeps failing
-		/// is parked; a committed one is pending until its refinery lands.
+		/// REF-1: rebuild the per-tick anchor model — the fields (once), the spreader anchors, each
+		/// anchor's field, the field cells by id, the field every refinery sits flush to and the anchor
+		/// every refinery serves. Runs at most once per world tick: the scores loop's anchor-granular
+		/// gate-B test (F1) and the claim update share the same build.
 		/// </summary>
-		void UpdateAnchorClaim(List<CPos> refineryCells, List<IReadOnlyCollection<CPos>> refineryTiles, List<CPos> buildingTiles)
+		void EnsureAnchorModel(List<CPos> refineryCells, List<IReadOnlyCollection<CPos>> refineryTiles, List<CPos> buildingTiles)
 		{
+			if (anchorModelTick == world.WorldTick)
+				return;
+
+			anchorModelTick = world.WorldTick;
 			EnsureFieldModel();
 			lastRefineryCells = refineryCells;
 			lastBuildingTiles = buildingTiles;
@@ -1822,6 +1852,23 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			for (var f = 0; f <= maxField; f++)
 				fieldCellsById.Add(f < fields.Count ? fields[f].Cells : (IReadOnlyCollection<CPos>)Array.Empty<CPos>());
 
+			// Which field each refinery's footprint sits flush to — a legal gap-0/1 placement on a field's far edge
+			// can land beyond the serve radius from the spreader, and it still is that field's refinery.
+			var serve = Info.AnchorServeRadiusCells > 0 ? Info.AnchorServeRadiusCells : Info.ClaimRadiusCells;
+			lastRefineryFields = RefineryFlushFields(refineryTiles, fieldCellsById);
+			lastAssigned = AssignRefineries(anchors, refineryCells, serve, anchorFieldIds, lastRefineryFields);
+		}
+
+		/// <summary>
+		/// REF-1 (§12.24 v2): rebuild the anchors (spreaders are public map data, like the spawn points, plus the centres of
+		/// spreaderless fields), attach each to its resource field, and publish the claim order — tier 1: every unserved
+		/// field's best spreader in reach, home first; tier 2: covered fields' extra spreaders. A claim that keeps failing
+		/// is parked; a committed one is pending until its refinery lands.
+		/// </summary>
+		void UpdateAnchorClaim(List<CPos> refineryCells, List<IReadOnlyCollection<CPos>> refineryTiles, List<CPos> buildingTiles)
+		{
+			EnsureAnchorModel(refineryCells, refineryTiles, buildingTiles);
+
 			anchorClaim = null;
 			anchorClaimFieldCenter = null;
 			wantsRefinery = false;
@@ -1836,16 +1883,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var tick = world.WorldTick;
 			var serve = Info.AnchorServeRadiusCells > 0 ? Info.AnchorServeRadiusCells : Info.ClaimRadiusCells;
 
-			// Which field each refinery's footprint sits flush to — a legal gap-0/1 placement on a field's far edge
-			// can land beyond the serve radius from the spreader, and it still is that field's refinery.
-			lastRefineryFields = RefineryFlushFields(refineryTiles, fieldCellsById);
-
 			// Pending commits clear when their refinery landed (the anchor is served) or the commit expired.
-			var assigned = AssignRefineries(anchors, refineryCells, serve, anchorFieldIds, lastRefineryFields);
 			foreach (var kv in anchorPendingUntil.ToList())
 			{
 				var index = anchors.IndexOf(kv.Key);
-				if (PendingCommitCleared(tick, kv.Value, index >= 0 && assigned[index] >= 0))
+				if (PendingCommitCleared(tick, kv.Value, index >= 0 && lastAssigned[index] >= 0))
 					anchorPendingUntil.Remove(kv.Key);
 			}
 

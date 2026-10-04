@@ -198,6 +198,33 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void UnderTheLawAnIndiceWithAnUnservedAnchorIsNotTaken()
+		{
+			const bool Law = true;
+			const bool Unserved = true;
+
+			// F1: one refinery per ANCHOR — a refinery in the indice takes it only when no anchor
+			// there is still unserved; otherwise the second spreader of a single-indice field could
+			// never be served from its own field.
+			Assert.That(ExpansionPlannerBotModule.FieldTaken(1, false, 40, Law, Unserved), Is.False,
+				"refinery present but an anchor in the indice is still unserved");
+			Assert.That(ExpansionPlannerBotModule.FieldTaken(0, true, 40, Law, Unserved), Is.False,
+				"claimed-by-radius also yields to an unserved anchor");
+			Assert.That(ExpansionPlannerBotModule.FieldTaken(1, false, 40, Law, !Unserved), Is.True,
+				"every anchor in the indice served — taken as before");
+			Assert.That(ExpansionPlannerBotModule.FieldTaken(0, true, 40, Law, !Unserved), Is.True);
+			Assert.That(ExpansionPlannerBotModule.FieldTaken(0, false, 40, Law, Unserved), Is.False,
+				"a free field stays free, law or not");
+
+			// Classic shape is unchanged: without the law the unserved flag cannot rescue anything.
+			Assert.That(ExpansionPlannerBotModule.FieldTaken(1, false, 40, !Law, Unserved), Is.True);
+			Assert.That(ExpansionPlannerBotModule.FieldTaken(0, true, 40, !Law, Unserved), Is.True);
+
+			// A worthless indice stays out of the scores even under the law.
+			Assert.That(ExpansionPlannerBotModule.FieldTaken(1, false, 0, Law, Unserved), Is.True);
+		}
+
+		[Test]
 		public void OnlyAnOutrankingAllyClaimSteersUsOffAField()
 		{
 			var me = 3;
