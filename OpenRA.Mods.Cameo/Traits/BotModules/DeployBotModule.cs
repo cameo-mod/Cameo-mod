@@ -119,6 +119,14 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		readonly OpenRA.Player player;
 		int scanTicks;
 
+		// AR-9 (§19.6): whoever orders holds the lease. A unit is claimed for as long as its group
+		// keeps issuing it orders — TryClaim renews on every ordered tick — and the lease lapses
+		// when the group goes quiet (idle/out-of-range emits nothing to renew). A squad can draft
+		// an idle deployable but never one mid-maneuver. Refreshed every scan, never cached across
+		// ticks: the registry is conditional (genericbot) and may arrive late (LC4's bug class).
+		IBotUnitLeases leases;
+		readonly HashSet<Actor> leasedUnits = new();
+
 		// Tracks when Ability-mode units deployed, for undeploy timing
 		readonly Dictionary<Actor, int> abilityDeployedAt = [];
 
@@ -148,7 +156,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				.Where(a => a.IsDead || !a.IsInWorld).ToList())
 				deployCooldown.Remove(dead);
 
-			var leases = BotUnitLeases.Of(player);
+			leases = BotUnitLeases.Of(player);
+			leasedUnits.RemoveWhere(a => a.IsDead || !a.IsInWorld);
 
 			// Single scan per tick - shared across all groups. Leased units are skipped wholesale: a squad
 			// member's squad owns its orders for this tick (§19.6), and unclaimable double-ordering is the
@@ -187,6 +196,42 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		}
 
 		int ScanInterval => Info.ScanInterval > 0 ? Info.ScanInterval : 1;
+
+		internal static int LeaseHeartbeatTicks(int scanInterval) => Math.Max(200, scanInterval * 4);
+
+		protected override void TraitDisabled(Actor self)
+		{
+			var registry = BotUnitLeases.Of(player);
+			foreach (var unit in leasedUnits)
+				registry?.Release(unit, LeaseOwner);
+
+			leasedUnits.Clear();
+		}
+
+		/// <summary>
+		/// §19.6 claim-then-order: the order is queued only while the claim lands (already ours or
+		/// unclaimed); a unit another module holds mid-scan keeps it and gets nothing. A denied
+		/// claim also drops the unit from the leased set so the next scan re-filters it.
+		/// </summary>
+		internal static bool QueueLeased(IBot bot, IBotUnitLeases leases, Actor unit,
+			string owner, BotLeasePurpose purpose, int heartbeatTicks, Order order, ISet<Actor> leased)
+		{
+			if (!BotUnitLeases.TryClaim(leases, unit, owner, purpose, heartbeatTicks))
+			{
+				leased?.Remove(unit);
+				return false;
+			}
+
+			leased?.Add(unit);
+			bot.QueueOrder(order);
+			return true;
+		}
+
+		void QueueLeased(IBot bot, Actor unit, Order order)
+		{
+			QueueLeased(bot, leases, unit, LeaseOwner, BotLeasePurpose.Mission,
+				LeaseHeartbeatTicks(ScanInterval), order, leasedUnits);
+		}
 
 		// Artillery: Move into range -> deploy -> undeploy if enemy within SafeRange
 		void TickArtillery(IBot bot, Actor unit, DeployBotGroup group)
@@ -349,14 +394,14 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			{
 				var validCell = FindNearestValidDeployCell(unit, deploy);
 				if (validCell.HasValue)
-					bot.QueueOrder(new Order("Move", unit, Target.FromCell(world, validCell.Value), false));
+					QueueLeased(bot, unit, new Order("Move", unit, Target.FromCell(world, validCell.Value), false));
 				return;
 			}
 
 			var deployTraits = unit.TraitsImplementing<IIssueDeployOrder>()
 				.Where(d => d.CanIssueDeployOrder(unit, false));
 			foreach (var d in deployTraits)
-				bot.QueueOrder(d.IssueDeployOrder(unit, false));
+				QueueLeased(bot, unit, d.IssueDeployOrder(unit, false));
 
 			deployCooldown[unit] = world.WorldTick;
 		}
@@ -370,7 +415,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var deployTraits = unit.TraitsImplementing<IIssueDeployOrder>()
 				.Where(d => d.CanIssueDeployOrder(unit, false));
 			foreach (var d in deployTraits)
-				bot.QueueOrder(d.IssueDeployOrder(unit, false));
+				QueueLeased(bot, unit, d.IssueDeployOrder(unit, false));
 
 			deployCooldown[unit] = world.WorldTick;
 		}
@@ -441,7 +486,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				cell = validCell.Value;
 			}
 
-			bot.QueueOrder(new Order("Move", unit, Target.FromCell(world, cell), false));
+			QueueLeased(bot, unit, new Order("Move", unit, Target.FromCell(world, cell), false));
 		}
 
 		void MoveIntoRange(IBot bot, Actor unit, Actor target, int range)
@@ -469,7 +514,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				cell = validCell.Value;
 			}
 
-			bot.QueueOrder(new Order("Move", unit, Target.FromCell(world, cell), false));
+			QueueLeased(bot, unit, new Order("Move", unit, Target.FromCell(world, cell), false));
 		}
 
 		CPos? FindNearestValidMoveCell(Mobile mobile, CPos around)

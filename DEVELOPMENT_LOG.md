@@ -1,3 +1,33 @@
+# 2026-10-04 — Devin-T2Verify: AR-9 lease gaps — LoadGarrisoner + DeployBot claim-before-order (§19.6)
+
+*Devin.* Branch `devin/t2verify/ar9-lease-gaps` rebased onto `devin/t2verify/incg-stack` (INC-f +
+the seam/F1/determinism/AR-8 stack).
+
+Two real unit-ordering lease gaps closed; the rest of the AR-9 candidate list is exempt or already
+documented (DAWN's `LoadCargo`×3 port, `Minelayer`/`SendUnitToAttack` rulings).
+
+- `LoadGarrisonerBotModuleCA` (OpenRA.Mods.CA): `BotLeasePurpose.Garrison` claims on every walking
+  garrisoner — squad-draftable infantry could otherwise be drafted mid-march. Renewed per scan,
+  released when the unit boards/idles/goes stuck (Stop queued while the lease is still held — GC-1
+  order-before-release) or the module disables; candidates claimed by another owner are skipped and
+  capacity is accounted only after a successful claim. Coverage doc now shows `(lease)` on its
+  `AttackMove`/`EnterGarrison`/`Stop` rows and its unseparated co-runner pairs dropped from R4.
+- `DeployBotModule` (OpenRA.Mods.Cameo): claim-while-ordering via a `QueueLeased` seam — TryClaim
+  precedes every Move/deploy/undeploy order; heartbeat `Math.Max(200, scan*4)` renews through active
+  maneuvers and lapses when the group goes quiet, so squads can still draft idle deployables.
+  Denied claims drop the unit for re-filtering; `TraitDisabled` releases all.
+- Exemptions verified, not patched: `FransMcvExpansionManagerBotModule` (MCV/Conyard/landing-craft
+  subjects — ExcludeFromSquadsTypes + BuildingInfo + naval disjoint), `HarvesterBotModuleCA` and
+  FransHarvester (`HarvesterInfo` excluded from drafts).
+
+Classic is bit-identical: `BotUnitLeaseRegistry` is `genericbot`-only and every helper is a no-op
+when `BotUnitLeases.Of(player)` returns null.
+
+Gates: mod+test builds 0 warnings / 0 errors; Cameo tests 937/937 on master base (+4
+`LeaseAdoptionTest` — claim before order, deny drops, null-registry classic fallback, heartbeat
+floor); fog PASS; direct-mutation PASS; arch freshness PASS after regen; boot gate PASS. Re-based
+gates re-run at the AR-9-on-INC-g tip below.
+
 # 2026-10-04 — Devin-T2Verify: AR-8 — issuer identity Type@N; the order gate judges at issue time
 
 *Devin-T2Verify.* Branch `devin/t2verify/ar8-issuer-identity` (stacked on
