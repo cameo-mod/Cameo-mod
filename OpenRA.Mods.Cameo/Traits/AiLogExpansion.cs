@@ -33,6 +33,12 @@ namespace OpenRA.Mods.Cameo.Traits
 		public string CrawlTarget = "", McvSite = "";
 		public int CrawlMcvAngle = -1;
 		public int CoverageMilli;
+
+		// REF-1 (§12.24 v2): the most refineries serving one anchor (the law's cap: must stay 1), the anchors in reach
+		// still waiting for a refinery, and the fields in reach with no refinery yet (the tier-1 backlog — it must
+		// drain to 0 before any second-refinery-on-a-field placement). The ids list is that backlog spelled out.
+		public int RefineriesPerAnchorMax, AnchorsInReachUnserved, FieldsInReachUnserved;
+		public int[] FieldsInReachUnservedIds = Array.Empty<int>();
 	}
 
 	internal readonly struct RefineryAssignment
@@ -156,6 +162,32 @@ namespace OpenRA.Mods.Cameo.Traits
 			return new RefineryAssignment(excess, unassigned, measured == 0 ? 0 : sum / measured, max);
 		}
 
+		/// <summary>
+		/// REF-1 (§12.24 v2): the gap between a placed footprint and a field's resource cells — 0 when a footprint cell
+		/// sits on or 8-adjacent to a resource cell, 1 when exactly one empty cell separates them, 2 when farther.
+		/// -1 when either side has no cells (a lone spreader has no known field).
+		/// </summary>
+		public static int ResourceGap(IReadOnlyCollection<CPos> footprintCells, IReadOnlyCollection<CPos> fieldCells)
+		{
+			if (footprintCells == null || footprintCells.Count == 0 || fieldCells == null || fieldCells.Count == 0)
+				return -1;
+
+			var best = int.MaxValue;
+			foreach (var fp in footprintCells)
+			{
+				foreach (var c in fieldCells)
+				{
+					var chebyshev = Math.Max(Math.Abs(fp.X - c.X), Math.Abs(fp.Y - c.Y));
+					if (chebyshev < best)
+						best = chebyshev;
+					if (best <= 1)
+						return 0;
+				}
+			}
+
+			return Math.Max(0, best - 1);
+		}
+
 		/// <summary>Rules-derived building category of the placement log; the first match in this order wins.</summary>
 		public static string Category(IReadOnlySet<string> tags, IReadOnlySet<string> roles)
 		{
@@ -197,8 +229,20 @@ namespace OpenRA.Mods.Cameo.Traits
 		int nextSpreaderScan;
 		CPos? mainConyard;
 
+		// REF-1 (§12.24 v2): the field model — the planner's own when one is mounted (the logged field ids are then
+		// exactly the ones the law claimed with), else a locally built component model frozen at the first scan.
+		ExpansionPlannerBotModule planner;
+		List<RefineryField> ownFields;
+		int[] ownAnchorFieldIds = Array.Empty<int>();
+		IReadOnlyList<IReadOnlyCollection<CPos>> ownFieldCellsById = Array.Empty<IReadOnlyCollection<CPos>>();
+
 		/// <summary>Anchors: the spreaders first, then the spreaderless fields' centres.</summary>
-		public IReadOnlyList<CPos> Anchors => anchors;
+		public IReadOnlyList<CPos> Anchors => ActiveAnchors;
+
+		IReadOnlyList<CPos> ActiveAnchors => planner?.ComponentFields != null ? planner.AnchorCells : anchors;
+		IReadOnlyList<int> ActiveAnchorFieldIds => planner?.ComponentFields != null ? planner.AnchorFieldIds : ownAnchorFieldIds;
+		IReadOnlyList<IReadOnlyCollection<CPos>> ActiveFieldCellsById => planner?.ComponentFields != null ? planner.FieldCellsById : ownFieldCellsById;
+		int ActiveSpreaderCount => planner?.ComponentFields != null ? planner.SpreaderAnchorCount : spreaderCount;
 
 		void Refresh(OpenRA.Player player, int tick)
 		{
@@ -211,6 +255,8 @@ namespace OpenRA.Mods.Cameo.Traits
 						fieldCenters[i] = field.ResourceCellsCenter;
 				}
 
+			planner = player.PlayerActor.TraitsImplementing<ExpansionPlannerBotModule>().FirstEnabledTraitOrDefault();
+
 			if (tick >= nextSpreaderScan)
 			{
 				nextSpreaderScan = tick + SpreaderRescanTicks;
@@ -220,18 +266,84 @@ namespace OpenRA.Mods.Cameo.Traits
 						spreaders.Add(a.Actor.Location);
 			}
 
+			if (planner?.ComponentFields != null)
+				return;
+
+			// No planner model (classic, or a planner that has not scanned yet): the local component model — the
+			// map's initial valuable cells grouped into 8-connected fields, frozen at first scan.
+			if (ownFields == null)
+			{
+				ownFields = new List<RefineryField>();
+				var layer = player.World.WorldActor.TraitOrDefault<IResourceLayer>();
+				var valuable = map?.Info.ValuableResourceTypes;
+				if (layer != null && valuable != null)
+				{
+					var cells = new List<CPos>();
+					foreach (var cell in player.World.Map.AllCells)
+						if (valuable.Contains(layer.GetResource(cell).Type))
+							cells.Add(cell);
+
+					ownFields = ExpansionPlannerBotModule.ResourceFields(cells)
+						.Select((component, i) => new RefineryField(i, component)).ToList();
+				}
+			}
+
 			anchors.Clear();
 			anchors.AddRange(spreaders);
 			spreaderCount = spreaders.Count;
-			anchors.AddRange(ExpansionMath.SpreaderlessFields(fieldCenters.Values, spreaders, ExpansionMath.AnchorRadiusCells));
+			anchors.AddRange(ExpansionMath.SpreaderlessFields(ownFields.Select(f => f.Center), spreaders, ExpansionMath.AnchorRadiusCells));
+
+			ownAnchorFieldIds = ExpansionPlannerBotModule.AssignAnchorFields(anchors, spreaderCount,
+				ownFields.Select(f => (IReadOnlyCollection<CPos>)f.Cells).ToList(), ownFields.Select(f => f.Center).ToList(),
+				ExpansionMath.AnchorRadiusCells);
+			var maxField = ownAnchorFieldIds.Length == 0 ? -1 : ownAnchorFieldIds.Max();
+			var byId = new List<IReadOnlyCollection<CPos>>();
+			for (var f = 0; f <= maxField; f++)
+				byId.Add(f < ownFields.Count ? ownFields[f].Cells : (IReadOnlyCollection<CPos>)Array.Empty<CPos>());
+			ownFieldCellsById = byId;
 		}
 
 		/// <summary>The anchor nearest to a placed building, for the placement log. Index -1 when the map knows none.</summary>
 		public (int Index, CPos Anchor, bool Spreader, double Distance) NearestAnchor(OpenRA.Player player, CPos cell)
 		{
 			Refresh(player, player.World.WorldTick);
-			var (index, distance) = ExpansionMath.Nearest(cell, anchors);
-			return index < 0 ? (-1, CPos.Zero, false, 0) : (index, anchors[index], index < spreaderCount, distance);
+			var active = ActiveAnchors;
+			var (index, distance) = ExpansionMath.Nearest(cell, active);
+			return index < 0 ? (-1, CPos.Zero, false, 0) : (index, active[index], index < ActiveSpreaderCount, distance);
+		}
+
+		/// <summary>
+		/// REF-1 (§12.24 v2): the placement record's field context — the field id of the anchor nearest the placed
+		/// cell, the tier it implied (2 when another own refinery already serves that field, else 1), and the gap
+		/// between the footprint and the field's resource cells. (-1, 0, -1) when nothing is known.
+		/// </summary>
+		public (int FieldId, int Tier, int Gap) PlacementFieldContext(OpenRA.Player player, CPos cell, IReadOnlyCollection<CPos> footprint)
+		{
+			Refresh(player, player.World.WorldTick);
+			var active = ActiveAnchors;
+			var fieldIds = ActiveAnchorFieldIds;
+			var (index, _) = ExpansionMath.Nearest(cell, active);
+			if (index < 0 || index >= fieldIds.Count)
+				return (-1, 0, -1);
+
+			var fieldId = fieldIds[index];
+			var cells = fieldId < ActiveFieldCellsById.Count ? ActiveFieldCellsById[fieldId] : null;
+			var gap = ExpansionMath.ResourceGap(footprint, cells);
+
+			// A field another own refinery serves is tier 2 — the same binding the law uses (proximity or a
+			// footprint flush to the field's cells), so the logged tier matches the claim the law ran with.
+			var builder = player.PlayerActor.TraitsImplementing<BaseBuilderBotModuleCA>().FirstOrDefault(t => t.IsTraitEnabled());
+			var ownRefineries = builder?.RefineryBuildings.Actors.Where(a => !a.IsDead).ToList() ?? new List<Actor>();
+			var refineryCells = ownRefineries.Select(a => a.Location).ToList();
+			var refineryTiles = ownRefineries
+				.Select(a => (IReadOnlyCollection<CPos>)a.Info.TraitInfoOrDefault<BuildingInfo>()?.Tiles(a.Location).ToList())
+				.ToList();
+			var refineryFields = ExpansionPlannerBotModule.RefineryFlushFields(refineryTiles, ActiveFieldCellsById);
+			var assigned = ExpansionPlannerBotModule.AssignRefineries(active, refineryCells, ExpansionMath.AnchorRadiusCells,
+				fieldIds, refineryFields);
+			var served = Enumerable.Range(0, Math.Min(active.Count, fieldIds.Count))
+				.Any(i => fieldIds[i] == fieldId && assigned[i] >= 0);
+			return (fieldId, served ? 2 : 1, gap);
 		}
 
 		public ExpansionSnapshot Capture(OpenRA.Player player, IReadOnlyCollection<Actor> ownBuildings)
@@ -242,17 +354,29 @@ namespace OpenRA.Mods.Cameo.Traits
 			var map = player.PlayerActor.TraitsImplementing<ResourceMapBotModule>().FirstOrDefault(t => t.IsTraitEnabled());
 			var planner = player.PlayerActor.TraitsImplementing<ExpansionPlannerBotModule>().FirstEnabledTraitOrDefault();
 			var reach = planner?.Info.ReachCells ?? 6;
-			var claimRadius = planner?.Info.ClaimRadiusCells ?? 8;
 
 			var buildableArea = new List<CPos>();
 			var refineries = new List<CPos>();
+			var refineryTiles = new List<IReadOnlyCollection<CPos>>();
 			var conyards = new List<CPos>();
 			foreach (var b in ownBuildings)
 			{
 				if (b.Info.HasTraitInfo<GivesBuildableAreaInfo>())
-					buildableArea.Add(b.Location);
+				{
+					// The buildable frontier is the building's footprint tiles (BuildingInfluence registers tiles
+					// and IsCloseEnoughToBase measures against them) — not the single top-left cell.
+					if (b.Info.TraitInfoOrDefault<BuildingInfo>() is BuildingInfo bbi)
+						buildableArea.AddRange(bbi.Tiles(b.Location));
+					else
+						buildableArea.Add(b.Location);
+				}
+
 				if (b.Info.HasTraitInfo<RefineryInfo>())
+				{
 					refineries.Add(b.Location);
+					refineryTiles.Add(b.Info.TraitInfoOrDefault<BuildingInfo>()?.Tiles(b.Location).ToList());
+				}
+
 				if (b.Info.HasTraitInfo<BaseBuildingInfo>())
 					conyards.Add(b.Location);
 			}
@@ -260,35 +384,135 @@ namespace OpenRA.Mods.Cameo.Traits
 			var snapshot = new ExpansionSnapshot
 			{
 				FieldsKnown = fieldCenters.Count,
-				AnchorsSpreader = spreaderCount,
-				AnchorsField = anchors.Count - spreaderCount,
+				AnchorsSpreader = ActiveSpreaderCount,
+				AnchorsField = ActiveAnchors.Count - ActiveSpreaderCount,
 				Refineries = refineries.Count,
 				Conyards = conyards.Count
 			};
 
-			var covered = 0;
+			// FieldsHarvested stays on the bot's seen-fields model (ResourceMapBotModule) — it is the fog-limited
+			// half of the report; reach/served below run on the law's own field ids so the three counters agree.
 			foreach (var kv in fieldCenters)
-			{
-				var center = kv.Value;
-				var inReach = buildableArea.Any(c => ExpansionMath.Distance(c, center) <= reach);
-				var served = refineries.Any(r => ExpansionMath.Distance(r, center) <= claimRadius);
-				if (inReach)
-					snapshot.FieldsInReach++;
-				if (served)
-					snapshot.FieldsServed++;
-				if (inReach || served)
-					covered++;
 				if (map != null && map.GetIndice(kv.Key)?.PlayerHarvetserCount > 0)
 					snapshot.FieldsHarvested++;
-			}
 
-			snapshot.CoverageMilli = fieldCenters.Count == 0 ? 0 : covered * 1000 / fieldCenters.Count;
-
-			var assignment = ExpansionMath.AssignRefineries(refineries, anchors, ExpansionMath.AnchorRadiusCells);
+			var activeAnchors = ActiveAnchors;
+			var assignment = ExpansionMath.AssignRefineries(refineries, activeAnchors, ExpansionMath.AnchorRadiusCells);
 			snapshot.ExcessRefineries = assignment.Excess;
 			snapshot.UnassignedRefineries = assignment.Unassigned;
 			snapshot.AnchorDistMean = Math.Round(assignment.MeanDistance, 1);
 			snapshot.AnchorDistMax = Math.Round(assignment.MaxDistance, 1);
+
+			// REF-1 (§12.24 v2): the per-anchor refinery max (the law's cap — 1), the anchors in reach with no
+			// refinery, and the fields in reach with no refinery at all (the tier-1 backlog the claim order drains
+			// before any field gets a second one). Serving mirrors the law's own binding: the greedy anchor
+			// assignment where a refinery qualifies by proximity OR by sitting flush to the anchor's field —
+			// a legal far-edge placement must bind, or the anchor would be claimed twice.
+			var activeFieldIds = ActiveAnchorFieldIds;
+			var fieldCellsById = ActiveFieldCellsById;
+			var refineryFields = ExpansionPlannerBotModule.RefineryFlushFields(refineryTiles, fieldCellsById);
+			var assigned = ExpansionPlannerBotModule.AssignRefineries(activeAnchors, refineries,
+				ExpansionMath.AnchorRadiusCells, activeFieldIds, refineryFields);
+
+			var bound = new bool[refineries.Count];
+			foreach (var r in assigned)
+				if (r >= 0)
+					bound[r] = true;
+
+			var servedPerAnchor = new int[activeAnchors.Count];
+			for (var a = 0; a < activeAnchors.Count; a++)
+				if (assigned[a] >= 0)
+					servedPerAnchor[a] = 1;
+
+			// Every unbound refinery still counts toward its nearest eligible anchor — a stack on one spreader
+			// is the violation this metric exists to show.
+			for (var r = 0; r < refineries.Count; r++)
+			{
+				if (bound[r])
+					continue;
+
+				var best = -1;
+				var bestD = double.MaxValue;
+				for (var a = 0; a < activeAnchors.Count; a++)
+				{
+					var eligible = r < refineryFields.Length && a < activeFieldIds.Count
+						&& refineryFields[r] >= 0 && refineryFields[r] == activeFieldIds[a];
+					var d = ExpansionMath.Distance(refineries[r], activeAnchors[a]);
+					if ((eligible || d <= ExpansionMath.AnchorRadiusCells) && d < bestD)
+					{
+						bestD = d;
+						best = a;
+					}
+				}
+
+				if (best >= 0)
+					servedPerAnchor[best]++;
+			}
+
+			snapshot.RefineriesPerAnchorMax = servedPerAnchor.Length == 0 ? 0 : servedPerAnchor.Max();
+
+			// Reach mirrors the law too: the refinery sits flush to the field's resource EDGE, so a field is in
+			// reach when one of its cells is — not when the spreader cell itself is (an orphan anchor with no
+			// recorded field cells keeps its own cell as the measure).
+			var fieldReach = new Dictionary<int, double>();
+			for (var f = 0; f < fieldCellsById.Count; f++)
+			{
+				var cells = fieldCellsById[f];
+				if (cells == null || cells.Count == 0)
+					continue;
+
+				var d = double.MaxValue;
+				foreach (var c in cells)
+					foreach (var b in buildableArea)
+						d = Math.Min(d, ExpansionMath.Distance(c, b));
+				fieldReach[f] = d;
+			}
+
+			var fieldServed = new Dictionary<int, bool>();
+			var fieldInReach = new Dictionary<int, bool>();
+			for (var a = 0; a < activeAnchors.Count; a++)
+			{
+				if (a >= activeFieldIds.Count)
+					break;
+
+				var fid = activeFieldIds[a];
+				var reachD = fid < fieldCellsById.Count && fieldCellsById[fid] is { Count: > 0 }
+					? fieldReach.GetValueOrDefault(fid, double.MaxValue)
+					: buildableArea.Count == 0 ? double.MaxValue : buildableArea.Min(b => ExpansionMath.Distance(b, activeAnchors[a]));
+				var inReach = reachD <= reach;
+				var servedAnchor = assigned[a] >= 0;
+				if (inReach && !servedAnchor)
+					snapshot.AnchorsInReachUnserved++;
+
+				fieldServed[fid] = fieldServed.GetValueOrDefault(fid) || servedAnchor;
+				fieldInReach[fid] = fieldInReach.GetValueOrDefault(fid) || inReach;
+			}
+
+			// All three field counters run on the law's own field ids and reach model: in reach = the field's
+			// resource edge within `reach` of a buildable-area tile (or an orphan anchor's own cell); served =
+			// a refinery bound to one of its anchors (proximity or flush); unserved = in reach and not served.
+			var covered = 0;
+			var unservedIds = new List<int>();
+			foreach (var fid in fieldInReach.Keys)
+			{
+				var inReach = fieldInReach[fid];
+				var servedField = fieldServed.GetValueOrDefault(fid);
+				if (inReach)
+					snapshot.FieldsInReach++;
+				if (servedField)
+					snapshot.FieldsServed++;
+				if (inReach || servedField)
+					covered++;
+				if (inReach && !servedField)
+				{
+					snapshot.FieldsInReachUnserved++;
+					unservedIds.Add(fid);
+				}
+			}
+
+			unservedIds.Sort();
+			snapshot.FieldsInReachUnservedIds = unservedIds.ToArray();
+			snapshot.CoverageMilli = fieldInReach.Count == 0 ? 0 : covered * 1000 / fieldInReach.Count;
 
 			// The main base: the first construction yard seen (kept for the match); outposts are the yards beyond MainBaseRadiusCells of it.
 			if (mainConyard == null && conyards.Count > 0)

@@ -3,13 +3,40 @@
  * Copyright (c) The OpenRA Combined Arms Developers (see CREDITS).
  * This file is part of OpenRA Combined Arms, which is free software.
  * It is made available to you under the terms of the GNU General Public License
- * as published by the Free Software Foundation, either version 3 of the License,
- * or (at your option) any later version. For more information, see COPYING.
+ * as published by the Free Software Foundation, either version 3 of
+ * the License, or (at your option) any later version. For more
+ * information, see COPYING.
  */
 #endregion
 
+using System.Collections.Generic;
+
 namespace OpenRA.Mods.CA.Traits
 {
+	/// <summary>
+	/// REF-1 (AI_ARCHITECTURE §12.24 v2, DESIGN §19.1b): one refinery-to-anchor claim — the anchor (a resource
+	/// spreader, or the centre of a field that has none), the field it belongs to, the claim tier
+	/// (1 = first refinery of a field that has none yet, 2 = an additional spreader of an already covered field),
+	/// and the field's valuable resource cells so the placement can sit flush to the field.
+	/// </summary>
+	public readonly struct RefineryAnchorClaim
+	{
+		public readonly CPos Anchor;
+		public readonly CPos FieldCenter;
+		public readonly int FieldId;
+		public readonly int Tier;
+		public readonly IReadOnlyCollection<CPos> ResourceCells;
+
+		public RefineryAnchorClaim(CPos anchor, CPos fieldCenter, int fieldId, int tier, IReadOnlyCollection<CPos> resourceCells)
+		{
+			Anchor = anchor;
+			FieldCenter = fieldCenter;
+			FieldId = fieldId;
+			Tier = tier;
+			ResourceCells = resourceCells;
+		}
+	}
+
 	/// <summary>
 	/// Cameo (docs/design/AI_ARCHITECTURE.md §12.13, EX-1): the resource field an expansion planner wants the base
 	/// to walk toward. <c>BaseBuilderBotModuleCA</c>'s BaseCrawl placements aim at it when one is published; null
@@ -36,8 +63,8 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>
 		/// FE-1 (§12.24, DESIGN §19.1b): the provider enforces one refinery per anchor (resource spreader or spreaderless
 		/// field centre). While true the base builder replaces its yard-based refinery cap, OptimalRefineryCount and the
-		/// scale-target refinery cap by <see cref="RefineryAnchorCount"/> / <see cref="UnservedAnchorsInReach"/>, and
-		/// <see cref="RefineryClaimTarget"/> is the anchor. Default false: no provider (classic) or switch off = unchanged.
+		/// scale-target refinery cap by <see cref="UnclaimedAnchorsInReach"/>, and every refinery is placed through
+		/// <see cref="NextRefineryClaim"/>. Default false: no provider (classic) or switch off = unchanged.
 		/// </summary>
 		bool RefineryLawActive => false;
 
@@ -49,5 +76,82 @@ namespace OpenRA.Mods.CA.Traits
 
 		/// <summary>FE-1: the resource centre of the anchor's field, the tie-break of the claim placement. Null = none.</summary>
 		CPos? RefineryClaimFieldCenter => null;
+
+		/// <summary>
+		/// REF-1 (§12.24 v2): the claim the next refinery must serve. <paramref name="near"/> is the ranking origin for an
+		/// MCV-requested refinery (the requesting yard) — within each tier the anchor nearest it wins; null = the planner's
+		/// own ordering (home first). Null result = no anchor wants a refinery: the caller retries later and must NOT fall
+		/// back to the old base placement — a refinery that serves no anchor is exactly what the law forbids.
+		/// </summary>
+		RefineryAnchorClaim? NextRefineryClaim(CPos? near) => null;
+
+		/// <summary>
+		/// REF-1: a produced refinery was just committed to <paramref name="anchor"/> — it is pending-served until the
+		/// building lands (or the pending expires), so another refinery does not claim the same anchor meanwhile.
+		/// </summary>
+		void RefineryClaimCommitted(CPos anchor) { }
+
+		/// <summary>
+		/// REF-1: anchors claimable right now — unserved, not parked, not pending. The production gate:
+		/// a refinery is allowed only while this exceeds the in-flight refinery count, never by comparing global totals
+		/// (a duplicate at home must not eat the quota of a forward anchor). The first-refinery fallback claim (an
+		/// unserved anchor beyond reach, claimed when nothing else is) counts too, so the first refinery is never
+		/// cap-blocked.
+		/// </summary>
+		int UnclaimedAnchorsInReach => 0;
+
+		/// <summary>
+		/// REF-1 B1 (§12.24 v2): the name of the cheapest crawl-eligible building the planner wants produced while
+		/// the crawl target's field sits beyond reach and no anchor is claimable — the crawl's own supply, instead of
+		/// power demand's accident. Null = no want (classic, switch off, nothing to do).
+		/// </summary>
+		string WantedLinkBuilding => null;
+
+		/// <summary>
+		/// REF-1 B1: the crawl aim refined to the target field's resource cell nearest our frontier — every building
+		/// placed to close the gap. Null = <see cref="ExpansionTarget"/> (the field centre) remains the aim.
+		/// </summary>
+		CPos? CrawlTargetEdge => null;
+
+		/// <summary>
+		/// REF-1 B2: the name of the cheapest currently-buildable provider of a due construction MCV's missing
+		/// prerequisite (td_gdi: the repair facility). Null = none — the MCV is producible or none is due.
+		/// </summary>
+		string WantedMcvPrerequisite => null;
+
+		/// <summary>
+		/// REF-1 B4: anchors with no serving refinery whose field edge sits beyond building reach — the law's
+		/// expansion-nudge condition ("all anchors in reach served and unserved anchors exist beyond reach").
+		/// </summary>
+		int UnservedAnchorsBeyondReach => 0;
+	}
+
+	/// <summary>
+	/// REF-1 B4: the expansion nudge. Under the refinery law the old raw refinery total
+	/// (<c>numRef &gt;= InititalMinimumRefineryCount + AdditionalMinimumRefineryCount</c>) is replaced by coverage:
+	/// fire when every anchor in reach is served and unserved anchors still exist beyond reach. Classic and
+	/// switch-off keep the refinery-count test verbatim.
+	/// </summary>
+	public static class RefineryLawNudge
+	{
+		public static bool Due(IBotExpansionTargetProvider law, int refineryCount, int refineryMinimum) =>
+			law != null
+				? law.UnservedAnchorsInReach == 0 && law.UnservedAnchorsBeyondReach > 0
+				: refineryCount >= refineryMinimum;
+	}
+
+	/// <summary>
+	/// REF-1 silo containment (maintainer report 2026-10-04): the classic "head room for resource
+	/// storage" priority override fires whenever resources exceed 80% of capacity — under the law a
+	/// healthy refinery economy stays above 80% permanently, so the override won every pick and
+	/// spammed silos. Under the law a silo is wanted only at &gt;95% capacity with none already in
+	/// production; classic and switch-off keep the plain 80% test.
+	/// </summary>
+	public static class RefineryLawSilo
+	{
+		public static bool Wanted(bool lawActive, int resources, int capacity, bool siloInProduction) =>
+			lawActive
+				? resources > 0.95 * capacity && !siloInProduction
+				: resources > 0.8 * capacity;
 	}
 }

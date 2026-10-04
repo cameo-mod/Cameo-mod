@@ -152,6 +152,108 @@ vision), which a mobile provider creates constantly; a static comm center almost
 and removed before commit — they live on `devin/tier4/takeover-smoke` where they belong.
 Known limitation: dots only render for actors carrying `CameoRangedGpsDot` inside a *Cameo* provider's disc —
 all nine swap sites were verified as the complete set (`RangedGpsWatcher` stays engine).
+# 2026-10-04 — REF-1 silo gate commit + rift smoke verdict (24109f58f)
+
+*Devin (T2Verify), branch `devin/ref1-refinery-law-v2`.* Lead accepted the smoke verdicts and froze REF-1
+for merge; option (a) landed the silo gate as its own commit: `RefineryLawSilo.Wanted` extracted to
+`IBotExpansionTargetProvider` (pure, testable) + `SiloOverrideThrottledUnderTheLaw` unit test (law on:
+85% no, 96% yes, 96%+in-production no, =95% no; law off: classic 80% both sides). Build 0 err, 857/857,
+audits + boot gate PASS. **Rift smoke on 24109f58f** (hard vs hard, 1 match): law clean — 0 FAIL,
+`rpa=1`, `base=0`, `gap_max=0`, `tier_viol=0`. Silo evidence vs `_ref1_rift_smoke3`: **0 `crawl` silos
+(80 pre-fix → 0)** — every post-fix silo is `reason='base'` inside owned buildable area; the winning
+seat's 21 vs the loser's 3 is genuine >95% overflow, not frontier spam. Checker ownership also landed:
+`devin/tier4/refinery-check@55e8b5efa` (rebuild-aware per-anchor skip via `fields_in_reach_unserved_ids`,
+P3 all-n/a exit 2, `?` docstring, 28/28 tests) — `_ref1_dd_smoke3` 3 FAIL → 1 FAIL; the residual
+(`f8e513e2`/Multi0) is a documented telemetry blind spot (out-of-reach loss + captured-refinery
+co-bind; `capture:` mission at t15701, rpa stayed 1 through the rebuild's snapshot) — ruling requested.
+
+# 2026-10-04 — REF-1 silo containment (maintainer report: "silos everywhere")
+
+*Devin (T2Verify), branch `devin/ref1-refinery-law-v2`.* Maintainer observed bots spamming silos everywhere.
+Root cause: REF-1's healthy refinery economy keeps resource storage above the classic 80% override
+(`BaseBuilderQueueManagerCA` "head room for resource storage") permanently, so the silo priority override won
+nearly every building pick — and every produced silo (non-`GivesBuildableArea`, useless as a link per the B1
+ruling) then took the 50% organic `BaseCrawl` roll onto the frontier. Two law-scoped fixes: (a) production —
+the override fires only when storage is >95% full AND no silo is already in production, otherwise the queue
+spends on production/defence (maintainer: "better to just build more production buildings and spend the
+money"); (b) placement — the organic `BaseCrawl` roll requires `GivesBuildableArea` under the law, so a
+produced silo places at home instead of crawling (the check precedes the draw — no random consumed).
+Classic and switch-off keep the 80% override and the unfiltered roll. Build 0 err / 8 pre-existing warns,
+856/856 tests, fog + mutation audits PASS, boot gate PASS. AI_ARCHITECTURE §12.24 records the ruling.
+Takeover-stance (peer): user-reported "takeover AI won't attack buildings" is already fixed on
+`devin/t3verify/bot-takeover@c05e247bd` (+f475f1881) — `AutoTarget` resolved human `InitialStance` (Defend)
+because `Player.IsBot` stays false for taken-over seats; not yet on master. Army stutter (peer): prime
+suspect is §12.7 `IssueFormationOrders` pace-lock + `leaderWaitCheck` stop alternation
+(`GroundStatesCA`), secondary the live concave deploy prong re-issues — flagged to the squad owners.
+
+# 2026-10-04 — REF-1 smoke verdicts on d578534c3 (B1 correction build)
+
+*Devin (T2Verify), branch `devin/ref1-refinery-law-v2`.* Re-smoke after the B1 link-legality correction:
+4 matches per map (hard vs hard, td_gdi, `--render fast`, `--time-limit 3`), 8 seat-records each.
+**tiberium-rift: 0 FAIL / 8 WARN** — `per_anchor_max=1`, `base=0`, `gap_max=1`, `tier_viol=0`; durations
+20851/16951/29401/26251 (3 ≥ 20k). **deterring-democracy: 3 FAIL / 5 WARN** — all three are the checker's
+cumulative-per-anchor counter counting rebuild-after-loss: `f8e513e2` Multi0 refs dropped 4→3→2 at
+t9151–9901 with fields 2+13 re-entering `fields_in_reach_unserved_ids` before rebuilds at t10461/t11679/
+t15396; `2dd92ff1` Multi1 and `c46a85d6` Multi0 identical pattern. Live `refineries_per_anchor_max`
+stayed 1 throughout — the law held at every instant. Checker fix (tier4 file-set): skip a same-anchor
+placement whose `field_id` was in `fields_in_reach_unserved_ids`. B1 evidence: 52+74 `power/crawl`
+placements — nukes marching aimed lines toward field edges (organic silo crawls unchanged, out of
+scope). Acceptance: first refinery placed on every seat; winners conyards 2–6, coverage 312–555 milli,
+fields_in_reach up to 8. Peer-review nit fixed at d578534c3; T3Verify's rev-2 branches approved in
+reciprocal review (fleet `REVIEW_2026-10-04_devin-t2verify_on-t3verify.md`).
+
+# 2026-10-04 — REF-1 B1 correction: legal crawl links (GivesBuildableArea, power preferred)
+
+*Devin (T2Verify), branch `devin/ref1-refinery-law-v2`.* Maintainer correction to B1: a crawl link must extend the
+buildable area — the first implementation let `CheapestBuildables`' cheapest-of-anything win, which could pick a
+silo (no build radius, closes no gap). `CheapestBuildables` now also returns a `CrawlLink` candidate filtered to
+`Buildable` + `Building` + `GivesBuildableArea` (never `Refinery`), picked by `PickCrawlLink` = power-producing
+(`PowerInfo.Amount > 0`) first, else the cheapest eligible — cost never excludes a power plant, so the advanced
+plant stays a valid link when it is the only one. Placement-side rules landed with it (crawl-trace §8): the aim
+is the target field's resource EDGE (`CrawlTargetEdge`), aimed crawl placements bypass the spacing-advisor
+re-rank (`findPos` `bypassAdvisor` — an armed advisor would override the distance sort), and a directed crawl
+with no aim holds the item instead of wasting it on an un-aimed fallback. Classic/switch-off untouched (interface
+defaults). Test: `CrawlLinkRequiresBuildableAreaAndPrefersPowerPlants` — 856/856. Build 0 err; fog + mutation
+audits PASS; boot gate PASS.
+
+# 2026-10-04 — REF-1 B-items: crawl supply want, MCV prereq want, ungated planner, coverage nudge
+
+*Devin (T2Verify), branch `devin/ref1-refinery-law-v2`.* Consolidated scope from the crawl trace
+(`NOTE_2026-10-04_devin-t3verify_crawl-trace.md`: frontier froze ~26 cells short once `nuk2` retired power-driven
+crawl; td_gdi's MCV sat gated on a repair facility for ~10k ticks): **B1** — while the crawl target's field is out
+of reach and no anchor is claimable in reach, the planner publishes `WantedLinkBuilding` (cheapest buildable) and
+`CrawlTargetEdge` (the target field's resource cell nearest the frontier); the queue takes the want after
+refineries, and the cash gate lets it through at its own price. **B2** — `McvDue` drops the cash gate from the
+request (it rides under `McvRequestReserve`; production is cash-gated downstream) and a due-but-unproducible MCV
+surfaces its cheapest unmet prerequisite provider as `WantedMcvPrerequisite` via `TechTree.HasPrerequisites`.
+**B3** — `refinery.Info == null` no longer nulls `Target`/`LastScores` or skips `RequestMcv`:
+`RefineryEstimateOrFallback` uses the last-seen buildable, then a rules-listed refinery, for the payback estimate.
+**B4** — the post-placement expansion nudge is `RefineryLawNudge.Due` = all anchors in reach served AND unserved
+anchors beyond reach (`UnservedAnchorsBeyondReach` — new `ClaimOrder` counter), replacing the raw
+`numRef >= Initial + Additional` under the law only. All new provider members publish only under `RefineryLawActive`;
+queue changes are confined to refinery/crawl/MCV triggers. Tests 855/855 (6 new: `LinkBuildingWanted`, the two
+ClaimOrder counters, `McvDue`, `MissingPrerequisiteTokens`, `RefineryEstimateOrFallback`, `RefineryLawNudge.Due`).
+Build 0 err / 0 mod warnings; fog + mutation audits PASS; boot gate PASS. Harness fix: `run_ai_match_batch.py`
+`mp_spawn_cells` accepts Owner/Location in either yaml order (unblocks deterring-democracy, whose map.yaml writes
+Location first). Pending: the 2-map ≥20k-tick re-smoke + `refinery_law_check.py` verdicts.
+
+# 2026-10-04 — REF-1 checkpoint: smoke findings fixed (first refinery, field counters, reach)
+
+*Devin (T2Verify), branch `devin/ref1-refinery-law-v2`.* The isolated td_gdi hard-vs-hard smoke (12,642 ticks)
+exposed three defects in the first cut: (1) **zero refineries on one seat** — the reach test measured
+spreader→building *top-left* ≤ ReachCells(6); the seat's home spreader sat 8 cells from its yard's origin while
+the field's resource edge was ~4 from the yard *footprint*, so a legal gap-0 placement existed but no claim ever
+fired and the per-anchor cap blocked the first refinery outright. Reach is now field-edge→buildable-area
+footprint tiles (the model `IsCloseEnoughToBase` uses), **and** a first-refinery fallback claims the unblocked
+anchor nearest the base even past reach when zero refineries exist and none is committed. (2) **`fields_in_reach`
+vs `fields_in_reach_unserved` disagreement** — telemetry counted field *centre* distance while the claim measured
+edge/anchor reach; all field counters now run on the law's field ids and edge reach (served = refinery bound by
+proximity OR flush), plus `fields_in_reach_unserved_ids` is emitted for the campaign checker's exact claim
+latency. (3) Mis-binding risk fixed with the same model: `AssignRefineries`/`RefineryFlushFields` bind a
+gap≤1-flush refinery to its field's nearest anchor beyond the plain serve radius. Tests 849/849 (incl. orphan-anchor
+IndexOutOfRange via `CellsOf`, field-edge reach, flush binding, first-refinery fallback, committed suppression).
+Build 0 err/0 mod warnings. Pending: 2-map ≥20k re-smoke + `refinery_law_check.py` verdicts, then hand-in.
+Fransbot report (read-only): `FransQueueManager` shares the same global-total/top-left-reach flaw — unchanged.
 
 # 2026-10-03 — coordinator: tier-3 hotfix (INC c) + ORDERS round 2 to NOVA/DAWN/EMBER
 

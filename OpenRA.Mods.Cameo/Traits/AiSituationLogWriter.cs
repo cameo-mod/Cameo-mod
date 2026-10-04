@@ -243,6 +243,18 @@ namespace OpenRA.Mods.Cameo.Traits
 			AiMatchLogWriter.AppendNumber(builder, "unassigned_refineries", e.UnassignedRefineries);
 			AiMatchLogWriter.AppendNumber(builder, "anchor_dist_mean", e.AnchorDistMean);
 			AiMatchLogWriter.AppendNumber(builder, "anchor_dist_max", e.AnchorDistMax);
+			AiMatchLogWriter.AppendNumber(builder, "refineries_per_anchor_max", e.RefineriesPerAnchorMax);
+			AiMatchLogWriter.AppendNumber(builder, "anchors_in_reach_unserved", e.AnchorsInReachUnserved);
+			AiMatchLogWriter.AppendNumber(builder, "fields_in_reach_unserved", e.FieldsInReachUnserved);
+			AiMatchLogWriter.AppendArrayPropertyStart(builder, "fields_in_reach_unserved_ids");
+			for (var i = 0; i < e.FieldsInReachUnservedIds.Length; i++)
+			{
+				if (i > 0)
+					builder.Append(',');
+				builder.Append(e.FieldsInReachUnservedIds[i]);
+			}
+
+			builder.Append(']');
 			AiMatchLogWriter.AppendNumber(builder, "conyards", e.Conyards);
 			AiMatchLogWriter.AppendNumber(builder, "outposts", e.Outposts);
 			AiMatchLogWriter.AppendString(builder, "crawl_target", e.CrawlTarget);

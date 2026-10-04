@@ -4969,6 +4969,42 @@ from one tier up, never on-off-on), and it must say why it cannot scale.
     bases, and the score rewards fields far from everything we own.
   * **Logged every match** (placement events + per-snapshot field economy, `tools/ai/expansion_report.py`), and improved
     against those numbers. Spec: `design/AI_ARCHITECTURE.md` §12.24.
+* **Refinery law v2 (maintainer rulings 2026-10-04):** *"they basecrawl forward with their power plants so they are
+  (almost) there to place a refinery close to a new resource field, and they just spam 3 refineries on the same
+  resource field in the back of their base instead of only 1 per resource field. Refineries must always be placed as
+  far apart as possible and always as close as possible to the resource fields. Place it directly with no gap to the
+  resources; the maximum allowed gap is 1 tile, and only if it would otherwise be blocked. Several refineries in the
+  base eat the budget, so there is none for the expansion, where it matters."* And: *"Every resource spreader should
+  be covered by one refinery, not more, not less … Refinery coverage is the most important feature right now"*, plus
+  *"some resource fields can have multiple spreaders … before you place a second refinery on the same resource field
+  just because it has multiple spreaders, you rather cover each external resource field first that is in range of
+  your base crawl or MCV expansion."*
+  * **One refinery per anchor, bound 1:1.** An anchor is a resource spreader (never merged per field), or the centre
+    of a field that has none. A refinery is allowed only while a specific anchor in building reach is unclaimed —
+    never by comparing totals: duplicate refineries stacked at home must not eat a forward anchor's quota.
+  * **Fields group the anchors.** An 8-connected component of valuable resource cells (or within a small merge
+    radius) is one field. Claim priority has two tiers: (1) the first anchor of every in-reach field with no refinery
+    yet — the spreader covering the most of the field's cells, ties by nearest our base; (2) only when tier 1 is
+    empty, additional spreaders of covered fields, farthest from the field's existing refinery first. Home first,
+    then any newly reached field immediately.
+  * **Placement is flush to the resources.** The placeable cell nearest the spreader whose footprint touches the
+    field's resource cells (gap 0); gap 1 only when no gap-0 cell is placeable; never more and never a home fallback —
+    a refinery that serves no anchor is exactly what the law forbids. Every refinery path obeys it: the first
+    refinery, the planner's claim and the MCV-requested one (which targets the requesting yard's nearest unserved
+    field). The harvester dock must be reachable and not sit on resources.
+  * **On by default for genericbot** (`FieldCoverage: true`, `AJ_field_coverage` carried into `ai.yaml`); classic is
+    untouched. Placement records carry `field_id` and `tier`; the snapshot tracks `refineries_per_anchor_max`,
+    `anchors_in_reach_unserved` and `fields_in_reach_unserved` (the tier-1 backlog — drains to 0 before any field's
+    second refinery).
+  * **The crawl has its own supply and the MCV its unlock (2026-10-04 B-items).** While the crawl target's field is
+    out of reach and nothing is claimable in reach, the planner wants the cheapest crawl-eligible building produced
+    and every such placement aims at the field's resource edge — *"every building placed to close the gap"*. A link
+    must extend the buildable area (never a silo), power plants are preferred and never excluded by cost, the aimed
+    placement ignores the spacing advisor, and a directed crawl with no aim waits rather than placing blind. A due
+    MCV's missing prerequisite becomes a building want (td_gdi: the repair facility), and the MCV request rides
+    under the cash reserve — the request is free; production is cash-gated at the queue. A transiently unbuildable
+    refinery never silences the planner (target, claims and MCV requests keep running). The expansion nudge keys
+    off coverage: all anchors in reach served plus unserved anchors beyond reach — never the raw refinery count.
 * **Building build order lab (maintainer 2026-10-02):** buildings' build order, timers and intervals are LOGGED every match,
   scored (win + margin, speed, destroyed-to-lost) and TUNED through §19.2 route 2 (knobs, paired experiments) and route 3
   (opening bandit). Each personality has its own preset, every match a random jitter, and the knobs react mid-match to
