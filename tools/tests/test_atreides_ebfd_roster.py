@@ -116,6 +116,27 @@ def child(node, key: str):
     return node.child(key) if node is not None else None
 
 
+SPRITES_DIR = ROOT / "mods/cameo/ContentPacks/D2k/Atreides/files/sprites"
+ICONS_DIR = ROOT / "mods/cameo/ContentPacks/D2k/Atreides/files/icons"
+BITS_DIR = ROOT / "mods/cameo/bits/d2k"
+
+
+def asset_path(filename: str) -> pathlib.Path:
+    """Archive files moved with the pack: sprites and new build icons under
+    ContentPacks/D2k/Atreides/files, original *_icon.png proofs remain in
+    mods/cameo/bits/d2k."""
+    for directory in (SPRITES_DIR, ICONS_DIR, BITS_DIR):
+        path = directory / filename
+        if path.is_file():
+            return path
+    return BITS_DIR / filename
+
+
+def bare(filename: str) -> str:
+    """Strip a ``namespace|`` prefix from a resolved sequence filename."""
+    return filename.rsplit("|", 1)[-1]
+
+
 class AtreidesEbfdRosterTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -124,14 +145,14 @@ class AtreidesEbfdRosterTests(unittest.TestCase):
         cls.sequences_path = ROOT / "mods/cameo/ContentPacks/D2k/Atreides/yaml/sequences.yaml"
         cls.vehicles_path = ROOT / "mods/cameo/ContentPacks/D2k/Atreides/yaml/vehicles.yaml"
         cls.promotions_path = ROOT / "mods/cameo/ContentPacks/D2k/Atreides/yaml/promotions.yaml"
-        cls.ai_path = ROOT / "mods/cameo/ai/ai.yaml"
+        cls.ai_path = ROOT / "mods/cameo/ContentPacks/D2k/Atreides/yaml/ai.yaml"
 
     def test_archive_provenance_and_nine_assets_are_byte_identical(self):
         self.assertEqual(len(ARCHIVE_ASSETS), 9)
         self.assertRegex(ARCHIVE_SHA256, r"^[0-9a-f]{64}$")
         for files in ARCHIVE_ASSETS.values():
             for filename, expected_hash in files.items():
-                path = ROOT / "mods/cameo/bits/d2k" / filename
+                path = asset_path(filename)
                 self.assertTrue(path.is_file(), filename)
                 actual_hash = hashlib.sha256(path.read_bytes()).hexdigest()
                 self.assertEqual(actual_hash, expected_hash, filename)
@@ -150,20 +171,20 @@ class AtreidesEbfdRosterTests(unittest.TestCase):
             self.assertIsNotNone(defaults, image)
             body = defaults.get("Filename")
             self.assertTrue(body.endswith(".png"), image)
-            self.assertIn(body, ARCHIVE_ASSETS[actor], body)
+            self.assertIn(bare(body), ARCHIVE_ASSETS[actor], body)
 
             icon = child(sequence, "icon")
             self.assertIsNotNone(icon, image)
             icon_file = icon.get("Filename")
-            self.assertEqual(BUILD_ICONS[actor], icon_file)
-            self.assertTrue((ROOT / "mods/cameo/bits/d2k" / icon_file).is_file(), icon_file)
+            self.assertEqual(BUILD_ICONS[actor], bare(icon_file))
+            self.assertTrue(asset_path(bare(icon_file)).is_file(), icon_file)
 
             for trait in sequence.children:
                 filename = trait.get("Filename")
-                if filename and filename in ARCHIVE_ASSETS[actor]:
+                if filename and bare(filename) in ARCHIVE_ASSETS[actor]:
                     self.assertEqual(
-                        hashlib.sha256((ROOT / "mods/cameo/bits/d2k" / filename).read_bytes()).hexdigest(),
-                        ARCHIVE_ASSETS[actor][filename],
+                        hashlib.sha256(asset_path(bare(filename)).read_bytes()).hexdigest(),
+                        ARCHIVE_ASSETS[actor][bare(filename)],
                     )
 
             for armament in resolved.children:
@@ -185,17 +206,23 @@ class AtreidesEbfdRosterTests(unittest.TestCase):
         self.assertNotIn("d2k_atreides_apc:", local)
 
         for block in (top_level_block(vehicles, "atreides_sonictank"),
-                      top_level_block(vehicles, "sonic_tank_husk.atreides")):
+                      top_level_block(vehicles, "atreides_sonic_tank_husk")):
             self.assertIn("Image: atreides_sonictank", block)
             self.assertIn("PlayerPalette: player_rgba", block)
         self.assertIn("Image: atreides_sonictank", top_level_block(promotions, "atreides_promotion_sonictank"))
 
         sonic = self.rules.sequence_image("atreides_sonictank")
         self.assertIsNotNone(sonic)
-        self.assertEqual(child(sonic, "Defaults").get("Filename"), "atreides_sonictank.png")
-        self.assertEqual(child(sonic, "idle").get("Length"), "8")
-        self.assertEqual(child(sonic, "move").get("Length"), "8")
-        self.assertEqual(child(sonic, "icon").get("Filename"), "atreides_sonictank_build_icon.png")
+        self.assertEqual(child(sonic, "Defaults").get("Filename"),
+                         "d2k_atreides_sprites|atreides_sonictank.png")
+        # the corrected layout drops Length/Transpose: frames 0-31 are one
+        # idle/move frame per facing (see the sequence's own comment)
+        self.assertEqual(child(sonic, "idle").get("Start"), "0")
+        self.assertEqual(child(sonic, "idle").get("Facings"), "32")
+        self.assertEqual(child(sonic, "move").get("Start"), "0")
+        self.assertEqual(child(sonic, "move").get("Facings"), "32")
+        self.assertEqual(child(sonic, "icon").get("Filename"),
+                         "d2k_atreides_icons|atreides_sonictank_build_icon.png")
         sonic_actor = self.rules.resolve("atreides_sonictank")
         move_animation = child(sonic_actor, "WithMoveAnimation")
         self.assertIsNotNone(move_animation)
@@ -229,6 +256,9 @@ class AtreidesEbfdRosterTests(unittest.TestCase):
         self.assertIn("atreides_promotion_sonictank", prereqs["atreides_promotion_minotaurus"])
         self.assertIn("atreides_promotion_minotaurus", prereqs["atreides_promotion_mongoose"])
 
+        # the bot roster migrated out of mods/cameo/ai/ai.yaml into the pack's
+        # own ai.yaml (self-contained ContentPacks); Player still parents the
+        # builder module rows there
         ai = self.ai_path.read_text(encoding="utf-8")
         units = top_level_block(ai, "Player")
         positions = []
@@ -252,7 +282,7 @@ class AtreidesEbfdRosterTests(unittest.TestCase):
             self.assertRegex(units, rf"(?m)^\t\t\t{re.escape(actor)}: {limit}$")
 
         local_ai = (ROOT / "mods/cameo/ContentPacks/D2k/Atreides/yaml/ai.yaml").read_text(encoding="utf-8")
-        self.assertIn("global mods/cameo/ai/ai.yaml", local_ai)
+        self.assertIn("mods/cameo/ai/ai.yaml", local_ai)
         self.assertNotIn("No faction-specific entries found", local_ai)
 
     def test_mongoose_muzzle_overlay_keeps_mtank_primary(self):

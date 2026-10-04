@@ -106,12 +106,13 @@ class ResolvedFirepowerTests(unittest.TestCase):
         cls.rules = Ruleset(extract.ROOT)
 
     def test_hydra_and_marine_include_inherited_modifiers(self):
-        for name, percentages in (('zerg_hydralisk', [99]),
-                                  ('terran_marine', [31])):
+        for name, percentages in (('zerg_hydralisk', [50, 99]),
+                                  ('terran_marine', [50, 31])):
             actor = self.rules.resolve(name)
             entries = extract.resolved_firepower_modifiers(actor, None)
             # Later reviewed waves gated the old unconditional buffs behind
-            # RequiresCondition; one inherited unconditioned modifier remains.
+            # RequiresCondition; the global 50 buff plus the reviewed
+            # unconditional modifier remain unconditioned.
             self.assertGreaterEqual(len(entries), 1)
             self.assertTrue(all(e['src'] == 'inherited' for e in entries))
             self.assertEqual([e['modifier'] for e in entries], percentages)

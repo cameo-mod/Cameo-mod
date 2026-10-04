@@ -155,7 +155,7 @@ class AuthorizedRemainingProfileTests(unittest.TestCase):
 
     def test_t30_profile_keeps_the_authorized_railgun_geometry(self):
         node = self.rules.resolve_weapon("t30shell").child(
-            "Warhead@Railgun_HeavyFlatCompatibility")
+            "Warhead@Railgun_Heavy_Flat")
         self.assertEqual("80000", node.get("Damage"))
         self.assertEqual("512", node.get("Spread"))
         self.assertEqual("100, 0", node.get("Falloff"))

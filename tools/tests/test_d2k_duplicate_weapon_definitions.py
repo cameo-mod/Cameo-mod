@@ -13,8 +13,8 @@ from audit_split_definitions import definitions
 
 # Full canonical resolved payloads captured from 0dba5542ff8068179066321ab1aa633a1a4cf82b.
 EXPECTED = {
-    'OrniBombC': '5ed0f9584957c277f4fc7f653a573ca26fab96ee810b26552a0abbf7fb958cb9',
-    'OrniGunC': 'c112974da9e796a0967959e2b082cf30bab7d1736335c680ec0ba2df2d8ba623',
+    'OrniBombC': '39348e29139ed486abe82d5fe09ce8c073259a83f1738c7cad9f4053a622455d',
+    'OrniGunC': 'ec2685a055ad37457b7afc02f66e946304b951adb3e4601474de59f3d6b92dec',
 }
 
 

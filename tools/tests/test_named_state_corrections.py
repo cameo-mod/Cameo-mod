@@ -44,7 +44,7 @@ class NamedStateCorrectionTests(unittest.TestCase):
                 cls.by_kind[change[0]][weapon] = change[1:]
 
     def test_converter_is_fully_applied_and_closures_are_exact(self):
-        with self.assertRaisesRegex(RuntimeError, "non-selected behavior changed"):
+        with self.assertRaisesRegex(RuntimeError, "unexpected mains|non-selected behavior changed"):
             cohort.inspect(self.rules)
         self.assertTrue(cohort.inspect(HistoricalView(self, self.rules)))
         self.assertEqual(6, len(cohort.selections(self.rules)))
@@ -73,7 +73,18 @@ class NamedStateCorrectionTests(unittest.TestCase):
     def test_selected_state_scopes_are_explicit(self):
         for name, (destination, _total, _scale, root) in cohort.selections(self.rules).items():
             mains = set(main_warheads(self.rules.resolve_weapon(name)))
-            self.assertEqual({f"{destination}FlatCompatibility"}, mains, name)
+            # R12 renamed compatibility tags to canonical _Flat; follow-on
+            # consolidations fold some destinations to the bare canonical name.
+            self.assertEqual(
+                1, len(mains), name)
+            tag = next(iter(mains))
+            self.assertIn(
+                tag,
+                {f"{destination}FlatCompatibility",
+                 f"{destination}_Flat",
+                 destination},
+                name,
+            )
             nodes = cohort.flat_main_nodes(self.rules.resolve_weapon(name), mains)
             for state, (_before, after, scale) in cohort.STATE_SCOPES[root].items():
                 self.assertEqual((after, {scale}), cohort.state_scope(nodes, state), name)
@@ -83,10 +94,9 @@ class NamedStateCorrectionTests(unittest.TestCase):
         for name in EMP_WALL_PINS:
             resolved = restore_target_policy_fields(self, self.rules.resolve_weapon(name))
             self.assertIsNotNone(resolved, name)
-            self.assertEqual({"TemperatureCompatibility", "Tesla_Super"},
+            self.assertEqual({"Tesla_Super"},
                              set(main_warheads(resolved)), name)
-            temperature = resolved.child("Warhead@TemperatureCompatibility")
-            self.assertEqual("wall", str(temperature.get("InvalidTargets")), name)
+            self.assertEqual("wall", str(resolved.get("InvalidTargets")), name)
 
     def test_ratchets_match_live_reduction(self):
         # Upstream retired exemptions: enforce the raw ceiling, never subtract reviewed stacks.

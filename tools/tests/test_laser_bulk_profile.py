@@ -15,14 +15,14 @@ from reviewed_weapon_history import restore_later_profile, HistoricalView
 
 ROOT_LASERS = {
     "td_nod_lasertrooper_blackhandlaser": (96000, 48000, 3),
-    "CabalHunterKillerLasers": (16000, 0, 2),
-    "CabalHunterKillerLasers_elite": (30000, 0, 3),
-    "TSLaser25mmDep": (4000, 0, 2),
-    "edenMobileLaser": (8000, 0, 4),
-    "ordos_lasertank": (40000, 0, 4),
-    "M16Laser": (6000, 0, 3),
-    "laserelitecadregun": (6000, 0, 3),
-    "td_nod_minigunner_minigun_laser": (6000, 0, 3),
+    "CabalHunterKillerLasers": (16600, 0, 2),
+    "CabalHunterKillerLasers_elite": (31600, 0, 3),
+    "TSLaser25mmDep": (4600, 0, 2),
+    "edenMobileLaser": (8600, 0, 4),
+    "ordos_lasertank": (41600, 0, 4),
+    "M16Laser": (6600, 0, 3),
+    "laserelitecadregun": (6600, 0, 3),
+    "td_nod_minigunner_minigun_laser": (11230, 0, 3),
     "LunarNaxiDroneLaser": (8000, 0, 4),
     "NaxLaserT": (8000, 0, 4),
     "NaxiBeetleLaser_elite": (8000, 0, 4),
@@ -151,7 +151,7 @@ class LaserBulkProfileTests(unittest.TestCase):
             weapon = self.rules.resolve_weapon(name)
             laser = child(weapon, "Warhead@Laser_Heavy")
             remainder = child(weapon, "Warhead@LaserHeavyGroundRemainder")
-            self.assertEqual("4000", child(laser, "Damage").value, name)
+            self.assertEqual("4600", child(laser, "Damage").value, name)
             self.assertEqual("Air", child(laser, "ValidTargets").value, name)
             self.assertIsNone(remainder, name)
 

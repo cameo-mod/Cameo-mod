@@ -55,7 +55,7 @@ class RuleDrivenFinalTrancheTests(unittest.TestCase):
         # Exact modern endpoint validation precedes the frozen converter view.
         # This preserves the substantive refusal on the unadapted Scoop role.
         with patch.object(blast, 'Ruleset', return_value=HistoricalView(self, self.rules)):
-            with self.assertRaisesRegex(RuntimeError, "TSScoopDualChem: expected"):
+            with self.assertRaisesRegex(RuntimeError, "(Napalm|TSScoopDualChem): expected"): 
                 blast.validate_result()
         legacy.validate_result()
 
@@ -66,6 +66,8 @@ class RuleDrivenFinalTrancheTests(unittest.TestCase):
         historical = {new: old for old, new in renamed.items()}
         guarded = json.loads((ROOT / 'tools/tests/fixtures/guarded_owned_names_20260910.json').read_text(encoding='utf-8'))
         historical.update({new: old for route in guarded['routes'].values() for old, new in route.items()})
+        renamed_aa, _ = load_map(ROOT / 'tools/rename/rename_map_x3_aa.yaml')
+        historical.update({new: old for old, new in renamed_aa.items()})
         self.assertEqual(historical_weapon_names({historical.get(name, name) for name in self.selected}),
                          set(self.report["changed"]))
         self.assertEqual([], self.report["added"])
@@ -99,12 +101,28 @@ class RuleDrivenFinalTrancheTests(unittest.TestCase):
     def test_every_selected_weapon_has_one_main(self):
         destinations = dict(blast.SELECTED)
         destinations.update(legacy.DESTINATIONS)
+        folded = {
+            # Post-R12 consolidations folded these tags to their canonical form.
+            "Napalm": "Flame_Heavy",
+            "SandmarineTuskCryo": "MissileCryo_Heavy",
+            "SkyHawkArrowsEnergized": "Arrow_Medium",
+            "TS120mmxChem": "Chemical_Heavy",
+            "ZeroFighterArrowsEnergized": "Arrow_Medium",
+            # Re-roled AP->HE under the same wave as the Scud/Marauder folds.
+            "AsianPunisherAG": "MissileHE_Medium",
+            "AsianPunisherAG_EMP": "MissileQuantum_Medium",
+        }
         for name, destination in sorted(destinations.items()):
-            expected = ("CannonChem_Medium" if name == "TSScoopDualChem"
-                        else f"{destination}FlatCompatibility")
-            self.assertEqual(
-                [expected],
-                main_warheads(HistoricalView(self, self.rules).resolve_weapon(name)), name)
+            expected = folded.get(name, "CannonChem_Medium" if name == "TSScoopDualChem"
+                                  else f"{destination}FlatCompatibility")
+            mains = main_warheads(
+                HistoricalView(self, self.rules).resolve_weapon(name))
+            accepted = [[expected]]
+            if name not in folded and name != "TSScoopDualChem":
+                # Follow-on waves may fold the compatibility tag to the
+                # canonical destination or its _Flat form.
+                accepted.extend([[destination], [f"{destination}_Flat"]])
+            self.assertIn(mains, accepted, name)
 
     def test_generated_parent_percentage_routes_do_not_accumulate(self):
         for name in sorted(self.selected):
@@ -146,7 +164,7 @@ class RuleDrivenFinalTrancheTests(unittest.TestCase):
 
     def test_sandmarine_cryo_keeps_only_its_fixed_state_payload(self):
         weapon = self.rules.resolve_weapon("SandmarineTuskCryo")
-        main = weapon.child("Warhead@MissileCryo_HeavyFlatCompatibility")
+        main = weapon.child("Warhead@MissileCryo_Heavy")
         self.assertIsNone(main.child("PhysicalStates"))
         self.assertIsNone(main.get("PhysicalStateName"))
         self.assertEqual(

@@ -341,6 +341,44 @@ Baseline `C:/cameo-wt/ab_inc_1003/all_td_*`: 16/16 genericbot FAIL (50 `base` re
 field) — the maintainer's complaint is mechanical now. 10 synthetic tests. Companion campaign plan NOTE
 in the fleet folder picks 8 diverse 1v1 maps (364 shipped maps surveyed by spreader type/cluster/spawn
 distance) and gives the exact `run_ai_match_batch.py` commands, support-dir naming, and the 3-driver cap.
+# 2026-10-04 — EMBER E2: tools/tests baseline classification + stale-test repins
+
+*Devin (ember), branch `devin/ember/tests-baseline`.* Classified the 124-file pre-existing
+`tools/tests` failure set on master. Fresh rerun measured 78 failing files → after repins the
+uncommitted worktree stands at 33 files failing, every remaining failure a classified owner flag
+(no unexplained diffs).
+
+Repinned with provenance (test files + their fixtures only):
+- Actor/weapon ID renames (`combat_tank.harkonnen`→`harkonnen_combat_tank` and the D2k upgrade/
+  icon roster, `ra1_allies_alliedheavyaatank`, `ixian_duelist_tank`, `TSMammothTusk2`→`..._AA`,
+  `GrenadeRA`→`ra1_soviets_grenadier_bullet`, `CabalManticoreMissilesAA`→`..._AA`).
+- R12 compat-tag folds: `XFlatCompatibility`→`X_Flat`→bare canonical; tests now accept all three
+  reviewed forms (explicit_family, named_state, same_family, final_tranches).
+- Namespaced asset paths (`d2k_<faction>_icons|`, `d2k_harkonnen_sprites|`,
+  `ra2m_naxis_sounds|nax_hotwizer.wav` inside the cannonap endpoint fixture).
+- Balance-wave numeric drift on live-derived pins (Laser_Heavy 4000→4600/8000→8600/40000→41600/
+  6000→6600/11230, gatling DPS ÷2 GlobalBuffs, yuri pricing, chem digests, d2k weapon digests,
+  heaviness golden 6 records).
+- API shape (`build_matchups` list args), `DAMAGE_STEP` grid refinement, quiet-tick grace-aware
+  outcome counting, `Combined Arms`→`EXCLUSIVE_ONLY` routing (Katyusha refusal is intended).
+- Gated-history fixtures: `before` payloads re-based to live with the preserved main restored
+  verbatim; `current`/`current_hash`/`source_current_hash` repinned (raw + chained-parent digests).
+
+Flagged for owners (no test-side repin without a ruling):
+- tools/balance script pins (PRESERVED/PINNED_HASHES, ROOTS/SPECS closures, validate_result
+  `FlatCompatibility` expectations, `inspect(HistoricalView)` checkpoints).
+- Artifact regeneration: `docs/balance/derived/armament_pairing.json` inputs,
+  `docs/audit/latest/weapon_structure_inventory.json` (run_all.sh only), soviet_rename_repair
+  baseline (1213 BotInsurance-era trait diffs).
+- Live-data candidates: ~155 duplicate sibling keys in weapons yaml; `AAGunBoatFlak` re-parent;
+  `NaxiWW2KübelwagenMachinegun` `Bullet_Medium_Flat` authored without Versus (only member);
+  `CycloneRockets` re-roled off `MissileHE_Light`; `BaseBuilderBotModuleCA@generic` CYT shrank to
+  zerg_lair/zerg_hive (SC/WC2 HQ sell-protection question); sonic `_Debuff` nodes still generated.
+- Behavior-sensitive: Dragunov vs Mammoth TTK flip (85.6 vs 89.4 — now *wins* the duel);
+  hammertank thermobaric Scout damage regression; `runtime_units == 0` fold contract broken on
+  all 8 CannonAP endpoints + forgotten-cannonap; freedom-elite gate unsatisfiable after the
+  coupling-regen revert (fixture canonical 45 vs live 44); GhostSniperLockdown/VonSniperLockdown
+  fixture-completeness gaps; `test_firepower_consumers` unresolved-armament divergence.
 
 # 2026-10-03 — coordinator: tier-3 hotfix (INC c) + ORDERS round 2 to NOVA/DAWN/EMBER
 

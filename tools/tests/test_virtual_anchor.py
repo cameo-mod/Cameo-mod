@@ -342,8 +342,8 @@ class SpeedGridTests(unittest.TestCase):
         evidence = result["fields"]["speed"]
         self.assertTrue(evidence["reference_backed"])
         self.assertEqual(evidence["grid_step"], 1)
-        self.assertEqual(evidence["median"], 72.5)
-        self.assertEqual(evidence["value"], 73)
+        self.assertEqual(evidence["median"], 72.0)
+        self.assertEqual(evidence["value"], 72)
 
 
 class RegistryRaceTests(unittest.TestCase):

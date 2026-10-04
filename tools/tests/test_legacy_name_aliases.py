@@ -53,7 +53,7 @@ else:
 # legacy workbook row -> (ledger file, actor id, current display name, content pack)
 ALIASES = {
     "Terran Marine": ("starcraft_terran.json", "terran_marine", "Marine", "StarCraft/Terran"),
-    "Ordos Tank Destroyer": ("d2k_ordos.json", "ordos_tankdestroyer", "Tank Destroyer", "D2k/Ordos"),
+    "Ordos Tank Destroyer": ("d2k_ordos.json", "ordos_tankdestroyer", "actor_ordos_tankdestroyer.name", "D2k/Ordos"),
     "Ixian Gun Turret": ("d2k_ixian.json", "ixian_gunturret", "Gun Turret", "D2k/Ixian"),
     # FutureTech identity chain: 6dbba3eaa007fcd3d612a37f013fe4854f87de6b then
     # db913a5abcb80cbf7489728ed3213e6cf18e96b7; no tooltip rename in the migration

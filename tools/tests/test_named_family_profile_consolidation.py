@@ -43,7 +43,7 @@ class NamedFamilyProfileConsolidationTests(unittest.TestCase):
                 cls.by_kind[change[0]][weapon] = change[1:]
 
     def test_converter_is_applied_and_closures_are_pinned(self):
-        with self.assertRaisesRegex(RuntimeError, "non-selected behavior hash changed"):
+        with self.assertRaisesRegex(RuntimeError, "unexpected mains|non-selected behavior"):
             cohort.inspect(self.rules)
         self.assertTrue(cohort.inspect(HistoricalView(self, self.rules)))
         self.assertEqual(27, len(cohort.selections(self.rules)))
@@ -51,8 +51,19 @@ class NamedFamilyProfileConsolidationTests(unittest.TestCase):
             self.assertEqual(expected, cohort.descendants(self.rules, root), root)
 
     def test_each_member_has_one_selected_named_family_main(self):
+        # the historical view reverses R12 (X_Flat -> XFlatCompatibility);
+        # follow-on waves re-folded a few destinations to canonical names.
+        post_r12 = {
+            "NapalmA10Carrier": "Flame_Heavy",
+            "RA2CosmonautLaser": "Laser_Light",
+            "TSAssaultCannonSonic": "BulletSonic_Medium",
+            "TSVulcanGunSonic": "BulletSonic_Medium",
+            "ra1_soviets_grenadier_grenadethermobaric": "Thermobaric_Light",
+            "ra1_soviets_grenadier_grenadethermobaricexplode": "Thermobaric_Light",
+            "ra1_soviets_hindattackhelicopter_hindmissilesthermobaric": "Thermobaric_Medium",
+        }
         for name, (destination, total, scale) in cohort.selections(self.rules).items():
-            tag = f"{destination}FlatCompatibility"
+            tag = post_r12.get(name, f"{destination}FlatCompatibility")
             resolved = HistoricalView(self, self.rules).resolve_weapon(name)
             self.assertEqual([tag], main_warheads(resolved), name)
             node = child(resolved, f"Warhead@{tag}")
@@ -62,7 +73,7 @@ class NamedFamilyProfileConsolidationTests(unittest.TestCase):
     def test_harpy_multi_is_behaviorally_unchanged_and_aoe_shape_is_pinned(self):
         self.assertNotIn("TSLaserHarpyMultiClaw", self.report["changed"])
         aoe = child(self.rules.resolve_weapon("TSLaserHarpyAOEClaw"),
-                    "Warhead@Laser_HeavyFlatCompatibility")
+                    "Warhead@Laser_Heavy_Flat")
         self.assertEqual("300", str(aoe.get("Spread")))
         self.assertEqual("100, 50, 25", str(aoe.get("Falloff")))
 

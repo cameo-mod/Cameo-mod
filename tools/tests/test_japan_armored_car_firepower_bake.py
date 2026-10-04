@@ -57,7 +57,9 @@ class JapanArmoredCarFirepowerBakeTests(unittest.TestCase):
     def test_actor_keeps_only_the_conditional_waveforce_multiplier(self):
         actor = self.rules.resolve("japan_armoredcar")
         multipliers = [c for c in actor.children if c.key.startswith("FirepowerMultiplier")]
-        self.assertFalse(any(c.get("RequiresCondition") is None for c in multipliers))
+        # The sanctioned global-buff trait is the one unconditional multiplier.
+        unconditional = [c.key for c in multipliers if c.get("RequiresCondition") is None]
+        self.assertEqual(["FirepowerMultiplier@GlobalBuffs"], unconditional)
         waveforce = child(actor, "FirepowerMultiplier@japan_upgrade_waveforcebullets")
         self.assertEqual("125", waveforce.get("Modifier"))
         self.assertEqual("japan_upgrade_waveforcebullets", waveforce.get("RequiresCondition"))

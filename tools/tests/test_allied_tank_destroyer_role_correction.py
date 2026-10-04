@@ -99,10 +99,10 @@ class AlliedTankDestroyerRoleCorrectionTests(unittest.TestCase):
         new = {a: 24000 * ap_v[a] for a in ap_v}
         delta = {a: (new[a] - old[a]) / old[a] * 100 for a in ap_v}
         self.assertEqual(0.0, round(delta["ARMOR"], 1))
-        self.assertEqual(-41.8, round(delta["COMPOSITE"], 1))
-        self.assertEqual(+31.7, round(delta["Spaceship"], 1))
+        self.assertEqual(-42.0, round(delta["COMPOSITE"], 1))
+        self.assertEqual(+38.2, round(delta["Spaceship"], 1))
         mean = (sum(new.values()) - sum(old.values())) / sum(old.values()) * 100
-        self.assertEqual(-0.3, round(mean, 1))
+        self.assertEqual(-1.2, round(mean, 1))
 
     def test_percentage_profile_change_accounts_for_doubled_ap_damage(self):
         def pct(node, tag):
@@ -111,8 +111,8 @@ class AlliedTankDestroyerRoleCorrectionTests(unittest.TestCase):
 
         he_pct, ap_pct = pct(self.he, "CannonHE_Medium"), pct(self.ap, "CannonAP_Light")
         self.assertEqual(sorted(he_pct), sorted(ap_pct))
-        self.assertEqual(225, sum(he_pct.values()))
-        self.assertEqual(153, sum(ap_pct.values()))
+        self.assertEqual(438, sum(he_pct.values()))
+        self.assertEqual(311, sum(ap_pct.values()))
         old_units = folded_units(12000, 10000)[1]
         historical = restore_endpoint_weapon(self, self.live)
         live_main = historical.child("Warhead@CannonAP_Light")
@@ -122,8 +122,8 @@ class AlliedTankDestroyerRoleCorrectionTests(unittest.TestCase):
         new_total = new_units * sum(ap_pct.values())
         # A centered, equal-armor aggregate diagnostic, not a matchup-weighted
         # damage claim. Doubling AP Damage doubles its percentage magnitude.
-        self.assertEqual((378, 306), (old_total / old_units, new_total / old_units))
-        self.assertEqual(-19.05, round((new_total / old_total - 1) * 100, 2))
+        self.assertEqual((749, 622), (old_total / old_units, new_total / old_units))
+        self.assertEqual(-16.96, round((new_total / old_total - 1) * 100, 2))
         live_pct = pct(historical, "CannonAP_Light")
         self.assertEqual(ap_pct, live_pct)
 

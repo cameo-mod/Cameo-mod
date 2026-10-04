@@ -64,7 +64,7 @@ class ReviewedHistoryTests(unittest.TestCase):
         with self.assertRaises(AssertionError):
             restore_target_policy_fields(self, live)
 
-    def fixture(self, value="102"):
+    def fixture(self, value="100"):
         return Node("GrenadeRA", "", [Node("ReloadDelay", "40"),
             Node("Warhead@Demolition_Light", "AreaDamage", [
                 Node("Damage", "12345"), Node("Versus", "", [Node("COMPOSITE", value)])])])
@@ -72,7 +72,7 @@ class ReviewedHistoryTests(unittest.TestCase):
     def test_reverses_only_the_reviewed_field_without_mutating_live_node(self):
         live = self.fixture()
         old = historical_copy(self, live)
-        self.assertEqual("102", live.get("Warhead@Demolition_Light", "Versus", "COMPOSITE"))
+        self.assertEqual("100", live.get("Warhead@Demolition_Light", "Versus", "COMPOSITE"))
         self.assertEqual("101", old.get("Warhead@Demolition_Light", "Versus", "COMPOSITE"))
         self.assertEqual("12345", old.get("Warhead@Demolition_Light", "Damage"))
         self.assertEqual("40", old.get("ReloadDelay"))
@@ -90,7 +90,7 @@ class ReviewedHistoryTests(unittest.TestCase):
     def test_unlisted_weapon_is_not_rewritten(self):
         live = self.fixture()
         live.key = "UnreviewedWeapon"
-        self.assertEqual("102", historical_copy(self, live).get("Warhead@Demolition_Light", "Versus", "COMPOSITE"))
+        self.assertEqual("100", historical_copy(self, live).get("Warhead@Demolition_Light", "Versus", "COMPOSITE"))
 
     def test_corrosion_reconstruction_rejects_an_extra_live_field(self):
         warhead = Node("Warhead@HeavyChemicalWeaponPercentage", "AreaDamagePercentage",

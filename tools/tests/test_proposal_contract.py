@@ -81,7 +81,8 @@ class ProposalContractTests(unittest.TestCase):
             self.report(lambda text: text.replace("dmg/wh×n", "dmg"))
 
     def test_missing_or_invalid_targets_refuse(self):
-        for value in ("-", "600", "NaN×2", "600×0", "600.5×2", "601×2"):
+        # "601×2" used to be off-grid; at DAMAGE_STEP 1 it is a legal target.
+        for value in ("-", "600", "NaN×2", "600×0", "600.5×2"):
             with self.subTest(value=value), self.assertRaises(ValueError):
                 self.report(lambda text: text.replace("600×2", value))
 

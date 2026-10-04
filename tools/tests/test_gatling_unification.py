@@ -14,7 +14,7 @@ from cameo_model import Model  # noqa: E402
 
 
 MIGRATED = (
-    "ra1_allies_alliedheavyaatank",
+    "ra1_allies_heavyaatank",
     "ra1_soviets_gatlingtank",
     "ra1_soviets_btr80",
     "japan_armoredcar",
@@ -90,7 +90,7 @@ class GatlingUnificationTests(unittest.TestCase):
                 self.assertEqual(legacy, [])
 
         for actor in (
-            "ra1_allies_alliedheavyaatank",
+            "ra1_allies_heavyaatank",
             "ra1_soviets_gatlingtank",
             "ra1_soviets_btr80",
             "japan_armoredcar",

@@ -41,7 +41,7 @@ class TKMTankTurretRoleTests(unittest.TestCase):
 
     def test_weapon_is_one_focused_anti_armor_main(self):
         self.assertEqual(
-            ["CannonAP_LightFlatCompatibility"], main_warheads(self.weapon))
+            ["CannonAP_Light_Flat"], main_warheads(self.weapon))
         main = main_warhead_nodes(self.weapon)[0]
         self.assertEqual("16000", main.get("Damage"))
         self.assertEqual("9994", main.get("PercentageScale"))

@@ -49,10 +49,10 @@
    "Ground, Water"
   ],
   [
-   "Warhead@CannonHE_Heavy",
+   "Warhead@CannonHE_Heavy_Flat",
    "ValidTargets",
    "Ground, Water, Air",
-   null
+   "Ground, Water"
   ]
  ],
  "FutureTankCannons_elite": [
@@ -105,10 +105,10 @@
    "Ground, Water"
   ],
   [
-   "Warhead@CannonHE_Heavy",
+   "Warhead@CannonHE_Heavy_Flat",
    "ValidTargets",
    "Ground, Water, Air",
-   null
+   "Ground, Water"
   ]
  ],
  "AAGunBoatFlak": [
@@ -129,12 +129,6 @@
    "ValidTargets",
    "Ground, Water",
    "Ground, Water, Air"
-  ],
-  [
-   "Warhead@Flak_MediumFlatCompatibility",
-   "ValidTargets",
-   "Ground, Water",
-   null
   ]
  ],
  "AAGunBoatFlak_elite": [
@@ -155,12 +149,6 @@
    "ValidTargets",
    "Ground, Water",
    "Ground, Water, Air"
-  ],
-  [
-   "Warhead@Flak_MediumFlatCompatibility",
-   "ValidTargets",
-   "Ground, Water",
-   null
   ]
  ],
  "td_gdi_guardtower_highvap": [
@@ -239,10 +227,10 @@
  ],
  "td_gdi_shotgunner_shotgun": [
   [
-   "Warhead@Bullet_MediumFlatCompatibility",
+   "Warhead@Bullet_Medium_Flat",
    "InvalidTargets",
    null,
-   null
+   "Air"
   ],
   [
    "Warhead@ShieldHit",
@@ -315,12 +303,6 @@
    "InvalidTargets",
    null,
    "Air"
-  ],
-  [
-   "Warhead@LegacyLaserExtraDamage",
-   "InvalidTargets",
-   null,
-   null
   ]
  ],
  "td_nod_obeliskoflight_laserobeliskburning": [
@@ -345,10 +327,10 @@
  ],
  "ra1_allies_machinegunner_machinegun": [
   [
-   "Warhead@Bullet_MediumFlatCompatibility",
+   "Warhead@Bullet_Medium_Flat",
    "InvalidTargets",
    null,
-   null
+   "Air"
   ],
   [
    "Warhead@ShieldHit",
@@ -459,16 +441,10 @@
    "Air"
   ],
   [
-   "Warhead@RailgunExtraDamageCompatibility",
+   "Warhead@RailgunExtraDamage_Auxiliary",
    "InvalidTargets",
    null,
-   null
-  ],
-  [
-   "Warhead@TankBusterBeamUnscopedCompatibility",
-   "InvalidTargets",
-   null,
-   null
+   "Air"
   ],
   [
    "Warhead@TankDestroyerCannonPercentage",
@@ -519,12 +495,6 @@
    "InvalidTargets",
    null,
    "Air"
-  ],
-  [
-   "Warhead@PreservedFlat_SwordWeapon",
-   "InvalidTargets",
-   null,
-   null
   ],
   [
    "Warhead@PreservedFlat_SwordWeaponFriendlyFire",
@@ -581,21 +551,9 @@
    "InvalidTargets",
    "wall",
    "wall, Air"
-  ],
-  [
-   "Warhead@CollapseTargetCompatibility1",
-   "InvalidTargets",
-   null,
-   null
   ]
  ],
  "BallistaTowerMultiShotEnergized": [
-  [
-   "Warhead@Arrow_MediumFlatCompatibility",
-   "InvalidTargets",
-   null,
-   null
-  ],
   [
    "Warhead@EMPUnit",
    "InvalidTargets",
@@ -651,20 +609,14 @@
    "InvalidTargets",
    null,
    "Air"
-  ],
-  [
-   "Warhead@Flak_MediumFlatCompatibility",
-   "InvalidTargets",
-   null,
-   null
   ]
  ],
  "Type89PlasmaCannon": [
   [
-   "Warhead@Plasma_MediumFlatCompatibility",
+   "Warhead@Plasma_Medium_Flat",
    "InvalidTargets",
    null,
-   null
+   "Air"
   ],
   [
    "Warhead@EMPUnit",
@@ -705,10 +657,10 @@
  ],
  "OISmallPlasmaCannon": [
   [
-   "Warhead@Plasma_MediumFlatCompatibility",
+   "Warhead@Plasma_Medium_Flat",
    "InvalidTargets",
    null,
-   null
+   "Air"
   ],
   [
    "Warhead@HeavyChemicalWeaponPercentage",
@@ -781,12 +733,6 @@
    "Air"
   ],
   [
-   "Warhead@Bullet_Medium",
-   "InvalidTargets",
-   null,
-   null
-  ],
-  [
    "Warhead@ArrowWeaponPercentage",
    "InvalidTargets",
    "wall",
@@ -843,10 +789,10 @@
  ],
  "ra1_soviets_ak47conscript_rifle": [
   [
-   "Warhead@Bullet_MediumFlatCompatibility",
+   "Warhead@Bullet_Medium_Flat",
    "InvalidTargets",
    null,
-   null
+   "Air"
   ],
   [
    "Warhead@ShieldHit",
@@ -885,12 +831,6 @@
    "InvalidTargets",
    null,
    "Air"
-  ],
-  [
-   "Warhead@CollapseTargetCompatibility1",
-   "InvalidTargets",
-   null,
-   null
   ]
  ],
  "ra1_soviets_v2rocketlauncher_scudthermobaric": [
@@ -907,34 +847,10 @@
    "Air"
   ],
   [
-   "Warhead@MissileHE_Heavy",
-   "InvalidTargets",
-   null,
-   null
-  ],
-  [
-   "Warhead@Flame_Heavy",
-   "InvalidTargets",
-   null,
-   null
-  ],
-  [
-   "Warhead@HeavyMissile",
-   "InvalidTargets",
-   null,
-   null
-  ],
-  [
    "Warhead@HeavyMissilePercentage",
    "InvalidTargets",
    null,
    "Air"
-  ],
-  [
-   "Warhead@HeavyFlameWeapon",
-   "InvalidTargets",
-   null,
-   null
   ],
   [
    "Warhead@HeavyFlameWeaponPercentage",
@@ -969,34 +885,10 @@
    "Air"
   ],
   [
-   "Warhead@MissileHE_Heavy",
-   "InvalidTargets",
-   null,
-   null
-  ],
-  [
-   "Warhead@Flame_Heavy",
-   "InvalidTargets",
-   null,
-   null
-  ],
-  [
-   "Warhead@HeavyMissile",
-   "InvalidTargets",
-   null,
-   null
-  ],
-  [
    "Warhead@HeavyMissilePercentage",
    "InvalidTargets",
    null,
    "Air"
-  ],
-  [
-   "Warhead@HeavyFlameWeapon",
-   "InvalidTargets",
-   null,
-   null
   ],
   [
    "Warhead@HeavyFlameWeaponPercentage",
@@ -1063,24 +955,6 @@
    "Air"
   ],
   [
-   "Warhead@PreservedFlat_HeavyBomb",
-   "InvalidTargets",
-   null,
-   null
-  ],
-  [
-   "Warhead@PreservedFlat_HeavyChemicalWeapon",
-   "InvalidTargets",
-   "wall",
-   null
-  ],
-  [
-   "Warhead@PreservedFlat_HeavyFlameWeapon",
-   "InvalidTargets",
-   "wall",
-   null
-  ],
-  [
    "Warhead@PreservedFlat_TeslaExtraDamage",
    "InvalidTargets",
    null,
@@ -1141,18 +1015,6 @@
    "Air"
   ],
   [
-   "Warhead@Railgun_HeavyFlatCompatibility",
-   "InvalidTargets",
-   null,
-   null
-  ],
-  [
-   "Warhead@CannonHE_Heavy",
-   "InvalidTargets",
-   null,
-   null
-  ],
-  [
    "Warhead@MediumChemicalWeaponPercentage",
    "InvalidTargets",
    null,
@@ -1167,16 +1029,10 @@
  ],
  "ra1_soviets_volkov_volkovmagneticweaponincendiarytesla": [
   [
-   "Warhead@Quantum_HeavyFlatCompatibility",
+   "Warhead@Quantum_Heavy_Flat",
    "InvalidTargets",
    null,
-   null
-  ],
-  [
-   "Warhead@CannonHE_Heavy",
-   "InvalidTargets",
-   null,
-   null
+   "Air"
   ],
   [
    "Warhead@ShieldHit",
@@ -1215,18 +1071,6 @@
    "Air"
   ],
   [
-   "Warhead@MediumChemicalWeapon",
-   "InvalidTargets",
-   null,
-   null
-  ],
-  [
-   "Warhead@Grenade",
-   "InvalidTargets",
-   null,
-   null
-  ],
-  [
    "Warhead@GrenadeFriendlyFire",
    "InvalidTargets",
    null,
@@ -1234,12 +1078,6 @@
   ]
  ],
  "ra1_soviets_volkov_volkovmagneticweaponincendiarynuclearshells": [
-  [
-   "Warhead@CannonNuke_HeavyFlatCompatibility",
-   "InvalidTargets",
-   null,
-   null
-  ],
   [
    "Warhead@MediumFlameWeaponPercentage",
    "InvalidTargets",
@@ -1259,12 +1097,6 @@
    "Air"
   ],
   [
-   "Warhead@CannonHE_Heavy",
-   "InvalidTargets",
-   null,
-   null
-  ],
-  [
    "Warhead@MediumChemicalWeaponPercentage",
    "InvalidTargets",
    null,
@@ -1275,18 +1107,6 @@
    "InvalidTargets",
    null,
    "Air"
-  ],
-  [
-   "Warhead@MediumChemicalWeapon",
-   "InvalidTargets",
-   null,
-   null
-  ],
-  [
-   "Warhead@Grenade",
-   "InvalidTargets",
-   null,
-   null
   ],
   [
    "Warhead@GrenadeFriendlyFire",
@@ -1310,12 +1130,6 @@
   ]
  ],
  "ra1_soviets_supersonicnuclearbomber_parabombnuke": [
-  [
-   "Warhead@Nuclear_SuperFlatCompatibility",
-   "InvalidTargets",
-   null,
-   null
-  ],
   [
    "Warhead@HeavyBombPercentage",
    "InvalidTargets",
@@ -1355,12 +1169,6 @@
    "Air"
   ],
   [
-   "Warhead@Flame_Heavy",
-   "InvalidTargets",
-   null,
-   null
-  ],
-  [
    "Warhead@ShieldHit",
    "InvalidTargets",
    null,
@@ -1373,18 +1181,6 @@
    "InvalidTargets",
    null,
    "Air"
-  ],
-  [
-   "Warhead@Laser_Heavy_ExtraDamage",
-   "InvalidTargets",
-   null,
-   null
-  ],
-  [
-   "Warhead@LaserExtraDamageCompatibility",
-   "InvalidTargets",
-   null,
-   null
   ],
   [
    "Warhead@TankDestroyerCannonPercentage",
@@ -1425,18 +1221,6 @@
    "Air"
   ],
   [
-   "Warhead@Laser_Heavy_ExtraDamage",
-   "InvalidTargets",
-   null,
-   null
-  ],
-  [
-   "Warhead@LaserExtraDamageCompatibility",
-   "InvalidTargets",
-   null,
-   null
-  ],
-  [
    "Warhead@TankDestroyerCannonPercentage",
    "InvalidTargets",
    null,
@@ -1469,10 +1253,10 @@
  ],
  "CabalReaperMissiles": [
   [
-   "Warhead@MissileHE_MediumFlatCompatibility",
+   "Warhead@MissileHE_Medium_Flat",
    "InvalidTargets",
    null,
-   null
+   "Air"
   ],
   [
    "Warhead@CollapsedCabalReaperMissilesConcussion_MediumPercentage",
@@ -1501,10 +1285,10 @@
  ],
  "CabalHeavyReaperMissiles": [
   [
-   "Warhead@MissileHE_HeavyFlatCompatibility",
+   "Warhead@MissileHE_Heavy_Flat",
    "InvalidTargets",
    null,
-   null
+   "Air"
   ],
   [
    "Warhead@CollapsedCabalHeavyReaperMissilesConcussion_MediumPercentage",
@@ -1533,10 +1317,10 @@
  ],
  "CabalCommandoPlasmaNeutron": [
   [
-   "Warhead@Plasma_HeavyFlatCompatibility",
+   "Warhead@Plasma_Heavy_Flat",
    "InvalidTargets",
    null,
-   null
+   "Air"
   ],
   [
    "Warhead@HeavyCannonPercentage",
@@ -1589,10 +1373,10 @@
  ],
  "CabalCommandoPlasmaMk2Neutron": [
   [
-   "Warhead@Plasma_HeavyFlatCompatibility",
+   "Warhead@Plasma_Heavy_Flat",
    "InvalidTargets",
    null,
-   null
+   "Air"
   ],
   [
    "Warhead@HeavyCannonPercentage",
@@ -1645,10 +1429,10 @@
  ],
  "CabalBeholderLaser": [
   [
-   "Warhead@Laser_HeavyFlatCompatibility",
+   "Warhead@Laser_Heavy_Flat",
    "InvalidTargets",
    null,
-   null
+   "Air"
   ],
   [
    "Warhead@HeavyCannonPercentage",
@@ -1737,43 +1521,13 @@
    "Air"
   ],
   [
-   "Warhead@ShotgunShrapnelEnemy",
-   "InvalidTargets",
-   null,
-   null
-  ],
-  [
    "Warhead@ShotgunShrapnelAlly",
    "InvalidTargets",
    null,
    "Air"
-  ],
-  [
-   "Warhead@ShotgunTankDestroyer",
-   "InvalidTargets",
-   null,
-   null
-  ],
-  [
-   "Warhead@ShotgunSmallArms",
-   "InvalidTargets",
-   "BulletImmune",
-   null
-  ],
-  [
-   "Warhead@ShotgunChaingun",
-   "InvalidTargets",
-   null,
-   null
   ]
  ],
  "KodiakCannon": [
-  [
-   "Warhead@RailgunExtraDamageCompatibility",
-   "InvalidTargets",
-   null,
-   null
-  ],
   [
    "Warhead@CannonHE_Heavy",
    "InvalidTargets",
@@ -1861,42 +1615,18 @@
    "Air"
   ],
   [
-   "Warhead@ShotgunShrapnelEnemy",
-   "InvalidTargets",
-   null,
-   null
-  ],
-  [
    "Warhead@ShotgunShrapnelAlly",
    "InvalidTargets",
    null,
    "Air"
-  ],
-  [
-   "Warhead@ShotgunTankDestroyer",
-   "InvalidTargets",
-   null,
-   null
-  ],
-  [
-   "Warhead@ShotgunSmallArms",
-   "InvalidTargets",
-   "BulletImmune",
-   null
-  ],
-  [
-   "Warhead@ShotgunChaingun",
-   "InvalidTargets",
-   null,
-   null
   ]
  ],
  "TSVulcanGun": [
   [
-   "Warhead@Bullet_MediumFlatCompatibility",
+   "Warhead@Bullet_Medium_Flat",
    "InvalidTargets",
    null,
-   null
+   "Air"
   ],
   [
    "Warhead@ShieldHit",
@@ -1983,42 +1713,18 @@
    "Air"
   ],
   [
-   "Warhead@ShotgunShrapnelEnemy",
-   "InvalidTargets",
-   null,
-   null
-  ],
-  [
    "Warhead@ShotgunShrapnelAlly",
    "InvalidTargets",
    null,
    "Air"
-  ],
-  [
-   "Warhead@ShotgunTankDestroyer",
-   "InvalidTargets",
-   null,
-   null
-  ],
-  [
-   "Warhead@ShotgunSmallArms",
-   "InvalidTargets",
-   "BulletImmune",
-   null
-  ],
-  [
-   "Warhead@ShotgunChaingun",
-   "InvalidTargets",
-   null,
-   null
   ]
  ],
  "TSMutVulcanTurret": [
   [
-   "Warhead@Bullet_MediumFlatCompatibility",
+   "Warhead@Bullet_Medium_Flat",
    "InvalidTargets",
    null,
-   null
+   "Air"
   ],
   [
    "Warhead@ShieldHit",
@@ -2073,12 +1779,6 @@
    "Air"
   ],
   [
-   "Warhead@MissileAP_Medium",
-   "InvalidTargets",
-   null,
-   null
-  ],
-  [
    "Warhead@MissileAP_Medium_GroundShipExtraDamage",
    "InvalidTargets",
    null,
@@ -2111,12 +1811,6 @@
    "Air"
   ],
   [
-   "Warhead@MissileAP_Medium",
-   "InvalidTargets",
-   null,
-   null
-  ],
-  [
    "Warhead@MissileAP_Medium_GroundShipExtraDamage",
    "InvalidTargets",
    null,
@@ -2125,10 +1819,10 @@
  ],
  "RA2vulcan3": [
   [
-   "Warhead@Bullet_MediumFlatCompatibility",
+   "Warhead@Bullet_Medium_Flat",
    "InvalidTargets",
    null,
-   null
+   "Air"
   ],
   [
    "Warhead@ShieldHit",
@@ -2153,10 +1847,10 @@
  ],
  "GuardianGIMG_elite": [
   [
-   "Warhead@Bullet_MediumFlatCompatibility",
+   "Warhead@Bullet_Medium_Flat",
    "InvalidTargets",
    null,
-   null
+   "Air"
   ],
   [
    "Warhead@ShieldHit",
@@ -2197,21 +1891,9 @@
    "InvalidTargets",
    null,
    "Air"
-  ],
-  [
-   "Warhead@Demolition_Heavy",
-   "InvalidTargets",
-   null,
-   null
   ]
  ],
  "RA160mmE_rad_elite": [
-  [
-   "Warhead@Chemical_LightFlatCompatibility",
-   "InvalidTargets",
-   null,
-   null
-  ],
   [
    "Warhead@Nuclear_Super",
    "InvalidTargets",
@@ -2275,12 +1957,6 @@
    "Air"
   ],
   [
-   "Warhead@MissileAP_Medium",
-   "InvalidTargets",
-   null,
-   null
-  ],
-  [
    "Warhead@MissileAP_Medium_GroundShipExtraDamage",
    "InvalidTargets",
    null,
@@ -2289,10 +1965,10 @@
  ],
  "RA2vulcan": [
   [
-   "Warhead@Bullet_MediumFlatCompatibility",
+   "Warhead@Bullet_Medium_Flat",
    "InvalidTargets",
    null,
-   null
+   "Air"
   ],
   [
    "Warhead@ShieldHit",
@@ -2303,10 +1979,10 @@
  ],
  "AsianQuasarAG_EMP": [
   [
-   "Warhead@Quantum_HeavyFlatCompatibility",
+   "Warhead@Quantum_Heavy_Flat",
    "InvalidTargets",
    null,
-   null
+   "Air"
   ],
   [
    "Warhead@MediumMissilePercentage",
@@ -2343,28 +2019,10 @@
    "InvalidTargets",
    null,
    "Air"
-  ],
-  [
-   "Warhead@PreservedFlat_MagicExtraDamage",
-   "InvalidTargets",
-   null,
-   null
-  ],
-  [
-   "Warhead@PreservedFlat_TeslaExtraDamage",
-   "InvalidTargets",
-   null,
-   null
   ]
  ],
  "AsianPunisherAG_EMP": [
   [
-   "Warhead@MissileQuantum_MediumFlatCompatibility",
-   "InvalidTargets",
-   null,
-   null
-  ],
-  [
    "Warhead@MediumMissilePercentage",
    "InvalidTargets",
    null,
@@ -2399,26 +2057,14 @@
    "InvalidTargets",
    null,
    "Air"
-  ],
-  [
-   "Warhead@PreservedFlat_MagicExtraDamage",
-   "InvalidTargets",
-   null,
-   null
-  ],
-  [
-   "Warhead@PreservedFlat_TeslaExtraDamage",
-   "InvalidTargets",
-   null,
-   null
   ]
  ],
  "AsianQuasarBoatAG_EMP": [
   [
-   "Warhead@Quantum_HeavyFlatCompatibility",
+   "Warhead@Quantum_Heavy_Flat",
    "InvalidTargets",
    null,
-   null
+   "Air"
   ],
   [
    "Warhead@MediumMissilePercentage",
@@ -2455,26 +2101,14 @@
    "InvalidTargets",
    null,
    "Air"
-  ],
-  [
-   "Warhead@PreservedFlat_MagicExtraDamage",
-   "InvalidTargets",
-   null,
-   null
-  ],
-  [
-   "Warhead@PreservedFlat_TeslaExtraDamage",
-   "InvalidTargets",
-   null,
-   null
   ]
  ],
  "asianalliance_fanatic_shotgun_upgrade": [
   [
-   "Warhead@Bullet_MediumFlatCompatibility",
+   "Warhead@Bullet_Medium_Flat",
    "InvalidTargets",
    null,
-   null
+   "Air"
   ],
   [
    "Warhead@ShieldHit",
@@ -2485,10 +2119,10 @@
  ],
  "asianalliance_fanatic_shotgun_elite": [
   [
-   "Warhead@Bullet_MediumFlatCompatibility",
+   "Warhead@Bullet_Medium_Flat",
    "InvalidTargets",
    null,
-   null
+   "Air"
   ],
   [
    "Warhead@ShieldHit",
@@ -2498,12 +2132,6 @@
   ]
  ],
  "SteelMakoGun_EMP_elite": [
-  [
-   "Warhead@Quantum_MediumFlatCompatibility",
-   "InvalidTargets",
-   null,
-   null
-  ],
   [
    "Warhead@LightChemicalWeaponPercentage",
    "InvalidTargets",
@@ -2543,10 +2171,10 @@
  ],
  "SteelMegaSword": [
   [
-   "Warhead@Melee_HeavyFlatCompatibility",
+   "Warhead@Melee_Heavy_Flat",
    "InvalidTargets",
    null,
-   null
+   "Air"
   ],
   [
    "Warhead@LightChemicalWeaponPercentage",
@@ -2625,10 +2253,10 @@
  ],
  "SteelQuantumTurretRail_EMP": [
   [
-   "Warhead@Quantum_HeavyFlatCompatibility",
+   "Warhead@Quantum_Heavy_Flat",
    "InvalidTargets",
    null,
-   null
+   "Air"
   ],
   [
    "Warhead@EMPUnit",
@@ -2675,12 +2303,6 @@
  ],
  "SteelKatyCannons_EMP_elite": [
   [
-   "Warhead@Quantum_MediumFlatCompatibility",
-   "InvalidTargets",
-   null,
-   null
-  ],
-  [
    "Warhead@TankDestroyerCannonPercentage",
    "InvalidTargets",
    null,
@@ -2719,10 +2341,10 @@
  ],
  "LatinMonkeyGrenade3": [
   [
-   "Warhead@Demolition_LightFlatCompatibility",
+   "Warhead@Demolition_Light_Flat",
    "InvalidTargets",
    null,
-   null
+   "Air"
   ],
   [
    "Warhead@ShieldHit",
@@ -2733,10 +2355,10 @@
  ],
  "RA2RBurritoRocket": [
   [
-   "Warhead@CannonHE_HeavyFlatCompatibility",
+   "Warhead@CannonHE_Heavy_Flat",
    "InvalidTargets",
    null,
-   null
+   "Air"
   ],
   [
    "Warhead@ShieldHit",
@@ -2879,10 +2501,10 @@
  ],
  "RA2APCMachineGun_elite": [
   [
-   "Warhead@Bullet_MediumFlatCompatibility",
+   "Warhead@Bullet_Medium_Flat",
    "InvalidTargets",
    null,
-   null
+   "Air"
   ],
   [
    "Warhead@ShieldHit",
@@ -2915,12 +2537,6 @@
    "InvalidTargets",
    null,
    "Air"
-  ],
-  [
-   "Warhead@MissileAP_Medium",
-   "InvalidTargets",
-   null,
-   null
   ]
  ],
  "Rammax_Sabot": [
@@ -2955,12 +2571,6 @@
    "Air"
   ],
   [
-   "Warhead@PreservedFlat_Chaingun",
-   "InvalidTargets",
-   null,
-   null
-  ],
-  [
    "Warhead@PreservedFlat_LaserExtraDamage",
    "InvalidTargets",
    null,
@@ -2977,12 +2587,6 @@
    "InvalidTargets",
    null,
    "Air"
-  ],
-  [
-   "Warhead@PreservedFlat_TeslaWeapon",
-   "InvalidTargets",
-   null,
-   null
   ]
  ],
  "naxis_naxiriflesoldier_rifle_elite": [
@@ -3029,22 +2633,10 @@
  ],
  "DalekCannon_elite": [
   [
-   "Warhead@Railgun_HeavyFlatCompatibility",
+   "Warhead@Railgun_Heavy_Flat",
    "InvalidTargets",
    null,
-   null
-  ],
-  [
-   "Warhead@Tesla_Heavy_ExtraDamage",
-   "InvalidTargets",
-   null,
-   null
-  ],
-  [
-   "Warhead@Laser_Heavy_ExtraDamage",
-   "InvalidTargets",
-   null,
-   null
+   "Air"
   ],
   [
    "Warhead@EMPUnit",
@@ -3057,12 +2649,6 @@
    "InvalidTargets",
    null,
    "Air"
-  ],
-  [
-   "Warhead@Railgun_Heavy_ExtraDamage",
-   "InvalidTargets",
-   null,
-   null
   ]
  ],
  "Lunar_YellowBeetleLaser": [
@@ -3101,12 +2687,6 @@
    "InvalidTargets",
    null,
    "Air"
-  ],
-  [
-   "Warhead@LegacyLaserExtraDamage",
-   "InvalidTargets",
-   null,
-   null
   ]
  ],
  "Lunar_AmplifiedBeetleLaser": [
@@ -3145,12 +2725,6 @@
    "InvalidTargets",
    null,
    "Air"
-  ],
-  [
-   "Warhead@LegacyLaserExtraDamage",
-   "InvalidTargets",
-   null,
-   null
   ]
  ],
  "Lunar_YellowTank2Laser": [
@@ -3189,12 +2763,6 @@
    "InvalidTargets",
    null,
    "Air"
-  ],
-  [
-   "Warhead@LegacyLaserExtraDamage",
-   "InvalidTargets",
-   null,
-   null
   ]
  ],
  "Lunar_AmplifiedTank2Laser": [
@@ -3233,20 +2801,14 @@
    "InvalidTargets",
    null,
    "Air"
-  ],
-  [
-   "Warhead@LegacyLaserExtraDamage",
-   "InvalidTargets",
-   null,
-   null
   ]
  ],
  "Future_Turret_Cryo": [
   [
-   "Warhead@Cryo_MediumFlatCompatibility",
+   "Warhead@Cryo_Medium_Flat",
    "InvalidTargets",
    null,
-   null
+   "Air"
   ],
   [
    "Warhead@LightMissilePercentage",
@@ -3299,12 +2861,6 @@
  ],
  "CryoLegionnaireAttack": [
   [
-   "Warhead@Cryo_LightFlatCompatibility",
-   "InvalidTargets",
-   null,
-   null
-  ],
-  [
    "Warhead@LightMissilePercentage",
    "InvalidTargets",
    null,
@@ -3355,10 +2911,10 @@
  ],
  "AthenaLaser": [
   [
-   "Warhead@Laser_HeavyFlatCompatibility",
+   "Warhead@Laser_Heavy_Flat",
    "InvalidTargets",
    null,
-   null
+   "Air"
   ],
   [
    "Warhead@LightMissilePercentage",
@@ -3459,34 +3015,10 @@
    "Air"
   ],
   [
-   "Warhead@ShotgunShrapnelEnemy",
-   "InvalidTargets",
-   null,
-   null
-  ],
-  [
    "Warhead@ShotgunShrapnelAlly",
    "InvalidTargets",
    null,
    "Air"
-  ],
-  [
-   "Warhead@ShotgunTankDestroyer",
-   "InvalidTargets",
-   null,
-   null
-  ],
-  [
-   "Warhead@ShotgunSmallArms",
-   "InvalidTargets",
-   "BulletImmune",
-   null
-  ],
-  [
-   "Warhead@ShotgunChaingun",
-   "InvalidTargets",
-   null,
-   null
   ]
  ],
  "FutureEnforcerShotgunDeployed_elite": [
@@ -3539,34 +3071,10 @@
    "Air"
   ],
   [
-   "Warhead@ShotgunShrapnelEnemy",
-   "InvalidTargets",
-   null,
-   null
-  ],
-  [
    "Warhead@ShotgunShrapnelAlly",
    "InvalidTargets",
    null,
    "Air"
-  ],
-  [
-   "Warhead@ShotgunTankDestroyer",
-   "InvalidTargets",
-   null,
-   null
-  ],
-  [
-   "Warhead@ShotgunSmallArms",
-   "InvalidTargets",
-   "BulletImmune",
-   null
-  ],
-  [
-   "Warhead@ShotgunChaingun",
-   "InvalidTargets",
-   null,
-   null
   ]
  ],
  "tkm_rifleman_rifle": [
@@ -3599,12 +3107,6 @@
  ],
  "tkmfirerockets": [
   [
-   "Warhead@MissileAP_Light",
-   "InvalidTargets",
-   null,
-   null
-  ],
-  [
    "Warhead@Flame_Light",
    "InvalidTargets",
    null,
@@ -3619,12 +3121,6 @@
  ],
  "tkmkatyushalalauncherrocketsfire": [
   [
-   "Warhead@MissileAP_Light",
-   "InvalidTargets",
-   null,
-   null
-  ],
-  [
    "Warhead@Flame_Light",
    "InvalidTargets",
    null,
@@ -3635,27 +3131,9 @@
    "InvalidTargets",
    null,
    "Air"
-  ],
-  [
-   "Warhead@Concussion_Medium",
-   "InvalidTargets",
-   null,
-   null
   ]
  ],
  "SandmarineTuskFire": [
-  [
-   "Warhead@MissileHE_HeavyFlatCompatibility",
-   "InvalidTargets",
-   null,
-   null
-  ],
-  [
-   "Warhead@MissileAP_Light",
-   "InvalidTargets",
-   null,
-   null
-  ],
   [
    "Warhead@Flame_Light",
    "InvalidTargets",
@@ -3697,10 +3175,10 @@
  ],
  "light_inf_lmg_ordos_upgrade": [
   [
-   "Warhead@Laser_HeavyFlatCompatibility",
+   "Warhead@Laser_Heavy_Flat",
    "InvalidTargets",
    null,
-   null
+   "Air"
   ],
   [
    "Warhead@Laser_Heavy_ExtraDamage",
@@ -3716,12 +3194,6 @@
   ]
  ],
  "corrino_sardaukar_javelin_spear": [
-  [
-   "Warhead@MissileAP_Heavy",
-   "InvalidTargets",
-   null,
-   null
-  ],
   [
    "Warhead@ShieldHit",
    "InvalidTargets",
@@ -3781,10 +3253,10 @@
  ],
  "Tentacle": [
   [
-   "Warhead@Melee_HeavyFlatCompatibility",
+   "Warhead@Melee_Heavy_Flat",
    "InvalidTargets",
    null,
-   null
+   "Air"
   ],
   [
    "Warhead@ShieldHit",
@@ -3813,10 +3285,10 @@
  ],
  "VultureGrenade": [
   [
-   "Warhead@Demolition_LightFlatCompatibility",
+   "Warhead@Demolition_Light_Flat",
    "InvalidTargets",
    null,
-   null
+   "Air"
   ],
   [
    "Warhead@ShieldHit",
@@ -3851,10 +3323,10 @@
  ],
  "SiegeTankSiegeCannon": [
   [
-   "Warhead@CannonHE_HeavyFlatCompatibility",
+   "Warhead@CannonHE_Heavy_Flat",
    "InvalidTargets",
    null,
-   null
+   "Air"
   ],
   [
    "Warhead@NuclearWarheadPercentage",
@@ -3983,10 +3455,10 @@
  ],
  "naxis_sssoldier_smg_elite": [
   [
-   "Warhead@Bullet_MediumFlatCompatibility",
+   "Warhead@Bullet_Medium_Flat",
    "InvalidTargets",
    null,
-   null
+   "Air"
   ],
   [
    "Warhead@ShieldHit",
@@ -3997,10 +3469,10 @@
  ],
  "SiegeEngineCannon": [
   [
-   "Warhead@CannonHE_HeavyFlatCompatibility",
+   "Warhead@CannonHE_Heavy_Flat",
    "InvalidTargets",
    null,
-   null
+   "Air"
   ],
   [
    "Warhead@NuclearWarheadPercentage",
@@ -4117,12 +3589,6 @@
    "InvalidTargets",
    null,
    "Air"
-  ],
-  [
-   "Warhead@LegacyLaserExtraDamage",
-   "InvalidTargets",
-   null,
-   null
   ]
  ],
  "TSLaser90mmDep": [
@@ -4147,10 +3613,10 @@
  ],
  "TSCABALPlasmaFire": [
   [
-   "Warhead@Laser_HeavyFlatCompatibility",
+   "Warhead@Laser_Heavy_Flat",
    "InvalidTargets",
    null,
-   null
+   "Air"
   ],
   [
    "Warhead@Laser_Heavy_ExtraDamage",
@@ -4167,10 +3633,10 @@
  ],
  "TSLaserTurretLaser": [
   [
-   "Warhead@Laser_HeavyFlatCompatibility",
+   "Warhead@Laser_Heavy_Flat",
    "InvalidTargets",
    null,
-   null
+   "Air"
   ],
   [
    "Warhead@Laser_Heavy_ExtraDamage",
@@ -4293,12 +3759,6 @@
    "Shielded, Air"
   ],
   [
-   "Warhead@TemperatureCompatibility",
-   "InvalidTargets",
-   "wall",
-   null
-  ],
-  [
    "Warhead@2Ext",
    "InvalidTargets",
    null,
@@ -4373,12 +3833,6 @@
    "Shielded, Air"
   ],
   [
-   "Warhead@TemperatureCompatibility",
-   "InvalidTargets",
-   "wall",
-   null
-  ],
-  [
    "Warhead@2Ext",
    "InvalidTargets",
    null,
@@ -4439,10 +3893,10 @@
  ],
  "AsianPhotonCannon_EMP": [
   [
-   "Warhead@Quantum_HeavyFlatCompatibility",
+   "Warhead@Quantum_Heavy_Flat",
    "ValidTargets",
    "Ground, Water, Air",
-   null
+   "Air"
   ],
   [
    "Warhead@MediumMissilePercentage",
@@ -4473,28 +3927,10 @@
    "ValidTargets",
    "Ground, Water, Air",
    "Air"
-  ],
-  [
-   "Warhead@PreservedFlat_MagicExtraDamage",
-   "ValidTargets",
-   "Ground, Water, Air",
-   null
-  ],
-  [
-   "Warhead@PreservedFlat_TeslaExtraDamage",
-   "ValidTargets",
-   "Ground, Water, Air",
-   null
   ]
  ],
  "AsianQuasarBoat_EMP_AA": [
   [
-   "Warhead@MissileQuantum_MediumFlatCompatibility",
-   "ValidTargets",
-   "Ground, Water, Air",
-   null
-  ],
-  [
    "Warhead@MediumMissilePercentage",
    "ValidTargets",
    "Ground, Water, Air",
@@ -4523,28 +3959,10 @@
    "ValidTargets",
    "Ground, Water, Air",
    "Air"
-  ],
-  [
-   "Warhead@PreservedFlat_MagicExtraDamage",
-   "ValidTargets",
-   "Ground, Water, Air",
-   null
-  ],
-  [
-   "Warhead@PreservedFlat_TeslaExtraDamage",
-   "ValidTargets",
-   "Ground, Water, Air",
-   null
   ]
  ],
  "AsianQuasar_EMP_AA": [
   [
-   "Warhead@MissileQuantum_MediumFlatCompatibility",
-   "ValidTargets",
-   "Ground, Water, Air",
-   null
-  ],
-  [
    "Warhead@MediumMissilePercentage",
    "ValidTargets",
    "Ground, Water, Air",
@@ -4573,18 +3991,6 @@
    "ValidTargets",
    "Ground, Water, Air",
    "Air"
-  ],
-  [
-   "Warhead@PreservedFlat_MagicExtraDamage",
-   "ValidTargets",
-   "Ground, Water, Air",
-   null
-  ],
-  [
-   "Warhead@PreservedFlat_TeslaExtraDamage",
-   "ValidTargets",
-   "Ground, Water, Air",
-   null
   ]
  ],
  "BallistaSingleShotAir": [
@@ -4683,26 +4089,14 @@
    "ValidTargets",
    "Ground, Water, Air",
    "Air"
-  ],
-  [
-   "Warhead@Flak_Medium",
-   "ValidTargets",
-   "Ground, Water, Air",
-   null
-  ],
-  [
-   "Warhead@MissileAP_Medium",
-   "ValidTargets",
-   "Ground, Water, Air",
-   null
   ]
  ],
  "D2K_APC_Rocket_AA": [
   [
-   "Warhead@MissileAA_MediumFlatCompatibility",
+   "Warhead@MissileAA_Medium_Flat",
    "ValidTargets",
    "Ground, Water, Air",
-   null
+   "Air"
   ],
   [
    "Warhead@CollapsedMissileAP_HeavyPercentage",
@@ -4721,14 +4115,6 @@
    "ValidTargets",
    "Ground, Water, Air",
    "Air"
-  ]
- ],
- "D2K_Rocket_AA": [
-  [
-   "Warhead@MissileAP_Heavy",
-   "ValidTargets",
-   "Ground, Water, Air",
-   null
   ]
  ],
  "DarkObeliskLaser": [
@@ -4789,10 +4175,10 @@
  ],
  "LatinAADefenderCannon": [
   [
-   "Warhead@MissileAP_MediumFlatCompatibility",
+   "Warhead@MissileAP_Medium_Flat",
    "ValidTargets",
    "Ground, Water, Air",
-   null
+   "Air"
   ]
  ],
  "Lunar_AmplifiedBeetleLaser_AA": [
@@ -4807,12 +4193,6 @@
    "ValidTargets",
    "Ground, Water",
    "Air"
-  ],
-  [
-   "Warhead@LegacyLaserExtraDamage",
-   "ValidTargets",
-   "Ground, Water, Air",
-   null
   ]
  ],
  "Lunar_AmplifiedTank2Laser_AA": [
@@ -4827,12 +4207,6 @@
    "ValidTargets",
    "Ground, Water",
    "Air"
-  ],
-  [
-   "Warhead@LegacyLaserExtraDamage",
-   "ValidTargets",
-   "Ground, Water, Air",
-   null
   ]
  ],
  "Lunar_YellowBeetleLaser_AA": [
@@ -4847,12 +4221,6 @@
    "ValidTargets",
    "Ground, Water",
    "Air"
-  ],
-  [
-   "Warhead@LegacyLaserExtraDamage",
-   "ValidTargets",
-   "Ground, Water, Air",
-   null
   ]
  ],
  "Lunar_YellowTank2Laser_AA": [
@@ -4867,12 +4235,6 @@
    "ValidTargets",
    "Ground, Water",
    "Air"
-  ],
-  [
-   "Warhead@LegacyLaserExtraDamage",
-   "ValidTargets",
-   "Ground, Water, Air",
-   null
   ]
  ],
  "MissileTurret": [
@@ -4967,10 +4329,10 @@
  ],
  "RA2APCMachineGun_AA_elite": [
   [
-   "Warhead@Bullet_MediumFlatCompatibility",
+   "Warhead@Bullet_Medium_Flat",
    "ValidTargets",
    "Ground, Water, Air",
-   null
+   "Air"
   ]
  ],
  "RA2APCRocket_AA_elite": [
@@ -4991,12 +4353,6 @@
    "ValidTargets",
    "Ground, Water, Air",
    "Air"
-  ],
-  [
-   "Warhead@MissileAP_Medium",
-   "ValidTargets",
-   "Ground, Water, Air",
-   null
   ]
  ],
  "RA2FlakTrackAAGun_elite": [
@@ -5013,62 +4369,6 @@
    "Air"
   ]
  ],
- "RA2HoverMissile_AA": [
-  [
-   "Warhead@MissileAA_LightFlatCompatibility",
-   "ValidTargets",
-   "Ground, Water, Air",
-   null
-  ]
- ],
- "RA2HoverMissile_AA_elite": [
-  [
-   "Warhead@MissileAA_LightFlatCompatibility",
-   "ValidTargets",
-   "Ground, Water, Air",
-   null
-  ]
- ],
- "RA2MultiHoverMissile_AA": [
-  [
-   "Warhead@MissileAA_LightFlatCompatibility",
-   "ValidTargets",
-   "Ground, Water, Air",
-   null
-  ]
- ],
- "RA2MultiHoverMissile_AA_elite": [
-  [
-   "Warhead@MissileAA_LightFlatCompatibility",
-   "ValidTargets",
-   "Ground, Water, Air",
-   null
-  ]
- ],
- "RA2MultiThunderboltMissile_AA": [
-  [
-   "Warhead@MissileHE_LightFlatCompatibility",
-   "ValidTargets",
-   "Ground, Water, Air",
-   null
-  ]
- ],
- "RA2MultiThunderboltMissile_AA_elite": [
-  [
-   "Warhead@MissileHE_LightFlatCompatibility",
-   "ValidTargets",
-   "Ground, Water, Air",
-   null
-  ]
- ],
- "RA2Patriot": [
-  [
-   "Warhead@MissileAP_Medium",
-   "ValidTargets",
-   "Ground, Water, Air",
-   null
-  ]
- ],
  "RA2TURRETFLAKAA": [
   [
    "Warhead@Flak_Medium",
@@ -5077,28 +4377,12 @@
    "Air"
   ]
  ],
- "RA2ThunderboltMissile_AA": [
-  [
-   "Warhead@MissileHE_LightFlatCompatibility",
-   "ValidTargets",
-   "Ground, Water, Air",
-   null
-  ]
- ],
- "RA2ThunderboltMissile_AA_elite": [
-  [
-   "Warhead@MissileHE_LightFlatCompatibility",
-   "ValidTargets",
-   "Ground, Water, Air",
-   null
-  ]
- ],
  "SCDevourerAA": [
   [
-   "Warhead@Chemical_MediumFlatCompatibility",
+   "Warhead@Chemical_Medium_Flat",
    "ValidTargets",
    "Ground, Water, Air",
-   null
+   "Air"
   ],
   [
    "Warhead@SwordWeaponPercentage",
@@ -5171,24 +4455,18 @@
  ],
  "SteelScalpelRailgunAA": [
   [
-   "Warhead@Flak_MediumFlatCompatibility",
+   "Warhead@Flak_Medium_Flat",
    "ValidTargets",
    "Ground, Water, Air",
-   null
-  ],
-  [
-   "Warhead@Railgun_Heavy_ExtraDamage",
-   "ValidTargets",
-   "Ground, Water",
-   null
+   "Air"
   ]
  ],
  "SteelScalpelRailgun_EMP_AA": [
   [
-   "Warhead@Flak_MediumFlatCompatibility",
+   "Warhead@Flak_Medium_Flat",
    "ValidTargets",
    "Ground, Water, Air",
-   null
+   "Air"
   ],
   [
    "Warhead@GrenadePercentage",
@@ -5233,12 +4511,6 @@
    "Air"
   ],
   [
-   "Warhead@Railgun_Heavy_ExtraDamage",
-   "ValidTargets",
-   "Ground, Water",
-   null
-  ],
-  [
    "Warhead@PreservedFlat_GrenadeFriendlyFire",
    "ValidTargets",
    "Ground, Water, Air",
@@ -5249,28 +4521,6 @@
    "ValidTargets",
    "Ground, Water, Air",
    "Air"
-  ],
-  [
-   "Warhead@PreservedFlat_TeslaExtraDamage",
-   "ValidTargets",
-   "Ground, Water, Air",
-   null
-  ]
- ],
- "TSGDIRedEye": [
-  [
-   "Warhead@MissileAP_Heavy",
-   "ValidTargets",
-   "Ground, Water, Air",
-   null
-  ]
- ],
- "TSNODTibRedEye": [
-  [
-   "Warhead@MissileAP_Heavy",
-   "ValidTargets",
-   "Ground, Water, Air",
-   null
   ]
  ],
  "ValkyrieRockets": [
@@ -5291,12 +4541,6 @@
    "ValidTargets",
    "Ground, Water, Air",
    "Air"
-  ],
-  [
-   "Warhead@MissileAP_Heavy",
-   "ValidTargets",
-   "Ground, Water, Air",
-   null
   ]
  ],
  "WraithRockets_AA": [
@@ -5375,12 +4619,6 @@
    "ValidTargets",
    "Vehicle, Ship, Air, Cyborg, Defense, Building, Epic",
    "Air"
-  ],
-  [
-   "Warhead@TemperatureCompatibility",
-   "ValidTargets",
-   "Ground, Water, Air",
-   null
   ]
  ],
  "eden_EMP_AA": [
@@ -5443,12 +4681,6 @@
    "ValidTargets",
    "Vehicle, Ship, Air, Cyborg, Defense, Building, Epic",
    "Air"
-  ],
-  [
-   "Warhead@TemperatureCompatibility",
-   "ValidTargets",
-   "Ground, Water, Air",
-   null
   ]
  ],
  "ra1_allies_alliedaagun_flak": [
@@ -5597,12 +4829,6 @@
  ],
  "AsianPunisherAG": [
   [
-   "Warhead@MissileAP_MediumFlatCompatibility",
-   "InvalidTargets",
-   null,
-   null
-  ],
-  [
    "Warhead@MediumMissilePercentage",
    "InvalidTargets",
    null,
@@ -5631,26 +4857,14 @@
    "InvalidTargets",
    null,
    "Air"
-  ],
-  [
-   "Warhead@PreservedFlat_MagicExtraDamage",
-   "InvalidTargets",
-   null,
-   null
-  ],
-  [
-   "Warhead@PreservedFlat_TeslaExtraDamage",
-   "InvalidTargets",
-   null,
-   null
   ]
  ],
  "AsianQuasarAG": [
   [
-   "Warhead@Plasma_HeavyFlatCompatibility",
+   "Warhead@Plasma_Heavy_Flat",
    "InvalidTargets",
    null,
-   null
+   "Air"
   ],
   [
    "Warhead@MediumMissilePercentage",
@@ -5681,26 +4895,14 @@
    "InvalidTargets",
    null,
    "Air"
-  ],
-  [
-   "Warhead@PreservedFlat_MagicExtraDamage",
-   "InvalidTargets",
-   null,
-   null
-  ],
-  [
-   "Warhead@PreservedFlat_TeslaExtraDamage",
-   "InvalidTargets",
-   null,
-   null
   ]
  ],
  "AsianQuasarBoatAG": [
   [
-   "Warhead@Plasma_HeavyFlatCompatibility",
+   "Warhead@Plasma_Heavy_Flat",
    "InvalidTargets",
    null,
-   null
+   "Air"
   ],
   [
    "Warhead@MediumMissilePercentage",
@@ -5731,26 +4933,14 @@
    "InvalidTargets",
    null,
    "Air"
-  ],
-  [
-   "Warhead@PreservedFlat_MagicExtraDamage",
-   "InvalidTargets",
-   null,
-   null
-  ],
-  [
-   "Warhead@PreservedFlat_TeslaExtraDamage",
-   "InvalidTargets",
-   null,
-   null
   ]
  ],
  "AsianQuasarBoat_AA": [
   [
-   "Warhead@MissileAA_MediumFlatCompatibility",
+   "Warhead@MissileAA_Medium_Flat",
    "ValidTargets",
    "Ground, Water, Air",
-   null
+   "Air"
   ],
   [
    "Warhead@MediumMissilePercentage",
@@ -5781,26 +4971,14 @@
    "ValidTargets",
    "Ground, Water, Air",
    "Air"
-  ],
-  [
-   "Warhead@PreservedFlat_MagicExtraDamage",
-   "ValidTargets",
-   "Ground, Water, Air",
-   null
-  ],
-  [
-   "Warhead@PreservedFlat_TeslaExtraDamage",
-   "ValidTargets",
-   "Ground, Water, Air",
-   null
   ]
  ],
  "AsianQuasar_AA": [
   [
-   "Warhead@MissileAA_MediumFlatCompatibility",
+   "Warhead@MissileAA_Medium_Flat",
    "ValidTargets",
    "Ground, Water, Air",
-   null
+   "Air"
   ],
   [
    "Warhead@MediumMissilePercentage",
@@ -5831,18 +5009,6 @@
    "ValidTargets",
    "Ground, Water, Air",
    "Air"
-  ],
-  [
-   "Warhead@PreservedFlat_MagicExtraDamage",
-   "ValidTargets",
-   "Ground, Water, Air",
-   null
-  ],
-  [
-   "Warhead@PreservedFlat_TeslaExtraDamage",
-   "ValidTargets",
-   "Ground, Water, Air",
-   null
   ]
  ],
  "BallistaMultiShot": [
@@ -5875,21 +5041,9 @@
    "InvalidTargets",
    "wall",
    "wall, Air"
-  ],
-  [
-   "Warhead@CollapseTargetCompatibility1",
-   "InvalidTargets",
-   null,
-   null
   ]
  ],
  "BallistaMultiShotEnergized": [
-  [
-   "Warhead@Arrow_MediumFlatCompatibility",
-   "InvalidTargets",
-   null,
-   null
-  ],
   [
    "Warhead@EMPUnit",
    "InvalidTargets",
@@ -5939,26 +5093,14 @@
    "ValidTargets",
    "Ground, Water, Air",
    "Air"
-  ],
-  [
-   "Warhead@Flak_Medium",
-   "ValidTargets",
-   "Ground, Water, Air",
-   null
-  ],
-  [
-   "Warhead@MissileAP_Medium",
-   "ValidTargets",
-   "Ground, Water, Air",
-   null
   ]
  ],
  "DalekCannon": [
   [
-   "Warhead@Railgun_HeavyFlatCompatibility",
+   "Warhead@Railgun_Heavy_Flat",
    "InvalidTargets",
    null,
-   null
+   "Air"
   ],
   [
    "Warhead@Tesla_Heavy_ExtraDamage",
@@ -5987,66 +5129,30 @@
  ],
  "DalekCannonScatter": [
   [
-   "Warhead@Railgun_HeavyFlatCompatibility",
+   "Warhead@Railgun_Heavy_Flat",
    "InvalidTargets",
    null,
-   null
-  ],
-  [
-   "Warhead@Tesla_Heavy_ExtraDamage",
-   "InvalidTargets",
-   null,
-   null
-  ],
-  [
-   "Warhead@Laser_Heavy_ExtraDamage",
-   "InvalidTargets",
-   null,
-   null
+   "Air"
   ],
   [
    "Warhead@EMPUnit",
    "InvalidTargets",
    "Shielded",
    "Shielded, Air"
-  ],
-  [
-   "Warhead@Railgun_Heavy_ExtraDamage",
-   "InvalidTargets",
-   null,
-   null
   ]
  ],
  "DalekCannonScatterE": [
   [
-   "Warhead@Railgun_HeavyFlatCompatibility",
+   "Warhead@Railgun_Heavy_Flat",
    "InvalidTargets",
    null,
-   null
-  ],
-  [
-   "Warhead@Tesla_Heavy_ExtraDamage",
-   "InvalidTargets",
-   null,
-   null
-  ],
-  [
-   "Warhead@Laser_Heavy_ExtraDamage",
-   "InvalidTargets",
-   null,
-   null
+   "Air"
   ],
   [
    "Warhead@EMPUnit",
    "InvalidTargets",
    "Shielded",
    "Shielded, Air"
-  ],
-  [
-   "Warhead@Railgun_Heavy_ExtraDamage",
-   "InvalidTargets",
-   null,
-   null
   ]
  ],
  "DiabloCannon_AA": [
@@ -6119,34 +5225,10 @@
    "Air"
   ],
   [
-   "Warhead@ShotgunShrapnelEnemy",
-   "InvalidTargets",
-   null,
-   null
-  ],
-  [
    "Warhead@ShotgunShrapnelAlly",
    "InvalidTargets",
    null,
    "Air"
-  ],
-  [
-   "Warhead@ShotgunTankDestroyer",
-   "InvalidTargets",
-   null,
-   null
-  ],
-  [
-   "Warhead@ShotgunSmallArms",
-   "InvalidTargets",
-   "BulletImmune",
-   null
-  ],
-  [
-   "Warhead@ShotgunChaingun",
-   "InvalidTargets",
-   null,
-   null
   ]
  ],
  "FutureEnforcerShotgunDeployed": [
@@ -6193,42 +5275,18 @@
    "Air"
   ],
   [
-   "Warhead@ShotgunShrapnelEnemy",
-   "InvalidTargets",
-   null,
-   null
-  ],
-  [
    "Warhead@ShotgunShrapnelAlly",
    "InvalidTargets",
    null,
    "Air"
-  ],
-  [
-   "Warhead@ShotgunTankDestroyer",
-   "InvalidTargets",
-   null,
-   null
-  ],
-  [
-   "Warhead@ShotgunSmallArms",
-   "InvalidTargets",
-   "BulletImmune",
-   null
-  ],
-  [
-   "Warhead@ShotgunChaingun",
-   "InvalidTargets",
-   null,
-   null
   ]
  ],
  "Future_Cryocopter_Cryo": [
   [
-   "Warhead@Cryo_MediumFlatCompatibility",
+   "Warhead@Cryo_Medium_Flat",
    "InvalidTargets",
    null,
-   null
+   "Air"
   ],
   [
    "Warhead@LightMissilePercentage",
@@ -6275,18 +5333,18 @@
  ],
  "GuardianGIMG": [
   [
-   "Warhead@Bullet_MediumFlatCompatibility",
+   "Warhead@Bullet_Medium_Flat",
    "InvalidTargets",
    null,
-   null
+   "Air"
   ]
  ],
  "RA2vulcan2": [
   [
-   "Warhead@Bullet_MediumFlatCompatibility",
+   "Warhead@Bullet_Medium_Flat",
    "InvalidTargets",
    null,
-   null
+   "Air"
   ]
  ],
  "GuardianGIMG2": [
@@ -6307,26 +5365,26 @@
  ],
  "LatinMonkeyGrenade1": [
   [
-   "Warhead@Demolition_LightFlatCompatibility",
+   "Warhead@Demolition_Light_Flat",
    "InvalidTargets",
    null,
-   null
+   "Air"
   ]
  ],
  "LatinMonkeyGrenade2": [
   [
-   "Warhead@Demolition_LightFlatCompatibility",
+   "Warhead@Demolition_Light_Flat",
    "InvalidTargets",
    null,
-   null
+   "Air"
   ]
  ],
  "LatinMonkeyGrenadeExplode": [
   [
-   "Warhead@Demolition_LightFlatCompatibility",
+   "Warhead@Demolition_Light_Flat",
    "InvalidTargets",
    null,
-   null
+   "Air"
   ]
  ],
  "MigMissiles_fire": [
@@ -6347,12 +5405,6 @@
    "InvalidTargets",
    null,
    "Air"
-  ],
-  [
-   "Warhead@MissileAP_Medium",
-   "InvalidTargets",
-   null,
-   null
   ],
   [
    "Warhead@MissileAP_Medium_GroundShipExtraDamage",
@@ -6387,12 +5439,6 @@
    "Air"
   ],
   [
-   "Warhead@MissileAP_Medium",
-   "InvalidTargets",
-   null,
-   null
-  ],
-  [
    "Warhead@MissileAP_Medium_GroundShipExtraDamage",
    "InvalidTargets",
    null,
@@ -6417,12 +5463,6 @@
    "InvalidTargets",
    null,
    "Air"
-  ],
-  [
-   "Warhead@MissileAP_Medium",
-   "InvalidTargets",
-   null,
-   null
   ],
   [
    "Warhead@MissileAP_Medium_GroundShipExtraDamage",
@@ -6467,12 +5507,6 @@
    "ValidTargets",
    "Ground, Water",
    "Air"
-  ],
-  [
-   "Warhead@LegacyLaserExtraDamage",
-   "ValidTargets",
-   "Ground, Water, Air",
-   null
   ]
  ],
  "NaxiTank2Laser_AA": [
@@ -6487,12 +5521,6 @@
    "ValidTargets",
    "Ground, Water",
    "Air"
-  ],
-  [
-   "Warhead@LegacyLaserExtraDamage",
-   "ValidTargets",
-   "Ground, Water, Air",
-   null
   ]
  ],
  "PositronBounce1": [
@@ -6501,12 +5529,6 @@
    "InvalidTargets",
    null,
    "Air"
-  ],
-  [
-   "Warhead@Quantum_MediumFlatCompatibility",
-   "InvalidTargets",
-   null,
-   null
   ],
   [
    "Warhead@SmallArmsPercentage",
@@ -6559,12 +5581,6 @@
    "Air"
   ],
   [
-   "Warhead@Quantum_MediumFlatCompatibility",
-   "InvalidTargets",
-   null,
-   null
-  ],
-  [
    "Warhead@SmallArmsPercentage",
    "InvalidTargets",
    null,
@@ -6608,12 +5624,6 @@
   ]
  ],
  "PositronGrenade": [
-  [
-   "Warhead@Quantum_MediumFlatCompatibility",
-   "InvalidTargets",
-   null,
-   null
-  ],
   [
    "Warhead@SmallArmsPercentage",
    "InvalidTargets",
@@ -6667,10 +5677,10 @@
  ],
  "RA2APCMachineGun_AA": [
   [
-   "Warhead@Bullet_MediumFlatCompatibility",
+   "Warhead@Bullet_Medium_Flat",
    "ValidTargets",
    "Ground, Water, Air",
-   null
+   "Air"
   ]
  ],
  "RA2APCRocket_AA": [
@@ -6691,12 +5701,6 @@
    "ValidTargets",
    "Ground, Water, Air",
    "Air"
-  ],
-  [
-   "Warhead@MissileAP_Medium",
-   "ValidTargets",
-   "Ground, Water, Air",
-   null
   ]
  ],
  "RA2FlakTrackAAGun": [
@@ -6725,32 +5729,14 @@
    "InvalidTargets",
    null,
    "Air"
-  ],
-  [
-   "Warhead@Demolition_Heavy",
-   "InvalidTargets",
-   null,
-   null
   ]
  ],
  "RA2Robotmm": [
-  [
-   "Warhead@Tesla_Heavy",
-   "InvalidTargets",
-   null,
-   null
-  ],
   [
    "Warhead@Tesla_Heavy_ExtraDamage",
    "InvalidTargets",
    null,
    "Air"
-  ],
-  [
-   "Warhead@Laser_Heavy",
-   "InvalidTargets",
-   null,
-   null
   ],
   [
    "Warhead@Laser_Heavy_ExtraDamage",
@@ -6779,22 +5765,10 @@
  ],
  "RA2RobotmmScatter_elite": [
   [
-   "Warhead@Tesla_Heavy",
-   "InvalidTargets",
-   null,
-   null
-  ],
-  [
    "Warhead@Tesla_Heavy_ExtraDamage",
    "InvalidTargets",
    null,
    "Air"
-  ],
-  [
-   "Warhead@Laser_Heavy",
-   "InvalidTargets",
-   null,
-   null
   ],
   [
    "Warhead@Laser_Heavy_ExtraDamage",
@@ -6823,22 +5797,10 @@
  ],
  "RA2Robotmm_elite": [
   [
-   "Warhead@Tesla_Heavy",
-   "InvalidTargets",
-   null,
-   null
-  ],
-  [
    "Warhead@Tesla_Heavy_ExtraDamage",
    "InvalidTargets",
    null,
    "Air"
-  ],
-  [
-   "Warhead@Laser_Heavy",
-   "InvalidTargets",
-   null,
-   null
   ],
   [
    "Warhead@Laser_Heavy_ExtraDamage",
@@ -6866,12 +5828,6 @@
   ]
  ],
  "SteelKatyCannons_EMP": [
-  [
-   "Warhead@Quantum_MediumFlatCompatibility",
-   "InvalidTargets",
-   null,
-   null
-  ],
   [
    "Warhead@TankDestroyerCannonPercentage",
    "InvalidTargets",
@@ -6905,12 +5861,6 @@
  ],
  "SteelMakoGun_EMP": [
   [
-   "Warhead@Quantum_MediumFlatCompatibility",
-   "InvalidTargets",
-   null,
-   null
-  ],
-  [
    "Warhead@LightChemicalWeaponPercentage",
    "InvalidTargets",
    null,
@@ -6933,132 +5883,126 @@
    "InvalidTargets",
    null,
    "Air"
-  ],
-  [
-   "Warhead@Railgun_Heavy_ExtraDamage",
-   "InvalidTargets",
-   null,
-   null
   ]
  ],
  "SteelMantaAAResonanceBounce1": [
   [
-   "Warhead@Flak_MediumFlatCompatibility",
+   "Warhead@Flak_Medium_Flat",
    "ValidTargets",
    "Ground, Water, Air",
-   null
+   "Air"
   ]
  ],
  "SteelMantaAAResonanceBounce2": [
   [
-   "Warhead@Flak_MediumFlatCompatibility",
+   "Warhead@Flak_Medium_Flat",
    "ValidTargets",
    "Ground, Water, Air",
-   null
+   "Air"
   ]
  ],
  "SteelMantaAAResonance_AA": [
   [
-   "Warhead@Flak_MediumFlatCompatibility",
+   "Warhead@Flak_Medium_Flat",
    "ValidTargets",
    "Ground, Water, Air",
-   null
+   "Air"
   ]
  ],
  "SteelMantaAGResonance": [
   [
-   "Warhead@Bullet_MediumFlatCompatibility",
+   "Warhead@Bullet_Medium_Flat",
    "InvalidTargets",
    null,
-   null
+   "Air"
   ]
  ],
  "SteelMantaAGResonanceBounce1": [
   [
-   "Warhead@Bullet_MediumFlatCompatibility",
+   "Warhead@Bullet_Medium_Flat",
    "InvalidTargets",
    null,
-   null
+   "Air"
   ]
  ],
  "SteelMantaAGResonanceBounce2": [
   [
-   "Warhead@Bullet_MediumFlatCompatibility",
+   "Warhead@Bullet_Medium_Flat",
    "InvalidTargets",
    null,
-   null
+   "Air"
   ]
  ],
  "SteelMantaHunterCannonsAAResonanceBounce1": [
   [
-   "Warhead@Flak_MediumFlatCompatibility",
+   "Warhead@Flak_Medium_Flat",
    "ValidTargets",
    "Ground, Water, Air",
-   null
+   "Air"
   ]
  ],
  "SteelMantaHunterCannonsAAResonanceBounce2": [
   [
-   "Warhead@Flak_MediumFlatCompatibility",
+   "Warhead@Flak_Medium_Flat",
    "ValidTargets",
    "Ground, Water, Air",
-   null
+   "Air"
   ]
  ],
  "SteelMantaHunterCannonsAAResonance_AA": [
   [
-   "Warhead@Flak_MediumFlatCompatibility",
+   "Warhead@Flak_Medium_Flat",
    "ValidTargets",
    "Ground, Water, Air",
-   null
+   "Air"
   ]
  ],
  "SteelMantaHunterCannonsResonance": [
   [
-   "Warhead@Bullet_MediumFlatCompatibility",
+   "Warhead@Bullet_Medium_Flat",
    "InvalidTargets",
    null,
-   null
+   "Air"
   ]
  ],
  "SteelMantaHunterCannonsResonanceBounce1": [
   [
-   "Warhead@Bullet_MediumFlatCompatibility",
+   "Warhead@Bullet_Medium_Flat",
    "InvalidTargets",
    null,
-   null
+   "Air"
   ]
  ],
  "SteelMantaHunterCannonsResonanceBounce2": [
   [
-   "Warhead@Bullet_MediumFlatCompatibility",
+   "Warhead@Bullet_Medium_Flat",
    "InvalidTargets",
    null,
-   null
+   "Air"
   ]
  ],
  "SteelMantaHunterCannons_AA": [
   [
-   "Warhead@Flak_MediumFlatCompatibility",
+   "Warhead@Flak_Medium_Flat",
    "ValidTargets",
    "Ground, Water, Air",
-   null
+   "Air"
   ]
  ],
  "SteelManta_AA": [
   [
-   "Warhead@Flak_MediumFlatCompatibility",
+   "Warhead@Flak_Medium_Flat",
    "ValidTargets",
    "Ground, Water, Air",
-   null
+   "Air"
   ]
  ],
  "SteelMegaSword_EMP": [
   [
-   "Warhead@Quantum_HeavyFlatCompatibility",
+   "Warhead@Quantum_Heavy_Flat",
    "InvalidTargets",
    null,
-   null
+   "Air"
   ],
   [
    "Warhead@HeavyChemicalWeaponPercentage",
@@ -7087,10 +6031,10 @@
  ],
  "SteelQuantumCannon": [
   [
-   "Warhead@Quantum_HeavyFlatCompatibility",
+   "Warhead@Quantum_Heavy_Flat",
    "InvalidTargets",
    null,
-   null
+   "Air"
   ],
   [
    "Warhead@Laser_Heavy_ExtraDamage",
@@ -7107,34 +6051,16 @@
  ],
  "SteelQuantumCannonScatter_elite": [
   [
-   "Warhead@Tesla_Heavy_ExtraDamage",
-   "InvalidTargets",
-   null,
-   null
-  ],
-  [
    "Warhead@EMPUnit",
    "InvalidTargets",
    null,
    "Air"
   ],
   [
-   "Warhead@Quantum_HeavyFlatCompatibility",
+   "Warhead@Quantum_Heavy_Flat",
    "InvalidTargets",
    null,
-   null
-  ],
-  [
-   "Warhead@Laser_Heavy_ExtraDamage",
-   "InvalidTargets",
-   null,
-   null
-  ],
-  [
-   "Warhead@Railgun_Heavy_ExtraDamage",
-   "InvalidTargets",
-   null,
-   null
+   "Air"
   ],
   [
    "Warhead@LaserWeaponPercentage",
@@ -7151,34 +6077,16 @@
  ],
  "SteelQuantumCannon_EMP": [
   [
-   "Warhead@Tesla_Heavy_ExtraDamage",
-   "InvalidTargets",
-   null,
-   null
-  ],
-  [
    "Warhead@EMPUnit",
    "InvalidTargets",
    null,
    "Air"
   ],
   [
-   "Warhead@Quantum_HeavyFlatCompatibility",
+   "Warhead@Quantum_Heavy_Flat",
    "InvalidTargets",
    null,
-   null
-  ],
-  [
-   "Warhead@Laser_Heavy_ExtraDamage",
-   "InvalidTargets",
-   null,
-   null
-  ],
-  [
-   "Warhead@Railgun_Heavy_ExtraDamage",
-   "InvalidTargets",
-   null,
-   null
+   "Air"
   ],
   [
    "Warhead@LaserWeaponPercentage",
@@ -7195,34 +6103,16 @@
  ],
  "SteelQuantumCannon_elite": [
   [
-   "Warhead@Tesla_Heavy_ExtraDamage",
-   "InvalidTargets",
-   null,
-   null
-  ],
-  [
    "Warhead@EMPUnit",
    "InvalidTargets",
    null,
    "Air"
   ],
   [
-   "Warhead@Quantum_HeavyFlatCompatibility",
+   "Warhead@Quantum_Heavy_Flat",
    "InvalidTargets",
    null,
-   null
-  ],
-  [
-   "Warhead@Laser_Heavy_ExtraDamage",
-   "InvalidTargets",
-   null,
-   null
-  ],
-  [
-   "Warhead@Railgun_Heavy_ExtraDamage",
-   "InvalidTargets",
-   null,
-   null
+   "Air"
   ],
   [
    "Warhead@LaserWeaponPercentage",
@@ -7239,10 +6129,10 @@
  ],
  "SteelQuantumTurretRail": [
   [
-   "Warhead@Quantum_HeavyFlatCompatibility",
+   "Warhead@Quantum_Heavy_Flat",
    "InvalidTargets",
    null,
-   null
+   "Air"
   ],
   [
    "Warhead@EMPUnit",
@@ -7295,20 +6185,12 @@
    "Air"
   ]
  ],
- "TSNODRedEye": [
-  [
-   "Warhead@MissileAP_Heavy",
-   "ValidTargets",
-   "Ground, Water, Air",
-   null
-  ]
- ],
  "TSTurretLaser": [
   [
-   "Warhead@Laser_HeavyFlatCompatibility",
+   "Warhead@Laser_Heavy_Flat",
    "InvalidTargets",
    null,
-   null
+   "Air"
   ],
   [
    "Warhead@Laser_Heavy_ExtraDamage",
@@ -7319,10 +6201,10 @@
  ],
  "asianalliance_fanatic_shotgun": [
   [
-   "Warhead@Bullet_MediumFlatCompatibility",
+   "Warhead@Bullet_Medium_Flat",
    "InvalidTargets",
    null,
-   null
+   "Air"
   ]
  ],
  "forgotten_mutant_dualwield": [
@@ -7359,18 +6241,18 @@
  ],
  "naxis_sssoldier_smg": [
   [
-   "Warhead@Bullet_MediumFlatCompatibility",
+   "Warhead@Bullet_Medium_Flat",
    "InvalidTargets",
    null,
-   null
+   "Air"
   ]
  ],
  "ra1_soviets_btr80_btrteslamachinegunarcfragment1aa": [
   [
-   "Warhead@Tesla_HeavyFlatCompatibility",
+   "Warhead@Tesla_Heavy_Flat",
    "ValidTargets",
    "Ground, Water, Air",
-   null
+   "Air"
   ],
   [
    "Warhead@Tesla_Heavy_ExtraDamage",
@@ -7387,10 +6269,10 @@
  ],
  "ra1_soviets_btr80_machinegun_tesla_AA": [
   [
-   "Warhead@Tesla_HeavyFlatCompatibility",
+   "Warhead@Tesla_Heavy_Flat",
    "ValidTargets",
    "Ground, Water, Air",
-   null
+   "Air"
   ],
   [
    "Warhead@Tesla_Heavy_ExtraDamage",
@@ -7407,10 +6289,10 @@
  ],
  "ra1_soviets_btr80_machinegun_tesla_arc_AA": [
   [
-   "Warhead@Tesla_HeavyFlatCompatibility",
+   "Warhead@Tesla_Heavy_Flat",
    "ValidTargets",
    "Ground, Water, Air",
-   null
+   "Air"
   ],
   [
    "Warhead@Tesla_Heavy_ExtraDamage",
@@ -7427,10 +6309,10 @@
  ],
  "ra1_soviets_btr80_btrteslamachinegunarcfragment1": [
   [
-   "Warhead@Tesla_HeavyFlatCompatibility",
+   "Warhead@Tesla_Heavy_Flat",
    "InvalidTargets",
    null,
-   null
+   "Air"
   ],
   [
    "Warhead@Tesla_Heavy_ExtraDamage",
@@ -7447,10 +6329,10 @@
  ],
  "ra1_soviets_btr80_machinegun_tesla_arc": [
   [
-   "Warhead@Tesla_HeavyFlatCompatibility",
+   "Warhead@Tesla_Heavy_Flat",
    "InvalidTargets",
    null,
-   null
+   "Air"
   ],
   [
    "Warhead@Tesla_Heavy_ExtraDamage",
@@ -7589,18 +6471,18 @@
  ],
  "ra1_soviets_rifleinfantry_carbine_incendiary": [
   [
-   "Warhead@Flame_LightFlatCompatibility",
+   "Warhead@Flame_Light_Flat",
    "InvalidTargets",
    null,
-   null
+   "Air"
   ]
  ],
  "AsianPhotonCannon": [
   [
-   "Warhead@Plasma_HeavyFlatCompatibility",
+   "Warhead@Plasma_Heavy_Flat",
    "ValidTargets",
    "Ground, Water, Air",
-   null
+   "Air"
   ],
   [
    "Warhead@MediumMissilePercentage",
@@ -7669,12 +6551,6 @@
    "InvalidTargets",
    null,
    "Air"
-  ],
-  [
-   "Warhead@MissileAP_Heavy",
-   "InvalidTargets",
-   null,
-   null
   ]
  ],
  "DiabloCannon": [
@@ -7739,12 +6615,6 @@
    "Air"
   ],
   [
-   "Warhead@MissileAP_Medium",
-   "InvalidTargets",
-   null,
-   null
-  ],
-  [
    "Warhead@MissileAP_Medium_GroundShipExtraDamage",
    "InvalidTargets",
    null,
@@ -7769,12 +6639,6 @@
    "InvalidTargets",
    null,
    "Air"
-  ],
-  [
-   "Warhead@MissileAP_Medium",
-   "InvalidTargets",
-   null,
-   null
   ],
   [
    "Warhead@MissileAP_Medium_GroundShipExtraDamage",
@@ -7919,10 +6783,10 @@
  ],
  "RA2APCMachineGun": [
   [
-   "Warhead@Bullet_MediumFlatCompatibility",
+   "Warhead@Bullet_Medium_Flat",
    "InvalidTargets",
    null,
-   null
+   "Air"
   ]
  ],
  "RA2APCRocket": [
@@ -7943,42 +6807,14 @@
    "InvalidTargets",
    null,
    "Air"
-  ],
-  [
-   "Warhead@MissileAP_Medium",
-   "InvalidTargets",
-   null,
-   null
-  ]
- ],
- "RA2HoverMissile": [
-  [
-   "Warhead@MissileAP_LightFlatCompatibility",
-   "InvalidTargets",
-   null,
-   null
-  ]
- ],
- "RA2HoverMissile_elite": [
-  [
-   "Warhead@MissileAP_LightFlatCompatibility",
-   "InvalidTargets",
-   null,
-   null
   ]
  ],
  "ShotgunAttackRobotGun": [
   [
-   "Warhead@Bullet_LightFlatCompatibility",
+   "Warhead@Bullet_Light_Flat",
    "InvalidTargets",
    null,
-   null
-  ],
-  [
-   "Warhead@CannonHE_Medium",
-   "InvalidTargets",
-   null,
-   null
+   "Air"
   ],
   [
    "Warhead@GrenadePercentage",
@@ -8003,28 +6839,22 @@
    "InvalidTargets",
    null,
    "Air"
-  ],
-  [
-   "Warhead@Bullet_Medium",
-   "InvalidTargets",
-   null,
-   null
   ]
  ],
  "SteelMantaAG": [
   [
-   "Warhead@Bullet_MediumFlatCompatibility",
+   "Warhead@Bullet_Medium_Flat",
    "InvalidTargets",
    null,
-   null
+   "Air"
   ]
  ],
  "SteelMantaHunterCannons": [
   [
-   "Warhead@Bullet_MediumFlatCompatibility",
+   "Warhead@Bullet_Medium_Flat",
    "InvalidTargets",
    null,
-   null
+   "Air"
   ]
  ],
  "edenTiger_EMP": [
@@ -8087,12 +6917,6 @@
    "InvalidTargets",
    "Shielded",
    "Shielded, Air"
-  ],
-  [
-   "Warhead@TemperatureCompatibility",
-   "InvalidTargets",
-   "wall",
-   null
   ]
  ],
  "eden_EMP": [
@@ -8155,21 +6979,9 @@
    "InvalidTargets",
    "Shielded",
    "Shielded, Air"
-  ],
-  [
-   "Warhead@TemperatureCompatibility",
-   "InvalidTargets",
-   "wall",
-   null
   ]
  ],
  "ixian_farasha": [
-  [
-   "Warhead@Laser_MediumFlatCompatibility",
-   "InvalidTargets",
-   null,
-   null
-  ],
   [
    "Warhead@EMPUnit",
    "InvalidTargets",
@@ -8255,12 +7067,6 @@
    "InvalidTargets",
    "Shielded",
    "Shielded, Air"
-  ],
-  [
-   "Warhead@TemperatureCompatibility",
-   "InvalidTargets",
-   "wall",
-   null
   ]
  ],
  "plymouth_EMP_AA": [
@@ -8323,28 +7129,22 @@
    "ValidTargets",
    "Vehicle, Ship, Air, Cyborg, Defense, Building, Epic",
    "Air"
-  ],
-  [
-   "Warhead@TemperatureCompatibility",
-   "ValidTargets",
-   "Ground, Water, Air",
-   null
   ]
  ],
  "ra1_soviets_btr80_machinegun": [
   [
-   "Warhead@Bullet_MediumFlatCompatibility",
+   "Warhead@Bullet_Medium_Flat",
    "InvalidTargets",
    null,
-   null
+   "Air"
   ]
  ],
  "ra1_soviets_btr80_machinegun_tesla": [
   [
-   "Warhead@Tesla_HeavyFlatCompatibility",
+   "Warhead@Tesla_Heavy_Flat",
    "InvalidTargets",
    null,
-   null
+   "Air"
   ],
   [
    "Warhead@Tesla_Heavy_ExtraDamage",
@@ -8380,18 +7180,6 @@
   ]
  ],
  "ra1_soviets_volkov_volkovmagneticweapontesla": [
-  [
-   "Warhead@Railgun_HeavyFlatCompatibility",
-   "InvalidTargets",
-   null,
-   null
-  ],
-  [
-   "Warhead@CannonHE_Heavy",
-   "InvalidTargets",
-   null,
-   null
-  ],
   [
    "Warhead@MediumChemicalWeaponPercentage",
    "InvalidTargets",

@@ -13,7 +13,7 @@ def write_jsonl(path, rows):
     path.write_text("".join(json.dumps(r) + "\n" for r in rows), encoding="utf-8")
 
 
-def make_dir(tmp_path, last_state):
+def make_dir(tmp_path, last_state, end_tick=9):
     logs = tmp_path / "batch" / "Logs"
     logs.mkdir(parents=True)
     (logs / "debug.log").write_text(
@@ -30,6 +30,7 @@ def make_dir(tmp_path, last_state):
         {"game_uid": "g1", "record_kind": "mission", "mission_id": "raid:1", "event": "DORMANT", "tick": 2},
         {"game_uid": "g1", "record_kind": "attempt", "mission_id": "raid:1", "attempt": 1, "state": "COMMITTED", "tick": 3},
         {"game_uid": "g1", "record_kind": "attempt", "mission_id": "raid:1", "attempt": 1, "state": last_state, "tick": 9},
+        {"game_uid": "g1", "record_kind": "mission", "mission_id": "raid:1", "event": "DORMANT", "tick": end_tick},
     ])
     return tmp_path / "batch"
 
@@ -46,7 +47,9 @@ def test_complete_logs_pass(tmp_path):
 
 
 def test_dangling_attempt_fails(tmp_path, capsys):
-    d = make_dir(tmp_path, "PROGRESSING")
+    # The outcomes layer gives an open attempt a 5000-tick grace before it
+    # counts as dangling, so the match must run past the attempt's last record.
+    d = make_dir(tmp_path, "PROGRESSING", end_tick=6000)
     s = states(round_trip_check.check([d]))
     assert s["outcomes"] == "FAIL"
     assert round_trip_check.main([str(d)]) == 1

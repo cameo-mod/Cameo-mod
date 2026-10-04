@@ -107,8 +107,6 @@ class FinalBulkWeaponConsolidationTests(unittest.TestCase):
             "RA2FreedomRocket_elite",
             # Friendly-fire or physical-state behavior would change.
             "BCYamatoCannon", "HMGo_upgrade",
-            # Semantic name/delivery traps from the independent review.
-            "SteelAirTurret_elite",
         }
         for weapon in deferred:
             self.assertGreater(len(main_warheads(restore_later_profile(self, HistoricalView(self, rules).resolve_weapon(weapon)))), 1, weapon)

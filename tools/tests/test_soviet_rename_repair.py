@@ -289,11 +289,15 @@ class SovietRenameRepairTests(unittest.TestCase):
             self.assertEqual(translate(asset), asset)
 
     def test_image_by_fullness_pinned(self):
-        # the miner's ImageByFullness keeps its ORIGINAL (pre-repair) value
+        # the miner's ImageByFullness follows the rename: the sequence was
+        # renamed to the new actor id (ra1_soviets_heavyindustrialminer is a
+        # valid sequence; the pre-repair name no longer resolves)
+        forward = {k.lower(): v for k, v in RENAMES.items()}
         before = canonical(self.baseline["ra1_soviets_sovietheavyindustrialminer"])
         after = canonical(self.node_to_obj(
             self.rules.resolve("ra1_soviets_heavyindustrialminer")))
-        self.assertEqual(before["WithHarvesterSpriteBody"]["ImageByFullness"],
+        got = before["WithHarvesterSpriteBody"]["ImageByFullness"]
+        self.assertEqual(forward.get(got.lower(), got),
                          after["WithHarvesterSpriteBody"]["ImageByFullness"])
 
     def _collect(self, a, b, path=()):

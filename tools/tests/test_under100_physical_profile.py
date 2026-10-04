@@ -98,12 +98,12 @@ class Under100PhysicalProfileTests(unittest.TestCase):
                                                       "ValidTargets").value)
         rockets = self.rules.resolve_weapon("NaxInterceptorRockets")
         self.assertEqual("Air", child(rockets, "ValidTargets").value)
-        main = child(rockets, "Warhead@MissileAA_HeavyFlatCompatibility")
+        main = child(rockets, "Warhead@MissileAA_Heavy_Flat")
         self.assertEqual("Air", child(main, "ValidTargets").value)
 
         resolved_gun = self.rules.resolve_weapon("NaxiInterceptorGun")
         gun = child(resolved_gun,
-                    "Warhead@Bullet_MediumFlatCompatibility")
+                    "Warhead@Bullet_Medium_Flat")
         self.assertEqual("1", child(gun, "Spread").value)
         self.assertIsNone(child(resolved_gun, "Warhead@CannonHE_Heavy"))
         percentage = [node for node in resolved_gun.children
@@ -117,11 +117,11 @@ class Under100PhysicalProfileTests(unittest.TestCase):
 
     def test_missile_consolidations_follow_the_weapon_roles(self):
         expected = {
-            "ra1_soviets_hindattackhelicopter_hindmissilesthermobaric": "Thermobaric_MediumFlatCompatibility",
-            "ra1_soviets_migattackbomber_thermobaricmaverick": "Thermobaric_HeavyFlatCompatibility",
-            "MarauderMissiles": "MissileAP_MediumFlatCompatibility",
-            "RA2RBurritoRocket": "CannonHE_HeavyFlatCompatibility",
-            "TSStankTibTusk": "MissileAP_MediumFlatCompatibility",
+            "ra1_soviets_hindattackhelicopter_hindmissilesthermobaric": "Thermobaric_Medium",
+            "ra1_soviets_migattackbomber_thermobaricmaverick": "Thermobaric_Heavy_Flat",
+            "MarauderMissiles": "MissileHE_Medium",
+            "RA2RBurritoRocket": "CannonHE_Heavy_Flat",
+            "TSStankTibTusk": "MissileAP_Medium_Flat",
         }
         for weapon_name, warhead_name in expected.items():
             weapon = self.rules.resolve_weapon(weapon_name)
@@ -130,12 +130,12 @@ class Under100PhysicalProfileTests(unittest.TestCase):
 
     def test_named_energy_and_biological_weapons_keep_their_roles(self):
         expected = {
-            "AsianHarbingerPlasma": "Plasma_MediumFlatCompatibility",
-            "FutureMechPlasma": "Plasma_HeavyFlatCompatibility",
-            "IxRailgunDroneBullet": "Railgun_HeavyFlatCompatibility",
+            "AsianHarbingerPlasma": "Plasma_Medium_Flat",
+            "FutureMechPlasma": "Plasma_Heavy_Flat",
+            "IxRailgunDroneBullet": "Railgun_Heavy_Flat",
             "Laboratory_Bioball": "Chemical_Medium",
-            "PhobosLaser": "Laser_HeavyFlatCompatibility",
-            "SteelFighterRailgun": "Laser_HeavyFlatCompatibility",
+            "PhobosLaser": "Laser_Heavy_Flat",
+            "SteelFighterRailgun": "Laser_Heavy_Flat",
         }
         for weapon_name, warhead_name in expected.items():
             weapon = self.rules.resolve_weapon(weapon_name)

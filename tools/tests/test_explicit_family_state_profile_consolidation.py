@@ -62,7 +62,7 @@ class ExplicitFamilyStateProfileTests(unittest.TestCase):
                 cls.by_kind[change[0]][weapon] = change[1:]
 
     def test_converter_is_fully_applied_and_fail_closed(self):
-        with self.assertRaisesRegex(RuntimeError, "route/relationship contract changed"):
+        with self.assertRaisesRegex(RuntimeError, "unexpected mains|route/relationship contract changed"):
             cohort.inspect(self.rules)
         self.assertTrue(cohort.inspect(HistoricalView(self, self.rules)))
         self.assertEqual(EXPECTED_EXPANSION, cohort.STATE_EXPANSION)
@@ -93,9 +93,13 @@ class ExplicitFamilyStateProfileTests(unittest.TestCase):
         for name, (destination, total, scale) in cohort.SPECS.items():
             resolved = self.rules.resolve_weapon(name)
             mains = set(main_warheads(resolved))
-            compatibility = f"{destination}FlatCompatibility"
-            self.assertEqual({compatibility}, mains, name)
-            node = cohort.flat_main_nodes(resolved, mains)[compatibility]
+            # Post-R12 waves folded several destinations to canonical or _Flat
+            # tags; all three forms denote the same reviewed role.
+            self.assertEqual(1, len(mains), name)
+            tag = next(iter(mains))
+            self.assertIn(tag, {f"{destination}FlatCompatibility",
+                                f"{destination}_Flat", destination}, name)
+            node = cohort.flat_main_nodes(resolved, mains)[tag]
             self.assertEqual(str(total), str(node.get("Damage")), name)
             self.assertEqual(str(scale), str(node.get("PercentageScale")), name)
 

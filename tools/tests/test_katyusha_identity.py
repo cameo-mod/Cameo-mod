@@ -74,8 +74,12 @@ class KatyushaIdentityTest(unittest.TestCase):
         row = self.peers[0]
         self.assertEqual(row.get("name"), "Katyusha")
         self.assertEqual(row.get("type"), "vehicle")
-        self.assertTrue(fr.allows("ra1_soviets", row),
-                        "ra1_soviets -> Combined Arms (soviet) does not admit KATY")
+        # Combined Arms joined EXCLUSIVE_ONLY after this override landed; KATY
+        # is tagged iraq/russia/soviet/ukraine/yuri, so routing refuses it as a
+        # multi-house row BY DESIGN. The maintainer override — asserted in the
+        # neighbouring tests — is its admission path.
+        self.assertFalse(fr.allows("ra1_soviets", row),
+                         "ra1_soviets -> Combined Arms (soviet) unexpectedly admits KATY")
 
     def test_the_assignment_holds_katy_and_displaced_nobody(self):
         row = self.assignment.get(ACTOR, {}).get(SOURCE)

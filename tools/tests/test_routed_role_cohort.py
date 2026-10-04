@@ -66,7 +66,7 @@ class RoutedRoleCohortTests(unittest.TestCase):
             self.assertEqual(cohort.PINNED_AFTER_MAINS[name], set(mains), name)
             self.assertTrue(all(tag.startswith("PreservedFlat_") for tag in mains), name)
         self.assertEqual(
-            {"MissileAP_MediumFlatCompatibility"},
+            {"MissileAP_Medium_Flat"},
             set(main_warheads(self.rules.resolve_weapon(
                 "NaxCorrosionRocketTrooper_elite"))),
         )
