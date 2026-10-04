@@ -6,8 +6,8 @@ A number in prose is true only on the day it is written. These are the claims a 
 
 | claim | documented | measured | status |
 |---|--:|--:|---|
-| `ai_contract_distinct_module_types` | 68 | 71 | **MISMATCH** |
-| `ai_contract_player_module_instances` | 93 | 96 | **MISMATCH** |
+| `ai_contract_distinct_module_types` | 73 | 73 | ✅ |
+| `ai_contract_player_module_instances` | 98 | 98 | ✅ |
 | `ai_contract_world_module_instances` | 1 | 1 | ✅ |
 | `shield_versus_mean` | 184.71 | 184.71 | ✅ |
 | `shield_hp_factor` | 0.541389 | 0.541389 | ✅ |
@@ -27,7 +27,7 @@ A number in prose is true only on the day it is written. These are the claims a 
 | `signed_off_class_anchors` | 0 | 0 | ✅ |
 | `warhead_family_reach` | 1509 | 1509 | ✅ |
 | `unconverted_template_inheritors` | 402 | 402 | ✅ |
-| `ledgers_drifted` | 0 | 33 | **MISMATCH** |
+| `ledgers_drifted` | 0 | 0 | ✅ |
 | `armament_multi_role_actors` | 104 | 104 | ✅ |
 | `armament_air_role_invisible_to_the_name_test` | 41 | 41 | ✅ |
 | `dta_projectile_roles_resolved` | 60 | 60 | ✅ |
@@ -50,9 +50,7 @@ A number in prose is true only on the day it is written. These are the claims a 
 | `cameo_shaped_families` | 53 | 53 | ✅ |
 | `cameo_element_bearing_families` | 23 | 23 | ✅ |
 
-**FAIL — a document and the tree disagree.**
-
-Fix whichever is wrong, and if the tree is right update `value` in `doc_claims.yaml` **and every doc listed under `docs:`** in the SAME commit. That co-update is the point: it is how the `Shield = top + floor` duplication survived in two documents for weeks.
+_clean_ — every registered claim still matches the tree.
 
 ## Review cadence (for what a number cannot capture)
 

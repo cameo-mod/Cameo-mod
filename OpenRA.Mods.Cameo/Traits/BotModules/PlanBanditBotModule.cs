@@ -129,7 +129,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		PlanBanditLearned learned = new();
 		IReadOnlyDictionary<string, int> conditionCounts = new Dictionary<string, int>(0);
 
-		public PlanBanditSnapshot Snapshot { get; private set; }
+		PlanBanditSnapshot snapshot;
+
+		/// <summary>The frozen draw for the situation/engagement logs; null while the trait is disabled
+		/// (rule 5, orders 2026-10-03 — every public reader self-guards, callers filter IsTraitEnabled anyway).</summary>
+		public PlanBanditSnapshot Snapshot => IsTraitDisabled ? null : snapshot;
 
 		public PlanBanditBotModule(Actor self, PlanBanditBotModuleInfo info)
 			: base(info)
@@ -144,17 +148,24 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		{
 			get
 			{
+				if (IsTraitDisabled)
+					return null;
+
 				Resolve();
-				return Snapshot is { PersonalityPinned: true } ? Snapshot.PersonalityArm : null;
+				return snapshot is { PersonalityPinned: true } ? snapshot.PersonalityArm : null;
 			}
 		}
 
-		/// <summary>The chosen plan overlay for a knob in thousandths; 1000 when the plan bandit did not run or the arm omits the knob.</summary>
+		/// <summary>The chosen plan overlay for a knob in thousandths; 1000 when the plan bandit did not run,
+		/// the arm omits the knob, or the trait is disabled.</summary>
 		public int PlanOverlayMilli(string knob)
 		{
+			if (IsTraitDisabled)
+				return BuildOrderKnob.Neutral;
+
 			Resolve();
-			if (Snapshot == null || Snapshot.PlanArm.Length == 0
-				|| !Info.PlanArms.TryGetValue(Snapshot.PlanArm, out var overlay)
+			if (snapshot == null || snapshot.PlanArm.Length == 0
+				|| !Info.PlanArms.TryGetValue(snapshot.PlanArm, out var overlay)
 				|| !overlay.TryGetValue(knob, out var milli))
 				return BuildOrderKnob.Neutral;
 
@@ -170,7 +181,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			resolved = true;
 			var snapshot = new PlanBanditSnapshot { Tick = world.WorldTick };
-			Snapshot = snapshot;
+			this.snapshot = snapshot;
 
 			var ownFaction = player.Faction?.InternalName ?? "";
 			var enemyFaction = EnemyFactionOf(world, player);
@@ -260,35 +271,33 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			return string.Join("+", armed) is { Length: > 0 } s ? s : "none";
 		}
 
-		// Player-level information only (the lobby faction of the main target, else the most common enemy faction), never actors.
-		// The same rule BuildOrderKnobsBotModule uses for its opening scope, kept verbatim so both modules see the same matchup.
+		// Player-level information only (the lobby-visible faction of the main target, else the most common
+		// publicly-known enemy faction), never actors — BotFactionView.PublicFactionOf throughout, so a
+		// Random/hidden pick contributes "" and the scope pools to the generic levels. The same rule
+		// BuildOrderKnobsBotModule uses for its opening scope, kept verbatim so both modules see the same matchup.
 		internal static string EnemyFactionOf(World world, OpenRA.Player player)
 		{
 			var main = player.PlayerActor.TraitsImplementing<IBotMainTargetProvider>()
 				.Select(p => p.MainTarget).FirstOrDefault(t => t != null);
 			if (main != null)
-				return main.Faction?.InternalName ?? "";
+				return BotFactionView.PublicFactionOf(main);
 
 			// The bandit resolves inside the Player ctor (PlayerActor creation), before w.SetPlayers ran —
-			// world.Players is still empty there. Lobby clients ARE populated by then, so early resolves
-			// fall back to lobby-level enemies. Lobby factions may name a random group ("Random"); an
-			// unmatched scope string simply pools to the generic levels — deterministic and safe.
+			// world.Players is still empty there. Enemy refs ARE populated by then, so early resolves
+			// fall back to the map-level path. A Random pick yields "" — the generic levels still apply.
 			if (!world.Players.Any())
 				return LobbyEnemyFaction(world, player);
 
-			return world.Players
+			return DominantFaction(world.Players
 				.Where(p => p != player && !p.NonCombatant && !p.Spectating && player.RelationshipWith(p) == PlayerRelationship.Enemy)
-				.GroupBy(p => p.Faction?.InternalName).Where(g => g.Key != null)
-				.OrderByDescending(g => g.Count()).ThenBy(g => g.Key, StringComparer.Ordinal)
-				.Select(g => g.Key).FirstOrDefault() ?? "";
+				.Select(BotFactionView.PublicFactionOf));
 		}
 
 		// Enemy faction from map data alone (used only while world.Players is unpopulated — the bandit resolves
 		// inside the Player ctor, before SetPlayers/SetupPlayerMasks): the owning PlayerReference.Enemies names
-		// the enemy player refs; each ref's own Faction field is the enemy faction. NonCombatant refs (Creeps)
-		// are skipped the same way the live-players path skips them. "Random" factions are used verbatim — an
-		// unmatched scope string simply pools to the generic levels, deterministic and honest about what was
-		// known at draw time.
+		// the enemy player refs; each ref's faction name is mapped through PublicFactionName the same way the
+		// live path maps DisplayFaction — a Random pick is "" (honest about what was publicly known at draw
+		// time). NonCombatant refs (Creeps) are skipped the same way the live-players path skips them.
 		static string LobbyEnemyFaction(World world, OpenRA.Player player)
 		{
 			var pr = player.PlayerReference;
@@ -296,13 +305,18 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				return "";
 
 			var mapPlayers = new MapPlayers(world.Map.PlayerDefinitions).Players;
-			return pr.Enemies
-				.Select(name => mapPlayers.TryGetValue(name, out var ep) && !ep.NonCombatant ? ep.Faction : null)
-				.Where(f => !string.IsNullOrEmpty(f))
+			return DominantFaction(pr.Enemies
+				.Select(name => mapPlayers.TryGetValue(name, out var ep) && !ep.NonCombatant
+					? BotFactionView.PublicFactionName(world, ep.Faction) : null));
+		}
+
+		/// <summary>The most common known faction among the candidates (count desc, ordinal tie-break);
+		/// null/empty candidates — unknown or Random-hid factions — are skipped. "" when none remain.</summary>
+		internal static string DominantFaction(IEnumerable<string> names) =>
+			names.Where(f => !string.IsNullOrEmpty(f))
 				.GroupBy(f => f)
 				.OrderByDescending(g => g.Count()).ThenBy(g => g.Key, StringComparer.Ordinal)
 				.Select(g => g.Key).FirstOrDefault() ?? "";
-		}
 	}
 
 	/// <summary>
