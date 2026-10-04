@@ -18195,6 +18195,12 @@ verified implementation), the boot_gate guard, and the comment fixes.
   reason says "convert to orders or drop").
 * Report wording fixed: it now enumerates the allowlisted sites and says "zero UNAUDITED
   sites" — not "zero sites", which would hide the hazard inventory.
+* `tools/tests/test_audit_bot_direct_mutation.py` — 9 cases: pattern shape (all five
+  mutations caught; orders/HasCondition/yaml keys ignored), `//`-comment exclusion,
+  end-to-end `main()` against a synthetic tree (clean PASS, unallowlisted grant FAIL,
+  **count-cap ratchet**: a third site in a 2-capped file still FAILs while the first two
+  stay disclosed), PASS-report disclosure wording, and a live-tree check that the repo
+  satisfies its own ratchet with the two hazard files named.
 * **Stale INC-3 comments fixed** (P2): `ai.yaml`'s `@inc3f1` header and `fransbot.yaml`'s
   header still claimed "default grants to fransbot only — inert on master". Since `8f5ebe0f7`
   promoted group C, `inc3f1` grants `inc3_frans_services` to all ten genericbot tiers + the
