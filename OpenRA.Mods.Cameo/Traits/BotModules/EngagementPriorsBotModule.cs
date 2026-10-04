@@ -39,6 +39,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 	{
 		public const int Neutral = 1000;
 
+		// The fitter's per-cell bound (MIN_MILLI/MAX_MILLI in fit_engagement_priors.py) and the
+		// MinCorrectionMilli/MaxCorrectionMilli defaults — a scaled cell must stay inside it too.
+		const int MinFittedMilli = 500;
+		const int MaxFittedMilli = 2000;
+
 		readonly Dictionary<string, int> factors = new(StringComparer.Ordinal);
 		readonly Dictionary<string, int> fittedPriors = new(StringComparer.Ordinal);
 		readonly Dictionary<string, int> defenceFactors = new(StringComparer.Ordinal);
@@ -135,7 +140,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		// Fitted values come back absolute: the optional global obs/exp scale the fitter wrote them
 		// relative to is multiplied back in. Neutral stays Neutral — a stale or missing cell reads
 		// the pure predictor, not the corrected global level.
-		int Scale(int fittedMilli) => (int)((long)fittedMilli * GlobalScaleMilli / Neutral);
+		// Re-clamp after GlobalScaleMilli: a cell fitted at the bound (e.g. 2000) scaled by g > 1000
+		// would otherwise sit outside the documented [500, 2000] cell range.
+		int Scale(int fittedMilli) => (int)Math.Clamp((long)fittedMilli * GlobalScaleMilli / Neutral, MinFittedMilli, MaxFittedMilli);
 	}
 
 	[TraitLocation(SystemActors.Player)]

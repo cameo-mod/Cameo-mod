@@ -1,3 +1,15 @@
+# 2026-10-04 (later) — NOVA N1 `2cdfdbac8`: parse-tolerance test vs the real emitted file
+
+*Devin (nova), same branch `devin/nova/t2-port`.* EMBER's first real fit (`ember-fit`,
+2,182 engagements fitted / 7,301 records) carries the full emitted block set —
+`Schema`/`LedgerHash`/`Engagements` headers, `#` comments, and `AttackTiming@` /
+`Response@` / `SuicideIndex@` analysis rows the §12.31 consumption contract does not
+define. `BotEngagementPriors.Parse` skips them by construction (prefix dispatch +
+`TryParse`), and `FitterMetadataBlocksAreSkipped` locks that: an out-of-contract block
+can never become a load failure. 844/844. (One real-value trap while writing it:
+`PriorPct: 155` marks the cell STALE in test context — ResolvedTagVersus is null →
+prior-100; the fixture uses 100 and real staleness stays covered by the dedicated tests.)
+
 # 2026-10-04 (later) — NOVA N1 `70879b038`: `GlobalScaleMilli` consumed
 
 *Devin (nova), same branch `devin/nova/t2-port`.* T3Verify's accounting-fixed fitter

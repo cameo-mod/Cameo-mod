@@ -170,7 +170,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		IBotEngagementPriors Priors()
 		{
 			priors ??= player.PlayerActor.TraitsImplementing<IBotEngagementPriors>().ToArray();
-			return priors.FirstOrDefault(p => p != null);
+			return priors.FirstEnabledTraitOrDefault();
 		}
 
 		List<(BotUnitProfile Unit, int Count)> ForceOf(SquadCA squad)
