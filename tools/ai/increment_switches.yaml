@@ -216,3 +216,7 @@ groups:
   BK_squad_order_dedup:              # NOVA AR-S residual (maintainer stutter clarification 2026-10-04): squad states queue an order only when a member's (order, quantized target) actually changed; protection rally/lure mode latch; quiet defenders hold post instead of the Flee->Idle->Attack cycle; the shared Retreat flee-home pick latches per episode instead of re-rolling a random building every pass. Mobile orders re-issue on idle (real retry); terminal orders never repeat. Off = pre-change stream
     SquadManagerBotModuleCA:
       UseSquadOrderDedup: true
+  BJ_squad_hysteresis:               # EMBER AR-S (maintainer report: army stutter-steps 2026-10-04): the formation hold/push split gets a 2-cell dead band, squad orders are only re-issued on class/quantized-target change, and the leader wait latches (enter >5x occupiedArea, release <3x) - the per-tick identical Stop/AttackMove re-issues cancelled every MoveTo and repathed the whole army each tick. Unarmed = the old hard cut + per-tick stream; @classic skipped = bit-identical
+    SquadManagerBotModuleCA:
+      UseFormationHysteresis: true
+      FormationHoldHysteresisCells: 2
