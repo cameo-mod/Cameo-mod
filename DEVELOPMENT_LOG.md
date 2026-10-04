@@ -1,3 +1,22 @@
+# 2026-10-04 — Devin-T2Verify: F1 — gate-B takes an indice only when its anchors are all served
+
+*Devin-T2Verify.* Lead ruling on the hotspot-6 NOTE's F1: gate B's indice-level refinery count could
+starve the second anchor of a multi-spreader single-indice field — "indice has our refinery" marked the
+whole indice taken, it left `scores`, and the crawl aim plus the MCV pipeline stopped driving at the field
+its second spreader still needed. That is a law violation of one refinery per ANCHOR.
+
+- The anchor model (spreaders -> anchors -> field ids -> flush map -> per-anchor assignment) is hoisted out of
+  `UpdateAnchorClaim` into `EnsureAnchorModel`, built once per re-plan tick before the scores loop.
+- `FieldTaken` gains two law terms: under `LawActive` an indice holding an unserved anchor is not "ours" — a
+  claimed-by-radius cell and the indice-level refinery count both yield — while an indice whose anchors are all
+  served takes as before.
+- Classic is bit-identical: `lawActive == false` collapses the new terms to the old `claimed || refineries > 0 ||
+  value <= 0` shape, and the anchor model still builds only when `FieldCoverage && DriveRefineries` are on.
+
+Gates (on the seam base): mod + test builds 0/0; 972/972 (new branch-coverage test for the law arms); fog /
+direct-mutation / arch-freshness PASS; boot gate PASS (menu reached, PID-scoped kill, no new exceptions).
+Stack-tip gates re-run on INC-f below.
+
 # 2026-10-04 — Devin-T2Verify: INC-g stack — hs5/hs6 seams + standalone BP-2 fold rebased onto INC-f
 
 *Devin.* The agreed merge order landed: BP-2 is in INC-f (`5e67eb6ec`), radar-contacts too
