@@ -1,3 +1,18 @@
+# 2026-10-04 — REF-1 silo gate commit + rift smoke verdict (24109f58f)
+
+*Devin (T2Verify), branch `devin/ref1-refinery-law-v2`.* Lead accepted the smoke verdicts and froze REF-1
+for merge; option (a) landed the silo gate as its own commit: `RefineryLawSilo.Wanted` extracted to
+`IBotExpansionTargetProvider` (pure, testable) + `SiloOverrideThrottledUnderTheLaw` unit test (law on:
+85% no, 96% yes, 96%+in-production no, =95% no; law off: classic 80% both sides). Build 0 err, 857/857,
+audits + boot gate PASS. **Rift smoke on 24109f58f** (hard vs hard, 1 match): law clean — 0 FAIL,
+`rpa=1`, `base=0`, `gap_max=0`, `tier_viol=0`. Silo evidence vs `_ref1_rift_smoke3`: **0 `crawl` silos
+(80 pre-fix → 0)** — every post-fix silo is `reason='base'` inside owned buildable area; the winning
+seat's 21 vs the loser's 3 is genuine >95% overflow, not frontier spam. Checker ownership also landed:
+`devin/tier4/refinery-check@55e8b5efa` (rebuild-aware per-anchor skip via `fields_in_reach_unserved_ids`,
+P3 all-n/a exit 2, `?` docstring, 28/28 tests) — `_ref1_dd_smoke3` 3 FAIL → 1 FAIL; the residual
+(`f8e513e2`/Multi0) is a documented telemetry blind spot (out-of-reach loss + captured-refinery
+co-bind; `capture:` mission at t15701, rpa stayed 1 through the rebuild's snapshot) — ruling requested.
+
 # 2026-10-04 — REF-1 silo containment (maintainer report: "silos everywhere")
 
 *Devin (T2Verify), branch `devin/ref1-refinery-law-v2`.* Maintainer observed bots spamming silos everywhere.
