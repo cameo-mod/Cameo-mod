@@ -155,6 +155,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			player = self.Owner;
 		}
 
+		string priorsState; // "none" | "error" | "fitted" — StaleCount is read live so the match record shows end-of-match staleness
+		public string PriorsState =>
+			priorsState == "fitted" ? $"fitted:{priors.FactorCount}/stale:{priors.StaleCount}" : priorsState;
+
 		void IBotTick.BotTick(IBot bot)
 		{
 			if (loaded)
@@ -164,15 +168,26 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var fs = Game.ModData.DefaultFileSystem;
 			if (!fs.Exists(Info.PriorsFile))
 			{
+				priorsState = "none";
 				Log.Write("debug", $"AI {player.InternalName}: TIER1 priors: none ({Info.PriorsFile} missing), neutral");
 				return;
 			}
 
-			using (var stream = fs.Open(Info.PriorsFile))
-				priors = BotEngagementPriors.Parse(MiniYaml.FromStream(stream, Info.PriorsFile));
+			try
+			{
+				using (var stream = fs.Open(Info.PriorsFile))
+					priors = BotEngagementPriors.Parse(MiniYaml.FromStream(stream, Info.PriorsFile));
 
-			Log.Write("debug", $"AI {player.InternalName}: TIER1 priors: {priors.FactorCount} cells, into-defences {priors.IntoDefencesPermille}‰" +
-				$"{(priors.LedgerHash != null ? $", ledger {priors.LedgerHash} (provenance only — unverifiable in-match)" : "")}");
+				priorsState = "fitted";
+				Log.Write("debug", $"AI {player.InternalName}: TIER1 priors: {priors.FactorCount} cells, into-defences {priors.IntoDefencesPermille}‰" +
+					$"{(priors.LedgerHash != null ? $", ledger {priors.LedgerHash} (provenance only — unverifiable in-match)" : "")}");
+			}
+			catch (Exception e)
+			{
+				priors = new BotEngagementPriors();
+				priorsState = "error";
+				Log.Write("debug", $"AI {player.InternalName}: TIER1 priors: error ({e.Message}), neutral");
+			}
 		}
 
 		int IBotEngagementPriors.CorrectionMilli(BotUnitProfile attacker, BotUnitProfile target)
@@ -191,6 +206,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			return (int)Math.Clamp(f, Info.MinCorrectionMilli, Info.MaxCorrectionMilli);
 		}
+
+		// The fitter's attrition exponent warps the predicted ratio (CombatVetoEval applies ratio^alpha);
+		// absent or disabled stays the pure square law. Same bounds as a correction: alpha in [0.5, 2.0].
+		int IBotEngagementPriors.AttritionExponentMilli =>
+			IsTraitDisabled || priors.AttritionExponentMilli == null ? 1000
+				: Math.Clamp(priors.AttritionExponentMilli.Value, Info.MinCorrectionMilli, Info.MaxCorrectionMilli);
 
 		// The weapon that would do most of the damage against this target decides the delivery cell —
 		// the per-pair correction cannot see inside DamagePerTickAgainst's weapon sum either way.
