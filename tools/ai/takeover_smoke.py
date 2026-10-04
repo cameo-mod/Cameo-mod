@@ -708,7 +708,10 @@ SCENARIOS = {
             "botteam Multi2 0",
             "botteam Multi3 1",
         ],
-        "actions": [("wait", 180)],
+        # kill both clients after the window: the judge reads bandit pins from
+        # debug.log and a live client's log buffer may not have flushed yet —
+        # a killed client's pins are on disk before finish() collects evidence.
+        "actions": [("wait", 180), ("kill", "c0"), ("kill", "c1"), ("wait", 3)],
         "settle": 30,
         "judge": j_desync,
     },
