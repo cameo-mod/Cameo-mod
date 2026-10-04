@@ -259,6 +259,14 @@ Verified P0s:
 - AR-1: grouped orders bypass the lease gate in `ModularBot.PassesGate`.
 - AR-2: the personality pin is read in synced `TraitEnabled` from host-only state.
 - AR-4: PlugSpawner order without an owner check.
+# 2026-10-04 — Devin-T3Verify: TAKEOVER nit — one AutoTarget scan per refresh (AR-P2)
+
+*Devin.* `devin/t3verify/takeover-scan-nit` off `devin/t3verify/bot-takeover@f475f1881`. The lead's
+AR-P2 nit: `ApplyBotStances` ran one `world.ActorsHavingTrait<AutoTarget>()` pass **per taken-over
+seat** on every refresh — N world scans per 25-tick pass. Now a single scan filters by
+`records.ContainsKey(a.Owner)` — O(actors) once regardless of seat count, same mutation set, same
+determinism (actor enumeration order unchanged, `records` added the seat before the takeover call).
+Gates: build 0/0; takeover suite 22/22; boot gate PASS.
 
 # 2026-10-04 — Devin-T3Verify: TAKEOVER bot-stance fix + tactical-map lazy build (user-reported passivity)
 
