@@ -1,3 +1,22 @@
+# 2026-10-04 — Devin-T2Verify: F1 — gate-B takes an indice only when its anchors are all served
+
+*Devin-T2Verify.* Branch `devin/t2verify/f1-anchor-granular-gate` stacked on `hotspot-queue-seams` (tip in the fleet
+STATUS file). Lead ruling on the hotspot-6 NOTE's F1: gate B's indice-level refinery count could starve the second
+anchor of a multi-spreader single-indice field — "indice has our refinery" marked the whole indice taken, it left
+`scores`, and the crawl aim plus the MCV pipeline stopped driving at the field its second spreader still needed.
+That is a law violation of one refinery per ANCHOR.
+
+- The anchor model (spreaders -> anchors -> field ids -> flush map -> per-anchor assignment) is hoisted out of
+  `UpdateAnchorClaim` into `EnsureAnchorModel`, built once per re-plan tick before the scores loop.
+- `FieldTaken` gains two law terms: under `LawActive` an indice holding an unserved anchor is not "ours" — a
+  claimed-by-radius cell and the indice-level refinery count both yield — while an indice whose anchors are all
+  served takes as before.
+- Classic is bit-identical: `lawActive == false` collapses the new terms to the old `claimed || refineries > 0 ||
+  value <= 0` shape, and the anchor model still builds only when `FieldCoverage && DriveRefineries` are on.
+
+Gates: mod + test builds 0/0; 972/972 (new branch-coverage test for the law arms); fog / direct-mutation /
+arch-freshness PASS; boot gate PASS (menu reached, PID-scoped kill, no new exceptions).
+
 # 2026-10-04 — Claude (lead): INC 2026-10-04e lands — INC-d completed (P0 raid gate), LC5 admission claims, checker v2, E2 test baseline
 
 *Claude.* Branch `inc/2026_10_04e` from master `1fbd239ff`:
