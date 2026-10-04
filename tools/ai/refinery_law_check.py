@@ -18,6 +18,10 @@ Per genericbot player x match:
   base_reason_count           refinery placements with reason "base"           -> FAIL when > 0
   resource_gap histogram      placements' resource_gap cells                   -> FAIL when any > 1
   tier_order_violations       tier>=2 placements while fields_in_reach_unserved > 0 at that tick -> FAIL when > 0
+  no_refinery                 zero refineries once the match passed --min-ticks-first-refinery
+                              (default 3000t)                                        -> FAIL
+  coverage_flat               coverage_milli never exceeds its 5-min (7500t) level -> WARN
+  no_expansion                conyards never > 1 in a match longer than 15 min (22500t) -> WARN
   claim_latency_p50/p90/max   ticks from a field first counted in fields_in_reach_unserved to its
                               refinery placement (lower bound when several fields wait; --warn-latency
                               flags a WARN, never a FAIL)
@@ -45,6 +49,9 @@ import ai_log_common as c  # noqa: E402
 
 NON_GENERIC = {"classic", "campaign", "fransbot"}
 DEFAULT_WARN_LATENCY = 2500  # ~100 game seconds a field may wait before it counts as a smell
+DEFAULT_MIN_TICKS_FIRST_REFINERY = 3000  # a genericbot seat with no refinery past this = FAIL no_refinery
+FLAT_COVERAGE_TICKS = 7500   # ~5 min: coverage must still grow past this or WARN coverage_flat
+NO_EXPANSION_TICKS = 22500   # ~15 min: conyards must exceed 1 in a longer match or WARN no_expansion
 
 
 def is_genericbot(bot_type: str) -> bool:
@@ -75,7 +82,8 @@ def ptick(p: dict) -> int:
 
 
 def check_match(snaps: list[dict], places: list[dict], warn_latency: int = DEFAULT_WARN_LATENCY,
-                match_end: int | None = None) -> dict:
+                match_end: int | None = None,
+                min_ticks_first_refinery: int = DEFAULT_MIN_TICKS_FIRST_REFINERY) -> dict:
     snaps = sorted((s for s in snaps if s.get("expansion")), key=lambda s: s["tick"])
     refs = sorted((p for p in places if p.get("category") == "refinery"), key=ptick)
     ex = [s["expansion"] for s in snaps]
@@ -147,6 +155,20 @@ def check_match(snaps: list[dict], places: list[dict], warn_latency: int = DEFAU
         i = min(len(latencies) - 1, int(round(q * (len(latencies) - 1))))
         return latencies[i]
 
+    # zero-refinery law + expansion smells. end_tick prefers the match record's duration_ticks, else
+    # the last snapshot tick (the REF-1 smoke exposed a silent n/a: 0 refineries in 12,642 ticks).
+    end_tick = match_end if match_end is not None else (snaps[-1]["tick"] if snaps else None)
+
+    # WARN, never FAIL: the maintainer's complaint is crawling forward then never
+    # taking the new field — coverage stuck at its 5-minute level, or never a second conyard past 15 min.
+    cov = [(s["tick"], e["coverage_milli"]) for s, e in zip(snaps, ex) if e.get("coverage_milli") is not None]
+    cov_before = [v for t, v in cov if t < FLAT_COVERAGE_TICKS]
+    cov_after = [v for t, v in cov if t >= FLAT_COVERAGE_TICKS]
+    coverage_flat = bool(cov_before) and bool(cov_after) and max(cov_after) <= max(cov_before)
+    conyards = [e["conyards"] for e in ex if e.get("conyards") is not None]
+    no_expansion = (end_tick is not None and end_tick > NO_EXPANSION_TICKS
+                    and bool(conyards) and max(conyards) <= 1)
+
     fails = []
     if ref_max is not None and ref_max > 1:
         fails.append(f"refineries_per_anchor_max={ref_max}")
@@ -156,10 +178,21 @@ def check_match(snaps: list[dict], places: list[dict], warn_latency: int = DEFAU
         fails.append(f"resource_gap_max={int(max(gaps))}")
     if tier_violations:
         fails.append(f"tier_order_violations={tier_violations}")
+    if not refs and end_tick is not None and end_tick > min_ticks_first_refinery:
+        fails.append("no_refinery")
 
     known = bool(refs) and ref_max is not None
     p90 = pct(0.9)
-    warn = (p90 is not None and p90 > warn_latency) or bool(never_served)
+    warns = []
+    if p90 is not None and p90 > warn_latency:
+        warns.append(f"claim_latency_p90={p90}")
+    if never_served:
+        warns.append(f"claim_latency_never={never_served}")
+    if coverage_flat:
+        warns.append("coverage_flat")
+    if no_expansion:
+        warns.append("no_expansion")
+    warn = bool(warns)
     verdict = "FAIL" if fails else ("WARN" if warn and known
                                     else "PASS" if known and gap_known and tier_violations is not None else "n/a")
     return {
@@ -175,11 +208,13 @@ def check_match(snaps: list[dict], places: list[dict], warn_latency: int = DEFAU
         "peak_coverage_milli": max((e.get("coverage_milli", 0) for e in ex), default=None),
         "final_coverage_milli": ex[-1].get("coverage_milli") if ex else None,
         "fails": fails,
+        "warns": warns,
         "verdict": verdict,
     }
 
 
-def build(data: dict[str, list[dict]], warn_latency: int = DEFAULT_WARN_LATENCY) -> dict:
+def build(data: dict[str, list[dict]], warn_latency: int = DEFAULT_WARN_LATENCY,
+          min_ticks_first_refinery: int = DEFAULT_MIN_TICKS_FIRST_REFINERY) -> dict:
     matches = {(m.get("game_uid"), m.get("player", {}).get("name")): m for m in data["matches"]}
     by_snap = collections.defaultdict(list)
     for s in data["situations"]:
@@ -197,7 +232,8 @@ def build(data: dict[str, list[dict]], warn_latency: int = DEFAULT_WARN_LATENCY)
                "map_uid": ref.get("map_uid") or (match or {}).get("map_uid", ""),
                "map_title": (match or {}).get("map_title") or ref.get("map_title") or "",
                "faction": ref.get("faction") or (match or {}).get("player", {}).get("faction", "")}
-        row.update(check_match(snaps, places, warn_latency, (match or {}).get("duration_ticks")))
+        row.update(check_match(snaps, places, warn_latency, (match or {}).get("duration_ticks"),
+                               min_ticks_first_refinery))
         rows.append(row)
 
     by_map = collections.defaultdict(list)
@@ -232,7 +268,7 @@ def render(result: dict, warn_latency: int) -> str:
     gen = [r for r in result["matches"] if is_genericbot(r["bot_type"])]
     classic = [r for r in result["matches"] if not is_genericbot(r["bot_type"])]
     head = ["verdict", "map", "game/player", "refs", "per_anchor_max", "base", "gap_hist", "tier_viol",
-            "lat_p50", "lat_p90", "lat_max", "lat_never", "peak_cov", "final_cov", "fails"]
+            "lat_p50", "lat_p90", "lat_max", "lat_never", "peak_cov", "final_cov", "fails;warns"]
     rows = [head]
     for r in gen:
         rows.append([r["verdict"], (r["map_title"] or r["map_uid"] or "?")[:14], f'{r["game_uid"][:8]}/{r["player"]}',
@@ -241,7 +277,8 @@ def render(result: dict, warn_latency: int) -> str:
                      r["tier_order_violations"] if r["tier_order_violations"] is not None else "n/a",
                      c.fmt(r["claim_latency_p50"]), c.fmt(r["claim_latency_p90"]), c.fmt(r["claim_latency_max"]),
                      r["claim_latency_never"] if r["claim_latency_never"] is not None else "-",
-                     c.fmt(r["peak_coverage_milli"]), c.fmt(r["final_coverage_milli"]), ";".join(r["fails"]) or "-"])
+                     c.fmt(r["peak_coverage_milli"]), c.fmt(r["final_coverage_milli"]),
+                     ";".join(r["fails"] + r["warns"]) or "-"])
     out = [f"refinery law check: {len(gen)} genericbot player-match(es), warn-latency={warn_latency}t",
            "FAIL = per_anchor_max>1 | base>0 | gap>1 | tier-2 while fields unserved; n/a = field absent from old logs",
            "", "genericbot", c.table(rows)]
@@ -273,6 +310,9 @@ def main(argv=None) -> int:
     ap.add_argument("--json", action="store_true", help="print the result as JSON")
     ap.add_argument("--warn-latency", type=int, default=DEFAULT_WARN_LATENCY,
                     help=f"mark latency p90 above this as WARN in the output (default {DEFAULT_WARN_LATENCY} ticks)")
+    ap.add_argument("--min-ticks-first-refinery", type=int, default=DEFAULT_MIN_TICKS_FIRST_REFINERY,
+                    help="a genericbot seat with zero refineries past this match tick is FAIL no_refinery "
+                         f"(default {DEFAULT_MIN_TICKS_FIRST_REFINERY})")
     args = ap.parse_args(argv)
     dirs = []
     for d in args.dirs:
@@ -281,7 +321,7 @@ def main(argv=None) -> int:
             dirs.extend(pathlib.Path(h) for h in hits)
         else:
             dirs.append(d)
-    result = build(c.load(dirs), args.warn_latency)
+    result = build(c.load(dirs), args.warn_latency, args.min_ticks_first_refinery)
     if not result["matches"]:
         print("no situation or placement records found", file=sys.stderr)
         return 2

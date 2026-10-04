@@ -209,6 +209,68 @@ class RefineryLawCheckTests(unittest.TestCase):
             self.assertEqual(rlc.main([str(bad)]), 1)
             self.assertEqual(rlc.main([str(good), str(bad)]), 1)
 
+    def test_no_refinery_past_threshold_fails(self):
+        # REF-1 smoke exposed this: a hard seat built zero refineries in a long match and read as n/a
+        res = rlc.build({"matches": [{**match("g1", "Multi0"), "duration_ticks": 12642}],
+                         "situations": [snap("g1", "Multi0", 100, fields_in_reach=0),
+                                        snap("g1", "Multi0", 12000, fields_in_reach=0)],
+                         "placements": [], "engagements": []})
+        r = self.row(res)
+        self.assertEqual(r["verdict"], "FAIL")
+        self.assertIn("no_refinery", r["fails"])
+
+    def test_no_refinery_before_threshold_stays_na(self):
+        res = rlc.build({"matches": [{**match("g1", "Multi0"), "duration_ticks": 2000}],
+                         "situations": [snap("g1", "Multi0", 100, fields_in_reach=0)],
+                         "placements": [], "engagements": []})
+        r = self.row(res)
+        self.assertEqual(r["verdict"], "n/a")
+        self.assertNotIn("no_refinery", r["fails"])
+
+    def test_coverage_flat_warns_not_fails(self):
+        res = self.build_one(
+            [snap("g1", "Multi0", 100, coverage_milli=200, fields_in_reach_unserved=0),
+             snap("g1", "Multi0", 8000, coverage_milli=150, fields_in_reach_unserved=0),
+             snap("g1", "Multi0", 12000, coverage_milli=150, fields_in_reach_unserved=0)],
+            [place("g1", "Multi0", 200, field_id="f1")])
+        r = self.row(res)
+        self.assertEqual(r["verdict"], "WARN")
+        self.assertIn("coverage_flat", r["warns"])
+        self.assertFalse(r["fails"])
+
+    def test_coverage_still_growing_no_warn(self):
+        res = self.build_one(
+            [snap("g1", "Multi0", 100, coverage_milli=100, fields_in_reach_unserved=0),
+             snap("g1", "Multi0", 8000, coverage_milli=250, fields_in_reach_unserved=0)],
+            [place("g1", "Multi0", 200, field_id="f1")])
+        r = self.row(res)
+        self.assertEqual(r["verdict"], "PASS")
+        self.assertNotIn("coverage_flat", r["warns"])
+
+    def test_no_expansion_warn_past_15min(self):
+        res = rlc.build({"matches": [{**match("g1", "Multi0"), "duration_ticks": 25000}],
+                         "situations": [snap("g1", "Multi0", 100, conyards=1, coverage_milli=50,
+                                             fields_in_reach_unserved=0),
+                                        snap("g1", "Multi0", 24000, conyards=1, coverage_milli=380,
+                                             fields_in_reach_unserved=0)],
+                         "placements": [place("g1", "Multi0", 200, field_id="f1")],
+                         "engagements": []})
+        r = self.row(res)
+        self.assertEqual(r["verdict"], "WARN")
+        self.assertIn("no_expansion", r["warns"])
+
+    def test_second_conyard_no_warn(self):
+        res = rlc.build({"matches": [{**match("g1", "Multi0"), "duration_ticks": 25000}],
+                         "situations": [snap("g1", "Multi0", 100, conyards=1, coverage_milli=50,
+                                             fields_in_reach_unserved=0),
+                                        snap("g1", "Multi0", 24000, conyards=2, coverage_milli=380,
+                                             fields_in_reach_unserved=0)],
+                         "placements": [place("g1", "Multi0", 200, field_id="f1")],
+                         "engagements": []})
+        r = self.row(res)
+        self.assertNotIn("no_expansion", r["warns"])
+        self.assertEqual(r["verdict"], "PASS")
+
     def test_glob_expansion_and_no_records_exit_2(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = pathlib.Path(tmp)
