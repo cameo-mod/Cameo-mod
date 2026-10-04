@@ -115,7 +115,9 @@ Three consequences, all load-bearing:
 **Precedent for the order round-trip already exists in Cameo**, which removes the main risk from
 §4: `PlugSpawnerBotModuleCA` queues `new Order("PlacePlugAI", player.PlayerActor, ...)` with a
 `TargetString` payload from `IBotTick`, and resolves it in synced code via `IResolveOrder` on the
-same trait (`OpenRA.Mods.Cameo/Traits/BotModules/PlugSpawnerBotModuleCA.cs:84-108`).
+same trait — including the AR-4 ownership check (`PlugTargetIsOwned(targetActor, self.Owner)`)
+that keeps a plug from landing on another player's building
+(`OpenRA.Mods.Cameo/Traits/BotModules/PlugSpawnerBotModuleCA.cs:135-200`).
 `ExternalBotOrdersManager` does the same for `IssueOrderToBot`
 (`engine/OpenRA.Mods.AS/Traits/BotModules/ExternalBotOrdersManager.cs:120-149`).
 

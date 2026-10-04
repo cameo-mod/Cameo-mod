@@ -30,6 +30,15 @@ the host's `BotTick` (`BanditPinOrder`, one issue/sim-second until reflected), w
 silent while pinned — same suppression semantics, sync-safe. +5 NUnit (draw-count via
 `MersenneTwister.TotalCount`, twin-client determinism, pin-order seam). Gates: builds 0/0, **938/938**,
 boot gate PASS. 2-client sync proof remains Tier4's AR-T3 armed smoke — assigned, must go red on master.
+## 2026-10-04 — EMBER AR-4: PlugSpawner owner check + scan cache (INC-ready)
+
+**INC-N ready: `devin/ember/ar4-plugspawner` — switch: none (correctness fix; valid ordering
+unchanged).** P0 of the 2026-10-04b architecture review. `PlacePlugAI`'s synced resolve path
+never verified target ownership — any client could plug anyone's building — and `BotTick`
+re-scanned `world.Actors` once per plug type. Now: `PlugTargetIsOwned(targetActor, self.Owner)`
+gates the resolve before cost/prereq/enable, and one `CollectOwnedActors` pass per interval
+feeds every plug kind. +3 NUnit (`PlugSpawnerBotModuleTest`, UnsafeAccessor fixtures).
+Gates: builds 0/0, **936/936**, boot gate PASS.
 
 ## 2026-10-04 — NOVA N2 receipt: EL-1 v2 on current master
 
