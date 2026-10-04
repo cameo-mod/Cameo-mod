@@ -1,5 +1,15 @@
 # 2026-10-04 independent review recovery record
 
+## Current verdict: BP re-review at 7690ddd07
+
+B2 (cluster membership), B3 (safe back fallback), and B4's extra-radar candidate coverage gate are resolved by static code review. B1 remains open: the number is now an absolute target, but existing radar allocation can still prevent an unserved front receiving its first provider. Takeover T1-T4 remain pending. The original findings below are checkpoint history, superseded by this current verdict where stated.
+
+`WantedForFront` at BaseFrontBackPlannerBotModule.cs:368-377 ignores existing per-front providers; Refresh at :768-777 sums those desired counts, while the prepared QM consumer compares the sum with all owned/planned radars. Concrete case: defended front A has two useful providers and zero uncovered cells; defended front B has zero providers and 20 uncovered cells. The target is 1 + 1 = 2, owned is 2, so B's first provider is suppressed. Surviving radars on a now-undefended old base can likewise suppress a new defended front.
+
+Requested correction: retain the absolute API, derive additional need per front, and account for existing extras/unassigned providers before the global comparison. Existing providers elsewhere must not consume another front's first slot. Aggregate regressions must cover A=2/B=0, surviving providers at an undefended base versus an empty defended front, and no defended fronts requesting no additional radars. The current new helper tests omit that aggregate caller comparison.
+
+Author-reported validation for 7690ddd07: 31/31 planner tests, 865/865 full suite, build zero warnings/errors, fog/direct-mutation/architecture R1-R2 audits PASS, boot gate PASS. Reviewer inspected the added tests and implementation but did not rerun these gates or execute gameplay. BP remains default OFF without QM consumers; phase-2 integration still waits for REF-1. Remaining BP corrective task: 01a106a7-0231-70c0-9d35-ba91cf698e2b. T3Verify received the counterexample and requested regression cases via team tools.
+
 Owner: Boss (Devin), team slot 01a10697-1728-7a81-b12c-1f9acfad34f2. User requested coordinated independent review and durable documentation while Claude resumes in a fresh session. This is review evidence, not a replacement for DESIGN rulings. No source changes, merges, builds, or game launches in this review.
 
 Checkpoints: takeover devin/t3verify/bot-takeover@9a0348101, worktree C:/cameo-wt/takeover; BP phase 1 devin/t3verify/bp-front-back@63cd1c372, worktree C:/cameo-wt/bp. Both baseline 8e86fca23. T3Verify owns both implementations. BP phase-1 static review is complete with changes requested; fixes and re-review are pending. REF-1 and stale-test-baseline checkpoint reviews were requested from their owners; neither is approved here.
@@ -43,5 +53,5 @@ The user asked every owner to preserve exact checkpoints, verification actually 
 
 1. Read this record and the fleet status note before relying on mailbox history.
 2. Obtain T3Verify corrective checkpoint, review all four fixes, and preserve Tier4 dedicated-client smoke results.
-3. Review BP corrective checkpoint against B1-B4; keep QM/FragileTypes phase 2 blocked until REF-1 lands under Claude coordination.
+3. Review BP corrective checkpoint against remaining B1; B2/B3/B4 resolved statically at 7690ddd07; keep QM/FragileTypes phase 2 blocked until REF-1 lands under Claude coordination.
 4. Review available REF-1/baseline checkpoints. Claude retains merge and campaign authority.

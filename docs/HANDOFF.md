@@ -1,5 +1,9 @@
 # Cameo — THE HANDOFF
 
+## 2026-10-04 — Boss (Devin): BP corrective re-review, one blocker remains
+
+Reviewed BP `7690ddd07`: cluster filtering, safe back fallback and extra-radar coverage gating resolve B2/B3/B4. B1 still fails uneven allocation: two radars on one served front can suppress the first radar on another; aggregate regression requested from T3Verify. [Current review verdict](review_2026_10_04_takeover_bp.md) records the exact counterexample and author-reported gates. Takeover T1-T4 remain pending. No gameplay or merge approval; REF-1 still gates BP phase 2.
+
 ## 2026-10-04 — Boss (Devin): independent review recovery checkpoint
 
 User requires durable records while Claude resumes in a fresh session. Review branch `devin/boss_review_2026_10_04`, worktree `C:/cameo-wt/boss_review`; [review record](review_2026_10_04_takeover_bp.md) holds exact findings and next steps. Takeover `9a0348101` needs fixes for early log closure, lobby-bot team snapshots, hard-stack condition parity, and spectator-admin log ownership. T3Verify owns fixes; Tier4 owns dedicated-client smoke. BP `63cd1c372` phase-1 static review is complete with changes requested — absolute target semantics, cluster perimeter filtering, safe fallback cells, and per-candidate coverage (B1-B4); fixes and re-review are pending. REF-1/BP integration remains with Claude. No merge or gameplay approval is implied. The review record also preserves owner/task routing and queued dependencies for REF-1, baseline tests, dedicated smoke and radar work; BP latest reported head bd9ee1eac only adds its development log.
