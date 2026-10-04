@@ -1,3 +1,28 @@
+# 2026-10-04 — Claude (lead): INC-f doc re-pin, INC-g built and pushed, boot-gate false pass
+
+*Claude.* `inc/2026_10_04g` @ 3a661c8b0 (pushed with `inc/2026_10_04f`).
+
+- **INC-f** failed only `audit_doc_claims`: AR-12 moved AI_ARCHITECTURE to 76/103 for
+  `LoadCargoBotModuleAS` without the registry value, and RADAR-A left `RadarContactsBotModule`
+  uncounted. Re-pinned doc + `doc_claims.yaml` together to 77/104 (249b36be6).
+- **INC-g** = T2Verify's rebased stack (hs5/hs6 seams, BP-2 fold, F1, determinism tie-breaks,
+  AR-8, AR-1 nit) + AR-2, AR-4, test fixtures, PRIORS-CARRY fitter, coverage infra (**ci.yml job
+  held — maintainer ruling: no CI without explicit request**), takeover-smoke (MasterAiEval +
+  balance log field), multi-info-crash, AR-9 (independent review APPROVE; P3/P4 follow-ups with
+  T2Verify). Conflicts were devlog/HANDOFF (union) and generated arch docs (regenerated).
+- **Gates:** build 0 errors, 1124/1124, pytest 34, arch freshness, fog, direct mutation,
+  doc_claims 0 mismatches, 0 empty warheads, boot to menu with 0 exceptions.
+- **What didn't work:** the shared `_bootgate.ps1` pattern false-passed — it greps the
+  machine-wide `%APPDATA%\OpenRA\Logs\perf.log`, which held a 20-minute-old menu marker while
+  the launched game wrote nothing. Fix: run `enginein\OpenRA.exe` with a fresh
+  `Engine.SupportDir`, poll only that dir, and check that MATCH INFO's Package path is in the
+  worktree. Fleet told to re-verify today's boot passes.
+- **Maintainer rulings today:** bot fight model reads live per-actor stats (active weapons,
+  modifiers, current HP; fog-fair; type table only as fallback); accuracy/splash/range-adjusted
+  damage becomes the default pricing path.
+- **Open:** AR-S stutter finish + ON/OFF demo replays (Ember), PREDICTOR live-stats (T3Verify),
+  PRICING-DEFAULT (Tier4), multi-TraitInfo sweep + AR-9 follow-ups (T2Verify).
+
 # 2026-10-04 — Devin-T2Verify: AR-9 lease gaps — LoadGarrisoner + DeployBot claim-before-order (§19.6)
 
 *Devin.* Branch `devin/t2verify/ar9-lease-gaps` rebased onto `devin/t2verify/incg-stack` (INC-f +
