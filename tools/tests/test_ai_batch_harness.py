@@ -240,6 +240,32 @@ class RealMapVariantTests(unittest.TestCase):
         self.assertEqual(cells[0], (11, 45))
         self.assertEqual(cells[1], (90, 24))
 
+    def test_mp_spawn_cells_any_key_order(self):
+        # deterring-democracy: Location before Owner; proto_*/AlpineAssault:
+        # Faction between them; _d2k_Desert_Valley: mixed within one map.
+        text = (
+            "Actors:\n"
+            "\tActor0: mpspawn\n"
+            "\t\tOwner: Neutral\n"
+            "\t\tLocation: 11,50\n"
+            "\tActor1: mpspawn\n"
+            "\t\tLocation: 132,93\n"
+            "\t\tOwner: Neutral\n"
+            "\tActor2: mpspawn\n"
+            "\t\tOwner: Neutral\n"
+            "\t\tFaction: Random\n"
+            "\t\tLocation: 40,97\n"
+            "\tActor3: mpspawn\n"
+            "\t\tLocation: 77,19\n"
+            "\t\tFaction: Random\n"
+            "\t\tOwner: Neutral\n"
+            "\tActor4: waypoint\n"
+            "\t\tOwner: Neutral\n"
+            "\t\tLocation: 1,1\n"
+        )
+        cells = batch.mp_spawn_cells(text)
+        self.assertEqual(cells, [(11, 50), (132, 93), (40, 97), (77, 19)])
+
     def test_swap_bots_alternates_spawn_ownership(self):
         matchups = batch.build_matchups(["td_gdi"], "fransbot", "hard", repeats=4, swap_bots=True)
         side_a_bots = [m["side_a"]["bot"] for m in matchups]
