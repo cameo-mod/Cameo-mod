@@ -476,7 +476,7 @@ yuri_psychictower:
 		RequiresCondition: yuri_upgrade_domination
 	RangeMultiplier@yuri_upgrade_psychicrange:
 		Modifier: 130
-	RangedGpsProvider@yuri_upgrade_psychicvision:
+	CameoRangedGpsProvider@yuri_upgrade_psychicvision:
 		Range: 15000
 		RequiresCondition: yuri_upgrade_psychicvision
 	RenderRangeCircle:

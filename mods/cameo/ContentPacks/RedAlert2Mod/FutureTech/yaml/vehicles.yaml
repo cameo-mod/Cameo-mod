@@ -774,7 +774,7 @@ futuretech_prospectormk2:
 	DetectCloaked:
 		Range: 7500
 		RequiresCondition: !disabled
-	RangedGpsProvider:
+	CameoRangedGpsProvider:
 		Range: 15000
 		RequiresCondition: !disabled
 	RenderDetectionCircle:

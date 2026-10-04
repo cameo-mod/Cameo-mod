@@ -523,7 +523,7 @@ yuri_mastermind:
 		Delay: 1
 		StartIfBelow: 101
 		RequiresCondition: (slaves > 9 && !yuri_upgrade_domination) || (slaves > 12 && yuri_upgrade_domination)
-	RangedGpsProvider@yuri_upgrade_psychicvision:
+	CameoRangedGpsProvider@yuri_upgrade_psychicvision:
 		Range: 15000
 		RequiresCondition: yuri_upgrade_psychicvision
 	ReloadArmamentsBar:

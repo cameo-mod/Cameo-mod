@@ -256,14 +256,14 @@ yuri_psychicsensor:
 		Modifier: 150
 	DetectCloakedMultiplier@yuri_upgrade_psychicvision:
 		Modifier: 150
-	RangedGpsProvider:
+	CameoRangedGpsProvider:
 		Range: 20000
 		RequiresCondition: !disabled && !yuri_upgrade_psychicvision
 	WithRangeCircle:
 		Range: 20000
 		Color: FF000088
 		RequiresCondition: !disabled && !yuri_upgrade_psychicvision
-	RangedGpsProvider@upgrade:
+	CameoRangedGpsProvider@upgrade:
 		Range: 30000
 		RequiresCondition: !disabled && yuri_upgrade_psychicvision
 	WithRangeCircle@upgrade:

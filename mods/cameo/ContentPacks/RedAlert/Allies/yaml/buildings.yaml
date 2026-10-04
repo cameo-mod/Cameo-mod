@@ -104,14 +104,14 @@ ra1_allies_radardome:
 		Modifier: 150
 	DetectCloakedMultiplier@ra1_allies_upgrade_advancedradarsystems:
 		Modifier: 150
-	RangedGpsProvider:
+	CameoRangedGpsProvider:
 		Range: 20000
 		RequiresCondition: !disabled && !ra1_allies_upgrade_advancedradarsystems
 	WithRangeCircle:
 		Range: 20000
 		Color: FF000088
 		RequiresCondition: !disabled && !ra1_allies_upgrade_advancedradarsystems
-	RangedGpsProvider@upgrade:
+	CameoRangedGpsProvider@upgrade:
 		Range: 30000
 		RequiresCondition: !disabled && ra1_allies_upgrade_advancedradarsystems
 	WithRangeCircle@upgrade:

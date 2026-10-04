@@ -126,6 +126,32 @@ spysatelliteuplink), and the 2-map smoke are phase 2 after REF-1 lands (prep: fl
 PREP_2026-10-04_devin-t3verify_bp-impl-phase2.md). Gates: build 0 warn/0 err; 858/858 tests; fog-honesty +
 bot-direct-mutation + ai-arch R1/R2 audits PASS (R3 dead-end flag on `IBotFrontBackAdvisor` expected until phase 2);
 boot gate PASS (isolated support dir `C:/cameo-wt/_support_bp`).
+# 2026-10-04 — Devin-Tier4: RADAR-ALLY — allied GPS providers share their discs (render-side fix)
+
+*Devin.* Engine bug: `OpenRA.Mods.AS RangedGpsDotEffect.cs:87` counted only `p.Owner == toPlayer` providers,
+so a human saw GPS dots inside an ALLY's ranged-GPS disc only when their own provider covered it — the
+`RangedGpsWatcher.GrantedAllies` flag already knew about allied providers but the per-dot gate ignored them.
+Mod-side shadow fix (no engine edit): `CameoRangedGpsDot` + `CameoRangedGpsProvider` (subclasses `RangedGpsProvider`,
+registers with the unchanged shared `RangedGpsWatcher`, own proximity trigger feeds the shadow dot's `Providers`)
++ `CameoRangedGpsDotEffect` (branches mirror the engine's; the provider predicate is widened to
+`p.Owner == toPlayer || toPlayer.IsAlliedWith(p.Owner)`). Render-side only — `state.Visible` is consumed
+exclusively by `RenderAboveShroud` for the local render player; nothing synced reads it.
+9 yaml files swapped `RangedGpsDot`→`CameoRangedGpsDot` / `RangedGpsProvider`→`CameoRangedGpsProvider`
+(defaults + 8 ContentPack sites); `RangedGpsWatcher` untouched.
+
+*Evidence:* build 0/0; `OpenRA.Mods.Cameo.Test` 845/845 (10 new branch tests); fog audit PASS (80 files,
+263 manifested sites, no new omniscience); boot gate PASS (isolated support dir); **live check PASS** —
+dev-harness 1 human + brutal protoss ally + 2 hard enemies on Doubles: the protoss_observer's mobile 20c disc
+produced `radar_ally: dot on asianalliance_militia visible to Multi0 via allied provider` x2 (distinct actors),
+0 exceptions, 0 sync reports. Lesson for the check: shared team vision suppresses the dot for anything an ally
+already sees (`alreadyVisible` branch) — the observable signature needs the annulus (inside disc, outside all
+vision), which a mobile provider creates constantly; a static comm center almost never shows it in a real match.
+
+*Temp scaffolding (NOT committed):* copies of the takeover-smoke hooks (`CameoLobbyAutopilot` in mod.yaml,
+`CameoAutoOrders` in world.yaml, `tools/ai/{takeover_smoke,radar_ally_smoke}.py`) were used for the live run
+and removed before commit — they live on `devin/tier4/takeover-smoke` where they belong.
+Known limitation: dots only render for actors carrying `CameoRangedGpsDot` inside a *Cameo* provider's disc —
+all nine swap sites were verified as the complete set (`RangedGpsWatcher` stays engine).
 
 # 2026-10-03 — coordinator: tier-3 hotfix (INC c) + ORDERS round 2 to NOVA/DAWN/EMBER
 
