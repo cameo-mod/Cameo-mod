@@ -1,3 +1,60 @@
+# 2026-10-04 — Devin-Tier4: AR-T3 — batch --round-trip, AR-2 MP desync regression RED on master, hotspot #1 extraction, module-map consumer fix
+
+*Devin.* `devin/tier4/takeover-smoke` in `C:/cameo-wt/t4-smoke` (base `3ba05ede7`).
+Four pieces of the AR-T3 bundle:
+
+- **`run_ai_match_batch --round-trip`:** new flag runs `round_trip_check.py` on the
+  batch's support dir after `batch_summary.json` is written, stores
+  `summary["round_trip"] = {"exit": rc}`, rewrites the summary and fails the batch
+  on a nonzero checker exit. Extracted into `run_round_trip()` for testability;
+  3 tests in `tools/tests/test_ai_batch_harness.py` (36/36 file PASS).
+- **AR-2 MP regression (`desync` scenario, RED on master as required):** two real
+  clients on opposite teams, `hard` generic bots each side, `AO_tier3_bandits`
+  armed transiently (byte snapshot → apply → finally-restore, launch inside the
+  try). Judge asserts 0 sync reports AND identical plan-bandit pins per bot
+  across clients — pin equality is the honest observable: `Player.cs` activates
+  bot brains host-side only, `Sync.RunUnsynced` wraps bot ticks, and granted
+  conditions carry no `[VerifySync]` state, so a divergent pin can never reach
+  the order hash today (a sync-report-only assert is green-by-construction).
+  **Live run on master: FAIL — Multi2 `steamroller`/`surge` (c0) vs
+  `guerrilla`/`press` (c1); Multi3 `steamroller`/`surge` (c0) vs
+  `turtle`/`balanced` (c1); 0 sync reports, 0 exceptions** — evidence
+  `C:/cameo-wt/_support_t4_smoke/scenario_desync/RESULT.json`. GREEN once the
+  pin moves to shared deterministic random state (AR-2 fix lane). Harness
+  hardening: clients are killed inside `actions` before `finish()` collects, so
+  buffered debug.log pin lines flush to disk before the judge reads them
+  (a live client's log buffer hid c1's pins in an earlier run).
+- **Hotspot #1 `MasterAiBotModule.Rebuild`:** pure decision branches extracted to
+  new `MasterAiEval` (12 functions — urgency latch, coalition-target bias,
+  nemesis override, emergency personality transition, held demands + demand-order
+  gate, region-intel counts, ledger/window deltas, per-game-minute rate, defence
+  fraction + expansion appetite hints, defence request). Rebuild keeps gathering,
+  publication and orders; a REBUILD DECISION TREE comment now documents
+  inputs/outputs/branch ownership and the manifested omniscient read. New
+  `OpenRA.Mods.Cameo.Test/MasterAiEvalTest.cs` — 34 NUnit tests covering every
+  branch incl. boundary/short-circuit/sentinel paths; bit-identical behaviour
+  (no World/Actor/trait reads in the eval file).
+- **`ai_module_map.py` consumer fix (false "no consumer" rows):** two bugs —
+  (a) class body slicing stopped at the next `class` keyword, so a nested helper
+  (`EngineerBotModule`'s `EscortPlan`, `SquadManagerBotModuleCA`'s
+  `MissionAttempt`, `CombatVetoBotModule`'s `CachedVerdict`) swallowed the rest
+  of the module's lookups; spans now close at the next class at the same-or-
+  shallower brace depth. (b) Lookups in non-module classes were invisible;
+  outermost-enclosing-class attribution adds helper consumers
+  (`BaseBuilderQueueManagerCA`, squad states, `BotMissionLog`, `TeamBlackboard`,
+  `BotUnitLeases` statics) shown with `+` in the map. **C2 false positives
+  12→1** — only the genuine phase-A `IBotFrontBackAdvisor` row remains.
+  `audit_bot_wiring.py`/`ai_arch_audit.py` updated for the widened signature.
+
+Gates: build 0 err/0 warn; **967/967 tests** (933 + 34 new); fog audit PASS
+(263 manifested sites, 0 new — eval file registers none); bot-wiring,
+personalities, merged-modules, direct-mutation, ai_arch audits PASS (R3–R6
+informational only); boot gate PASS. Desync stays out of `all` — it is red until
+the AR-2 fix lands. Also surfaced (not this lane): latent
+`TypeDictionary contains multiple instances of PowerInfo` crash in
+`ExpansionPlannerBotModule.IsPowerPlant` on `_ra_doubles` — deterministic on
+that map for a dual-Power-trait actor; crashed two desync runs, filed to lead.
+
 # 2026-10-04 — Devin-Tier4: TAKEOVER-SMOKE (real multi-client takeover smoke, all six scenarios PASS)
 
 *Devin.* `devin/tier4/takeover-smoke` @ `da8595dac` in `C:/cameo-wt/t4-smoke` (base

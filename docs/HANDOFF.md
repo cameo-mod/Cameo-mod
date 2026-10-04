@@ -1,3 +1,36 @@
+## 2026-10-04 — Devin-Tier4: AR-T3 bundle — round-trip gate, AR-2 desync regression RED, hotspot #1, module-map fix
+
+`Agent: Devin-Tier4 · branch devin/tier4/takeover-smoke · worktree C:/cameo-wt/t4-smoke · base master 3ba05ede7`
+
+**INC-ready pieces, NOT merged** (no merge authority; lead decides).
+1. `run_ai_match_batch --round-trip` — runs `round_trip_check.py` on the batch
+   support dir post-summary, records `summary["round_trip"].exit`, fails the
+   batch on nonzero; 3 unit tests (`test_ai_batch_harness.py` 36/36).
+2. **AR-2 red-first MP regression:** `takeover_smoke.py --scenario desync` — 2
+   clients opposite teams + `hard` generic bots + transient `AO_tier3_bandits`
+   (snapshot/apply/finally-restore). Judge = pin equality across clients +
+   0 sync reports. Engine analysis: bots tick host-only inside
+   `Sync.RunUnsynced`, conditions carry no `[VerifySync]` → divergent pins can
+   never reach the order hash; pin divergence IS the defect. **Official run:
+   FAIL `pin divergence (AR-2)` on both bots, 0 exceptions/0 sync reports**
+   (`_support_t4_smoke/scenario_desync/RESULT.json`). Excluded from `all`;
+   goes GREEN when the pin moves to shared deterministic RNG (AR-2 fix lane).
+3. **Hotspot #1 `Rebuild`:** 12 pure decision seams → `MasterAiEval`
+   (bit-identical; gathering/publication stay in `BotSituation.cs`); decision-
+   tree NOTE at `Rebuild`; 34 NUnit tests in `MasterAiEvalTest.cs`.
+4. **`ai_module_map.py` C2 fix:** nested-class body slicing + non-module
+   consumers were invisible → 11/12 "no consumer" rows were false; now
+   brace-depth spans + helper consumers marked `+`. C2 12→1 (only true
+   phase-A `IBotFrontBackAdvisor`).
+
+**Gates:** build 0/0; 967/967 tests; fog/wiring/personalities/merged/mutation/
+arch audits PASS; boot gate PASS.
+**Found, not in scope:** `ExpansionPlannerBotModule.IsPowerPlant` throws
+`TypeDictionary … multiple instances of PowerInfo` on `_ra_doubles` — crashed
+2 desync runs (deterministic map+actor combo); needs an owner.
+**Next:** AR-2 pin→shared-RNG fix lane (this regression turns green on it);
+`--round-trip` opt-in until the lead wires it into the batch defaults.
+
 ## 2026-10-04 — Devin-Tier4: TAKEOVER-SMOKE handed in (all six scenarios PASS on real processes)
 
 `Agent: Devin-Tier4 · branch devin/tier4/takeover-smoke @ da8595dac · worktree C:/cameo-wt/t4-smoke · base devin/t3verify/bot-takeover@9a0348101 (pre-rev-2)`
