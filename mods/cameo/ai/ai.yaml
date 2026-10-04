@@ -42,10 +42,10 @@
 	GrantConditionOnBotOwner@engttransport:
 		Condition: engt-transport
 		Bots: fransbot
-	# INC-3 (the F1 question as a switch): arms the eight Frans pure-service modules on the
-	# bots named below — the arm sets `Bots: hard, exploit_rush, exploit_turtle, exploit_guerrilla`
-	# (genericbot && hardbot, exactly the F1-ctrl population; classic stays Frans-free).
-	# Default grants to `fransbot` only, where the flag is already implied — inert on master.
+	# INC-3 (the F1 question, decided): the eight Frans pure-service modules ship on every
+	# genericbot tier plus the exploit bots — promoted to master default by the INC-1+2+3
+	# A/B (8f5ebe0f7; 'all' 13-3 vs ctrl 12-4). `fransbot` itself carries `enable-fransbot`,
+	# which implies the same flag. Classic stays Frans-free.
 	GrantConditionOnBotOwner@inc3f1:
 		Condition: inc3_frans_services
 		Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla

@@ -46,11 +46,30 @@ SCAN_GLOBS = [
     ("OpenRA.Mods.Cameo/Traits", "*Bot*.cs"),
 ]
 
-PATTERN = re.compile(r"\.(?:CancelActivity|QueueActivity|SetStance)\s*\(")
+PATTERN = re.compile(r"\.(?:CancelActivity|QueueActivity|SetStance|GrantCondition|RevokeCondition)\s*\(")
 LINE_COMMENT = re.compile(r"//.*$")
 
-# Deliberate exceptions — {repo-relative path: (max_sites, reason)}. Empty today.
-ALLOWLIST: dict[str, tuple[int, str]] = {}
+# Deliberate exceptions — {repo-relative path: (max_sites, reason)}.
+# Condition grants fire on the synced entry points (player orders, TraitEnabled) in these
+# files; the count caps them so a NEW call site — especially one reached from host-only
+# IBotTick code — still trips the audit (arch review 2026-10-04 P2).
+ALLOWLIST: dict[str, tuple[int, str]] = {
+    "OpenRA.Mods.Cameo/Traits/BotCounterDemandController.cs":
+        (3, "synced: grants fire from the SetBotCounterDemand order + TraitEnabled"),
+    "OpenRA.Mods.Cameo/Traits/BotInsurance.cs":
+        (2, "synced: grants fire from the insurance order path"),
+    "OpenRA.Mods.Cameo/Traits/DynamicBotInsurance.cs":
+        (2, "synced: grants fire from the insurance order path"),
+    "OpenRA.Mods.Cameo/Traits/BotPersonalityController.cs":
+        (4, "synced: grants fire from SetBotPersonality order + TraitEnabled"),
+    "OpenRA.Mods.Fransbot/Traits/FransEconomicSaturationBotModule.cs":
+        (2, "P2 dormant hazard: SetState grants from host-only IBotTick; no YAML consumer "
+             "exists yet — first consumer desyncs multiplayer (arch review 2026-10-04); "
+             "convert to orders or drop"),
+    "OpenRA.Mods.Fransbot/Traits/FransMcvExpansionManagerBotModule.cs":
+        (2, "P2 dormant hazard: expansion-lock grant from the tick path; no YAML consumer "
+             "exists yet (arch review 2026-10-04); convert to orders or drop"),
+}
 
 
 def iter_sources():
@@ -86,25 +105,32 @@ def find_sites(path: pathlib.Path):
 
 def main() -> int:
     failures: list[str] = []
+    allowlisted: list[str] = []
     scanned = 0
     for relname, path in iter_sources():
         scanned += 1
         sites = list(find_sites(path))
-        allowed, _reason = ALLOWLIST.get(relname, (0, ""))
-        for lineno, call, text in sites[: allowed]:
-            pass  # within the allowlisted count
+        allowed, reason = ALLOWLIST.get(relname, (0, ""))
+        for lineno, call, text in sites[:allowed]:
+            allowlisted.append(f"{relname}:{lineno} — {reason}")
         for lineno, call, text in sites[allowed:]:
             failures.append(f"{relname}:{lineno}: `{text}`")
 
     print("# audit_bot_direct_mutation")
     print()
     print(f"Scanned {scanned} bot-module source files for direct actor "
-          "`CancelActivity`/`QueueActivity`/`SetStance` calls.")
+          "`CancelActivity`/`QueueActivity`/`SetStance` and `GrantCondition`/"
+          "`RevokeCondition` calls.")
     print()
+    if allowlisted:
+        print(f"Allowlisted sites ({len(allowlisted)}):")
+        for a in allowlisted:
+            print(f"- {a}")
+        print()
     if not failures:
-        print("PASS — zero direct-activity sites. Bots drive actors exclusively "
-              "through the order stream; multiplayer stays in sync and the "
-              "order gate (§19.6) sees every issuer/lease pairing.")
+        print("PASS — zero unaudited direct-activity sites. Bots drive actors "
+              "exclusively through the order stream; multiplayer stays in sync "
+              "and the order gate (§19.6) sees every issuer/lease pairing.")
         return 0
 
     print(f"FAIL — {len(failures)} direct-activity site(s) in bot modules "

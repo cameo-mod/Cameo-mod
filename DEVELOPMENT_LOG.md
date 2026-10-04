@@ -18168,3 +18168,43 @@ Branch `devin/dawn/p0-bandit-arm-gate` off master `8e86fca23`.
   `AI_ARCH_COVERAGE.md` regenerated: UNMAPPED 15 -> 0.
 * Verify: build 0E / mod-code warnings 0; 834/834 NUnit; arch audit 0 ERROR / 32 WARN (+1 is the
   pre-existing `ProtectionTypes` R6 master drift); boot_gate.ps1 PASS.
+
+### 2026-10-04 DAWN P2: mutation audit extended to condition grants + INC-3 comment cleanup
+
+Same branch `devin/dawn/p0-bandit-arm-gate` (follow-up on the arch review's P2 items).
+**Supersession note (written after the fact)**: INC-d (`4a23fc88e`, not yet on master) landed
+the coordinator's own P0 fix `6ae83cae1` — `OfferedPersonalityArms` intersection in
+`RulesetLoaded`, which fails loud on all-typo where mine went inert-silent; their version is
+strictly stronger and supersedes this branch's `DrawablePersonalityArms`. The raid-gate map
+pin is unneeded under INC-d ("no map override needed" — ORDERS_2026-10-04). The P3 LAYER_OF
+mapping may also be superseded: Devin Cloud's orders item 5 mandates NEW layer slots
+(staging/learning/veto) rather than mapping into the existing seven. Still unique here: the
+audit extension + allowlist below (Cloud's item 1 covers the same scan — this is a ready
+verified implementation), the boot_gate guard, and the comment fixes.
+* **audit_bot_direct_mutation.py now scans `GrantCondition`/`RevokeCondition`** alongside
+  `CancelActivity`/`QueueActivity`/`SetStance` — condition mutation is the same synced-state
+  hazard class (the review's P2: `IBotTick` is host-only, so a tick-path grant desyncs
+  multiplayer the moment any yaml consumes the condition). The scan found 15 sites; all sit
+  inside an explicit per-file, count-capped `ALLOWLIST` with reasons — a NEW site in any of
+  those files (or any unlisted file) still fails the audit.
+* Site classes: 11 synced (`BotCounterDemandController`/`BotPersonalityController` fire from
+  the `SetBotCounterDemand`/`SetBotPersonality` player orders + `TraitEnabled`; the two
+  insurance controllers from the insurance order path) and 4 P2 dormant hazards
+  (`FransEconomicSaturationBotModule.SetState` x2, `FransMcvExpansionManagerBotModule`
+  expansion-lock x2 — host-only tick-path grants with no yaml consumer today; the allowlist
+  reason says "convert to orders or drop").
+* Report wording fixed: it now enumerates the allowlisted sites and says "zero UNAUDITED
+  sites" — not "zero sites", which would hide the hazard inventory.
+* **Stale INC-3 comments fixed** (P2): `ai.yaml`'s `@inc3f1` header and `fransbot.yaml`'s
+  header still claimed "default grants to fransbot only — inert on master". Since `8f5ebe0f7`
+  promoted group C, `inc3f1` grants `inc3_frans_services` to all ten genericbot tiers + the
+  exploit bots; the comments now record the promotion. Verified every other "fransbot only"
+  comment against its `Bots:` line — they are still accurate (cn2/cn3/plug/armyfirst/etc.
+  remain `Bots: fransbot`; the review only flagged @inc3f1).
+* **boot_gate.ps1 hardened**: Git Bash strips backslashes from an UNQUOTED `-Tree C:\a\b`
+  (delivers `C:ab` — Split-Path parent empty → cryptic Join-Path errors, and the robocopy
+  support-dir copy runs against garbage). The script now aborts cleanly when
+  `engine\bin\OpenRA.exe` is absent under `-Tree`, naming the quoting cause. Also learned:
+  an em-dash inside a double-quoted string in a BOM-less .ps1 decodes to `”` under
+  PowerShell 5.1's ANSI read — a live string delimiter that truncates the literal;
+  ASCII-only inside strings. Quote the path: `-Tree 'C:\cameo-wt\<task>'`.

@@ -25,10 +25,10 @@ Player:
 	# (cand 0-24) sent the whole Frans stack back to donor-only: `hard` keeps
 	# the CA producers/services, and DESIGN 19.1 forbids tier-gated modules
 	# anyway — strength scales via BotLimits, not RequiresCondition.
-	# INC-3 (F1's question as a switch): `inc3_frans_services` re-arms exactly
-	# these eight services on the A/B arm's bot population; granted only via
-	# GrantConditionOnBotOwner@inc3f1 in ai.yaml, which names `fransbot` by
-	# default so master behaviour is unchanged.
+	# INC-3 (F1's question, decided): `inc3_frans_services` ships on every
+	# genericbot tier plus the exploit bots — promoted to master default by the
+	# INC-1+2+3 A/B (8f5ebe0f7); granted via GrantConditionOnBotOwner@inc3f1 in
+	# ai.yaml. Master behaviour IS these services on genericbot.
 	FransCombatIntelBotModule:
 		RequiresCondition: enable-fransbot || inc3_frans_services
 	FransStrategicMapBotModule:

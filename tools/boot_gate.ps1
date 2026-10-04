@@ -6,6 +6,13 @@
 # The support dir is created on first use (Logs/ and Replays/ are not copied). Exit 0 = PASS, 1 = FAIL, 2 = machine at the cap.
 param([Parameter(Mandatory = $true)][string]$Tree, [int]$TimeoutSec = 600, [string]$SupportDir = "")
 
+# Git Bash strips backslashes from unquoted args ("C:\a\b" -> "C:ab"); fail loudly instead of
+# cascading through Split-Path/Join-Path with an empty parent.
+if (-not (Test-Path (Join-Path $Tree "engine\bin\OpenRA.exe"))) {
+	Write-Output "ABORT: -Tree '$Tree' has no engine\bin\OpenRA.exe -- wrong tree, unbuilt engine, or an unquoted path mangled by the shell (quote it: -Tree 'C:\cameo-wt\<task>')."
+	exit 2
+}
+
 if (-not $SupportDir) { $SupportDir = Join-Path (Split-Path $Tree -Parent) ("_support_" + (Split-Path $Tree -Leaf)) }
 if (-not (Test-Path (Join-Path $SupportDir "Content"))) {
 	robocopy (Join-Path $env:APPDATA "OpenRA") $SupportDir /E /XD Logs Replays /NFL /NDL /NJH /NJS /NP | Out-Null
