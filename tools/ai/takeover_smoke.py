@@ -16,6 +16,8 @@ Scenarios (maintainer spec):
   d) 1v1, disconnect                   -> last-player policy takeover
   e) admin client killed               -> controller re-elected, bot plays on
   inert) plan file present, arg absent -> hooks stay inert (the required test)
+  desync) AR-2 regression: hard genericbots on both sides, AO_tier3_bandits
+          armed transiently, two real clients must stay in sync for the window
 
 Per scenario reports PASS/FAIL, the match-record takeover block, sync/exception
 logs. Honors the 3-driver machine cap: refuses to start while existing
@@ -147,8 +149,9 @@ def read_file(path):
 
 
 def collect_evidence(client_dirs, server_dir):
-    """Sync reports, exceptions, match records from every process."""
-    ev = {"sync_reports": [], "exceptions": [], "records": [], "debug_takeover": []}
+    """Sync reports, exceptions, match records, bandit pins from every process."""
+    ev = {"sync_reports": [], "exceptions": [], "records": [], "debug_takeover": [],
+          "bandit_pins": {}}
     for name, d in client_dirs + [("server", server_dir)]:
         for log in glob_logs(d):
             base = os.path.basename(log)
@@ -168,6 +171,13 @@ def collect_evidence(client_dirs, server_dir):
             if base in ("debug.log", "dedicated-debug.log"):
                 for m in re.finditer(r".*(bot_takeover|CAMEO DEV).*", text):
                     ev["debug_takeover"].append((name, m.group(0).strip()))
+                # AR-2 observable: each client resolves its own bandit pin in
+                # synced TraitEnabled from host-local LocalRandom — harvest the
+                # resolve lines so the desync judge can compare per-bot pins.
+                for m in re.finditer(
+                        r"AI (\w+): plan-bandit (personality|plan) arm '([^']+)'", text):
+                    ev["bandit_pins"].setdefault(name, {}).setdefault(
+                        m.group(1), {})[m.group(2)] = m.group(3)
         # dedicated server logs land in <support>/Logs too
         for f in ("dedicated-server.log",):
             p = os.path.join(d, "Logs", f)
@@ -254,17 +264,35 @@ def run_scenario(sc, support_root):
             write_plan(os.path.join(cdir, "devautoorders.plan"), cspec["orders"])
 
     # --- launch --------------------------------------------------------------
-    wait_for_drivers(len(clients), f"scenario {sc}")
-    print(f"[{sc}] support={root} port={port}", flush=True)
-
-    srv = spawn(SERVER_ARGS(port, srv_dir, spec.get("singleplayer", False),
-                            spec.get("autopilot", True), f"t4smoke_{sc}"),
-                cwd=ENGINE, env_extra=mod_search_env())
-    time.sleep(4)  # let the server bind before the first client connects
-
-    procs = {"server": srv}
-    srv_log = os.path.join(srv_dir, "Logs", "dedicated-server.log")
+    # The try wraps the launch too: if a spawn dies while switches are armed
+    # the finally still restores the yaml snapshot.
+    procs = {}
+    yaml_before = {}
     try:
+        if spec.get("switches"):
+            ai_dir = os.path.join(REPO, "mods", "cameo", "ai")
+            for fn in sorted(os.listdir(ai_dir)):
+                if fn.endswith(".yaml"):
+                    p = os.path.join(ai_dir, fn)
+                    with open(p, "rb") as f:
+                        yaml_before[p] = f.read()
+            proc = subprocess.run(
+                [sys.executable,
+                 os.path.join(REPO, "tools", "ai", "apply_increment_switches.py"),
+                 REPO, "--groups", ",".join(spec["switches"])],
+                check=True, capture_output=True, text=True)
+            print(f"  [{sc}] switches armed: {proc.stdout.strip()}", flush=True)
+
+        wait_for_drivers(len(clients), f"scenario {sc}")
+        print(f"[{sc}] support={root} port={port}", flush=True)
+
+        procs["server"] = spawn(
+            SERVER_ARGS(port, srv_dir, spec.get("singleplayer", False),
+                        spec.get("autopilot", True), f"t4smoke_{sc}"),
+            cwd=ENGINE, env_extra=mod_search_env())
+        time.sleep(4)  # let the server bind before the first client connects
+
+        srv_log = os.path.join(srv_dir, "Logs", "dedicated-server.log")
         for i, cname in enumerate(spec["connect_order"]):
             cspec = clients[cname]
             cdir = os.path.join(root, cname)
@@ -286,6 +314,9 @@ def run_scenario(sc, support_root):
         for name, p in procs.items():
             kill_tree(p)
         time.sleep(2)
+        for path, blob in yaml_before.items():
+            with open(path, "wb") as f:
+                f.write(blob)
 
 
 def drive(sc, spec, root, srv_dir, procs):
@@ -456,6 +487,46 @@ def j_defeat(result, ev, blocks):
     return True, "surrender produced defeat, no takeover block"
 
 
+def j_desync(result, ev, blocks):
+    """AR-2 regression judge: with AO_tier3_bandits armed and a hard genericbot
+    on both sides, every client must resolve the SAME bandit pin per bot.
+
+    The red observable is pin equality, not only sync reports: bot brains tick
+    host-side only (Player.cs `IsBot && Game.IsHost`) inside Sync.RunUnsynced,
+    and granted conditions carry no [VerifySync] state — so a divergent pin
+    never reaches the order hash today and a sync-report-only assert is
+    green-by-construction. The pin divergence IS the desync-class bug (every
+    client disagrees about which synced traits are enabled). 0 sync reports
+    is kept as a guard. RED on master, GREEN once the pin moves to shared
+    random state."""
+    if not result["game_started"]:
+        return False, "game never started"
+
+    per_bot = {}
+    for client, pins in ev["bandit_pins"].items():
+        if client == "server":
+            continue
+        for bot, arms in pins.items():
+            per_bot.setdefault(bot, {})[client] = (arms.get("personality"),
+                                                   arms.get("plan"))
+    diffs = {bot: clients for bot, clients in per_bot.items()
+             if len(set(clients.values())) > 1}
+
+    problems = []
+    if ev["exceptions"]:
+        problems.append(f"exception logs: {[n for n, b, _ in ev['exceptions']]}")
+    if ev["sync_reports"]:
+        problems.append(f"DESYNC — sync reports generated: {ev['sync_reports']}")
+    if diffs:
+        problems.append(f"pin divergence (AR-2): {diffs}")
+    if problems:
+        return False, "; ".join(problems)
+    if not per_bot:
+        return False, ("no plan-bandit pins logged on any client — "
+                       "AO_tier3_bandits did not arm or the bandit never ran")
+    return True, f"0 sync reports and identical pins across clients: {per_bot}"
+
+
 SCENARIOS = {
     # a) 2v2, kill c1 -> takeover seat Multi1, controller = c0 (admin, index 0)
     #    No late surrender for c0: its takeover-AI teammate keeps it "not last",
@@ -610,13 +681,44 @@ SCENARIOS = {
         "actions": [],
         "judge": lambda r, ev, b: (True, ""),
     },
+
+    # desync) AR-2 MP regression: humans on OPPOSITE teams, a hard genericbot
+    #    teammate on each, AO_tier3_bandits armed transiently for the launch
+    #    window. Idle humans are fine — the divergence lives in synced trait
+    #    state, not orders. Asserts identical bandit pins across clients AND
+    #    0 sync reports (the pin is the red observable — see j_desync); RED on
+    #    master today, GREEN after the AR-2 fix. Deliberately not in `all`.
+    "desync": {
+        "clients": {
+            "c0": {},
+            "c1": {},
+        },
+        "connect_order": ["c0", "c1"],
+        "map_uid": UID2,
+        "switches": ["AO_tier3_bandits"],
+        "server_plan": [
+            "minclients 2",
+            f"map {UID2}",
+            "slot 0 Multi0",
+            "slot 1 Multi1",
+            "team 0 0",
+            "team 1 1",
+            "bot Multi2 hard",
+            "bot Multi3 hard",
+            "botteam Multi2 0",
+            "botteam Multi3 1",
+        ],
+        "actions": [("wait", 180)],
+        "settle": 30,
+        "judge": j_desync,
+    },
 }
 
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--scenario", required=True,
-                    help="a|b|c|d|e|inert|all")
+                    help="a|b|c|d|e|inert|desync|all (desync stays out of 'all' — it is red until AR-2 lands)")
     ap.add_argument("--support", default=DEFAULT_SUPPORT,
                     help="isolated support root (default %(default)s)")
     args = ap.parse_args()
