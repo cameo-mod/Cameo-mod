@@ -5,15 +5,16 @@ Reads placement records (`kind:"placement"`, `category:"refinery"` in cameo-ai-p
 top-level `expansion` object of situation snapshots (cameo-ai-situations.jsonl) of one or more match dirs
 (a batch support dir, its `Logs/`, or a jsonl file) via ai_log_common.
 
-The law (maintainer ruling 2026-10-04): exactly one refinery per resource field (spreaders whose resources
-are connected count as one field); tier 1 = the first refinery of every unserved field in reach, home first
-then each newly reached field immediately; tier 2 (extra spreaders on an already-served field) only after
-tier 1 is empty; placement gap 0 to the resources (1 only when blocked); genericbot takes NO 'base'-path
-refineries while the law is active.
+The law (maintainer ruling 2026-10-04, "REF-1"): at most one refinery per SPREADER anchor (a spreaderless
+field gets one at its centre); spreaders whose resources connect form one field; tier 1 = the first
+refinery of every unserved field in reach, home first then each newly reached field immediately; tier 2
+(extra spreaders on an already-served field) only after tier 1 is empty; placement gap 0 to the resources
+(1 only when blocked); genericbot takes NO 'base'-path refineries while the law is active.
 
 Per genericbot player x match:
-  refineries_per_anchor_max   most refineries on one field (field_id when logged; anchor_cell on old logs)
-                              -> FAIL when > 1; the snapshot field of the same name is folded in
+  refineries_per_anchor_max   most refineries on one spreader anchor (anchor_cell; field_id is the tier-2
+                              unit and may lawfully hold several refineries) -> FAIL when > 1; the
+                              snapshot field of the same name is folded in
   base_reason_count           refinery placements with reason "base"           -> FAIL when > 0
   resource_gap histogram      placements' resource_gap cells                   -> FAIL when any > 1
   tier_order_violations       tier>=2 placements while fields_in_reach_unserved > 0 at that tick -> FAIL when > 0
@@ -59,10 +60,11 @@ def tier_of(p: dict) -> int | None:
         return int(digits) if digits else None
 
 
-def field_key(p: dict) -> str:
-    """The law's unit: field_id once REF-1 logs it, else the spreader anchor cell."""
-    v = p.get("field_id")
-    return str(v) if v not in (None, "") else str(p.get("anchor_cell") or "?")
+def anchor_key(p: dict) -> str:
+    """The law's unit is the SPREADER anchor, never the field: tier-2 refineries are extra spreaders on an
+    already-served field, so a field_id may legitimately appear on several refineries."""
+    v = p.get("anchor_cell")
+    return str(v) if v not in (None, "") else str(p.get("field_id") or "?")
 
 
 def check_match(snaps: list[dict], places: list[dict], warn_latency: int = DEFAULT_WARN_LATENCY) -> dict:
@@ -70,8 +72,8 @@ def check_match(snaps: list[dict], places: list[dict], warn_latency: int = DEFAU
     refs = sorted((p for p in places if p.get("category") == "refinery"), key=lambda p: p["tick"])
     ex = [s["expansion"] for s in snaps]
 
-    # refineries per anchor/field: computed from placements AND the snapshot's own maximum
-    per_field = collections.Counter(field_key(p) for p in refs)
+    # refineries per spreader anchor: computed from placements AND the snapshot's own maximum
+    per_field = collections.Counter(anchor_key(p) for p in refs)
     computed_max = max(per_field.values(), default=0)
     snapshot_max = max((e.get("refineries_per_anchor_max", 0) for e in ex), default=0)
     ref_max = max(computed_max, snapshot_max) if (refs or any("refineries_per_anchor_max" in e for e in ex)) else None

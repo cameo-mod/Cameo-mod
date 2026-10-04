@@ -96,16 +96,26 @@ class RefineryLawCheckTests(unittest.TestCase):
         self.assertEqual(r["tier_order_violations"], 1)
 
     def test_tier2_when_empty_is_clean(self):
+        # legal tier-2: a SECOND spreader on the already-served field, claimed after tier 1 drained
         res = self.build_one(
             [snap("g1", "Multi0", 100, fields_in_reach_unserved=1),
              snap("g1", "Multi0", 300, fields_in_reach_unserved=0)],
             [place("g1", "Multi0", 200, field_id="f1", tier=1),
+             place("g1", "Multi0", 350, field_id="f1", tier=2, resource_gap=0, anchor_cell="9,55")])
+        r = self.row(res)
+        self.assertEqual(r["refineries_per_anchor_max"], 1)  # per-anchor, never per-field
+        self.assertEqual(r["verdict"], "PASS")
+        self.assertEqual(r["tier_order_violations"], 0)
+
+    def test_two_refineries_one_spreader_fails(self):
+        # same field, same anchor_cell = two refineries on one spreader -> FAIL
+        res = self.build_one(
+            [snap("g1", "Multi0", 100, fields_in_reach_unserved=0)],
+            [place("g1", "Multi0", 200, field_id="f1", tier=1),
              place("g1", "Multi0", 350, field_id="f1", tier=2, resource_gap=0)])
         r = self.row(res)
-        # one field, two refineries -> the per-field cap still fails (law's real unit)
         self.assertEqual(r["refineries_per_anchor_max"], 2)
         self.assertEqual(r["verdict"], "FAIL")
-        self.assertEqual(r["tier_order_violations"], 0)
 
     def test_old_log_fields_mark_na_and_never_pass(self):
         p = place("g1", "Multi0", 200)
