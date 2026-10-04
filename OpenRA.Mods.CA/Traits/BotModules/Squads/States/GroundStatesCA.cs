@@ -615,28 +615,19 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			// -- Try make way for leader
 			// -- If make way cannot solve this problem, we kick stuck unit
 			// 3. If leader can move and leader should go, we consider this squad has no problem on stuck.
-			if (leaderStopCheck && leaderWaitCheck)
-				shouldKickStuckPossibility++;
-			else if (leaderStopCheck && !leaderWaitCheck)
-			{
-				if (makeWay != -1)
-					shouldMakeWayPossibility++;
-				else
-					shouldKickStuckPossibility++;
-			}
-			else if (!leaderStopCheck && !leaderWaitCheck)
-			{
-				shouldMakeWayPossibility = 0;
-				shouldKickStuckPossibility = 0;
-			}
+			(shouldMakeWayPossibility, shouldKickStuckPossibility) = MarchEvalCA.StuckCountersNext(
+				leaderStopCheck, leaderWaitCheck, makeWay == -1,
+				shouldMakeWayPossibility, shouldKickStuckPossibility);
 
 			// Check if we need to make way for leader or kick stuck units
-			if (shouldMakeWayPossibility >= MaxMakeWayPossibility)
+			var stuckAction = MarchEvalCA.StuckActionFor(shouldMakeWayPossibility,
+				shouldKickStuckPossibility, MaxMakeWayPossibility, MaxSquadStuckPossibility);
+			if (stuckAction == MarchStuckAction.MakeWay)
 			{
 				AIUtils.BotDebug("AI ({0}): Make way for squad leader.", owner.Bot.Player.ClientIndex);
 				makeWay = MakeWayTicks;
 			}
-			else if (shouldKickStuckPossibility >= MaxSquadStuckPossibility)
+			else if (stuckAction == MarchStuckAction.KickStuck)
 			{
 				AIUtils.BotDebug("AI ({0}): Kick stuck units from squad.", owner.Bot.Player.ClientIndex);
 				kickStuck = KickStuckTicks;
@@ -661,18 +652,11 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				var locomotor = leader.Actor.TraitOrDefault<Mobile>()?.Locomotor;
 				if (currentRoute == null && locomotor != null)
 				{
-					var maxRoutes = 2;
-					var useIndirectRoutes = false;
-
-					if (owner.Type == SquadCAType.Harass)
-						maxRoutes = owner.SquadManager.Info.HarassRouteCount;
-					else if (owner.Type == SquadCAType.Guerrilla)
-						maxRoutes = 3;
-					else if (owner.SquadManager.Info.IndirectRouteChance > 0 && owner.World.LocalRandom.Next(100) < owner.SquadManager.Info.IndirectRouteChance)
-					{
-						useIndirectRoutes = true;
-						maxRoutes = 7;
-					}
+					// The roll stays lazy inside the chance gate (Func) — an eager draw would
+					// desync the shared random stream whenever the gate is off.
+					var (maxRoutes, useIndirectRoutes) = MarchEvalCA.RouteParams(owner.Type,
+						owner.SquadManager.Info.HarassRouteCount, owner.SquadManager.Info.IndirectRouteChance,
+						() => owner.World.LocalRandom.Next(100));
 
 					if (maxRoutes > 2 || useIndirectRoutes)
 					{
@@ -709,8 +693,9 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			// Advance through route waypoints
 			if (currentRoute != null && currentWaypointIndex < currentRoute.Count - 1)
 			{
-				if ((leader.Actor.Location - currentRoute[currentWaypointIndex]).LengthSquared < 16
-					|| owner.World.WorldTick > lastWaypointUpdateTick + 625)
+				if (MarchEvalCA.AdvanceWaypoint(
+					(leader.Actor.Location - currentRoute[currentWaypointIndex]).LengthSquared,
+					owner.World.WorldTick, lastWaypointUpdateTick))
 				{
 					currentWaypointIndex++;
 					lastWaypointUpdateTick = owner.World.WorldTick;
@@ -735,14 +720,15 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				// on every squad tick. A freshly armed kickStuck also releases: the kick block
 				// drives the leader for its duration, matching the old code's detection-tick
 				// AttackMove.
-				if (!leaderWaiting && leaderWaitCheck && kickStuck <= 0)
+				if (!leaderWaiting && MarchEvalCA.LeaderWaitLatches(leaderWaitCheck, kickStuck > 0))
 				{
 					leaderWaiting = true;
 					leaderOrderCell = null;
 					owner.Bot.QueueOrder(new Order("Stop", leader.Actor, false));
 				}
-				else if (leaderWaiting && (kickStuck > 0 || !owner.Units.Any(u =>
-					(u.Actor.CenterPosition - leader.Actor.CenterPosition).HorizontalLengthSquared > occupiedArea * 3)))
+				else if (leaderWaiting && !MarchEvalCA.LeaderWaitHolds(
+					owner.Units.Any(u => (u.Actor.CenterPosition - leader.Actor.CenterPosition).HorizontalLengthSquared > occupiedArea * 3),
+					kickStuck > 0))
 				{
 					leaderWaiting = false;
 				}
@@ -840,20 +826,14 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				if (u.Actor == leader.Actor)
 					continue;
 
-				if (!roleMap.TryGetValue(u.Actor.Info.Name, out var roles))
+				var roles = roleMap.TryGetValue(u.Actor.Info.Name, out var actorRoles) ? actorRoles : null;
+				switch (MarchEvalCA.BucketFor(roles))
 				{
-					trailing.Add(u);
-					continue;
+					case MarchBucket.Frontline: frontline.Add(u); break;
+					case MarchBucket.Scout: scouts.Add(u); break;
+					case MarchBucket.AntiAir: antiAir.Add(u); break;
+					default: trailing.Add(u); break;
 				}
-
-				if (roles.Contains(BotUnitRole.Frontline))
-					frontline.Add(u);
-				else if (roles.Contains(BotUnitRole.Scout))
-					scouts.Add(u);
-				else if (roles.Contains(BotUnitRole.AntiAir))
-					antiAir.Add(u);
-				else
-					trailing.Add(u);
 			}
 
 			if (frontline.Count == 0)
@@ -870,7 +850,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 			var centroid = new WPos((int)(cx / (frontline.Count + 1)), (int)(cy / (frontline.Count + 1)), 0);
 			var axis = routePos - centroid;
-			if (axis.HorizontalLengthSquared < (long)WDist.FromCells(2).Length * WDist.FromCells(2).Length)
+			if (!MarchEvalCA.AxisUsable(axis.HorizontalLengthSquared))
 				return false;
 
 			var axisLen = axis.HorizontalLength;
@@ -885,7 +865,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			foreach (var u in frontline)
 			{
 				var delta = routePos - u.Actor.CenterPosition;
-				var rem = ((long)delta.X * axis.X + (long)delta.Y * axis.Y + (long)delta.Z * axis.Z) / axisLen;
+				var rem = MarchEvalCA.AxisRemaining(delta.X, delta.Y, delta.Z, axis.X, axis.Y, axis.Z, axisLen);
 				if (rem > slowestRemaining)
 				{
 					slowestRemaining = rem;
@@ -902,27 +882,18 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			var stalledRearUnderFire = false;
 			if (rear != null)
 			{
-				if (rear.Actor.CenterPosition == formationRearPos)
-				{
-					formationRearStallTicks++;
-					var rearHealth = rear.Actor.TraitOrDefault<IHealth>();
-					if (rearHealth != null)
-					{
-						if (formationRearHp >= 0 && rearHealth.HP < formationRearHp)
-							stalledRearUnderFire = true;
-
-						formationRearHp = rearHealth.HP;
-					}
-				}
-				else
-				{
-					formationRearStallTicks = 0;
+				var sameRearPos = rear.Actor.CenterPosition == formationRearPos;
+				var rearHealth = sameRearPos ? rear.Actor.TraitOrDefault<IHealth>() : null;
+				var (stallTicks, prevHp, underFire) = MarchEvalCA.RearStallNext(sameRearPos,
+					formationRearStallTicks, rearHealth != null, rearHealth?.HP ?? 0, formationRearHp);
+				formationRearStallTicks = stallTicks;
+				formationRearHp = prevHp;
+				stalledRearUnderFire = underFire;
+				if (!sameRearPos)
 					formationRearPos = rear.Actor.CenterPosition;
-					formationRearHp = -1;
-				}
 
-				if (formationRearStallTicks >= 25)
-					lead = WDist.FromCells(owner.SquadManager.Info.FormationMaxStalledLeadCells).Length;
+				lead = MarchEvalCA.LeadForStall(formationRearStallTicks, maxLead,
+					WDist.FromCells(owner.SquadManager.Info.FormationMaxStalledLeadCells).Length);
 			}
 
 			// AR-S (switch BJ_squad_hysteresis): armed = dead band + transition-only orders;
@@ -939,7 +910,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			foreach (var u in frontline)
 			{
 				var delta = routePos - u.Actor.CenterPosition;
-				var rem = ((long)delta.X * axis.X + (long)delta.Y * axis.Y + (long)delta.Z * axis.Z) / axisLen;
+				var rem = MarchEvalCA.AxisRemaining(delta.X, delta.Y, delta.Z, axis.X, axis.Y, axis.Z, axisLen);
 				var wasHolding = formationOrders.TryGetValue(u.Actor, out var prev) && prev.Class == FormationClass.Hold;
 
 				// AR-S armed path: a wounded or under-fire member is pulled back this
