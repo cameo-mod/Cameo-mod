@@ -101,16 +101,28 @@ namespace OpenRA.Mods.Cameo.Traits
 			if (written)
 				return;
 
-			if (!eligibleAtWorldLoad || world.Type != WorldType.Regular || world.IsReplay || !IsLogOwner())
+			if (!eligibleAtWorldLoad || world.Type != WorldType.Regular || world.IsReplay)
 			{
 				written = true;
 				return;
 			}
 
+			// Not (yet) the writing process: a client that is neither host nor the current
+			// controller stays silent but keeps the record open — it may be elected after
+			// the admin drops, and latching written here would lose that forever
+			// (boss_review T1/T4).
+			if (!IsLogOwner())
+				return;
+
 			pendingText ??= BuildLog(world);
 			if (string.IsNullOrEmpty(pendingText))
 			{
-				written = true;
+				// An empty record only means nothing loggable has resolved yet. It latches
+				// "done" ONLY when nothing more can appear: while a bound human seat can
+				// still convert to a takeover bot the capture stays open (boss_review T1).
+				pendingText = null;
+				if (!OpenTakeoverSeats())
+					written = true;
 				return;
 			}
 
@@ -316,9 +328,31 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		bool AllBotsResolved(World world)
 		{
-			return world.Players
-				.Where(IsLoggedPlayer)
-				.All(p => p.WinState != WinState.Undefined);
+			// Capture waits for every logged seat to resolve AND for the conversion window
+			// to close: a lobby bot can finish while a human seat can still surrender into
+			// a takeover bot whose record must be written too (boss_review T1).
+			return CaptureReady(world.Players.Where(IsLoggedPlayer).Select(p => p.WinState), OpenTakeoverSeats());
+		}
+
+		internal static bool CaptureReady(IEnumerable<WinState> loggedStates, bool openTakeoverSeats)
+		{
+			return !openTakeoverSeats && loggedStates.All(s => s != WinState.Undefined);
+		}
+
+		bool OpenTakeoverSeats()
+		{
+			return takeover != null && takeover.HasOpenSeats;
+		}
+
+		static int LoggedTeam(World world, BotTakeoverTracker tracker, OpenRA.Player player)
+		{
+			// Lobby teams live on client rows: a departed takeover seat's row is gone, so the
+			// tracker's load-time snapshot (lobby teams for every slot incl. bots, boss_review
+			// T2) is the source of truth when mounted. Without it, the live row still serves.
+			if (tracker != null)
+				return tracker.TeamOfPlayer(player);
+
+			return world.LobbyInfo.ClientWithIndex(player.ClientIndex)?.Team ?? player.PlayerReference.Team;
 		}
 
 		internal static bool Eligible(WorldType type, bool replay, bool loadingSave, bool host)
@@ -338,7 +372,7 @@ namespace OpenRA.Mods.Cameo.Traits
 				var recorder = player.PlayerActor.TraitOrDefault<AiMatchLogRecorder>();
 				var stats = player.PlayerActor.TraitOrDefault<PlayerStatistics>();
 				var resources = player.PlayerActor.TraitOrDefault<PlayerResources>();
-				var team = world.LobbyInfo.ClientWithIndex(player.ClientIndex)?.Team ?? 0;
+				var team = LoggedTeam(world, takeover, player);
 				TakeoverRecord takeoverRecord = null;
 				takeover?.TryGetTakeoverRecord(player, out takeoverRecord);
 
@@ -405,15 +439,15 @@ namespace OpenRA.Mods.Cameo.Traits
 				if (OpenRA.Mods.CA.Traits.BotUnitLeases.Of(player) != null)
 					AppendOrderGate(lines, player.PlayerActor.TraitsImplementing<ModularBot>().FirstOrDefault(b => b.IsEnabled));
 
-				AppendRelationships(lines, world, player, "opponents", false);
-				AppendRelationships(lines, world, player, "allies", true);
+				AppendRelationships(lines, world, takeover, player, "opponents", false);
+				AppendRelationships(lines, world, takeover, player, "allies", true);
 				lines.Append("}\n");
 			}
 
 			return lines.ToString();
 		}
 
-		static void AppendRelationships(StringBuilder builder, World world, OpenRA.Player subject, string property, bool allies, bool first = false)
+		static void AppendRelationships(StringBuilder builder, World world, BotTakeoverTracker tracker, OpenRA.Player subject, string property, bool allies, bool first = false)
 		{
 			AppendArrayPropertyStart(builder, property, first);
 			// Evaluate stances from the masks assigned at world creation rather than
@@ -432,7 +466,7 @@ namespace OpenRA.Mods.Cameo.Traits
 					builder.Append(',');
 
 				var player = relationships[i];
-				var team = world.LobbyInfo.ClientWithIndex(player.ClientIndex)?.Team ?? 0;
+				var team = LoggedTeam(world, tracker, player);
 				AppendObjectStart(builder);
 				AppendString(builder, "name", player.InternalName, true);
 				AppendBoolean(builder, "is_bot", player.IsBot);

@@ -224,5 +224,110 @@ namespace OpenRA.Mods.Cameo.Test
 			((IResolveOrder)probe).ResolveOrder(null, OrderWithString("Move"));
 			Assert.That(probe.TakeoverCalls, Is.EqualTo(0));
 		}
+
+		// ---------------------------------------------------------------------
+		// boss_review T1-T4 corrections (2026-10-04).
+		// ---------------------------------------------------------------------
+
+		[Test]
+		public void LobbyTeamsComeFromClientsNotMapReferences()
+		{
+			// T2: the engine builds players from the unchanged map reference (all map
+			// teams 0) and applies lobby teams only via SetupPlayerMasks. The snapshot
+			// must read the client row for EVERY slot-bound player, bots included.
+			var lobby = new Session();
+			lobby.Clients.Add(new Session.Client { Index = 1, Slot = "human_slot", Team = 1 });
+			lobby.Clients.Add(new Session.Client { Index = 2, Slot = "bot_a", Bot = "hard", Team = 2 });
+			lobby.Clients.Add(new Session.Client { Index = 3, Slot = "bot_b", Bot = "hard", Team = 2 });
+			lobby.Clients.Add(new Session.Client { Index = 4 });                 // spectator: no slot
+
+			Assert.That(BotTakeoverTracker.LobbyTeamOf(lobby, "human_slot", 0), Is.EqualTo(1));
+			Assert.That(BotTakeoverTracker.LobbyTeamOf(lobby, "bot_a", 0), Is.EqualTo(2));
+			Assert.That(BotTakeoverTracker.LobbyTeamOf(lobby, "bot_b", 0), Is.EqualTo(2));
+			Assert.That(BotTakeoverTracker.LobbyTeamOf(lobby, "map_side_player", 7), Is.EqualTo(7),
+				"players with no lobby client keep their map team");
+		}
+
+		[Test]
+		public void HumanVsTwoBotTeamIsTwoTeamsLastSurrenderDefeats()
+		{
+			// T2 regression: human on team 1 vs two lobby bots on team 2 is TWO teams.
+			// Reading map teams would give three solo seats -> a wrongful "3-team" takeover.
+			var seats = new[] { Seat("human", 1), Seat("bot_a", 2), Seat("bot_b", 2) };
+
+			Assert.That(BotTakeoverTracker.CountTeamsAlive(seats), Is.EqualTo(2));
+			Assert.That(BotTakeoverTracker.HasUndefeatedTeammate(seats, Seat("human", 1)), Is.False);
+			Assert.That(
+				BotTakeoverTracker.Decide(
+					BotTakeoverTracker.CountTeamsAlive(seats), false, TakeoverTrigger.Surrender,
+					TakeoverLastPlayerPolicy.Takeover),
+				Is.EqualTo(TakeoverDecision.Defeat),
+				"the last human's surrender defeats — a lobby bot team is not a third team");
+		}
+
+		[Test]
+		public void ResolvedBotConditionsIncludeLobbyGrants()
+		{
+			// T3: a real hard bot would carry inc3_frans_services (ai.yaml GrantConditionOnBotOwner
+			// names hard); the takeover seat resolves the same set or the Frans services never wake.
+			var grant = new GrantConditionOnBotOwnerInfo();
+			FieldLoader.LoadFieldOrProperty(grant, "Condition", "inc3_frans_services");
+			FieldLoader.LoadFieldOrProperty(grant, "Bots", "hard,fransbot");
+
+			var resolved = BotTakeoverTracker.ResolvedBotConditions(
+				new[] { "genericbot", "hardbot" }, new[] { grant }, "hard");
+			Assert.That(resolved, Is.EquivalentTo(new[] { "genericbot", "hardbot", "inc3_frans_services" }));
+
+			var otherType = BotTakeoverTracker.ResolvedBotConditions(
+				new[] { "genericbot" }, new[] { grant }, "easy");
+			Assert.That(otherType, Is.EquivalentTo(new[] { "genericbot" }),
+				"a bot type the grant does not name gets no extra condition");
+		}
+
+		[Test]
+		public void OpenSeatClosesOnResolveDisconnectOrTakeover()
+		{
+			// T1: a bound human seat keeps the match-log capture open only while it
+			// can still convert; none of the closed states can reopen.
+			Assert.That(BotTakeoverTracker.SeatStillOpen(WinState.Undefined, false, true), Is.True);
+			Assert.That(BotTakeoverTracker.SeatStillOpen(WinState.Lost, false, true), Is.False, "defeated");
+			Assert.That(BotTakeoverTracker.SeatStillOpen(WinState.Undefined, true, true), Is.False, "already a bot");
+			Assert.That(BotTakeoverTracker.SeatStillOpen(WinState.Undefined, false, false), Is.False,
+				"disconnected without takeover cannot convert later");
+		}
+
+		[Test]
+		public void CaptureWaitsForLoggableResolutionAndOpenSeats()
+		{
+			// T1: lobby bots resolving early must not close the record while a human seat
+			// can still convert — its later takeover record would never be written.
+			Assert.That(AiMatchLogWriter.CaptureReady(new[] { WinState.Lost, WinState.Won }, true), Is.False,
+				"resolved lobby bots + open seat: keep waiting");
+			Assert.That(AiMatchLogWriter.CaptureReady(new[] { WinState.Lost, WinState.Won }, false), Is.True);
+			Assert.That(AiMatchLogWriter.CaptureReady(new[] { WinState.Undefined }, false), Is.False,
+				"an unresolved logged seat still waits");
+			Assert.That(AiMatchLogWriter.CaptureReady(new WinState[0], false), Is.True,
+				"no logged seats and none pending: close");
+			Assert.That(AiMatchLogWriter.CaptureReady(new WinState[0], true), Is.False,
+				"a human-only match with possible takeovers stays open");
+		}
+
+		[Test]
+		public void SpectatorNeverControlsButCountsAsConnected()
+		{
+			// T4: connectivity includes spectators (a spectator admin is visible for log
+			// ownership) while electability stays bound-playable only.
+			var connected = new HashSet<int> { 0, 2, 3 };           // 0 = spectator admin, 2/3 bound players
+			var bound = new HashSet<int> { 2, 3 };
+			var electee = BotTakeoverTracker.ElectController(
+				BotTakeoverTracker.ElectableClients(connected, bound, new HashSet<int>()));
+
+			Assert.That(electee, Is.EqualTo(2), "the spectator admin is never elected controller");
+			Assert.That(connected.Contains(0), Is.True, "the spectator admin still reads as connected");
+
+			var afterTwo = BotTakeoverTracker.ElectController(
+				BotTakeoverTracker.ElectableClients(connected, bound, new HashSet<int> { 2 }));
+			Assert.That(afterTwo, Is.EqualTo(3), "a taken-over bound client leaves the electable set");
+		}
 	}
 }

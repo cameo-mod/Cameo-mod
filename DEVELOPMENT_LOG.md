@@ -1,3 +1,31 @@
+# 2026-10-04 — Devin-T3Verify: TAKEOVER review corrections T1-T4 (boss static review @9a0348101)
+
+*Devin.* `devin/t3verify/bot-takeover` in `C:/cameo-wt/takeover`. Four findings from the independent review
+(`C:/cameo-wt/boss_review/docs/review_2026_10_04_takeover_bp.md`, fleet `STATUS_2026-10-04_boss_independent_review.md`),
+each with regression tests:
+**T1** `AiMatchLogWriter`: capture stayed open only until `AllBotsResolved` — `All(empty)` on a human-only match closed
+it at tick 0, and `!IsLogOwner()`/empty-log paths latched `written` forever. Now `CaptureReady` waits for logged seats
+to resolve AND `tracker.HasOpenSeats` (bound human, undefeated, still connected, not taken over) to close; non-owner
+processes return silently instead of latching (a client may be elected after the admin drops); an empty build keeps
+open while seats can still convert.
+**T2** `BotTakeoverTracker`: `teamOf` snapshotted map `PlayerReference.Team` and overwrote only for `NonBotPlayers`, so
+lobby bots kept map team 0 — a human-vs-2-bots lobby read 3 teams and a last-human surrender would wrongly take over.
+Now `LobbyTeamOf` reads `ClientInSlot(slot).Team` for EVERY slot-bound player (the engine only applies lobby teams in
+`SetupPlayerMasks`); the match log's team fields read the snapshot via `TeamOfPlayer` because a departed takeover seat's
+client row is gone.
+**T3** takeover grants were the fixed `{genericbot,hardbot}`: a real hard bot also carries `inc3_frans_services`
+(`GrantConditionOnBotOwner@inc3f1`, ai.yaml) which arms eight Frans service modules — R6 parity broken. Now
+`ResolvedBotConditions` resolves `info.Conditions` ∪ matching `GrantConditionOnBotOwner` grants from the player actor's
+rules — identical on every client.
+**T4** `connectedClients` was seeded from `NonBotPlayers`, so a spectator admin read `AdminConnected=false` and both the
+admin's and controller's processes could write the record. Now seeded from `NonBotClients` (whole human session);
+electability stays bound-playable only (`boundClients` + `ElectableClients`). Residual, documented in AI_MATCH_LOG.md +
+DESIGN §19.14: a spectator's DEPARTURE produces no playable player, so the synced disconnect notify never reaches the
+tracker — a departed spectator admin stays AdminConnected and the record stays on that process (engine-pin limitation;
+playable admins hand over correctly).
+Gates: build 0 warn/0 err, 852/852 tests (+6), fog-honesty PASS, bot direct-mutation PASS, arch audit R1/R2 ok
+(R3/R4 warnings pre-existing, none in touched files), boot gate PASS (menu, 0 new exceptions, isolated support dir).
+
 # 2026-10-04 — Devin-T3Verify: TAKEOVER-IMPL phase 1 (hard AI replaces disconnected/surrendered players)
 
 *Devin.* `devin/t3verify/bot-takeover` in `C:/cameo-wt/takeover` (base origin/master `8e86fca23`). Phase 1 of the

@@ -5375,12 +5375,19 @@ turning into a 2v1. The hard AI has no production speed/cost bonuses, so that is
 - **R7.** Lobby checkbox "Replace disconnected players with AI", default ON, lobby-synced.
 
 Implementation: `BotTakeoverTracker` (world; synced connected-set and takeover records; controller = lowest index of
-connected non-spectating humans who are not taken-over seats, re-elected on every synced disconnect), `CameoValidateOrder`
+connected bound clients who are not taken-over seats — spectators never control — re-elected on every synced disconnect),
+`CameoValidateOrder`
 (shadows `ValidateOrder`; a takeover seat accepts orders only from the elected controller, so the surrendered human's
 own orders are rejected), `CameoMissionObjectives` (re-lists `IResolveOrder`; intercepts Surrender before `ForceDefeat`),
-and direct grants of the `genericbot` + `hardbot` conditions plus `IBot.Activate` on the elected client. Single-player
+and grants of the `genericbot` + `hardbot` conditions PLUS every `GrantConditionOnBotOwner` whose `Bots` list names the
+takeover type (e.g. `inc3_frans_services` for `hard`), resolved from the rules so the seat carries exactly a lobby hard
+bot's set (R6), plus `IBot.Activate` on the elected client. Teams are snapshotted at load from the lobby client rows for
+EVERY slot-bound player, bots included — a lobby bot never keeps its map team id (the engine only applies lobby teams in
+`SetupPlayerMasks`). Single-player
 games keep the classic path. The match log records `takeover.taken_over_at`, `trigger`, `bot_type`,
-`controller_client`, and log ownership follows the elected controller. Phase 2 (re-hosting pre-existing lobby bots
+`controller_client`, keeps its capture open while a bound human seat can still convert, and log ownership follows the
+elected controller — spectator admins count as connected; their departure has no synced notify and stays pinned
+(engine limitation, AI_MATCH_LOG.md). Phase 2 (re-hosting pre-existing lobby bots
 when their controller drops) is out of scope.
 
 ## 20. AI bot unit compositions

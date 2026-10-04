@@ -94,7 +94,13 @@ schema-1 records in the same file remain valid and the aggregator pools both
   human). Any record carrying this block must be excluded from learning and A/B
   pools. Log ownership follows the elected takeover controller, not just the
   lobby admin, so a dedicated-server match keeps its record when the admin
-  drops mid-game.
+  drops mid-game. A spectator admin counts as connected for this: connectivity
+  is the whole human session (all non-bot clients), while only bound players
+  can elect the controller. Known engine-pin limitation: a spectator's
+  DEPARTURE produces no playable player, so the synced disconnect notify never
+  reaches the tracker — a departed spectator admin still reads AdminConnected
+  and the record stays on that dead process. A playable admin's departure is
+  tracked normally and hands the record to the controller.
 
 - `record_id` — `game_uid + "|" + player.InternalName`. When `game_uid` is empty
   (skirmish without one), substitute a per-match `Guid.NewGuid().ToString("N")`

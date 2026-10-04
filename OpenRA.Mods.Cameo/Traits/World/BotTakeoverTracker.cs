@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Linq;
 using OpenRA.Graphics;
 using OpenRA.Mods.Common.Traits;
+using OpenRA.Network;
 using OpenRA.Traits;
 
 namespace OpenRA.Mods.Cameo.Traits
@@ -95,6 +96,7 @@ namespace OpenRA.Mods.Cameo.Traits
 		// Synced state only: the lobby-bound humans still connected, the lobby client each seat
 		// belonged to, team ids frozen at load, and the takeover seats.
 		readonly HashSet<int> connectedClients = [];
+		readonly HashSet<int> boundClients = [];
 		readonly HashSet<int> takenOverClients = [];
 		readonly Dictionary<int, OpenRA.Player> boundPlayers = [];
 		readonly Dictionary<OpenRA.Player, int> teamOf = [];
@@ -115,6 +117,10 @@ namespace OpenRA.Mods.Cameo.Traits
 		public bool AdminConnected => adminClientIndex >= 0 && connectedClients.Contains(adminClientIndex);
 		public bool IsTakenOver(OpenRA.Player p) => records.ContainsKey(p);
 		public bool TryGetTakeoverRecord(OpenRA.Player p, out TakeoverRecord record) => records.TryGetValue(p, out record);
+
+		// The load-time lobby-team snapshot survives the departure of the player's client row —
+		// the AI match log uses it for takeover seats (boss_review T2).
+		public int TeamOfPlayer(OpenRA.Player p) => teamOf.GetValueOrDefault(p, p.PlayerReference.Team);
 		public IEnumerable<KeyValuePair<OpenRA.Player, TakeoverRecord>> Records => records;
 
 		public BotTakeoverTracker(BotTakeoverTrackerInfo info)
@@ -134,22 +140,34 @@ namespace OpenRA.Mods.Cameo.Traits
 			// Session clients and world players are identical on every client at load: snapshotting
 			// them here keeps every later decision on synced data. Client.State is UI-side and unsynced,
 			// so connectivity comes from our own set, updated at the synced disconnect marker.
-			foreach (var client in w.LobbyInfo.NonBotPlayers)
+			// Connectivity is the whole human session — spectators (a spectator admin included) are
+			// connected clients too, even though they bind no player (boss_review T4). Caveat: a
+			// spectator's DEPARTURE produces no playable player, so the synced disconnect notify never
+			// reaches it — the set can retain a ghost spectator. Harmless for controller eligibility
+			// (only bound clients elect) but a departed spectator admin still reads AdminConnected and
+			// keeps the match record on a dead process: an engine-pin limitation, not a choice.
+			foreach (var client in w.LobbyInfo.NonBotClients)
 			{
 				connectedClients.Add(client.Index);
+				if (client.Slot == null)
+					continue;
+
 				var bound = w.Players.FirstOrDefault(p => p.InternalName == client.Slot);
 				if (bound != null)
+				{
 					boundPlayers[client.Index] = bound;
+					boundClients.Add(client.Index);
+				}
 			}
 
 			adminClientIndex = w.LobbyInfo.Clients.FirstOrDefault(c => c.IsAdmin)?.Index ?? -1;
 
+			// Teams come from the lobby client for EVERY slot-bound player, bots included (boss_review
+			// T2): the engine builds players from the unchanged map reference (CreateMapPlayers) and
+			// applies lobby teams only via SetupPlayerMasks — a lobby bot would otherwise keep its map
+			// team id, and a human-vs-bots lobby would read one team too many.
 			foreach (var p in w.Players)
-				teamOf[p] = p.PlayerReference.Team;
-
-			foreach (var client in w.LobbyInfo.NonBotPlayers)
-				if (boundPlayers.TryGetValue(client.Index, out var bp))
-					teamOf[bp] = client.Team;
+				teamOf[p] = LobbyTeamOf(w.LobbyInfo, p.InternalName, p.PlayerReference.Team);
 
 			ElectController();
 		}
@@ -259,14 +277,57 @@ namespace OpenRA.Mods.Cameo.Traits
 			return min;
 		}
 
+		internal static IEnumerable<int> ElectableClients(IEnumerable<int> connected, IReadOnlySet<int> bound, IReadOnlySet<int> takenOver)
+		{
+			return connected.Where(id => bound.Contains(id) && !takenOver.Contains(id));
+		}
+
+		internal static int LobbyTeamOf(Session lobby, string slot, int mapTeam)
+		{
+			return lobby.ClientInSlot(slot)?.Team ?? mapTeam;
+		}
+
+		internal static string[] ResolvedBotConditions(IReadOnlyList<string> conditions,
+			IEnumerable<GrantConditionOnBotOwnerInfo> grants, string botType)
+		{
+			return conditions
+				.Concat(grants.Where(t => t.Bots.Contains(botType)).Select(t => t.Condition))
+				.Distinct()
+				.ToArray();
+		}
+
+		internal static bool SeatStillOpen(WinState state, bool takenOver, bool stillConnected)
+		{
+			return state == WinState.Undefined && !takenOver && stillConnected;
+		}
+
+		/// <summary>True while a bound lobby-human seat can still convert to a takeover bot:
+		/// undefeated, still connected, not already taken over. The AI match log stays open
+		/// for exactly this window (boss_review T1).</summary>
+		public bool HasOpenSeats
+		{
+			get
+			{
+				if (!enabled)
+					return false;
+
+				foreach (var p in boundPlayers.Values)
+					if (SeatStillOpen(p.WinState, records.ContainsKey(p), connectedClients.Contains(p.ClientIndex)))
+						return true;
+
+				return false;
+			}
+		}
+
 		// ---------------------------------------------------------------------
 
 		void ElectController()
 		{
 			// Deterministic on every client: same connected-set minus taken-over clients.
 			// A taken-over seat's former client is excluded so a surrendered player can never
-			// become the controller of their own (or any) takeover seat.
-			Controller = ElectController(connectedClients.Where(id => !takenOverClients.Contains(id)));
+			// become the controller of their own (or any) takeover seat. Only bound clients elect —
+			// a connected spectator can never drive a bot (boss_review T4).
+			Controller = ElectController(ElectableClients(connectedClients, boundClients, takenOverClients));
 		}
 
 		IEnumerable<TakeoverSeat> Seats()
@@ -317,7 +378,12 @@ namespace OpenRA.Mods.Cameo.Traits
 			ElectController();
 			records[p] = new TakeoverRecord(world.WorldTick, trigger, info.BotType, Controller);
 
-			foreach (var condition in info.Conditions)
+			// R6 parity (boss_review T3): a real lobby bot of this type would also carry every
+			// GrantConditionOnBotOwner whose Bots list names it (inc3_frans_services for hard arms
+			// eight Frans service modules). The seat resolves the same set from the rules — identical
+			// on all clients — so the matching stack wakes identically.
+			foreach (var condition in ResolvedBotConditions(info.Conditions,
+				p.PlayerActor.Info.TraitInfos<GrantConditionOnBotOwnerInfo>(), info.BotType))
 				p.PlayerActor.GrantCondition(condition);
 
 			// The electee may have just changed (a surrendered client was running earlier
