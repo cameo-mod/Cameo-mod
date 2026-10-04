@@ -12,6 +12,12 @@ Per bot x match:
   peak_coverage       the best share of known fields in reach of, or served by, our buildings (0..1)
   max_excess          the most refineries beyond one per anchor (anchor = spreader, else a spreaderless field;
                       a refinery serves the nearest anchor within 12 cells, farther ones count as excess)
+  rpa_max             REF-1 (§12.24 v2): the most refineries serving one anchor — the law's cap, must stay 1
+  anchors_unserved    REF-1: the most anchors in reach still waiting for a refinery at any snapshot
+  fields_unserved     REF-1: the most fields in reach with no refinery yet — the tier-1 backlog (drains to 0
+                      before any field gets a second refinery)
+  gap                 REF-1: the resource_gap histogram over the bot's refinery placements ("0:5 1:2" style)
+  base_ref            REF-1: refinery placements with reason "base" — must be 0 while the law is active
   anchor_dist_mean/max  refinery to nearest anchor distance in cells (mean of the snapshots' means / max of the maxima)
   angle_median / angle_lt45  the crawl target vs MCV site bearing angle from the main base (degrees; share of
                       snapshots below 45)
@@ -32,7 +38,8 @@ sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 import ai_log_common as c  # noqa: E402
 
 METRICS = ["first_refinery_min", "harvested_5", "harvested_10", "harvested_20", "peak_harvested", "peak_coverage",
-           "max_excess", "anchor_dist_mean", "anchor_dist_max", "angle_median", "angle_lt45", "conyards_peak"]
+           "max_excess", "anchor_dist_mean", "anchor_dist_max", "angle_median", "angle_lt45", "conyards_peak",
+           "refineries_per_anchor_max", "anchors_unserved", "fields_unserved", "base_ref"]
 
 
 def summarise_match(snaps: list[dict], placements: list[dict], match: dict | None) -> dict:
@@ -53,6 +60,8 @@ def summarise_match(snaps: list[dict], placements: list[dict], match: dict | Non
     ex = [s["expansion"] for s in snaps]
     angles = [e["crawl_mcv_angle"] for e in ex if e.get("crawl_mcv_angle", -1) >= 0]
     with_ref = [e for e in ex if e.get("refineries", 0) > 0]
+    refineries = [p for p in placements if p.get("category") == "refinery"]
+    gap_hist = collections.Counter(p["resource_gap"] for p in refineries if "resource_gap" in p)
     return {
         "first_refinery_tick": first_ref,
         "first_refinery_min": None if first_ref is None else round(c.minutes(first_ref), 2),
@@ -65,6 +74,11 @@ def summarise_match(snaps: list[dict], placements: list[dict], match: dict | Non
         "angle_median": c.median(angles),
         "angle_lt45": (sum(1 for a in angles if a < 45) / len(angles)) if angles else None,
         "conyards_peak": max((e.get("conyards", 0) for e in ex), default=None),
+        "refineries_per_anchor_max": max((e.get("refineries_per_anchor_max", 0) for e in ex), default=None),
+        "anchors_unserved": max((e.get("anchors_in_reach_unserved", 0) for e in ex), default=None),
+        "fields_unserved": max((e.get("fields_in_reach_unserved", 0) for e in ex), default=None),
+        "gap_hist": " ".join(f"{k}:{gap_hist[k]}" for k in sorted(gap_hist)) or "-",
+        "base_ref": sum(1 for p in refineries if p.get("reason") == "base"),
         "snapshots": len(ex),
     }
 
@@ -105,6 +119,7 @@ def build(data: dict[str, list[dict]]) -> dict:
 
 def render(result: dict) -> str:
     head = ["bot", "personality", "player", "first_ref", "h@5", "h@10", "h@20", "peak_h", "peak_cov", "max_excess",
+            "rpa_max", "anc_uns", "fld_uns", "gap", "base_ref",
             "dist_mean", "dist_max", "angle_med", "angle<45", "yards"]
     rows = [head]
     for r in result["matches"]:
@@ -112,18 +127,23 @@ def render(result: dict) -> str:
         cov = None if r["peak_coverage"] is None else r["peak_coverage"] / 1000
         rows.append([r["bot_type"], r["personality"], f'{r["game_uid"]}/{r["player"]}', first, c.fmt(r["harvested_5"]),
                      c.fmt(r["harvested_10"]), c.fmt(r["harvested_20"]), c.fmt(r["peak_harvested"]), c.fmt(cov, 2),
-                     c.fmt(r["max_excess"]), c.fmt(r["anchor_dist_mean"]), c.fmt(r["anchor_dist_max"]),
+                     c.fmt(r["max_excess"]), c.fmt(r["refineries_per_anchor_max"]), c.fmt(r["anchors_unserved"]),
+                     c.fmt(r["fields_unserved"]), r.get("gap_hist", "-"), c.fmt(r["base_ref"]),
+                     c.fmt(r["anchor_dist_mean"]), c.fmt(r["anchor_dist_max"]),
                      c.fmt(r["angle_median"], 0), c.fmt(r["angle_lt45"], 2), c.fmt(r["conyards_peak"])])
     out = ["Per bot x match", c.table(rows), "", "Aggregate (mean over matches)"]
     arows = [["bot", "personality", "n", "first_ref_min", "h@5", "h@10", "h@20", "peak_h", "peak_cov", "max_excess",
+              "rpa_max", "anc_uns", "fld_uns", "base_ref",
               "dist_mean", "dist_max", "angle_med", "angle<45", "yards"]]
     for a in result["aggregate"]:
         cov = None if a["peak_coverage"] is None else a["peak_coverage"] / 1000
         arows.append([a["bot_type"], a["personality"], str(a["matches"]), c.fmt(a["first_refinery_min"]),
                       c.fmt(a["harvested_5"]), c.fmt(a["harvested_10"]), c.fmt(a["harvested_20"]),
-                      c.fmt(a["peak_harvested"]), c.fmt(cov, 2), c.fmt(a["max_excess"]), c.fmt(a["anchor_dist_mean"]),
-                      c.fmt(a["anchor_dist_max"]), c.fmt(a["angle_median"], 0), c.fmt(a["angle_lt45"], 2),
-                      c.fmt(a["conyards_peak"])])
+                      c.fmt(a["peak_harvested"]), c.fmt(cov, 2), c.fmt(a["max_excess"]),
+                      c.fmt(a["refineries_per_anchor_max"]), c.fmt(a["anchors_unserved"]), c.fmt(a["fields_unserved"]),
+                      c.fmt(a["base_ref"]),
+                      c.fmt(a["anchor_dist_mean"]), c.fmt(a["anchor_dist_max"]), c.fmt(a["angle_median"], 0),
+                      c.fmt(a["angle_lt45"], 2), c.fmt(a["conyards_peak"])])
     out.append(c.table(arows))
     return "\n".join(out)
 

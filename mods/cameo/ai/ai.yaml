@@ -4142,12 +4142,17 @@ Player:
 		UseTeamExpansionClaims: false
 		# EX-4: keep MCVs in flight while any reachable far field is free - expansion stops when the
 		# map is covered, not at a fixed yard count. Difficulty paces via BotLimits intervals +
-		# McvRequestReserve, never the ceiling. Switch group AC.
-		CoverAllFields: false
+		# McvRequestReserve, never the ceiling. Switch group AC. The AJ_field_coverage ruling
+		# (2026-10-04) carries the AC values: cover-all on, reserve 1000, target 4, 3 in flight.
+		CoverAllFields: true
+		CoverAllFieldsMaxInflight: 3
+		McvRequestReserve: 1000
+		McvTargetCount: 4
 		# FE-1 (AI_ARCHITECTURE 12.24, DESIGN 19.1b): one refinery per anchor (resource spreader or spreaderless field),
 		# placed next to it, never more than anchors; MCV site and crawl target in different directions, spread over the
-		# map. genericbot-only (this module); classic is untouched. Switch group AJ_field_coverage.
-		FieldCoverage: false
+		# map. genericbot-only (this module); classic is untouched. Switch group AJ_field_coverage; ON BY DEFAULT per
+		# the maintainer ruling 2026-10-04 ("refinery coverage is the most important feature right now").
+		FieldCoverage: true
 	# Whole-base defence cover: each defence goes where its range covers the most uncovered base, outer edge and
 	# enemy side first (genericbot only; classic, sharing BaseBuilderBotModuleCA@generic, gets no advisor). Off until Enabled.
 	DefenseCoveragePlanner:

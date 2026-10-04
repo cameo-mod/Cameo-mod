@@ -3279,6 +3279,41 @@ independently, so they often point the same way.
 * Tests: `OpenRA.Mods.Cameo.Test/FieldCoverageTest.cs` (anchors, assignment, wanted rule incl. never more than anchors, separation,
   spread). Fog manifest: `ExpansionPlannerBotModule.cs` 4 -> 5 (neutral spreader scan).
 
+**REF-1 — refinery law v2 (maintainer rulings 2026-10-04; branch `devin/ref1-refinery-law-v2`; the AJ switch group is ON BY DEFAULT in `ai.yaml`):**
+The A/B showed the flaw was never the anchor definition: FE-1 compared GLOBAL totals (`placed + queued < anchors` and
+`count >= anchor count`), so duplicate refineries stacked at home ate the forward anchors' quota, and three of four
+refinery paths (first, MCV-requested, every `ExpansionWantsRefinery` null) bypassed the law into the old base-centre
+placement ("base" reason, 4-14 cells from the spreader). v2:
+* **Binding 1:1, never totals.** `ClaimOrder` returns the claimable anchors in order; a refinery is produced only
+  while claimable anchors exceed the in-flight count (`UnclaimedAnchorsInReach` replaces `RefineryAnchorCount`-style
+  totals). `RefineryClaimCommitted` marks an anchor pending (until its refinery lands or `AnchorClaimPendingTicks`
+  expires), so the production-to-placement gap cannot double-claim.
+* **Fields group anchors (addendum).** `ResourceFields` builds the 8-connected components of the map's initial
+  valuable resource cells once (`IResourceLayer` — public map data); `AssignAnchorFields` maps every spreader to its
+  nearest field within `SpreaderFieldRadiusCells` (a lone spreader gets a synthetic single-anchor field). Claim
+  priority is tiered: tier 1 = the representative anchor of every in-reach field with no serving or pending refinery
+  (the spreader covering the most of the field's cells; ties: nearest our buildings, lowest index), fields ordered
+  home-first — or by the requesting yard for an MCV-requested refinery (`near`). Tier 2 = the covered fields' still
+  unserved spreaders, farthest from the field's serving refinery first. `fields_in_reach_unserved` is the tier-1
+  backlog and must drain to 0 before any tier-2 claim.
+* **Placement is flush to the resources.** `LawRefineryPlacement` (BaseBuilderQueueManagerCA) walks the claim-radius
+  annulus by distance to the anchor and takes the first placeable cell whose footprint touches the field's resource
+  cells (gap 0 = a footprint cell on or 8-adjacent to a resource cell), else the first at gap 1; gap 2+ or no claim =
+  no placement, retry later — the old base-centre path is unreachable while the law is active (the first refinery and
+  the MCV-requested one included). The dock cell must not sit on valuable resources and keeps an on-map neighbour
+  outside the footprint.
+* **Telemetry:** refinery placements carry `field_id`, `tier` (1|2) and `resource_gap` (cells; -1 = lone spreader) on
+  top of the anchor fields; snapshots add `refineries_per_anchor_max` (the law's cap — must stay 1),
+  `anchors_in_reach_unserved` and `fields_in_reach_unserved`; `expansion_report.py` prints them plus the `gap`
+  histogram and the `base_ref` count (0 under the law). The placement log reads the planner's own field model, so the
+  logged ids are the ones the law claimed with; classic has no planner and uses a locally built copy of the same
+  component model (record-only, so the read is legal there).
+* Tests: `FieldCoverageTest.cs` — field grouping, anchor-to-field assignment, the A/B spec (a 3-spreader served field
+  never beats the 1-spreader unserved field; the second refinery takes the farthest spreader), coverage rep, pending
+  commits, reach, near-ranking, `ResourceGap`.
+* Fransbot note (report-only): `FransBaseBuilderBotModule`/`FransQueueManager` keep the same base-centre refinery
+  placement; untouched in this task per the rules.
+
 ### 12.25 BO — the building build-order lab: log, score, tune, personalise, learn, react (maintainer 2026-10-02; owner Claude)
 
 > *Maintainer:* "log the build order, then try to switch it around until the result is optimal … for all the buildings

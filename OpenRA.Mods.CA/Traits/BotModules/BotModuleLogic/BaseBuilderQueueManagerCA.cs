@@ -798,6 +798,91 @@ namespace OpenRA.Mods.CA.Traits
 			return null;
 		}
 
+		// REF-1 (§12.24 v2): the cells of `zone` dilated by one Chebyshev ring — the gap-0 zone of a field's resource
+		// cells is the cells themselves plus their 8-neighbours; dilating twice gives the gap-1 ring.
+		static HashSet<CPos> Dilate(IEnumerable<CPos> cells)
+		{
+			var result = new HashSet<CPos>(cells);
+			foreach (var c in cells)
+				for (var dy = -1; dy <= 1; dy++)
+					for (var dx = -1; dx <= 1; dx++)
+						result.Add(new CPos(c.X + dx, c.Y + dy));
+
+			return result;
+		}
+
+		// REF-1 (§12.24 v2): the harvester dock cell must not sit on valuable resources, and needs at least one on-map
+		// neighbour outside the footprint so the dock stays reachable — a refinery walled off the field is useless.
+		bool DockReachable(ActorInfo actorInfo, BuildingInfo bi, CPos topLeft, WVec dockOffset, IReadOnlySet<string> valuable)
+		{
+			var dock = world.Map.CellContaining(world.Map.CenterOfCell(topLeft) + bi.CenterOffset(world) + dockOffset);
+			if (valuable != null && resourceLayer != null && valuable.Contains(resourceLayer.GetResource(dock).Type))
+				return false;
+
+			var footprint = new HashSet<CPos>(bi.Tiles(topLeft));
+			for (var dy = -1; dy <= 1; dy++)
+				for (var dx = -1; dx <= 1; dx++)
+				{
+					var n = new CPos(dock.X + dx, dock.Y + dy);
+					if (!footprint.Contains(n) && world.Map.Contains(n))
+						return true;
+				}
+
+			return false;
+		}
+
+		// REF-1 (§12.24 v2): the placeable cell NEAREST the anchor whose footprint sits flush on the claim's resource
+		// cells — gap 0 (a footprint cell on or 8-adjacent to a resource cell), gap 1 only when no gap-0 cell is
+		// placeable, never more (the caller retries later instead of falling back home). Candidates are the annulus
+		// cells ordered by distance to the anchor (deterministic: distance, then X, then Y), so the winning cell is
+		// the nearest one meeting the law. Anchors with no known resource cells (a lone spreader) keep the plain
+		// nearest-placeable behaviour.
+		(CPos? Location, int Gap, int Variant) LawRefineryPlacement(string actorType, bool distanceToBaseIsImportant, Actor producer,
+			CPos anchor, IReadOnlyCollection<CPos> fieldCells, int claimRadius)
+		{
+			var actorInfo = world.Map.Rules.Actors[actorType];
+			var bi = actorInfo.TraitInfoOrDefault<BuildingInfo>();
+			if (bi == null)
+				return (null, -1, 0);
+
+			HashSet<CPos> zone0 = null, zone1 = null;
+			if (fieldCells != null && fieldCells.Count > 0)
+			{
+				zone0 = Dilate(fieldCells);
+				zone1 = Dilate(zone0);
+				zone1.ExceptWith(zone0);
+			}
+
+			var dockOffset = actorInfo.TraitInfoOrDefault<DockHostInfo>()?.DockOffset ?? WVec.Zero;
+			var valuable = baseBuilder.ResourceMapModule?.Info.ValuableResourceTypes;
+
+			CPos? gap1 = null;
+			foreach (var cell in world.Map.FindTilesInAnnulus(anchor, 0, claimRadius)
+				.OrderBy(c => (c - anchor).LengthSquared).ThenBy(c => c.X).ThenBy(c => c.Y))
+			{
+				if (!world.CanPlaceBuilding(cell, actorInfo, bi, null))
+					continue;
+
+				if (distanceToBaseIsImportant && !bi.IsCloseEnoughToBase(world, player, actorInfo, producer, cell))
+					continue;
+
+				if (!DockReachable(actorInfo, bi, cell, dockOffset, valuable))
+					continue;
+
+				if (zone0 == null)
+					return (cell, -1, 0);
+
+				var footprint = bi.Tiles(cell).ToList();
+				if (footprint.Any(zone0.Contains))
+					return (cell, 0, 0);
+
+				if (gap1 == null && footprint.Any(zone1.Contains))
+					gap1 = cell;
+			}
+
+			return gap1.HasValue ? (gap1.Value, 1, 0) : (null, -1, 0);
+		}
+
 		// Find the buildable cell that is closest to pos and centered around center.
 		// The building gap belongs to the placement advisor (BuildingGapRule.Resolve; no advisor = no gap);
 		// defense-style callers pass defenseGap so walls/turrets can still form tighter lines.
@@ -1007,6 +1092,34 @@ namespace OpenRA.Mods.CA.Traits
 
 					var requestRef = baseBuilder.RequestedRefineries.Count > 0 ? baseBuilder.RequestedRefineries.Keys.First() : null;
 
+					// REF-1 (§12.24 v2, DESIGN §19.1b): under the refinery law EVERY refinery path routes through the
+					// provider's claim — the first refinery, the MCV-requested one (its yard's nearest unserved field
+					// via `near`), and the planner's claim alike. Placement sits flush to the claim field's resource
+					// cells (gap 0, gap 1 only when 0 is unplaceable, never more); a failed claim retries later — the
+					// old base-centre path below is unreachable while the law is active, because a refinery stacked
+					// at home serving no anchor is exactly what the law forbids.
+					var law = baseBuilder.RefineryLawProvider();
+					if (law != null)
+					{
+						var near = requestRef != null ? baseBuilder.RequestedRefineries[requestRef].ConyardLoc : (CPos?)null;
+						if (law.NextRefineryClaim(near) is RefineryAnchorClaim claim)
+						{
+							var placed = LawRefineryPlacement(actorType, distanceToBaseIsImportant, producer,
+								claim.Anchor, claim.ResourceCells, law.ExpansionTargetClaimRadius);
+							if (placed.Location != null)
+							{
+								Log.Write("debug", $"AI ({player.ClientIndex}): REF-1 refinery {actorType} at {placed.Location.Value} claims anchor {claim.Anchor} field {claim.FieldId} tier {claim.Tier} gap {placed.Gap} at tick {world.WorldTick}");
+								law.RefineryClaimCommitted(claim.Anchor);
+								refineryClaimed = true;
+								if (requestRef != null)
+									baseBuilder.RequestedRefineries.Remove(requestRef);
+								return (placed.Location, claim.Anchor, placed.Variant);
+							}
+						}
+
+						return (null, null, 0);
+					}
+
 					// Cameo (AI_ARCHITECTURE §12.13, EX-2): the planner's field is in reach and unclaimed, so the refinery goes
 					// there, close enough to count as claiming it. A refinery the MCV module requested keeps priority.
 					var claimer = requestRef == null ? baseBuilder.ExpansionWantsRefinery() : null;
@@ -1020,24 +1133,14 @@ namespace OpenRA.Mods.CA.Traits
 						// The annulus must be around the FIELD, not baseCenter: a crawled-to field sits beyond
 						// baseCenter + MaxBaseRadius + claimRadius, so centering on the base yields zero candidate
 						// cells, the claim silently fails, and the fallback drops the refinery back home.
-						// FE-1 (§12.24): under the refinery law the field is an ANCHOR and the cell nearest it wins
-						// (then the cell nearest the field's resource cells); the home-base fallback below is skipped,
-						// because a refinery stacked at home is exactly what the law forbids (a failed attempt retries).
-						var law = claimer.RefineryLawActive;
-						var claim = law
-							? findPos(actorType, distanceToBaseIsImportant, producer, field, field,
-								0, claimer.ExpansionTargetClaimRadius, anchorTieBreak: claimer.RefineryClaimFieldCenter, anchorOrder: true)
-							: findPos(actorType, distanceToBaseIsImportant, producer, field, baseCenter,
-								0, claimer.ExpansionTargetClaimRadius);
+						var claim = findPos(actorType, distanceToBaseIsImportant, producer, field, baseCenter,
+							0, claimer.ExpansionTargetClaimRadius);
 						if (claim.Location != null)
 						{
 							Log.Write("debug", $"AI ({player.ClientIndex}): EX-2 refinery {actorType} at {claim.Location.Value} claims field {field} at tick {world.WorldTick}");
 							refineryClaimed = true;
 							return claim;
 						}
-
-						if (law)
-							return (null, null, 0);
 					}
 
 					// Try and place the refinery near a resource field

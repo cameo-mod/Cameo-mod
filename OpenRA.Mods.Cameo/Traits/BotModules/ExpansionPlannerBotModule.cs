@@ -30,8 +30,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		[Desc("How far (cells) one new building extends the base: the step of the building line toward a field.")]
 		public readonly int LinkStepCells = 4;
 
-		[Desc("How far (cells) from a building that gives buildable area a refinery can still be placed next to a field.",
-			"A field closer than this needs no link buildings.")]
+		[Desc("How far (cells) a field's resource edge may be from the tiles of a building that gives buildable area for",
+			"its anchor to be claimable — the law's refinery sits flush to the field, so the field edge, not the spreader,",
+			"is what must be in reach. A field farther than this needs link buildings (the base crawl) first.")]
 		public readonly int ReachCells = 6;
 
 		[Desc("Radius (cells) around a field's resource centre in which our own combat units count as its guard.")]
@@ -137,12 +138,19 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			"(EX-3) and field refineries (Yuri's slave miner, Japan's core refinery) keep going to fields.")]
 		public readonly bool BaseVehiclesAtBase = true;
 
-		[Desc("FE-1 (AI_ARCHITECTURE §12.24, DESIGN §19.1b; switch group AJ_field_coverage): one refinery per ANCHOR (a resource",
-			"spreader, or the centre of a field that has none), placed on the free cell nearest the anchor; a refinery is wanted",
-			"only while an anchor in building reach is unserved and never beyond the anchor count (replacing the yard-based",
-			"cap, OptimalRefineryCount and the scale-target refinery cap). The MCV site and the crawl target also score a",
-			"separation factor (different directions) and a spread factor (unexplored ground). Needs DriveRefineries.")]
+		[Desc("REF-1 (AI_ARCHITECTURE §12.24 v2, DESIGN §19.1b; switch group AJ_field_coverage, default-on ruling",
+			"2026-10-04): one refinery per ANCHOR (a resource spreader, or the centre of a field that has none), bound",
+			"1:1 — a refinery is allowed only while a specific anchor in building reach is unclaimed (unserved, not",
+			"parked, not pending), never by comparing totals. Anchors are grouped into FIELDS (8-connected components",
+			"of the map's valuable resource cells): the first anchor of every unserved field in reach claims first,",
+			"extra spreaders of covered fields only when no field is still waiting. Placement is the placeable cell",
+			"nearest the anchor whose footprint touches the field's resource cells (gap 0; gap 1 only when 0 is",
+			"unplaceable; never more; no home fallback). Needs DriveRefineries.")]
 		public readonly bool FieldCoverage = false;
+
+		[Desc("REF-1: ticks an anchor stays pending after a produced refinery was committed to it — covers the window",
+			"between the placement order and the building landing so a second refinery cannot claim the same anchor.")]
+		public readonly int AnchorClaimPendingTicks = 2000;
 
 		[Desc("FE-1: a field with a spreader within this many cells of its resource centre is represented by the spreader;",
 			"a field without one is its own anchor.")]
@@ -176,6 +184,27 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 	}
 
 	public enum McvRole { Expansion, FieldRefinery, BaseBuilding }
+
+	/// <summary>
+	/// REF-1 (§12.24 v2): one resource FIELD — an 8-connected component of the map's initial valuable resource cells
+	/// (public map data, frozen when the model is built; depletion under the fog is never re-read). Anchors carry the
+	/// field id; the claim tier is 1 while no refinery serves the field, 2 for its additional spreaders.
+	/// </summary>
+	internal sealed class RefineryField
+	{
+		public readonly int Id;
+		public readonly List<CPos> Cells;
+		public readonly HashSet<CPos> CellSet;
+		public readonly CPos Center;
+
+		public RefineryField(int id, List<CPos> cells)
+		{
+			Id = id;
+			Cells = cells;
+			CellSet = new HashSet<CPos>(cells);
+			Center = cells.Count == 0 ? CPos.Zero : new CPos((int)cells.Average(c => c.X), (int)cells.Average(c => c.Y));
+		}
+	}
 
 	public class ExpansionPlannerBotModule : ConditionalTrait<ExpansionPlannerBotModuleInfo>, IBotTick, IBotExpansionTargetProvider,
 		IBotMcvExpansionSiteProvider, IBotPositionsUpdated, IBotExpansionAssistProvider
@@ -236,6 +265,23 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		CPos? anchorClaim;
 		CPos? anchorClaimFieldCenter;
 		(CPos? Anchor, int Replans, int Refineries) anchorStuck = (null, 0, 0);
+
+		// REF-1 (§12.24 v2): the field model — connected components of the map's initial valuable resource cells, built
+		// once — the field id of every anchor, the fields' cells indexed by field id (synthetic single-spreader fields
+		// have none), the claimable anchors of the last re-plan in claim order, and the pending commits (a produced
+		// refinery bound to an anchor that has not landed yet). Refinery cells and building TILES of the last re-plan
+		// (the frontier IsCloseEnoughToBase measures against, not the top-lefts) are kept so NextRefineryClaim
+		// re-ranks live at placement time.
+		List<RefineryField> fields;
+		int[] anchorFieldIds = Array.Empty<int>();
+		List<IReadOnlyCollection<CPos>> fieldCellsById = new();
+		int spreaderAnchorCount;
+		readonly Dictionary<CPos, int> anchorPendingUntil = new();
+		List<CPos> lastRefineryCells = new();
+		List<CPos> lastBuildingTiles = new();
+		int[] lastRefineryFields = Array.Empty<int>();
+		int unclaimedAnchorsInReach;
+		int unservedFieldsInReach;
 		readonly Dictionary<CPos, int> anchorParkedUntil = new();
 		readonly Dictionary<uint, CPos> inflightMcvSites = new();
 		List<CPos> ownBuildingCells = new();
@@ -308,6 +354,29 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		int IBotExpansionTargetProvider.UnservedAnchorsInReach => LawActive ? unservedInReach : 0;
 
 		CPos? IBotExpansionTargetProvider.RefineryClaimFieldCenter => LawActive ? anchorClaimFieldCenter : null;
+
+		// REF-1 (§12.24 v2): the claim surface — the queue takes a full claim (anchor, field, tier, resource cells),
+		// commits the anchor when the placement order issues, and gates production on the claimable count.
+		RefineryAnchorClaim? IBotExpansionTargetProvider.NextRefineryClaim(CPos? near)
+		{
+			return LawActive ? ComputeClaim(near) : null;
+		}
+
+		void IBotExpansionTargetProvider.RefineryClaimCommitted(CPos anchor)
+		{
+			if (LawActive)
+				anchorPendingUntil[anchor] = world.WorldTick + Info.AnchorClaimPendingTicks;
+		}
+
+		int IBotExpansionTargetProvider.UnclaimedAnchorsInReach => LawActive ? unclaimedAnchorsInReach : 0;
+
+		// REF-1: the field model for the telemetry (same assembly, record-only reads) — the provider's model so the
+		// logged field ids are exactly the ones the law claimed with. Null until the first re-plan builds it.
+		internal IReadOnlyList<RefineryField> ComponentFields => fields;
+		internal IReadOnlyList<CPos> AnchorCells => anchors;
+		internal IReadOnlyList<int> AnchorFieldIds => anchorFieldIds;
+		internal IReadOnlyList<IReadOnlyCollection<CPos>> FieldCellsById => fieldCellsById;
+		internal int SpreaderAnchorCount => spreaderAnchorCount;
 
 		/// <summary>
 		/// TC-3 (§12.18): the claim that wants a bodyguard — the current target field while its
@@ -440,8 +509,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		/// FE-1: which refinery serves which anchor - a result per anchor, the refinery index or -1. Greedy by ascending
 		/// distance (ties by anchor then refinery index) within `serveRadiusCells`; every refinery serves at most one anchor
 		/// and every anchor has at most one refinery, so two spreaders next to one refinery do not both count as served.
+		/// REF-1 (v2 fix): <paramref name="refineryFields"/> gives the field each refinery's footprint sits flush to —
+		/// a refinery on a field's far edge can land farther than `serveRadiusCells` from the spreader yet still be that
+		/// field's refinery, so field-mates are eligible too; the distance order still binds the nearest anchor first.
 		/// </summary>
-		public static int[] AssignRefineries(IReadOnlyList<CPos> anchorCells, IReadOnlyList<CPos> refineries, int serveRadiusCells)
+		public static int[] AssignRefineries(IReadOnlyList<CPos> anchorCells, IReadOnlyList<CPos> refineries, int serveRadiusCells,
+			IReadOnlyList<int> anchorField = null, IReadOnlyList<int> refineryFields = null)
 		{
 			var result = new int[anchorCells.Count];
 			Array.Fill(result, -1);
@@ -451,7 +524,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				for (var r = 0; r < refineries.Count; r++)
 				{
 					var d = (anchorCells[a] - refineries[r]).LengthSquared;
-					if (d <= r2)
+					var flush = anchorField != null && refineryFields != null
+						&& r < refineryFields.Count && refineryFields[r] >= 0 && anchorField[a] == refineryFields[r];
+					if (d <= r2 || flush)
 						pairs.Add((d, a, r));
 				}
 
@@ -470,42 +545,335 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		}
 
 		/// <summary>
-		/// FE-1 refinery-wanted rule: the anchor the next refinery claims, or -1. Wanted iff an anchor within `reachCells` of a
-		/// building that gives buildable area is unserved (and not parked) AND the refinery count (placed + queued) is below
-		/// the anchor count - never more refineries than anchors. Among the candidates the one nearest a building wins (ties:
-		/// lowest index). `unservedInReach` counts all unserved in-reach anchors, parked or not.
+		/// REF-1 (v2): the field each refinery sits flush to — the field id whose resource cells come within
+		/// Chebyshev 2 of a refinery tile (the law's own placement bound: footprint within gap 1 of the field),
+		/// -1 when none. Distances tie-break to the lowest field id, matching the fields' own ordering.
 		/// </summary>
-		public static int WantedAnchor(IReadOnlyList<CPos> anchorCells, IReadOnlyList<CPos> refineries, IReadOnlyList<CPos> buildingCells,
-			int serveRadiusCells, int reachCells, Func<int, bool> parked, int queuedRefineries, out int unservedInReach)
+		public static int[] RefineryFlushFields(IReadOnlyList<IReadOnlyCollection<CPos>> refineryTiles,
+			IReadOnlyList<IReadOnlyCollection<CPos>> fieldCells)
 		{
-			unservedInReach = 0;
-			var assigned = AssignRefineries(anchorCells, refineries, serveRadiusCells);
-			var best = -1;
-			var bestDistance = int.MaxValue;
+			var result = new int[refineryTiles.Count];
+			for (var r = 0; r < refineryTiles.Count; r++)
+			{
+				result[r] = -1;
+				var tiles = refineryTiles[r];
+				if (tiles == null)
+					continue;
+
+				var best = -1;
+				var bestD = int.MaxValue;
+				for (var f = 0; f < fieldCells.Count; f++)
+				{
+					var cells = fieldCells[f];
+					if (cells == null || cells.Count == 0)
+						continue;
+
+					foreach (var t in tiles)
+						foreach (var c in cells)
+						{
+							var d = Math.Max(Math.Abs(t.X - c.X), Math.Abs(t.Y - c.Y));
+							if (d < bestD)
+							{
+								bestD = d;
+								best = f;
+							}
+						}
+				}
+
+				if (bestD <= 2)
+					result[r] = best;
+			}
+
+			return result;
+		}
+
+		/// <summary>
+		/// REF-1 (§12.24 v2): one FIELD = one 8-connected component of valuable resource cells. Deterministic: each
+		/// component's cells are sorted (X then Y) and the components are ordered by their smallest cell, so a field's
+		/// id — its position in the result — is stable for the whole match.
+		/// </summary>
+		public static List<List<CPos>> ResourceFields(IEnumerable<CPos> resourceCells)
+		{
+			var remaining = new HashSet<CPos>(resourceCells);
+			var fields = new List<List<CPos>>();
+			while (remaining.Count > 0)
+			{
+				var seed = remaining.OrderBy(c => c.X).ThenBy(c => c.Y).First();
+				var cells = new List<CPos>();
+				var queue = new Queue<CPos>();
+				queue.Enqueue(seed);
+				remaining.Remove(seed);
+				while (queue.Count > 0)
+				{
+					var c = queue.Dequeue();
+					cells.Add(c);
+					for (var dy = -1; dy <= 1; dy++)
+						for (var dx = -1; dx <= 1; dx++)
+						{
+							if (dx == 0 && dy == 0)
+								continue;
+
+							var n = new CPos(c.X + dx, c.Y + dy);
+							if (remaining.Remove(n))
+								queue.Enqueue(n);
+						}
+				}
+
+				cells.Sort((a, b) => a.X != b.X ? a.X - b.X : a.Y - b.Y);
+				fields.Add(cells);
+			}
+
+			fields.Sort((a, b) => a[0].X != b[0].X ? a[0].X - b[0].X : a[0].Y - b[0].Y);
+			return fields;
+		}
+
+		/// <summary>
+		/// REF-1: the field id of every anchor. The first <paramref name="spreaderCount"/> anchors are spreaders — each maps to
+		/// the field whose nearest valuable cell lies within <paramref name="mergeRadiusCells"/> of it; later anchors are the
+		/// centres of spreaderless fields and map back to their own field. A spreader with no field in range gets a synthetic
+		/// single-anchor field (id &gt;= fieldCells.Count, assigned in anchor order) — a field that keeps its own anchor.
+		/// </summary>
+		public static int[] AssignAnchorFields(IReadOnlyList<CPos> anchorCells, int spreaderCount,
+			IReadOnlyList<IReadOnlyCollection<CPos>> fieldCells, IReadOnlyList<CPos> fieldCenters, int mergeRadiusCells)
+		{
+			var result = new int[anchorCells.Count];
+			var centerToField = new Dictionary<CPos, int>();
+			for (var f = 0; f < fieldCenters.Count; f++)
+				if (!centerToField.ContainsKey(fieldCenters[f]))
+					centerToField[fieldCenters[f]] = f;
+
+			var r2 = (long)mergeRadiusCells * mergeRadiusCells;
+			var orphan = 0;
 			for (var a = 0; a < anchorCells.Count; a++)
 			{
-				if (assigned[a] >= 0)
-					continue;
-
-				var distance = int.MaxValue;
-				foreach (var b in buildingCells)
-					distance = Math.Min(distance, (b - anchorCells[a]).Length);
-
-				if (distance > reachCells)
-					continue;
-
-				unservedInReach++;
-				if (parked != null && parked(a))
-					continue;
-
-				if (distance < bestDistance)
+				if (a >= spreaderCount && centerToField.TryGetValue(anchorCells[a], out var fieldId))
 				{
-					bestDistance = distance;
-					best = a;
+					result[a] = fieldId;
+					continue;
+				}
+
+				var best = -1;
+				long bestD = long.MaxValue;
+				for (var f = 0; f < fieldCells.Count; f++)
+				{
+					var cells = fieldCells[f];
+					if (cells == null || cells.Count == 0)
+						continue;
+
+					foreach (var c in cells)
+					{
+						var d = (anchorCells[a] - c).LengthSquared;
+						if (d < bestD)
+						{
+							bestD = d;
+							best = f;
+						}
+					}
+				}
+
+				result[a] = best >= 0 && bestD <= r2 ? best : fieldCells.Count + orphan++;
+			}
+
+			return result;
+		}
+
+		/// <summary>
+		/// REF-1: an anchor's coverage of its field — the count of the field's resource cells nearest to it among the
+		/// field's own anchors. The first refinery of a field goes to the spreader covering the most cells.
+		/// </summary>
+		static int AnchorCoverage(int anchor, IEnumerable<int> fieldAnchors, IReadOnlyCollection<CPos> cells, IReadOnlyList<CPos> anchorCells)
+		{
+			if (cells == null || cells.Count == 0)
+				return 0;
+
+			var mates = fieldAnchors.ToArray();
+			var coverage = 0;
+			foreach (var c in cells)
+			{
+				var nearest = mates[0];
+				var bestD = (anchorCells[nearest] - c).LengthSquared;
+				foreach (var m in mates)
+				{
+					var d = (anchorCells[m] - c).LengthSquared;
+					if (d < bestD || (d == bestD && m < nearest))
+					{
+						bestD = d;
+						nearest = m;
+					}
+				}
+
+				if (nearest == anchor)
+					coverage++;
+			}
+
+			return coverage;
+		}
+
+		/// <summary>
+		/// REF-1 (§12.24 v2) refinery-claim order: the anchors the next refineries should claim, best first — tier 1: the
+		/// representative anchor of every field with no refinery yet (of the field's claimable anchors, the one covering
+		/// the most of the field's resource cells; ties: nearest our buildings, then lowest index), fields ordered home
+		/// first; then tier 2: the still-unserved anchors of covered fields, each field's anchors farthest from its own
+		/// refineries first. <paramref name="blocked"/> excludes parked or pending anchors from candidacy (they still
+		/// count in the unserved metrics); <paramref name="committed"/> marks pending anchors — a field with a pending
+		/// claim counts as covered, its other spreaders are tier 2. <paramref name="near"/> (the yard of an MCV-requested
+		/// refinery) ranks within each tier by distance to it instead of to our buildings.
+		/// <paramref name="anchorTier"/> returns each claimable anchor's tier (0 for the rest).
+		/// </summary>
+		public static List<int> ClaimOrder(
+			IReadOnlyList<CPos> anchorCells, IReadOnlyList<int> anchorField, IReadOnlyList<IReadOnlyCollection<CPos>> fieldCells,
+			IReadOnlyList<CPos> refineries, IReadOnlyList<int> refineryFields, IReadOnlyList<CPos> buildingTiles,
+			int serveRadiusCells, int reachCells,
+			Func<int, bool> blocked, Func<int, bool> committed, CPos? near,
+			out int unservedAnchorsInReach, out int unservedFieldsInReach, out int[] anchorTier)
+		{
+			unservedAnchorsInReach = 0;
+			unservedFieldsInReach = 0;
+			var order = new List<int>();
+			var n = anchorCells.Count;
+			anchorTier = new int[n];
+			if (n == 0)
+				return order;
+
+			var assigned = AssignRefineries(anchorCells, refineries, serveRadiusCells, anchorField, refineryFields);
+			var anchorsByField = new Dictionary<int, List<int>>();
+			for (var a = 0; a < n; a++)
+			{
+				var field = anchorField[a];
+				if (!anchorsByField.TryGetValue(field, out var list))
+					anchorsByField[field] = list = new List<int>();
+				list.Add(a);
+			}
+
+			// Synthetic single-spreader field ids sit beyond fieldCells.Count — the callers' per-id list spans them,
+			// but a bare field list does not; size lookups by the highest id used and give synthetic fields no cells.
+			var fieldCount = fieldCells.Count;
+			foreach (var f in anchorField)
+				fieldCount = Math.Max(fieldCount, f + 1);
+			IReadOnlyCollection<CPos> CellsOf(int field) => field < fieldCells.Count ? fieldCells[field] : null;
+
+			// buildingTiles are the footprint cells of our GivesBuildableArea buildings — the frontier the placement
+			// test (IsCloseEnoughToBase) measures against. An anchor is "in reach" when its FIELD's resource edge is:
+			// the law's refinery sits flush to the field, not to the spreader, so a spreader a few cells beyond the
+			// frontier is still claimable while its field's edge is in reach (a spreader with no recorded field cells
+			// — an orphan — keeps its own cell as the measure).
+			var anchorDist = new int[n];
+			for (var a = 0; a < n; a++)
+			{
+				var d = int.MaxValue;
+				foreach (var b in buildingTiles)
+					d = Math.Min(d, (b - anchorCells[a]).Length);
+				anchorDist[a] = d;
+			}
+
+			var fieldReach = new int[fieldCount];
+			Array.Fill(fieldReach, int.MaxValue);
+			for (var f = 0; f < fieldCount; f++)
+			{
+				var cells = CellsOf(f);
+				if (cells == null || cells.Count == 0)
+					continue;
+
+				foreach (var b in buildingTiles)
+				{
+					var d = int.MaxValue;
+					foreach (var c in cells)
+						d = Math.Min(d, (b - c).Length);
+					fieldReach[f] = Math.Min(fieldReach[f], d);
 				}
 			}
 
-			return refineries.Count + queuedRefineries >= anchorCells.Count ? -1 : best;
+			Func<int, int> rank = near.HasValue
+				? a => (anchorCells[a] - near.Value).Length
+				: a => anchorDist[a];
+
+			var reachDist = new int[n];
+			var served = new bool[n];
+			var fieldCovered = new bool[fieldCount];
+			var fieldInReach = new bool[fieldCount];
+			for (var a = 0; a < n; a++)
+			{
+				served[a] = assigned[a] >= 0;
+				var field = anchorField[a];
+				reachDist[a] = CellsOf(field) is { Count: > 0 }
+					? fieldReach[field]
+					: anchorDist[a];
+
+				var inReach = reachDist[a] <= reachCells;
+				if (inReach)
+					fieldInReach[field] = true;
+				if (!served[a] && inReach)
+					unservedAnchorsInReach++;
+				if (served[a] || (committed != null && committed(a)))
+					fieldCovered[field] = true;
+			}
+
+			// Tier-1 backlog metric: a field in reach with no serving and no pending refinery still waits for its first
+			// one — parked anchors count too (the backlog is honest even while it cannot be claimed right now).
+			foreach (var kv in anchorsByField)
+				if (!fieldCovered[kv.Key] && kv.Value.Any(a => !served[a] && reachDist[a] <= reachCells))
+					unservedFieldsInReach++;
+
+			Func<int, bool> claimable = a => !served[a] && reachDist[a] <= reachCells && (blocked == null || !blocked(a));
+
+			// Tier 1: one representative per field that has no refinery yet — the claimable anchor covering the most of
+			// the field's cells (ties: rank, then lowest index). Fields ordered by their rep's rank, then field id.
+			var tier1 = new List<(int Anchor, int Rank, int Field)>();
+			foreach (var kv in anchorsByField.OrderBy(kv => kv.Key))
+			{
+				if (fieldCovered[kv.Key])
+					continue;
+
+				var rep = -1;
+				var bestCoverage = -1;
+				var bestRank = int.MaxValue;
+				foreach (var a in kv.Value.Where(claimable))
+				{
+					var coverage = AnchorCoverage(a, kv.Value, CellsOf(kv.Key), anchorCells);
+					var r = rank(a);
+					if (coverage > bestCoverage || (coverage == bestCoverage && r < bestRank))
+					{
+						rep = a;
+						bestCoverage = coverage;
+						bestRank = r;
+					}
+				}
+
+				if (rep >= 0)
+				{
+					anchorTier[rep] = 1;
+					tier1.Add((rep, bestRank, kv.Key));
+				}
+			}
+
+			order.AddRange(tier1.OrderBy(t => t.Rank).ThenBy(t => t.Field).Select(t => t.Anchor));
+
+			// Tier 2: the still-unserved anchors of covered fields — each field's claimable anchors farthest from the
+			// refineries already serving it first; fields ordered by their best anchor's rank, then field id.
+			var tier2Fields = new List<(int Rank, int Field, List<int> Anchors)>();
+			foreach (var kv in anchorsByField.OrderBy(kv => kv.Key))
+			{
+				if (!fieldCovered[kv.Key])
+					continue;
+
+				var serving = kv.Value.Where(a => assigned[a] >= 0).Select(a => refineries[assigned[a]]).ToList();
+				var cand = kv.Value.Where(claimable)
+					.OrderByDescending(a => serving.Count == 0 ? 0 : serving.Min(r => (anchorCells[a] - r).LengthSquared))
+					.ThenBy(rank)
+					.ToList();
+				if (cand.Count == 0)
+					continue;
+
+				var fieldRank = cand.Min(rank);
+				foreach (var a in cand)
+					anchorTier[a] = 2;
+				tier2Fields.Add((fieldRank, kv.Key, cand));
+			}
+
+			foreach (var f in tier2Fields.OrderBy(t => t.Rank).ThenBy(t => t.Field))
+				order.AddRange(f.Anchors);
+
+			return order;
 		}
 
 		/// <summary>FE-1: the bearing of `to` as seen from `from`, integer (WAngle.ArcTan).</summary>
@@ -873,6 +1241,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			// base (GivesBuildableArea; a captured derrick or a garrisoned house does not), and guard units.
 			var buildingCells = new List<CPos>();
 			var refineryCells = new List<CPos>();
+
+			// REF-1: the frontier/tiles the law actually measures — a refinery's footprint binds its anchor and a
+			// building's tiles are the cells IsCloseEnoughToBase tests for adjacency; top-lefts would read too tight.
+			var refineryTiles = new List<IReadOnlyCollection<CPos>>();
+			var buildingTiles = new List<CPos>();
 			var guards = new List<(CPos Cell, int Value)>();
 			var allBuildingCells = new List<CPos>();
 			var yardCells = new List<CPos>();
@@ -883,7 +1256,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 				// The Refinery trait, from rules (the by-name lists are filled by the role rollout, §2.8).
 				if (a.Info.HasTraitInfo<RefineryInfo>())
+				{
 					refineryCells.Add(a.Location);
+					if (Info.FieldCoverage)
+						refineryTiles.Add(a.Info.TraitInfoOrDefault<BuildingInfo>()?.Tiles(a.Location).ToList());
+				}
 
 				if (Info.FieldCoverage)
 				{
@@ -895,7 +1272,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				}
 
 				if (a.Info.HasTraitInfo<GivesBuildableAreaInfo>())
+				{
 					buildingCells.Add(a.Location);
+					if (Info.FieldCoverage && a.Info.TraitInfoOrDefault<BuildingInfo>() is BuildingInfo abi)
+						buildingTiles.AddRange(abi.Tiles(a.Location));
+				}
 				else if (a.Info.HasTraitInfo<BuildingInfo>())
 					continue;
 				else if (a.Info.HasTraitInfo<AttackBaseInfo>() && !a.Info.HasTraitInfo<HarvesterInfo>())
@@ -928,7 +1309,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var incomePerTick = (resources.Earned - first.Earned) / (double)span;
 			var reach = Info.ReachCells;
 			var scores = new List<FieldScore>();
-			var fields = resourceMap.GetIndicesLength();
+			var fieldIndexCount = resourceMap.GetIndicesLength();
 			var owned = 0;
 
 			// TC-2c (§12.17): allied expansion claims off the team blackboard — only the ones that
@@ -1021,7 +1402,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var previous = Target?.Index;
 			Target = scores.Count > 0 ? scores[0] : null;
 			if (Target == null)
-				Idle($"no free field ({fields} map indices, {initialCells.Count} with resources, {owned} already ours)");
+				Idle($"no free field ({fieldIndexCount} map indices, {initialCells.Count} with resources, {owned} already ours)");
 			else
 				lastIdleReason = null;
 
@@ -1030,7 +1411,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			// field that keeps being missed.
 			// FE-1 (§12.24): with the switch on, one refinery per anchor replaces this field-based claim.
 			if (Info.FieldCoverage && Info.DriveRefineries)
-				UpdateAnchorClaim(refineryCells, buildingCells);
+				UpdateAnchorClaim(refineryCells, refineryTiles, buildingTiles);
 
 			var lawClaims = LawActive;
 			claimField = lawClaims ? null : BestClaimField(scores);
@@ -1078,11 +1459,63 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		}
 
 		/// <summary>
-		/// FE-1: rebuild the anchors (spreaders are public map data, like the spawn points; field centres are the first-seen
-		/// ones) and pick the unserved anchor in reach the next refinery claims. A claim that keeps failing is parked.
+		/// REF-1 (§12.24 v2): the field model — the map's valuable resource cells grouped into 8-connected components,
+		/// scanned once (public map data: the initial geometry, never re-read for depletion — DESIGN §19.1b).
 		/// </summary>
-		void UpdateAnchorClaim(List<CPos> refineryCells, List<CPos> buildingCells)
+		void EnsureFieldModel()
 		{
+			if (fields != null)
+				return;
+
+			fields = new List<RefineryField>();
+			var layer = world.WorldActor.TraitOrDefault<IResourceLayer>();
+			var valuable = resourceMap?.Info.ValuableResourceTypes;
+			if (layer == null || valuable == null || valuable.Count == 0)
+				return;
+
+			var cells = new List<CPos>();
+			foreach (var cell in world.Map.AllCells)
+				if (valuable.Contains(layer.GetResource(cell).Type))
+					cells.Add(cell);
+
+			fields = ResourceFields(cells).Select((component, i) => new RefineryField(i, component)).ToList();
+		}
+
+		/// <summary>
+		/// REF-1: the claim a produced refinery must serve, ranked live (pending commits are honoured at once).
+		/// <paramref name="near"/> is the MCV-requested refinery's yard: within each tier the anchor nearest it wins.
+		/// </summary>
+		RefineryAnchorClaim? ComputeClaim(CPos? near)
+		{
+			var tick = world.WorldTick;
+			var serve = Info.AnchorServeRadiusCells > 0 ? Info.AnchorServeRadiusCells : Info.ClaimRadiusCells;
+			var order = ClaimOrder(anchors, anchorFieldIds, fieldCellsById, lastRefineryCells, lastRefineryFields, lastBuildingTiles,
+				serve, Info.ReachCells,
+				i => (anchorParkedUntil.TryGetValue(anchors[i], out var until) && tick < until)
+					|| (anchorPendingUntil.TryGetValue(anchors[i], out var pend) && tick < pend),
+				i => anchorPendingUntil.TryGetValue(anchors[i], out var pend) && tick < pend,
+				near, out _, out _, out var tiers);
+			if (order.Count == 0)
+				return null;
+
+			var best = order[0];
+			var fieldId = anchorFieldIds[best];
+			var center = fieldId < fields.Count ? fields[fieldId].Center : anchors[best];
+			return new RefineryAnchorClaim(anchors[best], center, fieldId, tiers[best], fieldCellsById[fieldId]);
+		}
+
+		/// <summary>
+		/// REF-1 (§12.24 v2): rebuild the anchors (spreaders are public map data, like the spawn points, plus the centres of
+		/// spreaderless fields), attach each to its resource field, and publish the claim order — tier 1: every unserved
+		/// field's best spreader in reach, home first; tier 2: covered fields' extra spreaders. A claim that keeps failing
+		/// is parked; a committed one is pending until its refinery lands.
+		/// </summary>
+		void UpdateAnchorClaim(List<CPos> refineryCells, List<IReadOnlyCollection<CPos>> refineryTiles, List<CPos> buildingTiles)
+		{
+			EnsureFieldModel();
+			lastRefineryCells = refineryCells;
+			lastBuildingTiles = buildingTiles;
+
 			// Fog honesty: spreaders are neutral map actors placed by the map author - public map data like the spawn points
 			// (DESIGN 19.1b), never an enemy's state. Manifested in tools/audit/fog_honesty_manifest.json.
 			var spreaders = new List<CPos>();
@@ -1094,20 +1527,42 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				spreaders.Add(tp.Actor.Location);
 			}
 
-			var centers = new List<CPos>();
-			foreach (var kv in initialCenters)
-				if (initialCells.TryGetValue(kv.Key, out var cells) && cells > 0)
-					centers.Add(kv.Value);
+			anchors = BuildAnchors(spreaders, fields.Select(f => f.Center), Info.SpreaderFieldRadiusCells);
+			spreaderAnchorCount = spreaders.Distinct().Count();
+			anchorFieldIds = AssignAnchorFields(anchors, spreaderAnchorCount,
+				fields.Select(f => (IReadOnlyCollection<CPos>)f.Cells).ToList(),
+				fields.Select(f => f.Center).ToList(), Info.SpreaderFieldRadiusCells);
 
-			anchors = BuildAnchors(spreaders, centers, Info.SpreaderFieldRadiusCells);
+			fieldCellsById = new List<IReadOnlyCollection<CPos>>();
+			var maxField = anchorFieldIds.Length == 0 ? -1 : anchorFieldIds.Max();
+			for (var f = 0; f <= maxField; f++)
+				fieldCellsById.Add(f < fields.Count ? fields[f].Cells : (IReadOnlyCollection<CPos>)Array.Empty<CPos>());
+
 			anchorClaim = null;
 			anchorClaimFieldCenter = null;
 			wantsRefinery = false;
 			unservedInReach = 0;
+			unservedFieldsInReach = 0;
+			unclaimedAnchorsInReach = 0;
 			if (anchors.Count == 0)
 				return;
 
 			var tick = world.WorldTick;
+			var serve = Info.AnchorServeRadiusCells > 0 ? Info.AnchorServeRadiusCells : Info.ClaimRadiusCells;
+
+			// Which field each refinery's footprint sits flush to — a legal gap-0/1 placement on a field's far edge
+			// can land beyond the serve radius from the spreader, and it still is that field's refinery.
+			lastRefineryFields = RefineryFlushFields(refineryTiles, fieldCellsById);
+
+			// Pending commits clear when their refinery landed (the anchor is served) or the commit expired.
+			var assigned = AssignRefineries(anchors, refineryCells, serve, anchorFieldIds, lastRefineryFields);
+			foreach (var kv in anchorPendingUntil.ToList())
+			{
+				var index = anchors.IndexOf(kv.Key);
+				if (tick >= kv.Value || (index >= 0 && assigned[index] >= 0))
+					anchorPendingUntil.Remove(kv.Key);
+			}
+
 			var queued = 0;
 			var builder = baseBuilders.FirstOrDefault(t => t.IsTraitEnabled());
 			if (builder?.BuildingsBeingProduced != null)
@@ -1115,16 +1570,24 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					if (builder.BuildingsBeingProduced.TryGetValue(r, out var n))
 						queued += n;
 
-			var serve = Info.AnchorServeRadiusCells > 0 ? Info.AnchorServeRadiusCells : Info.ClaimRadiusCells;
-			var best = WantedAnchor(anchors, refineryCells, buildingCells, serve, Info.ReachCells,
-				i => anchorParkedUntil.TryGetValue(anchors[i], out var until) && tick < until, queued, out unservedInReach);
-			if (best < 0)
+			var order = ClaimOrder(anchors, anchorFieldIds, fieldCellsById, refineryCells, lastRefineryFields, buildingTiles,
+				serve, Info.ReachCells,
+				i => (anchorParkedUntil.TryGetValue(anchors[i], out var until) && tick < until)
+					|| (anchorPendingUntil.TryGetValue(anchors[i], out var pend) && tick < pend),
+				i => anchorPendingUntil.TryGetValue(anchors[i], out var pend) && tick < pend,
+				null, out unservedInReach, out unservedFieldsInReach, out _);
+			unclaimedAnchorsInReach = order.Count;
+
+			// A refinery is wanted only while more anchors are claimable than refineries already in flight — never by
+			// comparing totals (a duplicate stacked at home must not spend a forward anchor's quota).
+			wantsRefinery = order.Count > queued;
+			if (order.Count == 0)
 			{
 				anchorStuck = (null, 0, refineryCells.Count);
 				return;
 			}
 
-			var anchor = anchors[best];
+			var anchor = anchors[order[0]];
 
 			// Loop guard: the same anchor wanted replan after replan with no refinery gained and none in production.
 			var replans = anchorStuck.Anchor == anchor && refineryCells.Count <= anchorStuck.Refineries && queued == 0 ? anchorStuck.Replans + 1 : 0;
@@ -1133,26 +1596,15 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			{
 				anchorParkedUntil[anchor] = tick + Info.ParkTicks;
 				anchorStuck = (null, 0, refineryCells.Count);
-				var parked = $"AI ({player.ClientIndex}): FE-1 parked anchor {anchor} for {Info.ParkTicks} ticks: wanted {replans} re-plans with no refinery placed, at tick {tick}";
+				var parked = $"AI ({player.ClientIndex}): REF-1 parked anchor {anchor} for {Info.ParkTicks} ticks: wanted {replans} re-plans with no refinery placed, at tick {tick}";
 				Log.Write("debug", parked);
 				AIUtils.BotDebug(parked);
 				return;
 			}
 
 			anchorClaim = anchor;
-			wantsRefinery = true;
-
-			// Tie-break of the placement: the resource centre of the field nearest the anchor.
-			var nearest = int.MaxValue;
-			foreach (var c in centers)
-			{
-				var d = (c - anchor).LengthSquared;
-				if (d < nearest)
-				{
-					nearest = d;
-					anchorClaimFieldCenter = c;
-				}
-			}
+			var claimFieldId = anchorFieldIds[order[0]];
+			anchorClaimFieldCenter = claimFieldId < fields.Count ? fields[claimFieldId].Center : anchor;
 		}
 
 		void Idle(string reason)

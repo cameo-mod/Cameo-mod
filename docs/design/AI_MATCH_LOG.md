@@ -234,6 +234,23 @@ Versus against the target's armour, spread over the enemy by HP share. Above 100
 predicted to win; capped at 10000 (an enemy with nothing remembered that can shoot back). No
 decision reads it yet — it is being validated against the decisive fights (`tools/ai/fight_report.py`).
 
+### Field economy — `expansion` object and the placement log (FE-0/REF-1)
+
+Each situation snapshot also carries an `expansion` object (AI_ARCHITECTURE §12.24): `fields_known`,
+`fields_in_reach`, `fields_served`, `fields_harvested`, `anchors_spreader`, `anchors_field`, `refineries`,
+`excess_refineries`, `unassigned_refineries`, `anchor_dist_mean`, `anchor_dist_max`, `conyards`, `outposts`,
+`crawl_target`, `mcv_site`, `crawl_mcv_angle`, `coverage_milli`, and — REF-1 v2 — `refineries_per_anchor_max`
+(the law's cap; 1 when it holds), `anchors_in_reach_unserved` and `fields_in_reach_unserved` (the tier-1
+backlog: in-reach fields with no refinery yet — it drains to 0 before any covered field gets a second).
+
+The separate placement log (`cameo-ai-placements.jsonl`, one line per bot-placed building) adds, for
+refineries only, `anchor_kind` (`spreader`|`field`), `anchor_cell`, `anchor_dist` and — REF-1 v2 —
+`field_id` (the anchor's 8-connected resource component, -1 omitted), `tier` (1 = the field's first
+refinery, 2 = an extra spreader of a covered field) and `resource_gap` (empty cells between footprint and
+field, 0 = flush, 1 = the allowed maximum; absent for a lone spreader). `reason` is `refinery_claim` for a
+law-bound placement — under the law `base` must not appear on a genericbot refinery (the old base-centre
+path is unreachable), and `tools/ai/expansion_report.py` reports that count as `base_ref`.
+
 ## Batch harvest (Stage D)
 
 **Maintainer test mandate (2026-09-28):** every bot A/B test runs on the real

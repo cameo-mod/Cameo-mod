@@ -855,10 +855,11 @@ namespace OpenRA.Mods.CA.Traits
 
 			var currentRefineryCount = AIUtils.CountActorByCommonName(RefineryBuildings);
 
-			// FE-1 (§12.24): one refinery per anchor. DESIGN §19.1b binds every field to its refinery, so the yard-based
-			// ceiling (RefineriesPerBase x yards + MaxExtraRefineries), BotLimits.RefineryLimit and the §19.10 scale-target
-			// refinery cap are all bypassed: the physical cap is the number of anchors, and a refinery is allowed only while
-			// an anchor in building reach is unserved. The very first refinery keeps InititalMinimumRefineryCount.
+			// REF-1 (§12.24 v2, DESIGN §19.1b): one refinery per anchor, bound 1:1 — a refinery is allowed only while
+			// more anchors are claimable (unserved, not parked, not pending) than refineries already in flight. Never
+			// compare global totals: duplicate refineries stacked at home must not eat a forward anchor's quota. The
+			// yard-based ceiling (RefineriesPerBase x yards + MaxExtraRefineries), BotLimits.RefineryLimit and the
+			// §19.10 scale-target cap are all bypassed — coverage is the cap.
 			var law = RefineryLawProvider();
 			if (law != null)
 			{
@@ -867,11 +868,7 @@ namespace OpenRA.Mods.CA.Traits
 					if (BuildingsBeingProduced != null && BuildingsBeingProduced.TryGetValue(r, out var n))
 						inProduction += n;
 
-				var total = currentRefineryCount + inProduction;
-				if (total < Info.InititalMinimumRefineryCount)
-					return false;
-
-				return total >= law.RefineryAnchorCount || law.UnservedAnchorsInReach <= inProduction;
+				return law.UnclaimedAnchorsInReach <= inProduction;
 			}
 
 			// Scale targets (DESIGN 19.10): an enabled provider's refinery target replaces BotLimits.RefineryLimit.
@@ -888,11 +885,14 @@ namespace OpenRA.Mods.CA.Traits
 			return currentRefineryCount >= AIUtils.CountActorByCommonName(ConstructionYardBuildings) * Info.RefineriesPerBase + Info.MaxExtraRefineries;
 		}
 
-		// Require at least one refinery, unless we can't build it.
+		// Require at least one refinery, unless we can't build it. REF-1 (§12.24 v2): under the refinery law the
+		// count is irrelevant — adequate iff no anchor is claimable (unclaimed <= in-flight ends the want).
 		public bool HasAdequateRefineryCount() =>
 			Info.RefineryTypes.Count == 0 ||
-			(AIUtils.CountActorByCommonName(RefineryBuildings) >= (RefineryLawProvider() != null ? Info.InititalMinimumRefineryCount : OptimalRefineryCount())
-				&& ExpansionWantsRefinery() == null) ||
+			(RefineryLawProvider() != null
+				? ExpansionWantsRefinery() == null
+				: AIUtils.CountActorByCommonName(RefineryBuildings) >= OptimalRefineryCount()
+					&& ExpansionWantsRefinery() == null) ||
 			AIUtils.CountActorByCommonName(powerBuildings) == 0 ||
 			AIUtils.CountActorByCommonName(ConstructionYardBuildings) == 0;
 

@@ -17,6 +17,7 @@ using System.Text;
 using OpenRA.Graphics;
 using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.Cameo.Traits.BotModules;
+using OpenRA.Mods.Common.Traits;
 using OpenRA.Traits;
 
 namespace OpenRA.Mods.Cameo.Traits
@@ -130,7 +131,9 @@ namespace OpenRA.Mods.Cameo.Traits
 			AiMatchLogWriter.AppendString(builder, "category", category);
 			AiMatchLogWriter.AppendString(builder, "reason", reason);
 
-			// Refineries: the nearest anchor (a spreader, else the centre of a spreaderless field) and the distance in cells.
+			// Refineries: the nearest anchor (a spreader, else the centre of a spreaderless field) and the distance in
+			// cells. REF-1 (§12.24 v2): the anchor's field id, the claim tier (1 = the field's first refinery, 2 = an
+			// extra spreader of a covered field) and the footprint's gap to the field's resource cells.
 			if (category == "refinery")
 			{
 				var telemetry = owner.PlayerActor.TraitsImplementing<MasterAiBotModule>().FirstOrDefault()?.ExpansionTelemetry;
@@ -142,6 +145,18 @@ namespace OpenRA.Mods.Cameo.Traits
 						AiMatchLogWriter.AppendString(builder, "anchor_kind", spreader ? "spreader" : "field");
 						AiMatchLogWriter.AppendString(builder, "anchor_cell", anchor.X + "," + anchor.Y);
 						AiMatchLogWriter.AppendNumber(builder, "anchor_dist", Math.Round(distance, 1));
+
+						var footprint = world.Map.Rules.Actors.TryGetValue(actor, out var placed)
+							? placed.TraitInfoOrDefault<BuildingInfo>()?.Tiles(cell).ToList()
+							: null;
+						var (fieldId, tier, gap) = telemetry.PlacementFieldContext(owner, cell, footprint);
+						if (fieldId >= 0)
+						{
+							AiMatchLogWriter.AppendNumber(builder, "field_id", fieldId);
+							AiMatchLogWriter.AppendNumber(builder, "tier", tier);
+							if (gap >= 0)
+								AiMatchLogWriter.AppendNumber(builder, "resource_gap", gap);
+						}
 					}
 				}
 			}
