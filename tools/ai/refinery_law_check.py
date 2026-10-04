@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """refinery_law_check.py - PASS/FAIL verdict per match against the refinery law (DESIGN 19.1b, REF-1).
 
-Reads placement records (`kind:"placement"`, `category:"refinery"` in cameo-ai-placements.jsonl) and the
-top-level `expansion` object of situation snapshots (cameo-ai-situations.jsonl) of one or more match dirs
+Reads placement records (`kind:"placement"`, `category:"refinery"` in cameo-ai-placements.jsonl), the
+refinery lifecycle records (`kind:"refinery_lost"` / `"refinery_acquired"`, same log) and the top-level
+`expansion` object of situation snapshots (cameo-ai-situations.jsonl) of one or more match dirs
 (a batch support dir, its `Logs/`, or a jsonl file) via ai_log_common.
 
 The law (maintainer ruling 2026-10-04, "REF-1"): at most one refinery per SPREADER anchor (a spreaderless
@@ -13,11 +14,18 @@ refinery of every unserved field in reach, home first then each newly reached fi
 
 Per genericbot player x match:
   refineries_per_anchor_max   most refineries on one spreader anchor (anchor_cell; field_id is the tier-2
-                              unit and may lawfully hold several refineries) -> FAIL when > 1; the
-                              snapshot field of the same name is folded in. Rebuild-aware: a 2nd+
-                              same-anchor placement is not counted when the field was in
-                              fields_in_reach_unserved_ids between the previous binding and this tick
-                              (the earlier refinery died or was captured — rebuilds re-serve legally).
+                              unit and may lawfully hold several refineries) -> FAIL when > 1. Rebuild-aware:
+                              a 2nd+ same-anchor placement is not counted when a refinery_lost record on
+                              the same anchor sits between the previous binding and this tick (killed,
+                              captured or sold — the law governs builds, losses make rebuilds legal).
+                              refinery_acquired records never count — a captured refinery is not a build,
+                              so with lifecycle telemetry the live per-anchor maximum is reconstructed
+                              from events (placements minus losses per anchor) instead of the snapshot's
+                              refineries_per_anchor_max, which counts captured co-binds. Logs without
+                              lifecycle records fall back to the field-level evidence: a same-anchor
+                              placement is skipped when its field was in fields_in_reach_unserved_ids
+                              between the previous binding and this tick (blind to out-of-reach losses
+                              and sibling/captured anchors — ruling A's residual).
   base_reason_count           refinery placements with reason "base"           -> FAIL when > 0
   resource_gap histogram      placements' resource_gap cells                   -> FAIL when any > 1
   tier_order_violations       tier>=2 placements while fields_in_reach_unserved > 0 at that tick -> FAIL when > 0
@@ -92,36 +100,72 @@ def check_match(snaps: list[dict], places: list[dict], warn_latency: int = DEFAU
                 min_ticks_first_refinery: int = DEFAULT_MIN_TICKS_FIRST_REFINERY) -> dict:
     snaps = sorted((s for s in snaps if s.get("expansion")), key=lambda s: s["tick"])
     refs = sorted((p for p in places if p.get("category") == "refinery"), key=ptick)
+    # REF-1 telemetry follow-up (lead ruling A): the lifecycle records live in the same log —
+    # refinery_lost proves a binding ended (killed|captured|sold), refinery_acquired marks a
+    # captured refinery, which is never a build. They carry no `category`, so they stay out of refs.
+    lost = sorted((p for p in places if p.get("kind") == "refinery_lost"), key=ptick)
+    acquired = sorted((p for p in places if p.get("kind") == "refinery_acquired"), key=ptick)
+    has_lifecycle = bool(lost or acquired)
     ex = [s["expansion"] for s in snaps]
 
-    # refineries per spreader anchor: computed from placements AND the snapshot's own maximum.
+    # refineries per spreader anchor: computed from placements AND a live per-anchor maximum.
     # Rebuilds after a loss are legal and must not double-count an anchor: a second+ placement on
-    # the same anchor is skipped when the field was listed in fields_in_reach_unserved_ids in a
-    # snapshot taken after the previous same-anchor placement and at-or-before this one — the
+    # the same anchor is skipped when a refinery_lost on that anchor sits in (prev, this] — exact,
+    # no field/reach blindness. Logs without lifecycle records fall back to fields_in_reach_unserved_ids:
+    # the field listed there between the previous same-anchor placement and this one proves the
     # earlier refinery died or was captured and the field legitimately went unserved again
-    # (the REF-1 dd smoke showed refs 4->3->2 before each same-anchor re-placement). Logs without
-    # fields_in_reach_unserved_ids can't prove a rebuild and count every placement (fails closed).
+    # (the REF-1 dd smoke showed refs 4->3->2 before each same-anchor re-placement). Logs with
+    # neither can't prove a rebuild and count every placement (fails closed).
     unserved_by_tick = {}
     for s in snaps:
         ids = s["expansion"].get("fields_in_reach_unserved_ids")
         unserved_by_tick[s["tick"]] = {str(f) for f in ids} if ids is not None else None
     snap_ticks = sorted(unserved_by_tick)
+    lost_by_anchor: dict[str, list[int]] = collections.defaultdict(list)
+    for l in lost:
+        lost_by_anchor[anchor_key(l)].append(ptick(l))
+    for ticks in lost_by_anchor.values():
+        ticks.sort()
+
     anchor_last: dict[str, int] = {}
     per_field = collections.Counter()
     for p in refs:
         key = anchor_key(p)
         fid = p.get("field_id")
-        if key in anchor_last and fid is not None:
-            t0, t1 = anchor_last[key], ptick(p)
-            if any(unserved_by_tick[t] is not None and str(fid) in unserved_by_tick[t]
-                   for t in snap_ticks if t0 < t <= t1):
+        t1 = ptick(p)
+        if key in anchor_last:
+            t0 = anchor_last[key]
+            rebuild = any(t0 < lt <= t1 for lt in lost_by_anchor.get(key, ()))
+            if not rebuild and fid is not None:
+                rebuild = any(unserved_by_tick[t] is not None and str(fid) in unserved_by_tick[t]
+                              for t in snap_ticks if t0 < t <= t1)
+            if rebuild:
                 anchor_last[key] = t1
                 continue
         per_field[key] += 1
-        anchor_last[key] = ptick(p)
+        anchor_last[key] = t1
     computed_max = max(per_field.values(), default=0)
     snapshot_max = max((e.get("refineries_per_anchor_max", 0) for e in ex), default=0)
-    ref_max = max(computed_max, snapshot_max) if (refs or any("refineries_per_anchor_max" in e for e in ex)) else None
+    if has_lifecycle:
+        # With lifecycle telemetry the snapshot's refineries_per_anchor_max is replaced by an
+        # event-reconstructed live maximum: placed cells minus losses per anchor. Acquisitions are
+        # never added — a captured co-bind is not a build, and the ruling-A residual showed the
+        # snapshot metric counting one. A loss removes by cell across anchors (the recorded cell is
+        # the actor's unique address; its anchor key may differ from the placement's if the anchor
+        # model moved). Losses sort before placements at the same tick.
+        live: dict[str, set] = collections.defaultdict(set)
+        snapshot_max = 0
+        events = sorted([(ptick(l), 0, l) for l in lost] + [(ptick(p), 1, p) for p in refs])
+        for tick, kind, rec in events:
+            if kind:
+                s = live[anchor_key(rec)]
+                s.add(rec.get("cell") or f"placement@{tick}")
+                snapshot_max = max(snapshot_max, len(s))
+            else:
+                for s in live.values():
+                    s.discard(rec.get("cell"))
+    ref_max = (max(computed_max, snapshot_max)
+               if (refs or has_lifecycle or any("refineries_per_anchor_max" in e for e in ex)) else None)
 
     base_count = sum(1 for p in refs if p.get("reason") == "base")
 
@@ -226,6 +270,9 @@ def check_match(snaps: list[dict], places: list[dict], warn_latency: int = DEFAU
                                     else "PASS" if known and gap_known and tier_violations is not None else "n/a")
     return {
         "refineries": len(refs),
+        "refinery_lost": len(lost),
+        "refinery_acquired": len(acquired),
+        "per_anchor_basis": "events" if has_lifecycle else "snapshot",
         "refineries_per_anchor_max": ref_max,
         "base_reason_count": base_count,
         "resource_gap_hist": gap_hist if gap_known else "n/a",
