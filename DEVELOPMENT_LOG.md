@@ -1,3 +1,16 @@
+# 2026-10-04 — NOVA: `double_owner` explained and closed (lc5-admission-claim @2cd888287)
+
+*Devin.* The 10-03 `all`-arm `double_owner=1` (`td_gdi_minigunner`, 1 of 184 checks) was the
+admit→claim window: squads add members unleased and the next `ReconcileSquadLeases` claims them,
+so a foreign module ticking in between wins the unit for one sample before the heartbeat hands it
+off. `ProtectOwn`'s draftable also lacked `IsClaimedByOther` and is reachable from
+`INotifyDamage`/`RespondToAttack` between reconcile passes — the only exposed draft site. Fix:
+shared `IsDefenderDraftable` predicate (traits + exclusions + lease check) at both protect-squad
+draft sites, plus `ReconcileSquadLeases()` at the end of `AssignRolesToIdleUnits` and `ProtectOwn`
+— members now leave every admission path already claimed, so `double_owner` is structurally
+impossible rather than timing-dependent. Build 0 err, 834/834, boot PASS. Full evidence chain in
+fleet `STATUS_2026-10-04_nova_lc5_double_owner.md`.
+
 # 2026-10-03 — coordinator: tier-3 hotfix (INC c) + ORDERS round 2 to NOVA/DAWN/EMBER
 
 *Claude.* INC c `3c793d4c3` = DAWN `18556ada5` (GetVariableObservers `override` + base: tier 3 was permanently disabled
