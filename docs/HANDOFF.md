@@ -9,6 +9,33 @@ hunks onto master's files — checkout would have reverted `BotFactionView.Publi
 `IBotInMatchAdaptation` consumed only via `FirstEnabledTraitOrDefault`. Gates: build 0 err / 0 mod-code warnings,
 839/839 tests (+5 `InMatchAdaptTest`), arch coverage + module map regenerated, wiring/fog/direct-mutation audits
 PASS, `tools/boot_gate.ps1` PASS. #792 closed as superseded.
+## 2026-10-04 — NOVA: N1 one-branch port INC-ready — `AP_tier1_priors`
+
+`Agent: Devin (nova) · branch devin/nova/t2-port-v2 @ 6fd362b6b · worktree C:/cameo-wt/nova-t2port`
+*(re-applied from t2-port — the old branch carried one Devin-identity commit `1e8684842`; ruling (b): fresh branch, never merge the old one; trees byte-identical)*
+
+**INC-N ready: `devin/nova/t2-port-v2` — switch: `AP_tier1_priors` (default off).** Round-2 N1: the
+tier-2 follow-ups consolidated onto master ≥ `8e86fca23` — (b) `BotWeaponProfile.Delivery` tag axis,
+(c) canonical `BotEngagementPriors` consumption (`DeliveryArmour@`/`DefenceState@`/`IntoDefencesMilli`,
+`Factor@` path retired), (d) per-cell `PriorPct@` staleness via `ResolvedTagVersus`
+(template-canonical `^Warhead_<tag>` + family fallback, O(1)), (e) no faction-keyed lookups in the
+consumer (helper rule vacuously satisfied). Independent gate `genericbot && tier1_priors`; armed
+alone = inert; missing file = 1000 neutral. Build 0 err, 0 new mod-code warnings, 840/840, audits
+PASS, boot gate via `tools\boot_gate.ps1`.
+Follow-up `21781e27b`: `AttritionExponentMilli` now consumed (`IBotEngagementPriors` default member,
+eval applies `ratio^alpha`, [500,2000] bounds) — it was parsed-but-inert; provider `PriorsState`
+(`none`/`error`/`fitted:N/stale:M`, live stale count) lands on the match record's `priors_state`;
+`tier1_priors` joined `WatchConditions` (priors shift veto verdicts = survivorship filter, §12.33);
+parse failures degrade to neutral instead of throwing in BotTick. Re-gated: 841/841
+(+AttritionExponentWarpsTheRatio), audits PASS, boot PASS.
+Follow-up `70879b038`: `GlobalScaleMilli` consumed — the v2 fitter's relative factors go absolute at
+every fitted lookup (`v × g / 1000`); absent key = Schema-1 semantics; stale/unfitted stays Neutral —
+g never fabricates. Emit side is one yaml line pending the coordinator's ruling (fleet
+`REPLY_2026-10-04_nova_to_t3verify_globalscale.md`). 843/843.
+Follow-up `2cdfdbac8`: parse-tolerance test vs EMBER's real emitted file (`ember-fit`) —
+`Schema`/`LedgerHash`/`Engagements` headers, comments, and the `AttackTiming@`/`Response@`/
+`SuicideIndex@` analysis rows are out-of-contract and skipped by prefix dispatch; the test locks
+that so a parser change cannot turn an unknown block into a load failure. 844/844.
 
 ## 2026-10-03 (night) — Claude (coordinator): ORDERS round 2 for NOVA / DAWN / EMBER + the tier-3 hotfix
 

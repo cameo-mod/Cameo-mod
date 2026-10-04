@@ -413,6 +413,70 @@ Flagged for owners (no test-side repin without a ruling):
   all 8 CannonAP endpoints + forgotten-cannonap; freedom-elite gate unsatisfiable after the
   coupling-regen revert (fixture canonical 45 vs live 44); GhostSniperLockdown/VonSniperLockdown
   fixture-completeness gaps; `test_firepower_consumers` unresolved-armament divergence.
+# 2026-10-04 (later) — NOVA N1 `2cdfdbac8`: parse-tolerance test vs the real emitted file
+
+*Devin (nova), same branch `devin/nova/t2-port`.* EMBER's first real fit (`ember-fit`,
+2,182 engagements fitted / 7,301 records) carries the full emitted block set —
+`Schema`/`LedgerHash`/`Engagements` headers, `#` comments, and `AttackTiming@` /
+`Response@` / `SuicideIndex@` analysis rows the §12.31 consumption contract does not
+define. `BotEngagementPriors.Parse` skips them by construction (prefix dispatch +
+`TryParse`), and `FitterMetadataBlocksAreSkipped` locks that: an out-of-contract block
+can never become a load failure. 844/844. (One real-value trap while writing it:
+`PriorPct: 155` marks the cell STALE in test context — ResolvedTagVersus is null →
+prior-100; the fixture uses 100 and real staleness stays covered by the dedicated tests.)
+
+# 2026-10-04 (later) — NOVA N1 `70879b038`: `GlobalScaleMilli` consumed
+
+*Devin (nova), same branch `devin/nova/t2-port`.* T3Verify's accounting-fixed fitter
+(`devin/t3verify/tier1-fit-scale`) fits cell/defence/into-defences factors RELATIVE to a global
+obs/exp scale g (~1.13 once accounting is fixed) — partial pooling keeps thin cells honest — but
+today g survives only as a yaml comment, so a relative-fitted file would silently under-apply by
+the level. Consumer side now reads the optional `GlobalScaleMilli` header key: every fitted lookup
+(`FactorPermille`/`DefenceFactorPermille`/`IntoDefencesPermille`) multiplies `v × g / 1000` back to
+absolute; absent key = Schema-1 absolute semantics (v1 files read unchanged); a stale or unfitted
+cell returns Neutral before scaling — g never fabricates a correction on its own. The emit side is
+one line (`GlobalScaleMilli: <g×1000>` under `IntoDefencesMilli:`) pending the coordinator's ruling
+— see fleet `REPLY_2026-10-04_nova_to_t3verify_globalscale.md`. `AttritionExponentMilli`
+deliberately unscaled (exponent, not a damage factor). 843/843 (+2 tests), freshness PASS.
+
+# 2026-10-04 (later) — NOVA N1 follow-up `21781e27b`: exponent consumed + priors observability
+
+*Devin (nova), same branch `devin/nova/t2-port`.* The first pass parsed `AttritionExponentMilli`
+but never applied it — the pair-level `CorrectionMilli` seam cannot express a ratio warp. Added
+`IBotEngagementPriors.AttritionExponentMilli` (default 1000); `CombatVetoEval` applies
+`ratio^alpha` and re-derives surviving fractions (Lanchester invariant preserved), clamped to the
+existing [500, 2000] bounds. Provider `PriorsState` (`none`/`error`/`fitted:N/stale:M`, live stale
+count) now lands on the match record's `priors_state` so the A/B review sees unfitted/stale matches
+without digging debug logs; parse failure = `error` + neutral instead of a BotTick throw.
+`tier1_priors` added to `WatchConditions` — it shifts veto verdicts, so it filters which
+engagements exist (§12.33 armed-set attribution). 841/841, audits + boot PASS.
+
+# 2026-10-04 — feat(ai): NOVA round-2 N1 — the tier-2 follow-up port, one branch off master
+
+*Devin (nova), worktree `C:/cameo-wt/nova-t2port`, branch `devin/nova/t2-port` off `origin/master` @
+`8e86fca23` (round-2 orders rule 1). Consolidates `devin/nova/t1-priors-port` (which sat on a
+pre-INC-b/c base with revert+merge history) into ONE clean branch; the #795/#796 parallel lanes are
+superseded by it (F1-a: one format).*
+
+- **(a) veto deltas:** launch-edge consult + remembered-defences already landed via INC-N (my
+  design) — verified present, nothing to re-port.
+- **(b) tag axis:** `BotWeaponProfile.Delivery` = the main warhead's resolved `Warhead@<tag>`
+  suffix (`MiniYaml.Load` merges `Inherits`; same-index first, class-validated, class-name
+  fallback). Joins EMBER's ledger-tag taxonomy.
+- **(c) one schema:** `EngagementPriorsBotModule` reads `BotEngagementPriors`
+  (`DeliveryArmour@d__x__a`, `DefenceState@`, `IntoDefencesMilli`) natively; `Factor@`/
+  `StatFingerprint`/`arsenal_priors` paths retired (F1-a).
+- **(d) per-cell staleness:** `PriorPct@d__x__a` vs `BotUnitProfiles.ResolvedTagVersus(tag)` —
+  `^Warhead_<tag>` template canonical + one-level family fallback = the fitter's own
+  `versus_priors` question, O(1) after the lazy map. A moved Versus neutralizes exactly that cell;
+  absent PriorPct = unfitted = neutral. `LedgerHash` offline provenance only.
+- **(e)** `EngagementPriorsBotModule` performs **no faction-keyed lookups** (delivery x armour
+  axis only) — the `BotFactionView` rule is satisfied vacuously; noted for the record.
+- **Gating:** `AP_tier1_priors` → `tier1_priors` → `genericbot && tier1_priors`, independent of
+  `AN_combat_veto`; armed alone = inert; missing file/provider = 1000 neutral (classic
+  bit-identical).
+- Verified: build 0 err, **0 new mod-code warnings**, 840/840 tests (6 `EngagementPriorsTest`),
+  wiring/fog/direct-mutation/freshness PASS.
 
 # 2026-10-03 — coordinator: tier-3 hotfix (INC c) + ORDERS round 2 to NOVA/DAWN/EMBER
 

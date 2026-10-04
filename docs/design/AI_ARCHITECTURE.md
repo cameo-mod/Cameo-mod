@@ -3686,27 +3686,51 @@ the same `BotCombatPredictor` every predictor consumer already calls — the vet
 flee vetoes = `Denied`/`x_no_outrun`, a stood-down committed squad closes `Released`/`outmatched` via `DismissSquad`.
 EL scores vetoed vs non-vetoed attacks off these records.
 
-**Priors seam** (tier-1 hook): `IBotEngagementPriors.CorrectionMilli(attackerProfile, targetProfile)` (1000
-neutral) applied inside the HP-share damage assembly before the Lanchester core runs — the formula stays in
-`BotCombatPredictor`. `EngagementPriorsBotModule` loads the same committed `ai/learned/arsenal_priors.yaml`
-`BotLearnedPriors` serves (`PriorsFile` knob, mod-relative), once at match start, frozen for the match, absent
-file ⇒ neutral; EMBER's `ArsenalPriors` parser is reused so there is one file format. The fitted file's
-granularity is (faction pair, own unit type) — `target` is unused at this granularity and stays in the API for
-the finer attacker×target table a later fitter may write. The code stays stat-normalised per fleet rule.
+**Priors seam** (tier-1 hook, contract ruling F1 2026-10-03): `IBotEngagementPriors.CorrectionMilli(attackerProfile,
+targetProfile)` (1000 neutral) applied inside the HP-share damage assembly before the Lanchester core runs — the
+formula stays in `BotCombatPredictor`. `EngagementPriorsBotModule` loads `ai/learned/engagement_priors.yaml`
+(`PriorsFile` knob, mod-relative) once at match start, frozen for the match, absent file ⇒ neutral. **One canonical
+schema** (F1-a): the `BotEngagementPriors` root — `DeliveryArmour@<delivery>__x__<armor>` fitted residuals on the
+resolved Versus prior (per-cell factor in thousandths, composed then clamped), per-delivery `DefenceState@<delivery>`
+static-defence factors (applied when the attacker is a building) and the global `IntoDefencesMilli` (applied when the
+target is a building). The retired `EngagementPriors`/`Factor@` schema and the `arsenal_priors.yaml` bridge are gone —
+one format, one parser. The **delivery axis**: `BotWeaponProfile.Delivery` re-derives the main warhead's yaml
+`Warhead@<tag>` suffix from the resolved weapon yaml (`MiniYaml.Load` merges `Inherits`, so the child list is exactly
+what `WeaponInfo.LoadWarheads` iterated; same-index first, class-name-validated, fallback to the lowercased warhead
+class — the balance-pipeline taxonomy the fitter fits). The attacker's dominant weapon against the target supplies the
+cell's delivery key. **Per-cell staleness** (F1-b): the fitter also writes `PriorPct@<d>__x__<a>` = the resolved Versus
+percent the cell was fitted on (fitter default 100). At match start `BotUnitProfiles.ResolvedTagVersus(tag)` re-reads
+the tag's resolved Versus table; a cell whose prior moved reverts to neutral — a rebalance invalidates exactly the
+cells that shifted, not the whole file (the earlier global `StatFingerprint` gate is retired). `LedgerHash` remains
+offline provenance only — the balance ledgers are not mounted in-match. The code stays stat-normalised per fleet rule.
+The fitter's `AttritionExponentMilli` is consumed through `IBotEngagementPriors.AttritionExponentMilli` (default
+1000): `CombatVetoEval` applies `ratio^alpha` on the aggregate prediction and re-derives surviving fractions, bounded
+to the same [500, 2000] knob range — alpha in [0.5, 2.0], the pure square law when absent or disabled. Observability:
+the provider's `PriorsState` (`none` / `error` / `fitted:N/stale:M`, stale read live) lands on the match record's
+`priors_state` player field, and `tier1_priors` joined `UnitCompositionsBotModule.WatchConditions` — the priors shift
+veto verdicts, so they belong in the armed-set attribution (§12.33) alongside `combatveto` itself. The consumer also
+reads the optional `GlobalScaleMilli` header key (default 1000): the v2 fitter emits cell/defence/into-defences factors
+RELATIVE to a global obs/exp scale (the accounting-fixed ~1.13), and the consumer multiplies it back in so a
+relative-fitted file reproduces measured performance — an absent key keeps Schema-1 absolute semantics, and an
+unfitted lookup never fabricates a correction from `g` alone.
 Calibration note (E1b, 2026-10-04): dir-0 of the tier-1 fit prices its expected losses on the real `truth.start`
 victim force — correct for offline calibration — while the seen-vs-truth gap in game is a separate scouting effect
 that the cells must not absorb.
 
 **Perf**: per-squad verdict cached `VetoCacheTicks` (25); the launch check runs once per `AttackForceInterval`;
-no per-tick world enumeration beyond what the consult sites already compute.
+the delivery-tag map resolves once per mod load (`BotUnitProfiles` static); no per-tick world enumeration beyond
+what the consult sites already compute.
 
 **Knobs** (`CombatVetoBotModule`, genericbot-only): `VetoEngageRatioPct` 50, `VetoAbortRatioPct` 35
 (hysteresis: enter ≥50, exit <35), `VetoLaunchRatioPct` 60, `VetoFleeSpeedMarginPct` 100, `VetoCacheTicks` 25,
-`DefenceIncludeCells` 12. `EngagementPriorsBotModule`: `PriorsFile` `ai/learned/arsenal_priors.yaml`,
-`MinCorrectionMilli` 500, `MaxCorrectionMilli` 2000.
+`DefenceIncludeCells` 12. `EngagementPriorsBotModule`: `PriorsFile` `ai/learned/engagement_priors.yaml`,
+`MinCorrectionMilli` 500, `MaxCorrectionMilli` 2000 (the fitter's own [500, 2000] bound, applied to the composed
+product: delivery x armour cell x DefenceState x IntoDefences).
 
-**Switch**: `AN_combat_veto` — `GrantConditionOnBotOwner@combatveto` + `RequiresCondition: genericbot && combatveto`
-on both modules. Default off; classic never sees the provider.
+**Switches**: `AN_combat_veto` — `GrantConditionOnBotOwner@combatveto` + `RequiresCondition: genericbot && combatveto`
+on `CombatVetoBotModule`; `AP_tier1_priors` — `GrantConditionOnBotOwner@tier1priors` + `RequiresCondition: genericbot
+&& tier1_priors` on `EngagementPriorsBotModule` (F1-c: gated independently so a pure-predictor A/B can run unfitted;
+armed alone it is inert — the veto is its only consumer). Both default off; classic never sees either provider.
 
 ### 12.32 AD — in-match adaptation: form tunes the bar (NOVA EL-1)
 

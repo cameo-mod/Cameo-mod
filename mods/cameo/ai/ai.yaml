@@ -122,6 +122,12 @@
 	GrantConditionOnBotOwner@combatveto:
 		Condition: combatveto
 		Bots:
+	# Tier-1 engagement priors (AI_ARCHITECTURE 12.31, contract ruling F1): the veto's fitted delivery x armour
+	# residuals from ai/learned/engagement_priors.yaml. The arm sets Bots (switch group AP_tier1_priors);
+	# empty by default - inert on master. Independent of AN_combat_veto: no provider = neutral 1000.
+	GrantConditionOnBotOwner@tier1priors:
+		Condition: tier1_priors
+		Bots:
 	# Tier-3 pooled bandits (fleet orders 2026-10-03): Thompson-samples a personality arm + an attack-plan overlay
 	# over the EL engagement posteriors in ai/learned/plan_bandits.yaml, with a safety floor. The arm sets Bots
 	# (switch group AO_tier3_bandits); empty by default - inert on master.
@@ -3898,7 +3904,7 @@ Player:
 		MinSafetyLcb: -250
 		# Armed-set attribution (nova review 2026-10-03): decision-side conditions that filter which engagements
 		# exist are recorded as `bandit.armed` so a fitter pass can condition on the survivorship filter.
-		WatchConditions: plan_bandits, build_order_knobs, combatveto, inmatchadapt, armystaging
+		WatchConditions: plan_bandits, build_order_knobs, combatveto, tier1_priors, inmatchadapt, armystaging
 		# Attack-plan arms: one bounded knob overlay multiplied into the build-order vector (preset x learned x plan x
 		# jitter), frozen at match start. `balanced` is the explicit no-op arm so the bandit can choose not to overlay.
 		PlanArms:
@@ -5220,11 +5226,14 @@ Player:
 	# `genericbot && combatveto`: off on master until the increment A/B arms it (switch group AN_combat_veto).
 	CombatVetoBotModule:
 		RequiresCondition: genericbot && combatveto
-	# The veto's tier-1 prior source: the same committed ai/learned/arsenal_priors.yaml BotLearnedPriors
-	# reads, mapped onto IBotEngagementPriors corrections (percent x 10, bounded). Missing file = 1000,
-	# the pure predictor numbers — the veto then runs unfitted but still armed.
+	# The veto's tier-1 prior source (contract ruling F1): ai/learned/engagement_priors.yaml
+	# `BotEngagementPriors` — fitted delivery x armour residuals (DeliveryArmour@d__x__a, per-cell
+	# PriorPct staleness against the resolved Versus) plus DefenceState@/IntoDefencesMilli. Missing
+	# file, missing cell or stale PriorPct = 1000, the pure predictor numbers — the veto then runs
+	# unfitted but still armed. `genericbot && tier1_priors` (switch group AP_tier1_priors): gated
+	# separately from the veto so the pure-predictor A/B can run without fitted priors.
 	EngagementPriorsBotModule:
-		RequiresCondition: genericbot && combatveto
+		RequiresCondition: genericbot && tier1_priors
 
 World:
 	BeaconTracker:

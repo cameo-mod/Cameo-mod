@@ -124,7 +124,7 @@ Dataflow direction: `PERCEPTION -> SITUATION -> STRATEGY -> EXECUTION` with `PRO
 | `BuildOrderKnobsBotModule` | Cameo | `BuildOrderKnobsBotModule` (genericbot && build_order_knobs) | `IBotBuildOrderKnobs`, `IBotTick` | `BaseBuilderBotModuleCA`, `BotPersonalityController`, `IBotUnitRoles`, `MasterAiBotModule`, `PlanBanditBotModule` |
 | `CombatVetoBotModule` | Cameo | `CombatVetoBotModule` (genericbot && combatveto) | `IBotCombatVeto` | — |
 | `EngagementLogBotModule` | Cameo | `EngagementLogBotModule` | `IBotRespondToAttack`, `IBotTick` | — |
-| `EngagementPriorsBotModule` | Cameo | `EngagementPriorsBotModule` (genericbot && combatveto) | `IBotEngagementPriors`, `IBotTick` | `IBotMainTargetProvider` |
+| `EngagementPriorsBotModule` | Cameo | `EngagementPriorsBotModule` (genericbot && tier1_priors) | `IBotEngagementPriors`, `IBotTick` | — |
 | `GarrisonContestBotModule` | Cameo | `GarrisonContestBotModule` (genericbot && garrison_contest) | `IBotCaptureClaimSource`, `IBotMissionProvider`, `IBotTick` | `IBotRememberedDefenceProvider`, `IBotZoneTopology` |
 | `InMatchAdaptBotModule` | Cameo | `InMatchAdaptBotModule` (genericbot && inmatchadapt) | `IBotInMatchAdaptation`, `IBotTick` | `EngagementLogBotModule` |
 | `ParallelProductionBotModule` | Cameo | `ParallelProductionBotModule` (genericbot && parallel_production) | `IBotProductionWidth` | — |
