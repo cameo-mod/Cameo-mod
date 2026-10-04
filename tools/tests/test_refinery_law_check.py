@@ -149,6 +149,52 @@ class RefineryLawCheckTests(unittest.TestCase):
         # exit code ignores classic rows even when its metrics would fail
         self.assertEqual(rlc.main.__module__, "refinery_law_check")
 
+    def test_exact_per_field_latency(self):
+        res = self.build_one(
+            [snap("g1", "Multi0", 100, fields_in_reach_unserved=1, fields_in_reach_unserved_ids=["f1"]),
+             snap("g1", "Multi0", 200, fields_in_reach_unserved=2, fields_in_reach_unserved_ids=["f1", "f2"]),
+             snap("g1", "Multi0", 900, fields_in_reach_unserved=0, fields_in_reach_unserved_ids=[])],
+            [place("g1", "Multi0", 300, field_id="f1", tier=1),
+             place("g1", "Multi0", 400, field_id="f2", tier=1, anchor_cell="50,50")])
+        r = self.row(res)
+        self.assertEqual(r["verdict"], "PASS")
+        self.assertEqual(r["claim_latency_basis"], "exact")
+        # f1: 300-100=200, f2: 400-200=200
+        self.assertEqual(r["claim_latency_p50"], 200)
+        self.assertEqual(r["claim_latency_max"], 200)
+        self.assertEqual(r["claim_latency_never"], 0)
+
+    def test_unserved_field_flagged_never(self):
+        res = self.build_one(
+            [snap("g1", "Multi0", 100, fields_in_reach_unserved=1, fields_in_reach_unserved_ids=["f1"]),
+             snap("g1", "Multi0", 200, fields_in_reach_unserved=2, fields_in_reach_unserved_ids=["f1", "f3"]),
+             snap("g1", "Multi0", 1000, fields_in_reach_unserved=2, fields_in_reach_unserved_ids=["f1", "f3"])],
+            [place("g1", "Multi0", 300, field_id="f1", tier=1)])
+        r = self.row(res)
+        self.assertEqual(r["claim_latency_never"], 1)
+        self.assertEqual(r["verdict"], "WARN")  # f3 sat unserved to match end (snap@1000 -> 800t)
+        self.assertEqual(r["claim_latency_max"], 800)
+
+    def test_never_uses_match_duration_when_logged(self):
+        res = rlc.build({"matches": [{**match("g1", "Multi0"), "duration_ticks": 2000}],
+                         "situations": [snap("g1", "Multi0", 100, fields_in_reach_unserved=1, fields_in_reach_unserved_ids=["f9"]),
+                                        snap("g1", "Multi0", 500, fields_in_reach_unserved=1, fields_in_reach_unserved_ids=["f9"])],
+                         "placements": [place("g1", "Multi0", 300, field_id="f1", tier=1)],
+                         "engagements": []})
+        r = self.row(res)
+        self.assertEqual(r["claim_latency_max"], 1900)  # 2000-100 via duration_ticks, not last snap 500
+
+    def test_map_aggregate_na_when_all_missing(self):
+        # old-schema rows only -> map-level gap/tier/anchor must be n/a, never a fake 0
+        p = place("g1", "Multi0", 200)
+        for k in ("field_id", "tier", "resource_gap"):
+            p.pop(k)
+        res = self.build_one([snap("g1", "Multi0", 100)], [p])
+        m = res["maps"][0]
+        self.assertIsNone(m["resource_gap_max"])
+        self.assertIsNone(m["tier_order_violations"])
+        self.assertIsNotNone(m["worst_refineries_per_anchor_max"])  # anchor computable from anchor_cell
+
     def test_exit_codes(self):
         with tempfile.TemporaryDirectory() as tmp:
             good = write_dir(pathlib.Path(tmp), "good",

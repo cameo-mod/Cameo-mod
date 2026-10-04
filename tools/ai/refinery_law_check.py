@@ -67,9 +67,14 @@ def anchor_key(p: dict) -> str:
     return str(v) if v not in (None, "") else str(p.get("field_id") or "?")
 
 
-def check_match(snaps: list[dict], places: list[dict], warn_latency: int = DEFAULT_WARN_LATENCY) -> dict:
+def ptick(p: dict) -> int:
+    return p.get("placed_tick") or p.get("tick") or 0
+
+
+def check_match(snaps: list[dict], places: list[dict], warn_latency: int = DEFAULT_WARN_LATENCY,
+                match_end: int | None = None) -> dict:
     snaps = sorted((s for s in snaps if s.get("expansion")), key=lambda s: s["tick"])
-    refs = sorted((p for p in places if p.get("category") == "refinery"), key=lambda p: p["tick"])
+    refs = sorted((p for p in places if p.get("category") == "refinery"), key=ptick)
     ex = [s["expansion"] for s in snaps]
 
     # refineries per spreader anchor: computed from placements AND the snapshot's own maximum
@@ -93,20 +98,45 @@ def check_match(snaps: list[dict], places: list[dict], warn_latency: int = DEFAU
             t = tier_of(p)
             if t is None or t < 2:
                 continue
-            before = [s for s in snaps if s["tick"] <= p["tick"]]
+            before = [s for s in snaps if s["tick"] <= ptick(p)]
             unserved = before[-1]["expansion"].get("fields_in_reach_unserved", 0) if before else 0
             if unserved > 0:
                 tier_violations += 1
 
-    # claim latency: placed_tick minus the first snapshot that counted unserved fields (lower bound;
-    # per-field first-seen is not logged). Tier-1 placements only once REF-1 logs tiers — tier-2
-    # refineries are lawfully delayed and would skew the figure.
+    # claim latency. Exact per-field once the snapshot logs fields_in_reach_unserved_ids (sorted list of
+    # field_id): first snapshot the id appears -> that field's first tier-1 refinery; a field never
+    # served counts to match end and is flagged "never". Otherwise the lower bound: tier-1 placements
+    # only, minus the first snapshot that counted unserved fields (per-field first-seen is not logged).
     latencies = None
-    if have_unserved:
+    never_served = None
+    latency_basis = None
+    if any("fields_in_reach_unserved_ids" in e for e in ex):
+        latency_basis = "exact"
+        first_seen = {}
+        for s in snaps:
+            for fid in s["expansion"].get("fields_in_reach_unserved_ids") or []:
+                first_seen.setdefault(str(fid), s["tick"])
+        served = {}
+        for p in refs:
+            fid = p.get("field_id")
+            t = tier_of(p)
+            if fid is not None and (t is None or t < 2) and str(fid) not in served:
+                served[str(fid)] = ptick(p)
+        end = match_end if match_end is not None else (snaps[-1]["tick"] if snaps else 0)
+        latencies, never_served = [], 0
+        for fid, t0 in first_seen.items():
+            if fid in served:
+                latencies.append(max(0, served[fid] - t0))
+            else:
+                never_served += 1
+                latencies.append(max(0, end - t0))
+        latencies.sort()
+    elif have_unserved:
+        latency_basis = "lower-bound"
         first_unserved = next((s["tick"] for s in snaps if s["expansion"].get("fields_in_reach_unserved", 0) > 0), None)
         tier1 = [p for p in refs if tier_of(p) in (None, 1)] if any(tier_of(p) is not None for p in refs) else refs
-        latencies = sorted(p["tick"] - first_unserved for p in tier1
-                           if first_unserved is not None and p["tick"] >= first_unserved)
+        latencies = sorted(ptick(p) - first_unserved for p in tier1
+                           if first_unserved is not None and ptick(p) >= first_unserved)
 
     def pct(q):
         if not latencies:
@@ -126,7 +156,8 @@ def check_match(snaps: list[dict], places: list[dict], warn_latency: int = DEFAU
 
     known = bool(refs) and ref_max is not None
     p90 = pct(0.9)
-    verdict = "FAIL" if fails else ("WARN" if p90 is not None and p90 > warn_latency
+    warn = (p90 is not None and p90 > warn_latency) or bool(never_served)
+    verdict = "FAIL" if fails else ("WARN" if warn and known
                                     else "PASS" if known and gap_known and tier_violations is not None else "n/a")
     return {
         "refineries": len(refs),
@@ -137,6 +168,7 @@ def check_match(snaps: list[dict], places: list[dict], warn_latency: int = DEFAU
         "tier_order_violations": tier_violations,
         "claim_latency_p50": pct(0.5), "claim_latency_p90": p90, "claim_latency_max": latencies[-1] if latencies else None,
         "claim_latency_n": len(latencies) if latencies else 0,
+        "claim_latency_basis": latency_basis, "claim_latency_never": never_served,
         "peak_coverage_milli": max((e.get("coverage_milli", 0) for e in ex), default=None),
         "final_coverage_milli": ex[-1].get("coverage_milli") if ex else None,
         "fails": fails,
@@ -162,7 +194,7 @@ def build(data: dict[str, list[dict]], warn_latency: int = DEFAULT_WARN_LATENCY)
                "map_uid": ref.get("map_uid") or (match or {}).get("map_uid", ""),
                "map_title": (match or {}).get("map_title") or ref.get("map_title") or "",
                "faction": ref.get("faction") or (match or {}).get("player", {}).get("faction", "")}
-        row.update(check_match(snaps, places, warn_latency))
+        row.update(check_match(snaps, places, warn_latency, (match or {}).get("duration_ticks")))
         rows.append(row)
 
     by_map = collections.defaultdict(list)
@@ -173,15 +205,22 @@ def build(data: dict[str, list[dict]], warn_latency: int = DEFAULT_WARN_LATENCY)
     for map_name, members in sorted(by_map.items()):
         verdicts = collections.Counter(m["verdict"] for m in members)
         lat = sorted(v for m in members for v in [m["claim_latency_p90"]] if v is not None)
+
+        def worst(key):
+            vals = [m[key] for m in members if m[key] is not None]
+            return max(vals) if vals else None  # n/a when no match produced the metric — a 0 reads like a pass
+
         maps.append({
             "map": map_name, "map_uids": sorted({m["map_uid"] for m in members}), "matches": len(members),
             "fail": verdicts.get("FAIL", 0), "warn": verdicts.get("WARN", 0),
             "pass": verdicts.get("PASS", 0), "n/a": verdicts.get("n/a", 0),
-            "worst_refineries_per_anchor_max": max((m["refineries_per_anchor_max"] or 0 for m in members), default=0),
+            "worst_refineries_per_anchor_max": worst("refineries_per_anchor_max"),
             "base_reason_count": sum(m["base_reason_count"] for m in members),
-            "resource_gap_max": max((m["resource_gap_max"] or 0 for m in members), default=0),
-            "tier_order_violations": sum(m["tier_order_violations"] or 0 for m in members),
+            "resource_gap_max": worst("resource_gap_max"),
+            "tier_order_violations": None if all(m["tier_order_violations"] is None for m in members)
+                                     else sum(m["tier_order_violations"] or 0 for m in members),
             "claim_latency_p90": lat[-1] if lat else None,
+            "claim_latency_never": sum(m["claim_latency_never"] or 0 for m in members) or None,
         })
     return {"matches": rows, "maps": maps}
 
@@ -190,7 +229,7 @@ def render(result: dict, warn_latency: int) -> str:
     gen = [r for r in result["matches"] if is_genericbot(r["bot_type"])]
     classic = [r for r in result["matches"] if not is_genericbot(r["bot_type"])]
     head = ["verdict", "map", "game/player", "refs", "per_anchor_max", "base", "gap_hist", "tier_viol",
-            "lat_p50", "lat_p90", "lat_max", "peak_cov", "final_cov", "fails"]
+            "lat_p50", "lat_p90", "lat_max", "lat_never", "peak_cov", "final_cov", "fails"]
     rows = [head]
     for r in gen:
         rows.append([r["verdict"], (r["map_title"] or r["map_uid"] or "?")[:14], f'{r["game_uid"][:8]}/{r["player"]}',
@@ -198,6 +237,7 @@ def render(result: dict, warn_latency: int) -> str:
                      r["base_reason_count"], r["resource_gap_hist"],
                      r["tier_order_violations"] if r["tier_order_violations"] is not None else "n/a",
                      c.fmt(r["claim_latency_p50"]), c.fmt(r["claim_latency_p90"]), c.fmt(r["claim_latency_max"]),
+                     r["claim_latency_never"] if r["claim_latency_never"] is not None else "-",
                      c.fmt(r["peak_coverage_milli"]), c.fmt(r["final_coverage_milli"]), ";".join(r["fails"]) or "-"])
     out = [f"refinery law check: {len(gen)} genericbot player-match(es), warn-latency={warn_latency}t",
            "FAIL = per_anchor_max>1 | base>0 | gap>1 | tier-2 while fields unserved; n/a = field absent from old logs",
@@ -209,13 +249,17 @@ def render(result: dict, warn_latency: int) -> str:
                           r["refineries"], r["refineries_per_anchor_max"] or "-", r["base_reason_count"],
                           r["resource_gap_hist"], r["tier_order_violations"] if r["tier_order_violations"] is not None else "n/a",
                           c.fmt(r["claim_latency_p50"]), c.fmt(r["claim_latency_p90"]), c.fmt(r["claim_latency_max"]),
+                          r["claim_latency_never"] if r["claim_latency_never"] is not None else "-",
                           c.fmt(r["peak_coverage_milli"]), c.fmt(r["final_coverage_milli"]), "-"])
         out += ["", "classic / non-generic (information only, never fails)", c.table(crows)]
-    mrows = [["map", "matches", "FAIL", "WARN", "PASS", "n/a", "worst_per_anchor", "base", "gap_max", "tier_viol", "lat_p90"]]
+    mrows = [["map", "matches", "FAIL", "WARN", "PASS", "n/a", "worst_per_anchor", "base", "gap_max", "tier_viol", "lat_p90", "lat_never"]]
     for m in result["maps"]:
         mrows.append([(m["map"] or "?")[:14], m["matches"], m["fail"], m["warn"], m["pass"], m["n/a"],
-                      m["worst_refineries_per_anchor_max"], m["base_reason_count"], m["resource_gap_max"],
-                      m["tier_order_violations"], c.fmt(m["claim_latency_p90"])])
+                      m["worst_refineries_per_anchor_max"] if m["worst_refineries_per_anchor_max"] is not None else "n/a",
+                      m["base_reason_count"],
+                      m["resource_gap_max"] if m["resource_gap_max"] is not None else "n/a",
+                      m["tier_order_violations"] if m["tier_order_violations"] is not None else "n/a",
+                      c.fmt(m["claim_latency_p90"]), m["claim_latency_never"] or "-"])
     out += ["", "per map (genericbot)", c.table(mrows)]
     return "\n".join(out)
 
