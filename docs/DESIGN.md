@@ -5350,6 +5350,47 @@ and objective terms (buildings count two-thirds by HP lost and one-third on deat
 Spec: `design/AI_ARCHITECTURE.md` §12.30 (EL). The "deep RL: not now" verdict of `AI_DEEP_RESEARCH.md` §6.3 is amended
 accordingly.
 
+### 19.14 A hard AI takes over disconnected and surrendered players (maintainer rulings 2026-10-04) — binding
+
+In multiplayer games, when one player disconnects (leaves on purpose or loses connection), that player gets replaced
+by our new hard AI instead of becoming an idle player, so in team games like 2v2 the team can continue instead of it
+turning into a 2v1. The hard AI has no production speed/cost bonuses, so that is fair. The binding rules:
+
+- **R1.** Trigger = a DISCONNECT (leave or connection loss; the synced Disconnect order) or a SURRENDER (the synced
+  "Surrender" order).
+- **R2.** "Teams alive" = distinct teams (a no-team player = a team of one) with at least one player whose WinState is
+  Undefined, humans AND bots (including taken-over seats), read from synced state only.
+- **R3.** If teams alive > 2 (FFA / multi-team): the triggering player is ALWAYS taken over, even as the last player
+  of their team.
+- **R4.** If teams alive == 2: a SURRENDER is taken over UNLESS the surrendering player is the last undefeated player
+  of ANY kind on their team (no other teammate, human, lobby bot or takeover AI, has WinState Undefined); only that
+  last player's surrender takes today's defeat for their own player (ForceDefeat: buildings explode, units die).
+  A DISCONNECT is ALWAYS a takeover — any team count, last player or not, 1v1 included — behind one policy point
+  (`BotTakeoverTracker.LastPlayerDisconnect`, default `Takeover`, alternatives `Defeat` and `Idle`).
+- **R5.** A taken-over player stays AI for the rest of the match and is NOT defeated by its team's humans leaving. It
+  must be destroyed like any player to win (the normal conquest condition). In a 2-team game whose humans are all
+  gone, the remaining team must destroy every takeover AI.
+- **R6.** The takeover bot is the same genericbot hard stack as a lobby hard bot (verified neutral: production
+  multiplier 100/100), no cheats.
+- **R7.** Lobby checkbox "Replace disconnected players with AI", default ON, lobby-synced.
+
+Implementation: `BotTakeoverTracker` (world; synced connected-set and takeover records; controller = lowest index of
+connected bound clients who are not taken-over seats — spectators never control — re-elected on every synced disconnect),
+`CameoValidateOrder`
+(shadows `ValidateOrder`; a takeover seat accepts orders only from the elected controller, so the surrendered human's
+own orders are rejected), `CameoMissionObjectives` (re-lists `IResolveOrder`; intercepts Surrender before `ForceDefeat`),
+and grants of the `genericbot` + `hardbot` conditions PLUS every `GrantConditionOnBotOwner` whose `Bots` list names the
+takeover type (e.g. `inc3_frans_services` for `hard`), resolved from the rules so the seat carries exactly a lobby hard
+bot's set (R6), plus `IBot.Activate` on the elected client. Teams are snapshotted at load from the lobby client rows for
+EVERY slot-bound player, bots included — a lobby bot never keeps its map team id (the engine only applies lobby teams in
+`SetupPlayerMasks`). Single-player
+games keep the classic path. The match log records `takeover.taken_over_at`, `trigger`, `bot_type`,
+`controller_client`, keeps its capture open while a bound human seat can still convert, and log ownership IS the
+elected controller from match start — spectator connectivity (a departed spectator admin produces no synced notify)
+never governs the record; with no electable client left the host writes (AI_MATCH_LOG.md). Phase 2 (re-hosting
+pre-existing lobby bots
+when their controller drops) is out of scope.
+
 ## 20. AI bot unit compositions
 
 Unit compositions are opt-in through `UseCompositions: true` on

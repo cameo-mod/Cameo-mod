@@ -1,3 +1,77 @@
+# 2026-10-04 — Devin-T3Verify: TAKEOVER bot-stance fix + tactical-map lazy build (user-reported passivity)
+
+*Devin.* `devin/t3verify/bot-takeover` (on top of `fe4a43131`). Maintainer report: a taken-over seat's army "stays in
+guard stance and never attacks" — literally correct. `AutoTarget` resolves `Owner.IsBot || !Owner.Playable` at actor
+creation to pick `InitialStanceAI` (AttackAnything) vs `InitialStance` (Defend); `Player.IsBot`/`BotType` are fixed at
+construction from the client's `Bot:` slot field, which is permanently null for a taken-over human seat — so the
+inherited army AND all post-takeover production hold `Defend` forever (and the same `IsBot` read gates the
+`botmicro` unit conditions, `IBotTeamMember` enumeration, transport loading, frozen-target firing, and
+`DynamicBotInsurance` rank — all degrade, none block). `BotTakeoverTracker` now (a) re-imposes each unit's
+`AutoTargetInfo.InitialStanceAI` at `PerformTakeover` and (b) repeats the pass every `StanceRefreshIntervalTicks`
+(default 25) so post-takeover production gets the bot stance too — deterministic synced scan on every client.
+`TacticalMapBotModule.BotTick` builds its topology lazily when `!TopologyReady` — the `player.IsBot` WorldLoaded
+frame task never fires for takeover seats and bot ticks only run on the controller, so the lazy build costs
+nothing for normal bots and self-heals the takeover case. `ActivateBotHere` logs one `bot_takeover: activated`
+debug line for observability. Full `player.IsBot` parity (team channels, botmicro, frozen-target, insurance rank)
+needs an engine `Player.AssignBotType` seam — filed as the follow-up; the mod-side fixes cover the reported
+symptom. Build 0/0, focused suite 22/22, boot gate PASS (isolated support dir).
+
+# 2026-10-04 — Devin-T3Verify: TAKEOVER T4 rev-2 (controller-exclusive log ownership)
+
+*Devin.* `devin/t3verify/bot-takeover` (on top of `3d6c39ae3`). Boss re-review closed T1/T2/T3 and the T4
+duplicate-write but kept T4 open on the stranded-record residual — and ruled it does NOT need an engine change:
+the elected bound controller is the sole writer from match start whenever takeover is enabled and Controller>=0,
+so spectator connectivity never governs ownership. `IsLogOwner` = `OwnerIsLocal(host, takeoverEnabled, controller,
+localClientId)`: `takeoverEnabled && controller >= 0 → controller == localClientId; else host`. `AdminConnected` /
+`adminClientIndex` removed (dead under this policy); the ghost-spectator caveat stays as an informational note —
+unobservable departure, now harmless by construction. Docs rewritten to the new policy (AI_MATCH_LOG.md,
+DESIGN §19.14) — no more "engine-pin limitation" claim. +4 owner-selection matrix tests (spectator admin
+present/departed → same sole writer; controller disconnect → writer re-elects; surrendered admin can't duplicate;
+disabled/single-player keeps host). Focused suite 22/22, build 0/0, boot gate PASS (isolated support dir).
+
+# 2026-10-04 — Devin-T3Verify: TAKEOVER review corrections T1-T4 (boss static review @9a0348101)
+
+*Devin.* `devin/t3verify/bot-takeover` in `C:/cameo-wt/takeover`. Four findings from the independent review
+(`C:/cameo-wt/boss_review/docs/review_2026_10_04_takeover_bp.md`, fleet `STATUS_2026-10-04_boss_independent_review.md`),
+each with regression tests:
+**T1** `AiMatchLogWriter`: capture stayed open only until `AllBotsResolved` — `All(empty)` on a human-only match closed
+it at tick 0, and `!IsLogOwner()`/empty-log paths latched `written` forever. Now `CaptureReady` waits for logged seats
+to resolve AND `tracker.HasOpenSeats` (bound human, undefeated, still connected, not taken over) to close; non-owner
+processes return silently instead of latching (a client may be elected after the admin drops); an empty build keeps
+open while seats can still convert.
+**T2** `BotTakeoverTracker`: `teamOf` snapshotted map `PlayerReference.Team` and overwrote only for `NonBotPlayers`, so
+lobby bots kept map team 0 — a human-vs-2-bots lobby read 3 teams and a last-human surrender would wrongly take over.
+Now `LobbyTeamOf` reads `ClientInSlot(slot).Team` for EVERY slot-bound player (the engine only applies lobby teams in
+`SetupPlayerMasks`); the match log's team fields read the snapshot via `TeamOfPlayer` because a departed takeover seat's
+client row is gone.
+**T3** takeover grants were the fixed `{genericbot,hardbot}`: a real hard bot also carries `inc3_frans_services`
+(`GrantConditionOnBotOwner@inc3f1`, ai.yaml) which arms eight Frans service modules — R6 parity broken. Now
+`ResolvedBotConditions` resolves `info.Conditions` ∪ matching `GrantConditionOnBotOwner` grants from the player actor's
+rules — identical on every client.
+**T4** `connectedClients` was seeded from `NonBotPlayers`, so a spectator admin read `AdminConnected=false` and both the
+admin's and controller's processes could write the record. Now seeded from `NonBotClients` (whole human session);
+electability stays bound-playable only (`boundClients` + `ElectableClients`). Residual, documented in AI_MATCH_LOG.md +
+DESIGN §19.14: a spectator's DEPARTURE produces no playable player, so the synced disconnect notify never reaches the
+tracker — a departed spectator admin stays AdminConnected and the record stays on that process (engine-pin limitation;
+playable admins hand over correctly).
+Gates: build 0 warn/0 err, 852/852 tests (+6), fog-honesty PASS, bot direct-mutation PASS, arch audit R1/R2 ok
+(R3/R4 warnings pre-existing, none in touched files), boot gate PASS (menu, 0 new exceptions, isolated support dir).
+
+# 2026-10-04 — Devin-T3Verify: TAKEOVER-IMPL phase 1 (hard AI replaces disconnected/surrendered players)
+
+*Devin.* `devin/t3verify/bot-takeover` in `C:/cameo-wt/takeover` (base origin/master `8e86fca23`). Phase 1 of the
+V2 survey design, maintainer rules 2026-10-04 (R4 rev 2: last undefeated PLAYER of any kind; disconnect always
+takeover). New: `BotTakeoverTracker` (world; synced connected-set, seat binding via `Player.InternalName == client.Slot`,
+deterministic controller = lowest electable client index, re-elected on every synced disconnect; last-player disconnect
+policy point default Takeover), `CameoValidateOrder` (stock `ValidateOrder` replaced in world.yaml — takeover seats pass
+only from the current controller), `CameoMissionObjectives : MissionObjectives, IResolveOrder` (re-listed interface;
+intercepts Surrender before ForceDefeat), lobby checkbox `bot_takeover` (LobbySystemActorConditionCheckbox, default ON),
+`AiMatchLogWriter` takeover block + log ownership follows elected controller once the admin drops (no double writes).
+MP-only (`EnableSingleplayer` gates the classic path). Gates: build 0 warn/0 err, 846/846 tests, fog + bot
+direct-mutation audits PASS, boot gate PASS. Multi-client smoke NOT run — the harness (`run_ai_match_batch.py`) is
+headless `Launch.Map` local-server, no real lobby human clients; needs a manual dedicated-server 2-client test.
+Phase 2 (lobby-bot failover on admin drop) explicitly out of scope.
+
 # 2026-10-03 — coordinator: tier-3 hotfix (INC c) + ORDERS round 2 to NOVA/DAWN/EMBER
 
 *Claude.* INC c `3c793d4c3` = DAWN `18556ada5` (GetVariableObservers `override` + base: tier 3 was permanently disabled
