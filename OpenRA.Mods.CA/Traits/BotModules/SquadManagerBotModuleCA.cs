@@ -54,11 +54,6 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Enemy building types around which to scan for targets for naval squads.")]
 		public readonly HashSet<string> NavalProductionTypes = new HashSet<string>();
 
-		/*
-		[Desc("Own actor types that are prioritized when defending.")]
-		public readonly HashSet<string> ProtectionTypes = new HashSet<string>();
-		*/
-
 		[Desc("Minimum number of units AI must have before attacking.")]
 		public readonly int SquadSize = 8;
 
@@ -1169,7 +1164,7 @@ namespace OpenRA.Mods.CA.Traits
 		// prior stands and nothing omniscient leaks in.
 		internal (double Air, double Total) ObservedEnemyMix()
 		{
-			var provider = Player.PlayerActor.TraitsImplementing<IBotEnemyCompositionProvider>().FirstOrDefault();
+			var provider = Player.PlayerActor.TraitsImplementing<IBotEnemyCompositionProvider>().FirstEnabledTraitOrDefault();
 			if (provider == null || !provider.TryGetEnemyComposition(out var valueByActorType))
 				return (0, 0);
 
@@ -3065,7 +3060,7 @@ namespace OpenRA.Mods.CA.Traits
 			var forceScale = 100;
 			if (Info.UseDirectorPacing)
 			{
-				var director = Player.PlayerActor.TraitsImplementing<IBotDirector>().FirstOrDefault();
+				var director = Player.PlayerActor.TraitsImplementing<IBotDirector>().FirstEnabledTraitOrDefault();
 				if (director != null)
 					forceScale = DirectorForceScalePercent(director.DirectorPhase, Info);
 			}

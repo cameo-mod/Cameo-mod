@@ -426,7 +426,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		// enemy), else the map centre. Nothing here enumerates the world's actors.
 		CPos ThreatCell()
 		{
-			var main = player.PlayerActor.TraitsImplementing<IBotMainTargetProvider>().Select(p => p.MainTarget).FirstOrDefault(t => t != null);
+			var main = player.PlayerActor.TraitsImplementing<IBotMainTargetProvider>().Where(p => p.IsTraitEnabled()).Select(p => p.MainTarget).FirstOrDefault(t => t != null);
 			var remembered = player.PlayerActor.TraitsImplementing<IBotRememberedDefenceProvider>()
 				.SelectMany(p => p.RememberedDefences()).ToArray();
 			var pool = main != null ? remembered.Where(d => d.Enemy == main).ToArray() : remembered;

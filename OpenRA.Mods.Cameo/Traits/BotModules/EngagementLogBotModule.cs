@@ -784,7 +784,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			// AI_ARCHITECTURE 12.29: the staging point, read-only via IBotArmyStaging (null when no provider / no plan yet).
 			string stagingCell = null;
 			var stagingDist = -1;
-			var staging = player.PlayerActor.TraitsImplementing<IBotArmyStaging>().FirstOrDefault();
+			var staging = player.PlayerActor.TraitsImplementing<IBotArmyStaging>().FirstEnabledTraitOrDefault();
 			var stagingPoint = staging?.PrimaryStagingCell;
 			if (stagingPoint != null)
 			{

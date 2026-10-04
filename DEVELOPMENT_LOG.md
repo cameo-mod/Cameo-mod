@@ -1,3 +1,17 @@
+# 2026-10-04 — nova: seam hygiene — disabled-provider guards + dead config removal
+
+*Devin (nova).* Companion to the fleet arch review (`COORD_2026-10-04_nova_arch_review_wave.md`):
+six consumer sites took `TraitsImplementing<IBot*>().FirstOrDefault()` with no disabled-provider
+check — same class the CombatVeto review fixed (`FirstEnabledTraitOrDefault`). Guards applied at
+ScoutBotModule:121 (MainTarget), SquadManagerBotModuleCA:1145 (EnemyComposition) + :3037 (Director),
+UnitBuilderBotModuleCA:220 (EnemyComposition — file already used the enabled form for every other
+provider), ScaleTargetsBotModule:214 (ZoneTopology), EngagementLogBotModule:776 (ArmyStaging);
+DefenseCoveragePlanner:429 got `Where(IsTraitEnabled)` ahead of its Select. No behaviour change
+while providers share the consumer's gate; this removes the silent-wrong-data path for any future
+map/switch that splits them. Also removed two dead declarations the arch audit flags (R5/R6):
+`BotLeasePurpose.McvExpansion` (no claim site exists anywhere) and the CA-donor commented-out
+`ProtectionTypes` block in SquadManagerBotModuleCA (audit's "declared, never read" was the comment).
+Gates: build 0 errors / 0 mod warnings, 834/834, boot gate PASS.
 # 2026-10-04 — Claude (lead): INC 2026-10-04e lands — INC-d completed (P0 raid gate), LC5 admission claims, checker v2, E2 test baseline
 
 *Claude.* Branch `inc/2026_10_04e` from master `1fbd239ff`:

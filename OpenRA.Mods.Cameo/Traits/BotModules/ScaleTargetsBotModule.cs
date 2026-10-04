@@ -211,7 +211,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			master = playerActor.TraitsImplementing<MasterAiBotModule>().FirstEnabledTraitOrDefault();
 			personalityController = playerActor.TraitOrDefault<BotPersonalityController>();
 			axes = Info.UseUtilityAxes ? playerActor.TraitsImplementing<IBotUtilityAxes>().FirstEnabledTraitOrDefault() : null;
-			topology = playerActor.TraitsImplementing<IBotZoneTopology>().FirstOrDefault();
+			topology = playerActor.TraitsImplementing<IBotZoneTopology>().FirstEnabledTraitOrDefault();
 			roles = playerActor.TraitsImplementing<IBotUnitRoles>().FirstEnabledTraitOrDefault();
 			budget = playerActor.TraitsImplementing<BotGlobalUnitBudget>().FirstEnabledTraitOrDefault();
 

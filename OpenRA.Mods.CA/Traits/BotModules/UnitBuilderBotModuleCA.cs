@@ -217,7 +217,7 @@ namespace OpenRA.Mods.CA.Traits
 			requestPause = self.TraitsImplementing<IBotRequestPauseUnitProduction>().ToArray();
 			playerResources = self.Owner.PlayerActor.Trait<PlayerResources>();
 			techTree = self.Owner.PlayerActor.TraitOrDefault<TechTree>();
-			compositionProvider = self.TraitsImplementing<IBotEnemyCompositionProvider>().FirstOrDefault();
+			compositionProvider = self.TraitsImplementing<IBotEnemyCompositionProvider>().FirstEnabledTraitOrDefault();
 			leadProviders = self.TraitsImplementing<IBotPersonalityLeadProvider>().ToArray();
 			compositionsModule = Info.UseCompositions ? self.World.WorldActor.TraitOrDefault<UnitCompositionsBotModule>() : null;
 
