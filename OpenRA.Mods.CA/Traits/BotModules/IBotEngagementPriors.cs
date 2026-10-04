@@ -34,8 +34,8 @@ namespace OpenRA.Mods.CA.Traits.BotModuleLogic
 		int AttritionExponentMilli => 1000;
 
 		/// <summary>
-		/// Load state for the match record — e.g. <c>none</c> / <c>error</c> / <c>fitted:N/stale:M</c> — prefixed
-		/// with a source label. Null when the provider carries no priors file (the field is then omitted).
+		/// Load state for the match record — e.g. <c>none</c> / <c>error</c> / <c>fitted:N/carried:M/decay:D</c> —
+		/// prefixed with a source label. Null when the provider carries no priors file (the field is then omitted).
 		/// </summary>
 		string PriorsState => null;
 	}

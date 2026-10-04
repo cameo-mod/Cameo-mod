@@ -149,7 +149,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					return Neutral;
 
 				var decayMilli = (int)(Math.Exp(-Math.Abs(Math.Log((double)now / fitted)) * Neutral / StalenessTauMilli) * Neutral);
-				carriedDecayMilli[delivery + "|" + armor] = decayMilli;
+				carriedDecayMilli.TryAdd(delivery + "|" + armor, decayMilli);
 				v = Neutral + (int)((v - Neutral) * (long)decayMilli / Neutral);
 			}
 
