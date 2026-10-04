@@ -120,7 +120,8 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		void IBot.QueueOrder(Order order)
 		{
-			if (!PassesGate(order))
+			order = GateOrder(order);
+			if (order == null)
 				return;
 
 			while (orders.Count >= info.MaxQueuedOrders)
@@ -136,18 +137,51 @@ namespace OpenRA.Mods.Cameo.Traits
 		/// DESIGN §19.6: a unit order from a module that does not hold the unit's lease is refused when the registry
 		/// enforces, counted when it only watches; an emergency (an attack response from a listed module) takes the unit
 		/// over. Units without a lease, orders on buildings and bots without a registry (`classic`) pass untouched.
+		/// A grouped order (a null Subject with a GroupedActors array) resolves per member, so every member is judged
+		/// on its own lease — refused members are stripped and the order is rebuilt over the survivors (AR-1, see
+		/// <see cref="BotModules.BotOrderGroup"/>). Returns the order to enqueue, or null when it dies at the gate.
 		/// </summary>
-		bool PassesGate(Order order)
+		Order GateOrder(Order order)
 		{
-			var unit = order.Subject;
-			if (unit == null || unit.IsDead || unit.Owner != player || unit == player.PlayerActor || !unit.Info.HasTraitInfo<IMoveInfo>())
-				return true;
+			BotModules.BotUnitLeaseRegistry registry = null;
+			var registryResolved = false;
 
-			var registry = BotUnitLeases.Of(player) as BotModules.BotUnitLeaseRegistry;
+			// Judges one member on its own lease. The registry lookup runs once per order and only when a
+			// judgeable member exists — dead, foreign-owned and non-moving members pass through unjudged
+			// (BotOrderGroup.UnitInScope), exactly as single orders always have. Resolved at use time, never
+			// cached across calls: the registry is conditional (AR-6 lesson).
+			bool Passes(Actor unit, Order order)
+			{
+				if (!BotModules.BotOrderGroup.UnitInScope(unit, player))
+					return true;
+
+				if (!registryResolved)
+				{
+					registryResolved = true;
+					registry = BotUnitLeases.Of(player) as BotModules.BotUnitLeaseRegistry;
+				}
+
+				return PassesMember(unit, order, registry);
+			}
+
+			var group = order.GroupedActors;
+			if (group == null)
+				return Passes(order.Subject, order) ? order : null;
+
+			var (members, filtered) = BotModules.BotOrderGroup.Filter(group, unit => Passes(unit, order));
+			if (!filtered)
+				return order;
+
+			return members.Length == 0 ? null : BotModules.BotOrderGroup.RebuildWithMembers(order, members);
+		}
+
+		bool PassesMember(Actor unit, Order order, BotModules.BotUnitLeaseRegistry registry)
+		{
 			if (registry == null)
 				return true;
 
-			var holder = ((IBotUnitLeases)registry).LeaseOf(unit)?.Owner;
+			var leases = (IBotUnitLeases)registry;
+			var holder = leases.LeaseOf(unit)?.Owner;
 			var ri = registry.Info;
 			var (verdict, first) = gate.Judge(issuer, holder, ri.EnforceAtOrderGate, emergency, ri.EmergencyModules);
 			if (first)
@@ -157,7 +191,7 @@ namespace OpenRA.Mods.Cameo.Traits
 				return false;
 
 			if (verdict == BotModules.BotOrderVerdict.Preempt)
-				((IBotUnitLeases)registry).Preempt(unit, issuer, BotLeasePurpose.Emergency, ri.EmergencyLeaseTicks);
+				leases.Preempt(unit, issuer, BotLeasePurpose.Emergency, ri.EmergencyLeaseTicks);
 
 			var earlier = gate.NoteIssued(unit, issuer, world.WorldTick, ri.CrossedOrderWindowTicks, holder);
 			if (earlier != null && gate.CrossedPairs[(earlier, issuer)] == 1)
