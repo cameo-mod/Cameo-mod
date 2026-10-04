@@ -35,6 +35,19 @@ identical granted-token sets to `exploit_rush` across all six personality profil
 PASS (aliased, not uninsured); 834/834 dotnet test; boot gate PASS. Usage: `--bot-a exploit_expansion`
 pins (expansion) for the whole batch — same type on plus and minus trees, different learned files.
 
+# 2026-10-04 — refinery_law_check.py: per-match pass/fail for the refinery campaign (Devin-Tier4)
+
+*Devin.* New offline checker `tools/ai/refinery_law_check.py <match dirs> [--json] [--warn-latency T]` —
+per (game, genericbot player) and per-map verdicts against the REF-1 refinery law: max refineries per
+field/anchor >1 FAIL, `base`-reason refinery FAIL, `resource_gap`>1 FAIL, tier-2 placement while
+`fields_in_reach_unserved`>0 FAIL, claim-latency p50/p90/max with a warn threshold, peak/final coverage.
+Classic rows print as information only and never affect the exit code (exit 1 on any genericbot FAIL).
+Old logs lacking `field_id`/`tier`/`resource_gap`/`fields_in_reach_unserved` show `n/a` and never PASS.
+Baseline `C:/cameo-wt/ab_inc_1003/all_td_*`: 16/16 genericbot FAIL (50 `base` refineries, worst 4 on one
+field) — the maintainer's complaint is mechanical now. 10 synthetic tests. Companion campaign plan NOTE
+in the fleet folder picks 8 diverse 1v1 maps (364 shipped maps surveyed by spreader type/cluster/spawn
+distance) and gives the exact `run_ai_match_batch.py` commands, support-dir naming, and the 3-driver cap.
+
 # 2026-10-03 — coordinator: tier-3 hotfix (INC c) + ORDERS round 2 to NOVA/DAWN/EMBER
 
 *Claude.* INC c `3c793d4c3` = DAWN `18556ada5` (GetVariableObservers `override` + base: tier 3 was permanently disabled
