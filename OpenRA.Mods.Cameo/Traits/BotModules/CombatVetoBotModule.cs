@@ -167,10 +167,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			return Report(squad, "flee", vetoed, null);
 		}
 
-		IBotEngagementPriors Priors()
+		IBotEngagementPriors[] Priors()
 		{
-			priors ??= player.PlayerActor.TraitsImplementing<IBotEngagementPriors>().ToArray();
-			return priors.FirstOrDefault(p => p != null);
+			return priors ??= player.PlayerActor.TraitsImplementing<IBotEngagementPriors>()
+				.Where(p => p != null).ToArray();
 		}
 
 		List<(BotUnitProfile Unit, int Count)> ForceOf(SquadCA squad)

@@ -25,5 +25,27 @@ namespace OpenRA.Mods.CA.Traits.BotModuleLogic
 		/// Implementations must be bounded — a fitted value clamps to a sane range and never inverts a fight.
 		/// </summary>
 		int CorrectionMilli(BotUnitProfile attacker, BotUnitProfile target);
+
+		/// <summary>
+		/// Per-(delivery, armour) fitted correction on one weapon's damage (the tier-1 delivery grid,
+		/// `DeliveryArmour@<tag>__x__<armour>` cells). Default neutral; staleness is the provider's own check
+		/// (the `PriorPct@` twin vs the weapon's resolved Versus row).
+		/// </summary>
+		int CorrectionMilli(BotWeaponProfile weapon, string targetArmor) => 1000;
+
+		/// <summary>Correction on this weapon's damage when the TARGET is a static defence — the fitter's
+		/// `IntoDefencesMilli` scalar (the "suicide into defences" term). Default neutral.</summary>
+		int IntoDefencesMilli(BotWeaponProfile weapon) => 1000;
+
+		/// <summary>Correction on this weapon's damage when the ATTACKER is a static defence — the fitter's
+		/// `DefenceState@<delivery>` residuals. Default neutral.</summary>
+		int DefenceFireMilli(BotWeaponProfile weapon) => 1000;
+
+		/// <summary>Fitted attrition exponent in milli (1000 = square law); the eval applies it as ratio^alpha.</summary>
+		int AttritionExponentMilli => 1000;
+
+		/// <summary>Load state for the match record — `none` / `error` / `stale:N` / `fitted:N` — prefixed with a
+		/// source label (`"delivery:"`). Null when the provider carries no priors file.</summary>
+		string PriorsState => null;
 	}
 }

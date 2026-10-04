@@ -9,6 +9,7 @@
  */
 #endregion
 
+using System;
 using System.Collections.Generic;
 using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.CA.Traits.BotModuleLogic;
@@ -28,15 +29,41 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public static BotCombatPredictor.Prediction Predict(
 			IReadOnlyList<(BotUnitProfile Unit, int Count)> own,
 			IReadOnlyList<(BotUnitProfile Unit, int Count)> enemy,
-			IBotEngagementPriors priors)
+			IBotEngagementPriors priors) =>
+			Predict(own, enemy, priors == null ? null : new[] { priors });
+
+		/// <summary>All armed providers compose multiplicatively: the unit-level correction at pair granularity,
+		/// the tier-1 delivery×armour cells inside each weapon's contribution, and the attrition exponent on the
+		/// final ratio (ratio^alpha, fractions re-derived — the Lanchester invariant preserved).</summary>
+		public static BotCombatPredictor.Prediction Predict(
+			IReadOnlyList<(BotUnitProfile Unit, int Count)> own,
+			IReadOnlyList<(BotUnitProfile Unit, int Count)> enemy,
+			IReadOnlyList<IBotEngagementPriors> priors)
 		{
 			var ownHp = SumHp(own);
 			var enemyHp = SumHp(enemy);
 			// The fitted file measures OUR faction's trades: it corrects own-side damage only. The enemy
 			// direction stays unfitted (null = neutral), so a uniform prior can't cancel itself out.
-			return BotCombatPredictor.Predict(
+			var pred = BotCombatPredictor.Predict(
 				DamagePerTick(own, enemy, enemyHp, priors), ownHp,
 				DamagePerTick(enemy, own, ownHp, null), enemyHp);
+
+			var alpha = 1000;
+			if (priors != null)
+				foreach (var p in priors)
+					if (p.AttritionExponentMilli != 1000)
+					{
+						alpha = p.AttritionExponentMilli;
+						break;
+					}
+
+			if (alpha == 1000)
+				return pred;
+
+			var ratio = Math.Min(BotCombatPredictor.MaxRatio, Math.Pow(pred.Ratio, alpha / 1000.0));
+			return ratio >= 1
+				? new BotCombatPredictor.Prediction(ratio, Math.Sqrt(1 - 1 / ratio), 0)
+				: new BotCombatPredictor.Prediction(ratio, 0, Math.Sqrt(1 - ratio));
 		}
 
 		static double SumHp(IReadOnlyList<(BotUnitProfile Unit, int Count)> force)
@@ -48,7 +75,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		}
 
 		static double DamagePerTick(IReadOnlyList<(BotUnitProfile Unit, int Count)> attackers,
-			IReadOnlyList<(BotUnitProfile Unit, int Count)> targets, double targetHp, IBotEngagementPriors priors)
+			IReadOnlyList<(BotUnitProfile Unit, int Count)> targets, double targetHp, IReadOnlyList<IBotEngagementPriors> priors)
 		{
 			if (targetHp <= 0)
 				return 0;
@@ -57,9 +84,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			foreach (var (attacker, count) in attackers)
 				foreach (var (target, targetCount) in targets)
 				{
-					var dpt = attacker.DamagePerTickAgainst(target);
+					// Weapon-level (delivery×armour) corrections inside the weapon sum; the pair-level
+					// (faction-pair, unit-type) correction on the aggregate — every provider, multiplicatively.
+					var dpt = attacker.DamagePerTickAgainst(target, priors);
 					if (priors != null)
-						dpt = dpt * priors.CorrectionMilli(attacker, target) / 1000.0;
+						foreach (var p in priors)
+							dpt = dpt * p.CorrectionMilli(attacker, target) / 1000.0;
 
 					total += count * dpt * target.Hp * targetCount / targetHp;
 				}

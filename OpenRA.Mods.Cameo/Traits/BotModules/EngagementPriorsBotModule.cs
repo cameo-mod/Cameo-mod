@@ -54,6 +54,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			player = self.Owner;
 		}
 
+		public string PriorsState { get; private set; }
+
 		void IBotTick.BotTick(IBot bot)
 		{
 			if (loaded)
@@ -62,12 +64,25 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			loaded = true;
 			var fs = Game.ModData.DefaultFileSystem;
 			if (!fs.Exists(Info.PriorsFile))
+			{
+				PriorsState = "arsenal:none";
 				return;
+			}
 
-			using (var stream = fs.Open(Info.PriorsFile))
-				priors = ArsenalPriors.Parse(MiniYaml.FromStream(stream, Info.PriorsFile));
+			try
+			{
+				using (var stream = fs.Open(Info.PriorsFile))
+					priors = ArsenalPriors.Parse(MiniYaml.FromStream(stream, Info.PriorsFile));
 
-			Log.Write("debug", $"AI {player.InternalName}: COMBAT VETO priors: {priors.PairCount} pairs, {priors.TypeCount} types");
+				PriorsState = $"arsenal:fitted:{priors.PairCount}";
+				Log.Write("debug", $"AI {player.InternalName}: COMBAT VETO priors: {priors.PairCount} pairs, {priors.TypeCount} types");
+			}
+			catch (Exception e)
+			{
+				priors = new ArsenalPriors();
+				PriorsState = "arsenal:error";
+				Log.Write("debug", $"AI {player.InternalName}: COMBAT VETO priors: error ({e.Message}), neutral");
+			}
 		}
 
 		int IBotEngagementPriors.CorrectionMilli(BotUnitProfile attacker, BotUnitProfile target)

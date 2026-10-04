@@ -128,6 +128,12 @@
 	GrantConditionOnBotOwner@planbandits:
 		Condition: plan_bandits
 		Bots:
+	# Tier-1 delivery priors (TIER1_FITTER_SPEC, AI_ARCHITECTURE 12.34 phase B): multiplies the fitter's
+	# delivery×armour cells into the veto's damage assembly, per-cell staleness via the PriorPct twins.
+	# The arm sets Bots (switch group AP_tier1_priors); empty by default - inert on master.
+	GrantConditionOnBotOwner@tier1priors:
+		Condition: tier1_priors
+		Bots:
 	# DIFFICULTY SCALE (DESIGN §19.1, maintainer 2026-09-28): every number below lies on ONE straight line
 	# from easiest to cameogod, in EQUAL steps; an integer that cannot split evenly is the rounded line.
 	# Every field is written in every tier, so no tier silently falls back to a C# default.
@@ -3876,7 +3882,7 @@ Player:
 		MinSafetyLcb: -250
 		# Armed-set attribution (nova review 2026-10-03): decision-side conditions that filter which engagements
 		# exist are recorded as `bandit.armed` so a fitter pass can condition on the survivorship filter.
-		WatchConditions: plan_bandits, build_order_knobs, combatveto, inmatchadapt, armystaging
+		WatchConditions: plan_bandits, build_order_knobs, combatveto, tier1_priors, inmatchadapt, armystaging
 		# Attack-plan arms: one bounded knob overlay multiplied into the build-order vector (preset x learned x plan x
 		# jitter), frozen at match start. `balanced` is the explicit no-op arm so the bandit can choose not to overlay.
 		PlanArms:
@@ -5187,6 +5193,12 @@ Player:
 	# the pure predictor numbers — the veto then runs unfitted but still armed.
 	EngagementPriorsBotModule:
 		RequiresCondition: genericbot && combatveto
+	# The veto's tier-1 delivery-prior source (phase B, TIER1_FITTER_SPEC): reads the fitter output at
+	# ai/learned/engagement_priors.yaml — DeliveryArmour@ cells with per-cell PriorPct@ staleness twins,
+	# IntoDefencesMilli, DefenceState@, AttritionExponentMilli. Missing file = every correction neutral;
+	# armed without combatveto it loads but nothing consults it.
+	DeliveryPriorsBotModule:
+		RequiresCondition: genericbot && tier1_priors
 
 World:
 	BeaconTracker:

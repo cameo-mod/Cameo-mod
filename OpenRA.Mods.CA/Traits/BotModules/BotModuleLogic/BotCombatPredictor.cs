@@ -15,6 +15,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using OpenRA.GameRules;
 using OpenRA.Mods.Common.Traits;
+using OpenRA.Mods.CA.Traits.BotModuleLogic;
 using OpenRA.Mods.Common.Warheads;
 using OpenRA.Primitives;
 using OpenRA.Traits;
@@ -64,6 +65,34 @@ namespace OpenRA.Mods.CA.Traits
 
 			return total;
 		}
+
+		/// <summary>As <see cref="DamagePerTickAgainst(BotUnitProfile)"/> with every armed priors provider's weapon-level
+		/// corrections multiplied in: the delivery×armour cell, plus the defence scalars when either side of the pair
+		/// is a static defence.</summary>
+		public double DamagePerTickAgainst(BotUnitProfile target, IReadOnlyList<IBotEngagementPriors> priors)
+		{
+			var total = 0.0;
+			foreach (var w in Weapons)
+			{
+				if (!w.CanTarget(target.TargetTypes))
+					continue;
+
+				var dpt = w.DamagePerTick * (target.Armor == null ? 100 : w.Versus.GetValueOrDefault(target.Armor, 100)) / 100.0;
+				if (priors != null)
+					foreach (var p in priors)
+					{
+						dpt = dpt * p.CorrectionMilli(w, target.Armor) / 1000.0;
+						if (IsBuilding)
+							dpt = dpt * p.DefenceFireMilli(w) / 1000.0;
+						if (target.IsBuilding)
+							dpt = dpt * p.IntoDefencesMilli(w) / 1000.0;
+					}
+
+				total += dpt;
+			}
+
+			return total;
+		}
 	}
 
 	public readonly struct BotWeaponProfile
@@ -74,14 +103,20 @@ namespace OpenRA.Mods.CA.Traits
 		public readonly BitSet<TargetableType> Invalid;
 		public readonly IReadOnlyDictionary<string, int> Versus;
 
+		/// <summary>Delivery key of the main warhead: its yaml <c>Warhead@&lt;tag&gt;</c> suffix when the weapon yaml
+		/// resolves (the balance-pipeline delivery taxonomy the tier-1 fitter keys on), else the warhead class name
+		/// lowercased minus the "Warhead" suffix. Null-safe to treat as opaque when no provider reads it.</summary>
+		public readonly string Delivery;
+
 		public BotWeaponProfile(double damagePerTick, WDist range, BitSet<TargetableType> valid, BitSet<TargetableType> invalid,
-			IReadOnlyDictionary<string, int> versus)
+			IReadOnlyDictionary<string, int> versus, string delivery = null)
 		{
 			DamagePerTick = damagePerTick;
 			Range = range;
 			Valid = valid;
 			Invalid = invalid;
 			Versus = versus ?? new Dictionary<string, int>();
+			Delivery = delivery;
 		}
 
 		public bool CanTarget(BitSet<TargetableType> targetTypes) => Valid.Overlaps(targetTypes) && !Invalid.Overlaps(targetTypes);
@@ -129,7 +164,7 @@ namespace OpenRA.Mods.CA.Traits
 
 				var cycle = BotWeaponProfile.CycleTicks(weapon.ReloadDelay, weapon.Burst, weapon.BurstDelays);
 				weapons.Add(new BotWeaponProfile((double)main.Damage * Math.Max(1, weapon.Burst) / cycle, weapon.Range,
-					weapon.ValidTargets, weapon.InvalidTargets, main.Versus));
+					weapon.ValidTargets, weapon.InvalidTargets, main.Versus, DeliveryKey(armament.Weapon, weapon, main)));
 			}
 
 			var speed = actor.TraitInfoOrDefault<MobileInfo>()?.Speed ?? actor.TraitInfoOrDefault<AircraftInfo>()?.Speed ?? 0;
@@ -142,6 +177,61 @@ namespace OpenRA.Mods.CA.Traits
 				actor.HasTraitInfo<BuildingInfo>(),
 				actor.GetAllTargetTypes(),
 				weapons.ToArray());
+		}
+
+		// The balance pipeline keys deliveries on the warhead's yaml Warhead@<tag> suffix, which resolved
+		// WeaponInfo objects do not retain. Re-derive it once from the raw weapon yaml: WeaponInfo.LoadWarheads
+		// fills Warheads from the same Warhead@* child list in order, so the resolved index maps back to the
+		// child and its tag. Validated against the warhead class name (the node value); unresolvable weapons
+		// fall back to the lowercased class name, a coarser but still consistent axis.
+		static Dictionary<string, (string Tag, string Class)[]> warheadTags;
+
+		static Dictionary<string, (string Tag, string Class)[]> WarheadTagMap()
+		{
+			if (warheadTags != null)
+				return warheadTags;
+
+			var map = new Dictionary<string, (string, string)[]>();
+			var modData = Game.ModData;
+			if (modData != null)
+			{
+				try
+				{
+					foreach (var node in MiniYaml.Load(modData.DefaultFileSystem, modData.Manifest.Weapons, null))
+						map[node.Key.ToLowerInvariant()] = (node.Value?.Nodes ?? [])
+							.Where(n => n.Key.StartsWith("Warhead", StringComparison.Ordinal))
+							.Select(n => (n.Key.StartsWith("Warhead@", StringComparison.Ordinal) ? n.Key.Substring(8) : null, n.Value.Value))
+							.ToArray();
+				}
+				catch
+				{
+					// No file system (unit tests): Delivery falls back to the class name below.
+				}
+			}
+
+			return warheadTags = map;
+		}
+
+		static string DeliveryKey(string weaponName, WeaponInfo weapon, DamageWarhead main)
+		{
+			var cls = main.GetType().Name;
+			if (cls.EndsWith("Warhead", StringComparison.Ordinal))
+				cls = cls.Substring(0, cls.Length - "Warhead".Length);
+
+			if (WarheadTagMap().TryGetValue(weaponName.ToLowerInvariant(), out var tags))
+			{
+				var idx = weapon.Warheads.IndexOf(main);
+				if (idx >= 0 && idx < tags.Length && tags[idx].Tag != null
+					&& string.Equals(tags[idx].Class, cls, StringComparison.OrdinalIgnoreCase))
+					return tags[idx].Tag;
+
+				// A null CreateObject earlier in the list shifts indices — fall back to matching by class.
+				foreach (var (tag, @class) in tags)
+					if (tag != null && string.Equals(@class, cls, StringComparison.OrdinalIgnoreCase))
+						return tag;
+			}
+
+			return cls.ToLowerInvariant();
 		}
 	}
 
