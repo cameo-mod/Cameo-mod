@@ -2714,7 +2714,7 @@
 		RequiresCondition: !untargetable
 	GpsDot:
 		String: Vehicle
-	RangedGpsDot:
+	CameoRangedGpsDot:
 		Sequence: Vehicle
 	TeleportNetworkTransportable:
 	Targetable@disguise:
@@ -2790,7 +2790,7 @@
 		RepairActors: yrygyard, ra2nayard, ra2gayard, ra1_allies_navalyard, cncsyrd, ra1_soviets_subpen, cncspen
 	GpsDot:
 		String: Ship
-	RangedGpsDot:
+	CameoRangedGpsDot:
 		Sequence: Ship
 	GrantConditionOnTerrain@bridge:
 		Condition: underbridge
@@ -2887,7 +2887,7 @@
 		LayerName: tibradiation
 	GpsDot:
 		String: Infantry
-	RangedGpsDot:
+	CameoRangedGpsDot:
 		Sequence: Infantry
 	GrantConditionOnTerrain@bridge:
 		Condition: underbridge
@@ -2985,7 +2985,7 @@
 		Types: Plane
 	GpsDot:
 		String: Plane
-	RangedGpsDot:
+	CameoRangedGpsDot:
 		Sequence: Plane
 	Tooltip:
 		Name: Plane
@@ -3081,7 +3081,7 @@
 		Type: GroundPosition
 	GpsDot:
 		String: Plane
-	RangedGpsDot:
+	CameoRangedGpsDot:
 		Sequence: Plane
 	Tooltip:
 		Name: Plane
@@ -3128,7 +3128,7 @@
 		RequiresCondition: cruising && !disabled
 	GpsDot:
 		String: Helicopter
-	RangedGpsDot:
+	CameoRangedGpsDot:
 		Sequence: Helicopter
 	Targetable@helicopter:
 		TargetTypes: Helicopter
@@ -3212,7 +3212,7 @@
 		KilledOnImpassableTerrain: false
 	GpsDot:
 		String: Infantry
-	RangedGpsDot:
+	CameoRangedGpsDot:
 		Sequence: Infantry
 
 ^HeliExplodeLarge:
@@ -3279,7 +3279,7 @@
 	HiddenUnderFog:
 	GpsDot:
 		String: Infantry
-	RangedGpsDot:
+	CameoRangedGpsDot:
 		Sequence: Infantry
 	Targetable:
 		TargetTypes: Ground, Ship
@@ -3520,7 +3520,7 @@
 		ConsumedByCapture: false
 	GpsDot:
 		String: Infantry
-	RangedGpsDot:
+	CameoRangedGpsDot:
 		Sequence: Infantry
 	TeleportNetworkTransportable:
 	ActorStatValues:
@@ -8497,7 +8497,7 @@ CPQDEBUGDUMMY:
 		Range: 10000
 		DetectionTypes: Cloak, AirCloak, GroundCloak, Underwater, Hijacker
 		RequiresCondition: !disabled
-	RangedGpsProvider:
+	CameoRangedGpsProvider:
 		Range: 20000
 		RequiresCondition: !disabled
 	RenderDetectionCircle:
