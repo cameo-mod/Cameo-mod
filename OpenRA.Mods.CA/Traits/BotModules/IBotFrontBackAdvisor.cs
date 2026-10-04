@@ -82,9 +82,12 @@ namespace OpenRA.Mods.CA.Traits
 		FrontBackPick ChooseCell(FrontBackClass cls, ActorInfo building, CPos baseCenter, IReadOnlyList<CPos> candidates);
 
 		/// <summary>
-		/// The ABSOLUTE radar-provider target for the base: one per defended front plus justified extras (0 with
-		/// no defended front). The caller subtracts the providers it already owns or has planned — this is a target,
-		/// not a deficit.
+		/// The ABSOLUTE radar-provider target for the base: owned providers + every front's unmet need,
+		/// where each front's want (one per defended front, plus a justified extra) is met against the
+		/// providers already assigned to THAT front. The caller subtracts the providers it already owns
+		/// or has planned — the difference is exactly the count still required. Surplus or unassigned
+		/// providers (an extra on one front, a survivor at a now-undefended base) stay owned but never
+		/// consume another front's first slot.
 		/// </summary>
 		int WantedRadarProviders { get; }
 

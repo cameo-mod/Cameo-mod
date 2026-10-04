@@ -365,6 +365,43 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void AggregateTargetChargesEachFrontsOwnUnmetNeed()
+		{
+			// B1 rev-2 (boss re-review): the caller compares the ABSOLUTE target against ALL owned
+			// providers, so the target must equal owned + every front's unmet need — per-front
+			// allocation, not a flat sum of wants.
+			Assert.That(BaseFrontBackPlannerBotModule.AggregateRadarTarget(2, new[] { 1, 1 }, new[] { 2, 0 }),
+				Is.EqualTo(3), "A over-served 2/1 + B empty and defended: deficit = B's first radar");
+			Assert.That(BaseFrontBackPlannerBotModule.AggregateRadarTarget(1, new[] { 1, 1 }, new[] { 1, 0 }),
+				Is.EqualTo(2), "one served + one empty defended front");
+			Assert.That(BaseFrontBackPlannerBotModule.AggregateRadarTarget(2, new[] { 1, 1 }, new[] { 1, 1 }),
+				Is.EqualTo(2), "all wants met: nothing new");
+			Assert.That(BaseFrontBackPlannerBotModule.AggregateRadarTarget(1, new[] { 2, 1 }, new[] { 1, 0 }),
+				Is.EqualTo(3), "A's justified extra AND B's first both sit in the deficit");
+			Assert.That(BaseFrontBackPlannerBotModule.AggregateRadarTarget(3, new int[0], new int[0]),
+				Is.EqualTo(3), "no fronts at all: owned providers alone are the target");
+		}
+
+		[Test]
+		public void StrayProvidersNeverConsumeAnotherFrontsFirstSlot()
+		{
+			// B1 rev-2: providers surviving at a now-undefended base (assigned to a want-0 front,
+			// or unassigned entirely) still count as owned but must not suppress a new defended
+			// front's required first radar — the target exceeds owned by exactly one.
+			const int Owned = 2;
+			var assignedToDeadBase = BaseFrontBackPlannerBotModule.AggregateRadarTarget(Owned, new[] { 0, 1 }, new[] { 2, 0 });
+			Assert.That(assignedToDeadBase - Owned, Is.EqualTo(1));
+
+			var unassigned = BaseFrontBackPlannerBotModule.AggregateRadarTarget(Owned, new[] { 0, 1 }, new[] { 0, 0 });
+			Assert.That(unassigned - Owned, Is.EqualTo(1));
+
+			// The same guarantee with A over-served: no under-served defended front may request
+			// zero new radars because another front already carries extras.
+			var overServedA = BaseFrontBackPlannerBotModule.AggregateRadarTarget(Owned, new[] { 1, 1 }, new[] { 2, 0 });
+			Assert.That(overServedA - Owned, Is.EqualTo(1));
+		}
+
+		[Test]
 		public void PickRequiresFirstReachAndExtraThreshold()
 		{
 			// B4: a first provider must positively reach the approach; an extra must meet the threshold.

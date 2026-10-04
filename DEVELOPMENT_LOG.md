@@ -1,3 +1,17 @@
+# 2026-10-04 — Devin-T3Verify: BP-IMPL B1 rev-2 (per-front allocation in the absolute radar target)
+
+*Devin.* `devin/t3verify/bp-front-back` (on top of `7690ddd07`). Boss re-review closed B2/B3/B4 but caught the
+remaining B1 allocation bug: `WantedForFront` ignored existing per-front counts and `Refresh` summed fresh wants
+while the PREP consumer subtracts ALL owned providers — front A at 2/1 + defended front B at 0 summed to target=2
+against owned=2 and B's first radar was never requested; radars surviving at a now-undefended base could also
+suppress a new defended front. New static `AggregateRadarTarget(owned, wantPerFront, assignedPerFront)` =
+owned + Σ max(0, want − assigned): surplus/unassigned providers stay owned but never consume another front's first
+slot; no under-served defended front requests zero. `WantedRadarProviders` now returns that aggregate (interface
+doc updated: "owned + unmet per-front need"); power margin still follows the target (≥ owned always). +2 statics
+tests incl. the reviewer's required cases (A=2/B=0, survivors at a dead base assigned and unassigned, target
+exceeds owned by one). Gates: build 0/0, focused planner suite 33/33, boot gate PASS (isolated support dir).
+Sent to `01a10697` for re-review.
+
 # 2026-10-04 — Devin-T3Verify: BP-IMPL review corrections B1-B4 (boss_review static findings)
 
 *Devin.* `devin/t3verify/bp-front-back` (fixes on top of `63cd1c372`). Independent static review

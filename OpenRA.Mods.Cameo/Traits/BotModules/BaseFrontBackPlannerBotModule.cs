@@ -378,6 +378,22 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		}
 
 		/// <summary>
+		/// The ABSOLUTE radar target the caller compares against its total owned/planned count (B1 rev-2):
+		/// every front's want is met against the providers already assigned to THAT front — owned + the
+		/// unmet per-front need. A surplus or unassigned provider (an extra on one front, a survivor at a
+		/// now-undefended base) stays owned but never consumes another front's first slot; two fronts can
+		/// never starve each other.
+		/// </summary>
+		public static int AggregateRadarTarget(int ownedProviders, IReadOnlyList<int> wantPerFront, IReadOnlyList<int> assignedPerFront)
+		{
+			var target = ownedProviders;
+			for (var i = 0; i < wantPerFront.Count; i++)
+				target += Math.Max(0, wantPerFront[i] - assignedPerFront[i]);
+
+			return target;
+		}
+
+		/// <summary>
 		/// New approach cells a band pick must add to be accepted (B4): the first provider on a front must
 		/// positively reach the approach (>= 1 new cell); an extra only pays for itself at the configured threshold.
 		/// </summary>
@@ -763,8 +779,6 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				frontUncoveredApproach[f] = uncovered;
 			}
 
-			// The absolute target: one provider per defended front plus a justified extra — the caller
-			// subtracts what it already owns or has planned (B1); a deficit count would double-suppress.
 			foreach (var f in lastFronts)
 			{
 				if (!f.HasLine)
@@ -772,10 +786,22 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 				if (frontRadarCount[f] == 0)
 					lastFrontsWithoutRadar++;
-
-				lastWantedRadars += WantedForFront(f.HasLine, frontUncoveredApproach[f],
-					Info.RadarMinNewCoverageCells, Info.RadarMaxPerFront);
 			}
+
+			// The absolute target the caller compares against ALL owned providers (B1 rev-2): each
+			// front's want is met against the providers assigned to THAT front — owned + the unmet
+			// per-front need. A surplus provider on one front or a survivor at a now-undefended base
+			// stays owned but never consumes another front's first slot.
+			var wants = new List<int>(lastFronts.Count);
+			var assigned = new List<int>(lastFronts.Count);
+			foreach (var f in lastFronts)
+			{
+				wants.Add(WantedForFront(f.HasLine, frontUncoveredApproach[f],
+					Info.RadarMinNewCoverageCells, Info.RadarMaxPerFront));
+				assigned.Add(frontRadarCount.GetValueOrDefault(f));
+			}
+
+			lastWantedRadars = AggregateRadarTarget(lastProviders.Count, wants, assigned);
 		}
 
 		BaseFront FrontForCell(CPos baseCenter)
