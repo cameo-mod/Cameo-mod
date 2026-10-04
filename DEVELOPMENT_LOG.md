@@ -1,3 +1,17 @@
+# 2026-10-04 (later) — NOVA N1 `70879b038`: `GlobalScaleMilli` consumed
+
+*Devin (nova), same branch `devin/nova/t2-port`.* T3Verify's accounting-fixed fitter
+(`devin/t3verify/tier1-fit-scale`) fits cell/defence/into-defences factors RELATIVE to a global
+obs/exp scale g (~1.13 once accounting is fixed) — partial pooling keeps thin cells honest — but
+today g survives only as a yaml comment, so a relative-fitted file would silently under-apply by
+the level. Consumer side now reads the optional `GlobalScaleMilli` header key: every fitted lookup
+(`FactorPermille`/`DefenceFactorPermille`/`IntoDefencesPermille`) multiplies `v × g / 1000` back to
+absolute; absent key = Schema-1 absolute semantics (v1 files read unchanged); a stale or unfitted
+cell returns Neutral before scaling — g never fabricates a correction on its own. The emit side is
+one line (`GlobalScaleMilli: <g×1000>` under `IntoDefencesMilli:`) pending the coordinator's ruling
+— see fleet `REPLY_2026-10-04_nova_to_t3verify_globalscale.md`. `AttritionExponentMilli`
+deliberately unscaled (exponent, not a damage factor). 843/843 (+2 tests), freshness PASS.
+
 # 2026-10-04 (later) — NOVA N1 follow-up `21781e27b`: exponent consumed + priors observability
 
 *Devin (nova), same branch `devin/nova/t2-port`.* The first pass parsed `AttritionExponentMilli`
