@@ -12,12 +12,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.Json;
 using NUnit.Framework;
 using OpenRA;
 using OpenRA.Mods.CA.Traits;
+using OpenRA.Mods.Cameo.Test.TestFixtures;
 using OpenRA.Mods.Cameo.Traits;
 using OpenRA.Mods.Cameo.Traits.BotModules;
 using OpenRA.Support;
@@ -998,7 +998,7 @@ namespace OpenRA.Mods.Cameo.Test
 					EconomyValue = value.Economy,
 					EverSeen = true
 				};
-			var enemy = (OpenRA.Player)RuntimeHelpers.GetUninitializedObject(typeof(OpenRA.Player));
+			var enemy = Uninitialized.Player();
 			regions.SetRegions(enemy, cells);
 			return (regions, enemy);
 		}
@@ -1075,12 +1075,6 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(MasterAiBotModule.ReservationActive(100, 100, 1500), Is.True);
 			Assert.That(MasterAiBotModule.ReservationActive(100, 1600, 1500), Is.True);
 			Assert.That(MasterAiBotModule.ReservationActive(100, 1601, 1500), Is.False);
-		}
-
-		sealed class StubMissionProvider : IBotMissionProvider
-		{
-			public IReadOnlyList<BotMission> Missions { get; set; } = Array.Empty<BotMission>();
-			public void MissionTaken(BotMission mission) { }
 		}
 
 		[Test]

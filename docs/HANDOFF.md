@@ -39,6 +39,17 @@ re-scanned `world.Actors` once per plug type. Now: `PlugTargetIsOwned(targetActo
 gates the resolve before cost/prereq/enable, and one `CollectOwnedActors` pass per interval
 feeds every plug kind. +3 NUnit (`PlugSpawnerBotModuleTest`, UnsafeAccessor fixtures).
 Gates: builds 0/0, **936/936**, boot gate PASS.
+## 2026-10-04 — EMBER AR-T2: shared C# test fixtures (INC-ready)
+
+**INC-N ready: `devin/ember/test-fixtures` — switch: none (test-only).** New
+`OpenRA.Mods.Cameo.Test/TestFixtures/` namespace consolidating the per-file test doubles: `Uninitialized`
+(identity-only `Player`/`Actor`/`Of<T>`), `FakeZoneTopology` (merged exact + ring-search semantics via
+`NearestSearchRadius`; `AddZone(cells, adjacent, resourceCells)`; `Recut()`), `StubMissionProvider`,
+`StubUtilityAxes`, and `RecordingBot` (order-capture `IBot` for the AR-2/AR-4 seam tests ahead). 11 test
+files migrated; `TestFixturesTest` pins the fixtures' contracts. Net −130 duplicated lines. Gates: builds
+0/0, NUnit **941/941**. Prerequisite for AR-2 personality-pin and AR-4 PlugSpawner coverage (next).
+Sibling: coverage infra lives on `devin/ember/coverage-infra` (`dotnet-coverage`, T4 ratchet, 106-file
+baseline, 19.4% line / 17.2% branch on bot modules).
 
 ## 2026-10-04 — NOVA N2 receipt: EL-1 v2 on current master
 
