@@ -821,7 +821,6 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var reachDist = new int[n];
 			var served = new bool[n];
 			var fieldCovered = new bool[fieldCount];
-			var fieldInReach = new bool[fieldCount];
 			for (var a = 0; a < n; a++)
 			{
 				served[a] = assigned[a] >= 0;
@@ -831,8 +830,6 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					: anchorDist[a];
 
 				var inReach = reachDist[a] <= reachCells;
-				if (inReach)
-					fieldInReach[field] = true;
 				if (!served[a] && inReach)
 					unservedAnchorsInReach++;
 				if (!served[a] && !inReach)
