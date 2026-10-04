@@ -81,7 +81,11 @@ namespace OpenRA.Mods.CA.Traits
 		/// </summary>
 		FrontBackPick ChooseCell(FrontBackClass cls, ActorInfo building, CPos baseCenter, IReadOnlyList<CPos> candidates);
 
-		/// <summary>Enabled radar providers wanted: one per defended front plus justified extras (0 with no line).</summary>
+		/// <summary>
+		/// The ABSOLUTE radar-provider target for the base: one per defended front plus justified extras (0 with
+		/// no defended front). The caller subtracts the providers it already owns or has planned — this is a target,
+		/// not a deficit.
+		/// </summary>
 		int WantedRadarProviders { get; }
 
 		/// <summary>Excess power the base builder should hold so owned/planned radars are never blinded.</summary>

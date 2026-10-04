@@ -348,5 +348,97 @@ namespace OpenRA.Mods.Cameo.Test
 			var info = Info("test_radar", With(new RangedGpsProviderInfo(), "Range", "20000"));
 			Assert.That(BaseFrontBackPlannerBotModule.RadarRangeCells(info), Is.EqualTo(19)); // 20000 / 1024 = 19.5
 		}
+
+		// --- boss_review 2026-10-04 corrections B1-B4 ---
+
+		[Test]
+		public void RadarTargetIsAbsoluteNotDeficit()
+		{
+			// B1: a defended front's target does not shrink with providers already serving it —
+			// the caller subtracts owned/planned itself.
+			Assert.That(BaseFrontBackPlannerBotModule.WantedForFront(true, 0, 30, 2), Is.EqualTo(1));
+			Assert.That(BaseFrontBackPlannerBotModule.WantedForFront(true, 29, 30, 2), Is.EqualTo(1));
+			Assert.That(BaseFrontBackPlannerBotModule.WantedForFront(true, 30, 30, 2), Is.EqualTo(2));
+			Assert.That(BaseFrontBackPlannerBotModule.WantedForFront(true, 100, 30, 2), Is.EqualTo(2)); // per-front cap
+			Assert.That(BaseFrontBackPlannerBotModule.WantedForFront(true, 30, 30, 1), Is.EqualTo(1)); // maxPerFront
+			Assert.That(BaseFrontBackPlannerBotModule.WantedForFront(false, 500, 30, 2), Is.EqualTo(0)); // no line
+		}
+
+		[Test]
+		public void PickRequiresFirstReachAndExtraThreshold()
+		{
+			// B4: a first provider must positively reach the approach; an extra must meet the threshold.
+			Assert.That(BaseFrontBackPlannerBotModule.RequiredNewCoverage(0, 30), Is.EqualTo(1));
+			Assert.That(BaseFrontBackPlannerBotModule.RequiredNewCoverage(1, 30), Is.EqualTo(30));
+			Assert.That(BaseFrontBackPlannerBotModule.RequiredNewCoverage(2, 30), Is.EqualTo(30));
+		}
+
+		[Test]
+		public void ClusterDefencesKeepsOnlyOwnTowers()
+		{
+			// B2: the perimeter handed to a cluster's fronts is membership-filtered.
+			var cluster = new HashSet<CPos> { new(50, 50), new(51, 50), new(52, 50) };
+			var defences = new List<CPos> { new(51, 50), new(90, 90), new(52, 50) };
+			Assert.That(BaseFrontBackPlannerBotModule.ClusterDefences(defences, cluster),
+				Is.EqualTo(new List<CPos> { new(51, 50), new(52, 50) }));
+		}
+
+		[Test]
+		public void RemoteTowersWouldMoveTheLineIfNotFiltered()
+		{
+			// B2 regression shape: feeding remote towers into the same BuildFronts call moves the line —
+			// the cluster filter is what prevents the polluted input ever reaching here.
+			var anchors = new List<(CPos, FrontAnchorKind)> { (new CPos(90, 50), FrontAnchorKind.EnemySpawn) };
+			var cluster = new List<CPos> { new(50, 50), new(51, 50) };
+			var home = BaseFrontBackPlannerBotModule.BuildFronts(Center, anchors,
+				new List<CPos> { new(58, 50) }, cluster, Merge45, 3)[0];
+			var polluted = BaseFrontBackPlannerBotModule.BuildFronts(Center, anchors,
+				new List<CPos> { new(58, 50), new(140, 50) }, cluster, Merge45, 3)[0];
+			Assert.That(home.RearProj, Is.EqualTo(8));
+			Assert.That(home.FrontProj, Is.EqualTo(8));
+			Assert.That(polluted.FrontProj, Is.GreaterThan(home.FrontProj));
+		}
+
+		[Test]
+		public void FallbackNeverReturnsAForwardRadar()
+		{
+			// B3: defended front — only cells strictly behind the rearmost defence are safe;
+			// an all-forward candidate set yields nothing (the caller then Holds).
+			var front = EastFront(10, 5);
+			Assert.That(BaseFrontBackPlannerBotModule.SafeBackCells(
+				new List<CPos> { new(60, 50), new(70, 50) }, Center, front), Is.Empty);
+			Assert.That(BaseFrontBackPlannerBotModule.SafeBackCells(
+				new List<CPos> { new(53, 50), new(60, 50), new(48, 50) }, Center, front),
+				Is.EqualTo(new List<CPos> { new(53, 50), new(48, 50) }));
+		}
+
+		[Test]
+		public void UndefendedFallbackStaysAtOrBehindCentre()
+		{
+			// B3: a front with no line — cells ahead of centre (proj > 0) are forward, not back.
+			var front = new BaseFront { Id = 0, Centre = Center, DirX = 1, DirY = 0, Anchor = new CPos(90, 50) };
+			Assert.That(BaseFrontBackPlannerBotModule.SafeBackCells(
+				new List<CPos> { new(55, 50), new(51, 50) }, Center, front), Is.Empty);
+			Assert.That(BaseFrontBackPlannerBotModule.SafeBackCells(
+				new List<CPos> { new(50, 50), new(45, 50) }, Center, front),
+				Is.EqualTo(new List<CPos> { new(50, 50), new(45, 50) }));
+		}
+
+		[Test]
+		public void ExtraThresholdComparesCandidateDeltaNotUncoveredTotal()
+		{
+			// B4: 40 uncovered approach cells does not licence an extra whose best band pick
+			// adds fewer than the threshold — NewCoverageCells is what gets compared.
+			var front = EastFront(10, 5);
+			var approach = new List<CPos>();
+			for (var i = 0; i < 40; i++)
+				approach.Add(new CPos(60 + i % 10, 46 + i / 10));
+
+			var pick = BaseFrontBackPlannerBotModule.ChooseRadarCell(
+				new List<CPos> { new(53, 50) }, Center, front, approach, new HashSet<CPos>(), 2, 2, 8);
+			Assert.That(pick.Cell, Is.Not.Null);
+			Assert.That(pick.NewCoverageCells, Is.EqualTo(0));
+			Assert.That(pick.NewCoverageCells, Is.LessThan(30));
+		}
 	}
 }

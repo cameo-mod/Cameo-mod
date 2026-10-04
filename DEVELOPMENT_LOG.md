@@ -1,3 +1,26 @@
+# 2026-10-04 — Devin-T3Verify: BP-IMPL review corrections B1-B4 (boss_review static findings)
+
+*Devin.* `devin/t3verify/bp-front-back` (fixes on top of `63cd1c372`). Independent static review
+(`C:/cameo-wt/boss_review/docs/review_2026_10_04_takeover_bp.md`) found four live-assembly gaps the
+pure-helper tests missed — all fixed in the advisor/planner, no QM files touched:
+
+* **B1** `WantedRadarProviders` returned a deficit (missing providers); contract is an ABSOLUTE target
+  (`WantedForFront` static: 1 per defended front + 1 justified extra capped `RadarMaxPerFront`) — the
+  phase-2 consumer subtracts owned/planned itself; interface doc now says target-not-deficit.
+* **B2** every cluster's perimeter was built from ALL owned defences — a remote expansion's towers moved
+  the home line. `ClusterDefences` filters to cluster-footprint members before `BuildFronts`.
+* **B3** wait-then-back fell back to unconstrained `ChooseValuableCell` — an all-forward candidate set
+  still placed a forward radar. `SafeBackCells` (strictly behind `RearProj`, or `<=0` with no line)
+  filters first; empty => Hold.
+* **B4** extras were justified by TOTAL uncovered approach while the pick could add 0 — now the first
+  provider needs positive approach reach (`RequiredNewCoverage` = 1) and extras need the candidate's own
+  `NewCoverageCells >= RadarMinNewCoverageCells`; a failing extra Holds (it is optional and earns nothing
+  elsewhere), a failing first provider takes the same wait-then-back path.
+
+7 new statics tests (31/31 planner file, 865/865 suite). Gates: build 0 warn/0 err; fog-honesty +
+direct-mutation PASS; ai_arch R1/R2 PASS (R3 dead-end expected until phase 2); boot gate PASS isolated
+support dir. Sent to `01a10697` for re-review.
+
 # 2026-10-04 — Devin-T3Verify: BP-IMPL phase 1 (front/back placement planner — new files only, no QM seams)
 
 *Devin.* `devin/t3verify/bp-front-back` in `C:/cameo-wt/bp` (base origin/master `8e86fca23`). Phase 1 of the accepted

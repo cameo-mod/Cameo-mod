@@ -361,6 +361,63 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		}
 
 		/// <summary>
+		/// The ABSOLUTE radar target of one front (B1): one provider per defended front, plus one justified extra
+		/// while uncovered approach ground still reaches the threshold — the pick re-checks the candidate's own
+		/// delta — capped at <paramref name="maxPerFront"/>. An undefended front wants none; it never goes forward.
+		/// </summary>
+		public static int WantedForFront(bool hasLine, int uncoveredApproachCells, int minNewCoverage, int maxPerFront)
+		{
+			if (!hasLine)
+				return 0;
+
+			var want = 1;
+			if (uncoveredApproachCells >= minNewCoverage)
+				want++;
+
+			return Math.Min(want, maxPerFront);
+		}
+
+		/// <summary>
+		/// New approach cells a band pick must add to be accepted (B4): the first provider on a front must
+		/// positively reach the approach (>= 1 new cell); an extra only pays for itself at the configured threshold.
+		/// </summary>
+		public static int RequiredNewCoverage(int insideProviders, int minNewCoverage)
+		{
+			return insideProviders == 0 ? 1 : minNewCoverage;
+		}
+
+		/// <summary>
+		/// Defence cells belonging to this cluster (B2): a remote outpost's towers never create or move this
+		/// cluster's defence line.
+		/// </summary>
+		public static List<CPos> ClusterDefences(IEnumerable<CPos> defenceLocations, IReadOnlySet<CPos> clusterCells)
+		{
+			var own = new List<CPos>();
+			foreach (var d in defenceLocations)
+				if (clusterCells.Contains(d))
+					own.Add(d);
+
+			return own;
+		}
+
+		/// <summary>
+		/// The cells a fallback radar may take (B3): strictly behind the front's rearmost defence, or not ahead
+		/// of the base centre when the front has no line yet. Everything else is forward — the radar Holds instead.
+		/// </summary>
+		public static List<CPos> SafeBackCells(IReadOnlyList<CPos> candidates, CPos baseCenter, BaseFront front)
+		{
+			var safe = new List<CPos>();
+			foreach (var c in candidates)
+			{
+				var p = Project(c, baseCenter, front.DirX, front.DirY);
+				if (front.HasLine ? p < front.RearProj : p <= 0)
+					safe.Add(c);
+			}
+
+			return safe;
+		}
+
+		/// <summary>
 		/// Valuable pick: the cell farthest from EVERY front (minimise the maximum projection over all front axes),
 		/// the multi-front generalisation of the legacy sortMax away from the last attack. No fronts = no answer.
 		/// </summary>
@@ -642,14 +699,14 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				if (expansion is CPos aim)
 					anchors.Add((aim, FrontAnchorKind.Expansion));
 
-				var perimeter = owned
-					.Where(b => b.Info.HasTraitInfo<AttackBaseInfo>())
-					.Select(b => b.Location)
+				// Only this cluster's own defences draw its line — a remote outpost's towers never move it (B2).
+				var clusterSet = new HashSet<CPos>(cluster);
+				var perimeter = ClusterDefences(
+						owned.Where(b => b.Info.HasTraitInfo<AttackBaseInfo>()).Select(b => b.Location), clusterSet)
 					.Where(d => DefenseCoveragePlanner.Edgeness(d, centre, maxRadius) >= Info.PerimeterEdgePercent)
 					.ToList();
 
 				var fronts = BuildFronts(centre, anchors, perimeter, cluster, mergeCos, Info.MaxFrontsPerBase);
-				var clusterSet = new HashSet<CPos>(cluster);
 				foreach (var f in fronts)
 				{
 					f.Id = clusterIndex * 64 + BearingBucket(centre, f.Anchor);
@@ -706,19 +763,18 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				frontUncoveredApproach[f] = uncovered;
 			}
 
+			// The absolute target: one provider per defended front plus a justified extra — the caller
+			// subtracts what it already owns or has planned (B1); a deficit count would double-suppress.
 			foreach (var f in lastFronts)
 			{
 				if (!f.HasLine)
 					continue;
 
-				var inside = frontRadarCount[f];
-				if (inside == 0)
-				{
-					lastWantedRadars++;
+				if (frontRadarCount[f] == 0)
 					lastFrontsWithoutRadar++;
-				}
-				else if (inside < Info.RadarMaxPerFront && frontUncoveredApproach[f] >= Info.RadarMinNewCoverageCells)
-					lastWantedRadars++;
+
+				lastWantedRadars += WantedForFront(f.HasLine, frontUncoveredApproach[f],
+					Info.RadarMinNewCoverageCells, Info.RadarMaxPerFront);
 			}
 		}
 
@@ -782,24 +838,36 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			if (target == null || !target.HasLine)
 			{
-				// No defence line to hide behind: the radar waits for the line, then falls back to the
-				// back of the base — it never goes forward (maintainer ruling d).
+				// No defence line to hide behind: the radar waits for the line, then falls back to a SAFE
+				// back cell — it never goes forward (maintainer ruling d). All-forward candidates = Hold (B3).
 				if (target == null || world.WorldTick - target.FirstSeenTick < Info.RadarWaitForDefenceTicks)
 					return new FrontBackPick(null, true, target?.Id ?? -1, 0, 0, 0, 0);
 
-				return ChooseValuableCell(candidates, target.Centre, lastFronts);
+				var noLineSafe = SafeBackCells(candidates, target.Centre, target);
+				return noLineSafe.Count == 0 ? new FrontBackPick(null, true, target.Id, 0, 0, 0, 0)
+					: ChooseValuableCell(noLineSafe, target.Centre, lastFronts);
 			}
 
 			var pick = ChooseRadarCell(candidates, target.Centre, target, lastUnionApproach, lastUnionCovered,
 				RadarRangeCells(building), Info.RadarMinSetbackCells, Info.RadarMaxSetbackCells);
-			if (pick.Cell != null)
+			var inside = frontRadarCount.GetValueOrDefault(target);
+			var required = RequiredNewCoverage(inside, Info.RadarMinNewCoverageCells);
+			if (pick.Cell != null && pick.NewCoverageCells >= required)
 				return pick;
 
-			// No legal cell inside the band: same wait-then-back rule as a missing line.
+			// An EXTRA that cannot add the required new coverage holds — it is optional and earns nothing
+			// anywhere else; a pick with no legal band cell stays optional the same way (B4).
+			if (inside > 0)
+				return new FrontBackPick(null, true, target.Id, 0, 0, 0, 0);
+
+			// A first provider with no legal band cell, or one that cannot positively reach the approach:
+			// same wait-then-back rule as a missing line — and only SAFE back cells, never forward (B3/B4).
 			if (world.WorldTick - target.FirstSeenTick < Info.RadarWaitForDefenceTicks)
 				return new FrontBackPick(null, true, target.Id, 0, 0, 0, 0);
 
-			return ChooseValuableCell(candidates, target.Centre, lastFronts);
+			var safe = SafeBackCells(candidates, target.Centre, target);
+			return safe.Count == 0 ? new FrontBackPick(null, true, target.Id, 0, 0, 0, 0)
+				: ChooseValuableCell(safe, target.Centre, lastFronts);
 		}
 
 		int IBotFrontBackAdvisor.WantedRadarProviders
