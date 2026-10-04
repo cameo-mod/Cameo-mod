@@ -10,6 +10,14 @@
 
 skip: [SquadManagerBotModuleCA@classic]
 
+# Co-arm dependencies, enforced by apply_increment_switches.py: a group listed
+# here may only be applied together with its needs (a comment alone was never
+# checked — the P3 hygiene item). Defaults already on in ai.yaml (e.g.
+# DriveMcvRequests) need no entry.
+needs:
+  Q_ut3_defend_share: [O_ca2_defend_reserve]    # scales the reserve O creates
+  AA_cn4_region_roles: [D_zone_topology]        # role fronts need zone-graph regions
+
 groups:
   # SHIPPED 2026-10-01 as master defaults after the INC-1+2+3 A/B (all 13-3, 81% vs ctrl 12-4, 75%): former groups
   # A_squad_tactics, B_ownership_engineers_missions, C_f1_frans_services (C on every genericbot tier, §19.1).
