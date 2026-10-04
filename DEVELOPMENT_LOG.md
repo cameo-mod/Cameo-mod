@@ -1,3 +1,20 @@
+# 2026-10-04 — Devin-T2Verify: F4/F-CBL1 determinism — field-score tie-break + refinery-request pick
+
+*Devin-T2Verify.* Lead ruling on the hotspot NOTE's F4/F-CBL1: two unordered picks could diverge across
+runtimes in multiplayer.
+
+- `scores.Sort` on bare `Score` desc had no tie-break — `List.Sort` is unstable, so two exact-tie fields could rank
+  differently across runtimes. The new `CompareFieldScore` seam keeps score desc and falls to the lowest indice
+  index on an exact tie; `Replan` sorts through it.
+- `RequestedRefineries.Keys.First()` took whichever request `Dictionary` enumeration surfaced first — unspecified
+  order. The queue now routes through `FirstRequestedRefinery`/`FirstByOrder` (lowest ActorID), matching the Frans
+  twin's existing pick.
+- Both live on the extracted pure surfaces with branch-complete tests; behaviour changes only where entries
+  previously tied unordered.
+
+Gates (on the seam base): mod + test builds 0/0; 977/977 (six new); fog / direct-mutation / arch-freshness
+PASS; boot gate PASS. Stack-tip gates re-run on INC-f below.
+
 # 2026-10-04 — Devin-T2Verify: F1 — gate-B takes an indice only when its anchors are all served
 
 *Devin-T2Verify.* Lead ruling on the hotspot-6 NOTE's F1: gate B's indice-level refinery count could
