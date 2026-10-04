@@ -327,5 +327,39 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(ExpansionPlannerBotModule.LinkTargetEdge(new List<RefineryField> { new(0, new List<CPos>()) }, target, frontier), Is.Null,
 				"the nearest field has no usable cells: the centre stays the aim, no fall-through to the next field");
 		}
+
+		// F4: the scores sort orders by score desc, then by indice index — List.Sort is unstable, so
+		// a bare score comparison could rank tied fields differently across runtimes in MP.
+
+		static ExpansionPlannerBotModule.FieldScore FieldScore(int index, double score) =>
+			new(index, new CPos(index, 0), 40, 2, 100, 0, score);
+
+		[Test]
+		public void HigherScoreSortsFirstRegardlessOfIndex()
+		{
+			Assert.That(ExpansionPlannerBotModule.CompareFieldScore(FieldScore(9, 2.0), FieldScore(1, 1.0)), Is.LessThan(0));
+			Assert.That(ExpansionPlannerBotModule.CompareFieldScore(FieldScore(1, 1.0), FieldScore(9, 2.0)), Is.GreaterThan(0));
+		}
+
+		[Test]
+		public void AnExactScoreTieSortsTheLowestIndexFirst()
+		{
+			Assert.That(ExpansionPlannerBotModule.CompareFieldScore(FieldScore(3, 1.5), FieldScore(7, 1.5)), Is.LessThan(0));
+			Assert.That(ExpansionPlannerBotModule.CompareFieldScore(FieldScore(7, 1.5), FieldScore(3, 1.5)), Is.GreaterThan(0));
+			Assert.That(ExpansionPlannerBotModule.CompareFieldScore(FieldScore(5, 1.5), FieldScore(5, 1.5)), Is.EqualTo(0));
+		}
+
+		[Test]
+		public void TheSortedListRanksTiedFieldsDeterministically()
+		{
+			var scores = new List<ExpansionPlannerBotModule.FieldScore>
+			{
+				FieldScore(7, 1.5), FieldScore(1, 2.0), FieldScore(3, 1.5)
+			};
+			scores.Sort(ExpansionPlannerBotModule.CompareFieldScore);
+			Assert.That(scores[0].Index, Is.EqualTo(1));
+			Assert.That(scores[1].Index, Is.EqualTo(3));
+			Assert.That(scores[2].Index, Is.EqualTo(7));
+		}
 	}
 }

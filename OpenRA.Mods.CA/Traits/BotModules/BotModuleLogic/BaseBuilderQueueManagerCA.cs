@@ -1279,7 +1279,7 @@ namespace OpenRA.Mods.CA.Traits
 
 				case BuildingType.Refinery:
 
-					var requestRef = baseBuilder.RequestedRefineries.Count > 0 ? baseBuilder.RequestedRefineries.Keys.First() : null;
+					var requestRef = BaseBuilderQueueEvalCA.FirstRequestedRefinery(baseBuilder.RequestedRefineries);
 
 					// REF-1 (§12.24 v2, DESIGN §19.1b): under the refinery law EVERY refinery path routes through the
 					// provider's claim — the first refinery, the MCV-requested one (its yard's nearest unserved field

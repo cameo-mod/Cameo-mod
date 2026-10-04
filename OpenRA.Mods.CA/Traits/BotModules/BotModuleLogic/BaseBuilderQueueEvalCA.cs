@@ -199,5 +199,20 @@ namespace OpenRA.Mods.CA.Traits
 
 			return false;
 		}
+
+		/// <summary>
+		/// Deterministic dictionary pick (F-CBL1/F4): lowest tie-break key wins.
+		/// `Dictionary.Keys.First()` order is unspecified and could diverge across runtimes; an
+		/// explicit order keeps every peer's pick identical. Null/empty yields the default.
+		/// </summary>
+		public static TKey FirstByOrder<TKey, TValue>(IReadOnlyDictionary<TKey, TValue> items, Func<TKey, long> order) =>
+			items == null || items.Count == 0 ? default : items.Keys.OrderBy(order).First();
+
+		/// <summary>
+		/// The pending MCV refinery request the queue serves first — lowest ActorID wins (the Frans
+		/// twin already picks by ActorID).
+		/// </summary>
+		public static Actor FirstRequestedRefinery<TValue>(IReadOnlyDictionary<Actor, TValue> requests) =>
+			FirstByOrder(requests, a => a.ActorID);
 	}
 }

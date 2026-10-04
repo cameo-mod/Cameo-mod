@@ -1379,6 +1379,18 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			return score;
 		}
 
+		/// <summary>
+		/// The field-score ordering (F4): best score first; an exact tie goes to the lowest indice
+		/// index. List.Sort is unstable, so a bare score comparison could rank two tied fields
+		/// differently across runtimes — the index tie-break keeps every peer's pick identical.
+		/// Pure, for the tests.
+		/// </summary>
+		public static int CompareFieldScore(FieldScore a, FieldScore b)
+		{
+			var c = b.Score.CompareTo(a.Score);
+			return c != 0 ? c : a.Index.CompareTo(b.Index);
+		}
+
 		/// <summary>An in-flight MCV's site claim releases when the holder is gone, dead or no longer ours.</summary>
 		public static bool SiteHolderGone(bool found, bool dead, bool inWorld, bool owned) =>
 			!found || dead || !inWorld || !owned;
@@ -1619,7 +1631,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				scores.Add(new FieldScore(i, center, value, hops, payback, threat, score, Safety(threat, guardValue)));
 			}
 
-			scores.Sort((a, b) => b.Score.CompareTo(a.Score));
+			scores.Sort(CompareFieldScore);
 			LastScores = scores;
 			var previous = Target?.Index;
 			Target = scores.Count > 0 ? scores[0] : null;

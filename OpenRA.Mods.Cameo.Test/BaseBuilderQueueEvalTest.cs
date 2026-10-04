@@ -332,5 +332,30 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(BaseBuilderQueueEvalCA.DockHasExit(dock, open, n => n != new CPos(6, 5)), Is.True);
 			Assert.That(BaseBuilderQueueEvalCA.DockHasExit(dock, walled, _ => false), Is.False);
 		}
+
+		// FirstByOrder / FirstRequestedRefinery (F-CBL1/F4)
+
+		[Test]
+		public void FirstByOrderPicksTheLowestKeyNotInsertionOrder()
+		{
+			var requests = new Dictionary<string, int> { ["alpha"] = 1, ["beta"] = 2, ["gamma"] = 3 };
+			Assert.That(BaseBuilderQueueEvalCA.FirstByOrder(requests, s => s switch { "beta" => 7, "gamma" => 3, _ => 9 }), Is.EqualTo("gamma"));
+		}
+
+		[Test]
+		public void FirstByOrderIsStableUnderKeyEnumerationOrder()
+		{
+			var forward = new Dictionary<string, int> { ["alpha"] = 1, ["beta"] = 2 };
+			var reverse = new Dictionary<string, int> { ["beta"] = 2, ["alpha"] = 1 };
+			Assert.That(BaseBuilderQueueEvalCA.FirstByOrder(forward, s => s == "beta" ? 1 : 2), Is.EqualTo("beta"));
+			Assert.That(BaseBuilderQueueEvalCA.FirstByOrder(reverse, s => s == "beta" ? 1 : 2), Is.EqualTo("beta"));
+		}
+
+		[Test]
+		public void FirstByOrderYieldsDefaultOnNullOrEmpty()
+		{
+			Assert.That(BaseBuilderQueueEvalCA.FirstByOrder<string, int>(null, _ => 0), Is.Null);
+			Assert.That(BaseBuilderQueueEvalCA.FirstByOrder(new Dictionary<string, int>(), _ => 0), Is.Null);
+		}
 	}
 }
