@@ -252,6 +252,17 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(BaseBuilderQueueEvalCA.PickFacingVariant(new WVec(1, 0, 0), duplicated), Is.EqualTo(0));
 		}
 
+		// PicksRandomVariant — variants without facings draw; either half alone does not
+
+		[Test]
+		public void RandomVariantNeedsVariantsWithoutFacings()
+		{
+			Assert.That(BaseBuilderQueueEvalCA.PicksRandomVariant(false, false), Is.False);
+			Assert.That(BaseBuilderQueueEvalCA.PicksRandomVariant(false, true), Is.False);
+			Assert.That(BaseBuilderQueueEvalCA.PicksRandomVariant(true, true), Is.False);
+			Assert.That(BaseBuilderQueueEvalCA.PicksRandomVariant(true, false), Is.True);
+		}
+
 		// PlacementCellAdmitted — short-circuit order is part of the contract
 
 		[Test]

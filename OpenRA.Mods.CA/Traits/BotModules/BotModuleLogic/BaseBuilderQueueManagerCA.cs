@@ -860,19 +860,12 @@ namespace OpenRA.Mods.CA.Traits
 			if (frontBack != null && frontBack.WantedRadarProviders > OwnedRadarProviders())
 			{
 				var radar = frontBack.PreferredRadarProvider(GetRadarProducibles(buildableThings));
-				if (radar != null)
+				var radarPick = BaseBuilderQueueEvalCA.PickOrPower(radar, power, HasSufficientPowerForActor);
+				if (radarPick != null)
 				{
-					if (HasSufficientPowerForActor(radar))
-					{
-						AIUtils.BotDebug("{0} decided to build {1}: Priority override (radar for front)", queue.Actor.Owner, radar.Name);
-						return radar;
-					}
-
-					if (power != null)
-					{
-						AIUtils.BotDebug("{0} decided to build {1}: Priority override (radar would be low power)", queue.Actor.Owner, power.Name);
-						return power;
-					}
+					AIUtils.BotDebug("{0} decided to build {1}: Priority override ({2})", queue.Actor.Owner, radarPick.Name,
+						radarPick == radar ? "radar for front" : "radar would be low power");
+					return radarPick;
 				}
 			}
 
@@ -1070,14 +1063,14 @@ namespace OpenRA.Mods.CA.Traits
 				// If we don't have Facings in buildingVariantInfo, use a random variant
 				if (buildingVariantInfo?.Actors != null)
 				{
-					if (buildingVariantInfo.Facings != null)
+					if (BaseBuilderQueueEvalCA.PicksRandomVariant(true, buildingVariantInfo.Facings != null))
+						actorVariant = world.LocalRandom.Next(buildingVariantInfo.Actors.Length + 1);
+					else
 					{
 						// The rotation Y point to upside vertically, so -Y = Y(rotation)
 						actorVariant = BaseBuilderQueueEvalCA.PickFacingVariant(
 							world.Map.CenterOfCell(target) - world.Map.CenterOfCell(center), buildingVariantInfo.Facings);
 					}
-					else
-						actorVariant = world.LocalRandom.Next(buildingVariantInfo.Actors.Length + 1);
 				}
 			}
 			else
@@ -1206,13 +1199,13 @@ namespace OpenRA.Mods.CA.Traits
 			foreach (var cell in world.Map.FindTilesInAnnulus(baseCenter, baseBuilder.Info.MinBaseRadius,
 				Math.Max(baseBuilder.Info.MaxBaseRadius, baseBuilder.Info.MaximumDefenseRadius)))
 			{
-				if (!world.CanPlaceBuilding(cell, actorInfo, bi, null))
-					continue;
-
-				if (distanceToBaseIsImportant && !bi.IsCloseEnoughToBase(world, player, actorInfo, producer, cell))
-					continue;
-
-				if (ownBuildingBuffer != null && !bi.AllowInvalidPlacement && bi.Tiles(cell).Any(ownBuildingBuffer.Contains))
+				// The same admission gate findPos applies, minus the requirement-distance clause —
+				// the advisor's own front/back distance semantics cover that axis.
+				if (!BaseBuilderQueueEvalCA.PlacementCellAdmitted(
+						() => world.CanPlaceBuilding(cell, actorInfo, bi, null),
+						() => !distanceToBaseIsImportant || bi.IsCloseEnoughToBase(world, player, actorInfo, producer, cell),
+						() => true,
+						() => ownBuildingBuffer == null || bi.AllowInvalidPlacement || !bi.Tiles(cell).Any(ownBuildingBuffer.Contains)))
 					continue;
 
 				legal.Add(cell);
@@ -1226,7 +1219,9 @@ namespace OpenRA.Mods.CA.Traits
 		int FrontBackVariant(ActorInfo actorInfo)
 		{
 			var variants = actorInfo.TraitInfoOrDefault<PlaceBuildingVariantsInfo>();
-			return variants?.Actors != null && variants.Facings == null ? world.LocalRandom.Next(variants.Actors.Length + 1) : 0;
+			return BaseBuilderQueueEvalCA.PicksRandomVariant(variants?.Actors != null,
+				variants != null && variants.Facings != null)
+					? world.LocalRandom.Next(variants.Actors.Length + 1) : 0;
 		}
 
 		(CPos? Location, CPos? BaseCenter, int Variant) ChooseBuildLocation(string actorType, bool distanceToBaseIsImportant, Actor producer, BuildingType type)
