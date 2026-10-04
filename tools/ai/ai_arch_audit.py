@@ -79,6 +79,7 @@ LAYER_OF = {
     "FransCombatIntelBotModule": "PERCEPTION",
     "FransMineClusterBotModule": "PERCEPTION",
     "FransRiskModelBotModule": "PERCEPTION",
+    "RadarContactsBotModule": "PERCEPTION",
     # SITUATION — BotSituation feeds, personality, utility axes, leads, counter-demand
     "BotCounterDemandController": "SITUATION",
     "BotPersonalityController": "SITUATION",
@@ -125,6 +126,7 @@ LAYER_OF = {
     "McvExpansionManagerBotModule": "EXECUTION",
     "FransMcvExpansionManagerBotModule": "EXECUTION",
     "LoadCargoBotModule": "EXECUTION",
+    "LoadCargoBotModuleAS": "EXECUTION",
     "LoadGarrisonerBotModuleCA": "EXECUTION",
     "MinelayerBotModule": "EXECUTION",
     "FransMinelayerBotModule": "EXECUTION",
