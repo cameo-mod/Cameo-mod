@@ -132,9 +132,11 @@ def main(argv: list[str]) -> int:
                         health[bot]["own"][k] += v
                 # First example per kind names a concrete unit behind a count
                 # (LC5-DETAIL: counts alone left a double_owner unrecoverable).
+                # A row missing "kind" is skipped here — a None key would crash
+                # the sorted() below with a None-vs-str TypeError.
                 for e in own.get("examples") or []:
-                    if isinstance(e, dict):
-                        health[bot]["ex"].setdefault(e.get("kind"), (r.get("game_uid"), e))
+                    if isinstance(e, dict) and isinstance(e.get("kind"), str):
+                        health[bot]["ex"].setdefault(e["kind"], (r.get("game_uid"), e))
             gate = r.get("order_gate")
             if isinstance(gate, dict):
                 for k, v in gate.items():

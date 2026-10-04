@@ -113,6 +113,24 @@ class WatchdogReadoutTests(unittest.TestCase):
         out = run_summary(recs)
         self.assertNotIn("watchdogs", out)
 
+    def test_examples_print_first_per_kind_and_tolerate_missing_kind(self):
+        # LC5-DETAIL: `examples` names a concrete unit behind a count; a row
+        # missing "kind" is skipped rather than crashing the sorted() below.
+        recs = [
+            {**record("m1", "hard", "won"), "ownership": {
+                "checks": 10, "double_owner": 1,
+                "examples": [
+                    {"kind": "double_owner", "tick": 5400, "type": "td_gdi_minigunner",
+                     "actor_id": 1842, "detail": "rush/Assault#0 + lease GarrisonContestBotModule"},
+                    {"tick": 5500, "type": "td_gdi_apc"},
+                ]}},
+            {**record("m1", "classic", "lost")},
+        ]
+        out = run_summary(recs)
+        self.assertIn('first double_owner: td_gdi_minigunner#1842@5400 '
+                      '"rush/Assault#0 + lease GarrisonContestBotModule" (game m1)', out)
+        self.assertNotIn("first None", out)
+
 
 if __name__ == "__main__":
     unittest.main()
