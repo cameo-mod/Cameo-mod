@@ -1,3 +1,41 @@
+# 2026-10-04 — Claude (lead): INC 2026-10-04 lands — refinery law v2, bot takeover, BP phase 1, RADAR-ALLY, mpspawn parser
+
+*Claude.* Branch `inc/2026_10_04`, merged with `--no-ff` from master `8e86fca23`:
+- `devin/ref1-refinery-law-v2@a23da7798` (DESIGN §19.1b; AJ_field_coverage default ON per the maintainer). Smoke: rift 0 FAIL;
+  the deterring-democracy residual is a capture/rebuild artifact (lead ruling A). The silo gate brings crawl silos from 80 to 0.
+- `devin/t3verify/bot-takeover@f475f1881` (§19.14; lobby toggle default ON). Multi-client smoke, 6/6 scenarios PASS
+  (Tier4 harness `da8595dac`).
+- `devin/t3verify/bp-front-back@150be7e5c` (§19.15; inert, `Enabled: false`, no consumer until phase 2).
+- `devin/tier4/radar-ally@646bddf51`: allied ranged-GPS providers share their discs (render-side, maintainer ruling).
+- `devin/tier4/batch-mpspawn-fix@2f358c4ac`: order-independent mpspawn parse (a superset of REF-1's).
+
+Reviews:
+- Boss: takeover T1-T4 and BP B1-B4 (round 1).
+- T2Verify peer review: T4 rev-2 and B1 rev-2.
+- T3Verify peer review: REF-1.
+- Lead: T5, RADAR-ALLY, mpspawn.
+
+Conflicts: only append-only ones (devlog, DESIGN §19.14/§19.15, union) and `mp_spawn_cells` (taken from Tier4).
+`audit_doc_claims` AI contract 73/98 → 74/99 for `BaseFrontBackPlannerBotModule`.
+
+Gates:
+- build: 0 warnings, 0 errors
+- Cameo tests: 923/923
+- fog: PASS (263 sites)
+- direct-mutation: PASS
+- doc-claims: PASS
+- boot gate: PASS (isolated support dir)
+- `test_ai_batch_harness`: 31 pass; the same 3 failures as master (stale `build_matchups` tests, E2 baseline)
+
+Note: the "refresh the tracked Cameo DLL" step from the 10-02 standing orders is obsolete; no DLL has been tracked since
+`e75575a6b`.
+
+Next: the AI architecture review + harvest campaign (fleet `ORDERS_2026-10-04b_claude_ai_architecture_review.md`).
+Verified P0s:
+- AR-1: grouped orders bypass the lease gate in `ModularBot.PassesGate`.
+- AR-2: the personality pin is read in synced `TraitEnabled` from host-only state.
+- AR-4: PlugSpawner order without an owner check.
+
 # 2026-10-04 — Devin-T3Verify: TAKEOVER bot-stance fix + tactical-map lazy build (user-reported passivity)
 
 *Devin.* `devin/t3verify/bot-takeover` (on top of `fe4a43131`). Maintainer report: a taken-over seat's army "stays in
