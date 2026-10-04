@@ -264,10 +264,9 @@ namespace OpenRA.Mods.CA.Traits
 				var lawWants = baseBuilder.RefineryLawProvider();
 				var plannerWant = lawWants != null
 					&& (item.Name == lawWants.WantedLinkBuilding || item.Name == lawWants.WantedMcvPrerequisite);
-				if ((playerResources.GetCashAndResources() < minCashRequirement
-						&& !baseBuilder.Info.RefineryTypes.Contains(item.Name)
-						&& !(plannerWant && playerResources.GetCashAndResources() >= queue.GetProductionCost(item)))
-					|| itemQueuedThisTick)
+				if (BaseBuilderQueueEvalCA.BlockedByCash(playerResources.GetCashAndResources(), minCashRequirement,
+						baseBuilder.Info.RefineryTypes.Contains(item.Name), plannerWant,
+						queue.GetProductionCost(item), itemQueuedThisTick))
 					return false;
 
 				// Cameo (§12.20): the army-first vote - a provider (ArmyFirstBotModule, the one owner) can hold new
@@ -304,7 +303,7 @@ namespace OpenRA.Mods.CA.Traits
 				// Check if we've hit the limit for this building already, if so cancel it
 				if (baseBuilder.TryGetBuildingLimit(currentBuilding.Item, out var currentLimit))
 				{
-					if ((AIUtils.CountBuildingByCommonName(new HashSet<string> { currentBuilding.Item }, player) >= currentLimit))
+					if (BaseBuilderQueueEvalCA.LimitReached(AIUtils.CountBuildingByCommonName(new HashSet<string> { currentBuilding.Item }, player), currentLimit))
 					{
 						AIUtils.BotDebug($"{player} has already has enough {currentBuilding.Item}; cancelling production");
 						bot.QueueOrder(Order.CancelProduction(queue.Actor, currentBuilding.Item, 1));
@@ -339,45 +338,51 @@ namespace OpenRA.Mods.CA.Traits
 					// REF-1 B1 (§12.24 v2): the planner's crawl want is always a BaseCrawl placement — the want
 					// exists to close the gap to the target field, so the chance roll and cost threshold that
 					// gate organic crawl never apply to it (no random draw is consumed on this path).
-					if (law != null && currentBuilding.Item == law.WantedLinkBuilding)
-						type = BuildingType.BaseCrawl;
-					else if (baseBuilder.Info.RefineryTypes.Contains(actorInfo.Name))
+					var lawLink = law != null && currentBuilding.Item == law.WantedLinkBuilding;
+					var isRefinery = false;
+					var isFragile = false;
+					var hasAttackBase = false;
+					var defenseRoll = false;
+					var organicCrawlRoll = false;
+					if (!lawLink)
 					{
-						type = BuildingType.Refinery;
-					}
-					else if (baseBuilder.Info.FragileTypes.Contains(actorInfo.Name))
-					{
-						type = BuildingType.Fragile;
-						// distanceToBaseIsImportant = false;
-					}
-					else if (actorInfo.HasTraitInfo<AttackBaseInfo>())
-					{
-						// Cameo: an active advisor picks the cell itself, skipping the roll (no random draw is consumed);
-						// without one, or when it has no answer, the code below is unchanged.
-						advisedDefense = AdvisedDefenseCell(actorInfo, distanceToBaseIsImportant, queue.Actor);
-						if (advisedDefense == null)
+						if (baseBuilder.Info.RefineryTypes.Contains(actorInfo.Name))
+							isRefinery = true;
+						else if (baseBuilder.Info.FragileTypes.Contains(actorInfo.Name))
+							isFragile = true;
+						else if (actorInfo.HasTraitInfo<AttackBaseInfo>())
 						{
-							if (baseBuilder.Info.AntiAirTypes.Contains(actorInfo.Name))
-								placeDefenseTowardsEnemyChance = (int)Math.Ceiling(placeDefenseTowardsEnemyChance / 1.5);
+							hasAttackBase = true;
 
-							if (world.LocalRandom.Next(100) < placeDefenseTowardsEnemyChance)
-								type = BuildingType.Defense;
+							// Cameo: an active advisor picks the cell itself, skipping the roll (no random draw is consumed);
+							// without one, or when it has no answer, the code below is unchanged.
+							advisedDefense = AdvisedDefenseCell(actorInfo, distanceToBaseIsImportant, queue.Actor);
+							if (advisedDefense == null)
+							{
+								if (baseBuilder.Info.AntiAirTypes.Contains(actorInfo.Name))
+									placeDefenseTowardsEnemyChance = (int)Math.Ceiling(placeDefenseTowardsEnemyChance / 1.5);
+
+								defenseRoll = world.LocalRandom.Next(100) < placeDefenseTowardsEnemyChance;
+							}
+						}
+						// REF-1 (B1 maintainer ruling): a crawl placement must extend the buildable area —
+						// under the law, buildings without GivesBuildableArea (silos) never take the
+						// organic crawl roll and place at home instead; the GBA check precedes the draw
+						// so it consumes no randoms on the law path.
+						else
+						{
+							organicCrawlRoll = !limitBuildRadius && valueInfo != null && valueInfo.Cost < baseBuilder.Info.BaseCrawlCostThreshold
+								&& RefineryLawCrawlRoll.LegalLink(law != null, actorInfo)
+								&& world.LocalRandom.Next(100) < baseBuilder.Info.BaseCrawlChance;
 						}
 					}
-					// REF-1 (B1 maintainer ruling): a crawl placement must extend the buildable area —
-					// under the law, buildings without GivesBuildableArea (silos) never take the
-					// organic crawl roll and place at home instead; the GBA check precedes the draw
-					// so it consumes no randoms on the law path.
-					else if (!limitBuildRadius && valueInfo != null && valueInfo.Cost < baseBuilder.Info.BaseCrawlCostThreshold
-						&& RefineryLawCrawlRoll.LegalLink(law != null, actorInfo)
-						&& world.LocalRandom.Next(100) < baseBuilder.Info.BaseCrawlChance)
-						type = BuildingType.BaseCrawl;
+
+					type = BaseBuilderQueueEvalCA.ClassifyPlacement(lawLink, isRefinery, isFragile, hasAttackBase, defenseRoll, organicCrawlRoll);
 
 					// REF-1 B1 (crawl-trace §8): under the law a crawl placement with no aim holds — returning
 					// keeps the produced building queued (and spends no failure budget) instead of wasting the
 					// link on an un-aimed fallback cell.
-					if (type == BuildingType.BaseCrawl && law != null
-						&& law.CrawlTargetEdge == null && baseBuilder.ExpansionTarget() == null)
+					if (BaseBuilderQueueEvalCA.CrawlHold(type, law != null, law?.CrawlTargetEdge != null, baseBuilder.ExpansionTarget() != null))
 						return false;
 
 					if (advisedDefense != null)
@@ -446,9 +451,9 @@ namespace OpenRA.Mods.CA.Traits
 						// still exist beyond reach. Classic/switch-off keep the old count.
 						if (RefineryLawNudge.Due(baseBuilder.RefineryLawProvider(), numRef,
 								baseBuilder.Info.InititalMinimumRefineryCount + baseBuilder.Info.AdditionalMinimumRefineryCount)
-							&& numProd > 0 && numProd + numTech - RandomTolerance(baseBuilder.Info.ExpansionTolerate) - tolerateOnCash >= numRef)
+							&& numProd > 0 && BaseBuilderQueueEvalCA.ExpansionBalance(numProd, numTech, RandomTolerance(baseBuilder.Info.ExpansionTolerate), tolerateOnCash, numRef))
 						{
-							var undeployEvenNoBase = numProd + numTech - RandomTolerance(baseBuilder.Info.ForceExpansionTolerate) - tolerateOnCash >= numRef;
+							var undeployEvenNoBase = BaseBuilderQueueEvalCA.ExpansionBalance(numProd, numTech, RandomTolerance(baseBuilder.Info.ForceExpansionTolerate), tolerateOnCash, numRef);
 
 							foreach (var be in baseBuilder.BaseExpansionModules)
 								be.UpdateExpansionParams(bot, true, undeployEvenNoBase, null);
@@ -519,11 +524,9 @@ namespace OpenRA.Mods.CA.Traits
 				if (!actors.Contains(actor.Name))
 					return false;
 
-				if (!baseBuilder.TryGetBuildingLimit(actor.Name, out var limit))
-					return true;
-
-				return playerBuildings.Count(a => a.Info.Name == actor.Name) +
-					(baseBuilder.BuildingsBeingProduced.TryGetValue(actor.Name, out var beingProduced) ? beingProduced : 0) < limit;
+				return BaseBuilderQueueEvalCA.LimitAdmits(baseBuilder.TryGetBuildingLimit(actor.Name, out var limit), limit,
+					playerBuildings.Count(a => a.Info.Name == actor.Name),
+					baseBuilder.BuildingsBeingProduced.TryGetValue(actor.Name, out var beingProduced) ? beingProduced : 0);
 			});
 
 			if (orderBy != null)
@@ -624,14 +627,14 @@ namespace OpenRA.Mods.CA.Traits
 				var count = playerBuildings.Count(a => a.Info.Name == name) +
 					(baseBuilder.BuildingsBeingProduced.TryGetValue(name, out var num) ? num : 0);
 
-				if (botLimits != null && baseBuilder.Info.ProductionTypes.Contains(name) && count >= ProductionTypeLimit)
+				if (botLimits != null && baseBuilder.Info.ProductionTypes.Contains(name) && BaseBuilderQueueEvalCA.LimitReached(count, ProductionTypeLimit))
 					continue;
 
-				if (baseBuilder.TryGetBuildingLimit(name, out var limit) && limit <= count)
+				if (baseBuilder.TryGetBuildingLimit(name, out var limit) && BaseBuilderQueueEvalCA.LimitReached(count, limit))
 					continue;
 
 				var fraction = baseBuilder.Info.BuildingFractions != null && baseBuilder.Info.BuildingFractions.TryGetValue(name, out var f) ? f : 0;
-				if (best == null || fraction > bestFraction || fraction == bestFraction && string.CompareOrdinal(name, best.Name) < 0)
+				if (best == null || BaseBuilderQueueEvalCA.BetterOpeningCandidate(fraction, bestFraction, name, best.Name))
 				{
 					best = candidate;
 					bestFraction = fraction;
@@ -695,9 +698,10 @@ namespace OpenRA.Mods.CA.Traits
 			// This gets used quite a bit, so let's cache it here
 			var power = GetProducibleBuilding(baseBuilder.Info.PowerTypes, buildableThings,
 				a => a.TraitInfos<PowerInfo>().Where(i => i.EnabledByDefault).Sum(p => p.Amount));
-			var openingBarracksPolicyActive = botLimits != null && botLimits.Info.PrioritizeBarracksBeforeRefinery
-				&& baseBuilder.Info.BarracksBeforeRefineryFactions.Contains(player.Faction.InternalName)
-				&& !baseBuilder.OpeningBarracksPriorityCompleted;
+			var openingBarracksPolicyActive = BaseBuilderQueueEvalCA.OpeningBarracksPolicy(botLimits != null,
+				botLimits != null && botLimits.Info.PrioritizeBarracksBeforeRefinery,
+				baseBuilder.Info.BarracksBeforeRefineryFactions.Contains(player.Faction.InternalName),
+				baseBuilder.OpeningBarracksPriorityCompleted);
 
 			// Wait for the queued opening structure to be placed before allowing another construction queue to proceed.
 			if (openingBarracksPolicyActive && (baseBuilder.HasQueuedPowerPlant() || baseBuilder.HasQueuedBarracks()))
@@ -752,16 +756,12 @@ namespace OpenRA.Mods.CA.Traits
 				// been reached by a different faction's construction yard.
 				if (refinery != null && !baseBuilder.HasMaxRefineriesFor(refinery))
 				{
-					if (HasSufficientPowerForActor(refinery))
+					var pick = BaseBuilderQueueEvalCA.PickOrPower(refinery, power, HasSufficientPowerForActor);
+					if (pick != null)
 					{
-						AIUtils.BotDebug("{0} decided to build {1}: Priority override (refinery)", queue.Actor.Owner, refinery.Name);
-						return refinery;
-					}
-
-					if (power != null && !HasSufficientPowerForActor(refinery))
-					{
-						AIUtils.BotDebug("{0} decided to build {1}: Priority override (would be low power)", queue.Actor.Owner, power.Name);
-						return power;
+						AIUtils.BotDebug("{0} decided to build {1}: Priority override ({2})", queue.Actor.Owner, pick.Name,
+							pick == refinery ? "refinery" : "would be low power");
+						return pick;
 					}
 				}
 			}
@@ -782,16 +782,12 @@ namespace OpenRA.Mods.CA.Traits
 					if (pick == null)
 						continue;
 
-					if (HasSufficientPowerForActor(pick))
+					var wantPick = BaseBuilderQueueEvalCA.PickOrPower(pick, power, HasSufficientPowerForActor);
+					if (wantPick != null)
 					{
-						AIUtils.BotDebug("{0} decided to build {1}: Priority override (REF-1 planner want)", queue.Actor.Owner, pick.Name);
-						return pick;
-					}
-
-					if (power != null)
-					{
-						AIUtils.BotDebug("{0} decided to build {1}: Priority override (planner want would be low power)", queue.Actor.Owner, power.Name);
-						return power;
+						AIUtils.BotDebug("{0} decided to build {1}: Priority override ({2})", queue.Actor.Owner, wantPick.Name,
+							wantPick == pick ? "REF-1 planner want" : "planner want would be low power");
+						return wantPick;
 					}
 				}
 			}
@@ -810,18 +806,14 @@ namespace OpenRA.Mods.CA.Traits
 			{
 				var production = GetProducibleBuilding(baseBuilder.Info.ProductionTypes, buildableThings);
 
-				if (production != null && (ProductionTypeLimit <= 0 || playerBuildings.Count(a => a.Info.Name == production.Name) < ProductionTypeLimit))
+				if (production != null && (ProductionTypeLimit <= 0 || !BaseBuilderQueueEvalCA.LimitReached(playerBuildings.Count(a => a.Info.Name == production.Name), ProductionTypeLimit)))
 				{
-					if (HasSufficientPowerForActor(production))
+					var pick = BaseBuilderQueueEvalCA.PickOrPower(production, power, HasSufficientPowerForActor);
+					if (pick != null)
 					{
-						AIUtils.BotDebug("{0} decided to build {1}: Priority override (production)", queue.Actor.Owner, production.Name);
-						return production;
-					}
-
-					if (power != null && !HasSufficientPowerForActor(production))
-					{
-						AIUtils.BotDebug("{0} decided to build {1}: Priority override (would be low power)", queue.Actor.Owner, power.Name);
-						return power;
+						AIUtils.BotDebug("{0} decided to build {1}: Priority override ({2})", queue.Actor.Owner, pick.Name,
+							pick == production ? "production" : "would be low power");
+						return pick;
 					}
 				}
 			}
@@ -832,16 +824,12 @@ namespace OpenRA.Mods.CA.Traits
 				&& AIUtils.IsAreaAvailable<GivesBuildableArea>(world, player, world.Map, baseBuilder.Info.CheckForWaterRadius, baseBuilder.Info.WaterTerrainTypes))
 			{
 				var navalproduction = GetProducibleBuilding(baseBuilder.Info.NavalProductionTypes, buildableThings);
-				if (navalproduction != null && HasSufficientPowerForActor(navalproduction))
+				var navalPick = BaseBuilderQueueEvalCA.PickOrPower(navalproduction, power, HasSufficientPowerForActor);
+				if (navalPick != null)
 				{
-					AIUtils.BotDebug("{0} decided to build {1}: Priority override (navalproduction)", queue.Actor.Owner, navalproduction.Name);
-					return navalproduction;
-				}
-
-				if (power != null && navalproduction != null && !HasSufficientPowerForActor(navalproduction))
-				{
-					AIUtils.BotDebug("{0} decided to build {1}: Priority override (would be low power)", queue.Actor.Owner, power.Name);
-					return power;
+					AIUtils.BotDebug("{0} decided to build {1}: Priority override ({2})", queue.Actor.Owner, navalPick.Name,
+						navalPick == navalproduction ? "navalproduction" : "would be low power");
+					return navalPick;
 				}
 			}
 
@@ -856,16 +844,12 @@ namespace OpenRA.Mods.CA.Traits
 			if (wantSilo)
 			{
 				var silo = GetProducibleBuilding(baseBuilder.Info.SiloTypes, buildableThings);
-				if (silo != null && HasSufficientPowerForActor(silo))
+				var siloPick = BaseBuilderQueueEvalCA.PickOrPower(silo, power, HasSufficientPowerForActor);
+				if (siloPick != null)
 				{
-					AIUtils.BotDebug("{0} decided to build {1}: Priority override (silo)", queue.Actor.Owner, silo.Name);
-					return silo;
-				}
-
-				if (power != null && silo != null && !HasSufficientPowerForActor(silo))
-				{
-					AIUtils.BotDebug("{0} decided to build {1}: Priority override (would be low power)", queue.Actor.Owner, power.Name);
-					return power;
+					AIUtils.BotDebug("{0} decided to build {1}: Priority override ({2})", queue.Actor.Owner, siloPick.Name,
+						siloPick == silo ? "silo" : "would be low power");
+					return siloPick;
 				}
 			}
 
@@ -900,13 +884,13 @@ namespace OpenRA.Mods.CA.Traits
 				// Does this building have initial delay, if so have we passed it?
 				if (baseBuilder.Info.BuildingDelays != null &&
 					baseBuilder.Info.BuildingDelays.TryGetValue(name, out var delay) &&
-					KnobTicks(delay * buildingDelayModifier / 100, name) > world.WorldTick)
+					BaseBuilderQueueEvalCA.StillDelayed(KnobTicks(delay * buildingDelayModifier / 100, name), world.WorldTick))
 					continue;
 
 				// Does this building have an interval which hasn't elapsed yet?
-				if (baseBuilder.Info.BuildingIntervals != null &&
-					baseBuilder.Info.BuildingIntervals.ContainsKey(name) &&
-					activeBuildingIntervals.ContainsKey(name))
+				if (BaseBuilderQueueEvalCA.IntervalBlocks(
+						baseBuilder.Info.BuildingIntervals != null && baseBuilder.Info.BuildingIntervals.ContainsKey(name),
+						activeBuildingIntervals.ContainsKey(name)))
 					continue;
 
 				// Can we build this structure?
@@ -924,16 +908,16 @@ namespace OpenRA.Mods.CA.Traits
 
 				// Do we want to build this structure?
 				// Build-order knobs (12.25): production/tech/defence/support/greed scale the fraction of their categories (milli = 1000 without a provider).
-				if (count * 100L * 1000 > (long)frac.Value * FractionMilli(name) * playerBuildings.Length)
+				if (!BaseBuilderQueueEvalCA.FractionAdmits(count, frac.Value, FractionMilli(name), playerBuildings.Length))
 					continue;
 
-				if (botLimits != null && baseBuilder.Info.ProductionTypes.Contains(name) && count >= ProductionTypeLimit)
+				if (botLimits != null && baseBuilder.Info.ProductionTypes.Contains(name) && BaseBuilderQueueEvalCA.LimitReached(count, ProductionTypeLimit))
 				{
 					AIUtils.BotDebug("{0} decided to build {1} but limit of {2} already reached)", queue.Actor.Owner, name, ProductionTypeLimit);
 					continue;
 				}
 
-				if (baseBuilder.TryGetBuildingLimit(name, out var limit) && limit <= count)
+				if (baseBuilder.TryGetBuildingLimit(name, out var limit) && BaseBuilderQueueEvalCA.LimitReached(count, limit))
 				{
 					AIUtils.BotDebug("{0} decided to build {1} but limit of {2} already reached)", queue.Actor.Owner, name, limit);
 					continue;
@@ -945,14 +929,14 @@ namespace OpenRA.Mods.CA.Traits
 				// If we're considering to build a naval structure, check whether there is enough water inside the base perimeter
 				// and any structure providing buildable area close enough to that water.
 				// TODO: Extend this check to cover any naval structure, not just production.
-				if (baseBuilder.Info.NavalProductionTypes.Contains(name)
-					&& (waterState == WaterCheck.NotEnoughWater
-						|| !AIUtils.IsAreaAvailable<GivesBuildableArea>(world, player, world.Map, baseBuilder.Info.CheckForWaterRadius, baseBuilder.Info.WaterTerrainTypes)))
+				if (BaseBuilderQueueEvalCA.NavalBlocked(baseBuilder.Info.NavalProductionTypes.Contains(name),
+						waterState == WaterCheck.NotEnoughWater,
+						() => AIUtils.IsAreaAvailable<GivesBuildableArea>(world, player, world.Map, baseBuilder.Info.CheckForWaterRadius, baseBuilder.Info.WaterTerrainTypes)))
 					continue;
 
 				// Will this put us into low power?
 				var actor = world.Map.Rules.Actors[name];
-				if (playerPower != null && (playerPower.ExcessPower < minimumExcessPower || !HasSufficientPowerForActor(actor)))
+				if (BaseBuilderQueueEvalCA.LowPowerBlocked(playerPower != null, playerPower?.ExcessPower ?? 0, minimumExcessPower, HasSufficientPowerForActor(actor)))
 				{
 					// Try building a power plant instead
 					if (power != null && power.TraitInfos<PowerInfo>().Where(i => i.EnabledByDefault).Sum(pi => pi.Amount) > 0)
@@ -999,15 +983,7 @@ namespace OpenRA.Mods.CA.Traits
 				return false;
 
 			var footprint = new HashSet<CPos>(bi.Tiles(topLeft));
-			for (var dy = -1; dy <= 1; dy++)
-				for (var dx = -1; dx <= 1; dx++)
-				{
-					var n = new CPos(dock.X + dx, dock.Y + dy);
-					if (!footprint.Contains(n) && world.Map.Contains(n))
-						return true;
-				}
-
-			return false;
+			return BaseBuilderQueueEvalCA.DockHasExit(dock, footprint, world.Map.Contains);
 		}
 
 		// REF-1 (§12.24 v2): the placeable cell NEAREST the anchor whose footprint sits flush on the claim's resource
@@ -1052,10 +1028,11 @@ namespace OpenRA.Mods.CA.Traits
 					return (cell, -1, 0);
 
 				var footprint = bi.Tiles(cell).ToList();
-				if (footprint.Any(zone0.Contains))
+				var gap = BaseBuilderQueueEvalCA.FootprintGap(footprint, zone0, zone1);
+				if (gap == 0)
 					return (cell, 0, 0);
 
-				if (gap1 == null && footprint.Any(zone1.Contains))
+				if (gap == 1 && gap1 == null)
 					gap1 = cell;
 			}
 
@@ -1095,30 +1072,9 @@ namespace OpenRA.Mods.CA.Traits
 				{
 					if (buildingVariantInfo.Facings != null)
 					{
-						var vector = world.Map.CenterOfCell(target) - world.Map.CenterOfCell(center);
-
-						// FE-1: centre == target (anchor placement) has no direction; keep variant 0 instead of dividing by zero.
-						if (vector.Length == 0)
-							vector = new WVec(0, 1, 0);
-
 						// The rotation Y point to upside vertically, so -Y = Y(rotation)
-						var desireFacing = new WAngle(WAngle.ArcSin((int)((long)Math.Abs(vector.X) * 1024 / vector.Length)).Angle);
-						if (vector.X > 0 && vector.Y >= 0)
-							desireFacing = new WAngle(512) - desireFacing;
-						else if (vector.X < 0 && vector.Y >= 0)
-							desireFacing = new WAngle(512) + desireFacing;
-						else if (vector.X < 0 && vector.Y < 0)
-							desireFacing = -desireFacing;
-
-						for (int i = 0, e = 1024; i < buildingVariantInfo.Facings.Length; i++)
-						{
-							var minDelta = Math.Min((desireFacing - buildingVariantInfo.Facings[i]).Angle, (buildingVariantInfo.Facings[i] - desireFacing).Angle);
-							if (e > minDelta)
-							{
-								e = minDelta;
-								actorVariant = i;
-							}
-						}
+						actorVariant = BaseBuilderQueueEvalCA.PickFacingVariant(
+							world.Map.CenterOfCell(target) - world.Map.CenterOfCell(center), buildingVariantInfo.Facings);
 					}
 					else
 						actorVariant = world.LocalRandom.Next(buildingVariantInfo.Actors.Length + 1);
@@ -1162,16 +1118,11 @@ namespace OpenRA.Mods.CA.Traits
 				var candidates = new List<CPos>();
 				foreach (var cell in cells)
 				{
-					if (!world.CanPlaceBuilding(cell, actorInfo, bi, null))
-						continue;
-
-					if (distanceToBaseIsImportant && !bi.IsCloseEnoughToBase(world, player, actorInfo, producer, cell))
-						continue;
-
-					if (distanceRequirement > 0 && (cell - target).LengthSquared > distanceRequirement * distanceRequirement)
-						continue;
-
-					if (ownBuildingBuffer != null && !bi.AllowInvalidPlacement && bi.Tiles(cell).Any(ownBuildingBuffer.Contains))
+					if (!BaseBuilderQueueEvalCA.PlacementCellAdmitted(
+							() => world.CanPlaceBuilding(cell, actorInfo, bi, null),
+							() => !distanceToBaseIsImportant || bi.IsCloseEnoughToBase(world, player, actorInfo, producer, cell),
+							() => distanceRequirement <= 0 || (cell - target).LengthSquared <= distanceRequirement * distanceRequirement,
+							() => ownBuildingBuffer == null || bi.AllowInvalidPlacement || !bi.Tiles(cell).Any(ownBuildingBuffer.Contains)))
 						continue;
 
 					candidates.Add(cell);
@@ -1183,26 +1134,18 @@ namespace OpenRA.Mods.CA.Traits
 				{
 					var chosen = advisor.ChooseCell(actorInfo, candidates,
 						c => world.CanPlaceBuilding(c, actorInfo, bi, null));
-					if (chosen.HasValue && candidates.Contains(chosen.Value))
-						return (chosen.Value, center, actorVariant);
-
-					return (candidates[0], center, actorVariant);
+					return (BaseBuilderQueueEvalCA.AdvisorPick(chosen, candidates), center, actorVariant);
 				}
 			}
 			else
 			{
 				foreach (var cell in cells)
 				{
-					if (!world.CanPlaceBuilding(cell, actorInfo, bi, null))
-						continue;
-
-					if (distanceToBaseIsImportant && !bi.IsCloseEnoughToBase(world, player, actorInfo, producer, cell))
-						continue;
-
-					if (distanceRequirement > 0 && (cell - target).LengthSquared > distanceRequirement * distanceRequirement)
-						continue;
-
-					if (ownBuildingBuffer != null && !bi.AllowInvalidPlacement && bi.Tiles(cell).Any(ownBuildingBuffer.Contains))
+					if (!BaseBuilderQueueEvalCA.PlacementCellAdmitted(
+							() => world.CanPlaceBuilding(cell, actorInfo, bi, null),
+							() => !distanceToBaseIsImportant || bi.IsCloseEnoughToBase(world, player, actorInfo, producer, cell),
+							() => distanceRequirement <= 0 || (cell - target).LengthSquared <= distanceRequirement * distanceRequirement,
+							() => ownBuildingBuffer == null || bi.AllowInvalidPlacement || !bi.Tiles(cell).Any(ownBuildingBuffer.Contains)))
 						continue;
 
 					return (cell, center, actorVariant);
@@ -1379,7 +1322,7 @@ namespace OpenRA.Mods.CA.Traits
 						// EX-2c: the claim field may differ from the crawl aim — any free field already in
 						// reach qualifies, so an outpost yard claims its local field without waiting to
 						// become the crawl target. Null falls back to the expansion target (EX-2).
-						var field = claimer.RefineryClaimTarget ?? claimer.ExpansionTarget.Value;
+						var field = BaseBuilderQueueEvalCA.ClaimFieldOrTarget(claimer.RefineryClaimTarget, claimer.ExpansionTarget.Value);
 
 						// The annulus must be around the FIELD, not baseCenter: a crawled-to field sits beyond
 						// baseCenter + MaxBaseRadius + claimRadius, so centering on the base yields zero candidate
@@ -1398,8 +1341,9 @@ namespace OpenRA.Mods.CA.Traits
 					if (resourceLayer != null)
 					{
 						// If we have failed to place to the requested refinery point, try and place it near the base center
-						var resourceBaseCenter = failCount > 0 ? baseCenter :
-							(requestRef != null ? baseBuilder.RequestedRefineries[requestRef].ConyardLoc : (baseBuilder.ResourceConyardCenter ?? baseCenter));
+						var resourceBaseCenter = BaseBuilderQueueEvalCA.ResourcePickCenter(failCount, baseCenter,
+							requestRef != null && failCount <= 0 ? baseBuilder.RequestedRefineries[requestRef].ConyardLoc : null,
+							baseBuilder.ResourceConyardCenter);
 
 						// If we have a ResourceMapModule, only consider the resource types it considers valuable
 						// Otherwise consider any resource type
