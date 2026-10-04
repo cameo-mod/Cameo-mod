@@ -1,3 +1,20 @@
+# 2026-10-04 — Devin-T2Verify: F4/F-CBL1 determinism — field-score tie-break + refinery-request pick
+
+*Devin-T2Verify.* Branch `devin/t2verify/determinism-tiebreaks` stacked on `hotspot-queue-seams` (tip in the fleet
+STATUS file). Lead ruling on the hotspot NOTE's F4/F-CBL1: two unordered picks could diverge across runtimes in
+multiplayer.
+
+- `scores.Sort` on bare `Score` desc had no tie-break — `List.Sort` is unstable, so two exact-tie fields could rank
+  differently across runtimes. The new `CompareFieldScore` seam keeps score desc and falls to the lowest indice
+  index on an exact tie; `Replan` sorts through it.
+- `RequestedRefineries.Keys.First()` took whichever request `Dictionary` enumeration surfaced first — unspecified
+  order. The queue now routes through `FirstRequestedRefinery`/`FirstByOrder` (lowest ActorID), matching the Frans
+  twin's existing pick.
+- Both live on the extracted pure surfaces with branch-complete tests; behaviour changes only where entries
+  previously tied unordered.
+
+Gates: mod + test builds 0/0; 977/977 (six new); fog / direct-mutation / arch-freshness PASS; boot gate PASS.
+
 # 2026-10-04 — Claude (lead): INC 2026-10-04e lands — INC-d completed (P0 raid gate), LC5 admission claims, checker v2, E2 test baseline
 
 *Claude.* Branch `inc/2026_10_04e` from master `1fbd239ff`:
