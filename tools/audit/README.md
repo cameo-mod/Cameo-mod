@@ -88,7 +88,7 @@ suite can gate CI.
 | `audit_doc_claims.py` | meta | re-measures every numeric claim in `docs/audit/doc_claims.yaml`. A number in prose is true only on the day it is written |
 | `audit_doc_health.py` | meta | the documentation's own gate: control characters, mojibake, broken links/anchors, references to moved documents, duplicate DESIGN section ids |
 | `audit_code_duplication.py` | periodic | copy-paste detector for the tooling and the C# mods |
-| `audit_test_coverage.py` | periodic | test-coverage floor for the C# mod code and the tooling |
+| `audit_test_coverage.py` | periodic | test-coverage floor for the C# mod code and the tooling; `--coverage-xml` adds the per-file bot-module line-coverage ratchet (baseline: `tools/tests/coverage_baseline.json`, producer: `tools/ai/coverage_report.py`) |
 | `audit_error_handling.py` | periodic | error-handling lint for the Python tooling |
 | `audit_security.py` | periodic | repo security scan (no network required) |
 | `audit_recent_changes.py` | periodic | regression review of recent git history: balance yaml without a ledger, unregistered audits, missing provenance trailers. **Needs full history — a shallow clone limits it** |

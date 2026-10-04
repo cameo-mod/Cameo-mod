@@ -326,6 +326,28 @@ carry yaml keys, family-pool borrow). Fitter run end-to-end on the real engageme
 no engine content, no game yaml — boot-gate not applicable.
 
 ---
+# 2026-10-04 — Devin-Tier1 (EMBER): AR-T1 coverage infrastructure — dotnet-coverage collector, per-file report + ratchet, CI job
+
+*Devin-Tier1 (EMBER).* Branch `devin/ember/coverage-infra` from master `3ba05ede7` (orders §2 AR-T1):
+- **Collector:** `dotnet-coverage` (Microsoft CLR profiler, `dotnet tool install -g dotnet-coverage`) is the only driver
+  that records hits in this `EngineRootPath` layout. `coverlet.collector`/`coverlet.msbuild`/`coverlet.console` all
+  enumerate 944 classes but report 0% — the vstest testhost never loads coverlet's instrumented copies ("Hits file
+  not found" for every module). The csproj carries no coverage package; collection is `coverage_report.py --collect`.
+- **`tools/ai/coverage_report.py`** (new): runs `dotnet-coverage collect -f cobertura` over the built test assembly
+  OR parses an existing XML; emits a per-file worst-first markdown table + `coverage_baseline.json` for the ratchet.
+  Scope: `OpenRA.Mods.CA/Traits/BotModules/**`, `OpenRA.Mods.Cameo/Traits/BotModules/**`, `Cameo/Traits/*Bot*.cs`.
+- **`audit_test_coverage.py`**: C# scan now covers `OpenRA.Mods.Cameo` AND `OpenRA.Mods.CA`; stale placeholder floors
+  re-measured at true values (T1 24→933, T2 177→3076, T3 224→496 after the CA scan joined — recorded debt, same
+  rule as 2026-08). New flag-gated **T4**: `--coverage-xml` ratchets every baselined file's line-rate (ε=0.1pt);
+  `parse_cobertura` accumulates per filename across `<class>` records (last-type-wins produced phantom 100→0%
+  regressions — pinned by a unit test).
+- **First honest numbers:** 106 bot-module files, **line 19.4%, branch 17.2%**; worst files are
+  `BotGlobalUnitBudget`/`BotCounterDemandController`/`BotInsurance`/`PlugSpawnerBotModuleCA` at 0%.
+  Report: `docs/audit/coverage_botmodules.md`; baseline: `tools/tests/coverage_baseline.json`.
+- **CI:** additive `cameo-tests` job in `.github/workflows/ci.yml` (windows-2022, `make.ps1 all` → `dotnet test`
+  → coverage ratchet). Stock upstream jobs untouched. Note: org CI is disabled in GitHub — the job runs when enabled.
+- Tests: `tools/tests/test_coverage_report.py` (13 tests: scope, multi-class accumulation, parser agreement,
+  ratchet edges). Verified: bare audit exit 0 (run_all compat), `--coverage-xml` self-check 0 regressions/106 baselined.
 
 # 2026-10-04 — Claude (lead): INC 2026-10-04e lands — INC-d completed (P0 raid gate), LC5 admission claims, checker v2, E2 test baseline
 
