@@ -14,11 +14,13 @@ using OpenRA.Mods.Cameo.Traits.BotModules;
 
 namespace OpenRA.Mods.Cameo.Test
 {
-	// The tier-1 return leg (DESIGN §19.13, AI_ARCHITECTURE §12.31, contract ruling F1): the canonical
-	// BotEngagementPriors schema parses, every unknown is neutral, and a cell whose fitted PriorPct no
-	// longer equals the resolved Versus prior reverts to neutral — per cell, not per file.
-	// In tests Game.ModData is null so ResolvedTagVersus returns null and every cell's current prior
-	// reads as the Versus-default 100: PriorPct 100 rows are fresh, anything else is stale.
+	// The tier-1 return leg (DESIGN §19.13, AI_ARCHITECTURE §12.31, contract ruling F1 + PRIORS-CARRY):
+	// the canonical BotEngagementPriors schema parses, every unknown is neutral, and a cell whose
+	// fitted PriorPct no longer equals the resolved Versus prior carries its residual over, decayed
+	// by exp(-|ln(now/fitted)| / tau) — per cell, not per file.
+	// In tests Game.ModData is null so ResolvedTagVersus returns null (unverifiable, not "gone") and
+	// every cell's current prior reads as the Versus-default 100: PriorPct 100 rows are fresh,
+	// anything else carries over with decay.
 	[TestFixture]
 	public class EngagementPriorsTest
 	{
@@ -31,7 +33,7 @@ namespace OpenRA.Mods.Cameo.Test
 			"\tDeliveryArmour@CannonAP_Medium__x__Heavy: 1250\n" +
 			"\tPriorPct@CannonAP_Medium__x__Heavy: 100\n" +
 			"\tDeliveryArmour@CannonAP_Medium__x__None: 700\n" +
-			"\tPriorPct@CannonAP_Medium__x__None: 50\n" +   // fitted on a prior that has since moved: stale
+			"\tPriorPct@CannonAP_Medium__x__None: 50\n" +   // fitted on a prior that has since moved: carries, decayed
 			"\tDeliveryArmour@Bullet_Light__x__Wood: 900\n" + // no PriorPct row: unfitted, stays neutral
 			"\tDefenceState@CannonAP_Medium: 800\n" +
 			"\tAttackTiming@td_gdi: 6000, 12000, 18000\n";     // reserved tables ignored by the parser
@@ -54,18 +56,65 @@ namespace OpenRA.Mods.Cameo.Test
 		{
 			var priors = Load(Yaml);
 			Assert.That(priors.FactorPermille("CannonAP_Medium", "Heavy"), Is.EqualTo(1250));
-			Assert.That(priors.StaleCount, Is.EqualTo(0));
+			Assert.That(priors.CarriedCount, Is.EqualTo(0));
 		}
 
 		[Test]
-		public void StaleCellRevertsToNeutralPerCell()
+		public void MovedCellCarriesDecayedResidual()
 		{
 			var priors = Load(Yaml);
-			// CannonAP_Medium x None was fitted on prior 50; the resolved prior reads 100 now → neutral.
-			Assert.That(priors.FactorPermille("CannonAP_Medium", "None"), Is.EqualTo(BotEngagementPriors.Neutral));
-			Assert.That(priors.StaleCount, Is.EqualTo(1));
-			// The sibling cell on the same delivery is unaffected — staleness is per cell, not per file.
+			// CannonAP_Medium x None was fitted on prior 50; the resolved prior reads 100 now.
+			// Carry-over (PRIORS-CARRY): decay = exp(-|ln(100/50)| / 0.350) = exp(-1.9804) ≈ 138‰,
+			// so 700 -> 1000 + (700-1000)*138/1000 = 959 — the residual survives, shrunk by how
+			// far its stat moved, instead of reverting to neutral.
+			Assert.That(priors.FactorPermille("CannonAP_Medium", "None"), Is.EqualTo(959));
+			Assert.That(priors.CarriedCount, Is.EqualTo(1));
+			Assert.That(priors.MeanDecayMilli, Is.EqualTo(138));
+			// The sibling cell on the same delivery is unaffected — decay is per cell, not per file.
 			Assert.That(priors.FactorPermille("CannonAP_Medium", "Heavy"), Is.EqualTo(1250));
+		}
+
+		[Test]
+		public void UnresolvedDeliveryReadsUnverifiableNotGone()
+		{
+			// With no warhead map loaded (unit tests, headless tools) a tag resolving nowhere is
+			// "unverifiable" and reads as the Versus-default 100 — so a cell fitted at 100 stays
+			// fresh, not neutral. The live-game counterpart (map loaded, row truly gone → neutral)
+			// is the `current == null && VersusTableLoaded` branch, unreachable without a ModData.
+			var yaml = "BotEngagementPriors:\n" +
+				"\tDeliveryArmour@NoSuchDelivery_X__x__Heavy: 1250\n" +
+				"\tPriorPct@NoSuchDelivery_X__x__Heavy: 100\n";
+			var priors = Load(yaml);
+			Assert.That(priors.FactorPermille("NoSuchDelivery_X", "Heavy"), Is.EqualTo(1250));
+			Assert.That(priors.CarriedCount, Is.EqualTo(0));
+		}
+
+		[Test]
+		public void StalenessTauMilliScalesDecay()
+		{
+			// A wider tau shrinks the decay for the same move: tau 3500 → exp(-0.198) ≈ 820‰
+			// (700 -> 754); tau 175 → exp(-3.96) ≈ 19‰ (700 -> 995, nearly neutral).
+			var yaml = "BotEngagementPriors:\n" +
+				"\tStalenessTauMilli: 3500\n" +
+				"\tDeliveryArmour@CannonAP_Medium__x__None: 700\n" +
+				"\tPriorPct@CannonAP_Medium__x__None: 50\n";
+			var priors = Load(yaml);
+			Assert.That(priors.StalenessTauMilli, Is.EqualTo(3500));
+			Assert.That(priors.FactorPermille("CannonAP_Medium", "None"), Is.EqualTo(754));
+
+			var tight = Load(yaml.Replace("3500", "175"));
+			Assert.That(tight.FactorPermille("CannonAP_Medium", "None"), Is.EqualTo(995));
+		}
+
+		[Test]
+		public void NonPositivePriorsGoNeutral()
+		{
+			// A degenerate fitted or resolved prior (0) has no ln-ratio to decay against: neutral.
+			var yaml = "BotEngagementPriors:\n" +
+				"\tDeliveryArmour@CannonAP_Medium__x__None: 700\n" +
+				"\tPriorPct@CannonAP_Medium__x__None: 0\n";
+			var priors = Load(yaml);
+			Assert.That(priors.FactorPermille("CannonAP_Medium", "None"), Is.EqualTo(BotEngagementPriors.Neutral));
 		}
 
 		[Test]
