@@ -119,11 +119,13 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		readonly OpenRA.Player player;
 		int scanTicks;
 
-		// AR-9 (§19.6): whoever orders holds the lease. A unit is claimed for as long as its group
-		// keeps issuing it orders — TryClaim renews on every ordered tick — and the lease lapses
-		// when the group goes quiet (idle/out-of-range emits nothing to renew). A squad can draft
-		// an idle deployable but never one mid-maneuver. Refreshed every scan, never cached across
-		// ticks: the registry is conditional (genericbot) and may arrive late (LC4's bug class).
+		// AR-9 (§19.6): whoever orders holds the lease. A unit is claimed only while its group
+		// keeps issuing it orders — TryClaim renews on every ordered tick — and the claim lapses
+		// when the group goes quiet: an idle or out-of-range unit emits nothing to renew, and a
+		// lone order whose target vanished frees the unit after at most HeartbeatTicks (>= 200).
+		// Squads can draft any deployable the moment its orders stop flowing. Refreshed every
+		// scan, never cached across ticks: the registry is conditional (genericbot) and may
+		// arrive late (LC4's bug class).
 		IBotUnitLeases leases;
 		readonly HashSet<Actor> leasedUnits = new();
 
@@ -227,9 +229,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			return true;
 		}
 
-		void QueueLeased(IBot bot, Actor unit, Order order)
+		bool QueueLeased(IBot bot, Actor unit, Order order)
 		{
-			QueueLeased(bot, leases, unit, LeaseOwner, BotLeasePurpose.Mission,
+			return QueueLeased(bot, leases, unit, LeaseOwner, BotLeasePurpose.Mission,
 				LeaseHeartbeatTicks(ScanInterval), order, leasedUnits);
 		}
 
@@ -369,8 +371,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var distSq = DistSq(unit, target);
 			if (distSq <= RangeSq(group.DeployRange))
 			{
-				TryDeploy(bot, unit, group);
-				abilityDeployedAt[unit] = world.WorldTick;
+				if (TryDeploy(bot, unit, group))
+					abilityDeployedAt[unit] = world.WorldTick;
 			}
 			else if (distSq <= RangeSq(group.ScanRadius))
 			{
@@ -379,45 +381,54 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		}
 
 		// --- Deploy/Undeploy via IIssueDeployOrder ---
-		void TryDeploy(IBot bot, Actor unit, DeployBotGroup group)
+		// Both return whether at least one order was actually queued: the cooldown and the
+		// ability timer stamp only on a real action — a denied claim or an empty trait list
+		// must not freeze the unit's next decision for DeployCooldown ticks.
+		bool TryDeploy(IBot bot, Actor unit, DeployBotGroup group)
 		{
 			if (deployCooldown.TryGetValue(unit, out var lastAction)
 				&& world.WorldTick - lastAction < group.DeployCooldown)
-				return;
+				return false;
 
 			var deploy = unit.TraitsImplementing<GrantConditionOnDeploy>()
 				.FirstOrDefault(d => !d.IsTraitDisabled && !d.IsTraitPaused);
 			if (deploy == null)
-				return;
+				return false;
 
 			if (!deploy.IsValidTerrain(unit.Location))
 			{
 				var validCell = FindNearestValidDeployCell(unit, deploy);
 				if (validCell.HasValue)
 					QueueLeased(bot, unit, new Order("Move", unit, Target.FromCell(world, validCell.Value), false));
-				return;
+				return false;
 			}
 
+			var queued = false;
 			var deployTraits = unit.TraitsImplementing<IIssueDeployOrder>()
 				.Where(d => d.CanIssueDeployOrder(unit, false));
 			foreach (var d in deployTraits)
-				QueueLeased(bot, unit, d.IssueDeployOrder(unit, false));
+				queued |= QueueLeased(bot, unit, d.IssueDeployOrder(unit, false));
 
-			deployCooldown[unit] = world.WorldTick;
+			if (queued)
+				deployCooldown[unit] = world.WorldTick;
+			return queued;
 		}
 
-		void TryUndeploy(IBot bot, Actor unit, DeployBotGroup group)
+		bool TryUndeploy(IBot bot, Actor unit, DeployBotGroup group)
 		{
 			if (deployCooldown.TryGetValue(unit, out var lastAction)
 				&& world.WorldTick - lastAction < group.DeployCooldown)
-				return;
+				return false;
 
+			var queued = false;
 			var deployTraits = unit.TraitsImplementing<IIssueDeployOrder>()
 				.Where(d => d.CanIssueDeployOrder(unit, false));
 			foreach (var d in deployTraits)
-				QueueLeased(bot, unit, d.IssueDeployOrder(unit, false));
+				queued |= QueueLeased(bot, unit, d.IssueDeployOrder(unit, false));
 
-			deployCooldown[unit] = world.WorldTick;
+			if (queued)
+				deployCooldown[unit] = world.WorldTick;
+			return queued;
 		}
 
 		CPos? FindNearestValidDeployCell(Actor unit, GrantConditionOnDeploy deploy)

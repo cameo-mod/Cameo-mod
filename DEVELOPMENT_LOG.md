@@ -1,3 +1,37 @@
+# 2026-10-04 — Devin-T2Verify: AR-9 review follow-ups — per-tick release, timers on real actions, doc fixes
+
+*Devin-T2Verify.* Branch `devin/t2verify/ar9-review-fixes` on `origin/inc/2026_10_04g`. Independent
+review of AR-9 came back APPROVE with P3/P4 follow-ups; this branch is all of them.
+
+- **P3 `LoadGarrisonerBotModuleCA` — per-tick release.** The gone/idle sweep moved out of the
+  457-tick scan gate into the every-tick path (`ReleaseGoneOrIdle`): a garrisoner that boards, dies,
+  is captured or goes idle is released the tick it happens instead of staying squad-undraftable for
+  up to ~19 s. Claim renewal stays per-scan (`LostRenewal`); a lapsed claim the table re-keyed to a
+  rival is refused on the next heartbeat and dropped.
+- **P3 `TraitDisabled` — Stop marchers, keep stuck memory.** `DisableRelease` queues a Stop for
+  every still-orderable marcher while the claim is held, then releases all — under the lease regime
+  only (`leases == null` = classic: no Stop, no release, march continues bit-identically).
+  `stuckGarrisoner` no longer wiped: expiry stamps self-purge, and re-enabling should not resend
+  units into known-blocked paths.
+- **P4 `DeployBotModule` — timers only on real actions.** `TryDeploy`/`TryUndeploy` return whether
+  an order was actually queued; `deployCooldown` and `abilityDeployedAt` stamp only then — a denied
+  claim or empty trait list no longer freezes the unit for `DeployCooldown` ticks.
+- **Docs.** The stuck-path comment claiming "the Stop is ours while the lease is held" was wrong
+  under AR-8's issue-time gate — the Stop passes because nobody holds the unit when it acts; the
+  queue-then-release ordering is the GC-1 holder's-last-act convention, now said so. The
+  "never draftable mid-maneuver" comment overstated: a lone order whose target vanished frees the
+  unit after at most HeartbeatTicks (≥200). The AR-9 entry's `Minelayer`/`SendUnitToAttack` citation
+  conflated fog-of-war attack-response rules with lease rules — exemptions now cite §19.6's
+  "or while nobody holds it" directly.
+- **Tests.** `LoadGarrisonerLeaseTest` ×7 on extracted seams (`StopAndRelease`, `ReleaseGoneOrIdle`,
+  `LostRenewal`, `ClaimedWeight`, `DisableRelease`): Stop-queued-before-release via one shared event
+  log, gone/idle/captured per-tick release, lost renewal drops, no capacity on denied claim,
+  TraitDisabled Stops+releases-all (and classic's no-op), lapse on the real `BotLeaseTable`.
+
+Gates: build 0/0; tests 1131/1131 (+7); fog PASS; mutation PASS; arch-freshness PASS both; wiring
+0 ERROR; doc_claims _clean_; boot PASS under the per-run-SupportDir method (real marker at ~105 s,
+Package inside the worktree, 0 exceptions).
+
 # 2026-10-04 — Claude (lead): INC-f doc re-pin, INC-g built and pushed, boot-gate false pass
 
 *Claude.* `inc/2026_10_04g` @ 3a661c8b0 (pushed with `inc/2026_10_04f`).
@@ -28,8 +62,11 @@
 *Devin.* Branch `devin/t2verify/ar9-lease-gaps` rebased onto `devin/t2verify/incg-stack` (INC-f +
 the seam/F1/determinism/AR-8 stack).
 
-Two real unit-ordering lease gaps closed; the rest of the AR-9 candidate list is exempt or already
-documented (DAWN's `LoadCargo`×3 port, `Minelayer`/`SendUnitToAttack` rulings).
+Two real unit-ordering lease gaps closed; the rest of the AR-9 candidate list is exempt under
+DESIGN §19.6's "or while nobody holds it" — they order only squad-undraftable types, so no rival
+owner exists to exclude — or already documented (DAWN's `LoadCargo`×3 port). The `Minelayer`/
+`SendUnitToAttack` rulings live elsewhere: they are fog-of-war attack-response rules, not lease
+rules, and are not the ground for these exemptions.
 
 - `LoadGarrisonerBotModuleCA` (OpenRA.Mods.CA): `BotLeasePurpose.Garrison` claims on every walking
   garrisoner — squad-draftable infantry could otherwise be drafted mid-march. Renewed per scan,
