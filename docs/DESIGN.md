@@ -5192,6 +5192,17 @@ override": *"Refuse, but emergencies can override."*
   not used to kill the order: refusing the whole group would drop a twenty-unit AttackMove over one conflicted member,
   a stall worse than the fight the gate exists to prevent; stripping still keeps the usurped unit under its holder.
   The order is rebuilt over the survivors (`BotOrderGroup`); it dies only when no member survives.
+* **Issuer identity and timing (AR-8, 2026-10-04).** Attribution is `Type@ordinal` (`BotIssuer.Of`) — several
+  same-type module traits on one PlayerActor are told apart in logs, pairs and crossed pairs — while ownership
+  stays **type-scoped**: lease owners keep bare type names (`nameof`), and six SquadManager instances remain ONE
+  subsystem, not six rivals. Every "same owner?" comparison normalizes through `BotIssuer.TypeOf`; ordinals never
+  reach a verdict, so they cannot desync. The gate judges at **issue time**, not queue time — a deferred order is
+  judged against the leases that hold when it would act (the emission context `issuer`/`emergency` travels with
+  the queued item). A provider emitting inside another module's call charges itself via `BotIssuer.IssueAs`
+  (the capture-transport service: it transferred the leases to itself, so its own issuer clears the gate).
+  `EmergencyModules` may name a type (the whole subsystem) or one instance. A full queue drops the oldest order
+  and logs `ORDERGATE DROPPED` with its issuer; an action-budget stop now returns the order to the front of the
+  queue instead of discarding it, and a refused order costs no action.
 * **Rollout (AI_MASTER_PLAN §1.2 step 6).** `BotUnitLeaseRegistry.EnforceAtOrderGate` is false until its A/B: the gate then
   only COUNTS (`conflicts`) and records crossed orders (two modules ordering one unit inside `CrossedOrderWindowTicks`).
   A cross is two owners in fact: when the earlier issuer's lease has ended since its order — the holder is now the new

@@ -11,6 +11,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using OpenRA.Mods.CA.Traits;
 
 namespace OpenRA.Mods.Cameo.Traits.BotModules
 {
@@ -54,20 +55,24 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public IReadOnlyDictionary<(string First, string Second), int> CrossedPairs => crossed;
 
 		/// <summary>
-		/// The rule. `holder` is the lease owner (null = unclaimed); `issuer` the module that queued the order (null = an
-		/// order queued outside a module call, never refused). An emergency is an order a listed module queued from an
-		/// attack response: it preempts instead of being refused (maintainer 2026-09-30).
+		/// The rule. `holder` is the lease owner (null = unclaimed) — always a bare type name; `issuer` the module that
+		/// queued the order (null = an order queued outside a module call, never refused) — `Type@N` instanced, so
+		/// ownership compares normalize through <see cref="BotIssuer.TypeOf"/>: six SquadManager instances are ONE
+		/// subsystem that may pass units between its squads. An emergency is an order a listed module queued from an
+		/// attack response: it preempts instead of being refused (maintainer 2026-09-30). `EmergencyModules` may name
+		/// a type (`SquadManagerBotModuleCA`) or one instance (`SquadManagerBotModuleCA@2`).
 		/// </summary>
 		public static BotOrderVerdict Decide(string issuer, string holder, bool enforce, bool emergency, ICollection<string> emergencyModules)
 		{
-			if (holder == null || issuer == null || issuer == holder)
+			if (holder == null || issuer == null || BotIssuer.TypeOf(issuer) == BotIssuer.TypeOf(holder))
 				return BotOrderVerdict.Allow;
 
 			if (!enforce)
 				return BotOrderVerdict.Conflict;
 
-			return emergency && emergencyModules != null && emergencyModules.Contains(issuer)
-				? BotOrderVerdict.Preempt : BotOrderVerdict.Refuse;
+			return emergency && emergencyModules != null &&
+				(emergencyModules.Contains(issuer) || emergencyModules.Contains(BotIssuer.TypeOf(issuer)))
+					? BotOrderVerdict.Preempt : BotOrderVerdict.Refuse;
 		}
 
 		/// <summary>Decide, count, and return the verdict plus whether this (issuer, holder, verdict) pair is new (log it once).</summary>
@@ -106,9 +111,15 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				return null;
 
 			string earlier = null;
-			if (lastIssuer.TryGetValue(unit, out var last) && last.Issuer != issuer && tick - last.Tick <= window)
+			if (lastIssuer.TryGetValue(unit, out var last) &&
+				BotIssuer.TypeOf(last.Issuer) != BotIssuer.TypeOf(issuer) &&
+				tick - last.Tick <= window)
 			{
-				var released = last.Held && holder != last.Issuer;
+				// Ownership is type-scoped: two instances of one module handing a unit off inside the
+				// window is the subsystem re-drafting, not two owners fighting — invisible here, exactly
+				// as it was when issuers were bare type names (AR-8). The recorded pair keeps the
+				// instanced names so the log shows WHICH instances crossed.
+				var released = last.Held && BotIssuer.TypeOf(holder) != BotIssuer.TypeOf(last.Issuer);
 				if (!released)
 				{
 					earlier = last.Issuer;
@@ -117,7 +128,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				}
 			}
 
-			lastIssuer[unit] = (issuer, tick, issuer == holder);
+			lastIssuer[unit] = (issuer, tick, BotIssuer.TypeOf(issuer) == BotIssuer.TypeOf(holder));
 			return earlier;
 		}
 

@@ -1,3 +1,20 @@
+# 2026-10-04 — Devin-T2Verify: AR-8 — issuer identity Type@N; the order gate judges at issue time
+
+*Devin-T2Verify.* DESIGN §19.6 AR-8 bullet added; fleet `NOTE_2026-10-04_devin-t2verify_ar8_issuer_identity.md`.
+- `BotIssuer` (Mods.CA — Fransbot sees it): `Type@ordinal` instanced issuer, `TypeOf` owner
+  normalization, `IssueAs` ambient provider scope.
+- ModularBot: queued items carry `(Order, Issuer, Emergency)`; the gate now judges at ISSUE time
+  (a deferred order faces the leases that hold when it acts); `ORDERGATE DROPPED` line per
+  full-queue drop; LinkedList front-requeue on action-budget stop (was: silent discard); `Preempt`
+  keeps lease owners type-named via `TypeOf`.
+- Gate: `Decide`/`NoteIssued` TypeOf-normalized — six SquadManager instances are ONE subsystem;
+  `EmergencyModules` accepts a type or an instance; crossed pairs record instanced names.
+- FransTransport: `IssueAs` on every emitting provider entry point — the caller-issuer refusal
+  class (E_engt_transport) closed; read-only service methods deliberately unscoped.
+
+Gates (on the seam base): build 0/0; tests 952/952 (+9 `BotIssuerTest`); fog / mutation /
+arch-freshness / wiring PASS; boot gate PASS. Stack-tip gates re-run on INC-f below.
+
 # 2026-10-04 — Devin-T2Verify: F4/F-CBL1 determinism — field-score tie-break + refinery-request pick
 
 *Devin-T2Verify.* Lead ruling on the hotspot NOTE's F4/F-CBL1: two unordered picks could diverge across
