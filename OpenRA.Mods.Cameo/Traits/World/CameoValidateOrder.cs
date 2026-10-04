@@ -16,7 +16,7 @@ using OpenRA.Traits;
 namespace OpenRA.Mods.Cameo.Traits
 {
 	[TraitLocation(SystemActors.World)]
-	[Desc("Shadows OpenRA.Mods.Common.Traits.ValidateOrder (world.yaml uses -ValidateOrder:). " +
+	[Desc("Replaces OpenRA.Mods.Common.Traits.ValidateOrder on the World actor. " +
 		"Same authority rules, plus: orders for a takeover seat pass only from the elected " +
 		"controller client. Reads BotTakeoverTracker's synced state — never LobbyInfo rows — so " +
 		"the verdict is identical on every client.")]
