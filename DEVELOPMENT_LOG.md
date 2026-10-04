@@ -1,3 +1,37 @@
+# 2026-10-04 — Claude (lead): INC 2026-10-04e lands — INC-d completed (P0 raid gate), LC5 admission claims, checker v2, E2 test baseline
+
+*Claude.* Branch `inc/2026_10_04e` from master `1fbd239ff`:
+- `inc/2026-10-04d@4a23fc88e`: built earlier by the lead and held for its P0. It carries EL1-v2 `InMatchAdaptBotModule`,
+  tier1-fit-scale, t3-public-faction, the spsa coverage/pin, lc5-violation-detail, refinery-check v1, and PlanBandit
+  offered arms.
+- `devin/nova/p0-pins-offered@96f9f497a`: completes INC-d's P0. Pinned personalities tolerate a narrowed offer and fail
+  loudly only when every pin is a typo. Reviewed by DAWN, re-run by NOVA.
+- `devin/nova/lc5-admission-claim@2cd888287`: lease-checked defender drafts, plus a claim at the admission tails
+  (double_owner). Lead-reviewed.
+- `devin/tier4/refinery-check@55e8b5efa` (T2Verify): rebuild-aware per-anchor check; all-n/a exits 2.
+- `devin/ember/tests-baseline@0d5cfc14a`: E2, test-only repins (45 files green, 33 classified owner flags).
+
+Conflicts: devlog (union); `increment_switches.yaml` (INC-d's full combatveto Bots list + master's
+`BI_front_back_placement`). AI contract 74/99 → 75/100 for `InMatchAdaptBotModule`. `AI_MODULE_MAP` regenerated; it was
+also stale after INC 2026-10-04.
+
+HELD OUT: `devin/nova/seam-hygiene@c080089a2`. Changes requested: `ScoutBotModule` (ctor) and
+`UnitBuilderBotModuleCA.Created` resolve `FirstEnabledTraitOrDefault` at construction, while every conditional provider
+is still disabled (`ConditionalTrait.cs:60`), so they would cache null. See fleet
+`REVIEW_2026-10-04_claude_on_nova_seam-hygiene.md`.
+
+Gates:
+- build: 0 warnings
+- Cameo tests: 933/933
+- fog / direct-mutation / doc-claims: PASS
+- `test_refinery_law_check`: 28/28
+- boot gate: PASS
+- `ai_raid_gate.py`: PASS on this tree (records=10, last_tick=1351, raid_regions [3,4,17,30,43,56], squads=4,
+  squad_units=41; no rules-load failure)
+
+Tooling gap: the raid gate uses the shared `%APPDATA%` support dir when the tree has no `engine/Support`. It should take an
+isolated dir like `boot_gate.ps1` does.
+
 # 2026-10-04 — Claude (lead): INC 2026-10-04 lands — refinery law v2, bot takeover, BP phase 1, RADAR-ALLY, mpspawn parser
 
 *Claude.* Branch `inc/2026_10_04`, merged with `--no-ff` from master `8e86fca23`:
