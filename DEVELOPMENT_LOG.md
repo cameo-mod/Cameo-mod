@@ -1,3 +1,33 @@
+# 2026-10-04 — Devin-T3Verify: PRIORS-CARRY fitter (item 2) — version-aware evidence, Bayesian carry-over, family pooling
+
+*Devin-T3Verify.* Branch `devin/t3verify/priors-carry` from master `3ba05ede7`, implementing
+`SPEC_2026-10-04_claude_priors_carry_over` item 2 in `tools/ai/fit_engagement_priors.py`:
+
+- **Self-pricing logs**: a record's `balance.versus` map (Tier4's log field, `Tag|Armor` or `Tag__x__Armor`)
+  prices its own attribution and decay; a record without it is legacy-weighted at `LEGACY_RECORD_WEIGHT = 0.4`
+  (a bare `fingerprint` is provenance only, not self-pricing). Cells are staked on the record's own percents,
+  else the previous fit's `PriorPct@`, else today's resolved table — old logs are never silently re-priced.
+- **Bayesian carry-over**: `--prev` (default: the existing `--write` target) loads the previous posterior as a
+  pseudo-evidence anchor per cell, decayed `VERSION_EVIDENCE_DECAY (0.7)` per crossed `LedgerHash` boundary
+  (`FitVersion` counts them) times `staleness_decay` = `exp(-|ln(now/fitted)|*1000/350)` — the same decay the
+  consumer applies to the residual (`EngagementPriorsBotModule` on `devin/nova/priors-carry`, formula verified
+  identical). Dead delivery rows carry nothing; a missing armour row reads the Versus-default 100, same as the
+  consumer. Anchors re-base into the new `GlobalScaleMilli` so a uniform scale move never shifts them; the same
+  carry covers `DefenceState@`/`IntoDefences` (boundary decay only — pooled scalars stake no single cell prior).
+- **Hierarchical pooling**: cell → delivery-family (`Tag` minus its `_level`) → global; the family level pools
+  SIBLING cells only (excluding the cell itself, else single-cell families double-count their own evidence).
+- **`Evidence@` per cell** (effective N = real exp-side credit + decayed carried mass) plus
+  `DefenceStateEvidence@`, `IntoDefencesEvidence`, `FitVersion`, `StalenessTauMilli` — unknown keys are
+  consumer-safe (verified against NOVA's parser: exact-match/StartsWith on the other prefixes only).
+- `--no-carry` fits a fresh table (FitVersion 1). New `--prev`/`--write` default wiring in `main()`.
+
+Gates: `pytest tools/tests/test_fit_engagement_priors.py` 34/34 (26 existing + 8 new: legacy downweight,
+own-stats decay, posterior anchor, boundary+move decay ordering, dead-row carry, Evidence round-trip,
+carry yaml keys, family-pool borrow). Fitter run end-to-end on the real engagement log dir. Tools-only change —
+no engine content, no game yaml — boot-gate not applicable.
+
+---
+
 # 2026-10-04 — Claude (lead): INC 2026-10-04e lands — INC-d completed (P0 raid gate), LC5 admission claims, checker v2, E2 test baseline
 
 *Claude.* Branch `inc/2026_10_04e` from master `1fbd239ff`:
