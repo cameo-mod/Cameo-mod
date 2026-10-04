@@ -18,8 +18,11 @@ Reads engagement/1 records (Logs/cameo-ai-engagements.jsonl) plus the balance le
    'enemy_faction_public: false' (a Random lobby slot) pools to family/global only (ruling 2).
 
 Fitting is closed-form expected-attribution with pseudo-evidence shrinkage (the same pattern as
-fit_arsenal_priors.py's shrunk_ratio): residual[d][a] = (obs + K) / (exp + K), K = SHRINK_VALUE of
-pseudo-damage credit, clamped [MIN_MILLI, MAX_MILLI]. stdlib only, deterministic: same logs in,
+fit_arsenal_priors.py's shrunk_ratio): residual[d][a] = (obs + K*g) / (g*exp + K*g) where g is the
+pooled global obs/exp scale, K = SHRINK_VALUE of pseudo-damage credit, clamped [MIN_MILLI, MAX_MILLI].
+obs counts ONLY deaths among the start census (truth.enemy_loss_value / the unit+defence split /
+the own_defences census delta - never buildings, harvesters or mid-fight arrivals); exp prices the
+real victim force (truth.start values when present). stdlib only, deterministic: same logs in,
 same file out.
 
     python tools/ai/fit_engagement_priors.py <batch-dir> [...] [--write mods/cameo/ai/learned/engagement_priors.yaml]
@@ -180,13 +183,24 @@ def quantiles(values: list[int], ps=(10, 50, 90)) -> list[int | None]:
 
 def record_facts(r: dict, profiles: dict, matches_factions: dict) -> dict | None:
     """One engagement/1 record -> the derived facts a single accumulator pass needs, or None
-    when the record cannot feed the grid. Purely read-side; the fitter's only write is below."""
+    when the record cannot feed the grid. Purely read-side; the fitter's only write is below.
+
+    The obs side must count ONLY deaths among the start census the exp side predicts for -
+    the engagement/1 fields differ on purpose (E1b ruling):
+    - outcome.enemy_killed_value / own_lost_value include buildings and harvesters, which have
+      no composition row: crediting them to armour cells invented a ~1.5x obs-side inflation.
+    - kills of mid-fight reinforcements inflate obs while exp only expects start-force losses.
+    - exp must price the REAL victim force (truth.start) when present, not the fogged seen
+      value - the bot's prediction is about a fraction lost, and the fraction applies to the
+      real census the deaths are drawn from."""
     comp = ((r.get("seen") or {}).get("start") or {}).get("composition")
     if not comp:
         return None
     outcome = r.get("outcome") or {}
     start = (r.get("seen") or {}).get("start") or {}
-    truth_comp = (((r.get("truth") or {}).get("start") or {}).get("composition")) or {}
+    truth = r.get("truth") or {}
+    truth_start = truth.get("start") or {}
+    truth_comp = truth_start.get("composition") or {}
 
     own_units, own_defs = comp.get("own_units") or {}, comp.get("own_defences") or {}
     enemy_units = truth_comp.get("units") or comp.get("enemy_units") or {}
@@ -199,8 +213,33 @@ def record_facts(r: dict, profiles: dict, matches_factions: dict) -> dict | None
     if not enemy_share or not own_share:
         return None
 
-    enemy_value = max(1, start.get("enemy_unit_value", 0) + start.get("enemy_defence_value", 0))
+    seen_enemy_v = start.get("enemy_unit_value", 0) + start.get("enemy_defence_value", 0)
+    has_truth_v = "enemy_unit_value" in truth_start or "enemy_defence_value" in truth_start
+    truth_enemy_v = truth_start.get("enemy_unit_value", 0) + truth_start.get("enemy_defence_value", 0)
+    enemy_value = max(1, truth_enemy_v if has_truth_v else seen_enemy_v)
     own_value = max(1, start.get("own_committed_value", 0) + start.get("own_defence_value", 0))
+
+    # enemy-side obs: truth.enemy_loss_value tracks real deaths among the start-scan actors
+    # exactly; older logs fall back to the unit+defence split (pre-split logs: the total),
+    # always bounded by the start census value so reinforcements cannot inflate it.
+    loss = truth.get("enemy_loss_value")
+    if loss is None:
+        if "enemy_killed_unit_value" in outcome or "enemy_killed_defence_value" in outcome:
+            loss = outcome.get("enemy_killed_unit_value", 0) + outcome.get("enemy_killed_defence_value", 0)
+        else:
+            loss = outcome.get("enemy_killed_value", 0)
+    enemy_lost = min(loss, enemy_value)
+
+    # own-side obs: defence deaths hide inside own_lost_building_value (own defences are
+    # buildings to the writer), so recover them from the fully-seen own_defences census
+    # start -> end delta; harvester deaths inside own_lost_unit_value are bounded by the cap.
+    own_lost = outcome.get("own_lost_unit_value", outcome.get("own_lost_value", 0))
+    end_defs = ((((r.get("seen") or {}).get("end") or {}).get("composition")) or {}).get("own_defences") or {}
+    for t, n0 in own_defs.items():
+        p = profiles.get(t.lower())
+        if p:
+            own_lost += max(0, n0 - end_defs.get(t, 0)) * p["cost"]
+    own_lost = min(own_lost, own_value)
 
     # ruling 2: the OFFLINE fit uses the real faction; only in-match consumers honour
     # enemy_faction_public (a Random slot falls back to family/global pools).
@@ -216,17 +255,17 @@ def record_facts(r: dict, profiles: dict, matches_factions: dict) -> dict | None
         # (mobile units, static defences) stay disjoint so defence fire splits out cleanly
         "dirs": [
             (own_units, own_defs, enemy_share, enemy_value,
-             outcome.get("enemy_killed_value", 0), start.get("predicted_enemy_surviving_permille", 0)),
+             enemy_lost, start.get("predicted_enemy_surviving_permille", 0)),
             (enemy_units, enemy_defs, own_share, own_value,
-             outcome.get("own_lost_value", 0), start.get("predicted_own_surviving_permille", 0)),
+             own_lost, start.get("predicted_own_surviving_permille", 0)),
         ],
         "into_defences": ((r.get("tactics") or {}).get("into_defences_value") or 0) > 0,
-        "ratio": ((own_pred / 1000.0, max(0.0, 1.0 - outcome.get("own_lost_value", 0) / own_value))
+        "ratio": ((own_pred / 1000.0, max(0.0, 1.0 - own_lost / own_value))
                   if own_pred is not None and 0 < own_pred < 1000 else None),
         "kind": r.get("kind"), "start_tick": r.get("start_tick", 0),
         "faction": r.get("faction", ""), "enemy_faction": enemy_faction,
         "response": (r.get("response") or {}), "suicide_milli": (r.get("tactics") or {}).get("suicide_index_milli"),
-        "killed_total": outcome.get("enemy_killed_value", 0), "lost_total": outcome.get("own_lost_value", 0),
+        "killed_total": enemy_lost, "lost_total": own_lost,
     }
 
 
@@ -237,7 +276,7 @@ def fit(data: dict, profiles: dict, priors: dict) -> dict:
         if pl.get("faction"):
             matches_factions.setdefault(m.get("game_uid", ""), []).append(pl["faction"])
 
-    skipped = {"skirmish": 0, "no_composition": 0, "unmapped": 0}
+    skipped = {"skirmish": 0, "no_composition": 0, "empty_side": 0, "unmapped": 0}
     facts = []
     for r in data.get("engagements", []):
         if r.get("record") != "engagement":
@@ -247,7 +286,17 @@ def fit(data: dict, profiles: dict, priors: dict) -> dict:
             continue
         f = record_facts(r, profiles, matches_factions)
         if f is None:
-            key = "no_composition" if not ((r.get("seen") or {}).get("start") or {}).get("composition") else "unmapped"
+            comp = ((r.get("seen") or {}).get("start") or {}).get("composition") or {}
+            truth_comp = (((r.get("truth") or {}).get("start") or {}).get("composition")) or {}
+            enemy_comp = truth_comp or {}
+            if not comp:
+                key = "no_composition"
+            elif not ({**comp.get("own_units", {}), **comp.get("own_defences", {})}
+                      and {**(enemy_comp.get("units") or comp.get("enemy_units") or {}),
+                           **(enemy_comp.get("defences") or comp.get("enemy_defences") or {})}):
+                key = "empty_side"   # one side had no census actors to attribute into
+            else:
+                key = "unmapped"     # actor names missing from the ledger profiles
             skipped[key] += 1
             continue
         facts.append(f)
@@ -302,8 +351,8 @@ def fit(data: dict, profiles: dict, priors: dict) -> dict:
                         ds_exp[d] = ds_exp.get(d, 0.0) + expected_a * def_w / total_p
 
         if f["into_defences"]:  # the toll our fire paid while their defences were live
-            into_obs += min(f["killed_total"], cap)
-            _, _, v_share, v_value, _, surviving_pm = f["dirs"][0]
+            _, _, v_share, v_value, killed, surviving_pm = f["dirs"][0]
+            into_obs += min(killed, cap)
             into_exp += min(v_value, cap) * (1000 - min(1000, max(0, surviving_pm))) / 1000.0
 
         if f["ratio"]:
@@ -319,18 +368,28 @@ def fit(data: dict, profiles: dict, priors: dict) -> dict:
         elif f["kind"] == "attack" and f["suicide_milli"] is not None and f["enemy_faction"]:
             suicide.setdefault((f["faction"], f["enemy_faction"]), []).append(f["suicide_milli"])
 
-    def shrunk(o, e):
-        return (o + SHRINK_VALUE) / (e + SHRINK_VALUE)
+    # E1b global scale: the pooled obs/exp ratio. The first real fit learned one common
+    # ~3.3x multiplier (mostly accounting inflation, now fixed) and 149 cells pinned at the
+    # cap - the per-cell factors could not express real differences. Cells are now fitted
+    # RELATIVE to this scale: pseudo-evidence K of expected damage at the global rate, so
+    # thin cells inherit the global level (1000 relative), a uniform scale reads neutral,
+    # and only a real per-cell deviation moves a factor (partial pooling global -> family).
+    total_obs = sum(obs.values()) + sum(ds_obs.values()) + into_obs
+    total_exp = sum(exp.values()) + sum(ds_exp.values()) + into_exp
+    global_scale = total_obs / total_exp if total_exp > 0 else 1.0
 
-    cells = {k: max(MIN_MILLI, min(MAX_MILLI, round(1000 * shrunk(obs.get(k, 0.0), exp.get(k, 0.0)))))
+    def shrunk_rel(o, e):
+        return (o + SHRINK_VALUE * global_scale) / (global_scale * (e + SHRINK_VALUE))
+
+    cells = {k: max(MIN_MILLI, min(MAX_MILLI, round(1000 * shrunk_rel(obs.get(k, 0.0), exp.get(k, 0.0)))))
              for k in set(obs) | set(exp)}
     # F1(b): per-cell staleness is the resolved Versus percent the cell was fitted on -
     # exactly what the dpt weight consumed (default 100 when the armour row is absent).
     # The consumer recomputes the current prior per cell and reverts only moved cells.
     cell_prior = {(d, a): priors.get(d, {}).get(a, 100) for (d, a) in cells}
-    defence_state = {d: max(MIN_MILLI, min(MAX_MILLI, round(1000 * shrunk(ds_obs.get(d, 0.0), ds_exp.get(d, 0.0)))))
+    defence_state = {d: max(MIN_MILLI, min(MAX_MILLI, round(1000 * shrunk_rel(ds_obs.get(d, 0.0), ds_exp.get(d, 0.0)))))
                      for d in set(ds_obs) | set(ds_exp)}
-    into_defences_milli = max(MIN_MILLI, min(MAX_MILLI, round(1000 * shrunk(into_obs, into_exp))))
+    into_defences_milli = max(MIN_MILLI, min(MAX_MILLI, round(1000 * shrunk_rel(into_obs, into_exp))))
 
     # attrition exponent: corrected_ratio = ratio ** alpha; grid search the error on surviving
     # fractions (alpha = 1 is square law; only a real improvement moves it off 1000).
@@ -371,7 +430,8 @@ def fit(data: dict, profiles: dict, priors: dict) -> dict:
 
     return {
         "cells": cells, "evidence": {k: (obs.get(k, 0.0), exp.get(k, 0.0)) for k in cells},
-        "cell_prior": cell_prior,
+        "cell_prior": cell_prior, "global_scale": global_scale,
+        "global_scale_milli": max(MIN_MILLI, min(MAX_MILLI, round(1000 * global_scale))),
         "defence_state": defence_state, "into_defences_milli": into_defences_milli,
         "exponent_milli": exponent_milli,
         "attack_timing": attack_timing, "response": response_q, "suicide": suicide_q,
@@ -383,12 +443,14 @@ def report(result: dict) -> str:
     s = result["skipped"]
     meta = result.get("meta") or {}
     out = [f"{result['fitted']} fitted engagements "
-           f"({s['skirmish']} skirmish, {s['no_composition']} pre-composition, {s['unmapped']} unmapped skipped)"]
+           f"({s['skirmish']} skirmish, {s['no_composition']} pre-composition, "
+           f"{s['empty_side']} empty-side, {s['unmapped']} unmapped skipped)"]
     if result.get("excluded_tags"):
         out.append(f"excluded delivery tags (empty Versus prior, not fitted): {', '.join(result['excluded_tags'])}")
     if meta.get("collisions"):
         out.append(f"profile-name collisions (first ledger wins): {', '.join(meta['collisions'])}")
     out.append(f"attrition exponent: {result['exponent_milli']} milli | into-defences: {result['into_defences_milli']} milli")
+    out.append(f"global obs/exp scale: {result['global_scale']:.3f} (cells are relative to it; shrink anchor is the global level)")
     moved = [(k, v, result["evidence"][k]) for k, v in result["cells"].items() if v != 1000]
     moved.sort(key=lambda x: -abs(x[1] - 1000))
     out.append(f"\n## delivery x armour: {len(result['cells'])} cells, {len(moved)} moved")
@@ -421,11 +483,18 @@ def jsonable(result: dict) -> dict:
 def to_yaml(result: dict, ledger_hash: str) -> str:
     lines = ["# GENERATED by tools/ai/fit_engagement_priors.py - do not edit by hand; regenerate and review.",
              "# Tier-1 offline priors (TIER1_FITTER_SPEC, DESIGN 19.13/19.2): read at match start, frozen.",
-             f"# {result['fitted']} fitted engagements."]
+             f"# {result['fitted']} fitted engagements.",
+             f"# global obs/exp scale the factors are relative to: {result['global_scale']:.4f}"]
     if result.get("excluded_tags"):
         lines.append(f"# excluded delivery tags (empty Versus prior, not fitted): {', '.join(result['excluded_tags'])}")
     lines += ["BotEngagementPriors:", "\tSchema: 1",
-             f"\tLedgerHash: {ledger_hash}", f"\tEngagements: {result['fitted']}",
+             f"\tLedgerHash: {ledger_hash}",
+             # The global scale fitted cells are relative to: consumers multiply it back
+             # into FITTED lookups (missing/stale cells stay at neutral 1000), so mixed
+             # tables need it as a key - a comment would not reach MiniYaml. Clamped to
+             # the same [MIN_MILLI, MAX_MILLI] bounds as the factor cells.
+             f"\tGlobalScaleMilli: {result['global_scale_milli']}",
+             f"\tEngagements: {result['fitted']}",
              f"\tAttritionExponentMilli: {result['exponent_milli']}",
              f"\tIntoDefencesMilli: {result['into_defences_milli']}"]
     for (d, a), milli in sorted(result["cells"].items()):

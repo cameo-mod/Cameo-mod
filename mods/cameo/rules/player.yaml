@@ -254,6 +254,9 @@ Player:
 			exploit_rush: hard
 			exploit_turtle: hard
 			exploit_guerrilla: hard
+			exploit_expansion: hard
+			exploit_steamroller: hard
+			exploit_tech: hard
 	GrantConditionOnPrerequisite@enable-secondaryinsurance:
 		Condition: nobase
 		Prerequisites: !conyard

@@ -292,6 +292,55 @@ gap≤1-flush refinery to its field's nearest anchor beyond the plain serve radi
 IndexOutOfRange via `CellsOf`, field-edge reach, flush binding, first-refinery fallback, committed suppression).
 Build 0 err/0 mod warnings. Pending: 2-map ≥20k re-smoke + `refinery_law_check.py` verdicts, then hand-in.
 Fransbot report (read-only): `FransQueueManager` shares the same global-total/top-left-reach flaw — unchanged.
+# 2026-10-03 — LC5-DETAIL: ownership examples in the match record (unrecoverable double_owner)
+
+*Devin (T2Verify), `devin/lc5-violation-detail` on master@8e86fca23.* The A/B `all` arm's `double_owner=1`
+(4e90ba7a, Multi0 hard, td_gdi_minigunner) could not be traced: `BotOwnershipWatchdog` built the holder detail
+but only `Log.Write("debug")` received it and every launch rewrites `debug.log`. The match record now carries
+`ownership.examples`: the first `ViolationExamplesPerKind` (Info, default 5) violations per kind as
+`{kind, tick, type, actor_id, detail}` — `detail` names the holders (`rush/Assault#0 + lease
+GarrisonContestBotModule`). `BotOwnershipViolationExamples` caps per kind; `AppendOwnership` emits it sorted
+(kind, tick, type, id) next to `by_type`; `ab_summary.py` prints the first example per kind under the watchdog
+line; AI_MATCH_LOG.md documents the block. Record-only: no orders, no behaviour change. Gates: build 0 err /
+0 mod warnings (8 engine StyleCop), 835/835 tests, fog 80f/263s PASS, mutation 156f/0 PASS, boot gate PASS.
+
+# 2026-10-04 — NOVA N2: EL-1 v2 ported onto current master (`devin/nova/el1-v2`)
+
+*Devin (NOVA).* Round-2 order N2: rebuild the in-match adaptation lane off master ≥ `3c793d4c3` — supersedes
+`devin/nova/el1-import` (whose base predates INC b/c and F2). Applied as hunks, not file-checkout: el1-import's files
+would have reverted `BotFactionView.PublicFactionOf` (F2), `bandit.armed`/`WatchConditions` (INC b) and the newer
+§12.33/§12.34 doc text. Took only the EL-1 delta: `RunningTotalMilli`/`ClosedEngagementCount` on the engagement log
+(`BuildEngagement` out-params; non-skirmish only), the `InMatchAdaptMath` pure rule + `InMatchAdaptBotModule`
+provider (own-bot `TraitOrDefault<EngagementLogBotModule>`; `IsTraitDisabled` self-guards added per the round-2
+provider rule), `IBotInMatchAdaptation` (CA seam), and the squad manager's lazy `InMatchAdaptation` accessor +
+`RetreatRatioPct` additive delta. Switch `AQ_inmatch_adapt` / condition `inmatchadapt` (no `AN_` collision). §12.32
+inserted into master's doc unchanged. Gates: build 0 err / 0 mod-code warnings, 839/839 tests, arch coverage +
+module map regenerated, wiring/fog/direct-mutation PASS, `tools/boot_gate.ps1` PASS.
+
+# 2026-10-04 — devin-tier4: exploit_expansion / exploit_steamroller / exploit_tech pins (SPSA harness)
+
+*Devin (tier4).* The SPSA batch needs any one (personality, faction) pinned per arm; the exploit_* route
+designed for the league covers only rush/turtle/guerrilla, so the three remaining poles get the same hidden
+`ModularBot@Exploit*AI` treatment — `genericbot` + `hardbot` grants, `HiddenInLobby`, one
+`PinnedPersonalities` entry each, `DifficultyAliases` -> hard (insurance parity), the `bot_ai.*` locale
+names, and every `GrantConditionOnBotOwner` `Bots:` list that named the trio (ai.yaml x3 +
+tools/ai/increment_switches.yaml x17). Equivalence proven by `tools/audit/audit_bot_wiring.py --json`:
+identical granted-token sets to `exploit_rush` across all six personality profiles; `audit_bot_insurance.py`
+PASS (aliased, not uninsured); 834/834 dotnet test; boot gate PASS. Usage: `--bot-a exploit_expansion`
+pins (expansion) for the whole batch — same type on plus and minus trees, different learned files.
+
+# 2026-10-04 — refinery_law_check.py: per-match pass/fail for the refinery campaign (Devin-Tier4)
+
+*Devin.* New offline checker `tools/ai/refinery_law_check.py <match dirs> [--json] [--warn-latency T]` —
+per (game, genericbot player) and per-map verdicts against the REF-1 refinery law: max refineries per
+field/anchor >1 FAIL, `base`-reason refinery FAIL, `resource_gap`>1 FAIL, tier-2 placement while
+`fields_in_reach_unserved`>0 FAIL, claim-latency p50/p90/max with a warn threshold, peak/final coverage.
+Classic rows print as information only and never affect the exit code (exit 1 on any genericbot FAIL).
+Old logs lacking `field_id`/`tier`/`resource_gap`/`fields_in_reach_unserved` show `n/a` and never PASS.
+Baseline `C:/cameo-wt/ab_inc_1003/all_td_*`: 16/16 genericbot FAIL (50 `base` refineries, worst 4 on one
+field) — the maintainer's complaint is mechanical now. 10 synthetic tests. Companion campaign plan NOTE
+in the fleet folder picks 8 diverse 1v1 maps (364 shipped maps surveyed by spreader type/cluster/spawn
+distance) and gives the exact `run_ai_match_batch.py` commands, support-dir naming, and the 3-driver cap.
 
 # 2026-10-03 — coordinator: tier-3 hotfix (INC c) + ORDERS round 2 to NOVA/DAWN/EMBER
 
@@ -18441,3 +18490,21 @@ Generated with [Devin](https://devin.ai)
   distinct seeded arms per match, `pinned:true`, `armed:"plan_bandits"`. 822/822, boot-gate PASS.
 * Incident: one file's uncommitted edits were reverted by an external process mid-session (IDE/other
   agent). Detected via dll content check before the smoke; re-applied via shell and committed promptly.
+
+### 2026-10-04 DAWN round-2: public-faction adoption + disabled guards + tuner tests (D2/D3/D4)
+
+Branch `devin/dawn/t3-public-faction` off master `8e86fca23`, worktree `C:/cameo-wt/dawn-t3pf`.
+* **D2**: `EnemyFactionOf` live path and the `PlayerReference.Enemies` early-resolve both map through
+  `BotFactionView.PublicFactionOf` / new name-level `PublicFactionName` — a Random or hidden pick is ""
+  and the scope pools to generic levels (was: `Faction?.InternalName` truth / verbatim "Random" strings).
+  `BuildOrderKnobsBotModule.EnemyFaction()` already delegates to `EnemyFactionOf`, so one edit covers both
+  modules; shared dominant-faction pick extracted as `DominantFaction` (count desc, ordinal tie-break).
+* **D3**: `PinnedPersonalityArm`/`PlanOverlayMilli`/`Snapshot` self-guard `IsTraitDisabled` -> neutral
+  (null / 1000 / null) — rule 5 belt; a disabled bandit never even draws.
+* **D4**: `tools/tests/test_tune_plan_bandits.py` (15 tests): pooling chain, Welford, decay-drop,
+  --armed-only hold/unhold, Processed idempotency, malformed rows (missing score/scope default,
+  missing ids fail loud). **Real bug the tests caught**: `update()`'s early `if not fresh` return skipped
+  the skipped-rows Processed marking — unattributed rows re-scanned forever. Moved marking above the return.
+* Verify: build 0E, **mod-code warnings 0**; 837/837 NUnit (+3 BotFactionView/DominantFaction);
+  pytest 15/15 new file; `tools/boot_gate.ps1` PASS (menu, 0 exceptions, exit 0); audit regen: fog_honesty
+  +1 site (263), ai_arch_freshness FAIL->PASS (master's committed report was stale), rest master drift.

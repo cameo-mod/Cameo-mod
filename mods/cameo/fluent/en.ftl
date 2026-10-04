@@ -371,6 +371,9 @@ bot_ai =
    .exploit_rush = Rush Exploiter (League)
    .exploit_turtle = Turtle Exploiter (League)
    .exploit_guerrilla = Guerrilla Exploiter (League)
+   .exploit_expansion = Expansion Exploiter (League)
+   .exploit_steamroller = Steamroller Exploiter (League)
+   .exploit_tech = Tech Exploiter (League)
 
 support-power-timer = { $player }'s { $support-power }: { $time }
 

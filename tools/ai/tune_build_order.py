@@ -129,13 +129,58 @@ def load_engagement_means(batch_dirs: list[pathlib.Path]) -> dict[tuple[str, str
     return means
 
 
-def load_matches(batch_dirs: list[pathlib.Path]) -> list[dict]:
-    """One row per scored 1v1 bot match: arm, personality, faction, enemy faction, opening, base knob vector, score, win."""
+def load_engagement_coverage(batch_dirs: list[pathlib.Path]) -> dict[tuple[str, str, str], list]:
+    """(arm, game_uid, player) -> [usable, skirmish, total] engagement census for --coverage: `usable` is what
+    load_engagement_means counts (score.total_milli present and not skirmish); `skirmish` are flagged records;
+    `total` is every record for the pair (usable + skirmish + in-flight telemetry). The arm scopes the key so
+    the same (game, player) id in two batch dirs can never merge its EL evidence."""
+    census: dict[tuple[str, str, str], list] = {}
+    for d in batch_dirs:
+        for r in read_jsonl(d / "Logs" / "cameo-ai-engagements.jsonl"):
+            c = census.setdefault((arm_of(d), r.get("game_uid", ""), r.get("player", "")), [0, 0, 0])
+            c[2] += 1
+            score = r.get("score") or {}
+            if r.get("skirmish"):
+                c[1] += 1
+            elif score.get("total_milli") is not None:
+                c[0] += 1
+    return census
+
+
+DROP_REASONS = ["not_1v1", "no_build_order", "outcome_undecided", "duration_gate", "no_personality"]
+EL_BUCKETS = ["el_ok", "el_skirmish_only", "el_no_score", "el_unscored"]
+
+
+def side_of(arm: str) -> str:
+    """Experiment side for --coverage: an SPSA arm is 'plus'/'minus', a coordinate knob arm is 'arm',
+    anything else is 'base' (control / plain batch)."""
+    parsed = spsa_arm(arm)
+    if parsed is not None:
+        return parsed[3]
+    return "arm" if is_perturbed_arm(arm) else "base"
+
+
+def load_matches_detailed(batch_dirs: list[pathlib.Path]) -> tuple[list[dict], dict]:
+    """load_matches plus a per-(personality, faction, side) coverage funnel: match records seen, scored, and
+    drops by reason, plus how many scored rows actually joined a usable engagement verdict (EL buckets).
+    Drop counters attribute to the record's own player personality/faction; a record with neither lands in '?'."""
     el_means = load_engagement_means(batch_dirs)
+    el_census = load_engagement_coverage(batch_dirs)
     rows: list[dict] = []
+    cov: dict[tuple[str, str, str], dict] = {}
+
+    def bucket(r: dict, arm: str, bo: dict | None) -> dict:
+        player = r.get("player") or {}
+        personality = (bo or {}).get("personality") or player.get("personality") or "?"
+        faction = player.get("faction") or "?"
+        return cov.setdefault((personality, faction, side_of(arm)),
+                              {"seen": 0, "scored": 0, **{f"drop_{k}": 0 for k in DROP_REASONS},
+                               **{k: 0 for k in EL_BUCKETS}})
+
     for d in batch_dirs:
         records = read_jsonl(d / "Logs" / "cameo-ai-matches.jsonl")
         situations = read_jsonl(d / "Logs" / "cameo-ai-situations.jsonl")
+        arm = arm_of(d)
 
         first_bo: dict[tuple[str, str], dict] = {}
         last_bo: dict[tuple[str, str], dict] = {}
@@ -150,23 +195,45 @@ def load_matches(batch_dirs: list[pathlib.Path]) -> list[dict]:
         for r in records:
             player = r.get("player") or {}
             opponents = r.get("opponents") or []
-            if len(opponents) != 1 or r.get("allies"):
-                continue  # a team result says nothing about one bot's build order
             key = (r.get("game_uid", ""), player.get("name", ""))
+            b = bucket(r, arm, first_bo.get(key))
+            b["seen"] += 1
+            if len(opponents) != 1 or r.get("allies"):
+                b["drop_not_1v1"] += 1
+                continue  # a team result says nothing about one bot's build order
             if key not in first_bo:
+                b["drop_no_build_order"] += 1
                 continue
             stats = r.get("stats") or {}
-            scored = score_match(player.get("outcome", ""), stats.get("kills_cost", 0), stats.get("deaths_cost", 0),
+            outcome = player.get("outcome", "")
+            if outcome not in ("won", "lost"):
+                b["drop_outcome_undecided"] += 1
+                continue
+            if r.get("duration_ticks", 0) < MIN_DURATION_TICKS:
+                b["drop_duration_gate"] += 1
+                continue
+            scored = score_match(outcome, stats.get("kills_cost", 0), stats.get("deaths_cost", 0),
                                  r.get("duration_ticks", 0))
             if scored is None:
                 continue
             first, last = first_bo[key], last_bo[key]
             personality = first.get("personality") or player.get("personality") or ""
             if not personality:
+                b["drop_no_personality"] += 1
                 continue
+            b["scored"] += 1
+            usable, skirmish, total = el_census.get((arm, *key), [0, 0, 0])
+            if usable:
+                b["el_ok"] += 1
+            elif total == 0:
+                b["el_no_score"] += 1
+            elif skirmish:
+                b["el_skirmish_only"] += 1
+            else:
+                b["el_unscored"] += 1
             rows.append({
                 "game_uid": key[0],
-                "arm": arm_of(d),
+                "arm": arm,
                 "personality": personality,
                 "faction": player.get("faction", ""),
                 "enemy_faction": opponents[0].get("faction", ""),
@@ -179,7 +246,43 @@ def load_matches(batch_dirs: list[pathlib.Path]) -> list[dict]:
                 "el_mean_milli": (el_means.get(key) or [0.0, 0])[0] / max(1, (el_means.get(key) or [0.0, 0])[1]),
                 "el_n": (el_means.get(key) or [0.0, 0])[1],
             })
+    return rows, cov
+
+
+def load_matches(batch_dirs: list[pathlib.Path]) -> list[dict]:
+    """One row per scored 1v1 bot match: arm, personality, faction, enemy faction, opening, base knob vector, score, win."""
+    rows, _ = load_matches_detailed(batch_dirs)
     return rows
+
+
+def coverage_json(cov: dict, min_matches: int = MIN_MATCHES) -> dict:
+    """Machine-readable --coverage output: one entry per (personality, faction, side), ordinal-sorted."""
+    cells = []
+    for key in sorted(cov):
+        b = cov[key]
+        personality, faction, side = key
+        cells.append({"personality": personality, "faction": faction, "side": side, **b,
+                      "short_of_min": max(0, min_matches - b["scored"])})
+    return {"min_matches": min_matches, "drop_reasons": DROP_REASONS, "el_buckets": EL_BUCKETS,
+            "cells": cells}
+
+
+def coverage_report(cov: dict, min_matches: int = MIN_MATCHES) -> str:
+    """Deterministic text table for --coverage: one row per (personality, faction, side), ordinal-sorted."""
+    headers = ["personality", "faction", "side", "seen", "scored", "short",
+               *[f"drop_{k}" for k in DROP_REASONS], *EL_BUCKETS]
+    table = [headers]
+    for key in sorted(cov):
+        personality, faction, side = key
+        b = cov[key]
+        table.append([personality, faction, side, str(b["seen"]), str(b["scored"]),
+                      str(max(0, min_matches - b["scored"])),
+                      *[str(b[f"drop_{k}"]) for k in DROP_REASONS], *[str(b[k]) for k in EL_BUCKETS]])
+    width = [max(len(row[i]) for row in table) for i in range(len(headers))]
+    out = [f"coverage: {sum(b['seen'] for b in cov.values())} match record(s); "
+           f"MIN_MATCHES={min_matches} per side (short = matches still needed to measure)"]
+    out += ["  ".join(cell.ljust(width[i]) for i, cell in enumerate(row)).rstrip() for row in table]
+    return "\n".join(out)
 
 
 # ---------------------------------------------------------------- statistics
@@ -802,8 +905,18 @@ def main() -> int:
     ap.add_argument("--spsa", action="store_true",
                     help="tier-4 mode: simultaneous-perturbation pairs (bo__<p>__<f>__spsa__k<step>__plus|minus) "
                          "instead of coordinate descent; coordinate mode stays the default")
+    ap.add_argument("--coverage", action="store_true",
+                    help="report only: per-(personality, faction, side) funnel of match records seen, scored, "
+                         "and drops by reason vs --min-matches, plus engagement-verdict (EL) coverage")
+    ap.add_argument("--json", action="store_true", help="with --coverage: emit JSON instead of the text table")
     args = ap.parse_args()
     sys.stdout.reconfigure(encoding="utf-8")
+
+    if args.coverage:  # a report: never writes, never fails
+        _, cov = load_matches_detailed([d for d in args.batch_dirs if d.is_dir()])
+        print(json.dumps(coverage_json(cov, args.min_matches), indent=1, sort_keys=True)
+              if args.json else coverage_report(cov, args.min_matches))
+        return 0
 
     learned = parse_learned(args.learned.read_text(encoding="utf-8")) if args.learned.exists() else empty_learned()
     rows = load_matches([d for d in args.batch_dirs if d.is_dir()])

@@ -40,6 +40,18 @@ def _rec(kind="attack", skirmish=False, composition=True, **kw):
     return r
 
 
+def _rec3x():
+    """A record where BOTH directions observe ~3x the expected losses (obs = 3*exp):
+    the base model is uniformly 3x pessimistic, not a per-cell effect."""
+    r = _rec()
+    r["seen"]["start"]["predicted_enemy_surviving_permille"] = 700   # exp 3000 vs obs 9000
+    r["seen"]["start"]["predicted_own_surviving_permille"] = 875     # exp 100 vs obs 300
+    r["truth"]["start"]["enemy_unit_value"] = 10000
+    r["truth"]["enemy_loss_value"] = 9000
+    r["outcome"]["own_lost_unit_value"] = 300
+    return r
+
+
 def _fit(recs):
     return fp.fit({"engagements": recs, "matches": []}, PROFILES, PRIORS)
 
@@ -61,11 +73,16 @@ def test_cell_shrinks_to_prior_when_thin():
 
 
 def test_cell_clamped_to_bounds():
-    r = _rec()
-    r["outcome"]["enemy_killed_value"] = 10**9  # absurd evidence must still clamp
-    res = _fit([r] * 50)
+    # one genuinely extreme cell must still clamp even though the pooled scale absorbs
+    # part of it; obs is census-bounded so the mass comes through truth fields.
+    hot = _rec3x()
+    hot["seen"]["start"]["composition"]["own_units"] = {"rifle": 1}   # -> Bullet_Light cell
+    hot["truth"]["start"]["enemy_unit_value"] = 100000
+    hot["truth"]["enemy_loss_value"] = 100000
+    hot["seen"]["start"]["predicted_enemy_surviving_permille"] = 990  # exp 1000, obs 100000
+    res = _fit([_rec3x()] * 40 + [hot])
     assert all(fp.MIN_MILLI <= v <= fp.MAX_MILLI for v in res["cells"].values())
-    assert res["cells"][("CannonAP_Medium", "None")] == fp.MAX_MILLI
+    assert res["cells"][("Bullet_Light", "None")] == fp.MAX_MILLI
 
 
 def test_skirmish_and_pre_composition_records_skip():
@@ -93,8 +110,10 @@ def test_defence_state_collects_defence_fire_only():
 
 def test_one_record_cannot_dominate():
     # A single 1e6-value engagement among ordinary ones is capped at 4x the median.
+    # obs is census-bounded, so the huge value must exist in the truth start census.
     big = _rec()
-    big["outcome"]["enemy_killed_value"] = 10**6
+    big["truth"]["start"]["enemy_unit_value"] = 10**6
+    big["truth"]["enemy_loss_value"] = 10**6
     small = _rec()
     small["outcome"]["enemy_killed_value"] = 50
     res = _fit([big] + [small] * 30)
@@ -215,8 +234,9 @@ def test_halved_dpt_rescales_mixed_force_attribution():
         for killed in (100, 300):
             r = _rec()
             r["seen"]["start"]["composition"]["own_units"] = {"twin1": 1, "twin2": 1}
-            r["seen"]["start"]["predicted_enemy_surviving_permille"] = 0  # expected 100
-            r["outcome"]["enemy_killed_value"] = killed
+            r["seen"]["start"]["predicted_enemy_surviving_permille"] = 700  # expected 90
+            r["truth"]["start"]["enemy_unit_value"] = 300   # obs is census-bounded:
+            r["truth"]["enemy_loss_value"] = killed         # real start-census deaths
             recs.append(r)
         return fp.fit({"engagements": recs * 10, "matches": []}, p2, PRIORS)["cells"]
 
@@ -302,6 +322,32 @@ def test_jsonable_flattens_tuple_keys():
     assert ("CannonAP_Medium" + "|" + "None") in j["cells"]
 
 
+def test_uniform_scale_leaves_cells_neutral():
+    # E1b: a global obs/exp scale is NOT a per-cell correction - a uniform 3x must
+    # leave every factor at neutral (1000 means "at the global level", reported as g).
+    res = _fit([_rec3x()] * 20)
+    assert res["global_scale"] == pytest.approx(3.0, abs=0.05)
+    for v in res["cells"].values():
+        assert v == 1000
+
+
+def test_one_cell_moves_relative_to_global_scale():
+    # E1b: on top of the uniform 3x, ONE cell with a genuinely higher local ratio must
+    # move while the uniform cells stay neutral. The anomalous record is small vs the
+    # pool (pseudo-evidence K makes single-record cells shrink to the global level).
+    hot = _rec3x()
+    hot["seen"]["start"]["composition"]["own_units"] = {"gunpit": 1}  # -> CannonHE_Light cell
+    hot["truth"]["start"]["enemy_unit_value"] = 80000
+    hot["truth"]["enemy_loss_value"] = 64000
+    hot["seen"]["start"]["predicted_enemy_surviving_permille"] = 900  # exp 8000, obs 64000
+    res = _fit([_rec3x()] * 80 + [hot])
+    assert res["global_scale"] == pytest.approx(3.0, abs=0.4)
+    assert res["cells"][("CannonHE_Light", "None")] >= 1900
+    for k, v in res["cells"].items():
+        if k != ("CannonHE_Light", "None"):
+            assert 930 <= v <= 1030
+
+
 def test_profile_collisions_are_named():
     import json
     import tempfile
@@ -313,3 +359,26 @@ def test_profile_collisions_are_named():
                 {"ledger": {}, "sections": {"g": {"dup_unit": {"armaments": []}}}}))
         _, meta, _ = fp.load_profiles(root)
     assert meta["collisions"] == ["dup_unit"]
+
+
+def test_global_scale_milli_key_emitted_and_clamped():
+    # Adopted ruling (was: header comment only): consumers multiply g back into FITTED
+    # cells while stale/missing cells stay at neutral 1000, so mixed tables need g as a
+    # real key - clamped to the same [MIN_MILLI, MAX_MILLI] bounds as factor cells.
+    res = _fit([_rec3x()] * 20)
+    assert res["global_scale_milli"] == fp.MAX_MILLI   # g ~3.0 -> 3000 clamps to 2000
+    assert "\tGlobalScaleMilli: 2000" in fp.to_yaml(res, "h").splitlines()
+
+    half = _rec3x()
+    half["truth"]["enemy_loss_value"] = 4500       # dir-0 obs 4500 vs exp 3000
+    half["outcome"]["own_lost_unit_value"] = 150   # dir-1 obs 150 vs exp 100 -> g = 1.5
+    res2 = _fit([half] * 20)
+    assert res2["global_scale_milli"] == 1500
+    assert "\tGlobalScaleMilli: 1500" in fp.to_yaml(res2, "h").splitlines()
+
+    cold = _rec3x()
+    cold["truth"]["enemy_loss_value"] = 500        # obs 800 total
+    # expected loss = full min(census, record-cap) when surviving is 0 -> g ~0.24
+    cold["seen"]["start"]["predicted_enemy_surviving_permille"] = 0
+    res3 = _fit([cold] * 20)
+    assert res3["global_scale_milli"] == fp.MIN_MILLI

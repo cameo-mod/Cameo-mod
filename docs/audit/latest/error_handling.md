@@ -1,13 +1,13 @@
 # audit_error_handling — Python tooling error handling
 
-Files scanned: **808**
+Files scanned: **814**
 
 | code | meaning | count | baseline |
 |---|---|---|---|
 | E1 | bare except / except BaseException | 5 | 2 |
-| E2 | handler discards the error | 142 | 30 |
-| E3 | open() without encoding= | 161 | 90 |
-| E4 | subprocess call without check= | 63 | 9 |
+| E2 | handler discards the error | 143 | 30 |
+| E3 | open() without encoding= | 164 | 90 |
+| E4 | subprocess call without check= | 65 | 9 |
 
 
 ## Files that do not parse
@@ -28,23 +28,24 @@ Files scanned: **808**
 | tools/balance/apply_harvester_durability.py | 420 | `except BaseException` |
 
 
-## E2 — 142 finding(s)
+## E2 — 143 finding(s)
 
 | file | line | detail |
 |---|---|---|
-| tools/ai/ab_increment.py | 334 | handler body discards the error |
-| tools/ai/ab_increment.py | 469 | handler body discards the error |
-| tools/ai/ab_increment.py | 633 | handler body discards the error |
-| tools/ai/ab_increment.py | 692 | handler body discards the error |
+| tools/ai/ab_increment.py | 357 | handler body discards the error |
+| tools/ai/ab_increment.py | 497 | handler body discards the error |
+| tools/ai/ab_increment.py | 664 | handler body discards the error |
+| tools/ai/ab_increment.py | 723 | handler body discards the error |
 | tools/ai/derive_guerrilla_roles.py | 113 | handler body discards the error |
 | tools/ai/derive_roles_preview.py | 94 | handler body discards the error |
 | tools/ai/derive_roles_preview.py | 275 | handler body discards the error |
 | tools/ai/fight_report.py | 32 | handler body discards the error |
 | tools/ai/fit_arsenal_priors.py | 44 | handler body discards the error |
+| tools/ai/fit_engagement_priors.py | 86 | handler body discards the error |
 | tools/ai/gen_fransbot_lists.py | 140 | handler body discards the error |
 | tools/ai/run_ai_match_batch.py | 719 | handler body discards the error |
 | tools/ai/team_coordination_report.py | 60 | handler body discards the error |
-| tools/ai/tune_build_order.py | 84 | handler body discards the error |
+| tools/ai/tune_build_order.py | 90 | handler body discards the error |
 | tools/audit/audit_ai.py | 45 | handler body discards the error |
 | tools/audit/audit_armor_upgrade_harm.py | 101 | handler body discards the error |
 | tools/audit/audit_balance_sheet.py | 134 | handler body discards the error |
@@ -176,7 +177,7 @@ Files scanned: **808**
 | tools/tilesets/generate_volcanic_tileset.py | 814 | handler body discards the error |
 
 
-## E3 — 161 finding(s)
+## E3 — 164 finding(s)
 
 | file | line | detail |
 |---|---|---|
@@ -234,6 +235,9 @@ Files scanned: **808**
 | tools/tests/test_extract_versus_dta_overlay.py | 25 | `path.write_text()` without encoding= |
 | tools/tests/test_extract_versus_dta_overlay.py | 33 | `path.write_text()` without encoding= |
 | tools/tests/test_extract_versus_dta_overlay.py | 43 | `path.write_text()` without encoding= |
+| tools/tests/test_fit_engagement_priors.py | 141 | `f.write_text()` without encoding= |
+| tools/tests/test_fit_engagement_priors.py | 143 | `f.write_text()` without encoding= |
+| tools/tests/test_fit_engagement_priors.py | 312 | `write_text()` without encoding= |
 | tools/tests/test_frozen_hero_reference.py | 13 | `read_text()` without encoding= |
 | tools/tests/test_frozen_hero_reference.py | 14 | `read_text()` without encoding= |
 | tools/tests/test_frozen_hero_reference.py | 23 | `read_text()` without encoding= |
@@ -343,18 +347,20 @@ Files scanned: **808**
 | tools/tilesets/transfer_ai_cliff_style.py | 101 | `Image.open()` without encoding= |
 
 
-## E4 — 63 finding(s)
+## E4 — 65 finding(s)
 
 | file | line | detail |
 |---|---|---|
 | tools/ai/ab_increment.py | 249 | `subprocess.run()` without check= |
 | tools/ai/ab_increment.py | 255 | `subprocess.run()` without check= |
-| tools/ai/ab_increment.py | 276 | `subprocess.run()` without check= |
-| tools/ai/ab_increment.py | 301 | `subprocess.run()` without check= |
-| tools/ai/ab_increment.py | 481 | `subprocess.run()` without check= |
-| tools/ai/ab_increment.py | 510 | `subprocess.run()` without check= |
-| tools/ai/ab_increment.py | 559 | `subprocess.Popen()` without check= |
-| tools/ai/ab_increment.py | 724 | `subprocess.run()` without check= |
+| tools/ai/ab_increment.py | 273 | `subprocess.run()` without check= |
+| tools/ai/ab_increment.py | 281 | `subprocess.run()` without check= |
+| tools/ai/ab_increment.py | 299 | `subprocess.run()` without check= |
+| tools/ai/ab_increment.py | 324 | `subprocess.run()` without check= |
+| tools/ai/ab_increment.py | 509 | `subprocess.run()` without check= |
+| tools/ai/ab_increment.py | 538 | `subprocess.run()` without check= |
+| tools/ai/ab_increment.py | 587 | `subprocess.Popen()` without check= |
+| tools/ai/ab_increment.py | 755 | `subprocess.run()` without check= |
 | tools/ai/dump_bot_modules.py | 62 | `subprocess.Popen()` without check= |
 | tools/ai/dump_bot_modules.py | 77 | `subprocess.run()` without check= |
 | tools/ai/run_ai_match_batch.py | 645 | `subprocess.Popen()` without check= |
@@ -415,8 +421,8 @@ Files scanned: **808**
 ## FAIL
 
 - E1: 5 > baseline 2
-- E2: 142 > baseline 30
-- E3: 161 > baseline 90
-- E4: 63 > baseline 9
+- E2: 143 > baseline 30
+- E3: 164 > baseline 90
+- E4: 65 > baseline 9
 - 1 file(s) do not parse
 

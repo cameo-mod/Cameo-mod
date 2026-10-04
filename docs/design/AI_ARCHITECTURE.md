@@ -3693,6 +3693,9 @@ neutral) applied inside the HP-share damage assembly before the Lanchester core 
 file ⇒ neutral; EMBER's `ArsenalPriors` parser is reused so there is one file format. The fitted file's
 granularity is (faction pair, own unit type) — `target` is unused at this granularity and stays in the API for
 the finer attacker×target table a later fitter may write. The code stays stat-normalised per fleet rule.
+Calibration note (E1b, 2026-10-04): dir-0 of the tier-1 fit prices its expected losses on the real `truth.start`
+victim force — correct for offline calibration — while the seen-vs-truth gap in game is a separate scouting effect
+that the cells must not absorb.
 
 **Perf**: per-squad verdict cached `VetoCacheTicks` (25); the launch check runs once per `AttackForceInterval`;
 no per-tick world enumeration beyond what the consult sites already compute.
@@ -3704,6 +3707,34 @@ no per-tick world enumeration beyond what the consult sites already compute.
 
 **Switch**: `AN_combat_veto` — `GrantConditionOnBotOwner@combatveto` + `RequiresCondition: genericbot && combatveto`
 on both modules. Default off; classic never sees the provider.
+
+### 12.32 AD — in-match adaptation: form tunes the bar (NOVA EL-1)
+
+Binding ruling: DESIGN 19.13 "in-match vs between matches" — *within* a match a bounded rule reacts to the engagement
+scores so far and resets every match; its gains are tuned knobs (19.2). This is the in-game half of "learn in game
+and between games": tiers 1/3 learn between matches, EL-1 reacts inside the match while it still matters.
+
+**The tally (EL-0 extension, still record-only).** `EngagementLogBotModule` already computes `total_milli` per closed
+record; `BuildEngagement` now surfaces it (`out totalMilli, out isSkirmish`) and the module keeps a running
+`RunningTotalMilli` / `ClosedEngagementCount` over **non-skirmish** records — the same exclusion the report makes.
+Same lines written, same `seen`/`truth` split; the tally reads `seen`-side scores only. Still no orders, no
+conditions; the gated consumer lives in a separate module.
+
+**The rule** (`InMatchAdaptMath`, pure): `bias = clamp(-RunningTotalMilli * GainPermille / 1000, ±MaxDeltaPct)`
+recomputed on the posture cadence (`IntervalTicks` 250). Losing form (negative running score) tightens the bar;
+winning form loosens it toward today's value. Defaults: gain 15 (one clearly lost engagement ~ +15 points), bound
+±20 — with the default 50 bar the effective bar stays inside [30, 70]: tighten never reaches a full-health hold,
+loosen never reaches suicide.
+
+**The consumer.** `IBotInMatchAdaptation` (OpenRA.Mods.CA) exposes `RetreatRatioDeltaPct`; the squad manager adds it
+to `RetreatRatioPct` — the ONE bar both `PredictsLoss` (ratio < bar → flee) and `PredictsWin` (ratio ≥ bar ×
+`EngageMarginPct` → commit) already read. One property, both directions of discretion, no new decision points, no
+new order channels — the bias rides the same consulted path the combat veto uses, so armed together they compose:
+the veto disposes of bad fights, form decides how much proof a good one needs.
+
+**Resets every match** by construction — the tally starts empty per match and the provider recomputes from it; no
+state leaves the match. `genericbot && inmatchadapt`, switch `AQ_inmatch_adapt` (default off); absent provider =
+the bar runs bit-identical and classic is untouched. Enumerates no actors — zero new fog sites.
 
 ### 12.33 T3 — pooled bandits: personality + attack plan, safety floor (fleet orders 2026-10-03; owner dawn)
 
@@ -3741,6 +3772,15 @@ frozen at draw time, is emitted as `bandit.armed` ("+"-joined, sorted; `none` wh
 --armed-only SET` folds only records produced under that exact set — the honest way to split posteriors by
 survivorship filter; a plain run pools all sets (documented, current default).
 
+**Fog + self-guards (round-2 orders 2026-10-03).** The scope's enemy faction is `BotFactionView.PublicFactionOf`
+everywhere: the live path groups enemy players by lobby-visible `DisplayFaction`, and the early-resolve fallback
+(the draw runs inside the `Player` ctor, before `SetPlayers`) resolves `PlayerReference.Enemies` faction names
+through `PublicFactionName` — a Random or hidden pick yields "" and the scope pools to the generic levels instead
+of keying a matchup the bot could not publicly know. `BuildOrderKnobsBotModule.EnemyFaction()` delegates to the
+same `EnemyFactionOf`, so the bandit and the build-order scope can never disagree. Every public reader self-guards
+`IsTraitDisabled` (rule 5): `PinnedPersonalityArm` -> null, `PlanOverlayMilli` -> 1000, `Snapshot` -> null — a
+disabled bandit never draws, pins, overlays or logs, even if a consumer forgets the `IsTraitEnabled` filter.
+
 **Interactions.** Tier-2 `combatveto`: vetoed fights emit DENIED records but no engagement — posteriors are
 conditioned on fights the veto let through (intended composition; `armed` makes the conditioning explicit and
 fitter-addressable, counterfactual scoring would need EL on DENIED cards, not implemented). EL-1 `inmatchadapt`:
@@ -3750,8 +3790,10 @@ reads the pin lazily, so trait enable order cannot race it.
 **Tests / rulings.** `PlanBanditMathTest` pins the pure contract: Welford/Chan stats, parent downweighting,
 deterministic Thompson draws from an explicit uniform stream, the LCB safety floor (and its sparse-arm exemption),
 decay, malformed learned rows, the matchup -> faction -> family -> any chain and own-scope `EvidenceN`.
-`BuildOrderKnobsEvalTest` keeps unmatched learned opening posteriors neutral (1,1). Switch ruling: `genericbot &&
-plan_bandits`; OFF/classic stays bit-identical.
+`BotFactionViewTest` pins the public-faction predicate (Random -> "", dominant-faction tie-break);
+`tools/tests/test_tune_plan_bandits.py` pins the fitter's pooling, decay, `--armed-only`, `Processed` idempotency
+and malformed rows. `BuildOrderKnobsEvalTest` keeps unmatched learned opening posteriors neutral (1,1). Switch
+ruling: `genericbot && plan_bandits`; OFF/classic stays bit-identical.
 
 ### 12.34 T1 — the tier-1 'measured from logs' fitter (Devin, 2026-10-03; TIER1_FITTER_SPEC)
 

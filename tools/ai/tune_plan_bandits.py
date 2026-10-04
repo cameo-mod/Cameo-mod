@@ -158,6 +158,11 @@ def update(rows: list[dict], learned: dict, decay_factor: float = DECAY_FACTOR,
     filtered = [r for r in rows if r.get("bandit") and eligible(r)
                 and armed_only is not None and (r["bandit"].get("armed") or "none") != armed_only]
     skipped = [r for r in rows if eligible(r) and not r.get("bandit")]
+    for r in skipped:
+        # Unattributed engagements are permanently un-bandited — mark them processed even when
+        # nothing folds this pass (the early return below used to leave them re-scanning forever).
+        learned["processed"].append(game_key(r))
+        done.add(game_key(r))
     if not fresh:
         return {"folded": 0, "skipped": len(skipped), "filtered": len(filtered)}
 
@@ -172,9 +177,6 @@ def update(rows: list[dict], learned: dict, decay_factor: float = DECAY_FACTOR,
             for scope in scope_chain(bandit.get("scope") or "any"):
                 stats = learned["stats"].setdefault((name, scope), {})
                 welford_add(stats.setdefault(arm, [0, 0.0, 0.0]), float(total))
-        learned["processed"].append(game_key(r))
-        done.add(game_key(r))
-    for r in skipped:
         learned["processed"].append(game_key(r))
         done.add(game_key(r))
     # `filtered` rows are deliberately NOT marked processed: a mismatched armed-set belongs to a different fit.

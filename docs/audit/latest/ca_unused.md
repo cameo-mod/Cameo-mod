@@ -5,7 +5,7 @@
 | activity | 16 | 3 | 0 |
 | logic | 19 | 19 | 0 |
 | projectile | 9 | 0 | 0 |
-| trait | 296 | 87 | 57 |
+| trait | 298 | 87 | 57 |
 | warhead | 16 | 0 | 0 |
 | widget | 21 | 6 | 5 |
 

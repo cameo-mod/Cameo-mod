@@ -1,6 +1,6 @@
 # audit_recent_changes — last 14 day(s) of history
 
-Commits reviewed: **724**, files touched: **4932**
+Commits reviewed: **769**, files touched: **4929**
 
 | code | meaning | count | blocking |
 |---|---|---|---|
@@ -110,21 +110,21 @@ Commits reviewed: **724**, files touched: **4932**
 
 | file | commits touching it |
 |---|---|
-| DEVELOPMENT_LOG.md | 240 |
-| docs/design/AI_ARCHITECTURE.md | 132 |
-| mods/cameo/ai/ai.yaml | 126 |
-| docs/HANDOFF.md | 105 |
-| OpenRA.Mods.CA/Traits/BotModules/SquadManagerBotModuleCA.cs | 79 |
-| docs/DESIGN.md | 68 |
+| DEVELOPMENT_LOG.md | 256 |
+| docs/design/AI_ARCHITECTURE.md | 144 |
+| mods/cameo/ai/ai.yaml | 130 |
+| docs/HANDOFF.md | 109 |
+| OpenRA.Mods.CA/Traits/BotModules/SquadManagerBotModuleCA.cs | 81 |
 | docs/LESSONS_LEARNED.md | 68 |
-| OpenRA.Mods.Cameo/Traits/BotModules/BotSituation.cs | 63 |
+| docs/DESIGN.md | 67 |
+| OpenRA.Mods.Cameo/Traits/BotModules/BotSituation.cs | 65 |
+| tools/ai/increment_switches.yaml | 56 |
 | docs/design/ROADMAP.md | 54 |
-| tools/ai/increment_switches.yaml | 53 |
-| docs/design/AI_MODULE_MAP.md | 38 |
-| tools/audit/fog_honesty_manifest.json | 36 |
-| docs/audit/doc_claims.yaml | 34 |
-| OpenRA.Mods.Cameo.Test/MasterAiBotModuleTest.cs | 32 |
+| docs/design/AI_MODULE_MAP.md | 39 |
+| tools/audit/fog_honesty_manifest.json | 37 |
+| docs/audit/doc_claims.yaml | 35 |
 | docs/balance/derived/tiberiandawn_nod.json | 32 |
+| OpenRA.Mods.Cameo.Test/MasterAiBotModuleTest.cs | 32 |
 
 
 ## Reviewer checklist (not machine-checkable)

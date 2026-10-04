@@ -140,6 +140,16 @@ schema-1 records in the same file remain valid and the aggregator pools both
   by Cameo's `UpdatesPlayerStatistics` shadow (Info subclasses the engine's, trait wraps it), so
   every actor carrying that trait counts; pre-placed and starting units count as `created`.
   Empty when the ledger trait is absent.
+- `ownership` — the LC5 `BotOwnershipWatchdog` ledger (AI_MASTER_PLAN §3, the
+  §19.6 claim contract). `checks` = passes run; then one counter per
+  `BotOwnershipViolation` kind (`double_owner`, `two_squads`,
+  `held_by_disabled`, `dead_held`, `orphan`), each counting distinct units
+  reported once. `by_type` lists `{kind, type, units}` worst-first. `examples`
+  keeps the first `ViolationExamplesPerKind` (default 5) violations of each
+  kind as `{kind, tick, type, actor_id, detail}`, sorted by kind/tick/type/id —
+  `detail` names the holders (`rush/Assault#0 + lease GarrisonContestBotModule`),
+  so a count like `double_owner=1` stays traceable after `debug.log` rolls.
+  Absent when the watchdog did not run (human match, or a bot without it).
 - `opponents` / `allies` — every eligible player other than the subject, split
   by the **stance masks** (`p.AlliedPlayersMask.Overlaps(subject.PlayerMask)`),
   NOT by `player.IsAlliedWith`. The masks are assigned once by

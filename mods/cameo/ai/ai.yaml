@@ -43,12 +43,12 @@
 		Condition: engt-transport
 		Bots: fransbot
 	# INC-3 (the F1 question as a switch): arms the eight Frans pure-service modules on the
-	# bots named below — the arm sets `Bots: hard, exploit_rush, exploit_turtle, exploit_guerrilla`
+	# bots named below — the arm sets `Bots: hard, exploit_rush, exploit_turtle, exploit_guerrilla, exploit_expansion, exploit_steamroller, exploit_tech`
 	# (genericbot && hardbot, exactly the F1-ctrl population; classic stays Frans-free).
 	# Default grants to `fransbot` only, where the flag is already implied — inert on master.
 	GrantConditionOnBotOwner@inc3f1:
 		Condition: inc3_frans_services
-		Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla
+		Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla, exploit_expansion, exploit_steamroller, exploit_tech
 	# CN2 unit-repair manager + garrison defence: the arm flips these to the genericbot tier list in the
 	# increment A/B (tools/ai/increment_switches.yaml); default grants to fransbot only - inert on master.
 	GrantConditionOnBotOwner@cn2unitrepair:
@@ -127,6 +127,11 @@
 	# (switch group AO_tier3_bandits); empty by default - inert on master.
 	GrantConditionOnBotOwner@planbandits:
 		Condition: plan_bandits
+		Bots:
+	# EL-1 in-match adaptation (DESIGN 19.13, AI_ARCHITECTURE 12.32): bounded bias on the commit/retreat bar
+	# from this match's own closed engagement scores. The arm sets Bots (switch group AQ_inmatch_adapt).
+	GrantConditionOnBotOwner@inmatchadapt:
+		Condition: inmatchadapt
 		Bots:
 	# DIFFICULTY SCALE (DESIGN §19.1, maintainer 2026-09-28): every number below lies on ONE straight line
 	# from easiest to cameogod, in EQUAL steps; an integer that cannot split evenly is the rounded line.
@@ -460,12 +465,24 @@ Player:
 		Name: bot_ai.exploit_guerrilla
 		Type: exploit_guerrilla
 		HiddenInLobby: True
+	ModularBot@ExploitExpansionAI:
+		Name: bot_ai.exploit_expansion
+		Type: exploit_expansion
+		HiddenInLobby: True
+	ModularBot@ExploitSteamrollerAI:
+		Name: bot_ai.exploit_steamroller
+		Type: exploit_steamroller
+		HiddenInLobby: True
+	ModularBot@ExploitTechAI:
+		Name: bot_ai.exploit_tech
+		Type: exploit_tech
+		HiddenInLobby: True
 	GrantConditionOnBotOwner@exploitstack:
 		Condition: genericbot
-		Bots: exploit_rush, exploit_turtle, exploit_guerrilla
+		Bots: exploit_rush, exploit_turtle, exploit_guerrilla, exploit_expansion, exploit_steamroller, exploit_tech
 	GrantConditionOnBotOwner@exploittier:
 		Condition: hardbot
-		Bots: exploit_rush, exploit_turtle, exploit_guerrilla
+		Bots: exploit_rush, exploit_turtle, exploit_guerrilla, exploit_expansion, exploit_steamroller, exploit_tech
 	ProvidesPrerequisite@botplayer:
 		Prerequisite: botplayer
 		RequiresCondition: genericbot || classicbot
@@ -3709,6 +3726,11 @@ Player:
 	# ARMY STAGING (DESIGN 19.12, AI_ARCHITECTURE 12.29): a pure planner (IBotArmyStaging) - one staging point per threatened side on the rim,
 	# a few cells inside the own armed buildings; groups only when several sides are hit; a centre reserve for attacks from inside the ring.
 	# It issues no orders: the squad manager stages the idle pool and the base builder rallies new units at its primary cell.
+	# EL-1 (DESIGN 19.13, AI_ARCHITECTURE 12.32): reads the running total_milli of this match's closed
+	# non-skirmish engagements and biases the squad manager's retreat/commit bar by a bounded delta.
+	# `genericbot && inmatchadapt`: off on master until the increment A/B arms it (switch group AQ_inmatch_adapt).
+	InMatchAdaptBotModule:
+		RequiresCondition: genericbot && inmatchadapt
 	# `genericbot && armystaging`: off on master until the increment A/B arms it (switch group AM_army_staging).
 	ArmyStagingBotModule:
 		RequiresCondition: genericbot && armystaging
@@ -4034,6 +4056,9 @@ Player:
 			exploit_rush: rush
 			exploit_turtle: turtle
 			exploit_guerrilla: guerrilla
+			exploit_expansion: expansion
+			exploit_steamroller: steamroller
+			exploit_tech: tech
 	BotCounterDemandController:
 		RequiresCondition: genericbot
 	MasterAiBotModule:
