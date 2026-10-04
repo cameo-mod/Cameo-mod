@@ -1,3 +1,30 @@
+# 2026-10-04 — feat(ai): NOVA round-2 N1 — the tier-2 follow-up port, one branch off master
+
+*Devin (nova), worktree `C:/cameo-wt/nova-t2port`, branch `devin/nova/t2-port` off `origin/master` @
+`8e86fca23` (round-2 orders rule 1). Consolidates `devin/nova/t1-priors-port` (which sat on a
+pre-INC-b/c base with revert+merge history) into ONE clean branch; the #795/#796 parallel lanes are
+superseded by it (F1-a: one format).*
+
+- **(a) veto deltas:** launch-edge consult + remembered-defences already landed via INC-N (my
+  design) — verified present, nothing to re-port.
+- **(b) tag axis:** `BotWeaponProfile.Delivery` = the main warhead's resolved `Warhead@<tag>`
+  suffix (`MiniYaml.Load` merges `Inherits`; same-index first, class-validated, class-name
+  fallback). Joins EMBER's ledger-tag taxonomy.
+- **(c) one schema:** `EngagementPriorsBotModule` reads `BotEngagementPriors`
+  (`DeliveryArmour@d__x__a`, `DefenceState@`, `IntoDefencesMilli`) natively; `Factor@`/
+  `StatFingerprint`/`arsenal_priors` paths retired (F1-a).
+- **(d) per-cell staleness:** `PriorPct@d__x__a` vs `BotUnitProfiles.ResolvedTagVersus(tag)` —
+  `^Warhead_<tag>` template canonical + one-level family fallback = the fitter's own
+  `versus_priors` question, O(1) after the lazy map. A moved Versus neutralizes exactly that cell;
+  absent PriorPct = unfitted = neutral. `LedgerHash` offline provenance only.
+- **(e)** `EngagementPriorsBotModule` performs **no faction-keyed lookups** (delivery x armour
+  axis only) — the `BotFactionView` rule is satisfied vacuously; noted for the record.
+- **Gating:** `AP_tier1_priors` → `tier1_priors` → `genericbot && tier1_priors`, independent of
+  `AN_combat_veto`; armed alone = inert; missing file/provider = 1000 neutral (classic
+  bit-identical).
+- Verified: build 0 err, **0 new mod-code warnings**, 840/840 tests (6 `EngagementPriorsTest`),
+  wiring/fog/direct-mutation/freshness PASS.
+
 # 2026-10-03 — coordinator: tier-3 hotfix (INC c) + ORDERS round 2 to NOVA/DAWN/EMBER
 
 *Claude.* INC c `3c793d4c3` = DAWN `18556ada5` (GetVariableObservers `override` + base: tier 3 was permanently disabled

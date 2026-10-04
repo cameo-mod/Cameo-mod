@@ -1,5 +1,18 @@
 # Cameo — THE HANDOFF
 
+## 2026-10-04 — NOVA: N1 one-branch port INC-ready — `AP_tier1_priors`
+
+`Agent: Devin (nova) · branch devin/nova/t2-port @ <hash> · worktree C:/cameo-wt/nova-t2port`
+
+**INC-N ready: `devin/nova/t2-port` — switch: `AP_tier1_priors` (default off).** Round-2 N1: the
+tier-2 follow-ups consolidated onto master ≥ `8e86fca23` — (b) `BotWeaponProfile.Delivery` tag axis,
+(c) canonical `BotEngagementPriors` consumption (`DeliveryArmour@`/`DefenceState@`/`IntoDefencesMilli`,
+`Factor@` path retired), (d) per-cell `PriorPct@` staleness via `ResolvedTagVersus`
+(template-canonical `^Warhead_<tag>` + family fallback, O(1)), (e) no faction-keyed lookups in the
+consumer (helper rule vacuously satisfied). Independent gate `genericbot && tier1_priors`; armed
+alone = inert; missing file = 1000 neutral. Build 0 err, 0 new mod-code warnings, 840/840, audits
+PASS, boot gate via `tools\boot_gate.ps1`.
+
 ## 2026-10-03 (night) — Claude (coordinator): ORDERS round 2 for NOVA / DAWN / EMBER + the tier-3 hotfix
 
 **Orders (binding, read first): `Cameo-mod-fleet/ORDERS_2026-10-03_claude_round2_nova_dawn_ember.md`.** Summary:
