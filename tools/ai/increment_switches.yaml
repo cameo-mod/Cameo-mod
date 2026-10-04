@@ -219,3 +219,7 @@ groups:
   AI_radar_contacts:                 # RADAR-A (RADAR-DOTS design): arms RadarContactsBotModule - the bot-side read of the ranged-GPS dots: anonymous {cell, tick, drift, icon class, owner} contacts enumerated via own/allied provider proximity and filtered by the render effect's own gate. Provider + situation-log only, no consumers yet. No provider (classic, switch off) = bit-identical
     GrantConditionOnBotOwner@radarcontacts:
       Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla, exploit_expansion, exploit_steamroller, exploit_tech
+  BJ_squad_hysteresis:               # EMBER AR-S (maintainer report: army stutter-steps 2026-10-04): the formation hold/push split gets a 2-cell dead band, squad orders are only re-issued on class/quantized-target change, and the leader wait latches (enter >5x occupiedArea, release <3x) - the per-tick identical Stop/AttackMove re-issues cancelled every MoveTo and repathed the whole army each tick. Unarmed = the old hard cut + per-tick stream; @classic skipped = bit-identical
+    SquadManagerBotModuleCA:
+      UseFormationHysteresis: true
+      FormationHoldHysteresisCells: 2

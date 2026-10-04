@@ -56,6 +56,35 @@ Follow-up `2cdfdbac8`: parse-tolerance test vs EMBER's real emitted file (`ember
 `SuicideIndex@` analysis rows are out-of-contract and skipped by prefix dispatch; the test locks
 that so a parser change cannot turn an unknown block into a load failure. 844/844.
 
+## 2026-10-04 (late pm) — Devin-EMBER: AR-S formation hysteresis + order dedup INC-ready (army stutter fix)
+
+`Agent: Devin (ember) · branch devin/ember/formation-hysteresis (tip) · worktree C:/cameo-wt/ember-tests`
+
+**INC-ready: `devin/ember/formation-hysteresis` — switch: `BJ_squad_hysteresis` (default OFF; classic
+bit-identical via the `@classic` skip).** Maintainer report: armies march in stutter-steps. Root cause:
+`GroundUnitsAttackMoveStateCA` re-issued identical `Stop`/`AttackMove` orders every squad tick (each re-issue
+cancels the active `MoveTo` → whole army repaths per tick) plus a hard hold/push cut at `FormationMaxLeadCells`
+that flipped members Stop↔AttackMove at the threshold. Fix, per the AR-S rulings: gated by
+`SquadManagerBotModuleCAInfo.UseFormationHysteresis` (default false → verbatim old code path); armed = dead-band
+hold classification (`SquadMicroEvalCA.ClassifyHolding`, knob `FormationHoldHysteresisCells` default 2),
+transition-only order issuing via per-member `(class, quantized cell)` memory, latched leader wait (enter >5×
+occupiedArea, release <3×), leader order dedup by actor+route cell, stale-member cleanup, **plus the pull-back
+fold**: the order-rate trace showed the dominant flip was `AttackMove`↔`Move` (formation push vs MI pull-back in
+the same tick), so wounded/under-fire members classify as `Retreat`/`RetreatRear` inside the same dedup lattice
+— never pushed and pulled in one tick. Files: `GroundStatesCA.cs`, `SquadMicroEvalCA.cs` (+`ClassifyHolding`),
+`SquadManagerBotModuleCA.cs` (+2 fields), `increment_switches.yaml` (+`BJ_squad_hysteresis`),
+`tools/ai/order_trace.py` (new, replay order-rate analyzer), `FormationHysteresisTest.cs` (new, 100% branch
+coverage of the static). **Evidence:** `order_trace.py` on hard-vs-hard `td_gdi` duel replays — unarmed 90
+stutter units (≥2 alt/s) → armed 28 (**−69%**; alternations 548→298). Gates: build 0/0 on `3ba05ede7` ·
+Cameo.Test 937/937 · boot PASS on final code. Known residual: `unitsHurryUp` per-tick re-issue + non-Rush
+paths untouched (scope — next assignment). Fleet: `STATUS_2026-10-04_ember_formation_hysteresis.md`. Flag
+(pre-existing, not this change): match crash on "A Nuclear Winter" — duplicate `Power` trait,
+`ExpansionPlannerBotModule.IsPowerPlant`, `exception-2026-10-04T145446Z`.
+
+Earlier same day — EMBER E2: `devin/ember/tests-baseline`@`0d5cfc14a` landed in INC-e (78→33 failing files, all
+remaining = classified owner flags; see `NOTE_2026-10-04_ember_e2_test_baseline.md`). E1 preview stayed out of
+repo per coordinator ruling (global ~3× scale bias; T3Verify owns the fitter — scale fix landed `b659d2872`).
+
 ## 2026-10-03 (night) — Claude (coordinator): ORDERS round 2 for NOVA / DAWN / EMBER + the tier-3 hotfix
 
 **Orders (binding, read first): `Cameo-mod-fleet/ORDERS_2026-10-03_claude_round2_nova_dawn_ember.md`.** Summary:

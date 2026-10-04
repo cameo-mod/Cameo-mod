@@ -101,6 +101,66 @@ Gates:
 Tooling gap: the raid gate uses the shared `%APPDATA%` support dir when the tree has no `engine/Support`. It should take an
 isolated dir like `boot_gate.ps1` does.
 
+# 2026-10-04 — Devin-EMBER: AR-S formation hysteresis + transition-only squad orders (user-reported army stutter)
+
+*Devin.* `devin/ember/formation-hysteresis` on `3ba05ede7`. Maintainer report: armies march in stutter-steps —
+short moves, stop, restart, unnatural. Root cause in `GroundUnitsAttackMoveStateCA`: every squad tick issued a
+fresh `Stop` to each `holdFront` member and a fresh `AttackMove` to every `pushFront`/anti-air/scout/trailing
+member AND to the leader — each re-issue cancelled the unit's active `MoveTo`, so the whole army repathed every
+tick (visible stop-start). The hold/push split itself was a hard cut at `FormationMaxLeadCells`, so a member
+hovering at the threshold flipped Stop↔AttackMove tick over tick. Fix, per the coordinator's AR-S rulings
+(gated, classic bit-identical):
+- **Gate:** `SquadManagerBotModuleCAInfo.UseFormationHysteresis` (default false) + switch group
+  `BJ_squad_hysteresis` in `tools/ai/increment_switches.yaml` (arms all instances; `SquadManagerBotModuleCA@classic`
+  is in the file's `skip` list, so classic keeps the verbatim old order stream — bit-identical by construction).
+- **Dead band (armed):** new pure static `SquadMicroEvalCA.ClassifyHolding(over, lead, hysteresis, wasHolding)` —
+  enters Hold above `lead + hysteresis`, leaves at/below `lead`, keeps the previous class inside the band.
+  `FormationHoldHysteresisCells` (default 2; 0 = old hard cut). 100% branch coverage in `FormationHysteresisTest`.
+- **Transition-only orders (armed):** per-member `formationOrders` memory of `(FormationClass, quantized CPos)` —
+  Push(routeCell) / Hold(CPos.Zero) / AntiAir(centroidCell) / Scout(routeCell) / Trail(trailCell). An order is
+  queued only when class or quantized target actually changed (unarmed = every tick, the old stream); stale
+  entries for members that left the squad are dropped; `Activate` clears the memory.
+- **Latched leader wait (armed):** the leader stops once when a member trails beyond `occupiedArea*5` and
+  releases only when everyone is back within `occupiedArea*3`; the leader's `AttackMove` is re-issued only when
+  the leader actor or the route cell changes. Unarmed = the old per-tick `Stop`/`AttackMove` if/else.
+- **Pull-back fold (armed):** the before-trace showed the dominant flip was `AttackMove`↔`Move`, not
+  `Stop`↔`AttackMove` — the formation push re-issued `AttackMove` while the MI pull-back issued `Move` to the
+  trail line in the same tick, so a member under `SquadMicroRetreatPct` oscillated every squad tick. Armed now
+  classifies wounded frontline/trailing members (and the stalled-under-fire rear) as `Retreat`/`RetreatRear`
+  inside the same dedup lattice — a pulled member is never pushed in the same tick, the `Move` re-issues only
+  when the quantized rally cell changes, and the per-order micro budget is consumed only on a real transition.
+  Unarmed runs the verbatim old micro block after the verbatim old stream.
+- Deterministic/synced: pure functions of synced positions and squad membership only.
+
+**Order-rate evidence (coordinator requirement):** `tools/ai/order_trace.py` (new, this branch) parses the
+`.orarep` order stream and counts per-unit order-string alternations in
+a 25-tick window (1 sim-second; ≥2/sec = stutter per the AR-S definition). One hard-vs-hard duel each arm,
+`td_gdi` mirror, `run_ai_match_batch.py --repeats 1`, 0 other game drivers:
+- before (unarmed, = the classic stream): 311 units ordered, 548 alternations, **90 stutter units** (peak
+  3 alt/s at ~17-tick squad cadence; `AttackMove`→`Move` 273 + `Move`→`AttackMove` 233 dominated).
+- after (`BJ_squad_hysteresis` armed): 283 units, 298 alternations, **28 stutter units** — **−69% stutter
+  units, −46% alternations** (−39% per-tick normalised). Residual `AttackMove`↔`Move` churn sits in the
+  `unitsHurryUp` catch-up path (~33-tick per-tick leader-cell reissue) and non-`Rush` squad types — the
+  explicitly-unassigned scope.
+- Replays: `_ars_trace/before|after` support dirs (fingerprint `472471185b2d` / `a4d4f3456e94`).
+
+Known limits: the non-formation catch-up path (`unitsHurryUp`, guerrilla/harass + non-`Rush` squads) still
+re-issues `AttackMove` to the leader's cell every tick — left unchanged (scope). Armed held members whose
+`AutoTarget` engages now keep firing instead of being re-`Stop`ped each tick (intended; hold position kept).
+
+Gates: build 0 warnings 0 errors on `3ba05ede7`; `OpenRA.Mods.Cameo.Test` 937/937 incl.
+`FormationHysteresisTest` (4 cases = 100% `ClassifyHolding` branch coverage); boot gate PASS on the final code —
+`MenuPostProcessEffect.PostWorldLoaded`, no new exceptions (`exception-2026-10-04T162211Z` in the scratch
+support dir was a bad-launch-args abort, not a game crash).
+
+Flag for the coordinator (pre-existing, unrelated): during the boot window a match on "A Nuclear Winter" crashed
+with `TypeDictionary contains multiple instances of PowerInfo` at `ExpansionPlannerBotModule.IsPowerPlant`
+(`exception-2026-10-04T145446Z`) — an actor carrying two `Power` traits; YAML/data issue, not this change.
+
+Handoff: **INC-ready: `devin/ember/formation-hysteresis` — switch: `BJ_squad_hysteresis` (default OFF; classic
+bit-identical).** Coordinator merges and runs the A/B per WORKFLOW; fleet note
+`STATUS_2026-10-04_ember_formation_hysteresis.md`.
+
 # 2026-10-04 — Claude (lead): INC 2026-10-04 lands — refinery law v2, bot takeover, BP phase 1, RADAR-ALLY, mpspawn parser
 
 *Claude.* Branch `inc/2026_10_04`, merged with `--no-ff` from master `8e86fca23`:
