@@ -18,6 +18,18 @@ boot gate PASS · dry-run arm resolves · **live check PASS**: armed ra1_allies 
 details in DEVELOPMENT_LOG top entry). *Post-rebase re-verify* (base moved to `3ba05ede7`): build 0 errors,
 939/939 tests, fog/wiring/personalities/merged audits PASS, boot gate PASS. Consumers for phase B per the
 RADAR-DOTS note: early-warning -> scout-ID -> expansion -> veto -> EL scalar features.
+## 2026-10-04 — EMBER AR-2: personality-pin desync fixed (INC-ready)
+
+**INC-N ready: `devin/ember/ar2-personality-pin` — switch: none (fixes `AO_tier3_bandits`-armed play; unarmed
+is unchanged).** P0 of the 2026-10-04b architecture review. `TraitEnabled` read the bandit's
+`LocalRandom`-resolved `PinnedPersonalityArm` in a synced callback — each client granted a different
+`personality-*` condition AND skipped the `SharedRandom` draw (double divergence). Now per spec:
+`ChooseInitialCondition` draws `SharedRandom` exactly once unconditionally and applies only the synced
+harness pin; the bandit arm reaches the world solely as a synced `SetBotPersonality` order issued from
+the host's `BotTick` (`BanditPinOrder`, one issue/sim-second until reflected), with candidate switching
+silent while pinned — same suppression semantics, sync-safe. +5 NUnit (draw-count via
+`MersenneTwister.TotalCount`, twin-client determinism, pin-order seam). Gates: builds 0/0, **938/938**,
+boot gate PASS. 2-client sync proof remains Tier4's AR-T3 armed smoke — assigned, must go red on master.
 
 ## 2026-10-04 — NOVA N2 receipt: EL-1 v2 on current master
 
