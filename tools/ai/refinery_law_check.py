@@ -25,14 +25,17 @@ Per genericbot player x match:
 
 Old logs lack field_id/tier/resource_gap and the *_unserved snapshot counters: those metrics print "n/a"
 and a match that cannot be fully checked never earns PASS. classic rows are informational and never
-fail. Exit 1 when any genericbot match FAILs.
+fail. Exit 1 when any genericbot match FAILs, 0 when all pass, 2 when nothing was found (dir typo or
+an empty campaign dir must never read as a verdict).
 
 Usage: python tools/ai/refinery_law_check.py <match dirs...> [--json] [--warn-latency TICKS]
+  dir args may be globs (expanded here so CMD users can pass e.g. refcamp_* unquoted).
 """
 from __future__ import annotations
 
 import argparse
 import collections
+import glob
 import json
 import pathlib
 import sys
@@ -271,10 +274,17 @@ def main(argv=None) -> int:
     ap.add_argument("--warn-latency", type=int, default=DEFAULT_WARN_LATENCY,
                     help=f"mark latency p90 above this as WARN in the output (default {DEFAULT_WARN_LATENCY} ticks)")
     args = ap.parse_args(argv)
-    result = build(c.load(args.dirs), args.warn_latency)
+    dirs = []
+    for d in args.dirs:
+        hits = sorted(glob.glob(str(d), recursive=True))
+        if hits:
+            dirs.extend(pathlib.Path(h) for h in hits)
+        else:
+            dirs.append(d)
+    result = build(c.load(dirs), args.warn_latency)
     if not result["matches"]:
         print("no situation or placement records found", file=sys.stderr)
-        return 1
+        return 2
     print(json.dumps(result, indent=2) if args.json else render(result, args.warn_latency))
     return 1 if any(r["verdict"] == "FAIL" and is_genericbot(r["bot_type"]) for r in result["matches"]) else 0
 

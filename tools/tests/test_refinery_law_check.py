@@ -209,6 +209,17 @@ class RefineryLawCheckTests(unittest.TestCase):
             self.assertEqual(rlc.main([str(bad)]), 1)
             self.assertEqual(rlc.main([str(good), str(bad)]), 1)
 
+    def test_glob_expansion_and_no_records_exit_2(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = pathlib.Path(tmp)
+            write_dir(root, "refcamp_a",
+                      [snap("g1", "Multi0", 100, fields_in_reach_unserved=0)],
+                      [place("g1", "Multi0", 200, field_id="f1")],
+                      [match("g1", "Multi0")])
+            self.assertEqual(rlc.main([str(root / "refcamp_*")]), 0)  # glob expanded by the tool itself
+            self.assertEqual(rlc.main([str(root / "nomatch_*")]), 2)  # unmatched glob
+            self.assertEqual(rlc.main([str(root / "plain_missing_dir")]), 2)  # literal missing dir
+
 
 if __name__ == "__main__":
     unittest.main()
