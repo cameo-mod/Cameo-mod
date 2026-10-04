@@ -97,7 +97,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		int lastRegionsGeneration = -1;
 
 		ResourceMapBotModule resourceMap;
-		IBotMainTargetProvider mainTargetProvider;
+		IBotMainTargetProvider[] mainTargetProviders;
 		IBotRequestUnitProduction[] unitBuilders;
 		IBotPersonalityLeadProvider[] leadProviders;
 		int lastScoutRequestTick = -1;
@@ -118,7 +118,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		protected override void TraitEnabled(Actor self)
 		{
 			resourceMap = self.TraitsImplementing<ResourceMapBotModule>().FirstOrDefault(t => t.IsTraitEnabled());
-			mainTargetProvider = self.TraitsImplementing<IBotMainTargetProvider>().FirstEnabledTraitOrDefault();
+			mainTargetProviders = self.TraitsImplementing<IBotMainTargetProvider>().ToArray();
 			unitBuilders = self.TraitsImplementing<IBotRequestUnitProduction>().ToArray();
 			leadProviders = self.Owner.PlayerActor.TraitsImplementing<IBotPersonalityLeadProvider>().ToArray();
 			scanTicks = world.LocalRandom.Next(0, Info.ScanInterval);
@@ -450,7 +450,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (Info.EnemySpawnBonus > 0 && EnemySpawnRegions(regions).Contains(index))
 				interest += Info.EnemySpawnBonus;
 
-			if (Info.UseTargetIntelBias && mainTargetProvider != null)
+			var mainTargetProvider = Info.UseTargetIntelBias ? mainTargetProviders.FirstEnabledTraitOrDefault() : null;
+			if (mainTargetProvider != null)
 			{
 				var target = mainTargetProvider.MainTarget;
 				if (target != null

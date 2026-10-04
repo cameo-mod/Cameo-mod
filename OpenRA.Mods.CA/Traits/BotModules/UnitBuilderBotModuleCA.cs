@@ -171,7 +171,7 @@ namespace OpenRA.Mods.CA.Traits
 		bool firstTick = true;
 
 		readonly AdaptiveCounterProduction counters;
-		IBotEnemyCompositionProvider compositionProvider;
+		IBotEnemyCompositionProvider[] compositionProviders;
 		IBotPersonalityLeadProvider[] leadProviders;
 		IBotUnitRoles unitRoles;
 
@@ -217,7 +217,7 @@ namespace OpenRA.Mods.CA.Traits
 			requestPause = self.TraitsImplementing<IBotRequestPauseUnitProduction>().ToArray();
 			playerResources = self.Owner.PlayerActor.Trait<PlayerResources>();
 			techTree = self.Owner.PlayerActor.TraitOrDefault<TechTree>();
-			compositionProvider = self.TraitsImplementing<IBotEnemyCompositionProvider>().FirstEnabledTraitOrDefault();
+			compositionProviders = self.TraitsImplementing<IBotEnemyCompositionProvider>().ToArray();
 			leadProviders = self.TraitsImplementing<IBotPersonalityLeadProvider>().ToArray();
 			compositionsModule = Info.UseCompositions ? self.World.WorldActor.TraitOrDefault<UnitCompositionsBotModule>() : null;
 
@@ -269,7 +269,7 @@ namespace OpenRA.Mods.CA.Traits
 			}
 
 			if (CounterWeight > 0)
-				counters.Observe(Info.AdaptiveObservationInterval, compositionProvider);
+				counters.Observe(Info.AdaptiveObservationInterval, compositionProviders.FirstEnabledTraitOrDefault());
 
 			// Decrement any active unit intervals, removing any that reach zero
 			foreach (KeyValuePair<string, int> i in activeUnitIntervals.ToList())
@@ -969,7 +969,8 @@ namespace OpenRA.Mods.CA.Traits
 		// legacy omniscient world count stays, so the classic A/B reference is unchanged.
 		int EnemyAirThreatCount()
 		{
-			if (ObservedThreats && compositionProvider != null && compositionProvider.TryGetEnemyComposition(out var valueByType))
+			var compositionProvider = ObservedThreats ? compositionProviders.FirstEnabledTraitOrDefault() : null;
+			if (compositionProvider != null && compositionProvider.TryGetEnemyComposition(out var valueByType))
 				return AirLimits.EstimateObservedThreatCount(valueByType, Info.AirThreatUnits,
 					type => world.Map.Rules.Actors.TryGetValue(type, out var ai) ? ai.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? 0 : 0);
 
