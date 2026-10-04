@@ -10,9 +10,9 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using NUnit.Framework;
 using OpenRA.Mods.CA.Traits;
+using OpenRA.Mods.Cameo.Test.TestFixtures;
 
 namespace OpenRA.Mods.Cameo.Test
 {
@@ -25,8 +25,7 @@ namespace OpenRA.Mods.Cameo.Test
 	{
 		// Uninitialised Players stand in for real ones — only reference identity
 		// matters to the vote (same fixture trick as TeamBlackboardTest).
-		static OpenRA.Player FakePlayer() =>
-			(OpenRA.Player)RuntimeHelpers.GetUninitializedObject(typeof(OpenRA.Player));
+		static OpenRA.Player FakePlayer() => Uninitialized.Player();
 
 		static TeamBroadcast Broadcast(int clientIndex, int ownArmyValue = 0, int urgencyLevel = 0,
 			int directorTension = 0, DirectorPhase directorPhase = DirectorPhase.BuildUp,

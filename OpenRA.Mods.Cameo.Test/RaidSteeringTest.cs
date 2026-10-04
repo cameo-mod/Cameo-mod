@@ -13,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using NUnit.Framework;
 using OpenRA.Mods.CA.Traits;
+using OpenRA.Mods.Cameo.Test.TestFixtures;
 
 namespace OpenRA.Mods.Cameo.Test
 {
@@ -24,12 +25,6 @@ namespace OpenRA.Mods.Cameo.Test
 	[TestFixture]
 	public class RaidSteeringTest
 	{
-		sealed class StubMissionProvider : IBotMissionProvider
-		{
-			public IReadOnlyList<BotMission> Missions { get; set; } = Array.Empty<BotMission>();
-			public void MissionTaken(BotMission mission) { }
-		}
-
 		static BotMission Raid(int requiredValue, int priority = 0, int region = 0)
 		{
 			return new BotMission

@@ -12,6 +12,7 @@
 using NUnit.Framework;
 using OpenRA;
 using OpenRA.Mods.CA.Traits;
+using OpenRA.Mods.Cameo.Test.TestFixtures;
 
 namespace OpenRA.Mods.Cameo.Test
 {
@@ -22,15 +23,6 @@ namespace OpenRA.Mods.Cameo.Test
 	[TestFixture]
 	public class DefendUtilityReserveTest
 	{
-		sealed class StubAxes : IBotUtilityAxes
-		{
-			readonly int turtleRush;
-			public StubAxes(int turtleRush) { this.turtleRush = turtleRush; }
-			public int UtilityTurtleRush => turtleRush;
-			public int UtilityTechRushExpansion => IBotUtilityAxes.Neutral;
-			public int UtilitySteamrollerGuerrilla => IBotUtilityAxes.Neutral;
-		}
-
 		static SquadManagerBotModuleCAInfo Armed() => FieldLoader.Load<SquadManagerBotModuleCAInfo>(
 			new MiniYaml("", new[]
 			{
@@ -53,7 +45,7 @@ namespace OpenRA.Mods.Cameo.Test
 		{
 			var info = FieldLoader.Load<SquadManagerBotModuleCAInfo>(
 				new MiniYaml("", new[] { new MiniYamlNode("UseDefendPreservation", new MiniYaml("true")) }));
-			var providers = new IBotUtilityAxes[] { new StubAxes(0) };
+			var providers = new IBotUtilityAxes[] { new StubUtilityAxes(0) };
 
 			// 40 draftable, plain 25% reserve = keep 10, draft 30 — the turtle pole cannot deepen it.
 			Assert.That(SquadManagerBotModuleCA.DefendDraftLimit(40, false, info, providers), Is.EqualTo(30));
@@ -63,7 +55,7 @@ namespace OpenRA.Mods.Cameo.Test
 		public void NeutralAxisIsThePlainReserve()
 		{
 			var info = Armed();
-			var providers = new IBotUtilityAxes[] { new StubAxes(IBotUtilityAxes.Neutral) };
+			var providers = new IBotUtilityAxes[] { new StubUtilityAxes(IBotUtilityAxes.Neutral) };
 			Assert.That(SquadManagerBotModuleCA.DefendDraftLimit(40, false, info, providers), Is.EqualTo(30),
 				"neutral must be bit-identical to the CA-2 reserve");
 		}
@@ -72,7 +64,7 @@ namespace OpenRA.Mods.Cameo.Test
 		public void TurtlePoleDoublesTheReserve()
 		{
 			var info = Armed();
-			var providers = new IBotUtilityAxes[] { new StubAxes(0) };
+			var providers = new IBotUtilityAxes[] { new StubUtilityAxes(0) };
 
 			// 40 draftable: 25% x 200% = 50% reserve = keep 20, draft 20.
 			Assert.That(SquadManagerBotModuleCA.DefendDraftLimit(40, false, info, providers), Is.EqualTo(20));
@@ -82,7 +74,7 @@ namespace OpenRA.Mods.Cameo.Test
 		public void RushPoleHalvesTheReserve()
 		{
 			var info = Armed();
-			var providers = new IBotUtilityAxes[] { new StubAxes(100) };
+			var providers = new IBotUtilityAxes[] { new StubUtilityAxes(100) };
 
 			// 40 draftable: 25% x 50% = 12% reserve = keep max(4, 4.8->4) = 4, draft 36.
 			Assert.That(SquadManagerBotModuleCA.DefendDraftLimit(40, false, info, providers), Is.EqualTo(36));
@@ -92,7 +84,7 @@ namespace OpenRA.Mods.Cameo.Test
 		public void EmergencyAndSmallPoolBypassTheAxis()
 		{
 			var info = Armed();
-			var providers = new IBotUtilityAxes[] { new StubAxes(0) };
+			var providers = new IBotUtilityAxes[] { new StubUtilityAxes(0) };
 			Assert.That(SquadManagerBotModuleCA.DefendDraftLimit(40, true, info, providers), Is.EqualTo(40),
 				"attacker inside the base commits everything — the axis never overrides an emergency");
 			Assert.That(SquadManagerBotModuleCA.DefendDraftLimit(5, false, info, providers), Is.EqualTo(5));

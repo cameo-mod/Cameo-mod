@@ -1,3 +1,30 @@
+# 2026-10-04 — EMBER AR-T2: shared test fixtures (`devin/ember/test-fixtures`)
+
+*Devin-Tier1.* Branch `devin/ember/test-fixtures` from master `3ba05ede7`, worktree `ember-t2`. Test-only;
+no gameplay change, no switch.
+
+New `OpenRA.Mods.Cameo.Test/TestFixtures/` namespace:
+
+- `Uninitialized` — the identity-only engine-object helper (`Player()`, `Actor()`, `Of<T>()`), replacing eight
+  inline `RuntimeHelpers.GetUninitializedObject` sites.
+- `FakeZoneTopology` — merged from the two per-file doubles. `NearestSearchRadius = 0` gives
+  InfluenceLayers' exact-lookup semantics; the default ring search reproduces ZoneRegionMemory's.
+  `AddZone(cells, adjacent: int[] = null, resourceCells: 0)` covers both original call shapes (the two
+  originals had *different* signatures — adjacency params vs resourceCells-first — so positional `int`
+  args now fail to compile rather than silently reinterpret; the affected call sites use explicit
+  `new[] { ... }` / named args). `Recut()` clears the map for bridge-rebuild tests.
+- `StubMissionProvider` — one publish-only `IBotMissionProvider` (was identical in two files).
+- `StubUtilityAxes` — one configurable `IBotUtilityAxes` (was near-identical in two files).
+- `RecordingBot` — `IBot` recording queued orders, for the order-capture seam tests ahead
+  (AR-2 personality-pin / AR-4 PlugSpawner).
+
+Migrated 11 test files; `TestFixturesTest` pins the fixtures' own contracts (8 tests).
+Diff: +51/−181 in existing files — net −130 lines of duplication.
+
+Gates: solution build 0/0, test project build 0/0, NUnit **941/941** (933 + 8 fixture tests).
+Note: the worktree's robocopied `engine/bin` held a stale test DLL — the solution build does not include
+`OpenRA.Mods.Cameo.Test`; it must be built (and `vstest` run) explicitly.
+
 # 2026-10-04 — Claude (lead): INC 2026-10-04e lands — INC-d completed (P0 raid gate), LC5 admission claims, checker v2, E2 test baseline
 
 *Claude.* Branch `inc/2026_10_04e` from master `1fbd239ff`:

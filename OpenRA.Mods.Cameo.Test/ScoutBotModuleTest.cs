@@ -9,8 +9,8 @@
 #endregion
 
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using NUnit.Framework;
+using OpenRA.Mods.Cameo.Test.TestFixtures;
 using OpenRA.Mods.Cameo.Traits.BotModules;
 using OpenRA.Mods.Common.Traits;
 
@@ -19,11 +19,8 @@ namespace OpenRA.Mods.Cameo.Test
 	[TestFixture]
 	public sealed class ScoutBotModuleTest
 	{
-		static OpenRA.Actor ActorIdentityOnly()
-		{
-			// The ownership helper only stores or compares this reference; it never reads world or trait state.
-			return (OpenRA.Actor)RuntimeHelpers.GetUninitializedObject(typeof(OpenRA.Actor));
-		}
+		static OpenRA.Actor ActorIdentityOnly() =>
+			Uninitialized.Actor();
 
 		[Test]
 		public void ScoutsReturnToIdlePoolWhenNoRegionsNeedRecon()

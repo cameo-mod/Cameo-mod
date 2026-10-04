@@ -13,6 +13,7 @@ using System.Text.Json;
 using NUnit.Framework;
 using OpenRA;
 using OpenRA.Mods.CA.Traits;
+using OpenRA.Mods.Cameo.Test.TestFixtures;
 using OpenRA.Mods.Cameo.Traits;
 using OpenRA.Mods.Cameo.Traits.BotModules;
 using OpenRA.Traits;
@@ -22,21 +23,6 @@ namespace OpenRA.Mods.Cameo.Test
 	[TestFixture]
 	public sealed class BotUtilityAxesTest
 	{
-		sealed class StubUtilityAxes : IBotUtilityAxes
-		{
-			readonly int turtleRush;
-			readonly int steamrollerGuerrilla;
-			public StubUtilityAxes(int turtleRush, int steamrollerGuerrilla = IBotUtilityAxes.Neutral)
-			{
-				this.turtleRush = turtleRush;
-				this.steamrollerGuerrilla = steamrollerGuerrilla;
-			}
-
-			public int UtilityTurtleRush => turtleRush;
-			public int UtilityTechRushExpansion => IBotUtilityAxes.Neutral;
-			public int UtilitySteamrollerGuerrilla => steamrollerGuerrilla;
-		}
-
 		sealed class DisabledStubUtilityAxes : IBotUtilityAxes, IDisabledTrait
 		{
 			public int UtilityTurtleRush => 100;
