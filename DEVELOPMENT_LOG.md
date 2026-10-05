@@ -19461,3 +19461,26 @@ Branch `devin/dawn/t3-public-faction` off master `8e86fca23`, worktree `C:/cameo
 * Verify: build 0E, **mod-code warnings 0**; 837/837 NUnit (+3 BotFactionView/DominantFaction);
   pytest 15/15 new file; `tools/boot_gate.ps1` PASS (menu, 0 exceptions, exit 0); audit regen: fog_honesty
   +1 site (263), ai_arch_freshness FAIL->PASS (master's committed report was stale), rest master drift.
+ 
+
+## 2026-10-05 — EMBER: AR-S residual 2 — BL_protection_episode_guard (h2 engage-vs-lure flap)
+
+* Tagged-emitter attribution on the instrumented BJ+BK build showed ~95% of the surviving
+  flagged alternation is `AttackMove(engage) <-> Move(lure)` inside the protection tick — the
+  `PredictsLoss` verdict flickers at the fog edge and each eval re-issues a different-key order
+  (the dedup key cannot express it; the rallyMode latch only covers the rally side).
+* Guard: `ProtectionEpisode` — a pure struct in `Squads/` (same testability pattern as
+  `SquadOrderDedup`). The lure episode enters on `ProtectionLureEnterConfirmTicks` (2)
+  consecutive losing evals and aborts on `ProtectionLureAbortConfirmTicks` (2) consecutive
+  non-losing evals; engage entry itself is never confirmed, so a winnable enemy still fights
+  the eval it appears. Squad evals run once per `AttackForceInterval` (~2-4 s), so each confirm
+  is one extra round, not a tick-level delay. Episode state resets on Activate and when the
+  leader is back inside `LureRallyRadiusCells` (same site as the rallyMode reset).
+* Switch: `UseProtectionEpisodeGuard` (default off) + the two confirm fields on
+  `SquadManagerBotModuleCA`; armed only via `BL_protection_episode_guard` in
+  `tools/ai/increment_switches.yaml`. Off = the per-eval decision, unchanged stream.
+* Tests: `ProtectionEpisodeGuardTest` 7/7 — flap never enters, sustained-loss enter,
+  in-flight flicker ignore, resolved-verdict abort, immediate engage, re-enter needs
+  re-confirm, degenerate 1/1 = classic per-eval.
+* Stack: `devin/ember/ars-stutter-finish` = inc/2026_10_04g + merge e39670678 (NOVA's P1
+  rallyMode switch-gating, verified unarmed-identical).

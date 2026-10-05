@@ -37,10 +37,16 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 		// back); the latch clears when the leader is back inside the rally radius.
 		int rallyMode;
 
+		// AR-S residual 2 (BL_protection_episode_guard): consecutive-eval hysteresis on the
+		// lure decision — the surviving h2 flap is the predictor verdict flickering, which
+		// alternates the engage path and the lure Move even with the rallyMode latch armed.
+		ProtectionEpisode episode;
+
 		public void Activate(SquadCA owner)
 		{
 			tryAttackTick = owner.SquadManager.Info.ProtectionScanRadius;
 			rallyMode = 0;
+			episode = default;
 		}
 
 		public void Tick(SquadCA owner)
@@ -57,7 +63,10 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 			var holding = owner.SquadManager.TryGetProtectionRally(out var rally);
 			if (!holding || (leader.Location - rally).LengthSquared <= owner.SquadManager.Info.LureRallyRadiusCells * owner.SquadManager.Info.LureRallyRadiusCells)
+			{
 				rallyMode = 0;
+				episode = default;
+			}
 
 			// "Quiet" also covers a target that is still valid but invisible (fled into fog): the squad cannot
 			// fight it and would otherwise loop Attack→Flee forever with the release timer reset every pass.
@@ -91,9 +100,23 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			owner.SquadManager.ShouldReleaseDefenders(false);
 
 			// DF-2 lure: out beyond the rally point and losing alone -> fall back under the own defences.
-			if (holding && closestEnemy != null && owner.SquadManager.Info.UseCombatPredictor
+			var wantsLure = holding && closestEnemy != null && owner.SquadManager.Info.UseCombatPredictor
 				&& (leader.Location - rally).LengthSquared > owner.SquadManager.Info.LureRallyRadiusCells * owner.SquadManager.Info.LureRallyRadiusCells
-				&& owner.SquadManager.PredictsLoss(owner, owner.SquadManager.VisibleEnemiesNear(leader.CenterPosition, protectionScanRadius)))
+				&& owner.SquadManager.PredictsLoss(owner, owner.SquadManager.VisibleEnemiesNear(leader.CenterPosition, protectionScanRadius));
+
+			// BL: hysteresis on the episode, not the eval — a single-tick flicker neither
+			// starts nor aborts the fallback; a winnable enemy still engages as soon as the
+			// abort streak confirms (and instantly whenever no lure is in flight).
+			var luring = wantsLure;
+			if (owner.SquadManager.Info.UseProtectionEpisodeGuard)
+			{
+				episode = episode.Eval(wantsLure,
+					owner.SquadManager.Info.ProtectionLureEnterConfirmTicks,
+					owner.SquadManager.Info.ProtectionLureAbortConfirmTicks);
+				luring = episode.Luring;
+			}
+
+			if (luring)
 			{
 				QueueRallyOrder(owner, 2, rally);
 				return;
