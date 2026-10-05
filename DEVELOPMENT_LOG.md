@@ -1,3 +1,31 @@
+# 2026-10-05 — Claude (lead): crash repair, INC 2026-10-05, ars-stutter held back
+
+*Claude.* `inc/2026_10_05` on `inc/2026_10_04g` @ 4cbc73cbf.
+
+- **Machine crash ~00:05 corrupted the shared repo.** Zero-filled: `refs/heads/inc/2026_10_05`,
+  `worktrees/inc-1004g/HEAD` and `ORIG_HEAD`; the commit-graph listed two never-flushed commits (the
+  half-done INC merge). Repaired: backups in `C:/cameo-wt/_git_repair_backup_20261005`, ref and HEAD
+  restored to 4cbc73cbf from the worktree reflog, commit-graph rebuilt. `fsck --connectivity-only`
+  is clean, `rev-list --objects --all` is clean, and every worktree index blob is present. Some
+  missing objects are referenced only by unreachable crash debris, which is harmless; no gc while
+  agents run.
+- **Merged:** multi-TraitInfo sweep (959819bc9, review APPROVE after fixes), NOVA hotspot #2 march
+  evals (d22e70839) and #4 BuildRegions evals (b1af0bb70), both reviewed bit-identical, and the
+  harvest ledger (9a7d084ea, DAWN ENDORSE).
+- **Integration fix:** the harvest ledger made `load_spec` return `needs` too, and
+  `ai_arch_audit.switch_spec()` crashed unpacking two values. Fixed in 91b92481e.
+- **Held back:** `devin/nova/ars-stutter@e39670678`. With `UseSquadOrderDedup` off it still drops
+  empty grouped orders, guards null `TargetActor`, and allocates per tick, so "Off = pre-change
+  stream" is false. In-game those are mostly no-ops (`AttackMove` returns on an invalid target),
+  but the order stream differs. EMBER is gating them (`devin/ember/ars-stutter-gated`).
+  hotspot #8/#3 wait for that branch, because they are stacked on ars-stutter.
+- **Not merged:** AR-9 follow-ups (`ar9-followups@191196e04`). The P1s are fixed, but the classic
+  path now never removes finished garrisoners, which gives an NRE at the stuck check (P0). Back
+  with T2Verify.
+- **Gates:** build 0 errors, 1143/1143, pytest 34, arch freshness, fog, mutation,
+  multi-TraitInfo audit, doc_claims 0 mismatches, isolated boot PASS
+  (`C:/cameo-wt/boot_isolated.ps1`).
+
 # 2026-10-04 — Devin-T2Verify: multi-TraitInfo sweep review fixes — enabled-trait aggregation
 
 *Devin.* Fixup on `devin/t2verify/multi-traitinfo-sweep` after independent review REQUEST CHANGES
