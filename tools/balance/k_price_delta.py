@@ -105,12 +105,15 @@ def spec_price(inp, spec, anchor_tier):
         special=special, tech_tier=rel)
 
 
-def delta_rows():
+def delta_rows(derived_dir: pathlib.Path | None = None):
     """Every spec-anchored, combat-eligible actor priced both ways."""
     anchors = {k: v for k, v in
                json.loads((LEDGER / "class_anchors.json").read_text(encoding="utf-8")).items()
                if isinstance(v, dict) and v.get("spec", {}).get("dps0")}
-    tier_map = tier_chain.load_derived_map(LEDGER)
+    # A staged sidecar tree supports read-only model experiments without
+    # replacing the committed ledgers or changing any authored prices.
+    tier_root = derived_dir.parent if derived_dir is not None else LEDGER
+    tier_map = tier_chain.load_derived_map(tier_root)
     anchor_tiers = {}
     for cls, a in anchors.items():
         aa = a.get("anchor_actor")
@@ -288,8 +291,10 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--top", type=int, default=TOP_N, help="movers per faction")
     ap.add_argument("--out", type=pathlib.Path, default=OUT)
+    ap.add_argument("--derived-dir", type=pathlib.Path,
+                    help="read model sidecars from this staged directory")
     args = ap.parse_args()
-    rows = delta_rows()
+    rows = delta_rows(args.derived_dir)
     text = render(rows, top_n=args.top)
     args.out.write_text(text, encoding="utf-8", newline="\n")
     print(f"{len(rows)} actors priced both ways -> {args.out}")

@@ -223,18 +223,19 @@ def overkill_factor(per_shot: float, target_hp: float | None = None) -> float:
 
 
 def area_geometry_terms(node, fo, radii, density: float, sigma: float,
-                        radius_scale: int = 100):
+                        radius_scale: int = 100, target_radius: int = 0):
     """Tick-weighted runtime geometry for AreaDamage and its percentage subclass."""
     rel_total = secondary_total = footprint_total = 0.0
     for weight, reliability, footprint in ed.area_geometry_samples(
-            node, fo, radii, sigma, radius_scale):
+            node, fo, radii, sigma, radius_scale, target_radius):
         rel_total += weight * reliability
         secondary_total += weight * tm.footprint_targets(footprint, density)
         footprint_total += weight * footprint
     return rel_total, secondary_total, footprint_total
 
 
-def warhead_terms(node, wtype: str, sigma: float, is_direct_actor: bool = False):
+def warhead_terms(node, wtype: str, sigma: float, is_direct_actor: bool = False,
+                  target_radius: int = 0):
     """(versus_factor, reliability, secondary, footprint) for one warhead node."""
     vs = pd.versus_table(node)
     if wtype == "AreaDamage":
@@ -265,8 +266,10 @@ def warhead_terms(node, wtype: str, sigma: float, is_direct_actor: bool = False)
         if wtype == "AreaDamage":
             ed.area_tick_modifiers(node)
     if is_direct_actor:
+        direct_radius = (max(ed.POINT_TARGET_RADIUS, target_radius)
+                         if target_radius else ed.POINT_TARGET_RADIUS)
         reliability = ed.reliability(
-            [100, 0], [0, ed.POINT_TARGET_RADIUS], sigma)
+            [100, 0], [0, direct_radius], sigma)
         return versus, reliability, 0.0, 0.0
     if wtype == "TargetDamage":
         radius, live = ed.target_damage_radius(node)
@@ -274,18 +277,19 @@ def warhead_terms(node, wtype: str, sigma: float, is_direct_actor: bool = False)
         return versus, 0.0, 0.0, 0.0
     if wtype == "TargetDamage":
         footprint = ed.uniform_footprint_cells2(radius)
-        rel = ed.uniform_reliability(radius, sigma)
+        rel = ed.uniform_reliability(radius, sigma, target_radius)
         return versus, rel, tm.footprint_targets(footprint, density), footprint
     if wtype == "AreaDamage":
         rel, secondary, footprint = area_geometry_terms(
-            node, fo, radii, density, sigma)
+            node, fo, radii, density, sigma, target_radius=target_radius)
         return versus, rel, secondary, footprint
     footprint = ed.footprint_cells2(fo, radii)
-    rel = ed.reliability(fo, radii, sigma)
+    rel = ed.reliability(fo, radii, sigma, target_radius=target_radius)
     return versus, rel, tm.footprint_targets(footprint, density), footprint
 
 
-def percentage_terms(app: dict, sigma: float, is_direct_actor: bool = False):
+def percentage_terms(app: dict, sigma: float, is_direct_actor: bool = False,
+                     target_radius: int = 0):
     """Weighted armor/reliability/area terms for one percentage application."""
     node = app["node"]
     if node.value == "AreaDamagePercentage" or app["kind"] == pd.PCT_FOLDED:
@@ -295,8 +299,10 @@ def percentage_terms(app: dict, sigma: float, is_direct_actor: bool = False):
         fo = radii = None
         live = True
     if is_direct_actor:
+        direct_radius = (max(ed.POINT_TARGET_RADIUS, target_radius)
+                         if target_radius else ed.POINT_TARGET_RADIUS)
         reliability = ed.reliability(
-            [100, 0], [0, ed.POINT_TARGET_RADIUS], sigma)
+            [100, 0], [0, direct_radius], sigma)
         return tm.weighted_versus(app["versus"]), reliability, 0.0, 0.0
     if node.value == "HealthPercentageDamage":
         # This inherits TargetDamageWarhead. Spread 0 is one selected actor;
@@ -307,7 +313,7 @@ def percentage_terms(app: dict, sigma: float, is_direct_actor: bool = False):
         radius, live = ed.target_damage_radius(node)
         if live:
             footprint = ed.uniform_footprint_cells2(radius)
-            reliability = ed.uniform_reliability(radius, sigma)
+            reliability = ed.uniform_reliability(radius, sigma, target_radius)
             return (versus, reliability,
                     tm.footprint_targets(footprint, density), footprint)
         # TargetDamageWarhead's positional path returns immediately at Spread 0.
@@ -320,15 +326,19 @@ def percentage_terms(app: dict, sigma: float, is_direct_actor: bool = False):
     radius_scale = (app["percentage_spread"]
                     if app["kind"] == pd.PCT_FOLDED else 100)
     rel, secondary, footprint = area_geometry_terms(
-        node, fo, radii, density, sigma, radius_scale)
+        node, fo, radii, density, sigma, radius_scale, target_radius)
     return versus, rel, secondary, footprint
 
 
-def analyse(resolved, damage_total: float | None = None):
+def analyse(resolved, damage_total: float | None = None,
+            target_footprint: bool | None = None):
     """Full breakdown for one resolved weapon at a nominal total damage."""
     ed.validate_damage_warheads(resolved)
     whs = ed.flat_damage_warheads(resolved)
     ref_hp = tm.reference_hp()
+    if target_footprint is None:
+        target_footprint = ed.target_footprint_accuracy_enabled()
+    target_radius = ed.TARGET_FOOTPRINT_RADIUS if target_footprint else 0
     is_instant, sigma = ed.weapon_reliability_ctx(resolved)
     is_direct_actor = direct_actor_impact(resolved)
     applications = pd.percentage_applications(resolved, ref_hp)
@@ -346,7 +356,7 @@ def analyse(resolved, damage_total: float | None = None):
     damage_total = flat_total if damage_total is None else damage_total
     for tag, wtype, base, node in whs:
         versus, rel, secondary, footprint = warhead_terms(
-            node, wtype, sigma, is_direct_actor)
+            node, wtype, sigma, is_direct_actor, target_radius)
         parts.append({"tag": tag, "share": base / share_total, "versus": versus,
                       "rel": rel, "secondary": secondary, "footprint": footprint,
                       "rounding_share": 0.0,
@@ -355,7 +365,7 @@ def analyse(resolved, damage_total: float | None = None):
 
     for app in applications:
         versus, rel, secondary, footprint = percentage_terms(
-            app, sigma, is_direct_actor)
+            app, sigma, is_direct_actor, target_radius)
         rounding_hp = app["rounding_hp"]
         if app["kind"] == pd.PCT_FOLDED and damage_total != flat_total:
             # The family table may ask for a nominal Damage different from the template's

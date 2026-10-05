@@ -23,9 +23,13 @@ Writes/edits NOTHING. Usage:
   python tools/balance/effective_damage.py                 # full table, sorted desc
   python tools/balance/effective_damage.py --top 40        # only the top 40
   python tools/balance/effective_damage.py NAME [NAME...]   # just these weapons, verbose
+
+Experimental model switches (both default off):
+  BM_TARGET_FOOTPRINT_ACCURACY=1       # HitShape.DistanceFromEdge, T=426 WDist
 """
 from __future__ import annotations
 import math
+import os
 import pathlib
 import sys
 
@@ -47,6 +51,11 @@ DEFAULT_AREA_FALLOFF = (100, 37, 14, 5, 0)
 # moving direct-Actor projectiles. Area warheads use their runtime Spread exactly,
 # including authored values below 100.
 POINT_TARGET_RADIUS = 100
+# Opt-in accuracy experiment. 426 WDist is OpenRA's default CircleShape radius
+# and is a representative vehicle footprint. The legacy default remains off so
+# existing sidecars and order selection stay byte-identical.
+TARGET_FOOTPRINT_RADIUS = 426
+TARGET_FOOTPRINT_ENV = "BM_TARGET_FOOTPRINT_ACCURACY"
 BULLET_DEFAULT_SPEED = 17
 # Instant projectiles have no travel drift, but the hitscan variants retain their
 # authored scatter unless they use the direct-Actor center path. A projectile with
@@ -511,8 +520,14 @@ def validate_damage_warheads(resolved) -> None:
                             "Warhead.PercentageScale", 0) or None)
 
 
+def target_footprint_accuracy_enabled() -> bool:
+    """Whether to account for target extent in the experimental accuracy model."""
+    return os.environ.get(TARGET_FOOTPRINT_ENV, "").strip().lower() in {
+        "1", "true", "yes", "on"}
+
+
 def area_geometry_samples(node, fo, radii, sigma: float,
-                          radius_scale: int = 100):
+                          radius_scale: int = 100, target_radius: int = 0):
     """(weight, reliability, footprint) for every runtime AreaDamage tick."""
     modifiers = area_tick_modifiers(node)
     ticks = len(modifiers)
@@ -541,7 +556,8 @@ def area_geometry_samples(node, fo, radii, sigma: float,
         cutoff = min(outer, scaled_outer)
         samples.append((
             modifier / 100.0,
-            reliability(fo, radii, sigma, cutoff=cutoff),
+            reliability(fo, radii, sigma, cutoff=cutoff,
+                        target_radius=target_radius),
             footprint_cells2(fo, radii, cutoff=cutoff),
         ))
     return samples
@@ -593,7 +609,8 @@ def _build_radial_pdf(bins: int = 256, samples: int = 400_000):
 _RADIAL_PDF = _build_radial_pdf()
 
 
-def reliability(fo, radii, sigma, cutoff: int | None = None) -> float:
+def reliability(fo, radii, sigma, cutoff: int | None = None,
+                target_radius: int = 0) -> float:
     """Expected falloff at the impact point, over the engine's scatter (POINT target).
 
     E[F(R)] where R is the miss distance. A perfect center impact evaluates the
@@ -611,14 +628,15 @@ def reliability(fo, radii, sigma, cutoff: int | None = None) -> float:
     for i in range(n):
         t = (i + 0.5) * step
         w = scatter_pdf(t) * step
-        distance = t * sigma
+        distance = max(0.0, t * sigma - target_radius)
         if cutoff is None or distance <= cutoff:
             acc += runtime_falloff(fo, radii, distance) / 100.0 * w
         weight += w
     return acc / weight if weight else 1.0
 
 
-def uniform_reliability(radius: int, sigma: float) -> float:
+def uniform_reliability(radius: int, sigma: float,
+                        target_radius: int = 0) -> float:
     """Probability a point impact lands inside TargetDamage's closed disc."""
     if radius <= 0:
         return 0.0
@@ -631,7 +649,7 @@ def uniform_reliability(radius: int, sigma: float) -> float:
     for i in range(n):
         t = (i + 0.5) * step
         w = scatter_pdf(t) * step
-        if t * sigma <= radius:
+        if t * sigma <= radius + target_radius:
             caught += w
         weight += w
     return caught / weight if weight else 0.0
@@ -787,7 +805,7 @@ def weapon_reliability_ctx(resolved):
     return False, inacc + drift
 
 
-def effective_damage(resolved):
+def effective_damage(resolved, target_footprint: bool | None = None):
     """Return (effective, base_total, footprint_total, avg_reliability) or None."""
     validate_damage_warheads(resolved)
     # This legacy flat-only metric still runs after the engine's complete
@@ -796,6 +814,9 @@ def effective_damage(resolved):
     whs = flat_damage_warheads(resolved)
     if not whs:
         return None
+    if target_footprint is None:
+        target_footprint = target_footprint_accuracy_enabled()
+    target_radius = TARGET_FOOTPRINT_RADIUS if target_footprint else 0
     is_instant, sigma = weapon_reliability_ctx(resolved)
     is_direct_actor = direct_actor_impact(resolved)
     eff = base_total = foot_total = 0.0
@@ -810,7 +831,9 @@ def effective_damage(resolved):
             if wtype == "AreaDamage":
                 area_tick_modifiers(node)
         if is_direct_actor:
-            rel = reliability([100, 0], [0, POINT_TARGET_RADIUS], sigma)
+            direct_radius = (max(POINT_TARGET_RADIUS, target_radius)
+                             if target_radius else POINT_TARGET_RADIUS)
+            rel = reliability([100, 0], [0, direct_radius], sigma)
             eff += base * rel
             base_total += base
             rel_weighted += rel * base
@@ -824,14 +847,15 @@ def effective_damage(resolved):
             continue
         if wtype == "TargetDamage":
             fp = uniform_footprint_cells2(radius)
-            rel = uniform_reliability(radius, sigma)
+            rel = uniform_reliability(radius, sigma, target_radius)
         elif wtype == "AreaDamage":
-            samples = area_geometry_samples(node, fo, radii, sigma)
+            samples = area_geometry_samples(
+                node, fo, radii, sigma, target_radius=target_radius)
             rel = sum(weight * tick_rel for weight, tick_rel, _fp in samples)
             fp = sum(weight * tick_fp for weight, _rel, tick_fp in samples)
         else:
             fp = footprint_cells2(fo, radii)
-            rel = reliability(fo, radii, sigma)
+            rel = reliability(fo, radii, sigma, target_radius=target_radius)
         contrib = base * (rel + SWARM_W * fp)
         eff += contrib
         base_total += base

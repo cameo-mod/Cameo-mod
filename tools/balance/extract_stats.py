@@ -573,7 +573,7 @@ def model_constants() -> dict:
     Committed so that a model change shows up as a small, readable diff at the top of
     the derived tree instead of only as thousands of shifted decimals underneath it.
     """
-    return {
+    constants = {
         "effective_damage": {"SWARM_W": effmod.SWARM_W, "LEAD": effmod.LEAD,
                              "TARGET_SPEED": effmod.TARGET_SPEED,
                              "SPEED_CAP": effmod.SPEED_CAP,
@@ -650,6 +650,11 @@ def model_constants() -> dict:
                          "shield_versus_mean": round(tm.pseudo_armor_mean("Shield"), 2),
                          "shield_hp_factor": round(tm.shield_hp_factor(), 4)},
     }
+    if effmod.target_footprint_accuracy_enabled():
+        constants["effective_damage"]["target_footprint_accuracy"] = True
+        constants["effective_damage"]["TARGET_FOOTPRINT_RADIUS"] = \
+            effmod.TARGET_FOOTPRINT_RADIUS
+    return constants
 
 
 def derived_metrics(resolved, raw: dict) -> dict | None:

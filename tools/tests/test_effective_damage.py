@@ -11,12 +11,16 @@ import math
 import pathlib
 import sys
 import unittest
+from unittest.mock import patch
 
 import _bootstrap  # noqa: F401 — sys.path side effect
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[2] / "tools" / "balance"))
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[2] / "tools" / "audit"))
 import effective_damage as ed  # noqa: E402
 import formula as balance_formula  # noqa: E402
+import weapon_efficiency as we  # noqa: E402
+from miniyaml import Ruleset  # noqa: E402
 
 
 class Node:
@@ -213,6 +217,32 @@ class ReliabilityTest(unittest.TestCase):
         self.assertEqual(ed.scatter_pdf(-0.1), 0.0)
         self.assertEqual(ed.scatter_pdf(math.sqrt(2) + 0.1), 0.0)
 
+    def test_target_footprint_switch_defaults_off(self):
+        with patch.dict("os.environ", {}, clear=True):
+            self.assertFalse(ed.target_footprint_accuracy_enabled())
+
+    def test_target_extent_reliability_is_monotonic(self):
+        values = [ed.reliability(self.FO, self.RADII, 800, target_radius=r)
+                  for r in (0, 128, 426, 512)]
+        self.assertEqual(values, sorted(values))
+
+    def test_spread_one_sniper_error_fits_inside_infantry_shape(self):
+        # Worked example: Specter sigma 63.38; the max triangular-scatter radius
+        # is sqrt(2)*sigma = 89.63, inside the 128 WDist infantry HitShape.
+        self.assertEqual(
+            ed.reliability([100, 0], [0, 1], 63.38, target_radius=128), 1.0)
+
+    def test_instant_hit_scatter_is_caught_by_target_extent(self):
+        # RA2AWP: InstantHitWithFakeBullets, sigma 40 and no travel drift.
+        # Its max error radius 56.57 is below the 128 WDist infantry shape.
+        self.assertEqual(
+            ed.reliability([100, 0], [0, 1], 40, target_radius=128), 1.0)
+
+    def test_vehicle_footprint_catches_troop_rocket_scatter(self):
+        # 426 WDist is the engine CircleShape default used for the vehicle target
+        # profile. The fixture models an outer-128 rocket against that footprint.
+        self.assertEqual(
+            ed.reliability([100, 0], [0, 128], 300, target_radius=426), 1.0)
 
 class ProjectileRuntimeDefaultTest(unittest.TestCase):
     class ProjectileNode:
@@ -324,6 +354,13 @@ class ProjectileRuntimeDefaultTest(unittest.TestCase):
         self.assertIn(
             "unmodeled_projectile_lock_on:Missile", ed.model_limitations(root))
 
+    def test_unlocked_missile_retains_straight_flight_drift(self):
+        root = self.ProjectileNode(
+            "Missile", 10052,
+            {"Speed": 500, "Inaccuracy": 150, "LockOnProbability": 50})
+        self.assertEqual(ed.weapon_reliability_ctx(root)[1],
+                         150 + ed.LEAD * ed.TARGET_SPEED * 10052 / 500)
+
 
 class DamageValueTest(unittest.TestCase):
     def test_numeric_forms_parse(self):
@@ -335,6 +372,58 @@ class DamageValueTest(unittest.TestCase):
     def test_non_numeric_is_none_not_an_exception(self):
         for bad in (None, "", "abc", "inherit"):
             self.assertIsNone(ed.damage_value(bad))
+
+
+class TargetFootprintWorkedExamplesTest(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.rules = Ruleset(pathlib.Path(__file__).resolve().parents[2])
+
+    def test_four_live_examples_with_switch_off_and_on(self):
+        examples = {
+            "SpecterSniper": (0.0006, 1.0),
+            "GhostSniper": (0.0006, 1.0),
+            "RA2AWP": (0.0018, 1.0),
+            "mtank_pri2": (0.0021, 0.2),
+        }
+        with patch.dict("os.environ", {}, clear=True):
+            self.assertFalse(ed.target_footprint_accuracy_enabled())
+            for name, (legacy_reliability, new_max) in examples.items():
+                with self.subTest(weapon=name):
+                    weapon = self.rules.resolve_weapon(name)
+                    legacy = ed.effective_damage(weapon)
+                    explicit_legacy = ed.effective_damage(
+                        weapon, target_footprint=False)
+                    self.assertEqual(legacy, explicit_legacy)
+                    self.assertAlmostEqual(legacy[3], legacy_reliability,
+                                           delta=0.0001)
+                    corrected = ed.effective_damage(weapon, target_footprint=True)
+                    self.assertGreater(corrected[3], legacy[3])
+                    if name == "mtank_pri2":
+                        # PerCellIncrement scatter plus the engine CloseEnough
+                        # terminal miss keeps this counterexample below 0.2.
+                        self.assertLess(corrected[3], new_max)
+                        self.assertAlmostEqual(corrected[4], 1874.08)
+                    else:
+                        self.assertAlmostEqual(corrected[3], new_max, places=3)
+                    legacy_k = we.analyse(weapon, target_footprint=False)["k"]
+                    corrected_k = we.analyse(weapon, target_footprint=True)["k"]
+                    self.assertGreater(corrected_k, legacy_k)
+
+    @unittest.expectedFailure
+    def test_mtank_locked_inaccuracy_only_terminal_estimate_stays_below_0_2(self):
+        """Architect measured ~0.16; this branch currently gets 0.239.
+
+        Kept as an expected failure until the missile terminal-miss calculation
+        is reconciled. The main target-footprint switch remains independently
+        usable; do not weaken the <0.2 condition to hide this disagreement.
+        """
+        weapon = self.rules.resolve_weapon("mtank_pri2")
+        # Reproduce the proposed inaccuracy-only locked-miss sigma=1472 while
+        # isolating the target-footprint integration at T=426.
+        with patch.object(ed, "weapon_reliability_ctx", return_value=(False, 1472.0)):
+            result = ed.effective_damage(weapon, target_footprint=True)
+        self.assertLess(result[3], 0.2)
 
 
 if __name__ == "__main__":
