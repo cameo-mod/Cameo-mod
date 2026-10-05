@@ -248,7 +248,13 @@ namespace OpenRA.Mods.CA.Traits
 
 				// Heartbeat: a garrisoner that is still ours renews its lease; one whose
 				// renewal lost the claim to another owner is released and dropped.
-				activeGarrisoner.RemoveAll(u => LostRenewal(leases, u.Actor, LeaseOwner, LeaseHeartbeatTicks(Info.ScanTick)));
+				activeGarrisoner.RemoveAll(u =>
+				{
+					if (!LostRenewal(leases, u.Actor, LeaseOwner, LeaseHeartbeatTicks(Info.ScanTick)))
+						return false;
+					pendingLaunch.Remove(u.Actor);
+					return true;
+				});
 
 				foreach (var a in stuckGarrisoner.Keys.Where(a => unitCannotBeOrdered(a) || stuckGarrisoner[a] <= world.WorldTick).ToList())
 					stuckGarrisoner.Remove(a);
@@ -261,6 +267,7 @@ namespace OpenRA.Mods.CA.Traits
 					{
 						stuckGarrisoner[p.Actor] = world.WorldTick + StuckExpiryTicks;
 						StopAndRelease(bot, leases, p.Actor, LeaseOwner);
+						pendingLaunch.Remove(p.Actor);
 						activeGarrisoner.RemoveAt(i);
 						i--;
 					}

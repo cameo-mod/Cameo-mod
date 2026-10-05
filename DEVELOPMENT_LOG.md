@@ -12,7 +12,8 @@ the per-tick sweep dropped freshly claimed units while their orders were still i
   `ReleaseFinished` driven through `SweepTick`: dead/captured/out-of-world units (boarded
   garrisoners included) still release immediately; a still-idle unit keeps its claim while tracked
   in `pendingLaunch` — entries are written at claim time, removed the first tick the unit is seen
-  non-idle, and lapse after `OrderGraceTicks` (50) if the order never lands. The sweep self-gates
+  non-idle, lapse after `OrderGraceTicks` (50) if the order never lands, and are purged on every
+  drop path (gone, grace expiry, lost renewal, stuck-Stop, disable). The sweep self-gates
   on `leases == null`, so the classic per-tick path is a strict no-op — bit-identical to INC-g.
 - **P1 — disable Stops only live marchers.** `TraitDisabled` passed `unitCannotBeOrdered` where
   `orderable` was expected — Stops went to dead/captured units while live marchers were released
