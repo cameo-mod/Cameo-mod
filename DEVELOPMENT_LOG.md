@@ -1,3 +1,26 @@
+# 2026-10-05 — Devin-Architect: DESIGN-FRAMEWORK v8 — "most interesting RTS" rewrite
+
+*Devin-Architect.* `devin/architect/design-framework-v8` on `inc/2026_10_05` @ fe4459c9c.
+
+- **What:** rewrote `C:/cameo-wt/cameo_rts_crossover_design_framework_v7.md` (1177 lines) into
+  `docs/design/CAMEO_RTS_DESIGN_FRAMEWORK.md` (~580 lines), reframed from "catch Combined Arms" to
+  "most interesting RTS": the interesting-match machine (scout→read→commit→contest→adapt),
+  failure-mode antidotes (snowball/deathball/turtle/superweapon/APM), fun-AI opponent design
+  (readable intent, temperament/posture/playbook split, L4D director pacing, §19.13 tier status),
+  and a 12-item prioritized roadmap. 29 sources cited inline (§14).
+- **Research:** BW asymmetry-as-metagame, AoE2 scope discipline, WC3 incentive gradients, CoH
+  territory/VP anti-stalemate, SupCom/BAR economy + config-knobs, RA2/Mental Omega subfaction
+  economics, Stormgate scope postmortem, ZeroSpace persistence, Tempest Rising feel-first,
+  Senth readable-intent study, ISART utility+personality, UAlbertaBot bandit limits,
+  L4D director peaks-and-valleys.
+- **Repo grounding:** every recommendation mapped to a shipped seam or binding law — §11b one
+  warhead, §11c cross-warheads, §19.5 fog honesty, §19.13 tiers + engagement log, §19.15
+  front/back, engagement-priors/PRIORS-CARRY, `BM_live_combat_model`, `BN_meta_learning`
+  (spec pending approval), `BotDirector`, `HumanPaceBotModule`.
+- **Doc-only** — no code, no yaml, no balance numbers. Gates: n/a for docs (no engine content);
+  branch diff is one new file + this entry.
+- **Open:** DESIGN-FRAMEWORK is non-binding by design; roadmap §13 is proposal, not claim order.
+
 # 2026-10-05 — Claude (lead): crash repair, INC 2026-10-05, ars-stutter held back
 
 *Claude.* `inc/2026_10_05` on `inc/2026_10_04g` @ 4cbc73cbf.
