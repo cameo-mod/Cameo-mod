@@ -241,3 +241,8 @@ groups:
     SquadManagerBotModuleCA:
       UseProtectionRallyDedup: true
       ProtectionRallyHysteresisCells: 4
+  BP_squad_desire:                   # EMBER LEARN-P6 (SPEC 2026-10-05 §11/A4): arms the SquadDesireBotModule provider — per squad, per stance (attack/defend/retreat/regroup/harass/reinforce) a leaky integrator over urgency + a capped personality bias; a switch needs best > current + margin AND MinDwellTicks. The ground idle branch consumes the picked stance in place of the binary engage call (Attack commits, the rest take the retreat path). No provider (classic, switch off) = bit-identical
+    GrantConditionOnBotOwner@squaddesire:
+      Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla, exploit_expansion, exploit_steamroller, exploit_tech
+    SquadManagerBotModuleCA:
+      UseSquadDesire: true
