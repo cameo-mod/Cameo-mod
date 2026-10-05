@@ -17,7 +17,10 @@
   arm does not fire at 9/10) and `valueOnlyLaunch:false` + `squadValue>0` (waiver must not apply;
   count gate falls back to `requiredSize`).
 - **Gates:** Release build 0 errors / 8 pre-existing engine lint warnings; Cameo suite 957/957;
-  fog + multi-TraitInfo audits and isolated boot on the stack below.
+  `audit_fog_honesty.py` PASS (80 files / 263 sites); isolated `boot_isolated.ps1` BOOT_GATE=PASS
+  (package in worktree, 0 exceptions). Multi-TraitInfo: the sweep script does not exist on this
+  pre-inc-05 base; the restack diff adds zero `TraitOrDefault`/`TraitsImplementing`/
+  `FirstEnabledTraitOrDefault` lookups (verified by diff grep) — clean by construction.
 - **Open:** branches are on the gated ars-stutter base (pre-inc-05); lead merges gated first, then
   this stack — or restacks again if gated rebases.
 
