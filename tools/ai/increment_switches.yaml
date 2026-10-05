@@ -253,3 +253,7 @@ groups:
       UseEffectiveDamageModel: true
     EngagementLogBotModule:
       UseEffectiveDamageModel: true
+  BM_protection_rally_dedup:         # EMBER AR-S2 (maintainer stutter residual, tagged-emitter attribution 2026-10-05): after BJ/BK/BL the dominant churn is PrepositionDefenceTick re-pushing AttackMove(rally) to EVERY protection member each ProtectInterval (~50t) — a same-cell resend that cancels the in-flight order and yanks units off state-issued combat/lure orders (attrib3: 27-28 flagged units/match, 6.0k+3.5k issues, all that site). Armed: re-push only when the rally moved past ProtectionRallyHysteresisCells (4) or members joined — the state keeps owning per-tick orders. Off = the per-interval group push, bit-identical
+    SquadManagerBotModuleCA:
+      UseProtectionRallyDedup: true
+      ProtectionRallyHysteresisCells: 4
