@@ -70,7 +70,7 @@ set above.
 | `CaptureManagerBotModuleCA` | HARVESTED | Enabled (`ai.yaml:3155`) |
 | `HarvesterBotModuleCA` | HARVESTED | Enabled (`ai.yaml:3129`) |
 | `LoadGarrisonerBotModuleCA` | HARVESTED | Enabled (`ai.yaml:3390`) — garrison-load specialist |
-| `LoadCargoBotModule` (CA family) | HARVESTED | Enabled (`ai.yaml:3394`) |
+| `LoadCargoBotModule` (AS engine module) | HARVESTED+SPLIT | Enabled (`ai.yaml:3394`); AR-9 split — engine blocks are `classicbot`-only, genericbot runs the lease-aware twin `LoadCargoBotModuleAS` (AS resolves before Cameo in `Assemblies`, so a same-name shadow would be dead code; rosters resolve via @InstanceName fallback) |
 | `MCVManagerBotModuleCA` | REJECTED | H-7: role owned by `McvExpansionManagerBotModule`; loading both = duplicate MCV authority |
 | `PowerDownBotModuleCA` | REJECTED | H-7: vanilla `PowerDownBotModule` already owns powerdown; CA fork adds nothing measured |
 | `AutoDeployManager` | OPEN (low) | H-7: order plumbing for `AutoDeployer` traits; `DeployBotModule` covers unit deploy. Revisit only if an actor gains `AutoDeployer` |
