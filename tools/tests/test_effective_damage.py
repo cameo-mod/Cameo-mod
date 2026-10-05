@@ -426,5 +426,70 @@ class TargetFootprintWorkedExamplesTest(unittest.TestCase):
         self.assertLess(result[3], 0.2)
 
 
+class HomingMissileTerminalAccuracyTest(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.rules = Ruleset(pathlib.Path(__file__).resolve().parents[2])
+
+    def test_terminal_switch_defaults_off_and_changes_eligible_missile(self):
+        weapon = self.rules.resolve_weapon("td_nod_attacksubmarine_nodtorptube")
+        self.assertEqual(ed.homing_missile_terminal_bound(weapon), 298)
+        with patch.dict("os.environ", {}, clear=True):
+            self.assertFalse(ed.homing_missile_terminal_enabled())
+            legacy = ed.effective_damage(weapon, target_footprint=False)
+            legacy_k = we.analyse(weapon, target_footprint=False)["k"]
+        with patch.dict("os.environ", {
+                ed.HOMING_MISSILE_TERMINAL_ENV: "1"}):
+            terminal = ed.effective_damage(weapon, target_footprint=False)
+            terminal_k = we.analyse(weapon, target_footprint=False)["k"]
+        self.assertAlmostEqual(legacy[3], 0.162, places=3)
+        self.assertEqual(terminal[3], 1.0)
+        self.assertGreater(terminal_k, legacy_k)
+
+    def test_terminal_gate_checks_speed_fuel_lock_turn_and_aim_offset(self):
+        fields = {"Speed": 200, "LockOnProbability": 100,
+                  "CloseEnough": 500, "RangeLimit": 6000,
+                  "LockOnInaccuracy": 50,
+                  "HorizontalRateOfTurn": 25,
+                  "VerticalRateOfTurn": 12}
+        good = ProjectileRuntimeDefaultTest.ProjectileNode("Missile", 5000, fields)
+        self.assertAlmostEqual(ed.homing_missile_terminal_bound(good),
+                               500 + math.sqrt(2) * 50)
+        for key, value in (("Speed", 600), ("RangeLimit", 4000),
+                           ("LockOnProbability", 98),
+                           ("HorizontalRateOfTurn", 0),
+                           ("VerticalRateOfTurn", 0)):
+            invalid = dict(fields)
+            invalid[key] = value
+            with self.subTest(field=key):
+                node = ProjectileRuntimeDefaultTest.ProjectileNode(
+                    "Missile", 5000, invalid)
+                self.assertIsNone(ed.homing_missile_terminal_bound(node))
+
+    def test_mtank_is_not_promoted_past_failed_close_enough_gate(self):
+        weapon = self.rules.resolve_weapon("mtank_pri2")
+        self.assertIsNone(ed.homing_missile_terminal_bound(weapon))
+        with patch.dict("os.environ", {
+                ed.TARGET_FOOTPRINT_ENV: "1"}):
+            footprint_only = ed.effective_damage(weapon)
+        with patch.dict("os.environ", {
+                ed.TARGET_FOOTPRINT_ENV: "1",
+                ed.HOMING_MISSILE_TERMINAL_ENV: "1"}):
+            result = ed.effective_damage(weapon)
+        self.assertEqual(result, footprint_only)
+        self.assertLess(result[3], 0.2)
+
+    def test_aim_offset_outside_warhead_reach_keeps_scatter_model(self):
+        weapon = self.rules.resolve_weapon("RA2SCUD")
+        self.assertGreater(ed.homing_missile_terminal_bound(weapon),
+                           ed.TARGET_FOOTPRINT_RADIUS)
+        with patch.dict("os.environ", {}, clear=True):
+            legacy = ed.effective_damage(weapon, target_footprint=False)
+        with patch.dict("os.environ", {
+                ed.HOMING_MISSILE_TERMINAL_ENV: "1"}):
+            terminal = ed.effective_damage(weapon, target_footprint=False)
+        self.assertEqual(terminal, legacy)
+
+
 if __name__ == "__main__":
     unittest.main()

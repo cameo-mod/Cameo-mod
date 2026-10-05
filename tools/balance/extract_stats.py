@@ -654,6 +654,8 @@ def model_constants() -> dict:
         constants["effective_damage"]["target_footprint_accuracy"] = True
         constants["effective_damage"]["TARGET_FOOTPRINT_RADIUS"] = \
             effmod.TARGET_FOOTPRINT_RADIUS
+    if effmod.homing_missile_terminal_enabled():
+        constants["effective_damage"]["homing_missile_terminal_accuracy"] = True
     return constants
 
 

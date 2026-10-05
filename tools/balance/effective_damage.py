@@ -26,6 +26,7 @@ Writes/edits NOTHING. Usage:
 
 Experimental model switches (both default off):
   BM_TARGET_FOOTPRINT_ACCURACY=1       # HitShape.DistanceFromEdge, T=426 WDist
+  BM_HOMING_MISSILE_TERMINAL_ACCURACY=1 # locked-missile terminal bound, separate switch
 """
 from __future__ import annotations
 import math
@@ -56,6 +57,7 @@ POINT_TARGET_RADIUS = 100
 # existing sidecars and order selection stay byte-identical.
 TARGET_FOOTPRINT_RADIUS = 426
 TARGET_FOOTPRINT_ENV = "BM_TARGET_FOOTPRINT_ACCURACY"
+HOMING_MISSILE_TERMINAL_ENV = "BM_HOMING_MISSILE_TERMINAL_ACCURACY"
 BULLET_DEFAULT_SPEED = 17
 # Instant projectiles have no travel drift, but the hitscan variants retain their
 # authored scatter unless they use the direct-Actor center path. A projectile with
@@ -526,13 +528,105 @@ def target_footprint_accuracy_enabled() -> bool:
         "1", "true", "yes", "on"}
 
 
+def homing_missile_terminal_enabled() -> bool:
+    """Whether to use the opt-in runtime-bounded locked missile model."""
+    return os.environ.get(HOMING_MISSILE_TERMINAL_ENV, "").strip().lower() in {
+        "1", "true", "yes", "on"}
+
+
+def homing_missile_terminal_bound(resolved) -> float | None:
+    """Conservative target-center miss bound for a reliably locked Missile.
+
+    Engine detonation is checked after each movement step against
+    ``CloseEnough``. This requires a threshold wider than maximum per-tick speed,
+    sufficient fuel/range, and active turn in both axes. The launch aimpoint is
+    offset by the authored lock-on inaccuracy; its 2D rectangular bound is added
+    to CloseEnough so the estimate cannot treat that offset as zero.
+
+    This is a nominal-range model: RangeModifiers, InaccuracyModifiers,
+    point-defense, blockers, terrain, and the full turn trajectory are not
+    simulated. Returning None means the runtime guarantee is not established.
+    """
+    projectile = resolved.child("Projectile")
+    if projectile is None or projectile.value != "Missile":
+        return None
+
+    probability = parse_int32(
+        resolved.get("Projectile", "LockOnProbability"),
+        "Missile.LockOnProbability", 100)
+    if probability < 99:  # Random.Next(100) <= 99 is always true.
+        return None
+
+    weapon_range_raw = resolved.get("Range")
+    weapon_range = parse_wdist(weapon_range_raw) if weapon_range_raw else 0
+    speed_raw = resolved.get("Projectile", "Speed")
+    speed = parse_wdist(speed_raw) if speed_raw else 384
+    max_launch_speed_raw = resolved.get("Projectile", "MaximumLaunchSpeed")
+    if max_launch_speed_raw:
+        max_launch_speed = parse_wdist(max_launch_speed_raw)
+        if max_launch_speed >= 0:
+            speed = max(speed, max_launch_speed)
+
+    close_raw = resolved.get("Projectile", "CloseEnough")
+    close_enough = parse_wdist(close_raw) if close_raw else 298
+    if close_enough <= speed:
+        return None
+
+    limit_raw = resolved.get("Projectile", "RangeLimit")
+    range_limit = parse_wdist(limit_raw) if limit_raw else 0
+    if range_limit == 0:
+        range_limit = weapon_range
+    if range_limit >= 0 and weapon_range > range_limit:
+        return None
+
+    horizontal_raw = resolved.get("Projectile", "HorizontalRateOfTurn")
+    vertical_raw = resolved.get("Projectile", "VerticalRateOfTurn")
+    horizontal = parse_int32(horizontal_raw, "Missile.HorizontalRateOfTurn", 20)
+    vertical = parse_int32(vertical_raw, "Missile.VerticalRateOfTurn", 24)
+    if horizontal <= 0 or vertical <= 0:
+        return None
+
+    activation_raw = resolved.get("Projectile", "HomingActivationDelay")
+    activation_delay = (parse_int32(activation_raw, "Missile.HomingActivationDelay", 0)
+                       if activation_raw else 0)
+    if speed * activation_delay >= weapon_range:
+        return None
+
+    inaccuracy_raw = resolved.get("Projectile", "Inaccuracy")
+    inaccuracy = parse_wdist(inaccuracy_raw) if inaccuracy_raw else 0
+    lock_inaccuracy_raw = resolved.get("Projectile", "LockOnInaccuracy")
+    lock_inaccuracy = (parse_wdist(lock_inaccuracy_raw)
+                       if lock_inaccuracy_raw else -1)
+    if lock_inaccuracy >= 0:
+        inaccuracy = lock_inaccuracy
+
+    kind = str(resolved.get("Projectile", "InaccuracyType") or "Absolute").strip().lower()
+    if kind == "percellincrement":
+        inaccuracy = csharp_div(inaccuracy * weapon_range, 1024)
+    elif kind == "maximum":
+        # The guaranteed check is against nominal weapon range, where Maximum
+        # reaches its authored upper bound. Modifiers are intentionally omitted.
+        inaccuracy = inaccuracy
+    elif kind != "absolute":
+        return None
+
+    # Missile.cs draws independent x/y offsets from [-inaccuracy, +inaccuracy].
+    # Their farthest radial distance is sqrt(2) times the per-axis bound.
+    offset_bound = math.sqrt(2.0) * max(0, inaccuracy)
+    return close_enough + offset_bound
+
+
 def area_geometry_samples(node, fo, radii, sigma: float,
-                          radius_scale: int = 100, target_radius: int = 0):
+                          radius_scale: int = 100, target_radius: int = 0,
+                          terminal_bound: float | None = None,
+                          terminal_radius: int | None = None):
     """(weight, reliability, footprint) for every runtime AreaDamage tick."""
     modifiers = area_tick_modifiers(node)
     ticks = len(modifiers)
     if ticks == 0:
         return []
+    if terminal_radius is None:
+        terminal_radius = target_radius
     final_outer = int(radii[-1])
     authored_max_radius = parse_wdist(node.get("MaxRadius") or 0)
     authored_min_radius = parse_wdist(node.get("MinRadius") or 0)
@@ -557,7 +651,14 @@ def area_geometry_samples(node, fo, radii, sigma: float,
         samples.append((
             modifier / 100.0,
             reliability(fo, radii, sigma, cutoff=cutoff,
-                        target_radius=target_radius),
+                        target_radius=(terminal_radius
+                                       if terminal_bound is not None and
+                                       terminal_bound <= cutoff + terminal_radius
+                                       else target_radius),
+                        terminal_bound=(terminal_bound
+                                        if terminal_bound is not None and
+                                        terminal_bound <= cutoff + terminal_radius
+                                        else None)),
             footprint_cells2(fo, radii, cutoff=cutoff),
         ))
     return samples
@@ -610,7 +711,8 @@ _RADIAL_PDF = _build_radial_pdf()
 
 
 def reliability(fo, radii, sigma, cutoff: int | None = None,
-                target_radius: int = 0) -> float:
+                target_radius: int = 0,
+                terminal_bound: float | None = None) -> float:
     """Expected falloff at the impact point, over the engine's scatter (POINT target).
 
     E[F(R)] where R is the miss distance. A perfect center impact evaluates the
@@ -628,7 +730,9 @@ def reliability(fo, radii, sigma, cutoff: int | None = None,
     for i in range(n):
         t = (i + 0.5) * step
         w = scatter_pdf(t) * step
-        distance = max(0.0, t * sigma - target_radius)
+        impact_distance = (terminal_bound if terminal_bound is not None
+                           else t * sigma)
+        distance = max(0.0, impact_distance - target_radius)
         if cutoff is None or distance <= cutoff:
             acc += runtime_falloff(fo, radii, distance) / 100.0 * w
         weight += w
@@ -636,10 +740,13 @@ def reliability(fo, radii, sigma, cutoff: int | None = None,
 
 
 def uniform_reliability(radius: int, sigma: float,
-                        target_radius: int = 0) -> float:
+                        target_radius: int = 0,
+                        terminal_bound: float | None = None) -> float:
     """Probability a point impact lands inside TargetDamage's closed disc."""
     if radius <= 0:
         return 0.0
+    if terminal_bound is not None:
+        return 1.0 if terminal_bound <= radius + target_radius else 0.0
     if sigma <= 0:
         return 1.0
     n = 400
@@ -818,6 +925,8 @@ def effective_damage(resolved, target_footprint: bool | None = None):
         target_footprint = target_footprint_accuracy_enabled()
     target_radius = TARGET_FOOTPRINT_RADIUS if target_footprint else 0
     is_instant, sigma = weapon_reliability_ctx(resolved)
+    terminal_bound = (homing_missile_terminal_bound(resolved)
+                      if homing_missile_terminal_enabled() else None)
     is_direct_actor = direct_actor_impact(resolved)
     eff = base_total = foot_total = 0.0
     rel_weighted = 0.0
@@ -831,9 +940,16 @@ def effective_damage(resolved, target_footprint: bool | None = None):
             if wtype == "AreaDamage":
                 area_tick_modifiers(node)
         if is_direct_actor:
-            direct_radius = (max(POINT_TARGET_RADIUS, target_radius)
-                             if target_radius else POINT_TARGET_RADIUS)
-            rel = reliability([100, 0], [0, direct_radius], sigma)
+            use_terminal = (terminal_bound is not None
+                            and terminal_bound <= max(
+                                POINT_TARGET_RADIUS, TARGET_FOOTPRINT_RADIUS))
+            effective_radius = (TARGET_FOOTPRINT_RADIUS
+                                if use_terminal else target_radius)
+            direct_radius = max(POINT_TARGET_RADIUS, effective_radius)
+            rel = reliability(
+                [100, 0], [0, direct_radius], sigma,
+                target_radius=effective_radius,
+                terminal_bound=terminal_bound if use_terminal else None)
             eff += base * rel
             base_total += base
             rel_weighted += rel * base
@@ -847,15 +963,29 @@ def effective_damage(resolved, target_footprint: bool | None = None):
             continue
         if wtype == "TargetDamage":
             fp = uniform_footprint_cells2(radius)
-            rel = uniform_reliability(radius, sigma, target_radius)
+            terminal_radius = TARGET_FOOTPRINT_RADIUS
+            use_terminal = (terminal_bound is not None
+                            and terminal_bound <= radius + terminal_radius)
+            effective_radius = terminal_radius if use_terminal else target_radius
+            rel = uniform_reliability(
+                radius, sigma, effective_radius,
+                terminal_bound=terminal_bound if use_terminal else None)
         elif wtype == "AreaDamage":
             samples = area_geometry_samples(
-                node, fo, radii, sigma, target_radius=target_radius)
+                node, fo, radii, sigma, target_radius=target_radius,
+                terminal_bound=terminal_bound,
+                terminal_radius=TARGET_FOOTPRINT_RADIUS)
             rel = sum(weight * tick_rel for weight, tick_rel, _fp in samples)
             fp = sum(weight * tick_fp for weight, _rel, tick_fp in samples)
         else:
             fp = footprint_cells2(fo, radii)
-            rel = reliability(fo, radii, sigma, target_radius=target_radius)
+            terminal_radius = TARGET_FOOTPRINT_RADIUS
+            use_terminal = (terminal_bound is not None and radii
+                            and terminal_bound <= radii[-1] + terminal_radius)
+            effective_radius = terminal_radius if use_terminal else target_radius
+            rel = reliability(
+                fo, radii, sigma, target_radius=effective_radius,
+                terminal_bound=terminal_bound if use_terminal else None)
         contrib = base * (rel + SWARM_W * fp)
         eff += contrib
         base_total += base
