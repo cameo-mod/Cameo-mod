@@ -56,9 +56,13 @@ def fitting_unit(u):
     return {**u, 'armaments': arms}
 
 
-def unit_inputs(u, du=None):
-    """Use the fitting pipeline's selected domain and charge-cycle handling."""
-    return fit_class.unit_inputs(fitting_unit(u), du)[0]
+def unit_inputs(u, du=None, use_k=True):
+    """Use the fitting pipeline's selected domain and charge-cycle handling.
+
+    `use_k` defaults TRUE (PRICING-DEFAULT 2026-10-04): armaments contribute the
+    derived sidecar's K-adjusted `effective_dps` where it exists, raw DPS where
+    it does not."""
+    return fit_class.unit_inputs(fitting_unit(u), du, use_k=use_k)[0]
 
 
 def price_for(cls, anchor, inp, anchor_tier: float = 1.0):
@@ -139,6 +143,9 @@ def main() -> int:
                     help="actor-name prefix, including actors stored in shared ledgers; repeat to combine")
     ap.add_argument("--md")
     ap.add_argument('--json', type=pathlib.Path, help='structured diagnostic with active/inactive armament scope')
+    ap.add_argument('--raw', action='store_true',
+                    help='opt out of the default K-adjusted effective-DPS basis '
+                         'and price on raw damage/reload')
     args = ap.parse_args()
     anchors = {k: v for k, v in json.loads(ANCHORS.read_text(encoding="utf-8")).items()
                if isinstance(v, dict)}
@@ -198,7 +205,7 @@ def main() -> int:
         anchor = anchors[cls]; c0 = cost0_of(anchor)
         if not c0:
             continue
-        inp = unit_inputs(u, du)
+        inp = unit_inputs(u, du, use_k=not args.raw)
         if inp is None:
             continue
         pr = price_for(cls, anchor, inp, anchor_tiers.get(cls, 1.0))
@@ -215,7 +222,7 @@ def main() -> int:
                 'actual_cost': (u.get('cost') or {}).get('v'),
                 'signed_off': bool(anchor.get('signed_off')), 'band_exempt': epic,
                 'flagged': not epic and (pr / c0 < SOFT_FLOOR or pr / c0 > CEIL),
-                'inputs': dict(zip(('hp','speed','range','raw_dps','special','unit_class','tier'), inp)),
+                'inputs': dict(zip(('hp','speed','range','eff_dps','special','unit_class','tier'), inp)),
                 'comparison_domain': 'ground' if any(not fit_class.is_anti_air_armament(a)
                     for a in fit_class.pricing_armaments(fitting_unit(u))) else 'air',
                 'active_source_limitations': sorted({v for r in active for v in r['source_limitations']}),

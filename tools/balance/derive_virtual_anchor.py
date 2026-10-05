@@ -191,7 +191,9 @@ def derive(cls, members, assignments, factions=DEFAULT_FACTIONS, model_damage=No
         residuals.append((price - member["cost"]) / member["cost"])
     result["residuals"] = dict(count=len(residuals), skipped=skipped,
         minimum=min(residuals, default=None), median=statistics.median(residuals) if residuals else None,
-        maximum=max(residuals, default=None), basis="nominal DPS; no derived K")
+        maximum=max(residuals, default=None),
+        basis="K-adjusted effective DPS (PRICING-DEFAULT 2026-10-04); raw DPS "
+              "only where the derived sidecar has no armament entry")
     return result
 
 

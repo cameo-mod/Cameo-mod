@@ -457,7 +457,7 @@ def build():
             excluded.append({'actor': actor, 'reason': 'Not full external-plus-frozen-self coverage on all five calibration axes',
                              'external_source_counts': {s: values[s][2] for s in STATS}})
             continue
-        inputs = fit_class.unit_inputs(unit, member['derived'])[0]
+        inputs = fit_class.unit_inputs(unit, member['derived'], use_k=False)[0]
         if inputs is None:
             excluded.append({'actor': actor, 'reason': 'No compatible nominal fitting inputs'})
             continue
