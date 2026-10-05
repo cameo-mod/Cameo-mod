@@ -19482,5 +19482,16 @@ Branch `devin/dawn/t3-public-faction` off master `8e86fca23`, worktree `C:/cameo
 * Tests: `ProtectionEpisodeGuardTest` 7/7 — flap never enters, sustained-loss enter,
   in-flight flicker ignore, resolved-verdict abort, immediate engage, re-enter needs
   re-confirm, degenerate 1/1 = classic per-eval.
-* Stack: `devin/ember/ars-stutter-finish` = inc/2026_10_04g + merge e39670678 (NOVA's P1
-  rallyMode switch-gating, verified unarmed-identical).
+* Stack: `devin/ember/ars-stutter-finish` = inc/2026_10_05 (fe4459c9c) + merge of
+  `devin/ember/ars-stutter-gated` (e81da54e7: e39670678 + the BK off-path bit-identity
+  fix — EmitSet early-out keeps the unarmed grouped stream byte-identical incl. empty
+  groups, Invalid-target orders and the rearm `queued` flag; armed path unchanged) +
+  BL cherry-picked on top. Supersedes the 04g-era `9e601d213`.
+* Gates on ebed3d9dc: build 0E/8 pre-existing warnings, targeted 17/17, suite 1160/1160,
+  isolated boot `BOOT_GATE=PASS`.
+* Instrumented 3+3 (same tagged build, equal window 4002f, BJ+BK -> BJ+BK+BL): h2
+  alternations 9.0 -> 2.7 mean (-70%), total alternations 102.0 -> 71.7 (-30%), flagged
+  units 23.3 -> 21.3 (-9% — residual is `x`-emitter dominated, i.e. non-protection
+  same-order Move spam the episode guard does not target). 6/6 matches clean.
+* Demo: third arm (BJ+BK+BL) recorded on ebed3d9dc into the AR-S demo package —
+  `bl_on_bj_bk_bl_{1,2,3}_*.orarep` + README addendum.
