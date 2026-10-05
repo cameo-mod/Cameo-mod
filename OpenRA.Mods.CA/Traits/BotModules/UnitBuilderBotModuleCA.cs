@@ -102,6 +102,11 @@ namespace OpenRA.Mods.CA.Traits
 			"RoleMix and no IBotUnitRoles provider.")]
 		public readonly bool UseDerivedUnitWeights = false;
 
+		[Desc("BM_live_combat_model: the derived-weights strength term uses the balance",
+			"pipeline's effective-damage model instead of the classic main-warhead DPS.",
+			"False = classic numbers, bit-identical.")]
+		public readonly bool UseEffectiveDamageModel = false;
+
 		[Desc("Minimum ticks before selecting a new composition.")]
 		public readonly int MinCompositionSelectInterval = 750;
 
@@ -702,7 +707,8 @@ namespace OpenRA.Mods.CA.Traits
 		double DerivedUnitStrength(string name)
 		{
 			return world.Map.Rules.Actors.TryGetValue(name, out var actorInfo)
-				? DerivedUnitWeights.Strength(BotUnitProfiles.Get(world.Map.Rules, actorInfo))
+				? DerivedUnitWeights.Strength(BotUnitProfiles.Get(world.Map.Rules, actorInfo, Info.UseEffectiveDamageModel),
+					Info.UseEffectiveDamageModel)
 				: 1.0;
 		}
 

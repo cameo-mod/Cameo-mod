@@ -240,3 +240,16 @@ groups:
   BN_squad_pool_fixes:               # HOTSPOT-FINDINGS (2026-10-05): attack dispatch retains unmatched idle pool members; allied defend/assist answers require enough defender-draftable units. Off preserves legacy order stream; classic remains skipped.
     SquadManagerBotModuleCA:
       UseSquadPoolFixes: true
+  BM_live_combat_model:         # T3VERIFY PREDICTOR-PARITY P1 (SPEC_2026-10-04_claude_predictor_parity): every fight prediction, focus-fire pick, siege stand-off, veto and derived-unit strength reads the balance pipeline's effective-damage model (reliability, falloff/splash, all damage warheads, MinRange dead-zone, charge-up cycle, versus/context factors) instead of the classic main-warhead DPS. Off = classic numbers, bit-identical
+    SquadManagerBotModuleCA:
+      UseEffectiveDamageModel: true
+    SiegeEvaluatorBotModule:
+      UseEffectiveDamageModel: true
+    UnitBuilderBotModuleCA:
+      UseEffectiveDamageModel: true
+    MasterAiBotModule:
+      UseEffectiveDamageModel: true
+    CombatVetoBotModule:
+      UseEffectiveDamageModel: true
+    EngagementLogBotModule:
+      UseEffectiveDamageModel: true
