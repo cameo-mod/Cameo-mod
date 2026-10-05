@@ -601,6 +601,17 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Consecutive non-losing evals before an in-flight lure episode aborts back to engage (BL_protection_episode_guard). 2 bounds a real re-engage delay to one eval (~AttackForceInterval ticks) while a single flicker can never abort.")]
 		public readonly int ProtectionLureAbortConfirmTicks = 2;
 
+		[Desc("AR-S2 (BM_protection_rally_dedup): the defence preposition tick re-pushes " +
+			"AttackMove(rally) to every protection member each ProtectInterval — a same-cell " +
+			"resend that cancels the in-flight activity (the dominant untagged order-churn " +
+			"emitter in the tagged 2026-10-05 attribution). Armed: re-push only when the rally " +
+			"moved past ProtectionRallyHysteresisCells or members joined; the state machine keeps " +
+			"owning per-tick combat/lure orders. Off = the per-interval group push (unchanged stream).")]
+		public readonly bool UseProtectionRallyDedup = false;
+
+		[Desc("Dead band on the protect rally before the manager re-pushes the squad's march order (BM_protection_rally_dedup). A threat/request target jittering inside the band keeps the in-flight order; a real redirect beyond it re-orders everyone.")]
+		public readonly int ProtectionRallyHysteresisCells = 4;
+
 		public override void RulesetLoaded(Ruleset rules, ActorInfo ai)
 		{
 			base.RulesetLoaded(rules, ai);
@@ -738,6 +749,10 @@ namespace OpenRA.Mods.CA.Traits
 		// DF-2: where the protection squad waits for a predicted attack, and until when.
 		CPos? protectionRally;
 		int protectionHoldUntilTick = -1;
+
+		// AR-S2 (BM_protection_rally_dedup): which rally cell the protection members
+		// were last pushed to, and who carries that push. Only consulted while armed.
+		readonly ProtectionRallyDedup<Actor> protectionRallyDedup = new();
 
 		// TC-2b/TC-3 (§12.17/§12.18): the requester whose defend attempt record is open
 		// on the ally-answer protect rally — null while the squad serves an own threat or
@@ -2060,8 +2075,20 @@ namespace OpenRA.Mods.CA.Traits
 			protectionHoldUntilTick = request.HasValue
 				? Math.Min(request.Value.ExpiresTick, World.WorldTick + Info.ProtectInterval * 10)
 				: World.WorldTick + threat.Value.EtaTicks + Info.ProtectInterval * 10;
-			bot.QueueOrder(new Order("AttackMove", null, Target.FromCell(World, rally), false,
-				groupedActors: protectSq.Units.Select(u => u.Actor).ToArray()));
+			if (Info.UseProtectionRallyDedup)
+			{
+				// AR-S2: the every-interval re-push cancels each defender's in-flight order —
+				// re-push only on a real rally move or for freshly joined members.
+				var emit = protectionRallyDedup.EmitSet(protectSq.Units.Select(u => u.Actor).ToArray(), rally, Info.ProtectionRallyHysteresisCells);
+				if (emit != null)
+					bot.QueueOrder(new Order("AttackMove", null, Target.FromCell(World, rally), false,
+						groupedActors: emit));
+			}
+			else
+			{
+				bot.QueueOrder(new Order("AttackMove", null, Target.FromCell(World, rally), false,
+					groupedActors: protectSq.Units.Select(u => u.Actor).ToArray()));
+			}
 
 			if (allyDefendAnswer != null)
 				CommitAllyDefend(allyDefendAnswer, rally, protectSq.Units.Count);
@@ -2298,6 +2325,7 @@ namespace OpenRA.Mods.CA.Traits
 			protectionRally = null;
 			protectionHoldUntilTick = -1;
 			protectionQuietSinceTick = -1;
+			protectionRallyDedup.Reset();
 			CloseAllyDefend(BotMissionAttemptState.Released, BotMissionReasons.Done);
 			CloseAllyAssist(BotMissionAttemptState.Released, BotMissionReasons.Done);
 			foreach (var n in notifyIdleBaseUnits)
@@ -2349,8 +2377,21 @@ namespace OpenRA.Mods.CA.Traits
 					// DF-3: join the defence for this attack; protection release returns them to the pool afterwards.
 					protectSq.Units.AddRange(sq.Units);
 					sq.Units.Clear();
-					bot.QueueOrder(new Order("AttackMove", null, Target.FromCell(World, rally), false,
-						groupedActors: protectSq.Units.Select(u => u.Actor).ToArray()));
+					if (Info.UseProtectionRallyDedup)
+					{
+						// Same dedup as the main push: the folded members are joiners and
+						// get their first order; members already marching are not re-pushed.
+						var emit = protectionRallyDedup.EmitSet(protectSq.Units.Select(u => u.Actor).ToArray(), rally, Info.ProtectionRallyHysteresisCells);
+						if (emit != null)
+							bot.QueueOrder(new Order("AttackMove", null, Target.FromCell(World, rally), false,
+								groupedActors: emit));
+					}
+					else
+					{
+						bot.QueueOrder(new Order("AttackMove", null, Target.FromCell(World, rally), false,
+							groupedActors: protectSq.Units.Select(u => u.Actor).ToArray()));
+					}
+
 					continue;
 				}
 

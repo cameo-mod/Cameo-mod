@@ -19495,3 +19495,35 @@ Branch `devin/dawn/t3-public-faction` off master `8e86fca23`, worktree `C:/cameo
   same-order Move spam the episode guard does not target). 6/6 matches clean.
 * Demo: third arm (BJ+BK+BL) recorded on ebed3d9dc into the AR-S demo package —
   `bl_on_bj_bk_bl_{1,2,3}_*.orarep` + README addendum.
+
+## 2026-10-05 — EMBER: AR-S2 — BM_protection_rally_dedup (manager re-push emitter found)
+
+* **Attribution (second tagging pass, ~58 sites auto-tagged `TargetString`)**: the residual
+  `x` stream decomposed as untagged `AttackMove` (~5.5k + 2.4k in attrib2), NOT `Move`.
+  Fully tagged run (`attrib3`, hard v hard 1v1): **`SquadManagerBotModuleCA` line 2063 —
+  `PrepositionDefenceTick`'s group `AttackMove(rally)` — 6,016/3,465 issues, 27/28 flagged
+  units, ~95% of flagged churn.** The push fires every `ProtectInterval` (50t)
+  unconditionally, bypasses the squad `OrderMemory` dedup lattice, and cancels each
+  member's in-flight activity — the unit-visible restart. `sq2352`
+  (`ReactWithFastSquads` fold-in push) is the same pattern's second site.
+* Engineer route chains (`e6` assign / `e7` recheck, ~650+1k issues/match) remain a real
+  but secondary emitter — `Recheck` re-issues the full waypoint chain every
+  `RouteRecheckTicks` (100t) at hot targets. Not folded into BM; different mechanism.
+* **Fix**: `ProtectionRallyDedup<T>` (`Squads/ProtectionRallyDedup.cs`, generic over
+  member identity for World-free tests) records the pushed rally cell + issued
+  membership; the push emits only when the rally moved >= `ProtectionRallyHysteresisCells`
+  (4) or members joined — joiner-only emit covers `ReactWithFastSquads` fold-ins.
+  `ReleaseDefenders` resets the lattice. Switch `UseProtectionRallyDedup` (default off;
+  `BM_protection_rally_dedup`), off = unchanged per-interval stream.
+* **Tests**: `ProtectionRallyDedupTest` 8/8 — first-push emits all, same-cell and
+  in-band jitter suppress, past-band redirects, band measured from pushed cell (creep
+  escapes), joiner-only emit, released-then-rejoined re-orders, reset forces next push.
+* **Gates**: build 0E, focused 25/25, isolated boot `BOOT_GATE=PASS`.
+* **Instrumented 3+3 equal-window A/B** (tagged build, hard v hard, window <= 2739f):
+  manager-push stream (sq2063+sq2352) 3,381 -> 251 (**-93%**); full window 11,655 ->
+  1,203 (-89%, -88% frame-normalized). h2 rises (1,221 -> 1,580) because the deduped
+  state orders now flow uninterrupted — expected, not a regression. Flagged units
+  30 -> 34 (the metric also counts legit combat bursts).
+* **Correction to the standing question**: the residual churn is not a binary
+  attack/defend verdict flap — it is the manager's periodic group re-push colliding
+  with state-issued orders. LEARN-P6 stays a decision-quality feature, not order-rate.
