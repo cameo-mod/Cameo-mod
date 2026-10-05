@@ -71,6 +71,22 @@ the kick counter to half-max (P4, escalation by design, now pinned).
 
 `MarchEvalTest`: 9 tests, full truth tables + lazy-draw counting. 1133/1133 suite on INC-g,
 build 0 errors, boot gate PASS.
+# 2026-10-04 — NOVA: hotspot #4 — BuildRegions merge-loop extraction (RegionMergeEval)
+
+*NOVA.* Branch `devin/nova/hotspot4-buildregions` on `origin/inc/2026_10_04g@4cbc73cbf`
+(different assembly — not stacked on the SquadManager chain). The merge loop's decisions ->
+pure static `RegionMergeEval`: `MergeContinues` (round bounds), `IsMergeEligible`
+(active/droppable/touching>=2/strict-min), `SmallestTouchingSize` (min or int.MaxValue
+sentinel), `SelectRoundDrops` (worst-first sort + greedy disjoint-claim batching). Early
+continues preserved so TouchedRegions work is bit-identical.
+
+Findings (fleet NOTE_2026-10-04_nova_hotspot4_tree): F1 stale 'one piece per round' comment
+vs the batch design (fixed same commit); F2 piece-count ceiling ~2x loose vs droppable count
+(harmless); F3 List.Sort tie order non-semantic but per-map deterministic. P2 sub-item: all
+four world.Actors scans verified fog-honest or legitimately static (bridges/own-only/belief).
+
+`RegionMergeEvalTest`: 6 tests, all boundaries pinned. 1130/1130 suite on INC-g, build 0
+errors, boot gate PASS.
 
 # 2026-10-04 — Claude (lead): INC-f doc re-pin, INC-g built and pushed, boot-gate false pass
 
