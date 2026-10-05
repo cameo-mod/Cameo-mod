@@ -1,6 +1,6 @@
 # audit_security — credentials, code execution, supply chain
 
-Files scanned: **2351**
+Files scanned: **2419**
 
 | code | meaning | count | baseline |
 |---|---|---|---|
@@ -21,7 +21,7 @@ _none found_
 
 | file | line | detail |
 |---|---|---|
-| tools/audit/audit_bot_insurance.py | 92 | `eval()` |
+| tools/audit/audit_bot_insurance.py | 93 | `eval()` |
 | tools/audit/audit_fog_honesty.py | 171 | `eval()` |
 | tools/balance/firepower_consumer_report.py | 34 | `exec()` |
 | tools/balance/formula.py | 59 | `eval()` |
