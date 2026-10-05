@@ -1,3 +1,29 @@
+# 2026-10-05 — Devin-Architect: HOTSPOT-RESTACK — hotspot8+hotspot3 onto ars-stutter-gated
+
+*Devin-Architect.* `devin/architect/hotspot8-restack` + `devin/architect/hotspot3-restack` on
+`devin/ember/ars-stutter-gated@e81da54e7` (claimed task 01a10ac0 after the gated branch landed).
+
+- **Restack:** cherry-picked `d332aead8` (hotspot8, `PrepositionDecisionEvalCA`) clean onto the gated
+  branch; `7e51adeab` (hotspot3, `AttackForceEvalCA`) needed one devlog union — code applied clean.
+  Topology preserved: hotspot3 stacks on hotspot8, both sit on the gated ars-stutter, so merging no
+  longer drags in the ungated `e39670678` path differences.
+- **Review fix 1 — SelectChannel wired:** computed after the lazy cascade resolves, used as the
+  proceed gate (`channel == None` replaces the `threat == null && request == null` check — identical
+  semantics: request is non-null iff one of the three request channels produced it). Laziness
+  preserved — `SelectProtectionRequest` still runs only when `threat == null`.
+- **Review fix 2 — `RallyFor`:** dropped the unused `BotPredictedThreat? threat` param (it never
+  read it); call site + 3 test call sites updated.
+- **Review fix 3 — hotspot3 tests:** added the two missing cells — one-below-`MaxIdleUnits` (overflow
+  arm does not fire at 9/10) and `valueOnlyLaunch:false` + `squadValue>0` (waiver must not apply;
+  count gate falls back to `requiredSize`).
+- **Gates:** Release build 0 errors / 8 pre-existing engine lint warnings; Cameo suite 957/957;
+  `audit_fog_honesty.py` PASS (80 files / 263 sites); isolated `boot_isolated.ps1` BOOT_GATE=PASS
+  (package in worktree, 0 exceptions). Multi-TraitInfo: the sweep script does not exist on this
+  pre-inc-05 base; the restack diff adds zero `TraitOrDefault`/`TraitsImplementing`/
+  `FirstEnabledTraitOrDefault` lookups (verified by diff grep) — clean by construction.
+- **Open:** branches are on the gated ars-stutter base (pre-inc-05); lead merges gated first, then
+  this stack — or restacks again if gated rebases.
+
 # 2026-10-05 — Claude (lead): crash repair, INC 2026-10-05, ars-stutter held back
 
 *Claude.* `inc/2026_10_05` on `inc/2026_10_04g` @ 4cbc73cbf.

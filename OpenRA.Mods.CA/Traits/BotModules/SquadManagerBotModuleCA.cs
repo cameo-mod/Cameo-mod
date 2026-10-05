@@ -1937,7 +1937,7 @@ namespace OpenRA.Mods.CA.Traits
 					// matched by the marked ClientIndex fallback.
 					var myId = Player.InternalName ?? "#" + Player.ClientIndex;
 					var elected = election.FirstOrDefault(a =>
-						a.ResponderId == myId || (a.ResponderId == null && a.ResponderClientIndex == Player.ClientIndex));
+						PrepositionDecisionEvalCA.IsElectedResponder(a.ResponderId, a.ResponderClientIndex, myId, Player.ClientIndex));
 					if (elected != null)
 					{
 						var broadcasts = TeamBlackboard.CollectBroadcasts(Player);
@@ -1988,7 +1988,7 @@ namespace OpenRA.Mods.CA.Traits
 				{
 					var myId = Player.InternalName ?? "#" + Player.ClientIndex;
 					var elected = assistElection.FirstOrDefault(a =>
-						a.ResponderId == myId || (a.ResponderId == null && a.ResponderClientIndex == Player.ClientIndex));
+						PrepositionDecisionEvalCA.IsElectedResponder(a.ResponderId, a.ResponderClientIndex, myId, Player.ClientIndex));
 					if (elected != null)
 					{
 						var broadcasts = TeamBlackboard.CollectBroadcasts(Player);
@@ -2010,26 +2010,31 @@ namespace OpenRA.Mods.CA.Traits
 				}
 			}
 
-			if (threat == null && request == null)
+			// The precedence ladder, evaluated after the lazy cascade resolves:
+			// SelectProtectionRequest above only ran when threat == null, the
+			// ally-answer blocks only when both were null. An own-pool request is
+			// the Request channel only when no ally answer produced it.
+			var channel = PrepositionDecisionEvalCA.SelectChannel(threat != null,
+				request != null && allyDefendAnswer == null && allyAssistAssignment == null,
+				allyDefendAnswer != null, allyAssistAssignment != null);
+			if (channel == PrepositionChannelCA.None)
 				return;
 
-			CPos rally;
-			if (request.HasValue)
-			{
-				// Escorts go TO the guarded point - no defensive-building snap:
-				// the MCV/outpost is usually nowhere near a building.
-				rally = request.Value.Location;
-			}
-			else
+			// Escorts go TO the guarded point - no defensive-building snap:
+			// the MCV/outpost is usually nowhere near a building.
+			var nearestOrTarget = CPos.Zero;
+			if (!request.HasValue)
 			{
 				var target = threat.Value.Target;
 				var searchSquared = Info.PrepositionDefenceSearchCells * Info.PrepositionDefenceSearchCells;
-				rally = World.ActorsHavingTrait<AttackBase>()
+				nearestOrTarget = World.ActorsHavingTrait<AttackBase>()
 					.Where(a => a.Owner == Player && !a.IsDead && a.Info.HasTraitInfo<BuildingInfo>()
 						&& (a.Location - target).LengthSquared <= searchSquared)
 					.OrderBy(a => (a.Location - target).LengthSquared)
 					.Select(a => (CPos?)a.Location).FirstOrDefault() ?? target;
 			}
+
+			var rally = PrepositionDecisionEvalCA.RallyFor(request, nearestOrTarget);
 
 			var protectSq = GetSquadOfType(SquadCAType.Protection) ?? RegisterNewSquad(bot, SquadCAType.Protection);
 			var leases = BotUnitLeases.Of(Player);
@@ -2038,8 +2043,7 @@ namespace OpenRA.Mods.CA.Traits
 			// CA-2: forward defence keeps a reserve too — the rally outside the base
 			// radius is the donor's non-emergency case; a rally inside it means the
 			// threat is at the doorstep and gets the full pool.
-			var emergency = (rally - initialBaseCenter).LengthSquared <=
-				(long)Info.MaxBaseRadius * Info.MaxBaseRadius;
+			var emergency = PrepositionDecisionEvalCA.IsEmergencyRally(rally, initialBaseCenter, Info.MaxBaseRadius);
 			var toDraft = DefendDraftLimit(draftable.Count, emergency, Info, utilityAxesProviders);
 			for (var i = 0; i < toDraft; i++)
 			{
@@ -2057,9 +2061,7 @@ namespace OpenRA.Mods.CA.Traits
 			// publisher refreshes its request every ProtectInterval, so the hold is a
 			// rolling window - a retracted request lets the escort release within one
 			// interval, and ExpiresTick is the failsafe bound for a dead publisher.
-			protectionHoldUntilTick = request.HasValue
-				? Math.Min(request.Value.ExpiresTick, World.WorldTick + Info.ProtectInterval * 10)
-				: World.WorldTick + threat.Value.EtaTicks + Info.ProtectInterval * 10;
+			protectionHoldUntilTick = PrepositionDecisionEvalCA.HoldUntilTick(request, threat, World.WorldTick, Info.ProtectInterval);
 			bot.QueueOrder(new Order("AttackMove", null, Target.FromCell(World, rally), false,
 				groupedActors: protectSq.Units.Select(u => u.Actor).ToArray()));
 
@@ -3126,8 +3128,8 @@ namespace OpenRA.Mods.CA.Traits
 			var requiredSize = ApplyForceScale(desiredAttackForceSize, forceScale);
 
 			// CA F2p2 (A5-2): ValueOnlyAttackLaunch drops the unit-count gate when a squad value threshold is configured; MaxIdleUnits still applies.
-			var countGateMet = (Info.ValueOnlyAttackLaunch && Info.SquadValue > 0) || unitsHangingAroundTheBase.Count >= requiredSize;
-			if (unitsHangingAroundTheBase.Count >= maxIdleUnits || (idleUnitsValue >= requiredValue && countGateMet))
+			if (AttackForceEvalCA.ShouldLaunch(unitsHangingAroundTheBase.Count, maxIdleUnits,
+					idleUnitsValue, requiredValue, requiredSize, Info.ValueOnlyAttackLaunch, Info.SquadValue))
 			{
 				// 12.5: squads form to the same mix production builds - an assault
 				// missing a required role stages until the pool covers it, bounded
@@ -3167,7 +3169,7 @@ namespace OpenRA.Mods.CA.Traits
 						}
 
 						var heldTicks = World.WorldTick - defendMissionHeldSince;
-						if (heldTicks <= Math.Max(0, Info.MissionDefendHoldTicks))
+						if (AttackForceEvalCA.DefendHoldActive(heldTicks, Info.MissionDefendHoldTicks))
 						{
 							AIUtils.BotDebug("AI ({0}): holding {1} idle units for Defend mission in region {2} ({3}/{4} ticks)",
 								Player.ClientIndex, unitsHangingAroundTheBase.Count, mission.RegionIndex, heldTicks, Info.MissionDefendHoldTicks);
@@ -3220,9 +3222,8 @@ namespace OpenRA.Mods.CA.Traits
 					if (!Info.UseRaidMissionSteering)
 						return null;
 
-					var cap = (int)Math.Min(int.MaxValue, Math.Max(
-						(long)idleUnitsValue * Info.RaidMissionSteerOvercommitPercent / 100,
-						(long)Info.RaidMissionSteerMinValue));
+					var cap = AttackForceEvalCA.RaidSteerCap(idleUnitsValue,
+						Info.RaidMissionSteerOvercommitPercent, Info.RaidMissionSteerMinValue);
 					return BestRaidForSteering(missionProviders, cap);
 				}
 
@@ -3297,8 +3298,8 @@ namespace OpenRA.Mods.CA.Traits
 						// Ground vehicles that can hit ground, at most a third of the
 						// assault: the screen must win the flanker fight without
 						// stripping the raid itself (12.4a review item).
-						var escortsNeeded = Math.Min(artilleryParent.Units.Count * Info.FireSupportEscortPerArtillery,
-							attackForce.Units.Count / 3);
+						var escortsNeeded = AttackForceEvalCA.EscortsNeeded(
+							artilleryParent.Units.Count, attackForce.Units.Count, Info.FireSupportEscortPerArtillery);
 						foreach (var escort in attackForce.Units
 							.Where(u => !Info.FireSupportTypes.Contains(u.Actor.Info.Name) && CanEscortArtillery(u.Actor))
 							.OrderByDescending(u => UnitValue(u.Actor))
