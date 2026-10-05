@@ -192,7 +192,7 @@ def takeover_blocks(ev):
     out = []
     for name, rec in ev["records"]:
         if "takeover" in rec:
-            out.append((name, rec["player"]["name"], rec["takeover"]))
+            out.append((name, rec["player"]["seat"], rec["takeover"]))
     return out
 
 
@@ -456,8 +456,7 @@ def j_takeover(trigger, seat_player, want):
 
 
 def j_admin_kill(result, ev, blocks):
-    """Scenario e: admin c0 killed -> its seat Multi0 is taken over and the
-    record lands on surviving client c1 with controller_client=1 (re-election)."""
+    """Scenario e: admin c0 killed -> anonymous seat_1 takeover is logged on c1."""
     if not result["game_started"]:
         return False, "game never started"
     if ev["exceptions"]:
@@ -465,11 +464,10 @@ def j_admin_kill(result, ev, blocks):
     if ev["sync_reports"]:
         return False, f"sync reports (desync): {ev['sync_reports']}"
     hits = [(n, p, b) for n, p, b in blocks
-            if n == "c1" and p == "Multi0" and b.get("trigger") == "disconnect"
-            and b.get("controller_client") == 1]
+            if n == "c1" and p == "seat_1" and b.get("trigger") == "disconnect"]
     if not hits:
-        return False, ("no disconnect takeover block for Multi0 on c1 with "
-                       f"controller_client=1; blocks={blocks}")
+        return False, ("no anonymous disconnect takeover block for seat_1 on c1; "
+                       f"blocks={blocks}")
     return True, f"admin-kill takeover re-elected to c1: {hits}"
 
 
@@ -636,7 +634,7 @@ SCENARIOS = {
     },
 
     # e) kill the ADMIN c0 (enemy seat) -> takeover re-elects controller to c1
-    #    (controller_client=1 in the record); c1 then surrenders its own seat:
+    #    (anonymous controller provenance is omitted); c1 then surrenders its own seat:
     #    last on its solo team -> Defeat -> seat0's takeover AI wins -> record
     #    lands on c1, the surviving client. No lobby bots: a mid-game admin
     #    disconnect leaves BotControllerClientIndex dangling (engine only

@@ -802,7 +802,7 @@ def team_scoreboard(results: list[dict]) -> dict:
             allies = row.get("allies") or []
             members = frozenset(
                 {str(row.get("record_id") or "").rsplit("|", 1)[1]}
-                | {str(a.get("name")) for a in allies}
+                | {str(a.get("seat")) for a in allies}
             )
             team = by_members.get(members)
             if team is None:
@@ -1281,16 +1281,15 @@ def main() -> int:
                     # player.spawn is the lobby SpawnPoint — 0 for map-side
                     # duelists. The physical spawn is the slot binding:
                     # Multi0/BotA -> index 0, Multi1/BotB -> index 1.
-                    "spawn": SPAWN_INDEX_BY_SLOT.get((r.get("player") or {}).get("name"),
-                                                   (r.get("player") or {}).get("spawn")),
+                    "spawn": (r.get("player") or {}).get("spawn"),
                     "opponent": {"bot_type": ((r.get("opponents") or [{}])[0] or {}).get("bot_type")},
                     # Full relationship lists (2v2: one ally, two opponents).
                     "allies": [
-                        {"name": a.get("name"), "bot_type": a.get("bot_type"), "outcome": a.get("outcome")}
+                        {"seat": a.get("seat"), "bot_type": a.get("bot_type"), "outcome": a.get("outcome")}
                         for a in (r.get("allies") or [])
                     ],
                     "opponents": [
-                        {"name": o.get("name"), "bot_type": o.get("bot_type"), "outcome": o.get("outcome")}
+                        {"seat": o.get("seat"), "bot_type": o.get("bot_type"), "outcome": o.get("outcome")}
                         for o in (r.get("opponents") or [])
                     ],
                 }

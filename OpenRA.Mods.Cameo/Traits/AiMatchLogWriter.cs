@@ -392,6 +392,11 @@ namespace OpenRA.Mods.Cameo.Traits
 			return type == WorldType.Regular && !replay && !loadingSave && host;
 		}
 
+		// Stable, anonymous within-match key. PlayerReference.Name can be map-authored,
+		// so never persist it even when it looks like a lobby slot.
+		internal static string SeatKey(World world, OpenRA.Player player) =>
+			"seat_" + (Array.IndexOf(world.Players, player) + 1).ToString(CultureInfo.InvariantCulture);
+
 		string BuildLog(World world)
 		{
 			var gameUid = world.LobbyInfo.GlobalSettings.GameUid;
@@ -409,8 +414,8 @@ namespace OpenRA.Mods.Cameo.Traits
 				takeover?.TryGetTakeoverRecord(player, out takeoverRecord);
 
 				AppendObjectStart(lines);
-				AppendNumber(lines, "schema", 2, true);
-				AppendString(lines, "record_id", gameUid + "|" + player.InternalName);
+				AppendNumber(lines, "schema", 3, true);
+				AppendString(lines, "record_id", gameUid + "|" + SeatKey(world, player));
 				AppendString(lines, "recorded_utc", DateTime.UtcNow.ToString("o", CultureInfo.InvariantCulture));
 				AppendString(lines, "mod_version", Game.ModData.Manifest.Metadata.Version);
 				AppendString(lines, "game_uid", world.LobbyInfo.GlobalSettings.GameUid ?? "");
@@ -420,7 +425,7 @@ namespace OpenRA.Mods.Cameo.Traits
 				AppendNumber(lines, "timestep", world.Timestep);
 
 				AppendObjectPropertyStart(lines, "player");
-				AppendString(lines, "name", player.InternalName, true);
+				AppendString(lines, "seat", SeatKey(world, player), true);
 				AppendString(lines, "bot_type", player.BotType ?? takeoverRecord?.BotType);
 				AppendString(lines, "faction", player.Faction.InternalName);
 				AppendNumber(lines, "team", team);
@@ -452,7 +457,6 @@ namespace OpenRA.Mods.Cameo.Traits
 					AppendNumber(lines, "taken_over_at", takeoverRecord.Tick, true);
 					AppendString(lines, "trigger", takeoverRecord.Trigger == TakeoverTrigger.Surrender ? "surrender" : "disconnect");
 					AppendString(lines, "bot_type", takeoverRecord.BotType);
-					AppendNumber(lines, "controller_client", takeoverRecord.ControllerClientId);
 					lines.Append('}');
 				}
 
@@ -478,10 +482,75 @@ namespace OpenRA.Mods.Cameo.Traits
 
 				AppendRelationships(lines, world, takeover, player, "opponents", false);
 				AppendRelationships(lines, world, takeover, player, "allies", true);
+				AppendSeats(lines, world);
+				AppendOpponentSignatures(lines, world, player);
 				lines.Append("}\n");
 			}
 
 			return lines.ToString();
+		}
+
+		static void AppendOpponentSignatures(StringBuilder builder, World world, OpenRA.Player subject)
+		{
+			AppendArrayPropertyStart(builder, "opponent_signatures");
+			var enemies = world.Players.Where(IsEligiblePlayer)
+				.Where(p => p != subject && !p.AlliedPlayersMask.Overlaps(subject.PlayerMask))
+				.OrderBy(p => SeatKey(world, p), StringComparer.Ordinal).ToArray();
+			var module = subject.PlayerActor.TraitsImplementing<BotModules.MasterAiBotModule>().FirstOrDefault();
+			for (var i = 0; i < enemies.Length; i++)
+			{
+				if (i > 0) builder.Append(',');
+				var enemy = enemies[i];
+				AppendOpponentSignature(builder, SeatKey(world, enemy), module?.Situation?.Enemies?.GetValueOrDefault(enemy),
+					enemy.Faction.InternalName, Outcome(enemy.WinState));
+			}
+			builder.Append(']');
+		}
+
+		internal static void AppendOpponentSignature(StringBuilder builder, string seat,
+			BotModules.EnemyProfile profile, string trueFaction, string outcome)
+		{
+			AppendObjectStart(builder);
+			AppendString(builder, "seat", seat, true);
+			builder.Append(",\"seen\":");
+			if (profile == null) builder.Append("null");
+			else
+			{
+				builder.Append('{');
+				AppendString(builder, "faction", profile.FactionName ?? "", true);
+				AppendNumber(builder, "army_value", profile.ArmyValue);
+				AppendNumber(builder, "infantry_value", profile.InfantryValue);
+				AppendNumber(builder, "vehicle_value", profile.VehicleValue);
+				AppendNumber(builder, "air_value", profile.AirValue);
+				AppendNumber(builder, "naval_value", profile.NavalValue);
+				AppendNumber(builder, "defence_value", profile.DefenceValue);
+				AppendNumber(builder, "building_count", profile.BuildingCount);
+				AppendNumber(builder, "harvester_count", profile.HarvesterCount);
+				AppendNumber(builder, "known_regions", profile.KnownRegions);
+				AppendNumber(builder, "last_seen_tick", profile.LastSeenTick);
+				builder.Append('}');
+			}
+			AppendObjectPropertyStart(builder, "truth");
+			AppendString(builder, "faction", trueFaction, true);
+			AppendString(builder, "outcome", outcome);
+			builder.Append('}').Append('}');
+		}
+
+		static void AppendSeats(StringBuilder builder, World world)
+		{
+			AppendArrayPropertyStart(builder, "seats");
+			var players = world.Players.Where(IsEligiblePlayer).ToArray();
+			for (var i = 0; i < players.Length; i++)
+			{
+				if (i > 0) builder.Append(',');
+				var p = players[i];
+				AppendObjectStart(builder);
+				AppendString(builder, "seat", SeatKey(world, p), true);
+				AppendString(builder, "faction", p.Faction.InternalName);
+				AppendString(builder, "home", $"{p.HomeLocation.X},{p.HomeLocation.Y}");
+				builder.Append('}');
+			}
+			builder.Append(']');
 		}
 
 		static void AppendRelationships(StringBuilder builder, World world, BotTakeoverTracker tracker, OpenRA.Player subject, string property, bool allies, bool first = false)
@@ -494,7 +563,7 @@ namespace OpenRA.Mods.Cameo.Traits
 			var relationships = world.Players
 				.Where(IsEligiblePlayer)
 				.Where(p => p != subject && p.AlliedPlayersMask.Overlaps(subject.PlayerMask) == allies)
-				.OrderBy(p => p.InternalName, StringComparer.Ordinal)
+				.OrderBy(p => SeatKey(world, p), StringComparer.Ordinal)
 				.ToArray();
 
 			for (var i = 0; i < relationships.Length; i++)
@@ -505,12 +574,16 @@ namespace OpenRA.Mods.Cameo.Traits
 				var player = relationships[i];
 				var team = LoggedTeam(world, tracker, player);
 				AppendObjectStart(builder);
-				AppendString(builder, "name", player.InternalName, true);
-				AppendBoolean(builder, "is_bot", player.IsBot);
-				AppendString(builder, "bot_type", player.BotType ?? "");
+				AppendString(builder, "seat", SeatKey(world, player), true);
+				if (player.IsBot)
+					AppendString(builder, "bot_type", player.BotType ?? "");
 				AppendString(builder, "faction", player.Faction.InternalName);
-				AppendNumber(builder, "team", team);
-				AppendNumber(builder, "handicap", player.Handicap);
+				AppendString(builder, "home", $"{player.HomeLocation.X},{player.HomeLocation.Y}");
+				if (player.IsBot)
+				{
+					AppendNumber(builder, "team", team);
+					AppendNumber(builder, "handicap", player.Handicap);
+				}
 				AppendString(builder, "outcome", Outcome(player.WinState));
 				builder.Append('}');
 			}

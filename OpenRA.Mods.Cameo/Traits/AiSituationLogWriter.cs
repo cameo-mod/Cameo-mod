@@ -120,14 +120,14 @@ namespace OpenRA.Mods.Cameo.Traits
 				gameUid = fallbackGameUid;
 			var lines = new StringBuilder();
 			foreach (var player in world.Players.Where(AiMatchLogWriter.IsLoggableBot)
-				.OrderBy(p => p.InternalName, StringComparer.Ordinal))
+				.OrderBy(p => AiMatchLogWriter.SeatKey(world, p), StringComparer.Ordinal))
 			{
 				var module = player.PlayerActor.TraitsImplementing<MasterAiBotModule>().FirstOrDefault();
 				if (module == null)
 					continue;
 				foreach (var situation in module.PendingSituations)
-					AppendSituation(lines, gameUid, world.LobbyInfo.GlobalSettings.GameUid ?? "", world.Map.Uid,
-						player.InternalName, player.Faction.InternalName, player.BotType ?? "",
+					AppendSituation(lines, p => AiMatchLogWriter.SeatKey(world, p), gameUid, world.LobbyInfo.GlobalSettings.GameUid ?? "", world.Map.Uid,
+						AiMatchLogWriter.SeatKey(world, player), player.Faction.InternalName, player.BotType ?? "",
 						situation.OwnPersonality, situation);
 			}
 			return lines.ToString();
@@ -233,7 +233,8 @@ namespace OpenRA.Mods.Cameo.Traits
 				AiMatchLogWriter.AppendNumber(builder, "vx_per_kilotick", c.VXPerKilotick);
 				AiMatchLogWriter.AppendNumber(builder, "vy_per_kilotick", c.VYPerKilotick);
 				AiMatchLogWriter.AppendString(builder, "class", c.Class ?? "");
-				AiMatchLogWriter.AppendString(builder, "owner", c.Owner?.InternalName ?? "");
+				// Owner references are intentionally omitted: this snapshot has no world map
+				// available for translating the slot to an anonymous seat key.
 				builder.Append('}');
 			}
 
@@ -314,20 +315,28 @@ namespace OpenRA.Mods.Cameo.Traits
 			string mapUid, string playerName, string faction, string botType, string currentPersonality,
 			BotSituation situation)
 		{
+			AppendSituation(builder, p => p == situation.MainTarget ? "seat_2" : "seat_1", gameUid, worldGameUid,
+				mapUid, "seat_1", faction, botType, currentPersonality, situation);
+		}
+
+		static void AppendSituation(StringBuilder builder, Func<OpenRA.Player, string> seatOf, string gameUid, string worldGameUid,
+			string mapUid, string playerName, string faction, string botType, string currentPersonality,
+			BotSituation situation)
+		{
 			AiMatchLogWriter.AppendObjectStart(builder);
-			AiMatchLogWriter.AppendNumber(builder, "schema", 2, true);
+			AiMatchLogWriter.AppendNumber(builder, "schema", 3, true);
 			AiMatchLogWriter.AppendString(builder, "kind", "situation");
 			AiMatchLogWriter.AppendString(builder, "record_id", gameUid + "|" + playerName + "|" + situation.Tick);
 			AiMatchLogWriter.AppendString(builder, "game_uid", worldGameUid);
 			AiMatchLogWriter.AppendString(builder, "map_uid", mapUid);
-			AiMatchLogWriter.AppendString(builder, "player", playerName);
+			AiMatchLogWriter.AppendString(builder, "seat", playerName);
 			AiMatchLogWriter.AppendString(builder, "faction", faction);
 			AiMatchLogWriter.AppendString(builder, "bot_type", botType);
 			AiMatchLogWriter.AppendNumber(builder, "tick", situation.Tick);
 			AiMatchLogWriter.AppendString(builder, "urgency", situation.Urgency.ToString().ToLowerInvariant());
 			AiMatchLogWriter.AppendString(builder, "personality_current", currentPersonality);
 			AiMatchLogWriter.AppendString(builder, "personality_candidate", situation.Personality ?? "");
-			AiMatchLogWriter.AppendString(builder, "main_target", situation.MainTarget?.InternalName ?? "");
+			AiMatchLogWriter.AppendString(builder, "main_target", situation.MainTarget == null ? "" : seatOf(situation.MainTarget));
 			AiMatchLogWriter.AppendNumber(builder, "main_target_score",
 				situation.MainTarget != null && situation.Enemies.TryGetValue(situation.MainTarget, out var target) ? target.Score : 0);
 			if (situation.Mission == null)
@@ -448,14 +457,14 @@ namespace OpenRA.Mods.Cameo.Traits
 			AppendExpansion(builder, situation.Expansion);
 
 			AiMatchLogWriter.AppendArrayPropertyStart(builder, "enemies");
-			var enemies = situation.Enemies.Values.OrderBy(e => e.Name ?? "", StringComparer.Ordinal).ToArray();
+			var enemies = situation.Enemies.Values.OrderBy(e => seatOf(e.Player), StringComparer.Ordinal).ToArray();
 			for (var i = 0; i < enemies.Length; i++)
 			{
 				if (i > 0)
 					builder.Append(',');
 				var enemy = enemies[i];
 				AiMatchLogWriter.AppendObjectStart(builder);
-				AiMatchLogWriter.AppendString(builder, "name", enemy.Name ?? "", true);
+				AiMatchLogWriter.AppendString(builder, "seat", seatOf(enemy.Player), true);
 				AiMatchLogWriter.AppendString(builder, "faction", enemy.FactionName ?? "");
 				AiMatchLogWriter.AppendBoolean(builder, "alive", enemy.Alive);
 				AiMatchLogWriter.AppendNumber(builder, "army_value", enemy.ArmyValue);

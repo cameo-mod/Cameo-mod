@@ -43,10 +43,10 @@ def knob_vector(match: dict | None) -> str:
 
 
 def build(data: dict[str, list[dict]]) -> dict:
-    matches = {(m.get("game_uid"), m.get("player", {}).get("name")): m for m in data["matches"]}
+    matches = {(m.get("game_uid"), m.get("player", {}).get("seat")): m for m in data["matches"]}
     by_place = collections.defaultdict(list)
     for p in data["placements"]:
-        by_place[(p.get("game_uid"), p.get("player"))].append(p)
+        by_place[(p.get("game_uid"), p.get("seat"))].append(p)
 
     rows = []
     for key in sorted(by_place, key=lambda k: (str(k[0]), str(k[1]))):

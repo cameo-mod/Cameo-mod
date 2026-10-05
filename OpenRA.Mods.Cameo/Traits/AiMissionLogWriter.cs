@@ -9,6 +9,7 @@
 #endregion
 
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 using OpenRA.Graphics;
@@ -36,7 +37,7 @@ namespace OpenRA.Mods.Cameo.Traits
 
 	public class AiMissionLogWriter : IWorldLoaded, IGameOver, ITick, IBotMissionRecordSink, INotifyActorDisposing
 	{
-		public const string Schema = "mission-card/1";
+		public const string Schema = "mission-card/2";
 
 		readonly AiMissionLogWriterInfo info;
 		readonly StringBuilder pending = new();
@@ -49,6 +50,8 @@ namespace OpenRA.Mods.Cameo.Traits
 		int nextRetryTick;
 		AiLogFileAppender appender;
 		string inFlight;
+		readonly Dictionary<OpenRA.Player, string> seats = new();
+		readonly Dictionary<string, string> seatReplacements = new(StringComparer.Ordinal);
 
 		public int Dropped { get; private set; }
 
@@ -63,6 +66,11 @@ namespace OpenRA.Mods.Cameo.Traits
 
 			mapUid = world.Map.Uid;
 			mapTitle = world.Map.Title;
+			for (var i = 0; i < world.Players.Length; i++)
+			{
+				seats[world.Players[i]] = AiMatchLogWriter.SeatKey(world, world.Players[i]);
+				seatReplacements[world.Players[i].InternalName] = seats[world.Players[i]];
+			}
 			nextFlushTick = info.FlushIntervalTicks;
 		}
 
@@ -77,12 +85,13 @@ namespace OpenRA.Mods.Cameo.Traits
 				return;
 			}
 
-			pending.Append(BuildLine(record, gameUid, mapUid, mapTitle, DateTime.UtcNow)).Append('\n');
+			pending.Append(BuildLine(record, gameUid, mapUid, mapTitle, seats.GetValueOrDefault(record.Player, ""), seatReplacements, DateTime.UtcNow)).Append('\n');
 			pendingLines++;
 		}
 
 		/// <summary>One JSONL line, free of world state beyond the record so it can be tested.</summary>
-		public static string BuildLine(BotMissionRecord r, string gameUid, string mapUid, string mapTitle, DateTime utc)
+		public static string BuildLine(BotMissionRecord r, string gameUid, string mapUid, string mapTitle, string seat,
+			IReadOnlyDictionary<string, string> seatReplacements, DateTime utc)
 		{
 			var b = new StringBuilder();
 			AiMatchLogWriter.AppendObjectStart(b);
@@ -91,10 +100,10 @@ namespace OpenRA.Mods.Cameo.Traits
 			AiMatchLogWriter.AppendString(b, "game_uid", gameUid);
 			AiMatchLogWriter.AppendString(b, "map_uid", mapUid);
 			AiMatchLogWriter.AppendString(b, "map_title", mapTitle);
-			AiMatchLogWriter.AppendString(b, "player", r.Player?.InternalName);
+			AiMatchLogWriter.AppendString(b, "seat", seat);
 			AiMatchLogWriter.AppendString(b, "faction", r.Player?.Faction?.InternalName);
 			AiMatchLogWriter.AppendString(b, "bot", r.Player?.BotType);
-			AiMatchLogWriter.AppendString(b, "mission_id", r.MissionId);
+			AiMatchLogWriter.AppendString(b, "mission_id", Anonymous(r.MissionId, seatReplacements));
 			if (r.Event is BotMissionEvent e)
 			{
 				// A mission-level event: the card's own story, no attempt (AI_MISSION_CARDS §2.2).
@@ -105,7 +114,7 @@ namespace OpenRA.Mods.Cameo.Traits
 			{
 				AiMatchLogWriter.AppendString(b, "record_kind", "attempt");
 				AiMatchLogWriter.AppendNumber(b, "attempt", r.Attempt);
-				AiMatchLogWriter.AppendString(b, "attempt_id", r.MissionId + "|A" + r.Attempt.ToString(CultureInfo.InvariantCulture));
+				AiMatchLogWriter.AppendString(b, "attempt_id", Anonymous(r.MissionId, seatReplacements) + "|A" + r.Attempt.ToString(CultureInfo.InvariantCulture));
 				AiMatchLogWriter.AppendString(b, "state", BotMissionLog.StateName(r.State));
 				AiMatchLogWriter.AppendBoolean(b, "terminal", BotMissionLog.IsTerminal(r.State));
 			}
@@ -136,6 +145,17 @@ namespace OpenRA.Mods.Cameo.Traits
 
 			b.Append('}');
 			return b.ToString();
+		}
+
+		public static string BuildLine(BotMissionRecord r, string gameUid, string mapUid, string mapTitle, DateTime utc) =>
+			BuildLine(r, gameUid, mapUid, mapTitle, "seat_1", new Dictionary<string, string>(), utc);
+
+		static string Anonymous(string value, IReadOnlyDictionary<string, string> replacements)
+		{
+			if (string.IsNullOrEmpty(value)) return value;
+			foreach (var pair in replacements)
+				value = value.Replace(pair.Key, pair.Value, StringComparison.Ordinal);
+			return value;
 		}
 
 		void ITick.Tick(Actor self)

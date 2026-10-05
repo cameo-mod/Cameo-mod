@@ -102,7 +102,7 @@ namespace OpenRA.Mods.Cameo.Test
 			var line = AiMissionLogWriter.BuildLine(record, "g-uid", "m-uid", "A Nuclear Winter", new DateTime(2026, 9, 30, 12, 0, 0, DateTimeKind.Utc));
 			using var doc = JsonDocument.Parse(line);
 			var root = doc.RootElement;
-			Assert.That(root.GetProperty("schema").GetString(), Is.EqualTo("mission-card/1"));
+		Assert.That(root.GetProperty("schema").GetString(), Is.EqualTo("mission-card/2"));
 			Assert.That(root.GetProperty("record_kind").GetString(), Is.EqualTo("attempt"));
 			Assert.That(root.GetProperty("mission_id").GetString(), Is.EqualTo("capture:Multi1:oilb:526"));
 			Assert.That(root.GetProperty("attempt_id").GetString(), Is.EqualTo("capture:Multi1:oilb:526|A1"));
