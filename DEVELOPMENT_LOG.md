@@ -1,3 +1,44 @@
+# 2026-10-05 — Devin-T3Verify: PREDICTOR-PARITY P1 — effective-damage port + live per-actor stats
+
+*Devin.* Branch `devin/t3verify/predictor-parity`, worktree `C:\cameo-wt\parity`, rebased onto `inc/2026_10_05 @ fe4459c9c`:
+
+- C# port of the balance pipeline's effective-damage model under `BotModuleLogic/`:
+  `MiniYamlMirror` (resolved yaml surface without an engine `Ruleset`), `BotEffectiveDamage`
+  (formula/scatter/percentage/heaviness), `BotTargetModel` (census + armor weights),
+  `BotWeaponModel` (analyse + derived metrics + per-armour decomposition),
+  `BotWeaponModelTable` (`FromFiles` for tests, `Get(Ruleset)` lazy runtime seam).
+- Parity vs `docs/balance/derived` fixtures: 2619 rows / 1570 weapons / 0 failures;
+  charge_up 14 rows / 0 failures; scatter PDF + target-model invariants PASS
+  (`WeaponModelParityTest`). Fixes en route: `Armor`/`Armor@x` census scan (not
+  `Armable`), engagement-vs-census weight aggregation, **int32 intermediate overflow in
+  percentage runtime HP** (`afterUnits * 100` widened to long before the multiply).
+- Live per-actor path (lead ruling 2026-10-05): `BotUnitProfiles.Get(Actor, viewer, eff)`
+  reads `TraitsImplementing<Armament>()` filtered `!IsTraitDisabled` (multi-TraitInfo-sweep
+  convention), aggregated `IFirepowerModifier`/`IReloadModifier` per armament, current
+  `IHealth.HP`, first enabled `Armor.Info.Type`, `GetEnabledTargetTypes()`. Fog contract:
+  own actors in full, enemies only while `CanBeViewedByPlayer`; anything else → cached
+  type profile. `DamagePerTickAgainst` evaluates the model at the observed armour via
+  `KByArmor`/`PctByArmor`/`FoldedByArmor` → `EffectivePerShotAgainst(armor)`, then applies
+  power/cycle scales and the defender's `IDamageModifier` (damage-weighted per warhead)
+  when both sides are live. Legacy multi-damage-warheads sum via `BotWarheadTerm[]` under
+  the flag until W24; classic term stays main-warhead-only.
+- Switch `UseEffectiveDamageModel` (default off) on SquadManagerBotModuleCA,
+  SiegeEvaluatorBotModule, MasterAiBotModule (BotSituation), CombatVetoBotModule,
+  EngagementLogBotModule, UnitBuilderBotModuleCA; registered as `BM_live_combat_model`
+  in `tools/ai/increment_switches.yaml`. Production planning, remembered enemies/defences,
+  and MaxRange/CanTarget reads stay type-level.
+- 8 new `BotCombatPredictorTest` cases: firepower/veterancy, reload, granted armament,
+  damaged HP, flag bit-identity, armour-aware model row, unmodelled fallback, multi-warhead sum.
+
+Gates (on the pre-rebase base; re-run post-rebase):
+- build: 0 warnings / 0 errors (Release, win-x64)
+- Cameo tests: 945/945
+- parity: 2619 rows / 0 failures; charge_up 14/0; scatter PDF PASS; target invariants PASS
+- boot gate: PASS (isolated per-run support dir via `C:/cameo-wt/boot_isolated.ps1`)
+
+Not in P1 (later phases): NOVA situational target terms (P2), shields/meters (P3),
+closing time/range factors at engagement distance (P4).
+
 # 2026-10-05 — Claude (lead): crash repair, INC 2026-10-05, ars-stutter held back
 
 *Claude.* `inc/2026_10_05` on `inc/2026_10_04g` @ 4cbc73cbf.

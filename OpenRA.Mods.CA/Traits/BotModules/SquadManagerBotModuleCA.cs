@@ -459,6 +459,12 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Floor for the steered-raid cap regardless of the idle pool's value. 0 = ratio only.")]
 		public readonly int RaidMissionSteerMinValue = 0;
 
+		[Desc("BM_live_combat_model: run every fight prediction and focus-fire pick on the",
+			"balance pipeline's effective-damage model (reliability, falloff, every warhead,",
+			"charge-up) instead of the classic main-warhead DPS. False = classic numbers,",
+			"bit-identical.")]
+		public readonly bool UseEffectiveDamageModel = false;
+
 		[Desc("6g (CN A3): rules-derived BotTargetTags each squad type prefers when choosing targets (artillery, harvester, production, superweapon).")]
 		public readonly HashSet<string> AssaultPriorityTags = [];
 		public readonly HashSet<string> RushPriorityTags = [];
@@ -2880,11 +2886,18 @@ namespace OpenRA.Mods.CA.Traits
 			CanaryObservedAll(enemyList, "predicted-ratio");
 
 			var rules = World.Map.Rules;
+			var eff = Info.UseEffectiveDamageModel;
 			var own = squad.Units.Where(u => !unitCannotBeOrdered(u.Actor)).GroupBy(u => u.Actor.Info)
-				.Select(g => (BotUnitProfiles.Get(rules, g.Key), g.Count())).ToList();
+				.SelectMany(g => eff
+					? g.Select(u => (BotUnitProfiles.Get(u.Actor, Player, true), 1))
+					: new[] { (BotUnitProfiles.Get(rules, g.Key, false), g.Count()) })
+				.ToList();
 			var foes = enemyList.Where(e => e.Info.HasTraitInfo<AttackBaseInfo>()).GroupBy(e => e.Info)
-				.Select(g => (BotUnitProfiles.Get(rules, g.Key), g.Count())).ToList();
-			return BotCombatPredictor.Predict(own, foes).Ratio;
+				.SelectMany(g => eff
+					? g.Select(e => (BotUnitProfiles.Get(e, Player, true), 1))
+					: new[] { (BotUnitProfiles.Get(rules, g.Key, false), g.Count()) })
+				.ToList();
+			return BotCombatPredictor.Predict(own, foes, eff).Ratio;
 		}
 
 		int RetreatRatioPct => Math.Max(0, (botLimits?.Info.RetreatRatioPct ?? Info.DefaultRetreatRatioPct) + (InMatchAdaptation?.RetreatRatioDeltaPct ?? 0));

@@ -29,15 +29,16 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public static BotCombatPredictor.Prediction Predict(
 			IReadOnlyList<(BotUnitProfile Unit, int Count)> own,
 			IReadOnlyList<(BotUnitProfile Unit, int Count)> enemy,
-			IBotEngagementPriors priors)
+			IBotEngagementPriors priors,
+			bool useEffective = false)
 		{
 			var ownHp = SumHp(own);
 			var enemyHp = SumHp(enemy);
 			// The fitted file measures OUR faction's trades: it corrects own-side damage only. The enemy
 			// direction stays unfitted (null = neutral), so a uniform prior can't cancel itself out.
 			var pred = BotCombatPredictor.Predict(
-				DamagePerTick(own, enemy, enemyHp, priors), ownHp,
-				DamagePerTick(enemy, own, ownHp, null), enemyHp);
+				DamagePerTick(own, enemy, enemyHp, priors, useEffective), ownHp,
+				DamagePerTick(enemy, own, ownHp, null, useEffective), enemyHp);
 
 			// The fitted attrition exponent warps the aggregate ratio (the fitter's AttritionExponentMilli);
 			// fractions re-derive from the warped ratio so the Lanchester invariant holds. Neutral = 1000.
@@ -60,7 +61,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		}
 
 		static double DamagePerTick(IReadOnlyList<(BotUnitProfile Unit, int Count)> attackers,
-			IReadOnlyList<(BotUnitProfile Unit, int Count)> targets, double targetHp, IBotEngagementPriors priors)
+			IReadOnlyList<(BotUnitProfile Unit, int Count)> targets, double targetHp, IBotEngagementPriors priors,
+			bool useEffective)
 		{
 			if (targetHp <= 0)
 				return 0;
@@ -69,7 +71,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			foreach (var (attacker, count) in attackers)
 				foreach (var (target, targetCount) in targets)
 				{
-					var dpt = attacker.DamagePerTickAgainst(target);
+					var dpt = attacker.DamagePerTickAgainst(target, useEffective);
 					if (priors != null)
 						dpt = dpt * priors.CorrectionMilli(attacker, target) / 1000.0;
 
