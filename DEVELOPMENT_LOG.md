@@ -20488,3 +20488,8 @@ and the exact merged tree failed the fog audit.
 - Integration branch `codex/inc-learn` starts at `origin/master` 700bb16483f6d92664153e98d6f2560c312acaab and merges reviewed P0 fix 874fda89888cafcaba5716e50f49e79b3d3c2298 (base 229a2563b). Merge worktree: `C:/cameo-wt/inc-learn`.
 - `DEVELOPMENT_LOG.md` conflict resolved by retaining the current master history; older P0 checkpoint details remain in `STATUS_2026-10-10_learn_p0_p6_frozen.md` and `REREVIEW_2026-10-10_learn_p0_p6_vp.md`.
 - This integration does not claim runtime parity, P6 acceptance, or merge to master. P0/P6 switch-off order identity and P6 armed order-rate/churn remain separate gates.
+
+## 2026-10-10 — P6 all-squad-types source restack in codex/inc-learn
+
+- Integrated P6 source commits `bec5ab9c3` plus reviewed deltas `27eb42521`, `0249f6fc0`, and VP-approved `0b19d6290` onto current master + P0. The unrelated base branch's BO commits were not cherry-picked; current master already carries the `BO_squad_move_dedup` configuration.
+- Runtime gates are still pending; this records a local candidate only and does not authorize merge/master publication.

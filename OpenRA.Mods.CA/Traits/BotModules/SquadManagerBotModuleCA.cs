@@ -621,6 +621,13 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Dead band on the protect rally before the manager re-pushes the squad's march order (BO_squad_move_dedup). A threat/request target jittering inside the band keeps the in-flight order; a real redirect beyond it re-orders everyone.")]
 		public readonly int ProtectionRallyHysteresisCells = 4;
 
+		[Desc("LEARN-P6 (BP_squad_desire, SPEC 2026-10-05 §11): the enabled IBotSquadDesire provider's " +
+			"picked stance replaces the binary engage/retreat verdict in the ground idle branch — " +
+			"Attack commits, every other stance takes the retreat path. The provider computes " +
+			"desirability from the packaged fog-honest SquadDesireSignals; it is the only owner of " +
+			"stance choice (§19.3). Off, or no enabled provider, keeps the unchanged binary call.")]
+		public readonly bool UseSquadDesire = false;
+
 		public override void RulesetLoaded(Ruleset rules, ActorInfo ai)
 		{
 			base.RulesetLoaded(rules, ai);
@@ -845,6 +852,23 @@ namespace OpenRA.Mods.CA.Traits
 				}
 
 				return inMatchAdaptation;
+			}
+		}
+		// LEARN-P6 (SPEC §11): the enabled squad-desire provider this tick. Absent (classic, switch
+		// off) the ground idle branch keeps the binary engage/retreat call bit-identical.
+		IBotSquadDesire squadDesire;
+		int squadDesireTick = -1;
+		internal IBotSquadDesire SquadDesire
+		{
+			get
+			{
+				if (squadDesireTick != World.WorldTick)
+				{
+					squadDesireTick = World.WorldTick;
+					squadDesire = Player.PlayerActor.TraitsImplementing<IBotSquadDesire>().FirstEnabledTraitOrDefault();
+				}
+
+				return squadDesire;
 			}
 		}
 		IBotProtectionRequestProvider[] protectionRequestProviders;
@@ -2985,6 +3009,51 @@ namespace OpenRA.Mods.CA.Traits
 
 		internal bool PredictsWin(SquadCA squad, IEnumerable<Actor> enemies) =>
 			PredictedRatio(squad, enemies) * 100 >= (double)RetreatRatioPct * Info.EngageMarginPct / 100;
+
+		// LEARN-P6 (SPEC §11): the scatter normaliser — a member this far from the squad centre
+		// counts as fully scattered (ScatterMilli = mean member distance vs this, clamped to 1000).
+		static readonly long ScatterReferenceLength = WDist.FromCells(16).Length;
+
+		// LEARN-P6 (SPEC §11): the fog-honest fact pack the desire provider consumes each eval —
+		// provider assemblies never read squad internals, so everything it needs is collected here.
+		// SeenEnemyValue reuses the enemy list the caller already gathered; BaseEnemyValue reuses the
+		// same observed-enemy scan around the base centre. All strengths are ValuedInfo cost sums.
+		internal SquadDesireSignals SquadDesireSignalsFor(SquadCA squad, List<Actor> enemyUnits)
+		{
+			var enemyValue = 0;
+			foreach (var e in enemyUnits)
+				enemyValue += UnitValue(e);
+
+			var baseValue = 0;
+			foreach (var e in VisibleEnemiesNear(World.Map.CenterOfCell(initialBaseCenter), WDist.FromCells(Info.MaxBaseRadius)))
+				baseValue += UnitValue(e);
+
+			var count = 0;
+			var healthSum = 0;
+			long scatterSum = 0;
+			var centre = squad.CenterPosition;
+			foreach (var u in squad.Units)
+			{
+				if (unitCannotBeOrdered(u.Actor))
+					continue;
+
+				count++;
+				var h = u.Actor.TraitOrDefault<IHealth>();
+				healthSum += h == null || h.MaxHP <= 0 ? SquadDesireEval.Scale : h.HP * SquadDesireEval.Scale / h.MaxHP;
+				scatterSum += Math.Min(ScatterReferenceLength, (u.Actor.CenterPosition - centre).Length);
+			}
+
+			var healthMilli = count > 0 ? healthSum / count : SquadDesireEval.Scale;
+			var scatterMilli = count > 0
+				? (int)Math.Min(SquadDesireEval.Scale, scatterSum / count * SquadDesireEval.Scale / ScatterReferenceLength)
+				: 0;
+			var ratioMilli = (int)Math.Min(SquadDesireEval.MaxRatioMilli,
+				PredictedRatio(squad, enemyUnits) * SquadDesireEval.Scale);
+
+			return new SquadDesireSignals(
+				SquadValueOf(squad), enemyValue, baseValue, ratioMilli, healthMilli, scatterMilli,
+				squad.IsTargetValid, squad.Type is SquadCAType.Guerrilla or SquadCAType.Harass, World.WorldTick);
+		}
 
 		// CN3: remembered DetectCloaked coverage, aggregated across the enabled
 		// stealth-doctrine providers. Empty when `cn3_stealth_squads` arms no

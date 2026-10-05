@@ -329,3 +329,8 @@ groups:
   BP_effective_unit_value: # AI architecture synthesis F10 / Part IV A4: enable the learned arsenal weight for genericbot only; off preserves the authored neutral weight path
     BotLearnedPriors:
       UseLearnedPriors: true
+  BP_squad_desire:               # EMBER LEARN-P6: default-off per-squad stance provider; no provider leaves legacy decisions intact
+    GrantConditionOnBotOwner@squaddesire:
+      Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla, exploit_expansion, exploit_steamroller, exploit_tech
+    SquadManagerBotModuleCA:
+      UseSquadDesire: true
