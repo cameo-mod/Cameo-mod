@@ -357,7 +357,9 @@ def switch_spec():
     code path that applies the arms. Missing file -> no groups."""
     if not SWITCHES.is_file():
         return [], collections.OrderedDict()
-    return apply_increment_switches.load_spec(SWITCHES)
+    # load_spec also returns the co-arm `needs` map (harvest ledger P3); the audit reads groups only.
+    skip, groups, _ = apply_increment_switches.load_spec(SWITCHES)
+    return skip, groups
 
 
 # ----------------------------------------------------------------------------- #
