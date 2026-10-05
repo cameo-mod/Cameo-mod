@@ -1,12 +1,12 @@
 # audit_recent_changes — last 14 day(s) of history
 
-Commits reviewed: **769**, files touched: **4929**
+Commits reviewed: **884**, files touched: **5018**
 
 | code | meaning | count | blocking |
 |---|---|---|---|
 | R1 | balance yaml edited without the ledger | 24 | yes |
-| R2 | audit script never run by run_all.sh | 10 | yes |
-| R3 | provenance (wrong-identity trailer blocks; missing one on the shared identity is review-only) | 33 | partly |
+| R2 | audit script never run by run_all.sh | 11 | yes |
+| R3 | provenance (wrong-identity trailer blocks; missing one on the shared identity is review-only) | 37 | partly |
 | R4 | engine/mod.config change (needs boot gate) | 5 | no |
 
 
@@ -40,7 +40,7 @@ Commits reviewed: **769**, files touched: **4929**
 | d36f3b0a | 2026-09-24 | W23-RA batch 1: TKM file retrofit (20/21 weapons | Damage, MinRange, Range, ReloadDelay, Speed, Spread |
 
 
-## R2 — audits missing from run_all.sh (10)
+## R2 — audits missing from run_all.sh (11)
 
 | script | problem |
 |---|---|
@@ -49,6 +49,7 @@ Commits reviewed: **769**, files touched: **4929**
 | tools/audit/audit_chrome_master_freshness.py | not invoked by run_all.sh |
 | tools/audit/audit_chrome_scale_variants.py | not invoked by run_all.sh |
 | tools/audit/audit_inline_effects.py | not invoked by run_all.sh |
+| tools/audit/audit_multi_traitinfo_scan.py | not invoked by run_all.sh |
 | tools/audit/audit_orphan_removals.py | not invoked by run_all.sh |
 | tools/audit/audit_promotion_superiority.py | not invoked by run_all.sh |
 | tools/audit/audit_scaled_bullet_overrides.py | not invoked by run_all.sh |
@@ -56,10 +57,14 @@ Commits reviewed: **769**, files touched: **4929**
 | tools/audit/audit_weapon_identity.py | not invoked by run_all.sh |
 
 
-## R3 — commits without provenance (33)
+## R3 — commits without provenance (37)
 
 | commit | date | author | problem | severity |
 |---|---|---|---|---|
+| 772b8de5 | 2026-10-04 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
+| 0ddcb6b0 | 2026-10-04 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
+| 08d28859 | 2026-10-04 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
+| 6fd362b6 | 2026-10-04 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
 | 8fd71f6b | 2026-10-03 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
 | a382470b | 2026-10-03 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
 | 612014a7 | 2026-10-03 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
@@ -110,21 +115,21 @@ Commits reviewed: **769**, files touched: **4929**
 
 | file | commits touching it |
 |---|---|
-| DEVELOPMENT_LOG.md | 256 |
-| docs/design/AI_ARCHITECTURE.md | 144 |
-| mods/cameo/ai/ai.yaml | 130 |
-| docs/HANDOFF.md | 109 |
-| OpenRA.Mods.CA/Traits/BotModules/SquadManagerBotModuleCA.cs | 81 |
+| DEVELOPMENT_LOG.md | 311 |
+| docs/design/AI_ARCHITECTURE.md | 163 |
+| mods/cameo/ai/ai.yaml | 139 |
+| docs/HANDOFF.md | 126 |
+| OpenRA.Mods.CA/Traits/BotModules/SquadManagerBotModuleCA.cs | 86 |
+| docs/DESIGN.md | 76 |
+| OpenRA.Mods.Cameo/Traits/BotModules/BotSituation.cs | 71 |
 | docs/LESSONS_LEARNED.md | 68 |
-| docs/DESIGN.md | 67 |
-| OpenRA.Mods.Cameo/Traits/BotModules/BotSituation.cs | 65 |
-| tools/ai/increment_switches.yaml | 56 |
+| tools/ai/increment_switches.yaml | 65 |
 | docs/design/ROADMAP.md | 54 |
-| docs/design/AI_MODULE_MAP.md | 39 |
-| tools/audit/fog_honesty_manifest.json | 37 |
-| docs/audit/doc_claims.yaml | 35 |
-| docs/balance/derived/tiberiandawn_nod.json | 32 |
-| OpenRA.Mods.Cameo.Test/MasterAiBotModuleTest.cs | 32 |
+| docs/design/AI_MODULE_MAP.md | 47 |
+| tools/audit/fog_honesty_manifest.json | 39 |
+| docs/audit/doc_claims.yaml | 38 |
+| OpenRA.Mods.Cameo.Test/MasterAiBotModuleTest.cs | 36 |
+| docs/design/AI_MATCH_LOG.md | 35 |
 
 
 ## Reviewer checklist (not machine-checkable)
@@ -138,10 +143,10 @@ Commits reviewed: **769**, files touched: **4929**
 
 ## Enforcement
 
-R1/R3 block only for commits on or after **2026-08-12**: 24 R1 and 0 R3 of 24/33 findings are in scope; the rest predate the gate.
+R1/R3 block only for commits on or after **2026-08-12**: 24 R1 and 0 R3 of 24/37 findings are in scope; the rest predate the gate.
 
 
 ## FAIL
 
-- 24 R1, 10 R2, 0 R3 blocking finding(s)
+- 24 R1, 11 R2, 0 R3 blocking finding(s)
 

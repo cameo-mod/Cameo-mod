@@ -1,13 +1,13 @@
 # audit_error_handling — Python tooling error handling
 
-Files scanned: **814**
+Files scanned: **824**
 
 | code | meaning | count | baseline |
 |---|---|---|---|
 | E1 | bare except / except BaseException | 5 | 2 |
-| E2 | handler discards the error | 143 | 30 |
+| E2 | handler discards the error | 154 | 30 |
 | E3 | open() without encoding= | 164 | 90 |
-| E4 | subprocess call without check= | 65 | 9 |
+| E4 | subprocess call without check= | 70 | 9 |
 
 
 ## Files that do not parse
@@ -28,28 +28,37 @@ Files scanned: **814**
 | tools/balance/apply_harvester_durability.py | 420 | `except BaseException` |
 
 
-## E2 — 143 finding(s)
+## E2 — 154 finding(s)
 
 | file | line | detail |
 |---|---|---|
 | tools/ai/ab_increment.py | 357 | handler body discards the error |
 | tools/ai/ab_increment.py | 497 | handler body discards the error |
-| tools/ai/ab_increment.py | 664 | handler body discards the error |
-| tools/ai/ab_increment.py | 723 | handler body discards the error |
+| tools/ai/ab_increment.py | 672 | handler body discards the error |
+| tools/ai/ab_increment.py | 731 | handler body discards the error |
 | tools/ai/derive_guerrilla_roles.py | 113 | handler body discards the error |
 | tools/ai/derive_roles_preview.py | 94 | handler body discards the error |
 | tools/ai/derive_roles_preview.py | 275 | handler body discards the error |
 | tools/ai/fight_report.py | 32 | handler body discards the error |
 | tools/ai/fit_arsenal_priors.py | 44 | handler body discards the error |
-| tools/ai/fit_engagement_priors.py | 86 | handler body discards the error |
+| tools/ai/fit_engagement_priors.py | 105 | handler body discards the error |
+| tools/ai/fit_engagement_priors.py | 221 | handler body discards the error |
+| tools/ai/fit_engagement_priors.py | 260 | handler body discards the error |
+| tools/ai/fit_engagement_priors.py | 267 | handler body discards the error |
+| tools/ai/fit_engagement_priors.py | 272 | handler body discards the error |
+| tools/ai/fit_engagement_priors.py | 277 | handler body discards the error |
 | tools/ai/gen_fransbot_lists.py | 140 | handler body discards the error |
-| tools/ai/run_ai_match_batch.py | 719 | handler body discards the error |
+| tools/ai/run_ai_match_batch.py | 389 | handler body discards the error |
+| tools/ai/run_ai_match_batch.py | 734 | handler body discards the error |
+| tools/ai/takeover_smoke.py | 111 | handler body discards the error |
+| tools/ai/takeover_smoke.py | 127 | handler body discards the error |
+| tools/ai/takeover_smoke.py | 169 | handler body discards the error |
 | tools/ai/team_coordination_report.py | 60 | handler body discards the error |
 | tools/ai/tune_build_order.py | 90 | handler body discards the error |
 | tools/audit/audit_ai.py | 45 | handler body discards the error |
 | tools/audit/audit_armor_upgrade_harm.py | 101 | handler body discards the error |
 | tools/audit/audit_balance_sheet.py | 134 | handler body discards the error |
-| tools/audit/audit_bot_insurance.py | 144 | handler body discards the error |
+| tools/audit/audit_bot_insurance.py | 145 | handler body discards the error |
 | tools/audit/audit_dune_rank_decoration.py | 15 | handler body discards the error |
 | tools/audit/audit_elite_gating.py | 16 | handler body discards the error |
 | tools/audit/audit_engine_freshness.py | 76 | handler body discards the error |
@@ -58,6 +67,8 @@ Files scanned: **814**
 | tools/audit/audit_k_linearity.py | 180 | handler body discards the error |
 | tools/audit/audit_missile_role_family.py | 134 | handler body discards the error |
 | tools/audit/audit_missing_elite.py | 21 | handler body discards the error |
+| tools/audit/audit_multi_traitinfo.py | 181 | handler body discards the error |
+| tools/audit/audit_multi_traitinfo.py | 298 | handler body discards the error |
 | tools/audit/audit_orphans.py | 93 | handler body discards the error |
 | tools/audit/audit_plating_exclusivity.py | 94 | handler body discards the error |
 | tools/audit/audit_power_budget.py | 100 | handler body discards the error |
@@ -219,7 +230,7 @@ Files scanned: **814**
 | tools/reference/extract_opendune_units.py | 917 | `os.open()` without encoding= |
 | tools/reference/extract_ra3_units.py | 1348 | `os.open()` without encoding= |
 | tools/tests/test_aedis_target_policy.py | 135 | `fixture.read_text()` without encoding= |
-| tools/tests/test_ai_headquarters_refinery_cleanup.py | 39 | `read_text()` without encoding= |
+| tools/tests/test_ai_headquarters_refinery_cleanup.py | 48 | `read_text()` without encoding= |
 | tools/tests/test_ai_logging_integration.py | 21 | `read_text()` without encoding= |
 | tools/tests/test_anchor_dossier.py | 362 | `read_text()` without encoding= |
 | tools/tests/test_chained_owned_names.py | 11 | `read_text()` without encoding= |
@@ -235,9 +246,9 @@ Files scanned: **814**
 | tools/tests/test_extract_versus_dta_overlay.py | 25 | `path.write_text()` without encoding= |
 | tools/tests/test_extract_versus_dta_overlay.py | 33 | `path.write_text()` without encoding= |
 | tools/tests/test_extract_versus_dta_overlay.py | 43 | `path.write_text()` without encoding= |
-| tools/tests/test_fit_engagement_priors.py | 141 | `f.write_text()` without encoding= |
-| tools/tests/test_fit_engagement_priors.py | 143 | `f.write_text()` without encoding= |
-| tools/tests/test_fit_engagement_priors.py | 312 | `write_text()` without encoding= |
+| tools/tests/test_fit_engagement_priors.py | 164 | `f.write_text()` without encoding= |
+| tools/tests/test_fit_engagement_priors.py | 166 | `f.write_text()` without encoding= |
+| tools/tests/test_fit_engagement_priors.py | 362 | `write_text()` without encoding= |
 | tools/tests/test_frozen_hero_reference.py | 13 | `read_text()` without encoding= |
 | tools/tests/test_frozen_hero_reference.py | 14 | `read_text()` without encoding= |
 | tools/tests/test_frozen_hero_reference.py | 23 | `read_text()` without encoding= |
@@ -347,7 +358,7 @@ Files scanned: **814**
 | tools/tilesets/transfer_ai_cliff_style.py | 101 | `Image.open()` without encoding= |
 
 
-## E4 — 65 finding(s)
+## E4 — 70 finding(s)
 
 | file | line | detail |
 |---|---|---|
@@ -358,14 +369,19 @@ Files scanned: **814**
 | tools/ai/ab_increment.py | 299 | `subprocess.run()` without check= |
 | tools/ai/ab_increment.py | 324 | `subprocess.run()` without check= |
 | tools/ai/ab_increment.py | 509 | `subprocess.run()` without check= |
-| tools/ai/ab_increment.py | 538 | `subprocess.run()` without check= |
-| tools/ai/ab_increment.py | 587 | `subprocess.Popen()` without check= |
-| tools/ai/ab_increment.py | 755 | `subprocess.run()` without check= |
+| tools/ai/ab_increment.py | 546 | `subprocess.run()` without check= |
+| tools/ai/ab_increment.py | 595 | `subprocess.Popen()` without check= |
+| tools/ai/ab_increment.py | 763 | `subprocess.run()` without check= |
+| tools/ai/coverage_report.py | 70 | `subprocess.run()` without check= |
 | tools/ai/dump_bot_modules.py | 62 | `subprocess.Popen()` without check= |
 | tools/ai/dump_bot_modules.py | 77 | `subprocess.run()` without check= |
-| tools/ai/run_ai_match_batch.py | 645 | `subprocess.Popen()` without check= |
-| tools/ai/run_ai_match_batch.py | 843 | `subprocess.run()` without check= |
+| tools/ai/run_ai_match_batch.py | 660 | `subprocess.Popen()` without check= |
+| tools/ai/run_ai_match_batch.py | 858 | `subprocess.run()` without check= |
 | tools/ai/run_league.py | 357 | `subprocess.run()` without check= |
+| tools/ai/takeover_smoke.py | 66 | `subprocess.run()` without check= |
+| tools/ai/takeover_smoke.py | 85 | `subprocess.Popen()` without check= |
+| tools/ai/takeover_smoke.py | 93 | `subprocess.run()` without check= |
+| tools/ai/takeover_smoke.py | 98 | `subprocess.run()` without check= |
 | tools/audit/audit_ai_arch_freshness.py | 36 | `subprocess.run()` without check= |
 | tools/audit/audit_ai_frankenstein.py | 76 | `subprocess.run()` without check= |
 | tools/audit/audit_ca_unused.py | 46 | `subprocess.run()` without check= |
@@ -421,8 +437,8 @@ Files scanned: **814**
 ## FAIL
 
 - E1: 5 > baseline 2
-- E2: 143 > baseline 30
+- E2: 154 > baseline 30
 - E3: 164 > baseline 90
-- E4: 65 > baseline 9
+- E4: 70 > baseline 9
 - 1 file(s) do not parse
 

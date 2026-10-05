@@ -6,8 +6,8 @@ A number in prose is true only on the day it is written. These are the claims a 
 
 | claim | documented | measured | status |
 |---|--:|--:|---|
-| `ai_contract_distinct_module_types` | 73 | 73 | ✅ |
-| `ai_contract_player_module_instances` | 98 | 98 | ✅ |
+| `ai_contract_distinct_module_types` | 77 | 77 | ✅ |
+| `ai_contract_player_module_instances` | 104 | 104 | ✅ |
 | `ai_contract_world_module_instances` | 1 | 1 | ✅ |
 | `shield_versus_mean` | 184.71 | 184.71 | ✅ |
 | `shield_hp_factor` | 0.541389 | 0.541389 | ✅ |
