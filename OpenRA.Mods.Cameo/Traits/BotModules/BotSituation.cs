@@ -335,6 +335,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			"consumers read one publisher instead of re-deriving RegionMemory. Off until the",
 			"next increment A/B (same convention as UseZoneTopology; switch group F).")]
 		public readonly bool UseInfluenceLayers = false;
+		[Desc("BM_live_combat_model: army/defended combat ratios use the balance pipeline's",
+			"effective-damage model instead of the classic main-warhead DPS. False = classic,",
+			"bit-identical.")]
+		public readonly bool UseEffectiveDamageModel = false;
 		[Desc("IM-1: EMA weight percent per snapshot on each zone's remembered-threat history —",
 			"the 'where they usually are' average a stale sighting decays toward.")]
 		public readonly int InfluenceHistoryAlphaPercent = 20;
@@ -2542,8 +2546,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		(int Army, int Defended) CombatRatios(IEnumerable<Actor> ownActors)
 		{
 			var rules = player.World.Map.Rules;
+			var eff = Info.UseEffectiveDamageModel;
 			var own = ownActors.Where(IsCombatUnit).GroupBy(a => a.Info)
-				.Select(g => (BotUnitProfiles.Get(rules, g.Key), g.Count())).ToList();
+				.SelectMany(g => eff
+					? g.Select(a => (BotUnitProfiles.Get(a, player, true), 1))
+					: new[] { (BotUnitProfiles.Get(rules, g.Key, false), g.Count()) })
+				.ToList();
 
 			var army = new Dictionary<ActorInfo, int>();
 			var defences = new Dictionary<ActorInfo, int>();
@@ -2563,11 +2571,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				}
 			}
 
-			var enemyArmy = army.Select(kv => (BotUnitProfiles.Get(rules, kv.Key), kv.Value)).ToList();
+			var enemyArmy = army.Select(kv => (BotUnitProfiles.Get(rules, kv.Key, eff), kv.Value)).ToList();
 			// Walls count as defences for targeting but cannot shoot back: only armed defences join the fight.
-			var enemyAll = enemyArmy.Concat(defences.Select(kv => (BotUnitProfiles.Get(rules, kv.Key), kv.Value))
+			var enemyAll = enemyArmy.Concat(defences.Select(kv => (BotUnitProfiles.Get(rules, kv.Key, eff), kv.Value))
 				.Where(d => d.Item1.Weapons.Length > 0)).ToList();
-			return (RatioPct(BotCombatPredictor.Predict(own, enemyArmy)), RatioPct(BotCombatPredictor.Predict(own, enemyAll)));
+			return (RatioPct(BotCombatPredictor.Predict(own, enemyArmy, eff)), RatioPct(BotCombatPredictor.Predict(own, enemyAll, eff)));
 		}
 
 		static int RatioPct(BotCombatPredictor.Prediction p) => (int)Math.Round(p.Ratio * 100);

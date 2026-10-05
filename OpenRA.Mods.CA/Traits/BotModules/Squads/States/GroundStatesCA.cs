@@ -1174,14 +1174,16 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 				if (targets.Count > 0)
 				{
-					var squadProfiles = owner.Units.ConvertAll(u => BotUnitProfiles.Get(owner.World.Map.Rules, u.Actor.Info));
+					var eff = owner.SquadManager.Info.UseEffectiveDamageModel;
+					var viewer = owner.SquadManager.Player;
+					var squadProfiles = owner.Units.ConvertAll(u => BotUnitProfiles.Get(u.Actor, viewer, eff));
 					var pick = SquadMicroEvalCA.PickFocusTarget(squadProfiles,
-						targets.ConvertAll(t => LiveHpProfile(owner.World, t)));
+						targets.ConvertAll(t => eff ? BotUnitProfiles.Get(t, viewer, true) : LiveHpProfile(owner.World, t, false)), eff);
 
 					if (pick >= 0)
 					{
 						focus = targets[pick];
-						focusProfile = LiveHpProfile(owner.World, focus);
+						focusProfile = eff ? BotUnitProfiles.Get(focus, viewer, true) : LiveHpProfile(owner.World, focus, false);
 					}
 				}
 			}
@@ -1224,8 +1226,10 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				return true;
 			}
 
-			var ownProfile = BotUnitProfiles.Get(owner.World.Map.Rules, unit.Info);
-			var targetProfile = BotUnitProfiles.Get(owner.World.Map.Rules, assignedTarget.Info);
+			var eff = owner.SquadManager.Info.UseEffectiveDamageModel;
+			var viewer = owner.SquadManager.Player;
+			var ownProfile = eff ? BotUnitProfiles.Get(unit, viewer, true) : BotUnitProfiles.Get(owner.World.Map.Rules, unit.Info, false);
+			var targetProfile = eff ? BotUnitProfiles.Get(assignedTarget, viewer, true) : BotUnitProfiles.Get(owner.World.Map.Rules, assignedTarget.Info, false);
 			var standoff = SquadMicroEvalCA.KiteStandoff(ownProfile, targetProfile,
 				WDist.FromCells(owner.SquadManager.Info.SquadMicroKiteMarginCells));
 			if (standoff is WDist standoffDist)
@@ -1246,7 +1250,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			}
 
 			if (focus != null && focusProfile != null
-				&& ownProfile.DamagePerTickAgainst(focusProfile) > 0
+				&& ownProfile.DamagePerTickAgainst(focusProfile, eff) > 0
 				&& (focus.CenterPosition - unit.CenterPosition).HorizontalLengthSquared
 					<= (long)ownProfile.MaxRange.Length * ownProfile.MaxRange.Length)
 			{
@@ -1263,9 +1267,9 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 		// A rules profile with the actor's CURRENT hit points — PickFocusTarget's
 		// time-to-kill must see a near-dead target as near-dead, not at the
 		// pristine MaxHP the cache stores.
-		static BotUnitProfile LiveHpProfile(World world, Actor actor)
+		static BotUnitProfile LiveHpProfile(World world, Actor actor, bool useEffective)
 		{
-			var profile = BotUnitProfiles.Get(world.Map.Rules, actor.Info);
+			var profile = BotUnitProfiles.Get(world.Map.Rules, actor.Info, useEffective);
 			var health = actor.TraitOrDefault<IHealth>();
 			if (health == null || health.HP == profile.Hp)
 				return profile;

@@ -31,6 +31,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		"conditions and keeps no state another module reads; its writer only appends at game over on the host, outside replays.")]
 	public class EngagementLogBotModuleInfo : ConditionalTraitInfo
 	{
+		[Desc("BM_live_combat_model: the logged prediction reads the balance pipeline's",
+			"effective-damage model instead of the classic main-warhead DPS. False = classic,",
+			"bit-identical.")]
+		public readonly bool UseEffectiveDamageModel = false;
+
 		public override object Create(ActorInitializer init) { return new EngagementLogBotModule(init.Self, this); }
 	}
 
@@ -470,7 +475,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (flagsCache.TryGetValue(info, out var f))
 				return f;
 
-			var profile = BotUnitProfiles.Get(world.Map.Rules, info);
+			var profile = BotUnitProfiles.Get(world.Map.Rules, info, Info.UseEffectiveDamageModel);
 			var building = info.HasTraitInfo<BuildingInfo>();
 			var harvester = info.HasTraitInfo<HarvesterInfo>();
 			var hasAttack = info.HasTraitInfo<AttackBaseInfo>();
@@ -736,7 +741,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			var prediction = BotCombatPredictor.Predict(
 				own.Select(kv => (kv.Key.Profile, kv.Value)).ToList(),
-				enemy.Select(kv => (kv.Key.Profile, kv.Value)).ToList());
+				enemy.Select(kv => (kv.Key.Profile, kv.Value)).ToList(),
+				Info.UseEffectiveDamageModel);
 			seen.PredictedRatioMilli = (int)Math.Round(prediction.Ratio * 1000);
 			seen.PredictedOwnSurvivingPermille = (int)Math.Round(prediction.OwnSurvivingFraction * 1000);
 			seen.PredictedEnemySurvivingPermille = (int)Math.Round(prediction.EnemySurvivingFraction * 1000);

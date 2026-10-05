@@ -30,7 +30,8 @@ namespace OpenRA.Mods.CA.Traits
 		/// squad weapon can hurt are unkillable and never picked. Returns -1
 		/// when nothing is killable.
 		/// </summary>
-		public static int PickFocusTarget(IReadOnlyList<BotUnitProfile> squad, IReadOnlyList<BotUnitProfile> targets)
+		public static int PickFocusTarget(IReadOnlyList<BotUnitProfile> squad, IReadOnlyList<BotUnitProfile> targets,
+			bool useEffective = false)
 		{
 			var best = -1;
 			double bestTtk = 0;
@@ -42,7 +43,7 @@ namespace OpenRA.Mods.CA.Traits
 				var target = targets[i];
 				var squadDps = 0.0;
 				foreach (var own in squad)
-					squadDps += own.DamagePerTickAgainst(target);
+					squadDps += own.DamagePerTickAgainst(target, useEffective);
 
 				if (squadDps <= 0 || target.Hp <= 0)
 					continue;
@@ -50,7 +51,7 @@ namespace OpenRA.Mods.CA.Traits
 				var ttk = target.Hp / squadDps;
 				var threat = 0.0;
 				foreach (var own in squad)
-					threat += target.DamagePerTickAgainst(own);
+					threat += target.DamagePerTickAgainst(own, useEffective);
 
 				if (best < 0
 					|| ttk < bestTtk
