@@ -274,6 +274,46 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void AClassicScanDropsGoneAndIdleBeforeTheStuckCheck()
+		{
+			// P0 regression: with no registry the per-tick sweep is a strict no-op, so the
+			// scan's RemoveAll is the ONLY exit for gone/idle tracked units. Before the fix
+			// they survived to the stuck check, where CurrentActivity is null for an idle
+			// unit — a hard NRE on classic. Drive one full classic scan and prove it.
+			var log = new List<string>();
+			var me = Uninitialized.Player();
+			var idle = Unit(me);                     // CurrentActivity == null — the NRE bait
+			var boarded = Unit(me, inWorld: false);  // gone: left the world into the garrison
+			var active = Marchers(idle, boarded);
+
+			var dropped = LoadGarrisonerBotModuleCA.ScanStep(new LogBot(log), active,
+				new Dictionary<Actor, int>(), new Dictionary<Actor, int>(),
+				null, "loader", me, 1828, Now, 9144);
+
+			Assert.That(dropped, Is.EqualTo(2), "the scan is their exit — no exceptions, both gone");
+			Assert.That(active, Is.Empty);
+		}
+
+		[Test]
+		public void AClassicScanDoesNotStopAnAlreadyDoneUnit()
+		{
+			// Companion to the P0 fix: the scan must not queue a Stop for a unit its
+			// RemoveAll already dropped — classic never ordered tracked units.
+			var log = new List<string>();
+			var bot = new LogBot(log);
+			var me = Uninitialized.Player();
+			var idle = Unit(me);
+			var active = Marchers(idle);
+
+			LoadGarrisonerBotModuleCA.ScanStep(bot, active,
+				new Dictionary<Actor, int>(), new Dictionary<Actor, int>(),
+				null, "loader", me, 1828, Now, 9144);
+
+			Assert.That(bot.Queued, Is.Empty);
+			Assert.That(active, Is.Empty);
+		}
+
+		[Test]
 		public void ALostRenewalReleasesAndDropsTheUnit()
 		{
 			var log = new List<string>();

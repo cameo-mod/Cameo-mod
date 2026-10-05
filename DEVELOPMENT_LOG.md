@@ -1,3 +1,24 @@
+# 2026-10-05 — Devin-T2Verify: AR-9 P0 re-review fix — classic scan NRE on gone/idle garrisoners
+
+*Devin-T2Verify.* REQUEST CHANGES on `191196e04`: a P0 classic crash. Before AR-9 the scan's
+`RemoveAll` dropped boarded/dead/idle units (`unitCannotBeOrderedOrIsIdle`) BEFORE the stuck
+check; moving that into the lease-gated per-tick sweep left classic with no exit for them, and
+`p.Actor.CurrentActivity.ChildActivity` NRE'd on the first idle garrisoner (`CurrentActivity`
+is null while idle). The two P1 fixes themselves were confirmed correct and are kept as-is.
+
+- **`ScanStep` seam** owns the whole scan-cadence tracked-unit phase (renewal RemoveAll, stuck
+  expiry, stuck check) on the module's real predicates. Its RemoveAll restores gone/idle
+  removal **only when `leases == null`** — bit-identical to pre-AR-9 (`TryClaim(null)` is true,
+  so `lost` reduces to exactly `CannotBeOrdered || IsIdle`, same short-circuit order). Under
+  leases the per-tick sweep still owns gone/idle; the scan only renews.
+- **Null-guard** `CurrentActivity?.ChildActivity` anyway — protects the leased path when
+  `ScanTick <= OrderGraceTicks` (a pending-idle unit can then reach the check); an idle unit
+  simply is not stuck — the sweep's grace owns its release.
+- **Tests +2:** `AClassicScanDropsGoneAndIdleBeforeTheStuckCheck` drives one full classic scan
+  (`ScanStep`, `leases == null`) with an idle tracked unit (the NRE bait) and a boarded unit —
+  asserts no throw and both removed; `AClassicScanDoesNotStopAnAlreadyDoneUnit` pins that a
+  dropped unit never sees a Stop. Fixture 14/14.
+
 # 2026-10-05 — Devin-T2Verify: AR-9 follow-up re-review P1s — order-latency grace, disable predicate fix
 
 *Devin-T2Verify.* Branch `devin/t2verify/ar9-followups` on `origin/inc/2026_10_04g`. Re-review of

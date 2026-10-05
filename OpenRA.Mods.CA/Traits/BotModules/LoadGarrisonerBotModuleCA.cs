@@ -60,7 +60,6 @@ namespace OpenRA.Mods.CA.Traits
 
 		readonly World world;
 		readonly Player player;
-		readonly Predicate<Actor> unitCannotBeOrdered;
 		readonly Predicate<Actor> unitCannotBeOrderedOrIsBusy;
 		readonly Predicate<Actor> invalidTransport;
 
@@ -89,8 +88,7 @@ namespace OpenRA.Mods.CA.Traits
 			world = self.World;
 			player = self.Owner;
 			invalidTransport = a => a == null || a.IsDead || !a.IsInWorld || (a.Owner.RelationshipWith(player) != PlayerRelationship.Neutral && a.Owner != player);
-			unitCannotBeOrdered = a => CannotBeOrdered(a, player);
-			unitCannotBeOrderedOrIsBusy = a => unitCannotBeOrdered(a) || !(a.IsIdle || a.CurrentActivity is FlyIdle);
+			unitCannotBeOrderedOrIsBusy = a => CannotBeOrdered(a, player) || !IsIdle(a);
 		}
 
 		protected override void TraitEnabled(Actor self)
@@ -225,6 +223,53 @@ namespace OpenRA.Mods.CA.Traits
 			DisableRelease(bot, leases, active, owner, a => CanBeOrdered(a, ownerPlayer));
 		}
 
+		/// <summary>
+		/// The scan-cadence step over the tracked list: renew leases, drop what the scan is
+		/// done with, expire old stuck marks, then run the stuck check on the survivors.
+		/// On the classic (no-registry) path the RemoveAll also drops gone or idle units —
+		/// the per-tick sweep is a strict no-op there, so this is their only exit and it
+		/// must run BEFORE the stuck check reads CurrentActivity (null while idle), exactly
+		/// as before the lease regime. Under leases the per-tick sweep owns gone/idle
+		/// removal; this scan only renews. Returns the number dropped in the RemoveAll.
+		/// </summary>
+		public static int ScanStep(IBot bot, List<UnitWposWrapper> active, Dictionary<Actor, int> pendingLaunch,
+			Dictionary<Actor, int> stuckGarrisoner, IBotUnitLeases leases, string owner, Player ownerPlayer,
+			int heartbeatTicks, int now, int stuckExpiryTicks)
+		{
+			var dropped = active.RemoveAll(u =>
+			{
+				var lost = (leases == null && (CannotBeOrdered(u.Actor, ownerPlayer) || IsIdle(u.Actor)))
+					|| LostRenewal(leases, u.Actor, owner, heartbeatTicks);
+				if (lost)
+					pendingLaunch.Remove(u.Actor);
+
+				return lost;
+			});
+
+			foreach (var a in stuckGarrisoner.Keys.Where(a => CannotBeOrdered(a, ownerPlayer) || stuckGarrisoner[a] <= now).ToList())
+				stuckGarrisoner.Remove(a);
+
+			for (var i = 0; i < active.Count; i++)
+			{
+				var p = active[i];
+				var moveChild = p.Actor.CurrentActivity?.ChildActivity;
+				if (moveChild != null
+					&& moveChild.ActivityType == ActivityType.Move
+					&& p.Actor.CenterPosition == p.WPos)
+				{
+					stuckGarrisoner[p.Actor] = now + stuckExpiryTicks;
+					StopAndRelease(bot, leases, p.Actor, owner);
+					pendingLaunch.Remove(p.Actor);
+					active.RemoveAt(i);
+					i--;
+				}
+
+				p.WPos = p.Actor.CenterPosition;
+			}
+
+			return dropped;
+		}
+
 		IBot bot;
 
 		void IBotTick.BotTick(IBot bot)
@@ -246,34 +291,12 @@ namespace OpenRA.Mods.CA.Traits
 			{
 				minAssignRoleDelayTicks = Info.ScanTick;
 
-				// Heartbeat: a garrisoner that is still ours renews its lease; one whose
-				// renewal lost the claim to another owner is released and dropped.
-				activeGarrisoner.RemoveAll(u =>
-				{
-					if (!LostRenewal(leases, u.Actor, LeaseOwner, LeaseHeartbeatTicks(Info.ScanTick)))
-						return false;
-					pendingLaunch.Remove(u.Actor);
-					return true;
-				});
-
-				foreach (var a in stuckGarrisoner.Keys.Where(a => unitCannotBeOrdered(a) || stuckGarrisoner[a] <= world.WorldTick).ToList())
-					stuckGarrisoner.Remove(a);
-				for (var i = 0; i < activeGarrisoner.Count; i++)
-				{
-					var p = activeGarrisoner[i];
-					if (p.Actor.CurrentActivity.ChildActivity != null
-						&& p.Actor.CurrentActivity.ChildActivity.ActivityType == ActivityType.Move
-						&& p.Actor.CenterPosition == p.WPos)
-					{
-						stuckGarrisoner[p.Actor] = world.WorldTick + StuckExpiryTicks;
-						StopAndRelease(bot, leases, p.Actor, LeaseOwner);
-						pendingLaunch.Remove(p.Actor);
-						activeGarrisoner.RemoveAt(i);
-						i--;
-					}
-
-					p.WPos = p.Actor.CenterPosition;
-				}
+				// Heartbeat + stuck check on the scan cadence, on the module's real
+				// predicates. Classic additionally drops gone/idle tracked units here —
+				// without a registry the per-tick sweep never runs, so this is their only
+				// exit before the stuck check (bit-identical to pre-AR-9).
+				ScanStep(bot, activeGarrisoner, pendingLaunch, stuckGarrisoner, leases, LeaseOwner,
+					player, LeaseHeartbeatTicks(Info.ScanTick), world.WorldTick, StuckExpiryTicks);
 
 				var tcs = world.ActorsWithTrait<Garrisonable>().Where(
 				at =>
