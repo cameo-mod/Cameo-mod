@@ -54,6 +54,23 @@ Gates: build 0/0 all four assemblies; tests 1122/1122 (+2 new); fog PASS 82/266;
 169/0; arch-freshness PASS (regen folds INC-g's own merge drift); wiring 0 ERROR; doc_claims
 _clean_; `audit_multi_traitinfo` PASS 0 dangerous; boot gate re-run under the per-run-SupportDir
 method after the false-pass ruling below.
+# 2026-10-04 — NOVA: hotspot #2 — march-state decisions extraction (MarchEvalCA)
+
+*NOVA.* Branch `devin/nova/hotspot2-march` on `origin/inc/2026_10_04g@4cbc73cbf` (EMBER's
+merged lattice base). GroundUnitsAttackMoveStateCA Tick + IssueFormationOrders decisions ->
+pure static `MarchEvalCA` (the micro atoms stay in SquadMicroEvalCA): StuckCountersNext
+(4-arm truth table incl. the unchanged !stop&wait arm), StuckActionFor (makeWay precedence),
+RouteParams (lazy Func roll preserves the random stream), AdvanceWaypoint, LeaderWaitLatches/
+Holds, BucketFor (Frontline>Scout>AntiAir), AxisRemaining (long-math projection),
+RearStallNext + LeadForStall (StalledRearTicks=25 named), AxisUsable. 10 wire sites,
+laziness/short-circuit order preserved.
+
+Findings (fleet NOTE_2026-10-04_nova_hotspot2_tree): F1 makeWay -1 sentinel permanently
+re-routes stop&!wait to the kick counter for the march (P3); F4 makeWay epilogue pre-charges
+the kick counter to half-max (P4, escalation by design, now pinned).
+
+`MarchEvalTest`: 9 tests, full truth tables + lazy-draw counting. 1133/1133 suite on INC-g,
+build 0 errors, boot gate PASS.
 
 # 2026-10-04 — Claude (lead): INC-f doc re-pin, INC-g built and pushed, boot-gate false pass
 
