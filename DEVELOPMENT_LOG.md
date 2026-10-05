@@ -1,3 +1,27 @@
+# 2026-10-05 — EMBER: AR-S dedup OFF-path bit-identity fix (devin/ember/ars-stutter-gated)
+
+*EMBER, on top of NOVA `e39670678`.* Independent review found `BK_squad_order_dedup` was NOT
+bit-identical with the switch off: `QueueDeduped` skipped emitting when the member list was
+empty where the pre-change code queued the grouped order regardless; new
+`owner.TargetActor != null` guards dropped `AttackMove` packets the old code issued as
+`Target.FromActor(null) = Target.Invalid`; and the unarmed path paid a `Where().ToArray()`
+plus `OrderChanged` walk every call. Inert packets in-game, but the order stream differed.
+
+- `QueueDeduped` now early-outs unarmed through `SquadOrderDedup.EmitSet`: the grouped order
+  is issued unconditionally over the full member array — empty included — with the site's
+  original `queued` flag (new param; `ReturnToBase` rearm keeps `queued: true`, which
+  serializes into packet flags).
+- Every `OrderChanged`-gated call site is wrapped `!UseSquadOrderDedup || OrderChanged(...)`:
+  unarmed short-circuits before key construction, `CellContaining`, or memory access — no
+  extra allocation, no filtering. Armed path (guards + dedup) unchanged.
+- `SquadOrderKey.ForActor(null)` now yields the zero key instead of throwing, so the unarmed
+  call site can evaluate it for a null `TargetActor` exactly as the old code built
+  `Target.Invalid` orders.
+- `QueueRallyOrder` (protection) routes through the same `EmitSet`: unarmed queues the full
+  squad unconditionally; the armed latch/monotone-mode logic is untouched.
+- New tests in `SquadOrderDedupTest` record the emitted stream with the switch off for an
+  empty group and a null target and assert it matches the pre-change packets.
+
 # 2026-10-04 — NOVA: AR-S residual — squad order dedup + flee-episode home latch (BK_squad_order_dedup)
 
 *NOVA.* Branch `devin/nova/ars-stutter` from master `3ba05ede7`, off EMBER's march-lattice

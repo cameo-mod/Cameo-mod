@@ -277,8 +277,8 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				if ((u.Actor.CenterPosition - parentPos).LengthSquared <= followRangeSquared)
 					continue;
 
-				var cell = owner.World.Map.CellContaining(parentPos);
-				if (owner.OrderChanged(u.Actor, SquadOrderKey.ForCell("Move", cell)))
+				if (!owner.SquadManager.Info.UseSquadOrderDedup
+					|| owner.OrderChanged(u.Actor, SquadOrderKey.ForCell("Move", owner.World.Map.CellContaining(parentPos))))
 					owner.Bot.QueueOrder(new Order("Move", u.Actor, Target.FromPos(parentPos), false));
 			}
 		}
@@ -1007,8 +1007,8 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				if (micro && TryIssueMicroOrder(owner, a.Actor, focus, focusProfile))
 					continue;
 
-				if (owner.TargetActor != null
-					&& owner.OrderChanged(a.Actor, SquadOrderKey.ForActor("AttackMove", owner.TargetActor)))
+				if (!owner.SquadManager.Info.UseSquadOrderDedup
+					|| (owner.TargetActor != null && owner.OrderChanged(a.Actor, SquadOrderKey.ForActor("AttackMove", owner.TargetActor))))
 					owner.Bot.QueueOrder(new Order("AttackMove", a.Actor, Target.FromActor(owner.TargetActor), false));
 			}
 
@@ -1279,7 +1279,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 			QueueDeduped(owner, "AttackMove", SquadOrderKey.ForCell("AttackMove", leader.Location),
 				Target.FromCell(owner.World, leader.Location), followingUnits);
-			if (owner.TargetActor != null)
+			if (!owner.SquadManager.Info.UseSquadOrderDedup || owner.TargetActor != null)
 				QueueDeduped(owner, "AttackMove", SquadOrderKey.ForActor("AttackMove", owner.TargetActor),
 					Target.FromActor(owner.TargetActor), attackingUnits);
 

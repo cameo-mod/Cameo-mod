@@ -59,14 +59,15 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 		/// <summary>
 		/// AR-S (2026-10-04): grouped order over only the members whose (order, quantized target)
 		/// actually changed — an identical re-issue cancels the member's in-flight activity, the
-		/// stop-start stutter the maintainer reported. With UseSquadOrderDedup off every member
-		/// "changed", reproducing the pre-change stream (minus empty orders, which carry nothing).
+		/// stop-start stutter the maintainer reported. With UseSquadOrderDedup off the grouped
+		/// order is issued unconditionally — even for an empty member list, exactly as the
+		/// pre-change code did — so the order stream stays byte-identical (EMBER gating fix).
 		/// </summary>
-		protected static void QueueDeduped(SquadCA owner, string orderName, SquadOrderKey key, Target target, IReadOnlyList<Actor> members, bool terminal = false)
+		protected static void QueueDeduped(SquadCA owner, string orderName, SquadOrderKey key, Target target, IEnumerable<Actor> members, bool terminal = false, bool queued = false)
 		{
-			var changed = members.Where(a => owner.OrderChanged(a, key, terminal)).ToArray();
-			if (changed.Length > 0)
-				owner.Bot.QueueOrder(new Order(orderName, null, target, false, groupedActors: changed));
+			var set = SquadOrderDedup.EmitSet(owner.OrderMemory, owner.SquadManager.Info.UseSquadOrderDedup, members, key, terminal);
+			if (set != null)
+				owner.Bot.QueueOrder(new Order(orderName, null, target, queued, groupedActors: set));
 		}
 
 		protected static bool BusyAttack(Actor a)
@@ -324,7 +325,8 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 						if (repairBuilding != null)
 						{
-							if (squad.OrderChanged(u.Actor, SquadOrderKey.ForActor(orderId, repairBuilding)))
+							if (!squad.SquadManager.Info.UseSquadOrderDedup
+								|| squad.OrderChanged(u.Actor, SquadOrderKey.ForActor(orderId, repairBuilding)))
 								squad.Bot.QueueOrder(new Order(orderId, u.Actor, Target.FromActor(repairBuilding), orderQueued));
 
 							orderQueued = true;
@@ -339,11 +341,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			}
 
 			if (rearmingUnits.Count > 0)
-			{
-				var rearmChanged = rearmingUnits.Where(a => squad.OrderChanged(a, SquadOrderKey.Plain("ReturnToBase"), terminal: true)).ToArray();
-				if (rearmChanged.Length > 0)
-					squad.Bot.QueueOrder(new Order("ReturnToBase", null, true, groupedActors: rearmChanged));
-			}
+				QueueDeduped(squad, "ReturnToBase", SquadOrderKey.Plain("ReturnToBase"), Target.Invalid, rearmingUnits, terminal: true, queued: true);
 
 			if (fleeingUnits.Count > 0)
 			{

@@ -217,12 +217,12 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				{
 					leader = GetPathfindLeader(owner, owner.SquadManager.Info.SuggestedNavyLeaderLocomotor);
 					leader.WPos = leader.Actor.CenterPosition;
-					var kickTargetCell = owner.World.Map.CellContaining(owner.Target.CenterPosition);
-					if (owner.OrderChanged(leader.Actor, SquadOrderKey.ForCell("AttackMove", kickTargetCell)))
+					if (!owner.SquadManager.Info.UseSquadOrderDedup
+						|| owner.OrderChanged(leader.Actor, SquadOrderKey.ForCell("AttackMove", owner.World.Map.CellContaining(owner.Target.CenterPosition))))
 						owner.Bot.QueueOrder(new Order("AttackMove", leader.Actor, Target.FromPos(owner.Target.CenterPosition), false));
-					QueueDeduped(owner, "Stop", SquadOrderKey.Plain("Stop"), Target.Invalid, stopUnits.ToList(), terminal: true);
+					QueueDeduped(owner, "Stop", SquadOrderKey.Plain("Stop"), Target.Invalid, stopUnits, terminal: true);
 					QueueDeduped(owner, "AttackMove", SquadOrderKey.ForCell("AttackMove", leader.Actor.Location),
-						Target.FromCell(owner.World, leader.Actor.Location), otherUnits.ToList());
+						Target.FromCell(owner.World, leader.Actor.Location), otherUnits);
 					kickStuck--;
 				}
 				else if (kickStuck == 1)
@@ -245,9 +245,9 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				if (makeWay > 1)
 				{
 					var others = owner.Units.Where(u => u.Actor != leader.Actor).Select(u => u.Actor);
-					QueueDeduped(owner, "Scatter", SquadOrderKey.Plain("Scatter"), Target.Invalid, others.ToList(), terminal: true);
-					var makeWayTargetCell = owner.World.Map.CellContaining(owner.Target.CenterPosition);
-					if (owner.OrderChanged(leader.Actor, SquadOrderKey.ForCell("AttackMove", makeWayTargetCell)))
+					QueueDeduped(owner, "Scatter", SquadOrderKey.Plain("Scatter"), Target.Invalid, others, terminal: true);
+					if (!owner.SquadManager.Info.UseSquadOrderDedup
+						|| owner.OrderChanged(leader.Actor, SquadOrderKey.ForCell("AttackMove", owner.World.Map.CellContaining(owner.Target.CenterPosition))))
 						owner.Bot.QueueOrder(new Order("AttackMove", leader.Actor, Target.FromPos(owner.Target.CenterPosition), false));
 					makeWay--;
 				}
@@ -310,17 +310,18 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			// next tick is kick stuck unit (we need leader move in advance).
 			if (leaderWaitCheck && kickStuck <= 0)
 			{
-				if (owner.OrderChanged(leader.Actor, SquadOrderKey.Plain("Stop"), terminal: true))
+				if (!owner.SquadManager.Info.UseSquadOrderDedup
+					|| owner.OrderChanged(leader.Actor, SquadOrderKey.Plain("Stop"), terminal: true))
 					owner.Bot.QueueOrder(new Order("Stop", leader.Actor, false));
 			}
 			else
 			{
-				var driveCell = owner.World.Map.CellContaining(owner.Target.CenterPosition);
-				if (owner.OrderChanged(leader.Actor, SquadOrderKey.ForCell("AttackMove", driveCell)))
+				if (!owner.SquadManager.Info.UseSquadOrderDedup
+					|| owner.OrderChanged(leader.Actor, SquadOrderKey.ForCell("AttackMove", owner.World.Map.CellContaining(owner.Target.CenterPosition))))
 					owner.Bot.QueueOrder(new Order("AttackMove", leader.Actor, Target.FromPos(owner.Target.CenterPosition), false));
 			}
 
-			var unitsHurryUp = owner.Units.Where(u => (u.Actor.CenterPosition - leader.Actor.CenterPosition).HorizontalLengthSquared >= occupiedArea * 2).Select(u => u.Actor).ToList();
+			var unitsHurryUp = owner.Units.Where(u => (u.Actor.CenterPosition - leader.Actor.CenterPosition).HorizontalLengthSquared >= occupiedArea * 2).Select(u => u.Actor);
 			QueueDeduped(owner, "AttackMove", SquadOrderKey.ForCell("AttackMove", leader.Actor.Location),
 				Target.FromCell(owner.World, leader.Actor.Location), unitsHurryUp);
 		}
@@ -430,7 +431,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 			QueueDeduped(owner, "AttackMove", SquadOrderKey.ForCell("AttackMove", leader.Location),
 				Target.FromCell(owner.World, leader.Location), followingUnits);
-			if (owner.TargetActor != null)
+			if (!owner.SquadManager.Info.UseSquadOrderDedup || owner.TargetActor != null)
 				QueueDeduped(owner, "AttackMove", SquadOrderKey.ForActor("AttackMove", owner.TargetActor),
 					Target.FromActor(owner.TargetActor), attackingUnits);
 		}

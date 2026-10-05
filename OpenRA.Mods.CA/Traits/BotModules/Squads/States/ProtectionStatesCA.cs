@@ -202,7 +202,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 			QueueDeduped(owner, "ReturnToBase", SquadOrderKey.Plain("ReturnToBase"), Target.Invalid, resupplyingUnits, terminal: true);
 			QueueDeduped(owner, "AttackMove", SquadOrderKey.ForCell("AttackMove", leader.Location), Target.FromCell(owner.World, leader.Location), followingUnits);
-			if (owner.TargetActor != null)
+			if (!owner.SquadManager.Info.UseSquadOrderDedup || owner.TargetActor != null)
 				QueueDeduped(owner, "AttackMove", SquadOrderKey.ForActor("AttackMove", owner.TargetActor), Target.FromActor(owner.TargetActor), attackingUnits);
 		}
 
@@ -213,16 +213,17 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 		// mode every call, preserving the pre-change order stream.
 		void QueueRallyOrder(SquadCA owner, int mode, CPos rally)
 		{
-			if (owner.SquadManager.Info.UseSquadOrderDedup)
+			var armed = owner.SquadManager.Info.UseSquadOrderDedup;
+			if (armed)
 				rallyMode = System.Math.Max(rallyMode, mode);
 
-			var m = owner.SquadManager.Info.UseSquadOrderDedup ? rallyMode : mode;
+			var m = armed ? rallyMode : mode;
 			var orderName = m == 2 ? "Move" : "AttackMove";
-			var changed = owner.Units.Select(u => u.Actor)
-				.Where(a => owner.OrderChanged(a, SquadOrderKey.ForCell(orderName, rally))).ToArray();
-			if (changed.Length > 0)
+			var set = SquadOrderDedup.EmitSet(owner.OrderMemory, armed, owner.Units.Select(u => u.Actor),
+				SquadOrderKey.ForCell(orderName, rally), terminal: false);
+			if (set != null)
 				owner.Bot.QueueOrder(new Order(orderName, null, Target.FromCell(owner.World, rally), false,
-					groupedActors: changed));
+					groupedActors: set));
 		}
 
 		public void Deactivate(SquadCA owner) { }

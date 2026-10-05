@@ -9,6 +9,7 @@
 #endregion
 
 using System.Collections.Generic;
+using System.Linq;
 using OpenRA.Mods.Common.Traits;
 
 namespace OpenRA.Mods.CA.Traits.BotModules.Squads
@@ -33,7 +34,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 		}
 
 		public static SquadOrderKey ForCell(string order, CPos cell) => new(order, cell, 0);
-		public static SquadOrderKey ForActor(string order, Actor target) => new(order, CPos.Zero, target.ActorID);
+		public static SquadOrderKey ForActor(string order, Actor target) => new(order, CPos.Zero, target?.ActorID ?? 0);
 		public static SquadOrderKey Plain(string order) => new(order, CPos.Zero, 0);
 	}
 
@@ -90,6 +91,22 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				memory[member] = key;
 
 			return true;
+		}
+
+		/// <summary>
+		/// The member set a grouped order carries, or null when the order is suppressed.
+		/// Unarmed always returns the full member array — even an empty one — because the
+		/// pre-change stream issued the grouped order unconditionally (EMBER gating fix:
+		/// "off" must be byte-identical, no empty-skip and no member filtering). Callers
+		/// queue when this returns non-null.
+		/// </summary>
+		public static Actor[] EmitSet(Dictionary<Actor, SquadOrderKey> memory, bool armed, IEnumerable<Actor> members, SquadOrderKey key, bool terminal)
+		{
+			if (!armed)
+				return members.ToArray();
+
+			var changed = members.Where(a => Changed(memory, true, a, key, terminal)).ToArray();
+			return changed.Length > 0 ? changed : null;
 		}
 	}
 }
