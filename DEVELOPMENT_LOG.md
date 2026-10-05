@@ -1,3 +1,24 @@
+# 2026-10-05 — Devin-T2Verify: multi-TraitInfo sweep P4 follow-up — nesting-aware CLASS_RE
+
+*Devin.* Non-blocking P4 from the sweep re-review APPROVE, on `devin/t2verify/mti-audit-p4`
+stacked on `959819bc9` (kept separate so it does not race the INC-2026-10-05 merge).
+
+- **`CLASS_RE` generic-params group** `<[^{};]*>` was greedy: for a class whose base list itself
+  has generics, e.g. `PausableConditionalTrait<InfoType> : ConditionalTrait<InfoType>`, the
+  "parameters" group swallowed `InfoType> : ConditionalTrait<InfoType` through the LAST `>` and
+  the match completed with no base capture — the `supers` graph silently lost the edge, so
+  `Trait<ConditionalTrait>`-style closures under-counted PausableConditionalTrait instances.
+  Inner class is now `[^<>{};]` (params close at the FIRST `>`). Differential parse: 9 engine
+  declarations recover their bases (PausableConditionalTrait → ConditionalTrait, CellLayerBase →
+  IEnumerable<T>, Cache/ConcurrentCache → IReadOnlyDictionary<T,U>, etc.); still 983 sites, 0
+  dangerous — the recovered edges land in already-multi-capable families.
+- **ctor/Created-site comments:** at trait-construction and `INotifyCreated` time, conditions
+  are not applied yet (`ConditionalTrait` ctor sets `IsTraitDisabled = RequiresCondition != null`;
+  `ConditionConsumers` runs after INotifyCreated), so the enabled-first filter reads "has no
+  RequiresCondition". Comments at the three `With*Animation` ctors and `AttachableTo.Created` now
+  say the filter "prefers an unconditional instance". Runtime sites (Tick/Activate/runtime ctors)
+  keep the true disabled semantic and need no note.
+
 # 2026-10-04 — Devin-T2Verify: multi-TraitInfo sweep review fixes — enabled-trait aggregation
 
 *Devin.* Fixup on `devin/t2verify/multi-traitinfo-sweep` after independent review REQUEST CHANGES

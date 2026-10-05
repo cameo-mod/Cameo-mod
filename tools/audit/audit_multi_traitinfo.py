@@ -65,8 +65,11 @@ import miniyaml
 # up to '{' (where-clauses are consumed separately, not into the base list).
 # The type model only needs declared-type names + direct bases + the
 # TraitInfo<Y> production, so a single permissive match suffices.
+# The generic-parameter group must close at the FIRST '>': a greedy inner
+# class would swallow ``<T> : Base<T>`` whole (base list included), leaving the
+# declaration with no bases — e.g. PausableConditionalTrait<InfoType>.
 CLASS_RE = re.compile(
-    r"\b(?:class|interface)\s+([A-Z_]\w*)\s*(?:<[^{};]*>)?"
+    r"\b(?:class|interface)\s+([A-Z_]\w*)\s*(?:<[^<>{};]*>)?"
     r"(?:\s*:\s*([^{};]*?))?\s*(?:where\b[^{};]*?)?\{")
 TRAITINFO_ARG_RE = re.compile(r"\bTraitInfo\s*<\s*([A-Z_]\w*)\s*>")
 IFACE_RE = re.compile(r"^I[A-Z]")

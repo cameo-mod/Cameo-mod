@@ -46,6 +46,9 @@ namespace OpenRA.Mods.CA.Traits.Render
 			this.info = info;
 			self = init.Self;
 			facing = self.Trait<IFacing>();
+
+			// Conditions aren't applied yet during construction: IsTraitDisabled reads
+			// "has RequiresCondition", so this prefers an unconditional instance.
 			body = init.Self.TraitsImplementing<WithSpriteBody>().FirstOrDefault(w => !w.IsTraitDisabled && w.Info.Name == info.Body)
 				?? init.Self.TraitsImplementing<WithSpriteBody>().First(w => w.Info.Name == info.Body);
 		}
