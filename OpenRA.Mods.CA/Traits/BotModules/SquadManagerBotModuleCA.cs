@@ -391,6 +391,9 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only squad orders and the latched leader wait — the per-tick identical Stop/AttackMove re-issues cancelled every MoveTo. Off keeps the classic per-tick order stream bit-identical.")]
 		public readonly bool UseFormationHysteresis = false;
 
+		[Desc("Fixes two squad-pool accounting defects: retain idle leftovers after attack dispatch and gate allied answer requests on draftable units. False preserves legacy behavior.")]
+		public readonly bool UseSquadPoolFixes = false;
+
 		[Desc("CA-4 (12.7, fransbot donor): temporary lead cells granted when the rear frontline member has not moved for a while (chokepoint stall). Reverts to FormationMaxLeadCells the moment the rear moves again.")]
 		public readonly int FormationMaxStalledLeadCells = 12;
 
@@ -1896,9 +1899,21 @@ namespace OpenRA.Mods.CA.Traits
 			// draft, AttackMove and hold-expiry all reuse the escort path verbatim —
 			// the rolling hold lets a retracted request release within one interval.
 			// A thin home pool stays home regardless of how loud the request is.
+			// The fixed gate and the later protection draft must use the same eligibility predicate.
+			// Keep this scan lazy so the default-off path retains its original count-only check.
+			IBotUnitLeases answerLeases = null;
+			List<UnitWposWrapper> answerDraftable = null;
+			if (Info.UseSquadPoolFixes && threat == null && request == null && (teamAnswersOn || assistAnswersOn))
+			{
+				answerLeases = BotUnitLeases.Of(Player);
+				answerDraftable = unitsHangingAroundTheBase.Where(u => IsDefenderDraftable(u, answerLeases)).ToList();
+			}
+
+			var enoughAnswerUnits = SquadPoolFixesEvalCA.MeetsAnswerPoolMinimum(
+				unitsHangingAroundTheBase.Count, answerDraftable?.Count ?? 0,
+				Info.TeamDefendAnswerMinPoolUnits, Info.UseSquadPoolFixes);
 			TeamBroadcast allyDefendAnswer = null;
-			if (threat == null && request == null && teamAnswersOn &&
-				unitsHangingAroundTheBase.Count >= Info.TeamDefendAnswerMinPoolUnits)
+			if (threat == null && request == null && teamAnswersOn && enoughAnswerUnits)
 			{
 				// TC-3 (§12.18): the coalition fold elects exactly one responder per defend
 				// request — the nearest free ally by ArmyCentroid. A published election is
@@ -1958,8 +1973,7 @@ namespace OpenRA.Mods.CA.Traits
 			// live (CollectBroadcasts freshness + the next refold retracting it).
 			CoalitionAssistAssignment allyAssistAssignment = null;
 			TeamBroadcast allyAssistAnswer = null;
-			if (threat == null && request == null && assistAnswersOn &&
-				unitsHangingAroundTheBase.Count >= Info.TeamDefendAnswerMinPoolUnits)
+			if (threat == null && request == null && assistAnswersOn && enoughAnswerUnits)
 			{
 				var assistElection = Player.PlayerActor.TraitsImplementing<IBotCoalition>()
 					.FirstEnabledTraitOrDefault()?.Coalition?.AssistAssignments;
@@ -2011,8 +2025,8 @@ namespace OpenRA.Mods.CA.Traits
 			}
 
 			var protectSq = GetSquadOfType(SquadCAType.Protection) ?? RegisterNewSquad(bot, SquadCAType.Protection);
-			var leases = BotUnitLeases.Of(Player);
-			var draftable = unitsHangingAroundTheBase.Where(u => IsDefenderDraftable(u, leases)).ToList();
+			var leases = answerLeases ?? BotUnitLeases.Of(Player);
+			var draftable = answerDraftable ?? unitsHangingAroundTheBase.Where(u => IsDefenderDraftable(u, leases)).ToList();
 
 			// CA-2: forward defence keeps a reserve too — the rally outside the base
 			// radius is the donor's non-emergency case; a rally inside it means the
@@ -3233,9 +3247,10 @@ namespace OpenRA.Mods.CA.Traits
 				var artilleryUnits = unitsHangingAroundTheBase.Where(u => IsArtilleryUnit(u.Actor)).ToList();
 				var fireSupportUnits = unitsHangingAroundTheBase.Where(u => !IsArtilleryUnit(u.Actor)
 					&& Info.FireSupportTypes.Contains(u.Actor.Info.Name)).ToList();
-				attackForce.Units.AddRange(unitsHangingAroundTheBase.Where(u => !IsArtilleryUnit(u.Actor)
+				var assaultUnits = unitsHangingAroundTheBase.Where(u => !IsArtilleryUnit(u.Actor)
 					&& !Info.FireSupportTypes.Contains(u.Actor.Info.Name)
-					&& u.Actor.Info.HasTraitInfo<AttackBaseInfo>()));
+					&& u.Actor.Info.HasTraitInfo<AttackBaseInfo>()).ToList();
+				attackForce.Units.AddRange(assaultUnits);
 				if (Info.EnsureAntiAirEscort)
 					RequestAntiAirCoverage(bot, attackForce);
 				if (Info.EnsureArtillerySiege)
@@ -3297,7 +3312,17 @@ namespace OpenRA.Mods.CA.Traits
 					squad.Parent = attackForce.IsValid ? attackForce : squad.Parent;
 
 				AIUtils.BotDebug("AI ({0}): Added {1} units to squad {2}", Player.ClientIndex, attackForce.Units.Count, attackForce.Type);
-				unitsHangingAroundTheBase.Clear();
+				if (Info.UseSquadPoolFixes)
+				{
+					var dispatchedIds = artilleryUnits.Concat(fireSupportUnits).Concat(assaultUnits)
+						.Select(u => u.Actor.ActorID);
+					var retained = SquadPoolFixesEvalCA.RetainUnassigned(unitsHangingAroundTheBase,
+						dispatchedIds, u => u.Actor.ActorID);
+					unitsHangingAroundTheBase.Clear();
+					unitsHangingAroundTheBase.AddRange(retained);
+				}
+				else
+					unitsHangingAroundTheBase.Clear();
 				foreach (var n in notifyIdleBaseUnits)
 					n.UpdatedIdleBaseUnits(unitsHangingAroundTheBase);
 

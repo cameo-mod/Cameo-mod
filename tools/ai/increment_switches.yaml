@@ -231,3 +231,6 @@ groups:
     SquadManagerBotModuleCA:
       UseFormationHysteresis: true
       FormationHoldHysteresisCells: 2
+  BN_squad_pool_fixes:               # HOTSPOT-FINDINGS (2026-10-05): attack dispatch retains unmatched idle pool members; allied defend/assist answers require enough defender-draftable units. Off preserves legacy order stream; classic remains skipped.
+    SquadManagerBotModuleCA:
+      UseSquadPoolFixes: true
