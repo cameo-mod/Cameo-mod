@@ -19595,6 +19595,35 @@ Branch `devin/dawn/t3-public-faction` off master `8e86fca23`, worktree `C:/cameo
   attack/defend verdict flap — it is the manager's periodic group re-push colliding
   with state-issued orders. LEARN-P6 stays a decision-quality feature, not order-rate.
 
+## 2026-10-05 — EMBER: LEARN-P6 — BP_squad_desire (squad stance provider)
+
+* Design per SPEC_2026-10-05_bot_meta_learning.md §11/A4 (canonical switch `BP_squad_desire`;
+  the task board's "BN" was already `BN_squad_pool_fixes`; AR-S2 shipped as `BM`). New
+  `IBotSquadDesire` provider seam — a new `SquadDesireBotModule` (Cameo, ConditionalTrait+IBotTick)
+  publishes the per-squad stance; `SquadManagerBotModuleCA` consumes it in the ground idle branch
+  in place of the binary PredictsWin/fuzzy verdict (Attack commits, the other five stances take the
+  existing retreat path — P6 ships binary consumption only).
+* Assembly split forced by visibility: SquadCA internals are internal to Mods.CA, so the manager
+  packages `SquadDesireSignals` (own/enemy/base value, predicted ratio, health, scatter, hasTarget,
+  harass-capable, tick) and the provider owns ALL desirability math (§19.3).
+* `SquadDesireEval` (Squads/, pure): urgencies per stance in thousandths; leaky integrator
+  `d += rate*(u-d)/1000`; personality bias capped ±BiasCapMilli (200) via a fixed table over
+  rush/turtle/tech/expansion/steamroller/guerrilla; pick = argmax with hysteresis margin
+  (HysteresisMilli 150) AND MinDwellTicks (100), ties keep incumbent then lowest index.
+* Provider keeps per-squad DesireState keyed on the SquadCA reference — no identity fields,
+  nothing persisted; IBotTick prunes squads unseen for PruneAfterTicks (2500) every 500t.
+* Wiring: `UseSquadDesire` on SquadManagerBotModuleCA + lazy per-tick `SquadDesire` lookup
+  (FirstEnabledTraitOrDefault); `GrantConditionOnBotOwner@squaddesire` (Bots: empty) +
+  `SquadDesireBotModule: RequiresCondition: genericbot && squad_desire`; `squad_desire` added
+  to the bandit WatchConditions. Switch group `BP_squad_desire` in increment_switches.yaml.
+  Off/no-provider = binary call untouched, bit-identical.
+* Tests: `SquadDesireEvalTest` 18/18 — integrator converge/snap, urgency clamps, per-stance
+  dominance fixtures (attack winnable / reinforce outgunned / defend base-hit / retreat hurt /
+  harass raider-at-parity under guerrilla bias), hysteresis, dwell block, tie-incumbent,
+  bias cap + unknown personality + bias-vs-evidence, stance-flap bound (<=1+span/dwell, <=12 in
+  4000t), flicker-smoothing band.
+* Gates: build 0E/0W, isolated boot BOOT_GATE=PASS. Suite + order-rate A/B next.
+
 ## 2026-10-05 — Devin-Tier4: PRICING-DEFAULT — K-basis is the default pricing path
 
 Branch devin/tier4/pricing-default, task 01a10850 (maintainer ruling 2026-10-04).
