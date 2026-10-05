@@ -33,6 +33,7 @@ namespace OpenRA.Mods.Cameo.Traits
 		string fallbackGameUid;
 		string pendingText;
 		AiLogFileAppender appender;
+		BotTakeoverTracker takeover;
 		bool written;
 		bool eligibleAtWorldLoad;
 		int nextAttemptTick;
@@ -41,6 +42,7 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		void IWorldLoaded.WorldLoaded(World world, WorldRenderer worldRenderer)
 		{
+			takeover = world.WorldActor.TraitOrDefault<BotTakeoverTracker>();
 			eligibleAtWorldLoad = Eligible(world.Type, world.IsReplay, world.IsLoadingGameSave, Game.IsHost);
 			if (!eligibleAtWorldLoad)
 			{
@@ -107,10 +109,15 @@ namespace OpenRA.Mods.Cameo.Traits
 			}
 		}
 
-		static bool AllBotsResolved(World world)
+		bool AllBotsResolved(World world)
 		{
-			return world.Players.Where(AiMatchLogWriter.IsLoggableBot)
-				.All(p => p.WinState != WinState.Undefined);
+			// Same capture gate as the match writer: an all-human match filters to an empty
+			// set whose .All() is vacuously true — burning the record at tick ~1, so a seat
+			// that later converts to a takeover bot loses its whole situation stream. The
+			// open-takeover-seats flag holds capture until the conversion window closes.
+			return AiMatchLogWriter.CaptureReady(
+				world.Players.Where(AiMatchLogWriter.IsLoggableBot).Select(p => p.WinState),
+				takeover != null && takeover.HasOpenSeats);
 		}
 
 		string BuildLog(World world)

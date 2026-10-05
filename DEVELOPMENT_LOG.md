@@ -1,3 +1,18 @@
+# 2026-10-05 — EMBER: F1 — situation writer shares the match writer's takeover capture gate
+
+*EMBER (Devin).* Branch `devin/ember/sitlog-takeover-guard` off `origin/inc/2026_10_04g@4cbc73cbf`:
+- `AiSituationLogWriter.AllBotsResolved` had the same vacuous-`.All()`-on-empty-set defect the
+  takeover rev-2 fixed in `AiMatchLogWriter`: an all-human match filters `IsLoggableBot` to
+  nothing, `.All()` passes at tick ~1, the situation record burns, and a seat that later
+  converts to a takeover bot loses its entire situation stream.
+- Fix is a mechanical port of the proven pattern: `takeover` field resolved at `WorldLoaded`
+  (`TraitOrDefault<BotTakeoverTracker>`), gate routed through the tested internal seam
+  `AiMatchLogWriter.CaptureReady(botStates, takeover?.HasOpenSeats ?? false)` — already pinned
+  in `BotTakeoverTest` incl. the empty-set/open-seats cases.
+- Finding F1 from `COORD_2026-10-04_nova_arch_review_wave.md` (t3verify lane; picked up here
+  as a free EMBER item while P2 is blocked). Build 0/0, **1124/1124**, boot gate PASS
+  (menu marker; the one exception log is my own bad-args pre-init launch, not a game fault).
+
 # 2026-10-04 — Claude (lead): INC-f doc re-pin, INC-g built and pushed, boot-gate false pass
 
 *Claude.* `inc/2026_10_04g` @ 3a661c8b0 (pushed with `inc/2026_10_04f`).
