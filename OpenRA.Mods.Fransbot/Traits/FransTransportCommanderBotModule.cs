@@ -3009,8 +3009,7 @@ namespace OpenRA.Mods.Common.Traits
 				player.RelationshipWith(threat.Owner) != PlayerRelationship.Enemy || !threat.CanBeViewedByPlayer(player))
 				return false;
 
-			var attackFollow = threat.TraitOrDefault<AttackFollow>();
-			if (attackFollow != null)
+			foreach (var attackFollow in threat.TraitsImplementing<AttackFollow>())
 			{
 				if (attackFollow.RequestedTarget.Type == TargetType.Actor && attackFollow.RequestedTarget.Actor == engineer)
 					return true;

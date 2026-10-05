@@ -200,7 +200,7 @@ namespace OpenRA.Mods.CA.Traits
 				this.target = target;
 
 				move = self.Trait<IMove>();
-				wfsb = self.Trait<WithFacingSpriteBody>();
+				wfsb = self.TraitsImplementing<WithFacingSpriteBody>().FirstOrDefault(t => !t.IsTraitDisabled) ?? self.TraitsImplementing<WithFacingSpriteBody>().First();
 				screenShaker = self.World.WorldActor.Trait<ScreenShaker>();
 			}
 
