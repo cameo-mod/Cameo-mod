@@ -231,3 +231,9 @@ groups:
     SquadManagerBotModuleCA:
       UseFormationHysteresis: true
       FormationHoldHysteresisCells: 2
+  BK_squad_order_dedup:              # NOVA AR-S residual (maintainer stutter clarification 2026-10-04): squad states queue an order only when a member's (order, quantized target) actually changed; protection rally/lure mode latch; quiet defenders hold post instead of the Flee->Idle->Attack cycle; the shared Retreat flee-home pick latches per episode instead of re-rolling a random building every pass. Mobile orders re-issue on idle (real retry); terminal orders never repeat. Off = pre-change stream
+    SquadManagerBotModuleCA:
+      UseSquadOrderDedup: true
+  BL_protection_episode_guard:       # EMBER AR-S residual 2 (maintainer stutter, tagged-emitter attribution 2026-10-04): the surviving h2 flap is the protection tick's lure decision — a flickering PredictsLoss verdict alternates engage AttackMove with lure Move per eval, a different-key alternation the dedup cannot express. The episode enters on 2 consecutive losing evals and aborts on 2 consecutive non-losing evals (~AttackForceInterval each); engage entry is never confirmed, so a winnable enemy fights immediately. Off = per-eval decision, unchanged stream
+    SquadManagerBotModuleCA:
+      UseProtectionEpisodeGuard: true

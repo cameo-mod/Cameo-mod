@@ -580,6 +580,27 @@ namespace OpenRA.Mods.CA.Traits
 			"0 (Turtle) x1.5. Off, or no enabled provider, keeps the unchanged delay.")]
 		public readonly bool UseUtilityAxes = false;
 
+		[Desc("AR-S residual (2026-10-04): squad states only queue an order to a member when the " +
+			"(order, quantized target) actually changed — identical per-tick re-issues cancel the " +
+			"in-flight activity and read as stop-start stutter. Also latches the protection " +
+			"rally/lure mode and the shared Retreat flee-home pick per episode. " +
+			"Off = pre-change order stream.")]
+		public readonly bool UseSquadOrderDedup = false;
+
+		[Desc("AR-S residual 2 (BL_protection_episode_guard): the protection lure decision gets " +
+			"consecutive-eval hysteresis — a lure episode enters on ProtectionLureEnterConfirmTicks " +
+			"consecutive losing evals and aborts on ProtectionLureAbortConfirmTicks consecutive " +
+			"non-losing evals, so a flickering predictor verdict cannot alternate Move-to-rally and " +
+			"engage-AttackMove every squad tick. Engage entry itself is never confirmed. " +
+			"Off = the per-eval decision (unchanged stream).")]
+		public readonly bool UseProtectionEpisodeGuard = false;
+
+		[Desc("Consecutive losing evals before a lure episode starts (BL_protection_episode_guard). Evals run once per AttackForceInterval, so 2 = engage keeps running one extra round.")]
+		public readonly int ProtectionLureEnterConfirmTicks = 2;
+
+		[Desc("Consecutive non-losing evals before an in-flight lure episode aborts back to engage (BL_protection_episode_guard). 2 bounds a real re-engage delay to one eval (~AttackForceInterval ticks) while a single flicker can never abort.")]
+		public readonly int ProtectionLureAbortConfirmTicks = 2;
+
 		public override void RulesetLoaded(Ruleset rules, ActorInfo ai)
 		{
 			base.RulesetLoaded(rules, ai);
