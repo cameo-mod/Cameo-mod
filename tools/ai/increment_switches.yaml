@@ -231,3 +231,6 @@ groups:
     SquadManagerBotModuleCA:
       UseFormationHysteresis: true
       FormationHoldHysteresisCells: 2
+  BK_squad_order_dedup:              # NOVA AR-S residual (maintainer stutter clarification 2026-10-04): squad states queue an order only when a member's (order, quantized target) actually changed; protection rally/lure mode latch; quiet defenders hold post instead of the Flee->Idle->Attack cycle; the shared Retreat flee-home pick latches per episode instead of re-rolling a random building every pass. Mobile orders re-issue on idle (real retry); terminal orders never repeat. Off = pre-change stream
+    SquadManagerBotModuleCA:
+      UseSquadOrderDedup: true
