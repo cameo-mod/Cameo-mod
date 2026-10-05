@@ -47,7 +47,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 		/// <summary>Escorts rally at the guarded point; threats rally at the nearest own
 		/// defensive building inside the search ring (caller supplies it, or the threat
 		/// cell itself when none is near).</summary>
-		public static CPos RallyFor(BotProtectionRequest? request, BotPredictedThreat? threat, CPos nearestDefenceOrTarget)
+		public static CPos RallyFor(BotProtectionRequest? request, CPos nearestDefenceOrTarget)
 		{
 			return request?.Location ?? nearestDefenceOrTarget;
 		}

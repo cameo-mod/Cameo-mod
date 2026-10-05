@@ -1990,7 +1990,14 @@ namespace OpenRA.Mods.CA.Traits
 				}
 			}
 
-			if (threat == null && request == null)
+			// The precedence ladder, evaluated after the lazy cascade resolves:
+			// SelectProtectionRequest above only ran when threat == null, the
+			// ally-answer blocks only when both were null. An own-pool request is
+			// the Request channel only when no ally answer produced it.
+			var channel = PrepositionDecisionEvalCA.SelectChannel(threat != null,
+				request != null && allyDefendAnswer == null && allyAssistAssignment == null,
+				allyDefendAnswer != null, allyAssistAssignment != null);
+			if (channel == PrepositionChannelCA.None)
 				return;
 
 			// Escorts go TO the guarded point - no defensive-building snap:
@@ -2007,7 +2014,7 @@ namespace OpenRA.Mods.CA.Traits
 					.Select(a => (CPos?)a.Location).FirstOrDefault() ?? target;
 			}
 
-			var rally = PrepositionDecisionEvalCA.RallyFor(request, threat, nearestOrTarget);
+			var rally = PrepositionDecisionEvalCA.RallyFor(request, nearestOrTarget);
 
 			var protectSq = GetSquadOfType(SquadCAType.Protection) ?? RegisterNewSquad(bot, SquadCAType.Protection);
 			var leases = BotUnitLeases.Of(Player);

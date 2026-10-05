@@ -38,11 +38,11 @@ namespace OpenRA.Mods.Cameo.Test
 			var threat = new BotPredictedThreat(new CPos(90, 90), 200, 5000, 100);
 
 			// Request path: the guarded point verbatim — no building snap.
-			Assert.That(PrepositionDecisionEvalCA.RallyFor(request, null, new CPos(1, 2)), Is.EqualTo(new CPos(40, 50)));
+			Assert.That(PrepositionDecisionEvalCA.RallyFor(request, new CPos(1, 2)), Is.EqualTo(new CPos(40, 50)));
 
 			// Threat path: the caller's nearest-defence-or-target result verbatim.
-			Assert.That(PrepositionDecisionEvalCA.RallyFor(null, threat, new CPos(88, 89)), Is.EqualTo(new CPos(88, 89)));
-			Assert.That(PrepositionDecisionEvalCA.RallyFor(null, threat, threat.Target), Is.EqualTo(new CPos(90, 90)));
+			Assert.That(PrepositionDecisionEvalCA.RallyFor(null, new CPos(88, 89)), Is.EqualTo(new CPos(88, 89)));
+			Assert.That(PrepositionDecisionEvalCA.RallyFor(null, threat.Target), Is.EqualTo(new CPos(90, 90)));
 		}
 
 		[Test]
