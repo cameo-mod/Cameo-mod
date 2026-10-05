@@ -28,6 +28,12 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(AttackForceEvalCA.ShouldLaunch(
 				poolCount: 10, maxIdleUnits: 10, idleUnitsValue: 0,
 				requiredValue: 5000, requiredSize: 20, valueOnlyLaunch: false, squadValue: 0), Is.True);
+
+			// One below max: the overflow arm does not fire, and the other gates
+			// decide — unmet value gate means no launch.
+			Assert.That(AttackForceEvalCA.ShouldLaunch(
+				poolCount: 9, maxIdleUnits: 10, idleUnitsValue: 400,
+				requiredValue: 5000, requiredSize: 20, valueOnlyLaunch: false, squadValue: 0), Is.False);
 		}
 
 		[Test]
@@ -54,6 +60,15 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(AttackForceEvalCA.ShouldLaunch(
 				poolCount: 2, maxIdleUnits: 20, idleUnitsValue: 1000,
 				requiredValue: 1000, requiredSize: 10, valueOnlyLaunch: true, squadValue: 0), Is.False);
+
+			// valueOnlyLaunch off + squadValue set: the waiver does NOT apply —
+			// the count gate falls back to requiredSize.
+			Assert.That(AttackForceEvalCA.ShouldLaunch(
+				poolCount: 2, maxIdleUnits: 20, idleUnitsValue: 1000,
+				requiredValue: 1000, requiredSize: 10, valueOnlyLaunch: false, squadValue: 500), Is.False);
+			Assert.That(AttackForceEvalCA.ShouldLaunch(
+				poolCount: 10, maxIdleUnits: 20, idleUnitsValue: 1000,
+				requiredValue: 1000, requiredSize: 10, valueOnlyLaunch: false, squadValue: 500), Is.True);
 		}
 
 		[Test]
