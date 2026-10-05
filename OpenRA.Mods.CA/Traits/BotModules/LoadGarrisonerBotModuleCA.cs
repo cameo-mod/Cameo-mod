@@ -50,19 +50,32 @@ namespace OpenRA.Mods.CA.Traits
 		// AR-9 (§19.6): the loader holds a BotLeasePurpose.Garrison claim on every walking
 		// garrisoner — an idle infantry unit is squad-draftable, so without the claim a squad
 		// could draft a unit already marching to a garrison. Renewed each scan; released the
-		// tick the unit boards, dies, is captured or goes idle; Stopped then released on a
-		// stuck march. TraitDisabled Stops every still-orderable marcher and releases all.
-		// Under classicbot the registry is absent and every helper is a no-op — bit-identical.
+		// tick the unit boards, dies or is captured; an idle unit is released only once its
+		// march is confirmed over (seen non-idle first) or its order is lost (grace expiry) —
+		// a freshly claimed unit is still idle while its orders are in flight. Stopped then
+		// released on a stuck march. TraitDisabled Stops every still-orderable marcher and
+		// releases all. Under classicbot the registry is absent and every helper is a no-op —
+		// bit-identical.
 		const string LeaseOwner = nameof(LoadGarrisonerBotModuleCA);
 
 		readonly World world;
 		readonly Player player;
 		readonly Predicate<Actor> unitCannotBeOrdered;
 		readonly Predicate<Actor> unitCannotBeOrderedOrIsBusy;
-		readonly Predicate<Actor> unitCannotBeOrderedOrIsIdle;
 		readonly Predicate<Actor> invalidTransport;
 
 		readonly List<UnitWposWrapper> activeGarrisoner = new();
+
+		// Claim tick per unit whose launch has not been observed yet. Bot orders land
+		// several ticks after they are queued (bot order queue -> net frame -> apply),
+		// so a freshly claimed unit is still idle on the following ticks and must keep
+		// its lease. Entries are dropped the first tick the unit is seen non-idle, and
+		// are only written under the lease regime — classic leaves the dict empty.
+		readonly Dictionary<Actor, int> pendingLaunch = new();
+
+		// Far above order latency, far below ScanTick: a unit whose order never lands
+		// is freed well inside one scan instead of parking until lease lapse.
+		const int OrderGraceTicks = 50;
 
 		// Stuck units are ignored only for a while — a unit blocked by traffic should
 		// get another attempt instead of being blacklisted until it dies.
@@ -76,9 +89,8 @@ namespace OpenRA.Mods.CA.Traits
 			world = self.World;
 			player = self.Owner;
 			invalidTransport = a => a == null || a.IsDead || !a.IsInWorld || (a.Owner.RelationshipWith(player) != PlayerRelationship.Neutral && a.Owner != player);
-			unitCannotBeOrdered = a => a == null || a.IsDead || !a.IsInWorld || a.Owner != player;
+			unitCannotBeOrdered = a => CannotBeOrdered(a, player);
 			unitCannotBeOrderedOrIsBusy = a => unitCannotBeOrdered(a) || !(a.IsIdle || a.CurrentActivity is FlyIdle);
-			unitCannotBeOrderedOrIsIdle = a => unitCannotBeOrdered(a) || a.IsIdle || a.CurrentActivity is FlyIdle;
 		}
 
 		protected override void TraitEnabled(Actor self)
@@ -89,18 +101,26 @@ namespace OpenRA.Mods.CA.Traits
 
 		protected override void TraitDisabled(Actor self)
 		{
-			var leases = BotUnitLeases.Of(player);
-
 			// Under the lease regime a still-marching unit is Stopped before its claim ends,
 			// so a freed unit goes idle-draftable instead of finishing a march nobody owns.
 			// Classic never had leases — no Stop, no release, the march continues exactly as
 			// before. stuckGarrisoner deliberately survives the disable: its expiry stamps
 			// self-purge, and re-enabling should not resend units into known-blocked paths.
-			DisableRelease(bot, leases, activeGarrisoner, LeaseOwner, unitCannotBeOrdered);
+			DisableAll(bot, BotUnitLeases.Of(player), activeGarrisoner, LeaseOwner, player);
 			activeGarrisoner.Clear();
+			pendingLaunch.Clear();
 		}
 
 		public static int LeaseHeartbeatTicks(int scanTick) => Math.Max(200, scanTick * 4);
+
+		/// <summary>The module's real "gone" gate: dead, captured, or left the world (boarded).</summary>
+		public static bool CannotBeOrdered(Actor a, Player owner) => a == null || a.IsDead || !a.IsInWorld || a.Owner != owner;
+
+		/// <summary>The module's real "settled" gate: no activity, or circling on FlyIdle.</summary>
+		public static bool IsIdle(Actor a) => a != null && (a.IsIdle || a.CurrentActivity is FlyIdle);
+
+		/// <summary>The module's real "live marcher" gate for disable-time Stops.</summary>
+		public static bool CanBeOrdered(Actor a, Player owner) => !CannotBeOrdered(a, owner);
 
 		/// <summary>
 		/// GC-1 order-before-release: the holder's last act on a unit it gives up — queue the
@@ -115,18 +135,52 @@ namespace OpenRA.Mods.CA.Traits
 		}
 
 		/// <summary>
-		/// Per-tick release: drop every tracked unit matching `goneOrIdle` (boarded, dead,
-		/// captured or idle) and end its claim. Returns the number released.
+		/// Per-tick release: a unit that is `gone` (dead, captured, left the world — a
+		/// boarded garrisoner included) drops its claim at once. A still-idle unit keeps
+		/// the claim while its orders are in flight (bot queue -> net frame -> apply is
+		/// several ticks): `pendingLaunch` carries its claim tick until the first tick it
+		/// is seen non-idle. After launch — or once the grace expires without one — going
+		/// idle means the march is done and the claim ends. Returns the number released.
 		/// </summary>
-		public static int ReleaseGoneOrIdle(List<UnitWposWrapper> active, Predicate<Actor> goneOrIdle, IBotUnitLeases leases, string owner)
+		public static int ReleaseFinished(List<UnitWposWrapper> active, Predicate<Actor> gone, Predicate<Actor> idleNow,
+			Dictionary<Actor, int> pendingLaunch, int graceTicks, int now, IBotUnitLeases leases, string owner)
 		{
 			return active.RemoveAll(u =>
 			{
-				if (!goneOrIdle(u.Actor))
+				if (gone(u.Actor))
+				{
+					pendingLaunch.Remove(u.Actor);
+					leases?.Release(u.Actor, owner);
+					return true;
+				}
+
+				if (!idleNow(u.Actor))
+				{
+					pendingLaunch.Remove(u.Actor);
 					return false;
+				}
+
+				if (pendingLaunch.TryGetValue(u.Actor, out var claimTick) && now - claimTick <= graceTicks)
+					return false;
+
+				pendingLaunch.Remove(u.Actor);
 				leases?.Release(u.Actor, owner);
 				return true;
 			});
+		}
+
+		/// <summary>
+		/// The per-tick sweep on the module's real predicates and grace. Under classicbot
+		/// (`leases == null`) it is a strict no-op — the tracked list is only touched on
+		/// the scan cadence, exactly as before the lease regime existed.
+		/// </summary>
+		public static int SweepTick(List<UnitWposWrapper> active, Dictionary<Actor, int> pendingLaunch,
+			IBotUnitLeases leases, string owner, Player ownerPlayer, int now, int graceTicks)
+		{
+			if (leases == null)
+				return 0;
+
+			return ReleaseFinished(active, a => CannotBeOrdered(a, ownerPlayer), IsIdle, pendingLaunch, graceTicks, now, leases, owner);
 		}
 
 		/// <summary>
@@ -165,6 +219,12 @@ namespace OpenRA.Mods.CA.Traits
 			}
 		}
 
+		/// <summary>TraitDisabled teardown on the module's real predicates: only LIVE marchers get Stops.</summary>
+		public static void DisableAll(IBot bot, IBotUnitLeases leases, List<UnitWposWrapper> active, string owner, Player ownerPlayer)
+		{
+			DisableRelease(bot, leases, active, owner, a => CanBeOrdered(a, ownerPlayer));
+		}
+
 		IBot bot;
 
 		void IBotTick.BotTick(IBot bot)
@@ -172,12 +232,15 @@ namespace OpenRA.Mods.CA.Traits
 			this.bot = bot;
 			var leases = BotUnitLeases.Of(player);
 
-			// Every tick: a garrisoner that boarded, died, was captured or went idle is released
-			// now — parked until the next scan it would stay squad-undraftable for up to
-			// ScanTick (~19 s) while nobody is steering it. Claim renewal, the stuck check and
-			// new assignments all stay on the scan cadence below.
-			if (activeGarrisoner.Count > 0)
-				ReleaseGoneOrIdle(activeGarrisoner, unitCannotBeOrderedOrIsIdle, leases, LeaseOwner);
+			// Every tick under the lease regime: a garrisoner that boarded, died or was captured
+			// is released now — parked until the next scan it would stay squad-undraftable for
+			// up to ScanTick (~19 s). Idle means done only AFTER the unit was seen non-idle once
+			// or outstayed the order grace — a freshly claimed unit is still idle while its
+			// orders are in flight and must not be dropped. Classic (leases == null) is a
+			// strict no-op here. Claim renewal, the stuck check and new assignments all stay
+			// on the scan cadence below.
+			if (leases != null && activeGarrisoner.Count > 0)
+				SweepTick(activeGarrisoner, pendingLaunch, leases, LeaseOwner, player, world.WorldTick, OrderGraceTicks);
 
 			if (--minAssignRoleDelayTicks <= 0)
 			{
@@ -246,6 +309,8 @@ namespace OpenRA.Mods.CA.Traits
 						spaceTaken += weight;
 						orderedActors.Add(g.Actor);
 						activeGarrisoner.Add(new UnitWposWrapper(g.Actor));
+						if (leases != null)
+							pendingLaunch[g.Actor] = world.WorldTick;
 						passengerCount++;
 					}
 

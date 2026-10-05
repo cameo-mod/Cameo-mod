@@ -8,24 +8,28 @@
  */
 #endregion
 
-using System;
 using System.Collections.Generic;
+using System.Reflection;
 using NUnit.Framework;
 using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.Cameo.Test.TestFixtures;
 using OpenRA.Mods.Cameo.Traits.BotModules;
+using OpenRA.Mods.Common.Activities;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Traits;
 
 namespace OpenRA.Mods.Cameo.Test
 {
-	// AR-9 review (P3): LoadGarrisoner's lease lifecycle seams — per-tick release of gone/idle
-	// marchers, per-scan renewal, Stop-before-release, disable teardown and heartbeat lapse.
-	// The seams are public statics taking IBotUnitLeases/Predicate<Actor> so a fake table and
-	// identity-only Actors pin the contract without a World.
+	// AR-9 review (P3) + re-review (P1): LoadGarrisoner's lease lifecycle on the module's
+	// OWN predicates — the seams under test (SweepTick/DisableAll) own the real
+	// CannotBeOrdered/IsIdle/CanBeOrdered gates, so an inverted or premature predicate at
+	// the callsite fails these tests rather than slipping past stand-ins.
 	[TestFixture]
 	public sealed class LoadGarrisonerLeaseTest
 	{
+		const int Grace = 50;
+		const int Now = 1000;
+
 		// One shared log for order-queue and lease-release calls, so the test sees the
 		// sequence between them, not just that both happened.
 		sealed class EventLeases : IBotUnitLeases
@@ -69,12 +73,46 @@ namespace OpenRA.Mods.Cameo.Test
 			}
 		}
 
+		static void Set(object o, string field, object v) =>
+			typeof(Actor).GetField(field, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public).SetValue(o, v);
+
+		// Identity-only Actor with the fields the module's real predicates read pinned
+		// directly: Owner/IsInWorld/Disposed are backing fields, CurrentActivity a field.
+		static Actor Unit(Player owner, bool dead = false, bool inWorld = true, bool marching = false)
+		{
+			var a = Uninitialized.Actor();
+			Set(a, "<Owner>k__BackingField", owner);
+			Set(a, "<IsInWorld>k__BackingField", inWorld);
+			Set(a, "<Disposed>k__BackingField", dead);
+			if (marching)
+				Set(a, "currentActivity", Uninitialized.Of<Wait>());
+			return a;
+		}
+
 		static List<UnitWposWrapper> Marchers(params Actor[] actors)
 		{
 			var list = new List<UnitWposWrapper>();
 			foreach (var a in actors)
 				list.Add(new UnitWposWrapper(a));
 			return list;
+		}
+
+		[Test]
+		public void TheModulePredicatesSeeAFabricatedUnit()
+		{
+			// Sanity that the fixtures read through the real gates: a live, in-world,
+			// owned unit is orderable; dead/captured/absent ones are not; a unit with no
+			// CurrentActivity is idle and a marching one is not.
+			var me = Uninitialized.Player();
+			var other = Uninitialized.Player();
+
+			Assert.That(LoadGarrisonerBotModuleCA.CanBeOrdered(Unit(me, marching: true), me), Is.True);
+			Assert.That(LoadGarrisonerBotModuleCA.CannotBeOrdered(Unit(me, dead: true), me), Is.True);
+			Assert.That(LoadGarrisonerBotModuleCA.CannotBeOrdered(Unit(me, inWorld: false), me), Is.True);
+			Assert.That(LoadGarrisonerBotModuleCA.CannotBeOrdered(Unit(other), me), Is.True);
+			Assert.That(LoadGarrisonerBotModuleCA.CannotBeOrdered(null, me), Is.True);
+			Assert.That(LoadGarrisonerBotModuleCA.IsIdle(Unit(me)), Is.True);
+			Assert.That(LoadGarrisonerBotModuleCA.IsIdle(Unit(me, marching: true)), Is.False);
 		}
 
 		[Test]
@@ -94,25 +132,145 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
-		public void GoneOrIdleMarchersAreReleasedAndDroppedEveryTick()
+		public void AFreshClaimKeepsItsLeaseWhileTheOrderIsInFlight()
+		{
+			// P1 regression: a just-claimed unit is still idle while its orders ride the
+			// bot queue -> net frame -> apply path. The sweep must not drop it.
+			var log = new List<string>();
+			var leases = new EventLeases(log);
+			var me = Uninitialized.Player();
+			var fresh = Unit(me);                     // owned, alive, in-world, no activity
+			var active = Marchers(fresh);
+			var pending = new Dictionary<Actor, int> { [fresh] = Now };
+
+			var released = LoadGarrisonerBotModuleCA.SweepTick(active, pending, leases, "loader", me, Now + 5, Grace);
+
+			Assert.That(released, Is.EqualTo(0));
+			Assert.That(leases.ReleaseCount, Is.EqualTo(0), "the lease survives order latency");
+			Assert.That(active, Has.Count.EqualTo(1));
+			Assert.That(pending, Does.ContainKey(fresh), "still waiting for the launch to be seen");
+		}
+
+		[Test]
+		public void AnIdlePendingUnitIsFreedWhenTheOrderNeverLands()
 		{
 			var log = new List<string>();
 			var leases = new EventLeases(log);
-			var gone = Uninitialized.Actor();
-			var dead = Uninitialized.Actor();
-			var captured = Uninitialized.Actor();
-			var stillMarching = Uninitialized.Actor();
-			var active = Marchers(gone, dead, captured, stillMarching);
+			var me = Uninitialized.Player();
+			var stale = Unit(me);
+			var active = Marchers(stale);
+			var pending = new Dictionary<Actor, int> { [stale] = Now };
 
-			// The production predicate is unitCannotBeOrderedOrIsIdle (dead, out of world,
-			// captured, idle); a stand-in marks the same three cases here.
-			Predicate<Actor> goneOrIdle = a => a != stillMarching;
-			var released = LoadGarrisonerBotModuleCA.ReleaseGoneOrIdle(active, goneOrIdle, leases, "loader");
+			var released = LoadGarrisonerBotModuleCA.SweepTick(active, pending, leases, "loader", me, Now + Grace + 1, Grace);
 
-			Assert.That(released, Is.EqualTo(3));
+			Assert.That(released, Is.EqualTo(1), "a launch that never happened gives up after the grace");
+			Assert.That(leases.ReleaseCount, Is.EqualTo(1));
+			Assert.That(active, Is.Empty);
+			Assert.That(pending, Is.Empty);
+		}
+
+		[Test]
+		public void ALaunchedUnitGoingIdleIsDone()
+		{
+			// First sweep sees the unit non-idle (order landed) -> pending cleared.
+			// Next sweep sees it idle again -> march confirmed over -> released.
+			var log = new List<string>();
+			var leases = new EventLeases(log);
+			var me = Uninitialized.Player();
+			var unit = Unit(me, marching: true);
+			var active = Marchers(unit);
+			var pending = new Dictionary<Actor, int> { [unit] = Now };
+
+			Assert.That(LoadGarrisonerBotModuleCA.SweepTick(active, pending, leases, "loader", me, Now + 5, Grace),
+				Is.EqualTo(0));
+			Assert.That(pending, Is.Empty, "launch observed — pending bookkeeping cleared");
+
+			Set(unit, "currentActivity", null);   // march finished without boarding
+			Assert.That(LoadGarrisonerBotModuleCA.SweepTick(active, pending, leases, "loader", me, Now + 6, Grace),
+				Is.EqualTo(1));
+			Assert.That(leases.ReleaseCount, Is.EqualTo(1));
+			Assert.That(active, Is.Empty);
+		}
+
+		[Test]
+		public void GoneUnitsDropImmediatelyEvenWithinTheGrace()
+		{
+			var log = new List<string>();
+			var leases = new EventLeases(log);
+			var me = Uninitialized.Player();
+			var other = Uninitialized.Player();
+			var dead = Unit(me, dead: true);
+			var captured = Unit(other);
+			var gone = Unit(me, inWorld: false);      // boarded
+			var active = Marchers(dead, captured, gone);
+			var pending = new Dictionary<Actor, int> { [dead] = Now, [captured] = Now, [gone] = Now };
+
+			var released = LoadGarrisonerBotModuleCA.SweepTick(active, pending, leases, "loader", me, Now + 2, Grace);
+
+			Assert.That(released, Is.EqualTo(3), "dead/captured/boarded never wait for launch");
 			Assert.That(leases.ReleaseCount, Is.EqualTo(3));
-			Assert.That(active, Has.Count.EqualTo(1));
-			Assert.That(active[0].Actor, Is.SameAs(stillMarching));
+			Assert.That(pending, Is.Empty);
+		}
+
+		[Test]
+		public void ClassicSweepIsAStrictNoOp()
+		{
+			// leases == null is classicbot: the per-tick sweep must not touch the tracked
+			// list at all — INC-g behaviour is bit-identical.
+			var me = Uninitialized.Player();
+			var dead = Unit(me, dead: true);
+			var idle = Unit(me);
+			var active = Marchers(dead, idle);
+			var pending = new Dictionary<Actor, int> { [idle] = Now };
+
+			var released = LoadGarrisonerBotModuleCA.SweepTick(active, pending, null, "loader", me, Now + Grace + 1, Grace);
+
+			Assert.That(released, Is.EqualTo(0));
+			Assert.That(active, Has.Count.EqualTo(2), "classic leaves tracking untouched per tick");
+			Assert.That(pending, Does.ContainKey(idle));
+		}
+
+		[Test]
+		public void DisableStopsOnlyLiveMarchers()
+		{
+			// P1 regression: the old callsite passed unitCannotBeOrdered as `orderable` —
+			// Stops went to dead units while live marchers were released silently.
+			// DisableAll owns the real gate, so the inversion cannot hide.
+			var log = new List<string>();
+			var bot = new LogBot(log);
+			var leases = new EventLeases(log);
+			var me = Uninitialized.Player();
+			var other = Uninitialized.Player();
+			var marching = Unit(me, marching: true);
+			var waiting = Unit(me);                    // live + orderable but idle — still ours to stop
+			var dead = Unit(me, dead: true);
+			var captured = Unit(other);
+			var active = Marchers(marching, waiting, dead, captured);
+
+			LoadGarrisonerBotModuleCA.DisableAll(bot, leases, active, "loader", me);
+
+			Assert.That(log.FindAll(e => e == "queue:Stop"), Has.Count.EqualTo(2),
+				"Stops go to live orderable units only");
+			Assert.That(bot.Queued.FindAll(o => o.Subject == marching), Has.Count.EqualTo(1));
+			Assert.That(bot.Queued.FindAll(o => o.Subject == waiting), Has.Count.EqualTo(1));
+			Assert.That(bot.Queued.FindAll(o => o.Subject == dead || o.Subject == captured), Is.Empty,
+				"dead/captured units must not receive orders");
+			Assert.That(leases.ReleaseCount, Is.EqualTo(4), "every claim ends on disable");
+		}
+
+		[Test]
+		public void ClassicDisableStopsNothingAndReleasesNothing()
+		{
+			var log = new List<string>();
+			var bot = new LogBot(log);
+			var me = Uninitialized.Player();
+			var active = Marchers(Unit(me, marching: true), Unit(me));
+
+			// leases == null is classicbot: no Stop, no release — the march continues as before.
+			LoadGarrisonerBotModuleCA.DisableAll(bot, null, active, "loader", me);
+
+			Assert.That(log, Is.Empty);
+			Assert.That(bot.Queued, Is.Empty);
 		}
 
 		[Test]
@@ -142,42 +300,6 @@ namespace OpenRA.Mods.Cameo.Test
 
 			var allowed = new EventLeases(log) { Allow = true };
 			Assert.That(LoadGarrisonerBotModuleCA.ClaimedWeight(allowed, unit, 2, "loader", 400), Is.EqualTo(2));
-		}
-
-		[Test]
-		public void TraitDisabledStopsMarchersAndReleasesEverything()
-		{
-			var log = new List<string>();
-			var bot = new LogBot(log);
-			var leases = new EventLeases(log);
-			var marcher1 = Uninitialized.Actor();
-			var marcher2 = Uninitialized.Actor();
-			var alreadyGone = Uninitialized.Actor();
-			var active = Marchers(marcher1, marcher2, alreadyGone);
-
-			// orderable = unitCannotBeOrdered stand-in: the gone unit releases without a Stop.
-			Predicate<Actor> orderable = a => a != alreadyGone;
-			LoadGarrisonerBotModuleCA.DisableRelease(bot, leases, active, "loader", orderable);
-
-			Assert.That(log.FindAll(e => e == "queue:Stop"), Has.Count.EqualTo(2));
-			Assert.That(log.FindAll(e => e == "release"), Has.Count.EqualTo(3),
-				"every claim ends on disable, including the unit that no longer needs a Stop");
-			Assert.That(log.IndexOf("queue:Stop"), Is.LessThan(log.IndexOf("release")));
-		}
-
-		[Test]
-		public void ClassicDisableStopsNothingAndReleasesNothing()
-		{
-			var log = new List<string>();
-			var bot = new LogBot(log);
-			var active = Marchers(Uninitialized.Actor(), Uninitialized.Actor());
-			Predicate<Actor> orderable = _ => true;
-
-			// leases == null is classicbot: no Stop, no release — the march continues as before.
-			LoadGarrisonerBotModuleCA.DisableRelease(bot, null, active, "loader", orderable);
-
-			Assert.That(log, Is.Empty);
-			Assert.That(bot.Queued, Is.Empty);
 		}
 
 		[Test]

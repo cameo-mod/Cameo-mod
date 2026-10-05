@@ -1,3 +1,36 @@
+# 2026-10-05 — Devin-T2Verify: AR-9 follow-up re-review P1s — order-latency grace, disable predicate fix
+
+*Devin-T2Verify.* Branch `devin/t2verify/ar9-followups` on `origin/inc/2026_10_04g`. Re-review of
+`7ad90ef4a` came back REQUEST CHANGES with two P1 regressions in `LoadGarrisonerBotModuleCA`:
+the per-tick sweep dropped freshly claimed units while their orders were still in flight, and
+`DisableRelease` was wired with an inverted orderability predicate. Both fixed here.
+
+- **P1 — per-tick release no longer drops in-flight claims.** `ReleaseGoneOrIdle` treated idle as
+  done unconditionally; bot orders land several ticks after queueing (bot order queue -> net frame
+  -> apply), so a just-claimed unit was still idle on the next tick and lost its lease — the AR-9
+  gap reopened for genericbot, and classic lost its stuck-Stop behaviour. Replaced by
+  `ReleaseFinished` driven through `SweepTick`: dead/captured/out-of-world units (boarded
+  garrisoners included) still release immediately; a still-idle unit keeps its claim while tracked
+  in `pendingLaunch` — entries are written at claim time, removed the first tick the unit is seen
+  non-idle, and lapse after `OrderGraceTicks` (50) if the order never lands. The sweep self-gates
+  on `leases == null`, so the classic per-tick path is a strict no-op — bit-identical to INC-g.
+- **P1 — disable Stops only live marchers.** `TraitDisabled` passed `unitCannotBeOrdered` where
+  `orderable` was expected — Stops went to dead/captured units while live marchers were released
+  silently. The callsite now routes through `DisableAll`, which owns the real gate
+  (`a => CanBeOrdered(a, ownerPlayer)`); `CannotBeOrdered`/`IsIdle`/`CanBeOrdered` are the module's
+  real predicates promoted to public statics so tests exercise them, not stand-ins.
+- **Tests rewritten on the real predicates.** `LoadGarrisonerLeaseTest` ×12: the previous version
+  passed hand-written lambdas into the seams, which is why both inversions slipped. The suite now
+  calls `SweepTick`/`DisableAll` — the same seams the callsites invoke — over fabricated Actors
+  (Uninitialized + backing-field pins for Owner/IsInWorld/Disposed/currentActivity): fresh claim
+  keeps its lease inside the grace, grace expiry frees a never-launched unit, launched-then-idle
+  is done, gone units drop immediately, classic sweep and classic disable are strict no-ops, and
+  disable Stops exactly the live orderable units.
+
+Gates: build 0/0; tests 1136/1136 (+5 net); fog PASS; mutation PASS; arch-freshness PASS both;
+wiring 0 ERROR; doc_claims _clean_; isolated-SupportDir boot PASS at the gated sha (real marker,
+Package path inside the worktree, 0 exceptions, PID-scoped kill).
+
 # 2026-10-04 — Devin-T2Verify: AR-9 review follow-ups — per-tick release, timers on real actions, doc fixes
 
 *Devin-T2Verify.* Branch `devin/t2verify/ar9-review-fixes` on `origin/inc/2026_10_04g`. Independent
