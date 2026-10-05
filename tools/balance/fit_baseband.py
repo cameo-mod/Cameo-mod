@@ -138,7 +138,7 @@ def best_k(members, spec, anchor_tier):
 
 
 
-AXES = ("hp", "speed", "range", "raw_dps")
+AXES = ("hp", "speed", "range", "eff_dps")
 
 
 def worst_axis(member_inputs, core_medians):
@@ -257,7 +257,7 @@ def main() -> int:
             continue
         i = row["inputs"]
         by_class.setdefault(cls, []).append(
-            (i["hp"], i["speed"], i["range"], i["raw_dps"], i["special"], i["tier"]))
+            (i["hp"], i["speed"], i["range"], i["eff_dps"], i["special"], i["tier"]))
         reported.setdefault(cls, []).append(row["ratio"])
         names.setdefault(cls, []).append((row["actor"], i))
 

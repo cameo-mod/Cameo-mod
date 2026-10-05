@@ -83,7 +83,7 @@ class YuriGatlingPricingTests(unittest.TestCase):
                 record = self.record(actor)
                 selected = fit_class.pricing_armaments(record)
                 self.assertEqual([expected["weapon"]], [arm["weapon"] for arm in selected])
-                inputs, fallbacks = fit_class.unit_inputs(record)
+                inputs, fallbacks = fit_class.unit_inputs(record, use_k=False)
                 self.assertEqual(0, fallbacks)
                 self.assertEqual(expected["range"], inputs[2])
                 self.assertAlmostEqual(expected["dps"], inputs[3])
@@ -95,7 +95,7 @@ class YuriGatlingPricingTests(unittest.TestCase):
         )
         for actor in EXPECTED:
             with self.subTest(actor=actor):
-                inputs, _ = fit_class.unit_inputs(self.record(actor))
+                inputs, _ = fit_class.unit_inputs(self.record(actor), use_k=False)
                 self.assertEqual(1.25, inputs[4])
 
 

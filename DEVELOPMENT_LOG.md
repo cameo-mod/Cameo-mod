@@ -19402,3 +19402,38 @@ Branch `devin/dawn/t3-public-faction` off master `8e86fca23`, worktree `C:/cameo
 * Verify: build 0E, **mod-code warnings 0**; 837/837 NUnit (+3 BotFactionView/DominantFaction);
   pytest 15/15 new file; `tools/boot_gate.ps1` PASS (menu, 0 exceptions, exit 0); audit regen: fog_honesty
   +1 site (263), ai_arch_freshness FAIL->PASS (master's committed report was stale), rest master drift.
+
+## 2026-10-05 — Devin-Tier4: PRICING-DEFAULT — K-basis is the default pricing path
+
+Branch devin/tier4/pricing-default, task 01a10850 (maintainer ruling 2026-10-04).
+* `fit_class.unit_inputs(use_k=True)` default flips the whole pipeline to
+  accuracy/splash/range-adjusted effective DPS; `--raw` remains the explicit opt-out on
+  fit_class / check_band / propose_class_rebalance / propose_rebalance / update_ranges.
+* `propose_class_rebalance.unit_dps` returns (total, flat, pct_floor, fallbacks): the
+  flat-context coefficient feeds the closed-form damage solve, the percentage floor is
+  added back so achieved DPS equals the solve target, and sidecar misses are counted.
+* Latent raw-basis consumers fixed: `propose_anchor_spec` nominal leg and
+  `propose_reference_anchors` dps_diagnostics now pass `use_k=False` explicitly — they
+  compare external/raw references and must not silently inherit the flip.
+* `fit_class.pricing_armaments` aligned with `priced_by_default` (unresolved armaments
+  filtered) — repaired a pre-existing 80-vs-40 test failure, not a K regression.
+* New `tools/balance/k_price_delta.py` writes
+  docs/balance/derived/pricing_default_delta.md — 492 actors, median -1.5%,
+  range -93%..+102%, per-faction movers with reason attribution (accuracy/splash/range
+  dominance per armament). Read-only; no yaml or ledger prices changed.
+* Docs re-pinned same commit: doc_claims +pricing_default_basis_is_k (measures the
+  signature default), EFFECTIVE_DAMAGE wired-status, BALANCE_PROGRAM_PLAN W11 signed off,
+  anchor_decisions_log entry, k_comparison_mbt regenerated (was stale 40->50 members).
+* Rebased onto inc/2026_10_05 (fe4459c9c) post-commit; derived ledgers regenerate
+  byte-identical (deterministic), k_comparison_mbt + pricing_default_delta rebuilt on
+  the new base — 492 actors, median -1.5%, range -93%..+102%, and a complete >+-25%
+  mover table (147 actors) with per-term reasons and a data-flag column (49 near-zero
+  accuracy suspects, 56 provisional-model actors).
+* Gates on the inc base: build 0E (Release); dotnet OpenRA.Test 521/523 (0 fail);
+  audit_doc_claims 44/44 clean; boot_isolated.ps1 BOOT_GATE=PASS; full tools/tests
+  2896 tests with 129 failures — byte-identical failure set to the master-base run,
+  all in weapon-structure/YAML-baseline suites (none touch pricing code paths;
+  armament_pairing fingerprint staleness predates both bases).
+* Crash note: machine lost ~00:05 mid-gate; worktree survived intact. fsck reports
+  missing objects in the shared store — unreachable crash debris only, verified clean
+  from refs; lead confirmed no repair needed.

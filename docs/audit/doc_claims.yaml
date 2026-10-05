@@ -530,6 +530,22 @@ claims:
                            capture_output=True, text=True).stdout
       print(re.search(r'(\d+) direct inheritors', out).group(1))
 
+  - id: pricing_default_basis_is_k
+    value: 1
+    tolerance: 0
+    what: >
+      PRICING-DEFAULT (maintainer ruling 2026-10-04): `fit_class.unit_inputs` defaults
+      to K-adjusted `effective_dps` — accuracy, splash, range, dead zone and reachable
+      targets folded in — and `--raw` is the explicit opt-out. 1 = K is the default
+      signature. If this flips back, EFFECTIVE_DAMAGE.md, BALANCE_PROGRAM_PLAN.md W11,
+      anchor_decisions_log.md and pricing_default_delta.md all move with it.
+    docs: [docs/design/EFFECTIVE_DAMAGE.md, docs/design/BALANCE_PROGRAM_PLAN.md, docs/balance/anchor_decisions_log.md]
+    measure: |
+      import sys
+      sys.path.insert(0, 'tools/balance')
+      import fit_class, inspect
+      print(1 if inspect.signature(fit_class.unit_inputs).parameters['use_k'].default is True else 0)
+
   - id: ledgers_drifted
     value: 0
     tolerance: 0

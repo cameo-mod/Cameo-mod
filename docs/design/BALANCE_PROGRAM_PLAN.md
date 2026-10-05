@@ -1142,7 +1142,7 @@ the max-meter uses remain.
 
 ---
 
-### W11 — Wire K into `fit_class.py` ✅ BUILT · ⬜ awaiting maintainer sign-off
+### W11 — Wire K into `fit_class.py` ✅ BUILT · ✅ sign-off received 2026-10-04 (default)
 
 W3/W4/W5 were all ✅ long before anyone re-read this line — the ⛔ was stale, which is
 why this sat "blocked" while its dependencies were done.
@@ -1154,6 +1154,15 @@ K is read from the sidecar, never recomputed, so there is one definition of it. 
 anchor is re-fitted in whichever mode is running — pricing members on K against an
 anchor fitted on raw DPS would compare two scales and make every delta meaningless.
 `--compare-k` deliberately writes **no candidate anchor**: it is a report, not a fit.
+
+**FLIPPED TO DEFAULT (PRICING-DEFAULT, maintainer ruling 2026-10-04):** K-adjusted
+`effective_dps` is now the DEFAULT basis in `fit_class.unit_inputs` and every
+consumer that goes through it (`check_band`, `anchor_readiness`, `fit_baseband`,
+`derive_virtual_anchor`), plus `propose_class_rebalance`, `update_ranges` and
+`propose_rebalance`. Each tool keeps `--raw` as the explicit opt-out, and
+`--use-k` stays accepted for script compatibility. The per-faction before/after
+evidence lives at `docs/balance/derived/pricing_default_delta.md`
+(`tools/balance/k_price_delta.py`, read-only — it changes no yaml or ledger).
 
 **⚠ TWO PIPELINE BUGS FOUND BY ACTUALLY RUNNING IT** — both pre-existing, both far more
 consequential than the flag:
@@ -1187,8 +1196,9 @@ maintainer already considers CORRECT, and checking whether K pulls those towards
 away from them.
 
 **VERIFY:** `python tools/balance/fit_class.py --class mbt --anchor naxis_tiger --compare-k`
-→ report in `docs/balance/derived/`, `class_anchors.json` untouched. Sign-off still owed
-in `anchor_decisions_log.md` before `--use-k` becomes the default.
+→ report in `docs/balance/derived/`, `class_anchors.json` untouched. The sign-off
+arrived as the PRICING-DEFAULT ruling (2026-10-04): K is now the default basis;
+record the flip in `anchor_decisions_log.md`.
 
 ---
 
