@@ -20,8 +20,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 	/// <summary>Parser and read-only consumer for tools/ai/fit_fight_learning.py output.</summary>
 	public sealed class BotFightThresholds
 	{
+		const int Schema = 1;
+		const int MinimumEvidence = 150;
 		readonly Dictionary<string, int> retreat = new(StringComparer.Ordinal);
 		readonly Dictionary<string, int> engage = new(StringComparer.Ordinal);
+		readonly Dictionary<string, int> evidence = new(StringComparer.Ordinal);
 
 		public static BotFightThresholds Parse(IEnumerable<MiniYamlNode> nodes)
 		{
@@ -29,32 +32,67 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var root = nodes.FirstOrDefault(n => n.Key == "BotFightLearning");
 			if (root == null)
 				return result;
+			var schema = root.Value.Nodes.FirstOrDefault(n => n.Key == "Schema");
+			if (schema == null || !int.TryParse(schema.Value.Value, NumberStyles.Integer, CultureInfo.InvariantCulture, out var version) || version != Schema)
+				return result;
 
 			foreach (var node in root.Value.Nodes)
 			{
 				if (!int.TryParse(node.Value.Value, NumberStyles.Integer, CultureInfo.InvariantCulture, out var value))
 					continue;
-				if (node.Key.StartsWith("RetreatRatioPct@", StringComparison.Ordinal))
-					result.retreat[node.Key["RetreatRatioPct@".Length..]] = value;
-				else if (node.Key.StartsWith("EngageMarginPct@", StringComparison.Ordinal))
-					result.engage[node.Key["EngageMarginPct@".Length..]] = value;
+
+				Add(node.Key, "Evidence@", result.evidence, value);
+				Add(node.Key, "RetreatRatioPct@", result.retreat, value);
+				Add(node.Key, "EngageMarginPct@", result.engage, value);
 			}
 
 			return result;
 		}
 
-		public int RetreatRatioPct(string own, string enemy, int fallback) => Lookup(retreat, own, enemy, fallback);
-		public int EngageMarginPct(string own, string enemy, int fallback) => Lookup(engage, own, enemy, fallback);
-
-		static int Lookup(Dictionary<string, int> source, string own, string enemy, int fallback)
+		static void Add(string key, string prefix, Dictionary<string, int> destination, int value)
 		{
-			var exact = string.IsNullOrEmpty(enemy) ? null : own + "__vs__" + enemy;
-			if (exact != null && source.TryGetValue(exact, out var value))
-				return value;
-			if (!string.IsNullOrEmpty(own) && source.TryGetValue(own, out value))
-				return value;
-			return source.TryGetValue("any", out value) ? value : fallback;
+			if (!key.StartsWith(prefix, StringComparison.Ordinal))
+				return;
+
+			var scope = key[prefix.Length..];
+			if (ScopeIsSafe(scope))
+				destination[scope] = value;
 		}
+
+		// This is a defensive runtime boundary. The closed learned-artifact audit validates
+		// factions against rules vocabulary; here we also reject arbitrary text and never
+		// let a malformed artifact become a player-derived key.
+		static bool ScopeIsSafe(string scope)
+		{
+			if (scope == "any")
+				return true;
+
+			var halves = scope.Split("__vs__", StringSplitOptions.None);
+			if (halves.Length is < 1 or > 2 || halves.Any(string.IsNullOrEmpty))
+				return false;
+
+			return halves.All(part => part.All(c => c is >= 'a' and <= 'z' or >= '0' and <= '9' or '_' or '-' or '.'));
+		}
+
+		public bool TryRetreatRatioPct(string own, string enemy, out int value) => TryLookup(retreat, own, enemy, out value);
+		public bool TryEngageMarginPct(string own, string enemy, out int value) => TryLookup(engage, own, enemy, out value);
+
+		bool TryLookup(Dictionary<string, int> source, string own, string enemy, out int value)
+		{
+			value = 0;
+			var exact = string.IsNullOrEmpty(enemy) ? null : own + "__vs__" + enemy;
+			if (exact != null && HasEvidence(exact) && source.TryGetValue(exact, out value))
+				return true;
+			if (!string.IsNullOrEmpty(own) && HasEvidence(own) && source.TryGetValue(own, out value))
+				return true;
+
+			var family = own.IndexOf('_') is var separator && separator > 0 ? "family_" + own[..separator] : null;
+			if (family != null && HasEvidence(family) && source.TryGetValue(family, out value))
+				return true;
+			return HasEvidence("any") && source.TryGetValue("any", out value);
+		}
+
+		bool HasEvidence(string scope) => evidence.TryGetValue(scope, out var samples) && samples >= MinimumEvidence;
 	}
 
 	[TraitLocation(SystemActors.Player)]
@@ -72,12 +110,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 	public class FightThresholdsBotModule : ConditionalTrait<FightThresholdsBotModuleInfo>, IBotTick, IBotFightThresholds
 	{
-		readonly OpenRA.Player player;
 		BotFightThresholds thresholds = new();
 		bool loaded;
 
 		public FightThresholdsBotModule(Actor self, FightThresholdsBotModuleInfo info)
-			: base(info) { player = self.Owner; }
+			: base(info) { }
 
 		void IBotTick.BotTick(IBot bot)
 		{
@@ -92,17 +129,25 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				using var stream = fs.Open(Info.LearnedFile);
 				thresholds = BotFightThresholds.Parse(MiniYaml.FromStream(stream, Info.LearnedFile));
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				thresholds = new BotFightThresholds();
-				Log.Write("debug", $"AI {player.InternalName}: fight learning ignored ({e.Message})");
+				Log.Write("debug", "Fight learning ignored invalid artifact.");
 			}
 		}
 
-		int IBotFightThresholds.RetreatRatioPct(string own, string enemy, int fallback) =>
-			IsTraitDisabled || !loaded ? fallback : Math.Clamp(thresholds.RetreatRatioPct(own, enemy, fallback), Info.MinimumRetreatRatioPct, Info.MaximumRetreatRatioPct);
+		int IBotFightThresholds.RetreatRatioPct(string own, string enemy, int fallback)
+		{
+			if (IsTraitDisabled || !loaded || !thresholds.TryRetreatRatioPct(own, enemy, out var value))
+				return fallback;
+			return Math.Clamp(value, Info.MinimumRetreatRatioPct, Info.MaximumRetreatRatioPct);
+		}
 
-		int IBotFightThresholds.EngageMarginPct(string own, string enemy, int fallback) =>
-			IsTraitDisabled || !loaded ? fallback : Math.Clamp(thresholds.EngageMarginPct(own, enemy, fallback), Info.MinimumEngageMarginPct, Info.MaximumEngageMarginPct);
+		int IBotFightThresholds.EngageMarginPct(string own, string enemy, int fallback)
+		{
+			if (IsTraitDisabled || !loaded || !thresholds.TryEngageMarginPct(own, enemy, out var value))
+				return fallback;
+			return Math.Clamp(value, Info.MinimumEngageMarginPct, Info.MaximumEngageMarginPct);
+		}
 	}
 }

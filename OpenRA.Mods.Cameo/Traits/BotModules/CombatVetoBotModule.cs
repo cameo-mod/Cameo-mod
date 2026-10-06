@@ -193,7 +193,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (provider == null)
 				return (Info.VetoEngageRatioPct, Info.VetoAbortRatioPct);
 			var enemy = enemies.Where(a => a?.Owner?.Faction != null && player.RelationshipWith(a.Owner) == PlayerRelationship.Enemy)
-				.Select(a => a.Owner.Faction.InternalName).Where(f => !string.IsNullOrEmpty(f))
+				.Select(a => BotFactionView.PublicFactionOf(a.Owner)).Where(f => !string.IsNullOrEmpty(f))
 				.OrderBy(f => f, System.StringComparer.Ordinal).FirstOrDefault() ?? "";
 			var engage = provider.RetreatRatioPct(player.Faction.InternalName, enemy, Info.VetoEngageRatioPct);
 			var abort = Info.VetoAbortRatioPct * engage / System.Math.Max(1, Info.VetoEngageRatioPct);
