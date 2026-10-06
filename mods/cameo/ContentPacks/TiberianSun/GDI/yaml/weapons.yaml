@@ -1071,6 +1071,7 @@ TSDestroyerMissiles:
 		Duration: 12
 TSMammothTusk2_AA:
 	Inherits@missilerole: ^Warhead_MissileAA_Heavy
+	Inherits@projectileaa: ^Projectile_Missile_AA
 	Inherits@proj: ^Projectile_Missile_Heavy
 	Inherits@fx: ^ts_gdi_set21
 	ValidTargets: Air
@@ -1097,8 +1098,17 @@ TSMammothTusk2_AA:
 		PercentageScale: 10000
 		PercentageSpread: 50
 
+
+	Projectile: Missile
+		Inaccuracy: 150
+		ContrailLength: 0
+		MaximumLaunchSpeed: 200
+		MinimumLaunchSpeed: 200
+		HomingActivationDelay: 3
+
 TSMammothTusk2II_AA:
 	Inherits@missilerole: ^Warhead_MissileAA_Heavy
+	Inherits@projectileaa: ^Projectile_Missile_AA
 	Inherits@proj: ^Projectile_Missile_Heavy
 	Inherits@fx: ^ts_gdi_set21
 	ValidTargets: Air
@@ -1124,6 +1134,14 @@ TSMammothTusk2II_AA:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 10000
 		PercentageSpread: 50
+
+
+	Projectile: Missile
+		Inaccuracy: 150
+		ContrailLength: 0
+		MaximumLaunchSpeed: 200
+		MinimumLaunchSpeed: 200
+		HomingActivationDelay: 3
 
 TSHellfireSonic:
 	Inherits: TSHellfire
@@ -1186,6 +1204,7 @@ TSZoneHellfireSonic:
 
 TSGDIRedEye:
 	Inherits@missilerole: ^Warhead_MissileAA_Heavy
+	Inherits@projectileaa: ^Projectile_Missile_AA
 	Inherits@proj: ^Projectile_Missile_Heavy
 	Inherits@fx: ^ts_gdi_tsgdiredeye
 	ReloadDelay: 30
@@ -1210,6 +1229,14 @@ TSGDIRedEye:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 10000
 		PercentageSpread: 50
+
+
+	Projectile: Missile
+		Inaccuracy: 150
+		ContrailLength: 0
+		MaximumLaunchSpeed: 200
+		MinimumLaunchSpeed: 200
+		HomingActivationDelay: 3
 
 TSBomb:
 	Inherits@finalmain: ^Warhead_Demolition_Heavy_Flat

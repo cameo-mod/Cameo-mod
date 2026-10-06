@@ -21756,6 +21756,8 @@ Short8Inch:
 	-Warhead@Demolition_Heavy:
 
 bowFire_AA:
+	Inherits@warheadaa: ^Warhead_MissileAA_Light
+	Inherits@projectileaa: ^Projectile_Missile_AA
 	ReloadDelay: 40
 	Range: 7680
 	Report: bowfire.aud
@@ -21804,6 +21806,28 @@ bowFire_AA:
 			ShipMedium: 40
 			AntiAirShip: 50
 			SubmarineLight: 49
+
+
+	-Warhead@1Dam:
+	-Warhead@MissileAA_Light:
+	Warhead@MissileAA_Light: SpreadDamage
+		Spread: 150
+		Damage: 1500
+		ValidTargets: Air
+		Versus
+			None: 150
+			Wood: 40
+			Light: 100
+			Medium: 80
+			Heavy: 60
+			Concrete: 20
+			CyborgLight: 122
+			AntiAirVehicle: 89
+			ShipLight: 63
+			ShipMedium: 40
+			AntiAirShip: 50
+			SubmarineLight: 49
+		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
 
 bowFire:
 	ReloadDelay: 40

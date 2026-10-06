@@ -1553,6 +1553,7 @@ NapalmA10Carrier:
 
 A10CarrierMissiles_AA:
 	Inherits@missilerole: ^Warhead_MissileAA_Heavy
+	Inherits@projectileaa: ^Projectile_Missile_AA
 	Inherits@proj: ^Projectile_Missile_Heavy
 	Inherits@fx: ^td_gdi_set1
 	ValidTargets: Air
@@ -1588,6 +1589,12 @@ A10CarrierMissiles_AA:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 10000
 		PercentageSpread: 50
+
+
+	Projectile: Missile
+		HorizontalRateOfTurn: 20
+		VerticalRateOfTurn: 20
+		HomingActivationDelay: 3
 
 td_gdi_advancedguardtower_towermissile:
 	Inherits@missilerole: ^Warhead_MissileAP_Heavy
@@ -3036,6 +3043,7 @@ td_gdi_humveemkii_rocketshumvee2:
 
 td_gdi_humveemkii_rocketshumvee2_AA:
 	Inherits@missilerole: ^Warhead_MissileAA_Light
+	Inherits@projectileaa: ^Projectile_Missile_AA
 	ValidTargets: Air
 	ReloadDelay: 84
 	Range: 8397
@@ -3085,6 +3093,19 @@ td_gdi_humveemkii_rocketshumvee2_AA:
 		ValidTargets: Shielded
 	Inherits@w6fx1: ^td_gdi_td_gdi_humveemkii_rocketshumvee2_aa_2
 	Report: bazook1.aud
+
+	Projectile: Missile
+		Inaccuracy: 50
+		Image: DRAGON
+		HorizontalRateOfTurn: 40
+		VerticalRateOfTurn: 20
+		ContrailLength: 0
+		MaximumLaunchSpeed: 300
+		MinimumLaunchSpeed: 300
+		Speed: 600
+		Acceleration: 4
+		HomingActivationDelay: 1
+
 ^td_gdi_td_gdi_humveemkii_rocketshumvee2amt_aa:
 	Warhead@Concrete: DamagesConcrete
 		Damage: 100
@@ -3228,6 +3249,7 @@ td_gdi_humveemkii_rocketshumvee2amt:
 
 td_gdi_humveemkii_rocketshumvee2amt_AA:
 	Inherits@missilerole: ^Warhead_MissileAA_Heavy
+	Inherits@projectileaa: ^Projectile_Missile_AA
 	ValidTargets: Air
 	ReloadDelay: 84
 	Range: 8397
@@ -3303,6 +3325,18 @@ td_gdi_humveemkii_rocketshumvee2amt_AA:
 		ValidTargets: Shielded
 	Inherits@w6fx1: ^td_gdi_td_gdi_humveemkii_rocketshumvee2amt_aa_2
 	Report: bazook1.aud
+
+	Projectile: Missile
+		Inaccuracy: 50
+		Image: DRAGON
+		HorizontalRateOfTurn: 25
+		VerticalRateOfTurn: 12
+		ContrailLength: 12
+		MaximumLaunchSpeed: 400
+		MinimumLaunchSpeed: 400
+		Speed: 800
+		Acceleration: 5
+
 TDShotgun:
 	Inherits@collapsewh: ^Warhead_Bullet_Medium
 	Inherits@collapseexplosive: ^Warhead_Concussion_Medium
@@ -4820,6 +4854,7 @@ td_gdi_havoc_rifle:
 
 td_gdi_firehawk_firehawkmissiles_AA:
 	Inherits@missilerole: ^Warhead_MissileAA_Heavy
+	Inherits@projectileaa: ^Projectile_Missile_AA
 	Inherits@proj: ^Projectile_Missile_Heavy
 	Inherits@fx: ^td_gdi_set1
 	ValidTargets: Air
@@ -4856,6 +4891,12 @@ td_gdi_firehawk_firehawkmissiles_AA:
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 		PercentageScale: 10000
 		PercentageSpread: 50
+
+
+	Projectile: Missile
+		HorizontalRateOfTurn: 20
+		VerticalRateOfTurn: 20
+		HomingActivationDelay: 3
 
 td_gdi_firehawk_firehawkbomb:
 	Inherits@collapsewh: ^Warhead_Nuclear_Super

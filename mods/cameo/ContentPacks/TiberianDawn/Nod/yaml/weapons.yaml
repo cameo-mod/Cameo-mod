@@ -114,6 +114,7 @@ M16Laser:
 		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
 td_nod_samsite_dragon:
 	Inherits@w71: ^Warhead_MissileAA_Heavy
+	Inherits@projectileaa: ^Projectile_Missile_AA
 	Warhead@MissileAA_Heavy:
 		ValidTargets: Air
 		Damage: 12000
@@ -137,6 +138,18 @@ td_nod_samsite_dragon:
 	Report: rocket2.aud
 	Burst: 2
 	BurstDelays: 10
+
+	Projectile: Missile
+		Inaccuracy: 150
+		HorizontalRateOfTurn: 25
+		VerticalRateOfTurn: 12
+		ContrailLength: 0
+		MaximumLaunchSpeed: 200
+		MinimumLaunchSpeed: 200
+		Speed: 500
+		Acceleration: 5
+		HomingActivationDelay: 3
+
 td_nod_rocketsoldier_rockets:
 	Inherits@w71: ^Warhead_MissileAP_Light
 	Inherits@w72: ^Projectile_Missile_Light

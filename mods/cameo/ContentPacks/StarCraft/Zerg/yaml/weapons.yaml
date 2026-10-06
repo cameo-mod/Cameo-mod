@@ -460,12 +460,108 @@ sc_zerg_devourer_acidcloud_aa:
 		ImpactSounds: zavdth00.aud
 
 ScourgeExplosion:
+	Inherits@warheadaa: ^Warhead_MissileAA_Heavy
+	Inherits@projectileaa: ^Projectile_Missile_AA
 	Inherits: SCScourgeExplosion
 	Range: 2000
 	Projectile: Missile
 		Speed: 200
 		Image: zerg_scourge
 	Inherits@w6fx: ^sc_zerg_scourgeexplosion_fx
+
+
+	Projectile: Missile
+		Speed: 200
+		Inaccuracy: 400
+		Image: zerg_scourge
+
+
+	-Warhead@MissileAA_Heavy:
+	-Warhead@MissileAA_Heavy_Flat:
+	Warhead@MissileAA_Heavy: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Air
+		Spread: 400
+		Damage: 100000
+		Falloff: 100, 70, 30, 0
+		Versus
+			HAZMAT: 87
+			COMPOSITE: 67
+			BLAST: 56
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 172
+			Spaceship: 161
+			Superheavy: 150
+			Helicopter: 138
+			Heavy: 133
+			Bomber: 119
+			Medium: 108
+			Concrete: 105
+			Fighter: 102
+			Light: 96
+			Plate: 92
+			Steel: 83
+			Scout: 76
+			Flak: 74
+			Wood: 67
+			None: 54
+			Heroic: 43
+			CyborgLight: 72
+			CyborgMedium: 89
+			CyborgHeavy: 111
+			CyborgHeroic: 80
+			AntiAirInfantry: 63
+			AntiAirVehicle: 102
+			AntiAirBuilding: 93
+			ShipLight: 80
+			ShipMedium: 106
+			ShipHeavy: 105
+			ShipSuperheavy: 112
+			AntiAirShip: 92
+			FlyingInfantry: 92
+			SubmarineLight: 119
+			SubmarineHeavy: 125
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 9999
+		PercentageSpread: 50
+		PercentageVersus
+			Shield: 35
+			Spaceship: 25
+			Helicopter: 24
+			Bomber: 23
+			Fighter: 22
+			Superheavy: 21
+			Heavy: 20
+			Medium: 19
+			Light: 18
+			Scout: 17
+			Concrete: 16
+			Steel: 15
+			Wood: 14
+			Heroic: 13
+			Plate: 12
+			Flak: 11
+			None: 10
+			CyborgLight: 13
+			CyborgMedium: 14
+			CyborgHeavy: 15
+			CyborgHeroic: 17
+			AntiAirInfantry: 10
+			AntiAirVehicle: 18
+			AntiAirBuilding: 15
+			ShipLight: 16
+			ShipMedium: 17
+			ShipHeavy: 17
+			ShipSuperheavy: 18
+			AntiAirShip: 16
+			FlyingInfantry: 16
+			SubmarineLight: 18
+			SubmarineHeavy: 19
+
+	ValidTargets: Air
 
 ^sc_zerg_scscourgeexplosion:
 	Warhead@Effect: CreateEffect
@@ -1187,7 +1283,8 @@ SCQUEENSUMMON:
 		ValidTargets: Air
 
 Spore_AA:
-	Inherits@collapsewh: ^Warhead_Chemical_Medium
+	Inherits@collapsewh: ^Warhead_MissileAA_Medium
+	Inherits@projectileaa: ^Projectile_Missile_AA
 	Inherits: ^MediumMissile
 	Inherits@2: ^Chaingun
 	Inherits@3: ^FlakWeapon
@@ -1232,6 +1329,109 @@ Spore_AA:
 		ValidTargets: Air
 		Damage: 36000
 		PercentageScale: 0
+
+
+	Projectile: Missile
+		Blockable: False
+		Inaccuracy: 250
+		Image: scspore
+		HorizontalRateOfTurn: 200
+		VerticalRateOfTurn: 30
+		TrailImage: sczhsplash
+		ContrailLength: 5
+		MaximumLaunchSpeed: 250
+		MinimumLaunchSpeed: 250
+		Speed: 600
+		Acceleration: 3
+		HomingActivationDelay: 2
+
+
+	-Warhead@Chemical_Medium:
+	-Warhead@MissileAA_Medium:
+	Warhead@MissileAA_Medium: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Air
+		Spread: 275
+		Damage: 36000
+		Falloff: 100, 88, 72, 50, 0
+		Versus
+			HAZMAT: 51
+			COMPOSITE: 61
+			BLAST: 73
+			REFLECTOR: 96
+			ARMOR: 70
+			Shield: 220
+			Superheavy: 200
+			Plate: 192
+			CyborgHeavy: 181
+			Heavy: 170
+			SubmarineHeavy: 154
+			Medium: 148
+			SubmarineLight: 146
+			AntiAirVehicle: 144
+			CyborgMedium: 142
+			Light: 140
+			Flak: 137
+			CyborgHeroic: 137
+			ShipSuperheavy: 130
+			ShipMedium: 126
+			CyborgLight: 125
+			AntiAirInfantry: 123
+			ShipHeavy: 119
+			None: 111
+			AntiAirShip: 108
+			Concrete: 107
+			Scout: 98
+			AntiAirBuilding: 95
+			Heroic: 94
+			FlyingInfantry: 93
+			ShipLight: 92
+			Steel: 84
+			Spaceship: 65
+			Wood: 61
+			Helicopter: 60
+			Bomber: 54
+			Fighter: 45
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+		PhysicalStates
+			Corrosion: 100
+		PercentageScale: 0
+		PercentageSpread: 50
+		PercentageVersus
+			Shield: 25
+			Superheavy: 20
+			Heroic: 19
+			CyborgHeroic: 19
+			Heavy: 18
+			Plate: 17
+			CyborgHeavy: 17
+			Medium: 16
+			SubmarineHeavy: 16
+			Flak: 15
+			CyborgMedium: 15
+			AntiAirVehicle: 15
+			SubmarineLight: 15
+			Light: 14
+			AntiAirInfantry: 14
+			ShipSuperheavy: 14
+			None: 13
+			CyborgLight: 13
+			ShipMedium: 13
+			ShipHeavy: 13
+			Scout: 12
+			AntiAirShip: 12
+			Concrete: 11
+			FlyingInfantry: 11
+			ShipLight: 11
+			Steel: 10
+			AntiAirBuilding: 10
+			Wood: 9
+			Spaceship: 8
+			Helicopter: 7
+			Bomber: 6
+			Fighter: 5
 
 ^sc_zerg_tentacle:
 	Warhead@Effect: CreateEffect

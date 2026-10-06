@@ -245,12 +245,13 @@ DevBullet:
 		Palette: d2keffect
 
 D2K_Rocket_AA:
+	Inherits@wh: ^Warhead_MissileAA_Heavy
+	Inherits@projectileaa: ^Projectile_Missile_AA
 	Inherits@w81: ^Warhead_MissileAP_Heavy  # W7MAT covering-edge
 	Inherits@w82: ^Projectile_Missile_Heavy_D2K  # W7MAT covering-edge
 	Inherits@w83: ^Effect_MissileAP_Heavy_D2K  # W7MAT covering-edge
 	MinRange: 1100  # W7MAT w8-repin
 	Report: ROCKET1.WAV  # W7MAT w8-repin
-	Inherits@wh: ^Warhead_MissileHE_Heavy
 	ValidTargets: Air
 	Range: 5500
 	ReloadDelay: 30
@@ -270,6 +271,100 @@ D2K_Rocket_AA:
 	Warhead@MissileHE_Heavy:
 		ValidTargets: Air
 		Damage: 4750
+
+
+	Projectile: Missile
+		ContrailLength: 0
+		MaximumLaunchSpeed: 200
+		MinimumLaunchSpeed: 200
+		Acceleration: 3
+		HomingActivationDelay: 3
+
+
+	-Warhead@MissileAA_Heavy:
+	-Warhead@MissileHE_Heavy:
+	Warhead@MissileAA_Heavy: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Air
+		Spread: 200
+		Damage: 4750
+		Falloff: 100, 45, 15, 0
+		Versus
+			HAZMAT: 76
+			COMPOSITE: 88
+			BLAST: 45
+			REFLECTOR: 70
+			ARMOR: 70
+			Shield: 169
+			Scout: 145
+			Wood: 143
+			ShipLight: 141
+			Light: 140
+			AntiAirVehicle: 134
+			AntiAirShip: 133
+			Medium: 128
+			Steel: 126
+			ShipMedium: 126
+			Concrete: 125
+			AntiAirBuilding: 125
+			ShipHeavy: 124
+			SubmarineLight: 124
+			Heavy: 123
+			ShipSuperheavy: 123
+			SubmarineHeavy: 122
+			Superheavy: 121
+			Fighter: 108
+			CyborgLight: 104
+			Bomber: 97
+			FlyingInfantry: 96
+			CyborgMedium: 96
+			Helicopter: 84
+			CyborgHeavy: 84
+			None: 77
+			AntiAirInfantry: 74
+			Spaceship: 73
+			Flak: 72
+			CyborgHeroic: 70
+			Plate: 57
+			Heroic: 41
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 10000
+		PercentageSpread: 50
+		PercentageVersus
+			Shield: 35
+			Scout: 25
+			Wood: 24
+			Light: 23
+			ShipLight: 23
+			Steel: 22
+			AntiAirVehicle: 22
+			Medium: 21
+			AntiAirBuilding: 21
+			AntiAirShip: 21
+			Concrete: 20
+			ShipMedium: 20
+			ShipHeavy: 20
+			ShipSuperheavy: 20
+			Heavy: 19
+			SubmarineLight: 19
+			SubmarineHeavy: 19
+			Superheavy: 18
+			Fighter: 17
+			FlyingInfantry: 17
+			CyborgLight: 17
+			Bomber: 16
+			CyborgMedium: 16
+			Helicopter: 15
+			Spaceship: 14
+			CyborgHeavy: 14
+			None: 13
+			CyborgHeroic: 13
+			Flak: 12
+			AntiAirInfantry: 12
+			Plate: 11
+			Heroic: 10
 
 PlasmaExplosion:
 	Warhead@1Dam: SpreadDamage

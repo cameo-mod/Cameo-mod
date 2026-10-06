@@ -2148,6 +2148,8 @@ TSAdatsMissile:
 		ValidTargets: Shielded
 
 TSAdatsMissile_AA:
+	Inherits@finalmain: ^Warhead_MissileAA_Medium
+	Inherits@projectileaa: ^Projectile_Missile_AA
 	ValidTargets: Air
 	ReloadDelay: 54
 	Range: 8409
@@ -2188,11 +2190,111 @@ TSAdatsMissile_AA:
 	Burst: 4
 	BurstDelays: 2
 	Report: misl1.aud
-	Inherits@finalmain: ^Warhead_Flak_Medium_Flat
 	Warhead@Flak_Medium_Flat:
 		Damage: 8000
 		PercentageScale: 9988
 		ValidTargets: Air
+
+
+	Projectile: Missile
+		Inaccuracy: 50
+		Image: DRAGON
+		HorizontalRateOfTurn: 40
+		VerticalRateOfTurn: 20
+		ContrailLength: 0
+		MaximumLaunchSpeed: 300
+		MinimumLaunchSpeed: 300
+		Speed: 600
+		Acceleration: 4
+		HomingActivationDelay: 1
+
+
+	-Warhead@Flak_Medium_Flat:
+	-Warhead@MissileAA_Medium:
+	Warhead@MissileAA_Medium: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Air
+		Spread: 110
+		Damage: 8000
+		Falloff: 100, 58, 32, 16, 6, 0
+		Versus
+			HAZMAT: 88
+			COMPOSITE: 64
+			BLAST: 58
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 171
+			None: 200
+			Fighter: 197
+			Bomber: 196
+			Helicopter: 155
+			Spaceship: 153
+			Flak: 149
+			Plate: 117
+			Scout: 61
+			Light: 60
+			Medium: 57
+			Wood: 54
+			Heavy: 49
+			Superheavy: 40
+			Steel: 39
+			Concrete: 37
+			Heroic: 36
+			CyborgLight: 110
+			CyborgMedium: 92
+			CyborgHeavy: 76
+			CyborgHeroic: 38
+			AntiAirInfantry: 173
+			AntiAirVehicle: 58
+			AntiAirBuilding: 38
+			ShipLight: 57
+			ShipMedium: 46
+			ShipHeavy: 44
+			ShipSuperheavy: 39
+			AntiAirShip: 51
+			FlyingInfantry: 112
+			SubmarineLight: 47
+			SubmarineHeavy: 42
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 9988
+		PercentageSpread: 50
+		PercentageVersus
+			Shield: 25
+			Fighter: 20
+			Bomber: 19
+			Helicopter: 18
+			Spaceship: 17
+			None: 16
+			Flak: 15
+			Plate: 14
+			Heroic: 13
+			Scout: 12
+			Light: 11
+			Medium: 10
+			Heavy: 9
+			Superheavy: 8
+			Wood: 7
+			Steel: 6
+			Concrete: 5
+			CyborgLight: 13
+			CyborgMedium: 12
+			CyborgHeavy: 11
+			CyborgHeroic: 10
+			AntiAirInfantry: 15
+			AntiAirVehicle: 10
+			AntiAirBuilding: 5
+			ShipLight: 9
+			ShipMedium: 7
+			ShipHeavy: 7
+			ShipSuperheavy: 7
+			AntiAirShip: 8
+			FlyingInfantry: 15
+			SubmarineLight: 8
+			SubmarineHeavy: 7
+
+	ValidTargets: Air
 
 MutFlamer:
 	Inherits@wh: ^Warhead_Flame_Medium

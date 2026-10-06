@@ -956,6 +956,7 @@ ScarabLaunchDummy:
 
 ScoutRockets_AA:
 	Inherits@wh: ^Warhead_MissileAA_Heavy
+	Inherits@projectileaa: ^Projectile_Missile_AA
 	Inherits@proj: ^Projectile_Missile_Heavy_SC
 	Inherits@fx: ^Effect_MissileHE_Heavy_SC
 	Report: HKMISSLE.aud
@@ -979,6 +980,19 @@ ScoutRockets_AA:
 		ValidTargets: Air
 		Damage: 10000
 	Inherits@w6fx: ^sc_protoss_scoutrockets_aa
+
+	Projectile: Missile
+		Inaccuracy: 25
+		Image: d2k_missile2
+		VerticalRateOfTurn: 20
+		TrailImage: large_trail
+		ContrailLength: 0
+		MaximumLaunchSpeed: 250
+		MinimumLaunchSpeed: 250
+		Speed: 500
+		Acceleration: 5
+		HomingActivationDelay: 3
+
 ^sc_protoss_warpblade:
 	Warhead@Effect: CreateEffect
 		ImpactSounds: zulhit00.aud,zulhit01.aud

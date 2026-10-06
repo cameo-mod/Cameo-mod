@@ -1412,7 +1412,8 @@ JapanMaidenBowEnergized:
 		SmudgeType: RA2Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 BallistaSingleShotAir_AA:
-	Inherits@wh: ^Warhead_Arrow_Light
+	Inherits@wh: ^Warhead_MissileAA_Light
+	Inherits@projectileaa: ^Projectile_Missile_AA
 	Inherits@proj: ^Projectile_Arrow_Light
 	Inherits@fx: ^Effect_Arrow_Light
 	ReloadDelay: 200
@@ -1446,6 +1447,92 @@ BallistaSingleShotAir_AA:
 		ValidTargets: Ground
 	# W7MAT inline of JapanMaidenBow
 	ValidTargets: Air
+
+	-Warhead@Arrow_Light:
+	-Warhead@MissileAA_Light:
+	Warhead@MissileAA_Light: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Air
+		Spread: 59
+		Damage: 160000
+		Falloff: 100, 0
+		Versus
+			HAZMAT: 101
+			COMPOSITE: 35
+			BLAST: 73
+			REFLECTOR: 70
+			ARMOR: 70
+			Shield: 107
+			None: 200
+			AntiAirInfantry: 185
+			Flak: 171
+			Plate: 142
+			CyborgLight: 136
+			Fighter: 135
+			CyborgMedium: 122
+			FlyingInfantry: 115
+			Bomber: 109
+			CyborgHeavy: 107
+			Scout: 99
+			Light: 93
+			Wood: 92
+			ShipLight: 92
+			Helicopter: 91
+			AntiAirVehicle: 90
+			Medium: 87
+			AntiAirShip: 85
+			Steel: 82
+			Spaceship: 81
+			ShipHeavy: 81
+			Heavy: 80
+			ShipMedium: 79
+			SubmarineLight: 79
+			ShipSuperheavy: 78
+			SubmarineHeavy: 78
+			AntiAirBuilding: 77
+			Superheavy: 75
+			Concrete: 72
+			CyborgHeroic: 72
+			Heroic: 70
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 10000
+		PercentageSpread: 50
+		PercentageVersus
+			Shield: 17
+			None: 16
+			Flak: 15
+			AntiAirInfantry: 15
+			Plate: 14
+			Heroic: 13
+			Fighter: 12
+			Bomber: 11
+			FlyingInfantry: 11
+			CyborgLight: 11
+			Helicopter: 10
+			Spaceship: 9
+			CyborgMedium: 9
+			Scout: 8
+			CyborgHeavy: 8
+			Light: 7
+			CyborgHeroic: 7
+			Medium: 6
+			AntiAirVehicle: 6
+			Heavy: 5
+			ShipLight: 5
+			Superheavy: 4
+			Wood: 3
+			ShipHeavy: 3
+			ShipSuperheavy: 3
+			AntiAirShip: 3
+			SubmarineLight: 3
+			SubmarineHeavy: 3
+			Steel: 2
+			ShipMedium: 2
+			Concrete: 1
+			AntiAirBuilding: 1
+
 BallistaSingleShotAirEnergized_AA:
 	Inherits@wh: ^Warhead_MissileAP_Light
 	Inherits@proj: ^Projectile_Missile_Light

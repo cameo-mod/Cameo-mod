@@ -8205,6 +8205,8 @@ Naxis_Komet:
 		SmudgeType: RA2Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 Naxis_Komet_AA:
+	Inherits@warheadaa: ^Warhead_MissileAA_Heavy
+	Inherits@projectileaa: ^Projectile_Missile_AA
 	Inherits: Naxis_Komet
 	ValidTargets: Air
 	Range: 11740
@@ -8226,3 +8228,100 @@ Naxis_Komet_AA:
 	Warhead@MediumMissilePercentage:
 		-InvalidTargets:
 		ValidTargets: Air
+
+	Projectile: Missile
+		Image: DRAGON
+		Inaccuracy: 400
+		Speed: 800
+		ContrailLength: 0
+		HorizontalRateOfTurn: 30
+		MaximumLaunchSpeed: 250
+		MinimumLaunchSpeed: 250
+		Acceleration: 3
+		HomingActivationDelay: 2
+
+
+	-Warhead@Flak_Heavy:
+	-Warhead@MissileAA_Heavy:
+	Warhead@MissileAA_Heavy: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Air
+		Spread: 146
+		Damage: 32000
+		Falloff: 100, 58, 32, 16, 6, 0
+		Versus
+			HAZMAT: 88
+			COMPOSITE: 63
+			BLAST: 58
+			REFLECTOR: 70
+			ARMOR: 70
+			Shield: 195
+			Fighter: 200
+			Bomber: 180
+			None: 164
+			Helicopter: 162
+			AntiAirInfantry: 161
+			Flak: 159
+			Spaceship: 146
+			Plate: 142
+			FlyingInfantry: 127
+			CyborgLight: 110
+			CyborgMedium: 108
+			CyborgHeavy: 99
+			Scout: 79
+			Wood: 75
+			Light: 74
+			ShipLight: 74
+			Medium: 73
+			AntiAirVehicle: 73
+			Heavy: 69
+			Superheavy: 68
+			AntiAirShip: 68
+			ShipHeavy: 67
+			SubmarineHeavy: 67
+			ShipSuperheavy: 66
+			SubmarineLight: 66
+			Steel: 65
+			ShipMedium: 63
+			CyborgHeroic: 62
+			AntiAirBuilding: 60
+			Heroic: 56
+			Concrete: 55
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 0
+		PercentageSpread: 50
+		PercentageVersus
+			Shield: 35
+			Fighter: 25
+			Bomber: 24
+			Helicopter: 23
+			Spaceship: 22
+			None: 21
+			Flak: 20
+			FlyingInfantry: 20
+			AntiAirInfantry: 20
+			Plate: 19
+			Heroic: 18
+			CyborgLight: 18
+			Scout: 17
+			CyborgMedium: 17
+			Light: 16
+			CyborgHeavy: 16
+			Medium: 15
+			CyborgHeroic: 15
+			AntiAirVehicle: 15
+			Heavy: 14
+			ShipLight: 14
+			Superheavy: 13
+			AntiAirShip: 13
+			SubmarineLight: 13
+			Wood: 12
+			ShipMedium: 12
+			ShipHeavy: 12
+			ShipSuperheavy: 12
+			SubmarineHeavy: 12
+			Steel: 11
+			Concrete: 10
+			AntiAirBuilding: 10

@@ -5752,7 +5752,8 @@ NaxPlaneRockets_elite:
 	Warhead@Smudge:
 		SmudgeType: SandCrater, RockCrater
 NaxInterceptorRockets:
-	Inherits@finalmain: ^Warhead_MissileAA_Heavy_Flat
+	Inherits@finalmain: ^Warhead_MissileAA_Heavy
+	Inherits@projectileaa: ^Projectile_Missile_AA
 	Inherits: NaxPlaneRockets_elite
 	ValidTargets: Air
 	-Warhead@MissileAP_Heavy_Flat:
@@ -5790,6 +5791,101 @@ NaxInterceptorRockets:
 		ImpactActors: false
 	Warhead@Smudge:
 		SmudgeType: SandCrater, RockCrater
+
+
+	Projectile: Missile
+		Speed: 500
+		Inaccuracy: 25
+		Image: d2k_RPG
+		TrailImage: bazooka_trail2
+		Acceleration: 5
+		ContrailLength: 6
+
+
+	-Warhead@MissileAA_Heavy:
+	-Warhead@MissileAA_Heavy_Flat:
+	Warhead@MissileAA_Heavy: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Air
+		Spread: 400
+		Damage: 20000
+		Falloff: 100, 70, 30, 0
+		Versus
+			HAZMAT: 87
+			COMPOSITE: 67
+			BLAST: 56
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 172
+			Spaceship: 161
+			Superheavy: 150
+			Helicopter: 138
+			Heavy: 133
+			Bomber: 119
+			Medium: 108
+			Concrete: 105
+			Fighter: 102
+			Light: 96
+			Plate: 92
+			Steel: 83
+			Scout: 76
+			Flak: 74
+			Wood: 67
+			None: 54
+			Heroic: 43
+			CyborgLight: 72
+			CyborgMedium: 89
+			CyborgHeavy: 111
+			CyborgHeroic: 80
+			AntiAirInfantry: 63
+			AntiAirVehicle: 102
+			AntiAirBuilding: 93
+			ShipLight: 80
+			ShipMedium: 106
+			ShipHeavy: 105
+			ShipSuperheavy: 112
+			AntiAirShip: 92
+			FlyingInfantry: 92
+			SubmarineLight: 119
+			SubmarineHeavy: 125
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 9995
+		PercentageSpread: 50
+		PercentageVersus
+			Shield: 35
+			Spaceship: 25
+			Helicopter: 24
+			Bomber: 23
+			Fighter: 22
+			Superheavy: 21
+			Heavy: 20
+			Medium: 19
+			Light: 18
+			Scout: 17
+			Concrete: 16
+			Steel: 15
+			Wood: 14
+			Heroic: 13
+			Plate: 12
+			Flak: 11
+			None: 10
+			CyborgLight: 13
+			CyborgMedium: 14
+			CyborgHeavy: 15
+			CyborgHeroic: 17
+			AntiAirInfantry: 10
+			AntiAirVehicle: 18
+			AntiAirBuilding: 15
+			ShipLight: 16
+			ShipMedium: 17
+			ShipHeavy: 17
+			ShipSuperheavy: 18
+			AntiAirShip: 16
+			FlyingInfantry: 16
+			SubmarineLight: 18
+			SubmarineHeavy: 19
 
 NaxiInterceptorGun:
 	Inherits: ^Warhead_CannonHE_Heavy

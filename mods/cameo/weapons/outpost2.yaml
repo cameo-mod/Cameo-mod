@@ -1653,7 +1653,8 @@ eden_EMP:
 		PercentageScale: 0
 
 eden_EMP_AA:
-	Inherits@w70: ^Warhead_Tesla_Super
+	Inherits@w70: ^Warhead_MissileAA_Heavy
+	Inherits@projectileaa: ^Projectile_Missile_AA
 	Inherits@fx: ^op2_outpost2_set0
 	Range: 8250
 	MinRange: 1650
@@ -2021,7 +2022,93 @@ eden_EMP_AA:
 		ForceGround: true
 		OwnerType: InternalName
 		InternalOwner: Neutral
-	-Warhead@Tesla_Super_ExtraDamage:
+
+	-Warhead@MissileAA_Heavy:
+	-Warhead@Tesla_Super:
+	Warhead@MissileAA_Heavy: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Air
+		Spread: 116
+		Damage: 18000
+		Falloff: 100, 55, 0
+		Versus
+			HAZMAT: 61
+			COMPOSITE: 72
+			BLAST: 98
+			REFLECTOR: 51
+			ARMOR: 70
+			Shield: 400
+			Superheavy: 138
+			Heavy: 130
+			CyborgHeavy: 128
+			SubmarineHeavy: 127
+			Plate: 126
+			Medium: 124
+			SubmarineLight: 124
+			CyborgMedium: 123
+			Flak: 122
+			AntiAirVehicle: 122
+			Light: 121
+			AntiAirInfantry: 120
+			CyborgLight: 119
+			ShipSuperheavy: 119
+			None: 118
+			ShipMedium: 118
+			Scout: 116
+			ShipHeavy: 116
+			AntiAirShip: 114
+			Concrete: 113
+			ShipLight: 111
+			AntiAirBuilding: 108
+			Steel: 103
+			Wood: 101
+			CyborgHeroic: 100
+			FlyingInfantry: 95
+			Spaceship: 80
+			Heroic: 73
+			Helicopter: 60
+			Bomber: 55
+			Fighter: 54
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		IntegrityScale: 0
+		PercentageScale: 0
+		PercentageSpread: 50
+		PercentageVersus
+			Shield: 45
+			Superheavy: 30
+			Heroic: 29
+			CyborgHeroic: 29
+			Heavy: 28
+			Plate: 27
+			CyborgHeavy: 27
+			SubmarineHeavy: 27
+			Medium: 26
+			Flak: 25
+			CyborgMedium: 25
+			AntiAirVehicle: 25
+			SubmarineLight: 25
+			Light: 24
+			AntiAirInfantry: 24
+			ShipHeavy: 24
+			ShipSuperheavy: 24
+			None: 23
+			CyborgLight: 23
+			ShipMedium: 23
+			Scout: 22
+			AntiAirShip: 22
+			Concrete: 21
+			FlyingInfantry: 21
+			ShipLight: 21
+			Steel: 20
+			AntiAirBuilding: 20
+			Wood: 19
+			Spaceship: 18
+			Helicopter: 17
+			Bomber: 16
+			Fighter: 15
+
 edenTiger_EMP:
 	Inherits@w70: ^Warhead_Tesla_Super
 	Inherits@fx: ^op2_outpost2_set0
@@ -2400,7 +2487,8 @@ edenTiger_EMP:
 		InternalOwner: Neutral
 	-Warhead@Tesla_Super_ExtraDamage:
 edenTiger_EMP_AA:
-	Inherits@w70: ^Warhead_Tesla_Super
+	Inherits@w70: ^Warhead_MissileAA_Heavy
+	Inherits@projectileaa: ^Projectile_Missile_AA
 	Inherits@fx: ^op2_outpost2_set0
 	Range: 9000
 	MinRange: 1800
@@ -2768,7 +2856,93 @@ edenTiger_EMP_AA:
 		ForceGround: true
 		OwnerType: InternalName
 		InternalOwner: Neutral
-	-Warhead@Tesla_Super_ExtraDamage:
+
+	-Warhead@MissileAA_Heavy:
+	-Warhead@Tesla_Super:
+	Warhead@MissileAA_Heavy: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Air
+		Spread: 116
+		Damage: 18000
+		Falloff: 100, 55, 0
+		Versus
+			HAZMAT: 61
+			COMPOSITE: 72
+			BLAST: 98
+			REFLECTOR: 51
+			ARMOR: 70
+			Shield: 400
+			Superheavy: 138
+			Heavy: 130
+			CyborgHeavy: 128
+			SubmarineHeavy: 127
+			Plate: 126
+			Medium: 124
+			SubmarineLight: 124
+			CyborgMedium: 123
+			Flak: 122
+			AntiAirVehicle: 122
+			Light: 121
+			AntiAirInfantry: 120
+			CyborgLight: 119
+			ShipSuperheavy: 119
+			None: 118
+			ShipMedium: 118
+			Scout: 116
+			ShipHeavy: 116
+			AntiAirShip: 114
+			Concrete: 113
+			ShipLight: 111
+			AntiAirBuilding: 108
+			Steel: 103
+			Wood: 101
+			CyborgHeroic: 100
+			FlyingInfantry: 95
+			Spaceship: 80
+			Heroic: 73
+			Helicopter: 60
+			Bomber: 55
+			Fighter: 54
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		IntegrityScale: 0
+		PercentageScale: 0
+		PercentageSpread: 50
+		PercentageVersus
+			Shield: 45
+			Superheavy: 30
+			Heroic: 29
+			CyborgHeroic: 29
+			Heavy: 28
+			Plate: 27
+			CyborgHeavy: 27
+			SubmarineHeavy: 27
+			Medium: 26
+			Flak: 25
+			CyborgMedium: 25
+			AntiAirVehicle: 25
+			SubmarineLight: 25
+			Light: 24
+			AntiAirInfantry: 24
+			ShipHeavy: 24
+			ShipSuperheavy: 24
+			None: 23
+			CyborgLight: 23
+			ShipMedium: 23
+			Scout: 22
+			AntiAirShip: 22
+			Concrete: 21
+			FlyingInfantry: 21
+			ShipLight: 21
+			Steel: 20
+			AntiAirBuilding: 20
+			Wood: 19
+			Spaceship: 18
+			Helicopter: 17
+			Bomber: 16
+			Fighter: 15
+
 eden_GP_EMP:
 	Inherits@w70: ^Warhead_Tesla_Super
 	Inherits@fx: ^op2_outpost2_set1
@@ -4115,7 +4289,8 @@ plymouth_EMP:
 		PercentageScale: 0
 
 plymouth_EMP_AA:
-	Inherits@w70: ^Warhead_Tesla_Super
+	Inherits@w70: ^Warhead_MissileAA_Heavy
+	Inherits@projectileaa: ^Projectile_Missile_AA
 	Inherits@fx: ^op2_outpost2_set1
 	Range: 8250
 	MinRange: 1650
@@ -4483,7 +4658,93 @@ plymouth_EMP_AA:
 		ForceGround: true
 		OwnerType: InternalName
 		InternalOwner: Neutral
-	-Warhead@Tesla_Super_ExtraDamage:
+
+	-Warhead@MissileAA_Heavy:
+	-Warhead@Tesla_Super:
+	Warhead@MissileAA_Heavy: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Air
+		Spread: 116
+		Damage: 18000
+		Falloff: 100, 55, 0
+		Versus
+			HAZMAT: 61
+			COMPOSITE: 72
+			BLAST: 98
+			REFLECTOR: 51
+			ARMOR: 70
+			Shield: 400
+			Superheavy: 138
+			Heavy: 130
+			CyborgHeavy: 128
+			SubmarineHeavy: 127
+			Plate: 126
+			Medium: 124
+			SubmarineLight: 124
+			CyborgMedium: 123
+			Flak: 122
+			AntiAirVehicle: 122
+			Light: 121
+			AntiAirInfantry: 120
+			CyborgLight: 119
+			ShipSuperheavy: 119
+			None: 118
+			ShipMedium: 118
+			Scout: 116
+			ShipHeavy: 116
+			AntiAirShip: 114
+			Concrete: 113
+			ShipLight: 111
+			AntiAirBuilding: 108
+			Steel: 103
+			Wood: 101
+			CyborgHeroic: 100
+			FlyingInfantry: 95
+			Spaceship: 80
+			Heroic: 73
+			Helicopter: 60
+			Bomber: 55
+			Fighter: 54
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		IntegrityScale: 0
+		PercentageScale: 0
+		PercentageSpread: 50
+		PercentageVersus
+			Shield: 45
+			Superheavy: 30
+			Heroic: 29
+			CyborgHeroic: 29
+			Heavy: 28
+			Plate: 27
+			CyborgHeavy: 27
+			SubmarineHeavy: 27
+			Medium: 26
+			Flak: 25
+			CyborgMedium: 25
+			AntiAirVehicle: 25
+			SubmarineLight: 25
+			Light: 24
+			AntiAirInfantry: 24
+			ShipHeavy: 24
+			ShipSuperheavy: 24
+			None: 23
+			CyborgLight: 23
+			ShipMedium: 23
+			Scout: 22
+			AntiAirShip: 22
+			Concrete: 21
+			FlyingInfantry: 21
+			ShipLight: 21
+			Steel: 20
+			AntiAirBuilding: 20
+			Wood: 19
+			Spaceship: 18
+			Helicopter: 17
+			Bomber: 16
+			Fighter: 15
+
 plymouth_Tiger_EMP:
 	Inherits@w70: ^Warhead_Tesla_Super
 	Inherits@fx: ^op2_outpost2_set1

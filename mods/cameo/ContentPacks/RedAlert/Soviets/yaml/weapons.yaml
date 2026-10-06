@@ -12517,6 +12517,7 @@ ra1_soviets_cyberdog_bite:
 
 ra1_soviets_samsite_missile_AA:
 	Inherits@missilerole: ^Warhead_MissileAA_Heavy
+	Inherits@projectileaa: ^Projectile_Missile_AA
 	ReloadDelay: 27
 	Range: 12790
 	Report: missile1.aud

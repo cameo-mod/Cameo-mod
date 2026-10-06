@@ -1,4 +1,6 @@
 RA2Patriot:
+	Inherits@warheadaa: ^Warhead_MissileAA_Medium
+	Inherits@projectileaa: ^Projectile_Missile_AA
 	Inherits@xRA2Patriot0: ^Warhead_MissileAP_Medium
 	Inherits@xRA2Patriot1: ^Projectile_Missile_Medium
 	Inherits@xRA2Patriot2: ^Effect_Clsn_Medium_RA2
@@ -100,6 +102,15 @@ RA2Patriot:
 		PercentageSpread: 50
 		Spread: 300
 		Falloff: 100, 70, 30, 0
+
+	Projectile: Missile
+		Inaccuracy: 100
+		HorizontalRateOfTurn: 30
+		MaximumLaunchSpeed: 250
+		MinimumLaunchSpeed: 250
+		Acceleration: 3
+		HomingActivationDelay: 2
+
 RA2PatriotThunderboltMissile:
 	Inherits@wh: ^Warhead_MissileAA_Heavy
 	Inherits@proj: ^Projectile_Missile_AA
@@ -2988,6 +2999,8 @@ ChronoBeam_elite:
 		DamageTypes: ElectricityDeath
 		ValidTargets: Chronobeamable
 RA2Medusa_AA:
+	Inherits@warheadaa: ^Warhead_MissileAA_Medium
+	Inherits@projectileaa: ^Projectile_Missile_AA
 	Inherits@xRA2Medusa_AA0: ^Warhead_MissileAP_Medium
 	Inherits@xRA2Medusa_AA1: ^Projectile_Missile_Medium
 	Inherits@xRA2Medusa_AA2: ^Effect_Clsn_Medium_RA2
@@ -3089,6 +3102,15 @@ RA2Medusa_AA:
 		PercentageSpread: 50
 		Spread: 300
 		Falloff: 100, 70, 30, 0
+
+	Projectile: Missile
+		Inaccuracy: 100
+		HorizontalRateOfTurn: 30
+		MaximumLaunchSpeed: 250
+		MinimumLaunchSpeed: 250
+		Acceleration: 3
+		HomingActivationDelay: 2
+
 RA2MedusaAG:
 	Inherits@missilerole: ^Warhead_MissileHE_Medium
 	Inherits: RA2Medusa_AA
@@ -3107,6 +3129,31 @@ RA2MedusaAG:
 		PercentageScale: 10000
 		PercentageSpread: 50
 	-Warhead@MissileAA_Medium:
+
+
+	-Projectile:
+	Projectile: Missile
+		RangeLimitPercent: 150
+		CloseEnoughFromSpeed: true
+		Arm: 0
+		Blockable: false
+		AllowSnapping: true
+		Inaccuracy: 100
+		Image: patriot
+		Shadow: true
+		HorizontalRateOfTurn: 30
+		VerticalRateOfTurn: 30
+		TrailInterval: 1
+		ContrailLength: 35
+		MaximumLaunchSpeed: 250
+		MinimumLaunchSpeed: 250
+		Speed: 600
+		Acceleration: 3
+		HomingActivationDelay: 2
+		PointDefenseTypes: Missile
+		MinimumLaunchAngle: 60
+		ContrailStartWidth: 33
+		ContrailEndWidth: 1
 
 RA2M60:
 	Inherits@xRA2M600: ^Warhead_Bullet_Light
