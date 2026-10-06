@@ -1,5 +1,10 @@
 # Cameo — THE HANDOFF
 
+## Codex Sol — LEARN-P6 fix, 2026-10-06
+
+Branch `codex/learn-p6-fix` from `b9f1a9973`: six armed ground stance routes at regular cadence, independent immediate integer safety, raw integer rules-derived prediction. Read [execution details](design/SQUAD_DESIRE_EXECUTION.md). Build/full NUnit 1190/1190, Python 24/24, fog and mutation audits PASS, isolated boot PASS. Independent reviewer and coordinator pre-P6/off replay identity + armed churn gates remain pending. No merge or enabling approval.
+
+
 ## 2026-10-04 — Devin-Tier4: RADAR-A INC-ready — `AI_radar_contacts` (IBotRadarContacts provider, no consumers)
 
 `Agent: Devin-Tier4 · branch devin/tier4/radar-contacts · worktree C:/cameo-wt/t4-radar-a · base 3ba05ede7 (master, post-INC-04e)`
