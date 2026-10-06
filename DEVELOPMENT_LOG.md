@@ -19555,4 +19555,14 @@ Branch `devin/dawn/t3-public-faction` off master `8e86fca23`, worktree `C:/cameo
   harass raider-at-parity under guerrilla bias), hysteresis, dwell block, tie-incumbent,
   bias cap + unknown personality + bias-vs-evidence, stance-flap bound (<=1+span/dwell, <=12 in
   4000t), flicker-smoothing band.
-* Gates: build 0E/0W, isolated boot BOOT_GATE=PASS. Suite + order-rate A/B next.
+* Gates: build 0E/0W, isolated boot BOOT_GATE=PASS. Suite 1160/1160.
+  Audits: `audit_fog_honesty` PASS (266 manifested sites, no new omniscience),
+  `audit_bot_direct_mutation` PASS.
+* **Order-rate A/B** (fc0b5bf1c, hard v hard td_gdi mirror, 3+3, both arms clean,
+  exceptions=none, scoreboard 3-3 each): equal window <=3280t — move-family issues
+  8,790 -> 7,451 (**-15%**; AttackMove -11%, Move -30%), samekey resends 2,558 ->
+  2,179 (-15%), flagged units 73 -> 62. Alternations 332 -> 360 (+28, small).
+  NO order-rate regression — hysteresis+dwell dampen recommit churn. The gate was
+  no-regression only; decision quality is the maintainer playtest's call.
+* Off path: `Bots:` empty on master -> no `squad_desire` condition -> no provider ->
+  the binary PredictsWin/fuzzy branch runs untouched (bit-identical).
