@@ -19563,7 +19563,7 @@ Branch `devin/dawn/t3-public-faction` off master `8e86fca23`, worktree `C:/cameo
 * Demo: third arm (BJ+BK+BL) recorded on ebed3d9dc into the AR-S demo package —
   `bl_on_bj_bk_bl_{1,2,3}_*.orarep` + README addendum.
 
-## 2026-10-05 — EMBER: AR-S2 — BM_protection_rally_dedup (manager re-push emitter found)
+## 2026-10-05 — EMBER: AR-S2 — BO_squad_move_dedup (manager re-push emitter found; renamed from BM_protection_rally_dedup, BM is T3Verify's)
 
 * **Attribution (second tagging pass, ~58 sites auto-tagged `TargetString`)**: the residual
   `x` stream decomposed as untagged `AttackMove` (~5.5k + 2.4k in attrib2), NOT `Move`.
@@ -19581,7 +19581,7 @@ Branch `devin/dawn/t3-public-faction` off master `8e86fca23`, worktree `C:/cameo
   membership; the push emits only when the rally moved >= `ProtectionRallyHysteresisCells`
   (4) or members joined — joiner-only emit covers `ReactWithFastSquads` fold-ins.
   `ReleaseDefenders` resets the lattice. Switch `UseProtectionRallyDedup` (default off;
-  `BM_protection_rally_dedup`), off = unchanged per-interval stream.
+  `BO_squad_move_dedup`), off = unchanged per-interval stream.
 * **Tests**: `ProtectionRallyDedupTest` 8/8 — first-push emits all, same-cell and
   in-band jitter suppress, past-band redirects, band measured from pushed cell (creep
   escapes), joiner-only emit, released-then-rejoined re-orders, reset forces next push.
