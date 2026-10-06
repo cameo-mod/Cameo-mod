@@ -1,3 +1,41 @@
+# 2026-10-06 — Devin-Integrator: INTEG-GARRISON — garrison fire-ports + missile-feel merged into inc
+
+*Devin-Integrator.* Maintainer-approved merge (both playtests passed 2026-10-06).
+Branch `integ/garrison-2026-10-06`, worktree `C:\cameo-wt\integ-garrison`:
+
+- Engine: `integ/engine-2026-10-06` = `d5d8b2a685` + `codex/garrison-engine@dc92c52213`
+  (independent passenger fire stations) + `codex/missile-feel-engine@dd7b901b85`
+  (RangeLimit/RangeLimitPercent + proximity snapping). Build 0 errors/0 warnings,
+  engine suite 545 pass / 2 skip. Pushed; `origin/cameo-engine` fast-forwarded to
+  `0e42ed433d` — the new ENGINE_VERSION pin.
+- Mod: inc `5e45bfc80` + `codex/garrison-fireports@210ec9479` + `codex/missile-feel@4e47ead99`
+  (66 weapons, RangeLimitPercent 150, flattened Spit_AA/GLStingerSite/GLASCUD as playtested).
+  Two merge conflicts resolved: `mod.config` pin -> combined engine sha; `BotCombatPredictor`
+  keeps the HEAD WeaponProfile helper with the branch's IRangeLimitedProjectileInfo
+  effective range clamp ported into the helper.
+- Integration repair: the missile-feel branch changed `effective_damage.py`
+  (default-on homing-missile terminal bound + RangeLimit fuel gate) without
+  re-extracting ledgers or updating the C# port. Re-extracted 35 ledgers + derived
+  sidecars (ledgers_drifted 21 -> 0) and ported the terminal model into
+  `BotEffectiveDamage` (HomingMissileTerminalBound, fuel sigma=inf, MissileTA
+  handling, target-radius/terminal threading through Reliability/
+  UniformReliability/AreaGeometrySamples/Evaluate). Verified by
+  WeaponModelParityTest over all 1570 weapons.
+- doc_claims repins: warhead_family_reach 1509 -> 1510,
+  cameo_family_labelled_weapons 1567 -> 1569; cited docs co-updated.
+
+Gates:
+- build: 0 errors (Release, win-x64)
+- Cameo tests: 1202/1202
+- pytest scoped: 59 + 26 subtests (conflict markers, garrison fireports,
+  chinook capacity, missile feel defaults, effective damage)
+- audits: fog honesty PASS (266 sites), direct mutation PASS (0 sites),
+  ai_arch freshness PASS, doc_claims 44/44, balance drift clean,
+  garrison_fireports capacity audit PASS (304 actors, 0 violations)
+- audit_garrison_weapons informational: G1 4 scrin infantry w/o garrison weapon,
+  G4 1 cabal_ravager (pre-existing findings, not merge-introduced)
+- BOOT_GATE: PASS (isolated support dir, menu marker, package in worktree, 0 exceptions)
+
 # 2026-10-05 — Devin-T3Verify: PREDICTOR-PARITY P1 — effective-damage port + live per-actor stats
 
 *Devin.* Branch `devin/t3verify/predictor-parity`, worktree `C:\cameo-wt\parity`, rebased onto `inc/2026_10_05 @ fe4459c9c`:
