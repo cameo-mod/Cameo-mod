@@ -19703,3 +19703,38 @@ a harness. Classic/switch-off paths unchanged (provider members all default).
 * ECON-B coordination: `BotLeasePurpose.Harvest` (their `50d3614b6`) never touches
   `McvExpansion`, so the lapse check can't fire on harvester re-routes; BU holds no
   `ExpansionDemand` state — `ExpireExpansionDemand` has nothing of theirs to release.
+
+## 2026-10-06 — Devin: ECON-A-FIX2 — R1 fog-leak closed + R4 renewal gate (REREVIEW_2026-10-06_econ_a)
+
+Branch `devin/econ-a` on `aa117a0da`, worktree `C:/cameo-wt/econ-a`. Sol's re-review
+was FIX-REQUIRED on two of six findings. Both closed in place, additive commit.
+
+* **R1 frozen-trait leak**: `FrozenBlockedCells` no longer touches `fa.Actor` — the
+  layer hands out the live backing while it lives, so the old code re-read live trait
+  state under fog (backing disposal flipped blocked cells 0->1 on an unchanged record).
+  Now only the immutable snapshot is read: `IsValid`/`!Hidden` gate the record,
+  `Info`/`Owner`/`Footprint` supply the facts. Removable is rebuilt on the
+  remembered owner (gates/energy walls lift for remembered-ally; `DoesNotBlockInfo`
+  lifts on remembered target-type overlap vs our own MCV's enabled types). Crushable
+  is rebuilt from remembered crush classes — `MineInfo`/`CrateInfo` typed,
+  `*CrushableInfo` duck-typed off `CrushClasses`+`CrushedByFriendlies` (the
+  engine's own `CrushableInfo` is internal). Transit-only comes from
+  `BuildingInfo.TransitOnlyTiles` anchored at the footprint's top-left.
+* **R1 visible-cell != visible-actor**: `EtaCellCost`'s `known` was
+  `Shroud.IsVisible(cell)` — a lit cell exposed every occupant. Now
+  `other.CanBeViewedByPlayer(player)`: a cloaked or otherwise hidden actor on lit
+  ground stays unknown and never blocks (kernel doc updated, same signature).
+* **R4 targetless renewal**: `JourneyStillCommitted` was booleans — silence passed
+  as committed. Now `ExpansionJourneyState` {Redirected, Indeterminate, Committed}
+  + `JourneyRenewsDemand`: only a Committed chain on a non-idle traveller renews
+  the window (unit-less actors renew — existence IS the relocation). Sol's WaitFor
+  probe row — non-idle, no targets — no longer renews; the demand dies at its
+  outstanding ExpiresTick instead of pushing 200->300->1100.
+* Tests: 60/60 BaseBuilderQueueEvalTest (4 new: journey tri-state, renewal table
+  incl. the WaitFor row, frozen-footprint exemptions, remembered crushability).
+  Adapter-level hidden-state invariance is structural — the frozen pass takes no
+  live-actor input, so there is nothing left to dereference; the world-free tests
+  pin the fact-level rule.
+* Gates: Release build 0E/0W on OpenRA.Mods.CA + Cameo.Test. Focused tests only
+  per lead (Terra holds the heavy window); no boot-gate needed — diff is
+  C#-in-bot-logic only, no yaml/engine-pin surface.

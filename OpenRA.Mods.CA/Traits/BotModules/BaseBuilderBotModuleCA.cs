@@ -1272,21 +1272,23 @@ namespace OpenRA.Mods.CA.Traits
 						continue;
 					}
 
-					// ECON-A-FIX (R4): the committed journey, not the idle flag — the chain's last
-					// positional target must still aim at the deploy neighbourhood. A redirected MCV
-					// (DeployMcvs reposts only idle ones, so a mid-flight redirect otherwise kept the
-					// stale demand forever) lapses here; a transform or unit-less actor reports no
-					// targets and stays indeterminate for the idle window to decide.
-					if (!JourneyStillCommitted(mcv, demand))
+					// ECON-A-FIX2 (R4): the chain's last positional target must still aim at the deploy
+					// neighbourhood — a redirected MCV (DeployMcvs reposts only idle ones, so a
+					// mid-flight redirect otherwise kept the stale demand forever) lapses here.
+					var journey = JourneyState(mcv, demand);
+					if (journey == BaseBuilderQueueEvalCA.ExpansionJourneyState.Redirected)
 					{
 						ExpireExpansionDemand(bot, demand);
 						continue;
 					}
 
-					// En route: keep the window open while the MCV has a live activity (Move/Turn/
-					// Transform). A unit-less actor (a conyard still waiting to undeploy) can't idle —
-					// it refreshes too, its relocation is its own owner's timeout's business.
-					if (!mcv.IsIdle || mcv.TraitOrDefault<Mobile>() == null)
+					// ECON-A-FIX2 (R4): renewal requires a provably ongoing journey — a committed
+					// chain on a non-idle traveller, or a unit-less actor (a conyard waiting to
+					// undeploy) whose continued existence IS the in-flight relocation. An
+					// indeterminate, targetless chain — a WaitFor with a false predicate, a stalled
+					// Turn — no longer renews: the outstanding ExpiresTick is the bounded silence
+					// grace, so silence cannot keep a demand alive forever.
+					if (BaseBuilderQueueEvalCA.JourneyRenewsDemand(journey, mcv.IsIdle, mcv.TraitOrDefault<Mobile>() != null))
 						demand.ExpiresTick = now + Info.ExpansionDemandIdleTicks;
 
 					if (now >= demand.ExpiresTick)
@@ -1332,13 +1334,13 @@ namespace OpenRA.Mods.CA.Traits
 		}
 
 		/// <summary>
-		/// ECON-A-FIX (R4): the journey is still committed iff the traveller's activity chain aims at the
-		/// deploy cell's neighbourhood — Move reports its destination (or remaining path) through the
-		/// public GetTargets seam; TransformsIntoMobile persists the redeploy destination into the
-		/// emergent MCV's own chain. The last positional target decides: a redirected unit ends up
-		/// aiming elsewhere. No targets at all is indeterminate — the idle window decides.
+		/// ECON-A-FIX2 (R4): where the traveller's activity chain leaves the journey — Move reports its
+		/// destination (or remaining path) through the public GetTargets seam; TransformsIntoMobile
+		/// persists the redeploy destination into the emergent MCV's own chain. The last positional
+		/// target decides: Committed while it aims inside the deploy slack, Redirected once it aims
+		/// elsewhere, Indeterminate while the chain reports no positional target at all.
 		/// </summary>
-		bool JourneyStillCommitted(Actor mcv, ExpansionDemand demand)
+		BaseBuilderQueueEvalCA.ExpansionJourneyState JourneyState(Actor mcv, ExpansionDemand demand)
 		{
 			var sawTarget = false;
 			var lastNear = false;
@@ -1351,7 +1353,7 @@ namespace OpenRA.Mods.CA.Traits
 				lastNear = (world.Map.CellContaining(t.CenterPosition) - demand.ConyardLoc).Length <= ExpansionJourneySlackCells;
 			}
 
-			return BaseBuilderQueueEvalCA.ExpansionJourneyCommitted(sawTarget, lastNear);
+			return BaseBuilderQueueEvalCA.ExpansionJourney(sawTarget, lastNear);
 		}
 
 		/// <summary>Every target a chain reports — each activity's own, then its child's, then its next's.</summary>
@@ -1509,6 +1511,8 @@ namespace OpenRA.Mods.CA.Traits
 		/// ECON-A-FIX (R1): the per-cell cost of the honest search — PathCostForInvalidPath only where a
 		/// KNOWN immovable obstacle stands (Locomotor.IsBlockedBy's Immovable predicate re-evaluated
 		/// over remembered/visible/own occupants instead of the full ActorMap), else 0.
+		/// ECON-A-FIX2 (R1): KNOWN is per-actor legality — CanBeViewedByPlayer, not the cell: a revealed
+		/// cell does not reveal a cloaked or otherwise hidden actor standing on it.
 		/// </summary>
 		Func<CPos, int> EtaCellCost(Actor mcv, Mobile mobile, IReadOnlySet<CPos> remembered)
 		{
@@ -1518,7 +1522,6 @@ namespace OpenRA.Mods.CA.Traits
 				if (remembered != null && remembered.Contains(cell))
 					return PathGraph.PathCostForInvalidPath;
 
-				var seen = player.Shroud.IsVisible(cell);
 				foreach (var other in world.ActorMap.GetActorsAt(cell))
 				{
 					if (other == mcv)
@@ -1539,7 +1542,7 @@ namespace OpenRA.Mods.CA.Traits
 						}
 
 					if (BaseBuilderQueueEvalCA.EtaOccupantBlocks(
-						known: other.Owner == player || seen, movable, allied, moving, removable, transit, crushable))
+						known: other.Owner == player || other.CanBeViewedByPlayer(player), movable, allied, moving, removable, transit, crushable))
 						return PathGraph.PathCostForInvalidPath;
 				}
 
@@ -1548,12 +1551,15 @@ namespace OpenRA.Mods.CA.Traits
 		}
 
 		/// <summary>
-		/// ECON-A-FIX (R1): the cells remembered frozen-under-fog footprints still block for the MCV —
-		/// the frozen layer is the legal record of what we last saw; immobile remembered occupants keep
-		/// their cells unless the known actor is crushable, removable (a gate), or transit-only there.
-		/// A live actor hidden on a remembered cell is reached through the ActorMap pass (its cell is
-		/// unseen so it contributes nothing), and the footprint contributes here — the remembered
-		/// blocker stands even while the unit's live state is hidden.
+		/// ECON-A-FIX2 (R1): the cells remembered frozen-under-fog footprints still block for the MCV —
+		/// the frozen layer is the legal record of what we last saw, and ONLY that record is read.
+		/// fa.Actor is deliberately never dereferenced: the layer hands out the live backing while it
+		/// lives, so reading its traits would leak current hidden state — Sol's probe killed the
+		/// backing under fog and watched the blocker set change. Hidden records (the occupant was
+		/// masked at last sight) contribute nothing. Removable mirrors the live check on remembered
+		/// facts: a temporary blocker (gate, energy wall) lifts for a remembered-friendly owner; a
+		/// DoesNotBlock lifts when our MCV's own target types overlap its remembered admission set —
+		/// both sides of that comparison are legal knowledge.
 		/// </summary>
 		HashSet<CPos> FrozenBlockedCells(Actor mcv, Mobile mobile)
 		{
@@ -1562,28 +1568,51 @@ namespace OpenRA.Mods.CA.Traits
 				return null;
 
 			var crushes = mobile.Locomotor.Info.Crushes;
+			var mcvTargetTypes = mcv.GetEnabledTargetTypes();
+			var mcvMineImmune = mcv.Info.HasTraitInfo<MineImmuneInfo>();
 			HashSet<CPos> blocked = null;
 			foreach (var fa in layer.FrozenActorsInRegion(world.Map.AllCells))
 			{
-				if (!fa.IsValid || fa.Info.HasTraitInfo<MobileInfo>())
+				if (!fa.IsValid || fa.Hidden || fa.Info.HasTraitInfo<MobileInfo>())
 					continue;
 
-				var actor = fa.Actor;
+				var info = fa.Info;
+				var rememberedAllied = fa.Owner != null && player.RelationshipWith(fa.Owner) == PlayerRelationship.Ally;
+
+				var removable = false;
+				var crushable = false;
+				foreach (var ti in info.TraitsInConstructOrder())
+				{
+					if (ti is DoesNotBlockInfo dnb)
+						removable |= dnb.TargetTypes.IsEmpty || dnb.TargetTypes.Overlaps(mcvTargetTypes);
+					else if (ti is ITemporaryBlockerInfo)
+						// Gates and energy walls lift for friendly passers — the remembered owner is the fact.
+						removable |= rememberedAllied;
+					else if (ti is CrateInfo crate)
+						crushable |= crushes.Contains(crate.CrushClass);
+					else if (ti is MineInfo mine)
+						crushable |= mine.CrushClasses.Overlaps(crushes) && !(mine.BlockFriendly && !mcvMineImmune && rememberedAllied);
+					else if (ti.GetType().Name.EndsWith("CrushableInfo", StringComparison.Ordinal))
+					{
+						// CrushableInfo itself is internal to Common — the remembered record is read
+						// off its static fields so it and any custom ICrushable info join the same rule.
+						var type = ti.GetType();
+						var classesOverlap = type.GetField("CrushClasses")?.GetValue(ti) is BitSet<CrushClass> classes && classes.Overlaps(crushes);
+						var friendliesCrush = type.GetField("CrushedByFriendlies")?.GetValue(ti) is true;
+						crushable |= BaseBuilderQueueEvalCA.RememberedCrushable(classesOverlap, friendliesCrush, rememberedAllied);
+					}
+				}
+
+				// Transit-only is per-cell — only these footprint cells let the MCV through. The
+				// building anchor is its footprint's top-left cell.
+				var topLeft = new CPos(fa.Footprint.Min(p => p.U), fa.Footprint.Min(p => p.V));
+				var transit = info.TraitInfoOrDefault<BuildingInfo>() is { } bi
+					? new HashSet<CPos>(bi.TransitOnlyTiles(topLeft))
+					: null;
 				foreach (var puv in fa.Footprint)
 				{
 					var cell = ((MPos)puv).ToCPos(world.Map);
-					var transit = actor != null && actor.OccupiesSpace is Building building && building.TransitOnlyCells().Contains(cell);
-					var removable = actor != null && actor.TraitOrDefault<ITemporaryBlocker>() is { } tb && tb.CanRemoveBlockage(actor, mcv);
-					var crushable = false;
-					if (actor != null)
-						foreach (var c in actor.Crushables)
-							if (c.CrushableBy(actor, mcv, crushes))
-							{
-								crushable = true;
-								break;
-							}
-
-					if (!transit && !removable && !crushable)
+					if (BaseBuilderQueueEvalCA.FrozenOccupantBlocks(transit != null && transit.Contains(cell), removable, crushable))
 						(blocked ??= new HashSet<CPos>()).Add(cell);
 				}
 			}

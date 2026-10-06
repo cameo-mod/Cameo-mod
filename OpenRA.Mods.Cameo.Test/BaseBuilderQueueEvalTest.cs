@@ -496,8 +496,9 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(BaseBuilderQueueEvalCA.ExpansionPathLength(path, FakeCellCenter), Is.EqualTo(1024));
 		}
 
-		// R1: EtaOccupantBlocks — the fog-honest blocker verdict. `known` = ours, on a visible cell, or
-		// remembered; everything else mirrors IsBlockedBy under BlockedByActor.Immovable.
+		// R1-FIX2: EtaOccupantBlocks — the fog-honest blocker verdict. `known` = ours or legally
+		// visible to us (CanBeViewedByPlayer — a lit cell does not expose a cloaked actor); everything
+		// else mirrors IsBlockedBy under BlockedByActor.Immovable.
 
 		[Test]
 		public void HiddenOccupantsNeverBlockTheEta()
@@ -571,14 +572,70 @@ namespace OpenRA.Mods.Cameo.Test
 			=> Assert.That(BaseBuilderQueueEvalCA.ExpansionTransform(false, true, true, false), Is.EqualTo(
 				BaseBuilderQueueEvalCA.ExpansionTransformTransition.Relocate));
 
-		// R4: ExpansionJourneyCommitted — silence is indeterminate, a foreign destination lapses.
+		// R4-FIX2: ExpansionJourney — silence is its own verdict now, not a silent pass; and
+		// JourneyRenewsDemand — only a provably ongoing journey extends the window.
+		// (REREVIEW_2026-10-06_econ_a: a targetless WaitFor demand renewed expiry 200→300→1100.)
 
 		[Test]
-		public void JourneyLapsesOnRedirectButNotOnSilence()
+		public void JourneyClassifiesRedirectSilenceAndCommitment()
 		{
-			Assert.That(BaseBuilderQueueEvalCA.ExpansionJourneyCommitted(false, false), Is.True);   // no targets: transform/idle — the window decides
-			Assert.That(BaseBuilderQueueEvalCA.ExpansionJourneyCommitted(true, true), Is.True);     // last target near the deploy cell
-			Assert.That(BaseBuilderQueueEvalCA.ExpansionJourneyCommitted(true, false), Is.False);   // aiming elsewhere: a redirect took it
+			Assert.That(BaseBuilderQueueEvalCA.ExpansionJourney(false, false), Is.EqualTo(BaseBuilderQueueEvalCA.ExpansionJourneyState.Indeterminate));
+			Assert.That(BaseBuilderQueueEvalCA.ExpansionJourney(false, true), Is.EqualTo(BaseBuilderQueueEvalCA.ExpansionJourneyState.Indeterminate));
+			Assert.That(BaseBuilderQueueEvalCA.ExpansionJourney(true, true), Is.EqualTo(BaseBuilderQueueEvalCA.ExpansionJourneyState.Committed));
+			Assert.That(BaseBuilderQueueEvalCA.ExpansionJourney(true, false), Is.EqualTo(BaseBuilderQueueEvalCA.ExpansionJourneyState.Redirected));
+		}
+
+		[Test]
+		public void TargetlessActivityNeverRenewsTheDemand()
+		{
+			// Sol's R4 probe row: an in-world mobile MCV redirected onto WaitFor(() => false) —
+			// non-idle, but no positional target. The window must NOT renew; the demand dies at its
+			// outstanding ExpiresTick.
+			Assert.That(BaseBuilderQueueEvalCA.JourneyRenewsDemand(
+				BaseBuilderQueueEvalCA.ExpansionJourneyState.Indeterminate, idle: false, hasMobile: true), Is.False);
+
+			// Silence on an idle traveller doesn't renew either — the idle window itself decides.
+			Assert.That(BaseBuilderQueueEvalCA.JourneyRenewsDemand(
+				BaseBuilderQueueEvalCA.ExpansionJourneyState.Indeterminate, idle: true, hasMobile: true), Is.False);
+
+			// A committed chain on a moving traveller renews — the journey is provably ongoing.
+			Assert.That(BaseBuilderQueueEvalCA.JourneyRenewsDemand(
+				BaseBuilderQueueEvalCA.ExpansionJourneyState.Committed, idle: false, hasMobile: true), Is.True);
+
+			// A committed chain on an idle traveller doesn't — stopped is stopped; expiry decides.
+			Assert.That(BaseBuilderQueueEvalCA.JourneyRenewsDemand(
+				BaseBuilderQueueEvalCA.ExpansionJourneyState.Committed, idle: true, hasMobile: true), Is.False);
+
+			// A redirected chain never renews (the sweep already lapses it — defence in depth).
+			Assert.That(BaseBuilderQueueEvalCA.JourneyRenewsDemand(
+				BaseBuilderQueueEvalCA.ExpansionJourneyState.Redirected, idle: false, hasMobile: true), Is.False);
+
+			// A unit-less traveller can't idle — its existence is the in-flight relocation.
+			Assert.That(BaseBuilderQueueEvalCA.JourneyRenewsDemand(
+				BaseBuilderQueueEvalCA.ExpansionJourneyState.Indeterminate, idle: false, hasMobile: false), Is.True);
+		}
+
+		// R1-FIX2: the remembered-facts verdicts behind FrozenBlockedCells. The adapter itself takes
+		// no live-actor input — invariance under hidden-state change is structural (nothing remains
+		// to dereference), so the world-free tests pin the fact-level rule.
+
+		[Test]
+		public void FrozenFootprintBlocksUnlessRememberedPassable()
+		{
+			Assert.That(BaseBuilderQueueEvalCA.FrozenOccupantBlocks(false, false, false), Is.True);   // remembered enemy building blocks
+			Assert.That(BaseBuilderQueueEvalCA.FrozenOccupantBlocks(true, false, false), Is.False);   // transit-only cell
+			Assert.That(BaseBuilderQueueEvalCA.FrozenOccupantBlocks(false, true, false), Is.False);   // remembered gate/DoesNotBlock admits us
+			Assert.That(BaseBuilderQueueEvalCA.FrozenOccupantBlocks(false, false, true), Is.False);   // remembered crushable
+			Assert.That(BaseBuilderQueueEvalCA.FrozenOccupantBlocks(true, true, true), Is.False);
+		}
+
+		[Test]
+		public void RememberedCrushableNeedsOverlapAndANonAlliedOwner()
+		{
+			Assert.That(BaseBuilderQueueEvalCA.RememberedCrushable(true, false, false), Is.True);    // enemy crushable wall: crush
+			Assert.That(BaseBuilderQueueEvalCA.RememberedCrushable(true, false, true), Is.False);    // remembered ally: don't crush
+			Assert.That(BaseBuilderQueueEvalCA.RememberedCrushable(true, true, true), Is.True);      // CrushedByFriendlies record
+			Assert.That(BaseBuilderQueueEvalCA.RememberedCrushable(false, false, false), Is.False);  // no class overlap
 		}
 
 		// R5: DemandItemUnambiguous — the (producer, name) token must be exclusive.

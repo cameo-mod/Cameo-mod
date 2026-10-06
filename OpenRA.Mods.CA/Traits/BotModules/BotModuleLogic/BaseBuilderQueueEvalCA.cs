@@ -301,11 +301,13 @@ namespace OpenRA.Mods.CA.Traits
 		// the regression tests drive the rule, not a harness.
 
 		/// <summary>
-		/// ECON-A R1: one occupant's verdict on the fog-honest ETA path — Locomotor.IsBlockedBy under
-		/// BlockedByActor.Immovable, minus the hidden state: an occupant that is neither ours, nor on a
-		/// currently visible cell, nor remembered (a frozen footprint) is not KNOWN and never blocks,
-		/// so adding or removing an unseen enemy actor cannot change the estimate. Known + immovable
-		/// and not movable-allied/moving/removable/transit-only/crushable blocks.
+		/// ECON-A R1-FIX2: one occupant's verdict on the fog-honest ETA path — Locomotor.IsBlockedBy
+		/// under BlockedByActor.Immovable, minus the hidden state: an occupant that is neither ours,
+		/// nor legally visible to us (Actor.CanBeViewedByPlayer — a revealed CELL is not a revealed
+		/// ACTOR; cloaked, disguised or otherwise hidden actors on lit ground stay unknown), nor
+		/// remembered (a frozen footprint handled by <see cref="FrozenOccupantBlocks"/>) is not KNOWN
+		/// and never blocks, so adding or removing an unseen enemy actor cannot change the estimate.
+		/// Known + immovable and not movable-allied/moving/removable/transit-only/crushable blocks.
 		/// </summary>
 		public static bool EtaOccupantBlocks(bool known, bool movable, bool allied, bool moving, bool removable, bool transitOnly, bool crushable) =>
 			known && !(movable && allied) && !moving && !removable && !transitOnly && !crushable;
@@ -334,13 +336,52 @@ namespace OpenRA.Mods.CA.Traits
 		}
 
 		/// <summary>
-		/// ECON-A R4: a demand's journey stays committed while the MCV's activity chain still aims at
-		/// the deploy neighbourhood — the chain's last positional target within the slack. No targets at
-		/// all (a transform, a unit-less relocation) is indeterminate — the idle window decides — while
-		/// a chain whose last target lies elsewhere means a redirect took the unit.
+		/// ECON-A R4-FIX2: where the traveller's activity chain leaves the journey — the chain's last
+		/// positional target decides. A chain with no positional target at all (a WaitFor, a turn in
+		/// place, a transform in flight) is Indeterminate: not a redirect, but also not provably still
+		/// travelling — <see cref="JourneyRenewsDemand"/> bounds its grace.
 		/// </summary>
-		public static bool ExpansionJourneyCommitted(bool sawAnyTarget, bool lastTargetNearDeploy) =>
-			!sawAnyTarget || lastTargetNearDeploy;
+		public enum ExpansionJourneyState
+		{
+			/// <summary>The chain's last positional target aims elsewhere — a redirect took the unit.</summary>
+			Redirected,
+
+			/// <summary>No positional target on the chain — silence; the existing window decides.</summary>
+			Indeterminate,
+
+			/// <summary>The last positional target is still inside the deploy slack — travelling.</summary>
+			Committed,
+		}
+
+		public static ExpansionJourneyState ExpansionJourney(bool sawAnyTarget, bool lastTargetNearDeploy) =>
+			!sawAnyTarget ? ExpansionJourneyState.Indeterminate
+				: lastTargetNearDeploy ? ExpansionJourneyState.Committed : ExpansionJourneyState.Redirected;
+
+		/// <summary>
+		/// ECON-A R4-FIX2: the idle window renews only for a provably ongoing journey — a Committed
+		/// chain on a non-idle traveller, or a unit-less actor (a conyard mid-relocation, whose
+		/// continued existence IS the in-flight relocation). Indeterminate chains and idle travellers
+		/// do not renew: the demand's ExpiresTick is the bounded silence grace, so an unrelated
+		/// targetless activity (WaitFor with a false predicate) can no longer keep a demand alive
+		/// forever.
+		/// </summary>
+		public static bool JourneyRenewsDemand(ExpansionJourneyState state, bool idle, bool hasMobile) =>
+			!hasMobile || (state == ExpansionJourneyState.Committed && !idle);
+
+		/// <summary>
+		/// ECON-A R1-FIX2: a remembered frozen footprint cell blocks iff it isn't a transit-only cell,
+		/// isn't removable by us, and isn't crushable — evaluated on remembered facts only.
+		/// </summary>
+		public static bool FrozenOccupantBlocks(bool transitOnly, bool removable, bool crushable) =>
+			!transitOnly && !removable && !crushable;
+
+		/// <summary>
+		/// ECON-A R1-FIX2: remembered crushability — the record's static crush classes overlap the
+		/// locomotor's and the remembered owner relationship permits it (enemy owner, or friendly
+		/// when the record's static flag allows friendly crushing).
+		/// </summary>
+		public static bool RememberedCrushable(bool classesOverlap, bool friendliesCrush, bool rememberedAllied) =>
+			classesOverlap && (friendliesCrush || !rememberedAllied);
 
 		/// <summary>
 		/// ECON-A R5: the demand binding's (producer, item-name) token is unambiguous only while no
