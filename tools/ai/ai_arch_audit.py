@@ -88,6 +88,7 @@ LAYER_OF = {
     "BotRoleSets": "SITUATION",
     "BotUnitRoles": "SITUATION",
     "SiegeEvaluatorBotModule": "SITUATION",
+    "SquadDesireBotModule": "SITUATION",
     "RegionRolesBotModule": "SITUATION",
     "ArmyStagingBotModule": "SITUATION",
     "FransEconomicSaturationBotModule": "SITUATION",
