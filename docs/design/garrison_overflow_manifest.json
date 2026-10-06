@@ -1,0 +1,1319 @@
+{
+  "version": 1,
+  "actors": [
+    {
+      "actor": "FCOM",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 8,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/rules/tech.yaml",
+      "line": 217
+    },
+    {
+      "actor": "MISS",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 8,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/rules/tech.yaml",
+      "line": 161
+    },
+    {
+      "actor": "RAMISS",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 8,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/rules/tech.yaml",
+      "line": 345
+    },
+    {
+      "actor": "V02",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 8,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/rules/civilian.yaml",
+      "line": 32
+    },
+    {
+      "actor": "V03",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 8,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/rules/civilian.yaml",
+      "line": 65
+    },
+    {
+      "actor": "V20",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 8,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/rules/civilian_desert.yaml",
+      "line": 1
+    },
+    {
+      "actor": "V37",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 12,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/rules/civilian_desert.yaml",
+      "line": 491
+    },
+    {
+      "actor": "^TechBuildingGarrisonable",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 8,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/rules/defaults.yaml",
+      "line": 4423
+    },
+    {
+      "actor": "forgotten_thumperbus",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 12,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml",
+      "line": 827
+    },
+    {
+      "actor": "latinsyndicate_defensebureau",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 10,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/buildings.yaml",
+      "line": 324
+    },
+    {
+      "actor": "naxis_nokana",
+      "trait": "AttackGarrisoned",
+      "ports": 2,
+      "capacity_upper_bound": 10,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml",
+      "line": 1096
+    },
+    {
+      "actor": "ra2_city01",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 24,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2766
+    },
+    {
+      "actor": "ra2_city02",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 24,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2775
+    },
+    {
+      "actor": "ra2_city03",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 24,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2784
+    },
+    {
+      "actor": "ra2_city04",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 24,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2793
+    },
+    {
+      "actor": "ra2_city06",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 24,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2802
+    },
+    {
+      "actor": "ra2_ctnwy09",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 18,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2730
+    },
+    {
+      "actor": "ra2_ctnwy22",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 18,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2736
+    },
+    {
+      "actor": "ra2_ctnwy23",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 18,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2742
+    },
+    {
+      "actor": "ra2_ctnwy24",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 18,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2748
+    },
+    {
+      "actor": "ra2_ctnwy25",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 18,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2754
+    },
+    {
+      "actor": "ra2_ctpars02",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 40,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2956
+    },
+    {
+      "actor": "ra2_ctpars04",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 24,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2962
+    },
+    {
+      "actor": "ra2_ctpars05",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 24,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2968
+    },
+    {
+      "actor": "ra2_ctpars06",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 24,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2974
+    },
+    {
+      "actor": "ra2_ctpars08",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 40,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2980
+    },
+    {
+      "actor": "ra2_ctpars09",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 40,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2992
+    },
+    {
+      "actor": "ra2_ctpars10",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 30,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2998
+    },
+    {
+      "actor": "ra2_ctpars12",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 40,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 3004
+    },
+    {
+      "actor": "ra2_ctpars13",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 30,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 3010
+    },
+    {
+      "actor": "ra2_ctpars14",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 30,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 3016
+    },
+    {
+      "actor": "ra2_ctrus03",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 30,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 3022
+    },
+    {
+      "actor": "ra2_ctrus04",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 40,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 3028
+    },
+    {
+      "actor": "ra2_ctrus05",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 40,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 3034
+    },
+    {
+      "actor": "ra2_ctrus06",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 40,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 3040
+    },
+    {
+      "actor": "ra2_ctrus08",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 8,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 3052
+    },
+    {
+      "actor": "ra2_ctrus09",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 8,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 3058
+    },
+    {
+      "actor": "ra2_ctrus10",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 8,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 3064
+    },
+    {
+      "actor": "ra2_ctrus11",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 8,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 3070
+    },
+    {
+      "actor": "ra2_ctsanf01",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 18,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 3076
+    },
+    {
+      "actor": "ra2_ctsanf02",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 24,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 3082
+    },
+    {
+      "actor": "ra2_ctsanf03",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 18,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 3088
+    },
+    {
+      "actor": "ra2_ctsanf05",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 40,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 3094
+    },
+    {
+      "actor": "ra2_ctsanf06",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 18,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 3100
+    },
+    {
+      "actor": "ra2_ctsanf07",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 18,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 3106
+    },
+    {
+      "actor": "ra2_ctsanf08",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 24,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 3112
+    },
+    {
+      "actor": "ra2_ctsanf17",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 18,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 3124
+    },
+    {
+      "actor": "ra2_ctsanf18",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 24,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 3130
+    },
+    {
+      "actor": "ra2_cttexs01",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 8,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2908
+    },
+    {
+      "actor": "ra2_cttexs02",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 24,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2914
+    },
+    {
+      "actor": "ra2_cttexs03",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 24,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2920
+    },
+    {
+      "actor": "ra2_cttexs04",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 24,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2926
+    },
+    {
+      "actor": "ra2_cttexs05",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 24,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2932
+    },
+    {
+      "actor": "ra2_cttexs06",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 24,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2938
+    },
+    {
+      "actor": "ra2_cttexs07",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 24,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2944
+    },
+    {
+      "actor": "ra2_cttexs08",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 12,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2950
+    },
+    {
+      "actor": "ra2_ctwash03",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 24,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2829
+    },
+    {
+      "actor": "ra2_ctwash04",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 30,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2835
+    },
+    {
+      "actor": "ra2_ctwash05",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 24,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2841
+    },
+    {
+      "actor": "ra2_ctwash06",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 24,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2847
+    },
+    {
+      "actor": "ra2_ctwash07",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 24,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2853
+    },
+    {
+      "actor": "ra2_ctwash08",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 30,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2859
+    },
+    {
+      "actor": "ra2_ctwash09",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 12,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2865
+    },
+    {
+      "actor": "ra2_ctwash10",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 24,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2871
+    },
+    {
+      "actor": "ra2_ctwash11",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 30,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2877
+    },
+    {
+      "actor": "ra2_ctwash13",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 24,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2883
+    },
+    {
+      "actor": "ra2_ctwash17",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 30,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2902
+    },
+    {
+      "actor": "ra2ctarmy01",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 12,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2623
+    },
+    {
+      "actor": "ra2ctbarn02",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 8,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2468
+    },
+    {
+      "actor": "ra2ctbunk01",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 8,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2455
+    },
+    {
+      "actor": "ra2ctbunk02",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 8,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2465
+    },
+    {
+      "actor": "ra2ctchig01",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 18,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2478
+    },
+    {
+      "actor": "ra2ctchig02",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 18,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2484
+    },
+    {
+      "actor": "ra2ctchig03",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 18,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2487
+    },
+    {
+      "actor": "ra2cteur01",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 8,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2490
+    },
+    {
+      "actor": "ra2cteur02",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 8,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2495
+    },
+    {
+      "actor": "ra2cteur04",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 24,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2500
+    },
+    {
+      "actor": "ra2ctfarm01",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 8,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2473
+    },
+    {
+      "actor": "ra2ctfarm06",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 8,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2505
+    },
+    {
+      "actor": "ra2ctfrma",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 8,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2510
+    },
+    {
+      "actor": "ra2ctgas01",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 18,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2515
+    },
+    {
+      "actor": "ra2cthse01",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 8,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2523
+    },
+    {
+      "actor": "ra2cthse02",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 12,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2530
+    },
+    {
+      "actor": "ra2cthse03",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 12,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2536
+    },
+    {
+      "actor": "ra2cthse04",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 12,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2542
+    },
+    {
+      "actor": "ra2cthse07",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 12,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2557
+    },
+    {
+      "actor": "ra2ctind01",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 40,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2563
+    },
+    {
+      "actor": "ra2ctlab",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 24,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2569
+    },
+    {
+      "actor": "ra2ctmiam01",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 24,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2575
+    },
+    {
+      "actor": "ra2ctmiam02",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 24,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2581
+    },
+    {
+      "actor": "ra2ctmiam03",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 24,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2587
+    },
+    {
+      "actor": "ra2ctmiam05",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 24,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2599
+    },
+    {
+      "actor": "ra2ctmiam06",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 40,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2605
+    },
+    {
+      "actor": "ra2ctmiam07",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 40,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2611
+    },
+    {
+      "actor": "ra2ctmiam08",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 8,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2617
+    },
+    {
+      "actor": "ra2ctmsc07",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 8,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2641
+    },
+    {
+      "actor": "ra2ctmsc10",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 30,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2654
+    },
+    {
+      "actor": "ra2ctnewy01",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 24,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2660
+    },
+    {
+      "actor": "ra2ctnewy06",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 18,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2666
+    },
+    {
+      "actor": "ra2ctnewy07",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 18,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2672
+    },
+    {
+      "actor": "ra2ctnewy08",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 18,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2678
+    },
+    {
+      "actor": "ra2ctnewy10",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 18,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2684
+    },
+    {
+      "actor": "ra2ctnewy11",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 18,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2687
+    },
+    {
+      "actor": "ra2ctnewy12",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 18,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2690
+    },
+    {
+      "actor": "ra2ctnewy13",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 18,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2693
+    },
+    {
+      "actor": "ra2ctnewy14",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 18,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2696
+    },
+    {
+      "actor": "ra2ctnewy15",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 18,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2699
+    },
+    {
+      "actor": "ra2ctnewy16",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 8,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2702
+    },
+    {
+      "actor": "ra2ctnewy17",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 8,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2706
+    },
+    {
+      "actor": "ra2ctnewy18",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 8,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2709
+    },
+    {
+      "actor": "ra2ctnewy20",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 24,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2712
+    },
+    {
+      "actor": "ra2ctnewy21",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 24,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2721
+    },
+    {
+      "actor": "ra2ctnewy26",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 18,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml",
+      "line": 2760
+    },
+    {
+      "actor": "tkm_bigshiee",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 10,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml",
+      "line": 1421
+    },
+    {
+      "actor": "tscity01",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 18,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/TiberianSun/Shared/yaml/misc.yaml",
+      "line": 267
+    },
+    {
+      "actor": "tscity02",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 18,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/TiberianSun/Shared/yaml/misc.yaml",
+      "line": 276
+    },
+    {
+      "actor": "tscity03",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 18,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/TiberianSun/Shared/yaml/misc.yaml",
+      "line": 285
+    },
+    {
+      "actor": "tscity04",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 18,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/TiberianSun/Shared/yaml/misc.yaml",
+      "line": 294
+    },
+    {
+      "actor": "tscity05",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 18,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/TiberianSun/Shared/yaml/misc.yaml",
+      "line": 303
+    },
+    {
+      "actor": "tscity06",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 18,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/TiberianSun/Shared/yaml/misc.yaml",
+      "line": 312
+    },
+    {
+      "actor": "tscity07",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 18,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/TiberianSun/Shared/yaml/misc.yaml",
+      "line": 321
+    },
+    {
+      "actor": "tscity08",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 8,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/TiberianSun/Shared/yaml/misc.yaml",
+      "line": 330
+    },
+    {
+      "actor": "tscity09",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 8,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/TiberianSun/Shared/yaml/misc.yaml",
+      "line": 339
+    },
+    {
+      "actor": "tscity10",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 8,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/TiberianSun/Shared/yaml/misc.yaml",
+      "line": 348
+    },
+    {
+      "actor": "tscity11",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 18,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/TiberianSun/Shared/yaml/misc.yaml",
+      "line": 357
+    },
+    {
+      "actor": "tscity12",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 8,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/TiberianSun/Shared/yaml/misc.yaml",
+      "line": 366
+    },
+    {
+      "actor": "tscity13",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 8,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/TiberianSun/Shared/yaml/misc.yaml",
+      "line": 375
+    },
+    {
+      "actor": "tscity14",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 8,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/TiberianSun/Shared/yaml/misc.yaml",
+      "line": 384
+    },
+    {
+      "actor": "tscity15",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 18,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/TiberianSun/Shared/yaml/misc.yaml",
+      "line": 393
+    },
+    {
+      "actor": "tscity16",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 18,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/TiberianSun/Shared/yaml/misc.yaml",
+      "line": 402
+    },
+    {
+      "actor": "tscity17",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 24,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/TiberianSun/Shared/yaml/misc.yaml",
+      "line": 411
+    },
+    {
+      "actor": "tscity18",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 24,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/TiberianSun/Shared/yaml/misc.yaml",
+      "line": 420
+    },
+    {
+      "actor": "tscity19",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 8,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/TiberianSun/Shared/yaml/misc.yaml",
+      "line": 429
+    },
+    {
+      "actor": "tscity22",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 8,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/TiberianSun/Shared/yaml/misc.yaml",
+      "line": 438
+    },
+    {
+      "actor": "tsct0001",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 18,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/TiberianSun/Shared/yaml/misc.yaml",
+      "line": 447
+    },
+    {
+      "actor": "tsct0002",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 8,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/TiberianSun/Shared/yaml/misc.yaml",
+      "line": 456
+    },
+    {
+      "actor": "tsct0003",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 8,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/TiberianSun/Shared/yaml/misc.yaml",
+      "line": 465
+    },
+    {
+      "actor": "tsct0004",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 8,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/TiberianSun/Shared/yaml/misc.yaml",
+      "line": 474
+    },
+    {
+      "actor": "tsct0005",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 8,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/TiberianSun/Shared/yaml/misc.yaml",
+      "line": 483
+    },
+    {
+      "actor": "tsct0006",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 8,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/TiberianSun/Shared/yaml/misc.yaml",
+      "line": 492
+    },
+    {
+      "actor": "tsct0007",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 8,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/TiberianSun/Shared/yaml/misc.yaml",
+      "line": 501
+    },
+    {
+      "actor": "tsct0008",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 8,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/TiberianSun/Shared/yaml/misc.yaml",
+      "line": 510
+    },
+    {
+      "actor": "tsct0009",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 8,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/TiberianSun/Shared/yaml/misc.yaml",
+      "line": 519
+    },
+    {
+      "actor": "tsct0010",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 18,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/TiberianSun/Shared/yaml/misc.yaml",
+      "line": 528
+    },
+    {
+      "actor": "tsct0012",
+      "trait": "AttackGarrisoned",
+      "ports": 6,
+      "capacity_upper_bound": 18,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/TiberianSun/Shared/yaml/misc.yaml",
+      "line": 537
+    },
+    {
+      "actor": "zerg_behemoth",
+      "trait": "AttackGarrisoned",
+      "ports": 8,
+      "capacity_upper_bound": 12,
+      "intentional_no_fire": false,
+      "source": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml",
+      "line": 636
+    }
+  ]
+}

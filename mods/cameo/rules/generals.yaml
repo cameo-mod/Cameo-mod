@@ -2352,7 +2352,7 @@ glpalace:
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 6
 		EjectOnDeath: false
-	AttackOpenTopped:
+	AttackGarrisoned:
 		Armaments: garrisoned
 		PortOffsets: 768,0,1024, 448,-682,1024, -448,-682,1024, -768,0,1024, -448,682,1024, 448,682,1024
 		PauseOnCondition: chronobeamed
@@ -3700,7 +3700,7 @@ glbbus:
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 5
 		EjectOnDeath: false #desync
-	AttackOpenTopped:
+	AttackGarrisoned:
 		Voice: Attack
 		Armaments: garrisoned
 		PortOffsets: 384,0,128, 224,-341,128, -224,-341,128, -384,0,128, -224,341,128, 224,341,128
@@ -8231,7 +8231,7 @@ chcrawl2:
 		InitialUnits: che2, che2, che2, che2, che2, che2
 	Explodes@healer:
 		Weapon: FakeHealtAPC
-	AttackOpenTopped:
+	AttackGarrisoned:
 		Armaments: garrisoned
 		PortOffsets: 384,0,128, 224,-341,128, -224,-341,128, -384,0,128, -224,341,128, 224,341,128
 		Voice: Attack

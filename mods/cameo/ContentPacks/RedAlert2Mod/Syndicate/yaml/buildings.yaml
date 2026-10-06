@@ -89,7 +89,7 @@ latinsyndicate_combatbarracks:
 	WithIdleOverlay@Bunkered:
 		Sequence: idle-bunkered
 		RequiresCondition: loaded && !build-incomplete
-	AttackOpenTopped:
+	AttackGarrisoned:
 		Armaments: garrisoned
 		PortOffsets: 768,0,128, 448,-682,128, -448,-682,128, -768,0,128, -448,682,128, 448,682,128
 		PauseOnCondition: chronobeamed
@@ -372,7 +372,9 @@ latinsyndicate_defensebureau:
 	WithIdleOverlay@Bunkered:
 		Sequence: idle-bunkered
 		RequiresCondition: loaded && !build-incomplete
-	AttackOpenTopped:
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 		Armaments: garrisoned
 		PortOffsets: 768,0,128, 448,-682,128, -448,-682,128, -768,0,128, -448,682,128, 448,682,128
 		PauseOnCondition: chronobeamed
@@ -680,7 +682,7 @@ latinsyndicate_bunkertower:
 	WithIdleOverlay@Bunkered:
 		Sequence: idle-bunkered
 		RequiresCondition: loaded && !build-incomplete
-	AttackOpenTopped:
+	AttackGarrisoned:
 		Armaments: garrisoned
 		PortOffsets: 768,0,128, 448,-682,128, -448,-682,128, -768,0,128, -448,682,128, 448,682,128
 		PauseOnCondition: chronobeamed

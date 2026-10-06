@@ -50,6 +50,9 @@ V02:
 	Garrisonable:
 		MaxWeight: 8
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 V02.Husk:
 	Inherits: ^CivBuildingHusk
 	Building:
@@ -83,6 +86,9 @@ V03:
 	Garrisonable:
 		MaxWeight: 8
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 V03.Husk:
 	Inherits: ^CivBuildingHusk
 	Building:

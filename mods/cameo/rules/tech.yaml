@@ -191,6 +191,9 @@ MISS:
 		Palette: playerra2
 		IsPlayerPalette: true
 		Image: ra2caairp
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 MISS.Husk:
 	Inherits: ^TechBuildingHusk
 	Inherits@shape: ^3x2Shape
@@ -257,6 +260,9 @@ FCOM:
 		Palette: playerra2
 		IsPlayerPalette: true
 		Image: ra2caoild
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 FCOM.Husk:
 	Inherits: ^TechBuildingHusk
 	Inherits@shape: ^2x2Shape
@@ -346,6 +352,9 @@ RAMISS:
 	Inherits: MISS
 	-MapEditorData:
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 RABIO:
 	Inherits: bio
 	-MapEditorData:

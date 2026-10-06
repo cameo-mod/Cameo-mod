@@ -42,9 +42,12 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>The live actor this profile was built from, null for type-table profiles.
 		/// Set only when the bot owns the actor or can currently see it — the fog contract.</summary>
 		public readonly Actor Source;
+		/// <summary>Currently observed position, separate from live modifier evaluation.</summary>
+		public readonly Actor ObservedActor;
+		public readonly Player Observer;
 
 		public BotUnitProfile(string name, int cost, int hp, string armor, int speed, bool isAircraft, bool isBuilding,
-			BitSet<TargetableType> targetTypes, BotWeaponProfile[] weapons, Actor source = null)
+			BitSet<TargetableType> targetTypes, BotWeaponProfile[] weapons, Actor source = null, Actor observedActor = null, Player observer = null)
 		{
 			Name = name;
 			Cost = cost;
@@ -56,9 +59,20 @@ namespace OpenRA.Mods.CA.Traits
 			TargetTypes = targetTypes;
 			Weapons = weapons;
 			Source = source;
+			ObservedActor = observedActor ?? source;
+			Observer = observer;
 		}
 
 		public WDist MaxRange => Weapons.Length == 0 ? WDist.Zero : Weapons.Max(w => w.Range);
+		bool PortWeaponCanFire(BotWeaponProfile weapon, BotUnitProfile target) => weapon.PortArmament == null
+			|| Observer != null && ObservedActor != null && ObservedActor.Owner == Observer && target.ObservedActor != null
+				&& target.ObservedActor.CanBeViewedByPlayer(Observer)
+				&& ObservedActor.TraitsImplementing<IFirePortAttack>().Any(p =>
+					p.ArmamentsAgainst(Target.FromActor(target.ObservedActor)).Contains(weapon.PortArmament));
+		/// <summary>Target-specific range; passenger weapons count only at an eligible assigned port.</summary>
+		public WDist MaximumRangeAgainst(BotUnitProfile target) => Weapons.Any(w => w.PortArmament != null)
+			? Weapons.Where(w => w.CanTarget(target.TargetTypes) && PortWeaponCanFire(w, target))
+				.Select(w => w.Range).DefaultIfEmpty(WDist.Zero).Max() : MaxRange;
 
 		/// <summary>Damage per tick this unit deals to one `target`: every weapon that may hit it, scaled by Versus.
 		/// When <paramref name="useEffective"/> is set (BM_live_combat_model), a weapon's pipeline-modelled
@@ -71,6 +85,8 @@ namespace OpenRA.Mods.CA.Traits
 			var total = 0.0;
 			foreach (var w in Weapons)
 			{
+				if (!PortWeaponCanFire(w, target))
+					continue;
 				if (!w.CanTarget(target.TargetTypes))
 					continue;
 
@@ -97,7 +113,7 @@ namespace OpenRA.Mods.CA.Traits
 				if (w.CycleScale != 1.0)
 					dpt /= w.CycleScale;
 				if (Source != null && target.Source != null)
-					dpt *= LiveDamageTaken(Source, target.Source, w);
+					dpt *= LiveDamageTaken(w.PortArmament?.Actor ?? Source, target.Source, w);
 
 				total += dpt;
 			}
@@ -200,12 +216,14 @@ namespace OpenRA.Mods.CA.Traits
 		/// resolves (the balance-pipeline delivery taxonomy the tier-1 fitter fits), else the warhead class name
 		/// lowercased minus the "Warhead" suffix (AI_ARCHITECTURE 12.31).</summary>
 		public readonly string Delivery;
+		/// <summary>An owned passenger weapon; eligibility is evaluated at its assigned port.</summary>
+		public readonly Armament PortArmament;
 
 		public BotWeaponProfile(double damagePerTick, WDist range, BitSet<TargetableType> valid, BitSet<TargetableType> invalid,
 			IReadOnlyDictionary<string, int> versus, double effectiveDamagePerTick = 0,
 			BotWeaponModel model = null, BotChargeUp charge = null, int burst = 1,
 			double powerScale = 1.0, double cycleScale = 1.0, int mainDamage = 0, BitSet<DamageType> damageTypes = default,
-			IReadOnlyList<BotWarheadTerm> terms = null, string delivery = null)
+			IReadOnlyList<BotWarheadTerm> terms = null, string delivery = null, Armament portArmament = null)
 		{
 			DamagePerTick = damagePerTick;
 			EffectiveDamagePerTick = effectiveDamagePerTick;
@@ -222,6 +240,7 @@ namespace OpenRA.Mods.CA.Traits
 			DamageTypes = damageTypes;
 			Terms = terms;
 			Delivery = delivery;
+			PortArmament = portArmament;
 		}
 
 		public bool CanTarget(BitSet<TargetableType> targetTypes) => Valid.Overlaps(targetTypes) && !Invalid.Overlaps(targetTypes);
@@ -432,32 +451,43 @@ namespace OpenRA.Mods.CA.Traits
 		public static BotUnitProfile Get(Actor actor, Player viewer, bool useEffective = false)
 		{
 			var rules = actor.World.Map.Rules;
-			if (!useEffective || viewer == null || (actor.Owner != viewer && !actor.CanBeViewedByPlayer(viewer)))
+			if (viewer == null || (actor.Owner != viewer && !actor.CanBeViewedByPlayer(viewer)))
 				return Get(rules, actor.Info, useEffective);
+			// Enemy cargo is private even when the carrier is visible. Only own ports
+			// expose live occupants. Ordinary classic profiles keep their rule stats.
+			var ports = actor.Owner == viewer ? actor.TraitsImplementing<AttackGarrisoned>().ToArray() : [];
+			if (!useEffective && ports.Length == 0)
+			{
+				var profile = Get(rules, actor.Info, false);
+				return new BotUnitProfile(profile.Name, profile.Cost, profile.Hp, profile.Armor, profile.Speed,
+					profile.IsAircraft, profile.IsBuilding, profile.TargetTypes, profile.Weapons, observedActor: actor, observer: viewer);
+			}
 
 			var models = useEffective ? BotWeaponModelTable.Get(rules) : null;
 			var weapons = new List<BotWeaponProfile>();
-			foreach (var armament in actor.TraitsImplementing<Armament>())
+			var passengerArms = ports.SelectMany(p => p.Stations).Where(s => s.Occupant != null)
+				.SelectMany(s => s.Occupant.TraitsImplementing<Armament>().Where(a => ports.Any(p => p.Armaments.Contains(a)))).ToArray();
+			foreach (var armament in actor.TraitsImplementing<Armament>().Concat(passengerArms))
 			{
-				if (armament.IsTraitDisabled || armament.Weapon == null)
+				if (armament.IsTraitDisabled || passengerArms.Contains(armament) && armament.IsTraitPaused || armament.Weapon == null)
 					continue;
 
 				var name = armament.Info.Name;
 				var power = 1.0;
 				var reload = 1.0;
-				foreach (var m in actor.TraitsImplementing<IFirepowerModifier>())
+				foreach (var m in armament.Actor.TraitsImplementing<IFirepowerModifier>())
 					power *= m.GetFirepowerModifier(name) / 100.0;
-				foreach (var m in actor.TraitsImplementing<IReloadModifier>())
+				foreach (var m in armament.Actor.TraitsImplementing<IReloadModifier>())
 					reload *= m.GetReloadModifier(name) / 100.0;
 
-				var weaponProfile = WeaponProfile(models, armament.Weapon, armament.Info.Weapon, actor.Info.Name);
+				var weaponProfile = WeaponProfile(models, armament.Weapon, armament.Info.Weapon, armament.Actor.Info.Name);
 				if (!weaponProfile.HasValue)
 					continue;
 
 				var w = weaponProfile.Value;
-				weapons.Add(new BotWeaponProfile(w.DamagePerTick, w.Range, w.Valid, w.Invalid, w.Versus,
+				weapons.Add(new BotWeaponProfile(w.DamagePerTick, passengerArms.Contains(armament) ? armament.MaxRange() : w.Range, w.Valid, w.Invalid, w.Versus,
 					w.EffectiveDamagePerTick, w.Model, w.Charge, w.Burst, power, reload, w.MainDamage, w.DamageTypes, w.Terms,
-					w.Delivery));
+					w.Delivery, passengerArms.Contains(armament) ? armament : null));
 			}
 
 			var info = actor.Info;
@@ -474,7 +504,7 @@ namespace OpenRA.Mods.CA.Traits
 				info.HasTraitInfo<BuildingInfo>(),
 				actor.GetEnabledTargetTypes(),
 				weapons.ToArray(),
-				actor);
+				useEffective ? actor : null, actor, viewer);
 		}
 	}
 
