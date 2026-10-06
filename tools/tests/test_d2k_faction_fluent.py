@@ -34,6 +34,16 @@ UNIT_OWNER_COUNTS = {
 
 ORDOS_TURRETS = {"ordos_laserturret", "ordos_chemturret"}
 
+# d9eb3fcbe (#408 EBFD milestone) ported these actors with the upstream EBFD
+# shared-chassis fluent keys (actor_<basename>_<faction>), not actor_<id>.
+FLUENT_KEY_OVERRIDES = {
+    "harkonnen_combat_tank": "actor_combat_tank_harkonnen",
+    "ixian_duelist_tank": "actor_duelist_tank_ixian",
+    "ixian_heavy_inf": "actor_heavy_inf_ixian",
+    "ixian_heavy_rocket_raider": "actor_heavy_rocket_raider_ixian",
+    "ixian_rocket_raider": "actor_rocket_raider_ixian",
+}
+
 
 def fluent_block(text: str, key: str) -> str:
     match = re.search(rf"(?ms)^{re.escape(key)} =\n(.*?)(?=^[a-z0-9_]+ =|\Z)", text)
@@ -118,7 +128,7 @@ class D2KFactionFluentTests(unittest.TestCase):
         for actor in sorted(targets):
             with self.subTest(actor=actor):
                 resolved = self.rules.resolve(actor)
-                key = f"actor_{actor.replace('.', '_')}"
+                key = FLUENT_KEY_OVERRIDES.get(actor, f"actor_{actor.replace('.', '_')}")
                 self.assertEqual(f"{key}.name", resolved.get("Tooltip", "Name"))
                 self.assertEqual(f"{key}.description", resolved.get("Buildable", "Description"))
                 block = fluent_block(self.d2k_fluent, key)

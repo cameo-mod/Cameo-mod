@@ -81,6 +81,47 @@ SELECTED = {
 
 EXPECTED_BASELINE_DIGEST = "e099df1c4dd010165663ab68b7f4877f545bf80bafbd1c3b8c93e3e2545a3c8c"
 
+# Later authorized waves reshaped the consolidated post-state.  These pins
+# record exactly what moved, with provenance:
+# - ccbfd383c (R12 retire) renamed every *FlatCompatibility main to *_Flat;
+#   both spellings therefore satisfy "the consolidated flat main is present".
+# - 8330a1834 (W24 lane-3, RESOLVE-VERIFIED) folded RashidanGun_upgrade's
+#   bespoke RashidanGroundCompatibility main into Bullet_Medium_Flat.
+# - c48c7d41a (W24) + d36f3b0a9 (W23-RA provider strip) removed
+#   RA160mmE_rad_elite's flat channel entirely: Nuclear_Super alone carries
+#   the flat damage and the three collapsed companions keep the old stack's
+#   percentage share, so no flat main survives for it.
+FOLDED_RETAINED = {
+    "RashidanGun_upgrade": {"RashidanGroundCompatibility"},
+}
+FLAT_CHANNEL_REMOVED = {
+    "RA160mmE_rad_elite",
+}
+
+# After the fold the flat main resolves fields from the shared <Dest>_Flat
+# template, not the retired bespoke compat chain.  (Damage, ValidTargets,
+# PercentageScale) — ccbfd383c rename + 8330a1834 W24 fold (RESOLVE-VERIFIED,
+# intended damage-multiset flags).  FriendlyFire pins survive the fold.
+FOLD_FIELD_OVERRIDES = {
+    "RashidanGun_upgrade": (16000, "Ground, Water, Air", 0),
+}
+
+
+def flat_variants(destination: str) -> set:
+    """Accepted spellings of the consolidated flat main (R12 renamed it)."""
+    return {f"{destination}FlatCompatibility", f"{destination}_Flat"}
+
+
+def mains_match_post_state(name: str, destination: str, retained: set, mains: set) -> bool:
+    """mains equals the retained core plus exactly one flat variant — or the
+    core alone where later authorized waves stripped the flat channel."""
+    core = set(retained) - FOLDED_RETAINED.get(name, set())
+    remainder = mains - core
+    if name in FLAT_CHANNEL_REMOVED:
+        return not remainder
+    return len(remainder) == 1 and remainder <= flat_variants(destination)
+
+
 FORCE_PERCENTAGE_COMPANIONS = {
     "RA160mmE_rad_elite", "CabalReaperMissiles",
     "CabalHeavyReaperMissiles", "HMG_fremen",
@@ -109,8 +150,7 @@ def plans(rs: Ruleset):
         if resolved is None:
             raise RuntimeError(f"{name}: missing weapon")
         mains = set(main_warheads(resolved))
-        expected = retained | {f"{destination}FlatCompatibility"}
-        if mains == expected:
+        if mains_match_post_state(name, destination, retained, mains):
             result[name] = None
             continue
         collapse = mains - retained
@@ -258,10 +298,15 @@ def apply(rs: Ruleset, rows) -> None:
 def inspect(rs: Ruleset) -> bool:
     for name, (destination, retained, total, targets, scale, ff) in SELECTED.items():
         resolved = rs.resolve_weapon(name)
-        expected = retained | {f"{destination}FlatCompatibility"}
-        if set(main_warheads(resolved)) != expected:
+        mains = set(main_warheads(resolved))
+        if not mains_match_post_state(name, destination, retained, mains):
             return False
-        node = resolved.child(f"Warhead@{destination}FlatCompatibility")
+        variant = mains & flat_variants(destination)
+        if not variant:
+            continue
+        node = resolved.child(f"Warhead@{variant.pop()}")
+        if name in FOLD_FIELD_OVERRIDES:
+            total, targets, scale = FOLD_FIELD_OVERRIDES[name]
         if (int(str(node.get("Damage"))) != total
                 or str(node.get("ValidTargets")) != targets
                 or int(str(node.get("PercentageScale") or 0)) != scale):

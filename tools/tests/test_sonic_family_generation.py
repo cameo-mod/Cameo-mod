@@ -59,7 +59,15 @@ class SonicFamilyGenerationTest(unittest.TestCase):
                     main = node.child('Warhead@' + name + '_' + level)
                     status = node.child('Warhead@' + name + '_' + level + '_Debuff')
                     self.assertIsNotNone(main)
-                    self.assertIsNone(status)
+                    # 9758b9451 (#483): the _Debuff node is the restored AREA
+                    # meter channel — flat ApplyPhysicalState feed over the
+                    # ring twice the damage radius, exempt from double-feed by
+                    # the Range > Spread rule (FINDING_2026-09-24_dawn_w7).
+                    self.assertIsNotNone(status)
+                    self.assertEqual('ApplyPhysicalState', status.value)
+                    self.assertEqual('Resonance', status.get('PhysicalStateName'))
+                    self.assertEqual('5000', status.get('Amount'))
+                    self.assertEqual(str(int(main.get('Spread')) * 2), status.get('Range'))
                     self.assertIsNone(next((c for c in node.children
                                             if c.value == 'GrantExternalCondition'), None))
                     self.assertEqual(main.get('ValidTargets'), vt)

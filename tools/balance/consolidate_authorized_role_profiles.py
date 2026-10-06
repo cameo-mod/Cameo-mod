@@ -66,6 +66,18 @@ ROOTS = {
         "CannonHE_Heavy", {"AsianHowitzerCannon_elite"}, 40000, None),
 }
 
+# W7 de-parenting dissolved every weapon->weapon Inherits edge in this cohort:
+# children now inherit the shared 3-way templates directly (2f6f405c4 /
+# 259687271 / W7MAT flat-fold inlines), resolve-verified payload-identical.
+# The ROOTS sets remain the family contract (totals, fingerprints, ownership);
+# this pins the surviving edge closure, which is empty for every root.  Every
+# former child keeps its own entry in PRESERVED_HASHES.
+EXPECTED_CLOSURES = {root: set() for root in ROOTS}
+
+# R12 (ccbfd383c) renamed some consolidated destination mains; the digest must
+# exclude the destination under either spelling.
+R12_DESTINATION_RENAMES = {"CannonAP_Light": {"CannonAP"}}
+
 BASELINE_MAINS = {
     "ASDFKamikazeExplosion": {"Concussion_Medium", "Demolition_Heavy"},
     "TSBusMortar": {"Concussion_Medium", "Demolition_Heavy"},
@@ -137,7 +149,8 @@ EXPECTED_CONTRACT = (
     "",
     "",
     "Prone75Percent, TriggerProne, ExplosionDeath",
-)
+)[:-1]  # DamageTypes is family-derived since R44/R45 (e9e9f72af); the
+        # per-state fingerprint still pins it exactly.
 
 # Complete resolved fingerprints for the selected main nodes.  This makes the
 # converter accept exactly the audited before or after state while catching a
@@ -224,13 +237,18 @@ def node_hash(node) -> str:
 
 def resolved_hash(rs: Ruleset, name: str) -> str:
     excluded_keys = BASELINE_MAINS.get(name, set()) | {DESTINATIONS.get(name, "")}
+    # R12 renamed the CannonAP_Light destination to CannonAP; the digest must
+    # cover the resolved payload, not the spelling.
+    excluded_keys |= R12_DESTINATION_RENAMES.get(DESTINATIONS.get(name, ""), set())
     if name == "ra1_soviets_molotovconscript_conscriptmolotovexplode":
-        excluded_keys |= {"Flame_LightFlatCompatibility"}
+        # R12 renamed the flat key; exclude both spellings so the digest is
+        # invariant across the payload-identical rename (ccbfd383c).
+        excluded_keys |= {"Flame_LightFlatCompatibility", "Flame_Light_Flat"}
     excluded = {f"Warhead@{key}" for key in excluded_keys if key}
     payload = [
         node_payload(child)
         for child in rs.resolve_weapon(name).children
-        if child.key not in excluded
+        if child.key not in excluded and not child.key.startswith("Inherits")
     ]
     raw = json.dumps(payload, separators=(",", ":")).encode()
     return hashlib.sha256(raw).hexdigest()
@@ -247,7 +265,6 @@ def contract(node) -> tuple[str, ...]:
         "AffectsParent",
         "TargetActorCenter",
         "UpdatesUnitStatistics",
-        "DamageTypes",
     ))
 
 
@@ -272,7 +289,7 @@ def add_removal(lines: list[str], weapon: str, key: str) -> None:
 
 
 def inspect(rs: Ruleset, print_hashes: bool = False) -> bool:
-    for root, (_destination, expected, _total, _state_scale) in ROOTS.items():
+    for root, expected in EXPECTED_CLOSURES.items():
         actual = descendants(rs, root)
         if actual != expected:
             raise RuntimeError(
@@ -336,7 +353,9 @@ def inspect(rs: Ruleset, print_hashes: bool = False) -> bool:
             raise RuntimeError(f"{name}: non-selected behavior hash changed")
 
     death = rs.resolve_weapon("ra1_soviets_molotovconscript_conscriptmolotovexplode")
-    if set(main_warheads(death)) != {"Flame_LightFlatCompatibility"}:
+    death_mains = set(main_warheads(death))
+    if len(death_mains) != 1 or not death_mains <= {
+            "Flame_LightFlatCompatibility", "Flame_Light_Flat"}:
         raise RuntimeError("ConscriptMolotovExplode: death payload changed")
     if resolved_hash(rs, "ra1_soviets_molotovconscript_conscriptmolotovexplode") != PRESERVED_HASHES[
             "ra1_soviets_molotovconscript_conscriptmolotovexplode"]:

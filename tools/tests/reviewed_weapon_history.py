@@ -556,6 +556,55 @@ def restore_full_air_payload(test, node):
     return copy
 
 
+@lru_cache(maxsize=1)
+def role_profile_ladder_changes():
+    """R16 retune + armor-12.0 additions + ContentPack sound namespacing that
+    post-date the authorized role-profile cohort's pinned payloads."""
+    return json.loads((pathlib.Path(__file__).parent / 'fixtures' /
+                       'role_profile_ladder_history_20261007.json').read_text(encoding='utf-8'))
+
+
+def restore_role_profile_ladders(test, node, copy):
+    """Assert the post-#320 waves' exact current values, then restore the
+    pinned payload in a test copy.  Runs after FIELD_CHANGES so the recorded
+    current_hash already includes that layer's before-values."""
+    record = role_profile_ladder_changes()
+    fields = record['changed_fields'].get(node.key, ())
+    nodes = record['restored_nodes'].get(node.key, {})
+    if not fields and not nodes:
+        return copy
+
+    def ordered(n):
+        return [n.key, n.value, [ordered(c) for c in n.children]]
+
+    def rebuild(row):
+        return Node(row[0], row[1], [rebuild(c) for c in row[2]])
+
+    for tag, entry in nodes.items():
+        target = copy.child(tag)
+        test.assertIsNotNone(target, (node.key, tag))
+        digest = hashlib.sha256(json.dumps(ordered(target), separators=(',', ':')).encode()).hexdigest()
+        test.assertEqual(entry['current_hash'], digest, (node.key, tag))
+        copy.children = [rebuild(entry['before']) if c.key == tag else c
+                         for c in copy.children]
+    for path, before, after in fields:
+        keys = [part for part in path.split('/') if part]
+        parent = copy
+        for key in keys[:-1]:
+            parent = parent.child(key)
+            test.assertIsNotNone(parent, (node.key, path))
+        field = keys[-1]
+        current = parent.child(field)
+        test.assertEqual(after, current.value if current is not None else None, (node.key, path))
+        if before is None:
+            parent.children = [c for c in parent.children if c.key != field]
+        elif current is not None:
+            current.value = before
+        else:
+            parent.children.append(Node(field, before))
+    return copy
+
+
 def historical_copy(test, node):
     if node.key in ALL_ENDPOINTS or node.key == OWNED_GUNBOAT:
         node = restore_endpoint_weapon(test, node)
@@ -600,6 +649,7 @@ def historical_copy(test, node):
             test.assertIsNotNone(field, (node.key, path))
         test.assertEqual(after, field.value, (node.key, path))
         field.value = before
+    copy = restore_role_profile_ladders(test, node, copy)
     return copy
 
 

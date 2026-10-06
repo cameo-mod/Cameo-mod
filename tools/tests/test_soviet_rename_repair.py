@@ -191,15 +191,138 @@ class SovietRenameRepairTests(unittest.TestCase):
             diffs_seen += [(new,) + d for d in diffs]
         self.assertEqual(diffs_seen, [], "unexplained resolved differences")
 
+    # Whole-node REMOVALS authorized by post-baseline waves (slot identity, not
+    # the slot number, is checked: trait@slot):
+    #   - W17 retirement: every FirepowerMultiplier@* channel
+    #   - *Buff channel purge (InfantryBuff/MeleeBuff/HarvesterBuff/GlobalBuffs/
+    #     DefenseBuffs/... and the PromotionUnit/SplashDamage/2x1Shape channels
+    #     that rode the same system)
+    #   - SONICDEBUFF / poisoned / blinded conditions migrated to physical-state
+    #     traits (Resonance/Poison/Blind waves)
+    #   - BotInsurance/CashTrickler/ResourcePurifier/personality GrantRandomCondition
+    #     relocated from the construction yard onto the Player actor
+    _REMOVE_TRAITS_EXACT = {
+        "ExternalCondition@SONICDEBUFF", "ExternalCondition@Poisoned",
+        "SpeedMultiplier@SONICDEBUFF", "RangeMultiplier@blinded",
+        "WithColoredOverlay@SONICDEBUFF", "ChangesHealth@poison",
+        "Targetable@poisoned", "GrantRandomCondition@personality",
+    }
+    _REMOVE_TRAIT_PREFIX = ("BotInsurance@", "CashTrickler@",
+                            "ResourcePurifier@", "FirepowerMultiplier@")
+    # DamageMultiplier removals are bounded to the exact purge slots observed;
+    # an unrelated DamageMultiplier removal must still fail.
+    _REMOVE_DAMAGE_MULT_SLOTS = {
+        "SONICDEBUFF", "GlobalBuffs", "InfantryBuff", "MeleeBuff",
+        "HarvesterBuff", "AntiAirDefenseBuff", "DefenseBuffs", "PromotionUnit",
+        "FireActorBuffs", "HeavyInfantryBuff", "GrenadierInfantryBuff",
+        "AntiTankAntiAirInfantryBuff", "2x1Shape",
+    }
+
+    # Whole-node ADDITIONS authorized by the same waves:
+    #   - physical-state traits (Resonance/Poison/Blind families)
+    #   - GrantConditionOnBotOwner increment switches and the BotRoles band
+    _ADD_TRAIT_PREFIX = (
+        "PhysicalState@", "PhysicalStateBar@", "GrantConditionOnPhysicalState@",
+        "DamageMultiplierProportionalToPhysicalState@",
+        "ModifiesCombatProportionalToPhysicalState@",
+        "SlowsProportionalToPhysicalState@",
+        "ChangesHealthProportionalToPhysicalState@",
+        "WithPhysicalStateColoredOverlay@",
+        "GrantConditionOnBotOwner@", "BotRoles",
+    )
+
+    # Balance-pipeline retunes from the post-playtest batches (#401 e4213b6dd,
+    # #403 f4e5e20f7) and the armor-12.0 wave; pinned as exact before/after
+    # tuples so any further drift on these actors still fails.
+    _BALANCE_RETUNES = {
+        ("ra1_soviets_grenadier", ("ChangesHealth@SelfHealing", "Step"), "8", "14"),
+        ("ra1_soviets_grenadier", ("Health", "HP"), "8000", "14000"),
+        ("ra1_soviets_grenadier", ("Mobile", "Speed"), "75", "72"),
+        ("ra1_soviets_grenadier", ("Valued", "Cost"), "200", "230"),
+        ("ra1_soviets_rocketsoldier", ("Armor", "Type"), "Flak", "None"),
+        ("ra1_soviets_rocketsoldier", ("ChangesHealth@SelfHealing", "Step"), "10", "15"),
+        ("ra1_soviets_rocketsoldier", ("Health", "HP"), "10000", "15000"),
+        ("ra1_soviets_rocketsoldier", ("Mobile", "Speed"), "55", "46"),
+        ("ra1_soviets_rocketsoldier", ("Valued", "Cost"), "300", "440"),
+        ("ra1_soviets_heavytank", ("ChangesHealth@SelfHealing", "Step"), "60", "69"),
+        ("ra1_soviets_heavytank", ("Health", "HP"), "150000", "172000"),
+        ("ra1_soviets_heavytank", ("Mobile", "Speed"), "70", "66"),
+        ("ra1_soviets_heavytank", ("Repairable", "HpPerStep"), "7500", "8600"),
+        ("ra1_soviets_heavytank", ("Valued", "Cost"), "1000", "1450"),
+        ("ra1_soviets_oretruck", ("ChangesHealth@SelfHealing", "Step"), "40", "84"),
+        ("ra1_soviets_oretruck", ("Health", "HP"), "100000", "210000"),
+        ("ra1_soviets_oretruck", ("Mobile", "Speed"), "90", "81"),
+        ("ra1_soviets_oretruck", ("Mobile", "TurnSpeed"), "18", "16"),
+        ("ra1_soviets_oretruck", ("Repairable", "HpPerStep"), "5000", "10500"),
+        ("ra1_soviets_oretruck", ("Valued", "Cost"), "1000", "1560"),
+        ("ra1_soviets_mobileconstructionvehicle",
+         ("ChangesHealth@SelfHealing", "Step"), "120", "101"),
+        ("ra1_soviets_mobileconstructionvehicle", ("Health", "HP"), "300000", "253000"),
+        ("ra1_soviets_mobileconstructionvehicle", ("Mobile", "Speed"), "75", "70"),
+        ("ra1_soviets_mobileconstructionvehicle", ("Mobile", "TurnSpeed"), "15", "14"),
+        ("ra1_soviets_mobileconstructionvehicle",
+         ("Repairable", "HpPerStep"), "15000", "12650"),
+        ("ra1_soviets_mobileconstructionvehicle", ("Valued", "Cost"), "5000", "4650"),
+    }
+
     def _authorize(self, diffs, old, new):
         out = []
         for path, b, a in diffs:
+            trait = path[0].split("@")[0] if path else ""
+            slot = path[0].split("@", 1)[1] if "@" in path[0] else ""
+            leaf = path[-1] if path else ""
+            if len(path) == 1:
+                # whole-node add/remove from the post-baseline system waves
+                if a == "<missing>" and (path[0] in self._REMOVE_TRAITS_EXACT
+                        or path[0].startswith(self._REMOVE_TRAIT_PREFIX)
+                        or (trait == "DamageMultiplier"
+                            and slot in self._REMOVE_DAMAGE_MULT_SLOTS)):
+                    continue
+                if b == "<missing>" and path[0].startswith(self._ADD_TRAIT_PREFIX):
+                    continue
+            if trait == "BotLimits":
+                # bot-difficulty tuning system; every field post-dates baseline
+                continue
+            if (trait in ("ProductionCostMultiplier", "ProductionTimeMultiplier")
+                    and slot.endswith("botplayer") and leaf == "Multiplier"
+                    and b.isdigit() and a.isdigit()
+                    and int(a) - int(b) in (5, 10)):
+                # difficulty retune: +5 cost / +10 time per step
+                continue
+            if leaf in ("PauseOnCondition", "RequiresCondition") and (
+                    a == b + " || blinded"
+                    or a == b + " && !cyberneticarmor_up"):
+                # Blind physical-state / cybernetic-armor condition migrations
+                continue
+            if leaf in ("Prerequisites", "Proxy") and a == b.replace(".", "_"):
+                # dot -> underscore condition/upgrade key migration
+                continue
+            if (trait == "Building" and leaf == "TerrainTypes"
+                    and set(a.split(",")) - set(b.split(",")) == {"ClearInterior"}
+                    and set(b.split(",")) <= set(a.split(","))):
+                continue
+            if (leaf == "RepairActors"
+                    and a == b.replace("ra1_allies_alliedservicedepot",
+                                       "ra1_allies_servicedepot")):
+                continue
+            if leaf == "ImageByFullness" and a == RENAMES.get(b, b):
+                # sequence ids follow the actor rename; asset namespace stays
+                # untranslated by canonical(), so authorize the rename pair here
+                continue
+            if (new, path, b, a) in self._BALANCE_RETUNES:
+                continue
             if path == ("RenderSprites", "Image"):
                 # image preservation: the AFTER value must equal the exact
                 # BEFORE effective image — explicit before image, else the
                 # old actor-ID default. No unconditional pass-through.
+                # Post-d375346d4 the sequences themselves were renamed, so the
+                # explicit binding may carry either the old or the new id, or a
+                # same-wave allied-id rename (ra1_allies_allied* -> ra1_allies_*).
                 effective_before = b if b != "<missing>" else old
-                if a == effective_before:
+                if a in (effective_before,
+                         RENAMES.get(effective_before, effective_before),
+                         effective_before.replace("ra1_allies_allied",
+                                                  "ra1_allies_")):
                     continue
                 out.append((path, b, a))
                 continue
@@ -224,7 +347,34 @@ class SovietRenameRepairTests(unittest.TestCase):
                 # Exact later owner identity; thermobaric upgrade slots excluded.
                 continue
             out.append((path, b, a))
-        return out
+        return self._pair_key_renames(out)
+
+    @staticmethod
+    def _pair_key_renames(diffs):
+        """Drop matched remove+add pairs that are the same dict key renamed.
+
+        The cargo-condition keys moved from '<base>.<faction>' to
+        '<faction>_<base>' (e.g. 'scrapcar_driveby.latin' ->
+        'latin_scrapcar_driveby') — value preserved, order aside identical.
+        """
+        removed = {}  # (parent_path, removed_key, value) -> diff index
+        added = {}
+        for i, (path, b, a) in enumerate(diffs):
+            if a == "<missing>" and len(path) > 1:
+                removed[(path[:-1], path[-1], b)] = i
+            elif b == "<missing>" and len(path) > 1:
+                added[(path[:-1], path[-1], a)] = i
+        drop = set()
+        for (parent, key, val), ri in removed.items():
+            if "." not in key:
+                continue
+            base, fac = key.rsplit(".", 1)
+            swap = fac + "_" + base
+            ai = added.get((parent, swap, val))
+            if ai is not None:
+                drop.add(ri)
+                drop.add(ai)
+        return [d for i, d in enumerate(diffs) if i not in drop]
 
     def test_sam_weapon_authorization_is_exact(self):
         old, new = "ra1_soviets_sovietsamsite", "ra1_soviets_samsite"
@@ -277,9 +427,13 @@ class SovietRenameRepairTests(unittest.TestCase):
             obj = {"SomeTrait": {field: new_id}}
             self.assertEqual(canonical(obj), obj)
         # Compare at the trait level to exercise the same leaf path as live data.
+        # The image drift must be a value that is NOT the pair's own rename
+        # (Image -> new_id is the authorized post-d375346d4 binding for a
+        # renamed actor), so use the airfield pair with a barracks image.
         diffs = self._collect({"RenderSprites": {}},
                               canonical({"RenderSprites": {"Image": new_id}}))
-        self.assertTrue(self._authorize(diffs, "ra1_soviets_sovietbarracks", new_id))
+        self.assertTrue(self._authorize(diffs, "ra1_soviets_sovietairfield",
+                                        "ra1_soviets_airfield"))
         self.assertEqual(canonical({"SoundTrait": {"Report": new_id}}),
                          {"SoundTrait": {"Report": new_id}})
         # substrings in other namespaces must survive canonical()

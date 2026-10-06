@@ -1,3 +1,64 @@
+# 2026-10-06 — Devin-Reviewer: TOOLS-REGREEN — stale-contract repairs + real regressions filed
+
+*Devin-Reviewer.* `devin/tier4/tools-regreen` on `origin/inc/2026_10_05` (worktree
+`C:\cameo-wt\t4-regreen`). Task 01a10d9b. Fleet regressions doc:
+`Cameo-mod-fleet/REGREEN_2026-10-06_regressions.md` (R1 missile 27, R2 HQ sell-guard,
+R3 hammertank Scout — all need maintainer ruling; nothing repinned that is real).
+
+Repairs this increment (each carries a provenance commit in the message or the test comment):
+
+- **consolidate_authorized_remaining_profiles.py:** `inspect()`/`plans()` are fold-aware —
+  `FOLDED_RETAINED` (RashidanGun_upgrade drops `RashidanGroundCompatibility`, folded into
+  `Bullet_Medium_Flat` by W24 `8330a1834`), `FLAT_CHANNEL_REMOVED` (`RA160mmE_rad_elite`,
+  W23/W24 `d36f3b0a9`/`c48c7d41a`), flat spellings `<dst>FlatCompatibility`/`<dst>_Flat`
+  (R12 `ccbfd383c`), `FOLD_FIELD_OVERRIDES` only for the Rashidan damage/targets/scale.
+  `inspect(live)` still False; `inspect(LaterProfileView)` True. 10/11 — the one fail is
+  R3 below.
+- **consolidate_authorized_role_profiles.py + reviewed_weapon_history.py:** W7 de-parenting
+  (`259687271`, W7MAT inline) split family membership from the Inherits-edge closure —
+  `EXPECTED_CLOSURES` now holds only edge-intact members; de-parented weapons stay in
+  `PRESERVED_HASHES`. R12 rename tolerated (both flat spellings excluded from the hash).
+  Ordered before-state payloads restored via new fixture
+  `tools/tests/fixtures/role_profile_ladder_history_20261007.json` +
+  `restore_role_profile_ladders()` applied *after* `FIELD_CHANGES` (it asserts live values
+  first). Molotov `DamageTypes` is family-derived since R44/R45 (`e9e9f72af`) — removed from
+  `contract()`; the full node fingerprints still pin it. Suite green 6/6.
+- **merge_payload_repair_comparison.json:** `meta.health_values` repinned surgically to the
+  live HP ladder; artifact sha -> `46cbca21…`; derived head digest -> `5ca0c6ac…` (frozen
+  reconstruction verified bit-exact at `55530c7b…` under the old ladder; the pinned digest
+  is immutable history).
+- **missile_role_policy:** 4 stale records repaired (`95cfaa3bc`: `TSMammothTusk2` →
+  `TSMammothTusk2_AA` rename-map fallback mirroring `test_effective_heaviness`, SkyHawk
+  reparent row, two live-hash pins); 27 pre-R16 materialized-ladder regressions filed as R1.
+- **cannonap_endpoint_cohort (10):** `6d1f4a092` — 12.0j `PercentageScale: 2000` folded half
+  (`66c377077`) + W24 `Warhead@CannonAP_Light` removal on TSSkyHawk (`c48c7d41a`).
+- **test_soviet_rename_repair.py (1227 diffs → 0):** `_authorize` extended with bounded class
+  rules — physical-state trait add/remove families, bot-difficulty retune (`*botplayer`
+  multipliers +5/+10, `BotLimits@*`, Player-relocated `BotInsurance`/`CashTrickler`/
+  `ResourcePurifier`/`GrantRandomCondition`, `GrantConditionOnBotOwner` switches, `BotRoles`),
+  W17 `FirepowerMultiplier` retirement + bounded `DamageMultiplier@<slot>` purge list,
+  `|| blinded` / `&& !cyberneticarmor_up` condition suffixes, `.`→`_` key migration,
+  `latin_*` CargoConditions key-swap pairing (remove+add pairs matched by value, not
+  blanket-dropped), `ra1_allies_allied*`→`ra1_allies_*` and `alliedservicedepot`→`servicedepot`
+  renames, `ClearInterior` TerrainTypes insertion, 26 pinned #401/#403 balance retunes, and
+  `RenderSprites.Image` accepting the post-`d375346d4` renamed sequence id. Green 13/13.
+- **test_ai_logging_integration.py:** literal repinned to `host: true` — `9a0348101`
+  (takeover phase-1) defers owner eligibility to `OwnerIsLocal`. Green 2/2.
+- **test_d2k_faction_fluent.py:** `FLUENT_KEY_OVERRIDES` for the 5 EBFD-ported actors that
+  reuse upstream `actor_<basename>_<faction>` shared-chassis keys (`d9eb3fcbe`, #408). 4/4.
+- **test_sonic_family_generation.py:** `_Debuff` node now pinned as the restored AREA
+  flat-meter channel (`ApplyPhysicalState`, `Amount: 5000`, `Range = 2*Spread` —
+  `9758b9451` #483, exempt from double-feed by Range > Spread). Green 5/5.
+
+Real regressions filed (NOT repaired — see fleet doc): R1 materialized missile ladders
+pre-R16 (27), R2 HQ sell-protection covers only zerg_lair/zerg_hive (5), R3 hammertank
+thermobaric Scout tilt 146→98 under R16 (1). Current sweep: 53 passed, 33 failed =
+exactly the three filed classes.
+
+Also this session: **REREVIEW-P0-P6** (priority interrupt, task 01a110ee) — independent
+re-review of `codex/learn-p0-fix@874fda898` and `codex/learn-p6-fix@27eb42521`; verdicts in
+`Cameo-mod-fleet/REREVIEW_2026-10-06_learn_p0_p6.md`.
+
 # 2026-10-05 — Devin-Architect: HOTSPOT-RESTACK — hotspot8+hotspot3 onto ars-stutter-gated
 
 *Devin-Architect.* `devin/architect/hotspot8-restack` + `devin/architect/hotspot3-restack` on

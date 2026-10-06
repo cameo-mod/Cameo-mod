@@ -20,7 +20,9 @@ class AiLoggingIntegrationTests(unittest.TestCase):
     def test_save_exclusion_is_captured_before_replay_in_clears_the_flag(self):
         source = (ROOT / "OpenRA.Mods.Cameo/Traits/AiMatchLogWriter.cs").read_text()
         load = source.split("void IWorldLoaded.WorldLoaded", 1)[1].split("void ITick.Tick", 1)[0]
-        self.assertIn("eligibleAtWorldLoad = Eligible(world.Type, world.IsReplay, world.IsLoadingGameSave, Game.IsHost);", load)
+        # 9a0348101 (takeover phase-1): eligibility pins host:true at world
+        # load; OwnerIsLocal defers host-vs-controller ownership to runtime.
+        self.assertIn("eligibleAtWorldLoad = Eligible(world.Type, world.IsReplay, world.IsLoadingGameSave, host: true);", load)
         self.assertIn("written = true;", load)
         capture = source.split("void CaptureAndAppend", 1)[1].split("void TryAppend", 1)[0]
         self.assertLess(capture.index("!eligibleAtWorldLoad"), capture.index("BuildLog(world)"))
