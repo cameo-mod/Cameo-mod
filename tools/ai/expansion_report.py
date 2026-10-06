@@ -84,13 +84,13 @@ def summarise_match(snaps: list[dict], placements: list[dict], match: dict | Non
 
 
 def build(data: dict[str, list[dict]]) -> dict:
-    matches = {(m.get("game_uid"), m.get("player", {}).get("name")): m for m in data["matches"]}
+    matches = {(m.get("game_uid"), m.get("player", {}).get("seat", m.get("player", {}).get("name"))): m for m in data["matches"]}
     by_snap = collections.defaultdict(list)
     for s in data["situations"]:
-        by_snap[(s.get("game_uid"), s.get("player"))].append(s)
+        by_snap[(s.get("game_uid"), s.get("seat", s.get("player")))].append(s)
     by_place = collections.defaultdict(list)
     for p in data["placements"]:
-        by_place[(p.get("game_uid"), p.get("player"))].append(p)
+        by_place[(p.get("game_uid"), p.get("seat", p.get("player")))].append(p)
 
     rows = []
     for key in sorted(set(by_snap) | set(by_place), key=lambda k: (str(k[0]), str(k[1]))):

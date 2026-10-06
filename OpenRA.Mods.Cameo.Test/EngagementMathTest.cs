@@ -138,7 +138,7 @@ namespace OpenRA.Mods.Cameo.Test
 
 			using var doc = JsonDocument.Parse(EngagementRecord.BuildEngagement(h, s));
 			var root = doc.RootElement;
-			Assert.That(root.GetProperty("schema").GetString(), Is.EqualTo("engagement/1"));
+			Assert.That(root.GetProperty("schema").GetString(), Is.EqualTo("engagement/2"));
 			Assert.That(root.GetProperty("response").GetProperty("response_ticks").GetInt32(), Is.EqualTo(60));
 			Assert.That(root.GetProperty("score").GetProperty("trade_milli").GetInt32(), Is.EqualTo(EngagementScore.Trade(900, 400)));
 			Assert.That(root.GetProperty("outcome").GetProperty("own_lost_by_role").GetProperty("frontline").GetInt32(), Is.EqualTo(400));
