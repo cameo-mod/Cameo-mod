@@ -21,6 +21,7 @@ from miniyaml import Ruleset, load_text, merge_children
 from reviewed_weapon_history import LaterProfileView
 from review_batch_diff import active_health_values, snapshot, snapshot_digest
 import review_batch_diff
+from route_parity_floor import ROUTES, floor_rows
 from survey_weapon_structure import inventory
 
 
@@ -177,6 +178,17 @@ class AuthorizedRemainingProfileTests(unittest.TestCase):
                     paid_damage * paid_versus[armor],
                     base_damage * base_versus[armor],
                     f"{paid_name} regresses {armor}")
+            # REGREEN R3: the local floor rows are model-derived
+            # (tools/balance/route_parity_floor.py) — pin them to the model output
+            # so a ladder retune like R16 cannot silently stale them again.
+            route = next(r for r in ROUTES if r.paid_weapon == paid_name)
+            local_versus = self.rules.weapon(paid_name).child(
+                route.paid_warhead).child("Versus")
+            local_rows = {node.key: int(node.value) for node in local_versus.children}
+            for armor, want in floor_rows(self.rules, route).items():
+                self.assertEqual(
+                    want, local_rows[armor],
+                    f"{paid_name} {armor} parity floor drifted from the model")
 
     def test_kotin_uses_the_upstream_nuclear_upgrade_for_fire_and_death(self):
         # 4a1479b50 changed this role deliberately; do not impose the retired
