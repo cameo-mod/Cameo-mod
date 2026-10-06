@@ -1137,7 +1137,6 @@ JapanMaidenBow:
 		Speed: 512
 		Arm: 2
 		Inaccuracy: 125
-		RangeLimit: 25000
 		Image: DRAGON
 		TrailImage: blue_smokey_small
 		TrailInterval: 1
@@ -1173,7 +1172,6 @@ JapanMaidenBowEnergized:
 		Speed: 512
 		Arm: 2
 		Inaccuracy: 125
-		RangeLimit: 25000
 		Image: DRAGON
 		TrailImage: blue_smokey_small
 		TrailInterval: 1
@@ -1188,7 +1186,6 @@ JapanMaidenBowEnergized:
 		Blockable: false
 		AllowSnapping: true
 		Shadow: true
-		CloseEnough: 500
 		Acceleration: 3
 		HomingActivationDelay: 2
 	Warhead@Effect: CreateEffect
@@ -1428,7 +1425,6 @@ BallistaSingleShotAir_AA:
 		Speed: 512
 		Arm: 2
 		Inaccuracy: 125
-		RangeLimit: 25000
 		Image: DRAGON
 		TrailImage: blue_smokey_small
 		TrailInterval: 1
@@ -1998,7 +1994,6 @@ RocketAngelRockets:
 		Arm: 2
 		CruiseAltitude: 2500
 		Inaccuracy: 500
-		RangeLimit: 25000
 		Image: DRAGON
 		TrailImage: blue_smokey
 		TrailInterval: 1
@@ -2013,7 +2008,6 @@ RocketAngelRockets:
 		Blockable: false
 		AllowSnapping: true
 		Shadow: true
-		CloseEnough: 400
 		HomingActivationDelay: 3
 		PointDefenseTypes: Missile
 		LaunchAngle: 66
@@ -2377,7 +2371,6 @@ Hakureiring:
 		VerticalRateOfTurn: 66
 		Speed: 333
 		Inaccuracy: 333
-		RangeLimit: 33333
 		Image: hakurei_tailsman
 		Sequences: idle
 		Palette: player
@@ -2393,7 +2386,6 @@ Hakureiring:
 		ContrailStartColor: 77CCFF
 		ContrailEndColorUsePlayerColor: true
 		ContrailEndColor: FFFFFF
-		CloseEnough: 333
 		AllowSnapping: true
 	Warhead@Magic_Heavy:
 		InvalidTargets: Air
@@ -2424,7 +2416,6 @@ Hakureiring2:
 		VerticalRateOfTurn: 44
 		Speed: 222
 		Inaccuracy: 222
-		RangeLimit: 22222
 		Image: hakureiringspecial
 		Sequences: bullet
 		Palette: player
@@ -2440,7 +2431,6 @@ Hakureiring2:
 		ContrailStartColor: 77CCFF
 		ContrailEndColorUsePlayerColor: true
 		ContrailEndColor: FFFFFF
-		CloseEnough: 333
 		AllowSnapping: true
 		TrailDelay: 1
 	Warhead@Magic_Heavy:
@@ -2474,7 +2464,6 @@ ReimuDreamSeal:
 		VerticalRateOfTurn: 44
 		Speed: 222
 		Inaccuracy: 222
-		RangeLimit: 22222
 		Image: hakureiringspecial
 		Sequences: bullet
 		Palette: player
@@ -2490,7 +2479,6 @@ ReimuDreamSeal:
 		ContrailStartColor: 77CCFF
 		ContrailEndColorUsePlayerColor: true
 		ContrailEndColor: FFFFFF
-		CloseEnough: 333
 		AllowSnapping: true
 		TrailDelay: 1
 	Warhead@Magic_Heavy:
@@ -2573,7 +2561,6 @@ Hakureiring3:
 		VerticalRateOfTurn: 66
 		Speed: 333
 		Inaccuracy: 333
-		RangeLimit: 33333
 		Image: hakurei_tailsman
 		Sequences: idle
 		Palette: player
@@ -2589,7 +2576,6 @@ Hakureiring3:
 		ContrailStartColor: 77CCFF
 		ContrailEndColorUsePlayerColor: true
 		ContrailEndColor: FFFFFF
-		CloseEnough: 333
 		AllowSnapping: true
 	Warhead@Magic_Heavy:
 		InvalidTargets: Air
@@ -2764,7 +2750,6 @@ ZeroFighterArrows:
 		Speed: 256
 		Arm: 2
 		Inaccuracy: 125
-		RangeLimit: 25000
 		Image: DRAGON
 		TrailImage: blue_smokey_small
 		TrailInterval: 1
@@ -3130,7 +3115,6 @@ SkyHawkArrows:
 		Speed: 256
 		Arm: 2
 		Inaccuracy: 125
-		RangeLimit: 25000
 		Image: DRAGON
 		TrailImage: blue_smokey_small
 		TrailInterval: 1
@@ -3244,7 +3228,6 @@ SkyHawkArrowsEnergized:
 		Speed: 256
 		Arm: 2
 		Inaccuracy: 125
-		RangeLimit: 25000
 		Image: DRAGON
 		TrailImage: blue_smokey_small
 		TrailInterval: 1
@@ -4847,7 +4830,6 @@ ShrineTankCannon:
 		VerticalRateOfTurn: 66
 		Speed: 333
 		Inaccuracy: 333
-		RangeLimit: 33333
 		Image: hakurei_tailsman
 		Sequences: idle
 		Palette: player
@@ -4863,7 +4845,6 @@ ShrineTankCannon:
 		ContrailStartColor: 77CCFF
 		ContrailEndColorUsePlayerColor: true
 		ContrailEndColor: FFFFFF
-		CloseEnough: 333
 		AllowSnapping: true
 	Warhead@Magic_Heavy:
 		Damage: 24000
@@ -5502,7 +5483,6 @@ OIHakureiring:
 		VerticalRateOfTurn: 66
 		Speed: 333
 		Inaccuracy: 333
-		RangeLimit: 33333
 		Image: hakurei_tailsman
 		Sequences: idle
 		Palette: player
@@ -5518,7 +5498,6 @@ OIHakureiring:
 		ContrailStartColor: 77CCFF
 		ContrailEndColorUsePlayerColor: true
 		ContrailEndColor: FFFFFF
-		CloseEnough: 333
 		AllowSnapping: true
 	Warhead@Magic_Heavy:
 		InvalidTargets: Air
@@ -5550,7 +5529,6 @@ OIHakureiring2:
 		VerticalRateOfTurn: 44
 		Speed: 222
 		Inaccuracy: 222
-		RangeLimit: 22222
 		Image: hakureiringspecial
 		Sequences: bullet
 		Palette: player
@@ -5566,7 +5544,6 @@ OIHakureiring2:
 		ContrailStartColor: 77CCFF
 		ContrailEndColorUsePlayerColor: true
 		ContrailEndColor: FFFFFF
-		CloseEnough: 333
 		AllowSnapping: true
 		TrailDelay: 1
 	Warhead@Magic_Heavy:

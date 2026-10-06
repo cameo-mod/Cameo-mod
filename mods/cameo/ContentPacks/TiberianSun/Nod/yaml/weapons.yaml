@@ -71,7 +71,6 @@ TSProton:
 		Blockable: false
 		Shadow: false
 		Image: tstorpedo
-		RangeLimit: 12c0
 	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 15
@@ -224,10 +223,8 @@ TSStankTibTusk:
 		ContrailLength: 0
 		MaximumLaunchSpeed: 250
 		MinimumLaunchSpeed: 250
-		CloseEnough: 500
 		Acceleration: 3
 		HomingActivationDelay: 2
-		RangeLimit: 25000
 		PointDefenseTypes: Missile
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		Damage: 5
@@ -338,7 +335,6 @@ TSNODRedEye:
 		MinimumLaunchAngle: 75
 		Acceleration: 5
 		AllowSnapping: true
-		CloseEnough: 500
 	Warhead@MissileAA_Heavy: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -359,7 +355,6 @@ TSNODTibRedEye:
 		Speed: 500
 		Acceleration: 5
 		HorizontalRateOfTurn: 25
-		CloseEnough: 500
 		MinimumLaunchAngle: 75
 	Warhead@MissileAA_Heavy: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy

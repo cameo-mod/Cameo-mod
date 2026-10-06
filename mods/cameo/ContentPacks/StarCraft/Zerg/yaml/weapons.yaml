@@ -302,7 +302,6 @@ DreadshroudSpore:
 		Jammable: False
 		Blockable: False
 		AllowSnapping: true
-		CloseEnough: 600
 		TrailImage: sczhsplash
 	Warhead@LightFlameWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
@@ -652,7 +651,6 @@ HermitShoot:
 		Jammable: False
 		Blockable: False
 		AllowSnapping: true
-		CloseEnough: 600
 		TrailImage: sczhsplash
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
@@ -767,7 +765,6 @@ SwarmlingShoot:
 		Jammable: False
 		Blockable: False
 		AllowSnapping: true
-		CloseEnough: 600
 		TrailImage: sczhsplash
 	Warhead@MediumChemicalWeapon: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
@@ -1211,7 +1208,6 @@ Spore_AA:
 		Jammable: False
 		Blockable: False
 		AllowSnapping: true
-		CloseEnough: 600
 		TrailImage: sczhsplash
 	Warhead@MediumMissile: SpreadDamage
 		Damage: 12000

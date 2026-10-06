@@ -2592,10 +2592,11 @@ SandmarineTuskFire:
 	ValidTargets: Ground, Water, Air
 	TargetActorCenter: true
 	Projectile: Missile
+		RangeLimitPercent: 150
+		CloseEnoughFromSpeed: true
 		Speed: 400
 		Arm: 2
 		Inaccuracy: 2000
-		RangeLimit: 20000
 		Image: d2k_missile2
 		Palette: d2keffect
 		TrailImage: large_trail
@@ -2924,7 +2925,6 @@ ViperMissilesFire:
 		MinimumLaunchSpeed: 200
 		Speed: 400
 		Acceleration: 10
-		RangeLimit: 20000
 		ContrailStartWidth: 33
 		ContrailEndWidth: 1
 		Palette: d2keffect

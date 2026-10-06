@@ -219,11 +219,9 @@ CycloneRockets:
 		Blockable: false
 		MaximumLaunchSpeed: 250
 		MinimumLaunchSpeed: 250
-		RangeLimit: 25000
 		Speed: 500
 		Inaccuracy: 25
 		Acceleration: 5
-		CloseEnough: 500
 		AllowSnapping: true
 		InaccuracyType: PerCellIncrement
 		Image: d2k_RPG
@@ -278,9 +276,7 @@ MarauderMissiles:
 		VerticalRateOfTurn: 30
 		TrailInterval: 1
 		ContrailLength: 0
-		CloseEnough: 500
 		HomingActivationDelay: 2
-		RangeLimit: 25000
 		PointDefenseTypes: Missile
 	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
@@ -581,7 +577,6 @@ SCTyrAA:
 		Speed: 400
 		Arm: 2
 		Inaccuracy: 800
-		RangeLimit: 16000
 		Image: d2k_missile2
 		Palette: d2keffect
 		TrailImage: large_trail
@@ -2137,11 +2132,9 @@ GoliathRockets_AA:
 		Blockable: false
 		MaximumLaunchSpeed: 250
 		MinimumLaunchSpeed: 250
-		RangeLimit: 25000
 		Speed: 500
 		Inaccuracy: 25
 		Acceleration: 5
-		CloseEnough: 500
 		AllowSnapping: true
 		ContrailZOffset: 4000
 		ContrailStartColor: FF884400
@@ -2284,11 +2277,9 @@ GoliathMk2Rockets_AA:
 		Blockable: false
 		MaximumLaunchSpeed: 250
 		MinimumLaunchSpeed: 250
-		RangeLimit: 25000
 		Speed: 500
 		Inaccuracy: 25
 		Acceleration: 5
-		CloseEnough: 500
 		AllowSnapping: true
 		Arm: 0
 		Shadow: true
@@ -2443,11 +2434,9 @@ WraithRockets_AA:
 		Blockable: false
 		MaximumLaunchSpeed: 250
 		MinimumLaunchSpeed: 250
-		RangeLimit: 25000
 		Speed: 500
 		Inaccuracy: 25
 		Acceleration: 5
-		CloseEnough: 500
 		AllowSnapping: true
 		ContrailStartColor: 4488FF88
 		ContrailEndColor: 88BBFF44
@@ -2497,11 +2486,9 @@ SunDogRockets:
 		Blockable: false
 		MaximumLaunchSpeed: 250
 		MinimumLaunchSpeed: 250
-		RangeLimit: 25000
 		Speed: 500
 		Inaccuracy: 25
 		Acceleration: 5
-		CloseEnough: 500
 		AllowSnapping: true
 		ContrailZOffset: 4000
 		ContrailStartColor: FF884400
@@ -2547,11 +2534,9 @@ ValkyrieRockets:
 		Blockable: false
 		MaximumLaunchSpeed: 250
 		MinimumLaunchSpeed: 250
-		RangeLimit: 25000
 		Speed: 500
 		Inaccuracy: 50
 		Acceleration: 5
-		CloseEnough: 500
 		AllowSnapping: true
 		ContrailStartColor: 4488FF88
 		ContrailEndColor: 88BBFF44
@@ -2721,11 +2706,9 @@ WyvernRockets:
 		Blockable: false
 		MaximumLaunchSpeed: 250
 		MinimumLaunchSpeed: 250
-		RangeLimit: 25000
 		Speed: 500
 		Inaccuracy: 50
 		Acceleration: 5
-		CloseEnough: 500
 		AllowSnapping: true
 		ContrailStartColor: 4488FF88
 		ContrailEndColor: 88BBFF44
@@ -3521,11 +3504,9 @@ MissileTurret:
 		Blockable: false
 		MaximumLaunchSpeed: 250
 		MinimumLaunchSpeed: 250
-		RangeLimit: 25000
 		Speed: 500
 		Inaccuracy: 25
 		Acceleration: 5
-		CloseEnough: 500
 		AllowSnapping: true
 		ContrailZOffset: 4000
 		ContrailStartColor: FF884400
@@ -3718,7 +3699,6 @@ ScienceVesselDefenseMatrix:
 		Shadow: true
 		TrailImage: blue_smokey_small
 		Speed: 375
-		RangeLimit: 12500
 		PointDefenseType: Missile
 		ContrailStartColor: 77CCFF
 		ContrailEndColorUsePlayerColor: true
@@ -3749,7 +3729,6 @@ ScienceVesselIrradiate:
 		Shadow: true
 		TrailImage: smokey
 		Speed: 375
-		RangeLimit: 12500
 		PointDefenseType: Missile
 	Warhead@1: TargetDamage
 	Warhead@Radiation: CreateTintedCells
@@ -3788,7 +3767,6 @@ ScienceVessel_EMP:
 		Shadow: true
 		TrailImage: smokey
 		Speed: 375
-		RangeLimit: 12500
 		PointDefenseType: Missile
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 200000

@@ -38,6 +38,8 @@
 
 ^Projectile_TS_Missile_Medium:
 	Projectile: Missile
+		RangeLimitPercent: 150
+		CloseEnoughFromSpeed: true
 		Arm: 0
 		Blockable: false
 		AllowSnapping: true
@@ -57,14 +59,14 @@
 		MaximumLaunchSpeed: 543
 		MinimumLaunchSpeed: 301
 		Speed: 400
-		CloseEnough: 200
 		Acceleration: 3
 		HomingActivationDelay: 2
-		RangeLimit: 15360
 		PointDefenseTypes: Missile
 
 ^Projectile_TS_Missile_Heavy:
 	Projectile: Missile
+		RangeLimitPercent: 150
+		CloseEnoughFromSpeed: true
 		Arm: 0
 		Blockable: false
 		AllowSnapping: true
@@ -84,10 +86,8 @@
 		MaximumLaunchSpeed: 213
 		MinimumLaunchSpeed: 301
 		Speed: 400
-		CloseEnough: 200
 		Acceleration: 3
 		HomingActivationDelay: 2
-		RangeLimit: 15360
 		PointDefenseTypes: Missile
 
 ^TSCannon:
@@ -933,7 +933,6 @@ TSGrenadeAA:
 		MaximumLaunchAngle: 60
 		Inaccuracy: 0
 		Image: BOMB
-		RangeLimit: 9c0
 		Palette: effect
 		Jammable: false
 	Warhead@ShieldHit: GrantExternalCondition
@@ -1992,7 +1991,6 @@ TSReaperTusk:
 		MaximumLaunchAngle: 88
 		MinimumLaunchSpeed: 111
 		MaximumLaunchSpeed: 222
-		RangeLimit: 25c0
 		Acceleration: 33
 		Speed: 333
 		HorizontalRateOfTurn: 33
@@ -2033,7 +2031,6 @@ TSAegisMissile:
 	Report: vaegatta.wav, vaegattb.wav
 	Projectile: Missile
 		VerticalRateOfTurn: 20
-		RangeLimit: 18c0
 	-Warhead@MediumMissile:
 	-Warhead@LightMissile:
 	Warhead@MediumMissilePercentage:
@@ -2056,7 +2053,6 @@ TSMammothTusk_elite:
 	Projectile: Missile
 		VerticalRateOfTurn: 25
 		MinimumLaunchAngle: 75
-		CloseEnough: 500
 		HorizontalRateOfTurn: 25
 		Acceleration: 5
 		Speed: 500
@@ -2227,10 +2223,8 @@ TSSAPCCoreMissiles:
 		ContrailLength: 0
 		MaximumLaunchSpeed: 300
 		MinimumLaunchSpeed: 300
-		CloseEnough: 600
 		Acceleration: 4
 		HomingActivationDelay: 1
-		RangeLimit: 20000
 		PointDefenseTypes: Missile
 		MinimumLaunchAngle: 75
 		MaximumLaunchAngle: 75
@@ -2458,10 +2452,8 @@ TSRedEye2:
 		MaximumLaunchSpeed: 200
 		MinimumLaunchSpeed: 200
 		Speed: 500
-		CloseEnough: 500
 		Acceleration: 5
 		HomingActivationDelay: 3
-		RangeLimit: 30000
 		PointDefenseTypes: Missile
 		ContrailZOffset: 4000
 		ContrailStartColor: FF884400
@@ -2575,10 +2567,8 @@ TSChemAdatsMissile_AA:
 		MaximumLaunchSpeed: 300
 		MinimumLaunchSpeed: 300
 		Speed: 600
-		CloseEnough: 600
 		Acceleration: 4
 		HomingActivationDelay: 1
-		RangeLimit: 20000
 		PointDefenseTypes: Missile
 		MinimumLaunchAngle: 75
 		MaximumLaunchAngle: 75
@@ -2978,7 +2968,7 @@ TSTacticalMissile:
 	MinRange: 3072
 	AirThreshold: 11c0
 	Projectile: Missile
-		RangeLimit: -1
+		RangeLimitPercent: -1
 		MinimumLaunchAngle: 250
 		MaximumLaunchAngle: 250
 		MinimumLaunchSpeed: 400
@@ -3086,6 +3076,7 @@ TSTacticalChemMissile:
 	Range: 10238976
 	Report: samshot1.aud
 	Projectile: Missile
+		RangeLimitPercent: -1
 		Arm: 0
 		Blockable: false
 		AllowSnapping: true
@@ -3100,10 +3091,8 @@ TSTacticalChemMissile:
 		MaximumLaunchSpeed: 400
 		MinimumLaunchSpeed: 400
 		Speed: 1024
-		CloseEnough: 600
 		Acceleration: 4
 		HomingActivationDelay: 8
-		RangeLimit: -1
 		MinimumLaunchAngle: 250
 		MaximumLaunchAngle: 250
 		Jammable: false

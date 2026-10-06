@@ -624,6 +624,8 @@
 	Range: 5120
 	Report: bazook1.aud
 	Projectile: Missile
+		RangeLimitPercent: 150
+		CloseEnoughFromSpeed: true
 		Arm: 0
 		Blockable: false
 		AllowSnapping: true
@@ -638,10 +640,8 @@
 		MaximumLaunchSpeed: 300
 		MinimumLaunchSpeed: 300
 		Speed: 600
-		CloseEnough: 600
 		Acceleration: 4
 		HomingActivationDelay: 1
-		RangeLimit: 20000
 		PointDefenseTypes: Missile
 	Warhead@LightMissile: SpreadDamage
 		ValidTargets: Ground, Water, Air
@@ -758,6 +758,8 @@
 	Range: 5120
 	Report: bazook1.aud
 	Projectile: Missile
+		RangeLimitPercent: 150
+		CloseEnoughFromSpeed: true
 		Arm: 0
 		Blockable: false
 		AllowSnapping: true
@@ -772,10 +774,8 @@
 		MaximumLaunchSpeed: 250
 		MinimumLaunchSpeed: 250
 		Speed: 500
-		CloseEnough: 500
 		Acceleration: 3
 		HomingActivationDelay: 2
-		RangeLimit: 25000
 		PointDefenseTypes: Missile
 	Warhead@MediumMissile: SpreadDamage
 		ValidTargets: Ground, Water, Air
@@ -892,6 +892,8 @@
 	Range: 5120
 	Report: missile6.aud
 	Projectile: Missile
+		RangeLimitPercent: 150
+		CloseEnoughFromSpeed: true
 		Arm: 0
 		Blockable: false
 		AllowSnapping: true
@@ -906,10 +908,8 @@
 		MaximumLaunchSpeed: 200
 		MinimumLaunchSpeed: 200
 		Speed: 400
-		CloseEnough: 400
 		Acceleration: 2
 		HomingActivationDelay: 3
-		RangeLimit: 30000
 		PointDefenseTypes: Missile
 	Warhead@HeavyMissile: SpreadDamage
 		ValidTargets: Ground, Water, Air
@@ -3427,6 +3427,8 @@
 	InvalidTargets: wall
 	Report: dune2smalllaser.aud
 	Projectile: Missile
+		RangeLimitPercent: 150
+		CloseEnoughFromSpeed: true
 		Inaccuracy: 0
 		HorizontalRateOfTurn: 40
 		VerticalRateOfTurn: 40
@@ -3537,11 +3539,12 @@
 	Range: 5120
 	Report: 2100rotlsr.wav
 	Projectile: Missile
+		RangeLimitPercent: 150
+		CloseEnoughFromSpeed: true
 		HorizontalRateOfTurn: 33
 		VerticalRateOfTurn: 33
 		Speed: 333
 		Inaccuracy: 333
-		RangeLimit: 33333
 		Image: hakurei_tailsman
 		TrailImage: blue_smokey
 		TrailInterval: 1
@@ -16429,6 +16432,8 @@ DefuseKit:
 ####################################################################
 ^Projectile_Arrow_Light:
 	Projectile: Missile
+		RangeLimitPercent: 150
+		CloseEnoughFromSpeed: true
 		Inaccuracy: 0
 		HorizontalRateOfTurn: 40
 		VerticalRateOfTurn: 40
@@ -16568,11 +16573,12 @@ DefuseKit:
 
 ^Projectile_Magic_Heavy:
 	Projectile: Missile
+		RangeLimitPercent: 150
+		CloseEnoughFromSpeed: true
 		HorizontalRateOfTurn: 33
 		VerticalRateOfTurn: 33
 		Speed: 333
 		Inaccuracy: 333
-		RangeLimit: 33333
 		Image: hakurei_tailsman
 		TrailImage: blue_smokey
 		TrailInterval: 1
@@ -16596,6 +16602,8 @@ DefuseKit:
 
 ^Projectile_Missile_Light:
 	Projectile: Missile
+		RangeLimitPercent: 150
+		CloseEnoughFromSpeed: true
 		Arm: 0
 		Blockable: false
 		AllowSnapping: true
@@ -16610,14 +16618,14 @@ DefuseKit:
 		MaximumLaunchSpeed: 300
 		MinimumLaunchSpeed: 300
 		Speed: 600
-		CloseEnough: 600
 		Acceleration: 4
 		HomingActivationDelay: 1
-		RangeLimit: 20000
 		PointDefenseTypes: Missile
 
 ^Projectile_Missile_Medium:
 	Projectile: Missile
+		RangeLimitPercent: 150
+		CloseEnoughFromSpeed: true
 		Arm: 0
 		Blockable: false
 		AllowSnapping: true
@@ -16632,14 +16640,14 @@ DefuseKit:
 		MaximumLaunchSpeed: 250
 		MinimumLaunchSpeed: 250
 		Speed: 500
-		CloseEnough: 500
 		Acceleration: 3
 		HomingActivationDelay: 2
-		RangeLimit: 25000
 		PointDefenseTypes: Missile
 
 ^Projectile_Missile_Heavy:
 	Projectile: Missile
+		RangeLimitPercent: 150
+		CloseEnoughFromSpeed: true
 		Arm: 0
 		Blockable: false
 		AllowSnapping: true
@@ -16654,14 +16662,15 @@ DefuseKit:
 		MaximumLaunchSpeed: 200
 		MinimumLaunchSpeed: 200
 		Speed: 400
-		CloseEnough: 400
 		Acceleration: 2
 		HomingActivationDelay: 3
-		RangeLimit: 30000
 		PointDefenseTypes: Missile
 
 ^Projectile_Missile_AA:
 	Projectile: Missile
+		RangeLimitPercent: 150
+		CloseEnoughFromSpeed: true
+		SnapImpactToTarget: true
 		Arm: 0
 		Blockable: false
 		AllowSnapping: true
@@ -16676,10 +16685,8 @@ DefuseKit:
 		MaximumLaunchSpeed: 600
 		MinimumLaunchSpeed: 600
 		Speed: 1200
-		CloseEnough: 600
 		Acceleration: 8
 		HomingActivationDelay: 0
-		RangeLimit: 30000
 		PointDefenseTypes: Missile
 
 ^Projectile_Railgun_Heavy:
@@ -18178,6 +18185,8 @@ DefuseKit:
 	Report: bazook1.aud
 	ValidTargets: Ground, Air
 	Projectile: Missile
+		RangeLimitPercent: 150
+		CloseEnoughFromSpeed: true
 		Arm: 0
 		Blockable: false
 		Inaccuracy: 128
@@ -18188,7 +18197,6 @@ DefuseKit:
 		ContrailLength: 0
 		Speed: 400
 		Acceleration: 100
-		RangeLimit: 18c0
 		PointDefenseType: Missile
 		AllowSnapping: true
 	Warhead@1Dam: SpreadDamage
@@ -18262,6 +18270,8 @@ DefuseKit:
 	Report: missile6.aud
 	ValidTargets: Ground, Water
 	Projectile: Missile
+		RangeLimitPercent: 150
+		CloseEnoughFromSpeed: true
 		Speed: 250
 		Acceleration: 100
 		Arm: 2
@@ -18271,7 +18281,6 @@ DefuseKit:
 		Image: DRAGON
 		Shadow: True
 		HorizontalRateOfTurn: 5
-		RangeLimit: 10c0
 		PointDefenseType: Missile
 	Warhead@1Dam: SpreadDamage
 		Spread: 750
@@ -18294,7 +18303,8 @@ DefuseKit:
 ^AntiAirMissile:
 	Inherits: ^AntiGroundMissile
 	Projectile: Missile
-		RangeLimit: 20c0
+		RangeLimitPercent: 150
+		CloseEnoughFromSpeed: true
 		HorizontalRateOfTurn: 25
 		Speed: 500
 		Acceleration: 100
@@ -18610,7 +18620,6 @@ BoatMissile:
 		Inaccuracy: 666
 		HorizontalRateOfTurn: 15
 		Speed: 333
-		RangeLimit: 24c0
 	Warhead@1Dam: SpreadDamage
 		Spread: 666
 		Damage: 3333
@@ -18631,7 +18640,6 @@ Patriot:
 		Image: MISSILE
 		HorizontalRateOfTurn: 33
 		Speed: 555
-		RangeLimit: 33c3
 		Inaccuracy: 0
 	Warhead@1Dam: SpreadDamage
 		Spread: 666
@@ -20049,7 +20057,6 @@ Spit:
 		MaximumLaunchAngle: 123
 		TrailImage: spittrail
 		Image: spit
-		RangeLimit: 12345
 		HorizontalRateOfTurn: 33
 	Warhead@1Dam: SpreadDamage
 		Damage: 3333
@@ -20108,7 +20115,6 @@ Spit_AA:
 	Projectile: Missile
 		Speed: 444
 		HorizontalRateOfTurn: 44
-		RangeLimit: 44444
 		MinimumLaunchAngle: 123
 		MaximumLaunchAngle: 123
 		TrailImage: spittrail
@@ -20432,7 +20438,6 @@ GLASCUD:
 		TrailImage: laserfire
 		ContrailLength: 0
 		Speed: 150
-		RangeLimit: 19c0
 		MinimumLaunchAngle: 255
 		MaximumLaunchAngle: 255
 		MaximumLaunchSpeed: 384
@@ -20908,7 +20913,6 @@ GLStingerSiteMissile:
 	Range: 7680
 	Report: missile6.aud
 	Projectile: Missile
-		RangeLimit: 30c0
 
 GLStingerSiteMissileToxin:
 	ReloadDelay: 50
@@ -20926,7 +20930,6 @@ GLStingerSiteMissileToxin:
 		ContrailLength: 0
 		Speed: 400
 		Acceleration: 100
-		RangeLimit: 30c0
 		PointDefenseType: Missile
 		AllowSnapping: true
 	Warhead@1Dam: SpreadDamage
@@ -21762,7 +21765,6 @@ bowFire_AA:
 		Image: spearfire
 		HorizontalRateOfTurn: 48
 		VerticalRateOfTurn: 60
-		RangeLimit: 15c0
 	Warhead@1Dam: SpreadDamage
 		Spread: 150
 		Damage: 1500
@@ -21853,11 +21855,9 @@ bowFire:
 		Image: spearfire
 		HorizontalRateOfTurn: 48
 		VerticalRateOfTurn: 60
-		RangeLimit: 15c0
 wc_tower_fire:
 	Range: 8704
 	Projectile: Missile
-		RangeLimit: 17c0
 		HorizontalRateOfTurn: 100
 		VerticalRateOfTurn: 100
 		Speed: 0c650
@@ -22076,7 +22076,6 @@ SWGreenLaserG:
 		ContrailLength: 1
 		Speed: 400
 		Acceleration: 100
-		RangeLimit: 18c0
 		PointDefenseType: Missile
 		AllowSnapping: true
 	Warhead@1Dam: SpreadDamage
@@ -22167,7 +22166,6 @@ SWGBigRedLaserG:
 		ContrailLength: 1
 		Speed: 400
 		Acceleration: 100
-		RangeLimit: 18c0
 		PointDefenseType: Missile
 		AllowSnapping: true
 	Warhead@1Dam: SpreadDamage
@@ -22345,7 +22343,6 @@ GLTrooperRPGMissileG:
 		ContrailLength: 0
 		Speed: 400
 		Acceleration: 100
-		RangeLimit: 18c0
 		PointDefenseType: Missile
 		AllowSnapping: true
 	Warhead@Percentage: AreaDamagePercentage
@@ -22558,7 +22555,6 @@ GLTrooperRPGMissileToxin:
 		ContrailLength: 0
 		Speed: 400
 		Acceleration: 100
-		RangeLimit: 18c0
 		PointDefenseType: Missile
 		AllowSnapping: true
 	Warhead@1Dam: SpreadDamage

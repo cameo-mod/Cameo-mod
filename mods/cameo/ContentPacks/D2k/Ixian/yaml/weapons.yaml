@@ -482,10 +482,8 @@ mtank_pri2:
 		ContrailLength: 0
 		MaximumLaunchSpeed: 200
 		MinimumLaunchSpeed: 200
-		CloseEnough: 500
 		Acceleration: 5
 		HomingActivationDelay: 3
-		RangeLimit: 45000
 		PointDefenseTypes: Missile
 		Palette: d2keffect
 		CruiseAltitude: 1000
@@ -2216,7 +2214,6 @@ D2K_RocketsCymek:
 		Speed: 400
 		Arm: 2
 		Inaccuracy: 800
-		RangeLimit: 16000
 		Image: d2k_missile2
 		Palette: d2keffect
 		TrailImage: large_trail
@@ -2734,10 +2731,8 @@ MongooseRocket:
 		MaximumLaunchSpeed: 222
 		MinimumLaunchSpeed: 222
 		Speed: 666
-		CloseEnough: 500
 		Acceleration: 6
 		HomingActivationDelay: 2
-		RangeLimit: 25000
 		PointDefenseTypes: Missile
 		HorizontalRateOfTurn: 22
 		VerticalRateOfTurn: 12
@@ -3585,7 +3580,6 @@ ixian_airdrone:
 		VerticalRateOfTurn: 12
 		MinimumLaunchAngle: -128
 		HorizontalRateOfTurn: 40
-		RangeLimit: 24000
 		Speed: 800
 		Acceleration: 4
 		Inaccuracy: 25

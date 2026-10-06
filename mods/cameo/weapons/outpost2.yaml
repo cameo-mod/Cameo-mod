@@ -695,7 +695,6 @@ edenRailgun:
 		ContrailEndColor: FFFFFF00
 		HorizontalRateOfTurn: 5
 		VerticalRateOfTurn: 5
-		RangeLimit: 14000
 	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
 		Damage: 2
 	Warhead@ShrapnelWeaponPercentage: AreaDamagePercentage
@@ -939,7 +938,6 @@ edenTigerRailgun:
 		ContrailEndColor: FFFFFF00
 		HorizontalRateOfTurn: 5
 		VerticalRateOfTurn: 5
-		RangeLimit: 14000
 	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
 		AffectsParent: false
 		Spread: 125
@@ -1215,7 +1213,6 @@ edenDefenceRailgun:
 		ContrailEndColor: FFFFFF00
 		HorizontalRateOfTurn: 5
 		VerticalRateOfTurn: 5
-		RangeLimit: 14000
 	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
 		AffectsParent: false
 		Spread: 125
@@ -1678,10 +1675,8 @@ eden_EMP_AA:
 		ContrailLength: 8
 		MaximumLaunchSpeed: 200
 		MinimumLaunchSpeed: 200
-		CloseEnough: 400
 		Acceleration: 2
 		HomingActivationDelay: 3
-		RangeLimit: 30000
 		PointDefenseTypes: Missile
 	Warhead@Tesla_Super: AreaDamage
 		ValidTargets: Air
@@ -2388,10 +2383,8 @@ edenTiger_EMP:
 		ContrailLength: 8
 		MaximumLaunchSpeed: 200
 		MinimumLaunchSpeed: 200
-		CloseEnough: 400
 		Acceleration: 2
 		HomingActivationDelay: 3
-		RangeLimit: 30000
 		PointDefenseTypes: Missile
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
@@ -2429,10 +2422,8 @@ edenTiger_EMP_AA:
 		ContrailLength: 8
 		MaximumLaunchSpeed: 200
 		MinimumLaunchSpeed: 200
-		CloseEnough: 400
 		Acceleration: 2
 		HomingActivationDelay: 3
-		RangeLimit: 30000
 		PointDefenseTypes: Missile
 	Warhead@Tesla_Super: AreaDamage
 		ValidTargets: Air
@@ -3150,10 +3141,8 @@ eden_GP_EMP:
 		ContrailLength: 8
 		MaximumLaunchSpeed: 200
 		MinimumLaunchSpeed: 200
-		CloseEnough: 400
 		Acceleration: 2
 		HomingActivationDelay: 3
-		RangeLimit: 30000
 		PointDefenseTypes: Missile
 	InvalidTargets: wall
 	Warhead@GroundFire: SpawnActor
@@ -3275,7 +3264,6 @@ plymouthRPG:
 		TrailImage: smokey
 		ContrailLength: 8
 		Speed: 298
-		RangeLimit: 7c204
 	Warhead@1Dam: SpreadDamage
 		Spread: 128
 		Damage: 4500
@@ -3304,7 +3292,6 @@ plymouthTigerRPG:
 		TrailImage: smokey
 		ContrailLength: 8
 		Speed: 298
-		RangeLimit: 7c204
 	Range: 6144
 	MinRange: 1230
 	Report: bazook1.aud
@@ -3339,7 +3326,6 @@ plymouthDefenceRPG:
 		TrailImage: smokey
 		ContrailLength: 8
 		Speed: 298
-		RangeLimit: 7c204
 	Report: bazook1.aud
 	ValidTargets: Ground, Air
 	Warhead@1Dam: SpreadDamage
@@ -4482,10 +4468,8 @@ plymouth_EMP_AA:
 		ContrailLength: 8
 		MaximumLaunchSpeed: 200
 		MinimumLaunchSpeed: 200
-		CloseEnough: 400
 		Acceleration: 2
 		HomingActivationDelay: 3
-		RangeLimit: 30000
 		PointDefenseTypes: Missile
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
@@ -4872,10 +4856,8 @@ plymouth_Tiger_EMP:
 		ContrailLength: 8
 		MaximumLaunchSpeed: 200
 		MinimumLaunchSpeed: 200
-		CloseEnough: 400
 		Acceleration: 2
 		HomingActivationDelay: 3
-		RangeLimit: 30000
 		PointDefenseTypes: Missile
 	InvalidTargets: wall
 	Warhead@GroundFire: SpawnActor

@@ -785,6 +785,8 @@
 	Inherits@proj: ^Projectile_Missile_Light
 	Inherits@fx: ^Effect_Clsn_Small_RA2
 	Projectile: Missile
+		RangeLimitPercent: 150
+		CloseEnoughFromSpeed: true
 		Image: ra2_dragon
 		-TrailImage:
 		ContrailLength: 25
@@ -796,6 +798,8 @@
 	Inherits@proj: ^Projectile_Missile_Medium
 	Inherits@fx: ^Effect_Clsn_Medium_RA2
 	Projectile: Missile
+		RangeLimitPercent: 150
+		CloseEnoughFromSpeed: true
 		Image: patriot
 		-TrailImage:
 		ContrailLength: 33
@@ -1578,7 +1582,6 @@ RA2ThunderboltMissile:
 		Speed: 800
 		Arm: 2
 		Inaccuracy: 400
-		RangeLimit: 16000
 		Image: d2k_missile2
 		Palette: d2keffect
 		TrailImage: large_trail
@@ -2321,7 +2324,6 @@ RA2MultiThunderboltMissile:
 		Speed: 800
 		Arm: 2
 		Inaccuracy: 400
-		RangeLimit: 16000
 		Image: d2k_missile2
 		Palette: d2keffect
 		TrailImage: large_trail
@@ -2632,7 +2634,6 @@ RA2TRIPODPLAZMA:
 		Speed: 204
 		Inaccuracy: 0c256
 		Image: plasma
-		RangeLimit: 10c0
 		Shadow: True
 		Arm: 2
 		Blockable: false
@@ -2768,7 +2769,6 @@ RA2REVENANTAA:
 		TrailImage: fb2
 		Image: fireball
 		Inaccuracy: 0c128
-		RangeLimit: 13c0
 		HorizontalRateOfTurn: 40
 		Blockable: false
 		Shadow: True
@@ -4162,7 +4162,6 @@ MigMissiles:
 		Speed: 400
 		Arm: 2
 		Inaccuracy: 1000
-		RangeLimit: 15c0
 		Image: d2k_missile2
 		Palette: d2keffect
 		TrailImage: large_trail
@@ -4460,7 +4459,6 @@ MigMissiles_rad:
 		Speed: 400
 		Arm: 2
 		Inaccuracy: 1000
-		RangeLimit: 15c0
 		Image: d2k_missile2
 		Palette: d2keffect
 		TrailImage: green_smokey
@@ -6700,7 +6698,6 @@ YRBoomerSCUD:
 		Speed: 200
 		Image: MISSILE
 		TrailImage: bomb
-		RangeLimit: 20000
 		LaunchAngle: 66
 	Warhead@Effect: CreateEffect
 		ValidTargets: Ground, Air
@@ -6819,7 +6816,6 @@ RA2TorpTube:
 		Speed: 180
 		Acceleration: 1
 		HorizontalRateOfTurn: 5
-		RangeLimit: 18000
 		BoundToTerrainType: Water
 		Palette: cloak
 		MaximumLaunchAngle: 0
@@ -6935,7 +6931,6 @@ RA2TorpTube_elite:
 		Speed: 180
 		Acceleration: 1
 		HorizontalRateOfTurn: 5
-		RangeLimit: 18000
 		BoundToTerrainType: Water
 		Palette: cloak
 		MaximumLaunchAngle: 0

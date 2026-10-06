@@ -1191,7 +1191,6 @@ td_gdi_orca_orcamissiles:
 		AllowSnapping: true
 		Arm: 0
 		Blockable: false
-		CloseEnough: 500
 		ContrailLength: 0
 		HomingActivationDelay: 2
 		HorizontalRateOfTurn: 30
@@ -1201,7 +1200,6 @@ td_gdi_orca_orcamissiles:
 		MaximumLaunchSpeed: 250
 		MinimumLaunchSpeed: 250
 		PointDefenseTypes: Missile
-		RangeLimit: 25000
 		Shadow: true
 		Speed: 500
 		TrailImage: smokey
@@ -1233,10 +1231,8 @@ td_gdi_orca_orcamissilesamt:
 		LaunchAngle: 66
 		TrailImage: smokey
 		Arm: 0
-		CloseEnough: 500
 		Image: DRAGON
 		Shadow: true
-		RangeLimit: 25000
 		Blockable: false
 		Inaccuracy: 100
 		PointDefenseTypes: Missile
@@ -1607,7 +1603,6 @@ td_gdi_advancedguardtower_towermissile:
 		VerticalRateOfTurn: 16
 		Acceleration: 5
 		AllowSnapping: true
-		CloseEnough: 500
 		Arm: 0
 		Blockable: false
 		ContrailEndColor: 000000FF
@@ -1624,7 +1619,6 @@ td_gdi_advancedguardtower_towermissile:
 		MaximumLaunchSpeed: 250
 		MinimumLaunchSpeed: 250
 		PointDefenseTypes: Missile
-		RangeLimit: 25000
 		Shadow: true
 		Speed: 500
 		TrailImage: smokey
@@ -1937,10 +1931,8 @@ td_gdi_advancedguardtower_towermissileamt:
 		TrailImage: smokey
 		Arm: 0
 		ContrailZOffset: 4000
-		CloseEnough: 500
 		Image: DRAGON
 		Shadow: true
-		RangeLimit: 25000
 		Blockable: false
 		Inaccuracy: 100
 		PointDefenseTypes: Missile
@@ -2269,10 +2261,8 @@ td_gdi_sonicmissilesoldier_missilesoldierweapon:
 		ContrailEndColorUsePlayerColor: true
 		AllowSnapping: true
 		Arm: 0
-		CloseEnough: 400
 		HorizontalRateOfTurn: 20
 		PointDefenseTypes: Missile
-		RangeLimit: 30000
 		Shadow: true
 		VerticalRateOfTurn: 20
 	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
@@ -3076,10 +3066,8 @@ td_gdi_humveemkii_rocketshumvee2_AA:
 		MaximumLaunchSpeed: 300
 		MinimumLaunchSpeed: 300
 		Speed: 600
-		CloseEnough: 600
 		Acceleration: 4
 		HomingActivationDelay: 1
-		RangeLimit: 20000
 		PointDefenseTypes: Missile
 	Inherits: ^td_gdi_td_gdi_humveemkii_rocketshumvee2_aa
 	-Warhead@Concrete:
@@ -3185,10 +3173,8 @@ td_gdi_humveemkii_rocketshumvee2amt:
 		MaximumLaunchSpeed: 400
 		MinimumLaunchSpeed: 400
 		Speed: 800
-		CloseEnough: 600
 		Acceleration: 5
 		HomingActivationDelay: 0
-		RangeLimit: 20000
 		PointDefenseTypes: Missile
 		ContrailStartColor: 99887766
 		ContrailEndColor: 33221100
@@ -3292,10 +3278,8 @@ td_gdi_humveemkii_rocketshumvee2amt_AA:
 		MaximumLaunchSpeed: 400
 		MinimumLaunchSpeed: 400
 		Speed: 800
-		CloseEnough: 600
 		Acceleration: 5
 		HomingActivationDelay: 0
-		RangeLimit: 20000
 		PointDefenseTypes: Missile
 		ContrailStartColor: 99887766
 		ContrailEndColor: 33221100

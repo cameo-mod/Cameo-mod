@@ -10,6 +10,8 @@
 ^CabalMissileLight:
 	Inherits: ^Projectile_Missile_Light
 	Projectile: Missile
+		RangeLimitPercent: 150
+		CloseEnoughFromSpeed: true
 		MinimumLaunchAngle: 255
 		MaximumLaunchAngle: 255
 		HorizontalRateOfTurn: 80
@@ -22,6 +24,8 @@
 ^CabalMissileMedium:
 	Inherits: ^Projectile_Missile_Medium
 	Projectile: Missile
+		RangeLimitPercent: 150
+		CloseEnoughFromSpeed: true
 		MinimumLaunchAngle: 255
 		MaximumLaunchAngle: 255
 		HorizontalRateOfTurn: 80
@@ -603,7 +607,6 @@ TSHellfireTwin:
 		AllowSnapping: true
 		Arm: 0
 		Blockable: false
-		CloseEnough: 500
 		ContrailLength: 0
 		HomingActivationDelay: 2
 		HorizontalRateOfTurn: 30
@@ -613,7 +616,6 @@ TSHellfireTwin:
 		MaximumLaunchSpeed: 250
 		MinimumLaunchSpeed: 250
 		PointDefenseTypes: Missile
-		RangeLimit: 25000
 		Shadow: true
 		Speed: 500
 		TrailImage: smokey
@@ -962,10 +964,8 @@ CabalReaperMissiles:
 		Inaccuracy: 100
 		MaximumLaunchSpeed: 250
 		MinimumLaunchSpeed: 250
-		CloseEnough: 500
 		Acceleration: 3
 		HomingActivationDelay: 2
-		RangeLimit: 25000
 	Warhead@CollapsedCabalReaperMissilesConcussion_MediumPercentage: AreaDamagePercentage
 		InvalidTargets: Air
 		ValidRelationships: Ally, Neutral, Enemy
@@ -1171,10 +1171,8 @@ CabalReaperMissiles_AA:
 		Inaccuracy: 100
 		MaximumLaunchSpeed: 250
 		MinimumLaunchSpeed: 250
-		CloseEnough: 500
 		Acceleration: 3
 		HomingActivationDelay: 2
-		RangeLimit: 25000
 	Warhead@CollapsedCabalReaperMissiles_AAConcussion_MediumPercentage: AreaDamagePercentage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -1376,10 +1374,8 @@ CabalHeavyReaperMissiles:
 		Image: MISSILE
 		MaximumLaunchSpeed: 200
 		MinimumLaunchSpeed: 200
-		CloseEnough: 400
 		Acceleration: 2
 		HomingActivationDelay: 3
-		RangeLimit: 30000
 	Warhead@CollapsedCabalHeavyReaperMissilesConcussion_MediumPercentage: AreaDamagePercentage
 		InvalidTargets: Air
 		ValidRelationships: Ally, Neutral, Enemy
@@ -1586,10 +1582,8 @@ CabalHeavyReaperMissiles_AA:
 		Image: MISSILE
 		MaximumLaunchSpeed: 200
 		MinimumLaunchSpeed: 200
-		CloseEnough: 400
 		Acceleration: 2
 		HomingActivationDelay: 3
-		RangeLimit: 30000
 	Warhead@CollapsedCabalHeavyReaperMissiles_AAConcussion_MediumPercentage: AreaDamagePercentage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -2856,14 +2850,14 @@ CabalLegionGun:
 	ValidTargets: Ground, Water
 	Report: samshot1.aud
 	Projectile: Missile
+		RangeLimitPercent: 150
+		CloseEnoughFromSpeed: true
 		Speed: 500
 		Inaccuracy: 100
 		MaximumLaunchSpeed: 250
 		MinimumLaunchSpeed: 250
-		CloseEnough: 500
 		Acceleration: 3
 		HomingActivationDelay: 2
-		RangeLimit: 25000
 	Warhead@MissileHE_Medium: AreaDamage
 		Damage: 24000
 	Warhead@Demolition_Light: AreaDamage
@@ -3077,10 +3071,8 @@ CabalRocketCyborgRockets:
 		Inaccuracy: 100
 		MaximumLaunchSpeed: 250
 		MinimumLaunchSpeed: 250
-		CloseEnough: 500
 		Acceleration: 3
 		HomingActivationDelay: 2
-		RangeLimit: 25000
 	Warhead@MissileAP_Medium: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -3114,10 +3106,8 @@ CabalRocketCyborgRocketsUpgraded:
 		Inaccuracy: 100
 		MaximumLaunchSpeed: 250
 		MinimumLaunchSpeed: 250
-		CloseEnough: 500
 		Acceleration: 3
 		HomingActivationDelay: 2
-		RangeLimit: 25000
 	Warhead@MissileAP_Medium: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -3149,7 +3139,6 @@ CabalMothershipRockets:
 		Arm: 2
 		CruiseAltitude: 2500
 		Inaccuracy: 500
-		RangeLimit: 25000
 		Image: DRAGON
 		TrailImage: blue_smokey
 		TrailInterval: 1
@@ -3337,10 +3326,8 @@ CabalAscendedRockets:
 		Image: 50CAL
 		MaximumLaunchSpeed: 200
 		MinimumLaunchSpeed: 200
-		CloseEnough: 400
 		Acceleration: 2
 		HomingActivationDelay: 3
-		RangeLimit: 30000
 	Warhead@LightMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 3

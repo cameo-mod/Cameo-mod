@@ -52,9 +52,7 @@ wc2arrowFire:
 		Speed: 600
 		HorizontalRateOfTurn: 60
 		VerticalRateOfTurn: 60
-		RangeLimit: 12000
 		AllowSnapping: True
-		CloseEnough: 600
 		ContrailLength: 0
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
@@ -103,9 +101,7 @@ wc2highArrowFire:
 		MaximumLaunchAngle: 70
 		HorizontalRateOfTurn: 70
 		VerticalRateOfTurn: 70
-		RangeLimit: 14000
 		AllowSnapping: True
-		CloseEnough: 700
 		-TrailImage:
 		-MinimumLaunchSpeed:
 		ValidTargets: Ground, Water, Air
@@ -524,9 +520,7 @@ wc2_tower_arrow:
 		Speed: 600
 		HorizontalRateOfTurn: 60
 		VerticalRateOfTurn: 60
-		RangeLimit: 12000
 		AllowSnapping: True
-		CloseEnough: 600
 	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 3
@@ -647,9 +641,7 @@ wc2_tower_axe:
 		HorizontalRateOfTurn: 60
 		VerticalRateOfTurn: 60
 		PointDefenseTypes: Missile
-		RangeLimit: 12000
 		AllowSnapping: True
-		CloseEnough: 600
 	ReloadDelay: 34
 	Range: 8750
 	Warhead@Arrow_Heavy: AreaDamage

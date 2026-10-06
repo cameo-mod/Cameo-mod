@@ -1590,7 +1590,6 @@ TSMammothTuskChem:
 		MaximumLaunchAngle: 64
 		MinimumLaunchSpeed: 120
 		MaximumLaunchSpeed: 240
-		RangeLimit: 24c0
 		Acceleration: 48
 		HorizontalRateOfTurn: 24
 		VerticalRateOfTurn: 16
@@ -1601,7 +1600,6 @@ TSMammothTuskChem:
 		AllowSnapping: true
 		Arm: 0
 		Blockable: false
-		CloseEnough: 400
 		HomingActivationDelay: 3
 		Image: MISSILE
 		PointDefenseTypes: Missile
@@ -1723,7 +1721,6 @@ TSMammothTusk:
 		MinimumLaunchAngle: 75
 		Acceleration: 5
 		AllowSnapping: true
-		CloseEnough: 500
 		TrailImage: large_trail
 	Range: 5677
 	ReloadDelay: 62
@@ -1769,7 +1766,6 @@ TSChemRuinerMissile:
 		AllowSnapping: true
 		Arm: 0
 		Blockable: false
-		CloseEnough: 500
 		ContrailLength: 0
 		HomingActivationDelay: 2
 		HorizontalRateOfTurn: 30
@@ -1779,7 +1775,6 @@ TSChemRuinerMissile:
 		MaximumLaunchSpeed: 250
 		MinimumLaunchSpeed: 250
 		PointDefenseTypes: Missile
-		RangeLimit: 25000
 		Shadow: true
 		Speed: 500
 		TrailInterval: 1
@@ -2172,10 +2167,8 @@ TSAdatsMissile_AA:
 		MaximumLaunchSpeed: 300
 		MinimumLaunchSpeed: 300
 		Speed: 600
-		CloseEnough: 600
 		Acceleration: 4
 		HomingActivationDelay: 1
-		RangeLimit: 20000
 		PointDefenseTypes: Missile
 	Inherits: ^ts_forgotten_tsadatsmissile_aa
 	-Warhead@Concrete:
@@ -2662,7 +2655,6 @@ TSFiendShard:
 	ValidTargets: Ground, Air
 	Projectile: Missile
 		Speed: 333
-		RangeLimit: 33333
 		Image: ra2txgasg
 		TrailImage: green_smokey
 	Warhead@Chemical_Light:
@@ -2681,7 +2673,6 @@ TSFiendShardUP:
 	ValidTargets: Ground, Air
 	Projectile: Missile
 		Speed: 333
-		RangeLimit: 33333
 		Image: ra2txgasg
 		TrailImage: green_smokey
 	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
@@ -2841,7 +2832,6 @@ TSFiendShardBlue:
 	ValidTargets: Ground, Air
 	Projectile: Missile
 		Speed: 333
-		RangeLimit: 33333
 		Image: ra2txgasg
 		TrailImage: blue_smokey
 		Blockable: false
@@ -3037,7 +3027,6 @@ TSFiendShardBlueUP:
 	ValidTargets: Ground, Air
 	Projectile: Missile
 		Speed: 333
-		RangeLimit: 33333
 		Image: ra2txgasg
 		TrailImage: blue_smokey
 		Blockable: false

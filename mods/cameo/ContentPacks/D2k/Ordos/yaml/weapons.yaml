@@ -36,13 +36,11 @@ HeavyOrdosCombatTankRockets:
 		Blockable: false
 		MaximumLaunchSpeed: 250
 		MinimumLaunchSpeed: 250
-		RangeLimit: 25000
 		Speed: 500
 		Inaccuracy: 25
 		Acceleration: 5
 		MinimumLaunchAngle: 75
 		MaximumLaunchAngle: 75
-		CloseEnough: 500
 		AllowSnapping: true
 		ContrailZOffset: 4000
 		ContrailStartColor: FF884400
@@ -2229,10 +2227,8 @@ D2K_APC_Rocket_AA:
 		MaximumLaunchSpeed: 222
 		MinimumLaunchSpeed: 222
 		Speed: 666
-		CloseEnough: 500
 		Acceleration: 6
 		HomingActivationDelay: 2
-		RangeLimit: 25000
 		PointDefenseTypes: Missile
 		InaccuracyType: PerCellIncrement
 		Palette: d2keffect
@@ -2612,10 +2608,8 @@ DeviatorMissile_Artillery:
 		MaximumLaunchSpeed: 200
 		MinimumLaunchSpeed: 200
 		Speed: 666
-		CloseEnough: 400
 		Acceleration: 3
 		HomingActivationDelay: 3
-		RangeLimit: 12500
 		PointDefenseTypes: Missile
 		Palette: d2keffect
 		CruiseAltitude: 1000
@@ -3929,7 +3923,6 @@ ordos_airmine:
 		Shadow: true
 		Inaccuracy: 224
 		HorizontalRateOfTurn: 10
-		RangeLimit: 3c0
 		MinimumLaunchSpeed: 75
 		Speed: 250
 		LockOnProbability: 20
@@ -4757,7 +4750,6 @@ d2k_tyrant:
 	Range: 6144
 	ValidTargets: Ground
 	Projectile: Missile
-		RangeLimit: 6c512
 		Speed: 400
 		LockOnProbability: 0
 		HorizontalRateOfTurn: 20
@@ -4794,7 +4786,6 @@ Rocket_stealth_AA:
 		TrailPalette: effect75alpha
 		TrailInterval: 1
 		Speed: 384
-		RangeLimit: 12c614
 	Warhead@MissileAP_Heavy:
 		ValidTargets: Air
 		Damage: 12000
@@ -4853,7 +4844,6 @@ D2K_Annihilator_AA:
 	Projectile: Missile
 		VerticalRateOfTurn: 20
 		Speed: 280
-		RangeLimit: 12c0
 		ContrailStartColor: FF884400
 		ContrailEndColor: 000000FF
 	Warhead@MissileAA_Heavy:

@@ -11,6 +11,7 @@ import math
 import pathlib
 import sys
 import unittest
+from unittest.mock import patch
 
 import _bootstrap  # noqa: F401 — sys.path side effect
 
@@ -238,6 +239,12 @@ class ProjectileRuntimeDefaultTest(unittest.TestCase):
         self.assertFalse(instant)
         self.assertEqual(sigma, 2000.0)
 
+    def test_homing_terminal_model_defaults_on_and_has_legacy_opt_out(self):
+        with patch.dict("os.environ", {}, clear=True):
+            self.assertTrue(ed.homing_missile_terminal_enabled())
+        with patch.dict("os.environ", {ed.HOMING_MISSILE_TERMINAL_ENV: "0"}):
+            self.assertFalse(ed.homing_missile_terminal_enabled())
+
     def test_scaled_bullet_derives_speed_and_inaccuracy_from_range(self):
         root = self.ProjectileNode(
             "ScaledBullet", 5000,
@@ -316,6 +323,55 @@ class ProjectileRuntimeDefaultTest(unittest.TestCase):
              "LockOnInaccuracy": 480})
         _instant, sigma = ed.weapon_reliability_ctx(root)
         self.assertEqual(sigma, 680.0)  # 480 locked scatter + 200 travel heuristic
+
+    def test_speed_based_terminal_bound_tracks_acceleration_cap(self):
+        root = self.ProjectileNode(
+            "Missile", 10000,
+            {"Speed": 400, "MaximumLaunchSpeed": 600,
+             "CloseEnoughFromSpeed": "true", "LockOnProbability": 100,
+             "Inaccuracy": 50})
+        self.assertAlmostEqual(ed.homing_missile_terminal_bound(root),
+                               600 + math.sqrt(2) * 50)
+
+    def test_missile_ta_uses_the_same_projectile_fields(self):
+        root = self.ProjectileNode(
+            "MissileTA", 10000,
+            {"Speed": 400, "CloseEnoughFromSpeed": "true",
+             "RangeLimitPercent": 150, "SnapImpactToTarget": "true",
+             "LockOnProbability": 100})
+        self.assertEqual(ed.homing_missile_terminal_bound(root), 0.0)
+
+    def test_fixed_threshold_that_can_be_stepped_over_is_not_guaranteed(self):
+        root = self.ProjectileNode(
+            "Missile", 10000,
+            {"Speed": 400, "CloseEnough": 300,
+             "LockOnProbability": 100, "Inaccuracy": 50})
+        self.assertIsNone(ed.homing_missile_terminal_bound(root))
+
+    def test_range_limit_percent_controls_terminal_fuel_gate(self):
+        fields = {"Speed": 200, "CloseEnoughFromSpeed": "true",
+                  "LockOnProbability": 100, "Inaccuracy": 10,
+                  "RangeLimitPercent": 150}
+        self.assertIsNotNone(ed.homing_missile_terminal_bound(
+            self.ProjectileNode("Missile", 5000, fields)))
+        fields["RangeLimitPercent"] = 50
+        self.assertIsNone(ed.homing_missile_terminal_bound(
+            self.ProjectileNode("Missile", 5000, fields)))
+        instant, sigma = ed.weapon_reliability_ctx(
+            self.ProjectileNode("Missile", 5000, fields))
+        self.assertFalse(instant)
+        self.assertEqual(sigma, float("inf"))
+        fields["RangeLimitPercent"] = -1
+        self.assertIsNotNone(ed.homing_missile_terminal_bound(
+            self.ProjectileNode("Missile", 5000, fields)))
+
+    def test_snap_impact_to_target_has_zero_terminal_miss(self):
+        root = self.ProjectileNode(
+            "Missile", 5000,
+            {"Speed": 300, "CloseEnoughFromSpeed": "true",
+             "SnapImpactToTarget": "true", "LockOnProbability": 100,
+             "Inaccuracy": 500})
+        self.assertEqual(ed.homing_missile_terminal_bound(root), 0.0)
 
     def test_probabilistic_missile_lock_on_is_marked_provisional(self):
         root = self.ProjectileNode(

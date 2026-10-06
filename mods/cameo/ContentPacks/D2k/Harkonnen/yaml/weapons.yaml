@@ -158,7 +158,6 @@ DebrisMissile:
 		InaccuracyType: Maximum
 		Inaccuracy: 250
 		HorizontalRateOfTurn: 20
-		RangeLimit: 10c0
 		MinimumLaunchAngle: 120
 		MaximumLaunchAngle: 250
 		VerticalRateOfTurn: 20
@@ -267,7 +266,6 @@ D2K_Rocket_AA:
 		TrailInterval: 1
 		MinRange: 256
 		Image: d2k_RPG
-		RangeLimit: 24c0
 	-Warhead@MissileAP_Heavy:
 	Warhead@MissileHE_Heavy:
 		ValidTargets: Air

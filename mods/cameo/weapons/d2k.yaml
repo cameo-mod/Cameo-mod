@@ -322,10 +322,8 @@ D2K_Rocket_ultimate:
 		MaximumLaunchSpeed: 200
 		MinimumLaunchSpeed: 200
 		Speed: 666
-		CloseEnough: 400
 		Acceleration: 3
 		HomingActivationDelay: 3
-		RangeLimit: 36c0
 		PointDefenseTypes: Missile
 		Palette: d2keffect
 		CruiseAltitude: 1000
@@ -469,10 +467,8 @@ D2K_Rocket_Fremen:
 		MaximumLaunchSpeed: 200
 		MinimumLaunchSpeed: 200
 		Speed: 666
-		CloseEnough: 400
 		Acceleration: 3
 		HomingActivationDelay: 3
-		RangeLimit: 36c0
 		PointDefenseTypes: Missile
 		Palette: d2keffect
 		CruiseAltitude: 1000
@@ -766,7 +762,6 @@ d2k_APC_AA:
 		TrailPalette: effect75alpha
 		TrailInterval: 1
 		Speed: 384
-		RangeLimit: 12c614
 
 D2KATMine:
 	Warhead@1Dam: SpreadDamage
@@ -1705,10 +1700,8 @@ d2k_kwny_fighter:
 		MaximumLaunchSpeed: 200
 		MinimumLaunchSpeed: 200
 		Speed: 256
-		CloseEnough: 400
 		Acceleration: 3
 		HomingActivationDelay: 3
-		RangeLimit: 4c512
 		PointDefenseTypes: Missile
 		Palette: d2keffect
 		CruiseAltitude: 1000
@@ -2028,7 +2021,6 @@ omtank_pri:
 	MinRange: 1230
 	Projectile: Missile
 		Inaccuracy: 96
-		RangeLimit: 7c204
 	Warhead@MissileAP_Heavy:
 		Damage: 6000
 		ValidTargets: Ground, Air
@@ -2045,7 +2037,6 @@ oDeviatorMissile:
 	MinRange: 1025
 	Report: MISSLE1.WAV
 	Projectile: Missile
-		RangeLimit: 6c0
 		Image: MISSILE
 		TrailImage: deviator_trail
 		TrailPalette: deviatorgas

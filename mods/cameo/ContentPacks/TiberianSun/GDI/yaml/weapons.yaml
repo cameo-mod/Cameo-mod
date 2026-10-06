@@ -745,7 +745,6 @@ TSHoverMissile:
 	Report: hovrmis1.aud
 
 	Projectile: Missile
-		RangeLimit: 22c512
 		HorizontalRateOfTurn: 20
 		Inaccuracy: 32
 		VerticalRateOfTurn: 12
@@ -753,7 +752,6 @@ TSHoverMissile:
 		AllowSnapping: true
 		Arm: 0
 		Blockable: false
-		CloseEnough: 500
 		ContrailEndColor: 000000FF
 		ContrailEndWidth: 100
 		ContrailLength: 0
@@ -915,7 +913,6 @@ TSDestroyerMissiles:
 	Report: hovrmis1.aud
 
 	Projectile: Missile
-		RangeLimit: 22c512
 		HorizontalRateOfTurn: 20
 		Inaccuracy: 32
 		VerticalRateOfTurn: 12
@@ -923,7 +920,6 @@ TSDestroyerMissiles:
 		AllowSnapping: true
 		Arm: 0
 		Blockable: false
-		CloseEnough: 500
 		ContrailEndColor: 000000FF
 		ContrailEndWidth: 100
 		ContrailLength: 0
@@ -1085,7 +1081,6 @@ TSMammothTusk2_AA:
 		MinimumLaunchAngle: 75
 		Acceleration: 5
 		AllowSnapping: true
-		CloseEnough: 500
 		TrailImage: large_trail
 	Range: 9332
 	ReloadDelay: 92
@@ -1114,7 +1109,6 @@ TSMammothTusk2II_AA:
 		MinimumLaunchAngle: 75
 		Acceleration: 5
 		AllowSnapping: true
-		CloseEnough: 500
 		TrailImage: large_trail
 	Report: misl1.aud
 	Range: 9388
@@ -1207,7 +1201,6 @@ TSGDIRedEye:
 		MinimumLaunchAngle: 75
 		Acceleration: 5
 		AllowSnapping: true
-		CloseEnough: 500
 	Warhead@MissileAA_Heavy: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50

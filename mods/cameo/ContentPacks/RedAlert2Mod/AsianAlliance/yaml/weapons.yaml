@@ -530,7 +530,6 @@ AsianTankKillerRocketShrapnel:
 		TrailImage: large_trail
 		Speed: 333
 		Acceleration: 3
-		RangeLimit: 33333
 		Inaccuracy: 333
 	Warhead@Flame_Light:
 		ValidTargets: Ground, Water, Air
@@ -1205,7 +1204,6 @@ AsianMaidenBow:
 		VerticalRateOfTurn: 45
 		Speed: 450
 		Inaccuracy: 180
-		RangeLimit: 18000
 		Image: aa_plasblue
 		Palette: ra2effect
 		TrailImage: blue_smokey_small
@@ -1230,7 +1228,6 @@ AsianMaidenBow:
 		LaunchAngle: 66
 		Jammable: False
 		AllowSnapping: true
-		CloseEnough: 750
 	Warhead@Arrow_Light_Flat:
 		ValidTargets: Ground, Water, Air
 		Damage: 13888
@@ -1709,13 +1706,11 @@ AsianMaidenBow_elite:
 		Palette: ra2effect
 		ContrailStartColor: 77CCFF
 		ContrailLength: 36
-		RangeLimit: 18000
 		HorizontalRateOfTurn: 45
 		Speed: 450
 		Jammable: False
 		Blockable: false
 		AllowSnapping: true
-		CloseEnough: 750
 		Arm: 0
 		Inaccuracy: 180
 		Shadow: true
@@ -2651,13 +2646,11 @@ AsianPhotonCannon:
 		Palette: ra2effect
 		ContrailStartColor: 77CCFFAA
 		ContrailLength: 12
-		RangeLimit: 25000
 		HorizontalRateOfTurn: 200
 		Speed: 750
 		Jammable: False
 		Blockable: False
 		AllowSnapping: true
-		CloseEnough: 750
 		Arm: 0
 		Inaccuracy: 333
 		Shadow: true
@@ -2961,7 +2954,6 @@ AsianQuasarAG:
 	ReloadDelay: 33
 	Range: 6000
 	Projectile: Missile
-		RangeLimit: 8000
 		MinimumLaunchAngle: 75
 		MaximumLaunchAngle: 125
 		MinimumLaunchSpeed: 250
@@ -3025,7 +3017,6 @@ AsianQuasar_AA:
 	ReloadDelay: 33
 	Range: 9000
 	Projectile: Missile
-		RangeLimit: 12000
 		MinimumLaunchAngle: 75
 		MaximumLaunchAngle: 150
 		MaximumLaunchSpeed: 300
@@ -3290,7 +3281,6 @@ AsianPunisherAG:
 	ReloadDelay: 12
 	Range: 12000
 	Projectile: Missile
-		RangeLimit: 12000
 		MinimumLaunchAngle: 120
 		MaximumLaunchAngle: 120
 		MaximumLaunchSpeed: 240
@@ -3305,7 +3295,6 @@ AsianPunisherAG:
 		Jammable: False
 		Blockable: False
 		AllowSnapping: true
-		CloseEnough: 750
 		Arm: 0
 		Shadow: true
 		VerticalRateOfTurn: 33
@@ -3441,7 +3430,6 @@ AsianQuasarBoatAG:
 	Burst: 3
 	BurstDelays: 3
 	Projectile: Missile
-		RangeLimit: 12c0
 		MinimumLaunchAngle: 75
 		MaximumLaunchAngle: 128
 		MaximumLaunchSpeed: 192
@@ -3507,7 +3495,6 @@ AsianQuasarBoat_AA:
 	Burst: 3
 	BurstDelays: 3
 	Projectile: Missile
-		RangeLimit: 12c0
 		MinimumLaunchAngle: 75
 		MaximumLaunchAngle: 128
 		MaximumLaunchSpeed: 256
@@ -9298,6 +9285,8 @@ AsianSniperLockdown:
 	Inherits@proj: ^Projectile_Missile_Medium
 	Inherits@fx: ^Effect_Clsn_Medium_RA2
 	Projectile: Missile
+		RangeLimitPercent: 150
+		CloseEnoughFromSpeed: true
 		Image: patriot
 		-TrailImage:
 		ContrailLength: 33
