@@ -1,6 +1,9 @@
-# Trait unification: one plain-name Cameo implementation per mechanic
+# Trait unification: one plain-name Cameo implementation per mechanic — **v2**
 
 Owner: Boss (Devin). Task `01a10dcd-55b6-7d10-96a8-4a60b7d99d56`.
+v2 corrections and completions by Devin-Architect, verified per
+`VERIFY_2026-10-06_trait_unification.md` (claim-by-claim log). v1 is preserved
+unmodified as `SPEC_2026-10-05_trait_unification_v1.md`; §9 lists every delta.
 Status: specification for coordinator review; no implementation or merge approval.
 This specification also covers the lead's extension to capabilities not yet ported.
 The separate bot-meta-learning specification remains frozen and is not amended here.
@@ -53,9 +56,14 @@ The full inventory is split into readable companions:
   and the 152 individual MissileCA locations. Diff names match inventory anchors.
 
 The corrected capture contains 2,317 YAML-facing declaration candidates in 4,504
-source files. The comparison appendix has 1,754 rows, including family baselines;
-73 loaded declarations have the requested CA/AS/RV/SP/TA-style tags. The uncovered
-intake has 263 donor declarations: CA 123, CN 77, SP 32, RV 10 and Generals 21.
+source files. The comparison appendix has 1,754 rows, including family baselines.
+Tagged-variant accounting (v2 correction — v1's "73" was unreproducible):
+**68** type declarations carry CA/AS/RV/SP/TA-style suffixes in the loaded
+assemblies (CA 48, Cameo 10, AS 10); **70** distinct suffixed names exist once the
+two AS warheads are included whose YAML name is suffixed but whose Info class is
+not (`ChangeOwnerAS`, `FireClusterAS`); **38** of the tagged names are mounted,
+**30** are source-only. The uncovered intake has 263 donor declarations:
+CA 123, CN 77, SP 32, RV 10 and Generals 21.
 These are declaration counts, not counts of unique missing gameplay capabilities.
 
 USE means resolved non-template **trait instances**, projectile instances on concrete
@@ -177,6 +185,19 @@ mission assignments/events, team broadcasts, coalition directives, scale targets
 role/utility axes and protection requests. Split runtime helpers out if their
 dependencies would make Contracts depend on a gameplay assembly.
 
+v2 namespace correction: all interfaces listed above exist at baseline, but
+`IBotEngagementPriors` lives in `OpenRA.Mods.CA.Traits.BotModuleLogic`
+(a sub-namespace), not directly in `OpenRA.Mods.CA.Traits` with the other 37.
+The v2 contracts move is unaffected — the target namespace is the same.
+
+v2 suffix≠project correction: several donor-suffixed type names physically live in
+the **Cameo project** (`OpenRA.Mods.Cameo`), not the assembly the suffix suggests:
+`DroneSpawnerMasterCA`, `AttackInfectCA`, `InfectableCA`, `LoadCargoBotModuleAS`,
+`PlugSpawnerBotModuleCA`, `RenderRangeCircleCA`, `WithBuildingBibCA`,
+`TerrainLightSourceCA`, `FireWarheadsOnDeathCA`, `FactionCA`. The suffix records the
+donor lineage, not the compiling project — assembly-placement decisions below must
+be driven by the capture's `asm` column, never inferred from the name.
+
 | Cameo-owned implementation/helper | Plain target / treatment |
 |---|---|
 | `ConcaveEvalCA` | `ConcaveEval`; introduced in Cameo `a75b65609`, not an upstream CA mechanic. |
@@ -185,7 +206,8 @@ dependencies would make Contracts depend on a gameplay assembly.
 | `GroundUnitsConcaveStateCA`, `StealthHelpersCA`, `StealthUnitsIdleStateCA`, `StealthApproachStateCA`, `StealthFleeStateCA` | Remove CA suffix while migrating the squad helper closure; preserve behavior and state transitions. |
 | `FighterIdleStateCA`, `GunshipCASStateCA`, `BomberIdleStateCA` | Remove the final CA source suffix; `CAS` inside GunshipCAS means close air support and is not a source tag. |
 | `BotDifficultyLadder`, `BotLimits`, `BotLimitsResolver`, `BotMission*`, `BotTargetTags` | Already plain names; move Cameo-owned namespace/project placement, not their semantic identity. |
-| `AdaptiveCounterProduction`, `AirLimits`, `BotCombatPredictor`, `DerivedUnitWeights`, `SpreadRules`, `SiegeEvaluatorBotModule` | Move with bot implementation consumers; do not put engine-dependent evaluators into the contracts-only project. |
+| `AdaptiveCounterProduction`, `AirLimits`, `BotCombatPredictor`, `DerivedUnitWeights`, `SiegeEvaluatorBotModule` | Move with bot implementation consumers; do not put engine-dependent evaluators into the contracts-only project. |
+| ~~`SpreadRules`~~ | **v2 correction:** no `SpreadRules` type — and no `Spread`-named symbol — exists at the baseline. The v1 row likely meant the resource-spread mechanics (`OpenRA.Mods.Cameo/Traits/World/ResourceRegrowth.cs` and the spreader chain); treat that chain as Cameo-owned and keep it with implementation consumers. |
 | `PlugSpawnerBotModuleCA` | Merge its Cameo modifications into `PlugSpawnerBotModule`; donor AS has an actual counterpart, so this is not merely an original helper rename. |
 
 `IBotFrontBackAdvisor` was introduced by Cameo `63cd1c372`;
@@ -226,7 +248,7 @@ the single implementation where they represent real configurable behavior.
 |---|---|---|
 | AttackAircraftCA → AttackAircraft | Adds AirFacingTolerance=512; inherit AttackAircraftInfo fields rather than treating AttackType/StrafeRunLength as removed. Preserve separate air-facing tolerance semantics. | High |
 | AttackBomberCA → AttackBomber | CA gates firing on facingTarget and supplies FlyAttack instead of the base scripted-target exception; SetTarget signature also differs. Preserve scripted and order-driven operation explicitly. | High |
-| AttackGarrisonedSP → AttackGarrisoned | Adds PerPassengerTargeting=true and SP fire-port behavior; retain shared-target operation and port geometry. | High |
+| AttackGarrisonedSP → AttackGarrisoned | **v2 correction:** the mounted variant is the vendored `CA:` copy (`Cameo-mod/OpenRA.Mods.CA/Traits/Attack/AttackGarrisonedSP.cs`), which adds `PerPassengerTargeting=true`. The **SP donor** has no such field — it implements per-passenger targeting through its own `FirePortSP` per-port struct (per-passenger armaments, facing, offset, muzzle). These are two different mechanisms; the merge must map SP port geometry onto the union schema rather than treat the vendored field as the donor's. Retain shared-target operation and port geometry. | High |
 | AttackPrismSupportedCA → AttackPrismSupported | Adds charge capacity/reload/initial/continued charge delays, charge sound, modifier and charging condition. Merge the controller and support-link typed dependencies together. | High |
 | AttackLeapAS → AttackLeap | Adds Angle=20 degrees, DamageTypes and LeapTargetCondition; the base has LeapCondition. These conditions affect different actors and must remain distinct. | High |
 | AirstrikeMasterCA / AirstrikeSlaveCA → AirstrikeMaster / AirstrikeSlave | Master adds available-slave condition, CancelOnStop and SpawnDistance. Slave tracks busy/available state, notifies master on death and removes detached slaves. Merge master/slave/activity callbacks atomically. | High |
@@ -338,6 +360,27 @@ is either adopted, already represented, or explicitly blocked by a named depende
 No feature is silently discarded merely because current Cameo YAML has zero users.
 This spec does not authorize enabling cheats, changing balance, or changing classic.
 
+### 5.1 Per-group destination mapping (v2 completion)
+
+The 263 uncovered rows fall into the appendix's nine capability sections. Each
+group gets a default destination ruling; exceptions are escalated per row.
+
+| Appendix group | Rows | Default destination family / ruling |
+|---|---|---|
+| AI and squad control | 14 | Existing bot-module families — CN modules map to their Cameo counterparts (`CNGarrisonBotModule`→`LoadGarrisoner` family, `CNRepairManager`→`BuildingRepair`/repair-service family, `CNRegionManager`/profile/tactical modules→the strategic/tactical contracts, `CNVeinholeAssault`→squad-mission surface). `BotPlayerNames`/`BotCapabilities`/`SquadPathOverlay` are presentation/debug — Contracts-adjacent, not gameplay owners. |
+| Combat, health and actor lifecycle | 68 | Largest group; mixed. Infiltrate/proxy rows (`InfiltrateToCreateProxyActor`, `CreateProxyActorForAllies`) → `InfiltrateForSupportPower` family. Damage-multiplier rows → the warhead/health families. `ArmamentBurstCounter`, `AutoGuard`, `IgnoreOutOfRangeAttackOrders` → attack-family candidates. Each row needs a per-row family check before scheduling — do not batch-port. |
+| Conditions, ownership and player feedback | 24 | `GrantCondition*` variants → the condition-grant family union schema (scalar→list modes covered by §6 mappings). `InfiltrateForTimedCondition`/`Infiltrate*` → the infiltrate family. Lobby/mission rows → lobby-option presentation, not gameplay state. |
+| Economy, tech and progression | 34 | Prerequisite-provider variants (`ProvidesPrerequisitesOnCount`, `…OnTimeline`, `…IfAlliesExist`) → `ProvidesPrerequisite` family. Experience/reclaim/resupply rows → economy family. Generals supply/collector/dock pipeline → new economy intake, gated on its own spec (not folded into trait renaming). |
+| Movement, deployment and transport | 22 | Deploy/cargo/passenger rows → `Mobile`/`Cargo`/`Passenger`-adjacent families; `CNSteeredMobile` specifically maps to `Mobile`. `EjectOnTransform`, `ParachuteCargoOnCondition`, `ScatterOnExitCargo` → exit/eject family union. |
+| Projectiles | 3 | All three are copies of the same husk projectile: CA `ProjectileHusk`, CN `ProjectileHusk`, SP **`ProjetcileHusk`** (misspelled type name). Destination = a single un-suffixed `ProjectileHusk`; the SP row maps onto it despite the name difference — proof that name ≠ mechanism. Needed before any aircraft-husk content is mounted. |
+| Rendering, weather and terrain | 56 | Presentation/renderer rows → renderer/palette/overlay families; engine-hook blockers identified per row before scheduling (voxel dynamics, weather, day/night). No gameplay state changes. |
+| Support powers and intelligence | 24 | `ClassicAirstrikePower` → `AirstrikePower` family union; `DummyGpsPower`/`GpsRadar*`/`FrozenUnderFogUpdatedByGpsRadar` → GPS/intelligence family; `CashHack*`, `InterceptorPower`, `MeteorPower`, `AirReinforcementsPower` → support-power family intake, each an explicit yes/no ticket. |
+| Warheads and impacts | 18 | `SpawnHuskEffectOnDeath`/`Spawn*Warhead` → death-spawn warhead family (overlaps `FireWarheadsOnDeath` semantics — per-row check); `InfiltrateWarhead`/`CashHackWarhead`/`StealResourceWarhead`/`ExplodeResourceWarhead` → warhead family; `TerrainDeformationWarhead`, `WarpPercentDamageWarhead`, `HealthPercentageSpreadDamageWarhead` → damage-math union modes. |
+
+Total mapped: 263 rows. The mapping is a *routing table*, not an adoption
+decision — each row still gets an individual intake ticket (adopted / already
+represented / explicitly blocked).
+
 ## 6. Migration and compatibility
 
 Use a **family-specific OpenRA UpdateRule** (the existing `UpdateActorNode` and
@@ -440,10 +483,76 @@ Before authoring a family's implementation, its owner must close the CLR consume
 closure, inherited-field loader validation, and behavioral-mode cases named here.
 These are implementation gates, not permission to erase an unreviewed difference.
 If a donor description conflicts with code, code wins; the uncovered appendix
-already corrects the stale TargetSpecificOrderVoice description from its runtime.
+already corrects the stale `TargetSpecificOrderVoice` description from its runtime.
+
+### 8.1 Enumerated open decisions (v2 completion)
+
+Each item names its owner-of-decision and blocking dependency. None is resolved
+by this spec.
+
+1. **MissileCA port decision** — 152 dormant `Projectile: MissileCA` declarations
+   (22 files, zero mounted, zero resolved). Decision: port CA's `MissileCAInfo`
+   into the unified `Missile` union (new default-off modes), or keep the files
+   dormant and drop the name? Depends on whether the coordinator wants the
+   dormant-advancewars content reachable. Blocks U1 ordering.
+2. **`FactionCA.Game` sequencing** — Cameo-owned `FactionCAInfo` adds a `Game`
+   field that `Common:FactionInfo` lacks. The plain `Faction` union needs the
+   field; decide whether the merged `FactionInfo` lives in Cameo or Common and
+   whether the engine patch precedes or follows the trait merge. Blocks U0/U7.
+3. **Different-name bot families** — `BevManagerBotModule` (AS) has no declaration
+   row but exists as a source file paired by `KNOWN_PAIRS` with
+   `McvExpansionManagerBotModule`; `CncEngineer*` and `CaptureManagerBotAS` are
+   likewise name-divergent. Decision: which family's union schema is canonical and
+   what the surviving instance names are. Blocks U5.
+4. **`AttackGarrisonedSP` port model** — the vendored `PerPassengerTargeting` flag
+   and the SP donor's `FirePortSP` per-passenger struct are different mechanisms
+   (§4.2 v2 correction). Decision: union schema carrying both modes, or map SP
+   ports onto the vendored model? Needs a schema proposal before U3.
+5. **`ProjetcileHusk` typo** — SP's misspelled donor name maps onto plain
+   `ProjectileHusk` (§5.1). Decision is mechanical but must be recorded in the
+   manifest alias table so the typo name resolves.
+6. **`GrantConditionOnPrerequisite` lifecycle** — CA's `AddFrameEndTask`-deferred
+   add/remove callbacks vs base `INotifyActorDisposing`. Decision: which callback
+   contract is canonical in the merged trait, and how the other semantics are
+   preserved for converted YAML. Blocks U2.
+7. **`UsePowerLevels` flag** — §6's proposed flag is a design decision, not an
+   existing field. Decision: adopt the flag or a mode enum; finalize default and
+   conversion emitters per family. Blocks U4.
+8. **Alias retirement dates** — temporary name aliases need explicit removal dates
+   in `merged_bot_modules.json`. Decision: per-family dates, set when each phase's
+   manifest is registered. Blocks U7.
+9. **`DroneSpawnerMasterCA` / Cameo-asm `*CA` types** — ten suffix-tagged types
+   live in `OpenRA.Mods.Cameo`, not the assembly their name suggests (§3.1 v2
+   note). Decision: do they move assembly during rename, or stay? Affects project
+   dependency graph; blocks U0 project layout.
+10. **Dormant-file mounting policy** — the 22 MissileCA files plus other dormant
+    content: when, if ever, do they mount, and under which feature switch? Blocks
+    U6 scheduling.
+
+### 8.2 Verification status of this spec
+
+v1's claims were independently re-checked (see `VERIFY_2026-10-06_trait_unification.md`):
+**5 corrections** applied in v2 (§1 tag count, §3 `SpreadRules`, §3 contract
+namespace, §4.2 `AttackGarrisonedSP`, suffix≠project note); **zero** claims proved
+UNVERIFIABLE; all other factual claims VERIFIED against baseline `b6f522e78`,
+pinned engine `d5d8b2a685`, the six donor SHAs, and the frozen capture. Inventory
+spot-checks: ≥10% of every comparison family (782 rows) and 30 uncovered rows —
+zero discrepancies.
 
 No behavior source, YAML gameplay rule, engine pin, learning spec or shared branch
 was changed for this task. Evidence generation used scratch scripts under
 `C:/cameo-wt`; deliverables and coordination are in the fleet folder. The complete
 capture is also retained as `C:/cameo-wt/boss_trait_full_capture.json`, so subsequent
 formatting reads frozen results rather than measuring a moving checkout again.
+
+## 9. Corrections applied vs v1 (summary)
+
+| # | v1 claim | v2 state |
+|---|---|---|
+| C1 | "73 loaded declarations have … tags" | Replaced with exact accounting: 68 tagged type declarations (48 CA + 10 Cameo + 10 AS), 70 incl. YAML-name-only suffixes, 38 mounted. §1. |
+| C2 | `SpreadRules` in §3.1 table | No such type exists; row corrected to the `ResourceRegrowth`/spreader chain. §3. |
+| C3 | All contracts in `OpenRA.Mods.CA.Traits` | `IBotEngagementPriors` is in `…Traits.BotModuleLogic`. §3. |
+| C4 | AttackGarrisonedSP "Adds PerPassengerTargeting=true" | True only of the vendored CA copy; SP donor uses `FirePortSP` per-passenger ports. §4.2. |
+| C5 | (implicit) `*CA`/`AS` suffix ⇒ assembly residence | 10 listed suffix-tagged types actually live in `OpenRA.Mods.Cameo`. §3. |
+| C6 | §5 listed categories only | §5.1 adds the per-group destination mapping for all 263 uncovered rows. |
+| C7 | §8 was a paragraph | §8.1 enumerates 10 open decisions with blockers. |

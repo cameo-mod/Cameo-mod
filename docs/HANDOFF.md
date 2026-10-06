@@ -1,5 +1,7 @@
 # Cameo — THE HANDOFF
 
+Current Boss handoff (2026-10-05): [trait-unification specification](design/trait_unification_2026_10_05/SPEC_2026-10-05_trait_unification.md), inventory, capability intake and frozen evidence are ready for coordinator review. Branch `devin/boss_trait_unification_2026_10_05`, worktree `C:/cameo-wt/boss_trait_docs`, source baseline `b6f522e78`. Next: assign implementation phases from the spec; no gameplay or engine implementation is included. Fleet STATUS_2026_10_05_boss_trait_unification.md is the coordination record.
+
 ## 2026-10-04 — Devin-Tier4: RADAR-A INC-ready — `AI_radar_contacts` (IBotRadarContacts provider, no consumers)
 
 `Agent: Devin-Tier4 · branch devin/tier4/radar-contacts · worktree C:/cameo-wt/t4-radar-a · base 3ba05ede7 (master, post-INC-04e)`

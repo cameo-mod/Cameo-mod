@@ -1,3 +1,26 @@
+## 2026-10-06 — Devin-Architect: TRAIT-UNIFY-SPEC verification + v2
+
+- Task `01a10dcd-55b6-7d10-96a8-4a60b7d99d56` reopened after Boss's token outage; spec-only,
+  same worktree/branch. Verification log: `docs/design/trait_unification_2026_10_05/VERIFY_2026-10-06_trait_unification.md`.
+- Every factual claim in the v1 spec re-checked against baseline `b6f522e78`, pinned engine
+  `d5d8b2a685`, six donor SHAs, and the frozen capture. Result: **5 corrections**, 0 unverifiable,
+  all other claims VERIFIED. Inventory spot-checks: ≥10% of all 782 comparison families + 30
+  uncovered rows — 0 discrepancies.
+- Corrections: "73 tagged" → exact 68/70/38 accounting; `SpreadRules` is not a real type;
+  `IBotEngagementPriors` namespace; `AttackGarrisonedSP` field belongs to the vendored copy
+  not the SP donor (which uses `FirePortSP`); `*CA`/`*AS` suffix ≠ assembly residence
+  (10 types actually live in `OpenRA.Mods.Cameo`).
+- v2 spec written in place (`SPEC_2026-10-05_trait_unification.md`); v1 preserved as `_v1`.
+  Completed: §5.1 per-group destination mapping for all 263 uncovered rows; §8.1 ten enumerated
+  open decisions; §9 corrections summary. No code/YAML/engine changes; no build/boot claimed.
+
+## 2026-10-05 — Boss trait-unification specification
+
+- Task `01a10dcd-55b6-7d10-96a8-4a60b7d99d56`: spec only. Entry point `docs/design/trait_unification_2026_10_05/SPEC_2026-10-05_trait_unification.md`; declaration inventory, uncovered capability appendix and frozen evidence archive accompany it. Fleet holds the same artifacts.
+- Frozen Cameo baseline `b6f522e78d41c68649e66e315363a42fc0bb683c`; engine `d5d8b2a6853bff3b5a00cc5db7d86b03d4f30684`; all six donor SHAs recorded. Main `0fd6ec67e` is a doc-only commit atop INC-e but lacks later integration trait changes.
+- Confirmed MissileCA: 152 declarations in 22 unmounted weapon files; no mounted/resolved users; donor source exists. The spec records direct field/default deltas, behavior conflicts, Cameo-owned CA naming, selective unified assembly/contracts, migration and save/replay boundaries, and a projectile-first phased plan.
+- Validation is documentary/source evidence only. No gameplay changes, engine changes, builds, lint or boot PASS claimed. Next: coordinator reviews the spec and assigns implementation phases; no merge authorized here.
+
 # 2026-10-05 — Devin-Architect: HOTSPOT-RESTACK — hotspot8+hotspot3 onto ars-stutter-gated
 
 *Devin-Architect.* `devin/architect/hotspot8-restack` + `devin/architect/hotspot3-restack` on
