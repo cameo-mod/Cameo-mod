@@ -99,7 +99,7 @@ def fit(batch_dirs: list[pathlib.Path]) -> dict:
                 fields = (stats.get("stats_timeline_fields") or "").split(",")
                 actual = {row[0]: dict(zip(fields, row)).get("army_value", 0) for row in stats.get("stats_timeline") or []}
                 for s in situations:
-                    if s.get("game_uid") != uid or s.get("player") != me["player"]["name"] or not s.get("enemies"):
+                    if s.get("game_uid") != uid or s.get("seat", s.get("player")) != me["player"].get("seat", me["player"].get("name")) or not s.get("enemies"):
                         continue
                     tick = (s["tick"] // 750) * 750
                     act = actual.get(tick)

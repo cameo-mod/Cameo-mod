@@ -836,7 +836,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			{
 				GameUid = gameUid,
 				MapUid = world.Map.Uid,
-				Player = player.InternalName,
+				Player = AiMatchLogWriter.SeatKey(world, player),
 				BotType = player.BotType ?? "",
 				Faction = player.Faction.InternalName,
 				Personality = PersonalityNow(),
@@ -943,7 +943,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			{
 				GameUid = gameUid,
 				MapUid = world.Map.Uid,
-				Player = player.InternalName,
+				Player = AiMatchLogWriter.SeatKey(world, player),
 				BotType = player.BotType ?? "",
 				Faction = player.Faction.InternalName,
 				Personality = PersonalityNow(),
@@ -994,10 +994,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public SortedDictionary<string, int> BalanceVersus;
 	}
 
-	/// <summary>Builds the JSON lines (schema engagement/1). Pure, so the emitter's separators are unit-tested.</summary>
+	/// <summary>Builds the JSON lines (schema engagement/2). Pure, so the emitter's separators are unit-tested.</summary>
 	public static class EngagementRecord
 	{
-		public const string Schema = "engagement/1";
+		public const string Schema = "engagement/2";
 
 		public static string KindOf(int distOwnBase, int distEnemyBase)
 		{
@@ -1053,7 +1053,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			AiMatchLogWriter.AppendString(b, "game_uid", h.GameUid);
 			AiMatchLogWriter.AppendString(b, "record_id", h.GameUid + "|" + h.Player + "|" + s.Id);
 			AiMatchLogWriter.AppendString(b, "map_uid", h.MapUid);
-			AiMatchLogWriter.AppendString(b, "player", h.Player);
+			AiMatchLogWriter.AppendString(b, "seat", h.Player);
 			AiMatchLogWriter.AppendString(b, "bot_type", h.BotType);
 			AiMatchLogWriter.AppendString(b, "faction", h.Faction);
 			AiMatchLogWriter.AppendString(b, "personality", h.Personality);
@@ -1251,7 +1251,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			AiMatchLogWriter.AppendString(b, "game_uid", h.GameUid);
 			AiMatchLogWriter.AppendString(b, "record_id", h.GameUid + "|" + h.Player + "|p" + index);
 			AiMatchLogWriter.AppendString(b, "map_uid", h.MapUid);
-			AiMatchLogWriter.AppendString(b, "player", h.Player);
+			AiMatchLogWriter.AppendString(b, "seat", h.Player);
 			AiMatchLogWriter.AppendString(b, "bot_type", h.BotType);
 			AiMatchLogWriter.AppendString(b, "faction", h.Faction);
 			AiMatchLogWriter.AppendString(b, "personality", h.Personality);

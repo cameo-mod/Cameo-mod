@@ -113,7 +113,7 @@ def report(batch_dirs: list[pathlib.Path], bot: str, width: int) -> str:
             out.append(f"- decisive window ticks {a['tick']}–{b['tick']}: net {'+' if net >= 0 else ''}{net} "
                        f"(killed {b['kills_cost'] - a['kills_cost']}, lost {b['deaths_cost'] - a['deaths_cost']}); "
                        f"army {a['army_value']}→{b['army_value']} vs enemy {fa.get('army_value', '?')}→{fb.get('army_value', '?')}")
-            mine = [s for s in situations if s.get("game_uid") == uid and s.get("player") == p.get("name")]
+            mine = [s for s in situations if s.get("game_uid") == uid and s.get("seat") == p.get("seat")]
             sa, sb = snapshot_at(mine, a["tick"]), snapshot_at(mine, b["tick"])
             out.append(f"- before: {describe(sa)}")
             out.append(f"- after:  {describe(sb)}")

@@ -393,6 +393,19 @@ def mp_spawn_cells(map_text: str) -> list[tuple[int, int]]:
     return cells
 
 
+def physical_spawn(record: dict, map_text: str) -> int | None:
+    home = (record.get("player") or {}).get("home")
+    homes = re.findall(r"^\tPlayerReference@(?:Multi[0-9]+|Bot[A-Z]):\n(?:(?:\t\t[^\n]*\n)*)", map_text, re.MULTILINE)
+    for block in homes:
+        ref = re.search(r"PlayerReference@(Multi([0-9]+)|Bot([A-Z])):", block)
+        cell = re.search(r"^\t\tHomeLocation: (-?[0-9]+,-?[0-9]+)$", block, re.MULTILINE)
+        if ref and cell and cell.group(1) == home:
+            return int(ref.group(2)) if ref.group(2) is not None else ord(ref.group(3)) - ord("A")
+    # A lobby spawn is 1-based; never silently attribute every unknown map bot to 0.
+    chosen = (record.get("player") or {}).get("spawn", 0)
+    return chosen - 1 if isinstance(chosen, int) and chosen > 0 else None
+
+
 def split_spawn_sides(cells: list[tuple[int, int]], team_size: int) -> list[tuple[int, int]]:
     """Return spawn cells reordered so indices 0..team_size-1 are one geographic
     half of the map and team_size..2*team_size-1 are the other.
@@ -802,7 +815,7 @@ def team_scoreboard(results: list[dict]) -> dict:
             allies = row.get("allies") or []
             members = frozenset(
                 {str(row.get("record_id") or "").rsplit("|", 1)[1]}
-                | {str(a.get("name")) for a in allies}
+                | {str(a.get("seat")) for a in allies}
             )
             team = by_members.get(members)
             if team is None:
@@ -1281,16 +1294,15 @@ def main() -> int:
                     # player.spawn is the lobby SpawnPoint — 0 for map-side
                     # duelists. The physical spawn is the slot binding:
                     # Multi0/BotA -> index 0, Multi1/BotB -> index 1.
-                    "spawn": SPAWN_INDEX_BY_SLOT.get((r.get("player") or {}).get("name"),
-                                                   (r.get("player") or {}).get("spawn")),
+                    "spawn": physical_spawn(r, (variants_root / m["variant"] / "map.yaml").read_text(encoding="utf-8")),
                     "opponent": {"bot_type": ((r.get("opponents") or [{}])[0] or {}).get("bot_type")},
                     # Full relationship lists (2v2: one ally, two opponents).
                     "allies": [
-                        {"name": a.get("name"), "bot_type": a.get("bot_type"), "outcome": a.get("outcome")}
+                        {"seat": a.get("seat"), "bot_type": a.get("bot_type"), "outcome": a.get("outcome")}
                         for a in (r.get("allies") or [])
                     ],
                     "opponents": [
-                        {"name": o.get("name"), "bot_type": o.get("bot_type"), "outcome": o.get("outcome")}
+                        {"seat": o.get("seat"), "bot_type": o.get("bot_type"), "outcome": o.get("outcome")}
                         for o in (r.get("opponents") or [])
                     ],
                 }

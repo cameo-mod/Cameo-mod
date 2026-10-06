@@ -78,11 +78,11 @@ def teams_from_matches(match_records):
             parent[max(ra, rb)] = min(ra, rb)
 
     for r in match_records:
-        me = (r.get("player") or {}).get("name")
+        me = (r.get("player") or {}).get("seat")
         if not me:
             continue
         for a in r.get("allies") or []:
-            name = a.get("name") if isinstance(a, dict) else a
+            name = a.get("seat") if isinstance(a, dict) else a
             if name:
                 union(me, name)
     groups = collections.defaultdict(set)
@@ -102,10 +102,9 @@ def load_support_dir(support):
     if not matches:
         for r in results:
             for bo in r.get("bot_outcomes") or []:
-                me = bo.get("record_id")
-                allies = [{"name": a.get("name")} for a in bo.get("allies") or []]
-                # record_id is not the slot name; allies names are slot names.
-                matches.append({"player": {"name": me}, "allies": allies})
+                me = str(bo.get("record_id") or "").rsplit("|", 1)[-1]
+                allies = [{"seat": a.get("seat")} for a in bo.get("allies") or []]
+                matches.append({"player": {"seat": me}, "allies": allies})
     return missions, matches, results
 
 

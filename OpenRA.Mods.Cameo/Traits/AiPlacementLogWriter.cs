@@ -180,14 +180,14 @@ namespace OpenRA.Mods.Cameo.Traits
 
 			var builder = lines;
 			AiMatchLogWriter.AppendObjectStart(builder);
-			AiMatchLogWriter.AppendNumber(builder, "schema", 1, true);
+			AiMatchLogWriter.AppendNumber(builder, "schema", 2, true);
 			AiMatchLogWriter.AppendString(builder, "kind", kind);
 			AiMatchLogWriter.AppendString(builder, "game_uid", world.LobbyInfo.GlobalSettings.GameUid ?? "");
 			AiMatchLogWriter.AppendString(builder, "record_id",
-				gameUid + "|" + player.InternalName + "|" + tick + "|" + kind + "|" + t.Actor.Info.Name + "|" + t.Cell.X + "," + t.Cell.Y);
+				gameUid + "|" + AiMatchLogWriter.SeatKey(world, player) + "|" + tick + "|" + kind + "|" + t.Actor.Info.Name + "|" + t.Cell.X + "," + t.Cell.Y);
 			AiMatchLogWriter.AppendString(builder, "map_uid", world.Map.Uid);
 			AiMatchLogWriter.AppendNumber(builder, "seed", world.LobbyInfo.GlobalSettings.RandomSeed);
-			AiMatchLogWriter.AppendString(builder, "player", player.InternalName);
+			AiMatchLogWriter.AppendString(builder, "seat", AiMatchLogWriter.SeatKey(world, player));
 			AiMatchLogWriter.AppendString(builder, "faction", player.Faction.InternalName);
 			AiMatchLogWriter.AppendString(builder, "bot_type", player.BotType ?? "");
 			AiMatchLogWriter.AppendString(builder, "personality", personality);
@@ -263,13 +263,13 @@ namespace OpenRA.Mods.Cameo.Traits
 
 			var builder = lines;
 			AiMatchLogWriter.AppendObjectStart(builder);
-			AiMatchLogWriter.AppendNumber(builder, "schema", 1, true);
+			AiMatchLogWriter.AppendNumber(builder, "schema", 2, true);
 			AiMatchLogWriter.AppendString(builder, "kind", "placement");
 			AiMatchLogWriter.AppendString(builder, "game_uid", world.LobbyInfo.GlobalSettings.GameUid ?? "");
-			AiMatchLogWriter.AppendString(builder, "record_id", gameUid + "|" + owner.InternalName + "|" + tick + "|" + actor + "|" + cell.X + "," + cell.Y);
+			AiMatchLogWriter.AppendString(builder, "record_id", gameUid + "|" + AiMatchLogWriter.SeatKey(world, owner) + "|" + tick + "|" + actor + "|" + cell.X + "," + cell.Y);
 			AiMatchLogWriter.AppendString(builder, "map_uid", world.Map.Uid);
 			AiMatchLogWriter.AppendNumber(builder, "seed", world.LobbyInfo.GlobalSettings.RandomSeed);
-			AiMatchLogWriter.AppendString(builder, "player", owner.InternalName);
+			AiMatchLogWriter.AppendString(builder, "seat", AiMatchLogWriter.SeatKey(world, owner));
 			AiMatchLogWriter.AppendString(builder, "faction", owner.Faction.InternalName);
 			AiMatchLogWriter.AppendString(builder, "bot_type", owner.BotType ?? "");
 			AiMatchLogWriter.AppendString(builder, "personality", personality);
