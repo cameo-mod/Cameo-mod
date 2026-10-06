@@ -25,8 +25,11 @@ class CannonAPEndpointCohort(unittest.TestCase):
                      if n.key.startswith('Warhead')],
                     [n.key for n in weapon.children if n.key.startswith('Warhead')])
                 applications = pd.percentage_applications(weapon, 100000)
-                self.assertTrue(all(a['runtime_units'] == 0 for a in applications
-                                    if a['tag'] == 'CannonAP'))
+                # 12.0j (66c377077, maintainer ruling): ^Warhead_CannonAP now carries
+                # PercentageScale 2000, so the folded half is live by design. At h=0
+                # the shared growth is 4000/5000, giving damage x 8/1000 units.
+                self.assertTrue(all(a['runtime_units'] == a['damage'] * 8 // 1000
+                                    for a in applications if a['tag'] == 'CannonAP'))
 
     def test_historical_restore_rejects_reordered_events(self):
         for name in sorted(ALL_ENDPOINTS):
@@ -62,7 +65,9 @@ class CannonAPEndpointCohort(unittest.TestCase):
             weapon = self.rules.resolve_weapon(current_endpoint_name(self.rules, name))
             self.assertEqual(weapon.child('Warhead@LaserWeaponPercentage').get('Damage'), '3')
             folded = [a for a in pd.percentage_applications(weapon, 100000) if a['tag'] == 'CannonAP']
-            self.assertEqual([a['runtime_units'] for a in folded], [60])
+            # 12.0j (66c377077): the folded half is now designed-live; at h=1000 the
+            # shared growth is 5000/5000, so 12000 x 2000 / 200000 = 120 units.
+            self.assertEqual([a['runtime_units'] for a in folded], [120])
         cannon = self.rules.resolve_weapon(current_endpoint_name(self.rules, '2Inch')).child('Warhead@CannonAP')
         self.assertEqual(scale_length(int(cannon.get('Spread')), int(cannon.get('Heaviness'))), 300)
 
