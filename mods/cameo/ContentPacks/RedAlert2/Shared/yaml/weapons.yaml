@@ -1197,43 +1197,43 @@ RA2HoverMissile:
 	-Warhead@MissileAP_Light:
 	Warhead@MissileHE_Light: AreaDamage
 		Versus:
-			None: 93
-			Light: 156
-			Medium: 110
-			Heavy: 96
-			Superheavy: 78
-			Scout: 199
-			Plate: 39
-			Concrete: 88
-			Wood: 175
-			Steel: 112
-			Flak: 68
-			Heroic: 38
-			Bomber: 90
-			Fighter: 115
-			Helicopter: 77
-			Spaceship: 64
+			None: 102
+			Light: 161
+			Medium: 118
+			Heavy: 104
+			Superheavy: 87
+			Scout: 200
+			Plate: 48
+			Concrete: 97
+			Wood: 179
+			Steel: 120
+			Flak: 78
+			Heroic: 48
+			Bomber: 99
+			Fighter: 123
+			Helicopter: 86
+			Spaceship: 73
 			ARMOR: 70
 			BLAST: 45
 			COMPOSITE: 88
 			HAZMAT: 76
 			REFLECTOR: 70
 			Shield: 137
-			FlyingInfantry: 101
-			CyborgLight: 120
-			CyborgMedium: 86
-			CyborgHeavy: 61
-			CyborgHeroic: 54
-			AntiAirInfantry: 80
-			AntiAirVehicle: 131
-			AntiAirBuilding: 99
-			ShipLight: 165
-			ShipMedium: 98
-			ShipHeavy: 104
-			ShipSuperheavy: 93
-			AntiAirShip: 127
-			SubmarineLight: 97
-			SubmarineHeavy: 90
+			FlyingInfantry: 110
+			CyborgLight: 128
+			CyborgMedium: 96
+			CyborgHeavy: 71
+			CyborgHeroic: 65
+			AntiAirInfantry: 89
+			AntiAirVehicle: 138
+			AntiAirBuilding: 108
+			ShipLight: 170
+			ShipMedium: 107
+			ShipHeavy: 112
+			ShipSuperheavy: 102
+			AntiAirShip: 135
+			SubmarineLight: 105
+			SubmarineHeavy: 99
 		PercentageVersus:
 			None: 4
 			Light: 14
@@ -1296,43 +1296,43 @@ RA2HoverMissile_elite:
 		ContrailStartColor: e60000
 	Warhead@MissileHE_Light: AreaDamage
 		Versus:
-			None: 93
-			Light: 156
-			Medium: 110
-			Heavy: 96
-			Superheavy: 78
-			Scout: 199
-			Plate: 39
-			Concrete: 88
-			Wood: 175
-			Steel: 112
-			Flak: 68
-			Heroic: 38
-			Bomber: 90
-			Fighter: 115
-			Helicopter: 77
-			Spaceship: 64
+			None: 102
+			Light: 161
+			Medium: 118
+			Heavy: 104
+			Superheavy: 87
+			Scout: 200
+			Plate: 48
+			Concrete: 97
+			Wood: 179
+			Steel: 120
+			Flak: 78
+			Heroic: 48
+			Bomber: 99
+			Fighter: 123
+			Helicopter: 86
+			Spaceship: 73
 			ARMOR: 70
 			BLAST: 45
 			COMPOSITE: 88
 			HAZMAT: 76
 			REFLECTOR: 70
 			Shield: 137
-			FlyingInfantry: 101
-			CyborgLight: 120
-			CyborgMedium: 86
-			CyborgHeavy: 61
-			CyborgHeroic: 54
-			AntiAirInfantry: 80
-			AntiAirVehicle: 131
-			AntiAirBuilding: 99
-			ShipLight: 165
-			ShipMedium: 98
-			ShipHeavy: 104
-			ShipSuperheavy: 93
-			AntiAirShip: 127
-			SubmarineLight: 97
-			SubmarineHeavy: 90
+			FlyingInfantry: 110
+			CyborgLight: 128
+			CyborgMedium: 96
+			CyborgHeavy: 71
+			CyborgHeroic: 65
+			AntiAirInfantry: 89
+			AntiAirVehicle: 138
+			AntiAirBuilding: 108
+			ShipLight: 170
+			ShipMedium: 107
+			ShipHeavy: 112
+			ShipSuperheavy: 102
+			AntiAirShip: 135
+			SubmarineLight: 105
+			SubmarineHeavy: 99
 		PercentageVersus:
 			None: 4
 			Light: 14
@@ -1421,23 +1421,8 @@ RA2HoverMissile_AA:
 			BLAST: 56
 			COMPOSITE: 67
 			HAZMAT: 87
-			REFLECTOR: 70
+			REFLECTOR: 69
 			Shield: 140
-			FlyingInfantry: 94
-			CyborgLight: 66
-			CyborgMedium: 73
-			CyborgHeavy: 77
-			CyborgHeroic: 62
-			AntiAirInfantry: 39
-			AntiAirVehicle: 123
-			AntiAirBuilding: 66
-			ShipLight: 85
-			ShipMedium: 94
-			ShipHeavy: 88
-			ShipSuperheavy: 90
-			AntiAirShip: 89
-			SubmarineLight: 109
-			SubmarineHeavy: 108
 		PercentageVersus:
 			None: 1
 			Light: 9
@@ -1456,21 +1441,6 @@ RA2HoverMissile_AA:
 			Helicopter: 15
 			Spaceship: 16
 			Shield: 17
-			FlyingInfantry: 6
-			CyborgLight: 3
-			CyborgMedium: 4
-			CyborgHeavy: 6
-			CyborgHeroic: 7
-			AntiAirInfantry: 1
-			AntiAirVehicle: 9
-			AntiAirBuilding: 6
-			ShipLight: 7
-			ShipMedium: 8
-			ShipHeavy: 8
-			ShipSuperheavy: 8
-			AntiAirShip: 7
-			SubmarineLight: 9
-			SubmarineHeavy: 10
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -1521,23 +1491,8 @@ RA2HoverMissile_AA_elite:
 			BLAST: 56
 			COMPOSITE: 67
 			HAZMAT: 87
-			REFLECTOR: 70
+			REFLECTOR: 69
 			Shield: 140
-			FlyingInfantry: 94
-			CyborgLight: 66
-			CyborgMedium: 73
-			CyborgHeavy: 77
-			CyborgHeroic: 62
-			AntiAirInfantry: 39
-			AntiAirVehicle: 123
-			AntiAirBuilding: 66
-			ShipLight: 85
-			ShipMedium: 94
-			ShipHeavy: 88
-			ShipSuperheavy: 90
-			AntiAirShip: 89
-			SubmarineLight: 109
-			SubmarineHeavy: 108
 		PercentageVersus:
 			None: 1
 			Light: 9
@@ -1556,21 +1511,6 @@ RA2HoverMissile_AA_elite:
 			Helicopter: 15
 			Spaceship: 16
 			Shield: 17
-			FlyingInfantry: 6
-			CyborgLight: 3
-			CyborgMedium: 4
-			CyborgHeavy: 6
-			CyborgHeroic: 7
-			AntiAirInfantry: 1
-			AntiAirVehicle: 9
-			AntiAirBuilding: 6
-			ShipLight: 7
-			ShipMedium: 8
-			ShipHeavy: 8
-			ShipSuperheavy: 8
-			AntiAirShip: 7
-			SubmarineLight: 9
-			SubmarineHeavy: 10
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -1618,43 +1558,43 @@ RA2ThunderboltMissile:
 	-Warhead@MissileHE_Light_Flat:
 	Warhead@MissileAP_Light: AreaDamage
 		Versus:
-			None: 36
-			Light: 142
-			Medium: 155
-			Heavy: 169
-			Superheavy: 172
-			Scout: 130
-			Plate: 46
-			Concrete: 70
-			Wood: 59
-			Steel: 60
-			Flak: 43
-			Heroic: 35
-			Bomber: 113
-			Fighter: 112
-			Helicopter: 127
-			Spaceship: 128
+			None: 41
+			Light: 165
+			Medium: 180
+			Heavy: 197
+			Superheavy: 200
+			Scout: 150
+			Plate: 52
+			Concrete: 80
+			Wood: 68
+			Steel: 69
+			Flak: 49
+			Heroic: 39
+			Bomber: 131
+			Fighter: 130
+			Helicopter: 147
+			Spaceship: 148
 			ARMOR: 70
 			BLAST: 69
 			COMPOSITE: 44
 			HAZMAT: 94
 			REFLECTOR: 71
 			Shield: 134
-			FlyingInfantry: 89
-			CyborgLight: 71
-			CyborgMedium: 82
-			CyborgHeavy: 88
-			CyborgHeroic: 78
-			AntiAirInfantry: 39
-			AntiAirVehicle: 148
-			AntiAirBuilding: 65
-			ShipLight: 92
-			ShipMedium: 104
-			ShipHeavy: 101
-			ShipSuperheavy: 102
-			AntiAirShip: 98
-			SubmarineLight: 133
-			SubmarineHeavy: 132
+			FlyingInfantry: 103
+			CyborgLight: 82
+			CyborgMedium: 94
+			CyborgHeavy: 101
+			CyborgHeroic: 88
+			AntiAirInfantry: 45
+			AntiAirVehicle: 172
+			AntiAirBuilding: 74
+			ShipLight: 106
+			ShipMedium: 120
+			ShipHeavy: 117
+			ShipSuperheavy: 117
+			AntiAirShip: 113
+			SubmarineLight: 154
+			SubmarineHeavy: 153
 		PercentageVersus:
 			None: 1
 			Light: 13
@@ -1716,43 +1656,43 @@ RA2ThunderboltMissile_elite:
 		ContrailStartColor: e60000
 	Warhead@MissileAP_Light: AreaDamage
 		Versus:
-			None: 36
-			Light: 142
-			Medium: 155
-			Heavy: 169
-			Superheavy: 172
-			Scout: 130
-			Plate: 46
-			Concrete: 70
-			Wood: 59
-			Steel: 60
-			Flak: 43
-			Heroic: 35
-			Bomber: 113
-			Fighter: 112
-			Helicopter: 127
-			Spaceship: 128
+			None: 41
+			Light: 165
+			Medium: 180
+			Heavy: 197
+			Superheavy: 200
+			Scout: 150
+			Plate: 52
+			Concrete: 80
+			Wood: 68
+			Steel: 69
+			Flak: 49
+			Heroic: 39
+			Bomber: 131
+			Fighter: 130
+			Helicopter: 147
+			Spaceship: 148
 			ARMOR: 70
 			BLAST: 69
 			COMPOSITE: 44
 			HAZMAT: 94
 			REFLECTOR: 71
 			Shield: 134
-			FlyingInfantry: 89
-			CyborgLight: 71
-			CyborgMedium: 82
-			CyborgHeavy: 88
-			CyborgHeroic: 78
-			AntiAirInfantry: 39
-			AntiAirVehicle: 148
-			AntiAirBuilding: 65
-			ShipLight: 92
-			ShipMedium: 104
-			ShipHeavy: 101
-			ShipSuperheavy: 102
-			AntiAirShip: 98
-			SubmarineLight: 133
-			SubmarineHeavy: 132
+			FlyingInfantry: 103
+			CyborgLight: 82
+			CyborgMedium: 94
+			CyborgHeavy: 101
+			CyborgHeroic: 88
+			AntiAirInfantry: 45
+			AntiAirVehicle: 172
+			AntiAirBuilding: 74
+			ShipLight: 106
+			ShipMedium: 120
+			ShipHeavy: 117
+			ShipSuperheavy: 117
+			AntiAirShip: 113
+			SubmarineLight: 154
+			SubmarineHeavy: 153
 		PercentageVersus:
 			None: 1
 			Light: 13
@@ -1890,43 +1830,43 @@ RA2MultiHoverMissile:
 	-Warhead@MissileHE_Light_Flat:
 	Warhead@MissileAP_Light: AreaDamage
 		Versus:
-			None: 36
-			Light: 142
-			Medium: 155
-			Heavy: 169
-			Superheavy: 172
-			Scout: 130
-			Plate: 46
-			Concrete: 70
-			Wood: 59
-			Steel: 60
-			Flak: 43
-			Heroic: 35
-			Bomber: 113
-			Fighter: 112
-			Helicopter: 127
-			Spaceship: 128
+			None: 41
+			Light: 165
+			Medium: 180
+			Heavy: 197
+			Superheavy: 200
+			Scout: 150
+			Plate: 52
+			Concrete: 80
+			Wood: 68
+			Steel: 69
+			Flak: 49
+			Heroic: 39
+			Bomber: 131
+			Fighter: 130
+			Helicopter: 147
+			Spaceship: 148
 			ARMOR: 70
 			BLAST: 69
 			COMPOSITE: 44
 			HAZMAT: 94
 			REFLECTOR: 71
 			Shield: 134
-			FlyingInfantry: 89
-			CyborgLight: 71
-			CyborgMedium: 82
-			CyborgHeavy: 88
-			CyborgHeroic: 78
-			AntiAirInfantry: 39
-			AntiAirVehicle: 148
-			AntiAirBuilding: 65
-			ShipLight: 92
-			ShipMedium: 104
-			ShipHeavy: 101
-			ShipSuperheavy: 102
-			AntiAirShip: 98
-			SubmarineLight: 133
-			SubmarineHeavy: 132
+			FlyingInfantry: 103
+			CyborgLight: 82
+			CyborgMedium: 94
+			CyborgHeavy: 101
+			CyborgHeroic: 88
+			AntiAirInfantry: 45
+			AntiAirVehicle: 172
+			AntiAirBuilding: 74
+			ShipLight: 106
+			ShipMedium: 120
+			ShipHeavy: 117
+			ShipSuperheavy: 117
+			AntiAirShip: 113
+			SubmarineLight: 154
+			SubmarineHeavy: 153
 		PercentageVersus:
 			None: 1
 			Light: 13
@@ -2088,43 +2028,43 @@ RA2MultiHoverMissile_elite:
 		ContrailStartColor: e60000
 	Warhead@MissileAP_Light: AreaDamage
 		Versus:
-			None: 36
-			Light: 142
-			Medium: 155
-			Heavy: 169
-			Superheavy: 172
-			Scout: 130
-			Plate: 46
-			Concrete: 70
-			Wood: 59
-			Steel: 60
-			Flak: 43
-			Heroic: 35
-			Bomber: 113
-			Fighter: 112
-			Helicopter: 127
-			Spaceship: 128
+			None: 41
+			Light: 165
+			Medium: 180
+			Heavy: 197
+			Superheavy: 200
+			Scout: 150
+			Plate: 52
+			Concrete: 80
+			Wood: 68
+			Steel: 69
+			Flak: 49
+			Heroic: 39
+			Bomber: 131
+			Fighter: 130
+			Helicopter: 147
+			Spaceship: 148
 			ARMOR: 70
 			BLAST: 69
 			COMPOSITE: 44
 			HAZMAT: 94
 			REFLECTOR: 71
 			Shield: 134
-			FlyingInfantry: 89
-			CyborgLight: 71
-			CyborgMedium: 82
-			CyborgHeavy: 88
-			CyborgHeroic: 78
-			AntiAirInfantry: 39
-			AntiAirVehicle: 148
-			AntiAirBuilding: 65
-			ShipLight: 92
-			ShipMedium: 104
-			ShipHeavy: 101
-			ShipSuperheavy: 102
-			AntiAirShip: 98
-			SubmarineLight: 133
-			SubmarineHeavy: 132
+			FlyingInfantry: 103
+			CyborgLight: 82
+			CyborgMedium: 94
+			CyborgHeavy: 101
+			CyborgHeroic: 88
+			AntiAirInfantry: 45
+			AntiAirVehicle: 172
+			AntiAirBuilding: 74
+			ShipLight: 106
+			ShipMedium: 120
+			ShipHeavy: 117
+			ShipSuperheavy: 117
+			AntiAirShip: 113
+			SubmarineLight: 154
+			SubmarineHeavy: 153
 		PercentageVersus:
 			None: 1
 			Light: 13
@@ -2215,23 +2155,8 @@ RA2MultiHoverMissile_AA:
 			BLAST: 56
 			COMPOSITE: 67
 			HAZMAT: 87
-			REFLECTOR: 70
+			REFLECTOR: 69
 			Shield: 140
-			FlyingInfantry: 94
-			CyborgLight: 66
-			CyborgMedium: 73
-			CyborgHeavy: 77
-			CyborgHeroic: 62
-			AntiAirInfantry: 39
-			AntiAirVehicle: 123
-			AntiAirBuilding: 66
-			ShipLight: 85
-			ShipMedium: 94
-			ShipHeavy: 88
-			ShipSuperheavy: 90
-			AntiAirShip: 89
-			SubmarineLight: 109
-			SubmarineHeavy: 108
 		PercentageVersus:
 			None: 1
 			Light: 9
@@ -2250,21 +2175,6 @@ RA2MultiHoverMissile_AA:
 			Helicopter: 15
 			Spaceship: 16
 			Shield: 17
-			FlyingInfantry: 6
-			CyborgLight: 3
-			CyborgMedium: 4
-			CyborgHeavy: 6
-			CyborgHeroic: 7
-			AntiAirInfantry: 1
-			AntiAirVehicle: 9
-			AntiAirBuilding: 6
-			ShipLight: 7
-			ShipMedium: 8
-			ShipHeavy: 8
-			ShipSuperheavy: 8
-			AntiAirShip: 7
-			SubmarineLight: 9
-			SubmarineHeavy: 10
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -2311,23 +2221,8 @@ RA2MultiHoverMissile_AA_elite:
 			BLAST: 56
 			COMPOSITE: 67
 			HAZMAT: 87
-			REFLECTOR: 70
+			REFLECTOR: 69
 			Shield: 140
-			FlyingInfantry: 94
-			CyborgLight: 66
-			CyborgMedium: 73
-			CyborgHeavy: 77
-			CyborgHeroic: 62
-			AntiAirInfantry: 39
-			AntiAirVehicle: 123
-			AntiAirBuilding: 66
-			ShipLight: 85
-			ShipMedium: 94
-			ShipHeavy: 88
-			ShipSuperheavy: 90
-			AntiAirShip: 89
-			SubmarineLight: 109
-			SubmarineHeavy: 108
 		PercentageVersus:
 			None: 1
 			Light: 9
@@ -2346,21 +2241,6 @@ RA2MultiHoverMissile_AA_elite:
 			Helicopter: 15
 			Spaceship: 16
 			Shield: 17
-			FlyingInfantry: 6
-			CyborgLight: 3
-			CyborgMedium: 4
-			CyborgHeavy: 6
-			CyborgHeroic: 7
-			AntiAirInfantry: 1
-			AntiAirVehicle: 9
-			AntiAirBuilding: 6
-			ShipLight: 7
-			ShipMedium: 8
-			ShipHeavy: 8
-			ShipSuperheavy: 8
-			AntiAirShip: 7
-			SubmarineLight: 9
-			SubmarineHeavy: 10
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
@@ -2409,43 +2289,43 @@ RA2MultiThunderboltMissile:
 	-Warhead@MissileHE_Light_Flat:
 	Warhead@MissileAP_Light: AreaDamage
 		Versus:
-			None: 36
-			Light: 142
-			Medium: 155
-			Heavy: 169
-			Superheavy: 172
-			Scout: 130
-			Plate: 46
-			Concrete: 70
-			Wood: 59
-			Steel: 60
-			Flak: 43
-			Heroic: 35
-			Bomber: 113
-			Fighter: 112
-			Helicopter: 127
-			Spaceship: 128
+			None: 41
+			Light: 165
+			Medium: 180
+			Heavy: 197
+			Superheavy: 200
+			Scout: 150
+			Plate: 52
+			Concrete: 80
+			Wood: 68
+			Steel: 69
+			Flak: 49
+			Heroic: 39
+			Bomber: 131
+			Fighter: 130
+			Helicopter: 147
+			Spaceship: 148
 			ARMOR: 70
 			BLAST: 69
 			COMPOSITE: 44
 			HAZMAT: 94
 			REFLECTOR: 71
 			Shield: 134
-			FlyingInfantry: 89
-			CyborgLight: 71
-			CyborgMedium: 82
-			CyborgHeavy: 88
-			CyborgHeroic: 78
-			AntiAirInfantry: 39
-			AntiAirVehicle: 148
-			AntiAirBuilding: 65
-			ShipLight: 92
-			ShipMedium: 104
-			ShipHeavy: 101
-			ShipSuperheavy: 102
-			AntiAirShip: 98
-			SubmarineLight: 133
-			SubmarineHeavy: 132
+			FlyingInfantry: 103
+			CyborgLight: 82
+			CyborgMedium: 94
+			CyborgHeavy: 101
+			CyborgHeroic: 88
+			AntiAirInfantry: 45
+			AntiAirVehicle: 172
+			AntiAirBuilding: 74
+			ShipLight: 106
+			ShipMedium: 120
+			ShipHeavy: 117
+			ShipSuperheavy: 117
+			AntiAirShip: 113
+			SubmarineLight: 154
+			SubmarineHeavy: 153
 		PercentageVersus:
 			None: 1
 			Light: 13
@@ -2507,43 +2387,43 @@ RA2MultiThunderboltMissile_elite:
 		ContrailStartColor: e60000
 	Warhead@MissileAP_Light: AreaDamage
 		Versus:
-			None: 36
-			Light: 142
-			Medium: 155
-			Heavy: 169
-			Superheavy: 172
-			Scout: 130
-			Plate: 46
-			Concrete: 70
-			Wood: 59
-			Steel: 60
-			Flak: 43
-			Heroic: 35
-			Bomber: 113
-			Fighter: 112
-			Helicopter: 127
-			Spaceship: 128
+			None: 41
+			Light: 165
+			Medium: 180
+			Heavy: 197
+			Superheavy: 200
+			Scout: 150
+			Plate: 52
+			Concrete: 80
+			Wood: 68
+			Steel: 69
+			Flak: 49
+			Heroic: 39
+			Bomber: 131
+			Fighter: 130
+			Helicopter: 147
+			Spaceship: 148
 			ARMOR: 70
 			BLAST: 69
 			COMPOSITE: 44
 			HAZMAT: 94
 			REFLECTOR: 71
 			Shield: 134
-			FlyingInfantry: 89
-			CyborgLight: 71
-			CyborgMedium: 82
-			CyborgHeavy: 88
-			CyborgHeroic: 78
-			AntiAirInfantry: 39
-			AntiAirVehicle: 148
-			AntiAirBuilding: 65
-			ShipLight: 92
-			ShipMedium: 104
-			ShipHeavy: 101
-			ShipSuperheavy: 102
-			AntiAirShip: 98
-			SubmarineLight: 133
-			SubmarineHeavy: 132
+			FlyingInfantry: 103
+			CyborgLight: 82
+			CyborgMedium: 94
+			CyborgHeavy: 101
+			CyborgHeroic: 88
+			AntiAirInfantry: 45
+			AntiAirVehicle: 172
+			AntiAirBuilding: 74
+			ShipLight: 106
+			ShipMedium: 120
+			ShipHeavy: 117
+			ShipSuperheavy: 117
+			AntiAirShip: 113
+			SubmarineLight: 154
+			SubmarineHeavy: 153
 		PercentageVersus:
 			None: 1
 			Light: 13
