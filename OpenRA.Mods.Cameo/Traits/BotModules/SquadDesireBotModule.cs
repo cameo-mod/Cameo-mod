@@ -50,19 +50,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 	public class SquadDesireBotModule : ConditionalTrait<SquadDesireBotModuleInfo>, IBotSquadDesire, IBotTick
 	{
-		sealed class DesireState
-		{
-			public readonly int[] Desires = new int[SquadDesireEval.StanceCount];
-			public int Current = -1;
-			public int LastSwitchTick;
-			public int LastSeenTick;
-			public bool Primed;
-		}
-
 		readonly World world;
 		readonly OpenRA.Player player;
-		readonly Dictionary<SquadCA, DesireState> states = new();
-		readonly int[] urgencies = new int[SquadDesireEval.StanceCount];
+		readonly Dictionary<SquadCA, SquadDesireMemory> states = new();
 		readonly List<SquadCA> pruneScratch = new();
 
 		string personality;
@@ -92,29 +82,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		public SquadDesireStance StanceFor(SquadCA squad, in SquadDesireSignals signals)
 		{
-			if (!states.TryGetValue(squad, out var st))
-				states[squad] = st = new DesireState();
-
-			SquadDesireEval.Urgencies(in signals, urgencies);
-			SquadDesireEval.AddBias(urgencies, Personality, Info.BiasCapMilli);
-
-			for (var i = 0; i < SquadDesireEval.StanceCount; i++)
-				st.Desires[i] = st.Primed
-					? SquadDesireEval.Step(st.Desires[i], urgencies[i], Math.Max(0, Info.LeakPermille))
-					: urgencies[i];
-
-			st.Primed = true;
-			st.LastSeenTick = signals.WorldTick;
-
-			var next = SquadDesireEval.Pick(st.Desires, st.Current, Math.Max(0, Info.HysteresisMilli),
-				signals.WorldTick - st.LastSwitchTick >= Math.Max(0, Info.MinDwellTicks));
-			if (next != st.Current)
-			{
-				st.Current = next;
-				st.LastSwitchTick = signals.WorldTick;
-			}
-
-			return (SquadDesireStance)st.Current;
+			if (!states.TryGetValue(squad, out var state))
+				states[squad] = state = new SquadDesireMemory();
+			return state.Evaluate(in signals, Personality, Info.LeakPermille,
+				Info.HysteresisMilli, Info.MinDwellTicks, Info.BiasCapMilli);
 		}
 
 		void IBotTick.BotTick(IBot bot)

@@ -136,13 +136,6 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				? owner.SquadManager.PredictsWin(owner, enemyUnits)
 				: AttackOrFleeFuzzyCA.Default.CanAttack(owner.Units.ConvertAll(u => u.Actor), enemyUnits);
 
-			// LEARN-P6 (SPEC §11): armed + provider = the desire provider's picked stance replaces the
-			// binary verdict — Attack commits below, every other stance takes the retreat path. The
-			// provider owns stance desirability; this branch only packages facts and executes.
-			// Switch off or no provider = engage stays the unchanged binary call.
-			if (owner.SquadManager.Info.UseSquadDesire && owner.SquadManager.SquadDesire is { } desire)
-				engage = desire.StanceFor(owner, owner.SquadManager.SquadDesireSignalsFor(owner, enemyUnits)) == SquadDesireStance.Attack;
-
 			// INC-N combat veto (§12.31): the veto cancels a commit the provider predicts loses — the squad
 			// takes the same retreat path as a losing fuzzy call. No provider = false, nothing changes.
 			if (engage && owner.SquadManager.VetoEngage(owner, enemyUnits, alreadyCommitted: false, out _))

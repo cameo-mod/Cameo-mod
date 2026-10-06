@@ -622,8 +622,8 @@ namespace OpenRA.Mods.CA.Traits
 		public readonly int ProtectionRallyHysteresisCells = 4;
 
 		[Desc("LEARN-P6 (BP_squad_desire, SPEC 2026-10-05 §11): the enabled IBotSquadDesire provider's " +
-			"picked stance replaces the binary engage/retreat verdict in the ground idle branch — " +
-			"Attack commits, every other stance takes the retreat path. The provider computes " +
+			"picked stance drives six distinct ground routes at the regular squad cadence, with " +
+			"an independent integer combat safety guard. The provider computes " +
 			"desirability from the packaged fog-honest SquadDesireSignals; it is the only owner of " +
 			"stance choice (§19.3). Off, or no enabled provider, keeps the unchanged binary call.")]
 		public readonly bool UseSquadDesire = false;
@@ -855,7 +855,7 @@ namespace OpenRA.Mods.CA.Traits
 			}
 		}
 		// LEARN-P6 (SPEC §11): the enabled squad-desire provider this tick. Absent (classic, switch
-		// off) the ground idle branch keeps the binary engage/retreat call bit-identical.
+		// off) SquadCA.Update keeps the legacy state machine and its order calls unchanged.
 		IBotSquadDesire squadDesire;
 		int squadDesireTick = -1;
 		internal IBotSquadDesire SquadDesire
@@ -3010,6 +3010,43 @@ namespace OpenRA.Mods.CA.Traits
 		internal bool PredictsWin(SquadCA squad, IEnumerable<Actor> enemies) =>
 			PredictedRatio(squad, enemies) * 100 >= (double)RetreatRatioPct * Info.EngageMarginPct / 100;
 
+		internal CPos DesireHome => initialBaseCenter;
+		List<Actor> desireEnemies;
+		int desireEnemiesTick = -1;
+
+		internal List<Actor> DesireObservedEnemies()
+		{
+			if (desireEnemiesTick != World.WorldTick)
+			{
+				desireEnemiesTick = World.WorldTick;
+				// Visibility is unconditional here, even with the classic manager's fog switch off.
+				desireEnemies = World.Actors.Where(a => a.IsInWorld && !a.IsDead
+					&& a.CanBeViewedByPlayer(Player) && IsPreferredEnemyUnit(a))
+					.OrderBy(a => a.ActorID).ToList();
+				CanaryObservedAll(desireEnemies, "squad-desire-visible-targets");
+			}
+			return desireEnemies;
+		}
+
+		internal int DesireRatioMilli(SquadCA squad, IEnumerable<Actor> enemies)
+		{
+			var rules = World.Map.Rules;
+			IntegerCombatPredictor.Unit Profile(Actor actor)
+			{
+				var profile = IntegerCombatPredictor.Profile(rules, actor.Info);
+				return profile with { Hp = actor.TraitOrDefault<IHealth>()?.HP ?? profile.Hp };
+			}
+			var own = squad.Units.Where(u => !unitCannotBeOrdered(u.Actor))
+				.Select(u => (Profile(u.Actor), 1)).ToArray();
+			var foes = enemies.Where(a => a.CanBeViewedByPlayer(Player) && a.Info.HasTraitInfo<AttackBaseInfo>())
+				.Select(a => (Profile(a), 1)).ToArray();
+			CanaryObservedAll(enemies.Where(a => a.CanBeViewedByPlayer(Player)), "squad-desire-integer-ratio");
+			return IntegerCombatPredictor.RatioMilli(own, foes);
+		}
+
+		internal bool DesireCanEngage(SquadCA squad, IEnumerable<Actor> enemies) =>
+			SquadDesireOrders.CanEngage(DesireRatioMilli(squad, enemies), RetreatRatioPct, Info.EngageMarginPct);
+
 		// LEARN-P6 (SPEC §11): the scatter normaliser — a member this far from the squad centre
 		// counts as fully scattered (ScatterMilli = mean member distance vs this, clamped to 1000).
 		static readonly long ScatterReferenceLength = WDist.FromCells(16).Length;
@@ -3020,16 +3057,18 @@ namespace OpenRA.Mods.CA.Traits
 		// same observed-enemy scan around the base centre. All strengths are ValuedInfo cost sums.
 		internal SquadDesireSignals SquadDesireSignalsFor(SquadCA squad, List<Actor> enemyUnits)
 		{
-			var enemyValue = 0;
+			long enemyValue = 0;
 			foreach (var e in enemyUnits)
-				enemyValue += UnitValue(e);
+				if (e.CanBeViewedByPlayer(Player))
+					enemyValue += Math.Max(0, UnitValue(e));
 
-			var baseValue = 0;
+			long baseValue = 0;
 			foreach (var e in VisibleEnemiesNear(World.Map.CenterOfCell(initialBaseCenter), WDist.FromCells(Info.MaxBaseRadius)))
-				baseValue += UnitValue(e);
+				baseValue += Math.Max(0, UnitValue(e));
 
 			var count = 0;
-			var healthSum = 0;
+			long ownValue = 0;
+			long healthSum = 0;
 			long scatterSum = 0;
 			var centre = squad.CenterPosition;
 			foreach (var u in squad.Units)
@@ -3038,20 +3077,21 @@ namespace OpenRA.Mods.CA.Traits
 					continue;
 
 				count++;
+				ownValue += Math.Max(0, UnitValue(u.Actor));
 				var h = u.Actor.TraitOrDefault<IHealth>();
-				healthSum += h == null || h.MaxHP <= 0 ? SquadDesireEval.Scale : h.HP * SquadDesireEval.Scale / h.MaxHP;
+				healthSum += h == null || h.MaxHP <= 0 ? SquadDesireEval.Scale : (int)((long)h.HP * SquadDesireEval.Scale / h.MaxHP);
 				scatterSum += Math.Min(ScatterReferenceLength, (u.Actor.CenterPosition - centre).Length);
 			}
 
-			var healthMilli = count > 0 ? healthSum / count : SquadDesireEval.Scale;
+			var healthMilli = count > 0 ? (int)Math.Clamp(healthSum / count, 0, SquadDesireEval.Scale) : SquadDesireEval.Scale;
 			var scatterMilli = count > 0
 				? (int)Math.Min(SquadDesireEval.Scale, scatterSum / count * SquadDesireEval.Scale / ScatterReferenceLength)
 				: 0;
-			var ratioMilli = (int)Math.Min(SquadDesireEval.MaxRatioMilli,
-				PredictedRatio(squad, enemyUnits) * SquadDesireEval.Scale);
+			var ratioMilli = Math.Min(SquadDesireEval.MaxRatioMilli, DesireRatioMilli(squad, enemyUnits));
 
 			return new SquadDesireSignals(
-				SquadValueOf(squad), enemyValue, baseValue, ratioMilli, healthMilli, scatterMilli,
+				(int)Math.Min(int.MaxValue, ownValue), (int)Math.Min(int.MaxValue, enemyValue),
+				(int)Math.Min(int.MaxValue, baseValue), ratioMilli, healthMilli, scatterMilli,
 				squad.IsTargetValid, squad.Type is SquadCAType.Guerrilla or SquadCAType.Harass, World.WorldTick);
 		}
 

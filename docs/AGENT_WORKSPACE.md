@@ -33,6 +33,7 @@ and every other agent can see the same picture without asking. If your row is st
 
 | Agent | Model / host | Branch | File-set it owns | Status |
 |---|---|---|---|---|
+| **Codex Sol (team slot 01a11068)** | GPT-6.1 Sol / AionUi | `codex/learn-p6-fix` | P6 provider, ground stance controller, integer predictor, regression tests, scoped docs | leader-authorized 2026-10-06; review handoff; independent review and replay gates pending |
 | **Claude-Local** | Opus 5, local CLI | `claude/weapon_inherit_audit_and_map` | the REFERENCE pipeline: `tools/balance/{assign_references,reference_targets,reference_distribution,reference_coverage,build_reference_report,faction_routes}.py`, `tools/reference/variant_pool.py` | ACTIVE 2026-09-13 |
 | **Codex (Astra)** | GPT-6, Blackrobe's host | `codex/recovery-pr345-merge-20260912`, `codex/overnight-integration-20260910` | INI/DTA extraction, evidence gates, the four-faction review pipeline, `tools/tests/` | ACTIVE 2026-09-13 |
 | Devin — Aurora | Devin AI | `devin/aurora/lane*` | AA range/audit lanes, extractor cargo | idle since 2026-09-08 |
