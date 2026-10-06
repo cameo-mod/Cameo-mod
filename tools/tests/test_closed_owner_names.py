@@ -13,6 +13,7 @@ from miniyaml import Ruleset
 from dump_resolved import node_to_obj
 import extract_stats
 from weapon_name_map_checks import assert_no_old_weapon_names, assert_owned_weapon_consumers
+from owned_weapon_history import restore_gps_shadow_names
 
 
 def digest(obj):
@@ -65,7 +66,7 @@ class ClosedOwnerNameTests(unittest.TestCase):
         self.assertEqual(len(self.before['routes']), 12)
         counts = collections.Counter()
         for actor, slots in self.before['weapon_slots'].items():
-            obj = node_to_obj(self.rules.resolve(actor))
+            obj = restore_gps_shadow_names(node_to_obj(self.rules.resolve(actor)))
             for slot, old in slots.items():
                 counts[slot.split('@')[0]] += 1
                 self.assertEqual(obj[slot]['Weapon'], self.mapping[old], (actor, slot))

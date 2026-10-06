@@ -301,6 +301,14 @@ class TdNavalRenameTests(unittest.TestCase):
                         current = value.get('Weapon')
                         if current in reverse:
                             value['Weapon'] = reverse[current]
+                # RADAR-ALLY (646bddf51) swapped RangedGpsDot/RangedGpsProvider for the
+                # allied-sharing Cameo shadows on the shared defaults. The shadow carries
+                # identical fields, so a name-level normalization keeps the whole-payload
+                # comparison load-bearing instead of whitelisting a pair of diff lines.
+                for shadow, original in (('CameoRangedGpsDot', 'RangedGpsDot'),
+                                         ('CameoRangedGpsProvider', 'RangedGpsProvider')):
+                    if shadow in after:
+                        after[original] = after.pop(shadow)
                 diffs = [d for d in self.tree_diff(before, after)
                          if not self._authorized_post_baseline_diff(d, new)]
                 self.assertEqual([], diffs)

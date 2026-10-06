@@ -11,6 +11,7 @@ ROOT = pathlib.Path(__file__).resolve().parents[2]
 sys.path[:0] = [str(ROOT/'tools/audit'), str(ROOT/'tools/balance')]
 from miniyaml import Ruleset
 from dump_resolved import node_to_obj
+from owned_weapon_history import restore_gps_shadow_names
 import extract_stats
 
 
@@ -54,7 +55,7 @@ class TigerOwnershipTests(unittest.TestCase):
         count = 0
         for actor,route in self.before['routes'].items():
             reverse = {n:o for o,n in route.items()}
-            obj = node_to_obj(self.rules.resolve(actor))
+            obj = restore_gps_shadow_names(node_to_obj(self.rules.resolve(actor)))
             for key,value in obj.items():
                 if key.split('@')[0]=='Armament' and value.get('Weapon') in reverse:
                     value['Weapon'] = reverse[value['Weapon']]

@@ -11,6 +11,8 @@ from functools import lru_cache
 import pathlib
 import sys
 
+from owned_weapon_history import GPS_SHADOW_ORIGINAL
+
 ENDPOINT_COHORT = {
     'NaxiHetzerDestroyer', 'NaxiHetzerDestroyer_elite', 'NaxiHetzerDestroyerCorrosion',
     'NaxiAntiTankCannon', 'NaxiAntiTankCannon_elite', 'NaxiAntiTankCannonCorrosion',
@@ -66,6 +68,9 @@ def restore_owned_checkpoint_actor(test, rules, cohort, actor):
     """Reverse only the recorded post-owner actor changes in a validated copy."""
     from dump_resolved import node_to_obj
     obj = node_to_obj(rules.resolve(actor))
+    # RADAR-ALLY (646bddf51): the defaults now carry the field-identical
+    # CameoRangedGps* shadows; recorded fingerprints name the original traits.
+    obj = {GPS_SHADOW_ORIGINAL.get(key, key): value for key, value in obj.items()}
     record = owned_checkpoint_history()[cohort]['resolved_actors'][actor]
     digest = hashlib.sha256(json.dumps(obj, sort_keys=True,
                             separators=(',', ':')).encode()).hexdigest()

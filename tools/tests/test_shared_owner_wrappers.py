@@ -7,6 +7,7 @@ from test_closed_remaining_names import ROOT, Ruleset, node_to_obj, ordered, res
 sys.path.insert(0, str(ROOT / 'tools/balance'))
 import extract_stats
 from owned_weapon_wrappers import IDENTITY_WRAPPERS, is_reviewed_owner_wrapper
+from owned_weapon_history import restore_gps_shadow_names
 
 
 def digest(obj):
@@ -66,10 +67,10 @@ class SharedOwnerWrapperTests(unittest.TestCase):
             weapons = {c.get('Weapon') for c in node.children}
             self.assertTrue(set(route.values()) <= weapons, actor)
             self.assertFalse(set(route) & weapons, actor)
-            self.assertEqual(digest(restore(node_to_obj(node), self.reverse)), self.before['all_actor_hashes'][actor], actor)
+            self.assertEqual(digest(restore(restore_gps_shadow_names(node_to_obj(node)), self.reverse)), self.before['all_actor_hashes'][actor], actor)
 
     def test_legacy_map_alias_is_exactly_unchanged(self):
-        self.assertEqual(digest(node_to_obj(self.rules.resolve('E3'))),
+        self.assertEqual(digest(restore_gps_shadow_names(node_to_obj(self.rules.resolve('E3')))),
                          'db2803f88b0fb30084c5ecfa19f79eb9e164274d0af882c1d9e60266591d7e92')
         weapons = {c.get('Weapon') for c in self.rules.resolve('E3').children_named('Armament')}
         self.assertEqual(weapons, {'Rockets', 'RocketsAMT'})

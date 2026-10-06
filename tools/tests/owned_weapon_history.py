@@ -4,6 +4,20 @@ import pathlib
 
 FIXTURES = pathlib.Path(__file__).resolve().parent / 'fixtures'
 
+# RADAR-ALLY (646bddf51) swapped the RangedGpsDot/RangedGpsProvider traits on the
+# shared defaults for the field-identical allied-sharing Cameo shadows. Every
+# resolved-actor fixture predates that rename, so comparisons normalize the key
+# name only — a payload-level shadow change still mismatches the recorded hash.
+GPS_SHADOW_ORIGINAL = {
+    'CameoRangedGpsDot': 'RangedGpsDot',
+    'CameoRangedGpsProvider': 'RangedGpsProvider',
+}
+
+
+def restore_gps_shadow_names(obj):
+    """Rename the CameoRangedGps* shadow keys back in a resolved-actor payload."""
+    return {GPS_SHADOW_ORIGINAL.get(key, key): value for key, value in obj.items()}
+
 
 def restore_chained_identity_fields(obj, additional=None):
     """Reverse pinned later chain/wrapper identities for earlier frozen fixtures."""
@@ -15,7 +29,8 @@ def restore_chained_identity_fields(obj, additional=None):
 
     def walk(value):
         if isinstance(value, dict):
-            return {key: walk(child) for key, child in value.items()}
+            return {GPS_SHADOW_ORIGINAL.get(key, key): walk(child)
+                    for key, child in value.items()}
         if isinstance(value, list):
             return [walk(child) for child in value]
         if isinstance(value, str):
