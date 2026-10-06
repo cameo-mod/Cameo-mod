@@ -14,7 +14,7 @@ from fit_opponent_signatures import dump_yaml, fit
 
 def match_record():
     return {
-        "schema": 3, "record_id": "game|seat_1", "player": {"seat": "seat_1"},
+        "schema": 3, "record_id": "00000000-0000-0000-0000-000000000001|seat_1", "player": {"seat": "seat_1"},
         "seats": [{"seat": "seat_1", "faction": "td_gdi", "home": "1,2"}],
         "opponents": [{"seat": "seat_2", "faction": "td_nod", "home": "3,4"}],
         "allies": [], "opponent_signatures": [{"seat": "seat_2", "seen": {"faction": "td_nod", "army_value": 16},
@@ -33,7 +33,7 @@ class AnonymousLogSchemaTest(unittest.TestCase):
 
     def test_rejects_non_anonymous_record_id(self):
         row = match_record()
-        row["record_id"] = "game|Multi0"
+        row["record_id"] = "00000000-0000-0000-0000-000000000001|Multi0"
         self.assertFalse(match_ok(row))
 
     def test_fitter_clusters_seen_numeric_signatures(self):

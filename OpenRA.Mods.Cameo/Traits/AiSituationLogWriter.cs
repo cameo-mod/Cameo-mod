@@ -107,6 +107,13 @@ namespace OpenRA.Mods.Cameo.Traits
 			}
 		}
 
+		internal static string AnonymousTarget(string name, IEnumerable<OpenRA.Player> players, Func<OpenRA.Player, string> seatOf)
+		{
+			if (string.IsNullOrEmpty(name)) return "";
+			var target = players.FirstOrDefault(p => p != null && p.InternalName == name);
+			return target == null ? "" : seatOf(target);
+		}
+
 		static bool AllBotsResolved(World world)
 		{
 			return world.Players.Where(AiMatchLogWriter.IsLoggableBot)
@@ -319,7 +326,7 @@ namespace OpenRA.Mods.Cameo.Traits
 				mapUid, "seat_1", faction, botType, currentPersonality, situation);
 		}
 
-		static void AppendSituation(StringBuilder builder, Func<OpenRA.Player, string> seatOf, string gameUid, string worldGameUid,
+		internal static void AppendSituation(StringBuilder builder, Func<OpenRA.Player, string> seatOf, string gameUid, string worldGameUid,
 			string mapUid, string playerName, string faction, string botType, string currentPersonality,
 			BotSituation situation)
 		{
@@ -440,7 +447,7 @@ namespace OpenRA.Mods.Cameo.Traits
 			AiMatchLogWriter.AppendNumber(builder, "team_shared_target", situation.TeamSharedTarget);
 			AiMatchLogWriter.AppendNumber(builder, "team_any_climax", situation.TeamAnyClimax);
 			AiMatchLogWriter.AppendNumber(builder, "coalition_phase", situation.CoalitionPhase);
-			AiMatchLogWriter.AppendString(builder, "coalition_main_target", situation.CoalitionMainTarget);
+			AiMatchLogWriter.AppendString(builder, "coalition_main_target", AnonymousTarget(situation.CoalitionMainTarget, situation.Enemies.Keys, seatOf));
 
 			// BP-2 (§19.15): the front/back advisor's own diagnostics — publish-always;
 			// all zeros while no advisor is active, the honest answer.

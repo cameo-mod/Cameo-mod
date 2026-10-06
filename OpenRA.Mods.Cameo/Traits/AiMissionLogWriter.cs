@@ -153,9 +153,16 @@ namespace OpenRA.Mods.Cameo.Traits
 		static string Anonymous(string value, IReadOnlyDictionary<string, string> replacements)
 		{
 			if (string.IsNullOrEmpty(value)) return value;
-			foreach (var pair in replacements)
-				value = value.Replace(pair.Key, pair.Value, StringComparison.Ordinal);
-			return value;
+			// IdentityKey has exactly three colon-delimited fields. Replace only the target,
+			// never a substring of the mission type, region or a prefix-overlapping slot.
+			var parts = value.Split(':');
+			if ((parts.Length == 3 && (parts[0] == "raid" || parts[0] == "recon" || parts[0] == "secure" || parts[0] == "defend")) ||
+				(parts.Length == 4 && parts[0] == "capture"))
+				parts[1] = parts[1] == "self" ? "self" : replacements.GetValueOrDefault(parts[1], "unknown");
+			// Other producer grammars contain actor-type/actor-ID or numeric IDs, not player references.
+			else if (parts[0] != "capture" && parts[0] != "frans" && parts[0] != "garrison_contest" && parts[0] != "veto")
+				return "unknown";
+			return string.Join(":", parts);
 		}
 
 		void ITick.Tick(Actor self)

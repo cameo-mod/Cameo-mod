@@ -45,6 +45,23 @@ namespace OpenRA.Mods.Cameo.Traits
 		int nextAttemptTick;
 		BotTakeoverTracker takeover;
 		readonly Dictionary<OpenRA.Player, List<int[]>> samples = new();
+		readonly Dictionary<OpenRA.Player, BotModules.BotFogMemory> signatureMemory = new();
+		readonly Dictionary<(OpenRA.Player Observer, OpenRA.Player Enemy), List<SignatureSample>> signatures = new();
+		readonly BotModules.MasterAiBotModuleInfo signatureInfo = new();
+		bool gameEnded;
+
+		internal sealed class SignatureSample
+		{
+			public int Tick;
+			public BotModules.EnemyProfile Seen;
+			public BotModules.ObservedActor[] OwnActors;
+		}
+
+		internal static bool SignatureSampleDue(int tick, int lastTick, bool changed, int floorTicks) =>
+			lastTick < 0 || changed || tick - lastTick >= Math.Max(1, floorTicks);
+
+		internal static bool TruthCaptureReady(bool gameEnded, bool allResolved) => gameEnded;
+
 
 		public AiMatchLogWriter(AiMatchLogWriterInfo info)
 		{
@@ -73,6 +90,9 @@ namespace OpenRA.Mods.Cameo.Traits
 		void ITick.Tick(Actor self)
 		{
 			var world = self.World;
+			// Separate, record-only fog memory: never reuse an omniscient bot profile.
+			if (!written && eligibleAtWorldLoad && IsLogOwner() && world.WorldTick % 25 == 0)
+				SampleSignatures(world);
 			if (!written && info.SampleIntervalTicks > 0 && world.WorldTick % info.SampleIntervalTicks == 0)
 				Sample(world);
 
@@ -85,19 +105,25 @@ namespace OpenRA.Mods.Cameo.Traits
 				return;
 			}
 
-			if (AllBotsResolved(world))
-				CaptureAndAppend(world);
+
 		}
 
 		void IGameOver.GameOver(World world)
 		{
-			// World.EndGame pauses before dispatching IGameOver, and paused worlds do not advance ticks.
-			// A retry scheduled here may therefore never run; retries matter for live all-bots-resolved capture.
+			// World.EndGame pauses before dispatching IGameOver. Finish the appender's
+			// bounded mutex retries here, because no future simulation tick is guaranteed.
+			gameEnded = true;
+			if (eligibleAtWorldLoad && IsLogOwner())
+				SampleSignatures(world);
 			CaptureAndAppend(world);
+			for (var i = 0; i < 7 && !written && pendingText != null; i++)
+				TryAppend(world.WorldTick);
 		}
 
 		void CaptureAndAppend(World world)
 		{
+			if (!TruthCaptureReady(gameEnded, false))
+				return;
 			if (written)
 				return;
 
@@ -170,7 +196,7 @@ namespace OpenRA.Mods.Cameo.Traits
 		// game time (every 3000 ticks at the harness's maximum speed, 750 at normal speed).
 		void Sample(World world)
 		{
-			foreach (var player in world.Players.Where(IsLoggedPlayer))
+			foreach (var player in world.Players.Where(IsEligiblePlayer))
 			{
 				var stats = player.PlayerActor.TraitOrDefault<PlayerStatistics>();
 				var resources = player.PlayerActor.TraitOrDefault<PlayerResources>();
@@ -358,14 +384,6 @@ namespace OpenRA.Mods.Cameo.Traits
 			builder.Append(']');
 		}
 
-		bool AllBotsResolved(World world)
-		{
-			// Capture waits for every logged seat to resolve AND for the conversion window
-			// to close: a lobby bot can finish while a human seat can still surrender into
-			// a takeover bot whose record must be written too (boss_review T1).
-			return CaptureReady(world.Players.Where(IsLoggedPlayer).Select(p => p.WinState), OpenTakeoverSeats());
-		}
-
 		internal static bool CaptureReady(IEnumerable<WinState> loggedStates, bool openTakeoverSeats)
 		{
 			return !openTakeoverSeats && loggedStates.All(s => s != WinState.Undefined);
@@ -404,7 +422,7 @@ namespace OpenRA.Mods.Cameo.Traits
 				gameUid = fallbackGameUid;
 
 			var lines = new StringBuilder();
-			foreach (var player in world.Players.Where(IsLoggedPlayer))
+			foreach (var player in world.Players.Where(IsEligiblePlayer))
 			{
 				var recorder = player.PlayerActor.TraitOrDefault<AiMatchLogRecorder>();
 				var stats = player.PlayerActor.TraitOrDefault<PlayerStatistics>();
@@ -418,7 +436,7 @@ namespace OpenRA.Mods.Cameo.Traits
 				AppendString(lines, "record_id", gameUid + "|" + SeatKey(world, player));
 				AppendString(lines, "recorded_utc", DateTime.UtcNow.ToString("o", CultureInfo.InvariantCulture));
 				AppendString(lines, "mod_version", Game.ModData.Manifest.Metadata.Version);
-				AppendString(lines, "game_uid", world.LobbyInfo.GlobalSettings.GameUid ?? "");
+				AppendString(lines, "game_uid", gameUid);
 				AppendString(lines, "map_uid", world.Map.Uid);
 				AppendString(lines, "map_title", world.Map.Title);
 				AppendNumber(lines, "duration_ticks", world.WorldTick);
@@ -490,28 +508,95 @@ namespace OpenRA.Mods.Cameo.Traits
 			return lines.ToString();
 		}
 
-		static void AppendOpponentSignatures(StringBuilder builder, World world, OpenRA.Player subject)
+		void SampleSignatures(World world)
+		{
+			var players = world.Players.Where(IsEligiblePlayer).ToArray();
+			// Snapshot each seat's OWN actors for the deferred truth relabel. These buffers
+			// have no runtime consumer and are not serialized before IGameOver.
+			var byOwner = world.Actors.Where(a => a.IsInWorld && !a.IsDead && a.Info.HasTraitInfo<IOccupySpaceInfo>())
+				.GroupBy(a => a.Owner).ToDictionary(g => g.Key, g => g.ToArray());
+			foreach (var observer in players)
+			{
+				if (observer.Shroud == null)
+					continue;
+				if (!signatureMemory.TryGetValue(observer, out var memory))
+					signatureMemory[observer] = memory = new BotModules.BotFogMemory(observer, signatureInfo);
+				foreach (var enemy in players.Where(p => p != observer && !p.AlliedPlayersMask.Overlaps(observer.PlayerMask)))
+				{
+					var owned = byOwner.GetValueOrDefault(enemy, Array.Empty<Actor>());
+					memory.Observe(enemy, owned, world.WorldTick); // CanBeViewedByPlayer/frozen sightings only.
+					var seen = ProfileOf(memory.Remembered(enemy));
+					seen.FactionName = BotModules.BotFactionView.PublicFactionOf(enemy);
+					var key = (observer, enemy);
+					if (!signatures.TryGetValue(key, out var history))
+						signatures[key] = history = new List<SignatureSample>();
+					var previous = history.LastOrDefault();
+					if (!SignatureSampleDue(world.WorldTick, previous?.Tick ?? -1,
+						previous == null || SignatureChanged(previous.Seen, seen), Math.Max(750, info.SampleIntervalTicks)))
+						continue;
+					var ownActors = owned.Select(a => BotModules.BotFogMemory.Classify(a.Info,
+						a.ActorID, a.Location, a.GetEnabledTargetTypes(), world.WorldTick, signatureInfo)).ToArray();
+					history.Add(new SignatureSample { Tick = world.WorldTick, Seen = seen, OwnActors = ownActors });
+				}
+			}
+		}
+
+		internal static bool SignatureChanged(BotModules.EnemyProfile a, BotModules.EnemyProfile b) =>
+			a.FactionName != b.FactionName || a.ArmyValue != b.ArmyValue || a.InfantryValue != b.InfantryValue ||
+			a.VehicleValue != b.VehicleValue || a.AirValue != b.AirValue || a.NavalValue != b.NavalValue ||
+			a.DefenceValue != b.DefenceValue || a.BuildingCount != b.BuildingCount ||
+			a.HarvesterCount != b.HarvesterCount || a.KnownRegions != b.KnownRegions;
+
+		static BotModules.EnemyProfile ProfileOf(IEnumerable<BotModules.ObservedActor> actors)
+		{
+			var p = new BotModules.EnemyProfile();
+			var regions = new HashSet<(int, int)>();
+			foreach (var a in actors)
+			{
+				if (a.Combat)
+				{
+					p.ArmyValue += a.Value;
+					if (a.Aircraft) p.AirValue += a.Value;
+					else
+					{
+						if (a.Infantry) p.InfantryValue += a.Value;
+						if (a.Vehicle) p.VehicleValue += a.Value;
+						if (a.Naval) p.NavalValue += a.Value;
+					}
+				}
+				if (a.Defence) p.DefenceValue += a.Value;
+				if (a.Building) p.BuildingCount++;
+				if (a.Harvester) p.HarvesterCount++;
+				p.LastSeenTick = Math.Max(p.LastSeenTick, a.LastSeenTick);
+				regions.Add((a.Location.X / 8, a.Location.Y / 8));
+			}
+			p.KnownRegions = regions.Count;
+			return p;
+		}
+
+		void AppendOpponentSignatures(StringBuilder builder, World world, OpenRA.Player subject)
 		{
 			AppendArrayPropertyStart(builder, "opponent_signatures");
-			var enemies = world.Players.Where(IsEligiblePlayer)
-				.Where(p => p != subject && !p.AlliedPlayersMask.Overlaps(subject.PlayerMask))
-				.OrderBy(p => SeatKey(world, p), StringComparer.Ordinal).ToArray();
-			var module = subject.PlayerActor.TraitsImplementing<BotModules.MasterAiBotModule>().FirstOrDefault();
-			for (var i = 0; i < enemies.Length; i++)
-			{
-				if (i > 0) builder.Append(',');
-				var enemy = enemies[i];
-				AppendOpponentSignature(builder, SeatKey(world, enemy), module?.Situation?.Enemies?.GetValueOrDefault(enemy),
-					enemy.Faction.InternalName, Outcome(enemy.WinState));
-			}
+			var first = true;
+			foreach (var enemy in world.Players.Where(IsEligiblePlayer)
+				.Where(p => p != subject && !p.AlliedPlayersMask.Overlaps(subject.PlayerMask)))
+				if (signatures.TryGetValue((subject, enemy), out var history))
+					foreach (var sample in history)
+					{
+						if (!first) builder.Append(',');
+						first = false;
+						AppendOpponentSignature(builder, SeatKey(world, enemy), sample.Seen,
+							enemy.Faction.InternalName, Outcome(enemy.WinState), ProfileOf(sample.OwnActors), sample.Tick);
+					}
 			builder.Append(']');
 		}
 
 		internal static void AppendOpponentSignature(StringBuilder builder, string seat,
-			BotModules.EnemyProfile profile, string trueFaction, string outcome)
+			BotModules.EnemyProfile profile, string trueFaction, string outcome, BotModules.EnemyProfile truth = null, int tick = 0)
 		{
 			AppendObjectStart(builder);
 			AppendString(builder, "seat", seat, true);
+			AppendNumber(builder, "tick", tick);
 			builder.Append(",\"seen\":");
 			if (profile == null) builder.Append("null");
 			else
@@ -533,6 +618,17 @@ namespace OpenRA.Mods.Cameo.Traits
 			AppendObjectPropertyStart(builder, "truth");
 			AppendString(builder, "faction", trueFaction, true);
 			AppendString(builder, "outcome", outcome);
+			truth ??= new BotModules.EnemyProfile();
+			AppendNumber(builder, "army_value", truth.ArmyValue);
+			AppendNumber(builder, "infantry_value", truth.InfantryValue);
+			AppendNumber(builder, "vehicle_value", truth.VehicleValue);
+			AppendNumber(builder, "air_value", truth.AirValue);
+			AppendNumber(builder, "naval_value", truth.NavalValue);
+			AppendNumber(builder, "defence_value", truth.DefenceValue);
+			AppendNumber(builder, "building_count", truth.BuildingCount);
+			AppendNumber(builder, "harvester_count", truth.HarvesterCount);
+			AppendNumber(builder, "known_regions", truth.KnownRegions);
+			AppendNumber(builder, "last_seen_tick", truth.LastSeenTick);
 			builder.Append('}').Append('}');
 		}
 
@@ -645,7 +741,7 @@ namespace OpenRA.Mods.Cameo.Traits
 			builder.Append(']');
 		}
 
-		static bool IsEligiblePlayer(OpenRA.Player player)
+		internal static bool IsEligiblePlayer(OpenRA.Player player)
 		{
 			// Player.NonCombatant only applies to map-side players: the lobby-client
 			// branch of the Player ctor ignores it, so a map-declared inert slot

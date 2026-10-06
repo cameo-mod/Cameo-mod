@@ -104,8 +104,8 @@ namespace OpenRA.Mods.Cameo.Test
 			var root = doc.RootElement;
 		Assert.That(root.GetProperty("schema").GetString(), Is.EqualTo("mission-card/2"));
 			Assert.That(root.GetProperty("record_kind").GetString(), Is.EqualTo("attempt"));
-			Assert.That(root.GetProperty("mission_id").GetString(), Is.EqualTo("capture:Multi1:oilb:526"));
-			Assert.That(root.GetProperty("attempt_id").GetString(), Is.EqualTo("capture:Multi1:oilb:526|A1"));
+			Assert.That(root.GetProperty("mission_id").GetString(), Is.EqualTo("capture:unknown:oilb:526"));
+			Assert.That(root.GetProperty("attempt_id").GetString(), Is.EqualTo("capture:unknown:oilb:526|A1"));
 			Assert.That(root.GetProperty("state").GetString(), Is.EqualTo("SUCCESS"));
 			Assert.That(root.GetProperty("terminal").GetBoolean(), Is.True);
 			Assert.That(root.GetProperty("target_cell").GetString(), Is.EqualTo("61,33"));

@@ -456,17 +456,20 @@ def j_takeover(trigger, seat_player, want):
 
 
 def j_admin_kill(result, ev, blocks):
-    """Scenario e: admin c0 killed -> anonymous seat_1 takeover is logged on c1."""
+    """Scenario e: admin c0 killed -> its anonymous combat seat is logged on c1."""
     if not result["game_started"]:
         return False, "game never started"
     if ev["exceptions"]:
         return False, f"exception logs: {[n for n, b, _ in ev['exceptions']]}"
     if ev["sync_reports"]:
         return False, f"sync reports (desync): {ev['sync_reports']}"
+    # Scenario e has two humans and kills only c0. A disconnect takeover on
+    # the surviving c1 writer identifies that seat without assuming array index 0;
+    # neutral/referee map players precede combatants in World.Players.
     hits = [(n, p, b) for n, p, b in blocks
-            if n == "c1" and p == "seat_1" and b.get("trigger") == "disconnect"]
+            if n == "c1" and re.fullmatch(r"seat_[1-9][0-9]*", p or "") and b.get("trigger") == "disconnect"]
     if not hits:
-        return False, ("no anonymous disconnect takeover block for seat_1 on c1; "
+        return False, ("no anonymous disconnect takeover block on c1; "
                        f"blocks={blocks}")
     return True, f"admin-kill takeover re-elected to c1: {hits}"
 

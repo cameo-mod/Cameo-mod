@@ -1,3 +1,10 @@
+## 2026-10-06 — Codex Sol LEARN-P0-FIX checkpoint
+
+- Branch `codex/learn-p0-fix`, base `229a2563b`, isolated tree `C:/cameo-wt/codex-learn-p0-fix`; all eight review findings addressed with regressions.
+- Privacy references/reader joins, recursive learned/log grammar, all-seat post-game signature relabel, and physical spawn binding; see `docs/design/AI_LOG_PRIVACY.md`.
+- Validation: 1153 C# / 182 related Python passed; rebuilt emitter→fitter→audit PASS; fog manifest adds one documented record-only site (83 files/267 sites); fresh isolated boot PASS, zero exceptions.
+- Next: push, coordinator-owned identical-order trace, independent Devin-Reviewer review; no merge. Earlier P6 settings OOM was an environment issue (lead cleared orphan processes).
+
 # 2026-10-05 — Claude (lead): crash repair, INC 2026-10-05, ars-stutter held back
 
 *Claude.* `inc/2026_10_05` on `inc/2026_10_04g` @ 4cbc73cbf.

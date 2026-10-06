@@ -22,12 +22,12 @@ def fixtures():
                         "player": "Alpha", "tick": 20, "main_target": "Bravo",
                         "enemies": [{"name": "Bravo", "faction": "td_nod", "army_value": 64}]}],
         LOG_NAMES[2]: [{"schema": 1, "kind": "placement", "game_uid": "game-x", "record_id": "game-x|Alpha|20|unit",
-                        "player": "Alpha", "tick": 20, "actor": "td_gdi_tank", "cell": "5,6", "faction": "td_gdi"}],
+                        "player": "Alpha", "tick": 20, "actor": "td_gdi_minigunner", "cell": "5,6", "faction": "td_gdi"}],
         LOG_NAMES[3]: [{"schema": "mission-card/1", "game_uid": "game-x", "player": "Alpha",
                         "mission_id": "raid:Bravo:region_4", "attempt": 1, "attempt_id": "raid:Bravo:region_4|A1",
                         "record_kind": "attempt", "tick": 21}],
         LOG_NAMES[4]: [{"schema": "engagement/1", "game_uid": "game-x", "record_id": "game-x|Alpha|p0",
-                        "player": "Alpha", "tick": 21, "engagement_id": "e7", "record": {"client_id": 4}}],
+                        "player": "Alpha", "tick": 21, "engagement_id": "e7", "context": {"dist_own_base": 4}}],
     }
 
 

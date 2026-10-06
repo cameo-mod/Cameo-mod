@@ -19,9 +19,15 @@ import os
 import re
 import shutil
 import tempfile
+import sys
 from collections import defaultdict
 from datetime import datetime, timezone
 from pathlib import Path
+
+# The migration must emit the same closed grammar that the gate validates.
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "audit"))
+from audit_no_player_names import SHAPES, record_ok, scalar_ok, mission_ok, vocabulary, UID, ROLES
+
 
 LOG_NAMES = (
     "cameo-ai-matches.jsonl",
@@ -64,7 +70,7 @@ def game_key(row: dict) -> str:
 
 
 def is_legacy(filename: str, row: dict) -> bool:
-    return row.get("schema") in OLD[filename]
+    return row.get("schema") in OLD[filename] or (row.get("schema") == CURRENT[filename] and not record_ok(row))
 
 
 def identity_values(filename: str, row: dict) -> set[str]:
@@ -81,6 +87,11 @@ def identity_values(filename: str, row: dict) -> set[str]:
     target = row.get("main_target")
     if isinstance(target, str) and target:
         values.add(target)
+    mission = row.get("mission_id")
+    if isinstance(mission, str):
+        parts = mission.split(":")
+        if ((len(parts) == 3 and parts[0] in {"raid", "recon", "secure", "defend"}) or (len(parts) == 4 and parts[0] == "capture")) and parts[1] not in {"self", "unknown"}:
+            values.add(parts[1])
     return values
 
 
@@ -89,10 +100,13 @@ def id_map(rows: list[tuple[str, dict]]) -> dict[str, dict[str, str]]:
     for filename, row in rows:
         if is_legacy(filename, row):
             names[game_key(row)].update(identity_values(filename, row))
-    return {
-        game: {name: f"seat_{i}" for i, name in enumerate(sorted(values), 1)}
-        for game, values in names.items()
-    }
+    reserved = defaultdict(int)
+    for _, row in rows:
+        seat = row.get("seat") or (row.get("player", {}).get("seat") if isinstance(row.get("player"), dict) else None)
+        if isinstance(seat, str) and re.fullmatch(r"seat_[1-9][0-9]*", seat):
+            reserved[game_key(row)] = max(reserved[game_key(row)], int(seat[5:]))
+    return {game: {name: f"seat_{i}" for i, name in enumerate(sorted(values), reserved[game] + 1)}
+            for game, values in names.items()}
 
 
 def seat_for(row: dict, maps: dict[str, dict[str, str]], old_name: str | None = None) -> str:
@@ -160,9 +174,10 @@ def normalize_row(filename: str, row: dict, maps: dict[str, dict[str, str]]) -> 
     old_id = row.get("record_id")
     p = row.get("player")
     old_player = p.get("name") if isinstance(p, dict) else p if isinstance(p, str) else None
-    seat = seat_for(row, maps, old_player)
+    seat = row.get("seat") or (p.get("seat") if isinstance(p, dict) else None) or seat_for(row, maps, old_player)
     out = scrub_nested(row, mapping, root=True)
-    out["game_uid"] = str(row.get("game_uid") or game_key(row))
+    uid = str(row.get("game_uid") or game_key(row))
+    out["game_uid"] = uid if UID.fullmatch(uid) else "legacy-" + hashlib.sha256(uid.encode()).hexdigest()[:16]
 
     if filename == "cameo-ai-matches.jsonl":
         out["schema"] = 3
@@ -225,7 +240,43 @@ def normalize_row(filename: str, row: dict, maps: dict[str, dict[str, str]]) -> 
         if not suffix:
             suffix = f"p{row.get('tick', 0)}"
         out["record_id"] = f"{out['game_uid']}|{seat}|{anonymous_text(str(suffix), mapping)}"
+    # Unknown payloads cannot become certified simply by bumping their schema.
+    # Preserve canonical fields only; rollback originals remain in the backup.
+    kind = {LOG_NAMES[0]: "match", LOG_NAMES[1]: "situation", LOG_NAMES[2]: "placement",
+            LOG_NAMES[3]: "mission", LOG_NAMES[4]: "engagement"}[filename]
+    out = project(out, kind)
+    if kind == "mission":
+        value = out.get("mission_id", "")
+        out["mission_id"] = value if mission_ok(value) else "unknown"
+        if "attempt" in out:
+            out["attempt_id"] = f"{out['mission_id']}|A{out['attempt']}"
+    elif kind == "placement":
+        out["actor"] = out.get("actor") or "unknown"
+        out["record_id"] = f"{out['game_uid']}|{seat}|{out.get('tick', out.get('placed_tick', 0))}|{out['actor']}|{out.get('cell', '')}"
+    if not record_ok(out):
+        raise ValueError(f"{filename}: cannot convert this record to the anonymous grammar; no files changed")
     return out
+
+
+def project(value, path):
+    if isinstance(value, list):
+        return [project(v, path) for v in value]
+    cleaned = {}
+    for key, item in value.items():
+        if key not in SHAPES.get(path, []):
+            continue
+        child = path + "." + key
+        if child in SHAPES:
+            cleaned[key] = project(item, child) if item is not None else None
+        elif key in {"schema", "record_id", "mission_id", "attempt_id"} or scalar_ok(key, item):
+            cleaned[key] = item
+        elif key in {"losses_by_role", "away_losses_by_role", "own_lost_by_role"}:
+            cleaned[key] = {k:v for k,v in item.items() if k in ROLES and type(v) is int}
+        elif key in {"stats_timeline", "fields_in_reach_unserved_ids"}:
+            cleaned[key] = item
+        elif key in {"killed_by_victim", "own_units", "own_defences", "enemy_units", "enemy_defences", "units", "defences"}:
+            cleaned[key] = {k:v for k,v in item.items() if k in vocabulary()[0] and type(v) is int}
+    return cleaned
 
 
 def migrate(support_dir: Path) -> dict:

@@ -17,7 +17,7 @@ FEATURES = ("army_value", "infantry_value", "vehicle_value", "air_value", "naval
 
 
 def cluster_key(seen: dict) -> tuple:
-    faction = str(seen.get("faction", "unknown"))
+    faction = str(seen.get("faction") or "unknown")
     # Logarithmic buckets make scale differences meaningful without overfitting to map size.
     bands = tuple(int(math.log2(max(0, int(seen.get(k, 0))) + 1)) for k in FEATURES)
     return faction, bands
@@ -25,6 +25,7 @@ def cluster_key(seen: dict) -> tuple:
 
 def fit(paths: list[Path]) -> dict:
     members = defaultdict(list)
+    pairs = defaultdict(int)
     for path in paths:
         for line in path.read_text(encoding="utf-8").splitlines():
             if not line.strip():
@@ -33,15 +34,26 @@ def fit(paths: list[Path]) -> dict:
             if row.get("schema") != 3:
                 continue
             for signature in row.get("opponent_signatures", []):
-                seen = signature.get("seen")
+                seen, truth = signature.get("seen"), signature.get("truth")
                 if isinstance(seen, dict):
-                    members[cluster_key(seen)].append({k: int(seen.get(k, 0)) for k in FEATURES})
+                    recognized = cluster_key(seen)
+                    members[recognized].append({k: int(seen.get(k, 0)) for k in FEATURES})
+                    if isinstance(truth, dict) and all(k in truth for k in FEATURES):
+                        actual = cluster_key(truth)
+                        members[actual].append({k: int(truth[k]) for k in FEATURES})
+                        pairs[(recognized, actual)] += 1
     clusters = []
+    ids = {}
     for (faction, bands), rows in sorted(members.items()):
         center = {k: round(sum(r[k] for r in rows) / len(rows)) for k in FEATURES}
-        clusters.append({"id": f"sig_{len(clusters) + 1:04d}", "faction": faction,
-                         "count": len(rows), "bands": list(bands), "center": center})
-    return {"schema": "cameo-opponent-signatures/1", "source_schema": 3, "clusters": clusters}
+        ident = f"sig_{len(clusters) + 1:04d}"
+        ids[(faction, bands)] = ident
+        clusters.append({"id": ident, "faction": faction, "count": len(rows),
+                         "bands": list(bands), "center": center})
+    relabels = [{"recognized": ids[a], "actual": ids[b], "count": count}
+               for (a, b), count in sorted(pairs.items())]
+    return {"schema": "cameo-opponent-signatures/1", "source_schema": 3,
+            "clusters": clusters, "relabels": relabels}
 
 
 def dump_yaml(data: dict) -> str:
@@ -52,6 +64,12 @@ def dump_yaml(data: dict) -> str:
         lines += [f'  - id: "{c["id"]}"', f'    faction: "{c["faction"]}"',
                   f'    count: {c["count"]}', "    bands: [" + ", ".join(map(str, c["bands"])) + "]", "    center:"]
         lines += [f"      {k}: {c['center'][k]}" for k in FEATURES]
+    lines.append("relabels:")
+    if not data.get("relabels"):
+        lines.append("  []")
+    for p in data.get("relabels", []):
+        lines += [f'  - recognized: "{p["recognized"]}"', f'    actual: "{p["actual"]}"',
+                  f'    count: {p["count"]}']
     return "\n".join(lines) + "\n"
 
 
