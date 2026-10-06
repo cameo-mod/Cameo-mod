@@ -403,6 +403,7 @@ namespace OpenRA.Mods.CA.Traits
 		int refineryLimit;
 		IBotScaleTargets[] scaleTargets;
 		IBotBuildOrderKnobs[] buildOrderKnobs;
+		IBotEconomyLearning[] economyLearning;
 
 		public PowerManager PlayerPower { get; private set; }
 		public int ExcessPower { get; private set; }
@@ -633,6 +634,20 @@ namespace OpenRA.Mods.CA.Traits
 				buildOrderKnobs ??= player.PlayerActor.TraitsImplementing<IBotBuildOrderKnobs>().ToArray();
 				return buildOrderKnobs.FirstEnabled();
 			}
+		}
+
+		// BW_learn_econ: an optional, read-only provider.  It only changes the
+		// existing numerical thresholds below; an absent/disabled provider is exact fallback.
+		public int EconomyExpansionCashDivisor(int fallback)
+		{
+			economyLearning ??= player.PlayerActor.TraitsImplementing<IBotEconomyLearning>().ToArray();
+			return economyLearning.FirstEnabledTraitOrDefault()?.ExpansionCashDivisor(fallback) ?? fallback;
+		}
+
+		public int EconomyProductionCashThreshold(int fallback)
+		{
+			economyLearning ??= player.PlayerActor.TraitsImplementing<IBotEconomyLearning>().ToArray();
+			return economyLearning.FirstEnabledTraitOrDefault()?.ProductionCashThreshold(fallback) ?? fallback;
 		}
 
 		/// <summary>An enabled scale-targets provider's target for the category (DESIGN 19.10); false = keep the BotLimits number.</summary>

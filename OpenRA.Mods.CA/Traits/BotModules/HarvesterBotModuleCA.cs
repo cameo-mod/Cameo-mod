@@ -117,6 +117,7 @@ namespace OpenRA.Mods.CA.Traits
 		BotLimits botLimits;
 		int harvesterLimit;
 		IBotScaleTargets[] scaleTargets;
+		IBotEconomyLearning[] economyLearning;
 
 		public HarvesterBotModuleCA(Actor self, HarvesterBotModuleCAInfo info)
 			: base(info)
@@ -251,6 +252,8 @@ namespace OpenRA.Mods.CA.Traits
 				// the module's fixed MaxHarvesters; without one both apply unchanged.
 				var limit = harvesterLimit;
 				var maxHarvesters = Info.MaxHarvesters;
+				economyLearning ??= player.PlayerActor.TraitsImplementing<IBotEconomyLearning>().ToArray();
+				limit = economyLearning.FirstEnabledTraitOrDefault()?.HarvesterLimit(limit) ?? limit;
 				scaleTargets ??= player.PlayerActor.TraitsImplementing<IBotScaleTargets>().ToArray();
 				if (scaleTargets.TryTarget("harvester", out var scaledLimit))
 				{

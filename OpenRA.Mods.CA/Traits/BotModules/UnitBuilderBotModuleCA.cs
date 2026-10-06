@@ -183,12 +183,29 @@ namespace OpenRA.Mods.CA.Traits
 		// Cameo (§12.23, PP-1): lazy — resolved on first BuildUnit; null keeps the upstream one-queue fill.
 		IBotProductionWidth productionWidth;
 		IBotScaleTargets[] scaleTargets;
+		IBotEconomyLearning[] economyLearning;
 		readonly DerivedUnitWeights derivedUnitWeights = new DerivedUnitWeights();
 
 		int CounterWeight => botLimits?.Info.AdaptiveCounterWeight ?? 0;
 
-		int MaximiseProductionCash => botLimits != null && botLimits.Info.MaximiseProductionCashRequirement >= 0
-			? botLimits.Info.MaximiseProductionCashRequirement : Info.MaximiseProductionCashRequirement;
+		IBotEconomyLearning EconomyLearning
+		{
+			get
+			{
+				economyLearning ??= player.PlayerActor.TraitsImplementing<IBotEconomyLearning>().ToArray();
+				return economyLearning.FirstEnabledTraitOrDefault();
+			}
+		}
+
+		int MaximiseProductionCash
+		{
+			get
+			{
+				var fallback = botLimits != null && botLimits.Info.MaximiseProductionCashRequirement >= 0
+					? botLimits.Info.MaximiseProductionCashRequirement : Info.MaximiseProductionCashRequirement;
+				return EconomyLearning?.CreditFloat(fallback) ?? fallback;
+			}
+		}
 
 		public UnitBuilderBotModuleCA(Actor self, UnitBuilderBotModuleCAInfo info)
 			: base(info)
@@ -317,7 +334,8 @@ namespace OpenRA.Mods.CA.Traits
 				var cashLean = BotPersonalityLeads.Lean(leadProviders, "steamroller");
 
 				// Don't produce if we don't have enough cash
-				if (playerResources.Cash + playerResources.Resources < BotPersonalityLeads.Scaled(Info.ProductionMinCashRequirement, cashLean))
+				var productionFloor = EconomyLearning?.CreditFloat(Info.ProductionMinCashRequirement) ?? Info.ProductionMinCashRequirement;
+				if (playerResources.Cash + playerResources.Resources < BotPersonalityLeads.Scaled(productionFloor, cashLean))
 					return;
 
 				for (var i = 0; i < Info.UnitQueues.Length; i++)

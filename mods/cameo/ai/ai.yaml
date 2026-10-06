@@ -128,6 +128,11 @@
 	GrantConditionOnBotOwner@tier1priors:
 		Condition: tier1_priors
 		Bots:
+	# LEARN-ECON rows 6-9: frozen expansion/harvester/production/credit thresholds.
+	# BW_learn_econ arms only genericbot; absent provider preserves every authored economy rule.
+	GrantConditionOnBotOwner@economylearning:
+		Condition: economy_learning
+		Bots:
 	# Tier-3 pooled bandits (fleet orders 2026-10-03): Thompson-samples a personality arm + an attack-plan overlay
 	# over the EL engagement posteriors in ai/learned/plan_bandits.yaml, with a safety floor. The arm sets Bots
 	# (switch group AO_tier3_bandits); empty by default - inert on master.
@@ -4059,6 +4064,9 @@ Player:
 	BotLearnedPriors:
 		UseLearnedPriors: true
 		RequiresCondition: genericbot
+	# BW_learn_econ: provider only. CA builders remain the only economy order owners.
+	EconomyLearningBotModule:
+		RequiresCondition: genericbot && economy_learning
 	# LC5 (AI_MASTER_PLAN §3): the ownership watchdog. Read-only (never orders, claims or releases), so it runs on
 	# classic too: classic's squad layer is the baseline the genericbot owners are compared against. Active in
 	# bot-only matches (the A/B harness) and with Debug.BotDebug; the counts land in cameo-ai-matches.jsonl.

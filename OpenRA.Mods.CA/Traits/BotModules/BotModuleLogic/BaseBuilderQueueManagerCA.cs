@@ -112,6 +112,7 @@ namespace OpenRA.Mods.CA.Traits
 			{
 				var threshold = botLimits != null && botLimits.Info.NewProductionCashThreshold >= 0
 					? botLimits.Info.NewProductionCashThreshold : baseBuilder.Info.NewProductionCashThreshold;
+				threshold = baseBuilder.EconomyProductionCashThreshold(threshold);
 				var knobs = baseBuilder.BuildOrderKnobs;
 				if (knobs == null || threshold <= 0)
 					return threshold;
@@ -444,7 +445,8 @@ namespace OpenRA.Mods.CA.Traits
 						var numTech = playerBuildings.Count(a => baseBuilder.Info.FragileTypes.Contains(a.Info.Name))
 							+ (baseBuilder.Info.FragileTypes.Contains(currentBuilding.Item) ? 1 : 0);
 
-						var tolerateOnCash = playerResources.GetCashAndResources() / Math.Max(baseBuilder.Info.PerExpansionTolerateOnCash, 1);
+						var expansionCashDivisor = baseBuilder.EconomyExpansionCashDivisor(baseBuilder.Info.PerExpansionTolerateOnCash);
+						var tolerateOnCash = playerResources.GetCashAndResources() / Math.Max(expansionCashDivisor, 1);
 
 						// REF-1 B4 (§12.24 v2): under the refinery law the raw refinery total is replaced by
 						// coverage — nudge an expansion when every anchor in reach is served and unserved anchors
