@@ -39,6 +39,7 @@ and every other agent can see the same picture without asking. If your row is st
 | Devin — Ember | Devin AI (SWE-2 Max) | `devin/ember/b13-corrino-crate` | naming sweeps (R18 dot-rule), W7 remainders, versus-profile audit (R16), audit-tool fixes | ACTIVE 2026-09-26 — #488–#503 merged; #504 open; queue clean, awaiting assignment |
 | Devin — Nova | Devin AI | `devin/nova/*` | naming sweeps, AreaDamage class-2d, dead-field scales | idle since 2026-09-06 |
 | **OMP Astra** | GPT-6 Astra, Blackrobe's host | `omp/ready_deployment_20260928` | scout ownership follow-up, classic-four regression callers, reference/AI status corrections; scoped PR deployment | VERIFIED 2026-09-28; engine rollout remains gated on the human click-test |
+| **gpt-6.1-sol** | GPT-6.1 Sol, Team slot 01a11068 | `codex/context-providers` | new context schemas, pure public-map graph/window/encoder, context audit and focused tests; BX telemetry adapter after reviewed P0 lands | ACTIVE 2026-10-06; local core checkpoint, final runtime gates pending |
 
 **Signing rule (restating `CLAUDE.md` rule 10 because it keeps being got wrong):** sign with your
 OWN identity and your REAL model name. Claude Opus 5 signs `Co-Authored-By: Claude Opus 5
