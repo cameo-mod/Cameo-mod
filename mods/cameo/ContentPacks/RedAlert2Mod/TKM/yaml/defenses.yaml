@@ -35,7 +35,7 @@ tkm_bunker:
 		LocalOffset: 256,0,256
 		MuzzleSequence: muzzle
 		RequiresCondition: td_gdi_upgrade_armorpiercingbullets
-	AttackOpenTopped:
+	AttackGarrisoned:
 		Armaments: garrisoned
 		PortOffsets: 300,400,200, -400,500,200, 300,-400,200, -400,-500,200
 		PauseOnCondition: chronobeamed
