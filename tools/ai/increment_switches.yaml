@@ -262,3 +262,6 @@ groups:
       Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla, exploit_expansion, exploit_steamroller, exploit_tech
     SquadManagerBotModuleCA:
       UseSquadDesire: true
+  BV_learn_fight:                    # LEARN-FIGHT rows 1-3: arms frozen offline fight thresholds; genericbot only, classic has no provider
+    GrantConditionOnBotOwner@fightlearning:
+      Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla, exploit_expansion, exploit_steamroller, exploit_tech

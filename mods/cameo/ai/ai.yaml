@@ -134,6 +134,11 @@
 	GrantConditionOnBotOwner@tier1priors:
 		Condition: tier1_priors
 		Bots:
+	# LEARN-FIGHT threshold rows. The BK arm fills the genericbot list; empty keeps
+	# FightThresholdsBotModule disabled and all classic thresholds byte-identical.
+	GrantConditionOnBotOwner@fightlearning:
+		Condition: fightlearning
+		Bots:
 	# Tier-3 pooled bandits (fleet orders 2026-10-03): Thompson-samples a personality arm + an attack-plan overlay
 	# over the EL engagement posteriors in ai/learned/plan_bandits.yaml, with a safety floor. The arm sets Bots
 	# (switch group AO_tier3_bandits); empty by default - inert on master.
@@ -5306,6 +5311,11 @@ Player:
 	# separately from the veto so the pure-predictor A/B can run without fitted priors.
 	EngagementPriorsBotModule:
 		RequiresCondition: genericbot && tier1_priors
+	# LEARN-FIGHT: frozen threshold rows fitted offline from anonymous engagements.  The existing
+	# EngagementPriors provider remains the sole delivery x armour calibration consumer; this provider
+	# supplies only squad/veto hysteresis thresholds and is absent unless BV_learn_fight is armed.
+	FightThresholdsBotModule:
+		RequiresCondition: genericbot && fightlearning
 
 World:
 	BeaconTracker:
