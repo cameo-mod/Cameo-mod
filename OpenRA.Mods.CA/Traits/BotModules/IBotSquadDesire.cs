@@ -14,8 +14,8 @@ namespace OpenRA.Mods.CA.Traits
 {
 	/// <summary>
 	/// LEARN-P6 (SPEC 2026-10-05 §11/A4): the six postures a squad can want. The provider picks
-	/// one per squad per eval; the P6 consumer maps every non-Attack pick onto the classic
-	/// not-engage path, so this list is the decision vocabulary, not a state machine.
+	/// one per squad per eval. The ground squad controller executes six distinct routes;
+	/// an independent integer combat guard blocks unsafe attacks immediately.
 	/// </summary>
 	public enum SquadDesireStance { Attack, Defend, Retreat, Regroup, Harass, Reinforce }
 
@@ -37,7 +37,7 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>Observed enemy value near the own base centre (MaxBaseRadius).</summary>
 		public readonly int BaseEnemyValue;
 
-		/// <summary>The shared combat predictor's own/enemy ratio x1000, clamped to [0, 4000].</summary>
+		/// <summary>The integer rules-derived combat predictor's own/enemy ratio x1000, clamped to [0, 4000].</summary>
 		public readonly int PredictedRatioMilli;
 
 		/// <summary>Mean health of the orderable members, 0..1000.</summary>

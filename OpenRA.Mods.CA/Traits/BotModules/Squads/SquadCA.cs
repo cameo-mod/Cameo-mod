@@ -63,6 +63,8 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 		// until the whole squad is idle (the episode's end); a new leg then re-rolls.
 		internal CPos? FleeHomeCell;
 
+		SquadDesireController desireController;
+
 		// internal CPos BaseLocation;
 
 		public SquadCA(IBot bot, SquadManagerBotModuleCA squadManager, SquadCAType type)
@@ -126,14 +128,19 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 		{
 			if (IsValid)
 			{
+				var desire = SquadManager.Info.UseSquadDesire && SquadDesireOrders.Supports(Type)
+					? SquadManager.SquadDesire : null;
 				// LC6: the target the state is about to act on must still be
 				// observable — an Actor that went hidden while committed is
 				// stale consumption and the canary logs it. FrozenActor memory
 				// targets are legal by design and skip the check.
-				if (Target.Type == TargetType.Actor)
+				if (desire == null && Target.Type == TargetType.Actor)
 					SquadManager.CanaryObserved(Target.Actor, "squad-update-target");
 
-				FuzzyStateMachine.Update(this);
+				if (desire != null)
+					(desireController ??= new SquadDesireController()).Tick(this, desire);
+				else
+					FuzzyStateMachine.Update(this);
 
 				if (SquadManager.Info.UseSquadOrderDedup)
 				{
