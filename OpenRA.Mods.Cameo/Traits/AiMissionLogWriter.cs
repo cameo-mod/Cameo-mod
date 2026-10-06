@@ -153,16 +153,60 @@ namespace OpenRA.Mods.Cameo.Traits
 		static string Anonymous(string value, IReadOnlyDictionary<string, string> replacements)
 		{
 			if (string.IsNullOrEmpty(value)) return value;
-			// IdentityKey has exactly three colon-delimited fields. Replace only the target,
-			// never a substring of the mission type, region or a prefix-overlapping slot.
+			// A player name can sit at any colon-delimited position — a nested frans:<mission id>,
+			// a malformed capture arity — so map every segment that is exactly an identity
+			// (an exact match only: Multi1 must not shadow Multi10).
 			var parts = value.Split(':');
-			if ((parts.Length == 3 && (parts[0] == "raid" || parts[0] == "recon" || parts[0] == "secure" || parts[0] == "defend")) ||
-				(parts.Length == 4 && parts[0] == "capture"))
-				parts[1] = parts[1] == "self" ? "self" : replacements.GetValueOrDefault(parts[1], "unknown");
-			// Other producer grammars contain actor-type/actor-ID or numeric IDs, not player references.
-			else if (parts[0] != "capture" && parts[0] != "frans" && parts[0] != "garrison_contest" && parts[0] != "veto")
-				return "unknown";
-			return string.Join(":", parts);
+			for (var i = 0; i < parts.Length; i++)
+				if (replacements.TryGetValue(parts[i], out var seat))
+					parts[i] = seat;
+			// Then emit only the shapes the closed log grammar (mission_ok in
+			// tools/audit/audit_no_player_names.py) accepts; anything else — including a
+			// pass-through prefix carrying a nested or malformed id — collapses to "unknown"
+			// rather than leaking a token.
+			if (parts.Length == 3 && (parts[0] == "raid" || parts[0] == "recon" || parts[0] == "secure" || parts[0] == "defend"))
+			{
+				if (!IsSeatToken(parts[1]))
+					parts[1] = "unknown";
+				return IsRegion(parts[2]) ? string.Join(":", parts) : "unknown";
+			}
+			if (parts[0] == "capture")
+			{
+				// capture:<actorType>:<actorId>, or capture:<target>:<actorType>:<actorId>.
+				if (parts.Length == 3 && !IsSeatToken(parts[1]) && IsNumeric(parts[2]))
+					return string.Join(":", parts);
+				if (parts.Length == 4 && !IsSeatToken(parts[2]) && IsNumeric(parts[3]))
+				{
+					if (!IsSeat(parts[1]))
+						parts[1] = "unknown";
+					return string.Join(":", parts);
+				}
+			}
+			else if (parts.Length == 2 && parts[0] == "frans" && IsNumeric(parts[1]) ||
+				parts.Length == 2 && parts[0] == "garrison_contest" && parts[1].Length > 1 && parts[1][0] == 'a' && IsNumeric(parts[1][1..]) ||
+				parts.Length == 3 && parts[0] == "veto" && IsVetoKind(parts[1]) && IsNumeric(parts[2]))
+				return string.Join(":", parts);
+			return "unknown";
+		}
+
+		static bool IsSeat(string s) =>
+			s.Length > 5 && s.StartsWith("seat_", StringComparison.Ordinal) && s[5] is >= '1' and <= '9' && IsNumeric(s[5..]);
+
+		static bool IsSeatToken(string s) => IsSeat(s) || s == "self" || s == "unknown";
+
+		static bool IsRegion(string s) =>
+			s.Length > 1 && s[0] == 'r' && IsNumeric(s[1..]) ||
+			s.Length > 2 && s[0] == 'r' && s[1] == '-' && IsNumeric(s[2..]) ||
+			s.Length > 7 && s.StartsWith("region_", StringComparison.Ordinal) && IsNumeric(s[7..]);
+
+		static bool IsVetoKind(string s) =>
+			s == "attack" || s == "defend" || s == "field" || s == "retreat" || s == "flee" || s == "engage";
+
+		static bool IsNumeric(string s)
+		{
+			if (s.Length == 0) return false;
+			foreach (var c in s) if (c is < '0' or > '9') return false;
+			return true;
 		}
 
 		void ITick.Tick(Actor self)

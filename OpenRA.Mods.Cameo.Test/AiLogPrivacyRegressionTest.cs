@@ -103,6 +103,43 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void MissionIdsWithNamesInAnyPositionOrMalformedArityCannotLeak()
+		{
+			var map = new Dictionary<string, string> { ["Bravo"] = "seat_13", ["Bravo2"] = "seat_14" };
+			string MissionId(string id)
+			{
+				var record = new BotMissionRecord { MissionId = id, Attempt = 1, Tick = 750 };
+				var l = AiMissionLogWriter.BuildLine(record, "00000000-0000-0000-0000-000000000001", "map", "map", "seat_4", map, DateTime.UnixEpoch);
+				using var doc = JsonDocument.Parse(l);
+				return doc.RootElement.GetProperty("mission_id").GetString();
+			}
+
+			// Exact-match replacement, never a substring: Bravo2 must not inherit Bravo's seat.
+			Assert.That(MissionId("raid:Bravo2:r4"), Is.EqualTo("raid:seat_14:r4"));
+			Assert.That(MissionId("raid:Bravo:r4"), Is.EqualTo("raid:seat_13:r4"));
+			Assert.That(MissionId("raid:self:r4"), Is.EqualTo("raid:self:r4"));
+			Assert.That(MissionId("raid:Nobody:r4"), Is.EqualTo("raid:unknown:r4"));
+
+			// A pass-through prefix carrying a nested or malformed id must not survive verbatim.
+			Assert.That(MissionId("frans:raid:Bravo:r4"), Is.EqualTo("unknown"));
+			Assert.That(MissionId("capture:Bravo"), Is.EqualTo("unknown"));
+			Assert.That(MissionId("capture:Bravo:oilb"), Is.EqualTo("unknown"));
+			Assert.That(MissionId("capture:Bravo:oilb:526"), Is.EqualTo("capture:seat_13:oilb:526"));
+			Assert.That(MissionId("capture:oilb:526"), Is.EqualTo("capture:oilb:526"));
+			Assert.That(MissionId("secure:Bravo"), Is.EqualTo("unknown"));
+			Assert.That(MissionId("defend_answer:Bravo:r3"), Is.EqualTo("unknown"));
+			Assert.That(MissionId("assist_answer:#19:r3"), Is.EqualTo("unknown"));
+			Assert.That(MissionId("garrison_contest:Bravo"), Is.EqualTo("unknown"));
+			Assert.That(MissionId("garrison_contest:a77"), Is.EqualTo("garrison_contest:a77"));
+			Assert.That(MissionId("veto:attack:900"), Is.EqualTo("veto:attack:900"));
+
+			var record = new BotMissionRecord { MissionId = "frans:raid:Bravo:r4", Attempt = 1, Tick = 750 };
+			var line = AiMissionLogWriter.BuildLine(record, "00000000-0000-0000-0000-000000000001", "map", "map", "seat_4", map, DateTime.UnixEpoch);
+			Assert.That(line, Does.Not.Contain("Bravo"));
+			Export("mission.jsonl", line);
+		}
+
+		[Test]
 		public void EngagementAndPostureEmittersKeepAnonymousReferenceGrammar()
 		{
 			var h = new EngagementHeader
