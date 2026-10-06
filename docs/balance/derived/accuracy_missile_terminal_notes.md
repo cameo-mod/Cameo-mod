@@ -2,7 +2,7 @@
 
 Base: `codex/accuracy-fix@4c04909e608798da497c22c09efca67c0d1b42c1`.
 
-`BM_HOMING_MISSILE_TERMINAL_ACCURACY` is a separate default-off switch. It does not alter the target-footprint switch or the serialized sidecars when disabled.
+`PRICING_HOMING_TERMINAL` is a separate default-off switch. It does not alter the target-footprint switch or the serialized sidecars when disabled.
 
 ## Runtime model
 

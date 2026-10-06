@@ -25,8 +25,8 @@ Writes/edits NOTHING. Usage:
   python tools/balance/effective_damage.py NAME [NAME...]   # just these weapons, verbose
 
 Experimental model switches (both default off):
-  BM_TARGET_FOOTPRINT_ACCURACY=1       # HitShape.DistanceFromEdge, T=426 WDist
-  BM_HOMING_MISSILE_TERMINAL_ACCURACY=1 # locked-missile terminal bound, separate switch
+  PRICING_TARGET_FOOTPRINT=1           # HitShape.DistanceFromEdge, T=426 WDist
+  PRICING_HOMING_TERMINAL=1           # locked-missile terminal bound, separate switch
 """
 from __future__ import annotations
 import math
@@ -56,8 +56,8 @@ POINT_TARGET_RADIUS = 100
 # and is a representative vehicle footprint. The legacy default remains off so
 # existing sidecars and order selection stay byte-identical.
 TARGET_FOOTPRINT_RADIUS = 426
-TARGET_FOOTPRINT_ENV = "BM_TARGET_FOOTPRINT_ACCURACY"
-HOMING_MISSILE_TERMINAL_ENV = "BM_HOMING_MISSILE_TERMINAL_ACCURACY"
+TARGET_FOOTPRINT_ENV = "PRICING_TARGET_FOOTPRINT"
+HOMING_MISSILE_TERMINAL_ENV = "PRICING_HOMING_TERMINAL"
 BULLET_DEFAULT_SPEED = 17
 # Instant projectiles have no travel drift, but the hitscan variants retain their
 # authored scatter unless they use the direct-Actor center path. A projectile with

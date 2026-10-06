@@ -1,6 +1,6 @@
 ﻿# Target-footprint switch-on comparison
 
-Experimental, read-only pricing comparison on base `devin/tier4/pricing-default@d24668c39`. Generated sidecars used `BM_TARGET_FOOTPRINT_ACCURACY=1` (representative target footprint T=426 WDist). No authored YAML or canonical ledger was changed.
+Experimental, read-only pricing comparison on base `devin/tier4/pricing-default@d24668c39`. Generated sidecars used `PRICING_TARGET_FOOTPRINT=1` (representative target footprint T=426 WDist). No authored YAML or canonical ledger was changed.
 
 Command: `python tools/balance/k_price_delta.py --derived-dir C:\cameo-wt\accuracy-switch-on\derived --out docs/balance/derived/pricing_default_delta_target_footprint_on.md`.
 # PRICING-DEFAULT â€” before/after price delta
