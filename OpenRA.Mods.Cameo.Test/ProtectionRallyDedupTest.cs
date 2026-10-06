@@ -17,7 +17,7 @@ namespace OpenRA.Mods.Cameo.Test
 	[TestFixture]
 	public class ProtectionRallyDedupTest
 	{
-		// AR-S2 (BM_protection_rally_dedup, 2026-10-05): tagged-emitter attribution (attrib3)
+		// AR-S2 (BO_squad_move_dedup, 2026-10-05): tagged-emitter attribution (attrib3)
 		// pinned the last big churn emitter on PrepositionDefenceTick — an unconditional
 		// AttackMove(rally) re-push to every protection member each ProtectInterval (~50t).
 		// The dedup re-pushes only on a real rally move (past the cell band) or for joiners.

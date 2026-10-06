@@ -14,7 +14,7 @@ using System.Linq;
 namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 {
 	/// <summary>
-	/// AR-S2 (BM_protection_rally_dedup): the squad manager's defence preposition tick
+	/// AR-S2 (BO_squad_move_dedup): the squad manager's defence preposition tick
 	/// re-pushed AttackMove(rally) to every protection member on every ProtectInterval —
 	/// a same-cell resend that cancels the in-flight activity and restarts the path, and
 	/// the last large untagged order-churn emitter left after BJ/BK/BL (attrib3: 27-28

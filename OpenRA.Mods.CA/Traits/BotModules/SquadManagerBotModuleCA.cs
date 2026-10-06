@@ -601,7 +601,7 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Consecutive non-losing evals before an in-flight lure episode aborts back to engage (BL_protection_episode_guard). 2 bounds a real re-engage delay to one eval (~AttackForceInterval ticks) while a single flicker can never abort.")]
 		public readonly int ProtectionLureAbortConfirmTicks = 2;
 
-		[Desc("AR-S2 (BM_protection_rally_dedup): the defence preposition tick re-pushes " +
+		[Desc("AR-S2 (BO_squad_move_dedup): the defence preposition tick re-pushes " +
 			"AttackMove(rally) to every protection member each ProtectInterval — a same-cell " +
 			"resend that cancels the in-flight activity (the dominant untagged order-churn " +
 			"emitter in the tagged 2026-10-05 attribution). Armed: re-push only when the rally " +
@@ -609,7 +609,7 @@ namespace OpenRA.Mods.CA.Traits
 			"owning per-tick combat/lure orders. Off = the per-interval group push (unchanged stream).")]
 		public readonly bool UseProtectionRallyDedup = false;
 
-		[Desc("Dead band on the protect rally before the manager re-pushes the squad's march order (BM_protection_rally_dedup). A threat/request target jittering inside the band keeps the in-flight order; a real redirect beyond it re-orders everyone.")]
+		[Desc("Dead band on the protect rally before the manager re-pushes the squad's march order (BO_squad_move_dedup). A threat/request target jittering inside the band keeps the in-flight order; a real redirect beyond it re-orders everyone.")]
 		public readonly int ProtectionRallyHysteresisCells = 4;
 
 		[Desc("LEARN-P6 (BP_squad_desire, SPEC 2026-10-05 §11): the enabled IBotSquadDesire provider's " +
@@ -757,7 +757,7 @@ namespace OpenRA.Mods.CA.Traits
 		CPos? protectionRally;
 		int protectionHoldUntilTick = -1;
 
-		// AR-S2 (BM_protection_rally_dedup): which rally cell the protection members
+		// AR-S2 (BO_squad_move_dedup): which rally cell the protection members
 		// were last pushed to, and who carries that push. Only consulted while armed.
 		readonly ProtectionRallyDedup<Actor> protectionRallyDedup = new();
 
