@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Linq;
 using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.CA.Traits.BotModuleLogic;
+using OpenRA.Mods.CA.Traits.BotModules;
 using OpenRA.Mods.CA.Traits.BotModules.Squads;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Traits;
@@ -74,6 +75,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		readonly Dictionary<string, int> lastCard = new();
 
 		IBotEngagementPriors[] priors;
+		IBotFightThresholds[] fightThresholds;
 		IBotRememberedDefenceProvider[] defenceProviders;
 		IBotRegionThreatProvider[] regionThreats;
 
@@ -110,7 +112,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			AddDefencesNear(foes, CentroidOf(enemies));
 
 			var ratioPct = (int)(CombatVetoEval.Predict(own, foes, Priors(), Info.UseEffectiveDamageModel).Ratio * 100);
-			var vetoed = CombatVetoEval.EngageVetoed(ratioPct, alreadyCommitted, Info.VetoEngageRatioPct, Info.VetoAbortRatioPct);
+			var thresholds = FightThresholds(enemies);
+			var vetoed = CombatVetoEval.EngageVetoed(ratioPct, alreadyCommitted, thresholds.Engage, thresholds.Abort);
 			cache[key] = new CachedVerdict { Tick = world.WorldTick, Vetoed = vetoed, Reason = vetoed ? BotMissionReasons.Outmatched : null };
 			reason = vetoed ? BotMissionReasons.Outmatched : null;
 			return Report(squad, "engage", vetoed, null);
@@ -181,6 +184,20 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		{
 			priors ??= player.PlayerActor.TraitsImplementing<IBotEngagementPriors>().ToArray();
 			return priors.FirstEnabledTraitOrDefault();
+		}
+
+		(int Engage, int Abort) FightThresholds(IEnumerable<Actor> enemies)
+		{
+			fightThresholds ??= player.PlayerActor.TraitsImplementing<IBotFightThresholds>().ToArray();
+			var provider = fightThresholds.FirstEnabledTraitOrDefault();
+			if (provider == null)
+				return (Info.VetoEngageRatioPct, Info.VetoAbortRatioPct);
+			var enemy = enemies.Where(a => a?.Owner?.Faction != null && player.RelationshipWith(a.Owner) == PlayerRelationship.Enemy)
+				.Select(a => a.Owner.Faction.InternalName).Where(f => !string.IsNullOrEmpty(f))
+				.OrderBy(f => f, System.StringComparer.Ordinal).FirstOrDefault() ?? "";
+			var engage = provider.RetreatRatioPct(player.Faction.InternalName, enemy, Info.VetoEngageRatioPct);
+			var abort = Info.VetoAbortRatioPct * engage / System.Math.Max(1, Info.VetoEngageRatioPct);
+			return (engage, System.Math.Min(engage, abort));
 		}
 
 		List<(BotUnitProfile Unit, int Count)> ForceOf(SquadCA squad)
