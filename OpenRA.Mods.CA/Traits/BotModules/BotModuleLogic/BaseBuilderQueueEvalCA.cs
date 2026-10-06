@@ -296,5 +296,91 @@ namespace OpenRA.Mods.CA.Traits
 
 			return best;
 		}
+
+		// ECON-A-FIX (REVIEW_2026-10-06_econ_a): the review's six findings each get a world-free seam so
+		// the regression tests drive the rule, not a harness.
+
+		/// <summary>
+		/// ECON-A R1: one occupant's verdict on the fog-honest ETA path — Locomotor.IsBlockedBy under
+		/// BlockedByActor.Immovable, minus the hidden state: an occupant that is neither ours, nor on a
+		/// currently visible cell, nor remembered (a frozen footprint) is not KNOWN and never blocks,
+		/// so adding or removing an unseen enemy actor cannot change the estimate. Known + immovable
+		/// and not movable-allied/moving/removable/transit-only/crushable blocks.
+		/// </summary>
+		public static bool EtaOccupantBlocks(bool known, bool movable, bool allied, bool moving, bool removable, bool transitOnly, bool crushable) =>
+			known && !(movable && allied) && !moving && !removable && !transitOnly && !crushable;
+
+		/// <summary>
+		/// ECON-A R2: the length of a PathFinder result — the contract returns the path target-to-source
+		/// (<see cref="IPathFinder.FindPathToTargetCell"/>), so the path length is the sum of its own
+		/// consecutive cell-to-cell segments. There is no source-to-first-cell chord to prepend:
+		/// seeding the walk at the source position double-counts the whole route.
+		/// </summary>
+		public static long ExpansionPathLength(IReadOnlyList<CPos> targetToSource, Func<CPos, WPos> center)
+		{
+			if (targetToSource == null || targetToSource.Count < 2)
+				return 0;
+
+			var previous = center(targetToSource[0]);
+			long distance = 0;
+			for (var i = 1; i < targetToSource.Count; i++)
+			{
+				var cell = center(targetToSource[i]);
+				distance += (cell - previous).Length;
+				previous = cell;
+			}
+
+			return distance;
+		}
+
+		/// <summary>
+		/// ECON-A R4: a demand's journey stays committed while the MCV's activity chain still aims at
+		/// the deploy neighbourhood — the chain's last positional target within the slack. No targets at
+		/// all (a transform, a unit-less relocation) is indeterminate — the idle window decides — while
+		/// a chain whose last target lies elsewhere means a redirect took the unit.
+		/// </summary>
+		public static bool ExpansionJourneyCommitted(bool sawAnyTarget, bool lastTargetNearDeploy) =>
+			!sawAnyTarget || lastTargetNearDeploy;
+
+		/// <summary>
+		/// ECON-A R5: the demand binding's (producer, item-name) token is unambiguous only while no
+		/// same-name item shares the producer — already queued, ordered and still in flight, or bound
+		/// to another demand. CancelProduction resolves the LAST same-name item on the queue; a
+		/// duplicate would refund or free the wrong item.
+		/// </summary>
+		public static bool DemandItemUnambiguous(bool sameNameOnProducer, bool boundByOtherDemand) =>
+			!sameNameOnProducer && !boundByOtherDemand;
+
+		/// <summary>
+		/// ECON-A R3: what the sweep does with a live <c>Actor.ReplacedByActor</c> — the transform edge is a
+		/// one-shot transition, consumed by the caller's Deployed flag (the field stays readable on the
+		/// disposed MCV forever, so gating is the only thing keeping it from re-firing every sweep).
+		/// </summary>
+		public enum ExpansionTransformTransition
+		{
+			/// <summary>No live transform edge (or one already consumed) — keep waiting.</summary>
+			Waiting,
+
+			/// <summary>The replacement is an own, live construction yard — the MCV deployed.</summary>
+			Deploy,
+
+			/// <summary>The replacement is an own, live non-yard — the journey continues on it.</summary>
+			Relocate,
+
+			/// <summary>The replacement is unusable or foreign-owned — the journey died.</summary>
+			Fail,
+		}
+
+		/// <summary>The transition described above; <paramref name="replacementUsable"/> bundles the
+		/// sweep's "alive, in world, ours" check so a disposed or captured yard can never deploy.</summary>
+		public static ExpansionTransformTransition ExpansionTransform(
+			bool alreadyDeployed, bool hasReplacement, bool replacementUsable, bool replacementYard)
+		{
+			if (alreadyDeployed || !hasReplacement)
+				return ExpansionTransformTransition.Waiting;
+			if (!replacementUsable)
+				return ExpansionTransformTransition.Fail;
+			return replacementYard ? ExpansionTransformTransition.Deploy : ExpansionTransformTransition.Relocate;
+		}
 	}
 }

@@ -9,11 +9,85 @@
  */
 #endregion
 
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using OpenRA.Mods.Common.Traits;
 
 namespace OpenRA.Mods.CA.Traits
 {
+	/// <summary>
+	/// ECON-A-FIX (REVIEW_2026-10-06_econ_a R6, REF-1 §12.24 v2): anchor reservations owned by expansion
+	/// demands — while a demand's refinery sits on a producer queue its anchor is off the market for
+	/// every other claim, so a second producer cannot take it before the bound item lands. World-free
+	/// (the tick and the "anchor already taken" probe are supplied by the caller) so the lifecycle —
+	/// reserve, refresh, release, expire, commit — is directly testable.
+	/// </summary>
+	public sealed class RefineryAnchorReservations
+	{
+		readonly Dictionary<CPos, (int Until, object Owner)> held = new();
+
+		public int Count => held.Count;
+
+		/// <summary>Held (unexpired) by exactly this owner.</summary>
+		public bool LiveFor(CPos anchor, object owner, int now) =>
+			held.TryGetValue(anchor, out var r) && now < r.Until && ReferenceEquals(r.Owner, owner);
+
+		/// <summary>Held (unexpired) by anyone — the anchor is off the market for other claims.</summary>
+		public bool LiveAt(CPos anchor, int now) =>
+			held.TryGetValue(anchor, out var r) && now < r.Until;
+
+		/// <summary>
+		/// Take or refresh <paramref name="owner"/>'s hold until <paramref name="until"/>. Refused while a
+		/// different owner holds it live, or while the anchor is otherwise taken (served, parked,
+		/// pending — the caller's probe). An expired hold lapses and can be re-taken by anyone.
+		/// </summary>
+		public bool TryReserve(CPos anchor, object owner, int now, int until, Func<CPos, bool> taken)
+		{
+			if (held.TryGetValue(anchor, out var r) && now < r.Until)
+			{
+				if (!ReferenceEquals(r.Owner, owner))
+					return false;
+
+				held[anchor] = (until, owner);
+				return true;
+			}
+
+			if (taken != null && taken(anchor))
+				return false;
+
+			held[anchor] = (until, owner);
+			return true;
+		}
+
+		/// <summary>The owner lets go early (expiry, unbind, adoption failure). No-op for anyone else.</summary>
+		public bool Release(CPos anchor, object owner)
+		{
+			if (!held.TryGetValue(anchor, out var r) || !ReferenceEquals(r.Owner, owner))
+				return false;
+
+			held.Remove(anchor);
+			return true;
+		}
+
+		/// <summary>Ground truth overrides: a committed anchor's reservation is done whoever owned it.</summary>
+		public void Clear(CPos anchor) => held.Remove(anchor);
+
+		/// <summary>Drop expired holds and holds whose anchor was taken over meanwhile; returns the count.</summary>
+		public int Prune(int now, Func<CPos, bool> taken)
+		{
+			var pruned = 0;
+			foreach (var kv in held.ToList())
+				if (now >= kv.Value.Until || (taken != null && taken(kv.Key)))
+				{
+					held.Remove(kv.Key);
+					pruned++;
+				}
+
+			return pruned;
+		}
+	}
+
 	/// <summary>
 	/// REF-1 (AI_ARCHITECTURE §12.24 v2, DESIGN §19.1b): one refinery-to-anchor claim — the anchor (a resource
 	/// spreader, or the centre of a field that has none), the field it belongs to, the claim tier
@@ -125,6 +199,33 @@ namespace OpenRA.Mods.CA.Traits
 		/// expansion-nudge condition ("all anchors in reach served and unserved anchors exist beyond reach").
 		/// </summary>
 		int UnservedAnchorsBeyondReach => 0;
+
+		/// <summary>
+		/// ECON-A-FIX (R6): the claim a bound demand's refinery would take — ranked from <paramref name="near"/>
+		/// with <paramref name="futureProviderTiles"/> (the committed yard's footprint) counting as part of the
+		/// frontier, so an outpost beyond today's reach still reserves its anchor — the reach-only quota must not
+		/// gate a field the demand's own yard will open. Null = nothing claimable for it, or the law is off.
+		/// </summary>
+		RefineryAnchorClaim? DemandRefineryClaim(CPos near, IReadOnlyCollection<CPos> futureProviderTiles) => null;
+
+		/// <summary>
+		/// ECON-A-FIX (R6): take or refresh <paramref name="owner"/>'s hold on <paramref name="anchor"/> until
+		/// <paramref name="untilTick"/> — refused while another owner holds it live or the anchor is already taken
+		/// (served, parked, pending). Callers renew the hold while the bound item is still queued.
+		/// </summary>
+		bool TryReserveRefineryAnchor(CPos anchor, object owner, int untilTick) => false;
+
+		/// <summary>
+		/// ECON-A-FIX (R6): <paramref name="owner"/>'s hold on <paramref name="anchor"/> is live and the anchor is
+		/// still untaken — the only case where a placement re-adopts the reserved anchor instead of a fresh claim.
+		/// </summary>
+		bool RefineryAnchorReserved(CPos anchor, object owner) => false;
+
+		/// <summary>
+		/// ECON-A-FIX (R6): <paramref name="owner"/> releases its hold early (demand expiry, binding unwind). A
+		/// committed anchor's hold is cleared by <see cref="RefineryClaimCommitted"/> instead.
+		/// </summary>
+		void ReleaseRefineryAnchor(CPos anchor, object owner) { }
 	}
 
 	/// <summary>

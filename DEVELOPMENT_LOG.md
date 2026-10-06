@@ -19648,3 +19648,58 @@ Branch devin/tier4/pricing-default, task 01a10850 (maintainer ruling 2026-10-04)
 * Crash note: machine lost ~00:05 mid-gate; worktree survived intact. fsck reports
   missing objects in the shared store — unreachable crash debris only, verified clean
   from refs; lead confirmed no repair needed.
+
+## 2026-10-06 — Devin: ECON-A-FIX — all six findings of REVIEW_2026-10-06_econ_a
+
+Branch `devin/econ-a` on `42e32dc2e`, worktree `C:/cameo-wt/econ-a`. Review verdict
+was FIX-REQUIRED; this pass closes every finding in place (same branch, additive fix
+commit). Every finding got a world-free seam in `BaseBuilderQueueEvalCA` + a world-free
+state table (`RefineryAnchorReservations`) so the regression tests drive the rule, not
+a harness. Classic/switch-off paths unchanged (provider members all default).
+
+* **R1 fog-honest ETA**: `EstimateTravelTicks` now searches with `BlockedByActor.None`
+  + `ignoreActor` (terrain-only HPF) and a `customCost` that returns
+  `PathCostForInvalidPath` only on KNOWN obstacles — own units, occupants of currently
+  visible cells, remembered frozen-under-fog footprints (`FrozenActorLayer`). Hidden
+  enemy state can neither block nor unblock the estimate; kernel `EtaOccupantBlocks`
+  re-expresses `Locomotor.IsBlockedBy`'s Immovable predicate over the honest fact set.
+* **R2 path direction**: the finder contract returns target→source; the old walk seeded
+  at the source and double-counted the whole route (10-cell path read as 20).
+  `ExpansionPathLength` sums only the returned path's own consecutive segments.
+* **R3 one-shot transform**: `ReplacedByActor` stays readable on the disposed MCV
+  forever — the edge is now gated on `demand.Deployed` (consumed marker), the
+  replacement is validated usable+own before Deploy, a live own non-yard relocates
+  (re-key + re-lease), an unusable/foreign one expires the demand. `DeployedYard`
+  tracks the outpost; its death/capture expires the demand.
+* **R4 lease + journey lapse**: `PostExpansionDemand` claims `McvExpansion` on the
+  traveller under `nameof(BaseBuilderBotModuleCA)`; a refused first claim means the
+  demand never posts. The sweep re-claims each tick (heartbeat), expires on claim
+  loss/death/disposal/capture/request-removal, and `JourneyStillCommitted` walks
+  `Activity.GetTargets` (chain + children + next) — the last positional target beyond
+  `ExpansionJourneySlackCells` (12) of the deploy cell lapses the demand, closing the
+  mid-flight-redirect hole (`DeployMcvs` only re-posts idle MCVs).
+* **R5 bind at admission**: `pendingDemandPick` defers binding until after
+  `bot.QueueOrder(StartProduction)` — cash/army-first vetoes can no longer strand a
+  bound item that never queued. `producerOrdersInFlight` (OrderGraceTicks=30) +
+  `ProducerHoldsItem` + the `DemandItemUnambiguous` gate make the (producer, name)
+  token exclusive — `CancelProduction` removes the LAST same-name item, so duplicates
+  would refund/free the wrong one.
+* **R6 anchor reservation**: `RefineryAnchorReservations` (world-free: reserve,
+  refresh-for-owner, release, expire, commit-clear, prune-on-taken) hangs off
+  `IBotExpansionTargetProvider` with four defaulted members. A demand refinery ranks
+  its claim with the committed yard's footprint counted as frontier
+  (`DemandRefineryClaim` — an outpost beyond today's reach is not gated by the wall it
+  removes), reserves the anchor as the order is admitted, renews it each sweep while
+  bound, releases it on every unwind path, and re-adopts it at placement when still
+  live. `ClaimOrder` blocked/committed lambdas now fold reservation state in via shared
+  `AnchorBlockedForClaims`/`AnchorCommittedForClaims`/`AnchorTaken` helpers.
+* Gates: Debug build 0 errors; the three touched projects clean under `-warnaserror`
+  + EnforceCodeStyleInBuild + GenerateDocumentationFile; `dotnet test`
+  OpenRA.Mods.Cameo.Test 1215/1215 (+14 new regression tests, one+ per finding);
+  utility `--check-explicit-interfaces` 3 pre-existing engine violations, none mine;
+  `--check-conditional-trait-interface-overrides` 4 pre-existing engine violations,
+  none mine; boot-gate PASS (menu reached, 0 new exception-*.log, scoped kill).
+  Python audit suite N/A — the diff is C# only, no yaml/asset surface.
+* ECON-B coordination: `BotLeasePurpose.Harvest` (their `50d3614b6`) never touches
+  `McvExpansion`, so the lapse check can't fire on harvester re-routes; BU holds no
+  `ExpansionDemand` state — `ExpireExpansionDemand` has nothing of theirs to release.

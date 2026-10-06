@@ -49,6 +49,11 @@ namespace OpenRA.Mods.CA.Traits
 		// and can't be reached from inside the helper. Folded into the same telemetry flag.
 		bool demandAdvisedDefense = false;
 
+		// ECON-A-FIX (R5/R6): the demand pick deferred until the StartProduction order is actually
+		// admitted — binding at pick time lets a veto (cash floor, army-first) strand a bound item
+		// that never queues, and an anchor may only be reserved once the order is going out.
+		(ExpansionDemand Demand, bool IsRefinery, RefineryAnchorClaim? Claim) pendingDemandPick;
+
 		bool itemQueuedThisTick = false;
 
 		// An empty tolerance list in yaml would make ImmutableArray.Random throw.
@@ -258,8 +263,19 @@ namespace OpenRA.Mods.CA.Traits
 			// Waiting to build something
 			if (currentBuilding == null && failCount < baseBuilder.Info.MaximumFailedPlacementAttempts)
 			{
+				pendingDemandPick = default;
 				var item = ChooseBuildingToBuild(queue);
 				if (item == null)
+					return false;
+
+				var demandPick = pendingDemandPick;
+
+				// ECON-A-FIX (R5): producer+name exclusivity — an ordinary pick must never duplicate a
+				// demand-bound name on this producer: CancelProduction removes the LAST same-name item,
+				// so a duplicate would refund or free the wrong one. The demand's own pick (and an
+				// ordinary same-name duplicate of an ORDINARY item, legal before) pass unchanged.
+				if (baseBuilder.ExpansionPrebuildEnabled && demandPick.Demand == null
+					&& baseBuilder.DemandForQueuedItem(item.Name, queue.Actor) != null)
 					return false;
 
 				// We shouldn't be queueing new buildings (other than refineries) when we're low on cash.
@@ -272,10 +288,8 @@ namespace OpenRA.Mods.CA.Traits
 
 				// ECON-A: a demand-bound item rides at its own cost floor like the planner wants —
 				// the reserve gate would push it past the ETA it was scheduled to meet.
-				var demandBound = baseBuilder.ExpansionPrebuildEnabled
-					&& baseBuilder.DemandForQueuedItem(item.Name, queue.Actor) != null;
 				if (BaseBuilderQueueEvalCA.BlockedByCash(playerResources.GetCashAndResources(), minCashRequirement,
-						baseBuilder.Info.RefineryTypes.Contains(item.Name), plannerWant || demandBound,
+						baseBuilder.Info.RefineryTypes.Contains(item.Name), plannerWant || demandPick.Demand != null,
 						queue.GetProductionCost(item), itemQueuedThisTick))
 					return false;
 
@@ -290,10 +304,36 @@ namespace OpenRA.Mods.CA.Traits
 						return false;
 				}
 
+				// ECON-A-FIX (R6): the demand's refinery reserves its claim's anchor as the order is
+				// admitted — taken off every other claim while the item is in flight. A pick whose
+				// anchor is no longer reservable (served, parked, pending, or another demand got there)
+				// never reaches the queue and retries next sweep.
+				if (demandPick.Demand != null && demandPick.IsRefinery && lawWants != null
+					&& (demandPick.Claim == null
+						|| !lawWants.TryReserveRefineryAnchor(demandPick.Claim.Value.Anchor, demandPick.Demand,
+							world.WorldTick + baseBuilder.Info.ExpansionDemandIdleTicks)))
+				{
+					pendingDemandPick = default;
+					return false;
+				}
+
 				baseBuilder.RecordOpeningStructureQueued(queue, item);
 				baseBuilder.BuildOrderKnobs?.NotifyQueued(item.Name);
 				bot.QueueOrder(Order.StartProduction(queue.Actor, item.Name, 1));
 				queuedAt[queue.Actor.ActorID] = (item.Name, world.WorldTick);
+				if (demandPick.Demand != null)
+				{
+					// ECON-A-FIX (R5): bind on the admitted order, not the pick — the recorded in-flight
+					// order and this binding are the same (producer, item) token CancelProduction needs.
+					if (demandPick.IsRefinery)
+						demandPick.Demand.BindRefinery(item.Name, queue.Actor, world.WorldTick, demandPick.Claim);
+					else
+						demandPick.Demand.BindDefence(item.Name, queue.Actor, world.WorldTick);
+
+					pendingDemandPick = default;
+				}
+
+				baseBuilder.RecordProducerOrder(queue.Actor, item.Name);
 				itemQueuedThisTick = true;
 				SetBuildingInterval(item.Name);
 			}
@@ -713,13 +753,19 @@ namespace OpenRA.Mods.CA.Traits
 						.OrderBy(a => queue.GetBuildTime(a, BuildableInfo.GetTraitForQueue(a, queue.Info.Type)))
 						.ThenBy(a => a.Name, StringComparer.Ordinal)
 						.FirstOrDefault();
-					if (refinery != null && !baseBuilder.HasMaxRefineriesFor(refinery))
+					if (refinery != null && DemandRefineryQuota(demand, refinery))
 					{
 						var buildTime = queue.GetBuildTime(refinery, BuildableInfo.GetTraitForQueue(refinery, queue.Info.Type));
+
+						// ECON-A-FIX (R5): the pick stands only while the (producer, name) token stays
+						// unambiguous — no same-name item queued or still in flight, none bound to
+						// another demand. The binding itself happens at order admission, not here.
 						if (BaseBuilderQueueEvalCA.ExpansionDue(demand.EtaTick, buildTime, now)
-							&& !DemandItemHeldElsewhere(demand, refinery.Name, queue.Actor))
+							&& BaseBuilderQueueEvalCA.DemandItemUnambiguous(
+								baseBuilder.ProducerHoldsItem(queue.Actor, refinery.Name, now),
+								DemandItemHeldElsewhere(demand, refinery.Name, queue.Actor)))
 						{
-							demand.BindRefinery(refinery.Name, queue.Actor, now);
+							pendingDemandPick = (demand, true, baseBuilder.DemandClaimFor(demand));
 							return refinery;
 						}
 					}
@@ -733,9 +779,11 @@ namespace OpenRA.Mods.CA.Traits
 						var buildTime = queue.GetBuildTime(defence, BuildableInfo.GetTraitForQueue(defence, queue.Info.Type));
 						if (BaseBuilderQueueEvalCA.ExpansionDue(demand.EtaTick, buildTime, now)
 							&& baseBuilder.DefenceHoldPermitted(queue, demand, now)
-							&& !DemandItemHeldElsewhere(demand, defence.Name, queue.Actor))
+							&& BaseBuilderQueueEvalCA.DemandItemUnambiguous(
+								baseBuilder.ProducerHoldsItem(queue.Actor, defence.Name, now),
+								DemandItemHeldElsewhere(demand, defence.Name, queue.Actor)))
 						{
-							demand.BindDefence(defence.Name, queue.Actor, now);
+							pendingDemandPick = (demand, false, null);
 							return defence;
 						}
 					}
@@ -743,6 +791,19 @@ namespace OpenRA.Mods.CA.Traits
 			}
 
 			return null;
+		}
+
+		/// <summary>
+		/// ECON-A-FIX (R6): the demand's refinery quota — under the refinery law it IS the demand's own
+		/// reservable claim, ranked from the outpost with the committed yard's footprint counting as
+		/// frontier (an expansion beyond today's reach is not gated by the wall it removes). Without the
+		/// law the classic yard-based cap stands.
+		/// </summary>
+		bool DemandRefineryQuota(ExpansionDemand demand, ActorInfo refinery)
+		{
+			return baseBuilder.RefineryLawProvider() != null
+				? baseBuilder.DemandClaimFor(demand) != null
+				: !baseBuilder.HasMaxRefineriesFor(refinery);
 		}
 
 		// Another demand already holds this item name on this producer — a second binding would fight
@@ -1450,18 +1511,29 @@ namespace OpenRA.Mods.CA.Traits
 					if (law != null)
 					{
 						var near = requestRef != null ? baseBuilder.RequestedRefineries[requestRef].ConyardLoc : (CPos?)null;
-						if (law.NextRefineryClaim(near) is RefineryAnchorClaim claim)
+
+						// ECON-A-FIX (R6): a bound demand's refinery re-adopts the anchor it reserved at
+						// queue admission — held out of every other claim in between. A lost or stale
+						// hold takes whatever the law offers now; the law's claim order stands either way.
+						RefineryAnchorClaim? claim = null;
+						if (demand?.ReservedClaim is { } reserved
+							&& law.RefineryAnchorReserved(reserved.Anchor, demand))
+							claim = reserved;
+						else
+							claim = law.NextRefineryClaim(near);
+
+						if (claim is { } c)
 						{
 							var placed = LawRefineryPlacement(actorType, distanceToBaseIsImportant, producer,
-								claim.Anchor, claim.ResourceCells, law.ExpansionTargetClaimRadius);
+								c.Anchor, c.ResourceCells, law.ExpansionTargetClaimRadius);
 							if (placed.Location != null)
 							{
-								Log.Write("debug", $"AI ({player.ClientIndex}): REF-1 refinery {actorType} at {placed.Location.Value} claims anchor {claim.Anchor} field {claim.FieldId} tier {claim.Tier} gap {placed.Gap} at tick {world.WorldTick}");
-								law.RefineryClaimCommitted(claim.Anchor);
+								Log.Write("debug", $"AI ({player.ClientIndex}): REF-1 refinery {actorType} at {placed.Location.Value} claims anchor {c.Anchor} field {c.FieldId} tier {c.Tier} gap {placed.Gap} at tick {world.WorldTick}");
+								law.RefineryClaimCommitted(c.Anchor);
 								refineryClaimed = true;
 								if (requestRef != null)
 									baseBuilder.RequestedRefineries.Remove(requestRef);
-								return (placed.Location, claim.Anchor, placed.Variant);
+								return (placed.Location, c.Anchor, placed.Variant);
 							}
 						}
 

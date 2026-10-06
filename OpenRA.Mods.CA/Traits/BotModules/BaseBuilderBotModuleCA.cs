@@ -13,8 +13,10 @@ using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using OpenRA.Activities;
 using OpenRA.Mods.AS.Traits;
 using OpenRA.Mods.Common;
+using OpenRA.Mods.Common.Pathfinder;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Primitives;
 using OpenRA.Support;
@@ -415,6 +417,94 @@ namespace OpenRA.Mods.CA.Traits
 		// by genericbot AND classicbot, so the increment switch must not leak into the classic reference).
 		bool switchesActive;
 		public bool ExpansionPrebuildEnabled => Info.UseExpansionPrebuild && switchesActive;
+
+		// ECON-A-FIX (R4): the lease owner this module claims under — the nameof convention every
+		// LC1 holder uses, so a preempt notifies this trait by type name.
+		const string LeaseOwner = nameof(BaseBuilderBotModuleCA);
+
+		// ECON-A-FIX (R5): ticks an issued production order may take to land in the producer's queue —
+		// the same grace VerifyDemandBinding gives a bound item before it counts as never-queued.
+		const int OrderGraceTicks = 30;
+
+		// ECON-A-FIX (R4): cells of slack around the committed deploy cell that still count as "aiming
+		// there" — Move re-maps a blocked target cell by up to its ~10-cell nearest-moveable search, so
+		// the committed destination can legitimately drift a little from the posted ConyardLoc.
+		const int ExpansionJourneySlackCells = 12;
+
+		// ECON-A-FIX (R5): every StartProduction order this module's queues issued, keyed by producer —
+		// an order lands in the queue a tick or two after issue, and the (producer, item-name)
+		// exclusivity contract must see it while it is still in flight. Entries age out after
+		// OrderGraceTicks (VerifyDemandBinding's window).
+		readonly Dictionary<uint, List<(string Item, int Tick)>> producerOrdersInFlight = new();
+
+		/// <summary>Record a just-issued StartProduction order so later picks see it before it lands.</summary>
+		public void RecordProducerOrder(Actor producer, string item)
+		{
+			var now = world.WorldTick;
+			if (!producerOrdersInFlight.TryGetValue(producer.ActorID, out var log))
+				producerOrdersInFlight[producer.ActorID] = log = new List<(string Item, int Tick)>(2);
+
+			log.RemoveAll(e => now - e.Tick > OrderGraceTicks);
+			log.Add((item, now));
+		}
+
+		/// <summary>
+		/// ECON-A-FIX (R5): the producer holds this item name — already queued on any of its queues, or
+		/// ordered by us within the order-latency grace window (still in flight). CancelProduction
+		/// resolves the LAST same-name item on a queue, so a demand binding is exclusive to exactly
+		/// this absence: a same-name duplicate would refund or free the wrong item.
+		/// </summary>
+		public bool ProducerHoldsItem(Actor producer, string item, int now)
+		{
+			if (producer == null || producer.Disposed || producer.IsDead)
+				return false;
+
+			if (producer.TraitsImplementing<ProductionQueue>().Any(q => q.AllQueued().Any(i => i.Item == item)))
+				return true;
+
+			return producerOrdersInFlight.TryGetValue(producer.ActorID, out var log)
+				&& log.Any(e => e.Item == item && now - e.Tick <= OrderGraceTicks);
+		}
+
+		/// <summary>
+		/// ECON-A-FIX (R6): the anchor this demand's refinery would claim — evaluated as if the committed
+		/// yard's footprint already stood, so an outpost beyond today's frontier can still reserve (the
+		/// reach-only quota must not gate the field its own yard will open). Cached per tick: every
+		/// queue manager asks the same question of the same demand.
+		/// </summary>
+		public RefineryAnchorClaim? DemandClaimFor(ExpansionDemand demand)
+		{
+			var law = RefineryLawProvider();
+			if (law == null || demand == null)
+				return null;
+
+			var now = world.WorldTick;
+			if (demand.ClaimCacheTick == now)
+				return demand.CachedClaim;
+
+			demand.ClaimCacheTick = now;
+			return demand.CachedClaim = law.DemandRefineryClaim(demand.ConyardLoc, demand.YardFootprint);
+		}
+
+		/// <summary>
+		/// ECON-A-FIX (R6): the footprint the traveller leaves behind when it deploys — the committed
+		/// yard's BuildingInfo tiles around the deploy cell. An MCV's yard type resolves through its
+		/// Transforms trait (the same enabled-transform resolver the MCV manager uses); a relocating
+		/// conyard contributes its own.
+		/// </summary>
+		IReadOnlyCollection<CPos> DeployFootprint(Actor expandActor, CPos loc)
+		{
+			var info = expandActor.Info;
+			if (info.TraitInfoOrDefault<BuildingInfo>() == null)
+			{
+				var into = expandActor.TraitsImplementing<Transforms>()
+					.FirstOrDefault(t => !t.IsTraitDisabled && !t.IsTraitPaused)?.Info.IntoActor;
+				info = into != null && world.Map.Rules.Actors.TryGetValue(into, out var yard) ? yard : null;
+			}
+
+			var bi = info?.TraitInfoOrDefault<BuildingInfo>();
+			return bi != null ? bi.Tiles(loc).ToList() : (IReadOnlyCollection<CPos>)new[] { loc };
+		}
 
 		// ECON-A: projected income — the sliding window over Earned (deliveries only; integers).
 		int incomeWindowStartTick = -1;
@@ -1113,48 +1203,81 @@ namespace OpenRA.Mods.CA.Traits
 			{
 				var mcv = demand.Mcv;
 
-				// Transform chain first: ReplacedByActor stays readable on a disposed MCV, and the
-				// same tick disposes it — checking deadness first would skip the deploy/release edge.
-				if (mcv != null && mcv.ReplacedByActor != null)
+				// ECON-A-FIX (R3): the transform edge fires exactly once — ReplacedByActor stays readable
+				// on the disposed MCV forever, so it is gated on Deployed (the consumed marker). A yard
+				// replacement deploys; a live own non-yard relocates the demand onto it; an unusable or
+				// foreign-owned replacement (disposed, dead, lost, captured) ends the journey — the
+				// demand expires instead of latching onto a corpse or an enemy's yard.
+				if (!demand.Deployed && mcv != null && mcv.ReplacedByActor != null)
 				{
 					var next = mcv.ReplacedByActor;
-					if (Info.ConstructionYardTypes.Contains(next.Info.Name))
+					var usable = !next.Disposed && !next.IsDead && next.IsInWorld && next.Owner == player;
+					var transition = BaseBuilderQueueEvalCA.ExpansionTransform(
+						alreadyDeployed: false, hasReplacement: true,
+						replacementUsable: usable, replacementYard: usable && Info.ConstructionYardTypes.Contains(next.Info.Name));
+
+					if (transition == BaseBuilderQueueEvalCA.ExpansionTransformTransition.Deploy)
 					{
 						// Deployed: the conyard exists — the Done items release through the normal
 						// placement path this tick (the queue managers see Deployed and stop holding).
+						// The window is set once here — every later sweep skips this branch (the
+						// transform edge is consumed) — and the builder nudge fires exactly once.
 						demand.Deployed = true;
+						demand.DeployedYard = next;
 						demand.DeployedYardLoc = next.Location;
 						demand.ExpiresTick = now + Info.ExpansionDemandIdleTicks;
+						leases?.Release(mcv, LeaseOwner);
 						foreach (var builder in builders)
 							builder.WaitTicks = Math.Min(builder.WaitTicks, 0);
 					}
-					else
+					else if (transition == BaseBuilderQueueEvalCA.ExpansionTransformTransition.Relocate)
 					{
 						// Relocation (conyard→MCV) or another non-yard transform: the journey continues
-						// on the replacement actor — re-key both records so the demand follows it.
+						// on the replacement actor — re-key both records and the lease so the demand
+						// follows it.
 						RequestedRefineries.Remove(mcv);
 						RequestedRefineries[next] = (demand.ConyardLoc, demand.ResourceLoc);
 						ExpansionDemands.Remove(mcv);
+						leases?.Release(mcv, LeaseOwner);
 						demand.Mcv = next;
 						ExpansionDemands[next] = demand;
+						BotUnitLeases.TryClaim(leases, next, LeaseOwner, BotLeasePurpose.McvExpansion, Info.ExpansionDemandIdleTicks);
 						demand.ExpiresTick = now + Info.ExpansionDemandIdleTicks;
+						continue;
+					}
+					else
+					{
+						ExpireExpansionDemand(bot, demand);
 						continue;
 					}
 				}
 				else if (!demand.Deployed &&
-					(mcv == null || mcv.Disposed || mcv.IsDead || !mcv.IsInWorld
+					(mcv == null || mcv.Disposed || mcv.IsDead || !mcv.IsInWorld || mcv.Owner != player
 						|| !RequestedRefineries.ContainsKey(mcv)))
 				{
+					// ECON-A-FIX (R4): death, disposal, capture and a consumed request all lapse the
+					// demand — none of them waits for the idle window.
 					ExpireExpansionDemand(bot, demand);
 					continue;
 				}
 				else if (!demand.Deployed)
 				{
-					// A lease held by a different job (any purpose but McvExpansion) means the unit was
-					// taken over — the spec's "lost its lease" lapse. No lease service = no veto. No
-					// module claims McvExpansion yet, so the operative case is a foreign-purpose claim.
-					var lease = leases?.LeaseOf(mcv);
-					if (lease != null && lease.Value.Purpose != BotLeasePurpose.McvExpansion)
+					// ECON-A-FIX (R4): the demand holds the MCV's McvExpansion lease while the journey is
+					// ours — the spec's "active while the MCV holds the expansion lease" contract, claimed
+					// at posting and re-claimed every sweep as the heartbeat. A foreign owner's lease
+					// (takeover, emergency preempt) makes the claim fail; so does losing the unit.
+					if (!BotUnitLeases.TryClaim(leases, mcv, LeaseOwner, BotLeasePurpose.McvExpansion, Info.ExpansionDemandIdleTicks))
+					{
+						ExpireExpansionDemand(bot, demand);
+						continue;
+					}
+
+					// ECON-A-FIX (R4): the committed journey, not the idle flag — the chain's last
+					// positional target must still aim at the deploy neighbourhood. A redirected MCV
+					// (DeployMcvs reposts only idle ones, so a mid-flight redirect otherwise kept the
+					// stale demand forever) lapses here; a transform or unit-less actor reports no
+					// targets and stays indeterminate for the idle window to decide.
+					if (!JourneyStillCommitted(mcv, demand))
 					{
 						ExpireExpansionDemand(bot, demand);
 						continue;
@@ -1175,9 +1298,29 @@ namespace OpenRA.Mods.CA.Traits
 					if (now >= demand.NextEtaTick)
 						RefreshExpansionEta(demand);
 				}
+				else if (demand.DeployedYard == null || demand.DeployedYard.Disposed || demand.DeployedYard.IsDead
+					|| !demand.DeployedYard.IsInWorld || demand.DeployedYard.Owner != player)
+				{
+					// ECON-A-FIX (R3): the committed actor after deploy is the yard — the outpost died,
+					// was captured, or undeployed away. The demand ends with it (bound items unwind for
+					// their refund) instead of leaking bindings onto a corpse.
+					ExpireExpansionDemand(bot, demand);
+					continue;
+				}
 
 				VerifyDemandBinding(demand, isRefinery: true, now);
 				VerifyDemandBinding(demand, isRefinery: false, now);
+
+				// ECON-A-FIX (R6): the bound refinery's anchor reservation renews with the demand — a
+				// lost hold (the anchor got served, parked or committed elsewhere) just falls back to a
+				// fresh claim at placement; the law's one-refinery-per-anchor rule stands either way.
+				if (demand.ReservedClaim is { } reserved)
+				{
+					var law = RefineryLawProvider();
+					if (demand.RefineryItem == null || law == null
+						|| !law.TryReserveRefineryAnchor(reserved.Anchor, demand, now + Info.ExpansionDemandIdleTicks))
+						demand.ReservedClaim = null;
+				}
 
 				// Deployed and fully placed/cleared — done.
 				if (demand.Deployed && demand.Unbound && now >= demand.ExpiresTick)
@@ -1189,6 +1332,45 @@ namespace OpenRA.Mods.CA.Traits
 		}
 
 		/// <summary>
+		/// ECON-A-FIX (R4): the journey is still committed iff the traveller's activity chain aims at the
+		/// deploy cell's neighbourhood — Move reports its destination (or remaining path) through the
+		/// public GetTargets seam; TransformsIntoMobile persists the redeploy destination into the
+		/// emergent MCV's own chain. The last positional target decides: a redirected unit ends up
+		/// aiming elsewhere. No targets at all is indeterminate — the idle window decides.
+		/// </summary>
+		bool JourneyStillCommitted(Actor mcv, ExpansionDemand demand)
+		{
+			var sawTarget = false;
+			var lastNear = false;
+			foreach (var t in ActivityTargets(mcv, mcv.CurrentActivity))
+			{
+				if (t.Type == TargetType.Invalid)
+					continue;
+
+				sawTarget = true;
+				lastNear = (world.Map.CellContaining(t.CenterPosition) - demand.ConyardLoc).Length <= ExpansionJourneySlackCells;
+			}
+
+			return BaseBuilderQueueEvalCA.ExpansionJourneyCommitted(sawTarget, lastNear);
+		}
+
+		/// <summary>Every target a chain reports — each activity's own, then its child's, then its next's.</summary>
+		static IEnumerable<Target> ActivityTargets(Actor self, Activity activity)
+		{
+			for (var a = activity; a != null; a = a.NextActivity)
+			{
+				var targets = a.GetTargets(self);
+				if (targets != null)
+					foreach (var t in targets)
+						yield return t;
+
+				if (a.ChildActivity != null)
+					foreach (var t in ActivityTargets(self, a.ChildActivity))
+						yield return t;
+			}
+		}
+
+		/// <summary>
 		/// ECON-A (§6): expiry unwinds the demand — a still-building or held item is cancelled for its
 		/// normal refund (a Done item refunds the full paid amount), except a held Ready refinery that
 		/// the law can re-adopt on another anchor: it converts to a normal queued refinery instead.
@@ -1196,6 +1378,15 @@ namespace OpenRA.Mods.CA.Traits
 		void ExpireExpansionDemand(IBot bot, ExpansionDemand demand)
 		{
 			var law = RefineryLawProvider();
+
+			// ECON-A-FIX (R6): the demand's anchor hold ends with it — released before the re-adopt check
+			// so a still-Ready refinery may legally re-claim that very anchor as an ordinary item.
+			if (demand.ReservedClaim is { } reserved)
+				law?.ReleaseRefineryAnchor(reserved.Anchor, demand);
+
+			// ECON-A-FIX (R4): the traveller's McvExpansion lease is the demand's — released on every
+			// lapse path (the registry prunes a dead unit's lease on its own cadence regardless).
+			BotUnitLeases.Of(player)?.Release(demand.Mcv, LeaseOwner);
 
 			if (demand.RefineryItem != null)
 			{
@@ -1248,7 +1439,6 @@ namespace OpenRA.Mods.CA.Traits
 
 			var producer = isRefinery ? demand.RefineryProducer : demand.DefenceProducer;
 			var queuedTick = isRefinery ? demand.RefineryQueuedTick : demand.DefenceQueuedTick;
-			const int OrderGraceTicks = 30;
 
 			if (producer != null && !producer.Disposed
 				&& producer.TraitsImplementing<ProductionQueue>().Any(q => q.AllQueued().Any(i => i.Item == item)))
@@ -1257,10 +1447,19 @@ namespace OpenRA.Mods.CA.Traits
 			if (now - queuedTick < OrderGraceTicks)
 				return;
 
+			// ECON-A-FIX (R6): an unwound refinery binding releases its anchor hold — the anchor goes
+			// back on the market before the demand could re-bind or expire around it.
 			if (isRefinery)
+			{
+				if (demand.ReservedClaim is { } reserved)
+					RefineryLawProvider()?.ReleaseRefineryAnchor(reserved.Anchor, demand);
+
 				demand.UnbindRefinery();
+			}
 			else
+			{
 				demand.UnbindDefence();
+			}
 		}
 
 		/// <summary>
@@ -1280,29 +1479,116 @@ namespace OpenRA.Mods.CA.Traits
 				demand.DefenceType = ChooseDemandDefence(demand.EtaTick);
 		}
 
-		/// <summary>The PathFinder distance (WDist) from the MCV's cell to the deploy target over its
-		/// locomotor, divided by its nominal speed — own-unit facts and public map data only.</summary>
+		/// <summary>
+		/// ECON-A-FIX (R1): the honest-travel estimate — a terrain-only search (BlockedByActor.None) plus
+		/// a custom cell cost that blocks exactly the obstacles we KNOW: own units, occupants of
+		/// currently visible cells, and remembered frozen-under-fog footprints. The live Immovable
+		/// graph is never consulted, so an unseen enemy building can neither block nor unblock the
+		/// estimate — the production schedule provably does not depend on fog-hidden state.
+		/// ECON-A-FIX (R2): the result path runs target-to-source; its length is the sum of its own
+		/// consecutive segments only — no source-to-first-cell chord.
+		/// </summary>
 		int EstimateTravelTicks(Actor mcv, CPos target)
 		{
 			var mobile = mcv.TraitOrDefault<Mobile>();
 			if (mobile == null || pathFinder == null)
 				return 0;
 
+			var remembered = FrozenBlockedCells(mcv, mobile);
 			var path = pathFinder.FindPathToTargetCell(mcv, new[] { mcv.Location }, target,
-				BlockedByActor.Immovable, ignoreActor: mcv);
+				BlockedByActor.None, EtaCellCost(mcv, mobile, remembered), ignoreActor: mcv);
 			if (path.Count == 0)
 				return int.MaxValue;
 
-			long distance = 0;
-			var previous = world.Map.CenterOfCell(mcv.Location);
-			foreach (var step in path)
+			return BaseBuilderQueueEvalCA.ExpansionTravelTicks(
+				BaseBuilderQueueEvalCA.ExpansionPathLength(path, c => world.Map.CenterOfCell(c)),
+				mobile.MovementSpeedForCell(mcv.Location));
+		}
+
+		/// <summary>
+		/// ECON-A-FIX (R1): the per-cell cost of the honest search — PathCostForInvalidPath only where a
+		/// KNOWN immovable obstacle stands (Locomotor.IsBlockedBy's Immovable predicate re-evaluated
+		/// over remembered/visible/own occupants instead of the full ActorMap), else 0.
+		/// </summary>
+		Func<CPos, int> EtaCellCost(Actor mcv, Mobile mobile, IReadOnlySet<CPos> remembered)
+		{
+			var crushes = mobile.Locomotor.Info.Crushes;
+			return cell =>
 			{
-				var stepPosition = world.Map.CenterOfCell(step);
-				distance += (stepPosition - previous).Length;
-				previous = stepPosition;
+				if (remembered != null && remembered.Contains(cell))
+					return PathGraph.PathCostForInvalidPath;
+
+				var seen = player.Shroud.IsVisible(cell);
+				foreach (var other in world.ActorMap.GetActorsAt(cell))
+				{
+					if (other == mcv)
+						continue;
+
+					var otherMobile = other.OccupiesSpace as Mobile;
+					var movable = otherMobile != null && !otherMobile.IsTraitDisabled && !otherMobile.IsTraitPaused && !otherMobile.IsImmovable;
+					var moving = movable && otherMobile.CurrentMovementTypes.HasMovementType(MovementType.Horizontal);
+					var allied = movable && player.RelationshipWith(other.Owner) == PlayerRelationship.Ally;
+					var removable = other.TraitOrDefault<ITemporaryBlocker>() is { } tb && tb.CanRemoveBlockage(other, mcv);
+					var transit = other.OccupiesSpace is Building building && building.TransitOnlyCells().Contains(cell);
+					var crushable = false;
+					foreach (var c in other.Crushables)
+						if (c.CrushableBy(other, mcv, crushes))
+						{
+							crushable = true;
+							break;
+						}
+
+					if (BaseBuilderQueueEvalCA.EtaOccupantBlocks(
+						known: other.Owner == player || seen, movable, allied, moving, removable, transit, crushable))
+						return PathGraph.PathCostForInvalidPath;
+				}
+
+				return 0;
+			};
+		}
+
+		/// <summary>
+		/// ECON-A-FIX (R1): the cells remembered frozen-under-fog footprints still block for the MCV —
+		/// the frozen layer is the legal record of what we last saw; immobile remembered occupants keep
+		/// their cells unless the known actor is crushable, removable (a gate), or transit-only there.
+		/// A live actor hidden on a remembered cell is reached through the ActorMap pass (its cell is
+		/// unseen so it contributes nothing), and the footprint contributes here — the remembered
+		/// blocker stands even while the unit's live state is hidden.
+		/// </summary>
+		HashSet<CPos> FrozenBlockedCells(Actor mcv, Mobile mobile)
+		{
+			var layer = player.PlayerActor.TraitOrDefault<FrozenActorLayer>();
+			if (layer == null)
+				return null;
+
+			var crushes = mobile.Locomotor.Info.Crushes;
+			HashSet<CPos> blocked = null;
+			foreach (var fa in layer.FrozenActorsInRegion(world.Map.AllCells))
+			{
+				if (!fa.IsValid || fa.Info.HasTraitInfo<MobileInfo>())
+					continue;
+
+				var actor = fa.Actor;
+				foreach (var puv in fa.Footprint)
+				{
+					var cell = ((MPos)puv).ToCPos(world.Map);
+					var transit = actor != null && actor.OccupiesSpace is Building building && building.TransitOnlyCells().Contains(cell);
+					var removable = actor != null && actor.TraitOrDefault<ITemporaryBlocker>() is { } tb && tb.CanRemoveBlockage(actor, mcv);
+					var crushable = false;
+					if (actor != null)
+						foreach (var c in actor.Crushables)
+							if (c.CrushableBy(actor, mcv, crushes))
+							{
+								crushable = true;
+								break;
+							}
+
+					if (!transit && !removable && !crushable)
+						(blocked ??= new HashSet<CPos>()).Add(cell);
+				}
 			}
 
-			return BaseBuilderQueueEvalCA.ExpansionTravelTicks(distance, mobile.MovementSpeedForCell(mcv.Location));
+			return blocked;
 		}
 
 		/// <summary>Own cash + resources plus the measured income rate out to the ETA — integers only.</summary>
@@ -1536,7 +1822,8 @@ namespace OpenRA.Mods.CA.Traits
 			if (!ExpansionPrebuildEnabled || expandActor == null || !RequestedRefineries.ContainsKey(expandActor))
 				return;
 
-			if (!ExpansionDemands.TryGetValue(expandActor, out var demand))
+			var isNew = !ExpansionDemands.TryGetValue(expandActor, out var demand);
+			if (isNew)
 			{
 				demand = new ExpansionDemand(expandActor);
 				ExpansionDemands[expandActor] = demand;
@@ -1545,8 +1832,17 @@ namespace OpenRA.Mods.CA.Traits
 			var request = RequestedRefineries[expandActor];
 			demand.ConyardLoc = request.ConyardLoc;
 			demand.ResourceLoc = request.ResourceLoc;
+			demand.YardFootprint = DeployFootprint(expandActor, request.ConyardLoc);
 			demand.ExpiresTick = world.WorldTick + Info.ExpansionDemandIdleTicks;
 			demand.NextEtaTick = world.WorldTick;
+
+			// ECON-A-FIX (R4): the demand publishes only while its own McvExpansion lease holds on the
+			// traveller — a first claim refused by a foreign owner's lease means this journey is not ours
+			// to schedule, so the demand never posts (the plain request record still stands). On an
+			// existing demand a failed re-claim is left to the sweep, which expires it the same tick.
+			if (!BotUnitLeases.TryClaim(BotUnitLeases.Of(player), expandActor, LeaseOwner,
+				BotLeasePurpose.McvExpansion, Info.ExpansionDemandIdleTicks) && isNew)
+				ExpansionDemands.Remove(expandActor);
 		}
 	}
 }
