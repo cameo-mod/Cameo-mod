@@ -3969,4 +3969,46 @@ candidates, production at-or-behind-limit and neutral fallback, valuable farthes
 (air-only exempt, tech/superweapon/CashTrickler valuable, cheap crawl), provider non-collide > cheapest, range
 floor to cells.
 
+### 12.36 ECON-A — expansion pre-build: the outpost's refinery and defence are Ready when the conyard lands (Devin, 2026-10-06; fleet SPEC_2026-10-05_econ_logistics Part A; switch BT_expansion_prebuild)
+
+`BaseBuilderBotModuleCA` (`@generic`, shared by genericbot and classicbot — the `SwitchCondition: genericbot`
+gate keeps classic bit-identical, the F2 pattern) turns the existing `IBotSuggestRefineryProduction.RequestLocation`
+post into an `ExpansionDemand`. The MCV owner (engine `McvExpansionManagerBotModule`) already calls
+`RequestLocation(resourceLoc, deployLoc, mcv)` the tick it commits a deploy target; the base builder retains that
+`RequestedRefineries` entry as the demand record and carries the rest — ETA, defence pick, queue bindings, expiry —
+on a new `ExpansionDemand` keyed on the same actor and re-keyed across `ReplacedByActor` (conyard→MCV relocation
+chains included; a construction-yard replacement is the deploy event).
+
+`etaTick = now + travel + ExpansionDeployTicks` — travel is the `IPathFinder` path length (WDist) for the MCV's
+locomotor divided by `Mobile.MovementSpeedForCell` (own-unit facts + public map data, fog-honest), recomputed every
+`ExpansionEtaIntervalTicks` (25) since the MCV may detour; `TransformsInfo` exposes no deploy duration, so the
+allowance is a conservative knob (25). `defenceType` is the strongest `AttackBase` building a defence queue can
+produce that projected cash at the ETA affords — strength is `DefenceStrength`, the fuzzy squad model
+(`Damage * Burst / reload window * 100` per `DamageWarhead`, burst-delay term clamped [1,200]); ties break on
+cost then ordinal name; sticky once picked, recomputed while null. Projected cash = `GetCashAndResources()` plus a
+measured `Earned` rate over `ExpansionIncomeWindowTicks` (500).
+
+Scheduling: `ChooseExpansionDemandItem` injects ahead of ordinary wants (below every essential override — power,
+opening, economy refinery, planner wants), refinery first under the same `HasMaxRefineriesFor` anchor law
+(`UnclaimedAnchorsInReach > in-flight`), queued when `etaTick - buildTime <= now`. Demand-bound items ride the
+planner-want cost floor instead of the reserve gate, which would push them past the ETA they were scheduled to
+meet. A completed bound item sits at `Queue[0]` until deploy — the engine's own one-head-per-queue guarantee is the
+cap; the defence hold additionally requires `DefenceHoldPermitted` (a lone building producer exempts the hold
+unless `etaTick - now <= ExpansionHoldSlack`, 500; the refinery is never skipped). Deploy (`ReplacedByActor` → a
+ConstructionYardTypes actor) flips `Deployed`, nudges every queue's `WaitTicks` to release this/next tick, and the
+normal placement path does the work — refinery through `NextRefineryClaim`/`RefineryClaimCommitted` biased to the
+demand's own outpost entry, defence through the §12.35 advisor's Defence class at the outpost, then the
+defence-placement advisor, then the classic annulus scan. Expiry (`ExpansionDemandIdleTicks`, 100, refreshed by
+live activity; a dead/disposed/re-purposed MCV lapses) cancels bound items through `Order.CancelProduction` for the
+normal refund, except a held Ready refinery the law can re-adopt (`NextRefineryClaim(null)` non-null) which stays
+queued as an ordinary refinery. Determinism: demands iterate by `Mcv.ActorID`; no `LocalRandom` anywhere on the
+demand path — the classification roll is skipped outright for bound items.
+
+Switch off: `RequestedRefineries` and the queue flow are bit-identical — every new branch is behind
+`ExpansionPrebuildEnabled` and a null `demand` parameter.
+
+Tests (`BaseBuilderQueueEvalTest`, +8): the ETA due window and never-due `int.MaxValue`, travel division and
+stalled/pathless sentinel, sole-producer hold slack, strongest-affordable pick, and the cost-then-ordinal-name
+tie-break.
+
 

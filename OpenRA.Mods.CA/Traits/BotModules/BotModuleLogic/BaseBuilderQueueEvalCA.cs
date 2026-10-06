@@ -12,6 +12,8 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using OpenRA.Mods.Common.Traits;
+using OpenRA.Mods.Common.Warheads;
 
 namespace OpenRA.Mods.CA.Traits
 {
@@ -214,5 +216,85 @@ namespace OpenRA.Mods.CA.Traits
 		/// </summary>
 		public static Actor FirstRequestedRefinery<TValue>(IReadOnlyDictionary<Actor, TValue> requests) =>
 			FirstByOrder(requests, a => a.ActorID);
+
+		/// <summary>
+		/// ECON-A (SPEC_2026-10-05 Part A §3): a demand item queues when it can still reach Ready by
+		/// the MCV's ETA — start when `etaTick - buildTime &lt;= now`; an already-late item starts now.
+		/// </summary>
+		public static bool ExpansionDue(int etaTick, int buildTimeTicks, int now) => etaTick - buildTimeTicks <= now;
+
+		/// <summary>
+		/// ECON-A (§2): travel time for the expansion ETA — path length in WDist over the MCV's
+		/// nominal speed (WDist per tick), integer division. A pathless or stalled estimate is a
+		/// far-future tick (never due) so the caller expires the demand instead of pre-building blind.
+		/// </summary>
+		public static int ExpansionTravelTicks(long distanceWDist, int speedWDistPerTick) =>
+			speedWDistPerTick <= 0 ? int.MaxValue : (int)Math.Min(int.MaxValue, distanceWDist / speedWDistPerTick);
+
+		/// <summary>
+		/// ECON-A (§4): the defence pre-build is skipped while it would hold a Ready item on the
+		/// bot's only building producer — unless the deploy is already close (within holdSlack).
+		/// The refinery never takes this gate: it gates the expansion's economy.
+		/// </summary>
+		public static bool DefenceHoldPermitted(bool soleProducer, int ticksToEta, int holdSlack) =>
+			!soleProducer || ticksToEta <= holdSlack;
+
+		/// <summary>
+		/// ECON-A (§1): a defence's strength ordering — the same damage model the squad fuzzy uses
+		/// (AttackOrFleeFuzzyCA): Damage * Burst / totalReloadDelay * 100 per DamageWarhead, with the
+		/// first BurstDelay counted once per extra shot and the total reload window clamped to
+		/// [1, 200] so slow one-shot weapons are not undervalued. 0 for a non-AttackBase actor or one
+		/// with no damage warheads.
+		/// </summary>
+		public static int DefenceStrength(ActorInfo info)
+		{
+			if (!info.HasTraitInfo<AttackBaseInfo>())
+				return 0;
+
+			var sum = 0;
+			foreach (var arm in info.TraitInfos<ArmamentInfo>())
+			{
+				var weapon = arm.WeaponInfo;
+				if (weapon == null)
+					continue;
+
+				var burst = weapon.Burst;
+				var burstDelay = weapon.BurstDelays.IsDefaultOrEmpty ? 0 : weapon.BurstDelays[0];
+				var totalReloadDelay = weapon.ReloadDelay + (burstDelay * (burst - 1)).Clamp(1, 200);
+				foreach (var warhead in weapon.Warheads.OfType<DamageWarhead>())
+					sum += warhead.Damage * burst / Math.Max(1, totalReloadDelay) * 100;
+			}
+
+			return sum;
+		}
+
+		/// <summary>
+		/// ECON-A (§1): the strongest affordable defence — highest strength wins; ties break on the
+		/// lowest ActorInfo cost, then the actor name (ordinal). Nothing affordable yields null and
+		/// the demand proceeds refinery-only. Inputs arrive precomputed so the rule stays World-free.
+		/// </summary>
+		public static ActorInfo ChooseExpansionDefence(IReadOnlyList<(ActorInfo Info, int Strength, int Cost)> candidates, int projectedCash)
+		{
+			ActorInfo best = null;
+			var bestStrength = 0;
+			var bestCost = 0;
+			foreach (var candidate in candidates)
+			{
+				if (candidate.Cost > projectedCash)
+					continue;
+
+				if (best == null || candidate.Strength > bestStrength
+					|| (candidate.Strength == bestStrength
+						&& (candidate.Cost < bestCost
+							|| (candidate.Cost == bestCost && string.CompareOrdinal(candidate.Info.Name, best.Name) < 0))))
+				{
+					best = candidate.Info;
+					bestStrength = candidate.Strength;
+					bestCost = candidate.Cost;
+				}
+			}
+
+			return best;
+		}
 	}
 }

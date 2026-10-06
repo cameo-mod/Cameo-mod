@@ -357,5 +357,109 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(BaseBuilderQueueEvalCA.FirstByOrder<string, int>(null, _ => 0), Is.Null);
 			Assert.That(BaseBuilderQueueEvalCA.FirstByOrder(new Dictionary<string, int>(), _ => 0), Is.Null);
 		}
+
+		// ECON-A (SPEC_2026-10-05_econ_logistics Part A) — expansion demand scheduling
+		// ExpansionDue
+
+		[Test]
+		public void DemandItemQueuesOnlyInsideItsEtaWindow()
+		{
+			Assert.That(BaseBuilderQueueEvalCA.ExpansionDue(100, 30, 69), Is.False);
+			Assert.That(BaseBuilderQueueEvalCA.ExpansionDue(100, 30, 70), Is.True);
+			Assert.That(BaseBuilderQueueEvalCA.ExpansionDue(100, 30, 200), Is.True);
+		}
+
+		[Test]
+		public void UnreachableEtaIsNeverDue()
+			=> Assert.That(BaseBuilderQueueEvalCA.ExpansionDue(int.MaxValue, 30, 200000), Is.False);
+
+		// ExpansionTravelTicks
+
+		[Test]
+		public void TravelTicksDividePathLengthBySpeed()
+		{
+			Assert.That(BaseBuilderQueueEvalCA.ExpansionTravelTicks(1000, 100), Is.EqualTo(10));
+			Assert.That(BaseBuilderQueueEvalCA.ExpansionTravelTicks(999, 100), Is.EqualTo(9));
+			Assert.That(BaseBuilderQueueEvalCA.ExpansionTravelTicks(0, 100), Is.EqualTo(0));
+		}
+
+		[Test]
+		public void StalledOrPathlessTravelIsFarFuture()
+		{
+			Assert.That(BaseBuilderQueueEvalCA.ExpansionTravelTicks(1000, 0), Is.EqualTo(int.MaxValue));
+			Assert.That(BaseBuilderQueueEvalCA.ExpansionTravelTicks(1000, -5), Is.EqualTo(int.MaxValue));
+			Assert.That(BaseBuilderQueueEvalCA.ExpansionTravelTicks(long.MaxValue, 1), Is.EqualTo(int.MaxValue));
+		}
+
+		// DefenceHoldPermitted — the sole-producer slack gate
+
+		[Test]
+		public void DefenceHoldAlwaysAllowedWithMultipleProducers()
+		{
+			Assert.That(BaseBuilderQueueEvalCA.DefenceHoldPermitted(false, 90000, 500), Is.True);
+			Assert.That(BaseBuilderQueueEvalCA.DefenceHoldPermitted(false, 0, 0), Is.True);
+		}
+
+		[Test]
+		public void SoleProducerHoldsOnlyInsideTheSlackWindow()
+		{
+			Assert.That(BaseBuilderQueueEvalCA.DefenceHoldPermitted(true, 501, 500), Is.False);
+			Assert.That(BaseBuilderQueueEvalCA.DefenceHoldPermitted(true, 500, 500), Is.True);
+			Assert.That(BaseBuilderQueueEvalCA.DefenceHoldPermitted(true, 0, 500), Is.True);
+		}
+
+		// ChooseExpansionDefence — strength ordering, affordability at ETA, deterministic ties
+
+		static readonly ActorInfo GunA = new("guna");
+		static readonly ActorInfo GunB = new("gunb");
+		static readonly ActorInfo GunC = new("gunc");
+
+		[Test]
+		public void StrongestAffordableDefenceWins()
+		{
+			var candidates = new List<(ActorInfo Info, int Strength, int Cost)>
+			{
+				(GunA, 100, 500),
+				(GunB, 300, 900),
+				(GunC, 50, 100),
+			};
+
+			Assert.That(BaseBuilderQueueEvalCA.ChooseExpansionDefence(candidates, 1000), Is.SameAs(GunB));
+		}
+
+		[Test]
+		public void UnaffordableDefenceIsSkippedAtEta()
+		{
+			var candidates = new List<(ActorInfo Info, int Strength, int Cost)>
+			{
+				(GunA, 100, 500),
+				(GunB, 300, 900),
+			};
+
+			// Projected cash covers the weak gun only — strength does not buy past the ETA price.
+			Assert.That(BaseBuilderQueueEvalCA.ChooseExpansionDefence(candidates, 600), Is.SameAs(GunA));
+			Assert.That(BaseBuilderQueueEvalCA.ChooseExpansionDefence(candidates, 100), Is.Null);
+		}
+
+		[Test]
+		public void DefenceTiesBreakOnCostThenOrdinalName()
+		{
+			var byCost = new List<(ActorInfo Info, int Strength, int Cost)>
+			{
+				(GunB, 200, 800),
+				(GunA, 200, 500),
+			};
+
+			Assert.That(BaseBuilderQueueEvalCA.ChooseExpansionDefence(byCost, 1000), Is.SameAs(GunA));
+
+			var byName = new List<(ActorInfo Info, int Strength, int Cost)>
+			{
+				(GunC, 200, 500),
+				(GunB, 200, 500),
+				(GunA, 200, 500),
+			};
+
+			Assert.That(BaseBuilderQueueEvalCA.ChooseExpansionDefence(byName, 1000), Is.SameAs(GunA));
+		}
 	}
 }

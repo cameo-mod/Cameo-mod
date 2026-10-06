@@ -44,6 +44,11 @@ namespace OpenRA.Mods.CA.Traits
 		int minCashRequirement;
 		CPos? baseCenterKeepsFailing = null;
 
+		// ECON-A: ChooseBuildLocation set this when an expansion-demand cell came from the
+		// defence-placement advisor — TickQueue's advisedDefense local predates the demand path
+		// and can't be reached from inside the helper. Folded into the same telemetry flag.
+		bool demandAdvisedDefense = false;
+
 		bool itemQueuedThisTick = false;
 
 		// An empty tolerance list in yaml would make ImmutableArray.Random throw.
@@ -264,8 +269,13 @@ namespace OpenRA.Mods.CA.Traits
 				var lawWants = baseBuilder.RefineryLawProvider();
 				var plannerWant = lawWants != null
 					&& (item.Name == lawWants.WantedLinkBuilding || item.Name == lawWants.WantedMcvPrerequisite);
+
+				// ECON-A: a demand-bound item rides at its own cost floor like the planner wants —
+				// the reserve gate would push it past the ETA it was scheduled to meet.
+				var demandBound = baseBuilder.ExpansionPrebuildEnabled
+					&& baseBuilder.DemandForQueuedItem(item.Name, queue.Actor) != null;
 				if (BaseBuilderQueueEvalCA.BlockedByCash(playerResources.GetCashAndResources(), minCashRequirement,
-						baseBuilder.Info.RefineryTypes.Contains(item.Name), plannerWant,
+						baseBuilder.Info.RefineryTypes.Contains(item.Name), plannerWant || demandBound,
 						queue.GetProductionCost(item), itemQueuedThisTick))
 					return false;
 
@@ -289,6 +299,16 @@ namespace OpenRA.Mods.CA.Traits
 			}
 			else if (currentBuilding != null && currentBuilding.Done)
 			{
+				// ECON-A (§4 Ready-hold): a bound demand item sits at Queue[0] until its MCV deploys —
+				// returning false holds it without spending failure budget (the same mechanic the REF-1
+				// crawl hold and the BP-2 front/back hold use below). One held item per queue is the
+				// engine's own guarantee: only the head item produces, and the head is the held item.
+				var heldDemand = baseBuilder.ExpansionPrebuildEnabled
+					? baseBuilder.DemandForQueuedItem(currentBuilding.Item, queue.Actor)
+					: null;
+				if (heldDemand != null && !heldDemand.Deployed)
+					return false;
+
 				// Production is complete
 				// Choose the placement logic
 				// HACK: HACK HACK HACK
@@ -319,6 +339,7 @@ namespace OpenRA.Mods.CA.Traits
 				refineryClaimed = false;
 				lastFrontBackPick = null;
 				frontBackHold = false;
+				demandAdvisedDefense = false;
 				if (plugInfo != null)
 				{
 					var possibleBuilding = world.ActorsWithTrait<Pluggable>().FirstOrDefault(a =>
@@ -334,50 +355,63 @@ namespace OpenRA.Mods.CA.Traits
 				{
 					var law = baseBuilder.RefineryLawProvider();
 
-					// Check if Building is a defense and if we should place it towards the enemy or not.
-					// REF-1 B1 (§12.24 v2): the planner's crawl want is always a BaseCrawl placement — the want
-					// exists to close the gap to the target field, so the chance roll and cost threshold that
-					// gate organic crawl never apply to it (no random draw is consumed on this path).
-					var lawLink = law != null && currentBuilding.Item == law.WantedLinkBuilding;
-					var isRefinery = false;
-					var isFragile = false;
-					var hasAttackBase = false;
-					var defenseRoll = false;
-					var organicCrawlRoll = false;
-					if (!lawLink)
+					if (heldDemand != null)
 					{
-						if (baseBuilder.Info.RefineryTypes.Contains(actorInfo.Name))
-							isRefinery = true;
-						else if (baseBuilder.Info.FragileTypes.Contains(actorInfo.Name))
-							isFragile = true;
-						else if (actorInfo.HasTraitInfo<AttackBaseInfo>())
+						// ECON-A (§5): the MCV deployed — the held refinery takes the refinery-law claim
+						// path biased to the demand's own outpost, the defence places at the outpost.
+						// The class is decided by the binding itself; no random draw is consumed on
+						// this path (SPEC §8).
+						type = heldDemand.RefineryItem == currentBuilding.Item && heldDemand.RefineryProducer == queue.Actor
+							? BuildingType.Refinery
+							: BuildingType.Defense;
+					}
+					else
+					{
+						// Check if Building is a defense and if we should place it towards the enemy or not.
+						// REF-1 B1 (§12.24 v2): the planner's crawl want is always a BaseCrawl placement — the want
+						// exists to close the gap to the target field, so the chance roll and cost threshold that
+						// gate organic crawl never apply to it (no random draw is consumed on this path).
+						var lawLink = law != null && currentBuilding.Item == law.WantedLinkBuilding;
+						var isRefinery = false;
+						var isFragile = false;
+						var hasAttackBase = false;
+						var defenseRoll = false;
+						var organicCrawlRoll = false;
+						if (!lawLink)
 						{
-							hasAttackBase = true;
-
-							// Cameo: an active advisor picks the cell itself, skipping the roll (no random draw is consumed);
-							// without one, or when it has no answer, the code below is unchanged.
-							advisedDefense = AdvisedDefenseCell(actorInfo, distanceToBaseIsImportant, queue.Actor);
-							if (advisedDefense == null)
+							if (baseBuilder.Info.RefineryTypes.Contains(actorInfo.Name))
+								isRefinery = true;
+							else if (baseBuilder.Info.FragileTypes.Contains(actorInfo.Name))
+								isFragile = true;
+							else if (actorInfo.HasTraitInfo<AttackBaseInfo>())
 							{
-								if (baseBuilder.Info.AntiAirTypes.Contains(actorInfo.Name))
-									placeDefenseTowardsEnemyChance = (int)Math.Ceiling(placeDefenseTowardsEnemyChance / 1.5);
+								hasAttackBase = true;
 
-								defenseRoll = world.LocalRandom.Next(100) < placeDefenseTowardsEnemyChance;
+								// Cameo: an active advisor picks the cell itself, skipping the roll (no random draw is consumed);
+								// without one, or when it has no answer, the code below is unchanged.
+								advisedDefense = AdvisedDefenseCell(actorInfo, distanceToBaseIsImportant, queue.Actor);
+								if (advisedDefense == null)
+								{
+									if (baseBuilder.Info.AntiAirTypes.Contains(actorInfo.Name))
+										placeDefenseTowardsEnemyChance = (int)Math.Ceiling(placeDefenseTowardsEnemyChance / 1.5);
+
+									defenseRoll = world.LocalRandom.Next(100) < placeDefenseTowardsEnemyChance;
+								}
+							}
+							// REF-1 (B1 maintainer ruling): a crawl placement must extend the buildable area —
+							// under the law, buildings without GivesBuildableArea (silos) never take the
+							// organic crawl roll and place at home instead; the GBA check precedes the draw
+							// so it consumes no randoms on the law path.
+							else
+							{
+								organicCrawlRoll = !limitBuildRadius && valueInfo != null && valueInfo.Cost < baseBuilder.Info.BaseCrawlCostThreshold
+									&& RefineryLawCrawlRoll.LegalLink(law != null, actorInfo)
+									&& world.LocalRandom.Next(100) < baseBuilder.Info.BaseCrawlChance;
 							}
 						}
-						// REF-1 (B1 maintainer ruling): a crawl placement must extend the buildable area —
-						// under the law, buildings without GivesBuildableArea (silos) never take the
-						// organic crawl roll and place at home instead; the GBA check precedes the draw
-						// so it consumes no randoms on the law path.
-						else
-						{
-							organicCrawlRoll = !limitBuildRadius && valueInfo != null && valueInfo.Cost < baseBuilder.Info.BaseCrawlCostThreshold
-								&& RefineryLawCrawlRoll.LegalLink(law != null, actorInfo)
-								&& world.LocalRandom.Next(100) < baseBuilder.Info.BaseCrawlChance;
-						}
-					}
 
-					type = BaseBuilderQueueEvalCA.ClassifyPlacement(lawLink, isRefinery, isFragile, hasAttackBase, defenseRoll, organicCrawlRoll);
+						type = BaseBuilderQueueEvalCA.ClassifyPlacement(lawLink, isRefinery, isFragile, hasAttackBase, defenseRoll, organicCrawlRoll);
+					}
 
 					// REF-1 B1 (crawl-trace §8): under the law a crawl placement with no aim holds — returning
 					// keeps the produced building queued (and spends no failure budget) instead of wasting the
@@ -389,7 +423,7 @@ namespace OpenRA.Mods.CA.Traits
 						location = advisedDefense;
 					else
 					{
-						(location, baseCenterKeepsFailing, actorVariant) = ChooseBuildLocation(currentBuilding.Item, distanceToBaseIsImportant, queue.Actor, type);
+						(location, baseCenterKeepsFailing, actorVariant) = ChooseBuildLocation(currentBuilding.Item, distanceToBaseIsImportant, queue.Actor, type, heldDemand);
 
 						// BP-2 (§19.15): the front/back advisor's hold — no legal cell and no fallback
 						// (a radar on a front with no defence line waits; it never goes forward). Same
@@ -417,7 +451,7 @@ namespace OpenRA.Mods.CA.Traits
 				else
 				{
 					failCount = 0;
-					NotifyPlacement(currentBuilding.Item, location.Value, queue.Actor.ActorID, orderString, type, advisedDefense != null, lastFrontBackPick);
+					NotifyPlacement(currentBuilding.Item, location.Value, queue.Actor.ActorID, orderString, type, advisedDefense != null || demandAdvisedDefense, lastFrontBackPick);
 
 					bot.QueueOrder(new Order(orderString, player.PlayerActor, Target.FromCell(world, location.Value), false)
 					{
@@ -651,6 +685,75 @@ namespace OpenRA.Mods.CA.Traits
 			return best;
 		}
 
+		/// <summary>
+		/// ECON-A (SPEC_2026-10-05_econ_logistics Part A §3): the item an expansion demand wants on this
+		/// queue, or null. Refinery first — the shortest-build refinery the queue can make, gated by the
+		/// same HasMaxRefineriesFor anchor law every other refinery honours — then the demand's defence
+		/// pick. Both wait for their ETA window (finish ~= etaTick); an already-due item starts now.
+		/// Deterministic: demands iterate in Mcv.ActorID order; a second demand never binds the same
+		/// item name on the same producer (the hold tracks producer+item, not the order itself).
+		/// </summary>
+		ActorInfo ChooseExpansionDemandItem(ProductionQueue queue, IEnumerable<ActorInfo> buildableThings)
+		{
+			var demands = baseBuilder.ExpansionDemands;
+			if (demands.Count == 0)
+				return null;
+
+			var now = world.WorldTick;
+			var buildables = buildableThings as IReadOnlyList<ActorInfo> ?? buildableThings.ToList();
+			foreach (var demand in demands.Values.OrderBy(d => d.Mcv.ActorID))
+			{
+				if (demand.Deployed)
+					continue;
+
+				if (demand.RefineryItem == null)
+				{
+					var refinery = buildables
+						.Where(a => baseBuilder.Info.RefineryTypes.Contains(a.Name))
+						.OrderBy(a => queue.GetBuildTime(a, BuildableInfo.GetTraitForQueue(a, queue.Info.Type)))
+						.ThenBy(a => a.Name, StringComparer.Ordinal)
+						.FirstOrDefault();
+					if (refinery != null && !baseBuilder.HasMaxRefineriesFor(refinery))
+					{
+						var buildTime = queue.GetBuildTime(refinery, BuildableInfo.GetTraitForQueue(refinery, queue.Info.Type));
+						if (BaseBuilderQueueEvalCA.ExpansionDue(demand.EtaTick, buildTime, now)
+							&& !DemandItemHeldElsewhere(demand, refinery.Name, queue.Actor))
+						{
+							demand.BindRefinery(refinery.Name, queue.Actor, now);
+							return refinery;
+						}
+					}
+				}
+
+				if (demand.DefenceType != null && demand.DefenceItem == null)
+				{
+					var defence = buildables.FirstOrDefault(a => a.Name == demand.DefenceType);
+					if (defence != null)
+					{
+						var buildTime = queue.GetBuildTime(defence, BuildableInfo.GetTraitForQueue(defence, queue.Info.Type));
+						if (BaseBuilderQueueEvalCA.ExpansionDue(demand.EtaTick, buildTime, now)
+							&& baseBuilder.DefenceHoldPermitted(queue, demand, now)
+							&& !DemandItemHeldElsewhere(demand, defence.Name, queue.Actor))
+						{
+							demand.BindDefence(defence.Name, queue.Actor, now);
+							return defence;
+						}
+					}
+				}
+			}
+
+			return null;
+		}
+
+		// Another demand already holds this item name on this producer — a second binding would fight
+		// over the same queued item (the hold tracks producer+item, not the order itself).
+		bool DemandItemHeldElsewhere(ExpansionDemand demand, string item, Actor producer)
+		{
+			return baseBuilder.ExpansionDemands.Values.Any(other => !ReferenceEquals(other, demand)
+				&& ((other.RefineryProducer == producer && other.RefineryItem == item)
+					|| (other.DefenceProducer == producer && other.DefenceItem == item)));
+		}
+
 		static int DivideByKnob(int ticks, int milli) => milli == BuildOrderKnob.Neutral ? ticks : (int)(ticks * 1000L / Math.Max(1, milli));
 
 		// Build-order knobs (12.25): a delay or interval in ticks for one building. tempo divides every one (above 1000 = faster);
@@ -799,6 +902,17 @@ namespace OpenRA.Mods.CA.Traits
 				var opening = ChooseOpeningBuilding(buildOrderKnobs, buildableThings, power);
 				if (opening != null)
 					return opening;
+			}
+
+			// ECON-A (SPEC_2026-10-05_econ_logistics Part A §3): an expansion demand injects its
+			// refinery (then defence) just above ordinary wants — every essential override above
+			// (power, the opening, the economy refinery, the planner's own wants) still wins.
+			// Items schedule so finishTick ~= etaTick: they wait until eta - buildTime <= now.
+			if (baseBuilder.ExpansionPrebuildEnabled)
+			{
+				var demandPick = ChooseExpansionDemandItem(queue, buildableThings);
+				if (demandPick != null)
+					return demandPick;
 			}
 
 			// Make sure that we can spend as fast as we are earning
@@ -1165,14 +1279,14 @@ namespace OpenRA.Mods.CA.Traits
 
 		// Cameo: ask the first ACTIVE defence-placement advisor (resolved on each use, so a late-enabled one is seen)
 		// for a cell. canPlace is the check findPos applies.
-		CPos? AdvisedDefenseCell(ActorInfo actorInfo, bool distanceToBaseIsImportant, Actor producer)
+		CPos? AdvisedDefenseCell(ActorInfo actorInfo, bool distanceToBaseIsImportant, Actor producer, CPos? baseCenterOverride = null)
 		{
 			var advisor = player.PlayerActor.TraitsImplementing<IBotDefensePlacementAdvisor>().FirstOrDefault(a => a.IsActive);
 			var bi = actorInfo.TraitInfoOrDefault<BuildingInfo>();
 			if (advisor == null || bi == null)
 				return null;
 
-			var baseCenter = baseBuilder.GetBaseCenterForActor(actorInfo);
+			var baseCenter = baseCenterOverride ?? baseBuilder.GetBaseCenterForActor(actorInfo);
 
 			// The advisor's candidate cells get the same spacing rule as findPos defenses.
 			var gap = BuildingGapRule.Resolve(player.PlayerActor.TraitsImplementing<IBotPlacementAdvisor>().FirstOrDefault(a => a.IsActive), true);
@@ -1187,14 +1301,14 @@ namespace OpenRA.Mods.CA.Traits
 		// BP-2 (§19.15): every cell in the base annulus that already passes the checks findPos applies —
 		// CanPlaceBuilding, IsCloseEnoughToBase, the spacing-advisor gap. The advisor picks among these;
 		// an empty list means "no legal cell anywhere", which the planner reads as its hold case.
-		List<CPos> AdvisorLegalCells(ActorInfo actorInfo, bool distanceToBaseIsImportant, Actor producer)
+		List<CPos> AdvisorLegalCells(ActorInfo actorInfo, bool distanceToBaseIsImportant, Actor producer, CPos? baseCenterOverride = null)
 		{
 			var bi = actorInfo.TraitInfoOrDefault<BuildingInfo>();
 			var legal = new List<CPos>();
 			if (bi == null)
 				return legal;
 
-			var baseCenter = baseBuilder.GetBaseCenterForActor(actorInfo);
+			var baseCenter = baseCenterOverride ?? baseBuilder.GetBaseCenterForActor(actorInfo);
 			var spacingAdvisor = player.PlayerActor.TraitsImplementing<IBotPlacementAdvisor>().FirstOrDefault(a => a.IsActive);
 			var gap = BuildingGapRule.Resolve(spacingAdvisor, false);
 			var ownBuildingBuffer = gap > 0 ? OwnBuildingBufferCells(gap) : null;
@@ -1227,7 +1341,7 @@ namespace OpenRA.Mods.CA.Traits
 					? world.LocalRandom.Next(variants.Actors.Length + 1) : 0;
 		}
 
-		(CPos? Location, CPos? BaseCenter, int Variant) ChooseBuildLocation(string actorType, bool distanceToBaseIsImportant, Actor producer, BuildingType type)
+		(CPos? Location, CPos? BaseCenter, int Variant) ChooseBuildLocation(string actorType, bool distanceToBaseIsImportant, Actor producer, BuildingType type, ExpansionDemand demand = null)
 		{
 			var actorInfo = world.Map.Rules.Actors[actorType];
 			var baseCenter = baseBuilder.GetBaseCenterForActor(actorInfo);
@@ -1264,6 +1378,41 @@ namespace OpenRA.Mods.CA.Traits
 			{
 				case BuildingType.Defense:
 
+					// ECON-A (SPEC_2026-10-05 Part A §5): the held defence places at the new outpost —
+					// the front/back advisor's Defence class first (BP-SPEC §12.35), then the
+					// defence-placement advisor around the outpost, then the classic defence scan
+					// centred there, aimed at the field the refinery serves. A null cell runs the
+					// normal placement failure path — the item retries like every other building.
+					if (demand != null)
+					{
+						var outpost = demand.Deployed ? demand.DeployedYardLoc : demand.ConyardLoc;
+						var demandFrontBack = FrontBackAdvisor();
+						if (demandFrontBack != null)
+						{
+							var pick = demandFrontBack.ChooseCell(FrontBackClass.Defence, actorInfo, outpost,
+								AdvisorLegalCells(actorInfo, distanceToBaseIsImportant, producer, outpost));
+							lastFrontBackPick = pick;
+							if (pick.Hold)
+							{
+								frontBackHold = true;
+								return (null, null, 0);
+							}
+
+							if (pick.Cell != null)
+								return (pick.Cell, outpost, FrontBackVariant(actorInfo));
+						}
+
+						var outpostAdvised = AdvisedDefenseCell(actorInfo, distanceToBaseIsImportant, producer, outpost);
+						if (outpostAdvised != null)
+						{
+							demandAdvisedDefense = true;
+							return (outpostAdvised, outpost, 0);
+						}
+
+						return findPos(actorType, distanceToBaseIsImportant, producer, outpost, demand.ResourceLoc,
+							baseBuilder.Info.MinimumDefenseRadius, baseBuilder.Info.MaximumDefenseRadius, defenseGap: true);
+					}
+
 					// Build near the closest enemy structure
 					var defenseCenter = baseBuilder.DefenseCenter ?? baseCenter;
 					var closestEnemy = world.ActorsHavingTrait<Building>()
@@ -1282,7 +1431,14 @@ namespace OpenRA.Mods.CA.Traits
 
 				case BuildingType.Refinery:
 
-					var requestRef = BaseBuilderQueueEvalCA.FirstRequestedRefinery(baseBuilder.RequestedRefineries);
+					// ECON-A: a deployed demand's refinery serves its own outpost — the entry keyed on
+					// its MCV is the request, so the law's claim and the classic paths below need no
+					// special-casing (they already consume RequestedRefineries on success). A same-named
+					// bound twin can place after the entry was consumed — drop the stale key to null
+					// rather than let the indexer reads below throw.
+					var requestRef = demand?.Mcv ?? BaseBuilderQueueEvalCA.FirstRequestedRefinery(baseBuilder.RequestedRefineries);
+					if (requestRef != null && !baseBuilder.RequestedRefineries.ContainsKey(requestRef))
+						requestRef = null;
 
 					// REF-1 (§12.24 v2, DESIGN §19.1b): under the refinery law EVERY refinery path routes through the
 					// provider's claim — the first refinery, the MCV-requested one (its yard's nearest unserved field

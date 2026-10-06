@@ -1,3 +1,54 @@
+# 2026-10-06 — Devin-Developer: ECON-A — BT_expansion_prebuild (SPEC_2026-10-05_econ_logistics Part A)
+
+*Devin.* Branch `devin/econ-a`, worktree `C:\cameo-wt\econ-a`, base `inc@5fecf6710`, engine pin
+`d5d8b2a6853bff3b5a00cc5db7d86b03d4f30684`. Fleet spec: `Cameo-mod-fleet/SPEC_2026-10-05_econ_logistics.md` Part A.
+New §12.36 in `docs/design/AI_ARCHITECTURE.md`.
+
+- **Demand seam:** the existing `IBotSuggestRefineryProduction.RequestLocation` post (engine
+  `McvExpansionManagerBotModule` calls it the tick a deploy target is committed — :881 MCV, :847 conyard
+  relocation) now also creates an `ExpansionDemand` (new file, `OpenRA.Mods.CA/Traits/BotModules/ExpansionDemand.cs`)
+  alongside the retained `RequestedRefineries` record. ETA = `now + PathFinder distance /
+  MovementSpeedForCell + ExpansionDeployTicks` (25 — `TransformsInfo` has no duration field, documented
+  approximation), recomputed every 25 ticks. Defence pick = `DefenceStrength` (the AttackOrFleeFuzzy damage model:
+  `Damage * Burst / reload window * 100` per DamageWarhead, burst-delay term clamped [1,200]) over `DefenseTypes`
+  buildable on `DefenseQueues`, affordable against projected cash (`Earned` rate over a 500-tick window), ties on
+  cost then ordinal name; sticky once chosen.
+- **Queue injection:** `ChooseExpansionDemandItem` (BaseBuilderQueueManagerCA) sits just above ordinary wants in
+  `ChooseBuildingToBuild`; items queue when `etaTick - buildTime <= now` and ride the planner-want cost floor
+  (the reserve gate would push them past their own ETA). Ready items hold at `Queue[0]` via `return false` in the
+  Done branch — the REF-1 crawl-hold mechanic; the engine's one-head-per-queue rule is the hold cap. Defence hold
+  additionally gated by `DefenceHoldPermitted` (sole building producer exempts unless `etaTick - now <=
+  ExpansionHoldSlack` = 500; refinery never skipped).
+- **Deploy → place:** `ReplacedByActor` into a `ConstructionYardTypes` actor sets `Deployed`, nudges every QM's
+  `WaitTicks` to 0, and the normal placement path does the rest — refinery through the refinery-law claim biased
+  to the demand's own `RequestedRefineries` entry, defence through the §12.35 front/back advisor's Defence class
+  at the outpost, then the defence-placement advisor, then the classic annulus scan. Bound items skip the
+  classification roll entirely (no LocalRandom on the demand path).
+- **Expiry/unwind:** MCV dead/disposed/idle > `ExpansionDemandIdleTicks` (100) or claimed under a different
+  `BotLeasePurpose` → bound items cancel via `Order.CancelProduction` (full paid refund), except a held Ready
+  refinery the law can re-adopt (`NextRefineryClaim(null)` non-null) which stays queued as an ordinary refinery.
+  Non-yard replacements re-key `RequestedRefineries` + `ExpansionDemands` so conyard→MCV relocations keep their
+  demand. Deployed-and-unbound demands clean up at their expiry tick.
+- **Switch:** `BT_expansion_prebuild` registered in `tools/ai/increment_switches.yaml` — `UseExpansionPrebuild`
+  + `SwitchCondition: genericbot` on the shared `@generic` instance (F2 pattern; classic stays the reference).
+  Off = every demand branch dormant, queue flow bit-identical.
+- **Tests:** `BaseBuilderQueueEvalTest` +8 — due window boundary + late start, `int.MaxValue` never-due, travel
+  division + stalled/pathless sentinel, sole-producer slack edges, strength ordering, affordability-at-ETA, and
+  the cost-then-name tie-break. `DefenceStrength` itself is not unit-testable (needs resolved `ArmamentInfo`/
+  `AttackBaseInfo`); its formula mirrors `AttackOrFleeFuzzy` verbatim.
+
+Gates: `OpenRA.Mods.CA` build 0 errors (warnings all pre-existing class spam); `Cameo.Test` **1199/1199**;
+`audit_fog_honesty` PASS (82/266 — all reads are own-unit + public map data); `audit_multi_traitinfo` PASS
+(990 scanned, 0 dangerous); `audit_doc_claims` _clean_ (44/44); `ai_module_map --check` current;
+`audit_bot_wiring` no new findings (R1 unreachable 0, R5 never-loaded 0); Release build clean;
+**boot-gate PASS** (isolated support dir, menu reached, `PACKAGE_IN_WORKTREE=True`, 0 exceptions — required
+building `OpenRA.WindowsLauncher` with `-p:LauncherName=OpenRA` plus `OpenRA.Platforms.Default`, neither of which
+`CameoMod.sln` produces).
+
+Not in scope (Part A deferred/none): no engine changes; the `McvExpansion` lease purpose exists but nothing
+claims it yet, so the lease-loss lapse fires only on a foreign-purpose claim; `DefenceStrength` ignores
+non-damage warheads exactly as the fuzzy model does.
+
 # 2026-10-05 — Devin-T3Verify: PREDICTOR-PARITY P1 — effective-damage port + live per-actor stats
 
 *Devin.* Branch `devin/t3verify/predictor-parity`, worktree `C:\cameo-wt\parity`, rebased onto `inc/2026_10_05 @ fe4459c9c`:

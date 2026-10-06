@@ -17,6 +17,7 @@ using OpenRA.Mods.AS.Traits;
 using OpenRA.Mods.Common;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Primitives;
+using OpenRA.Support;
 using OpenRA.Traits;
 
 namespace OpenRA.Mods.CA.Traits
@@ -218,6 +219,37 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Radius in cells around building being considered for sale to scan for units")]
 		public readonly int SellScanRadius = 8;
 
+		[Desc("ECON-A (SPEC_2026-10-05_econ_logistics Part A): while an expansion MCV drives to its committed",
+			"deploy target, pre-build the outpost's refinery (and the strongest affordable defence) so each",
+			"reaches Ready ~= the ETA, hold it at the head of its queue, and place it the tick the conyard lands.",
+			"Armed by increment switch BT_expansion_prebuild; false keeps today's behaviour bit-identical.")]
+		public readonly bool UseExpansionPrebuild = false;
+
+		[ConsumedConditionReference]
+		[Desc("Increment switches on this shared instance (UseExpansionPrebuild) take effect only while this",
+			"condition is true (e.g. genericbot), so a shared module can be A/B-switched without changing the",
+			"classic reference. Null = switches apply to every owner.")]
+		public readonly BooleanExpression SwitchCondition = null;
+
+		[Desc("ECON-A: the defence pre-build is skipped while it would hold a Ready item on the bot's only",
+			"building-producer queue, unless the deploy ETA is already this close.")]
+		public readonly int ExpansionHoldSlack = 500;
+
+		[Desc("ECON-A: a demand expires this many ticks after its MCV stops having a live activity",
+			"(stuck, redirected, or dead — the spec's ~100-tick lapse window).")]
+		public readonly int ExpansionDemandIdleTicks = 100;
+
+		[Desc("ECON-A: ticks between recomputing a demand's ETA from the MCV's live path (it may detour).")]
+		public readonly int ExpansionEtaIntervalTicks = 25;
+
+		[Desc("ECON-A: flat tick allowance for the deploy transform itself (turn-to-facing + placement).",
+			"TransformsInfo exposes no duration field, so this is the conservative constant.")]
+		public readonly int ExpansionDeployTicks = 25;
+
+		[Desc("ECON-A: projected income for the defence pick's affordability check is measured over the",
+			"last window of this many ticks (Earned delta / window length, integers only).")]
+		public readonly int ExpansionIncomeWindowTicks = 500;
+
 		public override object Create(ActorInitializer init) { return new BaseBuilderBotModuleCA(init.Self, this); }
 	}
 
@@ -374,6 +406,21 @@ namespace OpenRA.Mods.CA.Traits
 
 		public Dictionary<Actor, (CPos ConyardLoc, CPos ResourceLoc)> RequestedRefineries = [];
 
+		// ECON-A (SPEC_2026-10-05_econ_logistics Part A): the per-MCV expansion demand metadata that
+		// rides alongside the RequestedRefineries record — ETA, defence pick, queue bindings, expiry.
+		// Keyed on the same actor and re-keyed with it when a Transform replaces the actor mid-journey.
+		public readonly Dictionary<Actor, ExpansionDemand> ExpansionDemands = [];
+
+		// SwitchCondition result; true when no condition is configured (F2 pattern — @generic is shared
+		// by genericbot AND classicbot, so the increment switch must not leak into the classic reference).
+		bool switchesActive;
+		public bool ExpansionPrebuildEnabled => Info.UseExpansionPrebuild && switchesActive;
+
+		// ECON-A: projected income — the sliding window over Earned (deliveries only; integers).
+		int incomeWindowStartTick = -1;
+		int incomeWindowStartEarned;
+		int projectedIncomePerTick;
+
 		readonly Stack<TraitPair<RallyPoint>> rallyPoints = [];
 		int assignRallyPointsTicks;
 		int checkBestResourceLocationTicks;
@@ -419,6 +466,21 @@ namespace OpenRA.Mods.CA.Traits
 			barracksBuildings = new ActorIndex.OwnerAndNamesAndTrait<BuildingInfo>(world, info.BarracksTypes, player);
 			factoryBuildings = new ActorIndex.OwnerAndNamesAndTrait<BuildingInfo>(world, info.VehiclesFactoryTypes, player);
 			ProductionBuildings = new ActorIndex.OwnerAndNamesAndTrait<BuildingInfo>(world, info.ProductionTypes, player);
+			switchesActive = info.SwitchCondition == null;
+		}
+
+		public override IEnumerable<VariableObserver> GetVariableObservers()
+		{
+			foreach (var observer in base.GetVariableObservers())
+				yield return observer;
+
+			if (Info.SwitchCondition != null)
+				yield return new VariableObserver(SwitchConditionChanged, Info.SwitchCondition.Variables);
+		}
+
+		void SwitchConditionChanged(Actor self, IReadOnlyDictionary<string, int> conditions)
+		{
+			switchesActive = Info.SwitchCondition.Evaluate(conditions);
 		}
 
 		// Use for proactive targeting.
@@ -611,6 +673,14 @@ namespace OpenRA.Mods.CA.Traits
 						}
 					}
 				}
+			}
+
+			if (ExpansionPrebuildEnabled)
+			{
+				// ECON-A: refresh the income window and sweep demand liveness/ETAs before the queue tick
+				// so a freshly-deployed yard releases its held items on the same tick.
+				SampleExpansionIncome();
+				SweepExpansionDemands(bot);
 			}
 
 			builders[currentBuilderIndex].Tick(bot);
@@ -1025,6 +1095,325 @@ namespace OpenRA.Mods.CA.Traits
 			}
 		}
 
+		/// <summary>
+		/// ECON-A (§2/§6): per-tick demand lifecycle — expire dead/stuck/claimed-away MCVs, follow a
+		/// Transform's ReplacedByActor (deploy = conyard lands; relocate = the journey continues on the
+		/// new actor), refresh the liveness window while it is en route, recompute ETAs on cadence, and
+		/// verify queue bindings once the order-latency grace has passed. Deterministic: iterates in
+		/// ActorID order, never on dictionary enumeration order.
+		/// </summary>
+		void SweepExpansionDemands(IBot bot)
+		{
+			if (ExpansionDemands.Count == 0)
+				return;
+
+			var now = world.WorldTick;
+			var leases = BotUnitLeases.Of(player);
+			foreach (var demand in ExpansionDemands.Values.OrderBy(d => d.Mcv.ActorID).ToList())
+			{
+				var mcv = demand.Mcv;
+
+				// Transform chain first: ReplacedByActor stays readable on a disposed MCV, and the
+				// same tick disposes it — checking deadness first would skip the deploy/release edge.
+				if (mcv != null && mcv.ReplacedByActor != null)
+				{
+					var next = mcv.ReplacedByActor;
+					if (Info.ConstructionYardTypes.Contains(next.Info.Name))
+					{
+						// Deployed: the conyard exists — the Done items release through the normal
+						// placement path this tick (the queue managers see Deployed and stop holding).
+						demand.Deployed = true;
+						demand.DeployedYardLoc = next.Location;
+						demand.ExpiresTick = now + Info.ExpansionDemandIdleTicks;
+						foreach (var builder in builders)
+							builder.WaitTicks = Math.Min(builder.WaitTicks, 0);
+					}
+					else
+					{
+						// Relocation (conyard→MCV) or another non-yard transform: the journey continues
+						// on the replacement actor — re-key both records so the demand follows it.
+						RequestedRefineries.Remove(mcv);
+						RequestedRefineries[next] = (demand.ConyardLoc, demand.ResourceLoc);
+						ExpansionDemands.Remove(mcv);
+						demand.Mcv = next;
+						ExpansionDemands[next] = demand;
+						demand.ExpiresTick = now + Info.ExpansionDemandIdleTicks;
+						continue;
+					}
+				}
+				else if (!demand.Deployed &&
+					(mcv == null || mcv.Disposed || mcv.IsDead || !mcv.IsInWorld
+						|| !RequestedRefineries.ContainsKey(mcv)))
+				{
+					ExpireExpansionDemand(bot, demand);
+					continue;
+				}
+				else if (!demand.Deployed)
+				{
+					// A lease held by a different job (any purpose but McvExpansion) means the unit was
+					// taken over — the spec's "lost its lease" lapse. No lease service = no veto. No
+					// module claims McvExpansion yet, so the operative case is a foreign-purpose claim.
+					var lease = leases?.LeaseOf(mcv);
+					if (lease != null && lease.Value.Purpose != BotLeasePurpose.McvExpansion)
+					{
+						ExpireExpansionDemand(bot, demand);
+						continue;
+					}
+
+					// En route: keep the window open while the MCV has a live activity (Move/Turn/
+					// Transform). A unit-less actor (a conyard still waiting to undeploy) can't idle —
+					// it refreshes too, its relocation is its own owner's timeout's business.
+					if (!mcv.IsIdle || mcv.TraitOrDefault<Mobile>() == null)
+						demand.ExpiresTick = now + Info.ExpansionDemandIdleTicks;
+
+					if (now >= demand.ExpiresTick)
+					{
+						ExpireExpansionDemand(bot, demand);
+						continue;
+					}
+
+					if (now >= demand.NextEtaTick)
+						RefreshExpansionEta(demand);
+				}
+
+				VerifyDemandBinding(demand, isRefinery: true, now);
+				VerifyDemandBinding(demand, isRefinery: false, now);
+
+				// Deployed and fully placed/cleared — done.
+				if (demand.Deployed && demand.Unbound && now >= demand.ExpiresTick)
+				{
+					RequestedRefineries.Remove(demand.Mcv);
+					ExpansionDemands.Remove(demand.Mcv);
+				}
+			}
+		}
+
+		/// <summary>
+		/// ECON-A (§6): expiry unwinds the demand — a still-building or held item is cancelled for its
+		/// normal refund (a Done item refunds the full paid amount), except a held Ready refinery that
+		/// the law can re-adopt on another anchor: it converts to a normal queued refinery instead.
+		/// </summary>
+		void ExpireExpansionDemand(IBot bot, ExpansionDemand demand)
+		{
+			var law = RefineryLawProvider();
+
+			if (demand.RefineryItem != null)
+			{
+				var readopted = law != null
+					&& ItemDone(demand.RefineryProducer, demand.RefineryItem)
+					&& law.NextRefineryClaim(null) != null;
+				if (!readopted)
+					CancelDemandItem(bot, demand.RefineryProducer, demand.RefineryItem);
+
+				demand.UnbindRefinery();
+			}
+
+			if (demand.DefenceItem != null)
+			{
+				CancelDemandItem(bot, demand.DefenceProducer, demand.DefenceItem);
+				demand.UnbindDefence();
+			}
+
+			RequestedRefineries.Remove(demand.Mcv);
+			ExpansionDemands.Remove(demand.Mcv);
+		}
+
+		static bool ItemDone(Actor producer, string item)
+		{
+			if (producer == null || producer.Disposed || producer.IsDead)
+				return false;
+
+			return producer.TraitsImplementing<ProductionQueue>()
+				.Any(q => q.AllQueued().Any(i => i.Item == item && i.Done));
+		}
+
+		static void CancelDemandItem(IBot bot, Actor producer, string item)
+		{
+			if (producer == null || producer.Disposed || producer.IsDead)
+				return;
+
+			bot.QueueOrder(Order.CancelProduction(producer, item, 1));
+		}
+
+		/// <summary>
+		/// The bound item left its queue (placed or cancelled elsewhere) — release the binding. Inside
+		/// the order-latency grace window an absent item is still the queued order in flight, so the
+		/// binding survives until the grace expires.
+		/// </summary>
+		void VerifyDemandBinding(ExpansionDemand demand, bool isRefinery, int now)
+		{
+			var item = isRefinery ? demand.RefineryItem : demand.DefenceItem;
+			if (item == null)
+				return;
+
+			var producer = isRefinery ? demand.RefineryProducer : demand.DefenceProducer;
+			var queuedTick = isRefinery ? demand.RefineryQueuedTick : demand.DefenceQueuedTick;
+			const int OrderGraceTicks = 30;
+
+			if (producer != null && !producer.Disposed
+				&& producer.TraitsImplementing<ProductionQueue>().Any(q => q.AllQueued().Any(i => i.Item == item)))
+				return;
+
+			if (now - queuedTick < OrderGraceTicks)
+				return;
+
+			if (isRefinery)
+				demand.UnbindRefinery();
+			else
+				demand.UnbindDefence();
+		}
+
+		/// <summary>
+		/// ECON-A (§2): etaTick = now + travelEstimate + deployDuration — PathFinder distance for the
+		/// MCV's locomotor over its nominal speed, recomputed on cadence (the MCV may detour). An
+		/// unreachable path lands the ETA at far-future so the demand idles out through ExpiresTick.
+		/// The defence pick is (re)taken here too: null means nothing was affordable — retried on every
+		/// recompute; a chosen type is sticky so the queue never thrashes between candidates.
+		/// </summary>
+		void RefreshExpansionEta(ExpansionDemand demand)
+		{
+			var now = world.WorldTick;
+			var travel = EstimateTravelTicks(demand.Mcv, demand.ConyardLoc);
+			demand.EtaTick = travel == int.MaxValue ? int.MaxValue : now + travel + Info.ExpansionDeployTicks;
+			demand.NextEtaTick = now + Info.ExpansionEtaIntervalTicks;
+			if (demand.DefenceType == null)
+				demand.DefenceType = ChooseDemandDefence(demand.EtaTick);
+		}
+
+		/// <summary>The PathFinder distance (WDist) from the MCV's cell to the deploy target over its
+		/// locomotor, divided by its nominal speed — own-unit facts and public map data only.</summary>
+		int EstimateTravelTicks(Actor mcv, CPos target)
+		{
+			var mobile = mcv.TraitOrDefault<Mobile>();
+			if (mobile == null || pathFinder == null)
+				return 0;
+
+			var path = pathFinder.FindPathToTargetCell(mcv, new[] { mcv.Location }, target,
+				BlockedByActor.Immovable, ignoreActor: mcv);
+			if (path.Count == 0)
+				return int.MaxValue;
+
+			long distance = 0;
+			var previous = world.Map.CenterOfCell(mcv.Location);
+			foreach (var step in path)
+			{
+				var stepPosition = world.Map.CenterOfCell(step);
+				distance += (stepPosition - previous).Length;
+				previous = stepPosition;
+			}
+
+			return BaseBuilderQueueEvalCA.ExpansionTravelTicks(distance, mobile.MovementSpeedForCell(mcv.Location));
+		}
+
+		/// <summary>Own cash + resources plus the measured income rate out to the ETA — integers only.</summary>
+		int ProjectedCash(int atTick)
+		{
+			var projected = playerResources.GetCashAndResources() + (long)projectedIncomePerTick * (atTick - world.WorldTick);
+			return (int)Math.Min(int.MaxValue, Math.Max(0, projected));
+		}
+
+		void SampleExpansionIncome()
+		{
+			var now = world.WorldTick;
+			if (incomeWindowStartTick < 0)
+			{
+				incomeWindowStartTick = now;
+				incomeWindowStartEarned = playerResources.Earned;
+				return;
+			}
+
+			var elapsed = now - incomeWindowStartTick;
+			if (elapsed < Info.ExpansionIncomeWindowTicks)
+				return;
+
+			projectedIncomePerTick = Math.Max(0, (playerResources.Earned - incomeWindowStartEarned) / elapsed);
+			incomeWindowStartTick = now;
+			incomeWindowStartEarned = playerResources.Earned;
+		}
+
+		/// <summary>
+		/// ECON-A (§1): the strongest affordable defence for the demand — AttackBase buildings from
+		/// Info.DefenseTypes that a defence queue can actually produce, affordable at the ETA against
+		/// projected income; the eval's DefenceStrength ordering decides, ties on cost then name.
+		/// </summary>
+		string ChooseDemandDefence(int etaTick)
+		{
+			if (etaTick == int.MaxValue)
+				return null;
+
+			var projected = ProjectedCash(etaTick);
+			var candidates = new List<(ActorInfo Info, int Strength, int Cost)>();
+			foreach (var name in Info.DefenseTypes)
+			{
+				if (!world.Map.Rules.Actors.TryGetValue(name, out var info) || !info.HasTraitInfo<AttackBaseInfo>())
+					continue;
+
+				int? cost = null;
+				foreach (var category in Info.DefenseQueues)
+				{
+					foreach (var queue in AIUtils.FindQueues(player, category))
+					{
+						if (!queue.BuildableItems().Any(b => b.Name == name))
+							continue;
+
+						var itemCost = queue.GetProductionCost(info);
+						cost = cost == null ? itemCost : Math.Min(cost.Value, itemCost);
+					}
+				}
+
+				if (cost == null)
+					continue;
+
+				candidates.Add((info, BaseBuilderQueueEvalCA.DefenceStrength(info), cost.Value));
+			}
+
+			return BaseBuilderQueueEvalCA.ChooseExpansionDefence(candidates, projected)?.Name;
+		}
+
+		/// <summary>The demand whose binding matches this queued item on this producer, or null.</summary>
+		public ExpansionDemand DemandForQueuedItem(string item, Actor producer)
+		{
+			if (ExpansionDemands.Count == 0)
+				return null;
+
+			foreach (var demand in ExpansionDemands.Values)
+			{
+				if ((demand.RefineryProducer == producer && demand.RefineryItem == item)
+					|| (demand.DefenceProducer == producer && demand.DefenceItem == item))
+					return demand;
+			}
+
+			return null;
+		}
+
+		/// <summary>
+		/// ECON-A (§4): the defence pre-build may hold its Ready item on any queue — except when that
+		/// queue is the bot's only building producer, where the hold is allowed only within HoldSlack
+		/// of the deploy ETA (a lone queue's blocked head would starve every building behind it).
+		/// </summary>
+		public bool DefenceHoldPermitted(ProductionQueue queue, ExpansionDemand demand, int now)
+		{
+			return BaseBuilderQueueEvalCA.DefenceHoldPermitted(BuildingProducerCount() <= 1,
+				demand.EtaTick - now, Info.ExpansionHoldSlack);
+		}
+
+		int buildingProducerCountCached = -1;
+		int buildingProducerCountTick = -1;
+		int BuildingProducerCount()
+		{
+			var now = world.WorldTick;
+			if (buildingProducerCountTick != now)
+			{
+				buildingProducerCountTick = now;
+				buildingProducerCountCached = Info.BuildingQueues.Concat(Info.DefenseQueues).Distinct()
+					.SelectMany(category => AIUtils.FindQueues(player, category))
+					.Distinct()
+					.Count();
+			}
+
+			return buildingProducerCountCached;
+		}
+
 		List<MiniYamlNode> IGameSaveTraitData.IssueTraitData(Actor self)
 		{
 			if (IsTraitDisabled)
@@ -1116,6 +1505,7 @@ namespace OpenRA.Mods.CA.Traits
 			if (ResourceMapModule == null)
 			{
 				RequestedRefineries[expandActor] = (conyardLocation, refineryLocation);
+				PostExpansionDemand(expandActor);
 				return;
 			}
 
@@ -1130,6 +1520,33 @@ namespace OpenRA.Mods.CA.Traits
 
 			if (held < Info.MaxRefineryPerIndice)
 				RequestedRefineries[expandActor] = (conyardLocation, refineryLocation);
+
+			PostExpansionDemand(expandActor);
+		}
+
+		/// <summary>
+		/// ECON-A (SPEC_2026-10-05_econ_logistics Part A §1): the MCV owner's RequestLocation call IS the
+		/// demand post — the module enriches the retained RequestedRefineries record with the ETA, the
+		/// defence pick and the expiry window. A re-post (redirect) refreshes the locations and forces
+		/// the next ETA recompute. No-op while the switch is off, the request was rejected, or the
+		/// actor is a building whose journey has not started (a conyard mid-relocation still deploys).
+		/// </summary>
+		void PostExpansionDemand(Actor expandActor)
+		{
+			if (!ExpansionPrebuildEnabled || expandActor == null || !RequestedRefineries.ContainsKey(expandActor))
+				return;
+
+			if (!ExpansionDemands.TryGetValue(expandActor, out var demand))
+			{
+				demand = new ExpansionDemand(expandActor);
+				ExpansionDemands[expandActor] = demand;
+			}
+
+			var request = RequestedRefineries[expandActor];
+			demand.ConyardLoc = request.ConyardLoc;
+			demand.ResourceLoc = request.ResourceLoc;
+			demand.ExpiresTick = world.WorldTick + Info.ExpansionDemandIdleTicks;
+			demand.NextEtaTick = world.WorldTick;
 		}
 	}
 }

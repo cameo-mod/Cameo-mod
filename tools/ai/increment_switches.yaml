@@ -253,3 +253,7 @@ groups:
       UseEffectiveDamageModel: true
     EngagementLogBotModule:
       UseEffectiveDamageModel: true
+  BT_expansion_prebuild:             # ECON-A (SPEC_2026-10-05_econ_logistics Part A): an MCV driving to a committed expansion target posts an ExpansionDemand (the retained RequestedRefineries record + ETA/defence/bindings); the queue pre-builds the outpost refinery (through the refinery-law claim path) and the strongest affordable defence so they reach Ready ~= deploy, holds them at Queue[0] (cap 1/queue; sole-producer defence exempt unless eta-now <= ExpansionHoldSlack=500), and places them the tick the conyard lands; expiry unwinds with full refunds or anchor re-adoption. SwitchCondition keeps the shared @generic instance out of classic = bit-identical
+    BaseBuilderBotModuleCA:
+      SwitchCondition: genericbot    # shared @generic instance serves classicbot too — the F2 pattern (spec: classic stays the A/B reference)
+      UseExpansionPrebuild: true
