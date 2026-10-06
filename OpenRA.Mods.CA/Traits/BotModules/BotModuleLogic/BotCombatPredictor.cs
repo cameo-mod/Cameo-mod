@@ -436,7 +436,15 @@ namespace OpenRA.Mods.CA.Traits
 			var terms = warheads
 				.Select(w => new BotWarheadTerm((double)w.Damage * burst / cycle, w.Versus, w.Damage, w.DamageTypes))
 				.ToArray();
-			return new BotWeaponProfile((double)main.Damage * burst / cycle, weapon.Range,
+			var range = weapon.Range;
+			if (weapon.Projectile is IRangeLimitedProjectileInfo limited)
+			{
+				var fuel = limited.EffectiveRangeLimit(weapon.Range);
+				if (fuel.Length > 0 && fuel.Length < range.Length)
+					range = fuel;
+			}
+
+			return new BotWeaponProfile((double)main.Damage * burst / cycle, range,
 				weapon.ValidTargets, weapon.InvalidTargets, main.Versus, effectiveDpt,
 				model, charge, burst, 1.0, 1.0, main.Damage, main.DamageTypes, terms,
 				DeliveryKey(weaponName, weapon, main));

@@ -3601,10 +3601,8 @@ ra1_soviets_hindattackhelicopter_hindmissilesthermobaric:
 		HorizontalRateOfTurn: 30
 		MaximumLaunchSpeed: 250
 		MinimumLaunchSpeed: 250
-		CloseEnough: 500
 		Acceleration: 3
 		HomingActivationDelay: 2
-		RangeLimit: 25000
 		PointDefenseTypes: Missile
 	Warhead@Effect: CreateEffect
 		Explosions: med_napalm
@@ -3911,10 +3909,8 @@ ra1_soviets_hindattackhelicopter_hindmissilesnuclear:
 		HorizontalRateOfTurn: 30
 		MaximumLaunchSpeed: 250
 		MinimumLaunchSpeed: 250
-		CloseEnough: 500
 		Acceleration: 3
 		HomingActivationDelay: 2
-		RangeLimit: 25000
 		PointDefenseTypes: Missile
 	Warhead@Effect: CreateEffect
 		ValidTargets: Ground, Water, Air
@@ -4189,10 +4185,8 @@ ra1_soviets_kamovattackhelicopter_kamovmissilestesla:
 		HorizontalRateOfTurn: 30
 		MaximumLaunchSpeed: 250
 		MinimumLaunchSpeed: 250
-		CloseEnough: 500
 		Acceleration: 3
 		HomingActivationDelay: 2
-		RangeLimit: 25000
 		PointDefenseTypes: Missile
 	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
 		PercentageDenominator: 400
@@ -8436,10 +8430,8 @@ MammothTuskThermobaric:
 		HorizontalRateOfTurn: 20
 		MaximumLaunchSpeed: 200
 		MinimumLaunchSpeed: 200
-		CloseEnough: 400
 		Acceleration: 2
 		HomingActivationDelay: 3
-		RangeLimit: 30000
 		PointDefenseTypes: Missile
 	Warhead@Effect: CreateEffect
 		Explosions: big_napalm
@@ -8865,10 +8857,8 @@ MammothTuskTesla:
 		HorizontalRateOfTurn: 20
 		MaximumLaunchSpeed: 200
 		MinimumLaunchSpeed: 200
-		CloseEnough: 400
 		Acceleration: 2
 		HomingActivationDelay: 3
-		RangeLimit: 30000
 		PointDefenseTypes: Missile
 	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
@@ -9930,10 +9920,8 @@ ra1_soviets_siegemammothtank_mammothtusk2:
 		ContrailLength: 0
 		MaximumLaunchSpeed: 200
 		MinimumLaunchSpeed: 200
-		CloseEnough: 400
 		Acceleration: 2
 		HomingActivationDelay: 3
-		RangeLimit: 30000
 		PointDefenseTypes: Missile
 	Warhead@Effect: CreateEffect
 		Explosions: artillery_explosion
@@ -10160,10 +10148,8 @@ ra1_soviets_siegemammothtank_mammothtusk2thermobaric:
 		HorizontalRateOfTurn: 20
 		MaximumLaunchSpeed: 200
 		MinimumLaunchSpeed: 200
-		CloseEnough: 400
 		Acceleration: 2
 		HomingActivationDelay: 3
-		RangeLimit: 30000
 		PointDefenseTypes: Missile
 	Warhead@Effect: CreateEffect
 		Explosions: big_napalm
@@ -10623,10 +10609,8 @@ ra1_soviets_monstertank_missile_tesla:
 		HorizontalRateOfTurn: 20
 		MaximumLaunchSpeed: 200
 		MinimumLaunchSpeed: 200
-		CloseEnough: 400
 		Acceleration: 2
 		HomingActivationDelay: 3
-		RangeLimit: 30000
 		PointDefenseTypes: Missile
 	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
 		PercentageDenominator: 2000
@@ -10854,10 +10838,8 @@ ra1_soviets_monstertank_missile_thermobaric:
 		HorizontalRateOfTurn: 20
 		MaximumLaunchSpeed: 200
 		MinimumLaunchSpeed: 200
-		CloseEnough: 400
 		Acceleration: 2
 		HomingActivationDelay: 3
-		RangeLimit: 30000
 		PointDefenseTypes: Missile
 	Warhead@Effect: CreateEffect
 		Explosions: big_napalm
@@ -12535,6 +12517,7 @@ ra1_soviets_cyberdog_bite:
 
 ra1_soviets_samsite_missile_AA:
 	Inherits@missilerole: ^Warhead_MissileAA_Heavy
+	Inherits@projectileaa: ^Projectile_Missile_AA
 	ReloadDelay: 27
 	Range: 12790
 	Report: missile1.aud
@@ -12543,7 +12526,6 @@ ra1_soviets_samsite_missile_AA:
 		Image: MISSILE
 		Acceleration: 6
 		AllowSnapping: true
-		CloseEnough: 600
 		ContrailZOffset: 4000
 		ContrailStartColor: FF884400
 		ContrailEndColor: 000000FF
@@ -12561,7 +12543,6 @@ ra1_soviets_samsite_missile_AA:
 		MaximumLaunchSpeed: 300
 		MinimumLaunchSpeed: 300
 		HomingActivationDelay: 1
-		RangeLimit: 20000
 		PointDefenseTypes: Missile
 	ValidTargets: Air
 	Warhead@EffectAir: CreateEffect

@@ -1,6 +1,8 @@
 ^CryoMissileProjectile:
 	TargetActorCenter: true
 	Projectile: Missile
+		RangeLimitPercent: 150
+		CloseEnoughFromSpeed: true
 		TrailImage: blue_smokey
 		TrailInterval: 1
 		ContrailStartColor: 77CCFF
@@ -3758,10 +3760,8 @@ ATMine:
 		ContrailLength: 0
 		MaximumLaunchSpeed: 200
 		MinimumLaunchSpeed: 200
-		CloseEnough: 400
 		Acceleration: 2
 		HomingActivationDelay: 3
-		RangeLimit: 30000
 		PointDefenseTypes: Missile
 	Warhead@Glow: GlowImpact
 		Color: FFB84D
@@ -4422,7 +4422,6 @@ ra1_soviets_submarine_torpedo:
 		Speed: 150
 		Acceleration: 1
 		HorizontalRateOfTurn: 5
-		RangeLimit: 15000
 		BoundToTerrainType: Water
 		Palette: cloak
 		MaximumLaunchAngle: 0
@@ -4541,7 +4540,6 @@ ra1_soviets_submarine_torpedo_thermobaric:
 		Speed: 150
 		Acceleration: 1
 		HorizontalRateOfTurn: 5
-		RangeLimit: 15000
 		BoundToTerrainType: Water
 		Palette: cloak
 		MaximumLaunchAngle: 0

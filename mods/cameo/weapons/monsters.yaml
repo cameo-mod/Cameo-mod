@@ -433,7 +433,6 @@ FireballAA:
 		TrailImage: fb2
 		Image: fireball
 		Inaccuracy: 0c128
-		RangeLimit: 10c0
 		HorizontalRateOfTurn: 40
 	Warhead@1Dam_impact: SpreadDamage
 		Spread: 128
@@ -728,7 +727,6 @@ TripodPlasmaPuff:
 		Speed: 204
 		Inaccuracy: 0c256
 		Image: plasma
-		RangeLimit: 10c0
 		Shadow: True
 	Warhead@1Dam_impact: SpreadDamage
 		Spread: 213
@@ -758,7 +756,6 @@ TripodPlasmaball_AA:
 		ContrailLength: 0
 		Image: plasma
 		Inaccuracy: 128
-		RangeLimit: 14c0
 		HorizontalRateOfTurn: 60
 	Warhead@1Dam_impact: SpreadDamage
 		Spread: 128

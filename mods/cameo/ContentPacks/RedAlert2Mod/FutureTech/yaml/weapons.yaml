@@ -1014,7 +1014,6 @@ FutureMicrotorpedos:
 		Speed: 240
 		Acceleration: 1
 		HorizontalRateOfTurn: 5
-		RangeLimit: 24000
 		BoundToTerrainType: Water
 		Palette: cloak
 		MaximumLaunchAngle: 0
@@ -1643,10 +1642,8 @@ Future_MultiMissile_Javelin:
 		MaximumLaunchSpeed: 300
 		MinimumLaunchSpeed: 300
 		Speed: 900
-		CloseEnough: 400
 		Acceleration: 6
 		HomingActivationDelay: 3
-		RangeLimit: 30000
 		PointDefenseTypes: Missile
 		LaunchAngle: 125
 		Palette: d2keffect
@@ -1726,7 +1723,6 @@ Future_MultiMissile_Sigma:
 		ContrailStartColor: 8888FFFF
 		ContrailEndColor: FFFFFF22
 		Inaccuracy: 100
-		RangeLimit: 25000
 		TrailInterval: 1
 		MinimumLaunchAngle: 111
 		MaximumLaunchAngle: 111
@@ -1736,7 +1732,6 @@ Future_MultiMissile_Sigma:
 		Arm: 0
 		AllowSnapping: true
 		Shadow: true
-		CloseEnough: 500
 		Acceleration: 3
 		HomingActivationDelay: 2
 		PointDefenseTypes: Missile
@@ -2381,10 +2376,8 @@ FutureJavelinRockets:
 		MaximumLaunchSpeed: 300
 		MinimumLaunchSpeed: 300
 		Speed: 600
-		CloseEnough: 400
 		Acceleration: 6
 		HomingActivationDelay: 3
-		RangeLimit: 30000
 		PointDefenseTypes: Missile
 		LaunchAngle: 125
 		Palette: d2keffect
@@ -2445,10 +2438,8 @@ FutureJavelinRockets_elite:
 		MaximumLaunchSpeed: 300
 		MinimumLaunchSpeed: 300
 		Speed: 600
-		CloseEnough: 400
 		Acceleration: 6
 		HomingActivationDelay: 3
-		RangeLimit: 30000
 		PointDefenseTypes: Missile
 		LaunchAngle: 125
 		Palette: d2keffect
@@ -2511,10 +2502,8 @@ FutureJavelinRocketsDeployed:
 		MaximumLaunchSpeed: 300
 		MinimumLaunchSpeed: 300
 		Speed: 600
-		CloseEnough: 400
 		Acceleration: 6
 		HomingActivationDelay: 3
-		RangeLimit: 30000
 		PointDefenseTypes: Missile
 		LaunchAngle: 125
 		Palette: d2keffect
@@ -2575,10 +2564,8 @@ FutureJavelinRocketsDeployed_elite:
 		MaximumLaunchSpeed: 300
 		MinimumLaunchSpeed: 300
 		Speed: 600
-		CloseEnough: 400
 		Acceleration: 6
 		HomingActivationDelay: 3
-		RangeLimit: 30000
 		PointDefenseTypes: Missile
 		LaunchAngle: 125
 		Palette: d2keffect

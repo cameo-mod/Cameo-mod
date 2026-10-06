@@ -1137,7 +1137,6 @@ JapanMaidenBow:
 		Speed: 512
 		Arm: 2
 		Inaccuracy: 125
-		RangeLimit: 25000
 		Image: DRAGON
 		TrailImage: blue_smokey_small
 		TrailInterval: 1
@@ -1173,7 +1172,6 @@ JapanMaidenBowEnergized:
 		Speed: 512
 		Arm: 2
 		Inaccuracy: 125
-		RangeLimit: 25000
 		Image: DRAGON
 		TrailImage: blue_smokey_small
 		TrailInterval: 1
@@ -1188,7 +1186,6 @@ JapanMaidenBowEnergized:
 		Blockable: false
 		AllowSnapping: true
 		Shadow: true
-		CloseEnough: 500
 		Acceleration: 3
 		HomingActivationDelay: 2
 	Warhead@Effect: CreateEffect
@@ -1415,7 +1412,8 @@ JapanMaidenBowEnergized:
 		SmudgeType: RA2Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 BallistaSingleShotAir_AA:
-	Inherits@wh: ^Warhead_Arrow_Light
+	Inherits@wh: ^Warhead_MissileAA_Light
+	Inherits@projectileaa: ^Projectile_Missile_AA
 	Inherits@proj: ^Projectile_Arrow_Light
 	Inherits@fx: ^Effect_Arrow_Light
 	ReloadDelay: 200
@@ -1428,7 +1426,6 @@ BallistaSingleShotAir_AA:
 		Speed: 512
 		Arm: 2
 		Inaccuracy: 125
-		RangeLimit: 25000
 		Image: DRAGON
 		TrailImage: blue_smokey_small
 		TrailInterval: 1
@@ -1450,6 +1447,92 @@ BallistaSingleShotAir_AA:
 		ValidTargets: Ground
 	# W7MAT inline of JapanMaidenBow
 	ValidTargets: Air
+
+	-Warhead@Arrow_Light:
+	-Warhead@MissileAA_Light:
+	Warhead@MissileAA_Light: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Air
+		Spread: 59
+		Damage: 160000
+		Falloff: 100, 0
+		Versus
+			HAZMAT: 101
+			COMPOSITE: 35
+			BLAST: 73
+			REFLECTOR: 70
+			ARMOR: 70
+			Shield: 107
+			None: 200
+			AntiAirInfantry: 185
+			Flak: 171
+			Plate: 142
+			CyborgLight: 136
+			Fighter: 135
+			CyborgMedium: 122
+			FlyingInfantry: 115
+			Bomber: 109
+			CyborgHeavy: 107
+			Scout: 99
+			Light: 93
+			Wood: 92
+			ShipLight: 92
+			Helicopter: 91
+			AntiAirVehicle: 90
+			Medium: 87
+			AntiAirShip: 85
+			Steel: 82
+			Spaceship: 81
+			ShipHeavy: 81
+			Heavy: 80
+			ShipMedium: 79
+			SubmarineLight: 79
+			ShipSuperheavy: 78
+			SubmarineHeavy: 78
+			AntiAirBuilding: 77
+			Superheavy: 75
+			Concrete: 72
+			CyborgHeroic: 72
+			Heroic: 70
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 10000
+		PercentageSpread: 50
+		PercentageVersus
+			Shield: 17
+			None: 16
+			Flak: 15
+			AntiAirInfantry: 15
+			Plate: 14
+			Heroic: 13
+			Fighter: 12
+			Bomber: 11
+			FlyingInfantry: 11
+			CyborgLight: 11
+			Helicopter: 10
+			Spaceship: 9
+			CyborgMedium: 9
+			Scout: 8
+			CyborgHeavy: 8
+			Light: 7
+			CyborgHeroic: 7
+			Medium: 6
+			AntiAirVehicle: 6
+			Heavy: 5
+			ShipLight: 5
+			Superheavy: 4
+			Wood: 3
+			ShipHeavy: 3
+			ShipSuperheavy: 3
+			AntiAirShip: 3
+			SubmarineLight: 3
+			SubmarineHeavy: 3
+			Steel: 2
+			ShipMedium: 2
+			Concrete: 1
+			AntiAirBuilding: 1
+
 BallistaSingleShotAirEnergized_AA:
 	Inherits@wh: ^Warhead_MissileAP_Light
 	Inherits@proj: ^Projectile_Missile_Light
@@ -1998,7 +2081,6 @@ RocketAngelRockets:
 		Arm: 2
 		CruiseAltitude: 2500
 		Inaccuracy: 500
-		RangeLimit: 25000
 		Image: DRAGON
 		TrailImage: blue_smokey
 		TrailInterval: 1
@@ -2013,7 +2095,6 @@ RocketAngelRockets:
 		Blockable: false
 		AllowSnapping: true
 		Shadow: true
-		CloseEnough: 400
 		HomingActivationDelay: 3
 		PointDefenseTypes: Missile
 		LaunchAngle: 66
@@ -2377,7 +2458,6 @@ Hakureiring:
 		VerticalRateOfTurn: 66
 		Speed: 333
 		Inaccuracy: 333
-		RangeLimit: 33333
 		Image: hakurei_tailsman
 		Sequences: idle
 		Palette: player
@@ -2393,7 +2473,6 @@ Hakureiring:
 		ContrailStartColor: 77CCFF
 		ContrailEndColorUsePlayerColor: true
 		ContrailEndColor: FFFFFF
-		CloseEnough: 333
 		AllowSnapping: true
 	Warhead@Magic_Heavy:
 		InvalidTargets: Air
@@ -2424,7 +2503,6 @@ Hakureiring2:
 		VerticalRateOfTurn: 44
 		Speed: 222
 		Inaccuracy: 222
-		RangeLimit: 22222
 		Image: hakureiringspecial
 		Sequences: bullet
 		Palette: player
@@ -2440,7 +2518,6 @@ Hakureiring2:
 		ContrailStartColor: 77CCFF
 		ContrailEndColorUsePlayerColor: true
 		ContrailEndColor: FFFFFF
-		CloseEnough: 333
 		AllowSnapping: true
 		TrailDelay: 1
 	Warhead@Magic_Heavy:
@@ -2474,7 +2551,6 @@ ReimuDreamSeal:
 		VerticalRateOfTurn: 44
 		Speed: 222
 		Inaccuracy: 222
-		RangeLimit: 22222
 		Image: hakureiringspecial
 		Sequences: bullet
 		Palette: player
@@ -2490,7 +2566,6 @@ ReimuDreamSeal:
 		ContrailStartColor: 77CCFF
 		ContrailEndColorUsePlayerColor: true
 		ContrailEndColor: FFFFFF
-		CloseEnough: 333
 		AllowSnapping: true
 		TrailDelay: 1
 	Warhead@Magic_Heavy:
@@ -2573,7 +2648,6 @@ Hakureiring3:
 		VerticalRateOfTurn: 66
 		Speed: 333
 		Inaccuracy: 333
-		RangeLimit: 33333
 		Image: hakurei_tailsman
 		Sequences: idle
 		Palette: player
@@ -2589,7 +2663,6 @@ Hakureiring3:
 		ContrailStartColor: 77CCFF
 		ContrailEndColorUsePlayerColor: true
 		ContrailEndColor: FFFFFF
-		CloseEnough: 333
 		AllowSnapping: true
 	Warhead@Magic_Heavy:
 		InvalidTargets: Air
@@ -2764,7 +2837,6 @@ ZeroFighterArrows:
 		Speed: 256
 		Arm: 2
 		Inaccuracy: 125
-		RangeLimit: 25000
 		Image: DRAGON
 		TrailImage: blue_smokey_small
 		TrailInterval: 1
@@ -3130,7 +3202,6 @@ SkyHawkArrows:
 		Speed: 256
 		Arm: 2
 		Inaccuracy: 125
-		RangeLimit: 25000
 		Image: DRAGON
 		TrailImage: blue_smokey_small
 		TrailInterval: 1
@@ -3244,7 +3315,6 @@ SkyHawkArrowsEnergized:
 		Speed: 256
 		Arm: 2
 		Inaccuracy: 125
-		RangeLimit: 25000
 		Image: DRAGON
 		TrailImage: blue_smokey_small
 		TrailInterval: 1
@@ -4847,7 +4917,6 @@ ShrineTankCannon:
 		VerticalRateOfTurn: 66
 		Speed: 333
 		Inaccuracy: 333
-		RangeLimit: 33333
 		Image: hakurei_tailsman
 		Sequences: idle
 		Palette: player
@@ -4863,7 +4932,6 @@ ShrineTankCannon:
 		ContrailStartColor: 77CCFF
 		ContrailEndColorUsePlayerColor: true
 		ContrailEndColor: FFFFFF
-		CloseEnough: 333
 		AllowSnapping: true
 	Warhead@Magic_Heavy:
 		Damage: 24000
@@ -5502,7 +5570,6 @@ OIHakureiring:
 		VerticalRateOfTurn: 66
 		Speed: 333
 		Inaccuracy: 333
-		RangeLimit: 33333
 		Image: hakurei_tailsman
 		Sequences: idle
 		Palette: player
@@ -5518,7 +5585,6 @@ OIHakureiring:
 		ContrailStartColor: 77CCFF
 		ContrailEndColorUsePlayerColor: true
 		ContrailEndColor: FFFFFF
-		CloseEnough: 333
 		AllowSnapping: true
 	Warhead@Magic_Heavy:
 		InvalidTargets: Air
@@ -5550,7 +5616,6 @@ OIHakureiring2:
 		VerticalRateOfTurn: 44
 		Speed: 222
 		Inaccuracy: 222
-		RangeLimit: 22222
 		Image: hakureiringspecial
 		Sequences: bullet
 		Palette: player
@@ -5566,7 +5631,6 @@ OIHakureiring2:
 		ContrailStartColor: 77CCFF
 		ContrailEndColorUsePlayerColor: true
 		ContrailEndColor: FFFFFF
-		CloseEnough: 333
 		AllowSnapping: true
 		TrailDelay: 1
 	Warhead@Magic_Heavy:

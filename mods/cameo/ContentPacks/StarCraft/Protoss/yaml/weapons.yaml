@@ -170,11 +170,12 @@ InterceptorLauncher:
 	Report: tphfi201.wav, tgofi200.wav
 	ValidTargets: Ground, Water, Air
 	Projectile: Missile
+		RangeLimitPercent: 150
+		CloseEnoughFromSpeed: true
 		ContrailLength: 0
 		Image: scdragoonprojectile
 		Speed: 822
 		Inaccuracy: 0
-		CloseEnough: 822
 		AllowSnapping: true
 	Warhead@FlakWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
@@ -368,7 +369,6 @@ DragoonCannon:
 	Range: 5000
 	Projectile: Missile
 		Speed: 500
-		CloseEnough: 500
 		AllowSnapping: true
 	Warhead@Plasma_Heavy_Flat:
 		ValidTargets: Ground, Water, Air
@@ -468,7 +468,6 @@ GladiusCannon:
 		ContrailLength: 0
 		Inaccuracy: 0
 		Shadow: true
-		CloseEnough: 400
 		AllowSnapping: true
 		HorizontalRateOfTurn: 4
 		VerticalRateOfTurn: 4
@@ -770,7 +769,6 @@ ArbiterCannon:
 	Range: 4280
 	Projectile: Missile
 		Speed: 428
-		CloseEnough: 428
 		AllowSnapping: true
 	Warhead@Plasma_Heavy_Flat:
 		ValidTargets: Ground, Water, Air
@@ -791,7 +789,6 @@ GlaveCanon:
 		Image: scdragoonprojectile
 		Speed: 822
 		Inaccuracy: 0
-		CloseEnough: 822
 		AllowSnapping: true
 	-Warhead@Railgun_Heavy:
 	Warhead@Railgun_Heavy_Flat:
@@ -912,9 +909,7 @@ ScarabLaunch:
 		MinimumLaunchSpeed: 222
 		MaximumLaunchSpeed: 333
 		HorizontalRateOfTurn: 11
-		CloseEnough: 1111
 		Inaccuracy: 1111
-		RangeLimit: 11111
 	Warhead@HeavyBomb: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 50000
@@ -961,6 +956,7 @@ ScarabLaunchDummy:
 
 ScoutRockets_AA:
 	Inherits@wh: ^Warhead_MissileAA_Heavy
+	Inherits@projectileaa: ^Projectile_Missile_AA
 	Inherits@proj: ^Projectile_Missile_Heavy_SC
 	Inherits@fx: ^Effect_MissileHE_Heavy_SC
 	Report: HKMISSLE.aud
@@ -971,11 +967,9 @@ ScoutRockets_AA:
 		Blockable: false
 		MaximumLaunchSpeed: 250
 		MinimumLaunchSpeed: 250
-		RangeLimit: 25000
 		Speed: 500
 		Inaccuracy: 25
 		Acceleration: 5
-		CloseEnough: 500
 		AllowSnapping: true
 		ContrailZOffset: 4000
 		ContrailStartColor: FF884400
@@ -986,6 +980,19 @@ ScoutRockets_AA:
 		ValidTargets: Air
 		Damage: 10000
 	Inherits@w6fx: ^sc_protoss_scoutrockets_aa
+
+	Projectile: Missile
+		Inaccuracy: 25
+		Image: d2k_missile2
+		VerticalRateOfTurn: 20
+		TrailImage: large_trail
+		ContrailLength: 0
+		MaximumLaunchSpeed: 250
+		MinimumLaunchSpeed: 250
+		Speed: 500
+		Acceleration: 5
+		HomingActivationDelay: 3
+
 ^sc_protoss_warpblade:
 	Warhead@Effect: CreateEffect
 		ImpactSounds: zulhit00.aud,zulhit01.aud

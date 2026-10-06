@@ -2260,7 +2260,6 @@ RA2LarsRocket:
 		Speed: 1000
 		Arm: 2
 		Inaccuracy: 50
-		RangeLimit: 20000
 		Image: d2k_missile2
 		Palette: d2keffect
 		TrailImage: large_trail
@@ -7069,7 +7068,6 @@ RA2APCRocket:
 		Speed: 400
 		Arm: 2
 		Inaccuracy: 1000
-		RangeLimit: 20000
 		Image: d2k_missile2
 		Palette: d2keffect
 		TrailImage: large_trail
@@ -7332,7 +7330,6 @@ RA2APCRocket_elite:
 		Speed: 400
 		Arm: 2
 		Inaccuracy: 1000
-		RangeLimit: 20000
 		Image: red_dragon
 		Palette: d2keffect
 		TrailImage: red_smokey
@@ -7587,6 +7584,7 @@ RA2APCRocket_elite:
 		InvalidTargets: Air
 RA2APCRocket_AA:
 	Inherits@missilerole: ^Warhead_MissileAA_Medium
+	Inherits@projectileaa: ^Projectile_Missile_AA
 	Inherits: RA2APCRocket
 	ValidTargets: Air
 	Range: 8610
@@ -7612,6 +7610,20 @@ RA2APCRocket_AA:
 		PercentageSpread: 50
 		PercentageDenominator: 10000
 	-Warhead@MissileHE_Medium:
+
+
+	Projectile: Missile
+		Arm: 2
+		Inaccuracy: 1000
+		Image: d2k_missile2
+		HorizontalRateOfTurn: 30
+		TrailImage: large_trail
+		ContrailLength: 33
+		MaximumLaunchSpeed: 200
+		MinimumLaunchSpeed: 200
+		Speed: 400
+		Acceleration: 10
+		HomingActivationDelay: 2
 
 RA2APCRocket_AA_elite:
 	Inherits: RA2APCRocket_AA
@@ -7641,6 +7653,18 @@ RA2APCRocket_AA_elite:
 		PercentageScale: 2500
 		PercentageSpread: 50
 		PercentageDenominator: 10000
+
+
+	Projectile: Missile
+		Arm: 2
+		Inaccuracy: 1000
+		HorizontalRateOfTurn: 30
+		ContrailLength: 33
+		MaximumLaunchSpeed: 200
+		MinimumLaunchSpeed: 200
+		Speed: 400
+		Acceleration: 10
+		HomingActivationDelay: 2
 
 SMLLauncher:
 	ValidTargets: Ground, Air, Water

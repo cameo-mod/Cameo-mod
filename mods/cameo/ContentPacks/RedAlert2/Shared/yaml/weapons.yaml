@@ -785,6 +785,8 @@
 	Inherits@proj: ^Projectile_Missile_Light
 	Inherits@fx: ^Effect_Clsn_Small_RA2
 	Projectile: Missile
+		RangeLimitPercent: 150
+		CloseEnoughFromSpeed: true
 		Image: ra2_dragon
 		-TrailImage:
 		ContrailLength: 25
@@ -796,6 +798,8 @@
 	Inherits@proj: ^Projectile_Missile_Medium
 	Inherits@fx: ^Effect_Clsn_Medium_RA2
 	Projectile: Missile
+		RangeLimitPercent: 150
+		CloseEnoughFromSpeed: true
 		Image: patriot
 		-TrailImage:
 		ContrailLength: 33
@@ -1374,7 +1378,8 @@ RA2HoverMissile_elite:
 		Spread: 100
 		Falloff: 100, 45, 15, 0
 RA2HoverMissile_AA:
-	Inherits@finalmain: ^Warhead_MissileAA_Light_Flat
+	Inherits@warheadaa: ^Warhead_MissileAA_Light
+	Inherits@projectileaa: ^Projectile_Missile_AA
 	Inherits@xRA2HoverMissile0: ^Warhead_MissileAP_Light
 	Inherits@xRA2HoverMissile1: ^Projectile_Missile_Light
 	Inherits@fx: ^Effect_Grey_Explosion_Small_RA2
@@ -1394,7 +1399,6 @@ RA2HoverMissile_AA:
 		ContrailStartWidth: 25
 		ContrailEndWidth: 1
 		VerticalRateOfTurn: 20
-	-Warhead@MissileAA_Light_Flat:
 	Warhead@MissileAA_Light: AreaDamage
 		Versus:
 			None: 36
@@ -1477,14 +1481,24 @@ RA2HoverMissile_AA:
 		PercentageSpread: 50
 		Spread: 200
 		Falloff: 100, 70, 30, 0
+
+	Projectile: Missile
+		Inaccuracy: 50
+		HorizontalRateOfTurn: 40
+		MaximumLaunchSpeed: 300
+		MinimumLaunchSpeed: 300
+		Speed: 600
+		Acceleration: 4
+		HomingActivationDelay: 1
+
 RA2HoverMissile_AA_elite:
-	Inherits@finalmain: ^Warhead_MissileAA_Light_Flat
+	Inherits@warheadaa: ^Warhead_MissileAA_Light
+	Inherits@projectileaa: ^Projectile_Missile_AA
 	Inherits: RA2HoverMissile_elite
 	ValidTargets: Air
 	Range: 9640
 	Projectile: Missile
 		VerticalRateOfTurn: 20
-	-Warhead@MissileAA_Light_Flat:
 	Warhead@MissileAA_Light: AreaDamage
 		Versus:
 			None: 36
@@ -1568,6 +1582,19 @@ RA2HoverMissile_AA_elite:
 		Spread: 200
 		Falloff: 100, 70, 30, 0
 	-Warhead@MissileHE_Light:
+
+	Projectile: Missile
+		Inaccuracy: 50
+		Image: red_dragon
+		HorizontalRateOfTurn: 40
+		ContrailLength: 25
+		MaximumLaunchSpeed: 300
+		MinimumLaunchSpeed: 300
+		Speed: 600
+		Acceleration: 4
+		HomingActivationDelay: 1
+		TrailImage: red_smokey
+
 RA2ThunderboltMissile:
 	Inherits@roleflat: ^Warhead_MissileHE_Light_Flat
 	Inherits@proj: ^Projectile_Missile_Light
@@ -1578,7 +1605,6 @@ RA2ThunderboltMissile:
 		Speed: 800
 		Arm: 2
 		Inaccuracy: 400
-		RangeLimit: 16000
 		Image: d2k_missile2
 		Palette: d2keffect
 		TrailImage: large_trail
@@ -1775,6 +1801,7 @@ RA2ThunderboltMissile_elite:
 	TargetActorCenter: true
 RA2ThunderboltMissile_AA:
 	Inherits@missilerole: ^Warhead_MissileAA_Light
+	Inherits@projectileaa: ^Projectile_Missile_AA
 	Inherits: RA2ThunderboltMissile
 	Report: bazook1.aud
 	ValidTargets: Air
@@ -1792,8 +1819,23 @@ RA2ThunderboltMissile_AA:
 		PercentageSpread: 50
 	-Warhead@MissileAP_Light:
 
+
+	Projectile: Missile
+		Arm: 2
+		Inaccuracy: 400
+		Image: d2k_missile2
+		HorizontalRateOfTurn: 40
+		TrailImage: large_trail
+		ContrailLength: 0
+		MaximumLaunchSpeed: 400
+		MinimumLaunchSpeed: 400
+		Speed: 800
+		Acceleration: 10
+		HomingActivationDelay: 1
+
 RA2ThunderboltMissile_AA_elite:
 	Inherits@missilerole: ^Warhead_MissileAA_Light
+	Inherits@projectileaa: ^Projectile_Missile_AA
 	Inherits: RA2ThunderboltMissile_elite
 	Report: bazook1.aud
 	ValidTargets: Air
@@ -1810,6 +1852,20 @@ RA2ThunderboltMissile_AA_elite:
 		PercentageScale: 9975
 		PercentageSpread: 50
 	-Warhead@MissileAP_Light:
+
+
+	Projectile: Missile
+		Arm: 2
+		Inaccuracy: 400
+		Image: red_dragon
+		HorizontalRateOfTurn: 40
+		TrailImage: red_smokey
+		ContrailLength: 0
+		MaximumLaunchSpeed: 400
+		MinimumLaunchSpeed: 400
+		Speed: 800
+		Acceleration: 10
+		HomingActivationDelay: 1
 
 RA2MultiHoverMissile:
 	Inherits@finalmain: ^Warhead_MissileHE_Light_Flat
@@ -2113,7 +2169,8 @@ RA2MultiHoverMissile_elite:
 		Spread: 43
 		Falloff: 100, 0
 RA2MultiHoverMissile_AA:
-	Inherits@finalmain: ^Warhead_MissileAA_Light_Flat
+	Inherits@warheadaa: ^Warhead_MissileAA_Light
+	Inherits@projectileaa: ^Projectile_Missile_AA
 	Inherits@finalmain_b: ^Warhead_MissileHE_Light_Flat
 	Inherits@proj: ^Projectile_Missile_Light
 	Inherits@fx: ^Effect_MissileHE_Light
@@ -2136,7 +2193,6 @@ RA2MultiHoverMissile_AA:
 	-Warhead@MissileHE_Light_Flat:
 	ValidTargets: Air
 	TargetActorCenter: true
-	-Warhead@MissileAA_Light_Flat:
 	Warhead@MissileAA_Light: AreaDamage
 		Versus:
 			None: 36
@@ -2219,14 +2275,20 @@ RA2MultiHoverMissile_AA:
 		PercentageSpread: 50
 		Spread: 200
 		Falloff: 100, 70, 30, 0
+
+	Projectile: Missile
+		Inaccuracy: 50
+		ContrailLength: 0
+		HomingActivationDelay: 1
+
 RA2MultiHoverMissile_AA_elite:
-	Inherits@finalmain: ^Warhead_MissileAA_Light_Flat
+	Inherits@warheadaa: ^Warhead_MissileAA_Light
+	Inherits@projectileaa: ^Projectile_Missile_AA
 	Inherits: RA2MultiHoverMissile_elite
 	ValidTargets: Air
 	Range: 10255
 	Projectile: Missile
 		VerticalRateOfTurn: 12
-	-Warhead@MissileAA_Light_Flat:
 	Warhead@MissileAA_Light: AreaDamage
 		Versus:
 			None: 36
@@ -2311,6 +2373,19 @@ RA2MultiHoverMissile_AA_elite:
 		Falloff: 100, 70, 30, 0
 	-Warhead@MissileAP_Light:
 	TargetActorCenter: true
+
+	Projectile: Missile
+		Inaccuracy: 50
+		Image: red_dragon
+		HorizontalRateOfTurn: 24
+		TrailImage: red_smokey
+		ContrailLength: 0
+		MaximumLaunchSpeed: 64
+		MinimumLaunchSpeed: 128
+		Speed: 384
+		Acceleration: 16
+		HomingActivationDelay: 1
+
 RA2MultiThunderboltMissile:
 	Inherits@roleflat: ^Warhead_MissileHE_Light_Flat
 	Inherits@proj: ^Projectile_Missile_Light
@@ -2321,7 +2396,6 @@ RA2MultiThunderboltMissile:
 		Speed: 800
 		Arm: 2
 		Inaccuracy: 400
-		RangeLimit: 16000
 		Image: d2k_missile2
 		Palette: d2keffect
 		TrailImage: large_trail
@@ -2518,6 +2592,7 @@ RA2MultiThunderboltMissile_elite:
 	TargetActorCenter: true
 RA2MultiThunderboltMissile_AA:
 	Inherits@missilerole: ^Warhead_MissileAA_Light
+	Inherits@projectileaa: ^Projectile_Missile_AA
 	Inherits: RA2MultiThunderboltMissile
 	Report: bazook1.aud
 	ValidTargets: Air
@@ -2535,8 +2610,23 @@ RA2MultiThunderboltMissile_AA:
 		PercentageSpread: 50
 	-Warhead@MissileAP_Light:
 
+
+	Projectile: Missile
+		Arm: 2
+		Inaccuracy: 400
+		Image: d2k_missile2
+		HorizontalRateOfTurn: 40
+		TrailImage: large_trail
+		ContrailLength: 0
+		MaximumLaunchSpeed: 200
+		MinimumLaunchSpeed: 200
+		Speed: 800
+		Acceleration: 10
+		HomingActivationDelay: 1
+
 RA2MultiThunderboltMissile_AA_elite:
 	Inherits@missilerole: ^Warhead_MissileAA_Light
+	Inherits@projectileaa: ^Projectile_Missile_AA
 	Inherits: RA2MultiThunderboltMissile_elite
 	Report: bazook1.aud
 	ValidTargets: Air
@@ -2553,6 +2643,20 @@ RA2MultiThunderboltMissile_AA_elite:
 		PercentageScale: 9975
 		PercentageSpread: 50
 	-Warhead@MissileAP_Light:
+
+
+	Projectile: Missile
+		Arm: 2
+		Inaccuracy: 400
+		Image: red_dragon
+		HorizontalRateOfTurn: 40
+		TrailImage: red_smokey
+		ContrailLength: 0
+		MaximumLaunchSpeed: 200
+		MinimumLaunchSpeed: 200
+		Speed: 800
+		Acceleration: 10
+		HomingActivationDelay: 1
 
 RA2DepthCharge:
 	Inherits@wh: ^Warhead_Demolition_Light
@@ -2632,7 +2736,6 @@ RA2TRIPODPLAZMA:
 		Speed: 204
 		Inaccuracy: 0c256
 		Image: plasma
-		RangeLimit: 10c0
 		Shadow: True
 		Arm: 2
 		Blockable: false
@@ -2768,7 +2871,6 @@ RA2REVENANTAA:
 		TrailImage: fb2
 		Image: fireball
 		Inaccuracy: 0c128
-		RangeLimit: 13c0
 		HorizontalRateOfTurn: 40
 		Blockable: false
 		Shadow: True
@@ -4162,7 +4264,6 @@ MigMissiles:
 		Speed: 400
 		Arm: 2
 		Inaccuracy: 1000
-		RangeLimit: 15c0
 		Image: d2k_missile2
 		Palette: d2keffect
 		TrailImage: large_trail
@@ -4460,7 +4561,6 @@ MigMissiles_rad:
 		Speed: 400
 		Arm: 2
 		Inaccuracy: 1000
-		RangeLimit: 15c0
 		Image: d2k_missile2
 		Palette: d2keffect
 		TrailImage: green_smokey
@@ -4949,6 +5049,7 @@ MigMissiles_fire_elite:
 
 MigMissiles_AA:
 	Inherits@heldmissilerole: ^Warhead_MissileAA_Medium
+	Inherits@projectileaa: ^Projectile_Missile_AA
 	Inherits: MigMissiles
 	ValidTargets: Air
 	Projectile: Missile
@@ -5007,8 +5108,21 @@ MigMissiles_AA:
 		FadeFrames: 10
 	Warhead@ShieldHit:
 		Duration: 8
+
+	Projectile: Missile
+		Arm: 2
+		Image: d2k_missile2
+		HorizontalRateOfTurn: 30
+		TrailImage: large_trail
+		ContrailLength: 33
+		MaximumLaunchSpeed: 384
+		MinimumLaunchSpeed: 384
+		Acceleration: 10
+		HomingActivationDelay: 2
+
 MigMissiles_AA_elite:
 	Inherits@heldmissilerole: ^Warhead_MissileAA_Medium
+	Inherits@projectileaa: ^Projectile_Missile_AA
 	Inherits: MigMissiles_elite
 	ValidTargets: Air
 	Projectile: Missile
@@ -5067,6 +5181,18 @@ MigMissiles_AA_elite:
 		FadeFrames: 10
 	Warhead@ShieldHit:
 		Duration: 8
+
+	Projectile: Missile
+		Arm: 2
+		Image: red_dragon
+		HorizontalRateOfTurn: 30
+		TrailImage: red_smokey
+		ContrailLength: 33
+		MaximumLaunchSpeed: 384
+		MinimumLaunchSpeed: 384
+		Acceleration: 10
+		HomingActivationDelay: 2
+
 V3Launch:
 	ReloadDelay: 50
 	Range: 15000
@@ -6700,7 +6826,6 @@ YRBoomerSCUD:
 		Speed: 200
 		Image: MISSILE
 		TrailImage: bomb
-		RangeLimit: 20000
 		LaunchAngle: 66
 	Warhead@Effect: CreateEffect
 		ValidTargets: Ground, Air
@@ -6819,7 +6944,6 @@ RA2TorpTube:
 		Speed: 180
 		Acceleration: 1
 		HorizontalRateOfTurn: 5
-		RangeLimit: 18000
 		BoundToTerrainType: Water
 		Palette: cloak
 		MaximumLaunchAngle: 0
@@ -6935,7 +7059,6 @@ RA2TorpTube_elite:
 		Speed: 180
 		Acceleration: 1
 		HorizontalRateOfTurn: 5
-		RangeLimit: 18000
 		BoundToTerrainType: Water
 		Palette: cloak
 		MaximumLaunchAngle: 0
