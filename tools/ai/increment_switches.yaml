@@ -237,7 +237,6 @@ groups:
   BL_protection_episode_guard:       # EMBER AR-S residual 2 (maintainer stutter, tagged-emitter attribution 2026-10-04): the surviving h2 flap is the protection tick's lure decision — a flickering PredictsLoss verdict alternates engage AttackMove with lure Move per eval, a different-key alternation the dedup cannot express. The episode enters on 2 consecutive losing evals and aborts on 2 consecutive non-losing evals (~AttackForceInterval each); engage entry is never confirmed, so a winnable enemy fights immediately. Off = per-eval decision, unchanged stream
     SquadManagerBotModuleCA:
       UseProtectionEpisodeGuard: true
-<<<<<<< HEAD
   BN_squad_pool_fixes:               # HOTSPOT-FINDINGS (2026-10-05): attack dispatch retains unmatched idle pool members; allied defend/assist answers require enough defender-draftable units. Off preserves legacy order stream; classic remains skipped.
     SquadManagerBotModuleCA:
       UseSquadPoolFixes: true
