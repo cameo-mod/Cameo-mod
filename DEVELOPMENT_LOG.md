@@ -980,6 +980,11 @@ closing time/range factors at engagement distance (P4).
 
 # 2026-10-05 — Claude (lead): crash repair, INC 2026-10-05, ars-stutter held back
 
+## 2026-10-06 — Codex Sol: LEARN-P6 review fixes
+
+Three runtime findings fixed with an armed ground controller, independent safety and integer rules-derived predictor. Four regressions added; full NUnit 1190/1190 and increment Python 24/24 pass. Audits/isolated boot PASS. Independent review and coordinator same-seed order identity/churn remain pending. Details: `docs/design/SQUAD_DESIRE_EXECUTION.md`.
+
+
 *Claude.* `inc/2026_10_05` on `inc/2026_10_04g` @ 4cbc73cbf.
 
 - **Machine crash ~00:05 corrupted the shared repo.** Zero-filled: `refs/heads/inc/2026_10_05`,
