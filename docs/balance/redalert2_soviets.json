@@ -782,6 +782,7 @@
       "slot": "Armament@AA",
       "versus_templates": [
        "^Warhead_MissileAA_Medium",
+       "^Projectile_Missile_AA",
        "MigMissiles"
       ],
       "warheads": [
@@ -841,6 +842,7 @@
       "slot": "Armament@AAELITE",
       "versus_templates": [
        "^Warhead_MissileAA_Medium",
+       "^Projectile_Missile_AA",
        "MigMissiles_elite"
       ],
       "warheads": [
@@ -4958,11 +4960,14 @@
       "requires": "!rank-elite",
       "slot": "Armament@SECONDARY",
       "versus_templates": [
+       "^Warhead_MissileAA_Medium",
+       "^Projectile_Missile_AA",
        "^Warhead_MissileAP_Medium",
        "^Projectile_Missile_Medium",
        "^Effect_Clsn_Medium_RA2"
       ],
       "warheads": [
+       "^Warhead_MissileAA_Medium",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "RA2MammothTusk_AA",
@@ -5117,6 +5122,7 @@
        "RA2MammothTusk_AA"
       ],
       "warheads": [
+       "^Warhead_MissileAA_Medium",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "RA2MammothTusk_AA_elite",

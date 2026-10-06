@@ -1517,6 +1517,11 @@ namespace OpenRA.Mods.CA.Traits
 		public const double SpeedCap = 10000;
 		public const int DefaultAreaSpread = 43;
 		public const int PointTargetRadius = 100;
+
+		// OpenRA's default CircleShape radius, a representative vehicle footprint
+		// (python TARGET_FOOTPRINT_RADIUS). The footprint accuracy experiment stays
+		// off in committed fixtures; the constant also bounds the terminal model.
+		public const int TargetFootprintRadius = 426;
 		public const int BulletDefaultSpeed = 17;
 		public const int AreaBeamDefaultDuration = 10;
 		public const int AreaBeamDefaultDamageInterval = 3;
@@ -1562,6 +1567,7 @@ namespace OpenRA.Mods.CA.Traits
 				["Bullet"] = BulletDefaultSpeed,
 				["ScaledBullet"] = BulletDefaultSpeed,
 				["Missile"] = 384,
+				["MissileTA"] = 384,
 				["AreaBeam"] = 128,
 				["SpriteAthenaLaser"] = 90,
 				["LinearPulse"] = 6 * 1024,
@@ -1569,7 +1575,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		public static readonly IReadOnlySet<string> InaccuracyProjectiles = new HashSet<string>(
 			InstantScatterProjectiles.Concat(TrackedZapProjectiles)
-				.Concat(new[] { "Bullet", "ScaledBullet", "Missile", "AreaBeam", "LinearPulse" }),
+				.Concat(new[] { "Bullet", "ScaledBullet", "Missile", "MissileTA", "AreaBeam", "LinearPulse" }),
 			StringComparer.Ordinal);
 
 		public static readonly IReadOnlySet<string> CenterTargetActorProjectiles = new HashSet<string>(StringComparer.Ordinal)
@@ -1767,7 +1773,7 @@ namespace OpenRA.Mods.CA.Traits
 			else if (projectileType != null && UnmodeledTrajectoryProjectiles.Contains(projectileType))
 				limitations.Add($"unmodeled_projectile_trajectory:{projectileType}");
 
-			if (projectileType == "Missile")
+			if (projectileType is "Missile" or "MissileTA")
 			{
 				var probability = BotFormula.ParseInt32(
 					resolved.Get("Projectile", "LockOnProbability"), "Missile.LockOnProbability", 100) ?? 100;
@@ -2009,15 +2015,102 @@ namespace OpenRA.Mods.CA.Traits
 			}
 		}
 
+		/// <summary>Conservative target-center miss bound for a reliably locked Missile
+		/// (python homing_missile_terminal_bound). Detonation is checked after movement
+		/// against fixed CloseEnough or the current speed when CloseEnoughFromSpeed is
+		/// set; the launch aimpoint is offset by authored lock-on inaccuracy, and
+		/// SnapImpactToTarget places the impact on the live target for a zero bound.
+		/// Nominal range only — modifiers, point-defense, blockers and the turn
+		/// trajectory are not simulated. Null means the guarantee is not established.</summary>
+		public static double? HomingMissileTerminalBound(MiniYamlMirrorNode resolved)
+		{
+			var projectile = resolved.Child("Projectile");
+			if (projectile == null || (projectile.Value != "Missile" && projectile.Value != "MissileTA"))
+				return null;
+
+			var probability = BotFormula.ParseInt32(
+				resolved.Get("Projectile", "LockOnProbability"), "Missile.LockOnProbability", 100) ?? 100;
+			if (probability < 99)
+				return null;
+
+			var weaponRangeRaw = resolved.Get("Range");
+			long weaponRange = weaponRangeRaw != null ? BotFormula.ParseWdist(weaponRangeRaw) : 0;
+			var speedRaw = resolved.Get("Projectile", "Speed");
+			long speed = speedRaw != null ? BotFormula.ParseWdist(speedRaw) : 384;
+			var maxLaunchRaw = resolved.Get("Projectile", "MaximumLaunchSpeed");
+			if (maxLaunchRaw != null)
+			{
+				var maxLaunch = (long)BotFormula.ParseWdist(maxLaunchRaw);
+				if (maxLaunch >= 0)
+					speed = Math.Max(speed, maxLaunch);
+			}
+
+			var fromSpeed = BotFormula.ParseBool(
+				resolved.Get("Projectile", "CloseEnoughFromSpeed"), "Missile.CloseEnoughFromSpeed", false) ?? false;
+			var closeRaw = resolved.Get("Projectile", "CloseEnough");
+			var closeEnough = fromSpeed ? speed : (closeRaw != null ? (long)BotFormula.ParseWdist(closeRaw) : 298);
+			if (!fromSpeed && closeEnough <= speed)
+				return null;
+
+			var limitRaw = resolved.Get("Projectile", "RangeLimit");
+			long rangeLimit = limitRaw != null ? BotFormula.ParseWdist(limitRaw) : 0;
+			if (rangeLimit == 0)
+			{
+				var limitPct = BotFormula.ParseInt32(
+					resolved.Get("Projectile", "RangeLimitPercent"), "Missile.RangeLimitPercent", 0) ?? 0;
+				rangeLimit = limitPct < 0 ? -1 : (limitPct > 0 ? CSharpDiv(weaponRange * limitPct, 100) : weaponRange);
+			}
+
+			if (rangeLimit >= 0 && weaponRange > rangeLimit)
+				return null;
+
+			var horizontal = BotFormula.ParseInt32(
+				resolved.Get("Projectile", "HorizontalRateOfTurn"), "Missile.HorizontalRateOfTurn", 20) ?? 20;
+			var vertical = BotFormula.ParseInt32(
+				resolved.Get("Projectile", "VerticalRateOfTurn"), "Missile.VerticalRateOfTurn", 24) ?? 24;
+			if (horizontal <= 0 || vertical <= 0)
+				return null;
+
+			var activationRaw = resolved.Get("Projectile", "HomingActivationDelay");
+			var activationDelay = activationRaw != null
+				? BotFormula.ParseInt32(activationRaw, "Missile.HomingActivationDelay", 0) ?? 0
+				: 0;
+			if (speed * activationDelay >= weaponRange)
+				return null;
+
+			var inaccRaw = resolved.Get("Projectile", "Inaccuracy");
+			long inaccuracy = inaccRaw != null ? BotFormula.ParseWdist(inaccRaw) : 0;
+			var lockInaccRaw = resolved.Get("Projectile", "LockOnInaccuracy");
+			var lockInaccuracy = lockInaccRaw != null ? BotFormula.ParseWdist(lockInaccRaw) : -1;
+			if (lockInaccuracy >= 0)
+				inaccuracy = lockInaccuracy;
+
+			var kind = (resolved.Get("Projectile", "InaccuracyType") ?? "Absolute").Trim().ToLowerInvariant();
+			if (kind == "percellincrement")
+				inaccuracy = CSharpDiv(inaccuracy * weaponRange, 1024);
+			else if (kind != "maximum" && kind != "absolute")
+				return null;
+
+			if (BotFormula.ParseBool(
+				resolved.Get("Projectile", "SnapImpactToTarget"), "Missile.SnapImpactToTarget", false) ?? false)
+				return 0.0;
+
+			// Missile.cs draws independent x/y offsets from [-inaccuracy, +inaccuracy];
+			// their farthest radial distance is sqrt(2) times the per-axis bound.
+			return closeEnough + Math.Sqrt(2.0) * Math.Max(0, inaccuracy);
+		}
+
 		/// <summary>(weight, reliability, footprint) for every runtime AreaDamage tick.</summary>
 		public static List<(double Weight, double Reliability, double Footprint)> AreaGeometrySamples(
-			MiniYamlMirrorNode node, IReadOnlyList<int> fo, IReadOnlyList<int> radii, double sigma, long radiusScale = 100)
+			MiniYamlMirrorNode node, IReadOnlyList<int> fo, IReadOnlyList<int> radii, double sigma,
+			long radiusScale = 100, long targetRadius = 0, double? terminalBound = null, long? terminalRadius = null)
 		{
 			var modifiers = AreaTickModifiers(node);
 			var ticks = modifiers.Length;
 			var samples = new List<(double, double, double)>();
 			if (ticks == 0)
 				return samples;
+			terminalRadius ??= targetRadius;
 			var finalOuter = (long)radii[radii.Count - 1];
 			var maxRadiusRaw = node.Get("MaxRadius");
 			var minRadiusRaw = node.Get("MinRadius");
@@ -2042,7 +2135,12 @@ namespace OpenRA.Mods.CA.Traits
 					outer = minRadius + CSharpDiv((maxRadius - minRadius) * (tick + 1), ticks);
 				var scaledOuter = CSharpDiv(outer * radiusScale, 100);
 				var cutoff = Math.Min(outer, scaledOuter);
-				samples.Add((modifiers[tick] / 100.0, Reliability(fo, radii, sigma, cutoff), FootprintCells2(fo, radii, cutoff)));
+				var useTerminal = terminalBound.HasValue && terminalBound.Value <= cutoff + terminalRadius.Value;
+				samples.Add((modifiers[tick] / 100.0,
+					Reliability(fo, radii, sigma, cutoff,
+						targetRadius: useTerminal ? terminalRadius.Value : targetRadius,
+						terminalBound: useTerminal ? terminalBound : null),
+					FootprintCells2(fo, radii, cutoff)));
 			}
 
 			return samples;
@@ -2052,7 +2150,8 @@ namespace OpenRA.Mods.CA.Traits
 		/// Expected falloff at the impact point over the engine's scatter (POINT target):
 		/// E[F(R)] where R is the miss distance; cutoff models an AreaDamage radius gate.
 		/// </summary>
-		public static double Reliability(IReadOnlyList<int> fo, IReadOnlyList<int> radii, double sigma, long? cutoff = null)
+		public static double Reliability(IReadOnlyList<int> fo, IReadOnlyList<int> radii, double sigma,
+			long? cutoff = null, long targetRadius = 0, double? terminalBound = null)
 		{
 			if (sigma <= 0)
 			{
@@ -2070,7 +2169,8 @@ namespace OpenRA.Mods.CA.Traits
 			{
 				var t = (i + 0.5) * step;
 				var w = ScatterDensityAt(t) * step;
-				var distance = t * sigma;
+				var impactDistance = terminalBound ?? t * sigma;
+				var distance = Math.Max(0.0, impactDistance - targetRadius);
 				if (!cutoff.HasValue || distance <= cutoff.Value)
 					acc += RuntimeFalloff(fo, radii, distance) / 100.0 * w;
 				weight += w;
@@ -2080,10 +2180,12 @@ namespace OpenRA.Mods.CA.Traits
 		}
 
 		/// <summary>Probability a point impact lands inside TargetDamage's closed disc.</summary>
-		public static double UniformReliability(long radius, double sigma)
+		public static double UniformReliability(long radius, double sigma, long targetRadius = 0, double? terminalBound = null)
 		{
 			if (radius <= 0)
 				return 0.0;
+			if (terminalBound.HasValue)
+				return terminalBound.Value <= radius + targetRadius ? 1.0 : 0.0;
 			if (sigma <= 0)
 				return 1.0;
 			const int n = 400;
@@ -2095,7 +2197,7 @@ namespace OpenRA.Mods.CA.Traits
 			{
 				var t = (i + 0.5) * step;
 				var w = ScatterDensityAt(t) * step;
-				if (t * sigma <= radius)
+				if (t * sigma <= radius + targetRadius)
 					caught += w;
 				weight += w;
 			}
@@ -2191,7 +2293,7 @@ namespace OpenRA.Mods.CA.Traits
 					return (false, 0.0);
 			}
 
-			if (ptype == "Missile")
+			if (ptype is "Missile" or "MissileTA")
 			{
 				var probability = BotFormula.ParseInt32(
 					resolved.Get("Projectile", "LockOnProbability"), "Missile.LockOnProbability", 100) ?? 100;
@@ -2199,6 +2301,23 @@ namespace OpenRA.Mods.CA.Traits
 				var lockInacc = lockRaw == null ? -1 : BotFormula.ParseWdist(lockRaw);
 				if (probability >= 99 && lockInacc >= 0)
 					inacc = lockInacc;
+
+				// Runtime missile fuel is fixed RangeLimit when authored, otherwise
+				// RangeLimitPercent of the weapon range, and modifiers follow that base.
+				var fuelRaw = resolved.Get("Projectile", "RangeLimit");
+				long fuel = fuelRaw != null ? BotFormula.ParseWdist(fuelRaw) : 0;
+				if (fuel == 0)
+				{
+					var fuelPct = BotFormula.ParseInt32(
+						resolved.Get("Projectile", "RangeLimitPercent"), "Missile.RangeLimitPercent", 0) ?? 0;
+					if (fuelPct < 0)
+						fuel = -1;
+					else if (fuelPct > 0)
+						fuel = CSharpDiv(rng * fuelPct, 100);
+				}
+
+				if (fuel > 0 && rng > fuel)
+					return (false, double.PositiveInfinity);
 			}
 
 			double speed;
@@ -2262,6 +2381,7 @@ namespace OpenRA.Mods.CA.Traits
 			if (whs.Count == 0)
 				return null;
 			var (_, sigma) = WeaponReliabilityCtx(resolved);
+			var terminalBound = HomingMissileTerminalBound(resolved);
 			var isDirectActor = DirectActorImpact(resolved);
 			var eff = 0.0;
 			var baseTotal = 0.0;
@@ -2281,7 +2401,13 @@ namespace OpenRA.Mods.CA.Traits
 
 				if (isDirectActor)
 				{
-					var directRel = Reliability(DirectFalloff, DirectRadii, sigma);
+					var useTerminal = terminalBound.HasValue &&
+						terminalBound.Value <= Math.Max(PointTargetRadius, TargetFootprintRadius);
+					var effectiveRadius = useTerminal ? TargetFootprintRadius : 0;
+					var directRadius = Math.Max(PointTargetRadius, effectiveRadius);
+					var directRel = Reliability(DirectFalloff, new[] { 0, directRadius }, sigma,
+						targetRadius: effectiveRadius,
+						terminalBound: useTerminal ? terminalBound : null);
 					eff += w.Base * directRel;
 					baseTotal += w.Base;
 					relWeighted += directRel * w.Base;
@@ -2301,19 +2427,28 @@ namespace OpenRA.Mods.CA.Traits
 				double rel;
 				if (w.Type == "TargetDamage")
 				{
+					var useTerminal = terminalBound.HasValue &&
+						terminalBound.Value <= radius + TargetFootprintRadius;
 					fp = UniformFootprintCells2(radius);
-					rel = UniformReliability(radius, sigma);
+					rel = UniformReliability(radius, sigma,
+						targetRadius: useTerminal ? TargetFootprintRadius : 0,
+						terminalBound: useTerminal ? terminalBound : null);
 				}
 				else if (w.Type == "AreaDamage")
 				{
-					var samples = AreaGeometrySamples(w.Node, fo, radii, sigma);
+					var samples = AreaGeometrySamples(w.Node, fo, radii, sigma,
+						terminalBound: terminalBound, terminalRadius: TargetFootprintRadius);
 					rel = samples.Sum(s => s.Weight * s.Reliability);
 					fp = samples.Sum(s => s.Weight * s.Footprint);
 				}
 				else
 				{
+					var useTerminal = terminalBound.HasValue && radii != null && radii.Length > 0 &&
+						terminalBound.Value <= radii[radii.Length - 1] + TargetFootprintRadius;
 					fp = FootprintCells2(fo, radii);
-					rel = Reliability(fo, radii, sigma);
+					rel = Reliability(fo, radii, sigma,
+						targetRadius: useTerminal ? TargetFootprintRadius : 0,
+						terminalBound: useTerminal ? terminalBound : null);
 				}
 
 				eff += w.Base * (rel + SwarmW * fp);

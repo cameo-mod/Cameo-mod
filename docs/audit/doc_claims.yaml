@@ -478,7 +478,7 @@ claims:
                 if isinstance(v, dict) and 'spec' in v and v.get('signed_off')))
 
   - id: warhead_family_reach
-    value: 1509
+    value: 1510
     tolerance: 0
     what: >
       Fired weapons whose inherit chain reaches a `^Warhead_*` family — the W23/W24 burn-up.
@@ -1118,7 +1118,7 @@ claims:
       print(int(cycles.pop()))
 
   - id: cameo_family_labelled_weapons
-    value: 1567
+    value: 1569
     tolerance: 0
     what: >
       Concrete Cameo weapons whose inherit chain names a `^Warhead_<Family>_<Level>` template,
