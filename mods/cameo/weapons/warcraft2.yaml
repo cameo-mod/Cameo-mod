@@ -52,7 +52,7 @@ wc2arrowFire:
 		Speed: 600
 		HorizontalRateOfTurn: 60
 		VerticalRateOfTurn: 60
-		RangeLimit: 12000
+		RangeLimitPercent: 150
 		AllowSnapping: True
 		CloseEnough: 600
 		ContrailLength: 0
@@ -103,7 +103,7 @@ wc2highArrowFire:
 		MaximumLaunchAngle: 70
 		HorizontalRateOfTurn: 70
 		VerticalRateOfTurn: 70
-		RangeLimit: 14000
+		RangeLimitPercent: 150
 		AllowSnapping: True
 		CloseEnough: 700
 		-TrailImage:

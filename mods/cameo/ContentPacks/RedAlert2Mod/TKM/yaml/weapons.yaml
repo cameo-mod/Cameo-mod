@@ -2595,7 +2595,7 @@ SandmarineTuskFire:
 		Speed: 400
 		Arm: 2
 		Inaccuracy: 2000
-		RangeLimit: 20000
+		RangeLimitPercent: 150
 		Image: d2k_missile2
 		Palette: d2keffect
 		TrailImage: large_trail
@@ -2711,7 +2711,7 @@ ViperMissiles:
 		MinimumLaunchSpeed: 200
 		Speed: 400
 		Acceleration: 10
-		RangeLimit: 20000
+		RangeLimitPercent: 150
 		ContrailStartWidth: 33
 		ContrailEndWidth: 1
 		Palette: d2keffect
@@ -2924,7 +2924,7 @@ ViperMissilesFire:
 		MinimumLaunchSpeed: 200
 		Speed: 400
 		Acceleration: 10
-		RangeLimit: 20000
+		RangeLimitPercent: 150
 		ContrailStartWidth: 33
 		ContrailEndWidth: 1
 		Palette: d2keffect

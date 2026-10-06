@@ -1201,7 +1201,7 @@ td_gdi_orca_orcamissiles:
 		MaximumLaunchSpeed: 250
 		MinimumLaunchSpeed: 250
 		PointDefenseTypes: Missile
-		RangeLimit: 25000
+		RangeLimitPercent: 150
 		Shadow: true
 		Speed: 500
 		TrailImage: smokey
@@ -1236,7 +1236,7 @@ td_gdi_orca_orcamissilesamt:
 		CloseEnough: 500
 		Image: DRAGON
 		Shadow: true
-		RangeLimit: 25000
+		RangeLimitPercent: 150
 		Blockable: false
 		Inaccuracy: 100
 		PointDefenseTypes: Missile
@@ -1624,7 +1624,7 @@ td_gdi_advancedguardtower_towermissile:
 		MaximumLaunchSpeed: 250
 		MinimumLaunchSpeed: 250
 		PointDefenseTypes: Missile
-		RangeLimit: 25000
+		RangeLimitPercent: 150
 		Shadow: true
 		Speed: 500
 		TrailImage: smokey
@@ -1940,7 +1940,7 @@ td_gdi_advancedguardtower_towermissileamt:
 		CloseEnough: 500
 		Image: DRAGON
 		Shadow: true
-		RangeLimit: 25000
+		RangeLimitPercent: 150
 		Blockable: false
 		Inaccuracy: 100
 		PointDefenseTypes: Missile
@@ -2272,7 +2272,7 @@ td_gdi_sonicmissilesoldier_missilesoldierweapon:
 		CloseEnough: 400
 		HorizontalRateOfTurn: 20
 		PointDefenseTypes: Missile
-		RangeLimit: 30000
+		RangeLimitPercent: 150
 		Shadow: true
 		VerticalRateOfTurn: 20
 	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
@@ -3079,7 +3079,7 @@ td_gdi_humveemkii_rocketshumvee2_AA:
 		CloseEnough: 600
 		Acceleration: 4
 		HomingActivationDelay: 1
-		RangeLimit: 20000
+		RangeLimitPercent: 150
 		PointDefenseTypes: Missile
 	Inherits: ^td_gdi_td_gdi_humveemkii_rocketshumvee2_aa
 	-Warhead@Concrete:
@@ -3188,7 +3188,7 @@ td_gdi_humveemkii_rocketshumvee2amt:
 		CloseEnough: 600
 		Acceleration: 5
 		HomingActivationDelay: 0
-		RangeLimit: 20000
+		RangeLimitPercent: 150
 		PointDefenseTypes: Missile
 		ContrailStartColor: 99887766
 		ContrailEndColor: 33221100
@@ -3295,7 +3295,7 @@ td_gdi_humveemkii_rocketshumvee2amt_AA:
 		CloseEnough: 600
 		Acceleration: 5
 		HomingActivationDelay: 0
-		RangeLimit: 20000
+		RangeLimitPercent: 150
 		PointDefenseTypes: Missile
 		ContrailStartColor: 99887766
 		ContrailEndColor: 33221100

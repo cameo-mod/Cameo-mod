@@ -135,7 +135,15 @@ namespace OpenRA.Mods.CA.Traits
 					continue;
 
 				var cycle = BotWeaponProfile.CycleTicks(weapon.ReloadDelay, weapon.Burst, weapon.BurstDelays);
-				weapons.Add(new BotWeaponProfile((double)main.Damage * Math.Max(1, weapon.Burst) / cycle, weapon.Range,
+				var range = weapon.Range;
+				if (weapon.Projectile is IRangeLimitedProjectileInfo limited)
+				{
+					var fuel = limited.EffectiveRangeLimit(weapon.Range);
+					if (fuel.Length > 0 && fuel.Length < range.Length)
+						range = fuel;
+				}
+
+				weapons.Add(new BotWeaponProfile((double)main.Damage * Math.Max(1, weapon.Burst) / cycle, range,
 					weapon.ValidTargets, weapon.InvalidTargets, main.Versus, DeliveryKey(armament.Weapon, weapon, main)));
 			}
 

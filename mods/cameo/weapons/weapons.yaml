@@ -641,7 +641,7 @@
 		CloseEnough: 600
 		Acceleration: 4
 		HomingActivationDelay: 1
-		RangeLimit: 20000
+		RangeLimitPercent: 150
 		PointDefenseTypes: Missile
 	Warhead@LightMissile: SpreadDamage
 		ValidTargets: Ground, Water, Air
@@ -775,7 +775,7 @@
 		CloseEnough: 500
 		Acceleration: 3
 		HomingActivationDelay: 2
-		RangeLimit: 25000
+		RangeLimitPercent: 150
 		PointDefenseTypes: Missile
 	Warhead@MediumMissile: SpreadDamage
 		ValidTargets: Ground, Water, Air
@@ -909,7 +909,7 @@
 		CloseEnough: 400
 		Acceleration: 2
 		HomingActivationDelay: 3
-		RangeLimit: 30000
+		RangeLimitPercent: 150
 		PointDefenseTypes: Missile
 	Warhead@HeavyMissile: SpreadDamage
 		ValidTargets: Ground, Water, Air
@@ -3541,7 +3541,7 @@
 		VerticalRateOfTurn: 33
 		Speed: 333
 		Inaccuracy: 333
-		RangeLimit: 33333
+		RangeLimitPercent: 150
 		Image: hakurei_tailsman
 		TrailImage: blue_smokey
 		TrailInterval: 1
@@ -16572,7 +16572,7 @@ DefuseKit:
 		VerticalRateOfTurn: 33
 		Speed: 333
 		Inaccuracy: 333
-		RangeLimit: 33333
+		RangeLimitPercent: 150
 		Image: hakurei_tailsman
 		TrailImage: blue_smokey
 		TrailInterval: 1
@@ -16613,7 +16613,7 @@ DefuseKit:
 		CloseEnough: 600
 		Acceleration: 4
 		HomingActivationDelay: 1
-		RangeLimit: 20000
+		RangeLimitPercent: 150
 		PointDefenseTypes: Missile
 
 ^Projectile_Missile_Medium:
@@ -16635,7 +16635,7 @@ DefuseKit:
 		CloseEnough: 500
 		Acceleration: 3
 		HomingActivationDelay: 2
-		RangeLimit: 25000
+		RangeLimitPercent: 150
 		PointDefenseTypes: Missile
 
 ^Projectile_Missile_Heavy:
@@ -16657,7 +16657,7 @@ DefuseKit:
 		CloseEnough: 400
 		Acceleration: 2
 		HomingActivationDelay: 3
-		RangeLimit: 30000
+		RangeLimitPercent: 150
 		PointDefenseTypes: Missile
 
 ^Projectile_Missile_AA:
@@ -16679,7 +16679,7 @@ DefuseKit:
 		CloseEnough: 600
 		Acceleration: 8
 		HomingActivationDelay: 0
-		RangeLimit: 30000
+		RangeLimitPercent: 150
 		PointDefenseTypes: Missile
 
 ^Projectile_Railgun_Heavy:
@@ -18188,7 +18188,7 @@ DefuseKit:
 		ContrailLength: 0
 		Speed: 400
 		Acceleration: 100
-		RangeLimit: 18c0
+		RangeLimitPercent: 150
 		PointDefenseType: Missile
 		AllowSnapping: true
 	Warhead@1Dam: SpreadDamage
@@ -18271,7 +18271,7 @@ DefuseKit:
 		Image: DRAGON
 		Shadow: True
 		HorizontalRateOfTurn: 5
-		RangeLimit: 10c0
+		RangeLimitPercent: 150
 		PointDefenseType: Missile
 	Warhead@1Dam: SpreadDamage
 		Spread: 750
@@ -18294,7 +18294,7 @@ DefuseKit:
 ^AntiAirMissile:
 	Inherits: ^AntiGroundMissile
 	Projectile: Missile
-		RangeLimit: 20c0
+		RangeLimitPercent: 150
 		HorizontalRateOfTurn: 25
 		Speed: 500
 		Acceleration: 100
@@ -18610,7 +18610,7 @@ BoatMissile:
 		Inaccuracy: 666
 		HorizontalRateOfTurn: 15
 		Speed: 333
-		RangeLimit: 24c0
+		RangeLimitPercent: 150
 	Warhead@1Dam: SpreadDamage
 		Spread: 666
 		Damage: 3333
@@ -18631,7 +18631,7 @@ Patriot:
 		Image: MISSILE
 		HorizontalRateOfTurn: 33
 		Speed: 555
-		RangeLimit: 33c3
+		RangeLimitPercent: 150
 		Inaccuracy: 0
 	Warhead@1Dam: SpreadDamage
 		Spread: 666
@@ -20049,7 +20049,7 @@ Spit:
 		MaximumLaunchAngle: 123
 		TrailImage: spittrail
 		Image: spit
-		RangeLimit: 12345
+		RangeLimitPercent: 150
 		HorizontalRateOfTurn: 33
 	Warhead@1Dam: SpreadDamage
 		Damage: 3333
@@ -21762,7 +21762,7 @@ bowFire_AA:
 		Image: spearfire
 		HorizontalRateOfTurn: 48
 		VerticalRateOfTurn: 60
-		RangeLimit: 15c0
+		RangeLimitPercent: 150
 	Warhead@1Dam: SpreadDamage
 		Spread: 150
 		Damage: 1500
@@ -21853,11 +21853,11 @@ bowFire:
 		Image: spearfire
 		HorizontalRateOfTurn: 48
 		VerticalRateOfTurn: 60
-		RangeLimit: 15c0
+		RangeLimitPercent: 150
 wc_tower_fire:
 	Range: 8704
 	Projectile: Missile
-		RangeLimit: 17c0
+		RangeLimitPercent: 150
 		HorizontalRateOfTurn: 100
 		VerticalRateOfTurn: 100
 		Speed: 0c650
@@ -22076,7 +22076,7 @@ SWGreenLaserG:
 		ContrailLength: 1
 		Speed: 400
 		Acceleration: 100
-		RangeLimit: 18c0
+		RangeLimitPercent: 150
 		PointDefenseType: Missile
 		AllowSnapping: true
 	Warhead@1Dam: SpreadDamage
@@ -22167,7 +22167,7 @@ SWGBigRedLaserG:
 		ContrailLength: 1
 		Speed: 400
 		Acceleration: 100
-		RangeLimit: 18c0
+		RangeLimitPercent: 150
 		PointDefenseType: Missile
 		AllowSnapping: true
 	Warhead@1Dam: SpreadDamage
@@ -22345,7 +22345,7 @@ GLTrooperRPGMissileG:
 		ContrailLength: 0
 		Speed: 400
 		Acceleration: 100
-		RangeLimit: 18c0
+		RangeLimitPercent: 150
 		PointDefenseType: Missile
 		AllowSnapping: true
 	Warhead@Percentage: AreaDamagePercentage
@@ -22558,7 +22558,7 @@ GLTrooperRPGMissileToxin:
 		ContrailLength: 0
 		Speed: 400
 		Acceleration: 100
-		RangeLimit: 18c0
+		RangeLimitPercent: 150
 		PointDefenseType: Missile
 		AllowSnapping: true
 	Warhead@1Dam: SpreadDamage

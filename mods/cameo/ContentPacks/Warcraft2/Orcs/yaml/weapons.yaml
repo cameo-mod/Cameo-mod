@@ -292,7 +292,7 @@ wc2deathknightDeathCoil:
 	ReloadDelay: 80
 	Range: 8000
 	Projectile: Missile
-		RangeLimit: 20c0
+		RangeLimitPercent: 150
 		HorizontalRateOfTurn: 128
 		VerticalRateOfTurn: 128
 		AllowSnapping: True
@@ -315,7 +315,7 @@ wc2deathknightDeathCoilScatter_Left:
 	Projectile: Missile
 		# Inaccuracy: 2c256
 		# InaccuracyType: Absolute
-		RangeLimit: 30c0
+		RangeLimitPercent: 150
 		HomingActivationDelay: 15
 		AllowSnapping: True
 		Image: wc2_effect_death_knight_attack
@@ -357,7 +357,7 @@ wc2deathknightDeathCoilScatter_Right:
 		ValidTargets: Ground, Water, Air
 	Inherits@w6fx: ^wc2_orcs_wc2deathknightdeathcoilscatter_right
 	Projectile: Missile  # W7MAT order-pin
-		RangeLimit: 30c0
+		RangeLimitPercent: 150
 		AllowSnapping: True
 		Image: wc2_effect_death_knight_attack
 		VerticalRateOfTurn: 128
@@ -767,7 +767,7 @@ wc2_orcs_zuljin_spear:
 	Report: wc2_shared_sounds|wc2_axe.aud
 	Projectile:
 		Image: wc2_orc_trollaxethrower_axe
-		RangeLimit: 16000
+		RangeLimitPercent: 150
 		AllowSnapping: True
 		VerticalRateOfTurn: 75
 		Speed: 750

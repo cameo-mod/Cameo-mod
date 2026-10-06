@@ -742,6 +742,19 @@ def weapon_reliability_ctx(resolved):
         # the runtime selects LockOnInaccuracy before calculating its offset.
         if probability >= 99 and lock_inaccuracy >= 0:
             inacc = lock_inaccuracy
+        # Fuel limit: RangeLimit wins over RangeLimitPercent, and a shot fired
+        # at a target beyond the limit dies in flight — max-range engagements
+        # cannot connect, so the model reports them as always missing.
+        fuel_raw = resolved.get("Projectile", "RangeLimit")
+        fuel = parse_wdist(fuel_raw) if fuel_raw else 0
+        if fuel == 0:
+            fuel_pct = parse_int32(
+                resolved.get("Projectile", "RangeLimitPercent"),
+                "Missile.RangeLimitPercent", 0)
+            if fuel_pct > 0:
+                fuel = csharp_div(rng * fuel_pct, 100)
+        if fuel > 0 and rng > fuel:
+            return False, float("inf")
 
     # MiniYAML resolution does not materialize C# field defaults. Bullet is a
     # moving projectile even when Speed is absent: BulletInfo supplies 17.

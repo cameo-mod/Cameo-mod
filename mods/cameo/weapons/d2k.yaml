@@ -2013,6 +2013,7 @@ oTowerMissile:
 	ValidTargets: Ground, Air
 	Projectile: Missile
 		HorizontalRateOfTurn: 4
+		RangeLimit: 6758
 	Warhead@MissileAP_Heavy:
 		ValidTargets: Ground, Air
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath

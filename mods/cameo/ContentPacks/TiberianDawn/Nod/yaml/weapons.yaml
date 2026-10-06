@@ -598,7 +598,7 @@ td_nod_reconbike_rocket:
 		MaximumLaunchSpeed: 300
 		MinimumLaunchSpeed: 300
 		PointDefenseTypes: Missile
-		RangeLimit: 20000
+		RangeLimitPercent: 150
 		Shadow: true
 		Speed: 600
 		TrailImage: smokey
@@ -1528,7 +1528,7 @@ Dragon:
 		CloseEnough: 500
 		Acceleration: 5
 		HomingActivationDelay: 3
-		RangeLimit: 30000
+		RangeLimitPercent: 150
 		PointDefenseTypes: Missile
 		MinimumLaunchAngle: 75
 	Warhead@MissileAA_Heavy:
@@ -1614,7 +1614,7 @@ td_nod_chemicalrocketsoldier_chemrockets:
 		MaximumLaunchSpeed: 300
 		MinimumLaunchSpeed: 300
 		PointDefenseTypes: Missile
-		RangeLimit: 20000
+		RangeLimitPercent: 150
 		Shadow: true
 		Speed: 600
 		TrailInterval: 1
@@ -1894,7 +1894,7 @@ td_nod_chemicalrocketsoldier_chemrocketsexplosion:
 		TrailImage: spittrail
 		Speed: 600
 		Acceleration: 4
-		RangeLimit: 20000
+		RangeLimitPercent: 150
 		Arm: 0
 		Blockable: false
 		Inaccuracy: 50
@@ -1946,7 +1946,7 @@ td_nod_chemicalattackbike_chemicalbikerockets:
 		MaximumLaunchSpeed: 250
 		MinimumLaunchSpeed: 250
 		PointDefenseTypes: Missile
-		RangeLimit: 25000
+		RangeLimitPercent: 150
 		Shadow: true
 		Speed: 500
 		TrailInterval: 1
@@ -2150,7 +2150,7 @@ td_nod_chemicalattackbike_chemicalbikerocketsexplosion:
 		TrailInterval: 1
 		ContrailEndColor: 000000FF
 		Speed: 500
-		RangeLimit: 25000
+		RangeLimitPercent: 150
 		Blockable: false
 		Inaccuracy: 100
 		PointDefenseTypes: Missile
@@ -2352,7 +2352,7 @@ td_nod_chemicalstealthtank_chemicalstealthtankmissiles:
 		MaximumLaunchSpeed: 250
 		MinimumLaunchSpeed: 250
 		PointDefenseTypes: Missile
-		RangeLimit: 25000
+		RangeLimitPercent: 150
 		Shadow: true
 		Speed: 500
 		TrailInterval: 1
@@ -2504,7 +2504,7 @@ td_nod_chemicalstealthtank_chemicalstealthtankexplosion:
 		TrailImage: spittrail
 		Speed: 500
 		Acceleration: 3
-		RangeLimit: 25000
+		RangeLimitPercent: 150
 		Arm: 0
 		Blockable: false
 		Inaccuracy: 100
@@ -3564,7 +3564,7 @@ td_nod_stealthsoldier_bhreddarts:
 		MaximumLaunchSpeed: 250
 		MinimumLaunchSpeed: 250
 		PointDefenseTypes: Missile
-		RangeLimit: 25000
+		RangeLimitPercent: 150
 		Shadow: true
 		Speed: 500
 		TrailInterval: 1
@@ -4094,7 +4094,7 @@ td_nod_attacksubmarine_nodtorptube:
 		Speed: 160
 		Acceleration: 1
 		HorizontalRateOfTurn: 8
-		RangeLimit: 16000
+		RangeLimitPercent: 150
 		BoundToTerrainType: Water
 		Palette: cloak
 		MaximumLaunchAngle: 0
@@ -4125,7 +4125,7 @@ td_nod_attacksubmarine_nodtorptubeblackmarket:
 		Speed: 160
 		Acceleration: 1
 		HorizontalRateOfTurn: 8
-		RangeLimit: 16000
+		RangeLimitPercent: 150
 		BoundToTerrainType: Water
 		Palette: cloak
 		MaximumLaunchAngle: 0

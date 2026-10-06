@@ -3604,7 +3604,7 @@ ra1_soviets_hindattackhelicopter_hindmissilesthermobaric:
 		CloseEnough: 500
 		Acceleration: 3
 		HomingActivationDelay: 2
-		RangeLimit: 25000
+		RangeLimitPercent: 150
 		PointDefenseTypes: Missile
 	Warhead@Effect: CreateEffect
 		Explosions: med_napalm
@@ -3914,7 +3914,7 @@ ra1_soviets_hindattackhelicopter_hindmissilesnuclear:
 		CloseEnough: 500
 		Acceleration: 3
 		HomingActivationDelay: 2
-		RangeLimit: 25000
+		RangeLimitPercent: 150
 		PointDefenseTypes: Missile
 	Warhead@Effect: CreateEffect
 		ValidTargets: Ground, Water, Air
@@ -4192,7 +4192,7 @@ ra1_soviets_kamovattackhelicopter_kamovmissilestesla:
 		CloseEnough: 500
 		Acceleration: 3
 		HomingActivationDelay: 2
-		RangeLimit: 25000
+		RangeLimitPercent: 150
 		PointDefenseTypes: Missile
 	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
 		PercentageDenominator: 400
@@ -8439,7 +8439,7 @@ MammothTuskThermobaric:
 		CloseEnough: 400
 		Acceleration: 2
 		HomingActivationDelay: 3
-		RangeLimit: 30000
+		RangeLimitPercent: 150
 		PointDefenseTypes: Missile
 	Warhead@Effect: CreateEffect
 		Explosions: big_napalm
@@ -9933,7 +9933,7 @@ ra1_soviets_siegemammothtank_mammothtusk2:
 		CloseEnough: 400
 		Acceleration: 2
 		HomingActivationDelay: 3
-		RangeLimit: 30000
+		RangeLimitPercent: 150
 		PointDefenseTypes: Missile
 	Warhead@Effect: CreateEffect
 		Explosions: artillery_explosion
@@ -10163,7 +10163,7 @@ ra1_soviets_siegemammothtank_mammothtusk2thermobaric:
 		CloseEnough: 400
 		Acceleration: 2
 		HomingActivationDelay: 3
-		RangeLimit: 30000
+		RangeLimitPercent: 150
 		PointDefenseTypes: Missile
 	Warhead@Effect: CreateEffect
 		Explosions: big_napalm
@@ -10626,7 +10626,7 @@ ra1_soviets_monstertank_missile_tesla:
 		CloseEnough: 400
 		Acceleration: 2
 		HomingActivationDelay: 3
-		RangeLimit: 30000
+		RangeLimitPercent: 150
 		PointDefenseTypes: Missile
 	Warhead@TeslaWeaponPercentage: AreaDamagePercentage
 		PercentageDenominator: 2000
@@ -10857,7 +10857,7 @@ ra1_soviets_monstertank_missile_thermobaric:
 		CloseEnough: 400
 		Acceleration: 2
 		HomingActivationDelay: 3
-		RangeLimit: 30000
+		RangeLimitPercent: 150
 		PointDefenseTypes: Missile
 	Warhead@Effect: CreateEffect
 		Explosions: big_napalm
@@ -12561,7 +12561,7 @@ ra1_soviets_samsite_missile_AA:
 		MaximumLaunchSpeed: 300
 		MinimumLaunchSpeed: 300
 		HomingActivationDelay: 1
-		RangeLimit: 20000
+		RangeLimitPercent: 150
 		PointDefenseTypes: Missile
 	ValidTargets: Air
 	Warhead@EffectAir: CreateEffect

@@ -71,7 +71,7 @@ TSProton:
 		Blockable: false
 		Shadow: false
 		Image: tstorpedo
-		RangeLimit: 12c0
+		RangeLimitPercent: 150
 	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 15
@@ -227,7 +227,7 @@ TSStankTibTusk:
 		CloseEnough: 500
 		Acceleration: 3
 		HomingActivationDelay: 2
-		RangeLimit: 25000
+		RangeLimitPercent: 150
 		PointDefenseTypes: Missile
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		Damage: 5

@@ -1205,7 +1205,7 @@ AsianMaidenBow:
 		VerticalRateOfTurn: 45
 		Speed: 450
 		Inaccuracy: 180
-		RangeLimit: 18000
+		RangeLimitPercent: 150
 		Image: aa_plasblue
 		Palette: ra2effect
 		TrailImage: blue_smokey_small
@@ -1709,7 +1709,7 @@ AsianMaidenBow_elite:
 		Palette: ra2effect
 		ContrailStartColor: 77CCFF
 		ContrailLength: 36
-		RangeLimit: 18000
+		RangeLimitPercent: 150
 		HorizontalRateOfTurn: 45
 		Speed: 450
 		Jammable: False
@@ -2651,7 +2651,7 @@ AsianPhotonCannon:
 		Palette: ra2effect
 		ContrailStartColor: 77CCFFAA
 		ContrailLength: 12
-		RangeLimit: 25000
+		RangeLimitPercent: 150
 		HorizontalRateOfTurn: 200
 		Speed: 750
 		Jammable: False
@@ -3441,7 +3441,7 @@ AsianQuasarBoatAG:
 	Burst: 3
 	BurstDelays: 3
 	Projectile: Missile
-		RangeLimit: 12c0
+		RangeLimitPercent: 150
 		MinimumLaunchAngle: 75
 		MaximumLaunchAngle: 128
 		MaximumLaunchSpeed: 192
@@ -3507,7 +3507,7 @@ AsianQuasarBoat_AA:
 	Burst: 3
 	BurstDelays: 3
 	Projectile: Missile
-		RangeLimit: 12c0
+		RangeLimitPercent: 150
 		MinimumLaunchAngle: 75
 		MaximumLaunchAngle: 128
 		MaximumLaunchSpeed: 256

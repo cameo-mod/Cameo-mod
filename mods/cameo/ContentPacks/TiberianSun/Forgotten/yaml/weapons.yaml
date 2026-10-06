@@ -1590,7 +1590,7 @@ TSMammothTuskChem:
 		MaximumLaunchAngle: 64
 		MinimumLaunchSpeed: 120
 		MaximumLaunchSpeed: 240
-		RangeLimit: 24c0
+		RangeLimitPercent: 150
 		Acceleration: 48
 		HorizontalRateOfTurn: 24
 		VerticalRateOfTurn: 16
@@ -1779,7 +1779,7 @@ TSChemRuinerMissile:
 		MaximumLaunchSpeed: 250
 		MinimumLaunchSpeed: 250
 		PointDefenseTypes: Missile
-		RangeLimit: 25000
+		RangeLimitPercent: 150
 		Shadow: true
 		Speed: 500
 		TrailInterval: 1
@@ -2175,7 +2175,7 @@ TSAdatsMissile_AA:
 		CloseEnough: 600
 		Acceleration: 4
 		HomingActivationDelay: 1
-		RangeLimit: 20000
+		RangeLimitPercent: 150
 		PointDefenseTypes: Missile
 	Inherits: ^ts_forgotten_tsadatsmissile_aa
 	-Warhead@Concrete:
@@ -2662,7 +2662,7 @@ TSFiendShard:
 	ValidTargets: Ground, Air
 	Projectile: Missile
 		Speed: 333
-		RangeLimit: 33333
+		RangeLimitPercent: 150
 		Image: ra2txgasg
 		TrailImage: green_smokey
 	Warhead@Chemical_Light:
@@ -2681,7 +2681,7 @@ TSFiendShardUP:
 	ValidTargets: Ground, Air
 	Projectile: Missile
 		Speed: 333
-		RangeLimit: 33333
+		RangeLimitPercent: 150
 		Image: ra2txgasg
 		TrailImage: green_smokey
 	Warhead@LightChemicalWeaponPercentage: AreaDamagePercentage
@@ -2841,7 +2841,7 @@ TSFiendShardBlue:
 	ValidTargets: Ground, Air
 	Projectile: Missile
 		Speed: 333
-		RangeLimit: 33333
+		RangeLimitPercent: 150
 		Image: ra2txgasg
 		TrailImage: blue_smokey
 		Blockable: false
@@ -3037,7 +3037,7 @@ TSFiendShardBlueUP:
 	ValidTargets: Ground, Air
 	Projectile: Missile
 		Speed: 333
-		RangeLimit: 33333
+		RangeLimitPercent: 150
 		Image: ra2txgasg
 		TrailImage: blue_smokey
 		Blockable: false

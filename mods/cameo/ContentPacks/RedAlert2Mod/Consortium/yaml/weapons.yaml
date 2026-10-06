@@ -5643,7 +5643,7 @@ SteelInfRailgun_elite:
 		CloseEnough: 600
 		Acceleration: 4
 		HomingActivationDelay: 1
-		RangeLimit: 20000
+		RangeLimitPercent: 150
 		PointDefenseTypes: Missile
 		ContrailStartColor: 77CCFFAA
 		ContrailEndColor: 4488FF00
@@ -5733,7 +5733,7 @@ SteelScalpelRailgunAA:
 		CloseEnough: 600
 		Acceleration: 4
 		HomingActivationDelay: 1
-		RangeLimit: 20000
+		RangeLimitPercent: 150
 		PointDefenseTypes: Missile
 		ContrailStartColor: 77CCFFAA
 		ContrailEndColor: 4488FF00
@@ -6289,7 +6289,7 @@ SteelInfRailgun_EMP:
 		CloseEnough: 600
 		Acceleration: 4
 		HomingActivationDelay: 1
-		RangeLimit: 20000
+		RangeLimitPercent: 150
 		PointDefenseTypes: Missile
 	Warhead@Effect: CreateEffect
 		ImpactActors: false
@@ -6994,7 +6994,7 @@ SteelInfRailgun_EMP_elite:
 		CloseEnough: 600
 		Acceleration: 4
 		HomingActivationDelay: 1
-		RangeLimit: 20000
+		RangeLimitPercent: 150
 		PointDefenseTypes: Missile
 		ContrailStartColor: 77CCFFAA
 		ContrailEndColor: 4488FF00
@@ -7432,7 +7432,7 @@ SteelScalpelRailgun_EMP_AA:
 		CloseEnough: 600
 		Acceleration: 4
 		HomingActivationDelay: 1
-		RangeLimit: 20000
+		RangeLimitPercent: 150
 		PointDefenseTypes: Missile
 		ContrailStartColor: 77CCFFAA
 		ContrailEndColor: 4488FF00

@@ -1578,7 +1578,7 @@ RA2ThunderboltMissile:
 		Speed: 800
 		Arm: 2
 		Inaccuracy: 400
-		RangeLimit: 16000
+		RangeLimitPercent: 150
 		Image: d2k_missile2
 		Palette: d2keffect
 		TrailImage: large_trail
@@ -2321,7 +2321,7 @@ RA2MultiThunderboltMissile:
 		Speed: 800
 		Arm: 2
 		Inaccuracy: 400
-		RangeLimit: 16000
+		RangeLimitPercent: 150
 		Image: d2k_missile2
 		Palette: d2keffect
 		TrailImage: large_trail
@@ -2632,7 +2632,7 @@ RA2TRIPODPLAZMA:
 		Speed: 204
 		Inaccuracy: 0c256
 		Image: plasma
-		RangeLimit: 10c0
+		RangeLimitPercent: 150
 		Shadow: True
 		Arm: 2
 		Blockable: false
@@ -4162,7 +4162,7 @@ MigMissiles:
 		Speed: 400
 		Arm: 2
 		Inaccuracy: 1000
-		RangeLimit: 15c0
+		RangeLimitPercent: 150
 		Image: d2k_missile2
 		Palette: d2keffect
 		TrailImage: large_trail
@@ -4460,7 +4460,7 @@ MigMissiles_rad:
 		Speed: 400
 		Arm: 2
 		Inaccuracy: 1000
-		RangeLimit: 15c0
+		RangeLimitPercent: 150
 		Image: d2k_missile2
 		Palette: d2keffect
 		TrailImage: green_smokey
@@ -6170,6 +6170,7 @@ RA2SCUDELITE:
 	-Warhead@MissileAP_Heavy:
 	Projectile:
 		LaunchAngle: 66
+		RangeLimit: 30000
 	Warhead@Effect:
 		ImpactActors: false
 
@@ -6700,7 +6701,7 @@ YRBoomerSCUD:
 		Speed: 200
 		Image: MISSILE
 		TrailImage: bomb
-		RangeLimit: 20000
+		RangeLimitPercent: 150
 		LaunchAngle: 66
 	Warhead@Effect: CreateEffect
 		ValidTargets: Ground, Air
@@ -6819,7 +6820,7 @@ RA2TorpTube:
 		Speed: 180
 		Acceleration: 1
 		HorizontalRateOfTurn: 5
-		RangeLimit: 18000
+		RangeLimitPercent: 150
 		BoundToTerrainType: Water
 		Palette: cloak
 		MaximumLaunchAngle: 0
@@ -6935,7 +6936,7 @@ RA2TorpTube_elite:
 		Speed: 180
 		Acceleration: 1
 		HorizontalRateOfTurn: 5
-		RangeLimit: 18000
+		RangeLimitPercent: 150
 		BoundToTerrainType: Water
 		Palette: cloak
 		MaximumLaunchAngle: 0

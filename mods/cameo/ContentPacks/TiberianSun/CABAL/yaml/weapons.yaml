@@ -613,7 +613,7 @@ TSHellfireTwin:
 		MaximumLaunchSpeed: 250
 		MinimumLaunchSpeed: 250
 		PointDefenseTypes: Missile
-		RangeLimit: 25000
+		RangeLimitPercent: 150
 		Shadow: true
 		Speed: 500
 		TrailImage: smokey
@@ -965,7 +965,7 @@ CabalReaperMissiles:
 		CloseEnough: 500
 		Acceleration: 3
 		HomingActivationDelay: 2
-		RangeLimit: 25000
+		RangeLimitPercent: 150
 	Warhead@CollapsedCabalReaperMissilesConcussion_MediumPercentage: AreaDamagePercentage
 		InvalidTargets: Air
 		ValidRelationships: Ally, Neutral, Enemy
@@ -1174,7 +1174,7 @@ CabalReaperMissiles_AA:
 		CloseEnough: 500
 		Acceleration: 3
 		HomingActivationDelay: 2
-		RangeLimit: 25000
+		RangeLimitPercent: 150
 	Warhead@CollapsedCabalReaperMissiles_AAConcussion_MediumPercentage: AreaDamagePercentage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -1379,7 +1379,7 @@ CabalHeavyReaperMissiles:
 		CloseEnough: 400
 		Acceleration: 2
 		HomingActivationDelay: 3
-		RangeLimit: 30000
+		RangeLimitPercent: 150
 	Warhead@CollapsedCabalHeavyReaperMissilesConcussion_MediumPercentage: AreaDamagePercentage
 		InvalidTargets: Air
 		ValidRelationships: Ally, Neutral, Enemy
@@ -1589,7 +1589,7 @@ CabalHeavyReaperMissiles_AA:
 		CloseEnough: 400
 		Acceleration: 2
 		HomingActivationDelay: 3
-		RangeLimit: 30000
+		RangeLimitPercent: 150
 	Warhead@CollapsedCabalHeavyReaperMissiles_AAConcussion_MediumPercentage: AreaDamagePercentage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -2863,7 +2863,7 @@ CabalLegionGun:
 		CloseEnough: 500
 		Acceleration: 3
 		HomingActivationDelay: 2
-		RangeLimit: 25000
+		RangeLimitPercent: 150
 	Warhead@MissileHE_Medium: AreaDamage
 		Damage: 24000
 	Warhead@Demolition_Light: AreaDamage
@@ -3080,7 +3080,7 @@ CabalRocketCyborgRockets:
 		CloseEnough: 500
 		Acceleration: 3
 		HomingActivationDelay: 2
-		RangeLimit: 25000
+		RangeLimitPercent: 150
 	Warhead@MissileAP_Medium: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -3117,7 +3117,7 @@ CabalRocketCyborgRocketsUpgraded:
 		CloseEnough: 500
 		Acceleration: 3
 		HomingActivationDelay: 2
-		RangeLimit: 25000
+		RangeLimitPercent: 150
 	Warhead@MissileAP_Medium: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -3149,7 +3149,7 @@ CabalMothershipRockets:
 		Arm: 2
 		CruiseAltitude: 2500
 		Inaccuracy: 500
-		RangeLimit: 25000
+		RangeLimitPercent: 150
 		Image: DRAGON
 		TrailImage: blue_smokey
 		TrailInterval: 1
@@ -3340,7 +3340,7 @@ CabalAscendedRockets:
 		CloseEnough: 400
 		Acceleration: 2
 		HomingActivationDelay: 3
-		RangeLimit: 30000
+		RangeLimitPercent: 150
 	Warhead@LightMissilePercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 3

@@ -60,7 +60,7 @@
 		CloseEnough: 200
 		Acceleration: 3
 		HomingActivationDelay: 2
-		RangeLimit: 15360
+		RangeLimitPercent: 150
 		PointDefenseTypes: Missile
 
 ^Projectile_TS_Missile_Heavy:
@@ -87,7 +87,7 @@
 		CloseEnough: 200
 		Acceleration: 3
 		HomingActivationDelay: 2
-		RangeLimit: 15360
+		RangeLimitPercent: 150
 		PointDefenseTypes: Missile
 
 ^TSCannon:
@@ -1992,7 +1992,7 @@ TSReaperTusk:
 		MaximumLaunchAngle: 88
 		MinimumLaunchSpeed: 111
 		MaximumLaunchSpeed: 222
-		RangeLimit: 25c0
+		RangeLimitPercent: 150
 		Acceleration: 33
 		Speed: 333
 		HorizontalRateOfTurn: 33
@@ -2033,7 +2033,7 @@ TSAegisMissile:
 	Report: vaegatta.wav, vaegattb.wav
 	Projectile: Missile
 		VerticalRateOfTurn: 20
-		RangeLimit: 18c0
+		RangeLimitPercent: 150
 	-Warhead@MediumMissile:
 	-Warhead@LightMissile:
 	Warhead@MediumMissilePercentage:
@@ -2230,7 +2230,7 @@ TSSAPCCoreMissiles:
 		CloseEnough: 600
 		Acceleration: 4
 		HomingActivationDelay: 1
-		RangeLimit: 20000
+		RangeLimitPercent: 150
 		PointDefenseTypes: Missile
 		MinimumLaunchAngle: 75
 		MaximumLaunchAngle: 75
@@ -2461,7 +2461,7 @@ TSRedEye2:
 		CloseEnough: 500
 		Acceleration: 5
 		HomingActivationDelay: 3
-		RangeLimit: 30000
+		RangeLimitPercent: 150
 		PointDefenseTypes: Missile
 		ContrailZOffset: 4000
 		ContrailStartColor: FF884400
@@ -2578,7 +2578,7 @@ TSChemAdatsMissile_AA:
 		CloseEnough: 600
 		Acceleration: 4
 		HomingActivationDelay: 1
-		RangeLimit: 20000
+		RangeLimitPercent: 150
 		PointDefenseTypes: Missile
 		MinimumLaunchAngle: 75
 		MaximumLaunchAngle: 75

@@ -36,7 +36,7 @@ HeavyOrdosCombatTankRockets:
 		Blockable: false
 		MaximumLaunchSpeed: 250
 		MinimumLaunchSpeed: 250
-		RangeLimit: 25000
+		RangeLimitPercent: 150
 		Speed: 500
 		Inaccuracy: 25
 		Acceleration: 5
@@ -2232,7 +2232,7 @@ D2K_APC_Rocket_AA:
 		CloseEnough: 500
 		Acceleration: 6
 		HomingActivationDelay: 2
-		RangeLimit: 25000
+		RangeLimitPercent: 150
 		PointDefenseTypes: Missile
 		InaccuracyType: PerCellIncrement
 		Palette: d2keffect
@@ -3929,7 +3929,7 @@ ordos_airmine:
 		Shadow: true
 		Inaccuracy: 224
 		HorizontalRateOfTurn: 10
-		RangeLimit: 3c0
+		RangeLimitPercent: 150
 		MinimumLaunchSpeed: 75
 		Speed: 250
 		LockOnProbability: 20

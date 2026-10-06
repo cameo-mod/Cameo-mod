@@ -745,7 +745,7 @@ TSHoverMissile:
 	Report: hovrmis1.aud
 
 	Projectile: Missile
-		RangeLimit: 22c512
+		RangeLimitPercent: 150
 		HorizontalRateOfTurn: 20
 		Inaccuracy: 32
 		VerticalRateOfTurn: 12
@@ -915,7 +915,7 @@ TSDestroyerMissiles:
 	Report: hovrmis1.aud
 
 	Projectile: Missile
-		RangeLimit: 22c512
+		RangeLimitPercent: 150
 		HorizontalRateOfTurn: 20
 		Inaccuracy: 32
 		VerticalRateOfTurn: 12

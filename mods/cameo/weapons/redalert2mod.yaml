@@ -313,7 +313,7 @@ AsianSmallTorpedo:
 		Speed: 240
 		Acceleration: 1
 		HorizontalRateOfTurn: 5
-		RangeLimit: 24000
+		RangeLimitPercent: 150
 		BoundToTerrainType: Water
 		Palette: cloak
 		MaximumLaunchAngle: 0
@@ -2037,7 +2037,7 @@ NaxTorpTube:
 		Speed: 180
 		Acceleration: 1
 		HorizontalRateOfTurn: 5
-		RangeLimit: 18000
+		RangeLimitPercent: 150
 		BoundToTerrainType: Water
 		Palette: cloak
 		MaximumLaunchAngle: 0
@@ -3296,7 +3296,7 @@ LatinBuggyRocket:
 		Speed: 480
 		Arm: 2
 		Inaccuracy: 120
-		RangeLimit: 12000
+		RangeLimitPercent: 150
 		Image: d2k_missile2
 		Palette: d2keffect
 		TrailImage: large_trail

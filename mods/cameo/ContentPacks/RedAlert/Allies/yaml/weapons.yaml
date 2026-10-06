@@ -973,7 +973,7 @@ ra1_allies_reconranger_recoillessgun:
 		AllowSnapping: true
 		CloseEnough: 500
 		HomingActivationDelay: 2
-		RangeLimit: 25000
+		RangeLimitPercent: 150
 		PointDefenseTypes: Missile
 	Warhead@RailgunWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
@@ -1560,7 +1560,7 @@ ra1_allies_phasetransport_missile:
 		CloseEnough: 500
 		Acceleration: 3
 		HomingActivationDelay: 2
-		RangeLimit: 25000
+		RangeLimitPercent: 150
 		PointDefenseTypes: Missile
 	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
@@ -1795,7 +1795,7 @@ ra1_allies_phasetransport_missile_cryo:
 		CloseEnough: 500
 		Acceleration: 3
 		HomingActivationDelay: 2
-		RangeLimit: 25000
+		RangeLimitPercent: 150
 		PointDefenseTypes: Missile
 	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
@@ -2029,7 +2029,7 @@ ra1_allies_chronotank_missile:
 		CloseEnough: 500
 		Acceleration: 3
 		HomingActivationDelay: 2
-		RangeLimit: 25000
+		RangeLimitPercent: 150
 		PointDefenseTypes: Missile
 	Warhead@MissileAP_Heavy: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
@@ -2308,7 +2308,7 @@ ra1_allies_chronotank_missile_cryo:
 		CloseEnough: 500
 		Acceleration: 3
 		HomingActivationDelay: 2
-		RangeLimit: 25000
+		RangeLimitPercent: 150
 		PointDefenseTypes: Missile
 	Warhead@MissileAP_Heavy: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy

@@ -324,6 +324,35 @@ class ProjectileRuntimeDefaultTest(unittest.TestCase):
         self.assertIn(
             "unmodeled_projectile_lock_on:Missile", ed.model_limitations(root))
 
+    def test_missile_range_limit_percent_keeps_max_range_reachable(self):
+        """150% fuel covers a 3840-range shot: identical to no field."""
+        root = self.ProjectileNode(
+            "Missile", 3840, {"RangeLimitPercent": 150})
+        self.assertEqual(ed.weapon_reliability_ctx(root), (False, 200.0))
+
+    def test_missile_range_limit_below_range_is_unreachable(self):
+        """Fuel shorter than the weapon range: the launch envelope outruns the
+        projectile, so max-range engagements always miss."""
+        root = self.ProjectileNode(
+            "Missile", 3840, {"RangeLimit": "2000"})
+        self.assertEqual(ed.weapon_reliability_ctx(root), (False, math.inf))
+
+    def test_missile_range_limit_percent_below_100_is_unreachable(self):
+        root = self.ProjectileNode(
+            "Missile", 3840, {"RangeLimitPercent": 50})
+        self.assertEqual(ed.weapon_reliability_ctx(root), (False, math.inf))
+
+    def test_missile_fixed_range_limit_overrides_percent(self):
+        """Fixed RangeLimit wins over RangeLimitPercent (engine precedence)."""
+        root = self.ProjectileNode(
+            "Missile", 3840, {"RangeLimit": "9999", "RangeLimitPercent": 50})
+        self.assertEqual(ed.weapon_reliability_ctx(root), (False, 200.0))
+
+    def test_missile_negative_range_limit_means_unlimited_fuel(self):
+        root = self.ProjectileNode(
+            "Missile", 3840, {"RangeLimit": "-1"})
+        self.assertEqual(ed.weapon_reliability_ctx(root), (False, 200.0))
+
 
 class DamageValueTest(unittest.TestCase):
     def test_numeric_forms_parse(self):
