@@ -417,4 +417,3 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 	}
 }
-
