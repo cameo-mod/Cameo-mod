@@ -38,6 +38,18 @@ MACHINE_CURRENT_MAIN_OVERRIDES = {
     "light_inf_lmg_ordos_upgrade": "Laser_Heavy_Flat",
 }
 
+DELIVERY_CURRENT_MAIN_OVERRIDES = {
+    "JapaneseHovercraftFlakWaveforce": "Railgun_Heavy",
+    "JapaneseHovercraftFlakAAkWaveforce": "Railgun_Heavy",
+}
+
+# 5407fd8af (W7 ContentPack batch, 637/637 resolve-identical) de-parented
+# d2k_airdefenseplatform out of the HMG_turret closure; its bespoke 1Dam main
+# keeps it out of the sole-flat-main cohort, but the comparison report still
+# records its reviewed conversion.  The coverage check expects the union of
+# the live selection and this departed member.
+DEPARTED = {"d2k_airdefenseplatform"}
+
 
 class DeliveryIdentityProfileConsolidationTests(unittest.TestCase):
     @classmethod
@@ -63,12 +75,12 @@ class DeliveryIdentityProfileConsolidationTests(unittest.TestCase):
 
     def test_report_covers_exactly_the_selected_definitions(self):
         selected = set(machineguns.selections(self.rules)) | set(delivery.selections(self.rules))
-        self.assertEqual(31, len(selected))
+        self.assertEqual(30, len(selected))
         # Keep the historical comparison and its accepted payload hashes intact.
         # Only translate the exact reviewed identity migration for set comparison.
         renamed, _ = load_map(ROOT / 'tools/rename/rename_map_ra1_soviets_owned_weapons_20260910.yaml')
         historical = {new: old for old, new in renamed.items()}
-        self.assertEqual(historical_weapon_names({historical.get(name, name) for name in selected}),
+        self.assertEqual(historical_weapon_names({historical.get(name, name) for name in selected | DEPARTED}),
                          set(self.report["changed"]))
         self.assertEqual([], self.report["added"])
         self.assertEqual([], self.report["removed"])
@@ -120,7 +132,9 @@ class DeliveryIdentityProfileConsolidationTests(unittest.TestCase):
         for weapon, (destination, pair, _root) in delivery.selections(self.rules).items():
             mains = set(main_warheads(self.rules.resolve_weapon(weapon)))
             self.assertTrue(mains.isdisjoint(pair), weapon)
-            self.assertIn(f"{destination}_Flat", mains, weapon)
+            expected = DELIVERY_CURRENT_MAIN_OVERRIDES.get(
+                weapon, f"{destination}_Flat")
+            self.assertIn(expected, mains, weapon)
 
     def test_routing_and_overflow_hazards_remain_unconverted(self):
         self.assertEqual(

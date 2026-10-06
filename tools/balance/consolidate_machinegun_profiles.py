@@ -33,23 +33,37 @@ from miniyaml import Ruleset  # noqa: E402
 
 
 PAIR = {"Bullet_Light", "Bullet_Medium"}
+# R12 folded XFlatCompatibility -> X_Flat; the waveforce finals went on to the
+# bare canonical Waveforce_Heavy.
 FINALIZED_DOWNSTREAM = {
-    "JHighVWaveforce": ("Waveforce_HeavyFlatCompatibility", 12000, 8325),
-    "JapanSpeedBoatGunWaveforce": (
-        "Waveforce_HeavyFlatCompatibility", 6000, 9984),
-    "light_inf_lmg_ordos_upgrade": ("Laser_HeavyFlatCompatibility", 6000, 9984),
+    "JHighVWaveforce": ("Waveforce_Heavy", 12000, 8325),
+    "JapanSpeedBoatGunWaveforce": ("Waveforce_Heavy", 6000, 9984),
+    "light_inf_lmg_ordos_upgrade": ("Laser_Heavy_Flat", 6000, 9984),
+    "HMGstealth_upgrade": ("Laser_Heavy", 6000, 10000),
 }
 
 # Every inheritance closure is explicit.  New descendants fail closed instead
 # of silently inheriting a role choice that was never reviewed.
+#
+# De-parented orphans (their resolved payloads were verified identical by the
+# converting commits, so the edge loss cannot drift the role):
+# - 5407fd8af (W7 ContentPack batch, 637/637 resolve-identical) de-parented
+#   d2k_airdefenseplatform and light_inf_lmg_ordos_upgrade.  The lmg upgrade
+#   keeps its finalized Laser_Heavy_Flat main and is re-anchored as its own
+#   root; d2k_airdefenseplatform retains a bespoke 1Dam main beside
+#   Bullet_Medium_Flat and leaves the cohort.
+# - 5eff1183e (rule-4 Versus remediation, maintainer ruling) re-authored
+#   HMGstealth_upgrade with its reviewed ^Warhead_Laser_Heavy identity.  It
+#   re-anchors as its own finalized root.
 ROOTS = {
-    "HMG_turret": (
-        "Bullet_Medium", {"HMG_turret_upgrade", "d2k_airdefenseplatform"}),
-    "HMGstealth": ("Bullet_Medium", {"HMGstealth_upgrade"}),
+    "HMG_turret": ("Bullet_Medium", {"HMG_turret_upgrade"}),
+    "HMGstealth": ("Bullet_Medium", set()),
     "JHighV": ("Bullet_Medium", {"JHighVWaveforce"}),
     "JapanSpeedBoatGun": ("Bullet_Medium", {"JapanSpeedBoatGunWaveforce"}),
     "RaiderGuns": ("Bullet_Medium", {"RaiderGuns_upgrade"}),
-    "light_inf_lmg": ("Bullet_Light", {"light_inf_lmg_ordos_upgrade"}),
+    "light_inf_lmg": ("Bullet_Light", set()),
+    "light_inf_lmg_ordos_upgrade": ("Laser_Heavy", set()),
+    "HMGstealth_upgrade": ("Laser_Heavy", set()),
 }
 
 
@@ -92,7 +106,7 @@ def inspect(rs: Ruleset, selected: dict[str, str]):
         if resolved is None:
             raise RuntimeError(f"{name}: missing resolved weapon")
         mains = set(main_warheads(resolved))
-        compatibility = f"{destination}FlatCompatibility"
+        compatibility = f"{destination}_Flat"
         if name in FINALIZED_DOWNSTREAM:
             final_key, final_damage, final_scale = FINALIZED_DOWNSTREAM[name]
             if mains != {final_key}:

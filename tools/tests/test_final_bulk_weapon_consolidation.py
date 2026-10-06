@@ -60,8 +60,9 @@ class FinalBulkWeaponConsolidationTests(unittest.TestCase):
         self.assertEqual(39, len(selected))
         for weapon, destination in selected.items():
             resolved = rules.resolve_weapon(weapon)
+            # R12 folded XFlatCompatibility -> X_Flat on the consolidated mains.
             self.assertEqual(
-                [f"{destination}FlatCompatibility"],
+                [f"{destination}_Flat"],
                 main_warheads(resolved), weapon)
 
     def test_selected_templates_are_not_reinherited_through_children(self):

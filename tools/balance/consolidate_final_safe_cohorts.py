@@ -33,7 +33,11 @@ HEALTH_VALUES = active_health_values(ROOT)
 # Root closures are explicit so a newly inherited variant fails closed.
 ROOTS = {
     "APCGun": ("Flak_Medium", {"td_gdi_apc_apcgun_AA"}),
-    "ra1_allies_alliedapc_gun": ("Flak_Medium", {"ra1_allies_alliedapc_gun_AA"}),
+    # 8e553991e (W7 chain-collapse batch-3, RESOLVE-VERIFIED) de-parented
+    # ra1_allies_alliedapc_gun_AA; it keeps the consolidated Flak_Medium_Flat
+    # main, so it is re-anchored as its own root.
+    "ra1_allies_alliedapc_gun": ("Flak_Medium", set()),
+    "ra1_allies_alliedapc_gun_AA": ("Flak_Medium", set()),
     "NaxHaenebuQuadCannon": ("Flak_Medium", {"NaxHaenebuQuadCannon_elite"}),
     "TKMQuadCannonAG": ("Flak_Medium", {"TKMQuadCannonAA"}),
     "TKMZazaCannonAG": ("Flak_Medium", {"TKMZazaCannonAA"}),
@@ -43,11 +47,16 @@ ROOTS = {
     "TS30mm": ("Flak_Medium", set()),
     "TSAAPCCannon": ("Flak_Medium", set()),
     "TSMutApcCannon": ("Flak_Medium", set()),
-    "BorisAKM": ("Bullet_Medium", {"BorisAKM2", "BorisAKM_elite"}),
-    "asianalliance_fanatic_shotgun": (
-        "Bullet_Medium",
-        {"asianalliance_fanatic_shotgun_elite", "asianalliance_fanatic_shotgun_upgrade"},
-    ),
+    # 8e553991e (W7 batch-3, RESOLVE-VERIFIED) de-parented BorisAKM2 and
+    # BorisAKM_elite; e2a232ccb (close-combat infantry class, maintainer spec)
+    # re-parented the fanatic shotgun family.  All four orphans keep the
+    # consolidated Bullet_Medium_Flat main, so they re-anchor as own roots.
+    "BorisAKM": ("Bullet_Medium", set()),
+    "BorisAKM2": ("Bullet_Medium", set()),
+    "BorisAKM_elite": ("Bullet_Medium", set()),
+    "asianalliance_fanatic_shotgun": ("Bullet_Medium", set()),
+    "asianalliance_fanatic_shotgun_elite": ("Bullet_Medium", set()),
+    "asianalliance_fanatic_shotgun_upgrade": ("Bullet_Medium", set()),
     "ASDFGun": ("Bullet_Medium", {"ASDFGun2"}),
     "CHGuardRifle": ("Bullet_Medium", set()),
     "NaxPlanegun_elite": ("Bullet_Medium", set()),
@@ -152,7 +161,7 @@ def inspect_baseline(rs: Ruleset, selected: dict[str, str]):
         if resolved is None:
             raise RuntimeError(f"{name}: missing resolved weapon")
         mains = set(main_warheads(resolved))
-        compatibility = f"{destination}FlatCompatibility"
+        compatibility = f"{destination}_Flat"
         if mains == {compatibility}:
             plans[name] = None
             continue

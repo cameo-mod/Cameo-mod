@@ -12,6 +12,23 @@ from reviewed_weapon_history import missile_role_changes, missile_parent_role_ch
 
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
+
+
+def _x3_aa_renames():
+    """Old -> current weapon ids from Ruling 12 (008c669ce); the dated fixtures
+    keep the pre-rename keys, so live resolution follows the rename map the same
+    way test_effective_heaviness does."""
+    renames = {}
+    for line in (ROOT / 'tools' / 'rename' / 'rename_map_x3_aa.yaml').read_text(
+            encoding='utf-8').splitlines():
+        old, sep, new = line.partition(':')
+        if sep and line[:1] in ' \t' and old.strip() and new.strip():
+            renames[old.strip()] = new.strip()
+    return renames
+
+
+RENAMES = _x3_aa_renames()
+
 BAKE_ROOT = (ROOT / 'docs/balance/checkpoints/20260911/four-faction-sunday-pilot' /
              'hidden-base-multipliers/local-firepower-bake-20260911')
 BAKE_EVIDENCE = {
@@ -145,7 +162,8 @@ class MissileRolePolicyTest(unittest.TestCase):
                 role_checkpoint = rebuild(record['before'])
                 before = apply_local_firepower_bake(
                     self, role_checkpoint, baked.get(name, {}))
-                now = self.rs.resolve_weapon(name)
+                now = self.rs.resolve_weapon(name) or self.rs.resolve_weapon(
+                    RENAMES.get(name, name))
                 assert_live_local_firepower_bake(
                     self, now, baked.get(name, {}))
                 targets = set(now.get('ValidTargets').split(', '))

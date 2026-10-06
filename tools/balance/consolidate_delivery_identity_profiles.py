@@ -36,37 +36,40 @@ RETIRED_MESSAGE = (
 
 # Each choice is backed by the already-resolved projectile/effect identity:
 # lightning/Tesla, flak, and chaingun bullets respectively.
+#
+# The W7 de-parenting batches (8e553991e RA batch-3, 5407fd8af ContentPack
+# batch — both RESOLVE-VERIFIED) removed only the root edges; the internal
+# arc/resonance sub-trees survived, so de-parented members re-anchor as roots
+# and keep their live transitive closures on the same reviewed destinations.
 ROOTS = {
     "ra1_soviets_btr80_machinegun_tesla": (
-        "Tesla_Heavy",
-        {"MissileAP_Light", "Tesla_Heavy"},
-        {
-            "ra1_soviets_btr80_machinegun_tesla_arc", "ra1_soviets_btr80_btrteslamachinegunarcfragment1",
-            "ra1_soviets_btr80_btrteslamachinegunarcfragment1aa", "ra1_soviets_btr80_machinegun_tesla_arc_AA",
-            "ra1_soviets_btr80_machinegun_tesla_AA",
-        },
-    ),
+        "Tesla_Heavy", {"MissileAP_Light", "Tesla_Heavy"}, set()),
+    "ra1_soviets_btr80_machinegun_tesla_arc": (
+        "Tesla_Heavy", {"MissileAP_Light", "Tesla_Heavy"},
+        {"ra1_soviets_btr80_btrteslamachinegunarcfragment1"}),
+    "ra1_soviets_btr80_machinegun_tesla_AA": (
+        "Tesla_Heavy", {"MissileAP_Light", "Tesla_Heavy"},
+        {"ra1_soviets_btr80_btrteslamachinegunarcfragment1aa",
+         "ra1_soviets_btr80_machinegun_tesla_arc_AA"}),
     "JapaneseHovercraftFlak": (
         "Flak_Medium",
         {"Bullet_Light", "Flak_Medium"},
-        {
-            "JapaneseHovercraftFlakAA", "JapaneseHovercraftFlakAAkWaveforce",
-            "JapaneseHovercraftFlakWaveforce",
-        },
+        {"JapaneseHovercraftFlakWaveforce"},
     ),
+    "JapaneseHovercraftFlakAA": (
+        "Flak_Medium", {"Bullet_Light", "Flak_Medium"},
+        {"JapaneseHovercraftFlakAAkWaveforce"}),
     "SteelMantaHunterCannons": (
-        "Bullet_Medium",
-        {"Bullet_Medium", "Flak_Medium"},
-        {
-            "SteelMantaHunterCannonsAAResonanceBounce1",
-            "SteelMantaHunterCannonsAAResonanceBounce2",
-            "SteelMantaHunterCannonsAAResonance_AA",
-            "SteelMantaHunterCannonsResonance",
-            "SteelMantaHunterCannonsResonanceBounce1",
-            "SteelMantaHunterCannonsResonanceBounce2",
-            "SteelMantaHunterCannons_AA",
-        },
-    ),
+        "Bullet_Medium", {"Bullet_Medium", "Flak_Medium"}, set()),
+    "SteelMantaHunterCannonsResonance": (
+        "Bullet_Medium", {"Bullet_Medium", "Flak_Medium"},
+        {"SteelMantaHunterCannonsResonanceBounce1",
+         "SteelMantaHunterCannonsResonanceBounce2"}),
+    "SteelMantaHunterCannons_AA": (
+        "Flak_Medium", {"Bullet_Medium", "Flak_Medium"},
+        {"SteelMantaHunterCannonsAAResonance_AA",
+         "SteelMantaHunterCannonsAAResonanceBounce1",
+         "SteelMantaHunterCannonsAAResonanceBounce2"}),
 }
 
 DESTINATION_OVERRIDES = {
@@ -74,6 +77,10 @@ DESTINATION_OVERRIDES = {
     "SteelMantaHunterCannonsAAResonance_AA": "Flak_Medium",
     "SteelMantaHunterCannonsAAResonanceBounce1": "Flak_Medium",
     "SteelMantaHunterCannonsAAResonanceBounce2": "Flak_Medium",
+    # Waveforce retrofit routed these variants to the bare Railgun_Heavy
+    # canonical main while they keep the flak parents' non-main fields.
+    "JapaneseHovercraftFlakWaveforce": "Railgun_Heavy",
+    "JapaneseHovercraftFlakAAkWaveforce": "Railgun_Heavy",
 }
 
 # This child starts the Manta's separately routed anti-air inheritance branch.
@@ -119,8 +126,11 @@ def inspect(rs: Ruleset, selected):
         if resolved is None:
             raise RuntimeError(f"{name}: missing resolved weapon")
         mains = set(main_warheads(resolved))
-        compatibility = f"{destination}FlatCompatibility"
-        if not (mains & pair) and compatibility in mains:
+        compatibility = f"{destination}_Flat"
+        # A member is finalized when its sole main is the destination's folded
+        # or bare canonical form (R12 retired XFlatCompatibility; some routes
+        # went on to the bare canonical name).
+        if not (mains & pair) and mains in ({compatibility}, {destination}):
             plans[name] = None
             continue
         if not pair <= mains:
