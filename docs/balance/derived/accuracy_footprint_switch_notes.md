@@ -4,7 +4,7 @@ Base: `devin/tier4/pricing-default` at `d24668c39ff6d2e43f39456fe0abcc4e650e8331
 
 ## Switches
 
-- `BM_TARGET_FOOTPRINT_ACCURACY` is default off. When enabled, positional falloff reliability evaluates `max(0, miss_distance - 426 WDist)`, using the vehicle `CircleShape` reference footprint. Direct-actor reliability uses the larger of the legacy 100 WDist point radius and this representative footprint.
+- `PRICING_TARGET_FOOTPRINT` is default off. When enabled, positional falloff reliability evaluates `max(0, miss_distance - 426 WDist)`, using the vehicle `CircleShape` reference footprint. Direct-actor reliability uses the larger of the legacy 100 WDist point radius and this representative footprint.
 - This branch changes no missile terminal model. A follow-up must use the engine's `Missile.cs` detonation and `ImpactPosition` behavior; a Gaussian sigma override is not included here.
 
 ## Evidence
