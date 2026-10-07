@@ -200,6 +200,7 @@ PROVIDER_MERGES = {
     "IBotRequestUnitProduction": "first-enabled (genericbot vs fransbot builders are gate-disjoint)",
     "IBotSuggestRefineryProduction": "first-enabled (CA vs Frans base builders are gate-disjoint)",
     "IBotBaseExpansion": "first-enabled (CA vs Frans MCV expansion are gate-disjoint)",
+    "IBotUnitLeaseLost": "owner-matched dispatch (BotUnitLeaseRegistry calls a provider's LeaseLost only when its type name is the lost lease's previous owner)",
 }
 
 # ----------------------------------------------------------------------------- #

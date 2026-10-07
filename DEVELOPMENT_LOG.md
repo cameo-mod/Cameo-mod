@@ -1,3 +1,45 @@
+# 2026-10-07 — Devin-Integrator: INTEG-ECON-B — BU_harvester_logistics merged into inc
+
+*Devin-Integrator.* Reviewer APPROVE (2 documented non-blocking deviations D1 P2 /
+D2 P3 — the gates here were the first independent run: the reviewer had no engine).
+Branch `integ/garrison-2026-10-06`, worktree `C:\cameo-wt\integ-garrison`:
+inc `f9d81bae8` + `devin/econ-b@50d3614b6` (`BU_harvester_logistics` —
+refinery-served field reservations, shared pool re-route over threat-free
+corridors only, lease-aware evac via new `BotLeasePurpose.Harvest`, production
+requests only when the pool cannot cover demand; `HarvesterBotModuleCA` gains
+`IBotUnitLeaseLost`).
+
+Conflicts (both degenerate): `DEVELOPMENT_LOG.md` append-adjacent entries —
+kept both; `increment_switches.yaml` tail — kept all groups
+(BM_live_combat_model + BO_squad_move_dedup + BU_harvester_logistics).
+Inc-side had not touched any of the branch's 5 files since the merge base —
+clean take.
+
+Integration repair: ai_arch_audit R7 flagged `IBotUnitLeaseLost` gaining a
+second loaded provider (`BridgeRepairBotModule` + `HarvesterBotModuleCA`) with no
+declared merge semantics — declared `owner-matched dispatch` in PROVIDER_MERGES
+(registry notifies each provider only when its type name equals the lost lease's
+previous owner; verified at BotUnitLeaseRegistry.cs:186). AI_ARCH_COVERAGE.md
+regenerated.
+
+Gates:
+
+- build: 0 errors (Release, win-x64)
+- Cameo tests: 1206 total, 1205 pass — sole failure was a stale
+  `DerivedWeaponMetrics` fixture (RA2Patriot rows after R1's refresh); fixed by
+  `extract_stats.py` re-extraction of all 34 derived faction ledgers (cohort
+  normalization churns every row; only R1-weapon rows changed semantics).
+  WeaponModelParityTest 4/4 on the regenerated fixtures.
+- audits: fog honesty PASS (82 files/266 sites), direct mutation PASS (0 sites),
+  ai_arch freshness PASS (both artifacts)
+- switch gating reviewed: all new paths behind `UseHarvesterLogistics`
+  (default false); `apply_increment_switches --dry-run BU_harvester_logistics`
+  arms `HarvesterBotModuleCA@generic` only; @classic untouched -> off =
+  bit-identical
+- conflict-marker test: PASS
+- BOOT_GATE: PASS (isolated support dir, menu marker, package in worktree,
+  0 exceptions)
+
 # 2026-10-07 — Devin-Integrator: INTEG-REGREEN-R1 — pre-R16 missile profile refresh merged into inc
 
 *Devin-Integrator.* Reviewer APPROVE. Branch `integ/garrison-2026-10-06` (continued),
