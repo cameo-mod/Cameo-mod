@@ -9,6 +9,7 @@
  */
 #endregion
 
+using System;
 using System.Linq;
 using NUnit.Framework;
 using OpenRA.Mods.CA.Traits;
@@ -67,8 +68,19 @@ namespace OpenRA.Mods.Cameo.Test
 		[Test]
 		public void LegacyModAliasCreatesTheCanonicalCommonRuntime()
 		{
+			#pragma warning disable CS0618 // Verify the one-release compatibility alias.
 			var f = new AttackGarrisonedTest.Fixture(schema: new AttackGarrisonedSPInfo());
+			#pragma warning restore CS0618
 			Assert.That(f.Host.Trait<AttackGarrisoned>().GetType(), Is.EqualTo(typeof(AttackGarrisoned)));
+		}
+		[Test]
+		public void LegacyModAliasCarriesObsoleteGuidance()
+		{
+			#pragma warning disable CS0618 // Verify the one-release compatibility alias.
+			var alias = typeof(AttackGarrisonedSPInfo);
+			#pragma warning restore CS0618
+			var obsolete = (ObsoleteAttribute)Attribute.GetCustomAttribute(alias, typeof(ObsoleteAttribute));
+			Assert.That(obsolete.Message, Is.EqualTo("Use AttackGarrisoned instead."));
 		}
 	}
 }
