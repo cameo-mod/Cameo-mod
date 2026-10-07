@@ -1,0 +1,564 @@
+﻿# Learnability manifest, sourced from the 40-row fleet LEARN_CATALOG_2026-10-06.md.
+# Values are offline-fitted, reviewed, and frozen at match start. Ranges state the
+# accepted parameter domain; safety_floor records the lower invariant the consumer
+# must preserve. "planned" rows have no runtime consumer until their switch is scheduled.
+schema_version: 1
+catalog: LEARN_CATALOG_2026-10-06.md
+learning_mode: offline_reviewed_yaml_frozen_at_match_start
+identity_policy: no player, account, client, game, or map identity keys
+allowed_scope_keys: faction, matchup, doctrine, temperament, map_feature_vector, squad_type, unit_role, enemy_role, range_band, phase, threat_role, target_class, power_type, starting_temperament, distance_band
+learnables:
+    predictor_calibration:
+        rank: 1
+        name: Predictor calibration (seed 1)
+        owner: EngagementPriorsBotModule.cs:EngagementPriorsBotModule; CombatVetoBotModule.cs:CombatVetoBotModule
+        bounds: min=500,max=2000,safety_floor=500,unit=permille
+        feature_schema: E.seen.predicted_trade,E.outcome,E.score,E.truth_offline,map_features,own_role,enemy_role,range_band,phase
+        credit_metric: actual_minus_predicted_trade
+        method: shrinkage_integer_additive_hinge_regression
+        scope_keys: faction,matchup,map_feature_vector,own_role,enemy_role,range_band,phase
+        fitter: tools/ai/fit_engagement_priors.py
+        sample_floor: 200 effective engagements per model
+        switch: AP_tier1_priors
+        state: wired
+        artifact:
+            path: mods/cameo/ai/learned/engagement_priors.yaml
+            schema: engagement_priors_v1
+            storage_bounds:
+                correction_permille: 500..2000
+                resolved_versus_percent: 0..2147483647
+                evidence_count: 0..2147483647
+                timing_ticks: 0..2147483647
+                suicide_index: 0..1000
+                fit_version: 0..2147483647
+                staleness_tau_milli: 1..2147483647
+    effective_unit_value:
+        rank: 2
+        name: Effective unit value by matchup
+        owner: BotLearnedPriors.cs:BotLearnedPriors; EngagementPriorsBotModule.cs:EngagementPriorsBotModule
+        bounds: min=50,max=150,safety_floor=50,unit=effective_weight_percent
+        feature_schema: E.role_losses,E.role_kills,E.score,map_features,own_role,enemy_role,phase
+        credit_metric: trade_per_cost_residual_after_predictor_calibration
+        method: hierarchical_smooth_regression
+        scope_keys: faction,matchup,map_feature_vector,own_role,enemy_role,phase
+        fitter: tools/ai/fit_arsenal_priors.py
+        sample_floor: 250 effective engagements per model
+        switch: unscheduled
+        state: wired_currently_enabled_without_increment_switch
+        activation_note: ai.yaml sets UseLearnedPriors=true; this registry records the gap but does not change the existing order stream
+        artifact:
+            path: mods/cameo/ai/learned/arsenal_priors.yaml
+            schema: arsenal_priors_v1
+            note: Existing TradePercent rows use legacy actor-type keys; the catalog target is role-scoped. Runtime clamps the resulting candidate weight to 50..150 percent.
+            storage_bounds:
+                visibility_percent: 0..100
+                raw_trade_percent: 0..2147483647
+    engage_retreat_threshold:
+        rank: 3
+        name: Engage / retreat threshold
+        owner: BotLimits.cs:BotLimits; SquadManagerBotModuleCA.cs:SquadManagerBotModuleCA
+        bounds: min=25,max=100,safety_floor=25,unit=force_ratio_percent
+        feature_schema: E.seen_force_ratio,E.seen_defences,E.urgency,map_features,squad_type,phase
+        credit_metric: next_fight_trade_plus_survival
+        method: bayesian_smooth_threshold
+        scope_keys: faction,matchup,doctrine,map_feature_vector,squad_type,phase
+        fitter: tools/ai/fit_retreat_threshold.py (planned)
+        sample_floor: 150 effective engagements per model
+        switch: unscheduled
+        state: planned
+    unit_mix:
+        rank: 4
+        name: Unit mix by matchup, phase, squad
+        owner: UnitBuilderBotModuleCA.cs:UnitBuilderBotModuleCA; AdaptiveCounterProduction.cs:AdaptiveCounterProduction
+        bounds: min=500,max=1500,safety_floor=500,unit=composition_multiplier_permille
+        feature_schema: S.enemies,S.demand,M.arsenal,M.composition,E.outcome,map_features,squad_type,phase
+        credit_metric: composition_delta_to_value_traded
+        method: capped_prototype_smoothing
+        scope_keys: faction,matchup,map_feature_vector,squad_type,phase
+        fitter: tools/ai/fit_unit_mix.py (planned)
+        sample_floor: 100 effective episodes
+        switch: unscheduled
+        state: planned
+    opening_build:
+        rank: 5
+        name: Opening build
+        owner: BuildOrderKnobsBotModule.cs:BuildOrderKnobsBotModule
+        bounds: min=800,max=1250,safety_floor=800,unit=knob_thousandths
+        feature_schema: S.build_order,M.timeline,M.outcome,start_faction,map_features,doctrine
+        credit_metric: first_3000_tick_efficiency_with_final_margin_secondary
+        method: smooth_prototype_lower_confidence_bound_then_league_ab
+        scope_keys: faction,matchup,map_feature_vector,doctrine
+        fitter: tools/ai/tune_build_order.py
+        sample_floor: 80 effective games per arm
+        switch: AK_build_order_knobs
+        state: wired
+        artifact:
+            path: mods/cameo/ai/learned/build_order_knobs.yaml
+            schema: build_order_knobs_v1
+            storage_bounds:
+                knob_thousandths: 800..1250
+                opening_alpha_beta: 1..200
+                spsa_step: 0..1000000
+    expansion_timing:
+        rank: 6
+        name: Expansion timing
+        owner: ExpansionPlannerBotModule.cs:ExpansionPlannerBotModule
+        bounds: min=0,max=15000,safety_floor=0,unit=ticks
+        feature_schema: S.own,S.enemies,S.expansion,P.refinery,P.outpost,M.income,map_features,phase
+        credit_metric: 1500_tick_income_gain_less_loss
+        method: shrinkage_integer_hinge_regression
+        scope_keys: faction,map_feature_vector,phase
+        fitter: tools/ai/tune_expansion_timing.py (planned)
+        sample_floor: 100 effective decisions per model
+        switch: unscheduled
+        state: planned
+    harvester_allocation:
+        rank: 7
+        name: Harvesters per refinery / field geometry
+        owner: HarvesterBotModuleCA.cs:HarvesterBotModuleCA; BotLimits.cs:BotLimits
+        bounds: min=1,max=16,safety_floor=1,unit=harvesters_per_field
+        feature_schema: S.own.harvesters,M.earned,M.spent,field_distance,field_richness,seen_danger,map_features,distance_band,phase
+        credit_metric: marginal_income_less_harvester_loss_and_idle_time
+        method: smooth_bayesian_threshold
+        scope_keys: faction,map_feature_vector,distance_band,phase
+        fitter: tools/ai/tune_harvester_allocation.py (planned)
+        sample_floor: 120 effective windows per model
+        switch: unscheduled
+        state: planned
+    production_count:
+        rank: 8
+        name: Production-building count versus income
+        owner: BaseBuilderBotModuleCA.cs:BaseBuilderBotModuleCA
+        bounds: min=0,max=20000,safety_floor=0,unit=cash_threshold
+        feature_schema: M.cash,M.earned,M.spent,M.queue_state,S.seen_threat,P.producer,doctrine,phase
+        credit_metric: queue_idle_reduction_less_delayed_army
+        method: bayesian_threshold
+        scope_keys: faction,doctrine,phase
+        fitter: tools/ai/tune_production_count.py (planned)
+        sample_floor: 120 build decisions per cell
+        switch: unscheduled
+        state: planned
+    credit_float:
+        rank: 9
+        name: Credit float target / spend timing
+        owner: UnitBuilderBotModuleCA.cs:UnitBuilderBotModuleCA; ArmyFirstBotModule.cs:ArmyFirstBotModule
+        bounds: min=0,max=20000,safety_floor=0,unit=cash
+        feature_schema: M.cash,M.resources,M.queue_idle,S.urgency,S.threats,doctrine,phase
+        credit_metric: unspent_resource_area_versus_army_and_tempo_lead
+        method: bayesian_hysteresis_threshold
+        scope_keys: faction,doctrine,phase
+        fitter: tools/ai/tune_credit_float.py (planned)
+        sample_floor: 150 timeline windows per cell
+        switch: unscheduled
+        state: planned
+    defence_count:
+        rank: 10
+        name: Defence count by base value / threat
+        owner: BaseBuilderBotModuleCA.cs:BaseBuilderBotModuleCA; DefenseCoveragePlanner.cs:DefenseCoveragePlanner
+        bounds: min=0,max=3000,safety_floor=0,unit=defence_budget_multiplier_permille
+        feature_schema: S.threats,S.enemies,P.defence_placements,E.building_loss,map_features,threat_role,phase
+        credit_metric: avoided_asset_loss_less_defence_opportunity_cost
+        method: guarded_smooth_regression
+        scope_keys: faction,map_feature_vector,threat_role,phase
+        fitter: tools/ai/tune_defence_coverage.py (planned)
+        sample_floor: 100 effective attacks per model
+        switch: unscheduled
+        state: planned
+    reinforcement_budget:
+        rank: 11
+        name: Reinforcement donor floor and budget share
+        owner: SquadReinforcementBotModule.cs:SquadReinforcementBotModule (planned); UnitBuilderBotModuleCA.cs:UnitBuilderBotModuleCA
+        bounds: min=0,max=500,safety_floor=0,unit=budget_share_permille
+        feature_schema: N.reinforcement_decision,N.request,N.floor,N.budget,N.fulfilled,N.arrival,E.outcome
+        credit_metric: requester_trade_and_arrival_less_donor_survival_loss
+        method: bayesian_grid_then_ab
+        scope_keys: faction,squad_type,unit_role,phase
+        fitter: tools/ai/fit_reinforcement_policy.py (planned)
+        sample_floor: 150 fulfilled requests per cell
+        switch: unscheduled
+        state: planned_requires_phase_7_logging
+    power_buffer:
+        rank: 12
+        name: Power buffer and silo timing
+        owner: BaseBuilderBotModuleCA.cs:BaseBuilderBotModuleCA
+        bounds: min=0,max=5000,safety_floor=0,unit=power_margin
+        feature_schema: S.own.power,S.own.storage,S.enemies,P.power,P.silo,M.production,M.assets,map_features
+        credit_metric: low_power_and_overflow_downtime_avoided_less_delay
+        method: smooth_bayesian_threshold
+        scope_keys: faction,map_feature_vector,phase
+        fitter: tools/ai/tune_power_buffer.py (planned)
+        sample_floor: 100 effective decisions per model
+        switch: unscheduled
+        state: planned
+    scout_policy:
+        rank: 13
+        name: Scout timing, routes, count
+        owner: ScoutBotModule.cs:ScoutBotModule
+        bounds: min=0,max=6,safety_floor=0,unit=scouts_per_6000_ticks
+        feature_schema: S.scale_targets.unscouted_milli,S.enemies,S.threats,map_features,phase
+        credit_metric: prediction_error_reduction_less_scout_loss
+        method: contextual_bandit_with_prototype_smoothing
+        scope_keys: faction,map_feature_vector,phase
+        fitter: tools/ai/tune_scout_policy.py (planned)
+        sample_floor: 100 effective sorties per model
+        switch: unscheduled
+        state: planned
+    enemy_timing:
+        rank: 14
+        name: Expected enemy timing windows
+        owner: BotSituation.cs:BotSituation (new read-only timing provider planned)
+        bounds: min=0,max=1000,safety_floor=0,unit=hazard_permille
+        feature_schema: S.enemies,S.last_seen_tick,E.contacts,truth_labels_offline,map_features
+        credit_metric: timing_calibration_error_and_avoided_preemption_loss
+        method: discrete_hazard_regression
+        scope_keys: faction,matchup,map_feature_vector,phase
+        fitter: tools/ai/fit_enemy_timing.py (planned)
+        sample_floor: 150 effective games per model
+        switch: unscheduled
+        state: planned
+    opponent_signature:
+        rank: 15
+        name: Opponent signature feature weights
+        owner: BotSituation.cs:BotSituation; BotFactionView.cs:BotFactionView
+        bounds: min=-2000,max=2000,safety_floor=-2000,unit=feature_weight_permille
+        feature_schema: S.enemies,S.build_order,S.threats,phase_0_anonymous_signature,map_features
+        credit_metric: recognition_accuracy_plus_response_efficiency
+        method: integer_multinomial_fit
+        scope_keys: matchup,map_feature_vector
+        fitter: tools/ai/fit_opponent_signature.py (planned)
+        sample_floor: 300 effective anonymous seats per model
+        switch: unscheduled
+        state: planned_requires_phase_0_records
+    counter_switch:
+        rank: 16
+        name: Counter-switch evidence / speed
+        owner: PlanBanditBotModule.cs:PlanBanditBotModule
+        bounds: min=0,max=1000,safety_floor=0,unit=confidence_permille
+        feature_schema: S.snapshot,E.score,seen_style_shift,own_recent_efficiency,dwell,map_features,phase
+        credit_metric: post_switch_efficiency_less_delay
+        method: bayesian_threshold_then_league_ab
+        scope_keys: faction,matchup,map_feature_vector,phase
+        fitter: tools/ai/tune_counter_switch.py (planned)
+        sample_floor: 100 effective candidates per model
+        switch: AO_tier3_bandits
+        state: planned
+        artifact:
+            path: mods/cameo/ai/learned/plan_bandits.yaml
+            schema: plan_bandits_v1
+            note: Existing file stores match-start personality and plan posteriors; it is schema-adjacent coverage, not counter-switch evidence.
+            storage_bounds:
+                observations: 0..1000000000
+                mean_total_milli: -1000..1000
+                m2_total_milli: 0..4000000000000000
+    attack_enemy_away:
+        rank: 17
+        name: Attack when enemy army is away
+        owner: ArmyStagingBotModule.cs:ArmyStagingBotModule; BotLimits.cs:BotLimits
+        bounds: min=0,max=15000,safety_floor=0,unit=ticks
+        feature_schema: S.threats,S.enemies,E.tactics,E.outcome,enemy_centroid,enemy_velocity,route_features
+        credit_metric: structure_and_economy_trade_before_enemy_return
+        method: smooth_bayesian_threshold
+        scope_keys: faction,squad_type,map_feature_vector,phase
+        fitter: tools/ai/tune_attack_enemy_away.py (planned)
+        sample_floor: 120 effective attacks per model
+        switch: unscheduled
+        state: planned
+    aa_escort_ratio:
+        rank: 18
+        name: AA escort ratio
+        owner: UnitBuilderBotModuleCA.cs:UnitBuilderBotModuleCA (escort-ratio seam planned)
+        bounds: min=0,max=1000,safety_floor=0,unit=escort_ratio_permille
+        feature_schema: S.enemies.air_share,S.demand,M.arsenal,E.outcome,protected_ground_value
+        credit_metric: air_loss_avoided_less_ground_trade_foregone
+        method: constrained_regression
+        scope_keys: faction,squad_type,phase
+        fitter: tools/ai/fit_aa_escort.py (planned)
+        sample_floor: 100 engagements per cell
+        switch: unscheduled
+        state: planned
+    harass_target:
+        rank: 19
+        name: Harass target choice
+        owner: SquadManagerBotModuleCA.cs:SquadManagerBotModuleCA
+        bounds: min=-1000,max=1000,safety_floor=-1000,unit=lcb_score_milli
+        feature_schema: S.enemies,S.threats,E.tactics,E.outcome,reachable_target_class,protection
+        credit_metric: target_value_destroyed_less_raider_loss_and_time
+        method: lower_confidence_bound_bandit
+        scope_keys: faction,squad_type,target_class,phase
+        fitter: tools/ai/fit_harass_target.py (planned)
+        sample_floor: 100 raids per arm
+        switch: unscheduled
+        state: planned
+    tech_timing:
+        rank: 20
+        name: Tech / upgrade / doctrine timing
+        owner: BuildOrderKnobsBotModule.cs:BuildOrderKnobsBotModule; BaseBuilderBotModuleCA.cs:BaseBuilderBotModuleCA
+        bounds: min=0,max=15000,safety_floor=0,unit=ticks
+        feature_schema: S.build_order,S.enemies,P.tech_placement,M.timeline,M.income
+        credit_metric: completion_payoff_less_army_window_loss
+        method: bayesian_timing_threshold
+        scope_keys: faction,matchup,doctrine,phase
+        fitter: tools/ai/tune_tech_timing.py (planned)
+        sample_floor: 100 decisions per cell
+        switch: unscheduled
+        state: planned
+    superweapon_economy:
+        rank: 21
+        name: Build superweapon and support defences
+        owner: BaseBuilderBotModuleCA.cs:BaseBuilderBotModuleCA (economic arm planned)
+        bounds: min=0,max=100000,safety_floor=0,unit=cash_threshold
+        feature_schema: S.own,S.enemies,P.superweapon,P.defence,M.assets,map_features
+        credit_metric: completion_payoff_less_defence_opportunity_cost
+        method: smooth_lower_confidence_bound_bandit
+        scope_keys: faction,matchup,map_feature_vector,phase
+        fitter: tools/ai/tune_superweapon_economy.py (planned)
+        sample_floor: 80 effective attempts per arm
+        switch: unscheduled
+        state: planned
+    intel_staleness:
+        rank: 22
+        name: Intel staleness
+        owner: BotFogMemory.cs:BotFogMemory
+        bounds: min=250,max=15000,safety_floor=250,unit=ticks
+        feature_schema: S.enemies.last_seen_tick,S.threats,movement_class,route_uncertainty,topology
+        credit_metric: reacquisition_prediction_error
+        method: smooth_bayesian_survival_threshold
+        scope_keys: matchup,unit_role,map_feature_vector
+        fitter: tools/ai/tune_intel_staleness.py (planned)
+        sample_floor: 250 effective reacquisitions per model
+        switch: unscheduled
+        state: planned
+    repair_threshold:
+        rank: 23
+        name: Repair pull-back HP threshold
+        owner: UnitRepairBotModule.cs:UnitRepairBotModule
+        bounds: min=10,max=90,safety_floor=10,unit=hp_percent
+        feature_schema: S.threats,E.survival,own_hp,repair_distance,repair_capacity
+        credit_metric: repair_survival_and_fight_value_less_absence
+        method: bayesian_threshold
+        scope_keys: faction,unit_role,squad_type,phase
+        fitter: tools/ai/tune_repair_threshold.py (planned)
+        sample_floor: 150 effective opportunities per cell
+        switch: unscheduled
+        state: planned
+    siege_standoff:
+        rank: 24
+        name: Siege standoff range
+        owner: SiegeEvaluatorBotModule.cs:SiegeEvaluatorBotModule; IBotSiegeAdvisor
+        bounds: min=1,max=30,safety_floor=1,unit=map_cells
+        feature_schema: S.enemies,S.threats,E.tactics,E.outcome,defence_range,artillery_range,path_safety
+        credit_metric: trade_per_artillery_loss_and_time_exposed
+        method: discrete_bandit
+        scope_keys: faction,squad_type,unit_role,threat_role
+        fitter: tools/ai/tune_siege_standoff.py (planned)
+        sample_floor: 100 sieges per arm
+        switch: unscheduled
+        state: planned
+    attack_lane_weights:
+        rank: 25
+        name: Attack-lane heatmaps / defence priority
+        owner: TacticalMapBotModule.cs:TacticalMapBotModule; DefenseCoveragePlanner.cs:DefenseCoveragePlanner
+        bounds: min=0,max=2000,safety_floor=0,unit=lane_weight_permille
+        feature_schema: E.tactics,E.outcome,S.threats,P.attack_entry_cell,public_topology,map_features
+        credit_metric: asset_loss_prevented_and_trade_on_lane
+        method: bayesian_smoothing_over_lane_features
+        scope_keys: map_feature_vector,faction,phase
+        fitter: tools/ai/tune_attack_lane.py (planned)
+        sample_floor: 80 effective attacks per model
+        switch: unscheduled
+        state: planned_geometry_cells_not_keys
+    harvester_routes:
+        rank: 26
+        name: Field order / safe harvester routes
+        owner: ExpansionPlannerBotModule.cs:ExpansionPlannerBotModule; HarvesterBotModuleCA.cs:HarvesterBotModuleCA
+        bounds: min=500,max=2000,safety_floor=500,unit=route_cost_multiplier_permille
+        feature_schema: S.expansion,S.threats,P.refinery,M.income,known_field_distance,route_coverage,resource_features
+        credit_metric: income_retained_per_travel_and_loss_risk
+        method: constrained_smooth_regression
+        scope_keys: map_feature_vector,faction,phase
+        fitter: tools/ai/tune_harvester_routes.py (planned)
+        sample_floor: 80 effective commitments per model
+        switch: unscheduled
+        state: planned_geometry_routes_not_keys
+    blob_split:
+        rank: 27
+        name: Blob versus split
+        owner: SquadManagerBotModuleCA.cs:SquadManagerBotModuleCA
+        bounds: min=0,max=1000,safety_floor=0,unit=split_fraction_permille
+        feature_schema: S.enemies,S.threats,E.tactics,E.outcome,enemy_dispersion,own_geometry,topology
+        credit_metric: trade_efficiency_plus_objective_pressure
+        method: two_arm_prototype_bandit
+        scope_keys: faction,squad_type,threat_role,map_feature_vector
+        fitter: tools/ai/tune_blob_split.py (planned)
+        sample_floor: 100 effective commitments per arm
+        switch: unscheduled
+        state: planned
+    multi_prong:
+        rank: 28
+        name: Multi-prong timing / flank angle
+        owner: SquadFlankPlanner.cs:SquadFlankPlanner (planned); RegionRouter.cs:RegionRouter
+        bounds: min=0,max=180,safety_floor=0,unit=degrees
+        feature_schema: S.enemies,S.threats,E.tactics,passable_routes,topology,arrival
+        credit_metric: joint_trade_and_objective_less_split_loss
+        method: smooth_league_ab_over_plans
+        scope_keys: map_feature_vector,squad_type,phase
+        fitter: tools/ai/tune_multi_prong.py (planned)
+        sample_floor: 120 effective plans per arm
+        switch: unscheduled
+        state: planned
+    regroup_radius:
+        rank: 29
+        name: Rally distance / regroup radius
+        owner: ArmyStagingBotModule.cs:ArmyStagingBotModule; AssaultFormationBotModule.cs:AssaultFormationBotModule
+        bounds: min=1,max=30,safety_floor=1,unit=map_cells
+        feature_schema: E.response_ticks,E.outcome,S.threats,straggler_distance,staging_point,travel_features
+        credit_metric: idle_travel_versus_premature_loss
+        method: smooth_bayesian_threshold
+        scope_keys: faction,squad_type,map_feature_vector
+        fitter: tools/ai/tune_regroup_radius.py (planned)
+        sample_floor: 120 effective regroups per model
+        switch: unscheduled
+        state: planned
+    support_power_threshold:
+        rank: 30
+        name: Support-power value threshold
+        owner: SupportPowerAdvisorBotModule.cs:SupportPowerAdvisorBotModule (planned; new owner)
+        bounds: min=0,max=100000,safety_floor=0,unit=seen_value
+        feature_schema: S.enemies,S.threats,power_ready,seen_target_density,cooldown
+        credit_metric: value_swing_per_cooldown_versus_hold
+        method: contextual_bandit
+        scope_keys: faction,power_type,phase
+        fitter: tools/ai/tune_support_power.py (planned)
+        sample_floor: 100 casts per arm
+        switch: unscheduled
+        state: planned_no_ai_owner
+    superweapon_target:
+        rank: 31
+        name: Superweapon target choice
+        owner: SuperweaponAdvisorBotModule.cs:SuperweaponAdvisorBotModule (planned; new owner)
+        bounds: min=-1000,max=1000,safety_floor=-1000,unit=target_score_milli
+        feature_schema: S.threats,S.enemies,target_class,seen_target_value,clump_size,travel,placement_features
+        credit_metric: strategic_damage_per_shot
+        method: smooth_lower_confidence_bound_bandit
+        scope_keys: faction,power_type,map_feature_vector,phase
+        fitter: tools/ai/tune_superweapon_target.py (planned)
+        sample_floor: 80 effective shots per arm
+        switch: unscheduled
+        state: planned_no_ai_owner
+    hold_combo:
+        rank: 32
+        name: Hold-for-combo versus cooldown fire
+        owner: SupportPowerAdvisorBotModule.cs:SupportPowerAdvisorBotModule (planned; new owner)
+        bounds: min=0,max=10000,safety_floor=0,unit=ticks
+        feature_schema: S.threats,S.own,power_ready,assault_readiness,assault_window,cooldown
+        credit_metric: assault_trade_net_of_hold_delay
+        method: league_ab
+        scope_keys: faction,power_type,squad_type,phase
+        fitter: tools/ai/tune_hold_combo.py (planned)
+        sample_floor: 100 effective windows per arm
+        switch: unscheduled
+        state: planned_no_cast_hold_event
+    stance_desire:
+        rank: 33
+        name: Stance-desire gains / hysteresis
+        owner: SquadDesireBotModule.cs:SquadDesireBotModule (planned); IBotSquadDesire
+        bounds: min=0,max=2000,safety_floor=0,unit=gain_permille
+        feature_schema: S.context,S.urgency,S.threat,S.gap,N.desire_inputs,N.stance,N.transition
+        credit_metric: efficiency_and_order_rate_with_flap_gate
+        method: bayesian_threshold_hard_flap_gate
+        scope_keys: faction,temperament,squad_type,phase
+        fitter: tools/ai/tune_stance_desire.py (planned)
+        sample_floor: 200 windows per cell
+        switch: unscheduled
+        state: planned
+    temperament_drift:
+        rank: 34
+        name: Temperament drift evidence weights
+        owner: BotPersonalityController.cs:BotPersonalityController
+        bounds: min=0,max=2000,safety_floor=0,unit=evidence_weight_permille
+        feature_schema: E.own_efficiency,M.outcome,public_features,N.temperament_axis
+        credit_metric: efficiency_entropy_and_drift_reset_compliance
+        method: bounded_smooth_regression_then_league_ab
+        scope_keys: faction,starting_temperament,map_feature_vector,phase
+        fitter: tools/ai/tune_temperament_drift.py (planned)
+        sample_floor: 300 effective segments per model
+        switch: unscheduled
+        state: planned
+    abandon_expansion:
+        rank: 35
+        name: Abandon / sell dying expansion
+        owner: ExpansionPlannerBotModule.cs:ExpansionPlannerBotModule (exit event and owner planned)
+        bounds: min=0,max=1000,safety_floor=0,unit=threat_threshold_permille
+        feature_schema: S.threats,S.expansion,P.refinery,M.assets,M.income,local_defence,travel_features
+        credit_metric: assets_saved_less_rebuild_and_income_penalty
+        method: conservative_smooth_threshold
+        scope_keys: faction,map_feature_vector,phase
+        fitter: tools/ai/tune_abandon_expansion.py (planned)
+        sample_floor: 80 effective threatened expansions per model
+        switch: unscheduled
+        state: planned_no_exit_event
+    base_spacing:
+        rank: 36
+        name: Base spacing against splash / superweapons
+        owner: BaseFrontBackPlannerBotModule.cs:BaseFrontBackPlannerBotModule; placement advisor
+        bounds: min=1,max=64,safety_floor=1,unit=map_cells
+        feature_schema: S.enemies,P.cells,seen_splash,seen_superweapon,own_footprint,placement_features
+        credit_metric: loss_avoided_less_crawl_and_production_delay
+        method: regression_with_hard_minimum
+        scope_keys: map_feature_vector,faction,threat_role
+        fitter: tools/ai/tune_base_spacing.py (planned)
+        sample_floor: 80 effective bases per model
+        switch: unscheduled
+        state: planned_geometry_derived
+    ambush_positions:
+        rank: 37
+        name: Artillery / ambush spots and chokepoints
+        owner: TacticalMapBotModule.cs:TacticalMapBotModule; SiegeEvaluatorBotModule.cs:SiegeEvaluatorBotModule
+        bounds: min=0,max=1000,safety_floor=0,unit=position_score_milli
+        feature_schema: S.threats,S.enemies,E.tactics,seen_direction,remembered_defence,public_topology
+        credit_metric: local_trade_and_hold_duration
+        method: bandit_over_public_topology_features
+        scope_keys: map_feature_vector,squad_type,unit_role
+        fitter: tools/ai/tune_ambush_positions.py (planned)
+        sample_floor: 100 effective positions per arm
+        switch: unscheduled
+        state: planned_candidate_cells_not_keys
+    focus_fire:
+        rank: 38
+        name: Focus-fire target priority
+        owner: SquadMicroEvalCA.cs:SquadMicroEvalCA
+        bounds: min=0,max=2000,safety_floor=0,unit=priority_weight_permille
+        feature_schema: E.role_outcome,visible_role,visible_hp,range,threat,overkill
+        credit_metric: time_to_kill_and_trade
+        method: constrained_contextual_bandit
+        scope_keys: faction,unit_role,enemy_role,phase
+        fitter: tools/ai/tune_focus_fire.py (planned)
+        sample_floor: 300 decisions per cell
+        switch: unscheduled
+        state: planned_no_policy_seam
+    kiting:
+        rank: 39
+        name: Kiting / dodging
+        owner: SquadMicroEvalCA.cs:SquadMicroEvalCA
+        bounds: min=0,max=1000,safety_floor=0,unit=damage_avoidance_weight_permille
+        feature_schema: E.tactics,E.outcome,visible_projectile_speed,threat_speed,range,own_speed,own_hp
+        credit_metric: damage_avoided_less_dps_and_travel
+        method: league_ab_then_contextual_bandit
+        scope_keys: faction,unit_role,enemy_role
+        fitter: tools/ai/tune_kiting.py (planned)
+        sample_floor: 300 windows per model
+        switch: unscheduled
+        state: planned_no_policy_seam
+    exploration_rate:
+        rank: 40
+        name: Exploration rate by temperament
+        owner: PlanBanditBotModule.cs:PlanBanditBotModule
+        bounds: min=50,max=500,safety_floor=50,unit=exploration_rate_permille
+        feature_schema: S.bandit,E.outcome,M.reward,observed_temperament,map_features
+        credit_metric: regret_to_strong_primary_with_diversity_floor
+        method: offline_simulation_then_league_ab
+        scope_keys: faction,temperament,matchup,map_feature_vector
+        fitter: tools/ai/tune_exploration_rate.py (planned)
+        sample_floor: 200 effective draws per model
+        switch: unscheduled
+        state: planned_policy_safety_floor

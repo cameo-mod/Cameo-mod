@@ -19667,3 +19667,14 @@ Branch devin/tier4/pricing-default, task 01a10850 (maintainer ruling 2026-10-04)
 * Crash note: machine lost ~00:05 mid-gate; worktree survived intact. fsck reports
   missing objects in the shared store — unreachable crash debris only, verified clean
   from refs; lead confirmed no repair needed.
+
+## 2026-10-07 — Codex: LEARN-REGISTRY — add the missing catalog-to-artifact contract
+
+The fleet's 40-row LEARN_CATALOG_2026-10-06.md and the ordered action plan in
+AI_ARCHITECTURE_RESEARCH_SYNTHESIS_2026-10-06.md require a manifest, but the repository
+has no catalog registry or CI check for learned files. Existing fitters already enforce
+different units and bounds (for example, build-order multipliers are 800–1250, while the
+runtime trade-prior consumer clamps raw serialized ratios to 50–150). A registry must
+preserve those distinctions, declare future rows explicitly unscheduled, and reject
+identity-bearing scope keys. This task adds that contract and a focused validator rather
+than duplicating or changing the existing fitter policies.
