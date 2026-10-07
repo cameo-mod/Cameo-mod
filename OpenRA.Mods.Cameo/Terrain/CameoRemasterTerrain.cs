@@ -192,6 +192,20 @@ namespace OpenRA.Mods.Cameo.Terrain
 
 		TerrainTile ITerrainInfo.DefaultTerrainTile => new(TemplatesInDefinitionOrder[0].Id, 0);
 
+		// FNV-1a over the string — string.GetHashCode is randomized per process,
+		// which would make tile layout differ run-to-run.
+		internal static int StableHash(string s)
+		{
+			unchecked
+			{
+				var h = 0x811C9DC5u;
+				foreach (var c in s)
+					h = (h ^ c) * 0x01000193u;
+
+				return (int)h;
+			}
+		}
+
 		ImmutableArray<string> ITemplatedTerrainInfo.EditorTemplateOrder => EditorTemplateOrder;
 		FrozenDictionary<ushort, TerrainTemplateInfo> ITemplatedTerrainInfo.Templates => Templates;
 		ImmutableArray<TerrainTemplateInfo> ITemplatedTerrainInfo.TemplatesInDefinitionOrder => TemplatesInDefinitionOrder;
@@ -210,8 +224,9 @@ namespace OpenRA.Mods.Cameo.Terrain
 
 		void ITerrainInfoNotifyMapCreated.MapCreated(Map map)
 		{
-			// Randomize PickAny tile variants.
-			var r = new MersenneTwister();
+			// Randomize PickAny tile variants. Seeded from the map uid so the
+			// variant layout is identical every time this map loads.
+			var r = new MersenneTwister(StableHash(map.Uid));
 			foreach (var uv in map.AllCells.MapCoords)
 			{
 				var type = map.Tiles[uv].Type;

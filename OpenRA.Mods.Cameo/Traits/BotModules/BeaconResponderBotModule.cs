@@ -12,6 +12,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using OpenRA.Mods.CA;
 using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.Common.Traits;
 using CAAIUtils = OpenRA.Mods.CA.AIUtils;
@@ -71,7 +72,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		protected override void TraitEnabled(Actor self)
 		{
 			threatProviders = self.TraitsImplementing<IBotRegionThreatProvider>().ToArray();
-			scanTicks = world.LocalRandom.Next(0, Info.ScanInterval);
+			scanTicks = BotRng.For(player).Next(0, Info.ScanInterval);
 		}
 
 		void IBotEnabled.BotEnabled(IBot bot) { }

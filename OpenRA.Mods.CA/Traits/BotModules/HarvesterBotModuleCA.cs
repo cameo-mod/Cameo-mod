@@ -170,9 +170,9 @@ namespace OpenRA.Mods.CA.Traits
 			limitsRechecked = false;
 
 			// Avoid all AIs scanning for idle harvesters on the same tick, randomize their initial scan delay.
-			scanForIdleHarvestersTicks = world.LocalRandom.Next(Info.ScanForIdleHarvestersInterval, Info.ScanForIdleHarvestersInterval * 2);
+			scanForIdleHarvestersTicks = BotRng.For(player).Next(Info.ScanForIdleHarvestersInterval, Info.ScanForIdleHarvestersInterval * 2);
 
-			scanForLowEffectHarvestersTicks = world.LocalRandom.Next(Info.ScanForLowEffectHarvestersInterval);
+			scanForLowEffectHarvestersTicks = BotRng.For(player).Next(Info.ScanForLowEffectHarvestersInterval);
 
 			scanForEnoughHarvestersTicks = Info.ProduceHarvestersInterval;
 		}
@@ -430,7 +430,7 @@ namespace OpenRA.Mods.CA.Traits
 						var mobile = harv.TraitOrDefault<Mobile>();
 						if (mobile != null)
 						{
-							var tcell = nearbyResources.Random(world.LocalRandom);
+							var tcell = nearbyResources.Random(BotRng.For(player));
 							if (mobile.PathFinder.PathMightExistForLocomotorBlockedByImmovable(mobile.Locomotor, harv.Location, tcell))
 							{
 								bot.QueueOrder(new Order("Harvest", harv, Target.FromCell(world, tcell), false));
@@ -448,7 +448,7 @@ namespace OpenRA.Mods.CA.Traits
 						}
 						else
 						{
-							bot.QueueOrder(new Order("Harvest", harv, Target.FromCell(world, nearbyResources.Random(world.LocalRandom)), false));
+							bot.QueueOrder(new Order("Harvest", harv, Target.FromCell(world, nearbyResources.Random(BotRng.For(player))), false));
 							needHarvs--;
 							harvestersCanAssign--;
 							usedHarvs.Add(harv);

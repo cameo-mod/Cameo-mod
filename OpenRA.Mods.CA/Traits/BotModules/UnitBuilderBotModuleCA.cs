@@ -238,7 +238,7 @@ namespace OpenRA.Mods.CA.Traits
 
 				possibleActiveCompositions = compositionsModule.UnitCompositions
 					.Where(c => c != null && !c.IsBaseline &&
-						(c.EnabledChance == 100 || self.World.LocalRandom.Next(100) < c.EnabledChance))
+						(c.EnabledChance == 100 || BotRng.For(player).Next(100) < c.EnabledChance))
 					.ToList();
 
 				nextCompositionSelectTick = GetNextCompositionSelectTick();
@@ -520,7 +520,7 @@ namespace OpenRA.Mods.CA.Traits
 				return deficit;
 
 			var weights = ActiveProductionWeights();
-			var unit = weights.Count > 0 ? ChooseWeighted(buildableThings.ToList(), weights) : buildableThings.Random(world.LocalRandom);
+			var unit = weights.Count > 0 ? ChooseWeighted(buildableThings.ToList(), weights) : buildableThings.Random(BotRng.For(player));
 			return CanBuildMoreOfAircraft(unit) ? unit : null;
 		}
 
@@ -545,9 +545,9 @@ namespace OpenRA.Mods.CA.Traits
 			var weights = candidates.Select(c => LearnedWeightPercent(c, providers)).ToList();
 			var total = weights.Sum();
 			if (total <= 0)
-				return candidates.Random(world.LocalRandom);
+				return candidates.Random(BotRng.For(player));
 
-			var roll = world.LocalRandom.Next(total);
+			var roll = BotRng.For(player).Next(total);
 			for (var i = 0; i < candidates.Count; i++)
 			{
 				roll -= weights[i];
@@ -582,7 +582,7 @@ namespace OpenRA.Mods.CA.Traits
 				.Where(a => a.Owner == player)
 				.Select(a => a.Info.Name).ToList();
 
-			foreach (var unit in unitsToBuildShares.Shuffle(world.LocalRandom))
+			foreach (var unit in unitsToBuildShares.Shuffle(BotRng.For(player)))
 				if (buildableThings.Any(b => b.Name == unit.Key))
 					if (!excludeLimited || Info.UnitLimits == null || !Info.UnitLimits.ContainsKey(unit.Key))
 						if (myUnits.Count(a => a == unit.Key) * 100 < ShareFor(unit.Key, unit.Value) * myUnits.Count)
@@ -658,7 +658,7 @@ namespace OpenRA.Mods.CA.Traits
 				// members that actually relieve this deficit (e.g. a dual-role Orca
 				// fields as fighter, not the gunship share it also belongs to).
 				var relieving = options.Where(b => roles.PrimaryRoleOf(b.Name) == role.Role).ToList();
-				return (relieving.Count > 0 ? relieving : options).Random(world.LocalRandom);
+				return (relieving.Count > 0 ? relieving : options).Random(BotRng.For(player));
 			}
 
 			return null;
@@ -773,7 +773,7 @@ namespace OpenRA.Mods.CA.Traits
 					&& CanProduceAnyUnitInCompositionForEachQueueCategory(c, playerQueues))
 				.ToArray();
 
-			return candidates.Length != 0 ? candidates.Random(world.LocalRandom) : null;
+			return candidates.Length != 0 ? candidates.Random(BotRng.For(player)) : null;
 		}
 
 		bool IsCompositionIntervalValid(UnitComposition composition)
@@ -863,7 +863,7 @@ namespace OpenRA.Mods.CA.Traits
 			if (max < min)
 				max = min;
 
-			var interval = min == max ? min : world.LocalRandom.Next(min, max + 1);
+			var interval = min == max ? min : BotRng.For(player).Next(min, max + 1);
 			return world.WorldTick + interval;
 		}
 

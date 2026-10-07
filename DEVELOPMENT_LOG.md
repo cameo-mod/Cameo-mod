@@ -1,3 +1,59 @@
+# 2026-10-07 — Devin-Architect: BOT-DETERMINISM — seeded per-player bot RNG + wall-clock/hash-order sweep
+
+*Devin-Architect.* Branch `devin/bot-determinism`, worktree `C:\cameo-wt\bot-determinism`,
+on the increment line (`5e45bfc80`). Engine half lives on `cameo-mod/OpenRA`
+`devin/bot-determinism @ 9e35bc96ee` (branched off pin `d5d8b2a6`; teammate
+`01a11068` reports inc pin moved to `0e42ed433d` — lead rebases as needed).
+
+- **Root cause of run-to-run divergence:** every bot-decision draw sat on
+  `World.LocalRandom`, which is process-seeded (no lobby tie-in) AND shared with cosmetic
+  consumers (sound-clip picks, voices, particle variants). Any consumer drawing a varying
+  number of times shifts every later bot pick — same-seed runs diverged at frame 49.
+- **`OpenRA.Mods.CA/BotRng.cs` (new):** `ConditionalWeakTable<Player, MersenneTwister>`,
+  one stream per bot player, seeded `lobbySeed + (PlayerActor.ActorID | ClientIndex + 1) *
+  0x9E3779B9`. `BotRng.For(player)` / `BotRng.For(IBot)`. Same lobby seed => same
+  decisions; different seed => different play; each bot independent.
+- **Mod sweep:** ~95 draw sites across 33 files in `OpenRA.Mods.CA`, `OpenRA.Mods.Cameo`,
+  `OpenRA.Mods.Fransbot` moved to `BotRng` (picks, weighted picks, shuffles, scan-tick
+  offsets, target/resource selection). `SquadCA.Random` now vends the bot stream.
+- **Engine sweep:** `OpenRA.Game/BotRandom.Create(world, player, salt)` + per-module
+  private `MersenneTwister` fields replacing `world.LocalRandom` in the 8 engine modules
+  registered by cameo bots (`McvExpansionManager`, `Minelayer`, `ResourceMap` [Common];
+  `SendUnitToAttack`, `ExternalBotOrdersManager`, `LoadCargo`, `PowerDown`,
+  `SupportPowerDecisionAS` scan draw [AS]). Assembly order (AS first) makes same-name
+  mod-side shadows impossible for AS — hence the engine patch.
+- **Wall-clock removal:** `CameoLobbyAutopilot` settle window converted
+  `Environment.TickCount64` -> server-tick countdown (idle loop ticks ~1s; budget rounds
+  up, preserving the minimum window).
+- **Decision-state GUID removal:** `UnitCompositionsBotModule` composition fallback id
+  `Guid.NewGuid()` -> stable `CompositionFallback{ordinal}` (id keys
+  `compositionLastUsedTickById`).
+- **Terrain seeding:** `CameoRemasterTerrain` PickAny variant layout +
+  `CameoRemasterTileCache` unseeded `MersenneTwister()` -> FNV-1a `StableHash(map.Uid)` /
+  `StableHash(terrainInfo.Id)` (`string.GetHashCode` is process-randomized).
+- **Deliberately unchanged:** all `SharedRandom` sim draws (warheads, spawns, idle turn,
+  HuntCA, Mirage); `BotPersonalityController`'s synced SharedRandom personality grant;
+  cosmetic `LocalRandom` (sound/voice picks, `AnnounceOnDamageState` voice gate,
+  `PlayerPromotions` flavor text); Fransbot `Stopwatch` (diagnostic-only); `CombatVeto`
+  `squad.GetHashCode()` dedup key (intra-process consistency only).
+- **Hash-order audit:** `ActorIndex.Actors` is `HashSet<Actor>`; `Actor.GetHashCode()` =
+  `ActorID` and add/remove sequences are identical across same-seed clients, so
+  enumeration is bit-deterministic — no re-sort applied. `World.Actors` is
+  insertion-ordered.
+
+Gates:
+- build: `dotnet build -c Release -p:TargetPlatform=win-x64` 0 warnings / 0 errors
+- boot-gate: PASS — menu reached (`MenuPostProcessEffect.PostWorldLoaded`), 0 new
+  `exception-*.log` vs 168 pre-existing, no stray processes
+- BOM audit: no file's BOM changed vs HEAD
+- Cameo tests: 1198/1198 PASS
+
+Open items for lead:
+- `mod.config` engine pin bump to a build containing `BotRandom` requires maintainer
+  authorization — `mod.config` untouched. Without it the mod half still compiles/runs;
+  the engine-registered modules keep drawing `LocalRandom` until the pin moves.
+- Same-seed parity re-run (`run_ai_match_batch.py` + `order_trace.py`) awaits
+  Integrator heavy-run window.
 # 2026-10-07 — Devin-Integrator: INTEG-ECON-B — BU_harvester_logistics merged into inc
 
 *Devin-Integrator.* Reviewer APPROVE (2 documented non-blocking deviations D1 P2 /

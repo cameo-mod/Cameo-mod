@@ -48,7 +48,11 @@ namespace OpenRA.Mods.Cameo.ServerTraits
 
 		readonly List<string[]> directives = [];
 		Phase phase = Phase.Idle;
-		long readyAtMs;
+
+		// Deterministic settle: count server ticks, not wall-clock ms, so the
+		// configured->ready/start gap is reproducible under load.
+		long ticks;
+		long readyAtTick;
 		int minClients = 1;
 		int settleMs;
 		bool armed;
@@ -85,6 +89,8 @@ namespace OpenRA.Mods.Cameo.ServerTraits
 
 		void ITick.Tick(S server)
 		{
+			ticks++;
+
 			if (!checkedGate)
 			{
 				checkedGate = true;
@@ -101,12 +107,15 @@ namespace OpenRA.Mods.Cameo.ServerTraits
 					return;
 
 				Execute(server, conns);
-				readyAtMs = Environment.TickCount64 + settleMs + DefaultSettleMs;
+
+				// One server tick is at most ~1s on an idle loop; round the settle
+				// budget up so the gap is at least the old millisecond window.
+				readyAtTick = ticks + Math.Max(1, (settleMs + DefaultSettleMs + 999) / 1000);
 				phase = Phase.Configured;
 				return;
 			}
 
-			if (Environment.TickCount64 < readyAtMs)
+			if (ticks < readyAtTick)
 				return;
 
 			// Every human readies through their own connection - `state` acts on the sender.

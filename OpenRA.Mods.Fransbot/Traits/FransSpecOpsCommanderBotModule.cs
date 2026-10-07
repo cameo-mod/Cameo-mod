@@ -13,6 +13,7 @@ using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Linq;
+using OpenRA.Mods.CA;
 using OpenRA.Mods.Common.Activities;
 using OpenRA.Mods.Common.Pathfinder;
 using OpenRA.Primitives;
@@ -551,11 +552,11 @@ namespace OpenRA.Mods.Common.Traits
 			if (world.Type == WorldType.Editor)
 				return;
 
-			scanTicks = world.LocalRandom.Next(0, Info.ScanInterval);
+			scanTicks = BotRng.For(player).Next(0, Info.ScanInterval);
 			if (Info.EnableDemandDrivenProduction)
-				demandProductionScanTicks = world.LocalRandom.Next(0, Info.DemandProductionScanInterval);
+				demandProductionScanTicks = BotRng.For(player).Next(0, Info.DemandProductionScanInterval);
 			if (Info.EnableStrategicCaptureSecurity)
-				captureSecurityScanTicks = world.LocalRandom.Next(0, Math.Max(1, Info.MinimumCaptureDelay));
+				captureSecurityScanTicks = BotRng.For(player).Next(0, Math.Max(1, Info.MinimumCaptureDelay));
 
 			recoveryReservationsUntil.Clear();
 			ResetRaidLostTargetSearch(false);

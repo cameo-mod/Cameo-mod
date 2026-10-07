@@ -45,6 +45,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using OpenRA.Graphics;
+using OpenRA.Mods.CA;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Traits;
 using CAAIUtils = OpenRA.Mods.CA.AIUtils;
@@ -508,12 +509,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			highGroundBuilding.Clear();
 			highGroundSource.Clear();
 			highGroundCursor = -1;
-			highGroundRefreshTick = world.WorldTick + world.LocalRandom.Next(interval);
+			highGroundRefreshTick = world.WorldTick + BotRng.For(player).Next(interval);
 			highGroundLastBaseRef = null;
 			usefulChokepoints.Clear();
 			usefulBuilding.Clear();
 			usefulCursor = -1;
-			usefulNextRefreshTick = world.WorldTick + world.LocalRandom.Next(interval);
+			usefulNextRefreshTick = world.WorldTick + BotRng.For(player).Next(interval);
 			usefulLastBaseRef = null;
 			usefulLastEnemyCount = -1;
 			sealableCorridors.Clear();
@@ -522,7 +523,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			corridorCursor = -1;
 			corridorLastBaseRef = null;
 			corridorLastEnemyCount = -1;
-			corridorNextRefreshTick = world.WorldTick + world.LocalRandom.Next(interval);
+			corridorNextRefreshTick = world.WorldTick + BotRng.For(player).Next(interval);
 
 			// ZG-b belief caches: territory, doors and region owners were derived against the old cut's
 			// corridors and region ids (and the old fog-memory picture), so they are dropped and rebuilt
@@ -535,9 +536,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			horizon.Clear();
 			territoryLastBaseRef = null;
 			territoryLastEnemyCount = -1;
-			territoryNextRefreshTick = world.WorldTick + world.LocalRandom.Next(interval);
+			territoryNextRefreshTick = world.WorldTick + BotRng.For(player).Next(interval);
 			regionOwners = [];
-			regionOwnershipNextRefreshTick = world.WorldTick + world.LocalRandom.Next(interval);
+			regionOwnershipNextRefreshTick = world.WorldTick + BotRng.For(player).Next(interval);
 		}
 
 		// Adopt a shared topology built by another bot: reference the heavy data, copy the small lists.

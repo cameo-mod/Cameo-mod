@@ -13,6 +13,7 @@ using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Linq;
+using OpenRA.Mods.CA;
 using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Traits;
@@ -68,7 +69,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			: base(info)
 		{
 			world = self.World;
-			repairScanTicks = world.LocalRandom.Next(RepairScanInterval);
+			repairScanTicks = BotRng.For(self.Owner).Next(RepairScanInterval);
 		}
 
 		void IBotNotifyIdleBaseUnits.UpdatedIdleBaseUnits(List<UnitWposWrapper> idleUnits)

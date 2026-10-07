@@ -227,7 +227,7 @@ namespace OpenRA.Mods.CA.Traits
 		public CPos GetRandomBaseCenter()
 		{
 			var randomConstructionYard = ConstructionYardBuildings.Actors.Where(a => !a.IsDead)
-				.RandomOrDefault(world.LocalRandom);
+				.RandomOrDefault(BotRng.For(player));
 
 			return randomConstructionYard?.Location ?? initialBaseCenter;
 		}
@@ -266,7 +266,7 @@ namespace OpenRA.Mods.CA.Traits
 			{
 				var matchingConstructionYard = ConstructionYardBuildings.Actors
 					.Where(a => !a.IsDead && a.Info.Name == conyardType)
-					.RandomOrDefault(world.LocalRandom);
+					.RandomOrDefault(BotRng.For(player));
 
 				if (matchingConstructionYard != null)
 					return matchingConstructionYard.Location;
@@ -463,9 +463,9 @@ namespace OpenRA.Mods.CA.Traits
 			RefreshBotLimits();
 
 			// Avoid all AIs reevaluating assignments on the same tick, randomize their initial evaluation delay.
-			assignRallyPointsTicks = world.LocalRandom.Next(0, Info.AssignRallyPointsInterval);
-			checkBestResourceLocationTicks = world.LocalRandom.Next(0, Info.CheckBestResourceLocationInterval);
-			sellRefineryTick = Info.SellRefineryInterval < 0 ? 0 : world.LocalRandom.Next(0, Info.SellRefineryInterval);
+			assignRallyPointsTicks = BotRng.For(player).Next(0, Info.AssignRallyPointsInterval);
+			checkBestResourceLocationTicks = BotRng.For(player).Next(0, Info.CheckBestResourceLocationInterval);
+			sellRefineryTick = Info.SellRefineryInterval < 0 ? 0 : BotRng.For(player).Next(0, Info.SellRefineryInterval);
 		}
 
 		void IBotPositionsUpdated.UpdatedBaseCenter(CPos newLocation)
@@ -711,7 +711,7 @@ namespace OpenRA.Mods.CA.Traits
 			var inMainBase = (self.CenterPosition - self.World.Map.CenterOfCell(initialBaseCenter)).Length < WDist.FromCells(28).Length;
 			var chanceThreshold = inMainBase ? 95 : 70;
 
-			if (self.World.LocalRandom.Next(100) < chanceThreshold)
+			if (BotRng.For(player).Next(100) < chanceThreshold)
 				return false;
 
 			if (Info.ConstructionYardTypes.Contains(self.Info.Name) && AIUtils.CountActorByCommonName(ConstructionYardBuildings) <= 1)
@@ -778,7 +778,7 @@ namespace OpenRA.Mods.CA.Traits
 				return producer.Location;
 			}
 
-			return possibleRallyPoints.Random(world.LocalRandom);
+			return possibleRallyPoints.Random(BotRng.For(player));
 		}
 
 		Locomotor[] LocomotorsForProducibles(Actor producer)

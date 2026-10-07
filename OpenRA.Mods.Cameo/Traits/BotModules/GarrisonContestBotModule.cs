@@ -13,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using OpenRA.Mods.AS.Traits;
+using OpenRA.Mods.CA;
 using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Traits;
@@ -138,7 +139,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		{
 			world = self.World;
 			player = self.Owner;
-			scanTicks = world.LocalRandom.Next(Info.ScanInterval);
+			scanTicks = BotRng.For(player).Next(Info.ScanInterval);
 		}
 
 		protected override void TraitDisabled(Actor self)

@@ -10,6 +10,7 @@ using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Linq;
+using OpenRA.Mods.CA;
 using OpenRA.Primitives;
 using OpenRA.Traits;
 
@@ -132,7 +133,7 @@ namespace OpenRA.Mods.Common.Traits
 
 		protected override void TraitEnabled(Actor self)
 		{
-			minAssignRoleDelayTicks = world.LocalRandom.Next(0, Info.ScanTick);
+			minAssignRoleDelayTicks = BotRng.For(player).Next(0, Info.ScanTick);
 			alertedTicks = 0;
 			conflictPositionLength = 0;
 			favoritePositionsLength = 0;
@@ -373,7 +374,7 @@ namespace OpenRA.Mods.Common.Traits
 					.ToArray();
 				if (visibleEnemies.Length > 0)
 				{
-					var enemy = visibleEnemies.Random(world.LocalRandom);
+					var enemy = visibleEnemies.Random(BotRng.For(player));
 					target = enemy.Location;
 					source = $"visible enemy {enemy.Info.Name}";
 					return true;
