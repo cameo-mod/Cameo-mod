@@ -73,6 +73,7 @@ anchor validity is enforced separately by `audit_doc_health` (D3/D4).
 | **Running the gates** | [`audit/PERIODIC.md`](audit/PERIODIC.md); [`HANDOFF.md`](HANDOFF.md) §3.0c on exit codes | `bash tools/audit/run_all.sh` (the ONLY sanctioned runner) |
 | **Refactor that must not change behaviour** | — | `tools/audit/dump_resolved.py` — diff must be empty |
 | **Reading yaml from Python** | [`LESSONS_LEARNED.md`](LESSONS_LEARNED.md) "NEVER HAND-PARSE YAML" | `tools/audit/miniyaml.py` — ⛔ `children_named()`, never `child()`, for `@suffixed` traits |
+| **Offline AI learnability registry and learned artifacts** | [`DESIGN.md`](DESIGN.md) §19.2 and §19.13; the fleet LEARN_CATALOG and AI architecture synthesis define the 40 candidates | `tools/ai/learnables.yaml` is the contract; `tools/tests/test_learnables_registry.py` checks coverage, bounds and identity-safe scopes. Existing fitters: `fit_engagement_priors.py`, `fit_arsenal_priors.py`, `tune_build_order.py`, `tune_plan_bandits.py` |
 | **A number quoted in a document** | [`audit/doc_claims.yaml`](audit/doc_claims.yaml) | `tools/audit/audit_doc_claims.py` — update `value` and every listed doc in the SAME commit |
 
 ---
