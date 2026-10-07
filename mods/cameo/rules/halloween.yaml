@@ -862,6 +862,7 @@ halloween_dkghost_small:
 	Armor:
 		Type: Heavy
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: ZClaw1
@@ -945,6 +946,7 @@ halloween_bat:
 	Armor:
 		Type: Heavy
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: halloween_bat_blood
@@ -1277,6 +1279,7 @@ halloween_spider:
 	Power:
 		Amount: -5
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 		ScanRadius: 6
 	Armament:
@@ -1351,6 +1354,7 @@ halloween_clown:
 	Armor:
 		Type: Wood
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: Halloween_ClownBalloon
@@ -1403,6 +1407,7 @@ halloween_clown2:
 	Armor:
 		Type: Wood
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: Halloween_ClownHammer
@@ -1465,6 +1470,7 @@ halloween_clown3:
 	Armor:
 		Type: light
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: halloween_bullethell
@@ -1632,6 +1638,7 @@ halloween_pirateship:
 		Weapon: halloween_pirateshipcannons
 		LocalOffset: 0,0,0
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 5
 	Turreted:
 	AttackTurreted:
@@ -1718,6 +1725,7 @@ halloween_skeleton_archer:
 	Health:
 		HP: 5400
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 6
 	Armament:
 		Weapon: bowFire

@@ -2546,6 +2546,7 @@ susamarine:
 	Health:
 		HP: 12000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 5
 	Armament@PRIMARY:
 		Weapon: SUSAMarineMG
@@ -2926,6 +2927,7 @@ susalittlebird:
 		LocalOffset: 384,293,-85, 384,-293,-85
 	-Armament@rockets:
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	AttackAircraft:
 		FacingTolerance: 60
@@ -3245,6 +3247,7 @@ susabiohazardtech:
 	Health:
 		HP: 12000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 5
 	Armament@PRIMARY:
 		Weapon: SUSAStrykerMedic
@@ -3819,6 +3822,7 @@ susaunstableeffects:
 		Weapon: SuicideBomberTargeting
 		RequiresCondition: !botmicro
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 		ScanRadius: 6
 	RejectsOrders:
@@ -5432,6 +5436,7 @@ susamedivacblackhawk:
 		TargetRelationships: Ally
 		ForceTargetRelationships: None
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	WithRangeCircle@heal:
 		Range: 4c0
@@ -8131,6 +8136,7 @@ sglballoon:
 		PauseOnCondition: chronobeamed
 		RequiresCondition: ifv-miss >= 2
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 5
 	AttackAircraft:
 		FacingTolerance: 80
@@ -8595,6 +8601,7 @@ sglcombatbuggy:
 		RequiresCondition: crew-flash
 	WithMuzzleOverlay:
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStanceAI: Defend
 	Inherits@EXT: ^ExternalConditions
 	AcceptsDeliveredExperience:
@@ -9576,6 +9583,7 @@ sglhip:
 		TurnSpeed: 16
 		Speed: 112
 	AutoTarget:
+		DynamicWeaponPriority: true
 	WithIdleOverlay@ROTORAIR:
 		Sequence: rotor
 		RequiresCondition: airborne
@@ -9827,6 +9835,7 @@ sglgrenadierterror:
 	Health:
 		HP: 12000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Inherits@EXT: ^ExternalConditions
 	Explodes:
@@ -10032,6 +10041,7 @@ sglroach:
 		Weapon: SGLRoachMissiles
 		LocalOffset: 750,0,200
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 10
 	AttackFrontal:
 		TargetFrozenActors: True
@@ -10253,6 +10263,7 @@ sgltopol:
 		ReloadingCondition: reloading
 		LocalOffset: -870,0,1350
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 10
 	AttackFrontal:
 		TargetFrozenActors: True
@@ -10384,6 +10395,7 @@ sglbus:
 	Selectable:
 		Class: glbbus
 	AutoTarget:
+		DynamicWeaponPriority: true
 		AllowMovement: true
 	Turreted:
 		TurnSpeed: 40
@@ -10467,6 +10479,7 @@ sglcamel:
 		Weapon: GLCamelWeapons
 		LocalOffset: 800,-128,208, 800,128,208, 000,-128,208, 000,128,208, -800,-128,208, -800,128,208
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 10
 	AttackFrontal:
 		TargetFrozenActors: True
@@ -11047,6 +11060,7 @@ sglscourge:
 		Count: 1
 		Delay: 125
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 10
 	Explodes:
 		Weapon: V2Explode
@@ -11300,6 +11314,7 @@ sglfrogssm:
 		LoadedCondition: toxammo
 		RequiresCondition: deployed
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 10
 	AttackFrontal:
 		TargetFrozenActors: True
@@ -12792,6 +12807,7 @@ schsiegesoldier:
 	Health:
 		HP: 6500
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 8
 	Armament@AIM:
 		Weapon: SCHSiegeSoldierAim
@@ -13159,6 +13175,7 @@ SCH_EMP_Mig:
 		RepulsionSpeed: 40
 		MaximumPitch: 56
 	AutoTarget:
+		DynamicWeaponPriority: true
 	AmmoPool:
 		Ammo: 4
 		AmmoCondition: ammo
@@ -13265,6 +13282,7 @@ schtiger:
 		Weapon: SCHTigerRockets_AA
 		LocalOffset: 150,213,-120, 150,-213,-120
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 5
 	AttackAircraft:
 		FacingTolerance: 80
@@ -14098,6 +14116,7 @@ schrazerbomber:
 		RepulsionSpeed: 40
 		MaximumPitch: 56
 	AutoTarget:
+		DynamicWeaponPriority: true
 	AmmoPool:
 		Ammo: 8
 		AmmoCondition: ammo
@@ -14212,6 +14231,7 @@ schtransporthelix:
 		RequiresCondition: !airborne
 		Offset: 500,0,40
 	AutoTarget:
+		DynamicWeaponPriority: true
 	AttackAircraft:
 		Armaments: gattling, gattlingaa, primary
 		FacingTolerance: 20
@@ -14961,6 +14981,7 @@ schbattlefortress:
 	RevealOnFire:
 		ArmamentNames: primary, garrisoned
 	AutoTarget:
+		DynamicWeaponPriority: true
 		AllowMovement: true
 	Turreted:
 		TurnSpeed: 40
@@ -15048,6 +15069,7 @@ schassaulthelix:
 		RequiresCondition: !airborne
 		Offset: 500,0,40
 	AutoTarget:
+		DynamicWeaponPriority: true
 	AttackAircraft:
 		Armaments: primary, secondary
 		FacingTolerance: 20

@@ -1223,6 +1223,7 @@ naxis_oldtank:
 	RevealOnFire:
 		ArmamentNames: primary, garrisoned
 	AutoTarget:
+		DynamicWeaponPriority: true
 		AllowMovement: true
 	Selectable:
 		DecorationBounds: 1440, 1440, 0, -128

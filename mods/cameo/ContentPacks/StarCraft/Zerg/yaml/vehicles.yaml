@@ -157,6 +157,7 @@ zerg_hermit:
 	AttackFrontal:
 		FacingTolerance: 0
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 10
 		InitialStance: AttackAnything
 	WithInfantryBody:
@@ -219,6 +220,7 @@ zerg_goremaw:
 	AttackFrontal:
 		FacingTolerance: 0
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 10
 		InitialStance: AttackAnything
 	WithInfantryBody:
@@ -294,6 +296,7 @@ zerg_lurker:
 		DefaultAttackSequence: stand
 		RequiresCondition: undeployed
 	AutoTarget:
+		DynamicWeaponPriority: true
 		# ScanRadius: 12
 		InitialStance: AttackAnything
 		# AllowMovement: false
@@ -303,7 +306,6 @@ zerg_lurker:
 		Weapon: LurkerTargeting
 	-AttackFrontal:
 	Turreted:
-	AttackTurreted:
 	RenderRangeCircle:
 	Crushable:
 		RequiresCondition: undeployed
@@ -340,6 +342,11 @@ zerg_lurker:
 	Armor@deployed:
 		Type: Steel
 		RequiresCondition: !shielded && deployed
+
+	-AttackTurreted:
+	AttackMultiTurreted:
+		Armaments: deployed, dummy
+		Turrets: deploy, dummy
 
 zerg_hatcherydrone:
 	Inherits: ^Vehicle

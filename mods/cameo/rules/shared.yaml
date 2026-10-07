@@ -127,6 +127,7 @@ ForceShieldDrainer:
 		DamageCooldown: 1
 		PercentageStep: 1
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 10
 		InitialStance: AttackAnything
 	GrantConditionOnPrerequisite@upzombiemutate1:

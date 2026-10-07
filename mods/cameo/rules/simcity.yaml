@@ -297,6 +297,7 @@ CITYAMBULANCE:
 		LocalOffset: 250,0,100
 	AttackTurreted:
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 7
 		InitialStance: AttackAnything
 	AutoTargetPriority@DEFAULT:
@@ -1653,6 +1654,7 @@ CITYFIREFIGHTER:
 	Health:
 		HP: 12000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament:
 		Weapon: WaterThrower
@@ -1698,6 +1700,7 @@ CITYPOLICEOFFICER:
 	Health:
 		HP: 6000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	GrantConditionOnPrerequisite@smg:
 		Condition: simcity_smg
@@ -2008,6 +2011,7 @@ CITYSWAT:
 	Armament:
 		Weapon: AngryMobTargeting
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 10
 	WithSpriteBody:
 		Sequence: dot
@@ -2046,6 +2050,7 @@ CITYSWAT1:
 	RevealsShroud:
 		Range: 7c0
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 8
 	Armament@SMG:
 		Weapon: SwatSMG
@@ -2122,6 +2127,7 @@ CITYSWATGL:
 	RevealsShroud:
 		Range: 7c0
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 8
 	Armament@lightsniper:
 		Weapon: SwatSniper

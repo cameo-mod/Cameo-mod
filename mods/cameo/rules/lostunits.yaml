@@ -367,6 +367,7 @@ techgdrone:
 		MuzzleSequence: muzzle
 		PauseOnCondition: !ammo
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	AttackAircraft:
 		FacingTolerance: 80
@@ -1727,6 +1728,7 @@ galagabee:
 		Weapon: GalagaStingTwin
 		LocalOffset: 128,-213,-85, 128,213,-85
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	AttackAircraft:
 		FacingTolerance: 80
@@ -1772,6 +1774,7 @@ galagabutterfly:
 		Weapon: GalagaSting
 		LocalOffset: 128,-213,-85, 128,213,-85
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	AttackAircraft:
 		FacingTolerance: 80
@@ -1816,6 +1819,7 @@ smflamechomp:
 		Weapon: FlameChompFireball
 		LocalOffset: 128,-213,-85, 128,213,-85
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	AttackAircraft:
 		FacingTolerance: 80
@@ -1860,6 +1864,7 @@ smangrysun:
 		Weapon: AngrySunFlames
 		LocalOffset: 128,-213,-85, 128,213,-85
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	AttackAircraft:
 		FacingTolerance: 80
@@ -1889,6 +1894,7 @@ smgoomba:
 	Mobile:
 		Speed: 25 #42
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 5
 	AttackFrontal:
 		FacingTolerance: 0
@@ -1923,6 +1929,7 @@ smgoomba2:
 	Mobile:
 		Speed: 26 #42
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 5
 	AttackFrontal:
 		FacingTolerance: 0
@@ -1958,6 +1965,7 @@ smbeetle:
 	Mobile:
 		Speed: 25 #42
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 5
 	AttackFrontal:
 		FacingTolerance: 0
@@ -1994,6 +2002,7 @@ smkoopa:
 	Mobile:
 		Speed: 25 #42
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 5
 	AttackFrontal:
 		FacingTolerance: 0
@@ -2030,6 +2039,7 @@ smkoopa2:
 	Mobile:
 		Speed: 26 #42
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 5
 	AttackFrontal:
 		FacingTolerance: 0
@@ -2191,6 +2201,7 @@ digdugpooka:
 		Locomotor: subterranean
 		Speed: 71
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 5
 	AttackFrontal:
 		PauseOnCondition: disabled || submerged
@@ -2236,6 +2247,7 @@ digdugfigars:
 		Locomotor: subterranean
 		Speed: 71
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 5
 	AttackFrontal:
 		PauseOnCondition: disabled || submerged

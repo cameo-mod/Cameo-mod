@@ -141,8 +141,6 @@ ts_gdi_cruiser:
 		RecoilRecovery: 35
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-	AttackTurreted:
-		Turrets: primary, secondary, tercera, cuarta, quinta, sexta
 	Selectable:
 		DecorationBounds: 2048, 2048
 	DeliversCash:
@@ -152,6 +150,11 @@ ts_gdi_cruiser:
 	RenderSprites:
 		Image: ts_gdi_cruiser
 		PlayerPalette: player_rgba
+	-AttackTurreted:
+	AttackMultiTurreted:
+		PauseOnCondition: disabled || blinded
+		Turrets: primary, secondary, tercera, cuarta, quinta, sexta
+
 ts_gdi_carrier:
 	Inherits: ^BoatUnit
 	Inherits@Template: ^ArtilleryShipTemplate
@@ -251,8 +254,6 @@ ts_gdi_carrier:
 		InstaRepair: true
 		SlaveDisposalOnKill: KillSlaves
 		SpawnAllAtOnce: false
-	AttackTurreted:
-		Turrets: primary, secondary, tercera, cuarta, quinta
 	Selectable:
 		DecorationBounds: 2048, 2048
 	DeliversCash:
@@ -262,6 +263,11 @@ ts_gdi_carrier:
 	RenderSprites:
 		Image: ts_gdi_carrier
 		PlayerPalette: player_rgba
+
+	-AttackTurreted:
+	AttackMultiTurreted:
+		PauseOnCondition: disabled || blinded
+		Turrets: primary, secondary, tercera, cuarta, quinta
 
 ts_gdi_destroyer:
 	Inherits: ^BoatUnit
@@ -387,6 +393,7 @@ ts_gdi_strike_orca:
 	CarrierSlave:
 		LandingDistance: 8000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStanceAI: AttackAnything
 		InitialStance: AttackAnything
 	HasParent:

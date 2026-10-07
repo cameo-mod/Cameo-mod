@@ -1218,6 +1218,7 @@ ancientvisceroid:
 	Health:
 		HP: 60000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 6
 	Armament@PRIMARY:
 		Weapon: AncientViceroid
@@ -2944,6 +2945,7 @@ mdkkurt:
 	Health:
 		HP: 100000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 12
 	RevealOnFire:
 		ArmamentNames: primary, deployed

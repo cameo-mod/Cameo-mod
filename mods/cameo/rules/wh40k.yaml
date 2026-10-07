@@ -2521,6 +2521,7 @@ wh40kgrenade:
 	Health:
 		HP: 8000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: WH40KGrenadeLauncher
@@ -2620,6 +2621,7 @@ wh40kcommisair:
 		BuildDuration: 150
 		Description: Imperial Guard Main Infantry
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 6
 		InitialStance: AttackAnything
 	Armament@PRIMARY:
@@ -2671,6 +2673,7 @@ wh40kogryn:
 	Armor:
 		Type: None
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: WH40KOgrynPunch
@@ -2756,6 +2759,7 @@ wh40kbigguns:
 	Health:
 		HP: 15000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	RevealOnFire:
 		ArmamentNames: primary, deployed
@@ -2907,6 +2911,7 @@ wh40kkars:
 	Health:
 		HP: 12000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: WH40KKasrkinMG
@@ -3040,6 +3045,7 @@ wh40ktechpriest:
 	Health:
 		HP: 15000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: WH40KTechpriestGun
@@ -3088,6 +3094,7 @@ wh40kpsyker:
 	Health:
 		HP: 15000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 6
 	Armament@PRIMARY:
 		Weapon: WH40KPsykerTesla
@@ -3134,6 +3141,7 @@ wh40kpriest:
 	Health:
 		HP: 25000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: PriestChainsaw
@@ -3207,6 +3215,7 @@ wh40kcommandsquada:
 	Armament:
 		Weapon: AngryMobTargeting
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 6
 	WithSpriteBody:
 		Sequence: dot
@@ -3335,6 +3344,7 @@ wh40kcommandsquad:
 	Health:
 		HP: 77000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: knightslice
@@ -3426,6 +3436,7 @@ wh40kguardsquad:
 	Armament:
 		Weapon: AngryMobTargeting
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 6
 	WithSpriteBody:
 		Sequence: dot
@@ -3894,6 +3905,7 @@ wh40kbasilisk:
 		FacingTolerance: 0
 	WithMuzzleOverlay:
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStanceAI: Defend
 	Explodes:
 		Weapon: ArtilleryShell
@@ -4190,6 +4202,7 @@ wh40kmaurader:
 		Weapon: WH40KSentinelCannon
 		LocalOffset: 768,12,20, 768,-12,20
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 5
 	AttackAircraft:
 		FacingTolerance: 80
@@ -5514,6 +5527,7 @@ wh40kmarine:
 	Armor:
 		Type: Wood
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: WH40KMarineMG
@@ -5673,6 +5687,7 @@ wh40kscout:
 	Health:
 		HP: 8500
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: WH40KMarineMG
@@ -5816,6 +5831,7 @@ wh40kforcecmd:
 	Health:
 		HP: 142000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: knightslice
@@ -5864,6 +5880,7 @@ wh40kchaptain:
 	Health:
 		HP: 142000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: knightslice
@@ -5916,6 +5933,7 @@ wh40klibrarian:
 	Health:
 		HP: 142000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: knightslice
@@ -5966,6 +5984,7 @@ wh40kterminator1:
 	Armor:
 		Type: Heavy
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: WH40KMarineMGG
@@ -6020,6 +6039,7 @@ wh40kterminator2:
 	Armor:
 		Type: Heavy
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: knightslice
@@ -6124,6 +6144,7 @@ wh40kservitor:
 	Health:
 		HP: 15000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	WithInfantryBody:
 		IdleSequences: idle1
@@ -6173,6 +6194,7 @@ wh40kapotecary:
 	Armor:
 		Type: Wood
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: WH40KMarineMG
@@ -6226,6 +6248,7 @@ wh40kgrayknight:
 	Health:
 		HP: 120000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: knightslice
@@ -6712,6 +6735,7 @@ wh40klandspeed2:
 		LocalOffset: 400,-400,300, 400,400,300
 		RequiresCondition: krak
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 5
 	AttackAircraft:
 		FacingTolerance: 80
@@ -8515,6 +8539,7 @@ wh40kgretchin:
 	Health:
 		HP: 3000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 6
 		InitialStance: AttackAnything
 	Armament@PRIMARY:
@@ -8624,6 +8649,7 @@ wh40kslugga:
 	Health:
 		HP: 12500
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: footmanslice
@@ -8733,6 +8759,7 @@ wh40kstormboyz:
 	Health:
 		HP: 12500
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: footmanslice
@@ -8792,6 +8819,7 @@ wh40kburna:
 	Health:
 		HP: 12000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: Flamethrower
@@ -8878,6 +8906,7 @@ wh40kshoota:
 	Health:
 		HP: 12000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: WH40KShootaBoyzGun
@@ -8958,6 +8987,7 @@ wh40knob:
 	Armor:
 		Type: None
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: knightslice
@@ -9042,6 +9072,7 @@ wh40kbigmek:
 	Armor:
 		Type: Wood
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: knightslice
@@ -9121,6 +9152,7 @@ wh40ktankbusta:
 	Health:
 		HP: 12000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: WH40KTankbustaMissile
@@ -9188,6 +9220,7 @@ wh40kflash:
 	Health:
 		HP: 15000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: WH40KOgrynGun
@@ -9260,6 +9293,7 @@ wh40kmaddok:
 	Health:
 		HP: 12500
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: footmanslice
@@ -9355,6 +9389,7 @@ wh40kmeganobz:
 	Armor:
 		Type: Heavy
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: knightslice
@@ -9475,6 +9510,7 @@ wh40kwarboss:
 	Armor:
 		Type: Heavy
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: knightslice
@@ -9577,6 +9613,7 @@ wh40ksluggasquad:
 	Armament:
 		Weapon: AngryMobTargeting
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 6
 	WithSpriteBody:
 		Sequence: dot
@@ -10520,6 +10557,7 @@ wh40kfightabomma:
 		Weapon: WH40KBommaBomb
 		LocalOffset: 768,12,20, 768,-12,20
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 5
 	AttackAircraft:
 		FacingTolerance: 80
@@ -11015,6 +11053,7 @@ wh40khelltalon:
 		LocalOffset: 768,12,20, 768,-12,20
 		RequiresCondition: !lascannonb
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 5
 	AttackAircraft:
 		FacingTolerance: 80
@@ -11136,6 +11175,7 @@ wh40kchaosmarine:
 	Armor:
 		Type: Wood
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: WH40KMarineMG
@@ -11256,6 +11296,7 @@ wh40kcultist:
 	Health:
 		HP: 10200
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: footmanslice
@@ -11414,6 +11455,7 @@ wh40kdemon:
 	Armor:
 		Type: Heavy
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: WH40KDemonFire
@@ -11468,6 +11510,7 @@ wh40kpossessed:
 	Health:
 		HP: 32000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: ZerglingClaw
@@ -11550,6 +11593,7 @@ wh40kheretic:
 	Health:
 		HP: 15000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	WithInfantryBody:
 		IdleSequences: idle1
@@ -11652,6 +11696,7 @@ wh40kraptor:
 	Armor:
 		Type: Wood
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: PriestChainsaw
@@ -11761,6 +11806,7 @@ wh40koliberator:
 	Armor:
 		Type: Heavy
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: knightslice
@@ -11839,6 +11885,7 @@ wh40kbloodthirster:
 	Armor:
 		Type: Heavy
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: WH40KBloodthirsterAxe
@@ -11891,6 +11938,7 @@ wh40kprincedemon:
 	Armor:
 		Type: Heavy
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: WH40KBloodthirsterAxe
@@ -11944,6 +11992,7 @@ wh40ksorcerer:
 	Health:
 		HP: 142000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: knightslice
@@ -11992,6 +12041,7 @@ wh40kchaoslord:
 	Health:
 		HP: 142000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: knightslice
@@ -12045,6 +12095,7 @@ wh40kberserk:
 	Health:
 		HP: 120000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: knightslice
@@ -12117,6 +12168,7 @@ wh40kcultistsquad:
 	Armament:
 		Weapon: AngryMobTargeting
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 6
 	WithSpriteBody:
 		Sequence: dot
@@ -13469,6 +13521,7 @@ wh40kguardian:
 	Armor:
 		Type: None
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: WH40KEldarGuardianRifle
@@ -14076,6 +14129,7 @@ wh40kfirewarrior:
 	Armor:
 		Type: None
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: WH40KTauPlasmarifle
@@ -14141,6 +14195,7 @@ wh40kkroot:
 	Health:
 		HP: 12500
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: footmanslice
@@ -14248,6 +14303,7 @@ wh40kxv15:
 	Armor:
 		Type: None
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: WH40KXV15rifle
@@ -14543,6 +14599,7 @@ wh40kdronesquad:
 	Armament:
 		Weapon: AngryMobTargeting
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 6
 	WithSpriteBody:
 		Sequence: dot

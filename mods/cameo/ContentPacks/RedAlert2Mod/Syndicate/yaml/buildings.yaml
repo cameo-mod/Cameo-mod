@@ -627,6 +627,7 @@ latinsyndicate_latinsentrygun:
 	WithSpriteTurret:
 		RequiresCondition: !build-incomplete
 	AutoTarget:
+		DynamicWeaponPriority: true
 	GrantConditionOnAttack@gatling:
 		RequiresCondition: !rank-elite && latinsyndicate_upgrade_yuristolentechchainguns
 	GrantConditionOnAttack@elitegatling:
@@ -749,6 +750,7 @@ latinsyndicate_smlturret:
 		RequiresCondition: !build-incomplete
 	WithRangeCircle:
 	AutoTarget:
+		DynamicWeaponPriority: true
 	DamageMultiplier@2x2Shape:
 		Modifier: 50
 	Power:
@@ -828,6 +830,7 @@ latinsyndicate_latinaadefender:
 		RequiresCondition: !build-incomplete
 	WithRangeCircle:
 	AutoTarget:
+		DynamicWeaponPriority: true
 	DamageMultiplier@2x2Shape:
 		Modifier: 50
 	Power:

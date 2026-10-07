@@ -374,6 +374,7 @@ ixian_resonancedrone:
 	Shielded:
 		RegenAmount: 20
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 10
 		InitialStance: AttackAnything
 	Armament@repair:

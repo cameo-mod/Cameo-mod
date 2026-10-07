@@ -247,6 +247,7 @@ ra1_allies_mechanic:
 	Voiced:
 		VoiceSet: MechanicVoice
 	AutoTarget:
+		DynamicWeaponPriority: true
 	AutoTargetPriority@DEFAULT:
 		ValidTargets: Vehicle, lockdowned, ivanattached
 	GuardsSelection:
@@ -294,6 +295,7 @@ ra1_allies_raspy:
 		Notification: BuildingInfiltrated
 		PlayerExperience: 50
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: HoldFire
 		InitialStanceAI: HoldFire
 		ScanRadius: 5

@@ -43,6 +43,7 @@ probe_a10_gun:
 	-HasParent:
 	-RejectsOrders:
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: HoldFire
 		InitialStanceAI: HoldFire
 	-ReloadAmmoPool:
@@ -61,6 +62,7 @@ probe_a10_reload:
 	-HasParent:
 	-RejectsOrders:
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: HoldFire
 		InitialStanceAI: HoldFire
 	ExternalCondition@probe_pause:
@@ -74,6 +76,7 @@ probe_a10_bomb:
 	-HasParent:
 	-RejectsOrders:
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: HoldFire
 		InitialStanceAI: HoldFire
 	-ReloadAmmoPool:
@@ -92,6 +95,7 @@ probe_a10_aa:
 	-HasParent:
 	-RejectsOrders:
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: HoldFire
 		InitialStanceAI: HoldFire
 	-ReloadAmmoPool:
@@ -110,6 +114,7 @@ probe_interceptor:
 	-HasParent:
 	-RejectsOrders:
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: HoldFire
 		InitialStanceAI: HoldFire
 	-ReloadAmmoPool:
@@ -146,6 +151,7 @@ probe_interceptor_reload:
 	-HasParent:
 	-RejectsOrders:
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: HoldFire
 		InitialStanceAI: HoldFire
 	RenderSprites:
@@ -157,6 +163,7 @@ probe_japan_reload:
 	-HasParent:
 	-RejectsOrders:
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: HoldFire
 		InitialStanceAI: HoldFire
 

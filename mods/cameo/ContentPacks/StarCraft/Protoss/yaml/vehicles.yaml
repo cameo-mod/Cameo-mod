@@ -22,6 +22,7 @@ protoss_probe:
 	Armament:
 		Weapon: ProbeAttack
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 10
 		InitialStance: AttackAnything
 	AttackFrontal:
@@ -476,6 +477,7 @@ protoss_archon:
 	RevealsShroud:
 		Range: 7c0
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 6
 		InitialStance: AttackAnything
 	Armament:

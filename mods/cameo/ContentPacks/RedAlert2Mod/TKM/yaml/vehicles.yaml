@@ -1147,6 +1147,7 @@ tkm_battlebus:
 	RevealOnFire:
 		ArmamentNames: primary, garrisoned
 	AutoTarget:
+		DynamicWeaponPriority: true
 		AllowMovement: true
 	Voiced:
 		VoiceSet: TSVehicle
@@ -1327,6 +1328,7 @@ tkm_sandmarine:
 	RevealOnFire:
 		ArmamentNames: primary, garrisoned
 	AutoTarget:
+		DynamicWeaponPriority: true
 		AllowMovement: true
 	Selectable:
 		DecorationBounds: 1440, 1440, 0, -128
@@ -1536,6 +1538,7 @@ tkm_bigshiee:
 	RevealOnFire:
 		ArmamentNames: primary, garrisoned
 	AutoTarget:
+		DynamicWeaponPriority: true
 		AllowMovement: true
 	Selectable:
 		DecorationBounds: 1440, 1440, 0, -128

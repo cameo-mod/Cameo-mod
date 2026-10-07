@@ -6407,6 +6407,7 @@ awconvoy:
 	Selectable:
 		Class: glbbus
 	AutoTarget:
+		DynamicWeaponPriority: true
 		AllowMovement: True
 	Turreted:
 		TurnSpeed: 40
@@ -8384,6 +8385,7 @@ awarty:
 	-WithFacingSpriteBody:
 	WithMuzzleOverlay:
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStanceAI: Defend
 	Inherits@EXT: ^ExternalConditions
 	AcceptsDeliveredExperience:
@@ -8503,6 +8505,7 @@ awflare:
 	-WithFacingSpriteBody:
 	WithMuzzleOverlay:
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStanceAI: Defend
 	Inherits@EXT: ^ExternalConditions
 	AcceptsDeliveredExperience:
@@ -8591,6 +8594,7 @@ awaaarty2:
 	-WithFacingSpriteBody:
 	WithMuzzleOverlay:
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStanceAI: Defend
 	Inherits@EXT: ^ExternalConditions
 	AcceptsDeliveredExperience:
@@ -8664,6 +8668,7 @@ awrocketl:
 	-WithFacingSpriteBody:
 	WithMuzzleOverlay:
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStanceAI: Defend
 	Inherits@EXT: ^ExternalConditions
 	AcceptsDeliveredExperience:
@@ -8784,6 +8789,7 @@ awaaarty:
 	-WithFacingSpriteBody:
 	WithMuzzleOverlay:
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStanceAI: Defend
 	Inherits@EXT: ^ExternalConditions
 	AcceptsDeliveredExperience:
@@ -9283,6 +9289,7 @@ awradarvan:
 	Selectable:
 		Class: glbbus
 	AutoTarget:
+		DynamicWeaponPriority: true
 		AllowMovement: True
 	Turreted:
 		TurnSpeed: 40
@@ -9405,6 +9412,7 @@ awsiege:
 	-WithFacingSpriteBody:
 	WithMuzzleOverlay:
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStanceAI: Defend
 	Inherits@EXT: ^ExternalConditions
 	AcceptsDeliveredExperience:
@@ -9759,6 +9767,7 @@ awe1:
 	Health:
 		HP: 6000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: AWMachinegunGeneral
@@ -9804,6 +9813,7 @@ awe1sami:
 	Health:
 		HP: 15000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARYB:
 		Weapon: AWSamiMG
@@ -9933,6 +9943,7 @@ awe3:
 	Health:
 		HP: 6000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: AWMechMissile
@@ -10068,6 +10079,7 @@ awmob:
 	Armament:
 		Weapon: AngryMobTargeting
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 6
 	WithSpriteBody:
 		Sequence: dot
@@ -10178,6 +10190,7 @@ awduster:
 		RepulsionSpeed: 40
 		MaximumPitch: 56
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: HoldFire
 		InitialStanceAI: HoldFire
 	AmmoPool:
@@ -10303,6 +10316,7 @@ awhydro:
 		RepulsionSpeed: 40
 		MaximumPitch: 56
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: HoldFire
 		InitialStanceAI: HoldFire
 	AmmoPool:
@@ -10430,6 +10444,7 @@ awfighter:
 		RepulsionSpeed: 40
 		MaximumPitch: 56
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: HoldFire
 		InitialStanceAI: HoldFire
 	AmmoPool:
@@ -10619,6 +10634,7 @@ awattacker:
 		RepulsionSpeed: 40
 		MaximumPitch: 56
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: HoldFire
 		InitialStanceAI: HoldFire
 	AmmoPool:
@@ -10728,6 +10744,7 @@ awbomber:
 		RepulsionSpeed: 33
 		MaximumPitch: 56
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: HoldFire
 		InitialStanceAI: HoldFire
 	AmmoPool:
@@ -10889,6 +10906,7 @@ awblackbomb:
 		RepulsionSpeed: 40
 		MaximumPitch: 56
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: HoldFire
 		InitialStanceAI: HoldFire
 	AmmoPool:
@@ -10970,6 +10988,7 @@ awstealth:
 		RepulsionSpeed: 40
 		MaximumPitch: 56
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: HoldFire
 		InitialStanceAI: HoldFire
 	AmmoPool:
@@ -11075,6 +11094,7 @@ awbcopter:
 		LocalOffset: 384,213,-85, 384,-213,-85
 		PauseOnCondition: !ammo
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	AttackAircraft:
 		FacingTolerance: 80
@@ -11207,6 +11227,7 @@ awkirov:
 		LocalOffset: 384,213,-85, 384,-213,-85
 		PauseOnCondition: !ammo
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	AttackAircraft:
 		FacingTolerance: 80
@@ -11894,6 +11915,7 @@ awpiperunner:
 		LocalOffset: 384,213,-85, 384,-213,-85
 		PauseOnCondition: !ammo
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	AttackAircraft:
 		FacingTolerance: 80
