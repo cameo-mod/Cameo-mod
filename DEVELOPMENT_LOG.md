@@ -1,3 +1,41 @@
+# 2026-10-07 — Devin-Integrator: INTEG-REGREEN-R1 — pre-R16 missile profile refresh merged into inc
+
+*Devin-Integrator.* Reviewer APPROVE. Branch `integ/garrison-2026-10-06` (continued),
+worktree `C:\cameo-wt\integ-garrison`: inc `6bb8818e8` + `codex/regreen-r1@a716cb6dc`
+(`1832a4c64` refresh pre-R16 missile profiles on 27 weapons + `a716cb6dc` reconcile
+missile history contract). Merge applied with zero conflicts.
+
+Semantic reconciliation required beyond the clean textual merge:
+
+- The R1 contract (`test_missile_role_policy` + `test_projectile_role_bulk_profile`,
+  95 records) asserts each recorded refresh changed only the main warhead. On the
+  missile-feel tree the whole checkpoint cohort failed (78 failures): missile-feel had
+  changed non-warhead fields and AA templates the records pin.
+- Fixtures rebased the same way as the E2 repin `0d5cfc14a` (live payloads with
+  preserved mains verbatim, digests repinned); thin variant shells fold the live
+  authored node.
+- `RA2HoverMissile_AA(_elite)` / `RA2MultiHoverMissile_AA(_elite)`: authored
+  `-Versus:`/`-PercentageVersus:` cancellation inside `Warhead@MissileAA_Light` so the
+  R1-reviewed 20-key ladders replace (not map-merge into) the new
+  `^Warhead_MissileAA_Light` template rows — otherwise the resolved warhead leaked
+  AntiAir*/Ship*/Cyborg* classes the refresh deliberately removed.
+
+Gates:
+
+- build: 0 errors (Release, win-x64)
+- role-policy contract: 10 passed + 77 subtests — identical to reviewer baseline
+- consumer-set regression check vs pre-merge inc baseline `6bb8818e8`: identical
+  failure sets (34 failed both sides — pre-existing missile-feel-era fixture
+  staleness in sonic/heaviness/owned-names lanes, out of R1 scope, likely R2/R3);
+  0 new failures, 78 fixed
+- conflict-marker test: PASS
+- BOOT_GATE: PASS (isolated support dir, menu marker, package in worktree, 0 exceptions)
+
+Known debt (flagged to lead): the 34 stale historical-view fixtures predate this
+merge (visible identically on inc baseline) — `sonic_family`/`later_profile`/
+`owned_checkpoint`/`heaviness golden` `current`-payload repins are owed to
+missile-feel reconciliation (REGREEN-R2/R3 territory, not this task's scope).
+
 # 2026-10-06 — Devin-Integrator: INTEG-GARRISON — garrison fire-ports + missile-feel merged into inc
 
 *Devin-Integrator.* Maintainer-approved merge (both playtests passed 2026-10-06).
