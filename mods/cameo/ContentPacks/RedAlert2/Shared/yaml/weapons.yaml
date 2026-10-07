@@ -1400,6 +1400,8 @@ RA2HoverMissile_AA:
 		ContrailEndWidth: 1
 		VerticalRateOfTurn: 20
 	Warhead@MissileAA_Light: AreaDamage
+		-Versus:
+		-PercentageVersus:
 		Versus:
 			None: 36
 			Light: 121
@@ -1470,6 +1472,8 @@ RA2HoverMissile_AA_elite:
 	Projectile: Missile
 		VerticalRateOfTurn: 20
 	Warhead@MissileAA_Light: AreaDamage
+		-Versus:
+		-PercentageVersus:
 		Versus:
 			None: 36
 			Light: 121
@@ -2134,6 +2138,8 @@ RA2MultiHoverMissile_AA:
 	ValidTargets: Air
 	TargetActorCenter: true
 	Warhead@MissileAA_Light: AreaDamage
+		-Versus:
+		-PercentageVersus:
 		Versus:
 			None: 36
 			Light: 121
@@ -2200,6 +2206,8 @@ RA2MultiHoverMissile_AA_elite:
 	Projectile: Missile
 		VerticalRateOfTurn: 12
 	Warhead@MissileAA_Light: AreaDamage
+		-Versus:
+		-PercentageVersus:
 		Versus:
 			None: 36
 			Light: 121
