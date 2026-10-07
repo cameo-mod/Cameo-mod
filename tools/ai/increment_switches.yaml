@@ -257,3 +257,6 @@ groups:
     SquadManagerBotModuleCA:
       UseProtectionRallyDedup: true
       ProtectionRallyHysteresisCells: 4
+  BU_harvester_logistics:            # ECON-B (SPEC_2026-10-05_econ_logistics Part B): refinery-served fields keep a spreader-sized reservation; surplus harvesters re-route only over threat-free corridors (remembered threat + enemy indice counts) under a Harvest lease; production requests fire only when the pool cannot cover demand. @generic only — @classic keeps the per-refinery count and cap-push, bit-identical
+    HarvesterBotModuleCA@generic:
+      UseHarvesterLogistics: true

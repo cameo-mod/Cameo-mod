@@ -19705,3 +19705,35 @@ Branch devin/tier4/pricing-default, task 01a10850 (maintainer ruling 2026-10-04)
 * Crash note: machine lost ~00:05 mid-gate; worktree survived intact. fsck reports
   missing objects in the shared store — unreachable crash debris only, verified clean
   from refs; lead confirmed no repair needed.
+
+## 2026-10-06 — Devin-Architect: ECON-B `BU_harvester_logistics` (SPEC_2026-10-05_econ_logistics Part B)
+
+* One owner, extended not forked: `HarvesterBotModuleCA` keeps the classic path verbatim behind
+  `UseHarvesterLogistics` (default false); switch `BU_harvester_logistics` arms it on
+  `HarvesterBotModuleCA@generic` only, @classic untouched.
+* Reservations (B1): refinery-served fields keep `ceil(cells/ResourceCellsPerHarvester)` clamped to
+  `MaxHarvestersPerResourceIndice` (pure helper `HarvesterLogistics.Reservation`). Shared pool (B2):
+  per indice, units beyond the reservation, indice order then lowest ActorID.
+* Safe routes (B3): candidate probe = `FindPathToTargetCells`, then every
+  `LogisticsRouteSampleCells`-strided cell must satisfy `MergedThreatAt == 0` (remembered, fog-honest)
+  and no `EnemyBaseCount`/`EnemyUnitCount`/`GetNearbyIndicesThreat` on the traversed indices;
+  reservation deficits bypass the churn margin, attraction moves need `LogisticsReassignMarginPercent`.
+* Leases (B4): re-routed units hold `BotLeasePurpose.Harvest` for `LogisticsReassignCooldownTicks`
+  (new enum member); `HarvestIfAble`/`RespondToAttack` yield while `IsClaimedByOther`; pre-empted
+  units are marked evacuated via `IBotUnitLeaseLost` and re-enter the pool when free.
+* Production (B6): request fires only when `numHarvesters < refineries` (unmet minimum) or the last
+  rebalance left shortfall — the pool provably cannot cover demand; BotLimits/ScaleTargets unchanged.
+* Determinism: integer-only math, no new LocalRandom; target cells ordered by distance then X,Y;
+  pool order indice-index then ActorID.
+* Verify on b6f522e78: Release build 0W/0E; `HarvesterLogisticsTest` 4/4; adjacent suite (Harvester/
+  Lease/Ownership/Spread/Fog filters) 63/63; `audit_fog_honesty` PASS (82 files/266 sites);
+  `audit_bot_direct_mutation` PASS; `ai_module_map --write` regenerated (new IBotUnitLeaseLost impl +
+  IBotRegionThreatProvider consumer rows); `apply_increment_switches --dry-run` arms
+  `UseHarvesterLogistics: true` on @generic only.
+* Boot: `BOOT_GATE=PASS` — menu reached (`MenuPostProcessEffect.PostWorldLoaded`), isolated support
+  dir, zero new exceptions. NOTE: `OpenRA.exe` apphost exits -1 on this host (also pre-change);
+  the gate ran `dotnet OpenRA.dll` (same Main, same assemblies, isolated SupportDir) to evidence
+  boot. `OpenRA.Utility.exe` runs normally — host-layer issue, not mod content.
+* ECON-A touch points (NOTE_2026-10-06_econ_a_econ_b_touchpoints.md): used NEW lease purpose
+  `Harvest` (never McvExpansion) per their guidance; BU does not attach to ExpansionDemand —
+  no seam change needed; shared file increment_switches.yaml appended `BU_harvester_logistics` at tail.
