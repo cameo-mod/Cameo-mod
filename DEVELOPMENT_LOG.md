@@ -1,3 +1,29 @@
+# 2026-10-08 — Devin-Architect: comparator R4/R5 repair (review round 2)
+
+*Devin-Architect.* Bounded re-review found two real defects in `order_stream_diff.py`
+at `edd956b20`; both fixed and regression-tested:
+
+- **R4 — dropped `flags`**: canonical order tuples omitted the raw i16 flags, so
+  orders differing only in `Queued` (0x08) or `TargetIsCell` (0x40) compared equal.
+  Flags now preserved byte-exact in every `('O', order, flags, ...)` tuple.
+  Regression: queued-vs-unqueued AttackMove pair → DIVERGENT.
+- **R5 — discarded tails**: bytes after the last parseable order in a packet were
+  silently dropped, so a valid-order + unknown-tail packet canonicalized identical
+  to one without. Now: unknown order types, unknown flag bits (>0x1FF), unknown
+  target types, and any field overrun all emit `('UNPARSED', tailhex)` records —
+  preserved byte-exact in the comparison AND counted. Any unparsed tail downgrades
+  the verdict to `UNPARSED_TAILS` (exit 3, fail closed — byte-equal opaque bytes
+  cannot attest semantic identity). DIVERGENT still wins when content genuinely
+  differs (exit 1); `IDENTICAL`/`IDENTICAL_TAIL_FLUSH` only when fully parsed.
+- Field reads are now bounds-checked (`read_str` overruns, negative counts,
+  target/extra/grouped overruns → UNPARSED instead of misaligned decode).
+
+Verification: `tools/tests/test_order_stream_diff.py` — 7/7 pass covering both
+regressions and all four verdicts. Real replays: fixed-engine pair →
+IDENTICAL_TAIL_FLUSH (no unparsed tails — real packets parse fully);
+pre-fix pair → DIVERGENT at frame 16 now showing flags
+(`Move` 0xC9, `DeployTransform` 0x88).
+
 # 2026-10-08 — Devin-Architect: BASE==BASE parity proof — root cause found and verified
 
 *Devin-Architect.* Two same-seed (`CAMEO_DEV_SEED=1337`) hard-vs-hard td_gdi matches on

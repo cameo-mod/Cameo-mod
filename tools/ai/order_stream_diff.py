@@ -11,8 +11,18 @@
 # runs even when every decision is identical:
 #   GlobalSettings.GameUid  (Guid.NewGuid per launch, Server.cs ctor)
 #   Handshake AuthToken / AuthSignature (per-launch auth challenge)
-# Everything else — every order byte, subject, target, extra field, sync-hash
-# payload — must match byte-for-byte in the same order for the runs to pass.
+# Everything else — every order byte including the raw i16 flags (Queued /
+# TargetIsCell carry no field payload), subject, target, extra field,
+# sync-hash payload — must match for the runs to pass.
+#
+# Comparison is per-frame record multiset: order packets and sync-hash packets
+# flush on separate channels, so packet interleaving and the exit-tail cutoff
+# are recording artifacts, not gameplay. Unknown or malformed packet bytes are
+# preserved byte-exact in the canonical record AND counted — any unparsed tail
+# downgrades the verdict to UNPARSED_TAILS (fail closed; exit 3).
+#
+# Verdicts: IDENTICAL (0) / IDENTICAL_TAIL_FLUSH (0) / DIVERGENT (1) /
+# UNPARSED_TAILS (3) / usage error (2).
 #
 # Usage:
 #   order_stream_diff.py A.orarep B.orarep [--pregame] [--ignore-client]
@@ -44,74 +54,117 @@ def read_str(b, p):
     return s, p + ln
 
 
+KNOWN_ORDER_FLAGS = 0x1FF  # Target|ExtraActors|TargetString|Queued|ExtraLocation|ExtraData|TargetIsCell|Subject|Grouped
+
+
 def parse_orders(pkt):
-    """Yield canonical tuples for the Field/Handshake orders in one packet."""
+    """Canonical tuples for the Field/Handshake orders in one packet.
+
+    Every order tuple preserves the raw i16 flags (Queued 0x08 / TargetIsCell
+    0x40 carry no field payload but are semantically significant) and every
+    consumed field byte. Anything the parser cannot consume — an unknown order
+    type, unknown flag bits, or a field that would run past the packet — is
+    emitted as an ('UNPARSED', hex) record carrying the remaining bytes, so the
+    comparison never silently discards payload.
+    Returns (orders, unparsed_tail_count).
+    """
     p = 4
     out = []
+    unparsed = 0
     while p < len(pkt):
         t = pkt[p]
-        p += 1
         if t == ORDER_HANDSHAKE:
-            name, p = read_str(pkt, p)
-            target, p = read_str(pkt, p)
+            p += 1
+            start = p
+            try:
+                name, p = read_str(pkt, p)
+                target, p = read_str(pkt, p)
+            except IndexError:
+                out.append(('UNPARSED', pkt[start - 1:].hex()))
+                unparsed += 1
+                break
             out.append(('HS', name, PER_LAUNCH_FIELDS.sub(r'\1<NORM>', target)))
             continue
         if t != ORDER_FIELDS:
+            out.append(('UNPARSED', pkt[p:].hex()))
+            unparsed += 1
             break
-        order, p = read_str(pkt, p)
-        flags, = struct.unpack_from('<h', pkt, p)
-        p += 2
-        subject = None
-        if flags & 0x80:
-            subject, = struct.unpack_from('<I', pkt, p)
-            p += 4
-        target_hex = ''
-        if flags & 0x01:
-            start = p
-            tt = pkt[p]
-            p += 1
-            if tt in (0, 1):      # Actor u32+i32 / FrozenActor u32+u32
-                p += 8
-            elif tt == 2:         # Terrain
-                if flags & 0x40:  # TargetIsCell: i32 + u8
-                    p += 5
+        p += 1
+        order_start = p - 1
+        try:
+            order, p = read_str(pkt, p)
+            flags, = struct.unpack_from('<h', pkt, p)
+            p += 2
+            if flags & ~KNOWN_ORDER_FLAGS:
+                raise ValueError('unknown flag bits')
+            subject = None
+            if flags & 0x80:
+                subject, = struct.unpack_from('<I', pkt, p)
+                p += 4
+            target_hex = ''
+            if flags & 0x01:
+                start = p
+                tt = pkt[p]
+                p += 1
+                if tt in (0, 1):      # Actor u32+i32 / FrozenActor u32+u32
+                    p += 8
+                elif tt == 2:         # Terrain
+                    if flags & 0x40:  # TargetIsCell: i32 + u8
+                        p += 5
+                    else:
+                        p += 12
+                        n, = struct.unpack_from('<h', pkt, p)
+                        p += 2
+                        if n < -1:
+                            raise ValueError('bad terrain count')
+                        if n != -1:
+                            p += 12 * n
                 else:
-                    p += 12
-                    n, = struct.unpack_from('<h', pkt, p)
-                    p += 2
-                    if n != -1:
-                        p += 12 * n
-            target_hex = pkt[start:p].hex()
-        target_string = None
-        if flags & 0x04:
-            target_string, p = read_str(pkt, p)
-            target_string = PER_LAUNCH_FIELDS.sub(r'\1<NORM>', target_string)
-        extra_hex = ''
-        start = p
-        if flags & 0x02:          # ExtraActors: i32 n + n u32
-            n, = struct.unpack_from('<i', pkt, p)
-            p += 4 + 4 * n
-        if flags & 0x10:          # ExtraLocation: i32
-            p += 4
-        if flags & 0x20:          # ExtraData: i32
-            p += 4
-        extra_hex = pkt[start:p].hex()
-        grouped_hex = ''
-        if flags & 0x100:
-            n, = struct.unpack_from('<i', pkt, p)
-            p += 4
-            grouped_hex = pkt[p:p + 4 * n].hex()
-            p += 4 * n
-        out.append(('O', order, subject, target_hex, target_string,
+                    raise ValueError('unknown target type')
+                if p > len(pkt):
+                    raise ValueError('target overrun')
+                target_hex = pkt[start:p].hex()
+            target_string = None
+            if flags & 0x04:
+                target_string, p = read_str(pkt, p)
+                target_string = PER_LAUNCH_FIELDS.sub(r'\1<NORM>', target_string)
+            extra_hex = ''
+            start = p
+            if flags & 0x02:          # ExtraActors: i32 n + n u32
+                n, = struct.unpack_from('<i', pkt, p)
+                if n < 0:
+                    raise ValueError('bad extras count')
+                p += 4 + 4 * n
+            if flags & 0x10:          # ExtraLocation: i32
+                p += 4
+            if flags & 0x20:          # ExtraData: i32
+                p += 4
+            if p > len(pkt):
+                raise ValueError('extras overrun')
+            extra_hex = pkt[start:p].hex()
+            grouped_hex = ''
+            if flags & 0x100:
+                n, = struct.unpack_from('<i', pkt, p)
+                if n < 0 or p + 4 + 4 * n > len(pkt):
+                    raise ValueError('bad grouped count')
+                p += 4
+                grouped_hex = pkt[p:p + 4 * n].hex()
+                p += 4 * n
+        except (IndexError, ValueError, struct.error):
+            out.append(('UNPARSED', pkt[order_start:].hex()))
+            unparsed += 1
+            break
+        out.append(('O', order, flags, subject, target_hex, target_string,
                     extra_hex, grouped_hex))
-    return out
+    return out, unparsed
 
 
 def extract(path, pregame, ignore_client, ignore_synchash):
-    """Return the canonical record list for one .orarep file."""
+    """Return (canonical records, unparsed_tail_count) for one .orarep file."""
     with open(path, 'rb') as f:
         data = f.read()
     records = []
+    unparsed = 0
     p = 0
     while p < len(data):
         client, = struct.unpack_from('<i', data, p)
@@ -135,12 +188,13 @@ def extract(path, pregame, ignore_client, ignore_synchash):
         if len(pkt) > 4 and pkt[4] == PKT_DISCONNECT:
             records.append(head + (frame, 'DISCONNECT', pkt[4:].hex()))
             continue
-        orders = parse_orders(pkt)
+        orders, tails = parse_orders(pkt)
+        unparsed += tails
         if orders:
             records.append(head + (frame, 'ORDERS', tuple(orders)))
         elif len(pkt) > 4:
             records.append(head + (frame, 'OTHER', pkt[4:].hex()))
-    return records
+    return records, unparsed
 
 
 def describe(rec):
@@ -209,18 +263,35 @@ def main(argv):
     ignore_synchash = '--ignore-synchash' in flags
     want_json = '--json' in flags
 
-    streams = {path: extract(path, pregame, ignore_client, ignore_synchash)
-               for path in args}
+    streams = {}
+    tails = {}
+    for path in args:
+        recs, tail_count = extract(path, pregame, ignore_client, ignore_synchash)
+        streams[path] = recs
+        tails[path] = tail_count
     digests = {path: hashlib.sha256(repr(recs).encode()).hexdigest()[:16]
                for path, recs in streams.items()}
 
     a, b = args
     ra, rb = streams[a], streams[b]
     result = {'records': {a: len(ra), b: len(rb)},
+              'unparsed_tails': tails,
               'sha256_16': digests}
 
     fmd = frame_multiset_diff(ra, rb)
+    tail_note = (f"; unparsed packet tails: {tails[a]}/{tails[b]}"
+                 if tails[a] or tails[b] else "")
     if fmd is None:
+        if tails[a] or tails[b]:
+            # Fail closed: the bytes were preserved in the comparison but their
+            # semantics are unknown, so never yield IDENTICAL.
+            result['verdict'] = 'UNPARSED_TAILS'
+            print(f"UNPARSED_TAILS — {tails[a]}/{tails[b]} packet(s) carried "
+                  f"bytes the parser could not consume; byte-identical but "
+                  f"semantic identity not provable.")
+            if want_json:
+                print(json.dumps(result))
+            return 3
         result['verdict'] = 'IDENTICAL'
         print(f"IDENTICAL — {len(ra)}/{len(rb)} canonical records, same "
               f"per-frame order+sync content, sha256/16 {digests[a]}")
@@ -229,7 +300,7 @@ def main(argv):
         return 0
 
     first_frame, only_a, only_b, trailing = fmd
-    if trailing:
+    if trailing and not (tails[a] or tails[b]):
         result['verdict'] = 'IDENTICAL_TAIL_FLUSH'
         result['tail_flush_frame'] = first_frame
         print(f"IDENTICAL (tail flush) — orders+syncs equal for all shared "
@@ -242,6 +313,14 @@ def main(argv):
         if want_json:
             print(json.dumps(result))
         return 0
+
+    if trailing:
+        result['verdict'] = 'UNPARSED_TAILS'
+        print(f"UNPARSED_TAILS — {tails[a]}/{tails[b]} packet(s) carried bytes "
+              f"the parser could not consume; semantic identity not provable.")
+        if want_json:
+            print(json.dumps(result))
+        return 3
 
     result['verdict'] = 'DIVERGENT'
     result['first_diff_frame'] = first_frame
