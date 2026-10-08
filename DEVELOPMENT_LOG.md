@@ -1,6 +1,7 @@
 # 2026-10-07 — Devin-Architect: BOT-DETERMINISM — seeded per-player bot RNG + wall-clock/hash-order sweep
 
-*Devin-Architect.* Branch `devin/bot-determinism`, worktree `C:\cameo-wt\bot-determinism`,
+*Devin-Architect.* Branch `devin/bot-determinism` @ `c9db891e9` (two commits: `624f5b27d`
+RNG sweep + `c9db891e9` hash-order pass), worktree `C:\cameo-wt\bot-determinism`,
 on the increment line (`5e45bfc80`). Engine half lives on `cameo-mod/OpenRA`
 `devin/bot-determinism @ 9e35bc96ee` (branched off pin `d5d8b2a6`; teammate
 `01a11068` reports inc pin moved to `0e42ed433d` — lead rebases as needed).
@@ -36,10 +37,19 @@ on the increment line (`5e45bfc80`). Engine half lives on `cameo-mod/OpenRA`
   cosmetic `LocalRandom` (sound/voice picks, `AnnounceOnDamageState` voice gate,
   `PlayerPromotions` flavor text); Fransbot `Stopwatch` (diagnostic-only); `CombatVeto`
   `squad.GetHashCode()` dedup key (intra-process consistency only).
-- **Hash-order audit:** `ActorIndex.Actors` is `HashSet<Actor>`; `Actor.GetHashCode()` =
-  `ActorID` and add/remove sequences are identical across same-seed clients, so
-  enumeration is bit-deterministic — no re-sort applied. `World.Actors` is
-  insertion-ordered.
+- **Hash-order pass (commit 2, `c9db891e9`):** `ActorIndex.Actors` is `HashSet<Actor>`
+  (hash layout is an implementation detail); every order-sensitive consumer now sorts by
+  `ActorID`: RNG pick sites, `FirstOrDefault`/`MinByOrDefault`/`ClosestTo*`/`foreach`
+  order dependencies in `BaseBuilderBotModuleCA`, `SquadManagerBotModuleCA`
+  (`OwnBaseBuildings` too), `BaseBuilderQueueManagerCA`, `AirStatesCA`
+  (`WaitingUnits` broadcast), `FransUnitBuilder` (3 `allUnits` snapshots),
+  `FransMcvExpansionManager` (`LiveMcvs` iterator), `FransSpecOps` (specialist pick),
+  plus `FrozenDictionary BuildingFractions` / `Dictionary unitsToBuildShares` key-sorted
+  before `Shuffle`. Verified already-deterministic and left alone: `World.Actors`
+  (`SortedDictionary` by ActorID), `ActorsWithTrait`/`ActorsHavingTrait` (`TraitContainer`
+  keeps a binary-search-inserted `List<Actor>` — ActorID-sorted), Fransbot's ~25 existing
+  `OrderBy(ActorID)` sites, `.Any`/`.Count`/`.Sum` aggregations, single-ActorID filters,
+  full-tiebreak collect-then-sort picks, `Rules.Actors` (load-order stable).
 
 Gates:
 - build: `dotnet build -c Release -p:TargetPlatform=win-x64` 0 warnings / 0 errors
