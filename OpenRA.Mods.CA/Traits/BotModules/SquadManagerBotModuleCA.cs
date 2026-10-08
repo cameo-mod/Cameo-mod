@@ -698,11 +698,11 @@ namespace OpenRA.Mods.CA.Traits
 		const float SquadValueRampDurationTicks = 20f * 60f * 25f; // Assumes the default 25 ticks per second.
 
 		// CA F2p2 (2bad89a77): own base buildings for route planning, from the construction yard index (no world scan).
-		public IEnumerable<Actor> OwnBaseBuildings => constructionYardBuildings.Actors;
+		public IEnumerable<Actor> OwnBaseBuildings => constructionYardBuildings.Actors.OrderBy(a => a.ActorID);
 
 		public CPos GetRandomBaseCenter()
 		{
-			var randomConstructionYard = constructionYardBuildings.Actors.RandomOrDefault(BotRng.For(Player));
+			var randomConstructionYard = constructionYardBuildings.Actors.OrderBy(a => a.ActorID).RandomOrDefault(BotRng.For(Player));
 
 			return randomConstructionYard?.Location ?? initialBaseCenter;
 		}

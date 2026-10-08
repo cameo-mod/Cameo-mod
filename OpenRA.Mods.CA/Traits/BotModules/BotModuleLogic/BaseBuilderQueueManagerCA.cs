@@ -140,6 +140,7 @@ namespace OpenRA.Mods.CA.Traits
 					{
 						var stuckConyard = baseBuilder.ConstructionYardBuildings.Actors
 							.Where(a => (a.Location - baseCenterKeepsFailing.Value).LengthSquared <= baseBuilder.Info.MaxBaseRadius * baseBuilder.Info.MaxBaseRadius)
+							.OrderBy(a => a.ActorID)
 							.MinByOrDefault(a => (a.Location - baseCenterKeepsFailing.Value).LengthSquared);
 
 						if (stuckConyard != null)
@@ -870,7 +871,7 @@ namespace OpenRA.Mods.CA.Traits
 			}
 
 			// Build everything else
-			foreach (var frac in baseBuilder.Info.BuildingFractions.Shuffle(BotRng.For(player)))
+			foreach (var frac in baseBuilder.Info.BuildingFractions.OrderBy(kv => kv.Key).Shuffle(BotRng.For(player)))
 			{
 				var name = frac.Key;
 
@@ -1353,7 +1354,7 @@ namespace OpenRA.Mods.CA.Traits
 
 						// Find the closest refinery we have if we have any when not failing to place for the first time
 						var closestRefinery = failCount <= 0
-							? baseBuilder.RefineryBuildings.Actors.Where(a => !a.IsDead)?.ClosestToIgnoringPath(world.Map.CenterOfCell(resourceBaseCenter))
+							? baseBuilder.RefineryBuildings.Actors.Where(a => !a.IsDead).OrderBy(a => a.ActorID).ClosestToIgnoringPath(world.Map.CenterOfCell(resourceBaseCenter))
 							: null;
 
 						IEnumerable<CPos> resourcesShouldCheck = null;

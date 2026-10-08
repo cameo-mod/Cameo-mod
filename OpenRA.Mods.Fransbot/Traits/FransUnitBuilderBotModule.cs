@@ -990,7 +990,7 @@ namespace OpenRA.Mods.Common.Traits
 		{
 			// Build the owned-unit snapshot once for this whole throughput-probe pass instead of
 			// rescanning ActorIndex separately for every individual production queue.
-			var allUnits = unitsToBuild.Actors.Where(a => !a.IsDead).ToArray();
+			var allUnits = unitsToBuild.Actors.Where(a => !a.IsDead).OrderBy(a => a.ActorID).ToArray();
 
 			foreach (var category in Info.UnitQueues)
 			{
@@ -1189,7 +1189,7 @@ namespace OpenRA.Mods.Common.Traits
 			if (live + queued >= Info.EconomicEmergencyMinimumAirCombatReserve)
 				return false;
 
-			var allUnits = unitsToBuild.Actors.Where(a => !a.IsDead).ToArray();
+			var allUnits = unitsToBuild.Actors.Where(a => !a.IsDead).OrderBy(a => a.ActorID).ToArray();
 			foreach (var category in QueueDomains.Air)
 				foreach (var queue in queuesByCategory[category].Where(IsFreeUsableQueue).OrderByDescending(q => q.Actor.ActorID))
 				{
@@ -1540,7 +1540,7 @@ namespace OpenRA.Mods.Common.Traits
 		ActorInfo ChooseRandomUnitToBuild(ProductionQueue queue)
 		{
 			return ChooseRandomUnitToBuild(queue,
-				unitsToBuild.Actors.Where(a => !a.IsDead).ToArray(),
+				unitsToBuild.Actors.Where(a => !a.IsDead).OrderBy(a => a.ActorID).ToArray(),
 				ignorePositiveUnitLimits: false);
 		}
 

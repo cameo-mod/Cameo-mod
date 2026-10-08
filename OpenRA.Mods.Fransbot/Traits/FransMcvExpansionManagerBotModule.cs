@@ -3157,7 +3157,7 @@ namespace OpenRA.Mods.Common.Traits
 			// Cargo manifests. One ActorID is yielded once even if an engine/index transition makes
 			// the same MCV visible through both sources for a frame.
 			var seen = new HashSet<uint>();
-			foreach (var mcv in mcvs.Actors)
+			foreach (var mcv in mcvs.Actors.OrderBy(a => a.ActorID))
 				if (IsLiveOwnedMcv(mcv) && seen.Add(mcv.ActorID))
 					yield return mcv;
 

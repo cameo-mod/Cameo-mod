@@ -2308,6 +2308,7 @@ namespace OpenRA.Mods.Common.Traits
 				return;
 
 			var referenceSpecialist = managedActors.Actors
+				.OrderBy(a => a.ActorID)
 				.FirstOrDefault(a => a.IsInWorld && !a.IsDead && a.Info.Name == actorType);
 
 			var safeDemandTargets = CountSafeDemandTargets(referenceSpecialist);

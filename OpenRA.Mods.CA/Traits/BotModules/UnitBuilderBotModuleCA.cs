@@ -582,7 +582,7 @@ namespace OpenRA.Mods.CA.Traits
 				.Where(a => a.Owner == player)
 				.Select(a => a.Info.Name).ToList();
 
-			foreach (var unit in unitsToBuildShares.Shuffle(BotRng.For(player)))
+			foreach (var unit in unitsToBuildShares.OrderBy(kv => kv.Key).Shuffle(BotRng.For(player)))
 				if (buildableThings.Any(b => b.Name == unit.Key))
 					if (!excludeLimited || Info.UnitLimits == null || !Info.UnitLimits.ContainsKey(unit.Key))
 						if (myUnits.Count(a => a == unit.Key) * 100 < ShareFor(unit.Key, unit.Value) * myUnits.Count)

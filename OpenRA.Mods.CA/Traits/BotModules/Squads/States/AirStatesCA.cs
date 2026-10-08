@@ -495,7 +495,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 			if (owner.WaitingUnits.Count > 0 && owner.WaitingUnits.Count >= owner.RearmingUnits.Count && (noPatience || !canBuildMoreOfAircraft()))
 			{
-				foreach (var a in owner.WaitingUnits)
+				foreach (var a in owner.WaitingUnits.OrderBy(a => a.ActorID))
 					if (CanAttackTarget(a, owner.TargetActor))
 						owner.Bot.QueueOrder(new Order("Attack", a, Target.FromActor(owner.TargetActor), false));
 

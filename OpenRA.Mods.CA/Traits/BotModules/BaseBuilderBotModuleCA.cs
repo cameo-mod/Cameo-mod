@@ -227,6 +227,7 @@ namespace OpenRA.Mods.CA.Traits
 		public CPos GetRandomBaseCenter()
 		{
 			var randomConstructionYard = ConstructionYardBuildings.Actors.Where(a => !a.IsDead)
+				.OrderBy(a => a.ActorID)
 				.RandomOrDefault(BotRng.For(player));
 
 			return randomConstructionYard?.Location ?? initialBaseCenter;
@@ -266,6 +267,7 @@ namespace OpenRA.Mods.CA.Traits
 			{
 				var matchingConstructionYard = ConstructionYardBuildings.Actors
 					.Where(a => !a.IsDead && a.Info.Name == conyardType)
+					.OrderBy(a => a.ActorID)
 					.RandomOrDefault(BotRng.For(player));
 
 				if (matchingConstructionYard != null)
@@ -278,6 +280,7 @@ namespace OpenRA.Mods.CA.Traits
 		public CPos GetDefenseBaseCenter()
 		{
 			var defenceConstructionYard = DefenseCenter != null ? ConstructionYardBuildings.Actors.OrderBy(a => (DefenseCenter.Value - a.Location).LengthSquared)
+				.ThenBy(a => a.ActorID)
 				.FirstOrDefault(a => !a.IsDead) : null;
 
 			return defenceConstructionYard?.Location ?? GetRandomBaseCenter();
@@ -541,7 +544,7 @@ namespace OpenRA.Mods.CA.Traits
 				Actor bestconyard = null;
 				var best = int.MinValue;
 
-				foreach (var conyard in ConstructionYardBuildings.Actors)
+				foreach (var conyard in ConstructionYardBuildings.Actors.OrderBy(a => a.ActorID))
 				{
 					if (conyard.IsDead)
 						continue;
@@ -949,7 +952,7 @@ namespace OpenRA.Mods.CA.Traits
 
 				if (!openingBarracksCostCommitted)
 				{
-					var barracks = barracksBuildings.Actors.FirstOrDefault(a => !a.IsDead);
+					var barracks = barracksBuildings.Actors.OrderBy(a => a.ActorID).FirstOrDefault(a => !a.IsDead);
 					if (barracks != null)
 					{
 						openingBarracksCommittedCost = queue.GetProductionCost(barracks.Info);
