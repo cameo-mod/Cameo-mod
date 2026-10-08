@@ -585,6 +585,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		int GuardingEnemies(Actor capturer, Actor target) =>
 			world.FindActorsInCircle(target.CenterPosition, Info.EnemyAvoidanceRadius)
 				.Count(u => !u.IsDead && u.IsInWorld && player.RelationshipWith(u.Owner) == PlayerRelationship.Enemy
+					&& (!Info.CheckCaptureTargetsForVisibility || u.CanBeViewedByPlayer(player))
 					&& u.Info.HasTraitInfo<AttackBaseInfo>() && capturer.IsTargetableBy(u));
 
 		/// <summary>Orders the try-candidates by RankScore over the nearest CaptureTargetTries x 2 (the rest are dropped).</summary>
@@ -1056,6 +1057,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var sum = 0L;
 			foreach (var u in world.FindActorsInCircle(center, Info.EnemyAvoidanceRadius))
 				if (!u.IsDead && capturer.Owner.RelationshipWith(u.Owner) == PlayerRelationship.Enemy
+					&& (!Info.CheckCaptureTargetsForVisibility || u.CanBeViewedByPlayer(player))
 					&& u.Info.HasTraitInfo<AttackBaseInfo>() && capturer.IsTargetableBy(u))
 					sum += Math.Max(0, Info.EnemyAvoidanceRadius.Length - (center - u.CenterPosition).Length);
 
@@ -1109,7 +1111,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var path = mobile.PathFinder.FindPathToTargetCellByPredicate(
 				capturer, new[] { capturer.Location }, loc => true, BlockedByActor.Stationary,
 				loc => world.FindActorsInCircle(world.Map.CenterOfCell(loc), Info.EnemyAvoidanceRadius)
-					.Where(u => !u.IsDead && capturer.Owner.RelationshipWith(u.Owner) == PlayerRelationship.Enemy && capturer.IsTargetableBy(u))
+					.Where(u => !u.IsDead && capturer.Owner.RelationshipWith(u.Owner) == PlayerRelationship.Enemy
+						&& (!Info.CheckCaptureTargetsForVisibility || u.CanBeViewedByPlayer(player)) && capturer.IsTargetableBy(u))
 					.Sum(u => Math.Max(WDist.Zero.Length, Info.EnemyAvoidanceRadius.Length - (world.Map.CenterOfCell(loc) - u.CenterPosition).Length)));
 
 			return path.Count == 0 ? Target.Invalid : Target.FromActor(target);
