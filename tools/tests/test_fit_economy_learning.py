@@ -1,3 +1,4 @@
+import json
 import pathlib
 import sys
 
@@ -43,3 +44,32 @@ def test_hidden_enemy_does_not_create_an_exact_matchup_cell():
     fitted = fit.fit(rows)
     assert "td_gdi__vs__td_nod" not in fitted["expansion"]
     assert fitted["expansion"]["td_gdi"][0] == fit.MINIMUM["expansion"]
+
+
+def test_read_records_ignores_non_object_json_values(tmp_path):
+    records = tmp_path / "mixed.jsonl"
+    records.write_text(
+        "null\n[]\n42\n\"text\"\n" + json.dumps(decision("kept")) + "\n",
+        encoding="utf-8",
+    )
+    assert [row["record_id"] for row in fit.read_records([records])] == ["kept"]
+
+
+def test_facts_rejects_non_mapping_and_unhashable_scope_fields():
+    allowed = {"td_gdi", "td_nod"}
+    assert fit.facts([], allowed) is None
+    for field, value in (("parameter", []), ("faction", {}), ("enemy_faction", [])):
+        row = decision(f"bad-{field}")
+        if field == "parameter":
+            row["decision"][field] = value
+        else:
+            row[field] = value
+        item = fit.facts(row, allowed)
+        if field == "enemy_faction":
+            assert item is not None and item[4] == ""
+        else:
+            assert item is None
+
+    hidden = decision("hidden-bad-enemy", public=False)
+    hidden["enemy_faction"] = {}
+    assert fit.facts(hidden, allowed) is not None

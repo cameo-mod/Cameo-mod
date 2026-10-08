@@ -71,7 +71,10 @@ def read_records(paths: list[pathlib.Path]):
                             row = json.loads(line)
                         except json.JSONDecodeError:
                             continue
-                        if row.get("record") == "economy_decision":
+                        # JSONL may contain valid JSON values that are not event
+                        # objects. Ignore them so one malformed producer row cannot
+                        # abort the whole offline fit.
+                        if isinstance(row, dict) and row.get("record") == "economy_decision":
                             yield row
             except OSError:
                 continue
@@ -90,6 +93,8 @@ def scope_chain(own: str, enemy: str):
 
 def facts(row: dict, allowed_factions: set[str]):
     """Return reviewed anonymous facts, or None for a malformed/unsafe row."""
+    if not isinstance(row, dict):
+        return None
     decision, outcome, balance = row.get("decision"), row.get("outcome"), row.get("balance")
     record_id = row.get("record_id")
     if (row.get("schema") != SCHEMA or not isinstance(record_id, str) or not record_id
@@ -103,14 +108,17 @@ def facts(row: dict, allowed_factions: set[str]):
     candidate = integer(decision.get("candidate"))
     reward = integer(outcome.get("economy_reward_milli"))
     own, enemy = row.get("faction"), row.get("enemy_faction")
-    if kind not in BOUNDS or candidate is None or reward is None or own not in allowed_factions:
+    if (not isinstance(kind, str) or not isinstance(own, str)
+            or kind not in BOUNDS or candidate is None or reward is None
+            or own not in allowed_factions):
         return None
     lower, upper = BOUNDS[kind]
     # Do not turn malformed data into a seemingly valid recommendation. The
     # reward is signed credit assignment and has only an overflow guard.
     if not lower <= candidate <= upper or not -1_000_000 <= reward <= 1_000_000:
         return None
-    if not row.get("enemy_faction_public") or enemy not in allowed_factions:
+    if (not row.get("enemy_faction_public") or not isinstance(enemy, str)
+            or enemy not in allowed_factions):
         enemy = ""
     return record_id, fingerprint.lower(), kind, own, enemy, candidate, reward
 
