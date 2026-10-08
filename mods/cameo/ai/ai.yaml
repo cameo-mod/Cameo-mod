@@ -41,7 +41,7 @@
 	# for genericbot through tools/ai/increment_switches.yaml (single-player harness: no desync possible).
 	GrantConditionOnBotOwner@engttransport:
 		Condition: engt-transport
-		Bots: fransbot
+		Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla, exploit_expansion, exploit_steamroller, exploit_tech
 	# INC-3 (the F1 question as a switch): arms the eight Frans pure-service modules on the
 	# bots named below — the arm sets `Bots: hard, exploit_rush, exploit_turtle, exploit_guerrilla, exploit_expansion, exploit_steamroller, exploit_tech`
 	# (genericbot && hardbot, exactly the F1-ctrl population; classic stays Frans-free).
@@ -53,98 +53,98 @@
 	# increment A/B (tools/ai/increment_switches.yaml); default grants to fransbot only - inert on master.
 	GrantConditionOnBotOwner@cn2unitrepair:
 		Condition: cn2_unit_repair
-		Bots: fransbot
+		Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla, exploit_expansion, exploit_steamroller, exploit_tech
 	GrantConditionOnBotOwner@cn2garrison:
 		Condition: cn2_garrison_defense
-		Bots: fransbot
+		Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla, exploit_expansion, exploit_steamroller, exploit_tech
 	GrantConditionOnBotOwner@cn3deploy:
 		Condition: cn3_deploy
-		Bots: fransbot
+		Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla, exploit_expansion, exploit_steamroller, exploit_tech
 	GrantConditionOnBotOwner@cn3bridgerepair:
 		Condition: cn3_bridge_repair
-		Bots: fransbot
+		Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla, exploit_expansion, exploit_steamroller, exploit_tech
 	GrantConditionOnBotOwner@plugspawn:
 		Condition: plug_spawn
-		Bots: fransbot
+		Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla, exploit_expansion, exploit_steamroller, exploit_tech
 	GrantConditionOnBotOwner@cn4regionroles:
 		Condition: cn4_region_roles
-		Bots: fransbot
+		Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla, exploit_expansion, exploit_steamroller, exploit_tech
 	# GC-1 (AI_ARCHITECTURE §12.19): garrison contest + enemy-garrison clear raids for genericbot.
 	# The arm flips these to the genericbot tier list in the increment A/B; default fransbot-only - inert on master.
 	GrantConditionOnBotOwner@garrisoncontest:
 		Condition: garrison_contest
-		Bots: fransbot
+		Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla, exploit_expansion, exploit_steamroller, exploit_tech
 	# CN3 stealth squads (crystallized-nexus port): arms StealthDoctrineBotModule, the
 	# detector-memory provider the stealth drafting + states read. Same convention as the
 	# CN2/CN3 granters: fransbot by default (inert on master), the increment A/B flips it
 	# to the genericbot tier list via tools/ai/increment_switches.yaml.
 	GrantConditionOnBotOwner@cn3stealthsquads:
 		Condition: cn3_stealth_squads
-		Bots: fransbot
+		Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla, exploit_expansion, exploit_steamroller, exploit_tech
 
 	# AF-1 (AI_ARCHITECTURE §12.20): army-first building gate for genericbot (the spacing advisor needs no condition:
 	# its building gap is live for genericbot, only its re-ranking is switched, by a field).
 	# Same inert-on-master pattern - the switch arm flips Bots: to the genericbot tier list.
 	GrantConditionOnBotOwner@armyfirst:
 		Condition: army_first
-		Bots: fransbot
+		Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla, exploit_expansion, exploit_steamroller, exploit_tech
 	# PP-1 (AI_ARCHITECTURE §12.23): parallel-queue production width. Provider-seam so the shared
 	# UnitBuilderBotModuleCA@generic instance never hands the width to classic (the A/B control).
 	GrantConditionOnBotOwner@parallelprod:
 		Condition: parallel_production
-		Bots: fransbot
+		Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla, exploit_expansion, exploit_steamroller, exploit_tech
 	# The line-of-death fix (unified concave, AI_ARCHITECTURE 12.7a): Rush squads deploy a range-matched
 	# concave arc before the commit, so the wave fires together. The arm flips this to the
 	# genericbot tier list in the increment A/B; default fransbot-only - inert on master.
 	GrantConditionOnBotOwner@assaultfanout:
 		Condition: assault_fanout
-		Bots: fransbot
+		Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla, exploit_expansion, exploit_steamroller, exploit_tech
 	# Scale targets (DESIGN 19.10, AI_ARCHITECTURE 12.22): base and army size grow with the seen enemy, the unscouted map,
 	# difficulty, personality and game time. The arm flips this to the genericbot tier list (switch group ST_scale_targets);
 	# default fransbot-only - inert on master.
 	GrantConditionOnBotOwner@scaletargets:
 		Condition: scale_targets
-		Bots: fransbot
+		Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla, exploit_expansion, exploit_steamroller, exploit_tech
 	# Build-order knobs (DESIGN 19.2, AI_ARCHITECTURE 12.25): eight bounded multipliers + an opening for the shared base builder, from the
 	# personality preset x learned x jitter, with a fog-honest react layer. The arm flips this to the genericbot tier list (switch group
 	# AK_build_order_knobs); default fransbot-only - inert on master.
 	GrantConditionOnBotOwner@buildorderknobs:
 		Condition: build_order_knobs
-		Bots: fransbot
+		Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla, exploit_expansion, exploit_steamroller, exploit_tech
 	# Army staging (DESIGN 19.12, AI_ARCHITECTURE 12.29): the idle army waits at the front with the defences, split by threatened side.
 	# The arm sets Bots (switch group AM_army_staging); empty by default - inert on master.
 	GrantConditionOnBotOwner@armystaging:
 		Condition: armystaging
-		Bots:
+		Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla, exploit_expansion, exploit_steamroller, exploit_tech
 	# Combat veto (AI_ARCHITECTURE 12.31, INC-N): one fog-honest provider consulted where a squad commits an
 	# attack or a retreat — predicted-loss attacks and outrun retreats are blocked, every veto a mission card.
 	# The arm sets Bots (switch group AN_combat_veto); empty by default - inert on master.
 	GrantConditionOnBotOwner@combatveto:
 		Condition: combatveto
-		Bots:
+		Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla, exploit_expansion, exploit_steamroller, exploit_tech
 	# Tier-1 engagement priors (AI_ARCHITECTURE 12.31, contract ruling F1): the veto's fitted delivery x armour
 	# residuals from ai/learned/engagement_priors.yaml. The arm sets Bots (switch group AP_tier1_priors);
 	# empty by default - inert on master. Independent of AN_combat_veto: no provider = neutral 1000.
 	GrantConditionOnBotOwner@tier1priors:
 		Condition: tier1_priors
-		Bots:
+		Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla, exploit_expansion, exploit_steamroller, exploit_tech
 	# Tier-3 pooled bandits (fleet orders 2026-10-03): Thompson-samples a personality arm + an attack-plan overlay
 	# over the EL engagement posteriors in ai/learned/plan_bandits.yaml, with a safety floor. The arm sets Bots
 	# (switch group AO_tier3_bandits); empty by default - inert on master.
 	GrantConditionOnBotOwner@planbandits:
 		Condition: plan_bandits
-		Bots:
+		Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla, exploit_expansion, exploit_steamroller, exploit_tech
 	# EL-1 in-match adaptation (DESIGN 19.13, AI_ARCHITECTURE 12.32): bounded bias on the commit/retreat bar
 	# from this match's own closed engagement scores. The arm sets Bots (switch group AQ_inmatch_adapt).
 	GrantConditionOnBotOwner@inmatchadapt:
 		Condition: inmatchadapt
-		Bots:
+		Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla, exploit_expansion, exploit_steamroller, exploit_tech
 	# Radar contacts (RADAR-A): the bot-side read of the ranged-GPS dots — anonymous cell/tick/
 	# velocity/class/owner records computed from the renderer's own visibility gate, provider-proximity
 	# enumeration only. The arm sets Bots (switch group AI_radar_contacts); empty by default - inert on master.
 	GrantConditionOnBotOwner@radarcontacts:
 		Condition: radar_contacts
-		Bots:
+		Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla, exploit_expansion, exploit_steamroller, exploit_tech
 	# DIFFICULTY SCALE (DESIGN §19.1, maintainer 2026-09-28): every number below lies on ONE straight line
 	# from easiest to cameogod, in EQUAL steps; an integer that cannot split evenly is the rounded line.
 	# Every field is written in every tier, so no tier silently falls back to a C# default.
@@ -3525,6 +3525,8 @@ Player:
 	# upstream A/B reference. The per-field cap (MaxHarvestersPerResourceIndice, default 4: saturated fields get no new
 	# harvesters, surplus is pushed to lacking fields) is LIVE for genericbot; classic opts out (maintainer 2026-10-02).
 	HarvesterBotModuleCA@generic:
+		UseHarvesterLogistics: true
+		ScanForLowEffectHarvestersInterval: 125
 		RequiresCondition: genericbot
 		HarvestersPerRefinery: 3
 		MaxHarvesters: 24
@@ -3571,9 +3573,9 @@ Player:
 	GarrisonContestBotModule:
 		RequiresCondition: genericbot && garrison_contest
 		# TC-2e: yield a contested target to the outranking ally's published claim (switch group BF).
-		UseTeamCaptureClaims: false
+		UseTeamCaptureClaims: true
 		# BF-2: prefer in-shard contest targets (deterministic cell hash mod team size); orders, never filters.
-		PreferShardCaptureTargets: false
+		PreferShardCaptureTargets: true
 	# The line-of-death fix (AI_ARCHITECTURE 12.7a, CV concave unified with ATK-1): a Rush squad that
 	# meets the enemy deploys into a range-matched concave arc (ConcaveEvalCA: per-member radius =
 	# enemy front depth + own range + margin, wider for bigger armies) and commits with staggered
@@ -3949,6 +3951,7 @@ Player:
 	# candidates (bases grow outward instead of packing) is off until switch group AD arms RerankCandidates.
 	# Refineries and defenses keep their own placement owners (EX-2 field claims / DEF-3 coverage).
 	SpacingAdvisorBotModule:
+		RerankCandidates: true
 		RequiresCondition: genericbot
 	# AF-1 + DAWN army-first (AI_ARCHITECTURE §12.20), ONE owner (maintainer 2026-10-02). The base builder's queues hold new
 	# non-essential buildings while cash sits under ArmyReserveLowCash (resumes above ArmyReserveHighCash) OR while owned
@@ -3957,6 +3960,8 @@ Player:
 	# producer exists, so tech sequencing cannot stall.
 	# `genericbot && army_first`: off on master until the increment A/B arms it (switch group AE).
 	ArmyFirstBotModule:
+		ArmyFirstMinCash: 1500
+		MinArmyUnitsBeforeBuildings: 14
 		RequiresCondition: genericbot && army_first
 	# PP-1 (AI_ARCHITECTURE §12.23): settings-only IBotProductionWidth provider - UnitBuilder fills up to
 	# MaxQueuesPerCategory idle queues of a category per call, so multiple factories produce in parallel
@@ -4084,14 +4089,19 @@ Player:
 	BotCounterDemandController:
 		RequiresCondition: genericbot
 	MasterAiBotModule:
+		UseEffectiveDamageModel: true
+		UseCoalitionTargetBias: true
+		UseCoalitionPlan: true
+		EmergencyKeepsPersonality: true
+		EmergencyLossArmyPct: 25
 		RaidFailuresBeforeDormant: 2
 		RequiresCondition: genericbot
 		UseFoggedObservation: true
 		# ZG-c: spatial memory + risk routing index by the zone graph when an enabled, built
 		# TacticalMapBotModule exists (genericbot); the square grid stays the fallback otherwise.
-		UseZoneTopology: false # ZG-c merged default-on without an A/B (#718); switch group D re-arms it for the next increment A/B
+		UseZoneTopology: true
 		# IM-1 (AI_DEEP_RESEARCH §3.3): publish per-region influence layers on the situation snapshot; scouts are the first consumer.
-		UseInfluenceLayers: false # off until the next increment A/B (same convention as group D); switch group H re-arms it
+		UseInfluenceLayers: true
 		# CA-6 (AI_ARCHITECTURE 12.9): remembered defences join the beatability
 		# check -- weak measures ownArmy vs ArmyValue+DefenceValue. Own A/B
 		# variable -- flip on the candidate worktree only.
@@ -4099,7 +4109,7 @@ Player:
 		# CA-6 (AI_ARCHITECTURE 12.9): stale intel loses target score -- the penalty
 		# grows toward the never-seen maximum as sightings age past IntelStaleTicks.
 		# Switch group N_ca6_target_intel sets the weight; 0 = pre-CA-6 scoring.
-		WeightIntelAge: 0
+		WeightIntelAge: 120
 		# AI_ARCHITECTURE §12.12: an enemy-held civilian house is priced by its garrison, not its own (missing) cost,
 		# so the risk gate stops feeding infantry into it. 250 = half the median cost (500) of the 323 buildable
 		# garrisoning infantry, per slot of MaxWeight: the observer cannot see how full it is.
@@ -4108,10 +4118,10 @@ Player:
 		# personality's budget knobs toward the lead's driver — Steamroller relaxes the unit builder's
 		# cash floors, Rush shortens the squad attack-force delay. The leads are computed on every
 		# snapshot regardless (record-only telemetry); switch group G arms the consumers for the A/B.
-		UsePersonalityLeads: false
+		UsePersonalityLeads: true
 		# TC-2d (§12.17): allied bots spread TechRush<->Expansion rests by ClientIndex rank
 		# (switch group W). Inert in 1v1; this module mounts on genericbot only.
-		UseTeamRoleSplit: false
+		UseTeamRoleSplit: true
 		# UT-1 (AI_DEEP_RESEARCH §5.1): each personality's starting/resting point on the three
 		# bipolar axes, [0,100] with 100 the SECOND pole. Record-only until a consumer arms
 		# UseUtilityAxes (switch group M_utility_axes); a missing key rests at neutral 50.
@@ -4151,7 +4161,7 @@ Player:
 		GuerrillaLeadExtraScouts: 2
 		# CA-6 (AI_ARCHITECTURE 12.9): scouts refresh the current main target's footprint first --
 		# the intel that target choice and raid bidding consume. Switch group N_ca6_target_intel.
-		UseTargetIntelBias: false
+		UseTargetIntelBias: true
 		# AI_ARCHITECTURE §12.11-12.12: unrationed replacements built ~72 Humvees and ~5 tanks per match for `hard`.
 		ScoutRebuildCooldownTicks: 3000
 		ScoutUnitTypes: ra1_soviets_dog, ra2_allies_dog, ra2_soviets_dog, td_nod_reconbike, td_nod_buggy, td_nod_buggymkii, td_gdi_humvee, td_gdi_humveemkii, ra1_allies_ranger, ra1_allies_reconranger, japan_scoutcar, japan_imperialscoutsman, ordos_dustdrone, ordos_swarmerdrone, ixian_airdrone, atreides_airdrone, latinsyndicate_raiderbuggy, futuretech_scoutdroid, ordos_raider, atreides_sandbike, ix_raider, corrino_buggy, zerg_zergling, terran_reaper, harkonnen_buzzsaw, eden_scout, plymouth_scout
@@ -4165,6 +4175,7 @@ Player:
 	# EL-0 (AI_ARCHITECTURE 12.30, DESIGN 19.13): record-only engagement + posture log. NO RequiresCondition on purpose: logging is not
 	# behaviour, so genericbot, classic and any other bot are measured identically. No orders, no conditions.
 	EngagementLogBotModule:
+		UseEffectiveDamageModel: true
 	TacticalMapBotModule:
 		RequiresCondition: genericbot
 		TopologyLocomotors: tracked
@@ -4172,6 +4183,7 @@ Player:
 	# best as the target field (EX-0). EX-1: BaseCrawl placements walk toward it (genericbot only; classic, which
 	# shares BaseBuilderBotModuleCA@generic, gets no provider and keeps today's placement).
 	ExpansionPlannerBotModule:
+		UseCoalitionSectors: true
 		RequiresCondition: genericbot
 		DriveBaseCrawl: true
 		# EX-2: every field in reach gets a refinery, beyond the base builder's fixed optimum.
@@ -4183,10 +4195,10 @@ Player:
 		DriveMcvRequests: true
 		# UT-4: TechRush<->Expansion axis scales the MCV appetite (switch group U). Off until the
 		# increment A/B arms it.
-		UseUtilityExpansionAppetite: false
+		UseUtilityExpansionAppetite: true
 		# TC-2c: yield contested fields to the outranking ally's published claim (switch group V).
 		# Inert in 1v1.
-		UseTeamExpansionClaims: false
+		UseTeamExpansionClaims: true
 		# EX-4: keep MCVs in flight while any reachable far field is free - expansion stops when the
 		# map is covered, not at a fixed yard count. Difficulty paces via BotLimits intervals +
 		# McvRequestReserve, never the ceiling. Switch group AC. The AJ_field_coverage ruling
@@ -4203,19 +4215,20 @@ Player:
 	# Whole-base defence cover: each defence goes where its range covers the most uncovered base, outer edge and
 	# enemy side first (genericbot only; classic, sharing BaseBuilderBotModuleCA@generic, gets no advisor). Off until Enabled.
 	DefenseCoveragePlanner:
+		UseRegionRoles: true
 		Enabled: true
 		RequiresCondition: genericbot
 		# DEF-3: cluster own buildings into fronts; the defence annulus centres on the most
 		# uncovered front instead of the randomly-picked yard — towers follow expansions.
 		# Switch group Z_def3_remote_outpost_coverage; off on master until the increment A/B.
-		CoverRemoteOutposts: false
+		CoverRemoteOutposts: true
 	# BP-1 (DESIGN 19.15, BP-SPEC rev 2): the front/back placement owner. One radar per defended front,
 	# strictly behind that front's defence line and spread for NEW approach coverage (union scoring, overlap
 	# is waste); ground/naval production at the front (air-only producers exempt); tech/superweapon/passive-
 	# income buildings in the back. Advises the shared base builder through IBotFrontBackAdvisor; genericbot
 	# only, classic keeps today's placement. Off until Enabled (switch group BI_front_back_placement).
 	BaseFrontBackPlannerBotModule:
-		Enabled: false
+		Enabled: true
 		RequiresCondition: genericbot
 	McvExpansionManagerBotModule:
 		RequiresCondition: genericbot || classicbot
@@ -4262,12 +4275,12 @@ Player:
 		CaptureRetreatsBeforeDormant: 4
 		MaxEngineersPerTarget: 1
 		# FB2: Frans SpecOps demand-capturers — safe targets justify building a specialist (switch T).
-		UseDemandCapturers: false
+		UseDemandCapturers: true
 		# TC-2e: yield a capture target to the outranking ally's published claim (switch group BF).
 		# Lowest ClientIndex keeps its claim; the loser falls through to another candidate. Inert in 1v1.
-		UseTeamCaptureClaims: false
+		UseTeamCaptureClaims: true
 		# BF-2: prefer in-shard capture targets (deterministic cell hash mod team size); orders, never filters.
-		PreferShardCaptureTargets: false
+		PreferShardCaptureTargets: true
 		RequiresCondition: genericbot # every tier (DESIGN §19.1; DAWN's #672 ungates the parents the same way)
 		# Capturer and target ids: read from CaptureManagerBotModuleCA above (one copy in the central file).
 		PriorityCaptureChance: 75
@@ -4290,44 +4303,57 @@ Player:
 		RequiresCondition: genericbot && personality-rush
 		Notification: notification-bot-personality-rush
 	SquadManagerBotModuleCA@rush:
+		ProtectionRallyHysteresisCells: 4
+		UseProtectionRallyDedup: true
+		UseEffectiveDamageModel: true
+		UseSquadPoolFixes: true
+		UseProtectionEpisodeGuard: true
+		FormationHoldHysteresisCells: 2
+		UseCoalitionTarget: true
+		UseCoalitionRescue: true
+		UseUpstreamStateTweaks: true
+		ValueOnlyAttackLaunch: true
+		PreferBuildingTargets: true
+		RouteFromNearestOwnBuilding: true
+		UseUtilityAxes: true
 		UseProtectionRequests: true
 		# CA-2 (AI_ARCHITECTURE 12.6): the defend draft keeps a reserve instead of
 		# stripping the idle pool on every ping (FransGroundDefendForcePreservationGuard
 		# donor shape); waived when the attacker is inside the base. Group O.
-		UseDefendPreservation: false
+		UseDefendPreservation: true
 		# DI-2 (AI_ARCHITECTURE 12.16): the Director wave phase scales the assault
 		# launch bar — Climax releases smaller, Relief rebuilds longer. Group P.
-		UseDirectorPacing: false
-		UseUtilityDefendReserve: false
-		UseTeamSyncAttacks: false
-		UseTeamDefendAnswers: false
-		AllyAnswerCooldownTicks: 0
+		UseDirectorPacing: true
+		UseUtilityDefendReserve: true
+		UseTeamSyncAttacks: true
+		UseTeamDefendAnswers: true
+		AllyAnswerCooldownTicks: 750
 		# TC-3 (AI_ARCHITECTURE 12.28): the fold's second election pass — an ally's
 		# contested expansion claim elects one free ally to escort it; the protect
 		# squad rallies the field through the same channel, strictly below a defend
 		# answer. Election-only (no fallback); shared capacity with rescue. Group BH.
-		UseCoalitionAssist: false
+		UseCoalitionAssist: true
 		# TC-2f (AI_ARCHITECTURE 12.27): EMBER's raid dead-end - a Raid card may ride a
 		# launching wave up to the overcommit cap; the wave commits anyway, so steering
 		# changes where it lands, not whether it goes. Group BG.
-		UseRaidMissionSteering: false
+		UseRaidMissionSteering: true
 		RaidMissionSteerOvercommitPercent: 300
 		RaidMissionSteerMinValue: 0
 		AirDoctrineEnabled: true
 		EnsureArtillerySiege: true
 		EnsureAntiAirEscort: true
 		SquadMicroEnabled: true
-		UseSquadOrderDedup: false
+		UseSquadOrderDedup: true
 		FormationMovement: true
 		# AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only
 		# orders and the latched leader wait - the per-tick identical Stop/AttackMove
 		# re-issues cancelled every MoveTo (army stutter). Off = the classic order stream.
-		UseFormationHysteresis: false
+		UseFormationHysteresis: true
 		RequiresCondition: genericbot && personality-rush
 		# CA-3 starting mix (§12.5): % of own mobile combat units per role; unlisted roles still produce at
 		# the RoleMixRoleFloorPct floor. Inert until switch group J_rolemix_production arms UseRoleMix.
 		# Rush: fast cheap pressure — skirmisher/anti-infantry heavy, scouts find the economy kills.
-		UseRoleMix: false
+		UseRoleMix: true
 		RoleMix:
 			frontline: 20
 			skirmisher: 25
@@ -4388,39 +4414,52 @@ Player:
 		RequiresCondition: genericbot && personality-turtle
 		Notification: notification-bot-personality-turtle
 	SquadManagerBotModuleCA@turtle:
+		ProtectionRallyHysteresisCells: 4
+		UseProtectionRallyDedup: true
+		UseEffectiveDamageModel: true
+		UseSquadPoolFixes: true
+		UseProtectionEpisodeGuard: true
+		FormationHoldHysteresisCells: 2
+		UseCoalitionTarget: true
+		UseCoalitionRescue: true
+		UseUpstreamStateTweaks: true
+		ValueOnlyAttackLaunch: true
+		PreferBuildingTargets: true
+		RouteFromNearestOwnBuilding: true
+		UseUtilityAxes: true
 		UseProtectionRequests: true
-		UseDefendPreservation: false
-		UseDirectorPacing: false
-		UseUtilityDefendReserve: false
-		UseTeamSyncAttacks: false
-		UseTeamDefendAnswers: false
-		AllyAnswerCooldownTicks: 0
+		UseDefendPreservation: true
+		UseDirectorPacing: true
+		UseUtilityDefendReserve: true
+		UseTeamSyncAttacks: true
+		UseTeamDefendAnswers: true
+		AllyAnswerCooldownTicks: 750
 		# TC-3 (AI_ARCHITECTURE 12.28): the fold's second election pass — an ally's
 		# contested expansion claim elects one free ally to escort it; the protect
 		# squad rallies the field through the same channel, strictly below a defend
 		# answer. Election-only (no fallback); shared capacity with rescue. Group BH.
-		UseCoalitionAssist: false
+		UseCoalitionAssist: true
 		# TC-2f (AI_ARCHITECTURE 12.27): EMBER's raid dead-end - a Raid card may ride a
 		# launching wave up to the overcommit cap; the wave commits anyway, so steering
 		# changes where it lands, not whether it goes. Group BG.
-		UseRaidMissionSteering: false
+		UseRaidMissionSteering: true
 		RaidMissionSteerOvercommitPercent: 300
 		RaidMissionSteerMinValue: 0
 		AirDoctrineEnabled: true
 		EnsureArtillerySiege: true
 		EnsureAntiAirEscort: true
 		SquadMicroEnabled: true
-		UseSquadOrderDedup: false
+		UseSquadOrderDedup: true
 		FormationMovement: true
 		# AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only
 		# orders and the latched leader wait - the per-tick identical Stop/AttackMove
 		# re-issues cancelled every MoveTo (army stutter). Off = the classic order stream.
-		UseFormationHysteresis: false
+		UseFormationHysteresis: true
 		RequiresCondition: genericbot && personality-turtle
 		# CA-3 starting mix (§12.5): % of own mobile combat units per role; unlisted roles still produce at
 		# the RoleMixRoleFloorPct floor. Inert until switch group J_rolemix_production arms UseRoleMix.
 		# Turtle: static-defence posture — artillery and anti-air mass behind the frontline screen.
-		UseRoleMix: false
+		UseRoleMix: true
 		RoleMix:
 			frontline: 25
 			artillery: 25
@@ -4480,39 +4519,52 @@ Player:
 		RequiresCondition: genericbot && personality-tech
 		Notification: notification-bot-personality-tech
 	SquadManagerBotModuleCA@tech:
+		ProtectionRallyHysteresisCells: 4
+		UseProtectionRallyDedup: true
+		UseEffectiveDamageModel: true
+		UseSquadPoolFixes: true
+		UseProtectionEpisodeGuard: true
+		FormationHoldHysteresisCells: 2
+		UseCoalitionTarget: true
+		UseCoalitionRescue: true
+		UseUpstreamStateTweaks: true
+		ValueOnlyAttackLaunch: true
+		PreferBuildingTargets: true
+		RouteFromNearestOwnBuilding: true
+		UseUtilityAxes: true
 		UseProtectionRequests: true
-		UseDefendPreservation: false
-		UseDirectorPacing: false
-		UseUtilityDefendReserve: false
-		UseTeamSyncAttacks: false
-		UseTeamDefendAnswers: false
-		AllyAnswerCooldownTicks: 0
+		UseDefendPreservation: true
+		UseDirectorPacing: true
+		UseUtilityDefendReserve: true
+		UseTeamSyncAttacks: true
+		UseTeamDefendAnswers: true
+		AllyAnswerCooldownTicks: 750
 		# TC-3 (AI_ARCHITECTURE 12.28): the fold's second election pass — an ally's
 		# contested expansion claim elects one free ally to escort it; the protect
 		# squad rallies the field through the same channel, strictly below a defend
 		# answer. Election-only (no fallback); shared capacity with rescue. Group BH.
-		UseCoalitionAssist: false
+		UseCoalitionAssist: true
 		# TC-2f (AI_ARCHITECTURE 12.27): EMBER's raid dead-end - a Raid card may ride a
 		# launching wave up to the overcommit cap; the wave commits anyway, so steering
 		# changes where it lands, not whether it goes. Group BG.
-		UseRaidMissionSteering: false
+		UseRaidMissionSteering: true
 		RaidMissionSteerOvercommitPercent: 300
 		RaidMissionSteerMinValue: 0
 		AirDoctrineEnabled: true
 		EnsureArtillerySiege: true
 		EnsureAntiAirEscort: true
 		SquadMicroEnabled: true
-		UseSquadOrderDedup: false
+		UseSquadOrderDedup: true
 		FormationMovement: true
 		# AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only
 		# orders and the latched leader wait - the per-tick identical Stop/AttackMove
 		# re-issues cancelled every MoveTo (army stutter). Off = the classic order stream.
-		UseFormationHysteresis: false
+		UseFormationHysteresis: true
 		RequiresCondition: genericbot && personality-tech
 		# CA-3 starting mix (§12.5): % of own mobile combat units per role; unlisted roles still produce at
 		# the RoleMixRoleFloorPct floor. Inert until switch group J_rolemix_production arms UseRoleMix.
 		# Tech: quality over quantity — frontline core with the widest air split (gunship/fighter/bomber).
-		UseRoleMix: false
+		UseRoleMix: true
 		RoleMix:
 			frontline: 30
 			artillery: 15
@@ -4574,39 +4626,52 @@ Player:
 		RequiresCondition: genericbot && personality-expansion
 		Notification: notification-bot-personality-expansion
 	SquadManagerBotModuleCA@expansion:
+		ProtectionRallyHysteresisCells: 4
+		UseProtectionRallyDedup: true
+		UseEffectiveDamageModel: true
+		UseSquadPoolFixes: true
+		UseProtectionEpisodeGuard: true
+		FormationHoldHysteresisCells: 2
+		UseCoalitionTarget: true
+		UseCoalitionRescue: true
+		UseUpstreamStateTweaks: true
+		ValueOnlyAttackLaunch: true
+		PreferBuildingTargets: true
+		RouteFromNearestOwnBuilding: true
+		UseUtilityAxes: true
 		UseProtectionRequests: true
-		UseDefendPreservation: false
-		UseDirectorPacing: false
-		UseUtilityDefendReserve: false
-		UseTeamSyncAttacks: false
-		UseTeamDefendAnswers: false
-		AllyAnswerCooldownTicks: 0
+		UseDefendPreservation: true
+		UseDirectorPacing: true
+		UseUtilityDefendReserve: true
+		UseTeamSyncAttacks: true
+		UseTeamDefendAnswers: true
+		AllyAnswerCooldownTicks: 750
 		# TC-3 (AI_ARCHITECTURE 12.28): the fold's second election pass — an ally's
 		# contested expansion claim elects one free ally to escort it; the protect
 		# squad rallies the field through the same channel, strictly below a defend
 		# answer. Election-only (no fallback); shared capacity with rescue. Group BH.
-		UseCoalitionAssist: false
+		UseCoalitionAssist: true
 		# TC-2f (AI_ARCHITECTURE 12.27): EMBER's raid dead-end - a Raid card may ride a
 		# launching wave up to the overcommit cap; the wave commits anyway, so steering
 		# changes where it lands, not whether it goes. Group BG.
-		UseRaidMissionSteering: false
+		UseRaidMissionSteering: true
 		RaidMissionSteerOvercommitPercent: 300
 		RaidMissionSteerMinValue: 0
 		AirDoctrineEnabled: true
 		EnsureArtillerySiege: true
 		EnsureAntiAirEscort: true
 		SquadMicroEnabled: true
-		UseSquadOrderDedup: false
+		UseSquadOrderDedup: true
 		FormationMovement: true
 		# AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only
 		# orders and the latched leader wait - the per-tick identical Stop/AttackMove
 		# re-issues cancelled every MoveTo (army stutter). Off = the classic order stream.
-		UseFormationHysteresis: false
+		UseFormationHysteresis: true
 		RequiresCondition: genericbot && personality-expansion
 		# CA-3 starting mix (§12.5): % of own mobile combat units per role; unlisted roles still produce at
 		# the RoleMixRoleFloorPct floor. Inert until switch group J_rolemix_production arms UseRoleMix.
 		# Expansion: spread defence of growing territory — balanced core, extra scouts find the fields.
-		UseRoleMix: false
+		UseRoleMix: true
 		RoleMix:
 			frontline: 30
 			anti_air: 15
@@ -4667,39 +4732,52 @@ Player:
 		RequiresCondition: genericbot && personality-steamroller
 		Notification: notification-bot-personality-steamroller
 	SquadManagerBotModuleCA@steamroller:
+		ProtectionRallyHysteresisCells: 4
+		UseProtectionRallyDedup: true
+		UseEffectiveDamageModel: true
+		UseSquadPoolFixes: true
+		UseProtectionEpisodeGuard: true
+		FormationHoldHysteresisCells: 2
+		UseCoalitionTarget: true
+		UseCoalitionRescue: true
+		UseUpstreamStateTweaks: true
+		ValueOnlyAttackLaunch: true
+		PreferBuildingTargets: true
+		RouteFromNearestOwnBuilding: true
+		UseUtilityAxes: true
 		UseProtectionRequests: true
-		UseDefendPreservation: false
-		UseDirectorPacing: false
-		UseUtilityDefendReserve: false
-		UseTeamSyncAttacks: false
-		UseTeamDefendAnswers: false
-		AllyAnswerCooldownTicks: 0
+		UseDefendPreservation: true
+		UseDirectorPacing: true
+		UseUtilityDefendReserve: true
+		UseTeamSyncAttacks: true
+		UseTeamDefendAnswers: true
+		AllyAnswerCooldownTicks: 750
 		# TC-3 (AI_ARCHITECTURE 12.28): the fold's second election pass — an ally's
 		# contested expansion claim elects one free ally to escort it; the protect
 		# squad rallies the field through the same channel, strictly below a defend
 		# answer. Election-only (no fallback); shared capacity with rescue. Group BH.
-		UseCoalitionAssist: false
+		UseCoalitionAssist: true
 		# TC-2f (AI_ARCHITECTURE 12.27): EMBER's raid dead-end - a Raid card may ride a
 		# launching wave up to the overcommit cap; the wave commits anyway, so steering
 		# changes where it lands, not whether it goes. Group BG.
-		UseRaidMissionSteering: false
+		UseRaidMissionSteering: true
 		RaidMissionSteerOvercommitPercent: 300
 		RaidMissionSteerMinValue: 0
 		AirDoctrineEnabled: true
 		EnsureArtillerySiege: true
 		EnsureAntiAirEscort: true
 		SquadMicroEnabled: true
-		UseSquadOrderDedup: false
+		UseSquadOrderDedup: true
 		FormationMovement: true
 		# AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only
 		# orders and the latched leader wait - the per-tick identical Stop/AttackMove
 		# re-issues cancelled every MoveTo (army stutter). Off = the classic order stream.
-		UseFormationHysteresis: false
+		UseFormationHysteresis: true
 		RequiresCondition: genericbot && personality-steamroller
 		# CA-3 starting mix (§12.5): % of own mobile combat units per role; unlisted roles still produce at
 		# the RoleMixRoleFloorPct floor. Inert until switch group J_rolemix_production arms UseRoleMix.
 		# Steamroller: massed armour push — frontline wall, artillery second line, AA cover.
-		UseRoleMix: false
+		UseRoleMix: true
 		RoleMix:
 			frontline: 40
 			artillery: 20
@@ -4758,39 +4836,52 @@ Player:
 		RequiresCondition: genericbot && personality-guerrilla
 		Notification: notification-bot-personality-guerrilla
 	SquadManagerBotModuleCA@guerrilla:
+		ProtectionRallyHysteresisCells: 4
+		UseProtectionRallyDedup: true
+		UseEffectiveDamageModel: true
+		UseSquadPoolFixes: true
+		UseProtectionEpisodeGuard: true
+		FormationHoldHysteresisCells: 2
+		UseCoalitionTarget: true
+		UseCoalitionRescue: true
+		UseUpstreamStateTweaks: true
+		ValueOnlyAttackLaunch: true
+		PreferBuildingTargets: true
+		RouteFromNearestOwnBuilding: true
+		UseUtilityAxes: true
 		UseProtectionRequests: true
-		UseDefendPreservation: false
-		UseDirectorPacing: false
-		UseUtilityDefendReserve: false
-		UseTeamSyncAttacks: false
-		UseTeamDefendAnswers: false
-		AllyAnswerCooldownTicks: 0
+		UseDefendPreservation: true
+		UseDirectorPacing: true
+		UseUtilityDefendReserve: true
+		UseTeamSyncAttacks: true
+		UseTeamDefendAnswers: true
+		AllyAnswerCooldownTicks: 750
 		# TC-3 (AI_ARCHITECTURE 12.28): the fold's second election pass — an ally's
 		# contested expansion claim elects one free ally to escort it; the protect
 		# squad rallies the field through the same channel, strictly below a defend
 		# answer. Election-only (no fallback); shared capacity with rescue. Group BH.
-		UseCoalitionAssist: false
+		UseCoalitionAssist: true
 		# TC-2f (AI_ARCHITECTURE 12.27): EMBER's raid dead-end - a Raid card may ride a
 		# launching wave up to the overcommit cap; the wave commits anyway, so steering
 		# changes where it lands, not whether it goes. Group BG.
-		UseRaidMissionSteering: false
+		UseRaidMissionSteering: true
 		RaidMissionSteerOvercommitPercent: 300
 		RaidMissionSteerMinValue: 0
 		AirDoctrineEnabled: true
 		EnsureArtillerySiege: true
 		EnsureAntiAirEscort: true
 		SquadMicroEnabled: true
-		UseSquadOrderDedup: false
+		UseSquadOrderDedup: true
 		FormationMovement: true
 		# AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only
 		# orders and the latched leader wait - the per-tick identical Stop/AttackMove
 		# re-issues cancelled every MoveTo (army stutter). Off = the classic order stream.
-		UseFormationHysteresis: false
+		UseFormationHysteresis: true
 		RequiresCondition: genericbot && personality-guerrilla
 		# CA-3 starting mix (§12.5): % of own mobile combat units per role; unlisted roles still produce at
 		# the RoleMixRoleFloorPct floor. Inert until switch group J_rolemix_production arms UseRoleMix.
 		# Guerrilla: map control — skirmishers and scouts hold ground, gunships punish exposed targets.
-		UseRoleMix: false
+		UseRoleMix: true
 		RoleMix:
 			skirmisher: 25
 			scout: 15
@@ -4973,6 +5064,8 @@ Player:
 		# construction yards, defenses, producers
 		EnemyBaseBuildingTypes: td_gdi_constructionyard, td_nod_constructionyard, ra1_allies_constructionyard, ra1_soviets_constructionyard, japan_japaneseconstructionyard, ra2_soviets_constructionyard, ra2_allies_constructionyard, yuri_constructionyard, ts_gdi_constructionyard, ts_nod_constructionyard, forgotten_constructionyard, cabal_constructionyard, terran_commandcenter, protoss_nexus, zerg_hatchery, zerg_lair, zerg_hive, glcommand, chcommand, usacommand, ixian_constructionyard, ordos_constructionyard, ordos_laserturret, ordos_chemturret, wc2_humans_townhall, wc2_orcs_greathall, asianalliance_constructionyard, steelconsortium_consortiumconstructionyard, latinsyndicate_syndicateconstructionyard, naxis_constructionyard, schwarzermond_constructionyard, futuretech_constructionyard, tkm_constructionyard, td_gdi_guardtower, td_gdi_advancedguardtower, td_nod_gunturret, td_nod_laserturret, td_nod_obeliskoflight, ra1_allies_pillbox, ra1_allies_camopillbox, ra1_allies_gunturret, ra1_allies_gapgenerator, ra1_allies_bastionartillerybunker, ra1_soviets_flametower, ra1_soviets_teslacoil, japan_waveforceturret, ra2_allies_pillbox, ra2_allies_prismtower, ra2_allies_grandcannon, ra2_soviets_battlebunker, ra2_soviets_sentrygun, ra2_soviets_flakcannon, ra2_soviets_teslacoil, yuri_gatlingcannon, yuri_tankbunker, asianalliance_sentryflamer, asianalliance_cgpnch, asianalliance_railtower, asianalliance_chaostower, asianalliance_plasmacannon, ixian_machinegunturret, ixian_gunturret, ixian_rocketturret, ixian_stormlasher, steelconsortium_consortiumsentryturret, steelconsortium_quantumcannon, steelconsortium_bfg10000, latinsyndicate_latinsentrygun, latinsyndicate_bunkertower, latinsyndicate_defensebureau, latinsyndicate_smlturret, naxis_rifletower, naxis_flak88, schwarzermond_lasertower, schwarzermond_sturmcannon, futuretech_multiturretsystem, futuretech_frostbiteturret, terran_bunker, zerg_creepcolony, zerg_creepcolony_defense, protoss_photoncannon, wc2_humans_humanscouttower, wc2_humans_sunwell, wc2_orcs_orcwatchtower, tkm_bunker, tkm_tankturretbunker, td_gdi_barracks, td_nod_handofnod, ra1_allies_barracks, ra1_soviets_barracks, ra2_allies_barracks, ra2_soviets_barracks, yuri_barracks, terran_barracks, protoss_gateway, zerg_spawningpool, ts_gdi_barracks, forgotten_barracks, ts_nod_handof, cabal_cyborgfactory, glbarracks, chbarracks, usabarracks, d2k_barracks, ixian_barracks, wc2_humans_barracks, wc2_orcs_barracks, asianalliance_barracks, steelconsortium_steelbarracks, latinsyndicate_combatbarracks, naxis_barracks, schwarzermond_barracks, futuretech_troopgate, td_gdi_weaponsfactory, td_nod_airstrip, ra1_allies_warfactory, ra1_soviets_warfactory, ra1_soviets_largefactory, ra2_allies_warfactory, ra2_soviets_warfactory, yuri_warfactory, terran_weaponsfactory, protoss_roboticsfacility, zerg_hatchery, zerg_lair, zerg_hive, ts_gdi_warfactory, forgotten_warfactory, ts_nod_warfactory, cabal_mechfactory, glweap, chweap, usaweap, ixian_advancedheavyfactory, ixian_starport, wc2_humans_gnomishinventor, wc2_orcs_golbinalchemist, asianalliance_warfactory, steelconsortium_consortiumwarfactory, latinsyndicate_syndicatefactory, naxis_warfactory, schwarzermond_warfactory, futuretech_warpgate, td_gdi_helipad, ts_nod_helipad, ts_nod_helipad, forgotten_helipad, ts_gdi_helipad, td_nod_helipad, ra1_allies_helipad, ra1_soviets_airfield, ra1_soviets_largesovietairfield, japan_japaneseairfield, ra2_allies_airforcecommandhq, ra2_soviets_airfield, ixian_hightechfactory, asianalliance_airforcecommand, latinsyndicate_airstation, naxis_airfield, schwarzermond_airfield, futuretech_launchpad, ordos_heavyfactory, ordos_starport, ordos_lightfactory, ordos_barracks, ordos_barracks, tkm_barracks, tkm_warfactory, tkm_airpad, atreides_constructionyard, corrino_constructionyard, harkonnen_constructionyard, atreides_barracks, corrino_barracks, harkonnen_barracks, atreides_lightfactory, corrino_lightfactory, harkonnen_lightfactory, atreides_heavyfactory, corrino_heavyfactory, harkonnen_heavyfactory, atreides_refinery, corrino_refinery, harkonnen_refinery, atreides_outpost, corrino_outpost, harkonnen_outpost, eden_factory_structure, eden_factory_vehicle, eden_factory_consumer, eden_smelter_common, eden_smelter_rare, plymouth_structure_factory, plymouth_factory_vehicle, plymouth_factory_arachnid, plymouth_smelter_common, plymouth_smelter_rare
 	BaseBuilderBotModuleCA@generic:
+		UseExpansionPrebuild: true
+		SwitchCondition: genericbot
 		RequiresCondition: genericbot || classicbot
 		InititalMinimumRefineryCount: 1
 		AdditionalMinimumRefineryCount: 2
@@ -5146,13 +5239,17 @@ Player:
 		GlobalUnitBudget: 600
 		MaxUnitsPerBot: 150
 	UnitBuilderBotModuleCA@generic:
+		UseEffectiveDamageModel: true
+		ObservedAirThreats: true
+		CountQueuedAircraft: true
+		SwitchCondition: genericbot
 		RequiresCondition: genericbot || classicbot
 		UseCompositions: true
 		# UW-1 (AI_ARCHITECTURE §2.8b item 3): derive the UnitsToBuild weights from the enabled
 		# personality's RoleMix x each unit's Versus-weighted strength. Off until the next increment
 		# A/B — switch group I_derived_unit_weights. Inert on classic: it carries no RoleMix and no
 		# IBotUnitRoles provider, so the same @generic instance keeps the yaml table there.
-		UseDerivedUnitWeights: false
+		UseDerivedUnitWeights: true
 		IdleBaseUnitsMaximum: 50
 		ProductionMinCashRequirement: 1000
 		MaximiseProductionCashRequirement: 5000
@@ -5272,6 +5369,7 @@ Player:
 	# Issues no orders; the CA-2b behaviour lands behind its own switch after this
 	# validates the remembered-defence inputs on the hard candidate.
 	SiegeEvaluatorBotModule:
+		UseEffectiveDamageModel: true
 		RequiresCondition: genericbot
 		# CA-2b: false = telemetry only. Flip true on the A/B candidate only --
 		# stand-off/retreat orders then reach assault squads via EvaluateSiege.
@@ -5288,6 +5386,7 @@ Player:
 	# card so the engagement report can score vetoed vs non-vetoed attacks.
 	# `genericbot && combatveto`: off on master until the increment A/B arms it (switch group AN_combat_veto).
 	CombatVetoBotModule:
+		UseEffectiveDamageModel: true
 		RequiresCondition: genericbot && combatveto
 	# The veto's tier-1 prior source (contract ruling F1): ai/learned/engagement_priors.yaml
 	# `BotEngagementPriors` — fitted delivery x armour residuals (DeliveryArmour@d__x__a, per-cell
