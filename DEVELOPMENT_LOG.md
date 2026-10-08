@@ -19629,3 +19629,57 @@ Branch devin/tier4/pricing-default, task 01a10850 (maintainer ruling 2026-10-04)
 * Crash note: machine lost ~00:05 mid-gate; worktree survived intact. fsck reports
   missing objects in the shared store — unreachable crash debris only, verified clean
   from refs; lead confirmed no repair needed.
+
+## 2026-10-06/07 — Devin (TRAIT-U0): trait-unification migration infrastructure (no merges yet)
+
+Branch devin/trait-u0, task 01a110b6; builds on scaffold 7d7b52e62 (Cameo.Contracts +
+Cameo.Unified assemblies, Unified listed before AS in mod.yaml so plain names win
+FindType resolution after merges land).
+
+* `tools/audit/trait_aliases.json` — registry of 83 old suffixed names → unified targets
+  (kind trait/projectile/warhead, state active|pending|retired, phase, decision link).
+  Zero `active` entries: nothing renames until a family is deliberately flipped.
+* `tools/audit/audit_trait_aliases.py` — zero-use lint: every active/retired alias must
+  still have surviving yaml uses (a dead pinned name means a migration ate it or the
+  registry is stale). Wired into run_all.sh (last blocking-audit slot). PASS: 83
+  aliases, 805 pending-state uses across 1189 yaml sources.
+* `tools/audit/gen_trait_families.py` + `trait_families` block in
+  `merged_bot_modules.json` (86 families) — per-family variants (yaml name, class,
+  assembly, donor file/sha, use count, loaded-vs-ref flag), unique fields, differing
+  defaults, affected files, alias_removal_phase, decisions. `audit_merged_bot_modules.py`
+  now schema-checks the block (FAMILY_KEYS/VARIANT_KEYS, donor refs resolve to a loaded
+  variant, use counts non-negative). PASS: 86 schema-checked.
+* `tools/audit/type_merge_inventory.py` — `--json` machine-readable families; Unified
+  added first in the ASSEMBLIES probe order to match the manifest FindType winner.
+* `OpenRA.Mods.Cameo.Unified/UpdateRules/MigrateUnifiedTraits.cs` — UpdateRule driven by
+  the registry: only `state=active` aliases rewrite; pending/retired untouched. Trait
+  keys keep `-` removal prefixes and `@instance` suffixes; weapon `Projectile:` /
+  `Warhead@x:` values rewritten selectively; same-base-name+same-`@instance` collisions
+  reported as manual steps, never silently merged.
+* `OpenRA.Mods.Cameo.Unified/UtilityCommands/UpdateUnifiedTraitsCommand.cs` —
+  `--update-unified-traits [--apply --yes] [--skip-maps] [--skip-dormant]`. Dry run by
+  default; applies the rule over the mounted corpus + every enumerated map + a dormant
+  sweep of loose *.yaml/*.yml no manifest mounts (classified by path convention:
+  weapons dirs get the weapon transform, others the actor transform, loose map.yaml gets
+  Rules/Actors/Weapons sections). Packed .oramap outside enumerated folders is reported,
+  never repacked blindly. Log: update-unified-traits.log.
+* Live run on this tree: `Updating mod... COMPLETE`, `Updating maps... COMPLETE`,
+  dormant sweep complete — 0 active aliases so the only "would update" entries were
+  MiniYaml re-serialization noise (blank-line drops + comment flush to node boundaries,
+  semantics identical). That incidental churn was REVERTED before commit — it carries
+  no semantic content and invades other file-sets' ownership (one-owner-per-file-set).
+* `OpenRA.Mods.Cameo.Test/UnifiedTraitMigrationTest.cs` — 8 tests: registry load,
+  assembly-order resolution winner, trait key rename preserving `-`/`@instance`,
+  pending-alias no-op, collision → manual step (no merge), weapon Projectile/Warhead
+  value rewrite, map-actor section transform. Cameo.Test.csproj gains the Unified
+  reference.
+* Gates: Release build 0W/0E; Cameo.Test 1206/1206 (8 new); python trait tests 10/10;
+  audit_trait_aliases + audit_merged_bot_modules PASS; `--update-unified-traits` dry
+  run COMPLETE end-to-end; run_all.sh executed through the full audit list (300s cap
+  hit in the post-loop generator section — every report file regenerated non-empty;
+  the two new/changed audits re-verified PASS individually after cleanup).
+* Boot gate PASS: `OpenRA.WindowsLauncher.exe` (dev engine has no packaged OpenRA.exe;
+  OpenRA.Platforms.Default.dll had to be built — the mod sln doesn't include it) with
+  Game.Mod=cameo + Sound.Device=none + explicit Engine.SupportDir; perf.log shows
+  MenuPostProcessEffect.PostWorldLoaded at 35.2s, zero exception-*.log.
+* No gameplay/type merge performed — infrastructure only, per SPEC §6/7 ordering.

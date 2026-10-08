@@ -19,6 +19,7 @@ McvExpansionManagerBotModule). The KNOWN_PAIRS table adds the second kind by han
 
   python tools/audit/type_merge_inventory.py                 # writes docs/design/TYPE_MERGE_INVENTORY.md
   python tools/audit/type_merge_inventory.py --stdout        # print instead
+  python tools/audit/type_merge_inventory.py --json          # machine-readable families to stdout
 
 Needs a built engine (engine/OpenRA.Mods.*): without it the report says so and covers the mod side only.
 """
@@ -38,7 +39,9 @@ import miniyaml  # noqa: E402
 OUT = REPO / "docs" / "design" / "TYPE_MERGE_INVENTORY.md"
 
 # mod.yaml Assemblies order: FindType takes the FIRST assembly that has the name.
+# Unified is first — after trait unification every plain yaml name resolves there.
 ASSEMBLIES = [
+    ("Unified", "OpenRA.Mods.Cameo.Unified"),
     ("AS", "engine/OpenRA.Mods.AS"),
     ("CA", "OpenRA.Mods.CA"),
     ("Cameo", "OpenRA.Mods.Cameo"),
@@ -252,13 +255,41 @@ def render(fams, missing, trait_use, proj_use, wh_use, types):
     return "\n".join(out) + "\n"
 
 
+def families_json(fams, trait_use, proj_use, wh_use, types):
+    """Machine-readable form: per family the variants (winner first by FindType order) with
+    resolved use counts, unique fields, and shared fields whose defaults differ."""
+    out = {}
+    for label, vs in fams.items():
+        uses = [use_of(v, trait_use, proj_use, wh_use, types) for v in vs]
+        only, differ = field_diff(vs)
+        order = [a for a, _ in ASSEMBLIES]
+        vs2 = sorted(zip(vs, uses),
+                     key=lambda vu: (vu[0].get("ref"), order.index(vu[0]["asm"]) if vu[0]["asm"] in order else 99))
+        out[label] = {
+            "variants": [{"yaml": v["yaml"], "class": v["class"], "asm": v["asm"], "kind": v["kind"],
+                          "file": v["file"], "ref": bool(v.get("ref")), "use": u,
+                          "unique_fields": only[v["class"]]}
+                         for v, u in vs2],
+            "differing_defaults": {f: d for f, d in differ},
+        }
+    return out
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--stdout", action="store_true")
+    ap.add_argument("--json", action="store_true", help="print machine-readable families to stdout")
     args = ap.parse_args()
     types, missing = scan()
     trait_use, proj_use, wh_use = usage()
-    text = render(families(types), missing, trait_use, proj_use, wh_use, types)
+    fams = families(types)
+    if args.json:
+        import json
+        print(json.dumps({"incomplete_sources": missing,
+                          "families": families_json(fams, trait_use, proj_use, wh_use, types)},
+                         indent=1, sort_keys=True))
+        return 0
+    text = render(fams, missing, trait_use, proj_use, wh_use, types)
     if args.stdout:
         print(text)
     else:
