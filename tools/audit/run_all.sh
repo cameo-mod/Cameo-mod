@@ -73,7 +73,7 @@ for a in inherits duplicate_inherits faction_leaks upgrades upgrade_coverage ai 
          impact_glow_preservation dead_warhead_fields family_uniqueness \
          three_way_split tier_weapon_class heaviness_bell versus_profile derived_armor_columns \
          meter_dilution ca_drift ca_unused ai_frankenstein fransbot_lists fransbot_drift guerrilla_roles central_ids upstream_adoption engine_freshness ammo_cadence fog_honesty merged_bot_modules bot_direct_mutation fransbot_orders elite_range \
-         ai_arch_freshness multi_traitinfo; do
+         ai_arch_freshness multi_traitinfo trait_aliases; do
   echo "== audit_$a"
   "$PYTHON" "tools/audit/audit_$a.py" "$@" > "$OUT/$a.md" 2> "$OUT/$a.err" \
     || failed=1

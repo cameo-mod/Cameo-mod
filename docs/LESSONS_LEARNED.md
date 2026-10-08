@@ -1420,6 +1420,19 @@ cd engine && ./bin/OpenRA.exe Game.Mod=cameo Engine.EngineDir=".." \
 the wrong path aborts with `Unknown or invalid mod 'cameo'` and a zero-byte perf.log.
 Always confirm `perf.log` has a FRESH timestamp before trusting the menu line.
 
+#### After `PostWorldLoaded`, kill the REAL game process — not the wrapper (2026-10-07)
+
+`OpenRA.WindowsLauncher.exe` (and `launch-game.cmd`) spawn the game as a **child**
+process; the `cmd`/launcher handle you started can exit while the game keeps sitting
+at the main menu — a 4.5 GB working set per leftover instance. During a shared RAM
+window, repeated gates left several instances alive until teammates killed them on
+maintainer instruction. The recipe: poll `perf.log` for
+`MenuPostProcessEffect.PostWorldLoaded`, then `tasklist /FI "IMAGENAME eq
+OpenRA.WindowsLauncher.exe"` (or `OpenRA.exe`) and `taskkill /PID` the instance whose
+`(Get-Process …).Path` matches YOUR worktree — never kill by the handle you launched,
+and never leave the menu standing open. A "process exited" reading on the wrapper
+says nothing about the game child.
+
 ## The canonical engine update pipeline (binding, uniform process)
 
 The engine lives in TWO places that must stay in sync. Follow these steps IN ORDER for every engine change:
