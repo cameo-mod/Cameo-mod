@@ -168,3 +168,39 @@ def test_per_launch_fields_normalized(tmp_path):
     b = [handshake_pkt(1, target=b'GameUid: 222\r\nAuthToken: bbb'),
          sync_pkt(1)]
     assert verdict(a, b, tmp_path) == 0
+
+
+def test_interior_gap_missing_record_diverges(tmp_path):
+    # B is missing a record at an interior frame — inside the shared window,
+    # both captures were recording -> real divergence, never a flush.
+    a = [sync_pkt(1), sync_pkt(2), sync_pkt(3)]
+    b = [sync_pkt(1), sync_pkt(3)]
+    assert verdict(a, b, tmp_path) == 1
+
+
+def test_interior_order_gap_diverges(tmp_path):
+    a = [sync_pkt(1), order_pkt(5, ('Move', 0x88, 42)), sync_pkt(9)]
+    b = [sync_pkt(1), sync_pkt(9)]
+    assert verdict(a, b, tmp_path) == 1
+
+
+def test_packet_grouping_is_irrelevant(tmp_path):
+    # One packet holding two orders equals two packets with one order each —
+    # ReplayConnection batching is a recording artifact, not gameplay.
+    a = [order_pkt(5, ('Move', 0x88, 42), ('Stop', 0x80, 43))]
+    b = [order_pkt(5, ('Move', 0x88, 42)), order_pkt(5, ('Stop', 0x80, 43))]
+    assert verdict(a, b, tmp_path) == 0
+
+
+def test_same_orders_different_packet_order_identical(tmp_path):
+    # Interleaving across channels within/across frames is not gameplay.
+    a = [order_pkt(5, ('Move', 0x88, 42)), sync_pkt(5)]
+    b = [sync_pkt(5), order_pkt(5, ('Move', 0x88, 42))]
+    assert verdict(a, b, tmp_path) == 0
+
+
+def test_trailing_disconnect_is_not_flush(tmp_path):
+    a = [sync_pkt(1), sync_pkt(2)]
+    b = [sync_pkt(1), sync_pkt(2),
+         struct.pack('<i', 9) + b'\xbf' + b'client left']
+    assert verdict(a, b, tmp_path) == 1

@@ -17,10 +17,13 @@
 # strings are compared byte-exact (raw bytes, never lossy-decoded); declared
 # string lengths that overrun a packet fail closed as UNPARSED.
 #
-# Comparison is per-frame record multiset: order packets and sync-hash packets
-# flush on separate channels, so packet interleaving and the exit-tail cutoff
-# are recording artifacts, not gameplay. Unknown or malformed packet bytes are
-# preserved byte-exact in the canonical record AND counted — any unparsed tail
+# Comparison is per-frame record multiset, matching the engine protocol:
+# ReplayConnection batches orders per flush on one channel and sync-hash
+# packets on another, so packet boundaries/interleaving inside one frame are
+# recording artifacts — the gameplay content of a frame is the SET of orders
+# and sync records emitted for it. Packet grouping is therefore irrelevant;
+# per-frame record multisets are the canonical form. Unknown or malformed
+# packet bytes are preserved byte-exact AND counted — any unparsed tail
 # downgrades the verdict to UNPARSED_TAILS (fail closed; exit 3).
 #
 # Verdicts: IDENTICAL (0) / IDENTICAL_TAIL_FLUSH (0) / DIVERGENT (1) /
@@ -223,9 +226,12 @@ def extract(path, pregame, ignore_client, ignore_synchash):
             continue
         orders, tails = parse_orders(pkt)
         unparsed += tails
-        if orders:
-            records.append(head + (frame, 'ORDERS', tuple(orders)))
-        elif len(pkt) > 4:
+        for o in orders:
+            if o[0] == 'UNPARSED':
+                records.append(head + (frame, 'UNPARSED', o[1]))
+            else:
+                records.append(head + (frame, 'ORDER', o))
+        if not orders and len(pkt) > 4:
             records.append(head + (frame, 'OTHER', pkt[4:].hex()))
     if not terminated:
         incomplete = True
@@ -234,12 +240,13 @@ def extract(path, pregame, ignore_client, ignore_synchash):
 
 def describe(rec):
     """Human-readable one-liner for a canonical record."""
-    kind = rec[-2] if rec[-2] in ('SYNCHASH', 'DISCONNECT', 'ORDERS', 'OTHER') else None
-    if kind == 'ORDERS':
-        orders = rec[-1]
-        names = [o[1].decode('utf-8', 'replace') if isinstance(o[1], bytes)
-                 else str(o[1]) for o in orders]
-        return f"frame={rec[len(rec)-3]} ORDERS {names[:6]}{'...' if len(names) > 6 else ''}"
+    kind = rec[-2] if rec[-2] in ('SYNCHASH', 'DISCONNECT', 'ORDER',
+                                  'UNPARSED', 'OTHER') else None
+    if kind == 'ORDER':
+        o = rec[-1]
+        name = (o[1].decode('utf-8', 'replace') if isinstance(o[1], bytes)
+                else str(o[1]))
+        return f"frame={rec[len(rec)-3]} ORDER {o[0]} {name} flags={o[2] if o[0] == 'O' else '-'}"
     return f"frame={rec[len(rec)-3]} {kind} {str(rec[-1])[:80]}"
 
 
@@ -357,6 +364,13 @@ def main(argv):
         if want_json:
             print(json.dumps(result))
         return 4
+    caveats = []
+    if ignore_synchash:
+        caveats.append('--ignore-synchash: sync hashes were excluded — '
+                       'this verdict is NOT strict identity proof')
+    if ignore_client:
+        caveats.append('--ignore-client: client ids were excluded')
+
     if fmd is None:
         if tails[a] or tails[b]:
             # Fail closed: the bytes were preserved in the comparison but their
@@ -369,8 +383,11 @@ def main(argv):
                 print(json.dumps(result))
             return 3
         result['verdict'] = 'IDENTICAL'
+        result['caveats'] = caveats
         print(f"IDENTICAL — {len(ra)}/{len(rb)} canonical records, same "
               f"per-frame order+sync content, sha256/16 {digests[a]}")
+        for c in caveats:
+            print(f"  caveat: {c}")
         if want_json:
             print(json.dumps(result))
         return 0
@@ -378,9 +395,12 @@ def main(argv):
     if trailing and not (tails[a] or tails[b]):
         result['verdict'] = 'IDENTICAL_TAIL_FLUSH'
         result['tail_flush_frame'] = first_frame
+        result['caveats'] = caveats
         print(f"IDENTICAL (tail flush) — orders+syncs equal for all shared "
               f"frames; only trailing records past frame {first_frame} differ "
               f"(replay write cutoff at exit). sha256/16 {digests[a]}")
+        for c in caveats:
+            print(f"  caveat: {c}")
         for k in only_a or {}:
             print(f"  only-A f{first_frame}: {repr(k)[:200]}")
         for k in only_b or {}:

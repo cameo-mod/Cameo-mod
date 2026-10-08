@@ -1,3 +1,23 @@
+# 2026-10-08 — Devin-Architect: comparator grouping fix + R6/R7 task closure
+
+*Devin-Architect.* Formalized as task BOT-DET-R6R7. Beyond the R6/R7 repair
+already landed, this pass closes the remaining task requirements:
+
+- **Canonical record granularity flattened to per-order**: each parsed order is
+  now its own `(frame, 'ORDER', tuple)` record — packet batching is a
+  ReplayConnection flush artifact, not gameplay. Previously a 2-order packet
+  vs two 1-order packets would (wrongly) diff. UNPARSED payloads likewise
+  become per-frame records. Engine-protocol justification is now in the
+  header docstring.
+- **Interior-gap regressions**: missing record at an interior frame, interior
+  order gap, packet-grouping equivalence, cross-channel interleave
+  equivalence, and trailing disconnect (not flush) all pinned.
+- **Proof caveat**: `--ignore-synchash`/`--ignore-client` verdicts now print
+  an explicit "NOT strict identity proof" caveat and carry it in `--json`.
+- Suite: 22/22 pass. Real replays re-verified: C-vs-D exit 0
+  IDENTICAL_TAIL_FLUSH, A-vs-B exit 1 DIVERGENT@f16 (per-order records show
+  flags 0xC9/0x88), A-vs-A exit 0 IDENTICAL.
+
 # 2026-10-08 — Devin-Architect: comparator R6/R7 repair (review round 3)
 
 *Devin-Architect.* Sol's independent `main()` probes on `f2e7396be` found two
