@@ -1,3 +1,40 @@
+# 2026-10-08 — Devin-Architect: comparator R6/R7 repair (review round 3)
+
+*Devin-Architect.* Sol's independent `main()` probes on `f2e7396be` found two
+more defect classes; both repaired with regressions:
+
+- **R6 — any sync-only diff classified as tail flush**: `frame_multiset_diff`
+  called trailing=True whenever the differing records contained no
+  ORDERS/DISCONNECT reprs — so a *same-frame* pair of different sync hashes
+  (world-state divergence, the worst kind) yielded IDENTICAL_TAIL_FLUSH.
+  Tail flush is now the genuine terminal one-sided condition: every differing
+  record must sit at a frame strictly beyond `min(lastA, lastB)` — any diff
+  inside the shared window (both captures were recording) is DIVERGENT —
+  and every extra tail record must be a passive SYNCHASH (orders,
+  disconnects, and opaque OTHER payloads in a tail are real content → 1).
+- **R7a — string bound not enforced**: `read_str` sliced `b[p:p+ln]` without
+  checking `p+ln <= len(b)`; Python slices truncate silently, so a declared
+  8-byte string with 3 bytes present parsed as 'abc' and dropped the rest.
+  Now raises → UNPARSED. Covers order names, handshake name/target, and
+  target strings; varint overrun already raised via IndexError, and a
+  shift>28 guard was added.
+- **R7b — lossy decode collapsed bytes**: `decode('utf-8','replace')` made
+  distinct byte sequences compare equal. Strings are now carried as raw
+  bytes end-to-end (order names, handshake targets, target strings);
+  normalization runs on bytes; decoding exists only display-side in
+  `describe()`.
+- R7 empty/truncated/missing-terminator findings were already closed by the
+  INCOMPLETE_CAPTURE work; regression tests now pin all of them.
+
+Suite: `tools/tests/test_order_stream_diff.py` — 17/17 pass. Real replays:
+fixed pair → IDENTICAL_TAIL_FLUSH (exit 0), pre-fix pair → DIVERGENT@f16
+(exit 1, flags visible), self-identity A vs A → IDENTICAL (exit 0).
+
+Note: lead's release gate adds — after R6/R7 review passes — a clean
+committed candidate rebased onto master 9ea31fdfb with engine foundation
+8c2b385f82; the b6a6fb14 BASE proof (old pin) is superseded as
+current-foundation evidence and must be re-run post-rebase.
+
 # 2026-10-08 — Devin-Architect: comparator fail-closed hardening (INCOMPLETE_CAPTURE)
 
 *Devin-Architect.* Sol's re-review request added two requirements beyond R4/R5:

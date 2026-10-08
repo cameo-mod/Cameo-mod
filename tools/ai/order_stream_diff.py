@@ -13,7 +13,9 @@
 #   Handshake AuthToken / AuthSignature (per-launch auth challenge)
 # Everything else — every order byte including the raw i16 flags (Queued /
 # TargetIsCell carry no field payload), subject, target, extra field,
-# sync-hash payload — must match for the runs to pass.
+# sync-hash payload — must match for the runs to pass. Order/handshake
+# strings are compared byte-exact (raw bytes, never lossy-decoded); declared
+# string lengths that overrun a packet fail closed as UNPARSED.
 #
 # Comparison is per-frame record multiset: order packets and sync-hash packets
 # flush on separate channels, so packet interleaving and the exit-tail cutoff
@@ -33,7 +35,7 @@
 import hashlib, json, re, struct, sys
 
 PER_LAUNCH_FIELDS = re.compile(
-    r'((?:GameUid|AuthToken|AuthSignature)\s*:\s*)[^\r\n]+')
+    rb'((?:GameUid|AuthToken|AuthSignature)\s*:\s*)[^\r\n]+')
 
 ORDER_FIELDS = 0xFF
 ORDER_HANDSHAKE = 0xFE
@@ -42,17 +44,27 @@ PKT_SYNCHASH = 0x65
 
 
 def read_str(b, p):
+    """Read a 7bit-length-prefixed string; returns (raw_bytes, new_p).
+
+    Raw bytes are returned, never decoded — a lossy decode would collapse
+    distinct byte sequences into identical replacement characters. Declared
+    lengths are never trusted: a varint or payload that runs past the buffer
+    raises, so the caller emits UNPARSED instead of silently truncating.
+    """
     ln = 0
     shift = 0
     while True:
-        byte = b[p]
+        byte = b[p]  # IndexError on varint overrun
         p += 1
         ln |= (byte & 0x7F) << shift
         if not (byte & 0x80):
             break
         shift += 7
-    s = b[p:p + ln].decode('utf-8', 'replace')
-    return s, p + ln
+        if shift > 28:
+            raise ValueError('bad string length varint')
+    if p + ln > len(b):
+        raise ValueError('declared string length overruns packet')
+    return b[p:p + ln], p + ln
 
 
 KNOWN_ORDER_FLAGS = 0x1FF  # Target|ExtraActors|TargetString|Queued|ExtraLocation|ExtraData|TargetIsCell|Subject|Grouped
@@ -80,11 +92,12 @@ def parse_orders(pkt):
             try:
                 name, p = read_str(pkt, p)
                 target, p = read_str(pkt, p)
-            except IndexError:
+            except (IndexError, ValueError):
                 out.append(('UNPARSED', pkt[start - 1:].hex()))
                 unparsed += 1
                 break
-            out.append(('HS', name, PER_LAUNCH_FIELDS.sub(r'\1<NORM>', target)))
+            out.append(('HS', name,
+                        PER_LAUNCH_FIELDS.sub(rb'\1<NORM>', target)))
             continue
         if t != ORDER_FIELDS:
             out.append(('UNPARSED', pkt[p:].hex()))
@@ -128,7 +141,8 @@ def parse_orders(pkt):
             target_string = None
             if flags & 0x04:
                 target_string, p = read_str(pkt, p)
-                target_string = PER_LAUNCH_FIELDS.sub(r'\1<NORM>', target_string)
+                target_string = PER_LAUNCH_FIELDS.sub(rb'\1<NORM>',
+                                                      target_string)
             extra_hex = ''
             start = p
             if flags & 0x02:          # ExtraActors: i32 n + n u32
@@ -223,7 +237,8 @@ def describe(rec):
     kind = rec[-2] if rec[-2] in ('SYNCHASH', 'DISCONNECT', 'ORDERS', 'OTHER') else None
     if kind == 'ORDERS':
         orders = rec[-1]
-        names = [o[1] for o in orders]
+        names = [o[1].decode('utf-8', 'replace') if isinstance(o[1], bytes)
+                 else str(o[1]) for o in orders]
         return f"frame={rec[len(rec)-3]} ORDERS {names[:6]}{'...' if len(names) > 6 else ''}"
     return f"frame={rec[len(rec)-3]} {kind} {str(rec[-1])[:80]}"
 
@@ -235,6 +250,14 @@ def frame_multiset_diff(ra, rb):
     flush interleaving (and the tail cutoff at process exit) is not part of the
     simulated game. Two runs are identical when every frame carries the same
     multiset of orders/sync records, regardless of packet write order.
+
+    A tail flush is ONLY a genuine terminal one-sided tail: every differing
+    record sits strictly beyond the shorter capture's last recorded frame, and
+    every such extra record is a passive SYNCHASH. Any difference inside the
+    shared window (frame <= min(lastA, lastB)) — including a same-frame
+    different sync hash — means both captures were recording there, so it is a
+    real divergence. Trailing orders/disconnects/unknown payloads are likewise
+    real content, not flush artifacts.
     Returns (first_diff_frame, only_a, only_b, trailing_only) or None.
     """
     import collections
@@ -242,34 +265,40 @@ def frame_multiset_diff(ra, rb):
     def by_frame(recs):
         m = collections.defaultdict(collections.Counter)
         for r in recs:
-            m[r[-3]][repr(r)] += 1
+            m[r[-3]][r] += 1
         return m
 
     fa, fb = by_frame(ra), by_frame(rb)
-    first = None
-    only_a = only_b = None
-    for f in sorted(set(fa) | set(fb)):
-        if fa.get(f, {}) == fb.get(f, {}):
-            continue
-        diff_a = fa.get(f, collections.Counter()) - fb.get(f, collections.Counter())
-        diff_b = fb.get(f, collections.Counter()) - fa.get(f, collections.Counter())
-        if first is None:
-            first, only_a, only_b = f, diff_a, diff_b
-        # Tail-only divergence: one side's replay ran a few more frames of pure
-        # sync hashes (no order records) after the other stopped — a recording
-        # cutoff artifact, not a decision difference.
-    trailing = True
-    for f in sorted(set(fa) | set(fb)):
-        if fa.get(f, {}) == fb.get(f, {}):
-            continue
-        diff_a = fa.get(f, collections.Counter()) - fb.get(f, collections.Counter())
-        diff_b = fb.get(f, collections.Counter()) - fa.get(f, collections.Counter())
-        for side, counter in (('a', diff_a), ('b', diff_b)):
-            for rec_repr in counter:
-                if "'ORDERS'" in rec_repr or "'DISCONNECT'" in rec_repr:
-                    trailing = False
-    if first is None:
+    diff_frames = [f for f in sorted(set(fa) | set(fb))
+                   if fa.get(f) != fb.get(f)]
+    if not diff_frames:
         return None
+    first = diff_frames[0]
+    only_a = fa.get(first, collections.Counter()) - fb.get(
+        first, collections.Counter())
+    only_b = fb.get(first, collections.Counter()) - fa.get(
+        first, collections.Counter())
+
+    la = max(fa) if fa else None
+    lb = max(fb) if fb else None
+    if la is None or lb is None:
+        return first, only_a, only_b, False
+    shared_max = min(la, lb)
+    trailing = True
+    for f in diff_frames:
+        if f <= shared_max:
+            trailing = False
+            break
+        extras = (fa.get(f, collections.Counter())
+                  - fb.get(f, collections.Counter()))
+        extras += (fb.get(f, collections.Counter())
+                   - fa.get(f, collections.Counter()))
+        for rec in extras:
+            if rec[-2] != 'SYNCHASH':
+                trailing = False
+                break
+        if not trailing:
+            break
     return first, only_a, only_b, trailing
 
 
@@ -353,9 +382,9 @@ def main(argv):
               f"frames; only trailing records past frame {first_frame} differ "
               f"(replay write cutoff at exit). sha256/16 {digests[a]}")
         for k in only_a or {}:
-            print(f"  only-A f{first_frame}: {k[:200]}")
+            print(f"  only-A f{first_frame}: {repr(k)[:200]}")
         for k in only_b or {}:
-            print(f"  only-B f{first_frame}: {k[:200]}")
+            print(f"  only-B f{first_frame}: {repr(k)[:200]}")
         if want_json:
             print(json.dumps(result))
         return 0
@@ -376,12 +405,12 @@ def main(argv):
     print(f"DIVERGENT at frame {first_frame} "
           f"(of {len(ra)}/{len(rb)} records), sha256/16 {digests[a]} vs {digests[b]}{inc}")
     for k in only_a:
-        print(f"  only-A: {k[:240]}")
+        print(f"  only-A: {repr(k)[:240]}")
     for k in only_b:
-        print(f"  only-B: {k[:240]}")
+        print(f"  only-B: {repr(k)[:240]}")
     if want_json:
-        result['only_a'] = list(only_a)
-        result['only_b'] = list(only_b)
+        result['only_a'] = [repr(k) for k in only_a]
+        result['only_b'] = [repr(k) for k in only_b]
         print(json.dumps(result))
     return 1
 
