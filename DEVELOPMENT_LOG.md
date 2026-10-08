@@ -1,3 +1,51 @@
+# 2026-10-08 — Devin-Architect: wave-1 scheduler v3 — fail-closed evidence adjudication
+
+*Devin-Architect.* Sol's wave-5 re-review (REVIEW_2026-10-08_wave5_adjudication)
+found the scheduler treating first-diff-frame `only_a`/`only_b` as the complete
+unmatched stream — later orders hid behind an early sync gap — and accepting
+empty/aggregate evidence. v3 repair on top of the coordinator's in-place v2
+(narrow adjudication rule):
+
+- **`compare()` PASS shape** (`payload_is_proof`): PASS requires comparator
+  exit 0 AND verdict in {IDENTICAL, IDENTICAL_TAIL_FLUSH} AND a well-formed
+  payload — both replay paths present as keys in `records`/`incomplete`/
+  `unparsed_tails`, every record count a positive non-bool int, every
+  incomplete flag explicitly False, every unparsed-tail count exactly 0.
+  Missing keys, malformed JSON, timeout, wrong types, or inconsistent
+  exit/verdict all fail closed; exit 0 with a proof verdict but invalid
+  metadata reports `UNPROVEN_EVIDENCE` (never PASS, never DIVERGENT).
+- **Full artifact persistence**: per pair, the comparator's complete stdout,
+  stderr, and parsed JSON payload are written under
+  `results/<run_id>/comparator/`; the summary carries artifact paths, not
+  truncated snippets.
+- **`adjudicate()`**: gated on exit == 1 only; re-extracts both replays
+  in-process via the frozen comparator's own `extract()` and Counter-diffs
+  over ALL frames — first-frame hiding is impossible. Adjudicated-artifact
+  rule unchanged from v2: one-sided extras, all SYNCHASH, all strictly past
+  the shorter stream's last frame, gated by nonempty identical match records
+  (diagnostic gate that can only reject, never prove). Any ORDER/DISCONNECT/
+  UNPARSED/interior/two-sided record stays DIVERGENT — tail orders are
+  unprovable and are never reclassified.
+- **Main loop**: every `exit != 0` propagates as wave-stop-invalid (incl.
+  exit 3/4, timeout, malformed output); only `c["ok"]` continues the wave.
+- Frozen comparator bytes untouched (TOOL_SHA256 pins verified pre-launch).
+
+Regression suite `tools/tests/test_wave1_adjudication.py`: 20/20 pass —
+first-frame-gap hiding a later two-sided mismatch, run4-style tail
+StartProduction, interior one-sided extra, pure-sync tail (adjudicates),
+match-record gate reject-only semantics (differing/missing/empty aggregates
+never admit), incomplete/zero/malformed/wrong-exit compare records, and the
+full PASS-shape matrix.
+
+Real-data check on the frozen wave-5 evidence (12 cells): both strict passes
+reproduce (`s1337`/`s8675309` gate pairs IDENTICAL_TAIL_FLUSH, ok=True); all
+4 flagged pairs stay DIVERGENT with the tail orders now surfaced — every
+unmatched record across all 6 pairs is terminal-tail (zero interior diffs):
+pure-SYNCHASH tail runs ending in ORDER records at the longer capture's
+final frames (RepairBuilding f4068, SetRallyPoint f4955, PlaceBuilding
+f11856, 7× Move f7197). These are post-window capture stragglers — exactly
+what the SPEC_2026-10-08 terminal fence eliminates by construction.
+
 # 2026-10-08 — Devin-Architect: comparator grouping fix + R6/R7 task closure
 
 *Devin-Architect.* Formalized as task BOT-DET-R6R7. Beyond the R6/R7 repair
