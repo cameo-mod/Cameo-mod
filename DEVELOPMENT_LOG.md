@@ -1,3 +1,28 @@
+# 2026-10-08 — Devin-Architect: order_stream_diff.py — BASE==BASE comparator for the parity proof
+
+*Devin-Architect.* Companion to `CameoDevSeed`: `tools/ai/order_stream_diff.py` compares
+the canonical order streams of two `.orarep` replays and reports IDENTICAL or the first
+divergent record — the assertion half of the 3-seed × 2-map proof (`CameoDevSeed` pins
+the seed; this proves the runs were identical).
+
+- Format verified against `ReplayRecorder.cs:74-98` (`[i32 client][i32 len][i32 frame]`
+  `[payload]` records, `-1` terminator before trailing metadata; uncompressed) — same
+  layout `order_trace.py` parses, and cross-checked: `order_trace` reads the tool's
+  synthetic fixtures identically (4 orders / 2 units / frame 25).
+- Canonical records cover every packet kind: Fields orders (all flag-gated fields kept
+  byte-exact: subject, target, target-string, extras, grouped actors), Handshake
+  orders, SyncHash (0x65 — proving world-state identity, stronger than orders alone),
+  Disconnect, and fallback OTHER for unknown types.
+- Per-launch normalizations applied to target strings only — `GameUid`
+  (`Guid.NewGuid` per launch, `Server.cs:334`), `AuthToken`, `AuthSignature`.
+  Everything else must match byte-for-byte in order.
+- Flags: `--pregame` includes lobby/handshake records (frame <= 0, still normalized),
+  `--ignore-client` drops the connection-id header, `--ignore-synchash`, `--json`.
+- Verified on synthetic fixtures: same-seed/different-GameUid pair → IDENTICAL
+  (exit 0); injected divergence → DIVERGENT at the exact record with 3-record context
+  (exit 1). Real-replay validation rides the lead's parity run.
+- Exit codes 0/1/2 for gate wiring: `order_stream_diff.py A.orarep B.orarep`.
+
 # 2026-10-08 — Devin-Architect: CameoDevSeed — dev-gated lobby seed pin for BASE==BASE parity runs
 
 *Devin-Architect.* The BOT-DETERMINISM proof (3 seeds × 2 maps, identical order streams)
