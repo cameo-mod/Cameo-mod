@@ -183,7 +183,8 @@ def learned_paths(root):
 
 def validate_learned(paths):
     errors=[]
-    roots={'arsenal_priors.yaml':'BotArsenalPriors:', 'build_order_knobs.yaml':'BotBuildOrderKnobs:', 'plan_bandits.yaml':'BotPlanBandits:'}
+    roots={'arsenal_priors.yaml':'BotArsenalPriors:', 'build_order_knobs.yaml':'BotBuildOrderKnobs:',
+           'plan_bandits.yaml':'BotPlanBandits:', 'fight_learning.yaml':'BotFightLearning:'}
     for path in paths:
         lines=[x for x in path.read_text(encoding='utf-8-sig').splitlines() if x.strip() and not x.lstrip().startswith('#')]
         ok=bool(lines)
@@ -201,6 +202,13 @@ def validate_learned(paths):
                         if key=='VisibilityPercentByPhase': ok=bool(re.fullmatch(r'[0-9, ]*',val))
                         else:
                             scope=key.removeprefix('TradePercent@');ok=key.startswith('TradePercent@') and scope_ok(scope) and not val;parent='actor'
+                    elif path.name=='fight_learning.yaml':
+                        if key in {'Schema','CalibrationMinimumSamples','ThresholdMinimumSamples','EffectiveValueMinimumSamples'}:
+                            ok=bool(re.fullmatch(r'-?[0-9]+',val))
+                        else:
+                            head,sep,scope=key.partition('@')
+                            ok=(head in {'Evidence','RetreatRatioPct','EngageMarginPct','CalibrationMilli','EffectiveValueMilli'}
+                                and bool(sep) and scope_ok(scope) and bool(re.fullmatch(r'-?[0-9]+',val)))
                     elif path.name=='build_order_knobs.yaml':
                         head,sep,scope=key.partition('@');pers,sep2,scope=scope.partition('__');ok=head in {'Knobs','Openings'} and bool(sep and sep2) and pers in PERSONALITIES and scope_ok(scope) and not val;parent=head
                     else:
