@@ -1,3 +1,39 @@
+# 2026-10-08 — Devin-Architect: CameoDevSeed — dev-gated lobby seed pin for BASE==BASE parity runs
+
+*Devin-Architect.* The BOT-DETERMINISM proof (3 seeds × 2 maps, identical order streams)
+needs same-seed launches, but the engine generates `randomSeed` from `DateTime.Now`
+inside `Server`'s ctor with no override path (`engine/OpenRA.Game/Server/Server.cs:307`).
+`LobbyInfo.GlobalSettings.RandomSeed` is a mutable field synced to every client and is
+the ONLY seed source read downstream: `StartGame` builds `playerRandom` (faction
+resolution + SharedRandom) from it at `Server.cs:1378`, and `BotRng` reads the client's
+`World.LobbyInfo.GlobalSettings.RandomSeed` per bot. Pinning that field before the
+server loop starts therefore covers every decision RNG uniformly — no engine change.
+
+- New dev-only server trait `OpenRA.Mods.Cameo/ServerTraits/CameoDevSeed.cs`
+  (`ServerTrait` + `INotifyServerStart`), registered in `mods/cameo/mod.yaml`
+  `ServerTraits:` next to `CameoLobbyAutopilot`. Inert unless `Cameo.DevSeed=<int>`
+  appears on the server command line (same arg-scan style as the autopilot gate).
+  On `ServerStarted` it sets `LobbyInfo.GlobalSettings.RandomSeed` and calls
+  `SyncLobbyInfo()` so already-connecting clients get the pinned value; logs
+  `CAMEO DEV SEED pinned` on the `server` channel.
+- `CameoDevArgs.Value(name)` added next to `IsEnabled` — returns the text after
+  `Name=` or null; unparseable/absent values leave the trait inert.
+- Usage for the lead's parity run: `OpenRA.Server Game.Mod=cameo Cameo.DevSeed=1337`
+  (optionally + `Cameo.DevAutopilot=True` + plan file for a fully scripted run).
+  Note: `GameUid` remains `Guid.NewGuid()` per launch — replay names/gameinfo differ,
+  but the order stream does not consume it.
+- Verified statically: `RandomSeed` writes are ctor-only (`Server.cs:329`), reads are
+  post-`ServerStarted` (`:1378` inside `StartGame`), so the pin cannot race.
+  Live pin verification is part of the lead's 3×2 heavy run (ServerTraits only
+  instantiate when a `Server` is created — menu boot does not construct them, but the
+  registration mirrors the already-reviewed `CameoLobbyAutopilot` pattern).
+
+Gates:
+- build: `dotnet build -c Release -p:TargetPlatform=win-x64` — Build succeeded, 0 errors
+- boot-gate: PASS — `MenuPostProcessEffect.PostWorldLoaded` at perf.log:534 of this
+  worktree's instance; 0 new `exception-*.log`; own PID+child tree killed via taskkill;
+  codex-display-settings-fix's instance left running untouched; SAC state: Off
+
 # 2026-10-08 — Devin-Architect: BOT-DETERMINISM review fixes — MapCreated null-Uid seed + autopilot start retry
 
 *Devin-Architect.* Review by teammate `01a11068` on `624f5b27d` found two defects, both fixed

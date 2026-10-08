@@ -36,5 +36,16 @@ namespace OpenRA.Mods.Cameo
 
 			return false;
 		}
+
+		/// <summary>The text after `Name=` (any value), or null when the arg is absent.</summary>
+		public static string Value(string name)
+		{
+			var expect = name + "=";
+			foreach (var arg in Environment.GetCommandLineArgs())
+				if (arg.StartsWith(expect, StringComparison.OrdinalIgnoreCase))
+					return arg[expect.Length..];
+
+			return null;
+		}
 	}
 }
