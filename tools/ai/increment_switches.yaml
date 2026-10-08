@@ -260,3 +260,7 @@ groups:
   BU_harvester_logistics:            # ECON-B (SPEC_2026-10-05_econ_logistics Part B): refinery-served fields keep a spreader-sized reservation; surplus harvesters re-route only over threat-free corridors (remembered threat + enemy indice counts) under a Harvest lease; production requests fire only when the pool cannot cover demand. @generic only — @classic keeps the per-refinery count and cap-push, bit-identical
     HarvesterBotModuleCA@generic:
       UseHarvesterLogistics: true
+  BT_expansion_prebuild:             # ECON-A (SPEC_2026-10-05_econ_logistics Part A): an MCV driving to a committed expansion target posts an ExpansionDemand (the retained RequestedRefineries record + ETA/defence/bindings); the queue pre-builds the outpost refinery (through the refinery-law claim path) and the strongest affordable defence so they reach Ready ~= deploy, holds them at Queue[0] (cap 1/queue; sole-producer defence exempt unless eta-now <= ExpansionHoldSlack=500), and places them the tick the conyard lands; expiry unwinds with full refunds or anchor re-adoption. SwitchCondition keeps the shared @generic instance out of classic = bit-identical
+    BaseBuilderBotModuleCA:
+      SwitchCondition: genericbot    # shared @generic instance serves classicbot too — the F2 pattern (spec: classic stays the A/B reference)
+      UseExpansionPrebuild: true

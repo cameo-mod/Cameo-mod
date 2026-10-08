@@ -115,6 +115,56 @@ Gates:
 - audit_garrison_weapons informational: G1 4 scrin infantry w/o garrison weapon,
   G4 1 cabal_ravager (pre-existing findings, not merge-introduced)
 - BOOT_GATE: PASS (isolated support dir, menu marker, package in worktree, 0 exceptions)
+# 2026-10-06 — Devin-Developer: ECON-A — BT_expansion_prebuild (SPEC_2026-10-05_econ_logistics Part A)
+
+*Devin.* Branch `devin/econ-a`, worktree `C:\cameo-wt\econ-a`, base `inc@5fecf6710`, engine pin
+`d5d8b2a6853bff3b5a00cc5db7d86b03d4f30684`. Fleet spec: `Cameo-mod-fleet/SPEC_2026-10-05_econ_logistics.md` Part A.
+New §12.36 in `docs/design/AI_ARCHITECTURE.md`.
+
+- **Demand seam:** the existing `IBotSuggestRefineryProduction.RequestLocation` post (engine
+  `McvExpansionManagerBotModule` calls it the tick a deploy target is committed — :881 MCV, :847 conyard
+  relocation) now also creates an `ExpansionDemand` (new file, `OpenRA.Mods.CA/Traits/BotModules/ExpansionDemand.cs`)
+  alongside the retained `RequestedRefineries` record. ETA = `now + PathFinder distance /
+  MovementSpeedForCell + ExpansionDeployTicks` (25 — `TransformsInfo` has no duration field, documented
+  approximation), recomputed every 25 ticks. Defence pick = `DefenceStrength` (the AttackOrFleeFuzzy damage model:
+  `Damage * Burst / reload window * 100` per DamageWarhead, burst-delay term clamped [1,200]) over `DefenseTypes`
+  buildable on `DefenseQueues`, affordable against projected cash (`Earned` rate over a 500-tick window), ties on
+  cost then ordinal name; sticky once chosen.
+- **Queue injection:** `ChooseExpansionDemandItem` (BaseBuilderQueueManagerCA) sits just above ordinary wants in
+  `ChooseBuildingToBuild`; items queue when `etaTick - buildTime <= now` and ride the planner-want cost floor
+  (the reserve gate would push them past their own ETA). Ready items hold at `Queue[0]` via `return false` in the
+  Done branch — the REF-1 crawl-hold mechanic; the engine's one-head-per-queue rule is the hold cap. Defence hold
+  additionally gated by `DefenceHoldPermitted` (sole building producer exempts unless `etaTick - now <=
+  ExpansionHoldSlack` = 500; refinery never skipped).
+- **Deploy → place:** `ReplacedByActor` into a `ConstructionYardTypes` actor sets `Deployed`, nudges every QM's
+  `WaitTicks` to 0, and the normal placement path does the rest — refinery through the refinery-law claim biased
+  to the demand's own `RequestedRefineries` entry, defence through the §12.35 front/back advisor's Defence class
+  at the outpost, then the defence-placement advisor, then the classic annulus scan. Bound items skip the
+  classification roll entirely (no LocalRandom on the demand path).
+- **Expiry/unwind:** MCV dead/disposed/idle > `ExpansionDemandIdleTicks` (100) or claimed under a different
+  `BotLeasePurpose` → bound items cancel via `Order.CancelProduction` (full paid refund), except a held Ready
+  refinery the law can re-adopt (`NextRefineryClaim(null)` non-null) which stays queued as an ordinary refinery.
+  Non-yard replacements re-key `RequestedRefineries` + `ExpansionDemands` so conyard→MCV relocations keep their
+  demand. Deployed-and-unbound demands clean up at their expiry tick.
+- **Switch:** `BT_expansion_prebuild` registered in `tools/ai/increment_switches.yaml` — `UseExpansionPrebuild`
+  + `SwitchCondition: genericbot` on the shared `@generic` instance (F2 pattern; classic stays the reference).
+  Off = every demand branch dormant, queue flow bit-identical.
+- **Tests:** `BaseBuilderQueueEvalTest` +8 — due window boundary + late start, `int.MaxValue` never-due, travel
+  division + stalled/pathless sentinel, sole-producer slack edges, strength ordering, affordability-at-ETA, and
+  the cost-then-name tie-break. `DefenceStrength` itself is not unit-testable (needs resolved `ArmamentInfo`/
+  `AttackBaseInfo`); its formula mirrors `AttackOrFleeFuzzy` verbatim.
+
+Gates: `OpenRA.Mods.CA` build 0 errors (warnings all pre-existing class spam); `Cameo.Test` **1199/1199**;
+`audit_fog_honesty` PASS (82/266 — all reads are own-unit + public map data); `audit_multi_traitinfo` PASS
+(990 scanned, 0 dangerous); `audit_doc_claims` _clean_ (44/44); `ai_module_map --check` current;
+`audit_bot_wiring` no new findings (R1 unreachable 0, R5 never-loaded 0); Release build clean;
+**boot-gate PASS** (isolated support dir, menu reached, `PACKAGE_IN_WORKTREE=True`, 0 exceptions — required
+building `OpenRA.WindowsLauncher` with `-p:LauncherName=OpenRA` plus `OpenRA.Platforms.Default`, neither of which
+`CameoMod.sln` produces).
+
+Not in scope (Part A deferred/none): no engine changes; the `McvExpansion` lease purpose exists but nothing
+claims it yet, so the lease-loss lapse fires only on a foreign-purpose claim; `DefenceStrength` ignores
+non-damage warheads exactly as the fuzzy model does.
 
 # 2026-10-05 — Devin-T3Verify: PREDICTOR-PARITY P1 — effective-damage port + live per-actor stats
 
@@ -19748,7 +19798,6 @@ Branch devin/tier4/pricing-default, task 01a10850 (maintainer ruling 2026-10-04)
   missing objects in the shared store — unreachable crash debris only, verified clean
   from refs; lead confirmed no repair needed.
 
-<<<<<<< HEAD
 ## 2026-10-06 — Devin-Architect: ECON-B `BU_harvester_logistics` (SPEC_2026-10-05_econ_logistics Part B)
 
 * One owner, extended not forked: `HarvesterBotModuleCA` keeps the classic path verbatim behind
@@ -19791,7 +19840,6 @@ runtime trade-prior consumer clamps raw serialized ratios to 50–150). A regist
 preserve those distinctions, declare future rows explicitly unscheduled, and reject
 identity-bearing scope keys. This task adds that contract and a focused validator rather
 than duplicating or changing the existing fitter policies.
-=======
 ## 2026-10-06/07 — Devin (TRAIT-U0): trait-unification migration infrastructure (no merges yet)
 
 Branch devin/trait-u0, task 01a110b6; builds on scaffold 7d7b52e62 (Cameo.Contracts +
@@ -19845,4 +19893,92 @@ FindType resolution after merges land).
   Game.Mod=cameo + Sound.Device=none + explicit Engine.SupportDir; perf.log shows
   MenuPostProcessEffect.PostWorldLoaded at 35.2s, zero exception-*.log.
 * No gameplay/type merge performed — infrastructure only, per SPEC §6/7 ordering.
->>>>>>> c9d1cb593
+## 2026-10-06 — Devin: ECON-A-FIX — all six findings of REVIEW_2026-10-06_econ_a
+
+Branch `devin/econ-a` on `42e32dc2e`, worktree `C:/cameo-wt/econ-a`. Review verdict
+was FIX-REQUIRED; this pass closes every finding in place (same branch, additive fix
+commit). Every finding got a world-free seam in `BaseBuilderQueueEvalCA` + a world-free
+state table (`RefineryAnchorReservations`) so the regression tests drive the rule, not
+a harness. Classic/switch-off paths unchanged (provider members all default).
+
+* **R1 fog-honest ETA**: `EstimateTravelTicks` now searches with `BlockedByActor.None`
+  + `ignoreActor` (terrain-only HPF) and a `customCost` that returns
+  `PathCostForInvalidPath` only on KNOWN obstacles — own units, occupants of currently
+  visible cells, remembered frozen-under-fog footprints (`FrozenActorLayer`). Hidden
+  enemy state can neither block nor unblock the estimate; kernel `EtaOccupantBlocks`
+  re-expresses `Locomotor.IsBlockedBy`'s Immovable predicate over the honest fact set.
+* **R2 path direction**: the finder contract returns target→source; the old walk seeded
+  at the source and double-counted the whole route (10-cell path read as 20).
+  `ExpansionPathLength` sums only the returned path's own consecutive segments.
+* **R3 one-shot transform**: `ReplacedByActor` stays readable on the disposed MCV
+  forever — the edge is now gated on `demand.Deployed` (consumed marker), the
+  replacement is validated usable+own before Deploy, a live own non-yard relocates
+  (re-key + re-lease), an unusable/foreign one expires the demand. `DeployedYard`
+  tracks the outpost; its death/capture expires the demand.
+* **R4 lease + journey lapse**: `PostExpansionDemand` claims `McvExpansion` on the
+  traveller under `nameof(BaseBuilderBotModuleCA)`; a refused first claim means the
+  demand never posts. The sweep re-claims each tick (heartbeat), expires on claim
+  loss/death/disposal/capture/request-removal, and `JourneyStillCommitted` walks
+  `Activity.GetTargets` (chain + children + next) — the last positional target beyond
+  `ExpansionJourneySlackCells` (12) of the deploy cell lapses the demand, closing the
+  mid-flight-redirect hole (`DeployMcvs` only re-posts idle MCVs).
+* **R5 bind at admission**: `pendingDemandPick` defers binding until after
+  `bot.QueueOrder(StartProduction)` — cash/army-first vetoes can no longer strand a
+  bound item that never queued. `producerOrdersInFlight` (OrderGraceTicks=30) +
+  `ProducerHoldsItem` + the `DemandItemUnambiguous` gate make the (producer, name)
+  token exclusive — `CancelProduction` removes the LAST same-name item, so duplicates
+  would refund/free the wrong one.
+* **R6 anchor reservation**: `RefineryAnchorReservations` (world-free: reserve,
+  refresh-for-owner, release, expire, commit-clear, prune-on-taken) hangs off
+  `IBotExpansionTargetProvider` with four defaulted members. A demand refinery ranks
+  its claim with the committed yard's footprint counted as frontier
+  (`DemandRefineryClaim` — an outpost beyond today's reach is not gated by the wall it
+  removes), reserves the anchor as the order is admitted, renews it each sweep while
+  bound, releases it on every unwind path, and re-adopts it at placement when still
+  live. `ClaimOrder` blocked/committed lambdas now fold reservation state in via shared
+  `AnchorBlockedForClaims`/`AnchorCommittedForClaims`/`AnchorTaken` helpers.
+* Gates: Debug build 0 errors; the three touched projects clean under `-warnaserror`
+  + EnforceCodeStyleInBuild + GenerateDocumentationFile; `dotnet test`
+  OpenRA.Mods.Cameo.Test 1215/1215 (+14 new regression tests, one+ per finding);
+  utility `--check-explicit-interfaces` 3 pre-existing engine violations, none mine;
+  `--check-conditional-trait-interface-overrides` 4 pre-existing engine violations,
+  none mine; boot-gate PASS (menu reached, 0 new exception-*.log, scoped kill).
+  Python audit suite N/A — the diff is C# only, no yaml/asset surface.
+* ECON-B coordination: `BotLeasePurpose.Harvest` (their `50d3614b6`) never touches
+  `McvExpansion`, so the lapse check can't fire on harvester re-routes; BU holds no
+  `ExpansionDemand` state — `ExpireExpansionDemand` has nothing of theirs to release.
+
+## 2026-10-06 — Devin: ECON-A-FIX2 — R1 fog-leak closed + R4 renewal gate (REREVIEW_2026-10-06_econ_a)
+
+Branch `devin/econ-a` on `aa117a0da`, worktree `C:/cameo-wt/econ-a`. Sol's re-review
+was FIX-REQUIRED on two of six findings. Both closed in place, additive commit.
+
+* **R1 frozen-trait leak**: `FrozenBlockedCells` no longer touches `fa.Actor` — the
+  layer hands out the live backing while it lives, so the old code re-read live trait
+  state under fog (backing disposal flipped blocked cells 0->1 on an unchanged record).
+  Now only the immutable snapshot is read: `IsValid`/`!Hidden` gate the record,
+  `Info`/`Owner`/`Footprint` supply the facts. Removable is rebuilt on the
+  remembered owner (gates/energy walls lift for remembered-ally; `DoesNotBlockInfo`
+  lifts on remembered target-type overlap vs our own MCV's enabled types). Crushable
+  is rebuilt from remembered crush classes — `MineInfo`/`CrateInfo` typed,
+  `*CrushableInfo` duck-typed off `CrushClasses`+`CrushedByFriendlies` (the
+  engine's own `CrushableInfo` is internal). Transit-only comes from
+  `BuildingInfo.TransitOnlyTiles` anchored at the footprint's top-left.
+* **R1 visible-cell != visible-actor**: `EtaCellCost`'s `known` was
+  `Shroud.IsVisible(cell)` — a lit cell exposed every occupant. Now
+  `other.CanBeViewedByPlayer(player)`: a cloaked or otherwise hidden actor on lit
+  ground stays unknown and never blocks (kernel doc updated, same signature).
+* **R4 targetless renewal**: `JourneyStillCommitted` was booleans — silence passed
+  as committed. Now `ExpansionJourneyState` {Redirected, Indeterminate, Committed}
+  + `JourneyRenewsDemand`: only a Committed chain on a non-idle traveller renews
+  the window (unit-less actors renew — existence IS the relocation). Sol's WaitFor
+  probe row — non-idle, no targets — no longer renews; the demand dies at its
+  outstanding ExpiresTick instead of pushing 200->300->1100.
+* Tests: 60/60 BaseBuilderQueueEvalTest (4 new: journey tri-state, renewal table
+  incl. the WaitFor row, frozen-footprint exemptions, remembered crushability).
+  Adapter-level hidden-state invariance is structural — the frozen pass takes no
+  live-actor input, so there is nothing left to dereference; the world-free tests
+  pin the fact-level rule.
+* Gates: Release build 0E/0W on OpenRA.Mods.CA + Cameo.Test. Focused tests only
+  per lead (Terra holds the heavy window); no boot-gate needed — diff is
+  C#-in-bot-logic only, no yaml/engine-pin surface.

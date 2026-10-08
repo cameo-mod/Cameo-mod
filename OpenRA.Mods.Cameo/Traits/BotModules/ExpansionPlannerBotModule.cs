@@ -281,6 +281,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		List<CPos> lastBuildingTiles = new();
 		int[] lastRefineryFields = Array.Empty<int>();
 
+		// ECON-A-FIX (R6): anchor holds owned by expansion demands — a demand's refinery takes its anchor
+		// off every other claim while the item is still queued. The table is world-free; the probes below
+		// wire it to served/parked/pending state.
+		readonly RefineryAnchorReservations anchorReservations = new();
+
 		// F1: the anchor model also feeds gate B's anchor-granular taken test — the assignment of the
 		// last model build and the tick it ran on (built once per re-plan, before the scores loop).
 		int[] lastAssigned = Array.Empty<int>();
@@ -384,8 +389,81 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		void IBotExpansionTargetProvider.RefineryClaimCommitted(CPos anchor)
 		{
 			if (LawActive)
+			{
 				anchorPendingUntil[anchor] = world.WorldTick + Info.AnchorClaimPendingTicks;
+
+				// ECON-A-FIX (R6): a commit is ground truth — the demand's hold (if any) promoted to the
+				// pending commit; the demand releases its side when the binding unwinds anyway.
+				anchorReservations.Clear(anchor);
+			}
 		}
+
+		// ECON-A-FIX (R6): the claim surface's three states, evaluated uniformly for the claim order and
+		// the reservation probes — blocked: off the market right now; committed: the field counts as
+		// covered (a pending commit or a live reservation); taken: ground truth owns it (served, parked
+		// or pending-committed) — a reservation cannot attach to or survive a taken anchor.
+		bool AnchorBlockedForClaims(int i, int tick)
+		{
+			var anchor = anchors[i];
+			return (anchorParkedUntil.TryGetValue(anchor, out var park) && tick < park)
+				|| (anchorPendingUntil.TryGetValue(anchor, out var pend) && tick < pend)
+				|| anchorReservations.LiveAt(anchor, tick);
+		}
+
+		bool AnchorCommittedForClaims(int i, int tick)
+		{
+			var anchor = anchors[i];
+			return (anchorPendingUntil.TryGetValue(anchor, out var pend) && tick < pend)
+				|| anchorReservations.LiveAt(anchor, tick);
+		}
+
+		bool AnchorTaken(CPos anchor, int tick)
+		{
+			var i = anchors.IndexOf(anchor);
+			return (i >= 0 && lastAssigned[i] >= 0)
+				|| (anchorParkedUntil.TryGetValue(anchor, out var park) && tick < park)
+				|| (anchorPendingUntil.TryGetValue(anchor, out var pend) && tick < pend);
+		}
+
+		// ECON-A-FIX (R6): the demand's own claim — ranked from the outpost with its future yard
+		// footprint counting as part of the frontier, so an expansion beyond today's buildable reach
+		// still reserves its anchor (the reach-only quota must not gate the field the yard opens).
+		RefineryAnchorClaim? IBotExpansionTargetProvider.DemandRefineryClaim(CPos near, IReadOnlyCollection<CPos> futureProviderTiles)
+		{
+			if (!LawActive)
+				return null;
+
+			var tick = world.WorldTick;
+			var serve = Info.AnchorServeRadiusCells > 0 ? Info.AnchorServeRadiusCells : Info.ClaimRadiusCells;
+			var tiles = futureProviderTiles == null || futureProviderTiles.Count == 0
+				? lastBuildingTiles
+				: lastBuildingTiles.Concat(futureProviderTiles).ToList();
+			var order = ClaimOrder(anchors, anchorFieldIds, fieldCellsById, lastRefineryCells, lastRefineryFields, tiles,
+				serve, Info.ReachCells,
+				i => AnchorBlockedForClaims(i, tick),
+				i => AnchorCommittedForClaims(i, tick),
+				near, out _, out _, out var tiers, out _, out _);
+			if (order.Count == 0)
+				return null;
+
+			var best = order[0];
+			var fieldId = anchorFieldIds[best];
+			var center = fieldId < fields.Count ? fields[fieldId].Center : anchors[best];
+			return new RefineryAnchorClaim(anchors[best], center, fieldId, tiers[best], fieldCellsById[fieldId]);
+		}
+
+		bool IBotExpansionTargetProvider.TryReserveRefineryAnchor(CPos anchor, object owner, int untilTick)
+		{
+			var tick = world.WorldTick;
+			return LawActive && anchorReservations.TryReserve(anchor, owner, tick, untilTick, a => AnchorTaken(a, tick));
+		}
+
+		bool IBotExpansionTargetProvider.RefineryAnchorReserved(CPos anchor, object owner) =>
+			LawActive && anchorReservations.LiveFor(anchor, owner, world.WorldTick)
+				&& !AnchorTaken(anchor, world.WorldTick);
+
+		void IBotExpansionTargetProvider.ReleaseRefineryAnchor(CPos anchor, object owner) =>
+			anchorReservations.Release(anchor, owner);
 
 		int IBotExpansionTargetProvider.UnclaimedAnchorsInReach => LawActive ? unclaimedAnchorsInReach : 0;
 
@@ -1813,9 +1891,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var serve = Info.AnchorServeRadiusCells > 0 ? Info.AnchorServeRadiusCells : Info.ClaimRadiusCells;
 			var order = ClaimOrder(anchors, anchorFieldIds, fieldCellsById, lastRefineryCells, lastRefineryFields, lastBuildingTiles,
 				serve, Info.ReachCells,
-				i => (anchorParkedUntil.TryGetValue(anchors[i], out var until) && tick < until)
-					|| (anchorPendingUntil.TryGetValue(anchors[i], out var pend) && tick < pend),
-				i => anchorPendingUntil.TryGetValue(anchors[i], out var pend) && tick < pend,
+				i => AnchorBlockedForClaims(i, tick),
+				i => AnchorCommittedForClaims(i, tick),
 				near, out _, out _, out var tiers, out _, out _);
 			if (order.Count == 0)
 				return null;
@@ -1903,6 +1980,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					anchorPendingUntil.Remove(kv.Key);
 			}
 
+			// ECON-A-FIX (R6): the same sweep retires demand reservations — expired holds, and holds whose
+			// anchor got served, parked or pending-committed under them.
+			anchorReservations.Prune(tick, a => AnchorTaken(a, tick));
+
 			var queued = 0;
 			var builder = baseBuilders.FirstOrDefault(t => t.IsTraitEnabled());
 			if (builder?.BuildingsBeingProduced != null)
@@ -1912,9 +1993,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			var order = ClaimOrder(anchors, anchorFieldIds, fieldCellsById, refineryCells, lastRefineryFields, buildingTiles,
 				serve, Info.ReachCells,
-				i => (anchorParkedUntil.TryGetValue(anchors[i], out var until) && tick < until)
-					|| (anchorPendingUntil.TryGetValue(anchors[i], out var pend) && tick < pend),
-				i => anchorPendingUntil.TryGetValue(anchors[i], out var pend) && tick < pend,
+				i => AnchorBlockedForClaims(i, tick),
+				i => AnchorCommittedForClaims(i, tick),
 				null, out unservedInReach, out unservedFieldsInReach, out _,
 				out claimableAnchorsInReach, out unservedBeyondReach);
 			unclaimedAnchorsInReach = order.Count;

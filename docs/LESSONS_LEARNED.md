@@ -3268,6 +3268,25 @@ looked finished and passed weaker gates:
 strict-removal replay over the OUTPUT files, (c) the boot gate — each catches a class the others
 miss.
 
+## `FrozenActor.Actor` is live-backed — fog-honest code must read the snapshot, never the backing (2026-10-06, Devin)
+
+`FrozenActorLayer` hands out the live backing actor via `fa.Actor` for as long as the real unit
+still lives; it flips to null when the hidden actor dies/disposes. Bot code that reads
+`fa.Actor.TraitOrDefault<...>` under fog leaks the difference between "actor still alive" and
+"actor gone" — Sol's probe killed the backing under fog and watched `blocked_cells` flip 0->1 on
+an unchanged frozen record. The remembered facts are `fa.IsValid` (record intact), `fa.Hidden`
+(masked at last sight — skip), `fa.Info`, `fa.Owner`, `fa.Footprint`: rebuild exemptions
+(removable/crushable/transit-only) from THOSE, and gate the recorded relationship on
+`fa.Owner` — never on live trait state.
+
+The twin trap: `Shroud.IsVisible(cell)` is CELL visibility, not actor legality — a cloaked or
+otherwise hidden actor on lit ground is still unknown. Use `other.CanBeViewedByPlayer(player)`.
+
+**Rule:** for frozen records use only immutable remembered facts (`Info`, `Owner`, `Footprint`);
+`fa.Actor` may be touched only by code that is allowed to know the actor is alive right now.
+For live ActorMap occupants, per-actor `CanBeViewedByPlayer` is the visibility test — a lit
+cell does not reveal a hidden actor on it. (ECON-A-FIX2, `BaseBuilderBotModuleCA.FrozenBlockedCells`.)
+
 ## `launch-game.cmd` fails from Git Bash — GNU `find` shadows Windows `find.exe` (2026-10-02, EMBER)
 
 The batch file's `find %ENGINE_VERSION% %ENGINE_DIRECTORY%\VERSION` check resolves `find`

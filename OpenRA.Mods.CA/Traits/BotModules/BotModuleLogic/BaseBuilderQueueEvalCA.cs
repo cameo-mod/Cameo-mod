@@ -12,6 +12,8 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using OpenRA.Mods.Common.Traits;
+using OpenRA.Mods.Common.Warheads;
 
 namespace OpenRA.Mods.CA.Traits
 {
@@ -214,5 +216,212 @@ namespace OpenRA.Mods.CA.Traits
 		/// </summary>
 		public static Actor FirstRequestedRefinery<TValue>(IReadOnlyDictionary<Actor, TValue> requests) =>
 			FirstByOrder(requests, a => a.ActorID);
+
+		/// <summary>
+		/// ECON-A (SPEC_2026-10-05 Part A §3): a demand item queues when it can still reach Ready by
+		/// the MCV's ETA — start when `etaTick - buildTime &lt;= now`; an already-late item starts now.
+		/// </summary>
+		public static bool ExpansionDue(int etaTick, int buildTimeTicks, int now) => etaTick - buildTimeTicks <= now;
+
+		/// <summary>
+		/// ECON-A (§2): travel time for the expansion ETA — path length in WDist over the MCV's
+		/// nominal speed (WDist per tick), integer division. A pathless or stalled estimate is a
+		/// far-future tick (never due) so the caller expires the demand instead of pre-building blind.
+		/// </summary>
+		public static int ExpansionTravelTicks(long distanceWDist, int speedWDistPerTick) =>
+			speedWDistPerTick <= 0 ? int.MaxValue : (int)Math.Min(int.MaxValue, distanceWDist / speedWDistPerTick);
+
+		/// <summary>
+		/// ECON-A (§4): the defence pre-build is skipped while it would hold a Ready item on the
+		/// bot's only building producer — unless the deploy is already close (within holdSlack).
+		/// The refinery never takes this gate: it gates the expansion's economy.
+		/// </summary>
+		public static bool DefenceHoldPermitted(bool soleProducer, int ticksToEta, int holdSlack) =>
+			!soleProducer || ticksToEta <= holdSlack;
+
+		/// <summary>
+		/// ECON-A (§1): a defence's strength ordering — the same damage model the squad fuzzy uses
+		/// (AttackOrFleeFuzzyCA): Damage * Burst / totalReloadDelay * 100 per DamageWarhead, with the
+		/// first BurstDelay counted once per extra shot and the total reload window clamped to
+		/// [1, 200] so slow one-shot weapons are not undervalued. 0 for a non-AttackBase actor or one
+		/// with no damage warheads.
+		/// </summary>
+		public static int DefenceStrength(ActorInfo info)
+		{
+			if (!info.HasTraitInfo<AttackBaseInfo>())
+				return 0;
+
+			var sum = 0;
+			foreach (var arm in info.TraitInfos<ArmamentInfo>())
+			{
+				var weapon = arm.WeaponInfo;
+				if (weapon == null)
+					continue;
+
+				var burst = weapon.Burst;
+				var burstDelay = weapon.BurstDelays.IsDefaultOrEmpty ? 0 : weapon.BurstDelays[0];
+				var totalReloadDelay = weapon.ReloadDelay + (burstDelay * (burst - 1)).Clamp(1, 200);
+				foreach (var warhead in weapon.Warheads.OfType<DamageWarhead>())
+					sum += warhead.Damage * burst / Math.Max(1, totalReloadDelay) * 100;
+			}
+
+			return sum;
+		}
+
+		/// <summary>
+		/// ECON-A (§1): the strongest affordable defence — highest strength wins; ties break on the
+		/// lowest ActorInfo cost, then the actor name (ordinal). Nothing affordable yields null and
+		/// the demand proceeds refinery-only. Inputs arrive precomputed so the rule stays World-free.
+		/// </summary>
+		public static ActorInfo ChooseExpansionDefence(IReadOnlyList<(ActorInfo Info, int Strength, int Cost)> candidates, int projectedCash)
+		{
+			ActorInfo best = null;
+			var bestStrength = 0;
+			var bestCost = 0;
+			foreach (var candidate in candidates)
+			{
+				if (candidate.Cost > projectedCash)
+					continue;
+
+				if (best == null || candidate.Strength > bestStrength
+					|| (candidate.Strength == bestStrength
+						&& (candidate.Cost < bestCost
+							|| (candidate.Cost == bestCost && string.CompareOrdinal(candidate.Info.Name, best.Name) < 0))))
+				{
+					best = candidate.Info;
+					bestStrength = candidate.Strength;
+					bestCost = candidate.Cost;
+				}
+			}
+
+			return best;
+		}
+
+		// ECON-A-FIX (REVIEW_2026-10-06_econ_a): the review's six findings each get a world-free seam so
+		// the regression tests drive the rule, not a harness.
+
+		/// <summary>
+		/// ECON-A R1-FIX2: one occupant's verdict on the fog-honest ETA path — Locomotor.IsBlockedBy
+		/// under BlockedByActor.Immovable, minus the hidden state: an occupant that is neither ours,
+		/// nor legally visible to us (Actor.CanBeViewedByPlayer — a revealed CELL is not a revealed
+		/// ACTOR; cloaked, disguised or otherwise hidden actors on lit ground stay unknown), nor
+		/// remembered (a frozen footprint handled by <see cref="FrozenOccupantBlocks"/>) is not KNOWN
+		/// and never blocks, so adding or removing an unseen enemy actor cannot change the estimate.
+		/// Known + immovable and not movable-allied/moving/removable/transit-only/crushable blocks.
+		/// </summary>
+		public static bool EtaOccupantBlocks(bool known, bool movable, bool allied, bool moving, bool removable, bool transitOnly, bool crushable) =>
+			known && !(movable && allied) && !moving && !removable && !transitOnly && !crushable;
+
+		/// <summary>
+		/// ECON-A R2: the length of a PathFinder result — the contract returns the path target-to-source
+		/// (<see cref="IPathFinder.FindPathToTargetCell"/>), so the path length is the sum of its own
+		/// consecutive cell-to-cell segments. There is no source-to-first-cell chord to prepend:
+		/// seeding the walk at the source position double-counts the whole route.
+		/// </summary>
+		public static long ExpansionPathLength(IReadOnlyList<CPos> targetToSource, Func<CPos, WPos> center)
+		{
+			if (targetToSource == null || targetToSource.Count < 2)
+				return 0;
+
+			var previous = center(targetToSource[0]);
+			long distance = 0;
+			for (var i = 1; i < targetToSource.Count; i++)
+			{
+				var cell = center(targetToSource[i]);
+				distance += (cell - previous).Length;
+				previous = cell;
+			}
+
+			return distance;
+		}
+
+		/// <summary>
+		/// ECON-A R4-FIX2: where the traveller's activity chain leaves the journey — the chain's last
+		/// positional target decides. A chain with no positional target at all (a WaitFor, a turn in
+		/// place, a transform in flight) is Indeterminate: not a redirect, but also not provably still
+		/// travelling — <see cref="JourneyRenewsDemand"/> bounds its grace.
+		/// </summary>
+		public enum ExpansionJourneyState
+		{
+			/// <summary>The chain's last positional target aims elsewhere — a redirect took the unit.</summary>
+			Redirected,
+
+			/// <summary>No positional target on the chain — silence; the existing window decides.</summary>
+			Indeterminate,
+
+			/// <summary>The last positional target is still inside the deploy slack — travelling.</summary>
+			Committed,
+		}
+
+		public static ExpansionJourneyState ExpansionJourney(bool sawAnyTarget, bool lastTargetNearDeploy) =>
+			!sawAnyTarget ? ExpansionJourneyState.Indeterminate
+				: lastTargetNearDeploy ? ExpansionJourneyState.Committed : ExpansionJourneyState.Redirected;
+
+		/// <summary>
+		/// ECON-A R4-FIX2: the idle window renews only for a provably ongoing journey — a Committed
+		/// chain on a non-idle traveller, or a unit-less actor (a conyard mid-relocation, whose
+		/// continued existence IS the in-flight relocation). Indeterminate chains and idle travellers
+		/// do not renew: the demand's ExpiresTick is the bounded silence grace, so an unrelated
+		/// targetless activity (WaitFor with a false predicate) can no longer keep a demand alive
+		/// forever.
+		/// </summary>
+		public static bool JourneyRenewsDemand(ExpansionJourneyState state, bool idle, bool hasMobile) =>
+			!hasMobile || (state == ExpansionJourneyState.Committed && !idle);
+
+		/// <summary>
+		/// ECON-A R1-FIX2: a remembered frozen footprint cell blocks iff it isn't a transit-only cell,
+		/// isn't removable by us, and isn't crushable — evaluated on remembered facts only.
+		/// </summary>
+		public static bool FrozenOccupantBlocks(bool transitOnly, bool removable, bool crushable) =>
+			!transitOnly && !removable && !crushable;
+
+		/// <summary>
+		/// ECON-A R1-FIX2: remembered crushability — the record's static crush classes overlap the
+		/// locomotor's and the remembered owner relationship permits it (enemy owner, or friendly
+		/// when the record's static flag allows friendly crushing).
+		/// </summary>
+		public static bool RememberedCrushable(bool classesOverlap, bool friendliesCrush, bool rememberedAllied) =>
+			classesOverlap && (friendliesCrush || !rememberedAllied);
+
+		/// <summary>
+		/// ECON-A R5: the demand binding's (producer, item-name) token is unambiguous only while no
+		/// same-name item shares the producer — already queued, ordered and still in flight, or bound
+		/// to another demand. CancelProduction resolves the LAST same-name item on the queue; a
+		/// duplicate would refund or free the wrong item.
+		/// </summary>
+		public static bool DemandItemUnambiguous(bool sameNameOnProducer, bool boundByOtherDemand) =>
+			!sameNameOnProducer && !boundByOtherDemand;
+
+		/// <summary>
+		/// ECON-A R3: what the sweep does with a live <c>Actor.ReplacedByActor</c> — the transform edge is a
+		/// one-shot transition, consumed by the caller's Deployed flag (the field stays readable on the
+		/// disposed MCV forever, so gating is the only thing keeping it from re-firing every sweep).
+		/// </summary>
+		public enum ExpansionTransformTransition
+		{
+			/// <summary>No live transform edge (or one already consumed) — keep waiting.</summary>
+			Waiting,
+
+			/// <summary>The replacement is an own, live construction yard — the MCV deployed.</summary>
+			Deploy,
+
+			/// <summary>The replacement is an own, live non-yard — the journey continues on it.</summary>
+			Relocate,
+
+			/// <summary>The replacement is unusable or foreign-owned — the journey died.</summary>
+			Fail,
+		}
+
+		/// <summary>The transition described above; <paramref name="replacementUsable"/> bundles the
+		/// sweep's "alive, in world, ours" check so a disposed or captured yard can never deploy.</summary>
+		public static ExpansionTransformTransition ExpansionTransform(
+			bool alreadyDeployed, bool hasReplacement, bool replacementUsable, bool replacementYard)
+		{
+			if (alreadyDeployed || !hasReplacement)
+				return ExpansionTransformTransition.Waiting;
+			if (!replacementUsable)
+				return ExpansionTransformTransition.Fail;
+			return replacementYard ? ExpansionTransformTransition.Deploy : ExpansionTransformTransition.Relocate;
+		}
 	}
 }

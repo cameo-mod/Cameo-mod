@@ -13,10 +13,13 @@ using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using OpenRA.Activities;
 using OpenRA.Mods.AS.Traits;
 using OpenRA.Mods.Common;
+using OpenRA.Mods.Common.Pathfinder;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Primitives;
+using OpenRA.Support;
 using OpenRA.Traits;
 
 namespace OpenRA.Mods.CA.Traits
@@ -218,6 +221,37 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Radius in cells around building being considered for sale to scan for units")]
 		public readonly int SellScanRadius = 8;
 
+		[Desc("ECON-A (SPEC_2026-10-05_econ_logistics Part A): while an expansion MCV drives to its committed",
+			"deploy target, pre-build the outpost's refinery (and the strongest affordable defence) so each",
+			"reaches Ready ~= the ETA, hold it at the head of its queue, and place it the tick the conyard lands.",
+			"Armed by increment switch BT_expansion_prebuild; false keeps today's behaviour bit-identical.")]
+		public readonly bool UseExpansionPrebuild = false;
+
+		[ConsumedConditionReference]
+		[Desc("Increment switches on this shared instance (UseExpansionPrebuild) take effect only while this",
+			"condition is true (e.g. genericbot), so a shared module can be A/B-switched without changing the",
+			"classic reference. Null = switches apply to every owner.")]
+		public readonly BooleanExpression SwitchCondition = null;
+
+		[Desc("ECON-A: the defence pre-build is skipped while it would hold a Ready item on the bot's only",
+			"building-producer queue, unless the deploy ETA is already this close.")]
+		public readonly int ExpansionHoldSlack = 500;
+
+		[Desc("ECON-A: a demand expires this many ticks after its MCV stops having a live activity",
+			"(stuck, redirected, or dead — the spec's ~100-tick lapse window).")]
+		public readonly int ExpansionDemandIdleTicks = 100;
+
+		[Desc("ECON-A: ticks between recomputing a demand's ETA from the MCV's live path (it may detour).")]
+		public readonly int ExpansionEtaIntervalTicks = 25;
+
+		[Desc("ECON-A: flat tick allowance for the deploy transform itself (turn-to-facing + placement).",
+			"TransformsInfo exposes no duration field, so this is the conservative constant.")]
+		public readonly int ExpansionDeployTicks = 25;
+
+		[Desc("ECON-A: projected income for the defence pick's affordability check is measured over the",
+			"last window of this many ticks (Earned delta / window length, integers only).")]
+		public readonly int ExpansionIncomeWindowTicks = 500;
+
 		public override object Create(ActorInitializer init) { return new BaseBuilderBotModuleCA(init.Self, this); }
 	}
 
@@ -374,6 +408,109 @@ namespace OpenRA.Mods.CA.Traits
 
 		public Dictionary<Actor, (CPos ConyardLoc, CPos ResourceLoc)> RequestedRefineries = [];
 
+		// ECON-A (SPEC_2026-10-05_econ_logistics Part A): the per-MCV expansion demand metadata that
+		// rides alongside the RequestedRefineries record — ETA, defence pick, queue bindings, expiry.
+		// Keyed on the same actor and re-keyed with it when a Transform replaces the actor mid-journey.
+		public readonly Dictionary<Actor, ExpansionDemand> ExpansionDemands = [];
+
+		// SwitchCondition result; true when no condition is configured (F2 pattern — @generic is shared
+		// by genericbot AND classicbot, so the increment switch must not leak into the classic reference).
+		bool switchesActive;
+		public bool ExpansionPrebuildEnabled => Info.UseExpansionPrebuild && switchesActive;
+
+		// ECON-A-FIX (R4): the lease owner this module claims under — the nameof convention every
+		// LC1 holder uses, so a preempt notifies this trait by type name.
+		const string LeaseOwner = nameof(BaseBuilderBotModuleCA);
+
+		// ECON-A-FIX (R5): ticks an issued production order may take to land in the producer's queue —
+		// the same grace VerifyDemandBinding gives a bound item before it counts as never-queued.
+		const int OrderGraceTicks = 30;
+
+		// ECON-A-FIX (R4): cells of slack around the committed deploy cell that still count as "aiming
+		// there" — Move re-maps a blocked target cell by up to its ~10-cell nearest-moveable search, so
+		// the committed destination can legitimately drift a little from the posted ConyardLoc.
+		const int ExpansionJourneySlackCells = 12;
+
+		// ECON-A-FIX (R5): every StartProduction order this module's queues issued, keyed by producer —
+		// an order lands in the queue a tick or two after issue, and the (producer, item-name)
+		// exclusivity contract must see it while it is still in flight. Entries age out after
+		// OrderGraceTicks (VerifyDemandBinding's window).
+		readonly Dictionary<uint, List<(string Item, int Tick)>> producerOrdersInFlight = new();
+
+		/// <summary>Record a just-issued StartProduction order so later picks see it before it lands.</summary>
+		public void RecordProducerOrder(Actor producer, string item)
+		{
+			var now = world.WorldTick;
+			if (!producerOrdersInFlight.TryGetValue(producer.ActorID, out var log))
+				producerOrdersInFlight[producer.ActorID] = log = new List<(string Item, int Tick)>(2);
+
+			log.RemoveAll(e => now - e.Tick > OrderGraceTicks);
+			log.Add((item, now));
+		}
+
+		/// <summary>
+		/// ECON-A-FIX (R5): the producer holds this item name — already queued on any of its queues, or
+		/// ordered by us within the order-latency grace window (still in flight). CancelProduction
+		/// resolves the LAST same-name item on a queue, so a demand binding is exclusive to exactly
+		/// this absence: a same-name duplicate would refund or free the wrong item.
+		/// </summary>
+		public bool ProducerHoldsItem(Actor producer, string item, int now)
+		{
+			if (producer == null || producer.Disposed || producer.IsDead)
+				return false;
+
+			if (producer.TraitsImplementing<ProductionQueue>().Any(q => q.AllQueued().Any(i => i.Item == item)))
+				return true;
+
+			return producerOrdersInFlight.TryGetValue(producer.ActorID, out var log)
+				&& log.Any(e => e.Item == item && now - e.Tick <= OrderGraceTicks);
+		}
+
+		/// <summary>
+		/// ECON-A-FIX (R6): the anchor this demand's refinery would claim — evaluated as if the committed
+		/// yard's footprint already stood, so an outpost beyond today's frontier can still reserve (the
+		/// reach-only quota must not gate the field its own yard will open). Cached per tick: every
+		/// queue manager asks the same question of the same demand.
+		/// </summary>
+		public RefineryAnchorClaim? DemandClaimFor(ExpansionDemand demand)
+		{
+			var law = RefineryLawProvider();
+			if (law == null || demand == null)
+				return null;
+
+			var now = world.WorldTick;
+			if (demand.ClaimCacheTick == now)
+				return demand.CachedClaim;
+
+			demand.ClaimCacheTick = now;
+			return demand.CachedClaim = law.DemandRefineryClaim(demand.ConyardLoc, demand.YardFootprint);
+		}
+
+		/// <summary>
+		/// ECON-A-FIX (R6): the footprint the traveller leaves behind when it deploys — the committed
+		/// yard's BuildingInfo tiles around the deploy cell. An MCV's yard type resolves through its
+		/// Transforms trait (the same enabled-transform resolver the MCV manager uses); a relocating
+		/// conyard contributes its own.
+		/// </summary>
+		IReadOnlyCollection<CPos> DeployFootprint(Actor expandActor, CPos loc)
+		{
+			var info = expandActor.Info;
+			if (info.TraitInfoOrDefault<BuildingInfo>() == null)
+			{
+				var into = expandActor.TraitsImplementing<Transforms>()
+					.FirstOrDefault(t => !t.IsTraitDisabled && !t.IsTraitPaused)?.Info.IntoActor;
+				info = into != null && world.Map.Rules.Actors.TryGetValue(into, out var yard) ? yard : null;
+			}
+
+			var bi = info?.TraitInfoOrDefault<BuildingInfo>();
+			return bi != null ? bi.Tiles(loc).ToList() : (IReadOnlyCollection<CPos>)new[] { loc };
+		}
+
+		// ECON-A: projected income — the sliding window over Earned (deliveries only; integers).
+		int incomeWindowStartTick = -1;
+		int incomeWindowStartEarned;
+		int projectedIncomePerTick;
+
 		readonly Stack<TraitPair<RallyPoint>> rallyPoints = [];
 		int assignRallyPointsTicks;
 		int checkBestResourceLocationTicks;
@@ -419,6 +556,21 @@ namespace OpenRA.Mods.CA.Traits
 			barracksBuildings = new ActorIndex.OwnerAndNamesAndTrait<BuildingInfo>(world, info.BarracksTypes, player);
 			factoryBuildings = new ActorIndex.OwnerAndNamesAndTrait<BuildingInfo>(world, info.VehiclesFactoryTypes, player);
 			ProductionBuildings = new ActorIndex.OwnerAndNamesAndTrait<BuildingInfo>(world, info.ProductionTypes, player);
+			switchesActive = info.SwitchCondition == null;
+		}
+
+		public override IEnumerable<VariableObserver> GetVariableObservers()
+		{
+			foreach (var observer in base.GetVariableObservers())
+				yield return observer;
+
+			if (Info.SwitchCondition != null)
+				yield return new VariableObserver(SwitchConditionChanged, Info.SwitchCondition.Variables);
+		}
+
+		void SwitchConditionChanged(Actor self, IReadOnlyDictionary<string, int> conditions)
+		{
+			switchesActive = Info.SwitchCondition.Evaluate(conditions);
 		}
 
 		// Use for proactive targeting.
@@ -611,6 +763,14 @@ namespace OpenRA.Mods.CA.Traits
 						}
 					}
 				}
+			}
+
+			if (ExpansionPrebuildEnabled)
+			{
+				// ECON-A: refresh the income window and sweep demand liveness/ETAs before the queue tick
+				// so a freshly-deployed yard releases its held items on the same tick.
+				SampleExpansionIncome();
+				SweepExpansionDemands(bot);
 			}
 
 			builders[currentBuilderIndex].Tick(bot);
@@ -1025,6 +1185,550 @@ namespace OpenRA.Mods.CA.Traits
 			}
 		}
 
+		/// <summary>
+		/// ECON-A (§2/§6): per-tick demand lifecycle — expire dead/stuck/claimed-away MCVs, follow a
+		/// Transform's ReplacedByActor (deploy = conyard lands; relocate = the journey continues on the
+		/// new actor), refresh the liveness window while it is en route, recompute ETAs on cadence, and
+		/// verify queue bindings once the order-latency grace has passed. Deterministic: iterates in
+		/// ActorID order, never on dictionary enumeration order.
+		/// </summary>
+		void SweepExpansionDemands(IBot bot)
+		{
+			if (ExpansionDemands.Count == 0)
+				return;
+
+			var now = world.WorldTick;
+			var leases = BotUnitLeases.Of(player);
+			foreach (var demand in ExpansionDemands.Values.OrderBy(d => d.Mcv.ActorID).ToList())
+			{
+				var mcv = demand.Mcv;
+
+				// ECON-A-FIX (R3): the transform edge fires exactly once — ReplacedByActor stays readable
+				// on the disposed MCV forever, so it is gated on Deployed (the consumed marker). A yard
+				// replacement deploys; a live own non-yard relocates the demand onto it; an unusable or
+				// foreign-owned replacement (disposed, dead, lost, captured) ends the journey — the
+				// demand expires instead of latching onto a corpse or an enemy's yard.
+				if (!demand.Deployed && mcv != null && mcv.ReplacedByActor != null)
+				{
+					var next = mcv.ReplacedByActor;
+					var usable = !next.Disposed && !next.IsDead && next.IsInWorld && next.Owner == player;
+					var transition = BaseBuilderQueueEvalCA.ExpansionTransform(
+						alreadyDeployed: false, hasReplacement: true,
+						replacementUsable: usable, replacementYard: usable && Info.ConstructionYardTypes.Contains(next.Info.Name));
+
+					if (transition == BaseBuilderQueueEvalCA.ExpansionTransformTransition.Deploy)
+					{
+						// Deployed: the conyard exists — the Done items release through the normal
+						// placement path this tick (the queue managers see Deployed and stop holding).
+						// The window is set once here — every later sweep skips this branch (the
+						// transform edge is consumed) — and the builder nudge fires exactly once.
+						demand.Deployed = true;
+						demand.DeployedYard = next;
+						demand.DeployedYardLoc = next.Location;
+						demand.ExpiresTick = now + Info.ExpansionDemandIdleTicks;
+						leases?.Release(mcv, LeaseOwner);
+						foreach (var builder in builders)
+							builder.WaitTicks = Math.Min(builder.WaitTicks, 0);
+					}
+					else if (transition == BaseBuilderQueueEvalCA.ExpansionTransformTransition.Relocate)
+					{
+						// Relocation (conyard→MCV) or another non-yard transform: the journey continues
+						// on the replacement actor — re-key both records and the lease so the demand
+						// follows it.
+						RequestedRefineries.Remove(mcv);
+						RequestedRefineries[next] = (demand.ConyardLoc, demand.ResourceLoc);
+						ExpansionDemands.Remove(mcv);
+						leases?.Release(mcv, LeaseOwner);
+						demand.Mcv = next;
+						ExpansionDemands[next] = demand;
+						BotUnitLeases.TryClaim(leases, next, LeaseOwner, BotLeasePurpose.McvExpansion, Info.ExpansionDemandIdleTicks);
+						demand.ExpiresTick = now + Info.ExpansionDemandIdleTicks;
+						continue;
+					}
+					else
+					{
+						ExpireExpansionDemand(bot, demand);
+						continue;
+					}
+				}
+				else if (!demand.Deployed &&
+					(mcv == null || mcv.Disposed || mcv.IsDead || !mcv.IsInWorld || mcv.Owner != player
+						|| !RequestedRefineries.ContainsKey(mcv)))
+				{
+					// ECON-A-FIX (R4): death, disposal, capture and a consumed request all lapse the
+					// demand — none of them waits for the idle window.
+					ExpireExpansionDemand(bot, demand);
+					continue;
+				}
+				else if (!demand.Deployed)
+				{
+					// ECON-A-FIX (R4): the demand holds the MCV's McvExpansion lease while the journey is
+					// ours — the spec's "active while the MCV holds the expansion lease" contract, claimed
+					// at posting and re-claimed every sweep as the heartbeat. A foreign owner's lease
+					// (takeover, emergency preempt) makes the claim fail; so does losing the unit.
+					if (!BotUnitLeases.TryClaim(leases, mcv, LeaseOwner, BotLeasePurpose.McvExpansion, Info.ExpansionDemandIdleTicks))
+					{
+						ExpireExpansionDemand(bot, demand);
+						continue;
+					}
+
+					// ECON-A-FIX2 (R4): the chain's last positional target must still aim at the deploy
+					// neighbourhood — a redirected MCV (DeployMcvs reposts only idle ones, so a
+					// mid-flight redirect otherwise kept the stale demand forever) lapses here.
+					var journey = JourneyState(mcv, demand);
+					if (journey == BaseBuilderQueueEvalCA.ExpansionJourneyState.Redirected)
+					{
+						ExpireExpansionDemand(bot, demand);
+						continue;
+					}
+
+					// ECON-A-FIX2 (R4): renewal requires a provably ongoing journey — a committed
+					// chain on a non-idle traveller, or a unit-less actor (a conyard waiting to
+					// undeploy) whose continued existence IS the in-flight relocation. An
+					// indeterminate, targetless chain — a WaitFor with a false predicate, a stalled
+					// Turn — no longer renews: the outstanding ExpiresTick is the bounded silence
+					// grace, so silence cannot keep a demand alive forever.
+					if (BaseBuilderQueueEvalCA.JourneyRenewsDemand(journey, mcv.IsIdle, mcv.TraitOrDefault<Mobile>() != null))
+						demand.ExpiresTick = now + Info.ExpansionDemandIdleTicks;
+
+					if (now >= demand.ExpiresTick)
+					{
+						ExpireExpansionDemand(bot, demand);
+						continue;
+					}
+
+					if (now >= demand.NextEtaTick)
+						RefreshExpansionEta(demand);
+				}
+				else if (demand.DeployedYard == null || demand.DeployedYard.Disposed || demand.DeployedYard.IsDead
+					|| !demand.DeployedYard.IsInWorld || demand.DeployedYard.Owner != player)
+				{
+					// ECON-A-FIX (R3): the committed actor after deploy is the yard — the outpost died,
+					// was captured, or undeployed away. The demand ends with it (bound items unwind for
+					// their refund) instead of leaking bindings onto a corpse.
+					ExpireExpansionDemand(bot, demand);
+					continue;
+				}
+
+				VerifyDemandBinding(demand, isRefinery: true, now);
+				VerifyDemandBinding(demand, isRefinery: false, now);
+
+				// ECON-A-FIX (R6): the bound refinery's anchor reservation renews with the demand — a
+				// lost hold (the anchor got served, parked or committed elsewhere) just falls back to a
+				// fresh claim at placement; the law's one-refinery-per-anchor rule stands either way.
+				if (demand.ReservedClaim is { } reserved)
+				{
+					var law = RefineryLawProvider();
+					if (demand.RefineryItem == null || law == null
+						|| !law.TryReserveRefineryAnchor(reserved.Anchor, demand, now + Info.ExpansionDemandIdleTicks))
+						demand.ReservedClaim = null;
+				}
+
+				// Deployed and fully placed/cleared — done.
+				if (demand.Deployed && demand.Unbound && now >= demand.ExpiresTick)
+				{
+					RequestedRefineries.Remove(demand.Mcv);
+					ExpansionDemands.Remove(demand.Mcv);
+				}
+			}
+		}
+
+		/// <summary>
+		/// ECON-A-FIX2 (R4): where the traveller's activity chain leaves the journey — Move reports its
+		/// destination (or remaining path) through the public GetTargets seam; TransformsIntoMobile
+		/// persists the redeploy destination into the emergent MCV's own chain. The last positional
+		/// target decides: Committed while it aims inside the deploy slack, Redirected once it aims
+		/// elsewhere, Indeterminate while the chain reports no positional target at all.
+		/// </summary>
+		BaseBuilderQueueEvalCA.ExpansionJourneyState JourneyState(Actor mcv, ExpansionDemand demand)
+		{
+			var sawTarget = false;
+			var lastNear = false;
+			foreach (var t in ActivityTargets(mcv, mcv.CurrentActivity))
+			{
+				if (t.Type == TargetType.Invalid)
+					continue;
+
+				sawTarget = true;
+				lastNear = (world.Map.CellContaining(t.CenterPosition) - demand.ConyardLoc).Length <= ExpansionJourneySlackCells;
+			}
+
+			return BaseBuilderQueueEvalCA.ExpansionJourney(sawTarget, lastNear);
+		}
+
+		/// <summary>Every target a chain reports — each activity's own, then its child's, then its next's.</summary>
+		static IEnumerable<Target> ActivityTargets(Actor self, Activity activity)
+		{
+			for (var a = activity; a != null; a = a.NextActivity)
+			{
+				var targets = a.GetTargets(self);
+				if (targets != null)
+					foreach (var t in targets)
+						yield return t;
+
+				if (a.ChildActivity != null)
+					foreach (var t in ActivityTargets(self, a.ChildActivity))
+						yield return t;
+			}
+		}
+
+		/// <summary>
+		/// ECON-A (§6): expiry unwinds the demand — a still-building or held item is cancelled for its
+		/// normal refund (a Done item refunds the full paid amount), except a held Ready refinery that
+		/// the law can re-adopt on another anchor: it converts to a normal queued refinery instead.
+		/// </summary>
+		void ExpireExpansionDemand(IBot bot, ExpansionDemand demand)
+		{
+			var law = RefineryLawProvider();
+
+			// ECON-A-FIX (R6): the demand's anchor hold ends with it — released before the re-adopt check
+			// so a still-Ready refinery may legally re-claim that very anchor as an ordinary item.
+			if (demand.ReservedClaim is { } reserved)
+				law?.ReleaseRefineryAnchor(reserved.Anchor, demand);
+
+			// ECON-A-FIX (R4): the traveller's McvExpansion lease is the demand's — released on every
+			// lapse path (the registry prunes a dead unit's lease on its own cadence regardless).
+			BotUnitLeases.Of(player)?.Release(demand.Mcv, LeaseOwner);
+
+			if (demand.RefineryItem != null)
+			{
+				var readopted = law != null
+					&& ItemDone(demand.RefineryProducer, demand.RefineryItem)
+					&& law.NextRefineryClaim(null) != null;
+				if (!readopted)
+					CancelDemandItem(bot, demand.RefineryProducer, demand.RefineryItem);
+
+				demand.UnbindRefinery();
+			}
+
+			if (demand.DefenceItem != null)
+			{
+				CancelDemandItem(bot, demand.DefenceProducer, demand.DefenceItem);
+				demand.UnbindDefence();
+			}
+
+			RequestedRefineries.Remove(demand.Mcv);
+			ExpansionDemands.Remove(demand.Mcv);
+		}
+
+		static bool ItemDone(Actor producer, string item)
+		{
+			if (producer == null || producer.Disposed || producer.IsDead)
+				return false;
+
+			return producer.TraitsImplementing<ProductionQueue>()
+				.Any(q => q.AllQueued().Any(i => i.Item == item && i.Done));
+		}
+
+		static void CancelDemandItem(IBot bot, Actor producer, string item)
+		{
+			if (producer == null || producer.Disposed || producer.IsDead)
+				return;
+
+			bot.QueueOrder(Order.CancelProduction(producer, item, 1));
+		}
+
+		/// <summary>
+		/// The bound item left its queue (placed or cancelled elsewhere) — release the binding. Inside
+		/// the order-latency grace window an absent item is still the queued order in flight, so the
+		/// binding survives until the grace expires.
+		/// </summary>
+		void VerifyDemandBinding(ExpansionDemand demand, bool isRefinery, int now)
+		{
+			var item = isRefinery ? demand.RefineryItem : demand.DefenceItem;
+			if (item == null)
+				return;
+
+			var producer = isRefinery ? demand.RefineryProducer : demand.DefenceProducer;
+			var queuedTick = isRefinery ? demand.RefineryQueuedTick : demand.DefenceQueuedTick;
+
+			if (producer != null && !producer.Disposed
+				&& producer.TraitsImplementing<ProductionQueue>().Any(q => q.AllQueued().Any(i => i.Item == item)))
+				return;
+
+			if (now - queuedTick < OrderGraceTicks)
+				return;
+
+			// ECON-A-FIX (R6): an unwound refinery binding releases its anchor hold — the anchor goes
+			// back on the market before the demand could re-bind or expire around it.
+			if (isRefinery)
+			{
+				if (demand.ReservedClaim is { } reserved)
+					RefineryLawProvider()?.ReleaseRefineryAnchor(reserved.Anchor, demand);
+
+				demand.UnbindRefinery();
+			}
+			else
+			{
+				demand.UnbindDefence();
+			}
+		}
+
+		/// <summary>
+		/// ECON-A (§2): etaTick = now + travelEstimate + deployDuration — PathFinder distance for the
+		/// MCV's locomotor over its nominal speed, recomputed on cadence (the MCV may detour). An
+		/// unreachable path lands the ETA at far-future so the demand idles out through ExpiresTick.
+		/// The defence pick is (re)taken here too: null means nothing was affordable — retried on every
+		/// recompute; a chosen type is sticky so the queue never thrashes between candidates.
+		/// </summary>
+		void RefreshExpansionEta(ExpansionDemand demand)
+		{
+			var now = world.WorldTick;
+			var travel = EstimateTravelTicks(demand.Mcv, demand.ConyardLoc);
+			demand.EtaTick = travel == int.MaxValue ? int.MaxValue : now + travel + Info.ExpansionDeployTicks;
+			demand.NextEtaTick = now + Info.ExpansionEtaIntervalTicks;
+			if (demand.DefenceType == null)
+				demand.DefenceType = ChooseDemandDefence(demand.EtaTick);
+		}
+
+		/// <summary>
+		/// ECON-A-FIX (R1): the honest-travel estimate — a terrain-only search (BlockedByActor.None) plus
+		/// a custom cell cost that blocks exactly the obstacles we KNOW: own units, occupants of
+		/// currently visible cells, and remembered frozen-under-fog footprints. The live Immovable
+		/// graph is never consulted, so an unseen enemy building can neither block nor unblock the
+		/// estimate — the production schedule provably does not depend on fog-hidden state.
+		/// ECON-A-FIX (R2): the result path runs target-to-source; its length is the sum of its own
+		/// consecutive segments only — no source-to-first-cell chord.
+		/// </summary>
+		int EstimateTravelTicks(Actor mcv, CPos target)
+		{
+			var mobile = mcv.TraitOrDefault<Mobile>();
+			if (mobile == null || pathFinder == null)
+				return 0;
+
+			var remembered = FrozenBlockedCells(mcv, mobile);
+			var path = pathFinder.FindPathToTargetCell(mcv, new[] { mcv.Location }, target,
+				BlockedByActor.None, EtaCellCost(mcv, mobile, remembered), ignoreActor: mcv);
+			if (path.Count == 0)
+				return int.MaxValue;
+
+			return BaseBuilderQueueEvalCA.ExpansionTravelTicks(
+				BaseBuilderQueueEvalCA.ExpansionPathLength(path, c => world.Map.CenterOfCell(c)),
+				mobile.MovementSpeedForCell(mcv.Location));
+		}
+
+		/// <summary>
+		/// ECON-A-FIX (R1): the per-cell cost of the honest search — PathCostForInvalidPath only where a
+		/// KNOWN immovable obstacle stands (Locomotor.IsBlockedBy's Immovable predicate re-evaluated
+		/// over remembered/visible/own occupants instead of the full ActorMap), else 0.
+		/// ECON-A-FIX2 (R1): KNOWN is per-actor legality — CanBeViewedByPlayer, not the cell: a revealed
+		/// cell does not reveal a cloaked or otherwise hidden actor standing on it.
+		/// </summary>
+		Func<CPos, int> EtaCellCost(Actor mcv, Mobile mobile, IReadOnlySet<CPos> remembered)
+		{
+			var crushes = mobile.Locomotor.Info.Crushes;
+			return cell =>
+			{
+				if (remembered != null && remembered.Contains(cell))
+					return PathGraph.PathCostForInvalidPath;
+
+				foreach (var other in world.ActorMap.GetActorsAt(cell))
+				{
+					if (other == mcv)
+						continue;
+
+					var otherMobile = other.OccupiesSpace as Mobile;
+					var movable = otherMobile != null && !otherMobile.IsTraitDisabled && !otherMobile.IsTraitPaused && !otherMobile.IsImmovable;
+					var moving = movable && otherMobile.CurrentMovementTypes.HasMovementType(MovementType.Horizontal);
+					var allied = movable && player.RelationshipWith(other.Owner) == PlayerRelationship.Ally;
+					var removable = other.TraitOrDefault<ITemporaryBlocker>() is { } tb && tb.CanRemoveBlockage(other, mcv);
+					var transit = other.OccupiesSpace is Building building && building.TransitOnlyCells().Contains(cell);
+					var crushable = false;
+					foreach (var c in other.Crushables)
+						if (c.CrushableBy(other, mcv, crushes))
+						{
+							crushable = true;
+							break;
+						}
+
+					if (BaseBuilderQueueEvalCA.EtaOccupantBlocks(
+						known: other.Owner == player || other.CanBeViewedByPlayer(player), movable, allied, moving, removable, transit, crushable))
+						return PathGraph.PathCostForInvalidPath;
+				}
+
+				return 0;
+			};
+		}
+
+		/// <summary>
+		/// ECON-A-FIX2 (R1): the cells remembered frozen-under-fog footprints still block for the MCV —
+		/// the frozen layer is the legal record of what we last saw, and ONLY that record is read.
+		/// fa.Actor is deliberately never dereferenced: the layer hands out the live backing while it
+		/// lives, so reading its traits would leak current hidden state — Sol's probe killed the
+		/// backing under fog and watched the blocker set change. Hidden records (the occupant was
+		/// masked at last sight) contribute nothing. Removable mirrors the live check on remembered
+		/// facts: a temporary blocker (gate, energy wall) lifts for a remembered-friendly owner; a
+		/// DoesNotBlock lifts when our MCV's own target types overlap its remembered admission set —
+		/// both sides of that comparison are legal knowledge.
+		/// </summary>
+		HashSet<CPos> FrozenBlockedCells(Actor mcv, Mobile mobile)
+		{
+			var layer = player.PlayerActor.TraitOrDefault<FrozenActorLayer>();
+			if (layer == null)
+				return null;
+
+			var crushes = mobile.Locomotor.Info.Crushes;
+			var mcvTargetTypes = mcv.GetEnabledTargetTypes();
+			var mcvMineImmune = mcv.Info.HasTraitInfo<MineImmuneInfo>();
+			HashSet<CPos> blocked = null;
+			foreach (var fa in layer.FrozenActorsInRegion(world.Map.AllCells))
+			{
+				if (!fa.IsValid || fa.Hidden || fa.Info.HasTraitInfo<MobileInfo>())
+					continue;
+
+				var info = fa.Info;
+				var rememberedAllied = fa.Owner != null && player.RelationshipWith(fa.Owner) == PlayerRelationship.Ally;
+
+				var removable = false;
+				var crushable = false;
+				foreach (var ti in info.TraitsInConstructOrder())
+				{
+					if (ti is DoesNotBlockInfo dnb)
+						removable |= dnb.TargetTypes.IsEmpty || dnb.TargetTypes.Overlaps(mcvTargetTypes);
+					else if (ti is ITemporaryBlockerInfo)
+						// Gates and energy walls lift for friendly passers — the remembered owner is the fact.
+						removable |= rememberedAllied;
+					else if (ti is CrateInfo crate)
+						crushable |= crushes.Contains(crate.CrushClass);
+					else if (ti is MineInfo mine)
+						crushable |= mine.CrushClasses.Overlaps(crushes) && !(mine.BlockFriendly && !mcvMineImmune && rememberedAllied);
+					else if (ti.GetType().Name.EndsWith("CrushableInfo", StringComparison.Ordinal))
+					{
+						// CrushableInfo itself is internal to Common — the remembered record is read
+						// off its static fields so it and any custom ICrushable info join the same rule.
+						var type = ti.GetType();
+						var classesOverlap = type.GetField("CrushClasses")?.GetValue(ti) is BitSet<CrushClass> classes && classes.Overlaps(crushes);
+						var friendliesCrush = type.GetField("CrushedByFriendlies")?.GetValue(ti) is true;
+						crushable |= BaseBuilderQueueEvalCA.RememberedCrushable(classesOverlap, friendliesCrush, rememberedAllied);
+					}
+				}
+
+				// Transit-only is per-cell — only these footprint cells let the MCV through. The
+				// building anchor is its footprint's top-left cell.
+				var topLeft = new CPos(fa.Footprint.Min(p => p.U), fa.Footprint.Min(p => p.V));
+				var transit = info.TraitInfoOrDefault<BuildingInfo>() is { } bi
+					? new HashSet<CPos>(bi.TransitOnlyTiles(topLeft))
+					: null;
+				foreach (var puv in fa.Footprint)
+				{
+					var cell = ((MPos)puv).ToCPos(world.Map);
+					if (BaseBuilderQueueEvalCA.FrozenOccupantBlocks(transit != null && transit.Contains(cell), removable, crushable))
+						(blocked ??= new HashSet<CPos>()).Add(cell);
+				}
+			}
+
+			return blocked;
+		}
+
+		/// <summary>Own cash + resources plus the measured income rate out to the ETA — integers only.</summary>
+		int ProjectedCash(int atTick)
+		{
+			var projected = playerResources.GetCashAndResources() + (long)projectedIncomePerTick * (atTick - world.WorldTick);
+			return (int)Math.Min(int.MaxValue, Math.Max(0, projected));
+		}
+
+		void SampleExpansionIncome()
+		{
+			var now = world.WorldTick;
+			if (incomeWindowStartTick < 0)
+			{
+				incomeWindowStartTick = now;
+				incomeWindowStartEarned = playerResources.Earned;
+				return;
+			}
+
+			var elapsed = now - incomeWindowStartTick;
+			if (elapsed < Info.ExpansionIncomeWindowTicks)
+				return;
+
+			projectedIncomePerTick = Math.Max(0, (playerResources.Earned - incomeWindowStartEarned) / elapsed);
+			incomeWindowStartTick = now;
+			incomeWindowStartEarned = playerResources.Earned;
+		}
+
+		/// <summary>
+		/// ECON-A (§1): the strongest affordable defence for the demand — AttackBase buildings from
+		/// Info.DefenseTypes that a defence queue can actually produce, affordable at the ETA against
+		/// projected income; the eval's DefenceStrength ordering decides, ties on cost then name.
+		/// </summary>
+		string ChooseDemandDefence(int etaTick)
+		{
+			if (etaTick == int.MaxValue)
+				return null;
+
+			var projected = ProjectedCash(etaTick);
+			var candidates = new List<(ActorInfo Info, int Strength, int Cost)>();
+			foreach (var name in Info.DefenseTypes)
+			{
+				if (!world.Map.Rules.Actors.TryGetValue(name, out var info) || !info.HasTraitInfo<AttackBaseInfo>())
+					continue;
+
+				int? cost = null;
+				foreach (var category in Info.DefenseQueues)
+				{
+					foreach (var queue in AIUtils.FindQueues(player, category))
+					{
+						if (!queue.BuildableItems().Any(b => b.Name == name))
+							continue;
+
+						var itemCost = queue.GetProductionCost(info);
+						cost = cost == null ? itemCost : Math.Min(cost.Value, itemCost);
+					}
+				}
+
+				if (cost == null)
+					continue;
+
+				candidates.Add((info, BaseBuilderQueueEvalCA.DefenceStrength(info), cost.Value));
+			}
+
+			return BaseBuilderQueueEvalCA.ChooseExpansionDefence(candidates, projected)?.Name;
+		}
+
+		/// <summary>The demand whose binding matches this queued item on this producer, or null.</summary>
+		public ExpansionDemand DemandForQueuedItem(string item, Actor producer)
+		{
+			if (ExpansionDemands.Count == 0)
+				return null;
+
+			foreach (var demand in ExpansionDemands.Values)
+			{
+				if ((demand.RefineryProducer == producer && demand.RefineryItem == item)
+					|| (demand.DefenceProducer == producer && demand.DefenceItem == item))
+					return demand;
+			}
+
+			return null;
+		}
+
+		/// <summary>
+		/// ECON-A (§4): the defence pre-build may hold its Ready item on any queue — except when that
+		/// queue is the bot's only building producer, where the hold is allowed only within HoldSlack
+		/// of the deploy ETA (a lone queue's blocked head would starve every building behind it).
+		/// </summary>
+		public bool DefenceHoldPermitted(ProductionQueue queue, ExpansionDemand demand, int now)
+		{
+			return BaseBuilderQueueEvalCA.DefenceHoldPermitted(BuildingProducerCount() <= 1,
+				demand.EtaTick - now, Info.ExpansionHoldSlack);
+		}
+
+		int buildingProducerCountCached = -1;
+		int buildingProducerCountTick = -1;
+		int BuildingProducerCount()
+		{
+			var now = world.WorldTick;
+			if (buildingProducerCountTick != now)
+			{
+				buildingProducerCountTick = now;
+				buildingProducerCountCached = Info.BuildingQueues.Concat(Info.DefenseQueues).Distinct()
+					.SelectMany(category => AIUtils.FindQueues(player, category))
+					.Distinct()
+					.Count();
+			}
+
+			return buildingProducerCountCached;
+		}
+
 		List<MiniYamlNode> IGameSaveTraitData.IssueTraitData(Actor self)
 		{
 			if (IsTraitDisabled)
@@ -1116,6 +1820,7 @@ namespace OpenRA.Mods.CA.Traits
 			if (ResourceMapModule == null)
 			{
 				RequestedRefineries[expandActor] = (conyardLocation, refineryLocation);
+				PostExpansionDemand(expandActor);
 				return;
 			}
 
@@ -1130,6 +1835,43 @@ namespace OpenRA.Mods.CA.Traits
 
 			if (held < Info.MaxRefineryPerIndice)
 				RequestedRefineries[expandActor] = (conyardLocation, refineryLocation);
+
+			PostExpansionDemand(expandActor);
+		}
+
+		/// <summary>
+		/// ECON-A (SPEC_2026-10-05_econ_logistics Part A §1): the MCV owner's RequestLocation call IS the
+		/// demand post — the module enriches the retained RequestedRefineries record with the ETA, the
+		/// defence pick and the expiry window. A re-post (redirect) refreshes the locations and forces
+		/// the next ETA recompute. No-op while the switch is off, the request was rejected, or the
+		/// actor is a building whose journey has not started (a conyard mid-relocation still deploys).
+		/// </summary>
+		void PostExpansionDemand(Actor expandActor)
+		{
+			if (!ExpansionPrebuildEnabled || expandActor == null || !RequestedRefineries.ContainsKey(expandActor))
+				return;
+
+			var isNew = !ExpansionDemands.TryGetValue(expandActor, out var demand);
+			if (isNew)
+			{
+				demand = new ExpansionDemand(expandActor);
+				ExpansionDemands[expandActor] = demand;
+			}
+
+			var request = RequestedRefineries[expandActor];
+			demand.ConyardLoc = request.ConyardLoc;
+			demand.ResourceLoc = request.ResourceLoc;
+			demand.YardFootprint = DeployFootprint(expandActor, request.ConyardLoc);
+			demand.ExpiresTick = world.WorldTick + Info.ExpansionDemandIdleTicks;
+			demand.NextEtaTick = world.WorldTick;
+
+			// ECON-A-FIX (R4): the demand publishes only while its own McvExpansion lease holds on the
+			// traveller — a first claim refused by a foreign owner's lease means this journey is not ours
+			// to schedule, so the demand never posts (the plain request record still stands). On an
+			// existing demand a failed re-claim is left to the sweep, which expires it the same tick.
+			if (!BotUnitLeases.TryClaim(BotUnitLeases.Of(player), expandActor, LeaseOwner,
+				BotLeasePurpose.McvExpansion, Info.ExpansionDemandIdleTicks) && isNew)
+				ExpansionDemands.Remove(expandActor);
 		}
 	}
 }
