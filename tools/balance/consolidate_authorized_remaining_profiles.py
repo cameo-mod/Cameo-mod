@@ -109,8 +109,9 @@ def plans(rs: Ruleset):
         if resolved is None:
             raise RuntimeError(f"{name}: missing weapon")
         mains = set(main_warheads(resolved))
-        expected = retained | {f"{destination}FlatCompatibility"}
-        if mains == expected:
+        applied = retained | {f"{destination}FlatCompatibility",
+                              f"{destination}_Flat", destination}
+        if mains and mains <= applied:
             result[name] = None
             continue
         collapse = mains - retained

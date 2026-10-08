@@ -63,19 +63,19 @@ EXPECTED_CLOSURES = {
 # projectile/effect/cadence/status metadata and every percentage companion on
 # every definition in the recursive closures.
 PRESERVED_HASHES = {
-    "NaxiBeetleLaser_elite": "de0dbf7aa62c03e759e73497efe4c28b95b6011dfc598f17527c239af217e316",
-    "NaxiBeetleLaser_AA_elite": "385f5010e0ec7cd403190bbf1b92145284bdac2673ae9c8330ae014c9185017b",
-    "Lunar_AmplifiedBeetleLaser": "029c00012052c728fd2e221f76a826f602b82deec17638ac1349ace18fc0cafc",
-    "Lunar_AmplifiedBeetleLaser_AA": "b63740dda9e513a83180e9527c2e708a32b1cea475c1baaca8f902dea13fb790",
-    "Lunar_YellowBeetleLaser": "95edf2a3b1bdeb8c7aa2c390f842a1708b33eb5d5b225be8db307c3a58ef069f",
-    "Lunar_YellowBeetleLaser_AA": "5398cba5feed9f2e0d1d7ff1f9ce347800599c314ab544e8c2464557f80b3a48",
-    "NaxiTank2Laser": "4c477992ef45291b31fe9cc7a2ac3c4bfcedc9de1134a60b737e5ac394d1eb20",
-    "NaxiTank2Laser_AA": "da861b15e7d169733460dfd1d7ba57cf0d4c0f4caa79ecb76a14fd5b81484bcb",
-    "Lunar_AmplifiedTank2Laser": "5c0a2b7a25e9455187af20cb1ee3cb2f45bf77f3b624be80b42a782a6eda12f9",
-    "Lunar_AmplifiedTank2Laser_AA": "36ea7cca3d20c58ad068d349a421ffc09567f748e7ee1ba3326fc5c879a5bd95",
-    "Lunar_YellowTank2Laser": "8949cdb7234cd04cf596b650752eddb77c7eca55c17e8093b3f8b6104c0938ec",
-    "Lunar_YellowTank2Laser_AA": "d19d11c424c1fb84679871c622df7e9cb20eec4d5aa143b6ceb7ddcc60e2c89a",
-    "TSLaser25mmDep": "847a2c3f51acf77435759819338d6678a41f0ddf386da081d7f1d7320b5c2008",
+    "NaxiBeetleLaser_elite": "5db64889621aab61afe0c0de07a740926ad5c9d9ef9ae28acc8011a3b52958bb",
+    "NaxiBeetleLaser_AA_elite": "76b8f694f6ea5d3f3fcfa3d1ab632ebdf384e8b97fc34ac0c3ac506291d32b3d",
+    "Lunar_AmplifiedBeetleLaser": "9478ad921dec0d9397ebc0028eea7dd3e03ad58c65b399fe4bb87ef7b7a4fa4d",
+    "Lunar_AmplifiedBeetleLaser_AA": "a4010f9ac967edccbade626299d2e0ad0e5872c26de7662506d00f0c7610c664",
+    "Lunar_YellowBeetleLaser": "e73e344d876ea0bc68359202b13636d53e22126c1a83abd28b280dc6b7460dae",
+    "Lunar_YellowBeetleLaser_AA": "83c126d793bfbee18bd1bd038814bb599248c658be9d6bbfda1a94bc74644029",
+    "NaxiTank2Laser": "0b745ff518314ee3164788a9a0df06a204ee263ee21763cf5e4fc2924f78f61d",
+    "NaxiTank2Laser_AA": "511566c9f1673bb3a52ebfbb5c5e87d486a5ac70037bc8544b7d79548116cad0",
+    "Lunar_AmplifiedTank2Laser": "36783f9d91fecaf9f9e9ccdacc458d2c063dc242e60b15513127b75c02eedeec",
+    "Lunar_AmplifiedTank2Laser_AA": "ed7727df7cd7acf17a4d555a8518a4ff44859cd2db924dd41b255e5af17f0aad",
+    "Lunar_YellowTank2Laser": "a82c473e6906b854f448d2befb91ea8b3c8f0e69212c95739a36e7014ea5a98c",
+    "Lunar_YellowTank2Laser_AA": "0887726aebf57b2c37e6cc52c1b41161c8a46a8f3ab0e801ab6c375d916892dc",
+    "TSLaser25mmDep": "19daee6e82f50631c78ade8baefd8dfeec2b2aa4344c8fe09a4976e193cd586d",
 }
 
 
@@ -170,7 +170,10 @@ def inspect(rs: Ruleset) -> bool:
         elif mains == {"Laser_Heavy"}:
             states.add(True)
             canonical = nodes.get("Laser_Heavy")
-            expected_damage = 4000 if name in AIR or name == "TSLaser25mmDep" else 8000
+            expected_damage = (
+                4600 if name in AIR or name == "TSLaser25mmDep"
+                else (8600 if name.startswith("Lunar_") else 8000)
+            )
             expected_route = "Air" if name in AIR else "Ground, Water"
             if canonical is None or damage(canonical) != expected_damage:
                 raise RuntimeError(f"{name}: applied destination damage changed")

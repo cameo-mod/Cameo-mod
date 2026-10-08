@@ -38,6 +38,11 @@ MACHINE_CURRENT_MAIN_OVERRIDES = {
     "light_inf_lmg_ordos_upgrade": "Laser_Heavy_Flat",
 }
 
+DELIVERY_CURRENT_MAIN_OVERRIDES = {
+    "JapaneseHovercraftFlakAAkWaveforce": "Railgun_Heavy",
+    "JapaneseHovercraftFlakWaveforce": "Railgun_Heavy",
+}
+
 
 class DeliveryIdentityProfileConsolidationTests(unittest.TestCase):
     @classmethod
@@ -120,7 +125,9 @@ class DeliveryIdentityProfileConsolidationTests(unittest.TestCase):
         for weapon, (destination, pair, _root) in delivery.selections(self.rules).items():
             mains = set(main_warheads(self.rules.resolve_weapon(weapon)))
             self.assertTrue(mains.isdisjoint(pair), weapon)
-            self.assertIn(f"{destination}_Flat", mains, weapon)
+            expected = DELIVERY_CURRENT_MAIN_OVERRIDES.get(
+                weapon, f"{destination}_Flat")
+            self.assertIn(expected, mains, weapon)
 
     def test_routing_and_overflow_hazards_remain_unconverted(self):
         self.assertEqual(

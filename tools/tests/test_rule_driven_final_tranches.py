@@ -111,6 +111,14 @@ class RuleDrivenFinalTrancheTests(unittest.TestCase):
             # Re-roled AP->HE under the same wave as the Scud/Marauder folds.
             "AsianPunisherAG": "MissileHE_Medium",
             "AsianPunisherAG_EMP": "MissileQuantum_Medium",
+            # Post-recording AA/HE missile re-roles the view does not restore.
+            "AsianPhotonCannon": "MissileAA_Heavy",
+            "AsianPhotonCannon_EMP": "MissileAA_Heavy",
+            "AsianQuasarBoat_EMP_AA": "MissileAA_Medium",
+            "AsianQuasar_EMP_AA": "MissileAA_Medium",
+            "SteelScalpelRailgunAA": "MissileAA_Medium",
+            "SteelScalpelRailgun_EMP_AA": "MissileAA_Medium",
+            "RocketsRA": "MissileAP_MediumFlatCompatibility",
         }
         for name, destination in sorted(destinations.items()):
             expected = folded.get(name, "CannonChem_Medium" if name == "TSScoopDualChem"

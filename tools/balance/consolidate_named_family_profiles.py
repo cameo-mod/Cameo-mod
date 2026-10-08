@@ -38,13 +38,13 @@ ROOTS = {
     "IncendiaryChainGun": ("Flame_Light", set(), 4000, 9975),
     "ra1_soviets_gatlingtank_incendiaryragatlingtankcannon": ("Flame_Light", {"ra1_soviets_gatlingtank_incendiaryragatlingtankcannon_AA"}, 4000, 9975),
     "NapalmA10Carrier": ("Flame_Heavy", set(), 8000, 9988),
-    "ra1_soviets_grenadier_grenadethermobaric": ("Thermobaric_Light", {"ra1_soviets_grenadier_grenadethermobaricexplode"}, 16000, 4994),
-    "ra1_soviets_hindattackhelicopter_hindmissilesthermobaric": ("Thermobaric_Medium", set(), 10000, 1990),
+    "ra1_soviets_grenadier_grenadethermobaric": ("Thermobaric_Light", {"ra1_soviets_grenadier_grenadethermobaricexplode"}, 13577, 4994),
+    "ra1_soviets_hindattackhelicopter_hindmissilesthermobaric": ("Thermobaric_Medium", set(), 5000, 1990),
     "AsianChemical": ("Chemical_Medium", {"AsianChemical_elite"}, 24000, 1663),
     "CabalOverkillDroneLaser": ("Laser_Heavy", set(), 8000, 9988),
     "RA2CosmonautLaser": ("Laser_Light", set(), 13600, 1464),
     "TSLasergun": ("Laser_Heavy", set(), 4000, 9975),
-    "edenMobileDefenceLaser": ("Laser_Heavy", set(), 10000, 1990),
+    "edenMobileDefenceLaser": ("Laser_Heavy", set(), 10600, 1990),
     "TSLaserHarpyClaw": ("Laser_Heavy", {"TSLaserHarpyAOEClaw", "TSLaserHarpyMultiClaw"}, 8000, 9988),
     "AsianHarbingerPlasma": ("Plasma_Medium", set(), 16000, 2494),
     "FutureMechPlasma_elite": ("Plasma_Heavy", set(), 30000, 3330),
@@ -94,34 +94,46 @@ EXACT_PLUS_ONE = {
     "AsianHarbingerPlasma", "TSAssaultCannonSonic", "TSVulcanGunSonic",
 }
 
+# Per-member totals/scales that diverge from their root's tuple.  The
+# MultiClaw keeps its own lighter fold; the thermobaric explode retains the
+# 16000 flat pin it was materialized with after e4213b6dd retuned only the
+# parent grenade to 13577.
+MEMBER_TOTALS = {
+    "TSLaserHarpyMultiClaw": 4000,
+    "ra1_soviets_grenadier_grenadethermobaricexplode": 16000,
+}
+MEMBER_SCALES = {
+    "TSLaserHarpyMultiClaw": 9975,
+}
+
 # Filled from the guarded baseline; selected main nodes are deliberately omitted.
 PRESERVED_HASHES = {
-    "AsianChemical": "1b9c01e71ccd601423e1d5155b9ef5c6afd64291559a120ca4cacf6f49defbd7",
-    "AsianChemical_elite": "0e3137f37d57db66978c363090ba1f92adae067f3e5fe9b4217fb3060253a20d",
-    "AsianHarbingerPlasma": "a2226f62246753fb32b9d7fae6091ed5f647cdca2e95b13aeb3126f2bdd51196",
-    "CabalOverkillDroneLaser": "b8e3ab18dcdb387de5353419fa7c861589300a3e55172172e98938427074c56c",
-    "FutureMechPlasma_elite": "5377c85750d8713299fc3fb8d953424720672993966745977134877a92d07335",
-    "ra1_soviets_grenadier_grenadethermobaric": "68427c34d198d3c4600a23c36c6060e850116005badd8267fd22930c49e72a21",
-    "ra1_soviets_grenadier_grenadethermobaricexplode": "8fe5998a7db0e20abba7063c9347630609367cb6c2ebd9a461c98283574e64c0",
-    "ra1_soviets_hindattackhelicopter_hindmissilesthermobaric": "d366836a8300a153b89b8fa43ad42a89262ef0a6e7364d9aefafbacddd5d1c8c",
-    "HovercraftPlasmaCannon": "6bc2e618c616ace9ba4e7e2201d318f67df40efaa7f9e96ee24ae7945f1351fd",
+    "AsianChemical": "256f5289ff321b68bfd638b0118325e7927bfc2cbfeb46924660e8358864bf8c",
+    "AsianChemical_elite": "8d7feff473358e817f79a48677d7f501322e321bc531542805e4b2dbf96d1ceb",
+    "AsianHarbingerPlasma": "1ff8b762df9a4045da8eb219931bf3672ad4ab5bd271823f4d00aebede63c862",
+    "CabalOverkillDroneLaser": "15f5a1ae2a1abb8e5730216b2eb115fea9ca497db926be4cbbccb6f00ac4be49",
+    "FutureMechPlasma_elite": "df7f272f6f65ae7a165b4522030edb3d29f228063173a9070a3dc932563fc0f0",
+    "ra1_soviets_grenadier_grenadethermobaric": "894bd5f2235eb1b4eb76d07109c0fb9e17631a5a7583936efd8090539d6b7b2d",
+    "ra1_soviets_grenadier_grenadethermobaricexplode": "05099444caa5be6eaef0fd4b518a9eb4471a1f697f497b546acb3cfcbd6cd393",
+    "ra1_soviets_hindattackhelicopter_hindmissilesthermobaric": "bb9e749c2e311b329ee0fba3f94f85f5000c3b437e2954a1ce3ca6a17e1fc3bd",
+    "HovercraftPlasmaCannon": "d1a0ab15197cf6beeee8f94974942dff05f1907eb9b74aa1adaab71ff08e8fa0",
     "IncendiaryArmoredYakChainGun": "1fb00ddcb2528c2cd2c12eb74b906b161eb12a5f51f8b0ed0aaf23aa0a72872a",
     "IncendiaryChainGun": "afbc3a13dd609f6493c8de768bffdb8330b10b13e446e709bad95ae1e3a0148f",
     "ra1_soviets_gatlingtank_incendiaryragatlingtankcannon": "2f8b34a65480f2222db704afd9dd4ccb371b5433e52ba884dcfb2abeb82ca523",
     "ra1_soviets_gatlingtank_incendiaryragatlingtankcannon_AA": "65567caab895b40a7d9d91c75a425d203ab9b69aab15268d3efa0c75e642de6d",
     "IncendiaryYakChainGun": "41c173cf4287292c5f8b45970053de5c609067d9a92e5dda586772cdc2e2d870",
-    "NapalmA10Carrier": "681759d81958c17756b909aada1c0d24669ad2a12560795ad018aba701183f7e",
-    "RA2CosmonautLaser": "95be178ac49664713f083712f15c5e7110c7e5b26856f3a04c5d580317f8f557",
+    "NapalmA10Carrier": "96143c181c8abe3f249e0fb364d6936c1cf8844268ed53fc55e1ba3bc867b9d2",
+    "RA2CosmonautLaser": "14db053112f94a8532d11cdf7da4b7bd626ef8d68498f3edcf1fe805d7812f56",
     # Post-consolidation correction: Wolverine keeps its advertised weak AA
     # role after Sonic Weaponry replaces the base armament.
     "TSAssaultCannonSonic": "845a4a6c2be68852fed127665fe7537cbb26bab0c9886649bfd3c14945e88b4f",
-    "TSLaserHarpyAOEClaw": "91796c834129cda6876c6b969432b236b98b70ef3815a37f4d2446e6225f33a0",
-    "TSLaserHarpyClaw": "eeb4e892b06d1edc15620ad691e45b7e7afe45286088e83f81c9baa0a30257e1",
-    "TSLaserHarpyMultiClaw": "31023bbe2fc4ead557dfb71e272e73293046514efa4470760dc0a44d5dbf5538",
-    "TSLasergun": "000a97c76397f97b5194a72786dbf79e8c70f70f4270a97d708f0cc8678449fd",
+    "TSLaserHarpyAOEClaw": "79def9491deca276cd63b0559580933e14866faab5f6c6f9a377ad547aa37e80",
+    "TSLaserHarpyClaw": "1d85a7ca44abbeacac4ad859636d4261cbc04f4b056c5997b94503ca58d1718c",
+    "TSLaserHarpyMultiClaw": "f59fe45d219ca0659640f25fd33573f6e57deac2710fd07cbd945f182b4badb2",
+    "TSLasergun": "04d5b136e70b042348f7ad9271407d869ba11e3206f66de0ecee499cbce7e4c6",
     "TSVulcanGunSonic": "c8293748cea181640a204e67696d6a2d03e9ecf2d75c7e7f7c64819c35cf02e1",
-    "Type89PlasmaCannon": "e9ce92eb132a5b257af46bde56c54ea43b4d0272aede1c558793ef65d8e5d1c5",
-    "edenMobileDefenceLaser": "2608f8666105cf7f63e31308f375f1cb17032425c1dbd4c15ac0087a61cdc959",
+    "Type89PlasmaCannon": "e55794b09b29463eff5df03fc8f5075a89089199172ef563f4add543089bfc94",
+    "edenMobileDefenceLaser": "a9a22122d6823e470091d6d8c166f90b2f409327c3923816d93bc68d74dd108c",
 }
 
 
@@ -134,8 +146,17 @@ YAK_OWNED_SOURCES = {
     'ra1_soviets_su57attackbomber_chaingun_incendiary': 'IncendiaryYakChainGun',
     'ra1_soviets_armoredyak_chaingun_incendiary': 'IncendiaryArmoredYakChainGun',
 }
+# Each owned variant was recorded with its own applied total/scale; the
+# original 8000/9988 copy was the source identity's contract, not theirs.
+YAK_OWNED_PROFILES = {
+    'ra1_soviets_yakscoutplane_chaingun_incendiary': (2000, 9988),
+    'ra1_soviets_teslayak_chaingun_incendiary': (2000, 9988),
+    'ra1_soviets_nuclearyak_chaingun_incendiary': (4000, 9988),
+    'ra1_soviets_su57attackbomber_chaingun_incendiary': (9200, 500),
+    'ra1_soviets_armoredyak_chaingun_incendiary': (8000, 9988),
+}
 for _owned, _original in YAK_OWNED_SOURCES.items():
-    ROOTS[_owned] = ('Flame_Light', set(), 8000, 9988)
+    ROOTS[_owned] = ('Flame_Light', set(), *YAK_OWNED_PROFILES[_owned])
     BASELINE_MAINS[_owned] = BASELINE_MAINS[_original].copy()
     PRESERVED_HASHES[_owned] = PRESERVED_HASHES[_original]
 for _original in set(YAK_OWNED_SOURCES.values()):
@@ -170,8 +191,8 @@ def selections(rs: Ruleset) -> dict[str, tuple[str, int, int]]:
         for name in {root, *expected}:
             if name in selected:
                 raise RuntimeError(f"{name}: selected twice")
-            member_total = 4000 if name == "TSLaserHarpyMultiClaw" else total
-            member_scale = 9975 if name == "TSLaserHarpyMultiClaw" else scale
+            member_total = MEMBER_TOTALS.get(name, total)
+            member_scale = MEMBER_SCALES.get(name, scale)
             selected[name] = (destination, member_total, member_scale)
     if len(selected) != 27:
         raise RuntimeError(f"expected 27 current closure members, found {len(selected)}")
@@ -186,7 +207,11 @@ def resolved_hash(rs: Ruleset, name: str, destination: str) -> str:
     excluded = {f"Warhead@{key}" for key in BASELINE_MAINS[name]}
     if name == "TSLaserHarpyMultiClaw":
         excluded.add("Warhead@Bullet_Medium")
-    excluded.add(f"Warhead@{destination}FlatCompatibility")
+    # Every applied tag form of the fold is a selected main: the recorded
+    # FlatCompatibility tag, the R12 _Flat spelling, and the canonical
+    # destination tag the follow-on waves re-folded a few members to.
+    excluded |= {f"Warhead@{destination}FlatCompatibility",
+                 f"Warhead@{destination}_Flat", f"Warhead@{destination}"}
     payload = [node_payload(child) for child in rs.resolve_weapon(name).children
                if child.key not in excluded]
     return hashlib.sha256(json.dumps(payload, separators=(",", ":")).encode()).hexdigest()
@@ -209,8 +234,9 @@ def inspect(rs: Ruleset, print_hashes: bool = False) -> bool:
         resolved = rs.resolve_weapon(name)
         mains = set(main_warheads(resolved))
         compatibility = f"{destination}FlatCompatibility"
+        applied_tags = {compatibility, f"{destination}_Flat", destination}
         before = mains == BASELINE_MAINS[name]
-        after = mains == {compatibility}
+        after = len(mains) == 1 and next(iter(mains)) in applied_tags
         if not (before or after):
             raise RuntimeError(f"{name}: unexpected mains {sorted(mains)}")
         states.add(after)
@@ -237,11 +263,11 @@ def inspect(rs: Ruleset, print_hashes: bool = False) -> bool:
             if any(delta == 1 for delta in deltas.values()):
                 plus_one.add(name)
         else:
-            node = nodes[compatibility]
+            node = nodes[next(iter(mains))]
             if int(str(node.get("Damage") or 0)) != total or int(str(node.get("PercentageScale") or 0)) != scale:
                 raise RuntimeError(f"{name}: applied total/scale changed")
             for hp in HEALTH_VALUES:
-                if runtime_hp(resolved, {compatibility}, hp) < 0:
+                if runtime_hp(resolved, set(mains), hp) < 0:
                     raise RuntimeError(f"{name}: folded percentage overflow at {hp}")
         if PRESERVED_HASHES and resolved_hash(rs, name, destination) != PRESERVED_HASHES[name]:
             raise RuntimeError(f"{name}: non-selected behavior hash changed")

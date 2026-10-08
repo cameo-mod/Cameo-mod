@@ -35,6 +35,7 @@ HEALTH_VALUES = active_health_values(ROOT)
 OLD_KEYS = {"Bullet_Light", "Bullet_Medium"}
 DESTINATION = "Bullet_Medium"
 COMPATIBILITY_KEY = f"{DESTINATION}FlatCompatibility"
+APPLIED_KEYS = {COMPATIBILITY_KEY, f"{DESTINATION}_Flat"}
 
 ROOT_CLOSURES = {
     "ACV_Machinegun": set(),
@@ -80,6 +81,13 @@ ROOT_CLOSURES = {
     "RA2NarcoAKM": {"RA2NarcoAKM_elite"},
     "naxis_sssoldier_smg": {"naxis_sssoldier_smg_elite"},
 }
+
+# W7 chain-collapse de-parented these reviewed children: they remain cohort
+# members (their folds are intact) but no longer hang off the root's live
+# inheritance edges.  Membership stays in ROOT_CLOSURES; this maps the edges.
+EXPECTED_CLOSURES = {root: set(children) for root, children in ROOT_CLOSURES.items()}
+for _root in ("RA2GattlingMG1", "NaxiWW2Machinegun", "RA2APCMachineGun", "GuardianGIMG"):
+    EXPECTED_CLOSURES[_root] = set()
 
 
 def descendants(rs: Ruleset) -> dict[str, set[str]]:
@@ -206,7 +214,7 @@ def set_percentage_scale(changed: dict[pathlib.Path, list[str]], path: pathlib.P
 
 def validate_baseline(rs: Ruleset) -> dict[str, set[str]]:
     closure = descendants(rs)
-    for root, expected in ROOT_CLOSURES.items():
+    for root, expected in EXPECTED_CLOSURES.items():
         if closure[root] != expected:
             added = sorted(closure[root] - expected)
             missing = sorted(expected - closure[root])
@@ -215,10 +223,10 @@ def validate_baseline(rs: Ruleset) -> dict[str, set[str]]:
         if resolved is None:
             raise RuntimeError(f"{root}: missing resolved weapon")
         mains = positive_main_keys(resolved)
-        already = COMPATIBILITY_KEY in mains and not (OLD_KEYS & mains)
+        already = bool(APPLIED_KEYS & mains) and not (OLD_KEYS & mains)
         if not already and not OLD_KEYS <= mains:
             raise RuntimeError(f"{root}: expected Light + Medium bullet mains, found {sorted(mains)}")
-    return closure
+    return {root: set(children) for root, children in ROOT_CLOSURES.items()}
 
 
 def validate_result() -> None:
@@ -230,7 +238,7 @@ def validate_result() -> None:
             if resolved is None:
                 raise RuntimeError(f"{name}: missing after rewrite")
             mains = positive_main_keys(resolved)
-            if OLD_KEYS & mains or COMPATIBILITY_KEY not in mains:
+            if OLD_KEYS & mains or not (APPLIED_KEYS & mains):
                 raise RuntimeError(f"{name}: unresolved consolidation: {sorted(mains)}")
 
 
@@ -250,7 +258,7 @@ def main() -> int:
         if local is None or resolved is None:
             raise RuntimeError(f"{root}: missing source or resolved weapon")
         mains = positive_main_keys(resolved)
-        already = COMPATIBILITY_KEY in mains and not (OLD_KEYS & mains)
+        already = bool(APPLIED_KEYS & mains) and not (OLD_KEYS & mains)
         if not already:
             total = resolved_flat_total(resolved, OLD_KEYS)
             if total <= 0:

@@ -1,5 +1,40 @@
 # Cameo — THE HANDOFF
 
+## 2026-10-08 — Devin: history re-record complete — `devin/regreen-history-rerecord`, 323/323 affected tests green
+
+`Agent: Devin · branch devin/regreen-history-rerecord · worktree C:/cameo-wt/rerecord-hist`
+
+**INC-ready evidence only — NOT merged; coordinator decides increment integration.**
+
+All stale balance-consolidation fixtures and converter tests re-recorded/repaired with
+provenance verification. Method: resolve at the fixture's recorded baseline (era worktrees
+`763b12776`, `6278225df`, `17022b1d5`), leaf-diff baseline→live, classify every leaf against
+attributed authorized waves, repin only after zero unexplained drift. No blanket normalization.
+
+* **Final state:** full 41-module importer set **195 + 128 = 323/323 green**; plus
+  `test_td_naval_rename` 14/14, `test_ownership_lineage_audits` 9/9, `test_sonic_family_generation` 5/5.
+* **Last cohort (this session):** `closed_remaining_names` fixture repinned (65 entries:
+  50 weapon bodies + raw/resolved ordered + 22 actors — recorded mid-wave on sibling lineage);
+  `guarded_owned_names` repinned (7 entries); `test_td_naval_rename` gained a scoped
+  `CameoRangedGpsDot/Provider`→`RangedGpsDot/Provider` reversal (bot-difficulty GPS refactor,
+  same wave tables as the soviet authorizer — payload diffs still visible).
+* **Attributed waves covering every repin:** armor-12.0l Versus expansion; `b7f6d4368`
+  Projectile migration; `450dcea59` ExtraDamage fold; `defe7ad13` EMBER MinRange DESIGN-rule
+  normalization; PhysicalState rollout; BotLimits/BotRoles + GPS-shadow refactor;
+  `4e47ead99` AA re-base; `8330a1834` W24 lane-3 fold; actor rename token waves; gatling
+  ammo→condition rework; balance-pipeline retunes.
+* **Real regression fixed tree-side (not masked):** `NaxiWW2KübelwagenMachinegun` `_Flat`
+  warhead lost its `^Warhead_Bullet_Medium_Flat` roleflat edge at `781308f24` — sole stripped
+  member of 51; canonical profile materialized back (VT/Damage/PS kept).
+* **Cross-branch port:** hammertank thermobaric route-parity floor fix cherry-picked from
+  `devin/regreen-r2r3` (`a7919dc66`, verified "at floor").
+* **Files touched:** 19 `consolidate_*.py`, 16 fixtures (incl. new
+  `canonical_template_history_20260910.json`), ~20 test files, `reviewed_weapon_history.py`,
+  `mods/.../Naxis/yaml/weapons.yaml` (Kübel only). `git diff --check` clean.
+* **Full detail:** `DEVELOPMENT_LOG.md` entry `2026-10-08`.
+* **Next agent:** re-verify with `python -X utf8 -m unittest <41-module set>` in
+  `tools/tests`; scoped `git add` only; no merge/PR-lifecycle claims.
+
 ## 2026-10-04 — Devin-Tier4: RADAR-A INC-ready — `AI_radar_contacts` (IBotRadarContacts provider, no consumers)
 
 `Agent: Devin-Tier4 · branch devin/tier4/radar-contacts · worktree C:/cameo-wt/t4-radar-a · base 3ba05ede7 (master, post-INC-04e)`

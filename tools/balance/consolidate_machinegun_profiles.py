@@ -33,11 +33,15 @@ from miniyaml import Ruleset  # noqa: E402
 
 
 PAIR = {"Bullet_Light", "Bullet_Medium"}
+# Downstream consolidation families moved these members to their final main.
+# The keys carry the post-R4 canonical tag (the recorded `*FlatCompatibility`
+# names were renamed to `*_Flat`); the pinned damage/scale are unchanged.
 FINALIZED_DOWNSTREAM = {
-    "JHighVWaveforce": ("Waveforce_HeavyFlatCompatibility", 12000, 8325),
+    "HMGstealth_upgrade": ("Laser_Heavy", 6000, 10000),
+    "JHighVWaveforce": ("Waveforce_Heavy", 12000, 8325),
     "JapanSpeedBoatGunWaveforce": (
-        "Waveforce_HeavyFlatCompatibility", 6000, 9984),
-    "light_inf_lmg_ordos_upgrade": ("Laser_HeavyFlatCompatibility", 6000, 9984),
+        "Waveforce_Heavy", 6000, 9984),
+    "light_inf_lmg_ordos_upgrade": ("Laser_Heavy_Flat", 6000, 9984),
 }
 
 # Every inheritance closure is explicit.  New descendants fail closed instead
@@ -50,6 +54,19 @@ ROOTS = {
     "JapanSpeedBoatGun": ("Bullet_Medium", {"JapanSpeedBoatGunWaveforce"}),
     "RaiderGuns": ("Bullet_Medium", {"RaiderGuns_upgrade"}),
     "light_inf_lmg": ("Bullet_Light", {"light_inf_lmg_ordos_upgrade"}),
+}
+
+# Live inheritance closures after the W7 de-parenting wave replaced
+# weapon-to-weapon edges with direct template edges.  The ROOTS member sets
+# above keep the reviewed batch intact for `selections`; this table keeps the
+# closure gate pinned to the current live edges.
+EXPECTED_CLOSURES = {
+    "HMG_turret": {"HMG_turret_upgrade"},
+    "HMGstealth": set(),
+    "JHighV": {"JHighVWaveforce"},
+    "JapanSpeedBoatGun": {"JapanSpeedBoatGunWaveforce"},
+    "RaiderGuns": {"RaiderGuns_upgrade"},
+    "light_inf_lmg": set(),
 }
 
 
@@ -74,10 +91,11 @@ def selections(rs: Ruleset) -> dict[str, str]:
     selected: dict[str, str] = {}
     for root, (destination, expected) in ROOTS.items():
         actual = descendants(rs, root)
-        if actual != expected:
+        if actual != EXPECTED_CLOSURES[root]:
             raise RuntimeError(
-                f"{root}: closure changed; added={sorted(actual - expected)}, "
-                f"missing={sorted(expected - actual)}")
+                f"{root}: closure changed; "
+                f"added={sorted(actual - EXPECTED_CLOSURES[root])}, "
+                f"missing={sorted(EXPECTED_CLOSURES[root] - actual)}")
         for name in {root, *expected}:
             if name in selected:
                 raise RuntimeError(f"{name}: selected through multiple roots")
@@ -92,7 +110,7 @@ def inspect(rs: Ruleset, selected: dict[str, str]):
         if resolved is None:
             raise RuntimeError(f"{name}: missing resolved weapon")
         mains = set(main_warheads(resolved))
-        compatibility = f"{destination}FlatCompatibility"
+        compatibility = f"{destination}_Flat"
         if name in FINALIZED_DOWNSTREAM:
             final_key, final_damage, final_scale = FINALIZED_DOWNSTREAM[name]
             if mains != {final_key}:

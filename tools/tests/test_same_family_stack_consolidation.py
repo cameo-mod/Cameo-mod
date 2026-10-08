@@ -88,12 +88,21 @@ class SameFamilyStackConsolidationTests(unittest.TestCase):
             return (node.key, node.value,
                     tuple(node_fingerprint(child) for child in node.children))
 
-        for root, (destination, closure) in selections.items():
+        def versus_map(node):
+            return {
+                item.key: item.value
+                for item in node.children
+            } if node is not None else None
+
+        def canonical_profile(destination, tag):
             # Compatibility is frozen, not recanonicalized when generated armor
-            # coupling ranks move. Compare every field against its actual root.
+            # coupling ranks move. Compare every field against the template that
+            # supplies the member's actual tag: canonical-tag members resolve
+            # the canonical profile; flat/compat tags resolve the flat variant.
+            reference = destination if tag == destination else f"{destination}_Flat"
             canonical_weapon = next(
                 resolved for resolved in (
-                    rules.resolve_weapon(f"^Warhead_{destination}_Flat"),
+                    rules.resolve_weapon(f"^Warhead_{reference}"),
                     rules.resolve_weapon(f"^Warhead_{destination}"),
                 )
                 if resolved is not None
@@ -102,12 +111,6 @@ class SameFamilyStackConsolidationTests(unittest.TestCase):
                 child for child in canonical_weapon.children
                 if child.key.startswith("Warhead@")
             )
-            def versus_map(node):
-                return {
-                    item.key: item.value
-                    for item in node.children
-                } if node is not None else None
-
             expected = {
                 key: versus_map(canonical.child(key))
                 for key in ("Versus", "PercentageVersus")
@@ -116,6 +119,9 @@ class SameFamilyStackConsolidationTests(unittest.TestCase):
                 key: canonical.get(key)
                 for key in ("Spread", "Falloff", "DamageTypes", "PercentageSpread")
             })
+            return expected
+
+        for root, (destination, closure) in selections.items():
             for weapon in [root, *sorted(closure)]:
                 resolved = rules.resolve_weapon(weapon)
                 actual = next(
@@ -128,6 +134,7 @@ class SameFamilyStackConsolidationTests(unittest.TestCase):
                     None,
                 )
                 self.assertIsNotNone(actual, weapon)
+                expected = canonical_profile(destination, actual.key.removeprefix("Warhead@"))
                 profile = {
                     key: versus_map(actual.child(key))
                     for key in ("Versus", "PercentageVersus")

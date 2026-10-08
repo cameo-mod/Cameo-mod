@@ -20359,3 +20359,49 @@ was FIX-REQUIRED on two of six findings. Both closed in place, additive commit.
 * Gates: Release build 0E/0W on OpenRA.Mods.CA + Cameo.Test. Focused tests only
   per lead (Terra holds the heavy window); no boot-gate needed — diff is
   C#-in-bot-logic only, no yaml/engine-pin surface.
+## 2026-10-08 — Devin: history re-record — all owned-name/history digest cohorts green (branch devin/regreen-history-rerecord)
+
+Provenance-preserving repair of every stale balance-consolidation fixture and converter on
+`devin/regreen-history-rerecord` (worktree `C:\cameo-wt\rerecord-hist`). Method per cohort:
+resolve at the fixture's recorded baseline (era worktrees at `763b12776`, `6278225df`
+"Complete frozen Tiberian Dawn weapon identity batch", `17022b1d5`), leaf-diff baseline→live,
+classify EVERY leaf against attributed authorized waves, then repin digests or restore through
+the existing helpers only — no blanket normalization, no yaml edits except one real regression.
+
+* **Repaired cohorts (all green):** authorized_role 6/6 · delivery_identity 8/8 (closure split +
+  R4 `_Flat` repins) · exact_profile_duplicates 5/5 · explicit_family_state 9/9 ·
+  final_bulk_weapons 8/8 · high_identity 6/6 (new `canonical_template_history_20260910.json`
+  fixture, era-extracted records) · identical_main 6/6 (flak node records + freedom base repin)
+  · laser_heavy_routes 8/8 (`450dcea59` W7 ExtraDamage fold + `d46ecd9d1` retune) ·
+  named_family 6/6 (canonical-tag applied forms, era-verified totals) · same_family_stacks 5/5
+  (Kübel `roleflat` regression fixed tree-side + Cyclone re-role) · authorized_remaining 11/11
+  (`later_profile_history` +4 records for fold-era collapses, frozen-blob health matrix,
+  hammertank floor cherry-picked from `devin/regreen-r2r3` `a7919dc66`) · named_state +
+  later_profile 10/10 · laser_bulk / freedom_elite / ifv_owned repins · soviet_rename_repair
+  13/13 (narrowly scoped wave tables) · cannonap_endpoint 6/6 (SkyHawk fold 4000+12000→16000,
+  PercentageScale route) · heaviness 108/108 (6 `analyse` entries repinned for armor-12.0l).
+* **Wave classes attributed across all repins:** armor-12.0l Versus census expansion;
+  `b7f6d4368` Projectile migration; `450dcea59` LegacyLaserExtraDamage→Damage fold;
+  `defe7ad13` EMBER MinRange→DESIGN `round(Range/25)*5`; PhysicalState rollout; bot-difficulty
+  refactor (BotLimits/BotRoles, CameoRangedGpsDot/Provider superseding RangedGpsDot/Provider);
+  `4e47ead99` air-only missile AA re-base; `8330a1834` W24 lane-3 fold; `393da51df` GPS-shadow
+  sound names; allied/soviet actor rename token waves; gatling ammo→GrantConditionOnAttack
+  rework; shield/tooltip waves; balance-pipeline stat retunes.
+* **Closed + guarded (final 4 failures):** repinned `closed_remaining_names_20260910.json`
+  (50 weapon bodies + raw/resolved ordered + 22 actor digests, 65 entries) and
+  `guarded_owned_names_20260910.json` (2 weapons ×2 hashes + 3 actor digests, 7 entries).
+  Recorded state = mid-wave snapshot on the sibling recording lineage (`6278225df`/
+  `17022b1d5` are not HEAD ancestors); baseline→live diff = authorized waves only, 0 unexplained.
+* **test_td_naval_rename:** scoped `CameoRangedGpsDot/Provider`→`RangedGpsDot/Provider`
+  reversal in the payload comparator (same wave tables as soviet authorizer); payload diffs
+  still visible. 14/14 green. `test_ownership_lineage_audits` 9/9, `test_sonic_family_generation` 5/5.
+* **Broad verification:** complete 41-module importer set — batch1 195/195 + batch2 128/128 =
+  **323/323 green**; plus the two uncovered fixture dependents (naval, lineage) green.
+* **Real regression fixed (not masked):** `NaxiWW2KübelwagenMachinegun`'s `_Flat` warhead lost
+  its `^Warhead_Bullet_Medium_Flat` roleflat edge at `781308f24` — sole stripped member of 51;
+  materialized the canonical profile fields tree-side (VT/Damage/PS contract kept).
+* Files: 19 `consolidate_*.py` converters (applied-forms/union validators, era-verified
+  totals), 16 fixtures (digest repins + provenance records), ~20 test files,
+  `reviewed_weapon_history.py`, `weapons.yaml` (Kübel). `git diff --check` clean.
+* **Next:** `python -m unittest` on the 41-module set in `tools/tests` to re-verify; fleet
+  coordinator decides increment merge — no lifecycle claims made here.
