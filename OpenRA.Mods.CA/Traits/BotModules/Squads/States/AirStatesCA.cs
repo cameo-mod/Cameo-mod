@@ -177,7 +177,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 		protected static Actor FindAirTarget(SquadCA owner)
 		{
 			Actor target = null;
-			var groundTargetPriority = owner.World.LocalRandom.Next(0, 100);
+			var groundTargetPriority = BotRng.For(owner.Bot).Next(0, 100);
 
 			if (groundTargetPriority > owner.SquadManager.Info.AirToAirPriority)
 				return target;
@@ -205,7 +205,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 				if (owner.SquadManager.Info.BigAirThreats.Count > 0)
 				{
-					var regularTargetPriority = owner.World.LocalRandom.Next(0, 100);
+					var regularTargetPriority = BotRng.For(owner.Bot).Next(0, 100);
 
 					if (owner.SquadManager.Info.AirToAirPriority > regularTargetPriority)
 					{
@@ -251,7 +251,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			var map = owner.World.Map;
 			detectedEnemyTarget = null;
 
-			foreach (var pos in owner.SquadManager.airStrikeGrid.Shuffle(owner.World.LocalRandom).ToArray()) //.OrderBy(a => (a - leader.Location).LengthSquared))
+			foreach (var pos in owner.SquadManager.airStrikeGrid.Shuffle(BotRng.For(owner.Bot)).ToArray()) //.OrderBy(a => (a - leader.Location).LengthSquared))
 			{
 				if (NearToPosSafely(owner, map.CenterOfCell(pos), out detectedEnemyTarget))
 				{
@@ -420,7 +420,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			else if (waitingCount > 1)
 				waitingPatience = 95;
 
-			var impatience = owner.World.LocalRandom.Next(100);
+			var impatience = BotRng.For(owner.Bot).Next(100);
 			var noPatience = impatience > waitingPatience;
 
 			foreach (var a in owner.Units)
@@ -495,7 +495,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 			if (owner.WaitingUnits.Count > 0 && owner.WaitingUnits.Count >= owner.RearmingUnits.Count && (noPatience || !canBuildMoreOfAircraft()))
 			{
-				foreach (var a in owner.WaitingUnits)
+				foreach (var a in owner.WaitingUnits.OrderBy(a => a.ActorID))
 					if (CanAttackTarget(a, owner.TargetActor))
 						owner.Bot.QueueOrder(new Order("Attack", a, Target.FromActor(owner.TargetActor), false));
 

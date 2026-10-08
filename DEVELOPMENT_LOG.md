@@ -1,3 +1,380 @@
+# 2026-10-08 — Devin-Architect: wave-1 scheduler v3 — fail-closed evidence adjudication
+
+*Devin-Architect.* Sol's wave-5 re-review (REVIEW_2026-10-08_wave5_adjudication)
+found the scheduler treating first-diff-frame `only_a`/`only_b` as the complete
+unmatched stream — later orders hid behind an early sync gap — and accepting
+empty/aggregate evidence. v3 repair on top of the coordinator's in-place v2
+(narrow adjudication rule):
+
+- **`compare()` PASS shape** (`payload_is_proof`): PASS requires comparator
+  exit 0 AND verdict in {IDENTICAL, IDENTICAL_TAIL_FLUSH} AND a well-formed
+  payload — both replay paths present as keys in `records`/`incomplete`/
+  `unparsed_tails`, every record count a positive non-bool int, every
+  incomplete flag explicitly False, every unparsed-tail count exactly 0.
+  Missing keys, malformed JSON, timeout, wrong types, or inconsistent
+  exit/verdict all fail closed; exit 0 with a proof verdict but invalid
+  metadata reports `UNPROVEN_EVIDENCE` (never PASS, never DIVERGENT).
+- **Full artifact persistence**: per pair, the comparator's complete stdout,
+  stderr, and parsed JSON payload are written under
+  `results/<run_id>/comparator/`; the summary carries artifact paths, not
+  truncated snippets.
+- **`adjudicate()`**: gated on exit == 1 only; re-extracts both replays
+  in-process via the frozen comparator's own `extract()` and Counter-diffs
+  over ALL frames — first-frame hiding is impossible. Adjudicated-artifact
+  rule unchanged from v2: one-sided extras, all SYNCHASH, all strictly past
+  the shorter stream's last frame, gated by nonempty identical match records
+  (diagnostic gate that can only reject, never prove). Any ORDER/DISCONNECT/
+  UNPARSED/interior/two-sided record stays DIVERGENT — tail orders are
+  unprovable and are never reclassified.
+- **Main loop**: every `exit != 0` propagates as wave-stop-invalid (incl.
+  exit 3/4, timeout, malformed output); only `c["ok"]` continues the wave.
+- Frozen comparator bytes untouched (TOOL_SHA256 pins verified pre-launch).
+
+Regression suite `tools/tests/test_wave1_adjudication.py`: 20/20 pass —
+first-frame-gap hiding a later two-sided mismatch, run4-style tail
+StartProduction, interior one-sided extra, pure-sync tail (adjudicates),
+match-record gate reject-only semantics (differing/missing/empty aggregates
+never admit), incomplete/zero/malformed/wrong-exit compare records, and the
+full PASS-shape matrix.
+
+Real-data check on the frozen wave-5 evidence (12 cells): both strict passes
+reproduce (`s1337`/`s8675309` gate pairs IDENTICAL_TAIL_FLUSH, ok=True); all
+4 flagged pairs stay DIVERGENT with the tail orders now surfaced — every
+unmatched record across all 6 pairs is terminal-tail (zero interior diffs):
+pure-SYNCHASH tail runs ending in ORDER records at the longer capture's
+final frames (RepairBuilding f4068, SetRallyPoint f4955, PlaceBuilding
+f11856, 7× Move f7197). These are post-window capture stragglers — exactly
+what the SPEC_2026-10-08 terminal fence eliminates by construction.
+
+# 2026-10-08 — Devin-Architect: comparator grouping fix + R6/R7 task closure
+
+*Devin-Architect.* Formalized as task BOT-DET-R6R7. Beyond the R6/R7 repair
+already landed, this pass closes the remaining task requirements:
+
+- **Canonical record granularity flattened to per-order**: each parsed order is
+  now its own `(frame, 'ORDER', tuple)` record — packet batching is a
+  ReplayConnection flush artifact, not gameplay. Previously a 2-order packet
+  vs two 1-order packets would (wrongly) diff. UNPARSED payloads likewise
+  become per-frame records. Engine-protocol justification is now in the
+  header docstring.
+- **Interior-gap regressions**: missing record at an interior frame, interior
+  order gap, packet-grouping equivalence, cross-channel interleave
+  equivalence, and trailing disconnect (not flush) all pinned.
+- **Proof caveat**: `--ignore-synchash`/`--ignore-client` verdicts now print
+  an explicit "NOT strict identity proof" caveat and carry it in `--json`.
+- Suite: 22/22 pass. Real replays re-verified: C-vs-D exit 0
+  IDENTICAL_TAIL_FLUSH, A-vs-B exit 1 DIVERGENT@f16 (per-order records show
+  flags 0xC9/0x88), A-vs-A exit 0 IDENTICAL.
+
+# 2026-10-08 — Devin-Architect: comparator R6/R7 repair (review round 3)
+
+*Devin-Architect.* Sol's independent `main()` probes on `f2e7396be` found two
+more defect classes; both repaired with regressions:
+
+- **R6 — any sync-only diff classified as tail flush**: `frame_multiset_diff`
+  called trailing=True whenever the differing records contained no
+  ORDERS/DISCONNECT reprs — so a *same-frame* pair of different sync hashes
+  (world-state divergence, the worst kind) yielded IDENTICAL_TAIL_FLUSH.
+  Tail flush is now the genuine terminal one-sided condition: every differing
+  record must sit at a frame strictly beyond `min(lastA, lastB)` — any diff
+  inside the shared window (both captures were recording) is DIVERGENT —
+  and every extra tail record must be a passive SYNCHASH (orders,
+  disconnects, and opaque OTHER payloads in a tail are real content → 1).
+- **R7a — string bound not enforced**: `read_str` sliced `b[p:p+ln]` without
+  checking `p+ln <= len(b)`; Python slices truncate silently, so a declared
+  8-byte string with 3 bytes present parsed as 'abc' and dropped the rest.
+  Now raises → UNPARSED. Covers order names, handshake name/target, and
+  target strings; varint overrun already raised via IndexError, and a
+  shift>28 guard was added.
+- **R7b — lossy decode collapsed bytes**: `decode('utf-8','replace')` made
+  distinct byte sequences compare equal. Strings are now carried as raw
+  bytes end-to-end (order names, handshake targets, target strings);
+  normalization runs on bytes; decoding exists only display-side in
+  `describe()`.
+- R7 empty/truncated/missing-terminator findings were already closed by the
+  INCOMPLETE_CAPTURE work; regression tests now pin all of them.
+
+Suite: `tools/tests/test_order_stream_diff.py` — 17/17 pass. Real replays:
+fixed pair → IDENTICAL_TAIL_FLUSH (exit 0), pre-fix pair → DIVERGENT@f16
+(exit 1, flags visible), self-identity A vs A → IDENTICAL (exit 0).
+
+Note: lead's release gate adds — after R6/R7 review passes — a clean
+committed candidate rebased onto master 9ea31fdfb with engine foundation
+8c2b385f82; the b6a6fb14 BASE proof (old pin) is superseded as
+current-foundation evidence and must be re-run post-rebase.
+
+# 2026-10-08 — Devin-Architect: comparator fail-closed hardening (INCOMPLETE_CAPTURE)
+
+*Devin-Architect.* Sol's re-review request added two requirements beyond R4/R5:
+truncated packets must fail closed, and empty/incomplete captures must never
+count as proof. Both implemented on top of `f2e7396be`:
+
+- **Truncation detection**: `extract()` now tracks record-header short reads,
+  negative/overrunning packet lengths, and a missing `-1` stream terminator —
+  any of these sets `incomplete`. (Subtlety: the terminator is a lone 4-byte
+  `-1`, so the header check must read `client` before requiring 8 bytes.)
+- **Empty-capture guard**: `len(records) == 0` on either side is treated as
+  no-evidence, not identity.
+- New verdict `INCOMPLETE_CAPTURE` (exit 4): emitted whenever a capture is
+  truncated or carries zero gameplay records and content is otherwise equal —
+  a cut-short or empty file can never yield `IDENTICAL`. `DIVERGENT` still wins
+  when content genuinely differs (truncation noted in the line).
+- Packets shorter than 4 bytes (can't hold a frame field) now count as unparsed
+  tails instead of being silently skipped.
+- Regressions: `test_empty_capture_is_not_proof`,
+  `test_truncated_capture_is_not_proof`, `test_missing_terminator_is_not_proof`
+  → 10/10 pass; real replays re-verified (fixed pair IDENTICAL_TAIL_FLUSH,
+  pre-fix pair DIVERGENT@f16).
+
+# 2026-10-08 — Devin-Architect: comparator R4/R5 repair (review round 2)
+
+*Devin-Architect.* Bounded re-review found two real defects in `order_stream_diff.py`
+at `edd956b20`; both fixed and regression-tested:
+
+- **R4 — dropped `flags`**: canonical order tuples omitted the raw i16 flags, so
+  orders differing only in `Queued` (0x08) or `TargetIsCell` (0x40) compared equal.
+  Flags now preserved byte-exact in every `('O', order, flags, ...)` tuple.
+  Regression: queued-vs-unqueued AttackMove pair → DIVERGENT.
+- **R5 — discarded tails**: bytes after the last parseable order in a packet were
+  silently dropped, so a valid-order + unknown-tail packet canonicalized identical
+  to one without. Now: unknown order types, unknown flag bits (>0x1FF), unknown
+  target types, and any field overrun all emit `('UNPARSED', tailhex)` records —
+  preserved byte-exact in the comparison AND counted. Any unparsed tail downgrades
+  the verdict to `UNPARSED_TAILS` (exit 3, fail closed — byte-equal opaque bytes
+  cannot attest semantic identity). DIVERGENT still wins when content genuinely
+  differs (exit 1); `IDENTICAL`/`IDENTICAL_TAIL_FLUSH` only when fully parsed.
+- Field reads are now bounds-checked (`read_str` overruns, negative counts,
+  target/extra/grouped overruns → UNPARSED instead of misaligned decode).
+
+Verification: `tools/tests/test_order_stream_diff.py` — 7/7 pass covering both
+regressions and all four verdicts. Real replays: fixed-engine pair →
+IDENTICAL_TAIL_FLUSH (no unparsed tails — real packets parse fully);
+pre-fix pair → DIVERGENT at frame 16 now showing flags
+(`Move` 0xC9, `DeployTransform` 0x88).
+
+# 2026-10-08 — Devin-Architect: BASE==BASE parity proof — root cause found and verified
+
+*Devin-Architect.* Two same-seed (`CAMEO_DEV_SEED=1337`) hard-vs-hard td_gdi matches on
+AI Duel Gate were run under the current pin (`d5d8b2a6`) to find the residual
+nondeterminism, then re-run with the fixed engine to prove the fix.
+
+**Residual found (pinned engine, without `9e35bc96ee`):**
+- Identical lobby/pregame records and identical sync hashes through frame 669.
+- Frame 16: run B issued `Move`+`DeployTransform` on MCV #183 (mid-transform from the
+  f3 deploy) — orders dropped at execution (stale actor), world state stayed identical.
+- Bot-internal state drifted silently afterward (LC1 lease claims 4528 vs 4527 by
+  tick 2251), then the first world-state divergence at frame 670, caused by a
+  `PlaceBuilding td_gdi_guardtower` at different cells at f669.
+- Root cause: engine-side `OpenRA.Mods.Common` `McvExpansionManagerBotModule`
+  (loaded — it appears in the module-timing lines) draws `scanInterval`,
+  `buildMCVInterval`, `moveConyardInterval` from `world.LocalRandom` in
+  `TraitEnabled` plus deploy-spot picks (`resCenter` coin-flip, `cells.Shuffle`,
+  conyard ordering, notify flip). `LocalRandom` is unseeded per launch, so the scan
+  cadence differed run-to-run — B's earlier scan caught #183 mid-transform and issued
+  the inert relocate pair; the different cadence cascaded into claim counts and the
+  later placement cell pick.
+
+**Fix verification (pin + `9e35bc96ee` only):**
+- `9e35bc96ee` is a direct child of pin `d5d8b2a6` (verified `git merge-base`), so a
+  build of `codex-garrison-engine` = pin + RNG conversion only.
+- Built it Release, swapped `OpenRA.Game/Common/AS.dll` into `engine\bin` for the
+  local test only (no `mod.config` change — pin bump is maintainer-authorized),
+  re-ran the identical same-seed pair (fingerprint `dlls=7db3470358` confirms the
+  patched binaries), then restored the pinned DLLs afterward.
+- **Result: IDENTICAL.** Every order and every sync-hash record equal for all
+  shared frames (3304 frames ≈ the full match to elimination). The only difference is
+  3 trailing sync-hash packets on the slower-exiting process — a replay write-cutoff
+  artifact, not a decision.
+- The old pair under the same comparator: `DIVERGENT at frame 16` naming the ghost
+  `Move`/`DeployTransform` pair — the tool correctly separates real divergence from
+  recording artifacts.
+
+**Comparator hardening** (`tools/ai/order_stream_diff.py`): comparison is now
+per-frame record multisets instead of raw record order — order packets and
+sync-hash packets flush on separate channels, so packet interleaving and the
+exit-tail cutoff are not gameplay. New verdict `IDENTICAL_TAIL_FLUSH` (exit 0)
+when only trailing sync/disconnect-free frames differ; `DIVERGENT` (exit 1) names
+the first frame whose order/sync multiset differs.
+
+**CameoDevSeed env fallback** (`OpenRA.Mods.Cameo/ServerTraits/CameoDevSeed.cs`):
+`CAMEO_DEV_SEED=<int>` env var works alongside `Cameo.DevSeed=<int>` because match
+harnesses (`run_ai_match_batch.py`) do not plumb extra game args but env vars
+propagate to spawned processes. Both parity runs logged `CAMEO DEV SEED pinned —
+RandomSeed=1337`.
+
+**Requirement surfaced:** `ENGINE_VERSION` must move to a commit containing
+`9e35bc96ee` for the proof to hold on real runs — the mod-side sweep alone cannot
+seed engine-module draws. Maintainer authorization needed (engine pin rule).
+
+Gates: two live same-seed matches per arm (4 total), all clean, no exceptions;
+`order_stream_diff.py` exercised on real replays in both verdict modes.
+
+# 2026-10-08 — Devin-Architect: order_stream_diff.py — BASE==BASE comparator for the parity proof
+
+*Devin-Architect.* Companion to `CameoDevSeed`: `tools/ai/order_stream_diff.py` compares
+the canonical order streams of two `.orarep` replays and reports IDENTICAL or the first
+divergent record — the assertion half of the 3-seed × 2-map proof (`CameoDevSeed` pins
+the seed; this proves the runs were identical).
+
+- Format verified against `ReplayRecorder.cs:74-98` (`[i32 client][i32 len][i32 frame]`
+  `[payload]` records, `-1` terminator before trailing metadata; uncompressed) — same
+  layout `order_trace.py` parses, and cross-checked: `order_trace` reads the tool's
+  synthetic fixtures identically (4 orders / 2 units / frame 25).
+- Canonical records cover every packet kind: Fields orders (all flag-gated fields kept
+  byte-exact: subject, target, target-string, extras, grouped actors), Handshake
+  orders, SyncHash (0x65 — proving world-state identity, stronger than orders alone),
+  Disconnect, and fallback OTHER for unknown types.
+- Per-launch normalizations applied to target strings only — `GameUid`
+  (`Guid.NewGuid` per launch, `Server.cs:334`), `AuthToken`, `AuthSignature`.
+  Everything else must match byte-for-byte in order.
+- Flags: `--pregame` includes lobby/handshake records (frame <= 0, still normalized),
+  `--ignore-client` drops the connection-id header, `--ignore-synchash`, `--json`.
+- Verified on synthetic fixtures: same-seed/different-GameUid pair → IDENTICAL
+  (exit 0); injected divergence → DIVERGENT at the exact record with 3-record context
+  (exit 1). Real-replay validation rides the lead's parity run.
+- Exit codes 0/1/2 for gate wiring: `order_stream_diff.py A.orarep B.orarep`.
+
+# 2026-10-08 — Devin-Architect: CameoDevSeed — dev-gated lobby seed pin for BASE==BASE parity runs
+
+*Devin-Architect.* The BOT-DETERMINISM proof (3 seeds × 2 maps, identical order streams)
+needs same-seed launches, but the engine generates `randomSeed` from `DateTime.Now`
+inside `Server`'s ctor with no override path (`engine/OpenRA.Game/Server/Server.cs:307`).
+`LobbyInfo.GlobalSettings.RandomSeed` is a mutable field synced to every client and is
+the ONLY seed source read downstream: `StartGame` builds `playerRandom` (faction
+resolution + SharedRandom) from it at `Server.cs:1378`, and `BotRng` reads the client's
+`World.LobbyInfo.GlobalSettings.RandomSeed` per bot. Pinning that field before the
+server loop starts therefore covers every decision RNG uniformly — no engine change.
+
+- New dev-only server trait `OpenRA.Mods.Cameo/ServerTraits/CameoDevSeed.cs`
+  (`ServerTrait` + `INotifyServerStart`), registered in `mods/cameo/mod.yaml`
+  `ServerTraits:` next to `CameoLobbyAutopilot`. Inert unless `Cameo.DevSeed=<int>`
+  appears on the server command line (same arg-scan style as the autopilot gate).
+  On `ServerStarted` it sets `LobbyInfo.GlobalSettings.RandomSeed` and calls
+  `SyncLobbyInfo()` so already-connecting clients get the pinned value; logs
+  `CAMEO DEV SEED pinned` on the `server` channel.
+- `CameoDevArgs.Value(name)` added next to `IsEnabled` — returns the text after
+  `Name=` or null; unparseable/absent values leave the trait inert.
+- Usage for the lead's parity run: `OpenRA.Server Game.Mod=cameo Cameo.DevSeed=1337`
+  (optionally + `Cameo.DevAutopilot=True` + plan file for a fully scripted run).
+  Note: `GameUid` remains `Guid.NewGuid()` per launch — replay names/gameinfo differ,
+  but the order stream does not consume it.
+- Verified statically: `RandomSeed` writes are ctor-only (`Server.cs:329`), reads are
+  post-`ServerStarted` (`:1378` inside `StartGame`), so the pin cannot race.
+  Live pin verification is part of the lead's 3×2 heavy run (ServerTraits only
+  instantiate when a `Server` is created — menu boot does not construct them, but the
+  registration mirrors the already-reviewed `CameoLobbyAutopilot` pattern).
+
+Gates:
+- build: `dotnet build -c Release -p:TargetPlatform=win-x64` — Build succeeded, 0 errors
+- boot-gate: PASS — `MenuPostProcessEffect.PostWorldLoaded` at perf.log:534 of this
+  worktree's instance; 0 new `exception-*.log`; own PID+child tree killed via taskkill;
+  codex-display-settings-fix's instance left running untouched; SAC state: Off
+
+# 2026-10-08 — Devin-Architect: BOT-DETERMINISM review fixes — MapCreated null-Uid seed + autopilot start retry
+
+*Devin-Architect.* Review by teammate `01a11068` on `624f5b27d` found two defects, both fixed
+in the follow-up commit on `devin/bot-determinism`:
+
+- **`CameoRemasterTerrain.MapCreated` crash:** `ITerrainInfoNotifyMapCreated.MapCreated` fires
+  BEFORE the map's first `Save` assigns `Uid` (editor `NewMapLogic`, `ImportGen1MapCommand`) —
+  `StableHash(map.Uid)` threw NRE on editor map creation/import. Seed now derives from
+  creation-time inputs: `StableHash(tileset|WxH|uid)` folded with FNV-1a over the tile content
+  (`Type<<8|Index` per cell). Deterministic per creation inputs; null-Uid safe.
+- **`CameoLobbyAutopilot` settle/start:** the earlier tick-count conversion was wrong — server
+  `ITick` fires per event-loop iteration (bursts drain instantly), so the ms floor was not
+  guaranteed and a silently-rejected `startgame` left the harness dead (`phase=Done`). Reverted
+  to `Environment.TickCount64` for the settle window (pre-game orchestration outside the order
+  stream — wall-clock is the correct semantic here) and added a `Starting` phase that re-issues
+  `state Ready` + `startgame` every 500ms until `server.State` leaves `WaitingPlayers`
+  (bounded: 20 attempts, then logs failure). Re-issuing `state Ready` is idempotent and also
+  recovers clients a late `SelectMap` callback resets to `Invalid`.
+- **Retry boundary (second review pass):** `InterpretCommand`/`Server.StartGame` is synchronous —
+  the attempt's result is observable in `server.State` immediately after issuing, so a
+  successful 20th attempt must confirm BEFORE exhaustion is declared, and only `GameStarted`
+  counts as confirmed (`ShuttingDown` is an abort, never "confirmed"). Extracted
+  `EvaluateStartAttempt(state, attempts, max)` + `StartAttemptOutcome` as `internal` (visible
+  to tests via `InternalsVisibleTo`) and added `CameoLobbyAutopilotTest` regressions:
+  final-attempt success → Confirmed, early success → Confirmed, waiting at 19 → Retry,
+  waiting at 20 → Exhausted, ShuttingDown at 1/20 → Aborted (never Confirmed/Exhausted).
+
+Gates (fix commits):
+- build: `dotnet build -c Release -p:TargetPlatform=win-x64` 0 errors (second build surfaced
+  8 pre-existing StyleCop warnings in upstream engine files — none in touched files)
+- boot-gate: PASS — menu reached (`MenuPostProcessEffect.PostWorldLoaded` in this instance's
+  rotated `perf.log.1`; another agent's trait-u0 instances held `perf.log`), 0 new
+  `exception-*.log` vs 168 pre-existing, own process killed (PID-scoped), SAC state: Off
+- Cameo tests: 1203/1203 PASS (1198 + 5 `CameoLobbyAutopilotTest` regressions)
+- boot-gate (retry-boundary commit): PASS — menu marker in this instance's `perf.log`,
+  0 new exceptions, own PID killed, other worktrees' instances untouched
+- editor `MapCreated` null-Uid path: statically verified (seed inputs are all ctor-set); no
+  automated editor harness exists — flagged for manual editor spot-check
+
+# 2026-10-07 — Devin-Architect: BOT-DETERMINISM — seeded per-player bot RNG + wall-clock/hash-order sweep
+
+*Devin-Architect.* Branch `devin/bot-determinism` @ `c9db891e9` (two commits: `624f5b27d`
+RNG sweep + `c9db891e9` hash-order pass), worktree `C:\cameo-wt\bot-determinism`,
+on the increment line (`5e45bfc80`). Engine half lives on `cameo-mod/OpenRA`
+`devin/bot-determinism @ 9e35bc96ee` (branched off pin `d5d8b2a6`; teammate
+`01a11068` reports inc pin moved to `0e42ed433d` — lead rebases as needed).
+
+- **Root cause of run-to-run divergence:** every bot-decision draw sat on
+  `World.LocalRandom`, which is process-seeded (no lobby tie-in) AND shared with cosmetic
+  consumers (sound-clip picks, voices, particle variants). Any consumer drawing a varying
+  number of times shifts every later bot pick — same-seed runs diverged at frame 49.
+- **`OpenRA.Mods.CA/BotRng.cs` (new):** `ConditionalWeakTable<Player, MersenneTwister>`,
+  one stream per bot player, seeded `lobbySeed + (PlayerActor.ActorID | ClientIndex + 1) *
+  0x9E3779B9`. `BotRng.For(player)` / `BotRng.For(IBot)`. Same lobby seed => same
+  decisions; different seed => different play; each bot independent.
+- **Mod sweep:** ~95 draw sites across 33 files in `OpenRA.Mods.CA`, `OpenRA.Mods.Cameo`,
+  `OpenRA.Mods.Fransbot` moved to `BotRng` (picks, weighted picks, shuffles, scan-tick
+  offsets, target/resource selection). `SquadCA.Random` now vends the bot stream.
+- **Engine sweep:** `OpenRA.Game/BotRandom.Create(world, player, salt)` + per-module
+  private `MersenneTwister` fields replacing `world.LocalRandom` in the 8 engine modules
+  registered by cameo bots (`McvExpansionManager`, `Minelayer`, `ResourceMap` [Common];
+  `SendUnitToAttack`, `ExternalBotOrdersManager`, `LoadCargo`, `PowerDown`,
+  `SupportPowerDecisionAS` scan draw [AS]). Assembly order (AS first) makes same-name
+  mod-side shadows impossible for AS — hence the engine patch.
+- **Wall-clock removal:** `CameoLobbyAutopilot` settle window converted
+  `Environment.TickCount64` -> server-tick countdown (idle loop ticks ~1s; budget rounds
+  up, preserving the minimum window).
+- **Decision-state GUID removal:** `UnitCompositionsBotModule` composition fallback id
+  `Guid.NewGuid()` -> stable `CompositionFallback{ordinal}` (id keys
+  `compositionLastUsedTickById`).
+- **Terrain seeding:** `CameoRemasterTerrain` PickAny variant layout +
+  `CameoRemasterTileCache` unseeded `MersenneTwister()` -> FNV-1a `StableHash(map.Uid)` /
+  `StableHash(terrainInfo.Id)` (`string.GetHashCode` is process-randomized).
+- **Deliberately unchanged:** all `SharedRandom` sim draws (warheads, spawns, idle turn,
+  HuntCA, Mirage); `BotPersonalityController`'s synced SharedRandom personality grant;
+  cosmetic `LocalRandom` (sound/voice picks, `AnnounceOnDamageState` voice gate,
+  `PlayerPromotions` flavor text); Fransbot `Stopwatch` (diagnostic-only); `CombatVeto`
+  `squad.GetHashCode()` dedup key (intra-process consistency only).
+- **Hash-order pass (commit 2, `c9db891e9`):** `ActorIndex.Actors` is `HashSet<Actor>`
+  (hash layout is an implementation detail); every order-sensitive consumer now sorts by
+  `ActorID`: RNG pick sites, `FirstOrDefault`/`MinByOrDefault`/`ClosestTo*`/`foreach`
+  order dependencies in `BaseBuilderBotModuleCA`, `SquadManagerBotModuleCA`
+  (`OwnBaseBuildings` too), `BaseBuilderQueueManagerCA`, `AirStatesCA`
+  (`WaitingUnits` broadcast), `FransUnitBuilder` (3 `allUnits` snapshots),
+  `FransMcvExpansionManager` (`LiveMcvs` iterator), `FransSpecOps` (specialist pick),
+  plus `FrozenDictionary BuildingFractions` / `Dictionary unitsToBuildShares` key-sorted
+  before `Shuffle`. Verified already-deterministic and left alone: `World.Actors`
+  (`SortedDictionary` by ActorID), `ActorsWithTrait`/`ActorsHavingTrait` (`TraitContainer`
+  keeps a binary-search-inserted `List<Actor>` — ActorID-sorted), Fransbot's ~25 existing
+  `OrderBy(ActorID)` sites, `.Any`/`.Count`/`.Sum` aggregations, single-ActorID filters,
+  full-tiebreak collect-then-sort picks, `Rules.Actors` (load-order stable).
+
+Gates:
+- build: `dotnet build -c Release -p:TargetPlatform=win-x64` 0 warnings / 0 errors
+- boot-gate: PASS — menu reached (`MenuPostProcessEffect.PostWorldLoaded`), 0 new
+  `exception-*.log` vs 168 pre-existing, no stray processes
+- BOM audit: no file's BOM changed vs HEAD
+- Cameo tests: 1198/1198 PASS
+
+Open items for lead:
+- `mod.config` engine pin bump to a build containing `BotRandom` requires maintainer
+  authorization — `mod.config` untouched. Without it the mod half still compiles/runs;
+  the engine-registered modules keep drawing `LocalRandom` until the pin moves.
+- Same-seed parity re-run (`run_ai_match_batch.py` + `order_trace.py`) awaits
+  Integrator heavy-run window.
 # 2026-10-07 — Devin-Integrator: INTEG-ECON-B — BU_harvester_logistics merged into inc
 
 *Devin-Integrator.* Reviewer APPROVE (2 documented non-blocking deviations D1 P2 /

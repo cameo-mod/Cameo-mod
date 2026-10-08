@@ -508,6 +508,35 @@ def patch_mp_block(
     return text[:start] + block + text[block_end:]
 
 
+# Harness-authored rules are shipped under a reserved filename so the copy
+# can never clobber an archive's own rules.yaml, and so the name can never
+# collide with a shipped Rules include.
+HARNESS_RULES_NAME = "duel_rules.yaml"
+
+
+def _insert_side_actors(text: str, rendered: str) -> str:
+    """Append rendered bare actor entries at the END of the Actors: section,
+    creating the section at EOF when absent. Appending preserves original
+    actor creation order/ids (SpawnMapActors assigns NextAID in file order);
+    prepending would shift every existing actor's id and perturb RNG-visible
+    behaviour."""
+    headers = list(re.finditer(r"(?m)^Actors:[ \t]*$", text))
+    if len(headers) > 1:
+        fail("map.yaml contains more than one Actors: section")
+    if not headers:
+        return text.rstrip("\n") + "\n\nActors:\n" + rendered
+
+    header = headers[0]
+    next_root = re.search(r"\n\S", text[header.end():])
+    block_end = header.end() + next_root.start() if next_root else len(text)
+    block = text[header.end():block_end]
+    for name in re.findall(r"(?m)^\t(\w+):", rendered):
+        if re.search(rf"(?m)^\t{name}:", block):
+            fail(f"synthetic actor id '{name}' collides with an existing actor")
+    block = block.rstrip("\n")
+    return text[: header.end()] + block + "\n" + rendered + text[block_end:]
+
+
 def write_variant_from_oramap(oramap: pathlib.Path, dest: pathlib.Path, matchup: dict, time_limit: int) -> None:
     """Extract a shipped .oramap into a variant dir and convert its Multi slots
     into map-side bot duelists. The referee seat is added for the local client;
@@ -532,11 +561,27 @@ def write_variant_from_oramap(oramap: pathlib.Path, dest: pathlib.Path, matchup:
             ref = f"Multi{i}"
             if text.count(f"	PlayerReference@{ref}:") != 1:
                 fail(f"team-size {team_size} expects exactly one PlayerReference@{ref} block")
-    if not re.search(r"^Rules: ", text, re.MULTILINE):
+    if (dest / HARNESS_RULES_NAME).exists():
+        fail(f"map archive already ships reserved file {HARNESS_RULES_NAME}")
+
+    rules_line = re.search(r"(?m)^Rules:[ \t]*([^\n]*)$", text)
+    if rules_line:
+        value = rules_line.group(1)
+        comment = ""
+        if "#" in value:
+            value, comment = value.split("#", 1)
+            comment = " #" + comment
+        entries = [e.strip() for e in value.split(",") if e.strip()]
+        if HARNESS_RULES_NAME in entries:
+            fail(f"map Rules already references reserved file {HARNESS_RULES_NAME}")
+        entries.append(HARNESS_RULES_NAME)
+        new_line = "Rules: " + ",".join(entries) + comment
+        text = text[:rules_line.start()] + new_line + text[rules_line.end():]
+    else:
         categories = re.search(r"^Categories: .+$", text, re.MULTILINE)
         if not categories:
             fail("map.yaml has no Categories line to anchor the Rules key")
-        text = text[:categories.end()] + "\n\nRules: rules.yaml" + text[categories.end():]
+        text = text[:categories.end()] + f"\n\nRules: {HARNESS_RULES_NAME}" + text[categories.end():]
 
     marker = "\tPlayerReference@Multi0:"
     if text.count(marker) != 1:
@@ -570,12 +615,14 @@ def write_variant_from_oramap(oramap: pathlib.Path, dest: pathlib.Path, matchup:
             ("Multi1", matchup["side_b"]["faction"], spawns[1]),
         ]
     rendered = "".join(render_side_actors(ref, faction, home) for ref, faction, home in sides)
-    text = text.rstrip("\n") + "\n" + rendered
+    text = _insert_side_actors(text, rendered)
     text += f"\n# ai-match-batch variant: {dest.name}\n"
     map_yaml.write_text(text, encoding="utf-8")
 
-    shutil.copyfile(TEMPLATE_MAP / "rules.yaml", dest / "rules.yaml")
-    rules_yaml = dest / "rules.yaml"
+    # Harness rules ship under the reserved name so an archive's own
+    # rules.yaml is never overwritten.
+    shutil.copyfile(TEMPLATE_MAP / "rules.yaml", dest / HARNESS_RULES_NAME)
+    rules_yaml = dest / HARNESS_RULES_NAME
     rules = rules_yaml.read_text(encoding="utf-8")
     patched, count = re.subn(r"TimeLimitDefault: \d+", f"TimeLimitDefault: {time_limit}", rules)
     if count != 1:

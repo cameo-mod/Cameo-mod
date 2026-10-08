@@ -40,7 +40,7 @@ namespace OpenRA.Mods.Cameo.Terrain
 			sheetBuilders = new Cache<SheetType, SheetBuilder>(t =>
 				new SheetBuilder(t, t == SheetType.BGRA ? terrainInfo.BgraSheetSize : terrainInfo.SheetSize));
 
-			random = new MersenneTwister();
+			random = new MersenneTwister(CameoRemasterTerrain.StableHash(terrainInfo.Id));
 
 			var frameCache = new FrameCache(Game.ModData.DefaultFileSystem, Game.ModData.SpriteLoaders);
 			foreach (var t in terrainInfo.Templates)

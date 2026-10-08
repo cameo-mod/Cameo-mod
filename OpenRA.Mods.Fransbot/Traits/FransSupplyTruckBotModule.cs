@@ -12,6 +12,7 @@
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Linq;
+using OpenRA.Mods.CA;
 using OpenRA.Traits;
 
 namespace OpenRA.Mods.Common.Traits
@@ -115,7 +116,7 @@ namespace OpenRA.Mods.Common.Traits
 				return;
 
 			// Stagger evaluations so that several bots do not all scan on the same tick.
-			scanTicks = world.LocalRandom.Next(0, Info.ScanInterval);
+			scanTicks = BotRng.For(player).Next(0, Info.ScanInterval);
 		}
 
 		void IBotTick.BotTick(IBot bot)
@@ -193,7 +194,7 @@ namespace OpenRA.Mods.Common.Traits
 			if (validTypes.Length == 0)
 				return;
 
-			var supplyTruckType = validTypes.Random(world.LocalRandom);
+			var supplyTruckType = validTypes.Random(BotRng.For(player));
 			unitBuilder.RequestUnitProduction(bot, supplyTruckType);
 			awaitingProductionConfirmation = true;
 			if (!retryUnconfirmedRequest)

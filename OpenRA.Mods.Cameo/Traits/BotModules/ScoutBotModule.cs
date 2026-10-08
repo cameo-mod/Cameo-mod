@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using OpenRA.Mods.CA.Traits;
+using BotRng = OpenRA.Mods.CA.BotRng;
 using OpenRA.Mods.Common;
 using OpenRA.Mods.Common.Traits;
 using CAAIUtils = OpenRA.Mods.CA.AIUtils;
@@ -121,7 +122,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			mainTargetProvider = self.TraitsImplementing<IBotMainTargetProvider>().FirstOrDefault();
 			unitBuilders = self.TraitsImplementing<IBotRequestUnitProduction>().ToArray();
 			leadProviders = self.Owner.PlayerActor.TraitsImplementing<IBotPersonalityLeadProvider>().ToArray();
-			scanTicks = world.LocalRandom.Next(0, Info.ScanInterval);
+			scanTicks = BotRng.For(player).Next(0, Info.ScanInterval);
 		}
 
 		void IBotEnabled.BotEnabled(IBot bot) { }

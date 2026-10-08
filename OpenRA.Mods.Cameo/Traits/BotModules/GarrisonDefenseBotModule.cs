@@ -14,6 +14,7 @@ using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Linq;
 using OpenRA.Mods.AS.Traits;
+using OpenRA.Mods.CA;
 using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Traits;
@@ -87,8 +88,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			: base(info)
 		{
 			world = self.World;
-			scanTicks = world.LocalRandom.Next(Info.ScanInterval);
-			swapTicks = world.LocalRandom.Next(Info.SwapInterval);
+			scanTicks = BotRng.For(self.Owner).Next(Info.ScanInterval);
+			swapTicks = BotRng.For(self.Owner).Next(Info.SwapInterval);
 		}
 
 		protected override void TraitDisabled(Actor self)

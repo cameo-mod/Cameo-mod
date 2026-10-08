@@ -13,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using OpenRA.Mods.CA;
 using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Support;
@@ -252,7 +253,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		IEnumerable<double> Uniforms()
 		{
 			while (true)
-				yield return world.LocalRandom.NextFloat();
+				yield return BotRng.For(player).NextFloat();
 		}
 
 		// IObservesVariables: the engine hands the full granted-condition map at create and after every grant/revoke.

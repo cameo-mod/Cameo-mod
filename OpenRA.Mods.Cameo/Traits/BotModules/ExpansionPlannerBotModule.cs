@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using OpenRA.Mods.CA.Traits;
+using BotRng = OpenRA.Mods.CA.BotRng;
 using OpenRA.Mods.Common;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Traits;
@@ -1302,7 +1303,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				return;
 			}
 
-			var mcvType = producible.Random(world.LocalRandom);
+			var mcvType = producible.Random(BotRng.For(player));
 			if (unitBuilder.RequestedProductionCount(bot, mcvType) > 0)
 				return;
 

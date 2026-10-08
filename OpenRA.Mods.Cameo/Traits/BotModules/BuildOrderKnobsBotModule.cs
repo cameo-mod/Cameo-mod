@@ -13,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using OpenRA.Mods.CA;
 using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Mods.Common.Traits.Radar;
@@ -324,7 +325,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			// One jitter draw per knob and nothing else, in a fixed order, from the host's random.
 			jitterDraws = new int[Knobs.Length];
 			for (var i = 0; i < Knobs.Length; i++)
-				jitterDraws[i] = world.LocalRandom.Next(0, 2001);
+				jitterDraws[i] = BotRng.For(player).Next(0, 2001);
 
 			if (Info.UseLearnedBuildOrder)
 				LoadLearned();
@@ -379,7 +380,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var faction = player.Faction?.InternalName ?? "";
 			var name = BuildOrderKnobsEval.ChooseOpening(weights,
 				o => Info.UseLearnedBuildOrder ? learned.Posterior(personality, faction, enemyFaction, o) : (1, 1),
-				() => world.LocalRandom.NextFloat());
+				() => BotRng.For(player).NextFloat());
 			if (name == null || !Info.Openings.TryGetValue(name, out var steps))
 				return;
 

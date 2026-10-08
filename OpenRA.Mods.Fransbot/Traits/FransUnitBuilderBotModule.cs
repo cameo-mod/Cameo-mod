@@ -14,6 +14,7 @@ using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using OpenRA.Mods.CA;
 using OpenRA.Mods.CA.Traits;
 using OpenRA.Primitives;
 using OpenRA.Traits;
@@ -989,7 +990,7 @@ namespace OpenRA.Mods.Common.Traits
 		{
 			// Build the owned-unit snapshot once for this whole throughput-probe pass instead of
 			// rescanning ActorIndex separately for every individual production queue.
-			var allUnits = unitsToBuild.Actors.Where(a => !a.IsDead).ToArray();
+			var allUnits = unitsToBuild.Actors.Where(a => !a.IsDead).OrderBy(a => a.ActorID).ToArray();
 
 			foreach (var category in Info.UnitQueues)
 			{
@@ -1188,7 +1189,7 @@ namespace OpenRA.Mods.Common.Traits
 			if (live + queued >= Info.EconomicEmergencyMinimumAirCombatReserve)
 				return false;
 
-			var allUnits = unitsToBuild.Actors.Where(a => !a.IsDead).ToArray();
+			var allUnits = unitsToBuild.Actors.Where(a => !a.IsDead).OrderBy(a => a.ActorID).ToArray();
 			foreach (var category in QueueDomains.Air)
 				foreach (var queue in queuesByCategory[category].Where(IsFreeUsableQueue).OrderByDescending(q => q.Actor.ActorID))
 				{
@@ -1539,7 +1540,7 @@ namespace OpenRA.Mods.Common.Traits
 		ActorInfo ChooseRandomUnitToBuild(ProductionQueue queue)
 		{
 			return ChooseRandomUnitToBuild(queue,
-				unitsToBuild.Actors.Where(a => !a.IsDead).ToArray(),
+				unitsToBuild.Actors.Where(a => !a.IsDead).OrderBy(a => a.ActorID).ToArray(),
 				ignorePositiveUnitLimits: false);
 		}
 
@@ -1688,7 +1689,7 @@ namespace OpenRA.Mods.Common.Traits
 			// unrelated under-target vehicle cannot win merely because Shuffle happened to list it
 			// first. Once the 33% pool is satisfied, ARTY/V2RL are held as queue-saturation fallback
 			// rather than continuing to inflate beyond the requested combined vehicle share.
-			var buildableThings = queue.BuildableItems().Shuffle(world.LocalRandom)
+			var buildableThings = queue.BuildableItems().Shuffle(BotRng.For(player))
 				.OrderByDescending(a => artilleryUnderTarget && Info.GroundVehicleArtilleryTypes.Contains(a.Name))
 				.ToArray();
 			if (buildableThings.Length == 0)

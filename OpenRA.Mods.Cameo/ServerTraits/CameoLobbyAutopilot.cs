@@ -44,11 +44,40 @@ namespace OpenRA.Mods.Cameo.ServerTraits
 		const string PlanFile = "devautopilot.plan";
 		const int DefaultSettleMs = 2000;
 
-		enum Phase { Idle, Configured, Done }
+		enum Phase { Idle, Settling, Starting, Done }
+
+		const int StartRetryMs = 500;
+		const int MaxStartAttempts = 20;
 
 		readonly List<string[]> directives = [];
 		Phase phase = Phase.Idle;
-		long readyAtMs;
+
+		// Observed outcome of one start attempt. InterpretCommand runs handlers
+		// synchronously - Server.StartGame flips State inside the call - so the
+		// result is visible immediately and must be checked BEFORE counting
+		// exhaustion. Only GameStarted confirms a start; any other exit from
+		// WaitingPlayers (e.g. ShuttingDown) is an abort, never a confirmation.
+		internal enum StartAttemptOutcome { Retry, Confirmed, Exhausted, Aborted }
+
+		internal static StartAttemptOutcome EvaluateStartAttempt(ServerState state, int attempts, int maxAttempts)
+		{
+			if (state == ServerState.GameStarted)
+				return StartAttemptOutcome.Confirmed;
+
+			if (state != ServerState.WaitingPlayers)
+				return StartAttemptOutcome.Aborted;
+
+			return attempts >= maxAttempts ? StartAttemptOutcome.Exhausted : StartAttemptOutcome.Retry;
+		}
+
+		// Wall-clock orchestration: this trait runs pre-game on the server only,
+		// outside the synchronized order stream, and the settle window IS a real-
+		// time guarantee for clients to apply the slot/map/option burst (server
+		// ITick fires per event-loop iteration, not per timed tick, so it cannot
+		// measure this).
+		long settleUntilMs;
+		long nextAttemptMs;
+		int startAttempts;
 		int minClients = 1;
 		int settleMs;
 		bool armed;
@@ -91,8 +120,19 @@ namespace OpenRA.Mods.Cameo.ServerTraits
 				armed = GateOpen(server);
 			}
 
-			if (!armed || phase == Phase.Done || server.State != ServerState.WaitingPlayers)
+			if (!armed || phase == Phase.Done)
 				return;
+
+			// A successful start flips State to GameStarted; confirm only that
+			// transition - any other exit (e.g. ShuttingDown) just ends the drive.
+			if (server.State != ServerState.WaitingPlayers)
+			{
+				if (phase == Phase.Starting && server.State == ServerState.GameStarted)
+					Log.Write("server", "CAMEO DEV AUTOPILOT game start confirmed");
+
+				phase = Phase.Done;
+				return;
+			}
 
 			if (phase == Phase.Idle)
 			{
@@ -101,15 +141,27 @@ namespace OpenRA.Mods.Cameo.ServerTraits
 					return;
 
 				Execute(server, conns);
-				readyAtMs = Environment.TickCount64 + settleMs + DefaultSettleMs;
-				phase = Phase.Configured;
+				settleUntilMs = Environment.TickCount64 + settleMs + DefaultSettleMs;
+				phase = Phase.Settling;
 				return;
 			}
 
-			if (Environment.TickCount64 < readyAtMs)
+			if (phase == Phase.Settling)
+			{
+				if (Environment.TickCount64 < settleUntilMs)
+					return;
+
+				phase = Phase.Starting;
+			}
+
+			if (Environment.TickCount64 < nextAttemptMs)
 				return;
 
-			// Every human readies through their own connection - `state` acts on the sender.
+			nextAttemptMs = Environment.TickCount64 + StartRetryMs;
+
+			// Every human readies through their own connection - `state` acts on
+			// the sender. Re-issuing is idempotent and recovers clients whose
+			// state was reset (e.g. a late map-select callback marks them Invalid).
 			foreach (var conn in server.Conns.Where(c => c.Validated))
 				server.InterpretCommand("state Ready", conn);
 
@@ -119,8 +171,29 @@ namespace OpenRA.Mods.Cameo.ServerTraits
 
 			server.InterpretCommand("state Ready", admin);
 			server.InterpretCommand("startgame", admin);
-			phase = Phase.Done;
-			Log.Write("server", "CAMEO DEV AUTOPILOT start sequence issued");
+			startAttempts++;
+
+			// InterpretCommand is synchronous, so State already reflects this
+			// attempt - success is possible on the final attempt and must be
+			// confirmed before exhaustion is declared.
+			switch (EvaluateStartAttempt(server.State, startAttempts, MaxStartAttempts))
+			{
+				case StartAttemptOutcome.Confirmed:
+					phase = Phase.Done;
+					Log.Write("server", "CAMEO DEV AUTOPILOT game start confirmed");
+					return;
+				case StartAttemptOutcome.Exhausted:
+					phase = Phase.Done;
+					Log.Write("server", $"CAMEO DEV AUTOPILOT start FAILED - lobby still WaitingPlayers after {startAttempts} attempts");
+					return;
+				case StartAttemptOutcome.Aborted:
+					phase = Phase.Done;
+					Log.Write("server", $"CAMEO DEV AUTOPILOT aborted - server state {server.State}");
+					return;
+				default:
+					Log.Write("server", $"CAMEO DEV AUTOPILOT start attempt {startAttempts} issued");
+					return;
+			}
 		}
 
 		void Execute(S server, List<Connection> conns)
