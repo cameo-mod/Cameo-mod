@@ -8,9 +8,12 @@
  */
 #endregion
 
+using System;
+
 namespace OpenRA.Mods.CA.Traits
 {
 	/// <summary>One-release alias of independent canonical engine fire stations.</summary>
+	[Obsolete("Use AttackGarrisoned instead.")]
 	public class AttackGarrisonedSPInfo : OpenRA.Mods.Common.Traits.AttackGarrisonedInfo
 	{
 		// Accepted only while loading unmigrated legacy YAML; independent targeting is unconditional.

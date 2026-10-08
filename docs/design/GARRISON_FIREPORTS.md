@@ -1,11 +1,13 @@
 ﻿# Garrison fire-port migration
 
 Canonical `AttackGarrisoned` is supplied by the engine Common assembly at
-`dc92c52213b369ec7cade9c810f8815ea8390942` (codex/garrison-engine), from the
-previous inc pin d5d8b2a685. The Common occupant-provider bridge is implemented by
-AS Garrisonable. AS AttackOpenTopped and mod CA AttackGarrisonedSP are temporary
-load aliases that identify the actor and replacement in the debug log. No assembly
-lookup order is changed. These aliases are retired by U7 after zero-use validation.
+`2db0db28b46a986112595218de709f3f816e3732` (codex/garrison-p3-fix), based on the
+integrated engine commit `0e42ed433d237c7844005f2b145e877953053bf4`. The Common
+occupant-provider bridge is implemented by AS Garrisonable. AS AttackOpenTopped
+and mod CA AttackGarrisonedSP are temporary load aliases that identify the actor
+and replacement in the debug log. Their Info types carry `ObsoleteAttribute`
+guidance for code-level consumers as well. No assembly lookup order is changed.
+These aliases are retired by U7 after zero-use validation.
 
 Run `python tools/audit/garrison_fireports.py --capacity-report <output.json>`.
 `--write --manifest <manifest.json>` performs conversion, records names/suffixes,
@@ -23,6 +25,10 @@ retain their original geometry and have `NoFireOverflow: true` at their actor no
 This is a gameplay change: excess occupants remain loaded but cannot fire until a
 port becomes free. Existing occupants keep their stations; there is no modulo or
 random sharing. No new art, offsets, yaws, cones or palette values are fabricated.
+
+Stance gating uses the more restrictive of the host and passenger stances: opportunity
+scans require both to be at least Defend, and retaliation requires both to be at least
+ReturnFire. A passenger cannot fire opportunistically through a host set to HoldFire.
 
 Bots and previews use the canonical selected-armament/range/cone queries. Owned
 carrier profiles include its occupied station weapons. Target-specific damage/range
