@@ -140,6 +140,7 @@ ordos_airmine:
 	Voiced:
 		VoiceSet: EBFDAAMine
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 	Cloak:
 		UncloakOn: Damage

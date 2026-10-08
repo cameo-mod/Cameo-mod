@@ -274,6 +274,7 @@ asianalliance_oiltruck:
 	Armament@PRIMARY:
 		Weapon: DemoTruckTargeting
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: Defend
 		InitialStanceAI: AttackAnything
 		ScanRadius: 10
@@ -962,6 +963,7 @@ asianalliance_warturtle:
 	RevealOnFire:
 		ArmamentNames: primary, garrisoned
 	AutoTarget:
+		DynamicWeaponPriority: true
 		AllowMovement: true
 	Selectable:
 		DecorationBounds: 1440, 1440, 0, -128

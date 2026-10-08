@@ -623,6 +623,7 @@ zerg_gorekraken:
 	Voiced:
 		VoiceSet: SCGuardianVoice
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 10
 		InitialStance: AttackAnything
 	WithAttackAnimation:

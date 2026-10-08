@@ -842,6 +842,7 @@ Player:
 	AutoTargetPriority@ATTACKANYTHING:
 		ValidRelationships: Enemy, Neutral
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Passenger:
 		CustomPipType: yellow

@@ -113,6 +113,7 @@ Player:
 		WanderMoveRadius: 16
 	RejectsOrders:
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 	DetectCloaked:
 		Range: 3c0
@@ -137,6 +138,7 @@ Player:
 		WanderMoveRadius: 5
 	RejectsOrders:
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 
 dunee1:
@@ -309,6 +311,7 @@ dunee1mob:
 	Armament:
 		Weapon: AngryMobTargeting
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 6
 	WithSpriteBody:
 		Sequence: dot
@@ -399,6 +402,7 @@ dunee3mob:
 	Armament:
 		Weapon: AngryMobTargeting
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 6
 	WithSpriteBody:
 		Sequence: dot
@@ -489,6 +493,7 @@ dunee4mob:
 	Armament:
 		Weapon: AngryMobTargeting
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 6
 	WithSpriteBody:
 		Sequence: dot
@@ -2316,6 +2321,7 @@ duneorni:
 		RepulsionSpeed: 40
 		MaximumPitch: 56
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: HoldFire
 		InitialStanceAI: HoldFire
 	AmmoPool:

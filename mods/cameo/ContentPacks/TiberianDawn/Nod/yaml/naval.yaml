@@ -170,9 +170,6 @@ td_nod_lasercorvette:
 		Recoil: 88
 		RecoilRecovery: 35
 		MuzzleSequence: muzzle
-	AttackTurreted:
-		Turrets: secondary
-		Armaments: secondary
 	AttackTurretedCharged:
 		Turrets: primary
 		Armaments: primary
@@ -194,6 +191,12 @@ td_nod_lasercorvette:
 	RenderSprites:
 		Image: nodlasercorvette
 		PlayerPalette: player_rgba
+
+	-AttackTurreted:
+	AttackMultiTurreted:
+		PauseOnCondition: disabled || blinded
+		Turrets: secondary
+		Armaments: secondary
 
 td_nod_transportsubmarine:
 	Inherits: ^BoatUnit

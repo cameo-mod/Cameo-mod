@@ -413,6 +413,7 @@ ra2shk.bot:
 		ShowSelectionBar: false
 		Delay: 10
 	AutoTarget:
+		DynamicWeaponPriority: true
 		AllowMovement: false
 		RequiresCondition: nocoil
 	Turreted:
@@ -479,6 +480,7 @@ YRSLAV:
 	AttackFrontal:
 		FacingTolerance: 2
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 10
 		RequiresCondition: freed
 	Voiced:
@@ -765,6 +767,7 @@ ra2sqd:
 	AttackFrontal:
 		FacingTolerance: 2
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 10
 		InitialStance: AttackAnything
 	AutoTargetPriority@SQUIDGRAB:
@@ -985,6 +988,7 @@ ra2asw:
 	CarrierSlave:
 		LandingDistance: 8000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStanceAI: AttackAnything
 		InitialStance: AttackAnything
 	HasParent:
@@ -1096,6 +1100,7 @@ ra2hornet:
 	CarrierSlave:
 		LandingDistance: 8000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStanceAI: AttackAnything
 		InitialStance: AttackAnything
 	HasParent:
@@ -2025,6 +2030,7 @@ ra2_ctoutp:
 		TurnSpeed: 16
 		Offset: -150,0,400
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 	Armament@PRIMARY:
 		Weapon: RA2HoverMissile
@@ -2123,6 +2129,7 @@ ra2sidewind:
 	Health:
 		HP: 15000
 	AutoTarget:
+		DynamicWeaponPriority: true
 	Armament@PRIMARY:
 		Name: primary
 		Weapon: RA2GIRocketsG

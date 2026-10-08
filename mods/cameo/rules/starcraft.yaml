@@ -377,6 +377,7 @@ SCSPIDERMINE:
 	ChangesHealth@SelfHealing:
 		Step: 4
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 		InitialStance: AttackAnything
 	WithInfantryBody:
@@ -554,6 +555,7 @@ SCWRAITHDRONE:
 	CarrierSlave:
 		LandingDistance: 8000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStanceAI: AttackAnything
 		InitialStance: AttackAnything
 	HasParent:
@@ -875,6 +877,7 @@ SCINTERCEPTOR:
 	CarrierSlave:
 		LandingDistance: 8000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStanceAI: AttackAnything
 		InitialStance: AttackAnything
 	HasParent:
@@ -1023,6 +1026,7 @@ SCBROODLING:
 	Armor:
 		Type: None
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 10
 		InitialStance: AttackAnything
 	Armament:
@@ -1096,6 +1100,7 @@ SCSCOURGEDRONE:
 	HasParent:
 	RejectsOrders:
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStanceAI: AttackAnything
 		InitialStance: AttackAnything
 	Armament@PRIMARY:

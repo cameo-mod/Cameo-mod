@@ -896,6 +896,7 @@ forgotten_thumperbus:
 	RevealOnFire:
 		ArmamentNames: primary, garrisoned
 	AutoTarget:
+		DynamicWeaponPriority: true
 		AllowMovement: true
 	Voiced:
 		VoiceSet: TSVehicle
@@ -966,6 +967,7 @@ forgotten_nomadbarracks:
 	RevealOnFire:
 		ArmamentNames: primary, garrisoned
 	AutoTarget:
+		DynamicWeaponPriority: true
 		AllowMovement: true
 	Voiced:
 		VoiceSet: TSVehicle

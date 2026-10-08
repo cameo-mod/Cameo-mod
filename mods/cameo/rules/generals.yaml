@@ -2652,6 +2652,7 @@ glsite.soldier:
 	Health:
 		HP: 6000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		AllowMovement: false
 		InitialStanceAI: Defend
 		EnableStances: false
@@ -2898,6 +2899,7 @@ glamob:
 	Armament:
 		Weapon: AngryMobTargeting
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 6
 	WithSpriteBody:
 		Sequence: dot
@@ -3025,6 +3027,7 @@ GLE1:
 	Health:
 		HP: 8000
 	AutoTarget:
+		DynamicWeaponPriority: true
 	Armament@PRIMARY:
 		Weapon: GLRebelAK47
 	Armament@SECONDARY:
@@ -3150,6 +3153,7 @@ GLKELL:
 	Passenger:
 		CustomPipType: red
 	AutoTarget:
+		DynamicWeaponPriority: true
 	Armament@PRIMARY:
 		Weapon: GLKellSniper
 	Armament@VEHICLE:
@@ -3467,6 +3471,7 @@ glbiker:
 	Selectable:
 		Class: glbiker
 	AutoTarget:
+		DynamicWeaponPriority: true
 		AllowMovement: true
 	Turreted:
 		TurnSpeed: 10
@@ -3609,6 +3614,7 @@ glbggy:
 		RequiresCondition: ammoupgrade && scrap_create_bonus == 2
 	WithMuzzleOverlay:
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStanceAI: Defend
 	Inherits@EXT: ^ExternalConditions
 	AcceptsDeliveredExperience:
@@ -3712,6 +3718,7 @@ glbbus:
 	Selectable:
 		Class: glbbus
 	AutoTarget:
+		DynamicWeaponPriority: true
 		AllowMovement: true
 	Turreted:
 		TurnSpeed: 10
@@ -4613,6 +4620,7 @@ GLSCUD:
 		LoadedCondition: toxammo
 		RequiresCondition: deployed
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 10
 	AttackFrontal:
 		TargetFrozenActors: True
@@ -4902,6 +4910,7 @@ glworker:
 	Health:
 		HP: 10000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Inherits@EXT: ^ExternalConditions
 	AcceptsDeliveredExperience:
@@ -4934,6 +4943,7 @@ glworker:
 		Weapon: GLWorkerHealBuilding
 		TargetStances: Ally
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 7
 		InitialStance: AttackAnything
 	AutoTargetPriority@DEFAULT:
@@ -6807,6 +6817,7 @@ CHE1:
 	Health:
 		HP: 8000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: CHGuardRifle
@@ -7122,6 +7133,7 @@ chlotus:
 	Passenger:
 		CustomPipType: red
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: CHLotusDisable
@@ -7381,6 +7393,7 @@ charty:
 		FacingTolerance: 0
 	WithMuzzleOverlay:
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStanceAI: Defend
 	Explodes:
 		Weapon: ArtilleryShell
@@ -8024,6 +8037,7 @@ choutpost:
 		FallbackRange: 6c0
 	SelectionDecorations:
 	AutoTarget:
+		DynamicWeaponPriority: true
 		AllowMovement: true
 	Turreted:
 		TurnSpeed: 10
@@ -8239,6 +8253,7 @@ chcrawl2:
 	RevealOnFire:
 		ArmamentNames: primary, garrisoned
 	AutoTarget:
+		DynamicWeaponPriority: true
 		AllowMovement: true
 	Turreted:
 		TurnSpeed: 10
@@ -8829,6 +8844,7 @@ CHMIG:
 		RepulsionSpeed: 40
 		MaximumPitch: 56
 	AutoTarget:
+		DynamicWeaponPriority: true
 	AmmoPool:
 		Ammo: 8
 		AmmoCondition: ammo
@@ -8926,6 +8942,7 @@ CHMIG2:
 		RepulsionSpeed: 40
 		MaximumPitch: 56
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: HoldFire
 	AmmoPool:
 		Ammo: 2
@@ -9046,6 +9063,7 @@ chhelix:
 		TurnSpeed: 4
 		Speed: 112
 	AutoTarget:
+		DynamicWeaponPriority: true
 	WithIdleOverlay@ROTORAIR:
 		Sequence: rotor
 		RequiresCondition: airborne
@@ -9689,6 +9707,7 @@ USAE1:
 	Health:
 		HP: 9000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: USARangerMG
@@ -9809,6 +9828,7 @@ usapath:
 	Health:
 		HP: 8000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: GENAWP
@@ -9869,6 +9889,7 @@ usaburton:
 	RevealsShroud:
 		Range: 6c0
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 8
 	Armament@PRIMARY:
 		Weapon: USABurtonMG
@@ -12083,6 +12104,7 @@ usacannon.beam:
 		Weapon: SuicideBomberTargeting
 		RequiresCondition: !botmicro
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 		ScanRadius: 6
 	AttackMove:
@@ -12266,6 +12288,7 @@ usaraptor:
 		RepulsionSpeed: 40
 		MaximumPitch: 56
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: HoldFire
 	AmmoPool:
 		Ammo: 4
@@ -12422,6 +12445,7 @@ usastealth:
 		MaximumPitch: 56
 		IdleBehavior: Land
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: HoldFire
 	AmmoPool:
 		Ammo: 4
@@ -12553,6 +12577,7 @@ usaaurora:
 		Modifier: 50
 		RequiresCondition: supersonic && ammo
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: HoldFire
 	AmmoPool:
 		Ammo: 1
@@ -12705,6 +12730,7 @@ usacomanche:
 		Weapon: USAComancheRockets
 		LocalOffset: 150,213,-85, 150,-213,-85
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	AttackAircraft:
 		FacingTolerance: 20

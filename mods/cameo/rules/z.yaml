@@ -63,6 +63,7 @@ World:
 	Health:
 		HP: 5000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: M16
@@ -169,6 +170,7 @@ zpsyco:
 	Health:
 		HP: 12500
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 6
 	Armament@PRIMARY:
 		Weapon: ZPsycoGun
@@ -196,6 +198,7 @@ zlaser:
 	Health:
 		HP: 7500
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 6
 	Armament@PRIMARY:
 		Weapon: ZLaserGun
@@ -223,6 +226,7 @@ zsniper:
 	Health:
 		HP: 2500
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 6
 	Armament@PRIMARY:
 		Weapon: ZSniper
@@ -251,6 +255,7 @@ zpyro:
 	Health:
 		HP: 10000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: ZFlamer
@@ -280,6 +285,7 @@ ztough:
 	Health:
 		HP: 15000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: ZToughMissile

@@ -959,6 +959,7 @@ win98_cd:
 		Weapon: demodiskstrike
 		LocalOffset: 200,4000,90, -900,-4200,90, 900,10000,30, 4000,-800,60, -2600,500,-30, 6600,500,40, 500,500,60, 1000,1300,50
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 		ScanRadius: 9999
 	AttackMove:
@@ -1057,6 +1058,7 @@ win98_redringofdeath:
 		LocalOffset: 200,4000,90, -900,-4200,90, 900,10000,30, 4000,-800,60, -2600,500,-30, 6600,500,40, 500,500,60, 1000,1300,50
 		Weapon: redringofdeathweapon
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 		ScanRadius: 9999
 	AttackMove:
@@ -1101,6 +1103,7 @@ WIN98_USER:
 	Armor:
 		Type: None
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 6
 		InitialStance: AttackAnything
 	Armament:
@@ -1170,6 +1173,7 @@ WIN98_HARVESTER:
 		HP: 7200
 	#Food
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	WithDeathAnimation:
 		UseDeathTypeSuffix: false
@@ -1303,6 +1307,7 @@ WIN98_SPIDER:
 	Voiced:
 		VoiceSet: win98uservoice
 	AutoTarget:
+		DynamicWeaponPriority: true
 	AutoTargetPriority@DEFAULT:
 		ValidTargets: Vehicle, lockdowned, ivanattached
 

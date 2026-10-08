@@ -349,6 +349,7 @@ terran_raven:
 	# 	Weapon: RavenTurretSpawner
 	# 	ForceTargetRelationships: Enemy, Neutral
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 10
 		InitialStance: AttackAnything
 	AttackAircraft:
@@ -576,6 +577,7 @@ terran_medivac:
 		ForceTargetRelationships: None
 		LocalOffset: 600,-100,256
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 	AutoTargetPriority@DEFAULT:
 		ValidTargets: Infantry, plagued, ivanattached, lockdowned

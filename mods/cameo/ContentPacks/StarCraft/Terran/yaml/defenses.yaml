@@ -171,6 +171,7 @@ terran_sentinel:
 	WithSpriteTurret:
 		RequiresCondition: !build-incomplete
 	AutoTarget:
+		DynamicWeaponPriority: true
 	Power:
 		Amount: -40
 	RevealsShroud:

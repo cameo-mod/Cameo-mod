@@ -236,6 +236,7 @@ naxis_airfield:
 	Armament@PRIMARY:
 		Weapon: NaxDefensivePlaneTarget
 	AutoTarget:
+		DynamicWeaponPriority: true
 	ParatroopersPower@paratroopers:
 		OrderName: NaxisParatroopers
 		Prerequisites:
@@ -468,6 +469,7 @@ naxis_rifletower:
 	WithSpriteTurret:
 		RequiresCondition: !build-incomplete
 	AutoTarget:
+		DynamicWeaponPriority: true
 	Power:
 		Amount: -25
 	RevealsShroud:
@@ -531,6 +533,7 @@ naxis_flak88:
 	WithSpriteTurret:
 		RequiresCondition: !build-incomplete
 	AutoTarget:
+		DynamicWeaponPriority: true
 	Power:
 		Amount: -40
 	RevealsShroud:

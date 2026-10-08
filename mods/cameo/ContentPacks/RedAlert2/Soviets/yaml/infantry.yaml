@@ -160,6 +160,7 @@ ra2_soviets_dog:
 	GrantConditionWhileAiming:
 		Condition: run
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 	AutoTargetPriority@DEFAULT:
 		ValidTargets: Infantry
@@ -386,6 +387,7 @@ ra2_soviets_crazyivan:
 	ChangesHealth@SelfHealing:
 		Step: 10
 	AutoTarget:
+		DynamicWeaponPriority: true
 	AttackFrontal:
 		FacingTolerance: 0
 	Voiced:
@@ -528,6 +530,7 @@ ra2_soviets_desolator:
 	ChangesHealth@SelfHealing:
 		Step: 30
 	AutoTarget:
+		DynamicWeaponPriority: true
 	Armament@PRIMARY:
 		Weapon: RA2RadBeamWeapon
 		LocalOffset: 256,43,341

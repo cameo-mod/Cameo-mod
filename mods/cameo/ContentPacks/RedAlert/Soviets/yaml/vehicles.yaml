@@ -1372,6 +1372,7 @@ ra1_soviets_nukedemotruck:
 	Armament@PRIMARY:
 		Weapon: DemoTruckTargeting
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: Defend
 		InitialStanceAI: AttackAnything
 		ScanRadius: 10
@@ -1434,6 +1435,7 @@ ra1_soviets_madtank:
 		Weapon: MADTankTargeting
 	-RenderRangeCircle:
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: HoldFire
 		InitialStanceAI: AttackAnything
 		ScanRadius: 10

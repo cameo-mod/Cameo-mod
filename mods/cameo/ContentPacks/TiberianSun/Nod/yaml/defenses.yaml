@@ -232,6 +232,7 @@ ts_nod_laserturret:
 		ShowShadow: false
 		RequiresCondition: !build-incomplete
 	AutoTarget:
+		DynamicWeaponPriority: true
 	DetectCloaked:
 		Range: 3c0
 	-WithVoxelBody:

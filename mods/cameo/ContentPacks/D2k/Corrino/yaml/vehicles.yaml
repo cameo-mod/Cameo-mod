@@ -143,6 +143,7 @@ corrino_buggy:
 		Weapon: D2KUnitExplodeMed
 		EmptyWeapon: D2KUnitExplodeMed
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStanceAI: Defend
 	Voiced:
 		VoiceSet: D2KVehicleVoice
@@ -200,6 +201,7 @@ corrino_bmp:
 		Weapon: D2KUnitExplodeMed
 		EmptyWeapon: D2KUnitExplodeMed
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStanceAI: Defend
 	Voiced:
 		VoiceSet: D2KVehicleVoice
@@ -281,6 +283,7 @@ corrino_missiletank:
 	AttackFrontal:
 		FacingTolerance: 0
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStanceAI: Defend
 	FireWarheadsOnDeath:
 		Weapon: D2KUnitExplodeMed

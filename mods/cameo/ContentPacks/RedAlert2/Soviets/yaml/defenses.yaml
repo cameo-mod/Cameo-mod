@@ -260,6 +260,7 @@ ra2_soviets_sentrygun:
 	WithVoxelTurret:
 		RequiresCondition: !build-incomplete
 	AutoTarget:
+		DynamicWeaponPriority: true
 	-WithVoxelBody:
 	-Cloak@TDcloak:
 	Power:
@@ -311,6 +312,7 @@ ra2_soviets_flakcannon:
 		RequiresCondition: !build-incomplete
 	WithMuzzleOverlay:
 	AutoTarget:
+		DynamicWeaponPriority: true
 	-WithVoxelBody:
 	-Cloak@TDcloak:
 	Power:

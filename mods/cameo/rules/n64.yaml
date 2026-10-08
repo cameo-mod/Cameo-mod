@@ -1668,6 +1668,7 @@ N64E1GDI:
 	Health:
 		HP: 5000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: M16
@@ -1702,6 +1703,7 @@ N64E1NOD:
 	Health:
 		HP: 5000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: M16
@@ -1735,6 +1737,7 @@ N64E2:
 	Health:
 		HP: 5000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament:
 		Weapon: Grenade
@@ -1776,6 +1779,7 @@ N64E3GDI:
 	Health:
 		HP: 4500
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 6
 	Armament@PRIMARY:
 		Weapon: Rockets
@@ -1811,6 +1815,7 @@ N64E3NOD:
 	Health:
 		HP: 4500
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 6
 	Armament@PRIMARY:
 		Weapon: Rockets
@@ -1845,6 +1850,7 @@ N64E4:
 	Health:
 		HP: 9000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament:
 		Weapon: Flamethrower
@@ -2236,6 +2242,7 @@ N64ARTY:
 		FacingTolerance: 0
 	WithMuzzleOverlay:
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStanceAI: Defend
 	#SpawnActorOnDeath:
 	#	Actor: ARTY.Husk
@@ -2292,6 +2299,7 @@ N64STNK:
 	AttackFrontal:
 		FacingTolerance: 0
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: HoldFire
 		InitialStanceAI: ReturnFire
 	#SpawnActorOnDeath:
@@ -2755,6 +2763,7 @@ N64ORCA:
 		LocalOffset: 427,-171,-213, 427,171,-213
 		PauseOnCondition: !ammo
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 5
 	AttackAircraft:
 		FacingTolerance: 80
@@ -2815,6 +2824,7 @@ N64HELI:
 		MuzzleSequence: muzzle
 		PauseOnCondition: !ammo
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	AttackAircraft:
 		FacingTolerance: 80

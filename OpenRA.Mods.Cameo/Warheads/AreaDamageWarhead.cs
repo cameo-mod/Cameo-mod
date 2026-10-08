@@ -460,6 +460,10 @@ namespace OpenRA.Mods.Cameo.Warheads
 			"ARMOR",
 		};
 
+		// Match the effective Heaviness table, class-armor combination and plating layer.
+		public override WeaponTargetScore TargetingVersus(Actor victim, HitShape shape) =>
+			new(VersusFrom(effectiveVersus, victim, shape), 1);
+
 		protected override int DamageVersus(Actor victim, HitShape shape, WarheadArgs args)
 		{
 			return VersusFrom(effectiveVersus, victim, shape);

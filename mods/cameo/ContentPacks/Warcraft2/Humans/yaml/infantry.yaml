@@ -753,6 +753,7 @@ wc2_humans_highelfpriest:
 	AutoTargetPriority@ATTACKANYTHING:
 		RequiresCondition: (stance-attackanything || assault-move) && !FSD_cond_2
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 7
 	Armament:
 		Weapon: wc2mageFire
@@ -868,6 +869,7 @@ wc2_humans_highelfsorceress:
 	AutoTargetPriority@ATTACKANYTHING:
 		RequiresCondition: (stance-attackanything || assault-move) && !FSD_cond_2
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 7
 	Armament:
 		Weapon: wc2mageFire

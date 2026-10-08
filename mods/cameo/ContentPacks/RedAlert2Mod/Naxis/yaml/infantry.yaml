@@ -519,6 +519,7 @@ naxis_slaveoverseer:
 	AttackFrontal:
 		FacingTolerance: 0
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 	Voiced:
 		VoiceSet: NaxiFemVoice
@@ -569,6 +570,7 @@ naxis_slave:
 	AttackFrontal:
 		FacingTolerance: 2
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 10
 		RequiresCondition: freed
 	Voiced:
@@ -753,8 +755,6 @@ naxis_naximachinegunners:
 		Name: garrisoned
 		Weapon: NaxiWW2Machinegunner_elite
 		RequiresCondition: rank-elite
-	AttackTurreted:
-		Voice: Attack
 	Turreted:
 		Turret: deploy
 		RealignDelay: -1
@@ -823,6 +823,12 @@ naxis_naximachinegunners:
 		Type: Steel
 		RequiresCondition: !shielded && deployed
 
+	-AttackTurreted:
+	AttackMultiTurreted:
+		Armaments: deployed, dummy
+		Turrets: deploy, dummy
+		Voice: Attack
+
 naxis_portableflak:
 	Inherits: ^Soldier
 	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
@@ -883,8 +889,6 @@ naxis_portableflak:
 		Name: garrisoned
 		Weapon: PortableFlak_elite
 		RequiresCondition: rank-elite
-	AttackTurreted:
-		Voice: Attack
 	Turreted:
 		Turret: deploy
 		RealignDelay: -1
@@ -953,6 +957,12 @@ naxis_portableflak:
 	Armor@deployed:
 		Type: Steel
 		RequiresCondition: !shielded && deployed
+
+	-AttackTurreted:
+	AttackMultiTurreted:
+		Armaments: deployed, dummy
+		Turrets: deploy, dummy
+		Voice: Attack
 
 naxis_undead:
 	Inherits: ^Soldier

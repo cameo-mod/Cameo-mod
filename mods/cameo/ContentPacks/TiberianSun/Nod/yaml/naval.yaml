@@ -130,8 +130,6 @@ ts_nod_cruiser:
 		RecoilRecovery: 35
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-	AttackTurreted:
-		Turrets: primary, secondary, tercera, cuarta, quinta
 	WithMuzzleOverlay:
 	WithSpriteTurret:
 	Selectable:
@@ -153,6 +151,11 @@ ts_nod_cruiser:
 	RenderSprites:
 		Image: ts_nod_cruiser
 		PlayerPalette: player_rgba
+
+	-AttackTurreted:
+	AttackMultiTurreted:
+		PauseOnCondition: disabled || blinded
+		Turrets: primary, secondary, tercera, cuarta, quinta
 
 ts_nod_rayboat:
 	Inherits: ^BoatUnit
