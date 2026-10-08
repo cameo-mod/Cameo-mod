@@ -1,3 +1,28 @@
+# 2026-10-08 — Devin-Architect: Phase-A comparator — Sol review hardening
+
+*Devin-Architect.* Sol's review of `08f8fc770` found two fail-closed gaps,
+both landed tools-only:
+
+- **Non-positive `order_latency` rejected** (`INVALID_ORDER_LATENCY`,
+  exit 2): `run()` validates before extraction — `bool`, non-`int`, and
+  `<= 0` are refused because `L<=0` collapses `B = F_term + L` at/below
+  the terminal frame and can fabricate a bounded PASS over real
+  divergence (Sol demonstrated L=0 → PASS B=50, L=-50 → PASS B=0 on a
+  divergent fixture). CLI `--order-latency` gets a `positive_int`
+  argparse type → exit 2 at parse.
+- **Multi-sync-client topology validated** (`UNSUPPORTED_TOPOLOGY`,
+  exit 5): F3 is now enforced, not just documented — SYNCHASH records
+  from >1 distinct client id are rejected per side; per-frame coverage
+  is only defined for single-client streams.
+- `main()` non-JSON print guarded against early-return verdicts lacking
+  `a_boundary`.
+
+Tests: bounded suite 32/32 (+latency e2e over 0/-50/True/False/1.5/'1',
++CLI argparse exits 2, +multi-sync-client fixture); combined 78/78.
+Re-verified 6/6 wave-5 pairs `IDENTICAL_OUTCOME_BOUNDED_TAIL` —
+real captures are single-client-sync. Sol's semantic approval remains
+pending; this commit is the candidate.
+
 # 2026-10-08 — Devin-Architect: Phase-A comparator review fixes F1–F4
 
 *Devin-Architect.* Integrator's conditional semantic review of

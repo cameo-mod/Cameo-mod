@@ -361,6 +361,41 @@ def test_b_persisted_exact(mapdir, tmp_path):
     assert res['B'] == 80
 
 
+# ---------- input validation (Sol review of 08f8fc770) ----------
+
+def test_invalid_order_latency_rejected(mapdir, tmp_path):
+    # L<=0 collapses B = F_term + L at/below the terminal frame and can
+    # fabricate a bounded PASS over real divergence — reject before
+    # extraction. bool is an int subclass and must not slip through.
+    pa, pb = tmp_path / 'a.orarep', tmp_path / 'b.orarep'
+    write_replay(pa, base_stream(50, 0x14))
+    write_replay(pb, base_stream(50, 0x14))
+    for bad in (0, -50, True, False, 1.5, '1'):
+        res, code = osdb.run(str(pa), str(pb), mapdir, bad)
+        assert code == 2
+        assert res['verdict'] == 'INVALID_ORDER_LATENCY', bad
+
+
+def test_cli_rejects_nonpositive_latency(mapdir, tmp_path):
+    pa, pb = tmp_path / 'a.orarep', tmp_path / 'b.orarep'
+    write_replay(pa, base_stream(50, 0x14))
+    write_replay(pb, base_stream(50, 0x14))
+    for bad in ('0', '-3', 'x'):
+        with pytest.raises(SystemExit) as e:
+            osdb.main([str(pa), str(pb), '--map', mapdir,
+                       '--order-latency', bad])
+        assert e.value.code == 2
+
+
+def test_multi_sync_client_topology_rejected(mapdir, tmp_path):
+    # Per-frame coverage is single-client scope: a second sync-emitting
+    # client is an unsupported topology — validate, don't just document.
+    a = base_stream(50, 0x14) + [(3, sync_pkt(51, 0x14))]
+    res, code = run_pair(base_stream(50, 0x14), a, mapdir, tmp_path)
+    assert code == 5 and res['verdict'] == 'UNSUPPORTED_TOPOLOGY'
+    assert 'multiple clients' in res['detail']
+
+
 # ---------- roster projection ----------
 
 def test_map_side_bot_roster_projection(mapdir):

@@ -359,6 +359,17 @@ def sync_coverage_ok(recs, bound):
 
 
 def run(rep_a, rep_b, map_path, order_latency):
+    # L must be a positive int BEFORE any extraction: L<=0 collapses
+    # B = F_term + L at/below the terminal frame and can fabricate a
+    # bounded PASS over real divergence (Sol review 08f8fc770). bool is
+    # an int subclass — reject it explicitly.
+    if isinstance(order_latency, bool) or not isinstance(
+            order_latency, int) or order_latency <= 0:
+        return ({'a': str(rep_a), 'b': str(rep_b),
+                 'order_latency': str(order_latency),
+                 'verdict': 'INVALID_ORDER_LATENCY',
+                 'detail': f'order_latency must be a positive int, got '
+                           f'{order_latency!r}'}, 2)
     # server_type label is honest about provenance: L==1 matches the
     # Local-server default (Server.cs:136-137); any other L is a caller
     # assertion the wire format cannot independently verify (review F2).
@@ -394,6 +405,19 @@ def run(rep_a, rep_b, map_path, order_latency):
         return finish('INCOMPLETE_CAPTURE', 'truncated or unterminated stream', 4)
     if any(s['n_records'] == 0 for s in sides.values()):
         return finish('INCOMPLETE_CAPTURE', 'zero gameplay records', 4)
+    # F3 enforced, not just documented: per-frame sync coverage is only
+    # defined when ONE client emits SYNCHASH (single-client streams — the
+    # server broadcasts one sync per frame to the recording connection).
+    # A second sync-emitting client is an unsupported topology: coverage
+    # would need per-client semantics the comparator does not define.
+    for t in ('a', 'b'):
+        sync_clients = sorted({r[0] for r in sides[t]['recs']
+                               if r[-2] == 'SYNCHASH'})
+        if len(sync_clients) > 1:
+            return finish('UNSUPPORTED_TOPOLOGY',
+                          f'side {t}: SYNCHASH from multiple clients '
+                          f'{sync_clients} — multi-client sync streams '
+                          f'are out of scope (single-client harness)', 5)
     if any(s['trailer'] is None for s in sides.values()):
         return finish('INCOMPLETE_CAPTURE', 'missing/malformed metadata trailer', 4)
     if any(s['trailer']['final_game_tick'] <= 0 for s in sides.values()):
@@ -469,13 +493,24 @@ def run(rep_a, rep_b, map_path, order_latency):
                                '(no post-boundary extras)', 0)
 
 
+def _positive_int(s):
+    try:
+        v = int(s)
+    except ValueError:
+        raise argparse.ArgumentTypeError(f'not an int: {s!r}')
+    if v <= 0:
+        raise argparse.ArgumentTypeError(
+            f'order latency must be a positive int, got {v}')
+    return v
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument('replay_a')
     ap.add_argument('replay_b')
     ap.add_argument('--map', required=True,
                     help='map roster source: variant map dir or .oramap')
-    ap.add_argument('--order-latency', type=int, default=1,
+    ap.add_argument('--order-latency', type=_positive_int, default=1,
                     help='session OrderLatency (Launch.Map Local server = 1)')
     ap.add_argument('--json', action='store_true')
     args = ap.parse_args(argv)
@@ -485,8 +520,9 @@ def main(argv=None):
         print(json.dumps(res, indent=2, default=str))
     else:
         print(f"{res['verdict']}: {res['detail']}")
-        mt = res['a_boundary']['m_term']
-        print(f"  B={res.get('B')} F_term={res['a_boundary']['f_term']} "
+        bound = res.get('a_boundary') or {}
+        mt = bound.get('m_term')
+        print(f"  B={res.get('B')} F_term={bound.get('f_term')} "
               f"M_term={'-' if mt is None else hex(mt)} "
               f"L={res['order_latency']}")
     return code
