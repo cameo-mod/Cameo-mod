@@ -13,6 +13,16 @@ last frame, gated by nonempty identical match records (diagnostic gate, never
 proof). Any ORDER/DISCONNECT/UNPARSED/interior/two-sided record stays
 DIVERGENT — tail orders are unprovable and are never reclassified.
 
+v4 (Devin-Architect): second-layer Phase-A bounded verdict per pair via
+tools/ai/order_stream_diff_bounded.py resolved BESIDE this scheduler file
+(NOT inside the frozen WORKTREE — the bounded tool is post-freeze tooling;
+the pin covers capture evidence only). Persisted as <pair>.bounded.{stdout,
+stderr,payload.json} under RUN_RESULTS/comparator and attached as
+c["bounded"] — ADDITIVE reporting only: the strict comparator remains the
+mechanical PASS gate; bounded acceptance (IDENTICAL_OUTCOME_BOUNDED_TAIL /
+IDENTICAL) awaits dev/Sol/Luna sign-off and coordinator promotion. Tool
+sha256 recorded per call for provenance.
+
 Frozen spec (coordinator 2026-10-08):
 - Frozen heads: engine devin/bot-determinism-8c2b@0a3f77dbe1a90bc59ff3ef5ad81534e8fbcf7695
   (foundation 8c2b385f82 + RNG pick); mod devin/bot-determinism@a9349d015619c5625cc188142ad72c10b391a16e.
@@ -340,6 +350,86 @@ def cell_dir_for(seed, map_path, repeat):
             / f"s{seed}-{Path(map_path).name}-r{repeat}")
 
 
+BOUNDED_PASS = {"IDENTICAL", "IDENTICAL_OUTCOME_BOUNDED_TAIL"}
+
+
+def _variant_map_dir(cell_dir):
+    """The cell's --keep-variants map tree: first dir under
+    <cell>/maps/**/ containing map.yaml (roster source for the boundary
+    comparator)."""
+    maps = Path(cell_dir) / "maps"
+    if not maps.is_dir():
+        return None
+    for f in sorted(maps.rglob("map.yaml")):
+        return str(f.parent)
+    return None
+
+
+def bounded_compare(rep_a, rep_b, cell_tag, map_dir):
+    """Phase-A outcome-bounded comparator (order_stream_diff_bounded.py) —
+    SECOND LAYER, additive only. The strict comparator verdict remains the
+    mechanical gate; the bounded verdict is recorded per pair for review
+    and retro-adjudication and does not itself flip acceptance until the
+    coordinator promotes it after dev/Sol/Luna sign-off."""
+    pair_dir = RUN_RESULTS / "comparator"
+    pair_dir.mkdir(parents=True, exist_ok=True)
+    stem = re.sub(r"[^A-Za-z0-9_.-]+", "_", cell_tag)
+    # The bounded tool is NEW post-freeze tooling — resolve it beside this
+    # scheduler file, not inside the frozen WORKTREE (which pins a9349d015
+    # for capture evidence only).
+    tool = Path(__file__).resolve().parent / "order_stream_diff_bounded.py"
+    import hashlib
+    tool_sha = hashlib.sha256(tool.read_bytes()).hexdigest() \
+        if tool.is_file() else "MISSING"
+    out = {"tool_sha256": tool_sha, "map": map_dir}
+    if map_dir is None:
+        out.update(verdict="BOUNDED_NO_MAP", exit=None)
+        return out
+    if not tool.is_file():
+        out.update(verdict="BOUNDED_TOOL_MISSING", exit=None)
+        return out
+    try:
+        p = subprocess.run(
+            [sys.executable, str(tool),
+             rep_a, rep_b, "--map", map_dir, "--json"],
+            cwd=str(WORKTREE), capture_output=True, text=True, timeout=120)
+    except (subprocess.TimeoutExpired, OSError) as e:
+        (pair_dir / f"{stem}.bounded.exception.txt").write_text(repr(e))
+        out.update(verdict="BOUNDED_TOOL_ERROR", exit=None)
+        return out
+    (pair_dir / f"{stem}.bounded.stdout.txt").write_text(
+        p.stdout, errors="replace")
+    (pair_dir / f"{stem}.bounded.stderr.txt").write_text(
+        p.stderr, errors="replace")
+    payload = None
+    try:
+        candidate = json.loads(p.stdout)
+        if isinstance(candidate, dict) and "verdict" in candidate:
+            payload = candidate
+    except json.JSONDecodeError:
+        for l in p.stdout.strip().splitlines():
+            try:
+                candidate = json.loads(l)
+                if isinstance(candidate, dict) and "verdict" in candidate:
+                    payload = candidate
+            except json.JSONDecodeError:
+                continue
+    if payload is None:
+        out.update(verdict="BOUNDED_MALFORMED", exit=p.returncode)
+        return out
+    (pair_dir / f"{stem}.bounded.payload.json").write_text(
+        json.dumps(payload, indent=2, sort_keys=True))
+    out.update(verdict=payload["verdict"], exit=p.returncode,
+               B=payload.get("B"),
+               f_term=(payload.get("a_boundary") or {}).get("f_term"),
+               m_term=(payload.get("a_boundary") or {}).get("m_term"),
+               tail_extras=payload.get("tail_extras"),
+               ok=p.returncode == 0 and payload["verdict"] in BOUNDED_PASS,
+               artifacts={"stdout": str(pair_dir / f"{stem}.bounded.stdout.txt"),
+                          "payload": str(pair_dir / f"{stem}.bounded.payload.json")})
+    return out
+
+
 VOLATILE_MATCH_KEYS = {"record_id", "recorded_utc", "game_uid"}
 
 
@@ -490,6 +580,16 @@ def main_locked():
                 break
             c = compare(pair[0]["replay"], pair[1]["replay"],
                         f"s{s}-{Path(m).name}")
+            # Phase-A second layer (additive): bounded verdict recorded
+            # alongside the strict gate — acceptance promotion pending
+            # dev/Sol/Luna sign-off per coordinator sequencing.
+            c["bounded"] = bounded_compare(
+                pair[0]["replay"], pair[1]["replay"],
+                f"s{s}-{Path(m).name}",
+                _variant_map_dir(cell_dir_for(s, m, REPEATS[0])))
+            print(f"[pair s{s}-{Path(m).name}] bounded: "
+                  f"{c['bounded']['verdict']} (B={c['bounded'].get('B')})",
+                  flush=True)
             if not c["ok"]:
                 if c["exit"] == 1:
                     # Comparator ran clean and claims in-window divergence —

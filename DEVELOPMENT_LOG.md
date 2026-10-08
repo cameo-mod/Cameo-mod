@@ -50,9 +50,18 @@ pregame permutation acceptance, heartbeat exclusion vs real-order
 pregame divergence, cross-client same-frame interleave acceptance,
 intra-packet + same-client order-swap divergence, interior extras,
 post-B tails, F_term/M_term mismatch, missing boundary, mask/roster
-mismatch incl. bidirectional Lost-bit check, contiguity-through-B,
+mismatch incl. one-directional mask→trailer check, contiguity-through-B,
 missing/malformed trailer, exact-B persistence (L=1 and L=3), roster
 projection incl. .oramap zip, and the frozen-comparator byte pin.
+
+**Scheduler v4 wiring** (`wave1_scheduler.py`): `bounded_compare()` runs
+the Phase-A tool per completed pair as a SECOND layer — additive only;
+the strict comparator remains the mechanical gate until coordinator
+promotes bounded acceptance post-sign-off. The tool resolves beside the
+scheduler file (NOT the frozen WORKTREE — post-freeze tooling), artifacts
+persist as `<pair>.bounded.*`, tool sha256 recorded per call. Suite
+`test_wave1_adjudication.py` now 23 tests (+3 plumbing: map discovery,
+no-map handling, end-to-end subprocess).
 
 # 2026-10-08 — Devin-Architect: wave-1 scheduler v3 — fail-closed evidence adjudication
 

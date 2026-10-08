@@ -263,3 +263,79 @@ def test_nonproof_verdict_fails():
 def test_non_dict_payload_fails():
     assert ws.payload_is_proof("IDENTICAL", A, B) is False
     assert ws.payload_is_proof(None, A, B) is False
+
+
+# --- v4 bounded second layer (Phase-A comparator wiring) ---
+# Plumbing only: verdict propagation, artifact persistence, map discovery.
+# The bounded comparator itself is covered by test_order_stream_diff_bounded.
+
+def sync13_pkt(frame, mask):
+    return struct.pack('<i', frame) + b'\x65' + struct.pack('<i', 1) + \
+        struct.pack('<Q', mask)
+
+
+BOUNDED_TRAILER = (
+    'Root:\n\tFinalGameTick: 100\n'
+    'Player@0:\n\tClientIndex: 0\n\tName: H\n\tOutcome: Lost\n')
+
+BOUNDED_MAP = ('Players:\n'
+               '\tPlayerReference@Neutral:\n\t\tNonCombatant: True\n'
+               '\tPlayerReference@BotA:\n\t\tPlayable: False\n\t\tBot: hard\n'
+               '\tPlayerReference@BotB:\n\t\tPlayable: False\n\t\tBot: hard\n'
+               '\tPlayerReference@Ref:\n\t\tPlayable: True\n'
+               '\t\tNonCombatant: True\n')
+
+
+def write_replay_trailer(path, records):
+    data = b''
+    for pkt in records:
+        data += struct.pack('<ii', 0, len(pkt)) + pkt
+    yaml = BOUNDED_TRAILER.encode()
+    data += struct.pack('<iii', -1, 1, len(yaml)) + yaml
+    data += struct.pack('<ii', len(yaml) + 4, -2)
+    path.write_bytes(data)
+
+
+def bounded_stream(f_term=20):
+    recs = [sync13_pkt(f, 0) for f in range(1, f_term)]
+    recs += [sync13_pkt(f_term, 0x0C),      # bots at world idx 1,2 -> 0b1100
+             sync13_pkt(f_term + 1, 0x0C)]  # boundary sync at B
+    return recs
+
+
+def test_variant_map_dir_discovery(tmp_path):
+    cell = tmp_path / 'cell'
+    md = cell / 'maps' / 'cameo' / '{DEV_VERSION}' / 'variant'
+    md.mkdir(parents=True)
+    (md / 'map.yaml').write_text('x')
+    (cell / 'maps' / 'zzz').mkdir()
+    assert ws._variant_map_dir(cell) == str(md)
+
+
+def test_bounded_compare_no_map(tmp_path, monkeypatch):
+    monkeypatch.setattr(ws, 'RUN_RESULTS', tmp_path / 'res')
+    out = ws.bounded_compare('a', 'b', 'pair1', None)
+    assert out['verdict'] == 'BOUNDED_NO_MAP'
+
+
+def test_bounded_compare_end_to_end(tmp_path, monkeypatch):
+    # Requires the bounded tool beside the scheduler file.
+    tool = pathlib.Path(ws.__file__).parent / 'order_stream_diff_bounded.py'
+    if not tool.is_file():
+        import pytest
+        pytest.skip('bounded comparator not staged beside scheduler')
+    monkeypatch.setattr(ws, 'RUN_RESULTS', tmp_path / 'res')
+    monkeypatch.setattr(ws, 'WORKTREE', tmp_path)
+    pa, pb = tmp_path / 'a.orarep', tmp_path / 'b.orarep'
+    write_replay_trailer(pa, bounded_stream() + [sync13_pkt(30, 0x0C)])
+    write_replay_trailer(pb, bounded_stream())
+    md = tmp_path / 'mymap'
+    md.mkdir()
+    (md / 'map.yaml').write_text(BOUNDED_MAP)
+    out = ws.bounded_compare(str(pa), str(pb), 'p1', str(md))
+    assert out['exit'] == 0
+    assert out['verdict'] == 'IDENTICAL_OUTCOME_BOUNDED_TAIL'
+    assert out['ok'] is True and out['B'] == 21
+    assert out['tool_sha256'] != 'MISSING'
+    assert pathlib.Path(
+        out['artifacts']['payload']).is_file()
