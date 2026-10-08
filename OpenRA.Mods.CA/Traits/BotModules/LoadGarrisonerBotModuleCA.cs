@@ -47,6 +47,13 @@ namespace OpenRA.Mods.CA.Traits
 
 	public class LoadGarrisonerBotModuleCA : ConditionalTrait<LoadGarrisonerBotModuleCAInfo>, IBotTick
 	{
+		// AR-9 (§19.6): the loader holds a BotLeasePurpose.Garrison claim on every walking
+		// garrisoner — an idle infantry unit is squad-draftable, so without the claim a squad
+		// could draft a unit already marching to a garrison. Renewed each scan, released when
+		// the unit boards, goes stuck or is lost, and all released on TraitDisabled. Under
+		// classicbot the registry is absent and every helper is a no-op — bit-identical.
+		const string LeaseOwner = nameof(LoadGarrisonerBotModuleCA);
+
 		readonly World world;
 		readonly Player player;
 		readonly Predicate<Actor> unitCannotBeOrdered;
@@ -79,13 +86,37 @@ namespace OpenRA.Mods.CA.Traits
 			minAssignRoleDelayTicks = world.LocalRandom.Next(0, Info.ScanTick);
 		}
 
+		protected override void TraitDisabled(Actor self)
+		{
+			var leases = BotUnitLeases.Of(player);
+			foreach (var g in activeGarrisoner)
+				leases?.Release(g.Actor, LeaseOwner);
+
+			activeGarrisoner.Clear();
+			stuckGarrisoner.Clear();
+		}
+
+		public static int LeaseHeartbeatTicks(int scanTick) => Math.Max(200, scanTick * 4);
+
 		void IBotTick.BotTick(IBot bot)
 		{
 			if (--minAssignRoleDelayTicks <= 0)
 			{
 				minAssignRoleDelayTicks = Info.ScanTick;
 
-				activeGarrisoner.RemoveAll(u => unitCannotBeOrderedOrIsIdle(u.Actor));
+				var leases = BotUnitLeases.Of(player);
+
+				// Heartbeat: a garrisoner that is still ours renews its lease; one that boarded (idle
+				// again), is gone or whose renewal lost the claim is released and dropped.
+				activeGarrisoner.RemoveAll(u =>
+				{
+					var lost = unitCannotBeOrderedOrIsIdle(u.Actor)
+						|| !BotUnitLeases.TryClaim(leases, u.Actor, LeaseOwner, BotLeasePurpose.Garrison, LeaseHeartbeatTicks(Info.ScanTick));
+					if (lost)
+						leases?.Release(u.Actor, LeaseOwner);
+
+					return lost;
+				});
 				foreach (var a in stuckGarrisoner.Keys.Where(a => unitCannotBeOrdered(a) || stuckGarrisoner[a] <= world.WorldTick).ToList())
 					stuckGarrisoner.Remove(a);
 				for (var i = 0; i < activeGarrisoner.Count; i++)
@@ -96,7 +127,10 @@ namespace OpenRA.Mods.CA.Traits
 						&& p.Actor.CenterPosition == p.WPos)
 					{
 						stuckGarrisoner[p.Actor] = world.WorldTick + StuckExpiryTicks;
+
+						// Order before release (GC-1 convention): the Stop is ours while the lease is held.
 						bot.QueueOrder(new Order("Stop", p.Actor, false));
+						leases?.Release(p.Actor, LeaseOwner);
 						activeGarrisoner.RemoveAt(i);
 						i--;
 					}
@@ -123,6 +157,7 @@ namespace OpenRA.Mods.CA.Traits
 				var garrisoner = world.ActorsWithTrait<Garrisoner>().Where(at => !unitCannotBeOrderedOrIsBusy(at.Actor)
 					&& (Info.GarrisonerUnit == null || Info.GarrisonerUnit.Contains(at.Actor.Info.Name))
 					&& !stuckGarrisoner.ContainsKey(at.Actor)
+					&& !BotUnitLeases.IsClaimedByOther(leases, at.Actor, LeaseOwner)
 					&& garrisonable.HasSpace(at.Trait.Info.Weight))
 						.OrderBy(at => (at.Actor.CenterPosition - transport.CenterPosition).HorizontalLengthSquared);
 
@@ -136,6 +171,10 @@ namespace OpenRA.Mods.CA.Traits
 
 					if (garrisonable.HasSpace(spaceTaken + g.Trait.Info.Weight))
 					{
+						// §19.6: claim before ordering — a garrisoner another module just took stays theirs.
+						if (!BotUnitLeases.TryClaim(leases, g.Actor, LeaseOwner, BotLeasePurpose.Garrison, LeaseHeartbeatTicks(Info.ScanTick)))
+							continue;
+
 						spaceTaken += g.Trait.Info.Weight;
 						orderedActors.Add(g.Actor);
 						activeGarrisoner.Add(new UnitWposWrapper(g.Actor));

@@ -197,8 +197,6 @@ nax_bitsmark:
 		RecoilRecovery: 35
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-	AttackTurreted:
-		Turrets: primary, secondary, tercera, cuarta
 	WithMuzzleOverlay:
 	WithSpriteTurret:
 	Selectable:
@@ -222,3 +220,7 @@ nax_bitsmark:
 ####################################################################################################
 #		Wolfestein
 #		Metal Slug
+	-AttackTurreted:
+	AttackMultiTurreted:
+		PauseOnCondition: disabled || blinded
+		Turrets: primary, secondary, tercera, cuarta

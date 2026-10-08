@@ -336,7 +336,7 @@ namespace OpenRA.Mods.Cameo.Traits
 			var ownRefineries = builder?.RefineryBuildings.Actors.Where(a => !a.IsDead).ToList() ?? new List<Actor>();
 			var refineryCells = ownRefineries.Select(a => a.Location).ToList();
 			var refineryTiles = ownRefineries
-				.Select(a => (IReadOnlyCollection<CPos>)a.Info.TraitInfoOrDefault<BuildingInfo>()?.Tiles(a.Location).ToList())
+				.Select(a => (IReadOnlyCollection<CPos>)a.Info.TraitInfos<BuildingInfo>().FirstOrDefault()?.Tiles(a.Location).ToList())
 				.ToList();
 			var refineryFields = ExpansionPlannerBotModule.RefineryFlushFields(refineryTiles, ActiveFieldCellsById);
 			var assigned = ExpansionPlannerBotModule.AssignRefineries(active, refineryCells, ExpansionMath.AnchorRadiusCells,
@@ -365,7 +365,7 @@ namespace OpenRA.Mods.Cameo.Traits
 				{
 					// The buildable frontier is the building's footprint tiles (BuildingInfluence registers tiles
 					// and IsCloseEnoughToBase measures against them) — not the single top-left cell.
-					if (b.Info.TraitInfoOrDefault<BuildingInfo>() is BuildingInfo bbi)
+					if (b.Info.TraitInfos<BuildingInfo>().FirstOrDefault() is { } bbi)
 						buildableArea.AddRange(bbi.Tiles(b.Location));
 					else
 						buildableArea.Add(b.Location);
@@ -374,7 +374,7 @@ namespace OpenRA.Mods.Cameo.Traits
 				if (b.Info.HasTraitInfo<RefineryInfo>())
 				{
 					refineries.Add(b.Location);
-					refineryTiles.Add(b.Info.TraitInfoOrDefault<BuildingInfo>()?.Tiles(b.Location).ToList());
+					refineryTiles.Add(b.Info.TraitInfos<BuildingInfo>().FirstOrDefault()?.Tiles(b.Location).ToList());
 				}
 
 				if (b.Info.HasTraitInfo<BaseBuildingInfo>())

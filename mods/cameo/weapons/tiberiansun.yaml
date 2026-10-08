@@ -38,6 +38,8 @@
 
 ^Projectile_TS_Missile_Medium:
 	Projectile: Missile
+		RangeLimitPercent: 150
+		CloseEnoughFromSpeed: true
 		Arm: 0
 		Blockable: false
 		AllowSnapping: true
@@ -57,14 +59,14 @@
 		MaximumLaunchSpeed: 543
 		MinimumLaunchSpeed: 301
 		Speed: 400
-		CloseEnough: 200
 		Acceleration: 3
 		HomingActivationDelay: 2
-		RangeLimit: 15360
 		PointDefenseTypes: Missile
 
 ^Projectile_TS_Missile_Heavy:
 	Projectile: Missile
+		RangeLimitPercent: 150
+		CloseEnoughFromSpeed: true
 		Arm: 0
 		Blockable: false
 		AllowSnapping: true
@@ -84,10 +86,8 @@
 		MaximumLaunchSpeed: 213
 		MinimumLaunchSpeed: 301
 		Speed: 400
-		CloseEnough: 200
 		Acceleration: 3
 		HomingActivationDelay: 2
-		RangeLimit: 15360
 		PointDefenseTypes: Missile
 
 ^TSCannon:
@@ -933,7 +933,6 @@ TSGrenadeAA:
 		MaximumLaunchAngle: 60
 		Inaccuracy: 0
 		Image: BOMB
-		RangeLimit: 9c0
 		Palette: effect
 		Jammable: false
 	Warhead@ShieldHit: GrantExternalCondition
@@ -1992,7 +1991,6 @@ TSReaperTusk:
 		MaximumLaunchAngle: 88
 		MinimumLaunchSpeed: 111
 		MaximumLaunchSpeed: 222
-		RangeLimit: 25c0
 		Acceleration: 33
 		Speed: 333
 		HorizontalRateOfTurn: 33
@@ -2025,7 +2023,8 @@ TSReaperTusk:
 		ValidTargets: Ground
 
 TSAegisMissile:
-	Inherits@roleflat: ^Warhead_MissileAA_Medium_Flat
+	Inherits@roleflat: ^Warhead_MissileAA_Medium
+	Inherits@projectileaa: ^Projectile_Missile_AA
 	Inherits: ^TSDefaultMissile
 	ValidTargets: Air
 	Burst: 2
@@ -2033,7 +2032,6 @@ TSAegisMissile:
 	Report: vaegatta.wav, vaegattb.wav
 	Projectile: Missile
 		VerticalRateOfTurn: 20
-		RangeLimit: 18c0
 	-Warhead@MediumMissile:
 	-Warhead@LightMissile:
 	Warhead@MediumMissilePercentage:
@@ -2047,8 +2045,107 @@ TSAegisMissile:
 		FriendlyFireDamage: 100
 		FriendlyFireSpread: 100
 
+
+	Projectile: Missile
+		Inaccuracy: 50
+		Image: DRAGON
+		HorizontalRateOfTurn: 40
+		ContrailLength: 0
+		MaximumLaunchSpeed: 300
+		MinimumLaunchSpeed: 300
+		Speed: 600
+		Acceleration: 4
+		HomingActivationDelay: 1
+
+
+	-Warhead@MissileAA_Medium:
+	-Warhead@MissileAA_Medium_Flat:
+	Warhead@MissileAA_Medium: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 100
+		FriendlyFireSpread: 100
+		ValidTargets: Air
+		Spread: 300
+		Damage: 25000
+		Falloff: 100, 70, 30, 0
+		Versus
+			HAZMAT: 87
+			COMPOSITE: 67
+			BLAST: 56
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 151
+			Spaceship: 191
+			Helicopter: 177
+			Bomber: 147
+			Superheavy: 144
+			Heavy: 139
+			Fighter: 133
+			Medium: 116
+			Light: 115
+			Concrete: 83
+			Scout: 76
+			Plate: 65
+			Steel: 56
+			Wood: 54
+			Flak: 44
+			None: 33
+			Heroic: 26
+			CyborgLight: 62
+			CyborgMedium: 71
+			CyborgHeavy: 95
+			CyborgHeroic: 61
+			AntiAirInfantry: 38
+			AntiAirVehicle: 115
+			AntiAirBuilding: 68
+			ShipLight: 79
+			ShipMedium: 98
+			ShipHeavy: 88
+			ShipSuperheavy: 90
+			AntiAirShip: 88
+			FlyingInfantry: 84
+			SubmarineLight: 117
+			SubmarineHeavy: 113
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 0
+		PercentageSpread: 50
+		PercentageVersus
+			Shield: 25
+			Spaceship: 20
+			Helicopter: 19
+			Bomber: 18
+			Fighter: 17
+			Superheavy: 16
+			Heavy: 15
+			Medium: 14
+			Light: 13
+			Scout: 12
+			Concrete: 11
+			Steel: 10
+			Wood: 9
+			Heroic: 8
+			Plate: 7
+			Flak: 6
+			None: 5
+			CyborgLight: 8
+			CyborgMedium: 9
+			CyborgHeavy: 10
+			CyborgHeroic: 11
+			AntiAirInfantry: 5
+			AntiAirVehicle: 13
+			AntiAirBuilding: 10
+			ShipLight: 11
+			ShipMedium: 12
+			ShipHeavy: 12
+			ShipSuperheavy: 13
+			AntiAirShip: 11
+			FlyingInfantry: 11
+			SubmarineLight: 13
+			SubmarineHeavy: 14
+
 TSMammothTusk_elite:
 	Inherits@w71: ^Warhead_MissileAA_Heavy
+	Inherits@projectileaa: ^Projectile_Missile_AA
 	Inherits@w72: ^Projectile_Missile_Heavy
 	Inherits@w73: ^ts_gdi_set21
 	Burst: 8
@@ -2056,7 +2153,6 @@ TSMammothTusk_elite:
 	Projectile: Missile
 		VerticalRateOfTurn: 25
 		MinimumLaunchAngle: 75
-		CloseEnough: 500
 		HorizontalRateOfTurn: 25
 		Acceleration: 5
 		Speed: 500
@@ -2075,6 +2171,14 @@ TSMammothTusk_elite:
 	BurstDelays: 8
 	ReloadDelay: 92
 	Report: misl1.aud
+
+	Projectile: Missile
+		Inaccuracy: 150
+		ContrailLength: 0
+		MaximumLaunchSpeed: 200
+		MinimumLaunchSpeed: 200
+		HomingActivationDelay: 3
+
 TSBikeMissile:
 	Inherits@missilerole: ^Warhead_MissileAP_Medium
 	Inherits@finalmain: ^Warhead_MissileHE_Medium_Flat
@@ -2227,10 +2331,8 @@ TSSAPCCoreMissiles:
 		ContrailLength: 0
 		MaximumLaunchSpeed: 300
 		MinimumLaunchSpeed: 300
-		CloseEnough: 600
 		Acceleration: 4
 		HomingActivationDelay: 1
-		RangeLimit: 20000
 		PointDefenseTypes: Missile
 		MinimumLaunchAngle: 75
 		MaximumLaunchAngle: 75
@@ -2458,10 +2560,8 @@ TSRedEye2:
 		MaximumLaunchSpeed: 200
 		MinimumLaunchSpeed: 200
 		Speed: 500
-		CloseEnough: 500
 		Acceleration: 5
 		HomingActivationDelay: 3
-		RangeLimit: 30000
 		PointDefenseTypes: Missile
 		ContrailZOffset: 4000
 		ContrailStartColor: FF884400
@@ -2555,6 +2655,8 @@ TSChemAdatsMissile:
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 
 TSChemAdatsMissile_AA:
+	Inherits@warheadaa: ^Warhead_MissileAA_Medium
+	Inherits@projectileaa: ^Projectile_Missile_AA
 	Inherits: ^ts_tiberiansun_tschemadatsmissile_aa
 	ValidTargets: Air
 	ReloadDelay: 54
@@ -2575,10 +2677,8 @@ TSChemAdatsMissile_AA:
 		MaximumLaunchSpeed: 300
 		MinimumLaunchSpeed: 300
 		Speed: 600
-		CloseEnough: 600
 		Acceleration: 4
 		HomingActivationDelay: 1
-		RangeLimit: 20000
 		PointDefenseTypes: Missile
 		MinimumLaunchAngle: 75
 		MaximumLaunchAngle: 75
@@ -2672,6 +2772,92 @@ TSChemAdatsMissile_AA:
 			AntiAirShip: 8
 			SubmarineLight: 8
 			SubmarineHeavy: 7
+
+	-Warhead@Flak_Medium_Flat:
+	-Warhead@MissileAA_Medium:
+	Warhead@MissileAA_Medium: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Air
+		Spread: 110
+		Damage: 12000
+		Falloff: 100, 58, 32, 16, 6, 0
+		Versus
+			HAZMAT: 88
+			COMPOSITE: 64
+			BLAST: 58
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 171
+			None: 200
+			Fighter: 197
+			Bomber: 196
+			Helicopter: 155
+			Spaceship: 153
+			Flak: 149
+			Plate: 117
+			Scout: 61
+			Light: 60
+			Medium: 57
+			Wood: 54
+			Heavy: 49
+			Superheavy: 40
+			Steel: 39
+			Concrete: 37
+			Heroic: 36
+			FlyingInfantry: 112
+			CyborgLight: 110
+			CyborgMedium: 92
+			CyborgHeavy: 76
+			CyborgHeroic: 38
+			AntiAirInfantry: 173
+			AntiAirVehicle: 58
+			AntiAirBuilding: 38
+			ShipLight: 57
+			ShipMedium: 46
+			ShipHeavy: 44
+			ShipSuperheavy: 39
+			AntiAirShip: 51
+			SubmarineLight: 47
+			SubmarineHeavy: 42
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 9992
+		PercentageSpread: 50
+		PercentageVersus
+			Shield: 25
+			Fighter: 20
+			Bomber: 19
+			Helicopter: 18
+			Spaceship: 17
+			None: 16
+			Flak: 15
+			Plate: 14
+			Heroic: 13
+			Scout: 12
+			Light: 11
+			Medium: 10
+			Heavy: 9
+			Superheavy: 8
+			Wood: 7
+			Steel: 6
+			Concrete: 5
+			FlyingInfantry: 15
+			CyborgLight: 13
+			CyborgMedium: 12
+			CyborgHeavy: 11
+			CyborgHeroic: 10
+			AntiAirInfantry: 15
+			AntiAirVehicle: 10
+			AntiAirBuilding: 5
+			ShipLight: 9
+			ShipMedium: 7
+			ShipHeavy: 7
+			ShipSuperheavy: 7
+			AntiAirShip: 8
+			SubmarineLight: 8
+			SubmarineHeavy: 7
+
 TSSlimeAttack:
 	ReloadDelay: 80
 	Range: 1408
@@ -2978,7 +3164,7 @@ TSTacticalMissile:
 	MinRange: 3072
 	AirThreshold: 11c0
 	Projectile: Missile
-		RangeLimit: -1
+		RangeLimitPercent: -1
 		MinimumLaunchAngle: 250
 		MaximumLaunchAngle: 250
 		MinimumLaunchSpeed: 400
@@ -3086,6 +3272,7 @@ TSTacticalChemMissile:
 	Range: 10238976
 	Report: samshot1.aud
 	Projectile: Missile
+		RangeLimitPercent: -1
 		Arm: 0
 		Blockable: false
 		AllowSnapping: true
@@ -3100,10 +3287,8 @@ TSTacticalChemMissile:
 		MaximumLaunchSpeed: 400
 		MinimumLaunchSpeed: 400
 		Speed: 1024
-		CloseEnough: 600
 		Acceleration: 4
 		HomingActivationDelay: 8
-		RangeLimit: -1
 		MinimumLaunchAngle: 250
 		MaximumLaunchAngle: 250
 		Jammable: false

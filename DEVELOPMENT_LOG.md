@@ -1,3 +1,922 @@
+# 2026-10-07 — Devin-Integrator: INTEG-ECON-B — BU_harvester_logistics merged into inc
+
+*Devin-Integrator.* Reviewer APPROVE (2 documented non-blocking deviations D1 P2 /
+D2 P3 — the gates here were the first independent run: the reviewer had no engine).
+Branch `integ/garrison-2026-10-06`, worktree `C:\cameo-wt\integ-garrison`:
+inc `f9d81bae8` + `devin/econ-b@50d3614b6` (`BU_harvester_logistics` —
+refinery-served field reservations, shared pool re-route over threat-free
+corridors only, lease-aware evac via new `BotLeasePurpose.Harvest`, production
+requests only when the pool cannot cover demand; `HarvesterBotModuleCA` gains
+`IBotUnitLeaseLost`).
+
+Conflicts (both degenerate): `DEVELOPMENT_LOG.md` append-adjacent entries —
+kept both; `increment_switches.yaml` tail — kept all groups
+(BM_live_combat_model + BO_squad_move_dedup + BU_harvester_logistics).
+Inc-side had not touched any of the branch's 5 files since the merge base —
+clean take.
+
+Integration repair: ai_arch_audit R7 flagged `IBotUnitLeaseLost` gaining a
+second loaded provider (`BridgeRepairBotModule` + `HarvesterBotModuleCA`) with no
+declared merge semantics — declared `owner-matched dispatch` in PROVIDER_MERGES
+(registry notifies each provider only when its type name equals the lost lease's
+previous owner; verified at BotUnitLeaseRegistry.cs:186). AI_ARCH_COVERAGE.md
+regenerated.
+
+Gates:
+
+- build: 0 errors (Release, win-x64)
+- Cameo tests: 1206 total, 1205 pass — sole failure was a stale
+  `DerivedWeaponMetrics` fixture (RA2Patriot rows after R1's refresh); fixed by
+  `extract_stats.py` re-extraction of all 34 derived faction ledgers (cohort
+  normalization churns every row; only R1-weapon rows changed semantics).
+  WeaponModelParityTest 4/4 on the regenerated fixtures.
+- audits: fog honesty PASS (82 files/266 sites), direct mutation PASS (0 sites),
+  ai_arch freshness PASS (both artifacts)
+- switch gating reviewed: all new paths behind `UseHarvesterLogistics`
+  (default false); `apply_increment_switches --dry-run BU_harvester_logistics`
+  arms `HarvesterBotModuleCA@generic` only; @classic untouched -> off =
+  bit-identical
+- conflict-marker test: PASS
+- BOOT_GATE: PASS (isolated support dir, menu marker, package in worktree,
+  0 exceptions)
+
+# 2026-10-07 — Devin-Integrator: INTEG-REGREEN-R1 — pre-R16 missile profile refresh merged into inc
+
+*Devin-Integrator.* Reviewer APPROVE. Branch `integ/garrison-2026-10-06` (continued),
+worktree `C:\cameo-wt\integ-garrison`: inc `6bb8818e8` + `codex/regreen-r1@a716cb6dc`
+(`1832a4c64` refresh pre-R16 missile profiles on 27 weapons + `a716cb6dc` reconcile
+missile history contract). Merge applied with zero conflicts.
+
+Semantic reconciliation required beyond the clean textual merge:
+
+- The R1 contract (`test_missile_role_policy` + `test_projectile_role_bulk_profile`,
+  95 records) asserts each recorded refresh changed only the main warhead. On the
+  missile-feel tree the whole checkpoint cohort failed (78 failures): missile-feel had
+  changed non-warhead fields and AA templates the records pin.
+- Fixtures rebased the same way as the E2 repin `0d5cfc14a` (live payloads with
+  preserved mains verbatim, digests repinned); thin variant shells fold the live
+  authored node.
+- `RA2HoverMissile_AA(_elite)` / `RA2MultiHoverMissile_AA(_elite)`: authored
+  `-Versus:`/`-PercentageVersus:` cancellation inside `Warhead@MissileAA_Light` so the
+  R1-reviewed 20-key ladders replace (not map-merge into) the new
+  `^Warhead_MissileAA_Light` template rows — otherwise the resolved warhead leaked
+  AntiAir*/Ship*/Cyborg* classes the refresh deliberately removed.
+
+Gates:
+
+- build: 0 errors (Release, win-x64)
+- role-policy contract: 10 passed + 77 subtests — identical to reviewer baseline
+- consumer-set regression check vs pre-merge inc baseline `6bb8818e8`: identical
+  failure sets (34 failed both sides — pre-existing missile-feel-era fixture
+  staleness in sonic/heaviness/owned-names lanes, out of R1 scope, likely R2/R3);
+  0 new failures, 78 fixed
+- conflict-marker test: PASS
+- BOOT_GATE: PASS (isolated support dir, menu marker, package in worktree, 0 exceptions)
+
+Known debt (flagged to lead): the 34 stale historical-view fixtures predate this
+merge (visible identically on inc baseline) — `sonic_family`/`later_profile`/
+`owned_checkpoint`/`heaviness golden` `current`-payload repins are owed to
+missile-feel reconciliation (REGREEN-R2/R3 territory, not this task's scope).
+
+# 2026-10-06 — Devin-Integrator: INTEG-GARRISON — garrison fire-ports + missile-feel merged into inc
+
+*Devin-Integrator.* Maintainer-approved merge (both playtests passed 2026-10-06).
+Branch `integ/garrison-2026-10-06`, worktree `C:\cameo-wt\integ-garrison`:
+
+- Engine: `integ/engine-2026-10-06` = `d5d8b2a685` + `codex/garrison-engine@dc92c52213`
+  (independent passenger fire stations) + `codex/missile-feel-engine@dd7b901b85`
+  (RangeLimit/RangeLimitPercent + proximity snapping). Build 0 errors/0 warnings,
+  engine suite 545 pass / 2 skip. Pushed; `origin/cameo-engine` fast-forwarded to
+  `0e42ed433d` — the new ENGINE_VERSION pin.
+- Mod: inc `5e45bfc80` + `codex/garrison-fireports@210ec9479` + `codex/missile-feel@4e47ead99`
+  (66 weapons, RangeLimitPercent 150, flattened Spit_AA/GLStingerSite/GLASCUD as playtested).
+  Two merge conflicts resolved: `mod.config` pin -> combined engine sha; `BotCombatPredictor`
+  keeps the HEAD WeaponProfile helper with the branch's IRangeLimitedProjectileInfo
+  effective range clamp ported into the helper.
+- Integration repair: the missile-feel branch changed `effective_damage.py`
+  (default-on homing-missile terminal bound + RangeLimit fuel gate) without
+  re-extracting ledgers or updating the C# port. Re-extracted 35 ledgers + derived
+  sidecars (ledgers_drifted 21 -> 0) and ported the terminal model into
+  `BotEffectiveDamage` (HomingMissileTerminalBound, fuel sigma=inf, MissileTA
+  handling, target-radius/terminal threading through Reliability/
+  UniformReliability/AreaGeometrySamples/Evaluate). Verified by
+  WeaponModelParityTest over all 1570 weapons.
+- doc_claims repins: warhead_family_reach 1509 -> 1510,
+  cameo_family_labelled_weapons 1567 -> 1569; cited docs co-updated.
+
+Gates:
+- build: 0 errors (Release, win-x64)
+- Cameo tests: 1202/1202
+- pytest scoped: 59 + 26 subtests (conflict markers, garrison fireports,
+  chinook capacity, missile feel defaults, effective damage)
+- audits: fog honesty PASS (266 sites), direct mutation PASS (0 sites),
+  ai_arch freshness PASS, doc_claims 44/44, balance drift clean,
+  garrison_fireports capacity audit PASS (304 actors, 0 violations)
+- audit_garrison_weapons informational: G1 4 scrin infantry w/o garrison weapon,
+  G4 1 cabal_ravager (pre-existing findings, not merge-introduced)
+- BOOT_GATE: PASS (isolated support dir, menu marker, package in worktree, 0 exceptions)
+
+# 2026-10-05 — Devin-T3Verify: PREDICTOR-PARITY P1 — effective-damage port + live per-actor stats
+
+*Devin.* Branch `devin/t3verify/predictor-parity`, worktree `C:\cameo-wt\parity`, rebased onto `inc/2026_10_05 @ fe4459c9c`:
+
+- C# port of the balance pipeline's effective-damage model under `BotModuleLogic/`:
+  `MiniYamlMirror` (resolved yaml surface without an engine `Ruleset`), `BotEffectiveDamage`
+  (formula/scatter/percentage/heaviness), `BotTargetModel` (census + armor weights),
+  `BotWeaponModel` (analyse + derived metrics + per-armour decomposition),
+  `BotWeaponModelTable` (`FromFiles` for tests, `Get(Ruleset)` lazy runtime seam).
+- Parity vs `docs/balance/derived` fixtures: 2619 rows / 1570 weapons / 0 failures;
+  charge_up 14 rows / 0 failures; scatter PDF + target-model invariants PASS
+  (`WeaponModelParityTest`). Fixes en route: `Armor`/`Armor@x` census scan (not
+  `Armable`), engagement-vs-census weight aggregation, **int32 intermediate overflow in
+  percentage runtime HP** (`afterUnits * 100` widened to long before the multiply).
+- Live per-actor path (lead ruling 2026-10-05): `BotUnitProfiles.Get(Actor, viewer, eff)`
+  reads `TraitsImplementing<Armament>()` filtered `!IsTraitDisabled` (multi-TraitInfo-sweep
+  convention), aggregated `IFirepowerModifier`/`IReloadModifier` per armament, current
+  `IHealth.HP`, first enabled `Armor.Info.Type`, `GetEnabledTargetTypes()`. Fog contract:
+  own actors in full, enemies only while `CanBeViewedByPlayer`; anything else → cached
+  type profile. `DamagePerTickAgainst` evaluates the model at the observed armour via
+  `KByArmor`/`PctByArmor`/`FoldedByArmor` → `EffectivePerShotAgainst(armor)`, then applies
+  power/cycle scales and the defender's `IDamageModifier` (damage-weighted per warhead)
+  when both sides are live. Legacy multi-damage-warheads sum via `BotWarheadTerm[]` under
+  the flag until W24; classic term stays main-warhead-only.
+- Switch `UseEffectiveDamageModel` (default off) on SquadManagerBotModuleCA,
+  SiegeEvaluatorBotModule, MasterAiBotModule (BotSituation), CombatVetoBotModule,
+  EngagementLogBotModule, UnitBuilderBotModuleCA; registered as `BM_live_combat_model`
+  in `tools/ai/increment_switches.yaml`. Production planning, remembered enemies/defences,
+  and MaxRange/CanTarget reads stay type-level.
+- 8 new `BotCombatPredictorTest` cases: firepower/veterancy, reload, granted armament,
+  damaged HP, flag bit-identity, armour-aware model row, unmodelled fallback, multi-warhead sum.
+
+Gates (on the pre-rebase base; re-run post-rebase):
+- build: 0 warnings / 0 errors (Release, win-x64)
+- Cameo tests: 945/945
+- parity: 2619 rows / 0 failures; charge_up 14/0; scatter PDF PASS; target invariants PASS
+- boot gate: PASS (isolated per-run support dir via `C:/cameo-wt/boot_isolated.ps1`)
+
+Not in P1 (later phases): NOVA situational target terms (P2), shields/meters (P3),
+closing time/range factors at engagement distance (P4).
+
+# 2026-10-05 — Devin-Architect: HOTSPOT-RESTACK — hotspot8+hotspot3 onto ars-stutter-gated
+
+*Devin-Architect.* `devin/architect/hotspot8-restack` + `devin/architect/hotspot3-restack` on
+`devin/ember/ars-stutter-gated@e81da54e7` (claimed task 01a10ac0 after the gated branch landed).
+
+- **Restack:** cherry-picked `d332aead8` (hotspot8, `PrepositionDecisionEvalCA`) clean onto the gated
+  branch; `7e51adeab` (hotspot3, `AttackForceEvalCA`) needed one devlog union — code applied clean.
+  Topology preserved: hotspot3 stacks on hotspot8, both sit on the gated ars-stutter, so merging no
+  longer drags in the ungated `e39670678` path differences.
+- **Review fix 1 — SelectChannel wired:** computed after the lazy cascade resolves, used as the
+  proceed gate (`channel == None` replaces the `threat == null && request == null` check — identical
+  semantics: request is non-null iff one of the three request channels produced it). Laziness
+  preserved — `SelectProtectionRequest` still runs only when `threat == null`.
+- **Review fix 2 — `RallyFor`:** dropped the unused `BotPredictedThreat? threat` param (it never
+  read it); call site + 3 test call sites updated.
+- **Review fix 3 — hotspot3 tests:** added the two missing cells — one-below-`MaxIdleUnits` (overflow
+  arm does not fire at 9/10) and `valueOnlyLaunch:false` + `squadValue>0` (waiver must not apply;
+  count gate falls back to `requiredSize`).
+- **Gates:** Release build 0 errors / 8 pre-existing engine lint warnings; Cameo suite 957/957;
+  `audit_fog_honesty.py` PASS (80 files / 263 sites); isolated `boot_isolated.ps1` BOOT_GATE=PASS
+  (package in worktree, 0 exceptions). Multi-TraitInfo: the sweep script does not exist on this
+  pre-inc-05 base; the restack diff adds zero `TraitOrDefault`/`TraitsImplementing`/
+  `FirstEnabledTraitOrDefault` lookups (verified by diff grep) — clean by construction.
+- **Open:** branches are on the gated ars-stutter base (pre-inc-05); lead merges gated first, then
+  this stack — or restacks again if gated rebases.
+
+# 2026-10-05 — Claude (lead): crash repair, INC 2026-10-05, ars-stutter held back
+
+*Claude.* `inc/2026_10_05` on `inc/2026_10_04g` @ 4cbc73cbf.
+
+- **Machine crash ~00:05 corrupted the shared repo.** Zero-filled: `refs/heads/inc/2026_10_05`,
+  `worktrees/inc-1004g/HEAD` and `ORIG_HEAD`; the commit-graph listed two never-flushed commits (the
+  half-done INC merge). Repaired: backups in `C:/cameo-wt/_git_repair_backup_20261005`, ref and HEAD
+  restored to 4cbc73cbf from the worktree reflog, commit-graph rebuilt. `fsck --connectivity-only`
+  is clean, `rev-list --objects --all` is clean, and every worktree index blob is present. Some
+  missing objects are referenced only by unreachable crash debris, which is harmless; no gc while
+  agents run.
+- **Merged:** multi-TraitInfo sweep (959819bc9, review APPROVE after fixes), NOVA hotspot #2 march
+  evals (d22e70839) and #4 BuildRegions evals (b1af0bb70), both reviewed bit-identical, and the
+  harvest ledger (9a7d084ea, DAWN ENDORSE).
+- **Integration fix:** the harvest ledger made `load_spec` return `needs` too, and
+  `ai_arch_audit.switch_spec()` crashed unpacking two values. Fixed in 91b92481e.
+- **Held back:** `devin/nova/ars-stutter@e39670678`. With `UseSquadOrderDedup` off it still drops
+  empty grouped orders, guards null `TargetActor`, and allocates per tick, so "Off = pre-change
+  stream" is false. In-game those are mostly no-ops (`AttackMove` returns on an invalid target),
+  but the order stream differs. EMBER is gating them (`devin/ember/ars-stutter-gated`).
+  hotspot #8/#3 wait for that branch, because they are stacked on ars-stutter.
+- **Not merged:** AR-9 follow-ups (`ar9-followups@191196e04`). The P1s are fixed, but the classic
+  path now never removes finished garrisoners, which gives an NRE at the stuck check (P0). Back
+  with T2Verify.
+- **Gates:** build 0 errors, 1143/1143, pytest 34, arch freshness, fog, mutation,
+  multi-TraitInfo audit, doc_claims 0 mismatches, isolated boot PASS
+  (`C:/cameo-wt/boot_isolated.ps1`).
+
+# 2026-10-04 — Devin-T2Verify: multi-TraitInfo sweep review fixes — enabled-trait aggregation
+
+*Devin.* Fixup on `devin/t2verify/multi-traitinfo-sweep` after independent review REQUEST CHANGES
+(P2×1, P3×3, P4×1) on `inc/2026_10_04g @ 4cbc73cbf`.
+
+- **P2 radar range (the real bug):** `RadarRangeCells` info-level Max was applied to live actors —
+  `ra1_allies_radardome`/the Yuri sensor carry mutually exclusive 20000/30000 ranges under
+  `!upgrade`/`upgrade`, so an un-upgraded dome was booked at ~29 cells instead of 19 (2.25× the
+  area → under-building). `EnabledRadarProviders` now takes Max over
+  `TraitsImplementing<RangedGpsProvider>().Where(!IsTraitDisabled)` via a new
+  `EnabledRadarRangeCells` seam; the `ActorInfo` overload stays as the deliberately OPTIMISTIC
+  prospective-placement estimate (commented).
+- **P3 docks:** refinery placement checks every `DockHost` offset (`@DOCK2`/`@DOCK3` exist on
+  nexus/hatchery/assimilator) — Any reachable; no-DockHost keeps the zero-offset fallback.
+- **P3 enabled preference:** `FirstOrDefault(!IsTraitDisabled) ?? FirstOrDefault()` (or `?? First()`
+  to preserve throw-on-absent) at TeleportCA, DetonateWeaponPowerCA, GrantExternalConditionPowerCA,
+  MadTankCA, ChargingSelfDestruct, AttachableTo; `Any(Carrier != null)` for the two Carryable
+  site checks (ordos_pythontank has AutoCarryable + Carryable) — extracted as
+  `AttachableTo.AnyCarrierAttached` for tests.
+- **P3 audit:** `CLASS_RE` now accepts `:`/base lists/`where` on following lines (~102 missed
+  declarations recovered); a real comment/string stripper stops `//` inside literals from eating
+  code; `.Single()`/`.SingleOrDefault()` on `TraitsImplementing`/`TraitInfos` chains scanned —
+  surfaced 3 latent `Single(name==Body)` sites (WithActivateAnimation, WithCargoHatchAnimation,
+  WithEnabledAnimation), converted to the enabled-first pattern. Devlog corrected: the audit is a
+  zero-tolerance gate, not a ratchet.
+- **P4:** `SelectionDecorations` documents that the engine base ctor still calls
+  `Trait<Interactable>()` first, so the subclass conversion is moot. Live-trait tests:
+  `EnabledRadarRangeCells` over fabricated disabled providers (`Uninitialized` + reflection),
+  `AnyCarrierAttached` over fabricated Carryables. The `Max==12` pin is reframed as the
+  optimistic prospective semantic.
+
+# 2026-10-04 — Devin-T2Verify (+Tier4 draft): multi-TraitInfo sweep — zero-tolerance gate + 16 hazard conversions
+
+*Devin-T2Verify, taking over Tier4's parked draft audit (`tools/audit/audit_multi_traitinfo*.py`
+in their `t4-multi` worktree).* Branch `devin/t2verify/multi-traitinfo-sweep` on
+`origin/inc/2026_10_04g` (rebased after the lead pushed INC-g).
+
+- The draft already modeled C# type hierarchy + yaml-resolved actor trait sets; the takeover fixed
+  three gaps: `actor_info_types` collected into a `set()` (deduped `Power@a`+`Power@b` — the exact
+  EMBER crash class), a dead O(types²) `impl_cache` precompute (hang), and `SCAN_ROOTS` pointing at
+  `engine/` instead of the mod-side CA/Cameo/Fransbot assemblies. Added the `X`/`XInfo` name-strip
+  fallback so `ConditionalTraitInfo : TraitInfo` (non-generic) descendants map to their produced
+  trait. Now a multiset-based zero-tolerance gate wired into `run_all.sh`.
+- Landscape: 982 single-instance lookup sites scanned, 224 multi-capable trait types, **16 real
+  hazards** converted to collection APIs with per-site aggregates — `Any` (PowerInfo power-plant,
+  AttackFollow target match iterates ALL instances), `Max` (RangedGpsProvider radar range),
+  `FirstOrDefault` (optional render/dock/attach lookups), `First` (required traits — preserves
+  throw-on-absent). Single-instance actors behave bit-identically.
+- Regression pins in `MultiTraitInfoSweepTest` (two fabricated `PowerInfo`/`RangedGpsProviderInfo`
+  instances via the `new ActorInfo(...)` trick; Fransbot ref added to the test csproj for the exact
+  `FransActorClass.IsPowerPlant` crash shape).
+
+Gates: build 0/0 all four assemblies; tests 1122/1122 (+2 new); fog PASS 82/266; mutation PASS
+169/0; arch-freshness PASS (regen folds INC-g's own merge drift); wiring 0 ERROR; doc_claims
+_clean_; `audit_multi_traitinfo` PASS 0 dangerous; boot gate re-run under the per-run-SupportDir
+method after the false-pass ruling below.
+# 2026-10-04 — NOVA: hotspot #2 — march-state decisions extraction (MarchEvalCA)
+
+*NOVA.* Branch `devin/nova/hotspot2-march` on `origin/inc/2026_10_04g@4cbc73cbf` (EMBER's
+merged lattice base). GroundUnitsAttackMoveStateCA Tick + IssueFormationOrders decisions ->
+pure static `MarchEvalCA` (the micro atoms stay in SquadMicroEvalCA): StuckCountersNext
+(4-arm truth table incl. the unchanged !stop&wait arm), StuckActionFor (makeWay precedence),
+RouteParams (lazy Func roll preserves the random stream), AdvanceWaypoint, LeaderWaitLatches/
+Holds, BucketFor (Frontline>Scout>AntiAir), AxisRemaining (long-math projection),
+RearStallNext + LeadForStall (StalledRearTicks=25 named), AxisUsable. 10 wire sites,
+laziness/short-circuit order preserved.
+
+Findings (fleet NOTE_2026-10-04_nova_hotspot2_tree): F1 makeWay -1 sentinel permanently
+re-routes stop&!wait to the kick counter for the march (P3); F4 makeWay epilogue pre-charges
+the kick counter to half-max (P4, escalation by design, now pinned).
+
+`MarchEvalTest`: 9 tests, full truth tables + lazy-draw counting. 1133/1133 suite on INC-g,
+build 0 errors, boot gate PASS.
+# 2026-10-04 — NOVA: hotspot #4 — BuildRegions merge-loop extraction (RegionMergeEval)
+
+*NOVA.* Branch `devin/nova/hotspot4-buildregions` on `origin/inc/2026_10_04g@4cbc73cbf`
+(different assembly — not stacked on the SquadManager chain). The merge loop's decisions ->
+pure static `RegionMergeEval`: `MergeContinues` (round bounds), `IsMergeEligible`
+(active/droppable/touching>=2/strict-min), `SmallestTouchingSize` (min or int.MaxValue
+sentinel), `SelectRoundDrops` (worst-first sort + greedy disjoint-claim batching). Early
+continues preserved so TouchedRegions work is bit-identical.
+
+Findings (fleet NOTE_2026-10-04_nova_hotspot4_tree): F1 stale 'one piece per round' comment
+vs the batch design (fixed same commit); F2 piece-count ceiling ~2x loose vs droppable count
+(harmless); F3 List.Sort tie order non-semantic but per-map deterministic. P2 sub-item: all
+four world.Actors scans verified fog-honest or legitimately static (bridges/own-only/belief).
+
+`RegionMergeEvalTest`: 6 tests, all boundaries pinned. 1130/1130 suite on INC-g, build 0
+errors, boot gate PASS.
+
+# 2026-10-04 — Claude (lead): INC-f doc re-pin, INC-g built and pushed, boot-gate false pass
+
+*Claude.* `inc/2026_10_04g` @ 3a661c8b0 (pushed with `inc/2026_10_04f`).
+
+- **INC-f** failed only `audit_doc_claims`: AR-12 moved AI_ARCHITECTURE to 76/103 for
+  `LoadCargoBotModuleAS` without the registry value, and RADAR-A left `RadarContactsBotModule`
+  uncounted. Re-pinned doc + `doc_claims.yaml` together to 77/104 (249b36be6).
+- **INC-g** = T2Verify's rebased stack (hs5/hs6 seams, BP-2 fold, F1, determinism tie-breaks,
+  AR-8, AR-1 nit) + AR-2, AR-4, test fixtures, PRIORS-CARRY fitter, coverage infra (**ci.yml job
+  held — maintainer ruling: no CI without explicit request**), takeover-smoke (MasterAiEval +
+  balance log field), multi-info-crash, AR-9 (independent review APPROVE; P3/P4 follow-ups with
+  T2Verify). Conflicts were devlog/HANDOFF (union) and generated arch docs (regenerated).
+- **Gates:** build 0 errors, 1124/1124, pytest 34, arch freshness, fog, direct mutation,
+  doc_claims 0 mismatches, 0 empty warheads, boot to menu with 0 exceptions.
+- **What didn't work:** the shared `_bootgate.ps1` pattern false-passed — it greps the
+  machine-wide `%APPDATA%\OpenRA\Logs\perf.log`, which held a 20-minute-old menu marker while
+  the launched game wrote nothing. Fix: run `enginein\OpenRA.exe` with a fresh
+  `Engine.SupportDir`, poll only that dir, and check that MATCH INFO's Package path is in the
+  worktree. Fleet told to re-verify today's boot passes.
+- **Maintainer rulings today:** bot fight model reads live per-actor stats (active weapons,
+  modifiers, current HP; fog-fair; type table only as fallback); accuracy/splash/range-adjusted
+  damage becomes the default pricing path.
+- **Open:** AR-S stutter finish + ON/OFF demo replays (Ember), PREDICTOR live-stats (T3Verify),
+  PRICING-DEFAULT (Tier4), multi-TraitInfo sweep + AR-9 follow-ups (T2Verify).
+
+# 2026-10-04 — Devin-T2Verify: AR-9 lease gaps — LoadGarrisoner + DeployBot claim-before-order (§19.6)
+
+*Devin.* Branch `devin/t2verify/ar9-lease-gaps` rebased onto `devin/t2verify/incg-stack` (INC-f +
+the seam/F1/determinism/AR-8 stack).
+
+Two real unit-ordering lease gaps closed; the rest of the AR-9 candidate list is exempt or already
+documented (DAWN's `LoadCargo`×3 port, `Minelayer`/`SendUnitToAttack` rulings).
+
+- `LoadGarrisonerBotModuleCA` (OpenRA.Mods.CA): `BotLeasePurpose.Garrison` claims on every walking
+  garrisoner — squad-draftable infantry could otherwise be drafted mid-march. Renewed per scan,
+  released when the unit boards/idles/goes stuck (Stop queued while the lease is still held — GC-1
+  order-before-release) or the module disables; candidates claimed by another owner are skipped and
+  capacity is accounted only after a successful claim. Coverage doc now shows `(lease)` on its
+  `AttackMove`/`EnterGarrison`/`Stop` rows and its unseparated co-runner pairs dropped from R4.
+- `DeployBotModule` (OpenRA.Mods.Cameo): claim-while-ordering via a `QueueLeased` seam — TryClaim
+  precedes every Move/deploy/undeploy order; heartbeat `Math.Max(200, scan*4)` renews through active
+  maneuvers and lapses when the group goes quiet, so squads can still draft idle deployables.
+  Denied claims drop the unit for re-filtering; `TraitDisabled` releases all.
+- Exemptions verified, not patched: `FransMcvExpansionManagerBotModule` (MCV/Conyard/landing-craft
+  subjects — ExcludeFromSquadsTypes + BuildingInfo + naval disjoint), `HarvesterBotModuleCA` and
+  FransHarvester (`HarvesterInfo` excluded from drafts).
+
+Classic is bit-identical: `BotUnitLeaseRegistry` is `genericbot`-only and every helper is a no-op
+when `BotUnitLeases.Of(player)` returns null.
+
+Gates: mod+test builds 0 warnings / 0 errors; Cameo tests 937/937 on master base (+4
+`LeaseAdoptionTest` — claim before order, deny drops, null-registry classic fallback, heartbeat
+floor); fog PASS; direct-mutation PASS; arch freshness PASS after regen; boot gate PASS. Re-based
+gates re-run at the AR-9-on-INC-g tip below.
+
+# 2026-10-04 — Devin-T2Verify: AR-8 — issuer identity Type@N; the order gate judges at issue time
+
+*Devin-T2Verify.* Branch `devin/t2verify/ar8-issuer-identity` (stacked on
+`devin/t2verify/ar1-grouped-gate`, rebased onto INC-f; current tip in the fleet STATUS file).
+DESIGN §19.6 AR-8 bullet added; fleet `NOTE_2026-10-04_devin-t2verify_ar8_issuer_identity.md`.
+- `BotIssuer` (Mods.CA — Fransbot sees it): `Type@ordinal` instanced issuer, `TypeOf` owner
+  normalization, `IssueAs` ambient provider scope.
+- ModularBot: queued items carry `(Order, Issuer, Emergency)`; the gate now judges at ISSUE time
+  (a deferred order faces the leases that hold when it acts); `ORDERGATE DROPPED` line per
+  full-queue drop; LinkedList front-requeue on action-budget stop (was: silent discard); `Preempt`
+  keeps lease owners type-named via `TypeOf`.
+- Gate: `Decide`/`NoteIssued` TypeOf-normalized — six SquadManager instances are ONE subsystem;
+  `EmergencyModules` accepts a type or an instance; crossed pairs record instanced names.
+- FransTransport: `IssueAs` on every emitting provider entry point — the caller-issuer refusal
+  class (E_engt_transport) closed; read-only service methods deliberately unscoped.
+
+Gates (on the seam base): build 0/0; tests 952/952 (+9 `BotIssuerTest`); fog / mutation /
+arch-freshness / wiring PASS; boot gate PASS. Stack-tip gates re-run on INC-f below.
+
+# 2026-10-04 — Devin-T2Verify: F4/F-CBL1 determinism — field-score tie-break + refinery-request pick
+
+*Devin-T2Verify.* Lead ruling on the hotspot NOTE's F4/F-CBL1: two unordered picks could diverge across
+runtimes in multiplayer.
+
+- `scores.Sort` on bare `Score` desc had no tie-break — `List.Sort` is unstable, so two exact-tie fields could rank
+  differently across runtimes. The new `CompareFieldScore` seam keeps score desc and falls to the lowest indice
+  index on an exact tie; `Replan` sorts through it.
+- `RequestedRefineries.Keys.First()` took whichever request `Dictionary` enumeration surfaced first — unspecified
+  order. The queue now routes through `FirstRequestedRefinery`/`FirstByOrder` (lowest ActorID), matching the Frans
+  twin's existing pick.
+- Both live on the extracted pure surfaces with branch-complete tests; behaviour changes only where entries
+  previously tied unordered.
+
+Gates (on the seam base): mod + test builds 0/0; 977/977 (six new); fog / direct-mutation / arch-freshness
+PASS; boot gate PASS. Stack-tip gates re-run on INC-f below.
+
+# 2026-10-04 — Devin-T2Verify: F1 — gate-B takes an indice only when its anchors are all served
+
+*Devin-T2Verify.* Lead ruling on the hotspot-6 NOTE's F1: gate B's indice-level refinery count could
+starve the second anchor of a multi-spreader single-indice field — "indice has our refinery" marked the
+whole indice taken, it left `scores`, and the crawl aim plus the MCV pipeline stopped driving at the field
+its second spreader still needed. That is a law violation of one refinery per ANCHOR.
+
+- The anchor model (spreaders -> anchors -> field ids -> flush map -> per-anchor assignment) is hoisted out of
+  `UpdateAnchorClaim` into `EnsureAnchorModel`, built once per re-plan tick before the scores loop.
+- `FieldTaken` gains two law terms: under `LawActive` an indice holding an unserved anchor is not "ours" — a
+  claimed-by-radius cell and the indice-level refinery count both yield — while an indice whose anchors are all
+  served takes as before.
+- Classic is bit-identical: `lawActive == false` collapses the new terms to the old `claimed || refineries > 0 ||
+  value <= 0` shape, and the anchor model still builds only when `FieldCoverage && DriveRefineries` are on.
+
+Gates (on the seam base): mod + test builds 0/0; 972/972 (new branch-coverage test for the law arms); fog /
+direct-mutation / arch-freshness PASS; boot gate PASS (menu reached, PID-scoped kill, no new exceptions).
+Stack-tip gates re-run on INC-f below.
+
+# 2026-10-04 — Devin-T2Verify: INC-g stack — hs5/hs6 seams + standalone BP-2 fold rebased onto INC-f
+
+*Devin.* The agreed merge order landed: BP-2 is in INC-f (`5e67eb6ec`), radar-contacts too
+(`a42a09e7c`), so the hs5×BP-2 stack rebases as seams + standalone fold — `7befd921c` (the BP-2
+cherry-pick) dropped. Pick chain on `inc/2026_10_04f @ 249b36be6`: hs6 + hs5 seams → fold →
+F1 anchor-granular gate → determinism tie-breaks → AR-8 + AR-1.
+
+The QueueManager conflict resolved as designed: hs5's `ClassifyPlacement` chain replaces BP-2's
+inline else-if ladder; the organic-crawl legality routes through INC-f's `RefineryLawCrawlRoll.LegalLink`
+(semantically identical to the picked inline GBA check, single-sourced). The fold routes BP-2's
+three duplicated decisions through `BaseBuilderQueueEvalCA` exactly as `4c363b6a8` did:
+radar priority → `PickOrPower`; `AdvisorLegalCells` → `PlacementCellAdmitted`; random-variant →
+`PicksRandomVariant` shared by `findPos` and `FrontBackVariant`.
+
+*Devin.* The fold content (unchanged by the rebase):
+
+* radar priority override → `PickOrPower` (radar when power-sufficient, else `power`; the debug
+  line names which arm returned — the same two messages as before);
+* `AdvisorLegalCells` → `PlacementCellAdmitted` with the requirement-distance clause `() => true`
+  (the advisor's front/back distance semantics cover that axis); short-circuit order and the
+  own-building spacing check preserved;
+* random-variant choice → new seam `PicksRandomVariant(hasVariants, hasFacings)`, shared by
+  `findPos` and `FrontBackVariant`: draw only when variants exist and no facings are configured;
+  facing-aimed placement still goes through `PickFacingVariant`. RNG draw order unchanged.
+
+No behavior change intended — same branches, same laziness, same draw order.
+
+Gates (at stack tip, see below): the full set re-run on INC-f — build, tests, fog, mutation,
+arch-freshness, wiring, doc-claims, boot.
+
+# 2026-10-04 — Devin-Tier4: RADAR-A — IBotRadarContacts provider + situation-log fields (no consumers)
+
+*Devin.* The bot-side radar screen: `RadarContactsBotModule` (genericbot-only via
+`genericbot && radar_contacts`; `GrantConditionOnBotOwner@radarcontacts` ships `Bots:` empty =
+inert on master; switch group `AI_radar_contacts` arms the genericbot tier list) publishes
+`IBotRadarContacts` — anonymous `BotRadarContact {Cell, Tick, VXPerKilotick, VYPerKilotick,
+Class, Owner}` records, exactly what a human writing down the radar dots could capture and
+never more (no type, no health, no ActorID). Enumeration is provider-proximity only:
+`world.Players` -> own/allied `RangedGpsWatcher.Providers` -> `CameoRangedGpsProvider.ActorsInRange`
+(the synced proximity list, exposed internally); **zero** global-actor-scan sites, so the
+fog-honesty manifest needed no new entry. Visibility is the renderer's own predicate —
+`CameoRangedGpsDotEffect.ShouldRenderDot` evaluated branch-for-branch against the bot player —
+so a contact exists iff the human would see the dot (incl. the RADAR-ALLY shared-disc semantics).
+Velocity is a per-ActorID internal track folded to cells x1000/tick; dead/disabled/powered-off
+providers contribute nothing because `TraitDisabled` clears the lists. Situation log gains
+`own.contacts {tick, providers, live:[{x,y,tick,vx_per_kilotick,vy_per_kilotick,class,owner}]}`
+(additive; absent when no module runs). NO consumers in phase A — no squad/scout/expansion/veto changes.
+
+*Evidence:* build 0 errors; `OpenRA.Mods.Cameo.Test` 851/851 (6 new: payload-shape contract via
+reflection, velocity math, track semantics); fog audit PASS (80 files, 263 sites, no new
+omniscience — new files register zero enumeration sites); `audit_bot_wiring` shows
+`RadarContactsBotModule gate='genericbot && radar_contacts'` under "dormant on master, armed by
+increment switch"; `audit_ai_personalities` PASS; `audit_merged_bot_modules` PASS; boot gate PASS;
+switch dry-run applies `AI_radar_contacts` -> the genericbot tier list. **Live check PASS** —
+switch armed transiently, `run_ai_match_batch` ra1_allies hard-vs-hard (support `_support_radara2`):
+`contacts` block present in all 442 situation records; at tick 23701 Multi0's radar dome produced
+6 live contacts (5 Infantry drifting -40/-40 cells/kt, 1 Vehicle fresh sighting at 0) all
+`owner: Multi1` — enemy-only, cell/tick/drift/class/owner exactly per contract. The arm was
+reverted after the run (switches live in frozen A/B trees only). First td_gdi attempt proved the
+negative path honestly: no provider built in a 14k-tick rush wipe => `providers: 0`, `live: []`.
+
+*Post-rebase (lead order 2026-10-04):* rebased onto `3ba05ede7` after INC-04e landed RADAR-ALLY; conflicts
+were append-only (devlog/HANDOFF top entries, ai.yaml grants — `@inmatchadapt` and `@radarcontacts` each
+kept their `Bots:`). Re-verified: build 0 errors, 939/939 tests, all four audits PASS, boot gate PASS.
+
+# 2026-10-04 — Devin-T3Verify: BP-IMPL phase 2 (front/back advisor wired into the shared queue manager)
+
+*Devin.* `devin/t3verify/bp-front-back-p2` in `C:/cameo-wt/bp` (base `3ba05ede7` — master after INC 2026-10-04e,
+which carries phase 1 + REF-1). The phase-2 integration from PREP_2026-10-04_devin-t3verify_bp-impl-phase2.md,
+now unblocked by the REF-1 merge:
+
+* `BaseBuilderQueueManagerCA` consults `IBotFrontBackAdvisor` (resolved once, `IsActive` re-checked per call —
+  `Enabled: false` ⇒ every seam inert, classic draw-for-draw). Classes claimed on the `Building`/`Fragile`
+  paths only: **Radar** (one per defended front + justified extra, strictly behind the front's defence line),
+  **Production** (ground/naval at the front; air-only exempt via the planner's classify), **Valuable**
+  (tech/superweapon/`CashTrickler` in the back). `FrontBackPick.Hold` → `return false` — produced building
+  stays queued, no failure budget (same construction as the REF-1 crawl hold); the advisor never sees
+  `BaseCrawl` placements, so its legal-cell filter can't starve the law's aimed crawls.
+* Radar want slots after the economy overrides (production, naval, silo) and before the fraction roll:
+  fires only when `WantedRadarProviders > owned+producing`; `PreferredRadarProvider` picks among the
+  limit-respecting producibles; power-short falls back to `power` like every other want.
+* `ScaledBaseMinimumExcessPower` gains the advisor's `RadarPowerMargin` (+60/provider in phase 1),
+  refreshed once per queue tick — a planned radar never blinds an owned one.
+* `IBotPlacementObserver.BuildingPlaced` extended `(FrontBackClass?, FrontBackPick?)` — sole implementer
+  `AiPlacementLogWriter` emits `class` on every placement while an advisor is active plus `fb_front`,
+  `fb_score`, `fb_new_coverage`, `fb_overlap`, `fb_setback` when the advisor claimed the cell.
+* `BotSituation` gains 4 record-only ints (`FrontBackFronts`, `FrontBackFrontsWithoutRadar`,
+  `FrontBackRadarUnionCells`, `FrontBackRadarApproachCells`); `AiSituationLogWriter` publishes them
+  always (all zeros without an advisor — the honest answer).
+* `ai.yaml` `FragileTypes`: the 23 radar-carrier names removed (101→78, resolved via `miniyaml.Ruleset`
+  in phase 1) so radars leave the sortMax fragile path and reach the advisor as `Radar`, not `Fragile`.
+
+Candidate set for `ChooseCell` = the full `FindTilesInAnnulus` filtered by the exact findPos legality
+trio (CanPlaceBuilding, IsCloseEnoughToBase, spacing-advisor gap) — the advisor ranks, it never widens
+legality. Variant keeps findPos's non-facing random draw (facing variants stay 0 for now).
+
+Gates: build 0 err / 8 pre-existing engine StyleCop warnings; Cameo tests **933/933**; boot gate PASS
+(menu reached, 0 new exceptions — an earlier launch-args miss produced `Unknown or invalid mod 'cameo'`,
+diagnosed + corrected, not a code fault). Audits + MP smoke: pending in this session.
+# 2026-10-04 — Devin-T3Verify: AR-10 tick phases — the resolved Player order is the contract (INC-N candidate)
+
+*Devin.* Branch `devin/t3verify/ar10-tick-phases` off `ar567-provider-precedence@4b00d9b99`. The arch review's
+sense→decide→act question, closed as documentation + audit rather than a reorder:
+
+- **Finding**: `ModularBot` ticks enabled `IBotTick` modules in resolved `Player` child order — merged across
+  every loaded rules file. `ContentPacks/*/ai.yaml` files load before `mods/cameo/ai/ai.yaml` and the first
+  pack merged wins position: `TiberianDawn/Shared`+`GDI` hoist `UnitBuilderBotModuleCA` (0), the six
+  `SquadManagerBotModuleCA` personalities (1–5, 9) and `BaseBuilderBotModuleCA` (8) ahead of every
+  sense/decide module — the act modules tick first. 48 consumer-before-provider read edges result; all are
+  one-tick-old snapshot reads, safe because every seam publishes on its own cadence (25–125 ticks) which
+  bounds the lag regardless. `ScaleTargets`/`BuildOrderKnobs` (pos 244/247) lag `MasterAi` (263) in the
+  *feedback* direction — the good side: all their consumers (the early builders) read them fresh.
+- **Audit**: `ai_arch_audit.py` gains **R8** — every loaded `IBotTick` type must declare its layer in
+  `LAYER_OF` (PERCEPTION+SITUATION=sense, STRATEGY=decide, EXECUTION+PRODUCTION=act, SUPPORT=infra,
+  TELEMETRY=observe; ERROR if missing), and `FRESH_EDGES` declares any seam requiring same-tick freshness
+  (empty today; ERROR if a declared edge ever reads stale). The coverage doc now prints the full per-instance
+  tick-order table (82 ticking instances) plus the 48 documented last-tick read edges and 10 call-time
+  provider reads — `--check` ratchets any yaml/include reorder. `docs/design/AI_ARCHITECTURE.md` gains
+  §10.5c with the contract and the reasoning (explicit reorder or snapshot stamps would annotate the same
+  staleness without removing it — cadence already bounds it).
+
+Gates: Release build 0/0; arch audit 0 ERROR, 33 WARN (R8 ok, 82 instances / 48 stale / 10 call-time / 0
+fresh declared); `ai_arch_audit --check` clean; `ai_module_map --check` clean; doc_claims 43/43;
+fog-honesty 80f/263s PASS; bot direct-mutation PASS; boot gate PASS. Test suite unchanged (no C#).
+
+# 2026-10-04 — Devin-T3Verify: AR-5/6/7 provider precedence — declared merges for every multi-provider bot seam (INC-N candidate)
+
+*Devin.* Branch `devin/t3verify/ar567-provider-precedence` from master `3ba05ede7`. The arch review's
+provider-precedence findings, closed end to end:
+
+- **AR-5** `IBotRegionThreatProvider` (MasterAi region memory + Scout danger marks — overlapping estimates of
+  one quantity): the four `Sum` consumers double-counted; `BeaconResponder` took `Max`. Declared merge = **max
+  over enabled providers**, implemented once as `BotRegionThreatMerge.MergedThreatAt` in the interface file;
+  all five consumers (`SquadManagerBotModuleCA:1742`, `SiegeEvaluatorBotModule:122`, `CombatVetoBotModule:129`,
+  `ExpansionPlannerBotModule:1529`, `BeaconResponderBotModule:149`) now call it.
+- **AR-7** `IBotMissionProvider` (MasterAi + GarrisonContest): `BestAffordableMission` iterated providers in
+  trait order — a provider's yaml position silently outranked every mission another published. Declared merge =
+  **one ordering across all enabled providers** (Priority desc, RequiredValue asc, publish order), the same
+  keys `BestRaidForSteering` already used; both pickers now filter `IsTraitEnabled()`. `MissionTaken` stays
+  `ReferenceEquals`-routed (order-irrelevant). `IBotMissionAssignmentProvider`: `BotSituation` now reads the
+  first non-null assignment among ENABLED providers — a disabled personality manager's stale assignment can
+  no longer shadow the live one. `IBotCaptureClaimSource`: verified already union-of-enabled (`BotSituation:1271`).
+- **AR-6** the site NOVA's held `seam-hygiene` does not cover: `FransUnitBuilderBotModule` resolves
+  `IBotEnemyCompositionProvider` by `FirstEnabledTraitOrDefault()` at use time (array cached at `Created`,
+  resolved per `BotTick`) — not at construction, where ConditionalTraits are still disabled (the flaw the lead
+  held `seam-hygiene` for). `FransCombatIntelBotModule.TryGetEnemyComposition` now honours the contract and
+  returns false while disabled.
+- **Audit**: `ai_arch_audit.py` gains **R7** — every seam with >1 loaded provider must declare its merge in
+  `PROVIDER_MERGES` (ERROR otherwise); the coverage doc's seam table carries a Merge column. `ai_module_map.py`
+  normalizes namespace-qualified base names, surfacing `FransCombatIntelBotModule` as a provider the scan had
+  been blind to. 13 multi-provider seams, all declared; both generated docs regenerated.
+
+Gates: Release build 0/0; tests 942/942 (new `ProviderMergeTest` ×9 + updated
+`BestAffordableMissionUsesTheDeclaredPriorityOrdering`); arch audit 0 ERROR (R1/R2 ok, R7 all declared);
+fog-honesty 80f/263s PASS; bot direct-mutation PASS; boot gate PASS.
+
+Residuals (noted for NOVA/lead): `IBotRegionRoles.RolesReady`, `IBotArmyStaging.PrimaryStagingCell` and
+`IBotZoneTopology` members don't self-guard while disabled — same bug class as `LastMissionAssignment`, left
+to the seam-hygiene pass. The `IFrans*` service lookups in `FransUnitBuilderBotModule.Created` keep their
+fail-fast `FirstOrDefault() ?? throw` — different seam family, fransbot-gated at spawn.
+# 2026-10-04 — EMBER AR-2: the personality-pin desync, fixed per spec (`devin/ember/ar2-personality-pin`)
+
+*Devin-Tier1.* Branch `devin/ember/ar2-personality-pin` from master `3ba05ede7`, worktree `ember-ar2`.
+P0 of the 2026-10-04b architecture review; live only with `AO_tier3_bandits` armed.
+
+**The bug.** `BotPersonalityController.TraitEnabled` is synced — it runs on every client at PlayerActor
+creation — and it read `PlanBanditBotModule.PinnedPersonalityArm`, which resolves lazily from
+`world.LocalRandom` (per-client, cosmetic RNG) plus a local learned file. Each client Thompson-sampled a
+different personality arm and granted a different `personality-*` condition → divergent bot behaviour.
+Same-shape hazard twice over: a pinned client also skipped `Info.Conditions.Random(SharedRandom)`, so the
+shared stream itself diverged.
+
+**The fix (per orders spec).** The pin travels only as a synced order:
+- `BotPersonalityController.TraitEnabled` now calls the pure seam `ChooseInitialCondition`, which draws
+  `SharedRandom` **exactly once, unconditionally**, then applies a harness `PinnedPersonalities` pin over
+  the draw. The bandit read (`BanditPin`) is gone — a synced context can no longer reach host-side state.
+- `MasterAiBotModule.BotTick` (host-only, where `SetBotPersonality` orders already originate) reads
+  `PinnedPersonalityArm` and issues `SetBotPersonality` via the pure seam `BanditPinOrder` — re-issued
+  once per sim second while the controller has not reflected it. While a bandit pin is in effect,
+  candidate personality switching stays silent — the same suppression the old `ResolveOrder` pin gave,
+  now provably sync-safe.
+- Harness `PinnedPersonalities` still wins over the draw and still blocks orders (synced yaml config).
+
+All other bandit readers were already host-only (`IBotTick` modules, log sinks) — audited every
+`PinnedPersonalityArm`/`PlanOverlayMilli`/`Snapshot` callsite. `Resolve()` stays lazy; first read is now
+the host's first BotTick rather than the `Player` ctor, so `EnemyFactionOf` takes its live-players path
+(the pre-`SetPlayers` lobby fallback remains for any earlier reader).
+
+**Tests (+5).** `ChooseInitialCondition`: exactly one `SharedRandom` call pinned or not (asserted on
+`MersenneTwister.TotalCount`, the engine's own sync counter), determinism across twin-seeded "clients",
+pin-overrides-draw, pin-miss-falls-back. `BanditPinOrder`: null arm, already-reflected, inside/outside
+the throttle window. The true 2-client proof is Tier4's AR-T3 armed-bandits sync smoke (assigned).
+Gates: builds 0/0, NUnit **938/938**.
+# 2026-10-04 — EMBER AR-4: PlugSpawner ownership check + scan cache (`devin/ember/ar4-plugspawner`)
+
+*Devin-Tier1.* Branch `devin/ember/ar4-plugspawner` from master `3ba05ede7`, worktree `ember-ar4`.
+P0 of the 2026-10-04b architecture review — two findings in `PlugSpawnerBotModuleCA`, both fixed
+per orders §2.5 ("an owner check (`targetActor.Owner == self.Owner`, the ordering player) + a
+scan cache. Plus a test.").
+
+**The bugs.** (1) The synced `IResolveOrder.ResolveOrder` for `PlacePlugAI` verified the target
+was alive and had an accepting `Pluggable` trait but never checked it belonged to the ordering
+player — any client could place an AI plug on anyone's building. (2) `BotTick` enumerated
+`world.Actors` once per plug type on every interval.
+
+**The fix.** `ResolveOrder`'s frame-end task now rejects the order when
+`!PlugTargetIsOwned(targetActor, self.Owner)` — the trait lives on the ordering player's
+PlayerActor, so `self.Owner` IS the ordering player; the check runs before cost/prereq/enable.
+`BotTick` collects the bot's live own actors once per interval via `CollectOwnedActors`
+(one `world.Actors` pass for all plug kinds) and filters per plug in memory. Both helpers are
+`internal static` pure seams. Placement eligibility (prereq gate, accepting pluggable, first
+match) unchanged.
+
+**Tests (+3, new `PlugSpawnerBotModuleTest`).** `PlugTargetIsOwned`: own/other-player/
+unowned/null targets. `CollectOwnedActors`: keeps only the ordering player's live in-world
+actors; enumerates the source exactly once regardless of plug-kind count. Fixtures use
+uninitialized `Player`/`Actor` with `UnsafeAccessor`-set `Owner`/`IsInWorld`/`Disposed`
+(the same trick as TeamBlackboardTest/ScoutBotModuleTest). Gates: builds 0/0, NUnit **936/936**.
+# 2026-10-04 — EMBER AR-T2: shared test fixtures (`devin/ember/test-fixtures`)
+
+*Devin-Tier1.* Branch `devin/ember/test-fixtures` from master `3ba05ede7`, worktree `ember-t2`. Test-only;
+no gameplay change, no switch.
+
+New `OpenRA.Mods.Cameo.Test/TestFixtures/` namespace:
+
+- `Uninitialized` — the identity-only engine-object helper (`Player()`, `Actor()`, `Of<T>()`), replacing eight
+  inline `RuntimeHelpers.GetUninitializedObject` sites.
+- `FakeZoneTopology` — merged from the two per-file doubles. `NearestSearchRadius = 0` gives
+  InfluenceLayers' exact-lookup semantics; the default ring search reproduces ZoneRegionMemory's.
+  `AddZone(cells, adjacent: int[] = null, resourceCells: 0)` covers both original call shapes (the two
+  originals had *different* signatures — adjacency params vs resourceCells-first — so positional `int`
+  args now fail to compile rather than silently reinterpret; the affected call sites use explicit
+  `new[] { ... }` / named args). `Recut()` clears the map for bridge-rebuild tests.
+- `StubMissionProvider` — one publish-only `IBotMissionProvider` (was identical in two files).
+- `StubUtilityAxes` — one configurable `IBotUtilityAxes` (was near-identical in two files).
+- `RecordingBot` — `IBot` recording queued orders, for the order-capture seam tests ahead
+  (AR-2 personality-pin / AR-4 PlugSpawner).
+
+Migrated 11 test files; `TestFixturesTest` pins the fixtures' own contracts (8 tests).
+Diff: +51/−181 in existing files — net −130 lines of duplication.
+
+Gates: solution build 0/0, test project build 0/0, NUnit **941/941** (933 + 8 fixture tests).
+Note: the worktree's robocopied `engine/bin` held a stale test DLL — the solution build does not include
+`OpenRA.Mods.Cameo.Test`; it must be built (and `vstest` run) explicitly.
+# 2026-10-04 — Devin-T3Verify: PRIORS-CARRY fitter (item 2) — version-aware evidence, Bayesian carry-over, family pooling
+
+*Devin-T3Verify.* Branch `devin/t3verify/priors-carry` from master `3ba05ede7`, implementing
+`SPEC_2026-10-04_claude_priors_carry_over` item 2 in `tools/ai/fit_engagement_priors.py`:
+
+- **Self-pricing logs**: a record's `balance.versus` map (Tier4's log field, `Tag|Armor` or `Tag__x__Armor`)
+  prices its own attribution and decay; a record without it is legacy-weighted at `LEGACY_RECORD_WEIGHT = 0.4`
+  (a bare `fingerprint` is provenance only, not self-pricing). Cells are staked on the record's own percents,
+  else the previous fit's `PriorPct@`, else today's resolved table — old logs are never silently re-priced.
+- **Bayesian carry-over**: `--prev` (default: the existing `--write` target) loads the previous posterior as a
+  pseudo-evidence anchor per cell, decayed `VERSION_EVIDENCE_DECAY (0.7)` per crossed `LedgerHash` boundary
+  (`FitVersion` counts them) times `staleness_decay` = `exp(-|ln(now/fitted)|*1000/350)` — the same decay the
+  consumer applies to the residual (`EngagementPriorsBotModule` on `devin/nova/priors-carry`, formula verified
+  identical). Dead delivery rows carry nothing; a missing armour row reads the Versus-default 100, same as the
+  consumer. Anchors re-base into the new `GlobalScaleMilli` so a uniform scale move never shifts them; the same
+  carry covers `DefenceState@`/`IntoDefences` (boundary decay only — pooled scalars stake no single cell prior).
+- **Hierarchical pooling**: cell → delivery-family (`Tag` minus its `_level`) → global; the family level pools
+  SIBLING cells only (excluding the cell itself, else single-cell families double-count their own evidence).
+- **`Evidence@` per cell** (effective N = real exp-side credit + decayed carried mass) plus
+  `DefenceStateEvidence@`, `IntoDefencesEvidence`, `FitVersion`, `StalenessTauMilli` — unknown keys are
+  consumer-safe (verified against NOVA's parser: exact-match/StartsWith on the other prefixes only).
+- `--no-carry` fits a fresh table (FitVersion 1). New `--prev`/`--write` default wiring in `main()`.
+
+Gates: `pytest tools/tests/test_fit_engagement_priors.py` 34/34 (26 existing + 8 new: legacy downweight,
+own-stats decay, posterior anchor, boundary+move decay ordering, dead-row carry, Evidence round-trip,
+carry yaml keys, family-pool borrow). Fitter run end-to-end on the real engagement log dir. Tools-only change —
+no engine content, no game yaml — boot-gate not applicable.
+
+---
+# 2026-10-04 — Devin-Tier1 (EMBER): AR-T1 coverage infrastructure — dotnet-coverage collector, per-file report + ratchet, CI job
+
+*Devin-Tier1 (EMBER).* Branch `devin/ember/coverage-infra` from master `3ba05ede7` (orders §2 AR-T1):
+- **Collector:** `dotnet-coverage` (Microsoft CLR profiler, `dotnet tool install -g dotnet-coverage`) is the only driver
+  that records hits in this `EngineRootPath` layout. `coverlet.collector`/`coverlet.msbuild`/`coverlet.console` all
+  enumerate 944 classes but report 0% — the vstest testhost never loads coverlet's instrumented copies ("Hits file
+  not found" for every module). The csproj carries no coverage package; collection is `coverage_report.py --collect`.
+- **`tools/ai/coverage_report.py`** (new): runs `dotnet-coverage collect -f cobertura` over the built test assembly
+  OR parses an existing XML; emits a per-file worst-first markdown table + `coverage_baseline.json` for the ratchet.
+  Scope: `OpenRA.Mods.CA/Traits/BotModules/**`, `OpenRA.Mods.Cameo/Traits/BotModules/**`, `Cameo/Traits/*Bot*.cs`.
+- **`audit_test_coverage.py`**: C# scan now covers `OpenRA.Mods.Cameo` AND `OpenRA.Mods.CA`; stale placeholder floors
+  re-measured at true values (T1 24→933, T2 177→3076, T3 224→496 after the CA scan joined — recorded debt, same
+  rule as 2026-08). New flag-gated **T4**: `--coverage-xml` ratchets every baselined file's line-rate (ε=0.1pt);
+  `parse_cobertura` accumulates per filename across `<class>` records (last-type-wins produced phantom 100→0%
+  regressions — pinned by a unit test).
+- **First honest numbers:** 106 bot-module files, **line 19.4%, branch 17.2%**; worst files are
+  `BotGlobalUnitBudget`/`BotCounterDemandController`/`BotInsurance`/`PlugSpawnerBotModuleCA` at 0%.
+  Report: `docs/audit/coverage_botmodules.md`; baseline: `tools/tests/coverage_baseline.json`.
+- **CI:** additive `cameo-tests` job in `.github/workflows/ci.yml` (windows-2022, `make.ps1 all` → `dotnet test`
+  → coverage ratchet). Stock upstream jobs untouched. Note: org CI is disabled in GitHub — the job runs when enabled.
+- Tests: `tools/tests/test_coverage_report.py` (13 tests: scope, multi-class accumulation, parser agreement,
+  ratchet edges). Verified: bare audit exit 0 (run_all compat), `--coverage-xml` self-check 0 regressions/106 baselined.
+
+# 2026-10-04 — Devin-Tier4: PRIORS-CARRY — engagement records carry the balance that produced them
+
+*Devin.* `devin/tier4/takeover-smoke` in `C:/cameo-wt/t4-smoke` (stacked on AR-T3 tip
+`e2e13e250`, base `3ba05ede7`). Spec `SPEC_2026-10-04_claude_priors_carry_over.md`
+(Tier4 lane: engagement-log field; T3Verify: fitter; NOVA: consumer; lead: integration).
+The tier-1 fitter re-priced old logs under *today's* Versus and got cells wrong whenever
+balance moved — every engagement record now carries an additive `balance` block:
+
+```json
+"balance": {"fingerprint": "sha256:…", "versus": {"Bullet_Light|Flak": 163, …}}
+```
+
+- **Fingerprint** = sha256 over mod id + mod version + map uid + sha256 of every
+  manifest weapon/rules file — identifies the exact rules revision that produced
+  the record (map uid is deliberately included: map yaml can overlay weapons).
+- **`versus`** = the resolved Versus percent for every `delivery-tag|armour-class`
+  cell the engagement touched (seen start/end compositions only — never the truth
+  scan). One-sided engagements (lone scout dies, no enemy ever tracked) emit
+  **fingerprint-only** — the fitter's declared legacy-weight (0.4) path, still
+  provenance-bearing. `versus` is omitted rather than emitted `{}` (ambiguous).
+- **Tag identity has exact ledger parity:** runtime `WeaponInfo` discards the
+  `Warhead@<suffix>` key, so tags are recovered from the resolved weapon yaml
+  (`MiniYaml.Load` of manifest weapons + `world.Map.WeaponDefinitions`), matching
+  `extract_stats.py` `damage_warheads[].tag` — parity-checked **1568/1568 weapons,
+  0 mismatch**. Main-warhead pick = max positive damage restricted to the ledger's
+  five damage types (`AffectsIntegrityWarhead` excluded, as the extractor does).
+- New `EngagementBalance` helpers in `EngagementMath.cs` (`Fingerprint`,
+  `WarheadTable`, `WarheadTag`, `AddCells`); ruleset-scoped `BalanceStatsCache`
+  inside `EngagementLogBotModule` (record-only, unsynced — zero sim cost share).
+- **T3Verify contract:** `r["balance"]["versus"]["<Tag>|<Armor>"]` (also accepts
+  `__x__`); fingerprint-only → legacy weight. Peer review of their fitter: contract
+  compatible; minor notes filed (`boundary=False` on missing prev `LedgerHash`
+  undocumented; parsed `prev.staleness_tau_milli` unused).
+
+**Live evidence** (`tools/ai/run_ai_match_batch.py --repeats 1 --time-limit 1`, 3 clean
+matches, `elcheck` support dir): 1128 log lines → **618/618 engagement records carry
+`balance`** — 295 with touched-cell versus (254 distinct `Tag|Armor` keys, 0 malformed,
+resolved values e.g. `Bullet_Heavy|None=200`, `1Dam|*=100`), 323 fingerprint-only
+one-sided records. Three distinct fingerprints = one per batch map variant, as designed.
+Backward compat: `engagement_report.py` and the on-branch `fit_engagement_priors.py`
+parse the new records unchanged (fitter reports "50 empty-side", matching the class).
+
+Gates: build 0 err/0 warn; focused fixture **17/17**; full suite **971/971** (967 + 4
+new balance tests); fog audit PASS (263 sites, 0 new — ruleset yaml is not actor state);
+wiring / personalities / merged / direct-mutation / arch audits PASS (R3–R6
+informational); `ai_module_map --check` current; **boot gate PASS** (menu reached,
+0 new exceptions).
+
+Files: `EngagementMath.cs` (+83), `EngagementLogBotModule.cs` (+164),
+`EngagementMathTest.cs` (+103) — all additive; no yaml, no balance numbers touched.
+
+# 2026-10-04 — Devin-Tier4: AR-T3 — batch --round-trip, AR-2 MP desync regression RED on master, hotspot #1 extraction, module-map consumer fix
+
+*Devin.* `devin/tier4/takeover-smoke` in `C:/cameo-wt/t4-smoke` (base `3ba05ede7`).
+Four pieces of the AR-T3 bundle:
+
+- **`run_ai_match_batch --round-trip`:** new flag runs `round_trip_check.py` on the
+  batch's support dir after `batch_summary.json` is written, stores
+  `summary["round_trip"] = {"exit": rc}`, rewrites the summary and fails the batch
+  on a nonzero checker exit. Extracted into `run_round_trip()` for testability;
+  3 tests in `tools/tests/test_ai_batch_harness.py` (36/36 file PASS).
+- **AR-2 MP regression (`desync` scenario, RED on master as required):** two real
+  clients on opposite teams, `hard` generic bots each side, `AO_tier3_bandits`
+  armed transiently (byte snapshot → apply → finally-restore, launch inside the
+  try). Judge asserts 0 sync reports AND identical plan-bandit pins per bot
+  across clients — pin equality is the honest observable: `Player.cs` activates
+  bot brains host-side only, `Sync.RunUnsynced` wraps bot ticks, and granted
+  conditions carry no `[VerifySync]` state, so a divergent pin can never reach
+  the order hash today (a sync-report-only assert is green-by-construction).
+  **Live run on master: FAIL — Multi2 `steamroller`/`surge` (c0) vs
+  `guerrilla`/`press` (c1); Multi3 `steamroller`/`surge` (c0) vs
+  `turtle`/`balanced` (c1); 0 sync reports, 0 exceptions** — evidence
+  `C:/cameo-wt/_support_t4_smoke/scenario_desync/RESULT.json`. GREEN once the
+  pin moves to shared deterministic random state (AR-2 fix lane). Harness
+  hardening: clients are killed inside `actions` before `finish()` collects, so
+  buffered debug.log pin lines flush to disk before the judge reads them
+  (a live client's log buffer hid c1's pins in an earlier run).
+- **Hotspot #1 `MasterAiBotModule.Rebuild`:** pure decision branches extracted to
+  new `MasterAiEval` (12 functions — urgency latch, coalition-target bias,
+  nemesis override, emergency personality transition, held demands + demand-order
+  gate, region-intel counts, ledger/window deltas, per-game-minute rate, defence
+  fraction + expansion appetite hints, defence request). Rebuild keeps gathering,
+  publication and orders; a REBUILD DECISION TREE comment now documents
+  inputs/outputs/branch ownership and the manifested omniscient read. New
+  `OpenRA.Mods.Cameo.Test/MasterAiEvalTest.cs` — 34 NUnit tests covering every
+  branch incl. boundary/short-circuit/sentinel paths; bit-identical behaviour
+  (no World/Actor/trait reads in the eval file).
+- **`ai_module_map.py` consumer fix (false "no consumer" rows):** two bugs —
+  (a) class body slicing stopped at the next `class` keyword, so a nested helper
+  (`EngineerBotModule`'s `EscortPlan`, `SquadManagerBotModuleCA`'s
+  `MissionAttempt`, `CombatVetoBotModule`'s `CachedVerdict`) swallowed the rest
+  of the module's lookups; spans now close at the next class at the same-or-
+  shallower brace depth. (b) Lookups in non-module classes were invisible;
+  outermost-enclosing-class attribution adds helper consumers
+  (`BaseBuilderQueueManagerCA`, squad states, `BotMissionLog`, `TeamBlackboard`,
+  `BotUnitLeases` statics) shown with `+` in the map. **C2 false positives
+  12→1** — only the genuine phase-A `IBotFrontBackAdvisor` row remains.
+  `audit_bot_wiring.py`/`ai_arch_audit.py` updated for the widened signature.
+
+Gates: build 0 err/0 warn; **967/967 tests** (933 + 34 new); fog audit PASS
+(263 manifested sites, 0 new — eval file registers none); bot-wiring,
+personalities, merged-modules, direct-mutation, ai_arch audits PASS (R3–R6
+informational only); boot gate PASS. Desync stays out of `all` — it is red until
+the AR-2 fix lands. Also surfaced (not this lane): latent
+`TypeDictionary contains multiple instances of PowerInfo` crash in
+`ExpansionPlannerBotModule.IsPowerPlant` on `_ra_doubles` — deterministic on
+that map for a dual-Power-trait actor; crashed two desync runs, filed to lead.
+
+# 2026-10-04 — Devin-Tier4: TAKEOVER-SMOKE (real multi-client takeover smoke, all six scenarios PASS)
+
+*Devin.* `devin/tier4/takeover-smoke` @ `da8595dac` in `C:/cameo-wt/t4-smoke` (base
+`devin/t3verify/bot-takeover@9a0348101`, pre-rev-2). The multi-client smoke T3Verify's
+phase 1 could not run: real `OpenRA.Server.exe` + real `Launch.Connect` clients in
+isolated support dirs, driven by two DEV-ONLY double-gated hooks (`CameoDevArgs` argv
+gate + per-process plan file; `CameoLobbyAutopilot` ServerTrait drives the lobby via
+`Server.InterpretCommand`; `CameoAutoOrders` world trait issues timed orders incl. the
+pause-menu Surrender shape). Harness `tools/ai/takeover_smoke.py` (stale-proc kill,
+3-driver cap via tasklist, uid-in-debug.log start detection, record/block/sync-report/
+exception collection, per-scenario RESULT.json). **Bug found + fixed on this branch:**
+`AiMatchLogWriter.AllBotsResolved` vacuously true on an empty logged set → the
+single-shot record burned at world load → takeovers in all-human matches could never
+be recorded (the boss review's blocker, corroborated live). **Results:** inert PASS
+(both gates hold) · c PASS (solo surrender → defeat) · d PASS (disconnect →
+`controller_client:0`) · a PASS (2v2 kill → disconnect) · b PASS (2v2 surrender) ·
+e PASS (admin-kill → re-election `controller_client:1` on the survivor). 0 sync
+reports, 0 exceptions everywhere. Evidence `C:/cameo-wt/_support_t4_smoke/scenario_*`;
+fleet `NOTE_2026-10-04_devin-tier4_takeover-smoke.md` +
+`STATUS_2026-10-04_devin-tier4_takeover-smoke.md`. Engine findings: mid-game disconnect
+never reassigns `BotControllerClientIndex` (Server.cs:1252, WaitingPlayers only) →
+orphaned lobby bots go inert (scenario e is a 1v1 for that reason); `EnableSingleplayer`
+disables the tracker; `easiest` bots cannot end a match, `brutal` resolves a 2v2 in ~4 min.
+Open vs rev-2 (`ae7075cd8`): exactly-one-record assertion + scenario f (spectator-admin
+server) per T3Verify; maintainer's passive-takeover observation matches the boss's
+omitted-service-condition finding — harness can repro on the corrected checkpoint.
+# 2026-10-04 — EMBER: HARVEST_LEDGER (H-0) + doc staleness + H-9 upstream refresh
+
+*EMBER (Devin).* Branch `devin/ember/harvest-ledger` off master `3ba05ede7` — docs only:
+- `docs/design/HARVEST_LEDGER.md` (new): one row per upstream bot file across vanilla, CA, CN,
+  Fransbot, SP, GA, HV, DR, OP2 + surveyed-empty repos, each with a disposition
+  (`HARVESTED`/`MERGED`/`IDEA`/`REJECTED`/`OPEN`/`NONE`), where it landed, or why it was refused.
+  Encodes the harvest rule: a port merges only when it names the decision it owns and the
+  consumer/seam it feeds. Cheat-class traits (cash/handicap multipliers) are REJECTED by design law.
+- `AI_MASTER_PLAN.md` §1 item 2: CN "1 of ~16" → "~8 of ~16" (CombatAnalysis + TacticalMap ports,
+  Deploy + BridgeRepair CN3 items, 4 idea re-implementations).
+- `AI_SYNTHESIS.md`: §7 callout annotated as a dated snapshot; source table rows updated
+  (CN "not yet" → ~8 derived; Fransbot "not yet, V1.29.19-RC" → vendored, 8 services arm via
+  `inc3_frans_services`, upstream `main` = V1.29.31+); §4.1 newest-code line corrected.
+- `WORKFLOW.md` upstream-status line (H-9 weekly refresh): Fransbot 33 new commits
+  (v1.29.55-4 — new VD-1 "Victory Drive" series, harvest-review candidate), GA 58, CN 0, RV 0;
+  openra ≈+17 (baseline sha absent, re-pin on next survey regen); absent clones noted.
+
+# 2026-10-05 — EMBER: AR-S dedup OFF-path bit-identity fix (devin/ember/ars-stutter-gated)
+
+*EMBER, on top of NOVA `e39670678`.* Independent review found `BK_squad_order_dedup` was NOT
+bit-identical with the switch off: `QueueDeduped` skipped emitting when the member list was
+empty where the pre-change code queued the grouped order regardless; new
+`owner.TargetActor != null` guards dropped `AttackMove` packets the old code issued as
+`Target.FromActor(null) = Target.Invalid`; and the unarmed path paid a `Where().ToArray()`
+plus `OrderChanged` walk every call. Inert packets in-game, but the order stream differed.
+
+- `QueueDeduped` now early-outs unarmed through `SquadOrderDedup.EmitSet`: the grouped order
+  is issued unconditionally over the full member array — empty included — with the site's
+  original `queued` flag (new param; `ReturnToBase` rearm keeps `queued: true`, which
+  serializes into packet flags).
+- Every `OrderChanged`-gated call site is wrapped `!UseSquadOrderDedup || OrderChanged(...)`:
+  unarmed short-circuits before key construction, `CellContaining`, or memory access — no
+  extra allocation, no filtering. Armed path (guards + dedup) unchanged.
+- `SquadOrderKey.ForActor(null)` now yields the zero key instead of throwing, so the unarmed
+  call site can evaluate it for a null `TargetActor` exactly as the old code built
+  `Target.Invalid` orders.
+- `QueueRallyOrder` (protection) routes through the same `EmitSet`: unarmed queues the full
+  squad unconditionally; the armed latch/monotone-mode logic is untouched.
+- New tests in `SquadOrderDedupTest` record the emitted stream with the switch off for an
+  empty group and a null target and assert it matches the pre-change packets.
+
+# 2026-10-04 — NOVA: AR-S residual — squad order dedup + flee-episode home latch (BK_squad_order_dedup)
+
+*NOVA.* Branch `devin/nova/ars-stutter` from master `3ba05ede7`, off EMBER's march-lattice
+hysteresis lane (local-only `devin/ember/formation-hysteresis@0895768eb`, t3verify-approved).
+The residual from EMBER's post-fold trace — protection rally/lure flap, quiet-defender
+Flee->Idle->Attack random-Move cycles, guerrilla/navy grouped per-tick re-issues — plus the
+class their alternation metric could not see: **identical-order re-issue spam**.
+
+- `SquadOrderDedup` (pure rule + `SquadOrderKey`, all branches pinned by `SquadOrderDedupTest`):
+  an order to a member queues only when (order, quantized target) actually changed. Mobile
+  orders re-issue on idle (a real retry); terminal orders (Stop/Scatter/ReturnToBase) never
+  repeat to the same effect. Memory lives on `SquadCA` so it survives state transitions and
+  is pruned of departed members.
+- `QueueDeduped` on `StateBaseCA`: grouped orders carry only members whose key changed —
+  empty groups queue nothing.
+- Protection rally/lure `rallyMode` latch (mode 1 hold < mode 2 lure, monotonic, cleared back
+  inside the rally radius); armed quiet defenders hold post instead of re-rolling.
+- `Retreat` flee-episode home latch (`SquadCA.FleeHomeCell`, cleared when the whole squad is
+  idle): `HomeLocation` -> `RandomBuildingLocation` re-rolled a fresh building every pass,
+  each re-roll cancelling the in-flight leg — the dominant Move spam.
+- Maintainer clarification folded in: per-tick orders are fine while units progress; the
+  defect is path-reset stop-start. Dedup suppresses only identical in-flight re-issues.
+
+Trace (td_gdi hard mirror, `order_trace.py` + issue-rate extension): alternations 459 -> 99
+(-78%), Move orders 1553 -> 484 (-69%), order-spam units 23 -> 11, alternating stutter units
+37 -> 16. Residual flagged units are queued waypoint chains (air strike routes, `queued:true`
+route legs — benign) and support-follow parent drift; the per-frame Move emitters outside the
+squad lattice (harvester retreat, deploy/scout/engineer/beacon modules) are a new fleet
+finding — flagged for the AR table.
+
+Gates: build 0 errors; Cameo tests 940/940; boot gate PASS (menu, zero new exceptions);
+unarmed path bit-identical by construction (`armed` short-circuits before memory reads);
+ai.yaml mounts all `false` — `BK_squad_order_dedup` in `increment_switches.yaml` arms it.
+INC-ready.
+
 # 2026-10-04 — Claude (lead): INC 2026-10-04e lands — INC-d completed (P0 raid gate), LC5 admission claims, checker v2, E2 test baseline
 
 *Claude.* Branch `inc/2026_10_04e` from master `1fbd239ff`:
@@ -31,6 +950,66 @@ Gates:
 
 Tooling gap: the raid gate uses the shared `%APPDATA%` support dir when the tree has no `engine/Support`. It should take an
 isolated dir like `boot_gate.ps1` does.
+
+# 2026-10-04 — Devin-EMBER: AR-S formation hysteresis + transition-only squad orders (user-reported army stutter)
+
+*Devin.* `devin/ember/formation-hysteresis` on `3ba05ede7`. Maintainer report: armies march in stutter-steps —
+short moves, stop, restart, unnatural. Root cause in `GroundUnitsAttackMoveStateCA`: every squad tick issued a
+fresh `Stop` to each `holdFront` member and a fresh `AttackMove` to every `pushFront`/anti-air/scout/trailing
+member AND to the leader — each re-issue cancelled the unit's active `MoveTo`, so the whole army repathed every
+tick (visible stop-start). The hold/push split itself was a hard cut at `FormationMaxLeadCells`, so a member
+hovering at the threshold flipped Stop↔AttackMove tick over tick. Fix, per the coordinator's AR-S rulings
+(gated, classic bit-identical):
+- **Gate:** `SquadManagerBotModuleCAInfo.UseFormationHysteresis` (default false) + switch group
+  `BJ_squad_hysteresis` in `tools/ai/increment_switches.yaml` (arms all instances; `SquadManagerBotModuleCA@classic`
+  is in the file's `skip` list, so classic keeps the verbatim old order stream — bit-identical by construction).
+- **Dead band (armed):** new pure static `SquadMicroEvalCA.ClassifyHolding(over, lead, hysteresis, wasHolding)` —
+  enters Hold above `lead + hysteresis`, leaves at/below `lead`, keeps the previous class inside the band.
+  `FormationHoldHysteresisCells` (default 2; 0 = old hard cut). 100% branch coverage in `FormationHysteresisTest`.
+- **Transition-only orders (armed):** per-member `formationOrders` memory of `(FormationClass, quantized CPos)` —
+  Push(routeCell) / Hold(CPos.Zero) / AntiAir(centroidCell) / Scout(routeCell) / Trail(trailCell). An order is
+  queued only when class or quantized target actually changed (unarmed = every tick, the old stream); stale
+  entries for members that left the squad are dropped; `Activate` clears the memory.
+- **Latched leader wait (armed):** the leader stops once when a member trails beyond `occupiedArea*5` and
+  releases only when everyone is back within `occupiedArea*3`; the leader's `AttackMove` is re-issued only when
+  the leader actor or the route cell changes. Unarmed = the old per-tick `Stop`/`AttackMove` if/else.
+- **Pull-back fold (armed):** the before-trace showed the dominant flip was `AttackMove`↔`Move`, not
+  `Stop`↔`AttackMove` — the formation push re-issued `AttackMove` while the MI pull-back issued `Move` to the
+  trail line in the same tick, so a member under `SquadMicroRetreatPct` oscillated every squad tick. Armed now
+  classifies wounded frontline/trailing members (and the stalled-under-fire rear) as `Retreat`/`RetreatRear`
+  inside the same dedup lattice — a pulled member is never pushed in the same tick, the `Move` re-issues only
+  when the quantized rally cell changes, and the per-order micro budget is consumed only on a real transition.
+  Unarmed runs the verbatim old micro block after the verbatim old stream.
+- Deterministic/synced: pure functions of synced positions and squad membership only.
+
+**Order-rate evidence (coordinator requirement):** `tools/ai/order_trace.py` (new, this branch) parses the
+`.orarep` order stream and counts per-unit order-string alternations in
+a 25-tick window (1 sim-second; ≥2/sec = stutter per the AR-S definition). One hard-vs-hard duel each arm,
+`td_gdi` mirror, `run_ai_match_batch.py --repeats 1`, 0 other game drivers:
+- before (unarmed, = the classic stream): 311 units ordered, 548 alternations, **90 stutter units** (peak
+  3 alt/s at ~17-tick squad cadence; `AttackMove`→`Move` 273 + `Move`→`AttackMove` 233 dominated).
+- after (`BJ_squad_hysteresis` armed): 283 units, 298 alternations, **28 stutter units** — **−69% stutter
+  units, −46% alternations** (−39% per-tick normalised). Residual `AttackMove`↔`Move` churn sits in the
+  `unitsHurryUp` catch-up path (~33-tick per-tick leader-cell reissue) and non-`Rush` squad types — the
+  explicitly-unassigned scope.
+- Replays: `_ars_trace/before|after` support dirs (fingerprint `472471185b2d` / `a4d4f3456e94`).
+
+Known limits: the non-formation catch-up path (`unitsHurryUp`, guerrilla/harass + non-`Rush` squads) still
+re-issues `AttackMove` to the leader's cell every tick — left unchanged (scope). Armed held members whose
+`AutoTarget` engages now keep firing instead of being re-`Stop`ped each tick (intended; hold position kept).
+
+Gates: build 0 warnings 0 errors on `3ba05ede7`; `OpenRA.Mods.Cameo.Test` 937/937 incl.
+`FormationHysteresisTest` (4 cases = 100% `ClassifyHolding` branch coverage); boot gate PASS on the final code —
+`MenuPostProcessEffect.PostWorldLoaded`, no new exceptions (`exception-2026-10-04T162211Z` in the scratch
+support dir was a bad-launch-args abort, not a game crash).
+
+Flag for the coordinator (pre-existing, unrelated): during the boot window a match on "A Nuclear Winter" crashed
+with `TypeDictionary contains multiple instances of PowerInfo` at `ExpansionPlannerBotModule.IsPowerPlant`
+(`exception-2026-10-04T145446Z`) — an actor carrying two `Power` traits; YAML/data issue, not this change.
+
+Handoff: **INC-ready: `devin/ember/formation-hysteresis` — switch: `BJ_squad_hysteresis` (default OFF; classic
+bit-identical).** Coordinator merges and runs the A/B per WORKFLOW; fleet note
+`STATUS_2026-10-04_ember_formation_hysteresis.md`.
 
 # 2026-10-04 — Claude (lead): INC 2026-10-04 lands — refinery law v2, bot takeover, BP phase 1, RADAR-ALLY, mpspawn parser
 
@@ -69,6 +1048,14 @@ Verified P0s:
 - AR-1: grouped orders bypass the lease gate in `ModularBot.PassesGate`.
 - AR-2: the personality pin is read in synced `TraitEnabled` from host-only state.
 - AR-4: PlugSpawner order without an owner check.
+# 2026-10-04 — Devin-T3Verify: TAKEOVER nit — one AutoTarget scan per refresh (AR-P2)
+
+*Devin.* `devin/t3verify/takeover-scan-nit` off `devin/t3verify/bot-takeover@f475f1881`. The lead's
+AR-P2 nit: `ApplyBotStances` ran one `world.ActorsHavingTrait<AutoTarget>()` pass **per taken-over
+seat** on every refresh — N world scans per 25-tick pass. Now a single scan filters by
+`records.ContainsKey(a.Owner)` — O(actors) once regardless of seat count, same mutation set, same
+determinism (actor enumeration order unchanged, `records` added the seat before the takeover call).
+Gates: build 0/0; takeover suite 22/22; boot gate PASS.
 
 # 2026-10-04 — Devin-T3Verify: TAKEOVER bot-stance fix + tactical-map lazy build (user-reported passivity)
 
@@ -413,6 +1400,85 @@ Flagged for owners (no test-side repin without a ruling):
   all 8 CannonAP endpoints + forgotten-cannonap; freedom-elite gate unsatisfiable after the
   coupling-regen revert (fixture canonical 45 vs live 44); GhostSniperLockdown/VonSniperLockdown
   fixture-completeness gaps; `test_firepower_consumers` unresolved-armament divergence.
+# 2026-10-04 (later) — NOVA PRIORS-CARRY: decayed carry-over replaces hard staleness
+
+*Devin (nova), `devin/nova/priors-carry` off `devin/nova/t2-port-v2`.* Maintainer spec:
+a rebalance must not zero the learned residual table. `FactorPermille` now decays a
+moved cell by `exp(-|ln(now/fitted)| / StalenessTauMilli)` (default 350‰ of the
+exponent — a 10% Versus move keeps ~76% of the residual, a 2x redesign ~14%) instead
+of hard-invalidating it. Only a delivery whose Versus row resolves nowhere while the
+warhead map IS loaded — the new `BotUnitProfiles.VersusTableLoaded` discriminator —
+or a non-positive prior still returns neutral. Unverifiable (no map: tests, headless
+tools) reads as the Versus-default 100, matching the old `now=100` fallback, so the
+decay math stays unit-testable. Telemetry moves `fitted:N/stale:M` to
+`fitted:N/carried:M/decay:D` (mean decay permille across carried cells);
+`AI_MATCH_LOG.md` both copies updated. `StalenessTauMilli` parses from the priors
+file (>0 only). 848/848, boot gate PASS (isolated support dir), arch freshness PASS.
+
+# 2026-10-04 (later) — NOVA N1 `2cdfdbac8`: parse-tolerance test vs the real emitted file
+
+*Devin (nova), same branch `devin/nova/t2-port`.* EMBER's first real fit (`ember-fit`,
+2,182 engagements fitted / 7,301 records) carries the full emitted block set —
+`Schema`/`LedgerHash`/`Engagements` headers, `#` comments, and `AttackTiming@` /
+`Response@` / `SuicideIndex@` analysis rows the §12.31 consumption contract does not
+define. `BotEngagementPriors.Parse` skips them by construction (prefix dispatch +
+`TryParse`), and `FitterMetadataBlocksAreSkipped` locks that: an out-of-contract block
+can never become a load failure. 844/844. (One real-value trap while writing it:
+`PriorPct: 155` marks the cell STALE in test context — ResolvedTagVersus is null →
+prior-100; the fixture uses 100 and real staleness stays covered by the dedicated tests.)
+
+# 2026-10-04 (later) — NOVA N1 `70879b038`: `GlobalScaleMilli` consumed
+
+*Devin (nova), same branch `devin/nova/t2-port`.* T3Verify's accounting-fixed fitter
+(`devin/t3verify/tier1-fit-scale`) fits cell/defence/into-defences factors RELATIVE to a global
+obs/exp scale g (~1.13 once accounting is fixed) — partial pooling keeps thin cells honest — but
+today g survives only as a yaml comment, so a relative-fitted file would silently under-apply by
+the level. Consumer side now reads the optional `GlobalScaleMilli` header key: every fitted lookup
+(`FactorPermille`/`DefenceFactorPermille`/`IntoDefencesPermille`) multiplies `v × g / 1000` back to
+absolute; absent key = Schema-1 absolute semantics (v1 files read unchanged); a stale or unfitted
+cell returns Neutral before scaling — g never fabricates a correction on its own. The emit side is
+one line (`GlobalScaleMilli: <g×1000>` under `IntoDefencesMilli:`) pending the coordinator's ruling
+— see fleet `REPLY_2026-10-04_nova_to_t3verify_globalscale.md`. `AttritionExponentMilli`
+deliberately unscaled (exponent, not a damage factor). 843/843 (+2 tests), freshness PASS.
+
+# 2026-10-04 (later) — NOVA N1 follow-up `21781e27b`: exponent consumed + priors observability
+
+*Devin (nova), same branch `devin/nova/t2-port`.* The first pass parsed `AttritionExponentMilli`
+but never applied it — the pair-level `CorrectionMilli` seam cannot express a ratio warp. Added
+`IBotEngagementPriors.AttritionExponentMilli` (default 1000); `CombatVetoEval` applies
+`ratio^alpha` and re-derives surviving fractions (Lanchester invariant preserved), clamped to the
+existing [500, 2000] bounds. Provider `PriorsState` (`none`/`error`/`fitted:N/stale:M`, live stale
+count) now lands on the match record's `priors_state` so the A/B review sees unfitted/stale matches
+without digging debug logs; parse failure = `error` + neutral instead of a BotTick throw.
+`tier1_priors` added to `WatchConditions` — it shifts veto verdicts, so it filters which
+engagements exist (§12.33 armed-set attribution). 841/841, audits + boot PASS.
+
+# 2026-10-04 — feat(ai): NOVA round-2 N1 — the tier-2 follow-up port, one branch off master
+
+*Devin (nova), worktree `C:/cameo-wt/nova-t2port`, branch `devin/nova/t2-port` off `origin/master` @
+`8e86fca23` (round-2 orders rule 1). Consolidates `devin/nova/t1-priors-port` (which sat on a
+pre-INC-b/c base with revert+merge history) into ONE clean branch; the #795/#796 parallel lanes are
+superseded by it (F1-a: one format).*
+
+- **(a) veto deltas:** launch-edge consult + remembered-defences already landed via INC-N (my
+  design) — verified present, nothing to re-port.
+- **(b) tag axis:** `BotWeaponProfile.Delivery` = the main warhead's resolved `Warhead@<tag>`
+  suffix (`MiniYaml.Load` merges `Inherits`; same-index first, class-validated, class-name
+  fallback). Joins EMBER's ledger-tag taxonomy.
+- **(c) one schema:** `EngagementPriorsBotModule` reads `BotEngagementPriors`
+  (`DeliveryArmour@d__x__a`, `DefenceState@`, `IntoDefencesMilli`) natively; `Factor@`/
+  `StatFingerprint`/`arsenal_priors` paths retired (F1-a).
+- **(d) per-cell staleness:** `PriorPct@d__x__a` vs `BotUnitProfiles.ResolvedTagVersus(tag)` —
+  `^Warhead_<tag>` template canonical + one-level family fallback = the fitter's own
+  `versus_priors` question, O(1) after the lazy map. A moved Versus neutralizes exactly that cell;
+  absent PriorPct = unfitted = neutral. `LedgerHash` offline provenance only.
+- **(e)** `EngagementPriorsBotModule` performs **no faction-keyed lookups** (delivery x armour
+  axis only) — the `BotFactionView` rule is satisfied vacuously; noted for the record.
+- **Gating:** `AP_tier1_priors` → `tier1_priors` → `genericbot && tier1_priors`, independent of
+  `AN_combat_veto`; armed alone = inert; missing file/provider = 1000 neutral (classic
+  bit-identical).
+- Verified: build 0 err, **0 new mod-code warnings**, 840/840 tests (6 `EngagementPriorsTest`),
+  wiring/fog/direct-mutation/freshness PASS.
 
 # 2026-10-03 — coordinator: tier-3 hotfix (INC c) + ORDERS round 2 to NOVA/DAWN/EMBER
 
@@ -18580,3 +19646,136 @@ Branch `devin/dawn/t3-public-faction` off master `8e86fca23`, worktree `C:/cameo
 * Verify: build 0E, **mod-code warnings 0**; 837/837 NUnit (+3 BotFactionView/DominantFaction);
   pytest 15/15 new file; `tools/boot_gate.ps1` PASS (menu, 0 exceptions, exit 0); audit regen: fog_honesty
   +1 site (263), ai_arch_freshness FAIL->PASS (master's committed report was stale), rest master drift.
+ 
+
+## 2026-10-05 — EMBER: AR-S residual 2 — BL_protection_episode_guard (h2 engage-vs-lure flap)
+
+* Tagged-emitter attribution on the instrumented BJ+BK build showed ~95% of the surviving
+  flagged alternation is `AttackMove(engage) <-> Move(lure)` inside the protection tick — the
+  `PredictsLoss` verdict flickers at the fog edge and each eval re-issues a different-key order
+  (the dedup key cannot express it; the rallyMode latch only covers the rally side).
+* Guard: `ProtectionEpisode` — a pure struct in `Squads/` (same testability pattern as
+  `SquadOrderDedup`). The lure episode enters on `ProtectionLureEnterConfirmTicks` (2)
+  consecutive losing evals and aborts on `ProtectionLureAbortConfirmTicks` (2) consecutive
+  non-losing evals; engage entry itself is never confirmed, so a winnable enemy still fights
+  the eval it appears. Squad evals run once per `AttackForceInterval` (~2-4 s), so each confirm
+  is one extra round, not a tick-level delay. Episode state resets on Activate and when the
+  leader is back inside `LureRallyRadiusCells` (same site as the rallyMode reset).
+* Switch: `UseProtectionEpisodeGuard` (default off) + the two confirm fields on
+  `SquadManagerBotModuleCA`; armed only via `BL_protection_episode_guard` in
+  `tools/ai/increment_switches.yaml`. Off = the per-eval decision, unchanged stream.
+* Tests: `ProtectionEpisodeGuardTest` 7/7 — flap never enters, sustained-loss enter,
+  in-flight flicker ignore, resolved-verdict abort, immediate engage, re-enter needs
+  re-confirm, degenerate 1/1 = classic per-eval.
+* Stack: `devin/ember/ars-stutter-finish` = inc/2026_10_05 (fe4459c9c) + merge of
+  `devin/ember/ars-stutter-gated` (e81da54e7: e39670678 + the BK off-path bit-identity
+  fix — EmitSet early-out keeps the unarmed grouped stream byte-identical incl. empty
+  groups, Invalid-target orders and the rearm `queued` flag; armed path unchanged) +
+  BL cherry-picked on top. Supersedes the 04g-era `9e601d213`.
+* Gates on ebed3d9dc: build 0E/8 pre-existing warnings, targeted 17/17, suite 1160/1160,
+  isolated boot `BOOT_GATE=PASS`.
+* Instrumented 3+3 (same tagged build, equal window 4002f, BJ+BK -> BJ+BK+BL): h2
+  alternations 9.0 -> 2.7 mean (-70%), total alternations 102.0 -> 71.7 (-30%), flagged
+  units 23.3 -> 21.3 (-9% — residual is `x`-emitter dominated, i.e. non-protection
+  same-order Move spam the episode guard does not target). 6/6 matches clean.
+* Demo: third arm (BJ+BK+BL) recorded on ebed3d9dc into the AR-S demo package —
+  `bl_on_bj_bk_bl_{1,2,3}_*.orarep` + README addendum.
+
+## 2026-10-05 — EMBER: AR-S2 — BO_squad_move_dedup (manager re-push emitter found; renamed from BM_protection_rally_dedup, BM is T3Verify's)
+
+* **Attribution (second tagging pass, ~58 sites auto-tagged `TargetString`)**: the residual
+  `x` stream decomposed as untagged `AttackMove` (~5.5k + 2.4k in attrib2), NOT `Move`.
+  Fully tagged run (`attrib3`, hard v hard 1v1): **`SquadManagerBotModuleCA` line 2063 —
+  `PrepositionDefenceTick`'s group `AttackMove(rally)` — 6,016/3,465 issues, 27/28 flagged
+  units, ~95% of flagged churn.** The push fires every `ProtectInterval` (50t)
+  unconditionally, bypasses the squad `OrderMemory` dedup lattice, and cancels each
+  member's in-flight activity — the unit-visible restart. `sq2352`
+  (`ReactWithFastSquads` fold-in push) is the same pattern's second site.
+* Engineer route chains (`e6` assign / `e7` recheck, ~650+1k issues/match) remain a real
+  but secondary emitter — `Recheck` re-issues the full waypoint chain every
+  `RouteRecheckTicks` (100t) at hot targets. Not folded into BM; different mechanism.
+* **Fix**: `ProtectionRallyDedup<T>` (`Squads/ProtectionRallyDedup.cs`, generic over
+  member identity for World-free tests) records the pushed rally cell + issued
+  membership; the push emits only when the rally moved >= `ProtectionRallyHysteresisCells`
+  (4) or members joined — joiner-only emit covers `ReactWithFastSquads` fold-ins.
+  `ReleaseDefenders` resets the lattice. Switch `UseProtectionRallyDedup` (default off;
+  `BO_squad_move_dedup`), off = unchanged per-interval stream.
+* **Tests**: `ProtectionRallyDedupTest` 8/8 — first-push emits all, same-cell and
+  in-band jitter suppress, past-band redirects, band measured from pushed cell (creep
+  escapes), joiner-only emit, released-then-rejoined re-orders, reset forces next push.
+* **Gates**: build 0E, focused 25/25, isolated boot `BOOT_GATE=PASS`.
+* **Instrumented 3+3 equal-window A/B** (tagged build, hard v hard, window <= 2739f):
+  manager-push stream (sq2063+sq2352) 3,381 -> 251 (**-93%**); full window 11,655 ->
+  1,203 (-89%, -88% frame-normalized). h2 rises (1,221 -> 1,580) because the deduped
+  state orders now flow uninterrupted — expected, not a regression. Flagged units
+  30 -> 34 (the metric also counts legit combat bursts).
+* **Correction to the standing question**: the residual churn is not a binary
+  attack/defend verdict flap — it is the manager's periodic group re-push colliding
+  with state-issued orders. LEARN-P6 stays a decision-quality feature, not order-rate.
+
+## 2026-10-05 — Devin-Tier4: PRICING-DEFAULT — K-basis is the default pricing path
+
+Branch devin/tier4/pricing-default, task 01a10850 (maintainer ruling 2026-10-04).
+* `fit_class.unit_inputs(use_k=True)` default flips the whole pipeline to
+  accuracy/splash/range-adjusted effective DPS; `--raw` remains the explicit opt-out on
+  fit_class / check_band / propose_class_rebalance / propose_rebalance / update_ranges.
+* `propose_class_rebalance.unit_dps` returns (total, flat, pct_floor, fallbacks): the
+  flat-context coefficient feeds the closed-form damage solve, the percentage floor is
+  added back so achieved DPS equals the solve target, and sidecar misses are counted.
+* Latent raw-basis consumers fixed: `propose_anchor_spec` nominal leg and
+  `propose_reference_anchors` dps_diagnostics now pass `use_k=False` explicitly — they
+  compare external/raw references and must not silently inherit the flip.
+* `fit_class.pricing_armaments` aligned with `priced_by_default` (unresolved armaments
+  filtered) — repaired a pre-existing 80-vs-40 test failure, not a K regression.
+* New `tools/balance/k_price_delta.py` writes
+  docs/balance/derived/pricing_default_delta.md — 492 actors, median -1.5%,
+  range -93%..+102%, per-faction movers with reason attribution (accuracy/splash/range
+  dominance per armament). Read-only; no yaml or ledger prices changed.
+* Docs re-pinned same commit: doc_claims +pricing_default_basis_is_k (measures the
+  signature default), EFFECTIVE_DAMAGE wired-status, BALANCE_PROGRAM_PLAN W11 signed off,
+  anchor_decisions_log entry, k_comparison_mbt regenerated (was stale 40->50 members).
+* Rebased onto inc/2026_10_05 (fe4459c9c) post-commit; derived ledgers regenerate
+  byte-identical (deterministic), k_comparison_mbt + pricing_default_delta rebuilt on
+  the new base — 492 actors, median -1.5%, range -93%..+102%, and a complete >+-25%
+  mover table (147 actors) with per-term reasons and a data-flag column (49 near-zero
+  accuracy suspects, 56 provisional-model actors).
+* Gates on the inc base: build 0E (Release); dotnet OpenRA.Test 521/523 (0 fail);
+  audit_doc_claims 44/44 clean; boot_isolated.ps1 BOOT_GATE=PASS; full tools/tests
+  2896 tests with 129 failures — byte-identical failure set to the master-base run,
+  all in weapon-structure/YAML-baseline suites (none touch pricing code paths;
+  armament_pairing fingerprint staleness predates both bases).
+* Crash note: machine lost ~00:05 mid-gate; worktree survived intact. fsck reports
+  missing objects in the shared store — unreachable crash debris only, verified clean
+  from refs; lead confirmed no repair needed.
+
+## 2026-10-06 — Devin-Architect: ECON-B `BU_harvester_logistics` (SPEC_2026-10-05_econ_logistics Part B)
+
+* One owner, extended not forked: `HarvesterBotModuleCA` keeps the classic path verbatim behind
+  `UseHarvesterLogistics` (default false); switch `BU_harvester_logistics` arms it on
+  `HarvesterBotModuleCA@generic` only, @classic untouched.
+* Reservations (B1): refinery-served fields keep `ceil(cells/ResourceCellsPerHarvester)` clamped to
+  `MaxHarvestersPerResourceIndice` (pure helper `HarvesterLogistics.Reservation`). Shared pool (B2):
+  per indice, units beyond the reservation, indice order then lowest ActorID.
+* Safe routes (B3): candidate probe = `FindPathToTargetCells`, then every
+  `LogisticsRouteSampleCells`-strided cell must satisfy `MergedThreatAt == 0` (remembered, fog-honest)
+  and no `EnemyBaseCount`/`EnemyUnitCount`/`GetNearbyIndicesThreat` on the traversed indices;
+  reservation deficits bypass the churn margin, attraction moves need `LogisticsReassignMarginPercent`.
+* Leases (B4): re-routed units hold `BotLeasePurpose.Harvest` for `LogisticsReassignCooldownTicks`
+  (new enum member); `HarvestIfAble`/`RespondToAttack` yield while `IsClaimedByOther`; pre-empted
+  units are marked evacuated via `IBotUnitLeaseLost` and re-enter the pool when free.
+* Production (B6): request fires only when `numHarvesters < refineries` (unmet minimum) or the last
+  rebalance left shortfall — the pool provably cannot cover demand; BotLimits/ScaleTargets unchanged.
+* Determinism: integer-only math, no new LocalRandom; target cells ordered by distance then X,Y;
+  pool order indice-index then ActorID.
+* Verify on b6f522e78: Release build 0W/0E; `HarvesterLogisticsTest` 4/4; adjacent suite (Harvester/
+  Lease/Ownership/Spread/Fog filters) 63/63; `audit_fog_honesty` PASS (82 files/266 sites);
+  `audit_bot_direct_mutation` PASS; `ai_module_map --write` regenerated (new IBotUnitLeaseLost impl +
+  IBotRegionThreatProvider consumer rows); `apply_increment_switches --dry-run` arms
+  `UseHarvesterLogistics: true` on @generic only.
+* Boot: `BOOT_GATE=PASS` — menu reached (`MenuPostProcessEffect.PostWorldLoaded`), isolated support
+  dir, zero new exceptions. NOTE: `OpenRA.exe` apphost exits -1 on this host (also pre-change);
+  the gate ran `dotnet OpenRA.dll` (same Main, same assemblies, isolated SupportDir) to evidence
+  boot. `OpenRA.Utility.exe` runs normally — host-layer issue, not mod content.
+* ECON-A touch points (NOTE_2026-10-06_econ_a_econ_b_touchpoints.md): used NEW lease purpose
+  `Harvest` (never McvExpansion) per their guidance; BU does not attach to ExpansionDemand —
+  no seam change needed; shared file increment_switches.yaml appended `BU_harvester_logistics` at tail.

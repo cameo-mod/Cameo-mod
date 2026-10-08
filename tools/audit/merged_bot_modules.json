@@ -32,6 +32,17 @@
           "sha": "7deb472b22c8f10b"
         }
       ]
+    },
+    "SupportPowerBotASModule": {
+      "file": "engine/OpenRA.Mods.AS/Traits/BotModules/SupportPowerBotASModule.cs",
+      "merged": "2026-10-01 (RV2, yaml-only: d7954bd25)",
+      "parents": [
+        {
+          "file": "engine/OpenRA.Mods.Common/Traits/BotModules/SupportPowerBotModule.cs",
+          "upstream": "engine pin d5d8b2a685 — OpenRA copy now gated classicbot in mods/cameo/rules/warcraft2.yaml; genericbot decisions live in ai.yaml SupportPowerBotASModule@wc2",
+          "sha": "a6fdef4b0dd8ecfa"
+        }
+      ]
     }
   }
 }

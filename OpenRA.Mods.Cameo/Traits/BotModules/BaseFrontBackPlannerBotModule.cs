@@ -479,7 +479,19 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		/// <summary>The provider's dot radius in whole cells (Range is a WDist; floors — a partial cell does not count).</summary>
 		public static int RadarRangeCells(ActorInfo info)
 		{
-			return info.TraitInfoOrDefault<RangedGpsProviderInfo>()?.Range.Length / 1024 ?? 0;
+			// Max over providers: an actor's effective dot radius is its strongest coverage
+			// (multi-provider actors like ra1_allies_radardome crash single-instance lookups).
+			// OPTIMISTIC: info-level Max counts every declared provider, including
+			// condition-gated variants that may spawn disabled (the dome/sensor carry
+			// mutually exclusive 20000/30000 ranges). Live actors must use
+			// EnabledRadarRangeCells, which filters to enabled traits.
+			return info.TraitInfos<RangedGpsProviderInfo>().Select(p => p.Range.Length).DefaultIfEmpty().Max() / 1024;
+		}
+
+		/// <summary>A live actor's dot radius in whole cells: Max over ENABLED providers only.</summary>
+		public static int EnabledRadarRangeCells(IEnumerable<RangedGpsProvider> providers)
+		{
+			return providers.Where(t => !t.IsTraitDisabled).Select(t => t.Info.Range.Length).DefaultIfEmpty().Max() / 1024;
 		}
 
 		static bool IsAircraftQueueName(string name, ProductionQueueInfo[] queues)
@@ -655,9 +667,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var providers = new List<(CPos, int)>();
 			foreach (var b in owned)
 			{
-				if (b.TraitsImplementing<RangedGpsProvider>().Any(t => !t.IsTraitDisabled))
+				var ranged = b.TraitsImplementing<RangedGpsProvider>();
+				if (ranged.Any(t => !t.IsTraitDisabled))
 				{
-					providers.Add((b.Location, RadarRangeCells(b.Info)));
+					providers.Add((b.Location, EnabledRadarRangeCells(ranged)));
 					continue;
 				}
 

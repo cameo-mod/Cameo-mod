@@ -869,7 +869,7 @@ latinsyndicate_narcohummer:
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 5
 		InitialUnits: latinsyndicate_latinmilitia, latinsyndicate_tankkiller, latinsyndicate_grenademonkey, latinsyndicate_latinflametrooper, latinsyndicate_narco
-	AttackOpenTopped:
+	AttackGarrisoned:
 		Voice: Attack
 		Armaments: garrisoned
 		PortOffsets: 0,0,128, 224,-341,128, -224,-341,128, -224,341,128, 224,341,128
@@ -949,7 +949,7 @@ latinsyndicate_carteltruck:
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 10
 		InitialUnits: latinsyndicate_latinmilitia, latinsyndicate_tankkiller, latinsyndicate_grenademonkey, latinsyndicate_latinflametrooper, latinsyndicate_narco, latinsyndicate_latinmilitia, latinsyndicate_tankkiller, latinsyndicate_grenademonkey, latinsyndicate_latinflametrooper, latinsyndicate_narco
-	AttackOpenTopped:
+	AttackGarrisoned:
 		Voice: Attack
 		Armaments: garrisoned
 		PortOffsets: 384,0,128, 224,-341,128, 224,0,128, 224,341,128, 0,-341,128, 0,341,128, -224,-341,128, -224,0,128, -224,341,128, -384,0,128
@@ -1243,6 +1243,7 @@ latinsyndicate_demolitiontruck:
 	Armament@PRIMARY:
 		Weapon: DemoTruckTargeting
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: Defend
 		InitialStanceAI: AttackAnything
 		ScanRadius: 10
@@ -1305,6 +1306,7 @@ latinsyndicate_nuketruck:
 	Armament@PRIMARY:
 		Weapon: DemoTruckTargeting
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: Defend
 		InitialStanceAI: AttackAnything
 		ScanRadius: 10

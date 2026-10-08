@@ -520,6 +520,7 @@ zerg_shriek:
 	Voiced:
 		VoiceSet: SCZerglingVoice
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 10
 		InitialStance: AttackAnything
 	RenderSprites:
@@ -566,6 +567,7 @@ zerg_ultralisk:
 	AttackFrontal:
 		FacingTolerance: 0
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 10
 		InitialStance: AttackAnything
 	WithInfantryBody:
@@ -725,6 +727,7 @@ zerg_kerrigan:
 	ChangesHealth@SelfHealing:
 		Step: 300
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 10
 		InitialStance: AttackAnything
 	Armament:

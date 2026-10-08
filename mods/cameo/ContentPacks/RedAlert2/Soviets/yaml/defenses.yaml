@@ -201,7 +201,7 @@ ra2_soviets_battlebunker:
 	WithIdleOverlay@Bunkered:
 		Sequence: idle-bunkered
 		RequiresCondition: loaded && !build-incomplete
-	AttackOpenTopped:
+	AttackGarrisoned:
 		Armaments: garrisoned
 		PortOffsets: 768,0,128, 448,-682,128, -448,-682,128, -768,0,128, -448,682,128, 448,682,128
 		PauseOnCondition: chronobeamed
@@ -260,6 +260,7 @@ ra2_soviets_sentrygun:
 	WithVoxelTurret:
 		RequiresCondition: !build-incomplete
 	AutoTarget:
+		DynamicWeaponPriority: true
 	-WithVoxelBody:
 	-Cloak@TDcloak:
 	Power:
@@ -311,6 +312,7 @@ ra2_soviets_flakcannon:
 		RequiresCondition: !build-incomplete
 	WithMuzzleOverlay:
 	AutoTarget:
+		DynamicWeaponPriority: true
 	-WithVoxelBody:
 	-Cloak@TDcloak:
 	Power:

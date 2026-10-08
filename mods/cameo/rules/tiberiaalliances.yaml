@@ -685,7 +685,7 @@ tareckoner:
 		Type: Heavy
 	RevealsShroud:
 		Range: 5c0
-	AttackOpenTopped:
+	AttackGarrisoned:
 		Voice: Attack
 		Armaments: garrisoned
 		PortOffsets: 384,0,128, 224,-341,128, -224,-341,128, -384,0,128, -224,341,128, 224,341,128
@@ -1325,6 +1325,7 @@ tapaladin:
 		LocalOffset: 427,-3,-213, 427,3,-213
 		PauseOnCondition: !ammo
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 5
 	AttackAircraft:
 		FacingTolerance: 80
@@ -1478,6 +1479,7 @@ tawasp:
 		LocalOffset: 427,-3,-213, 427,3,-213
 		PauseOnCondition: !ammo
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 5
 	AttackAircraft:
 		FacingTolerance: 80

@@ -90,6 +90,10 @@ namespace OpenRA.Mods.Cameo.Traits
 
 			var player = bot.Player;
 
+			// AR-4 (fleet orders 2026-10-04b): one world scan per interval covers every plug
+			// kind — the old loop enumerated world.Actors once per plug type.
+			var owned = CollectOwnedActors(world.Actors, player);
+
 			foreach (var (plugActor, plug) in plugs)
 			{
 				// Never queue a plug the tech tree still gates off — plugs that bypass
@@ -97,11 +101,8 @@ namespace OpenRA.Mods.Cameo.Traits
 				if (!PrerequisitesMet(plug.Prerequisites))
 					continue;
 
-				var targetActors = world.Actors.Where(x => x.IsInWorld && !x.IsDead && x.Owner == player && plug.Hosts.Contains(x.Info.Name));
-				if (!targetActors.Any())
-					continue;
-
-				var target = targetActors
+				var target = owned
+					.Where(x => plug.Hosts.Contains(x.Info.Name))
 					.Select(x => (x, x.TraitsImplementing<Pluggable>().FirstOrDefault(p => p.AcceptsPlug(plug.Type))))
 					.FirstOrDefault(x => x.Item2 != null);
 
@@ -119,6 +120,16 @@ namespace OpenRA.Mods.Cameo.Traits
 			}
 
 			ticks = Info.Interval;
+		}
+
+		// AR-4: the interval scan collects the bot's live own actors once for all plug kinds.
+		internal static List<Actor> CollectOwnedActors(IEnumerable<Actor> actors, OpenRA.Player owner)
+		{
+			var owned = new List<Actor>();
+			foreach (var actor in actors)
+				if (actor.IsInWorld && !actor.IsDead && actor.Owner == owner)
+					owned.Add(actor);
+			return owned;
 		}
 
 		void IResolveOrder.ResolveOrder(Actor self, Order order)
@@ -140,6 +151,12 @@ namespace OpenRA.Mods.Cameo.Traits
 				var targetActor = order.Target.Actor;
 
 				if (playerActor == null || playerActor.IsDead || targetActor == null || targetActor.IsDead)
+					return;
+
+				// AR-4 (fleet orders 2026-10-04b): an AI plug may only land on the ordering
+				// player's own building — this synced resolve path never checked target
+				// ownership, so any client could place a plug on anyone's building.
+				if (!PlugTargetIsOwned(targetActor, self.Owner))
 					return;
 
 				var actorInfo = self.World.Map.Rules.Actors[ts];
@@ -180,6 +197,13 @@ namespace OpenRA.Mods.Cameo.Traits
 				foreach (var s in buildingInfo.BuildSounds)
 					Game.Sound.PlayToPlayer(SoundType.World, order.Player, s, targetActor.CenterPosition);
 			});
+		}
+
+		// AR-4: the plug target must belong to the ordering player (self.Owner — the trait
+		// lives on that player's PlayerActor). Pure seam so the check is unit-testable.
+		internal static bool PlugTargetIsOwned(Actor target, OpenRA.Player orderingPlayer)
+		{
+			return target != null && target.Owner == orderingPlayer;
 		}
 
 		protected override void TraitEnabled(Actor self)

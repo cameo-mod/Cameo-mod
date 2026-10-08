@@ -25,5 +25,18 @@ namespace OpenRA.Mods.CA.Traits.BotModuleLogic
 		/// Implementations must be bounded — a fitted value clamps to a sane range and never inverts a fight.
 		/// </summary>
 		int CorrectionMilli(BotUnitProfile attacker, BotUnitProfile target);
+
+		/// <summary>
+		/// Fitted attrition exponent in thousandths (1000 = the pure square law). The eval applies it to the
+		/// predicted ratio (<c>ratio^alpha</c>) and re-derives surviving fractions, preserving the Lanchester
+		/// invariant. Default neutral — a provider that carries no exponent changes nothing.
+		/// </summary>
+		int AttritionExponentMilli => 1000;
+
+		/// <summary>
+		/// Load state for the match record — e.g. <c>none</c> / <c>error</c> / <c>fitted:N/carried:M/decay:D</c> —
+		/// prefixed with a source label. Null when the provider carries no priors file (the field is then omitted).
+		/// </summary>
+		string PriorsState => null;
 	}
 }

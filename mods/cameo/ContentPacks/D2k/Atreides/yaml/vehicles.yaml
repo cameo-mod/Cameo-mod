@@ -208,6 +208,7 @@ atreides_missiletank:
 	AttackFrontal:
 		FacingTolerance: 0
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStanceAI: Defend
 	FireWarheadsOnDeath:
 		Weapon: D2KUnitExplodeMed
@@ -269,6 +270,7 @@ atreides_siegetank:
 		Weapon: D2KUnitExplodeMed
 		EmptyWeapon: D2KUnitExplodeMed
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStanceAI: Defend
 	SpawnActorOnDeath:
 		Actor: atreides_siege_tank_husk
@@ -420,6 +422,7 @@ atreides_repairtank:
 		FacingTolerance: 0
 		Armaments: primary
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStanceAI: Defend
 	FireWarheadsOnDeath:
 		Weapon: D2KUnitExplodeMed
@@ -465,6 +468,7 @@ atreides_minotaurus:
 		FacingTolerance: 10
 		TargetFrozenActors: true
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStanceAI: Defend
 	FireWarheadsOnDeath:
 		Weapon: D2KUnitExplodeMed

@@ -149,7 +149,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		}
 
 		/// <summary>The personality arm the bandit pinned for this match, or null when the personality bandit did not run.
-		/// Read by BotPersonalityController at enable time; resolves lazily so trait ordering cannot race it.</summary>
+		/// Host-side only (AR-2): read in MasterAiBotModule's BotTick, which carries it to the world as a synced
+		/// SetBotPersonality order — a synced-context read of this LocalRandom draw would desync clients.</summary>
 		public string PinnedPersonalityArm
 		{
 			get

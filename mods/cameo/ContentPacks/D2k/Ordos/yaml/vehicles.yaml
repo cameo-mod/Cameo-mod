@@ -1480,6 +1480,7 @@ ordos_stealthraider:
 	Cloak:
 		Palette: d2kcloak
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: HoldFire
 		InitialStanceAI: ReturnFire
 	Armament@damage:
@@ -1613,6 +1614,7 @@ ordos_deviatorartillery:
 	AttackFrontal:
 		FacingTolerance: 0
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStanceAI: Defend
 	FireWarheadsOnDeath:
 		Weapon: D2KUnitExplodeLarge

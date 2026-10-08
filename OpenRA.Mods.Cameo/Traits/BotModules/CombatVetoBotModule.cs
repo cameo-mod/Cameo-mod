@@ -52,6 +52,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		[Desc("The same squad+kind veto writes at most one mission card per this many ticks.")]
 		public readonly int VetoCardTicks = 250;
 
+		[Desc("BM_live_combat_model: run the veto's predictor on the balance pipeline's",
+			"effective-damage model instead of the classic main-warhead DPS. False = classic, bit-identical.")]
+		public readonly bool UseEffectiveDamageModel = false;
+
 		public override object Create(ActorInitializer init) => new CombatVetoBotModule(init, this);
 	}
 
@@ -98,12 +102,14 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var foes = enemies
 				.Where(e => e != null && !e.IsDead && e.IsInWorld && e.Info.HasTraitInfo<AttackBaseInfo>())
 				.GroupBy(e => e.Info)
-				.Select(g => (BotUnitProfiles.Get(rules, g.Key), g.Count()))
+				.SelectMany(g => Info.UseEffectiveDamageModel
+					? g.Select(e => (BotUnitProfiles.Get(e, player, true), 1))
+					: new[] { (BotUnitProfiles.Get(rules, g.Key, false), g.Count()) })
 				.ToList();
 
 			AddDefencesNear(foes, CentroidOf(enemies));
 
-			var ratioPct = (int)(CombatVetoEval.Predict(own, foes, Priors()).Ratio * 100);
+			var ratioPct = (int)(CombatVetoEval.Predict(own, foes, Priors(), Info.UseEffectiveDamageModel).Ratio * 100);
 			var vetoed = CombatVetoEval.EngageVetoed(ratioPct, alreadyCommitted, Info.VetoEngageRatioPct, Info.VetoAbortRatioPct);
 			cache[key] = new CachedVerdict { Tick = world.WorldTick, Vetoed = vetoed, Reason = vetoed ? BotMissionReasons.Outmatched : null };
 			reason = vetoed ? BotMissionReasons.Outmatched : null;
@@ -120,13 +126,15 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var own = force
 				.Where(a => a != null && !a.IsDead && a.IsInWorld)
 				.GroupBy(a => a.Info)
-				.Select(g => (BotUnitProfiles.Get(rules, g.Key), g.Count()))
+				.SelectMany(g => Info.UseEffectiveDamageModel
+					? g.Select(a => (BotUnitProfiles.Get(a, player, true), 1))
+					: new[] { (BotUnitProfiles.Get(rules, g.Key, false), g.Count()) })
 				.ToList();
 
 			var foes = new List<(BotUnitProfile Unit, int Count)>();
 			var defenceValue = AddDefencesNear(foes, targetCell);
 			regionThreats ??= player.PlayerActor.TraitsImplementing<IBotRegionThreatProvider>().ToArray();
-			var threatValue = regionThreats.Sum(t => t.RememberedEnemyThreatAt(targetCell));
+			var threatValue = regionThreats.MergedThreatAt(targetCell);
 
 			// CP §2.3 parity floor: assume the enemy is at least as strong as we are unless proven otherwise — a loss
 			// must be proven, never assumed. Below own value the remembered evidence predicts a mirror (ratio ~1).
@@ -134,7 +142,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (defenceValue + threatValue < ownValue)
 				foes = own;
 
-			var ratioPct = (int)(CombatVetoEval.Predict(own, foes, Priors()).Ratio * 100);
+			var ratioPct = (int)(CombatVetoEval.Predict(own, foes, Priors(), Info.UseEffectiveDamageModel).Ratio * 100);
 			var vetoed = ratioPct < Info.VetoLaunchRatioPct;
 			reason = vetoed ? BotMissionReasons.Outmatched : null;
 			return Report(null, "launch", vetoed, targetCell);
@@ -158,7 +166,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var foes = pursuers
 				.Where(e => e != null && !e.IsDead && e.IsInWorld)
 				.GroupBy(e => e.Info)
-				.Select(g => (BotUnitProfiles.Get(rules, g.Key), g.Count()))
+				.SelectMany(g => Info.UseEffectiveDamageModel
+					? g.Select(e => (BotUnitProfiles.Get(e, player, true), 1))
+					: new[] { (BotUnitProfiles.Get(rules, g.Key, false), g.Count()) })
 				.ToList();
 
 			var vetoed = CombatVetoEval.CannotOutrun(own, foes, Info.VetoFleeSpeedMarginPct);
@@ -170,7 +180,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		IBotEngagementPriors Priors()
 		{
 			priors ??= player.PlayerActor.TraitsImplementing<IBotEngagementPriors>().ToArray();
-			return priors.FirstOrDefault(p => p != null);
+			return priors.FirstEnabledTraitOrDefault();
 		}
 
 		List<(BotUnitProfile Unit, int Count)> ForceOf(SquadCA squad)
@@ -179,7 +189,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			return squad.Units
 				.Where(u => u.Actor != null && !u.Actor.IsDead && u.Actor.IsInWorld)
 				.GroupBy(u => u.Actor.Info)
-				.Select(g => (BotUnitProfiles.Get(rules, g.Key), g.Count()))
+				.SelectMany(g => Info.UseEffectiveDamageModel
+					? g.Select(u => (BotUnitProfiles.Get(u.Actor, player, true), 1))
+					: new[] { (BotUnitProfiles.Get(rules, g.Key, false), g.Count()) })
 				.ToList();
 		}
 
@@ -198,7 +210,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				.GroupBy(d => d.Observed))
 			{
 				total += g.Sum(d => d.Value);
-				foes.Add((BotUnitProfiles.Get(rules, g.Key), g.Count()));
+				foes.Add((BotUnitProfiles.Get(rules, g.Key, Info.UseEffectiveDamageModel), g.Count()));
 			}
 
 			return total;

@@ -36,6 +36,7 @@ terran_scv:
 		ForceTargetRelationships: Ally
 		LocalOffset: 240,160,240
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 10
 		InitialStance: AttackAnything
 	AttackFrontal:
@@ -369,9 +370,6 @@ terran_matador:
 	GrantConditionOnPrerequisite@terran_upgrade_advancedsiegemode:
 		Condition: terran_upgrade_advancedsiegemode
 		Prerequisites: terran_upgrade_advancedsiegemode
-	AttackTurreted:
-		Turrets: primary,deployed
-		Armaments: primary,deployed
 	WithSpriteTurret:
 		RequiresCondition: undeployed
 	WithSpriteTurret@deployed:
@@ -404,6 +402,12 @@ terran_matador:
 		PlayerPalette: player_rgba
 	ActorStatValues:
 		Upgrades: terran_upgrade_vehicleweaponslevel1, terran_upgrade_vehicleweaponslevel2, terran_upgrade_vehicleplatinglevel1, terran_upgrade_vehicleplatinglevel2, terran_upgrade_advancedsiegemode
+
+	-AttackTurreted:
+	AttackMultiTurreted:
+		PauseOnCondition: disabled || blinded
+		Turrets: primary,deployed
+		Armaments: primary,deployed
 
 terran_cyclone:
 	Inherits: ^Tank

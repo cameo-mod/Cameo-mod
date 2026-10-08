@@ -67,7 +67,11 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		readonly ModularBotInfo info;
 		readonly World world;
-		readonly Queue<Order> orders = [];
+
+		// AR-8: a queued order carries the context it was emitted under — the instanced issuer
+		// (`Type@ordinal`, or a provider's ambient IssueAs name) and the attack-response flag.
+		// The gate judges at ISSUE time, so the context travels with the order.
+		readonly LinkedList<(Order Order, string Issuer, bool Emergency)> orders = [];
 
 		OpenRA.Player player;
 		IBotActionBudget actionBudget;
@@ -78,9 +82,11 @@ namespace OpenRA.Mods.Cameo.Traits
 		readonly Dictionary<IBotTick, (long Ticks, long Count)> moduleTiming = [];
 
 		// DESIGN §19.6, the order gate: every module's orders pass through QueueOrder, and ModularBot is the one that calls
-		// each module, so it knows who is ordering. `issuer` is the module running now (null outside a module call);
-		// `emergency` is true inside an attack response.
+		// each module, so it knows who is ordering. `issuer` is the instanced identity (`Type@N`) of the module running
+		// now (null outside a module call); `emergency` is true inside an attack response. Instance ordinals live only
+		// in attribution — verdicts compare TypeOf(issuer) to the type-named lease owner, so they can never desync.
 		readonly BotModules.BotOrderGate<Actor> gate = new();
+		readonly Dictionary<object, string> issuerOf = [];
 		string issuer;
 		bool emergency;
 		int gatePruneTick;
@@ -114,40 +120,85 @@ namespace OpenRA.Mods.Cameo.Traits
 			tickModules = p.PlayerActor.TraitsImplementing<IBotTick>().ToArray();
 			actionBudget = p.PlayerActor.TraitsImplementing<IBotActionBudget>().FirstEnabledTraitOrDefault();
 			attackResponseModules = p.PlayerActor.TraitsImplementing<IBotRespondToAttack>().ToArray();
+			foreach (var t in tickModules)
+				issuerOf[t] = BotIssuer.Of(t, p.PlayerActor);
+			foreach (var t in attackResponseModules)
+				issuerOf.TryAdd(t, BotIssuer.Of(t, p.PlayerActor));
 			foreach (var ibe in p.PlayerActor.TraitsImplementing<IBotEnabled>())
 				ibe.BotEnabled(this);
 		}
 
 		void IBot.QueueOrder(Order order)
 		{
-			if (!PassesGate(order))
-				return;
-
+			// The ambient scope wins: a provider emitting inside another module's call charges itself
+			// (BotIssuer.IssueAs), otherwise the module ticking now is the issuer. `emergency` rides along —
+			// it describes the emission context, not the world state at issue.
+			var item = (Order: order, Issuer: BotIssuer.Current ?? issuer, Emergency: emergency);
 			while (orders.Count >= info.MaxQueuedOrders)
 			{
-				orders.Dequeue();
+				var dropped = orders.First.Value;
+				orders.RemoveFirst();
 				DroppedOrders++;
+				Log.Write("debug", $"AI {player.InternalName}: ORDERGATE DROPPED {dropped.Issuer ?? "?"} queued {dropped.Order.OrderString} (queue full {info.MaxQueuedOrders}; tick {world.WorldTick})");
 			}
 
-			orders.Enqueue(order);
+			orders.AddLast(item);
 		}
 
 		/// <summary>
 		/// DESIGN §19.6: a unit order from a module that does not hold the unit's lease is refused when the registry
 		/// enforces, counted when it only watches; an emergency (an attack response from a listed module) takes the unit
 		/// over. Units without a lease, orders on buildings and bots without a registry (`classic`) pass untouched.
+		/// A grouped order (a null Subject with a GroupedActors array) resolves per member, so every member is judged
+		/// on its own lease — refused members are stripped and the order is rebuilt over the survivors (AR-1, see
+		/// <see cref="BotModules.BotOrderGroup"/>). Returns the order to enqueue, or null when it dies at the gate.
+		///
+		/// Runs at ISSUE time (AR-8): a deferred order is judged against the leases that hold when it would act,
+		/// not the ones that held when it was queued — a claim released in between no longer kills it, and one
+		/// taken in between no longer slips it through. `issuer`/`emergency` are the emission context captured
+		/// at queue time; they say who emitted the order, which world state cannot tell.
 		/// </summary>
-		bool PassesGate(Order order)
+		Order GateOrder(string issuer, bool emergency, Order order)
 		{
-			var unit = order.Subject;
-			if (unit == null || unit.IsDead || unit.Owner != player || unit == player.PlayerActor || !unit.Info.HasTraitInfo<IMoveInfo>())
-				return true;
+			BotModules.BotUnitLeaseRegistry registry = null;
+			var registryResolved = false;
 
-			var registry = BotUnitLeases.Of(player) as BotModules.BotUnitLeaseRegistry;
+			// Judges one member on its own lease. The registry lookup runs once per order and only when a
+			// judgeable member exists — dead, foreign-owned and non-moving members pass through unjudged
+			// (BotOrderGroup.UnitInScope), exactly as single orders always have. Resolved at use time, never
+			// cached across calls: the registry is conditional (AR-6 lesson).
+			bool Passes(Actor unit, Order order)
+			{
+				if (!BotModules.BotOrderGroup.UnitInScope(unit, player))
+					return true;
+
+				if (!registryResolved)
+				{
+					registryResolved = true;
+					registry = BotUnitLeases.Of(player) as BotModules.BotUnitLeaseRegistry;
+				}
+
+				return PassesMember(unit, order, issuer, emergency, registry);
+			}
+
+			var group = order.GroupedActors;
+			if (group == null)
+				return Passes(order.Subject, order) ? order : null;
+
+			var (members, filtered) = BotModules.BotOrderGroup.Filter(group, unit => Passes(unit, order));
+			if (!filtered)
+				return order;
+
+			return members.Length == 0 ? null : BotModules.BotOrderGroup.RebuildWithMembers(order, members);
+		}
+
+		bool PassesMember(Actor unit, Order order, string issuer, bool emergency, BotModules.BotUnitLeaseRegistry registry)
+		{
 			if (registry == null)
 				return true;
 
-			var holder = ((IBotUnitLeases)registry).LeaseOf(unit)?.Owner;
+			var leases = (IBotUnitLeases)registry;
+			var holder = leases.LeaseOf(unit)?.Owner;
 			var ri = registry.Info;
 			var (verdict, first) = gate.Judge(issuer, holder, ri.EnforceAtOrderGate, emergency, ri.EmergencyModules);
 			if (first)
@@ -157,7 +208,7 @@ namespace OpenRA.Mods.Cameo.Traits
 				return false;
 
 			if (verdict == BotModules.BotOrderVerdict.Preempt)
-				((IBotUnitLeases)registry).Preempt(unit, issuer, BotLeasePurpose.Emergency, ri.EmergencyLeaseTicks);
+				leases.Preempt(unit, BotIssuer.TypeOf(issuer), BotLeasePurpose.Emergency, ri.EmergencyLeaseTicks);
 
 			var earlier = gate.NoteIssued(unit, issuer, world.WorldTick, ri.CrossedOrderWindowTicks, holder);
 			if (earlier != null && gate.CrossedPairs[(earlier, issuer)] == 1)
@@ -190,7 +241,7 @@ namespace OpenRA.Mods.Cameo.Traits
 						if (!t.IsTraitEnabled())
 							continue;
 
-						issuer = t.GetType().Name;
+						issuer = issuerOf.TryGetValue(t, out var n) ? n : t.GetType().Name;
 						if (timed)
 						{
 							moduleStopwatch.Restart();
@@ -215,12 +266,25 @@ namespace OpenRA.Mods.Cameo.Traits
 			}
 
 			var ordersToIssueThisTick = Math.Min((orders.Count + info.MinOrderQuotientPerTick - 1) / info.MinOrderQuotientPerTick, orders.Count);
-			for (var i = 0; i < ordersToIssueThisTick; i++)
+			for (var i = 0; i < ordersToIssueThisTick && orders.Count > 0; i++)
 			{
-				if (actionBudget != null && !actionBudget.TryConsumeActions())
-					break;
+				var item = orders.First.Value;
+				orders.RemoveFirst();
 
-				world.IssueOrder(orders.Dequeue());
+				// AR-8: the gate runs here, when the order would act — a refused order costs no action.
+				var gated = GateOrder(item.Issuer, item.Emergency, item.Order);
+				if (gated == null)
+					continue;
+
+				if (actionBudget != null && !actionBudget.TryConsumeActions())
+				{
+					// The budget, not the gate, stopped it: it goes back to the front for next tick
+					// instead of vanishing the way a dequeued-then-abandoned order used to.
+					orders.AddFirst(item);
+					break;
+				}
+
+				world.IssueOrder(gated);
 			}
 		}
 
@@ -263,7 +327,7 @@ namespace OpenRA.Mods.Cameo.Traits
 						if (!t.IsTraitEnabled())
 							continue;
 
-						issuer = t.GetType().Name;
+						issuer = issuerOf.TryGetValue(t, out var n) ? n : t.GetType().Name;
 						t.RespondToAttack(this, self, e);
 					}
 

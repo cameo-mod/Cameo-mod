@@ -11,6 +11,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using OpenRA.GameRules;
@@ -38,8 +39,15 @@ namespace OpenRA.Mods.CA.Traits
 		public readonly BitSet<TargetableType> TargetTypes;
 		public readonly BotWeaponProfile[] Weapons;
 
+		/// <summary>The live actor this profile was built from, null for type-table profiles.
+		/// Set only when the bot owns the actor or can currently see it — the fog contract.</summary>
+		public readonly Actor Source;
+		/// <summary>Currently observed position, separate from live modifier evaluation.</summary>
+		public readonly Actor ObservedActor;
+		public readonly Player Observer;
+
 		public BotUnitProfile(string name, int cost, int hp, string armor, int speed, bool isAircraft, bool isBuilding,
-			BitSet<TargetableType> targetTypes, BotWeaponProfile[] weapons)
+			BitSet<TargetableType> targetTypes, BotWeaponProfile[] weapons, Actor source = null, Actor observedActor = null, Player observer = null)
 		{
 			Name = name;
 			Cost = cost;
@@ -50,38 +58,189 @@ namespace OpenRA.Mods.CA.Traits
 			IsBuilding = isBuilding;
 			TargetTypes = targetTypes;
 			Weapons = weapons;
+			Source = source;
+			ObservedActor = observedActor ?? source;
+			Observer = observer;
 		}
 
 		public WDist MaxRange => Weapons.Length == 0 ? WDist.Zero : Weapons.Max(w => w.Range);
+		bool PortWeaponCanFire(BotWeaponProfile weapon, BotUnitProfile target) => weapon.PortArmament == null
+			|| Observer != null && ObservedActor != null && ObservedActor.Owner == Observer && target.ObservedActor != null
+				&& target.ObservedActor.CanBeViewedByPlayer(Observer)
+				&& ObservedActor.TraitsImplementing<IFirePortAttack>().Any(p =>
+					p.ArmamentsAgainst(Target.FromActor(target.ObservedActor)).Contains(weapon.PortArmament));
+		/// <summary>Target-specific range; passenger weapons count only at an eligible assigned port.</summary>
+		public WDist MaximumRangeAgainst(BotUnitProfile target) => Weapons.Any(w => w.PortArmament != null)
+			? Weapons.Where(w => w.CanTarget(target.TargetTypes) && PortWeaponCanFire(w, target))
+				.Select(w => w.Range).DefaultIfEmpty(WDist.Zero).Max() : MaxRange;
 
-		/// <summary>Damage per tick this unit deals to one `target`: every weapon that may hit it, scaled by Versus.</summary>
-		public double DamagePerTickAgainst(BotUnitProfile target)
+		/// <summary>Damage per tick this unit deals to one `target`: every weapon that may hit it, scaled by Versus.
+		/// When <paramref name="useEffective"/> is set (BM_live_combat_model), a weapon's pipeline-modelled
+		/// damage per tick is used — evaluated against the target's own armour when that armour is known; the
+		/// balance model already folds reliability, falloff, and target density in. Unmodelled weapons (0) fall
+		/// back to the classic term. Live profiles additionally fold in the shooter's firepower/reload
+		/// modifiers and the target's damage modifiers (veterancy, upgrades, status).</summary>
+		public double DamagePerTickAgainst(BotUnitProfile target, bool useEffective = false)
 		{
 			var total = 0.0;
 			foreach (var w in Weapons)
-				if (w.CanTarget(target.TargetTypes))
-					total += w.DamagePerTick * (target.Armor == null ? 100 : w.Versus.GetValueOrDefault(target.Armor, 100)) / 100.0;
+			{
+				if (!PortWeaponCanFire(w, target))
+					continue;
+				if (!w.CanTarget(target.TargetTypes))
+					continue;
+
+				var dpt = useEffective && w.Model != null
+					? w.Model.DamagePerTick(w.Charge, w.Burst, target.Armor)
+					: 0;
+				if (dpt <= 0)
+				{
+					if (useEffective && w.EffectiveDamagePerTick > 0)
+						dpt = w.EffectiveDamagePerTick;
+					else if (useEffective && w.Terms != null && w.Terms.Count > 1)
+					{
+						// Legacy multi-damage-warheads sum until W24 picks a main warhead —
+						// each warhead keeps its own Versus row.
+						foreach (var t in w.Terms)
+							dpt += t.DamagePerTick * (target.Armor == null ? 100 : t.Versus.GetValueOrDefault(target.Armor, 100)) / 100.0;
+					}
+					else
+						dpt = w.DamagePerTick * (target.Armor == null ? 100 : w.Versus.GetValueOrDefault(target.Armor, 100)) / 100.0;
+				}
+
+				if (w.PowerScale != 1.0)
+					dpt *= w.PowerScale;
+				if (w.CycleScale != 1.0)
+					dpt /= w.CycleScale;
+				if (Source != null && target.Source != null)
+					dpt *= LiveDamageTaken(w.PortArmament?.Actor ?? Source, target.Source, w);
+
+				total += dpt;
+			}
 
 			return total;
+		}
+
+		/// <summary>The defender's live damage modifiers (veterancy, upgrades, status effects)
+		/// against one attacker weapon: every damage warhead gets its own modifier eval and the
+		/// weapon's multiplier is their damage-weighted mean. Only evaluated when both actors
+		/// are in sight — a fogged profile carries no traits to read.</summary>
+		static double LiveDamageTaken(Actor attacker, Actor defender, BotWeaponProfile weapon)
+		{
+			var terms = weapon.Terms;
+			if (terms == null || terms.Count == 0)
+			{
+				var scale = 1.0;
+				var damage = new Damage(weapon.MainDamage, weapon.DamageTypes);
+				foreach (var m in defender.TraitsImplementing<IDamageModifier>())
+					scale *= Math.Max(0, m.GetDamageModifier(attacker, damage)) / 100.0;
+				return scale;
+			}
+
+			var weighted = 0.0;
+			var totalDamage = 0.0;
+			foreach (var t in terms)
+			{
+				var scale = 1.0;
+				var damage = new Damage(t.Damage, t.DamageTypes);
+				foreach (var m in defender.TraitsImplementing<IDamageModifier>())
+					scale *= Math.Max(0, m.GetDamageModifier(attacker, damage)) / 100.0;
+				var weight = Math.Max(1, t.Damage);
+				weighted += scale * weight;
+				totalDamage += weight;
+			}
+
+			return totalDamage > 0 ? weighted / totalDamage : 1.0;
+		}
+	}
+
+	/// <summary>One positive-damage warhead's contribution inside a weapon — the "legacy
+	/// multi-damage-warheads" term the ruling wants summed until W24 picks a main warhead.
+	/// The classic path keeps using <see cref="BotWeaponProfile.DamagePerTick"/> (largest
+	/// warhead only); the effective fallback and the defender-modifier eval iterate all terms.</summary>
+	public readonly struct BotWarheadTerm
+	{
+		public readonly double DamagePerTick;
+		public readonly IReadOnlyDictionary<string, int> Versus;
+		public readonly int Damage;
+		public readonly BitSet<DamageType> DamageTypes;
+
+		public BotWarheadTerm(double damagePerTick, IReadOnlyDictionary<string, int> versus, int damage, BitSet<DamageType> damageTypes)
+		{
+			DamagePerTick = damagePerTick;
+			Versus = versus;
+			Damage = damage;
+			DamageTypes = damageTypes;
 		}
 	}
 
 	public readonly struct BotWeaponProfile
 	{
 		public readonly double DamagePerTick;
+
+		/// <summary>BM_live_combat_model: the balance pipeline's damage per tick for this weapon
+		/// (effective_per_shot over its charge-aware cycle). 0 = not modelled — callers fall back to
+		/// <see cref="DamagePerTick"/> rather than pricing the weapon as harmless.</summary>
+		public readonly double EffectiveDamagePerTick;
+
 		public readonly WDist Range;
 		public readonly BitSet<TargetableType> Valid;
 		public readonly BitSet<TargetableType> Invalid;
 		public readonly IReadOnlyDictionary<string, int> Versus;
 
+		/// <summary>The modelled weapon record when the effective table is in play — carries the
+		/// per-armour decomposition so a live target's observed armour picks its own Versus row.</summary>
+		public readonly BotWeaponModel Model;
+
+		/// <summary>The firing actor's charge-up record (null when the type has none).</summary>
+		public readonly BotChargeUp Charge;
+
+		/// <summary>Live actor stats, 1.0 on type profiles: the shooter's aggregated firepower
+		/// multiplier (veterancy/handicap) and reload multiplier per armament.</summary>
+		public readonly double PowerScale;
+		public readonly double CycleScale;
+		public readonly int Burst;
+
+		/// <summary>Main warhead's nominal damage and damage types — the arguments a target's
+		/// IDamageModifier traits are evaluated with on the live path.</summary>
+		public readonly int MainDamage;
+		public readonly BitSet<DamageType> DamageTypes;
+
+		/// <summary>Every positive-damage warhead on the weapon, largest first. Under the
+		/// effective flag an unmodelled weapon falls back to the SUM of these terms (each with
+		/// its own Versus) rather than the largest alone, and the live defender-modifier eval
+		/// weights each term's modifier by its nominal damage.</summary>
+		public readonly IReadOnlyList<BotWarheadTerm> Terms;
+
+		/// <summary>Delivery key of the main warhead: its yaml <c>Warhead@&lt;tag&gt;</c> suffix when the weapon yaml
+		/// resolves (the balance-pipeline delivery taxonomy the tier-1 fitter fits), else the warhead class name
+		/// lowercased minus the "Warhead" suffix (AI_ARCHITECTURE 12.31).</summary>
+		public readonly string Delivery;
+		/// <summary>An owned passenger weapon; eligibility is evaluated at its assigned port.</summary>
+		public readonly Armament PortArmament;
+
 		public BotWeaponProfile(double damagePerTick, WDist range, BitSet<TargetableType> valid, BitSet<TargetableType> invalid,
-			IReadOnlyDictionary<string, int> versus)
+			IReadOnlyDictionary<string, int> versus, double effectiveDamagePerTick = 0,
+			BotWeaponModel model = null, BotChargeUp charge = null, int burst = 1,
+			double powerScale = 1.0, double cycleScale = 1.0, int mainDamage = 0, BitSet<DamageType> damageTypes = default,
+			IReadOnlyList<BotWarheadTerm> terms = null, string delivery = null, Armament portArmament = null)
 		{
 			DamagePerTick = damagePerTick;
+			EffectiveDamagePerTick = effectiveDamagePerTick;
 			Range = range;
 			Valid = valid;
 			Invalid = invalid;
 			Versus = versus ?? new Dictionary<string, int>();
+			Model = model;
+			Charge = charge;
+			Burst = burst;
+			PowerScale = powerScale;
+			CycleScale = cycleScale;
+			MainDamage = mainDamage;
+			DamageTypes = damageTypes;
+			Terms = terms;
+			Delivery = delivery;
+			PortArmament = portArmament;
 		}
 
 		public bool CanTarget(BitSet<TargetableType> targetTypes) => Valid.Overlaps(targetTypes) && !Invalid.Overlaps(targetTypes);
@@ -102,34 +261,33 @@ namespace OpenRA.Mods.CA.Traits
 	{
 		static readonly ConditionalWeakTable<Ruleset, Dictionary<string, BotUnitProfile>> Cache = new();
 
-		public static BotUnitProfile Get(Ruleset rules, ActorInfo actor)
+		public static BotUnitProfile Get(Ruleset rules, ActorInfo actor, bool useEffective = false)
 		{
 			var byName = Cache.GetOrCreateValue(rules);
 			lock (byName)
 			{
-				if (!byName.TryGetValue(actor.Name, out var profile))
-					byName[actor.Name] = profile = Build(rules, actor);
+				// The effective variant reads a different model table — cache it under a
+				// separate key so a mixed-switch roster never sees the wrong numbers.
+				var key = useEffective ? actor.Name + "\u0001" : actor.Name;
+				if (!byName.TryGetValue(key, out var profile))
+					byName[key] = profile = Build(rules, actor, useEffective);
 
 				return profile;
 			}
 		}
 
-		static BotUnitProfile Build(Ruleset rules, ActorInfo actor)
+		static BotUnitProfile Build(Ruleset rules, ActorInfo actor, bool useEffective)
 		{
 			var weapons = new List<BotWeaponProfile>();
+			var models = useEffective ? BotWeaponModelTable.Get(rules) : null;
 			foreach (var armament in actor.TraitInfos<ArmamentInfo>().Where(a => a.EnabledByDefault))
 			{
 				if (armament.Weapon == null || !rules.Weapons.TryGetValue(armament.Weapon.ToLowerInvariant(), out var weapon))
 					continue;
 
-				// The largest positive damage warhead is the weapon's main one (W24), as the counter picker reads it.
-				var main = weapon.Warheads.OfType<DamageWarhead>().Where(d => d.Damage > 0).OrderByDescending(d => d.Damage).FirstOrDefault();
-				if (main == null)
-					continue;
-
-				var cycle = BotWeaponProfile.CycleTicks(weapon.ReloadDelay, weapon.Burst, weapon.BurstDelays);
-				weapons.Add(new BotWeaponProfile((double)main.Damage * Math.Max(1, weapon.Burst) / cycle, weapon.Range,
-					weapon.ValidTargets, weapon.InvalidTargets, main.Versus));
+				var weaponProfile = WeaponProfile(models, weapon, armament.Weapon, actor.Name);
+				if (weaponProfile.HasValue)
+					weapons.Add(weaponProfile.Value);
 			}
 
 			var speed = actor.TraitInfoOrDefault<MobileInfo>()?.Speed ?? actor.TraitInfoOrDefault<AircraftInfo>()?.Speed ?? 0;
@@ -142,6 +300,219 @@ namespace OpenRA.Mods.CA.Traits
 				actor.HasTraitInfo<BuildingInfo>(),
 				actor.GetAllTargetTypes(),
 				weapons.ToArray());
+		}
+
+		// The balance pipeline keys deliveries on the warhead's yaml Warhead@<tag> suffix, which resolved
+		// WeaponInfo objects do not retain. Re-derive it once from the resolved weapon yaml: MiniYaml.Load
+		// merges inheritance, so each weapon's child list is exactly what WeaponInfo.LoadWarheads iterated,
+		// in order — the resolved index maps back to the child and its tag. Validated against the warhead
+		// class name (the node value); unresolvable weapons fall back to the lowercased class name, a
+		// coarser but still consistent axis (the fitter's coarse Factor@ floor, if any, still reaches it).
+		// The static cache never invalidates — valid within one process lifetime: mod yaml is fixed at
+		// load, and every match resolves the same warhead set.
+		// Process-lifetime cache, deliberately never invalidated: weapon yaml is immutable within a
+		// match and the map only ever loads once per process (bot matches are one world per launch).
+		static Dictionary<string, (string Tag, string Class, IReadOnlyDictionary<string, int> Versus)[]> warheadYaml;
+
+		static Dictionary<string, (string Tag, string Class, IReadOnlyDictionary<string, int> Versus)[]> WarheadYamlMap()
+		{
+			if (warheadYaml != null)
+				return warheadYaml;
+
+			var map = new Dictionary<string, (string, string, IReadOnlyDictionary<string, int>)[]>();
+			var modData = Game.ModData;
+			if (modData != null)
+			{
+				try
+				{
+					foreach (var node in MiniYaml.Load(modData.DefaultFileSystem, modData.Manifest.Weapons, null))
+					{
+						map[node.Key.ToLowerInvariant()] = (node.Value?.Nodes ?? [])
+							.Where(n => n.Key.StartsWith("Warhead", StringComparison.Ordinal))
+							.Select(n => (
+								n.Key.StartsWith("Warhead@", StringComparison.Ordinal) ? n.Key.Substring(8) : null,
+								n.Value.Value,
+								(IReadOnlyDictionary<string, int>)VersusOf(n)))
+							.ToArray();
+					}
+				}
+				catch
+				{
+					// No file system (unit tests): Delivery falls back to the class name below.
+				}
+			}
+
+			return warheadYaml = map;
+		}
+
+		static Dictionary<string, int> VersusOf(MiniYamlNode warheadNode)
+		{
+			var versus = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
+			var node = warheadNode.Value?.Nodes.FirstOrDefault(n => n.Key == "Versus");
+			if (node == null)
+				return versus;
+
+			foreach (var armor in node.Value.Nodes)
+				if (int.TryParse(armor.Value.Value, NumberStyles.Integer, CultureInfo.InvariantCulture, out var pct))
+					versus[armor.Key] = pct;
+
+			return versus;
+		}
+
+		/// <summary>The resolved Versus table the tier-1 fitter fitted this delivery tag on (AI_ARCHITECTURE
+		/// 12.31, F1-b) — `^Warhead_&lt;tag&gt;`'s `Warhead@&lt;tag&gt;` child, else the one-level family
+		/// fallback `^Warhead_&lt;tag minus the last _segment&gt;`: the fitter's exact resolution
+		/// (fit_engagement_priors.versus_priors). Template tables are canonical (Versus lives only in
+		/// `^Warhead_*`); weapon children sharing the tag may carry inline overrides the fitter never
+		/// reads, so they are not consulted. Null when the tag resolves nowhere — fitter-excluded tags
+		/// emit no cells, so an unfitted lookup can only come from an unverifiable (stale-safe) cell.</summary>
+		/// <summary>True once the resolved warhead template map actually loaded — false under unit
+		/// tests or headless tools, where an unresolved tag means "unverifiable" rather than "the
+		/// delivery's Versus row is gone".</summary>
+		public static bool VersusTableLoaded => WarheadYamlMap().Count > 0;
+
+		public static IReadOnlyDictionary<string, int> ResolvedTagVersus(string tag)
+		{
+			var map = WarheadYamlMap();
+			var versus = TemplateVersus(map, tag);
+			if (versus != null)
+				return versus;
+
+			var cut = tag.LastIndexOf('_');
+			return cut > 0 ? TemplateVersus(map, tag[..cut]) : null;
+		}
+
+		static IReadOnlyDictionary<string, int> TemplateVersus(
+			Dictionary<string, (string Tag, string Class, IReadOnlyDictionary<string, int> Versus)[]> map, string templateTag)
+		{
+			if (!map.TryGetValue("^warhead_" + templateTag.ToLowerInvariant(), out var entries))
+				return null;
+
+			foreach (var (t, _, versus) in entries)
+				if (string.Equals(t, templateTag, StringComparison.Ordinal))
+					return versus;
+
+			return null;
+		}
+
+		static string DeliveryKey(string weaponName, WeaponInfo weapon, DamageWarhead main)
+		{
+			var cls = main.GetType().Name;
+			if (cls.EndsWith("Warhead", StringComparison.Ordinal))
+				cls = cls.Substring(0, cls.Length - "Warhead".Length);
+
+			if (WarheadYamlMap().TryGetValue(weaponName.ToLowerInvariant(), out var tags))
+			{
+				var idx = weapon.Warheads.IndexOf(main);
+				if (idx >= 0 && idx < tags.Length && tags[idx].Tag != null
+					&& string.Equals(tags[idx].Class, cls, StringComparison.OrdinalIgnoreCase))
+					return tags[idx].Tag;
+
+				// A null CreateObject earlier in the list shifts indices — fall back to matching by class.
+				foreach (var (tag, @class, _) in tags)
+					if (tag != null && string.Equals(@class, cls, StringComparison.OrdinalIgnoreCase))
+						return tag;
+			}
+
+			return cls.ToLowerInvariant();
+		}
+
+		/// <summary>One armament's weapon profile: the classic main-warhead term plus, when the
+		/// effective table is live, the pipeline-modelled record with charge-up cadence. Returns
+		/// null when the armament has no resolvable positive-damage warhead.</summary>
+		static BotWeaponProfile? WeaponProfile(BotWeaponModelTable models, WeaponInfo weapon, string weaponName, string actorName)
+		{
+			// The largest positive damage warhead is the weapon's main one (W24), as the counter picker reads it.
+			var warheads = weapon.Warheads.OfType<DamageWarhead>().Where(d => d.Damage > 0).OrderByDescending(d => d.Damage).ToList();
+			if (warheads.Count == 0)
+				return null;
+
+			var main = warheads[0];
+			var burst = Math.Max(1, weapon.Burst);
+			var cycle = BotWeaponProfile.CycleTicks(weapon.ReloadDelay, weapon.Burst, weapon.BurstDelays);
+			var model = models?.Compute(weaponName);
+			var charge = models?.ChargeUpFor(actorName);
+			var effectiveDpt = model != null && model.IsModelled ? model.DamagePerTick(charge, weapon.Burst) : 0;
+			var terms = warheads
+				.Select(w => new BotWarheadTerm((double)w.Damage * burst / cycle, w.Versus, w.Damage, w.DamageTypes))
+				.ToArray();
+			var range = weapon.Range;
+			if (weapon.Projectile is IRangeLimitedProjectileInfo limited)
+			{
+				var fuel = limited.EffectiveRangeLimit(weapon.Range);
+				if (fuel.Length > 0 && fuel.Length < range.Length)
+					range = fuel;
+			}
+
+			return new BotWeaponProfile((double)main.Damage * burst / cycle, range,
+				weapon.ValidTargets, weapon.InvalidTargets, main.Versus, effectiveDpt,
+				model, charge, burst, 1.0, 1.0, main.Damage, main.DamageTypes, terms,
+				DeliveryKey(weaponName, weapon, main));
+		}
+
+		/// <summary>The live variant of <see cref="Get(Ruleset, ActorInfo, bool)"/> — the actor's
+		/// armaments as enabled RIGHT NOW (upgrade/condition grants, weapon swaps, simultaneous
+		/// slots), its current hit points and armour, and its firepower/reload modifiers folded
+		/// into each weapon. Fog contract: the bot's own actors are fully read; an enemy only
+		/// while <see cref="Actor.CanBeViewedByPlayer"/> — a fogged actor returns the type-table
+		/// profile, so callers never branch on visibility themselves.</summary>
+		public static BotUnitProfile Get(Actor actor, Player viewer, bool useEffective = false)
+		{
+			var rules = actor.World.Map.Rules;
+			if (viewer == null || (actor.Owner != viewer && !actor.CanBeViewedByPlayer(viewer)))
+				return Get(rules, actor.Info, useEffective);
+			// Enemy cargo is private even when the carrier is visible. Only own ports
+			// expose live occupants. Ordinary classic profiles keep their rule stats.
+			var ports = actor.Owner == viewer ? actor.TraitsImplementing<AttackGarrisoned>().ToArray() : [];
+			if (!useEffective && ports.Length == 0)
+			{
+				var profile = Get(rules, actor.Info, false);
+				return new BotUnitProfile(profile.Name, profile.Cost, profile.Hp, profile.Armor, profile.Speed,
+					profile.IsAircraft, profile.IsBuilding, profile.TargetTypes, profile.Weapons, observedActor: actor, observer: viewer);
+			}
+
+			var models = useEffective ? BotWeaponModelTable.Get(rules) : null;
+			var weapons = new List<BotWeaponProfile>();
+			var passengerArms = ports.SelectMany(p => p.Stations).Where(s => s.Occupant != null)
+				.SelectMany(s => s.Occupant.TraitsImplementing<Armament>().Where(a => ports.Any(p => p.Armaments.Contains(a)))).ToArray();
+			foreach (var armament in actor.TraitsImplementing<Armament>().Concat(passengerArms))
+			{
+				if (armament.IsTraitDisabled || passengerArms.Contains(armament) && armament.IsTraitPaused || armament.Weapon == null)
+					continue;
+
+				var name = armament.Info.Name;
+				var power = 1.0;
+				var reload = 1.0;
+				foreach (var m in armament.Actor.TraitsImplementing<IFirepowerModifier>())
+					power *= m.GetFirepowerModifier(name) / 100.0;
+				foreach (var m in armament.Actor.TraitsImplementing<IReloadModifier>())
+					reload *= m.GetReloadModifier(name) / 100.0;
+
+				var weaponProfile = WeaponProfile(models, armament.Weapon, armament.Info.Weapon, armament.Actor.Info.Name);
+				if (!weaponProfile.HasValue)
+					continue;
+
+				var w = weaponProfile.Value;
+				weapons.Add(new BotWeaponProfile(w.DamagePerTick, passengerArms.Contains(armament) ? armament.MaxRange() : w.Range, w.Valid, w.Invalid, w.Versus,
+					w.EffectiveDamagePerTick, w.Model, w.Charge, w.Burst, power, reload, w.MainDamage, w.DamageTypes, w.Terms,
+					w.Delivery, passengerArms.Contains(armament) ? armament : null));
+			}
+
+			var info = actor.Info;
+			var health = actor.TraitOrDefault<IHealth>();
+			var armor = actor.TraitsImplementing<Armor>().FirstOrDefault(a => !a.IsTraitDisabled)?.Info.Type
+				?? info.TraitInfos<ArmorInfo>().FirstOrDefault(a => a.EnabledByDefault)?.Type;
+			var speed = info.TraitInfoOrDefault<MobileInfo>()?.Speed ?? info.TraitInfoOrDefault<AircraftInfo>()?.Speed ?? 0;
+			return new BotUnitProfile(info.Name,
+				info.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? 0,
+				health?.HP ?? info.TraitInfoOrDefault<IHealthInfo>()?.MaxHP ?? 0,
+				armor,
+				speed,
+				info.HasTraitInfo<AircraftInfo>(),
+				info.HasTraitInfo<BuildingInfo>(),
+				actor.GetEnabledTargetTypes(),
+				weapons.ToArray(),
+				useEffective ? actor : null, actor, viewer);
 		}
 	}
 
@@ -181,16 +552,19 @@ namespace OpenRA.Mods.CA.Traits
 				: new Prediction(ratio, 0, Math.Sqrt(1 - ratio));
 		}
 
-		/// <summary>Two forces given as (profile, count); damage is spread over the other side by HP share.</summary>
-		public static Prediction Predict(IReadOnlyList<(BotUnitProfile Unit, int Count)> own, IReadOnlyList<(BotUnitProfile Unit, int Count)> enemy)
+		/// <summary>Two forces given as (profile, count); damage is spread over the other side by HP share.
+		/// <paramref name="useEffective"/> (BM_live_combat_model) swaps the per-weapon term for the
+		/// balance pipeline's modelled value; profiles must have been fetched with the same flag.</summary>
+		public static Prediction Predict(IReadOnlyList<(BotUnitProfile Unit, int Count)> own, IReadOnlyList<(BotUnitProfile Unit, int Count)> enemy,
+			bool useEffective = false)
 		{
 			var ownHp = own.Sum(u => (double)u.Unit.Hp * u.Count);
 			var enemyHp = enemy.Sum(u => (double)u.Unit.Hp * u.Count);
-			return Predict(DamagePerTick(own, enemy, enemyHp), ownHp, DamagePerTick(enemy, own, ownHp), enemyHp);
+			return Predict(DamagePerTick(own, enemy, enemyHp, useEffective), ownHp, DamagePerTick(enemy, own, ownHp, useEffective), enemyHp);
 		}
 
 		static double DamagePerTick(IReadOnlyList<(BotUnitProfile Unit, int Count)> attackers,
-			IReadOnlyList<(BotUnitProfile Unit, int Count)> targets, double targetHp)
+			IReadOnlyList<(BotUnitProfile Unit, int Count)> targets, double targetHp, bool useEffective)
 		{
 			if (targetHp <= 0)
 				return 0;
@@ -198,7 +572,7 @@ namespace OpenRA.Mods.CA.Traits
 			var total = 0.0;
 			foreach (var (attacker, count) in attackers)
 				foreach (var (target, targetCount) in targets)
-					total += count * attacker.DamagePerTickAgainst(target) * target.Hp * targetCount / targetHp;
+					total += count * attacker.DamagePerTickAgainst(target, useEffective) * target.Hp * targetCount / targetHp;
 
 			return total;
 		}

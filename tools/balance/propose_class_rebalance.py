@@ -93,7 +93,14 @@ def spread_damages(arm: dict, smallarms_only: bool = False):
     return formula.spread_damage_sum(arm.get("damage_warheads", []), smallarms_only=smallarms_only)
 
 
-def armament_dps(arm: dict, fp: float, base_only: bool = False, smallarms_only: bool = False):
+def armament_dps(arm: dict, fp: float, base_only: bool = False, smallarms_only: bool = False,
+                 keyed_eff: float = None):
+    """Per-armament DPS for pricing. `keyed_eff` is the derived sidecar's
+    K-adjusted `effective_dps` for THIS armament (fp-free); when it is supplied
+    it replaces the raw damage/reload value — PRICING-DEFAULT 2026-10-04."""
+    fp_mul = 1.0 if base_only else fp
+    if keyed_eff is not None:
+        return keyed_eff * fp_mul
     rl = fnum(arm.get("reloaddelay"))
     burst = fnum(arm.get("burst")) or 1
     burst_delays = arm.get("burstdelays")
@@ -103,13 +110,57 @@ def armament_dps(arm: dict, fp: float, base_only: bool = False, smallarms_only: 
     # No weapon-class weight (W4): the K coefficient measures weapon quality
     # directly, so the tier weight would double-charge it.
     return formula.dps(dmg, rl, int(burst), burst_delays=burst_delays,
-                       firepower_multiplier=(1.0 if base_only else fp))
+                       firepower_multiplier=fp_mul)
 
 
-def unit_dps(u: dict, fp: float, base_only: bool = False, smallarms_only: bool = False):
-    return sum(armament_dps(arm, fp, base_only=base_only, smallarms_only=smallarms_only)
-               for arm in u.get("armaments", [])
-               if arm.get("pricing") and arm.get("slot") in ("Armament", "Armament@PRIMARY"))
+def derived_armament_stats(du: dict):
+    """{(slot, weapon): sidecar armament row} — one lookup for both the
+    K-adjusted `effective_dps` and the flat-context solve coefficient."""
+    idx = {}
+    for arm in (du or {}).get("armaments", []):
+        idx[(arm.get("slot"), arm.get("weapon"))] = arm
+    return idx
+
+
+def unit_dps(u: dict, fp: float, base_only: bool = False, smallarms_only: bool = False,
+             du: dict = None, use_k: bool = True):
+    """(total_dps, flat_dps, pct_floor_dps, fallbacks).
+
+    `total_dps` — the pricing basis: per-armament K-adjusted `effective_dps`
+    under the default (`use_k`, PRICING-DEFAULT 2026-10-04), raw damage/reload
+    under `--raw` or wherever the sidecar has no entry. `flat_dps` is the same
+    sum re-measured at `k_flat_context` — the damage-independent coefficient the
+    closed-form DPS inversion needs (overkill would make it a fixed point).
+    `pct_floor_dps` is the standalone-percentage floor the inversion subtracts
+    before dividing by the flat coefficient (EFFECTIVE_DAMAGE §3.0).
+    SmallArms-only scout rows and missing sidecar entries keep raw values and
+    are counted in `fallbacks` — the report states its coverage.
+    """
+    didx = derived_armament_stats(du) if (use_k and not smallarms_only) else {}
+    total = flat = pct_floor = 0.0
+    fallbacks = 0
+    for arm in u.get("armaments", []):
+        if not (arm.get("pricing") and arm.get("slot") in ("Armament", "Armament@PRIMARY")):
+            continue
+        drow = didx.get((arm.get("slot"), arm.get("weapon"))) if didx else None
+        keyed = fnum(drow.get("effective_dps")) if drow else None
+        if keyed is None and use_k and not smallarms_only:
+            fallbacks += 1
+        total += armament_dps(arm, fp, base_only=base_only,
+                              smallarms_only=smallarms_only, keyed_eff=keyed)
+        if keyed is not None:
+            k_ctx = fnum(drow.get("k_context"))
+            k_flat_ctx = fnum(drow.get("k_flat_context"))
+            ratio = k_flat_ctx / k_ctx if (k_ctx and k_flat_ctx is not None) else 1.0
+            per_shot = fnum(drow.get("effective_per_shot"))
+            pct_floor += ((fnum(drow.get("pct_absolute_context")) or 0.0)
+                          * keyed / per_shot if per_shot else 0.0) * (1.0 if base_only else fp)
+            flat += keyed * ratio * (1.0 if base_only else fp)
+        else:
+            raw = armament_dps(arm, fp, base_only=base_only,
+                               smallarms_only=smallarms_only)
+            flat += raw
+    return total, flat, pct_floor, fallbacks
 
 
 def resolve_dps_uniqueness(rows, step: float = 0.01) -> None:
@@ -251,7 +302,7 @@ def _group_by(rows, key):
     return groups
 
 
-def load_class_rows(cls: str):
+def load_class_rows(cls: str, use_k: bool = True):
     anchors = load_anchors()
     anchor = anchors.get(cls)
     if not anchor:
@@ -314,7 +365,9 @@ def load_class_rows(cls: str):
                 fp0 = 1.0 if is_protected else (fp_raw if fp_raw is not None else 1.0)
                 # Scout low-cost units (<=1.5*C0) are SmallArms-only per FORMULA_V2 §3.
                 smallarms_only = cls == "scout" and cost <= spec["cost0"] * 1.5
-                base_dps = unit_dps(u, fp0, base_only=True, smallarms_only=smallarms_only)
+                base_dps, flat_dps, pct_floor, fallbacks = unit_dps(
+                    u, fp0, base_only=True, smallarms_only=smallarms_only,
+                    du=du, use_k=use_k)
                 row = {
                     "actor": actor,
                     "faction": design.get("faction") or ledger_name,
@@ -324,6 +377,9 @@ def load_class_rows(cls: str):
                     "cost": cost,
                     "fp0": fp0,
                     "base_dps": base_dps,
+                    "flat_dps": flat_dps,
+                    "pct_floor": pct_floor,
+                    "k_fallbacks": fallbacks,
                     "special": fnum(design.get("special")) or 1.0,
                     "tier_abs": tier_chain.effective_tier(
                         design.get("tech_tier"), du.get("tier_multiplier"), default=1.0),
@@ -425,7 +481,7 @@ def solve_target_speed(spec, cost, hp, rng, dps, special, tech_tier, lo, hi):
     return (a + b) / 2
 
 
-def decompose_dps(target_dps, base_dps, cur_sum, n_wh):
+def decompose_dps(target_dps, flat_dps, cur_sum, n_wh, pct_floor=0.0):
     """Per-warhead `Damage` on the flat grid reproducing target_dps, in ONE stage.
 
     **W17 — `FirepowerMultiplier` is retired as a fine-tuning knob**, so the second
@@ -445,13 +501,18 @@ def decompose_dps(target_dps, base_dps, cur_sum, n_wh):
     new Damage lands, or the multiplier applies a second time. `render_report`
     emits that instruction; `plan_firepower_retirement.py` lists who needs it.
 
-    Returns (per_warhead_damage, 1.0). base_dps = eff-DPS at fp=1 with cur_sum
-    SUM (linear in SUM).
+    Returns (per_warhead_damage, 1.0). `flat_dps` = eff-DPS at fp=1 with cur_sum
+    SUM measured at `k_flat_context` — the damage-INDEPENDENT coefficient
+    (EFFECTIVE_DAMAGE §3.0): overkill is damage-dependent, so folding it into the
+    solve basis would turn a closed-form division into a fixed point. The
+    standalone-percentage floor `pct_floor` is likewise damage-independent and
+    comes off the target before the division.
     """
     step = formula.DAMAGE_STEP
-    if base_dps <= 0 or cur_sum <= 0 or target_dps <= 0:
+    target_dps -= pct_floor
+    if flat_dps <= 0 or cur_sum <= 0 or target_dps <= 0:
         return step, 1.0
-    per_unit = base_dps / cur_sum               # eff-DPS per unit of SUM at fp=1
+    per_unit = flat_dps / cur_sum               # flat eff-DPS per unit of SUM at fp=1
     needed = target_dps / per_unit              # required SUM
     return formula.snap_damage_step(needed / n_wh), 1.0
 
@@ -488,7 +549,7 @@ def unique_dmg_per_shot(rows, step=None):
                     r["per_wh"] = per_wh
                     r["dmg_shot"] = dmg_shot
                     r["dmg_eff"] = dmg_shot
-                    r["dps_eff"] = r["per_unit"] * dmg_shot
+                    r["dps_eff"] = r["per_unit"] * dmg_shot + r.get("pct_floor", 0.0)
                     placed.append(r)
                     break
             else:
@@ -498,8 +559,8 @@ def unique_dmg_per_shot(rows, step=None):
             placed.append(r)
 
 
-def rebalance_class(cls: str):
-    rows, spec, band_lo, band_hi, spd_lo, spd_hi = load_class_rows(cls)
+def rebalance_class(cls: str, use_k: bool = True):
+    rows, spec, band_lo, band_hi, spd_lo, spd_hi = load_class_rows(cls, use_k=use_k)
     if not rows:
         return ""
     nudge_hp_spd(rows, spd_lo=spd_lo, spd_hi=spd_hi)
@@ -513,7 +574,7 @@ def rebalance_class(cls: str):
     # 2. Per member: solve target eff-DPS for Δ0 at final (hp,spd,rng); decompose
     #    to 100-grid warhead Damage at FP=1 (cost pinned, stats trimmed law).
     for r in rows:
-        r["per_unit"] = (r["base_dps"] / r["dmg_shot0"]) if r["dmg_shot0"] else 0.0
+        r["per_unit"] = (r["flat_dps"] / r["dmg_shot0"]) if r["dmg_shot0"] else 0.0
         if r["protected"]:
             r["fp"] = r["fp0"]
             r["dmg_shot"] = r["dmg_shot0"]
@@ -533,14 +594,15 @@ def rebalance_class(cls: str):
             tgt = 0.0
         else:
             r["over_priced"] = False
-        D, fp = decompose_dps(tgt, r["base_dps"], r["dmg_shot0"] or 1, r["n_wh"])
+        D, fp = decompose_dps(tgt, r["flat_dps"], r["dmg_shot0"] or 1, r["n_wh"],
+                              pct_floor=r["pct_floor"])
         if r.get("over_priced"):
             D, fp = formula.DAMAGE_STEP, 1.0
         r["per_wh"] = D
         r["fp"] = fp
         r["dmg_shot"] = D * r["n_wh"]
         r["dmg_eff"] = r["dmg_shot"] * fp
-        r["dps_eff"] = r["per_unit"] * r["dmg_shot"] * fp
+        r["dps_eff"] = r["per_unit"] * r["dmg_shot"] * fp + r["pct_floor"]
         r["trimmed"] = (r["dmg_shot"] != (r["dmg_shot0"] or r["dmg_shot"]))
     # 2b. Range fine-tune: range is a finer (10-step) Δ lever than one Damage step.
     #     Snap each member to the range that zeroes Δ at its trimmed DPS when
@@ -585,15 +647,23 @@ def rebalance_class(cls: str):
         r["price"] = _price(spec, r["hp"], r["spd"], r["rng"], r["dps_eff"],
                             r["special"], r["tech_tier"])
         r["delta"] = r["price"] - r["cost"]
-    return render_report(rows, cls)
+    return render_report(rows, cls, use_k=use_k)
 
 
-def render_report(rows, cls):
+def render_report(rows, cls, use_k=True):
     s = load_anchors()[cls]["spec"]
+    k_fb = sum(r.get("k_fallbacks", 0) for r in rows)
+    basis = ("member DPS = K-adjusted `effective_dps` "
+             "(accuracy/splash/range, PRICING-DEFAULT 2026-10-04); solve on the "
+             "damage-independent `k_flat_context`; predicted prices re-measure "
+             "exactly on the next extract"
+             if use_k else "member DPS = raw damage/reload (--raw)")
     lines = [
         f"# {cls.replace('_', ' ').title()} infantry rebalance proposal",
         "",
         f"Anchor spec: HP={s['hp0']}, Speed={s['speed0']}, Range={s['range0_wdist']}, eff-DPS={s['dps0']}, Cost={s['cost0']}",
+        f"Pricing basis: {basis}"
+        + (f"; **{k_fb} armament(s) priced on raw fallback** (no sidecar entry)" if k_fb else ""),
         "",
         "Converter law: cost pinned, range clamped to band + made unique, "
         "eff-DPS trimmed to Δ≤1 via 100-grid warhead Damage; unconditional FirepowerMultiplier is retired.",
@@ -688,8 +758,11 @@ def main():
                     "design.class_anchor==<class> (or a mapped subtype).")
     ap.add_argument("--class", "-c", dest="cls", required=True, choices=valid,
                     metavar="CLASS", help="one of: " + ", ".join(valid))
+    ap.add_argument("--raw", action="store_true",
+                    help="opt out of the default K-adjusted effective-DPS basis "
+                         "and price/solve on raw damage/reload")
     args = ap.parse_args()
-    text = rebalance_class(args.cls)
+    text = rebalance_class(args.cls, use_k=not args.raw)
     if not text:
         print(f"no units found for class {args.cls} "
               f"(tag members with design.class_anchor=={args.cls} first)")

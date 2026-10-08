@@ -1,5 +1,150 @@
 # Cameo — THE HANDOFF
 
+## 2026-10-04 — Devin-Tier4: RADAR-A INC-ready — `AI_radar_contacts` (IBotRadarContacts provider, no consumers)
+
+`Agent: Devin-Tier4 · branch devin/tier4/radar-contacts · worktree C:/cameo-wt/t4-radar-a · base 3ba05ede7 (master, post-INC-04e)`
+
+**INC-ready: `devin/tier4/radar-contacts` — switch: `AI_radar_contacts`** (grant id `@radarcontacts`, condition
+`radar_contacts`; `genericbot && radar_contacts` gate). Stacks on RADAR-ALLY `646bddf51` (landed on master in INC 2026-10-04).
+`RadarContactsBotModule` publishes `IBotRadarContacts` — anonymous `{Cell, Tick, VXPerKilotick, VYPerKilotick,
+Class, Owner}` contacts computed from `CameoRangedGpsDotEffect.ShouldRenderDot` (the renderer's own gate,
+evaluated per bot player) over the own/allied `RangedGpsWatcher.Providers` -> `CameoRangedGpsProvider.ActorsInRange`
+proximity lists. No type, no HP, no ActorID; zero global-actor-scan sites (fog manifest unchanged, 0 new sites).
+Phase A is provider + situation log only — `own.contacts {tick, providers, live:[{x,y,tick,vx,vy,class,owner}]}`
+additive, absent when no module. No consumers wired (squads/scout/expansion/veto untouched).
+*Evidence:* build 0 errors · 851/851 tests (6 new) · fog/personalities/merged-modules audits PASS ·
+boot gate PASS · dry-run arm resolves · **live check PASS**: armed ra1_allies hard-v-hard produced
+`contacts` in all 442 situation records; tick 23701 = 6 live enemy contacts with real drift (RADAR-A
+details in DEVELOPMENT_LOG top entry). *Post-rebase re-verify* (base moved to `3ba05ede7`): build 0 errors,
+939/939 tests, fog/wiring/personalities/merged audits PASS, boot gate PASS. Consumers for phase B per the
+RADAR-DOTS note: early-warning -> scout-ID -> expansion -> veto -> EL scalar features.
+## 2026-10-04 — EMBER AR-2: personality-pin desync fixed (INC-ready)
+
+**INC-N ready: `devin/ember/ar2-personality-pin` — switch: none (fixes `AO_tier3_bandits`-armed play; unarmed
+is unchanged).** P0 of the 2026-10-04b architecture review. `TraitEnabled` read the bandit's
+`LocalRandom`-resolved `PinnedPersonalityArm` in a synced callback — each client granted a different
+`personality-*` condition AND skipped the `SharedRandom` draw (double divergence). Now per spec:
+`ChooseInitialCondition` draws `SharedRandom` exactly once unconditionally and applies only the synced
+harness pin; the bandit arm reaches the world solely as a synced `SetBotPersonality` order issued from
+the host's `BotTick` (`BanditPinOrder`, one issue/sim-second until reflected), with candidate switching
+silent while pinned — same suppression semantics, sync-safe. +5 NUnit (draw-count via
+`MersenneTwister.TotalCount`, twin-client determinism, pin-order seam). Gates: builds 0/0, **938/938**,
+boot gate PASS. 2-client sync proof remains Tier4's AR-T3 armed smoke — assigned, must go red on master.
+## 2026-10-04 — EMBER AR-4: PlugSpawner owner check + scan cache (INC-ready)
+
+**INC-N ready: `devin/ember/ar4-plugspawner` — switch: none (correctness fix; valid ordering
+unchanged).** P0 of the 2026-10-04b architecture review. `PlacePlugAI`'s synced resolve path
+never verified target ownership — any client could plug anyone's building — and `BotTick`
+re-scanned `world.Actors` once per plug type. Now: `PlugTargetIsOwned(targetActor, self.Owner)`
+gates the resolve before cost/prereq/enable, and one `CollectOwnedActors` pass per interval
+feeds every plug kind. +3 NUnit (`PlugSpawnerBotModuleTest`, UnsafeAccessor fixtures).
+Gates: builds 0/0, **936/936**, boot gate PASS.
+## 2026-10-04 — EMBER AR-T2: shared C# test fixtures (INC-ready)
+
+**INC-N ready: `devin/ember/test-fixtures` — switch: none (test-only).** New
+`OpenRA.Mods.Cameo.Test/TestFixtures/` namespace consolidating the per-file test doubles: `Uninitialized`
+(identity-only `Player`/`Actor`/`Of<T>`), `FakeZoneTopology` (merged exact + ring-search semantics via
+`NearestSearchRadius`; `AddZone(cells, adjacent, resourceCells)`; `Recut()`), `StubMissionProvider`,
+`StubUtilityAxes`, and `RecordingBot` (order-capture `IBot` for the AR-2/AR-4 seam tests ahead). 11 test
+files migrated; `TestFixturesTest` pins the fixtures' contracts. Net −130 duplicated lines. Gates: builds
+0/0, NUnit **941/941**. Prerequisite for AR-2 personality-pin and AR-4 PlugSpawner coverage (next).
+Sibling: coverage infra lives on `devin/ember/coverage-infra` (`dotnet-coverage`, T4 ratchet, 106-file
+baseline, 19.4% line / 17.2% branch on bot modules).
+## 2026-10-04 — EMBER receipt: AR-T1 coverage infrastructure
+
+**INC-N ready: `devin/ember/coverage-infra` — no switch (test/audit tooling only, no gameplay code).** From master
+`3ba05ede7`. `dotnet-coverage` is the working collector (coverlet's three drivers all record 0% in the
+`EngineRootPath` layout — instrumented copies never reach the vstest testhost). New: `tools/ai/coverage_report.py`
+(collect/parse → per-file table + `tools/tests/coverage_baseline.json`), T4 flag in `audit_test_coverage.py`
+(`--coverage-xml` per-file line-rate ratchet, ε=0.1pt), C# scan widened to `OpenRA.Mods.CA`, floors re-measured at
+truth (933/3076/496 — T3's +272 is the recorded CA debt). Baseline evidence: `docs/audit/coverage_botmodules.md`,
+106 bot-module files, **line 19.4% / branch 17.2%**. CI: additive `cameo-tests` job in `ci.yml` (org CI disabled —
+runs when enabled). Gates: 13/13 new py tests, bare audit exit 0, self-check 0 regressions/106 baselined,
+`dotnet-coverage` run: 933/933 NUnit. Next: AR-T2 shared fixtures, AR-2 personality-pin, AR-4 PlugSpawner.
+
+## 2026-10-04 — Devin-Tier4: PRIORS-CARRY engagement-log balance block (Tier4 lane, spec §ownership)
+
+`Agent: Devin-Tier4 · branch devin/tier4/takeover-smoke · worktree C:/cameo-wt/t4-smoke · base master 3ba05ede7 (stacked on AR-T3 commits)`
+
+**INC-ready, NOT merged** (no merge authority; lead decides).
+Per `SPEC_2026-10-04_claude_priors_carry_over.md` the tier-1 fitter re-priced old
+logs under *today's* Versus — every engagement record now carries an additive
+`balance` block so old logs price under their own rules:
+`balance.fingerprint` = sha256(mod id + mod version + map uid + per-file sha256 of
+manifest weapons/rules); `balance.versus` = resolved percent for every
+`delivery-tag|armour-class` cell the engagement touched (seen compositions only).
+Tag identity recovered from resolved weapon yaml (`WeaponInfo` drops the
+`Warhead@` suffix at load) — **parity 1568/1568 weapons, 0 mismatch** vs
+`extract_stats.py`; main-warhead pick restricted to the ledger's five damage
+types. One-sided engagements emit **fingerprint-only** = T3Verify's declared
+legacy-weight path. Consumer contract confirmed peer→peer:
+`r["balance"]["versus"]["<Tag>|<Armor>"]` (`__x__` also accepted).
+
+**Live evidence** (3-match batch): 618/618 engagement records carry `balance`;
+295 with versus (254 distinct cells, 0 malformed); 323 fingerprint-only;
+3 fingerprints = 3 map variants. `engagement_report` + on-branch fitter parse
+unchanged (additive field).
+**Gates:** build 0/0; 971/971 tests (4 new); fog/wiring/personalities/merged/
+mutation/arch audits PASS; module map current; boot gate PASS.
+**Files:** `EngagementMath.cs` +83, `EngagementLogBotModule.cs` +164,
+`EngagementMathTest.cs` +103 — additive only, no yaml/balance numbers.
+**Next (not mine):** NOVA consumer read path; lead's fit + A/B integration.
+T3Verify review notes: `boundary=False` on missing prev `LedgerHash`
+undocumented; parsed `prev.staleness_tau_milli` unused.
+
+## 2026-10-04 — Devin-Tier4: AR-T3 bundle — round-trip gate, AR-2 desync regression RED, hotspot #1, module-map fix
+
+`Agent: Devin-Tier4 · branch devin/tier4/takeover-smoke · worktree C:/cameo-wt/t4-smoke · base master 3ba05ede7`
+
+**INC-ready pieces, NOT merged** (no merge authority; lead decides).
+1. `run_ai_match_batch --round-trip` — runs `round_trip_check.py` on the batch
+   support dir post-summary, records `summary["round_trip"].exit`, fails the
+   batch on nonzero; 3 unit tests (`test_ai_batch_harness.py` 36/36).
+2. **AR-2 red-first MP regression:** `takeover_smoke.py --scenario desync` — 2
+   clients opposite teams + `hard` generic bots + transient `AO_tier3_bandits`
+   (snapshot/apply/finally-restore). Judge = pin equality across clients +
+   0 sync reports. Engine analysis: bots tick host-only inside
+   `Sync.RunUnsynced`, conditions carry no `[VerifySync]` → divergent pins can
+   never reach the order hash; pin divergence IS the defect. **Official run:
+   FAIL `pin divergence (AR-2)` on both bots, 0 exceptions/0 sync reports**
+   (`_support_t4_smoke/scenario_desync/RESULT.json`). Excluded from `all`;
+   goes GREEN when the pin moves to shared deterministic RNG (AR-2 fix lane).
+3. **Hotspot #1 `Rebuild`:** 12 pure decision seams → `MasterAiEval`
+   (bit-identical; gathering/publication stay in `BotSituation.cs`); decision-
+   tree NOTE at `Rebuild`; 34 NUnit tests in `MasterAiEvalTest.cs`.
+4. **`ai_module_map.py` C2 fix:** nested-class body slicing + non-module
+   consumers were invisible → 11/12 "no consumer" rows were false; now
+   brace-depth spans + helper consumers marked `+`. C2 12→1 (only true
+   phase-A `IBotFrontBackAdvisor`).
+
+**Gates:** build 0/0; 967/967 tests; fog/wiring/personalities/merged/mutation/
+arch audits PASS; boot gate PASS.
+**Found, not in scope:** `ExpansionPlannerBotModule.IsPowerPlant` throws
+`TypeDictionary … multiple instances of PowerInfo` on `_ra_doubles` — crashed
+2 desync runs (deterministic map+actor combo); needs an owner.
+**Next:** AR-2 pin→shared-RNG fix lane (this regression turns green on it);
+`--round-trip` opt-in until the lead wires it into the batch defaults.
+
+## 2026-10-04 — Devin-Tier4: TAKEOVER-SMOKE handed in (all six scenarios PASS on real processes)
+
+`Agent: Devin-Tier4 · branch devin/tier4/takeover-smoke @ da8595dac · worktree C:/cameo-wt/t4-smoke · base devin/t3verify/bot-takeover@9a0348101 (pre-rev-2)`
+
+**INC-ready for review, NOT merged** (no merge authority; lead/coordinator decides).
+Double-gated dev harness + five takeover scenarios on a real dedicated server with
+2 real clients: inert PASS · c defeat PASS · d disconnect-takeover PASS
+(`controller_client:0`) · a 2v2-kill PASS · b 2v2-surrender PASS · e admin-kill
+re-election PASS (`controller_client:1` on the survivor). 0 sync reports, 0
+exceptions. Build 0/0; harness `tools/ai/takeover_smoke.py --scenario {a..e,inert}`;
+evidence `C:/cameo-wt/_support_t4_smoke/scenario_*`; fleet NOTE+STATUS same date.
+**Real bug on this branch:** `AiMatchLogWriter.AllBotsResolved` vacuous-true on an
+empty logged set burned the one-shot record at world load — takeovers in all-human
+matches were unrecordable (boss-review blocker, corroborated live; rev-2's
+controller-exclusive writer may supersede the fix — do not double-apply).
+**Peer-queue note:** T3Verify asked for the exactly-one-record assertion + a
+spectator-admin scenario f against `ae7075cd8`; maintainer's passive-takeover
+report matches the boss's omitted-service-condition finding (harness can repro).
+**Next in queue (lead's ordering):** RADAR-ALLY → mpspawn order-independent fix →
+RADAR-A (`IBotRadarContacts` + situation-log fields, switch `AI_radar_contacts`).
 ## 2026-10-04 — NOVA N2 receipt: EL-1 v2 on current master
 
 **INC-N ready: `devin/nova/el1-v2` — switch: `AQ_inmatch_adapt` (default off).** Round-2 N2: the EL-1 in-match
@@ -9,6 +154,62 @@ hunks onto master's files — checkout would have reverted `BotFactionView.Publi
 `IBotInMatchAdaptation` consumed only via `FirstEnabledTraitOrDefault`. Gates: build 0 err / 0 mod-code warnings,
 839/839 tests (+5 `InMatchAdaptTest`), arch coverage + module map regenerated, wiring/fog/direct-mutation audits
 PASS, `tools/boot_gate.ps1` PASS. #792 closed as superseded.
+## 2026-10-04 — NOVA: N1 one-branch port INC-ready — `AP_tier1_priors`
+
+`Agent: Devin (nova) · branch devin/nova/t2-port-v2 @ 6fd362b6b · worktree C:/cameo-wt/nova-t2port`
+*(re-applied from t2-port — the old branch carried one Devin-identity commit `1e8684842`; ruling (b): fresh branch, never merge the old one; trees byte-identical)*
+
+**INC-N ready: `devin/nova/t2-port-v2` — switch: `AP_tier1_priors` (default off).** Round-2 N1: the
+tier-2 follow-ups consolidated onto master ≥ `8e86fca23` — (b) `BotWeaponProfile.Delivery` tag axis,
+(c) canonical `BotEngagementPriors` consumption (`DeliveryArmour@`/`DefenceState@`/`IntoDefencesMilli`,
+`Factor@` path retired), (d) per-cell `PriorPct@` staleness via `ResolvedTagVersus`
+(template-canonical `^Warhead_<tag>` + family fallback, O(1)), (e) no faction-keyed lookups in the
+consumer (helper rule vacuously satisfied). Independent gate `genericbot && tier1_priors`; armed
+alone = inert; missing file = 1000 neutral. Build 0 err, 0 new mod-code warnings, 840/840, audits
+PASS, boot gate via `tools\boot_gate.ps1`.
+Follow-up `21781e27b`: `AttritionExponentMilli` now consumed (`IBotEngagementPriors` default member,
+eval applies `ratio^alpha`, [500,2000] bounds) — it was parsed-but-inert; provider `PriorsState`
+(`none`/`error`/`fitted:N/stale:M`, live stale count) lands on the match record's `priors_state`;
+`tier1_priors` joined `WatchConditions` (priors shift veto verdicts = survivorship filter, §12.33);
+parse failures degrade to neutral instead of throwing in BotTick. Re-gated: 841/841
+(+AttritionExponentWarpsTheRatio), audits PASS, boot PASS.
+Follow-up `70879b038`: `GlobalScaleMilli` consumed — the v2 fitter's relative factors go absolute at
+every fitted lookup (`v × g / 1000`); absent key = Schema-1 semantics; stale/unfitted stays Neutral —
+g never fabricates. Emit side is one yaml line pending the coordinator's ruling (fleet
+`REPLY_2026-10-04_nova_to_t3verify_globalscale.md`). 843/843.
+Follow-up `2cdfdbac8`: parse-tolerance test vs EMBER's real emitted file (`ember-fit`) —
+`Schema`/`LedgerHash`/`Engagements` headers, comments, and the `AttackTiming@`/`Response@`/
+`SuicideIndex@` analysis rows are out-of-contract and skipped by prefix dispatch; the test locks
+that so a parser change cannot turn an unknown block into a load failure. 844/844.
+
+## 2026-10-04 (late pm) — Devin-EMBER: AR-S formation hysteresis + order dedup INC-ready (army stutter fix)
+
+`Agent: Devin (ember) · branch devin/ember/formation-hysteresis (tip) · worktree C:/cameo-wt/ember-tests`
+
+**INC-ready: `devin/ember/formation-hysteresis` — switch: `BJ_squad_hysteresis` (default OFF; classic
+bit-identical via the `@classic` skip).** Maintainer report: armies march in stutter-steps. Root cause:
+`GroundUnitsAttackMoveStateCA` re-issued identical `Stop`/`AttackMove` orders every squad tick (each re-issue
+cancels the active `MoveTo` → whole army repaths per tick) plus a hard hold/push cut at `FormationMaxLeadCells`
+that flipped members Stop↔AttackMove at the threshold. Fix, per the AR-S rulings: gated by
+`SquadManagerBotModuleCAInfo.UseFormationHysteresis` (default false → verbatim old code path); armed = dead-band
+hold classification (`SquadMicroEvalCA.ClassifyHolding`, knob `FormationHoldHysteresisCells` default 2),
+transition-only order issuing via per-member `(class, quantized cell)` memory, latched leader wait (enter >5×
+occupiedArea, release <3×), leader order dedup by actor+route cell, stale-member cleanup, **plus the pull-back
+fold**: the order-rate trace showed the dominant flip was `AttackMove`↔`Move` (formation push vs MI pull-back in
+the same tick), so wounded/under-fire members classify as `Retreat`/`RetreatRear` inside the same dedup lattice
+— never pushed and pulled in one tick. Files: `GroundStatesCA.cs`, `SquadMicroEvalCA.cs` (+`ClassifyHolding`),
+`SquadManagerBotModuleCA.cs` (+2 fields), `increment_switches.yaml` (+`BJ_squad_hysteresis`),
+`tools/ai/order_trace.py` (new, replay order-rate analyzer), `FormationHysteresisTest.cs` (new, 100% branch
+coverage of the static). **Evidence:** `order_trace.py` on hard-vs-hard `td_gdi` duel replays — unarmed 90
+stutter units (≥2 alt/s) → armed 28 (**−69%**; alternations 548→298). Gates: build 0/0 on `3ba05ede7` ·
+Cameo.Test 937/937 · boot PASS on final code. Known residual: `unitsHurryUp` per-tick re-issue + non-Rush
+paths untouched (scope — next assignment). Fleet: `STATUS_2026-10-04_ember_formation_hysteresis.md`. Flag
+(pre-existing, not this change): match crash on "A Nuclear Winter" — duplicate `Power` trait,
+`ExpansionPlannerBotModule.IsPowerPlant`, `exception-2026-10-04T145446Z`.
+
+Earlier same day — EMBER E2: `devin/ember/tests-baseline`@`0d5cfc14a` landed in INC-e (78→33 failing files, all
+remaining = classified owner flags; see `NOTE_2026-10-04_ember_e2_test_baseline.md`). E1 preview stayed out of
+repo per coordinator ruling (global ~3× scale bias; T3Verify owns the fitter — scale fix landed `b659d2872`).
 
 ## 2026-10-03 (night) — Claude (coordinator): ORDERS round 2 for NOVA / DAWN / EMBER + the tier-3 hotfix
 
@@ -3348,7 +3549,7 @@ someone else is mid-way through.**
 
 `warhead_family_reach` measures **1,526 distinct fired weapon identities** whose
 transitive inheritance reaches a `^Warhead_*` family in the current PR340 source.
-(2026-09-23 resync, post-#438: `unconverted_template_inheritors` = **1163**.) **2026-09-23b (post-#456 W23 retrofit): = 827.** **2026-09-24b (post-merge-wave): = 385.** **2026-09-26 (`afb66c9b5`): = 390.** **2026-09-27 (nova post-merge): = 394** (splice-edge mechanics, not new legacy usage). **2026-09-27 (DAWN stack merge): = 391.** **2026-09-27b (#534+#516 combined): `warhead_family_reach` = 1509, `unconverted_template_inheritors` = 395.** **2026-09-27 (#534+#516 merged tree): `warhead_family_reach` = 1509, `unconverted_template_inheritors` = 395** (union of both branches' conversions; splice mechanics, not new legacy usage). **2026-09-28 (post-#252 Scrin pack, `5d7bbd6bd`): = 402.**
+(2026-09-23 resync, post-#438: `unconverted_template_inheritors` = **1163**.) **2026-09-23b (post-#456 W23 retrofit): = 827.** **2026-09-24b (post-merge-wave): = 385.** **2026-09-26 (`afb66c9b5`): = 390.** **2026-09-27 (nova post-merge): = 394** (splice-edge mechanics, not new legacy usage). **2026-09-27 (DAWN stack merge): = 391.** **2026-09-27b (#534+#516 combined): `warhead_family_reach` = 1509, `unconverted_template_inheritors` = 395.** **2026-09-27 (#534+#516 merged tree): `warhead_family_reach` = 1509, `unconverted_template_inheritors` = 395** (union of both branches' conversions; splice mechanics, not new legacy usage). **2026-09-28 (post-#252 Scrin pack, `5d7bbd6bd`): = 402.** **2026-10-06 (garrison + missile-feel increment merge): `warhead_family_reach` = 1510.**
 The registry's previous value was 1,415; it is updated upward to this measured
 count with the same predicate and zero tolerance. Ownership wrappers can expose
 more distinct fired identities for existing family payloads: this increase does

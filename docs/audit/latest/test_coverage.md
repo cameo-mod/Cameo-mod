@@ -2,9 +2,10 @@
 
 | metric | meaning | value | floor/baseline |
 |---|---|---|---|
-| T1 | NUnit [Test] cases in OpenRA.Mods.Cameo.Test (73 file(s)) | 837 | >= 24 |
-| T2 | `def test_*` in tools/tests (297 file(s)) | 3022 | >= 177 |
-| T3 | modules with no test mentioning them | 339 | <= 224 |
+| T1 | NUnit [Test] cases in OpenRA.Mods.Cameo.Test (100 file(s)) | 1155 | >= 933 |
+| T2 | `def test_*` in tools/tests (301 file(s)) | 3106 | >= 3076 |
+| T3 | modules with no test mentioning them | 495 | <= 496 |
+| T4 | per-file line-coverage ratchet (bot modules) | not run (no --coverage-xml) | no baselined file loses coverage |
 
 
 ## How to run the real suites (periodic run must paste output here)
@@ -12,14 +13,18 @@
 ```
 dotnet test OpenRA.Mods.Cameo.Test/OpenRA.Mods.Cameo.Test.csproj -c Release
 python -m unittest discover -s tools/tests -t tools/tests
+# line/branch coverage (needs: dotnet tool install -g dotnet-coverage)
+python tools/ai/coverage_report.py --collect
+python tools/audit/audit_test_coverage.py --coverage-xml TestResults/coverage.cobertura.xml
 ```
 
 
-## T3 — untested modules (339)
+## T3 — untested modules (495)
 
 | kind | file | type(s)/module |
 |---|---|---|
 | C# | OpenRA.Mods.Cameo/Activities/HeliDeployForGrantedCondition.cs | HeliDeployForGrantedCondition, HeliDeployInner |
+| C# | OpenRA.Mods.Cameo/CameoDevArgs.cs | CameoDevArgs |
 | C# | OpenRA.Mods.Cameo/CyberintelThemes.cs | CyberintelThemes |
 | C# | OpenRA.Mods.Cameo/Effects/TintedSpriteEffect.cs | TintedSpriteEffect |
 | C# | OpenRA.Mods.Cameo/FileSystem/BagFile.cs | AudioBagLoader |
@@ -39,6 +44,7 @@ python -m unittest discover -s tools/tests -t tools/tests
 | C# | OpenRA.Mods.Cameo/RemasterSettings.cs | RemasterSettings |
 | C# | OpenRA.Mods.Cameo/Rendering/ColorPickerColorShift.cs | ColorPickerColorShift |
 | C# | OpenRA.Mods.Cameo/Rendering/PlayerColorShift.cs | PlayerColorShift |
+| C# | OpenRA.Mods.Cameo/ServerTraits/CameoLobbyAutopilot.cs | CameoLobbyAutopilot |
 | C# | OpenRA.Mods.Cameo/Terrain/CameoRemasterTerrain.cs | CameoRemasterTerrainLoader, CameoRemasterTerrain |
 | C# | OpenRA.Mods.Cameo/Terrain/CameoRemasterTileCache.cs | CameoRemasterTileCache |
 | C# | OpenRA.Mods.Cameo/Traits/AdaptiveGameSpeed.cs | AdaptiveGameSpeed |
@@ -47,7 +53,6 @@ python -m unittest discover -s tools/tests -t tools/tests
 | C# | OpenRA.Mods.Cameo/Traits/AiEngagementLogWriter.cs | AiEngagementLogWriter |
 | C# | OpenRA.Mods.Cameo/Traits/AiLogFileAppender.cs | AiLogFileAppender |
 | C# | OpenRA.Mods.Cameo/Traits/AiMatchLogRecorder.cs | AiMatchLogRecorder |
-| C# | OpenRA.Mods.Cameo/Traits/AiPlacementLogWriter.cs | AiPlacementLogWriter |
 | C# | OpenRA.Mods.Cameo/Traits/AnnounceOnDamageState.cs | AnnounceOnDamageState |
 | C# | OpenRA.Mods.Cameo/Traits/ArmorPlating.cs | ArmorPlating, ArmorPlatingInit |
 | C# | OpenRA.Mods.Cameo/Traits/Attack/AttackInfectCA.cs | AttackInfectCA |
@@ -58,17 +63,16 @@ python -m unittest discover -s tools/tests -t tools/tests
 | C# | OpenRA.Mods.Cameo/Traits/BotModules/AssaultFormationBotModule.cs | AssaultFormationBotModule |
 | C# | OpenRA.Mods.Cameo/Traits/BotModules/CombatAnalysisBotModule.cs | CombatAnalysisBotModule |
 | C# | OpenRA.Mods.Cameo/Traits/BotModules/CombatVetoBotModule.cs | CombatVetoBotModule |
-| C# | OpenRA.Mods.Cameo/Traits/BotModules/DeployBotModule.cs | DeployBotGroup, DeployBotModule |
-| C# | OpenRA.Mods.Cameo/Traits/BotModules/EngagementPriorsBotModule.cs | EngagementPriorsBotModule |
-| C# | OpenRA.Mods.Cameo/Traits/BotModules/GarrisonContestBotModule.cs | GarrisonContestBotModule |
 | C# | OpenRA.Mods.Cameo/Traits/BotModules/GarrisonDefenseBotModule.cs | GarrisonDefenseBotModule |
 | C# | OpenRA.Mods.Cameo/Traits/BotModules/HumanPaceBotModule.cs | HumanPaceBotModule |
 | C# | OpenRA.Mods.Cameo/Traits/BotModules/ParallelProductionBotModule.cs | ParallelProductionBotModule |
-| C# | OpenRA.Mods.Cameo/Traits/BotModules/PlugSpawnerBotModuleCA.cs | PlugSpawnerBotModuleCA |
 | C# | OpenRA.Mods.Cameo/Traits/BotModules/ScaleTargetsBotModule.cs | ScaleCategory, ScaleTargetsSnapshot, ScaleTargetsBotModule |
 | C# | OpenRA.Mods.Cameo/Traits/BotModules/SpacingAdvisorBotModule.cs | SpacingAdvisorBotModule |
 | C# | OpenRA.Mods.Cameo/Traits/BotModules/StealthDoctrineBotModule.cs | StealthDoctrineBotModule |
 | C# | OpenRA.Mods.Cameo/Traits/BotModules/UnitRepairBotModule.cs | UnitRepairBotModule |
+| C# | OpenRA.Mods.Cameo/Traits/CameoAutoOrders.cs | CameoAutoOrders |
+| C# | OpenRA.Mods.Cameo/Traits/CameoRangedGpsDot.cs | CameoRangedGpsDot |
+| C# | OpenRA.Mods.Cameo/Traits/CameoRangedGpsProvider.cs | CameoRangedGpsProvider |
 | C# | OpenRA.Mods.Cameo/Traits/CameoSettings.cs | CameoSettings |
 | C# | OpenRA.Mods.Cameo/Traits/ChangesPhysicalState.cs | ChangesPhysicalState |
 | C# | OpenRA.Mods.Cameo/Traits/Conditions/GrantConditionOnPower.cs | GrantConditionOnPower |
@@ -193,6 +197,160 @@ python -m unittest discover -s tools/tests -t tools/tests
 | C# | OpenRA.Mods.Cameo/Widgets/QuotaProductionPaletteWidget.cs | QuotaProductionPaletteWidget |
 | C# | OpenRA.Mods.Cameo/Widgets/RoundedImageWidget.cs | RoundedImageWidget |
 | C# | OpenRA.Mods.Cameo/Widgets/ScaledImageWidget.cs | ScaledImageWidget |
+| C# | OpenRA.Mods.CA/Activities/Attach.cs | Attach |
+| C# | OpenRA.Mods.CA/Activities/AttackCharged.cs | AttackCharged |
+| C# | OpenRA.Mods.CA/Activities/BallisticMissileCAFly.cs | BallisticMissileCAFly |
+| C# | OpenRA.Mods.CA/Activities/CruiseMissileFly.cs | CruiseMissileFly |
+| C# | OpenRA.Mods.CA/Activities/Dive.cs | Dive |
+| C# | OpenRA.Mods.CA/Activities/GuidedMissileFly.cs | GuidedMissileFly |
+| C# | OpenRA.Mods.CA/Activities/HuntCA.cs | HuntCA |
+| C# | OpenRA.Mods.CA/Activities/InstantTransform.cs | InstantTransform |
+| C# | OpenRA.Mods.CA/Activities/TeleportCA.cs | TeleportCA |
+| C# | OpenRA.Mods.CA/AIUtils.cs | AIUtils |
+| C# | OpenRA.Mods.CA/Effects/LinkedProducerIndicator.cs | LinkedProducerIndicator |
+| C# | OpenRA.Mods.CA/Effects/WarheadTrailProjectileEffectCA.cs | WarheadTrailProjectileCAEffect |
+| C# | OpenRA.Mods.CA/Graphics/MindControlArc.cs | WithMindControlArcCA |
+| C# | OpenRA.Mods.CA/Graphics/SelectionBoxAnnotationRenderableCA.cs | SelectionBoxAnnotationRenderableCA |
+| C# | OpenRA.Mods.CA/Orders/ReleaseSlaveOrderTargeter.cs | ReleaseSlaveOrderTargeter |
+| C# | OpenRA.Mods.CA/Projectiles/LaserZapCA.cs | LaserZapCA |
+| C# | OpenRA.Mods.CA/Projectiles/LinearPulse.cs | ProjectileAnimation, ImpactAnimation, DamageFalloff |
+| C# | OpenRA.Mods.CA/Projectiles/NukeLaunchInfo.cs | NukeLaunchCA |
+| C# | OpenRA.Mods.CA/Projectiles/PlasmaBeam.cs | PlasmaBeam |
+| C# | OpenRA.Mods.CA/Projectiles/WarheadTrailProjectileCA.cs | WarheadTrailProjectileCA |
+| C# | OpenRA.Mods.CA/Scripting/CombatCAProperties.cs | CombatCAProperties |
+| C# | OpenRA.Mods.CA/Scripting/MadTankCAGlobal.cs | MadTankCAProperties |
+| C# | OpenRA.Mods.CA/Scripting/ReinforcementsCAGlobal.cs | ReinforcementsCAGlobal |
+| C# | OpenRA.Mods.CA/Traits/Air/AttackAircraftCA.cs | AttackAircraftCA |
+| C# | OpenRA.Mods.CA/Traits/Air/DiveOnAttack.cs | DiveOnAttack |
+| C# | OpenRA.Mods.CA/Traits/AirstrikeMasterCA.cs | AirstrikeMasterCA |
+| C# | OpenRA.Mods.CA/Traits/AirstrikeSlaveCA.cs | AirstrikeSlaveCA |
+| C# | OpenRA.Mods.CA/Traits/Attachable.cs | Attachable |
+| C# | OpenRA.Mods.CA/Traits/AttachedAircraft.cs | AttachedAircraft |
+| C# | OpenRA.Mods.CA/Traits/AttachOnCreation.cs | AttachOnCreation |
+| C# | OpenRA.Mods.CA/Traits/AttachOnTransform.cs | AttachOnTransform |
+| C# | OpenRA.Mods.CA/Traits/Attack/AttackBomberCA.cs | AttackBomberCA |
+| C# | OpenRA.Mods.CA/Traits/Attack/AttackFrontalCharged.cs | AttackFrontalCharged |
+| C# | OpenRA.Mods.CA/Traits/Attack/AttackGarrisonedSP.cs | FirePortSP, AttackGarrisonedSP |
+| C# | OpenRA.Mods.CA/Traits/Attack/AttackPrismSupported.cs | AttackPrismSupportedCA |
+| C# | OpenRA.Mods.CA/Traits/Attack/AttackTurretedCharged.cs | AttackTurretedCharged |
+| C# | OpenRA.Mods.CA/Traits/BallisticMissileCA.cs | BallisticMissileCA |
+| C# | OpenRA.Mods.CA/Traits/BotModules/BotLimits.cs | BotLimits |
+| C# | OpenRA.Mods.CA/Traits/BotModules/BotLimitsResolver.cs | BotLimitsResolver |
+| C# | OpenRA.Mods.CA/Traits/BotModules/BuildingRepairBotModuleCA.cs | BuildingRepairBotModuleCA |
+| C# | OpenRA.Mods.CA/Traits/BotModules/CaptureManagerBotModuleCA.cs | CaptureManagerBotModuleCA |
+| C# | OpenRA.Mods.CA/Traits/BotModules/HarvesterBotModuleCA.cs | HarvesterBotModuleCA |
+| C# | OpenRA.Mods.CA/Traits/BotModules/IBotArmyStaging.cs | ArmyStagingGroup, ArmyStagingPlan |
+| C# | OpenRA.Mods.CA/Traits/BotModules/IBotRegionThreatProvider.cs | BotRegionThreatMerge |
+| C# | OpenRA.Mods.CA/Traits/BotModules/IBotScaleTargets.cs | BotScaleTargets |
+| C# | OpenRA.Mods.CA/Traits/BotModules/IBotThreatAnalysis.cs | BotThreatRoles |
+| C# | OpenRA.Mods.CA/Traits/BotModules/SiegeEvaluatorBotModule.cs | SiegeEvaluatorBotModule |
+| C# | OpenRA.Mods.CA/Traits/BotModules/UnitBuilderBotModuleCA.cs | UnitBuilderBotModuleCA |
+| C# | OpenRA.Mods.CA/Traits/BotModules/UnitCompositionsBotModule.cs | UnitComposition, UnitCompositionsBotModule |
+| C# | OpenRA.Mods.CA/Traits/CashHackable.cs | CashHackable |
+| C# | OpenRA.Mods.CA/Traits/ChronoshiftableCA.cs | ChronoshiftableCA, ChronoshiftReturnInit |
+| C# | OpenRA.Mods.CA/Traits/Conditions/GrantChargingCondition.cs | GrantChargingCondition |
+| C# | OpenRA.Mods.CA/Traits/Conditions/GrantConditionOnAttackCA.cs | GrantConditionOnAttackCA |
+| C# | OpenRA.Mods.CA/Traits/Conditions/GrantConditionOnBotOwnerCA.cs | GrantConditionOnBotOwnerCA |
+| C# | OpenRA.Mods.CA/Traits/Conditions/GrantConditionOnDamage.cs | GrantConditionOnDamage |
+| C# | OpenRA.Mods.CA/Traits/Conditions/GrantConditionOnFogEnabled.cs | GrantConditionOnFogEnabled |
+| C# | OpenRA.Mods.CA/Traits/Conditions/GrantConditionOnHealingReceived.cs | GrantConditionOnHealingReceived |
+| C# | OpenRA.Mods.CA/Traits/Conditions/GrantConditionOnOrders.cs | GrantConditionOnOrders |
+| C# | OpenRA.Mods.CA/Traits/Conditions/GrantConditionOnPrerequisiteCA.cs | GrantConditionOnPrerequisiteCA |
+| C# | OpenRA.Mods.CA/Traits/Conditions/GrantDelayedCondition.cs | GrantDelayedCondition |
+| C# | OpenRA.Mods.CA/Traits/Conditions/GrantStackingCondition.cs | GrantStackingCondition |
+| C# | OpenRA.Mods.CA/Traits/Conditions/GrantThermalCondition.cs | GrantThermalCondition |
+| C# | OpenRA.Mods.CA/Traits/Conditions/GrantTimedConditionOnCargoAction.cs | GrantTimedConditionOnCargoAction |
+| C# | OpenRA.Mods.CA/Traits/Conditions/GrantTimedConditionOnCrushWarning.cs | GrantTimedConditionOnCrushWarning |
+| C# | OpenRA.Mods.CA/Traits/Conditions/UnloadOnCondition.cs | UnloadOnCondition |
+| C# | OpenRA.Mods.CA/Traits/ConvertsDamageToHealth.cs | ConvertsDamageToHealth |
+| C# | OpenRA.Mods.CA/Traits/CruiseMissile.cs | CruiseMissile |
+| C# | OpenRA.Mods.CA/Traits/CustomRadarColor.cs | CustomRadarColor |
+| C# | OpenRA.Mods.CA/Traits/DeployOnAttack.cs | DeployOnAttack |
+| C# | OpenRA.Mods.CA/Traits/DetonateWeaponOnDeploy.cs | DetonateWeaponOnDeploy |
+| C# | OpenRA.Mods.CA/Traits/DoesNotBlock.cs | DoesNotBlock |
+| C# | OpenRA.Mods.CA/Traits/GuidedMissile.cs | GuidedMissile |
+| C# | OpenRA.Mods.CA/Traits/HarvesterBalancer.cs | HarvesterBalancer |
+| C# | OpenRA.Mods.CA/Traits/InstantTransforms.cs | InstantTransforms |
+| C# | OpenRA.Mods.CA/Traits/LinkedProducerSource.cs | LinkedProducerSource |
+| C# | OpenRA.Mods.CA/Traits/LinkedProducerTarget.cs | LinkedProducerTarget |
+| C# | OpenRA.Mods.CA/Traits/MadTankCA.cs | DetonationSequence |
+| C# | OpenRA.Mods.CA/Traits/MassEnterableCargo.cs | MassEnterableCargo |
+| C# | OpenRA.Mods.CA/Traits/MassEntersCargo.cs | MassEntersCargo |
+| C# | OpenRA.Mods.CA/Traits/MindControllable.cs | MindControllableCA |
+| C# | OpenRA.Mods.CA/Traits/MindController.cs | MindControllerCA |
+| C# | OpenRA.Mods.CA/Traits/MindControllerCapacityModifier.cs | MindControllerCapacityModifier |
+| C# | OpenRA.Mods.CA/Traits/MindControllerDelayModifier.cs | MindControllerDelayModifier |
+| C# | OpenRA.Mods.CA/Traits/Mirage.cs | MirageTarget, Mirage |
+| C# | OpenRA.Mods.CA/Traits/MissileBase.cs | MissileBase |
+| C# | OpenRA.Mods.CA/Traits/MissileSpawnerMaster.cs | MissileSpawnerMasterCA |
+| C# | OpenRA.Mods.CA/Traits/Modifiers/WithPalettedOverlay.cs | WithPalettedOverlay |
+| C# | OpenRA.Mods.CA/Traits/Multipliers/DamageTypeDamageMultiplier.cs | DamageTypeDamageMultiplier |
+| C# | OpenRA.Mods.CA/Traits/Multipliers/DynamicSpeedMultiplier.cs | DynamicSpeedMultiplier |
+| C# | OpenRA.Mods.CA/Traits/Multipliers/LayeredDamageMultiplier.cs | LayeredDamageMultiplier |
+| C# | OpenRA.Mods.CA/Traits/Multipliers/PortableChronoModifier.cs | PortableChronoModifier |
+| C# | OpenRA.Mods.CA/Traits/Multipliers/TimedDamageMultiplier.cs | TimedDamageMultiplier |
+| C# | OpenRA.Mods.CA/Traits/PaletteEffects/CloakPaletteEffectCA.cs | CloakPaletteEffectCA |
+| C# | OpenRA.Mods.CA/Traits/PaletteEffects/PulsingPaletteEffect.cs | PulsingPaletteEffect |
+| C# | OpenRA.Mods.CA/Traits/PaletteEffects/WeatherColorEffect.cs | WeatherPostProcessEffect |
+| C# | OpenRA.Mods.CA/Traits/Palettes/OverlayPlayerColorPalette.cs | OverlayPlayerColorPalette |
+| C# | OpenRA.Mods.CA/Traits/PeriodicProducerCA.cs | PeriodicProducerCA |
+| C# | OpenRA.Mods.CA/Traits/Player/CapturedFactionsManager.cs | CapturedFactionsManager |
+| C# | OpenRA.Mods.CA/Traits/Player/GrantConditionOnPrerequisiteManagerCA.cs | GrantConditionOnPrerequisiteManagerCA |
+| C# | OpenRA.Mods.CA/Traits/Player/LobbyPrerequisiteDropdown.cs | LobbyPrerequisiteDropdown |
+| C# | OpenRA.Mods.CA/Traits/Player/PopController.cs | PopController |
+| C# | OpenRA.Mods.CA/Traits/Player/ProvidesDelayedPrerequisite.cs | ProvidesDelayedPrerequisite |
+| C# | OpenRA.Mods.CA/Traits/Player/ProvidesPrerequisiteValidatedFaction.cs | ProvidesPrerequisiteValidatedFaction |
+| C# | OpenRA.Mods.CA/Traits/PopControlled.cs | PopControlled |
+| C# | OpenRA.Mods.CA/Traits/RecenterViewWithProductionTab.cs | RecenterViewWithProductionTab |
+| C# | OpenRA.Mods.CA/Traits/ReflectsDamage.cs | ReflectsDamage |
+| C# | OpenRA.Mods.CA/Traits/ReloadAmmoPoolCA.cs | ReloadAmmoPoolCA |
+| C# | OpenRA.Mods.CA/Traits/Render/LeavesTrailsCA.cs | LeavesTrailsCA |
+| C# | OpenRA.Mods.CA/Traits/Render/RenderShroudCircleCA.cs | RenderShroudCircleCA |
+| C# | OpenRA.Mods.CA/Traits/Render/WithActivateAnimation.cs | WithActivateAnimation |
+| C# | OpenRA.Mods.CA/Traits/Render/WithCargoHatchAnimation.cs | WithCargoHatchAnimation |
+| C# | OpenRA.Mods.CA/Traits/Render/WithChronoshiftChargePipsDecoration.cs | WithChronoshiftChargePipsDecoration |
+| C# | OpenRA.Mods.CA/Traits/Render/WithChronosphereOverlay.cs | WithChronosphereOverlay |
+| C# | OpenRA.Mods.CA/Traits/Render/WithDeliveryOverlay.cs | WithDeliveryOverlay |
+| C# | OpenRA.Mods.CA/Traits/Render/WithDisguiseTargetPalette.cs | WithDisguiseTargetPalette |
+| C# | OpenRA.Mods.CA/Traits/Render/WithEnabledAnimation.cs | WithEnabledAnimation |
+| C# | OpenRA.Mods.CA/Traits/Render/WithHarvesterCapacityBar.cs | WithHarvesterCapacityBar |
+| C# | OpenRA.Mods.CA/Traits/Render/WithNameTagDecorationCA.cs | WithNameTagDecorationCA |
+| C# | OpenRA.Mods.CA/Traits/Render/WithRestartableIdleOverlay.cs | WithRestartableIdleOverlay |
+| C# | OpenRA.Mods.CA/Traits/ResourcePurifierCA.cs | ResourcePurifierCA |
+| C# | OpenRA.Mods.CA/Traits/RevealOnFireCA.cs | RevealOnFireCA |
+| C# | OpenRA.Mods.CA/Traits/Sound/AnnounceOnCreation.cs | AnnounceOnCreation |
+| C# | OpenRA.Mods.CA/Traits/Sound/AttackSoundsCA.cs | AttackSoundsCA |
+| C# | OpenRA.Mods.CA/Traits/SpawnActorOnCapture.cs | SpawnActorOnCapture |
+| C# | OpenRA.Mods.CA/Traits/SpawnActorOnSell.cs | SpawnActorOnSell |
+| C# | OpenRA.Mods.CA/Traits/SpawnedExplodes.cs | SpawnedExplodes |
+| C# | OpenRA.Mods.CA/Traits/SpawnRandomActorOnDeath.cs | SpawnRandomActorOnDeath |
+| C# | OpenRA.Mods.CA/Traits/SupportPowers/DetonateWeaponPowerCA.cs | DetonateWeaponPowerCA, SelectDetonateWeaponPowerTarget |
+| C# | OpenRA.Mods.CA/Traits/SupportPowers/GrantExternalConditionPowerCA.cs | GrantExternalConditionPowerCA |
+| C# | OpenRA.Mods.CA/Traits/SupportPowers/NukePowerCA.cs | NukePowerCA, SelectNukePowerTarget |
+| C# | OpenRA.Mods.CA/Traits/TargetedAttackAbility.cs | TargetedAttackAbility |
+| C# | OpenRA.Mods.CA/Traits/TooltipExtras.cs | TooltipExtras |
+| C# | OpenRA.Mods.CA/Traits/TracksCapturedFaction.cs | TracksCapturedFaction |
+| C# | OpenRA.Mods.CA/Traits/TransferStanceToDeathActor.cs | TransfersStanceToDeathActor |
+| C# | OpenRA.Mods.CA/Traits/ValidFactions.cs | ValidFactions |
+| C# | OpenRA.Mods.CA/Traits/Warpable.cs | Warpable |
+| C# | OpenRA.Mods.CA/Traits/World/RevealedPlayersManager.cs | RevealedPlayersManager |
+| C# | OpenRA.Mods.CA/Warheads/ChronoFlashEffectWarhead.cs | ChronoFlashEffectWarhead |
+| C# | OpenRA.Mods.CA/Warheads/DummyWarhead.cs | DummyWarhead |
+| C# | OpenRA.Mods.CA/Warheads/FireReverseRadiusWarhead.cs | FireReverseRadiusWarhead |
+| C# | OpenRA.Mods.CA/Warheads/WarpDamageWarhead.cs | WarpDamageWarhead |
+| C# | OpenRA.Mods.CA/Widgets/ContainerWithTooltipWidget.cs | ContainerWithTooltipWidget |
+| C# | OpenRA.Mods.CA/Widgets/ExternalLinkButtonWidget.cs | ExternalLinkButtonWidget |
+| C# | OpenRA.Mods.CA/Widgets/ImageCAWidget.cs | ImageCAWidget |
+| C# | OpenRA.Mods.CA/Widgets/Logic/AddFactionSuffixLogicCA.cs | AddFactionSuffixLogicCA |
+| C# | OpenRA.Mods.CA/Widgets/Logic/ExternalLinksLogic.cs | ExternalLinksLogic |
+| C# | OpenRA.Mods.CA/Widgets/Logic/Ingame/ProductionTabsLogicCA.cs | ProductionTabsLogicCA |
+| C# | OpenRA.Mods.CA/Widgets/Logic/Ingame/SpritePowerMeterLogic.cs | SpritePowerMeterLogic |
+| C# | OpenRA.Mods.CA/Widgets/Logic/LobbyOptionsLogicCA.cs | LobbyOptionsLogicCA |
+| C# | OpenRA.Mods.CA/Widgets/Logic/SimpleTooltipWithDescLogic.cs | SimpleTooltipWithDescLogic |
+| C# | OpenRA.Mods.CA/Widgets/Logic/TemplateMenuLogic.cs | TemplateMenuLogic |
+| C# | OpenRA.Mods.CA/Widgets/ProductionPaletteCAWidget.cs | ProductionPaletteCAWidget |
+| C# | OpenRA.Mods.CA/Widgets/ProductionTabsCAWidget.cs | ProductionTabCA, ProductionTabGroupCA, ProductionTabsCAWidget |
+| C# | OpenRA.Mods.CA/Widgets/SpritePowerMeterWidget.cs | SpritePowerMeterWidget |
 | python | tools/audit/audit_ai.py | audit_ai |
 | python | tools/audit/audit_ai_arch_freshness.py | audit_ai_arch_freshness |
 | python | tools/audit/audit_ai_frankenstein.py | audit_ai_frankenstein |
@@ -242,6 +400,8 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/audit/audit_meter_dilution.py | audit_meter_dilution |
 | python | tools/audit/audit_min_range.py | audit_min_range |
 | python | tools/audit/audit_missing_elite.py | audit_missing_elite |
+| python | tools/audit/audit_multi_traitinfo.py | audit_multi_traitinfo |
+| python | tools/audit/audit_multi_traitinfo_scan.py | audit_multi_traitinfo_scan |
 | python | tools/audit/audit_multiplier_modifiers.py | audit_multiplier_modifiers |
 | python | tools/audit/audit_naming_damage.py | audit_naming_damage |
 | python | tools/audit/audit_nuclear_flash_bindings.py | audit_nuclear_flash_bindings |
@@ -358,9 +518,4 @@ python -m unittest discover -s tools/tests -t tools/tests
 | python | tools/rename/apply_ra1_legacy.py | apply_ra1_legacy |
 | python | tools/rename/convert_maps.py | convert_maps |
 | python | tools/rename/curate_map.py | curate_map |
-
-
-## FAIL
-
-- T3: 339 untested > baseline 224
 

@@ -385,6 +385,15 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("CA-4 (12.7): cells a frontline member may outrun the slowest frontline member before it holds.")]
 		public readonly int FormationMaxLeadCells = 6;
 
+		[Desc("Dead band added on top of FormationMaxLeadCells before a leading frontline member is ordered to hold, so members hovering at the threshold do not flip between hold and advance every squad tick (2026-10-04 stutter fix). Only read while UseFormationHysteresis is armed.")]
+		public readonly int FormationHoldHysteresisCells = 2;
+
+		[Desc("AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only squad orders and the latched leader wait — the per-tick identical Stop/AttackMove re-issues cancelled every MoveTo. Off keeps the classic per-tick order stream bit-identical.")]
+		public readonly bool UseFormationHysteresis = false;
+
+		[Desc("Fixes two squad-pool accounting defects: retain idle leftovers after attack dispatch and gate allied answer requests on draftable units. False preserves legacy behavior.")]
+		public readonly bool UseSquadPoolFixes = false;
+
 		[Desc("CA-4 (12.7, fransbot donor): temporary lead cells granted when the rear frontline member has not moved for a while (chokepoint stall). Reverts to FormationMaxLeadCells the moment the rear moves again.")]
 		public readonly int FormationMaxStalledLeadCells = 12;
 
@@ -452,6 +461,12 @@ namespace OpenRA.Mods.CA.Traits
 		public readonly int RaidMissionSteerOvercommitPercent = 300;
 		[Desc("Floor for the steered-raid cap regardless of the idle pool's value. 0 = ratio only.")]
 		public readonly int RaidMissionSteerMinValue = 0;
+
+		[Desc("BM_live_combat_model: run every fight prediction and focus-fire pick on the",
+			"balance pipeline's effective-damage model (reliability, falloff, every warhead,",
+			"charge-up) instead of the classic main-warhead DPS. False = classic numbers,",
+			"bit-identical.")]
+		public readonly bool UseEffectiveDamageModel = false;
 
 		[Desc("6g (CN A3): rules-derived BotTargetTags each squad type prefers when choosing targets (artillery, harvester, production, superweapon).")]
 		public readonly HashSet<string> AssaultPriorityTags = [];
@@ -573,6 +588,38 @@ namespace OpenRA.Mods.CA.Traits
 			"master's Turtle<->Rush utility axis (IBotUtilityAxes) — 100 (Rush) x0.6, 50 x1.0,",
 			"0 (Turtle) x1.5. Off, or no enabled provider, keeps the unchanged delay.")]
 		public readonly bool UseUtilityAxes = false;
+
+		[Desc("AR-S residual (2026-10-04): squad states only queue an order to a member when the " +
+			"(order, quantized target) actually changed — identical per-tick re-issues cancel the " +
+			"in-flight activity and read as stop-start stutter. Also latches the protection " +
+			"rally/lure mode and the shared Retreat flee-home pick per episode. " +
+			"Off = pre-change order stream.")]
+		public readonly bool UseSquadOrderDedup = false;
+
+		[Desc("AR-S residual 2 (BL_protection_episode_guard): the protection lure decision gets " +
+			"consecutive-eval hysteresis — a lure episode enters on ProtectionLureEnterConfirmTicks " +
+			"consecutive losing evals and aborts on ProtectionLureAbortConfirmTicks consecutive " +
+			"non-losing evals, so a flickering predictor verdict cannot alternate Move-to-rally and " +
+			"engage-AttackMove every squad tick. Engage entry itself is never confirmed. " +
+			"Off = the per-eval decision (unchanged stream).")]
+		public readonly bool UseProtectionEpisodeGuard = false;
+
+		[Desc("Consecutive losing evals before a lure episode starts (BL_protection_episode_guard). Evals run once per AttackForceInterval, so 2 = engage keeps running one extra round.")]
+		public readonly int ProtectionLureEnterConfirmTicks = 2;
+
+		[Desc("Consecutive non-losing evals before an in-flight lure episode aborts back to engage (BL_protection_episode_guard). 2 bounds a real re-engage delay to one eval (~AttackForceInterval ticks) while a single flicker can never abort.")]
+		public readonly int ProtectionLureAbortConfirmTicks = 2;
+
+		[Desc("AR-S2 (BO_squad_move_dedup): the defence preposition tick re-pushes " +
+			"AttackMove(rally) to every protection member each ProtectInterval — a same-cell " +
+			"resend that cancels the in-flight activity (the dominant untagged order-churn " +
+			"emitter in the tagged 2026-10-05 attribution). Armed: re-push only when the rally " +
+			"moved past ProtectionRallyHysteresisCells or members joined; the state machine keeps " +
+			"owning per-tick combat/lure orders. Off = the per-interval group push (unchanged stream).")]
+		public readonly bool UseProtectionRallyDedup = false;
+
+		[Desc("Dead band on the protect rally before the manager re-pushes the squad's march order (BO_squad_move_dedup). A threat/request target jittering inside the band keeps the in-flight order; a real redirect beyond it re-orders everyone.")]
+		public readonly int ProtectionRallyHysteresisCells = 4;
 
 		public override void RulesetLoaded(Ruleset rules, ActorInfo ai)
 		{
@@ -711,6 +758,10 @@ namespace OpenRA.Mods.CA.Traits
 		// DF-2: where the protection squad waits for a predicted attack, and until when.
 		CPos? protectionRally;
 		int protectionHoldUntilTick = -1;
+
+		// AR-S2 (BO_squad_move_dedup): which rally cell the protection members
+		// were last pushed to, and who carries that push. Only consulted while armed.
+		readonly ProtectionRallyDedup<Actor> protectionRallyDedup = new();
 
 		// TC-2b/TC-3 (§12.17/§12.18): the requester whose defend attempt record is open
 		// on the ally-answer protect rally — null while the squad serves an own threat or
@@ -1739,7 +1790,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		internal bool PassesRiskGate(CPos cell, int attackerValue)
 		{
-			var threat = threatProviders?.Sum(p => p.RememberedEnemyThreatAt(cell)) ?? 0;
+			var threat = threatProviders.MergedThreatAt(cell);
 			var pass = PassesRiskGate(attackerValue, threat, Info.AttackRiskMargin);
 			if (!pass)
 				AIUtils.BotDebug("AI ({0}): risk gate held a {1}-value squad off {2} (remembered threat {3}, margin {4}%)",
@@ -1890,9 +1941,21 @@ namespace OpenRA.Mods.CA.Traits
 			// draft, AttackMove and hold-expiry all reuse the escort path verbatim —
 			// the rolling hold lets a retracted request release within one interval.
 			// A thin home pool stays home regardless of how loud the request is.
+			// The fixed gate and the later protection draft must use the same eligibility predicate.
+			// Keep this scan lazy so the default-off path retains its original count-only check.
+			IBotUnitLeases answerLeases = null;
+			List<UnitWposWrapper> answerDraftable = null;
+			if (Info.UseSquadPoolFixes && threat == null && request == null && (teamAnswersOn || assistAnswersOn))
+			{
+				answerLeases = BotUnitLeases.Of(Player);
+				answerDraftable = unitsHangingAroundTheBase.Where(u => IsDefenderDraftable(u, answerLeases)).ToList();
+			}
+
+			var enoughAnswerUnits = SquadPoolFixesEvalCA.MeetsAnswerPoolMinimum(
+				unitsHangingAroundTheBase.Count, answerDraftable?.Count ?? 0,
+				Info.TeamDefendAnswerMinPoolUnits, Info.UseSquadPoolFixes);
 			TeamBroadcast allyDefendAnswer = null;
-			if (threat == null && request == null && teamAnswersOn &&
-				unitsHangingAroundTheBase.Count >= Info.TeamDefendAnswerMinPoolUnits)
+			if (threat == null && request == null && teamAnswersOn && enoughAnswerUnits)
 			{
 				// TC-3 (§12.18): the coalition fold elects exactly one responder per defend
 				// request — the nearest free ally by ArmyCentroid. A published election is
@@ -1910,7 +1973,7 @@ namespace OpenRA.Mods.CA.Traits
 					// matched by the marked ClientIndex fallback.
 					var myId = Player.InternalName ?? "#" + Player.ClientIndex;
 					var elected = election.FirstOrDefault(a =>
-						a.ResponderId == myId || (a.ResponderId == null && a.ResponderClientIndex == Player.ClientIndex));
+						PrepositionDecisionEvalCA.IsElectedResponder(a.ResponderId, a.ResponderClientIndex, myId, Player.ClientIndex));
 					if (elected != null)
 					{
 						var broadcasts = TeamBlackboard.CollectBroadcasts(Player);
@@ -1952,8 +2015,7 @@ namespace OpenRA.Mods.CA.Traits
 			// live (CollectBroadcasts freshness + the next refold retracting it).
 			CoalitionAssistAssignment allyAssistAssignment = null;
 			TeamBroadcast allyAssistAnswer = null;
-			if (threat == null && request == null && assistAnswersOn &&
-				unitsHangingAroundTheBase.Count >= Info.TeamDefendAnswerMinPoolUnits)
+			if (threat == null && request == null && assistAnswersOn && enoughAnswerUnits)
 			{
 				var assistElection = Player.PlayerActor.TraitsImplementing<IBotCoalition>()
 					.FirstEnabledTraitOrDefault()?.Coalition?.AssistAssignments;
@@ -1961,7 +2023,7 @@ namespace OpenRA.Mods.CA.Traits
 				{
 					var myId = Player.InternalName ?? "#" + Player.ClientIndex;
 					var elected = assistElection.FirstOrDefault(a =>
-						a.ResponderId == myId || (a.ResponderId == null && a.ResponderClientIndex == Player.ClientIndex));
+						PrepositionDecisionEvalCA.IsElectedResponder(a.ResponderId, a.ResponderClientIndex, myId, Player.ClientIndex));
 					if (elected != null)
 					{
 						var broadcasts = TeamBlackboard.CollectBroadcasts(Player);
@@ -1983,36 +2045,40 @@ namespace OpenRA.Mods.CA.Traits
 				}
 			}
 
-			if (threat == null && request == null)
+			// The precedence ladder, evaluated after the lazy cascade resolves:
+			// SelectProtectionRequest above only ran when threat == null, the
+			// ally-answer blocks only when both were null. An own-pool request is
+			// the Request channel only when no ally answer produced it.
+			var channel = PrepositionDecisionEvalCA.SelectChannel(threat != null,
+				request != null && allyDefendAnswer == null && allyAssistAssignment == null,
+				allyDefendAnswer != null, allyAssistAssignment != null);
+			if (channel == PrepositionChannelCA.None)
 				return;
 
-			CPos rally;
-			if (request.HasValue)
-			{
-				// Escorts go TO the guarded point - no defensive-building snap:
-				// the MCV/outpost is usually nowhere near a building.
-				rally = request.Value.Location;
-			}
-			else
+			// Escorts go TO the guarded point - no defensive-building snap:
+			// the MCV/outpost is usually nowhere near a building.
+			var nearestOrTarget = CPos.Zero;
+			if (!request.HasValue)
 			{
 				var target = threat.Value.Target;
 				var searchSquared = Info.PrepositionDefenceSearchCells * Info.PrepositionDefenceSearchCells;
-				rally = World.ActorsHavingTrait<AttackBase>()
+				nearestOrTarget = World.ActorsHavingTrait<AttackBase>()
 					.Where(a => a.Owner == Player && !a.IsDead && a.Info.HasTraitInfo<BuildingInfo>()
 						&& (a.Location - target).LengthSquared <= searchSquared)
 					.OrderBy(a => (a.Location - target).LengthSquared)
 					.Select(a => (CPos?)a.Location).FirstOrDefault() ?? target;
 			}
 
+			var rally = PrepositionDecisionEvalCA.RallyFor(request, nearestOrTarget);
+
 			var protectSq = GetSquadOfType(SquadCAType.Protection) ?? RegisterNewSquad(bot, SquadCAType.Protection);
-			var leases = BotUnitLeases.Of(Player);
-			var draftable = unitsHangingAroundTheBase.Where(u => IsDefenderDraftable(u, leases)).ToList();
+			var leases = answerLeases ?? BotUnitLeases.Of(Player);
+			var draftable = answerDraftable ?? unitsHangingAroundTheBase.Where(u => IsDefenderDraftable(u, leases)).ToList();
 
 			// CA-2: forward defence keeps a reserve too — the rally outside the base
 			// radius is the donor's non-emergency case; a rally inside it means the
 			// threat is at the doorstep and gets the full pool.
-			var emergency = (rally - initialBaseCenter).LengthSquared <=
-				(long)Info.MaxBaseRadius * Info.MaxBaseRadius;
+			var emergency = PrepositionDecisionEvalCA.IsEmergencyRally(rally, initialBaseCenter, Info.MaxBaseRadius);
 			var toDraft = DefendDraftLimit(draftable.Count, emergency, Info, utilityAxesProviders);
 			for (var i = 0; i < toDraft; i++)
 			{
@@ -2030,11 +2096,21 @@ namespace OpenRA.Mods.CA.Traits
 			// publisher refreshes its request every ProtectInterval, so the hold is a
 			// rolling window - a retracted request lets the escort release within one
 			// interval, and ExpiresTick is the failsafe bound for a dead publisher.
-			protectionHoldUntilTick = request.HasValue
-				? Math.Min(request.Value.ExpiresTick, World.WorldTick + Info.ProtectInterval * 10)
-				: World.WorldTick + threat.Value.EtaTicks + Info.ProtectInterval * 10;
-			bot.QueueOrder(new Order("AttackMove", null, Target.FromCell(World, rally), false,
-				groupedActors: protectSq.Units.Select(u => u.Actor).ToArray()));
+			protectionHoldUntilTick = PrepositionDecisionEvalCA.HoldUntilTick(request, threat, World.WorldTick, Info.ProtectInterval);
+			if (Info.UseProtectionRallyDedup)
+			{
+				// AR-S2: the every-interval re-push cancels each defender's in-flight order —
+				// re-push only on a real rally move or for freshly joined members.
+				var emit = protectionRallyDedup.EmitSet(protectSq.Units.Select(u => u.Actor).ToArray(), rally, Info.ProtectionRallyHysteresisCells);
+				if (emit != null)
+					bot.QueueOrder(new Order("AttackMove", null, Target.FromCell(World, rally), false,
+						groupedActors: emit));
+			}
+			else
+			{
+				bot.QueueOrder(new Order("AttackMove", null, Target.FromCell(World, rally), false,
+					groupedActors: protectSq.Units.Select(u => u.Actor).ToArray()));
+			}
 
 			if (allyDefendAnswer != null)
 				CommitAllyDefend(allyDefendAnswer, rally, protectSq.Units.Count);
@@ -2271,6 +2347,7 @@ namespace OpenRA.Mods.CA.Traits
 			protectionRally = null;
 			protectionHoldUntilTick = -1;
 			protectionQuietSinceTick = -1;
+			protectionRallyDedup.Reset();
 			CloseAllyDefend(BotMissionAttemptState.Released, BotMissionReasons.Done);
 			CloseAllyAssist(BotMissionAttemptState.Released, BotMissionReasons.Done);
 			foreach (var n in notifyIdleBaseUnits)
@@ -2322,8 +2399,21 @@ namespace OpenRA.Mods.CA.Traits
 					// DF-3: join the defence for this attack; protection release returns them to the pool afterwards.
 					protectSq.Units.AddRange(sq.Units);
 					sq.Units.Clear();
-					bot.QueueOrder(new Order("AttackMove", null, Target.FromCell(World, rally), false,
-						groupedActors: protectSq.Units.Select(u => u.Actor).ToArray()));
+					if (Info.UseProtectionRallyDedup)
+					{
+						// Same dedup as the main push: the folded members are joiners and
+						// get their first order; members already marching are not re-pushed.
+						var emit = protectionRallyDedup.EmitSet(protectSq.Units.Select(u => u.Actor).ToArray(), rally, Info.ProtectionRallyHysteresisCells);
+						if (emit != null)
+							bot.QueueOrder(new Order("AttackMove", null, Target.FromCell(World, rally), false,
+								groupedActors: emit));
+					}
+					else
+					{
+						bot.QueueOrder(new Order("AttackMove", null, Target.FromCell(World, rally), false,
+							groupedActors: protectSq.Units.Select(u => u.Actor).ToArray()));
+					}
+
 					continue;
 				}
 
@@ -2368,18 +2458,25 @@ namespace OpenRA.Mods.CA.Traits
 			return preferred.Count > 0 ? preferred : candidates;
 		}
 
+		// The declared multi-provider merge (AR-7; ai_arch_audit R7): every enabled
+		// provider's cards compete on one ordering — Priority desc, RequiredValue
+		// asc, publish order on a full tie — identical to BestRaidForSteering's.
+		// Before this, a provider's yaml position silently outranked every mission
+		// another provider published.
 		public static BotMission BestAffordableMission(IEnumerable<IBotMissionProvider> providers, int idleForceValue,
 			Func<BotMission, bool> exclude = null)
 		{
 			if (providers == null)
 				return null;
 
-			foreach (var provider in providers)
-				foreach (var mission in provider?.Missions ?? Array.Empty<BotMission>())
-					if (mission != null && mission.RequiredValue <= idleForceValue && (exclude == null || !exclude(mission)))
-						return mission;
-
-			return null;
+			return providers
+				.Where(provider => provider != null && provider.IsTraitEnabled())
+				.SelectMany(provider => provider.Missions ?? Array.Empty<BotMission>())
+				.Where(mission => mission != null && mission.RequiredValue <= idleForceValue
+					&& (exclude == null || !exclude(mission)))
+				.OrderByDescending(mission => mission.Priority)
+				.ThenBy(mission => mission.RequiredValue)
+				.FirstOrDefault();
 		}
 
 		// TC-2f (§12.27): the affordability gate leaves Raid cards published but
@@ -2394,7 +2491,8 @@ namespace OpenRA.Mods.CA.Traits
 				return null;
 
 			return providers
-				.SelectMany(provider => provider?.Missions ?? Array.Empty<BotMission>())
+				.Where(provider => provider != null && provider.IsTraitEnabled())
+				.SelectMany(provider => provider.Missions ?? Array.Empty<BotMission>())
 				.Where(mission => mission != null && mission.Type == BotMissionType.Raid && mission.RequiredValue <= valueCap)
 				.OrderByDescending(mission => mission.Priority)
 				.ThenBy(mission => mission.RequiredValue)
@@ -2866,11 +2964,18 @@ namespace OpenRA.Mods.CA.Traits
 			CanaryObservedAll(enemyList, "predicted-ratio");
 
 			var rules = World.Map.Rules;
+			var eff = Info.UseEffectiveDamageModel;
 			var own = squad.Units.Where(u => !unitCannotBeOrdered(u.Actor)).GroupBy(u => u.Actor.Info)
-				.Select(g => (BotUnitProfiles.Get(rules, g.Key), g.Count())).ToList();
+				.SelectMany(g => eff
+					? g.Select(u => (BotUnitProfiles.Get(u.Actor, Player, true), 1))
+					: new[] { (BotUnitProfiles.Get(rules, g.Key, false), g.Count()) })
+				.ToList();
 			var foes = enemyList.Where(e => e.Info.HasTraitInfo<AttackBaseInfo>()).GroupBy(e => e.Info)
-				.Select(g => (BotUnitProfiles.Get(rules, g.Key), g.Count())).ToList();
-			return BotCombatPredictor.Predict(own, foes).Ratio;
+				.SelectMany(g => eff
+					? g.Select(e => (BotUnitProfiles.Get(e, Player, true), 1))
+					: new[] { (BotUnitProfiles.Get(rules, g.Key, false), g.Count()) })
+				.ToList();
+			return BotCombatPredictor.Predict(own, foes, eff).Ratio;
 		}
 
 		int RetreatRatioPct => Math.Max(0, (botLimits?.Info.RetreatRatioPct ?? Info.DefaultRetreatRatioPct) + (InMatchAdaptation?.RetreatRatioDeltaPct ?? 0));
@@ -3091,8 +3196,8 @@ namespace OpenRA.Mods.CA.Traits
 			var requiredSize = ApplyForceScale(desiredAttackForceSize, forceScale);
 
 			// CA F2p2 (A5-2): ValueOnlyAttackLaunch drops the unit-count gate when a squad value threshold is configured; MaxIdleUnits still applies.
-			var countGateMet = (Info.ValueOnlyAttackLaunch && Info.SquadValue > 0) || unitsHangingAroundTheBase.Count >= requiredSize;
-			if (unitsHangingAroundTheBase.Count >= maxIdleUnits || (idleUnitsValue >= requiredValue && countGateMet))
+			if (AttackForceEvalCA.ShouldLaunch(unitsHangingAroundTheBase.Count, maxIdleUnits,
+					idleUnitsValue, requiredValue, requiredSize, Info.ValueOnlyAttackLaunch, Info.SquadValue))
 			{
 				// 12.5: squads form to the same mix production builds - an assault
 				// missing a required role stages until the pool covers it, bounded
@@ -3132,7 +3237,7 @@ namespace OpenRA.Mods.CA.Traits
 						}
 
 						var heldTicks = World.WorldTick - defendMissionHeldSince;
-						if (heldTicks <= Math.Max(0, Info.MissionDefendHoldTicks))
+						if (AttackForceEvalCA.DefendHoldActive(heldTicks, Info.MissionDefendHoldTicks))
 						{
 							AIUtils.BotDebug("AI ({0}): holding {1} idle units for Defend mission in region {2} ({3}/{4} ticks)",
 								Player.ClientIndex, unitsHangingAroundTheBase.Count, mission.RegionIndex, heldTicks, Info.MissionDefendHoldTicks);
@@ -3185,9 +3290,8 @@ namespace OpenRA.Mods.CA.Traits
 					if (!Info.UseRaidMissionSteering)
 						return null;
 
-					var cap = (int)Math.Min(int.MaxValue, Math.Max(
-						(long)idleUnitsValue * Info.RaidMissionSteerOvercommitPercent / 100,
-						(long)Info.RaidMissionSteerMinValue));
+					var cap = AttackForceEvalCA.RaidSteerCap(idleUnitsValue,
+						Info.RaidMissionSteerOvercommitPercent, Info.RaidMissionSteerMinValue);
 					return BestRaidForSteering(missionProviders, cap);
 				}
 
@@ -3219,9 +3323,10 @@ namespace OpenRA.Mods.CA.Traits
 				var artilleryUnits = unitsHangingAroundTheBase.Where(u => IsArtilleryUnit(u.Actor)).ToList();
 				var fireSupportUnits = unitsHangingAroundTheBase.Where(u => !IsArtilleryUnit(u.Actor)
 					&& Info.FireSupportTypes.Contains(u.Actor.Info.Name)).ToList();
-				attackForce.Units.AddRange(unitsHangingAroundTheBase.Where(u => !IsArtilleryUnit(u.Actor)
+				var assaultUnits = unitsHangingAroundTheBase.Where(u => !IsArtilleryUnit(u.Actor)
 					&& !Info.FireSupportTypes.Contains(u.Actor.Info.Name)
-					&& u.Actor.Info.HasTraitInfo<AttackBaseInfo>()));
+					&& u.Actor.Info.HasTraitInfo<AttackBaseInfo>()).ToList();
+				attackForce.Units.AddRange(assaultUnits);
 				if (Info.EnsureAntiAirEscort)
 					RequestAntiAirCoverage(bot, attackForce);
 				if (Info.EnsureArtillerySiege)
@@ -3262,8 +3367,8 @@ namespace OpenRA.Mods.CA.Traits
 						// Ground vehicles that can hit ground, at most a third of the
 						// assault: the screen must win the flanker fight without
 						// stripping the raid itself (12.4a review item).
-						var escortsNeeded = Math.Min(artilleryParent.Units.Count * Info.FireSupportEscortPerArtillery,
-							attackForce.Units.Count / 3);
+						var escortsNeeded = AttackForceEvalCA.EscortsNeeded(
+							artilleryParent.Units.Count, attackForce.Units.Count, Info.FireSupportEscortPerArtillery);
 						foreach (var escort in attackForce.Units
 							.Where(u => !Info.FireSupportTypes.Contains(u.Actor.Info.Name) && CanEscortArtillery(u.Actor))
 							.OrderByDescending(u => UnitValue(u.Actor))
@@ -3283,7 +3388,17 @@ namespace OpenRA.Mods.CA.Traits
 					squad.Parent = attackForce.IsValid ? attackForce : squad.Parent;
 
 				AIUtils.BotDebug("AI ({0}): Added {1} units to squad {2}", Player.ClientIndex, attackForce.Units.Count, attackForce.Type);
-				unitsHangingAroundTheBase.Clear();
+				if (Info.UseSquadPoolFixes)
+				{
+					var dispatchedIds = artilleryUnits.Concat(fireSupportUnits).Concat(assaultUnits)
+						.Select(u => u.Actor.ActorID);
+					var retained = SquadPoolFixesEvalCA.RetainUnassigned(unitsHangingAroundTheBase,
+						dispatchedIds, u => u.Actor.ActorID);
+					unitsHangingAroundTheBase.Clear();
+					unitsHangingAroundTheBase.AddRange(retained);
+				}
+				else
+					unitsHangingAroundTheBase.Clear();
 				foreach (var n in notifyIdleBaseUnits)
 					n.UpdatedIdleBaseUnits(unitsHangingAroundTheBase);
 

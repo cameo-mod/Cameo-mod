@@ -146,7 +146,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		void Respond(IBot bot, BeaconTracker.Entry entry)
 		{
 			var cell = world.Map.CellContaining(entry.Position);
-			var threat = threatProviders == null ? 0 : threatProviders.Max(p => p.RememberedEnemyThreatAt(cell));
+			var threat = threatProviders.MergedThreatAt(cell);
 
 			// Visible enemies near the beacon count too — gated by CanBeViewedByPlayer so
 			// actors hidden under fog/shroud do not leak into the response decision.

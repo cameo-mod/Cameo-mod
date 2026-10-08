@@ -133,6 +133,7 @@ fremen_creep:
 	RevealsShroud:
 		Range: 10000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 10
 	Armament@PRIMARY:
 		Weapon: HMG_fremen

@@ -215,7 +215,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				(shardRank, shardSize) = TeamBlackboard.ClaimRank(player);
 
 			int ShardTier(Actor garrison) =>
-				shardSize <= 1 ? 0 : (TeamBlackboard.CaptureShard(garrison.Location, shardSize) == shardRank ? 0 : 1);
+				CaptureRules.CaptureShardTier(shardRank, shardSize, TeamBlackboard.CaptureShard(garrison.Location, shardSize));
 
 			// Housekeeping first: drop walkers that arrived, died, lost their lease, or whose target stopped being neutral.
 			var prune = new List<(uint Building, bool AnyInside, bool Superseded, bool TimedOut)>();
@@ -244,16 +244,17 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 				// TC-2e: the claim lost arbitration to a lower-index ally. The walkers stand down through the
 				// stale-claim path — released, the entry pruned.
-				if (claimsAhead != null && claimCells.TryGetValue(building, out var claimedCell)
-					&& claimsAhead.Contains(world.Map.CenterOfCell(claimedCell)))
+				if (GarrisonContestRules.SupersedesClaim(claimsAhead != null,
+					claimCells.TryGetValue(building, out var claimedCell),
+					() => claimsAhead.Contains(world.Map.CenterOfCell(claimedCell))))
 				{
 					superseded = true;
 					// IsInside calls TraitOrDefault on destroyed actors, so the guards run inside the predicate.
 					anyInside = walkers.Any(w => !w.IsDead && w.IsInWorld && w.Owner == player && IsInside(w));
 					StandDownWalkers();
 				}
-				else if (claimStartTicks.TryGetValue(building, out var started)
-					&& world.WorldTick - started > Info.ClaimTimeoutTicks)
+				else if (GarrisonContestRules.ClaimTimedOut(claimStartTicks.TryGetValue(building, out var started),
+					world.WorldTick - started, Info.ClaimTimeoutTicks))
 				{
 					// The walkers never arrived and never died - wedged on a dead-end path but still alive, so
 					// the lease heartbeat renews forever. Stand them down and close the card honestly.
@@ -266,8 +267,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					{
 						// IsInside calls TraitOrDefault - destroyed actors throw, so the guards must run first.
 						var inside = !w.IsDead && w.IsInWorld && w.Owner == player && IsInside(w);
-						var done = inside || w.IsDead || !w.IsInWorld || w.Owner != player
-							|| leases == null || !leases.TryClaim(w, LeaseOwner, BotLeasePurpose.Garrison, LeaseHeartbeatTicks());
+						var done = GarrisonContestRules.WalkerDone(inside, w.IsDead, w.IsInWorld, w.Owner == player,
+							() => leases == null || !leases.TryClaim(w, LeaseOwner, BotLeasePurpose.Garrison, LeaseHeartbeatTicks()));
 						if (done)
 						{
 							anyInside |= inside;
@@ -291,7 +292,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				WriteClaimClosed(id, anyInside, superseded, timedOut);
 			}
 
-			if (claimWalkers.Count >= Info.MaxConcurrentClaims)
+			if (GarrisonContestRules.ClaimsFull(claimWalkers.Count, Info.MaxConcurrentClaims))
 				return;
 
 			var anchor = FrontierAnchor();
@@ -305,16 +306,16 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			// so a neutral-owner garrisonable is enterable; an enemy one is a clear-mission target instead.
 			// IsExplored keeps it fog-honest - the contest can only claim what scouting has already mapped.
 			var candidates = world.ActorsHavingTrait<Garrisonable>()
-				.Where(a => a.IsInWorld && !a.IsDead
-					&& a.Owner.RelationshipWith(player) == PlayerRelationship.Neutral
-					&& a.Trait<Garrisonable>().HasSpace(1)
-					&& !claimWalkers.ContainsKey(a.ActorID)
-					&& !(contestBlockedUntil.TryGetValue(a.ActorID, out var blockedUntil) && world.WorldTick < blockedUntil)
-					&& (claimsAhead == null || !claimsAhead.Contains(world.Map.CenterOfCell(a.Location)))
-					&& shroud.IsExplored(a.Location)
-					&& (a.Location - anchor.Value).LengthSquared <= radiusSq)
-				.OrderBy(ShardTier).ThenBy(a => ((a.Location - anchor.Value).LengthSquared)
-					/ Math.Max(1, a.Trait<Garrisonable>().Info.MaxWeight))
+				.Where(a => GarrisonContestRules.IsContestable(a.IsInWorld && !a.IsDead,
+					a.Owner.RelationshipWith(player) == PlayerRelationship.Neutral,
+					a.Trait<Garrisonable>().HasSpace(1),
+					claimWalkers.ContainsKey(a.ActorID),
+					contestBlockedUntil.TryGetValue(a.ActorID, out var blockedUntil) && world.WorldTick < blockedUntil,
+					claimsAhead != null && claimsAhead.Contains(world.Map.CenterOfCell(a.Location)),
+					shroud.IsExplored(a.Location),
+					(a.Location - anchor.Value).LengthSquared <= radiusSq))
+				.OrderBy(ShardTier).ThenBy(a => GarrisonContestRules.ContestRankKey(
+					(a.Location - anchor.Value).LengthSquared, a.Trait<Garrisonable>().Info.MaxWeight))
 				.ToList();
 			if (candidates.Count == 0)
 				return;
@@ -322,9 +323,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			// The spare-infantry buffer: only what exceeds the floor may walk, and only walkers that can
 			// actually fight from a garrison - a rifleman that cannot shoot through a port is wasted weight.
 			var pool = world.Actors
-				.Where(a => a.Owner == player && a.IsInWorld && !a.IsDead && a.IsIdle
-					&& CanFightFromGarrison(a)
-					&& !BotUnitLeases.IsClaimedByOther(leases, a, LeaseOwner))
+				.Where(a => a.Owner == player
+					&& GarrisonContestRules.IsContestWalker(a.IsInWorld && !a.IsDead, a.IsIdle,
+						CanFightFromGarrison(a), BotUnitLeases.IsClaimedByOther(leases, a, LeaseOwner)))
 				.OrderBy(a => a.ActorID)
 				.Skip(Info.MinimumSpareInfantry)
 				.ToList();
@@ -334,14 +335,14 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var leased = claimWalkers.Values.Sum(w => w.Count);
 			foreach (var garrison in candidates)
 			{
-				if (claimWalkers.Count >= Info.MaxConcurrentClaims || leased >= Info.MaxLeasedWalkers || pool.Count == 0)
+				if (GarrisonContestRules.CapacityReached(claimWalkers.Count, Info.MaxConcurrentClaims, leased, Info.MaxLeasedWalkers, pool.Count))
 					break;
 
 				var garrisonable = garrison.Trait<Garrisonable>();
-				var desired = Math.Min(garrisonable.Info.MaxWeight, Math.Max(1, Info.DesiredOccupancyWeight));
+				var desired = GarrisonContestRules.DesiredWalkers(garrisonable.Info.MaxWeight, Info.DesiredOccupancyWeight);
 				var walkers = new List<Actor>();
-				for (var weight = 0; weight < desired && pool.Count > 0 && leased < Info.MaxLeasedWalkers
-					&& garrisonable.HasSpace(garrisonable.TotalWeight + weight + 1);)
+				for (var weight = 0; GarrisonContestRules.FitsOneMore(weight, desired, pool.Count, leased, Info.MaxLeasedWalkers,
+					garrisonable.HasSpace(garrisonable.TotalWeight + weight + 1));)
 				{
 					var pick = pool
 						.OrderBy(p => (p.CenterPosition - garrison.CenterPosition).HorizontalLengthSquared)

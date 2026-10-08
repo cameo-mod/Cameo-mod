@@ -189,10 +189,17 @@ namespace OpenRA.Mods.Cameo.Traits
 			}
 
 			if (!enabled || !IsTakeoverCandidate(p))
+			{
+				if (CameoDevArgs.IsEnabled("Cameo.DevAutoOrders"))
+					Log.Write("debug", $"bot_takeover: disconnect of {p.InternalName} client {p.ClientIndex} skipped " +
+						$"(enabled={enabled}, candidate={IsTakeoverCandidate(p)})");
 				return;
+			}
 
 			var decision = Decide(CountTeamsAlive(Seats()), HasUndefeatedTeammate(Seats(), SeatOf(p)),
 				TakeoverTrigger.Disconnect, info.LastPlayerDisconnect);
+			if (CameoDevArgs.IsEnabled("Cameo.DevAutoOrders"))
+				Log.Write("debug", $"bot_takeover: disconnect of {p.InternalName} client {p.ClientIndex} -> {decision}");
 			ApplyDecision(p, decision, TakeoverTrigger.Disconnect);
 		}
 
@@ -390,7 +397,8 @@ namespace OpenRA.Mods.Cameo.Traits
 
 			// The inherited army keeps the human default stance: re-impose the bot stance
 			// now (post-takeover production is covered by the periodic pass below).
-			ApplyBotStances(p);
+			// records[p] is already set, so the single scan covers the new seat too.
+			ApplyBotStances();
 
 			// The electee may have just changed (a surrendered client was running earlier
 			// seats): this client re-activates every takeover bot it now controls.
@@ -410,19 +418,20 @@ namespace OpenRA.Mods.Cameo.Traits
 			if (!enabled || records.Count == 0 || world.WorldTick % Math.Max(1, info.StanceRefreshIntervalTicks) != 0)
 				return;
 
-			foreach (var seat in records.Keys)
-				ApplyBotStances(seat);
+			ApplyBotStances();
 		}
 
-		void ApplyBotStances(OpenRA.Player seat)
+		void ApplyBotStances()
 		{
 			// A bot-built unit's AutoTarget stance comes from InitialStanceAI; a takeover seat's
 			// units (inherited army plus new production) hold the human default. Re-apply the
 			// per-type bot stance — SetStance itself is a no-op when already matching, and it
 			// keeps ConditionByStance consumers and stance-change listeners consistent.
+			// One world scan per refresh regardless of seat count: the per-actor
+			// records lookup replaces one ActorsHavingTrait pass per taken-over seat.
 			foreach (var a in world.ActorsHavingTrait<AutoTarget>())
 			{
-				if (a.Owner != seat || a.IsDead || !a.IsInWorld)
+				if (a.IsDead || !a.IsInWorld || !records.ContainsKey(a.Owner))
 					continue;
 
 				var at = a.Trait<AutoTarget>();

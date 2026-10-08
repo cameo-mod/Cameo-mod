@@ -503,11 +503,6 @@ ts_gdi_juggernaut:
 	WithSpriteTurret@deployed:
 		Turret: deploy
 		RequiresCondition: deployed
-	AttackTurreted:
-		Voice: Attack
-		TargetFrozenActors: True
-		ForceFireIgnoresActors: True
-		OutsideRangeRequiresForceFire: True
 	Armament@Deployed:
 		Weapon: TSJugg90mm
 		LocalOffset: 777,203,999, 777,0,999, 777,-203,999
@@ -545,6 +540,16 @@ ts_gdi_juggernaut:
 	Armor@deployed:
 		Type: Steel
 		RequiresCondition: !shielded && deployed
+
+	-AttackTurreted:
+	AttackMultiTurreted:
+		PauseOnCondition: disabled || blinded
+		Voice: Attack
+		Armaments: deployed, dummy
+		Turrets: deploy, dummy
+		TargetFrozenActors: True
+		ForceFireIgnoresActors: True
+		OutsideRangeRequiresForceFire: True
 
 ts_gdi_hovermlrs:
 	Inherits: ^Tank

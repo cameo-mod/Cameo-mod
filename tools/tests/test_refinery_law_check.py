@@ -27,6 +27,22 @@ def place(game, player, tick, **kw):
     return p
 
 
+def lost(game, player, tick, cell="10,10", anchor="9,61", field="f1", cause="killed", **kw):
+    r = {"kind": "refinery_lost", "game_uid": game, "player": player, "tick": tick,
+         "map_uid": "m1", "bot_type": "hard", "actor": "td_gdi_tiberiumrefinery",
+         "cell": cell, "anchor_cell": anchor, "field_id": field, "cause": cause}
+    r.update(kw)
+    return r
+
+
+def acquired(game, player, tick, cell="30,30", anchor="9,61", field="f1", cause="captured", **kw):
+    r = {"kind": "refinery_acquired", "game_uid": game, "player": player, "tick": tick,
+         "map_uid": "m1", "bot_type": "hard", "actor": "td_gdi_tiberiumrefinery",
+         "cell": cell, "anchor_cell": anchor, "field_id": field, "cause": cause}
+    r.update(kw)
+    return r
+
+
 def match(game, player, bot="hard"):
     return {"kind": "match", "game_uid": game, "map_uid": "m1",
             "player": {"name": player, "bot_type": bot, "faction": "td_gdi"}}
@@ -151,6 +167,83 @@ class RefineryLawCheckTests(unittest.TestCase):
         r = self.row(res)
         self.assertEqual(r["refineries_per_anchor_max"], 2)
         self.assertEqual(r["verdict"], "FAIL")
+
+    def test_rebuild_after_lost_record_skips(self):
+        # refinery_lost on the same anchor between the placements: exact rebuild evidence, no uids needed
+        res = self.build_one(
+            [snap("g1", "Multi0", 100, fields_in_reach_unserved=0, fields_in_reach_unserved_ids=[])],
+            [place("g1", "Multi0", 200, cell="10,10", field_id="f1", anchor_cell="9,61"),
+             lost("g1", "Multi0", 300, cell="10,10", anchor="9,61", field="f1"),
+             place("g1", "Multi0", 500, cell="12,12", field_id="f1", anchor_cell="9,61")])
+        r = self.row(res)
+        self.assertEqual(r["refineries_per_anchor_max"], 1)
+        self.assertEqual(r["per_anchor_basis"], "events")
+        self.assertNotIn("refineries_per_anchor_max", ";".join(r["fails"]))
+
+    def test_lost_on_other_anchor_does_not_skip(self):
+        res = self.build_one(
+            [snap("g1", "Multi0", 100, fields_in_reach_unserved=0, fields_in_reach_unserved_ids=[])],
+            [place("g1", "Multi0", 200, cell="10,10", field_id="f1", anchor_cell="9,61"),
+             lost("g1", "Multi0", 300, cell="70,70", anchor="70,70", field="f9"),
+             place("g1", "Multi0", 500, cell="12,12", field_id="f1", anchor_cell="9,61")])
+        r = self.row(res)
+        self.assertEqual(r["verdict"], "FAIL")
+        self.assertEqual(r["refineries_per_anchor_max"], 2)
+
+    def test_lost_before_previous_placement_does_not_skip(self):
+        res = self.build_one(
+            [snap("g1", "Multi0", 100, fields_in_reach_unserved=0, fields_in_reach_unserved_ids=[])],
+            [lost("g1", "Multi0", 50, cell="8,8", anchor="9,61", field="f1"),
+             place("g1", "Multi0", 200, cell="10,10", field_id="f1", anchor_cell="9,61"),
+             place("g1", "Multi0", 500, cell="12,12", field_id="f1", anchor_cell="9,61")])
+        r = self.row(res)
+        self.assertEqual(r["verdict"], "FAIL")
+        self.assertEqual(r["refineries_per_anchor_max"], 2)
+
+    def test_sold_cause_also_resets_the_anchor(self):
+        res = self.build_one(
+            [snap("g1", "Multi0", 100, fields_in_reach_unserved=0, fields_in_reach_unserved_ids=[])],
+            [place("g1", "Multi0", 200, cell="10,10", field_id="f1", anchor_cell="9,61"),
+             lost("g1", "Multi0", 300, cell="10,10", anchor="9,61", field="f1", cause="sold"),
+             place("g1", "Multi0", 500, cell="12,12", field_id="f1", anchor_cell="9,61")])
+        r = self.row(res)
+        self.assertEqual(r["refineries_per_anchor_max"], 1)
+        self.assertEqual(r["verdict"], "PASS")
+
+    def test_captured_cobind_excluded_from_live_max(self):
+        # ruling-A residual: snapshot rpa=2 from a captured refinery folding onto the occupied anchor.
+        # With lifecycle telemetry the live max is reconstructed: 1 placed (rebuilt after a kill) +
+        # 1 captured, which is never a build -> PASS.
+        res = self.build_one(
+            [snap("g1", "Multi0", 100, fields_in_reach_unserved=0, fields_in_reach_unserved_ids=[]),
+             snap("g1", "Multi0", 900, fields_in_reach_unserved=0, fields_in_reach_unserved_ids=[],
+                  refineries_per_anchor_max=2)],
+            [place("g1", "Multi0", 200, cell="10,10", field_id="f1", anchor_cell="9,61"),
+             lost("g1", "Multi0", 400, cell="10,10", anchor="9,61", field="f1"),
+             place("g1", "Multi0", 500, cell="12,12", field_id="f1", anchor_cell="9,61"),
+             acquired("g1", "Multi0", 700, cell="30,30", anchor="9,61", field="f1")])
+        r = self.row(res)
+        self.assertEqual(r["refineries_per_anchor_max"], 1)
+        self.assertEqual(r["refinery_acquired"], 1)
+        self.assertEqual(r["verdict"], "PASS")
+
+    def test_acquired_later_lost_stays_excluded(self):
+        res = self.build_one(
+            [snap("g1", "Multi0", 100, fields_in_reach_unserved=0, fields_in_reach_unserved_ids=[])],
+            [place("g1", "Multi0", 200, cell="10,10", field_id="f1", anchor_cell="9,61"),
+             acquired("g1", "Multi0", 300, cell="30,30", anchor="9,61", field="f1"),
+             lost("g1", "Multi0", 400, cell="30,30", anchor="9,61", field="f1")])
+        r = self.row(res)
+        self.assertEqual(r["refineries_per_anchor_max"], 1)
+        self.assertEqual(r["refinery_lost"], 1)
+        self.assertEqual(r["verdict"], "PASS")
+
+    def test_no_lifecycle_keeps_snapshot_basis(self):
+        res = self.build_one(
+            [snap("g1", "Multi0", 100, fields_in_reach_unserved=0, fields_in_reach_unserved_ids=[])],
+            [place("g1", "Multi0", 200, field_id="f1", anchor_cell="9,61")])
+        r = self.row(res)
+        self.assertEqual(r["per_anchor_basis"], "snapshot")
 
     def test_old_log_fields_mark_na_and_never_pass(self):
         p = place("g1", "Multi0", 200)

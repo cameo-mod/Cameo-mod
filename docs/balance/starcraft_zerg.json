@@ -1165,23 +1165,27 @@
         "damage": "100000",
         "falloff": "100, 70, 30, 0",
         "spread": "400",
-        "tag": "MissileAA_Heavy_Flat",
+        "tag": "MissileAA_Heavy",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "2000",
       "reloaddelay": "25",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^Warhead_MissileAA_Heavy",
+       "^Projectile_Missile_AA",
        "SCScourgeExplosion",
        "^sc_zerg_scourgeexplosion_fx"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileAA_Heavy"
+      ],
       "weapon": "ScourgeExplosion",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -2106,13 +2110,6 @@
       "armament_name": "spore",
       "damage_warheads": [
        {
-        "damage": "36000",
-        "falloff": "100, 88, 72, 50, 0",
-        "spread": "275",
-        "tag": "Chemical_Medium",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "6",
         "falloff": null,
         "spread": "200",
@@ -2132,6 +2129,13 @@
         "spread": "125",
         "tag": "FlakWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "36000",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "275",
+        "tag": "MissileAA_Medium",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
@@ -2142,14 +2146,15 @@
       "requires": "spore",
       "slot": "Armament@spore",
       "versus_templates": [
-       "^Warhead_Chemical_Medium",
+       "^Warhead_MissileAA_Medium",
+       "^Projectile_Missile_AA",
        "^MediumMissile",
        "^Chaingun",
        "^FlakWeapon",
        "^sc_zerg_spore_aa"
       ],
       "warheads": [
-       "^Warhead_Chemical_Medium"
+       "^Warhead_MissileAA_Medium"
       ],
       "weapon": "Spore_AA",
       "weapon_class_source": "template"
@@ -2274,13 +2279,6 @@
       "armament_name": "spore",
       "damage_warheads": [
        {
-        "damage": "36000",
-        "falloff": "100, 88, 72, 50, 0",
-        "spread": "275",
-        "tag": "Chemical_Medium",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "6",
         "falloff": null,
         "spread": "200",
@@ -2300,6 +2298,13 @@
         "spread": "125",
         "tag": "FlakWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "36000",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "275",
+        "tag": "MissileAA_Medium",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
@@ -2310,14 +2315,15 @@
       "requires": "spore",
       "slot": "Armament@spore",
       "versus_templates": [
-       "^Warhead_Chemical_Medium",
+       "^Warhead_MissileAA_Medium",
+       "^Projectile_Missile_AA",
        "^MediumMissile",
        "^Chaingun",
        "^FlakWeapon",
        "^sc_zerg_spore_aa"
       ],
       "warheads": [
-       "^Warhead_Chemical_Medium"
+       "^Warhead_MissileAA_Medium"
       ],
       "weapon": "Spore_AA",
       "weapon_class_source": "template"
@@ -2441,13 +2447,6 @@
       "armament_name": "spore",
       "damage_warheads": [
        {
-        "damage": "36000",
-        "falloff": "100, 88, 72, 50, 0",
-        "spread": "275",
-        "tag": "Chemical_Medium",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "6",
         "falloff": null,
         "spread": "200",
@@ -2467,6 +2466,13 @@
         "spread": "125",
         "tag": "FlakWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "36000",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "275",
+        "tag": "MissileAA_Medium",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
@@ -2477,14 +2483,15 @@
       "requires": "spore",
       "slot": "Armament@spore",
       "versus_templates": [
-       "^Warhead_Chemical_Medium",
+       "^Warhead_MissileAA_Medium",
+       "^Projectile_Missile_AA",
        "^MediumMissile",
        "^Chaingun",
        "^FlakWeapon",
        "^sc_zerg_spore_aa"
       ],
       "warheads": [
-       "^Warhead_Chemical_Medium"
+       "^Warhead_MissileAA_Medium"
       ],
       "weapon": "Spore_AA",
       "weapon_class_source": "template"
@@ -2609,13 +2616,6 @@
       "armament_name": "spore",
       "damage_warheads": [
        {
-        "damage": "36000",
-        "falloff": "100, 88, 72, 50, 0",
-        "spread": "275",
-        "tag": "Chemical_Medium",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "6",
         "falloff": null,
         "spread": "200",
@@ -2635,6 +2635,13 @@
         "spread": "125",
         "tag": "FlakWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "36000",
+        "falloff": "100, 88, 72, 50, 0",
+        "spread": "275",
+        "tag": "MissileAA_Medium",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
@@ -2645,14 +2652,15 @@
       "requires": "spore",
       "slot": "Armament@spore",
       "versus_templates": [
-       "^Warhead_Chemical_Medium",
+       "^Warhead_MissileAA_Medium",
+       "^Projectile_Missile_AA",
        "^MediumMissile",
        "^Chaingun",
        "^FlakWeapon",
        "^sc_zerg_spore_aa"
       ],
       "warheads": [
-       "^Warhead_Chemical_Medium"
+       "^Warhead_MissileAA_Medium"
       ],
       "weapon": "Spore_AA",
       "weapon_class_source": "template"

@@ -2306,7 +2306,7 @@
         "damage": "4750",
         "falloff": "100, 45, 15, 0",
         "spread": "200",
-        "tag": "MissileHE_Heavy",
+        "tag": "MissileAA_Heavy",
         "type": "AreaDamage"
        }
       ],
@@ -2318,14 +2318,15 @@
       "reloaddelay": "30",
       "slot": "Armament",
       "versus_templates": [
+       "^Warhead_MissileAA_Heavy",
+       "^Projectile_Missile_AA",
        "^Warhead_MissileAP_Heavy",
        "^Projectile_Missile_Heavy_D2K",
-       "^Effect_MissileAP_Heavy_D2K",
-       "^Warhead_MissileHE_Heavy"
+       "^Effect_MissileAP_Heavy_D2K"
       ],
       "warheads": [
-       "^Warhead_MissileAP_Heavy",
-       "^Warhead_MissileHE_Heavy"
+       "^Warhead_MissileAA_Heavy",
+       "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "D2K_Rocket_AA",
       "weapon_class_source": "template"

@@ -20,11 +20,12 @@ REPO = pathlib.Path(__file__).resolve().parents[2]
 SPEC = REPO / "tools" / "ai" / "increment_switches.yaml"
 
 
-def load_spec(path: pathlib.Path) -> tuple[list[str], dict[str, dict[str, dict[str, str]]]]:
-    """A tiny reader for this file's fixed shape (skip list + groups → trait → field: value); comments ignored."""
+def load_spec(path: pathlib.Path) -> tuple[list[str], dict[str, dict[str, dict[str, str]]], dict[str, list[str]]]:
+    """A tiny reader for this file's fixed shape (skip list + needs map + groups → trait → field: value); comments ignored."""
     skip: list[str] = []
     groups: dict[str, dict[str, dict[str, str]]] = {}
-    group = trait = None
+    needs: dict[str, list[str]] = {}
+    group = trait = section = None
     for raw in path.read_text(encoding="utf-8").splitlines():
         line = raw.split("#", 1)[0].rstrip()
         if not line.strip():
@@ -32,17 +33,21 @@ def load_spec(path: pathlib.Path) -> tuple[list[str], dict[str, dict[str, dict[s
         indent = len(line) - len(line.lstrip(" "))
         key, _, value = line.strip().partition(":")
         value = value.strip()
-        if indent == 0 and key == "skip":
-            skip = [s.strip() for s in value.strip("[]").split(",") if s.strip()]
-        elif indent == 2:
+        if indent == 0:
+            section = key
+            if key == "skip":
+                skip = [s.strip() for s in value.strip("[]").split(",") if s.strip()]
+        elif indent == 2 and section == "needs":
+            needs[key] = [s.strip() for s in value.strip("[]").split(",") if s.strip()]
+        elif indent == 2 and section == "groups":
             group = key
             groups[group] = {}
-        elif indent == 4 and group:
+        elif indent == 4 and section == "groups" and group:
             trait = key
             groups[group][trait] = {}
-        elif indent == 6 and group and trait:
+        elif indent == 6 and section == "groups" and group and trait:
             groups[group][trait][key] = value
-    return skip, groups
+    return skip, groups, needs
 
 
 def apply(text: str, trait: str, fields: dict[str, str], skip: list[str]) -> tuple[str, list[str]]:
@@ -91,12 +96,20 @@ def main() -> int:
         print("refusing: apply switches only to a frozen A/B worktree, never the main checkout", file=sys.stderr)
         return 2
 
-    skip, groups = load_spec(args.spec)
+    skip, groups, needs = load_spec(args.spec)
     names = list(groups) if args.groups == "all" else args.groups.split(",")
     unknown = [n for n in names if n not in groups]
     if unknown:
         print(f"unknown group(s): {unknown}; known: {list(groups)}", file=sys.stderr)
         return 2
+    missing = {n: [d for d in needs.get(n, []) if d not in names] for n in names}
+    missing = {n: deps for n, deps in missing.items() if deps}
+    if missing:
+        print(f"unmet switch dependencies: {missing} (declare satisfied-by-default deps in the spec's comments only)", file=sys.stderr)
+        return 2
+    stray = sorted(set(needs) - set(groups))
+    if stray:
+        print(f"WARNING: needs entries name unknown groups: {stray}", file=sys.stderr)
 
     wanted: dict[str, dict[str, str]] = {}
     for n in names:

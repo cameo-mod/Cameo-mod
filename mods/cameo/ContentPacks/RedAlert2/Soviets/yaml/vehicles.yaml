@@ -661,6 +661,7 @@ ra2_soviets_terrordrone:
 	Targetable:
 		RequiresCondition: !parachute && !untargetable && !jousting
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 	AutoTargetPriority@DEFAULT:
 		ValidTargets: TerrorDronable

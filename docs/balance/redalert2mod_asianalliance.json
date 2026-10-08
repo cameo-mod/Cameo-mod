@@ -1990,13 +1990,6 @@
      {
       "damage_warheads": [
        {
-        "damage": "8000",
-        "falloff": "100, 89, 75, 55, 0",
-        "spread": "383",
-        "tag": "Plasma_Heavy_Flat",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1",
         "falloff": "100, 75, 50, 25",
         "spread": "50",
@@ -2037,32 +2030,35 @@
         "spread": "111",
         "tag": "MagicWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "8000",
+        "falloff": "100, 89, 75, 55, 0",
+        "spread": "383",
+        "tag": "MissileAA_Heavy",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "14000",
       "reloaddelay": "13",
       "requires": "!asianalliance_upgrade_celestialpower",
       "slot": "Armament",
       "versus_templates": [
-       "^Warhead_Plasma_Heavy_Flat",
+       "^Warhead_MissileAA_Heavy",
+       "^Projectile_Missile_AA",
        "^TeslaWeapon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileAA_Heavy"
+      ],
       "weapon": "AsianPhotonCannon",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
-       {
-        "damage": "9888",
-        "falloff": "100, 52, 0",
-        "spread": "52",
-        "tag": "Quantum_Heavy_Flat",
-        "type": "AreaDamage"
-       },
        {
         "damage": "1",
         "falloff": "100, 75, 50, 25",
@@ -2090,22 +2086,30 @@
         "spread": "111",
         "tag": "MagicWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "9888",
+        "falloff": "100, 52, 0",
+        "spread": "52",
+        "tag": "MissileAA_Heavy",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "14000",
       "reloaddelay": "13",
       "requires": "asianalliance_upgrade_celestialpower",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "^Warhead_Quantum_Heavy_Flat",
        "AsianPhotonCannon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileAA_Heavy"
+      ],
       "weapon": "AsianPhotonCannon_EMP",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -6476,13 +6480,6 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "9888",
-        "falloff": "100, 89, 75, 55, 0",
-        "spread": "383",
-        "tag": "Plasma_Heavy_Flat",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1",
         "falloff": "100, 75, 50, 25",
         "spread": "50",
@@ -6509,10 +6506,17 @@
         "spread": "111",
         "tag": "MagicWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "9888",
+        "falloff": "100, 89, 75, 55, 0",
+        "spread": "383",
+        "tag": "Plasma_Heavy_Flat",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "7168",
       "reloaddelay": "22",
@@ -6521,9 +6525,11 @@
       "versus_templates": [
        "AsianPhotonCannon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileAA_Heavy"
+      ],
       "weapon": "AsianQuasarBoatAG",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "burst": "3",
@@ -6566,7 +6572,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "7168",
       "reloaddelay": "22",
@@ -6576,21 +6582,16 @@
        "^Warhead_Quantum_Heavy_Flat",
        "AsianQuasarBoatAG"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileAA_Heavy"
+      ],
       "weapon": "AsianQuasarBoatAG_EMP",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "burst": "3",
       "burstdelays": "3",
       "damage_warheads": [
-       {
-        "damage": "9888",
-        "falloff": "100, 70, 30, 0",
-        "spread": "300",
-        "tag": "MissileAA_Medium_Flat",
-        "type": "AreaDamage"
-       },
        {
         "damage": "1",
         "falloff": "100, 75, 50, 25",
@@ -6618,34 +6619,37 @@
         "spread": "111",
         "tag": "MagicWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "9888",
+        "falloff": "100, 70, 30, 0",
+        "spread": "300",
+        "tag": "MissileAA_Medium",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "7168",
       "reloaddelay": "22",
       "requires": "!asianalliance_upgrade_celestialpower",
       "slot": "Armament@AA",
       "versus_templates": [
-       "^Warhead_MissileAA_Medium_Flat",
+       "^Warhead_MissileAA_Medium",
        "AsianPhotonCannon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileAA_Medium",
+       "^Warhead_MissileAA_Heavy"
+      ],
       "weapon": "AsianQuasarBoat_AA",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "burst": "3",
       "burstdelays": "3",
       "damage_warheads": [
-       {
-        "damage": "9888",
-        "falloff": "100, 51, 0",
-        "spread": "35",
-        "tag": "MissileQuantum_Medium",
-        "type": "AreaDamage"
-       },
        {
         "damage": "1",
         "falloff": "100, 75, 50, 25",
@@ -6673,21 +6677,28 @@
         "spread": "111",
         "tag": "MagicWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "9888",
+        "falloff": "100, 51, 0",
+        "spread": "35",
+        "tag": "MissileAA_Medium",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "7168",
       "reloaddelay": "22",
       "requires": "asianalliance_upgrade_celestialpower",
       "slot": "Armament@UpgradeAA",
       "versus_templates": [
-       "^Warhead_MissileQuantum_Medium",
        "AsianQuasarBoat_AA"
       ],
       "warheads": [
-       "^Warhead_MissileQuantum_Medium"
+       "^Warhead_MissileAA_Medium",
+       "^Warhead_MissileAA_Heavy"
       ],
       "weapon": "AsianQuasarBoat_EMP_AA",
       "weapon_class_source": "template"
@@ -9048,13 +9059,6 @@
      {
       "damage_warheads": [
        {
-        "damage": "9888",
-        "falloff": "100, 89, 75, 55, 0",
-        "spread": "383",
-        "tag": "Plasma_Heavy_Flat",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "1",
         "falloff": "100, 75, 50, 25",
         "spread": "50",
@@ -9081,10 +9085,17 @@
         "spread": "111",
         "tag": "MagicWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "9888",
+        "falloff": "100, 89, 75, 55, 0",
+        "spread": "383",
+        "tag": "Plasma_Heavy_Flat",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "33",
@@ -9093,9 +9104,11 @@
       "versus_templates": [
        "AsianPhotonCannon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileAA_Heavy"
+      ],
       "weapon": "AsianQuasarAG",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -9136,7 +9149,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "33",
@@ -9146,19 +9159,14 @@
        "^Warhead_Quantum_Heavy_Flat",
        "AsianQuasarAG"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileAA_Heavy"
+      ],
       "weapon": "AsianQuasarAG_EMP",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
-       {
-        "damage": "9888",
-        "falloff": "100, 70, 30, 0",
-        "spread": "300",
-        "tag": "MissileAA_Medium_Flat",
-        "type": "AreaDamage"
-       },
        {
         "damage": "1",
         "falloff": "100, 75, 50, 25",
@@ -9186,32 +9194,35 @@
         "spread": "111",
         "tag": "MagicWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "9888",
+        "falloff": "100, 70, 30, 0",
+        "spread": "300",
+        "tag": "MissileAA_Medium",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "9000",
       "reloaddelay": "33",
       "requires": "!asianalliance_upgrade_celestialpower",
       "slot": "Armament@AA",
       "versus_templates": [
-       "^Warhead_MissileAA_Medium_Flat",
+       "^Warhead_MissileAA_Medium",
        "AsianPhotonCannon"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileAA_Medium",
+       "^Warhead_MissileAA_Heavy"
+      ],
       "weapon": "AsianQuasar_AA",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
-       {
-        "damage": "9888",
-        "falloff": "100, 51, 0",
-        "spread": "35",
-        "tag": "MissileQuantum_Medium",
-        "type": "AreaDamage"
-       },
        {
         "damage": "1",
         "falloff": "100, 75, 50, 25",
@@ -9239,21 +9250,28 @@
         "spread": "111",
         "tag": "MagicWeaponPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "9888",
+        "falloff": "100, 51, 0",
+        "spread": "35",
+        "tag": "MissileAA_Medium",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "9000",
       "reloaddelay": "33",
       "requires": "asianalliance_upgrade_celestialpower",
       "slot": "Armament@UpgradeAA",
       "versus_templates": [
-       "^Warhead_MissileQuantum_Medium",
        "AsianQuasar_AA"
       ],
       "warheads": [
-       "^Warhead_MissileQuantum_Medium"
+       "^Warhead_MissileAA_Medium",
+       "^Warhead_MissileAA_Heavy"
       ],
       "weapon": "AsianQuasar_EMP_AA",
       "weapon_class_source": "template"

@@ -122,6 +122,12 @@
 	GrantConditionOnBotOwner@combatveto:
 		Condition: combatveto
 		Bots:
+	# Tier-1 engagement priors (AI_ARCHITECTURE 12.31, contract ruling F1): the veto's fitted delivery x armour
+	# residuals from ai/learned/engagement_priors.yaml. The arm sets Bots (switch group AP_tier1_priors);
+	# empty by default - inert on master. Independent of AN_combat_veto: no provider = neutral 1000.
+	GrantConditionOnBotOwner@tier1priors:
+		Condition: tier1_priors
+		Bots:
 	# Tier-3 pooled bandits (fleet orders 2026-10-03): Thompson-samples a personality arm + an attack-plan overlay
 	# over the EL engagement posteriors in ai/learned/plan_bandits.yaml, with a safety floor. The arm sets Bots
 	# (switch group AO_tier3_bandits); empty by default - inert on master.
@@ -132,6 +138,12 @@
 	# from this match's own closed engagement scores. The arm sets Bots (switch group AQ_inmatch_adapt).
 	GrantConditionOnBotOwner@inmatchadapt:
 		Condition: inmatchadapt
+		Bots:
+	# Radar contacts (RADAR-A): the bot-side read of the ranged-GPS dots — anonymous cell/tick/
+	# velocity/class/owner records computed from the renderer's own visibility gate, provider-proximity
+	# enumeration only. The arm sets Bots (switch group AI_radar_contacts); empty by default - inert on master.
+	GrantConditionOnBotOwner@radarcontacts:
+		Condition: radar_contacts
 		Bots:
 	# DIFFICULTY SCALE (DESIGN §19.1, maintainer 2026-09-28): every number below lies on ONE straight line
 	# from easiest to cameogod, in EQUAL steps; an integer that cannot split evenly is the rounded line.
@@ -3751,6 +3763,15 @@ Player:
 		BaseRadiusCells: 30
 		SpawnMatchCells: 8
 		UsePrediction: true
+	# RADAR CONTACTS (RADAR-A): the bot-side radar screen — anonymous enemy contacts (cell, tick, drift,
+	# icon class, owner colour) enumerated through the own/allied ranged-GPS providers' proximity lists
+	# and filtered by the render effect's own visibility predicate. Pure provider: publishes
+	# IBotRadarContacts + the situation-log snapshot, issues no orders, phase A has no consumers.
+	# `genericbot && radar_contacts`: off on master until the increment A/B arms it (switch group AI_radar_contacts).
+	RadarContactsBotModule:
+		RequiresCondition: genericbot && radar_contacts
+		ContactsIntervalTicks: 25
+		TrackGraceTicks: 250
 	# `genericbot && build_order_knobs`: off on master until the increment A/B arms it (switch group AK_build_order_knobs).
 	BuildOrderKnobsBotModule:
 		RequiresCondition: genericbot && build_order_knobs
@@ -3898,7 +3919,7 @@ Player:
 		MinSafetyLcb: -250
 		# Armed-set attribution (nova review 2026-10-03): decision-side conditions that filter which engagements
 		# exist are recorded as `bandit.armed` so a fitter pass can condition on the survivorship filter.
-		WatchConditions: plan_bandits, build_order_knobs, combatveto, inmatchadapt, armystaging
+		WatchConditions: plan_bandits, build_order_knobs, combatveto, tier1_priors, inmatchadapt, armystaging
 		# Attack-plan arms: one bounded knob overlay multiplied into the build-order vector (preset x learned x plan x
 		# jitter), frozen at match start. `balanced` is the explicit no-op arm so the bandit can choose not to overlay.
 		PlanArms:
@@ -3967,7 +3988,8 @@ Player:
 	# bridge huts - worst damage first, one repairer per hut - and a production request asks for a
 	# repairer when none exists at all (capped by MaximumRepairers, gated on RepairsBridgesInfo +
 	# BuildableInfo). Claims each repairer (BotLeasePurpose.Repair) so squads cannot re-draft it
-	# mid-walk. EngineerBotModule keeps its own RepairBridge job meanwhile.
+	# mid-walk. While this module is enabled, EngineerBotModule drops its own RepairBridge job
+	# (repairJobs excludes it via the enabled-trait check) - one owner per hut.
 	# `genericbot && cn3_bridge_repair`: off on master until the increment A/B arms it.
 	BridgeRepairBotModule:
 		RequiresCondition: genericbot && cn3_bridge_repair
@@ -4295,7 +4317,12 @@ Player:
 		EnsureArtillerySiege: true
 		EnsureAntiAirEscort: true
 		SquadMicroEnabled: true
+		UseSquadOrderDedup: false
 		FormationMovement: true
+		# AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only
+		# orders and the latched leader wait - the per-tick identical Stop/AttackMove
+		# re-issues cancelled every MoveTo (army stutter). Off = the classic order stream.
+		UseFormationHysteresis: false
 		RequiresCondition: genericbot && personality-rush
 		# CA-3 starting mix (§12.5): % of own mobile combat units per role; unlisted roles still produce at
 		# the RoleMixRoleFloorPct floor. Inert until switch group J_rolemix_production arms UseRoleMix.
@@ -4383,7 +4410,12 @@ Player:
 		EnsureArtillerySiege: true
 		EnsureAntiAirEscort: true
 		SquadMicroEnabled: true
+		UseSquadOrderDedup: false
 		FormationMovement: true
+		# AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only
+		# orders and the latched leader wait - the per-tick identical Stop/AttackMove
+		# re-issues cancelled every MoveTo (army stutter). Off = the classic order stream.
+		UseFormationHysteresis: false
 		RequiresCondition: genericbot && personality-turtle
 		# CA-3 starting mix (§12.5): % of own mobile combat units per role; unlisted roles still produce at
 		# the RoleMixRoleFloorPct floor. Inert until switch group J_rolemix_production arms UseRoleMix.
@@ -4470,7 +4502,12 @@ Player:
 		EnsureArtillerySiege: true
 		EnsureAntiAirEscort: true
 		SquadMicroEnabled: true
+		UseSquadOrderDedup: false
 		FormationMovement: true
+		# AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only
+		# orders and the latched leader wait - the per-tick identical Stop/AttackMove
+		# re-issues cancelled every MoveTo (army stutter). Off = the classic order stream.
+		UseFormationHysteresis: false
 		RequiresCondition: genericbot && personality-tech
 		# CA-3 starting mix (§12.5): % of own mobile combat units per role; unlisted roles still produce at
 		# the RoleMixRoleFloorPct floor. Inert until switch group J_rolemix_production arms UseRoleMix.
@@ -4559,7 +4596,12 @@ Player:
 		EnsureArtillerySiege: true
 		EnsureAntiAirEscort: true
 		SquadMicroEnabled: true
+		UseSquadOrderDedup: false
 		FormationMovement: true
+		# AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only
+		# orders and the latched leader wait - the per-tick identical Stop/AttackMove
+		# re-issues cancelled every MoveTo (army stutter). Off = the classic order stream.
+		UseFormationHysteresis: false
 		RequiresCondition: genericbot && personality-expansion
 		# CA-3 starting mix (§12.5): % of own mobile combat units per role; unlisted roles still produce at
 		# the RoleMixRoleFloorPct floor. Inert until switch group J_rolemix_production arms UseRoleMix.
@@ -4647,7 +4689,12 @@ Player:
 		EnsureArtillerySiege: true
 		EnsureAntiAirEscort: true
 		SquadMicroEnabled: true
+		UseSquadOrderDedup: false
 		FormationMovement: true
+		# AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only
+		# orders and the latched leader wait - the per-tick identical Stop/AttackMove
+		# re-issues cancelled every MoveTo (army stutter). Off = the classic order stream.
+		UseFormationHysteresis: false
 		RequiresCondition: genericbot && personality-steamroller
 		# CA-3 starting mix (§12.5): % of own mobile combat units per role; unlisted roles still produce at
 		# the RoleMixRoleFloorPct floor. Inert until switch group J_rolemix_production arms UseRoleMix.
@@ -4733,7 +4780,12 @@ Player:
 		EnsureArtillerySiege: true
 		EnsureAntiAirEscort: true
 		SquadMicroEnabled: true
+		UseSquadOrderDedup: false
 		FormationMovement: true
+		# AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only
+		# orders and the latched leader wait - the per-tick identical Stop/AttackMove
+		# re-issues cancelled every MoveTo (army stutter). Off = the classic order stream.
+		UseFormationHysteresis: false
 		RequiresCondition: genericbot && personality-guerrilla
 		# CA-3 starting mix (§12.5): % of own mobile combat units per role; unlisted roles still produce at
 		# the RoleMixRoleFloorPct floor. Inert until switch group J_rolemix_production arms UseRoleMix.
@@ -4864,27 +4916,44 @@ Player:
 	# GC-1 (AI_ARCHITECTURE §12.19): when the garrison-contest switch arms, the CA loader yields the genericbot
 	# slice to GarrisonContestBotModule - it picks targets nearest-first with leases, not map-random, and its
 	# infantry cannot be squad-drafted mid-walk. One owner per decision, same pattern as cn3_bridge_repair.
+	# AR-12: cn2_garrison_defense yields the same slice for own garrisons - GarrisonDefenseBotModule mans own
+	# buildings with leases and threat-matched specialists, so both successor scopes exclude the CA loader.
+	# With only one successor armed the other scope (neutral or own) stays unmanned on genericbot until the
+	# second switch arms; classicbot keeps the CA loader untouched either way.
 	LoadGarrisonerBotModuleCA@Infantry:
-		RequiresCondition: classicbot || (genericbot && !garrison_contest)
+		RequiresCondition: classicbot || (genericbot && !garrison_contest && !cn2_garrison_defense)
 		PassengersPerScan: 6
 		GarrisonerUnit: td_gdi_minigunner, td_nod_minigunner, td_gdi_grenadier, td_gdi_rocketsoldier, td_nod_rocketsoldier, td_nod_flamethrower, td_nod_chemicalwarrior, e3chem, td_nod_lasertrooper, td_nod_blackhandflamer, td_nod_stealthsoldier, td_gdi_shotgunner, td_gdi_sonicmissilesoldier, td_gdi_heavysniper, ra1_allies_rifleinfantry, ra1_soviets_rifleinfantry, japan_imperialscoutsman, ra1_soviets_rocketsoldier, japan_tankbuster, ra1_soviets_shocktrooper, ra1_soviets_mortarsoldier, japan_archermaiden, ra1_soviets_grenadier, ra1_soviets_flamethrower, japan_japaneseflamethrower, ra1_allies_sniper, ra1_allies_machinegunner, ra1_soviets_firerocketsoldier, ra2_allies_gi, ra2ggi, ra2_allies_seal, ra2_soviets_conscript, ra2_soviets_teslatrooper, ra2_soviets_flaktrooper, ra2_soviets_desolator, ra2_allies_sniper, yuri_initiate, yuri_virus, asianalliance_militia, asianalliance_tankkiller, asianalliance_flametrooper, asianalliance_plasmatrooper, asianalliance_fanatic, asianalliance_veteranarcher, asianalliance_asdf, light_inf, ixian_heavy_inf, trooper, ixian_shockinfantry, ixian_storminfantry, steelconsortium_clonetrooper, steelconsortium_hoverboardgrenadier, steelconsortium_quantummissiletrooper, latinsyndicate_latinmilitia, latinsyndicate_tankkiller, latinsyndicate_freedomfighter, latinsyndicate_latinflametrooper, latinsyndicate_narco, naxis_naxiriflesoldier, naxis_naxiriflerecruit, naxis_sssoldier, naxis_naximercenarysniper, naxis_panzerschreck, naxis_panzerfausttrooper, schwarzermond_lunarsoldier, schwarzermond_lunarrocket, schwarzermond_ubermensch, futuretech_enforcer, futuretech_javelinsoldier, terran_marine, terran_firebat, terran_marauder, terran_ghost, terran_madcap, terran_harakan, terran_specter, zerg_spithid, wc2_humans_elvenarcher, wc2_humans_elvenranger, wc2_orcs_trollaxethrower, wc2_orcs_trollberserker, tkm_rifleman, tkm_juggernaut, tkm_trooper, tkm_rocketeer, tkm_spetsnaz, atreides_lightinfantry, corrino_lightinfantry, harkonnen_lightinfantry
 	LoadCargoBotModule@Infantry:
-		RequiresCondition: genericbot || classicbot
+		# AR-9: classicbot only — genericbot runs LoadCargoBotModuleAS (lease-aware port); the classic
+		# module has no lease claim and its "All" load requirement can yank mid-mission squad infantry.
+		RequiresCondition: classicbot
 		TransportTypesAndLoadRequirement:
 			miss: All
 			ramiss: All
 			fcom: All
 		PassengerTypes: td_gdi_minigunner, td_nod_minigunner, td_gdi_grenadier, td_gdi_rocketsoldier, td_nod_rocketsoldier, td_nod_flamethrower, td_nod_chemicalwarrior, e3chem, td_nod_lasertrooper, td_nod_blackhandflamer, td_nod_stealthsoldier, td_gdi_shotgunner, td_gdi_sonicmissilesoldier, td_gdi_heavysniper, ra1_allies_rifleinfantry, ra1_soviets_rifleinfantry, japan_imperialscoutsman, ra1_soviets_rocketsoldier, japan_tankbuster, ra1_soviets_shocktrooper, ra1_soviets_mortarsoldier, japan_archermaiden, ra1_soviets_grenadier, ra1_soviets_flamethrower, japan_japaneseflamethrower, ra1_allies_sniper, ra1_allies_machinegunner, ra1_soviets_firerocketsoldier, ra2_allies_gi, ra2ggi, ra2_allies_seal, ra2_soviets_conscript, ra2_soviets_teslatrooper, ra2_soviets_flaktrooper, ra2_soviets_desolator, ra2_allies_sniper, yuri_initiate, yuri_virus, asianalliance_militia, asianalliance_tankkiller, asianalliance_flametrooper, asianalliance_plasmatrooper, asianalliance_fanatic, asianalliance_veteranarcher, asianalliance_asdf, light_inf, ixian_heavy_inf, trooper, ixian_shockinfantry, ixian_storminfantry, steelconsortium_clonetrooper, steelconsortium_hoverboardgrenadier, steelconsortium_quantummissiletrooper, latinsyndicate_latinmilitia, latinsyndicate_tankkiller, latinsyndicate_freedomfighter, latinsyndicate_latinflametrooper, latinsyndicate_narco, naxis_naxiriflesoldier, naxis_naxiriflerecruit, naxis_sssoldier, naxis_naximercenarysniper, naxis_panzerschreck, naxis_panzerfausttrooper, schwarzermond_lunarsoldier, schwarzermond_lunarrocket, schwarzermond_ubermensch, futuretech_enforcer, futuretech_javelinsoldier, terran_marine, terran_firebat, terran_marauder, terran_ghost, terran_madcap, terran_harakan, terran_specter, zerg_spithid, wc2_humans_elvenarcher, wc2_humans_elvenranger, wc2_orcs_trollaxethrower, wc2_orcs_trollberserker, tkm_rifleman, tkm_juggernaut, tkm_trooper, tkm_rocketeer, tkm_spetsnaz, atreides_lightinfantry, atreides_rockettrooper, atreides_engineer, atreides_fremen, harkonnen_lightinfantry, harkonnen_rockettrooper, harkonnen_engineer, harkonnen_sardaukar, corrino_lightinfantry, corrino_engineer, corrino_trooper, corrino_sardaukar_bazooka, corrino_sardaukar_berserker, corrino_sardaukar_sword, corrino_sardaukar_javelin, corrino_sardaukar_laser
 		ValidTransportOwner: AlliedBot
+	LoadCargoBotModuleAS@Infantry:
+		# AR-9 genericbot twin: lease-aware port; empty lists resolve from the @Infantry classic block.
+		RequiresCondition: genericbot
+		ValidTransportOwner: AlliedBot
 	LoadCargoBotModule@TankBunker:
-		RequiresCondition: genericbot || classicbot
+		RequiresCondition: classicbot
 		TransportTypesAndLoadRequirement:
 		PassengerTypes: td_nod_reconbike, td_nod_lighttank, td_gdi_battletank, td_gdi_mammothtank, td_nod_artillery, td_gdi_mlrs, td_gdi_archerartillery, td_nod_ssmlauncher, td_gdi_predatortank, td_gdi_mammothtankmkiii, td_nod_chemicalattackbike, td_nod_lighttankmkii, ra1_allies_lighttank, ra1_allies_mediumtank, ra1_soviets_heavytank, ra1_soviets_mammothtank, ra1_allies_artillery, ra1_allies_sheridanassaulttank, modtnkd2, ra1_allies_tigerheavytank, ra1_soviets_v1rockettruck, ra1_soviets_v2rocketlauncher, ra1_soviets_gatlingtank, ra1_soviets_teslatank, ra1_soviets_heavyteslatank, ra1_soviets_siegemammothtank, ra1_soviets_kotinnucleartank, ra1_soviets_nuclearv2launcher, japan_igomediumtank, japan_nanodronebuggy, japan_armoredcar, japan_chihaheavytank, japan_hovercraftflametank,  japan_grenadebuggy, japan_waveforcetank, japan_waveforceartillery, ra2_allies_grizzlytank, ra2_allies_miragetank, ra2_allies_prismtank, ra2_allies_ifv, ra2_allies_tankdestroyer, yrrobo, ra2_soviets_flaktrack, ra2_soviets_rhinoheavytank, ra2_soviets_apocalypsetank, ra2_soviets_teslatank, ra2_soviets_v3rocketlauncher, yuri_lashertank, yuri_gatlingtank, yuri_magnetron, asianalliance_quasar, asianalliance_lynxtank, asianalliance_pulverizer, asianalliance_ptnk, asianalliance_howitzer, asianalliance_viper, asianalliance_pulverizermecha, asianalliance_railguntank, asianalliance_heavyrailguntank, siege_tank, ixian_ixcombatsiege, ixian_duelist_tank, ixian_kodatank, ixian_ixmissiletank, steel_qutnk, terran_vulture, terran_siegetank, terran_goliath, terran_matador, terran_goliathmk2
 		ValidTransportOwner: AlliedBot
+	LoadCargoBotModuleAS@TankBunker:
+		RequiresCondition: genericbot
+		ValidTransportOwner: AlliedBot
 	LoadCargoBotModule@Battery:
-		RequiresCondition: genericbot || classicbot
+		RequiresCondition: classicbot
 		TransportTypesAndLoadRequirement:
 		PassengerTypes: td_gdi_minigunner, td_nod_minigunner, ra1_allies_rifleinfantry, ra1_soviets_rifleinfantry, japan_imperialscoutsman, ra2_allies_gi, ra2_soviets_conscript, yuri_initiate, light_inf, asianalliance_militia, steelconsortium_clonetrooper, latinsyndicate_latinmilitia, naxis_naxiriflesoldier, naxis_naxiriflerecruit, schwarzermond_lunarsoldier, terran_marine, tkm_rifleman, futuretech_enforcer
+		ValidTransportOwner: AlliedBot
+		ScanTick: 799
+	LoadCargoBotModuleAS@Battery:
+		RequiresCondition: genericbot
 		ValidTransportOwner: AlliedBot
 		ScanTick: 799
 	MinelayerBotModule:
@@ -4940,7 +5009,7 @@ Player:
 		SiloTypes: silo, ra1_oresilo, terran_supplydepot, protoss_pylon, zerg_overlord, d2k_silo, wc2_humans_elvenlumbermill, wc2_orcs_trolllumbermill, tkm_powerplant, atreides_storagesilo, corrino_storagesilo, harkonnen_storagesilo, atreides_refinery, corrino_refinery, harkonnen_refinery, eden_smelter_common, eden_smelter_rare, plymouth_smelter_common, plymouth_smelter_rare, eden_storage_common, plymouth_storage_common
 		AntiAirTypes: td_nod_samsite, td_gdi_skyshield, td_gdi_advancedguardtower, ra1_allies_aagun, ra1_soviets_samsite, ra1_allies_camopillbox, japan_japanesemgnest, ra2_allies_patriotmissilesystem, ra2_soviets_flakcannon, yuri_gatlingcannon, yrngbnkr.bot, ixian_rocketturret, asianalliance_pulsar, asianalliance_hyperionprojector, steelconsortium_antiairquantummissileturret, latinsyndicate_smlturret, latinsyndicate_latinaadefender, naxis_flak88, ordos_laserturret, schwarzermond_lasertower, futuretech_multiturretsystem, terran_missileturret, zerg_creepcolony, zerg_creepcolony_defense, tkm_quadturretbunker, atreides_rocketturret, corrino_rocketturret, harkonnen_rocketturret, harkonnen_autogunturret, eden_gp_laser, plymouth_gp_rpg
 		DefenseTypes: td_gdi_guardtower, td_gdi_advancedguardtower, td_nod_gunturret, td_nod_laserturret, td_nod_obeliskoflight, ra1_allies_pillbox, ra1_allies_camopillbox, ra1_allies_gunturret, ra1_allies_gapgenerator, ra1_allies_bastionartillerybunker, ra1_soviets_flametower, ra1_soviets_teslacoil, japan_waveforceturret, ra2_allies_pillbox, ra2_allies_prismtower, ra2_allies_grandcannon, ra2_soviets_battlebunker, ra2_soviets_sentrygun, ra2_soviets_flakcannon, ra2_soviets_teslacoil, yuri_gatlingcannon, yuri_tankbunker, asianalliance_sentryflamer, asianalliance_cgpnch, asianalliance_railtower, asianalliance_chaostower, asianalliance_plasmacannon, ixian_machinegunturret, ixian_gunturret, ixian_rocketturret, ixian_stormlasher, steelconsortium_consortiumsentryturret, steelconsortium_quantumcannon, steelconsortium_bfg10000, latinsyndicate_latinsentrygun, latinsyndicate_bunkertower, latinsyndicate_defensebureau, latinsyndicate_smlturret, naxis_rifletower, naxis_flak88, schwarzermond_lasertower, schwarzermond_sturmcannon, futuretech_multiturretsystem, futuretech_frostbiteturret, ordos_laserturret, ordos_chemturret, terran_bunker, zerg_creepcolony, zerg_creepcolony_defense, protoss_photoncannon, wc2_humans_humanscouttower, wc2_humans_sunwell, wc2_orcs_orcwatchtower, tkm_bunker, tkm_tankturretbunker, atreides_gunturret, atreides_rocketturret, corrino_gunturret, corrino_rocketturret, harkonnen_autogunturret, harkonnen_flameturret, harkonnen_rocketturret, harkonnen_devastatorturret, eden_gp_emp, eden_gp_laser, eden_gp_railgun, plymouth_gp_microwave, plymouth_gp_rpg, plymouth_gp_stickyfoam
-		FragileTypes: td_gdi_communicationscenter, td_nod_communicationscenter, td_gdi_advancedcommunicationscenter, td_nod_templeofnod, td_nod_templeprime, ra1_allies_radardome, ra1_soviets_radardome, japan_japaneseradararray, ra1_allies_techcenter, ra1_soviets_techcenter, japan_japanesetechcenter, japan_japaneseshrine, ra1_soviets_missilesilo, ra1_allies_chronosphere, ra1_soviets_ironcurtain, ra1_allies_reinforcementpad, ra2_allies_airforcecommandhq, ra2_soviets_radar, yuri_psychicsensor, ra2_allies_battlelab, ra2_soviets_battlelab, yuri_battlelab, yuri_lunarcommandcenter, ra2_allies_orepurifier, ra2_allies_spysatelliteuplink, futuretech_robotcontrolcenter, ra2_soviets_nuclearreactor, ra2_soviets_industrialplant, yuri_cloningvats, ra2_allies_weathercontrolcenter, ra2_allies_chronosphere, ra2_soviets_nuclearmissilesilo, ra2_soviets_ironcurtain, yuri_psychicdominator, yuri_geneticmutator, asianalliance_radar, asianalliance_battlelab, asianalliance_advancedcommunicationcenter, asianalliance_chaosstorminductor, asianalliance_militaryacademy, ixian_outpost, ordos_outpost, ixian_ixresearchcenter, ixian_starport, ordos_ixresearchcenter, ordos_starport, ixian_supercomputer, oilb.building, ra2_oilderrick, d2k_spicesifter, steelconsortium_consortiumradar, steelconsortium_consortiumbattlelab, latinsyndicate_latinempradar, latinsyndicate_spycenter, latinsyndicate_defensebureau, latinsyndicate_recyclingcenter, latinsyndicate_topolsilo, naxis_radar, naxis_academy, naxis_techcenter, naxis_sausagefactory, naxis_beerfactory, naxis_naxirocketsilo, schwarzermond_radar, schwarzermond_techcenter, schwarzermond_moondairyfarm, schwarzermond_meteortractionray, futuretech_transmissioncenter, futuretech_battlelab, futuretech_hypercore, terran_engineeringbay, terran_academy, terran_armory, terran_sciencefacility, terran_missilesilo, wc2_humans_humangoldmine_bot, wc2_orcs_orcgoldmine_bot, tkm_observationvan, tkm_techcenter, atreides_outpost, corrino_outpost, harkonnen_outpost, atreides_hightechfactory, corrino_hightechfactory, harkonnen_hightechfactory, atreides_ixresearchcenter, corrino_ixresearchcenter, harkonnen_ixresearchcenter, atreides_palace, corrino_palace, harkonnen_palace, eden_lab_basic, eden_lab_standard, eden_lab_advanced, eden_spaceport, eden_dirt, plymouth_basic_lab, plymouth_lab_standard, plymouth_lab_advanced, plymouth_spaceport, plymouth_dirt
+		FragileTypes: ra1_allies_techcenter, ra1_soviets_techcenter, japan_japanesetechcenter, japan_japaneseshrine, ra1_soviets_missilesilo, ra1_allies_chronosphere, ra1_soviets_ironcurtain, ra1_allies_reinforcementpad, ra2_allies_battlelab, ra2_soviets_battlelab, yuri_battlelab, yuri_lunarcommandcenter, ra2_allies_orepurifier, ra2_soviets_nuclearreactor, ra2_soviets_industrialplant, yuri_cloningvats, ra2_allies_weathercontrolcenter, ra2_allies_chronosphere, ra2_soviets_nuclearmissilesilo, ra2_soviets_ironcurtain, yuri_psychicdominator, yuri_geneticmutator, asianalliance_battlelab, asianalliance_advancedcommunicationcenter, asianalliance_chaosstorminductor, asianalliance_militaryacademy, ixian_ixresearchcenter, ixian_starport, ordos_ixresearchcenter, ordos_starport, ixian_supercomputer, oilb.building, ra2_oilderrick, d2k_spicesifter, steelconsortium_consortiumbattlelab, latinsyndicate_spycenter, latinsyndicate_defensebureau, latinsyndicate_recyclingcenter, latinsyndicate_topolsilo, naxis_academy, naxis_techcenter, naxis_sausagefactory, naxis_beerfactory, naxis_naxirocketsilo, schwarzermond_techcenter, schwarzermond_moondairyfarm, schwarzermond_meteortractionray, futuretech_battlelab, futuretech_hypercore, terran_engineeringbay, terran_academy, terran_armory, terran_sciencefacility, terran_missilesilo, wc2_humans_humangoldmine_bot, wc2_orcs_orcgoldmine_bot, tkm_techcenter, atreides_outpost, corrino_outpost, atreides_hightechfactory, corrino_hightechfactory, harkonnen_hightechfactory, atreides_ixresearchcenter, corrino_ixresearchcenter, harkonnen_ixresearchcenter, atreides_palace, corrino_palace, harkonnen_palace, eden_lab_basic, eden_lab_standard, eden_lab_advanced, eden_spaceport, eden_dirt, plymouth_basic_lab, plymouth_lab_standard, plymouth_lab_advanced, plymouth_spaceport, plymouth_dirt
 		BuildingIntervals:
 		#Refinery
 		#Barracks
@@ -5220,11 +5289,14 @@ Player:
 	# `genericbot && combatveto`: off on master until the increment A/B arms it (switch group AN_combat_veto).
 	CombatVetoBotModule:
 		RequiresCondition: genericbot && combatveto
-	# The veto's tier-1 prior source: the same committed ai/learned/arsenal_priors.yaml BotLearnedPriors
-	# reads, mapped onto IBotEngagementPriors corrections (percent x 10, bounded). Missing file = 1000,
-	# the pure predictor numbers — the veto then runs unfitted but still armed.
+	# The veto's tier-1 prior source (contract ruling F1): ai/learned/engagement_priors.yaml
+	# `BotEngagementPriors` — fitted delivery x armour residuals (DeliveryArmour@d__x__a, per-cell
+	# PriorPct staleness against the resolved Versus) plus DefenceState@/IntoDefencesMilli. Missing
+	# file, missing cell or stale PriorPct = 1000, the pure predictor numbers — the veto then runs
+	# unfitted but still armed. `genericbot && tier1_priors` (switch group AP_tier1_priors): gated
+	# separately from the veto so the pure-predictor A/B can run without fitted priors.
 	EngagementPriorsBotModule:
-		RequiresCondition: genericbot && combatveto
+		RequiresCondition: genericbot && tier1_priors
 
 World:
 	BeaconTracker:

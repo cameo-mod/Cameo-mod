@@ -36,13 +36,11 @@ HeavyOrdosCombatTankRockets:
 		Blockable: false
 		MaximumLaunchSpeed: 250
 		MinimumLaunchSpeed: 250
-		RangeLimit: 25000
 		Speed: 500
 		Inaccuracy: 25
 		Acceleration: 5
 		MinimumLaunchAngle: 75
 		MaximumLaunchAngle: 75
-		CloseEnough: 500
 		AllowSnapping: true
 		ContrailZOffset: 4000
 		ContrailStartColor: FF884400
@@ -1964,6 +1962,7 @@ D2K_Rocket_Trooper_AGOnly:
 
 D2K_Rocket_Trooper_AA:
 	Inherits@wh: ^Warhead_MissileAA_Heavy
+	Inherits@projectileaa: ^Projectile_Missile_AA
 	Inherits@proj: ^Projectile_Missile_Light
 	Inherits@fx: ^Effect_MissileHE_Heavy_D2K
 	ReloadDelay: 75
@@ -1988,6 +1987,11 @@ D2K_Rocket_Trooper_AA:
 	Warhead@MissileAA_Heavy:
 		ValidTargets: Air
 		Damage: 10000
+
+	Projectile: Missile
+		ContrailLength: 0
+		HomingActivationDelay: 1
+
 D2K_APC_Rocket:
 	Inherits@finalmain: ^Warhead_MissileAP_Medium_Flat
 	ValidTargets: Ground, Water, Air
@@ -2203,7 +2207,8 @@ D2K_APC_Rocket:
 		ValidTargets: Shielded
 
 D2K_APC_Rocket_AA:
-	Inherits@finalmain: ^Warhead_MissileAA_Medium_Flat
+	Inherits@finalmain: ^Warhead_MissileAA_Medium
+	Inherits@projectileaa: ^Projectile_Missile_AA
 	Warhead@MissileAA_Medium_Flat:
 		PhysicalStateName: Temperature
 		ValidTargets: Air
@@ -2229,10 +2234,8 @@ D2K_APC_Rocket_AA:
 		MaximumLaunchSpeed: 222
 		MinimumLaunchSpeed: 222
 		Speed: 666
-		CloseEnough: 500
 		Acceleration: 6
 		HomingActivationDelay: 2
-		RangeLimit: 25000
 		PointDefenseTypes: Missile
 		InaccuracyType: PerCellIncrement
 		Palette: d2keffect
@@ -2383,6 +2386,107 @@ D2K_APC_Rocket_AA:
 			SubmarineHeavy: 17
 		Falloff: 100, 50
 		Range: 0, 32
+
+	Projectile: Missile
+		Inaccuracy: 25
+		Image: d2k_RPG
+		HorizontalRateOfTurn: 22
+		VerticalRateOfTurn: 12
+		TrailImage: bazooka_trail2
+		ContrailLength: 0
+		MaximumLaunchSpeed: 222
+		MinimumLaunchSpeed: 222
+		Speed: 666
+		Acceleration: 6
+		HomingActivationDelay: 2
+
+
+	-Warhead@MissileAA_Medium:
+	-Warhead@MissileAA_Medium_Flat:
+	Warhead@MissileAA_Medium: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Air
+		Spread: 300
+		Damage: 24000
+		Falloff: 100, 70, 30, 0
+		Versus
+			HAZMAT: 87
+			COMPOSITE: 67
+			BLAST: 56
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 151
+			Spaceship: 191
+			Helicopter: 177
+			Bomber: 147
+			Superheavy: 144
+			Heavy: 139
+			Fighter: 133
+			Medium: 116
+			Light: 115
+			Concrete: 83
+			Scout: 76
+			Plate: 65
+			Steel: 56
+			Wood: 54
+			Flak: 44
+			None: 33
+			Heroic: 26
+			CyborgLight: 62
+			CyborgMedium: 71
+			CyborgHeavy: 95
+			CyborgHeroic: 61
+			AntiAirInfantry: 38
+			AntiAirVehicle: 115
+			AntiAirBuilding: 68
+			ShipLight: 79
+			ShipMedium: 98
+			ShipHeavy: 88
+			ShipSuperheavy: 90
+			AntiAirShip: 88
+			FlyingInfantry: 84
+			SubmarineLight: 117
+			SubmarineHeavy: 113
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 0
+		PercentageSpread: 50
+		PercentageVersus
+			Shield: 25
+			Spaceship: 20
+			Helicopter: 19
+			Bomber: 18
+			Fighter: 17
+			Superheavy: 16
+			Heavy: 15
+			Medium: 14
+			Light: 13
+			Scout: 12
+			Concrete: 11
+			Steel: 10
+			Wood: 9
+			Heroic: 8
+			Plate: 7
+			Flak: 6
+			None: 5
+			CyborgLight: 8
+			CyborgMedium: 9
+			CyborgHeavy: 10
+			CyborgHeroic: 11
+			AntiAirInfantry: 5
+			AntiAirVehicle: 13
+			AntiAirBuilding: 10
+			ShipLight: 11
+			ShipMedium: 12
+			ShipHeavy: 12
+			ShipSuperheavy: 13
+			AntiAirShip: 11
+			FlyingInfantry: 11
+			SubmarineLight: 13
+			SubmarineHeavy: 14
+		PhysicalStateName: Temperature
+
 DeviatorMissile:
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
@@ -2612,10 +2716,8 @@ DeviatorMissile_Artillery:
 		MaximumLaunchSpeed: 200
 		MinimumLaunchSpeed: 200
 		Speed: 666
-		CloseEnough: 400
 		Acceleration: 3
 		HomingActivationDelay: 3
-		RangeLimit: 12500
 		PointDefenseTypes: Missile
 		Palette: d2keffect
 		CruiseAltitude: 1000
@@ -3929,7 +4031,6 @@ ordos_airmine:
 		Shadow: true
 		Inaccuracy: 224
 		HorizontalRateOfTurn: 10
-		RangeLimit: 3c0
 		MinimumLaunchSpeed: 75
 		Speed: 250
 		LockOnProbability: 20
@@ -4757,7 +4858,6 @@ d2k_tyrant:
 	Range: 6144
 	ValidTargets: Ground
 	Projectile: Missile
-		RangeLimit: 6c512
 		Speed: 400
 		LockOnProbability: 0
 		HorizontalRateOfTurn: 20
@@ -4777,6 +4877,8 @@ Rocket_stealth:
 		Damage: 14500
 
 Rocket_stealth_AA:
+	Inherits@warheadaa: ^Warhead_MissileAA_Heavy
+	Inherits@projectileaa: ^Projectile_Missile_AA
 	Inherits: Rocket_stealth
 	Burst: 2
 	BurstDelays: 15
@@ -4794,10 +4896,95 @@ Rocket_stealth_AA:
 		TrailPalette: effect75alpha
 		TrailInterval: 1
 		Speed: 384
-		RangeLimit: 12c614
 	Warhead@MissileAP_Heavy:
 		ValidTargets: Air
 		Damage: 12000
+
+
+	-Warhead@MissileAA_Heavy:
+	-Warhead@MissileAP_Heavy:
+	Warhead@MissileAA_Heavy: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Air
+		Spread: 85
+		Damage: 12000
+		Falloff: 100, 0
+		Versus
+			HAZMAT: 94
+			COMPOSITE: 44
+			BLAST: 69
+			REFLECTOR: 71
+			ARMOR: 70
+			Shield: 158
+			Superheavy: 196
+			Spaceship: 175
+			Heavy: 168
+			SubmarineHeavy: 152
+			SubmarineLight: 147
+			Medium: 144
+			AntiAirVehicle: 133
+			Helicopter: 128
+			ShipMedium: 128
+			ShipSuperheavy: 128
+			CyborgHeavy: 126
+			Light: 123
+			ShipHeavy: 118
+			Concrete: 113
+			Scout: 106
+			AntiAirShip: 106
+			Bomber: 104
+			CyborgMedium: 101
+			FlyingInfantry: 99
+			CyborgHeroic: 99
+			AntiAirBuilding: 97
+			Plate: 95
+			ShipLight: 87
+			Steel: 83
+			CyborgLight: 76
+			Fighter: 74
+			Flak: 71
+			Wood: 62
+			AntiAirInfantry: 58
+			Heroic: 50
+			None: 47
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 10000
+		PercentageSpread: 50
+		PercentageVersus
+			Shield: 35
+			Superheavy: 25
+			Heavy: 24
+			Medium: 23
+			Light: 22
+			AntiAirVehicle: 22
+			SubmarineHeavy: 22
+			Scout: 21
+			SubmarineLight: 21
+			Spaceship: 20
+			Helicopter: 19
+			ShipMedium: 19
+			ShipHeavy: 19
+			ShipSuperheavy: 19
+			Bomber: 18
+			CyborgHeroic: 18
+			ShipLight: 18
+			AntiAirShip: 18
+			Fighter: 17
+			CyborgHeavy: 17
+			Concrete: 16
+			FlyingInfantry: 16
+			CyborgMedium: 16
+			Steel: 15
+			CyborgLight: 15
+			AntiAirBuilding: 15
+			Wood: 14
+			Heroic: 13
+			Plate: 12
+			Flak: 11
+			None: 10
+			AntiAirInfantry: 10
 
 d2k_APCo_AG:
 	Inherits: Rocket_stealth
@@ -4816,6 +5003,91 @@ d2k_APCo_AA:
 ############################
 #       OTHER
 ############################
+
+
+	-Warhead@MissileAA_Heavy:
+	Warhead@MissileAP_Heavy: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Air
+		Spread: 85
+		Damage: 12000
+		Falloff: 100, 0
+		Versus
+			HAZMAT: 94
+			COMPOSITE: 44
+			BLAST: 69
+			REFLECTOR: 71
+			ARMOR: 70
+			Shield: 158
+			Superheavy: 196
+			Spaceship: 175
+			Heavy: 168
+			SubmarineHeavy: 152
+			SubmarineLight: 147
+			Medium: 144
+			AntiAirVehicle: 133
+			Helicopter: 128
+			ShipMedium: 128
+			ShipSuperheavy: 128
+			CyborgHeavy: 126
+			Light: 123
+			ShipHeavy: 118
+			Concrete: 113
+			Scout: 106
+			AntiAirShip: 106
+			Bomber: 104
+			CyborgMedium: 101
+			FlyingInfantry: 99
+			CyborgHeroic: 99
+			AntiAirBuilding: 97
+			Plate: 95
+			ShipLight: 87
+			Steel: 83
+			CyborgLight: 76
+			Fighter: 74
+			Flak: 71
+			Wood: 62
+			AntiAirInfantry: 58
+			Heroic: 50
+			None: 47
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 10000
+		PercentageSpread: 50
+		PercentageVersus
+			Shield: 35
+			Superheavy: 25
+			Heavy: 24
+			Medium: 23
+			Light: 22
+			AntiAirVehicle: 22
+			SubmarineHeavy: 22
+			Scout: 21
+			SubmarineLight: 21
+			Spaceship: 20
+			Helicopter: 19
+			ShipMedium: 19
+			ShipHeavy: 19
+			ShipSuperheavy: 19
+			Bomber: 18
+			CyborgHeroic: 18
+			ShipLight: 18
+			AntiAirShip: 18
+			Fighter: 17
+			CyborgHeavy: 17
+			Concrete: 16
+			FlyingInfantry: 16
+			CyborgMedium: 16
+			Steel: 15
+			CyborgLight: 15
+			AntiAirBuilding: 15
+			Wood: 14
+			Heroic: 13
+			Plate: 12
+			Flak: 11
+			None: 10
+			AntiAirInfantry: 10
 
 D2K_Annihilator:
 	ReloadDelay: 50
@@ -4841,8 +5113,9 @@ D2K_Annihilator:
 		DamageTypes: Prone50Percent, TriggerProne, ElectricityDeath
 
 D2K_Annihilator_AA:
-	Inherits@proj: ^Projectile_Missile_Heavy
 	Inherits@aawh: ^Warhead_MissileAA_Heavy
+	Inherits@projectileaa: ^Projectile_Missile_AA
+	Inherits@proj: ^Projectile_Missile_Heavy
 	Inherits@fx: ^d2k_ordos_d2k_annihilator_aa
 	Range: 10240
 	Burst: 6
@@ -4853,13 +5126,22 @@ D2K_Annihilator_AA:
 	Projectile: Missile
 		VerticalRateOfTurn: 20
 		Speed: 280
-		RangeLimit: 12c0
 		ContrailStartColor: FF884400
 		ContrailEndColor: 000000FF
 	Warhead@MissileAA_Heavy:
 		Damage: 28500
 		ValidTargets: Air
 		InvalidTargets: Ground, Water
+
+
+	Projectile: Missile
+		Inaccuracy: 150
+		HorizontalRateOfTurn: 20
+		ContrailLength: 0
+		MaximumLaunchSpeed: 200
+		MinimumLaunchSpeed: 200
+		Acceleration: 2
+		HomingActivationDelay: 3
 
 Sound2:
 	Inherits: Sound

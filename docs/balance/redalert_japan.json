@@ -1323,7 +1323,7 @@
         "damage": "160000",
         "falloff": "100, 0",
         "spread": "59",
-        "tag": "Arrow_Light",
+        "tag": "MissileAA_Light",
         "type": "AreaDamage"
        }
       ],
@@ -1335,12 +1335,13 @@
       "reloaddelay": "200",
       "slot": "Armament@AIR",
       "versus_templates": [
-       "^Warhead_Arrow_Light",
+       "^Warhead_MissileAA_Light",
+       "^Projectile_Missile_AA",
        "^Projectile_Arrow_Light",
        "^Effect_Arrow_Light"
       ],
       "warheads": [
-       "^Warhead_Arrow_Light"
+       "^Warhead_MissileAA_Light"
       ],
       "weapon": "BallistaSingleShotAir_AA",
       "weapon_class_source": "template"

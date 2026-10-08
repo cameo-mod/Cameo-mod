@@ -12,10 +12,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Security.Cryptography;
 using System.Text;
+using OpenRA.FileSystem;
 using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.Common;
 using OpenRA.Mods.Common.Traits;
+using OpenRA.Mods.Common.Warheads;
 using OpenRA.Traits;
 
 namespace OpenRA.Mods.Cameo.Traits.BotModules
@@ -27,6 +31,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		"conditions and keeps no state another module reads; its writer only appends at game over on the host, outside replays.")]
 	public class EngagementLogBotModuleInfo : ConditionalTraitInfo
 	{
+		[Desc("BM_live_combat_model: the logged prediction reads the balance pipeline's",
+			"effective-damage model instead of the classic main-warhead DPS. False = classic,",
+			"bit-identical.")]
+		public readonly bool UseEffectiveDamageModel = false;
+
 		public override object Create(ActorInitializer init) { return new EngagementLogBotModule(init.Self, this); }
 	}
 
@@ -71,6 +80,17 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		readonly Dictionary<uint, (int X, int Y)> enemyBases = new();
 		readonly Dictionary<uint, (int X, int Y, int Tick)> buildingsUnderAttack = new();
 		readonly Dictionary<int, List<(Actor Actor, int Value)>> truthActors = new();
+
+		// PRIORS-CARRY (SPEC_2026-10-04): the resolved warhead tag table + rules fingerprint, once per ruleset.
+		// Record-only like the rest of the module — nothing reads it back into a decision.
+		sealed class BalanceStats
+		{
+			public string Fingerprint = "";
+			public Dictionary<string, List<(string Tag, string Type)>> Warheads;
+			public readonly Dictionary<ActorInfo, List<(string Tag, IReadOnlyDictionary<string, int> Versus)>> Deliveries = new();
+		}
+
+		static readonly ConditionalWeakTable<Ruleset, BalanceStats> BalanceStatsCache = new();
 
 		AiEngagementLogWriter sink;
 		IBotUnitRoles roles;
@@ -455,7 +475,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (flagsCache.TryGetValue(info, out var f))
 				return f;
 
-			var profile = BotUnitProfiles.Get(world.Map.Rules, info);
+			var profile = BotUnitProfiles.Get(world.Map.Rules, info, Info.UseEffectiveDamageModel);
 			var building = info.HasTraitInfo<BuildingInfo>();
 			var harvester = info.HasTraitInfo<HarvesterInfo>();
 			var hasAttack = info.HasTraitInfo<AttackBaseInfo>();
@@ -477,6 +497,127 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		}
 
 		IBotUnitRoles Roles() => roles ??= player.PlayerActor.TraitsImplementing<IBotUnitRoles>().FirstEnabledTraitOrDefault();
+
+		// ── PRIORS-CARRY balance stats (record-only) ──────────────────────────────────────────────────────────────
+
+		// The damage warhead types the stat ledger (extract_stats.damage_warheads) counts, as loaded class names —
+		// the main-warhead pick must match it exactly or the logged tag disagrees with the fitter's profiles.
+		static readonly HashSet<string> LedgerDamageTypes = new(StringComparer.Ordinal)
+		{
+			"SpreadDamageWarhead", "HealthPercentageDamageWarhead", "AreaDamageWarhead",
+			"AreaDamagePercentageWarhead", "TargetDamageWarhead",
+		};
+
+		BalanceStats Balance() => BalanceStatsCache.GetValue(world.Map.Rules, _ => BuildBalanceStats());
+
+		BalanceStats BuildBalanceStats()
+		{
+			var stats = new BalanceStats();
+			try
+			{
+				var manifest = Game.ModData.Manifest;
+				var fs = Game.ModData.DefaultFileSystem;
+				stats.Warheads = EngagementBalance.WarheadTable(MiniYaml.Load(fs, manifest.Weapons, world.Map.WeaponDefinitions));
+
+				var parts = new List<string> { "mod:" + manifest.Id, "version:" + manifest.Metadata.Version, "map:" + world.Map.Uid };
+				foreach (var f in manifest.Weapons)
+					parts.Add("weapons:" + f + ":" + FileDigest(fs, f));
+				foreach (var f in manifest.Rules)
+					parts.Add("rules:" + f + ":" + FileDigest(fs, f));
+				stats.Fingerprint = EngagementBalance.Fingerprint(parts);
+			}
+			catch (Exception e)
+			{
+				Log.Write("debug", "engagement balance stats unavailable: " + e.Message);
+				stats.Warheads = new Dictionary<string, List<(string, string)>>();
+			}
+
+			return stats;
+		}
+
+		static string FileDigest(IReadOnlyFileSystem fs, string path)
+		{
+			try
+			{
+				using var stream = fs.Open(path);
+				return Convert.ToHexString(SHA256.HashData(stream)).ToLowerInvariant();
+			}
+			catch
+			{
+				return "missing";
+			}
+		}
+
+		// One unit type's delivery list: (delivery tag, resolved Versus table) per enabled armament's main warhead.
+		// Weapon + armament selection mirror BotUnitProfiles.Build (W24); the main-warhead pick additionally keeps
+		// the ledger's damage-type filter so the logged tag matches the fitter's `damage_warheads` argmax.
+		List<(string Tag, IReadOnlyDictionary<string, int> Versus)> DeliveriesOf(BalanceStats stats, ActorInfo info)
+		{
+			if (stats.Deliveries.TryGetValue(info, out var list))
+				return list;
+
+			list = new List<(string, IReadOnlyDictionary<string, int>)>();
+			foreach (var armament in info.TraitInfos<ArmamentInfo>().Where(a => a.EnabledByDefault))
+			{
+				if (armament.Weapon == null || !world.Map.Rules.Weapons.TryGetValue(armament.Weapon.ToLowerInvariant(), out var weapon))
+					continue;
+
+				var main = weapon.Warheads.OfType<DamageWarhead>()
+					.Where(d => d.Damage > 0 && LedgerDamageTypes.Contains(d.GetType().Name))
+					.OrderByDescending(d => d.Damage).FirstOrDefault();
+				if (main == null)
+					continue;
+
+				var tag = "";
+				if (stats.Warheads.TryGetValue(armament.Weapon.ToLowerInvariant(), out var refs))
+					tag = EngagementBalance.WarheadTag(refs, weapon.Warheads.Select(w => w.GetType().Name).ToArray(), weapon.Warheads.IndexOf(main));
+
+				list.Add((tag, main.Versus));
+			}
+
+			stats.Deliveries[info] = list;
+			return list;
+		}
+
+		// The `balance` block for a closing engagement: touched cells = each side's delivery tags crossed with the
+		// other side's armour classes, over the union of seen start/end compositions (never the truth scan).
+		void FillBalance(EngagementState s, EngagementHeader h)
+		{
+			var stats = Balance();
+			if (stats.Fingerprint.Length == 0 && stats.Warheads.Count == 0)
+				return;
+
+			// The fingerprint lands on every closing record, even a one-sided engagement that touched
+			// no cells — the fitter still learns which rules produced it (fingerprint-only = legacy weight).
+			h.BalanceFingerprint = stats.Fingerprint;
+
+			var own = new HashSet<string>(StringComparer.Ordinal);
+			var enemy = new HashSet<string>(StringComparer.Ordinal);
+			foreach (var seen in new[] { s.SeenStart, s.SeenEnd })
+			{
+				if (seen == null)
+					continue;
+				foreach (var t in seen.OwnUnitTypes.Keys.Concat(seen.OwnDefenceTypes.Keys))
+					own.Add(t);
+				foreach (var t in seen.EnemyUnitTypes.Keys.Concat(seen.EnemyDefenceTypes.Keys))
+					enemy.Add(t);
+			}
+
+			if (own.Count == 0 || enemy.Count == 0)
+				return;
+
+			var rules = world.Map.Rules;
+			var cells = new SortedDictionary<string, int>(StringComparer.Ordinal);
+			List<IReadOnlyList<(string Tag, IReadOnlyDictionary<string, int> Versus)>> Deliveries(IEnumerable<string> types) =>
+				types.Where(rules.Actors.ContainsKey).Select(t => (IReadOnlyList<(string, IReadOnlyDictionary<string, int>)>)DeliveriesOf(stats, rules.Actors[t])).ToList();
+			IEnumerable<string> Armours(IEnumerable<string> types) =>
+				types.Where(rules.Actors.ContainsKey).Select(t => FlagsOf(rules.Actors[t]).Profile.Armor ?? "None").Distinct(StringComparer.Ordinal);
+
+			EngagementBalance.AddCells(cells, Deliveries(own), Armours(enemy));
+			EngagementBalance.AddCells(cells, Deliveries(enemy), Armours(own));
+
+			h.BalanceVersus = cells;
+		}
 
 		void NoteEnemyDefence(EngagementState s, Actor defence)
 		{
@@ -600,7 +741,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			var prediction = BotCombatPredictor.Predict(
 				own.Select(kv => (kv.Key.Profile, kv.Value)).ToList(),
-				enemy.Select(kv => (kv.Key.Profile, kv.Value)).ToList());
+				enemy.Select(kv => (kv.Key.Profile, kv.Value)).ToList(),
+				Info.UseEffectiveDamageModel);
 			seen.PredictedRatioMilli = (int)Math.Round(prediction.Ratio * 1000);
 			seen.PredictedOwnSurvivingPermille = (int)Math.Round(prediction.OwnSurvivingFraction * 1000);
 			seen.PredictedEnemySurvivingPermille = (int)Math.Round(prediction.EnemySurvivingFraction * 1000);
@@ -722,6 +864,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				header.BanditArmed = bandit.ArmedModules;
 			}
 
+			FillBalance(s, header);
 			sink.Append(EngagementRecord.BuildEngagement(header, s, out var totalMilli, out var isSkirmish));
 			if (!isSkirmish)
 			{
@@ -845,6 +988,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public string EnemyFaction = "";
 		public bool EnemyFactionPublic;
 		public int EndTick, DistOwnBase = -1, DistEnemyBase = -1, DirectorTension = -1, OwnBaseX = -1, OwnBaseY = -1;
+
+		// PRIORS-CARRY: the rules fingerprint and the touched delivery-tag x armour-class Versus cells ("Tag|Armor" -> percent).
+		public string BalanceFingerprint = "";
+		public SortedDictionary<string, int> BalanceVersus;
 	}
 
 	/// <summary>Builds the JSON lines (schema engagement/1). Pure, so the emitter's separators are unit-tested.</summary>
@@ -917,6 +1064,29 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				AiMatchLogWriter.AppendString(b, "personality_arm", h.BanditPersonalityArm);
 				AiMatchLogWriter.AppendString(b, "plan_arm", h.BanditPlanArm);
 				AiMatchLogWriter.AppendString(b, "armed", h.BanditArmed.Length > 0 ? h.BanditArmed : "none");
+				b.Append('}');
+			}
+
+			// PRIORS-CARRY: additive stats block — old logs without it stay valid and are downweighted by the fitter.
+			// A fingerprint-only record (no `versus` key) is the contract's legacy-weight path; an empty
+			// `versus:{}` would be ambiguous, so the key is omitted rather than emitted empty.
+			if (h.BalanceFingerprint.Length > 0 || (h.BalanceVersus?.Count ?? 0) > 0)
+			{
+				AiMatchLogWriter.AppendObjectPropertyStart(b, "balance");
+				AiMatchLogWriter.AppendString(b, "fingerprint", h.BalanceFingerprint, true);
+				if ((h.BalanceVersus?.Count ?? 0) > 0)
+				{
+					AiMatchLogWriter.AppendObjectPropertyStart(b, "versus");
+					var versusFirst = true;
+					foreach (var kv in h.BalanceVersus)
+					{
+						AiMatchLogWriter.AppendNumber(b, kv.Key, kv.Value, versusFirst);
+						versusFirst = false;
+					}
+
+					b.Append('}');
+				}
+
 				b.Append('}');
 			}
 

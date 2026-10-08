@@ -6718,13 +6718,6 @@
       "burstdelays": "12",
       "damage_warheads": [
        {
-        "damage": "32000",
-        "falloff": "100, 70, 30, 0",
-        "spread": "300",
-        "tag": "MissileAA_Medium_Flat",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "400",
         "falloff": "100, 72, 50, 32",
         "percentage_denominator": "10000",
@@ -6755,22 +6748,32 @@
         "spread": null,
         "tag": "CollapsedCabalReaperMissiles_AAMissileHE_MediumPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "32000",
+        "falloff": "100, 70, 30, 0",
+        "spread": "300",
+        "tag": "MissileAA_Medium",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "8680",
       "reloaddelay": "24",
       "slot": "Armament@SECONDARY",
       "versus_templates": [
-       "^Warhead_MissileAA_Medium_Flat",
+       "^Warhead_MissileAA_Medium",
+       "^Projectile_Missile_AA",
        "^Projectile_Missile_Light",
        "^CabalMissileEffect"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileAA_Medium"
+      ],
       "weapon": "CabalReaperMissiles_AA",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [],
@@ -6946,13 +6949,6 @@
       "burstdelays": "12",
       "damage_warheads": [
        {
-        "damage": "48000",
-        "falloff": "100, 70, 30, 0",
-        "spread": "400",
-        "tag": "MissileAA_Heavy_Flat",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "600",
         "falloff": "100, 72, 50, 32",
         "percentage_denominator": "10000",
@@ -6983,22 +6979,32 @@
         "spread": null,
         "tag": "CollapsedCabalHeavyReaperMissiles_AAMissileHE_MediumPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "48000",
+        "falloff": "100, 70, 30, 0",
+        "spread": "400",
+        "tag": "MissileAA_Heavy",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "9130",
       "reloaddelay": "30",
       "slot": "Armament@SECONDARY",
       "versus_templates": [
-       "^Warhead_MissileAA_Heavy_Flat",
+       "^Warhead_MissileAA_Heavy",
+       "^Projectile_Missile_AA",
        "^Projectile_Missile_Light",
        "^ts_cabal_set5"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileAA_Heavy"
+      ],
       "weapon": "CabalHeavyReaperMissiles_AA",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [],
@@ -7247,13 +7253,6 @@
       "burstdelays": "3",
       "damage_warheads": [
        {
-        "damage": "48000",
-        "falloff": "100, 70, 30, 0",
-        "spread": "300",
-        "tag": "MissileAA_Medium_Flat",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "600",
         "falloff": "100, 72, 50, 32",
         "percentage_denominator": "10000",
@@ -7284,6 +7283,13 @@
         "spread": null,
         "tag": "CollapsedCabalManticoreMissilesAAMissileHE_MediumPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "48000",
+        "falloff": "100, 70, 30, 0",
+        "spread": "300",
+        "tag": "MissileAA_Medium",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
@@ -7293,10 +7299,12 @@
       "reloaddelay": "30",
       "slot": "Armament@SECONDARY",
       "versus_templates": [
-       "^Warhead_MissileAA_Medium_Flat",
+       "^Warhead_MissileAA_Medium",
+       "^Projectile_Missile_AA",
        "^CabalManticoreMissiles"
       ],
       "warheads": [
+       "^Warhead_MissileAA_Medium",
        "^Warhead_MissileHE_Medium",
        "^Warhead_Demolition_Light",
        "^Warhead_Concussion_Medium"

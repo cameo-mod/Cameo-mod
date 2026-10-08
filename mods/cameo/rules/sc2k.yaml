@@ -1971,6 +1971,7 @@ SC2KCARGOSHIP:
 	Armament@PRIMARY:
 		Weapon: DemoTruckTargeting
 	AutoTarget:
+		DynamicWeaponPriority: true
 	GrantConditionOnAttack:
 		Condition: triggered
 	GrantConditionOnDeploy:
@@ -2446,6 +2447,7 @@ sc2kglsite.defense:
 	Health:
 		HP: 6000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		AllowMovement: false
 		InitialStanceAI: Defend
 		EnableStances: false
@@ -3616,6 +3618,7 @@ sc2k_ufo:
 		Weapon: TSCoreLaser
 		LocalOffset: 427,-171,-213, 427,171,-213
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 5
 	AttackAircraft:
 		FacingTolerance: 80

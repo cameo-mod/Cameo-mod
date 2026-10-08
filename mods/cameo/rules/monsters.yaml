@@ -87,6 +87,7 @@ Zombie:
 	Mobile:
 		Speed: 42
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 10
 		InitialStance: AttackAnything
 	WithInfantryBody:
@@ -131,6 +132,7 @@ Ant:
 		Locomotor: lighttracked
 	-Crushable:
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 10
 		InitialStance: AttackAnything
 	AttackFrontal:
@@ -455,6 +457,7 @@ RA2SPIDER:
 	Mobile:
 		Speed: 125
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 	Health:
 		HP: 4000
@@ -569,6 +572,7 @@ RA2TRIPOD:
 		Armaments: primary, secondary, aa
 		RangeMargin: 10c0
 	AutoTarget:
+		DynamicWeaponPriority: true
 	Armament@flame:
 		Name: primary
 		Weapon: Flamethrower3

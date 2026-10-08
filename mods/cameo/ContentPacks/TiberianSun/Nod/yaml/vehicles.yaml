@@ -251,6 +251,7 @@ ts_nod_stealthtank:
 	AttackFrontal:
 		FacingTolerance: 256
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: HoldFire
 	WithVoxelBody:
 	Voiced:
@@ -386,11 +387,6 @@ ts_nod_artillery:
 		LocalOffset: 407,0,362
 		PauseOnCondition: undeployed
 		RequiresCondition: (deployed || undeployed) && ts_nod_upgrade_auxiliaryweapon
-	AttackTurreted:
-		Voice: Attack
-		TargetFrozenActors: True
-		ForceFireIgnoresActors: True
-		OutsideRangeRequiresForceFire: True
 	GrantConditionOnDeploy:
 		Facing: 384
 		DeploySounds: place2.aud
@@ -433,6 +429,16 @@ ts_nod_artillery:
 	Armor@deployed:
 		Type: Steel
 		RequiresCondition: !shielded && deployed
+
+	-AttackTurreted:
+	AttackMultiTurreted:
+		PauseOnCondition: disabled || blinded
+		Voice: Attack
+		Armaments: deployed, dummy
+		Turrets: deploy, dummy
+		TargetFrozenActors: True
+		ForceFireIgnoresActors: True
+		OutsideRangeRequiresForceFire: True
 
 ts_nod_devilstongue:
 	Inherits: ^Tank

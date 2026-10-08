@@ -175,6 +175,7 @@ forgotten_mutantsniper_sp:
 	RenderSprites:
 		Image: forgotten_mutantsniper
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 9999
 		InitialStance: AttackAnything
 	-Voiced:
@@ -278,6 +279,7 @@ forgotten_ghoststalker_sp:
 	RenderSprites:
 		Image: forgotten_ghoststalker
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 		ScanRadius: 9999
 	-Voiced:
@@ -353,6 +355,7 @@ forgotten_mutant_sp:
 	RenderSprites:
 		Image: forgotten_mutant
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 		ScanRadius: 9999
 	-Voiced:
@@ -431,6 +434,7 @@ forgotten_mutantsoldier_sp:
 	RenderSprites:
 		Image: forgotten_mutantsoldier
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 		ScanRadius: 9999
 	-Voiced:

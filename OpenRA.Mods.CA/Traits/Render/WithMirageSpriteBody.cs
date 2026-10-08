@@ -8,6 +8,7 @@
  */
 #endregion
 
+using System.Linq;
 using OpenRA.Mods.Common.Traits.Render;
 using OpenRA.Traits;
 
@@ -55,7 +56,7 @@ namespace OpenRA.Mods.CA.Traits.Render
 						disguiseImage = renderSprites.GetImage(disguiseActor, disguisePlayer.Faction.InternalName);
 				}
 
-				var withSpriteBody = disguiseActor.TraitInfoOrDefault<WithSpriteBodyInfo>();
+				var withSpriteBody = disguiseActor.TraitInfos<WithSpriteBodyInfo>().FirstOrDefault();
 				if (withSpriteBody != null && disguiseImage != null)
 				{
 					DefaultAnimation.PlayRepeating(NormalizeSequence(self, withSpriteBody.Sequence));

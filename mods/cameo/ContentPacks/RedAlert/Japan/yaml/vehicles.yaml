@@ -412,8 +412,6 @@ japan_oitank:
 		LocalOffset: 500,0,500
 		FireDelay: 8
 		RequiresCondition: japan_upgrade_advancedplasmaweapons
-	AttackTurreted:
-		Turrets: primary, secondary, main, back
 	WithMuzzleOverlay:
 	WithSpriteTurret@PRIMARY:
 		Turret: primary
@@ -440,6 +438,11 @@ japan_oitank:
 		VoiceSet: JapaneseVehicleVoice
 	ActorStatValues:
 		Upgrades: japan_upgrade_waveforcebullets, japan_upgrade_superiorwarengines, japan_upgrade_advancedplasmaweapons, japan_upgrade_nanotechrepairs
+
+	-AttackTurreted:
+	AttackMultiTurreted:
+		PauseOnCondition: disabled || blinded
+		Turrets: primary, secondary, main, back
 
 japan_corewarfactory:
 	Inherits: ^Vehicle
@@ -983,6 +986,7 @@ japan_shogunexecutioner:
 	ChangesHealth@SelfHealing:
 		Step: 1200
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 10
 		InitialStance: AttackAnything
 	Armament:
@@ -1444,8 +1448,6 @@ japan_exorcistoitank:
 		LocalOffset: 500,0,500
 		FireDelay: 8
 		RequiresCondition: japan_upgrade_advancedplasmaweapons
-	AttackTurreted:
-		Turrets: primary, secondary, main, back
 	WithMuzzleOverlay:
 	WithSpriteTurret@PRIMARY:
 		Turret: primary
@@ -1487,3 +1489,8 @@ japan_exorcistoitank:
 		Image: nanodrone_overlay_big
 	ActorStatValues:
 		Upgrades: japan_upgrade_waveforcebullets, japan_upgrade_superiorwarengines, japan_upgrade_advancedplasmaweapons, japan_upgrade_nanotechrepairs
+	-AttackTurreted:
+	AttackMultiTurreted:
+		PauseOnCondition: disabled || blinded
+		Voice: Attack
+		Turrets: primary, secondary, main, back

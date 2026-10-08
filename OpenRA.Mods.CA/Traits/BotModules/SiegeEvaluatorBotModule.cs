@@ -49,6 +49,11 @@ namespace OpenRA.Mods.CA.Traits
 			"raw memory only (control-arm identical).")]
 		public readonly bool SiegeMemoryEnabled = false;
 
+		[Desc("BM_live_combat_model: price the stand-off fight with the balance pipeline's",
+			"effective-damage model (reliability, falloff, every warhead, charge-up) instead of the",
+			"classic main-warhead DPS. False = classic numbers, bit-identical.")]
+		public readonly bool UseEffectiveDamageModel = false;
+
 		public override object Create(ActorInitializer init) => new SiegeEvaluatorBotModule(init.Self, this);
 	}
 
@@ -119,7 +124,7 @@ namespace OpenRA.Mods.CA.Traits
 					.Where(d => (d.Cell - targetCell).LengthSquared <= radiusSq)
 					.ToArray();
 
-				var rememberedThreat = threatProviders.Sum(p => p.RememberedEnemyThreatAt(targetCell));
+				var rememberedThreat = threatProviders.MergedThreatAt(targetCell);
 				var defenceValue = covering.Sum(d => d.Value);
 
 				// CA-2c: regions that already beat a siege read heavier — the
@@ -143,12 +148,14 @@ namespace OpenRA.Mods.CA.Traits
 				{
 					var own = squad.Units.Where(u => u.Actor != null)
 						.GroupBy(u => u.Actor.Info)
-						.Select(g => (BotUnitProfiles.Get(rules, g.Key), g.Count()))
+						.SelectMany(g => Info.UseEffectiveDamageModel
+							? g.Select(u => (BotUnitProfiles.Get(u.Actor, player, true), 1))
+							: new[] { (BotUnitProfiles.Get(rules, g.Key, false), g.Count()) })
 						.ToList();
 					var enemy = covering.GroupBy(d => d.Observed)
-						.Select(g => (BotUnitProfiles.Get(rules, g.Key), g.Count()))
+						.Select(g => (BotUnitProfiles.Get(rules, g.Key, Info.UseEffectiveDamageModel), g.Count()))
 						.ToList();
-					var prediction = BotCombatPredictor.Predict(own, enemy);
+					var prediction = BotCombatPredictor.Predict(own, enemy, Info.UseEffectiveDamageModel);
 
 					standOffCells = covering.Max(d => d.MaxRangeCells) + Info.StandOffMarginCells;
 					var standOffSq = (long)standOffCells * standOffCells;

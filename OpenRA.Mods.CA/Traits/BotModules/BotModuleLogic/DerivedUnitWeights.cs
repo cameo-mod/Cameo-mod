@@ -125,14 +125,16 @@ namespace OpenRA.Mods.CA.Traits
 		/// Versus entries — a weapon with no Versus overrides reads 100, the DamageWarhead
 		/// default. A weaponless profile floors at 1 so it still counts toward the role mean.
 		/// </summary>
-		public static double Strength(BotUnitProfile profile)
+		public static double Strength(BotUnitProfile profile, bool useEffective = false)
 		{
 			var best = 0.0;
 			if (profile != null)
 				foreach (var w in profile.Weapons)
 				{
 					var versus = w.Versus.Count == 0 ? 100.0 : w.Versus.Values.Average();
-					best = Math.Max(best, w.DamagePerTick * versus / 100.0);
+					best = Math.Max(best, useEffective && w.EffectiveDamagePerTick > 0
+						? w.EffectiveDamagePerTick
+						: w.DamagePerTick * versus / 100.0);
 				}
 
 			return Math.Max(1.0, best);

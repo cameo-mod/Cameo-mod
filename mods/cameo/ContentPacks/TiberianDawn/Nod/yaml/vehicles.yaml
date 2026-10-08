@@ -43,6 +43,7 @@ td_nod_specterartillery:
 		RequiresCondition: td_nod_upgrade_blackmarketupgrades
 	WithMuzzleOverlay:
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStanceAI: Defend
 	FireWarheadsOnDeath:
 		Weapon: td_nod_specterartillery_specterartilleryshell
@@ -166,6 +167,7 @@ td_nod_artillery:
 		RequiresCondition: td_nod_upgrade_blackmarketupgrades
 	WithMuzzleOverlay:
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStanceAI: Defend
 	#SpawnActorOnDeath:
 	#	Actor: ARTY.Husk

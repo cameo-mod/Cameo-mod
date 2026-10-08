@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using NUnit.Framework;
+using OpenRA.Mods.Cameo.Test.TestFixtures;
 using OpenRA.Mods.Cameo.Traits;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Network;
@@ -33,7 +34,7 @@ namespace OpenRA.Mods.Cameo.Test
 
 		static Order OrderWithString(string orderString)
 		{
-			var order = (Order)RuntimeHelpers.GetUninitializedObject(typeof(Order));
+			var order = Uninitialized.Of<Order>();
 			OrderString(order) = orderString;
 			return order;
 		}
@@ -207,7 +208,7 @@ namespace OpenRA.Mods.Cameo.Test
 		[Test]
 		public void SurrenderDispatchHitsTheCameoImplementation()
 		{
-			var player = (OpenRA.Player)RuntimeHelpers.GetUninitializedObject(typeof(OpenRA.Player));
+			var player = Uninitialized.Player();
 			var probe = new ProbeCameoMissionObjectives(player, new CameoMissionObjectivesInfo());
 
 			// If IResolveOrder had bound to MissionObjectives' implicit implementation, the
@@ -219,7 +220,7 @@ namespace OpenRA.Mods.Cameo.Test
 		[Test]
 		public void OtherOrdersNeverReachTheIntercept()
 		{
-			var player = (OpenRA.Player)RuntimeHelpers.GetUninitializedObject(typeof(OpenRA.Player));
+			var player = Uninitialized.Player();
 			var probe = new ProbeCameoMissionObjectives(player, new CameoMissionObjectivesInfo());
 			((IResolveOrder)probe).ResolveOrder(null, OrderWithString("Move"));
 			Assert.That(probe.TakeoverCalls, Is.EqualTo(0));

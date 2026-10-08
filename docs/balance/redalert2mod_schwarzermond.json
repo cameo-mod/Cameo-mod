@@ -6932,13 +6932,6 @@
       "burstdelays": "4",
       "damage_warheads": [
        {
-        "damage": "32000",
-        "falloff": "100, 58, 32, 16, 6, 0",
-        "spread": "146",
-        "tag": "Flak_Heavy",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "4",
         "falloff": null,
         "spread": "125",
@@ -6965,6 +6958,13 @@
         "spread": "200",
         "tag": "MediumMissilePercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "32000",
+        "falloff": "100, 58, 32, 16, 6, 0",
+        "spread": "146",
+        "tag": "MissileAA_Heavy",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
@@ -6975,9 +6975,12 @@
       "reloaddelay": "60",
       "slot": "Armament@AA",
       "versus_templates": [
+       "^Warhead_MissileAA_Heavy",
+       "^Projectile_Missile_AA",
        "Naxis_Komet"
       ],
       "warheads": [
+       "^Warhead_MissileAA_Heavy",
        "^Warhead_Flak_Heavy"
       ],
       "weapon": "Naxis_Komet_AA",

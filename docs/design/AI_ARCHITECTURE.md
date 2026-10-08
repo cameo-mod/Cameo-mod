@@ -115,7 +115,9 @@ Three consequences, all load-bearing:
 **Precedent for the order round-trip already exists in Cameo**, which removes the main risk from
 §4: `PlugSpawnerBotModuleCA` queues `new Order("PlacePlugAI", player.PlayerActor, ...)` with a
 `TargetString` payload from `IBotTick`, and resolves it in synced code via `IResolveOrder` on the
-same trait (`OpenRA.Mods.Cameo/Traits/BotModules/PlugSpawnerBotModuleCA.cs:84-108`).
+same trait — including the AR-4 ownership check (`PlugTargetIsOwned(targetActor, self.Owner)`)
+that keeps a plug from landing on another player's building
+(`OpenRA.Mods.Cameo/Traits/BotModules/PlugSpawnerBotModuleCA.cs:135-200`).
 `ExternalBotOrdersManager` does the same for `IssueOrderToBot`
 (`engine/OpenRA.Mods.AS/Traits/BotModules/ExternalBotOrdersManager.cs:120-149`).
 
@@ -1359,7 +1361,7 @@ this incrementally shippable — each phase in 10.6 is a complete, playable stat
 Verified on 2026-09-07 from the active `mods/cameo/mod.yaml` manifest and resolved
 `Player` / `World`, against upstream base `291052380`. Scope here is the decision modules,
 their explicit coordination adapter, and the three data/limit providers named below:
-**75 distinct trait types, 100 Player instances plus one World instance** (2026-10-04e: INC 2026-10-04e brings INC-d's `InMatchAdaptBotModule` (genericbot, behind `inmatchadapt`, §12.32 EL-1), +1 type / +1 instance; 2026-10-04: INC 2026-10-04 adds `BaseFrontBackPlannerBotModule` (genericbot, `Enabled: false`, behind `BI_front_back_placement`, §12.35), the BP front/back advisor, +1 type / +1 instance; 2026-10-03: INC 2026-10-03 adds `CombatVetoBotModule` + `EngagementPriorsBotModule` (genericbot, behind `combatveto`, §12.31) and `PlanBanditBotModule` (genericbot, behind `plan_bandits`, §12.33), +3 types / +3 instances — the count also absorbs +2/+2 that #782 `ArmyStagingBotModule` (§12.29) and #789 `EngagementLogBotModule` (§12.30) left uncounted; 2026-10-02e: BO-1 adds `BuildOrderKnobsBotModule` (genericbot, behind `build_order_knobs`), the §12.25 build-order knob provider, +1 type / +1 instance; 2026-10-02d: ST adds `ScaleTargetsBotModule` (genericbot, behind `scale_targets`), the §12.22 size-target provider, +1 type / +1 instance (#770 left it uncounted); 2026-10-02c: PP-1 adds `ParallelProductionBotModule` (genericbot, behind `parallel_production`), the settings-only IBotProductionWidth provider, and ATK-1 adds `AssaultFormationBotModule` (genericbot, behind `assault_fanout`), the settings-only provider of the unified CV/ATK-1 deploy state (§12.7a), and ST adds `ScaleTargetsBotModule` (genericbot, behind `scale_targets`, §12.22), +3 types / +3 instances; 2026-10-02b: SP-1/AF-1 add `SpacingAdvisorBotModule` + `ArmyFirstBotModule` (genericbot, behind `spaced_base`/`army_first`) and the `HarvesterBotModuleCA@generic`/@classic split adds one more instance, +3 types / +4 instances — the count also absorbs +2/+2 drift other merges left uncounted; 2026-10-02: CN3 adds `BridgeRepairBotModule` (genericbot, behind `cn3_bridge_repair`), the CN bridge-hut repair port claiming repairers per §19.6, +1 type / +1 instance — the count also absorbs a +1 drift RV2's `SupportPowerBotASModule@wc2` left uncounted; 2026-10-01: CN3 adds `DeployBotModule` (genericbot, behind `cn3_deploy`), the CN unified deploy-driving port, +1 type / +1 instance; CN2 adds `UnitRepairBotModule` (genericbot, behind `cn2_unit_repair`) and `GarrisonDefenseBotModule` (genericbot, behind `cn2_garrison_defense`), the crystallized-nexus repair-manager and threat-adaptive garrison ports claiming units per §19.6, +2 types / +2 instances; ZG adds `TacticalMapBotModule` (genericbot), +1 type / +1 instance; 2026-09-30: RV1 adds `BaseRepairBotModule`, the merged repair owner of DESIGN §19.3, and unloads the Common `BuildingRepairBotModule`, ±0; #656 adds `SiegeEvaluatorBotModule` (CA-2a siege telemetry) and splits the Fransbot `FransGroundCommanderBotModule` into six instances `@ground1`…`@ground6`, +1 type / +6 instances; 2026-09-29: `ExpansionPlannerBotModule`, EX-0 of §12.13, +1 type / +1 instance; 2026-09-28: #621 adds
+**77 distinct trait types, 104 Player instances plus one World instance** (2026-10-04f: INC 2026-10-04f brings RADAR-A's `RadarContactsBotModule` (genericbot, inert — `AI_radar_contacts`, no consumers yet), the `IBotRadarContacts` provider, +1 type / +1 instance; 2026-10-04: AR-9 adds `LoadCargoBotModuleAS` (genericbot only), the lease-aware port of the AS `LoadCargoBotModule`, as three twins `@Infantry`/`@TankBunker`/`@Battery` while the engine blocks turn `classicbot`-only, +1 type / +3 instances; 2026-10-04e: INC 2026-10-04e brings INC-d's `InMatchAdaptBotModule` (genericbot, behind `inmatchadapt`, §12.32 EL-1), +1 type / +1 instance; 2026-10-04: INC 2026-10-04 adds `BaseFrontBackPlannerBotModule` (genericbot, `Enabled: false`, behind `BI_front_back_placement`, §12.35), the BP front/back advisor, +1 type / +1 instance; 2026-10-03: INC 2026-10-03 adds `CombatVetoBotModule` + `EngagementPriorsBotModule` (genericbot, behind `combatveto`, §12.31) and `PlanBanditBotModule` (genericbot, behind `plan_bandits`, §12.33), +3 types / +3 instances — the count also absorbs +2/+2 that #782 `ArmyStagingBotModule` (§12.29) and #789 `EngagementLogBotModule` (§12.30) left uncounted; 2026-10-02e: BO-1 adds `BuildOrderKnobsBotModule` (genericbot, behind `build_order_knobs`), the §12.25 build-order knob provider, +1 type / +1 instance; 2026-10-02d: ST adds `ScaleTargetsBotModule` (genericbot, behind `scale_targets`), the §12.22 size-target provider, +1 type / +1 instance (#770 left it uncounted); 2026-10-02c: PP-1 adds `ParallelProductionBotModule` (genericbot, behind `parallel_production`), the settings-only IBotProductionWidth provider, and ATK-1 adds `AssaultFormationBotModule` (genericbot, behind `assault_fanout`), the settings-only provider of the unified CV/ATK-1 deploy state (§12.7a), and ST adds `ScaleTargetsBotModule` (genericbot, behind `scale_targets`, §12.22), +3 types / +3 instances; 2026-10-02b: SP-1/AF-1 add `SpacingAdvisorBotModule` + `ArmyFirstBotModule` (genericbot, behind `spaced_base`/`army_first`) and the `HarvesterBotModuleCA@generic`/@classic split adds one more instance, +3 types / +4 instances — the count also absorbs +2/+2 drift other merges left uncounted; 2026-10-02: CN3 adds `BridgeRepairBotModule` (genericbot, behind `cn3_bridge_repair`), the CN bridge-hut repair port claiming repairers per §19.6, +1 type / +1 instance — the count also absorbs a +1 drift RV2's `SupportPowerBotASModule@wc2` left uncounted; 2026-10-01: CN3 adds `DeployBotModule` (genericbot, behind `cn3_deploy`), the CN unified deploy-driving port, +1 type / +1 instance; CN2 adds `UnitRepairBotModule` (genericbot, behind `cn2_unit_repair`) and `GarrisonDefenseBotModule` (genericbot, behind `cn2_garrison_defense`), the crystallized-nexus repair-manager and threat-adaptive garrison ports claiming units per §19.6, +2 types / +2 instances; ZG adds `TacticalMapBotModule` (genericbot), +1 type / +1 instance; 2026-09-30: RV1 adds `BaseRepairBotModule`, the merged repair owner of DESIGN §19.3, and unloads the Common `BuildingRepairBotModule`, ±0; #656 adds `SiegeEvaluatorBotModule` (CA-2a siege telemetry) and splits the Fransbot `FransGroundCommanderBotModule` into six instances `@ground1`…`@ground6`, +1 type / +6 instances; 2026-09-29: `ExpansionPlannerBotModule`, EX-0 of §12.13, +1 type / +1 instance; 2026-09-28: #621 adds
 `SquadManagerBotModuleCA@guerrilla`, the 69th instance; #607 adds `ResourceMapBotModule@fransbot` and `SquadManagerBotModuleCA@classic`, the 67th–68th instances; #578's Route-A Fransbot port adds 24 vendored `Frans*BotModule` types / 24 instances, the 28th–51st / 43rd–66th, which run only under the `fransbot` bot type; `BeaconResponderBotModule` (#580) is the 27th type / 42nd instance; `CncEngineerBotModule` (#562), `CombatAnalysisBotModule` (#564) and `HumanPaceBotModule` added the 24th–26th types / 39th–41st instances; `ScoutBotModule` was the 23rd/38th). Conditional instances
 are loaded, not necessarily enabled simultaneously. This replaces the old unqualified
 "20 loaded modules" claim. The scope does not count `ModularBot` dispatchers,
@@ -1398,7 +1400,7 @@ master snapshot today. "Hint" below is a future read-only integration, not shipp
 | `PowerDownBotModule` (1) | power toggling | power totals and toggleable buildings; no new hint | PowerDown orders; interval default 150 ticks; U |
 | `CratePickupBotModule` (1) | crate collector assignment | crate candidates, collectors and visibility setting; no new hint | movement orders; scan configured 300 ticks; U |
 | `LoadGarrisonerBotModuleCA` (@Infantry) | passenger-to-garrison assignment | configured passengers, garrisons, capacity/proximity; posture hint only in a later phase | Stop/AttackMove/EnterGarrison orders; scan default 457 ticks; U |
-| `LoadCargoBotModule` (@Infantry/@TankBunker/@Battery) | configured cargo loading | passengers, transport capacity and proximity; no phase-1 hint | cargo-related orders; scan default 317, Battery configured 799 ticks; U |
+| `LoadCargoBotModule` (@Infantry/@TankBunker/@Battery, classicbot) + `LoadCargoBotModuleAS` (same three instances, genericbot) | configured cargo loading | passengers, transport capacity and proximity; genericbot port claims each walking passenger per §19.6 | EnterTransport orders (grouped, null subject — AR-1 surface); scan default 317, Battery configured 799 ticks; U |
 | `MinelayerBotModule` (1) | minefield assignment | minelayers, positions and attack events; posture hint later | mine-related orders; scan default 320 ticks and attack callbacks; U |
 | `ExpansionPlannerBotModule` (genericbot) | EX-0 target field (§12.13): telemetry only, no orders | own actors, resource indices, base-builder queues, `IBotRegionThreatProvider`; nothing reads its target yet | `Target` / `LastScores` and a `debug.log` line on each target change; re-plan default 250 ticks; U |
 | `ResourceMapBotModule` (1) | resource-index information | resource layer and nearby actors; no snapshot hint | index/threat query methods; `UpdateResourceMapInverval` default 67 ticks, randomized initialization; U provider |
@@ -1497,7 +1499,15 @@ Such arbitration is future work, not a shipped shared allocator.
 **LoadCargoBotModule.** Keeps each instance's configured passenger/transport policy. A full or
 missing transport does not authorize an unrelated module to spawn one. Preserve the three
 instances and Battery cadence; cross-instance passenger contention must be tested if their
-selection sets change.
+selection sets change. AR-9 (2026-10-04): the engine module is `classicbot`-only; genericbot runs
+`LoadCargoBotModuleAS`, the same logic plus §19.6 leases — every walking passenger holds a Mission
+lease (claimed at pick, heartbeated each scan, released on arrival/stuck/loss) because the `All`
+load requirement applies no busy check and could otherwise draft mid-mission squad units. Empty
+rosters resolve from the same-named classic block (GC-1 fallback); scalars are per-twin. The two
+AR-9 sibling issuers were verified exempt rather than leased: `MinelayerBotModule` is disjoint by
+configuration (`ra1_allies_minelayer` sits in every squad manager's `ExcludeFromSquadsTypes`), and
+`SendUnitToAttackBotModule` is inert (the `quake_tank` stanza in `d2k.yaml` is commented out, so
+both its blocks have empty actor sets).
 
 **MinelayerBotModule.** Owns mine-placement assignments, using its current periodic and attack
 inputs. No usable minelayer or site leaves no assignment. A posture hint may bias sites later,
@@ -1657,6 +1667,72 @@ assigns a unit itself. `Recon` remains with `ScoutBotModule` and `Secure` is def
 phase. The assign layer must never become a second owner of a unit.
 
 The mission consumer revalidates each cycle: an exhausted Defend posture is skipped so a later affordable Raid remains eligible, and a cleared threat releases the hold immediately. Raid target lookup first uses visible actors; in fogged mode the consumer may use the existing remembered frozen-actor path. With `FoggedScans` disabled, the fallback can select unseen actors because it inherits the existing omniscient behavior of that mode rather than introducing a mission-layer cheat. The permanent `ai_raid_gate_20260928` fixture proves Raid publication and target-bearing assignment with reachable enemy economy under fog; it does not assert frozen assignment because that path is not reliably reproducible in the fixture.
+
+### 10.5b Provider precedence — the declared merges (AR-5/AR-7; audit R7)
+
+A seam with more than one loaded provider is a shared decision surface: without a declared
+merge, consumers silently pick their own — the AR-5 review found `IBotRegionThreatProvider`
+read by `Sum` in four modules and `Max` in a fifth, and AR-7 found `IBotMissionProvider`'s
+affordability pick deferring to trait order. `tools/ai/ai_arch_audit.py` now fails (R7, ERROR)
+when a seam has >1 loaded provider and no entry in its `PROVIDER_MERGES` table; the coverage
+doc's seam table prints the declaration. The declared merges:
+
+| Seam | Merge |
+|---|---|
+| `IBotRegionThreatProvider` | **max** across enabled providers (`BotRegionThreatMerge.MergedThreatAt`) — the providers publish overlapping estimates of the same strength, so summing double-counts a region both memories observed |
+| `IBotMissionProvider` | **priority-merge** across enabled providers — one ordering (Priority desc, RequiredValue asc, publish order) shared by `BestAffordableMission` and `BestRaidForSteering`; a provider's trait position no longer outranks another's missions |
+| `IBotMissionAssignmentProvider` | **first-non-null** among enabled providers — a disabled personality manager's stale assignment cannot shadow the live one's |
+| `IBotCaptureClaimSource` | **union** across enabled sources — `BotSituation` folds every claim cell into `TeamBroadcast.CaptureClaims`; `ClaimsAheadOf` arbitrates by participant key |
+| `IBotEnemyCompositionProvider` | **first-enabled** — the providers are gate-disjoint stacks (genericbot vs fransbot); `inc3_frans_services` can co-mount them |
+| `IBotRequestUnitProduction`, `IBotSuggestRefineryProduction`, `IBotBaseExpansion` | **first-enabled** — CA vs Frans providers are gate-disjoint |
+| `IBotRequestPauseUnitProduction` | **any** — any enabled voter's pause holds production |
+| `IBotTick`, `IBotEnabled`, `IBotRespondToAttack`, `IBotPositionsUpdated`, `IBotNotifyIdleBaseUnits`, `IBotMissionOutcomeSink` | **multicast** — every enabled provider is invoked; these are fan-out seams, not competing providers |
+
+Resolution rule for every seam: the enabled provider is chosen **at use time**
+(`FirstEnabledTraitOrDefault` or an explicit `IsTraitEnabled()` filter), never cached at
+`Created` — a `ConditionalTrait` is still disabled while its siblings are being constructed,
+and a later grant or personality switch must take effect without a rebuild.
+
+### 10.5c Tick phases — the declared order (AR-10; audit R8)
+
+`ModularBot` calls each enabled `IBotTick` module in **resolved `Player` child order** — the
+merged yaml order across every rules file that adds a `Player` child. That has a consequence
+the AR-10 review made visible: `ContentPacks/*/ai.yaml` row-injection files load **before**
+`mods/cameo/ai/ai.yaml`, and the pack that merges first wins the leading positions. Today
+`TiberianDawn/Shared` + `TiberianDawn/GDI` hoist the unit builder, the squad managers and the
+base builder to tick positions 0–10 — the act modules tick before every sense/decide module.
+The effective order is printed per instance in `AI_ARCH_COVERAGE.md` ("Tick order"); it is
+the contract, and `--check` fails when a yaml or include reorder changes it silently.
+
+The semantics of the order: a consumer positioned **before** a provider reads that provider's
+**previous** `BotTick` output — a one-tick-old snapshot. That is the standing behaviour, and
+it is safe: every seam publishes on its own cadence (situation rebuilds, 25–125-tick
+recomputes, squad intervals) and is consumed as a snapshot, so one extra tick sits inside the
+cadence window either way. The two lags the review cited are the feedback direction of
+producer/consumer pairs and are already the better direction: `ScaleTargets` (pos 244) and
+`BuildOrderKnobs` (pos 247) read `MasterAiBotModule`/`BaseBuilderBotModuleCA` one tick old,
+but every consumer of `IBotScaleTargets`/`IBotBuildOrderKnobs` — the builders at positions
+0 and 8 — reads them fresh. Moving the two modules later would only move the lag into the
+forward direction.
+
+The rule that holds the order honest (`ai_arch_audit.py` R8, ERROR):
+
+- **R8a** — every loaded `IBotTick` module type declares its layer in `LAYER_OF`:
+  `PERCEPTION`+`SITUATION` = sense, `STRATEGY` = decide, `EXECUTION`+`PRODUCTION` = act,
+  `SUPPORT` = infra, `TELEMETRY` = observe. A new ticking module without a declared layer
+  fails the audit.
+- **R8b** — `FRESH_EDGES` declares any seam that ever requires same-tick freshness
+  (consumer, interface, provider). None exists today; the audit errors if a declared edge
+  ever reads one tick late.
+- The full stale-read table (48 edges today) is generated into the coverage doc — the
+  ratchet is `--check`: any reorder regenerates the table deliberately.
+
+Why documentation and not a code reorder: an explicit sense→decide→act yaml reorder is
+deterministic and sync-safe (the same resolved ruleset reaches every client) but it changes
+read freshness on every provider edge at once — an unswitchable behavioural shift owned by
+the lead's increment call, not by this audit. Explicit snapshot versioning (a
+`snapshot.ComputedTick` stamp) was considered and rejected: it would annotate the same
+staleness without removing it, and the cadence windows already bound it.
 
 ### 10.6 Build order, each phase shippable on its own
 
@@ -3686,27 +3762,51 @@ the same `BotCombatPredictor` every predictor consumer already calls — the vet
 flee vetoes = `Denied`/`x_no_outrun`, a stood-down committed squad closes `Released`/`outmatched` via `DismissSquad`.
 EL scores vetoed vs non-vetoed attacks off these records.
 
-**Priors seam** (tier-1 hook): `IBotEngagementPriors.CorrectionMilli(attackerProfile, targetProfile)` (1000
-neutral) applied inside the HP-share damage assembly before the Lanchester core runs — the formula stays in
-`BotCombatPredictor`. `EngagementPriorsBotModule` loads the same committed `ai/learned/arsenal_priors.yaml`
-`BotLearnedPriors` serves (`PriorsFile` knob, mod-relative), once at match start, frozen for the match, absent
-file ⇒ neutral; EMBER's `ArsenalPriors` parser is reused so there is one file format. The fitted file's
-granularity is (faction pair, own unit type) — `target` is unused at this granularity and stays in the API for
-the finer attacker×target table a later fitter may write. The code stays stat-normalised per fleet rule.
+**Priors seam** (tier-1 hook, contract ruling F1 2026-10-03): `IBotEngagementPriors.CorrectionMilli(attackerProfile,
+targetProfile)` (1000 neutral) applied inside the HP-share damage assembly before the Lanchester core runs — the
+formula stays in `BotCombatPredictor`. `EngagementPriorsBotModule` loads `ai/learned/engagement_priors.yaml`
+(`PriorsFile` knob, mod-relative) once at match start, frozen for the match, absent file ⇒ neutral. **One canonical
+schema** (F1-a): the `BotEngagementPriors` root — `DeliveryArmour@<delivery>__x__<armor>` fitted residuals on the
+resolved Versus prior (per-cell factor in thousandths, composed then clamped), per-delivery `DefenceState@<delivery>`
+static-defence factors (applied when the attacker is a building) and the global `IntoDefencesMilli` (applied when the
+target is a building). The retired `EngagementPriors`/`Factor@` schema and the `arsenal_priors.yaml` bridge are gone —
+one format, one parser. The **delivery axis**: `BotWeaponProfile.Delivery` re-derives the main warhead's yaml
+`Warhead@<tag>` suffix from the resolved weapon yaml (`MiniYaml.Load` merges `Inherits`, so the child list is exactly
+what `WeaponInfo.LoadWarheads` iterated; same-index first, class-name-validated, fallback to the lowercased warhead
+class — the balance-pipeline taxonomy the fitter fits). The attacker's dominant weapon against the target supplies the
+cell's delivery key. **Per-cell staleness** (F1-b): the fitter also writes `PriorPct@<d>__x__<a>` = the resolved Versus
+percent the cell was fitted on (fitter default 100). At match start `BotUnitProfiles.ResolvedTagVersus(tag)` re-reads
+the tag's resolved Versus table; a cell whose prior moved reverts to neutral — a rebalance invalidates exactly the
+cells that shifted, not the whole file (the earlier global `StatFingerprint` gate is retired). `LedgerHash` remains
+offline provenance only — the balance ledgers are not mounted in-match. The code stays stat-normalised per fleet rule.
+The fitter's `AttritionExponentMilli` is consumed through `IBotEngagementPriors.AttritionExponentMilli` (default
+1000): `CombatVetoEval` applies `ratio^alpha` on the aggregate prediction and re-derives surviving fractions, bounded
+to the same [500, 2000] knob range — alpha in [0.5, 2.0], the pure square law when absent or disabled. Observability:
+the provider's `PriorsState` (`none` / `error` / `fitted:N/stale:M`, stale read live) lands on the match record's
+`priors_state` player field, and `tier1_priors` joined `UnitCompositionsBotModule.WatchConditions` — the priors shift
+veto verdicts, so they belong in the armed-set attribution (§12.33) alongside `combatveto` itself. The consumer also
+reads the optional `GlobalScaleMilli` header key (default 1000): the v2 fitter emits cell/defence/into-defences factors
+RELATIVE to a global obs/exp scale (the accounting-fixed ~1.13), and the consumer multiplies it back in so a
+relative-fitted file reproduces measured performance — an absent key keeps Schema-1 absolute semantics, and an
+unfitted lookup never fabricates a correction from `g` alone.
 Calibration note (E1b, 2026-10-04): dir-0 of the tier-1 fit prices its expected losses on the real `truth.start`
 victim force — correct for offline calibration — while the seen-vs-truth gap in game is a separate scouting effect
 that the cells must not absorb.
 
 **Perf**: per-squad verdict cached `VetoCacheTicks` (25); the launch check runs once per `AttackForceInterval`;
-no per-tick world enumeration beyond what the consult sites already compute.
+the delivery-tag map resolves once per mod load (`BotUnitProfiles` static); no per-tick world enumeration beyond
+what the consult sites already compute.
 
 **Knobs** (`CombatVetoBotModule`, genericbot-only): `VetoEngageRatioPct` 50, `VetoAbortRatioPct` 35
 (hysteresis: enter ≥50, exit <35), `VetoLaunchRatioPct` 60, `VetoFleeSpeedMarginPct` 100, `VetoCacheTicks` 25,
-`DefenceIncludeCells` 12. `EngagementPriorsBotModule`: `PriorsFile` `ai/learned/arsenal_priors.yaml`,
-`MinCorrectionMilli` 500, `MaxCorrectionMilli` 2000.
+`DefenceIncludeCells` 12. `EngagementPriorsBotModule`: `PriorsFile` `ai/learned/engagement_priors.yaml`,
+`MinCorrectionMilli` 500, `MaxCorrectionMilli` 2000 (the fitter's own [500, 2000] bound, applied to the composed
+product: delivery x armour cell x DefenceState x IntoDefences).
 
-**Switch**: `AN_combat_veto` — `GrantConditionOnBotOwner@combatveto` + `RequiresCondition: genericbot && combatveto`
-on both modules. Default off; classic never sees the provider.
+**Switches**: `AN_combat_veto` — `GrantConditionOnBotOwner@combatveto` + `RequiresCondition: genericbot && combatveto`
+on `CombatVetoBotModule`; `AP_tier1_priors` — `GrantConditionOnBotOwner@tier1priors` + `RequiresCondition: genericbot
+&& tier1_priors` on `EngagementPriorsBotModule` (F1-c: gated independently so a pure-predictor A/B can run unfitted;
+armed alone it is inert — the veto is its only consumer). Both default off; classic never sees either provider.
 
 ### 12.32 AD — in-match adaptation: form tunes the bar (NOVA EL-1)
 
@@ -3740,10 +3840,11 @@ the bar runs bit-identical and classic is untouched. Enumerates no actors — ze
 
 `PlanBanditBotModule` (Player, `genericbot && plan_bandits`; switch `AO_tier3_bandits`, default off — no provider =
 bit-identical) draws two Thompson samples once at match start and freezes them: a **personality arm** (the six
-`personality-*` presets; the winner pins `BotPersonalityController` the same way a harness pin does — harness pins win,
-an arm naming no condition falls back to the random draw) and a **plan arm** (a named knob overlay multiplied into the
-build-order vector as preset x learned x plan x jitter, clamped — `balanced` is the explicit no-op arm). No orders, no
-actor access, no new decision channels.
+`personality-*` presets; the winner reaches `BotPersonalityController` as a synced `SetBotPersonality` order issued
+from the host's BotTick — AR-2: the draw is host-side `LocalRandom` state, so it must never be read in a synced
+context; harness `PinnedPersonalities` pins are synced config and still override in `TraitEnabled`) and a **plan arm**
+(a named knob overlay multiplied into the build-order vector as preset x learned x plan x jitter, clamped —
+`balanced` is the explicit no-op arm). No orders, no actor access, no new decision channels.
 
 **Posterior.** Continuous reward (`score.total_milli`, [-1000, 1000]) — a Normal-mean posterior, sampled as Student-t
 (df = n-1, loc = mean, scale^2 = s^2/n; df > 64 uses the normal approximation). Beta posteriors cannot express a signed
@@ -3774,18 +3875,23 @@ survivorship filter; a plain run pools all sets (documented, current default).
 
 **Fog + self-guards (round-2 orders 2026-10-03).** The scope's enemy faction is `BotFactionView.PublicFactionOf`
 everywhere: the live path groups enemy players by lobby-visible `DisplayFaction`, and the early-resolve fallback
-(the draw runs inside the `Player` ctor, before `SetPlayers`) resolves `PlayerReference.Enemies` faction names
+(the draw may run before `SetPlayers`) resolves `PlayerReference.Enemies` faction names
 through `PublicFactionName` — a Random or hidden pick yields "" and the scope pools to the generic levels instead
 of keying a matchup the bot could not publicly know. `BuildOrderKnobsBotModule.EnemyFaction()` delegates to the
 same `EnemyFactionOf`, so the bandit and the build-order scope can never disagree. Every public reader self-guards
 `IsTraitDisabled` (rule 5): `PinnedPersonalityArm` -> null, `PlanOverlayMilli` -> 1000, `Snapshot` -> null — a
 disabled bandit never draws, pins, overlays or logs, even if a consumer forgets the `IsTraitEnabled` filter.
+**Sync (AR-2, 2026-10-04b).** All bandit readers are host-only (`IBotTick` / log sinks); the personality pin travels
+as a synced `SetBotPersonality` order throttled to one issue per sim second while the controller has not reflected
+it, and candidate personality switching stays silent while a pin is in effect. `BotPersonalityController.TraitEnabled`
+therefore draws `SharedRandom` exactly once, unconditionally (`ChooseInitialCondition`), then applies a harness pin
+over the draw — the shared stream can never diverge on pin state.
 
 **Interactions.** Tier-2 `combatveto`: vetoed fights emit DENIED records but no engagement — posteriors are
 conditioned on fights the veto let through (intended composition; `armed` makes the conditioning explicit and
 fitter-addressable, counterfactual scoring would need EL on DENIED cards, not implemented). EL-1 `inmatchadapt`:
-adjusts `RetreatRatioPct` inside whatever personality the pin picked — orthogonal axes. `BotPersonalityController`
-reads the pin lazily, so trait enable order cannot race it.
+adjusts `RetreatRatioPct` inside whatever personality the pin picked — orthogonal axes. The bandit resolves lazily
+on the host's first reader, so trait/tick ordering cannot race it.
 
 **Tests / rulings.** `PlanBanditMathTest` pins the pure contract: Welford/Chan stats, parent downweighting,
 deterministic Thompson draws from an explicit uniform stream, the LCB safety floor (and its sparse-arm exemption),

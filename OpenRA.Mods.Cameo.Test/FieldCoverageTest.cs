@@ -15,6 +15,7 @@ using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.Cameo.Traits;
 using OpenRA.Mods.Cameo.Traits.BotModules;
 using OpenRA.Mods.Common.Traits;
+using OpenRA.Support;
 
 namespace OpenRA.Mods.Cameo.Test
 {
@@ -561,6 +562,25 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void MultiInstanceTraitInfosDoNotCrashThePlanner()
+		{
+			// Packs model conditional power as second instances (Power@upgraded: ~190 actors carry
+			// two or more Power lines). TraitInfoOrDefault throws on multi-instance TypeDictionary
+			// entries; the planner's buildable-item scans must tolerate them — observed live crash
+			// on "A Nuclear Winter" (EMBER flag, 2026-10-04).
+			var variantPlant = new ActorInfo("pp", new BuildableInfo(), new BuildingInfo(), new GivesBuildableAreaInfo(),
+				Power(100), Power(40));
+			Assert.DoesNotThrow(() => ExpansionPlannerBotModule.IsPowerPlant(variantPlant));
+			Assert.That(ExpansionPlannerBotModule.IsPowerPlant(variantPlant), Is.True);
+			Assert.That(ExpansionPlannerBotModule.IsCrawlLink(variantPlant), Is.True);
+
+			// All-negative variant (a sink, not a plant) and single-instance still behave.
+			var sink = new ActorInfo("sink", new BuildableInfo(), new BuildingInfo(), new GivesBuildableAreaInfo(),
+				Power(-50), Power(-20));
+			Assert.That(ExpansionPlannerBotModule.IsPowerPlant(sink), Is.False);
+		}
+
+		[Test]
 		public void SiloOverrideThrottledUnderTheLaw()
 		{
 			// Law on: 85% capacity wants nothing, 96% wants a silo, 96% with one already in
@@ -574,6 +594,55 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(RefineryLawSilo.Wanted(false, 85, 100, false), Is.True);
 			Assert.That(RefineryLawSilo.Wanted(false, 85, 100, true), Is.True);
 			Assert.That(RefineryLawSilo.Wanted(false, 80, 100, false), Is.False);
+		}
+
+		[Test]
+		public void CrawlRollGateBlocksNonGbaWithoutDrawingRandom()
+		{
+			var silo = new ActorInfo("silo", new BuildableInfo(), new BuildingInfo());
+			var rax = new ActorInfo("rax", new BuildableInfo(), new BuildingInfo(), new GivesBuildableAreaInfo());
+
+			Assert.That(RefineryLawCrawlRoll.LegalLink(true, silo), Is.False);
+			Assert.That(RefineryLawCrawlRoll.LegalLink(true, rax), Is.True);
+			Assert.That(RefineryLawCrawlRoll.LegalLink(false, silo), Is.True);
+			Assert.That(RefineryLawCrawlRoll.LegalLink(false, rax), Is.True);
+
+			// The gate precedes the roll in the queue's && chain, so a law-blocked building consumes no
+			// randoms — the deterministic stream must not depend on which building the queue produced.
+			var rng = new MersenneTwister(42);
+			var rollTaken = RefineryLawCrawlRoll.LegalLink(true, silo) && rng.Next(100) < 50;
+			Assert.That(rollTaken, Is.False);
+			Assert.That(rng.TotalCount, Is.EqualTo(0));
+
+			// A legal link takes the roll exactly once.
+			_ = RefineryLawCrawlRoll.LegalLink(true, rax) && rng.Next(100) < 50;
+			Assert.That(rng.TotalCount, Is.EqualTo(1));
+
+			// Classic path is unfiltered: a non-GBA building still reaches the draw when the law is off.
+			_ = RefineryLawCrawlRoll.LegalLink(false, silo) && rng.Next(100) < 50;
+			Assert.That(rng.TotalCount, Is.EqualTo(2));
+		}
+
+		[Test]
+		public void RefineryLifecycleClassifiesTheDiff()
+		{
+			// Owner change in world: a capture — the victim logs a loss and the capturer an acquisition.
+			var capture = RefineryLifecycle.Classify(true, true, false);
+			Assert.That(capture.LostCause, Is.EqualTo("captured"));
+			Assert.That(capture.Acquired, Is.True);
+
+			// Same owner in world: nothing happened.
+			var quiet = RefineryLifecycle.Classify(false, true, false);
+			Assert.That(quiet.LostCause, Is.Null);
+			Assert.That(quiet.Acquired, Is.False);
+
+			// Gone from the world: the death flag splits killed from sold.
+			var killed = RefineryLifecycle.Classify(false, false, true);
+			Assert.That(killed.LostCause, Is.EqualTo("killed"));
+			Assert.That(killed.Acquired, Is.False);
+			var sold = RefineryLifecycle.Classify(false, false, false);
+			Assert.That(sold.LostCause, Is.EqualTo("sold"));
+			Assert.That(sold.Acquired, Is.False);
 		}
 
 		sealed class LawStub : IBotExpansionTargetProvider

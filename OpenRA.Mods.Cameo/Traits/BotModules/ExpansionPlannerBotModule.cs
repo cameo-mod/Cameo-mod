@@ -280,6 +280,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		List<CPos> lastRefineryCells = new();
 		List<CPos> lastBuildingTiles = new();
 		int[] lastRefineryFields = Array.Empty<int>();
+
+		// F1: the anchor model also feeds gate B's anchor-granular taken test — the assignment of the
+		// last model build and the tick it ran on (built once per re-plan, before the scores loop).
+		int[] lastAssigned = Array.Empty<int>();
+		int anchorModelTick = -1;
 		int unclaimedAnchorsInReach;
 		int unservedFieldsInReach;
 		int claimableAnchorsInReach;
@@ -335,7 +340,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (mcvRoles.TryGetValue(vehicle.Name, out var role))
 				return role;
 
-			var into = vehicle.TraitInfoOrDefault<TransformsInfo>()?.IntoActor;
+			var into = vehicle.TraitInfos<TransformsInfo>().FirstOrDefault()?.IntoActor;
 			var intoInfo = into != null && world.Map.Rules.Actors.TryGetValue(into, out var ai) ? ai : null;
 			role = ClassifyMcv(constructionMcvTypes.Contains(vehicle.Name), intoInfo?.HasTraitInfo<RefineryInfo>() ?? false);
 			mcvRoles[vehicle.Name] = role;
@@ -1126,7 +1131,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				.SelectMany(q => q.BuildableItems())
 				.Where(b => b.HasTraitInfo<BuildingInfo>()
 					&& b.TraitInfos<ITechTreePrerequisiteInfo>().Any(i => i.Prerequisites(b).Any(missing.Contains)))
-				.OrderBy(b => b.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? int.MaxValue)
+				.OrderBy(b => b.TraitInfos<ValuedInfo>().FirstOrDefault()?.Cost ?? int.MaxValue)
 				.ThenBy(b => b.Name, StringComparer.Ordinal)
 				.Select(b => b.Name)
 				.FirstOrDefault();
@@ -1329,6 +1334,67 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			return gap <= 0 ? 0 : (gap + Math.Max(stepCells, 1) - 1) / Math.Max(stepCells, 1);
 		}
 
+		/// <summary>
+		/// Field gate A: a live indice (its own cells) or a remembered one stays in play — regrowth keeps a
+		/// depleted field worth revisiting. Pure, for the tests.
+		/// </summary>
+		public static bool FieldPresent(bool hasIndice, int liveResourceCells, bool remembered) =>
+			hasIndice && (liveResourceCells > 0 || remembered);
+
+		/// <summary>
+		/// Field gate B: already ours (a refinery in the indice or within claim radius) or worthless —
+		/// `value` is the first-seen cell count, so a live field never reaches this gate with zero.
+		/// Under the refinery law the take is anchor-granular (F1): an indice that still holds an
+		/// unserved anchor is not "ours" no matter how many refineries its other anchors already have —
+		/// one refinery per ANCHOR means a multi-spreader single-indice field must stay claimable.
+		/// Classic keeps the old shape: `lawActive` false makes the extra terms fall away entirely.
+		/// Pure, for the tests.
+		/// </summary>
+		public static bool FieldTaken(int playerRefineries, bool claimed, int value, bool lawActive = false, bool indiceHasUnservedAnchor = false) =>
+			value <= 0 || ((claimed || playerRefineries > 0) && !(lawActive && indiceHasUnservedAnchor));
+
+		/// <summary>
+		/// TC-2c (§12.17): yield to an outranking ally's broadcast claim; null or empty claims never yield.
+		/// Pure, for the tests.
+		/// </summary>
+		public static bool YieldToAllyClaim(IReadOnlyCollection<(int ClientIndex, WPos Claim)> allyClaims,
+			WPos field, int myClientIndex, int radiusCells) =>
+			allyClaims != null && allyClaims.Count > 0 && AllyClaimWins(field, allyClaims, myClientIndex, radiusCells);
+
+		/// <summary>
+		/// The post-score multipliers in their fixed order — coalition-sector percent (TC-3), unexplored-spread
+		/// bonus and MCV separation (FE-1). A null factor means "not applicable this plan". Pure, for the tests.
+		/// </summary>
+		public static double ApplyFieldScoreModifiers(double score, int? sectorPercent, double? spreadFactor, double? separationFactor)
+		{
+			if (sectorPercent.HasValue)
+				score *= sectorPercent.Value / 100.0;
+
+			if (spreadFactor.HasValue)
+				score *= spreadFactor.Value;
+
+			if (separationFactor.HasValue)
+				score *= separationFactor.Value;
+
+			return score;
+		}
+
+		/// <summary>
+		/// The field-score ordering (F4): best score first; an exact tie goes to the lowest indice
+		/// index. List.Sort is unstable, so a bare score comparison could rank two tied fields
+		/// differently across runtimes — the index tie-break keeps every peer's pick identical.
+		/// Pure, for the tests.
+		/// </summary>
+		public static int CompareFieldScore(FieldScore a, FieldScore b)
+		{
+			var c = b.Score.CompareTo(a.Score);
+			return c != 0 ? c : a.Index.CompareTo(b.Index);
+		}
+
+		/// <summary>An in-flight MCV's site claim releases when the holder is gone, dead or no longer ours.</summary>
+		public static bool SiteHolderGone(bool found, bool dead, bool inWorld, bool owned) =>
+			!found || dead || !inWorld || !owned;
+
 		int MapDiagonalCells()
 		{
 			var size = world.Map.MapSize;
@@ -1413,7 +1479,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				{
 					refineryCells.Add(a.Location);
 					if (Info.FieldCoverage)
-						refineryTiles.Add(a.Info.TraitInfoOrDefault<BuildingInfo>()?.Tiles(a.Location).ToList());
+						refineryTiles.Add(a.Info.TraitInfos<BuildingInfo>().FirstOrDefault()?.Tiles(a.Location).ToList());
 				}
 
 				if (Info.FieldCoverage)
@@ -1428,13 +1494,13 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				if (a.Info.HasTraitInfo<GivesBuildableAreaInfo>())
 				{
 					buildingCells.Add(a.Location);
-					if (Info.FieldCoverage && a.Info.TraitInfoOrDefault<BuildingInfo>() is BuildingInfo abi)
+					if (Info.FieldCoverage && a.Info.TraitInfos<BuildingInfo>().FirstOrDefault() is { } abi)
 						buildingTiles.AddRange(abi.Tiles(a.Location));
 				}
 				else if (a.Info.HasTraitInfo<BuildingInfo>())
 					continue;
 				else if (a.Info.HasTraitInfo<AttackBaseInfo>() && !a.Info.HasTraitInfo<HarvesterInfo>())
-					guards.Add((a.Location, a.Info.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? 0));
+					guards.Add((a.Location, a.Info.TraitInfos<ValuedInfo>().FirstOrDefault()?.Cost ?? 0));
 			}
 
 			if (buildingCells.Count == 0)
@@ -1452,7 +1518,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				foreach (var id in inflightMcvSites.Keys.ToArray())
 				{
 					var heading = world.GetActorById(id);
-					if (heading == null || heading.IsDead || !heading.IsInWorld || heading.Owner != player)
+					if (SiteHolderGone(heading != null, heading?.IsDead ?? false, heading?.IsInWorld ?? false, heading?.Owner == player))
 						inflightMcvSites.Remove(id);
 				}
 			}
@@ -1489,10 +1555,27 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					sectorAnchors = anchors;
 			}
 
+			// F1 (lead ruling): the law's service is per ANCHOR, so gate B's indice-level refinery count
+			// must not starve the second anchor of a multi-spreader single-indice field — the anchor
+			// model builds before the scores loop and every indice still holding an unserved anchor
+			// stays in play (crawl aim and MCV pipeline keep driving at it).
+			var lawClaims = false;
+			HashSet<ResourceIndice> unservedAnchorIndices = null;
+			if (Info.FieldCoverage && Info.DriveRefineries)
+			{
+				EnsureAnchorModel(refineryCells, refineryTiles, buildingTiles);
+				lawClaims = LawActive;
+				if (lawClaims && fieldIndexCount > 0)
+					for (var a = 0; a < this.anchors.Count; a++)
+						if (lastAssigned[a] < 0)
+							(unservedAnchorIndices ??= new HashSet<ResourceIndice>())
+								.Add(resourceMap.FindClosestIndiceFromCPos(this.anchors[a]));
+			}
+
 			for (var i = 0; i < resourceMap.GetIndicesLength(); i++)
 			{
 				var field = resourceMap.GetIndice(i);
-				if (field == null || (field.ResourceCellsCount <= 0 && !initialCells.ContainsKey(i)))
+				if (!FieldPresent(field != null, field?.ResourceCellsCount ?? 0, initialCells.ContainsKey(i)))
 					continue;
 
 				// Ruling (c): the field's size at match start is public map data. The first scan of a field
@@ -1510,7 +1593,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				var center = EffectiveCenter(field.ResourceCellsCount, field.ResourceCellsCenter, initialCenters[i]);
 				var claimed = Claimed(center, refineryCells, Info.ClaimRadiusCells)
 					|| Claimed(initialCenters[i], refineryCells, Info.ClaimRadiusCells);
-				if (field.PlayerRefineryCount > 0 || claimed || value <= 0)
+				if (FieldTaken(field.PlayerRefineryCount, claimed, value, lawClaims,
+						unservedAnchorIndices != null && unservedAnchorIndices.Contains(field)))
 				{
 					owned += value > 0 ? 1 : 0;
 					continue;
@@ -1520,13 +1604,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					continue;
 
 				// TC-2c: an outranking ally already aims at this field — yield instead of stacking.
-				if (allyClaims != null && allyClaims.Count > 0
-					&& AllyClaimWins(world.Map.CenterOfCell(center), allyClaims, player.ClientIndex, Info.AllyClaimRadiusCells))
+				if (YieldToAllyClaim(allyClaims, world.Map.CenterOfCell(center), player.ClientIndex, Info.AllyClaimRadiusCells))
 					continue;
 
 				var distance = buildingCells.Min(c => (c - center).Length);
 				var hops = Hops(distance, reach, Info.LinkStepCells);
-				var threat = threatProviders.Sum(p => p.RememberedEnemyThreatAt(center));
+				var threat = threatProviders.MergedThreatAt(center);
 				var guardValue = guards.Where(g => (g.Cell - center).LengthSquared <= Info.GuardRadiusCells * Info.GuardRadiusCells)
 					.Sum(g => g.Value);
 				var cost = refinery.Cost + hops * link.Cost;
@@ -1536,22 +1619,19 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				// TC-3 / BD: own-sector fields keep their full score, foreign-sector fields keep
 				// CoalitionForeignSectorPercent of it — deprioritized, never forbidden: the argmax
 				// still picks a foreign field when no own-sector field is left.
-				if (sectorAnchors != null)
-					score *= SectorScorePercent(world.Map.CenterOfCell(center), sectorAnchors,
-						player.InternalName ?? "#" + player.ClientIndex, Info.CoalitionForeignSectorPercent) / 100.0;
-
 				// FE-1: unexplored ground wins ties (spread), and the crawl prefers fields no MCV is already heading to.
-				if (Info.FieldCoverage)
-				{
-					score *= SpreadFactor(allBuildingCells.Count > 0 ? allBuildingCells.Min(c => (c - center).Length) : distance, diagonalCells, Info.SpreadBonus);
-					if (inflightMcvSites.Count > 0 && TakenByMcvSite(center, inflightMcvSites.Values, Info.ClaimRadiusCells))
-						score *= Info.MinSeparationFactor;
-				}
+				score = ApplyFieldScoreModifiers(score,
+					sectorAnchors != null ? SectorScorePercent(world.Map.CenterOfCell(center), sectorAnchors,
+						player.InternalName ?? "#" + player.ClientIndex, Info.CoalitionForeignSectorPercent) : (int?)null,
+					Info.FieldCoverage ? SpreadFactor(allBuildingCells.Count > 0 ? allBuildingCells.Min(c => (c - center).Length) : distance,
+						diagonalCells, Info.SpreadBonus) : (double?)null,
+					Info.FieldCoverage && inflightMcvSites.Count > 0 && TakenByMcvSite(center, inflightMcvSites.Values, Info.ClaimRadiusCells)
+						? Info.MinSeparationFactor : (double?)null);
 
 				scores.Add(new FieldScore(i, center, value, hops, payback, threat, score, Safety(threat, guardValue)));
 			}
 
-			scores.Sort((a, b) => b.Score.CompareTo(a.Score));
+			scores.Sort(CompareFieldScore);
 			LastScores = scores;
 			var previous = Target?.Index;
 			Target = scores.Count > 0 ? scores[0] : null;
@@ -1575,10 +1655,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				crawlTargetEdge = null;
 			}
 
-			var lawClaims = LawActive;
-			claimField = lawClaims ? null : BestClaimField(scores);
-			if (!lawClaims)
-				wantsRefinery = claimField.HasValue;
+			(claimField, wantsRefinery) = ClaimSelection(lawClaims, wantsRefinery,
+				lawClaims ? (FieldScore?)null : BestClaimField(scores));
 
 			if (lawClaims)
 			{
@@ -1629,6 +1707,38 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public static bool LinkBuildingWanted(bool driveBaseCrawl, int? targetHops, int claimableAnchorsInReach, bool linkAvailable) =>
 			driveBaseCrawl && linkAvailable && targetHops > 0 && claimableAnchorsInReach == 0;
 
+		/// <summary>
+		/// REF-1: a pending anchor commit clears on expiry or the moment its refinery landed (the anchor is
+		/// served). Pure, for the tests.
+		/// </summary>
+		public static bool PendingCommitCleared(int tick, int until, bool served) => tick >= until || served;
+
+		/// <summary>
+		/// REF-1: a refinery is wanted only while claimable anchors outnumber refineries already in production —
+		/// never by comparing totals (a duplicate stacked at home must not spend a forward anchor's quota).
+		/// Pure, for the tests.
+		/// </summary>
+		public static bool AnchorRefineryWanted(int claimable, int queued) => claimable > queued;
+
+		/// <summary>
+		/// REF-1 loop guard: the same anchor wanted replan after replan with no refinery gained and none in
+		/// production counts a stuck re-plan; anything else restarts the count. `max` of 0 disables parking.
+		/// Pure, for the tests.
+		/// </summary>
+		public static (int Replans, bool Park) AnchorStuckNext(bool sameAnchor, int refineryCount,
+			int previousRefineries, int queued, int previousReplans, int maxReplans)
+		{
+			var replans = sameAnchor && refineryCount <= previousRefineries && queued == 0 ? previousReplans + 1 : 0;
+			return (replans, maxReplans > 0 && replans >= maxReplans);
+		}
+
+		/// <summary>
+		/// R7: under the anchor law the field claim is always null and the law's want carries through; classic
+		/// claims the best in-reach field and wants a refinery exactly when one exists. Pure, for the tests.
+		/// </summary>
+		public static (FieldScore? Claim, bool Want) ClaimSelection(bool lawActive, bool lawWanted, FieldScore? bestClaim) =>
+			lawActive ? (null, lawWanted) : (bestClaim, bestClaim.HasValue);
+
 		void UpdateCrawlWant((ActorInfo Info, int Cost, int BuildTicks) link, List<CPos> buildingTiles)
 		{
 			wantedLinkBuilding = null;
@@ -1637,7 +1747,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				return;
 
 			wantedLinkBuilding = link.Info.Name;
-			crawlTargetEdge = LinkTargetEdge(Target.Value, buildingTiles);
+			crawlTargetEdge = LinkTargetEdge(fields, Target.Value, buildingTiles);
 		}
 
 		/// <summary>
@@ -1646,7 +1756,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		/// (ResourceMap field vs the law's map-true component), so the law field nearest the target's centre supplies
 		/// the cells; with no usable cells the centre stays the aim.
 		/// </summary>
-		CPos? LinkTargetEdge(FieldScore target, List<CPos> buildingTiles)
+		internal static CPos? LinkTargetEdge(IReadOnlyList<RefineryField> fields, FieldScore target, IReadOnlyList<CPos> buildingTiles)
 		{
 			if (fields == null || fields.Count == 0 || buildingTiles == null || buildingTiles.Count == 0)
 				return null;
@@ -1717,13 +1827,17 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		}
 
 		/// <summary>
-		/// REF-1 (§12.24 v2): rebuild the anchors (spreaders are public map data, like the spawn points, plus the centres of
-		/// spreaderless fields), attach each to its resource field, and publish the claim order — tier 1: every unserved
-		/// field's best spreader in reach, home first; tier 2: covered fields' extra spreaders. A claim that keeps failing
-		/// is parked; a committed one is pending until its refinery lands.
+		/// REF-1: rebuild the per-tick anchor model — the fields (once), the spreader anchors, each
+		/// anchor's field, the field cells by id, the field every refinery sits flush to and the anchor
+		/// every refinery serves. Runs at most once per world tick: the scores loop's anchor-granular
+		/// gate-B test (F1) and the claim update share the same build.
 		/// </summary>
-		void UpdateAnchorClaim(List<CPos> refineryCells, List<IReadOnlyCollection<CPos>> refineryTiles, List<CPos> buildingTiles)
+		void EnsureAnchorModel(List<CPos> refineryCells, List<IReadOnlyCollection<CPos>> refineryTiles, List<CPos> buildingTiles)
 		{
+			if (anchorModelTick == world.WorldTick)
+				return;
+
+			anchorModelTick = world.WorldTick;
 			EnsureFieldModel();
 			lastRefineryCells = refineryCells;
 			lastBuildingTiles = buildingTiles;
@@ -1750,6 +1864,23 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			for (var f = 0; f <= maxField; f++)
 				fieldCellsById.Add(f < fields.Count ? fields[f].Cells : (IReadOnlyCollection<CPos>)Array.Empty<CPos>());
 
+			// Which field each refinery's footprint sits flush to — a legal gap-0/1 placement on a field's far edge
+			// can land beyond the serve radius from the spreader, and it still is that field's refinery.
+			var serve = Info.AnchorServeRadiusCells > 0 ? Info.AnchorServeRadiusCells : Info.ClaimRadiusCells;
+			lastRefineryFields = RefineryFlushFields(refineryTiles, fieldCellsById);
+			lastAssigned = AssignRefineries(anchors, refineryCells, serve, anchorFieldIds, lastRefineryFields);
+		}
+
+		/// <summary>
+		/// REF-1 (§12.24 v2): rebuild the anchors (spreaders are public map data, like the spawn points, plus the centres of
+		/// spreaderless fields), attach each to its resource field, and publish the claim order — tier 1: every unserved
+		/// field's best spreader in reach, home first; tier 2: covered fields' extra spreaders. A claim that keeps failing
+		/// is parked; a committed one is pending until its refinery lands.
+		/// </summary>
+		void UpdateAnchorClaim(List<CPos> refineryCells, List<IReadOnlyCollection<CPos>> refineryTiles, List<CPos> buildingTiles)
+		{
+			EnsureAnchorModel(refineryCells, refineryTiles, buildingTiles);
+
 			anchorClaim = null;
 			anchorClaimFieldCenter = null;
 			wantsRefinery = false;
@@ -1764,16 +1895,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var tick = world.WorldTick;
 			var serve = Info.AnchorServeRadiusCells > 0 ? Info.AnchorServeRadiusCells : Info.ClaimRadiusCells;
 
-			// Which field each refinery's footprint sits flush to — a legal gap-0/1 placement on a field's far edge
-			// can land beyond the serve radius from the spreader, and it still is that field's refinery.
-			lastRefineryFields = RefineryFlushFields(refineryTiles, fieldCellsById);
-
 			// Pending commits clear when their refinery landed (the anchor is served) or the commit expired.
-			var assigned = AssignRefineries(anchors, refineryCells, serve, anchorFieldIds, lastRefineryFields);
 			foreach (var kv in anchorPendingUntil.ToList())
 			{
 				var index = anchors.IndexOf(kv.Key);
-				if (tick >= kv.Value || (index >= 0 && assigned[index] >= 0))
+				if (PendingCommitCleared(tick, kv.Value, index >= 0 && lastAssigned[index] >= 0))
 					anchorPendingUntil.Remove(kv.Key);
 			}
 
@@ -1795,7 +1921,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			// A refinery is wanted only while more anchors are claimable than refineries already in flight — never by
 			// comparing totals (a duplicate stacked at home must not spend a forward anchor's quota).
-			wantsRefinery = order.Count > queued;
+			wantsRefinery = AnchorRefineryWanted(order.Count, queued);
 			if (order.Count == 0)
 			{
 				anchorStuck = (null, 0, refineryCells.Count);
@@ -1805,9 +1931,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var anchor = anchors[order[0]];
 
 			// Loop guard: the same anchor wanted replan after replan with no refinery gained and none in production.
-			var replans = anchorStuck.Anchor == anchor && refineryCells.Count <= anchorStuck.Refineries && queued == 0 ? anchorStuck.Replans + 1 : 0;
+			var (replans, parkAnchor) = AnchorStuckNext(anchorStuck.Anchor == anchor, refineryCells.Count,
+				anchorStuck.Refineries, queued, anchorStuck.Replans, Info.AnchorStuckReplans);
 			anchorStuck = (anchor, replans, refineryCells.Count);
-			if (Info.AnchorStuckReplans > 0 && replans >= Info.AnchorStuckReplans)
+			if (parkAnchor)
 			{
 				anchorParkedUntil[anchor] = tick + Info.ParkTicks;
 				anchorStuck = (null, 0, refineryCells.Count);
@@ -1857,14 +1984,14 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		{
 			var cheapest = world.Map.Rules.Actors.Values
 				.Where(a => a.HasTraitInfo<RefineryInfo>() && a.HasTraitInfo<BuildableInfo>() && a.HasTraitInfo<BuildingInfo>())
-				.OrderBy(a => a.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? int.MaxValue)
+				.OrderBy(a => a.TraitInfos<ValuedInfo>().FirstOrDefault()?.Cost ?? int.MaxValue)
 				.ThenBy(a => a.Name, StringComparer.Ordinal)
 				.FirstOrDefault();
 			if (cheapest == null)
 				return default;
 
-			return (cheapest, cheapest.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? 0,
-				Math.Max(0, cheapest.TraitInfoOrDefault<BuildableInfo>()?.BuildDuration ?? 0));
+			return (cheapest, cheapest.TraitInfos<ValuedInfo>().FirstOrDefault()?.Cost ?? 0,
+				Math.Max(0, cheapest.TraitInfos<BuildableInfo>().FirstOrDefault()?.BuildDuration ?? 0));
 		}
 
 		/// <summary>
@@ -1876,7 +2003,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			a.HasTraitInfo<BuildableInfo>() && a.HasTraitInfo<BuildingInfo>()
 			&& a.HasTraitInfo<GivesBuildableAreaInfo>() && !a.HasTraitInfo<RefineryInfo>();
 
-		public static bool IsPowerPlant(ActorInfo a) => (a.TraitInfoOrDefault<PowerInfo>()?.Amount ?? 0) > 0;
+		public static bool IsPowerPlant(ActorInfo a) => a.TraitInfos<PowerInfo>().Any(p => p.Amount > 0);
 
 		public static (ActorInfo Info, int Cost, int BuildTicks) PickCrawlLink(
 			(ActorInfo Info, int Cost, int BuildTicks) power, (ActorInfo Info, int Cost, int BuildTicks) other) =>
@@ -1892,11 +2019,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				queues++;
 				foreach (var item in queue.BuildableItems())
 				{
-					var bi = item.TraitInfoOrDefault<BuildableInfo>();
+					var bi = item.TraitInfos<BuildableInfo>().FirstOrDefault();
 					if (bi == null || !item.HasTraitInfo<BuildingInfo>())
 						continue;
 
-					var cost = item.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? 0;
+					var cost = item.TraitInfos<ValuedInfo>().FirstOrDefault()?.Cost ?? 0;
 					var entry = (item, cost, queue.GetBuildTime(item, bi));
 					// The Refinery trait, from rules: the by-name lists were emptied by the role rollout (§2.8).
 					if (item.HasTraitInfo<RefineryInfo>())
