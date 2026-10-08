@@ -1,3 +1,56 @@
+# 2026-10-08 — Devin-Architect: Phase-A outcome-bounded comparator
+
+*Devin-Architect.* `tools/ai/order_stream_diff_bounded.py` — the Phase-A
+comparator per `SPEC_2026-10-08_deterministic_replay_cutoff.md` ruling v2
+(coordinator assignment: comparator domain, tools-only, frozen comparator
+untouched and imported as a library for the wire parse).
+
+- **Terminal boundary derived in-band**: every SYNCHASH record's 13-byte
+  body carries `u64 defeatState` (bit i = World.Players[i] Lost).
+  `M_term` = mask at last sync; `F_term` = first frame reaching it
+  (mask is monotone — bits only set). `B = F_term + OrderLatency` (L=1,
+  Local server verified Server.cs:136-137).
+- **Roster projection**: mask bits index World.Players =
+  [!Playable map PlayerReferences] ++ [lobby clients] ++ [Everyone].
+  Map-side bots (Playable: False + Bot: hard) occupy mask slots but are
+  absent from replay trailers — the roster is reconstructed from the
+  cell's variant `map.yaml`, trailer rows are validated positionally with
+  a bidirectional Lost↔bit consistency check. Combatants = bot map refs;
+  terminality requires >=1 combatant Lost bit (1v1 scope, fail-closed on
+  other topologies) + nonzero FinalGameTick + all trailer outcomes
+  resolved.
+- **Canonical ordered compare** keyed (frame, clientId, intra-client
+  position): file order is receipt order, apply order is per-client
+  sequential (OrderManager.cs:234-260) — cross-client same-frame file
+  interleave canonicalized away; intra-packet and same-client order are
+  literal (semantically significant).
+- **Pregame (frame<=0)**: multiset compare with a declared volatile
+  exclusion — `SyncConnectionQuality` heartbeats (timing-dependent emit
+  count, zero sim content; the ONLY pregame diff observed on real data);
+  excluded counts reported in the payload.
+- **Verdicts**: IDENTICAL / IDENTICAL_OUTCOME_BOUNDED_TAIL (exit 0, PASS
+  class); DIVERGENT(1) for any canonical mismatch <= B or non-heartbeat
+  pregame diff; INCOMPLETE_CAPTURE(4) incl. sync-gap-through-B contiguity
+  gate; NO_BOUNDARY / BOUNDARY_MISMATCH / TERMINAL_MASK_MISMATCH (5).
+  Exact B, F_term, M_term, mask-verification detail and per-side tail
+  kind-buckets persisted in the JSON payload.
+
+Real-data validation on the frozen wave-5 set (6 pairs, 12 captures):
+**6/6 IDENTICAL_OUTCOME_BOUNDED_TAIL** — identical F_term/M_term on both
+sides of every pair (4785/0x14, 3949/0x18, 4789/0x14, 11749/0x14,
+7059/0x18, 7101/0x14), ordered content equal through B, all extras
+confined to post-boundary frames. Boundary bits match Integrator's
+independent measurement (flagged pair F_term=4789 mask 0x14).
+
+Suite `tools/tests/test_order_stream_diff_bounded.py`: 28 tests —
+pregame permutation acceptance, heartbeat exclusion vs real-order
+pregame divergence, cross-client same-frame interleave acceptance,
+intra-packet + same-client order-swap divergence, interior extras,
+post-B tails, F_term/M_term mismatch, missing boundary, mask/roster
+mismatch incl. bidirectional Lost-bit check, contiguity-through-B,
+missing/malformed trailer, exact-B persistence (L=1 and L=3), roster
+projection incl. .oramap zip, and the frozen-comparator byte pin.
+
 # 2026-10-08 — Devin-Architect: wave-1 scheduler v3 — fail-closed evidence adjudication
 
 *Devin-Architect.* Sol's wave-5 re-review (REVIEW_2026-10-08_wave5_adjudication)
