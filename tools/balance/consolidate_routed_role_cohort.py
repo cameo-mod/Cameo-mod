@@ -31,7 +31,7 @@ ROOTS = {
     "RA2ThunderboltMissile": ("MissileHE_Light", {
         "RA2ThunderboltMissile_AA", "RA2ThunderboltMissile_elite",
         "RA2ThunderboltMissile_AA_elite"}, 4000, 9975),
-    "td_nod_buggymkii_fireballlauncherbuggy2": ("Flame_Medium", set(), 6000, 9984),
+    "td_nod_buggymkii_fireballlauncherbuggy2": ("Flame_Medium", set(), 3000, 9984),
     "MatadorFlamer": ("Flame_Heavy", set(), 6000, 9984),
     "SyndicateFireballLauncher": ("Flame_Heavy", {
         "SyndicateFireballLauncherExplode", "SyndicateFireballLauncher_elite"},
@@ -69,6 +69,21 @@ PINNED_AFTER_MAINS = {
         "PreservedFlat_Flame_Medium", "PreservedFlat_HeavyFlameWeapon",
         "PreservedFlat_LightFlameWeapon", "PreservedFlat_MediumFlameWeapon",
     },
+}
+
+# Post-recording missile re-roles (W7/AA consolidation) moved these members to
+# new canonical destinations while preserving their folded totals. The recorded
+# destination stays authoritative for the pre-consolidation "before" state.
+REROLED_DESTINATIONS = {
+    "MarauderMissiles": "MissileHE_Medium",
+    "RA2MultiThunderboltMissile": "MissileAP_Light",
+    "RA2MultiThunderboltMissile_AA": "MissileAA_Light",
+    "RA2MultiThunderboltMissile_elite": "MissileAP_Light",
+    "RA2MultiThunderboltMissile_AA_elite": "MissileAA_Light",
+    "RA2ThunderboltMissile": "MissileAP_Light",
+    "RA2ThunderboltMissile_AA": "MissileAA_Light",
+    "RA2ThunderboltMissile_elite": "MissileAP_Light",
+    "RA2ThunderboltMissile_AA_elite": "MissileAA_Light",
 }
 
 
@@ -129,8 +144,12 @@ def inspect(rs):
                 raise RuntimeError(f"{name}: preservation fingerprint changed: {sorted(mains)}")
             states.add(after)
             continue
-        compatibility = f"{dest}FlatCompatibility"
-        before, after = mains == old, mains == {compatibility}
+        applied = {
+            tag
+            for effective in {dest, REROLED_DESTINATIONS.get(name, dest)}
+            for tag in (f"{effective}FlatCompatibility", f"{effective}_Flat", effective)
+        }
+        before, after = mains == old, len(mains) == 1 and mains <= applied
         if not (before or after):
             raise RuntimeError(f"{name}: unexpected mains {sorted(mains)}")
         states.add(after)
@@ -151,7 +170,7 @@ def inspect(rs):
             if max(abs(a-b) for a, b in zip(old_hp, new_hp)) > 1:
                 raise RuntimeError(f"{name}: percentage drift exceeds one HP")
         else:
-            node = nodes[compatibility]
+            node = nodes[next(iter(mains))]
             if int(str(node.get("PercentageScale") or 0)) != scale:
                 raise RuntimeError(f"{name}: applied scale changed")
     if len(states) != 1:

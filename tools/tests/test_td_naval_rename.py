@@ -301,6 +301,14 @@ class TdNavalRenameTests(unittest.TestCase):
                         current = value.get('Weapon')
                         if current in reverse:
                             value['Weapon'] = reverse[current]
+                # Bot-difficulty GPS refactor renamed the per-difficulty traits;
+                # reversing the rename keeps payload diffs visible.
+                for key in list(after):
+                    for cameo, old_root in (("CameoRangedGpsDot", "RangedGpsDot"),
+                                            ("CameoRangedGpsProvider", "RangedGpsProvider")):
+                        target = old_root + key[len(cameo):]
+                        if key.split('@')[0] == cameo and target not in after:
+                            after[target] = after.pop(key)
                 diffs = [d for d in self.tree_diff(before, after)
                          if not self._authorized_post_baseline_diff(d, new)]
                 self.assertEqual([], diffs)

@@ -3893,7 +3893,7 @@
  ],
  "AsianPhotonCannon_EMP": [
   [
-   "Warhead@Quantum_Heavy_Flat",
+   "Warhead@MissileAA_Heavy",
    "ValidTargets",
    "Ground, Water, Air",
    "Air"
@@ -3993,84 +3993,6 @@
    "Air"
   ]
  ],
- "BallistaSingleShotAir": [
-  [
-   "Warhead@Arrow_Light",
-   "ValidTargets",
-   "Ground, Water, Air",
-   "Air"
-  ]
- ],
- "BallistaSingleShotAirEnergized": [
-  [
-   "Warhead@MissileAP_Light",
-   "ValidTargets",
-   "Ground, Water, Air",
-   "Air"
-  ],
-  [
-   "Warhead@MediumFlameWeaponPercentage",
-   "ValidTargets",
-   "Ground, Water, Air",
-   "Air"
-  ],
-  [
-   "Warhead@MediumChemicalWeaponPercentage",
-   "ValidTargets",
-   "Ground, Water, Air",
-   "Air"
-  ],
-  [
-   "Warhead@ShrapnelWeaponPercentage",
-   "ValidTargets",
-   "Ground, Water, Air",
-   "Air"
-  ],
-  [
-   "Warhead@MediumMissilePercentage",
-   "ValidTargets",
-   "Ground, Water, Air",
-   "Air"
-  ],
-  [
-   "Warhead@EMPUnit",
-   "ValidTargets",
-   "Vehicle, Ship, Air, Cyborg, Defense, Building, Epic",
-   "Air"
-  ],
-  [
-   "Warhead@TeslaWeaponPercentage",
-   "ValidTargets",
-   "Ground, Water, Air",
-   "Air"
-  ],
-  [
-   "Warhead@Arrow_Light",
-   "ValidTargets",
-   "Ground, Water, Air",
-   "Air"
-  ],
-  [
-   "Warhead@CannonHE_Medium",
-   "ValidTargets",
-   "Ground, Water, Air",
-   "Air"
-  ],
-  [
-   "Warhead@CannonHE_Medium_Percentage",
-   "ValidTargets",
-   "Ground, Water, Air",
-   "Air"
-  ]
- ],
- "CabalLaserBoatLaserAA": [
-  [
-   "Warhead@Laser_Heavy_ExtraDamage",
-   "ValidTargets",
-   "Ground, Water, Air",
-   "Air"
-  ]
- ],
  "ConsortiumMissileSystem_EMP": [
   [
    "Warhead@EMPUnit",
@@ -4093,7 +4015,7 @@
  ],
  "D2K_APC_Rocket_AA": [
   [
-   "Warhead@MissileAA_Medium_Flat",
+   "Warhead@MissileAA_Medium",
    "ValidTargets",
    "Ground, Water, Air",
    "Air"
@@ -4255,7 +4177,7 @@
  ],
  "Naxis_Komet_AA": [
   [
-   "Warhead@Flak_Heavy",
+   "Warhead@MissileAA_Heavy",
    "ValidTargets",
    "Ground, Water, Air",
    "Air"
@@ -4429,7 +4351,7 @@
  ],
  "Spore_AA": [
   [
-   "Warhead@Chemical_Medium",
+   "Warhead@MissileAA_Medium",
    "ValidTargets",
    "Ground, Water, Air",
    "Air"
@@ -4455,7 +4377,7 @@
  ],
  "SteelScalpelRailgunAA": [
   [
-   "Warhead@Flak_Medium_Flat",
+   "Warhead@MissileAA_Medium",
    "ValidTargets",
    "Ground, Water, Air",
    "Air"
@@ -4463,7 +4385,7 @@
  ],
  "SteelScalpelRailgun_EMP_AA": [
   [
-   "Warhead@Flak_Medium_Flat",
+   "Warhead@MissileAA_Medium",
    "ValidTargets",
    "Ground, Water, Air",
    "Air"
@@ -4561,7 +4483,7 @@
  ],
  "edenTiger_EMP_AA": [
   [
-   "Warhead@Tesla_Super",
+   "Warhead@MissileAA_Heavy",
    "ValidTargets",
    "Ground, Water, Air",
    "Air"
@@ -4623,7 +4545,7 @@
  ],
  "eden_EMP_AA": [
   [
-   "Warhead@Tesla_Super",
+   "Warhead@MissileAA_Heavy",
    "ValidTargets",
    "Ground, Water, Air",
    "Air"
@@ -4937,7 +4859,7 @@
  ],
  "AsianQuasarBoat_AA": [
   [
-   "Warhead@MissileAA_Medium_Flat",
+   "Warhead@MissileAA_Medium",
    "ValidTargets",
    "Ground, Water, Air",
    "Air"
@@ -4975,7 +4897,7 @@
  ],
  "AsianQuasar_AA": [
   [
-   "Warhead@MissileAA_Medium_Flat",
+   "Warhead@MissileAA_Medium",
    "ValidTargets",
    "Ground, Water, Air",
    "Air"
@@ -6479,7 +6401,7 @@
  ],
  "AsianPhotonCannon": [
   [
-   "Warhead@Plasma_Heavy_Flat",
+   "Warhead@MissileAA_Heavy",
    "ValidTargets",
    "Ground, Water, Air",
    "Air"
@@ -7071,7 +6993,7 @@
  ],
  "plymouth_EMP_AA": [
   [
-   "Warhead@Tesla_Super",
+   "Warhead@MissileAA_Heavy",
    "ValidTargets",
    "Ground, Water, Air",
    "Air"
@@ -7222,6 +7144,78 @@
    "Warhead@Laser_Light_ExtraDamage",
    "InvalidTargets",
    null,
+   "Air"
+  ]
+ ],
+ "BallistaSingleShotAir_AA": [
+  [
+   "Warhead@MissileAA_Light",
+   "ValidTargets",
+   "Ground, Water, Air",
+   "Air"
+  ]
+ ],
+ "BallistaSingleShotAirEnergized_AA": [
+  [
+   "Warhead@MissileAP_Light",
+   "ValidTargets",
+   "Ground, Water, Air",
+   "Ground, Water, Air"
+  ],
+  [
+   "Warhead@MediumFlameWeaponPercentage",
+   "ValidTargets",
+   "Ground, Water, Air",
+   "Air"
+  ],
+  [
+   "Warhead@MediumChemicalWeaponPercentage",
+   "ValidTargets",
+   "Ground, Water, Air",
+   "Air"
+  ],
+  [
+   "Warhead@ShrapnelWeaponPercentage",
+   "ValidTargets",
+   "Ground, Water, Air",
+   "Air"
+  ],
+  [
+   "Warhead@MediumMissilePercentage",
+   "ValidTargets",
+   "Ground, Water, Air",
+   "Air"
+  ],
+  [
+   "Warhead@EMPUnit",
+   "ValidTargets",
+   "Vehicle, Ship, Air, Cyborg, Defense, Building, Epic",
+   "Air"
+  ],
+  [
+   "Warhead@TeslaWeaponPercentage",
+   "ValidTargets",
+   "Ground, Water, Air",
+   "Air"
+  ],
+  [
+   "Warhead@CannonHE_Medium_Percentage",
+   "ValidTargets",
+   "Ground, Water, Air",
+   "Air"
+  ],
+  [
+   "Warhead@CannonHE_Medium_Percentage",
+   "ValidTargets",
+   "Ground, Water, Air",
+   "Air"
+  ]
+ ],
+ "CabalLaserBoatLaser_AA": [
+  [
+   "Warhead@Laser_Heavy_ExtraDamage",
+   "ValidTargets",
+   "Ground, Water, Air",
    "Air"
   ]
  ]

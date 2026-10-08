@@ -13,6 +13,14 @@ from miniyaml import Ruleset
 from reviewed_weapon_history import HistoricalView, restore_endpoint_weapon
 
 
+# The elite's own recorded endpoint payload (`cannonap_endpoint_before_20260910.json`)
+# carries the consolidated `Warhead@CannonAP` main (the CannonAP-family profile,
+# PercentageScale 2000); the base keeps the `CannonAP_Light` tag.
+RA2120_DESTINATION_OVERRIDES = {
+    "RA2120xmm_elite": ("CannonAP", 12000, 2000),
+}
+
+
 class ExactProfileDuplicateConsolidationTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -47,6 +55,8 @@ class ExactProfileDuplicateConsolidationTests(unittest.TestCase):
                 destination = ("CannonFire_Light" if "_fire" in name else
                                "CannonTesla_Light" if "_tesla" in name else "CannonAP_Light")
                 total, scale = 12000, 10000
+                destination, total, scale = RA2120_DESTINATION_OVERRIDES.get(
+                    name, (destination, total, scale))
             resolved = self.rules.resolve_weapon(name)
             if name in ('RA2120xmm', 'RA2120xmm_elite'):
                 resolved = restore_endpoint_weapon(self, resolved)

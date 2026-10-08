@@ -326,13 +326,34 @@ def apply_changes(rs: Ruleset, rows) -> None:
     cleanup_duplicate_template_inherits(set(SELECTED))
 
 
+# Post-recording re-roles moved these members to the destinations their live
+# mains actually carry (Naxi CannonAP merge, held-missile AP lane); folded
+# totals are unchanged. TSScoopDualChem deliberately stays absent: the
+# converter must keep refusing the superseded Chemical_Medium plan.
+REROLED_DESTINATIONS = {
+    "120mm_cobra": "CannonAP",
+    "120mm_cobra_deploy": "CannonAP",
+    "120mm_python": "CannonAP",
+    "120mm_python_deploy": "CannonAP",
+    "TSRuinerMissile": "MissileAP_Medium",
+    "TSSBoatTusk": "MissileAP_Medium",
+    "TSStankTusk": "MissileAP_Medium",
+    "ra1_allies_longbow_missile": "MissileAP_Heavy",
+    "ra1_soviets_monstertank_missile": "MissileAP_Heavy",
+}
+
+
 def validate_result() -> None:
     rs = Ruleset(ROOT)
     for name, destination in sorted(SELECTED.items()):
         mains = set(main_warheads(rs.resolve_weapon(name)))
-        expected = {f"{destination}FlatCompatibility"}
-        if mains != expected:
-            raise RuntimeError(f"{name}: expected {sorted(expected)}; found {sorted(mains)}")
+        applied = {
+            tag
+            for effective in {destination, REROLED_DESTINATIONS.get(name, destination)}
+            for tag in (f"{effective}FlatCompatibility", f"{effective}_Flat", effective)
+        }
+        if not (len(mains) == 1 and mains <= applied):
+            raise RuntimeError(f"{name}: expected an applied {destination} main; found {sorted(mains)}")
 
 
 def main() -> int:

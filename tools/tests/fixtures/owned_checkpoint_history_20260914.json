@@ -6,6 +6,17 @@
     "ra1_allies_rapierjumpjet": {
      "changes": [
       {
+       "path": [
+        "CameoRangedGpsDot"
+       ],
+       "checkpoint": {
+        "__owned_history_missing__": true
+       },
+       "current": {
+        "Sequence": "Plane"
+       }
+      },
+      {
        "checkpoint": {
         "Modifier": "90"
        },
@@ -125,9 +136,20 @@
        "path": [
         "FirepowerMultiplier@RearmableAircraft"
        ]
+      },
+      {
+       "path": [
+        "RangedGpsDot"
+       ],
+       "checkpoint": {
+        "Sequence": "Plane"
+       },
+       "current": {
+        "__owned_history_missing__": true
+       }
       }
      ],
-     "current_hash": "dd9a8a33ba2b7963f2ad7e454b80ff156c0e8b0d24e5624afbd9fb1d63e39018"
+     "current_hash": "74d75d96376428c94c389e2aa86d02f056db7416f7ac70ace279cd534dab5670"
     },
     "ra1_allies_sheridanassaulttank": {
      "changes": [
@@ -146,6 +168,17 @@
         "Armament@MGCryo",
         "Weapon"
        ]
+      },
+      {
+       "path": [
+        "CameoRangedGpsDot"
+       ],
+       "checkpoint": {
+        "__owned_history_missing__": true
+       },
+       "current": {
+        "Sequence": "Vehicle"
+       }
       },
       {
        "checkpoint": {
@@ -201,12 +234,34 @@
        "path": [
         "FirepowerMultiplier@PromotionUnit"
        ]
+      },
+      {
+       "path": [
+        "RangedGpsDot"
+       ],
+       "checkpoint": {
+        "Sequence": "Vehicle"
+       },
+       "current": {
+        "__owned_history_missing__": true
+       }
       }
      ],
-     "current_hash": "38a6deb6b72ab6900a153bef6b44cb20cc3993a536d0e93355bb10c56e3e1113"
+     "current_hash": "c47b14d2bbdea378b9e001462cbda2b6e625e43231013f544014ba635817810e"
     },
     "ra1_soviets_commissar": {
      "changes": [
+      {
+       "path": [
+        "CameoRangedGpsDot"
+       ],
+       "checkpoint": {
+        "__owned_history_missing__": true
+       },
+       "current": {
+        "Sequence": "Infantry"
+       }
+      },
       {
        "checkpoint": {
         "Modifier": "150"
@@ -283,12 +338,34 @@
        "path": [
         "FirepowerMultiplier@SniperInfantryBuff"
        ]
+      },
+      {
+       "path": [
+        "RangedGpsDot"
+       ],
+       "checkpoint": {
+        "Sequence": "Infantry"
+       },
+       "current": {
+        "__owned_history_missing__": true
+       }
       }
      ],
-     "current_hash": "bfdeb585339f463927058071067be0abc08b5c08072ceb30d79455d985929a91"
+     "current_hash": "91fae3fe84d85e8e34a4c1640d59a8092f6a8f5422f29f01dfd1d933a6ee8d27"
     },
     "ra1_soviets_cyberdog": {
      "changes": [
+      {
+       "path": [
+        "CameoRangedGpsDot"
+       ],
+       "checkpoint": {
+        "__owned_history_missing__": true
+       },
+       "current": {
+        "Sequence": "Infantry"
+       }
+      },
       {
        "checkpoint": {
         "Modifier": "150"
@@ -376,9 +453,20 @@
        "path": [
         "FirepowerMultiplier@PromotionUnit"
        ]
+      },
+      {
+       "path": [
+        "RangedGpsDot"
+       ],
+       "checkpoint": {
+        "Sequence": "Infantry"
+       },
+       "current": {
+        "__owned_history_missing__": true
+       }
       }
      ],
-     "current_hash": "9b1b5de747a5ddfa8343831cfc533d88d3b598ea02ba9de3baf64b00a02b3d44"
+     "current_hash": "c1c2ae9808848ebbb80696549aca553dd5a9231bbdbf0b6d3e4a7b844c83749c"
     },
     "ra1_soviets_samsite": {
      "changes": [
@@ -2268,7 +2356,7 @@
        ]
       ]
      ],
-     "current_hash": "84b011665347fecd703add7547f888df5a4782bfced40463616d5fc9fe19085f"
+     "current_hash": "ada18d03ab2b298e3d4baf5d060542213c58096a986e5143263aea36ed015de2"
     },
     "ra1_allies_rapierjumpjet_missile_cryo_AA": {
      "checkpoint": [
@@ -3009,7 +3097,7 @@
        ]
       ]
      ],
-     "current_hash": "5827dc9b37136835c0c9349e876b5734d9f1f54430aca1b48957c3eff41614d7"
+     "current_hash": "b80dff598abdc89cdf67709cef9c061a2d13d8301ec64f6a7d9957272edee064"
     },
     "ra1_allies_sheridanassaulttank_cannon": {
      "checkpoint": [
@@ -4766,7 +4854,7 @@
        ]
       ]
      ],
-     "current_hash": "37b2841a4476f1ff1c7623bf1eb7690512a2bf1085a780879ed8226f2f0c5fc6"
+     "current_hash": "6c8dae938e6ced65e1d20705ca45ca37efa9e20c2f3850f01a86eca90afd6835"
     },
     "ra1_allies_sheridanassaulttank_missile_cryo": {
      "checkpoint": [
@@ -5208,7 +5296,7 @@
        ]
       ]
      ],
-     "current_hash": "58c0c114ae163692570c29a45b65e4293a58ea1e8d7cae4cc1645ea8d9d95d71"
+     "current_hash": "e5702e10fc413c6634e42206b69b52415fd3303ed4df64616ca5ead4cdfc1a24"
     },
     "ra1_soviets_commissar_pistol": {
      "checkpoint": [
@@ -6929,7 +7017,7 @@
        ]
       ]
      ],
-     "current_hash": "dbb239122237add96ff60c0fe5c547f063b7c8779a4384596113a95585b804bd"
+     "current_hash": "28ef5bb14318f668e5238ec36214557f6b8fa44bdd827624e7621f32eb136cd6"
     }
    },
    "source_weapons": {
@@ -8026,7 +8114,7 @@
        ]
       ]
      ],
-     "current_hash": "48535de1d47e3ef437afcf98e3ae925cb5b0cec1c0287ac4d070ae30d925a18e"
+     "current_hash": "1b0d90b3f308c067f078ef53cfd2247868cdbd7dff440e12387d728141a296ce"
     }
    }
   },
@@ -8035,6 +8123,64 @@
    "resolved_actors": {
     "ra1_soviets_btr80": {
      "changes": [
+      {
+       "path": [
+        "AmmoPool"
+       ],
+       "current": {
+        "__owned_history_missing__": true
+       },
+       "checkpoint": {
+        "Ammo": "16",
+        "AmmoCondition": "ammo"
+       }
+      },
+      {
+       "path": [
+        "AttackTurreted",
+        "PauseOnCondition"
+       ],
+       "current": "disabled || blinded",
+       "checkpoint": "disabled"
+      },
+      {
+       "path": [
+        "BotRoles"
+       ],
+       "current": {
+        "Roles": "guerrilla"
+       },
+       "checkpoint": {
+        "__owned_history_missing__": true
+       }
+      },
+      {
+       "path": [
+        "CameoRangedGpsDot"
+       ],
+       "checkpoint": {
+        "__owned_history_missing__": true
+       },
+       "current": {
+        "Sequence": "Vehicle"
+       }
+      },
+      {
+       "path": [
+        "Cloak@TDcloak",
+        "PauseOnCondition"
+       ],
+       "current": "cloak-force-disabled || base-reveal || disabled || blinded",
+       "checkpoint": "cloak-force-disabled || base-reveal || disabled"
+      },
+      {
+       "path": [
+        "Cloak@TScloak",
+        "PauseOnCondition"
+       ],
+       "current": "cloak-force-disabled || base-reveal || disabled || blinded",
+       "checkpoint": "cloak-force-disabled || base-reveal || disabled"
+      },
       {
        "checkpoint": {
         "Modifier": "150"
@@ -8047,6 +8193,44 @@
        ]
       },
       {
+       "path": [
+        "DamageMultiplier@SONICDEBUFF"
+       ],
+       "current": {
+        "__owned_history_missing__": true
+       },
+       "checkpoint": {
+        "Modifier": "150",
+        "RequiresCondition": "SonicDebuff"
+       }
+      },
+      {
+       "path": [
+        "DamageMultiplierProportionalToPhysicalState@Resonance"
+       ],
+       "current": {
+        "DamageMultiplierAtMaximum": "150",
+        "DamageMultiplierAtMinimum": "100",
+        "PhysicalStateName": "Resonance",
+        "RequiresCondition": "Resonating",
+        "UseDeviationFromRelaxed": "true"
+       },
+       "checkpoint": {
+        "__owned_history_missing__": true
+       }
+      },
+      {
+       "path": [
+        "ExternalCondition@SONICDEBUFF"
+       ],
+       "current": {
+        "__owned_history_missing__": true
+       },
+       "checkpoint": {
+        "Condition": "SonicDebuff"
+       }
+      },
+      {
        "checkpoint": {
         "Modifier": "50"
        },
@@ -8056,6 +8240,551 @@
        "path": [
         "FirepowerMultiplier@GlobalBuffs"
        ]
+      },
+      {
+       "path": [
+        "GrantConditionOnAttack@elitegatling"
+       ],
+       "current": {
+        "ArmamentNames": "primary, garrisoned",
+        "Condition": "gatling",
+        "IsCyclic": "false",
+        "MaximumInstances": "10",
+        "RequiredShotsPerInstance": "1,1,1,1,1,1,1,1,1,1",
+        "RequiresCondition": "rank-elite && ra1_soviets_promotion_gatlingtank",
+        "RevokeAll": "false",
+        "RevokeDelay": "15",
+        "RevokeOnNewTarget": "false"
+       },
+       "checkpoint": {
+        "__owned_history_missing__": true
+       }
+      },
+      {
+       "path": [
+        "GrantConditionOnAttack@gatling"
+       ],
+       "current": {
+        "ArmamentNames": "primary, garrisoned",
+        "Condition": "gatling",
+        "IsCyclic": "false",
+        "MaximumInstances": "10",
+        "RequiredShotsPerInstance": "1,2,3,4,5,6,7,8,9,10",
+        "RequiresCondition": "!rank-elite && ra1_soviets_promotion_gatlingtank",
+        "RevokeAll": "false",
+        "RevokeDelay": "37",
+        "RevokeOnNewTarget": "false"
+       },
+       "checkpoint": {
+        "__owned_history_missing__": true
+       }
+      },
+      {
+       "path": [
+        "GrantConditionOnBotOwner@aimicro"
+       ],
+       "current": {
+        "__owned_history_missing__": true
+       },
+       "checkpoint": {
+        "Bots": "easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod",
+        "Condition": "botmicro"
+       }
+      },
+      {
+       "path": [
+        "GrantConditionOnBotOwnerCA@aimicro"
+       ],
+       "current": {
+        "Condition": "botmicro"
+       },
+       "checkpoint": {
+        "__owned_history_missing__": true
+       }
+      },
+      {
+       "path": [
+        "GrantConditionOnPhysicalState@ResonanceDeadzone"
+       ],
+       "current": {
+        "Condition": "ResonanceDeadzone",
+        "LowerValue": "0",
+        "PhysicalStateName": "Resonance",
+        "UpperValue": "199"
+       },
+       "checkpoint": {
+        "__owned_history_missing__": true
+       }
+      },
+      {
+       "path": [
+        "GrantConditionOnPhysicalState@ResonanceMax"
+       ],
+       "current": {
+        "Condition": "ResonanceMax",
+        "LowerValue": "20000",
+        "PhysicalStateName": "Resonance",
+        "UpperValue": "20000"
+       },
+       "checkpoint": {
+        "__owned_history_missing__": true
+       }
+      },
+      {
+       "path": [
+        "GrantConditionOnPhysicalState@Resonating"
+       ],
+       "current": {
+        "Condition": "Resonating",
+        "LowerValue": "200",
+        "PhysicalStateName": "Resonance",
+        "UpperValue": "20000"
+       },
+       "checkpoint": {
+        "__owned_history_missing__": true
+       }
+      },
+      {
+       "path": [
+        "Mobile",
+        "PauseOnCondition"
+       ],
+       "current": "disabled || notmobile || blinded",
+       "checkpoint": "disabled || notmobile"
+      },
+      {
+       "path": [
+        "ModifiesCombatProportionalToPhysicalState@Blind"
+       ],
+       "current": {
+        "PhysicalStateName": "Blind",
+        "RangeTo": "20"
+       },
+       "checkpoint": {
+        "__owned_history_missing__": true
+       }
+      },
+      {
+       "path": [
+        "ModifiesCombatProportionalToPhysicalState@SpinUp"
+       ],
+       "current": {
+        "PhysicalStateName": "SpinUp",
+        "PitchFrom": "100",
+        "PitchTo": "120",
+        "RangeFrom": "100",
+        "RangeTo": "122",
+        "ReloadDelayFrom": "100",
+        "ReloadDelayTo": "60",
+        "RequiresCondition": "ra1_soviets_promotion_gatlingtank",
+        "SpeedFrom": "100",
+        "SpeedTo": "60",
+        "TurnSpeedFrom": "100",
+        "TurnSpeedTo": "60",
+        "TurretTurnSpeedFrom": "100",
+        "TurretTurnSpeedTo": "60"
+       },
+       "checkpoint": {
+        "__owned_history_missing__": true
+       }
+      },
+      {
+       "path": [
+        "PhysicalState@Resonance"
+       ],
+       "current": {
+        "ApplyDamageModifiers": "true",
+        "InitialValue": "0",
+        "MaxValue": "20000",
+        "MinValue": "0",
+        "Name": "Resonance",
+        "RelativeToHealth": "true",
+        "RelaxationDelay": "12",
+        "RelaxationInterval": "1",
+        "RelaxationLinear": "5",
+        "RelaxationScaled": "200",
+        "RelaxedValue": "0"
+       },
+       "checkpoint": {
+        "__owned_history_missing__": true
+       }
+      },
+      {
+       "path": [
+        "PhysicalState@SpinUp"
+       ],
+       "current": {
+        "InitialValue": "0",
+        "MaxValue": "100",
+        "MinValue": "0",
+        "Name": "SpinUp",
+        "RelaxedValue": "0"
+       },
+       "checkpoint": {
+        "__owned_history_missing__": true
+       }
+      },
+      {
+       "path": [
+        "PhysicalStateBar@ResonanceBar"
+       ],
+       "current": {
+        "DisplayWhenRelaxed": "false",
+        "NeutralColor": "808080",
+        "PhysicalStateName": "Resonance",
+        "PositiveColor": "0088FF",
+        "RequiresCondition": "!ResonanceDeadzone",
+        "ShowAbsoluteValues": "false"
+       },
+       "checkpoint": {
+        "__owned_history_missing__": true
+       }
+      },
+      {
+       "path": [
+        "ProducibleWithLevel@spyvehicles",
+        "Prerequisites"
+       ],
+       "current": "vehicles_upgraded",
+       "checkpoint": "vehicles.upgraded"
+      },
+      {
+       "path": [
+        "ProductionCostMultiplier@brutalbotplayer",
+        "Multiplier"
+       ],
+       "current": "90",
+       "checkpoint": "85"
+      },
+      {
+       "path": [
+        "ProductionCostMultiplier@cameogodbotplayer",
+        "Multiplier"
+       ],
+       "current": "75",
+       "checkpoint": "70"
+      },
+      {
+       "path": [
+        "ProductionCostMultiplier@challengerbotplayer",
+        "Multiplier"
+       ],
+       "current": "85",
+       "checkpoint": "80"
+      },
+      {
+       "path": [
+        "ProductionCostMultiplier@easiestbotplayer",
+        "Multiplier"
+       ],
+       "current": "120",
+       "checkpoint": "115"
+      },
+      {
+       "path": [
+        "ProductionCostMultiplier@easybotplayer",
+        "Multiplier"
+       ],
+       "current": "110",
+       "checkpoint": "105"
+      },
+      {
+       "path": [
+        "ProductionCostMultiplier@hardbotplayer",
+        "Multiplier"
+       ],
+       "current": "100",
+       "checkpoint": "95"
+      },
+      {
+       "path": [
+        "ProductionCostMultiplier@mediumbotplayer",
+        "Multiplier"
+       ],
+       "current": "105",
+       "checkpoint": "100"
+      },
+      {
+       "path": [
+        "ProductionCostMultiplier@unbeatablebotplayer",
+        "Multiplier"
+       ],
+       "current": "80",
+       "checkpoint": "75"
+      },
+      {
+       "path": [
+        "ProductionCostMultiplier@veryeasybotplayer",
+        "Multiplier"
+       ],
+       "current": "115",
+       "checkpoint": "110"
+      },
+      {
+       "path": [
+        "ProductionCostMultiplier@veryhardbotplayer",
+        "Multiplier"
+       ],
+       "current": "95",
+       "checkpoint": "90"
+      },
+      {
+       "path": [
+        "ProductionTimeMultiplier@brutalbotplayer",
+        "Multiplier"
+       ],
+       "current": "80",
+       "checkpoint": "70"
+      },
+      {
+       "path": [
+        "ProductionTimeMultiplier@cameogodbotplayer",
+        "Multiplier"
+       ],
+       "current": "50",
+       "checkpoint": "40"
+      },
+      {
+       "path": [
+        "ProductionTimeMultiplier@challengerbotplayer",
+        "Multiplier"
+       ],
+       "current": "70",
+       "checkpoint": "60"
+      },
+      {
+       "path": [
+        "ProductionTimeMultiplier@easiestbotplayer",
+        "Multiplier"
+       ],
+       "current": "140",
+       "checkpoint": "130"
+      },
+      {
+       "path": [
+        "ProductionTimeMultiplier@easybotplayer",
+        "Multiplier"
+       ],
+       "current": "120",
+       "checkpoint": "110"
+      },
+      {
+       "path": [
+        "ProductionTimeMultiplier@hardbotplayer",
+        "Multiplier"
+       ],
+       "current": "100",
+       "checkpoint": "90"
+      },
+      {
+       "path": [
+        "ProductionTimeMultiplier@mediumbotplayer",
+        "Multiplier"
+       ],
+       "current": "110",
+       "checkpoint": "100"
+      },
+      {
+       "path": [
+        "ProductionTimeMultiplier@unbeatablebotplayer",
+        "Multiplier"
+       ],
+       "current": "60",
+       "checkpoint": "50"
+      },
+      {
+       "path": [
+        "ProductionTimeMultiplier@veryeasybotplayer",
+        "Multiplier"
+       ],
+       "current": "130",
+       "checkpoint": "120"
+      },
+      {
+       "path": [
+        "ProductionTimeMultiplier@veryhardbotplayer",
+        "Multiplier"
+       ],
+       "current": "90",
+       "checkpoint": "80"
+      },
+      {
+       "path": [
+        "RangeMultiplier@GattlingSpeed1"
+       ],
+       "current": {
+        "__owned_history_missing__": true
+       },
+       "checkpoint": {
+        "Modifier": "105",
+        "RequiresCondition": "ammo < 10 && ra1_soviets_promotion_gatlingtank"
+       }
+      },
+      {
+       "path": [
+        "RangeMultiplier@GattlingSpeed2"
+       ],
+       "current": {
+        "__owned_history_missing__": true
+       },
+       "checkpoint": {
+        "Modifier": "105",
+        "RequiresCondition": "ammo < 6 && ra1_soviets_promotion_gatlingtank"
+       }
+      },
+      {
+       "path": [
+        "RangeMultiplier@GattlingSpeed3"
+       ],
+       "current": {
+        "__owned_history_missing__": true
+       },
+       "checkpoint": {
+        "Modifier": "105",
+        "RequiresCondition": "ammo <= 1 && ra1_soviets_promotion_gatlingtank"
+       }
+      },
+      {
+       "path": [
+        "RangeMultiplier@blinded"
+       ],
+       "current": {
+        "__owned_history_missing__": true
+       },
+       "checkpoint": {
+        "Modifier": "20",
+        "RequiresCondition": "blinded"
+       }
+      },
+      {
+       "path": [
+        "RangedGpsDot"
+       ],
+       "checkpoint": {
+        "Sequence": "Vehicle"
+       },
+       "current": {
+        "__owned_history_missing__": true
+       }
+      },
+      {
+       "path": [
+        "ReloadAmmoPool"
+       ],
+       "current": {
+        "__owned_history_missing__": true
+       },
+       "checkpoint": {
+        "Count": "1",
+        "Delay": "16",
+        "ResetOnFire": "True"
+       }
+      },
+      {
+       "path": [
+        "ReloadDelayMultiplier@GattlingSpeed1"
+       ],
+       "current": {
+        "__owned_history_missing__": true
+       },
+       "checkpoint": {
+        "Modifier": "80",
+        "RequiresCondition": "ammo < 10 && ra1_soviets_promotion_gatlingtank"
+       }
+      },
+      {
+       "path": [
+        "ReloadDelayMultiplier@GattlingSpeed2"
+       ],
+       "current": {
+        "__owned_history_missing__": true
+       },
+       "checkpoint": {
+        "Modifier": "80",
+        "RequiresCondition": "ammo < 6 && ra1_soviets_promotion_gatlingtank"
+       }
+      },
+      {
+       "path": [
+        "ReloadDelayMultiplier@GattlingSpeed3"
+       ],
+       "current": {
+        "__owned_history_missing__": true
+       },
+       "checkpoint": {
+        "Modifier": "80",
+        "RequiresCondition": "ammo <= 1 && ra1_soviets_promotion_gatlingtank"
+       }
+      },
+      {
+       "path": [
+        "Repairable",
+        "RepairActors"
+       ],
+       "current": "td_gdi_repairfacility, td_nod_repairfacility, ra1_allies_servicedepot, ra1_soviets_servicedepot, japan_japaneseservicedepot, ra2_soviets_servicedepot, ra2_allies_servicedepot, asianalliance_servicedepot, latinsyndicate_syndicateservicedepot, ixian_repairpad, ordos_repairpad, ra2_ctoutp, ts_gdi_servicedepot, ts_nod_servicedepot, forgotten_servicedepot, cabal_servicedepot, plymouth_garage, eden_garage",
+       "checkpoint": "td_gdi_repairfacility, td_nod_repairfacility, ra1_allies_alliedservicedepot, ra1_soviets_servicedepot, japan_japaneseservicedepot, ra2_soviets_servicedepot, ra2_allies_servicedepot, asianalliance_servicedepot, latinsyndicate_syndicateservicedepot, ixian_repairpad, ordos_repairpad, ra2_ctoutp, ts_gdi_servicedepot, ts_nod_servicedepot, forgotten_servicedepot, cabal_servicedepot, plymouth_garage, eden_garage"
+      },
+      {
+       "path": [
+        "SelectedPhysicalStateBar@SpinUp"
+       ],
+       "current": {
+        "DisplayWhenRelaxed": "false",
+        "PhysicalStateName": "SpinUp",
+        "PositiveColor": "FF8000",
+        "RequiresCondition": "ra1_soviets_promotion_gatlingtank",
+        "ShowAbsoluteValues": "true"
+       },
+       "checkpoint": {
+        "__owned_history_missing__": true
+       }
+      },
+      {
+       "path": [
+        "SlowsProportionalToPhysicalState@Resonance"
+       ],
+       "current": {
+        "OnlyPositiveValues": "true",
+        "PhysicalStateName": "Resonance",
+        "ReloadDelayModifierAtMaximum": "100",
+        "ReloadDelayModifierAtMinimum": "100",
+        "RequiresCondition": "Resonating",
+        "SpeedModifierAtMaximum": "75",
+        "SpeedModifierAtMinimum": "100",
+        "TurnSpeedModifierAtMaximum": "100",
+        "TurnSpeedModifierAtMinimum": "100",
+        "TurretTurnSpeedModifierAtMaximum": "100",
+        "TurretTurnSpeedModifierAtMinimum": "100",
+        "UseDeviationFromRelaxed": "true"
+       },
+       "checkpoint": {
+        "__owned_history_missing__": true
+       }
+      },
+      {
+       "path": [
+        "SpeedMultiplier@SONICDEBUFF"
+       ],
+       "current": {
+        "__owned_history_missing__": true
+       },
+       "checkpoint": {
+        "Modifier": "75",
+        "RequiresCondition": "SonicDebuff"
+       }
+      },
+      {
+       "path": [
+        "SynchronizesPhysicalStateWithCondition@SpinUp"
+       ],
+       "current": {
+        "Condition": "gatling",
+        "PhysicalStateName": "SpinUp",
+        "ValuePerInstance": "10"
+       },
+       "checkpoint": {
+        "__owned_history_missing__": true
+       }
       },
       {
        "checkpoint": {
@@ -8089,55 +8818,75 @@
       },
       {
        "path": [
-        "AmmoPool"
+        "WithColoredOverlay@SONICDEBUFF"
        ],
        "current": {
         "__owned_history_missing__": true
        },
        "checkpoint": {
-        "Ammo": "16",
-        "AmmoCondition": "ammo"
-       }
-      },
-      {
-       "path": [
-        "RangeMultiplier@GattlingSpeed1"
-       ],
-       "current": {
-        "__owned_history_missing__": true
-       },
-       "checkpoint": {
-        "Modifier": "105",
-        "RequiresCondition": "ammo < 10 && ra1_soviets_promotion_gatlingtank"
-       }
-      },
-      {
-       "path": [
-        "SpeedMultiplier@SONICDEBUFF"
-       ],
-       "current": {
-        "__owned_history_missing__": true
-       },
-       "checkpoint": {
-        "Modifier": "75",
+        "Color": "0088FF40",
+        "Multiply": "true",
         "RequiresCondition": "SonicDebuff"
        }
       },
       {
        "path": [
-        "ProducibleWithLevel@spyvehicles",
-        "Prerequisites"
+        "WithPhysicalStateColoredOverlay@Resonance"
        ],
-       "current": "vehicles_upgraded",
-       "checkpoint": "vehicles.upgraded"
+       "current": {
+        "BlendMode": "Multiply",
+        "LowerValue": "200",
+        "MaxColor": "0088FF40",
+        "MinColor": "0088FF08",
+        "PhysicalStateName": "Resonance",
+        "UpperValue": "20000"
+       },
+       "checkpoint": {
+        "__owned_history_missing__": true
+       }
+      }
+     ],
+     "current_hash": "73756e05dd2f5dfa99f505315801bbffd1760e1dd92990d9e19383495249cc1c"
+    },
+    "ra1_soviets_flaktruck": {
+     "changes": [
+      {
+       "path": [
+        "AttackTurreted",
+        "PauseOnCondition"
+       ],
+       "current": "disabled || blinded",
+       "checkpoint": "disabled"
       },
       {
        "path": [
-        "ProductionTimeMultiplier@veryhardbotplayer",
-        "Multiplier"
+        "BotRoles"
        ],
-       "current": "90",
-       "checkpoint": "80"
+       "current": {
+        "Roles": "guerrilla"
+       },
+       "checkpoint": {
+        "__owned_history_missing__": true
+       }
+      },
+      {
+       "path": [
+        "CameoRangedGpsDot"
+       ],
+       "checkpoint": {
+        "__owned_history_missing__": true
+       },
+       "current": {
+        "Sequence": "Vehicle"
+       }
+      },
+      {
+       "path": [
+        "Cloak@TDcloak",
+        "PauseOnCondition"
+       ],
+       "current": "cloak-force-disabled || base-reveal || disabled || blinded",
+       "checkpoint": "cloak-force-disabled || base-reveal || disabled"
       },
       {
        "path": [
@@ -8146,6 +8895,29 @@
        ],
        "current": "cloak-force-disabled || base-reveal || disabled || blinded",
        "checkpoint": "cloak-force-disabled || base-reveal || disabled"
+      },
+      {
+       "checkpoint": {
+        "Modifier": "150"
+       },
+       "current": {
+        "__owned_history_missing__": true
+       },
+       "path": [
+        "DamageMultiplier@GlobalBuffs"
+       ]
+      },
+      {
+       "path": [
+        "DamageMultiplier@SONICDEBUFF"
+       ],
+       "current": {
+        "__owned_history_missing__": true
+       },
+       "checkpoint": {
+        "Modifier": "150",
+        "RequiresCondition": "SonicDebuff"
+       }
       },
       {
        "path": [
@@ -8164,132 +8936,6 @@
       },
       {
        "path": [
-        "ReloadDelayMultiplier@GattlingSpeed3"
-       ],
-       "current": {
-        "__owned_history_missing__": true
-       },
-       "checkpoint": {
-        "Modifier": "80",
-        "RequiresCondition": "ammo <= 1 && ra1_soviets_promotion_gatlingtank"
-       }
-      },
-      {
-       "path": [
-        "DamageMultiplier@SONICDEBUFF"
-       ],
-       "current": {
-        "__owned_history_missing__": true
-       },
-       "checkpoint": {
-        "Modifier": "150",
-        "RequiresCondition": "SonicDebuff"
-       }
-      },
-      {
-       "path": [
-        "RangeMultiplier@GattlingSpeed2"
-       ],
-       "current": {
-        "__owned_history_missing__": true
-       },
-       "checkpoint": {
-        "Modifier": "105",
-        "RequiresCondition": "ammo < 6 && ra1_soviets_promotion_gatlingtank"
-       }
-      },
-      {
-       "path": [
-        "ReloadDelayMultiplier@GattlingSpeed2"
-       ],
-       "current": {
-        "__owned_history_missing__": true
-       },
-       "checkpoint": {
-        "Modifier": "80",
-        "RequiresCondition": "ammo < 6 && ra1_soviets_promotion_gatlingtank"
-       }
-      },
-      {
-       "path": [
-        "Mobile",
-        "PauseOnCondition"
-       ],
-       "current": "disabled || notmobile || blinded",
-       "checkpoint": "disabled || notmobile"
-      },
-      {
-       "path": [
-        "ProductionCostMultiplier@challengerbotplayer",
-        "Multiplier"
-       ],
-       "current": "85",
-       "checkpoint": "80"
-      },
-      {
-       "path": [
-        "ProductionTimeMultiplier@challengerbotplayer",
-        "Multiplier"
-       ],
-       "current": "70",
-       "checkpoint": "60"
-      },
-      {
-       "path": [
-        "SelectedPhysicalStateBar@SpinUp"
-       ],
-       "current": {
-        "DisplayWhenRelaxed": "false",
-        "PhysicalStateName": "SpinUp",
-        "PositiveColor": "FF8000",
-        "RequiresCondition": "ra1_soviets_promotion_gatlingtank",
-        "ShowAbsoluteValues": "true"
-       },
-       "checkpoint": {
-        "__owned_history_missing__": true
-       }
-      },
-      {
-       "path": [
-        "GrantConditionOnBotOwnerCA@aimicro"
-       ],
-       "current": {
-        "Condition": "botmicro"
-       },
-       "checkpoint": {
-        "__owned_history_missing__": true
-       }
-      },
-      {
-       "path": [
-        "RangeMultiplier@blinded"
-       ],
-       "current": {
-        "__owned_history_missing__": true
-       },
-       "checkpoint": {
-        "Modifier": "20",
-        "RequiresCondition": "blinded"
-       }
-      },
-      {
-       "path": [
-        "ProductionTimeMultiplier@easiestbotplayer",
-        "Multiplier"
-       ],
-       "current": "140",
-       "checkpoint": "130"
-      },
-      {
-       "path": [
-        "ProductionCostMultiplier@cameogodbotplayer",
-        "Multiplier"
-       ],
-       "current": "75",
-       "checkpoint": "70"
-      },
-      {
-       "path": [
         "ExternalCondition@SONICDEBUFF"
        ],
        "current": {
@@ -8298,458 +8944,6 @@
        "checkpoint": {
         "Condition": "SonicDebuff"
        }
-      },
-      {
-       "path": [
-        "ProductionCostMultiplier@hardbotplayer",
-        "Multiplier"
-       ],
-       "current": "100",
-       "checkpoint": "95"
-      },
-      {
-       "path": [
-        "PhysicalStateBar@ResonanceBar"
-       ],
-       "current": {
-        "DisplayWhenRelaxed": "false",
-        "NeutralColor": "808080",
-        "PhysicalStateName": "Resonance",
-        "PositiveColor": "0088FF",
-        "RequiresCondition": "!ResonanceDeadzone",
-        "ShowAbsoluteValues": "false"
-       },
-       "checkpoint": {
-        "__owned_history_missing__": true
-       }
-      },
-      {
-       "path": [
-        "ProductionTimeMultiplier@brutalbotplayer",
-        "Multiplier"
-       ],
-       "current": "80",
-       "checkpoint": "70"
-      },
-      {
-       "path": [
-        "WithPhysicalStateColoredOverlay@Resonance"
-       ],
-       "current": {
-        "BlendMode": "Multiply",
-        "LowerValue": "200",
-        "MaxColor": "0088FF40",
-        "MinColor": "0088FF08",
-        "PhysicalStateName": "Resonance",
-        "UpperValue": "20000"
-       },
-       "checkpoint": {
-        "__owned_history_missing__": true
-       }
-      },
-      {
-       "path": [
-        "ProductionTimeMultiplier@easybotplayer",
-        "Multiplier"
-       ],
-       "current": "120",
-       "checkpoint": "110"
-      },
-      {
-       "path": [
-        "ProductionCostMultiplier@unbeatablebotplayer",
-        "Multiplier"
-       ],
-       "current": "80",
-       "checkpoint": "75"
-      },
-      {
-       "path": [
-        "Repairable",
-        "RepairActors"
-       ],
-       "current": "td_gdi_repairfacility, td_nod_repairfacility, ra1_allies_servicedepot, ra1_soviets_servicedepot, japan_japaneseservicedepot, ra2_soviets_servicedepot, ra2_allies_servicedepot, asianalliance_servicedepot, latinsyndicate_syndicateservicedepot, ixian_repairpad, ordos_repairpad, ra2_ctoutp, ts_gdi_servicedepot, ts_nod_servicedepot, forgotten_servicedepot, cabal_servicedepot, plymouth_garage, eden_garage",
-       "checkpoint": "td_gdi_repairfacility, td_nod_repairfacility, ra1_allies_alliedservicedepot, ra1_soviets_servicedepot, japan_japaneseservicedepot, ra2_soviets_servicedepot, ra2_allies_servicedepot, asianalliance_servicedepot, latinsyndicate_syndicateservicedepot, ixian_repairpad, ordos_repairpad, ra2_ctoutp, ts_gdi_servicedepot, ts_nod_servicedepot, forgotten_servicedepot, cabal_servicedepot, plymouth_garage, eden_garage"
-      },
-      {
-       "path": [
-        "ProductionCostMultiplier@brutalbotplayer",
-        "Multiplier"
-       ],
-       "current": "90",
-       "checkpoint": "85"
-      },
-      {
-       "path": [
-        "GrantConditionOnBotOwner@aimicro"
-       ],
-       "current": {
-        "__owned_history_missing__": true
-       },
-       "checkpoint": {
-        "Bots": "easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod",
-        "Condition": "botmicro"
-       }
-      },
-      {
-       "path": [
-        "GrantConditionOnPhysicalState@Resonating"
-       ],
-       "current": {
-        "Condition": "Resonating",
-        "LowerValue": "200",
-        "PhysicalStateName": "Resonance",
-        "UpperValue": "20000"
-       },
-       "checkpoint": {
-        "__owned_history_missing__": true
-       }
-      },
-      {
-       "path": [
-        "Cloak@TDcloak",
-        "PauseOnCondition"
-       ],
-       "current": "cloak-force-disabled || base-reveal || disabled || blinded",
-       "checkpoint": "cloak-force-disabled || base-reveal || disabled"
-      },
-      {
-       "path": [
-        "ProductionCostMultiplier@veryhardbotplayer",
-        "Multiplier"
-       ],
-       "current": "95",
-       "checkpoint": "90"
-      },
-      {
-       "path": [
-        "ProductionCostMultiplier@mediumbotplayer",
-        "Multiplier"
-       ],
-       "current": "105",
-       "checkpoint": "100"
-      },
-      {
-       "path": [
-        "PhysicalState@Resonance"
-       ],
-       "current": {
-        "ApplyDamageModifiers": "true",
-        "InitialValue": "0",
-        "MaxValue": "20000",
-        "MinValue": "0",
-        "Name": "Resonance",
-        "RelativeToHealth": "true",
-        "RelaxationDelay": "12",
-        "RelaxationInterval": "1",
-        "RelaxationLinear": "5",
-        "RelaxationScaled": "200",
-        "RelaxedValue": "0"
-       },
-       "checkpoint": {
-        "__owned_history_missing__": true
-       }
-      },
-      {
-       "path": [
-        "ProductionTimeMultiplier@unbeatablebotplayer",
-        "Multiplier"
-       ],
-       "current": "60",
-       "checkpoint": "50"
-      },
-      {
-       "path": [
-        "SynchronizesPhysicalStateWithCondition@SpinUp"
-       ],
-       "current": {
-        "Condition": "gatling",
-        "PhysicalStateName": "SpinUp",
-        "ValuePerInstance": "10"
-       },
-       "checkpoint": {
-        "__owned_history_missing__": true
-       }
-      },
-      {
-       "path": [
-        "ReloadDelayMultiplier@GattlingSpeed1"
-       ],
-       "current": {
-        "__owned_history_missing__": true
-       },
-       "checkpoint": {
-        "Modifier": "80",
-        "RequiresCondition": "ammo < 10 && ra1_soviets_promotion_gatlingtank"
-       }
-      },
-      {
-       "path": [
-        "ProductionTimeMultiplier@cameogodbotplayer",
-        "Multiplier"
-       ],
-       "current": "50",
-       "checkpoint": "40"
-      },
-      {
-       "path": [
-        "GrantConditionOnAttack@gatling"
-       ],
-       "current": {
-        "ArmamentNames": "primary, garrisoned",
-        "Condition": "gatling",
-        "IsCyclic": "false",
-        "MaximumInstances": "10",
-        "RequiredShotsPerInstance": "1,2,3,4,5,6,7,8,9,10",
-        "RequiresCondition": "!rank-elite && ra1_soviets_promotion_gatlingtank",
-        "RevokeAll": "false",
-        "RevokeDelay": "37",
-        "RevokeOnNewTarget": "false"
-       },
-       "checkpoint": {
-        "__owned_history_missing__": true
-       }
-      },
-      {
-       "path": [
-        "GrantConditionOnAttack@elitegatling"
-       ],
-       "current": {
-        "ArmamentNames": "primary, garrisoned",
-        "Condition": "gatling",
-        "IsCyclic": "false",
-        "MaximumInstances": "10",
-        "RequiredShotsPerInstance": "1,1,1,1,1,1,1,1,1,1",
-        "RequiresCondition": "rank-elite && ra1_soviets_promotion_gatlingtank",
-        "RevokeAll": "false",
-        "RevokeDelay": "15",
-        "RevokeOnNewTarget": "false"
-       },
-       "checkpoint": {
-        "__owned_history_missing__": true
-       }
-      },
-      {
-       "path": [
-        "ProductionCostMultiplier@easybotplayer",
-        "Multiplier"
-       ],
-       "current": "110",
-       "checkpoint": "105"
-      },
-      {
-       "path": [
-        "RangeMultiplier@GattlingSpeed3"
-       ],
-       "current": {
-        "__owned_history_missing__": true
-       },
-       "checkpoint": {
-        "Modifier": "105",
-        "RequiresCondition": "ammo <= 1 && ra1_soviets_promotion_gatlingtank"
-       }
-      },
-      {
-       "path": [
-        "GrantConditionOnPhysicalState@ResonanceMax"
-       ],
-       "current": {
-        "Condition": "ResonanceMax",
-        "LowerValue": "20000",
-        "PhysicalStateName": "Resonance",
-        "UpperValue": "20000"
-       },
-       "checkpoint": {
-        "__owned_history_missing__": true
-       }
-      },
-      {
-       "path": [
-        "BotRoles"
-       ],
-       "current": {
-        "Roles": "guerrilla"
-       },
-       "checkpoint": {
-        "__owned_history_missing__": true
-       }
-      },
-      {
-       "path": [
-        "AttackTurreted",
-        "PauseOnCondition"
-       ],
-       "current": "disabled || blinded",
-       "checkpoint": "disabled"
-      },
-      {
-       "path": [
-        "WithColoredOverlay@SONICDEBUFF"
-       ],
-       "current": {
-        "__owned_history_missing__": true
-       },
-       "checkpoint": {
-        "Color": "0088FF40",
-        "Multiply": "true",
-        "RequiresCondition": "SonicDebuff"
-       }
-      },
-      {
-       "path": [
-        "ProductionTimeMultiplier@veryeasybotplayer",
-        "Multiplier"
-       ],
-       "current": "130",
-       "checkpoint": "120"
-      },
-      {
-       "path": [
-        "ProductionCostMultiplier@veryeasybotplayer",
-        "Multiplier"
-       ],
-       "current": "115",
-       "checkpoint": "110"
-      },
-      {
-       "path": [
-        "ModifiesCombatProportionalToPhysicalState@SpinUp"
-       ],
-       "current": {
-        "PhysicalStateName": "SpinUp",
-        "PitchFrom": "100",
-        "PitchTo": "120",
-        "RangeFrom": "100",
-        "RangeTo": "122",
-        "ReloadDelayFrom": "100",
-        "ReloadDelayTo": "60",
-        "RequiresCondition": "ra1_soviets_promotion_gatlingtank",
-        "SpeedFrom": "100",
-        "SpeedTo": "60",
-        "TurnSpeedFrom": "100",
-        "TurnSpeedTo": "60",
-        "TurretTurnSpeedFrom": "100",
-        "TurretTurnSpeedTo": "60"
-       },
-       "checkpoint": {
-        "__owned_history_missing__": true
-       }
-      },
-      {
-       "path": [
-        "ModifiesCombatProportionalToPhysicalState@Blind"
-       ],
-       "current": {
-        "PhysicalStateName": "Blind",
-        "RangeTo": "20"
-       },
-       "checkpoint": {
-        "__owned_history_missing__": true
-       }
-      },
-      {
-       "path": [
-        "ProductionCostMultiplier@easiestbotplayer",
-        "Multiplier"
-       ],
-       "current": "120",
-       "checkpoint": "115"
-      },
-      {
-       "path": [
-        "GrantConditionOnPhysicalState@ResonanceDeadzone"
-       ],
-       "current": {
-        "Condition": "ResonanceDeadzone",
-        "LowerValue": "0",
-        "PhysicalStateName": "Resonance",
-        "UpperValue": "199"
-       },
-       "checkpoint": {
-        "__owned_history_missing__": true
-       }
-      },
-      {
-       "path": [
-        "SlowsProportionalToPhysicalState@Resonance"
-       ],
-       "current": {
-        "OnlyPositiveValues": "true",
-        "PhysicalStateName": "Resonance",
-        "ReloadDelayModifierAtMaximum": "100",
-        "ReloadDelayModifierAtMinimum": "100",
-        "RequiresCondition": "Resonating",
-        "SpeedModifierAtMaximum": "75",
-        "SpeedModifierAtMinimum": "100",
-        "TurnSpeedModifierAtMaximum": "100",
-        "TurnSpeedModifierAtMinimum": "100",
-        "TurretTurnSpeedModifierAtMaximum": "100",
-        "TurretTurnSpeedModifierAtMinimum": "100",
-        "UseDeviationFromRelaxed": "true"
-       },
-       "checkpoint": {
-        "__owned_history_missing__": true
-       }
-      },
-      {
-       "path": [
-        "PhysicalState@SpinUp"
-       ],
-       "current": {
-        "InitialValue": "0",
-        "MaxValue": "100",
-        "MinValue": "0",
-        "Name": "SpinUp",
-        "RelaxedValue": "0"
-       },
-       "checkpoint": {
-        "__owned_history_missing__": true
-       }
-      },
-      {
-       "path": [
-        "ProductionTimeMultiplier@mediumbotplayer",
-        "Multiplier"
-       ],
-       "current": "110",
-       "checkpoint": "100"
-      },
-      {
-       "path": [
-        "ProductionTimeMultiplier@hardbotplayer",
-        "Multiplier"
-       ],
-       "current": "100",
-       "checkpoint": "90"
-      },
-      {
-       "path": [
-        "ReloadAmmoPool"
-       ],
-       "current": {
-        "__owned_history_missing__": true
-       },
-       "checkpoint": {
-        "Count": "1",
-        "Delay": "16",
-        "ResetOnFire": "True"
-       }
-      }
-     ],
-     "current_hash": "951d61ea00c4abac35d5cb3cfc61af772ee5007ebe0c8e1be689ab8ca5047f77"
-    },
-    "ra1_soviets_flaktruck": {
-     "changes": [
-      {
-       "checkpoint": {
-        "Modifier": "150"
-       },
-       "current": {
-        "__owned_history_missing__": true
-       },
-       "path": [
-        "DamageMultiplier@GlobalBuffs"
-       ]
       },
       {
        "checkpoint": {
@@ -8764,90 +8958,15 @@
       },
       {
        "path": [
-        "SpeedMultiplier@SONICDEBUFF"
+        "GrantConditionOnBotOwner@aimicro"
        ],
        "current": {
         "__owned_history_missing__": true
        },
        "checkpoint": {
-        "Modifier": "75",
-        "RequiresCondition": "SonicDebuff"
+        "Bots": "easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod",
+        "Condition": "botmicro"
        }
-      },
-      {
-       "path": [
-        "ProducibleWithLevel@spyvehicles",
-        "Prerequisites"
-       ],
-       "current": "vehicles_upgraded",
-       "checkpoint": "vehicles.upgraded"
-      },
-      {
-       "path": [
-        "ProductionTimeMultiplier@veryhardbotplayer",
-        "Multiplier"
-       ],
-       "current": "90",
-       "checkpoint": "80"
-      },
-      {
-       "path": [
-        "Cloak@TScloak",
-        "PauseOnCondition"
-       ],
-       "current": "cloak-force-disabled || base-reveal || disabled || blinded",
-       "checkpoint": "cloak-force-disabled || base-reveal || disabled"
-      },
-      {
-       "path": [
-        "DamageMultiplierProportionalToPhysicalState@Resonance"
-       ],
-       "current": {
-        "DamageMultiplierAtMaximum": "150",
-        "DamageMultiplierAtMinimum": "100",
-        "PhysicalStateName": "Resonance",
-        "RequiresCondition": "Resonating",
-        "UseDeviationFromRelaxed": "true"
-       },
-       "checkpoint": {
-        "__owned_history_missing__": true
-       }
-      },
-      {
-       "path": [
-        "DamageMultiplier@SONICDEBUFF"
-       ],
-       "current": {
-        "__owned_history_missing__": true
-       },
-       "checkpoint": {
-        "Modifier": "150",
-        "RequiresCondition": "SonicDebuff"
-       }
-      },
-      {
-       "path": [
-        "Mobile",
-        "PauseOnCondition"
-       ],
-       "current": "disabled || notmobile || blinded",
-       "checkpoint": "disabled || notmobile"
-      },
-      {
-       "path": [
-        "ProductionCostMultiplier@challengerbotplayer",
-        "Multiplier"
-       ],
-       "current": "85",
-       "checkpoint": "80"
-      },
-      {
-       "path": [
-        "ProductionTimeMultiplier@challengerbotplayer",
-        "Multiplier"
-       ],
-       "current": "70",
-       "checkpoint": "60"
       },
       {
        "path": [
@@ -8862,62 +8981,13 @@
       },
       {
        "path": [
-        "RangeMultiplier@blinded"
+        "GrantConditionOnPhysicalState@ResonanceDeadzone"
        ],
        "current": {
-        "__owned_history_missing__": true
-       },
-       "checkpoint": {
-        "Modifier": "20",
-        "RequiresCondition": "blinded"
-       }
-      },
-      {
-       "path": [
-        "ProductionTimeMultiplier@easiestbotplayer",
-        "Multiplier"
-       ],
-       "current": "140",
-       "checkpoint": "130"
-      },
-      {
-       "path": [
-        "ProductionCostMultiplier@cameogodbotplayer",
-        "Multiplier"
-       ],
-       "current": "75",
-       "checkpoint": "70"
-      },
-      {
-       "path": [
-        "ExternalCondition@SONICDEBUFF"
-       ],
-       "current": {
-        "__owned_history_missing__": true
-       },
-       "checkpoint": {
-        "Condition": "SonicDebuff"
-       }
-      },
-      {
-       "path": [
-        "ProductionCostMultiplier@hardbotplayer",
-        "Multiplier"
-       ],
-       "current": "100",
-       "checkpoint": "95"
-      },
-      {
-       "path": [
-        "PhysicalStateBar@ResonanceBar"
-       ],
-       "current": {
-        "DisplayWhenRelaxed": "false",
-        "NeutralColor": "808080",
+        "Condition": "ResonanceDeadzone",
+        "LowerValue": "0",
         "PhysicalStateName": "Resonance",
-        "PositiveColor": "0088FF",
-        "RequiresCondition": "!ResonanceDeadzone",
-        "ShowAbsoluteValues": "false"
+        "UpperValue": "199"
        },
        "checkpoint": {
         "__owned_history_missing__": true
@@ -8925,70 +8995,16 @@
       },
       {
        "path": [
-        "ProductionTimeMultiplier@brutalbotplayer",
-        "Multiplier"
-       ],
-       "current": "80",
-       "checkpoint": "70"
-      },
-      {
-       "path": [
-        "WithPhysicalStateColoredOverlay@Resonance"
+        "GrantConditionOnPhysicalState@ResonanceMax"
        ],
        "current": {
-        "BlendMode": "Multiply",
-        "LowerValue": "200",
-        "MaxColor": "0088FF40",
-        "MinColor": "0088FF08",
+        "Condition": "ResonanceMax",
+        "LowerValue": "20000",
         "PhysicalStateName": "Resonance",
         "UpperValue": "20000"
        },
        "checkpoint": {
         "__owned_history_missing__": true
-       }
-      },
-      {
-       "path": [
-        "ProductionTimeMultiplier@easybotplayer",
-        "Multiplier"
-       ],
-       "current": "120",
-       "checkpoint": "110"
-      },
-      {
-       "path": [
-        "ProductionCostMultiplier@unbeatablebotplayer",
-        "Multiplier"
-       ],
-       "current": "80",
-       "checkpoint": "75"
-      },
-      {
-       "path": [
-        "Repairable",
-        "RepairActors"
-       ],
-       "current": "td_gdi_repairfacility, td_nod_repairfacility, ra1_allies_servicedepot, ra1_soviets_servicedepot, japan_japaneseservicedepot, ra2_soviets_servicedepot, ra2_allies_servicedepot, asianalliance_servicedepot, latinsyndicate_syndicateservicedepot, ixian_repairpad, ordos_repairpad, ra2_ctoutp, ts_gdi_servicedepot, ts_nod_servicedepot, forgotten_servicedepot, cabal_servicedepot, plymouth_garage, eden_garage",
-       "checkpoint": "td_gdi_repairfacility, td_nod_repairfacility, ra1_allies_alliedservicedepot, ra1_soviets_servicedepot, japan_japaneseservicedepot, ra2_soviets_servicedepot, ra2_allies_servicedepot, asianalliance_servicedepot, latinsyndicate_syndicateservicedepot, ixian_repairpad, ordos_repairpad, ra2_ctoutp, ts_gdi_servicedepot, ts_nod_servicedepot, forgotten_servicedepot, cabal_servicedepot, plymouth_garage, eden_garage"
-      },
-      {
-       "path": [
-        "ProductionCostMultiplier@brutalbotplayer",
-        "Multiplier"
-       ],
-       "current": "90",
-       "checkpoint": "85"
-      },
-      {
-       "path": [
-        "GrantConditionOnBotOwner@aimicro"
-       ],
-       "current": {
-        "__owned_history_missing__": true
-       },
-       "checkpoint": {
-        "Bots": "easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod",
-        "Condition": "botmicro"
        }
       },
       {
@@ -9007,27 +9023,23 @@
       },
       {
        "path": [
-        "Cloak@TDcloak",
+        "Mobile",
         "PauseOnCondition"
        ],
-       "current": "cloak-force-disabled || base-reveal || disabled || blinded",
-       "checkpoint": "cloak-force-disabled || base-reveal || disabled"
+       "current": "disabled || notmobile || blinded",
+       "checkpoint": "disabled || notmobile"
       },
       {
        "path": [
-        "ProductionCostMultiplier@veryhardbotplayer",
-        "Multiplier"
+        "ModifiesCombatProportionalToPhysicalState@Blind"
        ],
-       "current": "95",
-       "checkpoint": "90"
-      },
-      {
-       "path": [
-        "ProductionCostMultiplier@mediumbotplayer",
-        "Multiplier"
-       ],
-       "current": "105",
-       "checkpoint": "100"
+       "current": {
+        "PhysicalStateName": "Blind",
+        "RangeTo": "20"
+       },
+       "checkpoint": {
+        "__owned_history_missing__": true
+       }
       },
       {
        "path": [
@@ -9052,37 +9064,15 @@
       },
       {
        "path": [
-        "ProductionTimeMultiplier@unbeatablebotplayer",
-        "Multiplier"
-       ],
-       "current": "60",
-       "checkpoint": "50"
-      },
-      {
-       "path": [
-        "ProductionTimeMultiplier@cameogodbotplayer",
-        "Multiplier"
-       ],
-       "current": "50",
-       "checkpoint": "40"
-      },
-      {
-       "path": [
-        "ProductionCostMultiplier@easybotplayer",
-        "Multiplier"
-       ],
-       "current": "110",
-       "checkpoint": "105"
-      },
-      {
-       "path": [
-        "GrantConditionOnPhysicalState@ResonanceMax"
+        "PhysicalStateBar@ResonanceBar"
        ],
        "current": {
-        "Condition": "ResonanceMax",
-        "LowerValue": "20000",
+        "DisplayWhenRelaxed": "false",
+        "NeutralColor": "808080",
         "PhysicalStateName": "Resonance",
-        "UpperValue": "20000"
+        "PositiveColor": "0088FF",
+        "RequiresCondition": "!ResonanceDeadzone",
+        "ShowAbsoluteValues": "false"
        },
        "checkpoint": {
         "__owned_history_missing__": true
@@ -9090,63 +9080,35 @@
       },
       {
        "path": [
-        "BotRoles"
+        "ProducibleWithLevel@spyvehicles",
+        "Prerequisites"
        ],
-       "current": {
-        "Roles": "guerrilla"
-       },
-       "checkpoint": {
-        "__owned_history_missing__": true
-       }
+       "current": "vehicles_upgraded",
+       "checkpoint": "vehicles.upgraded"
       },
       {
        "path": [
-        "AttackTurreted",
-        "PauseOnCondition"
-       ],
-       "current": "disabled || blinded",
-       "checkpoint": "disabled"
-      },
-      {
-       "path": [
-        "WithColoredOverlay@SONICDEBUFF"
-       ],
-       "current": {
-        "__owned_history_missing__": true
-       },
-       "checkpoint": {
-        "Color": "0088FF40",
-        "Multiply": "true",
-        "RequiresCondition": "SonicDebuff"
-       }
-      },
-      {
-       "path": [
-        "ProductionTimeMultiplier@veryeasybotplayer",
+        "ProductionCostMultiplier@brutalbotplayer",
         "Multiplier"
        ],
-       "current": "130",
-       "checkpoint": "120"
+       "current": "90",
+       "checkpoint": "85"
       },
       {
        "path": [
-        "ProductionCostMultiplier@veryeasybotplayer",
+        "ProductionCostMultiplier@cameogodbotplayer",
         "Multiplier"
        ],
-       "current": "115",
-       "checkpoint": "110"
+       "current": "75",
+       "checkpoint": "70"
       },
       {
        "path": [
-        "ModifiesCombatProportionalToPhysicalState@Blind"
+        "ProductionCostMultiplier@challengerbotplayer",
+        "Multiplier"
        ],
-       "current": {
-        "PhysicalStateName": "Blind",
-        "RangeTo": "20"
-       },
-       "checkpoint": {
-        "__owned_history_missing__": true
-       }
+       "current": "85",
+       "checkpoint": "80"
       },
       {
        "path": [
@@ -9158,25 +9120,162 @@
       },
       {
        "path": [
-        "GrantConditionOnPhysicalState@ResonanceDeadzone"
+        "ProductionCostMultiplier@easybotplayer",
+        "Multiplier"
+       ],
+       "current": "110",
+       "checkpoint": "105"
+      },
+      {
+       "path": [
+        "ProductionCostMultiplier@hardbotplayer",
+        "Multiplier"
+       ],
+       "current": "100",
+       "checkpoint": "95"
+      },
+      {
+       "path": [
+        "ProductionCostMultiplier@mediumbotplayer",
+        "Multiplier"
+       ],
+       "current": "105",
+       "checkpoint": "100"
+      },
+      {
+       "path": [
+        "ProductionCostMultiplier@unbeatablebotplayer",
+        "Multiplier"
+       ],
+       "current": "80",
+       "checkpoint": "75"
+      },
+      {
+       "path": [
+        "ProductionCostMultiplier@veryeasybotplayer",
+        "Multiplier"
+       ],
+       "current": "115",
+       "checkpoint": "110"
+      },
+      {
+       "path": [
+        "ProductionCostMultiplier@veryhardbotplayer",
+        "Multiplier"
+       ],
+       "current": "95",
+       "checkpoint": "90"
+      },
+      {
+       "path": [
+        "ProductionTimeMultiplier@brutalbotplayer",
+        "Multiplier"
+       ],
+       "current": "80",
+       "checkpoint": "70"
+      },
+      {
+       "path": [
+        "ProductionTimeMultiplier@cameogodbotplayer",
+        "Multiplier"
+       ],
+       "current": "50",
+       "checkpoint": "40"
+      },
+      {
+       "path": [
+        "ProductionTimeMultiplier@challengerbotplayer",
+        "Multiplier"
+       ],
+       "current": "70",
+       "checkpoint": "60"
+      },
+      {
+       "path": [
+        "ProductionTimeMultiplier@easiestbotplayer",
+        "Multiplier"
+       ],
+       "current": "140",
+       "checkpoint": "130"
+      },
+      {
+       "path": [
+        "ProductionTimeMultiplier@easybotplayer",
+        "Multiplier"
+       ],
+       "current": "120",
+       "checkpoint": "110"
+      },
+      {
+       "path": [
+        "ProductionTimeMultiplier@hardbotplayer",
+        "Multiplier"
+       ],
+       "current": "100",
+       "checkpoint": "90"
+      },
+      {
+       "path": [
+        "ProductionTimeMultiplier@mediumbotplayer",
+        "Multiplier"
+       ],
+       "current": "110",
+       "checkpoint": "100"
+      },
+      {
+       "path": [
+        "ProductionTimeMultiplier@unbeatablebotplayer",
+        "Multiplier"
+       ],
+       "current": "60",
+       "checkpoint": "50"
+      },
+      {
+       "path": [
+        "ProductionTimeMultiplier@veryeasybotplayer",
+        "Multiplier"
+       ],
+       "current": "130",
+       "checkpoint": "120"
+      },
+      {
+       "path": [
+        "ProductionTimeMultiplier@veryhardbotplayer",
+        "Multiplier"
+       ],
+       "current": "90",
+       "checkpoint": "80"
+      },
+      {
+       "path": [
+        "RangeMultiplier@blinded"
        ],
        "current": {
-        "Condition": "ResonanceDeadzone",
-        "LowerValue": "0",
-        "PhysicalStateName": "Resonance",
-        "UpperValue": "199"
+        "__owned_history_missing__": true
        },
        "checkpoint": {
+        "Modifier": "20",
+        "RequiresCondition": "blinded"
+       }
+      },
+      {
+       "path": [
+        "RangedGpsDot"
+       ],
+       "checkpoint": {
+        "Sequence": "Vehicle"
+       },
+       "current": {
         "__owned_history_missing__": true
        }
       },
       {
        "path": [
-        "Valued",
-        "Cost"
+        "Repairable",
+        "RepairActors"
        ],
-       "current": "980",
-       "checkpoint": "800"
+       "current": "td_gdi_repairfacility, td_nod_repairfacility, ra1_allies_servicedepot, ra1_soviets_servicedepot, japan_japaneseservicedepot, ra2_soviets_servicedepot, ra2_allies_servicedepot, asianalliance_servicedepot, latinsyndicate_syndicateservicedepot, ixian_repairpad, ordos_repairpad, ra2_ctoutp, ts_gdi_servicedepot, ts_nod_servicedepot, forgotten_servicedepot, cabal_servicedepot, plymouth_garage, eden_garage",
+       "checkpoint": "td_gdi_repairfacility, td_nod_repairfacility, ra1_allies_alliedservicedepot, ra1_soviets_servicedepot, japan_japaneseservicedepot, ra2_soviets_servicedepot, ra2_allies_servicedepot, asianalliance_servicedepot, latinsyndicate_syndicateservicedepot, ixian_repairpad, ordos_repairpad, ra2_ctoutp, ts_gdi_servicedepot, ts_nod_servicedepot, forgotten_servicedepot, cabal_servicedepot, plymouth_garage, eden_garage"
       },
       {
        "path": [
@@ -9202,25 +9301,93 @@
       },
       {
        "path": [
-        "ProductionTimeMultiplier@mediumbotplayer",
-        "Multiplier"
+        "SpeedMultiplier@SONICDEBUFF"
        ],
-       "current": "110",
-       "checkpoint": "100"
+       "current": {
+        "__owned_history_missing__": true
+       },
+       "checkpoint": {
+        "Modifier": "75",
+        "RequiresCondition": "SonicDebuff"
+       }
       },
       {
        "path": [
-        "ProductionTimeMultiplier@hardbotplayer",
-        "Multiplier"
+        "Valued",
+        "Cost"
        ],
-       "current": "100",
-       "checkpoint": "90"
+       "current": "980",
+       "checkpoint": "800"
+      },
+      {
+       "path": [
+        "WithColoredOverlay@SONICDEBUFF"
+       ],
+       "current": {
+        "__owned_history_missing__": true
+       },
+       "checkpoint": {
+        "Color": "0088FF40",
+        "Multiply": "true",
+        "RequiresCondition": "SonicDebuff"
+       }
+      },
+      {
+       "path": [
+        "WithPhysicalStateColoredOverlay@Resonance"
+       ],
+       "current": {
+        "BlendMode": "Multiply",
+        "LowerValue": "200",
+        "MaxColor": "0088FF40",
+        "MinColor": "0088FF08",
+        "PhysicalStateName": "Resonance",
+        "UpperValue": "20000"
+       },
+       "checkpoint": {
+        "__owned_history_missing__": true
+       }
       }
      ],
-     "current_hash": "3b0e3014cb5442dcda9f74288fb73bcd6cbdcb82064f4baab561d731a17ddc10"
+     "current_hash": "e1d8d81318b608629ee69cbb44600e54e806ef599322f8b8782da5c293d84acd"
     },
     "ra1_soviets_monstertank": {
      "changes": [
+      {
+       "path": [
+        "AttackTurreted",
+        "PauseOnCondition"
+       ],
+       "current": "disabled || blinded",
+       "checkpoint": "disabled"
+      },
+      {
+       "path": [
+        "CameoRangedGpsDot"
+       ],
+       "checkpoint": {
+        "__owned_history_missing__": true
+       },
+       "current": {
+        "Sequence": "Vehicle"
+       }
+      },
+      {
+       "path": [
+        "Cloak@TDcloak",
+        "PauseOnCondition"
+       ],
+       "current": "cloak-force-disabled || base-reveal || disabled || blinded",
+       "checkpoint": "cloak-force-disabled || base-reveal || disabled"
+      },
+      {
+       "path": [
+        "Cloak@TScloak",
+        "PauseOnCondition"
+       ],
+       "current": "cloak-force-disabled || base-reveal || disabled || blinded",
+       "checkpoint": "cloak-force-disabled || base-reveal || disabled"
+      },
       {
        "checkpoint": {
         "Modifier": "150"
@@ -9242,6 +9409,44 @@
        "path": [
         "DamageMultiplier@PromotionUnit"
        ]
+      },
+      {
+       "path": [
+        "DamageMultiplier@SONICDEBUFF"
+       ],
+       "current": {
+        "__owned_history_missing__": true
+       },
+       "checkpoint": {
+        "Modifier": "150",
+        "RequiresCondition": "SonicDebuff"
+       }
+      },
+      {
+       "path": [
+        "DamageMultiplierProportionalToPhysicalState@Resonance"
+       ],
+       "current": {
+        "DamageMultiplierAtMaximum": "150",
+        "DamageMultiplierAtMinimum": "100",
+        "PhysicalStateName": "Resonance",
+        "RequiresCondition": "Resonating",
+        "UseDeviationFromRelaxed": "true"
+       },
+       "checkpoint": {
+        "__owned_history_missing__": true
+       }
+      },
+      {
+       "path": [
+        "ExternalCondition@SONICDEBUFF"
+       ],
+       "current": {
+        "__owned_history_missing__": true
+       },
+       "checkpoint": {
+        "Condition": "SonicDebuff"
+       }
       },
       {
        "checkpoint": {
@@ -9278,50 +9483,13 @@
       },
       {
        "path": [
-        "SpeedMultiplier@SONICDEBUFF"
+        "GrantConditionOnPhysicalState@ResonanceDeadzone"
        ],
        "current": {
-        "__owned_history_missing__": true
-       },
-       "checkpoint": {
-        "Modifier": "75",
-        "RequiresCondition": "SonicDebuff"
-       }
-      },
-      {
-       "path": [
-        "ProducibleWithLevel@spyvehicles",
-        "Prerequisites"
-       ],
-       "current": "vehicles_upgraded",
-       "checkpoint": "vehicles.upgraded"
-      },
-      {
-       "path": [
-        "ProductionTimeMultiplier@veryhardbotplayer",
-        "Multiplier"
-       ],
-       "current": "90",
-       "checkpoint": "80"
-      },
-      {
-       "path": [
-        "Cloak@TScloak",
-        "PauseOnCondition"
-       ],
-       "current": "cloak-force-disabled || base-reveal || disabled || blinded",
-       "checkpoint": "cloak-force-disabled || base-reveal || disabled"
-      },
-      {
-       "path": [
-        "DamageMultiplierProportionalToPhysicalState@Resonance"
-       ],
-       "current": {
-        "DamageMultiplierAtMaximum": "150",
-        "DamageMultiplierAtMinimum": "100",
+        "Condition": "ResonanceDeadzone",
+        "LowerValue": "0",
         "PhysicalStateName": "Resonance",
-        "RequiresCondition": "Resonating",
-        "UseDeviationFromRelaxed": "true"
+        "UpperValue": "199"
        },
        "checkpoint": {
         "__owned_history_missing__": true
@@ -9329,158 +9497,17 @@
       },
       {
        "path": [
-        "DamageMultiplier@SONICDEBUFF"
+        "GrantConditionOnPhysicalState@ResonanceMax"
        ],
        "current": {
-        "__owned_history_missing__": true
-       },
-       "checkpoint": {
-        "Modifier": "150",
-        "RequiresCondition": "SonicDebuff"
-       }
-      },
-      {
-       "path": [
-        "Mobile",
-        "PauseOnCondition"
-       ],
-       "current": "disabled || blinded",
-       "checkpoint": "disabled"
-      },
-      {
-       "path": [
-        "ProductionCostMultiplier@challengerbotplayer",
-        "Multiplier"
-       ],
-       "current": "85",
-       "checkpoint": "80"
-      },
-      {
-       "path": [
-        "ProductionTimeMultiplier@challengerbotplayer",
-        "Multiplier"
-       ],
-       "current": "70",
-       "checkpoint": "60"
-      },
-      {
-       "path": [
-        "RangeMultiplier@blinded"
-       ],
-       "current": {
-        "__owned_history_missing__": true
-       },
-       "checkpoint": {
-        "Modifier": "20",
-        "RequiresCondition": "blinded"
-       }
-      },
-      {
-       "path": [
-        "ProductionTimeMultiplier@easiestbotplayer",
-        "Multiplier"
-       ],
-       "current": "140",
-       "checkpoint": "130"
-      },
-      {
-       "path": [
-        "ProductionCostMultiplier@cameogodbotplayer",
-        "Multiplier"
-       ],
-       "current": "75",
-       "checkpoint": "70"
-      },
-      {
-       "path": [
-        "ExternalCondition@SONICDEBUFF"
-       ],
-       "current": {
-        "__owned_history_missing__": true
-       },
-       "checkpoint": {
-        "Condition": "SonicDebuff"
-       }
-      },
-      {
-       "path": [
-        "ProductionCostMultiplier@hardbotplayer",
-        "Multiplier"
-       ],
-       "current": "100",
-       "checkpoint": "95"
-      },
-      {
-       "path": [
-        "PhysicalStateBar@ResonanceBar"
-       ],
-       "current": {
-        "DisplayWhenRelaxed": "false",
-        "NeutralColor": "808080",
-        "PhysicalStateName": "Resonance",
-        "PositiveColor": "0088FF",
-        "RequiresCondition": "!ResonanceDeadzone",
-        "ShowAbsoluteValues": "false"
-       },
-       "checkpoint": {
-        "__owned_history_missing__": true
-       }
-      },
-      {
-       "path": [
-        "ProductionTimeMultiplier@brutalbotplayer",
-        "Multiplier"
-       ],
-       "current": "80",
-       "checkpoint": "70"
-      },
-      {
-       "path": [
-        "WithPhysicalStateColoredOverlay@Resonance"
-       ],
-       "current": {
-        "BlendMode": "Multiply",
-        "LowerValue": "200",
-        "MaxColor": "0088FF40",
-        "MinColor": "0088FF08",
+        "Condition": "ResonanceMax",
+        "LowerValue": "20000",
         "PhysicalStateName": "Resonance",
         "UpperValue": "20000"
        },
        "checkpoint": {
         "__owned_history_missing__": true
        }
-      },
-      {
-       "path": [
-        "ProductionTimeMultiplier@easybotplayer",
-        "Multiplier"
-       ],
-       "current": "120",
-       "checkpoint": "110"
-      },
-      {
-       "path": [
-        "ProductionCostMultiplier@unbeatablebotplayer",
-        "Multiplier"
-       ],
-       "current": "80",
-       "checkpoint": "75"
-      },
-      {
-       "path": [
-        "Repairable",
-        "RepairActors"
-       ],
-       "current": "td_gdi_repairfacility, td_nod_repairfacility, ra1_allies_servicedepot, ra1_soviets_servicedepot, japan_japaneseservicedepot, ra2_soviets_servicedepot, ra2_allies_servicedepot, asianalliance_servicedepot, latinsyndicate_syndicateservicedepot, ixian_repairpad, ordos_repairpad, ra2_ctoutp, ts_gdi_servicedepot, ts_nod_servicedepot, forgotten_servicedepot, cabal_servicedepot, plymouth_garage, eden_garage",
-       "checkpoint": "td_gdi_repairfacility, td_nod_repairfacility, ra1_allies_alliedservicedepot, ra1_soviets_servicedepot, japan_japaneseservicedepot, ra2_soviets_servicedepot, ra2_allies_servicedepot, asianalliance_servicedepot, latinsyndicate_syndicateservicedepot, ixian_repairpad, ordos_repairpad, ra2_ctoutp, ts_gdi_servicedepot, ts_nod_servicedepot, forgotten_servicedepot, cabal_servicedepot, plymouth_garage, eden_garage"
-      },
-      {
-       "path": [
-        "ProductionCostMultiplier@brutalbotplayer",
-        "Multiplier"
-       ],
-       "current": "90",
-       "checkpoint": "85"
       },
       {
        "path": [
@@ -9498,27 +9525,23 @@
       },
       {
        "path": [
-        "Cloak@TDcloak",
+        "Mobile",
         "PauseOnCondition"
        ],
-       "current": "cloak-force-disabled || base-reveal || disabled || blinded",
-       "checkpoint": "cloak-force-disabled || base-reveal || disabled"
+       "current": "disabled || blinded",
+       "checkpoint": "disabled"
       },
       {
        "path": [
-        "ProductionCostMultiplier@veryhardbotplayer",
-        "Multiplier"
+        "ModifiesCombatProportionalToPhysicalState@Blind"
        ],
-       "current": "95",
-       "checkpoint": "90"
-      },
-      {
-       "path": [
-        "ProductionCostMultiplier@mediumbotplayer",
-        "Multiplier"
-       ],
-       "current": "105",
-       "checkpoint": "100"
+       "current": {
+        "PhysicalStateName": "Blind",
+        "RangeTo": "20"
+       },
+       "checkpoint": {
+        "__owned_history_missing__": true
+       }
       },
       {
        "path": [
@@ -9543,37 +9566,15 @@
       },
       {
        "path": [
-        "ProductionTimeMultiplier@unbeatablebotplayer",
-        "Multiplier"
-       ],
-       "current": "60",
-       "checkpoint": "50"
-      },
-      {
-       "path": [
-        "ProductionTimeMultiplier@cameogodbotplayer",
-        "Multiplier"
-       ],
-       "current": "50",
-       "checkpoint": "40"
-      },
-      {
-       "path": [
-        "ProductionCostMultiplier@easybotplayer",
-        "Multiplier"
-       ],
-       "current": "110",
-       "checkpoint": "105"
-      },
-      {
-       "path": [
-        "GrantConditionOnPhysicalState@ResonanceMax"
+        "PhysicalStateBar@ResonanceBar"
        ],
        "current": {
-        "Condition": "ResonanceMax",
-        "LowerValue": "20000",
+        "DisplayWhenRelaxed": "false",
+        "NeutralColor": "808080",
         "PhysicalStateName": "Resonance",
-        "UpperValue": "20000"
+        "PositiveColor": "0088FF",
+        "RequiresCondition": "!ResonanceDeadzone",
+        "ShowAbsoluteValues": "false"
        },
        "checkpoint": {
         "__owned_history_missing__": true
@@ -9581,52 +9582,35 @@
       },
       {
        "path": [
-        "AttackTurreted",
-        "PauseOnCondition"
+        "ProducibleWithLevel@spyvehicles",
+        "Prerequisites"
        ],
-       "current": "disabled || blinded",
-       "checkpoint": "disabled"
+       "current": "vehicles_upgraded",
+       "checkpoint": "vehicles.upgraded"
       },
       {
        "path": [
-        "WithColoredOverlay@SONICDEBUFF"
-       ],
-       "current": {
-        "__owned_history_missing__": true
-       },
-       "checkpoint": {
-        "Color": "0088FF40",
-        "Multiply": "true",
-        "RequiresCondition": "SonicDebuff"
-       }
-      },
-      {
-       "path": [
-        "ProductionTimeMultiplier@veryeasybotplayer",
+        "ProductionCostMultiplier@brutalbotplayer",
         "Multiplier"
        ],
-       "current": "130",
-       "checkpoint": "120"
+       "current": "90",
+       "checkpoint": "85"
       },
       {
        "path": [
-        "ProductionCostMultiplier@veryeasybotplayer",
+        "ProductionCostMultiplier@cameogodbotplayer",
         "Multiplier"
        ],
-       "current": "115",
-       "checkpoint": "110"
+       "current": "75",
+       "checkpoint": "70"
       },
       {
        "path": [
-        "ModifiesCombatProportionalToPhysicalState@Blind"
+        "ProductionCostMultiplier@challengerbotplayer",
+        "Multiplier"
        ],
-       "current": {
-        "PhysicalStateName": "Blind",
-        "RangeTo": "20"
-       },
-       "checkpoint": {
-        "__owned_history_missing__": true
-       }
+       "current": "85",
+       "checkpoint": "80"
       },
       {
        "path": [
@@ -9638,17 +9622,162 @@
       },
       {
        "path": [
-        "GrantConditionOnPhysicalState@ResonanceDeadzone"
+        "ProductionCostMultiplier@easybotplayer",
+        "Multiplier"
+       ],
+       "current": "110",
+       "checkpoint": "105"
+      },
+      {
+       "path": [
+        "ProductionCostMultiplier@hardbotplayer",
+        "Multiplier"
+       ],
+       "current": "100",
+       "checkpoint": "95"
+      },
+      {
+       "path": [
+        "ProductionCostMultiplier@mediumbotplayer",
+        "Multiplier"
+       ],
+       "current": "105",
+       "checkpoint": "100"
+      },
+      {
+       "path": [
+        "ProductionCostMultiplier@unbeatablebotplayer",
+        "Multiplier"
+       ],
+       "current": "80",
+       "checkpoint": "75"
+      },
+      {
+       "path": [
+        "ProductionCostMultiplier@veryeasybotplayer",
+        "Multiplier"
+       ],
+       "current": "115",
+       "checkpoint": "110"
+      },
+      {
+       "path": [
+        "ProductionCostMultiplier@veryhardbotplayer",
+        "Multiplier"
+       ],
+       "current": "95",
+       "checkpoint": "90"
+      },
+      {
+       "path": [
+        "ProductionTimeMultiplier@brutalbotplayer",
+        "Multiplier"
+       ],
+       "current": "80",
+       "checkpoint": "70"
+      },
+      {
+       "path": [
+        "ProductionTimeMultiplier@cameogodbotplayer",
+        "Multiplier"
+       ],
+       "current": "50",
+       "checkpoint": "40"
+      },
+      {
+       "path": [
+        "ProductionTimeMultiplier@challengerbotplayer",
+        "Multiplier"
+       ],
+       "current": "70",
+       "checkpoint": "60"
+      },
+      {
+       "path": [
+        "ProductionTimeMultiplier@easiestbotplayer",
+        "Multiplier"
+       ],
+       "current": "140",
+       "checkpoint": "130"
+      },
+      {
+       "path": [
+        "ProductionTimeMultiplier@easybotplayer",
+        "Multiplier"
+       ],
+       "current": "120",
+       "checkpoint": "110"
+      },
+      {
+       "path": [
+        "ProductionTimeMultiplier@hardbotplayer",
+        "Multiplier"
+       ],
+       "current": "100",
+       "checkpoint": "90"
+      },
+      {
+       "path": [
+        "ProductionTimeMultiplier@mediumbotplayer",
+        "Multiplier"
+       ],
+       "current": "110",
+       "checkpoint": "100"
+      },
+      {
+       "path": [
+        "ProductionTimeMultiplier@unbeatablebotplayer",
+        "Multiplier"
+       ],
+       "current": "60",
+       "checkpoint": "50"
+      },
+      {
+       "path": [
+        "ProductionTimeMultiplier@veryeasybotplayer",
+        "Multiplier"
+       ],
+       "current": "130",
+       "checkpoint": "120"
+      },
+      {
+       "path": [
+        "ProductionTimeMultiplier@veryhardbotplayer",
+        "Multiplier"
+       ],
+       "current": "90",
+       "checkpoint": "80"
+      },
+      {
+       "path": [
+        "RangeMultiplier@blinded"
        ],
        "current": {
-        "Condition": "ResonanceDeadzone",
-        "LowerValue": "0",
-        "PhysicalStateName": "Resonance",
-        "UpperValue": "199"
+        "__owned_history_missing__": true
        },
        "checkpoint": {
+        "Modifier": "20",
+        "RequiresCondition": "blinded"
+       }
+      },
+      {
+       "path": [
+        "RangedGpsDot"
+       ],
+       "checkpoint": {
+        "Sequence": "Vehicle"
+       },
+       "current": {
         "__owned_history_missing__": true
        }
+      },
+      {
+       "path": [
+        "Repairable",
+        "RepairActors"
+       ],
+       "current": "td_gdi_repairfacility, td_nod_repairfacility, ra1_allies_servicedepot, ra1_soviets_servicedepot, japan_japaneseservicedepot, ra2_soviets_servicedepot, ra2_allies_servicedepot, asianalliance_servicedepot, latinsyndicate_syndicateservicedepot, ixian_repairpad, ordos_repairpad, ra2_ctoutp, ts_gdi_servicedepot, ts_nod_servicedepot, forgotten_servicedepot, cabal_servicedepot, plymouth_garage, eden_garage",
+       "checkpoint": "td_gdi_repairfacility, td_nod_repairfacility, ra1_allies_alliedservicedepot, ra1_soviets_servicedepot, japan_japaneseservicedepot, ra2_soviets_servicedepot, ra2_allies_servicedepot, asianalliance_servicedepot, latinsyndicate_syndicateservicedepot, ixian_repairpad, ordos_repairpad, ra2_ctoutp, ts_gdi_servicedepot, ts_nod_servicedepot, forgotten_servicedepot, cabal_servicedepot, plymouth_garage, eden_garage"
       },
       {
        "path": [
@@ -9674,22 +9803,47 @@
       },
       {
        "path": [
-        "ProductionTimeMultiplier@mediumbotplayer",
-        "Multiplier"
+        "SpeedMultiplier@SONICDEBUFF"
        ],
-       "current": "110",
-       "checkpoint": "100"
+       "current": {
+        "__owned_history_missing__": true
+       },
+       "checkpoint": {
+        "Modifier": "75",
+        "RequiresCondition": "SonicDebuff"
+       }
       },
       {
        "path": [
-        "ProductionTimeMultiplier@hardbotplayer",
-        "Multiplier"
+        "WithColoredOverlay@SONICDEBUFF"
        ],
-       "current": "100",
-       "checkpoint": "90"
+       "current": {
+        "__owned_history_missing__": true
+       },
+       "checkpoint": {
+        "Color": "0088FF40",
+        "Multiply": "true",
+        "RequiresCondition": "SonicDebuff"
+       }
+      },
+      {
+       "path": [
+        "WithPhysicalStateColoredOverlay@Resonance"
+       ],
+       "current": {
+        "BlendMode": "Multiply",
+        "LowerValue": "200",
+        "MaxColor": "0088FF40",
+        "MinColor": "0088FF08",
+        "PhysicalStateName": "Resonance",
+        "UpperValue": "20000"
+       },
+       "checkpoint": {
+        "__owned_history_missing__": true
+       }
       }
      ],
-     "current_hash": "2c3f991ac55bc993f73ffaaeeee85916688efb65c5fb28a264ffe6f329ea5e78"
+     "current_hash": "274c0728da95261aea15c3137ae6dcdea8889d332e04f66686f06a4c2fe1d5f9"
     }
    },
    "resolved_weapons": {
@@ -16091,7 +16245,7 @@
        ]
       ]
      ],
-     "current_hash": "1c8c2060da87b20eab0a99783a9cb5be1dc9d0d85ca8b3ed01d84415c452f342"
+     "current_hash": "3bf0aedb0e8e065d7b88ad8b159a2e4725fab749bbdb8a4c04ebe3ea552cbfa4"
     },
     "ra1_soviets_monstertank_missile_tesla": {
      "checkpoint": [
@@ -17402,7 +17556,7 @@
        ]
       ]
      ],
-     "current_hash": "2b64ea2b0be93a98f360b5fc548664c897b3493bb09c7ac8806d1f58014ad2b5"
+     "current_hash": "bc97096ea30d9bb9d1e3ce2399d1e05be73ee6463af22801e620fcad70a1d387"
     },
     "ra1_soviets_monstertank_missile_thermobaric": {
      "checkpoint": [
@@ -19189,7 +19343,7 @@
        ]
       ]
      ],
-     "current_hash": "4d9dc3ce734412f005e795c4111e0ad7fb6534fca35fb4e5e7a074111bd1bc9a"
+     "current_hash": "bb445ef4fe50a6f5a3a3d69a7490db280a60733b20543f09f89881eb6db38969"
     }
    },
    "source_weapons": {
@@ -20291,7 +20445,7 @@
        ]
       ]
      ],
-     "current_hash": "1d6c4b46a9ad2d2f53707465b2ca93aeb2d3666654e55e5cb1be427be4acaf1c"
+     "current_hash": "7d51bd34edc7f74df47ad40d942acd42510f418aa20015bbddb1dc7c24af58df"
     },
     "ra1_soviets_monstertank_missile_tesla": {
      "checkpoint": [
@@ -20759,7 +20913,7 @@
        ]
       ]
      ],
-     "current_hash": "2b8be34ba32117e69d8f5b603539d8a14377d8d05da92ef59d47414d95466a9b"
+     "current_hash": "4df91d0035fec13b693177449d8503e55bff81d20d075b391741d34b0591ea3c"
     },
     "ra1_soviets_monstertank_missile_thermobaric": {
      "checkpoint": [
@@ -21430,7 +21584,7 @@
        ]
       ]
      ],
-     "current_hash": "10144e31ce2048738a3ce325556b49c1307da74b2264894f950b55c0d7879a6d"
+     "current_hash": "d51725407f13f944633fc8a9114f0cf73fa6e5bfb3e632f3b62122c868782847"
     }
    }
   },
@@ -21439,6 +21593,17 @@
    "resolved_actors": {
     "ra1_soviets_armoredyak": {
      "changes": [
+      {
+       "path": [
+        "CameoRangedGpsDot"
+       ],
+       "checkpoint": {
+        "__owned_history_missing__": true
+       },
+       "current": {
+        "Sequence": "Plane"
+       }
+      },
       {
        "checkpoint": {
         "Modifier": "90"
@@ -21526,9 +21691,20 @@
        "path": [
         "FirepowerMultiplier@PromotionUnit"
        ]
+      },
+      {
+       "path": [
+        "RangedGpsDot"
+       ],
+       "checkpoint": {
+        "Sequence": "Plane"
+       },
+       "current": {
+        "__owned_history_missing__": true
+       }
       }
      ],
-     "current_hash": "d05f49c60c36c5832a2fcbb7ed944d5f9bc207fca12911e368d43ef810195f79"
+     "current_hash": "42991a443c275bd1c1212790e0224d67db3fdc51e4b8012f430bda7adff32562"
     },
     "ra1_soviets_nuclearyak": {
      "changes": [
@@ -21539,6 +21715,17 @@
         "Armament@BOMBS",
         "Weapon"
        ]
+      },
+      {
+       "path": [
+        "CameoRangedGpsDot"
+       ],
+       "checkpoint": {
+        "__owned_history_missing__": true
+       },
+       "current": {
+        "Sequence": "Plane"
+       }
       },
       {
        "checkpoint": {
@@ -21638,9 +21825,20 @@
        "path": [
         "FirepowerMultiplier@PromotionUnit"
        ]
+      },
+      {
+       "path": [
+        "RangedGpsDot"
+       ],
+       "checkpoint": {
+        "Sequence": "Plane"
+       },
+       "current": {
+        "__owned_history_missing__": true
+       }
       }
      ],
-     "current_hash": "4c2be7f8ed690d9efc5712712b28b2a51a41cde575b7ffc771905f12cd734e37"
+     "current_hash": "912181974498bcf024ba6b7e3096016756a868dc0782db3eddf45f53db1c830b"
     },
     "ra1_soviets_su57attackbomber": {
      "changes": [
@@ -21659,6 +21857,17 @@
         "Armament@HE",
         "Weapon"
        ]
+      },
+      {
+       "path": [
+        "CameoRangedGpsDot"
+       ],
+       "checkpoint": {
+        "__owned_history_missing__": true
+       },
+       "current": {
+        "Sequence": "Plane"
+       }
       },
       {
        "checkpoint": {
@@ -21758,9 +21967,20 @@
        "path": [
         "FirepowerMultiplier@ra1_soviets_upgrade_thermobaricrockets"
        ]
+      },
+      {
+       "path": [
+        "RangedGpsDot"
+       ],
+       "checkpoint": {
+        "Sequence": "Plane"
+       },
+       "current": {
+        "__owned_history_missing__": true
+       }
       }
      ],
-     "current_hash": "f74f002c33eee95427ff04db58507786aaa18f92d734aaa176ed20597ab3cb08"
+     "current_hash": "0e8a092a09359d921d3881ecd110f53ef3a6c169f43b94a9bc9e06d960c096db"
     },
     "ra1_soviets_teslayak": {
      "changes": [
@@ -21787,6 +22007,17 @@
         "Armament@Tesla",
         "Weapon"
        ]
+      },
+      {
+       "path": [
+        "CameoRangedGpsDot"
+       ],
+       "checkpoint": {
+        "__owned_history_missing__": true
+       },
+       "current": {
+        "Sequence": "Plane"
+       }
       },
       {
        "checkpoint": {
@@ -21886,9 +22117,20 @@
        "path": [
         "FirepowerMultiplier@PromotionUnit"
        ]
+      },
+      {
+       "path": [
+        "RangedGpsDot"
+       ],
+       "checkpoint": {
+        "Sequence": "Plane"
+       },
+       "current": {
+        "__owned_history_missing__": true
+       }
       }
      ],
-     "current_hash": "0c4f300323132516ba46f52c0ab1b68e6c052d9dece4f7d143536d289c53d7a0"
+     "current_hash": "fe839a6ee8b5700d3055a8a484e7d70c7fc4a4f5b4262238993be88dc5cee6dd"
     },
     "ra1_soviets_yakscoutplane": {
      "changes": [
@@ -21899,6 +22141,17 @@
         "Armament@BOMBS",
         "Weapon"
        ]
+      },
+      {
+       "path": [
+        "CameoRangedGpsDot"
+       ],
+       "checkpoint": {
+        "__owned_history_missing__": true
+       },
+       "current": {
+        "Sequence": "Plane"
+       }
       },
       {
        "checkpoint": {
@@ -21976,9 +22229,20 @@
        "path": [
         "FirepowerMultiplier@GlobalBuffs"
        ]
+      },
+      {
+       "path": [
+        "RangedGpsDot"
+       ],
+       "checkpoint": {
+        "Sequence": "Plane"
+       },
+       "current": {
+        "__owned_history_missing__": true
+       }
       }
      ],
-     "current_hash": "c2fade437aba2bce0110b24e7153763083f8a7abdcb497e99570eea4c34154e9"
+     "current_hash": "3a2883d43177683a389d462e51af0e52c09dce82abe507967e86c762eea24f94"
     }
    },
    "resolved_weapons": {

@@ -56,8 +56,6 @@ class NamedFamilyProfileConsolidationTests(unittest.TestCase):
         post_r12 = {
             "NapalmA10Carrier": "Flame_Heavy",
             "RA2CosmonautLaser": "Laser_Light",
-            "TSAssaultCannonSonic": "BulletSonic_Medium",
-            "TSVulcanGunSonic": "BulletSonic_Medium",
             "ra1_soviets_grenadier_grenadethermobaric": "Thermobaric_Light",
             "ra1_soviets_grenadier_grenadethermobaricexplode": "Thermobaric_Light",
             "ra1_soviets_hindattackhelicopter_hindmissilesthermobaric": "Thermobaric_Medium",

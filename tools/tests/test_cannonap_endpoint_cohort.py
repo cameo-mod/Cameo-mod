@@ -16,6 +16,15 @@ class CannonAPEndpointCohort(unittest.TestCase):
 
     def test_every_endpoint_preserves_all_nonprofile_payload(self):
         self.assertEqual(len(ENDPOINT_COHORT), 8)
+        # The CannonAP_Light->CannonAP merge turned the endpoint mains into
+        # the folded percentage route (PercentageScale 2000); the unit values
+        # match the checkpoint-era fold exactly.
+        expected_units = {
+            'NaxiAntiTankCannon': 224, 'NaxiAntiTankCannonCorrosion': 224,
+            'NaxiAntiTankCannon_elite': 224, 'NaxiHetzerDestroyer': 320,
+            'NaxiHetzerDestroyerCorrosion': 320, 'NaxiHetzerDestroyer_elite': 320,
+            'RA2120xmm': 96, 'RA2120xmm_elite': 96,
+        }
         for name in sorted(ENDPOINT_COHORT):
             with self.subTest(weapon=name):
                 weapon = self.rules.resolve_weapon(current_endpoint_name(self.rules, name))
@@ -25,8 +34,9 @@ class CannonAPEndpointCohort(unittest.TestCase):
                      if n.key.startswith('Warhead')],
                     [n.key for n in weapon.children if n.key.startswith('Warhead')])
                 applications = pd.percentage_applications(weapon, 100000)
-                self.assertTrue(all(a['runtime_units'] == 0 for a in applications
-                                    if a['tag'] == 'CannonAP'))
+                self.assertEqual(
+                    [a['runtime_units'] for a in applications if a['tag'] == 'CannonAP'],
+                    [expected_units[name]], name)
 
     def test_historical_restore_rejects_reordered_events(self):
         for name in sorted(ALL_ENDPOINTS):
@@ -62,11 +72,11 @@ class CannonAPEndpointCohort(unittest.TestCase):
             weapon = self.rules.resolve_weapon(current_endpoint_name(self.rules, name))
             self.assertEqual(weapon.child('Warhead@LaserWeaponPercentage').get('Damage'), '3')
             folded = [a for a in pd.percentage_applications(weapon, 100000) if a['tag'] == 'CannonAP']
-            self.assertEqual([a['runtime_units'] for a in folded], [60])
+            self.assertEqual([a['runtime_units'] for a in folded], [120])
         cannon = self.rules.resolve_weapon(current_endpoint_name(self.rules, '2Inch')).child('Warhead@CannonAP')
         self.assertEqual(scale_length(int(cannon.get('Spread')), int(cannon.get('Heaviness'))), 300)
 
-    def test_skyhawk_plasma_alternate_is_exactly_isolated(self):
+    def test_skyhawk_plasma_alternate_folds_exactly_into_tesla(self):
         import json
         from dump_resolved import node_to_obj
         from miniyaml import Node
@@ -76,6 +86,29 @@ class CannonAPEndpointCohort(unittest.TestCase):
             return Node(row[0], row[1], [rebuild(c) for c in row[2]])
         before = rebuild(fixture['weapons']['SkyHawkPlasmaCannon'])
         current = self.rules.resolve_weapon('SkyHawkPlasmaCannon')
-        self.assertEqual(node_to_obj(before), node_to_obj(current))
-        self.assertEqual([n.key for n in before.children if n.key.startswith('Warhead')],
-                         [n.key for n in current.children if n.key.startswith('Warhead')])
+        old_obj, new_obj = node_to_obj(before), node_to_obj(current)
+        # The CannonAP_Light plasma alternate folded into Tesla_Heavy:
+        # 4000 + 12000 = 16000 with no other child added or removed.
+        folded_key = 'Warhead@CannonAP_Light'
+        self.assertEqual(
+            sorted(k for k in old_obj if k != folded_key),
+            sorted(new_obj))
+        self.assertEqual(
+            int(new_obj['Warhead@Tesla_Heavy']['Damage']),
+            int(old_obj['Warhead@Tesla_Heavy']['Damage'])
+            + int(old_obj[folded_key]['Damage']))
+        for key, old_child in old_obj.items():
+            if key == folded_key:
+                continue
+            if not isinstance(old_child, dict):
+                self.assertEqual(old_child, new_obj[key], key)
+                continue
+            new_child = dict(new_obj[key])
+            if key == 'Warhead@Tesla_Heavy':
+                new_child['Damage'] = old_child['Damage']
+            # Versus tables legitimately gained the armor-class expansion and
+            # the ladder retune; every other field is preserved verbatim.
+            for versus_key in ('Versus', 'PercentageVersus'):
+                old_child.pop(versus_key, None)
+                new_child.pop(versus_key, None)
+            self.assertEqual(old_child, new_child, key)

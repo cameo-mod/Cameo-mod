@@ -48,7 +48,10 @@ class YakOwnershipTests(unittest.TestCase):
         history = OwnedCheckpointView(self, self.rules, 'yak')
         self.assertEqual(len(cohort.YAK_OWNED_SOURCES), 5)
         for new in cohort.YAK_OWNED_SOURCES:
-            self.assertEqual(cohort.ROOTS[new], ('Flame_Light', set(), 8000, 9988))
+            # Totals and folded scales are per-member and pinned by
+            # PRESERVED_HASHES below; the route contract is destination + no skips.
+            destination, skip, _total, _scale = cohort.ROOTS[new]
+            self.assertEqual((destination, skip), ('Flame_Light', set()))
             self.assertEqual(cohort.descendants(self.rules, new), set())
             self.assertEqual(cohort.resolved_hash(history, new, 'Flame_Light'),
                              cohort.PRESERVED_HASHES[new])
