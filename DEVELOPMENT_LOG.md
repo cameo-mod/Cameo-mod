@@ -1,3 +1,26 @@
+# 2026-10-08 — Devin-Architect: comparator fail-closed hardening (INCOMPLETE_CAPTURE)
+
+*Devin-Architect.* Sol's re-review request added two requirements beyond R4/R5:
+truncated packets must fail closed, and empty/incomplete captures must never
+count as proof. Both implemented on top of `f2e7396be`:
+
+- **Truncation detection**: `extract()` now tracks record-header short reads,
+  negative/overrunning packet lengths, and a missing `-1` stream terminator —
+  any of these sets `incomplete`. (Subtlety: the terminator is a lone 4-byte
+  `-1`, so the header check must read `client` before requiring 8 bytes.)
+- **Empty-capture guard**: `len(records) == 0` on either side is treated as
+  no-evidence, not identity.
+- New verdict `INCOMPLETE_CAPTURE` (exit 4): emitted whenever a capture is
+  truncated or carries zero gameplay records and content is otherwise equal —
+  a cut-short or empty file can never yield `IDENTICAL`. `DIVERGENT` still wins
+  when content genuinely differs (truncation noted in the line).
+- Packets shorter than 4 bytes (can't hold a frame field) now count as unparsed
+  tails instead of being silently skipped.
+- Regressions: `test_empty_capture_is_not_proof`,
+  `test_truncated_capture_is_not_proof`, `test_missing_terminator_is_not_proof`
+  → 10/10 pass; real replays re-verified (fixed pair IDENTICAL_TAIL_FLUSH,
+  pre-fix pair DIVERGENT@f16).
+
 # 2026-10-08 — Devin-Architect: comparator R4/R5 repair (review round 2)
 
 *Devin-Architect.* Bounded re-review found two real defects in `order_stream_diff.py`

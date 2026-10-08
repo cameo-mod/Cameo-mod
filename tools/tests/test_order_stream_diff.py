@@ -86,3 +86,30 @@ def test_trailing_orders_not_flush(tmp_path):
     a = [sync_pkt(1)]
     b = [sync_pkt(1), order_pkt(3, ('Stop', 0x80, 9))]
     assert verdict(a, b, tmp_path) == 1
+
+
+def test_empty_capture_is_not_proof(tmp_path):
+    pa, pb = tmp_path / 'a.orarep', tmp_path / 'b.orarep'
+    write_replay(pa, [])
+    write_replay(pb, [])
+    assert osd.main([str(pa), str(pb)]) == 4
+
+
+def test_truncated_capture_is_not_proof(tmp_path):
+    # Record header claims a longer packet than the file holds: cut short.
+    pa, pb = tmp_path / 'a.orarep', tmp_path / 'b.orarep'
+    good = struct.pack('<ii', 0, len(sync_pkt(1))) + sync_pkt(1) \
+        + struct.pack('<i', -1)
+    # A's capture is cut mid-record before the terminator ever arrives.
+    pa.write_bytes(struct.pack('<ii', 0, len(sync_pkt(1))) + sync_pkt(1)
+                   + struct.pack('<ii', 0, 999) + sync_pkt(2)[:6])
+    pb.write_bytes(good)
+    assert osd.main([str(pa), str(pb)]) == 4
+
+
+def test_missing_terminator_is_not_proof(tmp_path):
+    pa, pb = tmp_path / 'a.orarep', tmp_path / 'b.orarep'
+    body = struct.pack('<ii', 0, len(sync_pkt(1))) + sync_pkt(1)
+    pa.write_bytes(body)            # no -1 terminator
+    pb.write_bytes(body + struct.pack('<i', -1))
+    assert osd.main([str(pa), str(pb)]) == 4

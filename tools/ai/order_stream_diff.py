@@ -22,7 +22,8 @@
 # downgrades the verdict to UNPARSED_TAILS (fail closed; exit 3).
 #
 # Verdicts: IDENTICAL (0) / IDENTICAL_TAIL_FLUSH (0) / DIVERGENT (1) /
-# UNPARSED_TAILS (3) / usage error (2).
+# usage error (2) / UNPARSED_TAILS (3) / INCOMPLETE_CAPTURE (4 — a truncated
+# or empty capture is never counted as proof).
 #
 # Usage:
 #   order_stream_diff.py A.orarep B.orarep [--pregame] [--ignore-client]
@@ -160,22 +161,40 @@ def parse_orders(pkt):
 
 
 def extract(path, pregame, ignore_client, ignore_synchash):
-    """Return (canonical records, unparsed_tail_count) for one .orarep file."""
+    """Return (canonical records, unparsed_tail_count, incomplete) for one file.
+
+    incomplete is set when the capture itself is cut short — a short record
+    header, a packet length overrunning the file, or a missing -1 terminator —
+    so an incomplete capture can never be counted as proof.
+    """
     with open(path, 'rb') as f:
         data = f.read()
     records = []
     unparsed = 0
+    incomplete = False
+    terminated = False
     p = 0
     while p < len(data):
+        if p + 4 > len(data):
+            incomplete = True
+            break
         client, = struct.unpack_from('<i', data, p)
         p += 4
         if client == -1:
+            terminated = True
+            break
+        if p + 4 > len(data):
+            incomplete = True
             break
         plen, = struct.unpack_from('<i', data, p)
         p += 4
+        if plen < 0 or p + plen > len(data):
+            incomplete = True
+            break
         pkt = data[p:p + plen]
         p += plen
         if len(pkt) < 4:
+            unparsed += 1
             continue
         frame, = struct.unpack_from('<i', pkt, 0)
         if not pregame and frame <= 0:
@@ -194,7 +213,9 @@ def extract(path, pregame, ignore_client, ignore_synchash):
             records.append(head + (frame, 'ORDERS', tuple(orders)))
         elif len(pkt) > 4:
             records.append(head + (frame, 'OTHER', pkt[4:].hex()))
-    return records, unparsed
+    if not terminated:
+        incomplete = True
+    return records, unparsed, incomplete
 
 
 def describe(rec):
@@ -265,10 +286,13 @@ def main(argv):
 
     streams = {}
     tails = {}
+    incomplete = {}
     for path in args:
-        recs, tail_count = extract(path, pregame, ignore_client, ignore_synchash)
+        recs, tail_count, inc = extract(path, pregame, ignore_client,
+                                        ignore_synchash)
         streams[path] = recs
         tails[path] = tail_count
+        incomplete[path] = inc
     digests = {path: hashlib.sha256(repr(recs).encode()).hexdigest()[:16]
                for path, recs in streams.items()}
 
@@ -276,11 +300,34 @@ def main(argv):
     ra, rb = streams[a], streams[b]
     result = {'records': {a: len(ra), b: len(rb)},
               'unparsed_tails': tails,
+              'incomplete': incomplete,
               'sha256_16': digests}
 
     fmd = frame_multiset_diff(ra, rb)
-    tail_note = (f"; unparsed packet tails: {tails[a]}/{tails[b]}"
-                 if tails[a] or tails[b] else "")
+    if fmd is not None:
+        first_frame, only_a, only_b, trailing = fmd
+    else:
+        first_frame = only_a = only_b = None
+        trailing = False
+    divergent = fmd is not None and not trailing
+
+    if not divergent and (incomplete[a] or incomplete[b]
+                          or len(ra) == 0 or len(rb) == 0):
+        # An empty or cut-short capture is never proof of identity.
+        result['verdict'] = 'INCOMPLETE_CAPTURE'
+        which = []
+        if len(ra) == 0:
+            which.append('A has no gameplay records')
+        if len(rb) == 0:
+            which.append('B has no gameplay records')
+        if incomplete[a]:
+            which.append('A file is truncated')
+        if incomplete[b]:
+            which.append('B file is truncated')
+        print('INCOMPLETE_CAPTURE — ' + '; '.join(which) + '.')
+        if want_json:
+            print(json.dumps(result))
+        return 4
     if fmd is None:
         if tails[a] or tails[b]:
             # Fail closed: the bytes were preserved in the comparison but their
@@ -299,7 +346,6 @@ def main(argv):
             print(json.dumps(result))
         return 0
 
-    first_frame, only_a, only_b, trailing = fmd
     if trailing and not (tails[a] or tails[b]):
         result['verdict'] = 'IDENTICAL_TAIL_FLUSH'
         result['tail_flush_frame'] = first_frame
@@ -324,8 +370,11 @@ def main(argv):
 
     result['verdict'] = 'DIVERGENT'
     result['first_diff_frame'] = first_frame
+    inc = '; ' + '; '.join(
+        s for s in ('A truncated' if incomplete[a] else '',
+                    'B truncated' if incomplete[b] else '') if s)
     print(f"DIVERGENT at frame {first_frame} "
-          f"(of {len(ra)}/{len(rb)} records), sha256/16 {digests[a]} vs {digests[b]}")
+          f"(of {len(ra)}/{len(rb)} records), sha256/16 {digests[a]} vs {digests[b]}{inc}")
     for k in only_a:
         print(f"  only-A: {k[:240]}")
     for k in only_b:
