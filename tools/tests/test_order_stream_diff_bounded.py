@@ -279,13 +279,15 @@ def test_mask_without_combatant_bit_fails(mapdir, tmp_path):
     assert code == 5 and res['verdict'] == 'TERMINAL_MASK_MISMATCH'
 
 
-def test_trailer_lost_without_mask_bit_fails(mapdir, tmp_path):
-    # Bidirectional: trailer Lost but mask bit clear on the lobby slot.
+def test_trailer_lost_without_mask_bit_ok(mapdir, tmp_path):
+    # Trailer->mask is NOT required: a lobby player's Outcome can resolve
+    # Lost during post-decision teardown after the last captured sync —
+    # 'row Lost, bit clear' is legitimate, not a mismatch (Integrator note).
     pa, pb = tmp_path / 'a.orarep', tmp_path / 'b.orarep'
     write_replay(pa, base_stream(50, 0x04))   # BotA lost only, host bit clear
     write_replay(pb, base_stream(50, 0x04))
     res, code = osdb.run(str(pa), str(pb), mapdir, 1)
-    assert code == 5 and res['verdict'] == 'TERMINAL_MASK_MISMATCH'
+    assert code == 0
 
 
 def test_mask_won_host_variant(mapdir, tmp_path):
@@ -366,7 +368,7 @@ def test_map_side_bot_roster_projection(mapdir):
     assert osdb.verify_mask(0x18, layout, row_lost)[0]   # BotB + host Lost
     assert not osdb.verify_mask(0x14, layout, row_won)[0]  # bit4 set, says Won
     assert not osdb.verify_mask(0x10, layout, row_lost)[0]  # no combatant bit
-    assert not osdb.verify_mask(0x04, layout, row_lost)[0]  # Lost but bit clear
+    assert osdb.verify_mask(0x04, layout, row_lost)[0]   # Lost row, bit clear
     assert osdb.verify_mask(0x04, layout, row_won)[0]    # consistent Won host
 
 

@@ -14,8 +14,11 @@ untouched and imported as a library for the wire parse).
   [!Playable map PlayerReferences] ++ [lobby clients] ++ [Everyone].
   Map-side bots (Playable: False + Bot: hard) occupy mask slots but are
   absent from replay trailers — the roster is reconstructed from the
-  cell's variant `map.yaml`, trailer rows are validated positionally with
-  a bidirectional Lost↔bit consistency check. Combatants = bot map refs;
+  cell's variant `map.yaml`; trailer rows validated positionally —
+  mask→trailer strict (set bit requires Outcome Lost), trailer→mask NOT
+  required (outcome can resolve during post-decision teardown after the
+  last captured sync — Integrator's outcome-vs-WinState timing finding).
+  Combatants = bot map refs;
   terminality requires >=1 combatant Lost bit (1v1 scope, fail-closed on
   other topologies) + nonzero FinalGameTick + all trailer outcomes
   resolved.

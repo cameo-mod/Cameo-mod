@@ -224,15 +224,20 @@ def world_player_layout(refs, n_trailer_players):
 
 def verify_mask(m_term, layout, trailer_players):
     """Project the terminal mask onto the reconstructed roster.
-    Returns (ok, detail)."""
+    Returns (ok, detail).
+
+    Mask->trailer direction is strict: a set bit on a lobby slot requires
+    Outcome Lost (the server recorded WinState=Lost in-band).
+    Trailer->mask is NOT required: SetPlayerDefeat can resolve a lobby
+    player's Outcome during post-decision teardown after the last captured
+    sync, so 'row Lost but bit clear' is a legitimate post-window
+    resolution, not a mismatch (Integrator's outcome-vs-WinState timing
+    note). Noncombatant map-ref bits are unchecked — no provable invariant."""
     bits = [i for i in range(64) if m_term & (1 << i)]
     combatants = [i for i, e in enumerate(layout) if e['combatant']]
     if len(combatants) != 2:
         return False, (f"unsupported roster topology: {len(combatants)} "
                        f"combatant slots (spec scope is 1v1 elimination)")
-    # Trailer rows: resolve combatant status via the map slot the client
-    # occupies — under this harness the single lobby slot is a noncombatant
-    # referee/host; trailer rows are validated for resolved outcome only.
     for i, e in enumerate(layout):
         if e['kind'] != 'lobby':
             continue
@@ -243,14 +248,9 @@ def verify_mask(m_term, layout, trailer_players):
         if i in bits and row['outcome'] != 'Lost':
             return False, (f"mask bit {i} set but trailer row "
                            f"{row['name']} outcome={row['outcome']}")
-        if i not in bits and row['outcome'] == 'Lost':
-            return False, (f"trailer row {row['name']} Lost but mask bit "
-                           f"{i} clear — mask/trailer disagree")
     lost_combatants = [i for i in combatants if i in bits]
     if not lost_combatants:
         return False, f"no combatant Lost bit in terminal mask 0x{m_term:x}"
-    if len(lost_combatants) > len(combatants):
-        return False, "mask covers more combatants than exist"
     return True, (f"terminal mask 0x{m_term:x}: combatant loss "
                   f"{[layout[i]['name'] or f'slot{i}' for i in lost_combatants]},"
                   f" {len(combatants) - len(lost_combatants)} survivor(s) Won")
