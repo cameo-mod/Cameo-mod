@@ -9,6 +9,7 @@
  */
 #endregion
 
+using System;
 using OpenRA.Server;
 using OpenRA.Support;
 
@@ -19,7 +20,10 @@ namespace OpenRA.Mods.Cameo.ServerTraits
 	/// <summary>
 	/// DEV-ONLY parity hook (BOT-DETERMINISM): pins the lobby RNG seed so repeated
 	/// launches produce identical game seeds for BASE==BASE order-stream proof runs.
-	/// Inert unless `Cameo.DevSeed=&lt;int&gt;` appears on the server command line.
+	/// Inert unless `Cameo.DevSeed=&lt;int&gt;` appears on the server command line or
+	/// `CAMEO_DEV_SEED=&lt;int&gt;` is set in the environment (env form exists because
+	/// launch harnesses like run_ai_match_batch.py do not plumb extra game args;
+	/// environment variables propagate to spawned processes automatically).
 	///
 	/// The seed lives in <c>LobbyInfo.GlobalSettings.RandomSeed</c>: it is synced to
 	/// every client, drives faction resolution and SharedRandom initialisation, and
@@ -31,7 +35,8 @@ namespace OpenRA.Mods.Cameo.ServerTraits
 	{
 		void INotifyServerStart.ServerStarted(S server)
 		{
-			var arg = CameoDevArgs.Value("Cameo.DevSeed");
+			var arg = CameoDevArgs.Value("Cameo.DevSeed")
+				?? Environment.GetEnvironmentVariable("CAMEO_DEV_SEED");
 			if (arg == null || !int.TryParse(arg, out var seed))
 				return;
 

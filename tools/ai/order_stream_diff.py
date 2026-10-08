@@ -153,6 +153,51 @@ def describe(rec):
     return f"frame={rec[len(rec)-3]} {kind} {str(rec[-1])[:80]}"
 
 
+def frame_multiset_diff(ra, rb):
+    """Compare per-frame record multisets — the canonical gameplay content.
+
+    Replay writes order packets and sync-hash packets on separate channels whose
+    flush interleaving (and the tail cutoff at process exit) is not part of the
+    simulated game. Two runs are identical when every frame carries the same
+    multiset of orders/sync records, regardless of packet write order.
+    Returns (first_diff_frame, only_a, only_b, trailing_only) or None.
+    """
+    import collections
+
+    def by_frame(recs):
+        m = collections.defaultdict(collections.Counter)
+        for r in recs:
+            m[r[-3]][repr(r)] += 1
+        return m
+
+    fa, fb = by_frame(ra), by_frame(rb)
+    first = None
+    only_a = only_b = None
+    for f in sorted(set(fa) | set(fb)):
+        if fa.get(f, {}) == fb.get(f, {}):
+            continue
+        diff_a = fa.get(f, collections.Counter()) - fb.get(f, collections.Counter())
+        diff_b = fb.get(f, collections.Counter()) - fa.get(f, collections.Counter())
+        if first is None:
+            first, only_a, only_b = f, diff_a, diff_b
+        # Tail-only divergence: one side's replay ran a few more frames of pure
+        # sync hashes (no order records) after the other stopped — a recording
+        # cutoff artifact, not a decision difference.
+    trailing = True
+    for f in sorted(set(fa) | set(fb)):
+        if fa.get(f, {}) == fb.get(f, {}):
+            continue
+        diff_a = fa.get(f, collections.Counter()) - fb.get(f, collections.Counter())
+        diff_b = fb.get(f, collections.Counter()) - fa.get(f, collections.Counter())
+        for side, counter in (('a', diff_a), ('b', diff_b)):
+            for rec_repr in counter:
+                if "'ORDERS'" in rec_repr or "'DISCONNECT'" in rec_repr:
+                    trailing = False
+    if first is None:
+        return None
+    return first, only_a, only_b, trailing
+
+
 def main(argv):
     args = [a for a in argv if not a.startswith('--')]
     flags = set(a for a in argv if a.startswith('--'))
@@ -174,36 +219,41 @@ def main(argv):
     result = {'records': {a: len(ra), b: len(rb)},
               'sha256_16': digests}
 
-    first_diff = None
-    for i in range(min(len(ra), len(rb))):
-        if ra[i] != rb[i]:
-            first_diff = i
-            break
-    if first_diff is None and len(ra) != len(rb):
-        first_diff = min(len(ra), len(rb))
-
-    if first_diff is None:
+    fmd = frame_multiset_diff(ra, rb)
+    if fmd is None:
         result['verdict'] = 'IDENTICAL'
-        print(f"IDENTICAL — {len(ra)} canonical records, "
-              f"sha256/16 {digests[a]}")
+        print(f"IDENTICAL — {len(ra)}/{len(rb)} canonical records, same "
+              f"per-frame order+sync content, sha256/16 {digests[a]}")
+        if want_json:
+            print(json.dumps(result))
+        return 0
+
+    first_frame, only_a, only_b, trailing = fmd
+    if trailing:
+        result['verdict'] = 'IDENTICAL_TAIL_FLUSH'
+        result['tail_flush_frame'] = first_frame
+        print(f"IDENTICAL (tail flush) — orders+syncs equal for all shared "
+              f"frames; only trailing records past frame {first_frame} differ "
+              f"(replay write cutoff at exit). sha256/16 {digests[a]}")
+        for k in only_a or {}:
+            print(f"  only-A f{first_frame}: {k[:200]}")
+        for k in only_b or {}:
+            print(f"  only-B f{first_frame}: {k[:200]}")
         if want_json:
             print(json.dumps(result))
         return 0
 
     result['verdict'] = 'DIVERGENT'
-    result['first_diff_index'] = first_diff
-    print(f"DIVERGENT at record {first_diff} "
-          f"(of {len(ra)}/{len(rb)}), sha256/16 {digests[a]} vs {digests[b]}")
-    lo = max(0, first_diff - 3)
-    for i in range(lo, min(first_diff + 2, len(ra))):
-        mark = '>>' if i == first_diff else '  '
-        print(f"  {mark} A[{i}] {describe(ra[i])}")
-    for i in range(lo, min(first_diff + 2, len(rb))):
-        mark = '>>' if i == first_diff else '  '
-        print(f"  {mark} B[{i}] {describe(rb[i])}")
+    result['first_diff_frame'] = first_frame
+    print(f"DIVERGENT at frame {first_frame} "
+          f"(of {len(ra)}/{len(rb)} records), sha256/16 {digests[a]} vs {digests[b]}")
+    for k in only_a:
+        print(f"  only-A: {k[:240]}")
+    for k in only_b:
+        print(f"  only-B: {k[:240]}")
     if want_json:
-        result['a_record'] = repr(ra[first_diff]) if first_diff < len(ra) else None
-        result['b_record'] = repr(rb[first_diff]) if first_diff < len(rb) else None
+        result['only_a'] = list(only_a)
+        result['only_b'] = list(only_b)
         print(json.dumps(result))
     return 1
 

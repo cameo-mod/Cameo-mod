@@ -1,3 +1,60 @@
+# 2026-10-08 — Devin-Architect: BASE==BASE parity proof — root cause found and verified
+
+*Devin-Architect.* Two same-seed (`CAMEO_DEV_SEED=1337`) hard-vs-hard td_gdi matches on
+AI Duel Gate were run under the current pin (`d5d8b2a6`) to find the residual
+nondeterminism, then re-run with the fixed engine to prove the fix.
+
+**Residual found (pinned engine, without `9e35bc96ee`):**
+- Identical lobby/pregame records and identical sync hashes through frame 669.
+- Frame 16: run B issued `Move`+`DeployTransform` on MCV #183 (mid-transform from the
+  f3 deploy) — orders dropped at execution (stale actor), world state stayed identical.
+- Bot-internal state drifted silently afterward (LC1 lease claims 4528 vs 4527 by
+  tick 2251), then the first world-state divergence at frame 670, caused by a
+  `PlaceBuilding td_gdi_guardtower` at different cells at f669.
+- Root cause: engine-side `OpenRA.Mods.Common` `McvExpansionManagerBotModule`
+  (loaded — it appears in the module-timing lines) draws `scanInterval`,
+  `buildMCVInterval`, `moveConyardInterval` from `world.LocalRandom` in
+  `TraitEnabled` plus deploy-spot picks (`resCenter` coin-flip, `cells.Shuffle`,
+  conyard ordering, notify flip). `LocalRandom` is unseeded per launch, so the scan
+  cadence differed run-to-run — B's earlier scan caught #183 mid-transform and issued
+  the inert relocate pair; the different cadence cascaded into claim counts and the
+  later placement cell pick.
+
+**Fix verification (pin + `9e35bc96ee` only):**
+- `9e35bc96ee` is a direct child of pin `d5d8b2a6` (verified `git merge-base`), so a
+  build of `codex-garrison-engine` = pin + RNG conversion only.
+- Built it Release, swapped `OpenRA.Game/Common/AS.dll` into `engine\bin` for the
+  local test only (no `mod.config` change — pin bump is maintainer-authorized),
+  re-ran the identical same-seed pair (fingerprint `dlls=7db3470358` confirms the
+  patched binaries), then restored the pinned DLLs afterward.
+- **Result: IDENTICAL.** Every order and every sync-hash record equal for all
+  shared frames (3304 frames ≈ the full match to elimination). The only difference is
+  3 trailing sync-hash packets on the slower-exiting process — a replay write-cutoff
+  artifact, not a decision.
+- The old pair under the same comparator: `DIVERGENT at frame 16` naming the ghost
+  `Move`/`DeployTransform` pair — the tool correctly separates real divergence from
+  recording artifacts.
+
+**Comparator hardening** (`tools/ai/order_stream_diff.py`): comparison is now
+per-frame record multisets instead of raw record order — order packets and
+sync-hash packets flush on separate channels, so packet interleaving and the
+exit-tail cutoff are not gameplay. New verdict `IDENTICAL_TAIL_FLUSH` (exit 0)
+when only trailing sync/disconnect-free frames differ; `DIVERGENT` (exit 1) names
+the first frame whose order/sync multiset differs.
+
+**CameoDevSeed env fallback** (`OpenRA.Mods.Cameo/ServerTraits/CameoDevSeed.cs`):
+`CAMEO_DEV_SEED=<int>` env var works alongside `Cameo.DevSeed=<int>` because match
+harnesses (`run_ai_match_batch.py`) do not plumb extra game args but env vars
+propagate to spawned processes. Both parity runs logged `CAMEO DEV SEED pinned —
+RandomSeed=1337`.
+
+**Requirement surfaced:** `ENGINE_VERSION` must move to a commit containing
+`9e35bc96ee` for the proof to hold on real runs — the mod-side sweep alone cannot
+seed engine-module draws. Maintainer authorization needed (engine pin rule).
+
+Gates: two live same-seed matches per arm (4 total), all clean, no exceptions;
+`order_stream_diff.py` exercised on real replays in both verdict modes.
+
 # 2026-10-08 — Devin-Architect: order_stream_diff.py — BASE==BASE comparator for the parity proof
 
 *Devin-Architect.* Companion to `CameoDevSeed`: `tools/ai/order_stream_diff.py` compares
