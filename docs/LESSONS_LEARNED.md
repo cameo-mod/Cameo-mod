@@ -11,6 +11,21 @@ add it to the Contents below: `audit_doc_health` D7 fails if the index misses on
 ---
 
 
+### 2026-10-08 — Devin: every FindTilesInAnnulus radius must respect MapGrid.MaximumTileSearchRange
+
+Playtest crash C1 (`ArgumentOutOfRangeException` on 'Imminent Destruction'): the front/back planner
+derived the approach annulus as `(FrontProj + depth)/coneCos + 1` = 71 and passed it straight to
+`FindTilesInAnnulus`, which throws above `MaximumTileSearchRange = 50` — and also when
+`minRange > maxRange`. Any derived search radius that grows with map geometry (a defence line that
+crawled outward, a map-size margin, a stride × factor) can exceed 50; constants like
+`BaseCrawlRadius = 50` are exactly AT the cap and legal, so audits of constants alone won't catch it.
+Fix pattern (`BaseFrontBackPlannerBotModule.AnnulusForApproach`): compute the bound in `double`
+(clamping `+Inf` / huge values BEFORE the int cast — `(int)Math.Ceiling(Inf)+1` wraps to
+`int.MinValue`), clamp outer to `world.Map.Grid.MaximumTileSearchRange`, and return null when the
+whole band lies past it — an unmeasurable approach reads as no cells, never a crash. Grep new code for
+`FindTilesInAnnulus` / `FindTilesInCircle` call sites whose radius isn't a bounded Info constant.
+
+
 ### 2026-09-28 — Claude: actor ids are LOWERCASED at load — an uppercase id in a bot list never matches
 
 `Ruleset.cs:130` builds every actor as `new ActorInfo(..., k.Key.ToLowerInvariant(), ...)`, so the

@@ -251,6 +251,28 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		}
 
 		/// <summary>
+		/// Annulus bounds covering every cell whose projection can reach the approach band
+		/// [frontProj, frontProj+depthCells] inside the cone: the worst-case distance of a band cell is
+		/// (frontProj+depthCells)/coneCos, so the outer edge grows with how far out the line crawled and
+		/// can exceed the engine's MaximumTileSearchRange on large maps. Clamps to the cap; returns null
+		/// when the whole band lies beyond it — the approach is then unmeasurable and the caller treats
+		/// it as no cells (uncovered = 0, never a crash).
+		/// </summary>
+		public static (int Inner, int Outer)? AnnulusForApproach(int frontProj, int depthCells, double coneCos, int cap)
+		{
+			// Compute in double so +Inf/NaN/huge reach never wrap an int cast into
+			// a legal-looking range; the inner<=outer gate runs on the CLAMPED
+			// outer so a band starting past the cap still returns null.
+			var outerD = Math.Ceiling((frontProj + depthCells) / coneCos) + 1;
+			if (double.IsNaN(outerD))
+				return null;
+
+			var outer = outerD >= cap ? cap : (int)outerD;
+			var inner = Math.Max(0, frontProj - 1);
+			return inner <= outer ? (inner, outer) : ((int, int)?)null;
+		}
+
+		/// <summary>
 		/// The cells of a front's approach: the band from the foremost defence depthCells farther out, inside the
 		/// front cone. A front with no defence line has no approach (nothing defines the line).
 		/// </summary>
@@ -768,8 +790,15 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					continue;
 				}
 
-				var outer = (int)Math.Ceiling((f.FrontProj + Info.RadarApproachDepthCells) / coneCos) + 1;
-				var space = world.Map.FindTilesInAnnulus(f.Centre, Math.Max(0, f.FrontProj - 1), outer);
+				// outer covers every cell whose projection reaches the approach band — worst-case
+				// distance is (band edge)/coneCos, which grows with how far out the line crawled.
+				// Clamp to the engine cap: a band beyond MaximumTileSearchRange is simply not
+				// measurable, so the approach reads as no cells rather than crashing the tick.
+				var annulus = AnnulusForApproach(f.FrontProj, Info.RadarApproachDepthCells, coneCos,
+					world.Map.Grid.MaximumTileSearchRange);
+				var space = annulus.HasValue
+					? world.Map.FindTilesInAnnulus(f.Centre, annulus.Value.Inner, annulus.Value.Outer)
+					: Enumerable.Empty<CPos>();
 				var approach = ApproachCells(space, f.Centre, f, Info.RadarApproachDepthCells, coneCos);
 				var uncovered = 0;
 				foreach (var c in approach)

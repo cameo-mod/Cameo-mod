@@ -142,6 +142,50 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(approach, Does.Contain(new CPos(62, 60))); // inside the cone
 		}
 
+		[Test]
+		public void AnnulusBoundsCoverTheWholeApproachBand()
+		{
+			// Unclamped passthrough: band [10,24] in a 45-degree cone needs
+			// ceil(24/0.7071)+1 = 35 cells of Euclidean reach.
+			Assert.That(BaseFrontBackPlannerBotModule.AnnulusForApproach(10, 14, Cone45, 50),
+				Is.EqualTo((9, 35)));
+		}
+
+		[Test]
+		public void AnnulusOuterEdgeClampsToTheEngineCap()
+		{
+			// Playtest crash C1 (Imminent Destruction): a line crawled 40 cells out
+			// asked for maxRange 78 — the engine throws past MaximumTileSearchRange.
+			Assert.That(BaseFrontBackPlannerBotModule.AnnulusForApproach(40, 14, Cone45, 50),
+				Is.EqualTo((39, 50)));
+		}
+
+		[Test]
+		public void AnnulusBeyondTheCapIsUnmeasurableNotACrash()
+		{
+			// inner must never exceed outer (engine throws on that too): a band
+			// starting past the cap returns null — the approach reads as no cells.
+			Assert.That(BaseFrontBackPlannerBotModule.AnnulusForApproach(52, 14, Cone45, 50),
+				Is.Null);
+			// The exactly-at-cap ring is still legal.
+			Assert.That(BaseFrontBackPlannerBotModule.AnnulusForApproach(51, 14, Cone45, 50),
+				Is.EqualTo((50, 50)));
+		}
+
+		[Test]
+		public void AnnulusDegenerateInputsNeverProduceAnIllegalRange()
+		{
+			// coneCos <= 0 (cone half-angle >= 90 in yaml) saturates the outer
+			// edge at the cap rather than producing a negative range.
+			var degenerate = BaseFrontBackPlannerBotModule.AnnulusForApproach(10, 14, 0, 50);
+			Assert.That(degenerate.HasValue && degenerate.Value.Outer <= 50
+				&& degenerate.Value.Inner <= degenerate.Value.Outer);
+			// An unset front projection (int.MinValue sentinel) must not overflow
+			// into a legal-looking range either.
+			Assert.That(BaseFrontBackPlannerBotModule.AnnulusForApproach(int.MinValue, 14, Cone45, 50),
+				Is.Null);
+		}
+
 		// --- radar ---
 
 		[Test]
