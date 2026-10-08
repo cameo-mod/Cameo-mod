@@ -1,3 +1,35 @@
+# 2026-10-08 — Devin-Architect: playtest C1 crash fix — approach annulus capped at MaximumTileSearchRange
+
+*Devin-Architect.* Post-playtest triage (fleet PLAYTEST_TRIAGE_2026-10-08.md) assigned crash C1:
+`ArgumentOutOfRangeException` on map 'Imminent Destruction' — `FindTilesInAnnulus` received
+`maxRange=71`, engine cap `MapGrid.MaximumTileSearchRange = 50`. Stack: `Refresh()` ←
+`RadarPowerMargin` ← `BaseBuilderQueueManagerCA.Tick` ← `BaseBuilderBotModuleCA.BotTick` ←
+`ModularBot.Tick`.
+
+- Root cause in `BaseFrontBackPlannerBotModule.Refresh()`: the approach annulus outer edge
+  `ceil((FrontProj + RadarApproachDepthCells)/coneCos) + 1` grows with how far the defence line
+  crawled — at the 45° front cone any `FrontProj` ~21+ already exceeds 50, so this is not a
+  huge-map-only path.
+- Fix: new static `AnnulusForApproach(frontProj, depthCells, coneCos, cap)` — computes the bound
+  in `double` so `+Inf`/huge values clamp to the cap BEFORE the int cast (`(int)Math.Ceiling(Inf)+1`
+  wraps to `int.MinValue`), clamps outer to `world.Map.Grid.MaximumTileSearchRange`, guards
+  `inner > outer`, and returns null when the whole band lies past the cap — the approach then reads
+  as no cells (`uncovered = 0`) instead of crashing the tick. Degenerate `coneCos` (0/NaN) handled.
+- Sibling sweep: every other `FindTilesInAnnulus`/`FindTilesInCircle` call site uses a bounded Info
+  constant (MaxBaseRadius=20, MaximumDefenseRadius=20, BaseCrawlRadius=50 at-cap-legal) or a
+  config-derived stride — this planner site was the only map-scale-derived radius.
+- Regression tests in `BaseFrontBackPlannerTest`: normal bounds `(10,14,45°,50)->(9,35)`, clamped
+  `(40,…)->(39,50)`, beyond-cap nulls `(52,…)->null`, `(51,…)->(50,50)`, degenerate `coneCos=0`
+  capped, `frontProj=int.MinValue` null.
+- Gates: Release build 0 errors / 8 warnings; focused planner suite 37/37; boot-gate PASS
+  (main menu, `MenuPostProcessEffect.PostWorldLoaded`, zero new exceptions). One earlier exception
+  (`exception-2026-10-08T202345Z`) was my launch harness missing `Engine.ModSearchPaths`, not the
+  code — corrected and re-passed.
+- Branch `devin/c1-annulus-range-cap` @ 67799ff7f off playtest head 3d99405bd; pushed. LESSONS_LEARNED
+  entry added. No master push — playtest freeze stands; Sol+Luna review gates apply.
+
+---
+
 # 2026-10-08 — Devin-Architect: wave-1 scheduler v3 — fail-closed evidence adjudication
 
 *Devin-Architect.* Sol's wave-5 re-review (REVIEW_2026-10-08_wave5_adjudication)
