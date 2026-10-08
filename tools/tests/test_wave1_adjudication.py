@@ -329,13 +329,30 @@ def test_bounded_compare_end_to_end(tmp_path, monkeypatch):
     pa, pb = tmp_path / 'a.orarep', tmp_path / 'b.orarep'
     write_replay_trailer(pa, bounded_stream() + [sync13_pkt(30, 0x0C)])
     write_replay_trailer(pb, bounded_stream())
-    md = tmp_path / 'mymap'
-    md.mkdir()
+    cell = tmp_path / 'cell'
+    md = cell / 'maps' / 'cameo' / '{DEV_VERSION}' / 'variant'
+    md.mkdir(parents=True)
     (md / 'map.yaml').write_text(BOUNDED_MAP)
-    out = ws.bounded_compare(str(pa), str(pb), 'p1', str(md))
+    out = ws.bounded_compare(str(pa), str(pb), 'p1', str(cell))
     assert out['exit'] == 0
     assert out['verdict'] == 'IDENTICAL_OUTCOME_BOUNDED_TAIL'
     assert out['ok'] is True and out['B'] == 21
+    assert out['order_latency'] == 1          # passed explicitly (F2)
+    assert out['duration_xcheck'] == 'missing-match-records'  # diagnostic (F4)
     assert out['tool_sha256'] != 'MISSING'
     assert pathlib.Path(
         out['artifacts']['payload']).is_file()
+
+
+def test_duration_xcheck(tmp_path):
+    # F4: closed form F_term = floor((T_dec+1)/NFI)+1 (Integrator residue
+    # sweep). Diagnostic string only — never a verdict input.
+    cell = tmp_path / 'cell'
+    (cell / 'Logs').mkdir(parents=True)
+    j = cell / 'Logs' / 'cameo-ai-matches.jsonl'
+    j.write_text(json.dumps({"duration_ticks": 56}) + '\n')  # (56+1)/3+1=20
+    assert ws._duration_xcheck(cell, 20) == 'ok'
+    assert ws._duration_xcheck(cell, 21).startswith('f_term 21 != expected')
+    assert ws._duration_xcheck(tmp_path / 'nocell', 20) == \
+        'missing-match-records'
+    assert ws._duration_xcheck(cell, None) == 'no-f_term'

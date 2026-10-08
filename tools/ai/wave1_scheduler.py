@@ -351,6 +351,15 @@ def cell_dir_for(seed, map_path, repeat):
 
 
 BOUNDED_PASS = {"IDENTICAL", "IDENTICAL_OUTCOME_BOUNDED_TAIL"}
+# Harness session latency: Launch.Map = Local server => OrderLatency default
+# 1 (Server.cs:136-137). Passed EXPLICITLY to the bounded comparator so the
+# 'exact L from session' requirement is evidenced, never defaulted (F2).
+ORDER_LATENCY = 1
+# Ticks per net frame — the closed form F_term = floor((T_dec+1)/NFI)+1 is
+# Integrator's residue sweep over all 6 wave-5 pairs (mask sampled before
+# WorldTick increments). duration_ticks lives in match records, NOT the
+# replay — diagnostic cross-check only, never a verdict input (F4).
+NET_FRAME_INTERVAL = 3
 
 
 def _variant_map_dir(cell_dir):
@@ -365,12 +374,38 @@ def _variant_map_dir(cell_dir):
     return None
 
 
-def bounded_compare(rep_a, rep_b, cell_tag, map_dir):
+def _duration_xcheck(cell_dir, f_term):
+    """Diagnostic-only cross-check of F_term against the cell's match
+    records' duration_ticks via the closed form. Returns a string."""
+    if f_term is None:
+        return "no-f_term"
+    p = Path(cell_dir) / "Logs" / "cameo-ai-matches.jsonl"
+    if not p.is_file():
+        return "missing-match-records"
+    durs = set()
+    for line in p.read_text(encoding="utf-8", errors="replace").splitlines():
+        line = line.strip()
+        if not line:
+            continue
+        try:
+            d = json.loads(line)
+            durs.add(int(d["duration_ticks"]))
+        except (json.JSONDecodeError, KeyError, TypeError, ValueError):
+            return "match-record-unparseable"
+    if not durs:
+        return "missing-duration_ticks"
+    expected = {(d + 1) // NET_FRAME_INTERVAL + 1 for d in durs}
+    return ("ok" if expected == {f_term}
+            else f"f_term {f_term} != expected {sorted(expected)}")
+
+
+def bounded_compare(rep_a, rep_b, cell_tag, cell_dir):
     """Phase-A outcome-bounded comparator (order_stream_diff_bounded.py) —
     SECOND LAYER, additive only. The strict comparator verdict remains the
     mechanical gate; the bounded verdict is recorded per pair for review
     and retro-adjudication and does not itself flip acceptance until the
     coordinator promotes it after dev/Sol/Luna sign-off."""
+    map_dir = _variant_map_dir(cell_dir) if cell_dir else None
     pair_dir = RUN_RESULTS / "comparator"
     pair_dir.mkdir(parents=True, exist_ok=True)
     stem = re.sub(r"[^A-Za-z0-9_.-]+", "_", cell_tag)
@@ -391,7 +426,8 @@ def bounded_compare(rep_a, rep_b, cell_tag, map_dir):
     try:
         p = subprocess.run(
             [sys.executable, str(tool),
-             rep_a, rep_b, "--map", map_dir, "--json"],
+             rep_a, rep_b, "--map", map_dir,
+             "--order-latency", str(ORDER_LATENCY), "--json"],
             cwd=str(WORKTREE), capture_output=True, text=True, timeout=120)
     except (subprocess.TimeoutExpired, OSError) as e:
         (pair_dir / f"{stem}.bounded.exception.txt").write_text(repr(e))
@@ -419,11 +455,14 @@ def bounded_compare(rep_a, rep_b, cell_tag, map_dir):
         return out
     (pair_dir / f"{stem}.bounded.payload.json").write_text(
         json.dumps(payload, indent=2, sort_keys=True))
+    f_term = (payload.get("a_boundary") or {}).get("f_term")
     out.update(verdict=payload["verdict"], exit=p.returncode,
                B=payload.get("B"),
-               f_term=(payload.get("a_boundary") or {}).get("f_term"),
+               f_term=f_term,
                m_term=(payload.get("a_boundary") or {}).get("m_term"),
                tail_extras=payload.get("tail_extras"),
+               order_latency=ORDER_LATENCY,
+               duration_xcheck=_duration_xcheck(cell_dir, f_term),
                ok=p.returncode == 0 and payload["verdict"] in BOUNDED_PASS,
                artifacts={"stdout": str(pair_dir / f"{stem}.bounded.stdout.txt"),
                           "payload": str(pair_dir / f"{stem}.bounded.payload.json")})
@@ -586,7 +625,7 @@ def main_locked():
             c["bounded"] = bounded_compare(
                 pair[0]["replay"], pair[1]["replay"],
                 f"s{s}-{Path(m).name}",
-                _variant_map_dir(cell_dir_for(s, m, REPEATS[0])))
+                cell_dir_for(s, m, REPEATS[0]))
             print(f"[pair s{s}-{Path(m).name}] bounded: "
                   f"{c['bounded']['verdict']} (B={c['bounded'].get('B')})",
                   flush=True)

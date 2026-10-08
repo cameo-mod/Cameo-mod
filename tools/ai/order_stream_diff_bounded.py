@@ -232,12 +232,23 @@ def verify_mask(m_term, layout, trailer_players):
     player's Outcome during post-decision teardown after the last captured
     sync, so 'row Lost but bit clear' is a legitimate post-window
     resolution, not a mismatch (Integrator's outcome-vs-WinState timing
-    note). Noncombatant map-ref bits are unchecked — no provable invariant."""
+    note). Bits outside {combatants} u {lobby slots} are unexplained
+    evidence — the roster model failed to account for a recorded defeat —
+    and fail closed (Integrator code review F1)."""
     bits = [i for i in range(64) if m_term & (1 << i)]
     combatants = [i for i, e in enumerate(layout) if e['combatant']]
     if len(combatants) != 2:
         return False, (f"unsupported roster topology: {len(combatants)} "
                        f"combatant slots (spec scope is 1v1 elimination)")
+    explainable = set(combatants)
+    explainable.update(i for i, e in enumerate(layout)
+                       if e['kind'] == 'lobby')
+    stray = [i for i in bits if i not in explainable]
+    if stray:
+        names = [layout[i]['name'] if i < len(layout) else f'slot{i}'
+                 for i in stray]
+        return False, (f"mask bit(s) {stray} on non-combatant/non-lobby "
+                       f"slot(s) {names} — unexplained by roster projection")
     for i, e in enumerate(layout):
         if e['kind'] != 'lobby':
             continue
@@ -338,16 +349,22 @@ def compare_stream(a_recs, b_recs, bound):
 
 def sync_coverage_ok(recs, bound):
     """Every frame 1..bound carries >=1 SYNCHASH (one per net frame is the
-    engine contract; a gap inside the boundary is an incomplete capture)."""
+    engine contract; a gap inside the boundary is an incomplete capture).
+    Scope: single-client streams (this harness) — the server emits ONE
+    broadcast sync per frame. A multi-client replay in scope would need
+    per-client coverage (review F3)."""
     have = {r[-3] for r in recs if r[-2] == 'SYNCHASH'}
     missing = [f for f in range(1, bound + 1) if f not in have]
     return missing
 
 
 def run(rep_a, rep_b, map_path, order_latency):
+    # server_type label is honest about provenance: L==1 matches the
+    # Local-server default (Server.cs:136-137); any other L is a caller
+    # assertion the wire format cannot independently verify (review F2).
     res = {'a': str(rep_a), 'b': str(rep_b), 'order_latency': order_latency,
-           'server_type': 'local(Launch.Map)'}
-    fa_info, fb_info = {}, {}
+           'server_type': ('local(Launch.Map)' if order_latency == 1
+                           else f'caller-asserted(L={order_latency})')}
     sides = {}
     for tag, path in (('a', rep_a), ('b', rep_b)):
         recs, unparsed, incomplete = _osd.extract(path, True, False, False)

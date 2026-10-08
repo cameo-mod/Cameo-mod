@@ -307,6 +307,16 @@ def test_mask_regression_is_corrupt_evidence(mapdir, tmp_path):
     assert 'regressed' in res['detail']
 
 
+def test_stray_mask_bit_fails_closed(mapdir, tmp_path):
+    # Review F1: set bits outside {combatants ∪ lobby} are unexplained.
+    # 0x34 = BotA + host + Everyone(bit5); 0x15 = Neutral(bit0) + BotA + host.
+    for mask in (0x34, 0x15, 0x14 | (1 << 40)):  # also beyond-roster bit
+        res, code = run_pair(base_stream(50, mask), base_stream(50, mask),
+                             mapdir, tmp_path)
+        assert code == 5 and res['verdict'] == 'TERMINAL_MASK_MISMATCH'
+        assert 'unexplained' in res['detail']
+
+
 def test_noncontiguous_sync_through_b(mapdir, tmp_path):
     b = [r for r in base_stream(50, 0x14) if r[1] != sync_pkt(30, 0)]
     res, code = run_pair(base_stream(50, 0x14), b, mapdir, tmp_path)
@@ -370,6 +380,8 @@ def test_map_side_bot_roster_projection(mapdir):
     assert not osdb.verify_mask(0x10, layout, row_lost)[0]  # no combatant bit
     assert osdb.verify_mask(0x04, layout, row_lost)[0]   # Lost row, bit clear
     assert osdb.verify_mask(0x04, layout, row_won)[0]    # consistent Won host
+    assert not osdb.verify_mask(0x34, layout, row_lost)[0]  # Everyone bit stray
+    assert not osdb.verify_mask(0x15, layout, row_lost)[0]  # Neutral bit stray
 
 
 def test_missing_map_source_fails(mapdir, tmp_path):

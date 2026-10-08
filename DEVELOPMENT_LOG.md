@@ -1,3 +1,41 @@
+# 2026-10-08 — Devin-Architect: Phase-A comparator review fixes F1–F4
+
+*Devin-Architect.* Integrator's conditional semantic review of
+`b22b6bdbc`+`379fbdccc` returned PASS-with-findings; both actionable
+items landed and both info items addressed, all tools-only:
+
+- **F1 — stray mask bits fail closed**: `verify_mask` now requires every
+  set bit in M_term to land on {combatants ∪ lobby slots}; a bit on a
+  noncombatant map ref, `Everyone`, or beyond the projected roster is
+  unexplained evidence → `TERMINAL_MASK_MISMATCH` naming the slots.
+  Real masks 0x14/0x18 unaffected (all bits explainable).
+- **F2 — honest server_type + explicit L**: `server_type` reports
+  `local(Launch.Map)` only when L==1 (Local default, Server.cs:136-137);
+  other L reports `caller-asserted(L=n)` — the wire format cannot verify
+  latency. The scheduler now passes `--order-latency` explicitly
+  (`ORDER_LATENCY=1`, harness-fixed) and records it on the per-pair
+  result — 'exact L from session' is evidenced, never defaulted.
+- **F3 — scope documented**: `sync_coverage_ok` records that
+  one-sync-per-frame is correct for single-client streams only; a
+  multi-client replay in scope would need per-client coverage.
+- **F4 — scheduler-side duration cross-check**: `_duration_xcheck()`
+  reads the cell's `Logs/cameo-ai-matches.jsonl` and verifies
+  `F_term == floor((duration_ticks+1)/3)+1` (Integrator's closed form —
+  mask sampled before WorldTick increments; NFI=3). Recorded as a
+  diagnostic string on the bounded result, never a verdict input
+  (duration_ticks lives in match records, not the replay).
+
+Tests: `test_order_stream_diff_bounded.py` 29/29 (+stray-bit e2e across
+Everyone/Neutral/beyond-roster bits, +unit roster asserts);
+`test_wave1_adjudication.py` 24/24 (e2e updated to cell-dir signature,
++duration_xcheck ok/mismatch/missing, +explicit-L + diagnostic asserts).
+
+Re-verified on the frozen wave-5 set: 6/6 `IDENTICAL_OUTCOME_BOUNDED_TAIL`
+with identical per-pair boundaries (4785/0x14, 3949/0x18, 4789/0x14,
+11749/0x14, 7059/0x18, 7101/0x14). Derived evidence regenerated under
+`parity-wave1\results\20261008T141741Z\bounded\` — still non-authoritative.
+Frozen comparator bytes unchanged (pin `88d9be75…` asserted in suite).
+
 # 2026-10-08 — Devin-Architect: Phase-A outcome-bounded comparator
 
 *Devin-Architect.* `tools/ai/order_stream_diff_bounded.py` — the Phase-A
