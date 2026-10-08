@@ -224,9 +224,21 @@ namespace OpenRA.Mods.Cameo.Terrain
 
 		void ITerrainInfoNotifyMapCreated.MapCreated(Map map)
 		{
-			// Randomize PickAny tile variants. Seeded from the map uid so the
-			// variant layout is identical every time this map loads.
-			var r = new MersenneTwister(StableHash(map.Uid));
+			// Randomize PickAny tile variants. This fires BEFORE the map's first
+			// Save assigns a Uid (editor NewMapLogic, Gen1 import), so the seed
+			// cannot rely on it: use what is fixed at creation time - tileset,
+			// dimensions, the Uid when one exists, and the tile content itself.
+			var seed = StableHash($"{map.Tileset}|{map.MapSize.Width}x{map.MapSize.Height}|{map.Uid}");
+			unchecked
+			{
+				foreach (var uv in map.AllCells.MapCoords)
+				{
+					var t = map.Tiles[uv];
+					seed = (seed * (int)0x01000193u) ^ (t.Type << 8 | t.Index);
+				}
+			}
+
+			var r = new MersenneTwister(seed);
 			foreach (var uv in map.AllCells.MapCoords)
 			{
 				var type = map.Tiles[uv].Type;

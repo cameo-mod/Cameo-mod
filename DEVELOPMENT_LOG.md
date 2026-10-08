@@ -1,3 +1,31 @@
+# 2026-10-08 — Devin-Architect: BOT-DETERMINISM review fixes — MapCreated null-Uid seed + autopilot start retry
+
+*Devin-Architect.* Review by teammate `01a11068` on `624f5b27d` found two defects, both fixed
+in the follow-up commit on `devin/bot-determinism`:
+
+- **`CameoRemasterTerrain.MapCreated` crash:** `ITerrainInfoNotifyMapCreated.MapCreated` fires
+  BEFORE the map's first `Save` assigns `Uid` (editor `NewMapLogic`, `ImportGen1MapCommand`) —
+  `StableHash(map.Uid)` threw NRE on editor map creation/import. Seed now derives from
+  creation-time inputs: `StableHash(tileset|WxH|uid)` folded with FNV-1a over the tile content
+  (`Type<<8|Index` per cell). Deterministic per creation inputs; null-Uid safe.
+- **`CameoLobbyAutopilot` settle/start:** the earlier tick-count conversion was wrong — server
+  `ITick` fires per event-loop iteration (bursts drain instantly), so the ms floor was not
+  guaranteed and a silently-rejected `startgame` left the harness dead (`phase=Done`). Reverted
+  to `Environment.TickCount64` for the settle window (pre-game orchestration outside the order
+  stream — wall-clock is the correct semantic here) and added a `Starting` phase that re-issues
+  `state Ready` + `startgame` every 500ms until `server.State` leaves `WaitingPlayers`
+  (bounded: 20 attempts, then logs failure). Re-issuing `state Ready` is idempotent and also
+  recovers clients a late `SelectMap` callback resets to `Invalid`.
+
+Gates (fix commit):
+- build: `dotnet build -c Release -p:TargetPlatform=win-x64` 0 warnings / 0 errors
+- boot-gate: PASS — menu reached (`MenuPostProcessEffect.PostWorldLoaded` in this instance's
+  rotated `perf.log.1`; another agent's trait-u0 instances held `perf.log`), 0 new
+  `exception-*.log` vs 168 pre-existing, own process killed (PID-scoped), SAC state: Off
+- Cameo tests: re-running before push
+- editor `MapCreated` null-Uid path: statically verified (seed inputs are all ctor-set); no
+  automated editor harness exists — flagged for manual editor spot-check
+
 # 2026-10-07 — Devin-Architect: BOT-DETERMINISM — seeded per-player bot RNG + wall-clock/hash-order sweep
 
 *Devin-Architect.* Branch `devin/bot-determinism` @ `c9db891e9` (two commits: `624f5b27d`
