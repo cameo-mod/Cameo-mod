@@ -16,13 +16,24 @@ in the follow-up commit on `devin/bot-determinism`:
   `state Ready` + `startgame` every 500ms until `server.State` leaves `WaitingPlayers`
   (bounded: 20 attempts, then logs failure). Re-issuing `state Ready` is idempotent and also
   recovers clients a late `SelectMap` callback resets to `Invalid`.
+- **Retry boundary (second review pass):** `InterpretCommand`/`Server.StartGame` is synchronous —
+  the attempt's result is observable in `server.State` immediately after issuing, so a
+  successful 20th attempt must confirm BEFORE exhaustion is declared, and only `GameStarted`
+  counts as confirmed (`ShuttingDown` is an abort, never "confirmed"). Extracted
+  `EvaluateStartAttempt(state, attempts, max)` + `StartAttemptOutcome` as `internal` (visible
+  to tests via `InternalsVisibleTo`) and added `CameoLobbyAutopilotTest` regressions:
+  final-attempt success → Confirmed, early success → Confirmed, waiting at 19 → Retry,
+  waiting at 20 → Exhausted, ShuttingDown at 1/20 → Aborted (never Confirmed/Exhausted).
 
-Gates (fix commit):
-- build: `dotnet build -c Release -p:TargetPlatform=win-x64` 0 warnings / 0 errors
+Gates (fix commits):
+- build: `dotnet build -c Release -p:TargetPlatform=win-x64` 0 errors (second build surfaced
+  8 pre-existing StyleCop warnings in upstream engine files — none in touched files)
 - boot-gate: PASS — menu reached (`MenuPostProcessEffect.PostWorldLoaded` in this instance's
   rotated `perf.log.1`; another agent's trait-u0 instances held `perf.log`), 0 new
   `exception-*.log` vs 168 pre-existing, own process killed (PID-scoped), SAC state: Off
-- Cameo tests: re-running before push
+- Cameo tests: 1203/1203 PASS (1198 + 5 `CameoLobbyAutopilotTest` regressions)
+- boot-gate (retry-boundary commit): PASS — menu marker in this instance's `perf.log`,
+  0 new exceptions, own PID killed, other worktrees' instances untouched
 - editor `MapCreated` null-Uid path: statically verified (seed inputs are all ctor-set); no
   automated editor harness exists — flagged for manual editor spot-check
 
