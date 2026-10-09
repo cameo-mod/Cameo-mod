@@ -33,7 +33,11 @@
   timeout; the `hard` team far ahead (kills 612,280 vs 268,220) but two of its three bots spent the match escorting
   and defending allies (90 escort + 46 defend answers; Multi0 0 attack waves, peak army 22,270) → new finding **M13**
   (team escort drain), which reproduces the playtest symptom. Multi1 alone had 11,962 refused MCV orders (M12).
-- **Not finished:** pre-arm 3v3 (same map) and the 2v2 pair on Terra Cotta. Continue from the doc's PT9.
+- **Night runs:** 2v2 Terra Cotta armed LOST (0 waves, ~30 % less income, 654 refused MCV orders, M6+M12) vs
+  pre-arm WON (~2x income, ~91k armies). 3v3 Winter's End pre-arm LOST (whole team forced to `turtle` by an early
+  emergency → **M14**: master's default `EmergencyKeepsPersonality: false` contradicts binding DESIGN §19.11; the fix
+  is only in switch group AL). Armed teammates also all got the same bandit arm at tick 7. One match per arm: next is
+  fixes (A8–A10, M14 default) then ≥ 4 repeats per arm/map. Continue from the doc's PT9.
 
 # 2026-10-09 — Devin: B-lane master repair batch — limited-SW default + engineer/crate flags + bot plug production
 

@@ -37,7 +37,9 @@ and the code disagree, the code wins. Fix the document when that happens (CLAUDE
 4. **The 2026-10-08 playtest (Part IIIb).** The playtest build armed all 59 switch groups at once (never A/B'd) and
    switched off the engineers' binding omniscience. It carries a game crash (M10), an MCV ownership conflict (M12) and a
    learned-file bug (M9) that are still open; two base-building bugs were fixed today. The first measured 1v1 was
-   **not** passive, so the team game and the bugs weigh at least as much as the stack of restraints.
+   **not** passive. In teams both configurations failed in different ways: the armed set starves its economy
+   (M6, M12) and drains armies into escorts (M13); the pre-arm default turns whole teams into turtles (M14, a binding
+   ruling left behind a switch). Fix the defects before choosing a switch set.
 5. **The plan (Part IV), in one line:** make the lab trustworthy first (per-module random streams, a standing
    order-stream parity gate, regenerated evidence, a performance baseline), then give the runtime a skeleton (a
    switchable layer scheduler, interface-only seams, a crossed-order ratchet), then spend the gained headroom on
@@ -422,6 +424,7 @@ These are the ways a stack of switches can lose strength; PT5 measures how much 
 | M10 | Front/back planner crashes the game: `FindTilesInAnnulus(…, outer)` with `outer = ceil((FrontProj + 14) / cos 45°) + 1`, which exceeds the engine's `MaximumTileSearchRange` 50 once a defence front is ~21+ cells from the base centre | `BI_front_back_placement` (`Enabled: true`) | game crash (on "A Nuclear Winter" at world tick ~2,000) | this review's run: `ArgumentOutOfRangeException … requested range (71) cannot exceed … (50)` at `BaseFrontBackPlannerBotModule.cs:773` | **open** |
 | M12 | MCV ownership conflict: the expansion pre-build claims the travelling MCV under `BaseBuilderBotModuleCA`'s name (`BotLeasePurpose.McvExpansion`, `BaseBuilderBotModuleCA.cs:1247-1272, 1881`), but the engine's `McvExpansionManagerBotModule` is the module that moves and deploys MCVs. With enforcement on, the gate refuses its orders | `BT_expansion_prebuild` + `EnforceAtOrderGate: true` | expansion MCVs stand still; money banks up | measured: **1,044 refused** `Move` orders (`ORDERGATE REFUSE McvExpansionManagerBotModule@0 … held by BaseBuilderBotModuleCA`, from tick 12,107) in the armed 1v1 | **open** (today's MCV fix repairs the deploy-cell search, not this) |
 | M13 | Team escort drain: the armed expansion appetite (AC, U, greedy MCV) keeps every bot claiming far fields; each contested claim asks the TC-3 assist election to escort it, and defend requests elect rescuers. The elected bot's army spends the game escorting allies instead of attacking | `BH_tc3_assist_election`, `BC_tc3_rescue_election`, `S_tc2_defend_answers` with AC/U | in a team, some bots never attack and their army stays small: "passive, almost no units, no threat" | measured 3v3 (PT5): 90 escort answers + 46 defend answers; Multi0 made **0** attack waves in 60,000 ticks with a peak army of 22,270 | **open** |
+| M14 | Personality convergence across a team. **Pre-arm:** `EmergencyKeepsPersonality: false` (master default) forces `turtle` on any emergency, so an early hit turns every bot of a team into a turtle; this contradicts binding DESIGN §19.11, whose fix ships only as switch group `AL_emergency_net_loss`. **Armed:** the plan bandit, running on priors only (M9), pinned the **same** personality arm on every teammate at tick 7 | master default (pre-arm); `AO_tier3_bandits` (armed) | a whole team plays one posture, often `turtle`: passive, few units | measured personality timelines (PT5): pre-arm 3v3 `expansion→turtle` (t 3,757), `turtle`, `steamroller→turtle` (t 4,657); pre-arm 2v2 both `→turtle` (t ~4,800–4,950); armed 3v3 all `→tech` at t 7; armed 2v2 both `→steamroller`. Code: `BotSituation.cs:2109` | **open**. The binding-ruling half is a one-line default change (`EmergencyKeepsPersonality: true`, `EmergencyLossArmyPct: 25`); the bandit half needs its cause found (why one arm for all teammates) |
 | M11 | Plugs bought through real queues | `F_plug_spawn` + `02241219` | bots now pay for plugs (fair; previously an instant installer). Slightly more spending | `02241219` | changed today (fairness fix, not a strength fix) |
 
 ## PT4. Team play: how bots coordinate, and where humans fit in
@@ -508,6 +511,24 @@ with **no refused MCV orders** (the M12 conflict needs `BT_expansion_prebuild`),
 `UseRaidMissionSteering` is armed, so it is comparable between armed matches only; across arms compare kills and
 buildings.)
 
+**Same 3v3, pre-arm**: the `hard` team **lost** after 13,770 ticks (~9 game-minutes), no exceptions. All three `hard`
+bots ended as `turtle` (two switched to it at ticks 3,757 and 4,657, when the omniscient `classic` bots first hit them),
+peaked at armies of 7,260–12,690, earned 5.50–5.99 per tick and banked 20,691–22,864 each; kills 24,370 against
+deaths 123,700 for the team; 0 buildings killed, 50 lost. The armed 3v3 drew; the pre-arm 3v3 lost. **M14** is the
+visible cause here (emergency → everyone turtles).
+
+**Reading the five matches together (n = 1 per arm, so directions, not verdicts):**
+
+| Match | Armed (minus planner) | Pre-arm | Main cause seen in the losing/weaker arm |
+|---|---|---|---|
+| 1v1, A Nuclear Winter | won; spent 8.01/tick, banked 86,723 | won; spent 14.15/tick | M1 + M12 (spending speed) |
+| 2v2, Terra Cotta | **lost**; ~30 % less income than `classic`, armies 18–22k | **won**; armies ~91k | M6 + M12 (MCV loop) |
+| 3v3, Winter's End (Rich) | draw; two of three bots as escorts | **lost**; whole team turtled | armed: M13; pre-arm: M14 |
+
+Neither configuration is safe. The armed set costs economy (M6, M12) and, in teams, attack power (M13). The pre-arm
+default carries M14 (a binding ruling left switched off). That is why the next step is fixing the defects, not choosing
+a switch set (PT7), and why every claim here needs repeats under the mirror A/B protocol before it becomes a verdict.
+
 **Per world tick** (the two matches ran to different lengths): the pre-arm bot earned **14.32** vs **11.97**
 (+20 %) and spent **14.15** vs **8.01** (+77 %); it ended with 11,395 banked against 86,723, and a larger army
 (133,440 vs 106,210) despite fighting much harder (deaths 103,680 vs 13,100). Personalities differed (`turtle` vs
@@ -532,7 +553,7 @@ possibly maps where the front/back planner's search stays under its crash limit.
 | `02241219` restores engineer/crate omniscience | M8 | fixed |
 | `02241219` plugs via normal queues; limited superweapons by default | B2/B6 playtest bugs (rules), not bot strength | done; bots now pay for plugs |
 | economy health logger, replay health gate, queue-transition seam | diagnostics only (no behaviour) | they will *detect* M1/M6/M7-type stalls in future matches |
-| — | M1–M5 (the restraint stack), M9 (learned files), M10 (crash), M12 (MCV ownership conflict), M13 (team escort drain) | **not addressed** |
+| — | M1–M5 (the restraint stack), M9 (learned files), M10 (crash), M12 (MCV ownership conflict), M13 (team escort drain), M14 (team personality convergence) | **not addressed** |
 
 ## PT7. What to do
 
@@ -560,6 +581,9 @@ possibly maps where the front/back planner's search stays under its crash limit.
 6b. M13: an escort or rescue answer must not cost a bot its offence. Answer an assist only from an army above the
    bot's own launch bar (spare units), cap concurrent escorts per bot at one, and expire an escort when the claim is
    uncontested. Gate: in a 3v3, every `hard` bot launches at least one wave in the first 30,000 ticks.
+6c. M14: make the binding ruling the default: `EmergencyKeepsPersonality: true` and `EmergencyLossArmyPct: 25` on
+   `MasterAiBotModule` in `ai.yaml` (today they are only in switch group `AL_emergency_net_loss`), and find why the
+   priors-only bandit gives every teammate the same arm. A binding ruling never lives behind an experiment switch.
 
 **Architecture (feeds Part IV):**
 7. **A liveness rule for attacks.** Every restraint on the launch path gets a bounded hold, and one owner (the squad
@@ -597,18 +621,18 @@ Four limits keep "learn every number" from being a shortcut:
 
 ## PT9. Status of this investigation and where to continue
 
-Done (2026-10-09): the static analysis M1–M12, the switch-set proof (201 changes = `--groups all`), the crash
-reproduction (M10), the learned-file proof (M9), the armed 1v1 (above), the 3v3 spawn check for "Winter's End (Rich)"
-(team A Multi0–2 at 6,34 / 26,26 / 34,6, top-left; team B Multi3–5 at 95,123 / 103,103 / 123,95, bottom-right;
-`split_spawn_sides` gives the same split for all 720 orderings of the spawn list).
+Done (2026-10-09): the static analysis M1–M14, the switch-set proof (201 changes = `--groups all`), the crash
+reproduction (M10), the learned-file proof (M9), and one match per arm on three maps (PT5): 1v1 "A Nuclear Winter",
+2v2 "Terra Cotta", 3v3 "Winter's End (Rich)". For the 3v3, team A Multi0–2 starts at 6,34 / 26,26 / 34,6 (top-left) and
+team B Multi3–5 at 95,123 / 103,103 / 123,95 (bottom-right); `split_spawn_sides` gives that split for all 720 orderings
+of the spawn list.
 
-Done since: the 1v1 pre-arm and the 3v3 armed on Winter's End (Rich) (PT5). The armed and pre-arm 2v2 on Terra Cotta are also done. Still owed:
-the **pre-arm 3v3** on Winter's End (Rich), the direct comparison for M13, queued in the review container when this
-was written (`chain_pre3v3.sh`). **If that container is
-gone, rerun them from a fresh session** (route: LESSONS_LEARNED "Building and boot-gating in a Linux cloud
-container"), then add the team rows to PT5, scored with
-`python tools/ai/team_coordination_report.py <support dir>` and `tools/ai/ab_summary.py`. Keep the yaml swap out of
-every commit.
+**Next, in order:** (1) the code and default fixes PT7 items 3, 4, 6a, 6c (A8–A10 and the M14 default), boot-gated;
+(2) the M13 design call (PT7 item 6b); (3) repeats, at least 4 per arm and map with both spawn sides, of the fixed bot
+against `classic` on the same three maps, scored with `tools/ai/ab_summary.py` and
+`python tools/ai/team_coordination_report.py <support dir>`. In a fresh cloud session, follow LESSONS_LEARNED
+"Building and boot-gating in a Linux cloud container"; the match harness needs `engine/bin/OpenRA.exe` → `OpenRA`
+(a symlink inside the gitignored `engine/`) and `xvfb-run`. Keep any swapped `ai.yaml` out of every commit.
 
 ---
 
