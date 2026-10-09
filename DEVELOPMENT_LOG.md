@@ -29,17 +29,21 @@
   config-derived stride — this planner site was the only map-scale-derived radius.
 - Regression tests in `BaseFrontBackPlannerTest`: in-cap bounds `(10,14,45°)->(9.0,35.0)`, crash case
   `(35,…)->(34.0,71.0)` not null — band EXISTS past the cap — fully-beyond-cap `(52,…)->(51.0,95.0)`,
-  `coneCos=0` → `+Inf` outer (clamped to map reach by `WideSpaceRadius`), NaN/negative-band/
-  `int.MinValue` sentinel → null, `WideSpaceRadius` clamps to map reach on 71.9/+Inf/1e30.
+  `coneCos=0` and `coneCos=-0.5` (half-angle ≥90°, laterally unbounded band) → `+Inf` outer clamped to
+  map span by `WideSpaceRadius`, NaN/negative-forward-band/`int.MinValue` sentinel → null,
+  `WideSpaceRadius` clamps on 71.9/+Inf/1e30. Luna's v2 edge review drove two more fixes:
+  `ApproachBandBounds` no longer nulls a ≥90° cone (cells DO satisfy the predicate at arbitrary
+  lateral distance) and `ApproachCells` promotes `frontProj + depthCells` to double so an extreme
+  configured depth can't wrap the band's upper edge.
 - Real-map regressions (uninitialized Map + real MapGrid, flat rectangular so `Contains` = Bounds):
   in-cap `ApproachSpace` == engine `FindTilesInAnnulus(9,35)` exactly; off-cap `(35,14,45°)` on a
   200×200 map — every emitted cell playable (cordon `(0,50)` excluded), box bounded (playable `(130,50)`
   at dx=80 > 72 excluded), and `ApproachCells` over the box is set-equal to `ApproachCells` over ALL
   playable map cells — the no-dropped-cell parity the reviewers required.
-- Gates: Release build 0 errors / 8 warnings; full `OpenRA.Mods.Cameo.Test` suite 1257/1257;
-  boot-gate PASS (main menu, `MenuPostProcessEffect.PostWorldLoaded`, zero new exceptions). One
-  earlier exception (`exception-2026-10-08T202345Z`) was my launch harness missing
-  `Engine.ModSearchPaths`, not the code — corrected and re-passed.
+- Gates: Release build clean; full `OpenRA.Mods.Cameo.Test` suite 1259/1259; boot-gate PASS
+  (main menu, `MenuPostProcessEffect.PostWorldLoaded`, zero new exceptions). One earlier exception
+  (`exception-2026-10-08T202345Z`) was my launch harness missing `Engine.ModSearchPaths`, not the
+  code — corrected and re-passed.
 - Branch `devin/c1-annulus-range-cap` off playtest head 3d99405bd; v1 code at 67799ff7f, docs at
   20a8107a1, semantic v2 pushed as the new tip. LESSONS_LEARNED entry updated. No master push —
   playtest freeze stands; Sol+Luna review gates apply (Luna asked for in-map repro on top of static

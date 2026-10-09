@@ -256,15 +256,21 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		/// worst-case distance of a band cell is (frontProj+depthCells)/coneCos, so the outer edge grows
 		/// with how far out the line crawled and can exceed the engine's MaximumTileSearchRange on large
 		/// maps. All arithmetic in double so Inf/NaN/sentinel ints can never wrap an int cast into a
-		/// legal-looking range. Null ONLY when the band is geometrically empty (NaN cone math or a band
-		/// entirely below radius 0) — a band past the engine cap still exists on the map and must be
-		/// enumerated (see ApproachSpace); returning no cells there would silently truncate coverage.
+		/// legal-looking range. Null ONLY when the cone math is NaN or (forward cone only) the whole
+		/// band lies below radius 0 — a band past the engine cap or a cone of 90°+ still exists on the
+		/// map and must be enumerated (see ApproachSpace); returning no cells there would silently
+		/// truncate coverage.
 		/// </summary>
 		public static (double Inner, double Outer)? ApproachBandBounds(int frontProj, int depthCells, double coneCos)
 		{
-			var outer = Math.Ceiling(((double)frontProj + depthCells) / coneCos) + 1;
+			// coneCos <= 0 (cone half-angle >= 90°): the cone admits cells at ANY distance
+			// perpendicular to or behind the front axis — the band is genuinely unbounded, so the
+			// outer edge is +Inf (the box degenerates to the whole map) rather than empty.
+			var outer = coneCos > 0
+				? Math.Ceiling(((double)frontProj + depthCells) / coneCos) + 1
+				: double.PositiveInfinity;
 			var inner = Math.Max(0.0, frontProj - 1.0);
-			if (double.IsNaN(outer) || inner > outer)
+			if (double.IsNaN(outer) || double.IsNaN(coneCos) || inner > outer)
 				return null;
 
 			return (inner, outer);
@@ -335,10 +341,13 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (!front.HasLine)
 				return approach;
 
+			// Double space: frontProj + depthCells must not wrap into a negative upper edge
+			// at extreme configured depth (int.MinValue/maxValue inputs would empty the band).
+			var bandMax = front.FrontProj + (double)depthCells;
 			foreach (var c in space)
 			{
 				var p = Project(c, baseCenter, front.DirX, front.DirY);
-				if (p < front.FrontProj || p > front.FrontProj + depthCells)
+				if (p < front.FrontProj || p > bandMax)
 					continue;
 
 				var dir = UnitDir(baseCenter, c);

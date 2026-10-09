@@ -176,7 +176,11 @@ namespace OpenRA.Mods.Cameo.Test
 			var degenerate = BaseFrontBackPlannerBotModule.ApproachBandBounds(10, 14, 0);
 			Assert.That(degenerate.HasValue && double.IsPositiveInfinity(degenerate.Value.Outer)
 				&& degenerate.Value.Inner == 9.0);
-			// NaN cone math and a wholly negative band are the only empty results.
+			// coneCos < 0 (half-angle > 90): the band is unbounded laterally — +Inf,
+			// never empty; the predicate still decides which cells qualify.
+			Assert.That(BaseFrontBackPlannerBotModule.ApproachBandBounds(35, 14, -0.5),
+				Is.EqualTo((34.0, double.PositiveInfinity)));
+			// NaN cone math and a wholly negative forward-cone band are the only empty results.
 			Assert.That(BaseFrontBackPlannerBotModule.ApproachBandBounds(10, 14, double.NaN),
 				Is.Null);
 			Assert.That(BaseFrontBackPlannerBotModule.ApproachBandBounds(-20, 14, Cone45),
@@ -258,6 +262,30 @@ namespace OpenRA.Mods.Cameo.Test
 			var actual = BaseFrontBackPlannerBotModule.ApproachCells(space, Center, front, 14, Cone45);
 			Assert.That(reference, Is.Not.Empty);
 			Assert.That(actual, Is.EquivalentTo(reference));
+		}
+
+		[Test]
+		public void ApproachSpaceWideConeEnumeratesTheWholePlayableMap()
+		{
+			// coneCos < 0 (half-angle > 90°): the band is laterally unbounded — the whole
+			// playable map is the candidate space, and the predicate alone decides.
+			var map = FlatTestMap(120, 4);
+			var space = BaseFrontBackPlannerBotModule.ApproachSpace(map, Center, 10, 14, -0.5).ToList();
+			Assert.That(space.Count, Is.EqualTo(PlayableCellsOf(map).Count));
+			Assert.That(space.TrueForAll(map.Contains), Is.True);
+		}
+
+		[Test]
+		public void ApproachCellsToleratesExtremeConfiguredDepth()
+		{
+			// int arithmetic wrapped frontProj + depthCells negative and emptied the band;
+			// double promotion keeps an extreme configured depth a genuine upper edge.
+			var front = EastFront(10, 10);
+			var space = new List<CPos> { new(70, 50), new(48, 50) };
+			var approach = BaseFrontBackPlannerBotModule.ApproachCells(
+				space, Center, front, int.MaxValue, Cone45);
+			Assert.That(approach, Does.Contain(new CPos(70, 50))); // proj 20 is inside the band
+			Assert.That(approach, Does.Not.Contain(new CPos(48, 50))); // proj -2 is below the band
 		}
 
 		// --- radar ---
