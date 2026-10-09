@@ -20640,7 +20640,6 @@ the existing helpers only — no blanket normalization, no yaml edits except one
 * **Next:** `python -m unittest` on the 41-module set in `tools/tests` to re-verify; fleet
   coordinator decides increment merge — no lifecycle claims made here.
 
-<<<<<<< HEAD
 ## 2026-10-09 - Devin-Architect: FIX-RA-REFINERY - passable-bib dock access + bounded refinery retry (branch devin/fix-ra-refinery-dock)
 
 * **Provenance:** the defect is byte-identical in frozen campaign `a9349d015` and

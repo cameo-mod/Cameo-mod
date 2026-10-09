@@ -5459,7 +5459,6 @@ the pre-wave `SquadManagerBotModuleCA@generic` config restored verbatim as
 `RevealsMap@classic` on its PlayerActor. See DEVELOPMENT_LOG.md 2026-09-28.
 
 
-<<<<<<< HEAD
 ## 2026-10-09 Sol: economy logger implementation checkpoint
 
 Isolated codex/replay-health-logger on f7e1d0fff. New opt-in recorder/world controller, bounded writer and queue/head timing core; no YAML mount, queue decision source, engine pin, orders or launches changed. Focused core/writer tests 16/16. Current seam outcome coverage is unresolved, so activation deliberately marks evidence incomplete (UNKNOWN); not ready for adoption. Remaining recorder/schema round-trip tests, corrected seam restack, measured runtime cost and independent review. See docs/design/REPLAY_HEALTH_LOGGER.md.
