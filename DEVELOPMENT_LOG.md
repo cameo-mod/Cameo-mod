@@ -20834,3 +20834,8 @@ Isolated codex/replay-health-gate at base3d; exclusive tool/test/design scope. E
 2026-10-09 — Inactive cancellation repair plan: independent b542 review reproduced elimination cleanup falsely counted as repeated production failure. Require event-local player activity, producer liveness and fixed cancellation class; exclude destruction/elimination cleanup, clear retry history on inactivity, and reject missing event evidence as UNKNOWN. Add active/inactive/destruction and between-pulse transition regressions. Offline files only; approved startup checker stays unchanged. Exact revised head requires independent review before adoption.
 
 2026-10-09 — Net spending schema correction: read-only engine inspection showed PlayerResources.Spent decreases on refunds. Acting-lead decision: no gross/low-spend proof from sampled net accounting. Separate offline verifier now policy v2/schema2 with signed net_spent, explicit gross_spent=null/gross_spend_complete=false, and cash-float spending-unverified diagnostic only. Cash-band threshold remains an independent provisional defect.19/19 focused tests pass including refund decreases, negative net spend and rejection of legacy/unsupported evidence. Runtime logger not edited; independent delta review required.
+
+### 2026-10-09 ? MCV deploy-cell repair (Codex Sol)
+- Isolated devin/mcv-deploy-cell from c76283c0b; docs/design/MCV_DEPLOY_CELL_REPAIR.md records H2 code defect and unknown match-level H1/H2 cause.
+- Lead authorized condition-driven opt-in engine repair; engine331657f07a pushed. Single YAML instance, genericbot search only; branch-local pin. No launches.
+- Engine focused9/9 and full575/577 (2 existing skips); real-YAML mod mount2/2. Independent review/runtime adoption pending.

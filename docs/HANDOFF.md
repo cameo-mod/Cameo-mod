@@ -5505,3 +5505,7 @@ Read design/REPLAY_HEALTH_ANALYZER.md before health/campaign work. tools/ai/repl
 
 
 2026-10-09 maintainer queue/cash thresholds: separate economy_invariants.py and test_economy_invariants.py implemented against schema1 complete50tick health contract;10 focused tests pass. New logger not shipped: missing telemetry UNKNOWN. Approved replay_health.py bytes unchanged, source/runtime ownership gates remain. New tool requires independentreview beforeintegration; provisional cashband1000..10000/1500ticks, zero/full250ticks, ready250,idle1500,cancels3/1500. See design/REPLAY_HEALTH_ANALYZER.md finalsection.
+
+### 2026-10-09 ? MCV deployment repair
+- Next: independent review of condition-driven engine331657f07a and devin/mcv-deploy-cell; see docs/design/MCV_DEPLOY_CELL_REPAIR.md.
+- Base c76283c0b; single-instance generic-only repair and branch-local pin. No launches; observer ownership and campaign holds remain.
