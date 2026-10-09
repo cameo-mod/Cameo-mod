@@ -132,10 +132,11 @@ logging and off-policy evaluation help triage candidates, but never replace the 
 
 # Part II — Verified state, 2026-10-09
 
-Every number below was measured on `5c8cfe04` unless it names another source. Module counts come from the committed
-[`design/AI_MODULE_MAP.md`](design/AI_MODULE_MAP.md) (generated 2026-10-06). It could not be regenerated for this
-revision because the review container had no `engine/` build (`ai_module_map.py --check` exits "engine/ is missing").
-Regenerate it before quoting these counts as release facts (phase A, A3).
+Every number below was measured on `5c8cfe04` unless it names another source. The tree was then built (engine pin
+`331657f07a`, 0 errors) and boot-gated to the main menu (route: LESSONS_LEARNED "Building and boot-gating in a Linux
+cloud container"). On that built tree `ai_module_map.py --check` and `ai_arch_audit.py --check` both report their
+committed docs **STALE**. A fresh generation, inspected and not committed, gives the counts below. Committing the
+regenerated docs is phase A, A3.
 
 ## 5. The bot as built
 
@@ -144,8 +145,8 @@ Regenerate it before quoting these counts as release facts (phase A, A3).
 | Measure | Value | How measured |
 |---|---|---|
 | Bot C# | ~125k lines: CA 26.5k, Cameo 43.6k, Fransbot 56.4k | `wc -l` over the bot module files |
-| Loaded module types / instances | 91 / 172 | AI_MODULE_MAP |
-| Module types in C# that are not loaded (check C3) | 18 | AI_MODULE_MAP |
+| Loaded module types / instances | 91 / 172 | fresh `ai_module_map.py` run (unchanged from the committed map) |
+| Module types in C# that are not loaded (check C3) | 19 (the committed map says 18; new: `AiEconomyHealthRecorder`) | fresh `ai_module_map.py` run |
 | `IBot*` interfaces | 51 | `grep "interface IBot"` over CA, Cameo, Fransbot, Contracts, Unified |
 | `QueueOrder(` call sites | 296; Fransbot holds the largest share (`FransMcvExpansionManager` 35) | grep |
 | Modules that claim units through the lease registry | 16 (CA 5, Cameo 10, Fransbot 1) | grep `TryClaim/Transfer/Preempt` |
@@ -186,7 +187,7 @@ Source: [`design/CAMEO_AI_ARCHITECTURE_REVIEW_2026-10-02_POST_MERGE.md`](design/
 
 | # | Finding | State on `5c8cfe04` | Evidence |
 |---|---|---|---|
-| 3.1 | Generated architecture evidence stale | **Re-check** (needs an engine build) | AI_MODULE_MAP dated 2026-10-06; Part IV A3 |
+| 3.1 | Generated architecture evidence stale | **Open, confirmed**: both `--check`s report STALE on the built tree | Part IV A3 |
 | 3.2 | Obsolete switch targets | Not re-audited | run `apply_increment_switches.py --dry-run` in A3 |
 | 4.1 | TC-3 temporal coherence | **Open (unverified)**: no epoch or documented eventual-consistency rule found in `IBotCoalition.cs` | F2 covers the intra-bot half |
 | 4.2 | TeamBroadcast liveness | **Fixed**: one rule, `BroadcastMaxAgeTicks = 500` | `IBotTeamMember.cs:220-231` |
@@ -307,7 +308,7 @@ against 19 % line coverage. Before each refactor: an identical field dump (`tool
 so that "bit-identical" is proved, not claimed.
 
 ### F8 — Switches have no end of life
-31 module blocks hang behind `genericbot && <switch>`, plus `increment_switches.yaml`, the 18 unloaded C3 types and
+31 module blocks hang behind `genericbot && <switch>`, plus `increment_switches.yaml`, the 19 unloaded C3 types and
 the dormant `fransbot` bot type. **Fix:** every switch gets an expiry. After its A/B it is either promoted (the
 condition is removed) or deleted (the yaml and code go). The same rule applies to types: retire C3 types, and delete
 `fransbot` once nothing in it is left unharvested (AI_SYNTHESIS §7.4 step 7).
