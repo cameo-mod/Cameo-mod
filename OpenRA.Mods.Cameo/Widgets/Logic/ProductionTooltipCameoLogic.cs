@@ -194,8 +194,10 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 			var pm = player.PlayerActor.TraitOrDefault<PowerManager>();
 			var pr = player.PlayerActor.Trait<PlayerResources>();
 
+			// GetTraitForQueue returns null for actors with no Buildable entry on this queue
+			// (cross-queue icons, non-buildable palette items) — deref it guarded or the tooltip dies.
 			widget.IsVisible = () => getTooltipIcon() != null && getTooltipIcon().Actor != null &&
-				BuildableInfo.GetTraitForQueue(getTooltipIcon().Actor, getTooltipIcon().ProductionQueue?.Info.Type).ShowTooltip;
+				(BuildableInfo.GetTraitForQueue(getTooltipIcon().Actor, getTooltipIcon().ProductionQueue?.Info.Type)?.ShowTooltip ?? false);
 			var nameLabel = widget.Get<LabelWidget>("NAME");
 			var hotkeyLabel = widget.Get<LabelWidget>("HOTKEY");
 			var requiresLabel = widget.Get<LabelWidget>("REQUIRES");
@@ -276,7 +278,7 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 					hotkeyLabel.Bounds.X = nameSize.X + 2 * nameLabel.Bounds.X;
 				}
 
-				var prereqs = buildable.Prerequisites
+				var prereqs = (buildable?.Prerequisites ?? [])
 					.Select(a => ActorName(mapRules, a))
 					.Where(s => !s.StartsWith('~') && !s.StartsWith('!'))
 					.ToList();
@@ -311,13 +313,13 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 					powerSize = font.Measure(powerText);
 				}
 
-				var buildTime = tooltipIcon.ProductionQueue?.GetBuildTime(actor, buildable) ?? 0;
-				var timeModifier = pm != null && pm.PowerState != PowerState.Normal ? tooltipIcon.ProductionQueue.Info.LowPowerModifier : 100;
+				var buildTime = buildable != null ? tooltipIcon.ProductionQueue?.GetBuildTime(actor, buildable) ?? 0 : 0;
+				var timeModifier = pm != null && pm.PowerState != PowerState.Normal ? tooltipIcon.ProductionQueue?.Info.LowPowerModifier ?? 100 : 100;
 
 				var timeText = formatBuildTime.Update(buildTime * timeModifier / 100);
 				timeLabel.GetText = () => timeText;
 				timeLabel.TextColor =
-					(pm != null && pm.PowerState != PowerState.Normal && tooltipIcon.ProductionQueue.Info.LowPowerModifier > 100)
+					(pm != null && pm.PowerState != PowerState.Normal && (tooltipIcon.ProductionQueue?.Info.LowPowerModifier ?? 100) > 100)
 						? Color.Red
 						: Color.White;
 				var timeSize = font.Measure(timeText);
@@ -347,10 +349,10 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 				extrasLabel.Text = string.Join("\n", tooltipExtras.Select(extra => UnescapeNewlines(FluentProvider.GetMessage(extra.Description))));
 				var extraSize = new int2(0, 0);
 
-				if (extrasLabel.Text != "")
+				extrasLabel.Visible = extrasLabel.Text != "";
+				if (extrasLabel.Visible)
 				{
 					extraSize = extrasFont.Measure(extrasLabel.Text);
-					extrasLabel.Visible = true;
 					descLabel.Bounds.Y += extraSize.Y;
 					requiresLabel.Bounds.Y += extraSize.Y;
 				}
@@ -358,7 +360,7 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 				var summary = versusContainer != null && versusTemplate != null ? VersusSummary.For(actor, mapRules, naval) : null;
 				var derived = summary != null && summary.HasWeapons;
 
-				var desc = string.IsNullOrEmpty(buildable.Description) ? "" : UnescapeNewlines(FluentProvider.GetMessage(buildable.Description));
+				var desc = string.IsNullOrEmpty(buildable?.Description) ? "" : UnescapeNewlines(FluentProvider.GetMessage(buildable.Description));
 
 				// DESIGN §7's hand-written "Strong vs / Weak vs" lines are replaced by the derived ones below.
 				if (derived)
@@ -378,19 +380,22 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 						(bottom, versusWidth) = LayoutVersus(summary, versusContainer, versusTemplate, cellFont, descLabel.Bounds.X, bottom + 4);
 				}
 
-				var extraLines = new List<(LabelWidget Label, string Text)>();
-				if (derived)
+				// The three group labels must be listed unconditionally: for an unarmed actor the loop
+				// below never sees them, so they would keep the last armed actor's text, visibility and
+				// Bounds.Y and render stale lines floating under the shrunken box (playtest B5).
+				var (strongText, mediumText, weakText) = derived
+					? GroupLines(summary.GroupValues)
+					: ("", "", "");
+				if (mediumsLabel == null && mediumText != "")
+					strongText = new[] { strongText, mediumText }.Where(t => t != "").JoinWith("\n");
+
+				var extraLines = new List<(LabelWidget Label, string Text)>
 				{
-					var (strongText, mediumText, weakText) = GroupLines(summary.GroupValues);
-					if (mediumsLabel == null && mediumText != "")
-						strongText = new[] { strongText, mediumText }.Where(t => t != "").JoinWith("\n");
-
-					extraLines.Add((strengthsLabel, strongText));
-					extraLines.Add((mediumsLabel, mediumText));
-					extraLines.Add((weaknessesLabel, weakText));
-				}
-
-				extraLines.Add((attributesLabel, Attributes(actor).JoinWith("\n")));
+					(strengthsLabel, strongText),
+					(mediumsLabel, mediumText),
+					(weaknessesLabel, weakText),
+					(attributesLabel, Attributes(actor).JoinWith("\n")),
+				};
 
 				var extraWidth = 0;
 				foreach (var (label, text) in extraLines)
