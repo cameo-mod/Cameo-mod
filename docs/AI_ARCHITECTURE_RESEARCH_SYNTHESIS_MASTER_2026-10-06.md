@@ -476,6 +476,22 @@ window (Multi1 + Multi2 against Multi4) in the whole match. The combat veto fire
 back here. **This reproduces the playtest symptom:** two of the three armed bots spent the match as escorts and
 defenders (M13), banked up to 62,000 each, and never threatened anyone. The one strong bot carried the team.
 
+**2v2 on "Terra Cotta"** (Tournament, 4 spawns; `hard` ×2 vs `classic` ×2), armed (minus the front/back planner):
+the `hard` team **lost** after 14,680 ticks (~10 game-minutes), no exceptions.
+
+| Bot | Kills / deaths (value) | Buildings killed / lost | Earned / spent per tick | Peak army | Attack waves | Refused MCV orders |
+|---|---|---|---|---|---|---|
+| Multi0 `hard` | 12,600 / 88,030 | 1 / 25 | 6.65 / 7.11 | 18,210 | **0** | 162 |
+| Multi1 `hard` | 29,300 / 96,260 | 2 / 39 | 5.87 / 6.28 | 22,140 | **0** | 492 |
+| Multi2 `classic` | 128,880 / 17,850 | 40 / 1 | 9.51 / 10.27 | 64,510 | — | — |
+| Multi3 `classic` | 54,750 / 25,290 | 24 / 2 | 8.47 / 9.31 | 52,510 | — | — |
+
+No escort drain here (0 escort answers), so the cause is economic. The expansion loop logged 217 "MCV sent to field"
+lines, 65 "parked field … no yard founded" and 46 greedy MCV requests: the same MCV at 26,88 is re-sent to field 25
+every 20 ticks ("hand-out 1, 2, 3"), never moves because the gate refuses `McvExpansionManagerBotModule`'s orders (M12),
+and the field is parked for 3,000 ticks. Both `hard` bots earned about 30 % less per tick than `classic`, built armies about a
+third the size, and never launched a wave: **the playtest symptom, in a 2v2, from M6 + M12.**
+
 **Per world tick** (the two matches ran to different lengths): the pre-arm bot earned **14.32** vs **11.97**
 (+20 %) and spent **14.15** vs **8.01** (+77 %); it ended with 11,395 banked against 86,723, and a larger army
 (133,440 vs 106,210) despite fighting much harder (deaths 103,680 vs 13,100). Personalities differed (`turtle` vs
@@ -570,9 +586,9 @@ reproduction (M10), the learned-file proof (M9), the armed 1v1 (above), the 3v3 
 (team A Multi0–2 at 6,34 / 26,26 / 34,6, top-left; team B Multi3–5 at 95,123 / 103,103 / 123,95, bottom-right;
 `split_spawn_sides` gives the same split for all 720 orderings of the spawn list).
 
-Done since: the 1v1 pre-arm and the 3v3 armed on Winter's End (Rich) (PT5). Still owed: a **pre-arm 3v3** on the same
-map (the direct comparison for M13), and the 2v2 pair on Terra Cotta, which was queued in the review container when
-this was written (`/tmp/claude-0/master_chain.sh`). **If that container is
+Done since: the 1v1 pre-arm and the 3v3 armed on Winter's End (Rich) (PT5). The armed 2v2 on Terra Cotta is also done. Still owed: the
+**pre-arm 2v2** on Terra Cotta and the **pre-arm 3v3** on Winter's End (Rich), the direct comparisons for M12/M6 and M13;
+both were queued in the review container when this was written (`/tmp/claude-0/master_chain.sh`, `chain_pre3v3.sh`). **If that container is
 gone, rerun them from a fresh session** (route: LESSONS_LEARNED "Building and boot-gating in a Linux cloud
 container"), then add the team rows to PT5, scored with
 `python tools/ai/team_coordination_report.py <support dir>` and `tools/ai/ab_summary.py`. Keep the yaml swap out of
