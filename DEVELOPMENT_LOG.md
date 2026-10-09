@@ -20516,3 +20516,35 @@ the existing helpers only — no blanket normalization, no yaml edits except one
 * **Verification:** 6 seam tests rewritten to the new API (Held dedupe, terminal episode
   end, per-instance Ready, per-instance episode ids, per-producer isolation, record shape);
   suite 1280/1280; Release clean; boot gate main menu, zero new exceptions.
+
+## 2026-10-09 - Devin-Architect: Sol c43d580fd re-review findings closed (same branch)
+
+* **Removal+request != cause proof:** a pending terminal now resolves to its recorded kind
+  only while the queue is still live-observed (`BotQueueWatch.SeenTick`); a removal flushed
+  from a stale/disabled/dead queue emits `Removed` carrying the pending *reason* — intent
+  preserved, honest UNKNOWN, no invented terminal. A pending `Placed` also cannot resolve
+  if the producer died before the next sweep. `Removed` always classifies event-locally
+  (Elimination / Destruction / None), never inherits the pending class; a dead producer
+  still reclassifies a *confirmed* production cancel as Destruction.
+* **Last-same-name binding:** `CancelProduction` removes the LAST same-name item, so all
+  three manager cancel sites and `NoteExternalCancel` bind the tail instance
+  (`AllQueued().LastOrDefault(name)` / watch scan), not the head. `BotQueuePendingTerminal.
+  Matches` prefers the bound instance ref; a same-name sibling leaving first no longer
+  consumes the request. Name-only binding remains as an honest fallback.
+* **Retention bounded:** `BotQueueEpisodeTracker.DropProducer` prunes dedupe history when a
+  producer watch dies; stale empty watches are dropped with their queues; pending requests
+  expire after `MaxInFlightTicks` (8) — a rejected/delayed cancel can never mask a later
+  real `Ready`/`Done` observation. `NoteExternalCancel` dedupes by name (last decision
+  wins) instead of appending unbounded requests.
+* **O(n) probe:** `BotQueueWatch.Items` is now a `HashSet<object>` and the current item list
+  is collected in a reusable `HashSet<ProductionItem>` scratch — removal diff is one pass
+  per queue (was nested `Contains` over lists, O(n²) per world tick).
+* **Naming honesty:** `Started` renamed `Queued` — it records observed queued state, not an
+  accepted engine start. `Ready` remains an observer observation (<=1 tick lag by trait
+  order), never claimed as exact engine completion.
+* **Regressions added:** `ReadyCannotInterleaveWithHeld` (stable
+  Ready->Held->Ready->Held emits each change; Ready never resurrects per instance),
+  `HeldReasonAlternationIsATransition`, `PendingTerminalExpiresRejectedRequests`,
+  `PendingMatchesBoundInstanceNotName`, `DroppedProducerLosesDedupeHistory`. 11 seam tests green; full suite 1285/1285; Release
+  clean; boot gate main menu, zero new exceptions. Still record-only — no orders, no world
+  mutation, no RNG.

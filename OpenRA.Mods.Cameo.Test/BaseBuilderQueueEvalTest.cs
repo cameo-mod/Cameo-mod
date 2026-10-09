@@ -985,6 +985,74 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void ReadyCannotInterleaveWithHeld()
+		{
+			// Sol review: a stable held item sweeping Ready->Held->Ready->Held would churn both
+			// records forever under last-tuple dedupe. Ready is once per item instance, so the
+			// interleaved Held emits can never resurrect it.
+			var tracker = new BotQueueEpisodeTracker();
+			var item = new object();
+			tracker.BeginEpisode(item);
+			Assert.That(tracker.AnnounceReady(item), Is.True);
+			Assert.That(tracker.EmitGate(7, item, "proc", BotQueueTransitionKind.Held, BotQueueTransitionReason.DemandHold), Is.True);
+			Assert.That(tracker.AnnounceReady(item), Is.False, "Held must not resurrect an announced Ready");
+			Assert.That(tracker.EmitGate(7, item, "proc", BotQueueTransitionKind.Held, BotQueueTransitionReason.DemandHold), Is.False);
+			Assert.That(tracker.AnnounceReady(item), Is.False, "still suppressed on every later sweep");
+		}
+
+		[Test]
+		public void HeldReasonAlternationIsATransition()
+		{
+			// A real oscillation (hold reason changing between sweeps) is a transition and must
+			// emit — dedupe only suppresses the identical consecutive tuple.
+			var tracker = new BotQueueEpisodeTracker();
+			var item = new object();
+			Assert.That(tracker.EmitGate(7, item, "proc", BotQueueTransitionKind.Held, BotQueueTransitionReason.DemandHold), Is.True);
+			Assert.That(tracker.EmitGate(7, item, "proc", BotQueueTransitionKind.Held, BotQueueTransitionReason.CrawlHold), Is.True);
+			Assert.That(tracker.EmitGate(7, item, "proc", BotQueueTransitionKind.Held, BotQueueTransitionReason.DemandHold), Is.True, "back to the first reason is a real change, not noise");
+			Assert.That(tracker.EmitGate(7, item, "proc", BotQueueTransitionKind.Held, BotQueueTransitionReason.DemandHold), Is.False, "then the repeat dedupes");
+		}
+
+		[Test]
+		public void PendingTerminalExpiresRejectedRequests()
+		{
+			// Requests and confirmed lifecycle stay separate: a pending older than the bound
+			// whose item is still queued is a rejected/lost order, dropped before reconcile.
+			var pending = new BotQueuePendingTerminal { IssuedTick = 100 };
+			Assert.That(pending.Stale(108), Is.False, "inside the bound the request may still resolve");
+			Assert.That(pending.Stale(109), Is.True, "past MaxInFlightTicks it never resolved");
+		}
+
+		[Test]
+		public void PendingMatchesBoundInstanceNotName()
+		{
+			// Sol review: CancelProduction resolves the LAST same-name item, so a request bound
+			// to an instance must never resolve against a different same-name removal — that
+			// would attribute another item's fate to this request.
+			var first = new object();
+			var second = new object();
+			var bound = new BotQueuePendingTerminal { Item = second, ItemName = "proc" };
+			Assert.That(bound.Matches(second, "proc"), Is.True, "its own instance resolves the request");
+			Assert.That(bound.Matches(first, "proc"), Is.False, "a same-name sibling leaving first must not consume it");
+
+			var nameBound = new BotQueuePendingTerminal { ItemName = "proc" };
+			Assert.That(nameBound.Matches(first, "proc"), Is.True, "a name-only request resolves the next same-name removal");
+			Assert.That(nameBound.Matches(first, "warfactory"), Is.False, "different names never match");
+		}
+
+		[Test]
+		public void DroppedProducerLosesDedupeHistory()
+		{
+			var tracker = new BotQueueEpisodeTracker();
+			var item = new object();
+			Assert.That(tracker.EmitGate(5, item, "proc", BotQueueTransitionKind.Held, BotQueueTransitionReason.DemandHold), Is.True);
+			Assert.That(tracker.EmitGate(5, item, "proc", BotQueueTransitionKind.Held, BotQueueTransitionReason.DemandHold), Is.False);
+			tracker.DropProducer(5);
+			Assert.That(tracker.EmitGate(5, item, "proc", BotQueueTransitionKind.Held, BotQueueTransitionReason.DemandHold), Is.True,
+				"a pruned producer's next transition is fresh — and its history is gone");
+		}
+
+		[Test]
 		public void TransitionRecordCarriesSchema2Fields()
 		{
 			var t = new BotQueueTransition(1234, "proc", "Building", BuildingType.Refinery, 42, 7,

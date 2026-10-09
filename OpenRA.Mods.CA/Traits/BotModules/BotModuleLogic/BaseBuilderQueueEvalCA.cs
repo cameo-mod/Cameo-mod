@@ -506,7 +506,7 @@ namespace OpenRA.Mods.CA.Traits
 	// - All probe/tracker state is lazy: with no observer trait registered the emit path is
 	//   one null check and nothing is allocated.
 
-	public enum BotQueueTransitionKind { Started, Ready, Placed, Cancelled, Held, Resumed, Removed }
+	public enum BotQueueTransitionKind { Queued, Ready, Placed, Cancelled, Held, Resumed, Removed }
 
 	public enum BotQueueTransitionReason { None, LimitReached, NoRefinerySite, SaturationLatch, RelocationLatch, DemandHold, CrawlHold, FrontBackHold, DemandCancel }
 
@@ -581,9 +581,15 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>True the first time a Done head item is announced — once per item instance.</summary>
 		public bool AnnounceReady(object item) => readyAnnounced.Add(item);
 
+		/// <summary>Drops a producer's dedupe entry — called when its queue leaves the probe
+		/// (dead/disposed), keeping <paramref name="producerId"/> history bounded to live
+		/// producers plus any in-flight episode.</summary>
+		public void DropProducer(uint producerId) => last.Remove(producerId);
+
 		/// <summary>Suppresses an identical consecutive transition (a Held re-swept every
 		/// tick emits once); item reference identity keeps a re-queued same-name item a new
-		/// episode.</summary>
+		/// episode. Only identical consecutive tuples dedupe — a real alternation
+		/// (Held/CrawlHold <-> Held/DemandHold) is a transition and still emits.</summary>
 		public bool EmitGate(uint producerId, object itemRef, string item, BotQueueTransitionKind kind, BotQueueTransitionReason reason)
 		{
 			if (last.TryGetValue(producerId, out var l) && ReferenceEquals(l.ItemRef, itemRef) && l.Item == item && l.Kind == kind && l.Reason == reason)
@@ -596,23 +602,42 @@ namespace OpenRA.Mods.CA.Traits
 
 	/// <summary>A terminal request in flight — resolves to a record on the tick the item
 	/// actually leaves the queue. Item is null when only the name is known (module-side
-	/// demand cancels); such an entry resolves against the next removed same-name item.</summary>
+	/// demand cancels); such an entry resolves against the next removed same-name item.
+	/// Requests and confirmed lifecycle stay separate: a pending older than
+	/// <see cref="MaxInFlightTicks"/> whose item is still queued is a rejected or lost order
+	/// — it is dropped so the eventual removal classifies fresh instead of wearing a stale
+	/// request's label.</summary>
 	public sealed class BotQueuePendingTerminal
 	{
+		/// <summary>QueueOrder latency is ~1-2 ticks; a request older than this never resolved.</summary>
+		public const int MaxInFlightTicks = 8;
+
 		public object Item;
 		public string ItemName;
 		public BotQueueTransitionKind Kind;
 		public BotQueueTransitionReason Reason;
 		public BotQueueCancellationClass Class;
+		public int IssuedTick;
+
+		/// <summary>World-free seam: the request is stale when its item is still queued
+		/// <see cref="MaxInFlightTicks"/> after issue.</summary>
+		public bool Stale(int now) => now - IssuedTick > MaxInFlightTicks;
+
+		/// <summary>World-free seam: a bound request matches only its item instance — the
+		/// engine removes that exact ProductionItem (callers bind the LAST same-name item for
+		/// cancels because CancelProduction resolves the last same-name entry). A name-only
+		/// request resolves against the next removed same-name item.</summary>
+		public bool Matches(object itemRef, string itemName)
+			=> ReferenceEquals(Item, itemRef) || (Item == null && ItemName == itemName);
 	}
 
-	/// <summary>Per-queue probe state for one manager category: the last observed item list
+	/// <summary>Per-queue probe state for one manager category: the last observed item set
 	/// plus terminal requests awaiting resolution. Bounded by queue length — no history.
 	/// SeenTick marks the last probe sweep the queue appeared in; a stale watch means the
 	/// producer's trait disabled (dead) and its contents resolve as removals.</summary>
 	public sealed class BotQueueWatch
 	{
-		public readonly List<object> Items = [];
+		public readonly HashSet<object> Items = [];
 		public readonly List<BotQueuePendingTerminal> Pending = [];
 		public int SeenTick = -1;
 	}
