@@ -187,8 +187,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			"only when the outbound dock->patch AND the return patch->dock route each stay within it.")]
 		public readonly int CoverageRouteLimitCells = 10;
 
-		[Desc("REPAIR-B3: patch cells sampled per (anchor, refinery) pair for the route probe — each cell and",
-			"each leg consumes budget.")]
+		[Desc("REPAIR-B3: patch cells a (anchor, refinery) pair's route-probe walk advances per refresh —",
+			"the walk resumes across refreshes until the field is exhausted, so an Unserved verdict only",
+			"ever follows a fully-examined candidate set; each cell and each leg consumes budget.")]
 		public readonly int CoveragePatchCellSample = 4;
 
 		[Desc("FE-1: the factor a site/field keeps when its bearing from the main base lies within CrawlSeparationDegrees of",
@@ -350,6 +351,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		RefineryProbeBudget coverageBudget = new(0, 0, 0);
 		byte[] anchorCoverageVerdict = Array.Empty<byte>();
 		readonly Dictionary<(int Anchor, int Refinery), long> coverageRanks = new();
+
+		// REPAIR-B3 (R2): how far each (anchor, refinery) pair has walked its field's ordered patch
+		// cells — the window advances CoveragePatchCellSample cells per refresh and persists across
+		// refreshes under the same model version, so "unserved" is only ever declared after the whole
+		// candidate set was examined (budget- or window-deferred pairs stay UNKNOWN).
+		readonly Dictionary<(int Anchor, int Refinery), (int Version, int Index)> patchProbeProgress = new();
 		readonly HashSet<(int Anchor, int Refinery)> evaluatedSites = new();
 		int coverageVersion;
 		int coverageCursor;
@@ -560,6 +567,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			Log.Write("debug", $"AI ({player.ClientIndex}): REPAIR-B3 reserve {set.Count} anchors for site {site} v{modelVersion}: {(ok ? "committed" : "refused")} at tick {tick}");
 			return ok;
 		}
+
+		int IBotExpansionTargetProvider.RefineryCoverageModelVersion => LawActive ? coverageVersion : -1;
 
 		int IBotExpansionTargetProvider.ReleaseRefineryAnchors(IReadOnlyCollection<CPos> set, object owner) =>
 			anchorReservations.ReleaseAll(set, owner);
@@ -2174,6 +2183,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				coverageBlockerCells = blockers;
 				anchorCoverageVerdict = new byte[anchors.Count];
 				coverageRanks.Clear();
+				patchProbeProgress.Clear();
 				evaluatedSites.Clear();
 				coverageCursor = 0;
 				coveragePendingAnchors = anchors.Count;
@@ -2291,9 +2301,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		}
 
 		/// <summary>
-		/// REPAIR-B3: the patch cells a harvester would actually mine first at anchor <paramref name="a"/> —
-		/// the CoveragePatchCellSample resource cells of its field nearest the anchor (the anchor cell itself
-		/// when the field records none). Deterministic order: distance, then X, then Y.
+		/// REPAIR-B3: the patch cells a harvester would mine at anchor <paramref name="a"/>, ordered
+		/// nearest-first — the anchor cell itself when the field records none. R2: the FULL candidate
+		/// set, not just the nearest CoveragePatchCellSample — a pair's walk advances only the knob's
+		/// window per refresh and resumes where it stopped, so a refinery is never declared unserving
+		/// while unexamined cells could still prove coverage. Deterministic order: distance, then X,
+		/// then Y.
 		/// </summary>
 		IReadOnlyList<CPos> PatchCells(int a)
 		{
@@ -2303,8 +2316,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				return new[] { anchors[a] };
 
 			var anchor = anchors[a];
-			return cells.OrderBy(c => (c - anchor).LengthSquared).ThenBy(c => c.X).ThenBy(c => c.Y)
-				.Take(Math.Max(1, Info.CoveragePatchCellSample)).ToArray();
+			return cells.OrderBy(c => (c - anchor).LengthSquared).ThenBy(c => c.X).ThenBy(c => c.Y).ToArray();
 		}
 
 		/// <summary>
@@ -2381,15 +2393,18 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		}
 
 		/// <summary>
-		/// REPAIR-B3 (SPEC §4, R1): the bounded refresh sweep — anchors resume at the persistent cursor,
-		/// each (anchor, refinery) candidate pair is gated by the geometric radius alone (R1: no
-		/// same-field inheritance — a far flush refinery does not serve), then requires a DockHost that
-		/// is enabled, in-world, and type-compatible (the loaded-return contract), then probes both
-		/// directed legs under the stationary-obstacle model. Site/probe counters cap the WHOLE refresh;
-		/// the per-tick probe limit only paces the spend (a tick-stopped anchor rewinds one cursor step
-		/// and resumes next tick — its paid witnesses persist). A pair the refresh ceiling refused is
-		/// deferred (UNKNOWN), never counted as failure; an anchor with any verified pair is Covered at
-		/// the best pair's travel-time rank.
+		/// REPAIR-B3 (SPEC §4, R1+R2): the bounded refresh sweep — anchors resume at the persistent
+		/// cursor, each (anchor, refinery) candidate pair is gated by the geometric radius alone (R1:
+		/// no same-field inheritance — a far flush refinery does not serve), then requires a DockHost
+		/// that is enabled, in-world, and type-compatible (the loaded-return contract), then probes
+		/// both directed legs under the stationary-obstacle model. R2: a pair walks its anchor's whole
+		/// field in CoveragePatchCellSample-cell windows across refreshes (per-pair cursor persisted
+		/// under the model version) — Unserved is only ever declared after every patch candidate was
+		/// examined, and a window- or budget-deferred pair keeps the anchor UNKNOWN. Site/probe
+		/// counters cap one PASS over the anchors; a ceiling-cut pass re-arms at the boundary so
+		/// deferred work resumes instead of starving. The per-tick probe limit only paces the spend
+		/// (a tick-stopped anchor rewinds one cursor step and resumes next tick — paid witnesses
+		/// persist). An anchor with any verified pair is Covered at the best pair's travel-time rank.
 		/// </summary>
 		void EvaluateCoverageTick()
 		{
@@ -2399,6 +2414,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				// together; a stray length mismatch clears all index-keyed state.
 				anchorCoverageVerdict = new byte[anchors.Count];
 				coverageRanks.Clear();
+				patchProbeProgress.Clear();
 				evaluatedSites.Clear();
 			}
 
@@ -2417,18 +2433,22 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			var n = anchors.Count;
 			var scanned = 0;
+			var rearmCoverageBudget = false;
 			while (scanned < n && coverageBudget.TickProbesOpen)
 			{
 				var a = coverageCursor % n;
 				coverageCursor++;
 				scanned++;
 				coverageSweepScanned++;
+				if (coverageCursor % n == 0 && coverageFirstBudgetDeferred >= 0)
+					rearmCoverageBudget = true;
 				if (anchorCoverageVerdict[a] != (byte)RefineryCoverageVerdict.Unknown)
 					continue;
 
 				var anyCovered = false;
 				var anyDeferred = false;
 				var tickCapHit = false;
+				var patches = PatchCells(a);
 				for (var r = 0; r < lastRefineryCells.Count && r < lastRefineryDocks.Count; r++)
 				{
 					var d = (anchors[a] - lastRefineryCells[r]).LengthSquared;
@@ -2455,23 +2475,33 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					var pairCovered = false;
 					var pairRank = long.MaxValue;
 					var (cells, types, enabled) = lastRefineryDocks[r];
-					for (var di = 0; cells != null && di < cells.Length && !pairCovered && !tickCapHit; di++)
+
+					// R2: patch-outer walk with a persisted per-pair cursor — cell index advances only
+					// after every eligible (dock, spec) examined it, and the window moves at most
+					// CoveragePatchCellSample cells per refresh. A pair whose window ends before the
+					// field does stays UNKNOWN (unexamined cells could still prove coverage); only a
+					// fully-walked field contributes to Unserved.
+					var pi = patchProbeProgress.TryGetValue((a, r), out var progress) && progress.Version == coverageVersion
+						? progress.Index : 0;
+					var piEnd = Math.Min(patches.Count, pi + Math.Max(1, Info.CoveragePatchCellSample));
+					for (; pi < piEnd && !pairCovered && !tickCapHit; pi++)
 					{
-						// R1: real DockHost eligibility — enabled and in-world, type-overlapping.
-						// A null Types array (no DockHost — exotic mod) is wildcard-compatible with
-						// the synthetic "enabled" flag RefineryDockGeometry fills for it.
-						var dockEnabled = enabled != null && di < enabled.Length && enabled[di];
-						BitSet<DockType>? dockType = types != null && di < types.Length ? types[di] : (BitSet<DockType>?)null;
-						foreach (var spec in specs)
+						var patch = patches[pi];
+						for (var di = 0; cells != null && di < cells.Length && !pairCovered && !tickCapHit; di++)
 						{
-							if (pairCovered || tickCapHit)
-								break;
-
-							if (!RefineryCoverageOracle.DockEligible(dockEnabled, spec.DockType, dockType))
-								continue;
-
-							foreach (var patch in PatchCells(a))
+							// R1: real DockHost eligibility — enabled and in-world, type-overlapping.
+							// A null Types array (no DockHost — exotic mod) is wildcard-compatible with
+							// the synthetic "enabled" flag RefineryDockGeometry fills for it.
+							var dockEnabled = enabled != null && di < enabled.Length && enabled[di];
+							BitSet<DockType>? dockType = types != null && di < types.Length ? types[di] : (BitSet<DockType>?)null;
+							foreach (var spec in specs)
 							{
+								if (pairCovered || tickCapHit)
+									break;
+
+								if (!RefineryCoverageOracle.DockEligible(dockEnabled, spec.DockType, dockType))
+									continue;
+
 								var outbound = WitnessOrProbe(cells[di], patch, spec, true);
 								var inbound = outbound == null ? null : WitnessOrProbe(cells[di], patch, spec, false);
 								if (outbound == null || inbound == null)
@@ -2501,6 +2531,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 						}
 					}
 
+					patchProbeProgress[(a, r)] = (coverageVersion, pi);
+					if (!pairCovered && !tickCapHit && !coverageBudget.ProbeCapSpent && pi < patches.Count)
+						anyDeferred = true;
+
 					if (pairCovered)
 					{
 						anyCovered = true;
@@ -2519,6 +2553,18 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					coverageCursor--;
 					break;
 				}
+			}
+
+			// One pass = one refresh (SPEC §54): the site/probe ceilings bound each pass, so a pass
+			// the ceiling cut short re-arms at the boundary — deferred anchors resume in the next
+			// pass instead of starving UNKNOWN on a permanently spent budget. The per-tick pace is
+			// untouched (NewTick runs at sweep start; this budget starts clean for next tick).
+			if (rearmCoverageBudget)
+			{
+				coverageBudget = new RefineryProbeBudget(Info.CoverageSiteLimit, Info.CoverageProbeLimit, Info.CoverageProbesPerTick);
+				evaluatedSites.Clear();
+				coverageFirstBudgetDeferred = -1;
+				Log.Write("debug", $"AI ({player.ClientIndex}): REPAIR-B3 coverage pass ceiling hit at tick {world.WorldTick}: refresh budget re-armed for the next pass");
 			}
 
 			var hadPending = coveragePendingAnchors;

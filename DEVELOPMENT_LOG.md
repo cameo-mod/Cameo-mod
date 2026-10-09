@@ -20576,3 +20576,53 @@ closed in this round:
   enumeration). Boot-gate still deferred (serial replay lane); no merge —
   pushed for Devin-Reviewer re-review of the frozen SHA.
 * **Overlap:** unchanged vs the queue-observer-seam — still append-point only.
+
+# 2026-10-09 — REPAIR-B3 R2: patch-walk honesty + pass-boundary re-arm + version getter
+
+*Devin-Developer.* The head-review addendum's remaining provider-side concern —
+"sampling only the nearest CoveragePatchCellSample cells can declare Unserved
+while unexamined field cells could still prove coverage" — is fixed by making
+the walk exhaustive under the existing budget machinery rather than widening
+the sample:
+
+1. **Per-pair persisted patch cursor (R2).** `PatchCells(a)` now returns the
+   anchor's whole field ordered nearest-first (deterministic: distance, X, Y);
+   `patchProbeProgress[(anchor,refinery)] = (version, index)` records how far
+   the pair's walk got under the current model version. The probe loop is
+   reordered patch-outer — a cell index only advances after every eligible
+   (dock, spec) pair examined it — and each refresh advances the window by at
+   most `CoveragePatchCellSample` cells. A pair whose window ends before the
+   field does now contributes `anyDeferred` (UNKNOWN), never Unserved; only a
+   fully-walked field can fail a pair. Progress resets on every model-version
+   bump (topology/dock changes re-open the walk) and on the length-mismatch
+   defensive path.
+2. **Pass-boundary budget re-arm.** The 32-site/64-probe ceilings still span
+   exactly one pass over the anchors (the reviewer's whole-refresh finding),
+   but a pass the ceiling cut short now re-arms `coverageBudget` +
+   `evaluatedSites` + `coverageFirstBudgetDeferred` when the anchor cursor
+   wraps — deferred pairs resume in the next pass instead of starving UNKNOWN
+   on a permanently spent budget. Without this, honest exhaustiveness on large
+   fields could deadlock an anchor behind an exhausted ceiling — the very
+   failure class B3 exists to remove. Per-tick pacing is untouched (NewTick at
+   sweep start; the re-arm happens after the tick's scan completes).
+3. **`RefineryCoverageModelVersion` getter** (interface + impl): the version
+   stamp callers pass as `modelVersion` to `TryReserveRefineryAnchors` so a
+   covered-anchor set derived from `RefineryClaimCoveredAnchors` is refused if
+   the model re-planned in between — completes the SPEC §62 transaction fields
+   (site, set, owner, until, version) for the Architect's queue-side wiring.
+4. `CoveragePatchCellSample` Desc + `EvaluateCoverageTick` doc updated:
+   "cells a pair's walk advances per refresh" — bounded per-refresh work, not a
+   bounded candidate set. `patches` hoisted out of the per-refinery loop (it is
+   anchor-only).
+
+* **Verification:** `dotnet build -c Release` 0/0; `dotnet test` = **1294/1294**
+  (no signature changes to tested surfaces; the cursor/walk is module-internal
+  world-bound code — its honesty property is exercised by the integration pass
+  once queue wiring lands). Fog audit unchanged (no new enumeration). Boot-gate
+  still deferred (serial replay lane); no merge.
+* **Queue-side blocker unchanged:** the VP's exact-tip R1 review
+  (`REREVIEW_2026-10-09_repair_b3_r1_vp.md`) confirms all five R1 findings
+  closed; its single remaining FIX is production callers for
+  `TryReserveRefineryAnchors`/`RefineryClaimCoveredAnchors`/
+  `RefineryClaimPlacementFailed`/2-arg commit — Architect-owned queue files.
+  Precise contract sent (commit ~:1619, failure ~:1633, admission bind ~:328).

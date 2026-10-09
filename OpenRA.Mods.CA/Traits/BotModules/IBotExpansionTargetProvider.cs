@@ -253,6 +253,14 @@ namespace OpenRA.Mods.CA.Traits
 		/// </summary>
 		bool TryReserveRefineryAnchors(CPos site, IReadOnlyCollection<CPos> anchors, object owner, int untilTick, int modelVersion = -1) => false;
 
+		/// <summary>
+		/// REPAIR-B3: the coverage-model version the provider currently holds — the value callers pass as
+		/// <c>modelVersion</c> to <see cref="TryReserveRefineryAnchors"/> so a set derived from
+		/// <see cref="RefineryClaimCoveredAnchors"/> is refused if the model re-planned in between.
+		/// Negative = no versioned model (classic, switch off).
+		/// </summary>
+		int RefineryCoverageModelVersion => -1;
+
 		/// <summary>REPAIR-B3: release <paramref name="owner"/>'s hold on every member — idempotent; returns released count.</summary>
 		int ReleaseRefineryAnchors(IReadOnlyCollection<CPos> anchors, object owner) => 0;
 
