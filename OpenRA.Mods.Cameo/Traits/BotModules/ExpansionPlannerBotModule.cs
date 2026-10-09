@@ -2545,8 +2545,18 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					}
 
 					patchProbeProgress[(a, r)] = (coverageVersion, walk.Index);
-					if (!pairCovered && !tickCapHit && !coverageBudget.ProbeCapSpent && !walk.FieldExhausted(patches.Count))
+					if (RefineryCoverageOracle.PairDeferredAfterWalk(pairCovered, walk, patches.Count))
+					{
+						// R4: unexamined cells defer the pair no matter WHAT stopped the walk —
+						// window end, tick pacing (already marked above, idempotent), or a probe
+						// ceiling the final SUCCESSFUL probe landed exactly on. The R3 form also
+						// required !ProbeCapSpent, so a clean cap exit suppressed the defer →
+						// false Unserved that cascaded: every later anchor exited its walk at
+						// entry, aggregated Unserved, and no deferred marker meant no re-arm.
 						anyDeferred = true;
+						if (coverageBudget.ProbeCapSpent && coverageFirstBudgetDeferred < 0)
+							coverageFirstBudgetDeferred = a;
+					}
 
 					if (pairCovered)
 					{

@@ -242,6 +242,16 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			anyCovered ? RefineryCoverageVerdict.Covered
 				: anyDeferred ? RefineryCoverageVerdict.Unknown
 				: RefineryCoverageVerdict.Unserved;
+
+		/// <summary>
+		/// REPAIR-B3 (R4): the pair's post-walk decision — unexamined field cells mean the pair is
+		/// DEFERRED, whatever stopped the walk: window end, tick pacing, or a probe ceiling the final
+		/// SUCCESSFUL probe landed exactly on. Only <see cref="PatchWalk.FieldExhausted"/> may feed an
+		/// Unserved contribution — a spent cap suppressing the defer was the R3 false-Unserved cascade:
+		/// every anchor evaluated after the ceiling exited its walk at entry and aggregated Unserved.
+		/// </summary>
+		public static bool PairDeferredAfterWalk(bool pairCovered, PatchWalk walk, int fieldCells) =>
+			!pairCovered && !walk.FieldExhausted(fieldCells);
 	}
 
 	/// <summary>

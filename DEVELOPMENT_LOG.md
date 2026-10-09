@@ -20688,3 +20688,34 @@ and leak it until expiry/prune.
   (1299 + 1). No world-facing surface change — fog audit unchanged.
   Boot-gate still deferred (serial lane holds OpenRA.exe). No merge — the
   queue-side wiring remains Architect-owned.
+
+# 2026-10-09 — REPAIR-B3 R4: clean-cap-exit deferral fix (false-Unserved cascade)
+
+*Devin-Developer.* The VP's R3 boundary check (forwarded + confirmed by
+Devin-Reviewer in `REREVIEW_2026-10-09_repair_b3_r3.md`) found a second
+cursor-class defect: when the final ALLOWED `TryConsumeProbe()` lands the
+count exactly on the ceiling, `ProbeCapSpent` flips true with no refusal
+ever running. The cell completes, `walk.CompleteCell()` advances, the while
+exits on the cap with cells remaining — and the post-walk deferred check
+`!coverageBudget.ProbeCapSpent` suppressed `anyDeferred` → false Unserved.
+Worse, it CASCADED: every subsequent anchor in the pass exited its pair walk
+at entry (`!ProbeCapSpent` in the while condition), published Unserved too,
+and `coverageFirstBudgetDeferred` stayed -1 → no pass-boundary re-arm — a
+spent probe cap mid-pass could collapse the whole coverage model.
+
+- **Fix:** new `RefineryCoverageOracle.PairDeferredAfterWalk(pairCovered,
+  walk, fieldCells)` — the single post-walk decision: unexamined cells defer
+  the pair regardless of WHAT stopped the walk (window end, tick pacing, or
+  a cleanly-spent cap). Only `PatchWalk.FieldExhausted` feeds Unserved. The
+  module now also records `coverageFirstBudgetDeferred` on a cap-stopped
+  deferral so the re-arm fires at the cursor wrap.
+- **Regressions** (`FieldCoverageTest`, +2): the VP's exact scenario —
+  probeLimit consumed by a completed cell's two legs, cells remaining →
+  deferred, never Unserved; and the entry-cascade — a pair admitted with the
+  cap already spent defers without touching the walk (plus the covered-pair
+  exemption).
+- **Verification:** Release build 0/0; `dotnet test` = **1302/1302**
+  (1300 + 2). No world-facing surface change — fog audit unchanged.
+  Boot-gate deferred: OpenRA.exe released but the lead's "no launches"
+  order for this task still stands — flagged to the lead for release.
+  No merge — queue-side wiring remains Architect-owned.

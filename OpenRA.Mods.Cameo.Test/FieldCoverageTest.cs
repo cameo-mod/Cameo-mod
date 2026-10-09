@@ -943,6 +943,51 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(stored.FieldExhausted(6), Is.True);    // fully walked — honest Unserved input
 		}
 
+		[Test]
+		public void ProbeCapSpentAtCompletedCellBoundaryStillDefers()
+		{
+			// R4 regression (VP boundary check): the final ALLOWED probe lands the count
+			// exactly on the ceiling — no refusal ever runs. The cell completes, the walk
+			// exits on ProbeCapSpent with cells remaining, and the pair MUST still defer;
+			// R3 suppressed the defer behind !ProbeCapSpent → false Unserved.
+			var budget = new RefineryProbeBudget(siteLimit: 8, probeLimit: 2, tickProbeLimit: 8);
+			var walk = new PatchWalk(0, count: 3, window: 8);
+
+			Assert.That(budget.TryConsumeProbe(), Is.True);   // cell 0 outbound
+			Assert.That(budget.TryConsumeProbe(), Is.True);   // cell 0 inbound — 2/2, cap spent by SUCCESS
+			Assert.That(budget.ProbeCapSpent, Is.True);
+			walk.CompleteCell();                              // cell 0 fully examined
+
+			// The module's while exits on ProbeCapSpent with cells 1-2 unexamined...
+			Assert.That(walk.HasCell, Is.True);
+			Assert.That(walk.FieldExhausted(3), Is.False);
+
+			// ...and the production predicate defers the pair — spent cap is not permission.
+			Assert.That(RefineryCoverageOracle.PairDeferredAfterWalk(false, walk, 3), Is.True);
+			Assert.That(RefineryCoverageOracle.Aggregate(false, true),
+				Is.EqualTo(RefineryCoverageVerdict.Unknown)); // never Unserved
+		}
+
+		[Test]
+		public void SpentProbeCapAtPairEntryDefersWithoutTouchingTheWalk()
+		{
+			// R4 cascade case: the NEXT anchor enters with the ceiling already spent —
+			// the while never admits the walk, yet the pair must still defer rather than
+			// aggregate Unserved (and the deferred marker is what re-arms the next pass).
+			var budget = new RefineryProbeBudget(siteLimit: 8, probeLimit: 1, tickProbeLimit: 8);
+			Assert.That(budget.TryConsumeProbe(), Is.True);   // an earlier pair spent the cap
+			Assert.That(budget.ProbeCapSpent, Is.True);
+
+			var walk = new PatchWalk(0, count: 5, window: 8);
+			// while (walk.HasCell && !pairCovered && !tickCapHit && !ProbeCapSpent) never runs:
+			Assert.That(walk.Index, Is.EqualTo(0));
+			Assert.That(walk.HasCell, Is.True);
+			Assert.That(RefineryCoverageOracle.PairDeferredAfterWalk(false, walk, 5), Is.True);
+
+			// And a covered pair is exempt — exhaustion with a witness stays Covered.
+			Assert.That(RefineryCoverageOracle.PairDeferredAfterWalk(true, walk, 5), Is.False);
+		}
+
 		sealed class LawStub : IBotExpansionTargetProvider
 		{
 			readonly int unservedInReach;
