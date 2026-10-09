@@ -1,5 +1,33 @@
 # Cameo — THE HANDOFF
 
+## 2026-10-09 — Devin: SW plug capacity (B2/B6) implemented — `devin/playtest-b2b6-swcap`
+
+`Agent: Devin · branch devin/playtest-b2b6-swcap · worktree C:/cameo-wt/playtest-swcap · base 3d99405bd (published head)`
+
+**INC-ready candidate — NOT merged; runtime match tests still required before release clearance.**
+
+Fixes B2 (multiple SW buildable despite the 1-cap) and B6 (ion uplink re-queueable
+while owned) per fleet spec `SPEC_2026-10-09_devin_plug_slot_capacity.md` (v10
+bounded lane). New world trait `SuperweaponPlugLimit`
+(`OpenRA.Mods.Cameo/Traits/World/`): synced `IValidateOrder` admission gate
+(owner-wide pending+installed+`ExtraData` ≤ 1 per occupancy token, active only
+under `global-swlimit` — Unlimited untouched) plus a per-tick deduplicated
+frame-end reconciliation that refunds over-cap pending SW plugs (clears
+`Infinite` first — kills `EndProduction`'s auto-replenish leak; full
+cash+resources refund). SW items are derived from rules wiring (host
+`Pluggable` type→condition → `ProvidesPrerequisite` token → plug's own
+`!token`), not hardcoded. Four host `@swlimit` providers gained
+`RequiresPrerequisites: global-swlimit`. Inbound `GetReplacement` migration is
+**detection-only** per spec — upstream exclusion is a separate out-of-scope fix.
+
+*Evidence:* build 0/0 · 1263/1263 NUnit (+12 `SuperweaponPlugLimitTest`: admit
+matrix, excess matrix, all-four-wiring token-map derivation) · boot-gate PASS
+(menu reached, 0 new exceptions) · `git diff --check` scoped files only · engine
+untouched (canonical pin `0a3f77dbe1`). *Next:* live-match regressions —
+infinite-flag install, capture over-cap, mixed-tech migration, PayUpFront
+refund, ordinary-infinite unaffected — before release clearance. B1/B7 branches
+await coordinator merge per plan §3.
+
 ## 2026-10-08 — Devin: history re-record complete — `devin/regreen-history-rerecord`, 323/323 affected tests green
 
 `Agent: Devin · branch devin/regreen-history-rerecord · worktree C:/cameo-wt/rerecord-hist`
