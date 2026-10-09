@@ -143,47 +143,55 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
-		public void AnnulusBoundsCoverTheWholeApproachBand()
+		public void ApproachBandBoundsCoverTheWholeBand()
 		{
-			// Unclamped passthrough: band [10,24] in a 45-degree cone needs
-			// ceil(24/0.7071)+1 = 35 cells of Euclidean reach.
-			Assert.That(BaseFrontBackPlannerBotModule.AnnulusForApproach(10, 14, Cone45, 50),
-				Is.EqualTo((9, 35)));
+			// Band [10,24] in a 45-degree cone needs ceil(24/0.7071)+1 = 35 cells
+			// of Euclidean reach.
+			Assert.That(BaseFrontBackPlannerBotModule.ApproachBandBounds(10, 14, Cone45),
+				Is.EqualTo((9.0, 35.0)));
 		}
 
 		[Test]
-		public void AnnulusOuterEdgeClampsToTheEngineCap()
+		public void ApproachBandPastTheEngineCapStillExists()
 		{
-			// Playtest crash C1 (Imminent Destruction): a line crawled 40 cells out
-			// asked for maxRange 78 — the engine throws past MaximumTileSearchRange.
-			Assert.That(BaseFrontBackPlannerBotModule.AnnulusForApproach(40, 14, Cone45, 50),
-				Is.EqualTo((39, 50)));
+			// Playtest crash C1 (Imminent Destruction): the real trigger was
+			// frontProj 35 -> outer ceil(49/0.7071)+1 = 71 > 50. The band EXISTS
+			// beyond the engine's tile-search cap — it must not read as no cells;
+			// ApproachSpace falls back to the map-clipped box enumeration.
+			Assert.That(BaseFrontBackPlannerBotModule.ApproachBandBounds(35, 14, Cone45),
+				Is.EqualTo((34.0, 71.0)));
+			// And a band starting past the cap is a real band, not empty.
+			Assert.That(BaseFrontBackPlannerBotModule.ApproachBandBounds(52, 14, Cone45),
+				Is.EqualTo((51.0, 95.0)));
 		}
 
 		[Test]
-		public void AnnulusBeyondTheCapIsUnmeasurableNotACrash()
+		public void ApproachBandDegenerateInputs()
 		{
-			// inner must never exceed outer (engine throws on that too): a band
-			// starting past the cap returns null — the approach reads as no cells.
-			Assert.That(BaseFrontBackPlannerBotModule.AnnulusForApproach(52, 14, Cone45, 50),
+			// coneCos = 0 (cone half-angle >= 90 in yaml) -> outer saturates to
+			// +Inf: the band is a half-plane, WideSpaceRadius clamps it to the map.
+			var degenerate = BaseFrontBackPlannerBotModule.ApproachBandBounds(10, 14, 0);
+			Assert.That(degenerate.HasValue && double.IsPositiveInfinity(degenerate.Value.Outer)
+				&& degenerate.Value.Inner == 9.0);
+			// NaN cone math and a wholly negative band are the only empty results.
+			Assert.That(BaseFrontBackPlannerBotModule.ApproachBandBounds(10, 14, double.NaN),
 				Is.Null);
-			// The exactly-at-cap ring is still legal.
-			Assert.That(BaseFrontBackPlannerBotModule.AnnulusForApproach(51, 14, Cone45, 50),
-				Is.EqualTo((50, 50)));
+			Assert.That(BaseFrontBackPlannerBotModule.ApproachBandBounds(-20, 14, Cone45),
+				Is.Null);
+			// An unset front projection (int.MinValue sentinel) must not wrap into
+			// a legal-looking range — operands promote to double before arithmetic.
+			Assert.That(BaseFrontBackPlannerBotModule.ApproachBandBounds(int.MinValue, 14, Cone45),
+				Is.Null);
 		}
 
 		[Test]
-		public void AnnulusDegenerateInputsNeverProduceAnIllegalRange()
+		public void WideSpaceRadiusClampsToMapReach()
 		{
-			// coneCos <= 0 (cone half-angle >= 90 in yaml) saturates the outer
-			// edge at the cap rather than producing a negative range.
-			var degenerate = BaseFrontBackPlannerBotModule.AnnulusForApproach(10, 14, 0, 50);
-			Assert.That(degenerate.HasValue && degenerate.Value.Outer <= 50
-				&& degenerate.Value.Inner <= degenerate.Value.Outer);
-			// An unset front projection (int.MinValue sentinel) must not overflow
-			// into a legal-looking range either.
-			Assert.That(BaseFrontBackPlannerBotModule.AnnulusForApproach(int.MinValue, 14, Cone45, 50),
-				Is.Null);
+			// The bounding box never exceeds the map's own reach around the centre.
+			Assert.That(BaseFrontBackPlannerBotModule.WideSpaceRadius(71.9, 120), Is.EqualTo(72));
+			Assert.That(BaseFrontBackPlannerBotModule.WideSpaceRadius(double.PositiveInfinity, 120),
+				Is.EqualTo(120));
+			Assert.That(BaseFrontBackPlannerBotModule.WideSpaceRadius(1e30, 200), Is.EqualTo(200));
 		}
 
 		// --- radar ---

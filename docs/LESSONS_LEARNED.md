@@ -19,11 +19,14 @@ derived the approach annulus as `(FrontProj + depth)/coneCos + 1` = 71 and passe
 `minRange > maxRange`. Any derived search radius that grows with map geometry (a defence line that
 crawled outward, a map-size margin, a stride × factor) can exceed 50; constants like
 `BaseCrawlRadius = 50` are exactly AT the cap and legal, so audits of constants alone won't catch it.
-Fix pattern (`BaseFrontBackPlannerBotModule.AnnulusForApproach`): compute the bound in `double`
-(clamping `+Inf` / huge values BEFORE the int cast — `(int)Math.Ceiling(Inf)+1` wraps to
-`int.MinValue`), clamp outer to `world.Map.Grid.MaximumTileSearchRange`, and return null when the
-whole band lies past it — an unmeasurable approach reads as no cells, never a crash. Grep new code for
-`FindTilesInAnnulus` / `FindTilesInCircle` call sites whose radius isn't a bounded Info constant.
+Fix pattern (`BaseFrontBackPlannerBotModule.ApproachSpace`): compute band bounds in `double`
+(promoting operands BEFORE `frontProj + depth` / `frontProj - 1` — int overflow and
+`(int)Math.Ceiling(Inf)+1` → `int.MinValue` wrap both fake legal ranges), use the exact annulus when
+the outer edge is `<= world.Map.Grid.MaximumTileSearchRange`, and beyond it enumerate the map-clipped
+bounding box of the same radius. **A band past the cap is still real coverage** — clamping it away
+silently zeroes `frontUncoveredApproach` and the radar planner under-builds (review: Luna/Sol). Never
+degrade "not measurable" into "zero uncovered". Grep new code for `FindTilesInAnnulus` /
+`FindTilesInCircle` call sites whose radius isn't a bounded Info constant.
 
 
 ### 2026-09-28 — Claude: actor ids are LOWERCASED at load — an uppercase id in a bot list never matches

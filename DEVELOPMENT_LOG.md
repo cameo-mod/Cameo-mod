@@ -10,23 +10,33 @@
   `ceil((FrontProj + RadarApproachDepthCells)/coneCos) + 1` grows with how far the defence line
   crawled — at the 45° front cone any `FrontProj` ~21+ already exceeds 50, so this is not a
   huge-map-only path.
-- Fix: new static `AnnulusForApproach(frontProj, depthCells, coneCos, cap)` — computes the bound
-  in `double` so `+Inf`/huge values clamp to the cap BEFORE the int cast (`(int)Math.Ceiling(Inf)+1`
-  wraps to `int.MinValue`), clamps outer to `world.Map.Grid.MaximumTileSearchRange`, guards
-  `inner > outer`, and returns null when the whole band lies past the cap — the approach then reads
-  as no cells (`uncovered = 0`) instead of crashing the tick. Degenerate `coneCos` (0/NaN) handled.
+- Fix v1 (67799ff7f, superseded on review): clamped the annulus outer edge to the cap and returned
+  null past it — crash-safe but silently truncated coverage: band cells at radius 51..71 were dropped,
+  `frontUncoveredApproach` undercounted, `WantedForFront` could miss the second-radar threshold.
+  Luna's re-review + Sol's acceptance hold: "do not present this as coverage-preserving."
+- Fix v2 (this head): `ApproachBandBounds` keeps the true double bounds (`(double)frontProj + depth`,
+  `frontProj - 1.0` — operands promote BEFORE arithmetic so int sentinels/huge values can't wrap);
+  null only for geometrically-empty bands (NaN cone math, band wholly below radius 0). `ApproachSpace`
+  then picks the candidate set: exact `FindTilesInAnnulus` when `outer <= MaximumTileSearchRange`,
+  else the map-clipped bounding box of the same outer radius (`WideSpaceRadius` clamps the box to the
+  map's own reach; `+Inf` outer → whole map). `ApproachCells` applies the exact band+cone predicate on
+  either space — full coverage, bounded by map area, deterministic `AllCells` order, never an illegal
+  engine radius.
 - Sibling sweep: every other `FindTilesInAnnulus`/`FindTilesInCircle` call site uses a bounded Info
   constant (MaxBaseRadius=20, MaximumDefenseRadius=20, BaseCrawlRadius=50 at-cap-legal) or a
   config-derived stride — this planner site was the only map-scale-derived radius.
-- Regression tests in `BaseFrontBackPlannerTest`: normal bounds `(10,14,45°,50)->(9,35)`, clamped
-  `(40,…)->(39,50)`, beyond-cap nulls `(52,…)->null`, `(51,…)->(50,50)`, degenerate `coneCos=0`
-  capped, `frontProj=int.MinValue` null.
-- Gates: Release build 0 errors / 8 warnings; focused planner suite 37/37; boot-gate PASS
-  (main menu, `MenuPostProcessEffect.PostWorldLoaded`, zero new exceptions). One earlier exception
-  (`exception-2026-10-08T202345Z`) was my launch harness missing `Engine.ModSearchPaths`, not the
-  code — corrected and re-passed.
-- Branch `devin/c1-annulus-range-cap` @ 67799ff7f off playtest head 3d99405bd; pushed. LESSONS_LEARNED
-  entry added. No master push — playtest freeze stands; Sol+Luna review gates apply.
+- Regression tests in `BaseFrontBackPlannerTest`: in-cap bounds `(10,14,45°)->(9.0,35.0)`, crash case
+  `(35,…)->(34.0,71.0)` not null — band EXISTS past the cap — fully-beyond-cap `(52,…)->(51.0,95.0)`,
+  `coneCos=0` → `+Inf` outer (clamped to map reach by `WideSpaceRadius`), NaN/negative-band/
+  `int.MinValue` sentinel → null, `WideSpaceRadius` clamps to map reach on 71.9/+Inf/1e30.
+- Gates (v2): Release build 0 errors / 8 warnings; full `OpenRA.Mods.Cameo.Test` suite 1255/1255;
+  boot-gate PASS (main menu, `MenuPostProcessEffect.PostWorldLoaded`, zero new exceptions). One
+  earlier exception (`exception-2026-10-08T202345Z`) was my launch harness missing
+  `Engine.ModSearchPaths`, not the code — corrected and re-passed.
+- Branch `devin/c1-annulus-range-cap` off playtest head 3d99405bd; v1 code at 67799ff7f, docs at
+  20a8107a1, semantic v2 pushed as the new tip. LESSONS_LEARNED entry updated. No master push —
+  playtest freeze stands; Sol+Luna review gates apply (Luna asked for in-map repro on top of static
+  review).
 
 ---
 
