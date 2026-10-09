@@ -272,7 +272,7 @@ start, frozen, host-local): no new ruling needed.
 |---|---|---|---|--:|--:|--:|--:|
 | ACC | acceptance: 20-map runner + the §0a test (fog-blind wins ≥16/20 vs omniscient classic) | EMBER | all above | 8 | 14 | 24 | 15 |
 
-**Runtime skeleton and performance (2026-10-09 review: [`../AI_ARCHITECTURE_RESEARCH_SYNTHESIS_MASTER_2026-10-06.md`](../AI_ARCHITECTURE_RESEARCH_SYNTHESIS_MASTER_2026-10-06.md) Part IV, phases A–C)**, expected 104 h.
+**Runtime skeleton and performance (2026-10-09 review: [`../AI_ARCHITECTURE_RESEARCH_SYNTHESIS_MASTER_2026-10-06.md`](../AI_ARCHITECTURE_RESEARCH_SYNTHESIS_MASTER_2026-10-06.md) Part IV, phases A–C; A8–A10 from its Part IIIb playtest analysis)**, expected 111 h.
 _Proposed 2026-10-09 and not yet scheduled: owners are unassigned, and these hours are **not** in the §0 / §4 totals until the
 maintainer schedules them. Phase A comes first because every later A/B is measured with it. That file's learning order D1–D3 overlaps
 L0–L3 here (baseline/parity, measured priors, the knob layer and its training); D4, the registry, shipped 2026-10-07; D5 (map/opponent feature vectors, telemetry first), D6's contextual plan prior beyond L4, and D7 (the DESIGN §19.13
@@ -288,6 +288,9 @@ actions (DESIGN §19.1); human-likeness stays `HL` above._
 | A5 | standing order-stream parity gate (switches off, fixed seed) | — | — | 2 | 4 | 8 | 4 |
 | A6 | per-module performance baseline from a league run, committed under `docs/audit/` | — | A3 | 2 | 4 | 8 | 4 |
 | A7 | promote the map/opponent identity ruling into DESIGN §19 (maintainer) | — | — | 0.5 | 1 | 2 | 1 |
+| A8 | playtest crash: clamp `BaseFrontBackPlannerBotModule` annulus to `MaximumTileSearchRange` (M10) | — | — | 1 | 2 | 4 | 2 |
+| A9 | learned files never load: resolve `ai/learned/*` via the mod package; round-trip check (M9) | — | — | 1 | 2 | 4 | 2 |
+| A10 | MCV lease held by the base builder, orders issued by the MCV manager: hand the lease over (M12) | — | — | 2 | 3 | 6 | 3 |
 | B1 | layer scheduler in `ModularBot`: `LAYER_OF` moves into module Infos, opt-in layer order + interval; no action cap (F2, F3) | — | A1, A2, A5 | 8 | 14 | 24 | 15 |
 | B2 | only if C3 makes cadences variable: re-open AI_ARCHITECTURE §10.5c (snapshot stamps were rejected there) — lead decision | Claude | C3 | 0.5 | 1 | 2 | 1 |
 | B3 | opt module families into layer order (sense → decide → act) with stable offsets, one increment each | — | B1, A6 | 8 | 14 | 26 | 15 |

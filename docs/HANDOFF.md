@@ -1,5 +1,30 @@
 # Cameo — THE HANDOFF
 
+## 2026-10-09 — Claude: AI architecture review + playtest regression — continue from here
+
+`Agent: Claude (Opus) · branch ccr-c7f51935-i53fkj · cloud container · base 5c8cfe04` · docs only.
+
+**Read:** `docs/AI_ARCHITECTURE_RESEARCH_SYNTHESIS_MASTER_2026-10-06.md` Part IIIb (PT1–PT9) for the playtest, Part IV
+for the plan. Queue rows A1–A10 / B1–B6 / C1–C4 are in `design/AI_MASTER_PLAN.md` §3 (unscheduled, no owners).
+
+**Why the playtest bots were weak (short):** the build armed all 59 never-A/B'd switch groups at once
+(`37d9fc6a` = `--groups all`, committed) and switched off the binding engineer/crate omniscience (`4bf69671`).
+Still open on master: **M10** front/back planner crash, **M12** MCV lease conflict (1,044 refused orders in one
+match), **M9** learned files never load. Fixed today: M7 (`368f4554`), M8 (`02241219`), MCV deploy search
+(`b06615a8`).
+
+**Next steps, in order:**
+1. Maintainer decision for the next playtest (PT7): revert `37d9fc6a` (one trivial conflict at the
+   `BaseFrontBackPlannerBotModule` block; keep today's `SkipUnreachableDeployCellsCondition`), or arm capabilities only.
+2. Small code fixes, each its own increment: A8 (M10 clamp + test), A9 (M9 paths + round-trip check), A10 (M12 lease
+   hand-off). Boot-gate each.
+3. Finish the measurements (PT5/PT9): pre-arm 1v1 on "A Nuclear Winter", 3v3 on "Winter's End (Rich)" (team A
+   Multi0–2 top-left, team B Multi3–5 bottom-right, verified), 2v2 armed + pre-arm on "Terra Cotta". Use
+   `run_ai_match_batch.py --time-limit 1 --keep-variants` (+ `--team-size N --map <tournament map>`), score with
+   `ab_summary.py` and `team_coordination_report.py`. The armed arm must have the front/back planner disabled until A8
+   lands. **Never commit the swapped `ai.yaml`.**
+4. Then Part IV phase A (A1 per-module RNG first: it changes every draw once, so take a fresh baseline after it).
+
 ## 2026-10-09 — Devin: SW plug capacity (B2/B6) implemented — `devin/playtest-b2b6-swcap` @ `901d5dace`
 
 `Agent: Devin · branch devin/playtest-b2b6-swcap · worktree C:/cameo-wt/playtest-swcap · base 3d99405bd (published head)`

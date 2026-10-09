@@ -34,7 +34,11 @@ and the code disagree, the code wins. Fix the document when that happens (CLAUDE
    (F9, F10).
 3. **Most of the 2026-10-02 review has been fixed.** Seven of its nine code and lab findings are verified fixed in the
    tree (§6). The TC-3 consistency model and one-responder rescue capacity are still unverified.
-4. **The plan (Part IV), in one line:** make the lab trustworthy first (per-module random streams, a standing
+4. **The 2026-10-08 playtest (Part IIIb).** The playtest build armed all 59 switch groups at once (never A/B'd) and
+   switched off the engineers' binding omniscience. It carries a game crash (M10), an MCV ownership conflict (M12) and a
+   learned-file bug (M9) that are still open; two base-building bugs were fixed today. The first measured 1v1 was
+   **not** passive, so the team game and the bugs weigh at least as much as the stack of restraints.
+5. **The plan (Part IV), in one line:** make the lab trustworthy first (per-module random streams, a standing
    order-stream parity gate, regenerated evidence, a performance baseline), then give the runtime a skeleton (a
    switchable layer scheduler, interface-only seams, a crossed-order ratchet), then spend the gained headroom on
    smartness (the canonical learning order D1–D7) and behaviour (UT, the blended squad manager, over the zone graph
@@ -350,6 +354,205 @@ which A/B enforcement went on). This revision doesn't edit binding text.
 
 ---
 
+# Part IIIb — The 2026-10-08 playtest: what arming every switch did to the bots
+
+_Added 2026-10-09 at the maintainer's request. The question: "the idea of so many switches is that each of them
+increases the bots' smartness … together the bot should be unstoppable … but the opposite happened." Everything below
+is measured on master `5c8cfe04` plus the evidence named in each row. "Fixed today" means the fix is on master
+`5c8cfe04`, not that it was proven in a match._
+
+## PT1. What changed between the strong bots and the weak ones
+
+| | Before (strong bots) | Playtest build (weak bots) |
+|---|---|---|
+| Experiment grants | 1 extra: `inc3f1` (the eight INC-3 Fransbot services, `hard` + exploit bots) | **20 grants** flipped from `fransbot`/empty to every difficulty tier (`37d9fc6a`, 10-08 19:43) |
+| Behaviour fields | `AJ_field_coverage` on by default (maintainer ruling 2026-10-04) | **181 field changes**: the same 24 fields in **each** of the six `SquadManagerBotModuleCA@<personality>` blocks (144), plus 37 in the builders, planners, MasterAi and harvester module |
+| Engineer/crate omniscience (DESIGN §19.5, binding) | on | **off**: `4bf69671` (10-08 19:46) set `CheckCaptureTargetsForVisibility`, `CheckRepairTargetsForVisibility` and crate `CheckTargetsForVisibility` to `true` |
+| A/B evidence for what was armed | — | **none**: no group armed on 10-08 has a result in `AI_MATCH_LOG.md`; the last recorded increment A/B is INC-1+2+3 (2026-10-01, 13-3) |
+
+The commit is exactly `apply_increment_switches.py --groups all`: on the pre-arm `ai.yaml` its dry run lists the
+same 201 changes, and on today's `ai.yaml` it lists 0. **All 59 switch groups** are armed, and the result was committed
+to master, although the tool's header says: "Never commit the result: master keeps the defaults until the increment's
+A/B decides." So the playtest tested 59 groups of never-measured behaviour at once, in an 8-bot team game, a format several of
+them had never been run in.
+
+## PT2. Why "every switch adds intelligence" fails
+
+These are the ways a stack of switches can lose strength; PT5 measures how much each one bites. (The first measured
+1v1 did **not** turn passive, so in the playtest the team-game and bug factors weigh at least as much as points 1–2.)
+
+
+1. **Most of the armed switches are restraints, not capabilities.** A restraint can only say "not yet" or "no": hold
+   buildings, hold the army, veto a launch, keep a reserve, retreat earlier, yield a field to an ally. Each was built
+   to stop one failure seen in one match (suicide attacks, stutter-stepping, over-commitment). A capability adds an
+   action (repair, deploy, garrison, stealth squads, plugs, expansion). Of the 59 armed groups, the ones that sit
+   directly on the attack or the base-building path are restraints (table PT3).
+2. **Restraints compose by AND.** An attack launches only when *every* gate says go: army value ≥ the scaled target,
+   the Director phase bar, the combat veto (≥ 60 % predicted against remembered defences), the defend reserve, no live
+   Defend hold, and then the in-match adaptation does not pull it back. If each gate alone says "go" 80 % of the time,
+   six of them together say go 26 % of the time. Nobody owns the question "has this bot attacked at all in the last
+   N minutes?" There is no liveness rule. The one valve CA had, `MaxIdleUnits` (attack anyway once the idle army is
+   big enough), is **scaled up by the same factor as the army target** when scale targets are on
+   (`SquadManagerBotModuleCA.cs:3189-3193`), so it moves away exactly when the bar does.
+3. **Each switch was built and checked against master with the others off.** A module that is correct alone can be
+   wrong in combination: the army-first cash vote assumes something else will raise income; the expansion switches
+   assume the refinery placer works on every faction; the combat veto assumes the army it judges was allowed to grow.
+   Nothing measured the combination, and the AI_MASTER_PLAN §1.2 rule (one increment, one A/B, behaviour behind
+   switches) exists to catch exactly this.
+4. **Team features were armed into an 8-bot team for the first time.** Ten groups (R, S, V, W, BB, BC, BD, BE, BF, BH:
+   sync attacks, defend answers, expansion claims, role split, the TC-3 coalition with its rescue and assist elections,
+   sectors and main target, team capture claims) are "inert in 1v1", and their A/Bs are 1v1
+   mirror matches (CLAUDE.md "A/B = mirror matches only"). They had never run at 8 allied bots.
+5. **One armed module crashes the game** (F13), so part of the armed set could not have been measured even if someone
+   had tried.
+
+## PT3. The mechanisms, one by one
+
+| # | Mechanism | Armed by | Symptom it produces | Evidence | State after today |
+|---|---|---|---|---|---|
+| M1 | Army-first cash vote: every non-essential building (second factory, tech, defences) is held while cash < 2,500 and stays held until cash ≥ 4,000. A bot spending income on units seldom reaches 4,000. On top: no optional building until 14 combat units exist while cash > 1,500. | `AE_army_first` + `MinArmyUnitsBeforeBuildings: 14`, `ArmyFirstMinCash: 1500` | small base, one factory, no tech or defences: "didn't build good bases" | `ArmyFirstBotModule.cs` `ArmyFirstEval.NextPaused` / `ArmyCountHolds`; yaml `ai.yaml:3962-3965` | **open** |
+| M2 | Launch bar replaced by the scale-target army value (`max(own SquadValue × difficulty × time growth, seen enemy army × 0.6–1.4 × up to 2 for unscouted map)`), and `MaxIdleUnits` scaled by the same factor | `ST_scale_targets` | the idle army waits for a bar it may never reach; the forced-launch valve moves with it | `SquadManagerBotModuleCA.cs:3185-3193`; `ScaleTargetsEval.Target` | **open** |
+| M3 | Combat veto: a wave launch is vetoed below a 60 % predicted ratio against remembered armed defences within 12 cells of the target | `AN_combat_veto` (+ `BM_live_combat_model`, `AP_tier1_priors`) | against a defended human base, waves never leave: "didn't attack us" | `CombatVetoBotModule.cs:34-50` | **open** (and its fitted priors never load, M9) |
+| M4 | Director pacing: the launch bar × 150 % in Relief (after losses), × 100 % in Build-up | `P_di2_director_pacing` | after a lost fight, the bot needs a 50 % bigger army before it tries again | `SquadManagerBotModuleCA.cs:271-282, 3166-3175` | **open** |
+| M5 | Caution layers: defend reserve (25 %, ×2 for turtles), defend preservation, in-match adaptation (losing tightens the retreat bar by up to 20 points), army staging (idle army waits at the defences) | `O_ca2_defend_reserve`, `Q_ut3_defend_share`, `AQ_inmatch_adapt`, `AM_army_staging` | more units held home, earlier retreats after early losses | the modules' Infos | **open** |
+| M6 | Expansion money sinks: expand to every reachable field, greedy MCV appetite, and an expansion pre-build that requests refineries ahead of the MCV | `AC_cover_map_expansion`, `U_ut4_expansion_appetite`, `BT_expansion_prebuild` (+ AJ, already on) | cash goes into MCVs and refineries instead of an army | increment_switches rows AC, U, BT | **partly fixed**: MCVs that never deployed (`b06615a8`, engine `331657f07a`) now find a reachable cell. The appetite itself is unchanged. |
+| M7 | Red Alert refinery dock check rejected every legal site; three failures could latch the base builder **for the rest of the game** (or trigger a conyard "relocation" that cancelled the whole queue) | pre-existing since 10-04 (REF-1); hit far more often with M6's extra refinery requests | the base stops growing mid-game: "sometimes just idle" | `368f4554` commit message; pre-fix `BaseBuilderQueueManagerCA.cs:142-195` | **fixed today** (`368f4554`) |
+| M8 | Engineers and MCV-recovery crates limited to visible targets, against binding DESIGN §19.5 | `4bf69671` | engineers stop capturing (per §19.5 they "would just suicide"); a bot that loses its MCV cannot recover | the yaml diff | **fixed today** (`02241219` restored all three flags) |
+| M9 | Learned files never load: every learned path is bare (`ai/learned/*.yaml`), but the mod is mounted only as `cameo|…` and `Folder.Contents` indexes top-level names only, so `FileSystem.Exists()` is false | all learners (`AO_tier3_bandits`, `AK_build_order_knobs`, `BotLearnedPriors`, `AP_tier1_priors`) | bandits pick arms from priors only (this run: personality `rush`, plan `fortify`); learned counters and priors never apply | runtime log: `plan-bandit learned: ai/learned/plan_bandits.yaml missing, priors only`, `LEARNED priors: … arsenal_priors.yaml missing`; `engine/OpenRA.Game/FileSystem/FileSystem.cs:257-266`, `Folder.cs:30-39` | **open** (present before the arm too) |
+| M10 | Front/back planner crashes the game: `FindTilesInAnnulus(…, outer)` with `outer = ceil((FrontProj + 14) / cos 45°) + 1`, which exceeds the engine's `MaximumTileSearchRange` 50 once a defence front is ~21+ cells from the base centre | `BI_front_back_placement` (`Enabled: true`) | game crash (on "A Nuclear Winter" at world tick ~2,000) | this review's run: `ArgumentOutOfRangeException … requested range (71) cannot exceed … (50)` at `BaseFrontBackPlannerBotModule.cs:773` | **open** |
+| M12 | MCV ownership conflict: the expansion pre-build claims the travelling MCV under `BaseBuilderBotModuleCA`'s name (`BotLeasePurpose.McvExpansion`, `BaseBuilderBotModuleCA.cs:1247-1272, 1881`), but the engine's `McvExpansionManagerBotModule` is the module that moves and deploys MCVs. With enforcement on, the gate refuses its orders | `BT_expansion_prebuild` + `EnforceAtOrderGate: true` | expansion MCVs stand still; money banks up | measured: **1,044 refused** `Move` orders (`ORDERGATE REFUSE McvExpansionManagerBotModule@0 … held by BaseBuilderBotModuleCA`, from tick 12,107) in the armed 1v1 | **open** (today's MCV fix repairs the deploy-cell search, not this) |
+| M11 | Plugs bought through real queues | `F_plug_spawn` + `02241219` | bots now pay for plugs (fair; previously an instant installer). Slightly more spending | `02241219` | changed today (fairness fix, not a strength fix) |
+
+## PT4. Team play: how bots coordinate, and where humans fit in
+
+| Channel | Bot → bot | Bot → human ally | Human ally → bot |
+|---|---|---|---|
+| Team blackboard (target vote, defend requests, sync waves, expansion and capture claims, TC-3 coalition) | yes, host-only and fog-honest (`TeamBlackboard.CollectBroadcasts`) | **no** | **no**: the collector only reads allies with `p.IsBot` (`IBotTeamMember.cs:256`), so a human ally publishes nothing and is never answered through it |
+| Beacons | not used | **no**: no bot module ever issues `PlaceBeacon` (the only emitter is the human UI's `BeaconOrderGenerator`) | **yes**: `BeaconResponderBotModule` (always on for `genericbot`) sends up to 6 idle combat units to a beacon with seen/remembered enemies within 8 cells, or a repair unit to a beacon on an allied building |
+| Chat / pings / attack-move markers | — | no | no |
+
+What this means in play:
+* **8 bots on one team** (the playtest) run every team feature at full scale. Every defend request elects a rescuer,
+  every ally's Climax opens the others' launch window, and on a contested expansion field or capture target the bot
+  with the lower ClientIndex wins while the rest stand down, so the later-seated bots of an 8-bot team expand less. None of this had been measured beyond 2v2 (see PT2 point 4).
+* **A human with bot allies** gets help only by beaconing, and only from idle units (6 at most per bot); the bots
+  never tell the human where they will attack or that they need help.
+* **Gap list for the plan:** (1) a `BeaconSignalBotModule` that places a beacon when the bot publishes a defend
+  request or commits a wave, rate-limited and only for allies that include a human, so a human sees what the
+  blackboard already says; (2) a human-ally adapter for the blackboard (a human's base under attack, seen through
+  shared allied vision, becomes a defend request the bots can answer); (3) a team A/B at 2v2 and larger before any
+  team feature is armed by default, scored with `tools/ai/team_coordination_report.py` (shared pushes, defend
+  answers, contested claims, coverage).
+
+## PT5. Measured: the armed set vs the pre-arm set
+
+Setup: this review's container (Linux, 4 cores, software rendering, so ~12–45 ticks/s), `tools/ai/run_ai_match_batch.py`
+at `GameSpeed: maximum` (1 ms timestep), `--time-limit 1` (60,000 ticks), `hard` vs `classic`, `td_gdi` mirror,
+"A Nuclear Winter" (2-player Tournament map). The **armed** arm is today's master `ai.yaml` with one change:
+`BaseFrontBackPlannerBotModule Enabled: false`, because with it on the game crashes (M10). The **pre-arm** arm is today's
+master with `37d9fc6a` reversed. Run logs: `/tmp/claude-0/run_*` in the review container (not committed).
+
+| Arm | Result | Duration | Kills / deaths (value) | Buildings killed / lost | Earned / spent | Banked at end | Order gate |
+|---|---|---|---|---|---|---|---|
+| armed, full `ai.yaml` | **crash** at world tick ~2,000 (M10) | — | — | — | — | — | — |
+| armed − front/back planner | `hard` **won** | 19,766 ticks | 74,610 / 13,100 | 26 / 0 | 236,540 / 158,360 | **86,723** | 1,044 refused (M12), 17 crossed |
+| pre-arm | [PENDING] | | | | | | |
+
+**What one 1v1 already shows.** With the crash removed, the armed bot is **not** passive in a 1v1 against `classic`:
+it fought early (kills from tick 2,250) and won in about 13 game-minutes. So the restraint stack (M1–M5) alone does
+not reproduce "passive and idle" in a duel. It does leave the bot unable to spend: a third of its income was unspent,
+and its expansion MCVs stood still (M12). One match is an anecdote, not a verdict (mirror A/B protocol, AI_MATCH_LOG);
+the remaining arms (PT8) decide. The playtest differed from this duel in five ways that all point toward weaker bots:
+an 8-bot **team** (the ten team groups, PT4), **human** opponents with defended bases (the veto, M3), Red Alert
+factions (M7, fixed today), engineers limited to visible targets (M8, fixed today), and possibly maps where the
+front/back planner's search stays under its crash limit.
+
+
+## PT6. What today's updates fixed, and what they did not
+
+| Today's change | Playtest problem it addresses | Status |
+|---|---|---|
+| `368f4554` passable-bib dock access + bounded law-refinery retry | M7: base builder latched / relocations on Red Alert factions | fixed (unit tests 79/79, suite 1270/1270, boot gate in its commit) |
+| `b06615a8` + engine `331657f07a` reachable MCV deployment search | M6 part: expansion MCVs that never deploy | fixed in the search; runtime review still owed (`design/MCV_DEPLOY_CELL_REPAIR.md`) |
+| `02241219` restores engineer/crate omniscience | M8 | fixed |
+| `02241219` plugs via normal queues; limited superweapons by default | B2/B6 playtest bugs (rules), not bot strength | done; bots now pay for plugs |
+| economy health logger, replay health gate, queue-transition seam | diagnostics only (no behaviour) | they will *detect* M1/M6/M7-type stalls in future matches |
+| — | M1–M5 (the restraint stack), M9 (learned files), M10 (crash), M12 (MCV ownership conflict) | **not addressed** |
+
+## PT7. What to do
+
+**For the next playtest (no code needed):**
+1. Revert `37d9fc6a`'s grants and fields, keeping today's fixes. `git revert 37d9fc6a` stops on one hunk (the
+   `BaseFrontBackPlannerBotModule` block, whose context now includes today's `SkipUnreachableDeployCellsCondition`
+   line); keep that line and take `Enabled: false`. The rest reverses as-is (checked with `patch -R`). That restores the configuration that beat players.
+2. If the playtest is meant to *show* features, arm **capabilities only**: K unit repair, L garrison defence, M deploy,
+   X bridge repair, Y stealth squads, AB garrison contest, AH parallel production, AG assault fan-out, BJ/BK/BL/BO
+   stutter fixes. Leave every restraint (AE, ST, AN, P, O, Q, AQ, AM) and BI off.
+
+**Code fixes (small, each its own increment):**
+3. M10: clamp `outer` to `world.Map.Grid.MaximumTileSearchRange` in `BaseFrontBackPlannerBotModule.Refresh()`, or
+   walk the cone in rings without the annulus helper. Add a regression test with a front 40 cells out.
+4. M9: write the learned paths as `cameo|ai/learned/…` (or resolve them through the mod package), and add a runtime
+   assertion to `round_trip_check.py`: a configured learned file that logs "missing" while it exists in the tree
+   fails the check.
+5. M1: make the army-first cash vote relative to income (hold only while unit queues are actually starved), not to
+   absolute 2,500/4,000 thresholds; drop `MinArmyUnitsBeforeBuildings: 14` until an A/B supports it.
+6. M2: keep `MaxIdleUnits` as an **absolute** forced-launch valve, not scaled by the army target.
+6a. M12: the module that issues the MCV's orders must hold its lease. Either the expansion demand hands the lease to
+   `McvExpansionManagerBotModule` (`IBotUnitLeases.Transfer`, the negotiated handoff the engineer-transport path
+   already uses), or the base builder emits the MCV orders itself under `BotIssuer.IssueAs`. Gate: 0 refused MCV
+   orders in a match with `BT_expansion_prebuild` armed.
+
+**Architecture (feeds Part IV):**
+7. **A liveness rule for attacks.** Every restraint on the launch path gets a bounded hold, and one owner (the squad
+   manager) guarantees "no more than N minutes without a launch while the idle army is above X". `replay_health.py`
+   gets a matching check: no attack launch in the first N minutes = symptom hold. This is the same discipline the order
+   gate applies to ownership.
+8. **A restraint budget.** Classify every switch as restraint / capability / neutral in `increment_switches.yaml`, and
+   never arm more than one new restraint per increment, so its cost is measurable.
+9. **Combination tests before a playtest.** "Arm everything" is itself a configuration, and it gets one A/B like any
+   increment: the full playtest set vs the shipped set, mirror matches, plus one team-size run (`--team-size`) for the
+   team features. Phase A's parity and performance gates (Part IV) make that cheap.
+
+## PT8. Should every number like these be learned?
+
+**Yes, by binding ruling, but through the registry and in small groups.** DESIGN §19.2 (maintainer 2026-09-29):
+"Every bot number is learnable. Today's values are starting points." The route is fixed: *measured* from logs, *tuned*
+by paired experiments, or *chosen* by a bandit, as bounded multipliers on the defaults, frozen at match start.
+The army-first thresholds (2,500 / 4,000 / 14 units / 1,500) are already registered: `credit_float` (rank 9,
+`tools/ai/learnables.yaml`, owner `ArmyFirstBotModule` + `UnitBuilderBotModuleCA`, bounds 0–20,000 cash, method
+`bayesian_hysteresis_threshold`), but its state is `planned`, its fitter `tune_credit_float.py` does not exist yet, and
+its switch is unscheduled.
+
+Four limits keep "learn every number" from being a shortcut:
+1. **Scale.** The bot module Infos declare 1,272 `int` and 133 `bool` fields (before per-personality yaml overrides).
+   One match is one noisy result, so tuning can move about 8–24 numbers at a time (§15.5; AI_LEARNING_RESEARCH
+   2026-10-03: a 5-point win-rate difference takes 783–3,130 matches to detect). The registry's 40 families group the
+   numbers so each learns where its signal is dense.
+2. **Learned files do not load today** (M9). Until the paths are fixed, every learned value, including the shipped
+   `arsenal_priors.yaml`, `build_order_knobs.yaml` and `plan_bandits.yaml`, is silently ignored.
+3. **Learning cannot fix a missing rule.** Tuning a restraint's threshold finds the least-bad threshold. It does not
+   add the liveness rule (PT7 item 7) that guarantees the bot attacks at all, or remove a crash (M10) or an ownership
+   conflict (M12). Those are code fixes that come first.
+4. **Some numbers must never be learned** (Appendix B.O): fog/legality, ownership and lease rules, the sync boundary,
+   unit stats (balance pipeline only), and the difficulty line (DESIGN §19.1).
+
+## PT9. Status of this investigation and where to continue
+
+Done (2026-10-09): the static analysis M1–M12, the switch-set proof (201 changes = `--groups all`), the crash
+reproduction (M10), the learned-file proof (M9), the armed 1v1 (above), the 3v3 spawn check for "Winter's End (Rich)"
+(team A Multi0–2 at 6,34 / 26,26 / 34,6, top-left; team B Multi3–5 at 95,123 / 103,103 / 123,95, bottom-right;
+`split_spawn_sides` gives the same split for all 720 orderings of the spawn list).
+
+Queued in the review container when this was written (one game at a time, `/tmp/claude-0/master_chain.sh`):
+1v1 pre-arm → 3v3 armed on Winter's End (Rich) → 2v2 armed and 2v2 pre-arm on Terra Cotta. **If that container is
+gone, rerun them from a fresh session** (route: LESSONS_LEARNED "Building and boot-gating in a Linux cloud
+container"), then fill the [PENDING] row and add the team rows, scored with
+`python tools/ai/team_coordination_report.py <support dir>` and `tools/ai/ab_summary.py`. Keep the yaml swap out of
+every commit.
+
+---
+
 # Part IV — The improvement plan
 
 ## 8. Goals and the measures that prove them
@@ -380,6 +583,10 @@ by one mirror-match A/B (`--factions td_gdi` and `--factions td_nod` as separate
 | A5 | Order-stream parity harness as a standing gate: fixed seed, all increment switches off, two runs ⇒ identical order stream | S | `order_stream_diff.py` exits 0 |
 | A6 | Performance baseline: a league run with `ModulePerfReportIntervalTicks` on; commit the per-module ms table and the worst tick per bot | S | table committed under `docs/audit/` |
 | A7 | Promote the map/opponent identity ruling from `learnables.yaml` into DESIGN.md §19 (maintainer sign-off) | S | maintainer ruling recorded |
+| A8 | Playtest crash M10: clamp the front/back planner's annulus to `MaximumTileSearchRange`; regression test with a front 40 cells out | S | test; boot; the armed 1v1 on "A Nuclear Winter" runs past tick 2,000 |
+| A9 | Learned files M9: resolve `ai/learned/*` through the mod package (`cameo|…`); `round_trip_check.py` fails when a configured learned file logs "missing" while it exists | S | log shows the three files loaded |
+| A10 | MCV ownership M12: the issuer of MCV orders holds the MCV's lease (Transfer to `McvExpansionManagerBotModule`, or `IssueAs`) | S | 0 refused MCV orders with `BT_expansion_prebuild` armed |
+| A11 | Playtest configuration rule (PT7): revert `37d9fc6a` (one trivial conflict) or arm capabilities only; never commit `--groups all` | S | maintainer call |
 
 ### Phase B — Give the runtime a skeleton
 
