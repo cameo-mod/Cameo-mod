@@ -20719,3 +20719,22 @@ spent probe cap mid-pass could collapse the whole coverage model.
   Boot-gate deferred: OpenRA.exe released but the lead's "no launches"
   order for this task still stands — flagged to the lead for release.
   No merge — queue-side wiring remains Architect-owned.
+
+# 2026-10-09 — REPAIR-B3 R4b: version-keyed PatchCells cache (VP materialization note)
+
+*Devin-Developer.* The VP's R2 task-record addendum asked for a measured
+profile on "full field ordering/materialization per unknown-anchor
+evaluation": `PatchCells(a)` sorted the anchor's whole field (distance, X,
+Y) once per anchor per pass — O(F log F) repeated across every refresh
+cycle even though the ordering is fixed while the topology is.
+
+- **Fix:** `patchCellsCache` — `(int Version, CPos Anchor, CPos[] Ordered)`
+  keyed by anchor index. A field is sorted at most once per refresh
+  generation per anchor; the cache also keys on the anchor's position so a
+  silently drifting centroid re-sorts even at the same version. Cleared at
+  both index-keyed reset sites (signature bump + defensive length
+  mismatch). Deterministic memoization of a deterministic ordering — no
+  semantics change.
+- **Verification:** Release build 0/0; `dotnet test` = **1302/1302**
+  (unchanged — pure memoization). Fog audit unchanged. Boot-gate still
+  deferred per the lead's no-launches order.

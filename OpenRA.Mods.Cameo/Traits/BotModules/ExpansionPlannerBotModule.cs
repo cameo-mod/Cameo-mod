@@ -357,6 +357,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		// refreshes under the same model version, so "unserved" is only ever declared after the whole
 		// candidate set was examined (budget- or window-deferred pairs stay UNKNOWN).
 		readonly Dictionary<(int Anchor, int Refinery), (int Version, int Index)> patchProbeProgress = new();
+		readonly Dictionary<int, (int Version, CPos Anchor, CPos[] Ordered)> patchCellsCache = new();
 		readonly HashSet<(int Anchor, int Refinery)> evaluatedSites = new();
 		int coverageVersion;
 		int coverageCursor;
@@ -2187,6 +2188,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				anchorCoverageVerdict = new byte[anchors.Count];
 				coverageRanks.Clear();
 				patchProbeProgress.Clear();
+				patchCellsCache.Clear();
 				evaluatedSites.Clear();
 				coverageCursor = 0;
 				coveragePendingAnchors = anchors.Count;
@@ -2309,17 +2311,24 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		/// set, not just the nearest CoveragePatchCellSample — a pair's walk advances only the knob's
 		/// window per refresh and resumes where it stopped, so a refinery is never declared unserving
 		/// while unexamined cells could still prove coverage. Deterministic order: distance, then X,
-		/// then Y.
+		/// then Y. R4b: the sorted list is cached per (anchor, model version) — the ordering is
+		/// fixed while the topology is, so a field is sorted at most once per refresh generation
+		/// rather than once per pass (the VP's materialization-profile note).
 		/// </summary>
 		IReadOnlyList<CPos> PatchCells(int a)
 		{
+			var anchor = anchors[a];
+			if (patchCellsCache.TryGetValue(a, out var cached)
+				&& cached.Version == coverageVersion && cached.Anchor == anchor)
+				return cached.Ordered;
+
 			var fieldId = a < anchorFieldIds.Length ? anchorFieldIds[a] : -1;
 			var cells = fieldId >= 0 && fieldId < fieldCellsById.Count ? fieldCellsById[fieldId] : null;
-			if (cells == null || cells.Count == 0)
-				return new[] { anchors[a] };
-
-			var anchor = anchors[a];
-			return cells.OrderBy(c => (c - anchor).LengthSquared).ThenBy(c => c.X).ThenBy(c => c.Y).ToArray();
+			var ordered = cells == null || cells.Count == 0
+				? new[] { anchor }
+				: cells.OrderBy(c => (c - anchor).LengthSquared).ThenBy(c => c.X).ThenBy(c => c.Y).ToArray();
+			patchCellsCache[a] = (coverageVersion, anchor, ordered);
+			return ordered;
 		}
 
 		/// <summary>
@@ -2418,6 +2427,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				anchorCoverageVerdict = new byte[anchors.Count];
 				coverageRanks.Clear();
 				patchProbeProgress.Clear();
+				patchCellsCache.Clear();
 				evaluatedSites.Clear();
 			}
 
