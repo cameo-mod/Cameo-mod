@@ -593,6 +593,7 @@ ts_gdi_ioncannonuplink:
 		BuildPaletteOrder: 10
 		BuildDuration: 1500
 		BuildDurationModifier: 100
+		BuildLimit: 1
 		Prerequisites: ~ts_gdi_upgradecenter, !droppod, !tsionc, ~techlevel.superweapons
 		Description: Unlocks the Ion Cannon superweapon.
 	Plug:
