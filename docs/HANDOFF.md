@@ -5415,3 +5415,6 @@ the pre-wave `SquadManagerBotModuleCA@generic` config restored verbatim as
 ## 2026-10-09 ? Offline replay health gate
 
 Read design/REPLAY_HEALTH_ANALYZER.md before health/campaign work. tools/ai/replay_health.py uses explicit GameUid/player; exits0 startup-observed,20 symptom review hold,21 unknown. No overall strength/integrity certification. 17 regression tests pass;127 historical completed records yield64 RA startup holds/63 GDI-Nod startup observations. Coordinator owns scheduler integration and fresh post-fix controls; live reason logging still required. No game launch or master publication.
+
+
+2026-10-09 replay-health review corrections: rejected duplicate/nonfinite JSON, non-string identities, malformed summary and empty non-list timeline; output now exclusive atomic publication to a new report only, never overwrites artifacts; event joins and window scan linear.22 tests pass including200000 snapshots/events/timeline points in1.20s. ab7285e81 remains superseded FIX REQUIRED; revised commit requires independent re-review. No runtime/game/master changes.

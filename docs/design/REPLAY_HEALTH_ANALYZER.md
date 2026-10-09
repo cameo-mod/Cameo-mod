@@ -61,6 +61,16 @@ consumed-prefix hashes. Fingerprints copied from summaries are provenance,
 not validated launch receipts: scheduler must separately enforce manifests,
 parser completeness, hashes, end reason and crash/cap status.
 
+Review hardening: duplicate keys/nonfinite constants and wrong identity/schema/
+timeline types are rejected. Reports must target a **new** file outside capture
+Logs/Replays; existing files are never overwritten. Publication uses a flushed
+sibling temporary file and exclusive atomic link, refusing concurrent target
+creation. Event joins and spending-window analysis are linear; a 200000-point
+timeline/200000-event regression exercises the configured row bound. Live
+files do not share a commit watermark yet: restrict symptom holds to quiescent
+captures; a future live logger must commit a shared watermark before automated
+early termination.
+
 ## What the historical runs tell us
 
 Offline scan of 127 completed hard-player captures at

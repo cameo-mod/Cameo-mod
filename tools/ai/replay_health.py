@@ -8,9 +8,12 @@ This is a symptom detector, not proof of a specific source bug or gameplay appro
 from __future__ import annotations
 
 import argparse
+from collections import deque
 import hashlib
 import json
+import os
 from pathlib import Path
+import tempfile
 
 POLICY_VERSION = "startup-economy-v1"
 PROFILES = {"td_gdi", "td_nod", "ra1_allies", "ra1_soviets", "japan"}
@@ -22,6 +25,49 @@ REFERENCE_BOTS = {"classic", "classic_hard"}
 
 class EvidenceError(ValueError):
     pass
+
+
+def strict_json(raw):
+    def unique(pairs):
+        result = {}
+        for key, value in pairs:
+            if key in result:
+                raise EvidenceError(f"duplicate JSON key: {key}")
+            result[key] = value
+        return result
+    def invalid_constant(value):
+        raise EvidenceError(f"non-finite JSON constant: {value}")
+    return json.loads(raw, object_pairs_hook=unique, parse_constant=invalid_constant)
+
+
+def identity(value):
+    if not isinstance(value, str) or not value.strip():
+        raise EvidenceError("identity must be a nonempty string")
+    return value
+
+
+def atomic_report(path, encoded, support):
+    """Publish a new report atomically; never overwrite any existing artifact."""
+    target = path.resolve()
+    source = support.resolve()
+    for directory in (source / "Logs", source / "Replays"):
+        if target.is_relative_to(directory.resolve()):
+            raise EvidenceError("report output cannot be inside capture Logs/Replays")
+    if target == (source / "batch_summary.json").resolve() or path.exists() or path.is_symlink():
+        raise EvidenceError("report output must be a new file, not an existing capture/report")
+    temp_path = None
+    try:
+        with tempfile.NamedTemporaryFile(mode="w", encoding="utf-8", dir=target.parent,
+                                         prefix=".replay-health-", delete=False) as stream:
+            temp_path = Path(stream.name)
+            stream.write(encoded)
+            stream.flush()
+            os.fsync(stream.fileno())
+        # Exclusive atomic publication: a concurrent creator cannot be overwritten.
+        os.link(temp_path, target)
+    finally:
+        if temp_path is not None:
+            temp_path.unlink(missing_ok=True)
 
 
 def integer(value):
@@ -52,7 +98,7 @@ def read_jsonl(path, live=False):
             if not raw.strip():
                 continue
             try:
-                row = json.loads(raw)
+                row = strict_json(raw)
             except (ValueError, UnicodeError) as error:
                 raise EvidenceError(f"invalid JSONL: {path}, row {len(rows)+1}") from error
             if not isinstance(row, dict):
@@ -70,6 +116,8 @@ def analyze(situations, placements, matches, game_uid, player, *, live=False,
     for threshold in (grace, persistence, max_gap):
         if not isinstance(threshold, int) or isinstance(threshold, bool) or threshold <= 0:
             raise EvidenceError("all policy tick thresholds must be positive integers")
+    identity(game_uid)
+    identity(player)
     rows = [r for r in situations if r.get("game_uid") == game_uid and r.get("player") == player]
     placed = [r for r in placements if r.get("game_uid") == game_uid]
     finals = [r for r in matches if r.get("game_uid") == game_uid and
@@ -85,14 +133,14 @@ def analyze(situations, placements, matches, game_uid, player, *, live=False,
     if len(finals) > 1:
         raise EvidenceError("duplicate selected terminal records")
     faction, bot, map_uid = rows[0].get("faction"), rows[0].get("bot_type"), rows[0].get("map_uid")
+    for value in (faction, bot, map_uid):
+        identity(value)
     if faction not in PROFILES:
         finding("UNSUPPORTED_ECONOMY_PROFILE", "UNKNOWN", faction)
         return report
-    if not game_uid or not player or not map_uid or not isinstance(bot, str) or not bot:
-        raise EvidenceError("missing game/player/map/bot identity")
     snapshots, previous = [], -1
     for r in rows:
-        if r.get("schema") != 2 or r.get("kind") != "situation":
+        if type(r.get("schema")) is not int or r.get("schema") != 2 or r.get("kind") != "situation":
             raise EvidenceError("unsupported situation schema/kind")
         if (r.get("faction"), r.get("bot_type"), r.get("map_uid")) != (faction, bot, map_uid):
             raise EvidenceError("identity drift within selected snapshots")
@@ -109,7 +157,7 @@ def analyze(situations, placements, matches, game_uid, player, *, live=False,
                           "bank": integer(own.get("banked_cash"))})
     own_ref_ticks, peer_ref_ticks, own_lifecycle_ticks = [], [], []
     for r in placed:
-        if r.get("schema") != 1 or r.get("kind") not in {"placement", "refinery_acquired", "refinery_lost"} or r.get("map_uid") != map_uid:
+        if type(r.get("schema")) is not int or r.get("schema") != 1 or r.get("kind") not in {"placement", "refinery_acquired", "refinery_lost"} or r.get("map_uid") != map_uid:
             raise EvidenceError("unsupported placement schema/kind or mismatched map")
         tick = integer(r.get("tick"))
         if r.get("kind") != "placement":
@@ -124,7 +172,7 @@ def analyze(situations, placements, matches, game_uid, player, *, live=False,
                 peer_ref_ticks.append(tick)
     final = finals[0] if finals else None
     if final:
-        if final.get("schema") != 2 or final.get("map_uid") != map_uid or (
+        if type(final.get("schema")) is not int or final.get("schema") != 2 or final.get("map_uid") != map_uid or (
                 final["player"].get("faction"), final["player"].get("bot_type")) != (faction, bot):
             raise EvidenceError("terminal schema or identity drift")
         if integer(final.get("duration_ticks")) < snapshots[-1]["tick"]:
@@ -139,9 +187,12 @@ def analyze(situations, placements, matches, game_uid, player, *, live=False,
     # alarm, not a claim that the opponent is a fair combat comparator.
     run_start, last_tick = None, None
     own_seen = False
+    # Only earliest observations are needed; no per-snapshot event scan.
+    own_first = min(own_ref_ticks + own_lifecycle_ticks, default=None)
+    peer_first = min(peer_ref_ticks, default=None)
     for s in snapshots:
-        own_seen |= s["refineries"] > 0 or any(t <= s["tick"] for t in own_ref_ticks + own_lifecycle_ticks)
-        peer_seen = any(t <= s["tick"] for t in peer_ref_ticks)
+        own_seen |= s["refineries"] > 0 or (own_first is not None and own_first <= s["tick"])
+        peer_seen = peer_first is not None and peer_first <= s["tick"]
         stalled = (s["tick"] >= grace and not own_seen and peer_seen and
                    s["refineries"] == 0 and s["harvesters"] == 0 and s["conyards"] > 0)
         if not stalled:
@@ -178,10 +229,13 @@ def analyze(situations, placements, matches, game_uid, player, *, live=False,
                                                        "deaths_cost": stats["deaths_cost"]})
         timeline = stats.get("stats_timeline", [])
         fields = "tick,earned,spent,army_value,assets_value,kills_cost,deaths_cost,banked,idle_queues"
+        if not isinstance(timeline, list) or len(timeline) > MAX_ROWS:
+            raise EvidenceError("stats timeline must be a bounded list")
         if timeline:
             if stats.get("stats_timeline_fields") != fields or not isinstance(timeline, list):
                 raise EvidenceError("unsupported stats timeline fields")
             previous_tick = -1
+            previous_spent = 0
             for point in timeline:
                 if not isinstance(point, list) or len(point) != 9:
                     raise EvidenceError("invalid stats timeline point")
@@ -189,28 +243,35 @@ def analyze(situations, placements, matches, game_uid, player, *, live=False,
                     integer(value)
                 if point[0] <= previous_tick or point[0] > final["duration_ticks"]:
                     raise EvidenceError("non-monotonic or post-terminal stats timeline")
+                if point[2] < previous_spent:
+                    raise EvidenceError("cumulative spending decreased")
                 previous_tick = point[0]
+                previous_spent = point[2]
             report["metrics"]["economy_combat_timeline"] = [dict(zip(fields.split(","), p)) for p in timeline]
             # A diagnosis request, not proof of a bug. Spend includes more than
             # non-power production; idle_queues is not a cumulative duration.
-            for start in range(len(timeline)):
-                window = []
-                for point in timeline[start:]:
-                    if window and point[0] - window[-1][0] > max_gap:
+            left, bank_minima = 0, deque()
+            for right, point in enumerate(timeline):
+                if point[7] < 25000 or (right and point[0] - timeline[right-1][0] > max_gap):
+                    left = right if point[7] >= 25000 else right + 1
+                    bank_minima.clear()
+                if point[7] < 25000:
+                    continue
+                while bank_minima and timeline[bank_minima[-1]][7] >= point[7]:
+                    bank_minima.pop()
+                bank_minima.append(right)
+                while left < right and point[0] - timeline[left+1][0] >= 3000:
+                    left += 1
+                while bank_minima and bank_minima[0] < left:
+                    bank_minima.popleft()
+                if point[0] - timeline[left][0] >= 3000:
+                    delta = point[2] - timeline[left][2]
+                    if 0 <= delta <= 1000:
+                        finding("SPENDING_STALL_SUSPECTED", "WARN", {
+                            "start_tick": timeline[left][0], "end_tick": point[0],
+                            "min_bank": timeline[bank_minima[0]][7], "spend_delta": delta,
+                            "cause": "unknown; inspect per-category suppression, producers, reservations and tech holds"})
                         break
-                    if point[7] < 25000:
-                        break
-                    window.append(point)
-                    if point[0] - window[0][0] >= 3000:
-                        delta = point[2] - window[0][2]
-                        if 0 <= delta <= 1000:
-                            finding("SPENDING_STALL_SUSPECTED", "WARN", {
-                                "start_tick": window[0][0], "end_tick": point[0],
-                                "min_bank": min(p[7] for p in window), "spend_delta": delta,
-                                "cause": "unknown; inspect per-category suppression, producers, reservations and tech holds"})
-                        break
-                if any(f["code"] == "SPENDING_STALL_SUSPECTED" for f in report["findings"]):
-                    break
     if report["earliest_block_tick"] is not None:
         report["status"] = "BLOCK"
     elif not live and not final:
@@ -239,7 +300,13 @@ def inspect(support, game_uid, player, live=False):
     if summary.exists():
         if summary.stat().st_size > MAX_LINE_BYTES:
             raise EvidenceError("oversized batch summary")
-        data = json.loads(summary.read_text(encoding="utf-8"))
+        data = strict_json(summary.read_text(encoding="utf-8"))
+        if not isinstance(data, dict):
+            raise EvidenceError("batch summary must be an object")
+        if "fingerprint" in data and not isinstance(data["fingerprint"], dict):
+            raise EvidenceError("summary fingerprint must be an object")
+        if "fingerprint_id" in data:
+            identity(data["fingerprint_id"])
         report["capture_fingerprint"] = data.get("fingerprint")
         report["capture_fingerprint_id"] = data.get("fingerprint_id")
     return report
@@ -257,9 +324,13 @@ def main():
         report = inspect(args.support, args.game_uid, args.player, args.live)
     except (EvidenceError, OSError, ValueError, TypeError, KeyError) as error:
         report = {"policy": POLICY_VERSION, "status": "UNKNOWN", "error": str(error)}
-    encoded = json.dumps(report, indent=2, sort_keys=True) + "\n"
+    encoded = json.dumps(report, indent=2, sort_keys=True, allow_nan=False) + "\n"
     if args.output:
-        args.output.write_text(encoded, encoding="utf-8")
+        try:
+            atomic_report(args.output, encoded, args.support)
+        except (EvidenceError, OSError) as error:
+            report = {"policy": POLICY_VERSION, "status": "UNKNOWN", "error": str(error)}
+            encoded = json.dumps(report, indent=2, sort_keys=True, allow_nan=False) + "\n"
     print(encoded, end="")
     return {"BLOCK": 20, "UNKNOWN": 21}.get(report["status"], 0)
 

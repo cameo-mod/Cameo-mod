@@ -20410,3 +20410,6 @@ the existing helpers only — no blanket normalization, no yaml edits except one
 ## 2026-10-09 ? Replay health prototype (Sol)
 
 Isolated codex/replay-health-gate at base3d; exclusive tool/test/design scope. Existing aggregate/story/order tools were checked: no startup stop gate exists. Implemented schema/identity/bounds-aware telemetry symptom gate, startup persistence and warning-only economy/combat timelines. Historical127 completed records:64 RA holds,63 GDI/Nod startup observed. 17 focused Python tests pass. Current buffered logger cannot provide mid-match detection; live pulse and scheduler stop latch remain separately owned work. No games, runtime changes or master pushes. See docs/design/REPLAY_HEALTH_ANALYZER.md for primary sources, policy and resume contract.
+
+
+2026-10-09 replay-health review corrections: rejected duplicate/nonfinite JSON, non-string identities, malformed summary and empty non-list timeline; output now exclusive atomic publication to a new report only, never overwrites artifacts; event joins and window scan linear.22 tests pass including200000 snapshots/events/timeline points in1.20s. ab7285e81 remains superseded FIX REQUIRED; revised commit requires independent re-review. No runtime/game/master changes.

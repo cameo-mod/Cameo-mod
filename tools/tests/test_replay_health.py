@@ -1,8 +1,11 @@
 import importlib.util
+import contextlib
+import io
 import json
 from pathlib import Path
 import tempfile
 import unittest
+from unittest.mock import patch
 
 spec = importlib.util.spec_from_file_location("replay_health", Path(__file__).resolve().parents[1] / "ai/replay_health.py")
 health = importlib.util.module_from_spec(spec)
@@ -30,6 +33,70 @@ def terminal(faction="ra1_allies"):
 
 
 class HealthTests(unittest.TestCase):
+    def test_duplicate_keys_and_nonfinite_constants_rejected(self):
+        for raw in ('{"schema":1,"schema":2}', '{"own":{"x":1,"x":2}}', '{"tick":NaN}'):
+            with self.assertRaises(health.EvidenceError):
+                health.strict_json(raw)
+
+    def test_map_identity_schema_and_empty_timeline_types_strict(self):
+        row = snapshot(4500, 1, 1)
+        row["map_uid"] = 42
+        with self.assertRaises(health.EvidenceError):
+            health.analyze([row], [], [terminal()], "g", "hard")
+        row = snapshot(4500, 1, 1)
+        row["schema"] = 2.0
+        with self.assertRaises(health.EvidenceError):
+            health.analyze([row], [], [terminal()], "g", "hard")
+        final = terminal()
+        for value in ({}, "", None):
+            final["stats"]["stats_timeline"] = value
+            with self.assertRaises(health.EvidenceError):
+                health.analyze([snapshot(4500, 1, 1)], [], [final], "g", "hard")
+
+    def test_atomic_report_never_overwrites_capture_existing_file_or_symlink(self):
+        with tempfile.TemporaryDirectory() as temp:
+            support = Path(temp)
+            logs = support / "Logs"
+            logs.mkdir()
+            source = logs / "cameo-ai-situations.jsonl"
+            original = b'capture evidence\n'
+            source.write_bytes(original)
+            with patch("sys.argv", ["replay_health", str(support), "--game-uid", "g",
+                                     "--player", "hard", "--output", str(source)]):
+                with contextlib.redirect_stdout(io.StringIO()) as output:
+                    self.assertEqual(health.main(), 21)
+                    self.assertEqual(json.loads(output.getvalue())["status"], "UNKNOWN")
+            self.assertEqual(source.read_bytes(), original)
+            with self.assertRaises(health.EvidenceError):
+                health.atomic_report(logs / "new.json", "{}", support)
+            target = support / "health.json"
+            health.atomic_report(target, '{"status":"UNKNOWN"}\n', support)
+            with self.assertRaises(health.EvidenceError):
+                health.atomic_report(target, "overwrite", support)
+            self.assertEqual(json.loads(target.read_text())["status"], "UNKNOWN")
+            self.assertFalse(list(support.glob(".replay-health-*")))
+
+    def test_nonobject_summary_is_structured_unknown(self):
+        with tempfile.TemporaryDirectory() as temp:
+            support = Path(temp)
+            (support / "batch_summary.json").write_text("[]", encoding="utf-8")
+            with patch("sys.argv", ["replay_health", str(support), "--game-uid", "g", "--player", "hard"]):
+                with contextlib.redirect_stdout(io.StringIO()) as output:
+                    self.assertEqual(health.main(), 21)
+            self.assertIn("summary must be an object", json.loads(output.getvalue())["error"])
+
+    def test_large_dense_timeline_and_events_complete_without_quadratic_scan(self):
+        final = terminal()
+        final["duration_ticks"] = 300000
+        final["stats"]["stats_timeline_fields"] = "tick,earned,spent,army_value,assets_value,kills_cost,deaths_cost,banked,idle_queues"
+        final["stats"]["stats_timeline"] = [[t, 100000, t, 1000, 5000, 0, 0, 40000, 2]
+                                                 for t in range(1, health.MAX_ROWS + 1)]
+        events = [placement(t, "hard") for t in range(1, health.MAX_ROWS + 1)]
+        rows = [snapshot(t, 1, 1) for t in range(1, health.MAX_ROWS + 1)]
+        result = health.analyze(rows, events, [final], "g", "hard")
+        self.assertEqual(result["status"], "OBSERVED_HEALTHY")
+        self.assertNotIn("SPENDING_STALL_SUSPECTED", [f["code"] for f in result["findings"]])
+
     def test_ra_failure_blocks_in_live_prefix_without_final(self):
         result = health.analyze([snapshot(t) for t in (3000, 3750, 4500)], [placement()], [], "g", "hard", live=True)
         self.assertEqual(result["status"], "BLOCK")
