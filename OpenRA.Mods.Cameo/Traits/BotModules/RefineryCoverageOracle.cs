@@ -245,6 +245,38 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 	}
 
 	/// <summary>
+	/// REPAIR-B3 (R2/R3): a (anchor, refinery) pair's patch-walk cursor — the single contract for
+	/// how the index may move. The window holds at most one refresh's cell quota; Index only ever
+	/// advances via <see cref="CompleteCell"/>, which the caller invokes strictly AFTER a cell's
+	/// examination completed (every eligible examiner saw it). Any interruption — tick pacing or a
+	/// probe-ceiling refusal — leaves Index on the unexamined cell so the next pass resumes
+	/// honestly; an index that could skip a cell would let a later field exhaustion publish a
+	/// false Unserved.
+	/// </summary>
+	public struct PatchWalk
+	{
+		/// <summary>The next unexamined patch-cell index — persisted between refreshes.</summary>
+		public int Index;
+
+		readonly int end;
+
+		public PatchWalk(int start, int count, int window)
+		{
+			Index = Math.Max(0, start);
+			end = Math.Min(count, Index + Math.Max(1, window));
+		}
+
+		/// <summary>True while this refresh's window still holds an unexamined cell.</summary>
+		public readonly bool HasCell => Index < end;
+
+		/// <summary>Advance past the current cell — only ever after its examination completed.</summary>
+		public void CompleteCell() => Index++;
+
+		/// <summary>True once every candidate cell was examined — the only honest Unserved state.</summary>
+		public readonly bool FieldExhausted(int count) => Index >= count;
+	}
+
+	/// <summary>
 	/// REPAIR-B3: the live half of the oracle — wraps <see cref="PathSearch"/> with a null self (the
 	/// theoretical-locomotor mode the engine explicitly supports) and stationary-only blocking so the
 	/// verdict reflects durable obstacles (cliffs, water, walls, buildings, blocked passages) and never

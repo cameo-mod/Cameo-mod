@@ -842,6 +842,107 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(assigned, Is.EqualTo(new[] { 0 }));   // r0 wins on rank despite the longer geometry
 		}
 
+		[Test]
+		public void PatchWalkProbeCapRefusalKeepsTheUnexaminedCell()
+		{
+			// R3 regression: a final allowed outbound probe followed by a budget-refused
+			// inbound must leave the cursor ON the cell — the R2 for-loop advanced past
+			// it anyway, letting a later field exhaustion publish a false Unserved.
+			var budget = new RefineryProbeBudget(siteLimit: 8, probeLimit: 3, tickProbeLimit: 8);
+			var walk = new PatchWalk(0, count: 10, window: 4);
+
+			Assert.That(budget.TryConsumeProbe(), Is.True);   // cell 0 outbound
+			Assert.That(budget.TryConsumeProbe(), Is.True);   // cell 0 inbound — complete
+			walk.CompleteCell();
+			Assert.That(walk.Index, Is.EqualTo(1));
+
+			Assert.That(budget.TryConsumeProbe(), Is.True);   // cell 1 outbound — last of cap (3/3)
+			Assert.That(budget.TryConsumeProbe(), Is.False);  // cell 1 inbound refused at the ceiling
+			Assert.That(budget.ProbeCapSpent, Is.True);
+
+			// The module's interruption path never calls CompleteCell — the cursor must still
+			// point at cell 1 so the next pass re-examines it instead of skipping to Unserved.
+			Assert.That(walk.Index, Is.EqualTo(1));
+			Assert.That(walk.FieldExhausted(10), Is.False);
+		}
+
+		[Test]
+		public void PatchWalkTickCapInterruptionLeavesTheCellPending()
+		{
+			// R3 regression: tick pacing interrupting a cell mid-examination must not advance
+			// the cursor either — the same for-loop skipped it before tickCapHit could stop it.
+			var budget = new RefineryProbeBudget(siteLimit: 8, probeLimit: 8, tickProbeLimit: 1);
+			var walk = new PatchWalk(0, count: 10, window: 4);
+
+			Assert.That(budget.TryConsumeProbe(), Is.True);    // outbound (tick window 1/1)
+			Assert.That(budget.TryConsumeProbe(), Is.False);   // inbound refused — pacing only
+			Assert.That(budget.ProbeCapSpent, Is.False);
+			Assert.That(budget.TickProbesOpen, Is.False);
+			Assert.That(walk.Index, Is.EqualTo(0));            // cell 0 still pending
+
+			budget.NewTick();
+			Assert.That(budget.TryConsumeProbe(), Is.True);    // the resumed inbound probe
+			walk.CompleteCell();
+			Assert.That(walk.Index, Is.EqualTo(1));
+		}
+
+		[Test]
+		public void PatchWalkSiteCapRefusalLeavesThePairUntouched()
+		{
+			// Cap-before-probe: when the site ceiling refuses admission the pair's walk never
+			// runs — the stored cursor resumes unchanged next pass, zero probes consumed.
+			var budget = new RefineryProbeBudget(siteLimit: 1, probeLimit: 8, tickProbeLimit: 8);
+			var walk = new PatchWalk(0, count: 10, window: 4);
+
+			Assert.That(budget.TryConsumeSite(), Is.True);    // another pair took the only slot
+			Assert.That(budget.TryConsumeSite(), Is.False);   // admission refused for this pair
+			Assert.That(budget.SiteCapSpent, Is.True);
+			Assert.That(budget.ProbeCapSpent, Is.False);
+
+			Assert.That(walk.Index, Is.EqualTo(0));
+			Assert.That(walk.HasCell, Is.True);
+		}
+
+		[Test]
+		public void PatchWalkWindowEndIsNotExhaustion()
+		{
+			// A pair whose window ends before the field does is UNKNOWN, never Unserved:
+			// unexamined cells beyond the window could still prove coverage.
+			var walk = new PatchWalk(0, count: 7, window: 4);
+			for (var i = 0; i < 4; i++)
+				walk.CompleteCell();
+
+			Assert.That(walk.Index, Is.EqualTo(4));
+			Assert.That(walk.HasCell, Is.False);               // this refresh's window spent
+			Assert.That(walk.FieldExhausted(7), Is.False);     // cells 4-6 unexamined -> not Unserved
+
+			// The next refresh resumes where it stopped and completes the field — only then
+			// may the pair contribute to an Unserved verdict.
+			var resumed = new PatchWalk(walk.Index, 7, 4);
+			resumed.CompleteCell();
+			resumed.CompleteCell();
+			resumed.CompleteCell();
+			Assert.That(resumed.FieldExhausted(7), Is.True);
+		}
+
+		[Test]
+		public void PatchWalkResumeHonoursTheStoredIndex()
+		{
+			// The persisted (version, index) cursor is the resume point — a stale-version
+			// cursor restarts at 0 (the caller's version check), a live one continues.
+			var stored = new PatchWalk(4, count: 6, window: 4);
+			Assert.That(stored.Index, Is.EqualTo(4));
+			Assert.That(stored.HasCell, Is.True);              // window = cells 4-5
+
+			stored.CompleteCell();
+			Assert.That(stored.Index, Is.EqualTo(5));
+			Assert.That(stored.FieldExhausted(6), Is.False);
+
+			stored.CompleteCell();
+			Assert.That(stored.Index, Is.EqualTo(6));
+			Assert.That(stored.FieldExhausted(6), Is.True);    // fully walked — honest Unserved input
+		}
+
 		sealed class LawStub : IBotExpansionTargetProvider
 		{
 			readonly int unservedInReach;

@@ -20626,3 +20626,36 @@ the sample:
   `TryReserveRefineryAnchors`/`RefineryClaimCoveredAnchors`/
   `RefineryClaimPlacementFailed`/2-arg commit — Architect-owned queue files.
   Precise contract sent (commit ~:1619, failure ~:1633, admission bind ~:328).
+
+# 2026-10-09 — REPAIR-B3 R3: cursor-interruption fix + PatchWalk contract + regression pins
+
+*Devin-Developer.* The VP's exact-tip R2 review
+(`REREVIEW_2026-10-09_repair_b3_r2_vp.md`) found a blocking cursor bug in the
+R2 patch walk: the outer `for`'s unconditional `pi++` advanced the persisted
+cursor past INTERRUPTED cells — a probe-cap refusal left `tickCapHit` false so
+the dock loop burned through the rest of the window with refused probes and
+advanced `pi` over never-examined cells; a tick-cap break likewise ran the
+for-update before the condition could stop the loop. A final allowed outbound
+plus a refused inbound could skip the cell entirely, and a later field
+exhaustion could then publish a false Unserved.
+
+- **Fix:** the cell index now advances only via `CompleteCell()` on the new
+  public `PatchWalk` struct (`RefineryCoverageOracle.cs`) — the caller invokes
+  it strictly after a cell's examination completed (every eligible dock/spec
+  saw it). Any interruption (`cellExamined=false` on probe refusal, tick-cap
+  break, or `ProbeCapSpent` in the loop condition) leaves `walk.Index` on the
+  unexamined cell, which the persisted `(version, index)` resumes from.
+  `FieldExhausted(count)` is now the only path that can feed Unserved.
+- **Regressions** (`FieldCoverageTest`, +5): probe-cap refusal at the
+  outbound/inbound split keeps the cell pending; tick-pacing interruption
+  leaves it pending and `NewTick` resumes it; site-cap refusal before any
+  probe leaves the pair untouched; window-end is NOT exhaustion (unexamined
+  cells keep the pair Unknown); resume honours the stored index through full
+  exhaustion.
+- **Verification:** Release build 0/0; `dotnet test` = **1299/1299**
+  (1294 + 5 PatchWalk pins). No world-facing surface change — fog audit
+  unchanged. Boot-gate still deferred (serial lane).
+- **Merge-wave context:** master moved to `e8ec610e7` (queue-observer-seam
+  merged; `c76283c0b` is an ancestor). The queue-wiring NOTE now carries
+  merged-master call-site coordinates (:600 admission, :1326/:1390/:1466
+  release sites, :1916-1945 commit/fail block).

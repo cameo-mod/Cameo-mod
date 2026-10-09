@@ -2476,18 +2476,21 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					var pairRank = long.MaxValue;
 					var (cells, types, enabled) = lastRefineryDocks[r];
 
-					// R2: patch-outer walk with a persisted per-pair cursor — cell index advances only
-					// after every eligible (dock, spec) examined it, and the window moves at most
-					// CoveragePatchCellSample cells per refresh. A pair whose window ends before the
-					// field does stays UNKNOWN (unexamined cells could still prove coverage); only a
-					// fully-walked field contributes to Unserved.
+					// R2+R3: patch-outer walk with a persisted per-pair cursor — the cell index may
+					// only advance after every eligible (dock, spec) examined it, and the window
+					// moves at most CoveragePatchCellSample cells per refresh. Any interruption —
+					// tick pacing or a probe-cap refusal — leaves the cursor ON the unexamined cell
+					// (R3: an unconditional for-update would skip it into a false Unserved). A pair
+					// whose window ends before the field does stays UNKNOWN; only a fully-walked
+					// field contributes to Unserved.
 					var pi = patchProbeProgress.TryGetValue((a, r), out var progress) && progress.Version == coverageVersion
 						? progress.Index : 0;
-					var piEnd = Math.Min(patches.Count, pi + Math.Max(1, Info.CoveragePatchCellSample));
-					for (; pi < piEnd && !pairCovered && !tickCapHit; pi++)
+					var walk = new PatchWalk(pi, patches.Count, Info.CoveragePatchCellSample);
+					while (walk.HasCell && !pairCovered && !tickCapHit && !coverageBudget.ProbeCapSpent)
 					{
-						var patch = patches[pi];
-						for (var di = 0; cells != null && di < cells.Length && !pairCovered && !tickCapHit; di++)
+						var patch = patches[walk.Index];
+						var cellExamined = true;
+						for (var di = 0; cells != null && di < cells.Length && !pairCovered && !tickCapHit && cellExamined; di++)
 						{
 							// R1: real DockHost eligibility — enabled and in-world, type-overlapping.
 							// A null Types array (no DockHost — exotic mod) is wildcard-compatible with
@@ -2508,8 +2511,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 								{
 									// Probe-cap refusal = deferred for this refresh; tick-cap
 									// refusal = pacing — rewind so this anchor resumes next tick
-									// (paid witnesses persist across both).
+									// (paid witnesses persist across both). The cell stays
+									// unexamined either way: pi must NOT advance (R3).
 									anyDeferred = true;
+									cellExamined = false;
 									if (coverageBudget.ProbeCapSpent)
 									{
 										if (coverageFirstBudgetDeferred < 0)
@@ -2529,10 +2534,15 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 								break;
 							}
 						}
+
+						if (!cellExamined)
+							break;
+
+						walk.CompleteCell();
 					}
 
-					patchProbeProgress[(a, r)] = (coverageVersion, pi);
-					if (!pairCovered && !tickCapHit && !coverageBudget.ProbeCapSpent && pi < patches.Count)
+					patchProbeProgress[(a, r)] = (coverageVersion, walk.Index);
+					if (!pairCovered && !tickCapHit && !coverageBudget.ProbeCapSpent && !walk.FieldExhausted(patches.Count))
 						anyDeferred = true;
 
 					if (pairCovered)
