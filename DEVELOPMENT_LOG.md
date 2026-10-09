@@ -1,3 +1,42 @@
+# 2026-10-09 — Devin: SW plug capacity (B2/B6) — review findings F1+F2 resolved
+
+*Devin-Developer.* Independent review of `devin/playtest-b2b6-swcap` produced two
+blockers; both are now fixed on the same branch (details in fleet
+`REVIEW_2026-10-09_devin_swcap_b2b6.md`).
+
+- **F1 refund double-credit** — `Cancel` returned `ResourcesPaid` as resources
+  AND included it in `TotalCost - RemainingCost` cash. Fix:
+  `RefundCash(total, remaining, paid) = total - remaining - paid`, arithmetically
+  identical to `CancelProductionInner`'s `RemainingCost += ResourcesPaid` before
+  `GiveCash`. Five refund-split regressions added.
+- **F2 token-map inference gap** — `BuildPlugTokenMap` accepted any
+  single-variable `RequiresCondition` provider, so an ordinary conditional
+  provider (or an inverted `!occupant` gate — same `Variables` set) paired with
+  an item that negates that token could be misclassified as SW-cap wiring. Fix:
+  providers must (a) carry `RequiresPrerequisites: global-swlimit` — explicit
+  lobby-cap wiring only — and (b) have *positive* single-variable polarity
+  (`RequiresCondition.Expression.Trim() == variable`). Both filters applied.
+- **Real lifecycle harness** — new `SuperweaponPlugLimitRuntimeTest.cs` builds a
+  real `World` via `RuntimeHelpers.GetUninitializedObject` + reflection (the
+  `AttackGarrisonedTest` pattern — this test assembly lacks `InternalsVisibleTo`
+  to `OpenRA.Game`, so `TraitDictionary`/`Actor` ctor/`Initialize`/`IsInWorld`
+  are invoked reflectively). Real `TechTree`/`PlayerResources`/`ProductionQueue`/
+  `ProvidesPrerequisite`/`Pluggable` on real actors — 15 lifecycle regressions:
+  order-gate admit/reject matrix, **`EnablePlug` → `CanBuild` flips off
+  synchronously** (the real installed-only install-boundary), tail-first excess
+  cancellation, `Infinite` cleared without replenish, progressed+`Done`
+  migrated item refunded **600 resources + 400 cash** and removed, installed+pending
+  never exceeds cap, Unlimited mode never reconciles, one sweep per tick dedup.
+- **Exact-four pinning** — `TokenMap_ExactlyFourActiveMappings` resolves all four
+  real wirings at once (asserts `map.Count == 4`, incl. CABAL two-provider split
+  and droppod exclusion); `SuperweaponPlugLimitYamlTest` scans the **real** five
+  yaml files and asserts exactly four `global-swlimit`-gated `@swlimit`
+  providers on the four expected hosts + each plug actor negates its token.
+- Adversarial fixtures: ordinary condition-provider with negated item token,
+  non-`global-swlimit`-gated provider, inverted-condition provider — all derive
+  out.
+- **Gates**: 38/38 focused, 1289/1289 full suite, Release 0/0.
+
 # 2026-10-09 — Devin: SW plug capacity (B2/B6) — admission gate + frame-end reconciliation implemented
 
 *Devin-Developer.* Playtest repairs B2 (multiple superweapons despite the cap) and

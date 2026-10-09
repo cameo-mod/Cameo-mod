@@ -20,8 +20,13 @@ cash+resources refund). SW items are derived from rules wiring (host
 `RequiresPrerequisites: global-swlimit`. Inbound `GetReplacement` migration is
 **detection-only** per spec — upstream exclusion is a separate out-of-scope fix.
 
-*Evidence:* build 0/0 · 1263/1263 NUnit (+12 `SuperweaponPlugLimitTest`: admit
-matrix, excess matrix, all-four-wiring token-map derivation) · boot-gate PASS
+*Evidence:* build 0/0 · 1289/1289 NUnit (+38 `SuperweaponPlugLimit*` tests:
+admit/excess/refund tables, token-map derivation incl. adversarial
+ordinary/inverted providers, exact-four resolved-wiring assertion, real-World
+lifecycle regressions via reflection harness — real `ProductionQueue`/`TechTree`
+/`Pluggable`: `EnablePlug`→`CanBuild` flip, tail-first sweep cancel, `Infinite`
+clear, Done-migration refund, per-tick dedup; plus real-yaml scan pinning
+exactly four `global-swlimit`-gated `@swlimit` providers) · boot-gate PASS
 (menu reached, 0 new exceptions) · `git diff --check` scoped files only · engine
 untouched (canonical pin `0a3f77dbe1`). *Next:* live-match regressions —
 infinite-flag install, capture over-cap, mixed-tech migration, PayUpFront

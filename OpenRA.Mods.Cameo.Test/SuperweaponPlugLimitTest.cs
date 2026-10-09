@@ -259,5 +259,109 @@ namespace OpenRA.Mods.Cameo.Test
 
 			Assert.That(map, Is.Empty);
 		}
+
+		[Test]
+		public void TokenMap_OrdinaryConditionProvider_NegatedItem_Excluded()
+		{
+			// Review regression: an ordinary host whose conditional provider is NOT
+			// wired to the lobby cap, combined with an item that negates that
+			// provider's token, must never be classified as SW-cap wiring.
+			var host = new ActorInfo("naxis_techcenter",
+				Provides("mgcap", "mg"),
+				Pluggable(("mg", "mg")));
+			var plug = new ActorInfo("naxis_mg_nest",
+				Plug("mg"),
+				Buildable("~naxis_constructionyard, naxis_techcenter, !mgcap"));
+
+			var map = SuperweaponPlugLimit.BuildPlugTokenMap(new[] { host, plug });
+
+			Assert.That(map, Is.Empty);
+		}
+
+		[Test]
+		public void TokenMap_NonSwlimitGatedProvider_NegatedItem_Excluded()
+		{
+			// The provider is gated on a DIFFERENT prerequisite token, not the
+			// lobby cap — still not capacity wiring.
+			var host = new ActorInfo("td_gdi_advancedcommunicationscenter",
+				Provides("ionc", "ionc", "techlevel.superweapons"),
+				Pluggable(("td_gdi_advancedcommunicationscenter", "ionc")));
+			var plug = new ActorInfo("td_gdi_ioncannonuplink",
+				Plug("td_gdi_advancedcommunicationscenter"),
+				Buildable("!ionc"));
+
+			var map = SuperweaponPlugLimit.BuildPlugTokenMap(new[] { host, plug });
+
+			Assert.That(map, Is.Empty);
+		}
+
+		[Test]
+		public void TokenMap_InvertedConditionProvider_Excluded()
+		{
+			// Review regression: a provider gated on a NEGATED variable
+			// (RequiresCondition: !ionc) can never be an install condition even
+			// when it carries the lobby-cap prerequisite.
+			var host = new ActorInfo("td_gdi_advancedcommunicationscenter",
+				Provides("ionc", "!ionc", "global-swlimit"),
+				Pluggable(("td_gdi_advancedcommunicationscenter", "ionc")));
+			var plug = new ActorInfo("td_gdi_ioncannonuplink",
+				Plug("td_gdi_advancedcommunicationscenter"),
+				Buildable("!ionc"));
+
+			var map = SuperweaponPlugLimit.BuildPlugTokenMap(new[] { host, plug });
+
+			Assert.That(map, Is.Empty);
+		}
+
+		[Test]
+		public void TokenMap_ExactlyFourActiveMappings()
+		{
+			// Resolved-wiring assertion: the four real host/plug pairs and nothing
+			// else produce capacity mappings. The CABAL host's ungated
+			// @cabalnuke provider and the droppod plug derive out.
+			var actors = new[]
+			{
+				new ActorInfo("td_gdi_advancedcommunicationscenter",
+					Provides("ionc", "ionc", "global-swlimit"),
+					Provides("techcenter", "!(powerdown || infiltrated)"),
+					Pluggable(("td_gdi_advancedcommunicationscenter", "ionc"))),
+				new ActorInfo("td_gdi_ioncannonuplink",
+					Plug("td_gdi_advancedcommunicationscenter"),
+					Buildable("~td_gdi_constructionyard, td_gdi_advancedcommunicationscenter, !ionc, ~techlevel.superweapons")),
+				new ActorInfo("td_nod_templeofnod",
+					Provides("nodnuke", "nuke", "global-swlimit"),
+					Pluggable(("td_nod_templeofnod", "nuke"))),
+				new ActorInfo("td_nod_nuclearmissilesilo",
+					Plug("td_nod_templeofnod"),
+					Buildable("~td_nod_constructionyard, td_nod_templeofnod, !nodnuke, ~techlevel.superweapons")),
+				new ActorInfo("cabal_core",
+					Provides("cabalnuke", "cabalnuke"),
+					Provides("cabalnuke_swlimit", "cabalnuke", "global-swlimit"),
+					Pluggable(("cabalcore_silo", "cabalnuke"))),
+				new ActorInfo("cabal_missilesilo",
+					Plug("cabalcore_silo"),
+					Buildable("~cabal_core, cabal_core, !cabalnuke_swlimit, ~techlevel.superweapons")),
+				new ActorInfo("ts_gdi_upgradecenter",
+					Provides("tsionc", "ionc", "global-swlimit"),
+					Pluggable(("ioncannon", "ionc"), ("droppod", "droppod"))),
+				new ActorInfo("ts_gdi_ioncannonuplink",
+					Plug("ioncannon"),
+					Buildable("~ts_gdi_upgradecenter, !droppod, !tsionc, ~techlevel.superweapons")),
+				new ActorInfo("ts_gdi_droppoduplink",
+					Plug("droppod"),
+					Buildable("~ts_gdi_upgradecenter, !ionc, !droppod")),
+			};
+
+			var map = SuperweaponPlugLimit.BuildPlugTokenMap(actors);
+
+			Assert.Multiple(() =>
+			{
+				Assert.That(map.Count, Is.EqualTo(4));
+				Assert.That(map["td_gdi_ioncannonuplink"], Is.EqualTo("ionc"));
+				Assert.That(map["td_nod_nuclearmissilesilo"], Is.EqualTo("nodnuke"));
+				Assert.That(map["cabal_missilesilo"], Is.EqualTo("cabalnuke_swlimit"));
+				Assert.That(map["ts_gdi_ioncannonuplink"], Is.EqualTo("tsionc"));
+			});
+		}
 	}
 }

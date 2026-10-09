@@ -118,14 +118,21 @@ namespace OpenRA.Mods.Cameo.Traits
 				var providedByCondition = new Dictionary<string, List<string>>();
 				foreach (var p in ai.TraitInfos<ProvidesPrerequisiteInfo>())
 				{
-					// Only single-variable gates identify a plug-granted condition
-					// (e.g. RequiresCondition: nuke); multi-variable expressions are
-					// skipped so an unrelated gating variable can't be misattributed.
 					if (p.RequiresCondition == null)
 						continue;
 
+					// Only a positive single-variable gate identifies a plug-granted
+					// condition (e.g. RequiresCondition: nuke). A negated (!ionc) or
+					// otherwise compound expression cannot be an install condition
+					// and must not classify the provider as capacity wiring.
 					var variables = p.RequiresCondition.Variables.ToArray();
-					if (variables.Length != 1)
+					if (variables.Length != 1 || p.RequiresCondition.Expression.Trim() != variables[0])
+						continue;
+
+					// Only providers explicitly wired to the lobby cap yield capacity
+					// tokens; an ordinary conditional provider with a negated item
+					// token must never be classified as SW-cap wiring.
+					if (!p.RequiresPrerequisites.Contains("global-swlimit"))
 						continue;
 
 					var condition = variables[0];
