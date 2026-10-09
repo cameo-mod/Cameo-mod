@@ -1,3 +1,43 @@
+# 2026-10-09 — Devin: B-lane master repair batch — limited-SW default + engineer/crate flags + bot plug production
+
+*Devin-Integrator* on `devin/repair-b2b6` (stacked on the bounded-approved
+swcap head `4ead228b4`, base `3d99405bd`). Maintainer policy via coordinator:
+limited superweapons lobby default; SW-granting plugs count installed+pending
+owner-wide; ordinary plugs keep intended oversubscription; bots buy plugs via
+normal paid production; engineer/crate visibility exceptions restored.
+
+- **`world.yaml` `MapOptions.TechLevel: superweapons`** — the techlevel lobby
+  dropdown now defaults to "Limited Superweapons" (grants `techlevel.superweapons`
+  + `global-swlimit`). "Unlimited Superweapons" (`unrestricted`) and
+  "No Superweapons" stay selectable; only the default changed.
+- **ai.yaml engineer/crate flags restored** — `CheckCaptureTargetsForVisibility`,
+  `CheckRepairTargetsForVisibility`, `CheckTargetsForVisibility` (CratePickup)
+  back to `false`. `4bf696716` had flipped them to `true` reading "without
+  cheats" too broadly; the conditional C# guards only restore behaviour once
+  the flags are false. The "Omniscient on purpose (DESIGN §19.5)" comment was
+  already correct for this state.
+- **Bot plug production migrated to the normal path** —
+  `PlugSpawnerBotModuleCA` no longer issues `PlacePlugAI` instant installs
+  (the whole `IResolveOrder` handler, instant `TakeCash`, `IgnoreCost` and the
+  ownership re-check are retired with it). Demand now queues ordinary
+  `StartProduction` on the first owner queue that `CanBuild`s the plug, gated
+  on tech-tree prerequisites and an owned host still accepting the plug type,
+  with a pending-item dedup so an interval scan can't flood the queue.
+  Queue-less plugs (the dormant `ts_gdi_droppoduplink`, whose `Queue:` is
+  deliberately commented out) resolve no producer and stay unreachable.
+  Completed plug items are placed by the existing
+  `BaseBuilderQueueManagerCA` Done branch through `PlacePlug` — the same path
+  a human's plug takes. Superweapon plugs ride the `SuperweaponPlugLimit`
+  owner-wide admission gate identically to player orders.
+- **Random eligible install slot** — the Done branch previously took the first
+  matching `Pluggable` host; it now draws via synced `BotRng.For(player)` over
+  ActorID-ordered candidates (maintainer ruling; never `LocalRandom`).
+- Tests: `PlugSpawnerBotModuleTest` drops the retired `PlugTargetIsOwned` seam;
+  owned-scan seams pinned unchanged. 1299/1299 `OpenRA.Mods.Cameo.Test`,
+  Release 0 errors.
+- Outstanding: live-match acceptance — plug production+placement by a bot,
+  cap-1 admission in a real Limited lobby, Unlimited unaffected.
+
 # 2026-10-09 — Devin: SW plug capacity (B2/B6) — F3/F4 resolved on 901d5dace
 
 *Devin-Developer.* Re-review of `19996eacf` found two more map-derivation

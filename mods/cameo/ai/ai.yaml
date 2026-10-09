@@ -4025,7 +4025,11 @@ Player:
 	# Zerg lair/hive tech chains, TS turbines + superweapon uplinks, Temple-of-Nod nuke, refinery
 	# collectors and bunker add-ons are all plugs — without this the bot can never produce them.
 	# The module gates on each plug's Buildable.Prerequisites (techTree) so no tech path is skipped.
-	# `genericbot && plug_spawn`: off on master until the increment A/B arms it (group F).
+	# B2/B6 repair: demand routes through ordinary StartProduction and the base builder's
+	# completed-item PlacePlug — bots buy plugs like players (maintainer ruling); the instant
+	# PlacePlugAI installer is retired. Queue-less plugs (dormant droppod uplink) stay
+	# unreachable. `genericbot && plug_spawn`: off on master until the increment A/B arms it
+	# (group F).
 	PlugSpawnerBotModuleCA:
 		RequiresCondition: genericbot && plug_spawn
 		Plugs:
@@ -4284,18 +4288,18 @@ Player:
 		RequiresCondition: genericbot # every tier (DESIGN §19.1; DAWN's #672 ungates the parents the same way)
 		# Capturer and target ids: read from CaptureManagerBotModuleCA above (one copy in the central file).
 		PriorityCaptureChance: 75
-		CheckCaptureTargetsForVisibility: true
+		CheckCaptureTargetsForVisibility: false
 		MinimumCaptureDelay: 125
 		MaximumCaptureTargetOptions: 25
 		RepairingActorTypes: e6, engineer, ra1_engineer, ra2_allies_engineer, ra2_soviets_engineer, yuri_engineer, asianalliance_engineer, steelconsortium_engineer, futuretech_engineer, latinsyndicate_engineer, tkm_engineer, crab, n64e6gdi, n64e6nod, wc_h_peasant_engineer, wormengineer, op2_commonore_beacon_3bar, atreides_engineer, corrino_engineer, harkonnen_engineer
 		RepairableHutActorTypes: bridgehut, bridgehut.small
-		CheckRepairTargetsForVisibility: true
+		CheckRepairTargetsForVisibility: false
 	# Try to get a MCV from a crate if we don't have one
 	CratePickupBotModule:
 		RequiresCondition: classicbot || genericbot # && nobase no conyard condition defined in player.yaml
 		ScanForCratesInterval: 300
 		# Omniscient on purpose (DESIGN §19.5): a bot that lost its MCV must find a crate anywhere.
-		CheckTargetsForVisibility: true
+		CheckTargetsForVisibility: false
 		ExcludedUnitTypes: e6, ra1_engineer, ra2_allies_engineer, ra2_soviets_engineer, yuri_engineer, asianalliance_engineer, latinsyndicate_engineer, steelconsortium_engineer, tsengineer, ts_nod_engineer, engineer, td_gdi_tiberiumharvester, td_nod_tiberiumharvester, td_nod_stealthharvester, td_gdi_mobileconstructionvehicle, td_nod_mobileconstructionvehicle, ra1_soviets_oretruck, ra1_allies_oretruck, japan_japaneseoretruck, ra1_allies_mobileconstructionvehicle, ra1_soviets_mobileconstructionvehicle, japan_japanesemobileconstructionvehicle, ra1_allies_minelayer, japan_corewarfactory, japan_corerefinery, japan_corepowerplant, japan_corebarracks, japan_coreradar, japan_coreairfield, japan_coreservicedepot, japan_coretechcenter, ra2_allies_chronominer, ra2_soviets_warminer, yrslav, yuri_slaveminer, asianalliance_droneminer, zerg_overlord, ts_gdi_tiberiumharvester, ts_nod_tiberiumharvester, forgotten_tiberiumharvester, cabal_tiberiumharvester, ra2_allies_mobileconstructionvehicle, ra2_soviets_mobileconstructionvehicle, yuri_mobileconstructionvehicle, asianalliance_mobileconstructionvehicle, ts_gdi_mobileconstructionvehicle, ts_nod_mobileconstructionvehicle, forgotten_mobileconstructionvehicle, cabal_mobileconstructionvehicle, ixian_spiceharvester, carryall, carryall.reinforce, ixian_mobileconstructionvehicle, ordos_mobileconstructionvehicle, ra1_allies_raspy, ra2_allies_ra2spy, ra2_allies_chronolegionnaire, ra1_soviets_nukedemotruck, ra1_allies_chronotank, ra1_soviets_madtank, td_gdi_chinooktransport, td_nod_chinooktransport, ra1_allies_chinooktransport, ra1_soviets_hiptransport, ra2_allies_nighthawk, latinsyndicate_hindtransport, asianalliance_shinobi, asianalliance_oiltruck, steelconsortium_consortiummobileconstructionvehicle, steelconsortium_consortiumminer, latinsyndicate_syndicatemobileconstructionvehicle, latinsyndicate_collectiontruck, naxis_naximobileconstructionvehicle, schwarzermond_naxismobileconstructionvehicle, schwarzermond_noidharvester, naxis_slaveoverseer, naxis_slave, latinsyndicate_terrorist, latinsyndicate_demolitiontruck, latinsyndicate_nuketruck, futuretech_mobileconstructionvehicle, futuretech_prospector, futuretech_engineer, futuretech_spyfutu, zerg_hatcherydrone, protoss_mobilenexus, terran_mobilecommandcenter, terran_scv, protoss_probe, zerg_drone, terran_dropship, terran_medivac, protoss_shuttle, wc2_humans_mobileconstructionvehiclehuman, wc2_orcs_mobileconstructionvehicleorc, wc2_humans_peasant, wc2_orcs_peon, wc2_humans_demolitionsquad, wc2_orcs_goblinsappers, ordos_spiceharvester, tkm_mobileconstructionvehicletkm, tkm_templateharvesterraname, tkm_engineer, tkm_radartruck, tkmworker, atreides_engineer, corrino_engineer, harkonnen_engineer, atreides_spiceharvester, corrino_spiceharvester, harkonnen_spiceharvester, eden_cargotruck_empty, plymouth_cargotruck_empty, atreides_mobileconstructionvehicle, corrino_mobileconstructionvehicle, harkonnen_mobileconstructionvehicle, eden_convec_structure_factory, plymouth_convec_structure_factory
 	ExternalBotOrdersManager:
 		RequiresCondition: genericbot

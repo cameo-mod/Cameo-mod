@@ -29,8 +29,8 @@ rem update; the null driver keeps the boot test alive without an audio device.
 rem Unset ALSOFT_DRIVERS to exercise the real audio path.
 if not defined ALSOFT_DRIVERS set "ALSOFT_DRIVERS=null"
 
-echo Boot test: launching OpenRA for 30s...
-powershell -NoProfile -Command "$proc = Start-Process -FilePath '%ENGINE_DIR%\bin\OpenRA.exe' -ArgumentList 'Game.Mod=%MOD_ID%','Sound.Device=none','Engine.EngineDir=..','Engine.LaunchPath=%TEMPLATE_DIR%\boot-test.cmd','Engine.ModSearchPaths=%MOD_SEARCH_PATHS%' -WorkingDirectory '%ENGINE_DIR%' -PassThru; if ($proc.WaitForExit(30000)) { exit $proc.ExitCode }; if (-not $proc.CloseMainWindow()) { $proc.Kill() } elseif (-not $proc.WaitForExit(5000)) { $proc.Kill() }; exit 0"
+echo Boot test: launching OpenRA for 90s...
+powershell -NoProfile -Command "$proc = Start-Process -FilePath '%ENGINE_DIR%\bin\OpenRA.exe' -ArgumentList 'Game.Mod=%MOD_ID%','Sound.Device=none','Engine.EngineDir=..','Engine.LaunchPath=%TEMPLATE_DIR%\boot-test.cmd','Engine.ModSearchPaths=%MOD_SEARCH_PATHS%' -WorkingDirectory '%ENGINE_DIR%' -PassThru; if ($proc.WaitForExit(90000)) { exit $proc.ExitCode }; if (-not $proc.CloseMainWindow()) { $proc.Kill() } elseif (-not $proc.WaitForExit(5000)) { $proc.Kill() }; exit 0"
 set "BOOT_EXIT=%ERRORLEVEL%"
 
 echo Boot test complete.
