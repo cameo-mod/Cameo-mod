@@ -534,31 +534,35 @@ namespace OpenRA.Mods.CA.Traits
 	}
 
 	/// <summary>
-	/// REPLAY-HEALTH-LOGGER: transition-episode dedupe for the manager's emits — a Held
-	/// repeats only when the held item or its reason changes within an episode, and Ready
-	/// fires once per production episode. Any Started/Placed/Cancelled/Resumed clears the
-	/// producer's episode so a re-queued same-name item announces fresh.
+	/// REPLAY-HEALTH-LOGGER: transition dedupe for the manager's emits — one record per
+	/// (producer, item, kind, reason) episode; identical consecutive transitions are noise
+	/// (a Held while a produced item waits ticks every sweep). A Cancelled item also shadows
+	/// Ready: CancelProduction is an in-flight order, so the item can still sit at the queue
+	/// head, still Done, for a tick or two — re-announcing Ready after its cancel would
+	/// invert the pair in the log. A Started clears the producer's shadowed cancels so a
+	/// re-queued same-name item announces fresh.
 	/// </summary>
 	public sealed class BotQueueEpisodeTracker
 	{
-		readonly Dictionary<uint, (string Item, BotQueueTransitionReason Reason)> holds = [];
-		readonly HashSet<uint> ready = [];
+		readonly Dictionary<uint, (string Item, BotQueueTransitionKind Kind, BotQueueTransitionReason Reason)> last = [];
+		readonly HashSet<(uint Producer, string Item)> cancelled = [];
 
-		public bool HoldEntering(uint producerId, string item, BotQueueTransitionReason reason)
+		public bool EmitGate(uint producerId, string item, BotQueueTransitionKind kind, BotQueueTransitionReason reason)
 		{
-			if (holds.TryGetValue(producerId, out var hold) && hold.Item == item && hold.Reason == reason)
+			if (kind == BotQueueTransitionKind.Ready && cancelled.Contains((producerId, item)))
 				return false;
 
-			holds[producerId] = (item, reason);
+			if (last.TryGetValue(producerId, out var l) && l.Item == item && l.Kind == kind && l.Reason == reason)
+				return false;
+
+			last[producerId] = (item, kind, reason);
+
+			if (kind == BotQueueTransitionKind.Cancelled)
+				cancelled.Add((producerId, item));
+			else if (kind == BotQueueTransitionKind.Started)
+				cancelled.RemoveWhere(c => c.Producer == producerId);
+
 			return true;
-		}
-
-		public bool ReadySeen(uint producerId) => ready.Add(producerId);
-
-		public void EpisodeEnded(uint producerId)
-		{
-			holds.Remove(producerId);
-			ready.Remove(producerId);
 		}
 	}
 }

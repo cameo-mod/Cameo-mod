@@ -20475,3 +20475,19 @@ the existing helpers only — no blanket normalization, no yaml edits except one
   logger is registered; zero allocations and zero RNG on the emit path.
 * **Not done:** logger/pulse implementation is Sol's lane (separate files); integrator receipt
   and runtime gates remain pending.
+
+## 2026-10-09 - Devin-Architect: seam dedupe fix — phantom Ready + in-flight cancel (same branch)
+
+* **Defect found on self-review:** the per-set tracker (holds/ready + EpisodeEnded) re-announced
+  Ready on the tick after Cancelled — CancelProduction is order-latency, so the cancelled item
+  still sits at the queue head, still Done, while the order is in flight. Clearing the episode
+  on Cancelled let the next sweep emit a second Ready *after* the Cancelled record, inverting
+  the pair the verifier measures. The repeated in-flight cancel order also re-emitted an
+  identical Cancelled each sweep.
+* **Fix:** BotQueueEpisodeTracker collapsed to a single `EmitGate(producerId, item, kind,
+  reason)` — one record per (producer, item, kind, reason) transition, and a cancelled
+  (producer, item) shadow suppresses Ready until a Started clears it. EmitQueueHeld folded
+  into EmitQueueTransition; every site now funnels through the same gate.
+* **Verification:** new regression `CancelledShadowsInFlightReadyUntilStarted` (phantom Ready
+  suppressed, duplicate in-flight Cancelled suppressed, Started clears the shadow); 6 seam
+  tests pass; full suite 1280/1280; Release clean; boot gate main menu, zero new exceptions.

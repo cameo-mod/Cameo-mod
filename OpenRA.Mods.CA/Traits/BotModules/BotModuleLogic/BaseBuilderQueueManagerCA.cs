@@ -123,7 +123,8 @@ namespace OpenRA.Mods.CA.Traits
 		// REPLAY-HEALTH-LOGGER (ACK-2): emit one record-only transition to every registered
 		// observer. Event-local state is resolved here, at the emit tick — a producer-less
 		// transition (latch resume) carries ProducerActorId 0 and ProducerLive null = UNKNOWN.
-		// A Started/Placed/Cancelled/Resumed clears the producer's hold/ready episode.
+		// EmitGate dedupes identical consecutive transitions and shadows a cancelled item's
+		// phantom Ready while its cancel order is still in flight.
 		void EmitQueueTransition(ProductionQueue queue, Actor producer, string item, BuildingType category,
 			BotQueueTransitionKind kind, BotQueueTransitionReason reason,
 			BotQueueCancellationClass cancellationClass = BotQueueCancellationClass.None)
@@ -133,8 +134,8 @@ namespace OpenRA.Mods.CA.Traits
 				return;
 
 			var producerId = producer?.ActorID ?? 0;
-			if (kind != BotQueueTransitionKind.Held && kind != BotQueueTransitionKind.Ready)
-				queueEpisodes.EpisodeEnded(producerId);
+			if (!queueEpisodes.EmitGate(producerId, item, kind, reason))
+				return;
 
 			var transition = new BotQueueTransition(world.WorldTick, item,
 				queue?.Info.Group ?? Category, category, producerId, kind, reason,
@@ -143,12 +144,6 @@ namespace OpenRA.Mods.CA.Traits
 				cancellationClass);
 			foreach (var observer in queueObservers)
 				observer.OnQueueTransition(in transition);
-		}
-
-		void EmitQueueHeld(ProductionQueue queue, string item, BuildingType category, BotQueueTransitionReason reason)
-		{
-			if (queueEpisodes.HoldEntering(queue.Actor.ActorID, item, reason))
-				EmitQueueTransition(queue, queue.Actor, item, category, BotQueueTransitionKind.Held, reason);
 		}
 
 		BuildingType QueueCategoryOf(string item)
@@ -420,10 +415,10 @@ namespace OpenRA.Mods.CA.Traits
 			else if (currentBuilding != null && currentBuilding.Done)
 			{
 				// REPLAY-HEALTH-LOGGER: Ready once per production episode — the timestamp the
-				// verifier's unplaced-ready window measures from.
-				if (queueEpisodes.ReadySeen(queue.Actor.ActorID))
-					EmitQueueTransition(queue, queue.Actor, currentBuilding.Item, QueueCategoryOf(currentBuilding.Item),
-						BotQueueTransitionKind.Ready, BotQueueTransitionReason.None);
+				// verifier's unplaced-ready window measures from. EmitGate dedupes the sweep
+				// and shadows it while the item's own cancel order is still in flight.
+				EmitQueueTransition(queue, queue.Actor, currentBuilding.Item, QueueCategoryOf(currentBuilding.Item),
+					BotQueueTransitionKind.Ready, BotQueueTransitionReason.None);
 
 				// ECON-A (§4 Ready-hold): a bound demand item sits at Queue[0] until its MCV deploys —
 				// returning false holds it without spending failure budget (the same mechanic the REF-1
@@ -434,7 +429,8 @@ namespace OpenRA.Mods.CA.Traits
 					: null;
 				if (heldDemand != null && !heldDemand.Deployed)
 				{
-					EmitQueueHeld(queue, currentBuilding.Item, QueueCategoryOf(currentBuilding.Item), BotQueueTransitionReason.DemandHold);
+					EmitQueueTransition(queue, queue.Actor, currentBuilding.Item, QueueCategoryOf(currentBuilding.Item),
+						BotQueueTransitionKind.Held, BotQueueTransitionReason.DemandHold);
 					return false;
 				}
 
@@ -555,7 +551,8 @@ namespace OpenRA.Mods.CA.Traits
 					// link on an un-aimed fallback cell.
 					if (BaseBuilderQueueEvalCA.CrawlHold(type, law != null, law?.CrawlTargetEdge != null, baseBuilder.ExpansionTarget() != null))
 					{
-						EmitQueueHeld(queue, currentBuilding.Item, type, BotQueueTransitionReason.CrawlHold);
+						EmitQueueTransition(queue, queue.Actor, currentBuilding.Item, type,
+							BotQueueTransitionKind.Held, BotQueueTransitionReason.CrawlHold);
 						return false;
 					}
 
@@ -570,7 +567,8 @@ namespace OpenRA.Mods.CA.Traits
 						// semantics as the REF-1 crawl hold above: queued, no failure budget spent.
 						if (frontBackHold)
 						{
-							EmitQueueHeld(queue, currentBuilding.Item, type, BotQueueTransitionReason.FrontBackHold);
+							EmitQueueTransition(queue, queue.Actor, currentBuilding.Item, type,
+								BotQueueTransitionKind.Held, BotQueueTransitionReason.FrontBackHold);
 							return false;
 						}
 					}
@@ -599,7 +597,8 @@ namespace OpenRA.Mods.CA.Traits
 							BotQueueTransitionKind.Cancelled, BotQueueTransitionReason.SaturationLatch,
 							BotQueueCancellationClass.Production);
 						bot.QueueOrder(Order.CancelProduction(queue.Actor, currentBuilding.Item, 1));
-						EmitQueueHeld(queue, currentBuilding.Item, QueueCategoryOf(currentBuilding.Item), BotQueueTransitionReason.SaturationLatch);
+						EmitQueueTransition(queue, queue.Actor, currentBuilding.Item, QueueCategoryOf(currentBuilding.Item),
+							BotQueueTransitionKind.Held, BotQueueTransitionReason.SaturationLatch);
 						lastFailedBuilding = currentBuilding.Item;
 
 						// FIX-RA-REFINERY R1: the latch snapshot is taken at every saturation —
