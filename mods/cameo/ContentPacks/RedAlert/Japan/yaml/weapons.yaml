@@ -2448,6 +2448,7 @@ Hakureiring:
 	Inherits@wh: ^Warhead_Magic_Heavy
 	Inherits@fx: ^Effect_Magic_Heavy
 	Report: ra1_shared_sounds|thattack1.wav, ra1_shared_sounds|thattack2.wav, ra1_shared_sounds|thattack3.wav
+	ValidTargets: Ground, Water
 	InvalidTargets: Epic, Psionic, Monster
 	ReloadDelay: 30
 	Burst: 3
@@ -2475,7 +2476,6 @@ Hakureiring:
 		ContrailEndColor: FFFFFF
 		AllowSnapping: true
 	Warhead@Magic_Heavy:
-		InvalidTargets: Air
 		ValidTargets: Air, Ground, Water
 		Damage: 20000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
@@ -2494,6 +2494,7 @@ Hakureiring2:
 	Inherits@wh: ^Warhead_Magic_Heavy
 	Inherits@fx: ^Effect_Magic_Heavy
 	Report: ra1_japan_sounds|thbomb.wav
+	ValidTargets: Epic, Psionic, Monster
 	ReloadDelay: 100
 	Burst: 1
 	BurstDelays: 10
@@ -2638,7 +2639,7 @@ Hakureiring3:
 	Inherits@wh: ^Warhead_Magic_Heavy
 	Inherits@fx: ^Effect_Magic_Heavy
 	Report: ra1_shared_sounds|thattack1.wav, ra1_shared_sounds|thattack2.wav, ra1_shared_sounds|thattack3.wav
-	InvalidTargets: Ground
+	ValidTargets: Ground, Water
 	ReloadDelay: 30
 	Burst: 3
 	BurstDelays: 10
@@ -2665,7 +2666,6 @@ Hakureiring3:
 		ContrailEndColor: FFFFFF
 		AllowSnapping: true
 	Warhead@Magic_Heavy:
-		InvalidTargets: Air
 		ValidTargets: Air, Ground, Water
 		Damage: 16000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
