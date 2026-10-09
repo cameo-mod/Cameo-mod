@@ -439,6 +439,91 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(BaseBuilderQueueEvalCA.RefineryDefers(true, BuildingType.BaseCrawl), Is.False);
 		}
 
+		// FIX-RA-REFINERY R1: the saturated-placement latch — the recovery arm covers every case
+		// the expansion nudge can't act on, probes on a per-episode timer, and releases only on a
+		// real world change against the baseline captured at saturation.
+
+		[Test]
+		public void LatchRecoveryCoversEveryUnNudgeableCase()
+		{
+			Assert.Multiple(() =>
+			{
+				Assert.That(BaseBuilderQueueEvalCA.LatchRecoveryApplies(0, true, false), Is.True, "no expansion modules");
+				Assert.That(BaseBuilderQueueEvalCA.LatchRecoveryApplies(0, false, false), Is.True, "no modules, no centre");
+				Assert.That(BaseBuilderQueueEvalCA.LatchRecoveryApplies(2, false, false), Is.True, "null failing centre");
+				Assert.That(BaseBuilderQueueEvalCA.LatchRecoveryApplies(2, true, true), Is.True, "relocation hold live");
+				Assert.That(BaseBuilderQueueEvalCA.LatchRecoveryApplies(2, false, true), Is.True, "hold + null centre");
+				Assert.That(BaseBuilderQueueEvalCA.LatchRecoveryApplies(2, true, false), Is.False,
+					"modules + centre + no hold = the nudge arm's own case");
+			});
+		}
+
+		[Test]
+		public void LatchProbeReleasesOnlyOnWorldChange()
+		{
+			// Snapshot at saturation: 10 buildings, 2 providers.
+			Assert.Multiple(() =>
+			{
+				Assert.That(BaseBuilderQueueEvalCA.LatchProbeReleases(9, 10, 2, 2), Is.True, "a building was lost — room freed");
+				Assert.That(BaseBuilderQueueEvalCA.LatchProbeReleases(10, 10, 3, 2), Is.True, "a provider appeared — new build area");
+				Assert.That(BaseBuilderQueueEvalCA.LatchProbeReleases(9, 10, 3, 2), Is.True, "either change suffices");
+				Assert.That(BaseBuilderQueueEvalCA.LatchProbeReleases(10, 10, 2, 2), Is.False, "unchanged world holds the latch");
+				Assert.That(BaseBuilderQueueEvalCA.LatchProbeReleases(11, 10, 2, 2), Is.False, "more buildings don't free space");
+				Assert.That(BaseBuilderQueueEvalCA.LatchProbeReleases(10, 10, 1, 2), Is.False, "fewer providers don't help");
+			});
+		}
+
+		[Test]
+		public void LatchProbeTimerTicksDownAndRearms()
+		{
+			// delay 3: three ticks per probe window, rearmed on expiry.
+			var timer = 3;
+			Assert.That(BaseBuilderQueueEvalCA.LatchProbeDue(ref timer, 3), Is.False);
+			Assert.That(timer, Is.EqualTo(2));
+			Assert.That(BaseBuilderQueueEvalCA.LatchProbeDue(ref timer, 3), Is.False);
+			Assert.That(timer, Is.EqualTo(1));
+			Assert.That(BaseBuilderQueueEvalCA.LatchProbeDue(ref timer, 3), Is.True);
+			Assert.That(timer, Is.EqualTo(3), "expiry re-arms a full delay");
+		}
+
+		[Test]
+		public void LatchRecoveryEpisodeReleasesOnlyAfterFreshProbe()
+		{
+			// Control-flow regression mirroring Tick's latch: an un-nudgeable saturation (null
+			// failing centre) holds across static probes, releases when a provider appears, and
+			// the NEXT episode starts on a fresh snapshot+timer — never on the stale one that
+			// previously let a water-check-cached baseline release or starve the latch.
+			const int delay = 2;
+			var failRetryTicks = delay;         // reset at saturation
+			var latchedBuildings = 10;          // snapshot at saturation
+			var latchedProviders = 2;
+
+			var released = false;
+			for (var i = 0; i < 20 && !released; i++)
+			{
+				if (!BaseBuilderQueueEvalCA.LatchProbeDue(ref failRetryTicks, delay))
+					continue;
+
+				released = BaseBuilderQueueEvalCA.LatchProbeReleases(10, latchedBuildings, 2, latchedProviders);
+			}
+
+			Assert.That(released, Is.False, "static world never releases the latch");
+
+			// A new base provider arrives — the next due probe releases.
+			for (var i = 0; i < delay && !BaseBuilderQueueEvalCA.LatchProbeDue(ref failRetryTicks, delay); i++) { }
+			Assert.That(BaseBuilderQueueEvalCA.LatchProbeReleases(10, latchedBuildings, 3, latchedProviders), Is.True);
+
+			// Second episode: fresh snapshot (12 buildings, 1 provider) and a fresh timer —
+			// the prior episode's countdown must not bleed through.
+			failRetryTicks = delay;
+			latchedBuildings = 12;
+			latchedProviders = 1;
+			Assert.That(BaseBuilderQueueEvalCA.LatchProbeDue(ref failRetryTicks, delay), Is.False);
+			Assert.That(BaseBuilderQueueEvalCA.LatchProbeDue(ref failRetryTicks, delay), Is.True);
+			Assert.That(BaseBuilderQueueEvalCA.LatchProbeReleases(12, latchedBuildings, 1, latchedProviders), Is.False,
+				"the new baseline holds until the world actually changes again");
+		}
+
 		// FirstByOrder / FirstRequestedRefinery (F-CBL1/F4)
 
 		[Test]

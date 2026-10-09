@@ -20427,6 +20427,16 @@ the existing helpers only — no blanket normalization, no yaml edits except one
   longer saturate the latch. The latch's wait-for-change arm now also covers the
   un-nudgeable cases (null failing centre or live relocation hold) that `Length==0`
   alone left latched forever.
+* **Fix 2 R1 (Sol's review):** the latch baseline was never actually captured —
+  its snapshot sat under a `BaseExpansionModules == null` dead guard (the array
+  is never null), and `cachedBases` doubled as the water checker's cache. The
+  latch now keeps dedicated `latchedBuildings`/`latchedProviders` captured
+  unconditionally at every saturation, the water check owns `cachedBases`
+  alone, and `failRetryTicks` re-arms per episode — at saturation, on nudge
+  release, and on each probe expiry — instead of leaking across episodes.
+  Recovery is covered by world-free seams (`LatchRecoveryApplies`,
+  `LatchProbeDue`, `LatchProbeReleases`) plus a two-episode control-flow
+  regression, not just the deferral classifier.
 * **Diagnostics (Sol's request, bounded):** a failed `LawRefineryPlacement` sweep
   emits one line tallying the per-cell reason chain — scanned / unbuildable /
   too-far / dock-on-resource / dock-no-exit / gap-illegal — plus a "no claim

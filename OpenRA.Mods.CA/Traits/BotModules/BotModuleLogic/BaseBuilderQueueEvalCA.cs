@@ -247,6 +247,37 @@ namespace OpenRA.Mods.CA.Traits
 			lawActive && type == BuildingType.Refinery;
 
 		/// <summary>
+		/// FIX-RA-REFINERY: the saturated-placement recovery arm owns a tick whenever the
+		/// expansion-nudge arm cannot act — no expansion modules, no recorded failing centre,
+		/// or a relocation hold in progress. Gated on module count alone those cases latched
+		/// the builder forever.
+		/// </summary>
+		public static bool LatchRecoveryApplies(int expansionModuleCount, bool hasFailingCenter, bool relocationHold) =>
+			expansionModuleCount == 0 || !hasFailingCenter || relocationHold;
+
+		/// <summary>
+		/// FIX-RA-REFINERY: ticks the recovery probe timer — due exactly when it reaches zero,
+		/// then re-arms to a full delay so each probe waits the same interval and a fresh
+		/// episode (reset at saturation) always gets its own window.
+		/// </summary>
+		public static bool LatchProbeDue(ref int failRetryTicks, int resumeDelay)
+		{
+			if (--failRetryTicks > 0)
+				return false;
+
+			failRetryTicks = resumeDelay;
+			return true;
+		}
+
+		/// <summary>
+		/// FIX-RA-REFINERY: a latch probe releases only on real world change against the
+		/// saturation-time baseline — fewer buildings (room freed) or more base providers
+		/// (new build area). Equal or worse counts hold the latch for another delay.
+		/// </summary>
+		public static bool LatchProbeReleases(int currentBuildings, int latchedBuildings, int currentProviders, int latchedProviders) =>
+			currentBuildings < latchedBuildings || currentProviders > latchedProviders;
+
+		/// <summary>
 		/// ECON-A (SPEC_2026-10-05 Part A §3): a demand item queues when it can still reach Ready by
 		/// the MCV's ETA — start when `etaTick - buildTime &lt;= now`; an already-late item starts now.
 		/// </summary>

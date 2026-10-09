@@ -39,7 +39,12 @@ namespace OpenRA.Mods.CA.Traits
 		string lastFailedBuilding;
 		int checkForBasesTicks;
 		int cachedBases;
-		int cachedBuildings;
+
+		// FIX-RA-REFINERY R1: the latch keeps its own baseline — cachedBases belongs to the water
+		// check and was being clobbered by it, and the old capture site was guarded by
+		// `BaseExpansionModules == null` which never runs (the array is never null).
+		int latchedBuildings;
+		int latchedProviders;
 		int minimumExcessPower;
 		int minCashRequirement;
 		CPos? baseCenterKeepsFailing = null;
@@ -166,36 +171,38 @@ namespace OpenRA.Mods.CA.Traits
 								be.UpdateExpansionParams(bot, false, true, stuckConyard);
 
 							failCount = 0;
+							failRetryTicks = baseBuilder.Info.StructureProductionResumeDelay;
 							return;
 						}
 					}
 
 					failCount = 0;
+					failRetryTicks = baseBuilder.Info.StructureProductionResumeDelay;
 				}
 
-				// No BaseExpansionModules exist. Only bother resetting failCount when either
-				// a) the number of buildings has decreased since last failure M ticks ago,
+				// When the nudge above can't act — no BaseExpansionModules, no failing centre, or a
+				// relocation hold live — only bother resetting failCount when either
+				// a) the number of buildings has decreased since the snapshot taken at saturation,
 				// or b) number of BaseProviders (construction yard or similar) has increased since then.
-				// Otherwise reset failRetryTicks instead to wait again.
-				// (BaseExpansionModules is a .ToArray() — never null; Length==0 was the intent.)
-				// FIX-RA-REFINERY: this arm must also serve the cases the nudge above can't touch —
-				// a null failing centre or a live relocation hold. Gated on Length==0 alone those
-				// latched the whole builder forever.
-				else if ((baseBuilder.BaseExpansionModules.Length == 0 || baseCenterKeepsFailing == null
-					|| baseBuilder.RelocationHoldConyard != null) && --failRetryTicks <= 0)
+				// Otherwise the probe waits another resume delay.
+				// (BaseExpansionModules is a .ToArray() — never null; Length==0 covers "no modules".)
+				// FIX-RA-REFINERY: the widened gate serves every un-nudgeable case; R1 moved the
+				// baseline off cachedBases (the water checker's field) onto latched* fields captured
+				// unconditionally at saturation, and rearmed the timer per episode.
+				else if (BaseBuilderQueueEvalCA.LatchRecoveryApplies(baseBuilder.BaseExpansionModules.Length,
+					baseCenterKeepsFailing != null, baseBuilder.RelocationHoldConyard != null)
+					&& BaseBuilderQueueEvalCA.LatchProbeDue(ref failRetryTicks, baseBuilder.Info.StructureProductionResumeDelay))
 				{
 					var currentBuildings = world.ActorsHavingTrait<Building>().Count(a => a.Owner == player);
 					var baseProviders = world.ActorsHavingTrait<BaseProvider>().Count(a => a.Owner == player);
 
-					if (currentBuildings < cachedBuildings || baseProviders > cachedBases)
+					if (BaseBuilderQueueEvalCA.LatchProbeReleases(currentBuildings, latchedBuildings, baseProviders, latchedProviders))
 					{
 						// FIX-RA-REFINERY diagnostics: observe the latch release — once per resume
 						// delay at most, never per tick.
-						AIUtils.BotDebug($"{player} placement latch released (buildings {cachedBuildings} -> {currentBuildings}, providers {cachedBases} -> {baseProviders}) at tick {world.WorldTick}");
+						AIUtils.BotDebug($"{player} placement latch released (buildings {latchedBuildings} -> {currentBuildings}, providers {latchedProviders} -> {baseProviders}) at tick {world.WorldTick}");
 						failCount = 0;
 					}
-					else
-						failRetryTicks = baseBuilder.Info.StructureProductionResumeDelay;
 				}
 
 				if (failCount >= baseBuilder.Info.MaximumFailedPlacementAttempts)
@@ -506,11 +513,14 @@ namespace OpenRA.Mods.CA.Traits
 						AIUtils.BotDebug($"{player} has nowhere to place {currentBuilding.Item}");
 						bot.QueueOrder(Order.CancelProduction(queue.Actor, currentBuilding.Item, 1));
 						lastFailedBuilding = currentBuilding.Item;
-						if (baseBuilder.BaseExpansionModules == null)
-						{
-							cachedBuildings = world.ActorsHavingTrait<Building>().Count(a => a.Owner == player);
-							cachedBases = world.ActorsHavingTrait<BaseProvider>().Count(a => a.Owner == player);
-						}
+
+						// FIX-RA-REFINERY R1: the latch snapshot is taken at every saturation —
+						// the old `BaseExpansionModules == null` guard never ran (the array is
+						// never null), which left the recovery probe comparing stale or
+						// water-check-owned baselines. The probe timer re-arms per episode.
+						latchedBuildings = world.ActorsHavingTrait<Building>().Count(a => a.Owner == player);
+						latchedProviders = world.ActorsHavingTrait<BaseProvider>().Count(a => a.Owner == player);
+						failRetryTicks = baseBuilder.Info.StructureProductionResumeDelay;
 					}
 				}
 				else
