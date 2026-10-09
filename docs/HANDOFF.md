@@ -5459,6 +5459,7 @@ the pre-wave `SquadManagerBotModuleCA@generic` config restored verbatim as
 `RevealsMap@classic` on its PlayerActor. See DEVELOPMENT_LOG.md 2026-09-28.
 
 
+<<<<<<< HEAD
 ## 2026-10-09 Sol: economy logger implementation checkpoint
 
 Isolated codex/replay-health-logger on f7e1d0fff. New opt-in recorder/world controller, bounded writer and queue/head timing core; no YAML mount, queue decision source, engine pin, orders or launches changed. Focused core/writer tests 16/16. Current seam outcome coverage is unresolved, so activation deliberately marks evidence incomplete (UNKNOWN); not ready for adoption. Remaining recorder/schema round-trip tests, corrected seam restack, measured runtime cost and independent review. See docs/design/REPLAY_HEALTH_LOGGER.md.
@@ -5495,3 +5496,13 @@ Correction: replay_health.py startup checker does not read the new economy file.
 VP bounded approval at 6b0c1fd73bf5a6d08b066fd34cef22f7a49a3f9e covers sizing disclosure and the pinned economy CLI tests only (REREVIEW_2026-10-09_logger_sizing_6b_luna.md). The reviewer reran Python 4/4 using existing C# fixtures; its detached tree lacked the ignored engine dependency, so it did not regenerate them.
 
 The accepted-resource callback now shares its raw serializer with tests: positive credited value proves acceptance, zero does not, and harvester identity stays unknown. Exact byte-budget exhaustion rejects the next record without appending and marks capture incomplete. Focused C# tests 30/30 and regenerated-fixture pinned CLI tests 4/4 pass. No gameplay, mounting, engine-pin or queue-seam changes. Raw/summary sizing, runtime cost, causal terminal seam, restack, dual-gate driver wiring and reservation remain open.
+
+## 2026-10-09 ? Offline replay health gate
+
+Read design/REPLAY_HEALTH_ANALYZER.md before health/campaign work. tools/ai/replay_health.py uses explicit GameUid/player; exits0 startup-observed,20 symptom review hold,21 unknown. No overall strength/integrity certification. 17 regression tests pass;127 historical completed records yield64 RA startup holds/63 GDI-Nod startup observations. Coordinator owns scheduler integration and fresh post-fix controls; live reason logging still required. No game launch or master publication.
+
+
+2026-10-09 replay-health review corrections: rejected duplicate/nonfinite JSON, non-string identities, malformed summary and empty non-list timeline; output now exclusive atomic publication to a new report only, never overwrites artifacts; event joins and window scan linear.22 tests pass including200000 snapshots/events/timeline points in1.20s. ab7285e81 remains superseded FIX REQUIRED; revised commit requires independent re-review. No runtime/game/master changes.
+
+
+2026-10-09 maintainer queue/cash thresholds: separate economy_invariants.py and test_economy_invariants.py implemented against schema1 complete50tick health contract;10 focused tests pass. New logger not shipped: missing telemetry UNKNOWN. Approved replay_health.py bytes unchanged, source/runtime ownership gates remain. New tool requires independentreview beforeintegration; provisional cashband1000..10000/1500ticks, zero/full250ticks, ready250,idle1500,cancels3/1500. See design/REPLAY_HEALTH_ANALYZER.md finalsection.

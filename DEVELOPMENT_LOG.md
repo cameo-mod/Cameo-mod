@@ -20640,6 +20640,7 @@ the existing helpers only — no blanket normalization, no yaml edits except one
 * **Next:** `python -m unittest` on the 41-module set in `tools/tests` to re-verify; fleet
   coordinator decides increment merge — no lifecycle claims made here.
 
+<<<<<<< HEAD
 ## 2026-10-09 - Devin-Architect: FIX-RA-REFINERY - passable-bib dock access + bounded refinery retry (branch devin/fix-ra-refinery-dock)
 
 * **Provenance:** the defect is byte-identical in frozen campaign `a9349d015` and
@@ -20820,3 +20821,17 @@ Correction: replay_health.py startup checker does not read the new economy file.
 Recorded VP bounded approval of 6b0c1fd73bf5a6d08b066fd34cef22f7a49a3f9e for sizing disclosure and pinned CLI tests only; reviewer Python 4/4 passed on existing C# fixtures, while its missing ignored engine dependency prevented fixture regeneration. Receipt: REREVIEW_2026-10-09_logger_sizing_6b_luna.md.
 
 Extracted the runtime accepted-resource raw serializer for direct tests of positive credit versus zero and unknown sender identity. Added exact byte-budget exhaustion regression: no extra append or certified record after failure. Focused C# 30/30 and pinned economy CLI 4/4 pass on regenerated fixtures. No mount, gameplay or engine changes; unresolved terminal causality and runtime adoption gates remain.
+
+## 2026-10-09 ? Replay health prototype (Sol)
+
+Isolated codex/replay-health-gate at base3d; exclusive tool/test/design scope. Existing aggregate/story/order tools were checked: no startup stop gate exists. Implemented schema/identity/bounds-aware telemetry symptom gate, startup persistence and warning-only economy/combat timelines. Historical127 completed records:64 RA holds,63 GDI/Nod startup observed. 17 focused Python tests pass. Current buffered logger cannot provide mid-match detection; live pulse and scheduler stop latch remain separately owned work. No games, runtime changes or master pushes. See docs/design/REPLAY_HEALTH_ANALYZER.md for primary sources, policy and resume contract.
+
+
+2026-10-09 replay-health review corrections: rejected duplicate/nonfinite JSON, non-string identities, malformed summary and empty non-list timeline; output now exclusive atomic publication to a new report only, never overwrites artifacts; event joins and window scan linear.22 tests pass including200000 snapshots/events/timeline points in1.20s. ab7285e81 remains superseded FIX REQUIRED; revised commit requires independent re-review. No runtime/game/master changes.
+
+
+2026-10-09 ? Economy invariant verifier plan: latest maintainer requires ready250/idle1500/repeatedcancel/cash-band defects. Existing startup checker cannot infer queue age/cancel reasons/storage from old logs. Preserve independently approved replay_health.py bytes; add separate tools/ai/economy_invariants.py + focused tests + contract docs in exclusive codex/replay-health-gate worktree.50tick complete pulses + exact state timestamps/cancel events, strictsequence/schema and truncated UNKNOWN; source logger still blocked. No live/source agent overlap.
+
+2026-10-09 — Inactive cancellation repair plan: independent b542 review reproduced elimination cleanup falsely counted as repeated production failure. Require event-local player activity, producer liveness and fixed cancellation class; exclude destruction/elimination cleanup, clear retry history on inactivity, and reject missing event evidence as UNKNOWN. Add active/inactive/destruction and between-pulse transition regressions. Offline files only; approved startup checker stays unchanged. Exact revised head requires independent review before adoption.
+
+2026-10-09 — Net spending schema correction: read-only engine inspection showed PlayerResources.Spent decreases on refunds. Acting-lead decision: no gross/low-spend proof from sampled net accounting. Separate offline verifier now policy v2/schema2 with signed net_spent, explicit gross_spent=null/gross_spend_complete=false, and cash-float spending-unverified diagnostic only. Cash-band threshold remains an independent provisional defect.19/19 focused tests pass including refund decreases, negative net spend and rejection of legacy/unsupported evidence. Runtime logger not edited; independent delta review required.
