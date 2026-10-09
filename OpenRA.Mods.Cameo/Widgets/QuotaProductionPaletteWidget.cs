@@ -40,6 +40,15 @@ namespace OpenRA.Mods.Cameo.Widgets
 			: base(modData, orderManager, world, worldRenderer)
 		{
 			cameoSettings = modData.GetSettings<CameoSettings>();
+
+			// Resolve the hovered icon per render instead of trusting the last Move-event
+			// snapshot: RefreshIcons rebuilds `icons` every tick, so a queued cell shifting
+			// under a stationary cursor left TooltipIcon pointing at a removed ProductionIcon
+			// (stale or missing tooltip). This matches what DrawHoverHeader already does.
+			GetTooltipIcon = () => icons
+				.Where(i => i.Key.Contains(Viewport.LastMousePos))
+				.Select(i => i.Value)
+				.FirstOrDefault();
 		}
 
 		public override void Initialize(WidgetArgs args)

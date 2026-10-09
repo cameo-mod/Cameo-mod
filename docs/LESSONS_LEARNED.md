@@ -254,6 +254,7 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 - [⛔ git stash is SHARED by every worktree — never stash in this repo (2026-09-27)](#-git-stash-is-shared-by-every-worktree--never-stash-in-this-repo-2026-09-27)
 - [⛔ Editor writes to `GroundStatesCA.cs` are silently lost — verify C# edits with grep+stat (2026-09-27)](#-editor-writes-to-groundstatescacs-are-silently-lost--verify-c-edits-with-grepstat-2026-09-27)
 - [A faction rollout is not AI-complete until the central `*Types` lists carry its ids (2026-09-28)](#a-faction-rollout-is-not-ai-complete-until-the-central-types-lists-carry-its-ids-2026-09-28)
+- [Tooltip `BeforeRender` mutations persist between hovers — reset Visible/Text/Bounds every pass (2026-10-09, Devin)](#tooltip-beforerender-mutations-persist-between-hovers--reset-visibletextbounds-every-pass-2026-10-09-devin)
 
 ---
 
@@ -3294,3 +3295,38 @@ against PATH; under Git Bash that's GNU find, which treats the hash as a path
 (`find: 'd5d8b2a…': No such file or directory`) and the launcher exits with "Required
 engine files not found" even when `engine/` is fine. Run the batch via PowerShell/cmd, or
 launch `engine\bin\OpenRA.exe` directly as WORKFLOW.md already prescribes.
+
+## Tooltip `BeforeRender` mutations persist between hovers — reset Visible/Text/Bounds every pass (2026-10-09, Devin)
+
+`TooltipContainerWidget` invokes the tooltip logic's `BeforeRender` on every hovered frame;
+Cameo's logics early-return when `lastUnit` is unchanged, so `Text`/`Visible`/`Bounds` written for
+unit A carry into unit B unless explicitly reset. Playtest B4/B5 were this defect class:
+
+- `extrasLabel.Visible = true` was set when extras existed but never cleared — the stale extras
+  line (e.g. queue-efficiency text) then rendered for later hovers, drawn beneath a box sized for
+  the CURRENT content. Same class hit both `ArmyTooltipCameoLogic` and `ActorIconTooltipCameoLogic`.
+- `descLabel.Bounds.Y += extraSize.Y` accumulated across hover targets — each new hover pushed the
+  description lower forever. Capture the baseline Y once and re-assign from it; never `+=` a
+  mutable widget origin.
+- `BuildableInfo.GetTraitForQueue(...)`, `TraitInfos<TooltipInfo>().FirstOrDefault().Name` and
+  `buildable.Description` are all null inside `BeforeRender` for cross-queue/non-buildable
+  palette items — the null deref threw and the whole tooltip failed to appear (intermittent
+  hover absence). Every trait/`BuildableInfo` lookup in that path needs a null-guarded fallback.
+- The width aggregate must include EVERY measured label (`extraSize.X` among them) —
+  `Math.Max(name, desc)` alone let long extras escape the right edge.
+- `ProductionPaletteWidget.TooltipIcon` is only written on `MouseInputEvent.Move`, but
+  `RefreshIcons()` rebuilds the `icons` dictionary every `Tick`. A queued cell shifting
+  under a stationary cursor (item completes, buildables appear/disappear, scroll) leaves
+  `TooltipIcon` bound to a removed `ProductionIcon` — the tooltip then shows the wrong
+  unit or nothing until the pointer moves. `QuotaProductionPaletteWidget` now resolves
+  `GetTooltipIcon` live against `Viewport.LastMousePos`, matching `DrawHoverHeader`.
+
+Rule: in tooltip `BeforeRender`, re-assign `Visible`, `Text` and `Bounds` from captured baselines
+on every pass, feed every measured label into the parent bounds aggregate, and null-guard every
+trait lookup — an exception there kills the tooltip silently, and stale widget state leaks across
+hover targets. And when a widget rebuilds its hit-test map every tick, resolve the hovered item
+against the cursor at read time — a Move-event snapshot goes stale the next refresh.
+
+Scope note: this entry covers palette/icon tooltip absence and stale-layout defects only.
+The world-hover absence (hovering a live world actor yields no tooltip at all) is NOT explained
+by this fix and stays explicitly unresolved pending in-game evidence.
