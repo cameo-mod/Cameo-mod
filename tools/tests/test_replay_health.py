@@ -38,6 +38,24 @@ class HealthTests(unittest.TestCase):
             with self.assertRaises(health.EvidenceError):
                 health.strict_json(raw)
 
+    def test_deeply_nested_jsonl_and_summary_return_unknown_without_traceback(self):
+        nested = "[" * 3000 + "0" + "]" * 3000
+        for summary in (False, True):
+            with tempfile.TemporaryDirectory() as temp:
+                support = Path(temp)
+                if summary:
+                    source = support / "batch_summary.json"
+                else:
+                    (support / "Logs").mkdir()
+                    source = support / "Logs/cameo-ai-situations.jsonl"
+                source.write_text(nested + "\n", encoding="utf-8")
+                with patch("sys.argv", ["replay_health", str(support), "--game-uid", "g", "--player", "hard"]):
+                    with contextlib.redirect_stdout(io.StringIO()) as output:
+                        self.assertEqual(health.main(), 21)
+                report = json.loads(output.getvalue())
+                self.assertEqual(report["status"], "UNKNOWN")
+                self.assertIn("depth limit", report["error"])
+
     def test_map_identity_schema_and_empty_timeline_types_strict(self):
         row = snapshot(4500, 1, 1)
         row["map_uid"] = 42

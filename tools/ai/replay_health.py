@@ -37,7 +37,10 @@ def strict_json(raw):
         return result
     def invalid_constant(value):
         raise EvidenceError(f"non-finite JSON constant: {value}")
-    return json.loads(raw, object_pairs_hook=unique, parse_constant=invalid_constant)
+    try:
+        return json.loads(raw, object_pairs_hook=unique, parse_constant=invalid_constant)
+    except RecursionError as error:
+        raise EvidenceError("JSON nesting exceeds parser depth limit") from error
 
 
 def identity(value):
@@ -99,6 +102,8 @@ def read_jsonl(path, live=False):
                 continue
             try:
                 row = strict_json(raw)
+            except EvidenceError:
+                raise
             except (ValueError, UnicodeError) as error:
                 raise EvidenceError(f"invalid JSONL: {path}, row {len(rows)+1}") from error
             if not isinstance(row, dict):
