@@ -14,14 +14,16 @@
   null past it — crash-safe but silently truncated coverage: band cells at radius 51..71 were dropped,
   `frontUncoveredApproach` undercounted, `WantedForFront` could miss the second-radar threshold.
   Luna's re-review + Sol's acceptance hold: "do not present this as coverage-preserving."
-- Fix v2 (this head): `ApproachBandBounds` keeps the true double bounds (`(double)frontProj + depth`,
+- Fix v2/v3 (this head): `ApproachBandBounds` keeps the true double bounds (`(double)frontProj + depth`,
   `frontProj - 1.0` — operands promote BEFORE arithmetic so int sentinels/huge values can't wrap);
   null only for geometrically-empty bands (NaN cone math, band wholly below radius 0). `ApproachSpace`
   then picks the candidate set: exact `FindTilesInAnnulus` when `outer <= MaximumTileSearchRange`,
-  else the map-clipped bounding box of the same outer radius (`WideSpaceRadius` clamps the box to the
-  map's own reach; `+Inf` outer → whole map). `ApproachCells` applies the exact band+cone predicate on
-  either space — full coverage, bounded by map area, deterministic `AllCells` order, never an illegal
-  engine radius.
+  else `PlayableBox` — the playable Chebyshev box of half-side `ceil(outer)` clamped to the map span.
+  Superset proof: `TilesByDistance[d]` holds `CVec(i,j)` with `i²+j² ≤ d²`, so every annulus cell has
+  `|dx|,|dy| ≤ ceil(outer)` on every grid type. `PlayableBox` iterates the box ∩ [0, MapSize) directly
+  (O(box), deterministic row-major) with `map.Contains` — the same playable-bounds filter the annulus
+  default uses, so cordon cells never inflate coverage (v2's `AllCells.Where` did). `ApproachCells`
+  applies the exact band+cone predicate on either space — full coverage, never an illegal engine radius.
 - Sibling sweep: every other `FindTilesInAnnulus`/`FindTilesInCircle` call site uses a bounded Info
   constant (MaxBaseRadius=20, MaximumDefenseRadius=20, BaseCrawlRadius=50 at-cap-legal) or a
   config-derived stride — this planner site was the only map-scale-derived radius.
@@ -29,7 +31,12 @@
   `(35,…)->(34.0,71.0)` not null — band EXISTS past the cap — fully-beyond-cap `(52,…)->(51.0,95.0)`,
   `coneCos=0` → `+Inf` outer (clamped to map reach by `WideSpaceRadius`), NaN/negative-band/
   `int.MinValue` sentinel → null, `WideSpaceRadius` clamps to map reach on 71.9/+Inf/1e30.
-- Gates (v2): Release build 0 errors / 8 warnings; full `OpenRA.Mods.Cameo.Test` suite 1255/1255;
+- Real-map regressions (uninitialized Map + real MapGrid, flat rectangular so `Contains` = Bounds):
+  in-cap `ApproachSpace` == engine `FindTilesInAnnulus(9,35)` exactly; off-cap `(35,14,45°)` on a
+  200×200 map — every emitted cell playable (cordon `(0,50)` excluded), box bounded (playable `(130,50)`
+  at dx=80 > 72 excluded), and `ApproachCells` over the box is set-equal to `ApproachCells` over ALL
+  playable map cells — the no-dropped-cell parity the reviewers required.
+- Gates: Release build 0 errors / 8 warnings; full `OpenRA.Mods.Cameo.Test` suite 1257/1257;
   boot-gate PASS (main menu, `MenuPostProcessEffect.PostWorldLoaded`, zero new exceptions). One
   earlier exception (`exception-2026-10-08T202345Z`) was my launch harness missing
   `Engine.ModSearchPaths`, not the code — corrected and re-passed.

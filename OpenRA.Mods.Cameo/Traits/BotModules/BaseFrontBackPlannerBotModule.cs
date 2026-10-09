@@ -271,8 +271,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		}
 
 		/// <summary>
-		/// Bounding-box radius for the beyond-cap enumeration, clamped to the map's own reach around the
-		/// centre — a huge or infinite outer bound degenerates to "the whole map", never an overflow.
+		/// Bounding-box half-side for the beyond-cap enumeration, clamped to the map's own span — every
+		/// playable coordinate lies inside [0, MapSize) on any grid type, so a box of that radius covers
+		/// the whole map and a huge or infinite outer bound degenerates to it without overflow.
 		/// </summary>
 		public static int WideSpaceRadius(double outer, int mapReach)
 		{
@@ -280,11 +281,33 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		}
 
 		/// <summary>
+		/// Playable cells of the square [centre ± r] ∩ [0, MapSize): iterates the box directly — O(box),
+		/// never a full-map scan — and applies the same playable-bounds predicate the default
+		/// FindTilesInAnnulus path uses, so the wide path counts exactly the cells a legal annulus would.
+		/// </summary>
+		static IEnumerable<CPos> PlayableBox(Map map, CPos centre, int r)
+		{
+			var x0 = Math.Max(0L, centre.X - (long)r);
+			var x1 = Math.Min(map.MapSize.Width - 1L, centre.X + (long)r);
+			var y0 = Math.Max(0L, centre.Y - (long)r);
+			var y1 = Math.Min(map.MapSize.Height - 1L, centre.Y + (long)r);
+			for (var y = y0; y <= y1; y++)
+				for (var x = x0; x <= x1; x++)
+				{
+					var c = new CPos((int)x, (int)y);
+					if (map.Contains(c))
+						yield return c;
+				}
+		}
+
+		/// <summary>
 		/// Candidate cells for <see cref="ApproachCells"/>: when the band fits inside the engine's
 		/// MaximumTileSearchRange, the exact annulus rings; past it — a defence line crawled far out on a
-		/// large map (playtest C1) — the map-clipped bounding box of the same outer radius so approach
-		/// coverage is never silently truncated. The wide path is bounded by the map area and deterministic
-		/// (AllCells order); ApproachCells still applies the exact band+cone predicate.
+		/// large map (playtest C1) — the playable Chebyshev box of half-side ceil(outer). The box is a
+		/// guaranteed superset: TilesByDistance rings are Euclidean in CPos space (i²+j² ≤ d² for ring d)
+		/// on every grid type, so every cell the unconstrained annulus would return satisfies |dx|,|dy|
+		/// ≤ ceil(outer). Coverage is never silently truncated, bounded by map area, and deterministic
+		/// in row-major order; ApproachCells still applies the exact band+cone predicate.
 		/// </summary>
 		public static IEnumerable<CPos> ApproachSpace(Map map, CPos centre, int frontProj, int depthCells, double coneCos)
 		{
@@ -296,12 +319,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (outer <= map.Grid.MaximumTileSearchRange)
 				return map.FindTilesInAnnulus(centre, (int)inner, (int)outer);
 
-			var tl = map.AllCells.TopLeft;
-			var br = map.AllCells.BottomRight;
-			var reach = Math.Max(Math.Max(centre.X - tl.X, br.X - centre.X),
-				Math.Max(centre.Y - tl.Y, br.Y - centre.Y));
+			var reach = Math.Max(map.MapSize.Width, map.MapSize.Height);
 			var r = WideSpaceRadius(outer, reach);
-			return map.AllCells.Where(c => Math.Abs(c.X - centre.X) <= r && Math.Abs(c.Y - centre.Y) <= r);
+			return PlayableBox(map, centre, r);
 		}
 
 		/// <summary>

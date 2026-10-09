@@ -10,12 +10,15 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using System.Runtime.CompilerServices;
 using NUnit.Framework;
 using OpenRA.Mods.AS.Traits;
 using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.Cameo.Traits.BotModules;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Mods.Common.Traits.Radar;
+using OpenRA.Primitives;
 using OpenRA.Traits;
 
 namespace OpenRA.Mods.Cameo.Test
@@ -192,6 +195,69 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(BaseFrontBackPlannerBotModule.WideSpaceRadius(double.PositiveInfinity, 120),
 				Is.EqualTo(120));
 			Assert.That(BaseFrontBackPlannerBotModule.WideSpaceRadius(1e30, 200), Is.EqualTo(200));
+		}
+
+		// A flat rectangular map shell: a REAL MapGrid (real TilesByDistance + the cap of 50) on an
+		// uninitialized Map — same technique as the engine's AttackGarrisonedTest fixture. For
+		// Grid.Type = Rectangular and MaximumTerrainHeight = 0, Map.Contains(CPos) is exactly the
+		// playable Bounds check FindTilesInAnnulus applies by default, so no terrain layers needed.
+		static Map FlatTestMap(int size, int cordon)
+		{
+			var map = (Map)RuntimeHelpers.GetUninitializedObject(typeof(Map));
+			typeof(Map).GetField("Grid", BindingFlags.Instance | BindingFlags.Public)
+				.SetValue(map, new MapGrid(new MiniYaml("")));
+			typeof(Map).GetProperty("MapSize").SetValue(map, new Size(size, size));
+			map.Bounds = new Rectangle(cordon, cordon, size - 2 * cordon, size - 2 * cordon);
+			return map;
+		}
+
+		static List<CPos> PlayableCellsOf(Map map)
+		{
+			var cells = new List<CPos>();
+			for (var y = 0; y < map.MapSize.Height; y++)
+				for (var x = 0; x < map.MapSize.Width; x++)
+				{
+					var c = new CPos(x, y);
+					if (map.Contains(c))
+						cells.Add(c);
+				}
+
+			return cells;
+		}
+
+		[Test]
+		public void ApproachSpaceInsideTheCapIsExactlyTheEngineAnnulus()
+		{
+			var map = FlatTestMap(120, 4);
+			var centre = new CPos(60, 60);
+			var space = BaseFrontBackPlannerBotModule.ApproachSpace(map, centre, 10, 14, Cone45);
+			Assert.That(space.ToList(), Is.EqualTo(map.FindTilesInAnnulus(centre, 9, 35).ToList()));
+		}
+
+		[Test]
+		public void ApproachSpacePastTheCapDropsNoPlayableBandCell()
+		{
+			// The real C1 trigger: (35,14,45°) -> band (34.0, 71.0); outer 71 > cap 50 -> wide path.
+			var map = FlatTestMap(200, 4);
+			var front = EastFront(35, 10);
+			var space = BaseFrontBackPlannerBotModule.ApproachSpace(map, Center, 35, 14, Cone45).ToList();
+
+			Assert.That(space, Is.Not.Empty);
+			// Same playable-bounds filter as the annulus default: no cordon cells inflate coverage.
+			Assert.That(space.TrueForAll(map.Contains), Is.True);
+			// A cordon cell inside the box but outside playable Bounds is excluded.
+			Assert.That(space, Does.Not.Contain(new CPos(0, 50)));
+			// The box is genuinely bounded: a playable cell past ceil(outer)=72 is not enumerated.
+			Assert.That(space, Does.Not.Contain(new CPos(130, 50)));
+
+			// Coverage parity — the review criterion: the exact band+cone predicate over the box
+			// returns the same approach as running it over EVERY playable map cell. No valid
+			// approach cell is silently dropped past the cap (the v1 clamp's defect).
+			var reference = BaseFrontBackPlannerBotModule.ApproachCells(
+				PlayableCellsOf(map), Center, front, 14, Cone45);
+			var actual = BaseFrontBackPlannerBotModule.ApproachCells(space, Center, front, 14, Cone45);
+			Assert.That(reference, Is.Not.Empty);
+			Assert.That(actual, Is.EquivalentTo(reference));
 		}
 
 		// --- radar ---
