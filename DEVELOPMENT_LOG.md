@@ -20575,3 +20575,8 @@ runtime benchmark). Raw stream budgets are independent. Arbitrary64-player
 maximum queue/event workloads are not certified; forecasting and overflowUNKNOWN
 remain required. No mount/seam/campaign clearance. Receipt:
 engine/bin/TestResults/economy-health-core-cost-2p.json.
+
+
+### 2026-10-09 actual-path economy consumer CLI evidence
+
+Correction: replay_health.py startup checker does not read the new economy file. Separate approved economy_invariants.py@2a417 CLI does. Actual C# serializer+bounded writer generate unique support/Logs/cameo-ai-economy-health.jsonl files; immutable pinned CLI consumes them and verifies byte digest/status/exit. C#4/4+PythonCLI4/4 PASS (healthy0,ready250 BLOCK20,incomplete21,missing-health21). Existing drivers still need explicit dual-checker integration; no runtime/adoption approval.

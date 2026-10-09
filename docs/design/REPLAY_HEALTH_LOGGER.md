@@ -58,7 +58,7 @@ independent review. No production YAML mounting or runtime launch occurred.
 
 Full mod suite at this checkpoint: 1301/1301 PASS.
 
-2026-10-09 consumer-fit delta: canonical shared Logs/cameo-ai-economy-health.jsonl and separate cameo-ai-economy-raw.jsonl now match analyzer input discovery; FileMode.CreateNew refuses existing evidence. World owns both streams, closing after all player terminals or on actor disposal without fabricated completion. Runtime and tests share schema serializer. Focused tests 20/20; actual C#-generated JSONL consumed by approved analyzer 2a417: normal/refundable net spend OBSERVED_HEALTHY, ready-at-250 BLOCK, incomplete terminal UNKNOWN. Synthetic consumer fixtures do not prove runtime coverage. Terminal causality remains deliberately incomplete pending accepted seam.
+2026-10-09 consumer-fit delta: canonical shared Logs/cameo-ai-economy-health.jsonl and separate cameo-ai-economy-raw.jsonl now match economy_invariants.py input discovery; FileMode.CreateNew refuses existing evidence. World owns both streams, closing after all player terminals or on actor disposal without fabricated completion. Runtime and tests share schema serializer. Focused tests 20/20; actual C#-generated JSONL consumed by approved analyzer 2a417: normal/refundable net spend OBSERVED_HEALTHY, ready-at-250 BLOCK, incomplete terminal UNKNOWN. Synthetic consumer fixtures do not prove runtime coverage. Terminal causality remains deliberately incomplete pending accepted seam.
 
 2026-10-09 timing/cost preparation: producer_live now means actor alive/not disposed, independently of ProductionQueue.Enabled. Disabled unfinished/empty queues are paused; Done heads remain ready, so disabled production does not hide a completed building. Re-enable empty queues start a fresh idle interval. Focused 27/27 PASS; explicit isolated maximum-census test 1/1 PASS (45001 ticks, 128 queues, 901 pulses, MemoryStream). Measured 1907.0625ms elapsed, 150460520 allocated bytes and 19021579 output bytes. These include test assertions/core/serializer and exclude World enumeration, seam, callbacks and disk; NOT runtime-cost approval. Two such players exceed current 32MiB shared file budget: forecast bounds before adoption, adapt bounded budget or declare unsupported rather than silently drop.
 
@@ -99,3 +99,29 @@ artifacts only; does not estimate their usage or include pre-existing logs/repla
 Actual raw workload and summary size remain adoption sizing gates. New frozen
 sizing receipt:engine/bin/TestResults/economy-health-core-cost-2p-line-sizing.json.
 Explicit2/2 PASS; no runtime/seam/adoption clearance.
+
+
+2026-10-09 consumer clarification and actual-path CLI proof: replay_health.py
+@83f14ab19 is the startup checker; it reads situations/placements/matches only
+and DOES NOT consume this logger file. The separate approved economy consumer
+is tools/ai/economy_invariants.py@2a417dc3e20cc408bec6e1818cf5734b0431a516;
+its CLI explicitly reads support/Logs/cameo-ai-economy-health.jsonl. Earlier
+wording about generic pinned-analyzer discovery was ambiguous and must not be
+read as startup-checker integration approval.
+
+C# AiEconomyHealthSchemaTest now uses the same bounded writer as runtime to
+create unique support roots and actual canonical health files. Python CLI tests
+extract immutable economy_invariants.py and its replay_health.py dependency
+from exact approved2a417 Git blobs into an isolated temporary directory; execute
+CLI on those generated support paths, verify exit/status and consumed byte SHA,
+and verify input bytes remain unchanged. C#4/4 and CLI4/4 PASS: healthy0,
+ready250 BLOCK20, incomplete UNKNOWN21, raw-path-only UNKNOWN21. No adapter,
+checker mutation, live game or driver execution. Run:
+dotnet test OpenRA.Mods.Cameo.Test/OpenRA.Mods.Cameo.Test.csproj -c Release --filter FullyQualifiedName~AiEconomyHealthSchemaTest
+python -m unittest tools.tests.test_economy_logger_cli -v
+
+These tests establish canonical path/schema consumer-fit for economy_invariants,
+not runtime event completeness. Coordinator still must explicitly invoke BOTH
+startup and economy checkers under separately accepted pins/capture fingerprints;
+existing startup-only driver cannot detect the new queue/cash invariants.
+Seam/outcome integration, runtime cost and campaign gates remain unresolved.

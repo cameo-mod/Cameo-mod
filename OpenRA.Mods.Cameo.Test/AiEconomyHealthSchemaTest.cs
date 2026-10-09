@@ -55,7 +55,7 @@ namespace OpenRA.Mods.Cameo.Test
 			// Generated test artifact, consumed by the independent Python analyzer command.
 			var directory = Path.Combine(TestContext.CurrentContext.WorkDirectory, "TestResults");
 			Directory.CreateDirectory(directory);
-			File.WriteAllLines(Path.Combine(directory, "economy-health-schema-roundtrip.jsonl"), rows);
+			WriteCliFixture("schema", rows);
 		}
 
 		[Test]
@@ -70,11 +70,23 @@ namespace OpenRA.Mods.Cameo.Test
 			rows.Add(AiEconomyHealthSchema.End(Identity(rows.Count, 250, "end"), true));
 			var directory = Path.Combine(TestContext.CurrentContext.WorkDirectory, "TestResults");
 			Directory.CreateDirectory(directory);
-			File.WriteAllLines(Path.Combine(directory, "economy-health-ready-roundtrip.jsonl"), rows);
+			WriteCliFixture("ready", rows);
 			rows[^1] = AiEconomyHealthSchema.End(Identity(rows.Count - 1, 250, "end"), false);
-			File.WriteAllLines(Path.Combine(directory, "economy-health-incomplete-roundtrip.jsonl"), rows);
+			WriteCliFixture("incomplete", rows);
 			using var end = JsonDocument.Parse(rows[^1]);
 			Assert.That(end.RootElement.GetProperty("complete").GetBoolean(), Is.False);
 		}
+		static void WriteCliFixture(string name, IEnumerable<string> rows)
+		{
+			var directory = Path.Combine(TestContext.CurrentContext.WorkDirectory, "TestResults");
+			var support = Path.Combine(directory, "economy-cli-" + name + "-" + Guid.NewGuid().ToString("N"));
+			Directory.CreateDirectory(Path.Combine(support, "Logs"));
+			using (var writer = new AiEconomyHealthLogWriter(Path.Combine(support, "Logs", "cameo-ai-economy-health.jsonl")))
+				foreach (var row in rows)
+					Assert.That(writer.TryWrite(row), Is.True);
+			// Only this test-discovery pointer is replaceable; evidence roots are always new.
+			File.WriteAllText(Path.Combine(directory, "economy-health-" + name + "-cli-input.txt"), support);
+		}
+
 	}
 }
