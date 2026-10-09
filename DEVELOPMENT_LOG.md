@@ -20519,3 +20519,60 @@ the existing helpers only — no blanket normalization, no yaml edits except one
   keep-both resolution, disjoint content. No shared edit region in source.
   Their `Cancelled+NoRefinerySite` seam record is where the queue-side
   `RefineryClaimPlacementFailed(anchor)` signal belongs.
+
+# 2026-10-09 — REPAIR-B3 R1: reviewer FIX round — flush bypass killed, whole-refresh caps, real dock eligibility, travel-time rank
+
+*Devin-Developer.* Devin-Reviewer's bounded static review
+(`REREVIEW_2026-10-09_repair_b3_static.md`) returned FIX REQUIRED with five
+findings against SPEC_2026-10-09_refinery_shared_coverage.md. All five are
+closed in this round:
+
+1. **Same-field flush bypass (SPEC §30 violation)** — `AssignRefineries` and
+   `EvaluateCoverageTick` both let a refinery flush to an anchor's field serve
+   it beyond the radius ("transitive/distant field inheritance"). The
+   `refineryFields`/`anchorField` eligibility terms are removed everywhere:
+   eligibility is now the geometric radius alone, `AssignRefineries` and
+   `ClaimOrder` drop the field plumbing entirely, `AiLogExpansion` mirrors the
+   new binding, and `RefineryFlushFields` survives only as a public helper +
+   its own unit test (nothing in the coverage model consumes it). The old test
+   `RefineryFlushToTheFieldBindsItsAnchorsBeyondServeRadius` is rewritten as
+   the inverse pin `RefineryFlushBeyondServeRadiusBindsNothing`.
+2. **Per-anchor budget re-arm** — `NextAnchor()` re-armed the 32/64 site/probe
+   caps per anchor (32A/64A total — exactly what the spec's "in one coverage
+   refresh" forbids). `RefineryProbeBudget` now exposes `SiteCapSpent/
+   ProbeCapSpent/RefreshSpent`; the caps span the whole sweep while
+   `CoverageProbesPerTick` only paces per-tick spend. An `evaluatedSites`
+   (anchor,refinery) set charges each admitted pair once per refresh so a
+   tick-paced revisit never double-charges; a tick-cap refusal rewinds the
+   cursor one step (the anchor resumes next tick on cached witnesses), a
+   refresh-cap refusal marks `coverageFirstBudgetDeferred` for telemetry.
+3. **Dock eligibility without gameplay semantics** — probes pathed to dock
+   coordinates and type-overlapped BitSets but never verified the real
+   `DockHost` contract. `RefineryDockGeometry` now returns per-dock
+   `Enabled = IsEnabledAndInWorld` (`!preventDock && !IsTraitDisabled &&
+   !IsDead && IsInWorld` — the durable half of `IsDockingPossible`); the new
+   `RefineryCoverageOracle.DockEligible(enabled, harvesterType, dockType)`
+   models `Harvester.CanDock(type, forceEnter:true)` — a loaded return always
+   docks at a type-compatible enabled host, so occupancy/drag correctly never
+   gate coverage, and a disabled/selling dock fails the pair. Enabled bits
+   fold into the topology signature so a dock dying/waking re-opens verdicts.
+4. **Rank ignored travel time** — `RefineryRouteWitness` gains `TravelMilli`;
+   `RouteTravelMilli` prices each entered cell at stepMilli x 1024 /
+   (MobileInfo.Speed x terrain%), the `Mobile.MovementSpeedForCell` product
+   minus transient actor modifiers; zero-speed cells rank infinite.
+   `LegPairRank` returns `long` (milli-tick packing would overflow int) —
+   max-leg bounds the round trip, other leg ties off. `routeRank` is now
+   `Func<int,int,long?>` end to end.
+5. **Telemetry omitted spend** — the refresh-complete line now carries
+   anchors, anchor-scans, sites evaluated, probes used, deferred candidates,
+   and cache hits; a new one-shot line fires when a refresh ceiling first
+   defers an anchor (index, sites/probes spent, pending count); the pacing
+   line distinguishes tick-window stops from ceiling stops.
+
+* **Verification:** `dotnet build -c Release` 0/0; `dotnet test` = **1294/1294**
+  (5 net new: whole-refresh caps, tick pacing independence, travel-time
+  pricing, zero-speed handling, dock eligibility, travel-time rank order);
+  `audit_fog_honesty.py` PASS (268 sites, unchanged — R1 adds no new
+  enumeration). Boot-gate still deferred (serial replay lane); no merge —
+  pushed for Devin-Reviewer re-review of the frozen SHA.
+* **Overlap:** unchanged vs the queue-observer-seam — still append-point only.

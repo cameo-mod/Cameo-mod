@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Linq;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Mods.Common.Pathfinder;
+using OpenRA.Primitives;
 
 namespace OpenRA.Mods.Cameo.Traits.BotModules
 {
@@ -30,10 +31,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 	}
 
 	/// <summary>
-	/// REPAIR-B3: the bounded deterministic evaluation budget (SPEC budget section). Site/probe limits
-	/// bound ONE anchor's evaluation (a pathological dense cluster defers instead of eating the whole
-	/// refresh); TickProbeLimit paces the pathfinder spend shared across all anchors per world tick.
-	/// DeferredCandidates and CacheHits are refresh-lifetime telemetry counters.
+	/// REPAIR-B3: the bounded deterministic evaluation budget (SPEC budget section, R1). Site/probe
+	/// counters span ONE WHOLE REFRESH — a full circuit of the anchor list that may run over many
+	/// ticks; they never re-arm mid-refresh, so 32 site evaluations and 64 directed probes bound the
+	/// entire pass (32A/64A over A anchors is exactly what the spec forbids). TickProbeLimit paces
+	/// the pathfinder spend per player per world tick. A new budget instance starts the next refresh.
 	/// </summary>
 	public sealed class RefineryProbeBudget
 	{
@@ -56,12 +58,14 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		public void NewTick() => TickProbesUsed = 0;
 
-		/// <summary>Per-anchor spend re-arm — the sweep calls it before each anchor it evaluates.</summary>
-		public void NextAnchor()
-		{
-			SitesEvaluated = 0;
-			ProbesUsed = 0;
-		}
+		/// <summary>
+		/// True once a refresh ceiling is spent — either site evaluations or directed probes. The
+		/// distinction matters: a tick-cap refusal rewinds the cursor and resumes next tick, while a
+		/// refresh-cap refusal defers the anchor for the rest of this refresh.
+		/// </summary>
+		public bool SiteCapSpent => SitesEvaluated >= SiteLimit;
+		public bool ProbeCapSpent => ProbesUsed >= ProbeLimit;
+		public bool RefreshSpent => SiteCapSpent || ProbeCapSpent;
 
 		public bool TryConsumeSite()
 		{
@@ -93,19 +97,23 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 	}
 
 	/// <summary>
-	/// REPAIR-B3: the route witness — one directed leg's verdict and length in milli-tiles.
-	/// Cached with the topology version that produced it; a stale version never counts as evidence.
+	/// REPAIR-B3: the route witness — one directed leg's verdict, travelled length in milli-tiles,
+	/// and estimated simulation travel time in milli-ticks (R1: ranking uses travel time, not raw
+	/// geometry). Cached with the topology version that produced it; a stale version never counts
+	/// as evidence.
 	/// </summary>
 	public readonly struct RefineryRouteWitness
 	{
 		public readonly bool Reachable;
 		public readonly int RouteMilli;
+		public readonly int TravelMilli;
 		public readonly int Version;
 
-		public RefineryRouteWitness(bool reachable, int routeMilli, int version)
+		public RefineryRouteWitness(bool reachable, int routeMilli, int travelMilli, int version)
 		{
 			Reachable = reachable;
 			RouteMilli = routeMilli;
+			TravelMilli = travelMilli;
 			Version = version;
 		}
 	}
@@ -136,6 +144,37 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			return length;
 		}
 
+		/// <summary>
+		/// Estimated simulation travel time in milli-ticks (R1, SPEC "estimated simulation travel
+		/// time using movement/terrain speed"): each step costs its WDist length
+		/// (stepLenMilli × 1024/1000, the engine's own EstimatedMoveDuration pattern) divided by the
+		/// effective speed of the entered cell — the caller's <paramref name="cellSpeed"/> supplies
+		/// harvester MobileInfo.Speed adjusted by locomotor terrain speed, the same formula as
+		/// Mobile.MovementSpeedForCell without actor-bound modifiers. A zero-speed cell contradicts
+		/// the path that found it and can never win: the route ranks infinite.
+		/// </summary>
+		public static int RouteTravelMilli(IReadOnlyList<CPos> path, Func<CPos, int> cellSpeed)
+		{
+			if (path == null || path.Count < 2)
+				return 0;
+
+			long travel = 0;
+			for (var i = 1; i < path.Count; i++)
+			{
+				var speed = cellSpeed(path[i]);
+				if (speed <= 0)
+					return int.MaxValue;
+
+				var d = path[i] - path[i - 1];
+				var stepMilli = d.X != 0 && d.Y != 0 ? MilliPerDiagonal : MilliPerCell;
+				travel += (long)stepMilli * 1024 / speed;
+				if (travel >= int.MaxValue)
+					return int.MaxValue;
+			}
+
+			return (int)travel;
+		}
+
 		/// <summary>True when the geometric cell distance (inclusive) is within the radius.</summary>
 		public static bool WithinServeRadius(CPos a, CPos b, int serveRadiusCells)
 		{
@@ -154,9 +193,28 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				&& outbound.RouteMilli <= legLimitMilli
 				&& inbound.RouteMilli <= legLimitMilli;
 
-		/// <summary>The pair's travel rank — the slower leg bounds a round trip; ties break by the other leg.</summary>
-		public static int LegPairRank(RefineryRouteWitness outbound, RefineryRouteWitness inbound) =>
-			Math.Max(outbound.RouteMilli, inbound.RouteMilli) * 100000 + Math.Min(outbound.RouteMilli, inbound.RouteMilli);
+		/// <summary>
+		/// The pair's travel rank in simulation ticks (R1 — terrain speed matters: a longer
+		/// fast-terrain route must outrank a shorter slow one). The slower leg bounds a round trip;
+		/// ties break by the other leg. Packed into a long — TravelMilli values are milli-ticks and
+		/// int packing would overflow.
+		/// </summary>
+		public static long LegPairRank(RefineryRouteWitness outbound, RefineryRouteWitness inbound) =>
+			Math.Max(outbound.TravelMilli, inbound.TravelMilli) * 1_000_000L + Math.Min(outbound.TravelMilli, inbound.TravelMilli);
+
+		/// <summary>
+		/// R1 (SPEC "gameplay docking eligibility, including loaded-return forceEnter semantics"):
+		/// whether a refinery dock can serve this harvester pair — the same contract the engine
+		/// resolves in Harvester.CanDock / IDockClient.CanDockAt minus the transient terms. A loaded
+		/// harvester can always dock at a type-compatible enabled host (CanDock: forceEnter ||
+		/// !IsEmpty — the return leg models the loaded client), so occupancy and drag never gate:
+		/// GenericDockSequence drags the client in once it reaches the dock cell, and reservations
+		/// are transient by design exclusion. An EMPTY harvester cannot re-enter without forceEnter
+		/// — but it never needs to: the outbound leg is an exit, not an entry. A null
+		/// <paramref name="dockType"/> is the wildcard (a refinery with no DockHost trait).
+		/// </summary>
+		public static bool DockEligible(bool enabledAndInWorld, BitSet<DockType> harvesterType, BitSet<DockType>? dockType) =>
+			enabledAndInWorld && (!dockType.HasValue || harvesterType.Overlaps(dockType.Value));
 
 		/// <summary>
 		/// Candidate-site ordering (SPEC §4): most newly covered anchors first, then lower travel cost,
