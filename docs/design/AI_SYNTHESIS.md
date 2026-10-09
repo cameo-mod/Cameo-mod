@@ -7,6 +7,9 @@ the plan for **combining** the five sources of Cameo's bot code. The binding des
 [`UPSTREAM_MODS.md`](UPSTREAM_MODS.md) §4a. Where they disagree about something already built,
 the code wins._
 
+> **2026-10-09 review: §8** covers the runtime mechanics (shared RNG, yaml tick order, no scheduler,
+> MasterAi coupling, order-queue priority) and the order to fix them in.
+>
 > **2026-09-28 review: read §7 first.** It measures what actually runs in the Frankenstein
 > `hard` bot on that date (0 Fransbot modules, 1 CN module — since grown: 8 Frans services arm via
 > `inc3_frans_services`, ~8 CN-derived modules run as code; `HARVEST_LEDGER.md` is the
@@ -509,3 +512,136 @@ current master on A Nuclear Winter (≥ 8 matches, both spawns):
 6. Economy (`FransEconomicSaturation`), then islands/transports (Fransbot V1.29.31), SpecOps,
    naval — each only after the earlier steps stop losing fights.
 7. The `fransbot` bot type is deleted when nothing in it remains un-harvested or rejected.
+
+---
+
+## 8. Review, 2026-10-09: the runtime mechanics under the Frankenstein
+
+_Claude (Opus), measured on master `4da84987`. §7 asked "which parent's code runs in each layer".
+This section asks how the modules run together: scheduling, randomness, data freshness, coupling,
+order arbitration. Each claim below names its file, so it can be re-checked. The module counts come
+from the committed `AI_MODULE_MAP.md` (generated 2026-10-06). `ai_module_map.py --check` could not
+run here because there was no `engine/` build, so regenerate it before relying on the numbers. The
+2026-10-02 review ([`CAMEO_AI_ARCHITECTURE_REVIEW_2026-10-02_POST_MERGE.md`](CAMEO_AI_ARCHITECTURE_REVIEW_2026-10-02_POST_MERGE.md))
+covers the TC-3, broadcast-liveness, rescue-capacity and BO-scoring findings. This review did not
+re-verify whether they have been fixed; check that before the next A/B._
+
+### 8.1 Scale
+
+| Measure | Value | Source |
+|---|---|---|
+| Bot C# | ~125k lines: CA 26.5k, Cameo 43.6k, Fransbot 56.4k | `wc -l` over the bot files |
+| Loaded module types / instances | 91 / 172 | `AI_MODULE_MAP.md` |
+| `IBot*` interfaces | 51 | `grep "interface IBot"` |
+| Types in C# that are not loaded | 18 | `AI_MODULE_MAP.md` check C3 |
+| Modules gated behind an experiment switch (`genericbot && X`) | 31 | `mods/cameo/ai/ai.yaml` |
+| Hand-written interval/tick fields in modules | 313 | `grep "public readonly int …(Interval\|Ticks)"` |
+| `QueueOrder` call sites | 296 (Fransbot owns the largest share) | grep |
+| Bot-module test coverage | 19.4 % line / 17.2 % branch | HANDOFF / `docs/audit/coverage_botmodules.md` |
+
+Fransbot code runs only in the separate `fransbot` bot type. The exception is the eight
+`inc3_frans_services` modules, which can run inside the Frankenstein. Of those eight, only
+`FransCommanderCoreBotModule` issues orders (2 `QueueOrder` sites), so check those orders before
+arming the switch.
+
+### 8.2 What is right (keep it)
+
+* **One order gate.** `ModularBot.QueueOrder` (`OpenRA.Mods.Cameo/Traits/ModularBot.cs:131`)
+  tags every order with its issuer (`Type@N`, or the ambient `BotIssuer.IssueAs` scope). It
+  judges the order against the lease table when the order is *issued*, not when it is queued
+  (AR-8). Grouped orders are filtered member by member (AR-1), and an attack response can preempt a
+  lease. Enforcement is on (`ai.yaml` `EnforceAtOrderGate: true`).
+* **Leases are adopted widely.** 15 modules claim units before ordering them. Squad membership is
+  a lease with a heartbeat (`SquadManagerBotModuleCA` LC1, `Math.Max(200, AttackForceInterval*4)`).
+  The idle pool is deliberately left unleased so that scouts, engineers and collectors can borrow
+  from it.
+* **Advisors don't issue orders.** Spacing, formation, scale targets, production width, BO knobs
+  and coalition publish bounded inputs, and the existing owner still decides (see §2 here and the
+  2026-10-02 review §1).
+* **Bot decisions draw from a lobby-seeded random stream** (`OpenRA.Mods.CA/BotRng.cs`).
+  `BotPersonalityController` draws exactly once from SharedRandom on every client (AR-2).
+* **Per-module timing** is logged every `ModulePerfReportIntervalTicks` (1500).
+
+### 8.3 Findings (ranked by value ÷ cost)
+
+1. **R1 — all modules share one random stream per player, which confounds every A/B.**
+   `BotRng.For(player)` (94 call sites) returns one `MersenneTwister` per player, and every module
+   draws from it. A switch that adds or removes even one draw in module X shifts every later draw
+   in every other module. An A/B of X therefore also reshuffles squads, scouting and builds, which
+   adds noise in exactly the place §1.2 step 6 relies on a clean comparison.
+   **Fix:** use one stream per module: `BotRng.For(player, issuerType)`, salted with a *stable*
+   string hash of the module type name (FNV-1a, never `string.GetHashCode`, which is randomised per
+   process). This is small and mechanical, and needs a NUnit test that drawing from module A
+   leaves module B's sequence unchanged.
+
+2. **R2 — tick order is yaml order, and shared data carries no freshness stamp.**
+   `ModularBot.Activate` takes `TraitsImplementing<IBotTick>()` in declaration order, so the
+   position of a block in `ai.yaml` decides whether a consumer reads this tick's data or the
+   previous one. Today:
+   `ScaleTargetsBotModule` (`ai.yaml:3610`) and `BuildOrderKnobsBotModule` (`:3778`) tick
+   *before* `MasterAiBotModule` (`:4095`) and read its previous snapshot. MasterAi reads
+   `CombatAnalysisBotModule`'s (`:5364`) threat analysis from the previous tick. That may be
+   harmless, but nobody chose it: moving a yaml block silently changes behaviour, and no test
+   catches it. The 2026-10-02 review's TC-3 cadence finding is the same problem *between* bots.
+   **Fix (stopgap):** add a test that asserts the provider-before-consumer order the code relies
+   on. **Fix (real):** see R3.
+
+3. **R3 — every module ticks every tick, and each runs its own clock.**
+   The comment at `ModularBot.cs:234` says so: "Every module ticks every tick … Attention gating
+   needs a clock/decision split first." There are 313 hand-written interval fields and no central
+   schedule, so expensive modules can line up on the same tick, and `HumanPaceBotModule`'s
+   attention budget stays at 0 (`ai.yaml:5366`).
+   **Fix:** run each tick in explicit phases in `ModularBot`
+   (OBSERVE → SYNTHESIZE → PLAN → ACT, the layering already drawn in the 2026-10-02 review §1).
+   Each module declares its phase and interval through an optional interface, and every module
+   that doesn't declare one stays in ACT at interval 1, so existing behaviour is unchanged.
+   Spread the intervals by issuer hash so they don't line up. Every published snapshot carries
+   `BuiltTick`, so consumers (and TC-3) can tell how fresh it is. This fixes R2 and enables the
+   attention budget, and it is a prerequisite that makes UT (AI_MASTER_PLAN §3) cheaper.
+
+4. **R4 — `MasterAiBotModule` is the hub, and other modules depend on its concrete type.**
+   It provides 16 interfaces, consumes about 20 modules, and lives in `BotSituation.cs`, where the
+   file name doesn't match the class. Eight modules (AiPlacementLogWriter, BuildOrderKnobs,
+   EngagementLog, ScaleTargets, Scout, StealthDoctrine, TacticalMap, AiSituationLogWriter) look it
+   up as the **concrete class** (10 `TraitOrDefault<concrete>` sites), so the "one authority,
+   bounded seams" rule doesn't hold at its own hub. `MasterAiEval` (pure decisions) is the right
+   start. **Fix:** consumers bind only to interfaces. Split the file into `partial` files by
+   concern (situation, target, mission lifecycle, director/utility, team publish), keeping **one**
+   owner and adding no second brain, as the 2026-10-02 review §8 already ruled. Then rename the
+   file.
+
+5. **R5 — the order queue has no priority lane.** All orders share one FIFO
+   (`MaxQueuedOrders` 512, drop oldest; `MinOrderQuotientPerTick` 5). A burst from one module can
+   delay an attack response, or evict it once the queue is full.
+   **Fix:** give emergency-context orders (`Emergency == true`) their own lane that drains first.
+   Also coalesce repeated orders to the same unit so that only the newest is kept: the older one
+   refers to staler world state.
+
+6. **R6 — the gate can only judge leased units.** An order to an unleased unit always passes. Two
+   modules ordering the same unit within the crossed-order window are only *logged*
+   (`ORDERGATE CROSSED`, `ModularBot.cs:215`). **Fix:** turn the CROSSED pair counts into a metric
+   that may only go down, gated in `replay_health.py` or an audit. Any Fransbot module harvested
+   into the Frankenstein must lease the units it orders: today only
+   `FransTransportCommanderBotModule` does.
+
+7. **R7 — large files and thin tests.** `FransMcvExpansionManagerBotModule` (14k lines),
+   `SquadManagerBotModuleCA` (3.7k) + `GroundStatesCA` (1.6k), `TacticalMapBotModule` (3.1k),
+   `BotEffectiveDamage` (2.5k), `BaseBuilderQueueManagerCA` (2.1k), against 19 % line coverage.
+   Each R3/R4 refactor must be preceded by a field dump that comes out identical
+   (`dump_bot_modules.py` + `diff_bot_modules.py`) and by `RecordingBot` order-capture tests,
+   so that "bit-identical" is proved, not claimed.
+
+8. **R8 — switches have no end of life.** 31 modules hang behind `genericbot && <switch>`, plus
+   `increment_switches.yaml`, the 18 unloaded C3 types and the dormant Fransbot bot type. Every
+   switch should get an expiry: after its A/B it is either promoted (the condition is removed) or
+   deleted (the yaml and code go). The C3 list and §7.4 step 7 (delete the `fransbot` type once it
+   is fully harvested) are the same rule applied to types.
+
+### 8.4 Order of work (feeds AI_MASTER_PLAN §3; each item lands behind a switch where it changes behaviour)
+
+| Step | Items | Size | Note |
+|---|---|---|---|
+| Now | R1 per-module RNG · R5 emergency lane + coalescing · R2 order-assertion test | small | R1 should land **before** the next increment A/B; it changes every draw once, so take a fresh baseline afterwards |
+| Next increment | R3 phased scheduler + `BuiltTick` stamps · R4 interfaces-only + partial split | medium | identical field dump, RecordingBot tests; then arm `HumanPaceBotModule` |
+| Ongoing | R6 CROSSED metric · R8 switch expiry + C3/Fransbot retirement · R7 file splits as each module is touched | continuous | — |
+| Then | UT (one blended squad manager) | large | cheaper once R2–R4 exist: one scheduler and interface-only seams to blend over |
