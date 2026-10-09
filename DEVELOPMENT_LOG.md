@@ -20738,3 +20738,11 @@ cycle even though the ordering is fixed while the topology is.
 - **Verification:** Release build 0/0; `dotnet test` = **1302/1302**
   (unchanged — pure memoization). Fog audit unchanged. Boot-gate still
   deferred per the lead's no-launches order.
+- **Memory bound** (VP's retained profile note, R4b review): entries ≤
+  `anchors.Count`; each array is that anchor's own static field cells
+  (`fields[f].Cells` is built once — never shrinks under harvesting).
+  Total retained = Σ|field(a)| ≤ A×F_max×8 B — ~30×300 ≈ 72 KB typical,
+  ~800 KB at 100×1000 extreme, cleared every version bump. Crucially the
+  pre-cache code materialized the SAME arrays every pass — the cache
+  retains between passes what was already peak-working-set garbage; it
+  does not raise the peak class.
