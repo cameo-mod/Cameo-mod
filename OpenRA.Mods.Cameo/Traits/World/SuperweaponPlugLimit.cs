@@ -239,6 +239,17 @@ namespace OpenRA.Mods.Cameo.Traits
 			}
 		}
 
+		// Cash share of a cancelled item's refund, matching
+		// ProductionQueue.CancelProductionInner: resources are refunded as
+		// resources and do NOT also come back as cash. The engine achieves the
+		// split by bumping RemainingCost += ResourcesPaid before GiveCash; the
+		// arithmetic here is identical (the item is removed right after, so
+		// mutating RemainingCost would be dead work).
+		internal static int RefundCash(int totalCost, int remainingCost, int resourcesPaid)
+		{
+			return totalCost - remainingCost - resourcesPaid;
+		}
+
 		static void Cancel(OpenRA.Player owner, ProductionQueue queue, ProductionItem item)
 		{
 			// Replicates ProductionQueue.CancelProductionInner's refund path:
@@ -247,12 +258,13 @@ namespace OpenRA.Mods.Cameo.Traits
 			item.Infinite = false;
 
 			var playerResources = owner.PlayerActor.TraitOrDefault<PlayerResources>();
-			if (item.ResourcesPaid > 0)
-				playerResources?.GiveResources(item.ResourcesPaid);
+			if (playerResources != null)
+			{
+				if (item.ResourcesPaid > 0)
+					playerResources.GiveResources(item.ResourcesPaid);
 
-			var payment = item.TotalCost - item.RemainingCost;
-			if (payment > 0)
-				playerResources?.GiveCash(payment);
+				playerResources.GiveCash(RefundCash(item.TotalCost, item.RemainingCost, item.ResourcesPaid));
+			}
 
 			queue.EndProduction(item);
 		}

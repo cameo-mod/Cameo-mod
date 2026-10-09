@@ -110,6 +110,46 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		// ---------------------------------------------------------------
+		// Refund split (engine parity with CancelProductionInner :843-849)
+		// ---------------------------------------------------------------
+
+		[Test]
+		public void RefundCash_ExcludesResourcesRefund_IntegratorExample()
+		{
+			// F1 double-credit: TotalCost=1000 fully paid (RemainingCost=0) with
+			// 600 paid as resources must refund 600 resources + 400 cash, not
+			// 600 + 1000.
+			Assert.That(SuperweaponPlugLimit.RefundCash(totalCost: 1000, remainingCost: 0, resourcesPaid: 600),
+				Is.EqualTo(400));
+		}
+
+		[Test]
+		public void RefundCash_NoResources_FullCashBack()
+		{
+			Assert.That(SuperweaponPlugLimit.RefundCash(1000, 0, 0), Is.EqualTo(1000));
+		}
+
+		[Test]
+		public void RefundCash_PartialProgress_RefundsOnlyPaid()
+		{
+			Assert.That(SuperweaponPlugLimit.RefundCash(1000, 500, 0), Is.EqualTo(500));
+			Assert.That(SuperweaponPlugLimit.RefundCash(1000, 500, 200), Is.EqualTo(300));
+		}
+
+		[Test]
+		public void RefundCash_ZeroCost_ZeroRefund()
+		{
+			Assert.That(SuperweaponPlugLimit.RefundCash(0, 0, 0), Is.EqualTo(0));
+		}
+
+		[Test]
+		public void RefundCash_AllResourcePaid_ZeroCash()
+		{
+			// Paid entirely in resources: cash share is zero, not TotalCost.
+			Assert.That(SuperweaponPlugLimit.RefundCash(1000, 0, 1000), Is.EqualTo(0));
+		}
+
+		// ---------------------------------------------------------------
 		// Token derivation from rules wiring
 		// ---------------------------------------------------------------
 
