@@ -67,6 +67,19 @@ def analyze(rows, game_uid, player):
                     raise EvidenceError("duplicate cancellation of one production item")
                 cancelled_ids.add((queue, item_id))
                 reason = identity(row.get("reason"))
+                active = row.get("player_active")
+                live = row.get("producer_live")
+                cancellation_class = row.get("cancellation_class")
+                if type(active) is not bool or type(live) is not bool:
+                    raise EvidenceError("missing cancellation activity/liveness evidence")
+                if cancellation_class not in ("production", "destruction", "elimination"):
+                    raise EvidenceError("missing/invalid cancellation class")
+                # Event-local evidence is authoritative; a pulse may precede elimination.
+                if not active or cancellation_class == "elimination":
+                    cancel_windows.clear()
+                    continue
+                if not live or cancellation_class == "destruction":
+                    continue
                 window = cancel_windows.setdefault(item, deque())
                 window.append(tick)
                 while window and tick - window[0] > 1500:
@@ -95,6 +108,8 @@ def analyze(rows, game_uid, player):
             active = row.get("player_active")
             if type(active) is not bool:
                 raise EvidenceError("missing player active state")
+            if not active:
+                cancel_windows.clear()
             for queue in queues:
                 if not isinstance(queue, dict):
                     raise EvidenceError("invalid queue state")

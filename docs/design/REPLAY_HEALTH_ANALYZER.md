@@ -216,10 +216,11 @@ Missing old-log fields are UNKNOWN. No live decision without shared watermark.
 
 Mandatory defects: live building producer's ready item unplaced for >=250
 ticks; idle construction queue for >=1500 ticks; >=3 cancellations of the same
-building type owner-wide within an inclusive1500-tick rolling window. Reasons
-(no site, policy hold, cap, affordability, relocation, enemy damage) are recorded
-for diagnosis; they do not erase the requested threshold violation. Dead
-producer queues are not treated as a postmortem obligation to produce.
+building type owner-wide within an inclusive1500-tick rolling window while the
+player and producer are active/live. Production rejection reasons (no site,
+policy hold, cap, affordability, relocation) are recorded for diagnosis.
+Destruction/elimination cleanup is excluded from the retry count. Dead producer
+queues are not treated as a postmortem obligation to produce.
 
 Initial **proposed** cash band is 1000..10000 combined cash+stored resources,
 inclusive. Outside band for1500ticks is a defect; near-empty total funds
@@ -244,8 +245,12 @@ seq contiguous from0, monotonic worldtick and dropped0. Kinds:
   production item_id; state timestamps are captured from transitions, not
   reconstructed from occasional samples. Logger keeps queue IDs stable.
 - `cancel`: queue_id/item/production item_id/reason, exactly once per cancelled
-  item. Cancel records are building-queue events only. Duplicate item cancellation
-  is invalid evidence, not another counted defect.
+  item; event-local player_active and producer_live bools, cancellation_class
+  `production`/`destruction`/`elimination`. Cancel records are building-queue events
+  only. Missing/unknown activity, liveness or class makes UNKNOWN; never inherit
+  activity from an earlier pulse. Inactive/elimination observations clear retry
+  history; destruction or dead-producer cancellations do not increment it.
+  Duplicate item cancellation is invalid evidence, not another counted defect.
 - `end`: complete=true, same envelope, after final pulse<=50ticks, commits the
   quiescent capture. Missing sequence/pulse/census/terminal or unsupported profile
   makes UNKNOWN even if earlier defect evidence exists.

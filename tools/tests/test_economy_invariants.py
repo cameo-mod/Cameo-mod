@@ -26,6 +26,18 @@ def codes(rows):
     return {f["code"] for f in verifier.analyze(rows, "g", "p")["findings"]}
 
 
+def cancellation_capture(active=True, live=True, classification="production"):
+    rows = capture(250)
+    events = [{**rows[0], "kind": "cancel", "tick": tick,
+               "queue_id": "1:building", "item": "refinery", "item_id": str(tick),
+               "reason": "no_site", "player_active": active, "producer_live": live,
+               "cancellation_class": classification} for tick in (10, 60, 110)]
+    rows = sorted(rows[:-1] + events, key=lambda r: r["tick"]) + [rows[-1]]
+    for seq, row in enumerate(rows):
+        row["seq"] = seq
+    return rows
+
+
 class InvariantTests(unittest.TestCase):
     def test_ready_exact_250_boundary(self):
         self.assertNotIn("READY_BUILDING_UNPLACED", codes(capture(200, "ready")))
@@ -78,15 +90,45 @@ class InvariantTests(unittest.TestCase):
         self.assertNotIn("FUNDS_ABOVE_BAND", codes(rows))
 
     def test_three_cancels_same_item_rolling_window(self):
-        rows = capture(250)
-        events = []
-        for tick in (0, 50, 100):
-            events.append({**rows[0], "kind": "cancel", "tick": tick, "queue_id": "1:building",
-                           "item": "refinery", "item_id": str(tick), "reason": "no_site"})
-        rows = sorted(rows[:-1] + events, key=lambda r: r["tick"]) + [rows[-1]]
+        self.assertIn("REPEATED_BUILDING_CANCELLATION", codes(cancellation_capture()))
+
+    def test_inactive_and_destruction_cleanup_not_retry_defect(self):
+        for args in ((False, True, "production"), (True, False, "production"),
+                     (True, True, "destruction"), (False, False, "elimination")):
+            rows = cancellation_capture(*args)
+            report = verifier.analyze(rows, "g", "p")
+            self.assertEqual(report["status"], "OBSERVED_HEALTHY")
+            self.assertNotIn("REPEATED_BUILDING_CANCELLATION", codes(rows))
+
+    def test_event_activity_changes_between_pulses(self):
+        rows = cancellation_capture()
+        events = [r for r in rows if r["kind"] == "cancel"]
+        # All pulses remain active: the exact event must stop the retry window.
+        events[1]["player_active"] = False
+        self.assertNotIn("REPEATED_BUILDING_CANCELLATION", codes(rows))
+        # Conversely, stale inactive pulses cannot hide three live active events
+        # occurring between two samples.
+        rows = cancellation_capture()
+        for r in rows:
+            if r["kind"] == "pulse":
+                r["player_active"] = False
+            elif r["kind"] == "cancel":
+                r["tick"] = {10: 10, 60: 20, 110: 30}[r["tick"]]
+        rows.sort(key=lambda r: (r["tick"], r["kind"] == "end"))
         for seq, row in enumerate(rows):
             row["seq"] = seq
         self.assertIn("REPEATED_BUILDING_CANCELLATION", codes(rows))
+
+    def test_cancel_missing_or_unknown_event_state_is_unknown(self):
+        for key in ("player_active", "producer_live", "cancellation_class"):
+            for value in (None, "unknown", 1):
+                rows = cancellation_capture()
+                event = next(r for r in rows if r["kind"] == "cancel")
+                event[key] = value
+                self.assertEqual(verifier.analyze(rows, "g", "p")["status"], "UNKNOWN")
+            rows = cancellation_capture()
+            del next(r for r in rows if r["kind"] == "cancel")[key]
+            self.assertEqual(verifier.analyze(rows, "g", "p")["status"], "UNKNOWN")
 
     def test_missing_truncated_unknown_and_gaps(self):
         self.assertEqual(verifier.analyze([], "g", "p")["status"], "UNKNOWN")
