@@ -438,6 +438,107 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void TokenMap_CrossHostProviderSocket_NeverJoins()
+		{
+			// F3 regression: provider on host A + socket on host B granting the
+			// same condition must NOT fabricate wiring — installing host B's
+			// plug never publishes the token.
+			var hostA = new ActorInfo("provider_only_host",
+				Provides("cap", "sharedcond", "global-swlimit"));
+			var hostB = new ActorInfo("socket_only_host",
+				Pluggable(("addon", "sharedcond")));
+			var plug = new ActorInfo("ordinary_addon",
+				Plug("addon"),
+				Buildable("~socket_only_host, socket_only_host, !cap"));
+
+			var diags = new List<string>();
+			var map = SuperweaponPlugLimit.BuildPlugTokenMap(new[] { hostA, hostB, plug }, new[] { "cap" }, diags);
+
+			Assert.Multiple(() =>
+			{
+				Assert.That(map, Is.Empty, "cross-host provider+socket must not produce a mapping");
+				Assert.That(diags.Any(d => d.Contains("'cap'") && d.Contains("same-host")), Is.True,
+					"expected a missing same-host socket diagnostic for 'cap'");
+				Assert.That(diags.Any(d => d.Contains("ordinary_addon") && d.Contains("uncapped")), Is.True,
+					"expected an uncapped diagnostic for the negating plug");
+			});
+		}
+
+		[Test]
+		public void TokenMap_CrossHost_SameActorStillMaps()
+		{
+			// Control for F3: when the SAME host carries provider and socket,
+			// the wiring resolves normally.
+			var host = new ActorInfo("full_host",
+				Provides("cap", "sharedcond", "global-swlimit"),
+				Pluggable(("addon", "sharedcond")));
+			var plug = new ActorInfo("ordinary_addon",
+				Plug("addon"),
+				Buildable("~full_host, full_host, !cap"));
+
+			var map = SuperweaponPlugLimit.BuildPlugTokenMap(new[] { host, plug }, new[] { "cap" });
+
+			Assert.That(map["ordinary_addon"], Is.EqualTo("cap"));
+		}
+
+		[Test]
+		public void TokenMap_ItemNegatingTwoResolvedTokens_Rejected_OrderIndependent()
+		{
+			// F4 regression: one plug item negating TWO declared tokens that both
+			// resolve for its plug type is ambiguous — it must be rejected, not
+			// bound to whichever token is iterated first. Both token orders in
+			// the item prerequisites and both actor orders must give the same
+			// empty result.
+			ActorInfo Host(string name, string token, string condition) =>
+				new(name,
+					Provides(token, condition, "global-swlimit"),
+					Pluggable(("shared_sw", condition)));
+
+			ActorInfo PlugActor(string prereqs) =>
+				new("ambiguous_plug",
+					Plug("shared_sw"),
+					Buildable(prereqs));
+
+			var hostA = Host("host_a", "tok_a", "cond_a");
+			var hostB = Host("host_b", "tok_b", "cond_b");
+			var plugAB = PlugActor("!tok_a, !tok_b");
+			var plugBA = PlugActor("!tok_b, !tok_a");
+			var declared = new[] { "tok_a", "tok_b" };
+
+			var diagsForward = new List<string>();
+			var mapForward = SuperweaponPlugLimit.BuildPlugTokenMap(new[] { hostA, hostB, plugAB }, declared, diagsForward);
+			var diagsReverse = new List<string>();
+			var mapReverse = SuperweaponPlugLimit.BuildPlugTokenMap(new[] { hostB, hostA, plugBA }, declared, diagsReverse);
+
+			Assert.Multiple(() =>
+			{
+				Assert.That(mapForward, Is.Empty, "ambiguous multi-token plug must be rejected");
+				Assert.That(mapReverse, Is.Empty, "rejection must be order-independent");
+				Assert.That(diagsForward.Any(d => d.Contains("ambiguous_plug") && d.Contains("ambiguous")), Is.True,
+					"expected an ambiguity diagnostic naming the plug");
+				Assert.That(diagsReverse.Any(d => d.Contains("ambiguous_plug") && d.Contains("ambiguous")), Is.True);
+			});
+		}
+
+		[Test]
+		public void TokenMap_SingleTokenOfTwoNegated_StillMaps()
+		{
+			// F4 control: an item negating a resolving token plus a declared
+			// token whose chain does NOT resolve for its type is unambiguous —
+			// it maps to the single resolving token.
+			var host = new ActorInfo("host_a",
+				Provides("tok_a", "cond_a", "global-swlimit"),
+				Pluggable(("shared_sw", "cond_a")));
+			var plug = new ActorInfo("typed_plug",
+				Plug("shared_sw"),
+				Buildable("!tok_a, !tok_b"));
+
+			var map = SuperweaponPlugLimit.BuildPlugTokenMap(new[] { host, plug }, new[] { "tok_a", "tok_b" });
+
+			Assert.That(map["typed_plug"], Is.EqualTo("tok_a"));
+		}
+
+		[Test]
 		public void TokenMap_ExactlyFourActiveMappings()
 		{
 			// Resolved-wiring assertion: the four real host/plug pairs and nothing

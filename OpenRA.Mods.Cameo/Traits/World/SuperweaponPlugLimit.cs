@@ -129,110 +129,153 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		// Capacity wiring is declared, not inferred: only tokens in
 		// SuperweaponPlugLimitInfo.OccupancyTokens can cap a plug. For each declared
-		// token the wiring chain is verified end to end — a ProvidesPrerequisite
-		// producing the token must carry `RequiresPrerequisites: global-swlimit` and
-		// a positive single-variable RequiresCondition (a bare install condition
-		// such as `ionc`; `!x`, `x && y` or `(x)` cannot be install gates); a host
-		// Pluggable must grant that condition for some plug type; and a plug actor
-		// of that type must negate !token in Buildable.Prerequisites. Missing or
-		// ambiguous links emit diagnostics (debug channel) and leave the plug
-		// uncapped rather than silently mis-deriving wiring. Behavioural polarity
-		// of the real gates is regression-covered at samples 0/1/2/int.MaxValue —
-		// no universal expression-validation claim.
+		// token the wiring chain is verified end to end on a single host — a
+		// ProvidesPrerequisite producing the token must carry
+		// `RequiresPrerequisites: global-swlimit` and a positive single-variable
+		// RequiresCondition (a bare install condition such as `ionc`; `!x`,
+		// `x && y` or `(x)` cannot be install gates); a Pluggable socket ON THE
+		// SAME host actor must grant that condition for some plug type; and a
+		// plug actor of that type must negate !token in Buildable.Prerequisites.
+		// Provider/socket pairs on different actors never join: installing the
+		// other host's plug would not publish this token. Missing or ambiguous
+		// links emit diagnostics (debug channel) and leave the plug uncapped —
+		// an item negating multiple resolving tokens is rejected, never
+		// first-wins. Behavioural polarity of the real gates is
+		// regression-covered at samples 0/1/2/int.MaxValue — no universal
+		// expression-validation claim.
 		internal static Dictionary<string, string> BuildPlugTokenMap(
 			IEnumerable<ActorInfo> actors, IEnumerable<string> occupancyTokens, List<string> diagnostics = null)
 		{
 			var result = new Dictionary<string, string>();
-			var declared = occupancyTokens.OrderBy(t => t, StringComparer.Ordinal).ToArray();
-			if (declared.Length == 0)
+			var declared = new HashSet<string>(occupancyTokens ?? [], StringComparer.Ordinal);
+			if (declared.Count == 0)
 				return result;
 
 			var all = actors.ToArray();
-			foreach (var token in declared)
+
+			// Pass 1: verify each declared token's provider chain and pair the
+			// install condition with a plug type ON THE SAME HOST. Joining
+			// providers and sockets globally would fabricate wiring: a provider
+			// on host A must never pair with a socket on host B — installing
+			// that socket's plug would not publish the token.
+			var tuples = new List<(string Token, string Type)>();
+			var sawProvider = new HashSet<string>(StringComparer.Ordinal);
+			var qualified = new HashSet<string>(StringComparer.Ordinal);
+			foreach (var host in all)
 			{
-				var conditions = new List<string>();
-				var sawProvider = false;
-				foreach (var ai in all)
+				var hostProviders = new List<(string Token, string Condition)>();
+				foreach (var p in host.TraitInfos<ProvidesPrerequisiteInfo>())
 				{
-					foreach (var p in ai.TraitInfos<ProvidesPrerequisiteInfo>())
+					var token = p.Prerequisite ?? host.Name;
+					if (!declared.Contains(token))
+						continue;
+
+					sawProvider.Add(token);
+					var variables = p.RequiresCondition?.Variables.ToArray();
+					if (variables == null || variables.Length != 1
+						|| p.RequiresCondition.Expression.Trim() != variables[0])
 					{
-						if ((p.Prerequisite ?? ai.Name) != token)
-							continue;
-
-						sawProvider = true;
-						var variables = p.RequiresCondition?.Variables.ToArray();
-						var positiveGate = variables != null && variables.Length == 1
-							&& p.RequiresCondition.Expression.Trim() == variables[0];
-						if (!positiveGate)
-						{
-							diagnostics?.Add($"swcap: '{token}' provider '{ai.Name}' RequiresCondition " +
-								$"'{p.RequiresCondition?.Expression ?? "<none>"}' is not a positive single-variable gate — skipped");
-							continue;
-						}
-
-						if (!p.RequiresPrerequisites.Contains("global-swlimit"))
-						{
-							diagnostics?.Add($"swcap: '{token}' provider '{ai.Name}' lacks RequiresPrerequisites: global-swlimit — skipped");
-							continue;
-						}
-
-						// Echo the resolved gate for review.
-						diagnostics?.Add($"swcap: '{token}' <- '{ai.Name}' gated on '{p.RequiresCondition.Expression}' + global-swlimit");
-						if (!conditions.Contains(variables[0]))
-							conditions.Add(variables[0]);
+						diagnostics?.Add($"swcap: '{token}' provider '{host.Name}' RequiresCondition " +
+							$"'{p.RequiresCondition?.Expression ?? "<none>"}' is not a positive single-variable gate — skipped");
+						continue;
 					}
+
+					if (!p.RequiresPrerequisites.Contains("global-swlimit"))
+					{
+						diagnostics?.Add($"swcap: '{token}' provider '{host.Name}' lacks RequiresPrerequisites: global-swlimit — skipped");
+						continue;
+					}
+
+					// Echo the resolved gate for review.
+					diagnostics?.Add($"swcap: '{token}' <- '{host.Name}' gated on '{p.RequiresCondition.Expression}' + global-swlimit");
+					qualified.Add(token);
+					hostProviders.Add((token, variables[0]));
 				}
 
-				if (!sawProvider)
-					diagnostics?.Add($"swcap: declared token '{token}' has no ProvidesPrerequisite provider — dangling declaration");
-
-				if (conditions.Count == 0)
+				foreach (var hp in hostProviders)
 				{
+					var matched = false;
+					foreach (var pluggable in host.TraitInfos<PluggableInfo>())
+						foreach (var cond in pluggable.Conditions)
+							if (cond.Value == hp.Condition)
+							{
+								tuples.Add((hp.Token, cond.Key));
+								matched = true;
+							}
+
+					if (!matched)
+						diagnostics?.Add($"swcap: '{hp.Token}' provider on '{host.Name}' has no same-host Pluggable socket granting '{hp.Condition}' — uncapped");
+				}
+			}
+
+			foreach (var token in declared.OrderBy(t => t, StringComparer.Ordinal))
+			{
+				if (!sawProvider.Contains(token))
+					diagnostics?.Add($"swcap: declared token '{token}' has no ProvidesPrerequisite provider — dangling declaration");
+				if (!qualified.Contains(token))
 					diagnostics?.Add($"swcap: declared token '{token}' has no qualifying lobby-cap provider — nothing capped");
+			}
+
+			// Pass 2: plug items. A candidate token must both be negated by the
+			// item (!token / ~!token in Buildable.Prerequisites) and resolve to
+			// the item's own plug type via a verified same-host pair. Negating
+			// more than one resolving token is ambiguous — the item is rejected
+			// outright rather than taking whichever token sorts first.
+			var resolvedPerToken = new Dictionary<string, int>(StringComparer.Ordinal);
+			foreach (var ai in all)
+			{
+				var plug = ai.TraitInfoOrDefault<PlugInfo>();
+				var buildable = ai.TraitInfoOrDefault<BuildableInfo>();
+				if (plug == null || buildable == null)
+					continue;
+
+				var negated = buildable.Prerequisites
+					.Select(NegatedToken)
+					.Where(t => t != null && declared.Contains(t))
+					.Distinct(StringComparer.Ordinal)
+					.ToArray();
+				if (negated.Length == 0)
+					continue;
+
+				var candidates = negated
+					.Where(t => tuples.Any(tp => tp.Token == t && tp.Type == plug.Type))
+					.ToArray();
+
+				if (candidates.Length == 0)
+				{
+					diagnostics?.Add($"swcap: plug '{ai.Name}' negates declared token(s) '{string.Join("', '", negated)}' " +
+						$"with no verified provider+socket chain for plug type '{plug.Type}' — uncapped");
 					continue;
 				}
 
-				if (conditions.Count > 1)
-					diagnostics?.Add($"swcap: declared token '{token}' resolves {conditions.Count} install conditions ({string.Join(", ", conditions)})");
-
-				// Plug types = host Pluggable entries granting a resolved condition.
-				var plugTypes = new List<string>();
-				foreach (var ai in all)
-					foreach (var pluggable in ai.TraitInfos<PluggableInfo>())
-						foreach (var cond in pluggable.Conditions)
-							if (conditions.Contains(cond.Value) && !plugTypes.Contains(cond.Key))
-								plugTypes.Add(cond.Key);
-
-				// The plug itself must negate the declared token in Buildable
-				// prerequisites (!token, or hidden ~!token).
-				var resolved = 0;
-				foreach (var ai in all)
+				if (candidates.Length > 1)
 				{
-					var plug = ai.TraitInfoOrDefault<PlugInfo>();
-					var buildable = ai.TraitInfoOrDefault<BuildableInfo>();
-					if (plug == null || buildable == null || !plugTypes.Contains(plug.Type))
-						continue;
-
-					if (!buildable.Prerequisites.Any(p => p.Replace("~", "") == "!" + token))
-						continue;
-
-					if (result.ContainsKey(ai.Name))
-					{
-						diagnostics?.Add($"swcap: plug '{ai.Name}' negates multiple declared tokens — first wins");
-						continue;
-					}
-
-					result[ai.Name] = token;
-					resolved++;
+					diagnostics?.Add($"swcap: plug '{ai.Name}' negates multiple declared tokens " +
+						$"({string.Join(", ", candidates)}) resolving for plug type '{plug.Type}' — ambiguous, uncapped");
+					continue;
 				}
 
-				if (resolved == 0)
+				result[ai.Name] = candidates[0];
+				resolvedPerToken[candidates[0]] = resolvedPerToken.GetValueOrDefault(candidates[0]) + 1;
+			}
+
+			foreach (var token in declared.OrderBy(t => t, StringComparer.Ordinal))
+			{
+				var resolved = resolvedPerToken.GetValueOrDefault(token);
+				if (qualified.Contains(token) && resolved == 0)
 					diagnostics?.Add($"swcap: declared token '{token}' resolves no plug actor");
 				else if (resolved > 1)
 					diagnostics?.Add($"swcap: declared token '{token}' resolves {resolved} plug actors — shared-slot cap");
 			}
 
 			return result;
+		}
+
+		// "!token" / "~!token" -> "token"; anything else -> null.
+		static string NegatedToken(string prerequisite)
+		{
+			var p = prerequisite.Trim().TrimStart('~');
+			return p.StartsWith("!", StringComparison.Ordinal) ? p.Substring(1) : null;
 		}
 
 		// itemName -> occupancy token for SW plug items, else null.
