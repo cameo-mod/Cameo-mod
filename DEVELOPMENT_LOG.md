@@ -20405,3 +20405,40 @@ the existing helpers only — no blanket normalization, no yaml edits except one
   `reviewed_weapon_history.py`, `weapons.yaml` (Kübel). `git diff --check` clean.
 * **Next:** `python -m unittest` on the 41-module set in `tools/tests` to re-verify; fleet
   coordinator decides increment merge — no lifecycle claims made here.
+
+## 2026-10-09 - Devin-Architect: FIX-RA-REFINERY - passable-bib dock access + bounded refinery retry (branch devin/fix-ra-refinery-dock)
+
+* **Provenance:** the defect is byte-identical in frozen campaign `a9349d015` and
+  published playtest `3d99405bd`; fix branches off `3d99405bd`.
+* **Root cause (Sol's A/B finding, confirmed in source):** `DockReachable` built the
+  wall footprint from `bi.Tiles(topLeft)` — which includes passable `=` bib cells.
+  `^RAPROC` is 3x4 `_X_/xxx/X==/===` with the dock landing on bib cell (1,2): all
+  nine scan cells sat inside the full footprint, so `DockHasExit` failed at every
+  legal interior site — RA refinery requests produced then cancelled, and each
+  cancellation counted a shared placement failure.
+* **Fix 1 — dock access:** new world-free seam `DockBlockingFootprint` yields only
+  the impassable `x`/`X` cells (the `=` bib and `+` transit lanes are traversable —
+  the leaving harvester is in transit). `DockHasExit` now skips the dock cell
+  itself: under blocking semantics a passable dock cell would have counted as its
+  own exit (caught by the new blocked-exit regression).
+* **Fix 2 — bounded retry:** under the refinery law a siteless refinery DEFERS via
+  `RefineryDefers(law != null, type)`: cancelled for its refund, standing request
+  re-queues it next sweep, zero `failCount` spent — a null-center failure can no
+  longer saturate the latch. The latch's wait-for-change arm now also covers the
+  un-nudgeable cases (null failing centre or live relocation hold) that `Length==0`
+  alone left latched forever.
+* **Diagnostics (Sol's request, bounded):** a failed `LawRefineryPlacement` sweep
+  emits one line tallying the per-cell reason chain — scanned / unbuildable /
+  too-far / dock-on-resource / dock-no-exit / gap-illegal — plus a "no claim
+  available" line for the other law-null cause and a latch-release line on
+  failCount reset. One log per failed sweep or resume delay, never per cell.
+* **Verification:** `BaseBuilderQueueEvalTest` covers every resolved refinery
+  shape (RAPROC ×3 factions, TDPROC, TS both pairs, D2K, SC triple-dock hosts,
+  WC2 lumber, RA2 `x+==`, Consortium, OP2 smelter) two ways — every passable
+  cell keeps an exit, audit-projected dock cells keep exits — plus blocked-exit,
+  off-map, `+` transit, and deferral-classifier regressions; focused and full
+  suite green; Release build clean; boot gate main menu, zero new exceptions.
+* **Not done:** in-map matched-progression validation and the shared-radius design
+  remain downstream gates; `BaseExpansionModules == null` at the cache-population
+  site is a known latent inconsistency left untouched (never-null array keeps the
+  latch self-releasing at first resume delay).

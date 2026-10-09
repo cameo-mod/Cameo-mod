@@ -14,6 +14,7 @@ using System.Collections.Immutable;
 using NUnit.Framework;
 using OpenRA.Mods.CA;
 using OpenRA.Mods.CA.Traits;
+using OpenRA.Mods.Common.Traits;
 
 namespace OpenRA.Mods.Cameo.Test
 {
@@ -331,6 +332,111 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(BaseBuilderQueueEvalCA.DockHasExit(dock, walled, _ => true), Is.False);
 			Assert.That(BaseBuilderQueueEvalCA.DockHasExit(dock, open, n => n != new CPos(6, 5)), Is.True);
 			Assert.That(BaseBuilderQueueEvalCA.DockHasExit(dock, walled, _ => false), Is.False);
+		}
+
+		// FIX-RA-REFINERY: real refinery shapes — the '=' bib is passable and must not wall the dock.
+		// Shapes follow the resolved yaml footprints (and AUDIT_2026-10-09_all_faction_docks.md for
+		// families whose actor defs live outside this tree); dock = CellContaining(CenterOfCell(topLeft)
+		// + CenterOffset(world) + DockOffset) is map-grid dependent, so each family is covered two ways:
+		// every passable footprint cell keeps an exit, and audit-verified or exactly-projected dock
+		// cells keep theirs. The ^RAPROC enclosure (all nine scan cells inside the full footprint) was
+		// the confirmed defect; WC2/OP2's inherited zero-offset docks shared it under Tiles semantics.
+
+		static Dictionary<CVec, FootprintCellType> Shape(params string[] rows)
+		{
+			var cells = new Dictionary<CVec, FootprintCellType>();
+			for (var y = 0; y < rows.Length; y++)
+				for (var x = 0; x < rows[y].Length; x++)
+					cells[new CVec(x, y)] = (FootprintCellType)rows[y][x];
+
+			return cells;
+		}
+
+		// Every passable cell ('='/ '+') of every resolved refinery shape must keep an on-map exit at an
+		// ordinary interior site — a dock landing on any bib cell is reachable. Under the old
+		// BuildingInfo.Tiles footprint these cells were walls, which enclosed RAPROC outright.
+		[TestCase("RAPROC_RA1_Allies_Soviets_Japan", "_X_", "xxx", "X==", "===")]
+		[TestCase("TDPROC_TD_GDI_Nod_TS_Forgotten_Cabal", "_x_", "xxx", "===", "===")]
+		[TestCase("TS_GDI_Nod", "xxx_", "xxx=", "_===")]
+		[TestCase("D2K_five_factions", "=xx", "xx=", "===")]
+		[TestCase("SC_Terran_Protoss_Zerg", "_x_", "xxx", "===")]
+		[TestCase("SC_Zerg_Terran_Protoss_townhall", "xxx", "xxx", "===")]
+		[TestCase("WC2_Humans_Orcs_lumber", "xxx", "xxx", "===")]
+		[TestCase("RA2_Allies_Soviets", "xxx=", "xxx=", "x+==")]
+		[TestCase("RA2Mod_Consortium", "xxx=", "xxxx", "=xx=")]
+		[TestCase("OP2_Eden_Plymouth_smelter", "xxx", "x==", "===")]
+		public void EveryPassableCellOfRealRefineryShapeKeepsAnExit(string name, params string[] rows)
+		{
+			var shape = Shape(rows);
+			var blocking = new HashSet<CPos>(BaseBuilderQueueEvalCA.DockBlockingFootprint(shape, CPos.Zero));
+			foreach (var kv in shape)
+			{
+				if (kv.Value != FootprintCellType.OccupiedPassable
+					&& kv.Value != FootprintCellType.OccupiedPassableTransitOnly)
+					continue;
+
+				var dock = new CPos(kv.Key.X, kv.Key.Y);
+				Assert.That(BaseBuilderQueueEvalCA.DockHasExit(dock, blocking, _ => true),
+					Is.True, $"{name}: passable cell ({dock.X},{dock.Y}) must keep an on-map exit");
+			}
+		}
+
+		// Dock cells confirmed by the audit (RAPROC/TDPROC) or by exact integer projection:
+		// zero-offset inherited ^Refinery docks (WC2 lumber, OP2 smelters) land on centre (1,1) of a
+		// 3x3 — WC2's is even an impassable 'x' cell, which the dock check must tolerate; RA2 Allies
+		// (DockOffset 1086,1086, no LocalCenterOffset) projects to (3,1); D2K's (1c5,0c5) projects
+		// outside the footprint at (3,2).
+		[TestCase("RAPROC", new[] { "_X_", "xxx", "X==", "===" }, 1, 2)]
+		[TestCase("TDPROC", new[] { "_x_", "xxx", "===", "===" }, 0, 2)]
+		[TestCase("WC2_OP2_inherited_zero_offset", new[] { "xxx", "xxx", "===" }, 1, 1)]
+		[TestCase("OP2_smelter_zero_offset", new[] { "xxx", "x==", "===" }, 1, 1)]
+		[TestCase("RA2_Allies", new[] { "xxx=", "xxx=", "x+==" }, 3, 1)]
+		[TestCase("D2K_off_footprint_dock", new[] { "=xx", "xx=", "===" }, 3, 2)]
+		public void RealRefineryDockCellKeepsAnExit(string name, string[] rows, int dockX, int dockY)
+		{
+			var blocking = new HashSet<CPos>(BaseBuilderQueueEvalCA.DockBlockingFootprint(Shape(rows), CPos.Zero));
+			Assert.That(BaseBuilderQueueEvalCA.DockHasExit(new CPos(dockX, dockY), blocking, _ => true),
+				Is.True, $"{name}: dock ({dockX},{dockY}) must keep an on-map exit outside the impassable footprint");
+		}
+
+		[Test]
+		public void RaRefineryDockCellsThatWereWallsArePassable()
+		{
+			// ^RAPROC bib cells that BuildingInfo.Tiles reported as footprint walls.
+			var blocking = new HashSet<CPos>(BaseBuilderQueueEvalCA.DockBlockingFootprint(
+				Shape("_X_", "xxx", "X==", "==="), CPos.Zero));
+
+			Assert.That(blocking, Does.Not.Contain(new CPos(1, 2)), "the dock's own bib cell is passable");
+			Assert.That(blocking, Does.Not.Contain(new CPos(2, 3)), "'=' bib cells are not walls");
+			Assert.That(blocking, Does.Contain(new CPos(1, 1)), "'x' cells stay blocking");
+			Assert.That(blocking, Does.Contain(new CPos(0, 2)), "'X' cells stay blocking");
+		}
+
+		[Test]
+		public void ImpassableCellsStillWallTheDock()
+		{
+			// x/X stay blocking — a dock ringed by real occupied cells has no exit.
+			var blocking = new HashSet<CPos>(BaseBuilderQueueEvalCA.DockBlockingFootprint(
+				Shape("xxx", "x=x", "xxx"), CPos.Zero));
+
+			Assert.That(BaseBuilderQueueEvalCA.DockHasExit(new CPos(1, 1), blocking, _ => true), Is.False);
+
+			// '+' transit-only lanes are the dock's own egress path — they don't wall it either.
+			var transit = new HashSet<CPos>(BaseBuilderQueueEvalCA.DockBlockingFootprint(
+				Shape("+++", "+x+", "+++"), CPos.Zero));
+			Assert.That(BaseBuilderQueueEvalCA.DockHasExit(new CPos(1, 1), transit, _ => true), Is.True);
+		}
+
+		[Test]
+		public void LawRefineryNoSiteDefersInsteadOfFailing()
+		{
+			// Deferral is law+refinery only — every other class keeps the ordinary failure path.
+			Assert.That(BaseBuilderQueueEvalCA.RefineryDefers(true, BuildingType.Refinery), Is.True);
+			Assert.That(BaseBuilderQueueEvalCA.RefineryDefers(false, BuildingType.Refinery), Is.False);
+			Assert.That(BaseBuilderQueueEvalCA.RefineryDefers(true, BuildingType.Building), Is.False);
+			Assert.That(BaseBuilderQueueEvalCA.RefineryDefers(true, BuildingType.Defense), Is.False);
+			Assert.That(BaseBuilderQueueEvalCA.RefineryDefers(true, BuildingType.Fragile), Is.False);
+			Assert.That(BaseBuilderQueueEvalCA.RefineryDefers(true, BuildingType.BaseCrawl), Is.False);
 		}
 
 		// FirstByOrder / FirstRequestedRefinery (F-CBL1/F4)
