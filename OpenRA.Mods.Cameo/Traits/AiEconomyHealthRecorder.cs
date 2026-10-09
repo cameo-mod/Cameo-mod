@@ -87,10 +87,9 @@ namespace OpenRA.Mods.Cameo.Traits
 				Pulse(tick);
 			if (terminal)
 			{
-				WriteHealth("end", tick, new { complete = state.Complete && health.Complete && raw.Complete });
+				WriteHealth(AiEconomyHealthSchema.End(Identity(tick, "end"),
+					state.Complete && health.Complete && raw.Complete));
 				finished = true;
-				health.Dispose();
-				raw.Dispose();
 			}
 		}
 
@@ -100,34 +99,21 @@ namespace OpenRA.Mods.Cameo.Traits
 			var resources = self.TraitOrDefault<PlayerResources>();
 			if (resources == null)
 				state.MarkIncomplete();
-			WriteHealth("pulse", tick, new
-			{
-				player_active = self.Owner.WinState == WinState.Undefined,
-				queues_complete = state.Complete,
-				queues = snapshots.Select(q => new { queue_id = q.QueueId, item_id = q.ItemId, item = q.Item,
-					state = q.State, state_since_tick = q.StateSinceTick, producer_live = q.ProducerLive, reason = q.Reason }),
-				cash = resources?.Cash ?? 0, resources = resources?.Resources ?? 0,
-				capacity = resources?.ResourceCapacity ?? 0, net_spent = resources?.Spent ?? 0,
-				gross_spent = (int?)null, gross_spend_complete = false
-			});
+			WriteHealth(AiEconomyHealthSchema.Pulse(Identity(tick, "pulse"),
+				self.Owner.WinState == WinState.Undefined, state.Complete, snapshots,
+				resources?.Cash ?? 0, resources?.Resources ?? 0, resources?.ResourceCapacity ?? 0,
+				resources?.Spent ?? 0));
 			lastPulse = tick;
 		}
 
-		void WriteHealth(string kind, int tick, object fields)
+		EconomyHealthIdentity Identity(int tick, string kind) => new(sequence++, tick, kind, gameUid,
+			self.Owner.InternalName, self.World.Map.Uid, self.Owner.Faction.InternalName,
+			self.Owner.BotType ?? "unknown", groups.Count > 0,
+			state.Complete && health.Complete && raw.Complete ? 0 : 1);
+
+		void WriteHealth(string json)
 		{
-			var record = JsonSerializer.SerializeToElement(fields);
-			var data = new Dictionary<string, object>
-			{
-				["schema"] = 2, ["seq"] = sequence++, ["tick"] = tick, ["kind"] = kind,
-				["game_uid"] = gameUid, ["player"] = self.Owner.InternalName,
-				["map_uid"] = self.World.Map.Uid, ["faction"] = self.Owner.Faction.InternalName,
-				["profile"] = self.Owner.BotType ?? "unknown",
-				["profile_supported"] = groups.Count > 0,
-				["dropped"] = state.Complete && health.Complete && raw.Complete ? 0 : 1
-			};
-			foreach (var field in record.EnumerateObject())
-				data.Add(field.Name, field.Value);
-			if (!health.TryWrite(JsonSerializer.Serialize(data)))
+			if (!health.TryWrite(json))
 				state.MarkIncomplete();
 		}
 
@@ -163,4 +149,45 @@ namespace OpenRA.Mods.Cameo.Traits
 				harvester = (uint?)null });
 		}
 	}
+	internal readonly record struct EconomyHealthIdentity(int Sequence, int Tick, string Kind,
+		string GameUid, string Player, string MapUid, string Faction, string Profile,
+		bool ProfileSupported, int Dropped);
+
+	// The runtime recorder and consumer-fit tests use the same serializer.
+	internal static class AiEconomyHealthSchema
+	{
+		static Dictionary<string, object> Common(EconomyHealthIdentity id) => new()
+		{
+			["schema"] = 2, ["seq"] = id.Sequence, ["tick"] = id.Tick, ["kind"] = id.Kind,
+			["game_uid"] = id.GameUid, ["player"] = id.Player, ["map_uid"] = id.MapUid,
+			["faction"] = id.Faction, ["profile"] = id.Profile,
+			["profile_supported"] = id.ProfileSupported, ["dropped"] = id.Dropped
+		};
+
+		internal static string Pulse(EconomyHealthIdentity id, bool active, bool queuesComplete,
+			IReadOnlyList<EconomyQueueSnapshot> queues, int cash, int resources, int capacity, int netSpent)
+		{
+			var record = Common(id);
+			record.Add("player_active", active);
+			record.Add("queues_complete", queuesComplete);
+			record.Add("queues", queues.Select(q => new { queue_id = q.QueueId, item_id = q.ItemId,
+				item = q.Item, state = q.State, state_since_tick = q.StateSinceTick,
+				producer_live = q.ProducerLive, reason = q.Reason }));
+			record.Add("cash", cash);
+			record.Add("resources", resources);
+			record.Add("capacity", capacity);
+			record.Add("net_spent", netSpent);
+			record.Add("gross_spent", null);
+			record.Add("gross_spend_complete", false);
+			return JsonSerializer.Serialize(record);
+		}
+
+		internal static string End(EconomyHealthIdentity id, bool complete)
+		{
+			var record = Common(id);
+			record.Add("complete", complete);
+			return JsonSerializer.Serialize(record);
+		}
+	}
+
 }

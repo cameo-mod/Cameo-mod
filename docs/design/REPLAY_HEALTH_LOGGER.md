@@ -57,3 +57,5 @@ file-disposal coverage, all-faction profile validation, measured runtime cost an
 independent review. No production YAML mounting or runtime launch occurred.
 
 Full mod suite at this checkpoint: 1301/1301 PASS.
+
+2026-10-09 consumer-fit delta: canonical shared Logs/cameo-ai-economy-health.jsonl and separate cameo-ai-economy-raw.jsonl now match analyzer input discovery; FileMode.CreateNew refuses existing evidence. World owns both streams, closing after all player terminals or on actor disposal without fabricated completion. Runtime and tests share schema serializer. Focused tests 20/20; actual C#-generated JSONL consumed by approved analyzer 2a417: normal/refundable net spend OBSERVED_HEALTHY, ready-at-250 BLOCK, incomplete terminal UNKNOWN. Synthetic consumer fixtures do not prove runtime coverage. Terminal causality remains deliberately incomplete pending accepted seam.

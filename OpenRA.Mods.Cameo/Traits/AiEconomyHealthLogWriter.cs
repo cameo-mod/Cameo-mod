@@ -25,10 +25,12 @@ namespace OpenRA.Mods.Cameo.Traits
 		public override object Create(ActorInitializer init) => new AiEconomyHealthCapture();
 	}
 
-	public sealed class AiEconomyHealthCapture : IWorldLoaded, ITick, IGameOver
+	public sealed class AiEconomyHealthCapture : IWorldLoaded, ITick, IGameOver, INotifyActorDisposing
 	{
 		const int MaximumPlayers = 64;
 		readonly List<AiEconomyHealthRecorder> recorders = [];
+		AiEconomyHealthLogWriter health;
+		AiEconomyHealthLogWriter raw;
 		bool ended;
 
 		void IWorldLoaded.WorldLoaded(World world, WorldRenderer renderer)
@@ -36,6 +38,21 @@ namespace OpenRA.Mods.Cameo.Traits
 			if (!AiMatchLogWriter.Eligible(world.Type, world.IsReplay, world.IsLoadingGameSave, Game.IsHost))
 				return;
 			var uid = world.LobbyInfo.GlobalSettings.GameUid;
+			try
+			{
+				var directory = Path.Combine(Platform.SupportDir, "Logs");
+				Directory.CreateDirectory(directory);
+				health = new AiEconomyHealthLogWriter(Path.Combine(directory, "cameo-ai-economy-health.jsonl"));
+				raw = new AiEconomyHealthLogWriter(Path.Combine(directory, "cameo-ai-economy-raw.jsonl"));
+			}
+			catch (Exception e) when (e is IOException or UnauthorizedAccessException)
+			{
+				health?.Dispose();
+				raw?.Dispose();
+				Log.Write("debug", "Economy health capture unavailable: " + e.GetType().Name);
+				return;
+			}
+
 			foreach (var player in world.Players)
 			{
 				if (!AiMatchLogWriter.IsLoggableBot(player))
@@ -43,26 +60,9 @@ namespace OpenRA.Mods.Cameo.Traits
 				var recorder = player.PlayerActor.TraitOrDefault<AiEconomyHealthRecorder>();
 				if (recorder == null || recorders.Count == MaximumPlayers)
 					continue;
-				AiEconomyHealthLogWriter health = null;
-				AiEconomyHealthLogWriter raw = null;
-				try
-				{
-					var directory = Path.Combine(Platform.SupportDir, "Logs");
-					Directory.CreateDirectory(directory);
-					var id = Guid.NewGuid().ToString("N");
-					health = new AiEconomyHealthLogWriter(Path.Combine(directory, $"cameo-ai-economy-{id}.jsonl"));
-					raw = new AiEconomyHealthLogWriter(Path.Combine(directory, $"cameo-ai-economy-raw-{id}.jsonl"));
-					recorder.Activate(uid, health, raw);
-					recorders.Add(recorder);
-					recorder.Observe(world.WorldTick);
-				}
-				catch (Exception e) when (e is IOException or UnauthorizedAccessException)
-				{
-					health?.Dispose();
-					raw?.Dispose();
-					// Missing/partial capture cannot have a complete terminal record.
-					Log.Write("debug", "Economy health capture unavailable: " + e.GetType().Name);
-				}
+				recorder.Activate(uid, health, raw);
+				recorders.Add(recorder);
+				recorder.Observe(world.WorldTick);
 			}
 		}
 
@@ -80,6 +80,16 @@ namespace OpenRA.Mods.Cameo.Traits
 			ended = true;
 			foreach (var recorder in recorders)
 				recorder.Observe(world.WorldTick, terminal: true);
+			health?.Dispose();
+			raw?.Dispose();
+		}
+
+		void INotifyActorDisposing.Disposing(Actor self)
+		{
+			// Leaving a world early closes handles without inventing an end-of-match watermark.
+			ended = true;
+			health?.Dispose();
+			raw?.Dispose();
 		}
 	}
 

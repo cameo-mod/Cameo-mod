@@ -20553,3 +20553,8 @@ the existing helpers only — no blanket normalization, no yaml edits except one
 ## 2026-10-09 Sol: economy logger implementation checkpoint
 
 Isolated codex/replay-health-logger on f7e1d0fff. New opt-in recorder/world controller, bounded writer and queue/head timing core; no YAML mount, queue decision source, engine pin, orders or launches changed. Focused core/writer tests 16/16. Current seam outcome coverage is unresolved, so activation deliberately marks evidence incomplete (UNKNOWN); not ready for adoption. Remaining recorder/schema round-trip tests, corrected seam restack, measured runtime cost and independent review. See docs/design/REPLAY_HEALTH_LOGGER.md.
+
+
+### 2026-10-09 Sol logger consumer-fit checkpoint
+
+Canonical shared health/raw files, shared schema serializer, early-world-disposal cleanup; no YAML mount or gameplay changes. Focused 20/20 pass. Approved offline analyzer consumes actual C# test output: normal OBSERVED_HEALTHY, 250-tick ready BLOCK, incomplete end UNKNOWN. Still deliberately incomplete from activation pending accepted outcome seam; no adoption or launches.
