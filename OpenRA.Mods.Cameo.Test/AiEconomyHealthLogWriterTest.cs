@@ -81,5 +81,17 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(writer.Complete, Is.False);
 			Assert.That(writer.TryWrite("{}"), Is.False);
 		}
+
+		[Test]
+		public void ExactlyFullByteBudgetCanWriteButNextRecordFailsWithoutAppending()
+		{
+			using var stream = new MemoryStream();
+			using var writer = new AiEconomyHealthLogWriter(stream, byteLimit: 3);
+			Assert.That(writer.TryWrite("{}"), Is.True);
+			Assert.That(writer.TryWrite("{}"), Is.False);
+			Assert.That(stream.Length, Is.EqualTo(3));
+			Assert.That(writer.Records, Is.EqualTo(1));
+			Assert.That(writer.Complete, Is.False);
+		}
 	}
 }

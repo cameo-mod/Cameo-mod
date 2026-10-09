@@ -120,8 +120,8 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		void WriteRaw(string kind, int tick, object value)
 		{
-			if (!raw.TryWrite(JsonSerializer.Serialize(new { schema = 2, seq = rawSequence++, tick, kind,
-				game_uid = gameUid, player = self.Owner.InternalName, evidence = value })))
+			if (!raw.TryWrite(AiEconomyHealthSchema.Raw(rawSequence++, tick, gameUid,
+				self.Owner.InternalName, kind, value)))
 				state.MarkIncomplete();
 		}
 
@@ -145,9 +145,8 @@ namespace OpenRA.Mods.Cameo.Traits
 		{
 			if (state == null || finished || refinery.Owner != self.Owner)
 				return;
-			WriteRaw("resource-accepted", self.World.WorldTick, new { refinery = refinery.ActorID,
-				resource_type = resourceType, count, value, accepted_credit = AiEconomyHealthState.AcceptedDelivery(value),
-				harvester = (uint?)null });
+			WriteRaw("resource-accepted", self.World.WorldTick,
+				AiEconomyHealthSchema.AcceptedResourceEvidence(refinery.ActorID, resourceType, count, value));
 		}
 	}
 	internal readonly record struct EconomyHealthIdentity(int Sequence, int Tick, string Kind,
@@ -157,6 +156,14 @@ namespace OpenRA.Mods.Cameo.Traits
 	// The runtime recorder and consumer-fit tests use the same serializer.
 	internal static class AiEconomyHealthSchema
 	{
+		internal static object AcceptedResourceEvidence(uint refinery, string type, int count, int value) =>
+			new { refinery, resource_type = type, count, value,
+				accepted_credit = AiEconomyHealthState.AcceptedDelivery(value), harvester = (uint?)null };
+
+		internal static string Raw(int sequence, int tick, string gameUid, string player, string kind, object evidence) =>
+			JsonSerializer.Serialize(new { schema = 2, seq = sequence, tick, kind,
+				game_uid = gameUid, player, evidence });
+
 		static Dictionary<string, object> Common(EconomyHealthIdentity id) => new()
 		{
 			["schema"] = 2, ["seq"] = id.Sequence, ["tick"] = id.Tick, ["kind"] = id.Kind,

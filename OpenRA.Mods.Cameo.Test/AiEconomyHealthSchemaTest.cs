@@ -13,6 +13,22 @@ namespace OpenRA.Mods.Cameo.Test
 		static EconomyHealthIdentity Identity(int sequence, int tick, string kind)
 			=> new(sequence, tick, kind, "roundtrip", "hard", "map", "td_nod", "hard", true, 0);
 
+		[TestCase(0, false)]
+		[TestCase(1, true)]
+		public void AcceptedResourceRecordRequiresPositiveCreditedValueAndKeepsSenderUnknown(int value, bool proof)
+		{
+			var evidence = AiEconomyHealthSchema.AcceptedResourceEvidence(17, "ore", 100, value);
+			using var row = JsonDocument.Parse(AiEconomyHealthSchema.Raw(3, 50, "roundtrip", "hard",
+				"resource-accepted", evidence));
+			var root = row.RootElement;
+			Assert.That(root.GetProperty("kind").GetString(), Is.EqualTo("resource-accepted"));
+			Assert.That(root.GetProperty("seq").GetInt32(), Is.EqualTo(3));
+			Assert.That(root.GetProperty("tick").GetInt32(), Is.EqualTo(50));
+			Assert.That(root.GetProperty("evidence").GetProperty("value").GetInt32(), Is.EqualTo(value));
+			Assert.That(root.GetProperty("evidence").GetProperty("accepted_credit").GetBoolean(), Is.EqualTo(proof));
+			Assert.That(root.GetProperty("evidence").GetProperty("harvester").ValueKind, Is.EqualTo(JsonValueKind.Null));
+		}
+
 		[Test]
 		public void SignedRefundableNetSpendNeverClaimsGrossSpend()
 		{
