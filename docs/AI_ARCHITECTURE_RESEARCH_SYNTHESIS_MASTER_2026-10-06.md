@@ -456,16 +456,21 @@ master with `37d9fc6a` reversed. Run logs: `/tmp/claude-0/run_*` in the review c
 |---|---|---|---|---|---|---|---|
 | armed, full `ai.yaml` | **crash** at world tick ~2,000 (M10) | — | — | — | — | — | — |
 | armed − front/back planner | `hard` **won** | 19,766 ticks | 74,610 / 13,100 | 26 / 0 | 236,540 / 158,360 | **86,723** | 1,044 refused (M12), 17 crossed |
-| pre-arm | [PENDING] | | | | | | |
+| pre-arm | `hard` **won** | 22,759 ticks | 154,580 / 103,680 | 47 / 5 | 325,948 / 322,050 | 11,395 | 84 refused (`ExternalBotOrdersManager` vs squad leases), 3 crossed |
 
-**What one 1v1 already shows.** With the crash removed, the armed bot is **not** passive in a 1v1 against `classic`:
-it fought early (kills from tick 2,250) and won in about 13 game-minutes. So the restraint stack (M1–M5) alone does
-not reproduce "passive and idle" in a duel. It does leave the bot unable to spend: a third of its income was unspent,
-and its expansion MCVs stood still (M12). One match is an anecdote, not a verdict (mirror A/B protocol, AI_MATCH_LOG);
-the remaining arms (PT8) decide. The playtest differed from this duel in five ways that all point toward weaker bots:
-an 8-bot **team** (the ten team groups, PT4), **human** opponents with defended bases (the veto, M3), Red Alert
-factions (M7, fixed today), engineers limited to visible targets (M8, fixed today), and possibly maps where the
-front/back planner's search stays under its crash limit.
+**Per world tick** (the two matches ran to different lengths): the pre-arm bot earned **14.32** vs **11.97**
+(+20 %) and spent **14.15** vs **8.01** (+77 %); it ended with 11,395 banked against 86,723, and a larger army
+(133,440 vs 106,210) despite fighting much harder (deaths 103,680 vs 13,100). Personalities differed (`turtle` vs
+`steamroller`, from the random draw), and n = 1 per arm, so this is a direction, not a verdict.
+
+**What the pair shows.** With the crash removed, the armed bot is **not** passive in a 1v1 against `classic`: it
+fought early (kills from tick 2,250) and won in about 13 game-minutes. Both arms won, but the armed bot turns income into
+army far more slowly. It holds back buildings and expansions (M1, M12) and banks the money: a third of its income was
+unspent. So the restraint stack (M1–M5) alone does not reproduce "passive and idle" in a duel; what it measurably costs
+is spending speed. The team runs (PT9) are the next evidence. The playtest differed from this duel in five ways that
+all point toward weaker bots: an 8-bot **team** (the ten team groups, PT4), **human** opponents with defended bases
+(the veto, M3), Red Alert factions (M7, fixed today), engineers limited to visible targets (M8, fixed today), and
+possibly maps where the front/back planner's search stays under its crash limit.
 
 
 ## PT6. What today's updates fixed, and what they did not
@@ -544,10 +549,10 @@ reproduction (M10), the learned-file proof (M9), the armed 1v1 (above), the 3v3 
 (team A Multi0–2 at 6,34 / 26,26 / 34,6, top-left; team B Multi3–5 at 95,123 / 103,103 / 123,95, bottom-right;
 `split_spawn_sides` gives the same split for all 720 orderings of the spawn list).
 
-Queued in the review container when this was written (one game at a time, `/tmp/claude-0/master_chain.sh`):
-1v1 pre-arm → 3v3 armed on Winter's End (Rich) → 2v2 armed and 2v2 pre-arm on Terra Cotta. **If that container is
+Done since: the 1v1 pre-arm (PT5). Queued in the review container when this was written (one game at a time,
+`/tmp/claude-0/master_chain.sh`): 3v3 armed on Winter's End (Rich) → 2v2 armed and 2v2 pre-arm on Terra Cotta. **If that container is
 gone, rerun them from a fresh session** (route: LESSONS_LEARNED "Building and boot-gating in a Linux cloud
-container"), then fill the [PENDING] row and add the team rows, scored with
+container"), then add the team rows to PT5, scored with
 `python tools/ai/team_coordination_report.py <support dir>` and `tools/ai/ab_summary.py`. Keep the yaml swap out of
 every commit.
 
