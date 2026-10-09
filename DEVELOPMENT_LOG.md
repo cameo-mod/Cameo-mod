@@ -1,3 +1,32 @@
+# 2026-10-09 — Devin-Integrator: B4/B5 continuation — live hover resolution + clip/hit-test audit
+
+*Devin-Integrator.* Continuation of the approved tooltip head (`d8a56de5e` source
+fix, Sol bounded-approved; `6d7385820` docs). Coordinator's extra asks checked
+statically; one real residual found and fixed:
+
+- **Audit — measured-bounds vs clip**: `TooltipContainerWidget` applies no clip
+  rect; `ChildOrigin` only positions the card. All three Cameo tooltip logics
+  (Production/ActorIcon/Army) feed every measured line into `leftWidth`/bottom,
+  so post-`d8a56de5e` the card fully contains its content — the playtest
+  screenshot overflow was the stale-bounds class already fixed; no residual
+  overflow path found statically.
+- **Audit — hit-test**: Ui fires `MouseExited` before `MouseEntered`
+  (`Widget.HandleInput`), so token-less `RemoveTooltip()` cannot kill a fresh
+  tooltip. Icon gaps (1px `IconMargin`) sit outside `eventBounds` — gap crossing
+  re-arms the container with its 200ms dwell (by-design flicker, not a defect).
+- **Residual found**: `ProductionPaletteWidget.TooltipIcon` is only written on
+  `MouseInputEvent.Move`, but `RefreshIcons()` rebuilds `icons` every `Tick`. A
+  queue cell shifting under a stationary cursor (item completes, buildables
+  appear/disappear, scroll) left the tooltip bound to a removed
+  `ProductionIcon` — wrong-unit or absent tooltip until the pointer moves, the
+  reported intermittent-missing class. `QuotaProductionPaletteWidget` now wires
+  `GetTooltipIcon` to resolve the icon under `Viewport.LastMousePos` per render,
+  matching `DrawHoverHeader`/`DrawMutualExclusionOutlines` — commit `4dfb64030`.
+- Gates: Release build 0 errors; boot-gate PASS
+  (`MenuPostProcessEffect.PostWorldLoaded`, no new exceptions, no orphan
+  process). World-hover absence stays explicitly unresolved per Sol's scope
+  note; interactive screenshot/hover-flow acceptance still needs a driven match.
+
 # 2026-10-08 — Devin-Architect: wave-1 scheduler v3 — fail-closed evidence adjudication
 
 *Devin-Architect.* Sol's wave-5 re-review (REVIEW_2026-10-08_wave5_adjudication)
