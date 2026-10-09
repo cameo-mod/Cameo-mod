@@ -26,6 +26,10 @@ defects; both fixed on the same branch.
   incident for all agents).
 - **Gates**: 49/49 focused (+4), 1300/1300 full suite, Release 0 errors,
   boot-gate PASS (direct-exe launch, PID 8160 killed + verified absent).
+- **REVIEW: APPROVED** — independent re-review of `901d5dace` +
+  `349532da2` (bounded source/focused scope; reviewer re-ran 49/49,
+  verified local==remote). All four findings (F1–F4) closed. Live-match
+  gates remain; no master/release clearance.
 
 # 2026-10-09 — Devin: SW plug capacity (B2/B6) — F2 revised to declared catalogue
 

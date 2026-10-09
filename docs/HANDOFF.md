@@ -4,7 +4,9 @@
 
 `Agent: Devin · branch devin/playtest-b2b6-swcap · worktree C:/cameo-wt/playtest-swcap · base 3d99405bd (published head)`
 
-**INC-ready candidate — NOT merged; runtime match tests still required before release clearance.**
+**INC-ready candidate — independent review APPROVED (F1–F4 all closed, exact
+local==remote `349532da2`). NOT merged; runtime match tests still required
+before release clearance.**
 
 Fixes B2 (multiple SW buildable despite the 1-cap) and B6 (ion uplink re-queueable
 while owned) per fleet spec `SPEC_2026-10-09_devin_plug_slot_capacity.md` (v10
