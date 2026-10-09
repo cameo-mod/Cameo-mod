@@ -20,7 +20,8 @@ def analyze(rows, game_uid, player):
     selected = [r for r in rows if r.get("game_uid") == game_uid and r.get("player") == player]
     report = {"policy": POLICY, "status": "UNKNOWN", "game_uid": game_uid, "player": player,
               "findings": [], "cash_band": {"low": 1000, "high": 10000,
-              "band_ticks": 1500, "zero_ticks": 250, "full_storage_ticks": 250},
+              "band_ticks": 1500, "near_empty_max": 100, "near_empty_ticks": 250,
+              "full_storage_ticks": 250},
               "scope": "economy defects; reasons are diagnostic, not causal proof"}
     if not selected:
         report["error"] = "Missing schema-1 economy health telemetry"
@@ -35,7 +36,7 @@ def analyze(rows, game_uid, player):
     identity_tuple = None
     cancel_windows = {}
     cancelled_ids = set()
-    balances = {name: None for name in ("low", "high", "zero", "full")}
+    balances = {name: None for name in ("low", "high", "near_empty", "full")}
     last_spent, high_spent, pulses = None, None, 0
     ended = False
     try:
@@ -91,6 +92,9 @@ def analyze(rows, game_uid, player):
             if not isinstance(queues, list) or row.get("queues_complete") is not True:
                 raise EvidenceError("incomplete building queue census")
             queue_ids = set()
+            active = row.get("player_active")
+            if type(active) is not bool:
+                raise EvidenceError("missing player active state")
             for queue in queues:
                 if not isinstance(queue, dict):
                     raise EvidenceError("invalid queue state")
@@ -110,10 +114,10 @@ def analyze(rows, game_uid, player):
                 if state == "ready":
                     identity(queue.get("item"))
                     identity(queue.get("item_id"))
-                    if queue["producer_live"] and tick - since >= 250:
+                    if active and queue["producer_live"] and tick - since >= 250:
                         defect("READY_BUILDING_UNPLACED", tick, {"queue_id": queue_id,
                                "item": queue["item"], "age_ticks": tick-since, "reason": reason})
-                if state == "idle" and queue["producer_live"] and tick - since >= 1500:
+                if state == "idle" and active and queue["producer_live"] and tick - since >= 1500:
                     defect("BUILDING_QUEUE_IDLE", tick, {"queue_id": queue_id,
                            "age_ticks": tick-since, "reason": reason})
             cash, resources, capacity, spent = (integer(row.get(k)) for k in
@@ -122,11 +126,8 @@ def analyze(rows, game_uid, player):
                 raise EvidenceError("invalid storage/cumulative spend")
             last_spent = spent
             funds = cash + resources
-            active = row.get("player_active")
-            if type(active) is not bool:
-                raise EvidenceError("missing player active state")
             flags = {"low": active and funds < 1000, "high": active and funds > 10000,
-                     "zero": active and funds == 0,
+                     "near_empty": active and funds <= 100,
                      "full": active and capacity > 0 and resources == capacity}
             for name, flag in flags.items():
                 if not flag:
@@ -139,10 +140,10 @@ def analyze(rows, game_uid, player):
                     if name == "high":
                         high_spent = spent
                 duration = tick - balances[name]
-                threshold = 250 if name in ("zero", "full") else 1500
+                threshold = 250 if name in ("near_empty", "full") else 1500
                 if duration >= threshold:
                     code = {"low": "FUNDS_BELOW_BAND", "high": "FUNDS_ABOVE_BAND",
-                            "zero": "ZERO_FUNDS", "full": "STORAGE_FULL"}[name]
+                            "near_empty": "NEAR_EMPTY_FUNDS", "full": "STORAGE_FULL"}[name]
                     defect(code, tick, {"duration_ticks": duration, "funds": funds,
                                        "resources": resources, "capacity": capacity})
                     if name == "high" and spent - high_spent <= 1000:

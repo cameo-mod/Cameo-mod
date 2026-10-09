@@ -222,8 +222,11 @@ for diagnosis; they do not erase the requested threshold violation. Dead
 producer queues are not treated as a postmortem obligation to produce.
 
 Initial **proposed** cash band is 1000..10000 combined cash+stored resources,
-inclusive. Outside band for1500ticks is a defect; zero total funds for250ticks
-is an additional defect. Full positive-capacity player storage for250ticks is
+inclusive. Outside band for1500ticks is a defect; near-empty total funds
+(<=100) for250ticks is an additional proposed signal. Exact zero is unsuitable:
+the maintainer confirms passive income of one credit per tick below1000 credits.
+Passive income must remain distinct from accepted harvest delivery evidence.
+Full positive-capacity player storage for250ticks is
 a defect. Zero capacity is not100% storage. Above-band spend delta<=1000 is a
 separate float/no-spending signal. These are starting thresholds to validate
 by faction/economy; no universal calibrated optimal bank is claimed. Resource
@@ -251,4 +254,5 @@ Runtime logger/Architect queue observer must supply these fields before the
 driver can require this new gate. Actual accepted delivery remains an additional
 independent event, never inferred from cash/credited income. Tests cover exact
 250/1500 boundaries, ready/idle, dead producer, cancellations, balance recovery,
-zero/full storage, low spending and malformed/incomplete capture.
+near-empty/full storage, passive-income starvation, inactive players, low spending
+and malformed/incomplete capture.

@@ -44,12 +44,27 @@ class InvariantTests(unittest.TestCase):
     def test_normal_band_and_production_observed(self):
         self.assertEqual(verifier.analyze(capture(), "g", "p")["status"], "OBSERVED_HEALTHY")
 
-    def test_zero_full_and_above_band_thresholds(self):
-        self.assertIn("ZERO_FUNDS", codes(capture(250, cash=0)))
+    def test_near_empty_full_and_above_band_thresholds(self):
+        self.assertIn("NEAR_EMPTY_FUNDS", codes(capture(250, cash=0)))
+        self.assertIn("NEAR_EMPTY_FUNDS", codes(capture(250, cash=100)))
+        self.assertNotIn("NEAR_EMPTY_FUNDS", codes(capture(250, cash=101)))
         self.assertIn("STORAGE_FULL", codes(capture(250, cash=5000, resources=10000)))
         self.assertNotIn("STORAGE_FULL", codes(capture(250, capacity=0)))
         self.assertIn("FUNDS_ABOVE_BAND", codes(capture(1500, cash=15000)))
         self.assertNotIn("FUNDS_ABOVE_BAND", codes(capture(1450, cash=15000)))
+
+    def test_passive_income_does_not_hide_sustained_low_funds(self):
+        rows = capture(1500, cash=1)
+        for row in rows:
+            row["cash"] = 1 + row["tick"] % 100
+        self.assertIn("FUNDS_BELOW_BAND", codes(rows))
+
+    def test_inactive_player_not_postmortem_queue_defect(self):
+        for state in ("ready", "idle"):
+            rows = capture(1500, state)
+            for row in rows:
+                row["player_active"] = False
+            self.assertEqual(codes(rows), set())
 
     def test_cash_float_with_little_spend(self):
         rows = capture(cash=50000)
