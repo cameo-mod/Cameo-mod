@@ -6,7 +6,7 @@ pregame multiset with volatile-heartbeat exclusion; terminal boundary
 derivation F_term/M_term; B = F_term + L persistence; roster-projected
 mask verification (map-side bots absent from trailer); contiguity-through-B;
 fail-closed NO_BOUNDARY / BOUNDARY_MISMATCH / TERMINAL_MASK_MISMATCH /
-INCOMPLETE_CAPTURE; and the frozen-comparator byte pin.
+INCOMPLETE_CAPTURE; and the comparator byte pin.
 """
 import hashlib
 import pathlib
@@ -22,9 +22,15 @@ sys.path.insert(0, str(ROOT / "tools/ai"))
 import order_stream_diff as osd  # noqa: E402
 import order_stream_diff_bounded as osdb  # noqa: E402
 
-# Frozen comparator byte pin (same digest wave1_scheduler asserts).
-FROZEN_SHA256 = '88d9be75d73c36233ad9e7d341c505b1ff76150' \
-                '7ebe23f58438f6d59e1586014'
+# Comparator byte pin (same digest wave1_scheduler asserts). Re-pinned
+# 2026-10-08: Sol's multiplayer-frozen-target finding — the parser accepted
+# target types tt in (0,1) while engine TargetType is Invalid0 Actor1
+# Terrain2 FrozenActor3, so legitimate FrozenActor orders went UNPARSED and
+# tt=0 silently consumed an 8-byte Actor payload. Repaired decode; the
+# frozen wave-1 worktree copy must be updated to this byte set before the
+# next wave (verify_tools fails closed until then).
+FROZEN_SHA256 = '1e089b45d9ea4cf8fa70cf915dbfc8f8e6cc43fea' \
+                '9879019828b3266305ffe9e'
 
 
 def write_str(s):

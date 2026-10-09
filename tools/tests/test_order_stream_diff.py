@@ -204,3 +204,70 @@ def test_trailing_disconnect_is_not_flush(tmp_path):
     b = [sync_pkt(1), sync_pkt(2),
          struct.pack('<i', 9) + b'\xbf' + b'client left']
     assert verdict(a, b, tmp_path) == 1
+
+
+# --- target-enum repair (Sol multiplayer-frozen-target finding) ---
+# Engine TargetType (Target.cs): Invalid=0 Actor=1 Terrain=2 FrozenActor=3.
+# Serialize only sets the Target flag when type != Invalid, so tt=0 on the
+# wire is malformed; tt=1 and tt=3 each carry 8 payload bytes (u32+i32 and
+# u32+u32), tt=2 carries the terrain layout.
+
+def order_pkt_target(frame, name, subject, tt, payload):
+    body = struct.pack('<i', frame)
+    body += b'\xff' + write_str(name) + struct.pack('<h', 0x81)
+    body += struct.pack('<I', subject) + bytes([tt]) + payload
+    return body
+
+
+def test_frozen_actor_target_parses(tmp_path):
+    # tt=3 (FrozenActor: u32 viewerPlayerActorID + u32 frozenActorID) must
+    # decode — previously fell into 'unknown target type' -> UNPARSED.
+    fa = struct.pack('<II', 7, 99)
+    pkts = [order_pkt_target(5, 'CaptureActor', 42, 3, fa), sync_pkt(6)]
+    assert verdict(pkts, pkts, tmp_path) == 0
+
+
+def test_frozen_actor_target_alignment(tmp_path):
+    # The 8 payload bytes are consumed exactly — a following order in the
+    # same packet must still parse, not slide onto garbage.
+    fa = struct.pack('<II', 7, 99)
+    pkt = order_pkt_target(5, 'CaptureActor', 42, 3, fa)
+    pkt += b'\xff' + write_str('Stop') + struct.pack('<h', 0x80) \
+        + struct.pack('<I', 5)
+    a = [pkt]
+    b = [order_pkt_target(5, 'CaptureActor', 42, 3, fa),
+         order_pkt(5, ('Stop', 0x80, 5))]
+    assert verdict(a, b, tmp_path) == 0
+
+
+def test_frozen_actor_id_difference_diverges(tmp_path):
+    a = [order_pkt_target(5, 'CaptureActor', 42, 3, struct.pack('<II', 7, 99))]
+    b = [order_pkt_target(5, 'CaptureActor', 42, 3, struct.pack('<II', 7, 98))]
+    assert verdict(a, b, tmp_path) == 1
+
+
+def test_actor_target_parses(tmp_path):
+    # tt=1 (Actor: u32 actorID + i32 generation) — the type-0 mislabel is
+    # gone; a real actor target still decodes and compares.
+    a = [order_pkt_target(5, 'Attack', 42, 1, struct.pack('<Ii', 55, 0))]
+    b = [order_pkt_target(5, 'Attack', 42, 1, struct.pack('<Ii', 55, 0))]
+    assert verdict(a, b, tmp_path) == 0
+
+
+def test_actor_generation_difference_diverges(tmp_path):
+    a = [order_pkt_target(5, 'Attack', 42, 1, struct.pack('<Ii', 55, 0))]
+    b = [order_pkt_target(5, 'Attack', 42, 1, struct.pack('<Ii', 55, 1))]
+    assert verdict(a, b, tmp_path) == 1
+
+
+def test_invalid_target_type_fails_closed(tmp_path):
+    # tt=0 (Invalid) is never emitted under the Target flag — the old decoder
+    # silently consumed 8 bytes as if it were an Actor. Now: malformed ->
+    # UNPARSED, byte-identical is still not proof.
+    pkts = [order_pkt_target(5, 'Move', 42, 0, struct.pack('<Ii', 1, 2))]
+    assert verdict(pkts, pkts, tmp_path) == 3
+
+
+def test_unknown_target_type_fails_closed(tmp_path):
+    pkts = [order_pkt_target(5, 'Move', 42, 9, struct.pack('<Ii', 1, 2))]
+    assert verdict(pkts, pkts, tmp_path) == 3

@@ -2,9 +2,13 @@
 r"""Outcome-bounded order-stream comparator — Phase-A of
 SPEC_2026-10-08_deterministic_replay_cutoff.md (Architect ruling v2).
 
-Companion to the frozen strict comparator (order_stream_diff.py, unchanged —
-this tool imports it as a library so the wire-format parse is the approved
-implementation byte-for-byte). Adds the deterministic terminal boundary:
+Companion to the pinned strict comparator (order_stream_diff.py — this tool
+imports it as a library so the wire-format parse is the approved
+implementation byte-for-byte). Pinned rev re-based 2026-10-08 for the
+TargetType-enum repair (Invalid0 Actor1 Terrain2 FrozenActor3): tt=3
+FrozenActor targets now decode instead of going UNPARSED, and tt=0 can no
+longer masquerade as an Actor payload. Adds the deterministic terminal
+boundary:
 
   F_term  = first net frame whose SYNCHASH record carries the final
             defeatState mask (u64 at payload bytes 5-12 of the 13-byte sync

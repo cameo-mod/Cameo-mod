@@ -39,10 +39,10 @@ def parse_orders(pkt):
         if flags & 0x80:
             subject, = struct.unpack_from('<I', pkt, p); p += 4
         if flags & 0x01:  # Target
+            # TargetType (engine Target.cs): Invalid=0 Actor=1 Terrain=2
+            # FrozenActor=3. Serialize never emits tt=0 under the Target flag.
             tt = pkt[p]; p += 1
-            if tt == 0:      # Actor: u32 + i32
-                p += 8
-            elif tt == 1:    # FrozenActor: u32 + u32
+            if tt in (1, 3):   # Actor u32+i32 / FrozenActor u32+u32
                 p += 8
             elif tt == 2:    # Terrain
                 if flags & 0x40:  # TargetIsCell: i32 + u8
@@ -52,6 +52,8 @@ def parse_orders(pkt):
                     n, = struct.unpack_from('<h', pkt, p); p += 2
                     if n != -1:
                         p += 12 * n
+            else:
+                break          # malformed: tt=0 or >3 — engine never emits it
         if flags & 0x04:  # TargetString
             _, p = read_str(pkt, p)
         if flags & 0x02:  # ExtraActors

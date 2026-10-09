@@ -1,3 +1,32 @@
+# 2026-10-08 — Devin-Architect: TargetType-enum repair — strict comparator + trace decoder re-pinned
+
+*Devin-Architect.* Sol's multiplayer-human replay audit found the published decoder accepting
+`tt in (0,1)` for target types while the engine enum is `TargetType : byte { Invalid, Actor,
+Terrain, FrozenActor }` (Target.cs:18). Consequence: legitimate `FrozenActor` (tt=3)
+CaptureActor/Attack packets went UNPARSED (Sol: BotsSuck4 23 tails, BotsSuck5 3 tails) and `tt=0`
+silently consumed an 8-byte Actor payload, desyncing the packet parse.
+
+- `order_stream_diff.py` and `order_trace.py` now decode per `Order.Serialize`/`Deserialize`
+  (Order.cs:392-435, 116-176): `tt=1` Actor `u32 actorID + i32 generation`; `tt=2` Terrain (cell
+  or position-list, unchanged); `tt=3` FrozenActor `u32 viewerPlayerActorID + u32 frozenActorID`;
+  `tt=0`/`tt>3` stay fail-closed UNPARSED — `Serialize` only sets the Target flag when the type is
+  not Invalid, so a 0/other byte on the wire is malformed for this engine.
+- Re-pin (coordinated): comparator `88d9be75…` -> `1e089b45d9ea4cf8fa70cf915dbfc8f8e6cc43fea9879019828b3266305ffe9e`,
+  trace `4da5b841…` -> `af14b88696f1600fd61f4c551370da46afbec19c8caa0aa56fd749d1b8f6d9c2` in
+  `wave1_scheduler.TOOL_SHA256` and `FROZEN_SHA256` in `test_order_stream_diff_bounded.py`.
+  The frozen wave-1 worktree copies (`parity-wave1-bd`) must be byte-updated to the repaired revs
+  before the next wave — `verify_tools()` fails closed on the stale pin, by design.
+- Regressions in `test_order_stream_diff.py` (+7): FrozenActor parse + intra-packet alignment +
+  payload diff; Actor parse + generation diff; `tt=0` and `tt=9` fail-closed UNPARSED.
+- Re-verified on the frozen wave-5 set: 6/6 `IDENTICAL_OUTCOME_BOUNDED_TAIL`, identical F_term/
+  M_term boundaries; all 12 captures extract cleanly with zero unparsed under the repaired decoder
+  (1v1 bot streams did not exercise FrozenActor — the defect bit human multiplayer captures).
+- Proof scope note: previous evidence derived under the old decoder treated tt=3 orders as UNPARSED
+  tail bytes; under the repair they compare as canonical ORDER records — strictly stronger.
+- Gates: combined comparator+scheduler suite 85/85. Branch `devin/bot-determinism`; no master push.
+
+---
+
 # 2026-10-08 — Devin-Architect: Phase-A comparator — Sol review hardening
 
 *Devin-Architect.* Sol's review of `08f8fc770` found two fail-closed gaps,

@@ -28,8 +28,11 @@ Frozen spec (coordinator 2026-10-08):
   (foundation 8c2b385f82 + RNG pick); mod devin/bot-determinism@a9349d015619c5625cc188142ad72c10b391a16e.
 - Seed: committed CameoDevSeed — CAMEO_DEV_SEED env or Cameo.DevSeed=<int> server arg.
   (OPENRA_PARITY_SEED is obsolete.)
-- Comparator frozen at delta-approved 32a0f925c (sha below); only scheduler-
-  side evidence handling is versioned here.
+- Comparator pinned at delta-approved 32a0f925c lineage (sha below);
+  re-pinned 2026-10-08 after Sol's TargetType-enum repair — the frozen
+  worktree's tool copies must be byte-updated to the repaired revs before
+  any wave; verify_tools() refuses to launch on the stale bytes. Only
+  scheduler-side evidence handling is versioned here.
 
 Policy: one scheduler, MAX_WORKERS concurrent game workers machine-wide
 (foreign OpenRA instances count), isolated per-worker support dirs
@@ -59,10 +62,15 @@ BOT = "hard"
 TIME_LIMIT = 1
 
 # Pinned tool SHA-256 (coordinator-frozen); verified before any launch.
+# Re-pinned 2026-10-08: target-type enum repair (engine TargetType is
+# Invalid0 Actor1 Terrain2 FrozenActor3; the previous comparator accepted
+# tt in (0,1), mis-decoding tt=0 as Actor and dropping FrozenActor packets
+# as UNPARSED). The frozen WORKTREE copies must be updated to the repaired
+# bytes before the next wave — verify_tools() fails closed until then.
 TOOL_SHA256 = {
-    "tools/ai/order_stream_diff.py": "88d9be75d73c36233ad9e7d341c505b1ff761507ebe23f58438f6d59e1586014",
+    "tools/ai/order_stream_diff.py": "1e089b45d9ea4cf8fa70cf915dbfc8f8e6cc43fea9879019828b3266305ffe9e",
     "tools/ai/run_ai_match_batch.py": "ed3aaed6bf713224d7bdd2664a525cd5b37d560f5173d6b0e26245ac35f35071",
-    "tools/ai/order_trace.py": "4da5b841a91093b7a50fe4cfae2e72cf26ddfd10a75673e46ff6da729365bf82",
+    "tools/ai/order_trace.py": "af14b88696f1600fd61f4c551370da46afbec19c8caa0aa56fd749d1b8f6d9c2",
 }
 
 
