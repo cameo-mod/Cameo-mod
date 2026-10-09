@@ -3319,3 +3319,7 @@ Rule: in tooltip `BeforeRender`, re-assign `Visible`, `Text` and `Bounds` from c
 on every pass, feed every measured label into the parent bounds aggregate, and null-guard every
 trait lookup — an exception there kills the tooltip silently, and stale widget state leaks across
 hover targets.
+
+Scope note: this entry covers palette/icon tooltip absence and stale-layout defects only.
+The world-hover absence (hovering a live world actor yields no tooltip at all) is NOT explained
+by this fix and stays explicitly unresolved pending in-game evidence.
