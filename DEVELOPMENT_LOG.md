@@ -20659,3 +20659,32 @@ exhaustion could then publish a false Unserved.
   merged; `c76283c0b` is an ancestor). The queue-wiring NOTE now carries
   merged-master call-site coordinates (:600 admission, :1326/:1390/:1466
   release sites, :1916-1945 commit/fail block).
+
+# 2026-10-09 — REPAIR-B3 R3.5: owner-keyed release (answers the reviewer's set-drift question)
+
+*Devin-Developer.* The reviewer's queue-wiring insertion map
+(`MAP_2026-10-09_b3_queue_wiring_sites.md`, sites on master `4da849874`)
+closed with an open contract question: reserve/bind/commit must share the
+same covered set, with `modelVersion` guarding read→commit. Analyzing it
+exposed a leak class in my own prepared hunks: release sites recomputed
+`RefineryClaimCoveredAnchors(anchor)` at teardown, but that set can drift
+from the admission-time set — members taken, covered by another commit, or
+re-modelled under a new version. A recomputed set could exclude a live hold
+and leak it until expiry/prune.
+
+- **Fix:** `ReleaseRefineryAnchors(object owner)` — a new interface member
+  backed by `RefineryAnchorReservations.ReleaseAllForOwner` — frees every
+  anchor the demand holds. Teardown (expiry, cancellation, binding unwind)
+  needs no set at all: nothing to recompute, nothing to persist on
+  `ExpansionDemand`, idempotent, returns the count.
+- **Resulting contract** (documented in the fleet NOTE, R3.5 section):
+  one set at reserve/bind (version-guarded), zero sets at teardown
+  (owner-keyed), provider-internal set at commit — `RefineryClaimCommitted`
+  already clears every covered member's reservation internally.
+- **Regression:** `ReleaseAllForOwnerFreesTheWholeDriftedSet` —
+  frees the full set, leaves another owner's hold untouched, idempotent on
+  re-release, freed anchors reservable.
+- **Verification:** Release build 0/0; `dotnet test` = **1300/1300**
+  (1299 + 1). No world-facing surface change — fog audit unchanged.
+  Boot-gate still deferred (serial lane holds OpenRA.exe). No merge — the
+  queue-side wiring remains Architect-owned.

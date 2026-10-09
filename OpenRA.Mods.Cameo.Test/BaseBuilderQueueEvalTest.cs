@@ -989,5 +989,29 @@ namespace OpenRA.Mods.Cameo.Test
 			table.ClearAll(set);
 			Assert.That(table.Count, Is.EqualTo(0));
 		}
+
+		[Test]
+		public void ReleaseAllForOwnerFreesTheWholeDriftedSet()
+		{
+			// R3: teardown must not recompute the reserved set — between admission and release a
+			// member may be taken/covered/re-modelled elsewhere, so a recomputed set could exclude
+			// a live hold and leak it. Owner-keyed release frees everything the owner holds.
+			var table = new RefineryAnchorReservations();
+			var owner = new object();
+			var other = new object();
+			var set = new[] { new CPos(1, 1), new CPos(2, 2), new CPos(3, 3) };
+
+			table.TryReserveAll(set, owner, 0, 100, _ => false);
+			table.TryReserve(new CPos(9, 9), other, 0, 100, _ => false);
+
+			Assert.That(table.ReleaseAllForOwner(owner), Is.EqualTo(3));
+			Assert.That(table.LiveAt(new CPos(1, 1), 10), Is.False);
+			Assert.That(table.LiveAt(new CPos(3, 3), 10), Is.False);
+			Assert.That(table.LiveAt(new CPos(9, 9), 10), Is.True);    // other's hold untouched
+			Assert.That(table.ReleaseAllForOwner(owner), Is.EqualTo(0)); // idempotent
+
+			// And the freed anchors are reservable by someone else.
+			Assert.That(table.TryReserve(new CPos(2, 2), other, 10, 50, _ => false), Is.True);
+		}
 	}
 }

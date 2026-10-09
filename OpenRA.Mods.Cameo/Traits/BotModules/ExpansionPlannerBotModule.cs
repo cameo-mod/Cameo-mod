@@ -573,6 +573,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		int IBotExpansionTargetProvider.ReleaseRefineryAnchors(IReadOnlyCollection<CPos> set, object owner) =>
 			anchorReservations.ReleaseAll(set, owner);
 
+		int IBotExpansionTargetProvider.ReleaseRefineryAnchors(object owner) =>
+			anchorReservations.ReleaseAllForOwner(owner);
+
 		bool IBotExpansionTargetProvider.RefineryAnchorsReserved(IReadOnlyCollection<CPos> set, object owner)
 		{
 			var tick = world.WorldTick;

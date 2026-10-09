@@ -116,6 +116,25 @@ namespace OpenRA.Mods.CA.Traits
 			return released;
 		}
 
+		/// <summary>
+		/// REPAIR-B3: release every anchor <paramref name="owner"/> holds — the set-free teardown:
+		/// the set reserved at admission may have drifted by release time (members taken, covered,
+		/// or re-modelled elsewhere), so releasing by owner cannot leak a member a recomputed set
+		/// forgot. Idempotent; returns the count released.
+		/// </summary>
+		public int ReleaseAllForOwner(object owner)
+		{
+			var released = 0;
+			foreach (var kv in held.ToList())
+				if (ReferenceEquals(kv.Value.Owner, owner))
+				{
+					held.Remove(kv.Key);
+					released++;
+				}
+
+			return released;
+		}
+
 		/// <summary>Every member live-held by exactly this owner.</summary>
 		public bool LiveSetFor(IReadOnlyCollection<CPos> anchors, object owner, int now)
 		{
@@ -263,6 +282,14 @@ namespace OpenRA.Mods.CA.Traits
 
 		/// <summary>REPAIR-B3: release <paramref name="owner"/>'s hold on every member — idempotent; returns released count.</summary>
 		int ReleaseRefineryAnchors(IReadOnlyCollection<CPos> anchors, object owner) => 0;
+
+		/// <summary>
+		/// REPAIR-B3: release EVERY anchor <paramref name="owner"/> holds — the teardown call for
+		/// cancellation/expiry/unbind/commit: the set reserved at admission may have drifted by
+		/// release time (members taken, covered, or re-modelled elsewhere), so releasing by owner
+		/// cannot leak a member a recomputed set forgot. Idempotent; returns the count released.
+		/// </summary>
+		int ReleaseRefineryAnchors(object owner) => 0;
 
 		/// <summary>REPAIR-B3: every member of the set is live-held by exactly this owner and untaken.</summary>
 		bool RefineryAnchorsReserved(IReadOnlyCollection<CPos> anchors, object owner) => false;
