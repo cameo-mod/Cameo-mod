@@ -486,15 +486,29 @@ namespace OpenRA.Mods.CA.Traits
 	}
 
 	// REPLAY-HEALTH-LOGGER (ACK-2, task 01a12023): record-only queue transitions for the
-	// bounded runtime logger. The manager emits synchronously at the tick a transition is
-	// observed; observers live on the bot's PlayerActor, are resolved once, and must not
-	// issue orders, mutate world state, or consume RNG. Schema-2 contract: Cancelled
-	// carries event-local player_active/producer_live/cancellation_class; a field that
-	// cannot be resolved at the emit site is null/None — never inferred from a pulse.
+	// bounded runtime logger. Observers live on the bot's PlayerActor, are resolved once, and
+	// must not issue orders, mutate world state, or consume RNG. Schema-2 contract: Cancelled
+	// carries event-local player_active/producer_live/cancellation_class; a field that cannot
+	// be resolved at the emit site is null/None — never inferred from a pulse.
+	//
+	// Resolution semantics (Sol review 22861e442 F1-F5):
+	// - Started/Ready emit when the per-tick queue probe OBSERVES the item — the exact tick
+	//   the engine applied the production order / completed the item, not the tick the
+	//   manager happened to sweep (WaitTicks and the latch early-return would otherwise lag).
+	// - Cancelled/Placed are terminal RESOLUTIONS: the decision sites only record a pending
+	//   request, and the record emits on the tick the item actually leaves the queue.
+	// - An item that leaves with no pending request is an engine or module-side removal:
+	//   emitted as Removed, classified only from event-local state (Elimination / Destruction
+	//   / None = UNKNOWN). The module's demand cancels register via NoteExternalCancel so
+	//   they resolve as Cancelled/DemandCancel instead of UNKNOWN.
+	// - EpisodeId is per queue-item instance: the same type name re-queued is a new episode;
+	//   0 = UNKNOWN (baseline items, producer-less latch records).
+	// - All probe/tracker state is lazy: with no observer trait registered the emit path is
+	//   one null check and nothing is allocated.
 
-	public enum BotQueueTransitionKind { Started, Ready, Placed, Cancelled, Held, Resumed }
+	public enum BotQueueTransitionKind { Started, Ready, Placed, Cancelled, Held, Resumed, Removed }
 
-	public enum BotQueueTransitionReason { None, LimitReached, NoRefinerySite, SaturationLatch, RelocationLatch, DemandHold, CrawlHold, FrontBackHold }
+	public enum BotQueueTransitionReason { None, LimitReached, NoRefinerySite, SaturationLatch, RelocationLatch, DemandHold, CrawlHold, FrontBackHold, DemandCancel }
 
 	public enum BotQueueCancellationClass { None, Production, Destruction, Elimination }
 
@@ -505,6 +519,7 @@ namespace OpenRA.Mods.CA.Traits
 		public readonly string Queue;
 		public readonly BuildingType Category;
 		public readonly uint ProducerActorId;
+		public readonly uint EpisodeId;
 		public readonly BotQueueTransitionKind Kind;
 		public readonly BotQueueTransitionReason Reason;
 		public readonly bool PlayerActive;
@@ -512,7 +527,7 @@ namespace OpenRA.Mods.CA.Traits
 		public readonly BotQueueCancellationClass CancellationClass;
 
 		public BotQueueTransition(int tick, string itemId, string queue, BuildingType category, uint producerActorId,
-			BotQueueTransitionKind kind, BotQueueTransitionReason reason, bool playerActive, bool? producerLive,
+			uint episodeId, BotQueueTransitionKind kind, BotQueueTransitionReason reason, bool playerActive, bool? producerLive,
 			BotQueueCancellationClass cancellationClass)
 		{
 			Tick = tick;
@@ -520,6 +535,7 @@ namespace OpenRA.Mods.CA.Traits
 			Queue = queue;
 			Category = category;
 			ProducerActorId = producerActorId;
+			EpisodeId = episodeId;
 			Kind = kind;
 			Reason = reason;
 			PlayerActive = playerActive;
@@ -534,35 +550,70 @@ namespace OpenRA.Mods.CA.Traits
 	}
 
 	/// <summary>
-	/// REPLAY-HEALTH-LOGGER: transition dedupe for the manager's emits — one record per
-	/// (producer, item, kind, reason) episode; identical consecutive transitions are noise
-	/// (a Held while a produced item waits ticks every sweep). A Cancelled item also shadows
-	/// Ready: CancelProduction is an in-flight order, so the item can still sit at the queue
-	/// head, still Done, for a tick or two — re-announcing Ready after its cancel would
-	/// invert the pair in the log. A Started clears the producer's shadowed cancels so a
-	/// re-queued same-name item announces fresh.
+	/// REPLAY-HEALTH-LOGGER: per-item episode and emit dedupe state. Keys are the queue item
+	/// objects themselves (reference identity), so a re-queued same-name item is a distinct
+	/// episode. Maps are bounded by the number of live queued items and producers — never
+	/// cumulative history. All entry points are world-free seams for the regression tests.
 	/// </summary>
 	public sealed class BotQueueEpisodeTracker
 	{
-		readonly Dictionary<uint, (string Item, BotQueueTransitionKind Kind, BotQueueTransitionReason Reason)> last = [];
-		readonly HashSet<(uint Producer, string Item)> cancelled = [];
+		readonly Dictionary<object, uint> episodes = [];
+		readonly HashSet<object> readyAnnounced = [];
+		readonly Dictionary<uint, (object ItemRef, string Item, BotQueueTransitionKind Kind, BotQueueTransitionReason Reason)> last = [];
+		uint nextEpisode = 1;
 
-		public bool EmitGate(uint producerId, string item, BotQueueTransitionKind kind, BotQueueTransitionReason reason)
+		/// <summary>Assigns a fresh episode id to a newly observed queue item.</summary>
+		public uint BeginEpisode(object item) => episodes[item] = nextEpisode++;
+
+		/// <summary>The item's episode id, or 0 = UNKNOWN when it predates observation.</summary>
+		public uint EpisodeOf(object item) => item != null && episodes.TryGetValue(item, out var e) ? e : 0;
+
+		/// <summary>Drops the item's episode and Ready flag — it left the queue.</summary>
+		public void EndEpisode(object item)
 		{
-			if (kind == BotQueueTransitionKind.Ready && cancelled.Contains((producerId, item)))
+			if (item == null)
+				return;
+
+			episodes.Remove(item);
+			readyAnnounced.Remove(item);
+		}
+
+		/// <summary>True the first time a Done head item is announced — once per item instance.</summary>
+		public bool AnnounceReady(object item) => readyAnnounced.Add(item);
+
+		/// <summary>Suppresses an identical consecutive transition (a Held re-swept every
+		/// tick emits once); item reference identity keeps a re-queued same-name item a new
+		/// episode.</summary>
+		public bool EmitGate(uint producerId, object itemRef, string item, BotQueueTransitionKind kind, BotQueueTransitionReason reason)
+		{
+			if (last.TryGetValue(producerId, out var l) && ReferenceEquals(l.ItemRef, itemRef) && l.Item == item && l.Kind == kind && l.Reason == reason)
 				return false;
 
-			if (last.TryGetValue(producerId, out var l) && l.Item == item && l.Kind == kind && l.Reason == reason)
-				return false;
-
-			last[producerId] = (item, kind, reason);
-
-			if (kind == BotQueueTransitionKind.Cancelled)
-				cancelled.Add((producerId, item));
-			else if (kind == BotQueueTransitionKind.Started)
-				cancelled.RemoveWhere(c => c.Producer == producerId);
-
+			last[producerId] = (itemRef, item, kind, reason);
 			return true;
 		}
+	}
+
+	/// <summary>A terminal request in flight — resolves to a record on the tick the item
+	/// actually leaves the queue. Item is null when only the name is known (module-side
+	/// demand cancels); such an entry resolves against the next removed same-name item.</summary>
+	public sealed class BotQueuePendingTerminal
+	{
+		public object Item;
+		public string ItemName;
+		public BotQueueTransitionKind Kind;
+		public BotQueueTransitionReason Reason;
+		public BotQueueCancellationClass Class;
+	}
+
+	/// <summary>Per-queue probe state for one manager category: the last observed item list
+	/// plus terminal requests awaiting resolution. Bounded by queue length — no history.
+	/// SeenTick marks the last probe sweep the queue appeared in; a stale watch means the
+	/// producer's trait disabled (dead) and its contents resolve as removals.</summary>
+	public sealed class BotQueueWatch
+	{
+		public readonly List<object> Items = [];
+		public readonly List<BotQueuePendingTerminal> Pending = [];
+		public int SeenTick = -1;
 	}
 }

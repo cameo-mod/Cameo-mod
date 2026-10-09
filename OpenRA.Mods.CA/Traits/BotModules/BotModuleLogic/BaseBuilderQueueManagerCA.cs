@@ -80,11 +80,12 @@ namespace OpenRA.Mods.CA.Traits
 		// production. Empty = nothing pauses, upstream-identical.
 		IBotRequestPauseBuildingProduction[] pauseBuilding;
 
-		// REPLAY-HEALTH-LOGGER (ACK-2, task 01a12023): record-only queue-transition dispatch —
-		// resolved once like the other observer seams; no observers costs one empty-array check.
-		// The episode tracker dedupes Held/Ready so only transitions emit, never steady state.
+		// REPLAY-HEALTH-LOGGER (ACK-2, task 01a12023): record-only queue-transition dispatch.
+		// Everything here is lazy — with no observer trait on the PlayerActor the seam is one
+		// null check per Tick and no state is ever allocated (Sol review F5).
 		IBotBuildQueueObserver[] queueObservers;
-		readonly BotQueueEpisodeTracker queueEpisodes = new();
+		BotQueueEpisodeTracker queueEpisodes;
+		Dictionary<ProductionQueue, BotQueueWatch> queueWatches;
 
 		public BaseBuilderQueueManagerCA(BaseBuilderBotModuleCA baseBuilder, string category, Player p, PowerManager pm,
 			PlayerResources pr, IResourceLayer rl)
@@ -120,25 +121,179 @@ namespace OpenRA.Mods.CA.Traits
 			buildingIntervalModifier = botLimits.Info.BuildingIntervalModifier;
 		}
 
-		// REPLAY-HEALTH-LOGGER (ACK-2): emit one record-only transition to every registered
-		// observer. Event-local state is resolved here, at the emit tick — a producer-less
-		// transition (latch resume) carries ProducerActorId 0 and ProducerLive null = UNKNOWN.
-		// EmitGate dedupes identical consecutive transitions and shadows a cancelled item's
-		// phantom Ready while its cancel order is still in flight.
-		void EmitQueueTransition(ProductionQueue queue, Actor producer, string item, BuildingType category,
-			BotQueueTransitionKind kind, BotQueueTransitionReason reason,
-			BotQueueCancellationClass cancellationClass = BotQueueCancellationClass.None)
+		// REPLAY-HEALTH-LOGGER (ACK-2, Sol review F1/F3/F5): a registered observer turns the
+		// seam on — observers resolve once, the tracker and per-queue watches allocate lazily.
+		bool ObserveQueueTransitions()
 		{
 			queueObservers ??= player.PlayerActor.TraitsImplementing<IBotBuildQueueObserver>().ToArray();
 			if (queueObservers.Length == 0)
+				return false;
+
+			queueEpisodes ??= new BotQueueEpisodeTracker();
+			queueWatches ??= new Dictionary<ProductionQueue, BotQueueWatch>();
+			return true;
+		}
+
+		// Every-tick item-list reconciliation (F2/F3/F4): runs before the latch and WaitTicks
+		// early returns so Started/Ready carry the exact observation tick and terminal records
+		// fire when the item actually leaves the queue. A queue that drops out of FindQueues
+		// (producer dead -> trait disabled) still resolves its contents as removals, so a
+		// destroyed producer never silently swallows records. Bounded by queue count and
+		// length — trait-list iteration only, no scans, orders, or RNG.
+		void ProbeQueueTransitions()
+		{
+			var tick = world.WorldTick;
+			foreach (var queue in AIUtils.FindQueues(player, Category))
+			{
+				if (!queueWatches.TryGetValue(queue, out var watch))
+					queueWatches[queue] = watch = new BotQueueWatch();
+
+				watch.SeenTick = tick;
+				var now = queue.AllQueued();
+
+				foreach (var old in watch.Items)
+				{
+					var oldItem = (ProductionItem)old;
+					if (!now.Contains(oldItem))
+						ResolveRemovedItem(queue, watch, oldItem);
+				}
+
+				foreach (var it in now)
+				{
+					if (watch.Items.Contains(it))
+						continue;
+
+					var episode = queueEpisodes.BeginEpisode(it);
+					EmitQueueTransition(queue, queue.Actor, it, it.Item, QueueCategoryOf(it.Item),
+						BotQueueTransitionKind.Started, BotQueueTransitionReason.None,
+						BotQueueCancellationClass.None, episode);
+				}
+
+				var head = now.FirstOrDefault();
+				if (head != null && head.Done && queueEpisodes.AnnounceReady(head))
+					EmitQueueTransition(queue, queue.Actor, head, head.Item, QueueCategoryOf(head.Item),
+						BotQueueTransitionKind.Ready, BotQueueTransitionReason.None);
+
+				watch.Items.Clear();
+				foreach (var it in now)
+					watch.Items.Add(it);
+			}
+
+			// Stale watches: the queue left FindQueues (disabled or destroyed producer) —
+			// every remaining item resolves as a removal on this observation tick.
+			foreach (var kv in queueWatches)
+			{
+				var watch = kv.Value;
+				if (watch.SeenTick == tick || watch.Items.Count == 0)
+					continue;
+
+				foreach (var old in watch.Items)
+					ResolveRemovedItem(kv.Key, watch, (ProductionItem)old);
+
+				watch.Items.Clear();
+				watch.Pending.Clear();
+				watch.SeenTick = tick;
+			}
+		}
+
+		// The item left its queue: a pending request resolves to its recorded terminal kind;
+		// no request means engine cleanup or a module-side cancel — Removed, classified only
+		// from event-local state (Elimination / Destruction / None = UNKNOWN).
+		void ResolveRemovedItem(ProductionQueue queue, BotQueueWatch watch, ProductionItem oldItem)
+		{
+			var episode = queueEpisodes.EpisodeOf(oldItem);
+			queueEpisodes.EndEpisode(oldItem);
+
+			var pending = FindPending(watch, oldItem);
+			if (pending != null)
+			{
+				watch.Pending.Remove(pending);
+				var kind = pending.Kind;
+				var reason = pending.Reason;
+				var cls = pending.Class;
+				var live = !queue.Actor.IsDead && !queue.Actor.Disposed;
+
+				// A placement can't resolve when its producer died with the order in
+				// flight; likewise a production cancel owed to that death is Destruction.
+				if (kind == BotQueueTransitionKind.Placed && !live)
+				{
+					kind = BotQueueTransitionKind.Removed;
+					reason = BotQueueTransitionReason.None;
+					cls = BotQueueCancellationClass.Destruction;
+				}
+				else if (!live && cls == BotQueueCancellationClass.Production)
+					cls = BotQueueCancellationClass.Destruction;
+
+				EmitQueueTransition(queue, queue.Actor, oldItem, oldItem.Item, QueueCategoryOf(oldItem.Item),
+					kind, reason, cls, episode);
+			}
+			else
+			{
+				var cls = player.WinState != WinState.Undefined ? BotQueueCancellationClass.Elimination
+					: queue.Actor.IsDead || queue.Actor.Disposed ? BotQueueCancellationClass.Destruction
+					: BotQueueCancellationClass.None;
+				EmitQueueTransition(queue, queue.Actor, oldItem, oldItem.Item, QueueCategoryOf(oldItem.Item),
+					BotQueueTransitionKind.Removed, BotQueueTransitionReason.None, cls, episode);
+			}
+		}
+
+		static BotQueuePendingTerminal FindPending(BotQueueWatch watch, object item)
+		{
+			var name = (item as ProductionItem)?.Item;
+			foreach (var p in watch.Pending)
+				if (ReferenceEquals(p.Item, item) || (p.Item == null && p.ItemName == name))
+					return p;
+
+			return null;
+		}
+
+		// A manager-issued terminal is a REQUEST — the record resolves on the tick the item
+		// leaves the queue (F2). Last decision wins: a later request for the same item
+		// supersedes the earlier pending entry.
+		void NotePendingTerminal(ProductionQueue queue, ProductionItem itemRef, string itemName,
+			BotQueueTransitionKind kind, BotQueueTransitionReason reason, BotQueueCancellationClass cls)
+		{
+			if (queueWatches == null || !queueWatches.TryGetValue(queue, out var watch))
+				return;
+
+			watch.Pending.RemoveAll(p => ReferenceEquals(p.Item, itemRef) || (p.Item == null && p.ItemName == itemName));
+			watch.Pending.Add(new BotQueuePendingTerminal { Item = itemRef, ItemName = itemName, Kind = kind, Reason = reason, Class = cls });
+		}
+
+		/// <summary>REPLAY-HEALTH-LOGGER (F4): a demand-path cancel issued outside the manager
+		/// (BaseBuilderBotModuleCA.CancelDemandItem) still resolves through the queue probe —
+		/// registering it here makes the record Cancelled/DemandCancel instead of
+		/// Removed/UNKNOWN.</summary>
+		public void NoteExternalCancel(Actor producer, string item)
+		{
+			if (queueWatches == null)
+				return;
+
+			foreach (var kv in queueWatches)
+				if (kv.Key.Actor == producer && kv.Value.Items.Any(i => (i as ProductionItem)?.Item == item))
+					kv.Value.Pending.Add(new BotQueuePendingTerminal { ItemName = item, Kind = BotQueueTransitionKind.Cancelled, Reason = BotQueueTransitionReason.DemandCancel, Class = BotQueueCancellationClass.Production });
+		}
+
+		// One record-only transition to every registered observer. Event-local state is
+		// resolved here, at the emit tick — a producer-less transition (latch resume)
+		// carries ProducerActorId 0 and ProducerLive null = UNKNOWN; an item unobserved by
+		// the probe carries EpisodeId 0 = UNKNOWN.
+		void EmitQueueTransition(ProductionQueue queue, Actor producer, object itemRef, string item, BuildingType category,
+			BotQueueTransitionKind kind, BotQueueTransitionReason reason,
+			BotQueueCancellationClass cancellationClass = BotQueueCancellationClass.None,
+			uint episodeOverride = 0)
+		{
+			if (!ObserveQueueTransitions())
 				return;
 
 			var producerId = producer?.ActorID ?? 0;
-			if (!queueEpisodes.EmitGate(producerId, item, kind, reason))
+			if (!queueEpisodes.EmitGate(producerId, itemRef, item, kind, reason))
 				return;
 
 			var transition = new BotQueueTransition(world.WorldTick, item,
-				queue?.Info.Group ?? Category, category, producerId, kind, reason,
+				queue?.Info.Group ?? Category, category, producerId,
+				episodeOverride != 0 ? episodeOverride : queueEpisodes.EpisodeOf(itemRef),
+				kind, reason,
 				player.WinState == WinState.Undefined,
 				producer == null ? (bool?)null : !producer.IsDead && !producer.Disposed,
 				cancellationClass);
@@ -182,6 +337,12 @@ namespace OpenRA.Mods.CA.Traits
 
 		public void Tick(IBot bot)
 		{
+			// REPLAY-HEALTH-LOGGER (F3): the probe reconciles queue state every tick so
+			// transition records carry exact observation ticks — it must run before the
+			// latch and WaitTicks early returns below. No observer = one lazy-resolve check.
+			if (ObserveQueueTransitions())
+				ProbeQueueTransitions();
+
 			foreach (KeyValuePair<string, int> i in activeBuildingIntervals.ToList())
 			{
 				activeBuildingIntervals[i.Key]--;
@@ -210,9 +371,11 @@ namespace OpenRA.Mods.CA.Traits
 							{
 								foreach (var item in queue.AllQueued().ToArray())
 								{
-									EmitQueueTransition(queue, queue.Actor, item.Item, QueueCategoryOf(item.Item),
-										BotQueueTransitionKind.Cancelled, BotQueueTransitionReason.RelocationLatch,
-										BotQueueCancellationClass.Production);
+									// The record resolves on the tick the item actually
+									// leaves the queue (F2); queues outside this manager's
+									// category surface as Removed on their own manager.
+									NotePendingTerminal(queue, item, item.Item, BotQueueTransitionKind.Cancelled,
+										BotQueueTransitionReason.RelocationLatch, BotQueueCancellationClass.Production);
 									bot.QueueOrder(Order.CancelProduction(queue.Actor, item.Item, 1));
 								}
 							}
@@ -220,7 +383,7 @@ namespace OpenRA.Mods.CA.Traits
 							foreach (var be in baseBuilder.BaseExpansionModules)
 								be.UpdateExpansionParams(bot, false, true, stuckConyard);
 
-							EmitQueueTransition(null, stuckConyard, lastFailedBuilding, QueueCategoryOf(lastFailedBuilding),
+							EmitQueueTransition(null, stuckConyard, null, lastFailedBuilding, QueueCategoryOf(lastFailedBuilding),
 								BotQueueTransitionKind.Held, BotQueueTransitionReason.RelocationLatch);
 							failCount = 0;
 							failRetryTicks = baseBuilder.Info.StructureProductionResumeDelay;
@@ -228,7 +391,7 @@ namespace OpenRA.Mods.CA.Traits
 						}
 					}
 
-					EmitQueueTransition(null, null, lastFailedBuilding, QueueCategoryOf(lastFailedBuilding),
+					EmitQueueTransition(null, null, null, lastFailedBuilding, QueueCategoryOf(lastFailedBuilding),
 						BotQueueTransitionKind.Resumed, BotQueueTransitionReason.SaturationLatch);
 					failCount = 0;
 					failRetryTicks = baseBuilder.Info.StructureProductionResumeDelay;
@@ -255,7 +418,7 @@ namespace OpenRA.Mods.CA.Traits
 						// FIX-RA-REFINERY diagnostics: observe the latch release — once per resume
 						// delay at most, never per tick.
 						AIUtils.BotDebug($"{player} placement latch released (buildings {latchedBuildings} -> {currentBuildings}, providers {latchedProviders} -> {baseProviders}) at tick {world.WorldTick}");
-						EmitQueueTransition(null, null, lastFailedBuilding, QueueCategoryOf(lastFailedBuilding),
+						EmitQueueTransition(null, null, null, lastFailedBuilding, QueueCategoryOf(lastFailedBuilding),
 							BotQueueTransitionKind.Resumed, BotQueueTransitionReason.SaturationLatch);
 						failCount = 0;
 					}
@@ -409,16 +572,14 @@ namespace OpenRA.Mods.CA.Traits
 				baseBuilder.RecordProducerOrder(queue.Actor, item.Name);
 				itemQueuedThisTick = true;
 				SetBuildingInterval(item.Name);
-				EmitQueueTransition(queue, queue.Actor, item.Name, QueueCategoryOf(item.Name),
-					BotQueueTransitionKind.Started, BotQueueTransitionReason.None);
+
+				// REPLAY-HEALTH-LOGGER (F2/F3): no emit here — the probe records Started on
+				// the tick the engine applies the order, not the request tick.
 			}
 			else if (currentBuilding != null && currentBuilding.Done)
 			{
-				// REPLAY-HEALTH-LOGGER: Ready once per production episode — the timestamp the
-				// verifier's unplaced-ready window measures from. EmitGate dedupes the sweep
-				// and shadows it while the item's own cancel order is still in flight.
-				EmitQueueTransition(queue, queue.Actor, currentBuilding.Item, QueueCategoryOf(currentBuilding.Item),
-					BotQueueTransitionKind.Ready, BotQueueTransitionReason.None);
+				// REPLAY-HEALTH-LOGGER (F3): Ready also comes from the probe — the exact tick
+				// the head item flips Done, not this WaitTicks-gated sweep.
 
 				// ECON-A (§4 Ready-hold): a bound demand item sits at Queue[0] until its MCV deploys —
 				// returning false holds it without spending failure budget (the same mechanic the REF-1
@@ -429,7 +590,7 @@ namespace OpenRA.Mods.CA.Traits
 					: null;
 				if (heldDemand != null && !heldDemand.Deployed)
 				{
-					EmitQueueTransition(queue, queue.Actor, currentBuilding.Item, QueueCategoryOf(currentBuilding.Item),
+					EmitQueueTransition(queue, queue.Actor, currentBuilding, currentBuilding.Item, QueueCategoryOf(currentBuilding.Item),
 						BotQueueTransitionKind.Held, BotQueueTransitionReason.DemandHold);
 					return false;
 				}
@@ -451,9 +612,8 @@ namespace OpenRA.Mods.CA.Traits
 					if (BaseBuilderQueueEvalCA.LimitReached(AIUtils.CountBuildingByCommonName(new HashSet<string> { currentBuilding.Item }, player), currentLimit))
 					{
 						AIUtils.BotDebug($"{player} has already has enough {currentBuilding.Item}; cancelling production");
-						EmitQueueTransition(queue, queue.Actor, currentBuilding.Item, QueueCategoryOf(currentBuilding.Item),
-							BotQueueTransitionKind.Cancelled, BotQueueTransitionReason.LimitReached,
-							BotQueueCancellationClass.Production);
+						NotePendingTerminal(queue, currentBuilding, currentBuilding.Item, BotQueueTransitionKind.Cancelled,
+							BotQueueTransitionReason.LimitReached, BotQueueCancellationClass.Production);
 						bot.QueueOrder(Order.CancelProduction(queue.Actor, currentBuilding.Item, 1));
 					}
 				}
@@ -551,7 +711,7 @@ namespace OpenRA.Mods.CA.Traits
 					// link on an un-aimed fallback cell.
 					if (BaseBuilderQueueEvalCA.CrawlHold(type, law != null, law?.CrawlTargetEdge != null, baseBuilder.ExpansionTarget() != null))
 					{
-						EmitQueueTransition(queue, queue.Actor, currentBuilding.Item, type,
+						EmitQueueTransition(queue, queue.Actor, currentBuilding, currentBuilding.Item, type,
 							BotQueueTransitionKind.Held, BotQueueTransitionReason.CrawlHold);
 						return false;
 					}
@@ -567,7 +727,7 @@ namespace OpenRA.Mods.CA.Traits
 						// semantics as the REF-1 crawl hold above: queued, no failure budget spent.
 						if (frontBackHold)
 						{
-							EmitQueueTransition(queue, queue.Actor, currentBuilding.Item, type,
+							EmitQueueTransition(queue, queue.Actor, currentBuilding, currentBuilding.Item, type,
 								BotQueueTransitionKind.Held, BotQueueTransitionReason.FrontBackHold);
 							return false;
 						}
@@ -583,9 +743,8 @@ namespace OpenRA.Mods.CA.Traits
 					if (refineryDefers)
 					{
 						AIUtils.BotDebug($"{player} defers {currentBuilding.Item}: no legal refinery site this sweep");
-						EmitQueueTransition(queue, queue.Actor, currentBuilding.Item, QueueCategoryOf(currentBuilding.Item),
-							BotQueueTransitionKind.Cancelled, BotQueueTransitionReason.NoRefinerySite,
-							BotQueueCancellationClass.Production);
+						NotePendingTerminal(queue, currentBuilding, currentBuilding.Item, BotQueueTransitionKind.Cancelled,
+							BotQueueTransitionReason.NoRefinerySite, BotQueueCancellationClass.Production);
 						bot.QueueOrder(Order.CancelProduction(queue.Actor, currentBuilding.Item, 1));
 					}
 
@@ -593,11 +752,10 @@ namespace OpenRA.Mods.CA.Traits
 					else if (++failCount >= baseBuilder.Info.MaximumFailedPlacementAttempts)
 					{
 						AIUtils.BotDebug($"{player} has nowhere to place {currentBuilding.Item}");
-						EmitQueueTransition(queue, queue.Actor, currentBuilding.Item, QueueCategoryOf(currentBuilding.Item),
-							BotQueueTransitionKind.Cancelled, BotQueueTransitionReason.SaturationLatch,
-							BotQueueCancellationClass.Production);
+						NotePendingTerminal(queue, currentBuilding, currentBuilding.Item, BotQueueTransitionKind.Cancelled,
+							BotQueueTransitionReason.SaturationLatch, BotQueueCancellationClass.Production);
 						bot.QueueOrder(Order.CancelProduction(queue.Actor, currentBuilding.Item, 1));
-						EmitQueueTransition(queue, queue.Actor, currentBuilding.Item, QueueCategoryOf(currentBuilding.Item),
+						EmitQueueTransition(queue, queue.Actor, currentBuilding, currentBuilding.Item, QueueCategoryOf(currentBuilding.Item),
 							BotQueueTransitionKind.Held, BotQueueTransitionReason.SaturationLatch);
 						lastFailedBuilding = currentBuilding.Item;
 
@@ -614,8 +772,11 @@ namespace OpenRA.Mods.CA.Traits
 				{
 					failCount = 0;
 					NotifyPlacement(currentBuilding.Item, location.Value, queue.Actor.ActorID, orderString, type, advisedDefense != null || demandAdvisedDefense, lastFrontBackPick);
-					EmitQueueTransition(queue, queue.Actor, currentBuilding.Item, type,
-						BotQueueTransitionKind.Placed, BotQueueTransitionReason.None);
+
+					// REPLAY-HEALTH-LOGGER (F2): the place order is in flight — the Placed
+					// record resolves on the tick the item actually leaves the queue.
+					NotePendingTerminal(queue, currentBuilding, currentBuilding.Item, BotQueueTransitionKind.Placed,
+						BotQueueTransitionReason.None, BotQueueCancellationClass.None);
 
 					bot.QueueOrder(new Order(orderString, player.PlayerActor, Target.FromCell(world, location.Value), false)
 					{

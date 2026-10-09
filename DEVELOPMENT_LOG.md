@@ -20491,3 +20491,28 @@ the existing helpers only — no blanket normalization, no yaml edits except one
 * **Verification:** new regression `CancelledShadowsInFlightReadyUntilStarted` (phantom Ready
   suppressed, duplicate in-flight Cancelled suppressed, Started clears the shadow); 6 seam
   tests pass; full suite 1280/1280; Release clean; boot gate main menu, zero new exceptions.
+
+## 2026-10-09 - Devin-Architect: seam redesign after Sol review 22861e442 F1-F5 (same branch)
+
+* **F1 — identity:** `BotQueueTransition.EpisodeId` — per queue-item instance id assigned by
+  the probe on first observation; a re-queued same-name item is a distinct episode, 0 =
+  UNKNOWN for baseline/producer-less records.
+* **F2 — resolution semantics:** `Cancelled`/`Placed` are no longer request-tick labels —
+  decision sites record a `BotQueuePendingTerminal` (last decision wins) and the record
+  emits on the tick the item actually leaves the queue. `Started`/`Ready` likewise emit at
+  probe observation, so every timestamped transition is an applied engine state.
+* **F3 — exact ticks:** `ProbeQueueTransitions` runs at the top of `Tick` before the latch
+  and `WaitTicks` early returns — item-list reconciliation per queue per tick, bounded by
+  queue count/length, trait-list iteration only (no scans/orders/RNG).
+* **F4 — removal reconciliation:** an item leaving with no pending request emits `Removed`,
+  classified event-locally (Elimination / Destruction / None = UNKNOWN). A queue that drops
+  out of `FindQueues` (producer dead) still flushes its items as removals. Module demand
+  cancels register via `BaseBuilderBotModuleCA.CancelDemandItem` -> `NoteExternalCancel`
+  and resolve as `Cancelled`/`DemandCancel`. A pending `Placed` whose producer died
+  in-flight resolves as `Removed`/`Destruction`.
+* **F5 — zero-cost without a logger:** observers, tracker, and watches are all lazy —
+  `ObserveQueueTransitions()` gates every path; no allocations or history until a logger
+  trait exists on the bot PlayerActor.
+* **Verification:** 6 seam tests rewritten to the new API (Held dedupe, terminal episode
+  end, per-instance Ready, per-instance episode ids, per-producer isolation, record shape);
+  suite 1280/1280; Release clean; boot gate main menu, zero new exceptions.

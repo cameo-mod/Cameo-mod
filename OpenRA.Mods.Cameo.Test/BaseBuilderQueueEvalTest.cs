@@ -916,69 +916,78 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(table.TryReserve(anchor, new object(), 10, 50, _ => false), Is.True);
 		}
 
-		// REPLAY-HEALTH-LOGGER seam (ACK-2 / task 01a12023) — BotQueueEpisodeTracker dedupe.
+		// REPLAY-HEALTH-LOGGER seam (ACK-2 / task 01a12023) — BotQueueEpisodeTracker dedupe,
+		// episode ids, and per-instance Ready (Sol review 22861e442 F1/F3/F5).
 
 		[Test]
 		public void HeldEmitsOncePerEpisode()
 		{
 			var tracker = new BotQueueEpisodeTracker();
-			Assert.That(tracker.EmitGate(7, "proc", BotQueueTransitionKind.Held, BotQueueTransitionReason.DemandHold), Is.True, "first sighting emits");
-			Assert.That(tracker.EmitGate(7, "proc", BotQueueTransitionKind.Held, BotQueueTransitionReason.DemandHold), Is.False, "steady hold must not re-emit per tick");
-			Assert.That(tracker.EmitGate(7, "proc", BotQueueTransitionKind.Held, BotQueueTransitionReason.CrawlHold), Is.True, "a changed reason is a new episode");
+			var item = new object();
+			Assert.That(tracker.EmitGate(7, item, "proc", BotQueueTransitionKind.Held, BotQueueTransitionReason.DemandHold), Is.True, "first sighting emits");
+			Assert.That(tracker.EmitGate(7, item, "proc", BotQueueTransitionKind.Held, BotQueueTransitionReason.DemandHold), Is.False, "steady hold must not re-emit per tick");
+			Assert.That(tracker.EmitGate(7, item, "proc", BotQueueTransitionKind.Held, BotQueueTransitionReason.CrawlHold), Is.True, "a changed reason is a new episode");
 		}
 
 		[Test]
 		public void HeldEpisodeEndsOnTerminalTransition()
 		{
 			var tracker = new BotQueueEpisodeTracker();
-			Assert.That(tracker.EmitGate(7, "proc", BotQueueTransitionKind.Held, BotQueueTransitionReason.DemandHold), Is.True);
-			Assert.That(tracker.EmitGate(7, "proc", BotQueueTransitionKind.Placed, BotQueueTransitionReason.None), Is.True);
-			Assert.That(tracker.EmitGate(7, "proc", BotQueueTransitionKind.Held, BotQueueTransitionReason.DemandHold), Is.True,
+			var item = new object();
+			Assert.That(tracker.EmitGate(7, item, "proc", BotQueueTransitionKind.Held, BotQueueTransitionReason.DemandHold), Is.True);
+			Assert.That(tracker.EmitGate(7, item, "proc", BotQueueTransitionKind.Placed, BotQueueTransitionReason.None), Is.True);
+			Assert.That(tracker.EmitGate(7, item, "proc", BotQueueTransitionKind.Held, BotQueueTransitionReason.DemandHold), Is.True,
 				"the same hold after a terminal transition is a new episode");
 		}
 
 		[Test]
-		public void ReadyEmitsOncePerProductionEpisode()
+		public void ReadyEmitsOncePerItemInstance()
 		{
 			var tracker = new BotQueueEpisodeTracker();
-			Assert.That(tracker.EmitGate(9, "proc", BotQueueTransitionKind.Ready, BotQueueTransitionReason.None), Is.True, "first Done observation emits the ready timestamp");
-			Assert.That(tracker.EmitGate(9, "proc", BotQueueTransitionKind.Ready, BotQueueTransitionReason.None), Is.False, "a held item stays Done — no re-emit");
-			Assert.That(tracker.EmitGate(9, "proc", BotQueueTransitionKind.Placed, BotQueueTransitionReason.None), Is.True);
-			Assert.That(tracker.EmitGate(9, "proc", BotQueueTransitionKind.Ready, BotQueueTransitionReason.None), Is.True, "a re-queued item announces a fresh episode");
+			var item = new object();
+			tracker.BeginEpisode(item);
+			Assert.That(tracker.AnnounceReady(item), Is.True, "first Done observation emits the ready timestamp");
+			Assert.That(tracker.AnnounceReady(item), Is.False, "the item stays Done until it leaves — no per-tick re-emit");
+			Assert.That(tracker.AnnounceReady(item), Is.False, "even an in-flight cancel leaves it announced — no phantom Ready after Cancelled");
+
+			tracker.EndEpisode(item);
+			var requeued = new object();
+			tracker.BeginEpisode(requeued);
+			Assert.That(tracker.AnnounceReady(requeued), Is.True, "a re-queued same-name item is a new instance and announces fresh");
 		}
 
 		[Test]
-		public void CancelledShadowsInFlightReadyUntilStarted()
+		public void EpisodeIdsArePerInstance()
 		{
 			var tracker = new BotQueueEpisodeTracker();
+			var first = new object();
+			var ep1 = tracker.BeginEpisode(first);
+			Assert.That(tracker.EpisodeOf(first), Is.EqualTo(ep1));
 
-			// Done item cancelled — CancelProduction is an order, so the item can sit at the
-			// queue head still Done for a tick or two. The sweep must not re-announce Ready.
-			Assert.That(tracker.EmitGate(7, "proc", BotQueueTransitionKind.Ready, BotQueueTransitionReason.None), Is.True);
-			Assert.That(tracker.EmitGate(7, "proc", BotQueueTransitionKind.Cancelled, BotQueueTransitionReason.NoRefinerySite), Is.True);
-			Assert.That(tracker.EmitGate(7, "proc", BotQueueTransitionKind.Ready, BotQueueTransitionReason.None), Is.False,
-				"phantom Ready after Cancelled would invert the pair in the log");
-			Assert.That(tracker.EmitGate(7, "proc", BotQueueTransitionKind.Cancelled, BotQueueTransitionReason.NoRefinerySite), Is.False,
-				"an in-flight cancel re-swept next tick must not re-emit");
-			Assert.That(tracker.EmitGate(7, "proc", BotQueueTransitionKind.Started, BotQueueTransitionReason.None), Is.True);
-			Assert.That(tracker.EmitGate(7, "proc", BotQueueTransitionKind.Ready, BotQueueTransitionReason.None), Is.True,
-				"a re-queued same-name item clears the shadow and announces fresh");
+			tracker.EndEpisode(first);
+			var second = new object();
+			var ep2 = tracker.BeginEpisode(second);
+			Assert.That(ep2, Is.Not.EqualTo(ep1), "re-queued same-name items must be distinguishable (F1)");
+			Assert.That(tracker.EpisodeOf(first), Is.EqualTo(0u), "a departed item resolves to UNKNOWN");
+			Assert.That(tracker.EpisodeOf(null), Is.EqualTo(0u), "an unbound emit resolves to UNKNOWN");
 		}
 
 		[Test]
 		public void EpisodesArePerProducer()
 		{
 			var tracker = new BotQueueEpisodeTracker();
-			tracker.EmitGate(3, "proc", BotQueueTransitionKind.Held, BotQueueTransitionReason.DemandHold);
-			Assert.That(tracker.EmitGate(4, "proc", BotQueueTransitionKind.Held, BotQueueTransitionReason.DemandHold), Is.True, "a different producer is its own episode");
-			Assert.That(tracker.EmitGate(3, "proc", BotQueueTransitionKind.Ready, BotQueueTransitionReason.None), Is.True);
-			Assert.That(tracker.EmitGate(4, "proc", BotQueueTransitionKind.Ready, BotQueueTransitionReason.None), Is.True, "ready dedupe never bleeds across producers");
+			var item3 = new object();
+			var item4 = new object();
+			tracker.EmitGate(3, item3, "proc", BotQueueTransitionKind.Held, BotQueueTransitionReason.DemandHold);
+			Assert.That(tracker.EmitGate(4, item4, "proc", BotQueueTransitionKind.Held, BotQueueTransitionReason.DemandHold), Is.True, "a different producer is its own episode");
+			Assert.That(tracker.AnnounceReady(item3), Is.True);
+			Assert.That(tracker.AnnounceReady(item4), Is.True, "ready dedupe never bleeds across producers");
 		}
 
 		[Test]
 		public void TransitionRecordCarriesSchema2Fields()
 		{
-			var t = new BotQueueTransition(1234, "proc", "Building", BuildingType.Refinery, 42,
+			var t = new BotQueueTransition(1234, "proc", "Building", BuildingType.Refinery, 42, 7,
 				BotQueueTransitionKind.Cancelled, BotQueueTransitionReason.NoRefinerySite,
 				true, null, BotQueueCancellationClass.Production);
 
@@ -987,6 +996,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(t.Queue, Is.EqualTo("Building"));
 			Assert.That(t.Category, Is.EqualTo(BuildingType.Refinery));
 			Assert.That(t.ProducerActorId, Is.EqualTo(42u));
+			Assert.That(t.EpisodeId, Is.EqualTo(7u));
 			Assert.That(t.Kind, Is.EqualTo(BotQueueTransitionKind.Cancelled));
 			Assert.That(t.Reason, Is.EqualTo(BotQueueTransitionReason.NoRefinerySite));
 			Assert.That(t.PlayerActive, Is.True);
