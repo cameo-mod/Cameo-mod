@@ -40,5 +40,10 @@
     <None Include="../mods/cameo/ContentPacks/TiberianSun/GDI/yaml/buildings.yaml"
           Link="tools/tests/fixtures/swcap/ts_gdi_buildings.yaml"
           CopyToOutputDirectory="Always" />
+    <!-- world.yaml carries the declared OccupancyTokens catalogue the scans
+         cross-check against the provider wiring. -->
+    <None Include="../mods/cameo/rules/world.yaml"
+          Link="tools/tests/fixtures/swcap/world.yaml"
+          CopyToOutputDirectory="Always" />
   </ItemGroup>
 </Project>

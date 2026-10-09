@@ -19,11 +19,23 @@ This skill runs the full Cameo boot-gate procedure. **Never commit engine conten
    $before = Get-ChildItem "$logDir\exception-*.log" -ErrorAction SilentlyContinue | Select-Object -ExpandProperty Name
    ```
 
-2. **Launch the game:**
+2. **Launch the game — `OpenRA.exe` DIRECTLY, never `launch-game.cmd`:**
+   the cmd wrapper orphans the child `OpenRA.exe` when the wrapper PID is
+   killed (2026-10-09 incident: orphan blocked other agents for ~1h).
    ```powershell
-   .\launch-game.cmd
+   $root = $PWD.Path
+   $game = Start-Process -PassThru -WorkingDirectory "$root\engine" `
+     -FilePath "$root\engine\bin\OpenRA.exe" -ArgumentList @(
+       'Game.Mod=cameo',
+       'Engine.EngineDir=".."',
+       "Engine.LaunchPath=`"$root\launch-game.cmd`"",
+       "Engine.ModSearchPaths=`"$root\mods,./mods`"")
+   $gamePid = $game.Id
    ```
    Wait for it to reach the main menu. This takes 30-90 seconds depending on the machine.
+   A ready-made script with launch + marker poll + PID-scoped kill + leftover
+   verification lives at `C:\tmp\boot_gate.ps1 -Root <worktree>` — recreate it
+   from this procedure if absent (it is in %TEMP%, not the repo).
 
 3. **Verify menu was reached** by checking perf.log ends with `MenuPostProcessEffect.PostWorldLoaded`:
    ```powershell
@@ -54,6 +66,15 @@ This skill runs the full Cameo boot-gate procedure. **Never commit engine conten
      Where-Object { $_.Path -like "$PWD*" -or $_.Path -like "$PWD\engine*" } |
      Stop-Process -Force
    ```
+
+   **Then VERIFY the kill — a kill command returning success is not proof:**
+   ```powershell
+   Get-Process -Name OpenRA -ErrorAction SilentlyContinue |
+     Where-Object { $_.Path -like "$PWD*" }   # must be EMPTY
+   ```
+   Any survivor under this worktree means the gate leaked a process — kill it
+   and re-check until empty. Processes under OTHER worktrees are other agents'
+   drivers: leave them running.
 
 ## Pre-conditions
 

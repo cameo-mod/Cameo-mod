@@ -1327,6 +1327,10 @@ World:
 	# authority plus takeover seats (validator order can't veto, only tighten).
 	CameoValidateOrder:
 	SuperweaponPlugLimit:
+		# Declared SW-plug occupancy tokens (lobby-cap wiring): td_gdi advcom
+		# uplink -> ionc, td_nod temple silo -> nodnuke, cabal core silo ->
+		# cabalnuke_swlimit, ts_gdi upgrade-center uplink -> tsionc.
+		OccupancyTokens: ionc, nodnuke, cabalnuke_swlimit, tsionc
 	BotTakeoverTracker:
 	CameoAutoOrders:
 	LobbySystemActorConditionCheckbox@BOT_TAKEOVER:

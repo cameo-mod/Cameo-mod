@@ -93,7 +93,8 @@ namespace OpenRA.Mods.Cameo.Test
 			public readonly Actor Host;
 			public readonly ProductionQueue Queue;
 			public readonly PlayerResources Resources;
-			public readonly SuperweaponPlugLimit Limit = new();
+			public readonly SuperweaponPlugLimit Limit = new(Info<SuperweaponPlugLimitInfo>(
+				("OccupancyTokens", new[] { PlugToken })));
 			public readonly Queue<Action<World>> FrameEnd = new();
 			public readonly ActorInfo PlugActorInfo;
 
@@ -558,6 +559,81 @@ namespace OpenRA.Mods.Cameo.Test
 				}
 
 				Assert.That(negates, Is.True, $"{item} does not negate !{token}");
+			}
+		}
+
+		[Test]
+		public void Yaml_DeclaredOccupancyTokens_MatchExpected()
+		{
+			// The declared catalogue in world.yaml is authoritative for which
+			// tokens are capacity-managed: it must list exactly the four SW plug
+			// occupancy tokens.
+			string[] declared = null;
+			var inTrait = false;
+			foreach (var raw in File.ReadLines(FixturePath("world.yaml")))
+			{
+				var line = raw.TrimEnd();
+				if (line.Length == 0 || line.TrimStart() == "#")
+					continue;
+
+				var indent = line.TakeWhile(c => c == '\t').Count();
+				if (indent <= 1)
+				{
+					inTrait = indent == 1 && line.TrimStart() == "SuperweaponPlugLimit:";
+					continue;
+				}
+
+				if (!inTrait || indent != 2)
+					continue;
+
+				var trimmed = line.Trim();
+				if (trimmed.StartsWith("OccupancyTokens:"))
+					declared = trimmed.Split(':', 2)[1]
+						.Split(',')
+						.Select(t => t.Trim())
+						.Where(t => t.Length > 0)
+						.ToArray();
+			}
+
+			Assert.That(declared, Is.Not.Null, "world.yaml lacks SuperweaponPlugLimit OccupancyTokens");
+			Assert.That(declared.OrderBy(t => t, StringComparer.Ordinal),
+				Is.EqualTo(Expected.Select(e => e.Token).OrderBy(t => t, StringComparer.Ordinal).ToArray()));
+		}
+
+		[Test]
+		public void Yaml_ProviderGates_PositivePolaritySamples()
+		{
+			// Provider contract (Architect): occupancy gate reads level 0 -> false,
+			// any positive level -> true. Sampled at 0/1/2/int.MaxValue on the real
+			// RequiresCondition expressions — a regression on the actual gates, not
+			// a universal expression-validation claim.
+			foreach (var (fixture, host, token, _) in Expected)
+			{
+				var block = SwlimitBlocks(FixturePath(fixture))
+					.Where(b => b.Host == host)
+					.Select(b => b.Block)
+					.FirstOrDefault(b => b.Any(l => l.StartsWith("Prerequisite:") && l.Contains(token))
+						&& b.Any(l => l.StartsWith("RequiresPrerequisites:") && l.Contains("global-swlimit")));
+
+				Assert.That(block, Is.Not.Null, $"{host}: no global-swlimit-gated @swlimit provider for {token}");
+
+				var gate = block.Where(l => l.StartsWith("RequiresCondition:"))
+					.Select(l => l.Split(':', 2)[1].Trim()).FirstOrDefault();
+				Assert.That(gate, Is.Not.Null.And.Not.Empty, $"{host}: provider for {token} has no RequiresCondition");
+
+				var expr = new BooleanExpression(gate);
+				var symbols = expr.Variables.ToDictionary(v => v, _ => 0);
+				Assert.Multiple(() =>
+				{
+					Assert.That(expr.Evaluate(symbols), Is.False, $"{token} gate '{gate}' true at level 0");
+					foreach (var level in new[] { 1, 2, int.MaxValue })
+					{
+						foreach (var v in symbols.Keys.ToArray())
+							symbols[v] = level;
+						Assert.That(expr.Evaluate(symbols), Is.True,
+							$"{token} gate '{gate}' false at level {level}");
+					}
+				});
 			}
 		}
 	}
