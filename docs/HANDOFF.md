@@ -22,8 +22,8 @@ escorts/defenders; one made 0 attack waves in 60,000 ticks). Fixed today: M7 (`3
    M13 (escort drain) needs a design call first (PT7 item 6b): escorts only from spare units, one at a time.
 3. Finish the measurements (PT5/PT9). Done: 1v1 armed + pre-arm, 3v3 armed on "Winter's End (Rich)" (team A
    Multi0–2 top-left, team B Multi3–5 bottom-right, verified; draw by timeout). 2v2 armed on "Terra Cotta": `hard` team LOST
-   (0 attack waves, ~30 % less income, 654 refused MCV orders = M12). Owed: **pre-arm 2v2** (Terra Cotta) and
-   **pre-arm 3v3** (Winter's End), the direct comparisons for M12/M6 and M13. Use
+   (0 attack waves, ~30 % less income, 654 refused MCV orders = M12). Pre-arm 2v2: `hard` WON, about 2x the income
+   and 4-5x the peak army, no refused MCV orders. Owed: **pre-arm 3v3** (Winter's End), the comparison for M13. Use
    `run_ai_match_batch.py --time-limit 1 --keep-variants` (+ `--team-size N --map <tournament map>`), score with
    `ab_summary.py` and `team_coordination_report.py`. The armed arm must have the front/back planner disabled until A8
    lands. **Never commit the swapped `ai.yaml`.**

@@ -492,6 +492,22 @@ every 20 ticks ("hand-out 1, 2, 3"), never moves because the gate refuses `McvEx
 and the field is parked for 3,000 ticks. Both `hard` bots earned about 30 % less per tick than `classic`, built armies about a
 third the size, and never launched a wave: **the playtest symptom, in a 2v2, from M6 + M12.**
 
+**Same 2v2, pre-arm** (`37d9fc6a` reversed): the `hard` team **won** after 57,535 ticks.
+
+| Bot | Kills / deaths (value) | Buildings killed / lost | Earned / spent per tick | Peak banked | Peak army | Refused orders |
+|---|---|---|---|---|---|---|
+| Multi0 `hard` | 492,060 / 541,270 | 76 / 41 | 14.29 / 14.48 | 11,000 | 90,710 | 102 (`ExternalBotOrdersManager` vs squad/scout leases) |
+| Multi1 `hard` | 544,250 / 486,960 | 62 / 26 | 12.17 / 12.32 | 11,793 | 91,270 | 70 (same) |
+| Multi2 `classic` | 516,440 / 517,150 | 35 / 73 | 8.43 / 8.57 | 10,093 | 67,910 | — |
+| Multi3 `classic` | 505,120 / 513,490 | 33 / 66 | 8.55 / 8.70 | 10,081 | 56,290 | — |
+
+**The A/B on one map, one match per arm:** pre-arm income per `hard` bot is about **twice** the armed income
+(14.29 and 12.17 vs 6.65 and 5.87), peak armies about **four to five times** larger (~91,000 vs 18,210 and 22,140),
+with **no refused MCV orders** (the M12 conflict needs `BT_expansion_prebuild`), and the match is won instead of lost.
+(The "attack waves" column of the armed tables counts `secure:` mission cards, which only exist when
+`UseRaidMissionSteering` is armed, so it is comparable between armed matches only; across arms compare kills and
+buildings.)
+
 **Per world tick** (the two matches ran to different lengths): the pre-arm bot earned **14.32** vs **11.97**
 (+20 %) and spent **14.15** vs **8.01** (+77 %); it ended with 11,395 banked against 86,723, and a larger army
 (133,440 vs 106,210) despite fighting much harder (deaths 103,680 vs 13,100). Personalities differed (`turtle` vs
@@ -586,9 +602,9 @@ reproduction (M10), the learned-file proof (M9), the armed 1v1 (above), the 3v3 
 (team A Multi0–2 at 6,34 / 26,26 / 34,6, top-left; team B Multi3–5 at 95,123 / 103,103 / 123,95, bottom-right;
 `split_spawn_sides` gives the same split for all 720 orderings of the spawn list).
 
-Done since: the 1v1 pre-arm and the 3v3 armed on Winter's End (Rich) (PT5). The armed 2v2 on Terra Cotta is also done. Still owed: the
-**pre-arm 2v2** on Terra Cotta and the **pre-arm 3v3** on Winter's End (Rich), the direct comparisons for M12/M6 and M13;
-both were queued in the review container when this was written (`/tmp/claude-0/master_chain.sh`, `chain_pre3v3.sh`). **If that container is
+Done since: the 1v1 pre-arm and the 3v3 armed on Winter's End (Rich) (PT5). The armed and pre-arm 2v2 on Terra Cotta are also done. Still owed:
+the **pre-arm 3v3** on Winter's End (Rich), the direct comparison for M13, queued in the review container when this
+was written (`chain_pre3v3.sh`). **If that container is
 gone, rerun them from a fresh session** (route: LESSONS_LEARNED "Building and boot-gating in a Linux cloud
 container"), then add the team rows to PT5, scored with
 `python tools/ai/team_coordination_report.py <support dir>` and `tools/ai/ab_summary.py`. Keep the yaml swap out of
