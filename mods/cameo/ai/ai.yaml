@@ -4212,6 +4212,9 @@ Player:
 		# map. genericbot-only (this module); classic is untouched. Switch group AJ_field_coverage; ON BY DEFAULT per
 		# the maintainer ruling 2026-10-04 ("refinery coverage is the most important feature right now").
 		FieldCoverage: true
+		# REPAIR-B3 (SPEC_2026-10-09 §1): shared coverage — a usable own refinery serves every anchor inside an
+		# inclusive Euclidean radius-10 (the default 0 would fall back to ClaimRadiusCells = 8).
+		AnchorServeRadiusCells: 10
 	# Whole-base defence cover: each defence goes where its range covers the most uncovered base, outer edge and
 	# enemy side first (genericbot only; classic, sharing BaseBuilderBotModuleCA@generic, gets no advisor). Off until Enabled.
 	DefenseCoveragePlanner:

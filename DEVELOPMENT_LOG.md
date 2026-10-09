@@ -20452,3 +20452,70 @@ the existing helpers only — no blanket normalization, no yaml edits except one
   remain downstream gates; `BaseExpansionModules == null` at the cache-population
   site is a known latent inconsistency left untouched (never-null array keeps the
   latch self-releasing at first resume delay).
+
+## 2026-10-09 - Devin-Developer: REPAIR-B3 - shared refinery coverage + claim-fail deadlock bound (branch devin/repair-b3-refinery, base c76283c0b)
+
+* **Scope (SPEC_2026-10-09_refinery_shared_coverage.md + review clarifications):**
+  one usable refinery covers EVERY anchor inside an inclusive Euclidean radius-10
+  with both directed dock->patch and patch->dock legs proven under the harvester
+  locomotor at <=10 tile-equivalents (stationary-blocked probes; transient
+  traffic never fails a leg); per-anchor verdicts Covered/Unserved/UNKNOWN with
+  budget-deferred anchors never counting either way; atomic multi-anchor
+  reservation transactions; bounded claim-failure churn (the failCount deadlock).
+* **New file:** `RefineryCoverageOracle.cs` — verdict enum, `RefineryProbeBudget`
+  (per-anchor site/probe caps re-armed by `NextAnchor()`; per-player-per-tick
+  probe cap; deferred/cache-hit counters), topology-versioned
+  `RefineryRouteWitness`, pure deterministic helpers (`RouteLengthMilli`
+  1000/1414, `WithinServeRadius`, `BothLegsCover`, `LegPairRank`, `CompareSites`,
+  `Aggregate`), and `RefineryRouteProbe.ProbeLeg` = `PathSearch.ToTargetCell`
+  with null self + `BlockedByActor.Stationary` + `laneBias:false`.
+* **Planner:** `AssignRefineries` drops `used[r]` 1:1 binding; the `routeRank`
+  oracle arg (null = unproven) gates service and ranks covered pairs.
+  `ClaimOrder` gains `coverageUnknown` — UNKNOWN anchors are neither served,
+  unserved, nor claimable, so budget deferral never spawns duplicate demand.
+  `CoverageTick` runs per tick ahead of the 250-tick replan gate; the topology
+  signature (anchors, refinery cells, dock cells, blocker cells — XOR-folded,
+  order-independent) re-opens verdicts on change while witnesses whose stored
+  route avoids every changed blocker cell survive (empty-path unreachable
+  witnesses always re-probe on change); dead dock keys are pruned. The refresh
+  resumes at a persistent cursor under the per-tick probe budget.
+  `CommitRefineryClaim(anchor, site)` publishes pending coverage for the whole
+  in-radius uncovered set atomically and clears their reservations/streaks;
+  `ComputeClaim` parks an anchor re-offered past `RefineryClaimFailAttempts`
+  (provider-side bound — needs no eval edits to work).
+* **Contract:** `RefineryAnchorReservations.TryReserveAll/ReleaseAll/ClearAll/
+  LiveSetFor`; interface adds the site-carrying commit, placement-failed signal,
+  covered-set accessor, atomic set reserve/release/query carrying site +
+  modelVersion, and `RefineryCoveragePendingAnchors`. All default-bodied —
+  Architect call sites compile untouched (integration asks logged in the fleet
+  claim doc: 2-arg commit call, failure signal on the null-site fall-through,
+  admission-time set binding).
+* **Knobs/yaml:** `AnchorServeRadiusCells: 10` (spec radius; the C# default 0
+  resolves to ClaimRadiusCells = 8); `RefineryClaimFailAttempts=1`,
+  `RefineryClaimFailParkTicks=1500`, `CoverageSiteLimit=32`,
+  `CoverageProbeLimit=64`, `CoverageProbesPerTick=8`, `CoverageRouteLimitCells=10`,
+  `CoveragePatchCellSample=4`. DISCREPANCY FLAGGED, not fixed: DESIGN 19.5 calls
+  EngineerBotModule capture/repair + CratePickupBotModule visibility checks
+  designed-off (`false` = omniscient exception), yet master's ai.yaml arms all
+  three `true` (336c524f2 "Make bots pick up crates if without MCV" +
+  playtest 4bf696716 "require visible engineer and crate targets"). Whether
+  `true` is deliberate behavior (bots only chase seen targets) or drift is a
+  maintainer call; this repair leaves master's state untouched.
+* **Tests:** legacy one-per-anchor assertions rewritten to shared coverage
+  ({0,0} pair coverage, flush-mate binds all field anchors, tier candidates
+  moved beyond radius); new oracle/budget/route-gate unit tests and atomic
+  reservation lifecycle tests (all-or-nothing, no partial writes, owner-scoped
+  idempotent release, commit clear-all). `dotnet build -c Release` clean;
+  `dotnet test OpenRA.Mods.Cameo.Test` = 1289/1289 pass.
+* **Not done:** shared-site search inside `LawRefineryPlacement` (Architect-owned);
+  boot-gate deferred — a serial replay lane (NOD-PROGRESSION-REPRO) held the
+  machine at commit time (OpenRA.exe resident, launches reserved) and the lead's
+  order was push-for-review with no launches; boot-gate remains an open gate,
+  not claimed. Full audit suite likewise pending. Pushed for Devin-Reviewer
+  review per lead order; no merge.
+* **Overlap vs devin/queue-observer-seam@c43d580fd (Architect):** append-point
+  conflicts only — both add a trailing block in `DEVELOPMENT_LOG.md` (EOF) and
+  tests after `CommitClearsAReservation` in `BaseBuilderQueueEvalTest.cs`;
+  keep-both resolution, disjoint content. No shared edit region in source.
+  Their `Cancelled+NoRefinerySite` seam record is where the queue-side
+  `RefineryClaimPlacementFailed(anchor)` signal belongs.

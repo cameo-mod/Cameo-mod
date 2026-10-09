@@ -915,5 +915,79 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(table.LiveAt(anchor, 10), Is.False);
 			Assert.That(table.TryReserve(anchor, new object(), 10, 50, _ => false), Is.True);
 		}
+
+		// REPAIR-B3 (SPEC_2026-10-09 §3): the atomic multi-anchor reservation — a queued refinery's
+		// covered set binds or refuses as one; a partially owned set is never left behind.
+
+		[Test]
+		public void ReserveAllCommitsTheWholeSetOrNothing()
+		{
+			var table = new RefineryAnchorReservations();
+			var set = new[] { new CPos(1, 1), new CPos(2, 2), new CPos(3, 3) };
+			var owner = new object();
+			var other = new object();
+
+			Assert.That(table.TryReserveAll(set, owner, 0, 100, _ => false), Is.True);
+			Assert.That(table.LiveSetFor(set, owner, 10), Is.True);
+
+			// A foreign claim on any member refuses the whole second set — nothing half-taken.
+			var overlap = new[] { new CPos(3, 3), new CPos(4, 4) };
+			Assert.That(table.TryReserveAll(overlap, other, 10, 200, _ => false), Is.False);
+			Assert.That(table.LiveFor(new CPos(4, 4), other, 10), Is.False);
+			Assert.That(table.LiveAt(new CPos(4, 4), 10), Is.False);
+		}
+
+		[Test]
+		public void ReserveAllRefusesTakenMembersWithoutPartialWrites()
+		{
+			var table = new RefineryAnchorReservations();
+			var set = new[] { new CPos(1, 1), new CPos(2, 2) };
+			var owner = new object();
+
+			// The taken probe rejects member 2 — member 1 must not be left holding.
+			Assert.That(table.TryReserveAll(set, owner, 0, 100, c => c == new CPos(2, 2)), Is.False);
+			Assert.That(table.LiveAt(new CPos(1, 1), 10), Is.False);
+			Assert.That(table.Count, Is.EqualTo(0));
+		}
+
+		[Test]
+		public void ReserveAllRefreshesTheOwnersExistingHolds()
+		{
+			var table = new RefineryAnchorReservations();
+			var owner = new object();
+			var set = new[] { new CPos(1, 1), new CPos(2, 2) };
+
+			table.TryReserve(new CPos(1, 1), owner, 0, 50, _ => false);
+			Assert.That(table.TryReserveAll(set, owner, 10, 500, _ => false), Is.True);
+			Assert.That(table.LiveAt(new CPos(1, 1), 400), Is.True);   // refreshed, not stuck at 50
+			Assert.That(table.LiveAt(new CPos(2, 2), 400), Is.True);
+		}
+
+		[Test]
+		public void ReleaseAllIsIdempotentAndClearsOnlyTheOwnersMembers()
+		{
+			var table = new RefineryAnchorReservations();
+			var owner = new object();
+			var other = new object();
+			var set = new[] { new CPos(1, 1), new CPos(2, 2) };
+
+			table.TryReserveAll(set, owner, 0, 100, _ => false);
+			table.TryReserve(new CPos(9, 9), other, 0, 100, _ => false);
+
+			Assert.That(table.ReleaseAll(set, owner), Is.EqualTo(2));
+			Assert.That(table.ReleaseAll(set, owner), Is.EqualTo(0));  // idempotent
+			Assert.That(table.LiveAt(new CPos(9, 9), 10), Is.True);    // other's hold untouched
+		}
+
+		[Test]
+		public void ClearAllDropsAWholeCommittedSet()
+		{
+			var table = new RefineryAnchorReservations();
+			var set = new[] { new CPos(1, 1), new CPos(2, 2), new CPos(3, 3) };
+
+			table.TryReserveAll(set, new object(), 0, 100, _ => false);
+			table.ClearAll(set);
+			Assert.That(table.Count, Is.EqualTo(0));
+		}
 	}
 }

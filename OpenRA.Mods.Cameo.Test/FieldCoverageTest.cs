@@ -50,13 +50,25 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
-		public void OneRefineryServesAtMostOneAnchor()
+		public void OneRefineryServesEveryAnchorInRadius()
 		{
+			// REPAIR-B3 shared coverage (SPEC_2026-10-09 §2): one usable refinery serves EVERY anchor in
+			// range — the retired 1:1 binding left the second spreader falsely unserved.
 			var anchors = new[] { C(10, 10), C(14, 10) };
 			var assigned = ExpansionPlannerBotModule.AssignRefineries(anchors, new[] { C(12, 10) }, 8);
 
-			// equidistant: the lower anchor index takes it, the other stays unserved
-			Assert.That(assigned, Is.EqualTo(new[] { 0, -1 }));
+			Assert.That(assigned, Is.EqualTo(new[] { 0, 0 }));
+		}
+
+		[Test]
+		public void AssignRefineriesRadiusTenDiagonalBoundary()
+		{
+			// SPEC radius-10 boundary: (7,7) away is inside (d^2=98 <= 100); one cell past on both axes is out.
+			var refinery = new[] { C(30, 10) };
+			Assert.That(ExpansionPlannerBotModule.AssignRefineries(new[] { C(37, 17) }, refinery, 10),
+				Is.EqualTo(new[] { 0 }));
+			Assert.That(ExpansionPlannerBotModule.AssignRefineries(new[] { C(38, 18) }, refinery, 10),
+				Is.EqualTo(new[] { -1 }));
 		}
 
 		[Test]
@@ -105,7 +117,9 @@ namespace OpenRA.Mods.Cameo.Test
 		{
 			// REF-1 v2 spec test: field A has three spreaders and one refinery already; field B has one spreader,
 			// none — both in reach. B's spreader must be claimed next (tier 1), not A's second (tier 2).
-			var anchors = new[] { C(20, 20), C(24, 20), C(28, 20), C(60, 20) };
+			// REPAIR-B3: the extra spreaders sit beyond the serve radius so the existing refinery does NOT
+			// cover them — in-radius siblings would be served outright and never reach the claim order.
+			var anchors = new[] { C(20, 20), C(32, 20), C(36, 20), C(60, 20) };
 			var fieldOf = new[] { 0, 0, 0, 1 };
 			var fieldCells = Fields(
 				new[] { C(19, 19), C(20, 20), C(21, 20), C(25, 20), C(29, 20) },
@@ -129,8 +143,9 @@ namespace OpenRA.Mods.Cameo.Test
 		public void ClaimOrderTierTwoPicksTheSpreaderFarthestFromTheFieldsRefinery()
 		{
 			// Once the only other field is served, field A's second refinery goes to the spreader farthest from
-			// A's first refinery (at 21,21 serving the (20,20) spreader): (28,20), not (24,20).
-			var anchors = new[] { C(20, 20), C(24, 20), C(28, 20) };
+			// A's first refinery (at 21,21 serving the (20,20) spreader). REPAIR-B3: the candidates sit beyond
+			// serve radius — shared coverage would serve them outright inside it.
+			var anchors = new[] { C(20, 20), C(32, 20), C(38, 20) };
 			var fieldOf = new[] { 0, 0, 0 };
 			var fieldCells = Fields(new[] { C(19, 19), C(20, 20), C(21, 20), C(25, 20), C(29, 20) });
 
@@ -343,16 +358,16 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
-		public void RefineryFlushToTheFieldBindsItsAnchorBeyondServeRadius()
+		public void RefineryFlushToTheFieldBindsItsAnchorsBeyondServeRadius()
 		{
 			// A refinery placed flush to a field's far edge can land beyond the serve radius from the spreader;
-			// it still is that field's refinery and binds the nearest of the field's anchors — without this the
-			// anchor stays unserved and the law claims a duplicate.
+			// it still is that field's refinery. REPAIR-B3: shared coverage binds EVERY anchor of the field —
+			// the nearest is no longer preferred over the rest.
 			var anchors = new[] { C(10, 10), C(14, 10) };
 			var assigned = ExpansionPlannerBotModule.AssignRefineries(anchors, new[] { C(30, 10) }, 8,
 				new[] { 0, 0 }, new[] { 0 });
 
-			Assert.That(assigned, Is.EqualTo(new[] { -1, 0 }));
+			Assert.That(assigned, Is.EqualTo(new[] { 0, 0 }));
 		}
 
 		[Test]
@@ -643,6 +658,122 @@ namespace OpenRA.Mods.Cameo.Test
 			var sold = RefineryLifecycle.Classify(false, false, false);
 			Assert.That(sold.LostCause, Is.EqualTo("sold"));
 			Assert.That(sold.Acquired, Is.False);
+		}
+
+		// REPAIR-B3 (SPEC_2026-10-09): the coverage oracle — deterministic route accounting, leg-pair
+		// verdicts, site ranking, and the bounded probe budget. Pure functions; no World.
+
+		[Test]
+		public void RouteLengthMilliCountsDiagonalStepsDearly()
+		{
+			Assert.That(RefineryCoverageOracle.RouteLengthMilli(new List<CPos> { C(0, 0) }), Is.EqualTo(0));
+			Assert.That(RefineryCoverageOracle.RouteLengthMilli(new List<CPos> { C(0, 0), C(1, 0) }), Is.EqualTo(1000));
+			Assert.That(RefineryCoverageOracle.RouteLengthMilli(new List<CPos> { C(0, 0), C(1, 1) }), Is.EqualTo(1414));
+			Assert.That(RefineryCoverageOracle.RouteLengthMilli(new List<CPos> { C(0, 0), C(1, 1), C(2, 1) }), Is.EqualTo(2414));
+		}
+
+		[Test]
+		public void RouteLengthMilliIsDirectionSymmetric()
+		{
+			var forward = new List<CPos> { C(0, 0), C(1, 1), C(2, 1), C(3, 1) };
+			var reverse = forward.AsEnumerable().Reverse().ToList();
+			Assert.That(RefineryCoverageOracle.RouteLengthMilli(reverse),
+				Is.EqualTo(RefineryCoverageOracle.RouteLengthMilli(forward)));
+		}
+
+		[Test]
+		public void WithinServeRadiusIsInclusive()
+		{
+			Assert.That(RefineryCoverageOracle.WithinServeRadius(C(0, 0), C(10, 0), 10), Is.True);
+			Assert.That(RefineryCoverageOracle.WithinServeRadius(C(0, 0), C(7, 7), 10), Is.True);    // 98 <= 100
+			Assert.That(RefineryCoverageOracle.WithinServeRadius(C(0, 0), C(8, 8), 10), Is.False);   // 128 > 100
+		}
+
+		[Test]
+		public void BothLegsCoverRequiresBothLegsInsideTheBound()
+		{
+			const int limit = 10_000;
+			var okOut = new RefineryRouteWitness(true, 9_000, 1);
+			var okIn = new RefineryRouteWitness(true, 8_000, 1);
+			var longIn = new RefineryRouteWitness(true, 12_000, 1);
+			var deadOut = new RefineryRouteWitness(false, 0, 1);
+
+			Assert.That(RefineryCoverageOracle.BothLegsCover(okOut, okIn, limit), Is.True);
+			// Asymmetric legs (spec F9): a covered outbound + over-long inbound does not cover.
+			Assert.That(RefineryCoverageOracle.BothLegsCover(okOut, longIn, limit), Is.False);
+			Assert.That(RefineryCoverageOracle.BothLegsCover(deadOut, okIn, limit), Is.False);
+		}
+
+		[Test]
+		public void VerdictAggregationTreatsDeferredAsUnknown()
+		{
+			Assert.That(RefineryCoverageOracle.Aggregate(true, true), Is.EqualTo(RefineryCoverageVerdict.Covered));
+			Assert.That(RefineryCoverageOracle.Aggregate(true, false), Is.EqualTo(RefineryCoverageVerdict.Covered));
+			// Budget cut before every candidate failed: Unknown, not Unserved — the anchor is retried.
+			Assert.That(RefineryCoverageOracle.Aggregate(false, true), Is.EqualTo(RefineryCoverageVerdict.Unknown));
+			Assert.That(RefineryCoverageOracle.Aggregate(false, false), Is.EqualTo(RefineryCoverageVerdict.Unserved));
+		}
+
+		[Test]
+		public void CompareSitesIsDeterministic()
+		{
+			// Newly covered desc, then cost asc, then X then Y.
+			Assert.That(RefineryCoverageOracle.CompareSites(2, 5000, C(1, 1), 1, 1000, C(0, 0)), Is.LessThan(0));
+			Assert.That(RefineryCoverageOracle.CompareSites(1, 1000, C(0, 0), 1, 5000, C(0, 0)), Is.LessThan(0));
+			Assert.That(RefineryCoverageOracle.CompareSites(1, 1000, C(0, 0), 1, 1000, C(1, 0)), Is.LessThan(0));
+			Assert.That(RefineryCoverageOracle.CompareSites(1, 1000, C(0, 0), 1, 1000, C(0, 1)), Is.LessThan(0));
+			Assert.That(RefineryCoverageOracle.CompareSites(1, 1000, C(0, 0), 1, 1000, C(0, 0)), Is.EqualTo(0));
+		}
+
+		[Test]
+		public void ProbeBudgetReArmsPerAnchorButPacesPerTick()
+		{
+			var budget = new RefineryProbeBudget(siteLimit: 2, probeLimit: 2, tickProbeLimit: 3);
+
+			Assert.That(budget.TryConsumeSite(), Is.True);
+			Assert.That(budget.TryConsumeSite(), Is.True);
+			Assert.That(budget.TryConsumeSite(), Is.False);          // 3rd site defers within one anchor
+			Assert.That(budget.DeferredCandidates, Is.EqualTo(1));
+
+			Assert.That(budget.TryConsumeProbe(), Is.True);
+			Assert.That(budget.TryConsumeProbe(), Is.True);
+			Assert.That(budget.TryConsumeProbe(), Is.False);         // per-anchor probe cap (tick spent 2/3)
+
+			budget.NextAnchor();                                     // next anchor re-arms site/probe caps
+			Assert.That(budget.TryConsumeProbe(), Is.True);          // ... the last tick slot still serves it
+			Assert.That(budget.TryConsumeProbe(), Is.False);         // ... then the per-tick cap binds
+			Assert.That(budget.TickProbesOpen, Is.False);
+
+			budget.NewTick();
+			Assert.That(budget.TickProbesOpen, Is.True);
+			Assert.That(budget.TryConsumeProbe(), Is.True);
+		}
+
+		[Test]
+		public void AssignRefineriesRouteGateHonoursTheWitness()
+		{
+			// A geometrically in-range refinery only serves the anchor when the probe witness covers it —
+			// unreachable or over-long routes stay -1 even inside the radius. The oracle returns the
+			// round-trip rank for covered pairs and null for failed/unproven ones.
+			var anchors = new[] { C(14, 10) };
+			var refineries = new[] { C(12, 10) };
+
+			Assert.That(ExpansionPlannerBotModule.AssignRefineries(anchors, refineries, 8,
+				routeRank: (a, r) => null), Is.EqualTo(new[] { -1 }));
+			Assert.That(ExpansionPlannerBotModule.AssignRefineries(anchors, refineries, 8,
+				routeRank: (a, r) => 4_000), Is.EqualTo(new[] { 0 }));
+		}
+
+		[Test]
+		public void AssignRefineriesPicksTheLowerRankedRefinery()
+		{
+			// Both refineries cover the anchor; the oracle's rank (not raw distance) decides.
+			var anchors = new[] { C(14, 10) };
+			var refineries = new[] { C(20, 10), C(12, 10) };   // r1 is geometrically nearer
+			var assigned = ExpansionPlannerBotModule.AssignRefineries(anchors, refineries, 8,
+				routeRank: (a, r) => r == 0 ? 3_000 : 9_000);
+
+			Assert.That(assigned, Is.EqualTo(new[] { 0 }));   // r0 wins on rank despite the longer geometry
 		}
 
 		sealed class LawStub : IBotExpansionTargetProvider
