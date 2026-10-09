@@ -566,6 +566,7 @@ cabal_core:
 	ProvidesPrerequisite@swlimit:
 		Prerequisite: cabalnuke_swlimit
 		RequiresCondition: cabalnuke
+		RequiresPrerequisites: global-swlimit
 	NukePowerCA:
 		OrderName: CabalMagicNuke
 		AllowMultiple: True

@@ -1326,6 +1326,7 @@ World:
 	# Stock ValidateOrder removed: CameoValidateOrder shadows it below with identical
 	# authority plus takeover seats (validator order can't veto, only tighten).
 	CameoValidateOrder:
+	SuperweaponPlugLimit:
 	BotTakeoverTracker:
 	CameoAutoOrders:
 	LobbySystemActorConditionCheckbox@BOT_TAKEOVER:

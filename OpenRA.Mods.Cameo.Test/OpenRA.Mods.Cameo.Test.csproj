@@ -23,5 +23,22 @@
     <None Include="../tools/tests/fixtures/cannonap_continuous_fixture.json"
           Link="tools/tests/fixtures/cannonap_continuous_fixture.json"
           CopyToOutputDirectory="Always" />
+    <!-- SW-cap wiring fixtures: the real host yaml files scanned by
+         SuperweaponPlugLimitYamlTest to pin the four global-swlimit providers. -->
+    <None Include="../mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/buildings.yaml"
+          Link="tools/tests/fixtures/swcap/td_gdi_buildings.yaml"
+          CopyToOutputDirectory="Always" />
+    <None Include="../mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/buildings.yaml"
+          Link="tools/tests/fixtures/swcap/td_nod_buildings.yaml"
+          CopyToOutputDirectory="Always" />
+    <None Include="../mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/buildings.yaml"
+          Link="tools/tests/fixtures/swcap/cabal_buildings.yaml"
+          CopyToOutputDirectory="Always" />
+    <None Include="../mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/defenses.yaml"
+          Link="tools/tests/fixtures/swcap/cabal_defenses.yaml"
+          CopyToOutputDirectory="Always" />
+    <None Include="../mods/cameo/ContentPacks/TiberianSun/GDI/yaml/buildings.yaml"
+          Link="tools/tests/fixtures/swcap/ts_gdi_buildings.yaml"
+          CopyToOutputDirectory="Always" />
   </ItemGroup>
 </Project>
