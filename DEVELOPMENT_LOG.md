@@ -20782,3 +20782,41 @@ the existing helpers only — no blanket normalization, no yaml edits except one
   `PendingMatchesBoundInstanceNotName`, `DroppedProducerLosesDedupeHistory`. 11 seam tests green; full suite 1285/1285; Release
   clean; boot gate main menu, zero new exceptions. Still record-only — no orders, no world
   mutation, no RNG.
+
+
+## 2026-10-09 Sol: economy logger implementation checkpoint
+
+Isolated codex/replay-health-logger on f7e1d0fff. New opt-in recorder/world controller, bounded writer and queue/head timing core; no YAML mount, queue decision source, engine pin, orders or launches changed. Focused core/writer tests 16/16. Current seam outcome coverage is unresolved, so activation deliberately marks evidence incomplete (UNKNOWN); not ready for adoption. Remaining recorder/schema round-trip tests, corrected seam restack, measured runtime cost and independent review. See docs/design/REPLAY_HEALTH_LOGGER.md.
+
+
+### 2026-10-09 Sol logger consumer-fit checkpoint
+
+Canonical shared health/raw files, shared schema serializer, early-world-disposal cleanup; no YAML mount or gameplay changes. Focused 20/20 pass. Approved offline analyzer consumes actual C# test output: normal OBSERVED_HEALTHY, 250-tick ready BLOCK, incomplete end UNKNOWN. Still deliberately incomplete from activation pending accepted outcome seam; no adoption or launches.
+
+
+### 2026-10-09 Sol logger producer-state/cost preparation
+
+Producer liveness separated from queue enablement; disabled unfinished queues paused, Done remains ready; re-enabled idle starts a new interval. Focused27/27 PASS and explicit one-player128-queue/45001-tick core measurement PASS (19,021,579 output bytes). Runtime cost/adoption unproven; shared32MiB budget cannot hold two maximum-census players, so supported cohort forecast and measured cost gate remain required. No games or mount changes.
+
+
+2026-10-09 output-budget correction: shared file cap is now 128MiB, matching
+approved replay_health.read_jsonl MAX_FILE_BYTES (128MiB); line cap64KiB and
+record cap200000 unchanged. This supersedes the earlier32MiB implementation.
+Explicit one/two-player fixtures each keep128 queues through45001 ticks; both
+PASS. Two-player receipt:1802 pulses,38046762 output bytes,1144.5332ms,
+300133944 allocated bytes (process/JIT warm-up differs; timing is NOT a comparative
+runtime benchmark). Raw stream budgets are independent. Arbitrary64-player
+maximum queue/event workloads are not certified; forecasting and overflowUNKNOWN
+remain required. No mount/seam/campaign clearance. Receipt:
+engine/bin/TestResults/economy-health-core-cost-2p.json.
+
+
+### 2026-10-09 actual-path economy consumer CLI evidence
+
+Correction: replay_health.py startup checker does not read the new economy file. Separate approved economy_invariants.py@2a417 CLI does. Actual C# serializer+bounded writer generate unique support/Logs/cameo-ai-economy-health.jsonl files; immutable pinned CLI consumes them and verifies byte digest/status/exit. C#4/4+PythonCLI4/4 PASS (healthy0,ready250 BLOCK20,incomplete21,missing-health21). Existing drivers still need explicit dual-checker integration; no runtime/adoption approval.
+
+### 2026-10-09 accepted-value and budget checkpoint
+
+Recorded VP bounded approval of 6b0c1fd73bf5a6d08b066fd34cef22f7a49a3f9e for sizing disclosure and pinned CLI tests only; reviewer Python 4/4 passed on existing C# fixtures, while its missing ignored engine dependency prevented fixture regeneration. Receipt: REREVIEW_2026-10-09_logger_sizing_6b_luna.md.
+
+Extracted the runtime accepted-resource raw serializer for direct tests of positive credit versus zero and unknown sender identity. Added exact byte-budget exhaustion regression: no extra append or certified record after failure. Focused C# 30/30 and pinned economy CLI 4/4 pass on regenerated fixtures. No mount, gameplay or engine changes; unresolved terminal causality and runtime adoption gates remain.
