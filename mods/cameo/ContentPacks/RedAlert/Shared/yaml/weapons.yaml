@@ -959,7 +959,7 @@ MagicOrb:
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water
+		ValidTargets: Ground, Water, Air
 		Falloff: 100, 55, 0
 		IntegrityScale: 100
 		PercentageSpread: 50
@@ -1005,7 +1005,7 @@ MagicOrb:
 		Spread: 1600
 		Damage: 4000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		ValidTargets: Ground, Water
+		ValidTargets: Ground, Water, Air
 		Falloff: 100, 75, 50, 25
 	Warhead@EMPUnit: AffectsIntegrity
 		Spread: 2000
@@ -1118,7 +1118,7 @@ MagicOrb2:
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
 		FriendlyFireSpread: 50
-		ValidTargets: Ground, Water
+		ValidTargets: Ground, Water, Air
 		Falloff: 100, 55, 0
 		IntegrityScale: 100
 		PercentageScale: 10000
@@ -1165,7 +1165,7 @@ MagicOrb2:
 		Spread: 2400
 		Damage: 2000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-		ValidTargets: Ground, Water
+		ValidTargets: Ground, Water, Air
 		Falloff: 100, 75, 50, 25
 	Warhead@EMPUnit: AffectsIntegrity
 		Spread: 2000
