@@ -5418,3 +5418,6 @@ Read design/REPLAY_HEALTH_ANALYZER.md before health/campaign work. tools/ai/repl
 
 
 2026-10-09 replay-health review corrections: rejected duplicate/nonfinite JSON, non-string identities, malformed summary and empty non-list timeline; output now exclusive atomic publication to a new report only, never overwrites artifacts; event joins and window scan linear.22 tests pass including200000 snapshots/events/timeline points in1.20s. ab7285e81 remains superseded FIX REQUIRED; revised commit requires independent re-review. No runtime/game/master changes.
+
+
+2026-10-09 maintainer queue/cash thresholds: separate economy_invariants.py and test_economy_invariants.py implemented against schema1 complete50tick health contract;10 focused tests pass. New logger not shipped: missing telemetry UNKNOWN. Approved replay_health.py bytes unchanged, source/runtime ownership gates remain. New tool requires independentreview beforeintegration; provisional cashband1000..10000/1500ticks, zero/full250ticks, ready250,idle1500,cancels3/1500. See design/REPLAY_HEALTH_ANALYZER.md finalsection.

@@ -205,3 +205,50 @@ determinism are separate gates. No fresh A/B success or master release claim.
 Research contributions: fleet `RESEARCH_2026-10-09_replay_health_gate.md`
 (Luna Manager), `REPORT_2026-10-09_luna_campaign_health_gate_seams.md`
 (Luna DevOps), and `REPORT_2026-10-09_faction_ab_forensics.md` (Sol + Luna).
+
+## Maintainer construction and cash invariants (2026-10-09)
+
+New separate `tools/ai/economy_invariants.py` preserves the approved startup
+checker bytes. Run against `Logs/cameo-ai-economy-health.jsonl` with explicit
+GameUid/player; exit semantics match the startup checker. This is an offline
+verifier against a new contract, not evidence that runtime logging is shipped.
+Missing old-log fields are UNKNOWN. No live decision without shared watermark.
+
+Mandatory defects: live building producer's ready item unplaced for >=250
+ticks; idle construction queue for >=1500 ticks; >=3 cancellations of the same
+building type owner-wide within an inclusive1500-tick rolling window. Reasons
+(no site, policy hold, cap, affordability, relocation, enemy damage) are recorded
+for diagnosis; they do not erase the requested threshold violation. Dead
+producer queues are not treated as a postmortem obligation to produce.
+
+Initial **proposed** cash band is 1000..10000 combined cash+stored resources,
+inclusive. Outside band for1500ticks is a defect; zero total funds for250ticks
+is an additional defect. Full positive-capacity player storage for250ticks is
+a defect. Zero capacity is not100% storage. Above-band spend delta<=1000 is a
+separate float/no-spending signal. These are starting thresholds to validate
+by faction/economy; no universal calibrated optimal bank is claimed. Resource
+storage capacity is player-wide engine capacity, not a separate tank at each
+refinery. Do not confuse unbounded cash with stored resources.
+
+Schema1 contract: all records carry GameUid/player/map_uid/faction/profile,
+profile_supported=true only after Ruleset profile resolution, schema integer1,
+seq contiguous from0, monotonic worldtick and dropped0. Kinds:
+
+- `pulse` every<=50ticks: complete building-queue census (queues_complete=true),
+  player_active bool, cash/resources/capacity/spent cumulative nonnegative ints;
+  each queue has unique queue_id, producer_live bool, state ready/idle/producing/
+  paused, exact state_since_tick, reason. Ready additionally has item and unique
+  production item_id; state timestamps are captured from transitions, not
+  reconstructed from occasional samples. Logger keeps queue IDs stable.
+- `cancel`: queue_id/item/production item_id/reason, exactly once per cancelled
+  item. Cancel records are building-queue events only. Duplicate item cancellation
+  is invalid evidence, not another counted defect.
+- `end`: complete=true, same envelope, after final pulse<=50ticks, commits the
+  quiescent capture. Missing sequence/pulse/census/terminal or unsupported profile
+  makes UNKNOWN even if earlier defect evidence exists.
+
+Runtime logger/Architect queue observer must supply these fields before the
+driver can require this new gate. Actual accepted delivery remains an additional
+independent event, never inferred from cash/credited income. Tests cover exact
+250/1500 boundaries, ready/idle, dead producer, cancellations, balance recovery,
+zero/full storage, low spending and malformed/incomplete capture.

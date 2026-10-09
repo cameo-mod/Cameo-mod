@@ -20413,3 +20413,6 @@ Isolated codex/replay-health-gate at base3d; exclusive tool/test/design scope. E
 
 
 2026-10-09 replay-health review corrections: rejected duplicate/nonfinite JSON, non-string identities, malformed summary and empty non-list timeline; output now exclusive atomic publication to a new report only, never overwrites artifacts; event joins and window scan linear.22 tests pass including200000 snapshots/events/timeline points in1.20s. ab7285e81 remains superseded FIX REQUIRED; revised commit requires independent re-review. No runtime/game/master changes.
+
+
+2026-10-09 ? Economy invariant verifier plan: latest maintainer requires ready250/idle1500/repeatedcancel/cash-band defects. Existing startup checker cannot infer queue age/cancel reasons/storage from old logs. Preserve independently approved replay_health.py bytes; add separate tools/ai/economy_invariants.py + focused tests + contract docs in exclusive codex/replay-health-gate worktree.50tick complete pulses + exact state timestamps/cancel events, strictsequence/schema and truncated UNKNOWN; source logger still blocked. No live/source agent overlap.
