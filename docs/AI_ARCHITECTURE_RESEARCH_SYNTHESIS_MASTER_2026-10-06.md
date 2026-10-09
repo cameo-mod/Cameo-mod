@@ -421,6 +421,7 @@ These are the ways a stack of switches can lose strength; PT5 measures how much 
 | M9 | Learned files never load: every learned path is bare (`ai/learned/*.yaml`), but the mod is mounted only as `cameo|…` and `Folder.Contents` indexes top-level names only, so `FileSystem.Exists()` is false | all learners (`AO_tier3_bandits`, `AK_build_order_knobs`, `BotLearnedPriors`, `AP_tier1_priors`) | bandits pick arms from priors only (this run: personality `rush`, plan `fortify`); learned counters and priors never apply | runtime log: `plan-bandit learned: ai/learned/plan_bandits.yaml missing, priors only`, `LEARNED priors: … arsenal_priors.yaml missing`; `engine/OpenRA.Game/FileSystem/FileSystem.cs:257-266`, `Folder.cs:30-39` | **open** (present before the arm too) |
 | M10 | Front/back planner crashes the game: `FindTilesInAnnulus(…, outer)` with `outer = ceil((FrontProj + 14) / cos 45°) + 1`, which exceeds the engine's `MaximumTileSearchRange` 50 once a defence front is ~21+ cells from the base centre | `BI_front_back_placement` (`Enabled: true`) | game crash (on "A Nuclear Winter" at world tick ~2,000) | this review's run: `ArgumentOutOfRangeException … requested range (71) cannot exceed … (50)` at `BaseFrontBackPlannerBotModule.cs:773` | **open** |
 | M12 | MCV ownership conflict: the expansion pre-build claims the travelling MCV under `BaseBuilderBotModuleCA`'s name (`BotLeasePurpose.McvExpansion`, `BaseBuilderBotModuleCA.cs:1247-1272, 1881`), but the engine's `McvExpansionManagerBotModule` is the module that moves and deploys MCVs. With enforcement on, the gate refuses its orders | `BT_expansion_prebuild` + `EnforceAtOrderGate: true` | expansion MCVs stand still; money banks up | measured: **1,044 refused** `Move` orders (`ORDERGATE REFUSE McvExpansionManagerBotModule@0 … held by BaseBuilderBotModuleCA`, from tick 12,107) in the armed 1v1 | **open** (today's MCV fix repairs the deploy-cell search, not this) |
+| M13 | Team escort drain: the armed expansion appetite (AC, U, greedy MCV) keeps every bot claiming far fields; each contested claim asks the TC-3 assist election to escort it, and defend requests elect rescuers. The elected bot's army spends the game escorting allies instead of attacking | `BH_tc3_assist_election`, `BC_tc3_rescue_election`, `S_tc2_defend_answers` with AC/U | in a team, some bots never attack and their army stays small: "passive, almost no units, no threat" | measured 3v3 (PT5): 90 escort answers + 46 defend answers; Multi0 made **0** attack waves in 60,000 ticks with a peak army of 22,270 | **open** |
 | M11 | Plugs bought through real queues | `F_plug_spawn` + `02241219` | bots now pay for plugs (fair; previously an instant installer). Slightly more spending | `02241219` | changed today (fairness fix, not a strength fix) |
 
 ## PT4. Team play: how bots coordinate, and where humans fit in
@@ -458,6 +459,23 @@ master with `37d9fc6a` reversed. Run logs: `/tmp/claude-0/run_*` in the review c
 | armed − front/back planner | `hard` **won** | 19,766 ticks | 74,610 / 13,100 | 26 / 0 | 236,540 / 158,360 | **86,723** | 1,044 refused (M12), 17 crossed |
 | pre-arm | `hard` **won** | 22,759 ticks | 154,580 / 103,680 | 47 / 5 | 325,948 / 322,050 | 11,395 | 84 refused (`ExternalBotOrdersManager` vs squad leases), 3 crossed |
 
+**3v3 on "Winter's End (Rich)"** (Tournament, 6 spawns; team A Multi0–2 `hard` top-left, team B Multi3–5 `classic`
+bottom-right, verified): armed (minus the front/back planner), 60,000-tick limit, no exceptions. Result: **draw by
+timeout** (every record says `lost`, the harness's way of recording a time-out). The `hard` team was far ahead on
+attrition (kills 612,280 vs 268,220; buildings 61 killed vs 23 lost) but could not end the game in ~40 game-minutes.
+
+| Bot | Kills / deaths (value) | Buildings killed / lost | Earned / spent per tick | Peak banked | Peak army | Attack waves (`secure`) | Escort / defend answers | Refused orders |
+|---|---|---|---|---|---|---|---|---|
+| Multi0 `hard` | 50,670 / 50,230 | 1 / 0 | 6.66 / 5.86 | 62,562 | 22,270 | **0** | 32 / 20 | 0 |
+| Multi1 `hard` | 499,110 / 222,080 | 60 / 13 | 11.80 / 10.84 | 62,631 | 148,790 | 10 | 36 / 18 | **11,962** MCV (M12) |
+| Multi2 `hard` | 62,500 / 29,610 | 0 / 10 | 7.52 / 6.70 | 62,361 | 48,800 | 2 | 22 / 8 | 0 |
+| Multi3–5 `classic` | 268,220 total / 608,120 total | 23 / 61 total | ~4.9 / ~5.0 each | ~10,100 each | 48,480–63,850 | — | — | — |
+
+`team_coordination_report.py`: team A made 244 mission attempts with 68 defend missions, but only **one** shared push
+window (Multi1 + Multi2 against Multi4) in the whole match. The combat veto fired 4 times, so M3 is not what held them
+back here. **This reproduces the playtest symptom:** two of the three armed bots spent the match as escorts and
+defenders (M13), banked up to 62,000 each, and never threatened anyone. The one strong bot carried the team.
+
 **Per world tick** (the two matches ran to different lengths): the pre-arm bot earned **14.32** vs **11.97**
 (+20 %) and spent **14.15** vs **8.01** (+77 %); it ended with 11,395 banked against 86,723, and a larger army
 (133,440 vs 106,210) despite fighting much harder (deaths 103,680 vs 13,100). Personalities differed (`turtle` vs
@@ -467,7 +485,7 @@ master with `37d9fc6a` reversed. Run logs: `/tmp/claude-0/run_*` in the review c
 fought early (kills from tick 2,250) and won in about 13 game-minutes. Both arms won, but the armed bot turns income into
 army far more slowly. It holds back buildings and expansions (M1, M12) and banks the money: a third of its income was
 unspent. So the restraint stack (M1–M5) alone does not reproduce "passive and idle" in a duel; what it measurably costs
-is spending speed. The team runs (PT9) are the next evidence. The playtest differed from this duel in five ways that
+is spending speed. The 3v3 above does reproduce it, through the team escort drain (M13) on top of the banking. The playtest differed from this duel in five ways that
 all point toward weaker bots: an 8-bot **team** (the ten team groups, PT4), **human** opponents with defended bases
 (the veto, M3), Red Alert factions (M7, fixed today), engineers limited to visible targets (M8, fixed today), and
 possibly maps where the front/back planner's search stays under its crash limit.
@@ -482,7 +500,7 @@ possibly maps where the front/back planner's search stays under its crash limit.
 | `02241219` restores engineer/crate omniscience | M8 | fixed |
 | `02241219` plugs via normal queues; limited superweapons by default | B2/B6 playtest bugs (rules), not bot strength | done; bots now pay for plugs |
 | economy health logger, replay health gate, queue-transition seam | diagnostics only (no behaviour) | they will *detect* M1/M6/M7-type stalls in future matches |
-| — | M1–M5 (the restraint stack), M9 (learned files), M10 (crash), M12 (MCV ownership conflict) | **not addressed** |
+| — | M1–M5 (the restraint stack), M9 (learned files), M10 (crash), M12 (MCV ownership conflict), M13 (team escort drain) | **not addressed** |
 
 ## PT7. What to do
 
@@ -507,6 +525,9 @@ possibly maps where the front/back planner's search stays under its crash limit.
    `McvExpansionManagerBotModule` (`IBotUnitLeases.Transfer`, the negotiated handoff the engineer-transport path
    already uses), or the base builder emits the MCV orders itself under `BotIssuer.IssueAs`. Gate: 0 refused MCV
    orders in a match with `BT_expansion_prebuild` armed.
+6b. M13: an escort or rescue answer must not cost a bot its offence. Answer an assist only from an army above the
+   bot's own launch bar (spare units), cap concurrent escorts per bot at one, and expire an escort when the claim is
+   uncontested. Gate: in a 3v3, every `hard` bot launches at least one wave in the first 30,000 ticks.
 
 **Architecture (feeds Part IV):**
 7. **A liveness rule for attacks.** Every restraint on the launch path gets a bounded hold, and one owner (the squad
@@ -549,8 +570,9 @@ reproduction (M10), the learned-file proof (M9), the armed 1v1 (above), the 3v3 
 (team A Multi0–2 at 6,34 / 26,26 / 34,6, top-left; team B Multi3–5 at 95,123 / 103,103 / 123,95, bottom-right;
 `split_spawn_sides` gives the same split for all 720 orderings of the spawn list).
 
-Done since: the 1v1 pre-arm (PT5). Queued in the review container when this was written (one game at a time,
-`/tmp/claude-0/master_chain.sh`): 3v3 armed on Winter's End (Rich) → 2v2 armed and 2v2 pre-arm on Terra Cotta. **If that container is
+Done since: the 1v1 pre-arm and the 3v3 armed on Winter's End (Rich) (PT5). Still owed: a **pre-arm 3v3** on the same
+map (the direct comparison for M13), and the 2v2 pair on Terra Cotta, which was queued in the review container when
+this was written (`/tmp/claude-0/master_chain.sh`). **If that container is
 gone, rerun them from a fresh session** (route: LESSONS_LEARNED "Building and boot-gating in a Linux cloud
 container"), then add the team rows to PT5, scored with
 `python tools/ai/team_coordination_report.py <support dir>` and `tools/ai/ab_summary.py`. Keep the yaml swap out of

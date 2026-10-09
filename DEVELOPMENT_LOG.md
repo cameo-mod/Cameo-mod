@@ -28,8 +28,12 @@
   `credit_float` (planned, no fitter). 1,272 `int` + 133 `bool` Info fields exist; see the doc's PT8 for the limits.
 - `docs/LESSONS_LEARNED.md`: Linux cloud build/boot route (.NET 10 via apt, engine via `git archive`, xvfb +
   `ALSOFT_DRIVERS=null`). `docs/design/AI_MASTER_PLAN.md` §3: unscheduled runtime block A1–A10, B1–B6, C1–C4 (111 h).
-- **Not finished:** the pre-arm 1v1, the 3v3 on "Winter's End (Rich)" (spawns verified top-left vs bottom-right) and the
-  2v2 pair on Terra Cotta were still running when this was written. Continue from the doc's PT9.
+- **Later the same evening:** pre-arm 1v1: `hard` won, earned 14.32 / spent 14.15 per tick vs the armed 11.97 / 8.01
+  (banked 11,395 vs 86,723). Armed 3v3 on "Winter's End (Rich)" (spawns verified top-left vs bottom-right): draw by
+  timeout; the `hard` team far ahead (kills 612,280 vs 268,220) but two of its three bots spent the match escorting
+  and defending allies (90 escort + 46 defend answers; Multi0 0 attack waves, peak army 22,270) → new finding **M13**
+  (team escort drain), which reproduces the playtest symptom. Multi1 alone had 11,962 refused MCV orders (M12).
+- **Not finished:** pre-arm 3v3 (same map) and the 2v2 pair on Terra Cotta. Continue from the doc's PT9.
 
 # 2026-10-09 — Devin: B-lane master repair batch — limited-SW default + engineer/crate flags + bot plug production
 
