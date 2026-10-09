@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Mandatory economy defect checks over complete schema-1 health telemetry.
+"""Mandatory economy defect checks over complete schema-2 health telemetry.
 
 No game launches or source repairs. Exit 0: observed checks passed; 20: defect
 review hold; 21: unsupported/incomplete evidence. Cash thresholds provisional.
@@ -11,7 +11,7 @@ from pathlib import Path
 
 from replay_health import EvidenceError, atomic_report, identity, integer, read_jsonl
 
-POLICY = "economy-invariants-v1"
+POLICY = "economy-invariants-v2"
 
 
 def analyze(rows, game_uid, player):
@@ -19,12 +19,12 @@ def analyze(rows, game_uid, player):
     identity(player)
     selected = [r for r in rows if r.get("game_uid") == game_uid and r.get("player") == player]
     report = {"policy": POLICY, "status": "UNKNOWN", "game_uid": game_uid, "player": player,
-              "findings": [], "cash_band": {"low": 1000, "high": 10000,
+              "findings": [], "diagnostics": [], "cash_band": {"low": 1000, "high": 10000,
               "band_ticks": 1500, "near_empty_max": 100, "near_empty_ticks": 250,
               "full_storage_ticks": 250},
               "scope": "economy defects; reasons are diagnostic, not causal proof"}
     if not selected:
-        report["error"] = "Missing schema-1 economy health telemetry"
+        report["error"] = "Missing schema-2 economy health telemetry"
         return report
     seen = set()
     def defect(code, tick, details):
@@ -37,13 +37,14 @@ def analyze(rows, game_uid, player):
     cancel_windows = {}
     cancelled_ids = set()
     balances = {name: None for name in ("low", "high", "near_empty", "full")}
-    last_spent, high_spent, pulses = None, None, 0
+    pulses = 0
+    float_diagnostic = False
     ended = False
     try:
         for row in selected:
             if ended:
                 raise EvidenceError("record after terminal health event")
-            if type(row.get("schema")) is not int or row["schema"] != 1:
+            if type(row.get("schema")) is not int or row["schema"] != 2:
                 raise EvidenceError("unsupported health schema")
             if integer(row.get("seq")) != sequence:
                 raise EvidenceError("health sequence missing/duplicate")
@@ -137,11 +138,18 @@ def analyze(rows, game_uid, player):
                 if state == "idle" and active and queue["producer_live"] and tick - since >= 1500:
                     defect("BUILDING_QUEUE_IDLE", tick, {"queue_id": queue_id,
                            "age_ticks": tick-since, "reason": reason})
-            cash, resources, capacity, spent = (integer(row.get(k)) for k in
-                                               ("cash", "resources", "capacity", "spent"))
-            if resources > capacity or (last_spent is not None and spent < last_spent):
-                raise EvidenceError("invalid storage/cumulative spend")
-            last_spent = spent
+            cash, resources, capacity = (integer(row.get(k)) for k in
+                                         ("cash", "resources", "capacity"))
+            net_spent = row.get("net_spent")
+            if type(net_spent) is not int:
+                raise EvidenceError("missing/invalid signed net spend")
+            if ("gross_spent" not in row or row["gross_spent"] is not None
+                    or row.get("gross_spend_complete") is not False):
+                raise EvidenceError("unsupported gross spending evidence")
+            if resources > capacity:
+                raise EvidenceError("invalid storage")
+            report["spending"] = {"net_spent": net_spent, "gross_spent": None,
+                                  "gross_spend_complete": False, "tick": tick}
             funds = cash + resources
             flags = {"low": active and funds < 1000, "high": active and funds > 10000,
                      "near_empty": active and funds <= 100,
@@ -149,13 +157,9 @@ def analyze(rows, game_uid, player):
             for name, flag in flags.items():
                 if not flag:
                     balances[name] = None
-                    if name == "high":
-                        high_spent = None
                     continue
                 if balances[name] is None:
                     balances[name] = tick
-                    if name == "high":
-                        high_spent = spent
                 duration = tick - balances[name]
                 threshold = 250 if name in ("near_empty", "full") else 1500
                 if duration >= threshold:
@@ -163,9 +167,12 @@ def analyze(rows, game_uid, player):
                             "near_empty": "NEAR_EMPTY_FUNDS", "full": "STORAGE_FULL"}[name]
                     defect(code, tick, {"duration_ticks": duration, "funds": funds,
                                        "resources": resources, "capacity": capacity})
-                    if name == "high" and spent - high_spent <= 1000:
-                        defect("CASH_FLOAT_WITH_LOW_SPENDING", tick,
-                               {"duration_ticks": duration, "spend_delta": spent-high_spent})
+                    if name == "high" and not float_diagnostic:
+                        float_diagnostic = True
+                        report["diagnostics"].append({"code": "CASH_FLOAT_SPENDING_UNVERIFIED",
+                            "severity": "DIAGNOSTIC", "tick": tick,
+                            "duration_ticks": duration, "gross_spent": None,
+                            "reason": "net spend can decrease on refunds; low spending not established"})
         if not ended:
             raise EvidenceError("no complete terminal health record; live use requires shared watermark")
         if not pulses:

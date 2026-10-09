@@ -13,11 +13,12 @@ import economy_invariants as verifier
 def capture(duration=1500, state="producing", cash=5000, resources=0, capacity=10000):
     rows = []
     for tick in range(0, duration+1, 50):
-        rows.append({"schema": 1, "game_uid": "g", "player": "p", "map_uid": "m",
+        rows.append({"schema": 2, "game_uid": "g", "player": "p", "map_uid": "m",
                      "faction": "ra1_allies", "profile": "conventional", "profile_supported": True,
                      "dropped": 0, "kind": "pulse", "tick": tick, "seq": len(rows),
                      "queues_complete": True, "player_active": True,
-                     "cash": cash, "resources": resources, "capacity": capacity, "spent": tick * 10,
+                     "cash": cash, "resources": resources, "capacity": capacity,
+                     "net_spent": tick * 10, "gross_spent": None, "gross_spend_complete": False,
                      "queues": [{"queue_id": "1:building", "producer_live": True,
                                  "state": state, "state_since_tick": 0, "reason": "no_site",
                                  "item": "refinery", "item_id": "1:0"}]})
@@ -101,11 +102,32 @@ class InvariantTests(unittest.TestCase):
                 row["player_active"] = False
             self.assertEqual(codes(rows), set())
 
-    def test_cash_float_with_little_spend(self):
+    def test_cash_float_spending_unverified_diagnostic(self):
         rows = capture(cash=50000)
         for row in rows:
-            row["spent"] = 0
-        self.assertIn("CASH_FLOAT_WITH_LOW_SPENDING", codes(rows))
+            row["net_spent"] = 0
+        report = verifier.analyze(rows, "g", "p")
+        self.assertNotIn("CASH_FLOAT_WITH_LOW_SPENDING", codes(rows))
+        self.assertEqual(report["diagnostics"][0]["severity"], "DIAGNOSTIC")
+        self.assertIn("FUNDS_ABOVE_BAND", codes(rows))
+
+    def test_signed_net_spend_refunds_do_not_invalidate_capture(self):
+        rows = capture()
+        for row in rows:
+            row["net_spent"] = 500 - row["tick"]
+        report = verifier.analyze(rows, "g", "p")
+        self.assertEqual(report["status"], "OBSERVED_HEALTHY")
+        self.assertEqual(report["spending"]["net_spent"], -1000)
+        self.assertIsNone(report["spending"]["gross_spent"])
+
+    def test_legacy_or_unsupported_spend_evidence_unknown(self):
+        for mutate in (lambda r: r.update(schema=1), lambda r: r.update(net_spent=True),
+                       lambda r: r.update(gross_spent=100),
+                       lambda r: r.update(gross_spend_complete=True),
+                       lambda r: r.pop("gross_spent"), lambda r: r.pop("net_spent")):
+            rows = capture()
+            mutate(rows[0])
+            self.assertEqual(verifier.analyze(rows, "g", "p")["status"], "UNKNOWN")
 
     def test_balance_recovery_resets_duration(self):
         rows = capture(1500, cash=15000)

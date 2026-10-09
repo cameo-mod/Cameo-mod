@@ -228,18 +228,25 @@ inclusive. Outside band for1500ticks is a defect; near-empty total funds
 the maintainer confirms passive income of one credit per tick below1000 credits.
 Passive income must remain distinct from accepted harvest delivery evidence.
 Full positive-capacity player storage for250ticks is
-a defect. Zero capacity is not100% storage. Above-band spend delta<=1000 is a
-separate float/no-spending signal. These are starting thresholds to validate
+a defect. Zero capacity is not100% storage. Above-band balances also produce a
+non-blocking `CASH_FLOAT_SPENDING_UNVERIFIED` diagnostic: sampled net spending
+cannot establish low spending. These are starting thresholds to validate
 by faction/economy; no universal calibrated optimal bank is claimed. Resource
 storage capacity is player-wide engine capacity, not a separate tank at each
 refinery. Do not confuse unbounded cash with stored resources.
 
-Schema1 contract: all records carry GameUid/player/map_uid/faction/profile,
-profile_supported=true only after Ruleset profile resolution, schema integer1,
+Schema2 contract (policy `economy-invariants-v2`; schema1 is UNKNOWN): all records
+carry GameUid/player/map_uid/faction/profile,
+profile_supported=true only after Ruleset profile resolution, schema integer2,
 seq contiguous from0, monotonic worldtick and dropped0. Kinds:
 
 - `pulse` begins at world tick zero, then every<=50ticks: complete building-queue census (queues_complete=true),
-  player_active bool, cash/resources/capacity/spent cumulative nonnegative ints;
+  player_active bool, cash/resources/capacity nonnegative ints; signed integer
+  `net_spent` is the engine's net accounting total and may decrease on refunds.
+  `gross_spent=null` and `gross_spend_complete=false` explicitly mark unavailable
+  gross evidence. This policy does not accept a claimed gross counter: a complete,
+  bounded debit/refund observer needs a separate reviewed extension. Never derive
+  gross spending or low spending from sampled net deltas.
   each queue has unique queue_id, producer_live bool, state ready/idle/producing/
   paused, exact state_since_tick, reason. Ready additionally has item and unique
   production item_id; state timestamps are captured from transitions, not
@@ -263,5 +270,6 @@ Runtime logger/Architect queue observer must supply these fields before the
 driver can require this new gate. Actual accepted delivery remains an additional
 independent event, never inferred from cash/credited income. Tests cover exact
 250/1500 boundaries, ready/idle, dead producer, cancellations, balance recovery,
-near-empty/full storage, passive-income starvation, inactive players, low spending
+near-empty/full storage, passive-income starvation, inactive players, refund/net
+accounting, non-blocking unverified-spending diagnostics
 and malformed/incomplete capture.
