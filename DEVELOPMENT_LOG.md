@@ -40,14 +40,25 @@
   200×200 map — every emitted cell playable (cordon `(0,50)` excluded), box bounded (playable `(130,50)`
   at dx=80 > 72 excluded), and `ApproachCells` over the box is set-equal to `ApproachCells` over ALL
   playable map cells — the no-dropped-cell parity the reviewers required.
-- Gates: Release build clean; full `OpenRA.Mods.Cameo.Test` suite 1259/1259; boot-gate PASS
+- Fix v5 (iso safety, Sol's v4 FIX REQUIRED): `MapSize` is the MPos/STORAGE domain — on
+  `RectangularIsometric` `MPos.ToCPos` unwraps to `x = u + v/2, y = v/2 - u` (engine MPos.cs:45-61 —
+  200×200 map: `M(100,100)→C(150,-50)`, `M(199,198)→C(298,-100)`), so `PlayableBox`'s CPos clip to
+  `[0, MapSize)` dropped real negative-Y / beyond-MapSize domain cells and `map.Contains` could not
+  restore them. `ApproachSpace` now keeps `PlayableBox` only for `MapGridType.Rectangular` (exact:
+  CPos domain IS `[0, MapSize)`); every other grid enumerates `map.AllCells` — the engine's own
+  MPos→CPos CellRegion, the true domain — filtered by the same box + `map.Contains` predicates.
+  Reach widened to `MapSize.W + H` (provable CPos Chebyshev bound on both shapes). Iso regression:
+  real `MapGrid(RectangularIsometric)` shell on 200×200 centred on `C(150,-50)` — emitted space
+  contains the negative-Y domain cell, all cells playable, `ApproachCells` set-equal to the
+  full-domain reference. `PlayableCellsOf` test helper now enumerates MPos→CPos too.
+- Gates: Release build clean; full `OpenRA.Mods.Cameo.Test` suite 1260/1260; boot-gate PASS
   (main menu, `MenuPostProcessEffect.PostWorldLoaded`, zero new exceptions). One earlier exception
   (`exception-2026-10-08T202345Z`) was my launch harness missing `Engine.ModSearchPaths`, not the
   code — corrected and re-passed.
 - Branch `devin/c1-annulus-range-cap` off playtest head 3d99405bd; v1 code at 67799ff7f, docs at
-  20a8107a1, semantic v2 pushed as the new tip. LESSONS_LEARNED entry updated. No master push —
+  20a8107a1, semantics v2–v5 on the branch tip. LESSONS_LEARNED entry updated. No master push —
   playtest freeze stands; Sol+Luna review gates apply (Luna asked for in-map repro on top of static
-  review).
+  review; Luna APPROVED v4 source+tests 92d2fe029, Sol's iso finding drove v5).
 
 ---
 

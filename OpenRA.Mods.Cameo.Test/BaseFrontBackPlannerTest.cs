@@ -201,27 +201,37 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(BaseFrontBackPlannerBotModule.WideSpaceRadius(1e30, 200), Is.EqualTo(200));
 		}
 
-		// A flat rectangular map shell: a REAL MapGrid (real TilesByDistance + the cap of 50) on an
-		// uninitialized Map — same technique as the engine's AttackGarrisonedTest fixture. For
-		// Grid.Type = Rectangular and MaximumTerrainHeight = 0, Map.Contains(CPos) is exactly the
-		// playable Bounds check FindTilesInAnnulus applies by default, so no terrain layers needed.
-		static Map FlatTestMap(int size, int cordon)
+		// A flat map shell on an uninitialized Map with a REAL MapGrid (real TilesByDistance + cap of
+		// 50) — same technique as the engine's AttackGarrisonedTest fixture. Flat maps make
+		// Map.Contains = CustomTerrain-cover && playable Bounds, exactly the filter FindTilesInAnnulus
+		// applies by default. AllCells mirrors the engine's own construction (Map.cs: region over the
+		// full map-coord rect); on RectangularIsometric that domain leaves [0, MapSize) in CPos space.
+		static Map FlatTestMap(int size, int cordon, MapGridType gridType = MapGridType.Rectangular)
 		{
+			var yaml = gridType == MapGridType.Rectangular
+				? new MiniYaml("")
+				: new MiniYaml("", new[] { new MiniYamlNode("Type", new MiniYaml("RectangularIsometric")) });
 			var map = (Map)RuntimeHelpers.GetUninitializedObject(typeof(Map));
 			typeof(Map).GetField("Grid", BindingFlags.Instance | BindingFlags.Public)
-				.SetValue(map, new MapGrid(new MiniYaml("")));
+				.SetValue(map, new MapGrid(yaml));
 			typeof(Map).GetProperty("MapSize").SetValue(map, new Size(size, size));
+			typeof(Map).GetProperty("AllCells").SetValue(map,
+				new CellRegion(gridType, new MPos(0, 0), new MPos(size - 1, size - 1)));
+			typeof(Map).GetProperty("CustomTerrain").SetValue(map,
+				new CellLayer<byte>(gridType, new Size(size, size)));
 			map.Bounds = new Rectangle(cordon, cordon, size - 2 * cordon, size - 2 * cordon);
 			return map;
 		}
 
+		// The playable domain is the MPos storage rect on every grid type — enumerate map coords and
+		// convert, rather than assuming CPos itself is [0, MapSize)-bounded (false on iso grids).
 		static List<CPos> PlayableCellsOf(Map map)
 		{
 			var cells = new List<CPos>();
-			for (var y = 0; y < map.MapSize.Height; y++)
-				for (var x = 0; x < map.MapSize.Width; x++)
+			for (var v = 0; v < map.MapSize.Height; v++)
+				for (var u = 0; u < map.MapSize.Width; u++)
 				{
-					var c = new CPos(x, y);
+					var c = new MPos(u, v).ToCPos(map);
 					if (map.Contains(c))
 						cells.Add(c);
 				}
@@ -273,6 +283,30 @@ namespace OpenRA.Mods.Cameo.Test
 			var space = BaseFrontBackPlannerBotModule.ApproachSpace(map, Center, 10, 14, -0.5).ToList();
 			Assert.That(space.Count, Is.EqualTo(PlayableCellsOf(map).Count));
 			Assert.That(space.TrueForAll(map.Contains), Is.True);
+		}
+
+		[Test]
+		public void ApproachSpacePastTheCapCoversTheIsoCellDomain()
+		{
+			// RectangularIsometric unwraps CPos outside [0, MapSize): the engine's own
+			// M(100,100) -> C(150,-50) on a 200x200 map — negative Y, X beyond MapSize. The
+			// off-cap path must enumerate that real domain (AllCells), not a [0, MapSize) box.
+			var map = FlatTestMap(200, 4, MapGridType.RectangularIsometric);
+			var centre = new CPos(150, -50);
+			Assert.That(map.Contains(centre), Is.True); // playable cell with negative Y
+
+			var space = BaseFrontBackPlannerBotModule.ApproachSpace(map, centre, 35, 14, Cone45).ToList();
+			Assert.That(space, Is.Not.Empty);
+			Assert.That(space.TrueForAll(map.Contains), Is.True);
+			Assert.That(space, Does.Contain(centre)); // inside the box: |0|,|0| <= 72
+			Assert.That(space.Any(c => c.Y < 0), Is.True); // iso domain genuinely exercised
+
+			var front = EastFront(35, 10);
+			var reference = BaseFrontBackPlannerBotModule.ApproachCells(
+				PlayableCellsOf(map), centre, front, 14, Cone45);
+			var actual = BaseFrontBackPlannerBotModule.ApproachCells(space, centre, front, 14, Cone45);
+			Assert.That(reference, Is.Not.Empty);
+			Assert.That(actual, Is.EquivalentTo(reference));
 		}
 
 		[Test]
