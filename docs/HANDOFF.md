@@ -5410,3 +5410,8 @@ Type `classic`): eighteen pre-wave modules re-gated `genericbot || classicbot`,
 the pre-wave `SquadManagerBotModuleCA@generic` config restored verbatim as
 `@classic`, `hardbot` granted for the hard-tier limits/prereqs, and
 `RevealsMap@classic` on its PlayerActor. See DEVELOPMENT_LOG.md 2026-09-28.
+
+
+## 2026-10-09 ? Offline replay health gate
+
+Read design/REPLAY_HEALTH_ANALYZER.md before health/campaign work. tools/ai/replay_health.py uses explicit GameUid/player; exits0 startup-observed,20 symptom review hold,21 unknown. No overall strength/integrity certification. 17 regression tests pass;127 historical completed records yield64 RA startup holds/63 GDI-Nod startup observations. Coordinator owns scheduler integration and fresh post-fix controls; live reason logging still required. No game launch or master publication.

@@ -20405,3 +20405,8 @@ the existing helpers only — no blanket normalization, no yaml edits except one
   `reviewed_weapon_history.py`, `weapons.yaml` (Kübel). `git diff --check` clean.
 * **Next:** `python -m unittest` on the 41-module set in `tools/tests` to re-verify; fleet
   coordinator decides increment merge — no lifecycle claims made here.
+
+
+## 2026-10-09 ? Replay health prototype (Sol)
+
+Isolated codex/replay-health-gate at base3d; exclusive tool/test/design scope. Existing aggregate/story/order tools were checked: no startup stop gate exists. Implemented schema/identity/bounds-aware telemetry symptom gate, startup persistence and warning-only economy/combat timelines. Historical127 completed records:64 RA holds,63 GDI/Nod startup observed. 17 focused Python tests pass. Current buffered logger cannot provide mid-match detection; live pulse and scheduler stop latch remain separately owned work. No games, runtime changes or master pushes. See docs/design/REPLAY_HEALTH_ANALYZER.md for primary sources, policy and resume contract.

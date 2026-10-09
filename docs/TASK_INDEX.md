@@ -39,6 +39,7 @@ anchor validity is enforced separately by `audit_doc_health` (D3/D4).
 
 | task | READ FIRST | ALREADY BUILT — check before writing anything |
 |---|---|---|
+| **Replay health / automatic economy stop gate** | [`design/REPLAY_HEALTH_ANALYZER.md`](design/REPLAY_HEALTH_ANALYZER.md) | `tools/ai/replay_health.py` (offline symptom gate); existing `tools/ai/ab_summary.py`, `tools/ai/mission_story.py`, `tools/ai/order_trace.py` remain distinct |
 | **Anything at all, first session** | [`README.md`](README.md) → [`LESSONS_LEARNED.md`](LESSONS_LEARNED.md) → [`AGENT_WORKSPACE.md`](AGENT_WORKSPACE.md) → [`HANDOFF.md`](HANDOFF.md) → [`DESIGN.md`](DESIGN.md) | — |
 | **Picking up work** | [`HANDOFF.md`](HANDOFF.md) §3.A, then [`design/ROADMAP.md`](design/ROADMAP.md) | — |
 | **Four-faction September balance continuation** | Current master first; [`balance/PLAYTEST_CLASSIC_FOUR_ACCEPTED_BATCH_20260915.md`](balance/PLAYTEST_CLASSIC_FOUR_ACCEPTED_BATCH_20260915.md) for the applied milestone; [`balance/GRAND_PLAN_20260911.md`](balance/GRAND_PLAN_20260911.md) and [`balance/PROJECT_STATUS_20260911.md`](balance/PROJECT_STATUS_20260911.md) as historical planning evidence | PR #401 applied 29 additional actors and repriced 11 carriers while retaining the newer Rocket Soldier result; the other 122 rows kept current values because no complete target existed. PR #402 made Yuri gatling range/firepower weapon-local. Do not use expired September 11 controls or old draft PRs as current authority. |
