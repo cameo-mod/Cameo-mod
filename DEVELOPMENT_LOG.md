@@ -20452,3 +20452,9 @@ the existing helpers only — no blanket normalization, no yaml edits except one
   remain downstream gates; `BaseExpansionModules == null` at the cache-population
   site is a known latent inconsistency left untouched (never-null array keeps the
   latch self-releasing at first resume delay).
+
+
+### 2026-10-09 ? MCV deploy-cell repair (Codex Sol)
+- Isolated devin/mcv-deploy-cell from c76283c0b; docs/design/MCV_DEPLOY_CELL_REPAIR.md records H2 code defect and unknown match-level H1/H2 cause.
+- Lead authorized condition-driven opt-in engine repair; engine331657f07a pushed. Single YAML instance, genericbot search only; branch-local pin. No launches.
+- Engine focused9/9 and full575/577 (2 existing skips); real-YAML mod mount2/2. Independent review/runtime adoption pending.

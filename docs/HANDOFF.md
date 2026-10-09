@@ -5410,3 +5410,8 @@ Type `classic`): eighteen pre-wave modules re-gated `genericbot || classicbot`,
 the pre-wave `SquadManagerBotModuleCA@generic` config restored verbatim as
 `@classic`, `hardbot` granted for the hard-tier limits/prereqs, and
 `RevealsMap@classic` on its PlayerActor. See DEVELOPMENT_LOG.md 2026-09-28.
+
+
+### 2026-10-09 ? MCV deployment repair
+- Next: independent review of condition-driven engine331657f07a and devin/mcv-deploy-cell; see docs/design/MCV_DEPLOY_CELL_REPAIR.md.
+- Base c76283c0b; single-instance generic-only repair and branch-local pin. No launches; observer ownership and campaign holds remain.
