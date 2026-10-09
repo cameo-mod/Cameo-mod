@@ -1,4 +1,4 @@
-﻿#region Copyright & License Information
+#region Copyright & License Information
 /*
  * Copyright 2015- OpenRA.Mods.AS Developers (see AUTHORS)
  * This file is a part of a third-party plugin for OpenRA, which is
@@ -17,31 +17,27 @@ using OpenRA.Traits;
 namespace OpenRA.Mods.Cameo.Traits
 {
 	[TraitLocation(SystemActors.Player)]
-	[Desc("Allows the AI to spawn plugs on pluggable buildings.",
-		"Each entry maps one plug actor to the host actor names it may be spawned on.",
+	[Desc("Queues plugs for pluggable buildings through normal paid production.",
+		"Each entry maps one plug actor to the host actor names it may be built for.",
 		"One module covers every plug kind — the upstream AS module needed one variant per plug.")]
 	public class PlugSpawnerBotModuleCAInfo : ConditionalTraitInfo
 	{
-		[Desc("Plug actor name -> comma-separated host actor names the AI may spawn it on.")]
+		[Desc("Plug actor name -> comma-separated host actor names the AI may build it for.")]
 		public readonly Dictionary<string, string> Plugs = new();
 
-		[Desc("Plug spawning interval per plug type.")]
+		[Desc("Plug production interval per plug type.")]
 		public readonly int Interval = 50;
-
-		[Desc("Should costs of the plug be ignored?")]
-		public readonly bool IgnoreCost = false;
 
 		public override object Create(ActorInitializer init) { return new PlugSpawnerBotModuleCA(init.Self, this); }
 	}
 
-	public class PlugSpawnerBotModuleCA : ConditionalTrait<PlugSpawnerBotModuleCAInfo>, IBotTick, IResolveOrder, INotifyCreated
+	public class PlugSpawnerBotModuleCA : ConditionalTrait<PlugSpawnerBotModuleCAInfo>, IBotTick, INotifyCreated
 	{
 		readonly World world;
-		PlayerResources playerResources;
 		TechTree techTree;
 
-		// plugActor -> (plug type, host name set, prerequisites)
-		readonly Dictionary<string, (string Type, HashSet<string> Hosts, string[] Prerequisites)> plugs = new();
+		// plugActor -> (plug type, host name set, prerequisites, actor info)
+		readonly Dictionary<string, (string Type, HashSet<string> Hosts, string[] Prerequisites, ActorInfo Info)> plugs = new();
 		int ticks;
 
 		public PlugSpawnerBotModuleCA(Actor self, PlugSpawnerBotModuleCAInfo info)
@@ -53,7 +49,6 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		protected override void Created(Actor self)
 		{
-			playerResources = self.Owner.PlayerActor.Trait<PlayerResources>();
 			techTree = self.Owner.PlayerActor.TraitOrDefault<TechTree>();
 
 			foreach (var kv in Info.Plugs)
@@ -72,7 +67,7 @@ namespace OpenRA.Mods.Cameo.Traits
 					.Distinct()
 					.ToArray();
 
-				plugs[kv.Key] = (plugInfo.Type, hosts, prereqs);
+				plugs[kv.Key] = (plugInfo.Type, hosts, prereqs, actorInfo);
 			}
 
 			base.Created(self);
@@ -93,6 +88,7 @@ namespace OpenRA.Mods.Cameo.Traits
 			// AR-4 (fleet orders 2026-10-04b): one world scan per interval covers every plug
 			// kind — the old loop enumerated world.Actors once per plug type.
 			var owned = CollectOwnedActors(world.Actors, player);
+			var queues = player.PlayerActor.TraitsImplementing<ProductionQueue>().ToArray();
 
 			foreach (var (plugActor, plug) in plugs)
 			{
@@ -101,25 +97,49 @@ namespace OpenRA.Mods.Cameo.Traits
 				if (!PrerequisitesMet(plug.Prerequisites))
 					continue;
 
-				var target = owned
+				// Bots buy plugs like players: ordinary StartProduction into a real queue,
+				// paid over the plug's build duration, then completed-item PlacePlug via
+				// the base builder's Done branch. Demand only fires while an owned host
+				// still accepts the plug type, and never duplicates a pending item —
+				// ordinary plugs may oversubscribe by design, but a second identical
+				// order before the first finishes is pure waste. Superweapon plugs are
+				// additionally admission-gated owner-wide by SuperweaponPlugLimit, so a
+				// rejected order here is correct behaviour, not an error.
+				if (ItemPending(queues, plugActor))
+					continue;
+
+				var hasEligibleHost = owned
 					.Where(x => plug.Hosts.Contains(x.Info.Name))
-					.Select(x => (x, x.TraitsImplementing<Pluggable>().FirstOrDefault(p => p.AcceptsPlug(plug.Type))))
-					.FirstOrDefault(x => x.Item2 != null);
+					.Any(x => x.TraitsImplementing<Pluggable>().Any(p => p.AcceptsPlug(plug.Type)));
 
-				if (target.x != null)
-				{
-					var order = new Order("PlacePlugAI", player.PlayerActor, Target.FromActor(target.x), false)
-					{
-						TargetString = plugActor,
-						ExtraData = player.PlayerActor.ActorID,
-						SuppressVisualFeedback = true
-					};
+				if (!hasEligibleHost)
+					continue;
 
-					bot.QueueOrder(order);
-				}
+				// Plugs without a production queue (e.g. the dormant droppod uplink, whose
+				// Queue is deliberately unset) resolve no producer and stay unreachable —
+				// migrating this module must not silently activate them.
+				var queue = QueueForPlug(queues, plug.Info);
+				if (queue == null)
+					continue;
+
+				bot.QueueOrder(Order.StartProduction(queue.Actor, plugActor, 1));
 			}
 
 			ticks = Info.Interval;
+		}
+
+		// The first owner queue that can currently produce the plug, else null. Pure seam
+		// so queue selection is unit-testable without a World.
+		internal static ProductionQueue QueueForPlug(IEnumerable<ProductionQueue> queues, ActorInfo actorInfo)
+		{
+			return queues.FirstOrDefault(q => q.CanBuild(actorInfo));
+		}
+
+		// True while any of the owner's queues already holds the plug item (in progress or
+		// Done-held). Pure seam so the pending dedup is unit-testable without a World.
+		internal static bool ItemPending(IEnumerable<ProductionQueue> queues, string itemName)
+		{
+			return queues.Any(q => q.AllQueued().Any(i => i.Item == itemName));
 		}
 
 		// AR-4: the interval scan collects the bot's live own actors once for all plug kinds.
@@ -130,80 +150,6 @@ namespace OpenRA.Mods.Cameo.Traits
 				if (actor.IsInWorld && !actor.IsDead && actor.Owner == owner)
 					owned.Add(actor);
 			return owned;
-		}
-
-		void IResolveOrder.ResolveOrder(Actor self, Order order)
-		{
-			if (IsTraitDisabled)
-				return;
-
-			var os = order.OrderString;
-			if (os != "PlacePlugAI")
-				return;
-
-			var ts = order.TargetString;
-			if (!plugs.TryGetValue(ts, out var plug))
-				return;
-
-			self.World.AddFrameEndTask(w =>
-			{
-				var playerActor = w.GetActorById(order.ExtraData);
-				var targetActor = order.Target.Actor;
-
-				if (playerActor == null || playerActor.IsDead || targetActor == null || targetActor.IsDead)
-					return;
-
-				// AR-4 (fleet orders 2026-10-04b): an AI plug may only land on the ordering
-				// player's own building — this synced resolve path never checked target
-				// ownership, so any client could place a plug on anyone's building.
-				if (!PlugTargetIsOwned(targetActor, self.Owner))
-					return;
-
-				var actorInfo = self.World.Map.Rules.Actors[ts];
-
-				var faction = self.Owner.Faction.InternalName;
-				var buildingInfo = actorInfo.TraitInfo<BuildingInfo>();
-
-				var buildableInfo = actorInfo.TraitInfos<BuildableInfo>().FirstOrDefault();
-				if (buildableInfo != null && buildableInfo.ForceFaction != null)
-					faction = buildableInfo.ForceFaction;
-
-				var plugInfo = actorInfo.TraitInfoOrDefault<PlugInfo>();
-				if (plugInfo == null)
-					return;
-
-				var location = targetActor.Location;
-				var pluggable = targetActor.TraitsImplementing<Pluggable>()
-					.FirstOrDefault(p => p.AcceptsPlug(plugInfo.Type));
-
-				if (pluggable == null)
-					return;
-
-				// Re-check at resolve time: the tech state or slot may have changed
-				// while the order sat in the queue.
-				if (!PrerequisitesMet(plug.Prerequisites))
-					return;
-
-				var valued = actorInfo.TraitInfoOrDefault<ValuedInfo>();
-				if (!Info.IgnoreCost && valued != null)
-				{
-					if (valued.Cost > playerResources.GetCashAndResources())
-						return;
-					else
-						playerResources.TakeCash(valued.Cost);
-				}
-
-				pluggable.EnablePlug(targetActor, plugInfo.Type);
-				foreach (var s in buildingInfo.BuildSounds)
-					Game.Sound.PlayToPlayer(SoundType.World, order.Player, s, targetActor.CenterPosition);
-			});
-		}
-
-		// AR-4: the plug target must belong to the ordering player (self.Owner — the trait
-		// lives on that player's PlayerActor). Pure seam so the check is unit-testable.
-		internal static bool PlugTargetIsOwned(Actor target, OpenRA.Player orderingPlayer)
-		{
-			return target != null && target.Owner == orderingPlayer;
 		}
 
 		protected override void TraitEnabled(Actor self)

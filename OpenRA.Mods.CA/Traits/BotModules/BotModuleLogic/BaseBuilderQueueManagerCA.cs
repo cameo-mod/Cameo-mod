@@ -686,11 +686,17 @@ namespace OpenRA.Mods.CA.Traits
 				demandAdvisedDefense = false;
 				if (plugInfo != null)
 				{
-					var possibleBuilding = world.ActorsWithTrait<Pluggable>().FirstOrDefault(a =>
-						a.Actor.Owner == player && a.Trait.AcceptsPlug(plugInfo.Type));
+					// Maintainer ruling (playtest repair): the normal base builder picks a
+					// random eligible installation slot — synced BotRng over ActorID-ordered
+					// candidates, never first-match and never unsynced LocalRandom.
+					var plugCandidates = world.ActorsWithTrait<Pluggable>()
+						.Where(a => a.Actor.Owner == player && a.Trait.AcceptsPlug(plugInfo.Type))
+						.OrderBy(a => a.Actor.ActorID)
+						.ToArray();
 
-					if (possibleBuilding.Actor != null)
+					if (plugCandidates.Length > 0)
 					{
+						var possibleBuilding = plugCandidates[BotRng.For(player).Next(plugCandidates.Length)];
 						orderString = "PlacePlug";
 						location = possibleBuilding.Actor.Location + possibleBuilding.Trait.Info.Offset;
 					}

@@ -1,3 +1,208 @@
+# 2026-10-09 — Devin: B-lane master repair batch — limited-SW default + engineer/crate flags + bot plug production
+
+*Devin-Integrator* on `devin/repair-b2b6` (stacked on the bounded-approved
+swcap head `4ead228b4`, base `3d99405bd`). Maintainer policy via coordinator:
+limited superweapons lobby default; SW-granting plugs count installed+pending
+owner-wide; ordinary plugs keep intended oversubscription; bots buy plugs via
+normal paid production; engineer/crate visibility exceptions restored.
+
+- **`world.yaml` `MapOptions.TechLevel: superweapons`** — the techlevel lobby
+  dropdown now defaults to "Limited Superweapons" (grants `techlevel.superweapons`
+  + `global-swlimit`). "Unlimited Superweapons" (`unrestricted`) and
+  "No Superweapons" stay selectable; only the default changed.
+- **ai.yaml engineer/crate flags restored** — `CheckCaptureTargetsForVisibility`,
+  `CheckRepairTargetsForVisibility`, `CheckTargetsForVisibility` (CratePickup)
+  back to `false`. `4bf696716` had flipped them to `true` reading "without
+  cheats" too broadly; the conditional C# guards only restore behaviour once
+  the flags are false. The "Omniscient on purpose (DESIGN §19.5)" comment was
+  already correct for this state.
+- **Bot plug production migrated to the normal path** —
+  `PlugSpawnerBotModuleCA` no longer issues `PlacePlugAI` instant installs
+  (the whole `IResolveOrder` handler, instant `TakeCash`, `IgnoreCost` and the
+  ownership re-check are retired with it). Demand now queues ordinary
+  `StartProduction` on the first owner queue that `CanBuild`s the plug, gated
+  on tech-tree prerequisites and an owned host still accepting the plug type,
+  with a pending-item dedup so an interval scan can't flood the queue.
+  Queue-less plugs (the dormant `ts_gdi_droppoduplink`, whose `Queue:` is
+  deliberately commented out) resolve no producer and stay unreachable.
+  Completed plug items are placed by the existing
+  `BaseBuilderQueueManagerCA` Done branch through `PlacePlug` — the same path
+  a human's plug takes. Superweapon plugs ride the `SuperweaponPlugLimit`
+  owner-wide admission gate identically to player orders.
+- **Random eligible install slot** — the Done branch previously took the first
+  matching `Pluggable` host; it now draws via synced `BotRng.For(player)` over
+  ActorID-ordered candidates (maintainer ruling; never `LocalRandom`).
+- Tests: `PlugSpawnerBotModuleTest` drops the retired `PlugTargetIsOwned` seam;
+  owned-scan seams pinned unchanged. 1299/1299 `OpenRA.Mods.Cameo.Test`,
+  Release 0 errors.
+- Outstanding: live-match acceptance — plug production+placement by a bot,
+  cap-1 admission in a real Limited lobby, Unlimited unaffected.
+
+# 2026-10-09 — Devin: SW plug capacity (B2/B6) — F3/F4 resolved on 901d5dace
+
+*Devin-Developer.* Re-review of `19996eacf` found two more map-derivation
+defects; both fixed on the same branch.
+
+- **F3 cross-host association** — provider/socket join was global: a provider
+  on host A + `Pluggable` socket on host B granting the same condition could
+  map a plug that never publishes the token. `BuildPlugTokenMap` pass 1 now
+  builds `(token, plugType)` tuples per host actor — provider and socket must
+  coexist on the SAME actor. Missing same-host socket emits an uncapped
+  diagnostic naming token/host/condition.
+- **F4 ambiguous multi-token item** — a plug negating 2+ declared tokens that
+  both resolve for its plug type was silently bound to the first token
+  iterated ("first wins"). Pass 2 now collects all candidate tokens per item
+  and REJECTS the item when >1 resolve; order-independent (regression flips
+  both prereq order and actor order). A declared-but-unresolved second
+  negation does not poison the single real mapping; multiple items sharing
+  ONE token still map (shared-slot).
+- New tests: `TokenMap_CrossHostProviderSocket_NeverJoins` + same-host
+  control, `TokenMap_ItemNegatingTwoResolvedTokens_Rejected_OrderIndependent`,
+  `TokenMap_SingleTokenOfTwoNegated_StillMaps`.
+- **INCIDENT**: boot-gate script launched `launch-game.cmd` and killed only
+  the cmd wrapper, orphaning `OpenRA.exe` (~1h, user killed it). Script +
+  skill now launch `engine\bin\OpenRA.exe` directly, kill that PID, then
+  verify zero survivors under the worktree path (fleet NOTE records the
+  incident for all agents).
+- **Gates**: 49/49 focused (+4), 1300/1300 full suite, Release 0 errors,
+  boot-gate PASS (direct-exe launch, PID 8160 killed + verified absent).
+- **REVIEW: APPROVED** — independent re-review of `901d5dace` +
+  `349532da2` (bounded source/focused scope; reviewer re-ran 49/49,
+  verified local==remote). All four findings (F1–F4) closed. Live-match
+  gates remain; no master/release clearance.
+
+# 2026-10-09 — Devin: SW plug capacity (B2/B6) — F2 revised to declared catalogue
+
+*Devin-Developer.* Post-approval design revision (Architect + Integrator direction):
+the SW-plug token set is now an **explicit declared catalogue** on the trait Info
+rather than pure wiring inference.
+
+- **`SuperweaponPlugLimitInfo.OccupancyTokens`** (`string[]`, world.yaml
+  `OccupancyTokens: ionc, nodnuke, cabalnuke_swlimit, tsionc`) — only declared
+  tokens can capacity-manage a plug. Empty list → nothing capped (ordinary plugs
+  never enter the map regardless of wiring).
+- `BuildPlugTokenMap(actors, declaredTokens, diagnostics)` verifies each declared
+  token's chain end-to-end: `ProvidesPrerequisite` producing the token must carry
+  `RequiresPrerequisites: global-swlimit` + positive single-variable
+  `RequiresCondition` (bare variable only — `Expression.Trim() == variable`,
+  rejects `!x`/compounds/parenthesized) → host `Pluggable` condition → plug actor
+  with matching `Plug.Type` that negates `!token` (or `~!token`).
+- **Diagnostics** (debug channel + returned list): missing provider for a declared
+  token, non-positive or ungated provider, multiple resolved install conditions,
+  zero/multiple plug resolutions, plug negating multiple declared tokens.
+  Behavioural claim kept bounded: provider contract is "level 0 → false, positive
+  → true" (`AsBool` is `value != 0`); sampling at 0/1/2/`int.MaxValue` is a
+  *regression* on the four real gates, not universal expression validation.
+- `SuperweaponPlugLimitInfo` switched `TraitInfo<T>` → `TraitInfo` +
+  `Create(init)` override so the trait receives its Info (catalogue access).
+- New/updated regressions: empty-declared uncaps, undeclared-token uncaps,
+  missing-provider diagnostic, ungated/inverted-provider diagnostics, resolved-
+  gate echo, shared-token two-plug ambiguity + dual mapping, CABAL ungated
+  sibling declared but rejected, exact-four under the declared set; real-yaml
+  scans now also assert `world.yaml` declared set == expected tokens and sample
+  each real `RequiresCondition` gate for polarity.
+- **Gates**: 45/45 focused, full suite + Release build below; boot-gate re-run
+  for this commit.
+
+# 2026-10-09 — Devin: SW plug capacity (B2/B6) — review findings F1+F2 resolved
+
+*Devin-Developer.* Independent review of `devin/playtest-b2b6-swcap` produced two
+blockers; both are now fixed on the same branch (details in fleet
+`REVIEW_2026-10-09_devin_swcap_b2b6.md`).
+
+- **F1 refund double-credit** — `Cancel` returned `ResourcesPaid` as resources
+  AND included it in `TotalCost - RemainingCost` cash. Fix:
+  `RefundCash(total, remaining, paid) = total - remaining - paid`, arithmetically
+  identical to `CancelProductionInner`'s `RemainingCost += ResourcesPaid` before
+  `GiveCash`. Five refund-split regressions added.
+- **F2 token-map inference gap** — `BuildPlugTokenMap` accepted any
+  single-variable `RequiresCondition` provider, so an ordinary conditional
+  provider (or an inverted `!occupant` gate — same `Variables` set) paired with
+  an item that negates that token could be misclassified as SW-cap wiring. Fix:
+  providers must (a) carry `RequiresPrerequisites: global-swlimit` — explicit
+  lobby-cap wiring only — and (b) have *positive* single-variable polarity
+  (`RequiresCondition.Expression.Trim() == variable`). Both filters applied.
+- **Real lifecycle harness** — new `SuperweaponPlugLimitRuntimeTest.cs` builds a
+  real `World` via `RuntimeHelpers.GetUninitializedObject` + reflection (the
+  `AttackGarrisonedTest` pattern — this test assembly lacks `InternalsVisibleTo`
+  to `OpenRA.Game`, so `TraitDictionary`/`Actor` ctor/`Initialize`/`IsInWorld`
+  are invoked reflectively). Real `TechTree`/`PlayerResources`/`ProductionQueue`/
+  `ProvidesPrerequisite`/`Pluggable` on real actors — 15 lifecycle regressions:
+  order-gate admit/reject matrix, **`EnablePlug` → `CanBuild` flips off
+  synchronously** (the real installed-only install-boundary), tail-first excess
+  cancellation, `Infinite` cleared without replenish, progressed+`Done`
+  migrated item refunded **600 resources + 400 cash** and removed, installed+pending
+  never exceeds cap, Unlimited mode never reconciles, one sweep per tick dedup.
+- **Exact-four pinning** — `TokenMap_ExactlyFourActiveMappings` resolves all four
+  real wirings at once (asserts `map.Count == 4`, incl. CABAL two-provider split
+  and droppod exclusion); `SuperweaponPlugLimitYamlTest` scans the **real** five
+  yaml files and asserts exactly four `global-swlimit`-gated `@swlimit`
+  providers on the four expected hosts + each plug actor negates its token.
+- Adversarial fixtures: ordinary condition-provider with negated item token,
+  non-`global-swlimit`-gated provider, inverted-condition provider — all derive
+  out.
+- **Gates**: 38/38 focused, 1289/1289 full suite, Release 0/0.
+
+# 2026-10-09 — Devin: SW plug capacity (B2/B6) — admission gate + frame-end reconciliation implemented
+
+*Devin-Developer.* Playtest repairs B2 (multiple superweapons despite the cap) and
+B6 (ion cannon plugin rebuildable while owned). Fleet spec
+`SPEC_2026-10-09_devin_plug_slot_capacity.md` v10 lane — bounded scope: admission
+gate + install/infinite/capture reconciliation + inbound-migration *detection*.
+Worktree `C:/cameo-wt/playtest-swcap`, branch `devin/playtest-b2b6-swcap`,
+base published head `3d99405bd`.
+
+- **New trait `SuperweaponPlugLimit`** (`OpenRA.Mods.Cameo/Traits/World/`,
+  mounted on `World` in `mods/cameo/rules/world.yaml` next to
+  `CameoValidateOrder`). Two synced layers:
+  - `IValidateOrder` admission gate: `StartProduction` orders for SW plug items
+    pass only when `pending + installed + requested <= 1`, counted owner-wide
+    across all `ProductionQueue`s and keyed by the occupancy *token* (so
+    distinct plugs sharing a `!token` share one slot). Inert unless the owner
+    holds the `global-swlimit` lobby prerequisite → Unlimited mode untouched.
+    `ExtraData` batch counts enforced (batch >1 rejected when cap is 1).
+  - `ITick` → one deduplicated `World.AddFrameEndTask` sweep per tick
+    (`sweepQueued` flag, cleared at task start; task re-evaluates *live* counts
+    so same-frame installs can't be lost). The task runs in `World.Tick`'s
+    frame-end drain, after `PlaceBuilding`'s install callback (EnablePlug +
+    `EndProduction` replenish) and before the next tick's `CancelUnbuildableItems`.
+    It cancels over-cap pending SW items tail-first in deterministic
+    (ActorID-ordered queue, list-tail-first) order: clears `Infinite` (suppresses
+    `EndProduction`'s auto-replenish), refunds `ResourcesPaid` + paid cash, then
+    `EndProduction` — replicating `CancelProductionInner`'s refund path.
+- **SW plug identification is derived, not hardcoded**: `BuildPlugTokenMap`
+  walks the ruleset — a host `Pluggable` accepts plug type T and grants
+  condition C; the same actor's single-variable-`RequiresCondition`
+  `ProvidesPrerequisite` yields candidate tokens; a plug item is capped iff it
+  has `Plug.Type == T` and its own `Buildable.Prerequisites` negates `!token`.
+  This correctly resolves all four wirings incl. CABAL's two-provider
+  `cabalnuke`/`cabalnuke_swlimit` split (picks the token the plug negates).
+  Ordinary plugs (Naxis addons, TS droppod) derive out cleanly.
+- **Four host `@swlimit` providers gated on limited mode**: added
+  `RequiresPrerequisites: global-swlimit` on
+  `td_gdi_advancedcommunicationscenter`, `td_nod_templeofnod`,
+  `cabal_core`, `ts_gdi_upgradecenter` — the occupancy prerequisite exists only
+  under the Limited lobby ruleset.
+- **Bounded claims (matching spec)**: inbound `GetReplacement` migration is
+  detection-only — a migrated SW item can tick at most once before frame-end
+  removal refunds all paid cash/resources; a `Queue[0]` migration can complete
+  `Done` in the same `TickInner`, but the order phase precedes ticking so it
+  can never install before the sweep removes it. Full prevention needs an
+  upstream `GetReplacement` exclusion — out of scope, flagged separately.
+- **Tests**: `OpenRA.Mods.Cameo.Test/SuperweaponPlugLimitTest.cs` — 12 NUnit:
+  admission truth table (limited/unlimited × pending/installed/batch), excess
+  matrix, and `BuildPlugTokenMap` against yaml-loaded synthetic actors for all
+  four real wirings + negative cases. Runtime regressions (infinite install,
+  capture, mixed-tech migration, PayUpFront refunds) require a live match —
+  documented in the spec; no TestWorld harness exists in this suite.
+- **Gates**: Release build 0/0 warnings; 1263/1263 NUnit (+12); boot-gate PASS
+  (`MenuPostProcessEffect.PostWorldLoaded` on fresh perf.log, 0 new
+  exception logs; SAC did not block). `-warnaserror` Debug check fails on
+  pre-existing upstream style debt in `engine/OpenRA.Mods.Common` (not this
+  change; engine untouched — mod-side file clean).
+- **Engine**: canonical pinned engine copied from main clone
+  (`engine/VERSION = 0a3f77dbe1…`, matches `mod.config`); no engine edits.
+
 # 2026-10-08 — Devin-Architect: wave-1 scheduler v3 — fail-closed evidence adjudication
 
 *Devin-Architect.* Sol's wave-5 re-review (REVIEW_2026-10-08_wave5_adjudication)

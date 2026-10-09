@@ -305,6 +305,7 @@ td_nod_templeofnod:
 	ProvidesPrerequisite@swlimit:
 		Prerequisite: nodnuke
 		RequiresCondition: nuke
+		RequiresPrerequisites: global-swlimit
 	ProvidesPrerequisite@techcenter:
 		Prerequisite: techcenter
 		RequiresCondition: !(powerdown || infiltrated)
