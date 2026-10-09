@@ -194,6 +194,11 @@ namespace OpenRA.Mods.CA.Traits
 			for (var dy = -1; dy <= 1; dy++)
 				for (var dx = -1; dx <= 1; dx++)
 				{
+					// FIX-RA-REFINERY: the exit must be another cell — a dock on a passable bib cell
+					// is no longer in the blocking set and would otherwise count as its own exit.
+					if (dx == 0 && dy == 0)
+						continue;
+
 					var n = new CPos(dock.X + dx, dock.Y + dy);
 					if (!footprint.Contains(n) && onMap(n))
 						return true;
@@ -201,6 +206,19 @@ namespace OpenRA.Mods.CA.Traits
 
 			return false;
 		}
+
+		/// <summary>
+		/// FIX-RA-REFINERY: the footprint cells that wall a dock in — the impassable cells only.
+		/// BuildingInfo.Tiles also yields passable '=' bibs and transit-only '+' lanes; treating
+		/// those as walls put the RA proc's dock — which lands on a bib cell — inside a neighbour
+		/// ring of "occupied" cells, so the exit check failed at every legal site. The harvester
+		/// leaving a dock is in transit, so '=' and '+' cells are both traversable here; only
+		/// 'x'/'X' cells block egress.
+		/// </summary>
+		public static IEnumerable<CPos> DockBlockingFootprint(IReadOnlyDictionary<CVec, FootprintCellType> footprint, CPos topLeft) =>
+			footprint
+				.Where(kv => kv.Value == FootprintCellType.Occupied || kv.Value == FootprintCellType.OccupiedUntargetable)
+				.Select(kv => topLeft + kv.Key);
 
 		/// <summary>
 		/// Deterministic dictionary pick (F-CBL1/F4): lowest tie-break key wins.
@@ -216,6 +234,48 @@ namespace OpenRA.Mods.CA.Traits
 		/// </summary>
 		public static Actor FirstRequestedRefinery<TValue>(IReadOnlyDictionary<Actor, TValue> requests) =>
 			FirstByOrder(requests, a => a.ActorID);
+
+		/// <summary>
+		/// FIX-RA-REFINERY: under the refinery law a refinery that found no legal site defers — the
+		/// produced item is cancelled for the refund and the standing request re-queues it on a
+		/// later sweep (the law's own contract: a failed claim retries later). It must not spend
+		/// the shared failCount budget: a siteless field would otherwise saturate the latch and
+		/// stop every other structure placing. Non-refinery and law-less placements keep the
+		/// ordinary failure path.
+		/// </summary>
+		public static bool RefineryDefers(bool lawActive, BuildingType type) =>
+			lawActive && type == BuildingType.Refinery;
+
+		/// <summary>
+		/// FIX-RA-REFINERY: the saturated-placement recovery arm owns a tick whenever the
+		/// expansion-nudge arm cannot act — no expansion modules, no recorded failing centre,
+		/// or a relocation hold in progress. Gated on module count alone those cases latched
+		/// the builder forever.
+		/// </summary>
+		public static bool LatchRecoveryApplies(int expansionModuleCount, bool hasFailingCenter, bool relocationHold) =>
+			expansionModuleCount == 0 || !hasFailingCenter || relocationHold;
+
+		/// <summary>
+		/// FIX-RA-REFINERY: ticks the recovery probe timer — due exactly when it reaches zero,
+		/// then re-arms to a full delay so each probe waits the same interval and a fresh
+		/// episode (reset at saturation) always gets its own window.
+		/// </summary>
+		public static bool LatchProbeDue(ref int failRetryTicks, int resumeDelay)
+		{
+			if (--failRetryTicks > 0)
+				return false;
+
+			failRetryTicks = resumeDelay;
+			return true;
+		}
+
+		/// <summary>
+		/// FIX-RA-REFINERY: a latch probe releases only on real world change against the
+		/// saturation-time baseline — fewer buildings (room freed) or more base providers
+		/// (new build area). Equal or worse counts hold the latch for another delay.
+		/// </summary>
+		public static bool LatchProbeReleases(int currentBuildings, int latchedBuildings, int currentProviders, int latchedProviders) =>
+			currentBuildings < latchedBuildings || currentProviders > latchedProviders;
 
 		/// <summary>
 		/// ECON-A (SPEC_2026-10-05 Part A §3): a demand item queues when it can still reach Ready by

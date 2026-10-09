@@ -39,7 +39,12 @@ namespace OpenRA.Mods.CA.Traits
 		string lastFailedBuilding;
 		int checkForBasesTicks;
 		int cachedBases;
-		int cachedBuildings;
+
+		// FIX-RA-REFINERY R1: the latch keeps its own baseline — cachedBases belongs to the water
+		// check and was being clobbered by it, and the old capture site was guarded by
+		// `BaseExpansionModules == null` which never runs (the array is never null).
+		int latchedBuildings;
+		int latchedProviders;
 		int minimumExcessPower;
 		int minCashRequirement;
 		CPos? baseCenterKeepsFailing = null;
@@ -166,27 +171,38 @@ namespace OpenRA.Mods.CA.Traits
 								be.UpdateExpansionParams(bot, false, true, stuckConyard);
 
 							failCount = 0;
+							failRetryTicks = baseBuilder.Info.StructureProductionResumeDelay;
 							return;
 						}
 					}
 
 					failCount = 0;
+					failRetryTicks = baseBuilder.Info.StructureProductionResumeDelay;
 				}
 
-				// No BaseExpansionModules exist. Only bother resetting failCount when either
-				// a) the number of buildings has decreased since last failure M ticks ago,
+				// When the nudge above can't act — no BaseExpansionModules, no failing centre, or a
+				// relocation hold live — only bother resetting failCount when either
+				// a) the number of buildings has decreased since the snapshot taken at saturation,
 				// or b) number of BaseProviders (construction yard or similar) has increased since then.
-				// Otherwise reset failRetryTicks instead to wait again.
-				// (BaseExpansionModules is a .ToArray() — never null; Length==0 was the intent.)
-				else if (baseBuilder.BaseExpansionModules.Length == 0 && --failRetryTicks <= 0)
+				// Otherwise the probe waits another resume delay.
+				// (BaseExpansionModules is a .ToArray() — never null; Length==0 covers "no modules".)
+				// FIX-RA-REFINERY: the widened gate serves every un-nudgeable case; R1 moved the
+				// baseline off cachedBases (the water checker's field) onto latched* fields captured
+				// unconditionally at saturation, and rearmed the timer per episode.
+				else if (BaseBuilderQueueEvalCA.LatchRecoveryApplies(baseBuilder.BaseExpansionModules.Length,
+					baseCenterKeepsFailing != null, baseBuilder.RelocationHoldConyard != null)
+					&& BaseBuilderQueueEvalCA.LatchProbeDue(ref failRetryTicks, baseBuilder.Info.StructureProductionResumeDelay))
 				{
 					var currentBuildings = world.ActorsHavingTrait<Building>().Count(a => a.Owner == player);
 					var baseProviders = world.ActorsHavingTrait<BaseProvider>().Count(a => a.Owner == player);
 
-					if (currentBuildings < cachedBuildings || baseProviders > cachedBases)
+					if (BaseBuilderQueueEvalCA.LatchProbeReleases(currentBuildings, latchedBuildings, baseProviders, latchedProviders))
+					{
+						// FIX-RA-REFINERY diagnostics: observe the latch release — once per resume
+						// delay at most, never per tick.
+						AIUtils.BotDebug($"{player} placement latch released (buildings {latchedBuildings} -> {currentBuildings}, providers {latchedProviders} -> {baseProviders}) at tick {world.WorldTick}");
 						failCount = 0;
-					else
-						failRetryTicks = baseBuilder.Info.StructureProductionResumeDelay;
+					}
 				}
 
 				if (failCount >= baseBuilder.Info.MaximumFailedPlacementAttempts)
@@ -377,6 +393,7 @@ namespace OpenRA.Mods.CA.Traits
 				var valueInfo = actorInfo.TraitInfoOrDefault<ValuedInfo>();
 				var distanceToBaseIsImportant = true;
 				CPos? advisedDefense = null;
+				var refineryDefers = false;
 				refineryClaimed = false;
 				lastFrontBackPick = null;
 				frontBackHold = false;
@@ -454,6 +471,10 @@ namespace OpenRA.Mods.CA.Traits
 						type = BaseBuilderQueueEvalCA.ClassifyPlacement(lawLink, isRefinery, isFragile, hasAttackBase, defenseRoll, organicCrawlRoll);
 					}
 
+					// FIX-RA-REFINERY: decided here so the null-location branch below can tell a
+					// law refinery's "retry later" from an ordinary placement failure.
+					refineryDefers = BaseBuilderQueueEvalCA.RefineryDefers(law != null, type);
+
 					// REF-1 B1 (crawl-trace §8): under the law a crawl placement with no aim holds — returning
 					// keeps the produced building queued (and spends no failure budget) instead of wasting the
 					// link on an un-aimed fallback cell.
@@ -476,17 +497,30 @@ namespace OpenRA.Mods.CA.Traits
 
 				if (location == null)
 				{
+					// FIX-RA-REFINERY: under the law a siteless refinery defers — cancelled for its
+					// refund while the standing request re-queues it on a later sweep. Spending
+					// shared failure budget here let one unreachable field saturate the latch and
+					// starve every other structure indefinitely.
+					if (refineryDefers)
+					{
+						AIUtils.BotDebug($"{player} defers {currentBuilding.Item}: no legal refinery site this sweep");
+						bot.QueueOrder(Order.CancelProduction(queue.Actor, currentBuilding.Item, 1));
+					}
+
 					// If we just reached the maximum fail count, cache the number of current structures
-					if (++failCount >= baseBuilder.Info.MaximumFailedPlacementAttempts)
+					else if (++failCount >= baseBuilder.Info.MaximumFailedPlacementAttempts)
 					{
 						AIUtils.BotDebug($"{player} has nowhere to place {currentBuilding.Item}");
 						bot.QueueOrder(Order.CancelProduction(queue.Actor, currentBuilding.Item, 1));
 						lastFailedBuilding = currentBuilding.Item;
-						if (baseBuilder.BaseExpansionModules == null)
-						{
-							cachedBuildings = world.ActorsHavingTrait<Building>().Count(a => a.Owner == player);
-							cachedBases = world.ActorsHavingTrait<BaseProvider>().Count(a => a.Owner == player);
-						}
+
+						// FIX-RA-REFINERY R1: the latch snapshot is taken at every saturation —
+						// the old `BaseExpansionModules == null` guard never ran (the array is
+						// never null), which left the recovery probe comparing stale or
+						// water-check-owned baselines. The probe timer re-arms per episode.
+						latchedBuildings = world.ActorsHavingTrait<Building>().Count(a => a.Owner == player);
+						latchedProviders = world.ActorsHavingTrait<BaseProvider>().Count(a => a.Owner == player);
+						failRetryTicks = baseBuilder.Info.StructureProductionResumeDelay;
 					}
 				}
 				else
@@ -1145,14 +1179,19 @@ namespace OpenRA.Mods.CA.Traits
 
 		// REF-1 (§12.24 v2): the harvester dock cell must not sit on valuable resources, and needs at least one on-map
 		// neighbour outside the footprint so the dock stays reachable — a refinery walled off the field is useless.
-		bool DockReachable(ActorInfo actorInfo, BuildingInfo bi, CPos topLeft, WVec dockOffset, IReadOnlySet<string> valuable)
+		// FIX-RA-REFINERY: "the footprint" here means the impassable cells — BuildingInfo.Tiles also
+		// yields the passable '=' bib, which walled the RA proc's dock inside its own footprint and
+		// failed the exit check at every legal site.
+		enum DockAccess { Clear, OnResource, NoExit }
+
+		DockAccess CheckDockAccess(ActorInfo actorInfo, BuildingInfo bi, CPos topLeft, WVec dockOffset, IReadOnlySet<string> valuable)
 		{
 			var dock = world.Map.CellContaining(world.Map.CenterOfCell(topLeft) + bi.CenterOffset(world) + dockOffset);
 			if (valuable != null && resourceLayer != null && valuable.Contains(resourceLayer.GetResource(dock).Type))
-				return false;
+				return DockAccess.OnResource;
 
-			var footprint = new HashSet<CPos>(bi.Tiles(topLeft));
-			return BaseBuilderQueueEvalCA.DockHasExit(dock, footprint, world.Map.Contains);
+			var footprint = new HashSet<CPos>(BaseBuilderQueueEvalCA.DockBlockingFootprint(bi.Footprint, topLeft));
+			return BaseBuilderQueueEvalCA.DockHasExit(dock, footprint, world.Map.Contains) ? DockAccess.Clear : DockAccess.NoExit;
 		}
 
 		// REF-1 (§12.24 v2): the placeable cell NEAREST the anchor whose footprint sits flush on the claim's resource
@@ -1184,17 +1223,58 @@ namespace OpenRA.Mods.CA.Traits
 			var valuable = baseBuilder.ResourceMapModule?.Info.ValuableResourceTypes;
 
 			CPos? gap1 = null;
+
+			// FIX-RA-REFINERY diagnostics: tally the per-cell rejection reasons so a failed sweep
+			// emits one bounded line — the reason chain (buildability / too-far / dock-on-resource /
+			// no-exit / gap-illegal) instead of a per-cell dump.
+			var scanned = 0;
+			var rejectedBuild = 0;
+			var rejectedFar = 0;
+			var rejectedDockResource = 0;
+			var rejectedDockExit = 0;
+			var rejectedGap = 0;
 			foreach (var cell in world.Map.FindTilesInAnnulus(anchor, 0, claimRadius)
 				.OrderBy(c => (c - anchor).LengthSquared).ThenBy(c => c.X).ThenBy(c => c.Y))
 			{
+				scanned++;
 				if (!world.CanPlaceBuilding(cell, actorInfo, bi, null))
+				{
+					rejectedBuild++;
 					continue;
+				}
 
 				if (distanceToBaseIsImportant && !bi.IsCloseEnoughToBase(world, player, actorInfo, producer, cell))
+				{
+					rejectedFar++;
 					continue;
+				}
 
-				if (!dockOffsets.Any(off => DockReachable(actorInfo, bi, cell, off, valuable)))
+				// A cell fails the dock check only when every dock is unreachable; a dock that lost
+				// solely to the valuable-resource rule keeps the resource signature for the tally.
+				var dockOk = false;
+				var dockAllResource = true;
+				foreach (var off in dockOffsets)
+				{
+					var access = CheckDockAccess(actorInfo, bi, cell, off, valuable);
+					if (access == DockAccess.Clear)
+					{
+						dockOk = true;
+						break;
+					}
+
+					if (access != DockAccess.OnResource)
+						dockAllResource = false;
+				}
+
+				if (!dockOk)
+				{
+					if (dockAllResource)
+						rejectedDockResource++;
+					else
+						rejectedDockExit++;
+
 					continue;
+				}
 
 				if (zone0 == null)
 					return (cell, -1, 0);
@@ -1206,9 +1286,15 @@ namespace OpenRA.Mods.CA.Traits
 
 				if (gap == 1 && gap1 == null)
 					gap1 = cell;
+				else if (gap < 0)
+					rejectedGap++;
 			}
 
-			return gap1.HasValue ? (gap1.Value, 1, 0) : (null, -1, 0);
+			if (gap1.HasValue)
+				return (gap1.Value, 1, 0);
+
+			AIUtils.BotDebug($"{player} law refinery {actorType}: no site at anchor {anchor} — {scanned} scanned, {rejectedBuild} unbuildable, {rejectedFar} too-far, {rejectedDockResource} dock-on-resource, {rejectedDockExit} dock-no-exit, {rejectedGap} gap-illegal at tick {world.WorldTick}");
+			return (null, -1, 0);
 		}
 
 		// Find the buildable cell that is closest to pos and centered around center.
@@ -1536,6 +1622,12 @@ namespace OpenRA.Mods.CA.Traits
 									baseBuilder.RequestedRefineries.Remove(requestRef);
 								return (placed.Location, c.Anchor, placed.Variant);
 							}
+						}
+						else
+						{
+							// FIX-RA-REFINERY diagnostics: the other law-null reason — nothing claimed
+							// this sweep. Bounded: one line per failed placement attempt.
+							AIUtils.BotDebug($"{player} law refinery {actorType}: no claim available at tick {world.WorldTick}");
 						}
 
 						return (null, null, 0);
