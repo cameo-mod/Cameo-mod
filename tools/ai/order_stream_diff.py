@@ -123,7 +123,10 @@ def parse_orders(pkt):
                 start = p
                 tt = pkt[p]
                 p += 1
-                if tt in (0, 1):      # Actor u32+i32 / FrozenActor u32+u32
+                # TargetType (engine Target.cs): Invalid=0 Actor=1 Terrain=2
+                # FrozenActor=3. Serialize sets the Target flag only when the
+                # type is not Invalid, so tt=0 on the wire is malformed.
+                if tt == 1:           # Actor: u32 actorID + i32 generation
                     p += 8
                 elif tt == 2:         # Terrain
                     if flags & 0x40:  # TargetIsCell: i32 + u8
@@ -136,6 +139,8 @@ def parse_orders(pkt):
                             raise ValueError('bad terrain count')
                         if n != -1:
                             p += 12 * n
+                elif tt == 3:         # FrozenActor: u32 viewerPlayerActorID + u32 frozenActorID
+                    p += 8
                 else:
                     raise ValueError('unknown target type')
                 if p > len(pkt):
