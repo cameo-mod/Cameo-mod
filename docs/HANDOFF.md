@@ -8,27 +8,34 @@
 
 Fixes B2 (multiple SW buildable despite the 1-cap) and B6 (ion uplink re-queueable
 while owned) per fleet spec `SPEC_2026-10-09_devin_plug_slot_capacity.md` (v10
-bounded lane). New world trait `SuperweaponPlugLimit`
+bounded lane; mechanism revised per independent review — declared catalogue).
+New world trait `SuperweaponPlugLimit`
 (`OpenRA.Mods.Cameo/Traits/World/`): synced `IValidateOrder` admission gate
 (owner-wide pending+installed+`ExtraData` ≤ 1 per occupancy token, active only
 under `global-swlimit` — Unlimited untouched) plus a per-tick deduplicated
 frame-end reconciliation that refunds over-cap pending SW plugs (clears
 `Infinite` first — kills `EndProduction`'s auto-replenish leak; full
-cash+resources refund). SW items are derived from rules wiring (host
-`Pluggable` type→condition → `ProvidesPrerequisite` token → plug's own
-`!token`), not hardcoded. Four host `@swlimit` providers gained
-`RequiresPrerequisites: global-swlimit`. Inbound `GetReplacement` migration is
-**detection-only** per spec — upstream exclusion is a separate out-of-scope fix.
+cash+resources refund — `RefundCash = TotalCost - RemainingCost - ResourcesPaid`,
+engine-parity with `CancelProductionInner`). SW items are resolved against a
+**declared catalogue**: `SuperweaponPlugLimit.OccupancyTokens` in world.yaml
+(`ionc, nodnuke, cabalnuke_swlimit, tsionc`) — a plug maps only when it negates a
+declared token whose provider chain verifies (`global-swlimit` gated + positive
+single-variable `RequiresCondition`); missing/ambiguous wiring emits debug-channel
+diagnostics and leaves plugs uncapped (empty catalogue = nothing capped). Four
+host `@swlimit` providers gained `RequiresPrerequisites: global-swlimit`.
+Inbound `GetReplacement` migration is **detection-only** per spec — upstream
+exclusion is a separate out-of-scope fix.
 
-*Evidence:* build 0/0 · 1289/1289 NUnit (+38 `SuperweaponPlugLimit*` tests:
-admit/excess/refund tables, token-map derivation incl. adversarial
-ordinary/inverted providers, exact-four resolved-wiring assertion, real-World
-lifecycle regressions via reflection harness — real `ProductionQueue`/`TechTree`
-/`Pluggable`: `EnablePlug`→`CanBuild` flip, tail-first sweep cancel, `Infinite`
-clear, Done-migration refund, per-tick dedup; plus real-yaml scan pinning
-exactly four `global-swlimit`-gated `@swlimit` providers) · boot-gate PASS
-(menu reached, 0 new exceptions) · `git diff --check` scoped files only · engine
-untouched (canonical pin `0a3f77dbe1`). *Next:* live-match regressions —
+*Evidence:* build 0/0 · NUnit 45/45 focused `SuperweaponPlugLimit*` (admit/excess/
+refund tables, declared-catalogue tests, adversarial ordinary/inverted/ungated
+providers, resolved-gate echo + missing-provider/ambiguity diagnostics,
+exact-four under the declared set, real-World lifecycle via reflection harness —
+`EnablePlug`→`CanBuild` flip, tail-first sweep cancel, `Infinite` clear,
+Done-migration 600res+400cash refund, per-tick dedup; real-yaml scans pin the
+four gated providers, the declared `OccupancyTokens` set, plug `!token`
+negations, and provider-gate polarity sampled 0/1/2/`int.MaxValue`) · boot-gate
+PASS (menu reached, 0 new exceptions) · `git diff --check` scoped files only ·
+engine untouched (canonical pin `0a3f77dbe1`). *Next:* live-match regressions —
 infinite-flag install, capture over-cap, mixed-tech migration, PayUpFront
 refund, ordinary-infinite unaffected — before release clearance. B1/B7 branches
 await coordinator merge per plan §3.

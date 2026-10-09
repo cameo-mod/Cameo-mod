@@ -10,6 +10,7 @@
 #endregion
 
 using System.Collections.Generic;
+using System.Linq;
 using NUnit.Framework;
 using OpenRA.Mods.Cameo.Traits;
 using OpenRA.Mods.Common.Traits;
@@ -164,7 +165,7 @@ namespace OpenRA.Mods.Cameo.Test
 				Plug("td_gdi_advancedcommunicationscenter"),
 				Buildable("~td_gdi_constructionyard, td_gdi_advancedcommunicationscenter, !ionc, ~techlevel.superweapons"));
 
-			var map = SuperweaponPlugLimit.BuildPlugTokenMap(new[] { host, plug });
+			var map = SuperweaponPlugLimit.BuildPlugTokenMap(new[] { host, plug }, new[] { "ionc" });
 
 			Assert.That(map, Does.ContainKey("td_gdi_ioncannonuplink"));
 			Assert.That(map["td_gdi_ioncannonuplink"], Is.EqualTo("ionc"));
@@ -180,7 +181,7 @@ namespace OpenRA.Mods.Cameo.Test
 				Plug("td_nod_templeofnod"),
 				Buildable("~td_nod_constructionyard, td_nod_templeofnod, !nodnuke, ~techlevel.superweapons"));
 
-			var map = SuperweaponPlugLimit.BuildPlugTokenMap(new[] { host, plug });
+			var map = SuperweaponPlugLimit.BuildPlugTokenMap(new[] { host, plug }, new[] { "nodnuke" });
 
 			Assert.That(map["td_nod_nuclearmissilesilo"], Is.EqualTo("nodnuke"));
 		}
@@ -199,9 +200,17 @@ namespace OpenRA.Mods.Cameo.Test
 				Plug("cabalcore_silo"),
 				Buildable("~cabal_core, cabal_core, !cabalnuke_swlimit, ~techlevel.superweapons"));
 
-			var map = SuperweaponPlugLimit.BuildPlugTokenMap(new[] { host, plug });
+			// Declaring the ungated sibling token too must not capture the plug:
+			// its provider lacks global-swlimit and the plug negates only
+			// !cabalnuke_swlimit.
+			var map = SuperweaponPlugLimit.BuildPlugTokenMap(new[] { host, plug },
+				new[] { "cabalnuke", "cabalnuke_swlimit" });
 
-			Assert.That(map["cabal_missilesilo"], Is.EqualTo("cabalnuke_swlimit"));
+			Assert.Multiple(() =>
+			{
+				Assert.That(map.Count, Is.EqualTo(1));
+				Assert.That(map["cabal_missilesilo"], Is.EqualTo("cabalnuke_swlimit"));
+			});
 		}
 
 		[Test]
@@ -217,7 +226,8 @@ namespace OpenRA.Mods.Cameo.Test
 				Plug("droppod"),
 				Buildable("~ts_gdi_upgradecenter, !ionc, !droppod"));
 
-			var map = SuperweaponPlugLimit.BuildPlugTokenMap(new[] { host, ionPlug, droppodPlug });
+			var map = SuperweaponPlugLimit.BuildPlugTokenMap(new[] { host, ionPlug, droppodPlug },
+				new[] { "tsionc" });
 
 			Assert.Multiple(() =>
 			{
@@ -238,7 +248,7 @@ namespace OpenRA.Mods.Cameo.Test
 				Plug("mg"),
 				Buildable("~naxis_constructionyard, naxis_techcenter"));
 
-			var map = SuperweaponPlugLimit.BuildPlugTokenMap(new[] { host, plug });
+			var map = SuperweaponPlugLimit.BuildPlugTokenMap(new[] { host, plug }, new[] { "ionc" });
 
 			Assert.That(map, Is.Empty);
 		}
@@ -255,7 +265,7 @@ namespace OpenRA.Mods.Cameo.Test
 				Plug("td_gdi_advancedcommunicationscenter"),
 				Buildable("~td_gdi_constructionyard, td_gdi_advancedcommunicationscenter"));
 
-			var map = SuperweaponPlugLimit.BuildPlugTokenMap(new[] { host, plug });
+			var map = SuperweaponPlugLimit.BuildPlugTokenMap(new[] { host, plug }, new[] { "ionc" });
 
 			Assert.That(map, Is.Empty);
 		}
@@ -273,9 +283,15 @@ namespace OpenRA.Mods.Cameo.Test
 				Plug("mg"),
 				Buildable("~naxis_constructionyard, naxis_techcenter, !mgcap"));
 
-			var map = SuperweaponPlugLimit.BuildPlugTokenMap(new[] { host, plug });
+			var diags = new List<string>();
+			var map = SuperweaponPlugLimit.BuildPlugTokenMap(new[] { host, plug }, new[] { "mgcap" }, diags);
 
-			Assert.That(map, Is.Empty);
+			Assert.Multiple(() =>
+			{
+				Assert.That(map, Is.Empty);
+				Assert.That(diags.Any(d => d.Contains("mgcap")), Is.True,
+					"expected a diagnostic naming the declared token");
+			});
 		}
 
 		[Test]
@@ -290,7 +306,7 @@ namespace OpenRA.Mods.Cameo.Test
 				Plug("td_gdi_advancedcommunicationscenter"),
 				Buildable("!ionc"));
 
-			var map = SuperweaponPlugLimit.BuildPlugTokenMap(new[] { host, plug });
+			var map = SuperweaponPlugLimit.BuildPlugTokenMap(new[] { host, plug }, new[] { "ionc" });
 
 			Assert.That(map, Is.Empty);
 		}
@@ -308,9 +324,117 @@ namespace OpenRA.Mods.Cameo.Test
 				Plug("td_gdi_advancedcommunicationscenter"),
 				Buildable("!ionc"));
 
-			var map = SuperweaponPlugLimit.BuildPlugTokenMap(new[] { host, plug });
+			var map = SuperweaponPlugLimit.BuildPlugTokenMap(new[] { host, plug }, new[] { "ionc" });
 
 			Assert.That(map, Is.Empty);
+		}
+
+		// ---------------------------------------------------------------
+		// Declared-catalogue semantics (OccupancyTokens on the trait Info)
+		// ---------------------------------------------------------------
+
+		[Test]
+		public void TokenMap_NoDeclaredTokens_AllUncapped()
+		{
+			// Zero declared candidates: even fully-wired SW plugs stay uncapped.
+			var host = new ActorInfo("td_gdi_advancedcommunicationscenter",
+				Provides("ionc", "ionc", "global-swlimit"),
+				Pluggable(("td_gdi_advancedcommunicationscenter", "ionc")));
+			var plug = new ActorInfo("td_gdi_ioncannonuplink",
+				Plug("td_gdi_advancedcommunicationscenter"),
+				Buildable("!ionc"));
+
+			var map = SuperweaponPlugLimit.BuildPlugTokenMap(new[] { host, plug }, new string[0]);
+
+			Assert.That(map, Is.Empty);
+		}
+
+		[Test]
+		public void TokenMap_UndeclaredToken_PlugUncapped()
+		{
+			// Fully-wired ionc plug, but only nodnuke is declared — the declared
+			// catalogue is authoritative, not the wiring.
+			var host = new ActorInfo("td_gdi_advancedcommunicationscenter",
+				Provides("ionc", "ionc", "global-swlimit"),
+				Pluggable(("td_gdi_advancedcommunicationscenter", "ionc")));
+			var plug = new ActorInfo("td_gdi_ioncannonuplink",
+				Plug("td_gdi_advancedcommunicationscenter"),
+				Buildable("!ionc"));
+
+			var diags = new List<string>();
+			var map = SuperweaponPlugLimit.BuildPlugTokenMap(new[] { host, plug }, new[] { "nodnuke" }, diags);
+
+			Assert.Multiple(() =>
+			{
+				Assert.That(map, Is.Empty);
+				Assert.That(diags.Any(d => d.Contains("nodnuke") && d.Contains("no ProvidesPrerequisite")), Is.True);
+			});
+		}
+
+		[Test]
+		public void TokenMap_DeclaredToken_MissingProvider_Diagnostic()
+		{
+			var plug = new ActorInfo("td_gdi_ioncannonuplink",
+				Plug("td_gdi_advancedcommunicationscenter"),
+				Buildable("!ionc"));
+
+			var diags = new List<string>();
+			var map = SuperweaponPlugLimit.BuildPlugTokenMap(new[] { plug }, new[] { "ionc" }, diags);
+
+			Assert.Multiple(() =>
+			{
+				Assert.That(map, Is.Empty);
+				Assert.That(diags.Any(d => d.Contains("'ionc'") && d.Contains("no ProvidesPrerequisite")), Is.True);
+				Assert.That(diags.Any(d => d.Contains("'ionc'") && d.Contains("nothing capped")), Is.True);
+			});
+		}
+
+		[Test]
+		public void TokenMap_ResolvedProvider_EchoesGateDiagnostic()
+		{
+			// Diagnostic echo of the resolved provider gate for review.
+			var host = new ActorInfo("td_gdi_advancedcommunicationscenter",
+				Provides("ionc", "ionc", "global-swlimit"),
+				Pluggable(("td_gdi_advancedcommunicationscenter", "ionc")));
+			var plug = new ActorInfo("td_gdi_ioncannonuplink",
+				Plug("td_gdi_advancedcommunicationscenter"),
+				Buildable("!ionc"));
+
+			var diags = new List<string>();
+			var map = SuperweaponPlugLimit.BuildPlugTokenMap(new[] { host, plug }, new[] { "ionc" }, diags);
+
+			Assert.Multiple(() =>
+			{
+				Assert.That(map["td_gdi_ioncannonuplink"], Is.EqualTo("ionc"));
+				Assert.That(diags.Any(d => d.Contains("'ionc'") && d.Contains("gated on 'ionc'")), Is.True,
+					"expected resolved-gate echo naming the token and condition");
+			});
+		}
+
+		[Test]
+		public void TokenMap_SharedToken_TwoPlugs_BothMapped_WithDiagnostic()
+		{
+			// Two plug actors negating the same declared token share one capacity
+			// slot — both map, and the ambiguity is surfaced for review.
+			var host = new ActorInfo("td_gdi_advancedcommunicationscenter",
+				Provides("ionc", "ionc", "global-swlimit"),
+				Pluggable(("td_gdi_advancedcommunicationscenter", "ionc")));
+			var plugA = new ActorInfo("td_gdi_ioncannonuplink",
+				Plug("td_gdi_advancedcommunicationscenter"),
+				Buildable("!ionc"));
+			var plugB = new ActorInfo("td_gdi_ioncannonuplink_mk2",
+				Plug("td_gdi_advancedcommunicationscenter"),
+				Buildable("!ionc"));
+
+			var diags = new List<string>();
+			var map = SuperweaponPlugLimit.BuildPlugTokenMap(new[] { host, plugA, plugB }, new[] { "ionc" }, diags);
+
+			Assert.Multiple(() =>
+			{
+				Assert.That(map.Count, Is.EqualTo(2));
+				Assert.That(map.Values, Is.All.EqualTo("ionc"));
+				Assert.That(diags.Any(d => d.Contains("shared-slot") || d.Contains("resolves 2")), Is.True);
+			});
 		}
 
 		[Test]
@@ -352,7 +476,9 @@ namespace OpenRA.Mods.Cameo.Test
 					Buildable("~ts_gdi_upgradecenter, !ionc, !droppod")),
 			};
 
-			var map = SuperweaponPlugLimit.BuildPlugTokenMap(actors);
+			// Declared catalogue = the world.yaml OccupancyTokens list.
+			var map = SuperweaponPlugLimit.BuildPlugTokenMap(actors,
+				new[] { "ionc", "nodnuke", "cabalnuke_swlimit", "tsionc" });
 
 			Assert.Multiple(() =>
 			{

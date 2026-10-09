@@ -1,3 +1,36 @@
+# 2026-10-09 — Devin: SW plug capacity (B2/B6) — F2 revised to declared catalogue
+
+*Devin-Developer.* Post-approval design revision (Architect + Integrator direction):
+the SW-plug token set is now an **explicit declared catalogue** on the trait Info
+rather than pure wiring inference.
+
+- **`SuperweaponPlugLimitInfo.OccupancyTokens`** (`string[]`, world.yaml
+  `OccupancyTokens: ionc, nodnuke, cabalnuke_swlimit, tsionc`) — only declared
+  tokens can capacity-manage a plug. Empty list → nothing capped (ordinary plugs
+  never enter the map regardless of wiring).
+- `BuildPlugTokenMap(actors, declaredTokens, diagnostics)` verifies each declared
+  token's chain end-to-end: `ProvidesPrerequisite` producing the token must carry
+  `RequiresPrerequisites: global-swlimit` + positive single-variable
+  `RequiresCondition` (bare variable only — `Expression.Trim() == variable`,
+  rejects `!x`/compounds/parenthesized) → host `Pluggable` condition → plug actor
+  with matching `Plug.Type` that negates `!token` (or `~!token`).
+- **Diagnostics** (debug channel + returned list): missing provider for a declared
+  token, non-positive or ungated provider, multiple resolved install conditions,
+  zero/multiple plug resolutions, plug negating multiple declared tokens.
+  Behavioural claim kept bounded: provider contract is "level 0 → false, positive
+  → true" (`AsBool` is `value != 0`); sampling at 0/1/2/`int.MaxValue` is a
+  *regression* on the four real gates, not universal expression validation.
+- `SuperweaponPlugLimitInfo` switched `TraitInfo<T>` → `TraitInfo` +
+  `Create(init)` override so the trait receives its Info (catalogue access).
+- New/updated regressions: empty-declared uncaps, undeclared-token uncaps,
+  missing-provider diagnostic, ungated/inverted-provider diagnostics, resolved-
+  gate echo, shared-token two-plug ambiguity + dual mapping, CABAL ungated
+  sibling declared but rejected, exact-four under the declared set; real-yaml
+  scans now also assert `world.yaml` declared set == expected tokens and sample
+  each real `RequiresCondition` gate for polarity.
+- **Gates**: 45/45 focused, full suite + Release build below; boot-gate re-run
+  for this commit.
+
 # 2026-10-09 — Devin: SW plug capacity (B2/B6) — review findings F1+F2 resolved
 
 *Devin-Developer.* Independent review of `devin/playtest-b2b6-swcap` produced two

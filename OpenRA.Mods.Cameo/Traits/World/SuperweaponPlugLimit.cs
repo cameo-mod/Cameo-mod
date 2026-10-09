@@ -28,17 +28,34 @@ namespace OpenRA.Mods.Cameo.Traits
 		"without calling StartProduction), captures, and ordinary items migrating INTO an " +
 		"SW plug via GetReplacement. Inbound migration is detection-only: a migrated item " +
 		"can tick at most once before frame-end removal refunds all paid cash/resources.")]
-	public class SuperweaponPlugLimitInfo : TraitInfo<SuperweaponPlugLimit> { }
+	public class SuperweaponPlugLimitInfo : TraitInfo
+	{
+		[Desc("Declared occupancy prerequisite tokens that capacity-manage superweapon plugs " +
+			"(e.g. ionc). A plug item is capped only when it negates a token declared here " +
+			"whose provider wiring verifies as lobby-cap wiring; an empty list leaves every " +
+			"plug uncapped.")]
+		public readonly string[] OccupancyTokens = [];
+
+		public override object Create(ActorInitializer init) => new SuperweaponPlugLimit(this);
+	}
 
 	public class SuperweaponPlugLimit : ITick, IValidateOrder
 	{
-		// SW plug item name ("td_gdi_ioncannonuplink") -> occupancy prerequisite
-		// token ("ionc") provided while its host holds the install condition.
+		readonly SuperweaponPlugLimitInfo info;
+
+		// SW plug item name ("td_gdi_ioncannonuplink") -> declared occupancy
+		// prerequisite token ("ionc") provided while its host holds the install
+		// condition.
 		Dictionary<string, string> swItemToken;
 
 		// dedup: one frame-end sweep is queued per owner per drain; late same-frame
 		// installs still resolve because the sweep re-evaluates live counts at run time.
 		bool sweepQueued;
+
+		public SuperweaponPlugLimit(SuperweaponPlugLimitInfo info)
+		{
+			this.info = info;
+		}
 
 		public bool OrderValidation(OrderManager orderManager, World world, int clientId, Order order)
 		{
@@ -101,87 +118,118 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		void EnsureMaps(World world)
 		{
-			swItemToken ??= BuildPlugTokenMap(world.Map.Rules.Actors.Values);
+			if (swItemToken != null)
+				return;
+
+			var diagnostics = new List<string>();
+			swItemToken = BuildPlugTokenMap(world.Map.Rules.Actors.Values, info.OccupancyTokens, diagnostics);
+			foreach (var diagnostic in diagnostics)
+				Log.Write("debug", diagnostic);
 		}
 
-		// Derived from the rules wiring, not hardcoded: a host Pluggable accepts plug
-		// type T and grants condition C for it; the same actor's ProvidesPrerequisite
-		// gated on C yields the token. An item is SW-capped iff it has Plug.Type == T
-		// and its own Buildable prerequisites contain !token (installed-only gating).
-		internal static Dictionary<string, string> BuildPlugTokenMap(IEnumerable<ActorInfo> actors)
+		// Capacity wiring is declared, not inferred: only tokens in
+		// SuperweaponPlugLimitInfo.OccupancyTokens can cap a plug. For each declared
+		// token the wiring chain is verified end to end — a ProvidesPrerequisite
+		// producing the token must carry `RequiresPrerequisites: global-swlimit` and
+		// a positive single-variable RequiresCondition (a bare install condition
+		// such as `ionc`; `!x`, `x && y` or `(x)` cannot be install gates); a host
+		// Pluggable must grant that condition for some plug type; and a plug actor
+		// of that type must negate !token in Buildable.Prerequisites. Missing or
+		// ambiguous links emit diagnostics (debug channel) and leave the plug
+		// uncapped rather than silently mis-deriving wiring. Behavioural polarity
+		// of the real gates is regression-covered at samples 0/1/2/int.MaxValue —
+		// no universal expression-validation claim.
+		internal static Dictionary<string, string> BuildPlugTokenMap(
+			IEnumerable<ActorInfo> actors, IEnumerable<string> occupancyTokens, List<string> diagnostics = null)
 		{
-			// plug type -> candidate occupancy tokens (a condition may feed several
-			// ProvidesPrerequisite traits, e.g. cabalnuke and cabalnuke_swlimit)
-			var typeToTokens = new Dictionary<string, List<string>>();
-			foreach (var ai in actors)
+			var result = new Dictionary<string, string>();
+			var declared = occupancyTokens.OrderBy(t => t, StringComparer.Ordinal).ToArray();
+			if (declared.Length == 0)
+				return result;
+
+			var all = actors.ToArray();
+			foreach (var token in declared)
 			{
-				var providedByCondition = new Dictionary<string, List<string>>();
-				foreach (var p in ai.TraitInfos<ProvidesPrerequisiteInfo>())
+				var conditions = new List<string>();
+				var sawProvider = false;
+				foreach (var ai in all)
 				{
-					if (p.RequiresCondition == null)
-						continue;
+					foreach (var p in ai.TraitInfos<ProvidesPrerequisiteInfo>())
+					{
+						if ((p.Prerequisite ?? ai.Name) != token)
+							continue;
 
-					// Only a positive single-variable gate identifies a plug-granted
-					// condition (e.g. RequiresCondition: nuke). A negated (!ionc) or
-					// otherwise compound expression cannot be an install condition
-					// and must not classify the provider as capacity wiring.
-					var variables = p.RequiresCondition.Variables.ToArray();
-					if (variables.Length != 1 || p.RequiresCondition.Expression.Trim() != variables[0])
-						continue;
+						sawProvider = true;
+						var variables = p.RequiresCondition?.Variables.ToArray();
+						var positiveGate = variables != null && variables.Length == 1
+							&& p.RequiresCondition.Expression.Trim() == variables[0];
+						if (!positiveGate)
+						{
+							diagnostics?.Add($"swcap: '{token}' provider '{ai.Name}' RequiresCondition " +
+								$"'{p.RequiresCondition?.Expression ?? "<none>"}' is not a positive single-variable gate — skipped");
+							continue;
+						}
 
-					// Only providers explicitly wired to the lobby cap yield capacity
-					// tokens; an ordinary conditional provider with a negated item
-					// token must never be classified as SW-cap wiring.
-					if (!p.RequiresPrerequisites.Contains("global-swlimit"))
-						continue;
+						if (!p.RequiresPrerequisites.Contains("global-swlimit"))
+						{
+							diagnostics?.Add($"swcap: '{token}' provider '{ai.Name}' lacks RequiresPrerequisites: global-swlimit — skipped");
+							continue;
+						}
 
-					var condition = variables[0];
-					if (!providedByCondition.TryGetValue(condition, out var tokens))
-						providedByCondition[condition] = tokens = new List<string>();
-					tokens.Add(p.Prerequisite ?? ai.Name);
+						// Echo the resolved gate for review.
+						diagnostics?.Add($"swcap: '{token}' <- '{ai.Name}' gated on '{p.RequiresCondition.Expression}' + global-swlimit");
+						if (!conditions.Contains(variables[0]))
+							conditions.Add(variables[0]);
+					}
 				}
 
-				if (providedByCondition.Count == 0)
-					continue;
+				if (!sawProvider)
+					diagnostics?.Add($"swcap: declared token '{token}' has no ProvidesPrerequisite provider — dangling declaration");
 
-				foreach (var pluggable in ai.TraitInfos<PluggableInfo>())
-					foreach (var cond in pluggable.Conditions)
-						if (providedByCondition.TryGetValue(cond.Value, out var tokens))
-						{
-							// Merge: several hosts may accept the same plug type; the
-							// plug's own negated prerequisite disambiguates the token.
-							if (!typeToTokens.TryGetValue(cond.Key, out var merged))
-								typeToTokens[cond.Key] = merged = new List<string>();
-							foreach (var t in tokens)
-								if (!merged.Contains(t))
-									merged.Add(t);
-						}
-			}
-
-			var result = new Dictionary<string, string>();
-			foreach (var ai in actors)
-			{
-				var plug = ai.TraitInfoOrDefault<PlugInfo>();
-				var buildable = ai.TraitInfoOrDefault<BuildableInfo>();
-				if (plug == null || buildable == null || !typeToTokens.TryGetValue(plug.Type, out var tokens))
-					continue;
-
-				// The occupancy token is the candidate the plug itself negates in
-				// Buildable prerequisites (!token). A candidate provided by the same
-				// install condition but not negated (e.g. cabalnuke) is unrelated.
-				foreach (var p in buildable.Prerequisites)
+				if (conditions.Count == 0)
 				{
-					var normalized = p.Replace("~", "");
-					foreach (var token in tokens)
-						if (normalized == "!" + token)
-						{
-							result[ai.Name] = token;
-							break;
-						}
+					diagnostics?.Add($"swcap: declared token '{token}' has no qualifying lobby-cap provider — nothing capped");
+					continue;
+				}
+
+				if (conditions.Count > 1)
+					diagnostics?.Add($"swcap: declared token '{token}' resolves {conditions.Count} install conditions ({string.Join(", ", conditions)})");
+
+				// Plug types = host Pluggable entries granting a resolved condition.
+				var plugTypes = new List<string>();
+				foreach (var ai in all)
+					foreach (var pluggable in ai.TraitInfos<PluggableInfo>())
+						foreach (var cond in pluggable.Conditions)
+							if (conditions.Contains(cond.Value) && !plugTypes.Contains(cond.Key))
+								plugTypes.Add(cond.Key);
+
+				// The plug itself must negate the declared token in Buildable
+				// prerequisites (!token, or hidden ~!token).
+				var resolved = 0;
+				foreach (var ai in all)
+				{
+					var plug = ai.TraitInfoOrDefault<PlugInfo>();
+					var buildable = ai.TraitInfoOrDefault<BuildableInfo>();
+					if (plug == null || buildable == null || !plugTypes.Contains(plug.Type))
+						continue;
+
+					if (!buildable.Prerequisites.Any(p => p.Replace("~", "") == "!" + token))
+						continue;
 
 					if (result.ContainsKey(ai.Name))
-						break;
+					{
+						diagnostics?.Add($"swcap: plug '{ai.Name}' negates multiple declared tokens — first wins");
+						continue;
+					}
+
+					result[ai.Name] = token;
+					resolved++;
 				}
+
+				if (resolved == 0)
+					diagnostics?.Add($"swcap: declared token '{token}' resolves no plug actor");
+				else if (resolved > 1)
+					diagnostics?.Add($"swcap: declared token '{token}' resolves {resolved} plug actors — shared-slot cap");
 			}
 
 			return result;
