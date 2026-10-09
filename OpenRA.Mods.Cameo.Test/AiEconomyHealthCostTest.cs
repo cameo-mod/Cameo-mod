@@ -58,7 +58,10 @@ namespace OpenRA.Mods.Cameo.Test
 				scope = "core and serializer with MemoryStream; excludes World scans, callbacks, disk and engine observer",
 				ticks = 45001, queues = observations.Length, pulses = writer.Records,
 				elapsed_ms = stopwatch.Elapsed.TotalMilliseconds, allocated_bytes = allocated,
-				output_bytes = writer.Bytes, adoption_approved = false
+				output_bytes = writer.Bytes, adoption_approved = false,
+				health_max_line_bytes_including_newline = writer.MaximumRecordBytes,
+				raw_stream_measured = false, summary_measured = false,
+				combined_fixture_bytes = writer.Bytes, combined_campaign_bytes = (long?)null
 			});
 			var directory = Path.Combine(TestContext.CurrentContext.WorkDirectory, "TestResults");
 			Directory.CreateDirectory(directory);

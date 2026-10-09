@@ -87,3 +87,15 @@ runtime benchmark). Raw stream budgets are independent. Arbitrary64-player
 maximum queue/event workloads are not certified; forecasting and overflowUNKNOWN
 remain required. No mount/seam/campaign clearance. Receipt:
 engine/bin/TestResults/economy-health-core-cost-2p.json.
+
+
+2026-10-09 per-stream sizing clarification: two-player fixture writes health only:
+38046762 bytes/1802 rows; maximum actual UTF8 record including newline21114 bytes
+(<64KiB writer cap and <1MiB approved reader line cap). Raw events and summary
+are NOT measured by this fixture; combined fixture bytes38046762, combined
+campaign bytes UNKNOWN/null. Configured health128MiB + raw128MiB + optional
+external summary reader1MiB gives257MiB capacity upper bound for those three
+artifacts only; does not estimate their usage or include pre-existing logs/replay.
+Actual raw workload and summary size remain adoption sizing gates. New frozen
+sizing receipt:engine/bin/TestResults/economy-health-core-cost-2p-line-sizing.json.
+Explicit2/2 PASS; no runtime/seam/adoption clearance.

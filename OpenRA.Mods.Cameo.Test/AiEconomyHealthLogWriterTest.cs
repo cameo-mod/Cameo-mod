@@ -29,6 +29,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(writer.TryWrite("{}"), Is.False);
 			Assert.That(writer.Records, Is.EqualTo(1));
 			Assert.That(writer.Bytes, Is.EqualTo(3));
+			Assert.That(writer.MaximumRecordBytes, Is.EqualTo(3));
 			Assert.That(Encoding.UTF8.GetString(stream.ToArray()), Is.EqualTo("{}\n"));
 			Assert.That(writer.Complete, Is.False);
 		}

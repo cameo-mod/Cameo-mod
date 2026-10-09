@@ -105,6 +105,7 @@ namespace OpenRA.Mods.Cameo.Traits
 		readonly int recordLimit;
 		long bytes;
 		int records;
+		int maximumRecordBytes;
 		bool failed;
 		bool disposed;
 
@@ -125,6 +126,7 @@ namespace OpenRA.Mods.Cameo.Traits
 		internal bool Complete => !failed && !disposed;
 		internal int Records => records;
 		internal long Bytes => bytes;
+		internal int MaximumRecordBytes => maximumRecordBytes;
 
 		internal bool TryWrite(string json)
 		{
@@ -146,6 +148,7 @@ namespace OpenRA.Mods.Cameo.Traits
 				stream.Flush();
 				bytes += count;
 				records++;
+				maximumRecordBytes = Math.Max(maximumRecordBytes, count);
 				return true;
 			}
 			catch (Exception e) when (e is IOException or UnauthorizedAccessException or
