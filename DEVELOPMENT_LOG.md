@@ -20452,3 +20452,99 @@ the existing helpers only — no blanket normalization, no yaml edits except one
   remain downstream gates; `BaseExpansionModules == null` at the cache-population
   site is a known latent inconsistency left untouched (never-null array keeps the
   latch self-releasing at first resume delay).
+
+## 2026-10-09 - Devin-Architect: queue observer seam for REPLAY-HEALTH-LOGGER (branch devin/queue-observer-seam, base c76283c0b)
+
+* **Contract (ACK-2, task 01a12023):** record-only queue transitions emitted synchronously at the
+  tick observed — Started / Ready / Placed / Cancelled / Held / Resumed — to
+  IBotBuildQueueObserver traits on the bot PlayerActor (resolved once, like the placement
+  observers). Schema-2 event-local fields on every record: tick, item id, queue group,
+  BuildingType category, producer ActorID, kind, reason, player_active, producer_live,
+  cancellation_class; unbound context emits 0/null = UNKNOWN, never pulse-inferred.
+* **Episode dedupe:** BotQueueEpisodeTracker — Held emits once per (producer, item, reason)
+  episode, Ready once per production episode; Started/Placed/Cancelled/Resumed end episodes.
+  All Cancelled emit sites are production-queue cancels (class=Production); the relocation
+  nudge cancels each queued item before the hold, and latch saturation/release emit
+  Held/Resumed with SaturationLatch.
+* **Coverage:** Ready-admission holds (demand/crawl/front-back) emit Held with their reason;
+  refinery defer emits Cancelled+NoRefinerySite; saturation emits Cancelled+Held; probe
+  release and no-nudge clear emit Resumed. Demand-path cancels in BaseBuilderBotModuleCA are
+  outside this seam (different file, same ownership boundary).
+* **Verification:** 5 new tracker/record tests; full suite 1279/1279; Release clean; boot gate
+  main menu, zero new exceptions. Observer dispatch costs one cached-array check when no
+  logger is registered; zero allocations and zero RNG on the emit path.
+* **Not done:** logger/pulse implementation is Sol's lane (separate files); integrator receipt
+  and runtime gates remain pending.
+
+## 2026-10-09 - Devin-Architect: seam dedupe fix — phantom Ready + in-flight cancel (same branch)
+
+* **Defect found on self-review:** the per-set tracker (holds/ready + EpisodeEnded) re-announced
+  Ready on the tick after Cancelled — CancelProduction is order-latency, so the cancelled item
+  still sits at the queue head, still Done, while the order is in flight. Clearing the episode
+  on Cancelled let the next sweep emit a second Ready *after* the Cancelled record, inverting
+  the pair the verifier measures. The repeated in-flight cancel order also re-emitted an
+  identical Cancelled each sweep.
+* **Fix:** BotQueueEpisodeTracker collapsed to a single `EmitGate(producerId, item, kind,
+  reason)` — one record per (producer, item, kind, reason) transition, and a cancelled
+  (producer, item) shadow suppresses Ready until a Started clears it. EmitQueueHeld folded
+  into EmitQueueTransition; every site now funnels through the same gate.
+* **Verification:** new regression `CancelledShadowsInFlightReadyUntilStarted` (phantom Ready
+  suppressed, duplicate in-flight Cancelled suppressed, Started clears the shadow); 6 seam
+  tests pass; full suite 1280/1280; Release clean; boot gate main menu, zero new exceptions.
+
+## 2026-10-09 - Devin-Architect: seam redesign after Sol review 22861e442 F1-F5 (same branch)
+
+* **F1 — identity:** `BotQueueTransition.EpisodeId` — per queue-item instance id assigned by
+  the probe on first observation; a re-queued same-name item is a distinct episode, 0 =
+  UNKNOWN for baseline/producer-less records.
+* **F2 — resolution semantics:** `Cancelled`/`Placed` are no longer request-tick labels —
+  decision sites record a `BotQueuePendingTerminal` (last decision wins) and the record
+  emits on the tick the item actually leaves the queue. `Started`/`Ready` likewise emit at
+  probe observation, so every timestamped transition is an applied engine state.
+* **F3 — exact ticks:** `ProbeQueueTransitions` runs at the top of `Tick` before the latch
+  and `WaitTicks` early returns — item-list reconciliation per queue per tick, bounded by
+  queue count/length, trait-list iteration only (no scans/orders/RNG).
+* **F4 — removal reconciliation:** an item leaving with no pending request emits `Removed`,
+  classified event-locally (Elimination / Destruction / None = UNKNOWN). A queue that drops
+  out of `FindQueues` (producer dead) still flushes its items as removals. Module demand
+  cancels register via `BaseBuilderBotModuleCA.CancelDemandItem` -> `NoteExternalCancel`
+  and resolve as `Cancelled`/`DemandCancel`. A pending `Placed` whose producer died
+  in-flight resolves as `Removed`/`Destruction`.
+* **F5 — zero-cost without a logger:** observers, tracker, and watches are all lazy —
+  `ObserveQueueTransitions()` gates every path; no allocations or history until a logger
+  trait exists on the bot PlayerActor.
+* **Verification:** 6 seam tests rewritten to the new API (Held dedupe, terminal episode
+  end, per-instance Ready, per-instance episode ids, per-producer isolation, record shape);
+  suite 1280/1280; Release clean; boot gate main menu, zero new exceptions.
+
+## 2026-10-09 - Devin-Architect: Sol c43d580fd re-review findings closed (same branch)
+
+* **Removal+request != cause proof:** a pending terminal now resolves to its recorded kind
+  only while the queue is still live-observed (`BotQueueWatch.SeenTick`); a removal flushed
+  from a stale/disabled/dead queue emits `Removed` carrying the pending *reason* — intent
+  preserved, honest UNKNOWN, no invented terminal. A pending `Placed` also cannot resolve
+  if the producer died before the next sweep. `Removed` always classifies event-locally
+  (Elimination / Destruction / None), never inherits the pending class; a dead producer
+  still reclassifies a *confirmed* production cancel as Destruction.
+* **Last-same-name binding:** `CancelProduction` removes the LAST same-name item, so all
+  three manager cancel sites and `NoteExternalCancel` bind the tail instance
+  (`AllQueued().LastOrDefault(name)` / watch scan), not the head. `BotQueuePendingTerminal.
+  Matches` prefers the bound instance ref; a same-name sibling leaving first no longer
+  consumes the request. Name-only binding remains as an honest fallback.
+* **Retention bounded:** `BotQueueEpisodeTracker.DropProducer` prunes dedupe history when a
+  producer watch dies; stale empty watches are dropped with their queues; pending requests
+  expire after `MaxInFlightTicks` (8) — a rejected/delayed cancel can never mask a later
+  real `Ready`/`Done` observation. `NoteExternalCancel` dedupes by name (last decision
+  wins) instead of appending unbounded requests.
+* **O(n) probe:** `BotQueueWatch.Items` is now a `HashSet<object>` and the current item list
+  is collected in a reusable `HashSet<ProductionItem>` scratch — removal diff is one pass
+  per queue (was nested `Contains` over lists, O(n²) per world tick).
+* **Naming honesty:** `Started` renamed `Queued` — it records observed queued state, not an
+  accepted engine start. `Ready` remains an observer observation (<=1 tick lag by trait
+  order), never claimed as exact engine completion.
+* **Regressions added:** `ReadyCannotInterleaveWithHeld` (stable
+  Ready->Held->Ready->Held emits each change; Ready never resurrects per instance),
+  `HeldReasonAlternationIsATransition`, `PendingTerminalExpiresRejectedRequests`,
+  `PendingMatchesBoundInstanceNotName`, `DroppedProducerLosesDedupeHistory`. 11 seam tests green; full suite 1285/1285; Release
+  clean; boot gate main menu, zero new exceptions. Still record-only — no orders, no world
+  mutation, no RNG.

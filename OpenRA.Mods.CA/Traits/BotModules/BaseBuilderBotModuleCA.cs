@@ -1423,10 +1423,16 @@ namespace OpenRA.Mods.CA.Traits
 				.Any(q => q.AllQueued().Any(i => i.Item == item && i.Done));
 		}
 
-		static void CancelDemandItem(IBot bot, Actor producer, string item)
+		void CancelDemandItem(IBot bot, Actor producer, string item)
 		{
 			if (producer == null || producer.Disposed || producer.IsDead)
 				return;
+
+			// REPLAY-HEALTH-LOGGER (F4): register the demand cancel so the owning manager's
+			// probe resolves it as Cancelled/DemandCancel instead of an UNKNOWN removal.
+			if (builders != null)
+				foreach (var b in builders)
+					b?.NoteExternalCancel(producer, item);
 
 			bot.QueueOrder(Order.CancelProduction(producer, item, 1));
 		}
