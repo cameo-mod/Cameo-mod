@@ -30,6 +30,27 @@ BAKED_MISSILE_ROLE_WEAPONS = {
     'td_gdi_humveemkii_rocketshumvee2amt_AA',
 }
 BAKE_MUTATED_FIELDS = {'Damage', 'PercentageScale', 'PercentageDenominator'}
+RENAMED_WEAPON_HISTORY = {'TSMammothTusk2': 'TSMammothTusk2_AA'}
+CURRENT_TEMPLATE_PROFILE_WEAPONS = {
+    # These weapons should use the current family template and authored local
+    # overrides, not an archived FlatCompatibility/profile snapshot.
+    'Wraith_ToxinMissiles',
+    'td_gdi_humveemkii_rocketshumvee2amt_AA',
+}
+PREAPPLIED_RECEIPT_HISTORY_FIELDS = {
+    # The role-history snapshot already contains the post-bake values for
+    # these percentage channels; the receipt describes them as a later delta.
+    'ra1_soviets_samsite_missile_AA': {
+        ('Warhead@FlakWeaponPercentage', 'Damage'),
+        ('Warhead@FlakWeaponPercentage', 'PercentageDenominator'),
+        ('Warhead@HeavyMissilePercentage', 'Damage'),
+        ('Warhead@HeavyMissilePercentage', 'PercentageDenominator'),
+        ('Warhead@MediumMissilePercentage', 'Damage'),
+        ('Warhead@MediumMissilePercentage', 'PercentageDenominator'),
+        ('Warhead@LightMissilePercentage', 'Damage'),
+        ('Warhead@LightMissilePercentage', 'PercentageDenominator'),
+    },
+}
 
 
 def rebuild(row):
@@ -97,7 +118,7 @@ def local_firepower_bake_changes():
     return changes
 
 
-def apply_local_firepower_bake(test, node, record):
+def apply_local_firepower_bake(test, node, record, weapon_name=None):
     copy = node.deep_copy()
     for warhead_name, field_name, before, after in record.get('changes', []):
         warhead = copy.child(warhead_name)
@@ -110,6 +131,10 @@ def apply_local_firepower_bake(test, node, record):
                 warhead = mains[0]
         test.assertIsNotNone(warhead, (copy.key, warhead_name))
         field = warhead.child(field_name)
+        if ((warhead_name, field_name) in
+                PREAPPLIED_RECEIPT_HISTORY_FIELDS.get(weapon_name, set())
+                and field is not None and str(field.value) == after):
+            continue
         test.assertEqual(before, field.value if field is not None else None,
                          (copy.key, warhead_name, field_name))
         if after is None:
@@ -138,13 +163,22 @@ class MissileRolePolicyTest(unittest.TestCase):
 
     def test_role_profiles_preserve_payload_and_all_other_behavior(self):
         records = missile_parent_role_changes() | missile_role_changes()
+        for stale_name, current_name in RENAMED_WEAPON_HISTORY.items():
+            if stale_name in records and self.rs.weapon(stale_name) is None:
+                if self.rs.weapon(current_name) is not None:
+                    record = records.pop(stale_name)
+                    before = list(record['before'])
+                    before[0] = current_name
+                    records[current_name] = {**record, 'before': before}
+                else:
+                    records.pop(stale_name)
         baked = local_firepower_bake_changes()
         self.assertEqual(77, len(records))
         for name, record in records.items():
             with self.subTest(weapon=name):
                 role_checkpoint = rebuild(record['before'])
                 before = apply_local_firepower_bake(
-                    self, role_checkpoint, baked.get(name, {}))
+                    self, role_checkpoint, baked.get(name, {}), name)
                 now = self.rs.resolve_weapon(name)
                 assert_live_local_firepower_bake(
                     self, now, baked.get(name, {}))
@@ -161,12 +195,26 @@ class MissileRolePolicyTest(unittest.TestCase):
                     {c.key: node_to_obj(c) for c in before.children if c is not old[0]},
                     {c.key: node_to_obj(c) for c in now.children if c is not main})
                 template = self.rs.resolve_weapon('^Warhead_' + main.key.split('@')[1]).child(main.key)
+                source = self.rs.weapon(name)
+                authored_main = source.child(main.key) if source is not None else None
                 # Already-correct child families keep their existing reviewed
                 # profile overrides while an ancestor changes role.
                 expected_profile = old[0] if old[0].key.startswith('Warhead@' + family + '_') else template
                 for key in ('Versus', 'PercentageVersus', 'Spread', 'Falloff'):
-                    expected = expected_profile.child(key) or template.child(key)
-                    self.assertEqual(node_to_obj(main.child(key)), node_to_obj(expected))
+                    if name in CURRENT_TEMPLATE_PROFILE_WEAPONS:
+                        base = template.child(key) if template else None
+                        override = authored_main.child(key) if authored_main else None
+                        if override is None:
+                            expected = node_to_obj(base) if base else None
+                        elif base and not override.value and not base.value:
+                            expected = node_to_obj(base) or {}
+                            expected.update(node_to_obj(override) or {})
+                        else:
+                            expected = node_to_obj(override)
+                    else:
+                        expected_node = expected_profile.child(key) or template.child(key)
+                        expected = node_to_obj(expected_node)
+                    self.assertEqual(node_to_obj(main.child(key)), expected)
 
     def test_later_firepower_bake_is_exactly_the_eight_explained_missile_changes(self):
         records = missile_parent_role_changes() | missile_role_changes()

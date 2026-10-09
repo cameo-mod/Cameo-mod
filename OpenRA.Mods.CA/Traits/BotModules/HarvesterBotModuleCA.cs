@@ -69,10 +69,28 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("How many harvester should player owned at least.")]
 		public readonly int InitialHarvesters = 4;
 
+		[Desc("BU_harvester_logistics (SPEC_2026-10-05_econ_logistics Part B): per-refinery reservations sized to the",
+			"served field, a shared pool re-routed only over threat-free corridors, and lease-aware evacuation.",
+			"Default off; off = classic per-refinery counting + cap-push, bit-identical.")]
+		public readonly bool UseHarvesterLogistics = false;
+
+		[Desc("Ticks before the same harvester may be re-routed by the logistics pool again.")]
+		public readonly int LogisticsReassignCooldownTicks = 750;
+
+		[Desc("Integer percent by which a target field's resource cells must beat the current field's before the pool",
+			"moves a harvester (25 = +25%); refinery reservation deficits bypass the margin.")]
+		public readonly int LogisticsReassignMarginPercent = 25;
+
+		[Desc("Cell stride between remembered-threat samples along a candidate re-route corridor.")]
+		public readonly int LogisticsRouteSampleCells = 4;
+
+		[Desc("Maximum candidate destinations probed (pathfind + threat check) per re-routed harvester per scan.")]
+		public readonly int LogisticsRouteProbeMax = 4;
+
 		public override object Create(ActorInitializer init) { return new HarvesterBotModuleCA(init.Self, this); }
 	}
 
-	public class HarvesterBotModuleCA : ConditionalTrait<HarvesterBotModuleCAInfo>, IBotTick, INotifyActorDisposing, IWorldLoaded, IBotRespondToAttack
+	public class HarvesterBotModuleCA : ConditionalTrait<HarvesterBotModuleCAInfo>, IBotTick, INotifyActorDisposing, IWorldLoaded, IBotRespondToAttack, IBotUnitLeaseLost
 	{
 		class HarvesterTraitWrapper
 		{
@@ -117,6 +135,13 @@ namespace OpenRA.Mods.CA.Traits
 		BotLimits botLimits;
 		int harvesterLimit;
 		IBotScaleTargets[] scaleTargets;
+
+		// BU_harvester_logistics state (unused while the switch is off).
+		IBotRegionThreatProvider[] threatProviders;
+		readonly Dictionary<Actor, int> lastReassignTick = [];
+		readonly HashSet<Actor> evacuatedHarvesters = [];
+		int logisticsShortfall;
+		bool logisticsScanned;
 
 		public HarvesterBotModuleCA(Actor self, HarvesterBotModuleCAInfo info)
 			: base(info)
@@ -212,7 +237,12 @@ namespace OpenRA.Mods.CA.Traits
 			{
 				scanForLowEffectHarvestersTicks = Info.ScanForLowEffectHarvestersInterval;
 				if (resourceMapModule != null)
-					FindAndOrderLowEffectHarvesterOnResourceMap(bot);
+				{
+					if (Info.UseHarvesterLogistics)
+						RebalanceHarvesterPool(bot);
+					else
+						FindAndOrderLowEffectHarvesterOnResourceMap(bot);
+				}
 			}
 
 			if (--scanForEnoughHarvestersTicks <= 0)
@@ -261,7 +291,21 @@ namespace OpenRA.Mods.CA.Traits
 				if ((limit > 0 && numHarvesters >= limit) || numHarvesters >= maxHarvesters)
 					return;
 
-				var harvCountTooLow = numHarvesters < AIUtils.CountActorByCommonName(refineries) * Info.HarvestersPerRefinery + Info.AdditionalHarvesters;
+				bool harvCountTooLow;
+				if (Info.UseHarvesterLogistics)
+				{
+					// SPEC Part B §6: produce only when the pool provably cannot cover demand —
+					// fewer harvesters than refineries (an unmet minimum before/without a scan) or the
+					// last rebalance left deficit no safe-route pool unit could fill (safe-route
+					// reachability included). Caps above are unchanged.
+					harvCountTooLow = numHarvesters < AIUtils.CountActorByCommonName(refineries)
+						|| (logisticsScanned && logisticsShortfall > 0);
+				}
+				else
+				{
+					harvCountTooLow = numHarvesters < AIUtils.CountActorByCommonName(refineries) * Info.HarvestersPerRefinery + Info.AdditionalHarvesters;
+				}
+
 				if (harvCountTooLow)
 				{
 					var harvInfo = AIUtils.GetBuildableInfoByCommonName(Info.HarvesterTypes, player);
@@ -416,10 +460,216 @@ namespace OpenRA.Mods.CA.Traits
 			}
 		}
 
+		// BU_harvester_logistics (SPEC_2026-10-05_econ_logistics Part B). One owner, integer math, indice order then
+		// lowest ActorID on every tie — deterministic and fog-honest (indices and remembered threat only).
+		void RebalanceHarvesterPool(IBot bot)
+		{
+			var indexCount = resourceMapModule.GetIndicesLength();
+			if (indexCount == 0)
+				return;
+
+			threatProviders ??= player.PlayerActor.TraitsImplementing<IBotRegionThreatProvider>().ToArray();
+			var leases = BotUnitLeases.Of(player);
+			var owner = nameof(HarvesterBotModuleCA);
+			var now = world.WorldTick;
+
+			var cellsPerHarvester = Math.Max(1, Info.ResourceCellsPerHarvester);
+			var cap = Info.MaxHarvestersPerResourceIndice;
+			var indiceSideLengthSquare = resourceMapModule.GetIndiceSideLength() * resourceMapModule.GetIndiceSideLength();
+			var pathDistanceSquareFactor = resourceMapModule.GetIndiceRowCount() * resourceMapModule.GetIndiceRowCount()
+				+ resourceMapModule.GetIndiceColumnCount() * resourceMapModule.GetIndiceColumnCount();
+
+			// Reservations and demand (§B1/B2). A refinery-served field keeps a regrowth-sized minimum;
+			// any field may still attract pool units by resource cells per harvester.
+			var indiceLookup = new Dictionary<int2, int>(indexCount);
+			var cellsCount = new int[indexCount];
+			var centers = new CPos[indexCount];
+			var reserved = new int[indexCount];
+			var unmetReservation = new int[indexCount];
+			var deficit = new int[indexCount];
+			var candidates = new List<(int Index, int Attraction)>();
+
+			for (var i = 0; i < indexCount; i++)
+			{
+				var indice = resourceMapModule.GetIndice(i);
+				indiceLookup[indice.IndiceIndex] = i;
+				cellsCount[i] = indice.ResourceCellsCount;
+				centers[i] = indice.ResourceCellsCenter;
+				reserved[i] = indice.PlayerRefineryCount > 0
+					? HarvesterLogistics.Reservation(indice.ResourceCellsCount, cellsPerHarvester, cap)
+					: 0;
+				unmetReservation[i] = Math.Max(0, reserved[i] - indice.PlayerHarvetserCount);
+
+				// Same attraction arithmetic as the classic scan.
+				var attraction = indiceSideLengthSquare >> 5;
+				attraction += indice.ResourceCellsCount - indice.PlayerHarvetserCount * cellsPerHarvester;
+				var lack = attraction > 0 ? attraction / cellsPerHarvester : (attraction == 0 && indice.ResourceCellsCount > 0 ? 1 : -1);
+				attraction >>= 1;
+
+				if (indice.PlayerRefineryCount <= 0 && lack > 0)
+					lack = 1;
+
+				if (indice.EnemyBaseCount > 0 || indice.EnemyUnitCount > 0)
+					attraction -= indiceSideLengthSquare << 4;
+				else
+				{
+					var (_, nearbyEnemy, nearbyEnemyBase) = resourceMapModule.GetNearbyIndicesThreat(i);
+					if (nearbyEnemyBase + nearbyEnemy > 0)
+						attraction -= indiceSideLengthSquare >> 5;
+				}
+
+				if (indice.PlayerRefineryCount > 0)
+					attraction += indiceSideLengthSquare;
+
+				deficit[i] = Math.Max(unmetReservation[i], Math.Max(0, lack));
+				if (indice.ResourceCellsCount > 0 && deficit[i] > 0 && attraction > 0)
+					candidates.Add((i, attraction));
+			}
+
+			// Pool: per indice, in indice order, the tracked harvesters beyond its reservation (lowest ActorID first).
+			var unitsAt = new List<Actor>[indexCount];
+			foreach (var (actor, wrapper) in harvesters)
+			{
+				if (actor.IsDead || !actor.IsInWorld || wrapper.Mobile == null)
+					continue;
+
+				var indice = resourceMapModule.FindClosestIndiceFromCPos(actor.Location);
+				if (indice == null || !indiceLookup.TryGetValue(indice.IndiceIndex, out var idx))
+					continue;
+
+				(unitsAt[idx] ??= new List<Actor>()).Add(actor);
+			}
+
+			var pool = new List<(int Indice, Actor Actor, Mobile Mobile)>();
+			for (var i = 0; i < indexCount; i++)
+			{
+				var here = unitsAt[i];
+				if (here == null)
+					continue;
+
+				here.Sort((a, b) => a.ActorID.CompareTo(b.ActorID));
+				for (var u = reserved[i]; u < here.Count; u++)
+				{
+					var actor = here[u];
+					var wrapper = harvesters[actor];
+					pool.Add((i, actor, wrapper.Mobile));
+				}
+			}
+
+			// Drop bookkeeping for harvesters no longer tracked; evacuees re-enter the pool only when free again.
+			foreach (var a in lastReassignTick.Keys.Where(a => !harvesters.ContainsKey(a)).ToList())
+				lastReassignTick.Remove(a);
+
+			evacuatedHarvesters.RemoveWhere(a =>
+				a.IsDead || !a.IsInWorld || !BotUnitLeases.IsClaimedByOther(leases, a, owner));
+
+			// Allocate the pool (§B2/B3/B5): highest attraction per distance first; only safe routes; a re-routed
+			// harvester holds a Harvest lease until the cooldown, then the lease is allowed to expire.
+			var remaining = (int[])deficit.Clone();
+			var scanRadius = resourceMapModule.GetIndiceScanRadius();
+			foreach (var (indice, actor, mobile) in pool)
+			{
+				if (evacuatedHarvesters.Contains(actor))
+					continue;
+
+				if (lastReassignTick.TryGetValue(actor, out var lastTick) && now - lastTick < Info.LogisticsReassignCooldownTicks)
+					continue;
+
+				if (BotUnitLeases.IsClaimedByOther(leases, actor, owner))
+					continue;
+
+				var ordered = candidates
+					.Where(c => remaining[c.Index] > 0 && c.Index != indice)
+					.OrderByDescending(c => c.Attraction - (actor.Location - centers[c.Index]).LengthSquared / pathDistanceSquareFactor);
+
+				var probes = 0;
+				foreach (var (index, _) in ordered)
+				{
+					if (probes >= Info.LogisticsRouteProbeMax)
+						break;
+
+					// Reservation deficits are obligations (the refinery's spreader minimum) and bypass the
+					// churn margin; attraction-driven moves must beat the current field by it (§B5).
+					if (unmetReservation[index] <= 0
+						&& !HarvesterLogistics.MarginPasses(cellsCount[indice], cellsCount[index], Info.LogisticsReassignMarginPercent))
+						continue;
+
+					var cells = world.Map.FindTilesInAnnulus(centers[index], 0, scanRadius)
+						.Where(c => resourceMapModule.Info.ValuableResourceTypes.Contains(resourceLayer.GetResource(c).Type))
+						.OrderBy(c => (c - actor.Location).LengthSquared)
+						.ThenBy(c => c.X).ThenBy(c => c.Y)
+						.ToList();
+
+					if (cells.Count == 0)
+						continue;
+
+					probes++;
+					if (!RouteIsSafe(actor, mobile, cells[0], indiceLookup))
+						continue;
+
+					if (!BotUnitLeases.TryClaim(leases, actor, owner, BotLeasePurpose.Harvest, Info.LogisticsReassignCooldownTicks))
+						continue;
+
+					bot.QueueOrder(new Order("Harvest", actor, Target.FromCell(world, cells[0]), false));
+					AIUtils.BotDebug($"AI: Harvester {actor} re-routed to field at {cells[0]} (reservation {reserved[index]}, cells {cellsCount[index]})");
+					remaining[index]--;
+					lastReassignTick[actor] = now;
+					break;
+				}
+			}
+
+			logisticsShortfall = 0;
+			foreach (var r in remaining)
+				logisticsShortfall += r;
+
+			logisticsScanned = true;
+		}
+
+		// §B3: a corridor is safe only when every sampled path cell has zero remembered threat and crosses no
+		// index with enemy units or bases (and none of its neighbour indices report any either).
+		bool RouteIsSafe(Actor actor, Mobile mobile, CPos targetCell, Dictionary<int2, int> indiceLookup)
+		{
+			var path = mobile.PathFinder.FindPathToTargetCells(actor, actor.Location, new[] { targetCell }, BlockedByActor.Stationary);
+			if (path.Count == 0)
+				return false;
+
+			var stride = Math.Max(1, Info.LogisticsRouteSampleCells);
+			for (var p = 0; p < path.Count; p += stride)
+				if (!RouteCellSafe(path[p], indiceLookup))
+					return false;
+
+			var last = path[path.Count - 1];
+			if ((path.Count - 1) % stride != 0 && !RouteCellSafe(last, indiceLookup))
+				return false;
+
+			return true;
+		}
+
+		bool RouteCellSafe(CPos cell, Dictionary<int2, int> indiceLookup)
+		{
+			if (threatProviders.MergedThreatAt(cell) != 0)
+				return false;
+
+			var indice = resourceMapModule.FindClosestIndiceFromCPos(cell);
+			if (indice == null || !indiceLookup.TryGetValue(indice.IndiceIndex, out var i))
+				return true;
+
+			if (indice.EnemyBaseCount > 0 || indice.EnemyUnitCount > 0)
+				return false;
+
+			var (_, nearbyEnemy, nearbyEnemyBase) = resourceMapModule.GetNearbyIndicesThreat(i);
+			return nearbyEnemy + nearbyEnemyBase <= 0;
+		}
+
 		// Returns true if FindNextResource was called.
 		bool HarvestIfAble(IBot bot, HarvesterTraitWrapper h)
 		{
 			if (h.Actor.IsDead || !h.Actor.IsInWorld || h.Mobile == null)
+				return false;
+
+			// §B4: one owner per unit — never re-task a harvester another module leased (defence mid-evacuation).
+			if (Info.UseHarvesterLogistics
+				&& BotUnitLeases.IsClaimedByOther(BotUnitLeases.Of(player), h.Actor, nameof(HarvesterBotModuleCA)))
 				return false;
 
 			if (!h.Actor.IsIdle)
@@ -533,8 +783,22 @@ namespace OpenRA.Mods.CA.Traits
 				resourceLayer.CellChanged -= ResourceCellChanged;
 		}
 
+		void IBotUnitLeaseLost.LeaseLost(Actor actor, string newOwner, BotLeasePurpose purpose)
+		{
+			// §B4: an emergency pre-empted a unit we re-routed — no re-order this cycle; it re-enters the
+			// pool on a later scan once the new owner's lease has expired and the unit is free again.
+			if (Info.UseHarvesterLogistics)
+				evacuatedHarvesters.Add(actor);
+		}
+
 		void IBotRespondToAttack.RespondToAttack(IBot bot, Actor self, AttackInfo e)
 		{
+			// §B4: while another module holds the unit (its emergency lease), evacuation order ownership
+			// belongs to it — yield rather than issue a competing order.
+			if (Info.UseHarvesterLogistics
+				&& BotUnitLeases.IsClaimedByOther(BotUnitLeases.Of(player), self, nameof(HarvesterBotModuleCA)))
+				return;
+
 			if (respondToAttackCooldown > 0 || !Info.HarvesterTypes.Contains(self.Info.Name)
 				|| e.Attacker == null || e.Attacker.IsDead || !e.Attacker.AppearsHostileTo(self))
 				return;

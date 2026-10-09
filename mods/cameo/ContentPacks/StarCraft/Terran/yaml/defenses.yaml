@@ -42,7 +42,7 @@ terran_bunker:
 		ExitSounds: tdrtra00.wav
 	FireWarheadsOnDeath@healer:
 		Weapon: FakeHealtAPC
-	AttackOpenTopped:
+	AttackGarrisoned:
 		Armaments: garrisoned
 		PortOffsets: 300,400,200, -400,500,200, 300,-400,200, -400,-500,200
 		PauseOnCondition: chronobeamed

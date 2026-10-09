@@ -4435,7 +4435,9 @@
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 8
 		RequiresCondition: owned
-	AttackOpenTopped:
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 		Armaments: garrisoned
 		PortOffsets: 768,0,256, 448,-682,256, -448,-682,256, -768,0,256, -448,682,256, 448,682,256
 		PauseOnCondition: disabled || blinded
@@ -4560,7 +4562,7 @@
 			engineer: pip-yellow
 			special: pip-blue
 			hero: pip-red
-	AttackOpenTopped:
+	AttackGarrisoned:
 		Armaments: garrisoned
 		PortOffsets: 768,0,256, 448,-682,256, -448,-682,256, -768,0,256, -448,682,256, 448,682,256
 		RequiresCondition: !chronobeamed && !damaged
@@ -10152,7 +10154,7 @@ CPQDEBUGDUMMY:
 		UnloadVoice: Move
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 3
-	AttackOpenTopped:
+	AttackGarrisoned:
 		Voice: Attack
 		Armaments: garrisoned
 		PortOffsets: 256,0,128, 384,-128,128, 384,128,128

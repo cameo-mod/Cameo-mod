@@ -26,6 +26,7 @@
    "LaserZapCA",
    "LinearPulse",
    "Missile",
+   "MissileTA",
    "Railgun",
    "ScaledBullet"
   ],
@@ -70,6 +71,7 @@
    "Bullet": 17,
    "LinearPulse": 6144,
    "Missile": 384,
+   "MissileTA": 384,
    "ScaledBullet": 17,
    "SpriteAthenaLaser": 90
   },
@@ -132,8 +134,8 @@
   },
   "reference_hp": 200000,
   "reference_hp_measured": 65350,
-  "shield_hp_factor": 0.5414,
-  "shield_versus_mean": 184.71
+  "shield_hp_factor": 0.5386,
+  "shield_versus_mean": 185.67
  },
  "weapon_efficiency": {
   "DEADZONE_WEIGHT": 1.0,

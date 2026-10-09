@@ -1370,7 +1370,6 @@ LunarNaxiDroneMissile:
 		Speed: 800
 		Arm: 2
 		Inaccuracy: 400
-		RangeLimit: 16000
 		Image: d2k_missile2
 		Palette: d2keffect
 		TrailImage: large_trail
@@ -2028,43 +2027,43 @@ NaxiShrek:
 	-Warhead@MissileAP_Medium:
 	Warhead@MissileHE_Medium: AreaDamage
 		Versus:
-			None: 99
-			Light: 136
-			Medium: 135
-			Heavy: 112
-			Superheavy: 88
-			Scout: 143
-			Plate: 48
-			Concrete: 93
-			Wood: 157
-			Steel: 113
-			Flak: 69
-			Heroic: 43
-			Bomber: 97
-			Fighter: 110
-			Helicopter: 86
-			Spaceship: 70
+			None: 106
+			Light: 162
+			Medium: 161
+			Heavy: 125
+			Superheavy: 91
+			Scout: 172
+			Plate: 41
+			Concrete: 99
+			Wood: 194
+			Steel: 127
+			Flak: 66
+			Heroic: 35
+			Bomber: 104
+			Fighter: 122
+			Helicopter: 88
+			Spaceship: 69
 			ARMOR: 70
 			BLAST: 45
 			COMPOSITE: 88
 			HAZMAT: 76
 			REFLECTOR: 70
 			Shield: 148
-			FlyingInfantry: 95
-			CyborgLight: 116
-			CyborgMedium: 97
-			CyborgHeavy: 73
-			CyborgHeroic: 62
-			AntiAirInfantry: 83
-			AntiAirVehicle: 135
-			AntiAirBuilding: 103
-			ShipLight: 146
-			ShipMedium: 112
-			ShipHeavy: 112
-			ShipSuperheavy: 100
-			AntiAirShip: 128
-			SubmarineLight: 112
-			SubmarineHeavy: 99
+			FlyingInfantry: 100
+			CyborgLight: 131
+			CyborgMedium: 103
+			CyborgHeavy: 72
+			CyborgHeroic: 56
+			AntiAirInfantry: 84
+			AntiAirVehicle: 161
+			AntiAirBuilding: 112
+			ShipLight: 177
+			ShipMedium: 126
+			ShipHeavy: 126
+			ShipSuperheavy: 108
+			AntiAirShip: 149
+			SubmarineLight: 125
+			SubmarineHeavy: 107
 		PercentageVersus:
 			None: 8
 			Light: 18
@@ -2388,43 +2387,43 @@ NaxiShrek_elite:
 		ContrailEndColor: FFFFFF
 	Warhead@MissileHE_Medium: AreaDamage
 		Versus:
-			None: 99
-			Light: 136
-			Medium: 135
-			Heavy: 112
-			Superheavy: 88
-			Scout: 143
-			Plate: 48
-			Concrete: 93
-			Wood: 157
-			Steel: 113
-			Flak: 69
-			Heroic: 43
-			Bomber: 97
-			Fighter: 110
-			Helicopter: 86
-			Spaceship: 70
+			None: 106
+			Light: 162
+			Medium: 161
+			Heavy: 125
+			Superheavy: 91
+			Scout: 172
+			Plate: 41
+			Concrete: 99
+			Wood: 194
+			Steel: 127
+			Flak: 66
+			Heroic: 35
+			Bomber: 104
+			Fighter: 122
+			Helicopter: 88
+			Spaceship: 69
 			ARMOR: 70
 			BLAST: 45
 			COMPOSITE: 88
 			HAZMAT: 76
 			REFLECTOR: 70
 			Shield: 148
-			FlyingInfantry: 95
-			CyborgLight: 116
-			CyborgMedium: 97
-			CyborgHeavy: 73
-			CyborgHeroic: 62
-			AntiAirInfantry: 83
-			AntiAirVehicle: 135
-			AntiAirBuilding: 103
-			ShipLight: 146
-			ShipMedium: 112
-			ShipHeavy: 112
-			ShipSuperheavy: 100
-			AntiAirShip: 128
-			SubmarineLight: 112
-			SubmarineHeavy: 99
+			FlyingInfantry: 100
+			CyborgLight: 131
+			CyborgMedium: 103
+			CyborgHeavy: 72
+			CyborgHeroic: 56
+			AntiAirInfantry: 84
+			AntiAirVehicle: 161
+			AntiAirBuilding: 112
+			ShipLight: 177
+			ShipMedium: 126
+			ShipHeavy: 126
+			ShipSuperheavy: 108
+			AntiAirShip: 149
+			SubmarineLight: 125
+			SubmarineHeavy: 107
 		PercentageVersus:
 			None: 8
 			Light: 18
@@ -2513,43 +2512,43 @@ NaxiShrekCons:
 	-Warhead@MissileAP_Medium:
 	Warhead@MissileHE_Medium: AreaDamage
 		Versus:
-			None: 99
-			Light: 136
-			Medium: 135
-			Heavy: 112
-			Superheavy: 88
-			Scout: 143
-			Plate: 48
-			Concrete: 93
-			Wood: 157
-			Steel: 113
-			Flak: 69
-			Heroic: 43
-			Bomber: 97
-			Fighter: 110
-			Helicopter: 86
-			Spaceship: 70
+			None: 106
+			Light: 162
+			Medium: 161
+			Heavy: 125
+			Superheavy: 91
+			Scout: 172
+			Plate: 41
+			Concrete: 99
+			Wood: 194
+			Steel: 127
+			Flak: 66
+			Heroic: 35
+			Bomber: 104
+			Fighter: 122
+			Helicopter: 88
+			Spaceship: 69
 			ARMOR: 70
 			BLAST: 45
 			COMPOSITE: 88
 			HAZMAT: 76
 			REFLECTOR: 70
 			Shield: 148
-			FlyingInfantry: 95
-			CyborgLight: 116
-			CyborgMedium: 97
-			CyborgHeavy: 73
-			CyborgHeroic: 62
-			AntiAirInfantry: 83
-			AntiAirVehicle: 135
-			AntiAirBuilding: 103
-			ShipLight: 146
-			ShipMedium: 112
-			ShipHeavy: 112
-			ShipSuperheavy: 100
-			AntiAirShip: 128
-			SubmarineLight: 112
-			SubmarineHeavy: 99
+			FlyingInfantry: 100
+			CyborgLight: 131
+			CyborgMedium: 103
+			CyborgHeavy: 72
+			CyborgHeroic: 56
+			AntiAirInfantry: 84
+			AntiAirVehicle: 161
+			AntiAirBuilding: 112
+			ShipLight: 177
+			ShipMedium: 126
+			ShipHeavy: 126
+			ShipSuperheavy: 108
+			AntiAirShip: 149
+			SubmarineLight: 125
+			SubmarineHeavy: 107
 		PercentageVersus:
 			None: 8
 			Light: 18
@@ -2871,43 +2870,43 @@ NaxiShrekCons_elite:
 		ContrailEndColor: FFFFFF
 	Warhead@MissileHE_Medium: AreaDamage
 		Versus:
-			None: 99
-			Light: 136
-			Medium: 135
-			Heavy: 112
-			Superheavy: 88
-			Scout: 143
-			Plate: 48
-			Concrete: 93
-			Wood: 157
-			Steel: 113
-			Flak: 69
-			Heroic: 43
-			Bomber: 97
-			Fighter: 110
-			Helicopter: 86
-			Spaceship: 70
+			None: 106
+			Light: 162
+			Medium: 161
+			Heavy: 125
+			Superheavy: 91
+			Scout: 172
+			Plate: 41
+			Concrete: 99
+			Wood: 194
+			Steel: 127
+			Flak: 66
+			Heroic: 35
+			Bomber: 104
+			Fighter: 122
+			Helicopter: 88
+			Spaceship: 69
 			ARMOR: 70
 			BLAST: 45
 			COMPOSITE: 88
 			HAZMAT: 76
 			REFLECTOR: 70
 			Shield: 148
-			FlyingInfantry: 95
-			CyborgLight: 116
-			CyborgMedium: 97
-			CyborgHeavy: 73
-			CyborgHeroic: 62
-			AntiAirInfantry: 83
-			AntiAirVehicle: 135
-			AntiAirBuilding: 103
-			ShipLight: 146
-			ShipMedium: 112
-			ShipHeavy: 112
-			ShipSuperheavy: 100
-			AntiAirShip: 128
-			SubmarineLight: 112
-			SubmarineHeavy: 99
+			FlyingInfantry: 100
+			CyborgLight: 131
+			CyborgMedium: 103
+			CyborgHeavy: 72
+			CyborgHeroic: 56
+			AntiAirInfantry: 84
+			AntiAirVehicle: 161
+			AntiAirBuilding: 112
+			ShipLight: 177
+			ShipMedium: 126
+			ShipHeavy: 126
+			ShipSuperheavy: 108
+			AntiAirShip: 149
+			SubmarineLight: 125
+			SubmarineHeavy: 107
 		PercentageVersus:
 			None: 8
 			Light: 18
@@ -5648,9 +5647,7 @@ NaxPlaneRockets_elite:
 		HorizontalRateOfTurn: 30
 		MaximumLaunchSpeed: 250
 		MinimumLaunchSpeed: 250
-		CloseEnough: 500
 		HomingActivationDelay: 2
-		RangeLimit: 25000
 		PointDefenseTypes: Missile
 	-Warhead@MissileAP_Heavy:
 	Warhead@MissileAP_Heavy_Flat: AreaDamage
@@ -5755,7 +5752,8 @@ NaxPlaneRockets_elite:
 	Warhead@Smudge:
 		SmudgeType: SandCrater, RockCrater
 NaxInterceptorRockets:
-	Inherits@finalmain: ^Warhead_MissileAA_Heavy_Flat
+	Inherits@finalmain: ^Warhead_MissileAA_Heavy
+	Inherits@projectileaa: ^Projectile_Missile_AA
 	Inherits: NaxPlaneRockets_elite
 	ValidTargets: Air
 	-Warhead@MissileAP_Heavy_Flat:
@@ -5773,9 +5771,7 @@ NaxInterceptorRockets:
 		HorizontalRateOfTurn: 30
 		MaximumLaunchSpeed: 250
 		MinimumLaunchSpeed: 250
-		CloseEnough: 500
 		HomingActivationDelay: 2
-		RangeLimit: 25000
 		PointDefenseTypes: Missile
 	Warhead@DuneRock:
 		SmudgeType: RockCrater
@@ -5795,6 +5791,101 @@ NaxInterceptorRockets:
 		ImpactActors: false
 	Warhead@Smudge:
 		SmudgeType: SandCrater, RockCrater
+
+
+	Projectile: Missile
+		Speed: 500
+		Inaccuracy: 25
+		Image: d2k_RPG
+		TrailImage: bazooka_trail2
+		Acceleration: 5
+		ContrailLength: 6
+
+
+	-Warhead@MissileAA_Heavy:
+	-Warhead@MissileAA_Heavy_Flat:
+	Warhead@MissileAA_Heavy: AreaDamage
+		ValidRelationships: Ally, Neutral, Enemy
+		FriendlyFireDamage: 50
+		FriendlyFireSpread: 50
+		ValidTargets: Air
+		Spread: 400
+		Damage: 20000
+		Falloff: 100, 70, 30, 0
+		Versus
+			HAZMAT: 87
+			COMPOSITE: 67
+			BLAST: 56
+			REFLECTOR: 69
+			ARMOR: 70
+			Shield: 172
+			Spaceship: 161
+			Superheavy: 150
+			Helicopter: 138
+			Heavy: 133
+			Bomber: 119
+			Medium: 108
+			Concrete: 105
+			Fighter: 102
+			Light: 96
+			Plate: 92
+			Steel: 83
+			Scout: 76
+			Flak: 74
+			Wood: 67
+			None: 54
+			Heroic: 43
+			CyborgLight: 72
+			CyborgMedium: 89
+			CyborgHeavy: 111
+			CyborgHeroic: 80
+			AntiAirInfantry: 63
+			AntiAirVehicle: 102
+			AntiAirBuilding: 93
+			ShipLight: 80
+			ShipMedium: 106
+			ShipHeavy: 105
+			ShipSuperheavy: 112
+			AntiAirShip: 92
+			FlyingInfantry: 92
+			SubmarineLight: 119
+			SubmarineHeavy: 125
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+		PercentageScale: 9995
+		PercentageSpread: 50
+		PercentageVersus
+			Shield: 35
+			Spaceship: 25
+			Helicopter: 24
+			Bomber: 23
+			Fighter: 22
+			Superheavy: 21
+			Heavy: 20
+			Medium: 19
+			Light: 18
+			Scout: 17
+			Concrete: 16
+			Steel: 15
+			Wood: 14
+			Heroic: 13
+			Plate: 12
+			Flak: 11
+			None: 10
+			CyborgLight: 13
+			CyborgMedium: 14
+			CyborgHeavy: 15
+			CyborgHeroic: 17
+			AntiAirInfantry: 10
+			AntiAirVehicle: 18
+			AntiAirBuilding: 15
+			ShipLight: 16
+			ShipMedium: 17
+			ShipHeavy: 17
+			ShipSuperheavy: 18
+			AntiAirShip: 16
+			FlyingInfantry: 16
+			SubmarineLight: 18
+			SubmarineHeavy: 19
 
 NaxiInterceptorGun:
 	Inherits: ^Warhead_CannonHE_Heavy
@@ -6617,7 +6708,6 @@ NaxiMissileUboat:
 		Speed: 400
 		Arm: 2
 		Inaccuracy: 2000
-		RangeLimit: 25000
 		Image: MISSILE
 		TrailImage: large_trail
 		MinimumLaunchAngle: 200

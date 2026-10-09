@@ -14,7 +14,7 @@ using OpenRA.Traits;
 namespace OpenRA.Mods.CA.Traits
 {
 	/// <summary>Why a module holds a unit (LC1, AI_MASTER_PLAN §3). Logged, and read by the ownership watchdog (LC5).</summary>
-	public enum BotLeasePurpose { Squad, Scout, Beacon, Capture, Engineer, Crate, McvExpansion, Mission, Emergency, Repair, Garrison }
+	public enum BotLeasePurpose { Squad, Scout, Beacon, Capture, Engineer, Crate, McvExpansion, Mission, Emergency, Repair, Garrison, Harvest }
 
 	/// <summary>One module's claim on one unit. `ExpiresTick` is the failsafe: a holder that stops renewing loses it.</summary>
 	public readonly record struct BotLease(string Owner, BotLeasePurpose Purpose, int AcquiredTick, int ExpiresTick);

@@ -2462,56 +2462,92 @@ ra2ctbunk01:
 		IsPlayerPalette: true
 		RequiresCondition: loaded
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2ctbunk02:
 	Inherits: ra2ctbunk01
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2ctbarn02:
 	Inherits: ra2ctbunk01
 	Tooltip:
 		Name: FarmerÃ‚Â´s House
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2ctfarm01:
 	Inherits: ra2ctbunk01
 	Tooltip:
 		Name: Barn
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2ctchig01:
 	Inherits: ra2ctbunk01
 	Inherits@shape: ^RA23x3Garrison
 	Tooltip:
 		Name: Department
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2ctchig02:
 	Inherits: ra2ctchig01
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2ctchig03:
 	Inherits: ra2ctchig01
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2cteur01:
 	Inherits: ra2ctbunk01
 	Tooltip:
 		Name: Cottage
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2cteur02:
 	Inherits: ra2ctbunk01
 	Tooltip:
 		Name: Cottage
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2cteur04:
 	Inherits: ra2ctchig01
 	Inherits@shape: ^RA24x3Garrison
 		Name: European House
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2ctfarm06:
 	Inherits: ra2ctbunk01
 	Inherits@shape: ^RA22x2Garrison
 		Name: Light House
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2ctfrma:
 	Inherits: ra2ctbunk01
 	Tooltip:
 		Name: FarmerÃ‚Â´s House
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2ctgas01:
 	Inherits: ra2ctchig01
 	Tooltip:
@@ -2520,6 +2556,9 @@ ra2ctgas01:
 		Weapon: FlametankExplode
 		EmptyWeapon: FlametankExplode
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2cthse01:
 	Inherits: ra2ctbunk01
 	Health:
@@ -2527,24 +2566,36 @@ ra2cthse01:
 	Tooltip:
 		Name: Civilian House
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2cthse02:
 	Inherits: ra2ctbunk01
 	Inherits@shape: ^RA23x2Garrison
 	Tooltip:
 		Name: House
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2cthse03:
 	Inherits: ra2ctchig01
 	Inherits@shape: ^RA23x2Garrison
 	Tooltip:
 		Name: House
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2cthse04:
 	Inherits: ra2ctbunk01
 	Inherits@shape: ^RA23x2Garrison
 	Tooltip:
 		Name: House
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2cthse05:
 	Inherits: ra2ctbunk01
 	Inherits@shape: ^RA22x1Garrison
@@ -2560,36 +2611,54 @@ ra2cthse07:
 	Tooltip:
 		Name: House
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2ctind01:
 	Inherits: ra2ctchig01
 	Inherits@shape: ^RA25x4Garrison
 	Tooltip:
 		Name: Civilian Factory
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2ctlab:
 	Inherits: ra2ctchig01
 	Inherits@shape: ^RA24x3Garrison
 	Tooltip:
 		Name: Civilian Laboratory
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2ctmiam01:
 	Inherits: ra2ctchig01
 	Inherits@shape: ^RA24x3Garrison
 	Tooltip:
 		Name: Hotel
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2ctmiam02:
 	Inherits: ra2ctchig01
 	Inherits@shape: ^RA24x3Garrison
 	Tooltip:
 		Name: Hotel
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2ctmiam03:
 	Inherits: ra2ctchig01
 	Inherits@shape: ^RA24x3Garrison
 	Tooltip:
 		Name: Hotel
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2ctmiam04:
 	Inherits: ra2ctbunk01
 	Inherits@shape: ^RA21x1Garrison
@@ -2602,30 +2671,45 @@ ra2ctmiam05:
 	Tooltip:
 		Name: Seaside Hotel
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2ctmiam06:
 	Inherits: ra2ctmiam05
 	Inherits@shape: ^RA25x4Garrison
 	Tooltip:
 		Name: Beachside Hotel
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2ctmiam07:
 	Inherits: ra2ctmiam05
 	Inherits@shape: ^RA25x4Garrison
 	Tooltip:
 		Name: Oceanside Hotel
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2ctmiam08:
 	Inherits: ra2ctbunk01
 	Inherits@shape: ^RA22x2Garrison
 	Tooltip:
 		Name: Arizona Memorial
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2ctarmy01:
 	Inherits: ra2ctbunk01
 	Inherits@shape: ^RA23x2Garrison
 	Tooltip:
 		Name: Army Tents
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2ctarmy02:
 	Inherits: ra2ctbunk01
 	Inherits@shape: ^RA21x1Garrison
@@ -2643,6 +2727,9 @@ ra2ctmsc07:
 	Tooltip:
 		Name: Big Island Hut
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2ctmsc08:
 	Inherits: ra2ctarmy02
 	Tooltip:
@@ -2657,58 +2744,100 @@ ra2ctmsc10:
 	Tooltip:
 		Name: McBurger Kong
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2ctnewy01:
 	Inherits: ra2ctchig01
 	Inherits@shape: ^RA24x3Garrison
 	Tooltip:
 		Name: Skycrapter
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2ctnewy06:
 	Inherits: ra2ctchig01
 	Inherits@shape: ^RA23x3Garrison
 	Tooltip:
 		Name: Skycrapter
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2ctnewy07:
 	Inherits: ra2ctchig01
 	Inherits@shape: ^RA23x3Garrison
 	Tooltip:
 		Name: Skycrapter
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2ctnewy08:
 	Inherits: ra2ctchig01
 	Inherits@shape: ^RA23x3Garrison
 	Tooltip:
 		Name: Skycrapter
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2ctnewy10:
 	Inherits: ra2ctchig01
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2ctnewy11:
 	Inherits: ra2ctchig01
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2ctnewy12:
 	Inherits: ra2ctnewy08
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2ctnewy13:
 	Inherits: ra2ctnewy08
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2ctnewy14:
 	Inherits: ra2ctnewy08
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2ctnewy15:
 	Inherits: ra2ctnewy07
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2ctnewy16:
 	Inherits: ra2ctnewy08
 	Inherits@shape: ^RA22x2Garrison
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2ctnewy17:
 	Inherits: ra2ctnewy16
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2ctnewy18:
 	Inherits: ra2ctnewy17
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2ctnewy20:
 	Inherits: ra2ctchig01
 	Inherits@shape: ^RA24x3Garrison
@@ -2718,6 +2847,9 @@ ra2ctnewy20:
 		Footprint: _xxxx xxxxx xxxx_
 		Dimensions: 5,3
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2ctnewy21:
 	Inherits: ra2ctnewy20
 	Inherits@shape: ^RA24x3Garrison
@@ -2727,42 +2859,63 @@ ra2ctnewy21:
 		Footprint: xxxx_ xxxxx _xxxx
 		Dimensions: 5,3
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2_ctnwy09:
 	Inherits: ra2ctchig01
 	Inherits@shape: ^RA23x3Garrison
 	Tooltip:
 		Name: Skycrapter
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2_ctnwy22:
 	Inherits: ra2ctchig01
 	Inherits@shape: ^RA23x3Garrison
 	Tooltip:
 		Name: Skycrapter
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2_ctnwy23:
 	Inherits: ra2ctchig01
 	Inherits@shape: ^RA23x3Garrison
 	Tooltip:
 		Name: Skycrapter
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2_ctnwy24:
 	Inherits: ra2ctchig01
 	Inherits@shape: ^RA23x3Garrison
 	Tooltip:
 		Name: Skycrapter
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2_ctnwy25:
 	Inherits: ra2ctchig01
 	Inherits@shape: ^RA23x3Garrison
 	Tooltip:
 		Name: Skycrapter
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2ctnewy26:
 	Inherits: ra2ctchig01
 	Inherits@shape: ^RA23x3Garrison
 	Tooltip:
 		Name: Skycrapter
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2_city01:
 	Inherits: ra2ctchig01
 	Inherits@shape: ^RA24x3Garrison
@@ -2772,6 +2925,9 @@ ra2_city01:
 		PlayerPalette: ra2cityp
 	-WithIdleOverlay@Bunkered:
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2_city02:
 	Inherits: ra2ctchig01
 	Inherits@shape: ^RA24x3Garrison
@@ -2781,6 +2937,9 @@ ra2_city02:
 		PlayerPalette: ra2cityp
 	-WithIdleOverlay@Bunkered:
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2_city03:
 	Inherits: ra2ctchig01
 	Inherits@shape: ^RA24x3Garrison
@@ -2790,6 +2949,9 @@ ra2_city03:
 		PlayerPalette: ra2cityp
 	-WithIdleOverlay@Bunkered:
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2_city04:
 	Inherits: ra2ctchig01
 	Inherits@shape: ^RA24x3Garrison
@@ -2799,6 +2961,9 @@ ra2_city04:
 		PlayerPalette: ra2cityp
 	-WithIdleOverlay@Bunkered:
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2_city06:
 	Inherits: ra2ctchig01
 	Inherits@shape: ^RA24x3Garrison
@@ -2808,6 +2973,9 @@ ra2_city06:
 		PlayerPalette: ra2cityp
 	-WithIdleOverlay@Bunkered:
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2_ctfrmb:
 	Inherits: ra2ctbunk01
 	Inherits@shape: ^RA21x1Garrison
@@ -2832,60 +3000,90 @@ ra2_ctwash03:
 	Tooltip:
 		Name: Office Building
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2_ctwash04:
 	Inherits: ra2ctchig01
 	Inherits@shape: ^RA25x3Garrison
 	Tooltip:
 		Name: Office Building
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2_ctwash05:
 	Inherits: ra2ctchig01
 	Inherits@shape: ^RA24x3Garrison
 	Tooltip:
 		Name: Public Building
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2_ctwash06:
 	Inherits: ra2ctchig01
 	Inherits@shape: ^RA24x3Garrison
 	Tooltip:
 		Name: Office Building
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2_ctwash07:
 	Inherits: ra2ctchig01
 	Inherits@shape: ^RA24x3Garrison
 	Tooltip:
 		Name: Office Building
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2_ctwash08:
 	Inherits: ra2ctchig01
 	Inherits@shape: ^RA25x3Garrison
 	Tooltip:
 		Name: Office Building
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2_ctwash09:
 	Inherits: ra2ctchig01
 	Inherits@shape: ^RA23x2Garrison
 	Tooltip:
 		Name: Public Building
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2_ctwash10:
 	Inherits: ra2ctchig01
 	Inherits@shape: ^RA24x3Garrison
 	Tooltip:
 		Name: Public Building
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2_ctwash11:
 	Inherits: ra2ctchig01
 	Inherits@shape: ^RA25x3Garrison
 	Tooltip:
 		Name: Public Building
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2_ctwash13:
 	Inherits: ra2ctchig01
 	Inherits@shape: ^RA24x3Garrison
 	Tooltip:
 		Name: Public Building
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2_ctwash16:
 	Inherits: ra2ctchig01
 	Inherits@shape: ^4x3Shape
@@ -2905,84 +3103,126 @@ ra2_ctwash17:
 	Tooltip:
 		Name: Natural History Museum
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2_cttexs01:
 	Inherits: ra2ctchig01
 	Inherits@shape: ^RA22x2Garrison
 	Tooltip:
 		Name: Skycrapter
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2_cttexs02:
 	Inherits: ra2ctchig01
 	Inherits@shape: ^RA24x3Garrison
 	Tooltip:
 		Name: Alamo
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2_cttexs03:
 	Inherits: ra2ctchig01
 	Inherits@shape: ^RA24x3Garrison
 	Tooltip:
 		Name: Office Building
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2_cttexs04:
 	Inherits: ra2ctchig01
 	Inherits@shape: ^RA24x3Garrison
 	Tooltip:
 		Name: Office Building
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2_cttexs05:
 	Inherits: ra2ctchig01
 	Inherits@shape: ^RA24x3Garrison
 	Tooltip:
 		Name: Office Building
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2_cttexs06:
 	Inherits: ra2ctchig01
 	Inherits@shape: ^RA24x3Garrison
 	Tooltip:
 		Name: Office Building
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2_cttexs07:
 	Inherits: ra2ctchig01
 	Inherits@shape: ^RA24x3Garrison
 	Tooltip:
 		Name: Office Building
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2_cttexs08:
 	Inherits: ra2ctchig01
 	Inherits@shape: ^RA23x2Garrison
 	Tooltip:
 		Name: Office Building
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2_ctpars02:
 	Inherits: ra2ctchig01
 	Inherits@shape: ^RA25x4Garrison
 	Tooltip:
 		Name: Cathedral
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2_ctpars04:
 	Inherits: ra2ctchig01
 	Inherits@shape: ^RA24x3Garrison
 	Tooltip:
 		Name: Departments
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2_ctpars05:
 	Inherits: ra2ctchig01
 	Inherits@shape: ^RA24x3Garrison
 	Tooltip:
 		Name: Departments
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2_ctpars06:
 	Inherits: ra2ctchig01
 	Inherits@shape: ^RA24x3Garrison
 	Tooltip:
 		Name: Departments
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2_ctpars08:
 	Inherits: ra2ctchig01
 	Inherits@shape: ^RA25x4Garrison
 	Tooltip:
 		Name: Cathedral
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2_ctpars07:
 	Inherits: ra2ctbunk01
 	Inherits@shape: ^RA21x1Garrison
@@ -2995,54 +3235,81 @@ ra2_ctpars09:
 	Tooltip:
 		Name: Cathedral
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2_ctpars10:
 	Inherits: ra2ctchig01
 	Inherits@shape: ^RA25x3Garrison
 	Tooltip:
 		Name: Restaurant
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2_ctpars12:
 	Inherits: ra2ctchig01
 	Inherits@shape: ^RA25x4Garrison
 	Tooltip:
 		Name: Cathedral
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2_ctpars13:
 	Inherits: ra2ctchig01
 	Inherits@shape: ^RA25x3Garrison
 	Tooltip:
 		Name: Restaurant
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2_ctpars14:
 	Inherits: ra2ctchig01
 	Inherits@shape: ^RA25x3Garrison
 	Tooltip:
 		Name: Restaurant
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2_ctrus03:
 	Inherits: ra2ctchig01
 	Inherits@shape: ^RA25x3Garrison
 	Tooltip:
 		Name: Kremlin
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2_ctrus04:
 	Inherits: ra2ctchig01
 	Inherits@shape: ^RA25x4Garrison
 	Tooltip:
 		Name: Building
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2_ctrus05:
 	Inherits: ra2ctchig01
 	Inherits@shape: ^RA25x4Garrison
 	Tooltip:
 		Name: Building
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2_ctrus06:
 	Inherits: ra2ctchig01
 	Inherits@shape: ^RA25x4Garrison
 	Tooltip:
 		Name: Building
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2_ctrus07:
 	Inherits: ra2ctchig01
 	Inherits@shape: ^RA21x1Garrison
@@ -3055,66 +3322,99 @@ ra2_ctrus08:
 	Tooltip:
 		Name: Building
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2_ctrus09:
 	Inherits: ra2ctchig01
 	Inherits@shape: ^RA22x2Garrison
 	Tooltip:
 		Name: Building
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2_ctrus10:
 	Inherits: ra2ctchig01
 	Inherits@shape: ^RA22x2Garrison
 	Tooltip:
 		Name: Building
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2_ctrus11:
 	Inherits: ra2ctchig01
 	Inherits@shape: ^RA22x2Garrison
 	Tooltip:
 		Name: Building
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2_ctsanf01:
 	Inherits: ra2ctchig01
 	Inherits@shape: ^RA23x3Garrison
 	Tooltip:
 		Name: House
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2_ctsanf02:
 	Inherits: ra2ctchig01
 	Inherits@shape: ^RA24x3Garrison
 	Tooltip:
 		Name: House
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2_ctsanf03:
 	Inherits: ra2ctchig01
 	Inherits@shape: ^RA23x3Garrison
 	Tooltip:
 		Name: House
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2_ctsanf05:
 	Inherits: ra2ctchig01
 	Inherits@shape: ^RA25x4Garrison
 	Tooltip:
 		Name: Prison
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2_ctsanf06:
 	Inherits: ra2ctchig01
 	Inherits@shape: ^RA23x3Garrison
 	Tooltip:
 		Name: House
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2_ctsanf07:
 	Inherits: ra2ctchig01
 	Inherits@shape: ^RA23x3Garrison
 	Tooltip:
 		Name: House
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2_ctsanf08:
 	Inherits: ra2ctchig01
 	Inherits@shape: ^RA24x3Garrison
 	Tooltip:
 		Name: House
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2_ctsanf16:
 	Inherits: ra2ctchig01
 	Inherits@shape: ^RA21x1Garrison
@@ -3127,6 +3427,9 @@ ra2_ctsanf17:
 	Tooltip:
 		Name: Public Building
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2_ctsanf18:
 	Inherits: ra2ctchig01
 	Inherits@shape: ^RA24x3Garrison
@@ -3136,6 +3439,9 @@ ra2_ctsanf18:
 #   Red Alert 2 Civilian Props
 ##############################################
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 ra2ctfarm02:
 	Inherits: ^RA2CivProp
 	Inherits@shape: ^1x1Shape

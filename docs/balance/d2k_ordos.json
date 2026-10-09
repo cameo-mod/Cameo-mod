@@ -322,13 +322,6 @@
      {
       "damage_warheads": [
        {
-        "damage": "24000",
-        "falloff": "100, 70, 30, 0",
-        "spread": "300",
-        "tag": "MissileAA_Medium_Flat",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "400",
         "falloff": "100, 51",
         "percentage_denominator": "10000",
@@ -351,33 +344,36 @@
         "spread": null,
         "tag": "CollapsedMissileAP_MediumPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "24000",
+        "falloff": "100, 70, 30, 0",
+        "spread": "300",
+        "tag": "MissileAA_Medium",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6500",
       "reloaddelay": "42",
       "slot": "Armament@aa1",
       "versus_templates": [
-       "^Warhead_MissileAA_Medium_Flat",
+       "^Warhead_MissileAA_Medium",
+       "^Projectile_Missile_AA",
        "^d2k_ordos_d2k_apc_rocket_aa",
        "^d2k_ordos_d2k_apc_rocket_aa_1",
        "^d2k_ordos_d2k_apc_rocket_aa_2"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileAA_Medium"
+      ],
       "weapon": "D2K_APC_Rocket_AA",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
-       {
-        "damage": "24000",
-        "falloff": "100, 70, 30, 0",
-        "spread": "300",
-        "tag": "MissileAA_Medium_Flat",
-        "type": "AreaDamage"
-       },
        {
         "damage": "400",
         "falloff": "100, 51",
@@ -401,23 +397,33 @@
         "spread": null,
         "tag": "CollapsedMissileAP_MediumPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "24000",
+        "falloff": "100, 70, 30, 0",
+        "spread": "300",
+        "tag": "MissileAA_Medium",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6500",
       "reloaddelay": "42",
       "slot": "Armament@aa2",
       "versus_templates": [
-       "^Warhead_MissileAA_Medium_Flat",
+       "^Warhead_MissileAA_Medium",
+       "^Projectile_Missile_AA",
        "^d2k_ordos_d2k_apc_rocket_aa",
        "^d2k_ordos_d2k_apc_rocket_aa_1",
        "^d2k_ordos_d2k_apc_rocket_aa_2"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileAA_Medium"
+      ],
       "weapon": "D2K_APC_Rocket_AA",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {
@@ -2213,6 +2219,7 @@
       "slot": "Armament",
       "versus_templates": [
        "^Warhead_MissileAA_Heavy",
+       "^Projectile_Missile_AA",
        "^Projectile_Missile_Light",
        "^Effect_MissileHE_Heavy_D2K"
       ],
@@ -2268,6 +2275,7 @@
       "slot": "Armament@garrisoned",
       "versus_templates": [
        "^Warhead_MissileAA_Heavy",
+       "^Projectile_Missile_AA",
        "^Projectile_Missile_Light",
        "^Effect_MissileHE_Heavy_D2K"
       ],
@@ -5578,13 +5586,6 @@
      {
       "damage_warheads": [
        {
-        "damage": "24000",
-        "falloff": "100, 70, 30, 0",
-        "spread": "300",
-        "tag": "MissileAA_Medium_Flat",
-        "type": "AreaDamage"
-       },
-       {
         "damage": "400",
         "falloff": "100, 51",
         "percentage_denominator": "10000",
@@ -5607,33 +5608,36 @@
         "spread": null,
         "tag": "CollapsedMissileAP_MediumPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "24000",
+        "falloff": "100, 70, 30, 0",
+        "spread": "300",
+        "tag": "MissileAA_Medium",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6500",
       "reloaddelay": "42",
       "slot": "Armament@aa1",
       "versus_templates": [
-       "^Warhead_MissileAA_Medium_Flat",
+       "^Warhead_MissileAA_Medium",
+       "^Projectile_Missile_AA",
        "^d2k_ordos_d2k_apc_rocket_aa",
        "^d2k_ordos_d2k_apc_rocket_aa_1",
        "^d2k_ordos_d2k_apc_rocket_aa_2"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileAA_Medium"
+      ],
       "weapon": "D2K_APC_Rocket_AA",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
-       {
-        "damage": "24000",
-        "falloff": "100, 70, 30, 0",
-        "spread": "300",
-        "tag": "MissileAA_Medium_Flat",
-        "type": "AreaDamage"
-       },
        {
         "damage": "400",
         "falloff": "100, 51",
@@ -5657,23 +5661,33 @@
         "spread": null,
         "tag": "CollapsedMissileAP_MediumPercentage",
         "type": "AreaDamagePercentage"
+       },
+       {
+        "damage": "24000",
+        "falloff": "100, 70, 30, 0",
+        "spread": "300",
+        "tag": "MissileAA_Medium",
+        "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6500",
       "reloaddelay": "42",
       "slot": "Armament@aa2",
       "versus_templates": [
-       "^Warhead_MissileAA_Medium_Flat",
+       "^Warhead_MissileAA_Medium",
+       "^Projectile_Missile_AA",
        "^d2k_ordos_d2k_apc_rocket_aa",
        "^d2k_ordos_d2k_apc_rocket_aa_1",
        "^d2k_ordos_d2k_apc_rocket_aa_2"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileAA_Medium"
+      ],
       "weapon": "D2K_APC_Rocket_AA",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {

@@ -8,6 +8,8 @@
 ^Projectile_Missile_Heavy_D2K:
 	Inherits: ^Projectile_Missile_Heavy
 	Projectile: Missile
+		RangeLimitPercent: 150
+		CloseEnoughFromSpeed: true
 		Arm: 0
 		Blockable: false
 		AllowSnapping: true
@@ -23,10 +25,8 @@
 		MaximumLaunchSpeed: 200
 		MinimumLaunchSpeed: 200
 		Speed: 666
-		CloseEnough: 400
 		Acceleration: 3
 		HomingActivationDelay: 3
-		RangeLimit: 33333
 		CruiseAltitude: 1000
 		MinimumLaunchAngle: 64
 		PointDefenseTypes: Missile
@@ -269,10 +269,11 @@
 
 ^Projectile_Missile_Heavy_D2K_OMissile:
 	Projectile: Missile
+		RangeLimitPercent: 150
+		CloseEnoughFromSpeed: true
 		Blockable: false
 		Shadow: true
 		HorizontalRateOfTurn: 12
-		RangeLimit: 6c614
 		Inaccuracy: 384
 		CruiseAltitude: 1c0
 		MinimumLaunchAngle: 64
@@ -505,10 +506,8 @@ D2K_TowerMissile:
 		TrailInterval: 1
 		MaximumLaunchSpeed: 200
 		MinimumLaunchSpeed: 200
-		CloseEnough: 666
 		Acceleration: 6
 		HomingActivationDelay: 3
-		RangeLimit: 33333
 		PointDefenseTypes: Missile
 		Palette: d2keffect
 		CruiseAltitude: 1000
@@ -544,7 +543,6 @@ mtank_pri:
 	ValidTargets: Ground, Air
 	Projectile: Missile
 		VerticalRateOfTurn: 12
-		RangeLimit: 30c0
 		HorizontalRateOfTurn: 100
 	Warhead@MissileAP_Heavy:
 		Damage: 16000
@@ -1606,7 +1604,6 @@ PhoenixRocketShrapnel:
 		TrailImage: large_trail
 		Speed: 333
 		Acceleration: 3
-		RangeLimit: 33333
 		LaunchAngle: 60
 		Inaccuracy: 333
 	Warhead@Cloud: SpawnSmokeParticle

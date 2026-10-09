@@ -21,6 +21,9 @@ V20:
 	Garrisonable:
 		MaxWeight: 8
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 V20.Husk:
 	Inherits: ^CivBuildingHusk
 	Building:
@@ -513,6 +516,9 @@ V37:
 	Health:
 		HP: 160000
 
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 V37.Husk:
 	Inherits: ^CivBuildingHusk
 	Building:

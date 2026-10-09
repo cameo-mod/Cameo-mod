@@ -685,7 +685,7 @@ ra2_allies_battlefortress:
 		InitialUnits: ra2_allies_gi,ra2_allies_gi,ra2_allies_guardiangi,ra2_allies_guardiangi,ra2_allies_guardiangi,ra2_allies_guardiangi
 		ExclusiveDeploy: true
 		DeployType: Battlefortress
-	AttackOpenTopped:
+	AttackGarrisoned:
 		Voice: Attack
 		Armaments: garrisoned
 		PortOffsets: 384,0,128, -384,0,128, 224,-341,128, -224,-341,128, 224,341,128, -224,341,128

@@ -86,10 +86,10 @@ namespace OpenRA.Mods.CA.Traits
 		/// </summary>
 		public static WDist? KiteStandoff(BotUnitProfile own, BotUnitProfile target, WDist margin)
 		{
-			if (own.MaxRange <= target.MaxRange)
+			if (own.MaximumRangeAgainst(target) <= target.MaximumRangeAgainst(own))
 				return null;
 
-			return target.MaxRange + margin;
+			return target.MaximumRangeAgainst(own) + margin;
 		}
 
 		/// <summary>

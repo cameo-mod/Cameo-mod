@@ -378,7 +378,7 @@
         "damage": "20000",
         "falloff": "100, 70, 30, 0",
         "spread": "400",
-        "tag": "MissileAA_Heavy_Flat",
+        "tag": "MissileAA_Heavy",
         "type": "AreaDamage"
        }
       ],
@@ -389,10 +389,12 @@
       "reloaddelay": "100",
       "slot": "Armament@Rockets",
       "versus_templates": [
-       "^Warhead_MissileAA_Heavy_Flat",
+       "^Warhead_MissileAA_Heavy",
+       "^Projectile_Missile_AA",
        "NaxPlaneRockets_elite"
       ],
       "warheads": [
+       "^Warhead_MissileAA_Heavy",
        "^Warhead_MissileAP_Heavy"
       ],
       "weapon": "NaxInterceptorRockets",

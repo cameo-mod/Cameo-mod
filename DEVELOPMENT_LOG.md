@@ -4,6 +4,123 @@
 - Privacy references/reader joins, recursive learned/log grammar, all-seat post-game signature relabel, and physical spawn binding; see `docs/design/AI_LOG_PRIVACY.md`.
 - Validation: 1153 C# / 182 related Python passed; rebuilt emitter→fitter→audit PASS; fog manifest adds one documented record-only site (83 files/267 sites); fresh isolated boot PASS, zero exceptions.
 - Next: push, coordinator-owned identical-order trace, independent Devin-Reviewer review; no merge. Earlier P6 settings OOM was an environment issue (lead cleared orphan processes).
+# 2026-10-07 — Devin-Integrator: INTEG-ECON-B — BU_harvester_logistics merged into inc
+
+*Devin-Integrator.* Reviewer APPROVE (2 documented non-blocking deviations D1 P2 /
+D2 P3 — the gates here were the first independent run: the reviewer had no engine).
+Branch `integ/garrison-2026-10-06`, worktree `C:\cameo-wt\integ-garrison`:
+inc `f9d81bae8` + `devin/econ-b@50d3614b6` (`BU_harvester_logistics` —
+refinery-served field reservations, shared pool re-route over threat-free
+corridors only, lease-aware evac via new `BotLeasePurpose.Harvest`, production
+requests only when the pool cannot cover demand; `HarvesterBotModuleCA` gains
+`IBotUnitLeaseLost`).
+
+Conflicts (both degenerate): `DEVELOPMENT_LOG.md` append-adjacent entries —
+kept both; `increment_switches.yaml` tail — kept all groups
+(BM_live_combat_model + BO_squad_move_dedup + BU_harvester_logistics).
+Inc-side had not touched any of the branch's 5 files since the merge base —
+clean take.
+
+Integration repair: ai_arch_audit R7 flagged `IBotUnitLeaseLost` gaining a
+second loaded provider (`BridgeRepairBotModule` + `HarvesterBotModuleCA`) with no
+declared merge semantics — declared `owner-matched dispatch` in PROVIDER_MERGES
+(registry notifies each provider only when its type name equals the lost lease's
+previous owner; verified at BotUnitLeaseRegistry.cs:186). AI_ARCH_COVERAGE.md
+regenerated.
+
+Gates:
+
+- build: 0 errors (Release, win-x64)
+- Cameo tests: 1206 total, 1205 pass — sole failure was a stale
+  `DerivedWeaponMetrics` fixture (RA2Patriot rows after R1's refresh); fixed by
+  `extract_stats.py` re-extraction of all 34 derived faction ledgers (cohort
+  normalization churns every row; only R1-weapon rows changed semantics).
+  WeaponModelParityTest 4/4 on the regenerated fixtures.
+- audits: fog honesty PASS (82 files/266 sites), direct mutation PASS (0 sites),
+  ai_arch freshness PASS (both artifacts)
+- switch gating reviewed: all new paths behind `UseHarvesterLogistics`
+  (default false); `apply_increment_switches --dry-run BU_harvester_logistics`
+  arms `HarvesterBotModuleCA@generic` only; @classic untouched -> off =
+  bit-identical
+- conflict-marker test: PASS
+- BOOT_GATE: PASS (isolated support dir, menu marker, package in worktree,
+  0 exceptions)
+
+# 2026-10-07 — Devin-Integrator: INTEG-REGREEN-R1 — pre-R16 missile profile refresh merged into inc
+
+*Devin-Integrator.* Reviewer APPROVE. Branch `integ/garrison-2026-10-06` (continued),
+worktree `C:\cameo-wt\integ-garrison`: inc `6bb8818e8` + `codex/regreen-r1@a716cb6dc`
+(`1832a4c64` refresh pre-R16 missile profiles on 27 weapons + `a716cb6dc` reconcile
+missile history contract). Merge applied with zero conflicts.
+
+Semantic reconciliation required beyond the clean textual merge:
+
+- The R1 contract (`test_missile_role_policy` + `test_projectile_role_bulk_profile`,
+  95 records) asserts each recorded refresh changed only the main warhead. On the
+  missile-feel tree the whole checkpoint cohort failed (78 failures): missile-feel had
+  changed non-warhead fields and AA templates the records pin.
+- Fixtures rebased the same way as the E2 repin `0d5cfc14a` (live payloads with
+  preserved mains verbatim, digests repinned); thin variant shells fold the live
+  authored node.
+- `RA2HoverMissile_AA(_elite)` / `RA2MultiHoverMissile_AA(_elite)`: authored
+  `-Versus:`/`-PercentageVersus:` cancellation inside `Warhead@MissileAA_Light` so the
+  R1-reviewed 20-key ladders replace (not map-merge into) the new
+  `^Warhead_MissileAA_Light` template rows — otherwise the resolved warhead leaked
+  AntiAir*/Ship*/Cyborg* classes the refresh deliberately removed.
+
+Gates:
+
+- build: 0 errors (Release, win-x64)
+- role-policy contract: 10 passed + 77 subtests — identical to reviewer baseline
+- consumer-set regression check vs pre-merge inc baseline `6bb8818e8`: identical
+  failure sets (34 failed both sides — pre-existing missile-feel-era fixture
+  staleness in sonic/heaviness/owned-names lanes, out of R1 scope, likely R2/R3);
+  0 new failures, 78 fixed
+- conflict-marker test: PASS
+- BOOT_GATE: PASS (isolated support dir, menu marker, package in worktree, 0 exceptions)
+
+Known debt (flagged to lead): the 34 stale historical-view fixtures predate this
+merge (visible identically on inc baseline) — `sonic_family`/`later_profile`/
+`owned_checkpoint`/`heaviness golden` `current`-payload repins are owed to
+missile-feel reconciliation (REGREEN-R2/R3 territory, not this task's scope).
+
+# 2026-10-06 — Devin-Integrator: INTEG-GARRISON — garrison fire-ports + missile-feel merged into inc
+
+*Devin-Integrator.* Maintainer-approved merge (both playtests passed 2026-10-06).
+Branch `integ/garrison-2026-10-06`, worktree `C:\cameo-wt\integ-garrison`:
+
+- Engine: `integ/engine-2026-10-06` = `d5d8b2a685` + `codex/garrison-engine@dc92c52213`
+  (independent passenger fire stations) + `codex/missile-feel-engine@dd7b901b85`
+  (RangeLimit/RangeLimitPercent + proximity snapping). Build 0 errors/0 warnings,
+  engine suite 545 pass / 2 skip. Pushed; `origin/cameo-engine` fast-forwarded to
+  `0e42ed433d` — the new ENGINE_VERSION pin.
+- Mod: inc `5e45bfc80` + `codex/garrison-fireports@210ec9479` + `codex/missile-feel@4e47ead99`
+  (66 weapons, RangeLimitPercent 150, flattened Spit_AA/GLStingerSite/GLASCUD as playtested).
+  Two merge conflicts resolved: `mod.config` pin -> combined engine sha; `BotCombatPredictor`
+  keeps the HEAD WeaponProfile helper with the branch's IRangeLimitedProjectileInfo
+  effective range clamp ported into the helper.
+- Integration repair: the missile-feel branch changed `effective_damage.py`
+  (default-on homing-missile terminal bound + RangeLimit fuel gate) without
+  re-extracting ledgers or updating the C# port. Re-extracted 35 ledgers + derived
+  sidecars (ledgers_drifted 21 -> 0) and ported the terminal model into
+  `BotEffectiveDamage` (HomingMissileTerminalBound, fuel sigma=inf, MissileTA
+  handling, target-radius/terminal threading through Reliability/
+  UniformReliability/AreaGeometrySamples/Evaluate). Verified by
+  WeaponModelParityTest over all 1570 weapons.
+- doc_claims repins: warhead_family_reach 1509 -> 1510,
+  cameo_family_labelled_weapons 1567 -> 1569; cited docs co-updated.
+
+Gates:
+- build: 0 errors (Release, win-x64)
+- Cameo tests: 1202/1202
+- pytest scoped: 59 + 26 subtests (conflict markers, garrison fireports,
+  chinook capacity, missile feel defaults, effective damage)
+- audits: fog honesty PASS (266 sites), direct mutation PASS (0 sites),
+  ai_arch freshness PASS, doc_claims 44/44, balance drift clean,
+  garrison_fireports capacity audit PASS (304 actors, 0 violations)
+- audit_garrison_weapons informational: G1 4 scrin infantry w/o garrison weapon,
+  G4 1 cabal_ravager (pre-existing findings, not merge-introduced)
+- BOOT_GATE: PASS (isolated support dir, menu marker, package in worktree, 0 exceptions)
 
 # 2026-10-05 — Devin-T3Verify: PREDICTOR-PARITY P1 — effective-damage port + live per-actor stats
 
@@ -19679,3 +19796,36 @@ Branch devin/tier4/pricing-default, task 01a10850 (maintainer ruling 2026-10-04)
   armament_pairing fingerprint staleness predates both bases).
 * Crash note: machine lost ~00:05 mid-gate; worktree survived intact. fsck reports
   missing objects in the shared store — unreachable crash debris only, verified clean
+  from refs; lead confirmed no repair needed.
+
+## 2026-10-06 — Devin-Architect: ECON-B `BU_harvester_logistics` (SPEC_2026-10-05_econ_logistics Part B)
+
+* One owner, extended not forked: `HarvesterBotModuleCA` keeps the classic path verbatim behind
+  `UseHarvesterLogistics` (default false); switch `BU_harvester_logistics` arms it on
+  `HarvesterBotModuleCA@generic` only, @classic untouched.
+* Reservations (B1): refinery-served fields keep `ceil(cells/ResourceCellsPerHarvester)` clamped to
+  `MaxHarvestersPerResourceIndice` (pure helper `HarvesterLogistics.Reservation`). Shared pool (B2):
+  per indice, units beyond the reservation, indice order then lowest ActorID.
+* Safe routes (B3): candidate probe = `FindPathToTargetCells`, then every
+  `LogisticsRouteSampleCells`-strided cell must satisfy `MergedThreatAt == 0` (remembered, fog-honest)
+  and no `EnemyBaseCount`/`EnemyUnitCount`/`GetNearbyIndicesThreat` on the traversed indices;
+  reservation deficits bypass the churn margin, attraction moves need `LogisticsReassignMarginPercent`.
+* Leases (B4): re-routed units hold `BotLeasePurpose.Harvest` for `LogisticsReassignCooldownTicks`
+  (new enum member); `HarvestIfAble`/`RespondToAttack` yield while `IsClaimedByOther`; pre-empted
+  units are marked evacuated via `IBotUnitLeaseLost` and re-enter the pool when free.
+* Production (B6): request fires only when `numHarvesters < refineries` (unmet minimum) or the last
+  rebalance left shortfall — the pool provably cannot cover demand; BotLimits/ScaleTargets unchanged.
+* Determinism: integer-only math, no new LocalRandom; target cells ordered by distance then X,Y;
+  pool order indice-index then ActorID.
+* Verify on b6f522e78: Release build 0W/0E; `HarvesterLogisticsTest` 4/4; adjacent suite (Harvester/
+  Lease/Ownership/Spread/Fog filters) 63/63; `audit_fog_honesty` PASS (82 files/266 sites);
+  `audit_bot_direct_mutation` PASS; `ai_module_map --write` regenerated (new IBotUnitLeaseLost impl +
+  IBotRegionThreatProvider consumer rows); `apply_increment_switches --dry-run` arms
+  `UseHarvesterLogistics: true` on @generic only.
+* Boot: `BOOT_GATE=PASS` — menu reached (`MenuPostProcessEffect.PostWorldLoaded`), isolated support
+  dir, zero new exceptions. NOTE: `OpenRA.exe` apphost exits -1 on this host (also pre-change);
+  the gate ran `dotnet OpenRA.dll` (same Main, same assemblies, isolated SupportDir) to evidence
+  boot. `OpenRA.Utility.exe` runs normally — host-layer issue, not mod content.
+* ECON-A touch points (NOTE_2026-10-06_econ_a_econ_b_touchpoints.md): used NEW lease purpose
+  `Harvest` (never McvExpansion) per their guidance; BU does not attach to ExpansionDemand —
+  no seam change needed; shared file increment_switches.yaml appended `BU_harvester_logistics` at tail.
