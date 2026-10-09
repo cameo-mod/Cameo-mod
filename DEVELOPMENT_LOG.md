@@ -1,3 +1,32 @@
+# 2026-10-09 — Devin: SW plug capacity (B2/B6) — F3/F4 resolved on 901d5dace
+
+*Devin-Developer.* Re-review of `19996eacf` found two more map-derivation
+defects; both fixed on the same branch.
+
+- **F3 cross-host association** — provider/socket join was global: a provider
+  on host A + `Pluggable` socket on host B granting the same condition could
+  map a plug that never publishes the token. `BuildPlugTokenMap` pass 1 now
+  builds `(token, plugType)` tuples per host actor — provider and socket must
+  coexist on the SAME actor. Missing same-host socket emits an uncapped
+  diagnostic naming token/host/condition.
+- **F4 ambiguous multi-token item** — a plug negating 2+ declared tokens that
+  both resolve for its plug type was silently bound to the first token
+  iterated ("first wins"). Pass 2 now collects all candidate tokens per item
+  and REJECTS the item when >1 resolve; order-independent (regression flips
+  both prereq order and actor order). A declared-but-unresolved second
+  negation does not poison the single real mapping; multiple items sharing
+  ONE token still map (shared-slot).
+- New tests: `TokenMap_CrossHostProviderSocket_NeverJoins` + same-host
+  control, `TokenMap_ItemNegatingTwoResolvedTokens_Rejected_OrderIndependent`,
+  `TokenMap_SingleTokenOfTwoNegated_StillMaps`.
+- **INCIDENT**: boot-gate script launched `launch-game.cmd` and killed only
+  the cmd wrapper, orphaning `OpenRA.exe` (~1h, user killed it). Script +
+  skill now launch `engine\bin\OpenRA.exe` directly, kill that PID, then
+  verify zero survivors under the worktree path (fleet NOTE records the
+  incident for all agents).
+- **Gates**: 49/49 focused (+4), 1300/1300 full suite, Release 0 errors,
+  boot-gate PASS (direct-exe launch, PID 8160 killed + verified absent).
+
 # 2026-10-09 — Devin: SW plug capacity (B2/B6) — F2 revised to declared catalogue
 
 *Devin-Developer.* Post-approval design revision (Architect + Integrator direction):

@@ -1,6 +1,6 @@
 # Cameo — THE HANDOFF
 
-## 2026-10-09 — Devin: SW plug capacity (B2/B6) implemented — `devin/playtest-b2b6-swcap`
+## 2026-10-09 — Devin: SW plug capacity (B2/B6) implemented — `devin/playtest-b2b6-swcap` @ `901d5dace`
 
 `Agent: Devin · branch devin/playtest-b2b6-swcap · worktree C:/cameo-wt/playtest-swcap · base 3d99405bd (published head)`
 
@@ -19,26 +19,31 @@ cash+resources refund — `RefundCash = TotalCost - RemainingCost - ResourcesPai
 engine-parity with `CancelProductionInner`). SW items are resolved against a
 **declared catalogue**: `SuperweaponPlugLimit.OccupancyTokens` in world.yaml
 (`ionc, nodnuke, cabalnuke_swlimit, tsionc`) — a plug maps only when it negates a
-declared token whose provider chain verifies (`global-swlimit` gated + positive
-single-variable `RequiresCondition`); missing/ambiguous wiring emits debug-channel
-diagnostics and leaves plugs uncapped (empty catalogue = nothing capped). Four
-host `@swlimit` providers gained `RequiresPrerequisites: global-swlimit`.
-Inbound `GetReplacement` migration is **detection-only** per spec — upstream
-exclusion is a separate out-of-scope fix.
+declared token whose provider chain verifies ON THE SAME HOST (`global-swlimit`
+gated + positive single-variable `RequiresCondition` + `Pluggable` socket for
+that condition); provider/socket on different actors never join (F3), and an
+item negating 2+ resolving tokens is rejected rather than first-wins (F4).
+Missing/ambiguous wiring emits debug-channel diagnostics and leaves plugs
+uncapped (empty catalogue = nothing capped). Four host `@swlimit` providers
+gained `RequiresPrerequisites: global-swlimit`. Inbound `GetReplacement`
+migration is **detection-only** per spec — upstream exclusion is a separate
+out-of-scope fix.
 
-*Evidence:* build 0/0 · NUnit 45/45 focused `SuperweaponPlugLimit*` (admit/excess/
+*Evidence:* build 0/0 · NUnit 49/49 focused `SuperweaponPlugLimit*` (admit/excess/
 refund tables, declared-catalogue tests, adversarial ordinary/inverted/ungated
-providers, resolved-gate echo + missing-provider/ambiguity diagnostics,
-exact-four under the declared set, real-World lifecycle via reflection harness —
-`EnablePlug`→`CanBuild` flip, tail-first sweep cancel, `Infinite` clear,
-Done-migration 600res+400cash refund, per-tick dedup; real-yaml scans pin the
-four gated providers, the declared `OccupancyTokens` set, plug `!token`
-negations, and provider-gate polarity sampled 0/1/2/`int.MaxValue`) · boot-gate
-PASS (menu reached, 0 new exceptions) · `git diff --check` scoped files only ·
-engine untouched (canonical pin `0a3f77dbe1`). *Next:* live-match regressions —
-infinite-flag install, capture over-cap, mixed-tech migration, PayUpFront
-refund, ordinary-infinite unaffected — before release clearance. B1/B7 branches
-await coordinator merge per plan §3.
+providers, cross-host non-join + multi-token rejection, resolved-gate echo +
+missing-provider/ambiguity diagnostics, exact-four under the declared set,
+real-World lifecycle via reflection harness — `EnablePlug`→`CanBuild` flip,
+tail-first sweep cancel, `Infinite` clear, Done-migration 600res+400cash refund,
+per-tick dedup; real-yaml scans pin the four gated providers, the declared
+`OccupancyTokens` set, plug `!token` negations, and provider-gate polarity
+sampled 0/1/2/`int.MaxValue`) · full suite 1300/1300 · boot-gate PASS on the
+committed tree (direct `OpenRA.exe` launch, PID killed + verified absent —
+process-cleanup incident fixed, see fleet NOTE) · `git diff --check` scoped
+files only · engine untouched (canonical pin `0a3f77dbe1`). *Next:* live-match
+regressions — infinite-flag install, capture over-cap, mixed-tech migration,
+PayUpFront refund, ordinary-infinite unaffected — before release clearance.
+B1/B7 branches await coordinator merge per plan §3.
 
 ## 2026-10-08 — Devin: history re-record complete — `devin/regreen-history-rerecord`, 323/323 affected tests green
 
