@@ -63,3 +63,15 @@ Full mod suite at this checkpoint: 1301/1301 PASS.
 2026-10-09 timing/cost preparation: producer_live now means actor alive/not disposed, independently of ProductionQueue.Enabled. Disabled unfinished/empty queues are paused; Done heads remain ready, so disabled production does not hide a completed building. Re-enable empty queues start a fresh idle interval. Focused 27/27 PASS; explicit isolated maximum-census test 1/1 PASS (45001 ticks, 128 queues, 901 pulses, MemoryStream). Measured 1907.0625ms elapsed, 150460520 allocated bytes and 19021579 output bytes. These include test assertions/core/serializer and exclude World enumeration, seam, callbacks and disk; NOT runtime-cost approval. Two such players exceed current 32MiB shared file budget: forecast bounds before adoption, adapt bounded budget or declare unsupported rather than silently drop.
 
 Proposed separate Coordinator cost gate after accepted seam/restack: frozen engine/tree/config, serial matched logger-unmounted versus mounted fixtures, representative and supported maximum players/queues; at least 5 paired samples. Record tick CPU distribution, total/peak allocation, working set, per-stream bytes/records, write/flush cost, observer history bounds, outcome/order parity and terminal coverage. Compare to a predeclared acceptable overhead budget with Lead/VP; no universal threshold or runtime clearance is inferred from the isolated core receipt. Overflow/error/truncation must yield UNKNOWN. Every supported campaign duration/roster must fit the analyzer input limits (128MiB/200000 rows) and logger bounds including raw events.
+
+
+2026-10-09 independent checkpoint acceptance: VP BOUNDED APPROVE at exact code
+322a69d190503389d4ed421be04f715300767bfc (parent655218af3bfe85c8fb6fea8f34899ae1aafbb3f9).
+Scope: actor producer_live independent of queue Enabled, paused/Done-ready
+semantics and explicit isolated cost fixture ONLY. Receipt:
+C:/Users/AedisToru/Documents/GitHub/Cameo-mod-fleet/REREVIEW_2026-10-09_logger_liveness_cost_322a_luna.md.
+Reviewer inspected committed delta/remote/diff-check; tests were not independently
+rerun. Sol-reported focused27/27 and explicit1/1. No adoption/runtime/campaign
+clearance; 01a121b6 terminal-causality remains FIX REQUIRED. Accepted seam restack,
+outcome consumer integration, supported-roster/output budgeting, paired runtime
+cost and reservation gates remain. Canonical files must both be preserved.
