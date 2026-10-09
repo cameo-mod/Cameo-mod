@@ -3314,11 +3314,18 @@ unit A carry into unit B unless explicitly reset. Playtest B4/B5 were this defec
   hover absence). Every trait/`BuildableInfo` lookup in that path needs a null-guarded fallback.
 - The width aggregate must include EVERY measured label (`extraSize.X` among them) —
   `Math.Max(name, desc)` alone let long extras escape the right edge.
+- `ProductionPaletteWidget.TooltipIcon` is only written on `MouseInputEvent.Move`, but
+  `RefreshIcons()` rebuilds the `icons` dictionary every `Tick`. A queued cell shifting
+  under a stationary cursor (item completes, buildables appear/disappear, scroll) leaves
+  `TooltipIcon` bound to a removed `ProductionIcon` — the tooltip then shows the wrong
+  unit or nothing until the pointer moves. `QuotaProductionPaletteWidget` now resolves
+  `GetTooltipIcon` live against `Viewport.LastMousePos`, matching `DrawHoverHeader`.
 
 Rule: in tooltip `BeforeRender`, re-assign `Visible`, `Text` and `Bounds` from captured baselines
 on every pass, feed every measured label into the parent bounds aggregate, and null-guard every
 trait lookup — an exception there kills the tooltip silently, and stale widget state leaks across
-hover targets.
+hover targets. And when a widget rebuilds its hit-test map every tick, resolve the hovered item
+against the cursor at read time — a Move-event snapshot goes stale the next refresh.
 
 Scope note: this entry covers palette/icon tooltip absence and stale-layout defects only.
 The world-hover absence (hovering a live world actor yields no tooltip at all) is NOT explained
