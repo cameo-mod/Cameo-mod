@@ -272,6 +272,33 @@ start, frozen, host-local): no new ruling needed.
 |---|---|---|---|--:|--:|--:|--:|
 | ACC | acceptance: 20-map runner + the §0a test (fog-blind wins ≥16/20 vs omniscient classic) | EMBER | all above | 8 | 14 | 24 | 15 |
 
+**Runtime skeleton and performance (2026-10-09 review: [`../AI_ARCHITECTURE_RESEARCH_SYNTHESIS_MASTER_2026-10-06.md`](../AI_ARCHITECTURE_RESEARCH_SYNTHESIS_MASTER_2026-10-06.md) Part IV, phases A–C)**, expected 104 h.
+_Proposed 2026-10-09 and not yet scheduled: owners are unassigned, and these hours are **not** in the §0 / §4 totals until the
+maintainer schedules them. Phase A comes first because every later A/B is measured with it. That file's learning order D1–D3 overlaps
+L0–L3 here (baseline/parity, measured priors, the knob layer and its training); D4, the registry, shipped 2026-10-07; D5 (map/opponent feature vectors, telemetry first), D6's contextual plan prior beyond L4, and D7 (the DESIGN §19.13
+tier-5 engagement network) are not queued yet and get estimates once phases A–B land. Nothing here caps the bot's
+actions (DESIGN §19.1); human-likeness stays `HL` above._
+
+| id | work | owner | needs | O | M | P | E |
+|---|---|---|---|--:|--:|--:|--:|
+| A1 | per-module bot RNG streams (`BotRng.For(player, moduleKey)`, FNV-1a salt), new A/B baseline (F1) | — | — | 2 | 4 | 8 | 4 |
+| A2 | declare in `FRESH_EDGES` (AR-10 R8b) the seams B3/C3 must keep same-tick | — | A3 | 1 | 2 | 4 | 2 |
+| A3 | regenerate module map / arch audit / switch dry-run / `run_all.sh` on a complete tree | — | engine build | 1 | 2 | 5 | 2 |
+| A4 | registry honesty: `wired` needs its artifact; own switch for `effective_unit_value` (F9, F10) | — | — | 2 | 3 | 6 | 3 |
+| A5 | standing order-stream parity gate (switches off, fixed seed) | — | — | 2 | 4 | 8 | 4 |
+| A6 | per-module performance baseline from a league run, committed under `docs/audit/` | — | A3 | 2 | 4 | 8 | 4 |
+| A7 | promote the map/opponent identity ruling into DESIGN §19 (maintainer) | — | — | 0.5 | 1 | 2 | 1 |
+| B1 | layer scheduler in `ModularBot`: `LAYER_OF` moves into module Infos, opt-in layer order + interval; no action cap (F2, F3) | — | A1, A2, A5 | 8 | 14 | 24 | 15 |
+| B2 | only if C3 makes cadences variable: re-open AI_ARCHITECTURE §10.5c (snapshot stamps were rejected there) — lead decision | Claude | C3 | 0.5 | 1 | 2 | 1 |
+| B3 | opt module families into layer order (sense → decide → act) with stable offsets, one increment each | — | B1, A6 | 8 | 14 | 26 | 15 |
+| B4 | order lanes, only if A6 shows drops or deep queues: emergency first, same-issuer/unit coalescing (F5) | — | A5, A6 | 3 | 5 | 9 | 5 |
+| B5 | MasterAi interface-only seams + partial-file split (F4) | — | A5 | 8 | 14 | 24 | 15 |
+| B6 | crossed-order ratchet: `round_trip_check.py` fails on a rise (F6) | — | — | 2 | 4 | 7 | 4 |
+| C1 | shared per-tick actor index served from the OBSERVE snapshot | — | B1, A6 | 8 | 14 | 26 | 15 |
+| C2 | cache fixed trait lookups (never conditional ones) | — | A6 | 4 | 8 | 14 | 8 |
+| C3 | interval tuning where no `FRESH_EDGES` seam depends on the scan and the cadence still bounds the lag | — | B1, A6 | 2 | 4 | 8 | 4 |
+| C4 | per-bot ms budget in `replay_health.py` | — | A6 | 1 | 2 | 4 | 2 |
+
 ---
 
 ## 4. Effort, schedule and the critical path
