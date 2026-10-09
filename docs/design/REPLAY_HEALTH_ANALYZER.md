@@ -238,7 +238,7 @@ Schema1 contract: all records carry GameUid/player/map_uid/faction/profile,
 profile_supported=true only after Ruleset profile resolution, schema integer1,
 seq contiguous from0, monotonic worldtick and dropped0. Kinds:
 
-- `pulse` every<=50ticks: complete building-queue census (queues_complete=true),
+- `pulse` begins at world tick zero, then every<=50ticks: complete building-queue census (queues_complete=true),
   player_active bool, cash/resources/capacity/spent cumulative nonnegative ints;
   each queue has unique queue_id, producer_live bool, state ready/idle/producing/
   paused, exact state_since_tick, reason. Ready additionally has item and unique
@@ -254,6 +254,10 @@ seq contiguous from0, monotonic worldtick and dropped0. Kinds:
 - `end`: complete=true, same envelope, after final pulse<=50ticks, commits the
   quiescent capture. Missing sequence/pulse/census/terminal or unsupported profile
   makes UNKNOWN even if earlier defect evidence exists.
+
+Renumbering a late-start trace cannot certify complete capture: absent tick-zero
+pulse is UNKNOWN. Malformed input also writes a structured UNKNOWN receipt when
+the requested output is a safe new path; unsafe/existing outputs remain untouched.
 
 Runtime logger/Architect queue observer must supply these fields before the
 driver can require this new gate. Actual accepted delivery remains an additional

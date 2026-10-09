@@ -1,6 +1,9 @@
 import importlib.util
 from pathlib import Path
 import sys
+import json
+import subprocess
+import tempfile
 import unittest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "ai"))
@@ -39,6 +42,26 @@ def cancellation_capture(active=True, live=True, classification="production"):
 
 
 class InvariantTests(unittest.TestCase):
+    def test_late_start_renumbered_capture_is_unknown(self):
+        rows = [r for r in capture(6500) if r["tick"] >= 5000]
+        for seq, row in enumerate(rows):
+            row["seq"] = seq
+        self.assertEqual(verifier.analyze(rows, "g", "p")["status"], "UNKNOWN")
+
+    def test_malformed_input_persists_unknown_to_safe_new_report(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            support = root / "support"
+            (support / "Logs").mkdir(parents=True)
+            (support / "Logs/cameo-ai-economy-health.jsonl").write_text("{invalid\n")
+            output = root / "unknown.json"
+            result = subprocess.run([sys.executable, verifier.__file__, str(support),
+                                     "--game-uid", "g", "--player", "p", "--output", str(output)],
+                                    capture_output=True, text=True)
+            self.assertEqual(result.returncode, 21)
+            self.assertEqual(json.loads(output.read_text())["status"], "UNKNOWN")
+            self.assertEqual(json.loads(result.stdout)["status"], "UNKNOWN")
+
     def test_ready_exact_250_boundary(self):
         self.assertNotIn("READY_BUILDING_UNPLACED", codes(capture(200, "ready")))
         self.assertIn("READY_BUILDING_UNPLACED", codes(capture(250, "ready")))

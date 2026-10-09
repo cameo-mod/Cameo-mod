@@ -98,6 +98,8 @@ def analyze(rows, game_uid, player):
                 continue
             if kind != "pulse":
                 raise EvidenceError("unknown health record kind")
+            if last_pulse is None and tick != 0:
+                raise EvidenceError("missing capture-start pulse at world tick zero")
             if last_pulse is not None and (tick <= last_pulse or tick - last_pulse > 50):
                 raise EvidenceError("pulse coverage gap/duplicate")
             last_pulse, pulses = tick, pulses + 1
@@ -186,10 +188,13 @@ def main():
         rows, receipt = read_jsonl(args.support / "Logs/cameo-ai-economy-health.jsonl")
         report = analyze(rows, args.game_uid, args.player)
         report["input"] = receipt
-        if args.output:
-            atomic_report(args.output, json.dumps(report, allow_nan=False, indent=2) + "\n", args.support)
     except (EvidenceError, OSError, ValueError, TypeError) as error:
         report = {"policy": POLICY, "status": "UNKNOWN", "error": str(error)}
+    if args.output:
+        try:
+            atomic_report(args.output, json.dumps(report, allow_nan=False, indent=2) + "\n", args.support)
+        except (EvidenceError, OSError, ValueError, TypeError) as error:
+            report = {"policy": POLICY, "status": "UNKNOWN", "error": str(error)}
     print(json.dumps(report, allow_nan=False, indent=2))
     return {"BLOCK": 20, "UNKNOWN": 21}.get(report["status"], 0)
 
