@@ -76,10 +76,11 @@ namespace OpenRA.Mods.Cameo.Traits
 					break;
 				}
 				var head = queue.CurrentItem();
-				var status = head == null ? "idle" : head.Done ? "ready" : head.Paused ? "paused" : "producing";
+				var status = AiEconomyHealthState.QueueState(queue.Enabled, head != null,
+					head?.Done ?? false, head?.Paused ?? false);
 				observations.Add(new EconomyQueueObservation(queue, head,
 					$"{pair.Actor.ActorID}:{queue.Info.Type}:{queue.Info.Group}", head?.Item ?? "", status,
-					!pair.Actor.IsDead && !pair.Actor.Disposed && queue.Enabled,
+					!pair.Actor.IsDead && !pair.Actor.Disposed,
 					queue.Enabled ? "observed" : "producer-disabled"));
 			}
 			state.Observe(tick, observations);

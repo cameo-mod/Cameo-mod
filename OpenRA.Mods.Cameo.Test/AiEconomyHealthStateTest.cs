@@ -117,5 +117,32 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(AiEconomyHealthState.AcceptedDelivery(0), Is.False);
 			Assert.That(AiEconomyHealthState.AcceptedDelivery(1), Is.True);
 		}
+
+		[TestCase(false, false, false, false, "paused")]
+		[TestCase(false, true, false, false, "paused")]
+		[TestCase(false, true, true, false, "ready")]
+		[TestCase(true, true, false, true, "paused")]
+		[TestCase(true, true, false, false, "producing")]
+		[TestCase(true, false, false, false, "idle")]
+		public void DisabledProductionIsDistinctFromDeadProducer(bool enabled, bool head,
+			bool done, bool paused, string expected)
+		{
+			Assert.That(AiEconomyHealthState.QueueState(enabled, head, done, paused), Is.EqualTo(expected));
+		}
+
+		[Test]
+		public void ReenabledEmptyQueueDoesNotInheritDisabledIdleAge()
+		{
+			var state = new AiEconomyHealthState();
+			var queue = new object();
+			for (var tick = 0; tick <= 1500; tick++)
+				state.Observe(tick, new[] { Queue(queue, null,
+					AiEconomyHealthState.QueueState(tick == 1500, false, false, false)) });
+			var snapshots = new List<EconomyQueueSnapshot>();
+			state.CopySnapshots(snapshots);
+			Assert.That(snapshots[0].ProducerLive, Is.True);
+			Assert.That(snapshots[0].State, Is.EqualTo("idle"));
+			Assert.That(snapshots[0].StateSinceTick, Is.EqualTo(1500));
+		}
 	}
 }

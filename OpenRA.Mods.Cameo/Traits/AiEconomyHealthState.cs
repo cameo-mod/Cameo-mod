@@ -45,6 +45,8 @@ namespace OpenRA.Mods.Cameo.Traits
 		internal void MarkIncomplete() => complete = false;
 		internal static bool PulseDue(int tick) => tick >= 0 && tick % 50 == 0;
 		internal static bool AcceptedDelivery(int creditedValue) => creditedValue > 0;
+		internal static string QueueState(bool enabled, bool hasHead, bool done, bool paused) =>
+			hasHead && done ? "ready" : !enabled || (hasHead && paused) ? "paused" : hasHead ? "producing" : "idle";
 
 		internal void Observe(int tick, IEnumerable<EconomyQueueObservation> observations)
 		{

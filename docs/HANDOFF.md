@@ -5420,3 +5420,8 @@ Isolated codex/replay-health-logger on f7e1d0fff. New opt-in recorder/world cont
 ### 2026-10-09 Sol logger consumer-fit checkpoint
 
 Canonical shared health/raw files, shared schema serializer, early-world-disposal cleanup; no YAML mount or gameplay changes. Focused 20/20 pass. Approved offline analyzer consumes actual C# test output: normal OBSERVED_HEALTHY, 250-tick ready BLOCK, incomplete end UNKNOWN. Still deliberately incomplete from activation pending accepted outcome seam; no adoption or launches.
+
+
+### 2026-10-09 Sol logger producer-state/cost preparation
+
+Producer liveness separated from queue enablement; disabled unfinished queues paused, Done remains ready; re-enabled idle starts a new interval. Focused27/27 PASS and explicit one-player128-queue/45001-tick core measurement PASS (19,021,579 output bytes). Runtime cost/adoption unproven; shared32MiB budget cannot hold two maximum-census players, so supported cohort forecast and measured cost gate remain required. No games or mount changes.
