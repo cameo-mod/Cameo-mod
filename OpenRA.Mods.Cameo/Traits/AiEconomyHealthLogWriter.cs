@@ -97,7 +97,7 @@ namespace OpenRA.Mods.Cameo.Traits
 	internal sealed class AiEconomyHealthLogWriter : IDisposable
 	{
 		internal const int MaximumLineBytes = 65536;
-		internal const long MaximumFileBytes = 32 * 1024 * 1024;
+		internal const long MaximumFileBytes = 128 * 1024 * 1024;
 		internal const int MaximumRecords = 200000;
 		static readonly Encoding Utf8 = new UTF8Encoding(false, true);
 		readonly Stream stream;
