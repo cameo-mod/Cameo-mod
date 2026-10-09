@@ -20452,3 +20452,26 @@ the existing helpers only — no blanket normalization, no yaml edits except one
   remain downstream gates; `BaseExpansionModules == null` at the cache-population
   site is a known latent inconsistency left untouched (never-null array keeps the
   latch self-releasing at first resume delay).
+
+## 2026-10-09 - Devin-Architect: queue observer seam for REPLAY-HEALTH-LOGGER (branch devin/queue-observer-seam, base c76283c0b)
+
+* **Contract (ACK-2, task 01a12023):** record-only queue transitions emitted synchronously at the
+  tick observed — Started / Ready / Placed / Cancelled / Held / Resumed — to
+  IBotBuildQueueObserver traits on the bot PlayerActor (resolved once, like the placement
+  observers). Schema-2 event-local fields on every record: tick, item id, queue group,
+  BuildingType category, producer ActorID, kind, reason, player_active, producer_live,
+  cancellation_class; unbound context emits 0/null = UNKNOWN, never pulse-inferred.
+* **Episode dedupe:** BotQueueEpisodeTracker — Held emits once per (producer, item, reason)
+  episode, Ready once per production episode; Started/Placed/Cancelled/Resumed end episodes.
+  All Cancelled emit sites are production-queue cancels (class=Production); the relocation
+  nudge cancels each queued item before the hold, and latch saturation/release emit
+  Held/Resumed with SaturationLatch.
+* **Coverage:** Ready-admission holds (demand/crawl/front-back) emit Held with their reason;
+  refinery defer emits Cancelled+NoRefinerySite; saturation emits Cancelled+Held; probe
+  release and no-nudge clear emit Resumed. Demand-path cancels in BaseBuilderBotModuleCA are
+  outside this seam (different file, same ownership boundary).
+* **Verification:** 5 new tracker/record tests; full suite 1279/1279; Release clean; boot gate
+  main menu, zero new exceptions. Observer dispatch costs one cached-array check when no
+  logger is registered; zero allocations and zero RNG on the emit path.
+* **Not done:** logger/pulse implementation is Sol's lane (separate files); integrator receipt
+  and runtime gates remain pending.

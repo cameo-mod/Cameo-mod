@@ -80,6 +80,12 @@ namespace OpenRA.Mods.CA.Traits
 		// production. Empty = nothing pauses, upstream-identical.
 		IBotRequestPauseBuildingProduction[] pauseBuilding;
 
+		// REPLAY-HEALTH-LOGGER (ACK-2, task 01a12023): record-only queue-transition dispatch —
+		// resolved once like the other observer seams; no observers costs one empty-array check.
+		// The episode tracker dedupes Held/Ready so only transitions emit, never steady state.
+		IBotBuildQueueObserver[] queueObservers;
+		readonly BotQueueEpisodeTracker queueEpisodes = new();
+
 		public BaseBuilderQueueManagerCA(BaseBuilderBotModuleCA baseBuilder, string category, Player p, PowerManager pm,
 			PlayerResources pr, IResourceLayer rl)
 		{
@@ -112,6 +118,50 @@ namespace OpenRA.Mods.CA.Traits
 			productionTypeLimit = botLimits.Info.ProductionTypeLimit;
 			buildingDelayModifier = botLimits.Info.BuildingDelayModifier;
 			buildingIntervalModifier = botLimits.Info.BuildingIntervalModifier;
+		}
+
+		// REPLAY-HEALTH-LOGGER (ACK-2): emit one record-only transition to every registered
+		// observer. Event-local state is resolved here, at the emit tick — a producer-less
+		// transition (latch resume) carries ProducerActorId 0 and ProducerLive null = UNKNOWN.
+		// A Started/Placed/Cancelled/Resumed clears the producer's hold/ready episode.
+		void EmitQueueTransition(ProductionQueue queue, Actor producer, string item, BuildingType category,
+			BotQueueTransitionKind kind, BotQueueTransitionReason reason,
+			BotQueueCancellationClass cancellationClass = BotQueueCancellationClass.None)
+		{
+			queueObservers ??= player.PlayerActor.TraitsImplementing<IBotBuildQueueObserver>().ToArray();
+			if (queueObservers.Length == 0)
+				return;
+
+			var producerId = producer?.ActorID ?? 0;
+			if (kind != BotQueueTransitionKind.Held && kind != BotQueueTransitionKind.Ready)
+				queueEpisodes.EpisodeEnded(producerId);
+
+			var transition = new BotQueueTransition(world.WorldTick, item,
+				queue?.Info.Group ?? Category, category, producerId, kind, reason,
+				player.WinState == WinState.Undefined,
+				producer == null ? (bool?)null : !producer.IsDead && !producer.Disposed,
+				cancellationClass);
+			foreach (var observer in queueObservers)
+				observer.OnQueueTransition(in transition);
+		}
+
+		void EmitQueueHeld(ProductionQueue queue, string item, BuildingType category, BotQueueTransitionReason reason)
+		{
+			if (queueEpisodes.HoldEntering(queue.Actor.ActorID, item, reason))
+				EmitQueueTransition(queue, queue.Actor, item, category, BotQueueTransitionKind.Held, reason);
+		}
+
+		BuildingType QueueCategoryOf(string item)
+		{
+			if (item == null || baseBuilder.Info == null)
+				return BuildingType.Building;
+			if (baseBuilder.Info.RefineryTypes.Contains(item))
+				return BuildingType.Refinery;
+			if (baseBuilder.Info.DefenseTypes.Contains(item))
+				return BuildingType.Defense;
+			if (baseBuilder.Info.FragileTypes.Contains(item))
+				return BuildingType.Fragile;
+			return BuildingType.Building;
 		}
 
 		// Scale targets (DESIGN 19.10): an enabled provider's production target replaces BotLimits.ProductionTypeLimit
@@ -164,18 +214,27 @@ namespace OpenRA.Mods.CA.Traits
 							foreach (var queue in stuckConyard.TraitsImplementing<ProductionQueue>())
 							{
 								foreach (var item in queue.AllQueued().ToArray())
+								{
+									EmitQueueTransition(queue, queue.Actor, item.Item, QueueCategoryOf(item.Item),
+										BotQueueTransitionKind.Cancelled, BotQueueTransitionReason.RelocationLatch,
+										BotQueueCancellationClass.Production);
 									bot.QueueOrder(Order.CancelProduction(queue.Actor, item.Item, 1));
+								}
 							}
 
 							foreach (var be in baseBuilder.BaseExpansionModules)
 								be.UpdateExpansionParams(bot, false, true, stuckConyard);
 
+							EmitQueueTransition(null, stuckConyard, lastFailedBuilding, QueueCategoryOf(lastFailedBuilding),
+								BotQueueTransitionKind.Held, BotQueueTransitionReason.RelocationLatch);
 							failCount = 0;
 							failRetryTicks = baseBuilder.Info.StructureProductionResumeDelay;
 							return;
 						}
 					}
 
+					EmitQueueTransition(null, null, lastFailedBuilding, QueueCategoryOf(lastFailedBuilding),
+						BotQueueTransitionKind.Resumed, BotQueueTransitionReason.SaturationLatch);
 					failCount = 0;
 					failRetryTicks = baseBuilder.Info.StructureProductionResumeDelay;
 				}
@@ -201,6 +260,8 @@ namespace OpenRA.Mods.CA.Traits
 						// FIX-RA-REFINERY diagnostics: observe the latch release — once per resume
 						// delay at most, never per tick.
 						AIUtils.BotDebug($"{player} placement latch released (buildings {latchedBuildings} -> {currentBuildings}, providers {latchedProviders} -> {baseProviders}) at tick {world.WorldTick}");
+						EmitQueueTransition(null, null, lastFailedBuilding, QueueCategoryOf(lastFailedBuilding),
+							BotQueueTransitionKind.Resumed, BotQueueTransitionReason.SaturationLatch);
 						failCount = 0;
 					}
 				}
@@ -353,9 +414,17 @@ namespace OpenRA.Mods.CA.Traits
 				baseBuilder.RecordProducerOrder(queue.Actor, item.Name);
 				itemQueuedThisTick = true;
 				SetBuildingInterval(item.Name);
+				EmitQueueTransition(queue, queue.Actor, item.Name, QueueCategoryOf(item.Name),
+					BotQueueTransitionKind.Started, BotQueueTransitionReason.None);
 			}
 			else if (currentBuilding != null && currentBuilding.Done)
 			{
+				// REPLAY-HEALTH-LOGGER: Ready once per production episode — the timestamp the
+				// verifier's unplaced-ready window measures from.
+				if (queueEpisodes.ReadySeen(queue.Actor.ActorID))
+					EmitQueueTransition(queue, queue.Actor, currentBuilding.Item, QueueCategoryOf(currentBuilding.Item),
+						BotQueueTransitionKind.Ready, BotQueueTransitionReason.None);
+
 				// ECON-A (§4 Ready-hold): a bound demand item sits at Queue[0] until its MCV deploys —
 				// returning false holds it without spending failure budget (the same mechanic the REF-1
 				// crawl hold and the BP-2 front/back hold use below). One held item per queue is the
@@ -364,7 +433,10 @@ namespace OpenRA.Mods.CA.Traits
 					? baseBuilder.DemandForQueuedItem(currentBuilding.Item, queue.Actor)
 					: null;
 				if (heldDemand != null && !heldDemand.Deployed)
+				{
+					EmitQueueHeld(queue, currentBuilding.Item, QueueCategoryOf(currentBuilding.Item), BotQueueTransitionReason.DemandHold);
 					return false;
+				}
 
 				// Production is complete
 				// Choose the placement logic
@@ -383,6 +455,9 @@ namespace OpenRA.Mods.CA.Traits
 					if (BaseBuilderQueueEvalCA.LimitReached(AIUtils.CountBuildingByCommonName(new HashSet<string> { currentBuilding.Item }, player), currentLimit))
 					{
 						AIUtils.BotDebug($"{player} has already has enough {currentBuilding.Item}; cancelling production");
+						EmitQueueTransition(queue, queue.Actor, currentBuilding.Item, QueueCategoryOf(currentBuilding.Item),
+							BotQueueTransitionKind.Cancelled, BotQueueTransitionReason.LimitReached,
+							BotQueueCancellationClass.Production);
 						bot.QueueOrder(Order.CancelProduction(queue.Actor, currentBuilding.Item, 1));
 					}
 				}
@@ -479,7 +554,10 @@ namespace OpenRA.Mods.CA.Traits
 					// keeps the produced building queued (and spends no failure budget) instead of wasting the
 					// link on an un-aimed fallback cell.
 					if (BaseBuilderQueueEvalCA.CrawlHold(type, law != null, law?.CrawlTargetEdge != null, baseBuilder.ExpansionTarget() != null))
+					{
+						EmitQueueHeld(queue, currentBuilding.Item, type, BotQueueTransitionReason.CrawlHold);
 						return false;
+					}
 
 					if (advisedDefense != null)
 						location = advisedDefense;
@@ -491,7 +569,10 @@ namespace OpenRA.Mods.CA.Traits
 						// (a radar on a front with no defence line waits; it never goes forward). Same
 						// semantics as the REF-1 crawl hold above: queued, no failure budget spent.
 						if (frontBackHold)
+						{
+							EmitQueueHeld(queue, currentBuilding.Item, type, BotQueueTransitionReason.FrontBackHold);
 							return false;
+						}
 					}
 				}
 
@@ -504,6 +585,9 @@ namespace OpenRA.Mods.CA.Traits
 					if (refineryDefers)
 					{
 						AIUtils.BotDebug($"{player} defers {currentBuilding.Item}: no legal refinery site this sweep");
+						EmitQueueTransition(queue, queue.Actor, currentBuilding.Item, QueueCategoryOf(currentBuilding.Item),
+							BotQueueTransitionKind.Cancelled, BotQueueTransitionReason.NoRefinerySite,
+							BotQueueCancellationClass.Production);
 						bot.QueueOrder(Order.CancelProduction(queue.Actor, currentBuilding.Item, 1));
 					}
 
@@ -511,7 +595,11 @@ namespace OpenRA.Mods.CA.Traits
 					else if (++failCount >= baseBuilder.Info.MaximumFailedPlacementAttempts)
 					{
 						AIUtils.BotDebug($"{player} has nowhere to place {currentBuilding.Item}");
+						EmitQueueTransition(queue, queue.Actor, currentBuilding.Item, QueueCategoryOf(currentBuilding.Item),
+							BotQueueTransitionKind.Cancelled, BotQueueTransitionReason.SaturationLatch,
+							BotQueueCancellationClass.Production);
 						bot.QueueOrder(Order.CancelProduction(queue.Actor, currentBuilding.Item, 1));
+						EmitQueueHeld(queue, currentBuilding.Item, QueueCategoryOf(currentBuilding.Item), BotQueueTransitionReason.SaturationLatch);
 						lastFailedBuilding = currentBuilding.Item;
 
 						// FIX-RA-REFINERY R1: the latch snapshot is taken at every saturation —
@@ -527,6 +615,8 @@ namespace OpenRA.Mods.CA.Traits
 				{
 					failCount = 0;
 					NotifyPlacement(currentBuilding.Item, location.Value, queue.Actor.ActorID, orderString, type, advisedDefense != null || demandAdvisedDefense, lastFrontBackPick);
+					EmitQueueTransition(queue, queue.Actor, currentBuilding.Item, type,
+						BotQueueTransitionKind.Placed, BotQueueTransitionReason.None);
 
 					bot.QueueOrder(new Order(orderString, player.PlayerActor, Target.FromCell(world, location.Value), false)
 					{

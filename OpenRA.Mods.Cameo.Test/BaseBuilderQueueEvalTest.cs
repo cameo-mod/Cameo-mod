@@ -915,5 +915,65 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(table.LiveAt(anchor, 10), Is.False);
 			Assert.That(table.TryReserve(anchor, new object(), 10, 50, _ => false), Is.True);
 		}
+
+		// REPLAY-HEALTH-LOGGER seam (ACK-2 / task 01a12023) — BotQueueEpisodeTracker dedupe.
+
+		[Test]
+		public void HeldEmitsOncePerEpisode()
+		{
+			var tracker = new BotQueueEpisodeTracker();
+			Assert.That(tracker.HoldEntering(7, "proc", BotQueueTransitionReason.DemandHold), Is.True, "first sighting emits");
+			Assert.That(tracker.HoldEntering(7, "proc", BotQueueTransitionReason.DemandHold), Is.False, "steady hold must not re-emit per tick");
+			Assert.That(tracker.HoldEntering(7, "proc", BotQueueTransitionReason.CrawlHold), Is.True, "a changed reason is a new episode");
+		}
+
+		[Test]
+		public void HeldEpisodeEndsOnTerminalTransition()
+		{
+			var tracker = new BotQueueEpisodeTracker();
+			tracker.HoldEntering(7, "proc", BotQueueTransitionReason.DemandHold);
+			tracker.EpisodeEnded(7);
+			Assert.That(tracker.HoldEntering(7, "proc", BotQueueTransitionReason.DemandHold), Is.True,
+				"the same hold after a Started/Placed/Cancelled/Resumed is a new episode");
+		}
+
+		[Test]
+		public void ReadyEmitsOncePerProductionEpisode()
+		{
+			var tracker = new BotQueueEpisodeTracker();
+			Assert.That(tracker.ReadySeen(9), Is.True, "first Done observation emits the ready timestamp");
+			Assert.That(tracker.ReadySeen(9), Is.False, "a held item stays Done — no re-emit");
+			tracker.EpisodeEnded(9);
+			Assert.That(tracker.ReadySeen(9), Is.True, "a re-queued item announces a fresh episode");
+		}
+
+		[Test]
+		public void EpisodesArePerProducer()
+		{
+			var tracker = new BotQueueEpisodeTracker();
+			tracker.HoldEntering(3, "proc", BotQueueTransitionReason.DemandHold);
+			Assert.That(tracker.HoldEntering(4, "proc", BotQueueTransitionReason.DemandHold), Is.True, "a different producer is its own episode");
+			Assert.That(tracker.ReadySeen(3), Is.True);
+			Assert.That(tracker.ReadySeen(4), Is.True, "ready dedupe never bleeds across producers");
+		}
+
+		[Test]
+		public void TransitionRecordCarriesSchema2Fields()
+		{
+			var t = new BotQueueTransition(1234, "proc", "Building", BuildingType.Refinery, 42,
+				BotQueueTransitionKind.Cancelled, BotQueueTransitionReason.NoRefinerySite,
+				true, null, BotQueueCancellationClass.Production);
+
+			Assert.That(t.Tick, Is.EqualTo(1234));
+			Assert.That(t.ItemId, Is.EqualTo("proc"));
+			Assert.That(t.Queue, Is.EqualTo("Building"));
+			Assert.That(t.Category, Is.EqualTo(BuildingType.Refinery));
+			Assert.That(t.ProducerActorId, Is.EqualTo(42u));
+			Assert.That(t.Kind, Is.EqualTo(BotQueueTransitionKind.Cancelled));
+			Assert.That(t.Reason, Is.EqualTo(BotQueueTransitionReason.NoRefinerySite));
+			Assert.That(t.PlayerActive, Is.True);
+			Assert.That(t.ProducerLive, Is.Null, "no producer bound -> UNKNOWN, not a guessed bool");
+			Assert.That(t.CancellationClass, Is.EqualTo(BotQueueCancellationClass.Production));
+		}
 	}
 }

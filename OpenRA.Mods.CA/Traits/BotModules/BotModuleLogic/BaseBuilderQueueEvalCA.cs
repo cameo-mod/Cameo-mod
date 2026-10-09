@@ -484,4 +484,81 @@ namespace OpenRA.Mods.CA.Traits
 			return replacementYard ? ExpansionTransformTransition.Deploy : ExpansionTransformTransition.Relocate;
 		}
 	}
+
+	// REPLAY-HEALTH-LOGGER (ACK-2, task 01a12023): record-only queue transitions for the
+	// bounded runtime logger. The manager emits synchronously at the tick a transition is
+	// observed; observers live on the bot's PlayerActor, are resolved once, and must not
+	// issue orders, mutate world state, or consume RNG. Schema-2 contract: Cancelled
+	// carries event-local player_active/producer_live/cancellation_class; a field that
+	// cannot be resolved at the emit site is null/None — never inferred from a pulse.
+
+	public enum BotQueueTransitionKind { Started, Ready, Placed, Cancelled, Held, Resumed }
+
+	public enum BotQueueTransitionReason { None, LimitReached, NoRefinerySite, SaturationLatch, RelocationLatch, DemandHold, CrawlHold, FrontBackHold }
+
+	public enum BotQueueCancellationClass { None, Production, Destruction, Elimination }
+
+	public readonly struct BotQueueTransition
+	{
+		public readonly int Tick;
+		public readonly string ItemId;
+		public readonly string Queue;
+		public readonly BuildingType Category;
+		public readonly uint ProducerActorId;
+		public readonly BotQueueTransitionKind Kind;
+		public readonly BotQueueTransitionReason Reason;
+		public readonly bool PlayerActive;
+		public readonly bool? ProducerLive;
+		public readonly BotQueueCancellationClass CancellationClass;
+
+		public BotQueueTransition(int tick, string itemId, string queue, BuildingType category, uint producerActorId,
+			BotQueueTransitionKind kind, BotQueueTransitionReason reason, bool playerActive, bool? producerLive,
+			BotQueueCancellationClass cancellationClass)
+		{
+			Tick = tick;
+			ItemId = itemId;
+			Queue = queue;
+			Category = category;
+			ProducerActorId = producerActorId;
+			Kind = kind;
+			Reason = reason;
+			PlayerActive = playerActive;
+			ProducerLive = producerLive;
+			CancellationClass = cancellationClass;
+		}
+	}
+
+	public interface IBotBuildQueueObserver
+	{
+		void OnQueueTransition(in BotQueueTransition transition);
+	}
+
+	/// <summary>
+	/// REPLAY-HEALTH-LOGGER: transition-episode dedupe for the manager's emits — a Held
+	/// repeats only when the held item or its reason changes within an episode, and Ready
+	/// fires once per production episode. Any Started/Placed/Cancelled/Resumed clears the
+	/// producer's episode so a re-queued same-name item announces fresh.
+	/// </summary>
+	public sealed class BotQueueEpisodeTracker
+	{
+		readonly Dictionary<uint, (string Item, BotQueueTransitionReason Reason)> holds = [];
+		readonly HashSet<uint> ready = [];
+
+		public bool HoldEntering(uint producerId, string item, BotQueueTransitionReason reason)
+		{
+			if (holds.TryGetValue(producerId, out var hold) && hold.Item == item && hold.Reason == reason)
+				return false;
+
+			holds[producerId] = (item, reason);
+			return true;
+		}
+
+		public bool ReadySeen(uint producerId) => ready.Add(producerId);
+
+		public void EpisodeEnded(uint producerId)
+		{
+			holds.Remove(producerId);
+			ready.Remove(producerId);
+		}
+	}
 }
