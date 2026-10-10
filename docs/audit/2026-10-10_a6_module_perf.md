@@ -78,7 +78,7 @@ recorded in `a6-league-c1fix/a6_raw.json`.)
 
 Re-run on the fac-stale-labels tree = master `10d3f44f7` (+ runtime-neutral
 faction fix, engine `6da7fce14` — the master pin, C1 capped path in force).
-**6/6 clean, 614 reports**, incl. the two cells that died on the A1 tip.
+**6/6 clean, 616 reports**, incl. the two cells that died on the A1 tip.
 Distribution CHANGED vs the pre-merge base — worth a line of its own:
 
 | Module | gate gdi | gate nod | imm gdi | nuke gdi |
@@ -91,7 +91,9 @@ Distribution CHANGED vs the pre-merge base — worth a line of its own:
 | EngineerBotModule | 11.7 / 14.1 (30-36w) | — | 21.8 (19w) | — |
 
 - `MasterAiBotModule` fell from ~32 to ~8 ms/300t — no longer dominant.
-- `ExpansionPlannerBotModule` is now the top consumer everywhere and is
+- `ExpansionPlannerBotModule` is now the top *sustained* consumer
+  (EngagementLogBotModule means exceed it in 5/6 cells but is bursty — see
+  above) and is
   sharply map-correlated (**115 ms/300t on Imminent** vs ~23–30 on the
   fixture) — likely interacts with merged MCV/expansion work since the old
   base (lease/prebuild changes) or engine `6da7fce14`. Observation, not a
@@ -108,7 +110,9 @@ Distribution CHANGED vs the pre-merge base — worth a line of its own:
   `CoverageProbesPerTick` is the natural throttle if tuning is ever asked.
 - **MasterAi 32→8 resolved (same-day window decomposition)**: the gap is
   concentrated in the early windows — per-cell first-third means ~87–92 ms
-  (max ~2900 ms, init) on the pre-merge base vs ~20–30 ms (max ~600 ms) on
+  (max ~2900 ms, init) on the c1-annulus-cap league (full-length cells,
+  n≥103; the A1 league's crashed cells window differently and are excluded)
+  vs ~20–30 ms (max ~600 ms) on
   master; mid/late windows are ~3–4 ms vs ~1–2 ms on BOTH trees. So
   MasterAi was never the dominant *sustained* cost — the pooled mean was
   init-dominated; master's merges and/or engine halved the startup spike.
