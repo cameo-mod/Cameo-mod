@@ -5516,12 +5516,12 @@ Next: exact-SHA VP review; cost/coverage/adoption remain gated. No launches. Ins
 - Next: C:/cameo-wt/sol-insurance-telemetry, codex/insurance-telemetry; docs/design/INSURANCE_TELEMETRY.md describes default-on observational stream and report contract.
 - Source complete for review: actual payout/cumulative plus covered engine income share; C#10/10/full1440/1440 and Python15/15. No game/boot/runtime acceptance.
 - M13 pure helpers remain unwired at99f89; continue after insurance review handoff. Master publication belongs to Integrator.
-### Sol — M13 restraint-budget checkpoint, 2026-10-10
+### Sol ï¿½ M13 restraint-budget checkpoint, 2026-10-10
 - Worktree C:/cameo-wt/sol-m13-liveness, branch codex/m13-liveness; contract docs/design/M13_RESTRAINT_BUDGET.md.
 - Budget tooling only; escort/liveness helpers still unwired. Existing runners requesting all now refuse at the applier.
 - Next: VP exact-tip review and conservative squad integration; causal claim/dispatch evidence must be explicit. No launches.
 
-### Sol — M13 helper R1 correction, 2026-10-10
+### Sol ï¿½ M13 helper R1 correction, 2026-10-10
 - C:/cameo-wt/sol-m13-liveness, codex/m13-liveness: Unsupported survives failed-intent callbacks; focused30/30.
 - Next: exact-tip helper re-review, then explicitly grounded claim/dispatch integration. Helpers remain unwired; no launches.
 
@@ -5529,4 +5529,3 @@ Next: exact-SHA VP review; cost/coverage/adoption remain gated. No launches. Ins
 - C:/cameo-wt/sol-m13-claim-episodes, codex/m13-claim-episodes; docs/design/M13_CLAIM_EPISODES.md.
 - Record-only Engineer admission + coalition transport; legacy publisher UNKNOWN. Separate authorized BotSituation plumbing next.
 - VP exact-tip review before runtime adoption; no launches, master remains Integrator-owned.
-

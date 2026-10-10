@@ -20440,13 +20440,13 @@ Next: exact-SHA VP review; cost/coverage/adoption remain gated. No launches. Ins
 - Isolated codex/insurance-telemetry from 5ea8c84f5; separate default-on version1 payout stream, actual credit delta and engine-Earned income share, name-free bot slots.
 - Dynamic and legacy grants unchanged; inherited CashTrickler sync hash regression passes. C#10/10, full1440/1440, Python15/15; no launches.
 - Next: exact-SHA VP review; runtime cost/capture/parity remain unmeasured. Engine6da unchanged; frozen economy/MCV schemas unchanged.
-### 2026-10-10 — M13 restraint-budget checkpoint (Sol)
+### 2026-10-10 ï¿½ M13 restraint-budget checkpoint (Sol)
 - Isolated codex/m13-liveness: classify 59 groups and refuse more than one newly armed restraint before YAML edits.
 - Exact externally reviewed manifests bind unchanged, already-armed baseline patches; combination tests remain explicitly non-campaign.
 - Preserve build-order generated specs with conservative restraint classes; no gameplay/default/engine changes.
 - Next: independent tooling review, then squad response/verified-dispatch wiring; no game launches.
 
-### 2026-10-10 — M13 helper R1 correction (Sol)
+### 2026-10-10 ï¿½ M13 helper R1 correction (Sol)
 - Failed dispatch now clears only the pending intent while preserving Unsupported; complete observation alone restores eligibility.
 - Two regressions cover pre-deadline and due-deadline callbacks, repeated callback, rejected retry and complete recovery without deadline renewal.
 - Focused pure-helper suite30/30 PASS; no runtime wiring, engine pin changes or launches.
@@ -20487,4 +20487,3 @@ and the exact merged tree failed the fog audit.
 - Isolated codex/m13-claim-episodes from10d3f44f7; four granted provider files only plus tests/docs.
 - Engineer admission counter and explicit coalition transport metadata; unsupported/history-missing claims UNKNOWN. No order/RNG/sync/default edits.
 - Focused58/58 PASS; full suite result recorded in frozen status receipt. BotSituation producer plumbing follows separately; no launches.
-
