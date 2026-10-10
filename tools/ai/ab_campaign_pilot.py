@@ -537,6 +537,39 @@ def analyze(m, manifest_sha, receipts, rows):
                  "synergy":"NOT_IDENTIFIABLE_FROM_PILOT (team-size strata lack matched individual counterfactuals)"})
  return {"schema":1,"switch":SWITCH,"games":result,"setups":setups,"unplanned_receipt_cells":extra,"unplanned_game_uids":extra_uids,"telemetry_intervals_ticks":list(ECONOMY_INTERVAL_TICKS),"note":"One game is one observation; seats are clustered. Natural win effect and paired bootstrap interval require complete side-swapped pairs. Synergy is not estimated because individual and team setups differ in map/roster context."}
 
+def validate_receipt_map_seats(job, map_yaml_path, resolved_seats):
+ """Cross-check claimed seats against the hash-pinned generated map.yaml bytes."""
+ import run_ai_match_batch as batch
+ text=map_yaml_path.read_text(encoding="utf-8")
+ marks=list(re.finditer(r"(?m)^\tPlayerReference@(Multi\d+):[ \t]*$",text))
+ blocks={}
+ for index,match in enumerate(marks):
+  end=marks[index+1].start() if index+1<len(marks) else len(text)
+  block=text[match.end():end];ref=match.group(1)
+  def value(key):
+   found=re.search(rf"(?m)^\t\t{key}: ([^\n]+)$",block)
+   return found.group(1) if found else None
+  blocks[ref]={key:value(key) for key in ("Bot","Faction","HomeLocation","Playable")}
+ source_path=pathlib.Path(job["map_path"])
+ if not source_path.is_absolute(): source_path=pathlib.Path(__file__).resolve().parents[2]/source_path
+ with zipfile.ZipFile(source_path) as archive:
+  source_yaml=archive.read("map.yaml").decode("utf-8")
+ spawn_cells=batch.mp_spawn_cells(source_yaml)
+ if job["team_size"]>=2:
+  if len(spawn_cells)<job["required_seats"]: raise ValueError("pinned map has too few mpspawn actors")
+  spawn_cells=batch.split_spawn_sides(spawn_cells,job["team_size"])+spawn_cells[2*job["team_size"]:]
+ expected={seat["home"]:seat for seat in job["seat_assignments"]}
+ require(len(resolved_seats)==len(expected),"receipt resolved seat count differs from plan")
+ for seat in resolved_seats:
+  home=seat["home"];planned=expected.get(home);actual=blocks.get(home)
+  require(planned is not None and actual is not None,"receipt seat home absent from planned or generated map.yaml")
+  require(seat["spawn"]==planned["spawn"] and seat["team"]==planned["side"] and
+          all(seat[key]==planned[key] for key in ("arm","bot_type","faction")),"receipt resolved seat differs from planned seat")
+  expected_location=spawn_cells[planned["spawn"]]
+  require(actual["Bot"]==planned["bot_type"] and actual["Faction"]==planned["faction"] and
+          actual["Playable"]=="False" and actual["HomeLocation"]==f"{expected_location[0]},{expected_location[1]}",
+          f"generated map.yaml seat proof mismatch: {home}")
+
 def normalize_campaign_receipts(manifest, manifest_sha, receipts, rows, artifact_root):
  """Convert the strict per-game receipt schema to analyzer input, proving every join.
 
@@ -606,6 +639,7 @@ def normalize_campaign_receipts(manifest, manifest_sha, receipts, rows, artifact
   by_cell[cell]=receipt
   map_path=load_artifact(receipt["artifacts"]["map_yaml"],f"{cell} map.yaml")
   require(hashlib.sha256(map_path.read_bytes()).hexdigest()==map_info["generated_map_yaml_sha256"],"map.yaml artifact differs from receipt map hash")
+  validate_receipt_map_seats(job,map_path,receipt["resolved_seats"])
   log_path=load_artifact(receipt["artifacts"]["server_log"],f"{cell} server.log",allow_missing=receipt["end_class"]=="INCOMPLETE")
   seed_line=receipt["seed_proof"]["server_log_pin_line"]
   if receipt["end_class"] in ("NATURAL","CAP"):
