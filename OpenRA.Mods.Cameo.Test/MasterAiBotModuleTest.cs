@@ -77,11 +77,11 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(doc.RootElement.GetProperty("enemies").GetArrayLength(), Is.Zero);
 			Assert.That(doc.RootElement.EnumerateObject().Select(p => p.Name), Is.EqualTo(new[]
 			{
-				"schema", "kind", "record_id", "game_uid", "map_uid", "player", "faction", "bot_type",
+				"schema", "kind", "record_id", "game_uid", "map_uid", "seat", "faction", "bot_type",
 				"tick", "urgency", "personality_current", "personality_candidate", "main_target",
 				"main_target_score", "mission", "mission_assignment", "hints", "demand", "own", "enemies"
 			}));
-			Assert.That(doc.RootElement.GetProperty("schema").GetInt32(), Is.EqualTo(2));
+			Assert.That(doc.RootElement.GetProperty("schema").GetInt32(), Is.EqualTo(3));
 			Assert.That(doc.RootElement.GetProperty("mission").ValueKind, Is.EqualTo(JsonValueKind.Null));
 			Assert.That(doc.RootElement.GetProperty("own").GetProperty("losses_by_role").EnumerateObject().Count(), Is.Zero);
 		}
@@ -134,7 +134,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(threat.GetProperty("eta").GetInt32(), Is.EqualTo(800));
 			Assert.That(threat.GetProperty("vx_per_kilotick").GetInt32(), Is.EqualTo(50));
 			var enemyJson = doc.RootElement.GetProperty("enemies")[0];
-			Assert.That(enemyJson.GetProperty("name").GetString(), Is.EqualTo("Multi1"));
+			Assert.That(enemyJson.GetProperty("seat").GetString(), Is.EqualTo("seat_2"));
 			Assert.That(enemyJson.GetProperty("faction").GetString(), Is.EqualTo("td_nod"));
 			Assert.That(enemyJson.GetProperty("army_value").GetInt32(), Is.EqualTo(8100));
 			Assert.That(enemyJson.GetProperty("buildings").GetInt32(), Is.EqualTo(9));
@@ -145,7 +145,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(doc.RootElement.GetProperty("mission").GetProperty("region_index").GetInt32(), Is.EqualTo(18));
 			Assert.That(enemyJson.EnumerateObject().Select(p => p.Name), Is.EqualTo(new[]
 			{
-				"name", "faction", "alive", "army_value", "infantry_value", "vehicle_value", "air_value",
+				"seat", "faction", "alive", "army_value", "infantry_value", "vehicle_value", "air_value",
 				"naval_value", "defence_count", "defence_value", "tech_buildings", "production_buildings",
 				"buildings", "expansion_clusters", "harvesters", "harvester_count", "known_regions",
 				"refineries", "pressure_value", "stealth_share", "nearest_cells", "last_seen_tick", "score",

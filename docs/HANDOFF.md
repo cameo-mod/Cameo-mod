@@ -1,3 +1,7 @@
+# LEARN-P0-FIX — 2026-10-06 Codex Sol checkpoint
+
+Next: `C:/cameo-wt/codex-learn-p0-fix` / `codex/learn-p0-fix` (base229a2563b), specification fleet `SPEC_2026-10-05_bot_meta_learning.md`; push and hand to Devin-Reviewer; coordinator order-stream identity gate remains pending. Build/tests/audits/isolated boot PASS. No merge. Queue: P6 fix → garrison implementation → trait U0. Details: `docs/design/AI_LOG_PRIVACY.md`, DEVELOPMENT_LOG newest entry.
+
 # Cameo — THE HANDOFF
 
 ## 2026-10-09 — Claude: AI architecture review + playtest regression — continue from here

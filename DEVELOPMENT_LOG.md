@@ -980,6 +980,11 @@ closing time/range factors at engagement distance (P4).
 
 # 2026-10-05 â€” Claude (lead): crash repair, INC 2026-10-05, ars-stutter held back
 
+## 2026-10-06 â€” Codex Sol: LEARN-P6 review fixes
+
+Three runtime findings fixed with an armed ground controller, independent safety and integer rules-derived predictor. Four regressions added; full NUnit 1190/1190 and increment Python 24/24 pass. Audits/isolated boot PASS. Independent review and coordinator same-seed order identity/churn remain pending. Details: `docs/design/SQUAD_DESIRE_EXECUTION.md`.
+
+
 *Claude.* `inc/2026_10_05` on `inc/2026_10_04g` @ 4cbc73cbf.
 
 - **Machine crash ~00:05 corrupted the shared repo.** Zero-filled: `refs/heads/inc/2026_10_05`,
@@ -20482,3 +20487,14 @@ and the exact merged tree failed the fog audit.
 - Verify: focused learnables-registry tests; requested map/audit checks, switch dry run (no dead targets), and `bash tools/audit/run_all.sh`. Switch-off order parity remains a separate Coordinator gate; no match launch or merge.
 - A3 run evidence: built engine version is `git-6da7fce14da541180c6baddd6925118fbef65b94`, matching `mod.config`'s raw pin. Fixed `audit_engine_freshness.py` to normalize the SDK's `git-` stamp before comparison and added a regression; the generated report now has no false built-engine mismatch. The shared cameo-engine clone is still at `d5d8b2a685`, so its separate upstream-drift note remains informational.
 - Validation: `ai_arch_audit.py --check` passes (0 errors, 21 existing warnings); targeted `BP_effective_unit_value --dry-run` shows exactly the intended `UseLearnedPriors: false -> true` change; learnables registry 4/4 and audit/engine-version tests 51/51 pass. `bash tools/audit/run_all.sh` completed and regenerated reports, exit 1 from existing blocking findings in `armor_upgrade_harm`, `derived_armor_columns`, `doc_claims`, `doc_health`, `duplicate_keys`, `release_drift`, and `weapon_shape`; no `.err` sidecars or zero-byte reports. In particular `doc_claims` measures `ledgers_drifted=1` against documented 0. These unrelated findings were not suppressed or repaired here.
+
+## 2026-10-10 — P0 privacy fix integrated on fresh learn parity branch
+
+- Integration branch `codex/inc-learn` starts at `origin/master` 700bb16483f6d92664153e98d6f2560c312acaab and merges reviewed P0 fix 874fda89888cafcaba5716e50f49e79b3d3c2298 (base 229a2563b). Merge worktree: `C:/cameo-wt/inc-learn`.
+- `DEVELOPMENT_LOG.md` conflict resolved by retaining the current master history; older P0 checkpoint details remain in `STATUS_2026-10-10_learn_p0_p6_frozen.md` and `REREVIEW_2026-10-10_learn_p0_p6_vp.md`.
+- This integration does not claim runtime parity, P6 acceptance, or merge to master. P0/P6 switch-off order identity and P6 armed order-rate/churn remain separate gates.
+
+## 2026-10-10 — P6 all-squad-types source restack in codex/inc-learn
+
+- Integrated P6 source commits `bec5ab9c3` plus reviewed deltas `27eb42521`, `0249f6fc0`, and VP-approved `0b19d6290` onto current master + P0. The unrelated base branch's BO commits were not cherry-picked; current master already carries the `BO_squad_move_dedup` configuration.
+- Runtime gates are still pending; this records a local candidate only and does not authorize merge/master publication.

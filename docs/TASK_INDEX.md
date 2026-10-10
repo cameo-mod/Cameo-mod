@@ -40,6 +40,7 @@ anchor validity is enforced separately by `audit_doc_health` (D3/D4).
 | task | READ FIRST | ALREADY BUILT — check before writing anything |
 |---|---|---|
 | **Replay health / automatic economy stop gate** | [`design/REPLAY_HEALTH_ANALYZER.md`](design/REPLAY_HEALTH_ANALYZER.md) | `tools/ai/replay_health.py` (startup symptom gate), `tools/ai/economy_invariants.py` (queue/cash invariants); existing `tools/ai/ab_summary.py`, `tools/ai/mission_story.py`, `tools/ai/order_trace.py` remain distinct |
+| **Squad desire review fixes (LEARN-P6)** | [`design/SQUAD_DESIRE_EXECUTION.md`](design/SQUAD_DESIRE_EXECUTION.md); `DESIGN.md` §19.3/§19.5/§19.8 | `OpenRA.Mods.Cameo.Test/SquadDesireRegressionTest.cs`; `tools/ai/order_trace.py`; `tools/ai/ab_increment.py`; `tools/audit/audit_fog_honesty.py` |
 | **Anything at all, first session** | [`README.md`](README.md) → [`LESSONS_LEARNED.md`](LESSONS_LEARNED.md) → [`AGENT_WORKSPACE.md`](AGENT_WORKSPACE.md) → [`HANDOFF.md`](HANDOFF.md) → [`DESIGN.md`](DESIGN.md) | — |
 | **Picking up work** | [`HANDOFF.md`](HANDOFF.md) §3.A, then [`design/ROADMAP.md`](design/ROADMAP.md) | — |
 | **Four-faction September balance continuation** | Current master first; [`balance/PLAYTEST_CLASSIC_FOUR_ACCEPTED_BATCH_20260915.md`](balance/PLAYTEST_CLASSIC_FOUR_ACCEPTED_BATCH_20260915.md) for the applied milestone; [`balance/GRAND_PLAN_20260911.md`](balance/GRAND_PLAN_20260911.md) and [`balance/PROJECT_STATUS_20260911.md`](balance/PROJECT_STATUS_20260911.md) as historical planning evidence | PR #401 applied 29 additional actors and repriced 11 carriers while retaining the newer Rocket Soldier result; the other 122 rows kept current values because no complete target existed. PR #402 made Yuri gatling range/firepower weapon-local. Do not use expired September 11 controls or old draft PRs as current authority. |
@@ -109,3 +110,9 @@ Put a new fact in exactly one of these. A fact in two places is a future contrad
 | the weapon/pricing board (W1–W26) | `design/BALANCE_PROGRAM_PLAN.md` |
 | what an agent did, and agent-to-agent messages | `DEVELOPMENT_LOG.md` |
 | provenance only, never authority | `docs/history/**` |
+
+## AI log privacy and phase-0 signature relabel
+
+| Task | READ FIRST | ALREADY BUILT |
+|---|---|---|
+| Anonymous all-seat AI logging, privacy grammar and offline signature relabel | [AI log privacy](design/AI_LOG_PRIVACY.md) | `tools/audit/audit_no_player_names.py`; `tools/ai/anonymize_legacy_logs.py`; `tools/ai/fit_opponent_signatures.py`; `tools/tests/test_learn_p0_privacy_regressions.py` |
