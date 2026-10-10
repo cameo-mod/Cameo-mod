@@ -310,6 +310,37 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void ApproachSpaceBandWhollyPastTheCapDropsNoPlayableBandCell()
+		{
+			// A8 behavioral regression: frontProj 52 puts the WHOLE band past the
+			// engine's tile-search cap — the band starts at 51 > MaximumTileSearchRange
+			// 50, so no FindTilesInAnnulus range could ever enumerate it. The existing
+			// 35 pin only crosses the cap (band starts at 34 < 50); the FrontProj 52
+			// bounds test checks the pair only. This exercises the deep off-cap path
+			// behaviourally: coverage parity with the exact band+cone predicate over
+			// every playable map cell.
+			var map = FlatTestMap(200, 4);
+			var front = EastFront(52, 10);
+			var bounds = BaseFrontBackPlannerBotModule.ApproachBandBounds(52, 14, Cone45);
+			Assert.That(bounds, Is.EqualTo((51.0, 95.0)));
+			Assert.That(bounds.Value.Inner, Is.GreaterThan(50));
+
+			var space = BaseFrontBackPlannerBotModule.ApproachSpace(map, Center, 52, 14, Cone45).ToList();
+			Assert.That(space, Is.Not.Empty);
+			Assert.That(space.TrueForAll(map.Contains), Is.True);
+
+			var reference = BaseFrontBackPlannerBotModule.ApproachCells(
+				PlayableCellsOf(map), Center, front, 14, Cone45);
+			var actual = BaseFrontBackPlannerBotModule.ApproachCells(space, Center, front, 14, Cone45);
+			Assert.That(reference, Is.Not.Empty);
+			Assert.That(actual, Is.EquivalentTo(reference));
+
+			// Genuinely post-cap cells are enumerated: projection > 50 east of the
+			// centre (X > 100) is a region the annulus helper can never reach.
+			Assert.That(actual.Any(c => c.X > 100), Is.True);
+		}
+
+		[Test]
 		public void ApproachCellsToleratesExtremeConfiguredDepth()
 		{
 			// int arithmetic wrapped frontProj + depthCells negative and emptied the band;
