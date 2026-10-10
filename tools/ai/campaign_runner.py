@@ -8,6 +8,7 @@ sampling/termination and immutable per-game receipt writes for that adapter.
 from __future__ import annotations
 
 import ctypes
+import copy
 import hashlib
 import json
 import os
@@ -123,6 +124,7 @@ class SupervisedResult:
 	pid_scoped_cleanup: bool
 	seed_pin_line: str | None
 	seed_server_log_sha256: str
+	cap_marker_tick: int | None
 
 
 def _stop_owned_process(process: subprocess.Popen[Any]) -> bool:
@@ -160,10 +162,12 @@ def run_supervised(
 	"""Run one game with a child-only watchdog. No retries are performed."""
 	if type(seed) is not int or seed < 0:
 		raise ValueError("seed must be a nonnegative integer")
-	if wall_timeout_seconds <= 0 or stall_timeout_seconds <= 0 or sample_interval_seconds <= 0:
-		raise ValueError("watchdog bounds must be positive")
-	if not 0 < private_stop_bytes < PRIVATE_HARD_BYTES:
-		raise ValueError("private stop must be strictly below the 8 GiB hard ceiling")
+	if not 0 < wall_timeout_seconds <= WALL_TIMEOUT_SECONDS or not 0 < stall_timeout_seconds <= STALL_TIMEOUT_SECONDS:
+		raise ValueError("wall/stall watchdog may not exceed the frozen policy bounds")
+	if not 0 < sample_interval_seconds <= 5:
+		raise ValueError("memory sample interval must be positive and at most five seconds")
+	if private_stop_bytes != PRIVATE_STOP_BYTES or free_ram_floor_bytes < MIN_FREE_BYTES:
+		raise ValueError("memory and free-RAM limits may only be tightened from the frozen policy")
 
 	executable = pathlib.Path(executable).resolve()
 	cwd = pathlib.Path(cwd).resolve()
@@ -187,6 +191,7 @@ def run_supervised(
 	seed_line: str | None = None
 	world_tick: int | None = None
 	actor_count: int | None = None
+	cap_marker_tick: int | None = None
 	log_offset = 0
 	log_carry = b""
 	status = "PROCESS_DIED"
@@ -194,7 +199,7 @@ def run_supervised(
 	process: subprocess.Popen[Any] | None = None
 
 	def read_log_markers(final: bool = False) -> None:
-		nonlocal log_offset, log_carry, seed_line, world_tick, actor_count
+		nonlocal log_offset, log_carry, seed_line, world_tick, actor_count, cap_marker_tick
 		if not server_log_path.is_file():
 			return
 		with server_log_path.open("rb") as stream:
@@ -215,6 +220,9 @@ def run_supervised(
 			match = re.search(r"AB_CAMPAIGN_ACTOR_SAMPLE tick=(\d+) actor_count=(\d+)", line)
 			if match:
 				world_tick, actor_count = int(match.group(1)), int(match.group(2))
+			cap_match = re.search(r"AB_CAMPAIGN_CAP tick=(\d+)", line)
+			if cap_match:
+				cap_marker_tick = int(cap_match.group(1))
 
 	try:
 		process = subprocess.Popen([str(executable), *arguments], cwd=cwd, env=env,
@@ -265,13 +273,70 @@ def run_supervised(
 			status = "SEED_UNVERIFIED"
 		log_digest = _sha256_file(server_log_path) if server_log_path.is_file() else ""
 		return SupervisedResult(process.pid, process.returncode, status, started, _utc_now(),
-			time.monotonic() - start_mono, peak, tuple(samples), cleaned, seed_line, log_digest)
+			time.monotonic() - start_mono, peak, tuple(samples), cleaned, seed_line, log_digest, cap_marker_tick)
 	finally:
 		if process is not None and process.poll() is None:
 			cleaned = _stop_owned_process(process)
 		output.flush()
 		os.fsync(output.fileno())
 		output.close()
+
+
+def apply_supervised_result(receipt: dict[str, Any], result: SupervisedResult, seed: int) -> dict[str, Any]:
+	"""Attach watchdog evidence without treating a zero exit as a game outcome."""
+	if type(seed) is not int or seed < 0:
+		raise ValueError("seed must be a nonnegative integer")
+	if not isinstance(result, SupervisedResult):
+		raise TypeError("result must be a SupervisedResult")
+	validate_receipt(receipt)
+	out = copy.deepcopy(receipt)
+	limit = out.get("memory", {}).get("limit_private_bytes", PRIVATE_STOP_BYTES)
+	out["seed_proof"] = {
+		"env_value": str(seed),
+		"server_log_pin_line": result.seed_pin_line,
+		"server_log_sha256": result.seed_server_log_sha256 or None,
+	}
+	out["memory"] = {
+		"process_id": result.pid,
+		"peak_private_bytes": result.peak_private_bytes,
+		"limit_private_bytes": limit,
+		"samples": [
+			{"utc": sample.utc, "world_tick": sample.world_tick, "private_bytes": sample.private_bytes, "actor_count": sample.actor_count}
+			for sample in result.samples
+		],
+	}
+	out["runtime"] = {
+		"started_utc": result.started_utc,
+		"finished_utc": result.finished_utc,
+		"exit_code": result.exit_code,
+		"wall_seconds": result.wall_seconds,
+		"stall_seconds": STALL_TIMEOUT_SECONDS,
+		"pid_scoped_cleanup": result.pid_scoped_cleanup,
+	}
+	out["world_tick"] = result.cap_marker_tick if result.cap_marker_tick is not None else next(
+		(sample.world_tick for sample in reversed(result.samples) if sample.world_tick is not None), None)
+	out["cap"] = {
+		"world_tick_cap": WORLD_TICK_CAP,
+		"marker_observed": result.cap_marker_tick is not None,
+		"marker_tick": result.cap_marker_tick,
+	}
+	out["winner_team"] = None
+	support = out.get("artifacts", {}).get("support_bundle", {})
+	complete_support = isinstance(support, dict) and isinstance(support.get("path"), str) and isinstance(support.get("sha256"), str)
+	if (result.status == "NATURAL_EXIT" and result.cap_marker_tick == WORLD_TICK_CAP
+			and result.seed_pin_line is not None and complete_support and result.peak_private_bytes < limit):
+		out["end_class"] = "CAP"
+		out["end_reason"] = "WORLD_TICK_CAP"
+	else:
+		out["end_class"] = "INCOMPLETE"
+		if result.cap_marker_tick == WORLD_TICK_CAP and not complete_support:
+			out["end_reason"] = "CAP_SUPPORT_MISSING"
+		elif result.status == "NATURAL_EXIT":
+			out["end_reason"] = "NATURAL_EXIT_UNADJUDICATED"
+		else:
+			out["end_reason"] = result.status
+	validate_receipt(out)
+	return out
 
 
 def validate_receipt(receipt: dict[str, Any]) -> None:
@@ -514,8 +579,6 @@ def validate_receipt(receipt: dict[str, Any]) -> None:
 	else:
 		if root["winner_team"] is not None or root["end_reason"] is None:
 			fail("INCOMPLETE receipt requires a concrete reason and null winner")
-		if cap["marker_observed"]:
-			fail("an observed cap marker requires end_class CAP")
 		if memory["peak_private_bytes"] >= memory["limit_private_bytes"] and "memory" not in root["end_reason"].lower():
 			fail("memory over-limit INCOMPLETE receipt must identify a memory kill")
 	

@@ -150,7 +150,7 @@ class PilotPlanTests(unittest.TestCase):
   from unittest.mock import patch
   with tempfile.TemporaryDirectory() as temp:
    root=pathlib.Path(temp);server=root/"server.log";progress=root/"progress.log"
-   script="import os,pathlib,sys; pathlib.Path(sys.argv[1]).write_text('CAMEO DEV SEED pinned - RandomSeed='+os.environ['CAMEO_DEV_SEED']+' (parity harness)\\n'); pathlib.Path(sys.argv[2]).write_text('tick')"
+   script="import os,pathlib,sys; pathlib.Path(sys.argv[1]).write_text('CAMEO DEV SEED pinned - RandomSeed='+os.environ['CAMEO_DEV_SEED']+' (parity harness)\\nAB_CAMPAIGN_ACTOR_SAMPLE tick=45000 actor_count=22\\nAB_CAMPAIGN_CAP tick=45000\\n'); pathlib.Path(sys.argv[2]).write_text('tick')"
    with patch.object(runner,"free_physical_bytes",return_value=16*1024**3), patch.object(runner,"process_private_bytes",return_value=0):
     result=runner.run_supervised(pathlib.Path(sys.executable),["-c",script,str(server),str(progress)],cwd=root,
      stdout_path=root/"stdout.log",seed=7,progress_log=progress,server_log_path=server,
@@ -158,6 +158,15 @@ class PilotPlanTests(unittest.TestCase):
    self.assertEqual("NATURAL_EXIT",result.status)
    self.assertEqual("CAMEO DEV SEED pinned - RandomSeed=7 (parity harness)",result.seed_pin_line)
    self.assertEqual(64,len(result.seed_server_log_sha256))
+   self.assertEqual(45000,result.cap_marker_tick)
+   receipt=campaign_receipt();receipt["seed"]=7;receipt["seed_proof"]["env_value"]="7"
+   incomplete=runner.apply_supervised_result(receipt,result,7)
+   self.assertEqual("INCOMPLETE",incomplete["end_class"])
+   self.assertEqual("CAP_SUPPORT_MISSING",incomplete["end_reason"])
+   receipt["artifacts"]["support_bundle"]={"path":"support.zip","sha256":"a"*64,"missing_reason":None}
+   capped=runner.apply_supervised_result(receipt,result,7)
+   self.assertEqual("CAP",capped["end_class"])
+   self.assertIsNone(capped["winner_team"])
 
  def test_campaign_runner_requires_proven_cap_and_no_winner(self):
   receipt=campaign_receipt();receipt.update({"end_class":"CAP","end_reason":"WORLD_TICK_CAP",
