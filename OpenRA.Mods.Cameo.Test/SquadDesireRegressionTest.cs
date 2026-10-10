@@ -11,6 +11,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
+using OpenRA.Mods.Common.Traits;
 using NUnit.Framework;
 using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.CA.Traits.BotModules.Squads;
@@ -57,6 +59,109 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(SquadDesireOrders.Supports(SquadCAType.Protection), Is.True);
 			Assert.That(SquadDesireOrders.Supports(SquadCAType.Rush), Is.True);
 			Assert.That(SquadDesireOrders.Supports(SquadCAType.Air), Is.False);
+		}
+
+		sealed class MemoryProvider : IBotSquadDesire
+		{
+			readonly SquadDesireMemory memory = new();
+			public SquadDesireStance Last;
+			public int Calls;
+			public SquadDesireStance StanceFor(SquadCA squad, in SquadDesireSignals signals)
+			{
+				Calls++;
+				return Last = memory.Evaluate(in signals, "rush", 100, 150, 100, 200);
+			}
+		}
+
+		sealed class Execution : ISquadDesireExecution<int>
+		{
+			public IReadOnlyList<int> Members { get; set; } = new[] { 1, 2 };
+			public readonly Dictionary<int, CPos> Cells = new() { [1] = new(8, 8), [2] = new(10, 8) };
+			public readonly List<(int Member, string Order, CPos Cell)> Emitted = new();
+			public SquadDesireSignals Signals = SquadDesireRegressionTest.Signals(4000, 0);
+			public CPos? Target = new(20, 20);
+			public CPos Home => new(2, 2);
+			public CPos? Reinforcement => new(12, 12);
+			public bool Idle = false;
+			public CPos Location(int member) => Cells[member];
+			public bool IsIdle(int member) => Idle;
+			public (SquadDesireStance Stance, bool Safe, CPos? Target) Evaluate(IBotSquadDesire provider) =>
+				(provider.StanceFor(null, in Signals), SquadDesireOrders.CanEngage(Signals.PredictedRatioMilli, 50, 150), Target);
+			public void QueueOrder(int member, string order, CPos cell) => Emitted.Add((member, order, cell));
+		}
+
+		[Test]
+		public void ProductionControllerReplacesInFlightAttackWithHomeOrdersDespiteRetainedDesire()
+		{
+			var controller = new SquadDesireController<int>();
+			var provider = new MemoryProvider();
+			var execution = new Execution();
+			controller.Tick(execution, provider);
+			Assert.That(execution.Emitted, Is.EqualTo(new[] {
+				(1, "AttackMove", new CPos(20, 20)), (2, "AttackMove", new CPos(20, 20)) }));
+			execution.Signals = Signals(500, 75);
+			controller.Tick(execution, provider);
+			Assert.That(provider.Last, Is.EqualTo(SquadDesireStance.Attack));
+			Assert.That(execution.Emitted.Skip(2), Is.EqualTo(new[] {
+				(1, "Move", execution.Home), (2, "Move", execution.Home) }));
+			controller.Tick(execution, provider);
+			Assert.That(provider.Calls, Is.EqualTo(3), "active movement still evaluates at manager cadence");
+			Assert.That(execution.Emitted.Count, Is.EqualTo(4), "identical in-flight retreat is suppressed");
+		}
+
+		[Test]
+		public void ProductionControllerDropsDepartedMemberMemoryAndSkipsAnEmptyRoster()
+		{
+			var controller = new SquadDesireController<int>();
+			var provider = new MemoryProvider();
+			var execution = new Execution();
+			controller.Tick(execution, provider);
+			execution.Members = new[] { 1 };
+			controller.Tick(execution, provider);
+			execution.Members = new[] { 1, 2 };
+			controller.Tick(execution, provider);
+			Assert.That(execution.Emitted.Last().Member, Is.EqualTo(2));
+			Assert.That(execution.Emitted.Count, Is.EqualTo(3));
+			execution.Members = Array.Empty<int>();
+			controller.Tick(execution, provider);
+			Assert.That(provider.Calls, Is.EqualTo(3));
+		}
+
+		sealed class RecordingState : IState
+		{
+			public int Ticks;
+			public void Activate(SquadCA squad) { }
+			public void Deactivate(SquadCA squad) { }
+			public void Tick(SquadCA squad) => Ticks++;
+		}
+
+		[Test]
+		public void ActualSquadUpdateKeepsEverySpecializedTypeOnItsLegacyFsmArmedOrOff()
+		{
+			var supported = new[] { SquadCAType.Rush, SquadCAType.Guerrilla, SquadCAType.Harass, SquadCAType.Protection };
+			foreach (var type in Enum.GetValues<SquadCAType>())
+				foreach (var armed in new[] { false, true })
+				{
+					if (armed && supported.Contains(type))
+						continue;
+					// Exercise real Update and its installed FSM without constructing a game.
+					// No world/provider is available: a mistaken armed dispatch fails this test.
+					var info = new SquadManagerBotModuleCAInfo();
+					typeof(SquadManagerBotModuleCAInfo).GetField(nameof(info.UseSquadDesire)).SetValue(info, armed);
+					var manager = (SquadManagerBotModuleCA)RuntimeHelpers.GetUninitializedObject(typeof(SquadManagerBotModuleCA));
+					typeof(ConditionalTrait<SquadManagerBotModuleCAInfo>).GetField("Info").SetValue(manager, info);
+					var squad = (SquadCA)RuntimeHelpers.GetUninitializedObject(typeof(SquadCA));
+					squad.Type = type;
+					squad.SquadManager = manager;
+					squad.Units = new() { default };
+					squad.FuzzyStateMachine = new StateMachineCA();
+					var legacy = new RecordingState();
+					squad.FuzzyStateMachine.ChangeState(squad, legacy, false);
+					squad.Update();
+					squad.Update();
+					Assert.That(legacy.Ticks, Is.EqualTo(2), $"{type}, armed={armed}");
+					Assert.That(squad.FuzzyStateMachine.CurrentState, Is.SameAs(legacy));
+				}
 		}
 
 		static readonly BitSet<TargetableType> Ground = new("Ground");

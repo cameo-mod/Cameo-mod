@@ -47,23 +47,42 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 		}
 	}
 
-	// Runs at the manager's regular squad cadence, including while attacking/defending.
-	// Specialized air/naval/artillery FSMs retain their existing role controllers.
-	sealed class SquadDesireController
+	// The live adapter supplies the same fog-filtered observations and manager guards.
+	// Tests replace world access, not the controller or its order-emission loop.
+	internal interface ISquadDesireExecution<T>
 	{
-		readonly Dictionary<Actor, (string Order, CPos Cell)> orders = new();
-		CPos? assemblyCell;
-		SquadDesireDestination? previousDestination;
+		IReadOnlyList<T> Members { get; }
+		CPos Location(T member);
+		bool IsIdle(T member);
+		CPos Home { get; }
+		CPos? Reinforcement { get; }
+		(SquadDesireStance Stance, bool Safe, CPos? Target) Evaluate(IBotSquadDesire provider);
+		void QueueOrder(T member, string order, CPos cell);
+	}
 
-		public void Tick(SquadCA squad, IBotSquadDesire provider)
+	internal sealed class LiveSquadDesireExecution : ISquadDesireExecution<Actor>
+	{
+		readonly SquadCA squad;
+		readonly Actor[] members;
+		public LiveSquadDesireExecution(SquadCA squad)
+		{
+			this.squad = squad;
+			members = squad.Units.Select(u => u.Actor).Where(a => !squad.SquadManager.unitCannotBeOrdered(a))
+				.OrderBy(a => a.ActorID).ToArray();
+		}
+
+		public IReadOnlyList<Actor> Members => members;
+		public CPos Location(Actor member) => member.Location;
+		public bool IsIdle(Actor member) => member.IsIdle;
+		public CPos Home => squad.SquadManager.DesireHome;
+		public CPos? Reinforcement => squad.SquadManager.FindAttachableAssault(squad)?.Units[0].Actor.Location;
+		public void QueueOrder(Actor member, string order, CPos cell) =>
+			squad.Bot.QueueOrder(new Order(order, member, Target.FromCell(squad.World, cell), false));
+
+		public (SquadDesireStance Stance, bool Safe, CPos? Target) Evaluate(IBotSquadDesire provider)
 		{
 			var manager = squad.SquadManager;
 			var world = squad.World;
-			var members = squad.Units.Select(u => u.Actor).Where(a => !manager.unitCannotBeOrdered(a))
-				.OrderBy(a => a.ActorID).ToArray();
-			if (members.Length == 0)
-				return;
-
 			var from = members[0].CenterPosition;
 			var enemies = manager.DesireObservedEnemies();
 			var target = enemies.OrderBy(a => (a.CenterPosition - from).HorizontalLengthSquared)
@@ -88,35 +107,46 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			var danger = manager.VisibleEnemiesNear(from, WDist.FromCells(manager.Info.DangerScanRadius))
 				.Where(a => a.CanBeViewedByPlayer(squad.Bot.Player)).ToList();
 			var safe = manager.DesireCanEngage(squad, commitEnemies) && manager.DesireCanEngage(squad, danger);
-			var plan = SquadDesireOrders.Plan(stance, safe, commitTarget != null);
+			return (stance, safe, commitTarget?.Location);
+		}
+	}
 
-			// Entering regroup latches a mean cell; moving members cannot drag their own
-			// rally point away every eval. Reinforce rallies at an existing assault wave;
-			// production requests remain the separate BR_squad_reinforce owner's job.
+	// Runs at the manager's regular cadence. Production and regressions share this controller.
+	internal sealed class SquadDesireController<T> where T : notnull
+	{
+		readonly Dictionary<T, (string Order, CPos Cell)> orders = new();
+		CPos? assemblyCell;
+		SquadDesireDestination? previousDestination;
+
+		public void Tick(ISquadDesireExecution<T> execution, IBotSquadDesire provider)
+		{
+			var members = execution.Members;
+			if (members.Count == 0)
+				return;
+			var evaluation = execution.Evaluate(provider);
+			var plan = SquadDesireOrders.Plan(evaluation.Stance, evaluation.Safe, evaluation.Target != null);
 			if (plan.Destination == SquadDesireDestination.Assembly && previousDestination != plan.Destination)
-				assemblyCell = new CPos((int)(members.Sum(a => (long)a.Location.X) / members.Length),
-					(int)(members.Sum(a => (long)a.Location.Y) / members.Length));
+				assemblyCell = new CPos((int)(members.Sum(a => (long)execution.Location(a).X) / members.Count),
+					(int)(members.Sum(a => (long)execution.Location(a).Y) / members.Count));
 			previousDestination = plan.Destination;
-			var reinforcement = manager.FindAttachableAssault(squad);
-			var home = manager.DesireHome;
+			// Preserve the existing reinforcement/home reads on every armed evaluation.
+			var reinforcement = execution.Reinforcement;
+			var home = execution.Home;
 			var cell = plan.Destination switch
 			{
-				SquadDesireDestination.Enemy => target.Location,
-				SquadDesireDestination.Raid => raid.Location,
-				SquadDesireDestination.Assembly => assemblyCell ?? members[0].Location,
-				SquadDesireDestination.Reinforcement => reinforcement?.Units[0].Actor.Location ?? home,
+				SquadDesireDestination.Enemy or SquadDesireDestination.Raid => evaluation.Target.Value,
+				SquadDesireDestination.Assembly => assemblyCell ?? execution.Location(members[0]),
+				SquadDesireDestination.Reinforcement => reinforcement ?? home,
 				_ => home
 			};
-			// Defensive AttackMove fights on the way home; emergency retreat is Move.
-			// Block repeats while travelling and stop issuing once the rally cell is reached.
 			foreach (var member in members)
 			{
 				var key = (plan.Order, cell);
 				if (orders.TryGetValue(member, out var previous) && previous == key
-					&& (!member.IsIdle || (member.Location - cell).LengthSquared <= 4))
+					&& (!execution.IsIdle(member) || (execution.Location(member) - cell).LengthSquared <= 4))
 					continue;
 				orders[member] = key;
-				squad.Bot.QueueOrder(new Order(plan.Order, member, Target.FromCell(world, cell), false));
+				execution.QueueOrder(member, plan.Order, cell);
 			}
 			foreach (var removed in orders.Keys.Where(a => !members.Contains(a)).ToArray())
 				orders.Remove(removed);
