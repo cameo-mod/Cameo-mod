@@ -1,12 +1,16 @@
 ## Resume
 
-Step 1 complete at `44a0910379fd6b6d090b89c775d01ec593336242`: receipt contract drafted; commit and send exact path to Luna DevOps. Step 2 next: resolve all eight amended-scope maps and verify package SHA plus playable `MultiN`/mpspawn counts on source pin `964cdb630b1514e1c1a0baed55cbdbc427d5fc11`. Do not launch. Open launch gates: A5 parity, approved executable manifest, current-source map/engine/spawn proof, production driver with 6.5 GiB watchdog, and all preflight negative controls.
+Step 1 schema published to Luna DevOps at `765a39b00f8c6213deae5ba5f92e575b7bf3dac7`; Step 2 map inventory complete. Step 3: update tooling to exact `origin/master@964cdb630b1514e1c1a0baed55cbdbc427d5fc11`, implement receipt-producing resume-safe runner with 6.5 GiB per-game monitor, actor samples, 45k cap, concurrency policy/slot lease, wall/stall bounds and PID-scoped cleanup; fixture/negative tests and no-launch dry run. No launches until dry run and exact-baseline A5 parity pass and required B3 landing. Engine acceptance/symmetric spawn proof and executable manifest remain gates.
 
 ## Progress
 
 ### Step 1 — receipt schema contract
 
-`AB_RECEIPT_SCHEMA_2026-10-11.md` defines immutable per-game receipt fields for campaign/source/engine/manifest pins; experiment/setup/map/pair/seed; seed proof; team-to-arm assignment; resolved seats/factions/spawns; natural/cap/incomplete classification and winner; per-seat economy/army/combat/timeline; peak private bytes and actor-count samples; runtime/PID cleanup; and artifact hashes. Caps and incomplete games have no winner. Missing receipts are preserved as incomplete. Next action: send the exact path to Luna DevOps.
+`AB_RECEIPT_SCHEMA_2026-10-11.md` defines immutable per-game receipt fields for campaign/source/engine/manifest pins; experiment/setup/map/pair/seed; seed proof; team-to-arm assignment; resolved seats/factions/spawns; natural/cap/incomplete classification and winner; per-seat economy/army/combat/timeline; peak private bytes and actor-count samples; runtime/PID cleanup; and artifact hashes. Caps and incomplete games have no winner. Missing receipts are preserved as incomplete. Exact path sent to Luna DevOps.
+
+### Step 2 — map inventory
+
+`MAP_PREFLIGHT_2026-10-11.md` records all eight amended-scope maps resolved at the exact baseline pin. All package SHAs match the previously pinned assets; parsed playable seat references and spawn actor counts match the required 2/4/6/8 seats. Counts do not prove spawn symmetry or engine acceptance; those remain gates.
 
 ### Baseline
 
