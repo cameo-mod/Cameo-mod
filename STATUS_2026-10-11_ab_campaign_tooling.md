@@ -45,6 +45,11 @@ The immutable receipt writer (`campaign_runner.validate_receipt`) and the pilot 
 - The analyzer still requires each receipt's `cell_id` and uses receipt `game_uid` to join `matches_jsonl` rows. The schema has enough planned identity to derive `cell_id` only if a stable `setup_id`/`pair_id`/`pair_member` mapping is documented and checked against a unique planned job. A UID could be recovered without adding a field only if `artifacts.matches_jsonl` is contractually a per-game file, its SHA is verified, and it contains exactly one UID; current schema prose does not guarantee per-game granularity or define artifact path resolution.
 - No schema/adapter edits, tests, launches, or integration were performed in this check. Pilot remains blocked. Contract/adapter resolution: either add `game_uid` for started games (nullable only for never-started `INCOMPLETE`) or guarantee and specify per-game match artifact semantics; in both cases define stable `cell_id` mapping and validate artifact SHA, UID uniqueness, and all job pins before analysis.
 
+### Producer implementation cross-check (latest fetched manager branch)
+
+- Reviewed `origin/codex/ab-campaign-tooling-manager@07c036d5b7c682c728959993f9a58dbb57317e8f`. Its `run_one` writes `artifacts.matches_jsonl` to the unique game directory `Support/Logs/cameo-ai-matches.jsonl`, so it is in fact a per-game artifact; the receipt builder sets `pair_id` to `setup:seed:pair` and `pair_member` to `game_in_pair`. Those producer conventions make a strict adapter possible without adding `game_uid`, provided the consumer resolves artifact paths inside an explicit support root, verifies SHA, and requires exactly one UID per started game's artifact.
+- The manager branch's `ab_campaign_pilot.analyze` still expects legacy `cell_id`/`game_uid` receipt fields and its CLI does not perform that artifact-backed normalization. So the gap is now narrower: the producer data is sufficient, but the adapter and human contract/path-root rules are still missing. No files from the manager branch were merged or copied.
+
 ## 2026-10-11 acting-lead readiness handoff
 
 - Read `STATUS_2026-10-10_acting_lead.md`: A5 run-a peaked at 6.55 GiB private bytes (above the 6.5 GiB stop), run-b reached 8.07 GiB and was PID-scoped stopped. There is no valid same-seed parity/order-stream receipt.
