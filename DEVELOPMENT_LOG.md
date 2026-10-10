@@ -1,3 +1,5 @@
+
+*Devin-Developer 2026-10-10 (rereview fix, devin/repair-b3-park-release @ 693c07793).* VP exact-tip review of 560a413 caught that owner-scoped AnchorTakenForOwner (ReferenceEquals only) made NULL-owner parks — offer-streak churn bounds, ParkTicks, the parameterless failure overload — invisible to every reservation probe. Restored global semantics for null-owner parks (park.Owner == null || ReferenceEquals) while keeping the lead-ruled owner scoping for failure cooldowns; fake provider mirrors it. New regression NullOwnerParkStaysGlobalAndBlocksForeignReservation. Verified: build 0 errors, focused 124/124, full 1515/1515, fog audit PASS (269 sites). No fresh boot gate — host has no execution slot (pytest ~9.7GB + seat_verify resident); branch boot-gated clean at dad8c6753.
 # 2026-10-10 — Devin: REPAIR-B3 follow-up — park frees the whole set; owner-scoped cooldown (branch `devin/repair-b3-park-release`)
 
 *Devin-Developer*, lead ruling 2026-10-10 (Opus, from Architect's question), base `10d3f44f7`,
@@ -20476,13 +20478,13 @@ Next: exact-SHA VP review; cost/coverage/adoption remain gated. No launches. Ins
 - Isolated codex/insurance-telemetry from 5ea8c84f5; separate default-on version1 payout stream, actual credit delta and engine-Earned income share, name-free bot slots.
 - Dynamic and legacy grants unchanged; inherited CashTrickler sync hash regression passes. C#10/10, full1440/1440, Python15/15; no launches.
 - Next: exact-SHA VP review; runtime cost/capture/parity remain unmeasured. Engine6da unchanged; frozen economy/MCV schemas unchanged.
-### 2026-10-10 � M13 restraint-budget checkpoint (Sol)
+### 2026-10-10 � M13 restraint-budget checkpoint (Sol)
 - Isolated codex/m13-liveness: classify 59 groups and refuse more than one newly armed restraint before YAML edits.
 - Exact externally reviewed manifests bind unchanged, already-armed baseline patches; combination tests remain explicitly non-campaign.
 - Preserve build-order generated specs with conservative restraint classes; no gameplay/default/engine changes.
 - Next: independent tooling review, then squad response/verified-dispatch wiring; no game launches.
 
-### 2026-10-10 � M13 helper R1 correction (Sol)
+### 2026-10-10 � M13 helper R1 correction (Sol)
 - Failed dispatch now clears only the pending intent while preserving Unsupported; complete observation alone restores eligibility.
 - Two regressions cover pre-deadline and due-deadline callbacks, repeated callback, rejected retry and complete recovery without deadline renewal.
 - Focused pure-helper suite30/30 PASS; no runtime wiring, engine pin changes or launches.
