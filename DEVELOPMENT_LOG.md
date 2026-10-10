@@ -20521,13 +20521,13 @@ and the exact merged tree failed the fog audit.
 - A3 run evidence: built engine version is `git-6da7fce14da541180c6baddd6925118fbef65b94`, matching `mod.config`'s raw pin. Fixed `audit_engine_freshness.py` to normalize the SDK's `git-` stamp before comparison and added a regression; the generated report now has no false built-engine mismatch. The shared cameo-engine clone is still at `d5d8b2a685`, so its separate upstream-drift note remains informational.
 - Validation: `ai_arch_audit.py --check` passes (0 errors, 21 existing warnings); targeted `BP_effective_unit_value --dry-run` shows exactly the intended `UseLearnedPriors: false -> true` change; learnables registry 4/4 and audit/engine-version tests 51/51 pass. `bash tools/audit/run_all.sh` completed and regenerated reports, exit 1 from existing blocking findings in `armor_upgrade_harm`, `derived_armor_columns`, `doc_claims`, `doc_health`, `duplicate_keys`, `release_drift`, and `weapon_shape`; no `.err` sidecars or zero-byte reports. In particular `doc_claims` measures `ledgers_drifted=1` against documented 0. These unrelated findings were not suppressed or repaired here.
 
-## 2026-10-10 � P0 privacy fix integrated on fresh learn parity branch
+## 2026-10-10 � P0 privacy fix integrated on fresh learn parity branch
 
 - Integration branch `codex/inc-learn` starts at `origin/master` 700bb16483f6d92664153e98d6f2560c312acaab and merges reviewed P0 fix 874fda89888cafcaba5716e50f49e79b3d3c2298 (base 229a2563b). Merge worktree: `C:/cameo-wt/inc-learn`.
 - `DEVELOPMENT_LOG.md` conflict resolved by retaining the current master history; older P0 checkpoint details remain in `STATUS_2026-10-10_learn_p0_p6_frozen.md` and `REREVIEW_2026-10-10_learn_p0_p6_vp.md`.
 - This integration does not claim runtime parity, P6 acceptance, or merge to master. P0/P6 switch-off order identity and P6 armed order-rate/churn remain separate gates.
 
-## 2026-10-10 � P6 all-squad-types source restack in codex/inc-learn
+## 2026-10-10 � P6 all-squad-types source restack in codex/inc-learn
 
 - Integrated P6 source commits `bec5ab9c3` plus reviewed deltas `27eb42521`, `0249f6fc0`, and VP-approved `0b19d6290` onto current master + P0. The unrelated base branch's BO commits were not cherry-picked; current master already carries the `BO_squad_move_dedup` configuration.
 - Runtime gates are still pending; this records a local candidate only and does not authorize merge/master publication.
@@ -20536,3 +20536,30 @@ Sol preserved the already-pushed null-owner global reservation correction (693c0
 
 ## 2026-10-10 B3 renewal correction
 The added c730b88 regression failed 1/125: same-owner live holds bypass the reservation table taken probe. The provider now validates the entire set against current park/pending/served state before table admission or renewal, without changing table ownership semantics or anchor-global offers. Matching provider fixture and production renewal-seam test pass: focused125/125, fullRelease1516/1516; two explicit max-census cases are not run. No engine pin change or launches.
+
+## 2026-10-10 Devin: FIX-CONCAVE-DEAD-MEMBER â€” prune destroyed placements in GroundUnitsConcaveStateCA (task 01a12627, branch devin/fix-concave-dead-member)
+
+Crash: `InvalidOperationException: Attempted to get trait from destroyed object` from
+`GroundUnitsConcaveStateCA.Tick -> ShouldCommit -> HpOf -> TraitOrDefault` on a `placed`
+entry whose actor was destroyed between `Plan()` and the commit checks (PT7 all-arm cell
+`all/duel_nod_2103`, base 700bb1648; fleet doc DEFECT_2026-10-10_concave_dead_member.md).
+
+Fix (OpenRA.Mods.CA/Traits/BotModules/Squads/States/GroundConcaveStateCA.cs, Tick):
+`placed.RemoveAll(p => owner.SquadManager.unitCannotBeOrdered(p.Actor))` inserted right
+before `ShouldCommit`. Same predicate the eligibility gate uses, so dead/disposed/
+out-of-world placements are dropped with identical semantics; survivors keep their slots
+(no replan churn under fire); a wiped plan degrades to the existing `0 >= 0`
+commit-now path the objective shape already relies on â€” empty `placed` is NOT treated
+as a replan trigger.
+
+Regression test (OpenRA.Mods.Cameo.Test/ConcaveDeadMemberRuntimeTest.cs): real-Actor
+runtime harness (SuperweaponPlugLimitLifecycleTest pattern, reflection for internal
+ctors). Three tests: trait lookup on a Disposed actor throws (the invariant the crash
+rests on); Tick prunes the dead placement and does not throw on the forming path;
+commit path excludes the dead member while survivors still receive staggered
+AttackMove orders.
+
+Validation: `dotnet test OpenRA.Mods.Cameo.Test -c Release` â€” 1516 passed, 0 failed
+(3/3 new tests green). Boot-gate PASS â€” main menu reached, no new exception-*.log.
+Verify pending: rerun of cell `all/duel_nod_2103` to cap with no exception log â€”
+coordinator-owned per PT7 runner authority.
