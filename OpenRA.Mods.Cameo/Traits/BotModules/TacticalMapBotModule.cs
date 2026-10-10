@@ -509,12 +509,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			highGroundBuilding.Clear();
 			highGroundSource.Clear();
 			highGroundCursor = -1;
-			highGroundRefreshTick = world.WorldTick + BotRng.For(player).Next(interval);
+			highGroundRefreshTick = world.WorldTick + BotRng.For(player, nameof(TacticalMapBotModule)).Next(interval);
 			highGroundLastBaseRef = null;
 			usefulChokepoints.Clear();
 			usefulBuilding.Clear();
 			usefulCursor = -1;
-			usefulNextRefreshTick = world.WorldTick + BotRng.For(player).Next(interval);
+			usefulNextRefreshTick = world.WorldTick + BotRng.For(player, nameof(TacticalMapBotModule)).Next(interval);
 			usefulLastBaseRef = null;
 			usefulLastEnemyCount = -1;
 			sealableCorridors.Clear();
@@ -523,7 +523,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			corridorCursor = -1;
 			corridorLastBaseRef = null;
 			corridorLastEnemyCount = -1;
-			corridorNextRefreshTick = world.WorldTick + BotRng.For(player).Next(interval);
+			corridorNextRefreshTick = world.WorldTick + BotRng.For(player, nameof(TacticalMapBotModule)).Next(interval);
 
 			// ZG-b belief caches: territory, doors and region owners were derived against the old cut's
 			// corridors and region ids (and the old fog-memory picture), so they are dropped and rebuilt
@@ -536,9 +536,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			horizon.Clear();
 			territoryLastBaseRef = null;
 			territoryLastEnemyCount = -1;
-			territoryNextRefreshTick = world.WorldTick + BotRng.For(player).Next(interval);
+			territoryNextRefreshTick = world.WorldTick + BotRng.For(player, nameof(TacticalMapBotModule)).Next(interval);
 			regionOwners = [];
-			regionOwnershipNextRefreshTick = world.WorldTick + BotRng.For(player).Next(interval);
+			regionOwnershipNextRefreshTick = world.WorldTick + BotRng.For(player, nameof(TacticalMapBotModule)).Next(interval);
 		}
 
 		// Adopt a shared topology built by another bot: reference the heavy data, copy the small lists.

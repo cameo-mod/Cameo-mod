@@ -139,7 +139,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		{
 			world = self.World;
 			player = self.Owner;
-			scanTicks = BotRng.For(player).Next(Info.ScanInterval);
+			scanTicks = BotRng.For(player, nameof(GarrisonContestBotModule)).Next(Info.ScanInterval);
 		}
 
 		protected override void TraitDisabled(Actor self)

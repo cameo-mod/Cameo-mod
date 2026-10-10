@@ -64,7 +64,7 @@ namespace OpenRA.Mods.CA.Traits
 		// An empty tolerance list in yaml would make ImmutableArray.Random throw.
 		int RandomTolerance(ImmutableArray<int> values)
 		{
-			return values.IsDefaultOrEmpty ? 0 : values.Random(BotRng.For(player));
+			return values.IsDefaultOrEmpty ? 0 : values.Random(BotRng.For(player, nameof(BaseBuilderQueueManagerCA)));
 		}
 		bool limitBuildRadius = false;
 
@@ -641,7 +641,7 @@ namespace OpenRA.Mods.CA.Traits
 
 			// Add a random factor so not every AI produces at the same tick early in the game.
 			// Minimum should not be negative as delays in HackyAI could be zero.
-			var randomFactor = BotRng.For(player).Next(0, baseBuilder.Info.StructureProductionRandomBonusDelay);
+			var randomFactor = BotRng.For(player, nameof(BaseBuilderQueueManagerCA)).Next(0, baseBuilder.Info.StructureProductionRandomBonusDelay);
 
 			WaitTicks = active ? baseBuilder.Info.StructureProductionActiveDelay + randomFactor
 				: baseBuilder.Info.StructureProductionInactiveDelay + randomFactor;
@@ -856,7 +856,7 @@ namespace OpenRA.Mods.CA.Traits
 									if (baseBuilder.Info.AntiAirTypes.Contains(actorInfo.Name))
 										placeDefenseTowardsEnemyChance = (int)Math.Ceiling(placeDefenseTowardsEnemyChance / 1.5);
 
-									defenseRoll = BotRng.For(player).Next(100) < placeDefenseTowardsEnemyChance;
+									defenseRoll = BotRng.For(player, nameof(BaseBuilderQueueManagerCA)).Next(100) < placeDefenseTowardsEnemyChance;
 								}
 							}
 							// REF-1 (B1 maintainer ruling): a crawl placement must extend the buildable area —
@@ -867,7 +867,7 @@ namespace OpenRA.Mods.CA.Traits
 							{
 								organicCrawlRoll = !limitBuildRadius && valueInfo != null && valueInfo.Cost < baseBuilder.Info.BaseCrawlCostThreshold
 									&& RefineryLawCrawlRoll.LegalLink(law != null, actorInfo)
-									&& BotRng.For(player).Next(100) < baseBuilder.Info.BaseCrawlChance;
+									&& BotRng.For(player, nameof(BaseBuilderQueueManagerCA)).Next(100) < baseBuilder.Info.BaseCrawlChance;
 							}
 						}
 
@@ -1069,7 +1069,7 @@ namespace OpenRA.Mods.CA.Traits
 			if (orderBy != null)
 				return available.MaxByOrDefault(orderBy);
 
-			return available.RandomOrDefault(BotRng.For(player));
+			return available.RandomOrDefault(BotRng.For(player, nameof(BaseBuilderQueueManagerCA)));
 		}
 
 		// BP-2 (§19.15): a rules-derived radar provider — same two-trait check the Cameo planner runs
@@ -1508,7 +1508,7 @@ namespace OpenRA.Mods.CA.Traits
 			}
 
 			// Build everything else
-			foreach (var frac in baseBuilder.Info.BuildingFractions.OrderBy(kv => kv.Key).Shuffle(BotRng.For(player)))
+			foreach (var frac in baseBuilder.Info.BuildingFractions.OrderBy(kv => kv.Key).Shuffle(BotRng.For(player, nameof(BaseBuilderQueueManagerCA))))
 			{
 				var name = frac.Key;
 
@@ -1757,7 +1757,7 @@ namespace OpenRA.Mods.CA.Traits
 				if (buildingVariantInfo?.Actors != null)
 				{
 					if (BaseBuilderQueueEvalCA.PicksRandomVariant(true, buildingVariantInfo.Facings != null))
-						actorVariant = BotRng.For(player).Next(buildingVariantInfo.Actors.Length + 1);
+						actorVariant = BotRng.For(player, nameof(BaseBuilderQueueManagerCA)).Next(buildingVariantInfo.Actors.Length + 1);
 					else
 					{
 						// The rotation Y point to upside vertically, so -Y = Y(rotation)
@@ -1768,10 +1768,10 @@ namespace OpenRA.Mods.CA.Traits
 			}
 			else
 			{
-				cells = cells.Shuffle(BotRng.For(player));
+				cells = cells.Shuffle(BotRng.For(player, nameof(BaseBuilderQueueManagerCA)));
 
 				if (buildingVariantInfo?.Actors != null)
-					actorVariant = BotRng.For(player).Next(buildingVariantInfo.Actors.Length + 1);
+					actorVariant = BotRng.For(player, nameof(BaseBuilderQueueManagerCA)).Next(buildingVariantInfo.Actors.Length + 1);
 			}
 
 			if (actorVariant != 0)
@@ -1914,7 +1914,7 @@ namespace OpenRA.Mods.CA.Traits
 			var variants = actorInfo.TraitInfoOrDefault<PlaceBuildingVariantsInfo>();
 			return BaseBuilderQueueEvalCA.PicksRandomVariant(variants?.Actors != null,
 				variants != null && variants.Facings != null)
-					? BotRng.For(player).Next(variants.Actors.Length + 1) : 0;
+					? BotRng.For(player, nameof(BaseBuilderQueueManagerCA)).Next(variants.Actors.Length + 1) : 0;
 		}
 
 		(CPos? Location, CPos? BaseCenter, int Variant) ChooseBuildLocation(string actorType, bool distanceToBaseIsImportant, Actor producer, BuildingType type, ExpansionDemand demand = null)
@@ -2108,7 +2108,7 @@ namespace OpenRA.Mods.CA.Traits
 						IEnumerable<CPos> resourcesShouldCheck = null;
 
 						if (closestRefinery == null)
-							resourcesShouldCheck = nearbyResources.Shuffle(BotRng.For(player)).Take(baseBuilder.Info.MaxResourceCellsToCheck);
+							resourcesShouldCheck = nearbyResources.Shuffle(BotRng.For(player, nameof(BaseBuilderQueueManagerCA))).Take(baseBuilder.Info.MaxResourceCellsToCheck);
 						else if (requestRef != null)
 						{
 							resourcesShouldCheck = nearbyResources.OrderBy(c => (c - baseBuilder.RequestedRefineries[requestRef].ResourceLoc).LengthSquared)
@@ -2183,7 +2183,7 @@ namespace OpenRA.Mods.CA.Traits
 					{
 						var nearbyResources = world.Map.FindTilesInAnnulus(baseCenter, baseBuilder.Info.MinBaseRadius, baseBuilder.Info.BaseCrawlRadius)
 							.Where(a => resourceLayer.GetResource(a).Type != null)
-							.Shuffle(BotRng.For(player)).Take(baseBuilder.Info.MaxResourceCellsToCheck);
+							.Shuffle(BotRng.For(player, nameof(BaseBuilderQueueManagerCA))).Take(baseBuilder.Info.MaxResourceCellsToCheck);
 
 						foreach (var r in nearbyResources)
 						{

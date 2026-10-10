@@ -262,7 +262,7 @@ namespace OpenRA.Mods.CA.Traits
 		{
 			var randomConstructionYard = ConstructionYardBuildings.Actors.Where(a => !a.IsDead)
 				.OrderBy(a => a.ActorID)
-				.RandomOrDefault(BotRng.For(player));
+				.RandomOrDefault(BotRng.For(player, nameof(BaseBuilderBotModuleCA)));
 
 			return randomConstructionYard?.Location ?? initialBaseCenter;
 		}
@@ -302,7 +302,7 @@ namespace OpenRA.Mods.CA.Traits
 				var matchingConstructionYard = ConstructionYardBuildings.Actors
 					.Where(a => !a.IsDead && a.Info.Name == conyardType)
 					.OrderBy(a => a.ActorID)
-					.RandomOrDefault(BotRng.For(player));
+					.RandomOrDefault(BotRng.For(player, nameof(BaseBuilderBotModuleCA)));
 
 				if (matchingConstructionYard != null)
 					return matchingConstructionYard.Location;
@@ -614,9 +614,9 @@ namespace OpenRA.Mods.CA.Traits
 			RefreshBotLimits();
 
 			// Avoid all AIs reevaluating assignments on the same tick, randomize their initial evaluation delay.
-			assignRallyPointsTicks = BotRng.For(player).Next(0, Info.AssignRallyPointsInterval);
-			checkBestResourceLocationTicks = BotRng.For(player).Next(0, Info.CheckBestResourceLocationInterval);
-			sellRefineryTick = Info.SellRefineryInterval < 0 ? 0 : BotRng.For(player).Next(0, Info.SellRefineryInterval);
+			assignRallyPointsTicks = BotRng.For(player, nameof(BaseBuilderBotModuleCA)).Next(0, Info.AssignRallyPointsInterval);
+			checkBestResourceLocationTicks = BotRng.For(player, nameof(BaseBuilderBotModuleCA)).Next(0, Info.CheckBestResourceLocationInterval);
+			sellRefineryTick = Info.SellRefineryInterval < 0 ? 0 : BotRng.For(player, nameof(BaseBuilderBotModuleCA)).Next(0, Info.SellRefineryInterval);
 		}
 
 		void IBotPositionsUpdated.UpdatedBaseCenter(CPos newLocation)
@@ -870,7 +870,7 @@ namespace OpenRA.Mods.CA.Traits
 			var inMainBase = (self.CenterPosition - self.World.Map.CenterOfCell(initialBaseCenter)).Length < WDist.FromCells(28).Length;
 			var chanceThreshold = inMainBase ? 95 : 70;
 
-			if (BotRng.For(player).Next(100) < chanceThreshold)
+			if (BotRng.For(player, nameof(BaseBuilderBotModuleCA)).Next(100) < chanceThreshold)
 				return false;
 
 			if (Info.ConstructionYardTypes.Contains(self.Info.Name) && AIUtils.CountActorByCommonName(ConstructionYardBuildings) <= 1)
@@ -937,7 +937,7 @@ namespace OpenRA.Mods.CA.Traits
 				return producer.Location;
 			}
 
-			return possibleRallyPoints.Random(BotRng.For(player));
+			return possibleRallyPoints.Random(BotRng.For(player, nameof(BaseBuilderBotModuleCA)));
 		}
 
 		Locomotor[] LocomotorsForProducibles(Actor producer)

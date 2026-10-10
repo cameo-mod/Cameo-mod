@@ -83,7 +83,7 @@ namespace OpenRA.Mods.CA.Traits
 		protected override void TraitEnabled(Actor self)
 		{
 			// Avoid all AIs reevaluating assignments on the same tick, randomize their initial evaluation delay.
-			minAssignRoleDelayTicks = BotRng.For(player).Next(0, Info.ScanTick);
+			minAssignRoleDelayTicks = BotRng.For(player, nameof(LoadGarrisonerBotModuleCA)).Next(0, Info.ScanTick);
 		}
 
 		protected override void TraitDisabled(Actor self)
@@ -149,7 +149,7 @@ namespace OpenRA.Mods.CA.Traits
 				if (tcs.Length == 0)
 					return;
 
-				var tc = tcs.Random(BotRng.For(player));
+				var tc = tcs.Random(BotRng.For(player, nameof(LoadGarrisonerBotModuleCA)));
 				var garrisonable = tc.Trait;
 				var transport = tc.Actor;
 				var spaceTaken = 0;

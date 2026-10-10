@@ -1303,7 +1303,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				return;
 			}
 
-			var mcvType = producible.Random(BotRng.For(player));
+			var mcvType = producible.Random(BotRng.For(player, nameof(ExpansionPlannerBotModule)));
 			if (unitBuilder.RequestedProductionCount(bot, mcvType) > 0)
 				return;
 

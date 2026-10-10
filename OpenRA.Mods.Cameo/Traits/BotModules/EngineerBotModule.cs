@@ -360,8 +360,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		protected override void TraitEnabled(Actor self)
 		{
 			// Avoid all AIs reevaluating on the same tick (both parents do this).
-			captureTicks = BotRng.For(player).Next(Info.MinimumCaptureDelay);
-			repairTicks = BotRng.For(player).Next(Info.AssignRoleDelay);
+			captureTicks = BotRng.For(player, nameof(EngineerBotModule)).Next(Info.MinimumCaptureDelay);
+			repairTicks = BotRng.For(player, nameof(EngineerBotModule)).Next(Info.AssignRoleDelay);
 		}
 
 		void IBotPositionsUpdated.UpdatedBaseCenter(CPos newLocation) { initialBaseCenter = newLocation; }
@@ -794,7 +794,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var next = 0;
 			var baseCenter = world.Map.CenterOfCell(initialBaseCenter);
 
-			if (CaptureRules.UsesPriorityPass(BotRng.For(player).Next(100), Info.PriorityCaptureChance))
+			if (CaptureRules.UsesPriorityPass(BotRng.For(player, nameof(EngineerBotModule)).Next(100), Info.PriorityCaptureChance))
 			{
 				var priorityTargets = world.Actors.Where(a =>
 					!a.IsDead && a.IsInWorld && Info.CapturableRelationships.HasRelationship(player.RelationshipWith(a.Owner))
@@ -829,7 +829,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (randPlayers.Count == 0)
 				return;
 
-			var randPlayer = randPlayers.Random(BotRng.For(player));
+			var randPlayer = randPlayers.Random(BotRng.For(player, nameof(EngineerBotModule)));
 			var remaining = capturers.Skip(next).ToList();
 
 			var options = world.Actors.Where(a => a.Owner == randPlayer && !a.IsDead && a.IsInWorld);
@@ -876,7 +876,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					// through to the foot path. The roll is drawn only when it can matter, so a chance of 0 leaves
 					// LocalRandom's sequence — and every later random choice — exactly as before.
 					if (CaptureRules.ShouldRollForTransport(Info.TransportChance, EscortEligible(target))
-						&& WantsTransport(true, BotRng.For(player).Next(100), Info.TransportChance)
+						&& WantsTransport(true, BotRng.For(player, nameof(EngineerBotModule)).Next(100), Info.TransportChance)
 						&& TransportProvider() is IBotCaptureTransportProvider provider)
 					{
 						var used = TryTransportRun(bot, leases, remaining.Skip(ci).Select(tp => tp.Actor).ToList(), target, targets, provider);

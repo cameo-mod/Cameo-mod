@@ -139,7 +139,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		{
 			world = self.World;
 			player = self.Owner;
-			scanTicks = BotRng.For(player).Next(ScanInterval);
+			scanTicks = BotRng.For(player, nameof(DeployBotModule)).Next(ScanInterval);
 		}
 
 		void IBotTick.BotTick(IBot bot)

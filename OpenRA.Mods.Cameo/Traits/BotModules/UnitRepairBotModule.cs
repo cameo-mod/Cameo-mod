@@ -69,7 +69,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			: base(info)
 		{
 			world = self.World;
-			repairScanTicks = BotRng.For(self.Owner).Next(RepairScanInterval);
+			repairScanTicks = BotRng.For(self.Owner, nameof(UnitRepairBotModule)).Next(RepairScanInterval);
 		}
 
 		void IBotNotifyIdleBaseUnits.UpdatedIdleBaseUnits(List<UnitWposWrapper> idleUnits)

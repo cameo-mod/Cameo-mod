@@ -325,7 +325,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			// One jitter draw per knob and nothing else, in a fixed order, from the host's random.
 			jitterDraws = new int[Knobs.Length];
 			for (var i = 0; i < Knobs.Length; i++)
-				jitterDraws[i] = BotRng.For(player).Next(0, 2001);
+				jitterDraws[i] = BotRng.For(player, nameof(BuildOrderKnobsBotModule)).Next(0, 2001);
 
 			if (Info.UseLearnedBuildOrder)
 				LoadLearned();
@@ -380,7 +380,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var faction = player.Faction?.InternalName ?? "";
 			var name = BuildOrderKnobsEval.ChooseOpening(weights,
 				o => Info.UseLearnedBuildOrder ? learned.Posterior(personality, faction, enemyFaction, o) : (1, 1),
-				() => BotRng.For(player).NextFloat());
+				() => BotRng.For(player, nameof(BuildOrderKnobsBotModule)).NextFloat());
 			if (name == null || !Info.Openings.TryGetValue(name, out var steps))
 				return;
 
