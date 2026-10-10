@@ -4236,17 +4236,17 @@
   "acceptance_thresholds": {
     "early_accept_share": 0.75,
     "early_reject_share": 0.25,
-    "win_noninferiority_delta": 0.0,
-    "min_earned_spent_improvement": 0.0,
     "min_army_efficiency_improvement": 0.0,
-    "min_kill_exchange_improvement": 0.0
+    "min_earned_spent_improvement": 0.0,
+    "min_kill_exchange_improvement": 0.0,
+    "win_noninferiority_delta": 0.0
   },
   "slot_policy": {
-    "max_parallel_small_games": 3,
-    "small_team_size_max": 2,
     "large_game_exclusive": true,
+    "max_parallel_small_games": 3,
+    "max_private_bytes": 8589934592,
     "min_free_ram_bytes": 6442450944,
-    "max_private_bytes": 8589934592
+    "small_team_size_max": 2
   },
   "ratchet_baseline_manifest_sha256": "27b638ecd7e33caa68003a020d0d4309822826405a7afe147983f92027a3e26a",
   "missing_campaign_gates": [
@@ -4283,7 +4283,14 @@
           "team_slot": 0,
           "home_location": "90,24"
         }
-      ]
+      ],
+      "runtime_monitor": {
+        "script_sha256": "c20c6c8418294f46072fc952789036639b4306c3a3c919e6de54049f9369e13f",
+        "rules_sha256": "32052f9061a53fab4886016ce64f247c325c4d71a04fc2f6e09828d1e60aa529",
+        "sample_interval_ticks": 5000,
+        "cap_tick": 45000,
+        "actor_count_marker": "AB_CAMPAIGN_ACTOR_SAMPLE"
+      }
     },
     {
       "setup": "1v1_nuclear_gdi",
@@ -4312,7 +4319,14 @@
           "team_slot": 0,
           "home_location": "11,45"
         }
-      ]
+      ],
+      "runtime_monitor": {
+        "script_sha256": "c20c6c8418294f46072fc952789036639b4306c3a3c919e6de54049f9369e13f",
+        "rules_sha256": "32052f9061a53fab4886016ce64f247c325c4d71a04fc2f6e09828d1e60aa529",
+        "sample_interval_ticks": 5000,
+        "cap_tick": 45000,
+        "actor_count_marker": "AB_CAMPAIGN_ACTOR_SAMPLE"
+      }
     },
     {
       "setup": "1v1_nuclear_nod",
@@ -4341,7 +4355,14 @@
           "team_slot": 0,
           "home_location": "90,24"
         }
-      ]
+      ],
+      "runtime_monitor": {
+        "script_sha256": "c20c6c8418294f46072fc952789036639b4306c3a3c919e6de54049f9369e13f",
+        "rules_sha256": "32052f9061a53fab4886016ce64f247c325c4d71a04fc2f6e09828d1e60aa529",
+        "sample_interval_ticks": 5000,
+        "cap_tick": 45000,
+        "actor_count_marker": "AB_CAMPAIGN_ACTOR_SAMPLE"
+      }
     },
     {
       "setup": "1v1_nuclear_nod",
@@ -4370,7 +4391,14 @@
           "team_slot": 0,
           "home_location": "11,45"
         }
-      ]
+      ],
+      "runtime_monitor": {
+        "script_sha256": "c20c6c8418294f46072fc952789036639b4306c3a3c919e6de54049f9369e13f",
+        "rules_sha256": "32052f9061a53fab4886016ce64f247c325c4d71a04fc2f6e09828d1e60aa529",
+        "sample_interval_ticks": 5000,
+        "cap_tick": 45000,
+        "actor_count_marker": "AB_CAMPAIGN_ACTOR_SAMPLE"
+      }
     },
     {
       "setup": "1v1_satans_allies",
@@ -4399,7 +4427,14 @@
           "team_slot": 0,
           "home_location": "50,79"
         }
-      ]
+      ],
+      "runtime_monitor": {
+        "script_sha256": "c20c6c8418294f46072fc952789036639b4306c3a3c919e6de54049f9369e13f",
+        "rules_sha256": "32052f9061a53fab4886016ce64f247c325c4d71a04fc2f6e09828d1e60aa529",
+        "sample_interval_ticks": 5000,
+        "cap_tick": 45000,
+        "actor_count_marker": "AB_CAMPAIGN_ACTOR_SAMPLE"
+      }
     },
     {
       "setup": "1v1_satans_allies",
@@ -4428,7 +4463,14 @@
           "team_slot": 0,
           "home_location": "49,20"
         }
-      ]
+      ],
+      "runtime_monitor": {
+        "script_sha256": "c20c6c8418294f46072fc952789036639b4306c3a3c919e6de54049f9369e13f",
+        "rules_sha256": "32052f9061a53fab4886016ce64f247c325c4d71a04fc2f6e09828d1e60aa529",
+        "sample_interval_ticks": 5000,
+        "cap_tick": 45000,
+        "actor_count_marker": "AB_CAMPAIGN_ACTOR_SAMPLE"
+      }
     },
     {
       "setup": "1v1_satans_soviets",
@@ -4457,7 +4499,14 @@
           "team_slot": 0,
           "home_location": "50,79"
         }
-      ]
+      ],
+      "runtime_monitor": {
+        "script_sha256": "c20c6c8418294f46072fc952789036639b4306c3a3c919e6de54049f9369e13f",
+        "rules_sha256": "32052f9061a53fab4886016ce64f247c325c4d71a04fc2f6e09828d1e60aa529",
+        "sample_interval_ticks": 5000,
+        "cap_tick": 45000,
+        "actor_count_marker": "AB_CAMPAIGN_ACTOR_SAMPLE"
+      }
     },
     {
       "setup": "1v1_satans_soviets",
@@ -4486,7 +4535,14 @@
           "team_slot": 0,
           "home_location": "49,20"
         }
-      ]
+      ],
+      "runtime_monitor": {
+        "script_sha256": "c20c6c8418294f46072fc952789036639b4306c3a3c919e6de54049f9369e13f",
+        "rules_sha256": "32052f9061a53fab4886016ce64f247c325c4d71a04fc2f6e09828d1e60aa529",
+        "sample_interval_ticks": 5000,
+        "cap_tick": 45000,
+        "actor_count_marker": "AB_CAMPAIGN_ACTOR_SAMPLE"
+      }
     },
     {
       "setup": "2v2_red_gdi_nod",
@@ -4535,7 +4591,14 @@
           "team_slot": 1,
           "home_location": "62,97"
         }
-      ]
+      ],
+      "runtime_monitor": {
+        "script_sha256": "7d370d3de6797b91c8be9f82d2e3489c3912998a1a8879f5209401045430a284",
+        "rules_sha256": "32052f9061a53fab4886016ce64f247c325c4d71a04fc2f6e09828d1e60aa529",
+        "sample_interval_ticks": 5000,
+        "cap_tick": 45000,
+        "actor_count_marker": "AB_CAMPAIGN_ACTOR_SAMPLE"
+      }
     },
     {
       "setup": "2v2_red_gdi_nod",
@@ -4584,7 +4647,14 @@
           "team_slot": 1,
           "home_location": "104,44"
         }
-      ]
+      ],
+      "runtime_monitor": {
+        "script_sha256": "7d370d3de6797b91c8be9f82d2e3489c3912998a1a8879f5209401045430a284",
+        "rules_sha256": "32052f9061a53fab4886016ce64f247c325c4d71a04fc2f6e09828d1e60aa529",
+        "sample_interval_ticks": 5000,
+        "cap_tick": 45000,
+        "actor_count_marker": "AB_CAMPAIGN_ACTOR_SAMPLE"
+      }
     },
     {
       "setup": "2v2_red_gdi_allies",
@@ -4633,7 +4703,14 @@
           "team_slot": 1,
           "home_location": "62,97"
         }
-      ]
+      ],
+      "runtime_monitor": {
+        "script_sha256": "7d370d3de6797b91c8be9f82d2e3489c3912998a1a8879f5209401045430a284",
+        "rules_sha256": "32052f9061a53fab4886016ce64f247c325c4d71a04fc2f6e09828d1e60aa529",
+        "sample_interval_ticks": 5000,
+        "cap_tick": 45000,
+        "actor_count_marker": "AB_CAMPAIGN_ACTOR_SAMPLE"
+      }
     },
     {
       "setup": "2v2_red_gdi_allies",
@@ -4682,7 +4759,14 @@
           "team_slot": 1,
           "home_location": "104,44"
         }
-      ]
+      ],
+      "runtime_monitor": {
+        "script_sha256": "7d370d3de6797b91c8be9f82d2e3489c3912998a1a8879f5209401045430a284",
+        "rules_sha256": "32052f9061a53fab4886016ce64f247c325c4d71a04fc2f6e09828d1e60aa529",
+        "sample_interval_ticks": 5000,
+        "cap_tick": 45000,
+        "actor_count_marker": "AB_CAMPAIGN_ACTOR_SAMPLE"
+      }
     },
     {
       "setup": "2v2_red_gdi_soviets",
@@ -4731,7 +4815,14 @@
           "team_slot": 1,
           "home_location": "62,97"
         }
-      ]
+      ],
+      "runtime_monitor": {
+        "script_sha256": "7d370d3de6797b91c8be9f82d2e3489c3912998a1a8879f5209401045430a284",
+        "rules_sha256": "32052f9061a53fab4886016ce64f247c325c4d71a04fc2f6e09828d1e60aa529",
+        "sample_interval_ticks": 5000,
+        "cap_tick": 45000,
+        "actor_count_marker": "AB_CAMPAIGN_ACTOR_SAMPLE"
+      }
     },
     {
       "setup": "2v2_red_gdi_soviets",
@@ -4780,7 +4871,14 @@
           "team_slot": 1,
           "home_location": "104,44"
         }
-      ]
+      ],
+      "runtime_monitor": {
+        "script_sha256": "7d370d3de6797b91c8be9f82d2e3489c3912998a1a8879f5209401045430a284",
+        "rules_sha256": "32052f9061a53fab4886016ce64f247c325c4d71a04fc2f6e09828d1e60aa529",
+        "sample_interval_ticks": 5000,
+        "cap_tick": 45000,
+        "actor_count_marker": "AB_CAMPAIGN_ACTOR_SAMPLE"
+      }
     },
     {
       "setup": "2v2_terra_nod_allies",
@@ -4829,7 +4927,14 @@
           "team_slot": 1,
           "home_location": "102,50"
         }
-      ]
+      ],
+      "runtime_monitor": {
+        "script_sha256": "7d370d3de6797b91c8be9f82d2e3489c3912998a1a8879f5209401045430a284",
+        "rules_sha256": "32052f9061a53fab4886016ce64f247c325c4d71a04fc2f6e09828d1e60aa529",
+        "sample_interval_ticks": 5000,
+        "cap_tick": 45000,
+        "actor_count_marker": "AB_CAMPAIGN_ACTOR_SAMPLE"
+      }
     },
     {
       "setup": "2v2_terra_nod_allies",
@@ -4878,7 +4983,14 @@
           "team_slot": 1,
           "home_location": "45,95"
         }
-      ]
+      ],
+      "runtime_monitor": {
+        "script_sha256": "7d370d3de6797b91c8be9f82d2e3489c3912998a1a8879f5209401045430a284",
+        "rules_sha256": "32052f9061a53fab4886016ce64f247c325c4d71a04fc2f6e09828d1e60aa529",
+        "sample_interval_ticks": 5000,
+        "cap_tick": 45000,
+        "actor_count_marker": "AB_CAMPAIGN_ACTOR_SAMPLE"
+      }
     },
     {
       "setup": "2v2_terra_nod_soviets",
@@ -4927,7 +5039,14 @@
           "team_slot": 1,
           "home_location": "102,50"
         }
-      ]
+      ],
+      "runtime_monitor": {
+        "script_sha256": "7d370d3de6797b91c8be9f82d2e3489c3912998a1a8879f5209401045430a284",
+        "rules_sha256": "32052f9061a53fab4886016ce64f247c325c4d71a04fc2f6e09828d1e60aa529",
+        "sample_interval_ticks": 5000,
+        "cap_tick": 45000,
+        "actor_count_marker": "AB_CAMPAIGN_ACTOR_SAMPLE"
+      }
     },
     {
       "setup": "2v2_terra_nod_soviets",
@@ -4976,7 +5095,14 @@
           "team_slot": 1,
           "home_location": "45,95"
         }
-      ]
+      ],
+      "runtime_monitor": {
+        "script_sha256": "7d370d3de6797b91c8be9f82d2e3489c3912998a1a8879f5209401045430a284",
+        "rules_sha256": "32052f9061a53fab4886016ce64f247c325c4d71a04fc2f6e09828d1e60aa529",
+        "sample_interval_ticks": 5000,
+        "cap_tick": 45000,
+        "actor_count_marker": "AB_CAMPAIGN_ACTOR_SAMPLE"
+      }
     },
     {
       "setup": "2v2_terra_allies_soviets",
@@ -5025,7 +5151,14 @@
           "team_slot": 1,
           "home_location": "102,50"
         }
-      ]
+      ],
+      "runtime_monitor": {
+        "script_sha256": "7d370d3de6797b91c8be9f82d2e3489c3912998a1a8879f5209401045430a284",
+        "rules_sha256": "32052f9061a53fab4886016ce64f247c325c4d71a04fc2f6e09828d1e60aa529",
+        "sample_interval_ticks": 5000,
+        "cap_tick": 45000,
+        "actor_count_marker": "AB_CAMPAIGN_ACTOR_SAMPLE"
+      }
     },
     {
       "setup": "2v2_terra_allies_soviets",
@@ -5074,7 +5207,14 @@
           "team_slot": 1,
           "home_location": "45,95"
         }
-      ]
+      ],
+      "runtime_monitor": {
+        "script_sha256": "7d370d3de6797b91c8be9f82d2e3489c3912998a1a8879f5209401045430a284",
+        "rules_sha256": "32052f9061a53fab4886016ce64f247c325c4d71a04fc2f6e09828d1e60aa529",
+        "sample_interval_ticks": 5000,
+        "cap_tick": 45000,
+        "actor_count_marker": "AB_CAMPAIGN_ACTOR_SAMPLE"
+      }
     },
     {
       "setup": "3v3_basics_gna",
@@ -5143,7 +5283,14 @@
           "team_slot": 2,
           "home_location": "67,85"
         }
-      ]
+      ],
+      "runtime_monitor": {
+        "script_sha256": "07308535f48940e92d00f6f34c09b5acbdc12d7cf0ac38f6bce6ba9c30f0c43a",
+        "rules_sha256": "32052f9061a53fab4886016ce64f247c325c4d71a04fc2f6e09828d1e60aa529",
+        "sample_interval_ticks": 5000,
+        "cap_tick": 45000,
+        "actor_count_marker": "AB_CAMPAIGN_ACTOR_SAMPLE"
+      }
     },
     {
       "setup": "3v3_basics_gna",
@@ -5212,7 +5359,14 @@
           "team_slot": 2,
           "home_location": "67,12"
         }
-      ]
+      ],
+      "runtime_monitor": {
+        "script_sha256": "07308535f48940e92d00f6f34c09b5acbdc12d7cf0ac38f6bce6ba9c30f0c43a",
+        "rules_sha256": "32052f9061a53fab4886016ce64f247c325c4d71a04fc2f6e09828d1e60aa529",
+        "sample_interval_ticks": 5000,
+        "cap_tick": 45000,
+        "actor_count_marker": "AB_CAMPAIGN_ACTOR_SAMPLE"
+      }
     },
     {
       "setup": "3v3_basics_nas",
@@ -5281,7 +5435,14 @@
           "team_slot": 2,
           "home_location": "67,85"
         }
-      ]
+      ],
+      "runtime_monitor": {
+        "script_sha256": "07308535f48940e92d00f6f34c09b5acbdc12d7cf0ac38f6bce6ba9c30f0c43a",
+        "rules_sha256": "32052f9061a53fab4886016ce64f247c325c4d71a04fc2f6e09828d1e60aa529",
+        "sample_interval_ticks": 5000,
+        "cap_tick": 45000,
+        "actor_count_marker": "AB_CAMPAIGN_ACTOR_SAMPLE"
+      }
     },
     {
       "setup": "3v3_basics_nas",
@@ -5350,7 +5511,14 @@
           "team_slot": 2,
           "home_location": "67,12"
         }
-      ]
+      ],
+      "runtime_monitor": {
+        "script_sha256": "07308535f48940e92d00f6f34c09b5acbdc12d7cf0ac38f6bce6ba9c30f0c43a",
+        "rules_sha256": "32052f9061a53fab4886016ce64f247c325c4d71a04fc2f6e09828d1e60aa529",
+        "sample_interval_ticks": 5000,
+        "cap_tick": 45000,
+        "actor_count_marker": "AB_CAMPAIGN_ACTOR_SAMPLE"
+      }
     },
     {
       "setup": "3v3_winter_asg",
@@ -5419,7 +5587,14 @@
           "team_slot": 2,
           "home_location": "123,95"
         }
-      ]
+      ],
+      "runtime_monitor": {
+        "script_sha256": "07308535f48940e92d00f6f34c09b5acbdc12d7cf0ac38f6bce6ba9c30f0c43a",
+        "rules_sha256": "32052f9061a53fab4886016ce64f247c325c4d71a04fc2f6e09828d1e60aa529",
+        "sample_interval_ticks": 5000,
+        "cap_tick": 45000,
+        "actor_count_marker": "AB_CAMPAIGN_ACTOR_SAMPLE"
+      }
     },
     {
       "setup": "3v3_winter_asg",
@@ -5488,7 +5663,14 @@
           "team_slot": 2,
           "home_location": "34,6"
         }
-      ]
+      ],
+      "runtime_monitor": {
+        "script_sha256": "07308535f48940e92d00f6f34c09b5acbdc12d7cf0ac38f6bce6ba9c30f0c43a",
+        "rules_sha256": "32052f9061a53fab4886016ce64f247c325c4d71a04fc2f6e09828d1e60aa529",
+        "sample_interval_ticks": 5000,
+        "cap_tick": 45000,
+        "actor_count_marker": "AB_CAMPAIGN_ACTOR_SAMPLE"
+      }
     },
     {
       "setup": "3v3_winter_sgn",
@@ -5557,7 +5739,14 @@
           "team_slot": 2,
           "home_location": "123,95"
         }
-      ]
+      ],
+      "runtime_monitor": {
+        "script_sha256": "07308535f48940e92d00f6f34c09b5acbdc12d7cf0ac38f6bce6ba9c30f0c43a",
+        "rules_sha256": "32052f9061a53fab4886016ce64f247c325c4d71a04fc2f6e09828d1e60aa529",
+        "sample_interval_ticks": 5000,
+        "cap_tick": 45000,
+        "actor_count_marker": "AB_CAMPAIGN_ACTOR_SAMPLE"
+      }
     },
     {
       "setup": "3v3_winter_sgn",
@@ -5626,7 +5815,14 @@
           "team_slot": 2,
           "home_location": "34,6"
         }
-      ]
+      ],
+      "runtime_monitor": {
+        "script_sha256": "07308535f48940e92d00f6f34c09b5acbdc12d7cf0ac38f6bce6ba9c30f0c43a",
+        "rules_sha256": "32052f9061a53fab4886016ce64f247c325c4d71a04fc2f6e09828d1e60aa529",
+        "sample_interval_ticks": 5000,
+        "cap_tick": 45000,
+        "actor_count_marker": "AB_CAMPAIGN_ACTOR_SAMPLE"
+      }
     },
     {
       "setup": "4v4_sahara",
@@ -5715,7 +5911,14 @@
           "team_slot": 3,
           "home_location": "83,64"
         }
-      ]
+      ],
+      "runtime_monitor": {
+        "script_sha256": "2aca2608e7da1d78b8ea1c17752dba2767e2b7032db48daf0f3b7c3bf66dccbb",
+        "rules_sha256": "32052f9061a53fab4886016ce64f247c325c4d71a04fc2f6e09828d1e60aa529",
+        "sample_interval_ticks": 5000,
+        "cap_tick": 45000,
+        "actor_count_marker": "AB_CAMPAIGN_ACTOR_SAMPLE"
+      }
     },
     {
       "setup": "4v4_sahara",
@@ -5804,7 +6007,14 @@
           "team_slot": 3,
           "home_location": "32,11"
         }
-      ]
+      ],
+      "runtime_monitor": {
+        "script_sha256": "2aca2608e7da1d78b8ea1c17752dba2767e2b7032db48daf0f3b7c3bf66dccbb",
+        "rules_sha256": "32052f9061a53fab4886016ce64f247c325c4d71a04fc2f6e09828d1e60aa529",
+        "sample_interval_ticks": 5000,
+        "cap_tick": 45000,
+        "actor_count_marker": "AB_CAMPAIGN_ACTOR_SAMPLE"
+      }
     },
     {
       "setup": "4v4_ice",
@@ -5893,7 +6103,14 @@
           "team_slot": 3,
           "home_location": "128,112"
         }
-      ]
+      ],
+      "runtime_monitor": {
+        "script_sha256": "2aca2608e7da1d78b8ea1c17752dba2767e2b7032db48daf0f3b7c3bf66dccbb",
+        "rules_sha256": "32052f9061a53fab4886016ce64f247c325c4d71a04fc2f6e09828d1e60aa529",
+        "sample_interval_ticks": 5000,
+        "cap_tick": 45000,
+        "actor_count_marker": "AB_CAMPAIGN_ACTOR_SAMPLE"
+      }
     },
     {
       "setup": "4v4_ice",
@@ -5982,14 +6199,21 @@
           "team_slot": 3,
           "home_location": "128,29"
         }
-      ]
+      ],
+      "runtime_monitor": {
+        "script_sha256": "2aca2608e7da1d78b8ea1c17752dba2767e2b7032db48daf0f3b7c3bf66dccbb",
+        "rules_sha256": "32052f9061a53fab4886016ce64f247c325c4d71a04fc2f6e09828d1e60aa529",
+        "sample_interval_ticks": 5000,
+        "cap_tick": 45000,
+        "actor_count_marker": "AB_CAMPAIGN_ACTOR_SAMPLE"
+      }
     }
   ],
   "arm_payload_preflight": [
     {
       "arm": "control",
       "switch": null,
-      "payload_sha256": "1bacffdc8ff8ebdaf0e7b9f669d690205472ce3c09af62812029eacbe1151c51",
+      "payload_sha256": "932e2e5c919de6f5b493e1722e6e66e39a3a5f1577b29aa58a571492b7de9d69",
       "changed_fields": 0,
       "changed_files": [],
       "runnable": false
@@ -5997,7 +6221,7 @@
     {
       "arm": "treatment",
       "switch": "BU_harvester_logistics",
-      "payload_sha256": "9646c765c9c18905156b31298c34e8d92050dd326e29a8c7adacf9420e8b9f33",
+      "payload_sha256": "acdfd3a3e2c7d405a776703593f1d52c5f357b423e75ffb224392159c009c725",
       "changed_fields": 1,
       "changed_files": [
         "ai.yaml"
@@ -6005,5 +6229,20 @@
       "runnable": false
     }
   ],
-  "manifest_sha256": "d47a1a9c64bd0dda2daa68c444d0051fc638c98242d6c394a516369c98fabe19"
+  "dual_arm_runtime_config_preflight": {
+    "switch": "BU_harvester_logistics",
+    "accepted_switches": [],
+    "ai_yaml_sha256": "b96ea938014d215110de87b84e2d1c84cd5d6a1220b29766c9e464ebac7c8fb4",
+    "runtime_files": [
+      "ai.yaml",
+      "fransbot.yaml",
+      "fransbot_lists.yaml"
+    ],
+    "runnable": false,
+    "arm_types": {
+      "control": "hard_control",
+      "treatment": "hard_treatment"
+    }
+  },
+  "manifest_sha256": "e7c09e25e5b5f7fd367a3ce1ab8d45d1348b005ec82216bcc1fd7ec36f613e04"
 }

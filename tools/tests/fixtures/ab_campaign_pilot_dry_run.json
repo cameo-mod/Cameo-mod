@@ -1,36 +1,79 @@
 {
-  "schema": 1,
-  "switch": "BU_harvester_logistics",
-  "execution_approved": false,
-  "pairs_per_setup": 2,
-  "team_size_scope": [
-    1,
-    2,
-    3,
-    4
-  ],
+  "acceptance_thresholds": {
+    "early_accept_share": 0.75,
+    "early_reject_share": 0.25,
+    "min_army_efficiency_improvement": 0.0,
+    "min_earned_spent_improvement": 0.0,
+    "min_kill_exchange_improvement": 0.0,
+    "win_noninferiority_delta": 0.0
+  },
   "arm_bot_types": {
     "control": "hard_control",
     "treatment": "hard_treatment"
   },
+  "baseline_ai_payload_sha256": "932e2e5c919de6f5b493e1722e6e66e39a3a5f1577b29aa58a571492b7de9d69",
   "baseline_manifest_path": "tools/tests/fixtures/ab_campaign_baseline.json",
   "baseline_manifest_sha256": "27b638ecd7e33caa68003a020d0d4309822826405a7afe147983f92027a3e26a",
-  "pins": {
-    "source_commit": "700bb16483f6d92664153e98d6f2560c312acaab",
-    "engine_version": "6da7fce14da541180c6baddd6925118fbef65b94"
-  },
-  "switch_patch_sha256": "d710567579cb3673eb33701ec881495f0a2a17d6203194b0efdc8052f4de4523",
-  "baseline_ai_payload_sha256": "1bacffdc8ff8ebdaf0e7b9f669d690205472ce3c09af62812029eacbe1151c51",
-  "treatment_ai_payload_sha256": "9646c765c9c18905156b31298c34e8d92050dd326e29a8c7adacf9420e8b9f33",
-  "tool_sha256": {
-    "driver_analyzer": "94319f4c57a002890c6dc60ba04e9d643a393a8580357f06576e75a15952b2ff",
-    "batch_runner": "660109df9a5cb431dc0b0fa426ebbba314cae7ac154f8786d71a418402a24cee",
-    "switch_applier": "5376258709f2ff6512e402abeaf09e164abe483142980830bc72269af047f97e"
-  },
   "binary_sha256": {
-    "bin/OpenRA.exe": "5693f355792ebb68699793f96ef2167b733c5e7756f580858c5090226418c984",
+    "bin/OpenRA.Mods.Cameo.dll": "41f37982c146f73b4a9c07071f34b47e214178cb9413e514f05af9af2d44b3a4",
     "bin/OpenRA.dll": "92ee9dacd08869593dc5ad70c2d1ce48f701caf8277ea3bd692acf2224a8ca77",
-    "bin/OpenRA.Mods.Cameo.dll": "41f37982c146f73b4a9c07071f34b47e214178cb9413e514f05af9af2d44b3a4"
+    "bin/OpenRA.exe": "5693f355792ebb68699793f96ef2167b733c5e7756f580858c5090226418c984"
+  },
+  "execution_approved": false,
+  "maps": [
+    {
+      "name": "nuclear_winter",
+      "path": "mods/cameo/maps/_ra_a-nuclear-winter.oramap",
+      "required_seats": 2,
+      "sha256": "191efefe3043acb2fd504b2e2e5c974a49f6498f8e016c1380159c9f7efc1c4a"
+    },
+    {
+      "name": "satans_clutch",
+      "path": "mods/cameo/maps/SatansClutch.oramap",
+      "required_seats": 2,
+      "sha256": "1bd3bee0bbb38c95015126ba689496c4284c2f4e8f8b6573711a9fdadcbf16cb"
+    },
+    {
+      "name": "red_spice",
+      "path": "mods/cameo/maps/Red_Spice_2v2_BI-4.4.oramap",
+      "required_seats": 4,
+      "sha256": "882f865b4e556f93324bbd1abb31397bff30b651489652fa151c031cf02cb65a"
+    },
+    {
+      "name": "terra_cotta",
+      "path": "mods/cameo/maps/Terracotta-ratls2.oramap",
+      "required_seats": 4,
+      "sha256": "c1a66fba029ccde5998fbe57b563f87569425ace82617e42e6e42e3fcc9e740d"
+    },
+    {
+      "name": "back_to_basics",
+      "path": "mods/cameo/maps/back-to-basics.oramap",
+      "required_seats": 6,
+      "sha256": "ddd071d131895ecb59be66b7d1924b023731c52a04ee01052fa9fc384dd15e6b"
+    },
+    {
+      "name": "winters_end_rich",
+      "path": "mods/cameo/maps/winters-end-rich.oramap",
+      "required_seats": 6,
+      "sha256": "a29eea3fef3087d5544c428d2d07d59f4430806c0b23db7eeb605dde7013c94e"
+    },
+    {
+      "name": "great_sahara_2",
+      "path": "mods/cameo/maps/Great_Sahara_3.oramap",
+      "required_seats": 8,
+      "sha256": "8b5c089c7cd2f8209819afa04436d6fa15849e125823ddc16bf5e996cd280ddc"
+    },
+    {
+      "name": "ice_cold",
+      "path": "mods/cameo/maps/ice_cold.oramap",
+      "required_seats": 8,
+      "sha256": "e097fcca4fa40f5878b4fb7d965529728dbbd34c2a14b8825e1bec0aea6da98b"
+    }
+  ],
+  "pairs_per_setup": 2,
+  "pins": {
+    "engine_version": "6da7fce14da541180c6baddd6925118fbef65b94",
+    "source_commit": "964cdb630b1514e1c1a0baed55cbdbc427d5fc11"
   },
   "round_stages": [
     16,
@@ -38,223 +81,181 @@
     48,
     64
   ],
-  "acceptance_thresholds": {
-    "early_accept_share": 0.75,
-    "early_reject_share": 0.25,
-    "win_noninferiority_delta": 0.0,
-    "min_earned_spent_improvement": 0.0,
-    "min_army_efficiency_improvement": 0.0,
-    "min_kill_exchange_improvement": 0.0
-  },
-  "slot_policy": {
-    "max_parallel_small_games": 3,
-    "small_team_size_max": 2,
-    "large_game_exclusive": true,
-    "min_free_ram_bytes": 6442450944,
-    "max_private_bytes": 8589934592
-  },
+  "schema": 1,
   "seeds": [
     1337,
     7331
   ],
-  "maps": [
-    {
-      "name": "nuclear_winter",
-      "path": "mods/cameo/maps/_ra_a-nuclear-winter.oramap",
-      "sha256": "191efefe3043acb2fd504b2e2e5c974a49f6498f8e016c1380159c9f7efc1c4a",
-      "required_seats": 2
-    },
-    {
-      "name": "satans_clutch",
-      "path": "mods/cameo/maps/SatansClutch.oramap",
-      "sha256": "1bd3bee0bbb38c95015126ba689496c4284c2f4e8f8b6573711a9fdadcbf16cb",
-      "required_seats": 2
-    },
-    {
-      "name": "red_spice",
-      "path": "mods/cameo/maps/Red_Spice_2v2_BI-4.4.oramap",
-      "sha256": "882f865b4e556f93324bbd1abb31397bff30b651489652fa151c031cf02cb65a",
-      "required_seats": 4
-    },
-    {
-      "name": "terra_cotta",
-      "path": "mods/cameo/maps/Terracotta-ratls2.oramap",
-      "sha256": "c1a66fba029ccde5998fbe57b563f87569425ace82617e42e6e42e3fcc9e740d",
-      "required_seats": 4
-    },
-    {
-      "name": "back_to_basics",
-      "path": "mods/cameo/maps/back-to-basics.oramap",
-      "sha256": "ddd071d131895ecb59be66b7d1924b023731c52a04ee01052fa9fc384dd15e6b",
-      "required_seats": 6
-    },
-    {
-      "name": "winters_end_rich",
-      "path": "mods/cameo/maps/winters-end-rich.oramap",
-      "sha256": "a29eea3fef3087d5544c428d2d07d59f4430806c0b23db7eeb605dde7013c94e",
-      "required_seats": 6
-    },
-    {
-      "name": "great_sahara_2",
-      "path": "mods/cameo/maps/Great_Sahara_3.oramap",
-      "sha256": "8b5c089c7cd2f8209819afa04436d6fa15849e125823ddc16bf5e996cd280ddc",
-      "required_seats": 8
-    },
-    {
-      "name": "ice_cold",
-      "path": "mods/cameo/maps/ice_cold.oramap",
-      "sha256": "e097fcca4fa40f5878b4fb7d965529728dbbd34c2a14b8825e1bec0aea6da98b",
-      "required_seats": 8
-    }
-  ],
   "setups": [
     {
       "id": "1v1_nuclear_gdi",
-      "team_size": 1,
       "map": "nuclear_winter",
       "team_factions": [
         "td_gdi"
-      ]
+      ],
+      "team_size": 1
     },
     {
       "id": "1v1_nuclear_nod",
-      "team_size": 1,
       "map": "nuclear_winter",
       "team_factions": [
         "td_nod"
-      ]
+      ],
+      "team_size": 1
     },
     {
       "id": "1v1_satans_allies",
-      "team_size": 1,
       "map": "satans_clutch",
       "team_factions": [
         "ra1_allies"
-      ]
+      ],
+      "team_size": 1
     },
     {
       "id": "1v1_satans_soviets",
-      "team_size": 1,
       "map": "satans_clutch",
       "team_factions": [
         "ra1_soviets"
-      ]
+      ],
+      "team_size": 1
     },
     {
       "id": "2v2_red_gdi_nod",
-      "team_size": 2,
       "map": "red_spice",
       "team_factions": [
         "td_gdi",
         "td_nod"
-      ]
+      ],
+      "team_size": 2
     },
     {
       "id": "2v2_red_gdi_allies",
-      "team_size": 2,
       "map": "red_spice",
       "team_factions": [
         "td_gdi",
         "ra1_allies"
-      ]
+      ],
+      "team_size": 2
     },
     {
       "id": "2v2_red_gdi_soviets",
-      "team_size": 2,
       "map": "red_spice",
       "team_factions": [
         "td_gdi",
         "ra1_soviets"
-      ]
+      ],
+      "team_size": 2
     },
     {
       "id": "2v2_terra_nod_allies",
-      "team_size": 2,
       "map": "terra_cotta",
       "team_factions": [
         "td_nod",
         "ra1_allies"
-      ]
+      ],
+      "team_size": 2
     },
     {
       "id": "2v2_terra_nod_soviets",
-      "team_size": 2,
       "map": "terra_cotta",
       "team_factions": [
         "td_nod",
         "ra1_soviets"
-      ]
+      ],
+      "team_size": 2
     },
     {
       "id": "2v2_terra_allies_soviets",
-      "team_size": 2,
       "map": "terra_cotta",
       "team_factions": [
         "ra1_allies",
         "ra1_soviets"
-      ]
+      ],
+      "team_size": 2
     },
     {
       "id": "3v3_basics_gna",
-      "team_size": 3,
       "map": "back_to_basics",
       "team_factions": [
         "td_gdi",
         "td_nod",
         "ra1_allies"
-      ]
+      ],
+      "team_size": 3
     },
     {
       "id": "3v3_basics_nas",
-      "team_size": 3,
       "map": "back_to_basics",
       "team_factions": [
         "td_nod",
         "ra1_allies",
         "ra1_soviets"
-      ]
+      ],
+      "team_size": 3
     },
     {
       "id": "3v3_winter_asg",
-      "team_size": 3,
       "map": "winters_end_rich",
       "team_factions": [
         "ra1_allies",
         "ra1_soviets",
         "td_gdi"
-      ]
+      ],
+      "team_size": 3
     },
     {
       "id": "3v3_winter_sgn",
-      "team_size": 3,
       "map": "winters_end_rich",
       "team_factions": [
         "ra1_soviets",
         "td_gdi",
         "td_nod"
-      ]
+      ],
+      "team_size": 3
     },
     {
       "id": "4v4_sahara",
-      "team_size": 4,
       "map": "great_sahara_2",
       "team_factions": [
         "td_gdi",
         "td_nod",
         "ra1_allies",
         "ra1_soviets"
-      ]
+      ],
+      "team_size": 4
     },
     {
       "id": "4v4_ice",
-      "team_size": 4,
       "map": "ice_cold",
       "team_factions": [
         "td_gdi",
         "td_nod",
         "ra1_allies",
         "ra1_soviets"
-      ]
+      ],
+      "team_size": 4
     }
-  ]
+  ],
+  "slot_policy": {
+    "large_game_exclusive": true,
+    "max_parallel_small_games": 3,
+    "max_private_bytes": 8589934592,
+    "min_free_ram_bytes": 6442450944,
+    "small_team_size_max": 2
+  },
+  "switch": "BU_harvester_logistics",
+  "switch_patch_sha256": "d710567579cb3673eb33701ec881495f0a2a17d6203194b0efdc8052f4de4523",
+  "team_size_scope": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "tool_sha256": {
+    "batch_runner": "d0d42746a28fa23a03849108a5b52d36455f0c1cad107d78ff029d16e345efa7",
+    "campaign_runner": "cfe23aead3fd71cb37c957d30cf0751fa560978086ef74b33f40087f46ed063f",
+    "driver_analyzer": "49830502fdbfa6cf0b715e89de4ddc341691196f25c5d88f5f5c779abfca2ef8",
+    "switch_applier": "5376258709f2ff6512e402abeaf09e164abe483142980830bc72269af047f97e"
+  },
+  "treatment_ai_payload_sha256": "acdfd3a3e2c7d405a776703593f1d52c5f357b423e75ffb224392159c009c725"
 }
