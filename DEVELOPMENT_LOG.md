@@ -20998,3 +20998,9 @@ land ticks later or never) all produce identical disappearances. Corrected on
   sanctioned fallback. Regressions exercise the production predicate: requirement-flip
   (no install -> `Removed`), true install -> `Placed`, unknown-type and still-accepting
   negatives.
+
+### 2026-10-10 — M13 restraint-budget checkpoint (Sol)
+- Isolated codex/m13-liveness: classify 59 groups and refuse more than one newly armed restraint before YAML edits.
+- Exact externally reviewed manifests bind unchanged, already-armed baseline patches; combination tests remain explicitly non-campaign.
+- Preserve build-order generated specs with conservative restraint classes; no gameplay/default/engine changes.
+- Next: independent tooling review, then squad response/verified-dispatch wiring; no game launches.

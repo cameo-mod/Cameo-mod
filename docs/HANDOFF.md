@@ -5541,3 +5541,8 @@ Read design/REPLAY_HEALTH_ANALYZER.md before health/campaign work. tools/ai/repl
 ### 2026-10-09 ? MCV deployment repair
 - Next: independent review of condition-driven engine331657f07a and devin/mcv-deploy-cell; see docs/design/MCV_DEPLOY_CELL_REPAIR.md.
 - Base c76283c0b; single-instance generic-only repair and branch-local pin. No launches; observer ownership and campaign holds remain.
+
+### Sol — M13 restraint-budget checkpoint, 2026-10-10
+- Worktree C:/cameo-wt/sol-m13-liveness, branch codex/m13-liveness; contract docs/design/M13_RESTRAINT_BUDGET.md.
+- Budget tooling only; escort/liveness helpers still unwired. Existing runners requesting all now refuse at the applier.
+- Next: VP exact-tip review and conservative squad integration; causal claim/dispatch evidence must be explicit. No launches.
