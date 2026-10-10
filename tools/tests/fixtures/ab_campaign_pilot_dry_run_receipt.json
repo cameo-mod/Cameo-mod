@@ -5985,5 +5985,25 @@
       ]
     }
   ],
-  "manifest_sha256": "53244e88e0abdaa3542ad24081facfdc87a257df4134b1896d79d56378b05cd7"
+  "arm_payload_preflight": [
+    {
+      "arm": "control",
+      "switch": null,
+      "payload_sha256": "1bacffdc8ff8ebdaf0e7b9f669d690205472ce3c09af62812029eacbe1151c51",
+      "changed_fields": 0,
+      "changed_files": [],
+      "runnable": false
+    },
+    {
+      "arm": "treatment",
+      "switch": "BU_harvester_logistics",
+      "payload_sha256": "9646c765c9c18905156b31298c34e8d92050dd326e29a8c7adacf9420e8b9f33",
+      "changed_fields": 1,
+      "changed_files": [
+        "ai.yaml"
+      ],
+      "runnable": false
+    }
+  ],
+  "manifest_sha256": "d47a1a9c64bd0dda2daa68c444d0051fc638c98242d6c394a516369c98fabe19"
 }

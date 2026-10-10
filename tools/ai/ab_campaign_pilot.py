@@ -165,6 +165,28 @@ def paired_bootstrap_interval(values,seed):
  rng=random.Random(seed); samples=sorted(sum(rng.choice(values) for _ in values)/len(values) for _ in range(4000))
  return [samples[int(.025*(len(samples)-1))],samples[int(.975*(len(samples)-1))]]
 
+def materialize_ai_arm(root,destination,switch=None):
+ """Create only an isolated AI-YAML payload for an arm; this is not a runnable game tree."""
+ destination=pathlib.Path(destination);source=root/"mods"/"cameo"/"ai"
+ require(not destination.exists(),"arm payload destination must be new")
+ files=sorted(source.glob("*.yaml"));require(files,"source AI yaml payload is empty")
+ skip,groups,_=increment.load_spec(pathlib.Path(__file__).with_name("increment_switches.yaml"))
+ if switch is not None: require(switch==SWITCH,"pilot may materialize exactly its one selected switch")
+ out=destination/"mods"/"cameo"/"ai";out.mkdir(parents=True)
+ changed_fields=0;changed_files=[]
+ for path in files:
+  original=path.read_text(encoding="utf-8");updated=original
+  if switch is not None:
+   for trait,fields in groups[switch].items():
+    updated,changes=increment.apply(updated,trait,fields,skip);changed_fields+=len(changes)
+  if updated!=original:changed_files.append(path.name)
+  (out/path.name).write_text(updated,encoding="utf-8")
+ payload=ai_payload_sha(destination)
+ expected=ai_payload_sha(root,switch)
+ require(payload==expected,"materialized arm payload differs from pinned expected payload")
+ if switch is not None: require(changed_fields>0,"selected treatment switch produced no AI payload delta")
+ return {"arm":"control" if switch is None else "treatment","switch":switch,"payload_sha256":payload,"changed_fields":changed_fields,"changed_files":changed_files,"runnable":False}
+
 def make_jobs(manifest):
  seeds=manifest.get("seeds")
  require(isinstance(seeds,list) and len(seeds)==2 and len(set(seeds))==2 and all(type(x)==int and x>=0 for x in seeds),"pilot needs exactly two distinct nonnegative seeds")
@@ -425,9 +447,11 @@ def main(argv=None):
   if a.cmd=="dry-run":
    raw=a.manifest.read_bytes();actual=hashlib.sha256(raw).hexdigest();require(actual==a.manifest_sha256,"manifest SHA mismatch")
    out=dry_run(m,a.repo_root,a.engine_root,a.minutes_per_game,a.setup_hours)
-   with tempfile.TemporaryDirectory(prefix="ab-campaign-map-preflight-") as temp:
-    out["generated_map_preflight"]=preflight_generated_maps(m,a.repo_root,pathlib.Path(temp))
-   out["manifest_sha256"]=actual;a.output.parent.mkdir(parents=True,exist_ok=True);a.output.write_text(json.dumps(out,indent=2)+"\n",encoding="utf-8");print(f"NO_LAUNCH games={out['games']} generated_maps={len(out['generated_map_preflight'])} worker_hours={out['worker_hours_estimate_at_8_5m_each']} slot_wall_hours={out['parallel_slot_wall_estimate_hours_at_8_5m_each']} launches=0");return 0
+   with tempfile.TemporaryDirectory(prefix="ab-campaign-preflight-") as temp:
+    preflight_root=pathlib.Path(temp)
+    out["generated_map_preflight"]=preflight_generated_maps(m,a.repo_root,preflight_root/"maps")
+    out["arm_payload_preflight"]=[materialize_ai_arm(a.repo_root,preflight_root/"arms"/"control"),materialize_ai_arm(a.repo_root,preflight_root/"arms"/"treatment",SWITCH)]
+   out["manifest_sha256"]=actual;a.output.parent.mkdir(parents=True,exist_ok=True);a.output.write_text(json.dumps(out,indent=2)+"\n",encoding="utf-8");print(f"NO_LAUNCH games={out['games']} generated_maps={len(out['generated_map_preflight'])} treatment_changes={out['arm_payload_preflight'][1]['changed_fields']} worker_hours={out['worker_hours_estimate_at_8_5m_each']} slot_wall_hours={out['parallel_slot_wall_estimate_hours_at_8_5m_each']} launches=0");return 0
   validate(m,a.repo_root); raw=a.manifest.read_bytes(); actual=hashlib.sha256(raw).hexdigest();require(actual==a.manifest_sha256,"manifest SHA mismatch")
   def jsonl(path): return [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
   out=analyze(m,actual,json.loads(a.receipts.read_text(encoding="utf-8")),jsonl(a.matches));a.output.parent.mkdir(parents=True,exist_ok=True);a.output.write_text(json.dumps(out,indent=2)+"\n",encoding="utf-8");print(f"ANALYZED games={len(out['games'])} unplanned_receipts={len(out['unplanned_receipt_cells'])}");return 2 if out["unplanned_receipt_cells"] or out["unplanned_game_uids"] or any(g["verdict"]=="INVALID_UNKNOWN" for g in out["games"]) else 0

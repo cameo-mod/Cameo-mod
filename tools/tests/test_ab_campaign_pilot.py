@@ -46,6 +46,20 @@ class PilotPlanTests(unittest.TestCase):
   with self.assertRaisesRegex(ValueError,"slot/memory policy"):
    pilot.validate(m,ROOT)
 
+ def test_arm_materialization_isolated_and_matches_pinned_payload(self):
+  with tempfile.TemporaryDirectory() as temp:
+   base=pathlib.Path(temp)
+   control=pilot.materialize_ai_arm(ROOT,base/"control")
+   treatment=pilot.materialize_ai_arm(ROOT,base/"treatment",pilot.SWITCH)
+   self.assertEqual(pilot.ai_payload_sha(ROOT),control["payload_sha256"])
+   self.assertEqual(pilot.ai_payload_sha(ROOT,pilot.SWITCH),treatment["payload_sha256"])
+   self.assertGreater(treatment["changed_fields"],0)
+   self.assertTrue(treatment["changed_files"])
+   self.assertFalse(treatment["runnable"])
+   self.assertEqual(["ai"], [p.name for p in (base/"treatment"/"mods"/"cameo").iterdir()])
+   with self.assertRaisesRegex(ValueError,"destination must be new"):
+    pilot.materialize_ai_arm(ROOT,base/"treatment",pilot.SWITCH)
+
  def test_missing_map_is_rejected(self):
   m=manifest();m["maps"][0]["path"]="mods/cameo/maps/missing.oramap"
   with self.assertRaisesRegex(ValueError,"map path/SHA"):
