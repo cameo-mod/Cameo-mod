@@ -54,7 +54,7 @@ ammo uptime and actual kill times are not claimed to be simulated.
 
 ## Live coverage: deliberately narrow
 
-The [generated census](../audit/latest/retained_firepower_survey.json) checks 1,000
+The [generated census](../../audit/latest/retained_firepower_survey.json) checks 1,000
 ledger-listed armed actors against active base YAML. Five pass the structural
 screen; four of those have shared/reference concerns. **One passes both screens:**
 `ra1_allies_raspy`, using `SilencedPPK`. The other 999 stay blocked.
@@ -92,7 +92,7 @@ Run `tools/balance/retained_firepower_survey.py` to check census freshness;
 
 ## Next boundary
 
-The [armament-mode survey](../audit/latest/armament_mode_survey.json) separates
+The [armament-mode survey](../../audit/latest/armament_mode_survey.json) separates
 identical primary/garrison weapon pairs from other multiple-armament arrangements.
 It resolves inherited slots, records each slot's unconditional firepower factor,
 known own/passenger attack selectors, activation uncertainty, conditional modifier

@@ -69,7 +69,7 @@ The existing real-actor anchors are vulnerable to actor drift, which is one sour
 
 > **Measurement correction 2026-09-09** (supersedes the raw-fit metrics block that stood
 > here — its "satisfying identity 0 of 27" line came from a superseded raw fit check; see
-> [ASTRA_REVIEW.md, 2026-09-09 pass](../audit/ASTRA_REVIEW.md)): the stored-fit registry
+> [ASTRA_REVIEW.md, 2026-09-09 pass](../../audit/ASTRA_REVIEW.md)): the stored-fit registry
 > holds **28 class entries — 26 carry no stored `cost0`/`o0`/`p0`/`q0` at all, and 2
 > (`line_breaker`, `mbt`) carry complete legacy raw values**. Absence is NOT a failed
 > identity: the final per-stat normalized identity cannot be judged by comparing raw
@@ -128,7 +128,7 @@ Owner: **Astra**. Place each expanded unit at **class anchor × tech tier × fac
 the formula fit the placed stats and price. **Clarification, Aedis 2026-09-09:** initial reference
 placement includes price; the final fit may adjust stats, price, or both on their permitted grids
 to approach zero delta. The old classic-original price freeze is superseded; MCVs and harvesters
-remain collection/manual-review only. See [the dated ruling record](../balance/review/AEDIS_OVERNIGHT_RULINGS_20260909.md).
+remain collection/manual-review only. See [the dated ruling record](../../balance/review/AEDIS_OVERNIGHT_RULINGS_20260909.md).
 This is the first real test of the method, and
 it is deliberately run on factions where we CAN check the answer: an expansion sitting next to
 approved originals is easy for a human to sanity-check.

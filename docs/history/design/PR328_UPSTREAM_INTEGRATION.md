@@ -7,7 +7,7 @@ older snapshots below. Upstream deleted the intentional-composite exemption
 registry under the one-warhead ruling. PR 328 therefore retires its live registry
 drift command and that command's tests; it does not restore the deleted approval
 mechanism. The last diagnostic is retained only as
-[`pr328_composite_registry_drift_pre_retirement.json`](../history/audits/pr328_composite_registry_drift_pre_retirement.json).
+[`pr328_composite_registry_drift_pre_retirement.json`](../audits/pr328_composite_registry_drift_pre_retirement.json).
 Its counts are historical, not current findings or exemptions. The old live
 command and its tests were removed; the archived evidence is recoverable in git.
 
@@ -52,7 +52,7 @@ of its results from the PR's tests.
 | Integrated PR 328 | 88 | 766 | 0 | 43 |
 
 All 137 tests in the twelve PR-added/modified test modules pass. The current full
-report is [`bounded_test_run.json`](../audit/latest/bounded_test_run.json).
+report is [`bounded_test_run.json`](../../audit/latest/bounded_test_run.json).
 No module newly fails. Seven baseline failures are repaired: assignment tests,
 four Hydra modules, physical-state binding regression and scaled-bullet overrides.
 
@@ -128,7 +128,7 @@ passes for all 33 ledgers after the focused regeneration. Percentage-runtime and
 This changes later pricing/reference populations intentionally; it does not apply
 prices. The follow-up full suite completed **88/88 modules, 862 tests run, 15
 skipped, 21 failed modules** in 481 seconds, recorded in
-[`bounded_test_run.json`](../audit/latest/bounded_test_run.json). Compared with
+[`bounded_test_run.json`](../../audit/latest/bounded_test_run.json). Compared with
 the previous recorded run, there are no newly failing modules and the assignment
 module is repaired. Remaining failures are not waived or automatically classified
 as harmless. Structure and decision audits still fail on the invalid registry.
@@ -215,7 +215,7 @@ decision audits fail because upstream's reviewed-composite registry no longer
 matches the resolved weapons. No stale digest or changed composite is automatically
 re-approved here; the old structure/decision artifacts must not be read as current.
 
-The [historical registry drift queue](../history/audits/pr328_composite_registry_drift_pre_retirement.json) retains
+The [historical registry drift queue](../audits/pr328_composite_registry_drift_pre_retirement.json) retains
 all **355 validator findings**. Its overlapping categories include 11 curated
 main-name disagreements, 14 manifest main-name disagreements, 151 changed main
 fingerprints despite unchanged names, and 5 reference/reachability disagreements.

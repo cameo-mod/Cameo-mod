@@ -97,5 +97,5 @@ sampling can miss extremely short-lived intermediary processes. The test runner
 uses fresh sequential processes so ruleset caches do not accumulate across modules.
 
 Detailed evidence: [ordered-impact report](HYDRALISK_IMPACT_LAB.md),
-[machine-readable traces](../audit/latest/hydralisk_impact_lab.json),
+[machine-readable traces](../../audit/latest/hydralisk_impact_lab.json),
 [earlier nominal screen](HYDRALISK_CANDIDATE_SCREEN.md).

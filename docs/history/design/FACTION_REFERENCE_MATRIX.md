@@ -10,7 +10,7 @@ python tools/balance/faction_extrapolate.py --by-class
 
 > The accreted 2026-09-04 narrative (the blocker story, the wiring session, the
 > measured "bullshit rate" of the rejected matcher) is preserved in
-> [`docs/history/FACTION_REFERENCE_MATRIX_2026-09-04.md`](../history/FACTION_REFERENCE_MATRIX_2026-09-04.md).
+> [`docs/history/FACTION_REFERENCE_MATRIX_2026-09-04.md`](../FACTION_REFERENCE_MATRIX_2026-09-04.md).
 > Everything here is the present.
 
 ## Maintainer rulings (binding — kept inline per fleet order)

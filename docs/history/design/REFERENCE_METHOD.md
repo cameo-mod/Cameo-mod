@@ -8,7 +8,7 @@ Cameo target is derived from it, and which parts are ruled versus still open.
 > document still teaching them is stale — see §7.
 
 **Companions:** [`REFERENCE_DEDUP.md`](REFERENCE_DEDUP.md) (step 1, one roster one vote) ·
-[`BALANCE_SYNTHESIS.md`](BALANCE_SYNTHESIS.md) (the source library and the faction map) ·
+[`BALANCE_SYNTHESIS.md`](../../design/BALANCE_SYNTHESIS.md) (the source library and the faction map) ·
 `docs/balance/REFERENCE_SYNTHESIS_REPORT.md` (the generated output).
 
 ---

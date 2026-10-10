@@ -371,7 +371,7 @@ build palette.
 forces infantry are the long range rifle guys that are able to attack air like the terran marine,
 ghost, gdi officer, Nod stealth trooper."*
 
-⛔ **All of it is already law in [`FORMULA_V2.md`](FORMULA_V2.md), which I had never opened**, and
+⛔ **All of it is already law in [`FORMULA_V2.md`](../../design/FORMULA_V2.md), which I had never opened**, and
 27 per-class working logs sit in `docs/balance/formula_v2_*.md`. This is CLAUDE.md rule 8f exactly:
 *"a design question that feels novel usually is not."*
 

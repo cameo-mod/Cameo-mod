@@ -189,7 +189,7 @@ before that switch is armed.
 
 ## 6. The 2026-10-02 review: what is fixed
 
-Source: [`design/CAMEO_AI_ARCHITECTURE_REVIEW_2026-10-02_POST_MERGE.md`](design/CAMEO_AI_ARCHITECTURE_REVIEW_2026-10-02_POST_MERGE.md).
+Source: [`history/design/CAMEO_AI_ARCHITECTURE_REVIEW_2026-10-02_POST_MERGE.md`](history/design/CAMEO_AI_ARCHITECTURE_REVIEW_2026-10-02_POST_MERGE.md).
 
 | # | Finding | State on `5c8cfe04` | Evidence |
 |---|---|---|---|
@@ -760,7 +760,7 @@ In the repository: `docs/DESIGN.md` §19 (§19.1, §19.2, §19.3, §19.5, §19.6
 `docs/design/AI_ARCHITECTURE.md` (§10.5c, §12.22), `tools/ai/ai_arch_audit.py` (R8),
 `docs/design/AI_MASTER_PLAN.md`, `docs/design/AI_SYNTHESIS.md`, `docs/design/AI_DEEP_RESEARCH.md`,
 `docs/design/AI_LEARNING_RESEARCH_2026-10-03.md`, `docs/design/TIER4_SPSA_SPEC.md`,
-`docs/design/CAMEO_AI_ARCHITECTURE_REVIEW_2026-10-02_POST_MERGE.md`, `docs/design/AI_MODULE_MAP.md`,
+`docs/history/design/CAMEO_AI_ARCHITECTURE_REVIEW_2026-10-02_POST_MERGE.md`, `docs/design/AI_MODULE_MAP.md`,
 `tools/ai/learnables.yaml`, `mods/cameo/ai/`, the C# under `OpenRA.Mods.CA/Traits/BotModules/`,
 `OpenRA.Mods.Cameo/Traits/BotModules/` and `OpenRA.Mods.Fransbot/Traits/`.
 

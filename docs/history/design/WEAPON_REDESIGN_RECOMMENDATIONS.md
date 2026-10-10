@@ -7,7 +7,7 @@ Status: **proposal only — no gameplay authority is implied by this document.**
 After PR #320, the active reachable queue is **14 definitions in 12 inheritance
 families**. Every remaining family needs a player-facing role, progression, or
 state-delivery decision; none has a mechanically exact fold. The generated
-[decision bundle](../audit/latest/weapon_decision_bundle.md) is the authoritative
+[decision bundle](../../audit/latest/weapon_decision_bundle.md) is the authoritative
 current grouping because it resolves the active include graph and records every
 consumer and delivery chain.
 

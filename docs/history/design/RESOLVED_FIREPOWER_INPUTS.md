@@ -20,7 +20,7 @@ not a missing value. Old ledger fixtures without the new field retain compatibil
 
 ## Impact
 
-The [generated comparison](../audit/latest/firepower_inputs.json) finds 770 changed
+The [generated comparison](../../audit/latest/firepower_inputs.json) finds 770 changed
 actor entries with usable class-fit inputs across the roster. These are input
 corrections, not 770 balance defects or recommended price changes.
 
@@ -92,7 +92,7 @@ garrison rows. Alternate weapons remain visible in the workbook, but are not sum
 into the base actor row. Resolved factors are locked per-weapon diagnostic cells,
 not imported actor knobs. The workbook fingerprint includes the shared helper.
 
-The [consumer census](../audit/latest/firepower_consumers.json) compares the first
+The [consumer census](../../audit/latest/firepower_consumers.json) compares the first
 PR328 commit's consumer implementation with this follow-up across 1,000 armed
 ledger entries on the `56c14d9db` integration:
 

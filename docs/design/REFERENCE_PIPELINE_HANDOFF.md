@@ -45,9 +45,9 @@ gate is satisfiable. Open them in this order:
 
 | # | document | why you need it |
 |---|---|---|
-| 1 | [`FACTION_REFERENCE_MATRIX.md`](FACTION_REFERENCE_MATRIX.md) | **the core.** Parts I–III are the rulings; **PART IV** is what the wiring measured; **PART V** is the prerequisite-hop fix and the per-class grounding table |
-| 2 | [`REFERENCE_METHOD.md`](REFERENCE_METHOD.md) | the 10 relative values, the matching law (§9), the role step (§12), and **§13 which says routing supersedes open matching** |
-| 3 | [`REFERENCE_DEDUP.md`](REFERENCE_DEDUP.md) | one roster = one vote, and why |
+| 1 | [`FACTION_REFERENCE_MATRIX.md`](../history/design/FACTION_REFERENCE_MATRIX.md) | **the core.** Parts I–III are the rulings; **PART IV** is what the wiring measured; **PART V** is the prerequisite-hop fix and the per-class grounding table |
+| 2 | [`REFERENCE_METHOD.md`](../history/design/REFERENCE_METHOD.md) | the 10 relative values, the matching law (§9), the role step (§12), and **§13 which says routing supersedes open matching** |
+| 3 | [`REFERENCE_DEDUP.md`](../history/design/REFERENCE_DEDUP.md) | one roster = one vote, and why |
 | 4 | [`BALANCE_PROGRAM_PLAN.md`](BALANCE_PROGRAM_PLAN.md) §0a, §2 | the binding order of operations and **file-set ownership** |
 | 5 | [`FORMULA_V2.md`](FORMULA_V2.md) | what actually prices a unit. A reference never does |
 | 6 | [`BALANCE_SYNTHESIS.md`](BALANCE_SYNTHESIS.md) §3 | the documented faction inspirations the matrix routes from |
