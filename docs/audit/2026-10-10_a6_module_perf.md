@@ -96,6 +96,18 @@ Distribution CHANGED vs the pre-merge base — worth a line of its own:
   fixture) — likely interacts with merged MCV/expansion work since the old
   base (lease/prebuild changes) or engine `6da7fce14`. Observation, not a
   verdict — flagged for the next perf pass.
+- **Attribution (peer NOTE_2026-10-10_devin_b3_expansionplanner_perf.md +
+  counter check)**: ExpansionPlanner hosts the B3 coverage model — entirely
+  new per-tick work (`EvaluateCoverageTick`, `CoverageProbesPerTick=8`,
+  `CoverageProbeLimit=64/refresh`, route legs ≤10, radius site enumeration
+  + per-generation PatchCells memo). Cost scales anchors×sites×field-size,
+  fitting the Imminent correlation. Counter evidence from these logs:
+  `REPAIR-B3 coverage ...` lines show the **64-probe budget exhausted on
+  EVERY ceiling event in all six cells** (spent=64/64, n=78) alongside
+  `N anchors pending` pacing lines — probe-dominated, so
+  `CoverageProbesPerTick` is the natural throttle if tuning is ever asked.
+  The `MasterAiBotModule` 32→8 drop is NOT explained by B3 (separate
+  investigation — A1 RNG/lease/engine candidates).
 - Engine differs too (`6da7fce14` vs `0a3f77dbe`); the shift cannot be
   attributed to mod merges alone from this data.
 - The C1 capped path held through the whole league — zero `FindTilesInAnnulus`
