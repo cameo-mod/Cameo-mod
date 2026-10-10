@@ -334,7 +334,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		string wantedMcvPrerequisite;
 		(ActorInfo Info, int Cost, int BuildTicks) lastRefineryEstimate;
 
-		readonly Dictionary<CPos, int> anchorParkedUntil = new();
+		// REPAIR-B3 (lead ruling 2026-10-10): the park records the owner whose placement failed —
+		// the cooldown binds that demand's re-reserve only; a foreign demand can bind the freed
+		// anchor at once (a contested anchor recycles fast). Null owner = a provider-side park
+		// (offer-streak, stuck-anchor) with no failing demand.
+		readonly Dictionary<CPos, (int Until, object Owner)> anchorParkedUntil = new();
 		readonly Dictionary<uint, CPos> inflightMcvSites = new();
 		List<CPos> ownBuildingCells = new();
 		List<CPos> ownYardCells = new();
@@ -487,6 +491,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				ParkFailedClaim(anchor, world.WorldTick, "placement failed (queue signal)");
 		}
 
+		void IBotExpansionTargetProvider.RefineryClaimPlacementFailed(CPos anchor, object owner)
+		{
+			if (LawActive)
+				ParkFailedClaim(anchor, world.WorldTick, "placement failed (queue signal)", owner);
+		}
+
 		// ECON-A-FIX (R6): the claim surface's three states, evaluated uniformly for the claim order and
 		// the reservation probes — blocked: off the market right now; committed: the field counts as
 		// covered (a pending commit or a live reservation); taken: ground truth owns it (served, parked
@@ -494,7 +504,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		bool AnchorBlockedForClaims(int i, int tick)
 		{
 			var anchor = anchors[i];
-			return (anchorParkedUntil.TryGetValue(anchor, out var park) && tick < park)
+			return (anchorParkedUntil.TryGetValue(anchor, out var park) && tick < park.Until)
 				|| (anchorPendingUntil.TryGetValue(anchor, out var pend) && tick < pend)
 				|| anchorReservations.LiveAt(anchor, tick);
 		}
@@ -510,7 +520,34 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		{
 			var i = anchors.IndexOf(anchor);
 			return (i >= 0 && lastAssigned[i] >= 0)
-				|| (anchorParkedUntil.TryGetValue(anchor, out var park) && tick < park)
+				|| (anchorParkedUntil.TryGetValue(anchor, out var park) && tick < park.Until)
+				|| (anchorPendingUntil.TryGetValue(anchor, out var pend) && tick < pend);
+		}
+
+		// REPAIR-B3 (lead ruling 2026-10-10): the reservation-channel taken probe — the fail
+		// cooldown binds only the owner that failed, so a freed contested anchor re-binds to a
+		// foreign demand immediately while the parked demand's own re-reserve waits it out.
+		// Null-owner parks stay GLOBAL (VP rereview 560a413): the offer-channel churn bounds —
+		// uncommitted-offer streaks and ParkTicks — carry no owner and must refuse every
+		// demand's reservation exactly as the pre-scoping AnchorTaken did. The offer channel
+		// itself stays globally parked (AnchorTaken above), which is what bounds the re-offer
+		// churn.
+		bool AnchorTakenForOwner(CPos anchor, int tick, object owner)
+		{
+			var i = anchors.IndexOf(anchor);
+			return (i >= 0 && lastAssigned[i] >= 0)
+				|| (anchorPendingUntil.TryGetValue(anchor, out var pend) && tick < pend)
+				|| (anchorParkedUntil.TryGetValue(anchor, out var park) && tick < park.Until
+					&& (park.Owner == null || ReferenceEquals(park.Owner, owner)));
+		}
+
+		// Park-agnostic "taken" for the reservation sweep: a hold on a foreign-parked anchor is
+		// still valid (it can activate for its owner during the cooldown), so only ground truth —
+		// served or pending-committed — retires a live hold.
+		bool AnchorServedOrPending(CPos anchor, int tick)
+		{
+			var i = anchors.IndexOf(anchor);
+			return (i >= 0 && lastAssigned[i] >= 0)
 				|| (anchorPendingUntil.TryGetValue(anchor, out var pend) && tick < pend);
 		}
 
@@ -545,12 +582,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		bool IBotExpansionTargetProvider.TryReserveRefineryAnchor(CPos anchor, object owner, int untilTick)
 		{
 			var tick = world.WorldTick;
-			return LawActive && anchorReservations.TryReserve(anchor, owner, tick, untilTick, a => AnchorTaken(a, tick));
+			return LawActive && anchorReservations.TryReserve(anchor, owner, tick, untilTick, a => AnchorTakenForOwner(a, tick, owner));
 		}
 
 		bool IBotExpansionTargetProvider.RefineryAnchorReserved(CPos anchor, object owner) =>
 			LawActive && anchorReservations.LiveFor(anchor, owner, world.WorldTick)
-				&& !AnchorTaken(anchor, world.WorldTick);
+				&& !AnchorTakenForOwner(anchor, world.WorldTick, owner);
 
 		void IBotExpansionTargetProvider.ReleaseRefineryAnchor(CPos anchor, object owner) =>
 			anchorReservations.Release(anchor, owner);
@@ -564,7 +601,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (!LawActive || (modelVersion >= 0 && modelVersion != coverageVersion))
 				return false;
 
-			var ok = anchorReservations.TryReserveAll(set, owner, tick, untilTick, a => AnchorTaken(a, tick));
+			// The table refreshes an existing owner's hold without consulting its taken probe.
+			// Revalidate the provider park/pending/served state on renewal as well as admission.
+			if (set.Any(a => AnchorTakenForOwner(a, tick, owner)))
+				return false;
+
+			var ok = anchorReservations.TryReserveAll(set, owner, tick, untilTick, a => AnchorTakenForOwner(a, tick, owner));
 			Log.Write("debug", $"AI ({player.ClientIndex}): REPAIR-B3 reserve {set.Count} anchors for site {site} v{modelVersion}: {(ok ? "committed" : "refused")} at tick {tick}");
 			return ok;
 		}
@@ -580,7 +622,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		bool IBotExpansionTargetProvider.RefineryAnchorsReserved(IReadOnlyCollection<CPos> set, object owner)
 		{
 			var tick = world.WorldTick;
-			return LawActive && anchorReservations.LiveSetFor(set, owner, tick) && !set.Any(a => AnchorTaken(a, tick));
+			return LawActive && anchorReservations.LiveSetFor(set, owner, tick) && !set.Any(a => AnchorTakenForOwner(a, tick, owner));
 		}
 
 		int IBotExpansionTargetProvider.RefineryCoveragePendingAnchors => LawActive ? coveragePendingAnchors : 0;
@@ -2086,9 +2128,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			return null;
 		}
 
-		void ParkFailedClaim(CPos anchor, int tick, string reason)
+		void ParkFailedClaim(CPos anchor, int tick, string reason, object owner = null)
 		{
-			anchorParkedUntil[anchor] = tick + Info.RefineryClaimFailParkTicks;
+			anchorParkedUntil[anchor] = (tick + Info.RefineryClaimFailParkTicks, owner);
 			anchorOfferStreaks.Remove(anchor);
 			var parked = $"AI ({player.ClientIndex}): REPAIR-B3 parked claim anchor {anchor} for {Info.RefineryClaimFailParkTicks} ticks ({reason}), at tick {tick}";
 			Log.Write("debug", parked);
@@ -2665,8 +2707,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			}
 
 			// ECON-A-FIX (R6): the same sweep retires demand reservations — expired holds, and holds whose
-			// anchor got served, parked or pending-committed under them.
-			anchorReservations.Prune(tick, a => AnchorTaken(a, tick));
+			// anchor got served or pending-committed under them. A park no longer retires a live hold
+			// (lead ruling 2026-10-10): the failing owner's holds are released at the failure point, and
+			// a foreign hold on a parked anchor stays valid so the anchor recycles to its owner.
+			anchorReservations.Prune(tick, a => AnchorServedOrPending(a, tick));
 
 			var queued = 0;
 			var builder = baseBuilders.FirstOrDefault(t => t.IsTraitEnabled());
@@ -2701,7 +2745,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			anchorStuck = (anchor, replans, refineryCells.Count);
 			if (parkAnchor)
 			{
-				anchorParkedUntil[anchor] = tick + Info.ParkTicks;
+				anchorParkedUntil[anchor] = (tick + Info.ParkTicks, null);
 				anchorStuck = (null, 0, refineryCells.Count);
 				var parked = $"AI ({player.ClientIndex}): REF-1 parked anchor {anchor} for {Info.ParkTicks} ticks: wanted {replans} re-plans with no refinery placed, at tick {tick}";
 				Log.Write("debug", parked);

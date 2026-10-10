@@ -1,3 +1,36 @@
+
+*Devin-Developer 2026-10-10 (rereview fix, devin/repair-b3-park-release @ 693c07793).* VP exact-tip review of 560a413 caught that owner-scoped AnchorTakenForOwner (ReferenceEquals only) made NULL-owner parks — offer-streak churn bounds, ParkTicks, the parameterless failure overload — invisible to every reservation probe. Restored global semantics for null-owner parks (park.Owner == null || ReferenceEquals) while keeping the lead-ruled owner scoping for failure cooldowns; fake provider mirrors it. New regression NullOwnerParkStaysGlobalAndBlocksForeignReservation. Verified: build 0 errors, focused 124/124, full 1515/1515, fog audit PASS (269 sites). No fresh boot gate — host has no execution slot (pytest ~9.7GB + seat_verify resident); branch boot-gated clean at dad8c6753.
+# 2026-10-10 — Devin: REPAIR-B3 follow-up — park frees the whole set; owner-scoped cooldown (branch `devin/repair-b3-park-release`)
+
+*Devin-Developer*, lead ruling 2026-10-10 (Opus, from Architect's question), base `10d3f44f7`,
+engine pin `6da7fce14`. Two commits (code + this log).
+
+- **`dad8c6753` — a placement-failure park frees the demand's whole covered set at the failure
+  point.** Previously the demand held the set until `UntilTick`, so a contested anchor stayed
+  hostage for the reservation TTL even though the per-site fail cooldown already bounds the
+  retry. `CommitRefineryClaimOrPark(law, claim, placedSite, owner)` releases by owner key before
+  signalling the failure; `RefineryClaimPlacementFailed(anchor, owner)` records the failing owner
+  on the park. The reservation channel probes per owner (`AnchorTakenForOwner`): a foreign demand
+  binds the freed anchor immediately; the parked demand's own re-reserve waits out the cooldown.
+  The offer channel keeps the anchor-global park (`AnchorTaken`, `AnchorBlockedForClaims`) — the
+  actual thrash bound the ruling cites. `Prune` drops the park term so a foreign hold on a parked
+  anchor survives and can activate for its owner mid-cooldown. Provider-side parks (offer-streak,
+  stuck-anchor) record a null owner and bind nobody's re-reserve.
+- **Regression pin:** `ParkedClaimFreesTheWholeSetAndRecyclesToAnotherDemand` — free-at-failure
+  (reservations Count 0 at the failure, not at UntilTick=500), immediate foreign re-bind of the
+  same anchor, parked owner's re-admission refused inside the cooldown and admitted once it
+  lapses. `FailedPlacementParksTheOfferedAnchorAndCommitsNothing` re-pinned for the owner-scoped
+  cooldown (the old global-refusal tail is superseded by the ruling).
+- **Known bound:** the offer channel stays anchor-global, so a parked anchor is still unofferable
+  to ANY demand during the cooldown — the immediate foreign re-bind is reachable for a demand
+  already holding a claim on that anchor (and for the freed covered-set siblings, which recycle
+  with no gate at all). Offering parked anchors to non-failing demands would need owner context
+  on the claim APIs — a separate, larger change if the ruling intends it.
+- **Verification:** Release 0/0; focused 123/123; full suite 1514/1514; fog audit PASS (82 files,
+  269 manifested sites — no new enumeration); boot gate PASS (menu reached, no new
+  exception-*.log, PID-scoped kill, no leftovers). Frozen tip pushed for VP exact-SHA review.
+  No runtime clearance implied.
+
 # 2026-10-10 — Devin: A9/M9 learned-file resolution + M14 emergency-default binding (branch `devin/a9-m9-m14-default`)
 
 *Devin-Architect*, task `01a1243d-3efb` (cloud doc @680dd25d PT7 items 4 and 6c;
@@ -20445,13 +20478,13 @@ Next: exact-SHA VP review; cost/coverage/adoption remain gated. No launches. Ins
 - Isolated codex/insurance-telemetry from 5ea8c84f5; separate default-on version1 payout stream, actual credit delta and engine-Earned income share, name-free bot slots.
 - Dynamic and legacy grants unchanged; inherited CashTrickler sync hash regression passes. C#10/10, full1440/1440, Python15/15; no launches.
 - Next: exact-SHA VP review; runtime cost/capture/parity remain unmeasured. Engine6da unchanged; frozen economy/MCV schemas unchanged.
-### 2026-10-10 � M13 restraint-budget checkpoint (Sol)
+### 2026-10-10 � M13 restraint-budget checkpoint (Sol)
 - Isolated codex/m13-liveness: classify 59 groups and refuse more than one newly armed restraint before YAML edits.
 - Exact externally reviewed manifests bind unchanged, already-armed baseline patches; combination tests remain explicitly non-campaign.
 - Preserve build-order generated specs with conservative restraint classes; no gameplay/default/engine changes.
 - Next: independent tooling review, then squad response/verified-dispatch wiring; no game launches.
 
-### 2026-10-10 � M13 helper R1 correction (Sol)
+### 2026-10-10 � M13 helper R1 correction (Sol)
 - Failed dispatch now clears only the pending intent while preserving Unsupported; complete observation alone restores eligibility.
 - Two regressions cover pre-deadline and due-deadline callbacks, repeated callback, rejected retry and complete recovery without deadline renewal.
 - Focused pure-helper suite30/30 PASS; no runtime wiring, engine pin changes or launches.
@@ -20498,3 +20531,8 @@ and the exact merged tree failed the fog audit.
 
 - Integrated P6 source commits `bec5ab9c3` plus reviewed deltas `27eb42521`, `0249f6fc0`, and VP-approved `0b19d6290` onto current master + P0. The unrelated base branch's BO commits were not cherry-picked; current master already carries the `BO_squad_move_dedup` configuration.
 - Runtime gates are still pending; this records a local candidate only and does not authorize merge/master publication.
+## 2026-10-10 B3 park takeover regression
+Sol preserved the already-pushed null-owner global reservation correction (693c07793 / da170b8ed), including the unchanged anchor-global offer park. Added production renewal-seam regression covering a park after admission, refusal through the final cooldown tick, and recovery at exact expiry. Focused/full validation is pending PT7 machine release; no launch or runtime approval.
+
+## 2026-10-10 B3 renewal correction
+The added c730b88 regression failed 1/125: same-owner live holds bypass the reservation table taken probe. The provider now validates the entire set against current park/pending/served state before table admission or renewal, without changing table ownership semantics or anchor-global offers. Matching provider fixture and production renewal-seam test pass: focused125/125, fullRelease1516/1516; two explicit max-census cases are not run. No engine pin change or launches.

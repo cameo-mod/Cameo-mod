@@ -531,13 +531,14 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>
 		/// REPAIR-B3: resolve an offered claim after the site search — a legal selected site
 		/// commits AT THE SITE (the provider publishes pending coverage for the whole in-radius
-		/// set around it and clears the reservations); no legal site parks the anchor for the
-		/// bounded fail cooldown so the next claim goes through instead of an unbounded
-		/// re-offer cycle. True = the caller queues the placement order; false = no refinery
-		/// placed this sweep.
+		/// set around it and clears the reservations); no legal site frees <paramref name="owner"/>'s
+		/// whole reserved set at the failure point (lead ruling 2026-10-10: a contested anchor must
+		/// recycle fast — the per-site fail cooldown alone bounds the retry) and parks the anchor
+		/// FOR THAT OWNER so its own re-reserve waits the cooldown while another demand can bind it
+		/// at once. True = the caller queues the placement order; false = no refinery placed.
 		/// </summary>
 		public static bool CommitRefineryClaimOrPark(
-			IBotExpansionTargetProvider law, RefineryAnchorClaim claim, CPos? placedSite)
+			IBotExpansionTargetProvider law, RefineryAnchorClaim claim, CPos? placedSite, object owner)
 		{
 			if (placedSite != null)
 			{
@@ -545,7 +546,8 @@ namespace OpenRA.Mods.CA.Traits
 				return true;
 			}
 
-			law.RefineryClaimPlacementFailed(claim.Anchor);
+			law.ReleaseRefineryAnchors(owner);
+			law.RefineryClaimPlacementFailed(claim.Anchor, owner);
 			return false;
 		}
 
