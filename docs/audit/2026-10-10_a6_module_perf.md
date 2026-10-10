@@ -106,8 +106,12 @@ Distribution CHANGED vs the pre-merge base — worth a line of its own:
   EVERY ceiling event in all six cells** (spent=64/64, n=78) alongside
   `N anchors pending` pacing lines — probe-dominated, so
   `CoverageProbesPerTick` is the natural throttle if tuning is ever asked.
-  The `MasterAiBotModule` 32→8 drop is NOT explained by B3 (separate
-  investigation — A1 RNG/lease/engine candidates).
+- **MasterAi 32→8 resolved (same-day window decomposition)**: the gap is
+  concentrated in the early windows — per-cell first-third means ~87–92 ms
+  (max ~2900 ms, init) on the pre-merge base vs ~20–30 ms (max ~600 ms) on
+  master; mid/late windows are ~3–4 ms vs ~1–2 ms on BOTH trees. So
+  MasterAi was never the dominant *sustained* cost — the pooled mean was
+  init-dominated; master's merges and/or engine halved the startup spike.
 - Engine differs too (`6da7fce14` vs `0a3f77dbe`); the shift cannot be
   attributed to mod merges alone from this data.
 - The C1 capped path held through the whole league — zero `FindTilesInAnnulus`
