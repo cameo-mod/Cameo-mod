@@ -74,9 +74,36 @@ recorded in `a6-league-c1fix/a6_raw.json`.)
 - No performance verdict is claimed; this is the reference table future
   changes should be measured against.
 
+## Post-merge master baseline (added same day, reviewer suggestion)
+
+Re-run on the fac-stale-labels tree = master `10d3f44f7` (+ runtime-neutral
+faction fix, engine `6da7fce14` — the master pin, C1 capped path in force).
+**6/6 clean, 614 reports**, incl. the two cells that died on the A1 tip.
+Distribution CHANGED vs the pre-merge base — worth a line of its own:
+
+| Module | gate gdi | gate nod | imm gdi | nuke gdi |
+|---|---|---|---|---|
+| ExpansionPlannerBotModule | 27.5 / 22.3 | 30.0 / 23.5 | **115.4** | 41.3 |
+| BaseBuilderBotModuleCA | 9.6 / 9.3 | 9.4 / 8.0 | 7.7 | 9.8 |
+| MasterAiBotModule | 8.0 / 8.6 | 8.1 / 7.4 | 7.6 | 11.1 |
+| TacticalMapBotModule | 10.1 / 11.2 | 12.8 / 12.0 | 23.3 | 12.6 |
+| EngagementLogBotModule | 45.4 / 33.2 (12-15w) | 18.3 / 39.0 (27/13w) | 126.6 (4w) | 69.5 (7w) |
+| EngineerBotModule | 11.7 / 14.1 (30-36w) | — | 21.8 (19w) | — |
+
+- `MasterAiBotModule` fell from ~32 to ~8 ms/300t — no longer dominant.
+- `ExpansionPlannerBotModule` is now the top consumer everywhere and is
+  sharply map-correlated (**115 ms/300t on Imminent** vs ~23–30 on the
+  fixture) — likely interacts with merged MCV/expansion work since the old
+  base (lease/prebuild changes) or engine `6da7fce14`. Observation, not a
+  verdict — flagged for the next perf pass.
+- Engine differs too (`6da7fce14` vs `0a3f77dbe`); the shift cannot be
+  attributed to mod merges alone from this data.
+- The C1 capped path held through the whole league — zero `FindTilesInAnnulus`
+  exceptions on master.
+
 ## Artifacts
 
-- Raw: `C:\cameo-wt\parity-wave1\a6-league{,-c1fix}\a6_raw.json`, per-cell
+- Raw: `C:\cameo-wt\parity-wave1\a6-league{,-c1fix,-master}\a6_raw.json`, per-cell
   `Logs/debug.log`, `batch_results.jsonl`, exception logs (A1 cells).
 - Exception logs (4×): `a6-league/*/Logs/exception-2026-10-10T*.log` — all
   `FindTilesInAnnulus maxRange>50` via `BaseFrontBackPlannerBotModule`.
