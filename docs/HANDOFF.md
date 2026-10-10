@@ -5549,3 +5549,5 @@ Next: exact-SHA VP review; cost/coverage/adoption remain gated. No launches. Ins
 - Default-off manager registers local wave identities; samples visible legal target/owned members, excludes explicit flee states and foreign leases, and prunes actor/wave memory. Shared observer rejects idle/queued/canceling/generic retreat or transport/ReturnToBase/unrelated targets; movement requires actual progress, not target drift.
 - Pure state renamed observed activity/count/time; monotonic wave dedup prevents repeat resets. No new orders, RNG, engine pin, default activation or combat stream mounting.
 - Focused42/42, full Release1558 passing (2 explicit max-census fixtures not run), Python tier/budget19/19, fog82files269sites and mutation191files0sites PASS. Save/coverage/full deadline/response/consumer/3v3 gates remain open; no launches.
+
+M13 combat consumer: tools/ai/combat_liveness.py validates transport only; see docs/design/COMBAT_LIVENESS_TRANSPORT.md. CLI always UNKNOWN21; semantic evaluator/emitter still pending. No economy logger or campaign gate changes.
