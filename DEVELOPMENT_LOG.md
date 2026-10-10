@@ -21035,3 +21035,8 @@ land ticks later or never) all produce identical disappearances. Corrected on
 Read-only separate MCV capture/provider and diagnostic consumer on codex/mcv-health-observation, base7ca7e9159; no YAML mount/engine/BaseBuilder edits.
 Focused9/9, Python8/8 actual canonical C# fixture UNKNOWN21, fullRelease1412/1412 PASS. Missing order/hold/transform hooks explicitly UNKNOWN.
 Next: exact-SHA VP review; cost/coverage/adoption remain gated. No launches. Insurance telemetry precedes M13 wiring per lead.
+
+### 2026-10-10 TRACK-INSURANCE source checkpoint
+- Isolated codex/insurance-telemetry from 5ea8c84f5; separate default-on version1 payout stream, actual credit delta and engine-Earned income share, name-free bot slots.
+- Dynamic and legacy grants unchanged; inherited CashTrickler sync hash regression passes. C#10/10, full1440/1440, Python15/15; no launches.
+- Next: exact-SHA VP review; runtime cost/capture/parity remain unmeasured. Engine6da unchanged; frozen economy/MCV schemas unchanged.

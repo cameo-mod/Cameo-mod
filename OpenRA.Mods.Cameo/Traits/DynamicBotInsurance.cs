@@ -667,7 +667,12 @@ namespace OpenRA.Mods.Cameo.Traits
 					accumulator = payout.Accumulator;
 					var cappedGrant = payout.Grant;
 					if (cappedGrant > 0)
+					{
+						var before = (long)playerResources.Cash + playerResources.Resources;
 						playerResources.GiveCash(cappedGrant);
+						InsuranceTelemetry.Payout(self, "dynamic_rescue", cappedGrant, before,
+							(long)playerResources.Cash + playerResources.Resources);
+					}
 
 					// The purifier bonus rides the same depth signal, as the stacked purifiers did.
 					if (amtAwaitingPurification >= info.PurifierMinAmount)
@@ -677,7 +682,12 @@ namespace OpenRA.Mods.Cameo.Traits
 						var cappedBonus = PurifierPayout(amtAwaitingPurification, purifierModifier,
 							depth, liquidity, cappedGrant, info.MaxThreshold);
 						if (cappedBonus > 0)
+						{
+							var before = (long)playerResources.Cash + playerResources.Resources;
 							playerResources.GiveCash(cappedBonus);
+							InsuranceTelemetry.Payout(self, "dynamic_purifier_bonus", cappedBonus, before,
+								(long)playerResources.Cash + playerResources.Resources);
+						}
 						amtAwaitingPurification = 0;
 					}
 

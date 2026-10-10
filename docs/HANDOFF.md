@@ -5546,3 +5546,7 @@ Read design/REPLAY_HEALTH_ANALYZER.md before health/campaign work. tools/ai/repl
 Read-only separate MCV capture/provider and diagnostic consumer on codex/mcv-health-observation, base7ca7e9159; no YAML mount/engine/BaseBuilder edits.
 Focused9/9, Python8/8 actual canonical C# fixture UNKNOWN21, fullRelease1412/1412 PASS. Missing order/hold/transform hooks explicitly UNKNOWN.
 Next: exact-SHA VP review; cost/coverage/adoption remain gated. No launches. Insurance telemetry precedes M13 wiring per lead.
+### TRACK-INSURANCE checkpoint (2026-10-10)
+- Next: C:/cameo-wt/sol-insurance-telemetry, codex/insurance-telemetry; docs/design/INSURANCE_TELEMETRY.md describes default-on observational stream and report contract.
+- Source complete for review: actual payout/cumulative plus covered engine income share; C#10/10/full1440/1440 and Python15/15. No game/boot/runtime acceptance.
+- M13 pure helpers remain unwired at99f89; continue after insurance review handoff. Master publication belongs to Integrator.
