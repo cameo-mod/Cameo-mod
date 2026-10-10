@@ -7,9 +7,22 @@ ROOT = pathlib.Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "tools" / "ai"))
 import a5_memory_parity_probe as probe
 import ab_campaign_pilot as pilot
+import run_ai_match_batch as batch
 
 
 class FixedTickParityTests(unittest.TestCase):
+    def test_temporary_map_template_requires_opt_in_and_fixed_layout(self):
+        with tempfile.TemporaryDirectory() as temp:
+            dest = pathlib.Path(temp)
+            for name in ("map.bin", "map.png"):
+                (dest / name).write_bytes(b"fixture")
+            (dest / "map.yaml").write_text("PlayerReference@BotA:\nPlayerReference@BotB:\n", encoding="utf-8")
+            (dest / "rules.yaml").write_text("World:\n\tTimeLimitDefault: 1\n", encoding="utf-8")
+            self.assertIn("only the bundled", batch.legacy_template_dir_error(dest))
+            self.assertIsNone(batch.legacy_template_dir_error(dest, allow_temporary=True))
+            (dest / "rules.yaml").write_text("World:\n", encoding="utf-8")
+            self.assertIn("TimeLimitDefault", batch.legacy_template_dir_error(dest, allow_temporary=True))
+
     def test_censored_cap_requires_marker_and_complete_mutual_loss(self):
         rows = [{"duration_ticks": 16002, "player": {"outcome": "lost"}} for _ in range(2)]
         self.assertEqual((True, 16001), probe.verify_censored_cap("AB_CAMPAIGN_CAP tick=16001", rows, 16000))

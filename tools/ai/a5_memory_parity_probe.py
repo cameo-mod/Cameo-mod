@@ -182,6 +182,7 @@ def run_cell(index: int) -> dict:
 		"--factions", "td_gdi", "--bot-a", "hard", "--bot-b", "hard",
 		"--team-size", "1", "--repeats", "1", "--map",
 		str(OUT / "a5_fixed_tick_map"),
+		"--allow-temporary-template",
 		"--time-limit", "1", "--retries", "0", "--stall-timeout", "180",
 		"--keep-variants", "--render", "fast", "--support-dir", str(support)]
 	env = os.environ.copy()

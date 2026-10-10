@@ -680,6 +680,25 @@ def write_variant(template: Path, dest: pathlib.Path, matchup: dict, time_limit:
     rules_yaml.write_text(patched, encoding="utf-8")
 
 
+def legacy_template_dir_error(path: pathlib.Path, allow_temporary: bool = False) -> str | None:
+    """Validate the fixed-layout BotA/B directory-map path used by A5 diagnostics."""
+    if not path.is_dir() or path.resolve() == TEMPLATE_MAP.resolve():
+        return None
+    if not allow_temporary:
+        return f"only the bundled template dir is supported for directory maps: {TEMPLATE_MAP}"
+    required = ("map.bin", "map.png", "map.yaml", "rules.yaml")
+    missing = [name for name in required if not (path / name).is_file()]
+    if missing:
+        return "temporary template dir missing required files: " + ", ".join(missing)
+    map_yaml = (path / "map.yaml").read_text(encoding="utf-8", errors="replace")
+    rules_yaml = (path / "rules.yaml").read_text(encoding="utf-8", errors="replace")
+    if "PlayerReference@BotA:" not in map_yaml or "PlayerReference@BotB:" not in map_yaml:
+        return "temporary template dir must contain the fixed BotA/B player references"
+    if not re.search(r"(?m)^\s*TimeLimitDefault:\s*\d+", rules_yaml):
+        return "temporary template dir missing TimeLimitDefault in rules.yaml"
+    return None
+
+
 def output_tail(output: str) -> str:
     lines = output.splitlines()
     return "\n".join(lines[-40:]) if len(lines) > 40 else output
@@ -1070,6 +1089,8 @@ def main() -> int:
     parser.add_argument("--map", dest="map_path", type=pathlib.Path, default=DEFAULT_MAP,
                         help="duel map: the shipped .oramap (default: A Nuclear Winter) "
                              "or the legacy ai_duel_gate template dir")
+    parser.add_argument("--allow-temporary-template", action="store_true",
+                        help="allow a validated temporary fixed-layout legacy template directory")
     parser.add_argument("--swap-bots", action="store_true",
                         help="alternate which bot occupies which spawn per repeat — "
                              "the A/B acceptance requires both spawns covered")
@@ -1125,8 +1146,9 @@ def main() -> int:
     map_source = map_arg.resolve()
     if not map_source.exists():
         fail(f"map source missing: {map_source}")
-    if map_source.is_dir() and map_source != TEMPLATE_MAP:
-        fail(f"only the bundled template dir is supported for directory maps: {TEMPLATE_MAP}")
+    template_error = legacy_template_dir_error(map_source, args.allow_temporary_template)
+    if template_error:
+        fail(template_error)
 
     mod_id, engine = load_config()
     executable = engine / "bin" / "OpenRA.exe"
