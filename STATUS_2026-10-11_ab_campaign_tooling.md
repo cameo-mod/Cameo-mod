@@ -62,3 +62,8 @@ No-launch dry run: 64 games / 32 variants / 144 seat proofs; 0 launches; estimat
 A5 parity gate failed: initial stale-DLL load failure; rebuilt run-a exceeded 6.5 GiB; run-b hit 8.07 GiB and was PID-scoped stopped; campaign cells never started.
 Preserved logs: `C:\cameo-wt\ab-campaign-tooling\results\campaign-a5-20261010`; schema: `C:\cameo-wt\ab-campaign-tooling\tools\ai\ab_campaign_receipt.schema.json`.
 Next owner is Luna DevOps; do not run any campaign cells until memory-safe exact-baseline A5 parity and map/manifest gates pass.
+
+## Resume (2026-10-10 18:04Z, memory cap review)
+Sol's guidance: PT7 1v1 hard-vs-hard on the same map ran 45k ticks at bounded memory, so the rapid 8.29 GiB at WT~3050 is unlikely ordinary workload; the logger-build change is a key new variable. Next diagnostic should compare telemetry/logging behavior and sample private bytes, free RAM, actor count/types, managed GC/LOH, and log/replay/temp sizes every 1-2 seconds. No `dotnet-counters` CLI is installed on this host.
+User authorized considering 12 GiB per instance, but current host has 31.93 GiB total / 15.42 GiB free. With the 6 GiB free-RAM reserve, a 12 GiB instance is not safe now (leaves 3.42 GiB); raw arithmetic ceiling is 9.42 GiB before headroom, so use at most an 8 GiB single-instance diagnostic unless free RAM rises. Do not launch campaign outcome cells; A5 has no valid match/replay/order proof.
+Incident receipt remains `results/campaign-a5-memory-patch-20261010/A5_memory_probe_incident.json`; kill-path fix is in pushed commit `8f8a532b2898dc6928c4e04e159aed76b18c9e7e`.
