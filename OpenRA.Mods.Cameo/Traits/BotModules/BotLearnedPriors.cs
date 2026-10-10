@@ -86,7 +86,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			"builder takes its original path, random draws included.")]
 		public readonly bool UseLearnedPriors = false;
 
-		[Desc("Mod-relative path of the priors file written by tools/ai/fit_arsenal_priors.py --write.")]
+		[Desc("Mod-relative path of the priors file written by tools/ai/fit_arsenal_priors.py --write.",
+			"A bare path resolves inside the cameo package; an explicit 'package|path' is honoured.")]
 		public readonly string PriorsFile = "ai/learned/arsenal_priors.yaml";
 
 		[Desc("Lowest weight (percent) the priors may give a candidate.")]
@@ -119,13 +120,14 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			loaded = true;
 			var fs = Game.ModData.DefaultFileSystem;
-			if (!fs.Exists(Info.PriorsFile))
+			var priorsPath = LearnedFilePath.Resolve(Info.PriorsFile);
+			if (!fs.Exists(priorsPath))
 			{
 				Log.Write("debug", $"AI {player.InternalName}: LEARNED priors: no priors ({Info.PriorsFile} missing), everything neutral");
 				return;
 			}
 
-			using (var stream = fs.Open(Info.PriorsFile))
+			using (var stream = fs.Open(priorsPath))
 				priors = ArsenalPriors.Parse(MiniYaml.FromStream(stream, Info.PriorsFile));
 
 			Log.Write("debug", $"AI {player.InternalName}: LEARNED priors: {priors.PairCount} pairs, {priors.TypeCount} types");

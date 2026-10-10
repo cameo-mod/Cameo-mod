@@ -44,7 +44,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		"armed, so the fitter can condition on survivorship filters. No orders, no actor access — record and steering only.")]
 	public class PlanBanditBotModuleInfo : ConditionalTraitInfo
 	{
-		[Desc("Mod-relative path of the learned posteriors written by tools/ai/tune_plan_bandits.py --write.")]
+		[Desc("Mod-relative path of the learned posteriors written by tools/ai/tune_plan_bandits.py --write.",
+			"A bare path resolves inside the cameo package; an explicit 'package|path' is honoured.")]
 		public readonly string LearnedFile = "ai/learned/plan_bandits.yaml";
 
 		[Desc("Personality bandit arms: personality names (no prefix) that must match a BotPersonalityController condition.",
@@ -225,13 +226,14 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		void LoadLearned()
 		{
 			var fs = Game.ModData.DefaultFileSystem;
-			if (!fs.Exists(Info.LearnedFile))
+			var learnedPath = LearnedFilePath.Resolve(Info.LearnedFile);
+			if (!fs.Exists(learnedPath))
 			{
 				Log.Write("debug", $"AI {player.InternalName}: plan-bandit learned: {Info.LearnedFile} missing, priors only");
 				return;
 			}
 
-			using (var stream = fs.Open(Info.LearnedFile))
+			using (var stream = fs.Open(learnedPath))
 				learned = PlanBanditLearned.Parse(MiniYaml.FromStream(stream, Info.LearnedFile));
 
 			Log.Write("debug", $"AI {player.InternalName}: plan-bandit learned: {learned.ScopeCount} scopes");

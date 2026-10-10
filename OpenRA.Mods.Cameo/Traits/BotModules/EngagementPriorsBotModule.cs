@@ -178,7 +178,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		"genericbot && tier1_priors only — classic never sees the provider.")]
 	public class EngagementPriorsBotModuleInfo : ConditionalTraitInfo
 	{
-		[Desc("Mod-relative path of the priors file written by tools/ai/fit_engagement_priors.py --write.")]
+		[Desc("Mod-relative path of the priors file written by tools/ai/fit_engagement_priors.py --write.",
+			"A bare path resolves inside the cameo package; an explicit 'package|path' is honoured.")]
 		public readonly string PriorsFile = "ai/learned/engagement_priors.yaml";
 
 		[Desc("Lowest correction (thousandths) a fitted prior may give an attacker's damage.")]
@@ -213,7 +214,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			loaded = true;
 			var fs = Game.ModData.DefaultFileSystem;
-			if (!fs.Exists(Info.PriorsFile))
+			var priorsPath = LearnedFilePath.Resolve(Info.PriorsFile);
+			if (!fs.Exists(priorsPath))
 			{
 				priorsState = "none";
 				Log.Write("debug", $"AI {player.InternalName}: TIER1 priors: none ({Info.PriorsFile} missing), neutral");
@@ -222,7 +224,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			try
 			{
-				using (var stream = fs.Open(Info.PriorsFile))
+				using (var stream = fs.Open(priorsPath))
 					priors = BotEngagementPriors.Parse(MiniYaml.FromStream(stream, Info.PriorsFile));
 
 				priorsState = "fitted";
