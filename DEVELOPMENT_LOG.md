@@ -20531,3 +20531,5 @@ and the exact merged tree failed the fog audit.
 
 - Integrated P6 source commits `bec5ab9c3` plus reviewed deltas `27eb42521`, `0249f6fc0`, and VP-approved `0b19d6290` onto current master + P0. The unrelated base branch's BO commits were not cherry-picked; current master already carries the `BO_squad_move_dedup` configuration.
 - Runtime gates are still pending; this records a local candidate only and does not authorize merge/master publication.
+## 2026-10-10 B3 park takeover regression
+Sol preserved the already-pushed null-owner global reservation correction (693c07793 / da170b8ed), including the unchanged anchor-global offer park. Added production renewal-seam regression covering a park after admission, refusal through the final cooldown tick, and recovery at exact expiry. Focused/full validation is pending PT7 machine release; no launch or runtime approval.
