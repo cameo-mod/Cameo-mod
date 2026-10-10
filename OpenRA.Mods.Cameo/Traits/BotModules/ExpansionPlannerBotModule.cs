@@ -527,14 +527,18 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		// REPAIR-B3 (lead ruling 2026-10-10): the reservation-channel taken probe — the fail
 		// cooldown binds only the owner that failed, so a freed contested anchor re-binds to a
 		// foreign demand immediately while the parked demand's own re-reserve waits it out.
-		// The offer channel stays globally parked (AnchorTaken above), which is what bounds the
-		// re-offer churn.
+		// Null-owner parks stay GLOBAL (VP rereview 560a413): the offer-channel churn bounds —
+		// uncommitted-offer streaks and ParkTicks — carry no owner and must refuse every
+		// demand's reservation exactly as the pre-scoping AnchorTaken did. The offer channel
+		// itself stays globally parked (AnchorTaken above), which is what bounds the re-offer
+		// churn.
 		bool AnchorTakenForOwner(CPos anchor, int tick, object owner)
 		{
 			var i = anchors.IndexOf(anchor);
 			return (i >= 0 && lastAssigned[i] >= 0)
 				|| (anchorPendingUntil.TryGetValue(anchor, out var pend) && tick < pend)
-				|| (anchorParkedUntil.TryGetValue(anchor, out var park) && tick < park.Until && ReferenceEquals(park.Owner, owner));
+				|| (anchorParkedUntil.TryGetValue(anchor, out var park) && tick < park.Until
+					&& (park.Owner == null || ReferenceEquals(park.Owner, owner)));
 		}
 
 		// Park-agnostic "taken" for the reservation sweep: a hold on a foreign-parked anchor is

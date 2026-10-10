@@ -1054,7 +1054,8 @@ namespace OpenRA.Mods.Cameo.Test
 				if (modelVersion >= 0 && modelVersion != Version)
 					return false;
 				return Reservations.TryReserveAll(anchors, owner, Now, untilTick,
-					a => Taken.Contains(a) || (Parked.TryGetValue(a, out var p) && Now < p.Until && ReferenceEquals(p.Owner, owner)));
+					a => Taken.Contains(a) || (Parked.TryGetValue(a, out var p) && Now < p.Until
+						&& (p.Owner == null || ReferenceEquals(p.Owner, owner))));
 			}
 
 			public void RefineryClaimCommitted(CPos anchor, CPos site)
@@ -1202,6 +1203,29 @@ namespace OpenRA.Mods.Cameo.Test
 			// ...and re-admits once it lapses — the park, not the reservation, was the bound.
 			law.Now = 10 + law.ParkTicks;
 			Assert.That(BaseBuilderQueueEvalCA.RefineryReservationAdmits(law, claim, parked, 700), Is.True);
+		}
+
+		[Test]
+		public void NullOwnerParkStaysGlobalAndBlocksForeignReservation()
+		{
+			// VP rereview 560a413: parks WITHOUT an owner — the offer-channel churn bounds
+			// (uncommitted-offer streaks, ParkTicks) and the legacy parameterless failure
+			// overload — must refuse EVERY demand's reservation for the cooldown, exactly as
+			// the pre-scoping AnchorTaken did. Only an owner-scoped failure park recycles
+			// early to foreign demands (ParkedClaimFreesTheWholeSetAndRecyclesToAnotherDemand).
+			var law = new RecordingRefineryLaw { Now = 5 };
+			var foreign = new object();
+			law.RefineryClaimPlacementFailed(new CPos(6, 6));   // parameterless → Owner = null
+
+			Assert.That(law.TryReserveRefineryAnchors(new CPos(6, 6), new[] { new CPos(6, 6) },
+				foreign, 100), Is.False);
+			Assert.That(law.TryReserveRefineryAnchors(new CPos(6, 6), new[] { new CPos(6, 6) },
+				new object(), 100), Is.False);   // any owner — global means global
+
+			// ...and the block lifts when the cooldown lapses.
+			law.Now = 5 + law.ParkTicks;
+			Assert.That(law.TryReserveRefineryAnchors(new CPos(6, 6), new[] { new CPos(6, 6) },
+				foreign, 100), Is.True);
 		}
 
 		[Test]
