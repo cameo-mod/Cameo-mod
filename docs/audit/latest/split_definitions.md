@@ -21,8 +21,8 @@ _none found_
 
 | weapon | defined at |
 |---|---|
-| `Flamethrower` | `weapons/tiberiandawn.yaml:168` · `weapons/starcraft.yaml:1` |
-| `Sound2` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:4864` · `ContentPacks/D2k/Atreides/yaml/weapons.yaml:15` |
+| `Flamethrower` | `weapons/tiberiandawn.yaml:170` · `weapons/starcraft.yaml:1` |
+| `Sound2` | `ContentPacks/D2k/Ordos/yaml/weapons.yaml:5146` · `ContentPacks/D2k/Atreides/yaml/weapons.yaml:15` |
 
 
 _at or below baseline_ — pre-existing migration residue. **Lower `S1_BASELINE`/`S2_BASELINE` as duplicates are deleted; never raise them.**

@@ -1,6 +1,6 @@
 # audit_code_duplication — copy-paste clone groups
 
-Python files: **824** (min 5 statements), C# files: **518** (min 8 lines)
+Python files: **850** (min 5 statements), C# files: **536** (min 8 lines)
 
 
 ## Files that do not parse (not scanned)
@@ -12,7 +12,7 @@ Python files: **824** (min 5 statements), C# files: **518** (min 8 lines)
 | code | meaning | clone groups | baseline |
 |---|---|---|---|
 | C1 | identical Python function bodies | 29 | 10 |
-| C2 | identical C# method bodies | 23 | 14 |
+| C2 | identical C# method bodies | 24 | 14 |
 | C3 | identical module-level literal tables | 43 | 10 |
 
 
@@ -20,27 +20,27 @@ Python files: **824** (min 5 statements), C# files: **518** (min 8 lines)
 
 | copies | fingerprint | sites |
 |---|---|---|
-| 5 | 41d0c91332872de3 | tools/balance/consolidate_authorized_role_profiles.py:199 descendants(); tools/balance/consolidate_corroborated_role_profiles.py:301 descendants(); tools/balance/consolidate_delivery_identity_profiles.py:83 descendants(); tools/balance/consolidate_machinegun_profiles.py:56 descendants(); tools/balance/consolidate_role_complete_profiles.py:85 descendants() |
-| 4 | 0c9e5a3408c1d09c | tools/balance/consolidate_exact_profile_duplicates.py:105 descendants(); tools/balance/consolidate_freedom_rocket_base.py:43 descendants(); tools/balance/consolidate_high_identity_profiles.py:66 descendants(); tools/balance/consolidate_laser_heavy_routes.py:82 descendants() |
+| 5 | 41d0c91332872de3 | tools/balance/consolidate_authorized_role_profiles.py:212 descendants(); tools/balance/consolidate_corroborated_role_profiles.py:301 descendants(); tools/balance/consolidate_delivery_identity_profiles.py:93 descendants(); tools/balance/consolidate_machinegun_profiles.py:73 descendants(); tools/balance/consolidate_role_complete_profiles.py:85 descendants() |
+| 4 | 0c9e5a3408c1d09c | tools/balance/consolidate_exact_profile_duplicates.py:107 descendants(); tools/balance/consolidate_freedom_rocket_base.py:43 descendants(); tools/balance/consolidate_high_identity_profiles.py:66 descendants(); tools/balance/consolidate_laser_heavy_routes.py:82 descendants() |
 | 4 | 2af465aa2475b428 | tools/gen_cryo_fog.py:29 fractal_noise(); tools/gen_fire.py:32 fractal_noise(); tools/gen_fire_smoke_glow.py:27 fractal_noise(); tools/gen_smoke.py:28 fractal_noise() |
 | 4 | 65200300e1e889be | tools/ai/run_ai_match_batch.py:174 load_config(); tools/tests/ai_bot_player_gate.py:48 load_config(); tools/tests/ai_raid_gate.py:55 load_config(); tools/tests/ai_squad_gate.py:54 load_config() |
 | 3 | 19cd94bfaa3c12ef | tools/balance/compare_nuke_area_damage.py:290 main(); tools/balance/reconcile_r12_consumer_closure.py:380 main(); tools/balance/reconcile_r13_templates.py:161 main() |
 | 3 | 276f5256b8897b1c | tools/tests/ai_bot_player_gate.py:110 read_appended_records(); tools/tests/ai_raid_gate.py:117 read_appended_records(); tools/tests/ai_squad_gate.py:116 read_appended_records() |
 | 3 | 8854ec3eda1c1b76 | tools/balance/cameo_channel_curves.py:533 main(); tools/balance/dta_channel_curves.py:501 main(); tools/balance/reference_weapon_geometry.py:565 main() |
 | 3 | 89ffae39156fff00 | tools/tests/ai_bot_player_gate.py:66 support_directory(); tools/tests/ai_raid_gate.py:73 support_directory(); tools/tests/ai_squad_gate.py:72 support_directory() |
-| 3 | b349b4fadfe93412 | tools/balance/consolidate_explicit_family_state_profiles.py:164 descendants(); tools/balance/consolidate_named_state_corrections.py:76 descendants(); tools/balance/consolidate_pinned_role_profiles.py:92 descendants() |
-| 3 | e56561937b9ea65e | tools/balance/consolidate_explicit_family_state_profiles.py:300 add_removal(); tools/balance/consolidate_named_family_profiles.py:260 add_removal(); tools/balance/consolidate_pinned_role_profiles.py:209 add_removal() |
+| 3 | b349b4fadfe93412 | tools/balance/consolidate_explicit_family_state_profiles.py:168 descendants(); tools/balance/consolidate_named_state_corrections.py:76 descendants(); tools/balance/consolidate_pinned_role_profiles.py:92 descendants() |
+| 3 | e56561937b9ea65e | tools/balance/consolidate_explicit_family_state_profiles.py:319 add_removal(); tools/balance/consolidate_named_family_profiles.py:286 add_removal(); tools/balance/consolidate_pinned_role_profiles.py:209 add_removal() |
 | 3 | f3f8811ecbc48273 | tools/gen_cryo_fog.py:51 warp(); tools/gen_fire_smoke_glow.py:50 warp(); tools/gen_smoke.py:51 warp() |
 | 2 | 05c6a74eb9d37d10 | tools/reference/extract_emperor_units.py:833 write_exclusive(); tools/reference/extract_opendune_units.py:908 write_exclusive() |
 | 2 | 0d67a0a30ddaeb8e | tools/tests/gen_cannonap_fixture.py:38 parse_generated_warhead(); tools/tests/test_cannonap_generated_fixture.py:42 parse_generated_warhead() |
 | 2 | 11d29300c3f1eadc | tools/tilesets/generate_volcanic_tileset.py:168 build_palette(); tools/tilesets/volcanic_art_utils.py:84 build_palette() |
 | 2 | 1dacd1e435667177 | tools/tilesets/generate_volcanic_tileset.py:588 base_clear_index(); tools/tilesets/volcanic_art_utils.py:132 base_clear_index() |
 | 2 | 2bbde3b4a104ab45 | tools/tests/test_accepted_td_gdi_balance_batch.py:44 assert_weapon(); tools/tests/test_accepted_td_nod_balance_batch.py:48 assert_weapon() |
-| 2 | 375206ce07b9e1fe | tools/balance/consolidate_adjacent_family_stacks.py:105 combined_percentage_scale(); tools/balance/consolidate_same_family_stacks.py:159 combined_percentage_scale() |
+| 2 | 375206ce07b9e1fe | tools/balance/consolidate_adjacent_family_stacks.py:112 combined_percentage_scale(); tools/balance/consolidate_same_family_stacks.py:167 combined_percentage_scale() |
 | 2 | 3ec58372f7614926 | tools/tilesets/generate_clear_lava.py:639 lattice(); tools/tilesets/generate_sh04_alpha_beach_prototype.py:1538 lattice() |
 | 2 | 46d2974b41e97f9c | tools/audit/audit_promotion_superiority.py:559 main(); tools/balance/prepare_promotion_upgrade_interactions.py:339 main() |
 | 2 | 4fa9c55d9990e939 | tools/balance/consolidate_freedom_rocket_base.py:64 resolved_hash(); tools/balance/consolidate_laser_heavy_routes.py:103 resolved_hash() |
-| 2 | 62ed07d5aa1ca73a | tools/balance/consolidate_corroborated_role_profiles.py:675 main(); tools/balance/consolidate_delivery_identity_profiles.py:194 main() |
+| 2 | 62ed07d5aa1ca73a | tools/balance/consolidate_corroborated_role_profiles.py:675 main(); tools/balance/consolidate_delivery_identity_profiles.py:205 main() |
 | 2 | 6a38f8704e6495e3 | tools/tilesets/generate_volcanic_tileset.py:576 tileable_noise(); tools/tilesets/volcanic_art_utils.py:120 tileable_noise() |
 | 2 | 91e5e00bc8dcb778 | tools/tilesets/build_volcanic_basalt_gimp_brushes.py:58 checkerboard(); tools/tilesets/fix_tc_basalt_shadow_outlines.py:60 checkerboard() |
 | 2 | 97800b303b1b47fb | tools/rename/apply.py:73 sub(); tools/rename/safe_rename.py:91 sub() |
@@ -48,43 +48,44 @@ Python files: **824** (min 5 statements), C# files: **518** (min 8 lines)
 | 2 | beec2625d556ef6b | tools/tilesets/generate_clear_lava.py:621 periodic_value_noise(); tools/tilesets/generate_sh04_alpha_beach_prototype.py:1520 periodic_value_noise() |
 | 2 | ed0cd1830cbcac3c | tools/balance/consolidate_rule_driven_blast_ordnance.py:223 isolate_legacy_root(); tools/balance/consolidate_rule_driven_heavy_explosives.py:108 isolate_legacy_root() |
 | 2 | f0e4b6e20114d0f8 | tools/rename/apply.py:35 load_map(); tools/rename/safe_rename.py:35 load_map() |
-| 2 | f7586bdb04bd3e37 | tools/balance/consolidate_exact_profile_duplicates.py:231 remove_node(); tools/balance/consolidate_laser_heavy_routes.py:212 remove_node() |
+| 2 | f7586bdb04bd3e37 | tools/balance/consolidate_exact_profile_duplicates.py:233 remove_node(); tools/balance/consolidate_laser_heavy_routes.py:215 remove_node() |
 
 
-## C2 — C# method clones (23 group(s))
+## C2 — C# method clones (24 group(s))
 
 | copies | fingerprint | sites |
 |---|---|---|
-| 4 | 6def834d295492bb | OpenRA.Mods.Cameo/Traits/BotModules/EngineerBotModule.cs:1198 EscortReady(); OpenRA.Mods.Cameo/Traits/BotModules/EngineerBotModule.cs:1205 DefenceValue(); OpenRA.Mods.Cameo/Traits/BotModules/EngineerBotModule.cs:1210 OwnArmedValueNear(); OpenRA.Mods.Cameo/Traits/BotModules/EngineerBotModule.cs:1230 BlockedByEscort() |
+| 4 | 6def834d295492bb | OpenRA.Mods.Cameo/Traits/BotModules/EngineerBotModule.cs:1202 EscortReady(); OpenRA.Mods.Cameo/Traits/BotModules/EngineerBotModule.cs:1209 DefenceValue(); OpenRA.Mods.Cameo/Traits/BotModules/EngineerBotModule.cs:1214 OwnArmedValueNear(); OpenRA.Mods.Cameo/Traits/BotModules/EngineerBotModule.cs:1234 BlockedByEscort() |
 | 3 | 2049c109832a37b5 | OpenRA.Mods.Cameo/Widgets/ObserverBuildOrderIconsWidget.cs:184 Tick(); OpenRA.Mods.Cameo/Widgets/ObserverPromotionsIconsWidget.cs:158 Tick(); OpenRA.Mods.Cameo/Widgets/PlayerUpgradesIconsWidget.cs:151 Tick() |
 | 3 | ec2ad77fd06bf5bb | OpenRA.Mods.Cameo/Traits/BotModules/BotSituation.cs:2009 TargetScore(); OpenRA.Mods.Cameo/Traits/BotModules/BotSituation.cs:2012 TargetScore(); OpenRA.Mods.Cameo/Traits/BotModules/BotSituation.cs:2016 TargetScore() |
+| 3 | fc7ad18d22be8b85 | OpenRA.Mods.CA/Traits/BotModules/BotModuleLogic/BotCombatPredictor.cs:67 PortWeaponCanFire(); OpenRA.Mods.CA/Traits/BotModules/BotModuleLogic/BotCombatPredictor.cs:73 MaximumRangeAgainst(); OpenRA.Mods.CA/Traits/BotModules/BotModuleLogic/BotCombatPredictor.cs:83 DamagePerTickAgainst() |
 | 2 | 05372eb40e5f4542 | OpenRA.Mods.Cameo/UtilityCommands/FactionBuildableReportCommand.cs:292 ExpandTransforms(); OpenRA.Mods.Cameo/UtilityCommands/TildeAuditCommand.cs:470 ExpandTransforms() |
-| 2 | 07c66d79766bf896 | OpenRA.Mods.CA/Traits/BotModules/SquadManagerBotModuleCA.cs:1160 CanEscortArtillery(); OpenRA.Mods.CA/Traits/BotModules/SquadManagerBotModuleCA.cs:1173 CanHitAir() |
+| 2 | 07c66d79766bf896 | OpenRA.Mods.CA/Traits/BotModules/SquadManagerBotModuleCA.cs:1199 CanEscortArtillery(); OpenRA.Mods.CA/Traits/BotModules/SquadManagerBotModuleCA.cs:1212 CanHitAir() |
 | 2 | 1b388f55c56ddd71 | OpenRA.Mods.Cameo/Traits/AiEngagementLogWriter.cs:89 TryAppend(); OpenRA.Mods.Cameo/Traits/AiPlacementLogWriter.cs:230 TryAppend() |
 | 2 | 1c600b09b51924b2 | OpenRA.Mods.Cameo/Widgets/ClickMaskWidget.cs:28 HandleMouseInput(); OpenRA.Mods.Cameo/Widgets/CommanderTreeDismissWidget.cs:24 HandleMouseInput() |
 | 2 | 1fe354611923a401 | OpenRA.Mods.Cameo/Traits/DroneSpawnerMasterCA.cs:235 SpawnIntoWorld(); OpenRA.Mods.Cameo/Traits/ShadeMaster.cs:139 SpawnIntoWorld() |
 | 2 | 2a3b5caf2a992b8b | OpenRA.Mods.Cameo/Traits/DroneSpawnerMasterCA.cs:282 MoveSlaves(); OpenRA.Mods.Cameo/Traits/SlaveMinerSpawnerMaster.cs:193 MoveSlaves() |
 | 2 | 36919d259764fdb5 | OpenRA.Mods.Cameo/Traits/DroneSpawnerMasterCA.cs:297 AssignSlaveActivity(); OpenRA.Mods.Cameo/Traits/SlaveMinerSpawnerMaster.cs:208 AssignSlaveActivity() |
-| 2 | 3ccd15bbfaebfe44 | OpenRA.Mods.Cameo/Traits/BotModules/EngineerBotModule.cs:583 GuardingEnemies(); OpenRA.Mods.Cameo/Traits/BotModules/EngineerBotModule.cs:590 RankBySafety() |
-| 2 | 45a43547d43ff3d8 | OpenRA.Mods.CA/Traits/BotModules/SquadManagerBotModuleCA.cs:2929 IsStealthDraftable(); OpenRA.Mods.CA/Traits/BotModules/SquadManagerBotModuleCA.cs:2931 FindNewUnits() |
+| 2 | 3ccd15bbfaebfe44 | OpenRA.Mods.Cameo/Traits/BotModules/EngineerBotModule.cs:584 GuardingEnemies(); OpenRA.Mods.Cameo/Traits/BotModules/EngineerBotModule.cs:592 RankBySafety() |
+| 2 | 46e9f71b250b0bfb | OpenRA.Mods.CA/Traits/BotModules/BaseBuilderBotModuleCA.cs:1049 HasAdequateRefineryCount(); OpenRA.Mods.CA/Traits/BotModules/BaseBuilderBotModuleCA.cs:1088 RecordOpeningStructureQueued() |
 | 2 | 522ab179c848a0ef | OpenRA.Mods.Cameo/Traits/DroneSpawnerMasterCA.cs:103 Created(); OpenRA.Mods.Cameo/Traits/SlaveMinerSpawnerMaster.cs:85 Created() |
-| 2 | 54498d1ba9741428 | OpenRA.Mods.CA/Traits/BotModules/SquadManagerBotModuleCA.cs:1089 IsDefenderDraftable(); OpenRA.Mods.CA/Traits/BotModules/SquadManagerBotModuleCA.cs:1103 AirSquadTypeFor() |
+| 2 | 54498d1ba9741428 | OpenRA.Mods.CA/Traits/BotModules/SquadManagerBotModuleCA.cs:1128 IsDefenderDraftable(); OpenRA.Mods.CA/Traits/BotModules/SquadManagerBotModuleCA.cs:1142 AirSquadTypeFor() |
 | 2 | 5659cbf6c3b6a99d | OpenRA.Mods.CA/Traits/BotModules/Squads/States/GroundConcaveStateCA.cs:411 Valid(); OpenRA.Mods.CA/Traits/BotModules/Squads/States/GroundConcaveStateCA.cs:420 ShouldCommit() |
 | 2 | 61d619290028a34b | OpenRA.Mods.CA/Projectiles/LinearPulse.cs:1509 TryProjectOntoCenterLine(); OpenRA.Mods.CA/Projectiles/LinearPulse.cs:1520 CalculateFalloffDistance() |
-| 2 | 8ab419c8b1877522 | OpenRA.Mods.Cameo/Traits/BotModules/TacticalMapBotModule.cs:1680 GetUsefulChokepoints(); OpenRA.Mods.Cameo/Traits/BotModules/TacticalMapBotModule.cs:1701 GetDoorHotspots() |
+| 2 | 8ab419c8b1877522 | OpenRA.Mods.Cameo/Traits/BotModules/TacticalMapBotModule.cs:1681 GetUsefulChokepoints(); OpenRA.Mods.Cameo/Traits/BotModules/TacticalMapBotModule.cs:1702 GetDoorHotspots() |
 | 2 | 918c59746a74f5f7 | OpenRA.Mods.CA/Projectiles/LinearPulse.cs:1531 TryProjectOntoCenterLine(); OpenRA.Mods.CA/Projectiles/LinearPulse.cs:1542 GetFalloffModifier() |
 | 2 | 9b5c59ffeffd6c33 | OpenRA.Mods.Cameo/Widgets/CommanderTreeWidget.cs:338 HandleRightClick(); OpenRA.Mods.Cameo/Widgets/CommanderTreeWidget.cs:354 HandleMiddleClick() |
+| 2 | 9e1568632ad568ac | OpenRA.Mods.CA/Traits/BotModules/SquadManagerBotModuleCA.cs:3007 IsStealthDraftable(); OpenRA.Mods.CA/Traits/BotModules/SquadManagerBotModuleCA.cs:3009 FindNewUnits() |
 | 2 | b0d2492b62a8c3b9 | OpenRA.Mods.Cameo/Widgets/ObserverBuildOrderIconsWidget.cs:64 ObserverBuildOrderIconsWidget(); OpenRA.Mods.Cameo/Widgets/ObserverPromotionsIconsWidget.cs:62 ObserverPromotionsIconsWidget() |
-| 2 | cfb1b41e7feda062 | OpenRA.Mods.Cameo/Traits/BotModules/TacticalMapBotModule.cs:1779 DoorApproachAxis(); OpenRA.Mods.Cameo/Traits/BotModules/TacticalMapBotModule.cs:1791 GetDoorKillZoneCells() |
-| 2 | da8e9cfda4c70a44 | OpenRA.Mods.CA/Traits/BotModules/BaseBuilderBotModuleCA.cs:890 HasAdequateRefineryCount(); OpenRA.Mods.CA/Traits/BotModules/BaseBuilderBotModuleCA.cs:929 RecordOpeningStructureQueued() |
-| 2 | edf49e24a44c5bb8 | OpenRA.Mods.CA/Traits/BotModules/BaseBuilderBotModuleCA.cs:980 CountQueuedBuildings(); OpenRA.Mods.CA/Traits/BotModules/BaseBuilderBotModuleCA.cs:988 SellUselessRefinery() |
+| 2 | cfb1b41e7feda062 | OpenRA.Mods.Cameo/Traits/BotModules/TacticalMapBotModule.cs:1780 DoorApproachAxis(); OpenRA.Mods.Cameo/Traits/BotModules/TacticalMapBotModule.cs:1792 GetDoorKillZoneCells() |
+| 2 | edf49e24a44c5bb8 | OpenRA.Mods.CA/Traits/BotModules/BaseBuilderBotModuleCA.cs:1139 CountQueuedBuildings(); OpenRA.Mods.CA/Traits/BotModules/BaseBuilderBotModuleCA.cs:1147 SellUselessRefinery() |
 
 
 ## C3 — Duplicated constant tables (43 group(s))
 
 | copies | fingerprint | sites |
 |---|---|---|
-| 5 | e90c0e4fa9ad2195 | tools/balance/consolidate_corroborated_role_profiles.py:285 CONTRACT_FIELDS; tools/balance/consolidate_explicit_family_state_profiles.py:158 CONTRACT_FIELDS; tools/balance/consolidate_high_identity_profiles.py:60 CONTRACT_FIELDS; tools/balance/consolidate_named_state_corrections.py:61 CONTRACT_FIELDS; tools/balance/consolidate_pinned_role_profiles.py:86 CONTRACT_FIELDS |
+| 5 | e90c0e4fa9ad2195 | tools/balance/consolidate_corroborated_role_profiles.py:285 CONTRACT_FIELDS; tools/balance/consolidate_explicit_family_state_profiles.py:162 CONTRACT_FIELDS; tools/balance/consolidate_high_identity_profiles.py:60 CONTRACT_FIELDS; tools/balance/consolidate_named_state_corrections.py:61 CONTRACT_FIELDS; tools/balance/consolidate_pinned_role_profiles.py:86 CONTRACT_FIELDS |
 | 4 | 28fac3656bc8fc3b | tools/audit/find_orphan_old_keys.py:20 CENTRAL; tools/audit/find_orphan_old_keys_multi.py:18 CENTRAL; tools/balance/fix_orphan_old_keys.py:19 CENTRAL; tools/balance/fix_orphan_old_keys_multi.py:16 CENTRAL |
 | 4 | 5573ff9b5f70fe4c | tools/audit/audit_original_coverage.py:42 ORIGINAL_SOURCES; tools/balance/armament_roles.py:628 ORIGINAL_SOURCES; tools/balance/assign_references.py:166 ORIGINAL_SOURCES; tools/balance/build_reference_report.py:38 ORIGINAL_SOURCES |
 | 4 | 6c04bed7d433482f | tools/audit/audit_stat_uniqueness.py:44 STATS; tools/balance/faction_extrapolate.py:84 RATE_STATS; tools/balance/propose_reference_anchors.py:26 STATS; tools/balance/reference_targets.py:42 STATS |
@@ -110,13 +111,13 @@ Python files: **824** (min 5 statements), C# files: **518** (min 8 lines)
 | 2 | 2665d6950cd4417a | tools/audit/find_orphan_old_keys.py:27 OLD_TO_NEW; tools/balance/fix_orphan_old_keys.py:25 OLD_TO_NEW |
 | 2 | 2ae9494faf6fdfef | tools/aud_to_wav.py:26 STEP_TABLE; tools/wav_to_aud.py:33 STEP_TABLE |
 | 2 | 36eb3ca7dd9cb6fd | tools/tests/gen_cannonap_fixture.py:31 HEAVINESS_CASES; tools/tests/test_cannonap_generated_fixture.py:35 HEAVINESS_CASES |
-| 2 | 41839a9d7e016b39 | tools/balance/consolidate_explicit_family_state_profiles.py:81 STATE_EXPANSION; tools/tests/test_explicit_family_state_profile_consolidation.py:32 EXPECTED_EXPANSION |
 | 2 | 4979d18fd8f148a1 | tools/tilesets/detect_cliff_dark_noise.py:14 BLACK; tools/tilesets/process_ai_edge_mask.py:15 BLACK |
 | 2 | 4e7af25b7a053de9 | tools/audit/target_payload_routes.py:34 DAMAGE; tools/balance/shrapnel_scenario_report.py:35 DAMAGE_TYPES |
 | 2 | 590fa5489ca5f751 | tools/audit/find_orphan_old_keys_multi.py:25 OLD_KEY_FAMILIES; tools/balance/fix_orphan_old_keys_multi.py:22 OLD_KEY_FAMILIES |
 | 2 | 599972d0cf395f28 | tools/audit/content_pack_dependencies.py:17 WEAPON_FIELDS; tools/audit/target_payload_routes.py:35 REFERENCES |
 | 2 | 7b392ae5dfabff76 | tools/tilesets/apply_ai_edge_correction.py:16 MAGENTA; tools/tilesets/process_ai_edge_mask.py:14 MAGENTA |
 | 2 | 820ecf9a9ca15705 | tools/art/generate_chrome_scales.py:46 FIELD_DENSITY; tools/audit/audit_chrome_scale_variants.py:69 DENSITY |
+| 2 | 8221851ac72a17ec | tools/balance/consolidate_explicit_family_state_profiles.py:85 STATE_EXPANSION; tools/tests/test_explicit_family_state_profile_consolidation.py:32 EXPECTED_EXPANSION |
 | 2 | 8ad665990352733b | tools/balance/build_workbook.py:62 TYPE_ORDER; tools/balance/import_workbook.py:37 TYPE_SHEETS |
 | 2 | c15459229a835d70 | tools/tilesets/build_tc_basalt_from_gimp.py:18 ACTORS; tools/tilesets/fix_tc_basalt_shadow_outlines.py:18 ACTORS |
 | 2 | d0b8ba1c2ccfa903 | tools/audit/audit_family_uniqueness.py:51 LEVELS; tools/balance/splice_templates.py:45 LEVEL_SUFFIXES |
@@ -132,6 +133,6 @@ Python files: **824** (min 5 statements), C# files: **518** (min 8 lines)
 ## FAIL
 
 - C1: 29 > baseline 10
-- C2: 23 > baseline 14
+- C2: 24 > baseline 14
 - C3: 43 > baseline 10
 

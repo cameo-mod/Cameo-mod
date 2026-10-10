@@ -5,7 +5,7 @@
 | activity | 16 | 3 | 0 |
 | logic | 19 | 19 | 0 |
 | projectile | 9 | 0 | 0 |
-| trait | 308 | 87 | 57 |
+| trait | 312 | 90 | 57 |
 | warhead | 17 | 1 | 0 |
 | widget | 21 | 6 | 5 |
 
@@ -77,6 +77,8 @@
 ## Unused here AND in CA (truly dead, or a Cameo-only file never wired)
 
 - ActorIconTooltipCameo (logic, `OpenRA.Mods.Cameo/Widgets/Logic/ActorIconTooltipCameoLogic.cs`)
+- AiEconomyHealthCapture (trait, `OpenRA.Mods.Cameo/Traits/AiEconomyHealthLogWriter.cs`)
+- AiEconomyHealthRecorder (trait, `OpenRA.Mods.Cameo/Traits/AiEconomyHealthRecorder.cs`)
 - ArmyTooltipCameo (logic, `OpenRA.Mods.Cameo/Widgets/Logic/ArmyTooltipCameoLogic.cs`)
 - ArmyValueTooltip (logic, `OpenRA.Mods.Cameo/Widgets/Logic/ArmyValueTooltipLogic.cs`)
 - AttachOnCreation (trait, `OpenRA.Mods.CA/Traits/AttachOnCreation.cs`)
@@ -109,6 +111,7 @@
 - LayeredDamageMultiplier (trait, `OpenRA.Mods.CA/Traits/Multipliers/LayeredDamageMultiplier.cs`)
 - Lobby (logic, `OpenRA.Mods.Cameo/Widgets/Logic/LobbyLogic.cs`)
 - Materialization (trait, `OpenRA.Mods.Cameo/Traits/Render/WithBuildingMaterialization.cs`)
+- McvHealthCapture (trait, `OpenRA.Mods.Cameo/Traits/McvHealthCapture.cs`)
 - MissileBase (trait, `OpenRA.Mods.CA/Traits/MissileBase.cs`)
 - ProductionTooltipCameo (logic, `OpenRA.Mods.Cameo/Widgets/Logic/ProductionTooltipCameoLogic.cs`)
 - PromotionPalette (trait, `OpenRA.Mods.Cameo/Traits/PromotionPalette.cs`)

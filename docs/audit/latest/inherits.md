@@ -2559,7 +2559,7 @@ _none found_
 | yuri_gatlingcannon | 3 | -RenderRangeCircle, -WithVoxelBody, -Cloak@TDcloak | mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/defenses.yaml |
 | zerg_creepcolony | 3 | -WithTurretSearchlight, -WithDeathAnimation, -WithMakeAnimation | mods/cameo/ContentPacks/StarCraft/Zerg/yaml/defenses.yaml |
 | zerg_drone | 5 | -WithMakeAnimation, -WithFacingSpriteBody, -WithInfantryBody, -Targetable@disguise, -WithSpriteBody@deployed | mods/cameo/ContentPacks/StarCraft/Zerg/yaml/vehicles.yaml |
-| zerg_lurker | 3 | -HitShape, -WithMakeAnimation, -AttackFrontal | mods/cameo/ContentPacks/StarCraft/Zerg/yaml/vehicles.yaml |
+| zerg_lurker | 4 | -HitShape, -WithMakeAnimation, -AttackFrontal, -AttackTurreted | mods/cameo/ContentPacks/StarCraft/Zerg/yaml/vehicles.yaml |
 | zerg_overlord | 4 | -Targetable@infiltrate, -AttackAircraft, -AutoTarget, -RenderRangeCircle | mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml |
 | zerg_overmind | 3 | -WithMakeAnimation, -WithDeathAnimation, -ToggleConditionOnOrder | mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml |
 

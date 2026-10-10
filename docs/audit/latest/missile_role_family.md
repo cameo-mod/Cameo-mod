@@ -3,12 +3,12 @@
 | code | check | count | ratchet |  |
 |---|---|---|---|---|
 | R1 | ground-only weapon not flying MissileHE | 11 | 51 | PASS |
-| R2 | air-only weapon not flying MissileAA | 6 | 33 | PASS |
+| R2 | air-only weapon not flying MissileAA | 3 | 33 | PASS |
 | R3 | dual-role weapon not flying MissileAP | 7 | 47 | PASS |
-| R4 | MissileHE reachable against Air (hard rule) | 8 | 50 | PASS |
+| R4 | MissileHE reachable against Air (hard rule) | 7 | 50 | PASS |
 
 
-363 concrete weapon(s) fly a Missile* main; 267 already match their role.
+376 concrete weapon(s) fly a Missile* main; 286 already match their role.
 
 
 ## custom selectors - domain verdict withheld
@@ -52,7 +52,7 @@ These selectors need recipient-type evidence; they are not certified conforming.
 | MissileChem | 16 |
 | MissileCryo | 4 |
 | MissileFire | 7 |
-| MissileQuantum | 4 |
+| MissileQuantum | 1 |
 | MissileSonic | 2 |
 | MissileTesla | 13 |
 | MissileThermobaric | 1 |
@@ -69,7 +69,7 @@ Groups only enumerated one-parent wrappers whose current ordered payload equals 
 | code | raw findings | exact-equivalence groups |
 |---|---|---|
 | R1 | 11 | 11 |
-| R2 | 6 | 6 |
+| R2 | 3 | 3 |
 | R3 | 7 | 7 |
-| R4 | 8 | 8 |
+| R4 | 7 | 7 |
 

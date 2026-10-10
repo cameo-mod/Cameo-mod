@@ -1,5 +1,6 @@
 # Fransbot generated lists — drift check
 
-fransbot_lists.yaml: UP TO DATE
+fransbot_lists.yaml: STALE â€” rerun tools/ai/gen_fransbot_lists.py
 
-PASS — generated file matches the resolved ruleset
+
+FAIL — regenerate with `python tools/ai/gen_fransbot_lists.py`

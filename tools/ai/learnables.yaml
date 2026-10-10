@@ -20,7 +20,7 @@ learnables:
         fitter: tools/ai/fit_engagement_priors.py
         sample_floor: 200 effective engagements per model
         switch: AP_tier1_priors
-        state: wired
+        state: wired_awaiting_artifact
         artifact:
             path: mods/cameo/ai/learned/engagement_priors.yaml
             schema: engagement_priors_v1
@@ -43,9 +43,9 @@ learnables:
         scope_keys: faction,matchup,map_feature_vector,own_role,enemy_role,phase
         fitter: tools/ai/fit_arsenal_priors.py
         sample_floor: 250 effective engagements per model
-        switch: unscheduled
-        state: wired_currently_enabled_without_increment_switch
-        activation_note: ai.yaml sets UseLearnedPriors=true; this registry records the gap but does not change the existing order stream
+        switch: BP_effective_unit_value
+        state: wired
+        activation_note: This consumer is default-off and is enabled only by its dedicated increment switch; switch-off order parity remains a Coordinator gate.
         artifact:
             path: mods/cameo/ai/learned/arsenal_priors.yaml
             schema: arsenal_priors_v1

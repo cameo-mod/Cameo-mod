@@ -42,8 +42,8 @@ A price target below the floor is UNREACHABLE by lowering flat Damage — `requi
 | `NaxiMissileUboat` | 93.3% |
 | `BlackEagleMissiles` | 93.1% |
 | `BlackEagleMissiles_elite` | 93.1% |
-| `RocketAngelRockets` | 88.7% |
 | `PhobosLaser` | 87.2% |
+| `RocketAngelRockets` | 87.2% |
 | `TSHSeekerBomb` | 85.7% |
 | `LunarNaxiDroneMissile` | 85.3% |
 | `HarrierMissiles_elite` | 84.0% |
@@ -64,26 +64,26 @@ This residual is included in measured output but excluded from `k_flat` and `dps
 
 | weapon | context-adjusted residual per shot |
 |---|--:|
-| `AsianTurretPlasma` | +2.4157 |
-| `AsianTwinPlasma_elite` | +2.1578 |
+| `AsianTurretPlasma` | +2.4156 |
+| `AsianTwinPlasma_elite` | +2.1577 |
 | `AsianTwinPlasma` | +2.0748 |
-| `Tentacle` | +2.0190 |
+| `Tentacle` | +2.0189 |
 | `ra1_soviets_migattackbomber_thermobaricmaverick` | +1.9411 |
 | `FutureMechPlasma_elite` | +1.9392 |
 | `AsianSinglePlasma_elite` | +1.9091 |
 | `FutureMechPlasma` | +1.8669 |
-| `AsianSinglePlasma` | +1.8624 |
+| `AsianSinglePlasma` | +1.8623 |
 | `ra1_soviets_btr80_machinegun_tesla` | +1.7793 |
 | `ra1_soviets_btr80_machinegun_tesla_arc` | +1.7793 |
 | `Napalm` | +1.7554 |
-| `CabalMantisGun` | +1.7163 |
+| `CabalMantisGun` | +1.7162 |
 | `RA2LasherLaser` | +1.7151 |
 | `AsianChemicalBombs` | +1.6999 |
 | `ra1_allies_alliedgunturret_cannon` | +1.6910 |
 | `NapalmA10Carrier` | +1.6654 |
-| `TSTurretLaser` | +1.6573 |
-| `TSCABALPlasmaFire` | +1.6573 |
-| `d2kChainGun_upgrade` | +1.6536 |
+| `TSTurretLaser` | +1.6572 |
+| `TSCABALPlasmaFire` | +1.6572 |
+| `d2kChainGun_upgrade` | +1.6535 |
 | `edenMobileDefenceLaser` | -1.6514 |
 | `schwarzermond_lunarsoldier_rifle_yellow` | +1.6407 |
 | `schwarzermond_lunarsoldier_rifle_amplified` | +1.6407 |
@@ -92,5 +92,5 @@ This residual is included in measured output but excluded from `k_flat` and `dps
 | `schwarzermond_lunarsoldier_rifle_amplified_elite` | +1.6058 |
 | `TSScoopDualTur` | +1.5973 |
 | `JHighVWaveforce` | +1.5823 |
-| `NambuMGWaveforce` | +1.5737 |
+| `NambuMGWaveforce` | +1.5736 |
 | `TSLaserHarpyClaw` | +1.5687 |
