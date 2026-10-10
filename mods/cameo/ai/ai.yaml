@@ -4146,6 +4146,11 @@ Player:
 			expansion: 55
 			steamroller: 20
 			guerrilla: 80
+		# M14 / DESIGN §19.11 (binding): an emergency changes urgency and the target, never the
+		# personality — keep the pinned personality and trigger on an army-relative net loss
+		# (>= 25% of own army + those losses) instead of the flat credit rule.
+		EmergencyKeepsPersonality: true
+		EmergencyLossArmyPct: 25
 	ScoutBotModule:
 		RequiresCondition: genericbot
 		# Maintainer 2026-09-28: scout constantly; keep checking the enemy's probable base (public mpspawn data).
