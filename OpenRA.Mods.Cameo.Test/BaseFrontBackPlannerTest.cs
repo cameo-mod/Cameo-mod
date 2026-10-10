@@ -10,12 +10,15 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using System.Runtime.CompilerServices;
 using NUnit.Framework;
 using OpenRA.Mods.AS.Traits;
 using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.Cameo.Traits.BotModules;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Mods.Common.Traits.Radar;
+using OpenRA.Primitives;
 using OpenRA.Traits;
 
 namespace OpenRA.Mods.Cameo.Test
@@ -140,6 +143,183 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(approach, Does.Not.Contain(new CPos(59, 50))); // behind the line
 			Assert.That(approach, Does.Not.Contain(new CPos(62, 63))); // outside the 45-degree cone
 			Assert.That(approach, Does.Contain(new CPos(62, 60))); // inside the cone
+		}
+
+		[Test]
+		public void ApproachBandBoundsCoverTheWholeBand()
+		{
+			// Band [10,24] in a 45-degree cone needs ceil(24/0.7071)+1 = 35 cells
+			// of Euclidean reach.
+			Assert.That(BaseFrontBackPlannerBotModule.ApproachBandBounds(10, 14, Cone45),
+				Is.EqualTo((9.0, 35.0)));
+		}
+
+		[Test]
+		public void ApproachBandPastTheEngineCapStillExists()
+		{
+			// Playtest crash C1 (Imminent Destruction): the real trigger was
+			// frontProj 35 -> outer ceil(49/0.7071)+1 = 71 > 50. The band EXISTS
+			// beyond the engine's tile-search cap — it must not read as no cells;
+			// ApproachSpace falls back to the map-clipped box enumeration.
+			Assert.That(BaseFrontBackPlannerBotModule.ApproachBandBounds(35, 14, Cone45),
+				Is.EqualTo((34.0, 71.0)));
+			// And a band starting past the cap is a real band, not empty.
+			Assert.That(BaseFrontBackPlannerBotModule.ApproachBandBounds(52, 14, Cone45),
+				Is.EqualTo((51.0, 95.0)));
+		}
+
+		[Test]
+		public void ApproachBandDegenerateInputs()
+		{
+			// coneCos = 0 (cone half-angle >= 90 in yaml) -> outer saturates to
+			// +Inf: the band is a half-plane, WideSpaceRadius clamps it to the map.
+			var degenerate = BaseFrontBackPlannerBotModule.ApproachBandBounds(10, 14, 0);
+			Assert.That(degenerate.HasValue && double.IsPositiveInfinity(degenerate.Value.Outer)
+				&& degenerate.Value.Inner == 9.0);
+			// coneCos < 0 (half-angle > 90): the band is unbounded laterally — +Inf,
+			// never empty; the predicate still decides which cells qualify.
+			Assert.That(BaseFrontBackPlannerBotModule.ApproachBandBounds(35, 14, -0.5),
+				Is.EqualTo((34.0, double.PositiveInfinity)));
+			// NaN cone math and a wholly negative forward-cone band are the only empty results.
+			Assert.That(BaseFrontBackPlannerBotModule.ApproachBandBounds(10, 14, double.NaN),
+				Is.Null);
+			Assert.That(BaseFrontBackPlannerBotModule.ApproachBandBounds(-20, 14, Cone45),
+				Is.Null);
+			// An unset front projection (int.MinValue sentinel) must not wrap into
+			// a legal-looking range — operands promote to double before arithmetic.
+			Assert.That(BaseFrontBackPlannerBotModule.ApproachBandBounds(int.MinValue, 14, Cone45),
+				Is.Null);
+		}
+
+		[Test]
+		public void WideSpaceRadiusClampsToMapReach()
+		{
+			// The bounding box never exceeds the map's own reach around the centre.
+			Assert.That(BaseFrontBackPlannerBotModule.WideSpaceRadius(71.9, 120), Is.EqualTo(72));
+			Assert.That(BaseFrontBackPlannerBotModule.WideSpaceRadius(double.PositiveInfinity, 120),
+				Is.EqualTo(120));
+			Assert.That(BaseFrontBackPlannerBotModule.WideSpaceRadius(1e30, 200), Is.EqualTo(200));
+		}
+
+		// A flat map shell on an uninitialized Map with a REAL MapGrid (real TilesByDistance + cap of
+		// 50) — same technique as the engine's AttackGarrisonedTest fixture. Flat maps make
+		// Map.Contains = CustomTerrain-cover && playable Bounds, exactly the filter FindTilesInAnnulus
+		// applies by default. AllCells mirrors the engine's own construction (Map.cs: region over the
+		// full map-coord rect); on RectangularIsometric that domain leaves [0, MapSize) in CPos space.
+		static Map FlatTestMap(int size, int cordon, MapGridType gridType = MapGridType.Rectangular)
+		{
+			var yaml = gridType == MapGridType.Rectangular
+				? new MiniYaml("")
+				: new MiniYaml("", new[] { new MiniYamlNode("Type", new MiniYaml("RectangularIsometric")) });
+			var map = (Map)RuntimeHelpers.GetUninitializedObject(typeof(Map));
+			typeof(Map).GetField("Grid", BindingFlags.Instance | BindingFlags.Public)
+				.SetValue(map, new MapGrid(yaml));
+			typeof(Map).GetProperty("MapSize").SetValue(map, new Size(size, size));
+			typeof(Map).GetProperty("AllCells").SetValue(map,
+				new CellRegion(gridType, new MPos(0, 0), new MPos(size - 1, size - 1)));
+			typeof(Map).GetProperty("CustomTerrain").SetValue(map,
+				new CellLayer<byte>(gridType, new Size(size, size)));
+			map.Bounds = new Rectangle(cordon, cordon, size - 2 * cordon, size - 2 * cordon);
+			return map;
+		}
+
+		// The playable domain is the MPos storage rect on every grid type — enumerate map coords and
+		// convert, rather than assuming CPos itself is [0, MapSize)-bounded (false on iso grids).
+		static List<CPos> PlayableCellsOf(Map map)
+		{
+			var cells = new List<CPos>();
+			for (var v = 0; v < map.MapSize.Height; v++)
+				for (var u = 0; u < map.MapSize.Width; u++)
+				{
+					var c = new MPos(u, v).ToCPos(map);
+					if (map.Contains(c))
+						cells.Add(c);
+				}
+
+			return cells;
+		}
+
+		[Test]
+		public void ApproachSpaceInsideTheCapIsExactlyTheEngineAnnulus()
+		{
+			var map = FlatTestMap(120, 4);
+			var centre = new CPos(60, 60);
+			var space = BaseFrontBackPlannerBotModule.ApproachSpace(map, centre, 10, 14, Cone45);
+			Assert.That(space.ToList(), Is.EqualTo(map.FindTilesInAnnulus(centre, 9, 35).ToList()));
+		}
+
+		[Test]
+		public void ApproachSpacePastTheCapDropsNoPlayableBandCell()
+		{
+			// The real C1 trigger: (35,14,45°) -> band (34.0, 71.0); outer 71 > cap 50 -> wide path.
+			var map = FlatTestMap(200, 4);
+			var front = EastFront(35, 10);
+			var space = BaseFrontBackPlannerBotModule.ApproachSpace(map, Center, 35, 14, Cone45).ToList();
+
+			Assert.That(space, Is.Not.Empty);
+			// Same playable-bounds filter as the annulus default: no cordon cells inflate coverage.
+			Assert.That(space.TrueForAll(map.Contains), Is.True);
+			// A cordon cell inside the box but outside playable Bounds is excluded.
+			Assert.That(space, Does.Not.Contain(new CPos(0, 50)));
+			// The box is genuinely bounded: a playable cell past ceil(outer)=72 is not enumerated.
+			Assert.That(space, Does.Not.Contain(new CPos(130, 50)));
+
+			// Coverage parity — the review criterion: the exact band+cone predicate over the box
+			// returns the same approach as running it over EVERY playable map cell. No valid
+			// approach cell is silently dropped past the cap (the v1 clamp's defect).
+			var reference = BaseFrontBackPlannerBotModule.ApproachCells(
+				PlayableCellsOf(map), Center, front, 14, Cone45);
+			var actual = BaseFrontBackPlannerBotModule.ApproachCells(space, Center, front, 14, Cone45);
+			Assert.That(reference, Is.Not.Empty);
+			Assert.That(actual, Is.EquivalentTo(reference));
+		}
+
+		[Test]
+		public void ApproachSpaceWideConeEnumeratesTheWholePlayableMap()
+		{
+			// coneCos < 0 (half-angle > 90°): the band is laterally unbounded — the whole
+			// playable map is the candidate space, and the predicate alone decides.
+			var map = FlatTestMap(120, 4);
+			var space = BaseFrontBackPlannerBotModule.ApproachSpace(map, Center, 10, 14, -0.5).ToList();
+			Assert.That(space.Count, Is.EqualTo(PlayableCellsOf(map).Count));
+			Assert.That(space.TrueForAll(map.Contains), Is.True);
+		}
+
+		[Test]
+		public void ApproachSpacePastTheCapCoversTheIsoCellDomain()
+		{
+			// RectangularIsometric unwraps CPos outside [0, MapSize): the engine's own
+			// M(100,100) -> C(150,-50) on a 200x200 map — negative Y, X beyond MapSize. The
+			// off-cap path must enumerate that real domain (AllCells), not a [0, MapSize) box.
+			var map = FlatTestMap(200, 4, MapGridType.RectangularIsometric);
+			var centre = new CPos(150, -50);
+			Assert.That(map.Contains(centre), Is.True); // playable cell with negative Y
+
+			var space = BaseFrontBackPlannerBotModule.ApproachSpace(map, centre, 35, 14, Cone45).ToList();
+			Assert.That(space, Is.Not.Empty);
+			Assert.That(space.TrueForAll(map.Contains), Is.True);
+			Assert.That(space, Does.Contain(centre)); // inside the box: |0|,|0| <= 72
+			Assert.That(space.Any(c => c.Y < 0), Is.True); // iso domain genuinely exercised
+
+			var front = EastFront(35, 10);
+			var reference = BaseFrontBackPlannerBotModule.ApproachCells(
+				PlayableCellsOf(map), centre, front, 14, Cone45);
+			var actual = BaseFrontBackPlannerBotModule.ApproachCells(space, centre, front, 14, Cone45);
+			Assert.That(reference, Is.Not.Empty);
+			Assert.That(actual, Is.EquivalentTo(reference));
+		}
+
+		[Test]
+		public void ApproachCellsToleratesExtremeConfiguredDepth()
+		{
+			// int arithmetic wrapped frontProj + depthCells negative and emptied the band;
+			// double promotion keeps an extreme configured depth a genuine upper edge.
+			var front = EastFront(10, 10);
+			var space = new List<CPos> { new(70, 50), new(48, 50) };
+			var approach = BaseFrontBackPlannerBotModule.ApproachCells(
+				space, Center, front, int.MaxValue, Cone45);
+			Assert.That(approach, Does.Contain(new CPos(70, 50))); // proj 20 is inside the band
+			Assert.That(approach, Does.Not.Contain(new CPos(48, 50))); // proj -2 is below the band
 		}
 
 		// --- radar ---

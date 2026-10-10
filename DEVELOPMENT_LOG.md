@@ -232,6 +232,70 @@ statically; one real residual found and fixed:
   process). World-hover absence stays explicitly unresolved per Sol's scope
   note; interactive screenshot/hover-flow acceptance still needs a driven match.
 
+# 2026-10-08 — Devin-Architect: playtest C1 crash fix — approach annulus capped at MaximumTileSearchRange
+
+*Devin-Architect.* Post-playtest triage (fleet PLAYTEST_TRIAGE_2026-10-08.md) assigned crash C1:
+`ArgumentOutOfRangeException` on map 'Imminent Destruction' — `FindTilesInAnnulus` received
+`maxRange=71`, engine cap `MapGrid.MaximumTileSearchRange = 50`. Stack: `Refresh()` ←
+`RadarPowerMargin` ← `BaseBuilderQueueManagerCA.Tick` ← `BaseBuilderBotModuleCA.BotTick` ←
+`ModularBot.Tick`.
+
+- Root cause in `BaseFrontBackPlannerBotModule.Refresh()`: the approach annulus outer edge
+  `ceil((FrontProj + RadarApproachDepthCells)/coneCos) + 1` grows with how far the defence line
+  crawled — at the 45° front cone any `FrontProj` ~21+ already exceeds 50, so this is not a
+  huge-map-only path.
+- Fix v1 (67799ff7f, superseded on review): clamped the annulus outer edge to the cap and returned
+  null past it — crash-safe but silently truncated coverage: band cells at radius 51..71 were dropped,
+  `frontUncoveredApproach` undercounted, `WantedForFront` could miss the second-radar threshold.
+  Luna's re-review + Sol's acceptance hold: "do not present this as coverage-preserving."
+- Fix v2/v3 (this head): `ApproachBandBounds` keeps the true double bounds (`(double)frontProj + depth`,
+  `frontProj - 1.0` — operands promote BEFORE arithmetic so int sentinels/huge values can't wrap);
+  null only for geometrically-empty bands (NaN cone math, band wholly below radius 0). `ApproachSpace`
+  then picks the candidate set: exact `FindTilesInAnnulus` when `outer <= MaximumTileSearchRange`,
+  else `PlayableBox` — the playable Chebyshev box of half-side `ceil(outer)` clamped to the map span.
+  Superset proof: `TilesByDistance[d]` holds `CVec(i,j)` with `i²+j² ≤ d²`, so every annulus cell has
+  `|dx|,|dy| ≤ ceil(outer)` on every grid type. `PlayableBox` iterates the box ∩ [0, MapSize) directly
+  (O(box), deterministic row-major) with `map.Contains` — the same playable-bounds filter the annulus
+  default uses, so cordon cells never inflate coverage (v2's `AllCells.Where` did). `ApproachCells`
+  applies the exact band+cone predicate on either space — full coverage, never an illegal engine radius.
+- Sibling sweep: every other `FindTilesInAnnulus`/`FindTilesInCircle` call site uses a bounded Info
+  constant (MaxBaseRadius=20, MaximumDefenseRadius=20, BaseCrawlRadius=50 at-cap-legal) or a
+  config-derived stride — this planner site was the only map-scale-derived radius.
+- Regression tests in `BaseFrontBackPlannerTest`: in-cap bounds `(10,14,45°)->(9.0,35.0)`, crash case
+  `(35,…)->(34.0,71.0)` not null — band EXISTS past the cap — fully-beyond-cap `(52,…)->(51.0,95.0)`,
+  `coneCos=0` and `coneCos=-0.5` (half-angle ≥90°, laterally unbounded band) → `+Inf` outer clamped to
+  map span by `WideSpaceRadius`, NaN/negative-forward-band/`int.MinValue` sentinel → null,
+  `WideSpaceRadius` clamps on 71.9/+Inf/1e30. Luna's v2 edge review drove two more fixes:
+  `ApproachBandBounds` no longer nulls a ≥90° cone (cells DO satisfy the predicate at arbitrary
+  lateral distance) and `ApproachCells` promotes `frontProj + depthCells` to double so an extreme
+  configured depth can't wrap the band's upper edge.
+- Real-map regressions (uninitialized Map + real MapGrid, flat rectangular so `Contains` = Bounds):
+  in-cap `ApproachSpace` == engine `FindTilesInAnnulus(9,35)` exactly; off-cap `(35,14,45°)` on a
+  200×200 map — every emitted cell playable (cordon `(0,50)` excluded), box bounded (playable `(130,50)`
+  at dx=80 > 72 excluded), and `ApproachCells` over the box is set-equal to `ApproachCells` over ALL
+  playable map cells — the no-dropped-cell parity the reviewers required.
+- Fix v5 (iso safety, Sol's v4 FIX REQUIRED): `MapSize` is the MPos/STORAGE domain — on
+  `RectangularIsometric` `MPos.ToCPos` unwraps to `x = u + v/2, y = v/2 - u` (engine MPos.cs:45-61 —
+  200×200 map: `M(100,100)→C(150,-50)`, `M(199,198)→C(298,-100)`), so `PlayableBox`'s CPos clip to
+  `[0, MapSize)` dropped real negative-Y / beyond-MapSize domain cells and `map.Contains` could not
+  restore them. `ApproachSpace` now keeps `PlayableBox` only for `MapGridType.Rectangular` (exact:
+  CPos domain IS `[0, MapSize)`); every other grid enumerates `map.AllCells` — the engine's own
+  MPos→CPos CellRegion, the true domain — filtered by the same box + `map.Contains` predicates.
+  Reach widened to `MapSize.W + H` (provable CPos Chebyshev bound on both shapes). Iso regression:
+  real `MapGrid(RectangularIsometric)` shell on 200×200 centred on `C(150,-50)` — emitted space
+  contains the negative-Y domain cell, all cells playable, `ApproachCells` set-equal to the
+  full-domain reference. `PlayableCellsOf` test helper now enumerates MPos→CPos too.
+- Gates: Release build clean; full `OpenRA.Mods.Cameo.Test` suite 1260/1260; boot-gate PASS
+  (main menu, `MenuPostProcessEffect.PostWorldLoaded`, zero new exceptions). One earlier exception
+  (`exception-2026-10-08T202345Z`) was my launch harness missing `Engine.ModSearchPaths`, not the
+  code — corrected and re-passed.
+- Branch `devin/c1-annulus-range-cap` off playtest head 3d99405bd; v1 code at 67799ff7f, docs at
+  20a8107a1, semantics v2–v5 on the branch tip. LESSONS_LEARNED entry updated. No master push —
+  playtest freeze stands; Sol+Luna review gates apply (Luna asked for in-map repro on top of static
+  review; Luna APPROVED v4 source+tests 92d2fe029, Sol's iso finding drove v5).
+
+---
+
 # 2026-10-08 — Devin-Architect: wave-1 scheduler v3 — fail-closed evidence adjudication
 
 *Devin-Architect.* Sol's wave-5 re-review (REVIEW_2026-10-08_wave5_adjudication)
