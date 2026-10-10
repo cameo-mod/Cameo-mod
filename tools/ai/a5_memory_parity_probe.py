@@ -3,9 +3,9 @@
 
 Runs two serial same-seed baseline-vs-baseline 1v1 cells, samples only the
 OpenRA process whose command line names that cell's support directory, and
-stops at 3 GiB after a steep private-bytes ramp was observed (well below the
-campaign's 6.5 GiB ceiling). It does not create
-an execution manifest or authorize campaign jobs.
+stops at 3 GiB by default. A bounded higher diagnostic stop may be explicitly
+selected up to 9.5 GiB when host RAM headroom is proven. It does not create an
+execution manifest or authorize campaign jobs.
 """
 from __future__ import annotations
 
@@ -30,11 +30,11 @@ BASELINE = "964cdb630b1514e1c1a0baed55cbdbc427d5fc11"
 MEMORY_FIX = "173038d7881fe45d012a05d2a37ebd7b17f85ffe"
 ENGINE = "6da7fce14da541180c6baddd6925118fbef65b94"
 SEED = 1337
-POLL = 1.0
+POLL = 0.25
 WALL = 900
 PROCESS_STOP = int(3.0 * 1024**3)
 HOST_SOFT_STOP = int(7.0 * 1024**3)
-HOST_HARD_FLOOR = 6 * 1024**3
+HOST_HARD_FLOOR = 3 * 1024**3
 HOST_LAUNCH_HEADROOM = 1 * 1024**3
 COMMIT_HEADROOM = 2 * 1024**3
 WORLD_TICK_RE = re.compile(r"\[WT\s+(\d+)\]")
@@ -46,6 +46,7 @@ TRACE_TRIGGER = 1 * 1024**3
 TRACE_BUFFER_MB = 32
 TRACE_MAX_OUTPUT = 64 * 1024**2
 TRACE_DURATION = "00:00:00:10"
+TRACE_ENABLED = True
 
 
 def admission_ok(available_physical: int, available_commit: int) -> bool:
@@ -235,7 +236,7 @@ def run_cell(index: int) -> dict:
 						stop_reason = "RUNTIME_COUNTERS_START_FAILED:" + str(exc)
 						kill_cell_processes(rows, support)
 						break
-				if private >= TRACE_TRIGGER and pid not in traces:
+				if TRACE_ENABLED and private >= TRACE_TRIGGER and pid not in traces:
 					trace_path = support / f"gc-verbose-{pid}.nettrace"
 					stderr_path = support / f"gc-verbose-{pid}.stderr.log"
 					try:
@@ -361,26 +362,44 @@ def run_cell(index: int) -> dict:
 		"allocation_trace_errors": trace_errors,
 		"allocation_trace_policy": {"trigger_private_bytes": TRACE_TRIGGER,
 			"buffersize_mb": TRACE_BUFFER_MB, "max_output_bytes": TRACE_MAX_OUTPUT,
-			"duration": TRACE_DURATION},
+			"duration": TRACE_DURATION, "enabled": TRACE_ENABLED, "poll_seconds": POLL},
 		"fingerprint_id": summary.get("fingerprint_id"), "seed_pin_verified": seed_pin_verified,
 		"records_verified": records_verified, "duration_ticks": duration_ticks,
 		"natural_below_cap": natural_below_cap, "replay_count": len(replays), "valid_game": valid_game}
 
 
 def main() -> int:
-	global OUT
+	global OUT, PROCESS_STOP, HOST_SOFT_STOP, HOST_HARD_FLOOR, TRACE_ENABLED
 	parser = argparse.ArgumentParser(description=__doc__)
 	parser.add_argument("--execute-a5-diagnostic", action="store_true",
 		help="explicitly run two bounded A5 qualification cells; never campaign outcomes")
 	parser.add_argument("--output-dir", type=pathlib.Path, default=OUT,
 		help="new, non-existing artifact directory; existing evidence is never overwritten")
+	parser.add_argument("--process-stop-gib", type=float, default=3.0,
+		help="PID-scoped diagnostic stop threshold; maximum 9.5 GiB for current host headroom")
+	parser.add_argument("--host-soft-stop-gib", type=float, default=7.0,
+		help="stop before the hard free-RAM floor")
+	parser.add_argument("--host-hard-floor-gib", type=float, default=3.0,
+		help="minimum free physical RAM; user-authorized reserve")
+	parser.add_argument("--no-allocation-trace", action="store_true",
+		help="disable gc-verbose profiler for parity runs; System.Runtime counters remain enabled")
 	args = parser.parse_args()
+	if not (3.0 <= args.process_stop_gib <= 9.5):
+		raise RuntimeError("process stop must be between 3 and 9.5 GiB pending larger host headroom")
+	if not (3.0 <= args.host_hard_floor_gib < args.host_soft_stop_gib):
+		raise RuntimeError("host hard floor must be >=3 GiB and strictly below host soft stop")
+	PROCESS_STOP = int(args.process_stop_gib * 1024**3)
+	HOST_HARD_FLOOR = int(args.host_hard_floor_gib * 1024**3)
+	HOST_SOFT_STOP = int(args.host_soft_stop_gib * 1024**3)
+	TRACE_ENABLED = not args.no_allocation_trace
 	output_dir = args.output_dir if args.output_dir.is_absolute() else ROOT / args.output_dir
 	OUT = output_dir.resolve()
 	if not args.execute_a5_diagnostic:
 		print(json.dumps({"mode": "NO_LAUNCH_A5_PREFLIGHT", "baseline": BASELINE,
 			"memory_fix": MEMORY_FIX, "seed": SEED, "cells": 2,
-			"per_process_stop_bytes": PROCESS_STOP, "campaign_gate_passed": False}, indent=2))
+			"per_process_stop_bytes": PROCESS_STOP, "host_soft_stop_bytes": HOST_SOFT_STOP,
+			"host_hard_floor_bytes": HOST_HARD_FLOOR, "poll_seconds": POLL,
+			"allocation_trace_enabled": TRACE_ENABLED, "campaign_gate_passed": False}, indent=2))
 		return 0
 	if subprocess.run(["git", "merge-base", "--is-ancestor", MEMORY_FIX, "HEAD"], cwd=ROOT).returncode:
 		raise RuntimeError("memory-fix commit is not an ancestor")
