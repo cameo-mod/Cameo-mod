@@ -491,22 +491,31 @@ namespace OpenRA.Mods.CA.Traits
 	// carries event-local player_active/producer_live/cancellation_class; a field that cannot
 	// be resolved at the emit site is null/None — never inferred from a pulse.
 	//
-	// Resolution semantics (Sol review 22861e442 F1-F5):
-	// - Started/Ready emit when the per-tick queue probe OBSERVES the item — the exact tick
+	// Resolution semantics (Sol review 22861e442 F1-F5; VP consumer-fit fix 01a121b6):
+	// - Queued/Ready emit when the per-tick queue probe OBSERVES the item — the exact tick
 	//   the engine applied the production order / completed the item, not the tick the
 	//   manager happened to sweep (WaitTicks and the latch early-return would otherwise lag).
-	// - Cancelled/Placed are terminal RESOLUTIONS: the decision sites only record a pending
-	//   request, and the record emits on the tick the item actually leaves the queue.
+	// - PlacementOrdered/CancelOrdered are REQUEST INTENT records, emitted at the decision
+	//   tick when an order goes out. They are never terminal.
+	// - Placed/Cancelled are PROVEN terminal RESOLUTIONS only. Disappearance of the bound
+	//   item is correlation, not proof: ProductionQueue cleanup (tech-cap refund,
+	//   infinite-trim, dead-producer disable) removes items too. Placed emits only when the
+	//   building actor exists on the ordered cell (or the plug slot accepted then refused the
+	//   plug) — builder-unit BuildOnSite can land ticks later or never, so the request stays
+	//   armed in a bounded awaiting-proof window and ends Removed + intent reason otherwise.
+	//   Cancelled emits only on the Infinite-flag flip CancelProductionInner performs; every
+	//   other cancel-related removal is indistinguishable from engine cleanup and resolves
+	//   Removed + intent reason (cause UNKNOWN).
 	// - An item that leaves with no pending request is an engine or module-side removal:
 	//   emitted as Removed, classified only from event-local state (Elimination / Destruction
-	//   / None = UNKNOWN). The module's demand cancels register via NoteExternalCancel so
-	//   they resolve as Cancelled/DemandCancel instead of UNKNOWN.
+	//   / None = UNKNOWN). The module's demand cancels register via NoteExternalCancel so the
+	//   CancelOrdered intent is on record; the removal still resolves Removed unless proven.
 	// - EpisodeId is per queue-item instance: the same type name re-queued is a new episode;
 	//   0 = UNKNOWN (baseline items, producer-less latch records).
 	// - All probe/tracker state is lazy: with no observer trait registered the emit path is
 	//   one null check and nothing is allocated.
 
-	public enum BotQueueTransitionKind { Queued, Ready, Placed, Cancelled, Held, Resumed, Removed }
+	public enum BotQueueTransitionKind { Queued, Ready, Placed, Cancelled, Held, Resumed, Removed, PlacementOrdered, CancelOrdered }
 
 	public enum BotQueueTransitionReason { None, LimitReached, NoRefinerySite, SaturationLatch, RelocationLatch, DemandHold, CrawlHold, FrontBackHold, DemandCancel }
 
@@ -600,13 +609,34 @@ namespace OpenRA.Mods.CA.Traits
 		}
 	}
 
+	/// <summary>What a pending request resolves to at an observation point — the caller
+	/// performs the emit/effect. World-free so the regression tests enumerate the map.</summary>
+	public enum BotQueuePendingResolution
+	{
+		/// <summary>No record yet — the request stays armed.</summary>
+		Unresolved,
+
+		/// <summary>Per-item engine evidence exists — emit the requested kind
+		/// (Placed on site proof; never for Cancelled on a removal).</summary>
+		EmitRequested,
+
+		/// <summary>Emit Removed carrying the request's reason — the intent stays on
+		/// record but the cause is UNKNOWN (schema-2 non-pass).</summary>
+		EmitRemoved,
+
+		/// <summary>The item left with no proof yet — keep the request armed for the
+		/// bounded proof window (a builder unit's BuildOnSite can still land).</summary>
+		KeepAwaitingProof
+	}
+
 	/// <summary>A terminal request in flight — resolves to a record on the tick the item
 	/// actually leaves the queue. Item is null when only the name is known (module-side
 	/// demand cancels); such an entry resolves against the next removed same-name item.
 	/// Requests and confirmed lifecycle stay separate: a pending older than
 	/// <see cref="MaxInFlightTicks"/> whose item is still queued is a rejected or lost order
 	/// — it is dropped so the eventual removal classifies fresh instead of wearing a stale
-	/// request's label.</summary>
+	/// request's label. Queue removal is NEVER terminal proof by itself: a competing
+	/// cleanup or cancellation can remove the same item within the window.</summary>
 	public sealed class BotQueuePendingTerminal
 	{
 		/// <summary>QueueOrder latency is ~1-2 ticks; a request older than this never resolved.</summary>
@@ -619,6 +649,22 @@ namespace OpenRA.Mods.CA.Traits
 		public BotQueueCancellationClass Class;
 		public int IssuedTick;
 
+		/// <summary>The cell the placement order targeted — Placed proof is an actor of the
+		/// ordered type occupying it (a builder unit's BuildOnSite lands there late or never).</summary>
+		public CPos? Site;
+
+		/// <summary>Non-null for PlacePlug requests: the plug type whose host slot flipping to
+		/// occupied (AcceptsPlug false) is the proof — plugs create no actor.</summary>
+		public string PlugType;
+
+		/// <summary>Bound at issue for cancel requests on an Infinite item — the flag flip to
+		/// false on the still-queued item is CancelProductionInner's unique signature.</summary>
+		public bool WasInfinite;
+
+		/// <summary>The bound item left the queue without proof; the request stays armed only
+		/// for the bounded proof window (IssuedTick restarts at the removal tick).</summary>
+		public bool AwaitingProof;
+
 		/// <summary>World-free seam: the request is stale when its item is still queued
 		/// <see cref="MaxInFlightTicks"/> after issue.</summary>
 		public bool Stale(int now) => now - IssuedTick > MaxInFlightTicks;
@@ -626,9 +672,51 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>World-free seam: a bound request matches only its item instance — the
 		/// engine removes that exact ProductionItem (callers bind the LAST same-name item for
 		/// cancels because CancelProduction resolves the last same-name entry). A name-only
-		/// request resolves against the next removed same-name item.</summary>
+		/// request resolves against the next removed same-name item. Entries awaiting proof
+		/// are no longer bound to a queued item and can never match a later removal.</summary>
 		public bool Matches(object itemRef, string itemName)
-			=> ReferenceEquals(Item, itemRef) || (Item == null && ItemName == itemName);
+			=> !AwaitingProof && (ReferenceEquals(Item, itemRef) || (Item == null && ItemName == itemName));
+
+		/// <summary>The bound item just left the queue. Disappearance alone never proves a
+		/// terminal — the engine's own cleanup removes items too — so a cancel request always
+		/// resolves Removed + intent reason, and a placement request emits Placed only when the
+		/// site already carries the actor (proven beats queue staleness: the building exists).
+		/// Otherwise it stays armed for the bounded proof window.</summary>
+		public BotQueuePendingResolution ResolveOnRemoval(int now, bool queueSeen, bool placementProven)
+		{
+			if (Kind == BotQueueTransitionKind.Placed && placementProven)
+				return BotQueuePendingResolution.EmitRequested;
+
+			if (!queueSeen || Stale(now))
+				return BotQueuePendingResolution.EmitRemoved;
+
+			return Kind == BotQueueTransitionKind.Placed
+				? BotQueuePendingResolution.KeepAwaitingProof
+				: BotQueuePendingResolution.EmitRemoved;
+		}
+
+		/// <summary>Tick-scan decision while armed awaiting actor proof: the actor landing on
+		/// the site resolves Placed; expiry or player elimination resolves Removed + reason.</summary>
+		public BotQueuePendingResolution ResolveWhileAwaiting(int now, bool placementProven, bool playerEliminated)
+		{
+			if (placementProven)
+				return BotQueuePendingResolution.EmitRequested;
+
+			return Stale(now) || playerEliminated
+				? BotQueuePendingResolution.EmitRemoved
+				: BotQueuePendingResolution.Unresolved;
+		}
+
+		/// <summary>The only provable cancellation: CancelProductionInner flips
+		/// item.Infinite to false while the item stays queued — a signature no cleanup path
+		/// produces. Bound-item + flag transition together, so a sibling or an unrelated
+		/// infinite item flipping cannot satisfy it.</summary>
+		public bool CancelProvenByFlagFlip()
+			=> Item is ProductionItem pi && CancelProvenByFlagFlip(pi.Infinite);
+
+		/// <summary>World-free seam over the bound item's current Infinite flag.</summary>
+		public bool CancelProvenByFlagFlip(bool infiniteNow)
+			=> Kind == BotQueueTransitionKind.Cancelled && !AwaitingProof && WasInfinite && Item != null && !infiniteNow;
 	}
 
 	/// <summary>Per-queue probe state for one manager category: the last observed item set

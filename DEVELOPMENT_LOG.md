@@ -20548,3 +20548,45 @@ the existing helpers only — no blanket normalization, no yaml edits except one
   `PendingMatchesBoundInstanceNotName`, `DroppedProducerLosesDedupeHistory`. 11 seam tests green; full suite 1285/1285; Release
   clean; boot gate main menu, zero new exceptions. Still record-only — no orders, no world
   mutation, no RNG.
+
+## 2026-10-10 - Devin-Architect: terminal causality — intent separated from proven outcomes (01a121b6)
+
+VP consumer-fit on frozen f7e1d0fff (REREVIEW_2026-10-09_observer_seam_f7e1_consumer_fit.md):
+`ResolveRemovedItem` still promoted a fresh pending to `Placed`/`Cancelled` whenever the
+bound item disappeared from a live queue within 8 ticks. Engine check at pin 0a3f77dbe
+shows removal alone can never prove cause — `ProductionQueue` cleanup (tech-cap refund
+:443, infinite trim :899, competing `CancelProductionInner` :828) and the builder-unit
+`BuildOnSite` path (`PlaceBuilding` :209-250 removes the item immediately, the actor may
+land ticks later or never) all produce identical disappearances. Corrected on
+`devin/queue-observer-seam`:
+
+* **Intent records emit at the decision tick** — `PlacementOrdered` / `CancelOrdered`
+  appended to `BotQueueTransitionKind` (existing ordinals unchanged). `NotePendingTerminal`
+  and `NoteExternalCancel` emit the intent once at issue; intent kinds are never terminal.
+* **`Placed` requires actor-lifecycle proof** — an own, live actor of the ordered type
+  (or a registered `PlaceBuildingVariants` variant) occupying the ordered cell
+  (`ActorMap.GetActorsAt`); plug orders prove on the host `Pluggable` slot no longer
+  accepting the type it accepted when chosen. Normal placement lands inside the same
+  frame-end task as the removal, so it proves at the next probe tick; a builder unit
+  arms the pending (`AwaitingProof`, window restarts at removal) and resolves on the
+  late actor, else `Removed`+intent reason after `MaxInFlightTicks` — the lead's narrow
+  ruling implemented verbatim.
+* **`Cancelled` requires the Infinite-flag flip** — `CancelProductionInner`'s unique
+  signature (`item.Infinite = false` while the item stays queued), bound at issue via
+  `WasInfinite`. Every other cancel-related removal resolves `Removed`+intent reason:
+  disappearance is indistinguishable from engine cleanup on this pin — schema-2 UNKNOWN,
+  never an invented terminal.
+* **`Removed` always classifies event-locally** (Elimination / Destruction / None) and
+  carries the request's reason so intent survives on record; it never inherits the
+  request's cancellation class (that would assert the unproven cause). Stale-watch
+  flushes resolve leftover pendings with one last proof check instead of silently
+  clearing. `Matches` no longer binds `AwaitingProof` entries — an armed entry's own
+  departed ref and same-name siblings can never re-consume it.
+* **World-free regression suite (+9):** unproven removal arms not Placed, stale request
+  Removed, proven placement (incl. queueSeen=false evidence-beats-staleness), builder-unit
+  late-actor success, builder-unit failure expiry, competing-removal never-Placed,
+  cancel removal always Removed across live/stale/fresh/expired, infinite flip bound-item
+  proof (sibling/unbound/finite/non-cancel negatives), awaiting-entry sibling immunity,
+  elimination during awaiting.
+* **Unchanged invariants:** lazy seam (no observer -> one null check), bounded O(n) probe,
+  no orders/RNG/world mutation, per-instance episodes, event-local schema-2 fields.
