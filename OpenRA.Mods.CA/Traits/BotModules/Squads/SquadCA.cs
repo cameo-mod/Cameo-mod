@@ -124,6 +124,10 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			}
 		}
 
+		// The production factory remains world-backed; offline consumer tests replace only
+		// observation and the order sink, while Update/provider lookup/controller stay real.
+		internal virtual ISquadDesireExecution<Actor> CreateDesireExecution() => new LiveSquadDesireExecution(this);
+
 		public void Update()
 		{
 			if (IsValid)
@@ -138,7 +142,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 					SquadManager.CanaryObserved(Target.Actor, "squad-update-target");
 
 				if (desire != null)
-					(desireController ??= new SquadDesireController<Actor>()).Tick(new LiveSquadDesireExecution(this), desire);
+					(desireController ??= new SquadDesireController<Actor>()).Tick(CreateDesireExecution(), desire);
 				else
 					FuzzyStateMachine.Update(this);
 
