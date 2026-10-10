@@ -1,6 +1,6 @@
 # audit_doc_claims — do the documents still match the tree?
 
-Registry: `docs/audit/doc_claims.yaml` — **43** claims.
+Registry: `docs/audit/doc_claims.yaml` — **44** claims.
 
 A number in prose is true only on the day it is written. These are the claims a DECISION rests on, re-measured every run.
 
@@ -9,9 +9,9 @@ A number in prose is true only on the day it is written. These are the claims a 
 | `ai_contract_distinct_module_types` | 77 | 77 | ✅ |
 | `ai_contract_player_module_instances` | 104 | 104 | ✅ |
 | `ai_contract_world_module_instances` | 1 | 1 | ✅ |
-| `shield_versus_mean` | 184.71 | 184.71 | ✅ |
-| `shield_hp_factor` | 0.541389 | 0.541389 | ✅ |
-| `shield_damage_share` | 0.0160276 | 0.0160276 | ✅ |
+| `shield_versus_mean` | 184.71 | 185.629 | ✅ |
+| `shield_hp_factor` | 0.541389 | 0.538709 | ✅ |
+| `shield_damage_share` | 0.0160276 | 0.0160098 | ✅ |
 | `always_on_shield_actors` | 58 | 58 | ✅ |
 | `always_on_shielded_buildings` | 16 | 16 | ✅ |
 | `live_damage_multipliers` | 326 | 326 | ✅ |
@@ -25,9 +25,10 @@ A number in prose is true only on the day it is written. These are the claims a 
 | `plating_row_ties` | 0 | 0 | ✅ |
 | `plating_families` | 52 | 52 | ✅ |
 | `signed_off_class_anchors` | 0 | 0 | ✅ |
-| `warhead_family_reach` | 1509 | 1509 | ✅ |
+| `warhead_family_reach` | 1510 | 1510 | ✅ |
 | `unconverted_template_inheritors` | 402 | 402 | ✅ |
-| `ledgers_drifted` | 0 | 0 | ✅ |
+| `pricing_default_basis_is_k` | 1 | 1 | ✅ |
+| `ledgers_drifted` | 0 | 1 | **MISMATCH** |
 | `armament_multi_role_actors` | 104 | 104 | ✅ |
 | `armament_air_role_invisible_to_the_name_test` | 41 | 41 | ✅ |
 | `dta_projectile_roles_resolved` | 60 | 60 | ✅ |
@@ -45,12 +46,14 @@ A number in prose is true only on the day it is written. These are the claims a 
 | `ranged_charge_actors` | 4 | 4 | ✅ |
 | `railtower_immediate_reacquisition_period` | 210 | 210 | ✅ |
 | `tesla_coil_attack_period` | 131 | 131 | ✅ |
-| `cameo_family_labelled_weapons` | 1567 | 1567 | ✅ |
+| `cameo_family_labelled_weapons` | 1569 | 1569 | ✅ |
 | `warhead_reference_groups` | 1674 | 1674 | ✅ |
 | `cameo_shaped_families` | 53 | 53 | ✅ |
 | `cameo_element_bearing_families` | 23 | 23 | ✅ |
 
-_clean_ — every registered claim still matches the tree.
+**FAIL — a document and the tree disagree.**
+
+Fix whichever is wrong, and if the tree is right update `value` in `doc_claims.yaml` **and every doc listed under `docs:`** in the SAME commit. That co-update is the point: it is how the `Shield = top + floor` duplication survived in two documents for weeks.
 
 ## Review cadence (for what a number cannot capture)
 

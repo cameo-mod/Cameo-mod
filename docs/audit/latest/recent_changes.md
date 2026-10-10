@@ -1,19 +1,21 @@
 # audit_recent_changes — last 14 day(s) of history
 
-Commits reviewed: **884**, files touched: **5018**
+Commits reviewed: **919**, files touched: **4162**
 
 | code | meaning | count | blocking |
 |---|---|---|---|
-| R1 | balance yaml edited without the ledger | 24 | yes |
+| R1 | balance yaml edited without the ledger | 18 | yes |
 | R2 | audit script never run by run_all.sh | 11 | yes |
-| R3 | provenance (wrong-identity trailer blocks; missing one on the shared identity is review-only) | 37 | partly |
-| R4 | engine/mod.config change (needs boot gate) | 5 | no |
+| R3 | provenance (wrong-identity trailer blocks; missing one on the shared identity is review-only) | 69 | partly |
+| R4 | engine/mod.config change (needs boot gate) | 13 | no |
 
 
-## R1 — hand-edited balance numbers (24)
+## R1 — hand-edited balance numbers (18)
 
 | commit | date | subject | fields |
 |---|---|---|---|
+| 230cdf71 | 2026-10-08 | test(balance): re-record history fixtures agains | Spread |
+| 4e47ead9 | 2026-10-06 | Rebase air-only missiles on AA templates | Damage, Speed, Spread |
 | d300295e | 2026-10-01 | packs: materialize 12 hard cross-pack refs (reso | Damage, Range, ReloadDelay, Speed, Spread |
 | 2f440999 | 2026-09-26 | W7 tail-2: 5 more de-parented after collision pr | Burst, BurstDelays, Damage, Range, ReloadDelay, Speed, Spread |
 | 5eff1183 | 2026-09-26 | rule-4 Versus remediation: restore weapon-parent | BurstDelays, MinRange |
@@ -30,14 +32,6 @@ Commits reviewed: **884**, files touched: **5018**
 | 450dcea5 | 2026-09-26 | feat(W7): materialize held-67 ExtraDamage batch  | BurstDelays, Damage, Range, ReloadDelay, Speed, Spread |
 | 434413f0 | 2026-09-26 | W7 packs: restore resolved child-order parity (N | Damage, Range, Spread |
 | 5407fd8a | 2026-09-25 | W7 ContentPack batch: 97 pack-level weapon-paren | Burst, BurstDelays, Damage, MinRange, Range, ReloadDelay, Speed, Spread |
-| c63c0415 | 2026-09-25 | W7: materialize 33 remaining DAWN-file-set weapo | Burst, BurstDelays, Damage, MinRange, Range, ReloadDelay, Speed, Spread |
-| 95e18490 | 2026-09-25 | pack self-containment: eliminate hard value-ref  | Burst, BurstDelays, Damage, HP, MinRange, Range, ReloadDelay, Speed, Spread |
-| 72468eb3 | 2026-09-25 | TD/TS/SC self-containment: eliminate cross-pack  | Damage, Range, ReloadDelay, Speed |
-| f51320c8 | 2026-09-25 | D2k self-containment: eliminate all cross-pack i | Burst, BurstDelays, Range, ReloadDelay, Spread |
-| d46ecd9d | 2026-09-24 | W7/W27/R17: DAWN lane — weapon 3-way conversions | Burst, BurstDelays, Damage, MinRange, Range, ReloadDelay, Speed, Spread |
-| 86577a7a | 2026-09-24 | W7: convert unclaimed weapon-parent edges in out | Damage, Range, ReloadDelay, Speed, Spread |
-| 004a9cb8 | 2026-09-24 | W7: convert all weapon-parent edges in weapons.y | Burst, BurstDelays, Damage, MinRange, Range, ReloadDelay, Speed, Spread |
-| d36f3b0a | 2026-09-24 | W23-RA batch 1: TKM file retrofit (20/21 weapons | Damage, MinRange, Range, ReloadDelay, Speed, Spread |
 
 
 ## R2 — audits missing from run_all.sh (11)
@@ -57,10 +51,48 @@ Commits reviewed: **884**, files touched: **5018**
 | tools/audit/audit_weapon_identity.py | not invoked by run_all.sh |
 
 
-## R3 — commits without provenance (37)
+## R3 — commits without provenance (69)
 
 | commit | date | author | problem | severity |
 |---|---|---|---|---|
+| 680dd25d | 2026-10-09 | Claude | agent trailer `Claude Opus 5.5 <noreply@anthropic.com>` on a non-shared identity | review |
+| ba8e99ac | 2026-10-09 | Claude | agent trailer `Claude Opus 5.5 <noreply@anthropic.com>` on a non-shared identity | review |
+| f70c37ba | 2026-10-09 | Claude | agent trailer `Claude Opus 5.5 <noreply@anthropic.com>` on a non-shared identity | review |
+| 11490f9e | 2026-10-09 | Claude | agent trailer `Claude Opus 5.5 <noreply@anthropic.com>` on a non-shared identity | review |
+| f185a733 | 2026-10-09 | Claude | agent trailer `Claude Opus 5.5 <noreply@anthropic.com>` on a non-shared identity | review |
+| 5041e038 | 2026-10-09 | Claude | agent trailer `Claude Opus 5.5 <noreply@anthropic.com>` on a non-shared identity | review |
+| f5cf0b34 | 2026-10-09 | Claude | agent trailer `Claude Opus 5.5 <noreply@anthropic.com>` on a non-shared identity | review |
+| 5621960d | 2026-10-09 | Claude | agent trailer `Claude Opus 5.5 <noreply@anthropic.com>` on a non-shared identity | review |
+| 5c8cfe04 | 2026-10-09 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
+| 3d875fd2 | 2026-10-09 | Claude | agent trailer `Claude Opus 5.5 <noreply@anthropic.com>` on a non-shared identity | review |
+| 2a417dc3 | 2026-10-09 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
+| cdb75da4 | 2026-10-09 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
+| e9814217 | 2026-10-09 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
+| b5425946 | 2026-10-09 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
+| a12d9661 | 2026-10-09 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
+| 83f14ab1 | 2026-10-09 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
+| d7494099 | 2026-10-09 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
+| ab7285e8 | 2026-10-09 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
+| 20a8107a | 2026-10-08 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
+| 3d99405b | 2026-10-08 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
+| 4bf69671 | 2026-10-08 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
+| 37d9fc6a | 2026-10-08 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
+| 65367213 | 2026-10-07 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
+| 29383802 | 2026-10-08 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
+| d8ccd7da | 2026-10-07 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
+| fa59898f | 2026-10-07 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
+| a716cb6d | 2026-10-06 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
+| 1832a4c6 | 2026-10-06 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
+| 210ec947 | 2026-10-06 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
+| 128b02a1 | 2026-10-06 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
+| 4e47ead9 | 2026-10-06 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
+| c061cfbb | 2026-10-05 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
+| 5fecf671 | 2026-10-06 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
+| 444e855e | 2026-10-06 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
+| b7f6d436 | 2026-10-06 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
+| 0fd6ec67 | 2026-10-05 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
+| b6f522e7 | 2026-10-05 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
+| 2e944a9e | 2026-10-05 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
 | 772b8de5 | 2026-10-04 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
 | 0ddcb6b0 | 2026-10-04 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
 | 08d28859 | 2026-10-04 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
@@ -92,18 +124,20 @@ Commits reviewed: **884**, files touched: **5018**
 | 67b18009 | 2026-09-27 | Zan Yewang | agent trailer `Devin AI <devin@cognition.ai>` on a non-shared identity | review |
 | e9d50021 | 2026-09-27 | Zan Yewang | agent trailer `Devin AI <158243242+devin-ai-integration[bot]@users.noreply.github.com>` on a non-shared identity | review |
 | 56de7db0 | 2026-09-27 | Zan Yewang | agent trailer `Devin AI <158243242+devin-ai-integration[bot]@users.noreply.github.com>` on a non-shared identity | review |
-| 043e6c40 | 2026-09-24 | AedisToru | no Co-Authored-By trailer (shared identity) | review |
-| 8f53b8dd | 2026-09-23 | devin-ai-integration[bot] | agent trailer `Zan Yewang <inyucedora@gmail.com>` on a non-shared identity | review |
-| c6894f19 | 2026-09-23 | devin-ai-integration[bot] | agent trailer `Zan Yewang <inyucedora@gmail.com>` on a non-shared identity | review |
-| d81a1bfd | 2026-09-23 | Blackrobe | agent trailer `Codex GPT-5.6 Luna <noreply@openai.com>` on a non-shared identity | review |
-| 1519a758 | 2026-09-22 | devin-ai-integration[bot] | agent trailer `Devin AI <devin@cognition.ai>` on a non-shared identity | review |
-| fdbb58ef | 2026-09-22 | devin-ai-integration[bot] | agent trailer `Devin AI <devin@cognition.ai>` on a non-shared identity | review |
 
 
-## R4 — engine/config changes to re-verify (5)
+## R4 — engine/config changes to re-verify (13)
 
 | commit | date | note |
 |---|---|---|
+| 7743fc17 | 2026-10-10 | mod.config changed (rebuild + boot gate required) |
+| b06615a8 | 2026-10-09 | mod.config changed (rebuild + boot gate required) |
+| a9349d01 | 2026-10-08 | mod.config changed (rebuild + boot gate required) |
+| d8ccd7da | 2026-10-07 | mod.config changed (rebuild + boot gate required) |
+| fa59898f | 2026-10-07 | mod.config changed (rebuild + boot gate required) |
+| 210ec947 | 2026-10-06 | mod.config changed (rebuild + boot gate required) |
+| 444e855e | 2026-10-06 | mod.config changed (rebuild + boot gate required) |
+| b7f6d436 | 2026-10-06 | mod.config changed (rebuild + boot gate required) |
 | 11f1825c | 2026-09-29 | mod.config changed (rebuild + boot gate required) |
 | 5441ace1 | 2026-09-29 | mod.config changed (rebuild + boot gate required) |
 | 5b526e79 | 2026-09-28 | mod.config changed (rebuild + boot gate required) |
@@ -115,20 +149,20 @@ Commits reviewed: **884**, files touched: **5018**
 
 | file | commits touching it |
 |---|---|
-| DEVELOPMENT_LOG.md | 311 |
-| docs/design/AI_ARCHITECTURE.md | 163 |
-| mods/cameo/ai/ai.yaml | 139 |
-| docs/HANDOFF.md | 126 |
-| OpenRA.Mods.CA/Traits/BotModules/SquadManagerBotModuleCA.cs | 86 |
-| docs/DESIGN.md | 76 |
-| OpenRA.Mods.Cameo/Traits/BotModules/BotSituation.cs | 71 |
-| docs/LESSONS_LEARNED.md | 68 |
-| tools/ai/increment_switches.yaml | 65 |
-| docs/design/ROADMAP.md | 54 |
-| docs/design/AI_MODULE_MAP.md | 47 |
+| DEVELOPMENT_LOG.md | 361 |
+| docs/design/AI_ARCHITECTURE.md | 160 |
+| mods/cameo/ai/ai.yaml | 135 |
+| docs/HANDOFF.md | 120 |
+| OpenRA.Mods.CA/Traits/BotModules/SquadManagerBotModuleCA.cs | 96 |
+| tools/ai/increment_switches.yaml | 73 |
+| OpenRA.Mods.Cameo/Traits/BotModules/BotSituation.cs | 67 |
+| docs/DESIGN.md | 61 |
+| docs/LESSONS_LEARNED.md | 56 |
+| docs/design/AI_MODULE_MAP.md | 48 |
+| OpenRA.Mods.CA/Traits/BotModules/BotModuleLogic/BaseBuilderQueueManagerCA.cs | 43 |
+| docs/design/ROADMAP.md | 43 |
 | tools/audit/fog_honesty_manifest.json | 39 |
-| docs/audit/doc_claims.yaml | 38 |
-| OpenRA.Mods.Cameo.Test/MasterAiBotModuleTest.cs | 36 |
+| OpenRA.Mods.CA/Traits/BotModules/Squads/States/GroundStatesCA.cs | 35 |
 | docs/design/AI_MATCH_LOG.md | 35 |
 
 
@@ -143,10 +177,10 @@ Commits reviewed: **884**, files touched: **5018**
 
 ## Enforcement
 
-R1/R3 block only for commits on or after **2026-08-12**: 24 R1 and 0 R3 of 24/37 findings are in scope; the rest predate the gate.
+R1/R3 block only for commits on or after **2026-08-12**: 18 R1 and 0 R3 of 18/69 findings are in scope; the rest predate the gate.
 
 
 ## FAIL
 
-- 24 R1, 11 R2, 0 R3 blocking finding(s)
+- 18 R1, 11 R2, 0 R3 blocking finding(s)
 

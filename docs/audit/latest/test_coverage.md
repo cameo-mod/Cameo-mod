@@ -2,9 +2,9 @@
 
 | metric | meaning | value | floor/baseline |
 |---|---|---|---|
-| T1 | NUnit [Test] cases in OpenRA.Mods.Cameo.Test (100 file(s)) | 1155 | >= 933 |
-| T2 | `def test_*` in tools/tests (301 file(s)) | 3106 | >= 3076 |
-| T3 | modules with no test mentioning them | 495 | <= 496 |
+| T1 | NUnit [Test] cases in OpenRA.Mods.Cameo.Test (121 file(s)) | 1431 | >= 933 |
+| T2 | `def test_*` in tools/tests (314 file(s)) | 3256 | >= 3076 |
+| T3 | modules with no test mentioning them | 494 | <= 496 |
 | T4 | per-file line-coverage ratchet (bot modules) | not run (no --coverage-xml) | no baselined file loses coverage |
 
 
@@ -19,7 +19,7 @@ python tools/audit/audit_test_coverage.py --coverage-xml TestResults/coverage.co
 ```
 
 
-## T3 — untested modules (495)
+## T3 — untested modules (494)
 
 | kind | file | type(s)/module |
 |---|---|---|
@@ -44,7 +44,7 @@ python tools/audit/audit_test_coverage.py --coverage-xml TestResults/coverage.co
 | C# | OpenRA.Mods.Cameo/RemasterSettings.cs | RemasterSettings |
 | C# | OpenRA.Mods.Cameo/Rendering/ColorPickerColorShift.cs | ColorPickerColorShift |
 | C# | OpenRA.Mods.Cameo/Rendering/PlayerColorShift.cs | PlayerColorShift |
-| C# | OpenRA.Mods.Cameo/ServerTraits/CameoLobbyAutopilot.cs | CameoLobbyAutopilot |
+| C# | OpenRA.Mods.Cameo/ServerTraits/CameoDevSeed.cs | CameoDevSeed |
 | C# | OpenRA.Mods.Cameo/Terrain/CameoRemasterTerrain.cs | CameoRemasterTerrainLoader, CameoRemasterTerrain |
 | C# | OpenRA.Mods.Cameo/Terrain/CameoRemasterTileCache.cs | CameoRemasterTileCache |
 | C# | OpenRA.Mods.Cameo/Traits/AdaptiveGameSpeed.cs | AdaptiveGameSpeed |
@@ -94,6 +94,7 @@ python tools/audit/audit_test_coverage.py --coverage-xml TestResults/coverage.co
 | C# | OpenRA.Mods.Cameo/Traits/Integrity.cs | Integrity |
 | C# | OpenRA.Mods.Cameo/Traits/LarvaConsumingProduction.cs | LarvaConsumingProduction |
 | C# | OpenRA.Mods.Cameo/Traits/LarvaProductionQueue.cs | LarvaProductionQueue |
+| C# | OpenRA.Mods.Cameo/Traits/McvHealthCapture.cs | McvHealthCapture |
 | C# | OpenRA.Mods.Cameo/Traits/Modifiers/WithPhysicalStateColoredOverlay.cs | WithPhysicalStateColoredOverlay |
 | C# | OpenRA.Mods.Cameo/Traits/ModifiesCombatProportionalToPhysicalState.cs | ModifiesCombatProportionalToPhysicalState |
 | C# | OpenRA.Mods.Cameo/Traits/NewConstructionOptionsNotification.cs | NewConstructionOptionsNotification, NewConstructionOptionsOnDeploy |
@@ -230,21 +231,18 @@ python tools/audit/audit_test_coverage.py --coverage-xml TestResults/coverage.co
 | C# | OpenRA.Mods.CA/Traits/AttachOnTransform.cs | AttachOnTransform |
 | C# | OpenRA.Mods.CA/Traits/Attack/AttackBomberCA.cs | AttackBomberCA |
 | C# | OpenRA.Mods.CA/Traits/Attack/AttackFrontalCharged.cs | AttackFrontalCharged |
-| C# | OpenRA.Mods.CA/Traits/Attack/AttackGarrisonedSP.cs | FirePortSP, AttackGarrisonedSP |
 | C# | OpenRA.Mods.CA/Traits/Attack/AttackPrismSupported.cs | AttackPrismSupportedCA |
 | C# | OpenRA.Mods.CA/Traits/Attack/AttackTurretedCharged.cs | AttackTurretedCharged |
 | C# | OpenRA.Mods.CA/Traits/BallisticMissileCA.cs | BallisticMissileCA |
 | C# | OpenRA.Mods.CA/Traits/BotModules/BotLimits.cs | BotLimits |
 | C# | OpenRA.Mods.CA/Traits/BotModules/BotLimitsResolver.cs | BotLimitsResolver |
 | C# | OpenRA.Mods.CA/Traits/BotModules/BuildingRepairBotModuleCA.cs | BuildingRepairBotModuleCA |
-| C# | OpenRA.Mods.CA/Traits/BotModules/CaptureManagerBotModuleCA.cs | CaptureManagerBotModuleCA |
-| C# | OpenRA.Mods.CA/Traits/BotModules/HarvesterBotModuleCA.cs | HarvesterBotModuleCA |
+| C# | OpenRA.Mods.CA/Traits/BotModules/ExpansionDemand.cs | ExpansionDemand |
 | C# | OpenRA.Mods.CA/Traits/BotModules/IBotArmyStaging.cs | ArmyStagingGroup, ArmyStagingPlan |
 | C# | OpenRA.Mods.CA/Traits/BotModules/IBotRegionThreatProvider.cs | BotRegionThreatMerge |
 | C# | OpenRA.Mods.CA/Traits/BotModules/IBotScaleTargets.cs | BotScaleTargets |
 | C# | OpenRA.Mods.CA/Traits/BotModules/IBotThreatAnalysis.cs | BotThreatRoles |
 | C# | OpenRA.Mods.CA/Traits/BotModules/SiegeEvaluatorBotModule.cs | SiegeEvaluatorBotModule |
-| C# | OpenRA.Mods.CA/Traits/BotModules/UnitBuilderBotModuleCA.cs | UnitBuilderBotModuleCA |
 | C# | OpenRA.Mods.CA/Traits/BotModules/UnitCompositionsBotModule.cs | UnitComposition, UnitCompositionsBotModule |
 | C# | OpenRA.Mods.CA/Traits/CashHackable.cs | CashHackable |
 | C# | OpenRA.Mods.CA/Traits/ChronoshiftableCA.cs | ChronoshiftableCA, ChronoshiftReturnInit |
@@ -267,7 +265,6 @@ python tools/audit/audit_test_coverage.py --coverage-xml TestResults/coverage.co
 | C# | OpenRA.Mods.CA/Traits/CustomRadarColor.cs | CustomRadarColor |
 | C# | OpenRA.Mods.CA/Traits/DeployOnAttack.cs | DeployOnAttack |
 | C# | OpenRA.Mods.CA/Traits/DetonateWeaponOnDeploy.cs | DetonateWeaponOnDeploy |
-| C# | OpenRA.Mods.CA/Traits/DoesNotBlock.cs | DoesNotBlock |
 | C# | OpenRA.Mods.CA/Traits/GuidedMissile.cs | GuidedMissile |
 | C# | OpenRA.Mods.CA/Traits/HarvesterBalancer.cs | HarvesterBalancer |
 | C# | OpenRA.Mods.CA/Traits/InstantTransforms.cs | InstantTransforms |
@@ -447,7 +444,9 @@ python tools/audit/audit_test_coverage.py --coverage-xml TestResults/coverage.co
 | python | tools/audit/gen_faction_matrix.py | gen_faction_matrix |
 | python | tools/audit/gen_release_baseline.py | gen_release_baseline |
 | python | tools/audit/gen_rename_maps.py | gen_rename_maps |
+| python | tools/audit/gen_trait_families.py | gen_trait_families |
 | python | tools/audit/phase_b_survey.py | phase_b_survey |
+| python | tools/audit/probe_swlimit_extend.py | probe_swlimit_extend |
 | python | tools/audit/propose_sonic_mapping.py | propose_sonic_mapping |
 | python | tools/audit/status_effect_inventory.py | status_effect_inventory |
 | python | tools/audit/summarize_role_comparison.py | summarize_role_comparison |

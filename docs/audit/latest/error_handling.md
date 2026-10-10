@@ -1,13 +1,13 @@
 # audit_error_handling — Python tooling error handling
 
-Files scanned: **824**
+Files scanned: **850**
 
 | code | meaning | count | baseline |
 |---|---|---|---|
 | E1 | bare except / except BaseException | 5 | 2 |
-| E2 | handler discards the error | 154 | 30 |
-| E3 | open() without encoding= | 164 | 90 |
-| E4 | subprocess call without check= | 70 | 9 |
+| E2 | handler discards the error | 160 | 30 |
+| E3 | open() without encoding= | 179 | 90 |
+| E4 | subprocess call without check= | 79 | 9 |
 
 
 ## Files that do not parse
@@ -28,7 +28,7 @@ Files scanned: **824**
 | tools/balance/apply_harvester_durability.py | 420 | `except BaseException` |
 
 
-## E2 — 154 finding(s)
+## E2 — 160 finding(s)
 
 | file | line | detail |
 |---|---|---|
@@ -49,12 +49,14 @@ Files scanned: **824**
 | tools/ai/fit_engagement_priors.py | 277 | handler body discards the error |
 | tools/ai/gen_fransbot_lists.py | 140 | handler body discards the error |
 | tools/ai/run_ai_match_batch.py | 389 | handler body discards the error |
-| tools/ai/run_ai_match_batch.py | 734 | handler body discards the error |
+| tools/ai/run_ai_match_batch.py | 781 | handler body discards the error |
 | tools/ai/takeover_smoke.py | 111 | handler body discards the error |
 | tools/ai/takeover_smoke.py | 127 | handler body discards the error |
 | tools/ai/takeover_smoke.py | 169 | handler body discards the error |
 | tools/ai/team_coordination_report.py | 60 | handler body discards the error |
 | tools/ai/tune_build_order.py | 90 | handler body discards the error |
+| tools/ai/wave1_scheduler.py | 306 | handler body discards the error |
+| tools/ai/wave1_scheduler.py | 555 | handler body discards the error |
 | tools/audit/audit_ai.py | 45 | handler body discards the error |
 | tools/audit/audit_armor_upgrade_harm.py | 101 | handler body discards the error |
 | tools/audit/audit_balance_sheet.py | 134 | handler body discards the error |
@@ -91,6 +93,7 @@ Files scanned: **824**
 | tools/audit/gen_release_baseline.py | 50 | handler body discards the error |
 | tools/audit/miniyaml.py | 223 | handler body discards the error |
 | tools/audit/phase_b_survey.py | 40 | handler body discards the error |
+| tools/audit/probe_swlimit_extend.py | 43 | handler body discards the error |
 | tools/audit/review_batch_diff.py | 80 | handler body discards the error |
 | tools/audit/review_resolve_diff.py | 159 | handler body discards the error |
 | tools/audit_ce_image_usage.py | 29 | handler body discards the error |
@@ -110,11 +113,11 @@ Files scanned: **824**
 | tools/balance/collapse_target.py | 137 | handler body discards the error |
 | tools/balance/compensate_retrofit.py | 113 | handler body discards the error |
 | tools/balance/compensate_retrofit.py | 121 | handler body discards the error |
-| tools/balance/consolidate_adjacent_family_stacks.py | 65 | handler body discards the error |
-| tools/balance/consolidate_final_safe_cohorts.py | 133 | handler body discards the error |
+| tools/balance/consolidate_adjacent_family_stacks.py | 72 | handler body discards the error |
+| tools/balance/consolidate_final_safe_cohorts.py | 168 | handler body discards the error |
 | tools/balance/consolidate_reviewed_weapon_roots.py | 268 | handler body discards the error |
 | tools/balance/consolidate_reviewed_weapon_roots.py | 320 | handler body discards the error |
-| tools/balance/consolidate_same_family_stacks.py | 136 | handler body discards the error |
+| tools/balance/consolidate_same_family_stacks.py | 144 | handler body discards the error |
 | tools/balance/derive_versus_columns.py | 72 | handler body discards the error |
 | tools/balance/design_invented_profiles.py | 172 | handler body discards the error |
 | tools/balance/design_invented_profiles.py | 186 | handler body discards the error |
@@ -123,10 +126,12 @@ Files scanned: **824**
 | tools/balance/extract_stats.py | 1225 | handler body discards the error |
 | tools/balance/formula.py | 589 | handler body discards the error |
 | tools/balance/gen_derived_stats.py | 95 | handler body discards the error |
+| tools/balance/k_price_delta.py | 131 | handler body discards the error |
+| tools/balance/k_price_delta.py | 153 | handler body discards the error |
 | tools/balance/measure_retrofit_gap.py | 134 | handler body discards the error |
 | tools/balance/pending_classes.py | 34 | handler body discards the error |
 | tools/balance/plan_firepower_retirement.py | 81 | handler body discards the error |
-| tools/balance/propose_class_rebalance.py | 271 | handler body discards the error |
+| tools/balance/propose_class_rebalance.py | 322 | handler body discards the error |
 | tools/balance/reference_distribution.py | 923 | handler body discards the error |
 | tools/balance/reference_distribution.py | 934 | handler body discards the error |
 | tools/balance/reference_distribution.py | 1101 | handler body discards the error |
@@ -182,16 +187,26 @@ Files scanned: **824**
 | tools/tests/test_armament_roles.py | 306 | handler body discards the error |
 | tools/tests/test_charge_aware_reference.py | 34 | handler body discards the error |
 | tools/tests/test_charge_aware_reference.py | 49 | handler body discards the error |
+| tools/tests/test_conflict_markers.py | 33 | handler body discards the error |
 | tools/tests/test_rename_r12_compatibility_cohort.py | 270 | handler body discards the error |
 | tools/tests/test_support_armament_pricing.py | 21 | handler body discards the error |
 | tools/tests/test_support_armament_pricing.py | 107 | handler body discards the error |
 | tools/tilesets/generate_volcanic_tileset.py | 814 | handler body discards the error |
 
 
-## E3 — 164 finding(s)
+## E3 — 179 finding(s)
 
 | file | line | detail |
 |---|---|---|
+| tools/ai/mcv_health.py | 36 | `path.open()` without encoding= |
+| tools/ai/replay_health.py | 89 | `path.open()` without encoding= |
+| tools/ai/wave1_scheduler.py | 110 | `os.open()` without encoding= |
+| tools/ai/wave1_scheduler.py | 246 | `write_text()` without encoding= |
+| tools/ai/wave1_scheduler.py | 295 | `write_text()` without encoding= |
+| tools/ai/wave1_scheduler.py | 298 | `write_text()` without encoding= |
+| tools/ai/wave1_scheduler.py | 299 | `write_text()` without encoding= |
+| tools/ai/wave1_scheduler.py | 314 | `write_text()` without encoding= |
+| tools/ai/wave1_scheduler.py | 531 | `write_text()` without encoding= |
 | tools/art/generate_chrome_scales.py | 149 | `Image.open()` without encoding= |
 | tools/audit/audit_effect_pairings.py | 112 | `args.baseline.read_text()` without encoding= |
 | tools/audit/collapse_dead_warhead_inherits.py | 43 | `open()` without encoding= |
@@ -208,6 +223,7 @@ Files scanned: **824**
 | tools/balance/peer_corpus.py | 64 | `path.open()` without encoding= |
 | tools/balance/prepare_promotion_discount.py | 37 | `path.open()` without encoding= |
 | tools/balance/propose_reference_anchors.py | 427 | `read_text()` without encoding= |
+| tools/balance/route_parity_floor.py | 112 | `read_text()` without encoding= |
 | tools/balance/shrapnel_scenario_report.py | 47 | `path.open()` without encoding= |
 | tools/check_hd_coverage.py | 10 | `open()` without encoding= |
 | tools/d2k_to_openra.py | 153 | `Image.open()` without encoding= |
@@ -241,6 +257,8 @@ Files scanned: **824**
 | tools/tests/test_converter_owned_names.py | 12 | `read_text()` without encoding= |
 | tools/tests/test_defense_tooltip_accuracy.py | 30 | `read_text()` without encoding= |
 | tools/tests/test_diagnostic_output.py | 38 | `two.read_text()` without encoding= |
+| tools/tests/test_economy_invariants.py | 57 | `write_text()` without encoding= |
+| tools/tests/test_economy_invariants.py | 63 | `output.read_text()` without encoding= |
 | tools/tests/test_extract_versus_dta_overlay.py | 16 | `rules.write_text()` without encoding= |
 | tools/tests/test_extract_versus_dta_overlay.py | 17 | `overlay.write_text()` without encoding= |
 | tools/tests/test_extract_versus_dta_overlay.py | 25 | `path.write_text()` without encoding= |
@@ -269,6 +287,7 @@ Files scanned: **824**
 | tools/tests/test_peer_corpus.py | 197 | `doc.write_text()` without encoding= |
 | tools/tests/test_peer_state_scenarios.py | 173 | `read_text()` without encoding= |
 | tools/tests/test_reference_map_requests.py | 27 | `read_text()` without encoding= |
+| tools/tests/test_replay_health.py | 94 | `target.read_text()` without encoding= |
 | tools/tests/test_shared_owner_wrappers.py | 19 | `read_text()` without encoding= |
 | tools/tests/test_td_naval_rename.py | 291 | `read_text()` without encoding= |
 | tools/tests/test_td_naval_rename.py | 292 | `read_text()` without encoding= |
@@ -276,6 +295,8 @@ Files scanned: **824**
 | tools/tests/test_warhead_source_paths.py | 21 | `rules.write_text()` without encoding= |
 | tools/tests/test_warhead_source_paths.py | 31 | `base.write_text()` without encoding= |
 | tools/tests/test_warhead_source_paths.py | 32 | `overlay.write_text()` without encoding= |
+| tools/tests/test_wave1_adjudication.py | 63 | `write_text()` without encoding= |
+| tools/tests/test_wave1_adjudication.py | 160 | `write_text()` without encoding= |
 | tools/tilesets/apply_ai_edge_correction.py | 34 | `Image.open()` without encoding= |
 | tools/tilesets/apply_ai_edge_correction.py | 78 | `Image.open()` without encoding= |
 | tools/tilesets/apply_dark_noise_cleanup.py | 79 | `Image.open()` without encoding= |
@@ -358,7 +379,7 @@ Files scanned: **824**
 | tools/tilesets/transfer_ai_cliff_style.py | 101 | `Image.open()` without encoding= |
 
 
-## E4 — 70 finding(s)
+## E4 — 79 finding(s)
 
 | file | line | detail |
 |---|---|---|
@@ -375,13 +396,17 @@ Files scanned: **824**
 | tools/ai/coverage_report.py | 70 | `subprocess.run()` without check= |
 | tools/ai/dump_bot_modules.py | 62 | `subprocess.Popen()` without check= |
 | tools/ai/dump_bot_modules.py | 77 | `subprocess.run()` without check= |
-| tools/ai/run_ai_match_batch.py | 660 | `subprocess.Popen()` without check= |
-| tools/ai/run_ai_match_batch.py | 858 | `subprocess.run()` without check= |
+| tools/ai/run_ai_match_batch.py | 707 | `subprocess.Popen()` without check= |
+| tools/ai/run_ai_match_batch.py | 905 | `subprocess.run()` without check= |
 | tools/ai/run_league.py | 357 | `subprocess.run()` without check= |
 | tools/ai/takeover_smoke.py | 66 | `subprocess.run()` without check= |
 | tools/ai/takeover_smoke.py | 85 | `subprocess.Popen()` without check= |
 | tools/ai/takeover_smoke.py | 93 | `subprocess.run()` without check= |
 | tools/ai/takeover_smoke.py | 98 | `subprocess.run()` without check= |
+| tools/ai/wave1_scheduler.py | 81 | `subprocess.run()` without check= |
+| tools/ai/wave1_scheduler.py | 131 | `subprocess.run()` without check= |
+| tools/ai/wave1_scheduler.py | 189 | `subprocess.Popen()` without check= |
+| tools/ai/wave1_scheduler.py | 292 | `subprocess.run()` without check= |
 | tools/audit/audit_ai_arch_freshness.py | 36 | `subprocess.run()` without check= |
 | tools/audit/audit_ai_frankenstein.py | 76 | `subprocess.run()` without check= |
 | tools/audit/audit_ca_unused.py | 46 | `subprocess.run()` without check= |
@@ -428,7 +453,12 @@ Files scanned: **824**
 | tools/tests/ai_d2k_production_gate.py | 70 | `subprocess.Popen()` without check= |
 | tools/tests/ai_raid_gate.py | 93 | `subprocess.Popen()` without check= |
 | tools/tests/ai_squad_gate.py | 92 | `subprocess.Popen()` without check= |
+| tools/tests/test_economy_invariants.py | 59 | `subprocess.run()` without check= |
+| tools/tests/test_economy_logger_cli.py | 41 | `subprocess.run()` without check= |
+| tools/tests/test_economy_logger_cli.py | 85 | `subprocess.run()` without check= |
 | tools/tests/test_family_bases.py | 68 | `subprocess.run()` without check= |
+| tools/tests/test_mcv_health.py | 101 | `subprocess.run()` without check= |
+| tools/tests/test_mcv_health.py | 114 | `subprocess.run()` without check= |
 | tools/tests/test_peer_export.py | 454 | `subprocess.run()` without check= |
 | tools/tests/test_peer_export.py | 541 | `subprocess.run()` without check= |
 | tools/wav_to_aud.py | 128 | `subprocess.run()` without check= |
@@ -437,8 +467,8 @@ Files scanned: **824**
 ## FAIL
 
 - E1: 5 > baseline 2
-- E2: 154 > baseline 30
-- E3: 164 > baseline 90
-- E4: 70 > baseline 9
+- E2: 160 > baseline 30
+- E3: 179 > baseline 90
+- E4: 79 > baseline 9
 - 1 file(s) do not parse
 

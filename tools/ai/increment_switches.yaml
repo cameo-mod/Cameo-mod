@@ -264,3 +264,6 @@ groups:
     BaseBuilderBotModuleCA:
       SwitchCondition: genericbot    # shared @generic instance serves classicbot too — the F2 pattern (spec: classic stays the A/B reference)
       UseExpansionPrebuild: true
+  BP_effective_unit_value: # AI architecture synthesis F10 / Part IV A4: enable the learned arsenal weight for genericbot only; off preserves the authored neutral weight path
+    BotLearnedPriors:
+      UseLearnedPriors: true

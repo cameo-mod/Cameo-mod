@@ -131,6 +131,17 @@ class LearnabilityRegistryTests(unittest.TestCase):
 
         self.assertEqual(sorted(ranks), list(range(1, 41)))
 
+    def test_wired_learnables_require_existing_artifacts(self):
+        records, _ = registry_data()
+        for entry in records:
+            if required(entry, "state") != "wired":
+                continue
+            artifact = child(entry, "artifact")
+            self.assertIsNotNone(artifact, f"wired learnable {entry.key} has no artifact declaration")
+            path = required(artifact, "path")
+            self.assertTrue((ROOT / pathlib.Path(path)).is_file(),
+                            f"wired learnable {entry.key} artifact is missing: {path}")
+
     def test_manifest_and_learned_artifacts_do_not_use_identity_fields(self):
         roots = miniyaml.load(REGISTRY)
         for root in roots:

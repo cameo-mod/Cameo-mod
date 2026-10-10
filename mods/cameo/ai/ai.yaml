@@ -4058,10 +4058,10 @@ Player:
 	BotUnitLeaseRegistry:
 		EnforceAtOrderGate: true
 		RequiresCondition: genericbot
-	# Reads the committed offline priors (DESIGN §19.2) as a bounded unit-builder weight; inert until its own
-	# UseLearnedPriors is on (genericbot only — classic, which shares the unit builder, has no provider).
+	# Reads committed offline priors as a bounded unit-builder weight; default-off, enabled only by BP_effective_unit_value.
+	# Genericbot only — classic, which shares the unit builder, has no provider.
 	BotLearnedPriors:
-		UseLearnedPriors: true
+		UseLearnedPriors: false
 		RequiresCondition: genericbot
 	# LC5 (AI_MASTER_PLAN §3): the ownership watchdog. Read-only (never orders, claims or releases), so it runs on
 	# classic too: classic's squad layer is the baseline the genericbot owners are compared against. Active in

@@ -402,7 +402,6 @@ Each row: a `BotTick` consumer positioned BEFORE the `IBotTick` provider it read
 | `Land` | `FransTransportCommanderBotModule` |
 | `PauseProduction` | `FransUnitBuilderBotModule` |
 | `PlaceMinefield` | `FransMinelayerBotModule` |
-| `PlacePlugAI` | `PlugSpawnerBotModuleCA` |
 | `Scatter` | `SquadManagerBotModuleCA` |
 | `SetBotCounterDemand` | `MasterAiBotModule` |
 | `SetBotPersonality` | `MasterAiBotModule` |
@@ -412,7 +411,7 @@ Each row: a `BotTick` consumer positioned BEFORE the `IBotTick` provider it read
 | check | severity | finding |
 |---|---|---|
 | R1 | ok | 109 gated instances checked; 0 dormant on master until their increment arm |
-| R2 | ok | 80 switch targets verified |
+| R2 | ok | 81 switch targets verified |
 | R3 | WARN | DEAD-END `IBotRadarContacts`: provided by `RadarContactsBotModule`; no consumer |
 | R4 | WARN | `AttackMove` — 7 issuers: BeaconResponderBotModule (lease); FransAirCommanderBotModule (no-lease); FransGroundCommanderBotModule (no-lease); FransSeaCommanderBotModule (no-lease); GarrisonContestBotModule (lease); LoadGarrisonerBotModuleCA (lease); SquadManagerBotModuleCA (lease); UNSEPARATED co-runners: FransAirCommanderBotModule+FransGroundCommanderBotModule, FransAirCommanderBotModule+FransSeaCommanderBotModule, FransGroundCommanderBotModule+FransSeaCommanderBotModule |
 | R4 | WARN | `Attack` — 6 issuers: FransAirCommanderBotModule (no-lease); FransGroundCommanderBotModule (no-lease); FransSeaCommanderBotModule (no-lease); FransSpecOpsCommanderBotModule (no-lease); FransTransportCommanderBotModule (lease); SquadManagerBotModuleCA (squad); UNSEPARATED co-runners: FransAirCommanderBotModule+FransGroundCommanderBotModule, FransAirCommanderBotModule+FransSeaCommanderBotModule, FransAirCommanderBotModule+FransSpecOpsCommanderBotModule, FransGroundCommanderBotModule+FransSeaCommanderBotModule, FransGroundCommanderBotModule+FransSpecOpsCommanderBotModule, FransSeaCommanderBotModule+FransSpecOpsCommanderBotModule |
@@ -456,4 +455,4 @@ Each row: a `BotTick` consumer positioned BEFORE the `IBotTick` provider it read
 
 0 ERROR, 21 WARN
 
-R1 checked 109 gated bot-module instances; R2 checked 80 switch targets. Modules marked *(no source)* live in `engine/` assemblies absent from this worktree — they are listed from yaml only, and C#-side checks skip them rather than fail.
+R1 checked 109 gated bot-module instances; R2 checked 81 switch targets. Modules marked *(no source)* live in `engine/` assemblies absent from this worktree — they are listed from yaml only, and C#-side checks skip them rather than fail.

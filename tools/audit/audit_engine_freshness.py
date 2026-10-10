@@ -78,6 +78,14 @@ def read_version_file(path: pathlib.Path) -> str | None:
     return None
 
 
+def built_version_matches_pin(built_hash: str | None, pin: str | None) -> bool:
+    """Compare the SDK's `git-<hash>` stamp with mod.config's raw hash pin."""
+    if not built_hash or not pin:
+        return False
+    normalized = built_hash.removeprefix("git-")
+    return normalized == pin
+
+
 def pinned_version() -> str | None:
     cfg = ROOT / "mod.config"
     if not cfg.is_file():
@@ -97,7 +105,7 @@ def main() -> int:
     print("|---|---|")
     print(f"| `mod.config` pins | `{pin or 'UNREADABLE'}` |")
     print(f"| `engine/VERSION` (what is built) | `{built_hash or 'absent — engine/ not populated'}` |")
-    if pin and built_hash and pin != built_hash:
+    if pin and built_hash and not built_version_matches_pin(built_hash, pin):
         print(f"| **mismatch** | the built engine is NOT the pinned one — run `make.cmd all` |")
     print()
 

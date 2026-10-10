@@ -1,30 +1,31 @@
 # audit_doc_health — is the documentation structurally sound?
 
-Documents scanned: **480**
+Documents scanned: **496**
 
 `audit_doc_claims.py` checks whether the NUMBERS are still true. This checks whether the documents themselves are intact.
 
 | code | what | count |
 |---|---|--:|
 | D1 | literal control characters | 2 |
-| D2 | mojibake (UTF-8 read as cp1252) | 1 |
+| D2 | mojibake (UTF-8 read as cp1252) | 2 |
 | D3 | markdown link to a missing file | 1 |
 | D4 | same-file anchor with no heading | 0 |
 | D5 | reference to a moved/removed document | 0 |
 | D6 | duplicate section id in DESIGN.md | 0 |
-| D7 | Contents index missing a section | 1 |
+| D7 | Contents index missing a section | 2 |
 | D8 | citation names a different section's law | 1 |
 
 
 ## D1 — Control characters (2)
 
-- `DEVELOPMENT_LOG.md`:176 — control character 0x8
-- `docs/HANDOFF.md`:224 — control character 0x8
+- `DEVELOPMENT_LOG.md`:1086 — control character 0x8
+- `docs/HANDOFF.md`:338 — control character 0x8
 
 
-## D2 — Mojibake (1)
+## D2 — Mojibake (2)
 
 - `DEVELOPMENT_LOG.md` — 1 distinct sequence(s), e.g. ['Â§']
+- `docs/audit/latest/engine_freshness.md` — 1 distinct sequence(s), e.g. ['Ã¤']
 
 
 ## D3 — Broken links (1)
@@ -47,14 +48,15 @@ _clean_
 _clean_
 
 
-## D7 — Contents index out of date (1)
+## D7 — Contents index out of date (2)
 
+- `docs/LESSONS_LEARNED.md` — Contents omits ``FrozenActor.Actor` is live-backed — fog-honest code must read the snapshot, never the backing (2026-10-06, Devin)`
 - `docs/LESSONS_LEARNED.md` — Contents omits ``launch-game.cmd` fails from Git Bash — GNU `find` shadows Windows `find.exe` (2026-10-02, EMBER)`
 
 
 ## D8 — Citation points at the wrong law (1)
 
-- `DEVELOPMENT_LOG.md`:2781 — cites §19.3 (One bot module per decision: merge dupli) but names `OpenRA`, which is §17 (Dune 2000 to OpenRA Sprite Conversion)
+- `DEVELOPMENT_LOG.md`:3750 — cites §19.3 (One bot module per decision: merge dupli) but names `OpenRA`, which is §17 (Dune 2000 to OpenRA Sprite Conversion)
 
 
-**FAIL — 6 finding(s).** Fix the document; none of these are cosmetic. D1/D2 are corruption, D6 makes a cited law ambiguous, D3–D5 send a reader to the wrong place, D7 means a document is hiding its own content from the person who was told to read it, and D8 means a citation resolves — to the wrong law.
+**FAIL — 8 finding(s).** Fix the document; none of these are cosmetic. D1/D2 are corruption, D6 makes a cited law ambiguous, D3–D5 send a reader to the wrong place, D7 means a document is hiding its own content from the person who was told to read it, and D8 means a citation resolves — to the wrong law.
