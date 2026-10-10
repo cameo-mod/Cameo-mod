@@ -20482,3 +20482,30 @@ and the exact merged tree failed the fog audit.
 - Verify: focused learnables-registry tests; requested map/audit checks, switch dry run (no dead targets), and `bash tools/audit/run_all.sh`. Switch-off order parity remains a separate Coordinator gate; no match launch or merge.
 - A3 run evidence: built engine version is `git-6da7fce14da541180c6baddd6925118fbef65b94`, matching `mod.config`'s raw pin. Fixed `audit_engine_freshness.py` to normalize the SDK's `git-` stamp before comparison and added a regression; the generated report now has no false built-engine mismatch. The shared cameo-engine clone is still at `d5d8b2a685`, so its separate upstream-drift note remains informational.
 - Validation: `ai_arch_audit.py --check` passes (0 errors, 21 existing warnings); targeted `BP_effective_unit_value --dry-run` shows exactly the intended `UseLearnedPriors: false -> true` change; learnables registry 4/4 and audit/engine-version tests 51/51 pass. `bash tools/audit/run_all.sh` completed and regenerated reports, exit 1 from existing blocking findings in `armor_upgrade_harm`, `derived_armor_columns`, `doc_claims`, `doc_health`, `duplicate_keys`, `release_drift`, and `weapon_shape`; no `.err` sidecars or zero-byte reports. In particular `doc_claims` measures `ledgers_drifted=1` against documented 0. These unrelated findings were not suppressed or repaired here.
+
+## 2026-10-10 Devin: FIX-CONCAVE-DEAD-MEMBER â€” prune destroyed placements in GroundUnitsConcaveStateCA (task 01a12627, branch devin/fix-concave-dead-member)
+
+Crash: `InvalidOperationException: Attempted to get trait from destroyed object` from
+`GroundUnitsConcaveStateCA.Tick -> ShouldCommit -> HpOf -> TraitOrDefault` on a `placed`
+entry whose actor was destroyed between `Plan()` and the commit checks (PT7 all-arm cell
+`all/duel_nod_2103`, base 700bb1648; fleet doc DEFECT_2026-10-10_concave_dead_member.md).
+
+Fix (OpenRA.Mods.CA/Traits/BotModules/Squads/States/GroundConcaveStateCA.cs, Tick):
+`placed.RemoveAll(p => owner.SquadManager.unitCannotBeOrdered(p.Actor))` inserted right
+before `ShouldCommit`. Same predicate the eligibility gate uses, so dead/disposed/
+out-of-world placements are dropped with identical semantics; survivors keep their slots
+(no replan churn under fire); a wiped plan degrades to the existing `0 >= 0`
+commit-now path the objective shape already relies on â€” empty `placed` is NOT treated
+as a replan trigger.
+
+Regression test (OpenRA.Mods.Cameo.Test/ConcaveDeadMemberRuntimeTest.cs): real-Actor
+runtime harness (SuperweaponPlugLimitLifecycleTest pattern, reflection for internal
+ctors). Three tests: trait lookup on a Disposed actor throws (the invariant the crash
+rests on); Tick prunes the dead placement and does not throw on the forming path;
+commit path excludes the dead member while survivors still receive staggered
+AttackMove orders.
+
+Validation: `dotnet test OpenRA.Mods.Cameo.Test -c Release` â€” 1516 passed, 0 failed
+(3/3 new tests green). Boot-gate PASS â€” main menu reached, no new exception-*.log.
+Verify pending: rerun of cell `all/duel_nod_2103` to cap with no exception log â€”
+coordinator-owned per PT7 runner authority.
