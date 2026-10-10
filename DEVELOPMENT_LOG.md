@@ -19576,3 +19576,9 @@ Branch `devin/dawn/t3-public-faction` off master `8e86fca23`, worktree `C:/cameo
 - codex/learn-p6-fix, C:/cameo-wt/codex-learn-p6-fix, parent27eb42521: real controller execution-port/order loop tests plus actual SquadCA.Update specialized/off FSM regression.
 - Lead accepts Rush/Guerrilla/Harass/Protection-only scope; specialized FSMs remain unchanged. No engine pin or YAML changes, game launches or parity waiver.
 - Next: freeze/push and VP exact-SHA re-review; full Release1193/1193, Python24/24; Coordinator runtime order identity/churn remains open. Details: docs/design/SQUAD_DESIRE_EXECUTION.md.
+
+### 2026-10-10 LEARN-P6 maintainer all-type override
+- Supersedes the four-type acceptance at 0249f6fc: every declared squad type, including Air/Naval/Artillery/Support, uses the same armed learned-desire controller and immediate integer safety guard.
+- Per-type actual Update/manager-provider/controller regressions cover six routes, retained unsafe Attack, in-flight deduplication, off FSM delegation and missing-provider fallback. The live observation adapter and order sink are unchanged; no engine/pin/YAML/RNG/sync changes.
+- Release full 1309/1309, focused SquadDesire 141/141, Python increment 24/24; fog audit 82 files/267 sites and direct-mutation audit 180 files/0 sites PASS.
+- No launches. Default off; live-world adapter, specialized armed logistics, switch-off replay identity and armed churn gates remain open. Next: frozen-SHA VP review and Luna DevOps integration/parity.

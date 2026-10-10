@@ -14,7 +14,7 @@ namespace OpenRA.Mods.CA.Traits
 {
 	/// <summary>
 	/// LEARN-P6 (SPEC 2026-10-05 §11/A4): the six postures a squad can want. The provider picks
-	/// one per squad per eval. The ground squad controller executes six distinct routes;
+	/// one per squad per eval. The shared all-type squad controller executes six distinct routes;
 	/// an independent integer combat guard blocks unsafe attacks immediately.
 	/// </summary>
 	public enum SquadDesireStance { Attack, Defend, Retreat, Regroup, Harass, Reinforce }

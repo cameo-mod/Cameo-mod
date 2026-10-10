@@ -22,8 +22,9 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 	// Execution policy, not urgency: safety is independent of integrator dwell/bias.
 	public static class SquadDesireOrders
 	{
-		public static bool Supports(SquadCAType type) => type is SquadCAType.Rush or SquadCAType.Guerrilla
-			or SquadCAType.Harass or SquadCAType.Protection;
+		// Maintainer override: every declared squad chassis uses the same learned controller.
+		// Invalid/unrecognized enum values are not silently treated as supported roles.
+		public static bool Supports(SquadCAType type) => Enum.IsDefined(type);
 
 		public static bool CanEngage(int ratioMilli, int retreatRatioPct, int engageMarginPct) =>
 			ratioMilli >= 1000 && (long)ratioMilli * 10 >= (long)Math.Max(0, retreatRatioPct) * Math.Max(0, engageMarginPct);
