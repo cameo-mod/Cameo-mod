@@ -1,0 +1,221 @@
+{
+  "schema": 1,
+  "campaign_id": "BU-pilot-fixture-only",
+  "switch": "BU_harvester_logistics",
+  "execution_approved": false,
+  "pairs_per_setup": 2,
+  "team_size_scope": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "arm_bot_types": {
+    "control": "hard_control",
+    "treatment": "hard_treatment"
+  },
+  "seeds": [
+    1337,
+    7331
+  ],
+  "maps": [
+    {
+      "name": "nuclear_winter",
+      "path": "mods/cameo/maps/_ra_a-nuclear-winter.oramap",
+      "sha256": "191efefe3043acb2fd504b2e2e5c974a49f6498f8e016c1380159c9f7efc1c4a",
+      "required_seats": 2
+    },
+    {
+      "name": "satans_clutch",
+      "path": "mods/cameo/maps/SatansClutch.oramap",
+      "sha256": "1bd3bee0bbb38c95015126ba689496c4284c2f4e8f8b6573711a9fdadcbf16cb",
+      "required_seats": 2
+    },
+    {
+      "name": "red_spice",
+      "path": "mods/cameo/maps/Red_Spice_2v2_BI-4.4.oramap",
+      "sha256": "882f865b4e556f93324bbd1abb31397bff30b651489652fa151c031cf02cb65a",
+      "required_seats": 4
+    },
+    {
+      "name": "terra_cotta",
+      "path": "mods/cameo/maps/Terracotta-ratls2.oramap",
+      "sha256": "c1a66fba029ccde5998fbe57b563f87569425ace82617e42e6e42e3fcc9e740d",
+      "required_seats": 4
+    },
+    {
+      "name": "back_to_basics",
+      "path": "mods/cameo/maps/back-to-basics.oramap",
+      "sha256": "ddd071d131895ecb59be66b7d1924b023731c52a04ee01052fa9fc384dd15e6b",
+      "required_seats": 6
+    },
+    {
+      "name": "winters_end_rich",
+      "path": "mods/cameo/maps/winters-end-rich.oramap",
+      "sha256": "a29eea3fef3087d5544c428d2d07d59f4430806c0b23db7eeb605dde7013c94e",
+      "required_seats": 6
+    },
+    {
+      "name": "great_sahara_2",
+      "path": "mods/cameo/maps/Great_Sahara_3.oramap",
+      "sha256": "8b5c089c7cd2f8209819afa04436d6fa15849e125823ddc16bf5e996cd280ddc",
+      "required_seats": 8
+    },
+    {
+      "name": "ice_cold",
+      "path": "mods/cameo/maps/ice_cold.oramap",
+      "sha256": "e097fcca4fa40f5878b4fb7d965529728dbbd34c2a14b8825e1bec0aea6da98b",
+      "required_seats": 8
+    }
+  ],
+  "setups": [
+    {
+      "id": "1v1_nuclear_gdi",
+      "team_size": 1,
+      "map": "nuclear_winter",
+      "team_factions": [
+        "td_gdi"
+      ]
+    },
+    {
+      "id": "1v1_nuclear_nod",
+      "team_size": 1,
+      "map": "nuclear_winter",
+      "team_factions": [
+        "td_nod"
+      ]
+    },
+    {
+      "id": "1v1_satans_allies",
+      "team_size": 1,
+      "map": "satans_clutch",
+      "team_factions": [
+        "ra1_allies"
+      ]
+    },
+    {
+      "id": "1v1_satans_soviets",
+      "team_size": 1,
+      "map": "satans_clutch",
+      "team_factions": [
+        "ra1_soviets"
+      ]
+    },
+    {
+      "id": "2v2_red_gdi_nod",
+      "team_size": 2,
+      "map": "red_spice",
+      "team_factions": [
+        "td_gdi",
+        "td_nod"
+      ]
+    },
+    {
+      "id": "2v2_red_gdi_allies",
+      "team_size": 2,
+      "map": "red_spice",
+      "team_factions": [
+        "td_gdi",
+        "ra1_allies"
+      ]
+    },
+    {
+      "id": "2v2_red_gdi_soviets",
+      "team_size": 2,
+      "map": "red_spice",
+      "team_factions": [
+        "td_gdi",
+        "ra1_soviets"
+      ]
+    },
+    {
+      "id": "2v2_terra_nod_allies",
+      "team_size": 2,
+      "map": "terra_cotta",
+      "team_factions": [
+        "td_nod",
+        "ra1_allies"
+      ]
+    },
+    {
+      "id": "2v2_terra_nod_soviets",
+      "team_size": 2,
+      "map": "terra_cotta",
+      "team_factions": [
+        "td_nod",
+        "ra1_soviets"
+      ]
+    },
+    {
+      "id": "2v2_terra_allies_soviets",
+      "team_size": 2,
+      "map": "terra_cotta",
+      "team_factions": [
+        "ra1_allies",
+        "ra1_soviets"
+      ]
+    },
+    {
+      "id": "3v3_basics_gna",
+      "team_size": 3,
+      "map": "back_to_basics",
+      "team_factions": [
+        "td_gdi",
+        "td_nod",
+        "ra1_allies"
+      ]
+    },
+    {
+      "id": "3v3_basics_nas",
+      "team_size": 3,
+      "map": "back_to_basics",
+      "team_factions": [
+        "td_nod",
+        "ra1_allies",
+        "ra1_soviets"
+      ]
+    },
+    {
+      "id": "3v3_winter_asg",
+      "team_size": 3,
+      "map": "winters_end_rich",
+      "team_factions": [
+        "ra1_allies",
+        "ra1_soviets",
+        "td_gdi"
+      ]
+    },
+    {
+      "id": "3v3_winter_sgn",
+      "team_size": 3,
+      "map": "winters_end_rich",
+      "team_factions": [
+        "ra1_soviets",
+        "td_gdi",
+        "td_nod"
+      ]
+    },
+    {
+      "id": "4v4_sahara",
+      "team_size": 4,
+      "map": "great_sahara_2",
+      "team_factions": [
+        "td_gdi",
+        "td_nod",
+        "ra1_allies",
+        "ra1_soviets"
+      ]
+    },
+    {
+      "id": "4v4_ice",
+      "team_size": 4,
+      "map": "ice_cold",
+      "team_factions": [
+        "td_gdi",
+        "td_nod",
+        "ra1_allies",
+        "ra1_soviets"
+      ]
+    }
+  ]
+}
