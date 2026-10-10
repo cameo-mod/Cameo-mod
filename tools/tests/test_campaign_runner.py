@@ -41,9 +41,19 @@ class CampaignRunnerTests(unittest.TestCase):
 			with self.assertRaises(FileExistsError):
 				runner.atomic_receipt(path, {"end_class": "CAP", "winner_team": None})
 
+	def test_published_schema_covers_analyzer_join_fields(self):
+		schema = json.loads(runner.RECEIPT_SCHEMA.read_text(encoding="utf-8"))
+		required = set(schema["required"])
+		for field in ("cell_id", "game_uid", "status", "seats", "seat_proof_source", "map_yaml_sha256",
+				"control_side", "treatment_side", "arm_bot_types", "cap_marker", "cap_tick",
+				"support_complete", "duration_ticks", "peak_memory_bytes"):
+			self.assertIn(field, required, f"persisted receipt must carry analyzer join field: {field}")
+
 	def test_bounds_and_parallel_policy(self):
-		self.assertEqual(int(6.5 * 1024**3), runner.PRIVATE_LIMIT)
-		self.assertEqual(6 * 1024**3, runner.FREE_RAM_FLOOR)
+		self.assertEqual(int(10.5 * 1024**3), runner.PRIVATE_LIMIT)
+		self.assertEqual(int(15.5 * 1024**3), runner.FREE_RAM_FLOOR)
+		self.assertEqual(3 * 1024**3, runner.FREE_RAM_HARD_FLOOR)
+		self.assertEqual(4 * 1024**3, runner.FREE_RAM_SOFT_FLOOR)
 		self.assertEqual(45000, runner.CAP_TICK)
 		self.assertEqual(5000, runner.ACTOR_SAMPLE_INTERVAL)
 		self.assertEqual(3, runner.SLOT_PARALLEL_SMALL)

@@ -1,0 +1,265 @@
+{
+  "schema": 1,
+  "campaign_id": "ab-bu-pilot-2026-10-11",
+  "switch": "BU_harvester_logistics",
+  "pairs_per_setup": 2,
+  "team_size_scope": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "arm_bot_types": {
+    "control": "hard_control",
+    "treatment": "hard_treatment"
+  },
+  "seeds": [
+    1337,
+    2026
+  ],
+  "round_stages": [
+    16,
+    32,
+    48,
+    64
+  ],
+  "acceptance_thresholds": {
+    "early_accept_share": 0.75,
+    "early_reject_share": 0.25,
+    "win_noninferiority_delta": 0.0,
+    "min_earned_spent_improvement": 0.0,
+    "min_army_efficiency_improvement": 0.0,
+    "min_kill_exchange_improvement": 0.0
+  },
+  "slot_policy": {
+    "max_parallel_small_games": 3,
+    "small_team_size_max": 2,
+    "large_game_exclusive": true,
+    "min_free_ram_bytes": 16642998272,
+    "max_private_bytes": 11274289152
+  },
+  "a5_parity_receipt_sha256": "0e6fc98982af8ca3c67f3846a121512fab4e3982b8de565db67172c865a382f4",
+  "baseline_manifest_path": "docs/audit/ab_baseline_manifest_pilot.json",
+  "baseline_manifest_sha256": "eecadb954680b13c4f832ad32dee5249634f255a4e3a91ad92586cb0705bb76a",
+  "pins": {
+    "source_commit": "964cdb630b1514e1c1a0baed55cbdbc427d5fc11",
+    "engine_version": "6da7fce14da541180c6baddd6925118fbef65b94"
+  },
+  "switch_patch_sha256": "d710567579cb3673eb33701ec881495f0a2a17d6203194b0efdc8052f4de4523",
+  "baseline_ai_payload_sha256": "932e2e5c919de6f5b493e1722e6e66e39a3a5f1577b29aa58a571492b7de9d69",
+  "treatment_ai_payload_sha256": "acdfd3a3e2c7d405a776703593f1d52c5f357b423e75ffb224392159c009c725",
+  "tool_sha256": {
+    "driver_analyzer": "1daef080aebca596259ccdaa998cde6ad60e17e574d3168f8ff1db31239a78c7",
+    "campaign_runner": "66368e1aa23d4cb2a1d7ea1a09a53949804f74a997560661689231577470ef1a",
+    "batch_runner": "e9497b51574a7f907aa19b0c1742b68db5b96904f43ab65a5bd39ba7ce8a1964",
+    "switch_applier": "5376258709f2ff6512e402abeaf09e164abe483142980830bc72269af047f97e"
+  },
+  "receipt_schema_sha256": "3db09fbf260c872da9e7a5535b9b9b87d05c9eee9c7aceafa95044bc0fe2ae51",
+  "binary_sha256": {
+    "bin/OpenRA.exe": "5693f355792ebb68699793f96ef2167b733c5e7756f580858c5090226418c984",
+    "bin/OpenRA.Game.dll": "167fcbd8985dc3cd74ae2747c6d4a43db0d51cbda99dc029712fdb72182f6b80",
+    "bin/OpenRA.Mods.Cameo.dll": "3b69b0d49d88914d4e003fbae2c35faf9e8bad0625e161effb2773e5e5575853"
+  },
+  "maps": [
+    {
+      "name": "nuclear_winter",
+      "path": "mods/cameo/maps/_ra_a-nuclear-winter.oramap",
+      "sha256": "191efefe3043acb2fd504b2e2e5c974a49f6498f8e016c1380159c9f7efc1c4a",
+      "required_seats": 2
+    },
+    {
+      "name": "satans_clutch",
+      "path": "mods/cameo/maps/SatansClutch.oramap",
+      "sha256": "1bd3bee0bbb38c95015126ba689496c4284c2f4e8f8b6573711a9fdadcbf16cb",
+      "required_seats": 2
+    },
+    {
+      "name": "red_spice",
+      "path": "mods/cameo/maps/Red_Spice_2v2_BI-4.4.oramap",
+      "sha256": "882f865b4e556f93324bbd1abb31397bff30b651489652fa151c031cf02cb65a",
+      "required_seats": 4
+    },
+    {
+      "name": "terra_cotta",
+      "path": "mods/cameo/maps/Terracotta-ratls2.oramap",
+      "sha256": "c1a66fba029ccde5998fbe57b563f87569425ace82617e42e6e42e3fcc9e740d",
+      "required_seats": 4
+    },
+    {
+      "name": "back_to_basics",
+      "path": "mods/cameo/maps/back-to-basics.oramap",
+      "sha256": "ddd071d131895ecb59be66b7d1924b023731c52a04ee01052fa9fc384dd15e6b",
+      "required_seats": 6
+    },
+    {
+      "name": "winters_end_rich",
+      "path": "mods/cameo/maps/winters-end-rich.oramap",
+      "sha256": "a29eea3fef3087d5544c428d2d07d59f4430806c0b23db7eeb605dde7013c94e",
+      "required_seats": 6
+    },
+    {
+      "name": "great_sahara_2",
+      "path": "mods/cameo/maps/Great_Sahara_3.oramap",
+      "sha256": "8b5c089c7cd2f8209819afa04436d6fa15849e125823ddc16bf5e996cd280ddc",
+      "required_seats": 8
+    },
+    {
+      "name": "ice_cold",
+      "path": "mods/cameo/maps/ice_cold.oramap",
+      "sha256": "e097fcca4fa40f5878b4fb7d965529728dbbd34c2a14b8825e1bec0aea6da98b",
+      "required_seats": 8
+    }
+  ],
+  "setups": [
+    {
+      "id": "1v1_nuclear_gdi",
+      "team_size": 1,
+      "map": "nuclear_winter",
+      "team_factions": [
+        "td_gdi"
+      ]
+    },
+    {
+      "id": "1v1_nuclear_nod",
+      "team_size": 1,
+      "map": "nuclear_winter",
+      "team_factions": [
+        "td_nod"
+      ]
+    },
+    {
+      "id": "1v1_satans_allies",
+      "team_size": 1,
+      "map": "satans_clutch",
+      "team_factions": [
+        "ra1_allies"
+      ]
+    },
+    {
+      "id": "1v1_satans_soviets",
+      "team_size": 1,
+      "map": "satans_clutch",
+      "team_factions": [
+        "ra1_soviets"
+      ]
+    },
+    {
+      "id": "2v2_red_gdi_nod",
+      "team_size": 2,
+      "map": "red_spice",
+      "team_factions": [
+        "td_gdi",
+        "td_nod"
+      ]
+    },
+    {
+      "id": "2v2_red_gdi_allies",
+      "team_size": 2,
+      "map": "red_spice",
+      "team_factions": [
+        "td_gdi",
+        "ra1_allies"
+      ]
+    },
+    {
+      "id": "2v2_red_gdi_soviets",
+      "team_size": 2,
+      "map": "red_spice",
+      "team_factions": [
+        "td_gdi",
+        "ra1_soviets"
+      ]
+    },
+    {
+      "id": "2v2_terra_nod_allies",
+      "team_size": 2,
+      "map": "terra_cotta",
+      "team_factions": [
+        "td_nod",
+        "ra1_allies"
+      ]
+    },
+    {
+      "id": "2v2_terra_nod_soviets",
+      "team_size": 2,
+      "map": "terra_cotta",
+      "team_factions": [
+        "td_nod",
+        "ra1_soviets"
+      ]
+    },
+    {
+      "id": "2v2_terra_allies_soviets",
+      "team_size": 2,
+      "map": "terra_cotta",
+      "team_factions": [
+        "ra1_allies",
+        "ra1_soviets"
+      ]
+    },
+    {
+      "id": "3v3_basics_gna",
+      "team_size": 3,
+      "map": "back_to_basics",
+      "team_factions": [
+        "td_gdi",
+        "td_nod",
+        "ra1_allies"
+      ]
+    },
+    {
+      "id": "3v3_basics_nas",
+      "team_size": 3,
+      "map": "back_to_basics",
+      "team_factions": [
+        "td_nod",
+        "ra1_allies",
+        "ra1_soviets"
+      ]
+    },
+    {
+      "id": "3v3_winter_asg",
+      "team_size": 3,
+      "map": "winters_end_rich",
+      "team_factions": [
+        "ra1_allies",
+        "ra1_soviets",
+        "td_gdi"
+      ]
+    },
+    {
+      "id": "3v3_winter_sgn",
+      "team_size": 3,
+      "map": "winters_end_rich",
+      "team_factions": [
+        "ra1_soviets",
+        "td_gdi",
+        "td_nod"
+      ]
+    },
+    {
+      "id": "4v4_sahara",
+      "team_size": 4,
+      "map": "great_sahara_2",
+      "team_factions": [
+        "td_gdi",
+        "td_nod",
+        "ra1_allies",
+        "ra1_soviets"
+      ]
+    },
+    {
+      "id": "4v4_ice",
+      "team_size": 4,
+      "map": "ice_cold",
+      "team_factions": [
+        "td_gdi",
+        "td_nod",
+        "ra1_allies",
+        "ra1_soviets"
+      ]
+    }
+  ],
+  "execution_approved": false,
+  "notes": "candidate dry-run manifest; maintainer flips execution_approved at sign-off after the open-item proposal is ruled on"
+}

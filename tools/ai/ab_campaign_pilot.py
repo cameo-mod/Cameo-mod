@@ -30,8 +30,8 @@ SETUPS = [
  ("3v3_winter_asg",3,"winters_end_rich",("ra1_allies","ra1_soviets","td_gdi")),("3v3_winter_sgn",3,"winters_end_rich",("ra1_soviets","td_gdi","td_nod")),
  ("4v4_sahara",4,"great_sahara_2",("td_gdi","td_nod","ra1_allies","ra1_soviets")),("4v4_ice",4,"ice_cold",("td_gdi","td_nod","ra1_allies","ra1_soviets")),
 ]
-RAM_FLOOR_BYTES = 6 * 1024**3
-PROCESS_CAP_BYTES = int(6.5 * 1024**3)
+RAM_FLOOR_BYTES = int(15.5 * 1024**3)
+PROCESS_CAP_BYTES = int(10.5 * 1024**3)
 ROUND_STAGES = [16,32,48,64]
 ECONOMY_INTERVAL_TICKS = tuple(range(5000, 45001, 5000))
 FIX_SAFETY_SWITCHES = frozenset("K_cn2_unit_repair AL_emergency_net_loss AN_combat_veto AG_assault_fanout BJ_squad_hysteresis BK_squad_order_dedup BL_protection_episode_guard BN_squad_pool_fixes BO_squad_move_dedup".split())
@@ -418,6 +418,7 @@ def adjudicate(records, receipt, job, manifest_sha):
  if not isinstance(seats,list) or len(seats)!=job["required_seats"] or len(records)!=len(seats):
   return {"verdict":"INVALID_UNKNOWN","reason":"seat/record count mismatch"}
  byhome={s.get("home"):s for s in seats if isinstance(s,dict)}
+ byloc={s.get("home_location"):s for s in seats if isinstance(s,dict) and isinstance(s.get("home_location"),str)}
  if len(byhome)!=len(seats) or any(not isinstance(h,str) or not h for h in byhome):
   return {"verdict":"INVALID_UNKNOWN","reason":"seat homes missing or duplicated"}
  if receipt.get("seat_proof_source")!="generated_map.yaml" or not receipt.get("map_yaml_sha256"):
@@ -432,7 +433,7 @@ def adjudicate(records, receipt, job, manifest_sha):
    return {"verdict":"INVALID_UNKNOWN","reason":"resolved map.yaml seats differ from planned side/spawn/faction assignment"}
  side_outcomes={"A":[],"B":[]}; arm_totals={"control":{"earned":0,"spent":0,"banked":0},"treatment":{"earned":0,"spent":0,"banked":0}}; seat_rows=[]; seen_homes=set()
  for r in records:
-  pl=r.get("player") or {}; home=pl.get("home"); seat=byhome.get(home)
+  pl=r.get("player") or {}; home=pl.get("home"); seat=byloc.get(home) or byhome.get(home)
   if seat is None or home in seen_homes or pl.get("faction")!=seat.get("faction") or pl.get("bot_type")!=seat.get("bot_type"):
    return {"verdict":"INVALID_UNKNOWN","reason":"record differs from resolved seat proof"}
   seen_homes.add(home)
