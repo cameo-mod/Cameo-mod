@@ -1,6 +1,6 @@
 ## Resume
 
-Next: continue source-only work while the acting lead replies on the A5 serial slot/approval; the stale SWITCH_ORDER catalog artifact is with its owner. Latest code-bearing runner commit: `ca16491620ebf5c5ac56ff13b3a09571a6b5dbed` on `origin/codex/ab-campaign-runner-final`, based on exact current `origin/master@964cdb630b1514e1c1a0baed55cbdbc427d5fc11`. No campaign or parity launch, boot, master push, or integration has occurred.
+Next: obtain lead/maintainer approval and A5 serial reservation; replace the stale dry-run manifest fixture with a current reviewed manifest before final manifest freeze. The runner branch merge-base is `origin/master@964cdb630b1514e1c1a0baed55cbdbc427d5fc11`; latest code-bearing runner commit remains `8cfec8f9e9cb5be44738de027fb6c733d4fd8eb8`. No campaign or parity launch, boot, master push, or integration has occurred.
 
 Implemented in the runner branch: strict receipt shape/cross-field validation and atomic immutable JSON write; per-process private-byte and system-free-RAM monitor with a 6.5 GiB stop, 8 GiB hard ceiling, tick/wall/stall observation, exact in-process seed pin, actor sampling, and PID-scoped child cleanup. The module attaches supervised process fields to a validated receipt without inferring natural outcomes from exit code; cap classification requires the exact 45k marker, seed proof, and support bundle, otherwise it records INCOMPLETE. It still does not integrate a campaign queue, generate resolved seats/metrics from match records, or start campaign jobs. Required gates remain approval, final manifest/hash lock, engine map acceptance/spawn symmetry, A5 exact-pin parity, reserved serial slot, and integrated end-to-end receipt/stop/resume proof.
 
@@ -16,7 +16,7 @@ Implemented in the runner branch: strict receipt shape/cross-field validation an
 
 ### Baseline
 
-Pinned for all remaining work: `origin/master@964cdb630b1514e1c1a0baed55cbdbc427d5fc11` (includes the authorized INTEG-LEARN squash, B3 park fix, and replay identity support). Current runner branch still has stale merge-base `700bb164`; rebase it before any test/manifest pin claim. Do not launch campaign games until approval, final manifest, map gate, A5 parity and serial reservation are verified on the exact baseline.
+Pinned for all remaining work: `origin/master@964cdb630b1514e1c1a0baed55cbdbc427d5fc11` (includes the authorized INTEG-LEARN squash, B3 park fix, and replay identity support). Verified `git merge-base HEAD origin/master` equals that SHA. Do not launch campaign games until approval, final manifest, map gate, A5 parity and serial reservation are verified on the exact baseline.
 
 ## Runner receipt validation update
 
@@ -25,3 +25,10 @@ The strict JSON schema from the manager worktree was copied into `tools/ai/ab_ca
 Known focused-suite exception: `test_switch_order_covers_the_frozen_sixty_group_catalog` fails because `SWITCH_ORDER_2026-10-11.md` pins `700bb164` and lacks current `BP_squad_desire`; notified the SWITCH_ORDER owner. Do not delete or weaken that check.
 
 Current verification after receipt-result mapping: `py_compile` passed; receipt-focused and process-guard tests 6/6 passed, including a dummy Python child (no OpenRA) that verifies in-process seed propagation, cap marker parsing, and incomplete-vs-cap classification with/without a support bundle. Campaign planner/analyzer plus pilot tests 28/29 passed; the only failure remains stale SWITCH_ORDER catalog coverage. `git diff --check` passed. Exact-pinned no-launch CLI dry run: 64 games, 32 generated maps, one treatment change, 11.07 worker hours, 7.29 parallel-slot wall hours, zero launches. Input manifest SHA-256 `ed81da06a3ddd542ab25c5b3fab7c5cd17ffa6ea2806abf649a0d50baa990a3d`; fixtures `tools/tests/fixtures/ab_campaign_pilot_dry_run.json` and `tools/tests/fixtures/ab_campaign_pilot_dry_run_receipt.json`. No full `tools/tests` run was started.
+
+## 2026-10-10 17:20Z source-only refresh
+
+- Rechecked isolated branch: HEAD and `origin/codex/ab-campaign-runner-final` both `8cfec8f9e9cb5be44738de027fb6c733d4fd8eb8`; merge-base with `origin/master` is `964cdb630b1514e1c1a0baed55cbdbc427d5fc11`.
+- Independently recomputed SHA-256 for all eight `.oramap` package paths pinned in `ab_campaign_pilot.py`; all eight matched. This establishes package identity only, not engine acceptance or spawn symmetry.
+- The tracked `tools/tests/fixtures/ab_campaign_manifest_dry_run.json` is an older contract (`schema/switch mismatch`) and cannot serve as the current pilot manifest. No generated-map preflight was claimed from it.
+- `SPEC_2026-10-11_ab_campaign.md` still says proposal / no launches authorized; `OPEN_DECISIONS.md` retains unresolved Amendment 2 checkpoint allocation. A5 parity, final reviewed manifest, generated map seat proof, engine acceptance/symmetry, and serial slot reservation remain open. No game launched.
