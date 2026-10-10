@@ -40,3 +40,10 @@ Three distinct A5 observations; the gate is **NOT PASSED**:
 3. `run-b-rebuilt` was interrupted at a sample of 8.07 GiB private bytes, exceeding the 6.5 GiB campaign limit. PID 19040 was killed after verifying its command line referenced this exact support directory; the companion OpenRA PID 31080 and the same-run retry tree (PIDs 30136, 31996, 30788, then PID 10444) were also PID-scoped stopped by exact support-directory identity to prevent automatic retries. Logs/output remain under `results/campaign-a5-20261010/run-b-rebuilt`.
 
 No replay parity comparison is valid; no exact-baseline A5 receipt was produced; no campaign outcome cell launched. Stop trigger: observed private-byte ceiling breach. Tooling must add/verify early enough sampling for A5, then exact binary/source build provenance and memory-safe A5 must be re-established before any campaign run. All OpenRA/A5 worker processes are now gone; the reserved slot was released in `HEAVY_RUN_WINDOW.txt`.
+
+## Resume (handoff, 2026-10-10)
+Branch `codex/ab-campaign-tooling-manager` includes map inventory, schema, guarded runner, fixtures/tests and A5 failure status; HEAD pinned below.
+No-launch dry run: 64 games / 32 variants / 144 seat proofs; 0 launches; estimated 7.29 slot-wall hours (5.11–9.47 range).
+A5 parity gate failed: initial stale-DLL load failure; rebuilt run-a exceeded 6.5 GiB; run-b hit 8.07 GiB and was PID-scoped stopped; campaign cells never started.
+Preserved logs: `C:\cameo-wt\ab-campaign-tooling\results\campaign-a5-20261010`; schema: `C:\cameo-wt\ab-campaign-tooling\tools\ai\ab_campaign_receipt.schema.json`.
+Next owner is Luna DevOps; do not run any campaign cells until memory-safe exact-baseline A5 parity and map/manifest gates pass.
