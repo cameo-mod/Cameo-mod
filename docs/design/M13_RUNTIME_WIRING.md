@@ -29,3 +29,16 @@ Remaining: bot-wide response membership and release, continuous liveness service
 authoritative observed-wave evidence, save/restore, separate frozen combat stream
 and diagnostic consumer. Expansion assist without an episode stays unsupported.
 No full M13, parity, cost, adoption or paired 3v3 claim follows from this checkpoint.
+
+Maintainer extension (2026-10-10): planned noob is one named step below easiest,
+with no-launch10000 / expiry2000 / cooldown1000 / capacity1. No noob tier exists
+or is added in this checkpoint. The test keys each existing tier by its explicit
+step from hard; adding noob later cannot re-index or shift the existing values.
+
+Authoritative dispatch evidence is still an API prerequisite: pinned engine
+Actor.ResolveOrder currently exposes only a void resolver loop, without a
+post-resolver outcome/correlated activity notification. Intent and a sampled
+CurrentActivity cannot alone certify the design's wave/request causality.
+Keep missing proof UNKNOWN. A record-only provider ruling is requested; no
+engine pin or engine source change is made here. This closes this bounded
+configuration checkpoint, not the remaining M13 implementation or runtime gates.

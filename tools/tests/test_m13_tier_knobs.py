@@ -12,15 +12,16 @@ import apply_increment_switches as switches
 class M13TierKnobsTests(unittest.TestCase):
     def test_every_tier_explicitly_writes_linear_delays_and_fixed_capacity(self):
         text = (ROOT / "mods/cameo/ai/ai.yaml").read_text(encoding="utf-8")
-        tiers = ["easiest", "veryeasy", "easy", "medium", "hard", "veryhard",
-                 "brutal", "challenger", "unbeatable", "god"]
-        for index, tier in enumerate(tiers):
+        tier_steps_from_hard = {"easiest": 4, "veryeasy": 3, "easy": 2, "medium": 1,
+                                "hard": 0, "veryhard": -1, "brutal": -2, "challenger": -3,
+                                "unbeatable": -4, "god": -5}
+        for tier, step in tier_steps_from_hard.items():
             with self.subTest(tier=tier):
                 blocks = re.findall(r"^\tBotLimits@" + tier + r":\n((?:\t\t[^\n]*\n)+)", text, re.M)
                 self.assertEqual(len(blocks), 1)
-                expected = {"AttackLivenessMaxNoLaunchTicks": 9500 - 500 * index,
-                            "TeamResponseMaxLeaseTicks": 1900 - 100 * index,
-                            "TeamResponseRearmCooldownTicks": 950 - 50 * index,
+                expected = {"AttackLivenessMaxNoLaunchTicks": 7500 + 500 * step,
+                            "TeamResponseMaxLeaseTicks": 1500 + 100 * step,
+                            "TeamResponseRearmCooldownTicks": 750 + 50 * step,
                             "TeamResponseLeaseLimit": 1}
                 for field, value in expected.items():
                     values = re.findall(r"^\t\t" + field + r": (\d+)$", blocks[0], re.M)

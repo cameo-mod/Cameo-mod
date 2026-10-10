@@ -5538,3 +5538,8 @@ Next: exact-SHA VP review; cost/coverage/adoption remain gated. No launches. Ins
 ### Sol M13 tier/count-valve checkpoint (2026-10-10)
 - codex/m13-runtime-wiring from accepted59e80: one default-off BV group, exact ten-tier delay/capacity values, armed absolute MaxIdleUnits in scale-target branch; legacy formula unchanged off.
 - Focused49/49 + Python19/19; switch dry run changes six generic personalities, excludes classic. docs/design/M13_RUNTIME_WIRING.md lists remaining work; no fullM13/runtime claim.
+
+### 2026-10-10 M13 bounded configuration checkpoint closed
+- Named hard-relative tier tests preserve existing values when the planned noob tier is added later; future10000/2000/1000 documented without a code/YAML row.
+- Dispatch-provenance provider/API ruling requested; missing outcome stays UNKNOWN. No engine source/pin change or launch.
+- Next: maintainer all-type P6 override on its isolated branch; remaining M13 response/dispatch/save/stream/3v3 work remains explicit in docs/design/M13_RUNTIME_WIRING.md.
