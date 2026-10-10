@@ -595,10 +595,17 @@ namespace OpenRA.Mods.CA.Traits
 				// admitted — taken off every other claim while the item is in flight. A pick whose
 				// anchor is no longer reservable (served, parked, pending, or another demand got there)
 				// never reaches the queue and retries next sweep.
+				// REPAIR-B3 (SPEC §3): the claim's WHOLE covered set binds atomically under the current
+				// coverage model version — a contested member or a stale-model set refuses the whole
+				// admission, so two queues can never split the set and each admit a duplicate.
 				if (demandPick.Demand != null && demandPick.IsRefinery && lawWants != null
 					&& (demandPick.Claim == null
-						|| !lawWants.TryReserveRefineryAnchor(demandPick.Claim.Value.Anchor, demandPick.Demand,
-							world.WorldTick + baseBuilder.Info.ExpansionDemandIdleTicks)))
+						|| !lawWants.TryReserveRefineryAnchors(
+							demandPick.Claim.Value.Anchor,
+							lawWants.RefineryClaimCoveredAnchors(demandPick.Claim.Value.Anchor),
+							demandPick.Demand,
+							world.WorldTick + baseBuilder.Info.ExpansionDemandIdleTicks,
+							lawWants.RefineryCoverageModelVersion)))
 				{
 					pendingDemandPick = default;
 					return false;

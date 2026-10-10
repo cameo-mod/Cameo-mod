@@ -1319,11 +1319,15 @@ namespace OpenRA.Mods.CA.Traits
 				// ECON-A-FIX (R6): the bound refinery's anchor reservation renews with the demand — a
 				// lost hold (the anchor got served, parked or committed elsewhere) just falls back to a
 				// fresh claim at placement; the law's one-refinery-per-anchor rule stands either way.
+				// REPAIR-B3: the renewal refreshes the whole covered set under the current model
+				// version — holds on members that drifted out of coverage lapse at their own expiry.
 				if (demand.ReservedClaim is { } reserved)
 				{
 					var law = RefineryLawProvider();
 					if (demand.RefineryItem == null || law == null
-						|| !law.TryReserveRefineryAnchor(reserved.Anchor, demand, now + Info.ExpansionDemandIdleTicks))
+						|| !law.TryReserveRefineryAnchors(reserved.Anchor,
+							law.RefineryClaimCoveredAnchors(reserved.Anchor), demand,
+							now + Info.ExpansionDemandIdleTicks, law.RefineryCoverageModelVersion))
 						demand.ReservedClaim = null;
 				}
 
@@ -1386,8 +1390,10 @@ namespace OpenRA.Mods.CA.Traits
 
 			// ECON-A-FIX (R6): the demand's anchor hold ends with it — released before the re-adopt check
 			// so a still-Ready refinery may legally re-claim that very anchor as an ordinary item.
-			if (demand.ReservedClaim is { } reserved)
-				law?.ReleaseRefineryAnchor(reserved.Anchor, demand);
+			// REPAIR-B3: owner-keyed release — the admission-time covered set may have drifted since
+			// (members taken/covered/re-modelled); a recomputed set could leak a live hold.
+			if (demand.ReservedClaim != null)
+				law?.ReleaseRefineryAnchors(demand);
 
 			// ECON-A-FIX (R4): the traveller's McvExpansion lease is the demand's — released on every
 			// lapse path (the registry prunes a dead unit's lease on its own cadence regardless).
@@ -1462,8 +1468,9 @@ namespace OpenRA.Mods.CA.Traits
 			// back on the market before the demand could re-bind or expire around it.
 			if (isRefinery)
 			{
-				if (demand.ReservedClaim is { } reserved)
-					RefineryLawProvider()?.ReleaseRefineryAnchor(reserved.Anchor, demand);
+				// REPAIR-B3: owner-keyed release frees the whole (possibly drifted) reserved set.
+				if (demand.ReservedClaim != null)
+					RefineryLawProvider()?.ReleaseRefineryAnchors(demand);
 
 				demand.UnbindRefinery();
 			}
