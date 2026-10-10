@@ -20,6 +20,7 @@ import argparse
 import ctypes
 import re
 import shutil
+import signal
 
 import campaign_runner as runner
 
@@ -39,6 +40,12 @@ COMMIT_HEADROOM = 2 * 1024**3
 WORLD_TICK_RE = re.compile(r"\[WT\s+(\d+)\]")
 COUNTERS_EXE = pathlib.Path(os.environ.get("DOTNET_COUNTERS_EXE") or
 	(shutil.which("dotnet-counters") or r"C:\tmp\a5diagtools\dotnet-counters.exe"))
+TRACE_EXE = pathlib.Path(os.environ.get("DOTNET_TRACE_EXE") or
+	(shutil.which("dotnet-trace") or r"C:\tmp\a5diagtools\dotnet-trace.exe"))
+TRACE_TRIGGER = 1 * 1024**3
+TRACE_BUFFER_MB = 32
+TRACE_MAX_OUTPUT = 64 * 1024**2
+TRACE_DURATION = "00:00:00:10"
 
 
 def admission_ok(available_physical: int, available_commit: int) -> bool:
@@ -57,6 +64,12 @@ def stop_reason(total_private: int, available_physical: int) -> str | None:
 def counters_command(tool: str, pid: int, output: pathlib.Path) -> list[str]:
 	return [tool, "collect", "--process-id", str(pid), "--counters", "System.Runtime",
 		"--refresh-interval", "1", "--format", "csv", "--output", str(output)]
+
+
+def trace_command(tool: str, pid: int, output: pathlib.Path) -> list[str]:
+	return [tool, "collect", "--process-id", str(pid), "--profile", "gc-verbose",
+		"--buffersize", str(TRACE_BUFFER_MB), "--duration", TRACE_DURATION,
+		"--format", "NetTrace", "--output", str(output)]
 
 
 def file_sha256(path: pathlib.Path) -> str:
@@ -167,6 +180,10 @@ def run_cell(index: int) -> dict:
 	counters = {}
 	counter_stderr = {}
 	counter_errors = {}
+	traces = {}
+	trace_stderr = {}
+	trace_files = {}
+	trace_errors = {}
 	stop_reason = None
 	with stdout_path.open("w", encoding="utf-8") as stdout:
 		proc = subprocess.Popen(command, cwd=ROOT, env=env, stdout=stdout, stderr=subprocess.STDOUT)
@@ -218,6 +235,20 @@ def run_cell(index: int) -> dict:
 						stop_reason = "RUNTIME_COUNTERS_START_FAILED:" + str(exc)
 						kill_cell_processes(rows, support)
 						break
+				if private >= TRACE_TRIGGER and pid not in traces:
+					trace_path = support / f"gc-verbose-{pid}.nettrace"
+					stderr_path = support / f"gc-verbose-{pid}.stderr.log"
+					try:
+						trace_stderr[pid] = stderr_path.open("w", encoding="utf-8")
+						traces[pid] = subprocess.Popen(
+							trace_command(str(TRACE_EXE), pid, trace_path), cwd=ROOT,
+							stdout=subprocess.DEVNULL, stderr=trace_stderr[pid],
+							creationflags=subprocess.CREATE_NEW_PROCESS_GROUP)
+						trace_files[pid] = trace_path
+					except (OSError, subprocess.SubprocessError) as exc:
+						stop_reason = "GC_VERBOSE_TRACE_START_FAILED:" + str(exc)
+						kill_cell_processes(rows, support)
+						break
 				samples.append({"utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
 					"pid": pid, "private_bytes": private,
 					"private_working_set_bytes": working_set,
@@ -225,6 +256,11 @@ def run_cell(index: int) -> dict:
 			for pid, monitor in counters.items():
 				if monitor.poll() is not None and monitor.returncode != 0:
 					stop_reason = f"RUNTIME_COUNTERS_FAILED_PID_{pid}_EXIT_{monitor.returncode}"
+					kill_cell_processes(rows, support)
+					break
+			for pid, trace in traces.items():
+				if trace_files[pid].is_file() and trace_files[pid].stat().st_size > TRACE_MAX_OUTPUT:
+					stop_reason = f"GC_VERBOSE_TRACE_OUTPUT_LIMIT_PID_{pid}"
 					kill_cell_processes(rows, support)
 					break
 			if stop_reason:
@@ -255,6 +291,27 @@ def run_cell(index: int) -> dict:
 				proc.kill(); proc.wait()
 		else:
 			proc.wait()
+	for pid, trace in traces.items():
+		try:
+			trace.wait(timeout=12)
+		except subprocess.TimeoutExpired:
+			try:
+				trace.send_signal(signal.CTRL_BREAK_EVENT)
+				trace.wait(timeout=5)
+			except (OSError, subprocess.SubprocessError, subprocess.TimeoutExpired):
+				trace.terminate()
+				try:
+					trace.wait(timeout=5)
+				except subprocess.TimeoutExpired:
+					trace.kill(); trace.wait()
+		trace_stderr[pid].close()
+		trace_path = trace_files[pid]
+		trace_files[pid] = {"path": str(trace_path), "bytes": trace_path.stat().st_size if trace_path.is_file() else 0,
+			"sha256": file_sha256(trace_path) if trace_path.is_file() else None,
+			"return_code": trace.returncode, "trigger_private_bytes": next(
+				(x["private_bytes"] for x in samples if x.get("pid") == pid and x["private_bytes"] >= TRACE_TRIGGER), None)}
+		if trace.returncode not in (0, None):
+			trace_errors[str(pid)] = f"dotnet-trace exit {trace.returncode}"
 	for pid, monitor in counters.items():
 		if monitor.poll() is None:
 			monitor.terminate()
@@ -300,6 +357,11 @@ def run_cell(index: int) -> dict:
 		"samples": samples, "support": str(support), "driver_stdout": str(stdout_path),
 		"runtime_counter_files": [str(support / f"System.Runtime-{pid}.csv") for pid in counters],
 		"runtime_counter_errors": counter_errors,
+		"allocation_trace_files": list(trace_files.values()),
+		"allocation_trace_errors": trace_errors,
+		"allocation_trace_policy": {"trigger_private_bytes": TRACE_TRIGGER,
+			"buffersize_mb": TRACE_BUFFER_MB, "max_output_bytes": TRACE_MAX_OUTPUT,
+			"duration": TRACE_DURATION},
 		"fingerprint_id": summary.get("fingerprint_id"), "seed_pin_verified": seed_pin_verified,
 		"records_verified": records_verified, "duration_ticks": duration_ticks,
 		"natural_below_cap": natural_below_cap, "replay_count": len(replays), "valid_game": valid_game}
@@ -333,6 +395,8 @@ def main() -> int:
 		raise RuntimeError(f"diagnostic launch admission failed: {host}")
 	if not COUNTERS_EXE.is_file():
 		raise RuntimeError(f"System.Runtime counter tool missing: {COUNTERS_EXE}")
+	if not TRACE_EXE.is_file():
+		raise RuntimeError(f"gc-verbose trace tool missing: {TRACE_EXE}")
 	if not (ROOT / "engine/bin/OpenRA.exe").is_file() or not (ROOT / "engine/bin/OpenRA.Mods.Cameo.dll").is_file():
 		raise RuntimeError("engine executable or Cameo DLL missing")
 	if process_rows(OUT):

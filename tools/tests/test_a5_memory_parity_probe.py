@@ -28,6 +28,13 @@ class A5MemoryProbeTests(unittest.TestCase):
 			"--counters", "System.Runtime", "--refresh-interval", "1", "--format", "csv",
 			"--output", "heap.csv"], cmd)
 
+	def test_gc_verbose_trace_is_bounded(self):
+		cmd = probe.trace_command("dotnet-trace.exe", 42, pathlib.Path("sample.nettrace"))
+		self.assertEqual(["dotnet-trace.exe", "collect", "--process-id", "42",
+			"--profile", "gc-verbose", "--buffersize", "32", "--duration", "00:00:00:10",
+			"--format", "NetTrace", "--output", "sample.nettrace"], cmd)
+		self.assertEqual(64 * 1024**2, probe.TRACE_MAX_OUTPUT)
+
 	def test_log_snapshot_reports_growth_without_inventing_actor_counts(self):
 		with tempfile.TemporaryDirectory() as temp:
 			support = pathlib.Path(temp)
