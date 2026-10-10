@@ -92,7 +92,7 @@ namespace OpenRA.Mods.Cameo.Test
 			using var end = JsonDocument.Parse(rows[^1]);
 			Assert.That(end.RootElement.GetProperty("complete").GetBoolean(), Is.False);
 		}
-		static void WriteCliFixture(string name, IEnumerable<string> rows)
+		internal static void WriteCliFixture(string name, IEnumerable<string> rows)
 		{
 			var directory = Path.Combine(TestContext.CurrentContext.WorkDirectory, "TestResults");
 			var support = Path.Combine(directory, "economy-cli-" + name + "-" + Guid.NewGuid().ToString("N"));

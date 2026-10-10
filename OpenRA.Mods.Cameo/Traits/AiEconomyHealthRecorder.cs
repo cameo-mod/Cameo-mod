@@ -49,8 +49,8 @@ namespace OpenRA.Mods.Cameo.Traits
 			health = healthWriter;
 			raw = rawWriter;
 			state = new AiEconomyHealthState();
-			// Until the accepted terminal-outcome seam is restacked and verified,
-			// absence of a cancellation record is not evidence of complete coverage.
+			// Outcome mapping is supported, but actual activation/census/terminal ordering
+			// and runtime coverage have not been validated. Keep adoption fail-closed.
 			state.MarkIncomplete();
 			observations = new List<EconomyQueueObservation>(AiEconomyHealthState.MaximumQueues);
 			snapshots = new List<EconomyQueueSnapshot>(AiEconomyHealthState.MaximumQueues);
@@ -136,9 +136,40 @@ namespace OpenRA.Mods.Cameo.Traits
 				player_active = transition.PlayerActive, producer_live = transition.ProducerLive,
 				cancellation_class = transition.CancellationClass.ToString(), category = transition.Category.ToString()
 			});
-			// f7e1 correlates intent and removal; it does not prove a terminal cause.
-			if (transition.Kind is BotQueueTransitionKind.Cancelled or BotQueueTransitionKind.Removed)
+			var evidence = AiEconomyQueueEvidence.Classify(in transition);
+			if (evidence == EconomyQueueEvidenceKind.Unknown)
 				state.MarkIncomplete();
+			else if (evidence == EconomyQueueEvidenceKind.ProvenCancellation)
+			{
+				var queueId = CancellationQueueId(in transition);
+				if (AiEconomyQueueEvidence.TryCancellation(in transition, queueId, out var cancellation))
+					WriteHealth(AiEconomyHealthSchema.Cancel(Identity(transition.Tick, "cancel"), cancellation));
+				else
+					state.MarkIncomplete();
+			}
+			// Proven Placed remains raw outcome evidence. The pinned economy consumer
+			// accepts pulse/cancel/end only; queue census observes the new state separately.
+		}
+
+		string CancellationQueueId(in BotQueueTransition transition)
+		{
+			string id = null;
+			var count = 0;
+			foreach (var pair in self.World.ActorsWithTrait<ProductionQueue>())
+			{
+				var queue = pair.Trait;
+				if (pair.Actor.Owner != self.Owner || !groups.Contains(queue.Info.Group))
+					continue;
+				if (++count > AiEconomyHealthState.MaximumQueues)
+					return null;
+				if (pair.Actor.ActorID != transition.ProducerActorId || queue.Info.Group != transition.Queue)
+					continue;
+				// The seam names the group, not the queue trait instance. Ambiguity is UNKNOWN.
+				if (id != null)
+					return null;
+				id = $"{pair.Actor.ActorID}:{queue.Info.Type}:{queue.Info.Group}";
+			}
+			return id;
 		}
 
 		void INotifyResourceAccepted.OnResourceAccepted(Actor actor, Actor refinery, string resourceType, int count, int value)
@@ -194,6 +225,19 @@ namespace OpenRA.Mods.Cameo.Traits
 		{
 			var record = Common(id);
 			record.Add("complete", complete);
+			return JsonSerializer.Serialize(record);
+		}
+
+		internal static string Cancel(EconomyHealthIdentity id, EconomyCancellationEvidence evidence)
+		{
+			var record = Common(id);
+			record.Add("queue_id", evidence.QueueId);
+			record.Add("item_id", evidence.ItemId);
+			record.Add("item", evidence.Item);
+			record.Add("reason", evidence.Reason);
+			record.Add("player_active", evidence.PlayerActive);
+			record.Add("producer_live", evidence.ProducerLive);
+			record.Add("cancellation_class", evidence.CancellationClass);
 			return JsonSerializer.Serialize(record);
 		}
 	}
