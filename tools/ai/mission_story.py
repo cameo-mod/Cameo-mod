@@ -113,7 +113,7 @@ def main(argv: list[str]) -> int:
     for uid, recs, missions in games:
         meta = recs[0] if recs else {}
         game_max_tick = max((r.get("tick") or 0) for r in recs)
-        print(f"\n== {meta.get('map_title', '?')} — {meta.get('bot', '?')} ({meta.get('player', '?')}, {meta.get('faction', '?')}) — {str(uid)[:8]}")
+        print(f"\n== {meta.get('map_title', '?')} — {meta.get('bot', '?')} ({meta.get('seat', '?')}, {meta.get('faction', '?')}) — {str(uid)[:8]}")
         for mid, m in missions:
             # Mission meta comes from any record carrying it (attempts first, else events).
             first = next(iter(m["attempts"].values()), m["events"] or [{}])[0]

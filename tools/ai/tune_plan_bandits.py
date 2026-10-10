@@ -102,7 +102,7 @@ def render_learned(learned: dict) -> str:
 
 def game_key(row: dict) -> str:
     """A short stable id of one bot's game (the file would otherwise list full game uids)."""
-    return hashlib.sha1(f"{row['game_uid']}|{row['player']}".encode()).hexdigest()[:10]
+    return hashlib.sha1(f"{row['game_uid']}|{row.get('seat', row.get('player', ''))}".encode()).hexdigest()[:10]
 
 
 def family_of(faction: str) -> str:
