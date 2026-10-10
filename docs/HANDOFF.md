@@ -5380,3 +5380,8 @@ Type `classic`): eighteen pre-wave modules re-gated `genericbot || classicbot`,
 the pre-wave `SquadManagerBotModuleCA@generic` config restored verbatim as
 `@classic`, `hardbot` granted for the hard-tier limits/prereqs, and
 `RevealsMap@classic` on its PlayerActor. See DEVELOPMENT_LOG.md 2026-09-28.
+
+### 2026-10-10 LEARN-P6 actual consumer regression follow-up
+- codex/learn-p6-fix, C:/cameo-wt/codex-learn-p6-fix, parent27eb42521: real controller execution-port/order loop tests plus actual SquadCA.Update specialized/off FSM regression.
+- Lead accepts Rush/Guerrilla/Harass/Protection-only scope; specialized FSMs remain unchanged. No engine pin or YAML changes, game launches or parity waiver.
+- Next: freeze/push and VP exact-SHA re-review; full Release1193/1193, Python24/24; Coordinator runtime order identity/churn remains open. Details: docs/design/SQUAD_DESIRE_EXECUTION.md.

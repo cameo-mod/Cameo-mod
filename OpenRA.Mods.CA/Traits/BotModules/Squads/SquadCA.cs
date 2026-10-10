@@ -63,7 +63,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 		// until the whole squad is idle (the episode's end); a new leg then re-rolls.
 		internal CPos? FleeHomeCell;
 
-		SquadDesireController desireController;
+		SquadDesireController<Actor> desireController;
 
 		// internal CPos BaseLocation;
 
@@ -138,7 +138,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 					SquadManager.CanaryObserved(Target.Actor, "squad-update-target");
 
 				if (desire != null)
-					(desireController ??= new SquadDesireController()).Tick(this, desire);
+					(desireController ??= new SquadDesireController<Actor>()).Tick(new LiveSquadDesireExecution(this), desire);
 				else
 					FuzzyStateMachine.Update(this);
 
