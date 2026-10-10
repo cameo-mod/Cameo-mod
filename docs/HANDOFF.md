@@ -5541,3 +5541,8 @@ Read design/REPLAY_HEALTH_ANALYZER.md before health/campaign work. tools/ai/repl
 ### 2026-10-09 ? MCV deployment repair
 - Next: independent review of condition-driven engine331657f07a and devin/mcv-deploy-cell; see docs/design/MCV_DEPLOY_CELL_REPAIR.md.
 - Base c76283c0b; single-instance generic-only repair and branch-local pin. No launches; observer ownership and campaign holds remain.
+
+## 2026-10-10 Sol MCV observation checkpoint
+Read-only separate MCV capture/provider and diagnostic consumer on codex/mcv-health-observation, base7ca7e9159; no YAML mount/engine/BaseBuilder edits.
+Focused9/9, Python8/8 actual canonical C# fixture UNKNOWN21, fullRelease1412/1412 PASS. Missing order/hold/transform hooks explicitly UNKNOWN.
+Next: exact-SHA VP review; cost/coverage/adoption remain gated. No launches. Insurance telemetry precedes M13 wiring per lead.

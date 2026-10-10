@@ -21031,3 +21031,7 @@ land ticks later or never) all produce identical disappearances. Corrected on
   first-call timing can never freeze a colliding seed. +2 regressions: three
   allied bots get distinct same-key streams, and adjacent salts stay
   uncorrelated (alternate MT-seeding hypothesis ruled out by construction).
+## 2026-10-10 Sol MCV observation checkpoint
+Read-only separate MCV capture/provider and diagnostic consumer on codex/mcv-health-observation, base7ca7e9159; no YAML mount/engine/BaseBuilder edits.
+Focused9/9, Python8/8 actual canonical C# fixture UNKNOWN21, fullRelease1412/1412 PASS. Missing order/hold/transform hooks explicitly UNKNOWN.
+Next: exact-SHA VP review; cost/coverage/adoption remain gated. No launches. Insurance telemetry precedes M13 wiring per lead.
