@@ -44,3 +44,9 @@ The immutable receipt writer (`campaign_runner.validate_receipt`) and the pilot 
 - Reviewed published `codex/ab-campaign-tooling-manager@0fe28abad487323350b9dffe0951f2eb57722611` schema and `AB_RECEIPT_SCHEMA_2026-10-11.md`. The published schema confirms the mismatch above: it requires `setup_id`, `pair_id`, `pair_member`, `end_class`, and `resolved_seats`, disallows unlisted keys, and has no `game_uid` or `cell_id`.
 - The analyzer still requires each receipt's `cell_id` and uses receipt `game_uid` to join `matches_jsonl` rows. These identity values cannot be faithfully synthesized by the current CLI from the strict published schema alone. `setup_id`/`pair_member` may map to a planned job only through a documented, unique mapping; the game UID must be persisted or recovered from a separately hash-verified per-game matches artifact and proven unique.
 - No schema/adapter edits, tests, launches, or integration were performed in this check. Pilot remains blocked. Proposed contract fix: add required `game_uid` for started games (nullable only for never-started `INCOMPLETE`) and define the stable `cell_id` mapping, then implement a strict adapter that validates artifact SHA, uniqueness, and all job pins before analysis.
+
+## 2026-10-11 acting-lead readiness handoff
+
+- Read `STATUS_2026-10-10_acting_lead.md`: A5 run-a peaked at 6.55 GiB private bytes (above the 6.5 GiB stop), run-b reached 8.07 GiB and was PID-scoped stopped. There is no valid same-seed parity/order-stream receipt.
+- A/B is NOT READY. Keep the per-game 6.5 GiB stop active; do not launch outcome/campaign cells until exact-baseline A5 parity/order proof and strict receipt-to-analyzer join integration pass. Serial reservation and other approval/map gates also remain prerequisites.
+- This is a status/evidence update only; no tests, launches, branch/ref changes, or integration were performed.
