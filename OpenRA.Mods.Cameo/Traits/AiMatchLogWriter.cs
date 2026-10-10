@@ -54,7 +54,7 @@ namespace OpenRA.Mods.Cameo.Traits
 		{
 			public int Tick;
 			public BotModules.EnemyProfile Seen;
-			public BotModules.ObservedActor[] OwnActors;
+			public BotModules.EnemyProfile Truth;
 		}
 
 		internal static bool SignatureSampleDue(int tick, int lastTick, bool changed, int floorTicks) =>
@@ -534,9 +534,9 @@ namespace OpenRA.Mods.Cameo.Traits
 					if (!SignatureSampleDue(world.WorldTick, previous?.Tick ?? -1,
 						previous == null || SignatureChanged(previous.Seen, seen), Math.Max(750, info.SampleIntervalTicks)))
 						continue;
-					var ownActors = owned.Select(a => BotModules.BotFogMemory.Classify(a.Info,
-						a.ActorID, a.Location, a.GetEnabledTargetTypes(), world.WorldTick, signatureInfo)).ToArray();
-					history.Add(new SignatureSample { Tick = world.WorldTick, Seen = seen, OwnActors = ownActors });
+					var truth = ProfileOf(owned.Select(a => BotModules.BotFogMemory.Classify(a.Info,
+						a.ActorID, a.Location, a.GetEnabledTargetTypes(), world.WorldTick, signatureInfo)));
+					history.Add(new SignatureSample { Tick = world.WorldTick, Seen = seen, Truth = truth });
 				}
 			}
 		}
@@ -547,7 +547,7 @@ namespace OpenRA.Mods.Cameo.Traits
 			a.DefenceValue != b.DefenceValue || a.BuildingCount != b.BuildingCount ||
 			a.HarvesterCount != b.HarvesterCount || a.KnownRegions != b.KnownRegions;
 
-		static BotModules.EnemyProfile ProfileOf(IEnumerable<BotModules.ObservedActor> actors)
+		internal static BotModules.EnemyProfile ProfileOf(IEnumerable<BotModules.ObservedActor> actors)
 		{
 			var p = new BotModules.EnemyProfile();
 			var regions = new HashSet<(int, int)>();
@@ -586,7 +586,7 @@ namespace OpenRA.Mods.Cameo.Traits
 						if (!first) builder.Append(',');
 						first = false;
 						AppendOpponentSignature(builder, SeatKey(world, enemy), sample.Seen,
-							enemy.Faction.InternalName, Outcome(enemy.WinState), ProfileOf(sample.OwnActors), sample.Tick);
+							enemy.Faction.InternalName, Outcome(enemy.WinState), sample.Truth, sample.Tick);
 					}
 			builder.Append(']');
 		}

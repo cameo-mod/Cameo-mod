@@ -19,6 +19,7 @@ using NUnit.Framework;
 using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.Cameo.Traits;
 using OpenRA.Mods.Cameo.Traits.BotModules;
+using OpenRA.Primitives;
 
 namespace OpenRA.Mods.Cameo.Test
 {
@@ -74,6 +75,32 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(doc.RootElement.GetProperty("seen").GetProperty("army_value").GetInt32(), Is.EqualTo(100));
 			Assert.That(doc.RootElement.GetProperty("truth").GetProperty("army_value").GetInt32(), Is.EqualTo(800));
 			Export("match.jsonl", "{\"schema\":3,\"game_uid\":\"00000000-0000-0000-0000-000000000001\",\"record_id\":\"00000000-0000-0000-0000-000000000001|seat_4\",\"player\":{\"seat\":\"seat_4\",\"faction\":\"td_gdi\",\"bot_type\":\"hard\",\"outcome\":\"won\"},\"opponent_signatures\":[" + b + "]}");
+		}
+
+		[Test]
+		public void DeferredSignatureHistoryRetainsOnlyAggregatedTruthProfiles()
+		{
+			var actors = new[]
+			{
+				new ObservedActor { Combat = true, Vehicle = true, Value = 800, Location = new CPos(1, 2), LastSeenTick = 10 },
+				new ObservedActor { Building = true, Defence = true, Value = 150, Location = new CPos(9, 2), LastSeenTick = 12 }
+			};
+			var truth = AiMatchLogWriter.ProfileOf(actors);
+			Assert.That(truth.ArmyValue, Is.EqualTo(800));
+			Assert.That(truth.VehicleValue, Is.EqualTo(800));
+			Assert.That(truth.DefenceValue, Is.EqualTo(150));
+			Assert.That(truth.BuildingCount, Is.EqualTo(1));
+			Assert.That(truth.KnownRegions, Is.EqualTo(2));
+			Assert.That(truth.LastSeenTick, Is.EqualTo(12));
+			Assert.That(typeof(AiMatchLogWriter.SignatureSample).GetField("OwnActors"), Is.Null,
+				"deferred histories must not retain per-actor snapshots for every tick");
+
+			var b = new StringBuilder();
+			AiMatchLogWriter.AppendOpponentSignature(b, "seat_2", new EnemyProfile { ArmyValue = 250 },
+				"td_gdi", "lost", truth, 750);
+			using var doc = JsonDocument.Parse(b.ToString());
+			Assert.That(doc.RootElement.GetProperty("truth").GetProperty("army_value").GetInt32(), Is.EqualTo(800));
+			Assert.That(doc.RootElement.GetProperty("truth").GetProperty("building_count").GetInt32(), Is.EqualTo(1));
 		}
 
 		[Test]

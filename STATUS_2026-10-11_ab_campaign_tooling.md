@@ -1,3 +1,9 @@
+## Resume (2026-10-10, memory mitigation)
+Next: reviewer/DevOps should inspect the commit, then rebuild the exact baseline and request approval for a bounded A5 parity rerun; no campaign launches until exact-baseline A5 is under 6.5 GiB with matching order streams.
+Change: AiMatchLogWriter aggregates each sampled own-actor snapshot immediately into EnemyProfile and retains only aggregate truth per history sample, avoiding repeated per-actor snapshots in deferred history. Serialization uses the same ProfileOf aggregation.
+Focused verification: with `-p:IsTestProject=true`, DeferredSignatureHistoryRetainsOnlyAggregatedTruthProfiles PASS 1/1; AiLogPrivacyRegressionTest PASS 9/9. The earlier `--no-restore` invocation silently skipped (unset IsTestProject); it is not counted.
+A5 evidence remains run-a 6.55 GiB and run-b 8.07 GiB (invalid parity); artifacts preserved under `results/campaign-a5-20261010`. This mitigation has not been measured in a rerun and is not a passed memory gate.
+
 ## Resume
 
 Step 1 receipt schema and Step 2 eight-map inventory are complete. Step 3 tooling is implemented and focused tests/no-launch dry run pass on branch `codex/ab-campaign-tooling` (last base SHA `ca590543108a6f90349a59acca711dc9678a10a0`; check current HEAD before continuing). Next: refresh fixture tool/schema hashes after final edits, inspect diff, commit/push; send exact schema path+SHA to Luna DevOps and send the final receipt to lead. Open launch gates: execution-approved manifest; exact-baseline A5 parity receipt; engine acceptance and symmetric-spawn proof for all eight maps; downstream analyzer fixture/negative controls. Never launch campaign cells until all gates pass.
@@ -29,7 +35,7 @@ Pinned for all remaining work: `origin/master@964cdb630b1514e1c1a0baed55cbdbc427
 
 Current branch `codex/ab-campaign-tooling`, commit `69e0f5acb4e586c239ff6dca318b6ec7fb37c04`, pushed. The earlier statement that no A5 games had been launched is superseded: one A5 run-a was attempted under the reserved parity slot. Gameplay source `mods/cameo` has no diff against baseline 964, but the game failed before a match during ruleset initialization with `Cannot locate type: SquadDesireBotModuleInfo`; failure log: `results/campaign-a5-20261010/run-a/Logs/exception-2026-10-10T171521Z.log`. Classify it `INCOMPLETE_PREFLIGHT_FAILURE`; preserve all artifacts; no second A5 run or campaign outcome cells launched. No OpenRA process from this attempt remains.
 
-Next: diagnose why the binary identified by `engine/VERSION=6da7fce14da541180c6baddd6925118fbef65b94` cannot load a trait required by exact-baseline mod sources. VERSION is descriptive and does not prove binary/source compatibility. Do not relax pin checks. After compatibility is proven, rerun both A5 seeds and verify order streams. Remaining gates: execution-approved manifest and engine acceptance plus symmetric-spawn proof for all eight maps. Current no-launch dry run remains 64 games / 32 variants / 144 seat proofs, estimated 7.29 slot-wall hours (5.11–9.47 range).
+Next: diagnose why the binary identified by `engine/VERSION=6da7fce14da541180c6baddd6925118fbef65b94` cannot load a trait required by exact-baseline mod sources. VERSION is descriptive and does not prove binary/source compatibility. Do not relax pin checks. After compatibility is proven, rerun both A5 seeds and verify order streams. Remaining gates: execution-approved manifest and engine acceptance plus symmetric-spawn proof for all eight maps. Current no-launch dry run remains 64 games / 32 variants / 144 seat proofs, estimated 7.29 slot-wall hours (5.11ï¿½9.47 range).
 
 ### A5 parity gate attempt (2026-10-10)
 
@@ -43,7 +49,7 @@ No replay parity comparison is valid; no exact-baseline A5 receipt was produced;
 
 ## Resume (handoff, 2026-10-10)
 Branch `codex/ab-campaign-tooling-manager` includes map inventory, schema, guarded runner, fixtures/tests and A5 failure status; HEAD pinned below.
-No-launch dry run: 64 games / 32 variants / 144 seat proofs; 0 launches; estimated 7.29 slot-wall hours (5.11–9.47 range).
+No-launch dry run: 64 games / 32 variants / 144 seat proofs; 0 launches; estimated 7.29 slot-wall hours (5.11ï¿½9.47 range).
 A5 parity gate failed: initial stale-DLL load failure; rebuilt run-a exceeded 6.5 GiB; run-b hit 8.07 GiB and was PID-scoped stopped; campaign cells never started.
 Preserved logs: `C:\cameo-wt\ab-campaign-tooling\results\campaign-a5-20261010`; schema: `C:\cameo-wt\ab-campaign-tooling\tools\ai\ab_campaign_receipt.schema.json`.
 Next owner is Luna DevOps; do not run any campaign cells until memory-safe exact-baseline A5 parity and map/manifest gates pass.
