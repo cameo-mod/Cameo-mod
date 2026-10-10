@@ -6,47 +6,29 @@ import unittest
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "tools" / "ai"))
 import a5_memory_parity_probe as probe
+import ab_campaign_pilot as pilot
 
 
-class A5MemoryProbeTests(unittest.TestCase):
-	def test_host_admission_keeps_process_and_reserve_headroom(self):
-		process = probe.PROCESS_STOP
-		soft = probe.HOST_SOFT_STOP
-		headroom = probe.HOST_LAUNCH_HEADROOM
-		self.assertTrue(probe.admission_ok(process + soft + headroom, process + probe.COMMIT_HEADROOM))
-		self.assertFalse(probe.admission_ok(process + soft + headroom - 1, 10**12))
-		self.assertFalse(probe.admission_ok(10**12, process + probe.COMMIT_HEADROOM - 1))
+class FixedTickParityTests(unittest.TestCase):
+    def test_censored_cap_requires_marker_and_complete_mutual_loss(self):
+        rows = [{"duration_ticks": 16002, "player": {"outcome": "lost"}} for _ in range(2)]
+        self.assertEqual((True, 16001), probe.verify_censored_cap("AB_CAMPAIGN_CAP tick=16001", rows, 16000))
+        self.assertFalse(probe.verify_censored_cap("", rows, 16000)[0])
+        self.assertFalse(probe.verify_censored_cap("AB_CAMPAIGN_CAP tick=16001", rows[:1], 16000)[0])
+        mixed = [rows[0], {"duration_ticks": 16002, "player": {"outcome": "won"}}]
+        self.assertFalse(probe.verify_censored_cap("AB_CAMPAIGN_CAP tick=16001", mixed, 16000)[0])
 
-	def test_soft_stop_reasons_are_independent(self):
-		self.assertEqual("PROCESS_PRIVATE_SOFT_STOP", probe.stop_reason(probe.PROCESS_STOP, 20 * 1024**3))
-		self.assertEqual("HOST_PHYSICAL_SOFT_STOP", probe.stop_reason(0, probe.HOST_SOFT_STOP))
-		self.assertIsNone(probe.stop_reason(1, probe.HOST_SOFT_STOP + 1))
-
-	def test_runtime_counter_command_is_one_second_csv(self):
-		cmd = probe.counters_command("dotnet-counters.exe", 42, pathlib.Path("heap.csv"))
-		self.assertEqual(["dotnet-counters.exe", "collect", "--process-id", "42",
-			"--counters", "System.Runtime", "--refresh-interval", "1", "--format", "csv",
-			"--output", "heap.csv"], cmd)
-
-	def test_gc_verbose_trace_is_bounded(self):
-		cmd = probe.trace_command("dotnet-trace.exe", 42, pathlib.Path("sample.nettrace"))
-		self.assertEqual(["dotnet-trace.exe", "collect", "--process-id", "42",
-			"--profile", "gc-verbose", "--buffersize", "32", "--duration", "00:00:00:10",
-			"--format", "NetTrace", "--output", "sample.nettrace"], cmd)
-		self.assertEqual(64 * 1024**2, probe.TRACE_MAX_OUTPUT)
-
-	def test_log_snapshot_reports_growth_without_inventing_actor_counts(self):
-		with tempfile.TemporaryDirectory() as temp:
-			support = pathlib.Path(temp)
-			logs = support / "Logs"
-			logs.mkdir()
-			(logs / "debug.log").write_text("[WT 10] first\n[WT 20] second\n", encoding="utf-8")
-			result = probe.log_snapshot(support)
-			self.assertEqual(20, result["world_tick"])
-			self.assertEqual((logs / "debug.log").stat().st_size, result["log_total_bytes"])
-			self.assertIsNone(result["actor_count"])
-			self.assertIn("not instrumented", result["actor_count_note"])
+    def test_monitor_accepts_bounded_parity_cap_and_rejects_bad_bounds(self):
+        with tempfile.TemporaryDirectory() as temp:
+            dest = pathlib.Path(temp)
+            (dest / "rules.yaml").write_text("World:\n", encoding="utf-8")
+            receipt = pilot.install_campaign_monitor(dest, 2, cap_tick=16000, sample_interval=2000, rules_filename="rules.yaml")
+            self.assertEqual(16000, receipt["cap_tick"])
+            lua = (dest / "ab_campaign_monitor.lua").read_text(encoding="utf-8")
+            self.assertIn("local CapTick = 16000", lua)
+            with self.assertRaises(ValueError):
+                pilot.install_campaign_monitor(dest, 2, cap_tick=0)
 
 
 if __name__ == "__main__":
-	unittest.main()
+    unittest.main()

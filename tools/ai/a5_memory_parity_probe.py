@@ -30,6 +30,7 @@ BASELINE = "964cdb630b1514e1c1a0baed55cbdbc427d5fc11"
 MEMORY_FIX = "173038d7881fe45d012a05d2a37ebd7b17f85ffe"
 ENGINE = "6da7fce14da541180c6baddd6925118fbef65b94"
 SEED = 1337
+CAP_TICK = 16000
 POLL = 0.25
 WALL = 900
 PROCESS_STOP = int(3.0 * 1024**3)
@@ -71,6 +72,16 @@ def trace_command(tool: str, pid: int, output: pathlib.Path) -> list[str]:
 	return [tool, "collect", "--process-id", str(pid), "--profile", "gc-verbose",
 		"--buffersize", str(TRACE_BUFFER_MB), "--duration", TRACE_DURATION,
 		"--format", "NetTrace", "--output", str(output)]
+
+
+def verify_censored_cap(log_text: str, match_rows: list[dict], cap_tick: int) -> tuple[bool, int | None]:
+	match = re.search(r"AB_CAMPAIGN_CAP tick=(\d+)", log_text)
+	observed = int(match.group(1)) if match else None
+	valid = (observed is not None and cap_tick <= observed <= cap_tick + 2
+		and len(match_rows) == 2
+		and all((row.get("player") or {}).get("outcome") == "lost" for row in match_rows)
+		and len({row.get("duration_ticks") for row in match_rows}) == 1)
+	return valid, observed
 
 
 def file_sha256(path: pathlib.Path) -> str:
@@ -170,7 +181,7 @@ def run_cell(index: int) -> dict:
 	command = [sys.executable, str(ROOT / "tools/ai/run_ai_match_batch.py"),
 		"--factions", "td_gdi", "--bot-a", "hard", "--bot-b", "hard",
 		"--team-size", "1", "--repeats", "1", "--map",
-		str(ROOT / "mods/cameo/maps/ai_duel_gate_20260928"),
+		str(OUT / "a5_fixed_tick_map"),
 		"--time-limit", "1", "--retries", "0", "--stall-timeout", "180",
 		"--keep-variants", "--render", "fast", "--support-dir", str(support)]
 	env = os.environ.copy()
@@ -330,20 +341,24 @@ def run_cell(index: int) -> dict:
 		stop_reason = stop_reason or "ORPHAN_CLEANUP"
 	log_root = support / "Logs"
 	server_log = log_root / "server.log"
+	lua_log = log_root / "lua.log"
 	match_log = log_root / "cameo-ai-matches.jsonl"
 	summary_path = support / "batch_summary.json"
 	summary = json.loads(summary_path.read_text(encoding="utf-8")) if summary_path.is_file() else {}
 	match_rows = [json.loads(line) for line in match_log.read_text(encoding="utf-8").splitlines() if line.strip()] if match_log.is_file() else []
 	replays = list((support / "Replays").rglob("*.orarep")) if (support / "Replays").is_dir() else []
-	seed_pin_verified = server_log.is_file() and f"CAMEO DEV SEED pinned - RandomSeed={SEED} (parity harness)" in server_log.read_text(encoding="utf-8", errors="replace")
+	log_text = server_log.read_text(encoding="utf-8", errors="replace") if server_log.is_file() else ""
+	lua_text = lua_log.read_text(encoding="utf-8", errors="replace") if lua_log.is_file() else ""
+	seed_pin_verified = f"CAMEO DEV SEED pinned - RandomSeed={SEED} (parity harness)" in log_text
 	records_verified = len(match_rows) == 2 and len({r.get("game_uid") for r in match_rows}) == 1 and all((r.get("player") or {}).get("outcome") in ("won", "lost") for r in match_rows)
 	duration_ticks = match_rows[0].get("duration_ticks") if records_verified else None
 	natural_below_cap = type(duration_ticks) is int and duration_ticks < 60000
 	batch_result = summary.get("results", [{}])[0] if summary.get("results") else {}
+	censored_cap_verified, observed_cap_tick = verify_censored_cap(lua_text, match_rows, CAP_TICK)
 	valid_game = (summary.get("matches") == 1 and summary.get("completed") == 1
 		and batch_result.get("status") == "ok" and batch_result.get("exit_code") == 0 and batch_result.get("attempts") == 1
 		and not summary.get("new_exceptions") and seed_pin_verified and records_verified
-		and natural_below_cap and len(replays) == 1 and stop_reason is None and peak < PROCESS_STOP)
+		and censored_cap_verified and len(replays) == 1 and stop_reason is None and peak < PROCESS_STOP)
 	if not valid_game and stop_reason is None:
 		stop_reason = "A5_RECEIPT_VALIDATION_FAILED"
 	return {"cell": cell, "seed": SEED, "source_head": subprocess.check_output(
@@ -365,11 +380,12 @@ def run_cell(index: int) -> dict:
 			"duration": TRACE_DURATION, "enabled": TRACE_ENABLED, "poll_seconds": POLL},
 		"fingerprint_id": summary.get("fingerprint_id"), "seed_pin_verified": seed_pin_verified,
 		"records_verified": records_verified, "duration_ticks": duration_ticks,
+		"cap_tick": CAP_TICK, "observed_cap_tick": observed_cap_tick, "censored_cap_verified": censored_cap_verified,
 		"natural_below_cap": natural_below_cap, "replay_count": len(replays), "valid_game": valid_game}
 
 
 def main() -> int:
-	global OUT, PROCESS_STOP, HOST_SOFT_STOP, HOST_HARD_FLOOR, TRACE_ENABLED
+	global OUT, PROCESS_STOP, HOST_SOFT_STOP, HOST_HARD_FLOOR, TRACE_ENABLED, CAP_TICK
 	parser = argparse.ArgumentParser(description=__doc__)
 	parser.add_argument("--execute-a5-diagnostic", action="store_true",
 		help="explicitly run two bounded A5 qualification cells; never campaign outcomes")
@@ -383,7 +399,12 @@ def main() -> int:
 		help="minimum free physical RAM; user-authorized reserve")
 	parser.add_argument("--no-allocation-trace", action="store_true",
 		help="disable gc-verbose profiler for parity runs; System.Runtime counters remain enabled")
+	parser.add_argument("--tick-cap", type=int, default=16000,
+		help="fixed world-tick cap for A5 parity; keeps the qualification below natural match end")
 	args = parser.parse_args()
+	if not 1000 <= args.tick_cap < 17000:
+		raise RuntimeError("A5 parity cap must be in [1000, 17000) to stay below observed natural end")
+	CAP_TICK = args.tick_cap
 	if not (3.0 <= args.process_stop_gib <= 9.5):
 		raise RuntimeError("process stop must be between 3 and 9.5 GiB pending larger host headroom")
 	if not (3.0 <= args.host_hard_floor_gib < args.host_soft_stop_gib):
@@ -396,7 +417,7 @@ def main() -> int:
 	OUT = output_dir.resolve()
 	if not args.execute_a5_diagnostic:
 		print(json.dumps({"mode": "NO_LAUNCH_A5_PREFLIGHT", "baseline": BASELINE,
-			"memory_fix": MEMORY_FIX, "seed": SEED, "cells": 2,
+			"memory_fix": MEMORY_FIX, "seed": SEED, "cells": 2, "tick_cap": CAP_TICK,
 			"per_process_stop_bytes": PROCESS_STOP, "host_soft_stop_bytes": HOST_SOFT_STOP,
 			"host_hard_floor_bytes": HOST_HARD_FLOOR, "poll_seconds": POLL,
 			"allocation_trace_enabled": TRACE_ENABLED, "campaign_gate_passed": False}, indent=2))
@@ -423,6 +444,10 @@ def main() -> int:
 	if OUT.exists():
 		raise RuntimeError("probe output exists; preserve and choose a new directory")
 	OUT.mkdir(parents=True)
+	map_dir = OUT / "a5_fixed_tick_map"
+	shutil.copytree(ROOT / "mods/cameo/maps/ai_duel_gate_20260928", map_dir)
+	import ab_campaign_pilot as pilot
+	map_monitor = pilot.install_campaign_monitor(map_dir, 2, cap_tick=CAP_TICK, sample_interval=2000, rules_filename="rules.yaml")
 	results = []
 	for index in (1, 2):
 		host = host_memory_status()
@@ -452,7 +477,8 @@ def main() -> int:
 		order_verdict = "INCOMPLETE_NO_PAIR_OF_REPLAYS"
 	processes_left = subprocess.run(["powershell.exe", "-NoProfile", "-NonInteractive", "-Command",
 		"@(Get-Process OpenRA -ErrorAction SilentlyContinue).Count"], capture_output=True, text=True)
-	receipt = {"purpose": "A5_MEMORY_QUALIFICATION_ONLY_NOT_CAMPAIGN_OUTCOME",
+	receipt = {"purpose": "A5_FIXED_TICK_PARITY_QUALIFICATION_ONLY_NOT_CAMPAIGN_OUTCOME",
+		"cap_tick": CAP_TICK, "map_monitor": map_monitor,
 		"baseline_commit": BASELINE, "source_head": subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip(),
 		"binary_sha256": {str(p.relative_to(ROOT)): file_sha256(p) for p in (
 			ROOT / "engine/bin/OpenRA.exe", ROOT / "engine/bin/OpenRA.Mods.Cameo.dll")},
