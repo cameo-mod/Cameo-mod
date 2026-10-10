@@ -35,10 +35,34 @@ with no-launch10000 / expiry2000 / cooldown1000 / capacity1. No noob tier exists
 or is added in this checkpoint. The test keys each existing tier by its explicit
 step from hard; adding noob later cannot re-index or shift the existing values.
 
-Authoritative dispatch evidence is still an API prerequisite: pinned engine
-Actor.ResolveOrder currently exposes only a void resolver loop, without a
-post-resolver outcome/correlated activity notification. Intent and a sampled
-CurrentActivity cannot alone certify the design's wave/request causality.
-Keep missing proof UNKNOWN. A record-only provider ruling is requested; no
-engine pin or engine source change is made here. This closes this bounded
-configuration checkpoint, not the remaining M13 implementation or runtime gates.
+## Observed-activity reset (maintainer ruling, 2026-10-10)
+
+NO engine change. The manager assigns monotonic local wave identities at offensive
+squad admission while the default-off switch is armed. Admission and order intent
+are not activity evidence. Before the ordinary squad update, it samples own,
+orderable wave members whose current target is a currently visible legal enemy.
+Foreign-held members and explicit flee states are excluded. Public CurrentActivity,
+active child state and GetTargets/attack target lines supply the evidence.
+
+Active attack must target that same legal enemy. AttackMove or attack-parent move
+requires the same activity instance across two distinct samples, actual own-position
+change and decreasing distance to the currently visible target's same position.
+Generic Move, queued/canceling/done activity, ReturnToBase, idle, unknown targets,
+retreat and unrelated goals cannot reset. Child depth and target enumeration are
+bounded at 16/256; absent public evidence stays unavailable. No hidden enemy census
+or pathfinder is added. Each actor's sample memory is pruned with the live wave
+membership; dead/dismissed wave records are pruned. A wave can reset once only;
+older waves observed after a newer wave are conservatively ignored.
+
+The pure state names this ObservedOffensiveActivity with LastObservedOffensiveTick
+and ObservedOffensiveCount. It needs no dispatch intent and never certifies an order
+resolution. The future combat stream must retain dispatch_causality UNKNOWN and
+observed-only labels; it is not implemented or mounted by this checkpoint.
+
+Eligibility sampling currently uses the fixed configured base value and existing
+squad targets only. Unsupported floor/delay stays Unsupported. Wave IDs, activity
+memory and interval state are not persisted yet: restored squads have no observation
+episode and cannot claim fresh-wave proof. Full first-wave target coverage, complete
+save/restore, soft-restraint release/deadline dispatch, team response membership,
+combat stream/consumer and paired 3v3 remain separate pending implementation. This
+checkpoint supplies the conservative reset producer, not the complete guarantee.

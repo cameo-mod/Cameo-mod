@@ -723,6 +723,13 @@ namespace OpenRA.Mods.CA.Traits
 
 		// §12.14 PL: attacks-launched telemetry (record-only).
 		public int OffensiveSquadsLaunched;
+
+		// Default-off observed-only evidence; construction/admission is not a launch.
+		internal readonly AttackLivenessEvalCA AttackLiveness = new();
+		readonly Dictionary<SquadCA, long> livenessWaves = new();
+		readonly Dictionary<Actor, OffensiveActivityObservationCA> livenessActivities = new();
+		long nextLivenessWave;
+
 		readonly ActorIndex.OwnerAndNamesAndTrait<BuildingInfo> constructionYardBuildings;
 
 		IBot bot;
@@ -2723,7 +2730,11 @@ namespace OpenRA.Mods.CA.Traits
 			if (type is SquadCAType.Rush or SquadCAType.Harass or SquadCAType.Guerrilla
 				or SquadCAType.Air or SquadCAType.Naval or SquadCAType.Fighter
 				or SquadCAType.Gunship or SquadCAType.Bomber or SquadCAType.Stealth)
+			{
 				OffensiveSquadsLaunched++;
+				if (Info.AttackLivenessEnabled && nextLivenessWave < long.MaxValue)
+					livenessWaves.Add(ret, ++nextLivenessWave);
+			}
 			return ret;
 		}
 
@@ -2822,6 +2833,9 @@ namespace OpenRA.Mods.CA.Traits
 				foreach (var s in Squads)
 					s.Units.RemoveAll(u => unitCannotBeOrdered(u.Actor));
 
+				if (Info.AttackLivenessEnabled)
+					ObserveOffensiveWaveActivity();
+
 				// H1: squads consult the attention budget before acting. The cursor
 				// rotates the pass order so a spent budget staggers squads instead of
 				// starving the tail of the list.
@@ -2855,6 +2869,17 @@ namespace OpenRA.Mods.CA.Traits
 				FindNewUnits(bot);
 			}
 
+			if (Info.AttackLivenessEnabled)
+			{
+				var value = unitsHangingAroundTheBase.Sum(u => (long)UnitValue(u.Actor));
+				var legalTarget = Squads.Any(s => s.Target.Actor is Actor target
+					&& target.CanBeViewedByPlayer(Player) && !target.IsDead && target.IsInWorld
+					&& Player.RelationshipWith(target.Owner) == PlayerRelationship.Enemy);
+				AttackLiveness.Observe(World.WorldTick, true, Player.WinState == WinState.Undefined,
+					legalTarget, unitsHangingAroundTheBase.Count > 0, value, Info.SquadValue,
+					botLimits?.Info.AttackLivenessMaxNoLaunchTicks ?? 0, 0, AttackSoftRestraintCA.None);
+			}
+
 			if (--minAttackForceDelayTicks <= 0)
 			{
 				// §12.14 PL-1 lead lean composed with the UT-1 TurtleRush axis scale —
@@ -2877,6 +2902,52 @@ namespace OpenRA.Mods.CA.Traits
 			// A/B `all` arm sampled as double_owner=1). The per-path claim above renews holds;
 			// this pass picks up everyone FindNewUnits/CreateAttackForce/drafts just admitted.
 			ReconcileSquadLeases();
+		}
+
+		internal static bool IsRetreatingForLiveness(SquadCA squad) =>
+			squad.FuzzyStateMachine?.CurrentState is GroundUnitsFleeStateCA or NavyUnitsFleeStateCA
+				or AirFleeStateCA or StealthFleeStateCA or UnitsForProtectionFleeState;
+
+		void ObserveOffensiveWaveActivity()
+		{
+			var tick = World.WorldTick;
+			var retained = new HashSet<Actor>();
+			var leases = BotUnitLeases.Of(Player);
+			foreach (var (squad, wave) in livenessWaves.ToArray())
+			{
+				if (!Squads.Contains(squad) || !squad.IsValid)
+				{
+					livenessWaves.Remove(squad);
+					continue;
+				}
+				if (IsRetreatingForLiveness(squad))
+					continue;
+				var enemy = squad.Target.Actor;
+				// No hidden position read: visibility precedes position or target matching.
+				if (enemy == null || enemy.IsDead || !enemy.IsInWorld
+					|| !enemy.CanBeViewedByPlayer(Player) || Player.RelationshipWith(enemy.Owner) != PlayerRelationship.Enemy)
+					continue;
+				var members = 0;
+				foreach (var unit in squad.Units)
+				{
+					var actor = unit.Actor;
+					if (unitCannotBeOrdered(actor) || leases?.IsClaimedByOther(actor, LeaseOwner) == true
+						|| !squad.Target.IsValidFor(actor))
+						continue;
+					retained.Add(actor);
+					if (!livenessActivities.TryGetValue(actor, out var observation))
+						livenessActivities.Add(actor, observation = new());
+					if (observation.Observe(tick, actor.CurrentActivity, actor, actor.CenterPosition,
+						true, actor.IsIdle, target => target.Type == TargetType.Actor
+							? target.Actor == enemy && target.IsValidFor(actor)
+							: target.Type == TargetType.Terrain
+								&& World.Map.CellContaining(target.CenterPosition) == enemy.Location))
+						members++;
+				}
+				AttackLiveness.ObserveOffensiveActivity(tick, wave, members, true, members > 0, true, true);
+			}
+			foreach (var stale in livenessActivities.Keys.Where(a => !retained.Contains(a)).ToArray())
+				livenessActivities.Remove(stale);
 		}
 
 		public void SetAirStrikeTarget(Actor target)

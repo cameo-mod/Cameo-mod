@@ -2,7 +2,7 @@ using System;
 
 namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 {
-	public enum AttackLivenessPhaseCA { Ineligible, EligibleWaiting, DispatchDue, DispatchPending, VerifiedDispatch, Unsupported }
+	public enum AttackLivenessPhaseCA { Ineligible, EligibleWaiting, DispatchDue, DispatchPending, ObservedOffensiveActivity, Unsupported }
 	[Flags]
 	public enum AttackSoftRestraintCA
 	{
@@ -12,18 +12,18 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 	}
 
 	// No target/reason/personality parameter can renew an already eligible interval.
-	// Dispatch intent is separate from reviewed outcome evidence; no game-world work here.
+	// Observed activity is not dispatch causality. No engine outcome or game-world work here.
 	public sealed class AttackLivenessEvalCA
 	{
 		public AttackLivenessPhaseCA Phase { get; private set; }
 		public int EligibleSinceTick { get; private set; } = -1;
 		public long ValueFloor { get; private set; }
 		public long DeadlineTick { get; private set; } = -1;
-		public int LastVerifiedLaunchTick { get; private set; } = -1;
-		public int VerifiedLaunchCount { get; private set; }
+		public int LastObservedOffensiveTick { get; private set; } = -1;
+		public int ObservedOffensiveCount { get; private set; }
 		public AttackSoftRestraintCA Restraints { get; private set; }
 		long pendingWave;
-		long lastVerifiedWave;
+		long lastObservedWave;
 		long lastIssuedWave;
 		int dispatchLead;
 		int lastTick = -1;
@@ -84,18 +84,20 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			return true;
 		}
 
-		public bool ObserveDispatch(int tick, long waveId, int offensiveMembers,
+		// Conservative monotonic dedup: an older wave observed after a newer one cannot renew
+		// the deadline. No queued intent is needed or certified by these public activity facts.
+		public bool ObserveOffensiveActivity(int tick, long waveId, int offensiveMembers,
 			bool ownedOffensiveWave, bool actualOffensiveActivity, bool legalTarget, bool evidenceComplete)
 		{
 			CheckTick(tick);
 			if (!evidenceComplete || !ownedOffensiveWave || !actualOffensiveActivity || !legalTarget
-				|| offensiveMembers <= 0 || waveId == 0 || waveId != pendingWave || waveId <= lastVerifiedWave)
+				|| offensiveMembers <= 0 || waveId <= 0 || waveId <= lastObservedWave)
 				return false;
-			LastVerifiedLaunchTick = tick;
-			VerifiedLaunchCount++;
-			lastVerifiedWave = waveId;
+			LastObservedOffensiveTick = tick;
+			ObservedOffensiveCount++;
+			lastObservedWave = waveId;
 			ClearInterval();
-			Phase = AttackLivenessPhaseCA.VerifiedDispatch;
+			Phase = AttackLivenessPhaseCA.ObservedOffensiveActivity;
 			return true;
 		}
 

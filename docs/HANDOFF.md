@@ -5543,3 +5543,9 @@ Next: exact-SHA VP review; cost/coverage/adoption remain gated. No launches. Ins
 - Named hard-relative tier tests preserve existing values when the planned noob tier is added later; future10000/2000/1000 documented without a code/YAML row.
 - Dispatch-provenance provider/API ruling requested; missing outcome stays UNKNOWN. No engine source/pin change or launch.
 - Next: maintainer all-type P6 override on its isolated branch; remaining M13 response/dispatch/save/stream/3v3 work remains explicit in docs/design/M13_RUNTIME_WIRING.md.
+
+### 2026-10-10 M13 observed-only offensive activity checkpoint
+- Maintainer NO-engine ruling: current public activity/targets of own offensive wave members may reset the interval; dispatch causality stays UNKNOWN, never proven by intent.
+- Default-off manager registers local wave identities; samples visible legal target/owned members, excludes explicit flee states and foreign leases, and prunes actor/wave memory. Shared observer rejects idle/queued/canceling/generic retreat or transport/ReturnToBase/unrelated targets; movement requires actual progress, not target drift.
+- Pure state renamed observed activity/count/time; monotonic wave dedup prevents repeat resets. No new orders, RNG, engine pin, default activation or combat stream mounting.
+- Focused42/42, full Release1558 passing (2 explicit max-census fixtures not run), Python tier/budget19/19, fog82files269sites and mutation191files0sites PASS. Save/coverage/full deadline/response/consumer/3v3 gates remain open; no launches.
