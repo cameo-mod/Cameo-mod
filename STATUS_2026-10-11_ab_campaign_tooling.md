@@ -1,3 +1,17 @@
+## Resume (2026-10-11, seat-join defect FIXED + memory policy implemented — uncommitted, DevOps review pending)
+
+Two launch blockers cleared in this tree (uncommitted; user directive "fix all blockers", DevOps to review+commit):
+
+1. **Seat-join defect FIXED** (`DEFECT_2026-10-11_seat_join_key.md` in main repo): real `cameo-ai-matches.jsonl` records carry `player.home` as the spawn coordinate (`"22,16"`), not the PlayerReference name (`"Multi0"`). `ab_campaign_pilot.py` gained a `byloc` map keyed on `seat["home_location"]`; the record join is `byloc.get(home) or byhome.get(home)` (byhome stays name-keyed for the `expected_seats` check). `campaign_runner.py` looks records up via `seat.get("home_location") or seat["home"]`. Before the fix every real record adjudicated `INVALID_UNKNOWN`; after: `TREATMENT_WIN` on real-shape records and name-form fixtures alike. Permanent negative-control `test_adjudicator_joins_real_coordinate_home_records` added. Fail-closed preserved.
+
+2. **Memory policy implemented** per DevOps relay (10.5 GiB cap, ≥15.5 GiB admission, 4 GiB soft / 3 GiB hard floors): `PROCESS_CAP_BYTES`/`PRIVATE_LIMIT`=10.5 GiB, `RAM_FLOOR_BYTES`/`FREE_RAM_FLOOR`=15.5 GiB (admission — second cell cannot admit below it, enforcing one-worker on this host), new `FREE_RAM_HARD_FLOOR`=3 GiB (runtime `LOW_FREE_RAM` stop), `FREE_RAM_SOFT_FLOOR`=4 GiB (surfaced in `plan_summary`). Receipt schema `limit_private_bytes` const → 11274289152. Test constants updated.
+
+3. **Stale harness test fixed**: `test_oramap_variant_converts_multi_slots` expected `Rules: rules.yaml`; the harness intentionally ships rules as `duel_rules.yaml` (reserved name, `8bd5bb1e1`). Test now reads `batch.HARNESS_RULES_NAME`.
+
+Verification: campaign suite **136/136 pass** (pilot 11, runner, A5 probe, harness 36, ab_campaign/increment/summary, replay_health, aggregate, league). Candidate manifest regenerated: `docs/audit/ab_pilot_manifest_candidate.json` sha256 `c60e464127201e08bcdbacf0b6481e1d2934bff1292ec033f17133ccf8ae6f8d` (tool_sha256 + slot_policy current). Full dry-run green: 64 games, 32 maps, 0 launches. Fixtures refreshed.
+
+Remaining launch gates (unchanged): exact-SHA manifest/analyzer integration sign-off by DevOps, 8-map engine acceptance + symmetric spawn proof, maintainer `execution_approved` flip. No outcome cells launched.
+
 ## Resume (2026-10-10 19:02Z, A5 fixed-tick parity PASS)
 A5 fixed-tick qualification PASS at commit `bcdd89e5451f4be8a66add9d506392adb5e17e52`, exact baseline ancestry `964cdb630b1514e1c1a0baed55cbdbc427d5fc11`, engine `6da7fce14da541180c6baddd6925118fbef65b94`, seed 1337, same runtime fingerprint `3d90631faa76`. Both runs verified Lua cap marker tick16001, complete two-seat mutual-loss CENSORED_CAP rows, and exactly one complete replay each; strict comparator returned `IDENTICAL_TAIL_FLUSH` (same shared per-frame orders/hashes, terminal sync-only flush). Durations 16601/16640; do not score either censored result. Peak private 8.55/8.53 GiB; host free at finish14.98 GiB; zero OpenRA processes.
 Receipt and all raw evidence: `results/campaign-a5-fixed-tick-parity-20261010-attempt2/A5_memory_probe_receipt.json`, `order_stream_diff.json`, run receipts/logs/replays. The prior failed preflight attempt remains preserved separately as INCOMPLETE_PREFLIGHT_REJECTION.

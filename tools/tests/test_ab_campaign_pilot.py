@@ -98,6 +98,26 @@ class PilotPlanTests(unittest.TestCase):
   receipt["cap_tick"]=45000;receipt["seats"][0]["spawn"]+=1
   self.assertEqual("INVALID_UNKNOWN",pilot.adjudicate(rows,receipt,job,"a"*64)["verdict"])
 
+ def test_adjudicator_joins_real_coordinate_home_records(self):
+  # Real cameo-ai-matches.jsonl rows carry player.home as the SPAWN COORDINATE
+  # ("22,16"), not the PlayerReference name ("Multi0"). Seats resolved by
+  # prove_generated_map carry the coordinate in home_location. Joining on
+  # seat["home"] silently INVALIDs every real record (DEFECT_2026-10-11).
+  m=manifest(); job=next(j for j in pilot.make_jobs(m) if j["team_size"]==1 and j["game_in_pair"]==0)
+  loc={"Multi0":"22,16","Multi1":"49,55"}
+  seats=[dict(s,home_location=loc[s["home"]]) for s in job["seat_assignments"]]
+  rows=[]
+  for seat in seats:
+   outcome="won" if seat["side"]==job["treatment_side"] else "lost"
+   rows.append({"player":{"seat":"seat_3" if seat["home"]=="Multi0" else "seat_4","home":seat["home_location"],"spawn":0,"bot_type":seat["bot_type"],"faction":seat["faction"],"outcome":outcome},"stats":{"stats_timeline_fields":"tick,earned,spent,banked","stats_timeline":[[45000,90,40,50]]}})
+  receipt={"cell_id":job["cell_id"],"manifest_sha256":"a"*64,"switch":job["switch"],"setup":job["setup"],"map":job["map"],"map_sha256":job["map_sha256"],"seed":job["seed"],"pair":job["pair"],"game_in_pair":job["game_in_pair"],"control_side":job["control_side"],"treatment_side":job["treatment_side"],"arm_bot_types":job["arm_bot_types"],"status":"NATURAL_END","end_reason":"natural","seat_proof_source":"generated_map.yaml","map_yaml_sha256":"b"*64,"seats":seats}
+  got=pilot.adjudicate(rows,receipt,job,"a"*64)
+  self.assertEqual("TREATMENT_WIN",got["verdict"],got.get("reason"))
+  self.assertEqual(90,got["team_totals"]["treatment"]["earned"])
+  # a wrong-shape home (neither coordinate nor name) stays fail-closed
+  rows[0]["player"]["home"]="not,a,seat"
+  self.assertEqual("INVALID_UNKNOWN",pilot.adjudicate(rows,receipt,job,"a"*64)["verdict"])
+
  def test_analyzer_preserves_all_unrun_planned_games(self):
   result=pilot.analyze(manifest(),"a"*64,[],[])
   self.assertEqual(64,len(result["games"]))
@@ -134,12 +154,12 @@ class PilotPlanTests(unittest.TestCase):
   with self.assertRaisesRegex(ValueError,"fix/safety"):
    pilot.treatment_baseline([],"AG_assault_fanout")
   self.assertTrue(pilot.regression_due(5));self.assertFalse(pilot.regression_due(4))
-  c=pilot.SlotCounter(); floor=6*1024**3
+  c=pilot.SlotCounter(); floor=24*1024**3
   self.assertTrue(c.acquire("a",1,floor));self.assertTrue(c.acquire("b",2,floor));self.assertTrue(c.acquire("c",1,floor));self.assertFalse(c.acquire("d",2,floor))
   self.assertFalse(c.acquire("large",4,floor));c.release("a");c.release("b");c.release("c")
   self.assertTrue(c.acquire("large",4,floor));self.assertFalse(c.acquire("small",1,floor));
-  with self.assertRaises(ValueError): c.update_private_bytes("large",8*1024**3)
-  self.assertFalse(pilot.slots_available(1,floor-1))
+  with self.assertRaises(ValueError): c.update_private_bytes("large",11*1024**3)
+  self.assertFalse(pilot.slots_available(1,pilot.RAM_FLOOR_BYTES-1))
   with tempfile.TemporaryDirectory() as temp:
    db1=pilot.SqliteSlotCounter(pathlib.Path(temp)/"slots.sqlite")
    db2=pilot.SqliteSlotCounter(pathlib.Path(temp)/"slots.sqlite")
@@ -147,7 +167,7 @@ class PilotPlanTests(unittest.TestCase):
    self.assertTrue(db1.acquire("z",1,floor));self.assertFalse(db2.acquire("fourth",1,floor))
    self.assertFalse(db2.acquire("exclusive",4,floor));db2.heartbeat("x",1024);db1.release("x");db2.release("y");db1.release("z")
    self.assertTrue(db2.acquire("exclusive",4,floor));self.assertFalse(db1.acquire("small",1,floor))
-   with self.assertRaisesRegex(ValueError,"memory cap"): db2.heartbeat("exclusive",8*1024**3)
+   with self.assertRaisesRegex(ValueError,"memory cap"): db2.heartbeat("exclusive",11*1024**3)
    db2.release("exclusive");db2.release("y");db1.release("z")
 
 if __name__=="__main__": unittest.main()

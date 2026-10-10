@@ -1,7 +1,7 @@
 {
   "schema": 1,
+  "campaign_id": "ab-bu-pilot-2026-10-11",
   "switch": "BU_harvester_logistics",
-  "execution_approved": false,
   "pairs_per_setup": 2,
   "team_size_scope": [
     1,
@@ -13,26 +13,10 @@
     "control": "hard_control",
     "treatment": "hard_treatment"
   },
-  "baseline_manifest_path": "tools/tests/fixtures/ab_campaign_baseline.json",
-  "baseline_manifest_sha256": "27b638ecd7e33caa68003a020d0d4309822826405a7afe147983f92027a3e26a",
-  "pins": {
-    "source_commit": "964cdb630b1514e1c1a0baed55cbdbc427d5fc11",
-    "engine_version": "6da7fce14da541180c6baddd6925118fbef65b94"
-  },
-  "switch_patch_sha256": "d710567579cb3673eb33701ec881495f0a2a17d6203194b0efdc8052f4de4523",
-  "baseline_ai_payload_sha256": "932e2e5c919de6f5b493e1722e6e66e39a3a5f1577b29aa58a571492b7de9d69",
-  "treatment_ai_payload_sha256": "acdfd3a3e2c7d405a776703593f1d52c5f357b423e75ffb224392159c009c725",
-  "tool_sha256": {
-    "driver_analyzer": "a8b712535828dbb057228230eab3493d2864ec1f6e8923c0a37079b8570a1547",
-    "campaign_runner": "b0de63b099ef1ac35cbb983e789a4a4e8a974f727c8c809c222bc64c16b39424",
-    "batch_runner": "d0d42746a28fa23a03849108a5b52d36455f0c1cad107d78ff029d16e345efa7",
-    "switch_applier": "5376258709f2ff6512e402abeaf09e164abe483142980830bc72269af047f97e"
-  },
-  "binary_sha256": {
-    "bin/OpenRA.exe": "5693f355792ebb68699793f96ef2167b733c5e7756f580858c5090226418c984",
-    "bin/OpenRA.dll": "92ee9dacd08869593dc5ad70c2d1ce48f701caf8277ea3bd692acf2224a8ca77",
-    "bin/OpenRA.Mods.Cameo.dll": "41f37982c146f73b4a9c07071f34b47e214178cb9413e514f05af9af2d44b3a4"
-  },
+  "seeds": [
+    1337,
+    2026
+  ],
   "round_stages": [
     16,
     32,
@@ -51,13 +35,30 @@
     "max_parallel_small_games": 3,
     "small_team_size_max": 2,
     "large_game_exclusive": true,
-    "min_free_ram_bytes": 6442450944,
-    "max_private_bytes": 6979321856
+    "min_free_ram_bytes": 16642998272,
+    "max_private_bytes": 11274289152
   },
-  "seeds": [
-    1337,
-    7331
-  ],
+  "baseline_manifest_path": "docs/audit/ab_baseline_manifest_pilot.json",
+  "baseline_manifest_sha256": "eecadb954680b13c4f832ad32dee5249634f255a4e3a91ad92586cb0705bb76a",
+  "pins": {
+    "source_commit": "964cdb630b1514e1c1a0baed55cbdbc427d5fc11",
+    "engine_version": "6da7fce14da541180c6baddd6925118fbef65b94"
+  },
+  "switch_patch_sha256": "d710567579cb3673eb33701ec881495f0a2a17d6203194b0efdc8052f4de4523",
+  "baseline_ai_payload_sha256": "932e2e5c919de6f5b493e1722e6e66e39a3a5f1577b29aa58a571492b7de9d69",
+  "treatment_ai_payload_sha256": "acdfd3a3e2c7d405a776703593f1d52c5f357b423e75ffb224392159c009c725",
+  "tool_sha256": {
+    "driver_analyzer": "4ebf57187feadb0083916fc6a579259cfbaeb02c50a42acd1341cc26e1b1a514",
+    "campaign_runner": "725f010588190c87a4108f3c872065c19b61f647319842f1d9d6777b55b9a2fa",
+    "batch_runner": "072225d79e70011545bb43b9228a7c1f2686c033c04c4b3fa02dd92edcf6a6ce",
+    "switch_applier": "5376258709f2ff6512e402abeaf09e164abe483142980830bc72269af047f97e"
+  },
+  "receipt_schema_sha256": "3d0e39057ded3c28354812bfad1db6727e891e16a25250bd6a9caff6063fa164",
+  "binary_sha256": {
+    "bin/OpenRA.exe": "5693f355792ebb68699793f96ef2167b733c5e7756f580858c5090226418c984",
+    "bin/OpenRA.Game.dll": "167fcbd8985dc3cd74ae2747c6d4a43db0d51cbda99dc029712fdb72182f6b80",
+    "bin/OpenRA.Mods.Cameo.dll": "3b69b0d49d88914d4e003fbae2c35faf9e8bad0625e161effb2773e5e5575853"
+  },
   "maps": [
     {
       "name": "nuclear_winter",
@@ -258,5 +259,6 @@
       ]
     }
   ],
-  "receipt_schema_sha256": "458b9f6444b91f606ad384bbff5a4db46ae7e2061ff4a66811b9b9d3fec974eb"
+  "execution_approved": false,
+  "notes": "candidate dry-run manifest; maintainer flips execution_approved at sign-off after the open-item proposal is ruled on"
 }

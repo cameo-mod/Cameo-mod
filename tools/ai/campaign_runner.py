@@ -25,8 +25,10 @@ from contextlib import contextmanager
 import ab_campaign_pilot as pilot
 
 CAP_TICK = 45000
-PRIVATE_LIMIT = int(6.5 * 1024**3)
-FREE_RAM_FLOOR = 6 * 1024**3
+PRIVATE_LIMIT = int(10.5 * 1024**3)     # decided cell ceiling (was 6.5 GiB; startup burst peaks ~9.5 GiB)
+FREE_RAM_FLOOR = int(15.5 * 1024**3)    # admission floor: cap + ~5 GiB host margin
+FREE_RAM_HARD_FLOOR = 3 * 1024**3       # runtime stop: available RAM below this kills the cell
+FREE_RAM_SOFT_FLOOR = 4 * 1024**3       # soft floor: telemetry threshold for low-RAM pressure
 ACTOR_SAMPLE_INTERVAL = 5000
 SLOT_PARALLEL_SMALL = 3
 SMALL_TEAM_MAX = 2
@@ -248,7 +250,7 @@ def validate_receipt(receipt: dict) -> None:
 	if receipt["end_class"] == "NATURAL" and (not isinstance(receipt["end_reason"], str) or receipt["winner_team"] is None):
 		raise ValueError("NATURAL classification lacks authoritative winner/end reason")
 	if receipt["memory"].get("limit_private_bytes") != PRIVATE_LIMIT:
-		raise ValueError("receipt memory threshold differs from the frozen 6.5 GiB limit")
+		raise ValueError("receipt memory threshold differs from the frozen 10.5 GiB limit")
 	if receipt["memory"].get("peak_private_bytes", 0) >= PRIVATE_LIMIT and not (receipt["end_class"] == "INCOMPLETE" and receipt["end_reason"] == "MEMORY_KILL"):
 		raise ValueError("memory threshold reached without INCOMPLETE MEMORY_KILL")
 	if len(receipt["resolved_seats"]) != receipt["map"].get("required_seats"):
@@ -347,6 +349,7 @@ def plan_summary(manifest: dict, manifest_sha: str, root: pathlib.Path, engine_r
 		"planned_games": len(jobs), "pilot_games": len(jobs), "setup_count": len(pilot.SETUPS),
 		"small_game_workers_max": SLOT_PARALLEL_SMALL, "large_games_exclusive": True,
 		"process_private_limit_bytes": PRIVATE_LIMIT, "free_ram_floor_bytes": FREE_RAM_FLOOR,
+		"free_ram_hard_floor_bytes": FREE_RAM_HARD_FLOOR, "free_ram_soft_floor_bytes": FREE_RAM_SOFT_FLOOR,
 		"cap_tick": CAP_TICK, "actor_sample_interval_ticks": ACTOR_SAMPLE_INTERVAL,
 		"queue_mode": "RESUME_SAFE_CLAIM_ONCE", "launches": 0,
 		"engine_load_test": "PENDING_A5_PARITY_AND_MAP_ENGINE_ACCEPTANCE",
@@ -367,7 +370,7 @@ def run_one(manifest: dict, manifest_sha: str, job: dict, *, root: pathlib.Path,
 	pilot.validate(manifest, root, engine_root, execution=True)
 	execution_gate(manifest, a5_receipt=a5_receipt, a5_receipt_sha256=a5_receipt_sha256,
 		source_commit=manifest["pins"]["source_commit"], engine_version=manifest["pins"]["engine_version"])
-	if available_ram_bytes() < FREE_RAM_FLOOR: raise ValueError("available RAM below 6 GiB slot floor")
+	if available_ram_bytes() < FREE_RAM_FLOOR: raise ValueError("available RAM below 15.5 GiB admission floor")
 	queue = ResumeQueue(support_root / "campaign_queue.sqlite", manifest_sha)
 	queue.install(pilot.make_jobs(manifest))
 	queue.recover_orphans(kill_game=lambda cell, pid: kill_owned_pid(pid, executable,
@@ -404,7 +407,7 @@ def run_one(manifest: dict, manifest_sha: str, job: dict, *, root: pathlib.Path,
 	def heartbeat(row):
 		if row["private_bytes"] < PRIVATE_LIMIT:
 			slot_counter.heartbeat(job["cell_id"], row["private_bytes"])
-		return "LOW_FREE_RAM" if available_ram_bytes() < FREE_RAM_FLOOR else None
+		return "LOW_FREE_RAM" if available_ram_bytes() < FREE_RAM_HARD_FLOOR else None
 	monitor_result = monitor_process(process, driver_log=driver_log, actor_log=server_log, stall_log=logs / "debug.log",
 		sample_callback=heartbeat)
 	slot_counter.release(job["cell_id"])
@@ -428,7 +431,7 @@ def run_one(manifest: dict, manifest_sha: str, job: dict, *, root: pathlib.Path,
 	match_by_home = {(r.get("player") or {}).get("home"): r for r in match_rows}
 	resolved_out = []
 	for seat in resolved:
-		r = match_by_home.get(seat["home"], {}); pl = r.get("player") or {}; timeline = pilot.normalized_timeline(r); last = timeline[-1] if timeline else {}
+		r = match_by_home.get(seat.get("home_location") or seat["home"], {}); pl = r.get("player") or {}; timeline = pilot.normalized_timeline(r); last = timeline[-1] if timeline else {}
 		metrics = {key: last.get(key) for key in ("earned", "spent", "banked", "army_value", "kills", "deaths")}
 		metrics["timeline"] = [{key: row.get(key) for key in ("tick", "earned", "spent", "banked", "army_value", "kills", "deaths")} for row in timeline]
 		resolved_out.append({"seat_id": seat["home"], "team": seat["side"], "arm": seat["arm"], "bot_type": seat["bot_type"], "faction": seat["faction"], "home": seat["home"], "spawn": seat["spawn"], "proof_source":"generated map.yaml + cameo-ai-matches.jsonl", "outcome": pl.get("outcome", "unknown"), "metrics": metrics})

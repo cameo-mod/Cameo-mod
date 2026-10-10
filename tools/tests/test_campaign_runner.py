@@ -42,8 +42,10 @@ class CampaignRunnerTests(unittest.TestCase):
 				runner.atomic_receipt(path, {"end_class": "CAP", "winner_team": None})
 
 	def test_bounds_and_parallel_policy(self):
-		self.assertEqual(int(6.5 * 1024**3), runner.PRIVATE_LIMIT)
-		self.assertEqual(6 * 1024**3, runner.FREE_RAM_FLOOR)
+		self.assertEqual(int(10.5 * 1024**3), runner.PRIVATE_LIMIT)
+		self.assertEqual(int(15.5 * 1024**3), runner.FREE_RAM_FLOOR)
+		self.assertEqual(3 * 1024**3, runner.FREE_RAM_HARD_FLOOR)
+		self.assertEqual(4 * 1024**3, runner.FREE_RAM_SOFT_FLOOR)
 		self.assertEqual(45000, runner.CAP_TICK)
 		self.assertEqual(5000, runner.ACTOR_SAMPLE_INTERVAL)
 		self.assertEqual(3, runner.SLOT_PARALLEL_SMALL)

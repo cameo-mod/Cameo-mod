@@ -224,8 +224,9 @@ class RealMapVariantTests(unittest.TestCase):
             self.assertNotIn("\t\tHomeLocation:", actors)
 
             # Rules key + file wired (maximum speed, locked time cap).
-            self.assertRegex(text, r"(?m)^Rules: rules\.yaml$")
-            rules = (dest / "rules.yaml").read_text(encoding="utf-8")
+            # Harness rules ship under the reserved name duel_rules.yaml.
+            self.assertRegex(text, r"(?m)^Rules: " + batch.HARNESS_RULES_NAME.replace(".", r"\.") + r"$")
+            rules = (dest / batch.HARNESS_RULES_NAME).read_text(encoding="utf-8")
             self.assertIn("GameSpeed: maximum", rules)
             self.assertIn("TimeLimitDefault: 2", rules)
         finally:
