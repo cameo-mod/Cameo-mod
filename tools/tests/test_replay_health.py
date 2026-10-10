@@ -221,6 +221,36 @@ class HealthTests(unittest.TestCase):
         with self.assertRaises(health.EvidenceError):
             health.analyze([snapshot(6000, 1, 1)], [], [final], "g", "hard")
 
+    def test_seat_privacy_schema_resolves_same_as_legacy_player_field(self):
+        # P0/P6's privacy schema emits a top-level "seat" (e.g. "seat_3") instead of
+        # "player" on situation/placement rows, and "player": {"seat": ...} instead of
+        # {"name": ...} on terminal/match rows. All three must resolve identically to
+        # the legacy "player"-keyed schema for the same selected identity.
+        def seat_snapshot(tick, refs=0, harvesters=0, conyards=1, bank=10000, faction="ra1_allies"):
+            row = snapshot(tick, refs, harvesters, conyards, bank, faction)
+            row["seat"] = row.pop("player")
+            return row
+
+        def seat_placement(tick=1374, seat="classic", faction="ra1_allies"):
+            row = placement(tick, seat, faction)
+            row["seat"] = row.pop("player")
+            return row
+
+        def seat_terminal(faction="ra1_allies"):
+            row = terminal(faction)
+            row["player"] = {"seat": row["player"].pop("name"), **row["player"]}
+            return row
+
+        legacy = health.analyze([snapshot(t, 1, 1, bank=30000) for t in (3000, 3750, 4500)],
+                                [placement(player="hard")], [terminal()], "g", "hard")
+        seated = health.analyze([seat_snapshot(t, 1, 1, bank=30000) for t in (3000, 3750, 4500)],
+                                [seat_placement(seat="hard")], [seat_terminal()], "g", "hard")
+        self.assertEqual(seated["status"], "OBSERVED_HEALTHY")
+        self.assertEqual(seated["status"], legacy["status"])
+        self.assertEqual(seated["metrics"]["first_refinery_placement_tick"],
+                          legacy["metrics"]["first_refinery_placement_tick"])
+        self.assertNotIn("MISSING_SITUATIONS", [f["code"] for f in seated["findings"]])
+
 
 if __name__ == "__main__":
     unittest.main()

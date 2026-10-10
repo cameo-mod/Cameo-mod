@@ -49,6 +49,16 @@ def identity(value):
     return value
 
 
+def row_identity(row):
+    """A row's own selectable identity: top-level 'seat' (newer privacy schema) or 'player'."""
+    return row.get("seat", row.get("player"))
+
+
+def player_identity(player_dict):
+    """The identity inside a nested terminal/match 'player' object: 'seat' or legacy 'name'."""
+    return player_dict.get("seat", player_dict.get("name"))
+
+
 def atomic_report(path, encoded, support):
     """Publish a new report atomically; never overwrite any existing artifact."""
     target = path.resolve()
@@ -123,10 +133,10 @@ def analyze(situations, placements, matches, game_uid, player, *, live=False,
             raise EvidenceError("all policy tick thresholds must be positive integers")
     identity(game_uid)
     identity(player)
-    rows = [r for r in situations if r.get("game_uid") == game_uid and r.get("player") == player]
+    rows = [r for r in situations if r.get("game_uid") == game_uid and row_identity(r) == player]
     placed = [r for r in placements if r.get("game_uid") == game_uid]
     finals = [r for r in matches if r.get("game_uid") == game_uid and
-              isinstance(r.get("player"), dict) and r["player"].get("name") == player]
+              isinstance(r.get("player"), dict) and player_identity(r["player"]) == player]
     report = {"policy": POLICY_VERSION, "game_uid": game_uid, "player": player,
               "status": "UNKNOWN", "findings": [], "metrics": {},
               "earliest_block_tick": None, "scope": "telemetry symptom triage, not replay semantic validation"}
@@ -167,11 +177,11 @@ def analyze(situations, placements, matches, game_uid, player, *, live=False,
         tick = integer(r.get("tick"))
         if r.get("kind") != "placement":
             # Loss/acquisition proves prior ownership; it is not a placement.
-            if r.get("player") == player:
+            if row_identity(r) == player:
                 own_lifecycle_ticks.append(tick)
             continue
         if r.get("category") == "refinery":
-            if r.get("player") == player:
+            if row_identity(r) == player:
                 own_ref_ticks.append(tick)
             elif r.get("faction") == faction and r.get("bot_type") in REFERENCE_BOTS:
                 peer_ref_ticks.append(tick)
