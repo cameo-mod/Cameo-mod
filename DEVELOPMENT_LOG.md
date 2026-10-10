@@ -1,3 +1,32 @@
+# 2026-10-10 — Devin: A9/M9 learned-file resolution + M14 emergency-default binding (branch `devin/a9-m9-m14-default`)
+
+*Devin-Architect*, task `01a1243d-3efb` (cloud doc @680dd25d PT7 items 4 and 6c;
+sites verified by REVIEW_2026-10-10_cloud_680dd25d.md), base master `545922cf8`,
+engine pin `6da7fce14`. Two commits, one per item.
+
+- **`df00f2cfb` M9/A9 — learned yamls actually load.** `FileSystem.Exists` indexes only each
+  package's top-level `Folder.Contents` names, so the bare `ai/learned/*.yaml` paths could never
+  exist: every load logged "missing" and the arsenal priors / build-order knobs / engagement priors /
+  plan bandits ran neutral regardless of the committed files. New `LearnedFilePath.Resolve` maps bare
+  mod-relative paths to `cameo|ai/learned/…` (Folder.Contains/GetStream probe the combined on-disk
+  path); explicit `package|path` passes through. All four modules (BotLearnedPriors,
+  BuildOrderKnobsBotModule, EngagementPriorsBotModule, PlanBanditBotModule) route `Exists`/`Open`
+  through it; configured `Info.*File` values stay bare and remain what the logs print.
+  `tools/ai/round_trip_check.py` gains a "learned files" row — FAIL when a learned yaml logs "missing"
+  while it exists under `mods/cameo`. `LearnedFilePathTest` pins the mechanism end-to-end through a
+  real `FileSystem`+`Folder` mount (bare misses the index, `cameo|` Exists+Opens) plus all four
+  shipped defaults. Switches unchanged — UseLearnedPriors/UseLearnedBuildOrder/… stay default-off.
+- **`fcec9cc89` M14 — the §19.11 binding is the default.** `MasterAiBotModule` in `mods/cameo/ai/ai.yaml`
+  gains `EmergencyKeepsPersonality: true` + `EmergencyLossArmyPct: 25` outside any switch group
+  (fields verified on BotSituation.cs:244/249). Previously the C# defaults (false/0) applied: any
+  Emergency force-pinned `turtle` on the whole team and the flat 600-credit loss rule fired in ~70% of
+  snapshots while winning — the exact team-turtle collapse recorded at lines 37-39 above. The
+  `AL_emergency_net_loss` switch-group copy in `tools/ai/increment_switches.yaml` is now a no-op
+  override of the same values.
+- **Verification:** Release build 0/0; suite 1402/1402 with both items in-tree; boot-to-menu gate PASSED
+  (perf.log `MenuPostProcessEffect.PostWorldLoaded`, 0 new exception-*.log, PID-scoped kill). No match
+  launches. Frozen branch `devin/a9-m9-m14-default` pushed for VP exact-SHA review.
+
 # 2026-10-09 — Claude: AI architecture review + playtest regression analysis (branch `ccr-c7f51935-i53fkj`)
 
 *Claude (Opus)*, cloud container, base master `5c8cfe04`. Docs only; no code or yaml changed on the branch.
