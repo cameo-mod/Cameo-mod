@@ -105,5 +105,57 @@ namespace OpenRA.Mods.Cameo.Test
 				differ |= p1.Next() != p2.Next();
 			Assert.That(differ, Is.True, "player isolation must survive identical module keys");
 		}
+
+		// M14 bandit same-arm: three allied bots collapsed onto one stream because
+		// the pre-spawn salt (ClientIndex) is shared by every host-owned/map player —
+		// engine sets it to the admin's index. The salt is now the World.Players slot
+		// index, which is distinct per player and exists before any PlayerActor spawns,
+		// so a first call that happens pre-spawn can never memoize a colliding seed.
+		[Test]
+		public void AlliedBotsGetDistinctStreamsForSameModuleKey()
+		{
+			const int LobbySeed = 0x5EED;
+			const string Key = "PlanBanditBotModule";
+
+			var draws = new int[3][];
+			for (var slot = 0; slot < 3; slot++)
+			{
+				var rng = new MersenneTwister(
+					BotRng.ModuleSeed(BotRng.PlayerSeed(LobbySeed, slot + 1), Key));
+				draws[slot] = new int[64];
+				for (var i = 0; i < draws[slot].Length; i++)
+					draws[slot][i] = rng.Next();
+			}
+
+			for (var i = 0; i < 64; i++)
+			{
+				Assert.That(draws[0][i] != draws[1][i] || draws[1][i] != draws[2][i],
+					Is.True, $"teammate streams identical at draw {i} — same-arm collapse");
+			}
+
+			// Sequences must differ as whole streams, not just at one draw.
+			Assert.That(draws[0], Is.Not.EqualTo(draws[1]), "bot 0 and bot 1 share a stream");
+			Assert.That(draws[1], Is.Not.EqualTo(draws[2]), "bot 1 and bot 2 share a stream");
+			Assert.That(draws[0], Is.Not.EqualTo(draws[2]), "bot 0 and bot 2 share a stream");
+		}
+
+		[Test]
+		public void AdjacentSaltsProduceUncorrelatedStreams()
+		{
+			// Alternate M14 hypothesis: adjacent salt values feed correlated MT seeds.
+			// The salt multiplier is the golden-ratio constant, so slot n and n+1
+			// must still produce wholly different sequences.
+			const int LobbySeed = 0x5EED;
+			const string Key = "PlanBanditBotModule";
+			var a = new MersenneTwister(BotRng.ModuleSeed(BotRng.PlayerSeed(LobbySeed, 5), Key));
+			var b = new MersenneTwister(BotRng.ModuleSeed(BotRng.PlayerSeed(LobbySeed, 6), Key));
+
+			var equal = 0;
+			for (var i = 0; i < 128; i++)
+				if (a.Next() == b.Next())
+					equal++;
+			Assert.That(equal, Is.LessThanOrEqualTo(3),
+				$"adjacent salts correlated — {equal}/128 equal draws");
+		}
 	}
 }

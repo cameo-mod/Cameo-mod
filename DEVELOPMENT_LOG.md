@@ -20623,3 +20623,15 @@ land ticks later or never) all produce identical disappearances. Corrected on
   on stream A leave B bit-identical), same-seed same-key 1024-draw parity, and
   per-player isolation with identical keys.
 * Suite 1304/1304, Release clean. No launches per task gate.
+
+* **M14 fold-in (same-arm fix):** the per-player salt is now the player's slot
+  index in `World.Players` — unique per player, fixed at world creation,
+  identical on all clients, and independent of spawn timing. The old chain
+  (`PlayerActor.ActorID`, falling back to `ClientIndex+1` while PlayerActor is
+  null) was doubly unsafe: the null-actor fallback got memoized forever, and
+  engine map/host-owned players all report the admin's `ClientIndex`
+  ("Owned by the host"), which is what collapsed allied bots onto one seed in
+  the bandit same-arm finding. `PlayerActor` is no longer consulted, so
+  first-call timing can never freeze a colliding seed. +2 regressions: three
+  allied bots get distinct same-key streams, and adjacent salts stay
+  uncorrelated (alternate MT-seeding hypothesis ruled out by construction).

@@ -9,6 +9,7 @@
  */
 #endregion
 
+using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using OpenRA.Support;
@@ -33,6 +34,15 @@ namespace OpenRA.Mods.CA
 	/// so adding, removing, or reordering draws in one module can never shift another
 	/// module's sequence. Keys must be compile-time constants (<c>nameof</c>) — never a
 	/// runtime-derived or machine-dependent string, or cross-client seeds would diverge.
+	/// </para>
+	/// <para>
+	/// The per-player salt is the player's position in <c>World.Players</c>: unique per
+	/// player, fixed at world creation, identical on every client, and — critically —
+	/// independent of spawn timing. Neither <c>PlayerActor.ActorID</c> nor
+	/// <c>ClientIndex</c> is safe: <c>PlayerActor</c> is null until first spawn (so a
+	/// first-call fallback would be memoized forever), and engine map/host-owned players
+	/// all report the admin's <c>ClientIndex</c> ("Owned by the host"), which is exactly
+	/// what collapsed allied bots onto one seed in the M14 bandit same-arm finding.
 	/// </para>
 	/// <para>
 	/// Synced world state must still use <c>World.SharedRandom</c> (mirrored on all clients).
@@ -81,8 +91,7 @@ namespace OpenRA.Mods.CA
 		static int PlayerSeed(Player p)
 		{
 			var lobbySeed = p.World.LobbyInfo.GlobalSettings.RandomSeed;
-			var salt = p.PlayerActor != null ? unchecked((int)p.PlayerActor.ActorID + 1) : p.ClientIndex + 1;
-			return PlayerSeed(lobbySeed, salt);
+			return PlayerSeed(lobbySeed, Array.IndexOf(p.World.Players, p) + 1);
 		}
 
 		/// <summary>
