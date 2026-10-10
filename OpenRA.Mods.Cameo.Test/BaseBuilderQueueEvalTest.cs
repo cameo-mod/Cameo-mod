@@ -1071,5 +1071,280 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(t.ProducerLive, Is.Null, "no producer bound -> UNKNOWN, not a guessed bool");
 			Assert.That(t.CancellationClass, Is.EqualTo(BotQueueCancellationClass.Production));
 		}
+
+		// FIX-QUEUE-OBSERVER-TERMINAL-CAUSALITY (01a121b6): request intent and proven
+		// outcome are separate records. Queue disappearance is correlation, never proof —
+		// engine cleanup removes items too. These drive the world-free resolution map the
+		// probe executes; every case below enumerates what the emit site can produce.
+
+		[Test]
+		public void PlacementRemovalWithoutProofArmsProofWindow()
+		{
+			// VP consumer-fit: a pending placement followed by the item leaving a live
+			// queue within the window is correlation — a competing cleanup or rejected
+			// order removes the item the same way. It must NOT emit Placed.
+			var pending = new BotQueuePendingTerminal
+			{
+				Item = new object(), ItemName = "proc", Kind = BotQueueTransitionKind.Placed,
+				IssuedTick = 100, Site = new CPos(3, 4)
+			};
+			Assert.That(pending.ResolveOnRemoval(101, queueSeen: true, placementProven: false),
+				Is.EqualTo(BotQueuePendingResolution.KeepAwaitingProof),
+				"unproven removal keeps the request armed — it never promotes to Placed on disappearance");
+			Assert.That(pending.ResolveOnRemoval(108, queueSeen: true, placementProven: false),
+				Is.EqualTo(BotQueuePendingResolution.KeepAwaitingProof), "still inside the bound, still not Placed");
+		}
+
+		[Test]
+		public void StalePlacementRequestEndsRemovedAtRemoval()
+		{
+			var pending = new BotQueuePendingTerminal
+			{
+				Item = new object(), ItemName = "proc", Kind = BotQueueTransitionKind.Placed,
+				IssuedTick = 100, Site = new CPos(3, 4)
+			};
+			Assert.That(pending.ResolveOnRemoval(109, queueSeen: true, placementProven: false),
+				Is.EqualTo(BotQueuePendingResolution.EmitRemoved),
+				"a request older than the bound is a lost order — Removed, never the proof window");
+		}
+
+		[Test]
+		public void ProvenPlacementEmitsPlacedAtRemoval()
+		{
+			// Normal placement: the actor lands inside the same frame-end task the item
+			// leaves in — site proof already holds at the next probe tick.
+			var pending = new BotQueuePendingTerminal
+			{
+				Item = new object(), ItemName = "proc", Kind = BotQueueTransitionKind.Placed,
+				IssuedTick = 100, Site = new CPos(3, 4)
+			};
+			Assert.That(pending.ResolveOnRemoval(101, queueSeen: true, placementProven: true),
+				Is.EqualTo(BotQueuePendingResolution.EmitRequested), "actor on the ordered cell -> Placed");
+			Assert.That(pending.ResolveOnRemoval(101, queueSeen: false, placementProven: true),
+				Is.EqualTo(BotQueuePendingResolution.EmitRequested),
+				"lifecycle evidence beats queue staleness — the building exists");
+		}
+
+		[Test]
+		public void BuilderUnitPlacementProvesOnLateActorArrival()
+		{
+			// Lead ruling: a builder-unit order removes the item immediately (EndProduction
+			// before BuildOnSite runs), and the actor lands ticks later — Placed resolves
+			// at actor-lifecycle proof inside the bounded window, never at queue removal.
+			var pending = new BotQueuePendingTerminal
+			{
+				Item = new object(), ItemName = "proc", Kind = BotQueueTransitionKind.Placed,
+				IssuedTick = 100, Site = new CPos(3, 4)
+			};
+			Assert.That(pending.ResolveOnRemoval(101, queueSeen: true, placementProven: false),
+				Is.EqualTo(BotQueuePendingResolution.KeepAwaitingProof), "item gone, actor not yet landed");
+
+			// The probe arms it and restarts the window at the removal tick.
+			pending.AwaitingProof = true;
+			pending.IssuedTick = 101;
+			Assert.That(pending.ResolveWhileAwaiting(105, placementProven: true, playerEliminated: false),
+				Is.EqualTo(BotQueuePendingResolution.EmitRequested), "BuildOnSite landed the actor -> Placed");
+		}
+
+		[Test]
+		public void BuilderUnitPlacementFailureExpiresToRemoved()
+		{
+			// BuildOnSite can fail after the item left (unit cancelled/dead, cell gone
+			// invalid, CanQueue refused) — no actor ever lands: the armed window expires
+			// to Removed carrying the intent reason, schema-2 UNKNOWN, never Placed.
+			var pending = new BotQueuePendingTerminal
+			{
+				Item = new object(), ItemName = "proc", Kind = BotQueueTransitionKind.Placed,
+				IssuedTick = 100, Site = new CPos(3, 4)
+			};
+			Assert.That(pending.ResolveOnRemoval(101, queueSeen: true, placementProven: false),
+				Is.EqualTo(BotQueuePendingResolution.KeepAwaitingProof));
+
+			pending.AwaitingProof = true;
+			pending.IssuedTick = 101;
+			Assert.That(pending.ResolveWhileAwaiting(104, placementProven: false, playerEliminated: false),
+				Is.EqualTo(BotQueuePendingResolution.Unresolved), "inside the window — no record yet");
+			Assert.That(pending.ResolveWhileAwaiting(110, placementProven: false, playerEliminated: false),
+				Is.EqualTo(BotQueuePendingResolution.EmitRemoved),
+				"window expired without the actor -> Removed + intent reason");
+		}
+
+		[Test]
+		public void CompetingRemovalAfterPlacementNeverConfirms()
+		{
+			// The required cleanup/competing-removal regression, end to end: request issued,
+			// the bound item is removed by something else (automatic unbuildable cleanup, a
+			// second cancel, a dead-producer flush) — every unproven path ends Removed.
+			var pending = new BotQueuePendingTerminal
+			{
+				Item = new object(), ItemName = "proc", Kind = BotQueueTransitionKind.Placed,
+				IssuedTick = 100, Site = new CPos(3, 4)
+			};
+			Assert.That(pending.ResolveOnRemoval(101, queueSeen: true, placementProven: false),
+				Is.Not.EqualTo(BotQueuePendingResolution.EmitRequested), "correlation is not Placed");
+
+			// queueSeen=false path: a disabled queue flushing its contents.
+			var stale = new BotQueuePendingTerminal
+			{
+				Item = new object(), ItemName = "proc", Kind = BotQueueTransitionKind.Placed,
+				IssuedTick = 100, Site = new CPos(3, 4)
+			};
+			Assert.That(stale.ResolveOnRemoval(101, queueSeen: false, placementProven: false),
+				Is.EqualTo(BotQueuePendingResolution.EmitRemoved));
+		}
+
+		[Test]
+		public void CancelRemovalNeverConfirmsCancelled()
+		{
+			// VP: a pending cancel followed by ANY removal — ours, a sibling's, or
+			// automatic cleanup — is indistinguishable on this engine pin; every case
+			// resolves Removed carrying the intent reason (schema-2 non-pass), never
+			// an invented Cancelled.
+			foreach (var (seen, age) in new[] { (true, 1), (true, 8), (false, 1), (true, 9) })
+			{
+				var pending = new BotQueuePendingTerminal
+				{
+					Item = new object(), ItemName = "proc", Kind = BotQueueTransitionKind.Cancelled,
+					Reason = BotQueueTransitionReason.DemandCancel, Class = BotQueueCancellationClass.Production,
+					IssuedTick = 100
+				};
+				Assert.That(pending.ResolveOnRemoval(100 + age, seen, placementProven: false),
+					Is.EqualTo(BotQueuePendingResolution.EmitRemoved),
+					$"seen={seen} age={age}: disappearance never proves a cancel");
+			}
+		}
+
+		[Test]
+		public void InfiniteCancelProvenOnlyByBoundFlagFlip()
+		{
+			// CancelProductionInner's unique signature: Infinite flips false on the bound
+			// item while it stays queued. Bound-item + flip together — a sibling or an
+			// unrelated infinite item flipping cannot satisfy it.
+			var bound = new BotQueuePendingTerminal
+			{
+				Item = new object(), ItemName = "proc", Kind = BotQueueTransitionKind.Cancelled,
+				Reason = BotQueueTransitionReason.DemandCancel, IssuedTick = 100, WasInfinite = true
+			};
+			Assert.That(bound.CancelProvenByFlagFlip(infiniteNow: false), Is.True, "the bound item flipped -> proven Cancelled");
+			Assert.That(bound.CancelProvenByFlagFlip(infiniteNow: true), Is.False, "no flip -> not proven");
+
+			var finite = new BotQueuePendingTerminal
+			{
+				Item = new object(), Kind = BotQueueTransitionKind.Cancelled, WasInfinite = false
+			};
+			Assert.That(finite.CancelProvenByFlagFlip(infiniteNow: false), Is.False,
+				"a finite item has no flag transition — no proof exists");
+
+			var nameOnly = new BotQueuePendingTerminal
+			{
+				ItemName = "proc", Kind = BotQueueTransitionKind.Cancelled, WasInfinite = true
+			};
+			Assert.That(nameOnly.CancelProvenByFlagFlip(infiniteNow: false), Is.False,
+				"an unbound request cannot verify its item's flag — honest UNKNOWN");
+
+			var notCancel = new BotQueuePendingTerminal
+			{
+				Item = new object(), Kind = BotQueueTransitionKind.Placed, WasInfinite = true
+			};
+			Assert.That(notCancel.CancelProvenByFlagFlip(infiniteNow: false), Is.False);
+		}
+
+		[Test]
+		public void AwaitingProofEntryCannotBindSiblingRemoval()
+		{
+			// An armed entry's item already left; a later same-name sibling removal must
+			// not re-consume it, and it can never re-resolve against its own departed ref.
+			var first = new object();
+			var second = new object();
+			var pending = new BotQueuePendingTerminal
+			{
+				Item = first, ItemName = "proc", Kind = BotQueueTransitionKind.Placed, AwaitingProof = true
+			};
+			Assert.That(pending.Matches(second, "proc"), Is.False, "awaiting entries are unbound from queue removals");
+			Assert.That(pending.Matches(first, "proc"), Is.False, "it resolves through the proof scan only");
+		}
+
+		[Test]
+		public void EliminationDuringAwaitingResolvesRemoved()
+		{
+			var pending = new BotQueuePendingTerminal
+			{
+				Item = new object(), ItemName = "proc", Kind = BotQueueTransitionKind.Placed,
+				IssuedTick = 100, AwaitingProof = true
+			};
+			Assert.That(pending.ResolveWhileAwaiting(102, placementProven: false, playerEliminated: true),
+				Is.EqualTo(BotQueuePendingResolution.EmitRemoved), "elimination closes the proof window early");
+			Assert.That(pending.ResolveWhileAwaiting(102, placementProven: true, playerEliminated: true),
+				Is.EqualTo(BotQueuePendingResolution.EmitRequested),
+				"a landed building still proves — elimination changes classification, not fact");
+		}
+
+		// VP re-review of ae259554d: !AcceptsPlug is not install proof — the engine's
+		// AcceptsPlug is false for unknown types and failed dynamic Requirements too.
+		// These drive the real predicate the manager wires from the Pluggable trait.
+
+		[Test]
+		public void PlugInstallProofRequiresPositiveSlotState()
+		{
+			// True install: the slot defines the type, it has no dynamic Requirements,
+			// and it now refuses — for requirement-free types AcceptsPlug is exactly
+			// `active == null`, so false here is the engine's own installed state.
+			Assert.That(BaseBuilderQueueEvalCA.PlugInstallProven(
+					slotDefinesType: true, requirementKeyed: false, acceptsNow: false),
+				Is.True, "requirement-free slot refusing its own type = active plug installed");
+
+			// Requirement flip: a requirement-keyed refusal is availability state —
+			// no EnablePlug ran. Never proof.
+			Assert.That(BaseBuilderQueueEvalCA.PlugInstallProven(true, requirementKeyed: true, acceptsNow: false),
+				Is.False, "requirement-keyed refusal is a requirement state, never install proof");
+			Assert.That(BaseBuilderQueueEvalCA.PlugInstallProven(true, true, acceptsNow: true),
+				Is.False, "availability true means the slot would still accept — not installed");
+
+			// Unknown type: the slot refuses by definition, not by installation.
+			Assert.That(BaseBuilderQueueEvalCA.PlugInstallProven(slotDefinesType: false, false, false),
+				Is.False, "a slot that never defined the type cannot 'refuse' it");
+
+			// Still accepting: no install.
+			Assert.That(BaseBuilderQueueEvalCA.PlugInstallProven(true, false, acceptsNow: true),
+				Is.False, "an empty accepting slot is not installed");
+		}
+
+		[Test]
+		public void RequirementFlipPlugPendingExpiresToRemoved()
+		{
+			// The VP scenario end to end through the production predicate: a plug order
+			// issued, then the host's dynamic Requirement fails before PlacePlug resolves —
+			// no EnablePlug runs, the slot reports refusal. With the corrected predicate
+			// that is NOT proof, so the armed pending expires to Removed + intent reason.
+			var pending = new BotQueuePendingTerminal
+			{
+				Item = new object(), ItemName = "plug", Kind = BotQueueTransitionKind.Placed,
+				IssuedTick = 100, Site = new CPos(5, 6), PlugType = "adv", AwaitingProof = true
+			};
+
+			var requirementFlipped = BaseBuilderQueueEvalCA.PlugInstallProven(
+				slotDefinesType: true, requirementKeyed: true, acceptsNow: false);
+			Assert.That(pending.ResolveWhileAwaiting(110, placementProven: requirementFlipped, playerEliminated: false),
+				Is.EqualTo(BotQueuePendingResolution.EmitRemoved),
+				"requirement flip -> no install -> expires Removed, never Placed");
+		}
+
+		[Test]
+		public void TruePlugInstallProvesPlaced()
+		{
+			// Same pending, true install: requirement-free slot now refusing the type it
+			// accepted at order-selection — the engine's install state -> Placed.
+			var pending = new BotQueuePendingTerminal
+			{
+				Item = new object(), ItemName = "plug", Kind = BotQueueTransitionKind.Placed,
+				IssuedTick = 100, Site = new CPos(5, 6), PlugType = "adv", AwaitingProof = true
+			};
+
+			var installed = BaseBuilderQueueEvalCA.PlugInstallProven(
+				slotDefinesType: true, requirementKeyed: false, acceptsNow: false);
+			Assert.That(pending.ResolveWhileAwaiting(104, placementProven: installed, playerEliminated: false),
+				Is.EqualTo(BotQueuePendingResolution.EmitRequested),
+				"slot occupied by EnablePlug -> Placed");
+		}
 	}
 }
