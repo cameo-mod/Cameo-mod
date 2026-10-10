@@ -125,3 +125,41 @@ not runtime event completeness. Coordinator still must explicitly invoke BOTH
 startup and economy checkers under separately accepted pins/capture fingerprints;
 existing startup-only driver cannot detect the new queue/cash invariants.
 Seam/outcome integration, runtime cost and campaign gates remain unresolved.
+
+2026-10-10 inert restack checkpoint on integrated master
+46a89fdcbf1f30a184ba821557d21749c325a0ab, containing independently accepted
+terminal seam1e89fd91d4667d55c024d2cfe92550a3dfd7d0ee. Engine pin remains
+6da7fce14da541180c6baddd6925118fbef65b94; frozen logger3741 is unchanged.
+
+The recorder retains every queue transition in raw evidence. PlacementOrdered,
+CancelOrdered and ordinary Queued/Ready/Held/Resumed observations cannot establish
+an outcome. Every Removed event marks coverage permanently incomplete. Only
+accepted Cancelled terminals with nonzero producer/episode, known event-local
+producer liveness and supported cancellation class can emit schema2 cancel.
+Proven Placed remains raw evidence: the pinned health consumer has no placement
+record kind, and the census separately observes the resulting queue state.
+
+Canonical cancellation queue IDs resolve the unique own configured building
+queue trait as producer:queue-type:group. Missing or ambiguous resolution is
+UNKNOWN. This performs an additional bounded own-queue lookup per cancellation
+(max128 own configured queues); no pathfinding/cell/enemy/policy/order work.
+Actual lookup and callback runtime cost is unmeasured. Item IDs use
+seam:category:episode, paired with resolved queue ID. Distinct same-name requeue
+episodes differ; these IDs are independent of pulse census IDs. The pinned
+consumer deduplicates cancel queue/item pairs without joining them to census IDs.
+
+Changed-boundary tests generate complete SYNTHETIC fixtures with the runtime
+schema serializer and bounded canonical writer. Pinned economy consumer2a417
+returns BLOCK20 for three active production cancels; inactive/elimination and
+destruction cleanup do not produce that defect; duplicate episode and incomplete
+Removed evidence return UNKNOWN21. These fixtures demonstrate consumer fit only.
+Run the entire AiEconomy filter before the CLI suite to generate all fixtures:
+
+dotnet test OpenRA.Mods.Cameo.Test/OpenRA.Mods.Cameo.Test.csproj -c Release --filter FullyQualifiedName~AiEconomy
+python -m unittest tools.tests.test_economy_logger_cli -v
+
+Activation's sticky incomplete guard is deliberately retained. No YAML mount,
+activation change, checker change or engine/source pin change is included. Actual
+tick0/callback/pulse/end ordering, capability/census/terminal coverage, mounted
+parity and CPU/allocation/disk cost, Coordinator dual-gate wiring and fresh
+reservation remain adoption gates. No runtime capture or launch was performed.
