@@ -553,11 +553,12 @@ def normalize_campaign_receipts(manifest, manifest_sha, receipts, rows, artifact
   require(identity not in by_identity,"planned job identity is not unique")
   by_identity[identity]=job
  grouped={}
- for row in rows:
-  uid=row.get("game_uid") if isinstance(row,dict) else None
-  require(isinstance(uid,str) and uid,"match row missing game_uid")
-  grouped.setdefault(uid,[]).append(row)
- uid_receipts={}; by_cell={}; verified_paths=set(); normalized=[]
+ if rows is not None:
+  for row in rows:
+   uid=row.get("game_uid") if isinstance(row,dict) else None
+   require(isinstance(uid,str) and uid,"match row missing game_uid")
+   grouped.setdefault(uid,[]).append(row)
+ uid_receipts={}; by_cell={}; verified_paths=set(); normalized=[]; artifact_rows_all=[]
 
  def load_artifact(artifact, label, *, allow_missing=False):
   require(isinstance(artifact,dict),f"{label} artifact must be an object")
@@ -624,9 +625,11 @@ def normalize_campaign_receipts(manifest, manifest_sha, receipts, rows, artifact
   if uid is not None:
    require(uid not in uid_receipts,"duplicate game_uid across receipts")
    uid_receipts[uid]=receipt
-   require(uid in grouped,"per-game matches artifact UID absent from aggregate match input")
-   canonical=lambda values: sorted(json.dumps(x,sort_keys=True,separators=(",",":")) for x in values)
-   require(canonical(grouped[uid])==canonical(match_rows),f"{cell} aggregate rows differ from hash-verified per-game artifact")
+   artifact_rows_all.extend(match_rows)
+   if rows is not None:
+    require(uid in grouped,"per-game matches artifact UID absent from aggregate match input")
+    canonical=lambda values: sorted(json.dumps(x,sort_keys=True,separators=(",",":")) for x in values)
+    require(canonical(grouped[uid])==canonical(match_rows),f"{cell} aggregate rows differ from hash-verified per-game artifact")
   team_arms={side:receipt["teams"][side]["arm"] for side in ("A","B")}
   require(set(team_arms.values())=={"control","treatment"},"receipt teams do not contain opposite arms")
   control_side=next(side for side,arm in team_arms.items() if arm=="control")
@@ -648,12 +651,12 @@ def normalize_campaign_receipts(manifest, manifest_sha, receipts, rows, artifact
    status=reason.upper()
   legacy={"cell_id":cell,"game_uid":uid,"manifest_sha256":manifest_sha,"switch":job["switch"],"setup":job["setup"],"map":job["map"],"map_sha256":job["map_sha256"],"seed":job["seed"],"pair":job["pair"],"game_in_pair":job["game_in_pair"],"control_side":control_side,"treatment_side":treatment_side,"arm_bot_types":arm_types,"status":status,"end_reason":reason,"cap_marker":receipt["cap"]["marker_observed"],"cap_tick":receipt["cap"]["marker_tick"],"support_complete":support_path is not None,"seat_proof_source":"generated_map.yaml","map_yaml_sha256":map_info["generated_map_yaml_sha256"],"seats":seats,"peak_memory_bytes":receipt["memory"]["peak_private_bytes"],"duration_ticks":receipt["world_tick"]}
   normalized.append(legacy)
- return normalized
+ return normalized, (rows if rows is not None else artifact_rows_all)
 
 def main(argv=None):
  p=argparse.ArgumentParser(description=__doc__); s=p.add_subparsers(dest="cmd",required=True)
  d=s.add_parser("dry-run");d.add_argument("--manifest",type=pathlib.Path,required=True);d.add_argument("--manifest-sha256",required=True);d.add_argument("--repo-root",type=pathlib.Path,required=True);d.add_argument("--engine-root",type=pathlib.Path);d.add_argument("--output",type=pathlib.Path,required=True);d.add_argument("--minutes-per-game",type=float,default=8.5);d.add_argument("--setup-hours",type=float,default=2.0)
- a=s.add_parser("analyze");a.add_argument("--manifest",type=pathlib.Path,required=True);a.add_argument("--manifest-sha256",required=True);a.add_argument("--matches",type=pathlib.Path,required=True);a.add_argument("--receipts",type=pathlib.Path,required=True);a.add_argument("--repo-root",type=pathlib.Path,required=True);a.add_argument("--artifact-root",type=pathlib.Path,required=True,help="root directory containing immutable per-game support artifacts");a.add_argument("--output",type=pathlib.Path,required=True)
+ a=s.add_parser("analyze");a.add_argument("--manifest",type=pathlib.Path,required=True);a.add_argument("--manifest-sha256",required=True);a.add_argument("--matches",type=pathlib.Path,help="optional aggregate JSONL crosscheck");a.add_argument("--receipts",type=pathlib.Path,required=True);a.add_argument("--repo-root",type=pathlib.Path,required=True);a.add_argument("--artifact-root",type=pathlib.Path,required=True,help="root directory containing immutable per-game support artifacts");a.add_argument("--output",type=pathlib.Path,required=True)
  a=p.parse_args(argv)
  try:
   m=json.loads(a.manifest.read_text(encoding="utf-8"))
@@ -668,8 +671,8 @@ def main(argv=None):
    out["manifest_sha256"]=actual;a.output.parent.mkdir(parents=True,exist_ok=True);a.output.write_text(json.dumps(out,indent=2)+"\n",encoding="utf-8");print(f"NO_LAUNCH games={out['games']} generated_maps={len(out['generated_map_preflight'])} treatment_changes={out['arm_payload_preflight'][1]['changed_fields']} worker_hours={out['worker_hours_estimate_at_8_5m_each']} slot_wall_hours={out['parallel_slot_wall_estimate_hours_at_8_5m_each']} launches=0");return 0
   validate(m,a.repo_root); raw=a.manifest.read_bytes(); actual=hashlib.sha256(raw).hexdigest();require(actual==a.manifest_sha256,"manifest SHA mismatch")
   def jsonl(path): return [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
-  receipts=json.loads(a.receipts.read_text(encoding="utf-8"));rows=jsonl(a.matches)
-  normalized=normalize_campaign_receipts(m,actual,receipts,rows,a.artifact_root)
+  receipts=json.loads(a.receipts.read_text(encoding="utf-8"));rows=jsonl(a.matches) if a.matches else None
+  normalized,rows=normalize_campaign_receipts(m,actual,receipts,rows,a.artifact_root)
   out=analyze(m,actual,normalized,rows);a.output.parent.mkdir(parents=True,exist_ok=True);a.output.write_text(json.dumps(out,indent=2)+"\n",encoding="utf-8");print(f"ANALYZED games={len(out['games'])} unplanned_receipts={len(out['unplanned_receipt_cells'])}");return 2 if out["unplanned_receipt_cells"] or out["unplanned_game_uids"] or any(g["verdict"]=="INVALID_UNKNOWN" for g in out["games"]) else 0
  except (OSError,ValueError,KeyError,TypeError) as e: print(f"error: {e}",file=sys.stderr);return 2
 if __name__=="__main__": raise SystemExit(main())
