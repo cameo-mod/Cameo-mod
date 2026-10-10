@@ -4,7 +4,8 @@
 This revision plans and audits evidence only. It never starts OpenRA.
 """
 from __future__ import annotations
-import argparse, hashlib, json, pathlib, random, re, subprocess, sys, zipfile
+import argparse, hashlib, json, os, pathlib, random, re, sqlite3, subprocess, sys, time, zipfile
+from contextlib import contextmanager
 from threading import Lock
 import apply_increment_switches as increment
 
@@ -32,6 +33,7 @@ SETUPS = [
 RAM_FLOOR_BYTES = 6 * 1024**3
 PROCESS_CAP_BYTES = 8 * 1024**3
 ROUND_STAGES = [16,32,48,64]
+ECONOMY_INTERVAL_TICKS = tuple(range(5000, 45001, 5000))
 FIX_SAFETY_SWITCHES = frozenset("K_cn2_unit_repair AL_emergency_net_loss AN_combat_veto AG_assault_fanout BJ_squad_hysteresis BK_squad_order_dedup BL_protection_episode_guard BN_squad_pool_fixes BO_squad_move_dedup".split())
 _, _ALL_GROUPS, _ = increment.load_spec(pathlib.Path(__file__).with_name("increment_switches.yaml"))
 BEHAVIOR_SWITCHES = tuple(name for name in _ALL_GROUPS if name not in FIX_SAFETY_SWITCHES)
@@ -75,6 +77,48 @@ def slots_available(team_size, free_ram_bytes, active_private_bytes=(), active_s
  if team_size>=3: return active_slots==0
  return active_slots<max_small_slots and not any(size>=3 for size in active_team_sizes)
 
+class SqliteSlotCounter:
+ """Process-shared lease counter. Runtime must heartbeat and monitor process/RAM continuously."""
+ def __init__(self,database_path,lease_seconds=3600):
+  self.database_path=pathlib.Path(database_path).resolve();self.lease_seconds=lease_seconds
+  require(type(lease_seconds)is int and lease_seconds>0,"lease duration must be positive")
+  self.database_path.parent.mkdir(parents=True,exist_ok=True)
+  with self._connect() as db: db.execute("CREATE TABLE IF NOT EXISTS active_slots (cell_id TEXT PRIMARY KEY,pid INTEGER NOT NULL,team_size INTEGER NOT NULL,private_bytes INTEGER NOT NULL,expires_at REAL NOT NULL)")
+ @contextmanager
+ def _connect(self):
+  db=sqlite3.connect(self.database_path,timeout=30,isolation_level=None)
+  try:
+   db.execute("PRAGMA journal_mode=WAL");db.execute("PRAGMA busy_timeout=30000");yield db
+  finally: db.close()
+ @staticmethod
+ def _pid_alive(pid):
+  try: os.kill(pid,0);return True
+  except ProcessLookupError:return False
+  except PermissionError:return True
+  except OSError:return False
+ def _begin(self,db):
+  db.execute("BEGIN IMMEDIATE");now=time.time()
+  for cell,pid in db.execute("SELECT cell_id,pid FROM active_slots WHERE expires_at < ?",(now,)).fetchall():
+   if not self._pid_alive(pid):db.execute("DELETE FROM active_slots WHERE cell_id=?",(cell,))
+ def acquire(self,cell_id,team_size,free_ram_bytes,pid=None):
+  pid=os.getpid() if pid is None else pid
+  with self._connect() as db:
+   self._begin(db);active=db.execute("SELECT team_size,private_bytes FROM active_slots").fetchall()
+   allowed=slots_available(team_size,free_ram_bytes,[x[1] for x in active],len(active),[x[0] for x in active])
+   duplicate=db.execute("SELECT 1 FROM active_slots WHERE cell_id=?",(cell_id,)).fetchone() is not None
+   if not allowed or duplicate:db.rollback();return False
+   db.execute("INSERT INTO active_slots VALUES(?,?,?,?,?)",(cell_id,pid,team_size,0,time.time()+self.lease_seconds));db.commit();return True
+ def heartbeat(self,cell_id,private_bytes=None):
+  if private_bytes is not None: require(type(private_bytes)is int and 0<=private_bytes<PROCESS_CAP_BYTES,"process memory cap reached")
+  with self._connect() as db:
+   self._begin(db)
+   cur=db.execute("UPDATE active_slots SET private_bytes=COALESCE(?,private_bytes),expires_at=? WHERE cell_id=?",(private_bytes,time.time()+self.lease_seconds,cell_id))
+   if cur.rowcount!=1:db.rollback();raise ValueError("unknown or expired slot owner")
+   db.commit()
+ def release(self,cell_id):
+  with self._connect() as db:
+   self._begin(db);db.execute("DELETE FROM active_slots WHERE cell_id=?",(cell_id,));db.commit()
+
 class SlotCounter:
  """Thread-safe in-process reservation counter; persistence/expiry belongs to runtime adapter."""
  def __init__(self): self._lock=Lock(); self._active={}; self._sizes={}
@@ -103,6 +147,23 @@ def ai_payload_sha(root,switch=None):
  return digest.hexdigest()
 def require(ok,msg):
  if not ok: raise ValueError(msg)
+
+def normalized_timeline(record):
+ """Read dict rows or the canonical flattened stats timeline."""
+ timeline=record.get("stats_timeline")
+ if isinstance(timeline,list) and all(isinstance(row,dict) for row in timeline): return timeline
+ stats=record.get("stats")
+ fields=stats.get("stats_timeline_fields") if isinstance(stats,dict) else None
+ rows=stats.get("stats_timeline") if isinstance(stats,dict) else None
+ if not isinstance(fields,str) or not isinstance(rows,list): return []
+ names=fields.split(",")
+ return [dict(zip(names,row)) for row in rows if isinstance(row,list) and len(row)==len(names)]
+
+def paired_bootstrap_interval(values,seed):
+ """Deterministic percentile CI over independent matched-pair effects."""
+ if not values: return None
+ rng=random.Random(seed); samples=sorted(sum(rng.choice(values) for _ in values)/len(values) for _ in range(4000))
+ return [samples[int(.025*(len(samples)-1))],samples[int(.975*(len(samples)-1))]]
 
 def make_jobs(manifest):
  seeds=manifest.get("seeds")
@@ -170,7 +231,7 @@ def dry_run(m,root,engine_root=None,minutes_per_game=8.5,setup_hours=2.0):
  slot_hours=round((small_games/3+large_games)*minutes_per_game/60+setup_hours,2)
  serial_range=[round(len(jobs)*5/60+setup_hours,2),round(len(jobs)*12/60+setup_hours,2)]
  slot_range=[round((small_games/3+large_games)*5/60+setup_hours,2),round((small_games/3+large_games)*12/60+setup_hours,2)]
- return {"mode":"NO_LAUNCH_DRY_RUN","switch":SWITCH,"setups":len(SETUPS),"pairs":32,"games":len(jobs),"jobs":jobs,"launches":0,"execution_authorized":False,"worker_hours_estimate_at_8_5m_each":serial_hours,"parallel_slot_wall_estimate_hours_at_8_5m_each":slot_hours,"parallel_slot_wall_estimate_range_hours_5_to_12m_each":slot_range,"serial_wall_estimate_range_hours_5_to_12m_each":serial_range,"map_engine_acceptance_and_symmetric_spawn_proof":"PENDING_ENGINE_PREFLIGHT","round_stages":ROUND_STAGES,"acceptance_thresholds":m["acceptance_thresholds"],"slot_policy":m["slot_policy"],"ratchet_baseline_manifest_sha256":m["baseline_manifest_sha256"],"missing_campaign_gates":["reviewed integration/source/engine/tool/AI payload hashes frozen in final manifest","actual map acceptance and symmetric spawn proof on pinned engine","runtime driver backend: seat-specific hard bot trees, map.yaml proof, watchdogs, immutable receipts, process-shared slot counter and PID cleanup","A5 parity and analyzer fixture/negative-control acceptance"]}
+ return {"mode":"NO_LAUNCH_DRY_RUN","switch":SWITCH,"setups":len(SETUPS),"pairs":32,"games":len(jobs),"jobs":jobs,"launches":0,"execution_authorized":False,"worker_hours_estimate_at_8_5m_each":serial_hours,"parallel_slot_wall_estimate_hours_at_8_5m_each":slot_hours,"parallel_slot_wall_estimate_range_hours_5_to_12m_each":slot_range,"serial_wall_estimate_range_hours_5_to_12m_each":serial_range,"map_engine_acceptance_and_symmetric_spawn_proof":"PENDING_ENGINE_PREFLIGHT","round_stages":ROUND_STAGES,"acceptance_thresholds":m["acceptance_thresholds"],"slot_policy":m["slot_policy"],"ratchet_baseline_manifest_sha256":m["baseline_manifest_sha256"],"missing_campaign_gates":["reviewed integration/source/engine/tool/AI payload hashes frozen in final manifest","actual map acceptance and symmetric spawn proof on pinned engine","runtime launch orchestration: seat-specific bot trees/map.yaml producer, live RSS and wall/stall watchdogs, immutable receipts/resume, PID-scoped cleanup; SQLite leases need live integration","A5 parity and analyzer fixture/negative-control acceptance"]}
 
 def adjudicate(records, receipt, job, manifest_sha):
  """One game -> one verdict; incomplete/cap evidence is never converted to a loss."""
@@ -216,10 +277,15 @@ def adjudicate(records, receipt, job, manifest_sha):
   if arm!=("control" if side==job["control_side"] else "treatment"):
    return {"verdict":"INVALID_UNKNOWN","reason":"resolved arm disagrees with side swap"}
   side_outcomes[side].append(outcome)
-  timeline=r.get("stats_timeline")
-  eco={k:(timeline[-1].get(k) if isinstance(timeline,list) and timeline and type(timeline[-1].get(k)) is int else None) for k in ("earned","spent","banked")}
-  if all(type(v)is int for v in eco.values()):
-   for k,v in eco.items(): arm_totals[arm][k]+=v
+  timeline=normalized_timeline(r)
+  final=timeline[-1] if timeline else {}
+  eco={k:(final.get(k) if type(final.get(k)) is int else None) for k in ("earned","spent","banked")}
+  eco["tick"]=final.get("tick") if type(final.get("tick")) is int else None
+  eco["intervals"]={str(tick):next(({"earned":row.get("earned"),"spent":row.get("spent"),"banked":row.get("banked")} for row in timeline if row.get("tick")==tick and all(type(row.get(k)) is int for k in ("earned","spent","banked"))),None) for tick in ECONOMY_INTERVAL_TICKS}
+  events=r.get("campaign_events")
+  eco["campaign_events"]=events if isinstance(events,list) and all(isinstance(e,dict) and isinstance(e.get("kind"),str) and type(e.get("tick")) is int for e in events) else None
+  if all(type(eco.get(k)) is int for k in ("earned","spent","banked")):
+   for k in ("earned","spent","banked"): arm_totals[arm][k]+=eco[k]
   seat_rows.append({"home":home,"side":side,"arm":arm,"faction":seat.get("faction"),"outcome":outcome,"economy":eco})
  if any(len(side_outcomes[s])!=job["team_size"] for s in ("A","B")):
   return {"verdict":"INVALID_UNKNOWN","reason":"resolved sides lack expected seat count"}
@@ -230,12 +296,22 @@ def adjudicate(records, receipt, job, manifest_sha):
   arm_totals[arm]["earned_spent_ratio"]=arm_totals[arm]["earned"]/spent if spent else None
  if cap:
   return {"verdict":"CENSORED_CAP","reason":"verified cap","team_totals":arm_totals,"seats":seat_rows,
-          "peak_memory_bytes":receipt.get("peak_memory_bytes"),"duration_ticks":receipt.get("duration_ticks")}
+          "peak_memory_bytes":receipt.get("peak_memory_bytes"),"duration_ticks":receipt.get("duration_ticks"),
+          "telemetry_intervals_ticks":list(ECONOMY_INTERVAL_TICKS)}
  winning=[s for s in ("A","B") if all(x=="won" for x in side_outcomes[s])]
  if len(winning)!=1 or any(x=="won" for x in side_outcomes["A"] if winning!=["A"]) or any(x=="won" for x in side_outcomes["B"] if winning!=["B"]):
   return {"verdict":"INVALID_UNKNOWN","reason":"team outcomes are mixed or lack one winner"}
  winner=winning[0]; arm="treatment" if winner==job["treatment_side"] else "control"
- return {"verdict":"TREATMENT_WIN" if arm=="treatment" else "CONTROL_WIN","winner_side":winner,"team_totals":arm_totals,"seats":seat_rows,"synergy":"NOT_IDENTIFIABLE_FROM_PILOT (team-size strata lack matched individual counterfactuals)"}
+ event_totals={a:{} for a in arm_totals}; event_first={a:{} for a in arm_totals}
+ for seat in seat_rows:
+  events=seat["economy"].get("campaign_events")
+  if events is None: continue
+  for event in events:
+   kind=event["kind"]; event_totals[seat["arm"]][kind]=event_totals[seat["arm"]].get(kind,0)+1
+   event_first[seat["arm"]][kind]=min(event["tick"],event_first[seat["arm"]].get(kind,event["tick"]))
+ return {"verdict":"TREATMENT_WIN" if arm=="treatment" else "CONTROL_WIN","winner_side":winner,"team_totals":arm_totals,"seats":seat_rows,
+         "campaign_events":{"status":"RECORDED" if any(s["economy"].get("campaign_events") is not None for s in seat_rows) else "UNKNOWN","counts":event_totals,"first_tick":event_first},
+         "synergy":"NOT_IDENTIFIABLE_FROM_PILOT (team-size strata lack matched individual counterfactuals)"}
 
 def analyze(m, manifest_sha, receipts, rows):
  jobs={j["cell_id"]:j for j in make_jobs(m)}; by_cell={}; uid_receipts={}
@@ -264,19 +340,36 @@ def analyze(m, manifest_sha, receipts, rows):
   pairs=[]
   for pair in (0,1):
    pg=[r for r in group if r["pair"]==pair]
-   if len(pg)==2 and all(r["verdict"] in ("TREATMENT_WIN","CONTROL_WIN") for r in pg):
-    t=sum(r["verdict"]=="TREATMENT_WIN" for r in pg); pairs.append(t-(2-t))
+   if len(pg)==2 and {r["game_in_pair"] for r in pg}=={0,1} and all(r["verdict"] in ("TREATMENT_WIN","CONTROL_WIN") for r in pg):
+    t=sum(r["verdict"]=="TREATMENT_WIN" for r in pg); pairs.append((t-(2-t))/2)
   totals={arm:{metric:sum((r.get("team_totals") or {}).get(arm,{}).get(metric,0) for r in group if r.get("team_totals")) for metric in ("earned","spent","banked")} for arm in ("control","treatment")}
   for arm in totals:
    spent=totals[arm]["spent"];totals[arm]["earned_spent_ratio"]=totals[arm]["earned"]/spent if spent else None
+  interval_metrics={arm:{str(tick):{"earned":0,"spent":0,"banked":0,"seat_samples":0} for tick in ECONOMY_INTERVAL_TICKS} for arm in ("control","treatment")}
+  event_metrics={arm:{"status":"UNKNOWN","reported_seats":0,"missing_seats":0,"counts":{},"first_tick":{}} for arm in ("control","treatment")}
+  for game in group:
+   for seat in game.get("seats",[]):
+    arm=seat.get("arm"); eco=seat.get("economy",{})
+    if arm not in interval_metrics: continue
+    for tick,values in eco.get("intervals",{}).items():
+     if values is None: continue
+     for metric in ("earned","spent","banked"): interval_metrics[arm][tick][metric]+=values[metric]
+     interval_metrics[arm][tick]["seat_samples"]+=1
+    if eco.get("campaign_events") is None: event_metrics[arm]["missing_seats"]+=1
+    else:
+     event_metrics[arm]["status"]="RECORDED";event_metrics[arm]["reported_seats"]+=1
+    for event in (eco.get("campaign_events") or []):
+     kind=event["kind"]; event_metrics[arm]["counts"][kind]=event_metrics[arm]["counts"].get(kind,0)+1
+     event_metrics[arm]["first_tick"][kind]=min(event["tick"],event_metrics[arm]["first_tick"].get(kind,event["tick"]))
   setups.append({"setup":setup,"team_size":size,"map":mapname,"planned_games":4,"complete_natural_pairs":len(pairs),"paired_win_differences":pairs,
+                 "paired_win_effect":sum(pairs)/len(pairs) if pairs else None,"paired_bootstrap_95ci":paired_bootstrap_interval(pairs,f"{setup}:{len(pairs)}"),
                  "natural_games":sum(r["verdict"] in ("TREATMENT_WIN","CONTROL_WIN") for r in group),
                  "censored_games":sum(r["verdict"]=="CENSORED_CAP" for r in group),
                  "incomplete_games":sum(r["verdict"]=="INCOMPLETE_UNKNOWN" for r in group),
                  "invalid_games":sum(r["verdict"]=="INVALID_UNKNOWN" for r in group),
-                 "team_economy_totals":totals,
+                 "team_economy_totals":totals,"fixed_interval_team_economy":interval_metrics,"campaign_event_metrics":event_metrics,
                  "synergy":"NOT_IDENTIFIABLE_FROM_PILOT (team-size strata lack matched individual counterfactuals)"})
- return {"schema":1,"switch":SWITCH,"games":result,"setups":setups,"unplanned_receipt_cells":extra,"unplanned_game_uids":extra_uids,"note":"One game is one observation; seats are clustered. Natural win effect requires complete side-swapped pair. Synergy is not estimated because individual and team setups differ in map/roster context."}
+ return {"schema":1,"switch":SWITCH,"games":result,"setups":setups,"unplanned_receipt_cells":extra,"unplanned_game_uids":extra_uids,"telemetry_intervals_ticks":list(ECONOMY_INTERVAL_TICKS),"note":"One game is one observation; seats are clustered. Natural win effect and paired bootstrap interval require complete side-swapped pairs. Synergy is not estimated because individual and team setups differ in map/roster context."}
 
 def main(argv=None):
  p=argparse.ArgumentParser(description=__doc__); s=p.add_subparsers(dest="cmd",required=True)

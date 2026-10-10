@@ -1,4 +1,4 @@
-import pathlib, sys, unittest
+import pathlib, sys, tempfile, unittest
 ROOT=pathlib.Path(__file__).resolve().parents[2]
 sys.path.insert(0,str(ROOT/"tools"/"ai"))
 import ab_campaign_pilot as pilot
@@ -64,6 +64,26 @@ class PilotPlanTests(unittest.TestCase):
   self.assertEqual(64,len(result["games"]))
   self.assertEqual(16,len(result["setups"]))
   self.assertTrue(all(x["verdict"]=="INCOMPLETE_UNKNOWN" for x in result["games"]))
+  self.assertTrue(all(x["paired_win_effect"] is None and x["paired_bootstrap_95ci"] is None for x in result["setups"]))
+
+
+ def test_analyzer_pairs_only_natural_games_and_reports_interval_metrics(self):
+  m=manifest(); jobs=[j for j in pilot.make_jobs(m) if j["setup"]==pilot.SETUPS[0][0]]
+  receipts=[]; rows=[]
+  for job in jobs:
+   uid="g-"+job["cell_id"]
+   treatment_wins=(job["pair"]==0)
+   receipts.append({"cell_id":job["cell_id"],"game_uid":uid,"manifest_sha256":"a"*64,"switch":job["switch"],"setup":job["setup"],"map":job["map"],"map_sha256":job["map_sha256"],"seed":job["seed"],"pair":job["pair"],"game_in_pair":job["game_in_pair"],"control_side":job["control_side"],"treatment_side":job["treatment_side"],"arm_bot_types":job["arm_bot_types"],"status":"NATURAL_END","end_reason":"natural","seat_proof_source":"generated_map.yaml","map_yaml_sha256":"b"*64,"seats":job["seat_assignments"]})
+   for seat in job["seat_assignments"]:
+    won=(seat["side"]==job["treatment_side"])==treatment_wins
+    rows.append({"game_uid":uid,"player":{"home":seat["home"],"bot_type":seat["bot_type"],"faction":seat["faction"],"outcome":"won" if won else "lost"},"stats":{"stats_timeline_fields":"tick,earned,spent,banked","stats_timeline":[[5000,10,4,6],[45000,90,40,50]]},"campaign_events":[{"kind":"refinery_placed","tick":7000}]})
+  result=pilot.analyze(m,"a"*64,receipts,rows)
+  setup=next(x for x in result["setups"] if x["setup"]==jobs[0]["setup"])
+  self.assertEqual(2,setup["complete_natural_pairs"])
+  self.assertEqual([1.0,-1.0],setup["paired_win_differences"])
+  self.assertEqual(0.0,setup["paired_win_effect"])
+  self.assertEqual(4,setup["fixed_interval_team_economy"]["treatment"]["5000"]["seat_samples"])
+  self.assertEqual(4,setup["campaign_event_metrics"]["treatment"]["counts"]["refinery_placed"])
 
  def test_ratchet_acceptance_regression_and_slot_rules(self):
   self.assertEqual({"control_groups":["BU_harvester_logistics"],"treatment_groups":["BU_harvester_logistics","U_ut4_expansion_appetite"]},pilot.treatment_baseline(["BU_harvester_logistics"],"U_ut4_expansion_appetite"))
@@ -81,6 +101,15 @@ class PilotPlanTests(unittest.TestCase):
   self.assertTrue(c.acquire("large",4,floor));self.assertFalse(c.acquire("small",1,floor));
   with self.assertRaises(ValueError): c.update_private_bytes("large",8*1024**3)
   self.assertFalse(pilot.slots_available(1,floor-1))
+  with tempfile.TemporaryDirectory() as temp:
+   db1=pilot.SqliteSlotCounter(pathlib.Path(temp)/"slots.sqlite")
+   db2=pilot.SqliteSlotCounter(pathlib.Path(temp)/"slots.sqlite")
+   self.assertTrue(db1.acquire("x",1,floor));self.assertTrue(db2.acquire("y",2,floor))
+   self.assertTrue(db1.acquire("z",1,floor));self.assertFalse(db2.acquire("fourth",1,floor))
+   self.assertFalse(db2.acquire("exclusive",4,floor));db2.heartbeat("x",1024);db1.release("x");db2.release("y");db1.release("z")
+   self.assertTrue(db2.acquire("exclusive",4,floor));self.assertFalse(db1.acquire("small",1,floor))
+   with self.assertRaisesRegex(ValueError,"memory cap"): db2.heartbeat("exclusive",8*1024**3)
+   db2.release("exclusive");db2.release("y");db1.release("z")
 
  def test_switch_order_covers_the_frozen_sixty_group_catalog(self):
   import apply_increment_switches as switches
