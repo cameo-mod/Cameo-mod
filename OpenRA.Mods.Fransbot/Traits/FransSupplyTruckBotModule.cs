@@ -116,7 +116,7 @@ namespace OpenRA.Mods.Common.Traits
 				return;
 
 			// Stagger evaluations so that several bots do not all scan on the same tick.
-			scanTicks = BotRng.For(player).Next(0, Info.ScanInterval);
+			scanTicks = BotRng.For(player, nameof(FransSupplyTruckBotModule)).Next(0, Info.ScanInterval);
 		}
 
 		void IBotTick.BotTick(IBot bot)
@@ -194,7 +194,7 @@ namespace OpenRA.Mods.Common.Traits
 			if (validTypes.Length == 0)
 				return;
 
-			var supplyTruckType = validTypes.Random(BotRng.For(player));
+			var supplyTruckType = validTypes.Random(BotRng.For(player, nameof(FransSupplyTruckBotModule)));
 			unitBuilder.RequestUnitProduction(bot, supplyTruckType);
 			awaitingProductionConfirmation = true;
 			if (!retryUnconfirmedRequest)

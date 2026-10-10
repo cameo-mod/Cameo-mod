@@ -20602,3 +20602,24 @@ land ticks later or never) all produce identical disappearances. Corrected on
   sanctioned fallback. Regressions exercise the production predicate: requirement-flip
   (no install -> `Removed`), true install -> `Placed`, unknown-type and still-accepting
   negatives.
+
+## 2026-10-10 - A1-RNG: per-module bot RNG streams (devin/a1-bot-rng)
+
+* `BotRng.For(player, moduleKey)` / `For(IBot, moduleKey)`: each bot player now
+  owns a `ConditionalWeakTable<Player, ModuleStreams>` whose `ByKey` dictionary
+  lazily creates one `MersenneTwister` per module key. Module seed =
+  `PlayerSeed(lobby, salt) ^ Fnv1a(key)` - so any module's draw count can change
+  without shifting any other module's sequence (the F1 cross-contamination fix).
+* Keys are compile-time `nameof(<enclosing class>)` at every call site - never
+  runtime/machine-derived strings, so cross-client seeds can't diverge.
+  95 sites migrated across OpenRA.Mods.CA (incl. queue manager, squad states -
+  each state class gets its own stream), OpenRA.Mods.Cameo, OpenRA.Mods.Fransbot.
+  `AIUtils` helpers key on `AIUtils`.
+* `PlayerSeed`/`ModuleSeed`/`Fnv1a` are public pure functions so the tests drive
+  the same seed math the production call composes; unkeyed `For(player)` still
+  works (normalizes to the empty key) for compatibility.
+* Tests (+6, `BotRngTest`): published FNV-1a32 vectors, null/empty key
+  normalization, module-stream independence, sibling-draw isolation (200 draws
+  on stream A leave B bit-identical), same-seed same-key 1024-draw parity, and
+  per-player isolation with identical keys.
+* Suite 1304/1304, Release clean. No launches per task gate.

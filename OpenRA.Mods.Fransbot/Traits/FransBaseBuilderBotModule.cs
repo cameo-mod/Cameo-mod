@@ -1399,7 +1399,7 @@ namespace OpenRA.Mods.Common.Traits
 
 		bool UseDirectionalPlacement() =>
 			Info.DirectionalPlacementChance >= 100 ||
-			(Info.DirectionalPlacementChance > 0 && BotRng.For(player).Next(100) < Info.DirectionalPlacementChance);
+			(Info.DirectionalPlacementChance > 0 && BotRng.For(player, nameof(FransBaseBuilderBotModule)).Next(100) < Info.DirectionalPlacementChance);
 
 		CPos StrategicRearTarget(CPos baseCenter)
 		{
@@ -1820,7 +1820,7 @@ namespace OpenRA.Mods.Common.Traits
 			// Ground Commander objective is the primary rally direction while a real MOVE/FIGHT/DEFEND mission exists.
 			// Otherwise the stable strategic front is used. Rally is only a local producer exit hint; it never owns units.
 			if (!TryGetRallyDirectionTarget(out var rallyTarget) || !Info.ForwardStructureTypes.Contains(producer.Info.Name))
-				return possible.Random(BotRng.For(player));
+				return possible.Random(BotRng.For(player, nameof(FransBaseBuilderBotModule)));
 
 			var forward = rallyTarget - producer.Location;
 			var minDistanceSquared = Info.StrategicRallyMinimumDistance * Info.StrategicRallyMinimumDistance;
@@ -1844,7 +1844,7 @@ namespace OpenRA.Mods.Common.Traits
 				.ToArray();
 
 			if (strategic.Length == 0)
-				return possible.Random(BotRng.For(player));
+				return possible.Random(BotRng.For(player, nameof(FransBaseBuilderBotModule)));
 
 			return strategic[(int)(producer.ActorID % (uint)strategic.Length)];
 		}

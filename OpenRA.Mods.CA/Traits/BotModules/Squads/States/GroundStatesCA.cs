@@ -57,7 +57,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 		{
 			if (highValueCheck)
 			{
-				var highValueTargetRoll = BotRng.For(owner.Bot).Next(0, 100);
+				var highValueTargetRoll = BotRng.For(owner.Bot, nameof(GroundStateBaseCA)).Next(0, 100);
 
 				if (owner.SquadManager.Info.HighValueTargetPriority > highValueTargetRoll)
 				{
@@ -658,7 +658,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 					// desync the shared random stream whenever the gate is off.
 					var (maxRoutes, useIndirectRoutes) = MarchEvalCA.RouteParams(owner.Type,
 						owner.SquadManager.Info.HarassRouteCount, owner.SquadManager.Info.IndirectRouteChance,
-						() => BotRng.For(owner.Bot).Next(100));
+						() => BotRng.For(owner.Bot, nameof(GroundUnitsAttackMoveStateCA)).Next(100));
 
 					if (maxRoutes > 2 || useIndirectRoutes)
 					{
@@ -683,7 +683,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 						if (routes.Count > 0)
 						{
-							var chosen = routes.Random(BotRng.For(owner.Bot));
+							var chosen = routes.Random(BotRng.For(owner.Bot, nameof(GroundUnitsAttackMoveStateCA)));
 							currentRoute = chosen.Skip(1).ToList();
 							currentWaypointIndex = 0;
 							lastWaypointUpdateTick = owner.World.WorldTick;
@@ -1308,7 +1308,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 			// The harasser launch quorum (upstream CA): a trickle of one or two
 			// raiders is a waste — wait for a squad that can hurt a harvester line.
-			if (!ShouldHarass(owner.Units.Count, owner.SquadManager.Info.HarassMinLaunchSize, BotRng.For(owner.Bot).Next(100)))
+			if (!ShouldHarass(owner.Units.Count, owner.SquadManager.Info.HarassMinLaunchSize, BotRng.For(owner.Bot, nameof(HarasserUnitsIdleStateCA)).Next(100)))
 				return;
 
 			// High-value targets first (harvester lines, expansions), through the

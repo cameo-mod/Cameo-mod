@@ -9,6 +9,7 @@
  */
 #endregion
 
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using OpenRA.Support;
 using OpenRA.Traits;
@@ -27,13 +28,31 @@ namespace OpenRA.Mods.CA
 	/// bot's rolls never perturb another's.
 	/// </para>
 	/// <para>
+	/// Within one bot player each module draws from its own keyed stream
+	/// (<see cref="For(Player, string)"/>): the module key is mixed in with an FNV-1a salt,
+	/// so adding, removing, or reordering draws in one module can never shift another
+	/// module's sequence. Keys must be compile-time constants (<c>nameof</c>) — never a
+	/// runtime-derived or machine-dependent string, or cross-client seeds would diverge.
+	/// </para>
+	/// <para>
 	/// Synced world state must still use <c>World.SharedRandom</c> (mirrored on all clients).
 	/// Host-only cosmetic state stays on <c>World.LocalRandom</c>.
 	/// </para>
 	/// </summary>
 	public static class BotRng
 	{
-		static readonly ConditionalWeakTable<Player, MersenneTwister> Streams = new();
+		sealed class ModuleStreams
+		{
+			public readonly int BaseSeed;
+			public readonly Dictionary<string, MersenneTwister> ByKey = new();
+
+			public ModuleStreams(int baseSeed)
+			{
+				BaseSeed = baseSeed;
+			}
+		}
+
+		static readonly ConditionalWeakTable<Player, ModuleStreams> Streams = new();
 
 		public static MersenneTwister For(IBot bot)
 		{
@@ -42,12 +61,61 @@ namespace OpenRA.Mods.CA
 
 		public static MersenneTwister For(Player player)
 		{
-			return Streams.GetValue(player, p =>
+			return For(player, null);
+		}
+
+		public static MersenneTwister For(IBot bot, string moduleKey)
+		{
+			return For(bot.Player, moduleKey);
+		}
+
+		public static MersenneTwister For(Player player, string moduleKey)
+		{
+			var streams = Streams.GetValue(player, p => new ModuleStreams(PlayerSeed(p)));
+			var key = moduleKey ?? string.Empty;
+			if (!streams.ByKey.TryGetValue(key, out var stream))
+				stream = streams.ByKey[key] = new MersenneTwister(ModuleSeed(streams.BaseSeed, key));
+			return stream;
+		}
+
+		static int PlayerSeed(Player p)
+		{
+			var lobbySeed = p.World.LobbyInfo.GlobalSettings.RandomSeed;
+			var salt = p.PlayerActor != null ? unchecked((int)p.PlayerActor.ActorID + 1) : p.ClientIndex + 1;
+			return PlayerSeed(lobbySeed, salt);
+		}
+
+		/// <summary>
+		/// The per-bot-player base seed: lobby seed mixed with the bot's stable player salt.
+		/// Pure function, world-free — exposed so tests can verify same-seed reproducibility
+		/// end to end without constructing a World.
+		/// </summary>
+		public static int PlayerSeed(int lobbySeed, int playerSalt)
+		{
+			return unchecked(lobbySeed + playerSalt * (int)0x9E3779B9u);
+		}
+
+		/// <summary>
+		/// The seed for one module's stream: the player base seed XORed with the FNV-1a
+		/// hash of the module key. Pure function — two different keys give two different
+		/// streams, and the same (seed, key) pair always gives the same stream.
+		/// </summary>
+		public static int ModuleSeed(int playerSeed, string moduleKey)
+		{
+			return unchecked(playerSeed ^ (int)Fnv1a(moduleKey ?? string.Empty));
+		}
+
+		/// <summary>FNV-1a 32-bit — stable, platform-independent string salt.</summary>
+		public static uint Fnv1a(string text)
+		{
+			var hash = 2166136261u;
+			foreach (var c in text)
 			{
-				var lobbySeed = p.World.LobbyInfo.GlobalSettings.RandomSeed;
-				var salt = p.PlayerActor != null ? unchecked((int)p.PlayerActor.ActorID + 1) : p.ClientIndex + 1;
-				return new MersenneTwister(unchecked(lobbySeed + salt * (int)0x9E3779B9u));
-			});
+				hash ^= c;
+				hash *= 16777619u;
+			}
+
+			return hash;
 		}
 	}
 }

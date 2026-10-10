@@ -122,7 +122,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			mainTargetProvider = self.TraitsImplementing<IBotMainTargetProvider>().FirstOrDefault();
 			unitBuilders = self.TraitsImplementing<IBotRequestUnitProduction>().ToArray();
 			leadProviders = self.Owner.PlayerActor.TraitsImplementing<IBotPersonalityLeadProvider>().ToArray();
-			scanTicks = BotRng.For(player).Next(0, Info.ScanInterval);
+			scanTicks = BotRng.For(player, nameof(ScoutBotModule)).Next(0, Info.ScanInterval);
 		}
 
 		void IBotEnabled.BotEnabled(IBot bot) { }
