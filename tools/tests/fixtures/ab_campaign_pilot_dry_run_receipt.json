@@ -25,7 +25,27 @@
       "arm_bot_types": {
         "control": "hard_control",
         "treatment": "hard_treatment"
-      }
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_gdi",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_gdi",
+          "team_slot": 0
+        }
+      ]
     },
     {
       "cell_id": "1v1_nuclear_gdi|1337|1",
@@ -47,7 +67,27 @@
       "arm_bot_types": {
         "control": "hard_control",
         "treatment": "hard_treatment"
-      }
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_gdi",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_gdi",
+          "team_slot": 0
+        }
+      ]
     },
     {
       "cell_id": "1v1_nuclear_gdi|7331|0",
@@ -69,7 +109,27 @@
       "arm_bot_types": {
         "control": "hard_control",
         "treatment": "hard_treatment"
-      }
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_gdi",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_gdi",
+          "team_slot": 0
+        }
+      ]
     },
     {
       "cell_id": "1v1_nuclear_gdi|7331|1",
@@ -91,7 +151,27 @@
       "arm_bot_types": {
         "control": "hard_control",
         "treatment": "hard_treatment"
-      }
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_gdi",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_gdi",
+          "team_slot": 0
+        }
+      ]
     },
     {
       "cell_id": "1v1_nuclear_nod|1337|0",
@@ -113,7 +193,27 @@
       "arm_bot_types": {
         "control": "hard_control",
         "treatment": "hard_treatment"
-      }
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_nod",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_nod",
+          "team_slot": 0
+        }
+      ]
     },
     {
       "cell_id": "1v1_nuclear_nod|1337|1",
@@ -135,7 +235,27 @@
       "arm_bot_types": {
         "control": "hard_control",
         "treatment": "hard_treatment"
-      }
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_nod",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_nod",
+          "team_slot": 0
+        }
+      ]
     },
     {
       "cell_id": "1v1_nuclear_nod|7331|0",
@@ -157,7 +277,27 @@
       "arm_bot_types": {
         "control": "hard_control",
         "treatment": "hard_treatment"
-      }
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_nod",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_nod",
+          "team_slot": 0
+        }
+      ]
     },
     {
       "cell_id": "1v1_nuclear_nod|7331|1",
@@ -179,7 +319,27 @@
       "arm_bot_types": {
         "control": "hard_control",
         "treatment": "hard_treatment"
-      }
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_nod",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_nod",
+          "team_slot": 0
+        }
+      ]
     },
     {
       "cell_id": "1v1_satans_allies|1337|0",
@@ -201,7 +361,27 @@
       "arm_bot_types": {
         "control": "hard_control",
         "treatment": "hard_treatment"
-      }
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_allies",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_allies",
+          "team_slot": 0
+        }
+      ]
     },
     {
       "cell_id": "1v1_satans_allies|1337|1",
@@ -223,7 +403,27 @@
       "arm_bot_types": {
         "control": "hard_control",
         "treatment": "hard_treatment"
-      }
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_allies",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_allies",
+          "team_slot": 0
+        }
+      ]
     },
     {
       "cell_id": "1v1_satans_allies|7331|0",
@@ -245,7 +445,27 @@
       "arm_bot_types": {
         "control": "hard_control",
         "treatment": "hard_treatment"
-      }
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_allies",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_allies",
+          "team_slot": 0
+        }
+      ]
     },
     {
       "cell_id": "1v1_satans_allies|7331|1",
@@ -267,7 +487,27 @@
       "arm_bot_types": {
         "control": "hard_control",
         "treatment": "hard_treatment"
-      }
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_allies",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_allies",
+          "team_slot": 0
+        }
+      ]
     },
     {
       "cell_id": "1v1_satans_soviets|1337|0",
@@ -289,7 +529,27 @@
       "arm_bot_types": {
         "control": "hard_control",
         "treatment": "hard_treatment"
-      }
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_soviets",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_soviets",
+          "team_slot": 0
+        }
+      ]
     },
     {
       "cell_id": "1v1_satans_soviets|1337|1",
@@ -311,7 +571,27 @@
       "arm_bot_types": {
         "control": "hard_control",
         "treatment": "hard_treatment"
-      }
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_soviets",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_soviets",
+          "team_slot": 0
+        }
+      ]
     },
     {
       "cell_id": "1v1_satans_soviets|7331|0",
@@ -333,7 +613,27 @@
       "arm_bot_types": {
         "control": "hard_control",
         "treatment": "hard_treatment"
-      }
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_soviets",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_soviets",
+          "team_slot": 0
+        }
+      ]
     },
     {
       "cell_id": "1v1_satans_soviets|7331|1",
@@ -355,7 +655,27 @@
       "arm_bot_types": {
         "control": "hard_control",
         "treatment": "hard_treatment"
-      }
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_soviets",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_soviets",
+          "team_slot": 0
+        }
+      ]
     },
     {
       "cell_id": "2v2_red_gdi_nod|1337|0",
@@ -378,7 +698,45 @@
       "arm_bot_types": {
         "control": "hard_control",
         "treatment": "hard_treatment"
-      }
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_gdi",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_nod",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_gdi",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_nod",
+          "team_slot": 1
+        }
+      ]
     },
     {
       "cell_id": "2v2_red_gdi_nod|1337|1",
@@ -401,7 +759,45 @@
       "arm_bot_types": {
         "control": "hard_control",
         "treatment": "hard_treatment"
-      }
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_nod",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_gdi",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_nod",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_gdi",
+          "team_slot": 1
+        }
+      ]
     },
     {
       "cell_id": "2v2_red_gdi_nod|7331|0",
@@ -424,7 +820,45 @@
       "arm_bot_types": {
         "control": "hard_control",
         "treatment": "hard_treatment"
-      }
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_gdi",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_nod",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_gdi",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_nod",
+          "team_slot": 1
+        }
+      ]
     },
     {
       "cell_id": "2v2_red_gdi_nod|7331|1",
@@ -447,7 +881,45 @@
       "arm_bot_types": {
         "control": "hard_control",
         "treatment": "hard_treatment"
-      }
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_nod",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_gdi",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_nod",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_gdi",
+          "team_slot": 1
+        }
+      ]
     },
     {
       "cell_id": "2v2_red_gdi_allies|1337|0",
@@ -470,7 +942,45 @@
       "arm_bot_types": {
         "control": "hard_control",
         "treatment": "hard_treatment"
-      }
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_gdi",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_allies",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_gdi",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_allies",
+          "team_slot": 1
+        }
+      ]
     },
     {
       "cell_id": "2v2_red_gdi_allies|1337|1",
@@ -493,7 +1003,45 @@
       "arm_bot_types": {
         "control": "hard_control",
         "treatment": "hard_treatment"
-      }
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_allies",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_gdi",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_allies",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_gdi",
+          "team_slot": 1
+        }
+      ]
     },
     {
       "cell_id": "2v2_red_gdi_allies|7331|0",
@@ -516,7 +1064,45 @@
       "arm_bot_types": {
         "control": "hard_control",
         "treatment": "hard_treatment"
-      }
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_gdi",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_allies",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_gdi",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_allies",
+          "team_slot": 1
+        }
+      ]
     },
     {
       "cell_id": "2v2_red_gdi_allies|7331|1",
@@ -539,7 +1125,45 @@
       "arm_bot_types": {
         "control": "hard_control",
         "treatment": "hard_treatment"
-      }
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_allies",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_gdi",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_allies",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_gdi",
+          "team_slot": 1
+        }
+      ]
     },
     {
       "cell_id": "2v2_red_gdi_soviets|1337|0",
@@ -562,7 +1186,45 @@
       "arm_bot_types": {
         "control": "hard_control",
         "treatment": "hard_treatment"
-      }
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_gdi",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_soviets",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_gdi",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_soviets",
+          "team_slot": 1
+        }
+      ]
     },
     {
       "cell_id": "2v2_red_gdi_soviets|1337|1",
@@ -585,7 +1247,45 @@
       "arm_bot_types": {
         "control": "hard_control",
         "treatment": "hard_treatment"
-      }
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_soviets",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_gdi",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_soviets",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_gdi",
+          "team_slot": 1
+        }
+      ]
     },
     {
       "cell_id": "2v2_red_gdi_soviets|7331|0",
@@ -608,7 +1308,45 @@
       "arm_bot_types": {
         "control": "hard_control",
         "treatment": "hard_treatment"
-      }
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_gdi",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_soviets",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_gdi",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_soviets",
+          "team_slot": 1
+        }
+      ]
     },
     {
       "cell_id": "2v2_red_gdi_soviets|7331|1",
@@ -631,7 +1369,45 @@
       "arm_bot_types": {
         "control": "hard_control",
         "treatment": "hard_treatment"
-      }
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_soviets",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_gdi",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_soviets",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_gdi",
+          "team_slot": 1
+        }
+      ]
     },
     {
       "cell_id": "2v2_terra_nod_allies|1337|0",
@@ -654,7 +1430,45 @@
       "arm_bot_types": {
         "control": "hard_control",
         "treatment": "hard_treatment"
-      }
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_nod",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_allies",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_nod",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_allies",
+          "team_slot": 1
+        }
+      ]
     },
     {
       "cell_id": "2v2_terra_nod_allies|1337|1",
@@ -677,7 +1491,45 @@
       "arm_bot_types": {
         "control": "hard_control",
         "treatment": "hard_treatment"
-      }
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_allies",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_nod",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_allies",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_nod",
+          "team_slot": 1
+        }
+      ]
     },
     {
       "cell_id": "2v2_terra_nod_allies|7331|0",
@@ -700,7 +1552,45 @@
       "arm_bot_types": {
         "control": "hard_control",
         "treatment": "hard_treatment"
-      }
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_nod",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_allies",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_nod",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_allies",
+          "team_slot": 1
+        }
+      ]
     },
     {
       "cell_id": "2v2_terra_nod_allies|7331|1",
@@ -723,7 +1613,45 @@
       "arm_bot_types": {
         "control": "hard_control",
         "treatment": "hard_treatment"
-      }
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_allies",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_nod",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_allies",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_nod",
+          "team_slot": 1
+        }
+      ]
     },
     {
       "cell_id": "2v2_terra_nod_soviets|1337|0",
@@ -746,7 +1674,45 @@
       "arm_bot_types": {
         "control": "hard_control",
         "treatment": "hard_treatment"
-      }
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_nod",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_soviets",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_nod",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_soviets",
+          "team_slot": 1
+        }
+      ]
     },
     {
       "cell_id": "2v2_terra_nod_soviets|1337|1",
@@ -769,7 +1735,45 @@
       "arm_bot_types": {
         "control": "hard_control",
         "treatment": "hard_treatment"
-      }
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_soviets",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_nod",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_soviets",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_nod",
+          "team_slot": 1
+        }
+      ]
     },
     {
       "cell_id": "2v2_terra_nod_soviets|7331|0",
@@ -792,7 +1796,45 @@
       "arm_bot_types": {
         "control": "hard_control",
         "treatment": "hard_treatment"
-      }
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_nod",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_soviets",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_nod",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_soviets",
+          "team_slot": 1
+        }
+      ]
     },
     {
       "cell_id": "2v2_terra_nod_soviets|7331|1",
@@ -815,7 +1857,45 @@
       "arm_bot_types": {
         "control": "hard_control",
         "treatment": "hard_treatment"
-      }
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_soviets",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_nod",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_soviets",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_nod",
+          "team_slot": 1
+        }
+      ]
     },
     {
       "cell_id": "2v2_terra_allies_soviets|1337|0",
@@ -838,7 +1918,45 @@
       "arm_bot_types": {
         "control": "hard_control",
         "treatment": "hard_treatment"
-      }
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_allies",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_soviets",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_allies",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_soviets",
+          "team_slot": 1
+        }
+      ]
     },
     {
       "cell_id": "2v2_terra_allies_soviets|1337|1",
@@ -861,7 +1979,45 @@
       "arm_bot_types": {
         "control": "hard_control",
         "treatment": "hard_treatment"
-      }
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_soviets",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_allies",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_soviets",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_allies",
+          "team_slot": 1
+        }
+      ]
     },
     {
       "cell_id": "2v2_terra_allies_soviets|7331|0",
@@ -884,7 +2040,45 @@
       "arm_bot_types": {
         "control": "hard_control",
         "treatment": "hard_treatment"
-      }
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_allies",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_soviets",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_allies",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_soviets",
+          "team_slot": 1
+        }
+      ]
     },
     {
       "cell_id": "2v2_terra_allies_soviets|7331|1",
@@ -907,7 +2101,45 @@
       "arm_bot_types": {
         "control": "hard_control",
         "treatment": "hard_treatment"
-      }
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_soviets",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_allies",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_soviets",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_allies",
+          "team_slot": 1
+        }
+      ]
     },
     {
       "cell_id": "3v3_basics_gna|1337|0",
@@ -931,7 +2163,63 @@
       "arm_bot_types": {
         "control": "hard_control",
         "treatment": "hard_treatment"
-      }
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_gdi",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_nod",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_allies",
+          "team_slot": 2
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_gdi",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi4",
+          "spawn": 4,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_nod",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi5",
+          "spawn": 5,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_allies",
+          "team_slot": 2
+        }
+      ]
     },
     {
       "cell_id": "3v3_basics_gna|1337|1",
@@ -955,7 +2243,63 @@
       "arm_bot_types": {
         "control": "hard_control",
         "treatment": "hard_treatment"
-      }
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_allies",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi4",
+          "spawn": 4,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_nod",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi5",
+          "spawn": 5,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_gdi",
+          "team_slot": 2
+        },
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_allies",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_nod",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_gdi",
+          "team_slot": 2
+        }
+      ]
     },
     {
       "cell_id": "3v3_basics_gna|7331|0",
@@ -979,7 +2323,63 @@
       "arm_bot_types": {
         "control": "hard_control",
         "treatment": "hard_treatment"
-      }
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_gdi",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_nod",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_allies",
+          "team_slot": 2
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_gdi",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi4",
+          "spawn": 4,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_nod",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi5",
+          "spawn": 5,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_allies",
+          "team_slot": 2
+        }
+      ]
     },
     {
       "cell_id": "3v3_basics_gna|7331|1",
@@ -1003,7 +2403,63 @@
       "arm_bot_types": {
         "control": "hard_control",
         "treatment": "hard_treatment"
-      }
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_allies",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi4",
+          "spawn": 4,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_nod",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi5",
+          "spawn": 5,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_gdi",
+          "team_slot": 2
+        },
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_allies",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_nod",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_gdi",
+          "team_slot": 2
+        }
+      ]
     },
     {
       "cell_id": "3v3_basics_nas|1337|0",
@@ -1027,7 +2483,63 @@
       "arm_bot_types": {
         "control": "hard_control",
         "treatment": "hard_treatment"
-      }
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_nod",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_allies",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_soviets",
+          "team_slot": 2
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_nod",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi4",
+          "spawn": 4,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_allies",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi5",
+          "spawn": 5,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_soviets",
+          "team_slot": 2
+        }
+      ]
     },
     {
       "cell_id": "3v3_basics_nas|1337|1",
@@ -1051,7 +2563,63 @@
       "arm_bot_types": {
         "control": "hard_control",
         "treatment": "hard_treatment"
-      }
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_soviets",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi4",
+          "spawn": 4,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_allies",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi5",
+          "spawn": 5,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_nod",
+          "team_slot": 2
+        },
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_soviets",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_allies",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_nod",
+          "team_slot": 2
+        }
+      ]
     },
     {
       "cell_id": "3v3_basics_nas|7331|0",
@@ -1075,7 +2643,63 @@
       "arm_bot_types": {
         "control": "hard_control",
         "treatment": "hard_treatment"
-      }
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_nod",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_allies",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_soviets",
+          "team_slot": 2
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_nod",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi4",
+          "spawn": 4,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_allies",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi5",
+          "spawn": 5,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_soviets",
+          "team_slot": 2
+        }
+      ]
     },
     {
       "cell_id": "3v3_basics_nas|7331|1",
@@ -1099,7 +2723,63 @@
       "arm_bot_types": {
         "control": "hard_control",
         "treatment": "hard_treatment"
-      }
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_soviets",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi4",
+          "spawn": 4,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_allies",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi5",
+          "spawn": 5,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_nod",
+          "team_slot": 2
+        },
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_soviets",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_allies",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_nod",
+          "team_slot": 2
+        }
+      ]
     },
     {
       "cell_id": "3v3_winter_asg|1337|0",
@@ -1123,7 +2803,63 @@
       "arm_bot_types": {
         "control": "hard_control",
         "treatment": "hard_treatment"
-      }
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_allies",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_soviets",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_gdi",
+          "team_slot": 2
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_allies",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi4",
+          "spawn": 4,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_soviets",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi5",
+          "spawn": 5,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_gdi",
+          "team_slot": 2
+        }
+      ]
     },
     {
       "cell_id": "3v3_winter_asg|1337|1",
@@ -1147,7 +2883,63 @@
       "arm_bot_types": {
         "control": "hard_control",
         "treatment": "hard_treatment"
-      }
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_gdi",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi4",
+          "spawn": 4,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_soviets",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi5",
+          "spawn": 5,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_allies",
+          "team_slot": 2
+        },
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_gdi",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_soviets",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_allies",
+          "team_slot": 2
+        }
+      ]
     },
     {
       "cell_id": "3v3_winter_asg|7331|0",
@@ -1171,7 +2963,63 @@
       "arm_bot_types": {
         "control": "hard_control",
         "treatment": "hard_treatment"
-      }
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_allies",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_soviets",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_gdi",
+          "team_slot": 2
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_allies",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi4",
+          "spawn": 4,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_soviets",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi5",
+          "spawn": 5,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_gdi",
+          "team_slot": 2
+        }
+      ]
     },
     {
       "cell_id": "3v3_winter_asg|7331|1",
@@ -1195,7 +3043,63 @@
       "arm_bot_types": {
         "control": "hard_control",
         "treatment": "hard_treatment"
-      }
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_gdi",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi4",
+          "spawn": 4,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_soviets",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi5",
+          "spawn": 5,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_allies",
+          "team_slot": 2
+        },
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_gdi",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_soviets",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_allies",
+          "team_slot": 2
+        }
+      ]
     },
     {
       "cell_id": "3v3_winter_sgn|1337|0",
@@ -1219,7 +3123,63 @@
       "arm_bot_types": {
         "control": "hard_control",
         "treatment": "hard_treatment"
-      }
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_soviets",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_gdi",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_nod",
+          "team_slot": 2
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_soviets",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi4",
+          "spawn": 4,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_gdi",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi5",
+          "spawn": 5,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_nod",
+          "team_slot": 2
+        }
+      ]
     },
     {
       "cell_id": "3v3_winter_sgn|1337|1",
@@ -1243,7 +3203,63 @@
       "arm_bot_types": {
         "control": "hard_control",
         "treatment": "hard_treatment"
-      }
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_nod",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi4",
+          "spawn": 4,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_gdi",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi5",
+          "spawn": 5,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_soviets",
+          "team_slot": 2
+        },
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_nod",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_gdi",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_soviets",
+          "team_slot": 2
+        }
+      ]
     },
     {
       "cell_id": "3v3_winter_sgn|7331|0",
@@ -1267,7 +3283,63 @@
       "arm_bot_types": {
         "control": "hard_control",
         "treatment": "hard_treatment"
-      }
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_soviets",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_gdi",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_nod",
+          "team_slot": 2
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_soviets",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi4",
+          "spawn": 4,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_gdi",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi5",
+          "spawn": 5,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_nod",
+          "team_slot": 2
+        }
+      ]
     },
     {
       "cell_id": "3v3_winter_sgn|7331|1",
@@ -1291,7 +3363,63 @@
       "arm_bot_types": {
         "control": "hard_control",
         "treatment": "hard_treatment"
-      }
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_nod",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi4",
+          "spawn": 4,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_gdi",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi5",
+          "spawn": 5,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_soviets",
+          "team_slot": 2
+        },
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_nod",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_gdi",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_soviets",
+          "team_slot": 2
+        }
+      ]
     },
     {
       "cell_id": "4v4_sahara|1337|0",
@@ -1316,7 +3444,81 @@
       "arm_bot_types": {
         "control": "hard_control",
         "treatment": "hard_treatment"
-      }
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_gdi",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_nod",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_allies",
+          "team_slot": 2
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_soviets",
+          "team_slot": 3
+        },
+        {
+          "home": "Multi4",
+          "spawn": 4,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_gdi",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi5",
+          "spawn": 5,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_nod",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi6",
+          "spawn": 6,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_allies",
+          "team_slot": 2
+        },
+        {
+          "home": "Multi7",
+          "spawn": 7,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_soviets",
+          "team_slot": 3
+        }
+      ]
     },
     {
       "cell_id": "4v4_sahara|1337|1",
@@ -1341,7 +3543,81 @@
       "arm_bot_types": {
         "control": "hard_control",
         "treatment": "hard_treatment"
-      }
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi4",
+          "spawn": 4,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_soviets",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi5",
+          "spawn": 5,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_allies",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi6",
+          "spawn": 6,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_nod",
+          "team_slot": 2
+        },
+        {
+          "home": "Multi7",
+          "spawn": 7,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_gdi",
+          "team_slot": 3
+        },
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_soviets",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_allies",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_nod",
+          "team_slot": 2
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_gdi",
+          "team_slot": 3
+        }
+      ]
     },
     {
       "cell_id": "4v4_sahara|7331|0",
@@ -1366,7 +3642,81 @@
       "arm_bot_types": {
         "control": "hard_control",
         "treatment": "hard_treatment"
-      }
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_gdi",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_nod",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_allies",
+          "team_slot": 2
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_soviets",
+          "team_slot": 3
+        },
+        {
+          "home": "Multi4",
+          "spawn": 4,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_gdi",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi5",
+          "spawn": 5,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_nod",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi6",
+          "spawn": 6,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_allies",
+          "team_slot": 2
+        },
+        {
+          "home": "Multi7",
+          "spawn": 7,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_soviets",
+          "team_slot": 3
+        }
+      ]
     },
     {
       "cell_id": "4v4_sahara|7331|1",
@@ -1391,7 +3741,81 @@
       "arm_bot_types": {
         "control": "hard_control",
         "treatment": "hard_treatment"
-      }
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi4",
+          "spawn": 4,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_soviets",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi5",
+          "spawn": 5,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_allies",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi6",
+          "spawn": 6,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_nod",
+          "team_slot": 2
+        },
+        {
+          "home": "Multi7",
+          "spawn": 7,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_gdi",
+          "team_slot": 3
+        },
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_soviets",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_allies",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_nod",
+          "team_slot": 2
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_gdi",
+          "team_slot": 3
+        }
+      ]
     },
     {
       "cell_id": "4v4_ice|1337|0",
@@ -1416,7 +3840,81 @@
       "arm_bot_types": {
         "control": "hard_control",
         "treatment": "hard_treatment"
-      }
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_gdi",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_nod",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_allies",
+          "team_slot": 2
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_soviets",
+          "team_slot": 3
+        },
+        {
+          "home": "Multi4",
+          "spawn": 4,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_gdi",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi5",
+          "spawn": 5,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_nod",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi6",
+          "spawn": 6,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_allies",
+          "team_slot": 2
+        },
+        {
+          "home": "Multi7",
+          "spawn": 7,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_soviets",
+          "team_slot": 3
+        }
+      ]
     },
     {
       "cell_id": "4v4_ice|1337|1",
@@ -1441,7 +3939,81 @@
       "arm_bot_types": {
         "control": "hard_control",
         "treatment": "hard_treatment"
-      }
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi4",
+          "spawn": 4,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_soviets",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi5",
+          "spawn": 5,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_allies",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi6",
+          "spawn": 6,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_nod",
+          "team_slot": 2
+        },
+        {
+          "home": "Multi7",
+          "spawn": 7,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_gdi",
+          "team_slot": 3
+        },
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_soviets",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_allies",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_nod",
+          "team_slot": 2
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_gdi",
+          "team_slot": 3
+        }
+      ]
     },
     {
       "cell_id": "4v4_ice|7331|0",
@@ -1466,7 +4038,81 @@
       "arm_bot_types": {
         "control": "hard_control",
         "treatment": "hard_treatment"
-      }
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_gdi",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_nod",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_allies",
+          "team_slot": 2
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "A",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_soviets",
+          "team_slot": 3
+        },
+        {
+          "home": "Multi4",
+          "spawn": 4,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_gdi",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi5",
+          "spawn": 5,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_nod",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi6",
+          "spawn": 6,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_allies",
+          "team_slot": 2
+        },
+        {
+          "home": "Multi7",
+          "spawn": 7,
+          "side": "B",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_soviets",
+          "team_slot": 3
+        }
+      ]
     },
     {
       "cell_id": "4v4_ice|7331|1",
@@ -1491,17 +4137,123 @@
       "arm_bot_types": {
         "control": "hard_control",
         "treatment": "hard_treatment"
-      }
+      },
+      "seat_assignments": [
+        {
+          "home": "Multi4",
+          "spawn": 4,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_soviets",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi5",
+          "spawn": 5,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "ra1_allies",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi6",
+          "spawn": 6,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_nod",
+          "team_slot": 2
+        },
+        {
+          "home": "Multi7",
+          "spawn": 7,
+          "side": "A",
+          "arm": "treatment",
+          "bot_type": "hard_treatment",
+          "faction": "td_gdi",
+          "team_slot": 3
+        },
+        {
+          "home": "Multi0",
+          "spawn": 0,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_soviets",
+          "team_slot": 0
+        },
+        {
+          "home": "Multi1",
+          "spawn": 1,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "ra1_allies",
+          "team_slot": 1
+        },
+        {
+          "home": "Multi2",
+          "spawn": 2,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_nod",
+          "team_slot": 2
+        },
+        {
+          "home": "Multi3",
+          "spawn": 3,
+          "side": "B",
+          "arm": "control",
+          "bot_type": "hard_control",
+          "faction": "td_gdi",
+          "team_slot": 3
+        }
+      ]
     }
   ],
   "launches": 0,
   "execution_authorized": false,
-  "wall_estimate_hours": 11.07,
+  "worker_hours_estimate_at_8_5m_each": 11.07,
+  "parallel_slot_wall_estimate_hours_at_8_5m_each": 7.29,
+  "parallel_slot_wall_estimate_range_hours_5_to_12m_each": [
+    5.11,
+    9.47
+  ],
+  "serial_wall_estimate_range_hours_5_to_12m_each": [
+    7.33,
+    14.8
+  ],
   "map_engine_acceptance_and_symmetric_spawn_proof": "PENDING_ENGINE_PREFLIGHT",
+  "round_stages": [
+    16,
+    32,
+    48,
+    64
+  ],
+  "acceptance_thresholds": {
+    "early_accept_share": 0.75,
+    "early_reject_share": 0.25,
+    "win_noninferiority_delta": 0.0,
+    "min_earned_spent_improvement": 0.0,
+    "min_army_efficiency_improvement": 0.0,
+    "min_kill_exchange_improvement": 0.0
+  },
+  "slot_policy": {
+    "max_parallel_small_games": 3,
+    "small_team_size_max": 2,
+    "large_game_exclusive": true,
+    "min_free_ram_bytes": 6442450944,
+    "max_private_bytes": 8589934592
+  },
+  "ratchet_baseline_manifest_sha256": "27b638ecd7e33caa68003a020d0d4309822826405a7afe147983f92027a3e26a",
   "missing_campaign_gates": [
     "reviewed integration/source/engine/tool/AI payload hashes frozen in final manifest",
     "actual map acceptance and symmetric spawn proof on pinned engine",
-    "driver backend: seat-specific hard bot trees, map.yaml proof, per-cell cap/wall/stall/memory watchdog, immutable receipts and PID cleanup",
+    "runtime driver backend: seat-specific hard bot trees, map.yaml proof, watchdogs, immutable receipts, process-shared slot counter and PID cleanup",
     "A5 parity and analyzer fixture/negative-control acceptance"
-  ]
+  ],
+  "manifest_sha256": "e40eb38b188da744c73af4c707c2e6aa076e9235541778247b93a95ed92ad753"
 }

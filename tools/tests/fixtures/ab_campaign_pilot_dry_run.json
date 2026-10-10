@@ -1,6 +1,5 @@
 {
   "schema": 1,
-  "campaign_id": "BU-pilot-fixture-only",
   "switch": "BU_harvester_logistics",
   "execution_approved": false,
   "pairs_per_setup": 2,
@@ -13,6 +12,46 @@
   "arm_bot_types": {
     "control": "hard_control",
     "treatment": "hard_treatment"
+  },
+  "baseline_manifest_path": "tools/tests/fixtures/ab_campaign_baseline.json",
+  "baseline_manifest_sha256": "27b638ecd7e33caa68003a020d0d4309822826405a7afe147983f92027a3e26a",
+  "pins": {
+    "source_commit": "700bb16483f6d92664153e98d6f2560c312acaab",
+    "engine_version": "6da7fce14da541180c6baddd6925118fbef65b94"
+  },
+  "switch_patch_sha256": "d710567579cb3673eb33701ec881495f0a2a17d6203194b0efdc8052f4de4523",
+  "baseline_ai_payload_sha256": "1bacffdc8ff8ebdaf0e7b9f669d690205472ce3c09af62812029eacbe1151c51",
+  "treatment_ai_payload_sha256": "9646c765c9c18905156b31298c34e8d92050dd326e29a8c7adacf9420e8b9f33",
+  "tool_sha256": {
+    "driver_analyzer": "eb5d91cf30770dbb3bb59c0b547d859dd131250a16633a715eab034edf2c9560",
+    "batch_runner": "660109df9a5cb431dc0b0fa426ebbba314cae7ac154f8786d71a418402a24cee",
+    "switch_applier": "5376258709f2ff6512e402abeaf09e164abe483142980830bc72269af047f97e"
+  },
+  "binary_sha256": {
+    "bin/OpenRA.exe": "5693f355792ebb68699793f96ef2167b733c5e7756f580858c5090226418c984",
+    "bin/OpenRA.dll": "92ee9dacd08869593dc5ad70c2d1ce48f701caf8277ea3bd692acf2224a8ca77",
+    "bin/OpenRA.Mods.Cameo.dll": "41f37982c146f73b4a9c07071f34b47e214178cb9413e514f05af9af2d44b3a4"
+  },
+  "round_stages": [
+    16,
+    32,
+    48,
+    64
+  ],
+  "acceptance_thresholds": {
+    "early_accept_share": 0.75,
+    "early_reject_share": 0.25,
+    "win_noninferiority_delta": 0.0,
+    "min_earned_spent_improvement": 0.0,
+    "min_army_efficiency_improvement": 0.0,
+    "min_kill_exchange_improvement": 0.0
+  },
+  "slot_policy": {
+    "max_parallel_small_games": 3,
+    "small_team_size_max": 2,
+    "large_game_exclusive": true,
+    "min_free_ram_bytes": 6442450944,
+    "max_private_bytes": 8589934592
   },
   "seeds": [
     1337,

@@ -1,16 +1,17 @@
 ## Resume
 
-Next: lead review this exact SHA, resolve the map symmetric-spawn/engine acceptance gate, then freeze final source, engine, tools, and arm payloads. No launch backend is enabled, and this task performed zero launches. Current branch: `codex/ab-campaign-tooling`.
+Next: lead review the amendment-2 update, resolve the round/checkpoint and synergy questions in fleet `OPEN_DECISIONS.md`, then implement the process-shared runtime driver before any launch. No launch backend is enabled, and this task performed zero launches. Current branch: `codex/ab-campaign-tooling`.
 
 ## Result
 
-Implemented amendment-specific planner and evidence adjudicator for the 64-game BU pilot: 16 setup/faction-mirror configurations, two matched seed pairs per setup, side swaps, exact eight map package hashes, seat-count validation from archived map.yaml, and strict natural/cap/incomplete/invalid classification. Aggregates per-seat metrics to arm totals; explicitly reports synergy as not identifiable from this pilot because the team-size and individual setups lack matched context. Dry-run fixture receipt: `tools/tests/fixtures/ab_campaign_pilot_dry_run_receipt.json` (NO_LAUNCH, 64 games, estimated 11.07 serial worker hours).
+Implemented amendment-specific planner and evidence adjudicator for the 64-game BU pilot: 16 setup/faction-mirror configurations, two matched seed pairs per setup, explicit seat/spawn rotation, exact eight map package hashes, seat-count validation from archived map.yaml, and strict natural/cap/incomplete/invalid classification. Added ratchet baseline model, predeclared acceptance policy (16/32/48/64 rounds), five-accept regression cadence and bounded small/large-game slot policy. `SWITCH_ORDER_2026-10-11.md` classifies all 60 groups (9 proposed fix/safety; 51 behavior impact order). Fixture dry run estimates 11.07 worker-hours serial, 7.29 wall-hours at 3 concurrent small-game slots, with 5–12 min/game producing 5.11–9.47 wall-hours; 0 launches.
 
 ## Open gates
 
 - No actual frozen campaign manifest was supplied in the repository; the exercised manifest is explicitly fixture-only/non-executable.
 - Map archives contain enough playable `MultiN` references, but engine acceptance and symmetric spawn proof remain unverified; dry run marks this pending.
-- This changes planner/analyzer only. The runtime backend for distinct control/treatment bot profiles, map.yaml generation/proof, 45k cap, 3,000s wall/180s stall, 8 GiB process watchdog, PID-scoped cleanup, serial lock, and immutable per-cell receipts is not implemented. Run command remains disabled.
+- This changes planner/analyzer and an in-process admission policy only. Runtime backend for distinct bot profiles, generated map.yaml, all-seat outcome/replay receipts, 45k cap, 3,000s wall/180s stall, hard 8 GiB process kill, live 6 GiB RAM floor, process-shared slot lock/expiry, PID cleanup, and resume-safe receipts is not implemented. Run command remains disabled.
+- Amendment 2 ambiguities are recorded in fleet `OPEN_DECISIONS.md`: how 16/32/48/64 checkpoints interact with mandatory 32-pair/64-game pilot, what constitutes synergy, and whether the 6 GiB free-memory floor is continuous.
 - A5 parity and broader fixture/negative-control gates remain before any launch; maintainer requires pilot-only lead go-ahead before switch 1.
 
 ## Amendment 2 map inventory (read-only)
@@ -19,4 +20,4 @@ All eight named packages exist at the pinned `700bb16483f6d92664153e98d6f2560c31
 
 ## Validation
 
-`py -3 -m unittest tools.tests.test_ab_campaign_pilot -v`: 5 passed. `py_compile` passed. No-launch dry run: 64 jobs, 0 launches. `git diff --check` passed.
+`py -3 -m unittest tools.tests.test_ab_campaign_pilot -v`: 7 passed, including slot-policy tamper rejection. `py_compile` and `git diff --check` passed. Fixture-only dry run: 64 games, 0 launches; manifest SHA-256 `e40eb38b188da744c73af4c707c2e6aa076e9235541778247b93a95ed92ad753`; source pin and `pt7-control/engine` hashes verified. Estimate: 11.07 worker-hours; 7.29 slot-wall hours at 3 small-game workers; 5.11-9.47 h range. Full tests directory intentionally not run per watchdog rule.
