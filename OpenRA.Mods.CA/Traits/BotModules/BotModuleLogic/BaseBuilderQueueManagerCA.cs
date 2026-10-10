@@ -1936,12 +1936,16 @@ namespace OpenRA.Mods.CA.Traits
 							if (placed.Location != null)
 							{
 								Log.Write("debug", $"AI ({player.ClientIndex}): REF-1 refinery {actorType} at {placed.Location.Value} claims anchor {c.Anchor} field {c.FieldId} tier {c.Tier} gap {placed.Gap} at tick {world.WorldTick}");
-								law.RefineryClaimCommitted(c.Anchor);
+								law.RefineryClaimCommitted(c.Anchor, placed.Location.Value);
 								refineryClaimed = true;
 								if (requestRef != null)
 									baseBuilder.RequestedRefineries.Remove(requestRef);
 								return (placed.Location, c.Anchor, placed.Variant);
 							}
+
+							// REPAIR-B3: the claim was offered but no site exists — park it for the
+							// bounded fail cooldown instead of silently re-offering it every sweep.
+							law.RefineryClaimPlacementFailed(c.Anchor);
 						}
 						else
 						{
