@@ -108,6 +108,22 @@ Distribution CHANGED vs the pre-merge base — worth a line of its own:
   EVERY ceiling event in all six cells** (spent=64/64, n=78) alongside
   `N anchors pending` pacing lines — probe-dominated, so
   `CoverageProbesPerTick` is the natural throttle if tuning is ever asked.
+- **FieldCoverage OFF-arm (same-tree paired isolation, reviewer-suggested
+  cheap arm)**: `AJ_field_coverage` gates the whole coverage sweep
+  (`ExpansionPlannerBotModule.CoverageTick` runs only when
+  `Info.FieldCoverage && Info.DriveRefineries`). The same three master cells
+  (gate/imm/nuke `td_gdi` s1337, `ModulePerfReportIntervalTicks=300`) were
+  re-run on the fac-stale-labels tree with `FieldCoverage: false`
+  (`a6-league-fcoff`), then the yaml was reverted. Result: ExpansionPlanner
+  collapses to baseline in every cell — **gate 27.5→2.7, imm 115.4→3.2,
+  nuke 41.3→3.3 ms/300t** (−90…−97%), while MasterAi moves ≤±1.4 ms. The
+  coverage sweep IS the B3 host cost — the correlation is now causal on a
+  same-tree config A/B. Side observation (not attributed): EngagementLog
+  means rose on imm (126.6→240.5) and nuke (69.5→118.0) OFF — bursty
+  module, plausibly more engagement work when expansion pathing differs;
+  needs its own arm to interpret. OFF cell sample counts: gate 104, imm 90,
+  nuke 100 (match lengths differ — the arm changes play, which is inherent
+  to a config A/B, not a flaw; the 24–36× delta dwarfs windowing effects).
 - **MasterAi 32→8 resolved (same-day window decomposition)**: the gap is
   concentrated in the early windows — per-cell first-third means ~87–92 ms
   (max ~2900 ms, init) on the c1-annulus-cap league (full-length cells,
@@ -123,7 +139,7 @@ Distribution CHANGED vs the pre-merge base — worth a line of its own:
 
 ## Artifacts
 
-- Raw: `C:\cameo-wt\parity-wave1\a6-league{,-c1fix,-master}\a6_raw.json`, per-cell
+- Raw: `C:\cameo-wt\parity-wave1\a6-league{,-c1fix,-master,-fcoff}\a6_raw.json`, per-cell
   `Logs/debug.log`, `batch_results.jsonl`, exception logs (A1 cells).
 - Exception logs (4×): `a6-league/*/Logs/exception-2026-10-10T*.log` — all
   `FindTilesInAnnulus maxRange>50` via `BaseFrontBackPlannerBotModule`.
