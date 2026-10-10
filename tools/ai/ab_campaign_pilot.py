@@ -653,6 +653,16 @@ def normalize_campaign_receipts(manifest, manifest_sha, receipts, rows, artifact
   require(len(uids)<=1 and all(isinstance(uid,str) and uid for uid in uids),f"{cell} match artifact must contain exactly one game_uid")
   if receipt["end_class"] in ("NATURAL","CAP"):
    require(match_path is not None and len(match_rows)==job["required_seats"] and len(uids)==1,f"{cell} complete end lacks one full per-game match artifact")
+  if receipt["end_class"]=="NATURAL":
+   records_by_home={}
+   for row in match_rows:
+    player=row.get("player") or {};home=player.get("home")
+    require(isinstance(home,str) and home not in records_by_home,f"{cell} natural match rows have missing or duplicate homes")
+    records_by_home[home]=player
+   require(set(records_by_home)=={seat["home"] for seat in receipt["resolved_seats"]},f"{cell} natural match homes differ from receipt seats")
+   for seat in receipt["resolved_seats"]:
+    player=records_by_home[seat["home"]]
+    require(player.get("outcome")==seat["outcome"],f"{cell} match outcome contradicts receipt for {seat['home']}")
   support_path=load_artifact(receipt["artifacts"]["support_bundle"],f"{cell} support bundle",allow_missing=receipt["end_class"]=="INCOMPLETE")
   if receipt["end_class"]=="CAP": require(support_path is not None,"cap receipt lacks a hash-verified support bundle")
   uid=next(iter(uids)) if uids else None
