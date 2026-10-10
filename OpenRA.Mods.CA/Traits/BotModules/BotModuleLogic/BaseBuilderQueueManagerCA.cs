@@ -335,8 +335,10 @@ namespace OpenRA.Mods.CA.Traits
 		// cell. Normal placement lands inside the same frame-end task as the removal, so it
 		// is already provable at the next probe tick; a builder unit lands whenever
 		// BuildOnSite completes (or never, on failure). A plug order creates no actor — its
-		// proof is the host slot no longer accepting the plug type it accepted when the
-		// order was chosen.
+		// proof is the host slot's installed plug state: only a requirement-free slot
+		// refusing the type it accepted is positive evidence (EnablePlug is the sole writer
+		// of active). A requirement-keyed or unknown-type slot reports availability, not
+		// install — those pendings stay UNKNOWN and expire Removed.
 		bool PlacementProof(BotQueuePendingTerminal p)
 		{
 			if (p.Kind != BotQueueTransitionKind.Placed || p.Site == null)
@@ -345,7 +347,11 @@ namespace OpenRA.Mods.CA.Traits
 			var site = p.Site.Value;
 			if (p.PlugType != null)
 				return world.ActorsWithTrait<Pluggable>().Any(t => t.Actor.Owner == player
-					&& t.Actor.Location + t.Trait.Info.Offset == site && !t.Trait.AcceptsPlug(p.PlugType));
+					&& t.Actor.Location + t.Trait.Info.Offset == site
+					&& BaseBuilderQueueEvalCA.PlugInstallProven(
+						t.Trait.Info.Conditions.ContainsKey(p.PlugType),
+						t.Trait.Info.Requirements.ContainsKey(p.PlugType),
+						t.Trait.AcceptsPlug(p.PlugType)));
 
 			return world.ActorMap.GetActorsAt(site).Any(a => !a.IsDead && a.Owner == player && PlacedNameMatches(p.ItemName, a));
 		}

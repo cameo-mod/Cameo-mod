@@ -483,6 +483,17 @@ namespace OpenRA.Mods.CA.Traits
 				return ExpansionTransformTransition.Fail;
 			return replacementYard ? ExpansionTransformTransition.Deploy : ExpansionTransformTransition.Relocate;
 		}
+
+		/// <summary>Plug install proof (VP re-review of ae259554d): !AcceptsPlug alone is NOT
+		/// proof — on pin 0a3f77dbe AcceptsPlug returns false for three different reasons:
+		/// the slot doesn't define the type, a dynamic Requirement currently fails, or —
+		/// requirement-free types only — the slot's active plug is non-null. Only the last
+		/// is install evidence (EnablePlug is the sole writer of active), so proof requires
+		/// slotDefinesType && !requirementKeyed && !acceptsNow. Requirement-keyed slots
+		/// report availability, never install state — and the engine exposes no public
+		/// active-state API — so those requests honestly stay UNKNOWN and expire Removed.</summary>
+		public static bool PlugInstallProven(bool slotDefinesType, bool requirementKeyed, bool acceptsNow)
+			=> slotDefinesType && !requirementKeyed && !acceptsNow;
 	}
 
 	// REPLAY-HEALTH-LOGGER (ACK-2, task 01a12023): record-only queue transitions for the

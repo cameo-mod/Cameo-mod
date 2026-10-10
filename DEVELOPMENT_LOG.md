@@ -20590,3 +20590,15 @@ land ticks later or never) all produce identical disappearances. Corrected on
   elimination during awaiting.
 * **Unchanged invariants:** lazy seam (no observer -> one null check), bounded O(n) probe,
   no orders/RNG/world mutation, per-instance episodes, event-local schema-2 fields.
+
+* **VP re-review fix (plug proof):** `!Pluggable.AcceptsPlug(type)` is false for three
+  distinct reasons — slot doesn't define the type, a dynamic `Requirement` currently
+  fails, or (requirement-free types only) `active != null`. Only the last is install
+  evidence, so `BaseBuilderQueueEvalCA.PlugInstallProven` now requires
+  `slotDefinesType && !requirementKeyed && !acceptsNow` — the manager wires the real
+  `Info.Conditions`/`Info.Requirements`/`AcceptsPlug` values per candidate slot.
+  Requirement-keyed slots report availability, not install state (no public engine API
+  exposes `active`), so those pendings stay UNKNOWN and expire `Removed` — the VP's
+  sanctioned fallback. Regressions exercise the production predicate: requirement-flip
+  (no install -> `Removed`), true install -> `Placed`, unknown-type and still-accepting
+  negatives.

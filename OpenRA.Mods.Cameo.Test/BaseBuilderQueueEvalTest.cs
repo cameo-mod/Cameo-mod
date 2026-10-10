@@ -1278,5 +1278,73 @@ namespace OpenRA.Mods.Cameo.Test
 				Is.EqualTo(BotQueuePendingResolution.EmitRequested),
 				"a landed building still proves — elimination changes classification, not fact");
 		}
+
+		// VP re-review of ae259554d: !AcceptsPlug is not install proof — the engine's
+		// AcceptsPlug is false for unknown types and failed dynamic Requirements too.
+		// These drive the real predicate the manager wires from the Pluggable trait.
+
+		[Test]
+		public void PlugInstallProofRequiresPositiveSlotState()
+		{
+			// True install: the slot defines the type, it has no dynamic Requirements,
+			// and it now refuses — for requirement-free types AcceptsPlug is exactly
+			// `active == null`, so false here is the engine's own installed state.
+			Assert.That(BaseBuilderQueueEvalCA.PlugInstallProven(
+					slotDefinesType: true, requirementKeyed: false, acceptsNow: false),
+				Is.True, "requirement-free slot refusing its own type = active plug installed");
+
+			// Requirement flip: a requirement-keyed refusal is availability state —
+			// no EnablePlug ran. Never proof.
+			Assert.That(BaseBuilderQueueEvalCA.PlugInstallProven(true, requirementKeyed: true, acceptsNow: false),
+				Is.False, "requirement-keyed refusal is a requirement state, never install proof");
+			Assert.That(BaseBuilderQueueEvalCA.PlugInstallProven(true, true, acceptsNow: true),
+				Is.False, "availability true means the slot would still accept — not installed");
+
+			// Unknown type: the slot refuses by definition, not by installation.
+			Assert.That(BaseBuilderQueueEvalCA.PlugInstallProven(slotDefinesType: false, false, false),
+				Is.False, "a slot that never defined the type cannot 'refuse' it");
+
+			// Still accepting: no install.
+			Assert.That(BaseBuilderQueueEvalCA.PlugInstallProven(true, false, acceptsNow: true),
+				Is.False, "an empty accepting slot is not installed");
+		}
+
+		[Test]
+		public void RequirementFlipPlugPendingExpiresToRemoved()
+		{
+			// The VP scenario end to end through the production predicate: a plug order
+			// issued, then the host's dynamic Requirement fails before PlacePlug resolves —
+			// no EnablePlug runs, the slot reports refusal. With the corrected predicate
+			// that is NOT proof, so the armed pending expires to Removed + intent reason.
+			var pending = new BotQueuePendingTerminal
+			{
+				Item = new object(), ItemName = "plug", Kind = BotQueueTransitionKind.Placed,
+				IssuedTick = 100, Site = new CPos(5, 6), PlugType = "adv", AwaitingProof = true
+			};
+
+			var requirementFlipped = BaseBuilderQueueEvalCA.PlugInstallProven(
+				slotDefinesType: true, requirementKeyed: true, acceptsNow: false);
+			Assert.That(pending.ResolveWhileAwaiting(110, placementProven: requirementFlipped, playerEliminated: false),
+				Is.EqualTo(BotQueuePendingResolution.EmitRemoved),
+				"requirement flip -> no install -> expires Removed, never Placed");
+		}
+
+		[Test]
+		public void TruePlugInstallProvesPlaced()
+		{
+			// Same pending, true install: requirement-free slot now refusing the type it
+			// accepted at order-selection — the engine's install state -> Placed.
+			var pending = new BotQueuePendingTerminal
+			{
+				Item = new object(), ItemName = "plug", Kind = BotQueueTransitionKind.Placed,
+				IssuedTick = 100, Site = new CPos(5, 6), PlugType = "adv", AwaitingProof = true
+			};
+
+			var installed = BaseBuilderQueueEvalCA.PlugInstallProven(
+				slotDefinesType: true, requirementKeyed: false, acceptsNow: false);
+			Assert.That(pending.ResolveWhileAwaiting(104, placementProven: installed, playerEliminated: false),
+				Is.EqualTo(BotQueuePendingResolution.EmitRequested),
+				"slot occupied by EnablePlug -> Placed");
+		}
 	}
 }
