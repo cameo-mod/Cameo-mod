@@ -1,3 +1,8 @@
+## Resume (2026-10-10, bounded A5 qualification)
+Next: reserve the exclusive campaign slot, then run `py -3 tools/ai/a5_memory_parity_probe.py --execute-a5-diagnostic`; it runs two serial same-seed baseline-vs-baseline A5 cells, logs per-process private-memory samples, stops at 6.25 GiB, checks server seed pins and order-stream identity, and never starts campaign outcome cells. Do not treat this diagnostic as campaign authorization or as an exact-964 binary proof: the compiled logger mitigation is commit 173038d.
+Preflight: no OpenRA process; 15.4 GiB free RAM; engine VERSION is 6da7fce; map-template no-launch dry-run resolves the prior A5 map SHA c546ed9; probe `py_compile` and no-launch mode pass. Probe source must be committed first so its tooling fingerprint is clean.
+Existing A5 evidence remains invalid parity: run-a 6.55 GiB, run-b 8.07 GiB; no campaign outcome cells have been launched. If the diagnostic exceeds its lower stop, preserve receipt and stop. If both stay below and order is identical, request reviewer/maintainer approval to update the runtime pin before campaign launch.
+
 ## Resume (2026-10-10, memory mitigation)
 Next: reviewer/DevOps should inspect the commit, then rebuild the exact baseline and request approval for a bounded A5 parity rerun; no campaign launches until exact-baseline A5 is under 6.5 GiB with matching order streams.
 Change: AiMatchLogWriter aggregates each sampled own-actor snapshot immediately into EnemyProfile and retains only aggregate truth per history sample, avoiding repeated per-actor snapshots in deferred history. Serialization uses the same ProfileOf aggregation.
