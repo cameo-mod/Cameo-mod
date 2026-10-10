@@ -1,3 +1,34 @@
+# 2026-10-10 — Devin: REPAIR-B3 follow-up — park frees the whole set; owner-scoped cooldown (branch `devin/repair-b3-park-release`)
+
+*Devin-Developer*, lead ruling 2026-10-10 (Opus, from Architect's question), base `10d3f44f7`,
+engine pin `6da7fce14`. Two commits (code + this log).
+
+- **`dad8c6753` — a placement-failure park frees the demand's whole covered set at the failure
+  point.** Previously the demand held the set until `UntilTick`, so a contested anchor stayed
+  hostage for the reservation TTL even though the per-site fail cooldown already bounds the
+  retry. `CommitRefineryClaimOrPark(law, claim, placedSite, owner)` releases by owner key before
+  signalling the failure; `RefineryClaimPlacementFailed(anchor, owner)` records the failing owner
+  on the park. The reservation channel probes per owner (`AnchorTakenForOwner`): a foreign demand
+  binds the freed anchor immediately; the parked demand's own re-reserve waits out the cooldown.
+  The offer channel keeps the anchor-global park (`AnchorTaken`, `AnchorBlockedForClaims`) — the
+  actual thrash bound the ruling cites. `Prune` drops the park term so a foreign hold on a parked
+  anchor survives and can activate for its owner mid-cooldown. Provider-side parks (offer-streak,
+  stuck-anchor) record a null owner and bind nobody's re-reserve.
+- **Regression pin:** `ParkedClaimFreesTheWholeSetAndRecyclesToAnotherDemand` — free-at-failure
+  (reservations Count 0 at the failure, not at UntilTick=500), immediate foreign re-bind of the
+  same anchor, parked owner's re-admission refused inside the cooldown and admitted once it
+  lapses. `FailedPlacementParksTheOfferedAnchorAndCommitsNothing` re-pinned for the owner-scoped
+  cooldown (the old global-refusal tail is superseded by the ruling).
+- **Known bound:** the offer channel stays anchor-global, so a parked anchor is still unofferable
+  to ANY demand during the cooldown — the immediate foreign re-bind is reachable for a demand
+  already holding a claim on that anchor (and for the freed covered-set siblings, which recycle
+  with no gate at all). Offering parked anchors to non-failing demands would need owner context
+  on the claim APIs — a separate, larger change if the ruling intends it.
+- **Verification:** Release 0/0; focused 123/123; full suite 1514/1514; fog audit PASS (82 files,
+  269 manifested sites — no new enumeration); boot gate PASS (menu reached, no new
+  exception-*.log, PID-scoped kill, no leftovers). Frozen tip pushed for VP exact-SHA review.
+  No runtime clearance implied.
+
 # 2026-10-10 — Devin: A9/M9 learned-file resolution + M14 emergency-default binding (branch `devin/a9-m9-m14-default`)
 
 *Devin-Architect*, task `01a1243d-3efb` (cloud doc @680dd25d PT7 items 4 and 6c;
