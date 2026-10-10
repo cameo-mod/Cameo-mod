@@ -3,7 +3,8 @@
 
 Runs two serial same-seed baseline-vs-baseline 1v1 cells, samples only the
 OpenRA process whose command line names that cell's support directory, and
-stops at 6.25 GiB (below the campaign's 6.5 GiB ceiling). It does not create
+stops at 3 GiB after a steep private-bytes ramp was observed (well below the
+campaign's 6.5 GiB ceiling). It does not create
 an execution manifest or authorize campaign jobs.
 """
 from __future__ import annotations
@@ -30,7 +31,7 @@ ENGINE = "6da7fce14da541180c6baddd6925118fbef65b94"
 SEED = 1337
 POLL = 1.0
 WALL = 900
-PROCESS_STOP = int(6.25 * 1024**3)
+PROCESS_STOP = int(3.0 * 1024**3)
 HOST_SOFT_STOP = int(7.0 * 1024**3)
 HOST_HARD_FLOOR = 6 * 1024**3
 HOST_LAUNCH_HEADROOM = 1 * 1024**3
