@@ -20487,3 +20487,8 @@ and the exact merged tree failed the fog audit.
 - Isolated codex/m13-claim-episodes from10d3f44f7; four granted provider files only plus tests/docs.
 - Engineer admission counter and explicit coalition transport metadata; unsupported/history-missing claims UNKNOWN. No order/RNG/sync/default edits.
 - Focused58/58 PASS; full suite result recorded in frozen status receipt. BotSituation producer plumbing follows separately; no launches.
+
+## Sol M13 coalition publisher episode follow-up (2026-10-10)
+- Separate codex/m13-coalition-episodes from frozen75a7897ad; lead-granted BotSituation publisher/admission plumbing only.
+- Published defence admission carries stable owner identity; withdrawal/re-admission and legacy-save UNKNOWN covered. Expansion assist remains UNKNOWN without provider proof.
+- Focused144/144 PASS; full suite in frozen receipt. Decisions/orders/RNG/sync untouched, no launches.

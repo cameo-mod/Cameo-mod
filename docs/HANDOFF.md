@@ -5529,3 +5529,8 @@ Next: exact-SHA VP review; cost/coverage/adoption remain gated. No launches. Ins
 - C:/cameo-wt/sol-m13-claim-episodes, codex/m13-claim-episodes; docs/design/M13_CLAIM_EPISODES.md.
 - Record-only Engineer admission + coalition transport; legacy publisher UNKNOWN. Separate authorized BotSituation plumbing next.
 - VP exact-tip review before runtime adoption; no launches, master remains Integrator-owned.
+
+### Sol M13 coalition publisher episode follow-up (2026-10-10)
+- Branch codex/m13-coalition-episodes, same isolated tree; Engineer/transport review ref75a789 remains frozen.
+- Defence publisher now has explicit admission lifetime; expansion assist unsupported/UNKNOWN, consumer wiring pending.
+- VP review requested separately; no runtime/default activation or launches.

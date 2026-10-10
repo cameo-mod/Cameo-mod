@@ -24,6 +24,21 @@ The BotSituation TeamBroadcast publisher is deliberately outside this first chec
 Its minimal admission plumbing is authorized as a separate follow-up commit. No snapshot
 tick, location, disappearance or handout can manufacture admission/deployment proof.
 
+## Separate coalition publisher follow-up
+
+BotSituation now records admission when its existing RequestsDefence publication changes
+from inactive to active. The owner-created episode is carried on every active broadcast;
+an observed withdrawal clears it, and re-admission increments the counter. No time or
+location enters this lifecycle. Changes that occur between snapshots do not create an
+inferred withdrawal or new episode: identity describes the published request, not the
+underlying combat event. Invalidating restored admission history keeps subsequent claims
+UNKNOWN. The existing urgency calculation, decisions, saves and coalition elections are
+unchanged. Six additional actor-free production-lifecycle tests exercise this plumbing.
+
+ExpansionAssistTarget exposes a target only, with no admission history API. It deliberately
+keeps UNKNOWN episode metadata. M13 must refuse that unsupported claim until its owning
+provider exposes provenance; this follow-up does not infer an episode from its target.
+
 Validation: ClaimEpisodeTest covers admission refresh/re-admission, distinct owners and
 provider instances, missing history, legacy UNKNOWN, owner validation and exact coalition
 transport across pulses. These are offline counter/record/fold regressions, not a game
