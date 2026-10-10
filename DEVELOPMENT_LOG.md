@@ -20518,3 +20518,6 @@ and the exact merged tree failed the fog audit.
 
 ## 2026-10-10 B3 park takeover regression
 Sol preserved the already-pushed null-owner global reservation correction (693c07793 / da170b8ed), including the unchanged anchor-global offer park. Added production renewal-seam regression covering a park after admission, refusal through the final cooldown tick, and recovery at exact expiry. Focused/full validation is pending PT7 machine release; no launch or runtime approval.
+
+## 2026-10-10 B3 renewal correction
+The added c730b88 regression failed 1/125: same-owner live holds bypass the reservation table taken probe. The provider now validates the entire set against current park/pending/served state before table admission or renewal, without changing table ownership semantics or anchor-global offers. Matching provider fixture and production renewal-seam test pass: focused125/125, fullRelease1516/1516; two explicit max-census cases are not run. No engine pin change or launches.

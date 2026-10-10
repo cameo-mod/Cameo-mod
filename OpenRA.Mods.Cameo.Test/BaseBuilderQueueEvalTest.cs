@@ -11,6 +11,7 @@
 
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Linq;
 using NUnit.Framework;
 using OpenRA.Mods.CA;
 using OpenRA.Mods.CA.Traits;
@@ -1052,6 +1053,9 @@ namespace OpenRA.Mods.Cameo.Test
 				ReservedVersions.Add(modelVersion);
 				ReservedUntilTicks.Add(untilTick);
 				if (modelVersion >= 0 && modelVersion != Version)
+					return false;
+				if (anchors.Any(a => Taken.Contains(a) || (Parked.TryGetValue(a, out var park)
+					&& Now < park.Until && (park.Owner == null || ReferenceEquals(park.Owner, owner)))))
 					return false;
 				return Reservations.TryReserveAll(anchors, owner, Now, untilTick,
 					a => Taken.Contains(a) || (Parked.TryGetValue(a, out var p) && Now < p.Until
