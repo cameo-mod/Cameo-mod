@@ -447,7 +447,8 @@ def main() -> int:
 	map_dir = OUT / "a5_fixed_tick_map"
 	shutil.copytree(ROOT / "mods/cameo/maps/ai_duel_gate_20260928", map_dir)
 	import ab_campaign_pilot as pilot
-	map_monitor = pilot.install_campaign_monitor(map_dir, 2, cap_tick=CAP_TICK, sample_interval=2000, rules_filename="rules.yaml")
+	map_monitor = pilot.install_campaign_monitor(map_dir, 2, cap_tick=CAP_TICK, sample_interval=2000,
+		rules_filename="rules.yaml", seat_names=["BotA", "BotB"])
 	results = []
 	for index in (1, 2):
 		host = host_memory_status()

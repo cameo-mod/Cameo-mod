@@ -322,10 +322,10 @@ def dry_run(m,root,engine_root=None,minutes_per_game=8.5,setup_hours=2.0):
  slot_range=[round((small_games/3+large_games)*5/60+setup_hours,2),round((small_games/3+large_games)*12/60+setup_hours,2)]
  return {"mode":"NO_LAUNCH_DRY_RUN","switch":SWITCH,"setups":len(SETUPS),"pairs":32,"games":len(jobs),"jobs":jobs,"launches":0,"execution_authorized":False,"worker_hours_estimate_at_8_5m_each":serial_hours,"parallel_slot_wall_estimate_hours_at_8_5m_each":slot_hours,"parallel_slot_wall_estimate_range_hours_5_to_12m_each":slot_range,"serial_wall_estimate_range_hours_5_to_12m_each":serial_range,"map_engine_acceptance_and_symmetric_spawn_proof":"PENDING_ENGINE_PREFLIGHT","round_stages":ROUND_STAGES,"acceptance_thresholds":m["acceptance_thresholds"],"slot_policy":m["slot_policy"],"ratchet_baseline_manifest_sha256":m["baseline_manifest_sha256"],"missing_campaign_gates":["lead-approved executable manifest and exact-baseline A5 parity receipt","engine acceptance plus symmetric spawn proof for all eight maps","fixture/negative-control acceptance for the downstream paired analyzer"]}
 
-def install_campaign_monitor(dest,seat_count,cap_tick=45000,sample_interval=5000,rules_filename="duel_rules.yaml"):
+def install_campaign_monitor(dest,seat_count,cap_tick=45000,sample_interval=5000,rules_filename="duel_rules.yaml",seat_names=None):
  """Install map-local actor-count sampling and an explicit all-seat censor marker."""
  require(seat_count in (2,4,6,8) and type(cap_tick) is int and 1000<=cap_tick<=45000 and 0<sample_interval<=cap_tick,"campaign monitor bounds")
- names=", ".join(json.dumps(f"Multi{i}") for i in range(seat_count))+', "Neutral", "Creeps"'
+ names=", ".join(json.dumps(name) for name in (seat_names or [f"Multi{i}" for i in range(seat_count)]))+', "Neutral", "Creeps"'
  lua=f'''local SeatNames = {{{names}}}
 local CapTick = {cap_tick}
 local SampleInterval = {sample_interval}

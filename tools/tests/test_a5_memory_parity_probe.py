@@ -22,10 +22,12 @@ class FixedTickParityTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temp:
             dest = pathlib.Path(temp)
             (dest / "rules.yaml").write_text("World:\n", encoding="utf-8")
-            receipt = pilot.install_campaign_monitor(dest, 2, cap_tick=16000, sample_interval=2000, rules_filename="rules.yaml")
+            receipt = pilot.install_campaign_monitor(dest, 2, cap_tick=16000, sample_interval=2000,
+                rules_filename="rules.yaml", seat_names=["BotA", "BotB"])
             self.assertEqual(16000, receipt["cap_tick"])
             lua = (dest / "ab_campaign_monitor.lua").read_text(encoding="utf-8")
             self.assertIn("local CapTick = 16000", lua)
+            self.assertIn('"BotA", "BotB", "Neutral", "Creeps"', lua)
             with self.assertRaises(ValueError):
                 pilot.install_campaign_monitor(dest, 2, cap_tick=0)
 
