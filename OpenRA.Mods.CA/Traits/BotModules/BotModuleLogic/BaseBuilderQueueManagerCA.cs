@@ -710,13 +710,9 @@ namespace OpenRA.Mods.CA.Traits
 				// coverage model version — a contested member or a stale-model set refuses the whole
 				// admission, so two queues can never split the set and each admit a duplicate.
 				if (demandPick.Demand != null && demandPick.IsRefinery && lawWants != null
-					&& (demandPick.Claim == null
-						|| !lawWants.TryReserveRefineryAnchors(
-							demandPick.Claim.Value.Anchor,
-							lawWants.RefineryClaimCoveredAnchors(demandPick.Claim.Value.Anchor),
-							demandPick.Demand,
-							world.WorldTick + baseBuilder.Info.ExpansionDemandIdleTicks,
-							lawWants.RefineryCoverageModelVersion)))
+					&& !BaseBuilderQueueEvalCA.RefineryReservationAdmits(
+						lawWants, demandPick.Claim, demandPick.Demand,
+						world.WorldTick + baseBuilder.Info.ExpansionDemandIdleTicks))
 				{
 					pendingDemandPick = default;
 					return false;
@@ -2048,19 +2044,19 @@ namespace OpenRA.Mods.CA.Traits
 						{
 							var placed = LawRefineryPlacement(actorType, distanceToBaseIsImportant, producer,
 								c.Anchor, c.ResourceCells, law.ExpansionTargetClaimRadius);
-							if (placed.Location != null)
+
+							// REPAIR-B3: a legal selected site commits the claim AT THE SITE (the provider
+							// publishes pending coverage for the whole in-radius set); an offered claim
+							// with no site parks for the bounded fail cooldown instead of silently
+							// re-offering it every sweep.
+							if (BaseBuilderQueueEvalCA.CommitRefineryClaimOrPark(law, c, placed.Location))
 							{
 								Log.Write("debug", $"AI ({player.ClientIndex}): REF-1 refinery {actorType} at {placed.Location.Value} claims anchor {c.Anchor} field {c.FieldId} tier {c.Tier} gap {placed.Gap} at tick {world.WorldTick}");
-								law.RefineryClaimCommitted(c.Anchor, placed.Location.Value);
 								refineryClaimed = true;
 								if (requestRef != null)
 									baseBuilder.RequestedRefineries.Remove(requestRef);
 								return (placed.Location, c.Anchor, placed.Variant);
 							}
-
-							// REPAIR-B3: the claim was offered but no site exists — park it for the
-							// bounded fail cooldown instead of silently re-offering it every sweep.
-							law.RefineryClaimPlacementFailed(c.Anchor);
 						}
 						else
 						{

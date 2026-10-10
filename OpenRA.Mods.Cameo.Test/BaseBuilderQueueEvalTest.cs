@@ -1014,6 +1014,239 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(table.TryReserve(new CPos(2, 2), other, 10, 50, _ => false), Is.True);
 		}
 
+		// REPAIR-B3 production lifecycle (VP rereview eafdfb6): the five wired call sites run
+		// through the BaseBuilderQueueEvalCA seams below — exercised end-to-end against a
+		// recording provider backed by the real RefineryAnchorReservations table, mirroring
+		// ExpansionPlannerBotModule's version guard, taken probe and commit-clear semantics.
+
+		sealed class RecordingRefineryLaw : IBotExpansionTargetProvider
+		{
+			public readonly RefineryAnchorReservations Reservations = new();
+			public readonly HashSet<CPos> Taken = new();
+			public readonly HashSet<CPos> Parked = new();
+			public readonly List<(CPos Anchor, CPos Site)> Committed = new();
+			public readonly List<CPos> PlacementFailed = new();
+			public readonly List<int> ReservedVersions = new();
+			public readonly List<int> ReservedUntilTicks = new();
+			public IReadOnlyList<CPos> Covered = new CPos[0];
+			public int Version = 1;
+			public int Now;
+			public int CoveredCalls;
+			public int SetReleaseCalls;
+
+			public CPos? ExpansionTarget => null;
+			public bool WantsRefineryAtExpansionTarget => false;
+			public int ExpansionTargetClaimRadius => 0;
+			public CPos? RefineryClaimTarget => null;
+			public int RefineryCoverageModelVersion => Version;
+
+			public IReadOnlyList<CPos> RefineryClaimCoveredAnchors(CPos anchor)
+			{
+				CoveredCalls++;
+				return Covered;
+			}
+
+			public bool TryReserveRefineryAnchors(CPos site, IReadOnlyCollection<CPos> anchors, object owner, int untilTick, int modelVersion = -1)
+			{
+				ReservedVersions.Add(modelVersion);
+				ReservedUntilTicks.Add(untilTick);
+				if (modelVersion >= 0 && modelVersion != Version)
+					return false;
+				return Reservations.TryReserveAll(anchors, owner, Now, untilTick, a => Taken.Contains(a) || Parked.Contains(a));
+			}
+
+			public void RefineryClaimCommitted(CPos anchor, CPos site)
+			{
+				Committed.Add((anchor, site));
+				Reservations.ClearAll(Covered);
+			}
+
+			public void RefineryClaimPlacementFailed(CPos anchor)
+			{
+				PlacementFailed.Add(anchor);
+				Parked.Add(anchor);
+			}
+
+			public int ReleaseRefineryAnchors(object owner) => Reservations.ReleaseAllForOwner(owner);
+
+			public int ReleaseRefineryAnchors(IReadOnlyCollection<CPos> anchors, object owner)
+			{
+				SetReleaseCalls++;
+				return Reservations.ReleaseAll(anchors, owner);
+			}
+		}
+
+		static RefineryAnchorClaim ClaimAt(CPos anchor) =>
+			new(anchor, anchor + new CVec(3, 0), fieldId: 1, tier: 1, resourceCells: new[] { anchor });
+
+		[Test]
+		public void AdmissionConflictRefusesTheWholeSetAndLeavesNoHold()
+		{
+			// Queue-admission gate: a contested member refuses the whole reservation — the
+			// caller treats false as "never queue or bind", so no partial holds and no claim.
+			var law = new RecordingRefineryLaw { Covered = new[] { new CPos(1, 1), new CPos(2, 2), new CPos(3, 3) } };
+			var owner = new object();
+			var foreign = new object();
+			law.Reservations.TryReserve(new CPos(2, 2), foreign, 0, 500, _ => false);
+
+			Assert.That(BaseBuilderQueueEvalCA.RefineryReservationAdmits(
+				law, ClaimAt(new CPos(1, 1)), owner, untilTick: 100), Is.False);
+			Assert.That(law.Reservations.LiveSetFor(law.Covered, owner, 10), Is.False);
+			Assert.That(law.Reservations.LiveAt(new CPos(1, 1), 10), Is.False); // no partial hold
+			Assert.That(law.Reservations.LiveAt(new CPos(3, 3), 10), Is.False);
+		}
+
+		[Test]
+		public void NullClaimRefusesAdmissionBeforeAnyReserveCall()
+		{
+			var law = new RecordingRefineryLaw();
+			Assert.That(BaseBuilderQueueEvalCA.RefineryReservationAdmits(law, null, new object(), 100), Is.False);
+			Assert.That(law.ReservedVersions, Is.Empty);
+			Assert.That(law.CoveredCalls, Is.EqualTo(0));
+		}
+
+		[Test]
+		public void AdmissionBindsTheWholeCoveredSetAtomically()
+		{
+			// Successful admission reserves every covered member under the live model version —
+			// the set the provider computed, owner-keyed to the demand, TTL'd to the demand's
+			// idle window.
+			var covered = new CPos[] { new(1, 1), new(2, 2), new(3, 3) };
+			var law = new RecordingRefineryLaw { Covered = covered, Version = 7, Now = 20 };
+			var demand = new ExpansionDemand(null);
+
+			Assert.That(BaseBuilderQueueEvalCA.RefineryReservationAdmits(
+				law, ClaimAt(new CPos(1, 1)), demand, untilTick: 300), Is.True);
+			Assert.That(law.Reservations.LiveSetFor(covered, demand, 21), Is.True);
+			Assert.That(law.ReservedVersions, Is.EqualTo(new[] { 7 }));   // live version forwarded
+			Assert.That(law.ReservedUntilTicks, Is.EqualTo(new[] { 300 }));
+			Assert.That(law.CoveredCalls, Is.EqualTo(1));                 // one set, computed once
+		}
+
+		[Test]
+		public void CommittedPlacementPublishesTheSelectedSiteAndClearsHolds()
+		{
+			// The production commit call passes the ACTUAL selected placement — the anchor is
+			// the claim; the site is wherever the footprint legally landed. The provider
+			// publishes the whole-set pending coverage and clears the demand's reservations.
+			var covered = new CPos[] { new(1, 1), new(2, 2), new(3, 3) };
+			var law = new RecordingRefineryLaw { Covered = covered };
+			var owner = new object();
+			var claim = ClaimAt(new CPos(1, 1));
+			law.Reservations.TryReserveAll(covered, owner, 0, 100, _ => false);
+			var selected = new CPos(4, 5); // the legal site — deliberately not the anchor
+
+			Assert.That(BaseBuilderQueueEvalCA.CommitRefineryClaimOrPark(law, claim, selected), Is.True);
+			Assert.That(law.Committed, Is.EqualTo(new[] { (new CPos(1, 1), selected) }));
+			Assert.That(law.PlacementFailed, Is.Empty);
+			Assert.That(law.Reservations.Count, Is.EqualTo(0)); // commit consumed the holds
+		}
+
+		[Test]
+		public void FailedPlacementParksTheOfferedAnchorAndCommitsNothing()
+		{
+			// No legal site for the offered claim — the manager signals placement failure so
+			// the provider bounds the retry (parked = taken here), and no commit fires.
+			var law = new RecordingRefineryLaw();
+			var claim = ClaimAt(new CPos(6, 6));
+
+			Assert.That(BaseBuilderQueueEvalCA.CommitRefineryClaimOrPark(law, claim, null), Is.False);
+			Assert.That(law.PlacementFailed, Is.EqualTo(new[] { new CPos(6, 6) }));
+			Assert.That(law.Committed, Is.Empty);
+
+			// The parked anchor now refuses fresh reservation — it is off the market for the
+			// bounded cooldown instead of looping an immediate re-offer.
+			Assert.That(law.TryReserveRefineryAnchors(new CPos(6, 6), new[] { new CPos(6, 6) },
+				new object(), 100), Is.False);
+		}
+
+		[Test]
+		public void TeardownReleasesByOwnerKeyWithoutRecomputingTheSet()
+		{
+			// Both production teardown paths (ExpireExpansionDemand lapse and the
+			// VerifyDemandBinding unwind) share this seam. The admission-time set has drifted:
+			// the provider's recomputation would now answer a different, smaller set — a
+			// set-keyed release would leak (3,3). Owner-keyed release frees all three holds
+			// and never consults the covered set or the set-overload release.
+			var coveredAtAdmission = new CPos[] { new(1, 1), new(2, 2), new(3, 3) };
+			var law = new RecordingRefineryLaw { Covered = coveredAtAdmission };
+			var owner = new object();
+			var other = new object();
+			law.Reservations.TryReserveAll(coveredAtAdmission, owner, 0, 100, _ => false);
+			law.Reservations.TryReserve(new CPos(9, 9), other, 0, 100, _ => false);
+			law.Covered = new[] { new CPos(1, 1) }; // the model drifted — (3,3) no longer covered
+
+			Assert.That(BaseBuilderQueueEvalCA.ReleaseRefineryReservations(law, owner), Is.EqualTo(3));
+			Assert.That(law.Reservations.LiveAt(new CPos(3, 3), 10), Is.False); // no leaked member
+			Assert.That(law.Reservations.LiveAt(new CPos(9, 9), 10), Is.True);  // foreign hold kept
+			Assert.That(law.CoveredCalls, Is.EqualTo(0));   // zero set computation at teardown
+			Assert.That(law.SetReleaseCalls, Is.EqualTo(0)); // and never the set-keyed overload
+
+			// The freed anchors are immediately claimable again — the lapse path depends on
+			// this so a still-Ready refinery can re-adopt the very same anchor.
+			Assert.That(law.TryReserveRefineryAnchors(new CPos(2, 2), new[] { new CPos(2, 2) },
+				other, 200), Is.True);
+		}
+
+		[Test]
+		public void RenewalRefreshesUnderTheLiveModelAndRefusalClearsTheClaim()
+		{
+			// Sweep-time renewal reserves the CURRENT covered set under the provider's live
+			// version — the demand keeps its claim; a contested renewal clears it so the
+			// placement falls back to a fresh claim (the law's one-refinery rule stands).
+			var covered = new CPos[] { new(1, 1), new(2, 2) };
+			var law = new RecordingRefineryLaw { Covered = covered, Version = 4 };
+			var demand = new ExpansionDemand(null) { ReservedClaim = ClaimAt(new CPos(1, 1)), RefineryItem = "proc" };
+
+			BaseBuilderQueueEvalCA.RenewRefineryReservation(law, demand, untilTick: 500);
+			Assert.That(demand.ReservedClaim, Is.Not.Null);
+			Assert.That(law.Reservations.LiveSetFor(covered, demand, 10), Is.True);
+			Assert.That(law.ReservedVersions, Is.EqualTo(new[] { 4 }));
+
+			// A foreign owner contests a member between sweeps — the renewal refuses and the
+			// stale claim is cleared (its surviving holds lapse at their own expiry).
+			var foreign = new object();
+			law.Reservations.TryReserve(new CPos(5, 5), foreign, 10, 900, _ => false);
+			law.Covered = new[] { new CPos(1, 1), new CPos(5, 5) };
+			BaseBuilderQueueEvalCA.RenewRefineryReservation(law, demand, untilTick: 800);
+			Assert.That(demand.ReservedClaim, Is.Null);
+		}
+
+		[Test]
+		public void RenewalDropsTheClaimWhenTheLawOrTheBindingIsGone()
+		{
+			var demand = new ExpansionDemand(null) { ReservedClaim = ClaimAt(new CPos(1, 1)), RefineryItem = "proc" };
+
+			// Provider gone (law switched off / module missing) — the claim cannot stand.
+			BaseBuilderQueueEvalCA.RenewRefineryReservation(null, demand, 100);
+			Assert.That(demand.ReservedClaim, Is.Null);
+
+			// The bound refinery item already unwound — a stale claim is dropped without
+			// consulting the provider at all.
+			var law = new RecordingRefineryLaw();
+			var stale = new ExpansionDemand(null) { ReservedClaim = ClaimAt(new CPos(2, 2)) };
+			BaseBuilderQueueEvalCA.RenewRefineryReservation(law, stale, 100);
+			Assert.That(stale.ReservedClaim, Is.Null);
+			Assert.That(law.ReservedVersions, Is.Empty);
+		}
+
+		[Test]
+		public void StaleModelVersionRefusesAndTheFreshReadRetries()
+		{
+			// The provider refuses a version that no longer matches its coverage model —
+			// the protocol the seams implement by forwarding the live version every call.
+			var law = new RecordingRefineryLaw { Version = 5 };
+			var owner = new object();
+			Assert.That(law.TryReserveRefineryAnchors(new CPos(1, 1), new[] { new CPos(1, 1) },
+				owner, 100, modelVersion: 4), Is.False, "a stashed version is refused");
+
+			law.Covered = new[] { new CPos(1, 1) };
+			Assert.That(BaseBuilderQueueEvalCA.RefineryReservationAdmits(
+				law, ClaimAt(new CPos(1, 1)), owner, 100), Is.True);
+			Assert.That(law.ReservedVersions, Is.EqualTo(new[] { 4, 5 }),
+				"the seam re-reads the provider's version — never a cached one");
+		}
+
 		// REPLAY-HEALTH-LOGGER seam (ACK-2 / task 01a12023) — BotQueueEpisodeTracker dedupe,
 		// episode ids, and per-instance Ready (Sol review 22861e442 F1/F3/F5).
 

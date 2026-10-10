@@ -1321,15 +1321,9 @@ namespace OpenRA.Mods.CA.Traits
 				// fresh claim at placement; the law's one-refinery-per-anchor rule stands either way.
 				// REPAIR-B3: the renewal refreshes the whole covered set under the current model
 				// version — holds on members that drifted out of coverage lapse at their own expiry.
-				if (demand.ReservedClaim is { } reserved)
-				{
-					var law = RefineryLawProvider();
-					if (demand.RefineryItem == null || law == null
-						|| !law.TryReserveRefineryAnchors(reserved.Anchor,
-							law.RefineryClaimCoveredAnchors(reserved.Anchor), demand,
-							now + Info.ExpansionDemandIdleTicks, law.RefineryCoverageModelVersion))
-						demand.ReservedClaim = null;
-				}
+				if (demand.ReservedClaim is { })
+					BaseBuilderQueueEvalCA.RenewRefineryReservation(
+						RefineryLawProvider(), demand, now + Info.ExpansionDemandIdleTicks);
 
 				// Deployed and fully placed/cleared — done.
 				if (demand.Deployed && demand.Unbound && now >= demand.ExpiresTick)
@@ -1393,7 +1387,7 @@ namespace OpenRA.Mods.CA.Traits
 			// REPAIR-B3: owner-keyed release — the admission-time covered set may have drifted since
 			// (members taken/covered/re-modelled); a recomputed set could leak a live hold.
 			if (demand.ReservedClaim != null)
-				law?.ReleaseRefineryAnchors(demand);
+				BaseBuilderQueueEvalCA.ReleaseRefineryReservations(law, demand);
 
 			// ECON-A-FIX (R4): the traveller's expansion-issuer lease is released on every
 			// lapse path (the registry prunes a dead unit's lease on its own cadence regardless).
@@ -1470,7 +1464,7 @@ namespace OpenRA.Mods.CA.Traits
 			{
 				// REPAIR-B3: owner-keyed release frees the whole (possibly drifted) reserved set.
 				if (demand.ReservedClaim != null)
-					RefineryLawProvider()?.ReleaseRefineryAnchors(demand);
+					BaseBuilderQueueEvalCA.ReleaseRefineryReservations(RefineryLawProvider(), demand);
 
 				demand.UnbindRefinery();
 			}

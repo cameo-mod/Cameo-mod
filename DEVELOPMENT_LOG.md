@@ -21329,3 +21329,27 @@ land ticks later or never) all produce identical disappearances. Corrected on
 Read-only separate MCV capture/provider and diagnostic consumer on codex/mcv-health-observation, base7ca7e9159; no YAML mount/engine/BaseBuilder edits.
 Focused9/9, Python8/8 actual canonical C# fixture UNKNOWN21, fullRelease1412/1412 PASS. Missing order/hold/transform hooks explicitly UNKNOWN.
 Next: exact-SHA VP review; cost/coverage/adoption remain gated. No launches. Insurance telemetry precedes M13 wiring per lead.
+
+## 2026-10-10 Devin REPAIR-B3 queue wiring — VP rereview fixes (lifecycle regressions + fog manifest)
+
+VP exact-SHA review of `eafdfb6a1` (`REREVIEW_2026-10-10_repair_b3_wiring_eafdfb6_luna.md`): FIX REQUIRED —
+the wired call sites were correct but unpinned (no test invoked the production lifecycle manager→provider),
+and the exact merged tree failed the fog audit.
+
+* **Seams extracted** in `BaseBuilderQueueEvalCA` (the documented call-site seam host) so the production
+  control flow is testable headless: `RefineryReservationAdmits` (admission gate — whole covered set,
+  atomic, version-guarded), `RenewRefineryReservation` (live-model renewal, clears `ReservedClaim` on
+  refusal/missing binding/missing law), `CommitRefineryClaimOrPark` (commit AT the selected site vs
+  bounded park on no-site), `ReleaseRefineryReservations` (owner-keyed, both teardown paths). All five
+  production call sites now delegate; observer/terminal-causality code untouched.
+* **+9 lifecycle regressions** in `BaseBuilderQueueEvalTest` via `RecordingRefineryLaw` — a fake
+  `IBotExpansionTargetProvider` backed by the real `RefineryAnchorReservations`, mirroring the module's
+  version guard / taken probe / commit-clear: refusal leaves no partial holds and no bind; commit
+  publishes the selected site (≠ anchor) and consumes holds; no-site parks the offered anchor;
+  teardown releases every owner hold with zero set recomputation; contested renewal clears
+  `ReservedClaim`; stale model version is refused and the seam re-reads the live version.
+* **Fog manifest reconciled**: upstream master `5ea8c84f5` introduced a 10th enumeration site in
+  `BaseBuilderQueueManagerCA` (the observer-seam `Placed` proof's own-player-filtered
+  `ActorsWithTrait<Pluggable>` scan) without bumping the manifest — the audit failed on master itself.
+  Manifest bumped 9 → 10; the scan is own-player-only (`t.Actor.Owner == player`), fog-honest.
+* Verified: Release build 0/0; focused `BaseBuilderQueueEvalTest|FieldCoverageTest` 183/183.

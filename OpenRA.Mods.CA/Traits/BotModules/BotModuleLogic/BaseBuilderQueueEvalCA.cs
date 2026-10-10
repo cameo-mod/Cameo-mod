@@ -494,6 +494,69 @@ namespace OpenRA.Mods.CA.Traits
 		/// active-state API — so those requests honestly stay UNKNOWN and expire Removed.</summary>
 		public static bool PlugInstallProven(bool slotDefinesType, bool requirementKeyed, bool acceptsNow)
 			=> slotDefinesType && !requirementKeyed && !acceptsNow;
+
+		/// <summary>
+		/// REPAIR-B3 (SPEC_2026-10-09 §3): the admission gate — reserve the claim's WHOLE covered
+		/// set atomically under the provider's current coverage-model version. False = refuse
+		/// admission (the caller clears the pending pick and returns without queueing or binding):
+		/// a null claim, a contested member, or a stale-model set must never reach the queue, so
+		/// two queues can never split the set and each admit a duplicate.
+		/// </summary>
+		public static bool RefineryReservationAdmits(
+			IBotExpansionTargetProvider law, RefineryAnchorClaim? claim, object owner, int untilTick)
+			=> claim != null && law.TryReserveRefineryAnchors(
+				claim.Value.Anchor,
+				law.RefineryClaimCoveredAnchors(claim.Value.Anchor),
+				owner, untilTick, law.RefineryCoverageModelVersion);
+
+		/// <summary>
+		/// REPAIR-B3: the bound refinery's anchor reservation renews with the demand — against the
+		/// CURRENT covered set and the live coverage-model version, so a stale-model or contested
+		/// renewal refuses and the demand falls back to a fresh claim at placement (the law's
+		/// one-refinery-per-anchor rule stands either way). Holds on members that drifted out of
+		/// coverage lapse at their own expiry. Clears <see cref="ExpansionDemand.ReservedClaim"/>
+		/// whenever the renewal cannot stand.
+		/// </summary>
+		public static void RenewRefineryReservation(
+			IBotExpansionTargetProvider law, ExpansionDemand demand, int untilTick)
+		{
+			if (law == null || demand.RefineryItem == null
+				|| !law.TryReserveRefineryAnchors(
+					demand.ReservedClaim.Value.Anchor,
+					law.RefineryClaimCoveredAnchors(demand.ReservedClaim.Value.Anchor),
+					demand, untilTick, law.RefineryCoverageModelVersion))
+				demand.ReservedClaim = null;
+		}
+
+		/// <summary>
+		/// REPAIR-B3: resolve an offered claim after the site search — a legal selected site
+		/// commits AT THE SITE (the provider publishes pending coverage for the whole in-radius
+		/// set around it and clears the reservations); no legal site parks the anchor for the
+		/// bounded fail cooldown so the next claim goes through instead of an unbounded
+		/// re-offer cycle. True = the caller queues the placement order; false = no refinery
+		/// placed this sweep.
+		/// </summary>
+		public static bool CommitRefineryClaimOrPark(
+			IBotExpansionTargetProvider law, RefineryAnchorClaim claim, CPos? placedSite)
+		{
+			if (placedSite != null)
+			{
+				law.RefineryClaimCommitted(claim.Anchor, placedSite.Value);
+				return true;
+			}
+
+			law.RefineryClaimPlacementFailed(claim.Anchor);
+			return false;
+		}
+
+		/// <summary>
+		/// REPAIR-B3: teardown frees the demand's reservations by OWNER key — shared by the
+		/// lapse (ExpireExpansionDemand) and the binding-unwind (VerifyDemandBinding) paths.
+		/// Never recompute the admission-time covered set here: it may have drifted (members
+		/// taken, covered or re-modelled), and a recomputed set can leak a live hold. Idempotent.
+		/// </summary>
+		public static int ReleaseRefineryReservations(IBotExpansionTargetProvider law, object owner) =>
+			law?.ReleaseRefineryAnchors(owner) ?? 0;
 	}
 
 	// REPLAY-HEALTH-LOGGER (ACK-2, task 01a12023): record-only queue transitions for the
