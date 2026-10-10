@@ -15,6 +15,7 @@ using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.Cameo.Traits;
 using OpenRA.Mods.Cameo.Traits.BotModules;
 using OpenRA.Mods.Common.Traits;
+using OpenRA.Primitives;
 using OpenRA.Support;
 
 namespace OpenRA.Mods.Cameo.Test
@@ -50,13 +51,25 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
-		public void OneRefineryServesAtMostOneAnchor()
+		public void OneRefineryServesEveryAnchorInRadius()
 		{
+			// REPAIR-B3 shared coverage (SPEC_2026-10-09 §2): one usable refinery serves EVERY anchor in
+			// range — the retired 1:1 binding left the second spreader falsely unserved.
 			var anchors = new[] { C(10, 10), C(14, 10) };
 			var assigned = ExpansionPlannerBotModule.AssignRefineries(anchors, new[] { C(12, 10) }, 8);
 
-			// equidistant: the lower anchor index takes it, the other stays unserved
-			Assert.That(assigned, Is.EqualTo(new[] { 0, -1 }));
+			Assert.That(assigned, Is.EqualTo(new[] { 0, 0 }));
+		}
+
+		[Test]
+		public void AssignRefineriesRadiusTenDiagonalBoundary()
+		{
+			// SPEC radius-10 boundary: (7,7) away is inside (d^2=98 <= 100); one cell past on both axes is out.
+			var refinery = new[] { C(30, 10) };
+			Assert.That(ExpansionPlannerBotModule.AssignRefineries(new[] { C(37, 17) }, refinery, 10),
+				Is.EqualTo(new[] { 0 }));
+			Assert.That(ExpansionPlannerBotModule.AssignRefineries(new[] { C(38, 18) }, refinery, 10),
+				Is.EqualTo(new[] { -1 }));
 		}
 
 		[Test]
@@ -105,7 +118,9 @@ namespace OpenRA.Mods.Cameo.Test
 		{
 			// REF-1 v2 spec test: field A has three spreaders and one refinery already; field B has one spreader,
 			// none — both in reach. B's spreader must be claimed next (tier 1), not A's second (tier 2).
-			var anchors = new[] { C(20, 20), C(24, 20), C(28, 20), C(60, 20) };
+			// REPAIR-B3: the extra spreaders sit beyond the serve radius so the existing refinery does NOT
+			// cover them — in-radius siblings would be served outright and never reach the claim order.
+			var anchors = new[] { C(20, 20), C(32, 20), C(36, 20), C(60, 20) };
 			var fieldOf = new[] { 0, 0, 0, 1 };
 			var fieldCells = Fields(
 				new[] { C(19, 19), C(20, 20), C(21, 20), C(25, 20), C(29, 20) },
@@ -113,7 +128,7 @@ namespace OpenRA.Mods.Cameo.Test
 			var buildings = new[] { C(10, 20) };
 
 			var order = ExpansionPlannerBotModule.ClaimOrder(anchors, fieldOf, fieldCells,
-				new[] { C(21, 21) }, null, buildings, 8, 80, null, null, null,
+				new[] { C(21, 21) }, buildings, 8, 80, null, null, null,
 				out var unservedAnchors, out var unservedFields, out var tiers, out _, out _);
 
 			Assert.That(order[0], Is.EqualTo(3));
@@ -129,13 +144,14 @@ namespace OpenRA.Mods.Cameo.Test
 		public void ClaimOrderTierTwoPicksTheSpreaderFarthestFromTheFieldsRefinery()
 		{
 			// Once the only other field is served, field A's second refinery goes to the spreader farthest from
-			// A's first refinery (at 21,21 serving the (20,20) spreader): (28,20), not (24,20).
-			var anchors = new[] { C(20, 20), C(24, 20), C(28, 20) };
+			// A's first refinery (at 21,21 serving the (20,20) spreader). REPAIR-B3: the candidates sit beyond
+			// serve radius — shared coverage would serve them outright inside it.
+			var anchors = new[] { C(20, 20), C(32, 20), C(38, 20) };
 			var fieldOf = new[] { 0, 0, 0 };
 			var fieldCells = Fields(new[] { C(19, 19), C(20, 20), C(21, 20), C(25, 20), C(29, 20) });
 
 			var order = ExpansionPlannerBotModule.ClaimOrder(anchors, fieldOf, fieldCells,
-				new[] { C(21, 21) }, null, new[] { C(10, 20) }, 8, 80, null, null, null,
+				new[] { C(21, 21) }, new[] { C(10, 20) }, 8, 80, null, null, null,
 				out var unservedAnchors, out var unservedFields, out var tiers, out _, out _);
 
 			Assert.That(order, Is.EqualTo(new[] { 2, 1 }));
@@ -153,7 +169,7 @@ namespace OpenRA.Mods.Cameo.Test
 			var fieldCells = Fields(new[] { C(10, 10), C(11, 10), C(12, 10), C(13, 10) });
 
 			var order = ExpansionPlannerBotModule.ClaimOrder(anchors, fieldOf, fieldCells,
-				new CPos[0], null, new[] { C(8, 10) }, 8, 80, null, null, null,
+				new CPos[0], new[] { C(8, 10) }, 8, 80, null, null, null,
 				out _, out _, out var tiers, out _, out _);
 
 			Assert.That(order, Is.EqualTo(new[] { 1 }));
@@ -170,7 +186,7 @@ namespace OpenRA.Mods.Cameo.Test
 			var fieldCells = Fields(new[] { C(20, 19), C(25, 20) }, new[] { C(60, 19) });
 
 			var order = ExpansionPlannerBotModule.ClaimOrder(anchors, fieldOf, fieldCells,
-				new CPos[0], null, new[] { C(10, 20) }, 8, 80, i => i == 0, i => i == 0, null,
+				new CPos[0], new[] { C(10, 20) }, 8, 80, i => i == 0, i => i == 0, null,
 				out var unservedAnchors, out var unservedFields, out var tiers, out _, out _);
 
 			Assert.That(order, Is.EqualTo(new[] { 2, 1 }));
@@ -189,7 +205,7 @@ namespace OpenRA.Mods.Cameo.Test
 			var fieldCells = Fields(new[] { C(12, 9) }, new[] { C(50, 9) });
 
 			var order = ExpansionPlannerBotModule.ClaimOrder(anchors, fieldOf, fieldCells,
-				new[] { C(13, 10) }, null, new[] { C(10, 10), C(45, 10) }, 8, 10, null, null, null,
+				new[] { C(13, 10) }, new[] { C(10, 10), C(45, 10) }, 8, 10, null, null, null,
 				out var unservedAnchors, out var unservedFields, out _, out _, out _);
 
 			Assert.That(order, Is.EqualTo(new[] { 1 }));
@@ -208,7 +224,7 @@ namespace OpenRA.Mods.Cameo.Test
 			var stack = new[] { C(9, 10), C(11, 10), C(12, 10) };
 
 			var order = ExpansionPlannerBotModule.ClaimOrder(anchors, fieldOf, fieldCells,
-				stack, null, new[] { C(5, 10), C(55, 10) }, 8, 10, null, null, null,
+				stack, new[] { C(5, 10), C(55, 10) }, 8, 10, null, null, null,
 				out var unservedAnchors, out var unservedFields, out _, out _, out _);
 
 			Assert.That(order, Is.EqualTo(new[] { 1 }));
@@ -225,7 +241,7 @@ namespace OpenRA.Mods.Cameo.Test
 			var fieldCells = Fields(new[] { C(10, 9) }, new[] { C(18, 9) });
 
 			var order = ExpansionPlannerBotModule.ClaimOrder(anchors, fieldOf, fieldCells,
-				new CPos[0], null, new[] { C(12, 10) }, 8, 10, i => i == 0, null, null,
+				new CPos[0], new[] { C(12, 10) }, 8, 10, i => i == 0, null, null,
 				out var unservedAnchors, out var unservedFields, out var tiers, out _, out _);
 
 			Assert.That(order, Is.EqualTo(new[] { 1 }));
@@ -244,7 +260,7 @@ namespace OpenRA.Mods.Cameo.Test
 			var fieldCells = Fields(new[] { C(20, 19) }, new[] { C(60, 19) });
 
 			var order = ExpansionPlannerBotModule.ClaimOrder(anchors, fieldOf, fieldCells,
-				new CPos[0], null, new[] { C(10, 20) }, 8, 80, null, null, C(58, 22),
+				new CPos[0], new[] { C(10, 20) }, 8, 80, null, null, C(58, 22),
 				out _, out _, out _, out _, out _);
 
 			Assert.That(order[0], Is.EqualTo(1));
@@ -268,7 +284,7 @@ namespace OpenRA.Mods.Cameo.Test
 			var anchors = new[] { C(10, 10), C(18, 10) };
 			var order = ExpansionPlannerBotModule.ClaimOrder(anchors, new[] { 0, 1 },
 				Fields(new[] { C(10, 9) }, new[] { C(18, 9) }),
-				new CPos[0], null, new[] { C(12, 10) }, 8, 10, i => i == 0, null, null,
+				new CPos[0], new[] { C(12, 10) }, 8, 10, i => i == 0, null, null,
 				out var unserved, out _, out _, out _, out _);
 			Assert.That(order, Is.EqualTo(new[] { 1 }));
 			Assert.That(unserved, Is.EqualTo(2));
@@ -285,7 +301,7 @@ namespace OpenRA.Mods.Cameo.Test
 			var fieldCells = Fields(new[] { C(47, 20), C(48, 20), C(52, 20) });
 
 			var order = ExpansionPlannerBotModule.ClaimOrder(anchors, fieldOf, fieldCells,
-				new CPos[0], null, new[] { C(44, 20) }, 8, 6, null, null, null,
+				new CPos[0], new[] { C(44, 20) }, 8, 6, null, null, null,
 				out var unservedAnchors, out var unservedFields, out _, out _, out _);
 
 			Assert.That(order, Is.EqualTo(new[] { 0 }));
@@ -303,7 +319,7 @@ namespace OpenRA.Mods.Cameo.Test
 			var fieldCells = Fields(new[] { C(47, 20), C(48, 20) });
 
 			var order = ExpansionPlannerBotModule.ClaimOrder(anchors, new[] { 1 }, fieldCells,
-				new[] { C(40, 20) }, null, new[] { C(44, 20) }, 8, 6, null, null, null,
+				new[] { C(40, 20) }, new[] { C(44, 20) }, 8, 6, null, null, null,
 				out var unservedAnchors, out var unservedFields, out _, out _, out _);
 
 			Assert.That(order, Is.Empty);
@@ -321,7 +337,7 @@ namespace OpenRA.Mods.Cameo.Test
 			var fieldCells = Fields(new[] { C(53, 20) }, new[] { C(61, 20) });
 
 			var order = ExpansionPlannerBotModule.ClaimOrder(anchors, new[] { 0, 1 }, fieldCells,
-				new CPos[0], null, new[] { C(44, 20) }, 8, 6, null, null, null,
+				new CPos[0], new[] { C(44, 20) }, 8, 6, null, null, null,
 				out _, out _, out var tiers, out _, out _);
 
 			Assert.That(order, Is.EqualTo(new[] { 0 }));
@@ -336,23 +352,22 @@ namespace OpenRA.Mods.Cameo.Test
 
 			var order = ExpansionPlannerBotModule.ClaimOrder(anchors, new[] { 0, 1 },
 				Fields(new[] { C(53, 20) }, new[] { C(61, 20) }),
-				new CPos[0], null, new[] { C(44, 20) }, 8, 6, i => i == 0, i => i == 0, null,
+				new CPos[0], new[] { C(44, 20) }, 8, 6, i => i == 0, i => i == 0, null,
 				out _, out _, out _, out _, out _);
 
 			Assert.That(order, Is.Empty);
 		}
 
 		[Test]
-		public void RefineryFlushToTheFieldBindsItsAnchorBeyondServeRadius()
+		public void RefineryFlushBeyondServeRadiusBindsNothing()
 		{
-			// A refinery placed flush to a field's far edge can land beyond the serve radius from the spreader;
-			// it still is that field's refinery and binds the nearest of the field's anchors — without this the
-			// anchor stays unserved and the law claims a duplicate.
+			// R1 (SPEC §30 "a far same-field anchor does not inherit coverage"): a refinery flush to the
+			// field's far edge but beyond the serve radius serves NOTHING — the retired flush exception
+			// used to bind the whole field's anchors to it.
 			var anchors = new[] { C(10, 10), C(14, 10) };
-			var assigned = ExpansionPlannerBotModule.AssignRefineries(anchors, new[] { C(30, 10) }, 8,
-				new[] { 0, 0 }, new[] { 0 });
+			var assigned = ExpansionPlannerBotModule.AssignRefineries(anchors, new[] { C(30, 10) }, 8);
 
-			Assert.That(assigned, Is.EqualTo(new[] { -1, 0 }));
+			Assert.That(assigned, Is.EqualTo(new[] { -1, -1 }));
 		}
 
 		[Test]
@@ -453,7 +468,7 @@ namespace OpenRA.Mods.Cameo.Test
 			var fieldCells = Fields(new[] { C(11, 10) }, new[] { C(61, 10) });
 
 			ExpansionPlannerBotModule.ClaimOrder(anchors, fieldOf, fieldCells,
-				new CPos[0], null, new[] { C(10, 12) }, 8, 6, null, null, null,
+				new CPos[0], new[] { C(10, 12) }, 8, 6, null, null, null,
 				out _, out _, out _, out var claimable, out var beyond);
 
 			Assert.That(claimable, Is.EqualTo(1));
@@ -461,7 +476,7 @@ namespace OpenRA.Mods.Cameo.Test
 
 			// A refinery serving A: nothing claimable remains, B stays unserved beyond reach.
 			ExpansionPlannerBotModule.ClaimOrder(anchors, fieldOf, fieldCells,
-				new[] { C(11, 10) }, null, new[] { C(10, 12) }, 8, 6, null, null, null,
+				new[] { C(11, 10) }, new[] { C(10, 12) }, 8, 6, null, null, null,
 				out _, out _, out _, out var claimableServed, out var beyondServed);
 
 			Assert.That(claimableServed, Is.EqualTo(0));
@@ -643,6 +658,334 @@ namespace OpenRA.Mods.Cameo.Test
 			var sold = RefineryLifecycle.Classify(false, false, false);
 			Assert.That(sold.LostCause, Is.EqualTo("sold"));
 			Assert.That(sold.Acquired, Is.False);
+		}
+
+		// REPAIR-B3 (SPEC_2026-10-09): the coverage oracle — deterministic route accounting, leg-pair
+		// verdicts, site ranking, and the bounded probe budget. Pure functions; no World.
+
+		[Test]
+		public void RouteLengthMilliCountsDiagonalStepsDearly()
+		{
+			Assert.That(RefineryCoverageOracle.RouteLengthMilli(new List<CPos> { C(0, 0) }), Is.EqualTo(0));
+			Assert.That(RefineryCoverageOracle.RouteLengthMilli(new List<CPos> { C(0, 0), C(1, 0) }), Is.EqualTo(1000));
+			Assert.That(RefineryCoverageOracle.RouteLengthMilli(new List<CPos> { C(0, 0), C(1, 1) }), Is.EqualTo(1414));
+			Assert.That(RefineryCoverageOracle.RouteLengthMilli(new List<CPos> { C(0, 0), C(1, 1), C(2, 1) }), Is.EqualTo(2414));
+		}
+
+		[Test]
+		public void RouteLengthMilliIsDirectionSymmetric()
+		{
+			var forward = new List<CPos> { C(0, 0), C(1, 1), C(2, 1), C(3, 1) };
+			var reverse = forward.AsEnumerable().Reverse().ToList();
+			Assert.That(RefineryCoverageOracle.RouteLengthMilli(reverse),
+				Is.EqualTo(RefineryCoverageOracle.RouteLengthMilli(forward)));
+		}
+
+		[Test]
+		public void WithinServeRadiusIsInclusive()
+		{
+			Assert.That(RefineryCoverageOracle.WithinServeRadius(C(0, 0), C(10, 0), 10), Is.True);
+			Assert.That(RefineryCoverageOracle.WithinServeRadius(C(0, 0), C(7, 7), 10), Is.True);    // 98 <= 100
+			Assert.That(RefineryCoverageOracle.WithinServeRadius(C(0, 0), C(8, 8), 10), Is.False);   // 128 > 100
+		}
+
+		[Test]
+		public void BothLegsCoverRequiresBothLegsInsideTheBound()
+		{
+			const int limit = 10_000;
+			var okOut = new RefineryRouteWitness(true, 9_000, 6_000, 1);
+			var okIn = new RefineryRouteWitness(true, 8_000, 5_000, 1);
+			var longIn = new RefineryRouteWitness(true, 12_000, 8_000, 1);
+			var deadOut = new RefineryRouteWitness(false, 0, int.MaxValue, 1);
+
+			Assert.That(RefineryCoverageOracle.BothLegsCover(okOut, okIn, limit), Is.True);
+			// Asymmetric legs (spec F9): a covered outbound + over-long inbound does not cover.
+			Assert.That(RefineryCoverageOracle.BothLegsCover(okOut, longIn, limit), Is.False);
+			Assert.That(RefineryCoverageOracle.BothLegsCover(deadOut, okIn, limit), Is.False);
+		}
+
+		[Test]
+		public void VerdictAggregationTreatsDeferredAsUnknown()
+		{
+			Assert.That(RefineryCoverageOracle.Aggregate(true, true), Is.EqualTo(RefineryCoverageVerdict.Covered));
+			Assert.That(RefineryCoverageOracle.Aggregate(true, false), Is.EqualTo(RefineryCoverageVerdict.Covered));
+			// Budget cut before every candidate failed: Unknown, not Unserved — the anchor is retried.
+			Assert.That(RefineryCoverageOracle.Aggregate(false, true), Is.EqualTo(RefineryCoverageVerdict.Unknown));
+			Assert.That(RefineryCoverageOracle.Aggregate(false, false), Is.EqualTo(RefineryCoverageVerdict.Unserved));
+		}
+
+		[Test]
+		public void CompareSitesIsDeterministic()
+		{
+			// Newly covered desc, then cost asc, then X then Y.
+			Assert.That(RefineryCoverageOracle.CompareSites(2, 5000, C(1, 1), 1, 1000, C(0, 0)), Is.LessThan(0));
+			Assert.That(RefineryCoverageOracle.CompareSites(1, 1000, C(0, 0), 1, 5000, C(0, 0)), Is.LessThan(0));
+			Assert.That(RefineryCoverageOracle.CompareSites(1, 1000, C(0, 0), 1, 1000, C(1, 0)), Is.LessThan(0));
+			Assert.That(RefineryCoverageOracle.CompareSites(1, 1000, C(0, 0), 1, 1000, C(0, 1)), Is.LessThan(0));
+			Assert.That(RefineryCoverageOracle.CompareSites(1, 1000, C(0, 0), 1, 1000, C(0, 0)), Is.EqualTo(0));
+		}
+
+		[Test]
+		public void ProbeBudgetCapsSpanTheWholeRefresh()
+		{
+			// R1 (SPEC "in one coverage refresh"): the site/probe ceilings bound the entire sweep —
+			// nothing re-arms them mid-refresh; NewTick only re-opens the pacing window.
+			var budget = new RefineryProbeBudget(siteLimit: 2, probeLimit: 3, tickProbeLimit: 2);
+
+			Assert.That(budget.TryConsumeSite(), Is.True);
+			Assert.That(budget.TryConsumeSite(), Is.True);
+			Assert.That(budget.SiteCapSpent, Is.True);               // the ceiling reads spent at 2/2
+			Assert.That(budget.TryConsumeSite(), Is.False);          // ... and a 3rd site is refused
+			Assert.That(budget.RefreshSpent, Is.True);
+			Assert.That(budget.DeferredCandidates, Is.EqualTo(1));
+
+			budget.NewTick();                                        // a new tick does NOT re-arm caps
+			Assert.That(budget.TryConsumeSite(), Is.False);
+			Assert.That(budget.SitesEvaluated, Is.EqualTo(2));
+		}
+
+		[Test]
+		public void ProbeBudgetTickPacingIsIndependentOfRefreshCaps()
+		{
+			// The per-tick limit only paces the spend: probes exhaust the tick window without
+			// touching the refresh ceiling, and NewTick re-opens the window for the same refresh.
+			var budget = new RefineryProbeBudget(siteLimit: 8, probeLimit: 8, tickProbeLimit: 2);
+
+			Assert.That(budget.TryConsumeProbe(), Is.True);
+			Assert.That(budget.TryConsumeProbe(), Is.True);
+			Assert.That(budget.TryConsumeProbe(), Is.False);         // tick window spent (2/8 refresh)
+			Assert.That(budget.TickProbesOpen, Is.False);
+			Assert.That(budget.ProbeCapSpent, Is.False);
+
+			budget.NewTick();
+			Assert.That(budget.TickProbesOpen, Is.True);
+			Assert.That(budget.TryConsumeProbe(), Is.True);          // 3/8 refresh — still open
+			Assert.That(budget.ProbeCapSpent, Is.False);
+		}
+
+		[Test]
+		public void RouteTravelMilliUsesTheCellSpeed()
+		{
+			// R1 (SPEC "estimated simulation travel time using movement/terrain speed"): the same
+			// path costs half the time at double the speed — milli-ticks = milli-cells x 1024 / speed.
+			var path = new List<CPos> { C(0, 0), C(1, 0), C(2, 0) };   // two orthogonal steps, 2000 milli-cells
+			Assert.That(RefineryCoverageOracle.RouteTravelMilli(path, _ => 100), Is.EqualTo(2_000 * 1024 / 100));
+			Assert.That(RefineryCoverageOracle.RouteTravelMilli(path, _ => 200), Is.EqualTo(2_000 * 1024 / 200));
+			Assert.That(RefineryCoverageOracle.RouteTravelMilli(new List<CPos> { C(0, 0) }, _ => 100), Is.EqualTo(0));
+		}
+
+		[Test]
+		public void RouteTravelMilliRanksZeroSpeedCellsInfinite()
+		{
+			// A zero-speed cell contradicts the path that found it — the route can never win.
+			var path = new List<CPos> { C(0, 0), C(1, 0), C(2, 0) };
+			Assert.That(RefineryCoverageOracle.RouteTravelMilli(path, c => c.X == 1 ? 0 : 100), Is.EqualTo(int.MaxValue));
+		}
+
+		[Test]
+		public void LegPairRankPrefersTheFasterRoundTrip()
+		{
+			// R1: ranking follows simulation travel time, not raw route length — a longer fast-terrain
+			// route outranks a shorter slow one.
+			var fastLong = new RefineryRouteWitness(true, 20_000, 10_000, 1);
+			var fastLongBack = new RefineryRouteWitness(true, 20_000, 10_000, 1);
+			var slowShort = new RefineryRouteWitness(true, 12_000, 30_000, 1);
+			var slowShortBack = new RefineryRouteWitness(true, 12_000, 30_000, 1);
+
+			Assert.That(RefineryCoverageOracle.LegPairRank(fastLong, fastLongBack),
+				Is.LessThan(RefineryCoverageOracle.LegPairRank(slowShort, slowShortBack)));
+
+			// The slower leg bounds the round trip; ties break by the other leg.
+			var asym = new RefineryRouteWitness(true, 5_000, 2_000, 1);
+			Assert.That(RefineryCoverageOracle.LegPairRank(slowShort, asym),
+				Is.GreaterThan(RefineryCoverageOracle.LegPairRank(fastLong, asym)));
+		}
+
+		[Test]
+		public void DockEligibleRequiresAnEnabledTypeCompatibleHost()
+		{
+			var harvester = new BitSet<DockType>("Unload");
+			var matching = new BitSet<DockType>("Unload");
+			var wrong = new BitSet<DockType>("Dock");
+
+			Assert.That(RefineryCoverageOracle.DockEligible(true, harvester, matching), Is.True);
+			Assert.That(RefineryCoverageOracle.DockEligible(true, harvester, null), Is.True);      // wildcard host
+			Assert.That(RefineryCoverageOracle.DockEligible(false, harvester, matching), Is.False); // disabled/dead dock
+			Assert.That(RefineryCoverageOracle.DockEligible(true, harvester, wrong), Is.False);     // type mismatch
+			Assert.That(RefineryCoverageOracle.DockEligible(true, default, matching), Is.False);    // no client type
+		}
+
+		[Test]
+		public void AssignRefineriesRouteGateHonoursTheWitness()
+		{
+			// A geometrically in-range refinery only serves the anchor when the probe witness covers it —
+			// unreachable or over-long routes stay -1 even inside the radius. The oracle returns the
+			// round-trip rank for covered pairs and null for failed/unproven ones.
+			var anchors = new[] { C(14, 10) };
+			var refineries = new[] { C(12, 10) };
+
+			Assert.That(ExpansionPlannerBotModule.AssignRefineries(anchors, refineries, 8,
+				routeRank: (a, r) => null), Is.EqualTo(new[] { -1 }));
+			Assert.That(ExpansionPlannerBotModule.AssignRefineries(anchors, refineries, 8,
+				routeRank: (a, r) => 4_000), Is.EqualTo(new[] { 0 }));
+		}
+
+		[Test]
+		public void AssignRefineriesPicksTheLowerRankedRefinery()
+		{
+			// Both refineries cover the anchor; the oracle's rank (not raw distance) decides.
+			var anchors = new[] { C(14, 10) };
+			var refineries = new[] { C(20, 10), C(12, 10) };   // r1 is geometrically nearer
+			var assigned = ExpansionPlannerBotModule.AssignRefineries(anchors, refineries, 8,
+				routeRank: (a, r) => r == 0 ? 3_000 : 9_000);
+
+			Assert.That(assigned, Is.EqualTo(new[] { 0 }));   // r0 wins on rank despite the longer geometry
+		}
+
+		[Test]
+		public void PatchWalkProbeCapRefusalKeepsTheUnexaminedCell()
+		{
+			// R3 regression: a final allowed outbound probe followed by a budget-refused
+			// inbound must leave the cursor ON the cell — the R2 for-loop advanced past
+			// it anyway, letting a later field exhaustion publish a false Unserved.
+			var budget = new RefineryProbeBudget(siteLimit: 8, probeLimit: 3, tickProbeLimit: 8);
+			var walk = new PatchWalk(0, count: 10, window: 4);
+
+			Assert.That(budget.TryConsumeProbe(), Is.True);   // cell 0 outbound
+			Assert.That(budget.TryConsumeProbe(), Is.True);   // cell 0 inbound — complete
+			walk.CompleteCell();
+			Assert.That(walk.Index, Is.EqualTo(1));
+
+			Assert.That(budget.TryConsumeProbe(), Is.True);   // cell 1 outbound — last of cap (3/3)
+			Assert.That(budget.TryConsumeProbe(), Is.False);  // cell 1 inbound refused at the ceiling
+			Assert.That(budget.ProbeCapSpent, Is.True);
+
+			// The module's interruption path never calls CompleteCell — the cursor must still
+			// point at cell 1 so the next pass re-examines it instead of skipping to Unserved.
+			Assert.That(walk.Index, Is.EqualTo(1));
+			Assert.That(walk.FieldExhausted(10), Is.False);
+		}
+
+		[Test]
+		public void PatchWalkTickCapInterruptionLeavesTheCellPending()
+		{
+			// R3 regression: tick pacing interrupting a cell mid-examination must not advance
+			// the cursor either — the same for-loop skipped it before tickCapHit could stop it.
+			var budget = new RefineryProbeBudget(siteLimit: 8, probeLimit: 8, tickProbeLimit: 1);
+			var walk = new PatchWalk(0, count: 10, window: 4);
+
+			Assert.That(budget.TryConsumeProbe(), Is.True);    // outbound (tick window 1/1)
+			Assert.That(budget.TryConsumeProbe(), Is.False);   // inbound refused — pacing only
+			Assert.That(budget.ProbeCapSpent, Is.False);
+			Assert.That(budget.TickProbesOpen, Is.False);
+			Assert.That(walk.Index, Is.EqualTo(0));            // cell 0 still pending
+
+			budget.NewTick();
+			Assert.That(budget.TryConsumeProbe(), Is.True);    // the resumed inbound probe
+			walk.CompleteCell();
+			Assert.That(walk.Index, Is.EqualTo(1));
+		}
+
+		[Test]
+		public void PatchWalkSiteCapRefusalLeavesThePairUntouched()
+		{
+			// Cap-before-probe: when the site ceiling refuses admission the pair's walk never
+			// runs — the stored cursor resumes unchanged next pass, zero probes consumed.
+			var budget = new RefineryProbeBudget(siteLimit: 1, probeLimit: 8, tickProbeLimit: 8);
+			var walk = new PatchWalk(0, count: 10, window: 4);
+
+			Assert.That(budget.TryConsumeSite(), Is.True);    // another pair took the only slot
+			Assert.That(budget.TryConsumeSite(), Is.False);   // admission refused for this pair
+			Assert.That(budget.SiteCapSpent, Is.True);
+			Assert.That(budget.ProbeCapSpent, Is.False);
+
+			Assert.That(walk.Index, Is.EqualTo(0));
+			Assert.That(walk.HasCell, Is.True);
+		}
+
+		[Test]
+		public void PatchWalkWindowEndIsNotExhaustion()
+		{
+			// A pair whose window ends before the field does is UNKNOWN, never Unserved:
+			// unexamined cells beyond the window could still prove coverage.
+			var walk = new PatchWalk(0, count: 7, window: 4);
+			for (var i = 0; i < 4; i++)
+				walk.CompleteCell();
+
+			Assert.That(walk.Index, Is.EqualTo(4));
+			Assert.That(walk.HasCell, Is.False);               // this refresh's window spent
+			Assert.That(walk.FieldExhausted(7), Is.False);     // cells 4-6 unexamined -> not Unserved
+
+			// The next refresh resumes where it stopped and completes the field — only then
+			// may the pair contribute to an Unserved verdict.
+			var resumed = new PatchWalk(walk.Index, 7, 4);
+			resumed.CompleteCell();
+			resumed.CompleteCell();
+			resumed.CompleteCell();
+			Assert.That(resumed.FieldExhausted(7), Is.True);
+		}
+
+		[Test]
+		public void PatchWalkResumeHonoursTheStoredIndex()
+		{
+			// The persisted (version, index) cursor is the resume point — a stale-version
+			// cursor restarts at 0 (the caller's version check), a live one continues.
+			var stored = new PatchWalk(4, count: 6, window: 4);
+			Assert.That(stored.Index, Is.EqualTo(4));
+			Assert.That(stored.HasCell, Is.True);              // window = cells 4-5
+
+			stored.CompleteCell();
+			Assert.That(stored.Index, Is.EqualTo(5));
+			Assert.That(stored.FieldExhausted(6), Is.False);
+
+			stored.CompleteCell();
+			Assert.That(stored.Index, Is.EqualTo(6));
+			Assert.That(stored.FieldExhausted(6), Is.True);    // fully walked — honest Unserved input
+		}
+
+		[Test]
+		public void ProbeCapSpentAtCompletedCellBoundaryStillDefers()
+		{
+			// R4 regression (VP boundary check): the final ALLOWED probe lands the count
+			// exactly on the ceiling — no refusal ever runs. The cell completes, the walk
+			// exits on ProbeCapSpent with cells remaining, and the pair MUST still defer;
+			// R3 suppressed the defer behind !ProbeCapSpent → false Unserved.
+			var budget = new RefineryProbeBudget(siteLimit: 8, probeLimit: 2, tickProbeLimit: 8);
+			var walk = new PatchWalk(0, count: 3, window: 8);
+
+			Assert.That(budget.TryConsumeProbe(), Is.True);   // cell 0 outbound
+			Assert.That(budget.TryConsumeProbe(), Is.True);   // cell 0 inbound — 2/2, cap spent by SUCCESS
+			Assert.That(budget.ProbeCapSpent, Is.True);
+			walk.CompleteCell();                              // cell 0 fully examined
+
+			// The module's while exits on ProbeCapSpent with cells 1-2 unexamined...
+			Assert.That(walk.HasCell, Is.True);
+			Assert.That(walk.FieldExhausted(3), Is.False);
+
+			// ...and the production predicate defers the pair — spent cap is not permission.
+			Assert.That(RefineryCoverageOracle.PairDeferredAfterWalk(false, walk, 3), Is.True);
+			Assert.That(RefineryCoverageOracle.Aggregate(false, true),
+				Is.EqualTo(RefineryCoverageVerdict.Unknown)); // never Unserved
+		}
+
+		[Test]
+		public void SpentProbeCapAtPairEntryDefersWithoutTouchingTheWalk()
+		{
+			// R4 cascade case: the NEXT anchor enters with the ceiling already spent —
+			// the while never admits the walk, yet the pair must still defer rather than
+			// aggregate Unserved (and the deferred marker is what re-arms the next pass).
+			var budget = new RefineryProbeBudget(siteLimit: 8, probeLimit: 1, tickProbeLimit: 8);
+			Assert.That(budget.TryConsumeProbe(), Is.True);   // an earlier pair spent the cap
+			Assert.That(budget.ProbeCapSpent, Is.True);
+
+			var walk = new PatchWalk(0, count: 5, window: 8);
+			// while (walk.HasCell && !pairCovered && !tickCapHit && !ProbeCapSpent) never runs:
+			Assert.That(walk.Index, Is.EqualTo(0));
+			Assert.That(walk.HasCell, Is.True);
+			Assert.That(RefineryCoverageOracle.PairDeferredAfterWalk(false, walk, 5), Is.True);
+
+			// And a covered pair is exempt — exhaustion with a witness stays Covered.
+			Assert.That(RefineryCoverageOracle.PairDeferredAfterWalk(true, walk, 5), Is.False);
 		}
 
 		sealed class LawStub : IBotExpansionTargetProvider

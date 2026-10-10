@@ -19905,6 +19905,300 @@ the existing helpers only — no blanket normalization, no yaml edits except one
   site is a known latent inconsistency left untouched (never-null array keeps the
   latch self-releasing at first resume delay).
 
+## 2026-10-09 - Devin-Developer: REPAIR-B3 - shared refinery coverage + claim-fail deadlock bound (branch devin/repair-b3-refinery, base c76283c0b)
+
+* **Scope (SPEC_2026-10-09_refinery_shared_coverage.md + review clarifications):**
+  one usable refinery covers EVERY anchor inside an inclusive Euclidean radius-10
+  with both directed dock->patch and patch->dock legs proven under the harvester
+  locomotor at <=10 tile-equivalents (stationary-blocked probes; transient
+  traffic never fails a leg); per-anchor verdicts Covered/Unserved/UNKNOWN with
+  budget-deferred anchors never counting either way; atomic multi-anchor
+  reservation transactions; bounded claim-failure churn (the failCount deadlock).
+* **New file:** `RefineryCoverageOracle.cs` — verdict enum, `RefineryProbeBudget`
+  (per-anchor site/probe caps re-armed by `NextAnchor()`; per-player-per-tick
+  probe cap; deferred/cache-hit counters), topology-versioned
+  `RefineryRouteWitness`, pure deterministic helpers (`RouteLengthMilli`
+  1000/1414, `WithinServeRadius`, `BothLegsCover`, `LegPairRank`, `CompareSites`,
+  `Aggregate`), and `RefineryRouteProbe.ProbeLeg` = `PathSearch.ToTargetCell`
+  with null self + `BlockedByActor.Stationary` + `laneBias:false`.
+* **Planner:** `AssignRefineries` drops `used[r]` 1:1 binding; the `routeRank`
+  oracle arg (null = unproven) gates service and ranks covered pairs.
+  `ClaimOrder` gains `coverageUnknown` — UNKNOWN anchors are neither served,
+  unserved, nor claimable, so budget deferral never spawns duplicate demand.
+  `CoverageTick` runs per tick ahead of the 250-tick replan gate; the topology
+  signature (anchors, refinery cells, dock cells, blocker cells — XOR-folded,
+  order-independent) re-opens verdicts on change while witnesses whose stored
+  route avoids every changed blocker cell survive (empty-path unreachable
+  witnesses always re-probe on change); dead dock keys are pruned. The refresh
+  resumes at a persistent cursor under the per-tick probe budget.
+  `CommitRefineryClaim(anchor, site)` publishes pending coverage for the whole
+  in-radius uncovered set atomically and clears their reservations/streaks;
+  `ComputeClaim` parks an anchor re-offered past `RefineryClaimFailAttempts`
+  (provider-side bound — needs no eval edits to work).
+* **Contract:** `RefineryAnchorReservations.TryReserveAll/ReleaseAll/ClearAll/
+  LiveSetFor`; interface adds the site-carrying commit, placement-failed signal,
+  covered-set accessor, atomic set reserve/release/query carrying site +
+  modelVersion, and `RefineryCoveragePendingAnchors`. All default-bodied —
+  Architect call sites compile untouched (integration asks logged in the fleet
+  claim doc: 2-arg commit call, failure signal on the null-site fall-through,
+  admission-time set binding).
+* **Knobs/yaml:** `AnchorServeRadiusCells: 10` (spec radius; the C# default 0
+  resolves to ClaimRadiusCells = 8); `RefineryClaimFailAttempts=1`,
+  `RefineryClaimFailParkTicks=1500`, `CoverageSiteLimit=32`,
+  `CoverageProbeLimit=64`, `CoverageProbesPerTick=8`, `CoverageRouteLimitCells=10`,
+  `CoveragePatchCellSample=4`. DISCREPANCY FLAGGED, not fixed: DESIGN 19.5 calls
+  EngineerBotModule capture/repair + CratePickupBotModule visibility checks
+  designed-off (`false` = omniscient exception), yet master's ai.yaml arms all
+  three `true` (336c524f2 "Make bots pick up crates if without MCV" +
+  playtest 4bf696716 "require visible engineer and crate targets"). Whether
+  `true` is deliberate behavior (bots only chase seen targets) or drift is a
+  maintainer call; this repair leaves master's state untouched.
+* **Tests:** legacy one-per-anchor assertions rewritten to shared coverage
+  ({0,0} pair coverage, flush-mate binds all field anchors, tier candidates
+  moved beyond radius); new oracle/budget/route-gate unit tests and atomic
+  reservation lifecycle tests (all-or-nothing, no partial writes, owner-scoped
+  idempotent release, commit clear-all). `dotnet build -c Release` clean;
+  `dotnet test OpenRA.Mods.Cameo.Test` = 1289/1289 pass.
+* **Not done:** shared-site search inside `LawRefineryPlacement` (Architect-owned);
+  boot-gate deferred — a serial replay lane (NOD-PROGRESSION-REPRO) held the
+  machine at commit time (OpenRA.exe resident, launches reserved) and the lead's
+  order was push-for-review with no launches; boot-gate remains an open gate,
+  not claimed. Full audit suite likewise pending. Pushed for Devin-Reviewer
+  review per lead order; no merge.
+* **Overlap vs devin/queue-observer-seam@c43d580fd (Architect):** append-point
+  conflicts only — both add a trailing block in `DEVELOPMENT_LOG.md` (EOF) and
+  tests after `CommitClearsAReservation` in `BaseBuilderQueueEvalTest.cs`;
+  keep-both resolution, disjoint content. No shared edit region in source.
+  Their `Cancelled+NoRefinerySite` seam record is where the queue-side
+  `RefineryClaimPlacementFailed(anchor)` signal belongs.
+
+# 2026-10-09 — REPAIR-B3 R1: reviewer FIX round — flush bypass killed, whole-refresh caps, real dock eligibility, travel-time rank
+
+*Devin-Developer.* Devin-Reviewer's bounded static review
+(`REREVIEW_2026-10-09_repair_b3_static.md`) returned FIX REQUIRED with five
+findings against SPEC_2026-10-09_refinery_shared_coverage.md. All five are
+closed in this round:
+
+1. **Same-field flush bypass (SPEC §30 violation)** — `AssignRefineries` and
+   `EvaluateCoverageTick` both let a refinery flush to an anchor's field serve
+   it beyond the radius ("transitive/distant field inheritance"). The
+   `refineryFields`/`anchorField` eligibility terms are removed everywhere:
+   eligibility is now the geometric radius alone, `AssignRefineries` and
+   `ClaimOrder` drop the field plumbing entirely, `AiLogExpansion` mirrors the
+   new binding, and `RefineryFlushFields` survives only as a public helper +
+   its own unit test (nothing in the coverage model consumes it). The old test
+   `RefineryFlushToTheFieldBindsItsAnchorsBeyondServeRadius` is rewritten as
+   the inverse pin `RefineryFlushBeyondServeRadiusBindsNothing`.
+2. **Per-anchor budget re-arm** — `NextAnchor()` re-armed the 32/64 site/probe
+   caps per anchor (32A/64A total — exactly what the spec's "in one coverage
+   refresh" forbids). `RefineryProbeBudget` now exposes `SiteCapSpent/
+   ProbeCapSpent/RefreshSpent`; the caps span the whole sweep while
+   `CoverageProbesPerTick` only paces per-tick spend. An `evaluatedSites`
+   (anchor,refinery) set charges each admitted pair once per refresh so a
+   tick-paced revisit never double-charges; a tick-cap refusal rewinds the
+   cursor one step (the anchor resumes next tick on cached witnesses), a
+   refresh-cap refusal marks `coverageFirstBudgetDeferred` for telemetry.
+3. **Dock eligibility without gameplay semantics** — probes pathed to dock
+   coordinates and type-overlapped BitSets but never verified the real
+   `DockHost` contract. `RefineryDockGeometry` now returns per-dock
+   `Enabled = IsEnabledAndInWorld` (`!preventDock && !IsTraitDisabled &&
+   !IsDead && IsInWorld` — the durable half of `IsDockingPossible`); the new
+   `RefineryCoverageOracle.DockEligible(enabled, harvesterType, dockType)`
+   models `Harvester.CanDock(type, forceEnter:true)` — a loaded return always
+   docks at a type-compatible enabled host, so occupancy/drag correctly never
+   gate coverage, and a disabled/selling dock fails the pair. Enabled bits
+   fold into the topology signature so a dock dying/waking re-opens verdicts.
+4. **Rank ignored travel time** — `RefineryRouteWitness` gains `TravelMilli`;
+   `RouteTravelMilli` prices each entered cell at stepMilli x 1024 /
+   (MobileInfo.Speed x terrain%), the `Mobile.MovementSpeedForCell` product
+   minus transient actor modifiers; zero-speed cells rank infinite.
+   `LegPairRank` returns `long` (milli-tick packing would overflow int) —
+   max-leg bounds the round trip, other leg ties off. `routeRank` is now
+   `Func<int,int,long?>` end to end.
+5. **Telemetry omitted spend** — the refresh-complete line now carries
+   anchors, anchor-scans, sites evaluated, probes used, deferred candidates,
+   and cache hits; a new one-shot line fires when a refresh ceiling first
+   defers an anchor (index, sites/probes spent, pending count); the pacing
+   line distinguishes tick-window stops from ceiling stops.
+
+* **Verification:** `dotnet build -c Release` 0/0; `dotnet test` = **1294/1294**
+  (5 net new: whole-refresh caps, tick pacing independence, travel-time
+  pricing, zero-speed handling, dock eligibility, travel-time rank order);
+  `audit_fog_honesty.py` PASS (268 sites, unchanged — R1 adds no new
+  enumeration). Boot-gate still deferred (serial replay lane); no merge —
+  pushed for Devin-Reviewer re-review of the frozen SHA.
+* **Overlap:** unchanged vs the queue-observer-seam — still append-point only.
+
+# 2026-10-09 — REPAIR-B3 R2: patch-walk honesty + pass-boundary re-arm + version getter
+
+*Devin-Developer.* The head-review addendum's remaining provider-side concern —
+"sampling only the nearest CoveragePatchCellSample cells can declare Unserved
+while unexamined field cells could still prove coverage" — is fixed by making
+the walk exhaustive under the existing budget machinery rather than widening
+the sample:
+
+1. **Per-pair persisted patch cursor (R2).** `PatchCells(a)` now returns the
+   anchor's whole field ordered nearest-first (deterministic: distance, X, Y);
+   `patchProbeProgress[(anchor,refinery)] = (version, index)` records how far
+   the pair's walk got under the current model version. The probe loop is
+   reordered patch-outer — a cell index only advances after every eligible
+   (dock, spec) pair examined it — and each refresh advances the window by at
+   most `CoveragePatchCellSample` cells. A pair whose window ends before the
+   field does now contributes `anyDeferred` (UNKNOWN), never Unserved; only a
+   fully-walked field can fail a pair. Progress resets on every model-version
+   bump (topology/dock changes re-open the walk) and on the length-mismatch
+   defensive path.
+2. **Pass-boundary budget re-arm.** The 32-site/64-probe ceilings still span
+   exactly one pass over the anchors (the reviewer's whole-refresh finding),
+   but a pass the ceiling cut short now re-arms `coverageBudget` +
+   `evaluatedSites` + `coverageFirstBudgetDeferred` when the anchor cursor
+   wraps — deferred pairs resume in the next pass instead of starving UNKNOWN
+   on a permanently spent budget. Without this, honest exhaustiveness on large
+   fields could deadlock an anchor behind an exhausted ceiling — the very
+   failure class B3 exists to remove. Per-tick pacing is untouched (NewTick at
+   sweep start; the re-arm happens after the tick's scan completes).
+3. **`RefineryCoverageModelVersion` getter** (interface + impl): the version
+   stamp callers pass as `modelVersion` to `TryReserveRefineryAnchors` so a
+   covered-anchor set derived from `RefineryClaimCoveredAnchors` is refused if
+   the model re-planned in between — completes the SPEC §62 transaction fields
+   (site, set, owner, until, version) for the Architect's queue-side wiring.
+4. `CoveragePatchCellSample` Desc + `EvaluateCoverageTick` doc updated:
+   "cells a pair's walk advances per refresh" — bounded per-refresh work, not a
+   bounded candidate set. `patches` hoisted out of the per-refinery loop (it is
+   anchor-only).
+
+* **Verification:** `dotnet build -c Release` 0/0; `dotnet test` = **1294/1294**
+  (no signature changes to tested surfaces; the cursor/walk is module-internal
+  world-bound code — its honesty property is exercised by the integration pass
+  once queue wiring lands). Fog audit unchanged (no new enumeration). Boot-gate
+  still deferred (serial replay lane); no merge.
+* **Queue-side blocker unchanged:** the VP's exact-tip R1 review
+  (`REREVIEW_2026-10-09_repair_b3_r1_vp.md`) confirms all five R1 findings
+  closed; its single remaining FIX is production callers for
+  `TryReserveRefineryAnchors`/`RefineryClaimCoveredAnchors`/
+  `RefineryClaimPlacementFailed`/2-arg commit — Architect-owned queue files.
+  Precise contract sent (commit ~:1619, failure ~:1633, admission bind ~:328).
+
+# 2026-10-09 — REPAIR-B3 R3: cursor-interruption fix + PatchWalk contract + regression pins
+
+*Devin-Developer.* The VP's exact-tip R2 review
+(`REREVIEW_2026-10-09_repair_b3_r2_vp.md`) found a blocking cursor bug in the
+R2 patch walk: the outer `for`'s unconditional `pi++` advanced the persisted
+cursor past INTERRUPTED cells — a probe-cap refusal left `tickCapHit` false so
+the dock loop burned through the rest of the window with refused probes and
+advanced `pi` over never-examined cells; a tick-cap break likewise ran the
+for-update before the condition could stop the loop. A final allowed outbound
+plus a refused inbound could skip the cell entirely, and a later field
+exhaustion could then publish a false Unserved.
+
+- **Fix:** the cell index now advances only via `CompleteCell()` on the new
+  public `PatchWalk` struct (`RefineryCoverageOracle.cs`) — the caller invokes
+  it strictly after a cell's examination completed (every eligible dock/spec
+  saw it). Any interruption (`cellExamined=false` on probe refusal, tick-cap
+  break, or `ProbeCapSpent` in the loop condition) leaves `walk.Index` on the
+  unexamined cell, which the persisted `(version, index)` resumes from.
+  `FieldExhausted(count)` is now the only path that can feed Unserved.
+- **Regressions** (`FieldCoverageTest`, +5): probe-cap refusal at the
+  outbound/inbound split keeps the cell pending; tick-pacing interruption
+  leaves it pending and `NewTick` resumes it; site-cap refusal before any
+  probe leaves the pair untouched; window-end is NOT exhaustion (unexamined
+  cells keep the pair Unknown); resume honours the stored index through full
+  exhaustion.
+- **Verification:** Release build 0/0; `dotnet test` = **1299/1299**
+  (1294 + 5 PatchWalk pins). No world-facing surface change — fog audit
+  unchanged. Boot-gate still deferred (serial lane).
+- **Merge-wave context:** master moved to `e8ec610e7` (queue-observer-seam
+  merged; `c76283c0b` is an ancestor). The queue-wiring NOTE now carries
+  merged-master call-site coordinates (:600 admission, :1326/:1390/:1466
+  release sites, :1916-1945 commit/fail block).
+
+# 2026-10-09 — REPAIR-B3 R3.5: owner-keyed release (answers the reviewer's set-drift question)
+
+*Devin-Developer.* The reviewer's queue-wiring insertion map
+(`MAP_2026-10-09_b3_queue_wiring_sites.md`, sites on master `4da849874`)
+closed with an open contract question: reserve/bind/commit must share the
+same covered set, with `modelVersion` guarding read→commit. Analyzing it
+exposed a leak class in my own prepared hunks: release sites recomputed
+`RefineryClaimCoveredAnchors(anchor)` at teardown, but that set can drift
+from the admission-time set — members taken, covered by another commit, or
+re-modelled under a new version. A recomputed set could exclude a live hold
+and leak it until expiry/prune.
+
+- **Fix:** `ReleaseRefineryAnchors(object owner)` — a new interface member
+  backed by `RefineryAnchorReservations.ReleaseAllForOwner` — frees every
+  anchor the demand holds. Teardown (expiry, cancellation, binding unwind)
+  needs no set at all: nothing to recompute, nothing to persist on
+  `ExpansionDemand`, idempotent, returns the count.
+- **Resulting contract** (documented in the fleet NOTE, R3.5 section):
+  one set at reserve/bind (version-guarded), zero sets at teardown
+  (owner-keyed), provider-internal set at commit — `RefineryClaimCommitted`
+  already clears every covered member's reservation internally.
+- **Regression:** `ReleaseAllForOwnerFreesTheWholeDriftedSet` —
+  frees the full set, leaves another owner's hold untouched, idempotent on
+  re-release, freed anchors reservable.
+- **Verification:** Release build 0/0; `dotnet test` = **1300/1300**
+  (1299 + 1). No world-facing surface change — fog audit unchanged.
+  Boot-gate still deferred (serial lane holds OpenRA.exe). No merge — the
+  queue-side wiring remains Architect-owned.
+
+# 2026-10-09 — REPAIR-B3 R4: clean-cap-exit deferral fix (false-Unserved cascade)
+
+*Devin-Developer.* The VP's R3 boundary check (forwarded + confirmed by
+Devin-Reviewer in `REREVIEW_2026-10-09_repair_b3_r3.md`) found a second
+cursor-class defect: when the final ALLOWED `TryConsumeProbe()` lands the
+count exactly on the ceiling, `ProbeCapSpent` flips true with no refusal
+ever running. The cell completes, `walk.CompleteCell()` advances, the while
+exits on the cap with cells remaining — and the post-walk deferred check
+`!coverageBudget.ProbeCapSpent` suppressed `anyDeferred` → false Unserved.
+Worse, it CASCADED: every subsequent anchor in the pass exited its pair walk
+at entry (`!ProbeCapSpent` in the while condition), published Unserved too,
+and `coverageFirstBudgetDeferred` stayed -1 → no pass-boundary re-arm — a
+spent probe cap mid-pass could collapse the whole coverage model.
+
+- **Fix:** new `RefineryCoverageOracle.PairDeferredAfterWalk(pairCovered,
+  walk, fieldCells)` — the single post-walk decision: unexamined cells defer
+  the pair regardless of WHAT stopped the walk (window end, tick pacing, or
+  a cleanly-spent cap). Only `PatchWalk.FieldExhausted` feeds Unserved. The
+  module now also records `coverageFirstBudgetDeferred` on a cap-stopped
+  deferral so the re-arm fires at the cursor wrap.
+- **Regressions** (`FieldCoverageTest`, +2): the VP's exact scenario —
+  probeLimit consumed by a completed cell's two legs, cells remaining →
+  deferred, never Unserved; and the entry-cascade — a pair admitted with the
+  cap already spent defers without touching the walk (plus the covered-pair
+  exemption).
+- **Verification:** Release build 0/0; `dotnet test` = **1302/1302**
+  (1300 + 2). No world-facing surface change — fog audit unchanged.
+  Boot-gate deferred: OpenRA.exe released but the lead's "no launches"
+  order for this task still stands — flagged to the lead for release.
+  No merge — queue-side wiring remains Architect-owned.
+
+# 2026-10-09 — REPAIR-B3 R4b: version-keyed PatchCells cache (VP materialization note)
+
+*Devin-Developer.* The VP's R2 task-record addendum asked for a measured
+profile on "full field ordering/materialization per unknown-anchor
+evaluation": `PatchCells(a)` sorted the anchor's whole field (distance, X,
+Y) once per anchor per pass — O(F log F) repeated across every refresh
+cycle even though the ordering is fixed while the topology is.
+
+- **Fix:** `patchCellsCache` — `(int Version, CPos Anchor, CPos[] Ordered)`
+  keyed by anchor index. A field is sorted at most once per refresh
+  generation per anchor; the cache also keys on the anchor's position so a
+  silently drifting centroid re-sorts even at the same version. Cleared at
+  both index-keyed reset sites (signature bump + defensive length
+  mismatch). Deterministic memoization of a deterministic ordering — no
+  semantics change.
+- **Verification:** Release build 0/0; `dotnet test` = **1302/1302**
+  (unchanged — pure memoization). Fog audit unchanged. Boot-gate still
+  deferred per the lead's no-launches order.
+- **Memory bound** (VP's retained profile note, R4b review): entries ≤
+  `anchors.Count`; each array is that anchor's own static field cells
+  (`fields[f].Cells` is built once — never shrinks under harvesting).
+  Total retained = Σ|field(a)| ≤ A×F_max×8 B — ~30×300 ≈ 72 KB typical,
+  ~800 KB at 100×1000 extreme, cleared every version bump. Crucially the
+  pre-cache code materialized the SAME arrays every pass — the cache
+  retains between passes what was already peak-working-set garbage; it
+  does not raise the peak class.
+
 ## 2026-10-09 - Devin-Architect: queue observer seam for REPLAY-HEALTH-LOGGER (branch devin/queue-observer-seam, base c76283c0b)
 
 * **Contract (ACK-2, task 01a12023):** record-only queue transitions emitted synchronously at the
@@ -20157,3 +20451,26 @@ Next: exact-SHA VP review; cost/coverage/adoption remain gated. No launches. Ins
 - Two regressions cover pre-deadline and due-deadline callbacks, repeated callback, rejected retry and complete recovery without deadline renewal.
 - Focused pure-helper suite30/30 PASS; no runtime wiring, engine pin changes or launches.
 - Next: exact revised-head independent helper re-review; M13 stays incomplete.
+## 2026-10-10 Devin REPAIR-B3 queue wiring — VP rereview fixes (lifecycle regressions + fog manifest)
+
+VP exact-SHA review of `eafdfb6a1` (`REREVIEW_2026-10-10_repair_b3_wiring_eafdfb6_luna.md`): FIX REQUIRED —
+the wired call sites were correct but unpinned (no test invoked the production lifecycle manager→provider),
+and the exact merged tree failed the fog audit.
+
+* **Seams extracted** in `BaseBuilderQueueEvalCA` (the documented call-site seam host) so the production
+  control flow is testable headless: `RefineryReservationAdmits` (admission gate — whole covered set,
+  atomic, version-guarded), `RenewRefineryReservation` (live-model renewal, clears `ReservedClaim` on
+  refusal/missing binding/missing law), `CommitRefineryClaimOrPark` (commit AT the selected site vs
+  bounded park on no-site), `ReleaseRefineryReservations` (owner-keyed, both teardown paths). All five
+  production call sites now delegate; observer/terminal-causality code untouched.
+* **+9 lifecycle regressions** in `BaseBuilderQueueEvalTest` via `RecordingRefineryLaw` — a fake
+  `IBotExpansionTargetProvider` backed by the real `RefineryAnchorReservations`, mirroring the module's
+  version guard / taken probe / commit-clear: refusal leaves no partial holds and no bind; commit
+  publishes the selected site (≠ anchor) and consumes holds; no-site parks the offered anchor;
+  teardown releases every owner hold with zero set recomputation; contested renewal clears
+  `ReservedClaim`; stale model version is refused and the seam re-reads the live version.
+* **Fog manifest reconciled**: upstream master `5ea8c84f5` introduced a 10th enumeration site in
+  `BaseBuilderQueueManagerCA` (the observer-seam `Placed` proof's own-player-filtered
+  `ActorsWithTrait<Pluggable>` scan) without bumping the manifest — the audit failed on master itself.
+  Manifest bumped 9 → 10; the scan is own-player-only (`t.Actor.Owner == player`), fog-honest.
+* Verified: Release build 0/0; focused `BaseBuilderQueueEvalTest|FieldCoverageTest` 183/183.

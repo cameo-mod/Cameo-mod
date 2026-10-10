@@ -73,6 +73,78 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>Ground truth overrides: a committed anchor's reservation is done whoever owned it.</summary>
 		public void Clear(CPos anchor) => held.Remove(anchor);
 
+		/// <summary>Drop every anchor of a set a commit consumed — idempotent, whoever owned each member.</summary>
+		public void ClearAll(IReadOnlyCollection<CPos> anchors)
+		{
+			foreach (var anchor in anchors)
+				held.Remove(anchor);
+		}
+
+		/// <summary>
+		/// REPAIR-B3 (SPEC_2026-10-09 shared coverage): the atomic multi-anchor transaction — one call
+		/// validates the whole set against live reservations (foreign owner refuses) and the caller's
+		/// taken probe, then commits all members or none. Never reserves the first anchor and fails on
+		/// the second; members the same owner already holds live are refreshed together.
+		/// </summary>
+		public bool TryReserveAll(IReadOnlyCollection<CPos> anchors, object owner, int now, int until, Func<CPos, bool> taken)
+		{
+			foreach (var anchor in anchors)
+			{
+				if (held.TryGetValue(anchor, out var r) && now < r.Until)
+				{
+					if (!ReferenceEquals(r.Owner, owner))
+						return false;
+				}
+				else if (taken != null && taken(anchor))
+					return false;
+			}
+
+			foreach (var anchor in anchors)
+				held[anchor] = (until, owner);
+
+			return true;
+		}
+
+		/// <summary>Release every member the owner holds live — idempotent; returns the count released.</summary>
+		public int ReleaseAll(IReadOnlyCollection<CPos> anchors, object owner)
+		{
+			var released = 0;
+			foreach (var anchor in anchors)
+				if (Release(anchor, owner))
+					released++;
+
+			return released;
+		}
+
+		/// <summary>
+		/// REPAIR-B3: release every anchor <paramref name="owner"/> holds — the set-free teardown:
+		/// the set reserved at admission may have drifted by release time (members taken, covered,
+		/// or re-modelled elsewhere), so releasing by owner cannot leak a member a recomputed set
+		/// forgot. Idempotent; returns the count released.
+		/// </summary>
+		public int ReleaseAllForOwner(object owner)
+		{
+			var released = 0;
+			foreach (var kv in held.ToList())
+				if (ReferenceEquals(kv.Value.Owner, owner))
+				{
+					held.Remove(kv.Key);
+					released++;
+				}
+
+			return released;
+		}
+
+		/// <summary>Every member live-held by exactly this owner.</summary>
+		public bool LiveSetFor(IReadOnlyCollection<CPos> anchors, object owner, int now)
+		{
+			foreach (var anchor in anchors)
+				if (!LiveFor(anchor, owner, now))
+					return false;
+
+			return anchors.Count > 0;
+		}
+
 		/// <summary>Drop expired holds and holds whose anchor was taken over meanwhile; returns the count.</summary>
 		public int Prune(int now, Func<CPos, bool> taken)
 		{
@@ -165,6 +237,69 @@ namespace OpenRA.Mods.CA.Traits
 		/// building lands (or the pending expires), so another refinery does not claim the same anchor meanwhile.
 		/// </summary>
 		void RefineryClaimCommitted(CPos anchor) { }
+
+		/// <summary>
+		/// REPAIR-B3 (SPEC_2026-10-09 §3): a produced refinery committed to <paramref name="anchor"/> at the actual
+		/// placement <paramref name="site"/> — the provider publishes pending coverage for every anchor that site's
+		/// docks demonstrably serve, atomically, before another queue evaluates demand. The default bridges to the
+		/// legacy single-anchor commit until the caller passes the site.
+		/// </summary>
+		void RefineryClaimCommitted(CPos anchor, CPos site) => RefineryClaimCommitted(anchor);
+
+		/// <summary>
+		/// REPAIR-B3: the queue's site search for <paramref name="anchor"/> failed — the provider parks it
+		/// for the bounded claim-fail cooldown so the next claim goes through instead of an unbounded
+		/// cancel/requeue cycle on the same deterministic best anchor. Default no-op: providers that
+		/// count uncommitted re-offers bound the churn without the signal.
+		/// </summary>
+		void RefineryClaimPlacementFailed(CPos anchor) { }
+
+		/// <summary>
+		/// REPAIR-B3 (SPEC §3): the anchors a refinery admitted for <paramref name="anchor"/> is expected
+		/// to cover — untaken, not already covered, inside the serve radius of the claim. Callers bind the
+		/// whole set atomically via <see cref="TryReserveRefineryAnchors"/> at admission. Default empty:
+		/// classic and switch-off bind nothing extra.
+		/// </summary>
+		IReadOnlyList<CPos> RefineryClaimCoveredAnchors(CPos anchor) => Array.Empty<CPos>();
+
+		/// <summary>
+		/// REPAIR-B3: the atomic coverage reservation — one transaction carrying the chosen
+		/// <paramref name="site"/>, the validated covered-<paramref name="anchors"/> set, the claimant
+		/// <paramref name="owner"/> and the coverage-model <paramref name="modelVersion"/> the set was
+		/// computed against. The provider refuses when its model version moved on (the caller must
+		/// re-derive the set) or any member is taken/foreign-held — all members commit or none.
+		/// <paramref name="modelVersion"/> negative skips the version check (tests, simple callers).
+		/// </summary>
+		bool TryReserveRefineryAnchors(CPos site, IReadOnlyCollection<CPos> anchors, object owner, int untilTick, int modelVersion = -1) => false;
+
+		/// <summary>
+		/// REPAIR-B3: the coverage-model version the provider currently holds — the value callers pass as
+		/// <c>modelVersion</c> to <see cref="TryReserveRefineryAnchors"/> so a set derived from
+		/// <see cref="RefineryClaimCoveredAnchors"/> is refused if the model re-planned in between.
+		/// Negative = no versioned model (classic, switch off).
+		/// </summary>
+		int RefineryCoverageModelVersion => -1;
+
+		/// <summary>REPAIR-B3: release <paramref name="owner"/>'s hold on every member — idempotent; returns released count.</summary>
+		int ReleaseRefineryAnchors(IReadOnlyCollection<CPos> anchors, object owner) => 0;
+
+		/// <summary>
+		/// REPAIR-B3: release EVERY anchor <paramref name="owner"/> holds — the teardown call for
+		/// cancellation/expiry/unbind/commit: the set reserved at admission may have drifted by
+		/// release time (members taken, covered, or re-modelled elsewhere), so releasing by owner
+		/// cannot leak a member a recomputed set forgot. Idempotent; returns the count released.
+		/// </summary>
+		int ReleaseRefineryAnchors(object owner) => 0;
+
+		/// <summary>REPAIR-B3: every member of the set is live-held by exactly this owner and untaken.</summary>
+		bool RefineryAnchorsReserved(IReadOnlyCollection<CPos> anchors, object owner) => false;
+
+		/// <summary>
+		/// REPAIR-B3 (SPEC §52): anchors whose coverage verdict is still UNKNOWN under the probe budget —
+		/// they must not count as unclaimed (that would queue a duplicate) nor as served. While this is
+		/// nonzero the model has deferred evaluation outstanding.
+		/// </summary>
+		int RefineryCoveragePendingAnchors => 0;
 
 		/// <summary>
 		/// REF-1: anchors claimable right now — unserved, not parked, not pending. The production gate:

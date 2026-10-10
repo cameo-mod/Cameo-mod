@@ -330,17 +330,12 @@ namespace OpenRA.Mods.Cameo.Traits
 			var cells = fieldId < ActiveFieldCellsById.Count ? ActiveFieldCellsById[fieldId] : null;
 			var gap = ExpansionMath.ResourceGap(footprint, cells);
 
-			// A field another own refinery serves is tier 2 — the same binding the law uses (proximity or a
-			// footprint flush to the field's cells), so the logged tier matches the claim the law ran with.
+			// A field another own refinery serves is tier 2 — the same binding the law uses (proximity;
+			// R1 removed the footprint-flush exception), so the logged tier matches the claim the law ran with.
 			var builder = player.PlayerActor.TraitsImplementing<BaseBuilderBotModuleCA>().FirstOrDefault(t => t.IsTraitEnabled());
 			var ownRefineries = builder?.RefineryBuildings.Actors.Where(a => !a.IsDead).ToList() ?? new List<Actor>();
 			var refineryCells = ownRefineries.Select(a => a.Location).ToList();
-			var refineryTiles = ownRefineries
-				.Select(a => (IReadOnlyCollection<CPos>)a.Info.TraitInfos<BuildingInfo>().FirstOrDefault()?.Tiles(a.Location).ToList())
-				.ToList();
-			var refineryFields = ExpansionPlannerBotModule.RefineryFlushFields(refineryTiles, ActiveFieldCellsById);
-			var assigned = ExpansionPlannerBotModule.AssignRefineries(active, refineryCells, ExpansionMath.AnchorRadiusCells,
-				fieldIds, refineryFields);
+			var assigned = ExpansionPlannerBotModule.AssignRefineries(active, refineryCells, ExpansionMath.AnchorRadiusCells);
 			var served = Enumerable.Range(0, Math.Min(active.Count, fieldIds.Count))
 				.Any(i => fieldIds[i] == fieldId && assigned[i] >= 0);
 			return (fieldId, served ? 2 : 1, gap);
@@ -357,7 +352,6 @@ namespace OpenRA.Mods.Cameo.Traits
 
 			var buildableArea = new List<CPos>();
 			var refineries = new List<CPos>();
-			var refineryTiles = new List<IReadOnlyCollection<CPos>>();
 			var conyards = new List<CPos>();
 			foreach (var b in ownBuildings)
 			{
@@ -372,10 +366,7 @@ namespace OpenRA.Mods.Cameo.Traits
 				}
 
 				if (b.Info.HasTraitInfo<RefineryInfo>())
-				{
 					refineries.Add(b.Location);
-					refineryTiles.Add(b.Info.TraitInfos<BuildingInfo>().FirstOrDefault()?.Tiles(b.Location).ToList());
-				}
 
 				if (b.Info.HasTraitInfo<BaseBuildingInfo>())
 					conyards.Add(b.Location);
@@ -406,13 +397,12 @@ namespace OpenRA.Mods.Cameo.Traits
 			// REF-1 (§12.24 v2): the per-anchor refinery max (the law's cap — 1), the anchors in reach with no
 			// refinery, and the fields in reach with no refinery at all (the tier-1 backlog the claim order drains
 			// before any field gets a second one). Serving mirrors the law's own binding: the greedy anchor
-			// assignment where a refinery qualifies by proximity OR by sitting flush to the anchor's field —
-			// a legal far-edge placement must bind, or the anchor would be claimed twice.
+			// assignment where a refinery qualifies by proximity — REPAIR-B3 R1 removed the same-field flush
+			// exception, so a far-edge refinery no longer binds beyond the radius here either.
 			var activeFieldIds = ActiveAnchorFieldIds;
 			var fieldCellsById = ActiveFieldCellsById;
-			var refineryFields = ExpansionPlannerBotModule.RefineryFlushFields(refineryTiles, fieldCellsById);
 			var assigned = ExpansionPlannerBotModule.AssignRefineries(activeAnchors, refineries,
-				ExpansionMath.AnchorRadiusCells, activeFieldIds, refineryFields);
+				ExpansionMath.AnchorRadiusCells);
 
 			var bound = new bool[refineries.Count];
 			foreach (var r in assigned)
@@ -425,7 +415,8 @@ namespace OpenRA.Mods.Cameo.Traits
 					servedPerAnchor[a] = 1;
 
 			// Every unbound refinery still counts toward its nearest eligible anchor — a stack on one spreader
-			// is the violation this metric exists to show.
+			// is the violation this metric exists to show. R1: eligibility is the radius alone — same-field
+			// flush no longer counts (mirrors the law's own binding).
 			for (var r = 0; r < refineries.Count; r++)
 			{
 				if (bound[r])
@@ -435,10 +426,8 @@ namespace OpenRA.Mods.Cameo.Traits
 				var bestD = double.MaxValue;
 				for (var a = 0; a < activeAnchors.Count; a++)
 				{
-					var eligible = r < refineryFields.Length && a < activeFieldIds.Count
-						&& refineryFields[r] >= 0 && refineryFields[r] == activeFieldIds[a];
 					var d = ExpansionMath.Distance(refineries[r], activeAnchors[a]);
-					if ((eligible || d <= ExpansionMath.AnchorRadiusCells) && d < bestD)
+					if (d <= ExpansionMath.AnchorRadiusCells && d < bestD)
 					{
 						bestD = d;
 						best = a;

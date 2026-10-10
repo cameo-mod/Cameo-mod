@@ -15,6 +15,7 @@ using OpenRA.Mods.CA.Traits;
 using BotRng = OpenRA.Mods.CA.BotRng;
 using OpenRA.Mods.Common;
 using OpenRA.Mods.Common.Traits;
+using OpenRA.Primitives;
 using OpenRA.Traits;
 using CAAIUtils = OpenRA.Mods.CA.AIUtils;
 
@@ -164,6 +165,33 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			"(a claim whose placement keeps failing must not retry forever).")]
 		public readonly int AnchorStuckReplans = 12;
 
+		[Desc("REPAIR-B3: re-offers of the same uncommitted claim before the anchor is parked for",
+			"RefineryClaimFailParkTicks (a claim whose site search keeps returning null must not churn).")]
+		public readonly int RefineryClaimFailAttempts = 1;
+
+		[Desc("REPAIR-B3: the bounded cooldown a claim-failed anchor is parked — shorter than ParkTicks so a",
+			"transiently unplaceable anchor re-enters the market before the planner's terminal park fires.")]
+		public readonly int RefineryClaimFailParkTicks = 1500;
+
+		[Desc("REPAIR-B3: coverage-refresh ceilings — candidate site evaluations and directed pathfinder",
+			"probes bound ONE WHOLE anchor-sweep (spanning ticks), never re-armed mid-refresh (R1).")]
+		public readonly int CoverageSiteLimit = 32;
+
+		public readonly int CoverageProbeLimit = 64;
+
+		[Desc("REPAIR-B3: per-tick pacing for the same refresh — bounds the pathfinder spend in ONE world",
+			"tick without touching the refresh ceilings above (a stopped anchor resumes next tick).")]
+		public readonly int CoverageProbesPerTick = 8;
+
+		[Desc("REPAIR-B3: route bound per directed leg in cells (milli-tiles = x1000) — a patch counts covered",
+			"only when the outbound dock->patch AND the return patch->dock route each stay within it.")]
+		public readonly int CoverageRouteLimitCells = 10;
+
+		[Desc("REPAIR-B3: patch cells a (anchor, refinery) pair's route-probe walk advances per refresh —",
+			"the walk resumes across refreshes until the field is exhausted, so an Unserved verdict only",
+			"ever follows a fully-examined candidate set; each cell and each leg consumes budget.")]
+		public readonly int CoveragePatchCellSample = 4;
+
 		[Desc("FE-1: the factor a site/field keeps when its bearing from the main base lies within CrawlSeparationDegrees of",
 			"the crawl target, an own yard or another in-flight MCV site (deprioritised, never forbidden).")]
 		public readonly double MinSeparationFactor = 0.25;
@@ -280,7 +308,6 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		readonly Dictionary<CPos, int> anchorPendingUntil = new();
 		List<CPos> lastRefineryCells = new();
 		List<CPos> lastBuildingTiles = new();
-		int[] lastRefineryFields = Array.Empty<int>();
 
 		// ECON-A-FIX (R6): anchor holds owned by expansion demands — a demand's refinery takes its anchor
 		// off every other claim while the item is still queued. The table is world-free; the probes below
@@ -311,6 +338,36 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		readonly Dictionary<uint, CPos> inflightMcvSites = new();
 		List<CPos> ownBuildingCells = new();
 		List<CPos> ownYardCells = new();
+
+		// REPAIR-B3 (shared coverage, SPEC_2026-10-09): the route-verified coverage model. Directed-leg
+		// witnesses are keyed by (dock cell, patch cell, locomotor, leg) and carry the topology version
+		// that produced them; a changed blocker cell inside a probed route invalidates that witness while
+		// unrelated ones survive the version bump. Per-anchor verdicts ride a persistent cursor — a
+		// refresh resumes where the per-tick budget stopped instead of restarting at the first anchor,
+		// so an exhausted budget cannot starve the tail of the anchor list.
+		readonly Dictionary<(CPos Dock, CPos Patch, string Locomotor, bool Outbound), RefineryRouteWitness> routeWitnesses = new();
+		readonly Dictionary<(CPos Dock, CPos Patch, string Locomotor, bool Outbound), List<CPos>> routeWitnessPaths = new();
+		readonly Dictionary<CPos, int> anchorOfferStreaks = new();
+		RefineryProbeBudget coverageBudget = new(0, 0, 0);
+		byte[] anchorCoverageVerdict = Array.Empty<byte>();
+		readonly Dictionary<(int Anchor, int Refinery), long> coverageRanks = new();
+
+		// REPAIR-B3 (R2): how far each (anchor, refinery) pair has walked its field's ordered patch
+		// cells — the window advances CoveragePatchCellSample cells per refresh and persists across
+		// refreshes under the same model version, so "unserved" is only ever declared after the whole
+		// candidate set was examined (budget- or window-deferred pairs stay UNKNOWN).
+		readonly Dictionary<(int Anchor, int Refinery), (int Version, int Index)> patchProbeProgress = new();
+		readonly Dictionary<int, (int Version, CPos Anchor, CPos[] Ordered)> patchCellsCache = new();
+		readonly HashSet<(int Anchor, int Refinery)> evaluatedSites = new();
+		int coverageVersion;
+		int coverageCursor;
+		int coveragePendingAnchors;
+		int coverageModelSignature;
+		int coverageSweepScanned;
+		int coverageFirstBudgetDeferred = -1;
+		HashSet<CPos> coverageBlockerCells;
+		List<(CPos[] Cells, BitSet<DockType>[] Types, bool[] Enabled)> lastRefineryDocks = new();
+		(Locomotor Locomotor, BitSet<DockType> DockType, MobileInfo Mobile)[] harvesterSpecs;
 
 		// BEV: the base centre the base builder publishes (the parent BevManagerBotModule used the same signal), and the
 		// construction MCVs of every MCV module on this player (Info-level: fixed for the match, safe to cache).
@@ -387,16 +444,47 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			return LawActive ? ComputeClaim(near) : null;
 		}
 
-		void IBotExpansionTargetProvider.RefineryClaimCommitted(CPos anchor)
+		void IBotExpansionTargetProvider.RefineryClaimCommitted(CPos anchor) => CommitRefineryClaim(anchor, anchor);
+
+		void IBotExpansionTargetProvider.RefineryClaimCommitted(CPos anchor, CPos site) => CommitRefineryClaim(anchor, site);
+
+		void CommitRefineryClaim(CPos anchor, CPos site)
+		{
+			if (!LawActive)
+				return;
+
+			var tick = world.WorldTick;
+			var until = tick + Info.AnchorClaimPendingTicks;
+			anchorPendingUntil[anchor] = until;
+			anchorOfferStreaks.Remove(anchor);
+
+			// ECON-A-FIX (R6): a commit is ground truth — the demand's hold (if any) promoted to the
+			// pending commit; the demand releases its side when the binding unwinds anyway.
+			anchorReservations.Clear(anchor);
+
+			// REPAIR-B3 (SPEC §3): the placed refinery covers every anchor inside its serve radius —
+			// mark the whole unserved/unresolved set pending atomically at commit so a second queue
+			// cannot admit a duplicate refinery for a sibling while this one is still in flight. Each
+			// member's pending clears exactly when the route oracle verifies it covered, or on the
+			// pending expiry if the site's docks never reach it — a false mark self-heals.
+			var serve = Info.AnchorServeRadiusCells > 0 ? Info.AnchorServeRadiusCells : Info.ClaimRadiusCells;
+			for (var a = 0; a < anchors.Count && a < anchorCoverageVerdict.Length; a++)
+			{
+				if (anchors[a] == anchor
+					|| anchorCoverageVerdict[a] == (byte)RefineryCoverageVerdict.Covered
+					|| !RefineryCoverageOracle.WithinServeRadius(site, anchors[a], serve))
+					continue;
+
+				anchorPendingUntil[anchors[a]] = until;
+				anchorOfferStreaks.Remove(anchors[a]);
+				anchorReservations.Clear(anchors[a]);
+			}
+		}
+
+		void IBotExpansionTargetProvider.RefineryClaimPlacementFailed(CPos anchor)
 		{
 			if (LawActive)
-			{
-				anchorPendingUntil[anchor] = world.WorldTick + Info.AnchorClaimPendingTicks;
-
-				// ECON-A-FIX (R6): a commit is ground truth — the demand's hold (if any) promoted to the
-				// pending commit; the demand releases its side when the binding unwinds anyway.
-				anchorReservations.Clear(anchor);
-			}
+				ParkFailedClaim(anchor, world.WorldTick, "placement failed (queue signal)");
 		}
 
 		// ECON-A-FIX (R6): the claim surface's three states, evaluated uniformly for the claim order and
@@ -439,11 +527,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var tiles = futureProviderTiles == null || futureProviderTiles.Count == 0
 				? lastBuildingTiles
 				: lastBuildingTiles.Concat(futureProviderTiles).ToList();
-			var order = ClaimOrder(anchors, anchorFieldIds, fieldCellsById, lastRefineryCells, lastRefineryFields, tiles,
+			var order = ClaimOrder(anchors, anchorFieldIds, fieldCellsById, lastRefineryCells, tiles,
 				serve, Info.ReachCells,
 				i => AnchorBlockedForClaims(i, tick),
 				i => AnchorCommittedForClaims(i, tick),
-				near, out _, out _, out var tiers, out _, out _);
+				near, out _, out _, out var tiers, out _, out _,
+				RouteRank, CoverageUnknown);
 			if (order.Count == 0)
 				return null;
 
@@ -465,6 +554,57 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		void IBotExpansionTargetProvider.ReleaseRefineryAnchor(CPos anchor, object owner) =>
 			anchorReservations.Release(anchor, owner);
+
+		// REPAIR-B3: the atomic set surface — a queued refinery's covered anchors bind as one
+		// transaction (SPEC §3), so two parallel building queues can never split the set and each
+		// admit a duplicate for a different half.
+		bool IBotExpansionTargetProvider.TryReserveRefineryAnchors(CPos site, IReadOnlyCollection<CPos> set, object owner, int untilTick, int modelVersion)
+		{
+			var tick = world.WorldTick;
+			if (!LawActive || (modelVersion >= 0 && modelVersion != coverageVersion))
+				return false;
+
+			var ok = anchorReservations.TryReserveAll(set, owner, tick, untilTick, a => AnchorTaken(a, tick));
+			Log.Write("debug", $"AI ({player.ClientIndex}): REPAIR-B3 reserve {set.Count} anchors for site {site} v{modelVersion}: {(ok ? "committed" : "refused")} at tick {tick}");
+			return ok;
+		}
+
+		int IBotExpansionTargetProvider.RefineryCoverageModelVersion => LawActive ? coverageVersion : -1;
+
+		int IBotExpansionTargetProvider.ReleaseRefineryAnchors(IReadOnlyCollection<CPos> set, object owner) =>
+			anchorReservations.ReleaseAll(set, owner);
+
+		int IBotExpansionTargetProvider.ReleaseRefineryAnchors(object owner) =>
+			anchorReservations.ReleaseAllForOwner(owner);
+
+		bool IBotExpansionTargetProvider.RefineryAnchorsReserved(IReadOnlyCollection<CPos> set, object owner)
+		{
+			var tick = world.WorldTick;
+			return LawActive && anchorReservations.LiveSetFor(set, owner, tick) && !set.Any(a => AnchorTaken(a, tick));
+		}
+
+		int IBotExpansionTargetProvider.RefineryCoveragePendingAnchors => LawActive ? coveragePendingAnchors : 0;
+
+		IReadOnlyList<CPos> IBotExpansionTargetProvider.RefineryClaimCoveredAnchors(CPos anchor)
+		{
+			if (!LawActive)
+				return Array.Empty<CPos>();
+
+			var tick = world.WorldTick;
+			var serve = Info.AnchorServeRadiusCells > 0 ? Info.AnchorServeRadiusCells : Info.ClaimRadiusCells;
+			var set = new List<CPos>();
+			for (var a = 0; a < anchors.Count; a++)
+			{
+				if ((a < anchorCoverageVerdict.Length && anchorCoverageVerdict[a] == (byte)RefineryCoverageVerdict.Covered)
+					|| AnchorTaken(anchors[a], tick)
+					|| !RefineryCoverageOracle.WithinServeRadius(anchor, anchors[a], serve))
+					continue;
+
+				set.Add(anchors[a]);
+			}
+
+			return set;
+		}
 
 		int IBotExpansionTargetProvider.UnclaimedAnchorsInReach => LawActive ? unclaimedAnchorsInReach : 0;
 
@@ -618,39 +758,47 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		}
 
 		/// <summary>
-		/// FE-1: which refinery serves which anchor - a result per anchor, the refinery index or -1. Greedy by ascending
-		/// distance (ties by anchor then refinery index) within `serveRadiusCells`; every refinery serves at most one anchor
-		/// and every anchor has at most one refinery, so two spreaders next to one refinery do not both count as served.
-		/// REF-1 (v2 fix): <paramref name="refineryFields"/> gives the field each refinery's footprint sits flush to —
-		/// a refinery on a field's far edge can land farther than `serveRadiusCells` from the spreader yet still be that
-		/// field's refinery, so field-mates are eligible too; the distance order still binds the nearest anchor first.
+		/// FE-1: which refinery serves which anchor - a result per anchor, the refinery index or -1. Every
+		/// refinery may serve EVERY anchor it reaches (REPAIR-B3 shared coverage, SPEC_2026-10-09 §2 —
+		/// the retired 1:1 binding counted a cluster of spreaders beside one refinery as starving while the
+		/// harvesters all docked there). Per anchor the best candidate wins by route rank (when supplied),
+		/// then squared distance, then refinery index — deterministic across clients.
+		/// R1 (SPEC §30 "a far same-field anchor does not inherit coverage"): the retired flush exception
+		/// is gone — eligibility is the geometric radius from the refinery's own location, nothing else;
+		/// the route oracle still gates whether in-radius coverage is actually usable.
+		/// REPAIR-B3: <paramref name="routeRank"/> is the coverage oracle — (anchor, refinery) -&gt; the
+		/// route-verified round-trip travel rank in milli-ticks, or null while unproven (UNKNOWN defers
+		/// the anchor rather than counting it either way). Null oracle = pure geometric assignment.
 		/// </summary>
 		public static int[] AssignRefineries(IReadOnlyList<CPos> anchorCells, IReadOnlyList<CPos> refineries, int serveRadiusCells,
-			IReadOnlyList<int> anchorField = null, IReadOnlyList<int> refineryFields = null)
+			Func<int, int, long?> routeRank = null)
 		{
 			var result = new int[anchorCells.Count];
-			Array.Fill(result, -1);
 			var r2 = (long)serveRadiusCells * serveRadiusCells;
-			var pairs = new List<(long D, int A, int R)>();
 			for (var a = 0; a < anchorCells.Count; a++)
+			{
+				var best = -1;
+				var bestRank = long.MaxValue;
+				var bestD = long.MaxValue;
 				for (var r = 0; r < refineries.Count; r++)
 				{
 					var d = (anchorCells[a] - refineries[r]).LengthSquared;
-					var flush = anchorField != null && refineryFields != null
-						&& r < refineryFields.Count && refineryFields[r] >= 0 && anchorField[a] == refineryFields[r];
-					if (d <= r2 || flush)
-						pairs.Add((d, a, r));
+					if (d > r2)
+						continue;
+
+					var rank = routeRank == null ? 0L : routeRank(a, r) ?? long.MaxValue;
+					if (rank == long.MaxValue)
+						continue;
+
+					if (rank < bestRank || (rank == bestRank && (d < bestD || (d == bestD && r < best))))
+					{
+						best = r;
+						bestRank = rank;
+						bestD = d;
+					}
 				}
 
-			pairs.Sort((x, y) => x.D != y.D ? x.D.CompareTo(y.D) : x.A != y.A ? x.A.CompareTo(y.A) : x.R.CompareTo(y.R));
-			var used = new bool[refineries.Count];
-			foreach (var (_, a, r) in pairs)
-			{
-				if (result[a] >= 0 || used[r])
-					continue;
-
-				result[a] = r;
-				used[r] = true;
+				result[a] = best;
 			}
 
 			return result;
@@ -834,11 +982,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		/// </summary>
 		public static List<int> ClaimOrder(
 			IReadOnlyList<CPos> anchorCells, IReadOnlyList<int> anchorField, IReadOnlyList<IReadOnlyCollection<CPos>> fieldCells,
-			IReadOnlyList<CPos> refineries, IReadOnlyList<int> refineryFields, IReadOnlyList<CPos> buildingTiles,
+			IReadOnlyList<CPos> refineries, IReadOnlyList<CPos> buildingTiles,
 			int serveRadiusCells, int reachCells,
 			Func<int, bool> blocked, Func<int, bool> committed, CPos? near,
 			out int unservedAnchorsInReach, out int unservedFieldsInReach, out int[] anchorTier,
-			out int claimableAnchorsInReach, out int unservedAnchorsBeyondReach)
+			out int claimableAnchorsInReach, out int unservedAnchorsBeyondReach,
+			Func<int, int, long?> routeRank = null, Func<int, bool> coverageUnknown = null)
 		{
 			unservedAnchorsInReach = 0;
 			unservedFieldsInReach = 0;
@@ -850,7 +999,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (n == 0)
 				return order;
 
-			var assigned = AssignRefineries(anchorCells, refineries, serveRadiusCells, anchorField, refineryFields);
+			var assigned = AssignRefineries(anchorCells, refineries, serveRadiusCells, routeRank);
 			var anchorsByField = new Dictionary<int, List<int>>();
 			for (var a = 0; a < n; a++)
 			{
@@ -904,19 +1053,23 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			var reachDist = new int[n];
 			var served = new bool[n];
+			var unknown = new bool[n];
 			var fieldCovered = new bool[fieldCount];
 			for (var a = 0; a < n; a++)
 			{
 				served[a] = assigned[a] >= 0;
+				unknown[a] = coverageUnknown != null && coverageUnknown(a);
 				var field = anchorField[a];
 				reachDist[a] = CellsOf(field) is { Count: > 0 }
 					? fieldReach[field]
 					: anchorDist[a];
 
+				// REPAIR-B3: an UNKNOWN anchor defers — it is neither served nor claimable nor
+				// backlog until the route oracle resolves it within budget.
 				var inReach = reachDist[a] <= reachCells;
-				if (!served[a] && inReach)
+				if (!served[a] && !unknown[a] && inReach)
 					unservedAnchorsInReach++;
-				if (!served[a] && !inReach)
+				if (!served[a] && !unknown[a] && !inReach)
 					unservedAnchorsBeyondReach++;
 				if (served[a] || (committed != null && committed(a)))
 					fieldCovered[field] = true;
@@ -925,10 +1078,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			// Tier-1 backlog metric: a field in reach with no serving and no pending refinery still waits for its first
 			// one — parked anchors count too (the backlog is honest even while it cannot be claimed right now).
 			foreach (var kv in anchorsByField)
-				if (!fieldCovered[kv.Key] && kv.Value.Any(a => !served[a] && reachDist[a] <= reachCells))
+				if (!fieldCovered[kv.Key] && kv.Value.Any(a => !served[a] && !unknown[a] && reachDist[a] <= reachCells))
 					unservedFieldsInReach++;
 
-			Func<int, bool> claimable = a => !served[a] && reachDist[a] <= reachCells && (blocked == null || !blocked(a));
+			Func<int, bool> claimable = a => !served[a] && !unknown[a] && reachDist[a] <= reachCells && (blocked == null || !blocked(a));
 			for (var a = 0; a < n; a++)
 				if (claimable(a))
 					claimableAnchorsInReach++;
@@ -1507,6 +1660,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			while (income.Count > 1 && world.WorldTick - income.Peek().Tick > Info.IncomeWindowTicks)
 				income.Dequeue();
 
+			// REPAIR-B3: the coverage oracle's per-tick budget step — decoupled from the replan cadence
+			// so a refresh interrupted by the probe budget resumes where it stopped instead of starving
+			// the tail of the anchor list for ReplanTicks at a time.
+			if (Info.FieldCoverage && Info.DriveRefineries)
+				CoverageTick();
+
 			if (++ticks % Info.ReplanTicks != 0)
 				return;
 
@@ -1544,6 +1703,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			// REF-1: the frontier/tiles the law actually measures — a refinery's footprint binds its anchor and a
 			// building's tiles are the cells IsCloseEnoughToBase tests for adjacency; top-lefts would read too tight.
 			var refineryTiles = new List<IReadOnlyCollection<CPos>>();
+			var refineryDocks = new List<(CPos[] Cells, BitSet<DockType>[] Types, bool[] Enabled)>();
 			var buildingTiles = new List<CPos>();
 			var guards = new List<(CPos Cell, int Value)>();
 			var allBuildingCells = new List<CPos>();
@@ -1558,7 +1718,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				{
 					refineryCells.Add(a.Location);
 					if (Info.FieldCoverage)
+					{
 						refineryTiles.Add(a.Info.TraitInfos<BuildingInfo>().FirstOrDefault()?.Tiles(a.Location).ToList());
+						refineryDocks.Add(RefineryDockGeometry(a));
+					}
 				}
 
 				if (Info.FieldCoverage)
@@ -1642,7 +1805,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			HashSet<ResourceIndice> unservedAnchorIndices = null;
 			if (Info.FieldCoverage && Info.DriveRefineries)
 			{
-				EnsureAnchorModel(refineryCells, refineryTiles, buildingTiles);
+				EnsureAnchorModel(refineryCells, refineryTiles, buildingTiles, refineryDocks);
 				lawClaims = LawActive;
 				if (lawClaims && fieldIndexCount > 0)
 					for (var a = 0; a < this.anchors.Count; a++)
@@ -1725,7 +1888,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			// FE-1 (§12.24): with the switch on, one refinery per anchor replaces this field-based claim.
 			if (Info.FieldCoverage && Info.DriveRefineries)
 			{
-				UpdateAnchorClaim(refineryCells, refineryTiles, buildingTiles);
+				UpdateAnchorClaim(refineryCells, refineryTiles, buildingTiles, refineryDocks);
 				UpdateCrawlWant(crawlLink, buildingTiles);
 			}
 			else
@@ -1890,18 +2053,46 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		{
 			var tick = world.WorldTick;
 			var serve = Info.AnchorServeRadiusCells > 0 ? Info.AnchorServeRadiusCells : Info.ClaimRadiusCells;
-			var order = ClaimOrder(anchors, anchorFieldIds, fieldCellsById, lastRefineryCells, lastRefineryFields, lastBuildingTiles,
+			var order = ClaimOrder(anchors, anchorFieldIds, fieldCellsById, lastRefineryCells, lastBuildingTiles,
 				serve, Info.ReachCells,
 				i => AnchorBlockedForClaims(i, tick),
 				i => AnchorCommittedForClaims(i, tick),
-				near, out _, out _, out var tiers, out _, out _);
-			if (order.Count == 0)
-				return null;
+				near, out _, out _, out var tiers, out _, out _,
+				RouteRank, CoverageUnknown);
+			var oi = 0;
+			while (oi < order.Count)
+			{
+				var best = order[oi];
+				var anchor = anchors[best];
+				var offers = (anchorOfferStreaks.TryGetValue(anchor, out var s) ? s : 0) + 1;
 
-			var best = order[0];
-			var fieldId = anchorFieldIds[best];
-			var center = fieldId < fields.Count ? fields[fieldId].Center : anchors[best];
-			return new RefineryAnchorClaim(anchors[best], center, fieldId, tiers[best], fieldCellsById[fieldId]);
+				// REPAIR-B3: an offer that returns uncommitted is a failed placement attempt. Re-offered
+				// past RefineryClaimFailAttempts, the anchor's site search is stuck — park it for the
+				// bounded claim-fail cooldown and hand the next claim instead of re-running the same
+				// cancel/requeue cycle on it forever.
+				if (offers > Info.RefineryClaimFailAttempts)
+				{
+					ParkFailedClaim(anchor, tick, "offered " + offers + " times uncommitted");
+					order.RemoveAt(oi);
+					continue;
+				}
+
+				anchorOfferStreaks[anchor] = offers;
+				var fieldId = anchorFieldIds[best];
+				var center = fieldId < fields.Count ? fields[fieldId].Center : anchor;
+				return new RefineryAnchorClaim(anchor, center, fieldId, tiers[best], fieldCellsById[fieldId]);
+			}
+
+			return null;
+		}
+
+		void ParkFailedClaim(CPos anchor, int tick, string reason)
+		{
+			anchorParkedUntil[anchor] = tick + Info.RefineryClaimFailParkTicks;
+			anchorOfferStreaks.Remove(anchor);
+			var parked = $"AI ({player.ClientIndex}): REPAIR-B3 parked claim anchor {anchor} for {Info.RefineryClaimFailParkTicks} ticks ({reason}), at tick {tick}";
+			Log.Write("debug", parked);
+			AIUtils.BotDebug(parked);
 		}
 
 		/// <summary>
@@ -1910,7 +2101,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		/// every refinery serves. Runs at most once per world tick: the scores loop's anchor-granular
 		/// gate-B test (F1) and the claim update share the same build.
 		/// </summary>
-		void EnsureAnchorModel(List<CPos> refineryCells, List<IReadOnlyCollection<CPos>> refineryTiles, List<CPos> buildingTiles)
+		void EnsureAnchorModel(List<CPos> refineryCells, List<IReadOnlyCollection<CPos>> refineryTiles, List<CPos> buildingTiles,
+			List<(CPos[] Cells, BitSet<DockType>[] Types, bool[] Enabled)> refineryDocks = null)
 		{
 			if (anchorModelTick == world.WorldTick)
 				return;
@@ -1942,11 +2134,501 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			for (var f = 0; f <= maxField; f++)
 				fieldCellsById.Add(f < fields.Count ? fields[f].Cells : (IReadOnlyCollection<CPos>)Array.Empty<CPos>());
 
-			// Which field each refinery's footprint sits flush to — a legal gap-0/1 placement on a field's far edge
-			// can land beyond the serve radius from the spreader, and it still is that field's refinery.
+			// R1: the flush-fields pass is gone — spec §30 forbids same-field inheritance beyond the
+			// radius, so coverage eligibility is the geometric radius alone. RefineryFlushFields stays
+			// a public helper (the placement side may still reason about gap-0/1), but nothing in the
+			// coverage model consumes it.
 			var serve = Info.AnchorServeRadiusCells > 0 ? Info.AnchorServeRadiusCells : Info.ClaimRadiusCells;
-			lastRefineryFields = RefineryFlushFields(refineryTiles, fieldCellsById);
-			lastAssigned = AssignRefineries(anchors, refineryCells, serve, anchorFieldIds, lastRefineryFields);
+			lastRefineryDocks = refineryDocks ?? new List<(CPos[] Cells, BitSet<DockType>[] Types, bool[] Enabled)>();
+			while (lastRefineryDocks.Count < refineryCells.Count)
+				lastRefineryDocks.Add((new[] { refineryCells[lastRefineryDocks.Count] }, null, new[] { true }));
+
+			// REPAIR-B3: the coverage topology version — anchors, refineries (cells+docks) and own
+			// blockers (footprint cells + building top-lefts) fold into one order-independent signature.
+			// A changed signature re-opens every verdict; a witness survives only when none of its
+			// recorded path cells changed. Docks are footprint-adjacent, so buildingTiles already covers
+			// the cells a harvester actually enters.
+			var blockers = new HashSet<CPos>(buildingTiles);
+			foreach (var cells in refineryTiles)
+				if (cells != null)
+					blockers.UnionWith(cells);
+			foreach (var r in lastRefineryDocks)
+				if (r.Cells != null)
+					blockers.UnionWith(r.Cells);
+
+			var newSignature = anchors.Count * 31 + blockers.Count;
+			foreach (var a in anchors)
+				newSignature = newSignature * 31 + a.X * 1024 + a.Y;
+			foreach (var c in refineryCells)
+				newSignature ^= c.X * 32768 + c.Y;
+
+			// The blocker cells themselves, not just their count — a same-count swap must re-open
+			// the verdicts. XOR over the set is order-independent (HashSet order is an impl detail).
+			foreach (var c in blockers)
+				newSignature ^= unchecked(c.X * 73856093 + c.Y * 19349663);
+
+			// R1: dock enabled state is part of the eligibility contract — a dock that wakes or dies
+			// must re-open the verdicts it could never satisfy while disabled.
+			foreach (var r in lastRefineryDocks)
+				if (r.Enabled != null)
+					foreach (var e in r.Enabled)
+						newSignature = newSignature * 31 + (e ? 1 : 0);
+
+			if (coverageBlockerCells == null || newSignature != coverageModelSignature)
+			{
+				// First build, or the model changed: every verdict re-opens and the cursor restarts.
+				// Witnesses keep only when their recorded route avoids every changed blocker cell.
+				var changed = coverageBlockerCells == null
+					? null
+					: new HashSet<CPos>(blockers.Where(c => !coverageBlockerCells.Contains(c))
+						.Concat(coverageBlockerCells.Where(c => !blockers.Contains(c))));
+				coverageVersion++;
+				coverageModelSignature = newSignature;
+				coverageBlockerCells = blockers;
+				anchorCoverageVerdict = new byte[anchors.Count];
+				coverageRanks.Clear();
+				patchProbeProgress.Clear();
+				patchCellsCache.Clear();
+				evaluatedSites.Clear();
+				coverageCursor = 0;
+				coveragePendingAnchors = anchors.Count;
+				coverageSweepScanned = 0;
+				coverageFirstBudgetDeferred = -1;
+				coverageBudget = new RefineryProbeBudget(Info.CoverageSiteLimit, Info.CoverageProbeLimit, Info.CoverageProbesPerTick);
+
+				if (changed != null && routeWitnesses.Count > 0)
+				{
+					foreach (var kv in routeWitnesses.ToList())
+					{
+						// A stored path survives only when it avoids every changed cell. An
+						// unreachable verdict stores no cells at all, so it can never observe a
+						// REMOVED blocker — it must re-probe on any blocker change.
+						if (!routeWitnessPaths.TryGetValue(kv.Key, out var path)
+							|| (path.Count == 0 && changed.Count > 0)
+							|| path.Any(changed.Contains))
+							routeWitnesses.Remove(kv.Key);
+						else
+							routeWitnesses[kv.Key] = new RefineryRouteWitness(kv.Value.Reachable, kv.Value.RouteMilli, kv.Value.TravelMilli, coverageVersion);
+					}
+
+					foreach (var kv in routeWitnessPaths.ToList())
+						if (!routeWitnesses.ContainsKey(kv.Key))
+							routeWitnessPaths.Remove(kv.Key);
+				}
+				else if (routeWitnesses.Count > 0)
+				{
+					// Witnesses exist but nothing changed for them — adopt them under the new version.
+					foreach (var kv in routeWitnesses.ToList())
+						routeWitnesses[kv.Key] = new RefineryRouteWitness(kv.Value.Reachable, kv.Value.RouteMilli, kv.Value.TravelMilli, coverageVersion);
+				}
+
+				// A dock that no longer exists can never be probed again — drop its stale keys so the
+				// cache stays bounded by the live refinery set.
+				var liveDocks = new HashSet<CPos>();
+				foreach (var r in lastRefineryDocks)
+					if (r.Cells != null)
+						liveDocks.UnionWith(r.Cells);
+
+				if (routeWitnesses.Count > 0)
+				{
+					foreach (var kv in routeWitnesses.ToList())
+						if (!liveDocks.Contains(kv.Key.Dock))
+							routeWitnesses.Remove(kv.Key);
+					foreach (var kv in routeWitnessPaths.ToList())
+						if (!liveDocks.Contains(kv.Key.Dock) || !routeWitnesses.ContainsKey(kv.Key))
+							routeWitnessPaths.Remove(kv.Key);
+				}
+			}
+
+			lastAssigned = AssignRefineries(anchors, refineryCells, serve, RouteRank);
+		}
+
+		/// <summary>REPAIR-B3: the route-verified pair rank for <see cref="AssignRefineries"/> — null while
+		/// the oracle has not proven the pair (the anchor then reads as UNKNOWN, not unserved).</summary>
+		long? RouteRank(int a, int r) =>
+			coverageRanks.TryGetValue((a, r), out var rank) ? rank : (long?)null;
+
+		bool CoverageUnknown(int a) =>
+			a < anchorCoverageVerdict.Length && anchorCoverageVerdict[a] == (byte)RefineryCoverageVerdict.Unknown;
+
+		/// <summary>
+		/// REPAIR-B3: a refinery's dock geometry — every DockHost's dock cell (the trait's own
+		/// DockPosition, never a geometric guess), its type set, and whether it can actually serve
+		/// clients right now (R1: enabled+in-world is part of the entry/exit contract — a disabled
+		/// or selling dock cannot unload a harvester). A refinery without a dock trait keeps its
+		/// top-left as the route origin with wildcard compatibility (exotic mod).
+		/// </summary>
+		static (CPos[] Cells, BitSet<DockType>[] Types, bool[] Enabled) RefineryDockGeometry(Actor a)
+		{
+			var docks = a.TraitsImplementing<DockHost>().ToArray();
+			if (docks.Length == 0)
+				return (new[] { a.Location }, null, new[] { true });
+
+			return (docks.Select(d => a.World.Map.CellContaining(d.DockPosition)).ToArray(),
+				docks.Select(d => d.Info.Type).ToArray(),
+				docks.Select(d => d.IsEnabledAndInWorld).ToArray());
+		}
+
+		/// <summary>
+		/// REPAIR-B3: the faction's harvester locomotors and dock types, resolved once from the resource
+		/// map's HarvesterTypes (the role rollout's name list). Empty list — a mod that never lists them —
+		/// falls back to every rules-listed harvester so the probe still has a vehicle to measure with.
+		/// Deterministic: names sorted, locomotors deduped, rules immutable per match.
+		/// </summary>
+		(Locomotor Locomotor, BitSet<DockType> DockType, MobileInfo Mobile)[] HarvesterSpecs()
+		{
+			if (harvesterSpecs != null)
+				return harvesterSpecs;
+
+			var names = resourceMap?.Info.HarvesterTypes;
+			var infos = (names == null || names.Count == 0
+					? world.Map.Rules.Actors.Values.Where(ai => ai.HasTraitInfo<HarvesterInfo>())
+					: names.Where(n => world.Map.Rules.Actors.TryGetValue(n, out var ai) && ai.HasTraitInfo<HarvesterInfo>())
+						.Select(n => world.Map.Rules.Actors[n]))
+				.OrderBy(ai => ai.Name, StringComparer.Ordinal);
+
+			var locos = world.WorldActor.TraitsImplementing<Locomotor>().ToArray();
+			var list = new List<(Locomotor Locomotor, BitSet<DockType> DockType, MobileInfo Mobile)>();
+			foreach (var ai in infos)
+			{
+				var mobile = ai.TraitInfoOrDefault<MobileInfo>();
+				if (mobile?.Locomotor == null)
+					continue;
+
+				var loco = locos.FirstOrDefault(l => l.Info.Name == mobile.Locomotor);
+				if (loco == null || list.Any(s => ReferenceEquals(s.Locomotor, loco)))
+					continue;
+
+				list.Add((loco, ai.TraitInfoOrDefault<HarvesterInfo>()?.Type ?? default, mobile));
+			}
+
+			return harvesterSpecs = list.ToArray();
+		}
+
+		/// <summary>
+		/// REPAIR-B3: the patch cells a harvester would mine at anchor <paramref name="a"/>, ordered
+		/// nearest-first — the anchor cell itself when the field records none. R2: the FULL candidate
+		/// set, not just the nearest CoveragePatchCellSample — a pair's walk advances only the knob's
+		/// window per refresh and resumes where it stopped, so a refinery is never declared unserving
+		/// while unexamined cells could still prove coverage. Deterministic order: distance, then X,
+		/// then Y. R4b: the sorted list is cached per (anchor, model version) — the ordering is
+		/// fixed while the topology is, so a field is sorted at most once per refresh generation
+		/// rather than once per pass (the VP's materialization-profile note).
+		/// </summary>
+		IReadOnlyList<CPos> PatchCells(int a)
+		{
+			var anchor = anchors[a];
+			if (patchCellsCache.TryGetValue(a, out var cached)
+				&& cached.Version == coverageVersion && cached.Anchor == anchor)
+				return cached.Ordered;
+
+			var fieldId = a < anchorFieldIds.Length ? anchorFieldIds[a] : -1;
+			var cells = fieldId >= 0 && fieldId < fieldCellsById.Count ? fieldCellsById[fieldId] : null;
+			var ordered = cells == null || cells.Count == 0
+				? new[] { anchor }
+				: cells.OrderBy(c => (c - anchor).LengthSquared).ThenBy(c => c.X).ThenBy(c => c.Y).ToArray();
+			patchCellsCache[a] = (coverageVersion, anchor, ordered);
+			return ordered;
+		}
+
+		/// <summary>
+		/// REPAIR-B3: the witness cache — a stored verdict under the current topology version is free
+		/// evidence; anything else costs probe budget. Returns null when the budget refused the probe —
+		/// the pair is then deferred (UNKNOWN), never counted as failure. R1: the witness also carries
+		/// the estimated simulation travel time — the harvester spec's MobileInfo.Speed adjusted by the
+		/// locomotor's terrain speed percentage, the same product Mobile.MovementSpeedForCell computes
+		/// minus actor-bound modifiers (those are transient by design exclusion).
+		/// </summary>
+		RefineryRouteWitness? WitnessOrProbe(CPos dock, CPos patch,
+			(Locomotor Locomotor, BitSet<DockType> DockType, MobileInfo Mobile) spec, bool outbound)
+		{
+			var key = (dock, patch, spec.Locomotor.Info.Name, outbound);
+			if (routeWitnesses.TryGetValue(key, out var w))
+			{
+				if (w.Version == coverageVersion)
+				{
+					coverageBudget.CacheHits++;
+					return w;
+				}
+
+				routeWitnesses.Remove(key);
+				routeWitnessPaths.Remove(key);
+			}
+
+			if (!coverageBudget.TryConsumeProbe())
+				return null;
+
+			var path = RefineryRouteProbe.ProbeLeg(world, spec.Locomotor, outbound ? dock : patch, outbound ? patch : dock);
+			var travel = RefineryCoverageOracle.RouteTravelMilli(path,
+				c => Util.ApplyPercentageModifiers(spec.Mobile.Speed, new[] { spec.Locomotor.MovementSpeedForCell(c) }));
+			w = new RefineryRouteWitness(path.Count > 0, RefineryCoverageOracle.RouteLengthMilli(path), travel, coverageVersion);
+			routeWitnesses[key] = w;
+			routeWitnessPaths[key] = path;
+			return w;
+		}
+
+		/// <summary>
+		/// REPAIR-B3: the per-tick coverage step — rebuilds the anchor/refinery model inputs from the
+		/// trait-indexed actor sets (same predicates as the replan's own-actor pass, so whichever ran
+		/// first this tick wins) and resumes the persistent-cursor refresh under the probe budget.
+		/// </summary>
+		void CoverageTick()
+		{
+			var refineryCells = new List<CPos>();
+			var refineryTiles = new List<IReadOnlyCollection<CPos>>();
+			var refineryDocks = new List<(CPos[] Cells, BitSet<DockType>[] Types, bool[] Enabled)>();
+			var buildingTiles = new List<CPos>();
+			foreach (var tp in world.ActorsWithTrait<Refinery>())
+			{
+				var a = tp.Actor;
+				if (a.Owner != player || a.IsDead || !a.IsInWorld)
+					continue;
+
+				refineryCells.Add(a.Location);
+				refineryTiles.Add(a.Info.TraitInfos<BuildingInfo>().FirstOrDefault()?.Tiles(a.Location).ToList());
+				refineryDocks.Add(RefineryDockGeometry(a));
+			}
+
+			foreach (var tp in world.ActorsWithTrait<GivesBuildableArea>())
+			{
+				var a = tp.Actor;
+				if (a.Owner != player || a.IsDead || !a.IsInWorld)
+					continue;
+
+				var bi = a.Info.TraitInfos<BuildingInfo>().FirstOrDefault();
+				if (bi != null)
+					buildingTiles.AddRange(bi.Tiles(a.Location));
+			}
+
+			EnsureAnchorModel(refineryCells, refineryTiles, buildingTiles, refineryDocks);
+			EvaluateCoverageTick();
+		}
+
+		/// <summary>
+		/// REPAIR-B3 (SPEC §4, R1+R2): the bounded refresh sweep — anchors resume at the persistent
+		/// cursor, each (anchor, refinery) candidate pair is gated by the geometric radius alone (R1:
+		/// no same-field inheritance — a far flush refinery does not serve), then requires a DockHost
+		/// that is enabled, in-world, and type-compatible (the loaded-return contract), then probes
+		/// both directed legs under the stationary-obstacle model. R2: a pair walks its anchor's whole
+		/// field in CoveragePatchCellSample-cell windows across refreshes (per-pair cursor persisted
+		/// under the model version) — Unserved is only ever declared after every patch candidate was
+		/// examined, and a window- or budget-deferred pair keeps the anchor UNKNOWN. Site/probe
+		/// counters cap one PASS over the anchors; a ceiling-cut pass re-arms at the boundary so
+		/// deferred work resumes instead of starving. The per-tick probe limit only paces the spend
+		/// (a tick-stopped anchor rewinds one cursor step and resumes next tick — paid witnesses
+		/// persist). An anchor with any verified pair is Covered at the best pair's travel-time rank.
+		/// </summary>
+		void EvaluateCoverageTick()
+		{
+			if (anchorCoverageVerdict.Length != anchors.Count)
+			{
+				// Defensive: the signature block normally reallocates verdicts and clears ranks
+				// together; a stray length mismatch clears all index-keyed state.
+				anchorCoverageVerdict = new byte[anchors.Count];
+				coverageRanks.Clear();
+				patchProbeProgress.Clear();
+				patchCellsCache.Clear();
+				evaluatedSites.Clear();
+			}
+
+			if (anchors.Count == 0)
+			{
+				coveragePendingAnchors = 0;
+				return;
+			}
+
+			var specs = HarvesterSpecs();
+			var serve = Info.AnchorServeRadiusCells > 0 ? Info.AnchorServeRadiusCells : Info.ClaimRadiusCells;
+			var r2 = (long)serve * serve;
+			var legLimit = Info.CoverageRouteLimitCells * RefineryCoverageOracle.MilliPerCell;
+			var hadFirstBudgetDeferred = coverageFirstBudgetDeferred;
+			coverageBudget.NewTick();
+
+			var n = anchors.Count;
+			var scanned = 0;
+			var rearmCoverageBudget = false;
+			while (scanned < n && coverageBudget.TickProbesOpen)
+			{
+				var a = coverageCursor % n;
+				coverageCursor++;
+				scanned++;
+				coverageSweepScanned++;
+				if (coverageCursor % n == 0 && coverageFirstBudgetDeferred >= 0)
+					rearmCoverageBudget = true;
+				if (anchorCoverageVerdict[a] != (byte)RefineryCoverageVerdict.Unknown)
+					continue;
+
+				var anyCovered = false;
+				var anyDeferred = false;
+				var tickCapHit = false;
+				var patches = PatchCells(a);
+				for (var r = 0; r < lastRefineryCells.Count && r < lastRefineryDocks.Count; r++)
+				{
+					var d = (anchors[a] - lastRefineryCells[r]).LengthSquared;
+					if (d > r2)
+						continue;
+
+					// Whole-refresh ceiling (R1): the site cap charges a pair once per refresh —
+					// a pair already admitted stays free to re-derive from cached witnesses on a
+					// tick-paced revisit, so pacing can never drain the site budget twice.
+					if (!evaluatedSites.Contains((a, r)))
+					{
+						if (!coverageBudget.TryConsumeSite())
+						{
+							anyDeferred = true;
+							if (coverageFirstBudgetDeferred < 0)
+								coverageFirstBudgetDeferred = a;
+
+							break;
+						}
+
+						evaluatedSites.Add((a, r));
+					}
+
+					var pairCovered = false;
+					var pairRank = long.MaxValue;
+					var (cells, types, enabled) = lastRefineryDocks[r];
+
+					// R2+R3: patch-outer walk with a persisted per-pair cursor — the cell index may
+					// only advance after every eligible (dock, spec) examined it, and the window
+					// moves at most CoveragePatchCellSample cells per refresh. Any interruption —
+					// tick pacing or a probe-cap refusal — leaves the cursor ON the unexamined cell
+					// (R3: an unconditional for-update would skip it into a false Unserved). A pair
+					// whose window ends before the field does stays UNKNOWN; only a fully-walked
+					// field contributes to Unserved.
+					var pi = patchProbeProgress.TryGetValue((a, r), out var progress) && progress.Version == coverageVersion
+						? progress.Index : 0;
+					var walk = new PatchWalk(pi, patches.Count, Info.CoveragePatchCellSample);
+					while (walk.HasCell && !pairCovered && !tickCapHit && !coverageBudget.ProbeCapSpent)
+					{
+						var patch = patches[walk.Index];
+						var cellExamined = true;
+						for (var di = 0; cells != null && di < cells.Length && !pairCovered && !tickCapHit && cellExamined; di++)
+						{
+							// R1: real DockHost eligibility — enabled and in-world, type-overlapping.
+							// A null Types array (no DockHost — exotic mod) is wildcard-compatible with
+							// the synthetic "enabled" flag RefineryDockGeometry fills for it.
+							var dockEnabled = enabled != null && di < enabled.Length && enabled[di];
+							BitSet<DockType>? dockType = types != null && di < types.Length ? types[di] : (BitSet<DockType>?)null;
+							foreach (var spec in specs)
+							{
+								if (pairCovered || tickCapHit)
+									break;
+
+								if (!RefineryCoverageOracle.DockEligible(dockEnabled, spec.DockType, dockType))
+									continue;
+
+								var outbound = WitnessOrProbe(cells[di], patch, spec, true);
+								var inbound = outbound == null ? null : WitnessOrProbe(cells[di], patch, spec, false);
+								if (outbound == null || inbound == null)
+								{
+									// Probe-cap refusal = deferred for this refresh; tick-cap
+									// refusal = pacing — rewind so this anchor resumes next tick
+									// (paid witnesses persist across both). The cell stays
+									// unexamined either way: pi must NOT advance (R3).
+									anyDeferred = true;
+									cellExamined = false;
+									if (coverageBudget.ProbeCapSpent)
+									{
+										if (coverageFirstBudgetDeferred < 0)
+											coverageFirstBudgetDeferred = a;
+									}
+									else
+										tickCapHit = true;
+
+									break;
+								}
+
+								if (!RefineryCoverageOracle.BothLegsCover(outbound.Value, inbound.Value, legLimit))
+									continue;
+
+								pairCovered = true;
+								pairRank = RefineryCoverageOracle.LegPairRank(outbound.Value, inbound.Value);
+								break;
+							}
+						}
+
+						if (!cellExamined)
+							break;
+
+						walk.CompleteCell();
+					}
+
+					patchProbeProgress[(a, r)] = (coverageVersion, walk.Index);
+					if (RefineryCoverageOracle.PairDeferredAfterWalk(pairCovered, walk, patches.Count))
+					{
+						// R4: unexamined cells defer the pair no matter WHAT stopped the walk —
+						// window end, tick pacing (already marked above, idempotent), or a probe
+						// ceiling the final SUCCESSFUL probe landed exactly on. The R3 form also
+						// required !ProbeCapSpent, so a clean cap exit suppressed the defer →
+						// false Unserved that cascaded: every later anchor exited its walk at
+						// entry, aggregated Unserved, and no deferred marker meant no re-arm.
+						anyDeferred = true;
+						if (coverageBudget.ProbeCapSpent && coverageFirstBudgetDeferred < 0)
+							coverageFirstBudgetDeferred = a;
+					}
+
+					if (pairCovered)
+					{
+						anyCovered = true;
+						coverageRanks[(a, r)] = pairRank;
+					}
+					else
+						coverageRanks.Remove((a, r));
+
+					if (tickCapHit)
+						break;
+				}
+
+				anchorCoverageVerdict[a] = (byte)RefineryCoverageOracle.Aggregate(anyCovered, anyDeferred);
+				if (tickCapHit)
+				{
+					coverageCursor--;
+					break;
+				}
+			}
+
+			// One pass = one refresh (SPEC §54): the site/probe ceilings bound each pass, so a pass
+			// the ceiling cut short re-arms at the boundary — deferred anchors resume in the next
+			// pass instead of starving UNKNOWN on a permanently spent budget. The per-tick pace is
+			// untouched (NewTick runs at sweep start; this budget starts clean for next tick).
+			if (rearmCoverageBudget)
+			{
+				coverageBudget = new RefineryProbeBudget(Info.CoverageSiteLimit, Info.CoverageProbeLimit, Info.CoverageProbesPerTick);
+				evaluatedSites.Clear();
+				coverageFirstBudgetDeferred = -1;
+				Log.Write("debug", $"AI ({player.ClientIndex}): REPAIR-B3 coverage pass ceiling hit at tick {world.WorldTick}: refresh budget re-armed for the next pass");
+			}
+
+			var hadPending = coveragePendingAnchors;
+			coveragePendingAnchors = anchorCoverageVerdict.Count(v => v == (byte)RefineryCoverageVerdict.Unknown);
+
+			// SPEC §56 (R1): the refresh telemetry now carries what a reviewer needs to audit the
+			// spend — candidate sites evaluated, directed probes consumed, deferred candidates,
+			// witness cache hits — plus the first anchor a refresh ceiling refused. Logged on the
+			// transition to fully resolved, once when a refresh ceiling first defers an anchor,
+			// and whenever the per-tick pacing stops the sweep (a deferred anchor is retried,
+			// never folded into Unserved).
+			if (coveragePendingAnchors == 0 && hadPending > 0)
+			{
+				var line = $"AI ({player.ClientIndex}): REPAIR-B3 coverage refresh complete at tick {world.WorldTick}: {anchors.Count} anchors, {coverageSweepScanned} anchor-scans, {coverageBudget.SitesEvaluated} sites, {coverageBudget.ProbesUsed} probes, {coverageBudget.DeferredCandidates} deferred candidates, {coverageBudget.CacheHits} witness cache hits";
+				Log.Write("debug", line);
+				AIUtils.BotDebug(line);
+			}
+
+			if (coverageFirstBudgetDeferred >= 0 && hadFirstBudgetDeferred < 0)
+			{
+				var line = $"AI ({player.ClientIndex}): REPAIR-B3 coverage refresh ceiling reached at tick {world.WorldTick}: anchor {coverageFirstBudgetDeferred} first deferred, {coverageBudget.SitesEvaluated}/{coverageBudget.SiteLimit} sites, {coverageBudget.ProbesUsed}/{coverageBudget.ProbeLimit} probes spent; {coveragePendingAnchors} anchors stay Unknown until the next refresh";
+				Log.Write("debug", line);
+				AIUtils.BotDebug(line);
+			}
+			else if (!coverageBudget.TickProbesOpen && coveragePendingAnchors > 0)
+				Log.Write("debug", $"AI ({player.ClientIndex}): REPAIR-B3 coverage tick pacing at tick {world.WorldTick}: {coveragePendingAnchors} anchors pending, resume at cursor {coverageCursor}");
+
+			// Verified pairs may have moved the assignment since the model build — recompute so served
+			// and the pending-commit clears read the live verdict, not this morning's.
+			var serveR = Info.AnchorServeRadiusCells > 0 ? Info.AnchorServeRadiusCells : Info.ClaimRadiusCells;
+			lastAssigned = AssignRefineries(anchors, lastRefineryCells, serveR, RouteRank);
 		}
 
 		/// <summary>
@@ -1955,9 +2637,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		/// field's best spreader in reach, home first; tier 2: covered fields' extra spreaders. A claim that keeps failing
 		/// is parked; a committed one is pending until its refinery lands.
 		/// </summary>
-		void UpdateAnchorClaim(List<CPos> refineryCells, List<IReadOnlyCollection<CPos>> refineryTiles, List<CPos> buildingTiles)
+		void UpdateAnchorClaim(List<CPos> refineryCells, List<IReadOnlyCollection<CPos>> refineryTiles, List<CPos> buildingTiles,
+			List<(CPos[] Cells, BitSet<DockType>[] Types, bool[] Enabled)> refineryDocks = null)
 		{
-			EnsureAnchorModel(refineryCells, refineryTiles, buildingTiles);
+			EnsureAnchorModel(refineryCells, refineryTiles, buildingTiles, refineryDocks);
 
 			anchorClaim = null;
 			anchorClaimFieldCenter = null;
@@ -1992,12 +2675,13 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					if (builder.BuildingsBeingProduced.TryGetValue(r, out var n))
 						queued += n;
 
-			var order = ClaimOrder(anchors, anchorFieldIds, fieldCellsById, refineryCells, lastRefineryFields, buildingTiles,
+			var order = ClaimOrder(anchors, anchorFieldIds, fieldCellsById, refineryCells, buildingTiles,
 				serve, Info.ReachCells,
 				i => AnchorBlockedForClaims(i, tick),
 				i => AnchorCommittedForClaims(i, tick),
 				null, out unservedInReach, out unservedFieldsInReach, out _,
-				out claimableAnchorsInReach, out unservedBeyondReach);
+				out claimableAnchorsInReach, out unservedBeyondReach,
+				RouteRank, CoverageUnknown);
 			unclaimedAnchorsInReach = order.Count;
 
 			// A refinery is wanted only while more anchors are claimable than refineries already in flight — never by
