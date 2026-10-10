@@ -1,3 +1,52 @@
+## Resume (2026-10-10 late, Claude: launch blockers fixed + runtime acceptance; branch `ccr-c7f51935-i53fkj`)
+
+Maintainer directive: fix what stopped the local agents from running the A/B. A capped REAL-engine run of the pilot path
+found that **no campaign cell could have produced a valid game**. It also fixed the memory blocker. Committed on the
+branch above (boot gate: default platform and `Game.Platform=Null` both reached the menu, 0 exceptions). Not merged into master, and `execution_approved` is still false.
+
+**Blockers fixed (details: `docs/LESSONS_LEARNED.md` "A runner that never ran a cell", master doc Part IIIc RR2):**
+0. **The arms never ran.** `campaign_runner` passed the dual-arm `ai.yaml` as a search-path overlay, but the engine
+   keeps the LAST `mods/cameo` it finds. `debug.log`: `Invalid bot type: hard_control / hard_treatment`, so every
+   seat idled. The cap Lua then crashed (`ResolvePlayerName`) and left one seat `undecided` (adjudicated INVALID). Now
+   the arms ride in the generated map: `ab_campaign_pilot.install_dual_arm_rules` writes `campaign_ai.yaml` first
+   in `Rules:`.
+1. `campaign_runner.py` imports: `shutil`/`zipfile`/`batch` were missing (crash before launch / before the receipt).
+   Guard: `tools/tests/test_campaign_tools_names.py`.
+2. Variant map dir: `Support/UserMaps` is not a MapFolder, so `Could not find map`. Now `batch.USER_MAP_DIR`.
+3. Cap and actor markers are in `lua.log`, not `server.log` (the seed pin stays in `server.log`).
+4. **The pair never swapped the arms' spawns** (`make_jobs` flipped twice). Control held `Multi0..n-1` in both games.
+   Fixed; the test checks per-arm spawn sets. `SPAWN_SYMMETRY_2026-10-11.md` carries a correction note.
+5. Text pins are line-ending independent (`text_sha`). The old pins were CRLF bytes from the Windows checkout and could
+   never validate on an LF host.
+6. `ab_campaign.py` map path case (`_ra_Siberian-Pass.oramap`).
+7. `BP_squad_desire` effect class (`restraint`). The applier had refused every `--groups` run since `a55954c1`.
+8. `run_ai_match_batch.py` refuses a stale build (a `.cs` newer than its `engine/bin` dll; `--allow-stale-build`).
+
+**Memory:** the 8.4–8.8 GiB peaks are sprite-sheet textures (200+ 2048² sheets, ≥ 3.2 GiB), not the managed heap.
+New mod project `OpenRA.Platforms.Null` (in `CameoMod.sln`, so `make.cmd all` builds it); select it with
+`--render headless` on `run_ai_match_batch.py` and `campaign_runner.py execute-one`. Linux measurements: peak 8.62 → 5.19 GB,
+in game 5.1 → 2.6 GB, ~100 ticks/s. A same-seed rendered/headless pair matched on all 2,673 shared frames (orders
+and sync hashes). **The memory policy constants are unchanged:** first measure headless private bytes on THIS host
+(one `run_ai_match_batch.py --render headless` 1v1, sample `Get-Process OpenRA`), then the lead decides whether
+`PRIVATE_LIMIT` / `FREE_RAM_FLOOR` can drop to admit two cells.
+
+**Runtime acceptance (`tools/ai/map_engine_acceptance.py`, headless, cap 1,500 ticks, seed 1337):** fixed path proven on `1v1_nuclear_gdi` (both games: arms active, mutual loss at the cap, control 11,45 → 90,24 across the pair). The full sweep is running; see `docs/audit/MAP_ENGINE_ACCEPTANCE_2026-10-10.md`.
+
+**Candidate manifest regenerated** (text pins only; design fields and Windows binary pins untouched):
+`docs/audit/ab_pilot_manifest_candidate.json` sha256 `126d57ec8219fbdc9a3aef7c20d2562953858ff5cd01706167867c50a351c0f7`. The pilot and runner dry-runs are
+green on Linux (64 games / 32 variants / 144 seats / 0 launches). `tools/tests/fixtures/ab_campaign_pilot_dry_run_receipt.json`
+was refreshed. The binary pins are this host's build, and a rebuild (now including `OpenRA.Platforms.Null.dll`, which is
+not pinned) should not change them: no engine or `OpenRA.Mods.Cameo` source changed.
+
+**Next on the Windows host, in order:** (1) `git pull`, `make.cmd all` (builds `OpenRA.Platforms.Null`); (2) campaign
+suites green (`python -m unittest tools.tests.test_ab_campaign_pilot tools.tests.test_campaign_runner
+tools.tests.test_map_engine_acceptance tools.tests.test_campaign_tools_names tools.tests.test_ai_batch_harness`);
+(3) `python tools/ai/map_engine_acceptance.py --manifest docs/audit/ab_pilot_manifest_candidate.json --out
+results/map-acceptance-<date>` on this host (all 16 setups, both games; ~1 h headless) and keep the receipt;
+(4) one headless 1v1 to measure private bytes, then the lead's memory-policy call; (5) DevOps sign-off of the
+regenerated manifest; (6) the maintainer's `execution_approved` flip. Still pending as before: the receipt/analyzer
+sign-off and the maintainer flip. A5 parity stands (it never used the overlay: `hard` bots on the gate map).
+
 ## Resume (2026-10-11, seat-join defect FIXED + memory policy implemented — uncommitted, DevOps review pending)
 
 Two launch blockers cleared in this tree (uncommitted; user directive "fix all blockers", DevOps to review+commit):

@@ -4,6 +4,36 @@ Next: `C:/cameo-wt/codex-learn-p0-fix` / `codex/learn-p0-fix` (base229a2563b), s
 
 # Cameo — THE HANDOFF
 
+## 2026-10-10 — Claude: the A/B blockers the local agents could not clear are fixed — continue from here
+
+`Agent: Claude (Opus) · branch ccr-c7f51935-i53fkj · cloud container · base c07bef43 · engine 6da7fce14` · boot gate:
+default platform and `Game.Platform=Null` both reach the menu, 0 exceptions.
+
+**Read:** `STATUS_2026-10-11_ab_campaign_tooling.md` (top entry: the next steps on the Windows host), LESSONS_LEARNED
+"Headless bot matches" and "A runner that never ran a cell", master doc Part IIIc (RR1 re-review of master, RR2
+blockers, RR3 memory, RR4 A/B results).
+
+**Fixed:**
+- **Memory:** a mod-side headless platform `OpenRA.Platforms.Null` (`--render headless`). Peak 8.62 → 5.19 GB, and
+  the sim is identical (same-seed sync hashes match on every shared frame).
+- **Campaign tooling, nine blockers:**
+  - the dual-arm bots never activated (overlay ignored by the engine);
+  - the pair never swapped the arms' spawns;
+  - missing imports;
+  - wrong map directory;
+  - markers read from the wrong log;
+  - CRLF-only pins;
+  - a map path with the wrong letter case;
+  - `BP_squad_desire` without a class, which blocked `apply_increment_switches.py`;
+  - stale-build launches.
+- **New tool:** `tools/ai/map_engine_acceptance.py`, a capped real-engine seat and pair-swap proof per map.
+- **Candidate manifest:** text pins regenerated (`126d57ec…`). Pilot and runner dry-runs are green on Linux.
+
+**Continue with:** (1) the acceptance sweep and A/B result write-up (RR4, `MAP_ENGINE_ACCEPTANCE_2026-10-10.md`; follow-up
+commit on this branch); (2) on the Windows host, STATUS steps 1–6 (build, tests, acceptance, a headless memory
+measurement, then the lead's memory-policy call, DevOps manifest sign-off, maintainer `execution_approved`); (3) PR
+to master when the maintainer asks.
+
 ## 2026-10-09 — Claude: AI architecture review + playtest regression — continue from here
 
 `Agent: Claude (Opus) · branch ccr-c7f51935-i53fkj · cloud container · base 5c8cfe04` · docs only.

@@ -32,6 +32,13 @@ Findings on the flagged maps:
 
 Interpretation for the A/B gate:
 
+> **Correction (Claude, 2026-10-10).** Point 1 below and the closing "both arms cover both halves" were NOT true of the
+> planner this audit read. `make_jobs` flipped both the side→spawn and the arm→side mapping in game 1, and the flips
+> cancelled, so control held spawns `Multi0..size-1` in BOTH games of every pair. The runtime seat proof showed it
+> (`tools/ai/map_engine_acceptance.py`: control at 11,45 in both Nuclear Winter games). Fixed in `ab_campaign_pilot.make_jobs`
+> (sides geographic, only the arm swaps), with a per-arm spawn-set test. The geometry and resource tables below are
+> unaffected and still hold; the runtime proof is in `MAP_ENGINE_ACCEPTANCE_2026-10-10.md`.
+
 1. The mirror pairing design already cancels first-order position effects —
    each pair plays both orientations with both arms, so a small systematic
    bias cancels in the *paired* win difference.

@@ -136,6 +136,11 @@ class SlotCounter:
   with self._lock: self._active.pop(cell_id,None);self._sizes.pop(cell_id,None)
 
 def sha(path): return hashlib.sha256(path.read_bytes()).hexdigest()
+def text_sha(path):
+ """sha256 of a TEXT pin with CRLF folded to LF. .gitattributes' `* text=lf` is not a valid
+ eol value, so a Windows checkout gets CRLF .py/.json files and a Linux one LF: a byte hash
+ pinned on one host never matched the other (2026-10-10). Binary pins (maps, engine) stay sha()."""
+ return hashlib.sha256(path.read_bytes().replace(b"\r\n",b"\n")).hexdigest()
 def ai_payload_sha(root,switch=None):
  skip,groups,_=increment.load_spec(pathlib.Path(__file__).with_name("increment_switches.yaml"));digest=hashlib.sha256()
  if switch is not None: require(switch in groups,"unknown AI payload switch")
@@ -264,7 +269,10 @@ def make_jobs(manifest):
     ca,ta=("A","B") if game==0 else ("B","A")
     assignments=[]
     for side in ("A","B"):
-     homes=range(0,size) if (side=="A")==(game==0) else range(size,2*size)
+     # Sides are geographic (A = the first spawn set every game); only the ARM swaps sides. Flipping the homes
+     # too cancelled the arm swap: control sat on Multi0..size-1 in BOTH games of every pair, so a spawn
+     # advantage was fully confounded with the switch (runtime seat proof, map_engine_acceptance 2026-10-10).
+     homes=range(0,size) if side=="A" else range(size,2*size)
      rotated=list(factions) if game==0 else list(reversed(factions))
      arm="control" if side==ca else "treatment"
      for offset,(spawn,faction) in enumerate(zip(homes,rotated)):
@@ -281,7 +289,7 @@ def validate(manifest,root,engine_root=None,execution=False):
  baseline=manifest.get("baseline_manifest_sha256")
  require(isinstance(baseline,str) and len(baseline)==64 and all(c in "0123456789abcdef" for c in baseline.lower()),"ratchet baseline manifest SHA required")
  basepath=(root/pathlib.PurePosixPath(manifest.get("baseline_manifest_path",""))).resolve()
- require(root.resolve() in basepath.parents and basepath.is_file() and sha(basepath)==baseline,"ratchet baseline manifest file/hash mismatch")
+ require(root.resolve() in basepath.parents and basepath.is_file() and text_sha(basepath)==baseline,"ratchet baseline manifest file/hash mismatch")
  pins=manifest.get("pins")
  require(isinstance(pins,dict) and pins.get("source_commit")=="964cdb630b1514e1c1a0baed55cbdbc427d5fc11" and pins.get("engine_version")=="6da7fce14da541180c6baddd6925118fbef65b94","source/engine pin mismatch")
  p=subprocess.run(["git","-C",str(root),"cat-file","-e",pins["source_commit"]+"^{commit}"],capture_output=True,timeout=20)
@@ -290,8 +298,8 @@ def validate(manifest,root,engine_root=None,execution=False):
  require(manifest.get("baseline_ai_payload_sha256")==ai_payload_sha(root),"baseline AI payload mismatch")
  require(manifest.get("treatment_ai_payload_sha256")==ai_payload_sha(root,SWITCH),"one-switch treatment AI payload mismatch")
  tool_paths={"driver_analyzer":pathlib.Path(__file__),"campaign_runner":root/"tools"/"ai"/"campaign_runner.py","batch_runner":root/"tools"/"ai"/"run_ai_match_batch.py","switch_applier":root/"tools"/"ai"/"apply_increment_switches.py"}
- require(manifest.get("tool_sha256")=={k:sha(v) for k,v in tool_paths.items()},"tool SHA pins mismatch")
- require(manifest.get("receipt_schema_sha256")==sha(root/"tools"/"ai"/"ab_campaign_receipt.schema.json"),"receipt schema SHA mismatch")
+ require(manifest.get("tool_sha256")=={k:text_sha(v) for k,v in tool_paths.items()},"tool SHA pins mismatch")
+ require(manifest.get("receipt_schema_sha256")==text_sha(root/"tools"/"ai"/"ab_campaign_receipt.schema.json"),"receipt schema SHA mismatch")
  binaries=manifest.get("binary_sha256")
  require(isinstance(binaries,dict) and len(binaries)==3 and all(len(v)==64 for v in binaries.values()),"engine binary SHA pins missing")
  if engine_root is not None:
@@ -391,6 +399,27 @@ def prove_generated_map(job,root,dest):
    raise ValueError(f"generated map seat proof mismatch: {ref}")
   proof.append({**seat,"home_location":actual["HomeLocation"]})
  return {"map_yaml_sha256":sha(dest/"map.yaml"),"seat_proof_source":"generated_map.yaml","seats":proof,"runtime_monitor":monitor}
+
+def install_dual_arm_rules(variant,overlay,root):
+ """Ship the dual-arm AI yaml INSIDE the generated map: list it first in map.yaml `Rules:` (before the harness's
+ duel_rules.yaml, which keeps the last word). A search-path overlay cannot do this: InstalledMods keeps the LAST
+ mods/cameo it enumerates, so an overlay listed first is silently ignored, and an overlay folder holding only ai/*.yaml
+ has none of the mod's other includes. The 2026-10-10 acceptance runs logged `Invalid bot type: hard_control` /
+ `hard_treatment`: neither arm's bot ever activated. Map rules merge over the mod rules; the dual-arm files only add
+ or change nodes (no `-Key:` removals), which is checked here."""
+ source=overlay/"mods"/"cameo"/"ai";installed={}
+ for path in sorted(source.glob("*.yaml")):
+  text=path.read_text(encoding="utf-8")
+  if text==(root/"mods"/"cameo"/"ai"/path.name).read_text(encoding="utf-8"): continue
+  require(re.search(r"(?m)^\t*-[^\s-]",text) is None,"dual-arm AI yaml uses a removal; map-rule merge cannot carry it: "+path.name)
+  name="campaign_"+path.name;(variant/name).write_text(text,encoding="utf-8");installed[name]=sha(variant/name)
+ require(installed,"dual-arm overlay changes no AI file")
+ map_yaml=variant/"map.yaml";text=map_yaml.read_text(encoding="utf-8")
+ rules=re.search(r"(?m)^Rules: (.+)$",text);require(rules is not None,"generated map.yaml has no Rules line")
+ listed=[x.strip() for x in rules.group(1).split(",")];require(not set(installed)&set(listed),"dual-arm rules already installed")
+ text=text[:rules.start()]+"Rules: "+", ".join(list(installed)+listed)+text[rules.end():]
+ map_yaml.write_text(text,encoding="utf-8")
+ return installed
 
 def preflight_generated_maps(m,root,directory):
  jobs=make_jobs(m);selected={}

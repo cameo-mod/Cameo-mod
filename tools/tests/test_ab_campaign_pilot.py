@@ -7,7 +7,7 @@ import apply_increment_switches as increment
 def manifest():
  baseline=ROOT/"tools/tests/fixtures/ab_campaign_baseline.json"
  _,groups,_=increment.load_spec(ROOT/"tools/ai/increment_switches.yaml")
- return {"schema":1,"switch":pilot.SWITCH,"execution_approved":False,"pairs_per_setup":2,"team_size_scope":[1,2,3,4],"arm_bot_types":{"control":"hard_control","treatment":"hard_treatment"},"baseline_manifest_path":"tools/tests/fixtures/ab_campaign_baseline.json","baseline_manifest_sha256":pilot.sha(baseline),"pins":{"source_commit":"964cdb630b1514e1c1a0baed55cbdbc427d5fc11","engine_version":"6da7fce14da541180c6baddd6925118fbef65b94"},"switch_patch_sha256":increment.group_patch_sha256(groups[pilot.SWITCH]),"baseline_ai_payload_sha256":pilot.ai_payload_sha(ROOT),"treatment_ai_payload_sha256":pilot.ai_payload_sha(ROOT,pilot.SWITCH),"tool_sha256":{"driver_analyzer":pilot.sha(ROOT/"tools/ai/ab_campaign_pilot.py"),"campaign_runner":pilot.sha(ROOT/"tools/ai/campaign_runner.py"),"batch_runner":pilot.sha(ROOT/"tools/ai/run_ai_match_batch.py"),"switch_applier":pilot.sha(ROOT/"tools/ai/apply_increment_switches.py")},"receipt_schema_sha256":pilot.sha(ROOT/"tools/ai/ab_campaign_receipt.schema.json"),"binary_sha256":{"bin/OpenRA.exe":"5693f355792ebb68699793f96ef2167b733c5e7756f580858c5090226418c984","bin/OpenRA.dll":"92ee9dacd08869593dc5ad70c2d1ce48f701caf8277ea3bd692acf2224a8ca77","bin/OpenRA.Mods.Cameo.dll":"41f37982c146f73b4a9c07071f34b47e214178cb9413e514f05af9af2d44b3a4"},"round_stages":pilot.ROUND_STAGES,"acceptance_thresholds":pilot.DEFAULT_THRESHOLDS,"slot_policy":dict(pilot.SLOT_POLICY),"seeds":[1337,7331],"maps":[{"name":k,"path":v[0],"sha256":v[1],"required_seats":v[2]} for k,v in pilot.MAPS.items()],"setups":[{"id":n,"team_size":s,"map":m,"team_factions":list(f)} for n,s,m,f in pilot.SETUPS]}
+ return {"schema":1,"switch":pilot.SWITCH,"execution_approved":False,"pairs_per_setup":2,"team_size_scope":[1,2,3,4],"arm_bot_types":{"control":"hard_control","treatment":"hard_treatment"},"baseline_manifest_path":"tools/tests/fixtures/ab_campaign_baseline.json","baseline_manifest_sha256":pilot.text_sha(baseline),"pins":{"source_commit":"964cdb630b1514e1c1a0baed55cbdbc427d5fc11","engine_version":"6da7fce14da541180c6baddd6925118fbef65b94"},"switch_patch_sha256":increment.group_patch_sha256(groups[pilot.SWITCH]),"baseline_ai_payload_sha256":pilot.ai_payload_sha(ROOT),"treatment_ai_payload_sha256":pilot.ai_payload_sha(ROOT,pilot.SWITCH),"tool_sha256":{"driver_analyzer":pilot.text_sha(ROOT/"tools/ai/ab_campaign_pilot.py"),"campaign_runner":pilot.text_sha(ROOT/"tools/ai/campaign_runner.py"),"batch_runner":pilot.text_sha(ROOT/"tools/ai/run_ai_match_batch.py"),"switch_applier":pilot.text_sha(ROOT/"tools/ai/apply_increment_switches.py")},"receipt_schema_sha256":pilot.text_sha(ROOT/"tools/ai/ab_campaign_receipt.schema.json"),"binary_sha256":{"bin/OpenRA.exe":"5693f355792ebb68699793f96ef2167b733c5e7756f580858c5090226418c984","bin/OpenRA.dll":"92ee9dacd08869593dc5ad70c2d1ce48f701caf8277ea3bd692acf2224a8ca77","bin/OpenRA.Mods.Cameo.dll":"41f37982c146f73b4a9c07071f34b47e214178cb9413e514f05af9af2d44b3a4"},"round_stages":pilot.ROUND_STAGES,"acceptance_thresholds":pilot.DEFAULT_THRESHOLDS,"slot_policy":dict(pilot.SLOT_POLICY),"seeds":[1337,7331],"maps":[{"name":k,"path":v[0],"sha256":v[1],"required_seats":v[2]} for k,v in pilot.MAPS.items()],"setups":[{"id":n,"team_size":s,"map":m,"team_factions":list(f)} for n,s,m,f in pilot.SETUPS]}
 
 class PilotPlanTests(unittest.TestCase):
  def test_approved_amendment_expands_to_64_side_swapped_games(self):
@@ -19,7 +19,13 @@ class PilotPlanTests(unittest.TestCase):
    pair=[j for j in jobs if j["setup"]==setup and j["seed"]==1337]
    self.assertEqual({0,1},{j["game_in_pair"] for j in pair})
    self.assertEqual({("A","B"), ("B","A")},{(j["control_side"],j["treatment_side"]) for j in pair})
-   self.assertNotEqual([x["spawn"] for x in pair[0]["seat_assignments"]],[x["spawn"] for x in pair[1]["seat_assignments"]])
+   # Each arm plays each spawn set once: control's spawns in game 0 are treatment's in game 1. (The old check here,
+   # "the spawn lists differ", passed on list ORDER while control held the same spawns in both games.)
+   spawns=lambda job,arm:{x["spawn"] for x in job["seat_assignments"] if x["arm"]==arm}
+   g0,g1=sorted(pair,key=lambda j:j["game_in_pair"])
+   self.assertEqual(spawns(g0,"control"),spawns(g1,"treatment"))
+   self.assertEqual(spawns(g0,"treatment"),spawns(g1,"control"))
+   self.assertFalse(spawns(g0,"control")&spawns(g1,"control"))
   result=pilot.dry_run(m,ROOT)
   self.assertEqual(0,result["launches"]);self.assertFalse(result["execution_authorized"])
   self.assertEqual(11.07,result["worker_hours_estimate_at_8_5m_each"])
@@ -76,6 +82,14 @@ class PilotPlanTests(unittest.TestCase):
    self.assertIn("HarvesterBotModuleCA@campaign_treatment:\n\t\tUseHarvesterLogistics: true\n\t\tRequiresCondition: campaign_treatment",text)
    self.assertIn("UseHarvesterLogistics: true",text)
 
+ def test_text_pins_ignore_checkout_line_endings(self):
+  # A Windows checkout (CRLF .py/.json) and a Linux one (LF) must pin the same tool hash;
+  # binary pins (map packages, engine) keep byte hashes.
+  with tempfile.TemporaryDirectory() as d:
+   lf=pathlib.Path(d)/"lf.py";crlf=pathlib.Path(d)/"crlf.py"
+   lf.write_bytes(b"a = 1\nb = 2\n");crlf.write_bytes(b"a = 1\r\nb = 2\r\n")
+   self.assertEqual(pilot.text_sha(lf),pilot.text_sha(crlf))
+   self.assertNotEqual(pilot.sha(lf),pilot.sha(crlf))
  def test_missing_map_is_rejected(self):
   m=manifest();m["maps"][0]["path"]="mods/cameo/maps/missing.oramap"
   with self.assertRaisesRegex(ValueError,"map path/SHA"):

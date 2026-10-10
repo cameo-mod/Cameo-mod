@@ -20,9 +20,11 @@ import subprocess
 import sys
 import tempfile
 import time
+import zipfile
 from contextlib import contextmanager
 
 import ab_campaign_pilot as pilot
+import run_ai_match_batch as batch
 
 CAP_TICK = 45000
 PRIVATE_LIMIT = int(10.5 * 1024**3)     # decided cell ceiling (was 6.5 GiB; startup burst peaks ~9.5 GiB)
@@ -363,7 +365,7 @@ def _file_artifact(path: pathlib.Path | None, missing_reason: str | None = None)
 
 def run_one(manifest: dict, manifest_sha: str, job: dict, *, root: pathlib.Path,
 			engine_root: pathlib.Path, a5_receipt: dict, a5_receipt_sha256: str, support_root: pathlib.Path,
-			slot_db: pathlib.Path) -> dict:
+			slot_db: pathlib.Path, render: str = "fast") -> dict:
 	"""Run exactly one claim-once game and atomically write its immutable receipt."""
 	root = root.resolve(); engine_root = engine_root.resolve(); support_root = support_root.resolve()
 	executable = engine_root / "bin" / "OpenRA.exe"
@@ -387,19 +389,29 @@ def run_one(manifest: dict, manifest_sha: str, job: dict, *, root: pathlib.Path,
 	game_root.mkdir(parents=True, exist_ok=False)
 	game_support = game_root / "Support"; game_support.mkdir()
 	logs = game_support / "Logs"; logs.mkdir()
-	maps = game_support / "UserMaps"; maps.mkdir()
+	# The mod.yaml MapFolders user entry is <SupportDir>/maps/cameo/{DEV_VERSION} (batch.USER_MAP_DIR); a map anywhere
+	# else fails Launch.Map with "Could not find map" before the first tick (2026-10-10 acceptance preflight).
+	maps = game_support / batch.USER_MAP_DIR; maps.mkdir(parents=True)
 	overlay = game_root / "Overlay"; pilot.materialize_dual_arm_ai(root, overlay, job["switch"], manifest.get("ratchet_accepted_switches", []))
-	shutil.copyfile(root / "mods" / "cameo" / "mod.yaml", overlay / "mods" / "cameo" / "mod.yaml")
 	variant = maps / ("campaign_" + re.sub(r"[^A-Za-z0-9_.-]", "_", job["cell_id"]))
 	proof = pilot.prove_generated_map(job, root, variant)
+	# The arms reach the engine as map rules; an overlay search path was ignored (pilot.install_dual_arm_rules).
+	pilot.install_dual_arm_rules(variant, overlay, root)
 	map_yaml = variant / "map.yaml"; map_yaml_sha = sha(map_yaml)
 	match_log = logs / "cameo-ai-matches.jsonl"; before = match_log.stat().st_size if match_log.exists() else 0
 	server_log = logs / "server.log"; driver_log = game_root / "driver.log"
+	# Lua print() (the campaign monitor's AB_CAMPAIGN_* markers) lands in lua.log; only the seed pin is in server.log.
+	lua_log = logs / "lua.log"
 	if not executable.is_file(): raise ValueError("pinned OpenRA executable missing")
+	if render not in ("fast", "headless"): raise ValueError("render must be fast or headless")
+	if render == "headless" and not (engine_root / "bin" / f"OpenRA.Platforms.{batch.HEADLESS_PLATFORM}.dll").is_file():
+		raise ValueError("--render headless needs engine/bin/OpenRA.Platforms.Null.dll (make.cmd all)")
 	args = [str(executable), "Game.Mod=cameo", "Sound.Device=none", "Engine.EngineDir=..",
-		f"Engine.ModSearchPaths={overlay / 'mods'},{root / 'mods'},{engine_root / 'mods'}",
+		f"Engine.ModSearchPaths={root / 'mods'},{engine_root / 'mods'}",
 		f"Engine.SupportDir={game_support}", f"Launch.Map={variant.name}", "Launch.Benchmark=ai-duel-batch-",
 		"Graphics.VSync=False", "Graphics.Mode=Windowed", "Graphics.WindowedSize=640,480"]
+	# headless = OpenRA.Platforms.Null (same sim, ~40% lower peak memory; LESSONS_LEARNED "Headless bot matches")
+	if render == "headless": args.append(f"Game.Platform={batch.HEADLESS_PLATFORM}")
 	env = os.environ.copy(); env["CAMEO_DEV_SEED"] = str(job["seed"])
 	with driver_log.open("w", encoding="utf-8") as output:
 		process = subprocess.Popen(args, cwd=engine_root, env=env, stdout=output, stderr=subprocess.STDOUT)
@@ -408,13 +420,17 @@ def run_one(manifest: dict, manifest_sha: str, job: dict, *, root: pathlib.Path,
 		if row["private_bytes"] < PRIVATE_LIMIT:
 			slot_counter.heartbeat(job["cell_id"], row["private_bytes"])
 		return "LOW_FREE_RAM" if available_ram_bytes() < FREE_RAM_HARD_FLOOR else None
-	monitor_result = monitor_process(process, driver_log=driver_log, actor_log=server_log, stall_log=logs / "debug.log",
+	monitor_result = monitor_process(process, driver_log=driver_log, actor_log=lua_log, stall_log=logs / "debug.log",
 		sample_callback=heartbeat)
 	slot_counter.release(job["cell_id"])
 	finished = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
 	log_text = server_log.read_text(encoding="utf-8", errors="replace") if server_log.exists() else ""
+	# The engine silently falls back to the Default platform, so the receipt records what actually ran.
+	graphics_log = logs / "graphics.log"
+	ran_headless = render == "headless" and batch.HEADLESS_LOG_MARKER in (graphics_log.read_text(encoding="utf-8", errors="replace") if graphics_log.is_file() else "")
 	match_rows = batch.read_appended_records(match_log, before)
-	cap_match = re.search(r"AB_CAMPAIGN_CAP tick=(\d+)", log_text)
+	lua_text = lua_log.read_text(encoding="utf-8", errors="replace") if lua_log.exists() else ""
+	cap_match = re.search(r"AB_CAMPAIGN_CAP tick=(\d+)", lua_text)
 	seed_line = next((line for line in log_text.splitlines() if f"RandomSeed={job['seed']}" in line and "CAMEO DEV SEED pinned" in line), None)
 	map_yaml_text = map_yaml.read_text(encoding="utf-8")
 	resolved = proof["seats"]
@@ -452,7 +468,7 @@ def run_one(manifest: dict, manifest_sha: str, job: dict, *, root: pathlib.Path,
 		"winner_team":classification.get("winner_side") if end_class=="NATURAL" else None,"world_tick":monitor_result["samples"][-1]["world_tick"] if monitor_result["samples"] else None,
 		"cap":{"world_tick_cap":CAP_TICK,"marker_observed":bool(cap_match),"marker_tick":int(cap_match.group(1)) if cap_match else None},
 		"memory":{"process_id":process.pid,"peak_private_bytes":monitor_result["peak_private_bytes"],"limit_private_bytes":PRIVATE_LIMIT,"samples":monitor_result["samples"]},
-		"runtime":{"started_utc":started,"finished_utc":finished,"exit_code":monitor_result["exit_code"],"wall_seconds":monitor_result["wall_seconds"],"stall_seconds":180,"pid_scoped_cleanup":monitor_result["pid_scoped_cleanup"]},
+		"runtime":{"started_utc":started,"finished_utc":finished,"exit_code":monitor_result["exit_code"],"wall_seconds":monitor_result["wall_seconds"],"stall_seconds":180,"pid_scoped_cleanup":monitor_result["pid_scoped_cleanup"],"render":"headless" if ran_headless else "fast"},
 		"artifacts":{"server_log":_file_artifact(server_log),"driver_log":_file_artifact(driver_log),"matches_jsonl":_file_artifact(match_log),"replay":_file_artifact(next(iter(game_root.rglob("*.orarep")), None)),"map_yaml":_file_artifact(map_yaml),"support_bundle":_file_artifact(bundle)}}
 	validate_receipt(receipt)
 	receipt_path = support_root / "receipts" / (re.sub(r"[^A-Za-z0-9_.-]", "_", job["cell_id"]) + ".json")
@@ -470,6 +486,7 @@ def main(argv=None):
 	e.add_argument("--a5-receipt", type=pathlib.Path, required=True);e.add_argument("--repo-root", type=pathlib.Path, required=True)
 	e.add_argument("--engine-root", type=pathlib.Path, required=True);e.add_argument("--cell-id", required=True)
 	e.add_argument("--support-root", type=pathlib.Path, required=True);e.add_argument("--slot-db", type=pathlib.Path, required=True)
+	e.add_argument("--render", choices=("fast", "headless"), default="fast", help="headless = Game.Platform=Null: same sim, far less RAM, no window")
 	args = p.parse_args(argv)
 	if args.cmd == "dry-run":
 		raw = args.manifest.read_bytes();actual = hashlib.sha256(raw).hexdigest()
@@ -502,7 +519,7 @@ def main(argv=None):
 		if len(matches) != 1: raise ValueError("cell_id is not uniquely present in frozen campaign manifest")
 		receipt = run_one(manifest, actual, matches[0], root=args.repo_root, engine_root=args.engine_root,
 			a5_receipt=a5, a5_receipt_sha256=hashlib.sha256(args.a5_receipt.read_bytes()).hexdigest(),
-			support_root=args.support_root, slot_db=args.slot_db)
+			support_root=args.support_root, slot_db=args.slot_db, render=args.render)
 		print(f"GAME {receipt['end_class']} cell={args.cell_id} receipt={args.support_root / 'receipts'}")
 		return 0 if receipt["end_class"] != "INCOMPLETE" else 2
 	return 2
