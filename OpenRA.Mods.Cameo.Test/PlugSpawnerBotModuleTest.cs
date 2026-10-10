@@ -19,11 +19,12 @@ namespace OpenRA.Mods.Cameo.Test
 	[TestFixture]
 	public class PlugSpawnerBotModuleTest
 	{
-		// AR-4 (fleet orders 2026-10-04b): PlacePlugAI's synced resolve path never checked
-		// that the target belongs to the ordering player, so any client could plug anyone's
-		// building. These tests pin the seams: uninitialized Players/Actors stand in where
-		// only identity and the Owner/IsInWorld/Disposed fields matter (the same fixture
-		// trick TeamBlackboardTest and ScoutBotModuleTest use).
+		// Playtest repair (B2/B6): the module now routes demand through ordinary
+		// StartProduction — the instant PlacePlugAI install path (and its per-target
+		// ownership seam) is retired, so these tests pin what remains: the single-pass
+		// owned-actor scan. Uninitialized Players/Actors stand in where only identity and
+		// the Owner/IsInWorld/Disposed fields matter (the same fixture trick
+		// TeamBlackboardTest and ScoutBotModuleTest use).
 
 		[UnsafeAccessor(UnsafeAccessorKind.Field, Name = "<Owner>k__BackingField")]
 		static extern ref OpenRA.Player OwnerField(OpenRA.Actor actor);
@@ -44,22 +45,6 @@ namespace OpenRA.Mods.Cameo.Test
 			IsInWorldField(actor) = inWorld;
 			DisposedField(actor) = dead;
 			return actor;
-		}
-
-		[Test]
-		public void PlugTargetMustBelongToTheOrderingPlayer()
-		{
-			var owner = FakePlayer();
-			var intruder = FakePlayer();
-
-			Assert.That(PlugSpawnerBotModuleCA.PlugTargetIsOwned(OwnedActor(owner), owner), Is.True,
-				"the bot's own building is a legal plug target");
-			Assert.That(PlugSpawnerBotModuleCA.PlugTargetIsOwned(OwnedActor(intruder), owner), Is.False,
-				"another player's building must refuse the plug");
-			Assert.That(PlugSpawnerBotModuleCA.PlugTargetIsOwned(OwnedActor(null), owner), Is.False,
-				"an unowned (world/neutral) building must refuse the plug");
-			Assert.That(PlugSpawnerBotModuleCA.PlugTargetIsOwned(null, owner), Is.False,
-				"a null target is not owned by anyone");
 		}
 
 		[Test]

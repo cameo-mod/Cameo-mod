@@ -1,5 +1,52 @@
 # Cameo — THE HANDOFF
 
+## 2026-10-09 — Devin: SW plug capacity (B2/B6) implemented — `devin/playtest-b2b6-swcap` @ `901d5dace`
+
+`Agent: Devin · branch devin/playtest-b2b6-swcap · worktree C:/cameo-wt/playtest-swcap · base 3d99405bd (published head)`
+
+**INC-ready candidate — independent review APPROVED (F1–F4 all closed, exact
+local==remote `349532da2`). NOT merged; runtime match tests still required
+before release clearance.**
+
+Fixes B2 (multiple SW buildable despite the 1-cap) and B6 (ion uplink re-queueable
+while owned) per fleet spec `SPEC_2026-10-09_devin_plug_slot_capacity.md` (v10
+bounded lane; mechanism revised per independent review — declared catalogue).
+New world trait `SuperweaponPlugLimit`
+(`OpenRA.Mods.Cameo/Traits/World/`): synced `IValidateOrder` admission gate
+(owner-wide pending+installed+`ExtraData` ≤ 1 per occupancy token, active only
+under `global-swlimit` — Unlimited untouched) plus a per-tick deduplicated
+frame-end reconciliation that refunds over-cap pending SW plugs (clears
+`Infinite` first — kills `EndProduction`'s auto-replenish leak; full
+cash+resources refund — `RefundCash = TotalCost - RemainingCost - ResourcesPaid`,
+engine-parity with `CancelProductionInner`). SW items are resolved against a
+**declared catalogue**: `SuperweaponPlugLimit.OccupancyTokens` in world.yaml
+(`ionc, nodnuke, cabalnuke_swlimit, tsionc`) — a plug maps only when it negates a
+declared token whose provider chain verifies ON THE SAME HOST (`global-swlimit`
+gated + positive single-variable `RequiresCondition` + `Pluggable` socket for
+that condition); provider/socket on different actors never join (F3), and an
+item negating 2+ resolving tokens is rejected rather than first-wins (F4).
+Missing/ambiguous wiring emits debug-channel diagnostics and leaves plugs
+uncapped (empty catalogue = nothing capped). Four host `@swlimit` providers
+gained `RequiresPrerequisites: global-swlimit`. Inbound `GetReplacement`
+migration is **detection-only** per spec — upstream exclusion is a separate
+out-of-scope fix.
+
+*Evidence:* build 0/0 · NUnit 49/49 focused `SuperweaponPlugLimit*` (admit/excess/
+refund tables, declared-catalogue tests, adversarial ordinary/inverted/ungated
+providers, cross-host non-join + multi-token rejection, resolved-gate echo +
+missing-provider/ambiguity diagnostics, exact-four under the declared set,
+real-World lifecycle via reflection harness — `EnablePlug`→`CanBuild` flip,
+tail-first sweep cancel, `Infinite` clear, Done-migration 600res+400cash refund,
+per-tick dedup; real-yaml scans pin the four gated providers, the declared
+`OccupancyTokens` set, plug `!token` negations, and provider-gate polarity
+sampled 0/1/2/`int.MaxValue`) · full suite 1300/1300 · boot-gate PASS on the
+committed tree (direct `OpenRA.exe` launch, PID killed + verified absent —
+process-cleanup incident fixed, see fleet NOTE) · `git diff --check` scoped
+files only · engine untouched (canonical pin `0a3f77dbe1`). *Next:* live-match
+regressions — infinite-flag install, capture over-cap, mixed-tech migration,
+PayUpFront refund, ordinary-infinite unaffected — before release clearance.
+B1/B7 branches await coordinator merge per plan §3.
+
 ## 2026-10-08 — Devin: history re-record complete — `devin/regreen-history-rerecord`, 323/323 affected tests green
 
 `Agent: Devin · branch devin/regreen-history-rerecord · worktree C:/cameo-wt/rerecord-hist`
@@ -5410,3 +5457,55 @@ Type `classic`): eighteen pre-wave modules re-gated `genericbot || classicbot`,
 the pre-wave `SquadManagerBotModuleCA@generic` config restored verbatim as
 `@classic`, `hardbot` granted for the hard-tier limits/prereqs, and
 `RevealsMap@classic` on its PlayerActor. See DEVELOPMENT_LOG.md 2026-09-28.
+
+
+## 2026-10-09 Sol: economy logger implementation checkpoint
+
+Isolated codex/replay-health-logger on f7e1d0fff. New opt-in recorder/world controller, bounded writer and queue/head timing core; no YAML mount, queue decision source, engine pin, orders or launches changed. Focused core/writer tests 16/16. Current seam outcome coverage is unresolved, so activation deliberately marks evidence incomplete (UNKNOWN); not ready for adoption. Remaining recorder/schema round-trip tests, corrected seam restack, measured runtime cost and independent review. See docs/design/REPLAY_HEALTH_LOGGER.md.
+
+
+### 2026-10-09 Sol logger consumer-fit checkpoint
+
+Canonical shared health/raw files, shared schema serializer, early-world-disposal cleanup; no YAML mount or gameplay changes. Focused 20/20 pass. Approved offline analyzer consumes actual C# test output: normal OBSERVED_HEALTHY, 250-tick ready BLOCK, incomplete end UNKNOWN. Still deliberately incomplete from activation pending accepted outcome seam; no adoption or launches.
+
+
+### 2026-10-09 Sol logger producer-state/cost preparation
+
+Producer liveness separated from queue enablement; disabled unfinished queues paused, Done remains ready; re-enabled idle starts a new interval. Focused27/27 PASS and explicit one-player128-queue/45001-tick core measurement PASS (19,021,579 output bytes). Runtime cost/adoption unproven; shared32MiB budget cannot hold two maximum-census players, so supported cohort forecast and measured cost gate remain required. No games or mount changes.
+
+
+2026-10-09 output-budget correction: shared file cap is now 128MiB, matching
+approved replay_health.read_jsonl MAX_FILE_BYTES (128MiB); line cap64KiB and
+record cap200000 unchanged. This supersedes the earlier32MiB implementation.
+Explicit one/two-player fixtures each keep128 queues through45001 ticks; both
+PASS. Two-player receipt:1802 pulses,38046762 output bytes,1144.5332ms,
+300133944 allocated bytes (process/JIT warm-up differs; timing is NOT a comparative
+runtime benchmark). Raw stream budgets are independent. Arbitrary64-player
+maximum queue/event workloads are not certified; forecasting and overflowUNKNOWN
+remain required. No mount/seam/campaign clearance. Receipt:
+engine/bin/TestResults/economy-health-core-cost-2p.json.
+
+
+### 2026-10-09 actual-path economy consumer CLI evidence
+
+Correction: replay_health.py startup checker does not read the new economy file. Separate approved economy_invariants.py@2a417 CLI does. Actual C# serializer+bounded writer generate unique support/Logs/cameo-ai-economy-health.jsonl files; immutable pinned CLI consumes them and verifies byte digest/status/exit. C#4/4+PythonCLI4/4 PASS (healthy0,ready250 BLOCK20,incomplete21,missing-health21). Existing drivers still need explicit dual-checker integration; no runtime/adoption approval.
+
+### 2026-10-09 accepted-value and budget checkpoint
+
+VP bounded approval at 6b0c1fd73bf5a6d08b066fd34cef22f7a49a3f9e covers sizing disclosure and the pinned economy CLI tests only (REREVIEW_2026-10-09_logger_sizing_6b_luna.md). The reviewer reran Python 4/4 using existing C# fixtures; its detached tree lacked the ignored engine dependency, so it did not regenerate them.
+
+The accepted-resource callback now shares its raw serializer with tests: positive credited value proves acceptance, zero does not, and harvester identity stays unknown. Exact byte-budget exhaustion rejects the next record without appending and marks capture incomplete. Focused C# tests 30/30 and regenerated-fixture pinned CLI tests 4/4 pass. No gameplay, mounting, engine-pin or queue-seam changes. Raw/summary sizing, runtime cost, causal terminal seam, restack, dual-gate driver wiring and reservation remain open.
+
+## 2026-10-09 ? Offline replay health gate
+
+Read design/REPLAY_HEALTH_ANALYZER.md before health/campaign work. tools/ai/replay_health.py uses explicit GameUid/player; exits0 startup-observed,20 symptom review hold,21 unknown. No overall strength/integrity certification. 17 regression tests pass;127 historical completed records yield64 RA startup holds/63 GDI-Nod startup observations. Coordinator owns scheduler integration and fresh post-fix controls; live reason logging still required. No game launch or master publication.
+
+
+2026-10-09 replay-health review corrections: rejected duplicate/nonfinite JSON, non-string identities, malformed summary and empty non-list timeline; output now exclusive atomic publication to a new report only, never overwrites artifacts; event joins and window scan linear.22 tests pass including200000 snapshots/events/timeline points in1.20s. ab7285e81 remains superseded FIX REQUIRED; revised commit requires independent re-review. No runtime/game/master changes.
+
+
+2026-10-09 maintainer queue/cash thresholds: separate economy_invariants.py and test_economy_invariants.py implemented against schema1 complete50tick health contract;10 focused tests pass. New logger not shipped: missing telemetry UNKNOWN. Approved replay_health.py bytes unchanged, source/runtime ownership gates remain. New tool requires independentreview beforeintegration; provisional cashband1000..10000/1500ticks, zero/full250ticks, ready250,idle1500,cancels3/1500. See design/REPLAY_HEALTH_ANALYZER.md finalsection.
+
+### 2026-10-09 ? MCV deployment repair
+- Next: independent review of condition-driven engine331657f07a and devin/mcv-deploy-cell; see docs/design/MCV_DEPLOY_CELL_REPAIR.md.
+- Base c76283c0b; single-instance generic-only repair and branch-local pin. No launches; observer ownership and campaign holds remain.

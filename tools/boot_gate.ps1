@@ -43,6 +43,17 @@ while ((Get-Date) -lt $deadline -and -not $proc.HasExited) {
 $exited = $proc.HasExited
 if (-not $exited) { Stop-Process -Id $proc.Id -Force; $proc.WaitForExit(10000) | Out-Null }
 
+# A kill command returning is not proof — 2026-10-09 incident: a launched
+# OpenRA.exe survived Stop-Process and blocked other lanes for ~1h.
+# Verify the exact PID is gone; escalate to taskkill on the same PID;
+# never sweep by image name (other agents' drivers share this machine).
+if (Get-Process -Id $proc.Id -ErrorAction SilentlyContinue) {
+	taskkill /PID $proc.Id /F /T | Out-Null
+	$proc.WaitForExit(10000) | Out-Null
+}
+$stillAlive = Get-Process -Id $proc.Id -ErrorAction SilentlyContinue
+if ($stillAlive) { Write-Output "FAIL: game process $($proc.Id) is still running"; exit 1 }
+
 Start-Sleep -Seconds 2
 $new = @(Get-ChildItem (Join-Path $logDir "exception-*.log") -ErrorAction SilentlyContinue | ForEach-Object Name | Where-Object { $_ -notin $before })
 Write-Output ("MENU " + $(if ($reached) { "REACHED" } else { "NOT REACHED" }) + $(if ($exited) { " (process exited by itself)" } else { "" }))

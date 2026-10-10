@@ -1,3 +1,237 @@
+# 2026-10-09 — Devin: B-lane master repair batch — limited-SW default + engineer/crate flags + bot plug production
+
+*Devin-Integrator* on `devin/repair-b2b6` (stacked on the bounded-approved
+swcap head `4ead228b4`, base `3d99405bd`). Maintainer policy via coordinator:
+limited superweapons lobby default; SW-granting plugs count installed+pending
+owner-wide; ordinary plugs keep intended oversubscription; bots buy plugs via
+normal paid production; engineer/crate visibility exceptions restored.
+
+- **`world.yaml` `MapOptions.TechLevel: superweapons`** — the techlevel lobby
+  dropdown now defaults to "Limited Superweapons" (grants `techlevel.superweapons`
+  + `global-swlimit`). "Unlimited Superweapons" (`unrestricted`) and
+  "No Superweapons" stay selectable; only the default changed.
+- **ai.yaml engineer/crate flags restored** — `CheckCaptureTargetsForVisibility`,
+  `CheckRepairTargetsForVisibility`, `CheckTargetsForVisibility` (CratePickup)
+  back to `false`. `4bf696716` had flipped them to `true` reading "without
+  cheats" too broadly; the conditional C# guards only restore behaviour once
+  the flags are false. The "Omniscient on purpose (DESIGN §19.5)" comment was
+  already correct for this state.
+- **Bot plug production migrated to the normal path** —
+  `PlugSpawnerBotModuleCA` no longer issues `PlacePlugAI` instant installs
+  (the whole `IResolveOrder` handler, instant `TakeCash`, `IgnoreCost` and the
+  ownership re-check are retired with it). Demand now queues ordinary
+  `StartProduction` on the first owner queue that `CanBuild`s the plug, gated
+  on tech-tree prerequisites and an owned host still accepting the plug type,
+  with a pending-item dedup so an interval scan can't flood the queue.
+  Queue-less plugs (the dormant `ts_gdi_droppoduplink`, whose `Queue:` is
+  deliberately commented out) resolve no producer and stay unreachable.
+  Completed plug items are placed by the existing
+  `BaseBuilderQueueManagerCA` Done branch through `PlacePlug` — the same path
+  a human's plug takes. Superweapon plugs ride the `SuperweaponPlugLimit`
+  owner-wide admission gate identically to player orders.
+- **Random eligible install slot** — the Done branch previously took the first
+  matching `Pluggable` host; it now draws via synced `BotRng.For(player)` over
+  ActorID-ordered candidates (maintainer ruling; never `LocalRandom`).
+- Tests: `PlugSpawnerBotModuleTest` drops the retired `PlugTargetIsOwned` seam;
+  owned-scan seams pinned unchanged. 1299/1299 `OpenRA.Mods.Cameo.Test`,
+  Release 0 errors.
+- Outstanding: live-match acceptance — plug production+placement by a bot,
+  cap-1 admission in a real Limited lobby, Unlimited unaffected.
+
+# 2026-10-09 — Devin: SW plug capacity (B2/B6) — F3/F4 resolved on 901d5dace
+
+*Devin-Developer.* Re-review of `19996eacf` found two more map-derivation
+defects; both fixed on the same branch.
+
+- **F3 cross-host association** — provider/socket join was global: a provider
+  on host A + `Pluggable` socket on host B granting the same condition could
+  map a plug that never publishes the token. `BuildPlugTokenMap` pass 1 now
+  builds `(token, plugType)` tuples per host actor — provider and socket must
+  coexist on the SAME actor. Missing same-host socket emits an uncapped
+  diagnostic naming token/host/condition.
+- **F4 ambiguous multi-token item** — a plug negating 2+ declared tokens that
+  both resolve for its plug type was silently bound to the first token
+  iterated ("first wins"). Pass 2 now collects all candidate tokens per item
+  and REJECTS the item when >1 resolve; order-independent (regression flips
+  both prereq order and actor order). A declared-but-unresolved second
+  negation does not poison the single real mapping; multiple items sharing
+  ONE token still map (shared-slot).
+- New tests: `TokenMap_CrossHostProviderSocket_NeverJoins` + same-host
+  control, `TokenMap_ItemNegatingTwoResolvedTokens_Rejected_OrderIndependent`,
+  `TokenMap_SingleTokenOfTwoNegated_StillMaps`.
+- **INCIDENT**: boot-gate script launched `launch-game.cmd` and killed only
+  the cmd wrapper, orphaning `OpenRA.exe` (~1h, user killed it). Script +
+  skill now launch `engine\bin\OpenRA.exe` directly, kill that PID, then
+  verify zero survivors under the worktree path (fleet NOTE records the
+  incident for all agents).
+- **Gates**: 49/49 focused (+4), 1300/1300 full suite, Release 0 errors,
+  boot-gate PASS (direct-exe launch, PID 8160 killed + verified absent).
+- **REVIEW: APPROVED** — independent re-review of `901d5dace` +
+  `349532da2` (bounded source/focused scope; reviewer re-ran 49/49,
+  verified local==remote). All four findings (F1–F4) closed. Live-match
+  gates remain; no master/release clearance.
+
+# 2026-10-09 — Devin: SW plug capacity (B2/B6) — F2 revised to declared catalogue
+
+*Devin-Developer.* Post-approval design revision (Architect + Integrator direction):
+the SW-plug token set is now an **explicit declared catalogue** on the trait Info
+rather than pure wiring inference.
+
+- **`SuperweaponPlugLimitInfo.OccupancyTokens`** (`string[]`, world.yaml
+  `OccupancyTokens: ionc, nodnuke, cabalnuke_swlimit, tsionc`) — only declared
+  tokens can capacity-manage a plug. Empty list → nothing capped (ordinary plugs
+  never enter the map regardless of wiring).
+- `BuildPlugTokenMap(actors, declaredTokens, diagnostics)` verifies each declared
+  token's chain end-to-end: `ProvidesPrerequisite` producing the token must carry
+  `RequiresPrerequisites: global-swlimit` + positive single-variable
+  `RequiresCondition` (bare variable only — `Expression.Trim() == variable`,
+  rejects `!x`/compounds/parenthesized) → host `Pluggable` condition → plug actor
+  with matching `Plug.Type` that negates `!token` (or `~!token`).
+- **Diagnostics** (debug channel + returned list): missing provider for a declared
+  token, non-positive or ungated provider, multiple resolved install conditions,
+  zero/multiple plug resolutions, plug negating multiple declared tokens.
+  Behavioural claim kept bounded: provider contract is "level 0 → false, positive
+  → true" (`AsBool` is `value != 0`); sampling at 0/1/2/`int.MaxValue` is a
+  *regression* on the four real gates, not universal expression validation.
+- `SuperweaponPlugLimitInfo` switched `TraitInfo<T>` → `TraitInfo` +
+  `Create(init)` override so the trait receives its Info (catalogue access).
+- New/updated regressions: empty-declared uncaps, undeclared-token uncaps,
+  missing-provider diagnostic, ungated/inverted-provider diagnostics, resolved-
+  gate echo, shared-token two-plug ambiguity + dual mapping, CABAL ungated
+  sibling declared but rejected, exact-four under the declared set; real-yaml
+  scans now also assert `world.yaml` declared set == expected tokens and sample
+  each real `RequiresCondition` gate for polarity.
+- **Gates**: 45/45 focused, full suite + Release build below; boot-gate re-run
+  for this commit.
+
+# 2026-10-09 — Devin: SW plug capacity (B2/B6) — review findings F1+F2 resolved
+
+*Devin-Developer.* Independent review of `devin/playtest-b2b6-swcap` produced two
+blockers; both are now fixed on the same branch (details in fleet
+`REVIEW_2026-10-09_devin_swcap_b2b6.md`).
+
+- **F1 refund double-credit** — `Cancel` returned `ResourcesPaid` as resources
+  AND included it in `TotalCost - RemainingCost` cash. Fix:
+  `RefundCash(total, remaining, paid) = total - remaining - paid`, arithmetically
+  identical to `CancelProductionInner`'s `RemainingCost += ResourcesPaid` before
+  `GiveCash`. Five refund-split regressions added.
+- **F2 token-map inference gap** — `BuildPlugTokenMap` accepted any
+  single-variable `RequiresCondition` provider, so an ordinary conditional
+  provider (or an inverted `!occupant` gate — same `Variables` set) paired with
+  an item that negates that token could be misclassified as SW-cap wiring. Fix:
+  providers must (a) carry `RequiresPrerequisites: global-swlimit` — explicit
+  lobby-cap wiring only — and (b) have *positive* single-variable polarity
+  (`RequiresCondition.Expression.Trim() == variable`). Both filters applied.
+- **Real lifecycle harness** — new `SuperweaponPlugLimitRuntimeTest.cs` builds a
+  real `World` via `RuntimeHelpers.GetUninitializedObject` + reflection (the
+  `AttackGarrisonedTest` pattern — this test assembly lacks `InternalsVisibleTo`
+  to `OpenRA.Game`, so `TraitDictionary`/`Actor` ctor/`Initialize`/`IsInWorld`
+  are invoked reflectively). Real `TechTree`/`PlayerResources`/`ProductionQueue`/
+  `ProvidesPrerequisite`/`Pluggable` on real actors — 15 lifecycle regressions:
+  order-gate admit/reject matrix, **`EnablePlug` → `CanBuild` flips off
+  synchronously** (the real installed-only install-boundary), tail-first excess
+  cancellation, `Infinite` cleared without replenish, progressed+`Done`
+  migrated item refunded **600 resources + 400 cash** and removed, installed+pending
+  never exceeds cap, Unlimited mode never reconciles, one sweep per tick dedup.
+- **Exact-four pinning** — `TokenMap_ExactlyFourActiveMappings` resolves all four
+  real wirings at once (asserts `map.Count == 4`, incl. CABAL two-provider split
+  and droppod exclusion); `SuperweaponPlugLimitYamlTest` scans the **real** five
+  yaml files and asserts exactly four `global-swlimit`-gated `@swlimit`
+  providers on the four expected hosts + each plug actor negates its token.
+- Adversarial fixtures: ordinary condition-provider with negated item token,
+  non-`global-swlimit`-gated provider, inverted-condition provider — all derive
+  out.
+- **Gates**: 38/38 focused, 1289/1289 full suite, Release 0/0.
+
+# 2026-10-09 — Devin: SW plug capacity (B2/B6) — admission gate + frame-end reconciliation implemented
+
+*Devin-Developer.* Playtest repairs B2 (multiple superweapons despite the cap) and
+B6 (ion cannon plugin rebuildable while owned). Fleet spec
+`SPEC_2026-10-09_devin_plug_slot_capacity.md` v10 lane — bounded scope: admission
+gate + install/infinite/capture reconciliation + inbound-migration *detection*.
+Worktree `C:/cameo-wt/playtest-swcap`, branch `devin/playtest-b2b6-swcap`,
+base published head `3d99405bd`.
+
+- **New trait `SuperweaponPlugLimit`** (`OpenRA.Mods.Cameo/Traits/World/`,
+  mounted on `World` in `mods/cameo/rules/world.yaml` next to
+  `CameoValidateOrder`). Two synced layers:
+  - `IValidateOrder` admission gate: `StartProduction` orders for SW plug items
+    pass only when `pending + installed + requested <= 1`, counted owner-wide
+    across all `ProductionQueue`s and keyed by the occupancy *token* (so
+    distinct plugs sharing a `!token` share one slot). Inert unless the owner
+    holds the `global-swlimit` lobby prerequisite → Unlimited mode untouched.
+    `ExtraData` batch counts enforced (batch >1 rejected when cap is 1).
+  - `ITick` → one deduplicated `World.AddFrameEndTask` sweep per tick
+    (`sweepQueued` flag, cleared at task start; task re-evaluates *live* counts
+    so same-frame installs can't be lost). The task runs in `World.Tick`'s
+    frame-end drain, after `PlaceBuilding`'s install callback (EnablePlug +
+    `EndProduction` replenish) and before the next tick's `CancelUnbuildableItems`.
+    It cancels over-cap pending SW items tail-first in deterministic
+    (ActorID-ordered queue, list-tail-first) order: clears `Infinite` (suppresses
+    `EndProduction`'s auto-replenish), refunds `ResourcesPaid` + paid cash, then
+    `EndProduction` — replicating `CancelProductionInner`'s refund path.
+- **SW plug identification is derived, not hardcoded**: `BuildPlugTokenMap`
+  walks the ruleset — a host `Pluggable` accepts plug type T and grants
+  condition C; the same actor's single-variable-`RequiresCondition`
+  `ProvidesPrerequisite` yields candidate tokens; a plug item is capped iff it
+  has `Plug.Type == T` and its own `Buildable.Prerequisites` negates `!token`.
+  This correctly resolves all four wirings incl. CABAL's two-provider
+  `cabalnuke`/`cabalnuke_swlimit` split (picks the token the plug negates).
+  Ordinary plugs (Naxis addons, TS droppod) derive out cleanly.
+- **Four host `@swlimit` providers gated on limited mode**: added
+  `RequiresPrerequisites: global-swlimit` on
+  `td_gdi_advancedcommunicationscenter`, `td_nod_templeofnod`,
+  `cabal_core`, `ts_gdi_upgradecenter` — the occupancy prerequisite exists only
+  under the Limited lobby ruleset.
+- **Bounded claims (matching spec)**: inbound `GetReplacement` migration is
+  detection-only — a migrated SW item can tick at most once before frame-end
+  removal refunds all paid cash/resources; a `Queue[0]` migration can complete
+  `Done` in the same `TickInner`, but the order phase precedes ticking so it
+  can never install before the sweep removes it. Full prevention needs an
+  upstream `GetReplacement` exclusion — out of scope, flagged separately.
+- **Tests**: `OpenRA.Mods.Cameo.Test/SuperweaponPlugLimitTest.cs` — 12 NUnit:
+  admission truth table (limited/unlimited × pending/installed/batch), excess
+  matrix, and `BuildPlugTokenMap` against yaml-loaded synthetic actors for all
+  four real wirings + negative cases. Runtime regressions (infinite install,
+  capture, mixed-tech migration, PayUpFront refunds) require a live match —
+  documented in the spec; no TestWorld harness exists in this suite.
+- **Gates**: Release build 0/0 warnings; 1263/1263 NUnit (+12); boot-gate PASS
+  (`MenuPostProcessEffect.PostWorldLoaded` on fresh perf.log, 0 new
+  exception logs; SAC did not block). `-warnaserror` Debug check fails on
+  pre-existing upstream style debt in `engine/OpenRA.Mods.Common` (not this
+  change; engine untouched — mod-side file clean).
+- **Engine**: canonical pinned engine copied from main clone
+  (`engine/VERSION = 0a3f77dbe1…`, matches `mod.config`); no engine edits.
+
+# 2026-10-09 — Devin-Integrator: B4/B5 continuation — live hover resolution + clip/hit-test audit
+
+*Devin-Integrator.* Continuation of the approved tooltip head (`d8a56de5e` source
+fix, Sol bounded-approved; `6d7385820` docs). Coordinator's extra asks checked
+statically; one real residual found and fixed:
+
+- **Audit — measured-bounds vs clip**: `TooltipContainerWidget` applies no clip
+  rect; `ChildOrigin` only positions the card. All three Cameo tooltip logics
+  (Production/ActorIcon/Army) feed every measured line into `leftWidth`/bottom,
+  so post-`d8a56de5e` the card fully contains its content — the playtest
+  screenshot overflow was the stale-bounds class already fixed; no residual
+  overflow path found statically.
+- **Audit — hit-test**: Ui fires `MouseExited` before `MouseEntered`
+  (`Widget.HandleInput`), so token-less `RemoveTooltip()` cannot kill a fresh
+  tooltip. Icon gaps (1px `IconMargin`) sit outside `eventBounds` — gap crossing
+  re-arms the container with its 200ms dwell (by-design flicker, not a defect).
+- **Residual found**: `ProductionPaletteWidget.TooltipIcon` is only written on
+  `MouseInputEvent.Move`, but `RefreshIcons()` rebuilds `icons` every `Tick`. A
+  queue cell shifting under a stationary cursor (item completes, buildables
+  appear/disappear, scroll) left the tooltip bound to a removed
+  `ProductionIcon` — wrong-unit or absent tooltip until the pointer moves, the
+  reported intermittent-missing class. `QuotaProductionPaletteWidget` now wires
+  `GetTooltipIcon` to resolve the icon under `Viewport.LastMousePos` per render,
+  matching `DrawHoverHeader`/`DrawMutualExclusionOutlines` — commit `4dfb64030`.
+- Gates: Release build 0 errors; boot-gate PASS
+  (`MenuPostProcessEffect.PostWorldLoaded`, no new exceptions, no orphan
+  process). World-hover absence stays explicitly unresolved per Sol's scope
+  note; interactive screenshot/hover-flow acceptance still needs a driven match.
+
 # 2026-10-08 — Devin-Architect: wave-1 scheduler v3 — fail-closed evidence adjudication
 
 *Devin-Architect.* Sol's wave-5 re-review (REVIEW_2026-10-08_wave5_adjudication)
@@ -20746,3 +20980,156 @@ cycle even though the ordering is fixed while the topology is.
   pre-cache code materialized the SAME arrays every pass — the cache
   retains between passes what was already peak-working-set garbage; it
   does not raise the peak class.
+
+## 2026-10-09 - Devin-Architect: queue observer seam for REPLAY-HEALTH-LOGGER (branch devin/queue-observer-seam, base c76283c0b)
+
+* **Contract (ACK-2, task 01a12023):** record-only queue transitions emitted synchronously at the
+  tick observed — Started / Ready / Placed / Cancelled / Held / Resumed — to
+  IBotBuildQueueObserver traits on the bot PlayerActor (resolved once, like the placement
+  observers). Schema-2 event-local fields on every record: tick, item id, queue group,
+  BuildingType category, producer ActorID, kind, reason, player_active, producer_live,
+  cancellation_class; unbound context emits 0/null = UNKNOWN, never pulse-inferred.
+* **Episode dedupe:** BotQueueEpisodeTracker — Held emits once per (producer, item, reason)
+  episode, Ready once per production episode; Started/Placed/Cancelled/Resumed end episodes.
+  All Cancelled emit sites are production-queue cancels (class=Production); the relocation
+  nudge cancels each queued item before the hold, and latch saturation/release emit
+  Held/Resumed with SaturationLatch.
+* **Coverage:** Ready-admission holds (demand/crawl/front-back) emit Held with their reason;
+  refinery defer emits Cancelled+NoRefinerySite; saturation emits Cancelled+Held; probe
+  release and no-nudge clear emit Resumed. Demand-path cancels in BaseBuilderBotModuleCA are
+  outside this seam (different file, same ownership boundary).
+* **Verification:** 5 new tracker/record tests; full suite 1279/1279; Release clean; boot gate
+  main menu, zero new exceptions. Observer dispatch costs one cached-array check when no
+  logger is registered; zero allocations and zero RNG on the emit path.
+* **Not done:** logger/pulse implementation is Sol's lane (separate files); integrator receipt
+  and runtime gates remain pending.
+
+## 2026-10-09 - Devin-Architect: seam dedupe fix — phantom Ready + in-flight cancel (same branch)
+
+* **Defect found on self-review:** the per-set tracker (holds/ready + EpisodeEnded) re-announced
+  Ready on the tick after Cancelled — CancelProduction is order-latency, so the cancelled item
+  still sits at the queue head, still Done, while the order is in flight. Clearing the episode
+  on Cancelled let the next sweep emit a second Ready *after* the Cancelled record, inverting
+  the pair the verifier measures. The repeated in-flight cancel order also re-emitted an
+  identical Cancelled each sweep.
+* **Fix:** BotQueueEpisodeTracker collapsed to a single `EmitGate(producerId, item, kind,
+  reason)` — one record per (producer, item, kind, reason) transition, and a cancelled
+  (producer, item) shadow suppresses Ready until a Started clears it. EmitQueueHeld folded
+  into EmitQueueTransition; every site now funnels through the same gate.
+* **Verification:** new regression `CancelledShadowsInFlightReadyUntilStarted` (phantom Ready
+  suppressed, duplicate in-flight Cancelled suppressed, Started clears the shadow); 6 seam
+  tests pass; full suite 1280/1280; Release clean; boot gate main menu, zero new exceptions.
+
+## 2026-10-09 - Devin-Architect: seam redesign after Sol review 22861e442 F1-F5 (same branch)
+
+* **F1 — identity:** `BotQueueTransition.EpisodeId` — per queue-item instance id assigned by
+  the probe on first observation; a re-queued same-name item is a distinct episode, 0 =
+  UNKNOWN for baseline/producer-less records.
+* **F2 — resolution semantics:** `Cancelled`/`Placed` are no longer request-tick labels —
+  decision sites record a `BotQueuePendingTerminal` (last decision wins) and the record
+  emits on the tick the item actually leaves the queue. `Started`/`Ready` likewise emit at
+  probe observation, so every timestamped transition is an applied engine state.
+* **F3 — exact ticks:** `ProbeQueueTransitions` runs at the top of `Tick` before the latch
+  and `WaitTicks` early returns — item-list reconciliation per queue per tick, bounded by
+  queue count/length, trait-list iteration only (no scans/orders/RNG).
+* **F4 — removal reconciliation:** an item leaving with no pending request emits `Removed`,
+  classified event-locally (Elimination / Destruction / None = UNKNOWN). A queue that drops
+  out of `FindQueues` (producer dead) still flushes its items as removals. Module demand
+  cancels register via `BaseBuilderBotModuleCA.CancelDemandItem` -> `NoteExternalCancel`
+  and resolve as `Cancelled`/`DemandCancel`. A pending `Placed` whose producer died
+  in-flight resolves as `Removed`/`Destruction`.
+* **F5 — zero-cost without a logger:** observers, tracker, and watches are all lazy —
+  `ObserveQueueTransitions()` gates every path; no allocations or history until a logger
+  trait exists on the bot PlayerActor.
+* **Verification:** 6 seam tests rewritten to the new API (Held dedupe, terminal episode
+  end, per-instance Ready, per-instance episode ids, per-producer isolation, record shape);
+  suite 1280/1280; Release clean; boot gate main menu, zero new exceptions.
+
+## 2026-10-09 - Devin-Architect: Sol c43d580fd re-review findings closed (same branch)
+
+* **Removal+request != cause proof:** a pending terminal now resolves to its recorded kind
+  only while the queue is still live-observed (`BotQueueWatch.SeenTick`); a removal flushed
+  from a stale/disabled/dead queue emits `Removed` carrying the pending *reason* — intent
+  preserved, honest UNKNOWN, no invented terminal. A pending `Placed` also cannot resolve
+  if the producer died before the next sweep. `Removed` always classifies event-locally
+  (Elimination / Destruction / None), never inherits the pending class; a dead producer
+  still reclassifies a *confirmed* production cancel as Destruction.
+* **Last-same-name binding:** `CancelProduction` removes the LAST same-name item, so all
+  three manager cancel sites and `NoteExternalCancel` bind the tail instance
+  (`AllQueued().LastOrDefault(name)` / watch scan), not the head. `BotQueuePendingTerminal.
+  Matches` prefers the bound instance ref; a same-name sibling leaving first no longer
+  consumes the request. Name-only binding remains as an honest fallback.
+* **Retention bounded:** `BotQueueEpisodeTracker.DropProducer` prunes dedupe history when a
+  producer watch dies; stale empty watches are dropped with their queues; pending requests
+  expire after `MaxInFlightTicks` (8) — a rejected/delayed cancel can never mask a later
+  real `Ready`/`Done` observation. `NoteExternalCancel` dedupes by name (last decision
+  wins) instead of appending unbounded requests.
+* **O(n) probe:** `BotQueueWatch.Items` is now a `HashSet<object>` and the current item list
+  is collected in a reusable `HashSet<ProductionItem>` scratch — removal diff is one pass
+  per queue (was nested `Contains` over lists, O(n²) per world tick).
+* **Naming honesty:** `Started` renamed `Queued` — it records observed queued state, not an
+  accepted engine start. `Ready` remains an observer observation (<=1 tick lag by trait
+  order), never claimed as exact engine completion.
+* **Regressions added:** `ReadyCannotInterleaveWithHeld` (stable
+  Ready->Held->Ready->Held emits each change; Ready never resurrects per instance),
+  `HeldReasonAlternationIsATransition`, `PendingTerminalExpiresRejectedRequests`,
+  `PendingMatchesBoundInstanceNotName`, `DroppedProducerLosesDedupeHistory`. 11 seam tests green; full suite 1285/1285; Release
+  clean; boot gate main menu, zero new exceptions. Still record-only — no orders, no world
+  mutation, no RNG.
+
+
+## 2026-10-09 Sol: economy logger implementation checkpoint
+
+Isolated codex/replay-health-logger on f7e1d0fff. New opt-in recorder/world controller, bounded writer and queue/head timing core; no YAML mount, queue decision source, engine pin, orders or launches changed. Focused core/writer tests 16/16. Current seam outcome coverage is unresolved, so activation deliberately marks evidence incomplete (UNKNOWN); not ready for adoption. Remaining recorder/schema round-trip tests, corrected seam restack, measured runtime cost and independent review. See docs/design/REPLAY_HEALTH_LOGGER.md.
+
+
+### 2026-10-09 Sol logger consumer-fit checkpoint
+
+Canonical shared health/raw files, shared schema serializer, early-world-disposal cleanup; no YAML mount or gameplay changes. Focused 20/20 pass. Approved offline analyzer consumes actual C# test output: normal OBSERVED_HEALTHY, 250-tick ready BLOCK, incomplete end UNKNOWN. Still deliberately incomplete from activation pending accepted outcome seam; no adoption or launches.
+
+
+### 2026-10-09 Sol logger producer-state/cost preparation
+
+Producer liveness separated from queue enablement; disabled unfinished queues paused, Done remains ready; re-enabled idle starts a new interval. Focused27/27 PASS and explicit one-player128-queue/45001-tick core measurement PASS (19,021,579 output bytes). Runtime cost/adoption unproven; shared32MiB budget cannot hold two maximum-census players, so supported cohort forecast and measured cost gate remain required. No games or mount changes.
+
+
+2026-10-09 output-budget correction: shared file cap is now 128MiB, matching
+approved replay_health.read_jsonl MAX_FILE_BYTES (128MiB); line cap64KiB and
+record cap200000 unchanged. This supersedes the earlier32MiB implementation.
+Explicit one/two-player fixtures each keep128 queues through45001 ticks; both
+PASS. Two-player receipt:1802 pulses,38046762 output bytes,1144.5332ms,
+300133944 allocated bytes (process/JIT warm-up differs; timing is NOT a comparative
+runtime benchmark). Raw stream budgets are independent. Arbitrary64-player
+maximum queue/event workloads are not certified; forecasting and overflowUNKNOWN
+remain required. No mount/seam/campaign clearance. Receipt:
+engine/bin/TestResults/economy-health-core-cost-2p.json.
+
+
+### 2026-10-09 actual-path economy consumer CLI evidence
+
+Correction: replay_health.py startup checker does not read the new economy file. Separate approved economy_invariants.py@2a417 CLI does. Actual C# serializer+bounded writer generate unique support/Logs/cameo-ai-economy-health.jsonl files; immutable pinned CLI consumes them and verifies byte digest/status/exit. C#4/4+PythonCLI4/4 PASS (healthy0,ready250 BLOCK20,incomplete21,missing-health21). Existing drivers still need explicit dual-checker integration; no runtime/adoption approval.
+
+### 2026-10-09 accepted-value and budget checkpoint
+
+Recorded VP bounded approval of 6b0c1fd73bf5a6d08b066fd34cef22f7a49a3f9e for sizing disclosure and pinned CLI tests only; reviewer Python 4/4 passed on existing C# fixtures, while its missing ignored engine dependency prevented fixture regeneration. Receipt: REREVIEW_2026-10-09_logger_sizing_6b_luna.md.
+
+Extracted the runtime accepted-resource raw serializer for direct tests of positive credit versus zero and unknown sender identity. Added exact byte-budget exhaustion regression: no extra append or certified record after failure. Focused C# 30/30 and pinned economy CLI 4/4 pass on regenerated fixtures. No mount, gameplay or engine changes; unresolved terminal causality and runtime adoption gates remain.
+
+## 2026-10-09 ? Replay health prototype (Sol)
+
+Isolated codex/replay-health-gate at base3d; exclusive tool/test/design scope. Existing aggregate/story/order tools were checked: no startup stop gate exists. Implemented schema/identity/bounds-aware telemetry symptom gate, startup persistence and warning-only economy/combat timelines. Historical127 completed records:64 RA holds,63 GDI/Nod startup observed. 17 focused Python tests pass. Current buffered logger cannot provide mid-match detection; live pulse and scheduler stop latch remain separately owned work. No games, runtime changes or master pushes. See docs/design/REPLAY_HEALTH_ANALYZER.md for primary sources, policy and resume contract.
+
+
+2026-10-09 replay-health review corrections: rejected duplicate/nonfinite JSON, non-string identities, malformed summary and empty non-list timeline; output now exclusive atomic publication to a new report only, never overwrites artifacts; event joins and window scan linear.22 tests pass including200000 snapshots/events/timeline points in1.20s. ab7285e81 remains superseded FIX REQUIRED; revised commit requires independent re-review. No runtime/game/master changes.
+
+
+2026-10-09 ? Economy invariant verifier plan: latest maintainer requires ready250/idle1500/repeatedcancel/cash-band defects. Existing startup checker cannot infer queue age/cancel reasons/storage from old logs. Preserve independently approved replay_health.py bytes; add separate tools/ai/economy_invariants.py + focused tests + contract docs in exclusive codex/replay-health-gate worktree.50tick complete pulses + exact state timestamps/cancel events, strictsequence/schema and truncated UNKNOWN; source logger still blocked. No live/source agent overlap.
+
+2026-10-09 — Inactive cancellation repair plan: independent b542 review reproduced elimination cleanup falsely counted as repeated production failure. Require event-local player activity, producer liveness and fixed cancellation class; exclude destruction/elimination cleanup, clear retry history on inactivity, and reject missing event evidence as UNKNOWN. Add active/inactive/destruction and between-pulse transition regressions. Offline files only; approved startup checker stays unchanged. Exact revised head requires independent review before adoption.
+
+2026-10-09 — Net spending schema correction: read-only engine inspection showed PlayerResources.Spent decreases on refunds. Acting-lead decision: no gross/low-spend proof from sampled net accounting. Separate offline verifier now policy v2/schema2 with signed net_spent, explicit gross_spent=null/gross_spend_complete=false, and cash-float spending-unverified diagnostic only. Cash-band threshold remains an independent provisional defect.19/19 focused tests pass including refund decreases, negative net spend and rejection of legacy/unsupported evidence. Runtime logger not edited; independent delta review required.
+
+### 2026-10-09 ? MCV deploy-cell repair (Codex Sol)
+- Isolated devin/mcv-deploy-cell from c76283c0b; docs/design/MCV_DEPLOY_CELL_REPAIR.md records H2 code defect and unknown match-level H1/H2 cause.
+- Lead authorized condition-driven opt-in engine repair; engine331657f07a pushed. Single YAML instance, genericbot search only; branch-local pin. No launches.
+- Engine focused9/9 and full575/577 (2 existing skips); real-YAML mod mount2/2. Independent review/runtime adoption pending.

@@ -46,9 +46,9 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 					return;
 
 				var world = unit.Actor?.World;
-				var stance = world?.RenderPlayer == null ? PlayerRelationship.None : unit.Actor?.Owner.RelationshipWith(world.RenderPlayer);
+				var stance = world?.RenderPlayer == null || unit.Actor == null ? PlayerRelationship.None : unit.Actor.Owner.RelationshipWith(world.RenderPlayer);
 				var tooltip = unit.Tooltips?.FirstEnabledTraitOrDefault();
-				var name = tooltip?.TooltipInfo.TooltipForPlayerStance(stance.Value) ?? unit.ActorInfo.TraitInfos<TooltipInfo>().FirstOrDefault().Name;
+				var name = tooltip?.TooltipInfo?.TooltipForPlayerStance(stance) ?? unit.ActorInfo.TraitInfos<TooltipInfo>().FirstOrDefault()?.Name;
 				name ??= unit.Actor?.Info.Name ?? unit.ActorInfo.Name;
 				var buildable = unit.BuildableInfo;
 				var tooltipDescs = unit.TooltipDescriptions?.Where(td => td.IsTooltipVisible(world.RenderPlayer ?? world.LocalPlayer));
@@ -62,12 +62,16 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 				extrasLabel.Text = String.Join("\n", extras.Select(extra => FluentProvider.GetMessage(extra.Description)));
 				var extraSize = new int2(0, 0);
 
-				if (extrasLabel.Text != "")
+				// The extras shift must be reset unconditionally: when the next hovered unit has none,
+				// DESC keeps the lowered Y and its stale text renders under the shrunken box (B5-class).
+				extrasLabel.Visible = extrasLabel.Text != "";
+				if (extrasLabel.Visible)
 				{
 					extraSize = extrasFont.Measure(extrasLabel.Text);
-					extrasLabel.Visible = true;
 					descLabel.Bounds.Y = descLabelY + extraSize.Y;
 				}
+				else
+					descLabel.Bounds.Y = descLabelY;
 
 				var descSize = new int2(0, 0);
 				if (tooltipDescs != null && tooltipDescs.Any())
@@ -95,10 +99,11 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 				}
 				else
 				{
+					descLabel.Text = "";
 					descLabel.Bounds.Height = 0;
 				}
 
-				var leftWidth = Math.Max(nameSize.X, descSize.X);
+				var leftWidth = new[] { nameSize.X, descSize.X, extraSize.X }.Max();
 
 				widget.Bounds.Width = leftWidth + 2 * nameLabel.Bounds.X;
 
