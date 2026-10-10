@@ -702,7 +702,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		public CPos GetRandomBaseCenter()
 		{
-			var randomConstructionYard = constructionYardBuildings.Actors.OrderBy(a => a.ActorID).RandomOrDefault(BotRng.For(Player));
+			var randomConstructionYard = constructionYardBuildings.Actors.OrderBy(a => a.ActorID).RandomOrDefault(BotRng.For(Player, nameof(SquadManagerBotModuleCA)));
 
 			return randomConstructionYard?.Location ?? initialBaseCenter;
 		}
@@ -1541,10 +1541,10 @@ namespace OpenRA.Mods.CA.Traits
 			limitsRechecked = false;
 
 			// Avoid all AIs reevaluating assignments on the same tick, randomize their initial evaluation delay.
-			assignRolesTicks = BotRng.For(Player).Next(0, Info.AssignRolesInterval);
-			attackForceTicks = BotRng.For(Player).Next(0, Info.AttackForceInterval);
-			protectionForceTicks = BotRng.For(Player).Next(0, Info.ProtectInterval);
-			minAttackForceDelayTicks = BotRng.For(Player).Next(0, Info.MinimumAttackForceDelay) +
+			assignRolesTicks = BotRng.For(Player, nameof(SquadManagerBotModuleCA)).Next(0, Info.AssignRolesInterval);
+			attackForceTicks = BotRng.For(Player, nameof(SquadManagerBotModuleCA)).Next(0, Info.AttackForceInterval);
+			protectionForceTicks = BotRng.For(Player, nameof(SquadManagerBotModuleCA)).Next(0, Info.ProtectInterval);
+			minAttackForceDelayTicks = BotRng.For(Player, nameof(SquadManagerBotModuleCA)).Next(0, Info.MinimumAttackForceDelay) +
 				RemainingInitialAttackDelay(initialAttackDelay, World.WorldTick);
 
 			// Without this the desired force stays 0/0 and the very first
@@ -1747,7 +1747,7 @@ namespace OpenRA.Mods.CA.Traits
 
 			var mainTarget = EffectiveMainTarget();
 			units = PreferOwned(units, mainTarget == null ? null : a => a.Owner == mainTarget);
-			var picked = units.RandomOrDefault(BotRng.For(Player));
+			var picked = units.RandomOrDefault(BotRng.For(Player, nameof(SquadManagerBotModuleCA)));
 			CanaryObserved(picked, "find-hv-target");
 			return picked;
 		}
@@ -1761,7 +1761,7 @@ namespace OpenRA.Mods.CA.Traits
 			var mainTarget = EffectiveMainTarget();
 			units = PreferOwned(units, mainTarget == null ? null : a => a.Owner == mainTarget);
 			units.RemoveAll(u => !PassesRiskGate(u.Location, attackerValue));
-			var picked = units.RandomOrDefault(BotRng.For(Player));
+			var picked = units.RandomOrDefault(BotRng.For(Player, nameof(SquadManagerBotModuleCA)));
 			CanaryObserved(picked, "find-hv-target");
 			return picked;
 		}
@@ -3024,7 +3024,7 @@ namespace OpenRA.Mods.CA.Traits
 			// feed the same regions_fresh the lead measures. lean >= 1 keeps the roll exact.
 			var joinGuerrilla = EffectiveJoinGuerrilla(Info.JoinGuerrilla,
 				BotPersonalityLeads.Lean(leadProviders, "guerrilla"));
-			var guerrillaRoll = joinGuerrilla > 0 && BotRng.For(Player).Next(100) < joinGuerrilla;
+			var guerrillaRoll = joinGuerrilla > 0 && BotRng.For(Player, nameof(SquadManagerBotModuleCA)).Next(100) < joinGuerrilla;
 
 			foreach (var a in newUnits)
 			{
@@ -3457,7 +3457,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		void SetNextDesiredAttackForce()
 		{
-			desiredAttackForceSize = Info.SquadSize + BotRng.For(Player).Next(Info.SquadSizeRandomBonus);
+			desiredAttackForceSize = Info.SquadSize + BotRng.For(Player, nameof(SquadManagerBotModuleCA)).Next(Info.SquadSizeRandomBonus);
 			desiredAttackForceValue = 0;
 
 			if (Info.SquadValue > 0)
@@ -3465,7 +3465,7 @@ namespace OpenRA.Mods.CA.Traits
 				if (Info.SquadValueMaxEarlyBonus == 0 &&
 					Info.SquadValueMinLateBonus == 0 &&
 					Info.SquadValueMaxLateBonus == 0)
-					desiredAttackForceValue = Info.SquadValue + BotRng.For(Player).Next(Info.SquadValueRandomBonus);
+					desiredAttackForceValue = Info.SquadValue + BotRng.For(Player, nameof(SquadManagerBotModuleCA)).Next(Info.SquadValueRandomBonus);
 				else
 				{
 					desiredAttackForceValue = Info.SquadValue;
@@ -3478,7 +3478,7 @@ namespace OpenRA.Mods.CA.Traits
 					if (maxBonus <= minBonus)
 						desiredAttackForceValue += minBonus;
 					else
-						desiredAttackForceValue += BotRng.For(Player).Next(minBonus, maxBonus);
+						desiredAttackForceValue += BotRng.For(Player, nameof(SquadManagerBotModuleCA)).Next(minBonus, maxBonus);
 				}
 			}
 		}

@@ -64,7 +64,7 @@ namespace OpenRA.Mods.CA.Traits
 		// An empty tolerance list in yaml would make ImmutableArray.Random throw.
 		int RandomTolerance(ImmutableArray<int> values)
 		{
-			return values.IsDefaultOrEmpty ? 0 : values.Random(BotRng.For(player));
+			return values.IsDefaultOrEmpty ? 0 : values.Random(BotRng.For(player, nameof(BaseBuilderQueueManagerCA)));
 		}
 		bool limitBuildRadius = false;
 
@@ -166,8 +166,48 @@ namespace OpenRA.Mods.CA.Traits
 
 				// Expire requests whose item is still queued: the order was rejected or
 				// lost. Done after the removal diff so a leaving item still carries the
-				// request's intent on its Removed record.
-				watch.Pending.RemoveAll(p => p.Stale(tick));
+				// request's intent on its Removed record, and before the proof scans so
+				// an expired request can never claim a late signature. Armed entries are
+				// not dropped silently — they resolve through the proof scan below.
+				watch.Pending.RemoveAll(p => p.Stale(tick) && !p.AwaitingProof);
+
+				// The only provable cancellation: a cancel request on an Infinite item sees
+				// item.Infinite flipped to false while the item STAYS queued — the unique
+				// signature of CancelProductionInner (EndProduction removals are
+				// indistinguishable from engine cleanup). The item keeps its episode.
+				List<BotQueuePendingTerminal> proven = null;
+				foreach (var p in watch.Pending)
+					if (p.Item is ProductionItem pi && queueProbeScratch.Contains(pi) && p.CancelProvenByFlagFlip())
+						(proven ??= new List<BotQueuePendingTerminal>()).Add(p);
+				if (proven != null)
+					foreach (var p in proven)
+					{
+						watch.Pending.Remove(p);
+						EmitQueueTransition(queue, queue.Actor, p.Item, p.ItemName, QueueCategoryOf(p.ItemName),
+							BotQueueTransitionKind.Cancelled, p.Reason, p.Class, queueEpisodes.EpisodeOf(p.Item));
+					}
+
+				// Armed placement requests awaiting actor proof: the actor landing on the
+				// ordered cell resolves Placed; expiry or elimination resolves Removed
+				// carrying the intent reason (schema-2 UNKNOWN).
+				List<(BotQueuePendingTerminal Pending, BotQueuePendingResolution Outcome)> outcomes = null;
+				var live = !queue.Actor.IsDead && !queue.Actor.Disposed;
+				foreach (var p in watch.Pending)
+				{
+					if (!p.AwaitingProof)
+						continue;
+
+					var res = p.ResolveWhileAwaiting(tick, PlacementProof(p), player.WinState != WinState.Undefined);
+					if (res != BotQueuePendingResolution.Unresolved)
+						(outcomes ??= new List<(BotQueuePendingTerminal, BotQueuePendingResolution)>()).Add((p, res));
+				}
+
+				if (outcomes != null)
+					foreach (var (p, res) in outcomes)
+					{
+						watch.Pending.Remove(p);
+						EmitTerminalOutcome(queue, p.Item, p.ItemName, p, res == BotQueuePendingResolution.EmitRequested, live);
+					}
 
 				foreach (var it in now)
 				{
@@ -202,6 +242,17 @@ namespace OpenRA.Mods.CA.Traits
 				foreach (var old in watch.Items)
 					ResolveRemovedItem(kv.Key, watch, (ProductionItem)old, queueSeen: false);
 
+				// Requests left over after the item flush — armed proof entries get one
+				// last actor check (a builder unit's BuildOnSite survives its producer's
+				// death), everything else resolves Removed carrying its intent reason so
+				// a registered request's fate is never silently cleared.
+				var staleLive = !kv.Key.Actor.IsDead && !kv.Key.Actor.Disposed;
+				foreach (var p in watch.Pending)
+				{
+					var res = p.AwaitingProof && p.ResolveWhileAwaiting(tick, PlacementProof(p), player.WinState != WinState.Undefined) == BotQueuePendingResolution.EmitRequested;
+					EmitTerminalOutcome(kv.Key, p.Item, p.ItemName, p, res, staleLive);
+				}
+
 				watch.Items.Clear();
 				watch.Pending.Clear();
 				watch.SeenTick = tick;
@@ -221,54 +272,99 @@ namespace OpenRA.Mods.CA.Traits
 					queueWatches.Remove(queue);
 		}
 
-		// The item left its queue: with the queue live-observed this tick, a pending request
-		// resolves to its recorded kind — the removal is engine-side proof the order applied
-		// (a rejected order leaves the item queued instead). With the queue stale (disabled
-		// or dead producer) request+removal is only co-occurrence, so the record keeps the
-		// intent (reason) but resolves as Removed — never an invented terminal. No request at
-		// all means engine cleanup or a module-side cancel: Removed, classified event-locally
-		// (Elimination / Destruction / None = UNKNOWN).
+		// The item left its queue. Removal alone NEVER proves a terminal cause (VP 01a121b6):
+		// the engine's own cleanup paths remove items too — tech-cap refunds, infinite trims,
+		// competing cancels, dead-producer disable — so request+removal is correlation, not
+		// proof. A Placed request emits Placed only on actor-lifecycle proof: an own, live
+		// actor of the ordered type occupying the ordered cell (or the plug slot occupied).
+		// Without proof the request stays armed for the bounded window — a builder unit's
+		// BuildOnSite lands late or never — and ends Removed + intent reason. A cancel
+		// request can never be proven by disappearance (cleanup is indistinguishable), so it
+		// always resolves Removed + intent reason — cause UNKNOWN, schema-2 non-pass.
 		void ResolveRemovedItem(ProductionQueue queue, BotQueueWatch watch, ProductionItem oldItem, bool queueSeen)
 		{
-			var episode = queueEpisodes.EpisodeOf(oldItem);
-			queueEpisodes.EndEpisode(oldItem);
-
 			var pending = FindPending(watch, oldItem);
 			var live = !queue.Actor.IsDead && !queue.Actor.Disposed;
 
 			if (pending != null)
 			{
-				watch.Pending.Remove(pending);
-
-				// A placement can't resolve when its producer died with the order in flight,
-				// nothing resolves to its recorded kind once the queue itself is stale, and a
-				// request older than MaxInFlightTicks is a rejected/lost order — all keep the
-				// intent reason but report Removed (Sol: intent + UNKNOWN over invented
-				// terminal proof). Removed always classifies event-locally; a dead producer
-				// also reclassifies a confirmed production cancel as Destruction.
-				var kind = pending.Kind;
-				var cls = pending.Class;
-				if (!queueSeen || pending.Stale(world.WorldTick) || (kind == BotQueueTransitionKind.Placed && !live))
+				var resolution = pending.ResolveOnRemoval(world.WorldTick, queueSeen, PlacementProof(pending));
+				if (resolution == BotQueuePendingResolution.KeepAwaitingProof)
 				{
-					kind = BotQueueTransitionKind.Removed;
-					cls = player.WinState != WinState.Undefined ? BotQueueCancellationClass.Elimination
-						: !live ? BotQueueCancellationClass.Destruction
-						: BotQueueCancellationClass.None;
+					// The item is gone but the actor may still land — the request and its
+					// episode stay armed for the bounded proof window, which restarts now.
+					pending.AwaitingProof = true;
+					pending.IssuedTick = world.WorldTick;
+					return;
 				}
-				else if (!live && cls == BotQueueCancellationClass.Production)
-					cls = BotQueueCancellationClass.Destruction;
 
-				EmitQueueTransition(queue, queue.Actor, oldItem, oldItem.Item, QueueCategoryOf(oldItem.Item),
-					kind, pending.Reason, cls, episode);
+				watch.Pending.Remove(pending);
+				EmitTerminalOutcome(queue, oldItem, pending.ItemName, pending,
+					resolution == BotQueuePendingResolution.EmitRequested, live);
 			}
 			else
 			{
+				var episode = queueEpisodes.EpisodeOf(oldItem);
+				queueEpisodes.EndEpisode(oldItem);
 				var cls = player.WinState != WinState.Undefined ? BotQueueCancellationClass.Elimination
 					: !live ? BotQueueCancellationClass.Destruction
 					: BotQueueCancellationClass.None;
 				EmitQueueTransition(queue, queue.Actor, oldItem, oldItem.Item, QueueCategoryOf(oldItem.Item),
 					BotQueueTransitionKind.Removed, BotQueueTransitionReason.None, cls, episode);
 			}
+		}
+
+		// Terminal emit for a resolved request: proof emits the requested kind (Placed); the
+		// unproven path emits Removed carrying the request's reason so the intent stays on
+		// record, classified event-locally — never the request's class, which would assert
+		// the unproven cause.
+		void EmitTerminalOutcome(ProductionQueue queue, object itemRef, string itemName, BotQueuePendingTerminal pending, bool proven, bool live)
+		{
+			var episode = queueEpisodes.EpisodeOf(itemRef);
+			queueEpisodes.EndEpisode(itemRef);
+			var cls = proven ? BotQueueCancellationClass.None
+				: player.WinState != WinState.Undefined ? BotQueueCancellationClass.Elimination
+				: !live ? BotQueueCancellationClass.Destruction
+				: BotQueueCancellationClass.None;
+			EmitQueueTransition(queue, queue.Actor, itemRef, itemName, QueueCategoryOf(itemName),
+				proven ? pending.Kind : BotQueueTransitionKind.Removed, pending.Reason, cls, episode);
+		}
+
+		// Actor-lifecycle proof for a Placed request — the lead's "building actor added to
+		// the world" criterion: an own, live actor of the ordered type occupying the ordered
+		// cell. Normal placement lands inside the same frame-end task as the removal, so it
+		// is already provable at the next probe tick; a builder unit lands whenever
+		// BuildOnSite completes (or never, on failure). A plug order creates no actor — its
+		// proof is the host slot's installed plug state: only a requirement-free slot
+		// refusing the type it accepted is positive evidence (EnablePlug is the sole writer
+		// of active). A requirement-keyed or unknown-type slot reports availability, not
+		// install — those pendings stay UNKNOWN and expire Removed.
+		bool PlacementProof(BotQueuePendingTerminal p)
+		{
+			if (p.Kind != BotQueueTransitionKind.Placed || p.Site == null)
+				return false;
+
+			var site = p.Site.Value;
+			if (p.PlugType != null)
+				return world.ActorsWithTrait<Pluggable>().Any(t => t.Actor.Owner == player
+					&& t.Actor.Location + t.Trait.Info.Offset == site
+					&& BaseBuilderQueueEvalCA.PlugInstallProven(
+						t.Trait.Info.Conditions.ContainsKey(p.PlugType),
+						t.Trait.Info.Requirements.ContainsKey(p.PlugType),
+						t.Trait.AcceptsPlug(p.PlugType)));
+
+			return world.ActorMap.GetActorsAt(site).Any(a => !a.IsDead && a.Owner == player && PlacedNameMatches(p.ItemName, a));
+		}
+
+		bool PlacedNameMatches(string itemName, Actor placed)
+		{
+			if (placed.Info.Name == itemName)
+				return true;
+
+			// PlaceBuildingVariants: the order may carry a variant override — the created
+			// actor's name differs from the queue item name but is a registered variant.
+			var info = world.Map.Rules.Actors[itemName].TraitInfoOrDefault<PlaceBuildingVariantsInfo>();
+			return info?.Actors != null && info.Actors.Contains(placed.Info.Name);
 		}
 
 		static BotQueuePendingTerminal FindPending(BotQueueWatch watch, object item)
@@ -281,23 +377,34 @@ namespace OpenRA.Mods.CA.Traits
 			return null;
 		}
 
-		// A manager-issued terminal is a REQUEST — the record resolves on the tick the item
-		// leaves the queue (F2). Last decision wins: a later request for the same item
-		// supersedes the earlier pending entry.
+		// A manager-issued terminal is a REQUEST — the intent record emits now, at the
+		// decision tick, and the outcome resolves separately on removal/proof (VP 01a121b6:
+		// request intent and proven outcome are distinct records, never fused). Last
+		// decision wins: a later request for the same item supersedes the earlier pending.
 		void NotePendingTerminal(ProductionQueue queue, ProductionItem itemRef, string itemName,
-			BotQueueTransitionKind kind, BotQueueTransitionReason reason, BotQueueCancellationClass cls)
+			BotQueueTransitionKind kind, BotQueueTransitionReason reason, BotQueueCancellationClass cls,
+			CPos? site = null, string plugType = null)
 		{
 			if (queueWatches == null || !queueWatches.TryGetValue(queue, out var watch))
 				return;
 
 			watch.Pending.RemoveAll(p => ReferenceEquals(p.Item, itemRef) || (p.Item == null && p.ItemName == itemName));
-			watch.Pending.Add(new BotQueuePendingTerminal { Item = itemRef, ItemName = itemName, Kind = kind, Reason = reason, Class = cls, IssuedTick = world.WorldTick });
+			watch.Pending.Add(new BotQueuePendingTerminal
+			{
+				Item = itemRef, ItemName = itemName, Kind = kind, Reason = reason, Class = cls,
+				IssuedTick = world.WorldTick, Site = site, PlugType = plugType,
+				WasInfinite = (itemRef as ProductionItem)?.Infinite ?? false
+			});
+
+			EmitQueueTransition(queue, queue.Actor, itemRef, itemName, QueueCategoryOf(itemName),
+				kind == BotQueueTransitionKind.Placed ? BotQueueTransitionKind.PlacementOrdered : BotQueueTransitionKind.CancelOrdered,
+				reason, cls, queueEpisodes.EpisodeOf(itemRef));
 		}
 
 		/// <summary>REPLAY-HEALTH-LOGGER (F4): a demand-path cancel issued outside the manager
-		/// (BaseBuilderBotModuleCA.CancelDemandItem) still resolves through the queue probe —
-		/// registering it here makes the record Cancelled/DemandCancel instead of
-		/// Removed/UNKNOWN.</summary>
+		/// (BaseBuilderBotModuleCA.CancelDemandItem) registers its intent here — the record is
+		/// a non-terminal CancelOrdered; the bound item's later removal resolves Removed with
+		/// the DemandCancel reason (disappearance alone never proves a cancel).</summary>
 		public void NoteExternalCancel(Actor producer, string item)
 		{
 			if (queueWatches == null)
@@ -320,8 +427,12 @@ namespace OpenRA.Mods.CA.Traits
 				{
 					Item = target, ItemName = item, Kind = BotQueueTransitionKind.Cancelled,
 					Reason = BotQueueTransitionReason.DemandCancel, Class = BotQueueCancellationClass.Production,
-					IssuedTick = world.WorldTick
+					IssuedTick = world.WorldTick, WasInfinite = target.Infinite
 				});
+
+				EmitQueueTransition(kv.Key, producer, target, item, QueueCategoryOf(item),
+					BotQueueTransitionKind.CancelOrdered, BotQueueTransitionReason.DemandCancel,
+					BotQueueCancellationClass.Production, queueEpisodes.EpisodeOf(target));
 			}
 		}
 
@@ -530,7 +641,7 @@ namespace OpenRA.Mods.CA.Traits
 
 			// Add a random factor so not every AI produces at the same tick early in the game.
 			// Minimum should not be negative as delays in HackyAI could be zero.
-			var randomFactor = BotRng.For(player).Next(0, baseBuilder.Info.StructureProductionRandomBonusDelay);
+			var randomFactor = BotRng.For(player, nameof(BaseBuilderQueueManagerCA)).Next(0, baseBuilder.Info.StructureProductionRandomBonusDelay);
 
 			WaitTicks = active ? baseBuilder.Info.StructureProductionActiveDelay + randomFactor
 				: baseBuilder.Info.StructureProductionInactiveDelay + randomFactor;
@@ -752,7 +863,7 @@ namespace OpenRA.Mods.CA.Traits
 									if (baseBuilder.Info.AntiAirTypes.Contains(actorInfo.Name))
 										placeDefenseTowardsEnemyChance = (int)Math.Ceiling(placeDefenseTowardsEnemyChance / 1.5);
 
-									defenseRoll = BotRng.For(player).Next(100) < placeDefenseTowardsEnemyChance;
+									defenseRoll = BotRng.For(player, nameof(BaseBuilderQueueManagerCA)).Next(100) < placeDefenseTowardsEnemyChance;
 								}
 							}
 							// REF-1 (B1 maintainer ruling): a crawl placement must extend the buildable area —
@@ -763,7 +874,7 @@ namespace OpenRA.Mods.CA.Traits
 							{
 								organicCrawlRoll = !limitBuildRadius && valueInfo != null && valueInfo.Cost < baseBuilder.Info.BaseCrawlCostThreshold
 									&& RefineryLawCrawlRoll.LegalLink(law != null, actorInfo)
-									&& BotRng.For(player).Next(100) < baseBuilder.Info.BaseCrawlChance;
+									&& BotRng.For(player, nameof(BaseBuilderQueueManagerCA)).Next(100) < baseBuilder.Info.BaseCrawlChance;
 							}
 						}
 
@@ -843,10 +954,14 @@ namespace OpenRA.Mods.CA.Traits
 					failCount = 0;
 					NotifyPlacement(currentBuilding.Item, location.Value, queue.Actor.ActorID, orderString, type, advisedDefense != null || demandAdvisedDefense, lastFrontBackPick);
 
-					// REPLAY-HEALTH-LOGGER (F2): the place order is in flight — the Placed
-					// record resolves on the tick the item actually leaves the queue.
+					// REPLAY-HEALTH-LOGGER (F2): the place order is in flight — the intent
+					// emits as PlacementOrdered now; Placed resolves only on actor-lifecycle
+					// proof (the building on the ordered cell / the plug slot occupied), so
+					// the request carries its site and plug type. A builder unit's
+					// BuildOnSite can still land after the item leaves the queue.
 					NotePendingTerminal(queue, currentBuilding, currentBuilding.Item, BotQueueTransitionKind.Placed,
-						BotQueueTransitionReason.None, BotQueueCancellationClass.None);
+						BotQueueTransitionReason.None, BotQueueCancellationClass.None,
+						location.Value, orderString == "PlacePlug" ? plugInfo?.Type : null);
 
 					bot.QueueOrder(new Order(orderString, player.PlayerActor, Target.FromCell(world, location.Value), false)
 					{
@@ -961,7 +1076,7 @@ namespace OpenRA.Mods.CA.Traits
 			if (orderBy != null)
 				return available.MaxByOrDefault(orderBy);
 
-			return available.RandomOrDefault(BotRng.For(player));
+			return available.RandomOrDefault(BotRng.For(player, nameof(BaseBuilderQueueManagerCA)));
 		}
 
 		// BP-2 (§19.15): a rules-derived radar provider — same two-trait check the Cameo planner runs
@@ -1400,7 +1515,7 @@ namespace OpenRA.Mods.CA.Traits
 			}
 
 			// Build everything else
-			foreach (var frac in baseBuilder.Info.BuildingFractions.OrderBy(kv => kv.Key).Shuffle(BotRng.For(player)))
+			foreach (var frac in baseBuilder.Info.BuildingFractions.OrderBy(kv => kv.Key).Shuffle(BotRng.For(player, nameof(BaseBuilderQueueManagerCA))))
 			{
 				var name = frac.Key;
 
@@ -1649,7 +1764,7 @@ namespace OpenRA.Mods.CA.Traits
 				if (buildingVariantInfo?.Actors != null)
 				{
 					if (BaseBuilderQueueEvalCA.PicksRandomVariant(true, buildingVariantInfo.Facings != null))
-						actorVariant = BotRng.For(player).Next(buildingVariantInfo.Actors.Length + 1);
+						actorVariant = BotRng.For(player, nameof(BaseBuilderQueueManagerCA)).Next(buildingVariantInfo.Actors.Length + 1);
 					else
 					{
 						// The rotation Y point to upside vertically, so -Y = Y(rotation)
@@ -1660,10 +1775,10 @@ namespace OpenRA.Mods.CA.Traits
 			}
 			else
 			{
-				cells = cells.Shuffle(BotRng.For(player));
+				cells = cells.Shuffle(BotRng.For(player, nameof(BaseBuilderQueueManagerCA)));
 
 				if (buildingVariantInfo?.Actors != null)
-					actorVariant = BotRng.For(player).Next(buildingVariantInfo.Actors.Length + 1);
+					actorVariant = BotRng.For(player, nameof(BaseBuilderQueueManagerCA)).Next(buildingVariantInfo.Actors.Length + 1);
 			}
 
 			if (actorVariant != 0)
@@ -1806,7 +1921,7 @@ namespace OpenRA.Mods.CA.Traits
 			var variants = actorInfo.TraitInfoOrDefault<PlaceBuildingVariantsInfo>();
 			return BaseBuilderQueueEvalCA.PicksRandomVariant(variants?.Actors != null,
 				variants != null && variants.Facings != null)
-					? BotRng.For(player).Next(variants.Actors.Length + 1) : 0;
+					? BotRng.For(player, nameof(BaseBuilderQueueManagerCA)).Next(variants.Actors.Length + 1) : 0;
 		}
 
 		(CPos? Location, CPos? BaseCenter, int Variant) ChooseBuildLocation(string actorType, bool distanceToBaseIsImportant, Actor producer, BuildingType type, ExpansionDemand demand = null)
@@ -2004,7 +2119,7 @@ namespace OpenRA.Mods.CA.Traits
 						IEnumerable<CPos> resourcesShouldCheck = null;
 
 						if (closestRefinery == null)
-							resourcesShouldCheck = nearbyResources.Shuffle(BotRng.For(player)).Take(baseBuilder.Info.MaxResourceCellsToCheck);
+							resourcesShouldCheck = nearbyResources.Shuffle(BotRng.For(player, nameof(BaseBuilderQueueManagerCA))).Take(baseBuilder.Info.MaxResourceCellsToCheck);
 						else if (requestRef != null)
 						{
 							resourcesShouldCheck = nearbyResources.OrderBy(c => (c - baseBuilder.RequestedRefineries[requestRef].ResourceLoc).LengthSquared)
@@ -2079,7 +2194,7 @@ namespace OpenRA.Mods.CA.Traits
 					{
 						var nearbyResources = world.Map.FindTilesInAnnulus(baseCenter, baseBuilder.Info.MinBaseRadius, baseBuilder.Info.BaseCrawlRadius)
 							.Where(a => resourceLayer.GetResource(a).Type != null)
-							.Shuffle(BotRng.For(player)).Take(baseBuilder.Info.MaxResourceCellsToCheck);
+							.Shuffle(BotRng.For(player, nameof(BaseBuilderQueueManagerCA))).Take(baseBuilder.Info.MaxResourceCellsToCheck);
 
 						foreach (var r in nearbyResources)
 						{

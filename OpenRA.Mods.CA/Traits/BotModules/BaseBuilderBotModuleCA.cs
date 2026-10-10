@@ -262,7 +262,7 @@ namespace OpenRA.Mods.CA.Traits
 		{
 			var randomConstructionYard = ConstructionYardBuildings.Actors.Where(a => !a.IsDead)
 				.OrderBy(a => a.ActorID)
-				.RandomOrDefault(BotRng.For(player));
+				.RandomOrDefault(BotRng.For(player, nameof(BaseBuilderBotModuleCA)));
 
 			return randomConstructionYard?.Location ?? initialBaseCenter;
 		}
@@ -302,7 +302,7 @@ namespace OpenRA.Mods.CA.Traits
 				var matchingConstructionYard = ConstructionYardBuildings.Actors
 					.Where(a => !a.IsDead && a.Info.Name == conyardType)
 					.OrderBy(a => a.ActorID)
-					.RandomOrDefault(BotRng.For(player));
+					.RandomOrDefault(BotRng.For(player, nameof(BaseBuilderBotModuleCA)));
 
 				if (matchingConstructionYard != null)
 					return matchingConstructionYard.Location;
@@ -420,10 +420,6 @@ namespace OpenRA.Mods.CA.Traits
 		// by genericbot AND classicbot, so the increment switch must not leak into the classic reference).
 		bool switchesActive;
 		public bool ExpansionPrebuildEnabled => Info.UseExpansionPrebuild && switchesActive;
-
-		// ECON-A-FIX (R4): the lease owner this module claims under — the nameof convention every
-		// LC1 holder uses, so a preempt notifies this trait by type name.
-		const string LeaseOwner = nameof(BaseBuilderBotModuleCA);
 
 		// ECON-A-FIX (R5): ticks an issued production order may take to land in the producer's queue —
 		// the same grace VerifyDemandBinding gives a bound item before it counts as never-queued.
@@ -618,9 +614,9 @@ namespace OpenRA.Mods.CA.Traits
 			RefreshBotLimits();
 
 			// Avoid all AIs reevaluating assignments on the same tick, randomize their initial evaluation delay.
-			assignRallyPointsTicks = BotRng.For(player).Next(0, Info.AssignRallyPointsInterval);
-			checkBestResourceLocationTicks = BotRng.For(player).Next(0, Info.CheckBestResourceLocationInterval);
-			sellRefineryTick = Info.SellRefineryInterval < 0 ? 0 : BotRng.For(player).Next(0, Info.SellRefineryInterval);
+			assignRallyPointsTicks = BotRng.For(player, nameof(BaseBuilderBotModuleCA)).Next(0, Info.AssignRallyPointsInterval);
+			checkBestResourceLocationTicks = BotRng.For(player, nameof(BaseBuilderBotModuleCA)).Next(0, Info.CheckBestResourceLocationInterval);
+			sellRefineryTick = Info.SellRefineryInterval < 0 ? 0 : BotRng.For(player, nameof(BaseBuilderBotModuleCA)).Next(0, Info.SellRefineryInterval);
 		}
 
 		void IBotPositionsUpdated.UpdatedBaseCenter(CPos newLocation)
@@ -874,7 +870,7 @@ namespace OpenRA.Mods.CA.Traits
 			var inMainBase = (self.CenterPosition - self.World.Map.CenterOfCell(initialBaseCenter)).Length < WDist.FromCells(28).Length;
 			var chanceThreshold = inMainBase ? 95 : 70;
 
-			if (BotRng.For(player).Next(100) < chanceThreshold)
+			if (BotRng.For(player, nameof(BaseBuilderBotModuleCA)).Next(100) < chanceThreshold)
 				return false;
 
 			if (Info.ConstructionYardTypes.Contains(self.Info.Name) && AIUtils.CountActorByCommonName(ConstructionYardBuildings) <= 1)
@@ -941,7 +937,7 @@ namespace OpenRA.Mods.CA.Traits
 				return producer.Location;
 			}
 
-			return possibleRallyPoints.Random(BotRng.For(player));
+			return possibleRallyPoints.Random(BotRng.For(player, nameof(BaseBuilderBotModuleCA)));
 		}
 
 		Locomotor[] LocomotorsForProducibles(Actor producer)
@@ -1229,7 +1225,7 @@ namespace OpenRA.Mods.CA.Traits
 						demand.DeployedYard = next;
 						demand.DeployedYardLoc = next.Location;
 						demand.ExpiresTick = now + Info.ExpansionDemandIdleTicks;
-						leases?.Release(mcv, LeaseOwner);
+						ExpansionMcvLease.Release(leases, mcv);
 						foreach (var builder in builders)
 							builder.WaitTicks = Math.Min(builder.WaitTicks, 0);
 					}
@@ -1241,10 +1237,14 @@ namespace OpenRA.Mods.CA.Traits
 						RequestedRefineries.Remove(mcv);
 						RequestedRefineries[next] = (demand.ConyardLoc, demand.ResourceLoc);
 						ExpansionDemands.Remove(mcv);
-						leases?.Release(mcv, LeaseOwner);
+						ExpansionMcvLease.Release(leases, mcv);
 						demand.Mcv = next;
 						ExpansionDemands[next] = demand;
-						BotUnitLeases.TryClaim(leases, next, LeaseOwner, BotLeasePurpose.McvExpansion, Info.ExpansionDemandIdleTicks);
+						if (!ExpansionMcvLease.Acquire(leases, next, Info.ExpansionDemandIdleTicks))
+						{
+							ExpireExpansionDemand(bot, demand);
+							continue;
+						}
 						demand.ExpiresTick = now + Info.ExpansionDemandIdleTicks;
 						continue;
 					}
@@ -1265,11 +1265,11 @@ namespace OpenRA.Mods.CA.Traits
 				}
 				else if (!demand.Deployed)
 				{
-					// ECON-A-FIX (R4): the demand holds the MCV's McvExpansion lease while the journey is
+					// ECON-A-FIX (R4): the expansion order issuer holds the MCV's lease while the journey is
 					// ours — the spec's "active while the MCV holds the expansion lease" contract, claimed
 					// at posting and re-claimed every sweep as the heartbeat. A foreign owner's lease
 					// (takeover, emergency preempt) makes the claim fail; so does losing the unit.
-					if (!BotUnitLeases.TryClaim(leases, mcv, LeaseOwner, BotLeasePurpose.McvExpansion, Info.ExpansionDemandIdleTicks))
+					if (!ExpansionMcvLease.Acquire(leases, mcv, Info.ExpansionDemandIdleTicks))
 					{
 						ExpireExpansionDemand(bot, demand);
 						continue;
@@ -1395,9 +1395,9 @@ namespace OpenRA.Mods.CA.Traits
 			if (demand.ReservedClaim != null)
 				law?.ReleaseRefineryAnchors(demand);
 
-			// ECON-A-FIX (R4): the traveller's McvExpansion lease is the demand's — released on every
+			// ECON-A-FIX (R4): the traveller's expansion-issuer lease is released on every
 			// lapse path (the registry prunes a dead unit's lease on its own cadence regardless).
-			BotUnitLeases.Of(player)?.Release(demand.Mcv, LeaseOwner);
+			ExpansionMcvLease.Release(BotUnitLeases.Of(player), demand.Mcv);
 
 			if (demand.RefineryItem != null)
 			{
@@ -1881,12 +1881,11 @@ namespace OpenRA.Mods.CA.Traits
 			demand.ExpiresTick = world.WorldTick + Info.ExpansionDemandIdleTicks;
 			demand.NextEtaTick = world.WorldTick;
 
-			// ECON-A-FIX (R4): the demand publishes only while its own McvExpansion lease holds on the
+			// ECON-A-FIX (R4): the demand publishes only while the expansion order issuer's lease holds on the
 			// traveller — a first claim refused by a foreign owner's lease means this journey is not ours
 			// to schedule, so the demand never posts (the plain request record still stands). On an
 			// existing demand a failed re-claim is left to the sweep, which expires it the same tick.
-			if (!BotUnitLeases.TryClaim(BotUnitLeases.Of(player), expandActor, LeaseOwner,
-				BotLeasePurpose.McvExpansion, Info.ExpansionDemandIdleTicks) && isNew)
+			if (!ExpansionMcvLease.Acquire(BotUnitLeases.Of(player), expandActor, Info.ExpansionDemandIdleTicks) && isNew)
 				ExpansionDemands.Remove(expandActor);
 		}
 	}

@@ -552,11 +552,11 @@ namespace OpenRA.Mods.Common.Traits
 			if (world.Type == WorldType.Editor)
 				return;
 
-			scanTicks = BotRng.For(player).Next(0, Info.ScanInterval);
+			scanTicks = BotRng.For(player, nameof(FransSpecOpsCommanderBotModule)).Next(0, Info.ScanInterval);
 			if (Info.EnableDemandDrivenProduction)
-				demandProductionScanTicks = BotRng.For(player).Next(0, Info.DemandProductionScanInterval);
+				demandProductionScanTicks = BotRng.For(player, nameof(FransSpecOpsCommanderBotModule)).Next(0, Info.DemandProductionScanInterval);
 			if (Info.EnableStrategicCaptureSecurity)
-				captureSecurityScanTicks = BotRng.For(player).Next(0, Math.Max(1, Info.MinimumCaptureDelay));
+				captureSecurityScanTicks = BotRng.For(player, nameof(FransSpecOpsCommanderBotModule)).Next(0, Math.Max(1, Info.MinimumCaptureDelay));
 
 			recoveryReservationsUntil.Clear();
 			ResetRaidLostTargetSearch(false);

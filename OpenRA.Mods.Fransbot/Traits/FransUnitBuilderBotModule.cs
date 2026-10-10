@@ -1689,7 +1689,7 @@ namespace OpenRA.Mods.Common.Traits
 			// unrelated under-target vehicle cannot win merely because Shuffle happened to list it
 			// first. Once the 33% pool is satisfied, ARTY/V2RL are held as queue-saturation fallback
 			// rather than continuing to inflate beyond the requested combined vehicle share.
-			var buildableThings = queue.BuildableItems().Shuffle(BotRng.For(player))
+			var buildableThings = queue.BuildableItems().Shuffle(BotRng.For(player, nameof(FransUnitBuilderBotModule)))
 				.OrderByDescending(a => artilleryUnderTarget && Info.GroundVehicleArtilleryTypes.Contains(a.Name))
 				.ToArray();
 			if (buildableThings.Length == 0)

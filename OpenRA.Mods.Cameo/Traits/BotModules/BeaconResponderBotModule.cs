@@ -72,7 +72,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		protected override void TraitEnabled(Actor self)
 		{
 			threatProviders = self.TraitsImplementing<IBotRegionThreatProvider>().ToArray();
-			scanTicks = BotRng.For(player).Next(0, Info.ScanInterval);
+			scanTicks = BotRng.For(player, nameof(BeaconResponderBotModule)).Next(0, Info.ScanInterval);
 		}
 
 		void IBotEnabled.BotEnabled(IBot bot) { }

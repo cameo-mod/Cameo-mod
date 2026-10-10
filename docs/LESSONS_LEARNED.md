@@ -11,6 +11,34 @@ add it to the Contents below: `audit_doc_health` D7 fails if the index misses on
 ---
 
 
+### 2026-10-08 — Devin: every FindTilesInAnnulus radius must respect MapGrid.MaximumTileSearchRange
+
+Playtest crash C1 (`ArgumentOutOfRangeException` on 'Imminent Destruction'): the front/back planner
+derived the approach annulus as `(FrontProj + depth)/coneCos + 1` = 71 and passed it straight to
+`FindTilesInAnnulus`, which throws above `MaximumTileSearchRange = 50` — and also when
+`minRange > maxRange`. Any derived search radius that grows with map geometry (a defence line that
+crawled outward, a map-size margin, a stride × factor) can exceed 50; constants like
+`BaseCrawlRadius = 50` are exactly AT the cap and legal, so audits of constants alone won't catch it.
+Fix pattern (`BaseFrontBackPlannerBotModule.ApproachSpace`): compute band bounds in `double`
+(promoting operands BEFORE `frontProj + depth` / `frontProj - 1` — int overflow and
+`(int)Math.Ceiling(Inf)+1` → `int.MinValue` wrap both fake legal ranges), use the exact annulus when
+the outer edge is `<= world.Map.Grid.MaximumTileSearchRange`, and beyond it enumerate the playable
+Chebyshev box of half-side `ceil(outer)` — a guaranteed superset, since `TilesByDistance` rings are
+Euclidean in CPos space on every grid (`i²+j² ≤ d²` ⇒ `|dx|,|dy| ≤ ceil(outer)`). Apply the same
+`map.Contains` playable filter the annulus default uses (raw `AllCells` spans the cordon and would
+inflate coverage). **The cell domain is grid-dependent**: `MapSize`/`[0, MapSize)` is the MPos
+*storage* domain — CPos itself only coincides with it on `MapGridType.Rectangular`. On
+`RectangularIsometric` `MPos.ToCPos` unwraps to `x = u + v/2`, `y = v/2 - u` (200×200 map:
+`M(100,100)→C(150,-50)`, `M(199,198)→C(298,-100)`), so a `[0, MapSize)` CPos clip silently drops
+real negative-Y / beyond-MapSize playable cells (Sol's v4 finding). Rectangular iterates the box ∩
+`[0, MapSize)` directly; any other grid enumerates `map.AllCells` — the engine's own MPos→CPos
+`CellRegion`, the true domain — filtered by the box and `map.Contains`. **A band past the cap is
+still real coverage** — clamping it away silently zeroes `frontUncoveredApproach` and the radar
+planner under-builds (review: Luna/Sol). Never degrade "not measurable" into "zero uncovered". Grep
+new code for `FindTilesInAnnulus` / `FindTilesInCircle` call sites whose radius isn't a bounded Info
+constant, and never assume CPos bounds follow MapSize — enumerate MPos→CPos for full-domain work.
+
+
 ### 2026-09-28 — Claude: actor ids are LOWERCASED at load — an uppercase id in a bot list never matches
 
 `Ruleset.cs:130` builds every actor as `new ActorInfo(..., k.Key.ToLowerInvariant(), ...)`, so the
@@ -194,6 +222,7 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 
 **Process, tooling and platform**
 
+- [Building and boot-gating in a Linux cloud container (2026-10-09)](#building-and-boot-gating-in-a-linux-cloud-container-2026-10-09)
 - [⛔ The pinned engine commit is NOT on `cameo-engine` — branch an engine change from the PIN (2026-09-29)](#-the-pinned-engine-commit-is-not-on-cameo-engine--branch-an-engine-change-from-the-pin-2026-09-29)
 - [Switching a worktree branch mid-batch corrupts the REST of the batch — yaml is re-read per match (2026-09-29)](#switching-a-worktree-branch-mid-batch-corrupts-the-rest-of-the-batch--yaml-is-re-read-per-match-2026-09-29)
 - [Never run a batch from the auto-synced main checkout — the 15-minute sync lands new yaml under old DLLs (2026-09-30, EMBER)](#never-run-a-batch-from-the-auto-synced-main-checkout--the-15-minute-sync-lands-new-yaml-under-old-dlls-2026-09-30-ember)
@@ -257,6 +286,28 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 - [Tooltip `BeforeRender` mutations persist between hovers — reset Visible/Text/Bounds every pass (2026-10-09, Devin)](#tooltip-beforerender-mutations-persist-between-hovers--reset-visibletextbounds-every-pass-2026-10-09-devin)
 
 ---
+
+## Building and boot-gating in a Linux cloud container (2026-10-09)
+
+On Windows the route is `make.cmd` → `all`, then `launch-game.cmd`, with the .NET 10 SDK installed (maintainer). A
+Claude Code cloud container is Ubuntu 24.04 with no `dotnet`, and the same route works through the SDK's POSIX twins
+once three obstacles are cleared (verified 2026-10-09 on master `5c8cfe04`, engine pin `331657f07a`):
+
+1. **SDK:** `dot.net/v1/dotnet-install.sh` is refused by the egress proxy (`builds.dotnet.microsoft.com`), but Ubuntu's
+   own archive carries it: `apt-get install -y dotnet-sdk-10.0` (10.0.112).
+2. **Engine fetch:** `make all` → `fetch-engine.sh` downloads the pin as a GitHub zipball, and the proxy returns an
+   error page instead of a zip ("End-of-central-directory signature not found"), which leaves an empty `engine/`.
+   `git` to github.com works, so fetch the **exact pin** and export it without `.git` (`engine/` must never hold
+   one): `git fetch --depth 1 origin <pin> && git archive <pin> | tar -x -C engine`, then
+   `(cd engine && make version VERSION=<pin>)` so `engine/VERSION` matches `mod.config`, then `make all` (0 errors,
+   ~1 min).
+3. **Boot gate without a display:** `ALSOFT_DRIVERS=null xvfb-run -a -s "-screen 0 1280x720x24" ./launch-game.sh
+   Engine.SupportDir=<fresh dir>`. It renders through Mesa llvmpipe and reached `MenuPostProcessEffect.PostWorldLoaded`
+   after ~57 s of loading, with no `exception-*.log` in the fresh support dir. The game stays at the menu, so bound it
+   with `timeout` and read `perf.log`.
+
+With `engine/` built, the generators work here too (`ai_module_map.py --check`, `ai_arch_audit.py --check`). The
+checkout is still shallow, so `run_all.sh` audit reports remain off-limits (CLAUDE.md rule 8).
 
 ## ⛔ The pinned engine commit is NOT on `cameo-engine` — branch an engine change from the PIN (2026-09-29)
 

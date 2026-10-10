@@ -73,7 +73,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			Bot = bot;
 			SquadManager = squadManager;
 			World = bot.Player.PlayerActor.World;
-			Random = BotRng.For(bot);
+			Random = BotRng.For(bot, nameof(SquadCA));
 			Type = type;
 			Target = Target.FromActor(target);
 			FuzzyStateMachine = new StateMachineCA();

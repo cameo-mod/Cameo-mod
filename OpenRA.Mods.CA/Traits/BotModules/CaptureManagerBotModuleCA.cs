@@ -96,7 +96,7 @@ namespace OpenRA.Mods.CA.Traits
 		protected override void TraitEnabled(Actor self)
 		{
 			// Avoid all AIs reevaluating assignments on the same tick, randomize their initial evaluation delay.
-			minCaptureDelayTicks = BotRng.For(player).Next(Info.MinimumCaptureDelay);
+			minCaptureDelayTicks = BotRng.For(player, nameof(CaptureManagerBotModuleCA)).Next(Info.MinimumCaptureDelay);
 		}
 
 		void IBotTick.BotTick(IBot bot)
@@ -153,7 +153,7 @@ namespace OpenRA.Mods.CA.Traits
 
 			var baseCenter = world.Map.CenterOfCell(initialBaseCenter);
 
-			if (BotRng.For(player).Next(100) < Info.PriorityCaptureChance)
+			if (BotRng.For(player, nameof(CaptureManagerBotModuleCA)).Next(100) < Info.PriorityCaptureChance)
 			{
 				var priorityTargets = world.Actors.Where(a =>
 					!a.IsDead && a.IsInWorld && Info.CapturableRelationships.HasRelationship(player.RelationshipWith(a.Owner))
@@ -197,7 +197,7 @@ namespace OpenRA.Mods.CA.Traits
 			if (randPlayers.Count == 0)
 				return;
 
-			var randPlayer = randPlayers.Random(BotRng.For(player));
+			var randPlayer = randPlayers.Random(BotRng.For(player, nameof(CaptureManagerBotModuleCA)));
 
 			var targetOptions = Info.CheckCaptureTargetsForVisibility
 				? GetVisibleActorsBelongingToPlayer(randPlayer)

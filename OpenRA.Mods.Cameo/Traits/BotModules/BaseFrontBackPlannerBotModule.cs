@@ -251,6 +251,96 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		}
 
 		/// <summary>
+		/// Approach band bounds in double space: [Inner, Outer] Euclidean radii around the centre covering
+		/// every cell whose projection reaches [frontProj, frontProj+depthCells] inside the cone — the
+		/// worst-case distance of a band cell is (frontProj+depthCells)/coneCos, so the outer edge grows
+		/// with how far out the line crawled and can exceed the engine's MaximumTileSearchRange on large
+		/// maps. All arithmetic in double so Inf/NaN/sentinel ints can never wrap an int cast into a
+		/// legal-looking range. Null ONLY when the cone math is NaN or (forward cone only) the whole
+		/// band lies below radius 0 — a band past the engine cap or a cone of 90°+ still exists on the
+		/// map and must be enumerated (see ApproachSpace); returning no cells there would silently
+		/// truncate coverage.
+		/// </summary>
+		public static (double Inner, double Outer)? ApproachBandBounds(int frontProj, int depthCells, double coneCos)
+		{
+			// coneCos <= 0 (cone half-angle >= 90°): the cone admits cells at ANY distance
+			// perpendicular to or behind the front axis — the band is genuinely unbounded, so the
+			// outer edge is +Inf (the box degenerates to the whole map) rather than empty.
+			var outer = coneCos > 0
+				? Math.Ceiling(((double)frontProj + depthCells) / coneCos) + 1
+				: double.PositiveInfinity;
+			var inner = Math.Max(0.0, frontProj - 1.0);
+			if (double.IsNaN(outer) || double.IsNaN(coneCos) || inner > outer)
+				return null;
+
+			return (inner, outer);
+		}
+
+		/// <summary>
+		/// Bounding-box half-side for the beyond-cap enumeration, clamped to the map's CPos span —
+		/// MapSize.Width + MapSize.Height upper-bounds the coordinate distance between any two cells on
+		/// both grid shapes (Rectangular: coords lie inside [0, MapSize); RectangularIsometric unwraps
+		/// to x = u + v/2 ∈ [0, W + H/2), y = v/2 - u ∈ (-W, H/2]), so a box of that radius covers the
+		/// whole map and a huge or infinite outer bound degenerates to it without overflow.
+		/// </summary>
+		public static int WideSpaceRadius(double outer, int mapReach)
+		{
+			return double.IsFinite(outer) ? (int)Math.Min((long)Math.Ceiling(outer), mapReach) : mapReach;
+		}
+
+		/// <summary>
+		/// Playable cells of the square [centre ± r] ∩ [0, MapSize), Rectangular maps only — CPos space IS
+		/// the [0, MapSize) storage domain there. Iterates the box directly (O(box), never a full-map
+		/// scan) and applies the same playable-bounds predicate the default FindTilesInAnnulus path uses.
+		/// </summary>
+		static IEnumerable<CPos> PlayableBox(Map map, CPos centre, int r)
+		{
+			var x0 = Math.Max(0L, centre.X - (long)r);
+			var x1 = Math.Min(map.MapSize.Width - 1L, centre.X + (long)r);
+			var y0 = Math.Max(0L, centre.Y - (long)r);
+			var y1 = Math.Min(map.MapSize.Height - 1L, centre.Y + (long)r);
+			for (var y = y0; y <= y1; y++)
+				for (var x = x0; x <= x1; x++)
+				{
+					var c = new CPos((int)x, (int)y);
+					if (map.Contains(c))
+						yield return c;
+				}
+		}
+
+		/// <summary>
+		/// Candidate cells for <see cref="ApproachCells"/>: when the band fits inside the engine's
+		/// MaximumTileSearchRange, the exact annulus rings; past it — a defence line crawled far out on a
+		/// large map (playtest C1) — the playable Chebyshev box of half-side ceil(outer). The box is a
+		/// guaranteed superset on every grid type: TilesByDistance rings are Euclidean in CPos space
+		/// (i²+j² ≤ d² for ring d), so every cell the unconstrained annulus would return satisfies
+		/// |dx|,|dy| ≤ ceil(outer). Rectangular maps iterate the box ∩ [0, MapSize) directly; any other
+		/// grid type (RectangularIsometric unwraps CPos to X = u + v/2, Y = v/2 - u — outside [0,
+		/// MapSize), e.g. M(100,100) → C(150,-50) on a 200×200 map) enumerates AllCells — the true
+		/// domain incl. negative-Y cells — filtered by the same box and playable predicates. Coverage is
+		/// never silently truncated, bounded by map area, deterministic; ApproachCells still applies the
+		/// exact band+cone predicate.
+		/// </summary>
+		public static IEnumerable<CPos> ApproachSpace(Map map, CPos centre, int frontProj, int depthCells, double coneCos)
+		{
+			var bounds = ApproachBandBounds(frontProj, depthCells, coneCos);
+			if (!bounds.HasValue)
+				return Enumerable.Empty<CPos>();
+
+			var (inner, outer) = bounds.Value;
+			if (outer <= map.Grid.MaximumTileSearchRange)
+				return map.FindTilesInAnnulus(centre, (int)inner, (int)outer);
+
+			var reach = map.MapSize.Width + map.MapSize.Height;
+			var r = WideSpaceRadius(outer, reach);
+			if (map.Grid.Type == MapGridType.Rectangular)
+				return PlayableBox(map, centre, r);
+
+			return map.AllCells.Where(c =>
+				Math.Abs(c.X - centre.X) <= r && Math.Abs(c.Y - centre.Y) <= r && map.Contains(c));
+		}
+
+		/// <summary>
 		/// The cells of a front's approach: the band from the foremost defence depthCells farther out, inside the
 		/// front cone. A front with no defence line has no approach (nothing defines the line).
 		/// </summary>
@@ -261,10 +351,13 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (!front.HasLine)
 				return approach;
 
+			// Double space: frontProj + depthCells must not wrap into a negative upper edge
+			// at extreme configured depth (int.MinValue/maxValue inputs would empty the band).
+			var bandMax = front.FrontProj + (double)depthCells;
 			foreach (var c in space)
 			{
 				var p = Project(c, baseCenter, front.DirX, front.DirY);
-				if (p < front.FrontProj || p > front.FrontProj + depthCells)
+				if (p < front.FrontProj || p > bandMax)
 					continue;
 
 				var dir = UnitDir(baseCenter, c);
@@ -768,8 +861,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					continue;
 				}
 
-				var outer = (int)Math.Ceiling((f.FrontProj + Info.RadarApproachDepthCells) / coneCos) + 1;
-				var space = world.Map.FindTilesInAnnulus(f.Centre, Math.Max(0, f.FrontProj - 1), outer);
+				// The approach band can reach past the engine's MaximumTileSearchRange when the
+				// defence line crawled far out (playtest C1 — outer=71 on Imminent Destruction):
+				// exact annulus rings inside the cap, map-clipped bounding box beyond it — coverage
+				// is never silently truncated and FindTilesInAnnulus never sees an illegal range.
+				var space = ApproachSpace(world.Map, f.Centre, f.FrontProj,
+					Info.RadarApproachDepthCells, coneCos);
 				var approach = ApproachCells(space, f.Centre, f, Info.RadarApproachDepthCells, coneCos);
 				var uncovered = 0;
 				foreach (var c in approach)

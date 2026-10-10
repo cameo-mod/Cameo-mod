@@ -1,6 +1,6 @@
 """Consumer-fit CLI checks using the C# recorder serializer and bounded file writer.
 
-First run the AiEconomyHealthSchemaTest dotnet tests to generate new support roots.
+First run the AiEconomy dotnet test filter to generate new support roots.
 This suite executes immutable Git blobs from the approved economy consumer head,
 not a mutable working-tree checker. It does not run an OpenRA game or driver.
 """
@@ -33,7 +33,7 @@ class EconomyLoggerCliTest(unittest.TestCase):
 
     def check_fixture(self, name, status, exit_code):
         pointer = ROOT / f"engine/bin/TestResults/economy-health-{name}-cli-input.txt"
-        self.assertTrue(pointer.exists(), "Run AiEconomyHealthSchemaTest first")
+        self.assertTrue(pointer.exists(), "Run the AiEconomy dotnet test filter first")
         support = Path(pointer.read_text(encoding="utf-8-sig"))
         emitted = support / "Logs/cameo-ai-economy-health.jsonl"
         data = emitted.read_bytes()
@@ -59,6 +59,22 @@ class EconomyLoggerCliTest(unittest.TestCase):
 
     def test_canonical_incomplete_cli(self):
         self.check_fixture("incomplete", "UNKNOWN", 21)
+
+    def test_proven_active_three_cancel_cli(self):
+        report = self.check_fixture("cancel-active", "BLOCK", 20)
+        self.assertIn("REPEATED_BUILDING_CANCELLATION", [x["code"] for x in report["findings"]])
+
+    def test_inactive_three_cancel_cli(self):
+        self.check_fixture("cancel-inactive", "OBSERVED_HEALTHY", 0)
+
+    def test_destruction_three_cancel_cli(self):
+        self.check_fixture("cancel-destroyed", "OBSERVED_HEALTHY", 0)
+
+    def test_duplicate_episode_is_unknown(self):
+        self.check_fixture("cancel-duplicate", "UNKNOWN", 21)
+
+    def test_unclassified_removed_coverage_is_unknown(self):
+        self.check_fixture("removed-unknown", "UNKNOWN", 21)
 
     def test_raw_filename_cannot_substitute_for_health(self):
         support = self.consumer / "missing-health"

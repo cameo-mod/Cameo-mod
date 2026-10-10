@@ -1,3 +1,44 @@
+# 2026-10-09 — Claude: AI architecture review + playtest regression analysis (branch `ccr-c7f51935-i53fkj`)
+
+*Claude (Opus)*, cloud container, base master `5c8cfe04`. Docs only; no code or yaml changed on the branch.
+
+- **`docs/AI_ARCHITECTURE_RESEARCH_SYNTHESIS_MASTER_2026-10-06.md` reworked and verified:** Part II = verified state;
+  Part III = findings F1–F12 (shared per-player `BotRng` stream confounds A/B; AR-10 tick layers audited but not the
+  runtime order; no scheduler; MasterAi concrete coupling; order lanes; crossed-order ratchet; switch expiry; registry
+  gaps F9/F10; DESIGN §19.6 rollout line stale vs `ai.yaml:4064`). First-version errors fixed (tier-5 contradiction
+  with DESIGN §19.13, the inverted map row, "orders/conditions" vs §19.8, uncommitted sources).
+- **Part IIIb (new): the 2026-10-08 playtest.** `37d9fc6a` = `apply_increment_switches.py --groups all` committed
+  (201 changes, all 59 groups, none A/B'd); `4bf69671` switched off the binding engineer/crate omniscience (DESIGN
+  §19.5). Mechanisms M1–M12 with evidence and status. Measured in this container:
+  - **M10 crash (open):** armed `ai.yaml` on "A Nuclear Winter" dies at world tick ~2,000:
+    `BaseFrontBackPlannerBotModule.Refresh` → `FindTilesInAnnulus` range 71 > `MaximumTileSearchRange` 50 (any
+    defence front ≥ ~21 cells out).
+  - **M9 learned files never load (open, predates the arm):** bare `ai/learned/*.yaml` paths cannot resolve
+    (`FileSystem.Exists` + `Folder.Contents` top-level only); runtime log says "missing" for all three files.
+  - **M12 MCV ownership conflict (open):** with `BT_expansion_prebuild` + enforcement, 1,044 `Move` orders from
+    `McvExpansionManagerBotModule` refused because `BaseBuilderBotModuleCA` holds the MCV's lease.
+  - **Armed (minus the crashing planner) `hard` vs `classic`, 1v1, td_gdi:** `hard` won in 19,766 ticks (kills
+    74,610 / deaths 13,100, 26/0 buildings), but banked 86,723 unspent. So the duel is not passive; team play and the
+    bugs weigh at least as much as the restraint stack.
+  - Fixed today by others and confirmed relevant: `368f4554` (RA refinery dock + base-builder latch, M7),
+    `02241219` (engineer/crate omniscience restored, M8), `b06615a8` (MCV deploy search, part of M6).
+- **Team play:** bots answer allied beacons (`BeaconResponderBotModule`, ≤ 6 idle units) but never place beacons, and
+  the team blackboard ignores human allies (`p.IsBot`, `IBotTeamMember.cs:256`).
+- **Learning:** every bot number is learnable per DESIGN §19.2; the army-first thresholds are registry row
+  `credit_float` (planned, no fitter). 1,272 `int` + 133 `bool` Info fields exist; see the doc's PT8 for the limits.
+- `docs/LESSONS_LEARNED.md`: Linux cloud build/boot route (.NET 10 via apt, engine via `git archive`, xvfb +
+  `ALSOFT_DRIVERS=null`). `docs/design/AI_MASTER_PLAN.md` §3: unscheduled runtime block A1–A10, B1–B6, C1–C4 (111 h).
+- **Later the same evening:** pre-arm 1v1: `hard` won, earned 14.32 / spent 14.15 per tick vs the armed 11.97 / 8.01
+  (banked 11,395 vs 86,723). Armed 3v3 on "Winter's End (Rich)" (spawns verified top-left vs bottom-right): draw by
+  timeout; the `hard` team far ahead (kills 612,280 vs 268,220) but two of its three bots spent the match escorting
+  and defending allies (90 escort + 46 defend answers; Multi0 0 attack waves, peak army 22,270) → new finding **M13**
+  (team escort drain), which reproduces the playtest symptom. Multi1 alone had 11,962 refused MCV orders (M12).
+- **Night runs:** 2v2 Terra Cotta armed LOST (0 waves, ~30 % less income, 654 refused MCV orders, M6+M12) vs
+  pre-arm WON (~2x income, ~91k armies). 3v3 Winter's End pre-arm LOST (whole team forced to `turtle` by an early
+  emergency → **M14**: master's default `EmergencyKeepsPersonality: false` contradicts binding DESIGN §19.11; the fix
+  is only in switch group AL). Armed teammates also all got the same bandit arm at tick 7. One match per arm: next is
+  fixes (A8–A10, M14 default) then ≥ 4 repeats per arm/map. Continue from the doc's PT9.
+
 # 2026-10-09 — Devin: B-lane master repair batch — limited-SW default + engineer/crate flags + bot plug production
 
 *Devin-Integrator* on `devin/repair-b2b6` (stacked on the bounded-approved
@@ -231,6 +272,70 @@ statically; one real residual found and fixed:
   (`MenuPostProcessEffect.PostWorldLoaded`, no new exceptions, no orphan
   process). World-hover absence stays explicitly unresolved per Sol's scope
   note; interactive screenshot/hover-flow acceptance still needs a driven match.
+
+# 2026-10-08 — Devin-Architect: playtest C1 crash fix — approach annulus capped at MaximumTileSearchRange
+
+*Devin-Architect.* Post-playtest triage (fleet PLAYTEST_TRIAGE_2026-10-08.md) assigned crash C1:
+`ArgumentOutOfRangeException` on map 'Imminent Destruction' — `FindTilesInAnnulus` received
+`maxRange=71`, engine cap `MapGrid.MaximumTileSearchRange = 50`. Stack: `Refresh()` ←
+`RadarPowerMargin` ← `BaseBuilderQueueManagerCA.Tick` ← `BaseBuilderBotModuleCA.BotTick` ←
+`ModularBot.Tick`.
+
+- Root cause in `BaseFrontBackPlannerBotModule.Refresh()`: the approach annulus outer edge
+  `ceil((FrontProj + RadarApproachDepthCells)/coneCos) + 1` grows with how far the defence line
+  crawled — at the 45° front cone any `FrontProj` ~21+ already exceeds 50, so this is not a
+  huge-map-only path.
+- Fix v1 (67799ff7f, superseded on review): clamped the annulus outer edge to the cap and returned
+  null past it — crash-safe but silently truncated coverage: band cells at radius 51..71 were dropped,
+  `frontUncoveredApproach` undercounted, `WantedForFront` could miss the second-radar threshold.
+  Luna's re-review + Sol's acceptance hold: "do not present this as coverage-preserving."
+- Fix v2/v3 (this head): `ApproachBandBounds` keeps the true double bounds (`(double)frontProj + depth`,
+  `frontProj - 1.0` — operands promote BEFORE arithmetic so int sentinels/huge values can't wrap);
+  null only for geometrically-empty bands (NaN cone math, band wholly below radius 0). `ApproachSpace`
+  then picks the candidate set: exact `FindTilesInAnnulus` when `outer <= MaximumTileSearchRange`,
+  else `PlayableBox` — the playable Chebyshev box of half-side `ceil(outer)` clamped to the map span.
+  Superset proof: `TilesByDistance[d]` holds `CVec(i,j)` with `i²+j² ≤ d²`, so every annulus cell has
+  `|dx|,|dy| ≤ ceil(outer)` on every grid type. `PlayableBox` iterates the box ∩ [0, MapSize) directly
+  (O(box), deterministic row-major) with `map.Contains` — the same playable-bounds filter the annulus
+  default uses, so cordon cells never inflate coverage (v2's `AllCells.Where` did). `ApproachCells`
+  applies the exact band+cone predicate on either space — full coverage, never an illegal engine radius.
+- Sibling sweep: every other `FindTilesInAnnulus`/`FindTilesInCircle` call site uses a bounded Info
+  constant (MaxBaseRadius=20, MaximumDefenseRadius=20, BaseCrawlRadius=50 at-cap-legal) or a
+  config-derived stride — this planner site was the only map-scale-derived radius.
+- Regression tests in `BaseFrontBackPlannerTest`: in-cap bounds `(10,14,45°)->(9.0,35.0)`, crash case
+  `(35,…)->(34.0,71.0)` not null — band EXISTS past the cap — fully-beyond-cap `(52,…)->(51.0,95.0)`,
+  `coneCos=0` and `coneCos=-0.5` (half-angle ≥90°, laterally unbounded band) → `+Inf` outer clamped to
+  map span by `WideSpaceRadius`, NaN/negative-forward-band/`int.MinValue` sentinel → null,
+  `WideSpaceRadius` clamps on 71.9/+Inf/1e30. Luna's v2 edge review drove two more fixes:
+  `ApproachBandBounds` no longer nulls a ≥90° cone (cells DO satisfy the predicate at arbitrary
+  lateral distance) and `ApproachCells` promotes `frontProj + depthCells` to double so an extreme
+  configured depth can't wrap the band's upper edge.
+- Real-map regressions (uninitialized Map + real MapGrid, flat rectangular so `Contains` = Bounds):
+  in-cap `ApproachSpace` == engine `FindTilesInAnnulus(9,35)` exactly; off-cap `(35,14,45°)` on a
+  200×200 map — every emitted cell playable (cordon `(0,50)` excluded), box bounded (playable `(130,50)`
+  at dx=80 > 72 excluded), and `ApproachCells` over the box is set-equal to `ApproachCells` over ALL
+  playable map cells — the no-dropped-cell parity the reviewers required.
+- Fix v5 (iso safety, Sol's v4 FIX REQUIRED): `MapSize` is the MPos/STORAGE domain — on
+  `RectangularIsometric` `MPos.ToCPos` unwraps to `x = u + v/2, y = v/2 - u` (engine MPos.cs:45-61 —
+  200×200 map: `M(100,100)→C(150,-50)`, `M(199,198)→C(298,-100)`), so `PlayableBox`'s CPos clip to
+  `[0, MapSize)` dropped real negative-Y / beyond-MapSize domain cells and `map.Contains` could not
+  restore them. `ApproachSpace` now keeps `PlayableBox` only for `MapGridType.Rectangular` (exact:
+  CPos domain IS `[0, MapSize)`); every other grid enumerates `map.AllCells` — the engine's own
+  MPos→CPos CellRegion, the true domain — filtered by the same box + `map.Contains` predicates.
+  Reach widened to `MapSize.W + H` (provable CPos Chebyshev bound on both shapes). Iso regression:
+  real `MapGrid(RectangularIsometric)` shell on 200×200 centred on `C(150,-50)` — emitted space
+  contains the negative-Y domain cell, all cells playable, `ApproachCells` set-equal to the
+  full-domain reference. `PlayableCellsOf` test helper now enumerates MPos→CPos too.
+- Gates: Release build clean; full `OpenRA.Mods.Cameo.Test` suite 1260/1260; boot-gate PASS
+  (main menu, `MenuPostProcessEffect.PostWorldLoaded`, zero new exceptions). One earlier exception
+  (`exception-2026-10-08T202345Z`) was my launch harness missing `Engine.ModSearchPaths`, not the
+  code — corrected and re-passed.
+- Branch `devin/c1-annulus-range-cap` off playtest head 3d99405bd; v1 code at 67799ff7f, docs at
+  20a8107a1, semantics v2–v5 on the branch tip. LESSONS_LEARNED entry updated. No master push —
+  playtest freeze stands; Sol+Luna review gates apply (Luna asked for in-map repro on top of static
+  review; Luna APPROVED v4 source+tests 92d2fe029, Sol's iso finding drove v5).
+
+---
 
 # 2026-10-08 — Devin-Architect: wave-1 scheduler v3 — fail-closed evidence adjudication
 
@@ -21133,3 +21238,94 @@ Isolated codex/replay-health-gate at base3d; exclusive tool/test/design scope. E
 - Isolated devin/mcv-deploy-cell from c76283c0b; docs/design/MCV_DEPLOY_CELL_REPAIR.md records H2 code defect and unknown match-level H1/H2 cause.
 - Lead authorized condition-driven opt-in engine repair; engine331657f07a pushed. Single YAML instance, genericbot search only; branch-local pin. No launches.
 - Engine focused9/9 and full575/577 (2 existing skips); real-YAML mod mount2/2. Independent review/runtime adoption pending.
+
+## 2026-10-10 - Devin-Architect: terminal causality — intent separated from proven outcomes (01a121b6)
+
+VP consumer-fit on frozen f7e1d0fff (REREVIEW_2026-10-09_observer_seam_f7e1_consumer_fit.md):
+`ResolveRemovedItem` still promoted a fresh pending to `Placed`/`Cancelled` whenever the
+bound item disappeared from a live queue within 8 ticks. Engine check at pin 0a3f77dbe
+shows removal alone can never prove cause — `ProductionQueue` cleanup (tech-cap refund
+:443, infinite trim :899, competing `CancelProductionInner` :828) and the builder-unit
+`BuildOnSite` path (`PlaceBuilding` :209-250 removes the item immediately, the actor may
+land ticks later or never) all produce identical disappearances. Corrected on
+`devin/queue-observer-seam`:
+
+* **Intent records emit at the decision tick** — `PlacementOrdered` / `CancelOrdered`
+  appended to `BotQueueTransitionKind` (existing ordinals unchanged). `NotePendingTerminal`
+  and `NoteExternalCancel` emit the intent once at issue; intent kinds are never terminal.
+* **`Placed` requires actor-lifecycle proof** — an own, live actor of the ordered type
+  (or a registered `PlaceBuildingVariants` variant) occupying the ordered cell
+  (`ActorMap.GetActorsAt`); plug orders prove on the host `Pluggable` slot no longer
+  accepting the type it accepted when chosen. Normal placement lands inside the same
+  frame-end task as the removal, so it proves at the next probe tick; a builder unit
+  arms the pending (`AwaitingProof`, window restarts at removal) and resolves on the
+  late actor, else `Removed`+intent reason after `MaxInFlightTicks` — the lead's narrow
+  ruling implemented verbatim.
+* **`Cancelled` requires the Infinite-flag flip** — `CancelProductionInner`'s unique
+  signature (`item.Infinite = false` while the item stays queued), bound at issue via
+  `WasInfinite`. Every other cancel-related removal resolves `Removed`+intent reason:
+  disappearance is indistinguishable from engine cleanup on this pin — schema-2 UNKNOWN,
+  never an invented terminal.
+* **`Removed` always classifies event-locally** (Elimination / Destruction / None) and
+  carries the request's reason so intent survives on record; it never inherits the
+  request's cancellation class (that would assert the unproven cause). Stale-watch
+  flushes resolve leftover pendings with one last proof check instead of silently
+  clearing. `Matches` no longer binds `AwaitingProof` entries — an armed entry's own
+  departed ref and same-name siblings can never re-consume it.
+* **World-free regression suite (+9):** unproven removal arms not Placed, stale request
+  Removed, proven placement (incl. queueSeen=false evidence-beats-staleness), builder-unit
+  late-actor success, builder-unit failure expiry, competing-removal never-Placed,
+  cancel removal always Removed across live/stale/fresh/expired, infinite flip bound-item
+  proof (sibling/unbound/finite/non-cancel negatives), awaiting-entry sibling immunity,
+  elimination during awaiting.
+* **Unchanged invariants:** lazy seam (no observer -> one null check), bounded O(n) probe,
+  no orders/RNG/world mutation, per-instance episodes, event-local schema-2 fields.
+
+* **VP re-review fix (plug proof):** `!Pluggable.AcceptsPlug(type)` is false for three
+  distinct reasons — slot doesn't define the type, a dynamic `Requirement` currently
+  fails, or (requirement-free types only) `active != null`. Only the last is install
+  evidence, so `BaseBuilderQueueEvalCA.PlugInstallProven` now requires
+  `slotDefinesType && !requirementKeyed && !acceptsNow` — the manager wires the real
+  `Info.Conditions`/`Info.Requirements`/`AcceptsPlug` values per candidate slot.
+  Requirement-keyed slots report availability, not install state (no public engine API
+  exposes `active`), so those pendings stay UNKNOWN and expire `Removed` — the VP's
+  sanctioned fallback. Regressions exercise the production predicate: requirement-flip
+  (no install -> `Removed`), true install -> `Placed`, unknown-type and still-accepting
+  negatives.
+
+## 2026-10-10 - A1-RNG: per-module bot RNG streams (devin/a1-bot-rng)
+
+* `BotRng.For(player, moduleKey)` / `For(IBot, moduleKey)`: each bot player now
+  owns a `ConditionalWeakTable<Player, ModuleStreams>` whose `ByKey` dictionary
+  lazily creates one `MersenneTwister` per module key. Module seed =
+  `PlayerSeed(lobby, salt) ^ Fnv1a(key)` - so any module's draw count can change
+  without shifting any other module's sequence (the F1 cross-contamination fix).
+* Keys are compile-time `nameof(<enclosing class>)` at every call site - never
+  runtime/machine-derived strings, so cross-client seeds can't diverge.
+  95 sites migrated across OpenRA.Mods.CA (incl. queue manager, squad states -
+  each state class gets its own stream), OpenRA.Mods.Cameo, OpenRA.Mods.Fransbot.
+  `AIUtils` helpers key on `AIUtils`.
+* `PlayerSeed`/`ModuleSeed`/`Fnv1a` are public pure functions so the tests drive
+  the same seed math the production call composes; unkeyed `For(player)` still
+  works (normalizes to the empty key) for compatibility.
+* Tests (+6, `BotRngTest`): published FNV-1a32 vectors, null/empty key
+  normalization, module-stream independence, sibling-draw isolation (200 draws
+  on stream A leave B bit-identical), same-seed same-key 1024-draw parity, and
+  per-player isolation with identical keys.
+* Suite 1304/1304, Release clean. No launches per task gate.
+
+* **M14 fold-in (same-arm fix):** the per-player salt is now the player's slot
+  index in `World.Players` — unique per player, fixed at world creation,
+  identical on all clients, and independent of spawn timing. The old chain
+  (`PlayerActor.ActorID`, falling back to `ClientIndex+1` while PlayerActor is
+  null) was doubly unsafe: the null-actor fallback got memoized forever, and
+  engine map/host-owned players all report the admin's `ClientIndex`
+  ("Owned by the host"), which is what collapsed allied bots onto one seed in
+  the bandit same-arm finding. `PlayerActor` is no longer consulted, so
+  first-call timing can never freeze a colliding seed. +2 regressions: three
+  allied bots get distinct same-key streams, and adjacent salts stay
+  uncorrelated (alternate MT-seeding hypothesis ruled out by construction).
+## 2026-10-10 Sol MCV observation checkpoint
+Read-only separate MCV capture/provider and diagnostic consumer on codex/mcv-health-observation, base7ca7e9159; no YAML mount/engine/BaseBuilder edits.
+Focused9/9, Python8/8 actual canonical C# fixture UNKNOWN21, fullRelease1412/1412 PASS. Missing order/hold/transform hooks explicitly UNKNOWN.
+Next: exact-SHA VP review; cost/coverage/adoption remain gated. No launches. Insurance telemetry precedes M13 wiring per lead.

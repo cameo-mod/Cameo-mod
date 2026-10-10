@@ -88,8 +88,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			: base(info)
 		{
 			world = self.World;
-			scanTicks = BotRng.For(self.Owner).Next(Info.ScanInterval);
-			swapTicks = BotRng.For(self.Owner).Next(Info.SwapInterval);
+			scanTicks = BotRng.For(self.Owner, nameof(GarrisonDefenseBotModule)).Next(Info.ScanInterval);
+			swapTicks = BotRng.For(self.Owner, nameof(GarrisonDefenseBotModule)).Next(Info.SwapInterval);
 		}
 
 		protected override void TraitDisabled(Actor self)

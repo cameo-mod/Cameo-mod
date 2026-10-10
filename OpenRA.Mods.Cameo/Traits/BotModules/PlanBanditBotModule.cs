@@ -253,7 +253,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		IEnumerable<double> Uniforms()
 		{
 			while (true)
-				yield return BotRng.For(player).NextFloat();
+				yield return BotRng.For(player, nameof(PlanBanditBotModule)).NextFloat();
 		}
 
 		// IObservesVariables: the engine hands the full granted-condition map at create and after every grant/revoke.

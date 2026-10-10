@@ -89,7 +89,7 @@ namespace OpenRA.Mods.CA
 		public static ActorInfo GetInfoByCommonName(HashSet<string> names, Player owner)
 		{
 			var matches = owner.World.Map.Rules.Actors.Where(k => names.Contains(k.Key)).ToList();
-			return matches.Count > 0 ? matches.Random(BotRng.For(owner)).Value : null;
+			return matches.Count > 0 ? matches.Random(BotRng.For(owner, nameof(AIUtils))).Value : null;
 		}
 
 		// Common-name sets (e.g. HarvesterTypes) are shared across every faction in the mod, so a
@@ -106,7 +106,7 @@ namespace OpenRA.Mods.CA
 				.ToList();
 
 			if (buildable.Count > 0)
-				return buildable.Random(BotRng.For(owner));
+				return buildable.Random(BotRng.For(owner, nameof(AIUtils)));
 
 			return GetInfoByCommonName(names, owner);
 		}

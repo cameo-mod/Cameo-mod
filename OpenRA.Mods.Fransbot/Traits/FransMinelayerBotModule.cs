@@ -133,7 +133,7 @@ namespace OpenRA.Mods.Common.Traits
 
 		protected override void TraitEnabled(Actor self)
 		{
-			minAssignRoleDelayTicks = BotRng.For(player).Next(0, Info.ScanTick);
+			minAssignRoleDelayTicks = BotRng.For(player, nameof(FransMinelayerBotModule)).Next(0, Info.ScanTick);
 			alertedTicks = 0;
 			conflictPositionLength = 0;
 			favoritePositionsLength = 0;
@@ -374,7 +374,7 @@ namespace OpenRA.Mods.Common.Traits
 					.ToArray();
 				if (visibleEnemies.Length > 0)
 				{
-					var enemy = visibleEnemies.Random(BotRng.For(player));
+					var enemy = visibleEnemies.Random(BotRng.For(player, nameof(FransMinelayerBotModule)));
 					target = enemy.Location;
 					source = $"visible enemy {enemy.Info.Name}";
 					return true;

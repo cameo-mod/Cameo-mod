@@ -1951,9 +1951,9 @@ namespace OpenRA.Mods.Common.Traits
 				"{0}: FransMcvExpansion TOPOLOGY-PROVEN EARLY NAVY active: water percentage never creates naval demand. Explore Map resource topology may bootstrap one early Ship queue only when a known sea-accessible ore objective is on a different ground landmass from the main FACT. PIONEER successor, FACT->PROC proof, actionable regional LST supply, bounded CoastalStaging and SeaOre scan budgets remain active. Completed sea search cache {1} WT; RETREAT pathfinding remains batched to {2} candidate(s)/pass.",
 				player, Info.RoutineSeaOreSearchCacheDuration, Info.McvRetreatMaximumPathCandidatesPerAnchor);
 
-			scanTicks = BotRng.For(player).Next(1, Info.ScanInterval + 1);
-			buildMcvTicks = BotRng.For(player).Next(1, Info.BuildMcvInterval + 1);
-			nextSeaPlanningTick = world.WorldTick + BotRng.For(player).Next(1, Info.SeaPlanningInterval + 1);
+			scanTicks = BotRng.For(player, nameof(FransMcvExpansionManagerBotModule)).Next(1, Info.ScanInterval + 1);
+			buildMcvTicks = BotRng.For(player, nameof(FransMcvExpansionManagerBotModule)).Next(1, Info.BuildMcvInterval + 1);
+			nextSeaPlanningTick = world.WorldTick + BotRng.For(player, nameof(FransMcvExpansionManagerBotModule)).Next(1, Info.SeaPlanningInterval + 1);
 		}
 
 		protected override void TraitDisabled(Actor self)

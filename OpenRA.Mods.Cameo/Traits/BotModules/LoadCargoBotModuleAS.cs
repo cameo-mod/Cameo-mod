@@ -115,7 +115,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		protected override void TraitEnabled(Actor self)
 		{
 			// Avoid all AIs reevaluating assignments on the same tick, randomize their initial evaluation delay.
-			minAssignRoleDelayTicks = BotRng.For(player).Next(0, Info.ScanTick);
+			minAssignRoleDelayTicks = BotRng.For(player, nameof(LoadCargoBotModuleAS)).Next(0, Info.ScanTick);
 		}
 
 		protected override void TraitDisabled(Actor self)
@@ -189,7 +189,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (tcs.Count == 0)
 				return;
 
-			var tc = tcs.Random(BotRng.For(player));
+			var tc = tcs.Random(BotRng.For(player, nameof(LoadCargoBotModuleAS)));
 			var cargo = tc.Trait;
 			var transport = tc.Actor;
 			var spaceTaken = 0;
