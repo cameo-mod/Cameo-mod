@@ -164,14 +164,16 @@ def run_supervised(
 		raise ValueError("watchdog bounds must be positive")
 	if not 0 < private_stop_bytes < PRIVATE_HARD_BYTES:
 		raise ValueError("private stop must be strictly below the 8 GiB hard ceiling")
-	if free_physical_bytes() < free_ram_floor_bytes:
-		raise RuntimeError("free-RAM admission floor not met; no game process started")
 
 	executable = pathlib.Path(executable).resolve()
 	cwd = pathlib.Path(cwd).resolve()
 	stdout_path = pathlib.Path(stdout_path).resolve()
 	progress_log = pathlib.Path(progress_log).resolve()
 	server_log_path = pathlib.Path(server_log_path).resolve()
+	if progress_log.exists() or server_log_path.exists():
+		raise FileExistsError("progress and server logs must be fresh paths for this game")
+	if free_physical_bytes() < free_ram_floor_bytes:
+		raise RuntimeError("free-RAM admission floor not met; no game process started")
 	stdout_path.parent.mkdir(parents=True, exist_ok=True)
 	output = stdout_path.open("xb")
 	env = os.environ.copy()
@@ -185,11 +187,35 @@ def run_supervised(
 	seed_line: str | None = None
 	world_tick: int | None = None
 	actor_count: int | None = None
-	log_offset = server_log_path.stat().st_size if server_log_path.exists() else 0
+	log_offset = 0
 	log_carry = b""
 	status = "PROCESS_DIED"
 	cleaned = True
 	process: subprocess.Popen[Any] | None = None
+
+	def read_log_markers(final: bool = False) -> None:
+		nonlocal log_offset, log_carry, seed_line, world_tick, actor_count
+		if not server_log_path.is_file():
+			return
+		with server_log_path.open("rb") as stream:
+			stream.seek(log_offset)
+			chunk = stream.read()
+			log_offset = stream.tell()
+		pending = log_carry + chunk
+		parts = pending.split(b"\n")
+		lines = parts[:-1]
+		log_carry = b"" if pending.endswith(b"\n") else parts[-1]
+		if final and log_carry:
+			lines.append(log_carry)
+			log_carry = b""
+		for raw_line in lines:
+			line = raw_line.decode("utf-8", "replace").strip()
+			if line == f"CAMEO DEV SEED pinned - RandomSeed={seed} (parity harness)":
+				seed_line = line
+			match = re.search(r"AB_CAMPAIGN_ACTOR_SAMPLE tick=(\d+) actor_count=(\d+)", line)
+			if match:
+				world_tick, actor_count = int(match.group(1)), int(match.group(2))
+
 	try:
 		process = subprocess.Popen([str(executable), *arguments], cwd=cwd, env=env,
 			stdout=output, stderr=subprocess.STDOUT,
@@ -197,25 +223,13 @@ def run_supervised(
 		deadline = start_mono + wall_timeout_seconds
 		while process.poll() is None:
 			now = time.monotonic()
-			private = process_private_bytes(process.pid)
-			available = free_physical_bytes()
-			if server_log_path.is_file():
-				with server_log_path.open("rb") as stream:
-					stream.seek(log_offset)
-					chunk = stream.read()
-					log_offset = stream.tell()
-				pending = log_carry + chunk
-				lines = pending.split(b"\n")
-				log_carry = lines.pop() if lines and not pending.endswith(b"\n") else b""
-				if pending.endswith(b"\n"):
-					lines = pending.split(b"\n")[:-1]
-				for raw_line in lines:
-					line = raw_line.decode("utf-8", "replace").strip()
-					if line == f"CAMEO DEV SEED pinned - RandomSeed={seed} (parity harness)":
-						seed_line = line
-					match = re.search(r"AB_CAMPAIGN_ACTOR_SAMPLE tick=(\d+) actor_count=(\d+)", line)
-					if match:
-						world_tick, actor_count = int(match.group(1)), int(match.group(2))
+			try:
+				private = process_private_bytes(process.pid)
+				available = free_physical_bytes()
+			except OSError:
+				status = "MONITOR_ERROR"
+				break
+			read_log_markers()
 			samples.append(ProcessSample(_utc_now(), private, available, world_tick, actor_count))
 			peak = max(peak, private)
 			if private >= PRIVATE_HARD_BYTES:
@@ -242,6 +256,7 @@ def run_supervised(
 				break
 			time.sleep(min(sample_interval_seconds, max(0.0, deadline - now)))
 
+		read_log_markers(final=True)
 		if process.poll() is None:
 			cleaned = _stop_owned_process(process)
 		elif status == "PROCESS_DIED":
@@ -527,4 +542,4 @@ def write_immutable_receipt(path: pathlib.Path, receipt: dict[str, Any]) -> str:
 			temp.unlink()
 		except FileNotFoundError:
 			pass
-	return __import__("hashlib").sha256(data).hexdigest()
+	return hashlib.sha256(data).hexdigest()

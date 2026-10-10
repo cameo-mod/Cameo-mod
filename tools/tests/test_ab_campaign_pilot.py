@@ -138,6 +138,27 @@ class PilotPlanTests(unittest.TestCase):
   self.assertFalse(schema["additionalProperties"])
   self.assertIn("resolved_seats",schema["required"])
 
+ def test_campaign_runner_refuses_stale_progress_or_server_logs_before_admission(self):
+  with tempfile.TemporaryDirectory() as temp:
+   root=pathlib.Path(temp);(root/"old.log").write_text("stale",encoding="utf-8")
+   with self.assertRaisesRegex(FileExistsError,"fresh paths"):
+    runner.run_supervised(root/"OpenRA.exe",[],cwd=root,stdout_path=root/"stdout.log",seed=7,
+     progress_log=root/"old.log",server_log_path=root/"server.log")
+
+ def test_campaign_runner_checks_seed_pin_even_when_child_exits_before_first_sample(self):
+  import sys
+  from unittest.mock import patch
+  with tempfile.TemporaryDirectory() as temp:
+   root=pathlib.Path(temp);server=root/"server.log";progress=root/"progress.log"
+   script="import os,pathlib,sys; pathlib.Path(sys.argv[1]).write_text('CAMEO DEV SEED pinned - RandomSeed='+os.environ['CAMEO_DEV_SEED']+' (parity harness)\\n'); pathlib.Path(sys.argv[2]).write_text('tick')"
+   with patch.object(runner,"free_physical_bytes",return_value=16*1024**3), patch.object(runner,"process_private_bytes",return_value=0):
+    result=runner.run_supervised(pathlib.Path(sys.executable),["-c",script,str(server),str(progress)],cwd=root,
+     stdout_path=root/"stdout.log",seed=7,progress_log=progress,server_log_path=server,
+     sample_interval_seconds=.05,wall_timeout_seconds=3,stall_timeout_seconds=3)
+   self.assertEqual("NATURAL_EXIT",result.status)
+   self.assertEqual("CAMEO DEV SEED pinned - RandomSeed=7 (parity harness)",result.seed_pin_line)
+   self.assertEqual(64,len(result.seed_server_log_sha256))
+
  def test_campaign_runner_requires_proven_cap_and_no_winner(self):
   receipt=campaign_receipt();receipt.update({"end_class":"CAP","end_reason":"WORLD_TICK_CAP",
    "world_tick":45000,"cap":{"world_tick_cap":45000,"marker_observed":True,"marker_tick":45000}})
