@@ -1,6 +1,8 @@
 ## Resume
 
-Step 1 schema published to Luna DevOps at `765a39b00f8c6213deae5ba5f92e575b7bf3dac7`; Step 2 map inventory complete. Step 3: update tooling to exact `origin/master@964cdb630b1514e1c1a0baed55cbdbc427d5fc11`, implement receipt-producing resume-safe runner with 6.5 GiB per-game monitor, actor samples, 45k cap, concurrency policy/slot lease, wall/stall bounds and PID-scoped cleanup; fixture/negative tests and no-launch dry run. No launches until dry run and exact-baseline A5 parity pass and required B3 landing. Engine acceptance/symmetric spawn proof and executable manifest remain gates.
+Next: rebase `codex/ab-campaign-runner-final` onto exact current `origin/master@964cdb630b1514e1c1a0baed55cbdbc427d5fc11`, rerun the two focused campaign test files (expected single known stale SWITCH_ORDER catalog failure), then ask the acting lead for the serial A5 slot and current approval status. Current local HEAD before rebase: `ca590543108a6f90349a59acca711dc9678a10a0`; its merge base is stale `700bb16483f6d92664153e98d6f2560c312acaab`. No campaign or parity launch, boot, push, or integration has occurred from this worktree.
+
+Implemented in the runner branch: strict receipt shape/cross-field validation and atomic immutable JSON write; per-process private-byte and system-free-RAM monitor with a 6.5 GiB stop, 8 GiB hard ceiling, tick/wall/stall observation, exact in-process seed pin, actor sampling, and PID-scoped child cleanup. The module does not yet integrate a queue, generate final receipts from match records, or start campaign jobs. Required gates remain approval, final manifest/hash lock, engine map acceptance/spawn symmetry, A5 exact-pin parity, reserved serial slot, and integrated end-to-end receipt/stop/resume proof.
 
 ## Progress
 
@@ -14,4 +16,12 @@ Step 1 schema published to Luna DevOps at `765a39b00f8c6213deae5ba5f92e575b7bf3d
 
 ### Baseline
 
-Pinned for all remaining work: `origin/master@964cdb630b1514e1c1a0baed55cbdbc427d5fc11` (includes `a55954c18` and replay identity support). B3 is not yet an ancestor of this master pin; no campaign game may launch until the required B3 landing and A5 parity gates are verified on the exact baseline.
+Pinned for all remaining work: `origin/master@964cdb630b1514e1c1a0baed55cbdbc427d5fc11` (includes the authorized INTEG-LEARN squash, B3 park fix, and replay identity support). Current runner branch still has stale merge-base `700bb164`; rebase it before any test/manifest pin claim. Do not launch campaign games until approval, final manifest, map gate, A5 parity and serial reservation are verified on the exact baseline.
+
+## Runner receipt validation update
+
+The strict JSON schema from the manager worktree was copied into `tools/ai/ab_campaign_receipt.schema.json`. `campaign_runner.validate_receipt` now checks exact keys, hashes, path safety, team/seat identity consistency, outcome/winner consistency, seed pin equality, timeline ordering, memory-stop classification, artifact hash/missing-reason consistency, and CAP proof. Three focused receipt tests pass; no game or boot process was started. The schema file was not present in the latest fetched campaign branch tip, so it is now included in this runner branch and should be reviewed with the runner changes.
+
+Known focused-suite exception: `test_switch_order_covers_the_frozen_sixty_group_catalog` fails because `SWITCH_ORDER_2026-10-11.md` pins `700bb164` and lacks current `BP_squad_desire`; notified the SWITCH_ORDER owner. Do not delete or weaken that check.
+
+Current verification on pre-rebase tree: `py_compile` passed; receipt-focused tests 4/4 passed; campaign planner/analyzer plus pilot tests 25/26 passed, with only the stale SWITCH_ORDER catalog failure above; `git diff --check` passed. No full `tools/tests` run was started.
