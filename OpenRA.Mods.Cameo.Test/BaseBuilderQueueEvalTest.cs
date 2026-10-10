@@ -14,6 +14,7 @@ using System.Collections.Immutable;
 using NUnit.Framework;
 using OpenRA.Mods.CA;
 using OpenRA.Mods.CA.Traits;
+using OpenRA.Mods.Common.Traits;
 
 namespace OpenRA.Mods.Cameo.Test
 {
@@ -331,6 +332,196 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(BaseBuilderQueueEvalCA.DockHasExit(dock, walled, _ => true), Is.False);
 			Assert.That(BaseBuilderQueueEvalCA.DockHasExit(dock, open, n => n != new CPos(6, 5)), Is.True);
 			Assert.That(BaseBuilderQueueEvalCA.DockHasExit(dock, walled, _ => false), Is.False);
+		}
+
+		// FIX-RA-REFINERY: real refinery shapes — the '=' bib is passable and must not wall the dock.
+		// Shapes follow the resolved yaml footprints (and AUDIT_2026-10-09_all_faction_docks.md for
+		// families whose actor defs live outside this tree); dock = CellContaining(CenterOfCell(topLeft)
+		// + CenterOffset(world) + DockOffset) is map-grid dependent, so each family is covered two ways:
+		// every passable footprint cell keeps an exit, and audit-verified or exactly-projected dock
+		// cells keep theirs. The ^RAPROC enclosure (all nine scan cells inside the full footprint) was
+		// the confirmed defect; WC2/OP2's inherited zero-offset docks shared it under Tiles semantics.
+
+		static Dictionary<CVec, FootprintCellType> Shape(params string[] rows)
+		{
+			var cells = new Dictionary<CVec, FootprintCellType>();
+			for (var y = 0; y < rows.Length; y++)
+				for (var x = 0; x < rows[y].Length; x++)
+					cells[new CVec(x, y)] = (FootprintCellType)rows[y][x];
+
+			return cells;
+		}
+
+		// Every passable cell ('='/ '+') of every resolved refinery shape must keep an on-map exit at an
+		// ordinary interior site — a dock landing on any bib cell is reachable. Under the old
+		// BuildingInfo.Tiles footprint these cells were walls, which enclosed RAPROC outright.
+		[TestCase("RAPROC_RA1_Allies_Soviets_Japan", "_X_", "xxx", "X==", "===")]
+		[TestCase("TDPROC_TD_GDI_Nod_TS_Forgotten_Cabal", "_x_", "xxx", "===", "===")]
+		[TestCase("TS_GDI_Nod", "xxx_", "xxx=", "_===")]
+		[TestCase("D2K_five_factions", "=xx", "xx=", "===")]
+		[TestCase("SC_Terran_Protoss_Zerg", "_x_", "xxx", "===")]
+		[TestCase("SC_Zerg_Terran_Protoss_townhall", "xxx", "xxx", "===")]
+		[TestCase("WC2_Humans_Orcs_lumber", "xxx", "xxx", "===")]
+		[TestCase("RA2_Allies_Soviets", "xxx=", "xxx=", "x+==")]
+		[TestCase("RA2Mod_Consortium", "xxx=", "xxxx", "=xx=")]
+		[TestCase("OP2_Eden_Plymouth_smelter", "xxx", "x==", "===")]
+		public void EveryPassableCellOfRealRefineryShapeKeepsAnExit(string name, params string[] rows)
+		{
+			var shape = Shape(rows);
+			var blocking = new HashSet<CPos>(BaseBuilderQueueEvalCA.DockBlockingFootprint(shape, CPos.Zero));
+			foreach (var kv in shape)
+			{
+				if (kv.Value != FootprintCellType.OccupiedPassable
+					&& kv.Value != FootprintCellType.OccupiedPassableTransitOnly)
+					continue;
+
+				var dock = new CPos(kv.Key.X, kv.Key.Y);
+				Assert.That(BaseBuilderQueueEvalCA.DockHasExit(dock, blocking, _ => true),
+					Is.True, $"{name}: passable cell ({dock.X},{dock.Y}) must keep an on-map exit");
+			}
+		}
+
+		// Dock cells confirmed by the audit (RAPROC/TDPROC) or by exact integer projection:
+		// zero-offset inherited ^Refinery docks (WC2 lumber, OP2 smelters) land on centre (1,1) of a
+		// 3x3 — WC2's is even an impassable 'x' cell, which the dock check must tolerate; RA2 Allies
+		// (DockOffset 1086,1086, no LocalCenterOffset) projects to (3,1); D2K's (1c5,0c5) projects
+		// outside the footprint at (3,2).
+		[TestCase("RAPROC", new[] { "_X_", "xxx", "X==", "===" }, 1, 2)]
+		[TestCase("TDPROC", new[] { "_x_", "xxx", "===", "===" }, 0, 2)]
+		[TestCase("WC2_OP2_inherited_zero_offset", new[] { "xxx", "xxx", "===" }, 1, 1)]
+		[TestCase("OP2_smelter_zero_offset", new[] { "xxx", "x==", "===" }, 1, 1)]
+		[TestCase("RA2_Allies", new[] { "xxx=", "xxx=", "x+==" }, 3, 1)]
+		[TestCase("D2K_off_footprint_dock", new[] { "=xx", "xx=", "===" }, 3, 2)]
+		public void RealRefineryDockCellKeepsAnExit(string name, string[] rows, int dockX, int dockY)
+		{
+			var blocking = new HashSet<CPos>(BaseBuilderQueueEvalCA.DockBlockingFootprint(Shape(rows), CPos.Zero));
+			Assert.That(BaseBuilderQueueEvalCA.DockHasExit(new CPos(dockX, dockY), blocking, _ => true),
+				Is.True, $"{name}: dock ({dockX},{dockY}) must keep an on-map exit outside the impassable footprint");
+		}
+
+		[Test]
+		public void RaRefineryDockCellsThatWereWallsArePassable()
+		{
+			// ^RAPROC bib cells that BuildingInfo.Tiles reported as footprint walls.
+			var blocking = new HashSet<CPos>(BaseBuilderQueueEvalCA.DockBlockingFootprint(
+				Shape("_X_", "xxx", "X==", "==="), CPos.Zero));
+
+			Assert.That(blocking, Does.Not.Contain(new CPos(1, 2)), "the dock's own bib cell is passable");
+			Assert.That(blocking, Does.Not.Contain(new CPos(2, 3)), "'=' bib cells are not walls");
+			Assert.That(blocking, Does.Contain(new CPos(1, 1)), "'x' cells stay blocking");
+			Assert.That(blocking, Does.Contain(new CPos(0, 2)), "'X' cells stay blocking");
+		}
+
+		[Test]
+		public void ImpassableCellsStillWallTheDock()
+		{
+			// x/X stay blocking — a dock ringed by real occupied cells has no exit.
+			var blocking = new HashSet<CPos>(BaseBuilderQueueEvalCA.DockBlockingFootprint(
+				Shape("xxx", "x=x", "xxx"), CPos.Zero));
+
+			Assert.That(BaseBuilderQueueEvalCA.DockHasExit(new CPos(1, 1), blocking, _ => true), Is.False);
+
+			// '+' transit-only lanes are the dock's own egress path — they don't wall it either.
+			var transit = new HashSet<CPos>(BaseBuilderQueueEvalCA.DockBlockingFootprint(
+				Shape("+++", "+x+", "+++"), CPos.Zero));
+			Assert.That(BaseBuilderQueueEvalCA.DockHasExit(new CPos(1, 1), transit, _ => true), Is.True);
+		}
+
+		[Test]
+		public void LawRefineryNoSiteDefersInsteadOfFailing()
+		{
+			// Deferral is law+refinery only — every other class keeps the ordinary failure path.
+			Assert.That(BaseBuilderQueueEvalCA.RefineryDefers(true, BuildingType.Refinery), Is.True);
+			Assert.That(BaseBuilderQueueEvalCA.RefineryDefers(false, BuildingType.Refinery), Is.False);
+			Assert.That(BaseBuilderQueueEvalCA.RefineryDefers(true, BuildingType.Building), Is.False);
+			Assert.That(BaseBuilderQueueEvalCA.RefineryDefers(true, BuildingType.Defense), Is.False);
+			Assert.That(BaseBuilderQueueEvalCA.RefineryDefers(true, BuildingType.Fragile), Is.False);
+			Assert.That(BaseBuilderQueueEvalCA.RefineryDefers(true, BuildingType.BaseCrawl), Is.False);
+		}
+
+		// FIX-RA-REFINERY R1: the saturated-placement latch — the recovery arm covers every case
+		// the expansion nudge can't act on, probes on a per-episode timer, and releases only on a
+		// real world change against the baseline captured at saturation.
+
+		[Test]
+		public void LatchRecoveryCoversEveryUnNudgeableCase()
+		{
+			Assert.Multiple(() =>
+			{
+				Assert.That(BaseBuilderQueueEvalCA.LatchRecoveryApplies(0, true, false), Is.True, "no expansion modules");
+				Assert.That(BaseBuilderQueueEvalCA.LatchRecoveryApplies(0, false, false), Is.True, "no modules, no centre");
+				Assert.That(BaseBuilderQueueEvalCA.LatchRecoveryApplies(2, false, false), Is.True, "null failing centre");
+				Assert.That(BaseBuilderQueueEvalCA.LatchRecoveryApplies(2, true, true), Is.True, "relocation hold live");
+				Assert.That(BaseBuilderQueueEvalCA.LatchRecoveryApplies(2, false, true), Is.True, "hold + null centre");
+				Assert.That(BaseBuilderQueueEvalCA.LatchRecoveryApplies(2, true, false), Is.False,
+					"modules + centre + no hold = the nudge arm's own case");
+			});
+		}
+
+		[Test]
+		public void LatchProbeReleasesOnlyOnWorldChange()
+		{
+			// Snapshot at saturation: 10 buildings, 2 providers.
+			Assert.Multiple(() =>
+			{
+				Assert.That(BaseBuilderQueueEvalCA.LatchProbeReleases(9, 10, 2, 2), Is.True, "a building was lost — room freed");
+				Assert.That(BaseBuilderQueueEvalCA.LatchProbeReleases(10, 10, 3, 2), Is.True, "a provider appeared — new build area");
+				Assert.That(BaseBuilderQueueEvalCA.LatchProbeReleases(9, 10, 3, 2), Is.True, "either change suffices");
+				Assert.That(BaseBuilderQueueEvalCA.LatchProbeReleases(10, 10, 2, 2), Is.False, "unchanged world holds the latch");
+				Assert.That(BaseBuilderQueueEvalCA.LatchProbeReleases(11, 10, 2, 2), Is.False, "more buildings don't free space");
+				Assert.That(BaseBuilderQueueEvalCA.LatchProbeReleases(10, 10, 1, 2), Is.False, "fewer providers don't help");
+			});
+		}
+
+		[Test]
+		public void LatchProbeTimerTicksDownAndRearms()
+		{
+			// delay 3: three ticks per probe window, rearmed on expiry.
+			var timer = 3;
+			Assert.That(BaseBuilderQueueEvalCA.LatchProbeDue(ref timer, 3), Is.False);
+			Assert.That(timer, Is.EqualTo(2));
+			Assert.That(BaseBuilderQueueEvalCA.LatchProbeDue(ref timer, 3), Is.False);
+			Assert.That(timer, Is.EqualTo(1));
+			Assert.That(BaseBuilderQueueEvalCA.LatchProbeDue(ref timer, 3), Is.True);
+			Assert.That(timer, Is.EqualTo(3), "expiry re-arms a full delay");
+		}
+
+		[Test]
+		public void LatchRecoveryEpisodeReleasesOnlyAfterFreshProbe()
+		{
+			// Control-flow regression mirroring Tick's latch: an un-nudgeable saturation (null
+			// failing centre) holds across static probes, releases when a provider appears, and
+			// the NEXT episode starts on a fresh snapshot+timer — never on the stale one that
+			// previously let a water-check-cached baseline release or starve the latch.
+			const int delay = 2;
+			var failRetryTicks = delay;         // reset at saturation
+			var latchedBuildings = 10;          // snapshot at saturation
+			var latchedProviders = 2;
+
+			var released = false;
+			for (var i = 0; i < 20 && !released; i++)
+			{
+				if (!BaseBuilderQueueEvalCA.LatchProbeDue(ref failRetryTicks, delay))
+					continue;
+
+				released = BaseBuilderQueueEvalCA.LatchProbeReleases(10, latchedBuildings, 2, latchedProviders);
+			}
+
+			Assert.That(released, Is.False, "static world never releases the latch");
+
+			// A new base provider arrives — the next due probe releases.
+			for (var i = 0; i < delay && !BaseBuilderQueueEvalCA.LatchProbeDue(ref failRetryTicks, delay); i++) { }
+			Assert.That(BaseBuilderQueueEvalCA.LatchProbeReleases(10, latchedBuildings, 3, latchedProviders), Is.True);
+
+			// Second episode: fresh snapshot (12 buildings, 1 provider) and a fresh timer —
+			// the prior episode's countdown must not bleed through.
+			failRetryTicks = delay;
+			latchedBuildings = 12;
+			latchedProviders = 1;
+			Assert.That(BaseBuilderQueueEvalCA.LatchProbeDue(ref failRetryTicks, delay), Is.False);
+			Assert.That(BaseBuilderQueueEvalCA.LatchProbeDue(ref failRetryTicks, delay), Is.True);
+			Assert.That(BaseBuilderQueueEvalCA.LatchProbeReleases(12, latchedBuildings, 1, latchedProviders), Is.False,
+				"the new baseline holds until the world actually changes again");
 		}
 
 		// FirstByOrder / FirstRequestedRefinery (F-CBL1/F4)

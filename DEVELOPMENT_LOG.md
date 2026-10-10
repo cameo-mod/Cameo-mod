@@ -20119,3 +20119,31 @@ runtime trade-prior consumer clamps raw serialized ratios to 50–150). A regist
 preserve those distinctions, declare future rows explicitly unscheduled, and reject
 identity-bearing scope keys. This task adds that contract and a focused validator rather
 than duplicating or changing the existing fitter policies.
+
+## 2026-10-10 - NOD-FIX-ONLY-CONTRAST candidate (devin/nod-fix-only-contrast)
+
+* Disposable forensic candidate on exact base a9349d015 transplanting ONLY the
+  semantic patches of 368f45541 (passable-bib dock access, refinery deferral,
+  bounded diagnostics) + c76283c0b (latch baseline capture, dedicated latched*
+  fields, per-episode timer) into the allowlisted paths:
+  BaseBuilderQueueEvalCA.cs, BaseBuilderQueueManagerCA.cs, BaseBuilderQueueEvalTest.cs.
+* Portability proven (was UNKNOWN): git apply --3way resolved most hunks; two
+  conflict regions resolved by hand against both original commits —
+  (a) eval tail: kept only RefineryDefers + LatchRecoveryApplies/LatchProbeDue/
+  LatchProbeReleases; the ECON-A helper tail in the merge's "theirs" side is
+  unrelated a934->3d994 drift and was dropped; (b) manager type= line: kept
+  both lines (patch appends refineryDefers after ClassifyPlacement); (c) added
+  `using OpenRA.Mods.Common.Traits` — required by the patch's FootprintCellType
+  signature, missing on the a934-era file.
+* Purity: `git diff a934` touches only the three allowlisted files + this
+  record; mods/cameo/ai/ai.yaml SHA256 9192d963501e... byte-identical to a934;
+  every changed line reviewed = patch semantics only.
+* Gates: engine pin 0a3f77dbe identical to base comparison; Release build
+  0/0; full suite 1238/1238 (incl. ported refinery-shape/latch regressions).
+* Binary digests (SHA256): OpenRA.Game.dll 5a1a17777697..., OpenRA.Mods.Common.dll
+  89e7b5c032c0..., OpenRA.Mods.CA.dll e66eeaa0806f..., OpenRA.Mods.Cameo.dll
+  cdba6a369217..., OpenRA.Mods.Fransbot.dll 9d123dde0bc2..., OpenRA.Mods.Cameo.Test.dll
+  975ccad7b569....
+* NO runtime launch — the paired a934-vs-candidate run stays a separate
+  diagnostic pending the health logger, accepted observer seam, cost gate,
+  and an explicit Coordinator serial reservation.
