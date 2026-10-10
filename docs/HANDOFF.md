@@ -5524,3 +5524,9 @@ Next: exact-SHA VP review; cost/coverage/adoption remain gated. No launches. Ins
 ### Sol — M13 helper R1 correction, 2026-10-10
 - C:/cameo-wt/sol-m13-liveness, codex/m13-liveness: Unsupported survives failed-intent callbacks; focused30/30.
 - Next: exact-tip helper re-review, then explicitly grounded claim/dispatch integration. Helpers remain unwired; no launches.
+
+### Sol M13 claim episode checkpoint (2026-10-10)
+- C:/cameo-wt/sol-m13-claim-episodes, codex/m13-claim-episodes; docs/design/M13_CLAIM_EPISODES.md.
+- Record-only Engineer admission + coalition transport; legacy publisher UNKNOWN. Separate authorized BotSituation plumbing next.
+- VP exact-tip review before runtime adoption; no launches, master remains Integrator-owned.
+

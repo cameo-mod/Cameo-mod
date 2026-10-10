@@ -103,11 +103,17 @@ namespace OpenRA.Mods.CA.Traits
 		/// </summary>
 		public readonly string ParticipantId;
 
+		/// <summary>Explicit owner-produced claim episodes; default for unsupported/legacy publishers.
+		/// SnapshotTick, urgency and location cannot supply admission provenance.</summary>
+		public readonly BotClaimEpisode DefenceEpisode;
+		public readonly BotClaimEpisode ExpansionAssistEpisode;
+
 		public TeamBroadcast(int snapshotTick, int ownArmyValue, int urgencyLevel, int directorTension,
 			DirectorPhase directorPhase, Player mainTarget, bool requestsDefence, WPos defendPosition,
 			int clientIndex = 0, WPos expansionClaim = default, WPos armyCentroid = default,
 			WPos expansionAssist = default, WPos spawnPoint = default, IReadOnlyList<WPos> captureClaims = null,
-			string participantId = null)
+			string participantId = null, BotClaimEpisode defenceEpisode = default,
+			BotClaimEpisode expansionAssistEpisode = default)
 		{
 			SnapshotTick = snapshotTick;
 			OwnArmyValue = ownArmyValue;
@@ -124,6 +130,9 @@ namespace OpenRA.Mods.CA.Traits
 			SpawnPoint = spawnPoint;
 			CaptureClaims = captureClaims ?? Array.Empty<WPos>();
 			ParticipantId = participantId;
+			DefenceEpisode = requestsDefence && defenceEpisode.BelongsTo(participantId) ? defenceEpisode : default;
+			ExpansionAssistEpisode = expansionAssist != WPos.Zero && expansionAssistEpisode.BelongsTo(participantId)
+				? expansionAssistEpisode : default;
 		}
 
 		/// <summary>What an absent, disabled or never-snapshotted provider publishes.</summary>

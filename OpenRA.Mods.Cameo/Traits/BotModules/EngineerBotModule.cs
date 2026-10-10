@@ -258,6 +258,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		// The one escorted capture in progress: the mission waits (no attempt) until the escort holds the target area.
 		sealed class EscortPlan
 		{
+			public BotClaimEpisode Episode;
 			public Actor Target;
 			public string MissionId;
 			public int SinceTick;
@@ -267,6 +268,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		}
 
 		EscortPlan escort;
+		readonly BotClaimEpisodeCounter escortEpisodes;
 
 		// The squad manager serves a protection request only at or above its PrepositionMinThreatValue: a request valued at
 		// a few riflemen (the first flag-on match published 440-1000) is dropped in silence. Read the bar from the squad
@@ -335,6 +337,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		{
 			world = self.World;
 			player = self.Owner;
+			escortEpisodes = new BotClaimEpisodeCounter(player.InternalName, nameof(EngineerBotModule),
+				self.Info.TraitInfos<EngineerBotModuleInfo>().ToList().IndexOf(info));
 			maximumCaptureTargetOptions = Math.Max(1, info.MaximumCaptureTargetOptions);
 
 			var shared = self.Info.TraitInfos<CaptureManagerBotModuleCAInfo>().FirstOrDefault();
@@ -1264,6 +1268,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 				escort = new EscortPlan
 				{
+					Episode = escortEpisodes.Admit(),
 					Target = t, MissionId = CaptureMissionId(t.Info.Name, t.ActorID), SinceTick = world.WorldTick, DefenceValue = defence,
 					InitialDefenceValue = defence
 				};
@@ -1317,7 +1322,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		IReadOnlyList<BotProtectionRequest> IBotProtectionRequestProvider.ProtectionRequests =>
 			escort == null || escort.Target.IsDead || !escort.Target.IsInWorld
 				? []
-				: [new BotProtectionRequest(escort.Target.Location, EscortRequestValue(escort.DefenceValue, EscortRequestFloor()), world.WorldTick + Info.EscortRequestTicks)];
+				: [new BotProtectionRequest(escort.Target.Location, EscortRequestValue(escort.DefenceValue, EscortRequestFloor()), world.WorldTick + Info.EscortRequestTicks, escort.Episode)];
 
 		/// <summary>A target already carrying `max` live capture attempts takes no more (max ≤ 0: no limit).</summary>
 		public static bool TargetFull(int liveAttempts, int max) => max > 0 && liveAttempts >= max;
@@ -1458,6 +1463,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		void IGameSaveTraitData.ResolveTraitData(Actor self, MiniYaml data)
 		{
+			// Existing saves contain no escort admission history. Identity remains UNKNOWN after load;
+			// do not change legacy save fields, orders or restore behavior to manufacture provenance.
+			escortEpisodes.Invalidate();
+			if (escort != null)
+				escort.Episode = default;
 			if (self.World.IsReplay)
 				return;
 
