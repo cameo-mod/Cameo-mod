@@ -10,7 +10,7 @@ the fights it allowed actually scored. `detail` carries the predicted numbers
 field landed still count, just without a predicted trade.
 
 Reads `cameo-ai-missions.jsonl` + `cameo-ai-engagements.jsonl` of one or more match dirs
-(a batch support dir, its `Logs/`, or a jsonl file). Skirmishes stay out of taken_trade.
+(a batch support dir, its `Logs/`, or a jsonl file). `posture` rows and skirmishes stay out of taken_trade.
 
 Per bot x personality:
   veto_atk / veto_ret   DENIED cards by reason (below_threshold / cant_outrun)
@@ -60,9 +60,14 @@ def veto_records(mission_records: list[dict]) -> list[dict]:
 
 def summarise(mission_records: list[dict], engagement_records: list[dict]) -> dict:
     """Per (bot, personality): veto counts, counterfactual trade, taken trade, gap."""
+    # Only `engagement` records count as fights taken: the same jsonl carries `posture`
+    # snapshots (every 250 ticks, no score/personality) — unfiltered they inflate taken_n
+    # ~2.2x and a posture row seen first pins personality_of[...] to "" via setdefault.
+    fights = [r for r in engagement_records if r.get("record") == "engagement"]
+
     # (game_uid, player) -> personality, from the engagement stream that carries it.
     personality_of = {}
-    for r in engagement_records:
+    for r in fights:
         personality_of.setdefault((r.get("game_uid"), r.get("player")), r.get("personality") or "")
 
     groups = collections.defaultdict(list)
@@ -71,7 +76,7 @@ def summarise(mission_records: list[dict], engagement_records: list[dict]) -> di
         groups[key].append(r)
 
     taken = collections.defaultdict(list)
-    for r in engagement_records:
+    for r in fights:
         if r.get("skirmish"):
             continue
         key = (r.get("bot_type") or "", r.get("personality") or "")
