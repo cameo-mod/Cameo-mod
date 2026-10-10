@@ -20998,3 +20998,8 @@ land ticks later or never) all produce identical disappearances. Corrected on
   sanctioned fallback. Regressions exercise the production predicate: requirement-flip
   (no install -> `Removed`), true install -> `Placed`, unknown-type and still-accepting
   negatives.
+
+## 2026-10-10 Sol MCV observation checkpoint
+Read-only separate MCV capture/provider and diagnostic consumer on codex/mcv-health-observation, base7ca7e9159; no YAML mount/engine/BaseBuilder edits.
+Focused9/9, Python8/8 actual canonical C# fixture UNKNOWN21, fullRelease1412/1412 PASS. Missing order/hold/transform hooks explicitly UNKNOWN.
+Next: exact-SHA VP review; cost/coverage/adoption remain gated. No launches. Insurance telemetry precedes M13 wiring per lead.
