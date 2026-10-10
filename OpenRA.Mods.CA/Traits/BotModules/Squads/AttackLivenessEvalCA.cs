@@ -76,8 +76,11 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			if (waveId == 0 || waveId != pendingWave)
 				return false;
 			pendingWave = 0;
-			Phase = lastTick >= DeadlineTick - dispatchLead ? AttackLivenessPhaseCA.DispatchDue
-				: AttackLivenessPhaseCA.EligibleWaiting;
+			// Resolving an old intent supplies no new eligibility evidence.
+			// Only Observe with complete evidence may leave Unsupported.
+			if (Phase != AttackLivenessPhaseCA.Unsupported)
+				Phase = lastTick >= DeadlineTick - dispatchLead ? AttackLivenessPhaseCA.DispatchDue
+					: AttackLivenessPhaseCA.EligibleWaiting;
 			return true;
 		}
 

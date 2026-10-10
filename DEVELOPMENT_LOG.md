@@ -21004,3 +21004,9 @@ land ticks later or never) all produce identical disappearances. Corrected on
 - Exact externally reviewed manifests bind unchanged, already-armed baseline patches; combination tests remain explicitly non-campaign.
 - Preserve build-order generated specs with conservative restraint classes; no gameplay/default/engine changes.
 - Next: independent tooling review, then squad response/verified-dispatch wiring; no game launches.
+
+### 2026-10-10 — M13 helper R1 correction (Sol)
+- Failed dispatch now clears only the pending intent while preserving Unsupported; complete observation alone restores eligibility.
+- Two regressions cover pre-deadline and due-deadline callbacks, repeated callback, rejected retry and complete recovery without deadline renewal.
+- Focused pure-helper suite30/30 PASS; no runtime wiring, engine pin changes or launches.
+- Next: exact revised-head independent helper re-review; M13 stays incomplete.

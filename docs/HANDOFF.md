@@ -5546,3 +5546,7 @@ Read design/REPLAY_HEALTH_ANALYZER.md before health/campaign work. tools/ai/repl
 - Worktree C:/cameo-wt/sol-m13-liveness, branch codex/m13-liveness; contract docs/design/M13_RESTRAINT_BUDGET.md.
 - Budget tooling only; escort/liveness helpers still unwired. Existing runners requesting all now refuse at the applier.
 - Next: VP exact-tip review and conservative squad integration; causal claim/dispatch evidence must be explicit. No launches.
+
+### Sol — M13 helper R1 correction, 2026-10-10
+- C:/cameo-wt/sol-m13-liveness, codex/m13-liveness: Unsupported survives failed-intent callbacks; focused30/30.
+- Next: exact-tip helper re-review, then explicitly grounded claim/dispatch integration. Helpers remain unwired; no launches.

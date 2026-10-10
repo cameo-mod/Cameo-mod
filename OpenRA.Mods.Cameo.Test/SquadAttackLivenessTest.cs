@@ -85,6 +85,29 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(state.LastVerifiedLaunchTick, Is.EqualTo(7500));
 		}
 
+		[TestCase(7000)]
+		[TestCase(7500)]
+		public void FailedIntentCannotRestoreEligibilityAfterEvidenceBecomesUnsupported(int tick)
+		{
+			var state = new AttackLivenessEvalCA();
+			Eligible(state, 0);
+			Assert.That(state.NoteDispatchIntent(1), Is.True);
+			Eligible(state, tick, complete: false);
+			Assert.That(state.Phase, Is.EqualTo(AttackLivenessPhaseCA.Unsupported));
+			Assert.That(state.NoteDispatchFailed(1), Is.True);
+			Assert.That(state.NoteDispatchFailed(1), Is.False);
+			Assert.That(state.Phase, Is.EqualTo(AttackLivenessPhaseCA.Unsupported));
+			Assert.That(state.NoteDispatchIntent(2), Is.False);
+			Assert.That(state.EligibleSinceTick, Is.Zero);
+			Assert.That(state.DeadlineTick, Is.EqualTo(7500));
+			Assert.That(state.VerifiedLaunchCount, Is.Zero);
+			Eligible(state, tick + 1);
+			Assert.That(state.Phase, Is.EqualTo(tick < 7350
+				? AttackLivenessPhaseCA.EligibleWaiting : AttackLivenessPhaseCA.DispatchDue));
+			Assert.That(state.DeadlineTick, Is.EqualTo(7500));
+			Assert.That(state.NoteDispatchIntent(2), Is.True);
+		}
+
 		[Test]
 		public void PauseAndInvalidConfigurationCannotAdvanceOrCreateZeroFloorGuarantee()
 		{
