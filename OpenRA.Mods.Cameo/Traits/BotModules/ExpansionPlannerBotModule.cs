@@ -601,6 +601,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (!LawActive || (modelVersion >= 0 && modelVersion != coverageVersion))
 				return false;
 
+			// The table refreshes an existing owner's hold without consulting its taken probe.
+			// Revalidate the provider park/pending/served state on renewal as well as admission.
+			if (set.Any(a => AnchorTakenForOwner(a, tick, owner)))
+				return false;
+
 			var ok = anchorReservations.TryReserveAll(set, owner, tick, untilTick, a => AnchorTakenForOwner(a, tick, owner));
 			Log.Write("debug", $"AI ({player.ClientIndex}): REPAIR-B3 reserve {set.Count} anchors for site {site} v{modelVersion}: {(ok ? "committed" : "refused")} at tick {tick}");
 			return ok;
