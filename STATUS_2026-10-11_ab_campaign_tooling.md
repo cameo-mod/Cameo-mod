@@ -68,6 +68,11 @@ The immutable receipt writer (`campaign_runner.validate_receipt`) and the pilot 
 - Added `validate_receipt_map_seats`: it reads the hash-verified generated `map.yaml`, rejects duplicate or unexpected Multi player references, checks each planned home/bot/faction/Playable/HomeLocation tuple against its actual `PlayerReference` block, bounds spawn indexes, and derives expected coordinates from the pinned map's spawn actors using the batch writer's side-split routine. Natural match rows are also required to have exactly the receipt's homes and seat outcomes, preventing contradictory winner evidence from being analyzed.
 - `py -3 -m py_compile tools/ai/ab_campaign_pilot.py` and `git diff --check` pass. No tests or launches were run. The adapter still needs focused positive/negative fixtures and an independent exact-SHA review; A5, final manifest, engine map acceptance/spawn symmetry, and authorization gates remain open.
 
+## 2026-10-10 MiniYaml parsing correction
+
+- Replaced both generated-map `PlayerReference` regex block readers with the shared `tools/audit/miniyaml.py` parser, retaining duplicate-reference rejection and the same bot/faction/home/playable checks. This follows the repository rule against hand-parsing YAML.
+- `py -3 -m py_compile tools/ai/ab_campaign_pilot.py` and `git diff --check` pass. Focused tests were not rerun; behavioral fixture coverage and independent exact-SHA review remain open. No launch, manifest refresh, or campaign gate changed.
+
 ## 2026-10-11 A5 memory-budget update
 
 - Acting-lead report adds a single 1v1 diagnostic at ~8.29 GiB private / WT~3050 / ~65 seconds, on baseline 964 plus an unspecified logger optimization, with zero match/replay. No exact run, logger, or kill-path-fix SHA was supplied. This is censored resource evidence only; root cause and parity remain UNKNOWN.

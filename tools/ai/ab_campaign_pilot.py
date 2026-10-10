@@ -30,6 +30,22 @@ SETUPS = [
  ("3v3_winter_asg",3,"winters_end_rich",("ra1_allies","ra1_soviets","td_gdi")),("3v3_winter_sgn",3,"winters_end_rich",("ra1_soviets","td_gdi","td_nod")),
  ("4v4_sahara",4,"great_sahara_2",("td_gdi","td_nod","ra1_allies","ra1_soviets")),("4v4_ice",4,"ice_cold",("td_gdi","td_nod","ra1_allies","ra1_soviets")),
 ]
+
+def generated_map_player_references(text):
+ """Read generated MiniYaml PlayerReference nodes with the shared parser."""
+ audit_tools=pathlib.Path(__file__).resolve().parents[1]/"audit"
+ audit_path=str(audit_tools)
+ if audit_path not in sys.path: sys.path.insert(0,audit_path)
+ from miniyaml import load_text
+ references={}
+ for node in load_text(text,"<generated map.yaml>"):
+  if not node.key.startswith("PlayerReference@Multi"): continue
+  ref=node.key.split("@",1)[1]
+  if re.fullmatch(r"Multi\d+",ref) is None: continue
+  require(ref not in references,"generated map.yaml has duplicate Multi PlayerReference")
+  references[ref]={key:node.get(key) for key in ("Bot","Faction","HomeLocation","Playable")}
+ return references
+
 RAM_FLOOR_BYTES = 6 * 1024**3
 PROCESS_CAP_BYTES = 8 * 1024**3
 ROUND_STAGES = [16,32,48,64]
@@ -376,13 +392,7 @@ def prove_generated_map(job,root,dest):
  batch.write_variant(map_path,dest,matchup,1)
  monitor=install_campaign_monitor(dest,job["required_seats"])
  text=(dest/"map.yaml").read_text(encoding="utf-8")
- blocks={}
- marks=list(re.finditer(r"(?m)^\tPlayerReference@(Multi\d+):[ \t]*$",text))
- for index,match in enumerate(marks):
-  end=marks[index+1].start() if index+1<len(marks) else len(text)
-  block=text[match.end():end]; ref=match.group(1)
-  values={k:(re.search(rf"(?m)^\t\t{k}: ([^\n]+)$",block).group(1) if re.search(rf"(?m)^\t\t{k}: ([^\n]+)$",block) else None) for k in ("Bot","Faction","HomeLocation","Playable")}
-  blocks[ref]=values
+ blocks=generated_map_player_references(text)
  proof=[]
  for seat in seats:
   ref=seat["home"]; actual=blocks.get(ref);expected_home=spawn_cells[seat["spawn"]]
@@ -541,16 +551,7 @@ def validate_receipt_map_seats(job, map_yaml_path, resolved_seats):
  """Cross-check claimed seats against the hash-pinned generated map.yaml bytes."""
  import run_ai_match_batch as batch
  text=map_yaml_path.read_text(encoding="utf-8")
- marks=list(re.finditer(r"(?m)^\tPlayerReference@(Multi\d+):[ \t]*$",text))
- blocks={}
- for index,match in enumerate(marks):
-  end=marks[index+1].start() if index+1<len(marks) else len(text)
-  block=text[match.end():end];ref=match.group(1)
-  require(ref not in blocks,"generated map.yaml has duplicate Multi PlayerReference")
-  def value(key):
-   found=re.search(rf"(?m)^\t\t{key}: ([^\n]+)$",block)
-   return found.group(1) if found else None
-  blocks[ref]={key:value(key) for key in ("Bot","Faction","HomeLocation","Playable")}
+ blocks=generated_map_player_references(text)
  source_path=pathlib.Path(job["map_path"])
  if not source_path.is_absolute(): source_path=pathlib.Path(__file__).resolve().parents[2]/source_path
  with zipfile.ZipFile(source_path) as archive:
