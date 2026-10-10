@@ -1996,8 +1996,10 @@ namespace OpenRA.Mods.CA.Traits
 									|| (elected.RequesterId == null && b.ClientIndex == elected.RequesterClientIndex)));
 							var armyValue = answered?.OwnArmyValue
 								?? broadcasts.Where(b => b != null).Select(b => b.OwnArmyValue).DefaultIfEmpty().Max();
-							request = new BotProtectionRequest(rallyCell,
-								armyValue, World.WorldTick + Info.ProtectInterval * 10);
+							request = M13ResponseClaimCA.Synthesize(rallyCell,
+								armyValue, World.WorldTick + Info.ProtectInterval * 10,
+								answered == null ? null : CoalitionFold.ParticipantKey(answered),
+								answered?.DefenceEpisode ?? default, elected.Episode, electionRequired: true);
 						}
 					}
 				}
@@ -2008,8 +2010,9 @@ namespace OpenRA.Mods.CA.Traits
 							|| !AnswerOnCooldown("defend_answer", CoalitionFold.ParticipantKey(b),
 								World.Map.CellContaining(b.DefendPosition))));
 					if (answered != null)
-						request = new BotProtectionRequest(World.Map.CellContaining(answered.DefendPosition),
-							answered.OwnArmyValue, World.WorldTick + Info.ProtectInterval * 10);
+						request = M13ResponseClaimCA.Synthesize(World.Map.CellContaining(answered.DefendPosition),
+							answered.OwnArmyValue, World.WorldTick + Info.ProtectInterval * 10,
+							CoalitionFold.ParticipantKey(answered), answered.DefenceEpisode);
 				}
 
 				allyDefendAnswer = answered;
@@ -2046,8 +2049,10 @@ namespace OpenRA.Mods.CA.Traits
 									|| (elected.RequesterId == null && b.ClientIndex == elected.RequesterClientIndex)));
 							var armyValue = requester?.OwnArmyValue
 								?? broadcasts.Where(b => b != null).Select(b => b.OwnArmyValue).DefaultIfEmpty().Max();
-							request = new BotProtectionRequest(rallyCell,
-								armyValue, World.WorldTick + Info.ProtectInterval * 10);
+							request = M13ResponseClaimCA.Synthesize(rallyCell,
+								armyValue, World.WorldTick + Info.ProtectInterval * 10,
+								requester == null ? null : CoalitionFold.ParticipantKey(requester),
+								requester?.ExpansionAssistEpisode ?? default, elected.Episode, electionRequired: true);
 							allyAssistAssignment = elected;
 							allyAssistAnswer = requester;
 						}
