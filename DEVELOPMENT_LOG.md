@@ -20509,3 +20509,32 @@ Validation: `dotnet test OpenRA.Mods.Cameo.Test -c Release` â€” 1516 passed
 (3/3 new tests green). Boot-gate PASS â€” main menu reached, no new exception-*.log.
 Verify pending: rerun of cell `all/duel_nod_2103` to cap with no exception log â€”
 coordinator-owned per PT7 runner authority.
+
+## 2026-10-10 â€” MEM-PT7-ALL: 45k-tick 6v6 >8 GB is a scale wall, not a leak (analysis only)
+
+Fleet task `01a126fc` (MEM-PT7-ALL) investigated the watchdog kill of the armed
+`pt7-all` OpenRA at 8209 MB private in a 45k-tick 12-bot 6v6
+(`team6v6_1337`, `_ra_imminent-destruction`, seed 1337).
+
+Method: artifact review (watchdog log, completed 15k cell on the same tree,
+control 45k cell, benchmark CSVs, perf.log LoadReservations) + full source sweep
+of every plausible retention site across `OpenRA.Mods.Cameo`, `.Fransbot`,
+`.CA`, `.Common`, `OpenRA.Game`.
+
+Findings:
+- Baseline ~4.5-5 GB at tick 0 (191 resident sheets = 2456 MiB managed + native
+  textures + ~1-1.5 GB engine/world); ~3-4 GB accumulates over ~40k ticks.
+- No unbounded collection exists: every swept cache evicts, caps, or clears
+  (Frans risk/transport/sea/specops caches, strategic maps, BotSituation,
+  engagement truthActors, McvHealthState cap 64, telemetry writers stream or
+  flush periodically, OrderManager drains, Benchmark ~10 MB, SheetBuilder frees
+  filled-sheet CPU buffers).
+- NOT armed-specific: watchdog log shows identical ~8.2-8.8 GB kills on
+  parity-wave1-bd (x4), integ-b1b7, and a DevBuild maintainer playtest.
+- Armed arm's extra telemetry adds tens of MB, not GBs.
+
+Verdict + mitigations filed in fleet `DEFECT_2026-10-10_pt7_all_memory.md`;
+biggest single lever = releasing sheet CPU buffers post-upload (~2.4 GB).
+Recommended the one allowed repro = same cell + a read-only memory sampler to
+separate managed vs native growth; requires Luna Manager for the serial
+heavy-run slot.
