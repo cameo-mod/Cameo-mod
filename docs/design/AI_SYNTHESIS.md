@@ -7,6 +7,9 @@ the plan for **combining** the five sources of Cameo's bot code. The binding des
 [`UPSTREAM_MODS.md`](UPSTREAM_MODS.md) §4a. Where they disagree about something already built,
 the code wins._
 
+> **2026-10-09 review:** the runtime mechanics and the improvement plan are in
+> [`../AI_ARCHITECTURE_RESEARCH_SYNTHESIS_MASTER_2026-10-06.md`](../AI_ARCHITECTURE_RESEARCH_SYNTHESIS_MASTER_2026-10-06.md) (§8 here points there).
+>
 > **2026-09-28 review: read §7 first.** It measures what actually runs in the Frankenstein
 > `hard` bot on that date (0 Fransbot modules, 1 CN module — since grown: 8 Frans services arm via
 > `inc3_frans_services`, ~8 CN-derived modules run as code; `HARVEST_LEDGER.md` is the
@@ -509,3 +512,14 @@ current master on A Nuclear Winter (≥ 8 matches, both spawns):
 6. Economy (`FransEconomicSaturation`), then islands/transports (Fransbot V1.29.31), SpecOps,
    naval — each only after the earlier steps stop losing fights.
 7. The `fransbot` bot type is deleted when nothing in it remains un-harvested or rejected.
+
+---
+
+## 8. Review, 2026-10-09: runtime mechanics (moved)
+
+The 2026-10-09 runtime-architecture review (shared bot RNG, yaml tick order, no scheduler, MasterAi coupling,
+order-queue priority, gate coverage, file size, switch expiry) and the improvement plan built on it now live in
+[`../AI_ARCHITECTURE_RESEARCH_SYNTHESIS_MASTER_2026-10-06.md`](../AI_ARCHITECTURE_RESEARCH_SYNTHESIS_MASTER_2026-10-06.md)
+(Part III, findings F1–F11; Part IV, phases A–F). That file corrects this section's first version in three places: 16
+modules claim leases, not 15; the proposed `BuiltTick` snapshot stamp is withdrawn (AI_ARCHITECTURE §10.5c had already
+rejected it); and the zero `HumanPaceBotModule` budget is a binding ruling (DESIGN §19.1, no APM cap), not a gap.

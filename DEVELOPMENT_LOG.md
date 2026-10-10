@@ -1,3 +1,44 @@
+# 2026-10-09 — Claude: AI architecture review + playtest regression analysis (branch `ccr-c7f51935-i53fkj`)
+
+*Claude (Opus)*, cloud container, base master `5c8cfe04`. Docs only; no code or yaml changed on the branch.
+
+- **`docs/AI_ARCHITECTURE_RESEARCH_SYNTHESIS_MASTER_2026-10-06.md` reworked and verified:** Part II = verified state;
+  Part III = findings F1–F12 (shared per-player `BotRng` stream confounds A/B; AR-10 tick layers audited but not the
+  runtime order; no scheduler; MasterAi concrete coupling; order lanes; crossed-order ratchet; switch expiry; registry
+  gaps F9/F10; DESIGN §19.6 rollout line stale vs `ai.yaml:4064`). First-version errors fixed (tier-5 contradiction
+  with DESIGN §19.13, the inverted map row, "orders/conditions" vs §19.8, uncommitted sources).
+- **Part IIIb (new): the 2026-10-08 playtest.** `37d9fc6a` = `apply_increment_switches.py --groups all` committed
+  (201 changes, all 59 groups, none A/B'd); `4bf69671` switched off the binding engineer/crate omniscience (DESIGN
+  §19.5). Mechanisms M1–M12 with evidence and status. Measured in this container:
+  - **M10 crash (open):** armed `ai.yaml` on "A Nuclear Winter" dies at world tick ~2,000:
+    `BaseFrontBackPlannerBotModule.Refresh` → `FindTilesInAnnulus` range 71 > `MaximumTileSearchRange` 50 (any
+    defence front ≥ ~21 cells out).
+  - **M9 learned files never load (open, predates the arm):** bare `ai/learned/*.yaml` paths cannot resolve
+    (`FileSystem.Exists` + `Folder.Contents` top-level only); runtime log says "missing" for all three files.
+  - **M12 MCV ownership conflict (open):** with `BT_expansion_prebuild` + enforcement, 1,044 `Move` orders from
+    `McvExpansionManagerBotModule` refused because `BaseBuilderBotModuleCA` holds the MCV's lease.
+  - **Armed (minus the crashing planner) `hard` vs `classic`, 1v1, td_gdi:** `hard` won in 19,766 ticks (kills
+    74,610 / deaths 13,100, 26/0 buildings), but banked 86,723 unspent. So the duel is not passive; team play and the
+    bugs weigh at least as much as the restraint stack.
+  - Fixed today by others and confirmed relevant: `368f4554` (RA refinery dock + base-builder latch, M7),
+    `02241219` (engineer/crate omniscience restored, M8), `b06615a8` (MCV deploy search, part of M6).
+- **Team play:** bots answer allied beacons (`BeaconResponderBotModule`, ≤ 6 idle units) but never place beacons, and
+  the team blackboard ignores human allies (`p.IsBot`, `IBotTeamMember.cs:256`).
+- **Learning:** every bot number is learnable per DESIGN §19.2; the army-first thresholds are registry row
+  `credit_float` (planned, no fitter). 1,272 `int` + 133 `bool` Info fields exist; see the doc's PT8 for the limits.
+- `docs/LESSONS_LEARNED.md`: Linux cloud build/boot route (.NET 10 via apt, engine via `git archive`, xvfb +
+  `ALSOFT_DRIVERS=null`). `docs/design/AI_MASTER_PLAN.md` §3: unscheduled runtime block A1–A10, B1–B6, C1–C4 (111 h).
+- **Later the same evening:** pre-arm 1v1: `hard` won, earned 14.32 / spent 14.15 per tick vs the armed 11.97 / 8.01
+  (banked 11,395 vs 86,723). Armed 3v3 on "Winter's End (Rich)" (spawns verified top-left vs bottom-right): draw by
+  timeout; the `hard` team far ahead (kills 612,280 vs 268,220) but two of its three bots spent the match escorting
+  and defending allies (90 escort + 46 defend answers; Multi0 0 attack waves, peak army 22,270) → new finding **M13**
+  (team escort drain), which reproduces the playtest symptom. Multi1 alone had 11,962 refused MCV orders (M12).
+- **Night runs:** 2v2 Terra Cotta armed LOST (0 waves, ~30 % less income, 654 refused MCV orders, M6+M12) vs
+  pre-arm WON (~2x income, ~91k armies). 3v3 Winter's End pre-arm LOST (whole team forced to `turtle` by an early
+  emergency → **M14**: master's default `EmergencyKeepsPersonality: false` contradicts binding DESIGN §19.11; the fix
+  is only in switch group AL). Armed teammates also all got the same bandit arm at tick 7. One match per arm: next is
+  fixes (A8–A10, M14 default) then ≥ 4 repeats per arm/map. Continue from the doc's PT9.
+
 # 2026-10-09 — Devin: B-lane master repair batch — limited-SW default + engineer/crate flags + bot plug production
 
 *Devin-Integrator* on `devin/repair-b2b6` (stacked on the bounded-approved
