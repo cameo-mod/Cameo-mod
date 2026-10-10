@@ -537,10 +537,123 @@ def analyze(m, manifest_sha, receipts, rows):
                  "synergy":"NOT_IDENTIFIABLE_FROM_PILOT (team-size strata lack matched individual counterfactuals)"})
  return {"schema":1,"switch":SWITCH,"games":result,"setups":setups,"unplanned_receipt_cells":extra,"unplanned_game_uids":extra_uids,"telemetry_intervals_ticks":list(ECONOMY_INTERVAL_TICKS),"note":"One game is one observation; seats are clustered. Natural win effect and paired bootstrap interval require complete side-swapped pairs. Synergy is not estimated because individual and team setups differ in map/roster context."}
 
+def normalize_campaign_receipts(manifest, manifest_sha, receipts, rows, artifact_root):
+ """Convert the strict per-game receipt schema to analyzer input, proving every join.
+
+ The producer stores each game's match log inside its unique support directory. We
+ recover game_uid only from that hash-verified artifact, never by guessing from a
+ seed/map/seat combination in the aggregate match log.
+ """
+ import campaign_runner
+ root=pathlib.Path(artifact_root).resolve(strict=True)
+ jobs=make_jobs(manifest); by_identity={}
+ for job in jobs:
+  pair_id=f"{job['setup']}:{job['seed']}:{job['pair']}"
+  identity=(job["switch"],job["setup"],job["map"],job["map_sha256"],job["seed"],pair_id,job["game_in_pair"])
+  require(identity not in by_identity,"planned job identity is not unique")
+  by_identity[identity]=job
+ grouped={}
+ for row in rows:
+  uid=row.get("game_uid") if isinstance(row,dict) else None
+  require(isinstance(uid,str) and uid,"match row missing game_uid")
+  grouped.setdefault(uid,[]).append(row)
+ uid_receipts={}; by_cell={}; verified_paths=set(); normalized=[]
+
+ def load_artifact(artifact, label, *, allow_missing=False):
+  require(isinstance(artifact,dict),f"{label} artifact must be an object")
+  path_text=artifact.get("path")
+  if path_text is None:
+   require(allow_missing and artifact.get("sha256") is None and isinstance(artifact.get("missing_reason"),str),f"{label} artifact is required")
+   return None
+  candidate=pathlib.Path(path_text)
+  if not candidate.is_absolute(): candidate=root/candidate
+  path=candidate.resolve(strict=True)
+  require(root in path.parents,f"{label} artifact escapes artifact root")
+  require(path not in verified_paths,f"artifact path is reused across receipts: {label}")
+  verified_paths.add(path)
+  digest=hashlib.sha256(path.read_bytes()).hexdigest()
+  require(digest==artifact.get("sha256"),f"{label} artifact SHA mismatch")
+  return path
+
+ def read_jsonl(path, label):
+  result=[]
+  for number,line in enumerate(path.read_text(encoding="utf-8").splitlines(),1):
+   if not line.strip(): continue
+   value=json.loads(line)
+   require(isinstance(value,dict),f"{label} line {number} is not an object")
+   result.append(value)
+  return result
+
+ for receipt in receipts:
+  require(isinstance(receipt,dict),"receipt must be an object")
+  campaign_runner.validate_receipt(receipt)
+  map_info=receipt["map"]
+  pair_id=receipt["pair_id"]
+  identity=(receipt["switch"],receipt["setup_id"],map_info["name"],map_info["sha256"],receipt["seed"],pair_id,receipt["pair_member"])
+  job=by_identity.get(identity)
+  require(job is not None,"receipt does not map to exactly one planned job")
+  require(map_info["path"]==job["map_path"] and map_info["required_seats"]==job["required_seats"],"receipt map path/seat count differs from plan")
+  require(receipt["manifest_sha256"]==manifest_sha,"receipt manifest pin mismatch")
+  require(receipt["baseline_commit"]==manifest["pins"]["source_commit"],"receipt source pin mismatch")
+  binary_shas=manifest["binary_sha256"]
+  expected_engine_sha=hashlib.sha256("".join(binary_shas[k] for k in sorted(binary_shas)).encode()).hexdigest()
+  require(receipt["engine_sha256"]==expected_engine_sha,"receipt engine binary digest mismatch")
+  require(receipt["campaign_id"]==manifest.get("campaign_id","ab-campaign-2026-10-11-pilot"),"receipt campaign ID mismatch")
+  require(receipt["switch"]==SWITCH,"receipt switch differs from analyzer candidate")
+  cell=job["cell_id"]
+  require(cell not in by_cell,"duplicate planned cell receipt")
+  by_cell[cell]=receipt
+  map_path=load_artifact(receipt["artifacts"]["map_yaml"],f"{cell} map.yaml")
+  require(hashlib.sha256(map_path.read_bytes()).hexdigest()==map_info["generated_map_yaml_sha256"],"map.yaml artifact differs from receipt map hash")
+  log_path=load_artifact(receipt["artifacts"]["server_log"],f"{cell} server.log",allow_missing=receipt["end_class"]=="INCOMPLETE")
+  seed_line=receipt["seed_proof"]["server_log_pin_line"]
+  if receipt["end_class"] in ("NATURAL","CAP"):
+   require(log_path is not None and receipt["seed_proof"]["server_log_sha256"]==receipt["artifacts"]["server_log"]["sha256"],"complete end lacks matching server-log artifact hash")
+   require(seed_line in log_path.read_text(encoding="utf-8",errors="replace").splitlines(),"server-log seed proof line not present in pinned artifact")
+  if log_path is not None and seed_line is not None:
+   require(seed_line in log_path.read_text(encoding="utf-8",errors="replace").splitlines(),"seed proof line not present in server log")
+  match_path=load_artifact(receipt["artifacts"]["matches_jsonl"],f"{cell} matches.jsonl",allow_missing=receipt["end_class"]=="INCOMPLETE")
+  match_rows=read_jsonl(match_path,f"{cell} matches.jsonl") if match_path is not None else []
+  uids={row.get("game_uid") for row in match_rows}
+  require(len(uids)<=1 and all(isinstance(uid,str) and uid for uid in uids),f"{cell} match artifact must contain exactly one game_uid")
+  if receipt["end_class"] in ("NATURAL","CAP"):
+   require(match_path is not None and len(match_rows)==job["required_seats"] and len(uids)==1,f"{cell} complete end lacks one full per-game match artifact")
+  support_path=load_artifact(receipt["artifacts"]["support_bundle"],f"{cell} support bundle",allow_missing=receipt["end_class"]=="INCOMPLETE")
+  if receipt["end_class"]=="CAP": require(support_path is not None,"cap receipt lacks a hash-verified support bundle")
+  uid=next(iter(uids)) if uids else None
+  if uid is not None:
+   require(uid not in uid_receipts,"duplicate game_uid across receipts")
+   uid_receipts[uid]=receipt
+   require(uid in grouped,"per-game matches artifact UID absent from aggregate match input")
+   canonical=lambda values: sorted(json.dumps(x,sort_keys=True,separators=(",",":")) for x in values)
+   require(canonical(grouped[uid])==canonical(match_rows),f"{cell} aggregate rows differ from hash-verified per-game artifact")
+  team_arms={side:receipt["teams"][side]["arm"] for side in ("A","B")}
+  require(set(team_arms.values())=={"control","treatment"},"receipt teams do not contain opposite arms")
+  control_side=next(side for side,arm in team_arms.items() if arm=="control")
+  treatment_side=next(side for side,arm in team_arms.items() if arm=="treatment")
+  arm_types={receipt["teams"][side]["arm"]:receipt["teams"][side]["bot_type"] for side in ("A","B")}
+  require(arm_types==job["arm_bot_types"],"receipt team bot types differ from planned arm bindings")
+  seats=[]
+  for seat in receipt["resolved_seats"]:
+   require(seat["team"] in ("A","B"),"receipt seat has invalid team")
+   seats.append({"home":seat["home"],"spawn":seat["spawn"],"side":seat["team"],"arm":seat["arm"],"bot_type":seat["bot_type"],"faction":seat["faction"]})
+   proof=seat["proof_source"].lower()
+   require("map.yaml" in proof and "match" in proof,"seat proof source omits generated map or match evidence")
+  end_class=receipt["end_class"]
+  status={"NATURAL":"NATURAL_END","CAP":"CENSORED_CAP","INCOMPLETE":"INCOMPLETE"}[end_class]
+  reason=receipt["end_reason"]
+  if end_class=="NATURAL": require(reason=="natural","natural receipt has unexpected end_reason")
+  elif end_class=="CAP": require(reason=="cap","cap receipt has unexpected end_reason")
+  elif isinstance(reason,str) and reason.upper() in {"MEMORY_KILL","MEMORY_SAMPLE_FAILED","LOW_FREE_RAM","STALL","WALL_TIMEOUT","PROCESS_DIED"}:
+   status=reason.upper()
+  legacy={"cell_id":cell,"game_uid":uid,"manifest_sha256":manifest_sha,"switch":job["switch"],"setup":job["setup"],"map":job["map"],"map_sha256":job["map_sha256"],"seed":job["seed"],"pair":job["pair"],"game_in_pair":job["game_in_pair"],"control_side":control_side,"treatment_side":treatment_side,"arm_bot_types":arm_types,"status":status,"end_reason":reason,"cap_marker":receipt["cap"]["marker_observed"],"cap_tick":receipt["cap"]["marker_tick"],"support_complete":support_path is not None,"seat_proof_source":"generated_map.yaml","map_yaml_sha256":map_info["generated_map_yaml_sha256"],"seats":seats,"peak_memory_bytes":receipt["memory"]["peak_private_bytes"],"duration_ticks":receipt["world_tick"]}
+  normalized.append(legacy)
+ return normalized
+
 def main(argv=None):
  p=argparse.ArgumentParser(description=__doc__); s=p.add_subparsers(dest="cmd",required=True)
  d=s.add_parser("dry-run");d.add_argument("--manifest",type=pathlib.Path,required=True);d.add_argument("--manifest-sha256",required=True);d.add_argument("--repo-root",type=pathlib.Path,required=True);d.add_argument("--engine-root",type=pathlib.Path);d.add_argument("--output",type=pathlib.Path,required=True);d.add_argument("--minutes-per-game",type=float,default=8.5);d.add_argument("--setup-hours",type=float,default=2.0)
- a=s.add_parser("analyze");a.add_argument("--manifest",type=pathlib.Path,required=True);a.add_argument("--manifest-sha256",required=True);a.add_argument("--matches",type=pathlib.Path,required=True);a.add_argument("--receipts",type=pathlib.Path,required=True);a.add_argument("--repo-root",type=pathlib.Path,required=True);a.add_argument("--output",type=pathlib.Path,required=True)
+ a=s.add_parser("analyze");a.add_argument("--manifest",type=pathlib.Path,required=True);a.add_argument("--manifest-sha256",required=True);a.add_argument("--matches",type=pathlib.Path,required=True);a.add_argument("--receipts",type=pathlib.Path,required=True);a.add_argument("--repo-root",type=pathlib.Path,required=True);a.add_argument("--artifact-root",type=pathlib.Path,required=True,help="root directory containing immutable per-game support artifacts");a.add_argument("--output",type=pathlib.Path,required=True)
  a=p.parse_args(argv)
  try:
   m=json.loads(a.manifest.read_text(encoding="utf-8"))
@@ -555,6 +668,8 @@ def main(argv=None):
    out["manifest_sha256"]=actual;a.output.parent.mkdir(parents=True,exist_ok=True);a.output.write_text(json.dumps(out,indent=2)+"\n",encoding="utf-8");print(f"NO_LAUNCH games={out['games']} generated_maps={len(out['generated_map_preflight'])} treatment_changes={out['arm_payload_preflight'][1]['changed_fields']} worker_hours={out['worker_hours_estimate_at_8_5m_each']} slot_wall_hours={out['parallel_slot_wall_estimate_hours_at_8_5m_each']} launches=0");return 0
   validate(m,a.repo_root); raw=a.manifest.read_bytes(); actual=hashlib.sha256(raw).hexdigest();require(actual==a.manifest_sha256,"manifest SHA mismatch")
   def jsonl(path): return [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
-  out=analyze(m,actual,json.loads(a.receipts.read_text(encoding="utf-8")),jsonl(a.matches));a.output.parent.mkdir(parents=True,exist_ok=True);a.output.write_text(json.dumps(out,indent=2)+"\n",encoding="utf-8");print(f"ANALYZED games={len(out['games'])} unplanned_receipts={len(out['unplanned_receipt_cells'])}");return 2 if out["unplanned_receipt_cells"] or out["unplanned_game_uids"] or any(g["verdict"]=="INVALID_UNKNOWN" for g in out["games"]) else 0
+  receipts=json.loads(a.receipts.read_text(encoding="utf-8"));rows=jsonl(a.matches)
+  normalized=normalize_campaign_receipts(m,actual,receipts,rows,a.artifact_root)
+  out=analyze(m,actual,normalized,rows);a.output.parent.mkdir(parents=True,exist_ok=True);a.output.write_text(json.dumps(out,indent=2)+"\n",encoding="utf-8");print(f"ANALYZED games={len(out['games'])} unplanned_receipts={len(out['unplanned_receipt_cells'])}");return 2 if out["unplanned_receipt_cells"] or out["unplanned_game_uids"] or any(g["verdict"]=="INVALID_UNKNOWN" for g in out["games"]) else 0
  except (OSError,ValueError,KeyError,TypeError) as e: print(f"error: {e}",file=sys.stderr);return 2
 if __name__=="__main__": raise SystemExit(main())

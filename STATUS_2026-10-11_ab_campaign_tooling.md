@@ -50,6 +50,12 @@ The immutable receipt writer (`campaign_runner.validate_receipt`) and the pilot 
 - Reviewed `origin/codex/ab-campaign-tooling-manager@07c036d5b7c682c728959993f9a58dbb57317e8f`. Its `run_one` writes `artifacts.matches_jsonl` to the unique game directory `Support/Logs/cameo-ai-matches.jsonl`, so it is in fact a per-game artifact; the receipt builder sets `pair_id` to `setup:seed:pair` and `pair_member` to `game_in_pair`. Those producer conventions make a strict adapter possible without adding `game_uid`, provided the consumer resolves artifact paths inside an explicit support root, verifies SHA, and requires exactly one UID per started game's artifact.
 - The manager branch's `ab_campaign_pilot.analyze` still expects legacy `cell_id`/`game_uid` receipt fields and its CLI does not perform that artifact-backed normalization. So the gap is now narrower: the producer data is sufficient, but the adapter and human contract/path-root rules are still missing. No files from the manager branch were merged or copied.
 
+## 2026-10-11 receipt-to-analyzer adapter draft
+
+- Added `normalize_campaign_receipts` to the owned runner branch. It validates each strict receipt, maps `setup_id`/map/seed/`pair_id`/`pair_member` to exactly one planned job, confines present artifact paths to an explicit `--artifact-root`, verifies map/match/server/support artifact hashes, checks the pinned seed line in `server.log`, extracts one unique `game_uid` only from that receipt's per-game match artifact, and requires exact equality with the corresponding rows in the aggregate `--matches` JSONL. The analyzer then receives its prior normalized internal shape. The Markdown contract documents the producer identity conventions.
+- Source check: `py -3 -m py_compile tools/ai/ab_campaign_pilot.py` and `git diff --check` passed. Per instruction, tests were not run. The adapter has not yet been exercised against valid, malformed, incomplete, and cross-game negative-control receipts; do not treat it as accepted or ready for pilot until that focused fixture review passes. No games were launched.
+- The adapter/contract delta changes pinned tool/content hashes. Refresh the final manifest and add focused canonical-receipt fixtures before any analysis or launch authorization.
+
 ## 2026-10-11 acting-lead readiness handoff
 
 - Read `STATUS_2026-10-10_acting_lead.md`: A5 run-a peaked at 6.55 GiB private bytes (above the 6.5 GiB stop), run-b reached 8.07 GiB and was PID-scoped stopped. There is no valid same-seed parity/order-stream receipt.
