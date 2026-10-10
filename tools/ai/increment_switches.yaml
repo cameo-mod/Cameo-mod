@@ -224,6 +224,9 @@ groups:
   AK_build_order_knobs:              # DESIGN 19.2 / AI_ARCHITECTURE 12.25 BO-1: arms the BuildOrderKnobsBotModule provider - eight bounded multipliers (tempo, greed, production, tech, defence, power_margin, expansion, support) + a named opening from personality preset x learned x jitter with a fog-honest react layer; the shared base builder reads it only from an enabled provider (BuildingDelays/Intervals, BuildingFractions by category, power surplus, opening step). No provider (classic, switch off) = bit-identical
     GrantConditionOnBotOwner@buildorderknobs:
       Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla, exploit_expansion, exploit_steamroller, exploit_tech
+  # ABSORBED into master defaults by fcec9cc89 (merged eba72aa13, 2026-10-10).
+  # Retained for older frozen baselines; on descendants carrying those defaults,
+  # AL is a no-op and must not be reported as a newly activated experimental policy.
   AL_emergency_net_loss:             # maintainer ruling 2026-10-03, AI_ARCHITECTURE open question 10 - Emergency means LOSING (loss >25% of army+loss AND deaths > kills in the window; clears at 12%) and never rewrites the personality (no forced turtle); target + urgency only
     MasterAiBotModule:
       EmergencyLossArmyPct: 25

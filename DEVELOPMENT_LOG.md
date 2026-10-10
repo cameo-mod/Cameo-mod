@@ -21010,3 +21010,8 @@ land ticks later or never) all produce identical disappearances. Corrected on
 - Two regressions cover pre-deadline and due-deadline callbacks, repeated callback, rejected retry and complete recovery without deadline renewal.
 - Focused pure-helper suite30/30 PASS; no runtime wiring, engine pin changes or launches.
 - Next: exact revised-head independent helper re-review; M13 stays incomplete.
+
+### 2026-10-10 — AL registry annotation (Sol)
+- Verified fcec9cc89/eba72aa13 defaults match both AL_emergency_net_loss fields; annotate absorbed status for those descendants.
+- Retain the historical group for older frozen baselines and the approved 59-group classification; parsed spec unchanged.
+- No gameplay activation, policy edits or launches; M13 provider ownership ruling still pending.

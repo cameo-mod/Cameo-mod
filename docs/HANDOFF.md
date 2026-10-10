@@ -5550,3 +5550,7 @@ Read design/REPLAY_HEALTH_ANALYZER.md before health/campaign work. tools/ai/repl
 ### Sol — M13 helper R1 correction, 2026-10-10
 - C:/cameo-wt/sol-m13-liveness, codex/m13-liveness: Unsupported survives failed-intent callbacks; focused30/30.
 - Next: exact-tip helper re-review, then explicitly grounded claim/dispatch integration. Helpers remain unwired; no launches.
+
+### Sol — absorbed AL registry annotation, 2026-10-10
+- codex/m13-liveness: AL defaults absorbed at fcec9cc89/eba72aa13; retain group for frozen pre-absorption baselines.
+- Parsed switch spec unchanged. Next: M13 provider ownership ruling and runtime wiring; no launches.
