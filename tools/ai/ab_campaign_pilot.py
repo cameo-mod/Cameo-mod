@@ -546,6 +546,7 @@ def validate_receipt_map_seats(job, map_yaml_path, resolved_seats):
  for index,match in enumerate(marks):
   end=marks[index+1].start() if index+1<len(marks) else len(text)
   block=text[match.end():end];ref=match.group(1)
+  require(ref not in blocks,"generated map.yaml has duplicate Multi PlayerReference")
   def value(key):
    found=re.search(rf"(?m)^\t\t{key}: ([^\n]+)$",block)
    return found.group(1) if found else None
@@ -559,12 +560,14 @@ def validate_receipt_map_seats(job, map_yaml_path, resolved_seats):
   if len(spawn_cells)<job["required_seats"]: raise ValueError("pinned map has too few mpspawn actors")
   spawn_cells=batch.split_spawn_sides(spawn_cells,job["team_size"])+spawn_cells[2*job["team_size"]:]
  expected={seat["home"]:seat for seat in job["seat_assignments"]}
+ require(set(blocks)==set(expected),"generated map.yaml PlayerReference set differs from planned seats")
  require(len(resolved_seats)==len(expected),"receipt resolved seat count differs from plan")
  for seat in resolved_seats:
   home=seat["home"];planned=expected.get(home);actual=blocks.get(home)
   require(planned is not None and actual is not None,"receipt seat home absent from planned or generated map.yaml")
   require(seat["spawn"]==planned["spawn"] and seat["team"]==planned["side"] and
           all(seat[key]==planned[key] for key in ("arm","bot_type","faction")),"receipt resolved seat differs from planned seat")
+  require(planned["spawn"]<len(spawn_cells),"planned spawn index exceeds pinned map spawn list")
   expected_location=spawn_cells[planned["spawn"]]
   require(actual["Bot"]==planned["bot_type"] and actual["Faction"]==planned["faction"] and
           actual["Playable"]=="False" and actual["HomeLocation"]==f"{expected_location[0]},{expected_location[1]}",
