@@ -2047,9 +2047,10 @@ namespace OpenRA.Mods.CA.Traits
 
 							// REPAIR-B3: a legal selected site commits the claim AT THE SITE (the provider
 							// publishes pending coverage for the whole in-radius set); an offered claim
-							// with no site parks for the bounded fail cooldown instead of silently
-							// re-offering it every sweep.
-							if (BaseBuilderQueueEvalCA.CommitRefineryClaimOrPark(law, c, placed.Location))
+							// with no site frees the demand's whole reserved set at once (lead ruling
+							// 2026-10-10 — the fail cooldown is the only retry bound) and parks the anchor
+							// for that owner instead of holding the set hostage until UntilTick.
+							if (BaseBuilderQueueEvalCA.CommitRefineryClaimOrPark(law, c, placed.Location, demand))
 							{
 								Log.Write("debug", $"AI ({player.ClientIndex}): REF-1 refinery {actorType} at {placed.Location.Value} claims anchor {c.Anchor} field {c.FieldId} tier {c.Tier} gap {placed.Gap} at tick {world.WorldTick}");
 								refineryClaimed = true;

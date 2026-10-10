@@ -255,6 +255,15 @@ namespace OpenRA.Mods.CA.Traits
 		void RefineryClaimPlacementFailed(CPos anchor) { }
 
 		/// <summary>
+		/// REPAIR-B3 (lead ruling 2026-10-10): the owner-scoped failure signal — the cooldown binds
+		/// <paramref name="owner"/> (the demand whose placement failed), not the anchor's reservation
+		/// slot: the demand's whole set is freed at the failure point so a contested anchor recycles
+		/// to another demand immediately, while the failing owner's own re-reserve waits out the
+		/// cooldown. The default bridges to the owner-blind park until the caller passes the owner.
+		/// </summary>
+		void RefineryClaimPlacementFailed(CPos anchor, object owner) => RefineryClaimPlacementFailed(anchor);
+
+		/// <summary>
 		/// REPAIR-B3 (SPEC §3): the anchors a refinery admitted for <paramref name="anchor"/> is expected
 		/// to cover — untaken, not already covered, inside the serve radius of the claim. Callers bind the
 		/// whole set atomically via <see cref="TryReserveRefineryAnchors"/> at admission. Default empty:

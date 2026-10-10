@@ -1023,7 +1023,7 @@ namespace OpenRA.Mods.Cameo.Test
 		{
 			public readonly RefineryAnchorReservations Reservations = new();
 			public readonly HashSet<CPos> Taken = new();
-			public readonly HashSet<CPos> Parked = new();
+			public readonly Dictionary<CPos, (int Until, object Owner)> Parked = new();
 			public readonly List<(CPos Anchor, CPos Site)> Committed = new();
 			public readonly List<CPos> PlacementFailed = new();
 			public readonly List<int> ReservedVersions = new();
@@ -1031,6 +1031,7 @@ namespace OpenRA.Mods.Cameo.Test
 			public IReadOnlyList<CPos> Covered = new CPos[0];
 			public int Version = 1;
 			public int Now;
+			public int ParkTicks = 50;
 			public int CoveredCalls;
 			public int SetReleaseCalls;
 
@@ -1052,7 +1053,8 @@ namespace OpenRA.Mods.Cameo.Test
 				ReservedUntilTicks.Add(untilTick);
 				if (modelVersion >= 0 && modelVersion != Version)
 					return false;
-				return Reservations.TryReserveAll(anchors, owner, Now, untilTick, a => Taken.Contains(a) || Parked.Contains(a));
+				return Reservations.TryReserveAll(anchors, owner, Now, untilTick,
+					a => Taken.Contains(a) || (Parked.TryGetValue(a, out var p) && Now < p.Until && ReferenceEquals(p.Owner, owner)));
 			}
 
 			public void RefineryClaimCommitted(CPos anchor, CPos site)
@@ -1061,10 +1063,13 @@ namespace OpenRA.Mods.Cameo.Test
 				Reservations.ClearAll(Covered);
 			}
 
-			public void RefineryClaimPlacementFailed(CPos anchor)
+			public void RefineryClaimPlacementFailed(CPos anchor) =>
+				((IBotExpansionTargetProvider)this).RefineryClaimPlacementFailed(anchor, null);
+
+			public void RefineryClaimPlacementFailed(CPos anchor, object owner)
 			{
 				PlacementFailed.Add(anchor);
-				Parked.Add(anchor);
+				Parked[anchor] = (Now + ParkTicks, owner);
 			}
 
 			public int ReleaseRefineryAnchors(object owner) => Reservations.ReleaseAllForOwner(owner);
@@ -1136,7 +1141,7 @@ namespace OpenRA.Mods.Cameo.Test
 			law.Reservations.TryReserveAll(covered, owner, 0, 100, _ => false);
 			var selected = new CPos(4, 5); // the legal site — deliberately not the anchor
 
-			Assert.That(BaseBuilderQueueEvalCA.CommitRefineryClaimOrPark(law, claim, selected), Is.True);
+			Assert.That(BaseBuilderQueueEvalCA.CommitRefineryClaimOrPark(law, claim, selected, owner), Is.True);
 			Assert.That(law.Committed, Is.EqualTo(new[] { (new CPos(1, 1), selected) }));
 			Assert.That(law.PlacementFailed, Is.Empty);
 			Assert.That(law.Reservations.Count, Is.EqualTo(0)); // commit consumed the holds
@@ -1146,18 +1151,57 @@ namespace OpenRA.Mods.Cameo.Test
 		public void FailedPlacementParksTheOfferedAnchorAndCommitsNothing()
 		{
 			// No legal site for the offered claim — the manager signals placement failure so
-			// the provider bounds the retry (parked = taken here), and no commit fires.
-			var law = new RecordingRefineryLaw();
+			// the provider bounds the retry, and no commit fires. The cooldown is owner-scoped
+			// (lead ruling 2026-10-10): it refuses the failing owner's re-reserve while a
+			// foreign demand may bind the anchor at once.
+			var law = new RecordingRefineryLaw { Now = 5 };
 			var claim = ClaimAt(new CPos(6, 6));
+			var owner = new object();
 
-			Assert.That(BaseBuilderQueueEvalCA.CommitRefineryClaimOrPark(law, claim, null), Is.False);
+			Assert.That(BaseBuilderQueueEvalCA.CommitRefineryClaimOrPark(law, claim, null, owner), Is.False);
 			Assert.That(law.PlacementFailed, Is.EqualTo(new[] { new CPos(6, 6) }));
 			Assert.That(law.Committed, Is.Empty);
 
-			// The parked anchor now refuses fresh reservation — it is off the market for the
-			// bounded cooldown instead of looping an immediate re-offer.
+			// The failing owner cannot re-bind inside its cooldown...
 			Assert.That(law.TryReserveRefineryAnchors(new CPos(6, 6), new[] { new CPos(6, 6) },
-				new object(), 100), Is.False);
+				owner, 100), Is.False);
+
+			// ...but the anchor is no longer hostage for everyone else.
+			Assert.That(law.TryReserveRefineryAnchors(new CPos(6, 6), new[] { new CPos(6, 6) },
+				new object(), 100), Is.True);
+		}
+
+		[Test]
+		public void ParkedClaimFreesTheWholeSetAndRecyclesToAnotherDemand()
+		{
+			// LEAD RULING 2026-10-10: a placement-failure park frees the failing demand's whole
+			// covered set AT the failure point — the per-site cooldown is the retry bound, not
+			// the hold's UntilTick. A foreign demand binds the contested anchor immediately;
+			// the parked demand's own re-admission waits out the cooldown, then succeeds.
+			var covered = new CPos[] { new(1, 1), new(2, 2), new(3, 3) };
+			var law = new RecordingRefineryLaw { Covered = covered, Now = 10 };
+			var parked = new object();
+			var foreign = new object();
+			var claim = ClaimAt(new CPos(1, 1));
+			law.Reservations.TryReserveAll(covered, parked, 0, 500, _ => false);
+
+			Assert.That(BaseBuilderQueueEvalCA.CommitRefineryClaimOrPark(law, claim, null, parked), Is.False);
+			Assert.That(law.PlacementFailed, Is.EqualTo(new[] { new CPos(1, 1) }));
+			Assert.That(law.Committed, Is.Empty);
+			Assert.That(law.Reservations.Count, Is.EqualTo(0)); // freed at the failure, not at UntilTick=500
+
+			// Another demand binds the SAME anchor immediately — the cooldown binds only the owner that failed.
+			law.Covered = new[] { new CPos(1, 1) };
+			Assert.That(BaseBuilderQueueEvalCA.RefineryReservationAdmits(law, claim, foreign, 700), Is.True);
+			Assert.That(law.Reservations.LiveFor(new CPos(1, 1), foreign, 11), Is.True);
+			law.ReleaseRefineryAnchors(foreign);
+
+			// The parked demand's retry is refused inside the cooldown...
+			Assert.That(BaseBuilderQueueEvalCA.RefineryReservationAdmits(law, claim, parked, 700), Is.False);
+
+			// ...and re-admits once it lapses — the park, not the reservation, was the bound.
+			law.Now = 10 + law.ParkTicks;
+			Assert.That(BaseBuilderQueueEvalCA.RefineryReservationAdmits(law, claim, parked, 700), Is.True);
 		}
 
 		[Test]
