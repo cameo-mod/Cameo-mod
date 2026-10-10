@@ -1281,6 +1281,34 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void NullOwnerParkRefusesRenewalUntilExpiry()
+		{
+			var anchor = new CPos(6, 6);
+			var covered = new[] { anchor, new CPos(7, 6) };
+			var law = new RecordingRefineryLaw { Now = 5, Covered = covered };
+			var demand = new ExpansionDemand(null) { ReservedClaim = ClaimAt(anchor), RefineryItem = "proc" };
+			BaseBuilderQueueEvalCA.RenewRefineryReservation(law, demand, untilTick: 100);
+			Assert.That(demand.ReservedClaim, Is.Not.Null);
+
+			// A provider-wide park arriving after admission must also reject this owner's renewal.
+			law.RefineryClaimPlacementFailed(anchor);
+			BaseBuilderQueueEvalCA.RenewRefineryReservation(law, demand, untilTick: 200);
+			Assert.That(demand.ReservedClaim, Is.Null);
+			Assert.That(law.TryReserveRefineryAnchors(anchor, covered, new object(), 200), Is.False);
+
+			law.Now = 5 + law.ParkTicks - 1;
+			demand.ReservedClaim = ClaimAt(anchor);
+			BaseBuilderQueueEvalCA.RenewRefineryReservation(law, demand, untilTick: 200);
+			Assert.That(demand.ReservedClaim, Is.Null);
+
+			law.Now++;
+			demand.ReservedClaim = ClaimAt(anchor);
+			BaseBuilderQueueEvalCA.RenewRefineryReservation(law, demand, untilTick: 200);
+			Assert.That(demand.ReservedClaim, Is.Not.Null);
+			Assert.That(law.Reservations.LiveSetFor(covered, demand, law.Now), Is.True);
+		}
+
+		[Test]
 		public void RenewalDropsTheClaimWhenTheLawOrTheBindingIsGone()
 		{
 			var demand = new ExpansionDemand(null) { ReservedClaim = ClaimAt(new CPos(1, 1)), RefineryItem = "proc" };
