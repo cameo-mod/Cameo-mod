@@ -83,6 +83,20 @@ class CampaignRunnerTests(unittest.TestCase):
 		self.assertTrue(p.killed);self.assertEqual("MEMORY_KILL",result["end_reason"])
 		self.assertEqual(4242,p.pid);self.assertTrue(result["pid_scoped_cleanup"])
 
+	def test_windows_orphan_kill_helper_invokes_identity_checked_powershell(self):
+		with tempfile.TemporaryDirectory() as temp:
+			exe = pathlib.Path(temp) / "OpenRA.exe"
+			support = pathlib.Path(temp) / "Support"
+			with patch.object(runner.os, "name", "nt"), patch.object(runner.subprocess, "run") as run:
+				run.return_value.returncode = 0
+				self.assertTrue(runner.kill_owned_pid(4242, exe, support))
+				args = run.call_args.args[0]
+				self.assertEqual("powershell.exe", args[0])
+				self.assertIn("ExecutablePath -ieq", args[-1])
+				self.assertIn("CommandLine.Contains", args[-1])
+				run.side_effect = runner.subprocess.TimeoutExpired("powershell.exe", 15)
+				self.assertFalse(runner.kill_owned_pid(4242, exe, support))
+
 
 if __name__ == "__main__":
 	unittest.main()
