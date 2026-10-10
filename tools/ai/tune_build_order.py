@@ -627,7 +627,11 @@ def switches_text(arms: list[str]) -> str:
              "# Arm with: python tools/ai/apply_increment_switches.py <worktree> --spec <this file> --groups AK_build_order_knobs_arm",
              "# (AK_build_order_knobs from the main spec arms the provider; each arm adds its learned file). Copy <arm>.yaml to",
              "# <worktree>/mods/cameo/ai/learned/ first.",
-             "skip: [SquadManagerBotModuleCA@classic]", "", "groups:"]
+             "skip: [SquadManagerBotModuleCA@classic]", "", "effect_classes:"]
+    # These arms activate the same learned policy surface as AK_build_order_knobs.
+    # Treat each as a restraint conservatively; never implicitly co-arm multiple arms.
+    lines += [f"  {arm}: restraint" for arm in arms]
+    lines += ["", "groups:"]
     for arm in arms:
         lines += [f"  {arm}:", "    BuildOrderKnobsBotModule:", "      UseLearnedBuildOrder: true",
                   f"      LearnedFile: ai/learned/{arm}.yaml"]

@@ -931,7 +931,6 @@ zero enemy buildings killed in any match, out-traded ~5:1 by cost
 4. FIXED in #162: `TraitInfoOrDefault<AttackBaseInfo>` crash on multi-AttackBase
    actors (same class as #554 attackbuggy).
 
-
 **Post-fix A/B (ResourceMap live):** machinery works — MCV expansion commits,
 `MovingToOre`/`BuildingRefinery` stages cycle, expansion retry after raid
 threats — but fransbot still lost both completions (0-6 overall). Kill chain
@@ -1118,11 +1117,6 @@ Outpost2 ids. #587's A/B started the bot with a finished base and could not see 
 
 **Next in the list rollout:** roles for power, barracks and production, which take #588's interim
 central ids out again. Then the Fransbot fields from DAWN's spec.
-
-
-
-
-
 
 ## 2026-09-27 — Claude: the AI lane is SPLIT (maintainer ruling); harvester role applied; 5 factions' bots are inert
 
@@ -1590,9 +1584,6 @@ Post-fix G4 16→7, G1 unchanged 7.
 (rocketeer, rocketangel, jumpjet, cosmonaut, shriek, swarmling,
 cyborgassassin, orbdrone, skymage) — structurally excluded, not defects.
 
-
-
-
 ### DAWN — Stack consolidated onto master 91f865585 (2026-09-27)
 
 Per Claude's merge ruling (ONE PR, tip-evaluated): the whole DAWN weapon
@@ -1678,7 +1669,6 @@ C:raw full-stack templates (`^HeavyBomb`,
 `^TSDefaultMissile`...) need real family conversion — design-class, not
 edge surgery. `^LaserWeapon`/`^RailgunWeapon`/`^TeslaWeapon` held on the
 pending ExtraDamage ruling.
-
 
 ## 2026-09-26g — DAWN: W7 weapon-edge conversion — my lanes cleared
 
@@ -1858,7 +1848,6 @@ a structural census, not latent debt — the SUMMARY queue can demote it; the
 real residual risk is D2-style payload last-wins inside merged nodes (3,968,
 separate row).
 
-
 **Watched shared files I touched** (so nobody's surprised): `rules/misc.yaml`
 (+5 corrino crate stanza), `ai/ai.yaml` (one id retarget),
 `tools/audit/audit_faction_leaks.py` (alias map), `audit/SUMMARY.md` +
@@ -1907,7 +1896,6 @@ granting `corrino_mobileconstructionvehicle`, same shape as the 30 siblings.
 UnitsToBuild ref — `atreides_combat_tank` → loaded actor `atreides_combattank` —
 A3 unloaded refs 1 → 0, and resyncs the stale "D1: 7" prose; the audit has
 measured 0 since the merge wave.)*
-
 
 Remaining red rows and their owners (not mine to take):
 - Q prerequisite order ×1 — `steelconsortium_consortiummobileconstructionvehicle`
@@ -2729,7 +2717,6 @@ already per CYCLE. On `td_gdi_minigunner`, going Burst 4 -> 1 and keeping `Damag
 gap to 25.4x; keeping the cycle total leaves 6.35x. The driver is reload - every reference fires a
 full cycle in 20 ticks where Cameo takes 50 + 9.
 
-
 ### WHAT IS STILL OPEN ON THIS LANE
 
 * **The ruler is still the ACTOR-LEVEL distribution.** `armament_target` projects one armament
@@ -2925,7 +2912,6 @@ NOT live WIP. Leave it alone; preserving it to a branch is Blackrobe's call.
 * ⛔ **The 694 unfolded rates stay BLOCKED.** Only 77 declare a burst delay, in Phobos/Ares notation
   that is not OpenRA's (`[15, -1]` for Burst 6). Needs a YR/Ares cycle model nobody has written.
 
-
 ## ⛔⛔ 2026-09-13 (later) — THE "334 UNFOLDED RATES" ARE 694, AND THE BLOCKER IS NOT ARITHMETIC
 
 Written by **Claude-Local (Opus 5)**. ⚠ **Codex relayed at 13:34 that it has "picked up the 334-rate
@@ -3031,7 +3017,6 @@ reference or what?"*), and the CROSS-LANE PASS above is the answer: the actor no
 O1 gating stays **12 of ratchet 12** and O2 gating fell **7 -> 6**. No ratchet was raised, and no
 exemption was added — the carve-out entry written for this actor earlier in the session was
 DELETED once the pass closed the gap for real.
-
 
 ### ⭐ THE CROSS-LANE PASS — "Can you please also use it as reference?"
 
@@ -3284,7 +3269,6 @@ wants its own before/after measurement — it is the first thing to pick up.
 * **The reference map is one artifact, not many.** Update the existing page rather than publishing
   a new one; find it with the Artifact `list` action instead of guessing.
 
-
 ## ⭐⭐ 2026-09-12 — ALL NINE DECISIONS ARE RULED. THE QUEUE IS UNBLOCKED.
 
 The rulings are binding and live in **`DESIGN.md` §11b.0 (R1–R9)** — read that, not this
@@ -3415,7 +3399,6 @@ to it.** `Storm_*` and `Tesla_Heavy` likewise. See `DESIGN.md` R6 for the table.
 
 ### The old "open decisions" list, for provenance only — every one is now answered
 
-
 Newest first; each one blocks a batch that is otherwise measured and ready.
 
 **1. Which weapon target is authoritative — DPS, or damage+reload?** They disagree by
@@ -3533,7 +3516,6 @@ This handoff authorizes no merge, game launch, build or external agent setup.
 Scheduled Discord checks are active every 15 minutes through 14 September 2026
 at 00:16:58 WIB, using a new temporary external-browser tab for each check.
 The repository-wide history follows.
-
 
 ## ⭐ 2026-09-13 — DEVIN-CLOUD (the AI lane): who I am, what Codex already did, and what I need
 
@@ -3658,7 +3640,6 @@ commit was intact) and the merge was redone from scratch, but the protocol earne
 usual way. **`git checkout -- .` does not "refresh" anything; it is a bulk overwrite of whatever
 someone else is mid-way through.**
 
-
 ## 2026-09-10 — source PR340 warhead-family reach measurement
 
 `warhead_family_reach` measures **1,526 distinct fired weapon identities** whose
@@ -3671,7 +3652,6 @@ not establish newly converted weapons or additional gameplay balance work.
 Earlier dated snapshots below remain historical, and the only-UP rule remains.
 
 > **Numeric evidence refresh — 2026-09-10, combined `839cdced4` plus reopened tooling.** `multi_main_fired_weapons` = **120**; `unconverted_template_inheritors` = **1590**. Measured on this combined tree; predicates and tolerances are unchanged. The flat-health denominator correction changes diagnostics, not live weapons or prices. Earlier branch-specific snapshots remain historical. **2026-09-23b (post-#456/#457): `multi_main_fired_weapons` = 1** (`DRPlasmaTankWeapon` only — ruling pending); `unconverted_template_inheritors` = **827**.
-
 
 ## ⛔⛔ 2026-09-07 — READ THIS FIRST: the reference map, and one absolute rule
 
@@ -3989,7 +3969,6 @@ Maintainer rulings, 2026-09-08:
 * Missing actors the maintainer named: **RMBO / E7 (Tanya)**, CA's Chinook, Specter, Venom.
 
 ---
-
 
 **2026-08-25 update (Devin AI):** The volcanic shellmap (`shellmap_v3.oramap`) camera was too tight (6-cell radius), hiding the scripted attack waves. The `attack.lua` camera radius was widened to 45 cells. **Superseded 2026-09-16:** reverted to 6 cells (`03049aada`) — at 45 cells the camera centre travelled up to 45 cells from `camerapoint` while the three scripted battle waypoints sit only 14–20 cells away, so the fight left the frame for much of the 144 s revolution. See the 2026-09-16 entry in `DEVELOPMENT_LOG.md`. The boot-blocking stale removal `-Warhead@CannonHE_MediumPercentage` in `weapons/outpost2.yaml` is resolved in `a92ae850`, and boot-gate passes with no new exceptions. See `DEVELOPMENT_LOG.md` § "Volcanic shellmap camera radius fix" for evidence and verification.
 
@@ -4463,7 +4442,6 @@ maintainer-REVIEWED; the other nine are `proposed`. Next: `dta_enhanced` (needs 
 ⚠ Extractor fixes in the lane (R48, R50, R51, R54, R56, R58–R60) changed the measured corpus, so
 anything downstream of `warhead_groups.json` computed before 2026-09-23 is stale.
 
-
 ### 3.A — MULTI-AGENT COORDINATION (read this FIRST if you are an AI agent)
 
 **As of 2026-08-25, there are 5 Devin AI agents running locally.** Each agent MUST:
@@ -4500,7 +4478,6 @@ anything downstream of `warhead_groups.json` computed before 2026-09-23 is stale
 | **Devin-Blaze** | Active — **D2k Shared consolidation** (maintainer priority) | Phase 1 Harkonnen complete (`afdaae46c`); Phase 4 shared/global. **ORDER: move remaining shared D2k content into `ContentPacks/D2k/Shared/`. Clean up legacy `d2k.yaml`/`rules/d2k.yaml` dead blocks. Verify no dangling refs.** | `mods/cameo/ContentPacks/D2k/Harkonnen/`, `ContentPacks/D2k/Shared/`, legacy `mods/cameo/weapons/d2k.yaml`, `mods/cameo/rules/d2k.yaml` |
 | **Devin-Nova** (Devin CLI, SWE-1.7 Max) | Active — verifier/generator lane | Committed `7557c983d` (AreaDamageWarhead C# NRE fix), `b905d7679` (BulletChem generator spec), `85bcf3f33` (Claude's reference-pipeline tooling). **Relayed heaviness bell ruling.** ORDER: composite-registry re-curation (fixes `three_way_split` crash on `wc2deathknightFire` stale digest). `gen_weapon_template.py` REFLECTOR 75→74 sync. Help Ember. | `OpenRA.Mods.Cameo/Warheads/AreaDamageWarhead.cs`, `tools/balance/gen_weapon_template.py` |
 | **Claude-Cloud** (Anthropic, cloud container) | Active — **rebase your branches** | Patches landed locally by Aurora. ORDER: rebase `claude/*` against current branch; extract specific files only, do NOT merge wholesale. | `claude/*` branches |
-
 
 ---
 
@@ -4667,7 +4644,6 @@ them in faction packs. Reference them via `ProvidesPrerequisite` and `Buildable:
 Prerequisites: ~d2k_barracks` etc.
 
 #### Agent assignments for D2k faction completion
-
 
 > ⛔ **SUPERSEDED — this ownership table is STALE. The single authoritative roster is
 > §3.A "Agent roster and current assignments".** It is kept only as provenance; it
@@ -4862,7 +4838,6 @@ When a weapon has `Bullet_Light` + `Bullet_Medium` as two damage mains:
 ### 3.C - D2k Atreides / Harkonnen / Corrino (legacy draft - superseded by §3.B)
 
 **Coordinating agent:** Devin-Echo. See full plan and per-agent instructions in `DEVELOPMENT_LOG.md` §"D2k faction rollout plan — Atreides / Harkonnen / Corrino".
-
 
 > ⛔ **SUPERSEDED — this ownership table is STALE. The single authoritative roster is
 > §3.A "Agent roster and current assignments".** It is kept only as provenance; it
@@ -5267,7 +5242,6 @@ another agent claimed it in the last 30 minutes, do not touch it.
 
 **Agent registry** (maintained in `DEVELOPMENT_LOG.md` → "Agent registry", mirrored here):
 
-
 > ⛔ **SUPERSEDED — this ownership table is STALE. The single authoritative roster is
 > §3.A "Agent roster and current assignments".** It is kept only as provenance; it
 > contradicts §3.A on who owns D2k/Harkonnen and on who the coordinator is. Do NOT
@@ -5469,7 +5443,6 @@ missing-source column now uses each faction's actual routes instead of claiming 
 required for RA2 and TS. The bot-only empty Battle Fortress variant remains separate and did not
 steal `BFRT` rows from the real Battle Fortress.
 
-
 ## 2026-09-28 — A/B duel standard: Frankenstein vs omniscient classic on "A Nuclear Winter"
 
 Maintainer ruling: every bot-vs-bot test runs on the real tournament duel map
@@ -5490,21 +5463,17 @@ the pre-wave `SquadManagerBotModuleCA@generic` config restored verbatim as
 `@classic`, `hardbot` granted for the hard-tier limits/prereqs, and
 `RevealsMap@classic` on its PlayerActor. See DEVELOPMENT_LOG.md 2026-09-28.
 
-
 ## 2026-10-09 Sol: economy logger implementation checkpoint
 
 Isolated codex/replay-health-logger on f7e1d0fff. New opt-in recorder/world controller, bounded writer and queue/head timing core; no YAML mount, queue decision source, engine pin, orders or launches changed. Focused core/writer tests 16/16. Current seam outcome coverage is unresolved, so activation deliberately marks evidence incomplete (UNKNOWN); not ready for adoption. Remaining recorder/schema round-trip tests, corrected seam restack, measured runtime cost and independent review. See docs/design/REPLAY_HEALTH_LOGGER.md.
-
 
 ### 2026-10-09 Sol logger consumer-fit checkpoint
 
 Canonical shared health/raw files, shared schema serializer, early-world-disposal cleanup; no YAML mount or gameplay changes. Focused 20/20 pass. Approved offline analyzer consumes actual C# test output: normal OBSERVED_HEALTHY, 250-tick ready BLOCK, incomplete end UNKNOWN. Still deliberately incomplete from activation pending accepted outcome seam; no adoption or launches.
 
-
 ### 2026-10-09 Sol logger producer-state/cost preparation
 
 Producer liveness separated from queue enablement; disabled unfinished queues paused, Done remains ready; re-enabled idle starts a new interval. Focused27/27 PASS and explicit one-player128-queue/45001-tick core measurement PASS (19,021,579 output bytes). Runtime cost/adoption unproven; shared32MiB budget cannot hold two maximum-census players, so supported cohort forecast and measured cost gate remain required. No games or mount changes.
-
 
 2026-10-09 output-budget correction: shared file cap is now 128MiB, matching
 approved replay_health.read_jsonl MAX_FILE_BYTES (128MiB); line cap64KiB and
@@ -5516,7 +5485,6 @@ runtime benchmark). Raw stream budgets are independent. Arbitrary64-player
 maximum queue/event workloads are not certified; forecasting and overflowUNKNOWN
 remain required. No mount/seam/campaign clearance. Receipt:
 engine/bin/TestResults/economy-health-core-cost-2p.json.
-
 
 ### 2026-10-09 actual-path economy consumer CLI evidence
 
@@ -5532,9 +5500,7 @@ The accepted-resource callback now shares its raw serializer with tests: positiv
 
 Read design/REPLAY_HEALTH_ANALYZER.md before health/campaign work. tools/ai/replay_health.py uses explicit GameUid/player; exits0 startup-observed,20 symptom review hold,21 unknown. No overall strength/integrity certification. 17 regression tests pass;127 historical completed records yield64 RA startup holds/63 GDI-Nod startup observations. Coordinator owns scheduler integration and fresh post-fix controls; live reason logging still required. No game launch or master publication.
 
-
 2026-10-09 replay-health review corrections: rejected duplicate/nonfinite JSON, non-string identities, malformed summary and empty non-list timeline; output now exclusive atomic publication to a new report only, never overwrites artifacts; event joins and window scan linear.22 tests pass including200000 snapshots/events/timeline points in1.20s. ab7285e81 remains superseded FIX REQUIRED; revised commit requires independent re-review. No runtime/game/master changes.
-
 
 2026-10-09 maintainer queue/cash thresholds: separate economy_invariants.py and test_economy_invariants.py implemented against schema1 complete50tick health contract;10 focused tests pass. New logger not shipped: missing telemetry UNKNOWN. Approved replay_health.py bytes unchanged, source/runtime ownership gates remain. New tool requires independentreview beforeintegration; provisional cashband1000..10000/1500ticks, zero/full250ticks, ready250,idle1500,cancels3/1500. See design/REPLAY_HEALTH_ANALYZER.md finalsection.
 
@@ -5550,3 +5516,11 @@ Next: exact-SHA VP review; cost/coverage/adoption remain gated. No launches. Ins
 - Next: C:/cameo-wt/sol-insurance-telemetry, codex/insurance-telemetry; docs/design/INSURANCE_TELEMETRY.md describes default-on observational stream and report contract.
 - Source complete for review: actual payout/cumulative plus covered engine income share; C#10/10/full1440/1440 and Python15/15. No game/boot/runtime acceptance.
 - M13 pure helpers remain unwired at99f89; continue after insurance review handoff. Master publication belongs to Integrator.
+### Sol � M13 restraint-budget checkpoint, 2026-10-10
+- Worktree C:/cameo-wt/sol-m13-liveness, branch codex/m13-liveness; contract docs/design/M13_RESTRAINT_BUDGET.md.
+- Budget tooling only; escort/liveness helpers still unwired. Existing runners requesting all now refuse at the applier.
+- Next: VP exact-tip review and conservative squad integration; causal claim/dispatch evidence must be explicit. No launches.
+
+### Sol � M13 helper R1 correction, 2026-10-10
+- C:/cameo-wt/sol-m13-liveness, codex/m13-liveness: Unsupported survives failed-intent callbacks; focused30/30.
+- Next: exact-tip helper re-review, then explicitly grounded claim/dispatch integration. Helpers remain unwired; no launches.

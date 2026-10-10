@@ -18,6 +18,67 @@ needs:
   Q_ut3_defend_share: [O_ca2_defend_reserve]    # scales the reserve O creates
   AA_cn4_region_roles: [D_zone_topology]        # role fronts need zone-graph regions
 
+effect_classes:
+  D_zone_topology: capability
+  E_engt_transport: capability
+  H_influence_layers: capability
+  G_personality_leads: restraint
+  I_derived_unit_weights: neutral
+  J_rolemix_production: capability
+  M_utility_axes: restraint
+  K_cn2_unit_repair: capability
+  L_cn2_garrison_defense: capability
+  M_cn3_deploy: capability
+  N_ca6_target_intel: neutral
+  O_ca2_defend_reserve: restraint
+  P_di2_director_pacing: restraint
+  Q_ut3_defend_share: restraint
+  R_tc2_sync_attacks: capability
+  S_tc2_defend_answers: restraint
+  T_fb2_demand_capturers: capability
+  U_ut4_expansion_appetite: restraint
+  V_tc2_expansion_claims: restraint
+  W_tc2_role_split: capability
+  X_cn3_bridge_repair: capability
+  Y_cn3_stealth_squads: capability
+  Z_def3_remote_outpost_coverage: capability
+  F_plug_spawn: capability
+  AA_cn4_region_roles: capability
+  AB_garrison_contest: capability
+  AC_cover_map_expansion: capability
+  AJ_field_coverage: capability
+  AD_spaced_base_placement: neutral
+  AE_army_first: restraint
+  AF_harvester_spread: capability
+  AH_parallel_production: capability
+  AG_assault_fanout: restraint
+  ST_scale_targets: restraint
+  AK_build_order_knobs: restraint
+  AL_emergency_net_loss: capability
+  AM_army_staging: restraint
+  AO_tier3_bandits: restraint
+  AQ_inmatch_adapt: restraint
+  F2_ca_f2p2: restraint
+  BB_tc3_coalition_plan: neutral
+  BC_tc3_rescue_election: restraint
+  BD_tc3_sectors: capability
+  BE_tc3_main_target: capability
+  BF_team_capture_claims: restraint
+  BG_raid_mission_steering: capability
+  BH_tc3_assist_election: restraint
+  AN_combat_veto: restraint
+  BI_front_back_placement: restraint
+  AP_tier1_priors: neutral
+  AI_radar_contacts: neutral
+  BJ_squad_hysteresis: restraint
+  BK_squad_order_dedup: neutral
+  BL_protection_episode_guard: restraint
+  BN_squad_pool_fixes: restraint
+  BM_live_combat_model: neutral
+  BO_squad_move_dedup: neutral
+  BU_harvester_logistics: restraint
+  BT_expansion_prebuild: restraint
+
 groups:
   # SHIPPED 2026-10-01 as master defaults after the INC-1+2+3 A/B (all 13-3, 81% vs ctrl 12-4, 75%): former groups
   # A_squad_tactics, B_ownership_engineers_missions, C_f1_frans_services (C on every genericbot tier, §19.1).
