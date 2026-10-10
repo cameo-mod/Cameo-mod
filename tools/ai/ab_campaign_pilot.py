@@ -4,7 +4,7 @@
 This revision plans and audits evidence only. It never starts OpenRA.
 """
 from __future__ import annotations
-import argparse, hashlib, json, os, pathlib, random, re, sqlite3, subprocess, sys, time, zipfile
+import argparse, hashlib, json, os, pathlib, random, re, sqlite3, subprocess, sys, tempfile, time, zipfile
 from contextlib import contextmanager
 from threading import Lock
 import apply_increment_switches as increment
@@ -233,6 +233,50 @@ def dry_run(m,root,engine_root=None,minutes_per_game=8.5,setup_hours=2.0):
  slot_range=[round((small_games/3+large_games)*5/60+setup_hours,2),round((small_games/3+large_games)*12/60+setup_hours,2)]
  return {"mode":"NO_LAUNCH_DRY_RUN","switch":SWITCH,"setups":len(SETUPS),"pairs":32,"games":len(jobs),"jobs":jobs,"launches":0,"execution_authorized":False,"worker_hours_estimate_at_8_5m_each":serial_hours,"parallel_slot_wall_estimate_hours_at_8_5m_each":slot_hours,"parallel_slot_wall_estimate_range_hours_5_to_12m_each":slot_range,"serial_wall_estimate_range_hours_5_to_12m_each":serial_range,"map_engine_acceptance_and_symmetric_spawn_proof":"PENDING_ENGINE_PREFLIGHT","round_stages":ROUND_STAGES,"acceptance_thresholds":m["acceptance_thresholds"],"slot_policy":m["slot_policy"],"ratchet_baseline_manifest_sha256":m["baseline_manifest_sha256"],"missing_campaign_gates":["reviewed integration/source/engine/tool/AI payload hashes frozen in final manifest","actual map acceptance and symmetric spawn proof on pinned engine","runtime launch orchestration: seat-specific bot trees/map.yaml producer, live RSS and wall/stall watchdogs, immutable receipts/resume, PID-scoped cleanup; SQLite leases need live integration","A5 parity and analyzer fixture/negative-control acceptance"]}
 
+def prove_generated_map(job,root,dest):
+ """Render one job with the pinned batch map writer and prove every Multi seat."""
+ import run_ai_match_batch as batch
+ map_path=root/pathlib.PurePosixPath(job["map_path"])
+ with zipfile.ZipFile(map_path) as archive: source_yaml=archive.read("map.yaml").decode("utf-8")
+ spawn_cells=batch.mp_spawn_cells(source_yaml)
+ if job["team_size"]>=2:
+  if len(spawn_cells)<job["required_seats"]: raise ValueError("map has too few mpspawn actors")
+  spawn_cells=batch.split_spawn_sides(spawn_cells,job["team_size"])+spawn_cells[2*job["team_size"]:]
+ seats=job["seat_assignments"]; size=job["team_size"]
+ if size==1:
+  # The legacy writer names its parameters by Multi0/Multi1, not experiment sides.
+  a=next(x for x in seats if x["home"]=="Multi0");b=next(x for x in seats if x["home"]=="Multi1")
+  matchup={"side_a":{"bot":a["bot_type"],"faction":a["faction"]},"side_b":{"bot":b["bot_type"],"faction":b["faction"]}}
+ else:
+  team_a=[x for x in seats if x["side"]=="A"];team_b=[x for x in seats if x["side"]=="B"]
+  matchup={"team_size":size,"slots_a":[int(x["home"][5:]) for x in team_a],"slots_b":[int(x["home"][5:]) for x in team_b],
+           "team_a":[{"bot":x["bot_type"],"faction":x["faction"]} for x in team_a],
+           "team_b":[{"bot":x["bot_type"],"faction":x["faction"]} for x in team_b]}
+ batch.write_variant(map_path,dest,matchup,1)
+ text=(dest/"map.yaml").read_text(encoding="utf-8")
+ blocks={}
+ marks=list(re.finditer(r"(?m)^\tPlayerReference@(Multi\d+):[ \t]*$",text))
+ for index,match in enumerate(marks):
+  end=marks[index+1].start() if index+1<len(marks) else len(text)
+  block=text[match.end():end]; ref=match.group(1)
+  values={k:(re.search(rf"(?m)^\t\t{k}: ([^\n]+)$",block).group(1) if re.search(rf"(?m)^\t\t{k}: ([^\n]+)$",block) else None) for k in ("Bot","Faction","HomeLocation","Playable")}
+  blocks[ref]=values
+ proof=[]
+ for seat in seats:
+  ref=seat["home"]; actual=blocks.get(ref);expected_home=spawn_cells[seat["spawn"]]
+  if not actual or actual["Bot"]!=seat["bot_type"] or actual["Faction"]!=seat["faction"] or actual["Playable"]!="False" or actual["HomeLocation"]!=f"{expected_home[0]},{expected_home[1]}":
+   raise ValueError(f"generated map seat proof mismatch: {ref}")
+  proof.append({**seat,"home_location":actual["HomeLocation"]})
+ return {"map_yaml_sha256":sha(dest/"map.yaml"),"seat_proof_source":"generated_map.yaml","seats":proof}
+
+def preflight_generated_maps(m,root,directory):
+ jobs=make_jobs(m);selected={}
+ for job in jobs:selected.setdefault((job["setup"],job["game_in_pair"]),job)
+ proofs=[]
+ for index,job in enumerate(selected.values()):
+  proofs.append({"setup":job["setup"],"game_in_pair":job["game_in_pair"],"map":job["map"],**prove_generated_map(job,root,directory/f"variant-{index:02d}")})
+ return proofs
+
 def adjudicate(records, receipt, job, manifest_sha):
  """One game -> one verdict; incomplete/cap evidence is never converted to a loss."""
  if not isinstance(receipt,dict) or receipt.get("cell_id")!=job["cell_id"] or receipt.get("manifest_sha256")!=manifest_sha:
@@ -380,7 +424,10 @@ def main(argv=None):
   m=json.loads(a.manifest.read_text(encoding="utf-8"))
   if a.cmd=="dry-run":
    raw=a.manifest.read_bytes();actual=hashlib.sha256(raw).hexdigest();require(actual==a.manifest_sha256,"manifest SHA mismatch")
-   out=dry_run(m,a.repo_root,a.engine_root,a.minutes_per_game,a.setup_hours);out["manifest_sha256"]=actual;a.output.parent.mkdir(parents=True,exist_ok=True);a.output.write_text(json.dumps(out,indent=2)+"\n",encoding="utf-8");print(f"NO_LAUNCH games={out['games']} worker_hours={out['worker_hours_estimate_at_8_5m_each']} slot_wall_hours={out['parallel_slot_wall_estimate_hours_at_8_5m_each']} launches=0");return 0
+   out=dry_run(m,a.repo_root,a.engine_root,a.minutes_per_game,a.setup_hours)
+   with tempfile.TemporaryDirectory(prefix="ab-campaign-map-preflight-") as temp:
+    out["generated_map_preflight"]=preflight_generated_maps(m,a.repo_root,pathlib.Path(temp))
+   out["manifest_sha256"]=actual;a.output.parent.mkdir(parents=True,exist_ok=True);a.output.write_text(json.dumps(out,indent=2)+"\n",encoding="utf-8");print(f"NO_LAUNCH games={out['games']} generated_maps={len(out['generated_map_preflight'])} worker_hours={out['worker_hours_estimate_at_8_5m_each']} slot_wall_hours={out['parallel_slot_wall_estimate_hours_at_8_5m_each']} launches=0");return 0
   validate(m,a.repo_root); raw=a.manifest.read_bytes(); actual=hashlib.sha256(raw).hexdigest();require(actual==a.manifest_sha256,"manifest SHA mismatch")
   def jsonl(path): return [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
   out=analyze(m,actual,json.loads(a.receipts.read_text(encoding="utf-8")),jsonl(a.matches));a.output.parent.mkdir(parents=True,exist_ok=True);a.output.write_text(json.dumps(out,indent=2)+"\n",encoding="utf-8");print(f"ANALYZED games={len(out['games'])} unplanned_receipts={len(out['unplanned_receipt_cells'])}");return 2 if out["unplanned_receipt_cells"] or out["unplanned_game_uids"] or any(g["verdict"]=="INVALID_UNKNOWN" for g in out["games"]) else 0

@@ -26,6 +26,15 @@ class PilotPlanTests(unittest.TestCase):
   self.assertEqual(7.29,result["parallel_slot_wall_estimate_hours_at_8_5m_each"])
   self.assertEqual([5.11,9.47],result["parallel_slot_wall_estimate_range_hours_5_to_12m_each"])
 
+ def test_generated_map_writer_proves_mixed_faction_4v4_seats_without_launch(self):
+  m=manifest();job=next(j for j in pilot.make_jobs(m) if j["team_size"]==4 and j["game_in_pair"]==1)
+  with tempfile.TemporaryDirectory() as temp:
+   proof=pilot.prove_generated_map(job,ROOT,pathlib.Path(temp)/"variant")
+  self.assertEqual("generated_map.yaml",proof["seat_proof_source"])
+  self.assertEqual(8,len(proof["seats"]))
+  self.assertEqual({"td_gdi","td_nod","ra1_allies","ra1_soviets"},{x["faction"] for x in proof["seats"]})
+  self.assertTrue(all(x["home_location"] for x in proof["seats"]))
+
  def test_map_tamper_and_execution_authority_fail_closed(self):
   m=manifest();m["maps"][0]["sha256"]="0"*64
   with self.assertRaisesRegex(ValueError,"map path/SHA"):
