@@ -24,3 +24,19 @@ Pinned for all remaining work: `origin/master@964cdb630b1514e1c1a0baed55cbdbc427
 - Focused tests: `py -3 -m unittest tools.tests.test_ab_campaign_pilot tools.tests.test_campaign_runner -q` — 17/17 PASS; `py_compile` and JSON schema parse pass. Never run `tools/tests` as one suite.
 - No-launch dry run on the pinned 964 source and 6da7fce engine: 64 games, 32 map variants, 144 seat proofs; 11.07 estimated worker-hours, 7.29 slot-wall hours (5.11–9.47 range); 0 launches. Receipt: `tools/tests/fixtures/ab_campaign_pilot_dry_run_receipt.json`.
 - No campaign/A5 games were launched. Engine map acceptance and symmetric-spawn proof remain untested. The execution gate requires an explicit approved manifest plus a two-run exact-pin A5 JSON receipt with seed pins and `IDENTICAL`/`IDENTICAL_TAIL_FLUSH` order stream verdict.
+
+## Resume (2026-10-10 17:22Z, correction)
+
+Current branch `codex/ab-campaign-tooling`, commit `69e0f5acb4e586c239ff6dca318b6ec7fb37c04`, pushed. The earlier statement that no A5 games had been launched is superseded: one A5 run-a was attempted under the reserved parity slot. Gameplay source `mods/cameo` has no diff against baseline 964, but the game failed before a match during ruleset initialization with `Cannot locate type: SquadDesireBotModuleInfo`; failure log: `results/campaign-a5-20261010/run-a/Logs/exception-2026-10-10T171521Z.log`. Classify it `INCOMPLETE_PREFLIGHT_FAILURE`; preserve all artifacts; no second A5 run or campaign outcome cells launched. No OpenRA process from this attempt remains.
+
+Next: diagnose why the binary identified by `engine/VERSION=6da7fce14da541180c6baddd6925118fbef65b94` cannot load a trait required by exact-baseline mod sources. VERSION is descriptive and does not prove binary/source compatibility. Do not relax pin checks. After compatibility is proven, rerun both A5 seeds and verify order streams. Remaining gates: execution-approved manifest and engine acceptance plus symmetric-spawn proof for all eight maps. Current no-launch dry run remains 64 games / 32 variants / 144 seat proofs, estimated 7.29 slot-wall hours (5.11�9.47 range).
+
+### A5 parity gate attempt (2026-10-10)
+
+Three distinct A5 observations; the gate is **NOT PASSED**:
+
+1. `run-a` failed before a match because the copied `engine/bin/OpenRA.Mods.Cameo.dll` was stale and lacked `SquadDesireBotModuleInfo`; exception is preserved at `results/campaign-a5-20261010/run-a/Logs/exception-2026-10-10T171521Z.log`.
+2. After a serial `dotnet build OpenRA.Mods.Cameo/OpenRA.Mods.Cameo.csproj` (0 errors), `run-a-rebuilt` completed one 1v1 gate match with two mutual-lost records, no exception. Fingerprint: source tooling HEAD `69e0f5acb4e586c239ff6dca318b6ec7fb37c04`, engine VERSION `6da7fce14da541180c6baddd6925118fbef65b94`; baseline `mods/cameo` diff from 964 is empty. Manual sampling observed one OpenRA process at 6.55 GiB private bytes; exact peak is not recorded, and this exceeds the campaign's 6.5 GiB limit. Treat this run as safety-invalid for A5 parity evidence.
+3. `run-b-rebuilt` was interrupted at a sample of 8.07 GiB private bytes, exceeding the 6.5 GiB campaign limit. PID 19040 was killed after verifying its command line referenced this exact support directory; the companion OpenRA PID 31080 and the same-run retry tree (PIDs 30136, 31996, 30788, then PID 10444) were also PID-scoped stopped by exact support-directory identity to prevent automatic retries. Logs/output remain under `results/campaign-a5-20261010/run-b-rebuilt`.
+
+No replay parity comparison is valid; no exact-baseline A5 receipt was produced; no campaign outcome cell launched. Stop trigger: observed private-byte ceiling breach. Tooling must add/verify early enough sampling for A5, then exact binary/source build provenance and memory-safe A5 must be re-established before any campaign run. All OpenRA/A5 worker processes are now gone; the reserved slot was released in `HEAVY_RUN_WINDOW.txt`.
