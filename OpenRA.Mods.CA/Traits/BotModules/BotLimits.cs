@@ -29,6 +29,15 @@ namespace OpenRA.Mods.CA.Traits
 
 		public readonly int InitialAttackDelay = 0;
 
+		[Desc("M13 maximum continuously eligible no-launch interval. Used only by the default-off M13 consumer.")]
+		public readonly int AttackLivenessMaxNoLaunchTicks = 7500;
+		[Desc("M13 non-renewing response expiry from first admission; a delay on the difficulty line.")]
+		public readonly int TeamResponseMaxLeaseTicks = 1500;
+		[Desc("M13 response re-admission cooldown for the same claim episode.")]
+		public readonly int TeamResponseRearmCooldownTicks = 750;
+		[Desc("M13 concurrent responses per bot. Capacity invariant: exactly one at every tier.")]
+		public readonly int TeamResponseLeaseLimit = 1;
+
 		[Desc("Prioritize the first barracks before the first refinery for configured factions.")]
 		public readonly bool PrioritizeBarracksBeforeRefinery = false;
 

@@ -68,6 +68,9 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Maximum number of units AI can have idle.")]
 		public readonly int MaxIdleUnits = 36;
 
+		[Desc("M13 bounded team-response and attack-liveness consumer. Default off; classic excluded by the increment applier.")]
+		public readonly bool AttackLivenessEnabled = false;
+
 		[ActorReference]
 		[Desc("Units that form a guerrilla squad.")]
 		public readonly HashSet<string> GuerrillaTypes = new();
@@ -3189,7 +3192,8 @@ namespace OpenRA.Mods.CA.Traits
 			if (Info.SquadValue > 0 && scaleTargetProviders.TryArmyValue(Info.SquadValue, out var armyTarget))
 			{
 				desiredValue = armyTarget;
-				maxIdleUnits = Math.Max(1, (int)((long)Info.MaxIdleUnits * armyTarget / Info.SquadValue));
+				maxIdleUnits = M13LaunchPolicyCA.MaxIdleUnits(Info.AttackLivenessEnabled, Info.MaxIdleUnits,
+					Info.SquadValue, armyTarget);
 			}
 
 			var requiredValue = ApplyForceScale(desiredValue, forceScale);

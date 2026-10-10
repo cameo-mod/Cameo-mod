@@ -20492,3 +20492,7 @@ and the exact merged tree failed the fog audit.
 - Separate codex/m13-coalition-episodes from frozen75a7897ad; lead-granted BotSituation publisher/admission plumbing only.
 - Published defence admission carries stable owner identity; withdrawal/re-admission and legacy-save UNKNOWN covered. Expansion assist remains UNKNOWN without provider proof.
 - Focused144/144 PASS; full suite in frozen receipt. Decisions/orders/RNG/sync untouched, no launches.
+
+### Sol M13 tier/count-valve checkpoint (2026-10-10)
+- codex/m13-runtime-wiring from accepted59e80: one default-off BV group, exact ten-tier delay/capacity values, armed absolute MaxIdleUnits in scale-target branch; legacy formula unchanged off.
+- Focused49/49 + Python19/19; switch dry run changes six generic personalities, excludes classic. docs/design/M13_RUNTIME_WIRING.md lists remaining work; no fullM13/runtime claim.
