@@ -291,7 +291,7 @@ def run_cell(index: int) -> dict:
 		["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip(),
 		"baseline_parent": BASELINE, "engine_version": (ROOT / "engine/VERSION").read_text().strip(),
 		"binary_sha256": {str(p.relative_to(ROOT)): file_sha256(p) for p in (
-			ROOT / "engine/bin/OpenRA.Game.exe", ROOT / "engine/bin/OpenRA.Mods.Cameo.dll") if p.is_file()},
+			ROOT / "engine/bin/OpenRA.exe", ROOT / "engine/bin/OpenRA.Mods.Cameo.dll") if p.is_file()},
 		"exit_code": proc.returncode, "stop_reason": stop_reason or "PROCESS_EXIT",
 		"wall_seconds": round(time.monotonic() - start, 2), "peak_private_bytes": peak,
 		"stop_threshold_bytes": PROCESS_STOP, "host_soft_stop_bytes": HOST_SOFT_STOP,
@@ -332,7 +332,7 @@ def main() -> int:
 		raise RuntimeError(f"diagnostic launch admission failed: {host}")
 	if not COUNTERS_EXE.is_file():
 		raise RuntimeError(f"System.Runtime counter tool missing: {COUNTERS_EXE}")
-	if not (ROOT / "engine/bin/OpenRA.Game.exe").is_file() or not (ROOT / "engine/bin/OpenRA.Mods.Cameo.dll").is_file():
+	if not (ROOT / "engine/bin/OpenRA.exe").is_file() or not (ROOT / "engine/bin/OpenRA.Mods.Cameo.dll").is_file():
 		raise RuntimeError("engine executable or Cameo DLL missing")
 	if process_rows(OUT):
 		raise RuntimeError("unexpected OpenRA process already names probe output")
@@ -371,7 +371,7 @@ def main() -> int:
 	receipt = {"purpose": "A5_MEMORY_QUALIFICATION_ONLY_NOT_CAMPAIGN_OUTCOME",
 		"baseline_commit": BASELINE, "source_head": subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip(),
 		"binary_sha256": {str(p.relative_to(ROOT)): file_sha256(p) for p in (
-			ROOT / "engine/bin/OpenRA.Game.exe", ROOT / "engine/bin/OpenRA.Mods.Cameo.dll")},
+			ROOT / "engine/bin/OpenRA.exe", ROOT / "engine/bin/OpenRA.Mods.Cameo.dll")},
 		"dotnet_counters_sha256": file_sha256(COUNTERS_EXE),
 		"engine_version": ENGINE, "seed": SEED, "pair": results,
 		"order_stream_verdict": order_verdict, "system_openra_process_count": processes_left.stdout.strip(),
