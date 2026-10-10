@@ -16,15 +16,16 @@
   "baseline_manifest_path": "tools/tests/fixtures/ab_campaign_baseline.json",
   "baseline_manifest_sha256": "27b638ecd7e33caa68003a020d0d4309822826405a7afe147983f92027a3e26a",
   "pins": {
-    "source_commit": "700bb16483f6d92664153e98d6f2560c312acaab",
+    "source_commit": "964cdb630b1514e1c1a0baed55cbdbc427d5fc11",
     "engine_version": "6da7fce14da541180c6baddd6925118fbef65b94"
   },
   "switch_patch_sha256": "d710567579cb3673eb33701ec881495f0a2a17d6203194b0efdc8052f4de4523",
-  "baseline_ai_payload_sha256": "1bacffdc8ff8ebdaf0e7b9f669d690205472ce3c09af62812029eacbe1151c51",
-  "treatment_ai_payload_sha256": "9646c765c9c18905156b31298c34e8d92050dd326e29a8c7adacf9420e8b9f33",
+  "baseline_ai_payload_sha256": "932e2e5c919de6f5b493e1722e6e66e39a3a5f1577b29aa58a571492b7de9d69",
+  "treatment_ai_payload_sha256": "acdfd3a3e2c7d405a776703593f1d52c5f357b423e75ffb224392159c009c725",
   "tool_sha256": {
-    "driver_analyzer": "94319f4c57a002890c6dc60ba04e9d643a393a8580357f06576e75a15952b2ff",
-    "batch_runner": "660109df9a5cb431dc0b0fa426ebbba314cae7ac154f8786d71a418402a24cee",
+    "driver_analyzer": "a8b712535828dbb057228230eab3493d2864ec1f6e8923c0a37079b8570a1547",
+    "campaign_runner": "b0de63b099ef1ac35cbb983e789a4a4e8a974f727c8c809c222bc64c16b39424",
+    "batch_runner": "d0d42746a28fa23a03849108a5b52d36455f0c1cad107d78ff029d16e345efa7",
     "switch_applier": "5376258709f2ff6512e402abeaf09e164abe483142980830bc72269af047f97e"
   },
   "binary_sha256": {
@@ -51,7 +52,7 @@
     "small_team_size_max": 2,
     "large_game_exclusive": true,
     "min_free_ram_bytes": 6442450944,
-    "max_private_bytes": 8589934592
+    "max_private_bytes": 6979321856
   },
   "seeds": [
     1337,
@@ -256,5 +257,6 @@
         "ra1_soviets"
       ]
     }
-  ]
+  ],
+  "receipt_schema_sha256": "458b9f6444b91f606ad384bbff5a4db46ae7e2061ff4a66811b9b9d3fec974eb"
 }

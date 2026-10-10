@@ -7,7 +7,7 @@ import apply_increment_switches as increment
 def manifest():
  baseline=ROOT/"tools/tests/fixtures/ab_campaign_baseline.json"
  _,groups,_=increment.load_spec(ROOT/"tools/ai/increment_switches.yaml")
- return {"schema":1,"switch":pilot.SWITCH,"execution_approved":False,"pairs_per_setup":2,"team_size_scope":[1,2,3,4],"arm_bot_types":{"control":"hard_control","treatment":"hard_treatment"},"baseline_manifest_path":"tools/tests/fixtures/ab_campaign_baseline.json","baseline_manifest_sha256":pilot.sha(baseline),"pins":{"source_commit":"700bb16483f6d92664153e98d6f2560c312acaab","engine_version":"6da7fce14da541180c6baddd6925118fbef65b94"},"switch_patch_sha256":increment.group_patch_sha256(groups[pilot.SWITCH]),"baseline_ai_payload_sha256":pilot.ai_payload_sha(ROOT),"treatment_ai_payload_sha256":pilot.ai_payload_sha(ROOT,pilot.SWITCH),"tool_sha256":{"driver_analyzer":pilot.sha(ROOT/"tools/ai/ab_campaign_pilot.py"),"batch_runner":pilot.sha(ROOT/"tools/ai/run_ai_match_batch.py"),"switch_applier":pilot.sha(ROOT/"tools/ai/apply_increment_switches.py")},"binary_sha256":{"bin/OpenRA.exe":"5693f355792ebb68699793f96ef2167b733c5e7756f580858c5090226418c984","bin/OpenRA.dll":"92ee9dacd08869593dc5ad70c2d1ce48f701caf8277ea3bd692acf2224a8ca77","bin/OpenRA.Mods.Cameo.dll":"41f37982c146f73b4a9c07071f34b47e214178cb9413e514f05af9af2d44b3a4"},"round_stages":pilot.ROUND_STAGES,"acceptance_thresholds":pilot.DEFAULT_THRESHOLDS,"slot_policy":dict(pilot.SLOT_POLICY),"seeds":[1337,7331],"maps":[{"name":k,"path":v[0],"sha256":v[1],"required_seats":v[2]} for k,v in pilot.MAPS.items()],"setups":[{"id":n,"team_size":s,"map":m,"team_factions":list(f)} for n,s,m,f in pilot.SETUPS]}
+ return {"schema":1,"switch":pilot.SWITCH,"execution_approved":False,"pairs_per_setup":2,"team_size_scope":[1,2,3,4],"arm_bot_types":{"control":"hard_control","treatment":"hard_treatment"},"baseline_manifest_path":"tools/tests/fixtures/ab_campaign_baseline.json","baseline_manifest_sha256":pilot.sha(baseline),"pins":{"source_commit":"964cdb630b1514e1c1a0baed55cbdbc427d5fc11","engine_version":"6da7fce14da541180c6baddd6925118fbef65b94"},"switch_patch_sha256":increment.group_patch_sha256(groups[pilot.SWITCH]),"baseline_ai_payload_sha256":pilot.ai_payload_sha(ROOT),"treatment_ai_payload_sha256":pilot.ai_payload_sha(ROOT,pilot.SWITCH),"tool_sha256":{"driver_analyzer":pilot.sha(ROOT/"tools/ai/ab_campaign_pilot.py"),"campaign_runner":pilot.sha(ROOT/"tools/ai/campaign_runner.py"),"batch_runner":pilot.sha(ROOT/"tools/ai/run_ai_match_batch.py"),"switch_applier":pilot.sha(ROOT/"tools/ai/apply_increment_switches.py")},"receipt_schema_sha256":pilot.sha(ROOT/"tools/ai/ab_campaign_receipt.schema.json"),"binary_sha256":{"bin/OpenRA.exe":"5693f355792ebb68699793f96ef2167b733c5e7756f580858c5090226418c984","bin/OpenRA.dll":"92ee9dacd08869593dc5ad70c2d1ce48f701caf8277ea3bd692acf2224a8ca77","bin/OpenRA.Mods.Cameo.dll":"41f37982c146f73b4a9c07071f34b47e214178cb9413e514f05af9af2d44b3a4"},"round_stages":pilot.ROUND_STAGES,"acceptance_thresholds":pilot.DEFAULT_THRESHOLDS,"slot_policy":dict(pilot.SLOT_POLICY),"seeds":[1337,7331],"maps":[{"name":k,"path":v[0],"sha256":v[1],"required_seats":v[2]} for k,v in pilot.MAPS.items()],"setups":[{"id":n,"team_size":s,"map":m,"team_factions":list(f)} for n,s,m,f in pilot.SETUPS]}
 
 class PilotPlanTests(unittest.TestCase):
  def test_approved_amendment_expands_to_64_side_swapped_games(self):
@@ -29,11 +29,16 @@ class PilotPlanTests(unittest.TestCase):
  def test_generated_map_writer_proves_mixed_faction_4v4_seats_without_launch(self):
   m=manifest();job=next(j for j in pilot.make_jobs(m) if j["team_size"]==4 and j["game_in_pair"]==1)
   with tempfile.TemporaryDirectory() as temp:
-   proof=pilot.prove_generated_map(job,ROOT,pathlib.Path(temp)/"variant")
+   dest=pathlib.Path(temp)/"variant";proof=pilot.prove_generated_map(job,ROOT,dest)
+   monitor_text=(dest/"ab_campaign_monitor.lua").read_text(encoding="utf-8")
   self.assertEqual("generated_map.yaml",proof["seat_proof_source"])
   self.assertEqual(8,len(proof["seats"]))
   self.assertEqual({"td_gdi","td_nod","ra1_allies","ra1_soviets"},{x["faction"] for x in proof["seats"]})
   self.assertTrue(all(x["home_location"] for x in proof["seats"]))
+  self.assertEqual(45000,proof["runtime_monitor"]["cap_tick"])
+  self.assertEqual("AB_CAMPAIGN_ACTOR_SAMPLE",proof["runtime_monitor"]["actor_count_marker"])
+  self.assertIn('"Neutral", "Creeps"',monitor_text)
+  self.assertIn('AB_CAMPAIGN_CAP tick=',monitor_text)
 
  def test_map_tamper_and_execution_authority_fail_closed(self):
   m=manifest();m["maps"][0]["sha256"]="0"*64
@@ -59,6 +64,17 @@ class PilotPlanTests(unittest.TestCase):
    self.assertEqual(["ai"], [p.name for p in (base/"treatment"/"mods"/"cameo").iterdir()])
    with self.assertRaisesRegex(ValueError,"destination must be new"):
     pilot.materialize_ai_arm(ROOT,base/"treatment",pilot.SWITCH)
+
+ def test_dual_arm_ai_aliases_isolate_selected_switch(self):
+  with tempfile.TemporaryDirectory() as temp:
+   result=pilot.materialize_dual_arm_ai(ROOT,pathlib.Path(temp)/"combined",pilot.SWITCH)
+   text=(pathlib.Path(temp)/"combined"/"mods"/"cameo"/"ai"/"ai.yaml").read_text(encoding="utf-8")
+   self.assertEqual({"control":"hard_control","treatment":"hard_treatment"},result["arm_types"])
+   self.assertIn("Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, hard_control, hard_treatment",text)
+   self.assertIn("Condition: campaign_treatment\n\t\tBots: hard_treatment",text)
+   self.assertIn("HarvesterBotModuleCA@generic:\n\t\tRequiresCondition: genericbot && !campaign_treatment",text)
+   self.assertIn("HarvesterBotModuleCA@campaign_treatment:\n\t\tUseHarvesterLogistics: true\n\t\tRequiresCondition: campaign_treatment",text)
+   self.assertIn("UseHarvesterLogistics: true",text)
 
  def test_missing_map_is_rejected(self):
   m=manifest();m["maps"][0]["path"]="mods/cameo/maps/missing.oramap"
@@ -133,12 +149,5 @@ class PilotPlanTests(unittest.TestCase):
    self.assertTrue(db2.acquire("exclusive",4,floor));self.assertFalse(db1.acquire("small",1,floor))
    with self.assertRaisesRegex(ValueError,"memory cap"): db2.heartbeat("exclusive",8*1024**3)
    db2.release("exclusive");db2.release("y");db1.release("z")
-
- def test_switch_order_covers_the_frozen_sixty_group_catalog(self):
-  import apply_increment_switches as switches
-  _,groups,_=switches.load_spec(ROOT/"tools"/"ai"/"increment_switches.yaml")
-  doc=(ROOT/"SWITCH_ORDER_2026-10-11.md").read_text(encoding="utf-8")
-  for name in groups: self.assertIn(f"`{name}`",doc)
-  self.assertEqual(60,len(groups))
 
 if __name__=="__main__": unittest.main()

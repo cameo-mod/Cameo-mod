@@ -4,7 +4,7 @@
 This revision plans and audits evidence only. It never starts OpenRA.
 """
 from __future__ import annotations
-import argparse, hashlib, json, os, pathlib, random, re, sqlite3, subprocess, sys, tempfile, time, zipfile
+import argparse, hashlib, json, os, pathlib, random, re, shutil, sqlite3, subprocess, sys, tempfile, time, zipfile
 from contextlib import contextmanager
 from threading import Lock
 import apply_increment_switches as increment
@@ -31,7 +31,7 @@ SETUPS = [
  ("4v4_sahara",4,"great_sahara_2",("td_gdi","td_nod","ra1_allies","ra1_soviets")),("4v4_ice",4,"ice_cold",("td_gdi","td_nod","ra1_allies","ra1_soviets")),
 ]
 RAM_FLOOR_BYTES = 6 * 1024**3
-PROCESS_CAP_BYTES = 8 * 1024**3
+PROCESS_CAP_BYTES = int(6.5 * 1024**3)
 ROUND_STAGES = [16,32,48,64]
 ECONOMY_INTERVAL_TICKS = tuple(range(5000, 45001, 5000))
 FIX_SAFETY_SWITCHES = frozenset("K_cn2_unit_repair AL_emergency_net_loss AN_combat_veto AG_assault_fanout BJ_squad_hysteresis BK_squad_order_dedup BL_protection_episode_guard BN_squad_pool_fixes BO_squad_move_dedup".split())
@@ -187,6 +187,72 @@ def materialize_ai_arm(root,destination,switch=None):
  if switch is not None: require(changed_fields>0,"selected treatment switch produced no AI payload delta")
  return {"arm":"control" if switch is None else "treatment","switch":switch,"payload_sha256":payload,"changed_fields":changed_fields,"changed_files":changed_files,"runnable":False}
 
+def _yaml_root_trait(text,key):
+ """Return the source span of one top-level trait in the ^AIDifficulties actor."""
+ lines=text.splitlines(keepends=True); start=None; end=len(lines)
+ pattern=re.compile(r"^\t"+re.escape(key)+r":(?:\n|$)")
+ for i,line in enumerate(lines):
+  if pattern.match(line): start=i;break
+ if start is None: raise ValueError(f"dual-arm AI trait missing: {key}")
+ for i in range(start+1,len(lines)):
+  if lines[i].startswith("\t") and not lines[i].startswith("\t\t") and not lines[i].startswith("\t#"):
+   end=i;break
+ return lines,start,end
+
+def materialize_dual_arm_ai(root,destination,switch,accepted_switches=()):
+ """Compose two bot aliases in one game; treatment-only modules use a bot-owner condition."""
+ _,groups,skip=increment.load_spec(pathlib.Path(__file__).with_name("increment_switches.yaml"))
+ require(switch in BEHAVIOR_SWITCHES,"unknown or fix/safety switch cannot enter A/B")
+ require(len(set(accepted_switches))==len(accepted_switches) and all(x in BEHAVIOR_SWITCHES for x in accepted_switches),"invalid ratchet baseline switch list")
+ require(not destination.exists(),"dual-arm output destination must be new")
+ source=root/"mods"/"cameo"/"ai"; out=destination/"mods"/"cameo"/"ai";out.mkdir(parents=True)
+ for p in source.glob("*.yaml"): shutil.copyfile(p,out/p.name)
+ path=out/"ai.yaml"; raw=path.read_text(encoding="utf-8");baseline=raw
+ for accepted in accepted_switches:
+  for trait,fields in groups[accepted].items(): baseline,_=increment.apply(baseline,trait,fields,skip)
+ treatment=baseline
+ for trait,fields in groups[switch].items(): treatment,_=increment.apply(treatment,trait,fields,skip)
+ aliased=baseline
+ for trait in groups[switch]:
+  b,bs,be=_yaml_root_trait(baseline,trait);t,ts,te=_yaml_root_trait(treatment,trait)
+  original="".join(b[bs:be]);changed="".join(t[ts:te]);
+  cond=re.search(r"(?m)^\t\tRequiresCondition: (.+)$",original)
+  require(cond is not None,"switch trait has no explicit RequiresCondition: "+trait)
+  original=original[:cond.start(1)]+cond.group(1)+" && !campaign_treatment"+original[cond.end(1):]
+  clone=changed
+  clone=re.sub(r"(?m)^\t"+re.escape(trait)+r":", "\t"+trait.split("@")[0]+"@campaign_treatment:", clone, count=1)
+  c=re.search(r"(?m)^\t\tRequiresCondition: (.+)$",clone)
+  if c:
+   target=c.group(1).replace("genericbot","campaign_treatment")
+   clone=clone[:c.start(1)]+target+clone[c.end(1):]
+  else:
+   clone=clone.replace("\n", "\n\t\tRequiresCondition: campaign_treatment\n",1)
+  # Replace just this trait in the common stack and append its treatment instance.
+  common_lines,cs,ce=_yaml_root_trait(aliased,trait)
+  common_lines[cs:ce]=[original+clone]
+  aliased="".join(common_lines)
+ # Register hidden hard-tier aliases and their owner conditions.
+ def extend_bots(key,extra):
+  nonlocal aliased
+  lines,a,b=_yaml_root_trait(aliased,key);block="".join(lines[a:b])
+  m=re.search(r"(?m)^(\t\tBots: )([^\n]+)$",block);require(m is not None,"bot owner condition lacks Bots: "+key)
+  names=m.group(2).split(", ")
+  for name in extra:
+   if name not in names:names.append(name)
+  block=block[:m.start(2)]+", ".join(names)+block[m.end(2):];lines[a:b]=[block];aliased="".join(lines)
+ extend_bots("GrantConditionOnBotOwner@generic",["hard_control","hard_treatment"])
+ extend_bots("GrantConditionOnBotOwner@hard",["hard_control","hard_treatment"])
+ control="\tModularBot@HardControlAI:\n\t\tName: bot_ai.hard_control\n\t\tType: hard_control\n\t\tHiddenInLobby: True\n"
+ treatment_bot="\tModularBot@HardTreatmentAI:\n\t\tName: bot_ai.hard_treatment\n\t\tType: hard_treatment\n\t\tHiddenInLobby: True\n"
+ botlines,a,b=_yaml_root_trait(aliased,"ModularBot@HardAI");
+ # Insertion follows the existing hard bot declaration without altering it.
+ botlines[b:b]=[control+treatment_bot];aliased="".join(botlines)
+ hard_cond="\tGrantConditionOnBotOwner@campaigntreatment:\n\t\tCondition: campaign_treatment\n\t\tBots: hard_treatment\n"
+ condlines,a,b=_yaml_root_trait(aliased,"GrantConditionOnBotOwner@hard");condlines[b:b]=[hard_cond];aliased="".join(condlines)
+ path.write_text(aliased,encoding="utf-8")
+ changed=sorted(p.name for p in source.glob("*.yaml"))
+ return {"switch":switch,"accepted_switches":list(accepted_switches),"ai_yaml_sha256":sha(path),"runtime_files":changed,"runnable":False,"arm_types":{"control":"hard_control","treatment":"hard_treatment"}}
+
 def make_jobs(manifest):
  seeds=manifest.get("seeds")
  require(isinstance(seeds,list) and len(seeds)==2 and len(set(seeds))==2 and all(type(x)==int and x>=0 for x in seeds),"pilot needs exactly two distinct nonnegative seeds")
@@ -206,7 +272,7 @@ def make_jobs(manifest):
     jobs.append({"cell_id":f"{setup}|{seed}|{game}","switch":SWITCH,"setup":setup,"team_size":size,"map":mapname,"map_path":rel,"map_sha256":digest,"seed":seed,"pair":pair,"game_in_pair":game,"control_side":ca,"treatment_side":ta,"team_factions":list(factions),"required_seats":2*size,"arm_bot_types":manifest["arm_bot_types"],"seat_assignments":assignments})
  return jobs
 
-def validate(manifest,root,engine_root=None):
+def validate(manifest,root,engine_root=None,execution=False):
  require(manifest.get("schema")==1 and manifest.get("switch")==SWITCH,"schema/switch mismatch")
  require(manifest.get("pairs_per_setup")==2 and manifest.get("team_size_scope")==[1,2,3,4],"pilot design mismatch")
  require(manifest.get("arm_bot_types")=={"control":"hard_control","treatment":"hard_treatment"},"distinct control/treatment hard bot bindings required")
@@ -217,14 +283,15 @@ def validate(manifest,root,engine_root=None):
  basepath=(root/pathlib.PurePosixPath(manifest.get("baseline_manifest_path",""))).resolve()
  require(root.resolve() in basepath.parents and basepath.is_file() and sha(basepath)==baseline,"ratchet baseline manifest file/hash mismatch")
  pins=manifest.get("pins")
- require(isinstance(pins,dict) and pins.get("source_commit")=="700bb16483f6d92664153e98d6f2560c312acaab" and pins.get("engine_version")=="6da7fce14da541180c6baddd6925118fbef65b94","source/engine pin mismatch")
+ require(isinstance(pins,dict) and pins.get("source_commit")=="964cdb630b1514e1c1a0baed55cbdbc427d5fc11" and pins.get("engine_version")=="6da7fce14da541180c6baddd6925118fbef65b94","source/engine pin mismatch")
  p=subprocess.run(["git","-C",str(root),"cat-file","-e",pins["source_commit"]+"^{commit}"],capture_output=True,timeout=20)
  require(p.returncode==0,"pinned source commit unavailable")
  require(manifest.get("switch_patch_sha256")==increment.group_patch_sha256(increment.load_spec(pathlib.Path(__file__).with_name("increment_switches.yaml"))[1][SWITCH]),"BU patch SHA mismatch")
  require(manifest.get("baseline_ai_payload_sha256")==ai_payload_sha(root),"baseline AI payload mismatch")
  require(manifest.get("treatment_ai_payload_sha256")==ai_payload_sha(root,SWITCH),"one-switch treatment AI payload mismatch")
- tool_paths={"driver_analyzer":pathlib.Path(__file__),"batch_runner":root/"tools"/"ai"/"run_ai_match_batch.py","switch_applier":root/"tools"/"ai"/"apply_increment_switches.py"}
+ tool_paths={"driver_analyzer":pathlib.Path(__file__),"campaign_runner":root/"tools"/"ai"/"campaign_runner.py","batch_runner":root/"tools"/"ai"/"run_ai_match_batch.py","switch_applier":root/"tools"/"ai"/"apply_increment_switches.py"}
  require(manifest.get("tool_sha256")=={k:sha(v) for k,v in tool_paths.items()},"tool SHA pins mismatch")
+ require(manifest.get("receipt_schema_sha256")==sha(root/"tools"/"ai"/"ab_campaign_receipt.schema.json"),"receipt schema SHA mismatch")
  binaries=manifest.get("binary_sha256")
  require(isinstance(binaries,dict) and len(binaries)==3 and all(len(v)==64 for v in binaries.values()),"engine binary SHA pins missing")
  if engine_root is not None:
@@ -243,7 +310,7 @@ def validate(manifest,root,engine_root=None):
   seats=len(set(re.findall(r"PlayerReference@Multi(\d+):",y)))
   require(seats>=entry["required_seats"],f"insufficient playable seats: {entry['name']}")
  # Explicitly non-executable: execution approvals and runtime backend do not exist in this tool.
- require(manifest.get("execution_approved") is False,"dry-run manifest must not authorize execution")
+ require(manifest.get("execution_approved") is execution,"dry-run manifest must not authorize execution" if not execution else "execution manifest must explicitly authorize execution")
  return True
 
 def dry_run(m,root,engine_root=None,minutes_per_game=8.5,setup_hours=2.0):
@@ -253,7 +320,40 @@ def dry_run(m,root,engine_root=None,minutes_per_game=8.5,setup_hours=2.0):
  slot_hours=round((small_games/3+large_games)*minutes_per_game/60+setup_hours,2)
  serial_range=[round(len(jobs)*5/60+setup_hours,2),round(len(jobs)*12/60+setup_hours,2)]
  slot_range=[round((small_games/3+large_games)*5/60+setup_hours,2),round((small_games/3+large_games)*12/60+setup_hours,2)]
- return {"mode":"NO_LAUNCH_DRY_RUN","switch":SWITCH,"setups":len(SETUPS),"pairs":32,"games":len(jobs),"jobs":jobs,"launches":0,"execution_authorized":False,"worker_hours_estimate_at_8_5m_each":serial_hours,"parallel_slot_wall_estimate_hours_at_8_5m_each":slot_hours,"parallel_slot_wall_estimate_range_hours_5_to_12m_each":slot_range,"serial_wall_estimate_range_hours_5_to_12m_each":serial_range,"map_engine_acceptance_and_symmetric_spawn_proof":"PENDING_ENGINE_PREFLIGHT","round_stages":ROUND_STAGES,"acceptance_thresholds":m["acceptance_thresholds"],"slot_policy":m["slot_policy"],"ratchet_baseline_manifest_sha256":m["baseline_manifest_sha256"],"missing_campaign_gates":["reviewed integration/source/engine/tool/AI payload hashes frozen in final manifest","actual map acceptance and symmetric spawn proof on pinned engine","runtime launch orchestration: seat-specific bot trees/map.yaml producer, live RSS and wall/stall watchdogs, immutable receipts/resume, PID-scoped cleanup; SQLite leases need live integration","A5 parity and analyzer fixture/negative-control acceptance"]}
+ return {"mode":"NO_LAUNCH_DRY_RUN","switch":SWITCH,"setups":len(SETUPS),"pairs":32,"games":len(jobs),"jobs":jobs,"launches":0,"execution_authorized":False,"worker_hours_estimate_at_8_5m_each":serial_hours,"parallel_slot_wall_estimate_hours_at_8_5m_each":slot_hours,"parallel_slot_wall_estimate_range_hours_5_to_12m_each":slot_range,"serial_wall_estimate_range_hours_5_to_12m_each":serial_range,"map_engine_acceptance_and_symmetric_spawn_proof":"PENDING_ENGINE_PREFLIGHT","round_stages":ROUND_STAGES,"acceptance_thresholds":m["acceptance_thresholds"],"slot_policy":m["slot_policy"],"ratchet_baseline_manifest_sha256":m["baseline_manifest_sha256"],"missing_campaign_gates":["lead-approved executable manifest and exact-baseline A5 parity receipt","engine acceptance plus symmetric spawn proof for all eight maps","fixture/negative-control acceptance for the downstream paired analyzer"]}
+
+def install_campaign_monitor(dest,seat_count,cap_tick=45000,sample_interval=5000):
+ """Install map-local actor-count sampling and an explicit all-seat censor marker."""
+ require(seat_count in (2,4,6,8) and cap_tick==45000 and 0<sample_interval<=cap_tick,"campaign monitor bounds")
+ names=", ".join(json.dumps(f"Multi{i}") for i in range(seat_count))+', "Neutral", "Creeps"'
+ lua=f'''local SeatNames = {{{names}}}
+local CapTick = {cap_tick}
+local SampleInterval = {sample_interval}
+local Objectives = {{}}
+local function SampleActors()
+\tlocal total = 0
+\tfor _, name in ipairs(SeatNames) do
+\t\tlocal player = Player.GetPlayer(name)
+\t\tif player then for _, actor in ipairs(player.GetActors()) do if actor.Type ~= "player" then total = total + 1 end end end
+\tend
+\tprint("AB_CAMPAIGN_ACTOR_SAMPLE tick=" .. DateTime.GameTime .. " actor_count=" .. total)
+end
+WorldLoaded = function()
+\tfor _, name in ipairs(SeatNames) do local p = Player.GetPlayer(name); if p then Objectives[name] = p.AddPrimaryObjective("Campaign observation cap") end end
+\tprint("AB_CAMPAIGN_STARTED tick=" .. DateTime.GameTime .. " cap=" .. CapTick)
+\tfor tick = SampleInterval, CapTick - SampleInterval, SampleInterval do Trigger.AfterDelay(tick, SampleActors) end
+\tTrigger.AfterDelay(CapTick, function()
+\t\tSampleActors(); print("AB_CAMPAIGN_CAP tick=" .. DateTime.GameTime)
+\t\tfor _, name in ipairs(SeatNames) do local p = Player.GetPlayer(name); if p and Objectives[name] then p.MarkFailedObjective(Objectives[name]) end end
+\tend)
+end
+'''
+ script=dest/"ab_campaign_monitor.lua";script.write_text(lua,encoding="utf-8")
+ rules=dest/"duel_rules.yaml";text=rules.read_text(encoding="utf-8")
+ world=re.search(r"(?m)^World:\s*$",text);require(world is not None and "LuaScript:" not in text,"harness rules cannot accept campaign monitor Lua")
+ text=text[:world.end()]+"\n\tLuaScript:\n\t\tScripts: ab_campaign_monitor.lua"+text[world.end():]
+ rules.write_text(text,encoding="utf-8")
+ return {"script_sha256":sha(script),"rules_sha256":sha(rules),"sample_interval_ticks":sample_interval,"cap_tick":cap_tick,"actor_count_marker":"AB_CAMPAIGN_ACTOR_SAMPLE"}
 
 def prove_generated_map(job,root,dest):
  """Render one job with the pinned batch map writer and prove every Multi seat."""
@@ -275,6 +375,7 @@ def prove_generated_map(job,root,dest):
            "team_a":[{"bot":x["bot_type"],"faction":x["faction"]} for x in team_a],
            "team_b":[{"bot":x["bot_type"],"faction":x["faction"]} for x in team_b]}
  batch.write_variant(map_path,dest,matchup,1)
+ monitor=install_campaign_monitor(dest,job["required_seats"])
  text=(dest/"map.yaml").read_text(encoding="utf-8")
  blocks={}
  marks=list(re.finditer(r"(?m)^\tPlayerReference@(Multi\d+):[ \t]*$",text))
@@ -289,7 +390,7 @@ def prove_generated_map(job,root,dest):
   if not actual or actual["Bot"]!=seat["bot_type"] or actual["Faction"]!=seat["faction"] or actual["Playable"]!="False" or actual["HomeLocation"]!=f"{expected_home[0]},{expected_home[1]}":
    raise ValueError(f"generated map seat proof mismatch: {ref}")
   proof.append({**seat,"home_location":actual["HomeLocation"]})
- return {"map_yaml_sha256":sha(dest/"map.yaml"),"seat_proof_source":"generated_map.yaml","seats":proof}
+ return {"map_yaml_sha256":sha(dest/"map.yaml"),"seat_proof_source":"generated_map.yaml","seats":proof,"runtime_monitor":monitor}
 
 def preflight_generated_maps(m,root,directory):
  jobs=make_jobs(m);selected={}
@@ -306,7 +407,7 @@ def adjudicate(records, receipt, job, manifest_sha):
  if any(receipt.get(k)!=job[k] for k in ("switch","setup","map","map_sha256","seed","pair","game_in_pair")):
   return {"verdict":"INVALID_UNKNOWN","reason":"receipt disagrees with planned job"}
  status=receipt.get("status")
- if status in ("CRASH","INCOMPLETE","MEMORY_KILL","WALL_TIMEOUT","STALL","PROCESS_DIED"):
+ if status in ("CRASH","INCOMPLETE","MEMORY_KILL","MEMORY_SAMPLE_FAILED","LOW_FREE_RAM","WALL_TIMEOUT","STALL","PROCESS_DIED"):
   return {"verdict":"INCOMPLETE_UNKNOWN","reason":status}
  cap=status=="CENSORED_CAP"
  if cap and not (receipt.get("cap_marker") is True and receipt.get("cap_tick")==45000 and receipt.get("support_complete") is True):
@@ -450,7 +551,8 @@ def main(argv=None):
    with tempfile.TemporaryDirectory(prefix="ab-campaign-preflight-") as temp:
     preflight_root=pathlib.Path(temp)
     out["generated_map_preflight"]=preflight_generated_maps(m,a.repo_root,preflight_root/"maps")
-    out["arm_payload_preflight"]=[materialize_ai_arm(a.repo_root,preflight_root/"arms"/"control"),materialize_ai_arm(a.repo_root,preflight_root/"arms"/"treatment",SWITCH)]
+   out["arm_payload_preflight"]=[materialize_ai_arm(a.repo_root,preflight_root/"arms"/"control"),materialize_ai_arm(a.repo_root,preflight_root/"arms"/"treatment",SWITCH)]
+   out["dual_arm_runtime_config_preflight"]=materialize_dual_arm_ai(a.repo_root,preflight_root/"dual-arm",SWITCH)
    out["manifest_sha256"]=actual;a.output.parent.mkdir(parents=True,exist_ok=True);a.output.write_text(json.dumps(out,indent=2)+"\n",encoding="utf-8");print(f"NO_LAUNCH games={out['games']} generated_maps={len(out['generated_map_preflight'])} treatment_changes={out['arm_payload_preflight'][1]['changed_fields']} worker_hours={out['worker_hours_estimate_at_8_5m_each']} slot_wall_hours={out['parallel_slot_wall_estimate_hours_at_8_5m_each']} launches=0");return 0
   validate(m,a.repo_root); raw=a.manifest.read_bytes(); actual=hashlib.sha256(raw).hexdigest();require(actual==a.manifest_sha256,"manifest SHA mismatch")
   def jsonl(path): return [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
