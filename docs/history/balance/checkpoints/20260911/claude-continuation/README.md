@@ -1,6 +1,6 @@
 # Portable continuation inputs
 
-Read [project status](../../../PROJECT_STATUS_20260911.md) for ownership, current
+Read [project status](../../../../../balance/PROJECT_STATUS_20260911.md) for ownership, current
 results and Claude's CL-01 assignment. CL-01 can begin from committed YAML and
 reports without extracting this packet. This archive supports the separate
 GP-02 source comparison and preserves inputs previously available only on

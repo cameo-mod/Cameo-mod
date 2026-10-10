@@ -121,7 +121,7 @@ Record that full SHA in Claude's report and compare it with the pinned SHA in
 the handoff reply/PR description. If the named local branch already exists, use
 the existing task worktree after checking its base; do not reset it.
 The current status, grand plan, implementation, tests and receipts travel together.
-The [portable input packet](checkpoints/20260911/claude-continuation/README.md)
+The [portable input packet](../history/balance/checkpoints/20260911/claude-continuation/README.md)
 contains the exact four external comparison inputs and 71 archived ledger inputs.
 Old absolute Windows paths in receipts record their original generation location;
 they are not required directories on Claude's PC. Historical report iterations
@@ -133,7 +133,7 @@ are retained for provenance; the successor links below identify current evidence
 four-faction rows and return actionable findings without changing gameplay.
 
 **Read first:** this status, the grand plan's GP-03 and role decisions, and
-[role/payload disposition](FOUR_FACTION_ROLE_PAYLOAD_DISPOSITION_20260911.md).
+[role/payload disposition](../history/balance/FOUR_FACTION_ROLE_PAYLOAD_DISPOSITION_20260911.md).
 Use [target routes](../audit/latest/astra_review_20260911/target_routes.json),
 [secondary routes](../audit/latest/secondary_payload_routes_20260911.json), and
 [shrapnel scenarios](../audit/latest/shrapnel_scenario_20260911.json) as navigation

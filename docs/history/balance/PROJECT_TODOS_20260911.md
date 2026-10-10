@@ -1,8 +1,8 @@
 # Four-faction balance TODOs — 11 September 2026
 
 This is the request and evidence inventory for the four-faction balance pass.
-Use the [grand plan](GRAND_PLAN_20260911.md) for execution and the
-[project status](PROJECT_STATUS_20260911.md) for current state and ownership.
+Use the [grand plan](../../balance/GRAND_PLAN_20260911.md) for execution and the
+[project status](../../balance/PROJECT_STATUS_20260911.md) for current state and ownership.
 Checked evidence items do not mean their larger gameplay deliverable is complete.
 The original requests remain visible; this is not a diagnostic-only replacement
 for the intended balanced candidate.
@@ -331,7 +331,7 @@ The DM review confirmed these requests and their current disposition:
 
 ## Immediate execution order
 
-Follow the live ownership table in [project status](PROJECT_STATUS_20260911.md).
+Follow the live ownership table in [project status](../../balance/PROJECT_STATUS_20260911.md).
 The Astra review corrects GP-01/helper edge cases, withdraws the GP-03 completion
 claim and reverses the Havoc role regression. GP-02 has 71/71 original ledger
 inputs recovered, with original per-armor semantics still unverified. GP-04

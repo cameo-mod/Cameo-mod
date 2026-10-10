@@ -64,7 +64,7 @@ manual review. Combat-unit fitting must not silently include either group.
 - **23:29:** review counterpart coverage and faction identity, starting with Nod
   Buggy Mk II versus GDI Humvee Mk II. Check alleged missing DTA/CA equivalents;
   do not assume a single-source projection preserves GDI-heavier/Nod-faster identity.
-  Findings are in [the focused comparison](BUGGY_HUMVEE_REFERENCE_REVIEW_20260909.md).
+  Findings are in [the focused comparison](../../history/balance/review/BUGGY_HUMVEE_REFERENCE_REVIEW_20260909.md).
 - **23:33:** prioritize W24 remaining structure blockers before applying damage.
   Preserve projectile operation and effects; use appropriate delivery/element blends
   rather than mechanically collapsing unlike profiles. Propose missing families only

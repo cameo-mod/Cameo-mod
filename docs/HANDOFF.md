@@ -3509,7 +3509,7 @@ capability, 19 target-route cases still need review, and only 13 of the 31 numer
 proposal rows are reviewable (18 held). The full table accounts for 163 actors;
 it does not certify 163 prices. Frozen armor-channel reconstruction remains open.
 
-The [portable input packet](balance/checkpoints/20260911/claude-continuation/README.md)
+The [portable input packet](history/balance/checkpoints/20260911/claude-continuation/README.md)
 includes the four comparison inputs and all 71 original frozen ledger inputs.
 Use the current status above instead of treating dated logs below as new orders.
 This handoff authorizes no merge, game launch, build or external agent setup.
