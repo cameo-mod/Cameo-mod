@@ -404,7 +404,9 @@ def adjudicate(records, receipt, job, manifest_sha):
  """One game -> one verdict; incomplete/cap evidence is never converted to a loss."""
  if not isinstance(receipt,dict) or receipt.get("cell_id")!=job["cell_id"] or receipt.get("manifest_sha256")!=manifest_sha:
   return {"verdict":"INVALID_UNKNOWN","reason":"cell or manifest pin mismatch"}
- if any(receipt.get(k)!=job[k] for k in ("switch","setup","map","map_sha256","seed","pair","game_in_pair")):
+ map_pin=receipt.get("map") if isinstance(receipt.get("map"),str) else (receipt.get("map") or {}).get("name")
+ job_pins={"switch":receipt.get("switch"),"setup":receipt.get("setup") or receipt.get("setup_id"),"map":map_pin,"map_sha256":receipt.get("map_sha256") or (receipt.get("map") or {}).get("sha256"),"seed":receipt.get("seed"),"pair":receipt.get("pair"),"game_in_pair":receipt.get("game_in_pair")}
+ if any(job_pins.get(k)!=job[k] for k in ("switch","setup","map","map_sha256","seed","pair","game_in_pair")):
   return {"verdict":"INVALID_UNKNOWN","reason":"receipt disagrees with planned job"}
  status=receipt.get("status")
  if status in ("CRASH","INCOMPLETE","MEMORY_KILL","MEMORY_SAMPLE_FAILED","LOW_FREE_RAM","WALL_TIMEOUT","STALL","PROCESS_DIED"):

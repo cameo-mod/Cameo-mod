@@ -46,7 +46,8 @@ class CampaignRunnerTests(unittest.TestCase):
 		required = set(schema["required"])
 		for field in ("cell_id", "game_uid", "status", "seats", "seat_proof_source", "map_yaml_sha256",
 				"control_side", "treatment_side", "arm_bot_types", "cap_marker", "cap_tick",
-				"support_complete", "duration_ticks", "peak_memory_bytes"):
+				"support_complete", "setup", "map_sha256", "pair", "game_in_pair",
+				"duration_ticks", "peak_memory_bytes"):
 			self.assertIn(field, required, f"persisted receipt must carry analyzer join field: {field}")
 
 	def test_bounds_and_parallel_policy(self):

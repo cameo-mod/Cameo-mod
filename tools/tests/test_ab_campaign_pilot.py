@@ -98,6 +98,17 @@ class PilotPlanTests(unittest.TestCase):
   receipt["cap_tick"]=45000;receipt["seats"][0]["spawn"]+=1
   self.assertEqual("INVALID_UNKNOWN",pilot.adjudicate(rows,receipt,job,"a"*64)["verdict"])
 
+ def test_persisted_external_receipt_satisfies_both_contracts(self):
+  import campaign_runner as runner
+  m=manifest(); job=next(j for j in pilot.make_jobs(m) if j["team_size"]==2 and j["game_in_pair"]==0)
+  seats=[{**s,"home_location":f"{10+s['spawn']},{20+s['spawn']}"} for s in job["seat_assignments"]]
+  rows=[{"player":{"home":seat["home_location"],"bot_type":seat["bot_type"],"faction":seat["faction"],"outcome":"won" if seat["side"]==job["treatment_side"] else "lost"},"stats_timeline":[{"tick":100,"earned":12,"spent":5,"banked":7}]} for seat in seats]
+  resolved=[{"seat_id":s["home"],"team":s["side"],"arm":s["arm"],"bot_type":s["bot_type"],"faction":s["faction"],"home":s["home"],"spawn":s["spawn"],"proof_source":"generated map.yaml + cameo-ai-matches.jsonl","outcome":"won" if s["side"]==job["treatment_side"] else "lost","metrics":{"timeline":[]}} for s in seats]
+  receipt={"schema_version":1,"campaign_id":"c","manifest_sha256":"a"*64,"baseline_commit":"b"*40,"engine_sha256":"c"*64,"switch":job["switch"],"setup_id":job["setup"],"pair_id":"p","pair_member":0,"seed":job["seed"],"seed_proof":{"env_value":str(job["seed"]),"server_log_pin_line":"pin","server_log_sha256":None},"teams":{"A":{"arm":"control","bot_type":"hard_control","seat_ids":[]},"B":{"arm":"treatment","bot_type":"hard_treatment","seat_ids":[]}},"map":{"name":job["map"],"path":"p","sha256":"d"*64,"generated_map_yaml_sha256":"e"*64,"required_seats":4},"resolved_seats":resolved,"end_class":"NATURAL","end_reason":"natural","winner_team":job["treatment_side"],"world_tick":40000,"cap":{"world_tick_cap":45000,"marker_observed":False,"marker_tick":None},"memory":{"process_id":1,"peak_private_bytes":8*1024**3,"limit_private_bytes":runner.PRIVATE_LIMIT,"samples":[]},"runtime":{"started_utc":None,"finished_utc":None,"exit_code":0,"wall_seconds":1.0,"stall_seconds":180,"pid_scoped_cleanup":True},"artifacts":{"server_log":{},"driver_log":{},"matches_jsonl":{},"replay":{},"map_yaml":{},"support_bundle":{}},
+   "cell_id":job["cell_id"],"game_uid":"g-1","status":"NATURAL_END","seats":seats,"seat_proof_source":"generated_map.yaml","map_yaml_sha256":"e"*64,"control_side":job["control_side"],"treatment_side":job["treatment_side"],"arm_bot_types":job["arm_bot_types"],"cap_marker":False,"cap_tick":None,"support_complete":True,"setup":job["setup"],"map_sha256":job["map_sha256"],"pair":job["pair"],"game_in_pair":job["game_in_pair"],"duration_ticks":None,"peak_memory_bytes":8*1024**3}
+  runner.validate_receipt(receipt)
+  self.assertEqual("TREATMENT_WIN",pilot.adjudicate(rows,receipt,job,"a"*64)["verdict"])
+
  def test_analyzer_preserves_all_unrun_planned_games(self):
   result=pilot.analyze(manifest(),"a"*64,[],[])
   self.assertEqual(64,len(result["games"]))
