@@ -23,6 +23,7 @@ import shutil
 import signal
 
 import campaign_runner as runner
+import campaign_deployment_guard as deployment_guard
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 OUT = ROOT / "results" / "campaign-a5-memory-diagnostic-20261010-sol-advice"
@@ -198,10 +199,30 @@ def run_cell(index: int) -> dict:
 	trace_files = {}
 	trace_errors = {}
 	stop_reason = None
+	deployment_offset = 0
+	deployment = {"verified": False, "check_tick": None, "reported_seat_count": None,
+		"expected_seat_count": None, "seats": {}, "missing": []}
 	with stdout_path.open("w", encoding="utf-8") as stdout:
 		proc = subprocess.Popen(command, cwd=ROOT, env=env, stdout=stdout, stderr=subprocess.STDOUT)
 		while proc.poll() is None:
 			time.sleep(POLL)
+			lua_log = support / "Logs" / "lua.log"
+			if lua_log.is_file():
+				with lua_log.open("r", encoding="utf-8", errors="replace") as stream:
+					stream.seek(deployment_offset); chunk = stream.read(); deployment_offset = stream.tell()
+				deployment = deployment_guard.merge(deployment, deployment_guard.parse(chunk))
+				if deployment["check_tick"] is not None:
+					deployment["verified"] = deployment_guard.valid(deployment, ["BotA", "BotB"])
+					if not deployment["verified"]: stop_reason = "INVALID_NO_DEPLOY"
+			if not deployment["verified"] and deployment_guard.latest_world_tick(support / "Logs" / "debug.log") is not None and deployment_guard.latest_world_tick(support / "Logs" / "debug.log") > 100:
+				stop_reason = "INVALID_NO_DEPLOY"
+			if stop_reason == "INVALID_NO_DEPLOY":
+				proc.terminate()
+				try: proc.wait(timeout=15)
+				except subprocess.TimeoutExpired: proc.kill(); proc.wait()
+				try: kill_cell_processes(process_rows(support), support)
+				except Exception as cleanup_error: stop_reason += ":CLEANUP_FAILED:" + str(cleanup_error)
+				break
 			try:
 				rows = process_rows(support)
 			except (OSError, RuntimeError, subprocess.SubprocessError, json.JSONDecodeError) as exc:
@@ -350,6 +371,9 @@ def run_cell(index: int) -> dict:
 	replays = list((support / "Replays").rglob("*.orarep")) if (support / "Replays").is_dir() else []
 	log_text = server_log.read_text(encoding="utf-8", errors="replace") if server_log.is_file() else ""
 	lua_text = lua_log.read_text(encoding="utf-8", errors="replace") if lua_log.is_file() else ""
+	deployment = deployment_guard.merge(deployment, deployment_guard.parse(lua_text))
+	deployment["verified"] = deployment_guard.valid(deployment, ["BotA", "BotB"])
+	if not deployment["verified"] and stop_reason is None: stop_reason = "INVALID_NO_DEPLOY"
 	seed_pin_verified = f"CAMEO DEV SEED pinned - RandomSeed={SEED} (parity harness)" in log_text
 	records_verified = len(match_rows) == 2 and len({r.get("game_uid") for r in match_rows}) == 1 and all((r.get("player") or {}).get("outcome") in ("won", "lost") for r in match_rows)
 	duration_ticks = match_rows[0].get("duration_ticks") if records_verified else None
@@ -359,7 +383,7 @@ def run_cell(index: int) -> dict:
 	valid_game = (summary.get("matches") == 1 and summary.get("completed") == 1
 		and batch_result.get("status") == "ok" and batch_result.get("exit_code") == 0 and batch_result.get("attempts") == 1
 		and not summary.get("new_exceptions") and seed_pin_verified and records_verified
-		and censored_cap_verified and len(replays) == 1 and stop_reason is None and peak < PROCESS_STOP)
+		and censored_cap_verified and deployment["verified"] and len(replays) == 1 and stop_reason is None and peak < PROCESS_STOP)
 	if not valid_game and stop_reason is None:
 		stop_reason = "A5_RECEIPT_VALIDATION_FAILED"
 	return {"cell": cell, "seed": SEED, "source_head": subprocess.check_output(
@@ -382,7 +406,8 @@ def run_cell(index: int) -> dict:
 		"fingerprint_id": summary.get("fingerprint_id"), "seed_pin_verified": seed_pin_verified,
 		"records_verified": records_verified, "duration_ticks": duration_ticks,
 		"cap_tick": CAP_TICK, "observed_cap_tick": observed_cap_tick, "censored_cap_verified": censored_cap_verified,
-		"natural_below_cap": natural_below_cap, "replay_count": len(replays), "valid_game": valid_game}
+		"natural_below_cap": natural_below_cap, "deployment": deployment,
+		"replay_count": len(replays), "valid_game": valid_game}
 
 
 def main() -> int:

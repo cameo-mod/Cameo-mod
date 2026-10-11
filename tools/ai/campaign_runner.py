@@ -25,6 +25,8 @@ import zipfile
 from contextlib import contextmanager
 
 import ab_campaign_pilot as pilot
+import campaign_deployment_guard as deployment_guard
+import campaign_overlay
 import run_ai_match_batch as batch
 
 CAP_TICK = 45000
@@ -213,6 +215,11 @@ class ResumeQueue:
 			cur = db.execute("UPDATE cells SET status=?,updated=?,receipt_path=? WHERE cell_id=? AND status='RUNNING'", (status, time.time(), str(receipt_path), cell_id))
 			if cur.rowcount != 1: raise ValueError("cell not owned by this queue runner")
 
+	def park_planned(self, reason: str):
+		if reason != "INVALID_NO_DEPLOY": raise ValueError("unsupported queue stop reason")
+		with self.connect() as db:
+			return db.execute("UPDATE cells SET status='PARKED_INVALID_NO_DEPLOY',updated=? WHERE status='PLANNED'", (time.time(),)).rowcount
+
 	def counts(self) -> dict[str, int]:
 		with self.connect() as db:
 			return dict(db.execute("SELECT status,count(*) FROM cells GROUP BY status").fetchall())
@@ -238,7 +245,7 @@ def validate_receipt(receipt: dict) -> None:
 	"""Validate the producer's semantic invariants; JSON Schema is published alongside."""
 	if not isinstance(receipt, dict) or receipt.get("schema_version") != 1:
 		raise ValueError("receipt schema_version must be 1")
-	for key in ("campaign_id", "manifest_sha256", "cell_id", "game_uid", "status", "seats", "seat_proof_source", "map_yaml_sha256", "control_side", "treatment_side", "arm_bot_types", "cap_marker", "cap_tick", "support_complete", "setup", "map_sha256", "pair", "game_in_pair", "duration_ticks", "peak_memory_bytes", "baseline_commit", "engine_sha256", "switch", "setup_id", "pair_id", "seed", "seed_proof", "teams", "resolved_seats", "end_class", "end_reason", "winner_team", "world_tick", "cap", "memory", "runtime", "artifacts"):
+	for key in ("campaign_id", "manifest_sha256", "cell_id", "game_uid", "status", "seats", "seat_proof_source", "map_yaml_sha256", "control_side", "treatment_side", "arm_bot_types", "cap_marker", "cap_tick", "support_complete", "setup", "map_sha256", "pair", "game_in_pair", "duration_ticks", "peak_memory_bytes", "baseline_commit", "engine_sha256", "switch", "setup_id", "pair_id", "seed", "seed_proof", "teams", "resolved_seats", "end_class", "end_reason", "winner_team", "world_tick", "cap", "deployment", "memory", "runtime", "artifacts"):
 		if key not in receipt:
 			raise ValueError("receipt missing required field: " + key)
 	if receipt["end_class"] not in ("NATURAL", "CAP", "INCOMPLETE"):
@@ -259,6 +266,8 @@ def validate_receipt(receipt: dict) -> None:
 		raise ValueError("CAP classification lacks valid cap evidence")
 	if receipt["end_class"] == "NATURAL" and (not isinstance(receipt["end_reason"], str) or receipt["winner_team"] is None):
 		raise ValueError("NATURAL classification lacks authoritative winner/end reason")
+	if receipt["end_class"] != "INCOMPLETE" and receipt["deployment"].get("verified") is not True:
+		raise ValueError("completed receipt lacks verified tick-100 deployment evidence")
 	if receipt["memory"].get("limit_private_bytes") != PRIVATE_LIMIT:
 		raise ValueError("receipt memory threshold differs from the measured headless peak plus 3 GiB")
 	if receipt["memory"].get("peak_private_bytes", 0) >= PRIVATE_LIMIT and not (receipt["end_class"] == "INCOMPLETE" and receipt["end_reason"] == "MEMORY_KILL"):
@@ -296,7 +305,7 @@ def execution_gate(manifest: dict, *, a5_receipt: dict | None, a5_receipt_sha256
 def monitor_process(process, *, driver_log: pathlib.Path, actor_log: pathlib.Path,
 				stall_log: pathlib.Path | None = None,
 				wall_timeout: int = 3000, stall_timeout: int = 180,
-				poll_seconds: float = 2.0, sample_callback=None,
+				poll_seconds: float = 2.0, sample_callback=None, required_seats=None, deployment_log: pathlib.Path | None = None,
 				clock=time.monotonic, sleep=time.sleep) -> dict:
 	"""Watch one owned process; any stop targets only the supplied Popen handle."""
 	if wall_timeout != 3000 or stall_timeout != 180 or poll_seconds <= 0:
@@ -309,7 +318,9 @@ def monitor_process(process, *, driver_log: pathlib.Path, actor_log: pathlib.Pat
 	peak = 0
 	stop_reason = None
 	actor_offset = 0
+	deployment_offset = 0
 	last_actor = {"world_tick": None, "actor_count": None}
+	deployment = {"verified": False, "check_tick": None, "reported_seat_count": None, "expected_seat_count": None, "seats": {}, "missing": []}
 	while process.poll() is None:
 		sleep(poll_seconds)
 		try:
@@ -329,6 +340,15 @@ def monitor_process(process, *, driver_log: pathlib.Path, actor_log: pathlib.Pat
 				actor_stream.seek(actor_offset); chunk = actor_stream.read(); actor_offset = actor_stream.tell()
 				new_actors = parse_actor_samples(chunk)
 				if new_actors: last_actor = new_actors[-1]
+		if deployment_log is not None and pathlib.Path(deployment_log) != pathlib.Path(actor_log) and deployment_log.exists():
+			with deployment_log.open("r", encoding="utf-8", errors="replace") as stream:
+				stream.seek(deployment_offset); chunk = stream.read(); deployment_offset = stream.tell()
+			deployment = deployment_guard.merge(deployment, deployment_guard.parse(chunk))
+			if deployment["check_tick"] is not None and required_seats is not None:
+				deployment["verified"] = deployment_guard.valid(deployment, list(required_seats))
+				if not deployment["verified"]: stop_reason = "INVALID_NO_DEPLOY"
+		world_tick_check = deployment_guard.latest_world_tick(stall_log) if required_seats is not None and not deployment["verified"] else None
+		if world_tick_check is not None and world_tick_check > 100: stop_reason = "INVALID_NO_DEPLOY"
 		actor_count = last_actor["actor_count"]
 		world_tick = last_actor["world_tick"]
 		row = {"utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()), "world_tick": world_tick,
@@ -341,15 +361,17 @@ def monitor_process(process, *, driver_log: pathlib.Path, actor_log: pathlib.Pat
 				stop_reason = "MEMORY_SAMPLE_FAILED"; break
 			if requested_stop:
 				stop_reason = str(requested_stop); break
+		if stop_reason == "INVALID_NO_DEPLOY": break
 		if private >= PRIVATE_LIMIT: stop_reason = "MEMORY_KILL"; break
 		if clock() - last_activity > stall_timeout: stop_reason = "STALL"; break
 		if clock() >= deadline: stop_reason = "WALL_TIMEOUT"; break
+	if required_seats is not None and not deployment["verified"] and stop_reason is None: stop_reason = "INVALID_NO_DEPLOY"
 	if stop_reason is not None and process.poll() is None:
 		process.kill()  # Popen.kill terminates this process handle/PID only.
 		process.wait()
 	return {"end_reason": stop_reason or "PROCESS_EXIT", "exit_code": process.poll(),
 		"wall_seconds": max(0, clock() - start), "peak_private_bytes": peak,
-		"samples": private_samples, "pid_scoped_cleanup": process.poll() is not None}
+		"samples": private_samples, "pid_scoped_cleanup": process.poll() is not None, "deployment": deployment}
 
 
 def plan_summary(manifest: dict, manifest_sha: str, root: pathlib.Path, engine_root: pathlib.Path | None):
@@ -399,15 +421,14 @@ def run_one(manifest: dict, manifest_sha: str, job: dict, *, root: pathlib.Path,
 	logs = game_support / "Logs"; logs.mkdir()
 	maps = game_support / "maps" / "cameo" / "{DEV_VERSION}"; maps.mkdir(parents=True)
 	overlay = game_root / "Overlay"; pilot.materialize_dual_arm_ai(root, overlay, job["switch"], manifest.get("ratchet_accepted_switches", []))
-	shutil.copyfile(root / "mods" / "cameo" / "mod.yaml", overlay / "mods" / "cameo" / "mod.yaml")
+	campaign_overlay.materialize_manifest(root, overlay, engine_root)
 	variant = maps / ("campaign_" + re.sub(r"[^A-Za-z0-9_.-]", "_", job["cell_id"]))
 	proof = pilot.prove_generated_map(job, root, variant)
 	map_yaml = variant / "map.yaml"; map_yaml_sha = sha(map_yaml)
 	match_log = logs / "cameo-ai-matches.jsonl"; before = match_log.stat().st_size if match_log.exists() else 0
 	server_log = logs / "server.log"; driver_log = game_root / "driver.log"
 	if not executable.is_file(): raise ValueError("pinned OpenRA executable missing")
-	args = [str(executable), "Game.Mod=cameo", "Sound.Device=none", "Engine.EngineDir=..",
-		f"Engine.ModSearchPaths={overlay / 'mods'},{root / 'mods'},{engine_root / 'mods'}",
+	args = [str(executable), *campaign_overlay.launch_mod_arguments(root, engine_root, overlay), "Sound.Device=none",
 		f"Engine.SupportDir={game_support}", f"Launch.Map={variant.name}", "Launch.Benchmark=ai-duel-batch-",
 		"Graphics.VSync=False", "Graphics.Mode=Windowed", "Graphics.WindowedSize=640,480"]
 	env = os.environ.copy(); env["CAMEO_DEV_SEED"] = str(job["seed"])
@@ -419,7 +440,7 @@ def run_one(manifest: dict, manifest_sha: str, job: dict, *, root: pathlib.Path,
 			slot_counter.heartbeat(job["cell_id"], row["private_bytes"])
 		return "LOW_FREE_RAM" if available_ram_bytes() < FREE_RAM_HARD_FLOOR else None
 	monitor_result = monitor_process(process, driver_log=driver_log, actor_log=server_log, stall_log=logs / "debug.log",
-		sample_callback=heartbeat)
+		sample_callback=heartbeat, required_seats=[seat["home"] for seat in job["seat_assignments"]], deployment_log=logs / "lua.log")
 	slot_counter.release(job["cell_id"])
 	finished = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
 	log_text = server_log.read_text(encoding="utf-8", errors="replace") if server_log.exists() else ""
@@ -428,7 +449,7 @@ def run_one(manifest: dict, manifest_sha: str, job: dict, *, root: pathlib.Path,
 	seed_line = next((line for line in log_text.splitlines() if f"RandomSeed={job['seed']}" in line and "CAMEO DEV SEED pinned" in line), None)
 	map_yaml_text = map_yaml.read_text(encoding="utf-8")
 	resolved = proof["seats"]
-	known_incomplete = {"MEMORY_KILL", "MEMORY_SAMPLE_FAILED", "LOW_FREE_RAM", "STALL", "WALL_TIMEOUT"}
+	known_incomplete = {"MEMORY_KILL", "MEMORY_SAMPLE_FAILED", "LOW_FREE_RAM", "STALL", "WALL_TIMEOUT", "INVALID_NO_DEPLOY"}
 	internal_status = monitor_result["end_reason"] if monitor_result["end_reason"] in known_incomplete else "INCOMPLETE"
 	end_reason = monitor_result["end_reason"]
 	if monitor_result["end_reason"] == "PROCESS_EXIT" and monitor_result["exit_code"] == 0 and seed_line and len(match_rows) == job["required_seats"]:
@@ -437,6 +458,9 @@ def run_one(manifest: dict, manifest_sha: str, job: dict, *, root: pathlib.Path,
 	internal = {"cell_id":job["cell_id"], "manifest_sha256":manifest_sha, "switch":job["switch"], "setup":job["setup"], "map":job["map"], "map_sha256":job["map_sha256"], "seed":job["seed"], "pair":job["pair"], "game_in_pair":job["game_in_pair"], "control_side":job["control_side"], "treatment_side":job["treatment_side"], "arm_bot_types":job["arm_bot_types"], "status":internal_status, "end_reason":end_reason, "cap_marker":bool(cap_match), "cap_tick":int(cap_match.group(1)) if cap_match else None, "support_complete":len(match_rows)==job["required_seats"], "seat_proof_source":"generated_map.yaml", "map_yaml_sha256":map_yaml_sha, "seats":resolved, "peak_memory_bytes":monitor_result["peak_private_bytes"], "duration_ticks":int(cap_match.group(1)) if cap_match else None}
 	classification = pilot.adjudicate(match_rows, internal, job, manifest_sha)
 	end_class = {"CENSORED_CAP":"CAP", "TREATMENT_WIN":"NATURAL", "CONTROL_WIN":"NATURAL"}.get(classification["verdict"], "INCOMPLETE")
+	if monitor_result["end_reason"] == "INVALID_NO_DEPLOY":
+		end_class = "INCOMPLETE"
+		classification = {"verdict":"INCOMPLETE_UNKNOWN", "reason":"INVALID_NO_DEPLOY", "winner_side":None}
 	if end_class == "INCOMPLETE": end_reason = classification.get("reason") or end_reason
 	match_by_home = {(r.get("player") or {}).get("home"): r for r in match_rows}
 	resolved_out = []
@@ -458,7 +482,7 @@ def run_one(manifest: dict, manifest_sha: str, job: dict, *, root: pathlib.Path,
 		"map":{"name":job["map"],"path":job["map_path"],"sha256":job["map_sha256"],"generated_map_yaml_sha256":map_yaml_sha,"required_seats":job["required_seats"]},
 	"pair_id":f"{job['setup']}:{job['seed']}:{job['pair']}","pair_member":job["game_in_pair"],"seed":job["seed"],
 		"seed_proof":{"env_value":str(job["seed"]),"server_log_pin_line":seed_line,"server_log_sha256":sha(server_log) if server_log.is_file() else None},
-		"teams":team_obj,"resolved_seats":resolved_out,"end_class":end_class,"end_reason":end_reason,
+		"teams":team_obj,"resolved_seats":resolved_out,"end_class":end_class,"end_reason":end_reason,"deployment":monitor_result["deployment"],
 		"winner_team":classification.get("winner_side") if end_class=="NATURAL" else None,"world_tick":monitor_result["samples"][-1]["world_tick"] if monitor_result["samples"] else None,
 		"cap":{"world_tick_cap":CAP_TICK,"marker_observed":bool(cap_match),"marker_tick":int(cap_match.group(1)) if cap_match else None},
 		"memory":{"process_id":process.pid,"peak_private_bytes":monitor_result["peak_private_bytes"],"limit_private_bytes":PRIVATE_LIMIT,"samples":monitor_result["samples"]},
@@ -468,6 +492,7 @@ def run_one(manifest: dict, manifest_sha: str, job: dict, *, root: pathlib.Path,
 	receipt_path = support_root / "receipts" / (re.sub(r"[^A-Za-z0-9_.-]", "_", job["cell_id"]) + ".json")
 	atomic_receipt(receipt_path, receipt)
 	queue.finish(job["cell_id"], end_class, receipt_path)
+	if monitor_result["end_reason"] == "INVALID_NO_DEPLOY": queue.park_planned("INVALID_NO_DEPLOY")
 	return receipt
 
 

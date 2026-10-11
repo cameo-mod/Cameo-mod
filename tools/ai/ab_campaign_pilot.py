@@ -10,6 +10,7 @@ from threading import Lock
 import apply_increment_switches as increment
 
 SWITCH = "BU_harvester_logistics"
+VERIFIED_DEPLOYMENT_TYPES = frozenset(("td_gdi_constructionyard", "td_nod_constructionyard", "ra1_allies_constructionyard", "ra1_soviets_constructionyard"))
 MAPS = {
  "nuclear_winter": ("mods/cameo/maps/_ra_a-nuclear-winter.oramap", "191efefe3043acb2fd504b2e2e5c974a49f6498f8e016c1380159c9f7efc1c4a", 2),
  "satans_clutch": ("mods/cameo/maps/SatansClutch.oramap", "1bd3bee0bbb38c95015126ba689496c4284c2f4e8f8b6573711a9fdadcbf16cb", 2),
@@ -346,10 +347,14 @@ def dry_run(m,root,engine_root=None,minutes_per_game=8.5,setup_hours=2.0):
 def install_campaign_monitor(dest,seat_count,cap_tick=45000,sample_interval=5000,rules_filename="duel_rules.yaml",seat_names=None):
  """Install map-local actor-count sampling and an explicit all-seat censor marker."""
  require(seat_count in (2,4,6,8) and type(cap_tick) is int and 1000<=cap_tick<=45000 and 0<sample_interval<=cap_tick,"campaign monitor bounds")
- names=", ".join(json.dumps(name) for name in (seat_names or [f"Multi{i}" for i in range(seat_count)]))+', "Neutral", "Creeps"'
+ campaign_seat_names=", ".join(json.dumps(name) for name in (seat_names or [f"Multi{i}" for i in range(seat_count)]))
+ names=campaign_seat_names+', "Neutral", "Creeps"'
+ verified_yards=", ".join("["+json.dumps(actor)+"]=true" for actor in sorted(VERIFIED_DEPLOYMENT_TYPES))
  lua=f'''local SeatNames = {{{names}}}
+local CampaignSeatNames = {{{campaign_seat_names}}}
 local CapTick = {cap_tick}
 local SampleInterval = {sample_interval}
+local DeploymentTick = 100
 local Objectives = {{}}
 local function SampleActors()
 \tlocal total = 0
@@ -359,9 +364,35 @@ local function SampleActors()
 \tend
 \tprint("AB_CAMPAIGN_ACTOR_SAMPLE tick=" .. DateTime.GameTime .. " actor_count=" .. total)
 end
+local VerifiedConstructionYards = {{{verified_yards}}}
+local Deployments = {{}}
+local function ProbeSeatDeployment()
+\tlocal tick = DateTime.GameTime
+\tfor _, name in ipairs(CampaignSeatNames) do
+\t\tif not Deployments[name] then
+\t\t\tlocal player = Player.GetPlayer(name)
+\t\t\tif player then for _, actor in ipairs(player.GetActors()) do
+\t\t\t\tif VerifiedConstructionYards[actor.Type] then
+\t\t\t\t\tDeployments[name] = {{ tick=tick, type=actor.Type }}
+\t\t\t\t\tprint("AB_CAMPAIGN_DEPLOY seat=" .. name .. " tick=" .. tick .. " type=" .. actor.Type)
+\t\t\t\t\tbreak
+\t\t\t\tend
+\t\t\tend end
+\t\tend
+\tend
+\tif tick >= DeploymentTick then
+\t\tlocal deployed = 0
+\t\tfor _, name in ipairs(CampaignSeatNames) do
+\t\t\tif Deployments[name] and Deployments[name].tick <= DeploymentTick then deployed = deployed + 1
+\t\t\telse print("AB_CAMPAIGN_NO_DEPLOY seat=" .. name .. " tick=" .. tick) end
+\t\tend
+\t\tprint("AB_CAMPAIGN_DEPLOYMENT_CHECK tick=" .. tick .. " seat_count=" .. deployed .. " expected_count=" .. #CampaignSeatNames)
+\telse Trigger.AfterDelay(1, ProbeSeatDeployment) end
+end
 WorldLoaded = function()
 \tfor _, name in ipairs(SeatNames) do local p = Player.GetPlayer(name); if p then Objectives[name] = p.AddPrimaryObjective("Campaign observation cap") end end
 \tprint("AB_CAMPAIGN_STARTED tick=" .. DateTime.GameTime .. " cap=" .. CapTick)
+\tTrigger.AfterDelay(1, ProbeSeatDeployment)
 \tfor tick = SampleInterval, CapTick - SampleInterval, SampleInterval do Trigger.AfterDelay(tick, SampleActors) end
 \tTrigger.AfterDelay(CapTick, function()
 \t\tSampleActors(); print("AB_CAMPAIGN_CAP tick=" .. DateTime.GameTime)
@@ -372,6 +403,7 @@ end
  script=dest/"ab_campaign_monitor.lua";script.write_text(lua,encoding="utf-8")
  rules=dest/rules_filename;text=rules.read_text(encoding="utf-8")
  world=re.search(r"(?m)^World:\s*$",text);require(world is not None and "LuaScript:" not in text,"harness rules cannot accept campaign monitor Lua")
+	# Keep the map's World rules unchanged apart from the campaign monitor.
  text=text[:world.end()]+"\n\tLuaScript:\n\t\tScripts: ab_campaign_monitor.lua"+text[world.end():]
  rules.write_text(text,encoding="utf-8")
  return {"script_sha256":sha(script),"rules_sha256":sha(rules),"sample_interval_ticks":sample_interval,"cap_tick":cap_tick,"actor_count_marker":"AB_CAMPAIGN_ACTOR_SAMPLE"}
