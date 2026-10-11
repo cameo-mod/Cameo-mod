@@ -173,16 +173,21 @@ class PilotPlanTests(unittest.TestCase):
    pilot.treatment_baseline([],"AG_assault_fanout")
   self.assertTrue(pilot.regression_due(5));self.assertFalse(pilot.regression_due(4))
   c=pilot.SlotCounter(); floor=24*1024**3
-  self.assertTrue(c.acquire("a",1,floor));self.assertTrue(c.acquire("b",2,floor));self.assertTrue(c.acquire("c",1,floor));self.assertFalse(c.acquire("d",2,floor))
+  # Ruling 04:50Z: at most TWO parallel small games (a second needs >=14 GiB free).
+  self.assertTrue(c.acquire("a",1,floor));self.assertTrue(c.acquire("b",2,floor));self.assertFalse(c.acquire("c",1,floor));self.assertFalse(c.acquire("d",2,floor))
   self.assertFalse(c.acquire("large",4,floor));c.release("a");c.release("b");c.release("c")
   self.assertTrue(c.acquire("large",4,floor));self.assertFalse(c.acquire("small",1,floor));
   with self.assertRaises(ValueError): c.update_private_bytes("large",11*1024**3)
+  # Single game admits at the measured-peak+3 GiB floor; a second small game needs the 14 GiB parallel floor.
   self.assertFalse(pilot.slots_available(1,pilot.RAM_FLOOR_BYTES-1))
+  self.assertTrue(pilot.slots_available(1,pilot.RAM_FLOOR_BYTES))
+  self.assertFalse(pilot.slots_available(1,pilot.PARALLEL_RAM_FLOOR_BYTES-1,active_slots=1,active_team_sizes=(1,)))
+  self.assertTrue(pilot.slots_available(1,pilot.PARALLEL_RAM_FLOOR_BYTES,active_slots=1,active_team_sizes=(1,)))
   with tempfile.TemporaryDirectory() as temp:
    db1=pilot.SqliteSlotCounter(pathlib.Path(temp)/"slots.sqlite")
    db2=pilot.SqliteSlotCounter(pathlib.Path(temp)/"slots.sqlite")
    self.assertTrue(db1.acquire("x",1,floor));self.assertTrue(db2.acquire("y",2,floor))
-   self.assertTrue(db1.acquire("z",1,floor));self.assertFalse(db2.acquire("fourth",1,floor))
+   self.assertFalse(db1.acquire("z",1,floor));self.assertFalse(db2.acquire("fourth",1,floor))
    self.assertFalse(db2.acquire("exclusive",4,floor));db2.heartbeat("x",1024);db1.release("x");db2.release("y");db1.release("z")
    self.assertTrue(db2.acquire("exclusive",4,floor));self.assertFalse(db1.acquire("small",1,floor))
    with self.assertRaisesRegex(ValueError,"memory cap"): db2.heartbeat("exclusive",11*1024**3)

@@ -29,11 +29,11 @@ import run_ai_match_batch as batch
 
 CAP_TICK = 45000
 PRIVATE_LIMIT = int(10.5 * 1024**3)     # decided cell ceiling (was 6.5 GiB; startup burst peaks ~9.5 GiB)
-FREE_RAM_FLOOR = int(13.5 * 1024**3)    # admission = cap(10.5) + hard floor(3): worst-case free >=3.9 GiB at full cap
+FREE_RAM_FLOOR = pilot.RAM_FLOOR_BYTES  # ruling 04:50Z: admit one game at measured headless peak + 3 GiB reserve
 FREE_RAM_HARD_FLOOR = 3 * 1024**3       # runtime stop: available RAM below this kills the cell
 FREE_RAM_SOFT_FLOOR = 4 * 1024**3       # soft floor: telemetry threshold for low-RAM pressure
 ACTOR_SAMPLE_INTERVAL = 5000
-SLOT_PARALLEL_SMALL = 3
+SLOT_PARALLEL_SMALL = 2
 SMALL_TEAM_MAX = 2
 ACTOR_SAMPLE_RE = re.compile(r"AB_CAMPAIGN_ACTOR_SAMPLE tick=(\d+) actor_count=(\d+)")
 RECEIPT_SCHEMA = pathlib.Path(__file__).with_name("ab_campaign_receipt.schema.json")
@@ -474,7 +474,7 @@ def run_one(manifest: dict, manifest_sha: str, job: dict, *, root: pathlib.Path,
 	pilot.validate(manifest, root, engine_root, execution=True)
 	execution_gate(manifest, a5_receipt=a5_receipt, a5_receipt_sha256=a5_receipt_sha256,
 		source_commit=manifest["pins"]["source_commit"], engine_version=manifest["pins"]["engine_version"])
-	if available_ram_bytes() < FREE_RAM_FLOOR: raise ValueError("available RAM below 13.5 GiB admission floor")
+	if available_ram_bytes() < FREE_RAM_FLOOR: raise ValueError(f"available RAM below {FREE_RAM_FLOOR / 1024**3:.2f} GiB admission floor")
 	queue = ResumeQueue(support_root / "campaign_queue.sqlite", manifest_sha)
 	queue.install(pilot.make_jobs(manifest))
 	queue.recover_orphans(kill_game=lambda cell, pid: kill_owned_pid(pid, executable,

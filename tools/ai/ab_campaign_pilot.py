@@ -30,7 +30,9 @@ SETUPS = [
  ("3v3_winter_asg",3,"winters_end_rich",("ra1_allies","ra1_soviets","td_gdi")),("3v3_winter_sgn",3,"winters_end_rich",("ra1_soviets","td_gdi","td_nod")),
  ("4v4_sahara",4,"great_sahara_2",("td_gdi","td_nod","ra1_allies","ra1_soviets")),("4v4_ice",4,"ice_cold",("td_gdi","td_nod","ra1_allies","ra1_soviets")),
 ]
-RAM_FLOOR_BYTES = int(13.5 * 1024**3)   # admission = cap(10.5) + hard floor(3): worst-case free >=3.9 GiB at full cap
+MEASURED_HEADLESS_PEAK_BYTES = int(5.24 * 1024**3)  # measured single-game headless peak on this host, 2026-10-11
+RAM_FLOOR_BYTES = MEASURED_HEADLESS_PEAK_BYTES + 3 * 1024**3  # maintainer ruling 04:50Z: admit one game at peak + 3 GiB hard reserve (~8.24 GiB)
+PARALLEL_RAM_FLOOR_BYTES = 14 * 1024**3  # ruling: a second small game only when free RAM >= 14 GiB
 PROCESS_CAP_BYTES = int(10.5 * 1024**3) # decided cell ceiling (was 6.5 GiB; startup burst peaks ~9.5 GiB)
 ROUND_STAGES = [16,32,48,64]
 ECONOMY_INTERVAL_TICKS = tuple(range(5000, 45001, 5000))
@@ -38,7 +40,7 @@ FIX_SAFETY_SWITCHES = frozenset("K_cn2_unit_repair AL_emergency_net_loss AN_comb
 _, _ALL_GROUPS, _ = increment.load_spec(pathlib.Path(__file__).with_name("increment_switches.yaml"))
 BEHAVIOR_SWITCHES = tuple(name for name in _ALL_GROUPS if name not in FIX_SAFETY_SWITCHES)
 DEFAULT_THRESHOLDS = {"early_accept_share":0.75,"early_reject_share":0.25,"win_noninferiority_delta":0.0,"min_earned_spent_improvement":0.0,"min_army_efficiency_improvement":0.0,"min_kill_exchange_improvement":0.0}
-SLOT_POLICY={"max_parallel_small_games":3,"small_team_size_max":2,"large_game_exclusive":True,"min_free_ram_bytes":RAM_FLOOR_BYTES,"max_private_bytes":PROCESS_CAP_BYTES}
+SLOT_POLICY={"max_parallel_small_games":2,"small_team_size_max":2,"large_game_exclusive":True,"min_free_ram_bytes":RAM_FLOOR_BYTES,"parallel_min_free_ram_bytes":PARALLEL_RAM_FLOOR_BYTES,"max_private_bytes":PROCESS_CAP_BYTES}
 
 def treatment_baseline(accepted_switches, candidate):
  """Ratchet rule: accepted groups stay in control; treatment adds one candidate."""
@@ -71,11 +73,14 @@ def acceptance_decision(*, rounds, treatment_wins, control_wins, economy_not_wor
 def regression_due(accepted_count):
  return accepted_count>0 and accepted_count%5==0
 
-def slots_available(team_size, free_ram_bytes, active_private_bytes=(), active_slots=0, active_team_sizes=(), max_small_slots=3):
+def slots_available(team_size, free_ram_bytes, active_private_bytes=(), active_slots=0, active_team_sizes=(), max_small_slots=2):
  """Admission policy for the amended slot counter; callers still need OS memory monitoring."""
  if free_ram_bytes<RAM_FLOOR_BYTES or any(x>=PROCESS_CAP_BYTES for x in active_private_bytes): return False
  if team_size>=3: return active_slots==0
- return active_slots<max_small_slots and not any(size>=3 for size in active_team_sizes)
+ if active_slots>=max_small_slots or any(size>=3 for size in active_team_sizes): return False
+ # Ruling 04:50Z: a second small game needs the 14 GiB parallel floor, not the single-game floor.
+ if active_slots>=1 and free_ram_bytes<PARALLEL_RAM_FLOOR_BYTES: return False
+ return True
 
 class SqliteSlotCounter:
  """Process-shared lease counter. Runtime must heartbeat and monitor process/RAM continuously."""

@@ -43,12 +43,13 @@ class CampaignRunnerTests(unittest.TestCase):
 
 	def test_bounds_and_parallel_policy(self):
 		self.assertEqual(int(10.5 * 1024**3), runner.PRIVATE_LIMIT)
-		self.assertEqual(int(13.5 * 1024**3), runner.FREE_RAM_FLOOR)
+		# Ruling 04:50Z: admission = measured headless peak (~5.24 GiB) + 3 GiB reserve; <=2 parallel small games.
+		self.assertEqual(runner.pilot.MEASURED_HEADLESS_PEAK_BYTES + 3 * 1024**3, runner.FREE_RAM_FLOOR)
 		self.assertEqual(3 * 1024**3, runner.FREE_RAM_HARD_FLOOR)
 		self.assertEqual(4 * 1024**3, runner.FREE_RAM_SOFT_FLOOR)
 		self.assertEqual(45000, runner.CAP_TICK)
 		self.assertEqual(5000, runner.ACTOR_SAMPLE_INTERVAL)
-		self.assertEqual(3, runner.SLOT_PARALLEL_SMALL)
+		self.assertEqual(2, runner.SLOT_PARALLEL_SMALL)
 
 	def test_execution_gate_rejects_unapproved_or_missing_a5(self):
 		manifest = {"execution_approved": False, "pins": {"source_commit": "a" * 40, "engine_version": "engine"}}
