@@ -187,17 +187,32 @@ class HarmVeto(unittest.TestCase):
     ACCEPT, even when the pooled signal alone would clear the 75% bar. Devin-Reviewer
     finding (exact-SHA review of 497d737f6): a 1-pair setup's bootstrap CI is
     degenerate (every resample is that one value), so it must not be veto-eligible —
-    see MIN_SETUP_VETO_SAMPLE."""
+    see ANALYZER_POLICY_DEFAULTS."""
 
     def test_harmed_setup_downgrades_pooled_accept_to_park(self):
         good = []
         for i in range(12):
             good += matched_pair(setup_id="1v1_nuclear_gdi", pair_index=i, treatment_wins=(True, True))
         harmed = []
-        for i in range(az.MIN_SETUP_VETO_SAMPLE):
+        for i in range(az.ANALYZER_POLICY_DEFAULTS["min_setup_veto_sample"]):
             harmed += matched_pair(setup_id="1v1_nuclear_nod", pair_index=i, treatment_wins=(False, False))
         result = az.summarize(good + harmed, None)
         self.assertEqual(result["sequential_decision"]["pre_veto_verdict"], "ACCEPT")
+        self.assertEqual(result["sequential_decision"]["harm_veto_setups"], ["1v1_nuclear_nod"])
+        self.assertEqual(result["sequential_decision"]["verdict"], "PARK")
+
+    def test_manifest_acceptance_thresholds_override_the_sample_floor(self):
+        """Lead ruling 2026-10-11: the floor must be a frozen manifest/policy value,
+        not hard-coded, so a change shows up in the manifest's policy hash."""
+        good = []
+        for i in range(14):
+            good += matched_pair(setup_id="1v1_nuclear_gdi", pair_index=i, treatment_wins=(True, True))
+        two_pair_sweep = []
+        for i in range(2):
+            two_pair_sweep += matched_pair(setup_id="1v1_nuclear_nod", pair_index=i, treatment_wins=(False, False))
+        manifest = {"acceptance_thresholds": {**pilot.DEFAULT_THRESHOLDS, "min_setup_veto_sample": 2}}
+        result = az.summarize(good + two_pair_sweep, manifest)
+        self.assertEqual(result["sequential_decision"]["harm_veto_min_sample"], 2)
         self.assertEqual(result["sequential_decision"]["harm_veto_setups"], ["1v1_nuclear_nod"])
         self.assertEqual(result["sequential_decision"]["verdict"], "PARK")
 

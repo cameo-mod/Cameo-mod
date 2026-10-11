@@ -42,10 +42,13 @@ CRASH_END_REASONS = frozenset({"CRASH", "SENTINEL", "MEMORY_KILL", "PROCESS_DIED
 # so paired_bootstrap_interval([-1], seed) == [-1.0, -1.0] looks like a tight, confident
 # interval when it is actually one noisy observation. Require this many pairs in a
 # setup before its CI is trusted to veto a pooled ACCEPT; below the floor the setup is
-# reported but cannot veto. 4 is a pragmatic floor (not a formal power calculation):
-# enough that a unanimous run is not just one game, still small since stage 1 only
-# plans ~1 pair/setup pooled across 16 setups. Flagged to the lead for confirmation.
-MIN_SETUP_VETO_SAMPLE = 4
+# reported but cannot veto. 4 is a pragmatic floor (not a formal power calculation),
+# lead-confirmed 2026-10-11. Lead ruling: this must live in the frozen manifest/policy,
+# not be hard-coded, so a change shows up in the policy hash. ANALYZER_POLICY_DEFAULTS
+# is the fallback only when a manifest's acceptance_thresholds omits the key; when a
+# manifest is supplied with acceptance_thresholds.min_setup_veto_sample set, that frozen
+# value governs (and is covered by the manifest's own SHA-256/policy hash).
+ANALYZER_POLICY_DEFAULTS = {"min_setup_veto_sample": 4}
 
 
 def require(ok: bool, msg: str) -> None:
@@ -405,17 +408,20 @@ def summarize(receipts: list[dict], manifest: dict | None) -> dict[str, Any]:
     # ACCEPT becomes "needs review", not an outright kill) since the pooled signal
     # was otherwise positive. A pooled REJECT/CONTINUE/PARK is never upgraded.
     #
-    # A setup below MIN_SETUP_VETO_SAMPLE is reported (harm_veto_ineligible_setups)
-    # but excluded from the veto itself: see MIN_SETUP_VETO_SAMPLE docstring above.
+    # A setup below min_setup_veto_sample is reported (harm_veto_ineligible_setups)
+    # but excluded from the veto itself: see ANALYZER_POLICY_DEFAULTS docstring above.
+    # Sourced from the frozen manifest's acceptance_thresholds when supplied (so a
+    # change shows up in the manifest's policy hash), else the analyzer's own default.
+    min_setup_veto_sample = thresholds.get("min_setup_veto_sample", ANALYZER_POLICY_DEFAULTS["min_setup_veto_sample"])
     harm_veto_setups = sorted(
         setup_id for setup_id, s in by_setup.items()
         if s["paired_bootstrap_95ci"] is not None and s["paired_bootstrap_95ci"][1] < 0
-        and len(s["win_diffs"]) >= MIN_SETUP_VETO_SAMPLE
+        and len(s["win_diffs"]) >= min_setup_veto_sample
     )
     harm_veto_ineligible_setups = sorted(
         setup_id for setup_id, s in by_setup.items()
         if s["paired_bootstrap_95ci"] is not None and s["paired_bootstrap_95ci"][1] < 0
-        and len(s["win_diffs"]) < MIN_SETUP_VETO_SAMPLE
+        and len(s["win_diffs"]) < min_setup_veto_sample
     )
     pre_veto_decision = decision
     if decision == "ACCEPT" and harm_veto_setups:
@@ -440,7 +446,7 @@ def summarize(receipts: list[dict], manifest: dict | None) -> dict[str, Any]:
             "pre_veto_verdict": pre_veto_decision,
             "harm_veto_setups": harm_veto_setups,
             "harm_veto_ineligible_setups": harm_veto_ineligible_setups,
-            "harm_veto_min_sample": MIN_SETUP_VETO_SAMPLE,
+            "harm_veto_min_sample": min_setup_veto_sample,
             "rounds": pooled_n, "treatment_wins": treatment_wins, "control_wins": control_wins,
             "crashed": crashed, "thresholds": thresholds,
             "earned_spent_delta": earned_spent_delta, "army_efficiency_delta": army_efficiency_delta,
