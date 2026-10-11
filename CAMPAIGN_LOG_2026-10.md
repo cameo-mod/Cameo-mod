@@ -162,6 +162,13 @@ Two engine-run proofs on `codex/ab-campaign-port-fixes` with the pinned
   PeriodicExplosion.Tick — large-radius persistent AoE). 2/2 on 4v4.
   Recommendation now flips: the engine fix is a PREREQUISITE —
   pilot-first would burn all 32 3v3/4v4 cells into INCOMPLETE crashes.
+- FIX VERIFIED LIVE: `4v4_ice|2026|0` re-run on a probe engine carrying
+  `devin/polygon-hitshape-longmath@375d20e9ca` (patched
+  OpenRA.Mods.Common.dll over pin 4f69df005f) ran the FULL 45,000 ticks
+  to cap — all 8 seats resolved, real economies (control 1.65M vs
+  treatment 1.31M earned), receipt `4v4_ice_2026_0.json` under
+  `results/campaign-validation-polyfix/`, peak 6.33 GiB, wall 1258 s,
+  zero exceptions. Same cell, same seed, patched engine: crash gone.
 
 ## Pending
 
