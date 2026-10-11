@@ -129,12 +129,39 @@ Two engine-run proofs on `codex/ab-campaign-port-fixes` with the pinned
   26/26 focused tests green. A live re-run on pair member
   `1v1_nuclear_gdi|1337|1` is in flight to prove the path end-to-end.
 
+### 2026-10-11 end-to-end proof + first REAL gameplay crash found
+
+- Cell `1v1_nuclear_gdi|1337|1` under the corrected runner: full
+  45k-tick game, cap marker 45001, seed pin, both bots economically
+  active -> `end_class CAP`, `winner_team None`, `game_uid 99beaf5e`,
+  receipt `1v1_nuclear_gdi_1337_1.json` sha256 `552c7e17`, bundle now
+  **5.25 MB** (was 1.05 GB), queue finished status CAP, real game pid
+  11752 recorded. The complete execute-one pipeline is PROVEN.
+- Cell `4v4_sahara|1337|0` (8-seat, cross-faction): game crashed at
+  ~tick 20k — `InvalidOperationException: square root of a negative
+  integer: -1868759040` in `PolygonShape.DistanceFromEdge` via
+  `AreaDamageWarhead.ApplyRing` (exception-2026-10-11T073551Z.log).
+  Runner correctly classified `INCOMPLETE` and preserved all artifacts.
+- Root cause: `PolygonShape` squared-distance math runs in int32 while
+  `int2.LengthSquared` wraps silently >46340 units; a wrapped-negative
+  operand reaches `Exts.ISqrt` and throws. Engine fix prepared on
+  `devin/polygon-hitshape-longmath` @ `375d20e9ca` (off campaign pin
+  `4f69df005f`): long math end-to-end, WDist saturates at int.MaxValue,
+  bit-identical in the previously valid domain (determinism-safe),
+  OpenRA.Mods.Common builds clean (0 warnings). Sibling audit: Capsule
+  has the same latent crash path; Rectangle/Circle only wrap silently
+  via `(int)ISqrt(long)` — flagged for review, not patched.
+- DECISION NEEDED (maintainer): adopt the engine fix now (re-pin ->
+  re-A5 -> restart gate chain) or launch the pilot knowing large-team
+  cells can crash INCOMPLETE. Receipts preserve crashes honestly either
+  way, so the pilot is not blocked — but a deterministic crash will keep
+  3v3/4v4 cells from producing CAP/NATURAL evidence.
+
 ## Pending
 
 - Merge `codex/ab-campaign-port-fixes` onto `codex/ab-campaign` (DevOps),
   then regenerate the execution manifest with final tool/engine SHAs.
 - Luna exact-SHA review of engine merge `4f69df005f` / pin `fb7faffaf`.
-- Confirm the live validation cell `1v1_nuclear_gdi|1337|1` writes a
-  CAP receipt under the corrected runner (in flight).
+- Maintainer ruling on polygon fix `375d20e9ca` (new pin vs pilot-first).
 - Remaining cells stay PLANNED; serial, one worker until the second-
   small-game parallel gate is exercised under observation.
