@@ -321,7 +321,7 @@ def validate(manifest,root,engine_root=None,execution=False):
  binaries=manifest.get("binary_sha256")
  require(isinstance(binaries,dict) and len(binaries)==3 and all(len(v)==64 for v in binaries.values()),"engine binary SHA pins missing")
  if engine_root is not None:
-  require((engine_root/"VERSION").read_text(encoding="ascii").strip()==pins["engine_version"],"engine VERSION mismatch")
+  require(read_engine_version(engine_root/"VERSION")==pins["engine_version"],"engine VERSION mismatch")
   require({rel:sha((engine_root/pathlib.PurePosixPath(rel))) for rel in binaries}==binaries,"engine binary SHA mismatch")
  expected=[{"name":k,"path":v[0],"sha256":v[1],"required_seats":v[2]} for k,v in MAPS.items()]
  require(manifest.get("maps")==expected,"map path/SHA/seat-count pins mismatch")
