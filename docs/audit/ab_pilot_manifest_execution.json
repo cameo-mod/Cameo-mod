@@ -259,8 +259,10 @@
       ]
     }
   ],
-  "execution_approved": true,
-  "notes": "execution manifest; approved by maintainer 2026-10-11 (lead order: launch BU pilot)",
+  "execution_approved": false,
+  "notes": "REVOKED 2026-10-11: old 6da7fce engine and A5 6f4f82 pins; not valid for current e49acf41/4f69df005f campaign. Do not execute.",
   "a5_parity_receipt_sha256": "6f4f827637693074331769bcde9d8c138a8554140fb0149118881c6d79064707",
-  "a5_parity_receipt_path": "results/campaign-a5-fixed-tick-parity-20261010-attempt2/A5_parity_gate_receipt.json"
+  "a5_parity_receipt_path": "results/campaign-a5-fixed-tick-parity-20261010-attempt2/A5_parity_gate_receipt.json",
+  "revocation_reason": "Stale engine, A5 receipt, source and tool pins; candidate manifest remains unapproved pending refresh, acceptance and review.",
+  "revoked_manifest_sha256": "05f96755d60edee0461e888b0b6bd99bd06094685a7569ece4f9909955057e81"
 }
