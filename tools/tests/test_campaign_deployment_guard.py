@@ -9,6 +9,24 @@ import campaign_deployment_guard as guard
 
 
 class DeploymentGuardTests(unittest.TestCase):
+	def test_sampling_failure_after_exit_with_prior_sample_is_normal_exit_race(self):
+		self.assertTrue(guard.sampling_failure_is_exit_race(None,
+			process_exited=True, valid_sample_count=1))
+
+	def test_sampling_failure_while_process_alive_fails_closed(self):
+		self.assertFalse(guard.sampling_failure_is_exit_race(None,
+			process_exited=False, valid_sample_count=1))
+
+	def test_sampling_failure_after_exit_without_sample_fails_closed(self):
+		self.assertFalse(guard.sampling_failure_is_exit_race("PROCESS_EXIT",
+			process_exited=True, valid_sample_count=0))
+
+	def test_sampling_exit_race_never_clears_existing_safety_stop(self):
+		for reason in ("MEMORY_KILL", "LOW_FREE_RAM", "STALL", "WALL_TIMEOUT", "INVALID_NO_DEPLOY"):
+			with self.subTest(reason=reason):
+				self.assertFalse(guard.sampling_failure_is_exit_race(reason,
+					process_exited=True, valid_sample_count=1))
+
 	def test_accepts_real_per_seat_markers_at_or_before_tick_100(self):
 		evidence = guard.parse("""AB_CAMPAIGN_DEPLOY seat=Multi0 tick=72 type=td_gdi_constructionyard
 AB_CAMPAIGN_DEPLOY seat=Multi1 tick=93 type=td_nod_constructionyard

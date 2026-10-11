@@ -210,6 +210,7 @@ def run_cell(index: int) -> dict:
 	trace_files = {}
 	trace_errors = {}
 	stop_reason = None
+	valid_memory_sample_count = 0
 	deployment_reader = deployment_guard.MarkerReader()
 	deployment_deadline = deployment_guard.DeploymentDeadline(start, runner.DEPLOYMENT_WALL_TIMEOUT)
 	deployment = {"verified": False, "check_tick": None, "reported_seat_count": None,
@@ -246,7 +247,24 @@ def run_cell(index: int) -> dict:
 				except Exception as cleanup_error:
 					stop_reason += ":CLEANUP_FAILED:" + str(cleanup_error)
 				break
-			host = host_memory_status()
+			try:
+				host = host_memory_status()
+			except (OSError, RuntimeError, ValueError):
+				# Host-RAM telemetry is required while a game is live. Recheck the
+				# cell-scoped process set to distinguish a genuine exit race from a
+				# missing sample on a running game; failed identity reads fail closed.
+				try:
+					still_running = bool(process_rows(support))
+				except (OSError, RuntimeError, subprocess.SubprocessError, json.JSONDecodeError):
+					still_running = True
+				if (not still_running and deployment_guard.sampling_failure_is_exit_race(
+							stop_reason, process_exited=True, valid_sample_count=valid_memory_sample_count)):
+					break
+				if stop_reason is None:
+					stop_reason = "MEMORY_SAMPLE_FAILED"
+				if rows:
+					kill_cell_processes(rows, support)
+				break
 			if not rows:
 				samples.append({"utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
 					"pid": None, **host, **log_snapshot(support)})
@@ -256,14 +274,22 @@ def run_cell(index: int) -> dict:
 					private = runner.private_bytes(pid)
 					working_set = process_working_set(pid)
 				except (OSError, RuntimeError):
-					# A naturally exited child can disappear between the CIM query and
-					# memory sample; a still-present one makes the probe fail closed.
-					if any(int(x["ProcessId"]) == pid for x in process_rows(support)):
+					# The game may exit between the process snapshot and memory query.
+					# Re-snapshot before classifying; a failed identity query is not
+					# evidence that the process exited.
+					try:
+						still_present = any(int(x["ProcessId"]) == pid for x in process_rows(support))
+					except (OSError, RuntimeError, subprocess.SubprocessError, json.JSONDecodeError):
+						still_present = True
+					if (not still_present and deployment_guard.sampling_failure_is_exit_race(
+							stop_reason, process_exited=True, valid_sample_count=valid_memory_sample_count)):
+						continue
+					if stop_reason is None:
 						stop_reason = "MEMORY_SAMPLE_FAILED"
-						kill_cell_processes(rows, support)
-						break
-					continue
+					kill_cell_processes(rows, support)
+					break
 				peak = max(peak, private)
+				valid_memory_sample_count += 1
 				if pid not in counters:
 					counter_path = support / f"System.Runtime-{pid}.csv"
 					stderr_path = support / f"System.Runtime-{pid}.stderr.log"
@@ -332,6 +358,9 @@ def run_cell(index: int) -> dict:
 				proc.kill(); proc.wait()
 		else:
 			proc.wait()
+	if valid_memory_sample_count == 0 and stop_reason is None:
+		# Host-only snapshots do not prove that the game itself was ever measured.
+		stop_reason = "MEMORY_SAMPLE_FAILED"
 	for pid, trace in traces.items():
 		try:
 			trace.wait(timeout=12)

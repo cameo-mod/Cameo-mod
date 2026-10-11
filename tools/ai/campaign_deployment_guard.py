@@ -9,6 +9,24 @@ WORLD_TICK_RE = re.compile(r"\[WT\s+(\d+)\]")
 VERIFIED_TYPES = frozenset(("td_gdi_constructionyard", "td_nod_constructionyard",
 	"ra1_allies_constructionyard", "ra1_soviets_constructionyard"))
 
+# A sampling exception is only a benign exit race when no stop condition has
+# already been selected. Whitelisting normal states prevents a late sample
+# exception from rehabilitating any safety stop (or another failure reason).
+_SAFETY_STOPS = frozenset(("MEMORY_KILL", "LOW_FREE_RAM", "STALL", "WALL_TIMEOUT", "INVALID_NO_DEPLOY"))
+
+
+def sampling_failure_is_exit_race(stop_reason: str | None, *, process_exited: bool,
+		valid_sample_count: int) -> bool:
+	"""Whether a failed sample can be attributed to a just-exited process.
+
+	The caller must re-check process liveness after the sampling failure. A prior
+	valid sample is mandatory: an unmeasured process still fails closed. Existing
+	safety stops and non-normal errors are never cleared.
+	"""
+	return (process_exited and valid_sample_count > 0
+		and stop_reason in (None, "PROCESS_EXIT")
+		and stop_reason not in _SAFETY_STOPS)
+
 
 def parse(text: str) -> dict:
 	checks = CHECK_RE.findall(text)
