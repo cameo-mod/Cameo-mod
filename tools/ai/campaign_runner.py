@@ -517,7 +517,8 @@ def execution_gate(manifest: dict, *, a5_receipt: dict | None, a5_receipt_sha256
 			run.get("replay_count") != 1 or not run.get("fingerprint_id") or
 			type(run.get("stop_threshold_bytes")) is not int or
 			not 0 < run["stop_threshold_bytes"] <= PRIVATE_LIMIT or run.get("ceiling_bytes") != PRIVATE_LIMIT or
-			run.get("allocation_trace_policy", {}).get("enabled") is not False or run.get("allocation_trace_files") != [] or
+			not isinstance(run.get("allocation_trace_policy"), dict) or
+			run["allocation_trace_policy"].get("enabled") is not False or run.get("allocation_trace_files") != [] or
 			run.get("host_hard_floor_bytes") != FREE_RAM_HARD_FLOOR or
 			run.get("peak_private_bytes", PRIVATE_LIMIT) >= PRIVATE_LIMIT):
 			raise ValueError("A5 receipt contains an incomplete or unpinned capped run")
