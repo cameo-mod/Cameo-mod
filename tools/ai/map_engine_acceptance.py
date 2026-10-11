@@ -451,6 +451,7 @@ def run_cell(job: dict, *, root: pathlib.Path, engine: pathlib.Path, overlay: pa
 	observed_owned = {}
 	child_seen = False
 	monitor_error = None
+	identity_gaps = 0
 	with (cell_dir / "driver.log").open("w", encoding="utf-8") as output:
 		process = subprocess.Popen(args, cwd=engine, env=env, stdout=output, stderr=subprocess.STDOUT)
 		end_reason = "PROCESS_EXIT"
@@ -476,6 +477,10 @@ def run_cell(job: dict, *, root: pathlib.Path, engine: pathlib.Path, overlay: pa
 					end_reason = "MEMORY_SAMPLE_FAILED"
 					raise RuntimeError("host available-RAM sample is missing")
 			except Exception as error:
+				if "ExecutablePath missing" in str(error) and identity_gaps < 10:
+					identity_gaps += 1
+					time.sleep(0.5)
+					continue
 				if end_reason == "PROCESS_EXIT":
 					end_reason = "MEMORY_SAMPLE_FAILED"
 				monitor_error = str(error)
@@ -485,6 +490,7 @@ def run_cell(job: dict, *, root: pathlib.Path, engine: pathlib.Path, overlay: pa
 					end_reason = "CLEANUP_FAILED"
 					monitor_error += f"; cleanup failed: {cleanup_error}"
 				break
+			identity_gaps = 0
 			peak = max(peak, current_rss)
 			peak_private = max(peak_private, current_private)
 			min_host_free = available if min_host_free is None else min(min_host_free, available)
