@@ -53,6 +53,13 @@ TRACE_ENABLED = True
 ALLOW_STALE_BUILD = False
 
 
+def binary_hashes() -> dict[str, str]:
+	"""Record every campaign-pinned executable/DLL; missing evidence is fatal."""
+	return {str(path.relative_to(ROOT)): file_sha256(path) for path in (
+		ROOT / "engine/bin/OpenRA.exe", ROOT / "engine/bin/OpenRA.Game.dll",
+		ROOT / "engine/bin/OpenRA.Mods.Cameo.dll")}
+
+
 def admission_ok(available_physical: int, available_commit: int) -> bool:
 	return (available_physical >= PROCESS_STOP + HOST_SOFT_STOP + HOST_LAUNCH_HEADROOM
 		and available_commit >= PROCESS_STOP + COMMIT_HEADROOM)
@@ -389,8 +396,9 @@ def run_cell(index: int) -> dict:
 	return {"cell": cell, "seed": SEED, "source_head": subprocess.check_output(
 		["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip(),
 		"baseline_parent": BASELINE, "engine_version": pilot.read_engine_version(ROOT / "engine/VERSION"),
-		"binary_sha256": {str(p.relative_to(ROOT)): file_sha256(p) for p in (
-			ROOT / "engine/bin/OpenRA.exe", ROOT / "engine/bin/OpenRA.Mods.Cameo.dll") if p.is_file()},
+		"binary_sha256": binary_hashes(),
+		"render_mode": command[command.index("--render") + 1],
+		"render_mode_derived_from": {"command_render_argument": command[command.index("--render") + 1]},
 		"exit_code": proc.returncode, "stop_reason": stop_reason or "PROCESS_EXIT",
 		"wall_seconds": round(time.monotonic() - start, 2), "peak_private_bytes": peak,
 		"stop_threshold_bytes": PROCESS_STOP, "host_soft_stop_bytes": HOST_SOFT_STOP,
@@ -410,9 +418,72 @@ def run_cell(index: int) -> dict:
 		"replay_count": len(replays), "valid_game": valid_game}
 
 
+def aggregate_run_config(receipt: dict, runs: list[dict]) -> dict:
+	"""Derive guardrail fields from complete matching run records, never defaults."""
+	if len(runs) != 2: raise ValueError("re-aggregation requires exactly two run records")
+	configs = []
+	for run in runs:
+		for key in ("render_mode", "ceiling_bytes", "host_hard_floor_bytes", "stop_threshold_bytes", "allocation_trace_policy"):
+			if key not in run: raise ValueError(f"run record missing {key}")
+		policy = run["allocation_trace_policy"]
+		if not isinstance(policy, dict) or type(policy.get("enabled")) is not bool:
+			raise ValueError("run record missing allocation trace enabled flag")
+		if run["render_mode"] != "headless": raise ValueError("A5 run is not headless")
+		for key in ("ceiling_bytes", "host_hard_floor_bytes", "stop_threshold_bytes"):
+			if type(run[key]) is not int or run[key] <= 0: raise ValueError(f"invalid run {key}")
+		if run["stop_threshold_bytes"] > run["ceiling_bytes"]: raise ValueError("stop exceeds hard ceiling")
+		configs.append((run["render_mode"], run["ceiling_bytes"], run["host_hard_floor_bytes"], run["stop_threshold_bytes"], policy["enabled"]))
+	if configs[0] != configs[1]: raise ValueError("A5 run configurations disagree")
+	result = dict(receipt)
+	result.update(render_mode=configs[0][0], process_private_cap_bytes=configs[0][1],
+		host_emergency_floor_bytes=configs[0][2], process_stop_threshold_bytes=configs[0][3],
+		allocation_trace_enabled=configs[0][4], pair=runs)
+	return result
+
+
+def reaggregate(source: pathlib.Path, expected_sha256: str, destination: pathlib.Path) -> dict:
+	"""Offline reconstruction. Source receipts/logs are immutable hashed inputs."""
+	if destination.exists(): raise ValueError("re-aggregate output exists; preserve existing evidence")
+	if not re.fullmatch(r"[0-9a-fA-F]{64}", expected_sha256 or ""):
+		raise ValueError("source raw receipt SHA256 is required")
+	actual_sha = file_sha256(source)
+	if actual_sha != expected_sha256.lower(): raise ValueError("source raw receipt SHA256 mismatch")
+	raw = json.loads(source.read_text(encoding="utf-8-sig"))
+	if not isinstance(raw.get("pair"), list) or len(raw["pair"]) != 2:
+		raise ValueError("raw receipt lacks the two run records")
+	runs = []; inputs = []
+	for index, embedded in enumerate(raw["pair"], 1):
+		cell = f"run-{index:02d}"
+		path = source.parent / f"{cell}.receipt.json"
+		run = json.loads(path.read_text(encoding="utf-8-sig"))
+		if run != embedded or run.get("cell") != cell:
+			raise ValueError("raw aggregate and per-run receipt differ")
+		proof = {"run_receipt": str(path.resolve()), "sha256": file_sha256(path)}
+		# Legacy emitter lacked a renderer field. The actual engine graphics
+		# record is authoritative; never infer this from today's CLI defaults.
+		if "render_mode" not in run:
+			graphics = source.parent / cell / "Logs" / "graphics.log"
+			if not graphics.is_file() or "Null platform: headless window" not in graphics.read_text(encoding="utf-8", errors="strict"):
+				raise ValueError("run record lacks authoritative headless graphics evidence")
+			run = dict(run, render_mode="headless", render_mode_derived_from={"graphics_log_sha256": file_sha256(graphics)})
+			proof.update(graphics_record=str(graphics.resolve()), graphics_sha256=file_sha256(graphics))
+		runs.append(run); inputs.append(proof)
+	result = aggregate_run_config(raw, runs)
+	result["reaggregation"] = {"mode": "NO_LAUNCH_FROM_EXISTING_RECORDS", "source_raw_receipt_sha256": actual_sha,
+		"source_raw_receipt": str(source.resolve()), "input_records": inputs,
+		"emitter_sha256": file_sha256(pathlib.Path(__file__))}
+	destination.parent.mkdir(parents=True, exist_ok=True)
+	with destination.open("x", encoding="utf-8") as stream:
+		stream.write(json.dumps(result, indent=2) + "\n")
+	return result
+
+
 def main() -> int:
 	global OUT, PROCESS_STOP, HOST_SOFT_STOP, HOST_HARD_FLOOR, TRACE_ENABLED, CAP_TICK, ALLOW_STALE_BUILD
 	parser = argparse.ArgumentParser(description=__doc__)
+	parser.add_argument("--reaggregate-source", type=pathlib.Path, help="existing raw aggregate; strictly offline, no launch")
+	parser.add_argument("--source-raw-sha256", help="required raw aggregate SHA256 for offline reconstruction")
+	parser.add_argument("--reaggregate-output", type=pathlib.Path, help="new output receipt; never overwrite source")
 	parser.add_argument("--execute-a5-diagnostic", action="store_true",
 		help="explicitly run two bounded A5 qualification cells; never campaign outcomes")
 	parser.add_argument("--output-dir", type=pathlib.Path, default=OUT,
@@ -432,6 +503,14 @@ def main() -> int:
 			"newer than the pinned engine/bin dlls only by checkout timestamp "
 			"(e.g. hardlink-materialized engine); receipt records binary sha256")
 	args = parser.parse_args()
+	if args.reaggregate_source is not None:
+		if args.execute_a5_diagnostic or args.reaggregate_output is None:
+			raise ValueError("re-aggregate requires new output and forbids execute mode")
+		reaggregate(args.reaggregate_source, args.source_raw_sha256, args.reaggregate_output)
+		print(json.dumps({"mode": "NO_LAUNCH_REAGGREGATE", "output": str(args.reaggregate_output)}))
+		return 0
+	if args.source_raw_sha256 or args.reaggregate_output:
+		raise ValueError("re-aggregate arguments require an existing source receipt")
 	if not 1000 <= args.tick_cap < 17000:
 		raise RuntimeError("A5 parity cap must be in [1000, 17000) to stay below observed natural end")
 	CAP_TICK = args.tick_cap
@@ -468,8 +547,7 @@ def main() -> int:
 		raise RuntimeError(f"System.Runtime counter tool missing: {COUNTERS_EXE}")
 	if not TRACE_EXE.is_file():
 		raise RuntimeError(f"gc-verbose trace tool missing: {TRACE_EXE}")
-	if not (ROOT / "engine/bin/OpenRA.exe").is_file() or not (ROOT / "engine/bin/OpenRA.Mods.Cameo.dll").is_file():
-		raise RuntimeError("engine executable or Cameo DLL missing")
+	binary_hashes()  # Validate all three binaries before any launch.
 	if process_rows(OUT):
 		raise RuntimeError("unexpected OpenRA process already names probe output")
 	if OUT.exists():
@@ -511,14 +589,14 @@ def main() -> int:
 	receipt = {"purpose": "A5_FIXED_TICK_PARITY_QUALIFICATION_ONLY_NOT_CAMPAIGN_OUTCOME",
 		"cap_tick": CAP_TICK, "map_monitor": map_monitor,
 		"baseline_commit": BASELINE, "source_head": subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip(),
-		"binary_sha256": {str(p.relative_to(ROOT)): file_sha256(p) for p in (
-			ROOT / "engine/bin/OpenRA.exe", ROOT / "engine/bin/OpenRA.Mods.Cameo.dll")},
+		"binary_sha256": binary_hashes(),
 		"dotnet_counters_sha256": file_sha256(COUNTERS_EXE),
 		"engine_version": ENGINE, "seed": SEED, "pair": results,
 		"order_stream_verdict": order_verdict, "system_openra_process_count": processes_left.stdout.strip(),
 		"a5_diagnostic_passed": len(results) == 2 and all(r["valid_game"] for r in results) and
 			results[0].get("fingerprint_id") == results[1].get("fingerprint_id") and order_verdict in ("IDENTICAL", "IDENTICAL_TAIL_FLUSH"),
 		"campaign_gate_passed": False}
+	if len(results) == 2: receipt = aggregate_run_config(receipt, results)
 	(OUT / "A5_memory_probe_receipt.json").write_text(json.dumps(receipt, indent=2) + "\n", encoding="utf-8")
 	print(json.dumps({"output": str(OUT), "pair_count": len(results),
 		"order_stream_verdict": order_verdict, "campaign_gate_passed": receipt["campaign_gate_passed"]}, indent=2))

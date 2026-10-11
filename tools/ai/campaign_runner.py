@@ -450,6 +450,29 @@ def validate_receipt(receipt: dict) -> None:
 		raise ValueError("deployment missing-seat list must be unique")
 
 
+REPO_ROOT = pathlib.Path(__file__).resolve().parents[2]
+
+
+def verify_tools_only_ancestor(commit: str, source_commit: str) -> None:
+	"""Verify provenance in Git; receipt assertions cannot authorize a new baseline."""
+	if any(not isinstance(x, str) or not re.fullmatch(r"[0-9a-f]{40}", x) for x in (commit, source_commit)):
+		raise ValueError("A5 provenance requires exact commit SHA")
+	try:
+		ancestor = subprocess.run(["git", "merge-base", "--is-ancestor", commit, source_commit],
+			cwd=REPO_ROOT, capture_output=True, timeout=15)
+		if ancestor.returncode != 0: raise ValueError("A5 source/baseline is not an ancestor of manifest source")
+		diff = subprocess.run(["git", "diff", "--name-only", "-z", commit, source_commit, "--"],
+			cwd=REPO_ROOT, capture_output=True, timeout=15)
+		if diff.returncode != 0: raise ValueError("cannot verify A5 source diff")
+		paths = diff.stdout.decode("utf-8", errors="strict").split("\0")
+	except (OSError, subprocess.SubprocessError, UnicodeError) as error:
+		raise ValueError("cannot verify A5 provenance in Git") from error
+	for path in filter(None, paths):
+		if (not (path.startswith("tools/") or path.startswith("docs/") or path == "DEVELOPMENT_LOG.md")
+			or pathlib.PurePosixPath(path).suffix.lower() in (".cs", ".yaml", ".yml", ".lua", ".oramap")):
+			raise ValueError(f"A5 baseline differs in simulation/pin data: {path}")
+
+
 def execution_gate(manifest: dict, *, a5_receipt: dict | None, a5_receipt_sha256: str | None,
 				source_commit: str, engine_version: str) -> None:
 	"""Refuse execution unless the manifest and exact-baseline A5 proof agree."""
@@ -461,8 +484,10 @@ def execution_gate(manifest: dict, *, a5_receipt: dict | None, a5_receipt_sha256
 		raise ValueError("manifest engine pin mismatch")
 	if not isinstance(a5_receipt, dict) or a5_receipt.get("a5_diagnostic_passed") is not True or a5_receipt.get("order_stream_verdict") not in ("IDENTICAL", "IDENTICAL_TAIL_FLUSH"):
 		raise ValueError("exact-baseline A5 parity receipt required")
-	if a5_receipt.get("source_head") != source_commit or a5_receipt.get("baseline_commit") != source_commit or a5_receipt.get("engine_version") != engine_version:
+	if a5_receipt.get("engine_version") != engine_version:
 		raise ValueError("A5 parity receipt pin mismatch")
+	for commit in {a5_receipt.get("source_head"), a5_receipt.get("baseline_commit")}:
+		verify_tools_only_ancestor(commit, source_commit)
 	if manifest.get("a5_parity_receipt_sha256") != a5_receipt_sha256:
 		raise ValueError("A5 parity receipt SHA mismatch")
 	if a5_receipt.get("campaign_gate_passed") is not False or a5_receipt.get("render_mode") != "headless":
@@ -481,8 +506,8 @@ def execution_gate(manifest: dict, *, a5_receipt: dict | None, a5_receipt_sha256
 	if receipt_binaries != binary_pins:
 		raise ValueError("A5 receipt binary SHA differs from the approved campaign pin")
 	for run in pair:
-		if (not isinstance(run, dict) or run.get("source_head") != source_commit or
-			run.get("baseline_parent") != source_commit or run.get("engine_version") != engine_version or
+		if (not isinstance(run, dict) or run.get("source_head") != a5_receipt.get("source_head") or
+			run.get("baseline_parent") != a5_receipt.get("baseline_commit") or run.get("engine_version") != engine_version or
 			run.get("exit_code") != 0 or run.get("stop_reason") != "PROCESS_EXIT" or
 			run.get("seed") != a5_receipt["seed"] or run.get("seed_pin_verified") is not True or
 			run.get("records_verified") is not True or run.get("valid_game") is not True or
@@ -490,7 +515,9 @@ def execution_gate(manifest: dict, *, a5_receipt: dict | None, a5_receipt_sha256
 			run.get("cap_tick") != a5_receipt.get("cap_tick") or
 			run.get("observed_cap_tick") != a5_receipt.get("cap_tick", -1) + 1 or
 			run.get("replay_count") != 1 or not run.get("fingerprint_id") or
-			run.get("stop_threshold_bytes") != PRIVATE_LIMIT or
+			type(run.get("stop_threshold_bytes")) is not int or
+			not 0 < run["stop_threshold_bytes"] <= PRIVATE_LIMIT or run.get("ceiling_bytes") != PRIVATE_LIMIT or
+			run.get("allocation_trace_policy", {}).get("enabled") is not False or run.get("allocation_trace_files") != [] or
 			run.get("host_hard_floor_bytes") != FREE_RAM_HARD_FLOOR or
 			run.get("peak_private_bytes", PRIVATE_LIMIT) >= PRIVATE_LIMIT):
 			raise ValueError("A5 receipt contains an incomplete or unpinned capped run")
