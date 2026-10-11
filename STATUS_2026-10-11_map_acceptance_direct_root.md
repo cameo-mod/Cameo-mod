@@ -18,3 +18,6 @@ Next: have the reviewer inspect `codex/ab-campaign-pidguard-integration@68193e2d
 - Regression coverage includes direct root-only success, wrong map/benchmark rejection, mismatched support rejection, launcher-plus-child, exited launcher plus surviving child, unrelated process exclusion, and missing memory samples.
 - Focused `tools.tests.test_map_engine_acceptance`: 20/20 passed. `py_compile` and `git diff --check` passed. No launch occurred for this change.
 - Candidate manifest remains SHA-256 `1f7cac209531e9ae1b94468ecc233562d4d04b9a844542186324b27510767074` and `execution_approved=false`; its A5 evidence is unchanged. Runtime acceptance must produce new receipts against the updated acceptance-tool SHA before any outcome campaign is considered.
+## Review (2026-10-11)
+
+Exact review PASS for branch head `98eaa192c66be72a70a20e0bd1da35fd5301938d`, including code commit `d47503dce6da69ad84d8ef448b74441ada69b945`. Reviewer: Luna Manager; receipt `REVIEW_2026-10-11_map_acceptance_pidguard_98eaa_luna.md`. Focused map tests 21/21 and combined focused suite 57/57; py_compile/diff-check PASS. No runtime acceptance was run for this source revision. The consolidated `codex/ab-campaign` checkout still needs this code, refreshed acceptance provenance, and a clean resolution of its existing conflicts before any new reservation/launch.
