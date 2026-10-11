@@ -216,6 +216,22 @@ class HarmVeto(unittest.TestCase):
         self.assertEqual(result["sequential_decision"]["harm_veto_setups"], ["1v1_nuclear_nod"])
         self.assertEqual(result["sequential_decision"]["verdict"], "PARK")
 
+    def test_manifest_without_the_sample_floor_is_rejected(self):
+        """Devin-Reviewer finding (re-review of 8272b271b): a supplied manifest whose
+        acceptance_thresholds omits min_setup_veto_sample must fail closed, not
+        silently default — otherwise the manifest SHA doesn't bind the veto threshold
+        actually used."""
+        games = matched_pair()
+        manifest_missing_field = {"acceptance_thresholds": dict(pilot.DEFAULT_THRESHOLDS)}
+        with self.assertRaises(ValueError):
+            az.summarize(games, manifest_missing_field)
+        manifest_wrong_type = {"acceptance_thresholds": {**pilot.DEFAULT_THRESHOLDS, "min_setup_veto_sample": "4"}}
+        with self.assertRaises(ValueError):
+            az.summarize(games, manifest_wrong_type)
+        manifest_non_positive = {"acceptance_thresholds": {**pilot.DEFAULT_THRESHOLDS, "min_setup_veto_sample": 0}}
+        with self.assertRaises(ValueError):
+            az.summarize(games, manifest_non_positive)
+
     def test_single_pair_setup_is_not_veto_eligible(self):
         """Devin-Reviewer's exact regression request: one noisy pair must not veto."""
         good = []

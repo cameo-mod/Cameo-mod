@@ -381,6 +381,18 @@ def summarize(receipts: list[dict], manifest: dict | None) -> dict[str, Any]:
     teams = team_metrics(receipts)
 
     thresholds = (manifest or {}).get("acceptance_thresholds", pilot.DEFAULT_THRESHOLDS)
+    # Devin-Reviewer finding (2026-10-11, re-review of 8272b271b): a silent fallback to
+    # ANALYZER_POLICY_DEFAULTS when a *supplied* manifest omits min_setup_veto_sample
+    # means the manifest's SHA-256 does not actually bind the veto threshold used —
+    # the same signed manifest could behave differently under a different analyzer
+    # version. Require and validate the field whenever a manifest is supplied; only
+    # the no-manifest fixture path may use the analyzer's own default.
+    if manifest is not None:
+        veto_sample_raw = thresholds.get("min_setup_veto_sample")
+        require(isinstance(veto_sample_raw, int) and not isinstance(veto_sample_raw, bool) and veto_sample_raw > 0,
+                "manifest acceptance_thresholds.min_setup_veto_sample must be a frozen positive integer "
+                "when a manifest is supplied; it cannot default silently, or the manifest SHA would not "
+                "bind the veto threshold actually used")
     earned_spent_delta = (
         income["treatment"]["earned_spent_ratio"] - income["control"]["earned_spent_ratio"]
         if income["treatment"]["earned_spent_ratio"] is not None and income["control"]["earned_spent_ratio"] is not None
@@ -410,9 +422,13 @@ def summarize(receipts: list[dict], manifest: dict | None) -> dict[str, Any]:
     #
     # A setup below min_setup_veto_sample is reported (harm_veto_ineligible_setups)
     # but excluded from the veto itself: see ANALYZER_POLICY_DEFAULTS docstring above.
-    # Sourced from the frozen manifest's acceptance_thresholds when supplied (so a
-    # change shows up in the manifest's policy hash), else the analyzer's own default.
-    min_setup_veto_sample = thresholds.get("min_setup_veto_sample", ANALYZER_POLICY_DEFAULTS["min_setup_veto_sample"])
+    # Sourced from the frozen manifest's acceptance_thresholds when supplied (required
+    # and validated above, so it is actually bound by that manifest's policy hash),
+    # else the analyzer's own default (no-manifest fixture mode only).
+    min_setup_veto_sample = (
+        thresholds["min_setup_veto_sample"] if manifest is not None
+        else ANALYZER_POLICY_DEFAULTS["min_setup_veto_sample"]
+    )
     harm_veto_setups = sorted(
         setup_id for setup_id, s in by_setup.items()
         if s["paired_bootstrap_95ci"] is not None and s["paired_bootstrap_95ci"][1] < 0
