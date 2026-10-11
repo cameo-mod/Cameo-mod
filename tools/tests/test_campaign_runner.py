@@ -121,6 +121,29 @@ class CampaignRunnerTests(unittest.TestCase):
 		receipt["winner_team"]=None;receipt["cap"]["marker_observed"]=False
 		with self.assertRaisesRegex(ValueError,"lacks valid cap evidence"):
 			runner.validate_receipt(receipt)
+		# the Lua cap marker lands on the first tick AT/AFTER the cap (observed
+		# 45001 for cap 45000; A5 receipts showed 16001 for cap 16000) — accept it
+		receipt["cap"]["marker_observed"]=True;receipt["cap"]["marker_tick"]=45001
+		runner.validate_receipt(receipt)
+		receipt["cap"]["marker_tick"]=45002
+		with self.assertRaisesRegex(ValueError,"lacks valid cap evidence"):
+			runner.validate_receipt(receipt)
+
+	def test_support_bundle_excludes_fullmods_and_stale_bundles(self):
+		# FullMods is ~33k hardlinked files (~1 GiB zipped/cell) reproducible from
+		# manifest pins — bundling it 64x is waste, not evidence. Stale
+		# support_bundle*.zip must not self-bundle on re-processing.
+		with tempfile.TemporaryDirectory() as temp:
+			root = pathlib.Path(temp)
+			keep = root / "Support" / "Logs" / "server.log"
+			fullmods = root / "FullMods" / "mods" / "cameo" / "mod.yaml"
+			stale = root / "support_bundle.zip"
+			for p in (keep, fullmods, stale):
+				p.parent.mkdir(parents=True, exist_ok=True); p.write_text("x", encoding="utf-8")
+			self.assertTrue(runner._is_support_artifact(root, keep))
+			self.assertFalse(runner._is_support_artifact(root, fullmods))
+			self.assertFalse(runner._is_support_artifact(root, stale))
+			self.assertFalse(runner._is_support_artifact(root, root / "support_bundle_v2.zip"))
 
 	def test_memory_watch_kills_only_given_process_handle(self):
 		class FakeProcess:

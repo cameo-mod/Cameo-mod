@@ -458,7 +458,10 @@ def adjudicate(records, receipt, job, manifest_sha):
  if status in ("CRASH","INCOMPLETE","MEMORY_KILL","MEMORY_SAMPLE_FAILED","LOW_FREE_RAM","WALL_TIMEOUT","STALL","PROCESS_DIED"):
   return {"verdict":"INCOMPLETE_UNKNOWN","reason":status}
  cap=status=="CENSORED_CAP"
- if cap and not (receipt.get("cap_marker") is True and receipt.get("cap_tick")==45000 and receipt.get("support_complete") is True):
+ # The Lua monitor emits the cap marker on the first game tick AT/AFTER the
+ # configured cap — observed 45001 for cap 45000 here and 16001 for cap 16000
+ # in the A5 receipts — so accept the observed tick in {cap, cap+1}.
+ if cap and not (receipt.get("cap_marker") is True and receipt.get("cap_tick") in (45000,45001) and receipt.get("support_complete") is True):
   return {"verdict":"INVALID_UNKNOWN","reason":"cap evidence incomplete"}
  if not cap and (status!="NATURAL_END" or receipt.get("end_reason")!="natural"):
   return {"verdict":"INVALID_UNKNOWN","reason":"natural end proof missing"}

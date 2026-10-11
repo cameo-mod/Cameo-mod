@@ -335,7 +335,9 @@ def validate_receipt(receipt: dict) -> None:
 		raise ValueError("memory.samples must be a list")
 	if receipt["memory"].get("peak_private_bytes", 0) > PRIVATE_LIMIT and receipt["end_reason"] != "MEMORY_KILL":
 		raise ValueError("memory limit exceeded without MEMORY_KILL classification")
-	if receipt["end_class"] == "CAP" and not (receipt["cap"].get("marker_observed") is True and receipt["cap"].get("marker_tick") == CAP_TICK):
+	# The cap marker lands on the first game tick at/after the cap (45001 for
+	# cap 45000; A5 receipts observed the same +1 at cap 16000) — accept both.
+	if receipt["end_class"] == "CAP" and not (receipt["cap"].get("marker_observed") is True and receipt["cap"].get("marker_tick") in (CAP_TICK, CAP_TICK + 1)):
 		raise ValueError("CAP classification lacks valid cap evidence")
 	if receipt["end_class"] == "NATURAL" and (not isinstance(receipt["end_reason"], str) or receipt["winner_team"] is None):
 		raise ValueError("NATURAL classification lacks authoritative winner/end reason")
@@ -472,6 +474,17 @@ def _file_artifact(path: pathlib.Path | None, missing_reason: str | None = None)
 	return {"path": str(path), "sha256": sha(path), "missing_reason": None}
 
 
+def _is_support_artifact(game_root: pathlib.Path, path: pathlib.Path) -> bool:
+	"""Bundle predicate: cell evidence only — never the reproducible FullMods
+	tree (~33k links) and never an earlier support_bundle*.zip (a re-processed
+	cell must not self-bundle a stale archive)."""
+	try:
+		rel = path.relative_to(game_root)
+	except ValueError:
+		return False
+	return "FullMods" not in rel.parts and not path.name.startswith("support_bundle")
+
+
 def run_one(manifest: dict, manifest_sha: str, job: dict, *, root: pathlib.Path,
 			engine_root: pathlib.Path, a5_receipt: dict, a5_receipt_sha256: str, support_root: pathlib.Path,
 			slot_db: pathlib.Path) -> dict:
@@ -547,6 +560,10 @@ def run_one(manifest: dict, manifest_sha: str, job: dict, *, root: pathlib.Path,
 	# still produce cap-censored rows — never classify that as a played cell.
 	mod_failed = "Invalid bot type" in debug_text or "YamlException" in debug_text
 	match_rows = batch.read_appended_records(match_log, before)
+	# Every match row must carry the same game_uid: mixed or missing uids mean
+	# the match log can't be attributed to this launch — cap evidence is moot.
+	game_uids = {r.get("game_uid") for r in match_rows if isinstance(r.get("game_uid"), str)}
+	game_uid = next(iter(game_uids)) if len(game_uids) == 1 else None
 	# The cap marker is emitted by the batch driver (verified in driver.log and
 	# lua.log on preserved attempts); check both plus server.log so a stream move
 	# can never silently turn a capped cell into a stall.
@@ -561,7 +578,7 @@ def run_one(manifest: dict, manifest_sha: str, job: dict, *, root: pathlib.Path,
 	known_incomplete = {"MEMORY_KILL", "MEMORY_SAMPLE_FAILED", "LOW_FREE_RAM", "STALL", "WALL_TIMEOUT"}
 	internal_status = monitor_result["end_reason"] if monitor_result["end_reason"] in known_incomplete else "INCOMPLETE"
 	end_reason = monitor_result["end_reason"]
-	if monitor_result["end_reason"] == "PROCESS_EXIT" and monitor_result["exit_code"] == 0 and seed_line and len(match_rows) == job["required_seats"] and not mod_failed:
+	if monitor_result["end_reason"] == "PROCESS_EXIT" and monitor_result["exit_code"] == 0 and seed_line and len(match_rows) == job["required_seats"] and not mod_failed and game_uid:
 		if cap_match and int(cap_match.group(1)) >= CAP_TICK: internal_status="CENSORED_CAP"; end_reason="cap"
 		else: internal_status="NATURAL_END"; end_reason="natural"
 	if mod_failed: internal_status="INCOMPLETE"; end_reason="INVALID_MOD_REGISTRATION"
@@ -578,13 +595,19 @@ def run_one(manifest: dict, manifest_sha: str, job: dict, *, root: pathlib.Path,
 		resolved_out.append({"seat_id": seat["home"], "team": seat["side"], "arm": seat["arm"], "bot_type": seat["bot_type"], "faction": seat["faction"], "home": seat["home"], "spawn": seat["spawn"], "proof_source":"generated map.yaml + cameo-ai-matches.jsonl", "outcome": pl.get("outcome", "unknown"), "metrics": metrics})
 	team_obj = {side:{"arm":"control" if side==job["control_side"] else "treatment", "bot_type":job["arm_bot_types"]["control" if side==job["control_side"] else "treatment"], "seat_ids":[s["home"] for s in resolved_out if s["team"]==side]} for side in ("A", "B")}
 	logs.mkdir(exist_ok=True)
-	artifact_paths = list(game_root.rglob("*"))
+	# The support bundle is evidence, not a mod-tree backup: FullMods is ~33k
+	# hardlinked files (~1 GiB zipped per cell, 64x redundant) and is fully
+	# reproducible from the manifest pins + cell receipt. Exclude it, and any
+	# earlier support_bundle*.zip so a re-processed cell can't self-bundle.
+	artifact_paths = [p for p in game_root.rglob("*") if _is_support_artifact(game_root, p)]
 	bundle = game_root / "support_bundle.zip"
 	with zipfile.ZipFile(bundle, "w", compression=zipfile.ZIP_DEFLATED) as z:
 		for file in artifact_paths:
 			if file.is_file() and file != bundle: z.write(file, file.relative_to(game_root))
 	engine_digest = hashlib.sha256("".join(manifest["binary_sha256"][k] for k in sorted(manifest["binary_sha256"])).encode()).hexdigest()
-	receipt = {"schema_version":1,"campaign_id":manifest.get("campaign_id", "ab-campaign-2026-10-11-pilot"), "manifest_sha256":manifest_sha,
+	# The receipt carries the internal classification fields verbatim: analyze()
+	# re-adjudicates stored receipts and validate_receipt requires both layers.
+	receipt = {**internal, "game_uid":game_uid,"schema_version":1,"campaign_id":manifest.get("campaign_id", "ab-campaign-2026-10-11-pilot"), "manifest_sha256":manifest_sha,
 		"baseline_commit":manifest["pins"]["source_commit"], "engine_sha256":engine_digest, "switch":job["switch"], "setup_id":job["setup"],
 		"map":{"name":job["map"],"path":job["map_path"],"sha256":job["map_sha256"],"generated_map_yaml_sha256":map_yaml_sha,"required_seats":job["required_seats"]},
 	"pair_id":f"{job['setup']}:{job['seed']}:{job['pair']}","pair_member":job["game_in_pair"],"seed":job["seed"],

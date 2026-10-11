@@ -109,6 +109,12 @@ class PilotPlanTests(unittest.TestCase):
   self.assertEqual("CENSORED_CAP",censored["verdict"]);self.assertEqual(24,censored["team_totals"]["treatment"]["earned"])
   receipt["cap_tick"]=15000
   self.assertEqual("INVALID_UNKNOWN",pilot.adjudicate(rows,receipt,job,"a"*64)["verdict"])
+  # the Lua cap marker lands on the first tick AT/AFTER the cap (observed
+  # 45001 for cap 45000; A5 receipts showed 16001 for cap 16000) — accept it
+  receipt["cap_tick"]=45001
+  self.assertEqual("CENSORED_CAP",pilot.adjudicate(rows,receipt,job,"a"*64)["verdict"])
+  receipt["cap_tick"]=45002
+  self.assertEqual("INVALID_UNKNOWN",pilot.adjudicate(rows,receipt,job,"a"*64)["verdict"])
   receipt["cap_tick"]=45000;receipt["seats"][0]["spawn"]+=1
   self.assertEqual("INVALID_UNKNOWN",pilot.adjudicate(rows,receipt,job,"a"*64)["verdict"])
 
