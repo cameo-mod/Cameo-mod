@@ -367,7 +367,6 @@ local CampaignSeatNames = {{{campaign_seat_names}}}
 local CapTick = {cap_tick}
 local SampleInterval = {sample_interval}
 local DeploymentTick = 100
-local Objectives = {{}}
 local function SampleActors()
 \tlocal total = 0
 \tfor _, name in ipairs(SeatNames) do
@@ -401,14 +400,24 @@ local function ProbeSeatDeployment()
 \t\tprint("AB_CAMPAIGN_DEPLOYMENT_CHECK tick=" .. tick .. " seat_count=" .. deployed .. " expected_count=" .. #CampaignSeatNames)
 \telse Trigger.AfterDelay(1, ProbeSeatDeployment) end
 end
+local function FailPrimaryObjectives(player)
+\tlocal id = 0
+\twhile true do
+\t\tlocal ok, otype = pcall(function() return player.GetObjectiveType(id) end)
+\t\tif not ok then break end
+\t\tif otype == "Primary" and not player.IsObjectiveFailed(id) and not player.IsObjectiveCompleted(id) then
+\t\t\tplayer.MarkFailedObjective(id)
+\t\tend
+\t\tid = id + 1
+\tend
+end
 WorldLoaded = function()
-\tfor _, name in ipairs(SeatNames) do local p = Player.GetPlayer(name); if p then Objectives[name] = p.AddPrimaryObjective("Campaign observation cap") end end
 \tprint("AB_CAMPAIGN_STARTED tick=" .. DateTime.GameTime .. " cap=" .. CapTick)
 \tTrigger.AfterDelay(1, ProbeSeatDeployment)
 \tfor tick = SampleInterval, CapTick - SampleInterval, SampleInterval do Trigger.AfterDelay(tick, SampleActors) end
 \tTrigger.AfterDelay(CapTick, function()
 \t\tSampleActors(); print("AB_CAMPAIGN_CAP tick=" .. DateTime.GameTime)
-\t\tfor _, name in ipairs(SeatNames) do local p = Player.GetPlayer(name); if p and Objectives[name] then p.MarkFailedObjective(Objectives[name]) end end
+\t\tfor _, name in ipairs(CampaignSeatNames) do local p = Player.GetPlayer(name); if p then FailPrimaryObjectives(p) end end
 \tend)
 end
 '''
