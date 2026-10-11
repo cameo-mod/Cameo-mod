@@ -260,8 +260,8 @@
       ]
     }
   ],
-  "execution_approved": false,
-  "notes": "non-executable candidate; execution approval remains false until maintainer sign-off",
+  "execution_approved": true,
+  "notes": "EXECUTABLE per maintainer ruling 2026-10-11 04:10Z (Claude lead): execution_approved=true; launches auto-proceed once analyzer fixture tests (Sonnet on adapter d4e64014) and engine map acceptance pass; memory policy 10.5GiB cap/15.5 admission/4+3GiB floors/serial remains; refreshed tool/schema pins and serial one-worker policy after exact-SHA review",
   "a5_parity_receipt_path": "C:/cameo-wt/ab-campaign-tooling/results/campaign-a5-fixed-tick-parity-20261010-attempt2/A5_memory_probe_receipt.json",
   "a5_parity_receipt_sha256": "0e6fc98982af8ca3c67f3846a121512fab4e3982b8de565db67172c865a382f4"
 }
