@@ -3,16 +3,18 @@
 BU_harvester_logistics A/B pilot. Approved shape: 64 games, 16 setups,
 2 matched seed-pair members per setup (seeds 1337/2026), swapped sides,
 45,000 world-tick cap, 10.5 GiB process cap, admission at measured
-headless peak (5.24 GiB) + 3 GiB reserve, >=14 GiB for a second parallel
+headless peak (6.34 GiB measured on merged engine) + 3 GiB reserve, >=14 GiB for a second parallel
 small game, max 2 parallel small games, 3v3/4v4 exclusive (ruling 04:50Z),
 claim-once queue, immutable receipts, incomplete cells preserved and
 never replaced or retried.
 
 Execution manifest: `docs/audit/ab_pilot_manifest_execution.json`
-(sha256 at launch: `05f96755d60edee0461e888b0b6bd99bd06094685a7569ece4f9909955057e81`,
+(current staged sha256 `2e55f849cf9d6f29d11abb594485989e14283f8b1fdd587f425d792fdda1efcb`,
 regenerated whenever tool SHAs change — see STATUS).
-A5 gate receipt: `results/campaign-a5-fixed-tick-parity-20261010-attempt2/A5_parity_gate_receipt.json`
-sha256 `6f4f827637693074331769bcde9d8c138a8554140fb0149118881c6d79064707`.
+A5 gate receipt: PENDING — fresh fixed-tick parity run on
+source `e49acf41` + engine `ad061ebf79` required (awaiting
+HEAVY_RUN_WINDOW); prior `...-merged-polyfix` receipt documents
+superseded pins.
 
 ## 2026-10-11 — first execute-one attempt (tooling bug, no game data)
 
@@ -218,17 +220,58 @@ Two engine-run proofs on `codex/ab-campaign-port-fixes` with the pinned
   (4v4: 112/bot), `MaxUnitsPerBot` 150->200. Lobby `hard` still draws
   freely — product-wide personality pinning is a maintainer call.
 
+## 2026-10-11 — lead-directed integration: combined engine bump + consolidated runner (12:30-15:00Z)
+
+Lead ruling (single integrator on `codex/ab-campaign-port-fixes`; DevOps,
+Luna Manager, Sonnet paused; PILOT HOLD active — no launches without a
+HEAVY_RUN_WINDOW reservation):
+
+- ENGINE: maintainer adopted the polygon fix. Combined bump built as
+  `devin/engine-bump-botname-capsule@ad061ebf79` = merged-engine base
+  `04f9a38bae` (polygon long-math) + bot-name fallback `65feb80c48` +
+  Capsule long-math + `docs/hitshape-int32-overflow-findings.md`
+  (Rectangle/Circle recorded as follow-up findings, not patched).
+  **Sol BOUNDED APPROVE** on exact SHA `ad061ebf79029da4dcd3a841a9b2540e39cbf968`
+  (200k-case differential, zero mismatches). Fast-forwarded onto
+  `cameo-engine` mainline; `mod.config` pinned; `make all` rebuilt clean;
+  boot-gate PASS (menu, no new exceptions, no leftovers).
+- SOURCE PIN corrected per lead resend: `e49acf41a` (NOT 964cdb63) merged
+  into this branch; every `source_commit`/`engine_version` pin in tools,
+  tests, fixtures, manifests updated.
+- RUNNER consolidation on `f2811ac0e`: deployment guard
+  `codex/campaign-deployment-guard@ca95040` + Luna root/PID fallback
+  `98eaa192c`/`f1d9255` + sol review fixes — bounded missing-marker abort
+  (`DEPLOYMENT_WALL_TIMEOUT` + highest_world_tick), duplicate-seat
+  rejection (unique seat_id/home + exact set equality), PID-scoped
+  cleanup hardened (`kill_owned_pid` + `_path_variants`: Windows
+  CommandLine can carry 8.3/long/MIXED-prefix path spellings — a
+  long-form-only containment check silently refused the kill), guard in
+  map_engine_acceptance + A5, policy constants per ruling (10.5 GiB cap /
+  peak+3 admit / >=14 GiB 2nd small / large exclusive / 3 GiB stop).
+- Reviewer-flagged guard regressions checked: `tool_hash_algorithm`
+  enforcement kept, BOM-aware engine VERSION read kept, `text_sha`
+  lone-CR fold restored (guard had dropped it), RAM constants = ruling.
+- Luna FAIL on `cb4c920cc` fixed: `match_game_uid` requires EVERY match
+  row to carry the same nonempty uid — mixed present/missing rejected;
+  regression test added.
+- `results/map-engine-acceptance-20261011-windows-pilot` (my fixture run
+  without reservation) renamed `*-UNAUTHORIZED-NONAUTHORITATIVE` per lead.
+- Manifests regenerated + staged on the integrated SHA `181703996`:
+  candidate sha `374fd362`, execution sha `2e55f849` (approved byte
+  false). `a5_parity_receipt_*` intentionally null — the prior receipt
+  documents superseded pins; fresh A5 on e49acf41+ad061ebf79 is required.
+  Dry-run: `NO_LAUNCH games=64` on the final binary. 72 focused tests.
+
 ## Pending
 
-- Merge `codex/ab-campaign-port-fixes` onto `codex/ab-campaign` (DevOps) —
-  now carries the engine pin, merged-engine A5 receipt, rush pins, and the
-  regenerated manifests; merge makes `codex/ab-campaign` pilot-ready.
-- Luna exact-SHA review of engine merge `04f9a38bae` (post-merge review;
-  fix already verified live on the identical crashed cell).
-- Maintainer flips `execution_approved` on
-  `docs/audit/ab_pilot_manifest_execution.json` (sha `7f9012f0`), then the
-  64-game pilot launches under the approved manifest.
-- Remaining cells stay PLANNED; serial, one worker until the second-
-  small-game parallel gate is exercised under observation.
+- LEAD: grant HEAVY_RUN_WINDOW -> A5 fixed-tick parity on
+  source `e49acf41` + engine `ad061ebf79` -> new A5 receipt ->
+  regen+re-sign exec manifest -> dry-run -> report (<=5 lines, STATUS
+  Resume). THEN maintainer flips `execution_approved`.
+- PILOT HOLD: no outcome cells until lead lifts it; every launch of any
+  kind requires a HEAVY_RUN_WINDOW reservation first.
+- Follow-up task: Rectangle/Circle hitshape long-math (findings file).
 - Open question for maintainer: whether lobby `hard` should also pin an
   aggressive personality (currently only campaign arms are pinned).
+- User-reported blocker still open: "all AIs of a team destroyed but the
+  game is still not ending" — no-early-end proof remains a pilot blocker.
