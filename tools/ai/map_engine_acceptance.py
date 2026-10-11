@@ -42,6 +42,7 @@ import time
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "tools" / "ai"))
 import ab_campaign_pilot as pilot  # noqa: E402
+import campaign_deployment_guard as deployment_guard  # noqa: E402
 import run_ai_match_batch as batch  # noqa: E402
 
 HEADLESS_PLATFORM = batch.HEADLESS_PLATFORM
@@ -150,11 +151,26 @@ def run_cell(job: dict, *, root: pathlib.Path, engine: pathlib.Path, overlay: pa
 	env["CAMEO_DEV_SEED"] = str(job["seed"])
 	started = time.monotonic()
 	peak = 0
+	deployment_offset = 0
+	deployment = {"verified": False, "check_tick": None, "reported_seat_count": None,
+		"expected_seat_count": None, "seats": {}, "missing": []}
 	with (cell_dir / "driver.log").open("w", encoding="utf-8") as output:
 		process = subprocess.Popen(args, cwd=engine, env=env, stdout=output, stderr=subprocess.STDOUT)
 		end_reason = "PROCESS_EXIT"
 		while process.poll() is None:
 			peak = max(peak, rss_bytes(process.pid) or 0)
+			lua_log = logs / "lua.log"
+			if lua_log.is_file():
+				with lua_log.open("r", encoding="utf-8", errors="replace") as stream:
+					stream.seek(deployment_offset); chunk = stream.read(); deployment_offset = stream.tell()
+				deployment = deployment_guard.merge(deployment, deployment_guard.parse(chunk))
+				if deployment["check_tick"] is not None:
+					deployment["verified"] = deployment_guard.valid(deployment, [s["home"] for s in proof["seats"]])
+					if not deployment["verified"]: end_reason = "INVALID_NO_DEPLOY"
+			if not deployment["verified"] and deployment_guard.latest_world_tick(logs / "debug.log") is not None and deployment_guard.latest_world_tick(logs / "debug.log") >= 100:
+				end_reason = "INVALID_NO_DEPLOY"
+			if end_reason == "INVALID_NO_DEPLOY":
+				process.kill(); process.wait(); break
 			if time.monotonic() - started > timeout:
 				process.kill()
 				process.wait()
@@ -189,6 +205,9 @@ def run_cell(job: dict, *, root: pathlib.Path, engine: pathlib.Path, overlay: pa
 		if batch.HEADLESS_LOG_MARKER not in (graphics.read_text(errors="replace") if graphics.is_file() else ""):
 			problems.append("engine fell back from the headless platform (see graphics.log)")
 	problems += seat_proof(proof["seats"], records)
+	if not deployment["verified"] and end_reason == "PROCESS_EXIT": end_reason = "INVALID_NO_DEPLOY"
+	deployment["verified"] = deployment_guard.valid(deployment, [s["home"] for s in proof["seats"]])
+	if not deployment["verified"]: problems.append("INVALID_NO_DEPLOY: per-seat construction yard evidence missing/invalid by tick 100")
 	return {"cell_id": job["cell_id"], "setup": job["setup"], "map": job["map"], "map_sha256": job["map_sha256"],
 		"team_size": job["team_size"], "seed": job["seed"], "game_in_pair": job["game_in_pair"],
 		"map_yaml_sha256": pilot.sha(variant / "map.yaml"), "dual_arm_rules_sha256": dual_arm_rules, "seats": proof["seats"],
@@ -196,7 +215,7 @@ def run_cell(job: dict, *, root: pathlib.Path, engine: pathlib.Path, overlay: pa
 			"allies": sorted(str(a.get("home")) for a in r.get("allies", [])),
 			"opponents": sorted(str(o.get("home")) for o in r.get("opponents", []))} for r in records],
 		"cap_tick": int(cap.group(1)) if cap else None, "exceptions": exceptions, "exit_code": process.returncode,
-		"end_reason": end_reason, "wall_seconds": round(time.monotonic() - started, 1),
+		"end_reason": end_reason, "deployment": deployment, "wall_seconds": round(time.monotonic() - started, 1),
 		"peak_rss_bytes": peak or None, "verdict": "ACCEPTED" if not problems else "REJECTED", "problems": problems}
 
 
@@ -244,6 +263,7 @@ def main(argv=None) -> int:
 		"cap_tick": args.cap_tick, "preflight_only_never_outcome_cells": True, "cells": [], "pairs": []}
 	path = out / "acceptance_receipt.json"
 	for job in jobs:
+		cell = None
 		free = available_ram_bytes()
 		if free is not None and free < args.min_free_gib * 1024**3:
 			receipt["cells"].append({"cell_id": job["cell_id"], "setup": job["setup"], "map": job["map"],
@@ -255,6 +275,8 @@ def main(argv=None) -> int:
 			receipt["cells"].append(cell)
 			print(f"    {cell['verdict']} in {cell['wall_seconds']}s {'; '.join(cell['problems'])}", flush=True)
 		path.write_text(json.dumps(receipt, indent=1) + "\n", encoding="utf-8")
+		if cell and any("INVALID_NO_DEPLOY" in str(problem) for problem in cell.get("problems", [])):
+			break
 	by_setup: dict[str, dict[int, dict]] = {}
 	for cell in receipt["cells"]:
 		if cell["verdict"] == "ACCEPTED":
