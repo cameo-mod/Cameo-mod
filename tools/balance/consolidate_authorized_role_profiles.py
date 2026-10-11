@@ -39,7 +39,7 @@ from miniyaml import Ruleset  # noqa: E402
 import percentage_damage as pd  # noqa: E402
 
 
-# root: destination, exact concrete descendants, combined flat damage,
+# root: destination, reviewed batch members, combined flat damage,
 # optional physical-state scale on the final main.
 ROOTS = {
     "ASDFKamikazeExplosion": (
@@ -96,6 +96,11 @@ DESTINATIONS = {
     "AsianHowitzerCannon_elite": "CannonHE_Heavy",
 }
 
+# Every reviewed descendant was de-parented onto direct template edges by the
+# W7 chain-collapse batches (e40001270/9ec114771/8e553991e/76914f1c8/ae67c80fc).
+# The gate now asserts no root regains weapon-parent descendants.
+EXPECTED_CLOSURES = {root: set() for root in ROOTS}
+
 TOTALS = {
     name: ROOTS[root][2]
     for root in ROOTS
@@ -115,15 +120,15 @@ PRESERVED_HASHES = {
     "TSBusMortar": "a0d944d2dba35617d5b299744c511e38ac9bdf1f6055e3a26af088f7f764c3eb",
     "ra1_soviets_molotovconscript_conscriptmolotov": "f9dd87dfe31f6abf73eadb45cb6a83f8e83a36f3cd056405177941834abb0777",
     "ra1_soviets_molotovconscript_conscriptmolotovexplode": "d4c4546e3152e1a81f2243a632e84b1970f99597af017bdbb0806cd59e09509c",
-    "tkm_trooper_gp25": "8ef419ef385162319312d8fef6c9dbc5f4bf093442d523eec3a0b120d48cd93c",
-    "NaxiAntiTankCannon": "c12968710c555f7c6afb7940fa68023a9e3fd093a0542f9883eb2a6a1cf3f57b",
-    "NaxiAntiTankCannonCorrosion": "7ef73a271469d8a6e533f63e0d03c74d75a2f72f17fcfdc0cb3983f38f46dbf4",
-    "NaxiAntiTankCannon_elite": "ca44753dde84db4db713283011a3d59b757f6f9dc0059586226b6add46fa39a4",
+    "tkm_trooper_gp25": "d6959b2746de94d48642a4db03d1ff10a526c0a52048fa302bc0a5310269fd80",
+    "NaxiAntiTankCannon": "75d280345d7872e752e2e06e407d1d88b2572411c61d6f040bd1c7959bc264fa",
+    "NaxiAntiTankCannonCorrosion": "c9d682d18c1bea656af526e450c67cb2fb03236b0c6f71e52244e08505193179",
+    "NaxiAntiTankCannon_elite": "e4ceab6f54b2419773c968373c6bd45111cdfb850cdace92064d23d1263c084b",
     "NaxiHetzerDestroyer": "1e6ad43b14ac9247535a285159bf99c92e4c82bb6aa2b2e5c58014476ffa767b",
     "NaxiHetzerDestroyerCorrosion": "c72b31c4c046d1e8dc2092b1ba8efc6262c150d0e6edcfd9c100948c4b9b742b",
     "NaxiHetzerDestroyer_elite": "4c96c8c4fbeeeda47756001fce4cd293fe12a94cda1ea39d7c37cf629fbab9f9",
-    "AsianHowitzerCannon": "742e028454edda6b304c9696f9099c55f5c051bdaa371d56bcd3cc39582c33a7",
-    "AsianHowitzerCannon_elite": "b50a9de3e8d5407d5c28dcde6c0e16e493db7000ed9535fc7ef309697cef6812",
+    "AsianHowitzerCannon": "03836a881def3646a958aac0e1d7322755fbd53eafc85fc9e3d5b06dc8ed495a",
+    "AsianHowitzerCannon_elite": "7c250c79cc49f08816c1ba28fbddb4d288bd37c9f786c81254936c21f58431f3",
 }
 
 EXPECTED_CONTRACT = (
@@ -139,6 +144,14 @@ EXPECTED_CONTRACT = (
     "Prone75Percent, TriggerProne, ExplosionDeath",
 )
 
+# 6978eebec (reference lane R16-R62) retagged the flame family's DamageTypes
+# from ExplosionDeath to FireDeath + Incendiary so the base family matches the
+# blends derived from it.
+EXPECTED_CONTRACT_OVERRIDES = {
+    "ra1_soviets_molotovconscript_conscriptmolotov": EXPECTED_CONTRACT[:9] + (
+        "Prone75Percent, TriggerProne, FireDeath, Incendiary",),
+}
+
 # Complete resolved fingerprints for the selected main nodes.  This makes the
 # converter accept exactly the audited before or after state while catching a
 # later change to geometry, armor tables, percentage tables, targeting, state
@@ -149,21 +162,21 @@ EXPECTED_MAIN_HASHES = {
             "Demolition_Heavy": "4a51cfea69f96a2086698bf3ea775bb82f9872ea0ff95a21128c97e4ec7fead1",
             "Concussion_Medium": "1774540468304f185b4b4fd5bfad4e58f2ebb020bfc654ec45e2fd6c28789547",
         },
-        True: {"Demolition_Heavy": "a63d750520f77caab34f34ef623150e83e089a539cd0c2d46ead8c8efba9fcc9"},
+        True: {"Demolition_Heavy": "f51a47d7692a551d00f7eff6e78193e4fc0409f771712a88ca04f6905c8c7a76"},
     },
     "AsianHowitzerCannon": {
         False: {
             "CannonHE_Medium": "417331a6846fb7fb7f7bf4ca60887f061897d5a62d367cb22f7636316e8d7396",
             "CannonHE_Heavy": "b1636a2732d8e0f198cd9def0dbdad6fca6a09cc16d18a683d00282cdb9c58f4",
         },
-        True: {"CannonHE_Heavy": "f00128ebcbe008b7216e9a08553908dbe2bcb141d573b33d19ce42c0af9cd49e"},
+        True: {"CannonHE_Heavy": "61862023980e9ca6cb1618cbe0b7bc443fbe0263eec5ef2da7da27946f8cfa3e"},
     },
     "ra1_soviets_molotovconscript_conscriptmolotov": {
         False: {
             "Demolition_Light": "34aa4b8058d40e27c268a4bcf5ed70867c657a78ddf1d1efba119ad0461a3457",
             "Flame_Light": "9fd6bbeb93a6195bac87a6df75939d92c45e717beb9cf672f0bf7d4249c9d651",
         },
-        True: {"Flame_Light": "97ef6bc4479c27abca09b62c070756d546f838471a24f5b7cf7ae96fd5222c2b"},
+        True: {"Flame_Light": "fcfd841c24f76ed5616c25a8c86c71295404d37cef55490911edac5a684b6406"},
     },
     "NaxiAntiTankCannon": {
         False: {
@@ -184,14 +197,14 @@ EXPECTED_MAIN_HASHES = {
             "Concussion_Medium": "3a5b52dc269daaa1d2f5628538339aafe4d3a46ec5b7b4f779966e84e1a253cd",
             "Demolition_Heavy": "19dfe3224471126df71a317d3d1c666b3fc24412c91c16381030a6c85e465358",
         },
-        True: {"Concussion_Medium": "b12ef9c6df8e23d5fdf192bf2c66b7dfa01b1aa37fc468f58e59dda01ebf3ad0"},
+        True: {"Concussion_Medium": "dcec6b0d9cf80d54904fcfcc742fa561354b7e245e67127b14f6d15e96a4ce37"},
     },
     "tkm_trooper_gp25": {
         False: {
             "Demolition_Light": "b71f898d4e04ac5e8702dae1c577c59b42346e8e72300f9b1fe3e54d8151cc16",
             "Flame_Light": "6835836b8f1c93b1a226f4ae660e69a24fbb6ba507152f904401778363116522",
         },
-        True: {"Demolition_Light": "46715d3876cbd8c6449d8c0688c02991ab58ca568f1a4901a90b9d8f6bb8852b"},
+        True: {"Demolition_Light": "00e38509938e238c9412e95cbc1e304208f57861cb58fbe4b0a8f0ad76a405de"},
     },
 }
 
@@ -225,7 +238,7 @@ def node_hash(node) -> str:
 def resolved_hash(rs: Ruleset, name: str) -> str:
     excluded_keys = BASELINE_MAINS.get(name, set()) | {DESTINATIONS.get(name, "")}
     if name == "ra1_soviets_molotovconscript_conscriptmolotovexplode":
-        excluded_keys |= {"Flame_LightFlatCompatibility"}
+        excluded_keys |= {"Flame_LightFlatCompatibility", "Flame_Light_Flat"}
     excluded = {f"Warhead@{key}" for key in excluded_keys if key}
     payload = [
         node_payload(child)
@@ -272,8 +285,9 @@ def add_removal(lines: list[str], weapon: str, key: str) -> None:
 
 
 def inspect(rs: Ruleset, print_hashes: bool = False) -> bool:
-    for root, (_destination, expected, _total, _state_scale) in ROOTS.items():
+    for root in ROOTS:
         actual = descendants(rs, root)
+        expected = EXPECTED_CLOSURES[root]
         if actual != expected:
             raise RuntimeError(
                 f"{root}: closure changed; added={sorted(actual - expected)}, "
@@ -308,7 +322,8 @@ def inspect(rs: Ruleset, print_hashes: bool = False) -> bool:
             raise RuntimeError(f"{name}: selected-main fingerprint changed")
         if any(node.value != "AreaDamage" for node in nodes.values()):
             raise RuntimeError(f"{name}: selected main is not AreaDamage")
-        if any(contract(node) != EXPECTED_CONTRACT for node in nodes.values()):
+        if any(contract(node) != EXPECTED_CONTRACT_OVERRIDES.get(
+                name, EXPECTED_CONTRACT) for node in nodes.values()):
             raise RuntimeError(f"{name}: target/relationship contract changed")
 
         total = sum(int(str(node.get("Damage") or 0)) for node in nodes.values())

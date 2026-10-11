@@ -1,3 +1,1755 @@
+
+*Devin-Developer 2026-10-10 (rereview fix, devin/repair-b3-park-release @ 693c07793).* VP exact-tip review of 560a413 caught that owner-scoped AnchorTakenForOwner (ReferenceEquals only) made NULL-owner parks — offer-streak churn bounds, ParkTicks, the parameterless failure overload — invisible to every reservation probe. Restored global semantics for null-owner parks (park.Owner == null || ReferenceEquals) while keeping the lead-ruled owner scoping for failure cooldowns; fake provider mirrors it. New regression NullOwnerParkStaysGlobalAndBlocksForeignReservation. Verified: build 0 errors, focused 124/124, full 1515/1515, fog audit PASS (269 sites). No fresh boot gate — host has no execution slot (pytest ~9.7GB + seat_verify resident); branch boot-gated clean at dad8c6753.
+# 2026-10-10 — Devin: REPAIR-B3 follow-up — park frees the whole set; owner-scoped cooldown (branch `devin/repair-b3-park-release`)
+
+*Devin-Developer*, lead ruling 2026-10-10 (Opus, from Architect's question), base `10d3f44f7`,
+engine pin `6da7fce14`. Two commits (code + this log).
+
+- **`dad8c6753` — a placement-failure park frees the demand's whole covered set at the failure
+  point.** Previously the demand held the set until `UntilTick`, so a contested anchor stayed
+  hostage for the reservation TTL even though the per-site fail cooldown already bounds the
+  retry. `CommitRefineryClaimOrPark(law, claim, placedSite, owner)` releases by owner key before
+  signalling the failure; `RefineryClaimPlacementFailed(anchor, owner)` records the failing owner
+  on the park. The reservation channel probes per owner (`AnchorTakenForOwner`): a foreign demand
+  binds the freed anchor immediately; the parked demand's own re-reserve waits out the cooldown.
+  The offer channel keeps the anchor-global park (`AnchorTaken`, `AnchorBlockedForClaims`) — the
+  actual thrash bound the ruling cites. `Prune` drops the park term so a foreign hold on a parked
+  anchor survives and can activate for its owner mid-cooldown. Provider-side parks (offer-streak,
+  stuck-anchor) record a null owner and bind nobody's re-reserve.
+- **Regression pin:** `ParkedClaimFreesTheWholeSetAndRecyclesToAnotherDemand` — free-at-failure
+  (reservations Count 0 at the failure, not at UntilTick=500), immediate foreign re-bind of the
+  same anchor, parked owner's re-admission refused inside the cooldown and admitted once it
+  lapses. `FailedPlacementParksTheOfferedAnchorAndCommitsNothing` re-pinned for the owner-scoped
+  cooldown (the old global-refusal tail is superseded by the ruling).
+- **Known bound:** the offer channel stays anchor-global, so a parked anchor is still unofferable
+  to ANY demand during the cooldown — the immediate foreign re-bind is reachable for a demand
+  already holding a claim on that anchor (and for the freed covered-set siblings, which recycle
+  with no gate at all). Offering parked anchors to non-failing demands would need owner context
+  on the claim APIs — a separate, larger change if the ruling intends it.
+- **Verification:** Release 0/0; focused 123/123; full suite 1514/1514; fog audit PASS (82 files,
+  269 manifested sites — no new enumeration); boot gate PASS (menu reached, no new
+  exception-*.log, PID-scoped kill, no leftovers). Frozen tip pushed for VP exact-SHA review.
+  No runtime clearance implied.
+
+# 2026-10-10 — Devin: A9/M9 learned-file resolution + M14 emergency-default binding (branch `devin/a9-m9-m14-default`)
+
+*Devin-Architect*, task `01a1243d-3efb` (cloud doc @680dd25d PT7 items 4 and 6c;
+sites verified by REVIEW_2026-10-10_cloud_680dd25d.md), base master `545922cf8`,
+engine pin `6da7fce14`. Two commits, one per item.
+
+- **`df00f2cfb` M9/A9 — learned yamls actually load.** `FileSystem.Exists` indexes only each
+  package's top-level `Folder.Contents` names, so the bare `ai/learned/*.yaml` paths could never
+  exist: every load logged "missing" and the arsenal priors / build-order knobs / engagement priors /
+  plan bandits ran neutral regardless of the committed files. New `LearnedFilePath.Resolve` maps bare
+  mod-relative paths to `cameo|ai/learned/…` (Folder.Contains/GetStream probe the combined on-disk
+  path); explicit `package|path` passes through. All four modules (BotLearnedPriors,
+  BuildOrderKnobsBotModule, EngagementPriorsBotModule, PlanBanditBotModule) route `Exists`/`Open`
+  through it; configured `Info.*File` values stay bare and remain what the logs print.
+  `tools/ai/round_trip_check.py` gains a "learned files" row — FAIL when a learned yaml logs "missing"
+  while it exists under `mods/cameo`. `LearnedFilePathTest` pins the mechanism end-to-end through a
+  real `FileSystem`+`Folder` mount (bare misses the index, `cameo|` Exists+Opens) plus all four
+  shipped defaults. Switches unchanged — UseLearnedPriors/UseLearnedBuildOrder/… stay default-off.
+- **`fcec9cc89` M14 — the §19.11 binding is the default.** `MasterAiBotModule` in `mods/cameo/ai/ai.yaml`
+  gains `EmergencyKeepsPersonality: true` + `EmergencyLossArmyPct: 25` outside any switch group
+  (fields verified on BotSituation.cs:244/249). Previously the C# defaults (false/0) applied: any
+  Emergency force-pinned `turtle` on the whole team and the flat 600-credit loss rule fired in ~70% of
+  snapshots while winning — the exact team-turtle collapse recorded at lines 37-39 above. The
+  `AL_emergency_net_loss` switch-group copy in `tools/ai/increment_switches.yaml` is now a no-op
+  override of the same values.
+- **Verification:** Release build 0/0; suite 1402/1402 with both items in-tree; boot-to-menu gate PASSED
+  (perf.log `MenuPostProcessEffect.PostWorldLoaded`, 0 new exception-*.log, PID-scoped kill). No match
+  launches. Frozen branch `devin/a9-m9-m14-default` pushed for VP exact-SHA review.
+
+# 2026-10-09 — Claude: AI architecture review + playtest regression analysis (branch `ccr-c7f51935-i53fkj`)
+
+*Claude (Opus)*, cloud container, base master `5c8cfe04`. Docs only; no code or yaml changed on the branch.
+
+- **`docs/AI_ARCHITECTURE_RESEARCH_SYNTHESIS_MASTER_2026-10-06.md` reworked and verified:** Part II = verified state;
+  Part III = findings F1–F12 (shared per-player `BotRng` stream confounds A/B; AR-10 tick layers audited but not the
+  runtime order; no scheduler; MasterAi concrete coupling; order lanes; crossed-order ratchet; switch expiry; registry
+  gaps F9/F10; DESIGN §19.6 rollout line stale vs `ai.yaml:4064`). First-version errors fixed (tier-5 contradiction
+  with DESIGN §19.13, the inverted map row, "orders/conditions" vs §19.8, uncommitted sources).
+- **Part IIIb (new): the 2026-10-08 playtest.** `37d9fc6a` = `apply_increment_switches.py --groups all` committed
+  (201 changes, all 59 groups, none A/B'd); `4bf69671` switched off the binding engineer/crate omniscience (DESIGN
+  §19.5). Mechanisms M1–M12 with evidence and status. Measured in this container:
+  - **M10 crash (open):** armed `ai.yaml` on "A Nuclear Winter" dies at world tick ~2,000:
+    `BaseFrontBackPlannerBotModule.Refresh` → `FindTilesInAnnulus` range 71 > `MaximumTileSearchRange` 50 (any
+    defence front ≥ ~21 cells out).
+  - **M9 learned files never load (open, predates the arm):** bare `ai/learned/*.yaml` paths cannot resolve
+    (`FileSystem.Exists` + `Folder.Contents` top-level only); runtime log says "missing" for all three files.
+  - **M12 MCV ownership conflict (open):** with `BT_expansion_prebuild` + enforcement, 1,044 `Move` orders from
+    `McvExpansionManagerBotModule` refused because `BaseBuilderBotModuleCA` holds the MCV's lease.
+  - **Armed (minus the crashing planner) `hard` vs `classic`, 1v1, td_gdi:** `hard` won in 19,766 ticks (kills
+    74,610 / deaths 13,100, 26/0 buildings), but banked 86,723 unspent. So the duel is not passive; team play and the
+    bugs weigh at least as much as the restraint stack.
+  - Fixed today by others and confirmed relevant: `368f4554` (RA refinery dock + base-builder latch, M7),
+    `02241219` (engineer/crate omniscience restored, M8), `b06615a8` (MCV deploy search, part of M6).
+- **Team play:** bots answer allied beacons (`BeaconResponderBotModule`, ≤ 6 idle units) but never place beacons, and
+  the team blackboard ignores human allies (`p.IsBot`, `IBotTeamMember.cs:256`).
+- **Learning:** every bot number is learnable per DESIGN §19.2; the army-first thresholds are registry row
+  `credit_float` (planned, no fitter). 1,272 `int` + 133 `bool` Info fields exist; see the doc's PT8 for the limits.
+- `docs/LESSONS_LEARNED.md`: Linux cloud build/boot route (.NET 10 via apt, engine via `git archive`, xvfb +
+  `ALSOFT_DRIVERS=null`). `docs/design/AI_MASTER_PLAN.md` §3: unscheduled runtime block A1–A10, B1–B6, C1–C4 (111 h).
+- **Later the same evening:** pre-arm 1v1: `hard` won, earned 14.32 / spent 14.15 per tick vs the armed 11.97 / 8.01
+  (banked 11,395 vs 86,723). Armed 3v3 on "Winter's End (Rich)" (spawns verified top-left vs bottom-right): draw by
+  timeout; the `hard` team far ahead (kills 612,280 vs 268,220) but two of its three bots spent the match escorting
+  and defending allies (90 escort + 46 defend answers; Multi0 0 attack waves, peak army 22,270) → new finding **M13**
+  (team escort drain), which reproduces the playtest symptom. Multi1 alone had 11,962 refused MCV orders (M12).
+- **Night runs:** 2v2 Terra Cotta armed LOST (0 waves, ~30 % less income, 654 refused MCV orders, M6+M12) vs
+  pre-arm WON (~2x income, ~91k armies). 3v3 Winter's End pre-arm LOST (whole team forced to `turtle` by an early
+  emergency → **M14**: master's default `EmergencyKeepsPersonality: false` contradicts binding DESIGN §19.11; the fix
+  is only in switch group AL). Armed teammates also all got the same bandit arm at tick 7. One match per arm: next is
+  fixes (A8–A10, M14 default) then ≥ 4 repeats per arm/map. Continue from the doc's PT9.
+
+# 2026-10-09 — Devin: B-lane master repair batch — limited-SW default + engineer/crate flags + bot plug production
+
+*Devin-Integrator* on `devin/repair-b2b6` (stacked on the bounded-approved
+swcap head `4ead228b4`, base `3d99405bd`). Maintainer policy via coordinator:
+limited superweapons lobby default; SW-granting plugs count installed+pending
+owner-wide; ordinary plugs keep intended oversubscription; bots buy plugs via
+normal paid production; engineer/crate visibility exceptions restored.
+
+- **`world.yaml` `MapOptions.TechLevel: superweapons`** — the techlevel lobby
+  dropdown now defaults to "Limited Superweapons" (grants `techlevel.superweapons`
+  + `global-swlimit`). "Unlimited Superweapons" (`unrestricted`) and
+  "No Superweapons" stay selectable; only the default changed.
+- **ai.yaml engineer/crate flags restored** — `CheckCaptureTargetsForVisibility`,
+  `CheckRepairTargetsForVisibility`, `CheckTargetsForVisibility` (CratePickup)
+  back to `false`. `4bf696716` had flipped them to `true` reading "without
+  cheats" too broadly; the conditional C# guards only restore behaviour once
+  the flags are false. The "Omniscient on purpose (DESIGN §19.5)" comment was
+  already correct for this state.
+- **Bot plug production migrated to the normal path** —
+  `PlugSpawnerBotModuleCA` no longer issues `PlacePlugAI` instant installs
+  (the whole `IResolveOrder` handler, instant `TakeCash`, `IgnoreCost` and the
+  ownership re-check are retired with it). Demand now queues ordinary
+  `StartProduction` on the first owner queue that `CanBuild`s the plug, gated
+  on tech-tree prerequisites and an owned host still accepting the plug type,
+  with a pending-item dedup so an interval scan can't flood the queue.
+  Queue-less plugs (the dormant `ts_gdi_droppoduplink`, whose `Queue:` is
+  deliberately commented out) resolve no producer and stay unreachable.
+  Completed plug items are placed by the existing
+  `BaseBuilderQueueManagerCA` Done branch through `PlacePlug` — the same path
+  a human's plug takes. Superweapon plugs ride the `SuperweaponPlugLimit`
+  owner-wide admission gate identically to player orders.
+- **Random eligible install slot** — the Done branch previously took the first
+  matching `Pluggable` host; it now draws via synced `BotRng.For(player)` over
+  ActorID-ordered candidates (maintainer ruling; never `LocalRandom`).
+- Tests: `PlugSpawnerBotModuleTest` drops the retired `PlugTargetIsOwned` seam;
+  owned-scan seams pinned unchanged. 1299/1299 `OpenRA.Mods.Cameo.Test`,
+  Release 0 errors.
+- Outstanding: live-match acceptance — plug production+placement by a bot,
+  cap-1 admission in a real Limited lobby, Unlimited unaffected.
+
+# 2026-10-09 — Devin: SW plug capacity (B2/B6) — F3/F4 resolved on 901d5dace
+
+*Devin-Developer.* Re-review of `19996eacf` found two more map-derivation
+defects; both fixed on the same branch.
+
+- **F3 cross-host association** — provider/socket join was global: a provider
+  on host A + `Pluggable` socket on host B granting the same condition could
+  map a plug that never publishes the token. `BuildPlugTokenMap` pass 1 now
+  builds `(token, plugType)` tuples per host actor — provider and socket must
+  coexist on the SAME actor. Missing same-host socket emits an uncapped
+  diagnostic naming token/host/condition.
+- **F4 ambiguous multi-token item** — a plug negating 2+ declared tokens that
+  both resolve for its plug type was silently bound to the first token
+  iterated ("first wins"). Pass 2 now collects all candidate tokens per item
+  and REJECTS the item when >1 resolve; order-independent (regression flips
+  both prereq order and actor order). A declared-but-unresolved second
+  negation does not poison the single real mapping; multiple items sharing
+  ONE token still map (shared-slot).
+- New tests: `TokenMap_CrossHostProviderSocket_NeverJoins` + same-host
+  control, `TokenMap_ItemNegatingTwoResolvedTokens_Rejected_OrderIndependent`,
+  `TokenMap_SingleTokenOfTwoNegated_StillMaps`.
+- **INCIDENT**: boot-gate script launched `launch-game.cmd` and killed only
+  the cmd wrapper, orphaning `OpenRA.exe` (~1h, user killed it). Script +
+  skill now launch `engine\bin\OpenRA.exe` directly, kill that PID, then
+  verify zero survivors under the worktree path (fleet NOTE records the
+  incident for all agents).
+- **Gates**: 49/49 focused (+4), 1300/1300 full suite, Release 0 errors,
+  boot-gate PASS (direct-exe launch, PID 8160 killed + verified absent).
+- **REVIEW: APPROVED** — independent re-review of `901d5dace` +
+  `349532da2` (bounded source/focused scope; reviewer re-ran 49/49,
+  verified local==remote). All four findings (F1–F4) closed. Live-match
+  gates remain; no master/release clearance.
+
+# 2026-10-09 — Devin: SW plug capacity (B2/B6) — F2 revised to declared catalogue
+
+*Devin-Developer.* Post-approval design revision (Architect + Integrator direction):
+the SW-plug token set is now an **explicit declared catalogue** on the trait Info
+rather than pure wiring inference.
+
+- **`SuperweaponPlugLimitInfo.OccupancyTokens`** (`string[]`, world.yaml
+  `OccupancyTokens: ionc, nodnuke, cabalnuke_swlimit, tsionc`) — only declared
+  tokens can capacity-manage a plug. Empty list → nothing capped (ordinary plugs
+  never enter the map regardless of wiring).
+- `BuildPlugTokenMap(actors, declaredTokens, diagnostics)` verifies each declared
+  token's chain end-to-end: `ProvidesPrerequisite` producing the token must carry
+  `RequiresPrerequisites: global-swlimit` + positive single-variable
+  `RequiresCondition` (bare variable only — `Expression.Trim() == variable`,
+  rejects `!x`/compounds/parenthesized) → host `Pluggable` condition → plug actor
+  with matching `Plug.Type` that negates `!token` (or `~!token`).
+- **Diagnostics** (debug channel + returned list): missing provider for a declared
+  token, non-positive or ungated provider, multiple resolved install conditions,
+  zero/multiple plug resolutions, plug negating multiple declared tokens.
+  Behavioural claim kept bounded: provider contract is "level 0 → false, positive
+  → true" (`AsBool` is `value != 0`); sampling at 0/1/2/`int.MaxValue` is a
+  *regression* on the four real gates, not universal expression validation.
+- `SuperweaponPlugLimitInfo` switched `TraitInfo<T>` → `TraitInfo` +
+  `Create(init)` override so the trait receives its Info (catalogue access).
+- New/updated regressions: empty-declared uncaps, undeclared-token uncaps,
+  missing-provider diagnostic, ungated/inverted-provider diagnostics, resolved-
+  gate echo, shared-token two-plug ambiguity + dual mapping, CABAL ungated
+  sibling declared but rejected, exact-four under the declared set; real-yaml
+  scans now also assert `world.yaml` declared set == expected tokens and sample
+  each real `RequiresCondition` gate for polarity.
+- **Gates**: 45/45 focused, full suite + Release build below; boot-gate re-run
+  for this commit.
+
+# 2026-10-09 — Devin: SW plug capacity (B2/B6) — review findings F1+F2 resolved
+
+*Devin-Developer.* Independent review of `devin/playtest-b2b6-swcap` produced two
+blockers; both are now fixed on the same branch (details in fleet
+`REVIEW_2026-10-09_devin_swcap_b2b6.md`).
+
+- **F1 refund double-credit** — `Cancel` returned `ResourcesPaid` as resources
+  AND included it in `TotalCost - RemainingCost` cash. Fix:
+  `RefundCash(total, remaining, paid) = total - remaining - paid`, arithmetically
+  identical to `CancelProductionInner`'s `RemainingCost += ResourcesPaid` before
+  `GiveCash`. Five refund-split regressions added.
+- **F2 token-map inference gap** — `BuildPlugTokenMap` accepted any
+  single-variable `RequiresCondition` provider, so an ordinary conditional
+  provider (or an inverted `!occupant` gate — same `Variables` set) paired with
+  an item that negates that token could be misclassified as SW-cap wiring. Fix:
+  providers must (a) carry `RequiresPrerequisites: global-swlimit` — explicit
+  lobby-cap wiring only — and (b) have *positive* single-variable polarity
+  (`RequiresCondition.Expression.Trim() == variable`). Both filters applied.
+- **Real lifecycle harness** — new `SuperweaponPlugLimitRuntimeTest.cs` builds a
+  real `World` via `RuntimeHelpers.GetUninitializedObject` + reflection (the
+  `AttackGarrisonedTest` pattern — this test assembly lacks `InternalsVisibleTo`
+  to `OpenRA.Game`, so `TraitDictionary`/`Actor` ctor/`Initialize`/`IsInWorld`
+  are invoked reflectively). Real `TechTree`/`PlayerResources`/`ProductionQueue`/
+  `ProvidesPrerequisite`/`Pluggable` on real actors — 15 lifecycle regressions:
+  order-gate admit/reject matrix, **`EnablePlug` → `CanBuild` flips off
+  synchronously** (the real installed-only install-boundary), tail-first excess
+  cancellation, `Infinite` cleared without replenish, progressed+`Done`
+  migrated item refunded **600 resources + 400 cash** and removed, installed+pending
+  never exceeds cap, Unlimited mode never reconciles, one sweep per tick dedup.
+- **Exact-four pinning** — `TokenMap_ExactlyFourActiveMappings` resolves all four
+  real wirings at once (asserts `map.Count == 4`, incl. CABAL two-provider split
+  and droppod exclusion); `SuperweaponPlugLimitYamlTest` scans the **real** five
+  yaml files and asserts exactly four `global-swlimit`-gated `@swlimit`
+  providers on the four expected hosts + each plug actor negates its token.
+- Adversarial fixtures: ordinary condition-provider with negated item token,
+  non-`global-swlimit`-gated provider, inverted-condition provider — all derive
+  out.
+- **Gates**: 38/38 focused, 1289/1289 full suite, Release 0/0.
+
+# 2026-10-09 — Devin: SW plug capacity (B2/B6) — admission gate + frame-end reconciliation implemented
+
+*Devin-Developer.* Playtest repairs B2 (multiple superweapons despite the cap) and
+B6 (ion cannon plugin rebuildable while owned). Fleet spec
+`SPEC_2026-10-09_devin_plug_slot_capacity.md` v10 lane — bounded scope: admission
+gate + install/infinite/capture reconciliation + inbound-migration *detection*.
+Worktree `C:/cameo-wt/playtest-swcap`, branch `devin/playtest-b2b6-swcap`,
+base published head `3d99405bd`.
+
+- **New trait `SuperweaponPlugLimit`** (`OpenRA.Mods.Cameo/Traits/World/`,
+  mounted on `World` in `mods/cameo/rules/world.yaml` next to
+  `CameoValidateOrder`). Two synced layers:
+  - `IValidateOrder` admission gate: `StartProduction` orders for SW plug items
+    pass only when `pending + installed + requested <= 1`, counted owner-wide
+    across all `ProductionQueue`s and keyed by the occupancy *token* (so
+    distinct plugs sharing a `!token` share one slot). Inert unless the owner
+    holds the `global-swlimit` lobby prerequisite → Unlimited mode untouched.
+    `ExtraData` batch counts enforced (batch >1 rejected when cap is 1).
+  - `ITick` → one deduplicated `World.AddFrameEndTask` sweep per tick
+    (`sweepQueued` flag, cleared at task start; task re-evaluates *live* counts
+    so same-frame installs can't be lost). The task runs in `World.Tick`'s
+    frame-end drain, after `PlaceBuilding`'s install callback (EnablePlug +
+    `EndProduction` replenish) and before the next tick's `CancelUnbuildableItems`.
+    It cancels over-cap pending SW items tail-first in deterministic
+    (ActorID-ordered queue, list-tail-first) order: clears `Infinite` (suppresses
+    `EndProduction`'s auto-replenish), refunds `ResourcesPaid` + paid cash, then
+    `EndProduction` — replicating `CancelProductionInner`'s refund path.
+- **SW plug identification is derived, not hardcoded**: `BuildPlugTokenMap`
+  walks the ruleset — a host `Pluggable` accepts plug type T and grants
+  condition C; the same actor's single-variable-`RequiresCondition`
+  `ProvidesPrerequisite` yields candidate tokens; a plug item is capped iff it
+  has `Plug.Type == T` and its own `Buildable.Prerequisites` negates `!token`.
+  This correctly resolves all four wirings incl. CABAL's two-provider
+  `cabalnuke`/`cabalnuke_swlimit` split (picks the token the plug negates).
+  Ordinary plugs (Naxis addons, TS droppod) derive out cleanly.
+- **Four host `@swlimit` providers gated on limited mode**: added
+  `RequiresPrerequisites: global-swlimit` on
+  `td_gdi_advancedcommunicationscenter`, `td_nod_templeofnod`,
+  `cabal_core`, `ts_gdi_upgradecenter` — the occupancy prerequisite exists only
+  under the Limited lobby ruleset.
+- **Bounded claims (matching spec)**: inbound `GetReplacement` migration is
+  detection-only — a migrated SW item can tick at most once before frame-end
+  removal refunds all paid cash/resources; a `Queue[0]` migration can complete
+  `Done` in the same `TickInner`, but the order phase precedes ticking so it
+  can never install before the sweep removes it. Full prevention needs an
+  upstream `GetReplacement` exclusion — out of scope, flagged separately.
+- **Tests**: `OpenRA.Mods.Cameo.Test/SuperweaponPlugLimitTest.cs` — 12 NUnit:
+  admission truth table (limited/unlimited × pending/installed/batch), excess
+  matrix, and `BuildPlugTokenMap` against yaml-loaded synthetic actors for all
+  four real wirings + negative cases. Runtime regressions (infinite install,
+  capture, mixed-tech migration, PayUpFront refunds) require a live match —
+  documented in the spec; no TestWorld harness exists in this suite.
+- **Gates**: Release build 0/0 warnings; 1263/1263 NUnit (+12); boot-gate PASS
+  (`MenuPostProcessEffect.PostWorldLoaded` on fresh perf.log, 0 new
+  exception logs; SAC did not block). `-warnaserror` Debug check fails on
+  pre-existing upstream style debt in `engine/OpenRA.Mods.Common` (not this
+  change; engine untouched — mod-side file clean).
+- **Engine**: canonical pinned engine copied from main clone
+  (`engine/VERSION = 0a3f77dbe1…`, matches `mod.config`); no engine edits.
+
+# 2026-10-09 — Devin-Integrator: B4/B5 continuation — live hover resolution + clip/hit-test audit
+
+*Devin-Integrator.* Continuation of the approved tooltip head (`d8a56de5e` source
+fix, Sol bounded-approved; `6d7385820` docs). Coordinator's extra asks checked
+statically; one real residual found and fixed:
+
+- **Audit — measured-bounds vs clip**: `TooltipContainerWidget` applies no clip
+  rect; `ChildOrigin` only positions the card. All three Cameo tooltip logics
+  (Production/ActorIcon/Army) feed every measured line into `leftWidth`/bottom,
+  so post-`d8a56de5e` the card fully contains its content — the playtest
+  screenshot overflow was the stale-bounds class already fixed; no residual
+  overflow path found statically.
+- **Audit — hit-test**: Ui fires `MouseExited` before `MouseEntered`
+  (`Widget.HandleInput`), so token-less `RemoveTooltip()` cannot kill a fresh
+  tooltip. Icon gaps (1px `IconMargin`) sit outside `eventBounds` — gap crossing
+  re-arms the container with its 200ms dwell (by-design flicker, not a defect).
+- **Residual found**: `ProductionPaletteWidget.TooltipIcon` is only written on
+  `MouseInputEvent.Move`, but `RefreshIcons()` rebuilds `icons` every `Tick`. A
+  queue cell shifting under a stationary cursor (item completes, buildables
+  appear/disappear, scroll) left the tooltip bound to a removed
+  `ProductionIcon` — wrong-unit or absent tooltip until the pointer moves, the
+  reported intermittent-missing class. `QuotaProductionPaletteWidget` now wires
+  `GetTooltipIcon` to resolve the icon under `Viewport.LastMousePos` per render,
+  matching `DrawHoverHeader`/`DrawMutualExclusionOutlines` — commit `4dfb64030`.
+- Gates: Release build 0 errors; boot-gate PASS
+  (`MenuPostProcessEffect.PostWorldLoaded`, no new exceptions, no orphan
+  process). World-hover absence stays explicitly unresolved per Sol's scope
+  note; interactive screenshot/hover-flow acceptance still needs a driven match.
+
+# 2026-10-08 — Devin-Architect: playtest C1 crash fix — approach annulus capped at MaximumTileSearchRange
+
+*Devin-Architect.* Post-playtest triage (fleet PLAYTEST_TRIAGE_2026-10-08.md) assigned crash C1:
+`ArgumentOutOfRangeException` on map 'Imminent Destruction' — `FindTilesInAnnulus` received
+`maxRange=71`, engine cap `MapGrid.MaximumTileSearchRange = 50`. Stack: `Refresh()` ←
+`RadarPowerMargin` ← `BaseBuilderQueueManagerCA.Tick` ← `BaseBuilderBotModuleCA.BotTick` ←
+`ModularBot.Tick`.
+
+- Root cause in `BaseFrontBackPlannerBotModule.Refresh()`: the approach annulus outer edge
+  `ceil((FrontProj + RadarApproachDepthCells)/coneCos) + 1` grows with how far the defence line
+  crawled — at the 45° front cone any `FrontProj` ~21+ already exceeds 50, so this is not a
+  huge-map-only path.
+- Fix v1 (67799ff7f, superseded on review): clamped the annulus outer edge to the cap and returned
+  null past it — crash-safe but silently truncated coverage: band cells at radius 51..71 were dropped,
+  `frontUncoveredApproach` undercounted, `WantedForFront` could miss the second-radar threshold.
+  Luna's re-review + Sol's acceptance hold: "do not present this as coverage-preserving."
+- Fix v2/v3 (this head): `ApproachBandBounds` keeps the true double bounds (`(double)frontProj + depth`,
+  `frontProj - 1.0` — operands promote BEFORE arithmetic so int sentinels/huge values can't wrap);
+  null only for geometrically-empty bands (NaN cone math, band wholly below radius 0). `ApproachSpace`
+  then picks the candidate set: exact `FindTilesInAnnulus` when `outer <= MaximumTileSearchRange`,
+  else `PlayableBox` — the playable Chebyshev box of half-side `ceil(outer)` clamped to the map span.
+  Superset proof: `TilesByDistance[d]` holds `CVec(i,j)` with `i²+j² ≤ d²`, so every annulus cell has
+  `|dx|,|dy| ≤ ceil(outer)` on every grid type. `PlayableBox` iterates the box ∩ [0, MapSize) directly
+  (O(box), deterministic row-major) with `map.Contains` — the same playable-bounds filter the annulus
+  default uses, so cordon cells never inflate coverage (v2's `AllCells.Where` did). `ApproachCells`
+  applies the exact band+cone predicate on either space — full coverage, never an illegal engine radius.
+- Sibling sweep: every other `FindTilesInAnnulus`/`FindTilesInCircle` call site uses a bounded Info
+  constant (MaxBaseRadius=20, MaximumDefenseRadius=20, BaseCrawlRadius=50 at-cap-legal) or a
+  config-derived stride — this planner site was the only map-scale-derived radius.
+- Regression tests in `BaseFrontBackPlannerTest`: in-cap bounds `(10,14,45°)->(9.0,35.0)`, crash case
+  `(35,…)->(34.0,71.0)` not null — band EXISTS past the cap — fully-beyond-cap `(52,…)->(51.0,95.0)`,
+  `coneCos=0` and `coneCos=-0.5` (half-angle ≥90°, laterally unbounded band) → `+Inf` outer clamped to
+  map span by `WideSpaceRadius`, NaN/negative-forward-band/`int.MinValue` sentinel → null,
+  `WideSpaceRadius` clamps on 71.9/+Inf/1e30. Luna's v2 edge review drove two more fixes:
+  `ApproachBandBounds` no longer nulls a ≥90° cone (cells DO satisfy the predicate at arbitrary
+  lateral distance) and `ApproachCells` promotes `frontProj + depthCells` to double so an extreme
+  configured depth can't wrap the band's upper edge.
+- Real-map regressions (uninitialized Map + real MapGrid, flat rectangular so `Contains` = Bounds):
+  in-cap `ApproachSpace` == engine `FindTilesInAnnulus(9,35)` exactly; off-cap `(35,14,45°)` on a
+  200×200 map — every emitted cell playable (cordon `(0,50)` excluded), box bounded (playable `(130,50)`
+  at dx=80 > 72 excluded), and `ApproachCells` over the box is set-equal to `ApproachCells` over ALL
+  playable map cells — the no-dropped-cell parity the reviewers required.
+- Fix v5 (iso safety, Sol's v4 FIX REQUIRED): `MapSize` is the MPos/STORAGE domain — on
+  `RectangularIsometric` `MPos.ToCPos` unwraps to `x = u + v/2, y = v/2 - u` (engine MPos.cs:45-61 —
+  200×200 map: `M(100,100)→C(150,-50)`, `M(199,198)→C(298,-100)`), so `PlayableBox`'s CPos clip to
+  `[0, MapSize)` dropped real negative-Y / beyond-MapSize domain cells and `map.Contains` could not
+  restore them. `ApproachSpace` now keeps `PlayableBox` only for `MapGridType.Rectangular` (exact:
+  CPos domain IS `[0, MapSize)`); every other grid enumerates `map.AllCells` — the engine's own
+  MPos→CPos CellRegion, the true domain — filtered by the same box + `map.Contains` predicates.
+  Reach widened to `MapSize.W + H` (provable CPos Chebyshev bound on both shapes). Iso regression:
+  real `MapGrid(RectangularIsometric)` shell on 200×200 centred on `C(150,-50)` — emitted space
+  contains the negative-Y domain cell, all cells playable, `ApproachCells` set-equal to the
+  full-domain reference. `PlayableCellsOf` test helper now enumerates MPos→CPos too.
+- Gates: Release build clean; full `OpenRA.Mods.Cameo.Test` suite 1260/1260; boot-gate PASS
+  (main menu, `MenuPostProcessEffect.PostWorldLoaded`, zero new exceptions). One earlier exception
+  (`exception-2026-10-08T202345Z`) was my launch harness missing `Engine.ModSearchPaths`, not the
+  code — corrected and re-passed.
+- Branch `devin/c1-annulus-range-cap` off playtest head 3d99405bd; v1 code at 67799ff7f, docs at
+  20a8107a1, semantics v2–v5 on the branch tip. LESSONS_LEARNED entry updated. No master push —
+  playtest freeze stands; Sol+Luna review gates apply (Luna asked for in-map repro on top of static
+  review; Luna APPROVED v4 source+tests 92d2fe029, Sol's iso finding drove v5).
+
+---
+
+# 2026-10-08 — Devin-Architect: wave-1 scheduler v3 — fail-closed evidence adjudication
+
+*Devin-Architect.* Sol's wave-5 re-review (REVIEW_2026-10-08_wave5_adjudication)
+found the scheduler treating first-diff-frame `only_a`/`only_b` as the complete
+unmatched stream — later orders hid behind an early sync gap — and accepting
+empty/aggregate evidence. v3 repair on top of the coordinator's in-place v2
+(narrow adjudication rule):
+
+- **`compare()` PASS shape** (`payload_is_proof`): PASS requires comparator
+  exit 0 AND verdict in {IDENTICAL, IDENTICAL_TAIL_FLUSH} AND a well-formed
+  payload — both replay paths present as keys in `records`/`incomplete`/
+  `unparsed_tails`, every record count a positive non-bool int, every
+  incomplete flag explicitly False, every unparsed-tail count exactly 0.
+  Missing keys, malformed JSON, timeout, wrong types, or inconsistent
+  exit/verdict all fail closed; exit 0 with a proof verdict but invalid
+  metadata reports `UNPROVEN_EVIDENCE` (never PASS, never DIVERGENT).
+- **Full artifact persistence**: per pair, the comparator's complete stdout,
+  stderr, and parsed JSON payload are written under
+  `results/<run_id>/comparator/`; the summary carries artifact paths, not
+  truncated snippets.
+- **`adjudicate()`**: gated on exit == 1 only; re-extracts both replays
+  in-process via the frozen comparator's own `extract()` and Counter-diffs
+  over ALL frames — first-frame hiding is impossible. Adjudicated-artifact
+  rule unchanged from v2: one-sided extras, all SYNCHASH, all strictly past
+  the shorter stream's last frame, gated by nonempty identical match records
+  (diagnostic gate that can only reject, never prove). Any ORDER/DISCONNECT/
+  UNPARSED/interior/two-sided record stays DIVERGENT — tail orders are
+  unprovable and are never reclassified.
+- **Main loop**: every `exit != 0` propagates as wave-stop-invalid (incl.
+  exit 3/4, timeout, malformed output); only `c["ok"]` continues the wave.
+- Frozen comparator bytes untouched (TOOL_SHA256 pins verified pre-launch).
+
+Regression suite `tools/tests/test_wave1_adjudication.py`: 20/20 pass —
+first-frame-gap hiding a later two-sided mismatch, run4-style tail
+StartProduction, interior one-sided extra, pure-sync tail (adjudicates),
+match-record gate reject-only semantics (differing/missing/empty aggregates
+never admit), incomplete/zero/malformed/wrong-exit compare records, and the
+full PASS-shape matrix.
+
+Real-data check on the frozen wave-5 evidence (12 cells): both strict passes
+reproduce (`s1337`/`s8675309` gate pairs IDENTICAL_TAIL_FLUSH, ok=True); all
+4 flagged pairs stay DIVERGENT with the tail orders now surfaced — every
+unmatched record across all 6 pairs is terminal-tail (zero interior diffs):
+pure-SYNCHASH tail runs ending in ORDER records at the longer capture's
+final frames (RepairBuilding f4068, SetRallyPoint f4955, PlaceBuilding
+f11856, 7× Move f7197). These are post-window capture stragglers — exactly
+what the SPEC_2026-10-08 terminal fence eliminates by construction.
+
+# 2026-10-08 — Devin-Architect: comparator grouping fix + R6/R7 task closure
+
+*Devin-Architect.* Formalized as task BOT-DET-R6R7. Beyond the R6/R7 repair
+already landed, this pass closes the remaining task requirements:
+
+- **Canonical record granularity flattened to per-order**: each parsed order is
+  now its own `(frame, 'ORDER', tuple)` record — packet batching is a
+  ReplayConnection flush artifact, not gameplay. Previously a 2-order packet
+  vs two 1-order packets would (wrongly) diff. UNPARSED payloads likewise
+  become per-frame records. Engine-protocol justification is now in the
+  header docstring.
+- **Interior-gap regressions**: missing record at an interior frame, interior
+  order gap, packet-grouping equivalence, cross-channel interleave
+  equivalence, and trailing disconnect (not flush) all pinned.
+- **Proof caveat**: `--ignore-synchash`/`--ignore-client` verdicts now print
+  an explicit "NOT strict identity proof" caveat and carry it in `--json`.
+- Suite: 22/22 pass. Real replays re-verified: C-vs-D exit 0
+  IDENTICAL_TAIL_FLUSH, A-vs-B exit 1 DIVERGENT@f16 (per-order records show
+  flags 0xC9/0x88), A-vs-A exit 0 IDENTICAL.
+
+# 2026-10-08 — Devin-Architect: comparator R6/R7 repair (review round 3)
+
+*Devin-Architect.* Sol's independent `main()` probes on `f2e7396be` found two
+more defect classes; both repaired with regressions:
+
+- **R6 — any sync-only diff classified as tail flush**: `frame_multiset_diff`
+  called trailing=True whenever the differing records contained no
+  ORDERS/DISCONNECT reprs — so a *same-frame* pair of different sync hashes
+  (world-state divergence, the worst kind) yielded IDENTICAL_TAIL_FLUSH.
+  Tail flush is now the genuine terminal one-sided condition: every differing
+  record must sit at a frame strictly beyond `min(lastA, lastB)` — any diff
+  inside the shared window (both captures were recording) is DIVERGENT —
+  and every extra tail record must be a passive SYNCHASH (orders,
+  disconnects, and opaque OTHER payloads in a tail are real content → 1).
+- **R7a — string bound not enforced**: `read_str` sliced `b[p:p+ln]` without
+  checking `p+ln <= len(b)`; Python slices truncate silently, so a declared
+  8-byte string with 3 bytes present parsed as 'abc' and dropped the rest.
+  Now raises → UNPARSED. Covers order names, handshake name/target, and
+  target strings; varint overrun already raised via IndexError, and a
+  shift>28 guard was added.
+- **R7b — lossy decode collapsed bytes**: `decode('utf-8','replace')` made
+  distinct byte sequences compare equal. Strings are now carried as raw
+  bytes end-to-end (order names, handshake targets, target strings);
+  normalization runs on bytes; decoding exists only display-side in
+  `describe()`.
+- R7 empty/truncated/missing-terminator findings were already closed by the
+  INCOMPLETE_CAPTURE work; regression tests now pin all of them.
+
+Suite: `tools/tests/test_order_stream_diff.py` — 17/17 pass. Real replays:
+fixed pair → IDENTICAL_TAIL_FLUSH (exit 0), pre-fix pair → DIVERGENT@f16
+(exit 1, flags visible), self-identity A vs A → IDENTICAL (exit 0).
+
+Note: lead's release gate adds — after R6/R7 review passes — a clean
+committed candidate rebased onto master 9ea31fdfb with engine foundation
+8c2b385f82; the b6a6fb14 BASE proof (old pin) is superseded as
+current-foundation evidence and must be re-run post-rebase.
+
+# 2026-10-08 — Devin-Architect: comparator fail-closed hardening (INCOMPLETE_CAPTURE)
+
+*Devin-Architect.* Sol's re-review request added two requirements beyond R4/R5:
+truncated packets must fail closed, and empty/incomplete captures must never
+count as proof. Both implemented on top of `f2e7396be`:
+
+- **Truncation detection**: `extract()` now tracks record-header short reads,
+  negative/overrunning packet lengths, and a missing `-1` stream terminator —
+  any of these sets `incomplete`. (Subtlety: the terminator is a lone 4-byte
+  `-1`, so the header check must read `client` before requiring 8 bytes.)
+- **Empty-capture guard**: `len(records) == 0` on either side is treated as
+  no-evidence, not identity.
+- New verdict `INCOMPLETE_CAPTURE` (exit 4): emitted whenever a capture is
+  truncated or carries zero gameplay records and content is otherwise equal —
+  a cut-short or empty file can never yield `IDENTICAL`. `DIVERGENT` still wins
+  when content genuinely differs (truncation noted in the line).
+- Packets shorter than 4 bytes (can't hold a frame field) now count as unparsed
+  tails instead of being silently skipped.
+- Regressions: `test_empty_capture_is_not_proof`,
+  `test_truncated_capture_is_not_proof`, `test_missing_terminator_is_not_proof`
+  → 10/10 pass; real replays re-verified (fixed pair IDENTICAL_TAIL_FLUSH,
+  pre-fix pair DIVERGENT@f16).
+
+# 2026-10-08 — Devin-Architect: comparator R4/R5 repair (review round 2)
+
+*Devin-Architect.* Bounded re-review found two real defects in `order_stream_diff.py`
+at `edd956b20`; both fixed and regression-tested:
+
+- **R4 — dropped `flags`**: canonical order tuples omitted the raw i16 flags, so
+  orders differing only in `Queued` (0x08) or `TargetIsCell` (0x40) compared equal.
+  Flags now preserved byte-exact in every `('O', order, flags, ...)` tuple.
+  Regression: queued-vs-unqueued AttackMove pair → DIVERGENT.
+- **R5 — discarded tails**: bytes after the last parseable order in a packet were
+  silently dropped, so a valid-order + unknown-tail packet canonicalized identical
+  to one without. Now: unknown order types, unknown flag bits (>0x1FF), unknown
+  target types, and any field overrun all emit `('UNPARSED', tailhex)` records —
+  preserved byte-exact in the comparison AND counted. Any unparsed tail downgrades
+  the verdict to `UNPARSED_TAILS` (exit 3, fail closed — byte-equal opaque bytes
+  cannot attest semantic identity). DIVERGENT still wins when content genuinely
+  differs (exit 1); `IDENTICAL`/`IDENTICAL_TAIL_FLUSH` only when fully parsed.
+- Field reads are now bounds-checked (`read_str` overruns, negative counts,
+  target/extra/grouped overruns → UNPARSED instead of misaligned decode).
+
+Verification: `tools/tests/test_order_stream_diff.py` — 7/7 pass covering both
+regressions and all four verdicts. Real replays: fixed-engine pair →
+IDENTICAL_TAIL_FLUSH (no unparsed tails — real packets parse fully);
+pre-fix pair → DIVERGENT at frame 16 now showing flags
+(`Move` 0xC9, `DeployTransform` 0x88).
+
+# 2026-10-08 — Devin-Architect: BASE==BASE parity proof — root cause found and verified
+
+*Devin-Architect.* Two same-seed (`CAMEO_DEV_SEED=1337`) hard-vs-hard td_gdi matches on
+AI Duel Gate were run under the current pin (`d5d8b2a6`) to find the residual
+nondeterminism, then re-run with the fixed engine to prove the fix.
+
+**Residual found (pinned engine, without `9e35bc96ee`):**
+- Identical lobby/pregame records and identical sync hashes through frame 669.
+- Frame 16: run B issued `Move`+`DeployTransform` on MCV #183 (mid-transform from the
+  f3 deploy) — orders dropped at execution (stale actor), world state stayed identical.
+- Bot-internal state drifted silently afterward (LC1 lease claims 4528 vs 4527 by
+  tick 2251), then the first world-state divergence at frame 670, caused by a
+  `PlaceBuilding td_gdi_guardtower` at different cells at f669.
+- Root cause: engine-side `OpenRA.Mods.Common` `McvExpansionManagerBotModule`
+  (loaded — it appears in the module-timing lines) draws `scanInterval`,
+  `buildMCVInterval`, `moveConyardInterval` from `world.LocalRandom` in
+  `TraitEnabled` plus deploy-spot picks (`resCenter` coin-flip, `cells.Shuffle`,
+  conyard ordering, notify flip). `LocalRandom` is unseeded per launch, so the scan
+  cadence differed run-to-run — B's earlier scan caught #183 mid-transform and issued
+  the inert relocate pair; the different cadence cascaded into claim counts and the
+  later placement cell pick.
+
+**Fix verification (pin + `9e35bc96ee` only):**
+- `9e35bc96ee` is a direct child of pin `d5d8b2a6` (verified `git merge-base`), so a
+  build of `codex-garrison-engine` = pin + RNG conversion only.
+- Built it Release, swapped `OpenRA.Game/Common/AS.dll` into `engine\bin` for the
+  local test only (no `mod.config` change — pin bump is maintainer-authorized),
+  re-ran the identical same-seed pair (fingerprint `dlls=7db3470358` confirms the
+  patched binaries), then restored the pinned DLLs afterward.
+- **Result: IDENTICAL.** Every order and every sync-hash record equal for all
+  shared frames (3304 frames ≈ the full match to elimination). The only difference is
+  3 trailing sync-hash packets on the slower-exiting process — a replay write-cutoff
+  artifact, not a decision.
+- The old pair under the same comparator: `DIVERGENT at frame 16` naming the ghost
+  `Move`/`DeployTransform` pair — the tool correctly separates real divergence from
+  recording artifacts.
+
+**Comparator hardening** (`tools/ai/order_stream_diff.py`): comparison is now
+per-frame record multisets instead of raw record order — order packets and
+sync-hash packets flush on separate channels, so packet interleaving and the
+exit-tail cutoff are not gameplay. New verdict `IDENTICAL_TAIL_FLUSH` (exit 0)
+when only trailing sync/disconnect-free frames differ; `DIVERGENT` (exit 1) names
+the first frame whose order/sync multiset differs.
+
+**CameoDevSeed env fallback** (`OpenRA.Mods.Cameo/ServerTraits/CameoDevSeed.cs`):
+`CAMEO_DEV_SEED=<int>` env var works alongside `Cameo.DevSeed=<int>` because match
+harnesses (`run_ai_match_batch.py`) do not plumb extra game args but env vars
+propagate to spawned processes. Both parity runs logged `CAMEO DEV SEED pinned —
+RandomSeed=1337`.
+
+**Requirement surfaced:** `ENGINE_VERSION` must move to a commit containing
+`9e35bc96ee` for the proof to hold on real runs — the mod-side sweep alone cannot
+seed engine-module draws. Maintainer authorization needed (engine pin rule).
+
+Gates: two live same-seed matches per arm (4 total), all clean, no exceptions;
+`order_stream_diff.py` exercised on real replays in both verdict modes.
+
+# 2026-10-08 — Devin-Architect: order_stream_diff.py — BASE==BASE comparator for the parity proof
+
+*Devin-Architect.* Companion to `CameoDevSeed`: `tools/ai/order_stream_diff.py` compares
+the canonical order streams of two `.orarep` replays and reports IDENTICAL or the first
+divergent record — the assertion half of the 3-seed × 2-map proof (`CameoDevSeed` pins
+the seed; this proves the runs were identical).
+
+- Format verified against `ReplayRecorder.cs:74-98` (`[i32 client][i32 len][i32 frame]`
+  `[payload]` records, `-1` terminator before trailing metadata; uncompressed) — same
+  layout `order_trace.py` parses, and cross-checked: `order_trace` reads the tool's
+  synthetic fixtures identically (4 orders / 2 units / frame 25).
+- Canonical records cover every packet kind: Fields orders (all flag-gated fields kept
+  byte-exact: subject, target, target-string, extras, grouped actors), Handshake
+  orders, SyncHash (0x65 — proving world-state identity, stronger than orders alone),
+  Disconnect, and fallback OTHER for unknown types.
+- Per-launch normalizations applied to target strings only — `GameUid`
+  (`Guid.NewGuid` per launch, `Server.cs:334`), `AuthToken`, `AuthSignature`.
+  Everything else must match byte-for-byte in order.
+- Flags: `--pregame` includes lobby/handshake records (frame <= 0, still normalized),
+  `--ignore-client` drops the connection-id header, `--ignore-synchash`, `--json`.
+- Verified on synthetic fixtures: same-seed/different-GameUid pair → IDENTICAL
+  (exit 0); injected divergence → DIVERGENT at the exact record with 3-record context
+  (exit 1). Real-replay validation rides the lead's parity run.
+- Exit codes 0/1/2 for gate wiring: `order_stream_diff.py A.orarep B.orarep`.
+
+# 2026-10-08 — Devin-Architect: CameoDevSeed — dev-gated lobby seed pin for BASE==BASE parity runs
+
+*Devin-Architect.* The BOT-DETERMINISM proof (3 seeds × 2 maps, identical order streams)
+needs same-seed launches, but the engine generates `randomSeed` from `DateTime.Now`
+inside `Server`'s ctor with no override path (`engine/OpenRA.Game/Server/Server.cs:307`).
+`LobbyInfo.GlobalSettings.RandomSeed` is a mutable field synced to every client and is
+the ONLY seed source read downstream: `StartGame` builds `playerRandom` (faction
+resolution + SharedRandom) from it at `Server.cs:1378`, and `BotRng` reads the client's
+`World.LobbyInfo.GlobalSettings.RandomSeed` per bot. Pinning that field before the
+server loop starts therefore covers every decision RNG uniformly — no engine change.
+
+- New dev-only server trait `OpenRA.Mods.Cameo/ServerTraits/CameoDevSeed.cs`
+  (`ServerTrait` + `INotifyServerStart`), registered in `mods/cameo/mod.yaml`
+  `ServerTraits:` next to `CameoLobbyAutopilot`. Inert unless `Cameo.DevSeed=<int>`
+  appears on the server command line (same arg-scan style as the autopilot gate).
+  On `ServerStarted` it sets `LobbyInfo.GlobalSettings.RandomSeed` and calls
+  `SyncLobbyInfo()` so already-connecting clients get the pinned value; logs
+  `CAMEO DEV SEED pinned` on the `server` channel.
+- `CameoDevArgs.Value(name)` added next to `IsEnabled` — returns the text after
+  `Name=` or null; unparseable/absent values leave the trait inert.
+- Usage for the lead's parity run: `OpenRA.Server Game.Mod=cameo Cameo.DevSeed=1337`
+  (optionally + `Cameo.DevAutopilot=True` + plan file for a fully scripted run).
+  Note: `GameUid` remains `Guid.NewGuid()` per launch — replay names/gameinfo differ,
+  but the order stream does not consume it.
+- Verified statically: `RandomSeed` writes are ctor-only (`Server.cs:329`), reads are
+  post-`ServerStarted` (`:1378` inside `StartGame`), so the pin cannot race.
+  Live pin verification is part of the lead's 3×2 heavy run (ServerTraits only
+  instantiate when a `Server` is created — menu boot does not construct them, but the
+  registration mirrors the already-reviewed `CameoLobbyAutopilot` pattern).
+
+Gates:
+- build: `dotnet build -c Release -p:TargetPlatform=win-x64` — Build succeeded, 0 errors
+- boot-gate: PASS — `MenuPostProcessEffect.PostWorldLoaded` at perf.log:534 of this
+  worktree's instance; 0 new `exception-*.log`; own PID+child tree killed via taskkill;
+  codex-display-settings-fix's instance left running untouched; SAC state: Off
+
+# 2026-10-08 — Devin-Architect: BOT-DETERMINISM review fixes — MapCreated null-Uid seed + autopilot start retry
+
+*Devin-Architect.* Review by teammate `01a11068` on `624f5b27d` found two defects, both fixed
+in the follow-up commit on `devin/bot-determinism`:
+
+- **`CameoRemasterTerrain.MapCreated` crash:** `ITerrainInfoNotifyMapCreated.MapCreated` fires
+  BEFORE the map's first `Save` assigns `Uid` (editor `NewMapLogic`, `ImportGen1MapCommand`) —
+  `StableHash(map.Uid)` threw NRE on editor map creation/import. Seed now derives from
+  creation-time inputs: `StableHash(tileset|WxH|uid)` folded with FNV-1a over the tile content
+  (`Type<<8|Index` per cell). Deterministic per creation inputs; null-Uid safe.
+- **`CameoLobbyAutopilot` settle/start:** the earlier tick-count conversion was wrong — server
+  `ITick` fires per event-loop iteration (bursts drain instantly), so the ms floor was not
+  guaranteed and a silently-rejected `startgame` left the harness dead (`phase=Done`). Reverted
+  to `Environment.TickCount64` for the settle window (pre-game orchestration outside the order
+  stream — wall-clock is the correct semantic here) and added a `Starting` phase that re-issues
+  `state Ready` + `startgame` every 500ms until `server.State` leaves `WaitingPlayers`
+  (bounded: 20 attempts, then logs failure). Re-issuing `state Ready` is idempotent and also
+  recovers clients a late `SelectMap` callback resets to `Invalid`.
+- **Retry boundary (second review pass):** `InterpretCommand`/`Server.StartGame` is synchronous —
+  the attempt's result is observable in `server.State` immediately after issuing, so a
+  successful 20th attempt must confirm BEFORE exhaustion is declared, and only `GameStarted`
+  counts as confirmed (`ShuttingDown` is an abort, never "confirmed"). Extracted
+  `EvaluateStartAttempt(state, attempts, max)` + `StartAttemptOutcome` as `internal` (visible
+  to tests via `InternalsVisibleTo`) and added `CameoLobbyAutopilotTest` regressions:
+  final-attempt success → Confirmed, early success → Confirmed, waiting at 19 → Retry,
+  waiting at 20 → Exhausted, ShuttingDown at 1/20 → Aborted (never Confirmed/Exhausted).
+
+Gates (fix commits):
+- build: `dotnet build -c Release -p:TargetPlatform=win-x64` 0 errors (second build surfaced
+  8 pre-existing StyleCop warnings in upstream engine files — none in touched files)
+- boot-gate: PASS — menu reached (`MenuPostProcessEffect.PostWorldLoaded` in this instance's
+  rotated `perf.log.1`; another agent's trait-u0 instances held `perf.log`), 0 new
+  `exception-*.log` vs 168 pre-existing, own process killed (PID-scoped), SAC state: Off
+- Cameo tests: 1203/1203 PASS (1198 + 5 `CameoLobbyAutopilotTest` regressions)
+- boot-gate (retry-boundary commit): PASS — menu marker in this instance's `perf.log`,
+  0 new exceptions, own PID killed, other worktrees' instances untouched
+- editor `MapCreated` null-Uid path: statically verified (seed inputs are all ctor-set); no
+  automated editor harness exists — flagged for manual editor spot-check
+
+# 2026-10-07 — Devin-Architect: BOT-DETERMINISM — seeded per-player bot RNG + wall-clock/hash-order sweep
+
+*Devin-Architect.* Branch `devin/bot-determinism` @ `c9db891e9` (two commits: `624f5b27d`
+RNG sweep + `c9db891e9` hash-order pass), worktree `C:\cameo-wt\bot-determinism`,
+on the increment line (`5e45bfc80`). Engine half lives on `cameo-mod/OpenRA`
+`devin/bot-determinism @ 9e35bc96ee` (branched off pin `d5d8b2a6`; teammate
+`01a11068` reports inc pin moved to `0e42ed433d` — lead rebases as needed).
+
+- **Root cause of run-to-run divergence:** every bot-decision draw sat on
+  `World.LocalRandom`, which is process-seeded (no lobby tie-in) AND shared with cosmetic
+  consumers (sound-clip picks, voices, particle variants). Any consumer drawing a varying
+  number of times shifts every later bot pick — same-seed runs diverged at frame 49.
+- **`OpenRA.Mods.CA/BotRng.cs` (new):** `ConditionalWeakTable<Player, MersenneTwister>`,
+  one stream per bot player, seeded `lobbySeed + (PlayerActor.ActorID | ClientIndex + 1) *
+  0x9E3779B9`. `BotRng.For(player)` / `BotRng.For(IBot)`. Same lobby seed => same
+  decisions; different seed => different play; each bot independent.
+- **Mod sweep:** ~95 draw sites across 33 files in `OpenRA.Mods.CA`, `OpenRA.Mods.Cameo`,
+  `OpenRA.Mods.Fransbot` moved to `BotRng` (picks, weighted picks, shuffles, scan-tick
+  offsets, target/resource selection). `SquadCA.Random` now vends the bot stream.
+- **Engine sweep:** `OpenRA.Game/BotRandom.Create(world, player, salt)` + per-module
+  private `MersenneTwister` fields replacing `world.LocalRandom` in the 8 engine modules
+  registered by cameo bots (`McvExpansionManager`, `Minelayer`, `ResourceMap` [Common];
+  `SendUnitToAttack`, `ExternalBotOrdersManager`, `LoadCargo`, `PowerDown`,
+  `SupportPowerDecisionAS` scan draw [AS]). Assembly order (AS first) makes same-name
+  mod-side shadows impossible for AS — hence the engine patch.
+- **Wall-clock removal:** `CameoLobbyAutopilot` settle window converted
+  `Environment.TickCount64` -> server-tick countdown (idle loop ticks ~1s; budget rounds
+  up, preserving the minimum window).
+- **Decision-state GUID removal:** `UnitCompositionsBotModule` composition fallback id
+  `Guid.NewGuid()` -> stable `CompositionFallback{ordinal}` (id keys
+  `compositionLastUsedTickById`).
+- **Terrain seeding:** `CameoRemasterTerrain` PickAny variant layout +
+  `CameoRemasterTileCache` unseeded `MersenneTwister()` -> FNV-1a `StableHash(map.Uid)` /
+  `StableHash(terrainInfo.Id)` (`string.GetHashCode` is process-randomized).
+- **Deliberately unchanged:** all `SharedRandom` sim draws (warheads, spawns, idle turn,
+  HuntCA, Mirage); `BotPersonalityController`'s synced SharedRandom personality grant;
+  cosmetic `LocalRandom` (sound/voice picks, `AnnounceOnDamageState` voice gate,
+  `PlayerPromotions` flavor text); Fransbot `Stopwatch` (diagnostic-only); `CombatVeto`
+  `squad.GetHashCode()` dedup key (intra-process consistency only).
+- **Hash-order pass (commit 2, `c9db891e9`):** `ActorIndex.Actors` is `HashSet<Actor>`
+  (hash layout is an implementation detail); every order-sensitive consumer now sorts by
+  `ActorID`: RNG pick sites, `FirstOrDefault`/`MinByOrDefault`/`ClosestTo*`/`foreach`
+  order dependencies in `BaseBuilderBotModuleCA`, `SquadManagerBotModuleCA`
+  (`OwnBaseBuildings` too), `BaseBuilderQueueManagerCA`, `AirStatesCA`
+  (`WaitingUnits` broadcast), `FransUnitBuilder` (3 `allUnits` snapshots),
+  `FransMcvExpansionManager` (`LiveMcvs` iterator), `FransSpecOps` (specialist pick),
+  plus `FrozenDictionary BuildingFractions` / `Dictionary unitsToBuildShares` key-sorted
+  before `Shuffle`. Verified already-deterministic and left alone: `World.Actors`
+  (`SortedDictionary` by ActorID), `ActorsWithTrait`/`ActorsHavingTrait` (`TraitContainer`
+  keeps a binary-search-inserted `List<Actor>` — ActorID-sorted), Fransbot's ~25 existing
+  `OrderBy(ActorID)` sites, `.Any`/`.Count`/`.Sum` aggregations, single-ActorID filters,
+  full-tiebreak collect-then-sort picks, `Rules.Actors` (load-order stable).
+
+Gates:
+- build: `dotnet build -c Release -p:TargetPlatform=win-x64` 0 warnings / 0 errors
+- boot-gate: PASS — menu reached (`MenuPostProcessEffect.PostWorldLoaded`), 0 new
+  `exception-*.log` vs 168 pre-existing, no stray processes
+- BOM audit: no file's BOM changed vs HEAD
+- Cameo tests: 1198/1198 PASS
+
+Open items for lead:
+- `mod.config` engine pin bump to a build containing `BotRandom` requires maintainer
+  authorization — `mod.config` untouched. Without it the mod half still compiles/runs;
+  the engine-registered modules keep drawing `LocalRandom` until the pin moves.
+- Same-seed parity re-run (`run_ai_match_batch.py` + `order_trace.py`) awaits
+  Integrator heavy-run window.
+# 2026-10-07 — Devin-Integrator: INTEG-ECON-B — BU_harvester_logistics merged into inc
+
+*Devin-Integrator.* Reviewer APPROVE (2 documented non-blocking deviations D1 P2 /
+D2 P3 — the gates here were the first independent run: the reviewer had no engine).
+Branch `integ/garrison-2026-10-06`, worktree `C:\cameo-wt\integ-garrison`:
+inc `f9d81bae8` + `devin/econ-b@50d3614b6` (`BU_harvester_logistics` —
+refinery-served field reservations, shared pool re-route over threat-free
+corridors only, lease-aware evac via new `BotLeasePurpose.Harvest`, production
+requests only when the pool cannot cover demand; `HarvesterBotModuleCA` gains
+`IBotUnitLeaseLost`).
+
+Conflicts (both degenerate): `DEVELOPMENT_LOG.md` append-adjacent entries —
+kept both; `increment_switches.yaml` tail — kept all groups
+(BM_live_combat_model + BO_squad_move_dedup + BU_harvester_logistics).
+Inc-side had not touched any of the branch's 5 files since the merge base —
+clean take.
+
+Integration repair: ai_arch_audit R7 flagged `IBotUnitLeaseLost` gaining a
+second loaded provider (`BridgeRepairBotModule` + `HarvesterBotModuleCA`) with no
+declared merge semantics — declared `owner-matched dispatch` in PROVIDER_MERGES
+(registry notifies each provider only when its type name equals the lost lease's
+previous owner; verified at BotUnitLeaseRegistry.cs:186). AI_ARCH_COVERAGE.md
+regenerated.
+
+Gates:
+
+- build: 0 errors (Release, win-x64)
+- Cameo tests: 1206 total, 1205 pass — sole failure was a stale
+  `DerivedWeaponMetrics` fixture (RA2Patriot rows after R1's refresh); fixed by
+  `extract_stats.py` re-extraction of all 34 derived faction ledgers (cohort
+  normalization churns every row; only R1-weapon rows changed semantics).
+  WeaponModelParityTest 4/4 on the regenerated fixtures.
+- audits: fog honesty PASS (82 files/266 sites), direct mutation PASS (0 sites),
+  ai_arch freshness PASS (both artifacts)
+- switch gating reviewed: all new paths behind `UseHarvesterLogistics`
+  (default false); `apply_increment_switches --dry-run BU_harvester_logistics`
+  arms `HarvesterBotModuleCA@generic` only; @classic untouched -> off =
+  bit-identical
+- conflict-marker test: PASS
+- BOOT_GATE: PASS (isolated support dir, menu marker, package in worktree,
+  0 exceptions)
+
+# 2026-10-07 — Devin-Integrator: INTEG-REGREEN-R1 — pre-R16 missile profile refresh merged into inc
+
+*Devin-Integrator.* Reviewer APPROVE. Branch `integ/garrison-2026-10-06` (continued),
+worktree `C:\cameo-wt\integ-garrison`: inc `6bb8818e8` + `codex/regreen-r1@a716cb6dc`
+(`1832a4c64` refresh pre-R16 missile profiles on 27 weapons + `a716cb6dc` reconcile
+missile history contract). Merge applied with zero conflicts.
+
+Semantic reconciliation required beyond the clean textual merge:
+
+- The R1 contract (`test_missile_role_policy` + `test_projectile_role_bulk_profile`,
+  95 records) asserts each recorded refresh changed only the main warhead. On the
+  missile-feel tree the whole checkpoint cohort failed (78 failures): missile-feel had
+  changed non-warhead fields and AA templates the records pin.
+- Fixtures rebased the same way as the E2 repin `0d5cfc14a` (live payloads with
+  preserved mains verbatim, digests repinned); thin variant shells fold the live
+  authored node.
+- `RA2HoverMissile_AA(_elite)` / `RA2MultiHoverMissile_AA(_elite)`: authored
+  `-Versus:`/`-PercentageVersus:` cancellation inside `Warhead@MissileAA_Light` so the
+  R1-reviewed 20-key ladders replace (not map-merge into) the new
+  `^Warhead_MissileAA_Light` template rows — otherwise the resolved warhead leaked
+  AntiAir*/Ship*/Cyborg* classes the refresh deliberately removed.
+
+Gates:
+
+- build: 0 errors (Release, win-x64)
+- role-policy contract: 10 passed + 77 subtests — identical to reviewer baseline
+- consumer-set regression check vs pre-merge inc baseline `6bb8818e8`: identical
+  failure sets (34 failed both sides — pre-existing missile-feel-era fixture
+  staleness in sonic/heaviness/owned-names lanes, out of R1 scope, likely R2/R3);
+  0 new failures, 78 fixed
+- conflict-marker test: PASS
+- BOOT_GATE: PASS (isolated support dir, menu marker, package in worktree, 0 exceptions)
+
+Known debt (flagged to lead): the 34 stale historical-view fixtures predate this
+merge (visible identically on inc baseline) — `sonic_family`/`later_profile`/
+`owned_checkpoint`/`heaviness golden` `current`-payload repins are owed to
+missile-feel reconciliation (REGREEN-R2/R3 territory, not this task's scope).
+
+# 2026-10-06 — Devin-Integrator: INTEG-GARRISON — garrison fire-ports + missile-feel merged into inc
+
+*Devin-Integrator.* Maintainer-approved merge (both playtests passed 2026-10-06).
+Branch `integ/garrison-2026-10-06`, worktree `C:\cameo-wt\integ-garrison`:
+
+- Engine: `integ/engine-2026-10-06` = `d5d8b2a685` + `codex/garrison-engine@dc92c52213`
+  (independent passenger fire stations) + `codex/missile-feel-engine@dd7b901b85`
+  (RangeLimit/RangeLimitPercent + proximity snapping). Build 0 errors/0 warnings,
+  engine suite 545 pass / 2 skip. Pushed; `origin/cameo-engine` fast-forwarded to
+  `0e42ed433d` — the new ENGINE_VERSION pin.
+- Mod: inc `5e45bfc80` + `codex/garrison-fireports@210ec9479` + `codex/missile-feel@4e47ead99`
+  (66 weapons, RangeLimitPercent 150, flattened Spit_AA/GLStingerSite/GLASCUD as playtested).
+  Two merge conflicts resolved: `mod.config` pin -> combined engine sha; `BotCombatPredictor`
+  keeps the HEAD WeaponProfile helper with the branch's IRangeLimitedProjectileInfo
+  effective range clamp ported into the helper.
+- Integration repair: the missile-feel branch changed `effective_damage.py`
+  (default-on homing-missile terminal bound + RangeLimit fuel gate) without
+  re-extracting ledgers or updating the C# port. Re-extracted 35 ledgers + derived
+  sidecars (ledgers_drifted 21 -> 0) and ported the terminal model into
+  `BotEffectiveDamage` (HomingMissileTerminalBound, fuel sigma=inf, MissileTA
+  handling, target-radius/terminal threading through Reliability/
+  UniformReliability/AreaGeometrySamples/Evaluate). Verified by
+  WeaponModelParityTest over all 1570 weapons.
+- doc_claims repins: warhead_family_reach 1509 -> 1510,
+  cameo_family_labelled_weapons 1567 -> 1569; cited docs co-updated.
+
+Gates:
+- build: 0 errors (Release, win-x64)
+- Cameo tests: 1202/1202
+- pytest scoped: 59 + 26 subtests (conflict markers, garrison fireports,
+  chinook capacity, missile feel defaults, effective damage)
+- audits: fog honesty PASS (266 sites), direct mutation PASS (0 sites),
+  ai_arch freshness PASS, doc_claims 44/44, balance drift clean,
+  garrison_fireports capacity audit PASS (304 actors, 0 violations)
+- audit_garrison_weapons informational: G1 4 scrin infantry w/o garrison weapon,
+  G4 1 cabal_ravager (pre-existing findings, not merge-introduced)
+- BOOT_GATE: PASS (isolated support dir, menu marker, package in worktree, 0 exceptions)
+# 2026-10-06 — Devin-Developer: ECON-A — BT_expansion_prebuild (SPEC_2026-10-05_econ_logistics Part A)
+
+*Devin.* Branch `devin/econ-a`, worktree `C:\cameo-wt\econ-a`, base `inc@5fecf6710`, engine pin
+`d5d8b2a6853bff3b5a00cc5db7d86b03d4f30684`. Fleet spec: `Cameo-mod-fleet/SPEC_2026-10-05_econ_logistics.md` Part A.
+New §12.36 in `docs/design/AI_ARCHITECTURE.md`.
+
+- **Demand seam:** the existing `IBotSuggestRefineryProduction.RequestLocation` post (engine
+  `McvExpansionManagerBotModule` calls it the tick a deploy target is committed — :881 MCV, :847 conyard
+  relocation) now also creates an `ExpansionDemand` (new file, `OpenRA.Mods.CA/Traits/BotModules/ExpansionDemand.cs`)
+  alongside the retained `RequestedRefineries` record. ETA = `now + PathFinder distance /
+  MovementSpeedForCell + ExpansionDeployTicks` (25 — `TransformsInfo` has no duration field, documented
+  approximation), recomputed every 25 ticks. Defence pick = `DefenceStrength` (the AttackOrFleeFuzzy damage model:
+  `Damage * Burst / reload window * 100` per DamageWarhead, burst-delay term clamped [1,200]) over `DefenseTypes`
+  buildable on `DefenseQueues`, affordable against projected cash (`Earned` rate over a 500-tick window), ties on
+  cost then ordinal name; sticky once chosen.
+- **Queue injection:** `ChooseExpansionDemandItem` (BaseBuilderQueueManagerCA) sits just above ordinary wants in
+  `ChooseBuildingToBuild`; items queue when `etaTick - buildTime <= now` and ride the planner-want cost floor
+  (the reserve gate would push them past their own ETA). Ready items hold at `Queue[0]` via `return false` in the
+  Done branch — the REF-1 crawl-hold mechanic; the engine's one-head-per-queue rule is the hold cap. Defence hold
+  additionally gated by `DefenceHoldPermitted` (sole building producer exempts unless `etaTick - now <=
+  ExpansionHoldSlack` = 500; refinery never skipped).
+- **Deploy → place:** `ReplacedByActor` into a `ConstructionYardTypes` actor sets `Deployed`, nudges every QM's
+  `WaitTicks` to 0, and the normal placement path does the rest — refinery through the refinery-law claim biased
+  to the demand's own `RequestedRefineries` entry, defence through the §12.35 front/back advisor's Defence class
+  at the outpost, then the defence-placement advisor, then the classic annulus scan. Bound items skip the
+  classification roll entirely (no LocalRandom on the demand path).
+- **Expiry/unwind:** MCV dead/disposed/idle > `ExpansionDemandIdleTicks` (100) or claimed under a different
+  `BotLeasePurpose` → bound items cancel via `Order.CancelProduction` (full paid refund), except a held Ready
+  refinery the law can re-adopt (`NextRefineryClaim(null)` non-null) which stays queued as an ordinary refinery.
+  Non-yard replacements re-key `RequestedRefineries` + `ExpansionDemands` so conyard→MCV relocations keep their
+  demand. Deployed-and-unbound demands clean up at their expiry tick.
+- **Switch:** `BT_expansion_prebuild` registered in `tools/ai/increment_switches.yaml` — `UseExpansionPrebuild`
+  + `SwitchCondition: genericbot` on the shared `@generic` instance (F2 pattern; classic stays the reference).
+  Off = every demand branch dormant, queue flow bit-identical.
+- **Tests:** `BaseBuilderQueueEvalTest` +8 — due window boundary + late start, `int.MaxValue` never-due, travel
+  division + stalled/pathless sentinel, sole-producer slack edges, strength ordering, affordability-at-ETA, and
+  the cost-then-name tie-break. `DefenceStrength` itself is not unit-testable (needs resolved `ArmamentInfo`/
+  `AttackBaseInfo`); its formula mirrors `AttackOrFleeFuzzy` verbatim.
+
+Gates: `OpenRA.Mods.CA` build 0 errors (warnings all pre-existing class spam); `Cameo.Test` **1199/1199**;
+`audit_fog_honesty` PASS (82/266 — all reads are own-unit + public map data); `audit_multi_traitinfo` PASS
+(990 scanned, 0 dangerous); `audit_doc_claims` _clean_ (44/44); `ai_module_map --check` current;
+`audit_bot_wiring` no new findings (R1 unreachable 0, R5 never-loaded 0); Release build clean;
+**boot-gate PASS** (isolated support dir, menu reached, `PACKAGE_IN_WORKTREE=True`, 0 exceptions — required
+building `OpenRA.WindowsLauncher` with `-p:LauncherName=OpenRA` plus `OpenRA.Platforms.Default`, neither of which
+`CameoMod.sln` produces).
+
+Not in scope (Part A deferred/none): no engine changes; the `McvExpansion` lease purpose exists but nothing
+claims it yet, so the lease-loss lapse fires only on a foreign-purpose claim; `DefenceStrength` ignores
+non-damage warheads exactly as the fuzzy model does.
+
+# 2026-10-05 — Devin-T3Verify: PREDICTOR-PARITY P1 — effective-damage port + live per-actor stats
+
+*Devin.* Branch `devin/t3verify/predictor-parity`, worktree `C:\cameo-wt\parity`, rebased onto `inc/2026_10_05 @ fe4459c9c`:
+
+- C# port of the balance pipeline's effective-damage model under `BotModuleLogic/`:
+  `MiniYamlMirror` (resolved yaml surface without an engine `Ruleset`), `BotEffectiveDamage`
+  (formula/scatter/percentage/heaviness), `BotTargetModel` (census + armor weights),
+  `BotWeaponModel` (analyse + derived metrics + per-armour decomposition),
+  `BotWeaponModelTable` (`FromFiles` for tests, `Get(Ruleset)` lazy runtime seam).
+- Parity vs `docs/balance/derived` fixtures: 2619 rows / 1570 weapons / 0 failures;
+  charge_up 14 rows / 0 failures; scatter PDF + target-model invariants PASS
+  (`WeaponModelParityTest`). Fixes en route: `Armor`/`Armor@x` census scan (not
+  `Armable`), engagement-vs-census weight aggregation, **int32 intermediate overflow in
+  percentage runtime HP** (`afterUnits * 100` widened to long before the multiply).
+- Live per-actor path (lead ruling 2026-10-05): `BotUnitProfiles.Get(Actor, viewer, eff)`
+  reads `TraitsImplementing<Armament>()` filtered `!IsTraitDisabled` (multi-TraitInfo-sweep
+  convention), aggregated `IFirepowerModifier`/`IReloadModifier` per armament, current
+  `IHealth.HP`, first enabled `Armor.Info.Type`, `GetEnabledTargetTypes()`. Fog contract:
+  own actors in full, enemies only while `CanBeViewedByPlayer`; anything else → cached
+  type profile. `DamagePerTickAgainst` evaluates the model at the observed armour via
+  `KByArmor`/`PctByArmor`/`FoldedByArmor` → `EffectivePerShotAgainst(armor)`, then applies
+  power/cycle scales and the defender's `IDamageModifier` (damage-weighted per warhead)
+  when both sides are live. Legacy multi-damage-warheads sum via `BotWarheadTerm[]` under
+  the flag until W24; classic term stays main-warhead-only.
+- Switch `UseEffectiveDamageModel` (default off) on SquadManagerBotModuleCA,
+  SiegeEvaluatorBotModule, MasterAiBotModule (BotSituation), CombatVetoBotModule,
+  EngagementLogBotModule, UnitBuilderBotModuleCA; registered as `BM_live_combat_model`
+  in `tools/ai/increment_switches.yaml`. Production planning, remembered enemies/defences,
+  and MaxRange/CanTarget reads stay type-level.
+- 8 new `BotCombatPredictorTest` cases: firepower/veterancy, reload, granted armament,
+  damaged HP, flag bit-identity, armour-aware model row, unmodelled fallback, multi-warhead sum.
+
+Gates (on the pre-rebase base; re-run post-rebase):
+- build: 0 warnings / 0 errors (Release, win-x64)
+- Cameo tests: 945/945
+- parity: 2619 rows / 0 failures; charge_up 14/0; scatter PDF PASS; target invariants PASS
+- boot gate: PASS (isolated per-run support dir via `C:/cameo-wt/boot_isolated.ps1`)
+
+Not in P1 (later phases): NOVA situational target terms (P2), shields/meters (P3),
+closing time/range factors at engagement distance (P4).
+
+# 2026-10-05 — Devin-Architect: HOTSPOT-RESTACK — hotspot8+hotspot3 onto ars-stutter-gated
+
+*Devin-Architect.* `devin/architect/hotspot8-restack` + `devin/architect/hotspot3-restack` on
+`devin/ember/ars-stutter-gated@e81da54e7` (claimed task 01a10ac0 after the gated branch landed).
+
+- **Restack:** cherry-picked `d332aead8` (hotspot8, `PrepositionDecisionEvalCA`) clean onto the gated
+  branch; `7e51adeab` (hotspot3, `AttackForceEvalCA`) needed one devlog union — code applied clean.
+  Topology preserved: hotspot3 stacks on hotspot8, both sit on the gated ars-stutter, so merging no
+  longer drags in the ungated `e39670678` path differences.
+- **Review fix 1 — SelectChannel wired:** computed after the lazy cascade resolves, used as the
+  proceed gate (`channel == None` replaces the `threat == null && request == null` check — identical
+  semantics: request is non-null iff one of the three request channels produced it). Laziness
+  preserved — `SelectProtectionRequest` still runs only when `threat == null`.
+- **Review fix 2 — `RallyFor`:** dropped the unused `BotPredictedThreat? threat` param (it never
+  read it); call site + 3 test call sites updated.
+- **Review fix 3 — hotspot3 tests:** added the two missing cells — one-below-`MaxIdleUnits` (overflow
+  arm does not fire at 9/10) and `valueOnlyLaunch:false` + `squadValue>0` (waiver must not apply;
+  count gate falls back to `requiredSize`).
+- **Gates:** Release build 0 errors / 8 pre-existing engine lint warnings; Cameo suite 957/957;
+  `audit_fog_honesty.py` PASS (80 files / 263 sites); isolated `boot_isolated.ps1` BOOT_GATE=PASS
+  (package in worktree, 0 exceptions). Multi-TraitInfo: the sweep script does not exist on this
+  pre-inc-05 base; the restack diff adds zero `TraitOrDefault`/`TraitsImplementing`/
+  `FirstEnabledTraitOrDefault` lookups (verified by diff grep) — clean by construction.
+- **Open:** branches are on the gated ars-stutter base (pre-inc-05); lead merges gated first, then
+  this stack — or restacks again if gated rebases.
+
+# 2026-10-05 — Claude (lead): crash repair, INC 2026-10-05, ars-stutter held back
+
+## 2026-10-06 — Codex Sol: LEARN-P6 review fixes
+
+Three runtime findings fixed with an armed ground controller, independent safety and integer rules-derived predictor. Four regressions added; full NUnit 1190/1190 and increment Python 24/24 pass. Audits/isolated boot PASS. Independent review and coordinator same-seed order identity/churn remain pending. Details: `docs/design/SQUAD_DESIRE_EXECUTION.md`.
+
+
+*Claude.* `inc/2026_10_05` on `inc/2026_10_04g` @ 4cbc73cbf.
+
+- **Machine crash ~00:05 corrupted the shared repo.** Zero-filled: `refs/heads/inc/2026_10_05`,
+  `worktrees/inc-1004g/HEAD` and `ORIG_HEAD`; the commit-graph listed two never-flushed commits (the
+  half-done INC merge). Repaired: backups in `C:/cameo-wt/_git_repair_backup_20261005`, ref and HEAD
+  restored to 4cbc73cbf from the worktree reflog, commit-graph rebuilt. `fsck --connectivity-only`
+  is clean, `rev-list --objects --all` is clean, and every worktree index blob is present. Some
+  missing objects are referenced only by unreachable crash debris, which is harmless; no gc while
+  agents run.
+- **Merged:** multi-TraitInfo sweep (959819bc9, review APPROVE after fixes), NOVA hotspot #2 march
+  evals (d22e70839) and #4 BuildRegions evals (b1af0bb70), both reviewed bit-identical, and the
+  harvest ledger (9a7d084ea, DAWN ENDORSE).
+- **Integration fix:** the harvest ledger made `load_spec` return `needs` too, and
+  `ai_arch_audit.switch_spec()` crashed unpacking two values. Fixed in 91b92481e.
+- **Held back:** `devin/nova/ars-stutter@e39670678`. With `UseSquadOrderDedup` off it still drops
+  empty grouped orders, guards null `TargetActor`, and allocates per tick, so "Off = pre-change
+  stream" is false. In-game those are mostly no-ops (`AttackMove` returns on an invalid target),
+  but the order stream differs. EMBER is gating them (`devin/ember/ars-stutter-gated`).
+  hotspot #8/#3 wait for that branch, because they are stacked on ars-stutter.
+- **Not merged:** AR-9 follow-ups (`ar9-followups@191196e04`). The P1s are fixed, but the classic
+  path now never removes finished garrisoners, which gives an NRE at the stuck check (P0). Back
+  with T2Verify.
+- **Gates:** build 0 errors, 1143/1143, pytest 34, arch freshness, fog, mutation,
+  multi-TraitInfo audit, doc_claims 0 mismatches, isolated boot PASS
+  (`C:/cameo-wt/boot_isolated.ps1`).
+
+# 2026-10-04 — Devin-T2Verify: multi-TraitInfo sweep review fixes — enabled-trait aggregation
+
+*Devin.* Fixup on `devin/t2verify/multi-traitinfo-sweep` after independent review REQUEST CHANGES
+(P2×1, P3×3, P4×1) on `inc/2026_10_04g @ 4cbc73cbf`.
+
+- **P2 radar range (the real bug):** `RadarRangeCells` info-level Max was applied to live actors —
+  `ra1_allies_radardome`/the Yuri sensor carry mutually exclusive 20000/30000 ranges under
+  `!upgrade`/`upgrade`, so an un-upgraded dome was booked at ~29 cells instead of 19 (2.25× the
+  area → under-building). `EnabledRadarProviders` now takes Max over
+  `TraitsImplementing<RangedGpsProvider>().Where(!IsTraitDisabled)` via a new
+  `EnabledRadarRangeCells` seam; the `ActorInfo` overload stays as the deliberately OPTIMISTIC
+  prospective-placement estimate (commented).
+- **P3 docks:** refinery placement checks every `DockHost` offset (`@DOCK2`/`@DOCK3` exist on
+  nexus/hatchery/assimilator) — Any reachable; no-DockHost keeps the zero-offset fallback.
+- **P3 enabled preference:** `FirstOrDefault(!IsTraitDisabled) ?? FirstOrDefault()` (or `?? First()`
+  to preserve throw-on-absent) at TeleportCA, DetonateWeaponPowerCA, GrantExternalConditionPowerCA,
+  MadTankCA, ChargingSelfDestruct, AttachableTo; `Any(Carrier != null)` for the two Carryable
+  site checks (ordos_pythontank has AutoCarryable + Carryable) — extracted as
+  `AttachableTo.AnyCarrierAttached` for tests.
+- **P3 audit:** `CLASS_RE` now accepts `:`/base lists/`where` on following lines (~102 missed
+  declarations recovered); a real comment/string stripper stops `//` inside literals from eating
+  code; `.Single()`/`.SingleOrDefault()` on `TraitsImplementing`/`TraitInfos` chains scanned —
+  surfaced 3 latent `Single(name==Body)` sites (WithActivateAnimation, WithCargoHatchAnimation,
+  WithEnabledAnimation), converted to the enabled-first pattern. Devlog corrected: the audit is a
+  zero-tolerance gate, not a ratchet.
+- **P4:** `SelectionDecorations` documents that the engine base ctor still calls
+  `Trait<Interactable>()` first, so the subclass conversion is moot. Live-trait tests:
+  `EnabledRadarRangeCells` over fabricated disabled providers (`Uninitialized` + reflection),
+  `AnyCarrierAttached` over fabricated Carryables. The `Max==12` pin is reframed as the
+  optimistic prospective semantic.
+
+# 2026-10-04 — Devin-T2Verify (+Tier4 draft): multi-TraitInfo sweep — zero-tolerance gate + 16 hazard conversions
+
+*Devin-T2Verify, taking over Tier4's parked draft audit (`tools/audit/audit_multi_traitinfo*.py`
+in their `t4-multi` worktree).* Branch `devin/t2verify/multi-traitinfo-sweep` on
+`origin/inc/2026_10_04g` (rebased after the lead pushed INC-g).
+
+- The draft already modeled C# type hierarchy + yaml-resolved actor trait sets; the takeover fixed
+  three gaps: `actor_info_types` collected into a `set()` (deduped `Power@a`+`Power@b` — the exact
+  EMBER crash class), a dead O(types²) `impl_cache` precompute (hang), and `SCAN_ROOTS` pointing at
+  `engine/` instead of the mod-side CA/Cameo/Fransbot assemblies. Added the `X`/`XInfo` name-strip
+  fallback so `ConditionalTraitInfo : TraitInfo` (non-generic) descendants map to their produced
+  trait. Now a multiset-based zero-tolerance gate wired into `run_all.sh`.
+- Landscape: 982 single-instance lookup sites scanned, 224 multi-capable trait types, **16 real
+  hazards** converted to collection APIs with per-site aggregates — `Any` (PowerInfo power-plant,
+  AttackFollow target match iterates ALL instances), `Max` (RangedGpsProvider radar range),
+  `FirstOrDefault` (optional render/dock/attach lookups), `First` (required traits — preserves
+  throw-on-absent). Single-instance actors behave bit-identically.
+- Regression pins in `MultiTraitInfoSweepTest` (two fabricated `PowerInfo`/`RangedGpsProviderInfo`
+  instances via the `new ActorInfo(...)` trick; Fransbot ref added to the test csproj for the exact
+  `FransActorClass.IsPowerPlant` crash shape).
+
+Gates: build 0/0 all four assemblies; tests 1122/1122 (+2 new); fog PASS 82/266; mutation PASS
+169/0; arch-freshness PASS (regen folds INC-g's own merge drift); wiring 0 ERROR; doc_claims
+_clean_; `audit_multi_traitinfo` PASS 0 dangerous; boot gate re-run under the per-run-SupportDir
+method after the false-pass ruling below.
+# 2026-10-04 — NOVA: hotspot #2 — march-state decisions extraction (MarchEvalCA)
+
+*NOVA.* Branch `devin/nova/hotspot2-march` on `origin/inc/2026_10_04g@4cbc73cbf` (EMBER's
+merged lattice base). GroundUnitsAttackMoveStateCA Tick + IssueFormationOrders decisions ->
+pure static `MarchEvalCA` (the micro atoms stay in SquadMicroEvalCA): StuckCountersNext
+(4-arm truth table incl. the unchanged !stop&wait arm), StuckActionFor (makeWay precedence),
+RouteParams (lazy Func roll preserves the random stream), AdvanceWaypoint, LeaderWaitLatches/
+Holds, BucketFor (Frontline>Scout>AntiAir), AxisRemaining (long-math projection),
+RearStallNext + LeadForStall (StalledRearTicks=25 named), AxisUsable. 10 wire sites,
+laziness/short-circuit order preserved.
+
+Findings (fleet NOTE_2026-10-04_nova_hotspot2_tree): F1 makeWay -1 sentinel permanently
+re-routes stop&!wait to the kick counter for the march (P3); F4 makeWay epilogue pre-charges
+the kick counter to half-max (P4, escalation by design, now pinned).
+
+`MarchEvalTest`: 9 tests, full truth tables + lazy-draw counting. 1133/1133 suite on INC-g,
+build 0 errors, boot gate PASS.
+# 2026-10-04 — NOVA: hotspot #4 — BuildRegions merge-loop extraction (RegionMergeEval)
+
+*NOVA.* Branch `devin/nova/hotspot4-buildregions` on `origin/inc/2026_10_04g@4cbc73cbf`
+(different assembly — not stacked on the SquadManager chain). The merge loop's decisions ->
+pure static `RegionMergeEval`: `MergeContinues` (round bounds), `IsMergeEligible`
+(active/droppable/touching>=2/strict-min), `SmallestTouchingSize` (min or int.MaxValue
+sentinel), `SelectRoundDrops` (worst-first sort + greedy disjoint-claim batching). Early
+continues preserved so TouchedRegions work is bit-identical.
+
+Findings (fleet NOTE_2026-10-04_nova_hotspot4_tree): F1 stale 'one piece per round' comment
+vs the batch design (fixed same commit); F2 piece-count ceiling ~2x loose vs droppable count
+(harmless); F3 List.Sort tie order non-semantic but per-map deterministic. P2 sub-item: all
+four world.Actors scans verified fog-honest or legitimately static (bridges/own-only/belief).
+
+`RegionMergeEvalTest`: 6 tests, all boundaries pinned. 1130/1130 suite on INC-g, build 0
+errors, boot gate PASS.
+
+# 2026-10-04 — Claude (lead): INC-f doc re-pin, INC-g built and pushed, boot-gate false pass
+
+*Claude.* `inc/2026_10_04g` @ 3a661c8b0 (pushed with `inc/2026_10_04f`).
+
+- **INC-f** failed only `audit_doc_claims`: AR-12 moved AI_ARCHITECTURE to 76/103 for
+  `LoadCargoBotModuleAS` without the registry value, and RADAR-A left `RadarContactsBotModule`
+  uncounted. Re-pinned doc + `doc_claims.yaml` together to 77/104 (249b36be6).
+- **INC-g** = T2Verify's rebased stack (hs5/hs6 seams, BP-2 fold, F1, determinism tie-breaks,
+  AR-8, AR-1 nit) + AR-2, AR-4, test fixtures, PRIORS-CARRY fitter, coverage infra (**ci.yml job
+  held — maintainer ruling: no CI without explicit request**), takeover-smoke (MasterAiEval +
+  balance log field), multi-info-crash, AR-9 (independent review APPROVE; P3/P4 follow-ups with
+  T2Verify). Conflicts were devlog/HANDOFF (union) and generated arch docs (regenerated).
+- **Gates:** build 0 errors, 1124/1124, pytest 34, arch freshness, fog, direct mutation,
+  doc_claims 0 mismatches, 0 empty warheads, boot to menu with 0 exceptions.
+- **What didn't work:** the shared `_bootgate.ps1` pattern false-passed — it greps the
+  machine-wide `%APPDATA%\OpenRA\Logs\perf.log`, which held a 20-minute-old menu marker while
+  the launched game wrote nothing. Fix: run `enginein\OpenRA.exe` with a fresh
+  `Engine.SupportDir`, poll only that dir, and check that MATCH INFO's Package path is in the
+  worktree. Fleet told to re-verify today's boot passes.
+- **Maintainer rulings today:** bot fight model reads live per-actor stats (active weapons,
+  modifiers, current HP; fog-fair; type table only as fallback); accuracy/splash/range-adjusted
+  damage becomes the default pricing path.
+- **Open:** AR-S stutter finish + ON/OFF demo replays (Ember), PREDICTOR live-stats (T3Verify),
+  PRICING-DEFAULT (Tier4), multi-TraitInfo sweep + AR-9 follow-ups (T2Verify).
+
+# 2026-10-04 — Devin-T2Verify: AR-9 lease gaps — LoadGarrisoner + DeployBot claim-before-order (§19.6)
+
+*Devin.* Branch `devin/t2verify/ar9-lease-gaps` rebased onto `devin/t2verify/incg-stack` (INC-f +
+the seam/F1/determinism/AR-8 stack).
+
+Two real unit-ordering lease gaps closed; the rest of the AR-9 candidate list is exempt or already
+documented (DAWN's `LoadCargo`×3 port, `Minelayer`/`SendUnitToAttack` rulings).
+
+- `LoadGarrisonerBotModuleCA` (OpenRA.Mods.CA): `BotLeasePurpose.Garrison` claims on every walking
+  garrisoner — squad-draftable infantry could otherwise be drafted mid-march. Renewed per scan,
+  released when the unit boards/idles/goes stuck (Stop queued while the lease is still held — GC-1
+  order-before-release) or the module disables; candidates claimed by another owner are skipped and
+  capacity is accounted only after a successful claim. Coverage doc now shows `(lease)` on its
+  `AttackMove`/`EnterGarrison`/`Stop` rows and its unseparated co-runner pairs dropped from R4.
+- `DeployBotModule` (OpenRA.Mods.Cameo): claim-while-ordering via a `QueueLeased` seam — TryClaim
+  precedes every Move/deploy/undeploy order; heartbeat `Math.Max(200, scan*4)` renews through active
+  maneuvers and lapses when the group goes quiet, so squads can still draft idle deployables.
+  Denied claims drop the unit for re-filtering; `TraitDisabled` releases all.
+- Exemptions verified, not patched: `FransMcvExpansionManagerBotModule` (MCV/Conyard/landing-craft
+  subjects — ExcludeFromSquadsTypes + BuildingInfo + naval disjoint), `HarvesterBotModuleCA` and
+  FransHarvester (`HarvesterInfo` excluded from drafts).
+
+Classic is bit-identical: `BotUnitLeaseRegistry` is `genericbot`-only and every helper is a no-op
+when `BotUnitLeases.Of(player)` returns null.
+
+Gates: mod+test builds 0 warnings / 0 errors; Cameo tests 937/937 on master base (+4
+`LeaseAdoptionTest` — claim before order, deny drops, null-registry classic fallback, heartbeat
+floor); fog PASS; direct-mutation PASS; arch freshness PASS after regen; boot gate PASS. Re-based
+gates re-run at the AR-9-on-INC-g tip below.
+
+# 2026-10-04 — Devin-T2Verify: AR-8 — issuer identity Type@N; the order gate judges at issue time
+
+*Devin-T2Verify.* Branch `devin/t2verify/ar8-issuer-identity` (stacked on
+`devin/t2verify/ar1-grouped-gate`, rebased onto INC-f; current tip in the fleet STATUS file).
+DESIGN §19.6 AR-8 bullet added; fleet `NOTE_2026-10-04_devin-t2verify_ar8_issuer_identity.md`.
+- `BotIssuer` (Mods.CA — Fransbot sees it): `Type@ordinal` instanced issuer, `TypeOf` owner
+  normalization, `IssueAs` ambient provider scope.
+- ModularBot: queued items carry `(Order, Issuer, Emergency)`; the gate now judges at ISSUE time
+  (a deferred order faces the leases that hold when it acts); `ORDERGATE DROPPED` line per
+  full-queue drop; LinkedList front-requeue on action-budget stop (was: silent discard); `Preempt`
+  keeps lease owners type-named via `TypeOf`.
+- Gate: `Decide`/`NoteIssued` TypeOf-normalized — six SquadManager instances are ONE subsystem;
+  `EmergencyModules` accepts a type or an instance; crossed pairs record instanced names.
+- FransTransport: `IssueAs` on every emitting provider entry point — the caller-issuer refusal
+  class (E_engt_transport) closed; read-only service methods deliberately unscoped.
+
+Gates (on the seam base): build 0/0; tests 952/952 (+9 `BotIssuerTest`); fog / mutation /
+arch-freshness / wiring PASS; boot gate PASS. Stack-tip gates re-run on INC-f below.
+
+# 2026-10-04 — Devin-T2Verify: F4/F-CBL1 determinism — field-score tie-break + refinery-request pick
+
+*Devin-T2Verify.* Lead ruling on the hotspot NOTE's F4/F-CBL1: two unordered picks could diverge across
+runtimes in multiplayer.
+
+- `scores.Sort` on bare `Score` desc had no tie-break — `List.Sort` is unstable, so two exact-tie fields could rank
+  differently across runtimes. The new `CompareFieldScore` seam keeps score desc and falls to the lowest indice
+  index on an exact tie; `Replan` sorts through it.
+- `RequestedRefineries.Keys.First()` took whichever request `Dictionary` enumeration surfaced first — unspecified
+  order. The queue now routes through `FirstRequestedRefinery`/`FirstByOrder` (lowest ActorID), matching the Frans
+  twin's existing pick.
+- Both live on the extracted pure surfaces with branch-complete tests; behaviour changes only where entries
+  previously tied unordered.
+
+Gates (on the seam base): mod + test builds 0/0; 977/977 (six new); fog / direct-mutation / arch-freshness
+PASS; boot gate PASS. Stack-tip gates re-run on INC-f below.
+
+# 2026-10-04 — Devin-T2Verify: F1 — gate-B takes an indice only when its anchors are all served
+
+*Devin-T2Verify.* Lead ruling on the hotspot-6 NOTE's F1: gate B's indice-level refinery count could
+starve the second anchor of a multi-spreader single-indice field — "indice has our refinery" marked the
+whole indice taken, it left `scores`, and the crawl aim plus the MCV pipeline stopped driving at the field
+its second spreader still needed. That is a law violation of one refinery per ANCHOR.
+
+- The anchor model (spreaders -> anchors -> field ids -> flush map -> per-anchor assignment) is hoisted out of
+  `UpdateAnchorClaim` into `EnsureAnchorModel`, built once per re-plan tick before the scores loop.
+- `FieldTaken` gains two law terms: under `LawActive` an indice holding an unserved anchor is not "ours" — a
+  claimed-by-radius cell and the indice-level refinery count both yield — while an indice whose anchors are all
+  served takes as before.
+- Classic is bit-identical: `lawActive == false` collapses the new terms to the old `claimed || refineries > 0 ||
+  value <= 0` shape, and the anchor model still builds only when `FieldCoverage && DriveRefineries` are on.
+
+Gates (on the seam base): mod + test builds 0/0; 972/972 (new branch-coverage test for the law arms); fog /
+direct-mutation / arch-freshness PASS; boot gate PASS (menu reached, PID-scoped kill, no new exceptions).
+Stack-tip gates re-run on INC-f below.
+
+# 2026-10-04 — Devin-T2Verify: INC-g stack — hs5/hs6 seams + standalone BP-2 fold rebased onto INC-f
+
+*Devin.* The agreed merge order landed: BP-2 is in INC-f (`5e67eb6ec`), radar-contacts too
+(`a42a09e7c`), so the hs5×BP-2 stack rebases as seams + standalone fold — `7befd921c` (the BP-2
+cherry-pick) dropped. Pick chain on `inc/2026_10_04f @ 249b36be6`: hs6 + hs5 seams → fold →
+F1 anchor-granular gate → determinism tie-breaks → AR-8 + AR-1.
+
+The QueueManager conflict resolved as designed: hs5's `ClassifyPlacement` chain replaces BP-2's
+inline else-if ladder; the organic-crawl legality routes through INC-f's `RefineryLawCrawlRoll.LegalLink`
+(semantically identical to the picked inline GBA check, single-sourced). The fold routes BP-2's
+three duplicated decisions through `BaseBuilderQueueEvalCA` exactly as `4c363b6a8` did:
+radar priority → `PickOrPower`; `AdvisorLegalCells` → `PlacementCellAdmitted`; random-variant →
+`PicksRandomVariant` shared by `findPos` and `FrontBackVariant`.
+
+*Devin.* The fold content (unchanged by the rebase):
+
+* radar priority override → `PickOrPower` (radar when power-sufficient, else `power`; the debug
+  line names which arm returned — the same two messages as before);
+* `AdvisorLegalCells` → `PlacementCellAdmitted` with the requirement-distance clause `() => true`
+  (the advisor's front/back distance semantics cover that axis); short-circuit order and the
+  own-building spacing check preserved;
+* random-variant choice → new seam `PicksRandomVariant(hasVariants, hasFacings)`, shared by
+  `findPos` and `FrontBackVariant`: draw only when variants exist and no facings are configured;
+  facing-aimed placement still goes through `PickFacingVariant`. RNG draw order unchanged.
+
+No behavior change intended — same branches, same laziness, same draw order.
+
+Gates (at stack tip, see below): the full set re-run on INC-f — build, tests, fog, mutation,
+arch-freshness, wiring, doc-claims, boot.
+
+# 2026-10-04 — Devin-Tier4: RADAR-A — IBotRadarContacts provider + situation-log fields (no consumers)
+
+*Devin.* The bot-side radar screen: `RadarContactsBotModule` (genericbot-only via
+`genericbot && radar_contacts`; `GrantConditionOnBotOwner@radarcontacts` ships `Bots:` empty =
+inert on master; switch group `AI_radar_contacts` arms the genericbot tier list) publishes
+`IBotRadarContacts` — anonymous `BotRadarContact {Cell, Tick, VXPerKilotick, VYPerKilotick,
+Class, Owner}` records, exactly what a human writing down the radar dots could capture and
+never more (no type, no health, no ActorID). Enumeration is provider-proximity only:
+`world.Players` -> own/allied `RangedGpsWatcher.Providers` -> `CameoRangedGpsProvider.ActorsInRange`
+(the synced proximity list, exposed internally); **zero** global-actor-scan sites, so the
+fog-honesty manifest needed no new entry. Visibility is the renderer's own predicate —
+`CameoRangedGpsDotEffect.ShouldRenderDot` evaluated branch-for-branch against the bot player —
+so a contact exists iff the human would see the dot (incl. the RADAR-ALLY shared-disc semantics).
+Velocity is a per-ActorID internal track folded to cells x1000/tick; dead/disabled/powered-off
+providers contribute nothing because `TraitDisabled` clears the lists. Situation log gains
+`own.contacts {tick, providers, live:[{x,y,tick,vx_per_kilotick,vy_per_kilotick,class,owner}]}`
+(additive; absent when no module runs). NO consumers in phase A — no squad/scout/expansion/veto changes.
+
+*Evidence:* build 0 errors; `OpenRA.Mods.Cameo.Test` 851/851 (6 new: payload-shape contract via
+reflection, velocity math, track semantics); fog audit PASS (80 files, 263 sites, no new
+omniscience — new files register zero enumeration sites); `audit_bot_wiring` shows
+`RadarContactsBotModule gate='genericbot && radar_contacts'` under "dormant on master, armed by
+increment switch"; `audit_ai_personalities` PASS; `audit_merged_bot_modules` PASS; boot gate PASS;
+switch dry-run applies `AI_radar_contacts` -> the genericbot tier list. **Live check PASS** —
+switch armed transiently, `run_ai_match_batch` ra1_allies hard-vs-hard (support `_support_radara2`):
+`contacts` block present in all 442 situation records; at tick 23701 Multi0's radar dome produced
+6 live contacts (5 Infantry drifting -40/-40 cells/kt, 1 Vehicle fresh sighting at 0) all
+`owner: Multi1` — enemy-only, cell/tick/drift/class/owner exactly per contract. The arm was
+reverted after the run (switches live in frozen A/B trees only). First td_gdi attempt proved the
+negative path honestly: no provider built in a 14k-tick rush wipe => `providers: 0`, `live: []`.
+
+*Post-rebase (lead order 2026-10-04):* rebased onto `3ba05ede7` after INC-04e landed RADAR-ALLY; conflicts
+were append-only (devlog/HANDOFF top entries, ai.yaml grants — `@inmatchadapt` and `@radarcontacts` each
+kept their `Bots:`). Re-verified: build 0 errors, 939/939 tests, all four audits PASS, boot gate PASS.
+
+# 2026-10-04 — Devin-T3Verify: BP-IMPL phase 2 (front/back advisor wired into the shared queue manager)
+
+*Devin.* `devin/t3verify/bp-front-back-p2` in `C:/cameo-wt/bp` (base `3ba05ede7` — master after INC 2026-10-04e,
+which carries phase 1 + REF-1). The phase-2 integration from PREP_2026-10-04_devin-t3verify_bp-impl-phase2.md,
+now unblocked by the REF-1 merge:
+
+* `BaseBuilderQueueManagerCA` consults `IBotFrontBackAdvisor` (resolved once, `IsActive` re-checked per call —
+  `Enabled: false` ⇒ every seam inert, classic draw-for-draw). Classes claimed on the `Building`/`Fragile`
+  paths only: **Radar** (one per defended front + justified extra, strictly behind the front's defence line),
+  **Production** (ground/naval at the front; air-only exempt via the planner's classify), **Valuable**
+  (tech/superweapon/`CashTrickler` in the back). `FrontBackPick.Hold` → `return false` — produced building
+  stays queued, no failure budget (same construction as the REF-1 crawl hold); the advisor never sees
+  `BaseCrawl` placements, so its legal-cell filter can't starve the law's aimed crawls.
+* Radar want slots after the economy overrides (production, naval, silo) and before the fraction roll:
+  fires only when `WantedRadarProviders > owned+producing`; `PreferredRadarProvider` picks among the
+  limit-respecting producibles; power-short falls back to `power` like every other want.
+* `ScaledBaseMinimumExcessPower` gains the advisor's `RadarPowerMargin` (+60/provider in phase 1),
+  refreshed once per queue tick — a planned radar never blinds an owned one.
+* `IBotPlacementObserver.BuildingPlaced` extended `(FrontBackClass?, FrontBackPick?)` — sole implementer
+  `AiPlacementLogWriter` emits `class` on every placement while an advisor is active plus `fb_front`,
+  `fb_score`, `fb_new_coverage`, `fb_overlap`, `fb_setback` when the advisor claimed the cell.
+* `BotSituation` gains 4 record-only ints (`FrontBackFronts`, `FrontBackFrontsWithoutRadar`,
+  `FrontBackRadarUnionCells`, `FrontBackRadarApproachCells`); `AiSituationLogWriter` publishes them
+  always (all zeros without an advisor — the honest answer).
+* `ai.yaml` `FragileTypes`: the 23 radar-carrier names removed (101→78, resolved via `miniyaml.Ruleset`
+  in phase 1) so radars leave the sortMax fragile path and reach the advisor as `Radar`, not `Fragile`.
+
+Candidate set for `ChooseCell` = the full `FindTilesInAnnulus` filtered by the exact findPos legality
+trio (CanPlaceBuilding, IsCloseEnoughToBase, spacing-advisor gap) — the advisor ranks, it never widens
+legality. Variant keeps findPos's non-facing random draw (facing variants stay 0 for now).
+
+Gates: build 0 err / 8 pre-existing engine StyleCop warnings; Cameo tests **933/933**; boot gate PASS
+(menu reached, 0 new exceptions — an earlier launch-args miss produced `Unknown or invalid mod 'cameo'`,
+diagnosed + corrected, not a code fault). Audits + MP smoke: pending in this session.
+# 2026-10-04 — Devin-T3Verify: AR-10 tick phases — the resolved Player order is the contract (INC-N candidate)
+
+*Devin.* Branch `devin/t3verify/ar10-tick-phases` off `ar567-provider-precedence@4b00d9b99`. The arch review's
+sense→decide→act question, closed as documentation + audit rather than a reorder:
+
+- **Finding**: `ModularBot` ticks enabled `IBotTick` modules in resolved `Player` child order — merged across
+  every loaded rules file. `ContentPacks/*/ai.yaml` files load before `mods/cameo/ai/ai.yaml` and the first
+  pack merged wins position: `TiberianDawn/Shared`+`GDI` hoist `UnitBuilderBotModuleCA` (0), the six
+  `SquadManagerBotModuleCA` personalities (1–5, 9) and `BaseBuilderBotModuleCA` (8) ahead of every
+  sense/decide module — the act modules tick first. 48 consumer-before-provider read edges result; all are
+  one-tick-old snapshot reads, safe because every seam publishes on its own cadence (25–125 ticks) which
+  bounds the lag regardless. `ScaleTargets`/`BuildOrderKnobs` (pos 244/247) lag `MasterAi` (263) in the
+  *feedback* direction — the good side: all their consumers (the early builders) read them fresh.
+- **Audit**: `ai_arch_audit.py` gains **R8** — every loaded `IBotTick` type must declare its layer in
+  `LAYER_OF` (PERCEPTION+SITUATION=sense, STRATEGY=decide, EXECUTION+PRODUCTION=act, SUPPORT=infra,
+  TELEMETRY=observe; ERROR if missing), and `FRESH_EDGES` declares any seam requiring same-tick freshness
+  (empty today; ERROR if a declared edge ever reads stale). The coverage doc now prints the full per-instance
+  tick-order table (82 ticking instances) plus the 48 documented last-tick read edges and 10 call-time
+  provider reads — `--check` ratchets any yaml/include reorder. `docs/design/AI_ARCHITECTURE.md` gains
+  §10.5c with the contract and the reasoning (explicit reorder or snapshot stamps would annotate the same
+  staleness without removing it — cadence already bounds it).
+
+Gates: Release build 0/0; arch audit 0 ERROR, 33 WARN (R8 ok, 82 instances / 48 stale / 10 call-time / 0
+fresh declared); `ai_arch_audit --check` clean; `ai_module_map --check` clean; doc_claims 43/43;
+fog-honesty 80f/263s PASS; bot direct-mutation PASS; boot gate PASS. Test suite unchanged (no C#).
+
+# 2026-10-04 — Devin-T3Verify: AR-5/6/7 provider precedence — declared merges for every multi-provider bot seam (INC-N candidate)
+
+*Devin.* Branch `devin/t3verify/ar567-provider-precedence` from master `3ba05ede7`. The arch review's
+provider-precedence findings, closed end to end:
+
+- **AR-5** `IBotRegionThreatProvider` (MasterAi region memory + Scout danger marks — overlapping estimates of
+  one quantity): the four `Sum` consumers double-counted; `BeaconResponder` took `Max`. Declared merge = **max
+  over enabled providers**, implemented once as `BotRegionThreatMerge.MergedThreatAt` in the interface file;
+  all five consumers (`SquadManagerBotModuleCA:1742`, `SiegeEvaluatorBotModule:122`, `CombatVetoBotModule:129`,
+  `ExpansionPlannerBotModule:1529`, `BeaconResponderBotModule:149`) now call it.
+- **AR-7** `IBotMissionProvider` (MasterAi + GarrisonContest): `BestAffordableMission` iterated providers in
+  trait order — a provider's yaml position silently outranked every mission another published. Declared merge =
+  **one ordering across all enabled providers** (Priority desc, RequiredValue asc, publish order), the same
+  keys `BestRaidForSteering` already used; both pickers now filter `IsTraitEnabled()`. `MissionTaken` stays
+  `ReferenceEquals`-routed (order-irrelevant). `IBotMissionAssignmentProvider`: `BotSituation` now reads the
+  first non-null assignment among ENABLED providers — a disabled personality manager's stale assignment can
+  no longer shadow the live one. `IBotCaptureClaimSource`: verified already union-of-enabled (`BotSituation:1271`).
+- **AR-6** the site NOVA's held `seam-hygiene` does not cover: `FransUnitBuilderBotModule` resolves
+  `IBotEnemyCompositionProvider` by `FirstEnabledTraitOrDefault()` at use time (array cached at `Created`,
+  resolved per `BotTick`) — not at construction, where ConditionalTraits are still disabled (the flaw the lead
+  held `seam-hygiene` for). `FransCombatIntelBotModule.TryGetEnemyComposition` now honours the contract and
+  returns false while disabled.
+- **Audit**: `ai_arch_audit.py` gains **R7** — every seam with >1 loaded provider must declare its merge in
+  `PROVIDER_MERGES` (ERROR otherwise); the coverage doc's seam table carries a Merge column. `ai_module_map.py`
+  normalizes namespace-qualified base names, surfacing `FransCombatIntelBotModule` as a provider the scan had
+  been blind to. 13 multi-provider seams, all declared; both generated docs regenerated.
+
+Gates: Release build 0/0; tests 942/942 (new `ProviderMergeTest` ×9 + updated
+`BestAffordableMissionUsesTheDeclaredPriorityOrdering`); arch audit 0 ERROR (R1/R2 ok, R7 all declared);
+fog-honesty 80f/263s PASS; bot direct-mutation PASS; boot gate PASS.
+
+Residuals (noted for NOVA/lead): `IBotRegionRoles.RolesReady`, `IBotArmyStaging.PrimaryStagingCell` and
+`IBotZoneTopology` members don't self-guard while disabled — same bug class as `LastMissionAssignment`, left
+to the seam-hygiene pass. The `IFrans*` service lookups in `FransUnitBuilderBotModule.Created` keep their
+fail-fast `FirstOrDefault() ?? throw` — different seam family, fransbot-gated at spawn.
+# 2026-10-04 — EMBER AR-2: the personality-pin desync, fixed per spec (`devin/ember/ar2-personality-pin`)
+
+*Devin-Tier1.* Branch `devin/ember/ar2-personality-pin` from master `3ba05ede7`, worktree `ember-ar2`.
+P0 of the 2026-10-04b architecture review; live only with `AO_tier3_bandits` armed.
+
+**The bug.** `BotPersonalityController.TraitEnabled` is synced — it runs on every client at PlayerActor
+creation — and it read `PlanBanditBotModule.PinnedPersonalityArm`, which resolves lazily from
+`world.LocalRandom` (per-client, cosmetic RNG) plus a local learned file. Each client Thompson-sampled a
+different personality arm and granted a different `personality-*` condition → divergent bot behaviour.
+Same-shape hazard twice over: a pinned client also skipped `Info.Conditions.Random(SharedRandom)`, so the
+shared stream itself diverged.
+
+**The fix (per orders spec).** The pin travels only as a synced order:
+- `BotPersonalityController.TraitEnabled` now calls the pure seam `ChooseInitialCondition`, which draws
+  `SharedRandom` **exactly once, unconditionally**, then applies a harness `PinnedPersonalities` pin over
+  the draw. The bandit read (`BanditPin`) is gone — a synced context can no longer reach host-side state.
+- `MasterAiBotModule.BotTick` (host-only, where `SetBotPersonality` orders already originate) reads
+  `PinnedPersonalityArm` and issues `SetBotPersonality` via the pure seam `BanditPinOrder` — re-issued
+  once per sim second while the controller has not reflected it. While a bandit pin is in effect,
+  candidate personality switching stays silent — the same suppression the old `ResolveOrder` pin gave,
+  now provably sync-safe.
+- Harness `PinnedPersonalities` still wins over the draw and still blocks orders (synced yaml config).
+
+All other bandit readers were already host-only (`IBotTick` modules, log sinks) — audited every
+`PinnedPersonalityArm`/`PlanOverlayMilli`/`Snapshot` callsite. `Resolve()` stays lazy; first read is now
+the host's first BotTick rather than the `Player` ctor, so `EnemyFactionOf` takes its live-players path
+(the pre-`SetPlayers` lobby fallback remains for any earlier reader).
+
+**Tests (+5).** `ChooseInitialCondition`: exactly one `SharedRandom` call pinned or not (asserted on
+`MersenneTwister.TotalCount`, the engine's own sync counter), determinism across twin-seeded "clients",
+pin-overrides-draw, pin-miss-falls-back. `BanditPinOrder`: null arm, already-reflected, inside/outside
+the throttle window. The true 2-client proof is Tier4's AR-T3 armed-bandits sync smoke (assigned).
+Gates: builds 0/0, NUnit **938/938**.
+# 2026-10-04 — EMBER AR-4: PlugSpawner ownership check + scan cache (`devin/ember/ar4-plugspawner`)
+
+*Devin-Tier1.* Branch `devin/ember/ar4-plugspawner` from master `3ba05ede7`, worktree `ember-ar4`.
+P0 of the 2026-10-04b architecture review — two findings in `PlugSpawnerBotModuleCA`, both fixed
+per orders §2.5 ("an owner check (`targetActor.Owner == self.Owner`, the ordering player) + a
+scan cache. Plus a test.").
+
+**The bugs.** (1) The synced `IResolveOrder.ResolveOrder` for `PlacePlugAI` verified the target
+was alive and had an accepting `Pluggable` trait but never checked it belonged to the ordering
+player — any client could place an AI plug on anyone's building. (2) `BotTick` enumerated
+`world.Actors` once per plug type on every interval.
+
+**The fix.** `ResolveOrder`'s frame-end task now rejects the order when
+`!PlugTargetIsOwned(targetActor, self.Owner)` — the trait lives on the ordering player's
+PlayerActor, so `self.Owner` IS the ordering player; the check runs before cost/prereq/enable.
+`BotTick` collects the bot's live own actors once per interval via `CollectOwnedActors`
+(one `world.Actors` pass for all plug kinds) and filters per plug in memory. Both helpers are
+`internal static` pure seams. Placement eligibility (prereq gate, accepting pluggable, first
+match) unchanged.
+
+**Tests (+3, new `PlugSpawnerBotModuleTest`).** `PlugTargetIsOwned`: own/other-player/
+unowned/null targets. `CollectOwnedActors`: keeps only the ordering player's live in-world
+actors; enumerates the source exactly once regardless of plug-kind count. Fixtures use
+uninitialized `Player`/`Actor` with `UnsafeAccessor`-set `Owner`/`IsInWorld`/`Disposed`
+(the same trick as TeamBlackboardTest/ScoutBotModuleTest). Gates: builds 0/0, NUnit **936/936**.
+# 2026-10-04 — EMBER AR-T2: shared test fixtures (`devin/ember/test-fixtures`)
+
+*Devin-Tier1.* Branch `devin/ember/test-fixtures` from master `3ba05ede7`, worktree `ember-t2`. Test-only;
+no gameplay change, no switch.
+
+New `OpenRA.Mods.Cameo.Test/TestFixtures/` namespace:
+
+- `Uninitialized` — the identity-only engine-object helper (`Player()`, `Actor()`, `Of<T>()`), replacing eight
+  inline `RuntimeHelpers.GetUninitializedObject` sites.
+- `FakeZoneTopology` — merged from the two per-file doubles. `NearestSearchRadius = 0` gives
+  InfluenceLayers' exact-lookup semantics; the default ring search reproduces ZoneRegionMemory's.
+  `AddZone(cells, adjacent: int[] = null, resourceCells: 0)` covers both original call shapes (the two
+  originals had *different* signatures — adjacency params vs resourceCells-first — so positional `int`
+  args now fail to compile rather than silently reinterpret; the affected call sites use explicit
+  `new[] { ... }` / named args). `Recut()` clears the map for bridge-rebuild tests.
+- `StubMissionProvider` — one publish-only `IBotMissionProvider` (was identical in two files).
+- `StubUtilityAxes` — one configurable `IBotUtilityAxes` (was near-identical in two files).
+- `RecordingBot` — `IBot` recording queued orders, for the order-capture seam tests ahead
+  (AR-2 personality-pin / AR-4 PlugSpawner).
+
+Migrated 11 test files; `TestFixturesTest` pins the fixtures' own contracts (8 tests).
+Diff: +51/−181 in existing files — net −130 lines of duplication.
+
+Gates: solution build 0/0, test project build 0/0, NUnit **941/941** (933 + 8 fixture tests).
+Note: the worktree's robocopied `engine/bin` held a stale test DLL — the solution build does not include
+`OpenRA.Mods.Cameo.Test`; it must be built (and `vstest` run) explicitly.
+# 2026-10-04 — Devin-T3Verify: PRIORS-CARRY fitter (item 2) — version-aware evidence, Bayesian carry-over, family pooling
+
+*Devin-T3Verify.* Branch `devin/t3verify/priors-carry` from master `3ba05ede7`, implementing
+`SPEC_2026-10-04_claude_priors_carry_over` item 2 in `tools/ai/fit_engagement_priors.py`:
+
+- **Self-pricing logs**: a record's `balance.versus` map (Tier4's log field, `Tag|Armor` or `Tag__x__Armor`)
+  prices its own attribution and decay; a record without it is legacy-weighted at `LEGACY_RECORD_WEIGHT = 0.4`
+  (a bare `fingerprint` is provenance only, not self-pricing). Cells are staked on the record's own percents,
+  else the previous fit's `PriorPct@`, else today's resolved table — old logs are never silently re-priced.
+- **Bayesian carry-over**: `--prev` (default: the existing `--write` target) loads the previous posterior as a
+  pseudo-evidence anchor per cell, decayed `VERSION_EVIDENCE_DECAY (0.7)` per crossed `LedgerHash` boundary
+  (`FitVersion` counts them) times `staleness_decay` = `exp(-|ln(now/fitted)|*1000/350)` — the same decay the
+  consumer applies to the residual (`EngagementPriorsBotModule` on `devin/nova/priors-carry`, formula verified
+  identical). Dead delivery rows carry nothing; a missing armour row reads the Versus-default 100, same as the
+  consumer. Anchors re-base into the new `GlobalScaleMilli` so a uniform scale move never shifts them; the same
+  carry covers `DefenceState@`/`IntoDefences` (boundary decay only — pooled scalars stake no single cell prior).
+- **Hierarchical pooling**: cell → delivery-family (`Tag` minus its `_level`) → global; the family level pools
+  SIBLING cells only (excluding the cell itself, else single-cell families double-count their own evidence).
+- **`Evidence@` per cell** (effective N = real exp-side credit + decayed carried mass) plus
+  `DefenceStateEvidence@`, `IntoDefencesEvidence`, `FitVersion`, `StalenessTauMilli` — unknown keys are
+  consumer-safe (verified against NOVA's parser: exact-match/StartsWith on the other prefixes only).
+- `--no-carry` fits a fresh table (FitVersion 1). New `--prev`/`--write` default wiring in `main()`.
+
+Gates: `pytest tools/tests/test_fit_engagement_priors.py` 34/34 (26 existing + 8 new: legacy downweight,
+own-stats decay, posterior anchor, boundary+move decay ordering, dead-row carry, Evidence round-trip,
+carry yaml keys, family-pool borrow). Fitter run end-to-end on the real engagement log dir. Tools-only change —
+no engine content, no game yaml — boot-gate not applicable.
+
+---
+# 2026-10-04 — Devin-Tier1 (EMBER): AR-T1 coverage infrastructure — dotnet-coverage collector, per-file report + ratchet, CI job
+
+*Devin-Tier1 (EMBER).* Branch `devin/ember/coverage-infra` from master `3ba05ede7` (orders §2 AR-T1):
+- **Collector:** `dotnet-coverage` (Microsoft CLR profiler, `dotnet tool install -g dotnet-coverage`) is the only driver
+  that records hits in this `EngineRootPath` layout. `coverlet.collector`/`coverlet.msbuild`/`coverlet.console` all
+  enumerate 944 classes but report 0% — the vstest testhost never loads coverlet's instrumented copies ("Hits file
+  not found" for every module). The csproj carries no coverage package; collection is `coverage_report.py --collect`.
+- **`tools/ai/coverage_report.py`** (new): runs `dotnet-coverage collect -f cobertura` over the built test assembly
+  OR parses an existing XML; emits a per-file worst-first markdown table + `coverage_baseline.json` for the ratchet.
+  Scope: `OpenRA.Mods.CA/Traits/BotModules/**`, `OpenRA.Mods.Cameo/Traits/BotModules/**`, `Cameo/Traits/*Bot*.cs`.
+- **`audit_test_coverage.py`**: C# scan now covers `OpenRA.Mods.Cameo` AND `OpenRA.Mods.CA`; stale placeholder floors
+  re-measured at true values (T1 24→933, T2 177→3076, T3 224→496 after the CA scan joined — recorded debt, same
+  rule as 2026-08). New flag-gated **T4**: `--coverage-xml` ratchets every baselined file's line-rate (ε=0.1pt);
+  `parse_cobertura` accumulates per filename across `<class>` records (last-type-wins produced phantom 100→0%
+  regressions — pinned by a unit test).
+- **First honest numbers:** 106 bot-module files, **line 19.4%, branch 17.2%**; worst files are
+  `BotGlobalUnitBudget`/`BotCounterDemandController`/`BotInsurance`/`PlugSpawnerBotModuleCA` at 0%.
+  Report: `docs/audit/coverage_botmodules.md`; baseline: `tools/tests/coverage_baseline.json`.
+- **CI:** additive `cameo-tests` job in `.github/workflows/ci.yml` (windows-2022, `make.ps1 all` → `dotnet test`
+  → coverage ratchet). Stock upstream jobs untouched. Note: org CI is disabled in GitHub — the job runs when enabled.
+- Tests: `tools/tests/test_coverage_report.py` (13 tests: scope, multi-class accumulation, parser agreement,
+  ratchet edges). Verified: bare audit exit 0 (run_all compat), `--coverage-xml` self-check 0 regressions/106 baselined.
+
+# 2026-10-04 — Devin-Tier4: PRIORS-CARRY — engagement records carry the balance that produced them
+
+*Devin.* `devin/tier4/takeover-smoke` in `C:/cameo-wt/t4-smoke` (stacked on AR-T3 tip
+`e2e13e250`, base `3ba05ede7`). Spec `SPEC_2026-10-04_claude_priors_carry_over.md`
+(Tier4 lane: engagement-log field; T3Verify: fitter; NOVA: consumer; lead: integration).
+The tier-1 fitter re-priced old logs under *today's* Versus and got cells wrong whenever
+balance moved — every engagement record now carries an additive `balance` block:
+
+```json
+"balance": {"fingerprint": "sha256:…", "versus": {"Bullet_Light|Flak": 163, …}}
+```
+
+- **Fingerprint** = sha256 over mod id + mod version + map uid + sha256 of every
+  manifest weapon/rules file — identifies the exact rules revision that produced
+  the record (map uid is deliberately included: map yaml can overlay weapons).
+- **`versus`** = the resolved Versus percent for every `delivery-tag|armour-class`
+  cell the engagement touched (seen start/end compositions only — never the truth
+  scan). One-sided engagements (lone scout dies, no enemy ever tracked) emit
+  **fingerprint-only** — the fitter's declared legacy-weight (0.4) path, still
+  provenance-bearing. `versus` is omitted rather than emitted `{}` (ambiguous).
+- **Tag identity has exact ledger parity:** runtime `WeaponInfo` discards the
+  `Warhead@<suffix>` key, so tags are recovered from the resolved weapon yaml
+  (`MiniYaml.Load` of manifest weapons + `world.Map.WeaponDefinitions`), matching
+  `extract_stats.py` `damage_warheads[].tag` — parity-checked **1568/1568 weapons,
+  0 mismatch**. Main-warhead pick = max positive damage restricted to the ledger's
+  five damage types (`AffectsIntegrityWarhead` excluded, as the extractor does).
+- New `EngagementBalance` helpers in `EngagementMath.cs` (`Fingerprint`,
+  `WarheadTable`, `WarheadTag`, `AddCells`); ruleset-scoped `BalanceStatsCache`
+  inside `EngagementLogBotModule` (record-only, unsynced — zero sim cost share).
+- **T3Verify contract:** `r["balance"]["versus"]["<Tag>|<Armor>"]` (also accepts
+  `__x__`); fingerprint-only → legacy weight. Peer review of their fitter: contract
+  compatible; minor notes filed (`boundary=False` on missing prev `LedgerHash`
+  undocumented; parsed `prev.staleness_tau_milli` unused).
+
+**Live evidence** (`tools/ai/run_ai_match_batch.py --repeats 1 --time-limit 1`, 3 clean
+matches, `elcheck` support dir): 1128 log lines → **618/618 engagement records carry
+`balance`** — 295 with touched-cell versus (254 distinct `Tag|Armor` keys, 0 malformed,
+resolved values e.g. `Bullet_Heavy|None=200`, `1Dam|*=100`), 323 fingerprint-only
+one-sided records. Three distinct fingerprints = one per batch map variant, as designed.
+Backward compat: `engagement_report.py` and the on-branch `fit_engagement_priors.py`
+parse the new records unchanged (fitter reports "50 empty-side", matching the class).
+
+Gates: build 0 err/0 warn; focused fixture **17/17**; full suite **971/971** (967 + 4
+new balance tests); fog audit PASS (263 sites, 0 new — ruleset yaml is not actor state);
+wiring / personalities / merged / direct-mutation / arch audits PASS (R3–R6
+informational); `ai_module_map --check` current; **boot gate PASS** (menu reached,
+0 new exceptions).
+
+Files: `EngagementMath.cs` (+83), `EngagementLogBotModule.cs` (+164),
+`EngagementMathTest.cs` (+103) — all additive; no yaml, no balance numbers touched.
+
+# 2026-10-04 — Devin-Tier4: AR-T3 — batch --round-trip, AR-2 MP desync regression RED on master, hotspot #1 extraction, module-map consumer fix
+
+*Devin.* `devin/tier4/takeover-smoke` in `C:/cameo-wt/t4-smoke` (base `3ba05ede7`).
+Four pieces of the AR-T3 bundle:
+
+- **`run_ai_match_batch --round-trip`:** new flag runs `round_trip_check.py` on the
+  batch's support dir after `batch_summary.json` is written, stores
+  `summary["round_trip"] = {"exit": rc}`, rewrites the summary and fails the batch
+  on a nonzero checker exit. Extracted into `run_round_trip()` for testability;
+  3 tests in `tools/tests/test_ai_batch_harness.py` (36/36 file PASS).
+- **AR-2 MP regression (`desync` scenario, RED on master as required):** two real
+  clients on opposite teams, `hard` generic bots each side, `AO_tier3_bandits`
+  armed transiently (byte snapshot → apply → finally-restore, launch inside the
+  try). Judge asserts 0 sync reports AND identical plan-bandit pins per bot
+  across clients — pin equality is the honest observable: `Player.cs` activates
+  bot brains host-side only, `Sync.RunUnsynced` wraps bot ticks, and granted
+  conditions carry no `[VerifySync]` state, so a divergent pin can never reach
+  the order hash today (a sync-report-only assert is green-by-construction).
+  **Live run on master: FAIL — Multi2 `steamroller`/`surge` (c0) vs
+  `guerrilla`/`press` (c1); Multi3 `steamroller`/`surge` (c0) vs
+  `turtle`/`balanced` (c1); 0 sync reports, 0 exceptions** — evidence
+  `C:/cameo-wt/_support_t4_smoke/scenario_desync/RESULT.json`. GREEN once the
+  pin moves to shared deterministic random state (AR-2 fix lane). Harness
+  hardening: clients are killed inside `actions` before `finish()` collects, so
+  buffered debug.log pin lines flush to disk before the judge reads them
+  (a live client's log buffer hid c1's pins in an earlier run).
+- **Hotspot #1 `MasterAiBotModule.Rebuild`:** pure decision branches extracted to
+  new `MasterAiEval` (12 functions — urgency latch, coalition-target bias,
+  nemesis override, emergency personality transition, held demands + demand-order
+  gate, region-intel counts, ledger/window deltas, per-game-minute rate, defence
+  fraction + expansion appetite hints, defence request). Rebuild keeps gathering,
+  publication and orders; a REBUILD DECISION TREE comment now documents
+  inputs/outputs/branch ownership and the manifested omniscient read. New
+  `OpenRA.Mods.Cameo.Test/MasterAiEvalTest.cs` — 34 NUnit tests covering every
+  branch incl. boundary/short-circuit/sentinel paths; bit-identical behaviour
+  (no World/Actor/trait reads in the eval file).
+- **`ai_module_map.py` consumer fix (false "no consumer" rows):** two bugs —
+  (a) class body slicing stopped at the next `class` keyword, so a nested helper
+  (`EngineerBotModule`'s `EscortPlan`, `SquadManagerBotModuleCA`'s
+  `MissionAttempt`, `CombatVetoBotModule`'s `CachedVerdict`) swallowed the rest
+  of the module's lookups; spans now close at the next class at the same-or-
+  shallower brace depth. (b) Lookups in non-module classes were invisible;
+  outermost-enclosing-class attribution adds helper consumers
+  (`BaseBuilderQueueManagerCA`, squad states, `BotMissionLog`, `TeamBlackboard`,
+  `BotUnitLeases` statics) shown with `+` in the map. **C2 false positives
+  12→1** — only the genuine phase-A `IBotFrontBackAdvisor` row remains.
+  `audit_bot_wiring.py`/`ai_arch_audit.py` updated for the widened signature.
+
+Gates: build 0 err/0 warn; **967/967 tests** (933 + 34 new); fog audit PASS
+(263 manifested sites, 0 new — eval file registers none); bot-wiring,
+personalities, merged-modules, direct-mutation, ai_arch audits PASS (R3–R6
+informational only); boot gate PASS. Desync stays out of `all` — it is red until
+the AR-2 fix lands. Also surfaced (not this lane): latent
+`TypeDictionary contains multiple instances of PowerInfo` crash in
+`ExpansionPlannerBotModule.IsPowerPlant` on `_ra_doubles` — deterministic on
+that map for a dual-Power-trait actor; crashed two desync runs, filed to lead.
+
+# 2026-10-04 — Devin-Tier4: TAKEOVER-SMOKE (real multi-client takeover smoke, all six scenarios PASS)
+
+*Devin.* `devin/tier4/takeover-smoke` @ `da8595dac` in `C:/cameo-wt/t4-smoke` (base
+`devin/t3verify/bot-takeover@9a0348101`, pre-rev-2). The multi-client smoke T3Verify's
+phase 1 could not run: real `OpenRA.Server.exe` + real `Launch.Connect` clients in
+isolated support dirs, driven by two DEV-ONLY double-gated hooks (`CameoDevArgs` argv
+gate + per-process plan file; `CameoLobbyAutopilot` ServerTrait drives the lobby via
+`Server.InterpretCommand`; `CameoAutoOrders` world trait issues timed orders incl. the
+pause-menu Surrender shape). Harness `tools/ai/takeover_smoke.py` (stale-proc kill,
+3-driver cap via tasklist, uid-in-debug.log start detection, record/block/sync-report/
+exception collection, per-scenario RESULT.json). **Bug found + fixed on this branch:**
+`AiMatchLogWriter.AllBotsResolved` vacuously true on an empty logged set → the
+single-shot record burned at world load → takeovers in all-human matches could never
+be recorded (the boss review's blocker, corroborated live). **Results:** inert PASS
+(both gates hold) · c PASS (solo surrender → defeat) · d PASS (disconnect →
+`controller_client:0`) · a PASS (2v2 kill → disconnect) · b PASS (2v2 surrender) ·
+e PASS (admin-kill → re-election `controller_client:1` on the survivor). 0 sync
+reports, 0 exceptions everywhere. Evidence `C:/cameo-wt/_support_t4_smoke/scenario_*`;
+fleet `NOTE_2026-10-04_devin-tier4_takeover-smoke.md` +
+`STATUS_2026-10-04_devin-tier4_takeover-smoke.md`. Engine findings: mid-game disconnect
+never reassigns `BotControllerClientIndex` (Server.cs:1252, WaitingPlayers only) →
+orphaned lobby bots go inert (scenario e is a 1v1 for that reason); `EnableSingleplayer`
+disables the tracker; `easiest` bots cannot end a match, `brutal` resolves a 2v2 in ~4 min.
+Open vs rev-2 (`ae7075cd8`): exactly-one-record assertion + scenario f (spectator-admin
+server) per T3Verify; maintainer's passive-takeover observation matches the boss's
+omitted-service-condition finding — harness can repro on the corrected checkpoint.
+# 2026-10-04 — EMBER: HARVEST_LEDGER (H-0) + doc staleness + H-9 upstream refresh
+
+*EMBER (Devin).* Branch `devin/ember/harvest-ledger` off master `3ba05ede7` — docs only:
+- `docs/design/HARVEST_LEDGER.md` (new): one row per upstream bot file across vanilla, CA, CN,
+  Fransbot, SP, GA, HV, DR, OP2 + surveyed-empty repos, each with a disposition
+  (`HARVESTED`/`MERGED`/`IDEA`/`REJECTED`/`OPEN`/`NONE`), where it landed, or why it was refused.
+  Encodes the harvest rule: a port merges only when it names the decision it owns and the
+  consumer/seam it feeds. Cheat-class traits (cash/handicap multipliers) are REJECTED by design law.
+- `AI_MASTER_PLAN.md` §1 item 2: CN "1 of ~16" → "~8 of ~16" (CombatAnalysis + TacticalMap ports,
+  Deploy + BridgeRepair CN3 items, 4 idea re-implementations).
+- `AI_SYNTHESIS.md`: §7 callout annotated as a dated snapshot; source table rows updated
+  (CN "not yet" → ~8 derived; Fransbot "not yet, V1.29.19-RC" → vendored, 8 services arm via
+  `inc3_frans_services`, upstream `main` = V1.29.31+); §4.1 newest-code line corrected.
+- `WORKFLOW.md` upstream-status line (H-9 weekly refresh): Fransbot 33 new commits
+  (v1.29.55-4 — new VD-1 "Victory Drive" series, harvest-review candidate), GA 58, CN 0, RV 0;
+  openra ≈+17 (baseline sha absent, re-pin on next survey regen); absent clones noted.
+
+# 2026-10-05 — EMBER: AR-S dedup OFF-path bit-identity fix (devin/ember/ars-stutter-gated)
+
+*EMBER, on top of NOVA `e39670678`.* Independent review found `BK_squad_order_dedup` was NOT
+bit-identical with the switch off: `QueueDeduped` skipped emitting when the member list was
+empty where the pre-change code queued the grouped order regardless; new
+`owner.TargetActor != null` guards dropped `AttackMove` packets the old code issued as
+`Target.FromActor(null) = Target.Invalid`; and the unarmed path paid a `Where().ToArray()`
+plus `OrderChanged` walk every call. Inert packets in-game, but the order stream differed.
+
+- `QueueDeduped` now early-outs unarmed through `SquadOrderDedup.EmitSet`: the grouped order
+  is issued unconditionally over the full member array — empty included — with the site's
+  original `queued` flag (new param; `ReturnToBase` rearm keeps `queued: true`, which
+  serializes into packet flags).
+- Every `OrderChanged`-gated call site is wrapped `!UseSquadOrderDedup || OrderChanged(...)`:
+  unarmed short-circuits before key construction, `CellContaining`, or memory access — no
+  extra allocation, no filtering. Armed path (guards + dedup) unchanged.
+- `SquadOrderKey.ForActor(null)` now yields the zero key instead of throwing, so the unarmed
+  call site can evaluate it for a null `TargetActor` exactly as the old code built
+  `Target.Invalid` orders.
+- `QueueRallyOrder` (protection) routes through the same `EmitSet`: unarmed queues the full
+  squad unconditionally; the armed latch/monotone-mode logic is untouched.
+- New tests in `SquadOrderDedupTest` record the emitted stream with the switch off for an
+  empty group and a null target and assert it matches the pre-change packets.
+
+# 2026-10-04 — NOVA: AR-S residual — squad order dedup + flee-episode home latch (BK_squad_order_dedup)
+
+*NOVA.* Branch `devin/nova/ars-stutter` from master `3ba05ede7`, off EMBER's march-lattice
+hysteresis lane (local-only `devin/ember/formation-hysteresis@0895768eb`, t3verify-approved).
+The residual from EMBER's post-fold trace — protection rally/lure flap, quiet-defender
+Flee->Idle->Attack random-Move cycles, guerrilla/navy grouped per-tick re-issues — plus the
+class their alternation metric could not see: **identical-order re-issue spam**.
+
+- `SquadOrderDedup` (pure rule + `SquadOrderKey`, all branches pinned by `SquadOrderDedupTest`):
+  an order to a member queues only when (order, quantized target) actually changed. Mobile
+  orders re-issue on idle (a real retry); terminal orders (Stop/Scatter/ReturnToBase) never
+  repeat to the same effect. Memory lives on `SquadCA` so it survives state transitions and
+  is pruned of departed members.
+- `QueueDeduped` on `StateBaseCA`: grouped orders carry only members whose key changed —
+  empty groups queue nothing.
+- Protection rally/lure `rallyMode` latch (mode 1 hold < mode 2 lure, monotonic, cleared back
+  inside the rally radius); armed quiet defenders hold post instead of re-rolling.
+- `Retreat` flee-episode home latch (`SquadCA.FleeHomeCell`, cleared when the whole squad is
+  idle): `HomeLocation` -> `RandomBuildingLocation` re-rolled a fresh building every pass,
+  each re-roll cancelling the in-flight leg — the dominant Move spam.
+- Maintainer clarification folded in: per-tick orders are fine while units progress; the
+  defect is path-reset stop-start. Dedup suppresses only identical in-flight re-issues.
+
+Trace (td_gdi hard mirror, `order_trace.py` + issue-rate extension): alternations 459 -> 99
+(-78%), Move orders 1553 -> 484 (-69%), order-spam units 23 -> 11, alternating stutter units
+37 -> 16. Residual flagged units are queued waypoint chains (air strike routes, `queued:true`
+route legs — benign) and support-follow parent drift; the per-frame Move emitters outside the
+squad lattice (harvester retreat, deploy/scout/engineer/beacon modules) are a new fleet
+finding — flagged for the AR table.
+
+Gates: build 0 errors; Cameo tests 940/940; boot gate PASS (menu, zero new exceptions);
+unarmed path bit-identical by construction (`armed` short-circuits before memory reads);
+ai.yaml mounts all `false` — `BK_squad_order_dedup` in `increment_switches.yaml` arms it.
+INC-ready.
+
 # 2026-10-04 — Claude (lead): INC 2026-10-04e lands — INC-d completed (P0 raid gate), LC5 admission claims, checker v2, E2 test baseline
 
 *Claude.* Branch `inc/2026_10_04e` from master `1fbd239ff`:
@@ -31,6 +1783,66 @@ Gates:
 
 Tooling gap: the raid gate uses the shared `%APPDATA%` support dir when the tree has no `engine/Support`. It should take an
 isolated dir like `boot_gate.ps1` does.
+
+# 2026-10-04 — Devin-EMBER: AR-S formation hysteresis + transition-only squad orders (user-reported army stutter)
+
+*Devin.* `devin/ember/formation-hysteresis` on `3ba05ede7`. Maintainer report: armies march in stutter-steps —
+short moves, stop, restart, unnatural. Root cause in `GroundUnitsAttackMoveStateCA`: every squad tick issued a
+fresh `Stop` to each `holdFront` member and a fresh `AttackMove` to every `pushFront`/anti-air/scout/trailing
+member AND to the leader — each re-issue cancelled the unit's active `MoveTo`, so the whole army repathed every
+tick (visible stop-start). The hold/push split itself was a hard cut at `FormationMaxLeadCells`, so a member
+hovering at the threshold flipped Stop↔AttackMove tick over tick. Fix, per the coordinator's AR-S rulings
+(gated, classic bit-identical):
+- **Gate:** `SquadManagerBotModuleCAInfo.UseFormationHysteresis` (default false) + switch group
+  `BJ_squad_hysteresis` in `tools/ai/increment_switches.yaml` (arms all instances; `SquadManagerBotModuleCA@classic`
+  is in the file's `skip` list, so classic keeps the verbatim old order stream — bit-identical by construction).
+- **Dead band (armed):** new pure static `SquadMicroEvalCA.ClassifyHolding(over, lead, hysteresis, wasHolding)` —
+  enters Hold above `lead + hysteresis`, leaves at/below `lead`, keeps the previous class inside the band.
+  `FormationHoldHysteresisCells` (default 2; 0 = old hard cut). 100% branch coverage in `FormationHysteresisTest`.
+- **Transition-only orders (armed):** per-member `formationOrders` memory of `(FormationClass, quantized CPos)` —
+  Push(routeCell) / Hold(CPos.Zero) / AntiAir(centroidCell) / Scout(routeCell) / Trail(trailCell). An order is
+  queued only when class or quantized target actually changed (unarmed = every tick, the old stream); stale
+  entries for members that left the squad are dropped; `Activate` clears the memory.
+- **Latched leader wait (armed):** the leader stops once when a member trails beyond `occupiedArea*5` and
+  releases only when everyone is back within `occupiedArea*3`; the leader's `AttackMove` is re-issued only when
+  the leader actor or the route cell changes. Unarmed = the old per-tick `Stop`/`AttackMove` if/else.
+- **Pull-back fold (armed):** the before-trace showed the dominant flip was `AttackMove`↔`Move`, not
+  `Stop`↔`AttackMove` — the formation push re-issued `AttackMove` while the MI pull-back issued `Move` to the
+  trail line in the same tick, so a member under `SquadMicroRetreatPct` oscillated every squad tick. Armed now
+  classifies wounded frontline/trailing members (and the stalled-under-fire rear) as `Retreat`/`RetreatRear`
+  inside the same dedup lattice — a pulled member is never pushed in the same tick, the `Move` re-issues only
+  when the quantized rally cell changes, and the per-order micro budget is consumed only on a real transition.
+  Unarmed runs the verbatim old micro block after the verbatim old stream.
+- Deterministic/synced: pure functions of synced positions and squad membership only.
+
+**Order-rate evidence (coordinator requirement):** `tools/ai/order_trace.py` (new, this branch) parses the
+`.orarep` order stream and counts per-unit order-string alternations in
+a 25-tick window (1 sim-second; ≥2/sec = stutter per the AR-S definition). One hard-vs-hard duel each arm,
+`td_gdi` mirror, `run_ai_match_batch.py --repeats 1`, 0 other game drivers:
+- before (unarmed, = the classic stream): 311 units ordered, 548 alternations, **90 stutter units** (peak
+  3 alt/s at ~17-tick squad cadence; `AttackMove`→`Move` 273 + `Move`→`AttackMove` 233 dominated).
+- after (`BJ_squad_hysteresis` armed): 283 units, 298 alternations, **28 stutter units** — **−69% stutter
+  units, −46% alternations** (−39% per-tick normalised). Residual `AttackMove`↔`Move` churn sits in the
+  `unitsHurryUp` catch-up path (~33-tick per-tick leader-cell reissue) and non-`Rush` squad types — the
+  explicitly-unassigned scope.
+- Replays: `_ars_trace/before|after` support dirs (fingerprint `472471185b2d` / `a4d4f3456e94`).
+
+Known limits: the non-formation catch-up path (`unitsHurryUp`, guerrilla/harass + non-`Rush` squads) still
+re-issues `AttackMove` to the leader's cell every tick — left unchanged (scope). Armed held members whose
+`AutoTarget` engages now keep firing instead of being re-`Stop`ped each tick (intended; hold position kept).
+
+Gates: build 0 warnings 0 errors on `3ba05ede7`; `OpenRA.Mods.Cameo.Test` 937/937 incl.
+`FormationHysteresisTest` (4 cases = 100% `ClassifyHolding` branch coverage); boot gate PASS on the final code —
+`MenuPostProcessEffect.PostWorldLoaded`, no new exceptions (`exception-2026-10-04T162211Z` in the scratch
+support dir was a bad-launch-args abort, not a game crash).
+
+Flag for the coordinator (pre-existing, unrelated): during the boot window a match on "A Nuclear Winter" crashed
+with `TypeDictionary contains multiple instances of PowerInfo` at `ExpansionPlannerBotModule.IsPowerPlant`
+(`exception-2026-10-04T145446Z`) — an actor carrying two `Power` traits; YAML/data issue, not this change.
+
+Handoff: **INC-ready: `devin/ember/formation-hysteresis` — switch: `BJ_squad_hysteresis` (default OFF; classic
+bit-identical).** Coordinator merges and runs the A/B per WORKFLOW; fleet note
+`STATUS_2026-10-04_ember_formation_hysteresis.md`.
 
 # 2026-10-04 — Claude (lead): INC 2026-10-04 lands — refinery law v2, bot takeover, BP phase 1, RADAR-ALLY, mpspawn parser
 
@@ -69,6 +1881,14 @@ Verified P0s:
 - AR-1: grouped orders bypass the lease gate in `ModularBot.PassesGate`.
 - AR-2: the personality pin is read in synced `TraitEnabled` from host-only state.
 - AR-4: PlugSpawner order without an owner check.
+# 2026-10-04 — Devin-T3Verify: TAKEOVER nit — one AutoTarget scan per refresh (AR-P2)
+
+*Devin.* `devin/t3verify/takeover-scan-nit` off `devin/t3verify/bot-takeover@f475f1881`. The lead's
+AR-P2 nit: `ApplyBotStances` ran one `world.ActorsHavingTrait<AutoTarget>()` pass **per taken-over
+seat** on every refresh — N world scans per 25-tick pass. Now a single scan filters by
+`records.ContainsKey(a.Owner)` — O(actors) once regardless of seat count, same mutation set, same
+determinism (actor enumeration order unchanged, `records` added the seat before the takeover call).
+Gates: build 0/0; takeover suite 22/22; boot gate PASS.
 
 # 2026-10-04 — Devin-T3Verify: TAKEOVER bot-stance fix + tactical-map lazy build (user-reported passivity)
 
@@ -413,6 +2233,85 @@ Flagged for owners (no test-side repin without a ruling):
   all 8 CannonAP endpoints + forgotten-cannonap; freedom-elite gate unsatisfiable after the
   coupling-regen revert (fixture canonical 45 vs live 44); GhostSniperLockdown/VonSniperLockdown
   fixture-completeness gaps; `test_firepower_consumers` unresolved-armament divergence.
+# 2026-10-04 (later) — NOVA PRIORS-CARRY: decayed carry-over replaces hard staleness
+
+*Devin (nova), `devin/nova/priors-carry` off `devin/nova/t2-port-v2`.* Maintainer spec:
+a rebalance must not zero the learned residual table. `FactorPermille` now decays a
+moved cell by `exp(-|ln(now/fitted)| / StalenessTauMilli)` (default 350‰ of the
+exponent — a 10% Versus move keeps ~76% of the residual, a 2x redesign ~14%) instead
+of hard-invalidating it. Only a delivery whose Versus row resolves nowhere while the
+warhead map IS loaded — the new `BotUnitProfiles.VersusTableLoaded` discriminator —
+or a non-positive prior still returns neutral. Unverifiable (no map: tests, headless
+tools) reads as the Versus-default 100, matching the old `now=100` fallback, so the
+decay math stays unit-testable. Telemetry moves `fitted:N/stale:M` to
+`fitted:N/carried:M/decay:D` (mean decay permille across carried cells);
+`AI_MATCH_LOG.md` both copies updated. `StalenessTauMilli` parses from the priors
+file (>0 only). 848/848, boot gate PASS (isolated support dir), arch freshness PASS.
+
+# 2026-10-04 (later) — NOVA N1 `2cdfdbac8`: parse-tolerance test vs the real emitted file
+
+*Devin (nova), same branch `devin/nova/t2-port`.* EMBER's first real fit (`ember-fit`,
+2,182 engagements fitted / 7,301 records) carries the full emitted block set —
+`Schema`/`LedgerHash`/`Engagements` headers, `#` comments, and `AttackTiming@` /
+`Response@` / `SuicideIndex@` analysis rows the §12.31 consumption contract does not
+define. `BotEngagementPriors.Parse` skips them by construction (prefix dispatch +
+`TryParse`), and `FitterMetadataBlocksAreSkipped` locks that: an out-of-contract block
+can never become a load failure. 844/844. (One real-value trap while writing it:
+`PriorPct: 155` marks the cell STALE in test context — ResolvedTagVersus is null →
+prior-100; the fixture uses 100 and real staleness stays covered by the dedicated tests.)
+
+# 2026-10-04 (later) — NOVA N1 `70879b038`: `GlobalScaleMilli` consumed
+
+*Devin (nova), same branch `devin/nova/t2-port`.* T3Verify's accounting-fixed fitter
+(`devin/t3verify/tier1-fit-scale`) fits cell/defence/into-defences factors RELATIVE to a global
+obs/exp scale g (~1.13 once accounting is fixed) — partial pooling keeps thin cells honest — but
+today g survives only as a yaml comment, so a relative-fitted file would silently under-apply by
+the level. Consumer side now reads the optional `GlobalScaleMilli` header key: every fitted lookup
+(`FactorPermille`/`DefenceFactorPermille`/`IntoDefencesPermille`) multiplies `v × g / 1000` back to
+absolute; absent key = Schema-1 absolute semantics (v1 files read unchanged); a stale or unfitted
+cell returns Neutral before scaling — g never fabricates a correction on its own. The emit side is
+one line (`GlobalScaleMilli: <g×1000>` under `IntoDefencesMilli:`) pending the coordinator's ruling
+— see fleet `REPLY_2026-10-04_nova_to_t3verify_globalscale.md`. `AttritionExponentMilli`
+deliberately unscaled (exponent, not a damage factor). 843/843 (+2 tests), freshness PASS.
+
+# 2026-10-04 (later) — NOVA N1 follow-up `21781e27b`: exponent consumed + priors observability
+
+*Devin (nova), same branch `devin/nova/t2-port`.* The first pass parsed `AttritionExponentMilli`
+but never applied it — the pair-level `CorrectionMilli` seam cannot express a ratio warp. Added
+`IBotEngagementPriors.AttritionExponentMilli` (default 1000); `CombatVetoEval` applies
+`ratio^alpha` and re-derives surviving fractions (Lanchester invariant preserved), clamped to the
+existing [500, 2000] bounds. Provider `PriorsState` (`none`/`error`/`fitted:N/stale:M`, live stale
+count) now lands on the match record's `priors_state` so the A/B review sees unfitted/stale matches
+without digging debug logs; parse failure = `error` + neutral instead of a BotTick throw.
+`tier1_priors` added to `WatchConditions` — it shifts veto verdicts, so it filters which
+engagements exist (§12.33 armed-set attribution). 841/841, audits + boot PASS.
+
+# 2026-10-04 — feat(ai): NOVA round-2 N1 — the tier-2 follow-up port, one branch off master
+
+*Devin (nova), worktree `C:/cameo-wt/nova-t2port`, branch `devin/nova/t2-port` off `origin/master` @
+`8e86fca23` (round-2 orders rule 1). Consolidates `devin/nova/t1-priors-port` (which sat on a
+pre-INC-b/c base with revert+merge history) into ONE clean branch; the #795/#796 parallel lanes are
+superseded by it (F1-a: one format).*
+
+- **(a) veto deltas:** launch-edge consult + remembered-defences already landed via INC-N (my
+  design) — verified present, nothing to re-port.
+- **(b) tag axis:** `BotWeaponProfile.Delivery` = the main warhead's resolved `Warhead@<tag>`
+  suffix (`MiniYaml.Load` merges `Inherits`; same-index first, class-validated, class-name
+  fallback). Joins EMBER's ledger-tag taxonomy.
+- **(c) one schema:** `EngagementPriorsBotModule` reads `BotEngagementPriors`
+  (`DeliveryArmour@d__x__a`, `DefenceState@`, `IntoDefencesMilli`) natively; `Factor@`/
+  `StatFingerprint`/`arsenal_priors` paths retired (F1-a).
+- **(d) per-cell staleness:** `PriorPct@d__x__a` vs `BotUnitProfiles.ResolvedTagVersus(tag)` —
+  `^Warhead_<tag>` template canonical + one-level family fallback = the fitter's own
+  `versus_priors` question, O(1) after the lazy map. A moved Versus neutralizes exactly that cell;
+  absent PriorPct = unfitted = neutral. `LedgerHash` offline provenance only.
+- **(e)** `EngagementPriorsBotModule` performs **no faction-keyed lookups** (delivery x armour
+  axis only) — the `BotFactionView` rule is satisfied vacuously; noted for the record.
+- **Gating:** `AP_tier1_priors` → `tier1_priors` → `genericbot && tier1_priors`, independent of
+  `AN_combat_veto`; armed alone = inert; missing file/provider = 1000 neutral (classic
+  bit-identical).
+- Verified: build 0 err, **0 new mod-code warnings**, 840/840 tests (6 `EngagementPriorsTest`),
+  wiring/fog/direct-mutation/freshness PASS.
 
 # 2026-10-03 — coordinator: tier-3 hotfix (INC c) + ORDERS round 2 to NOVA/DAWN/EMBER
 
@@ -957,7 +2856,6 @@ auto-release) — no logic change, orders untouched, classic unchanged. The next
 0 errors; `apply_increment_switches.py --groups AF_harvester_spread --dry-run` = 2 changes, both `@generic`.
 
 # 2026-10-02 — TC-2e: capture-claim deconfliction (the fifth blackboard consumer, AI_ARCHITECTURE 12.17)
-
 
 *Devin (dawn), worktree `dawn-tc2e`, branch `devin/dawn/tc2e-capture-claims`.*
 
@@ -1769,7 +3667,6 @@ Co-Authored-By: Nova (Devin) <devin@cognition.ai>
   for unroled rows, weight floor at 1, flag-off/no-mix/no-provider fallback, composition
   precedence, cache-on-mix-reference, strength proxy incl. empty-Versus=100. Suite: 477 green.
 - Boot gate: PASS (PostWorldLoaded reached, no new exception-*.log). PR body has the evidence.
-
 
 # 2026-10-01 — Devin (NOVA): CA-3 personality starting RoleMixes + UseRoleMix gate (§12.5)
 
@@ -2587,7 +4484,6 @@ Second pass on the Nuclear Winter A/B program after the maintainer mandate
 - `PowerDownBotModule.PowerDownTypes` unset on the genericbot stack — bots
   never toggle power-hungry buildings under brownout. Generator emit suggested.
 - The §9.12 decision (fresh-intel-for-raids) is the blocker on the donor axis.
-
 
 # 2026-09-28 — Devin: fleet bot-module review fixes — crash, leak, and fog-honesty batch
 
@@ -3825,7 +5721,6 @@ reassigned from AURORA per `ORDERS_2026-09-23_three_agents.md`.
   at ~40 s, zero new exceptions; pre-existing master test failures (BotInsurance fixture
   debt, duplicate-trait 447-diff) confirmed identical on pristine `7994c8784`.
 
-
 **Branch:** `devin/dawn/w23` — addresses PR #449 review: the W23 fidelity pins had
 raised W6 694→737 by declaring effect warheads locally; the fix inherits covering
 `^Effect_*` templates instead of pinning.
@@ -4489,7 +6384,6 @@ See `docs/design/PR328_UPSTREAM_INTEGRATION.md` for the full baseline comparison
 limitations and superseded snapshots. No game launched. Peak measured PC memory
 55.0%. Aedis's implementation brief is the separately authorized next phase.
 
-
 ## Devin-Aurora - DuneRankDecoration fix + audit status update (2026-09-06, evening)
 
 **Identity:** Devin-Aurora (Devin CLI, GLM-5.2 High), D2k coordinator under Claude-Local.
@@ -4708,7 +6602,6 @@ This was the exact "-Warhead@ marker trap" Nova had documented in `9b67da411`.
 The RA1 Soviets rename (`106/106 actors compliant`) was already completed by commit `ad7c5e232`. During this session, a stale `rename_map_ra1_soviets.yaml` was accidentally re-applied, producing doubled `ra1_ra1_soviets_` prefixes and broken file references. The re-application was reverted via `git checkout -- .` (justified - it was my own WIP, not another agent's). **The rename map in `tools/rename/rename_map_ra1_soviets.yaml` is STALE and should not be re-applied.** It contains `ra1_ra1_soviets_ -> ra1_soviets_` mappings that re-introduce the doubling bug if run against the already-corrected tree.
 
 **Lesson:** Always check `git log` for recent commits on a task before applying a rename map. The rename was already in HEAD; the map was a pre-fix artifact.
-
 
 ## Devin-Ember - 6/8 RedAlert broadcasts collapsed + verified; UNCOMMITTED until sweeps settle (2026-09-06, late evening)
 
@@ -6043,7 +7936,6 @@ before and after."
 until this lands — the tree cannot be boot-gated with the NRE present, and the
 commit gate is absolute.
 
-
 ## Devin-Ember — acknowledging Rulings 12-15 + both stops; queue accepted (2026-09-06, late evening)
 
 **Identity:** Devin-Ember (SWE-1.7 Max), verifier lane -> now volume lane per
@@ -6071,7 +7963,6 @@ was later; either way the rule stands.)
 
 **Queue order executing:** X2 renames -> X3 split + X5 fix -> Ruling-5 actors
 (`ra1_soviets_volkov`, `terran_medic`) -> D-3 13-weapon collapse under Ruling 13.
-
 
 ## Devin-Aurora -- ACKNOWLEDGED: SUM vs VERBATIM collision, deferring to Claude (2026-09-06, evening)
 
@@ -6308,7 +8199,6 @@ ruling regardless of SUM vs VERBATIM.
 
 Co-Authored-By: Devin AI <devin@cognition.ai>
 
-
 ## Devin-Ember — evidence for Nova's SUM-vs-VERBATIM collision flag (2026-09-06, evening)
 
 **Identity:** Devin-Ember (SWE-1.7 Max), verifier lane. Adding command-verified
@@ -6329,7 +8219,6 @@ evidence to Nova's collision flag so Claude can rule on the value convention.
 multiplication bug the exemption existed to record. (Nova's design point stands
 separately: a deliberate multi-warhead weapon whose design IS the total would
 need its own ruling — but nothing in my 13-weapon slice is signed as one.)
-
 
 ## Devin-Nova - COLLISION FLAG on the W24 collapse value rule: Aurora SUM vs Ember VERBATIM (2026-09-06, evening)
 
@@ -6394,7 +8283,6 @@ resolve-and-inline + W23 conversion + then a family choice (plan table says
 "delivery projectile decides the family" (missile-shaped -> MissileCryo) or
 "name-word wins even over stack". With that one rule, all 13 execute
 mechanically; without it, each row is a coin flip I should not spend.
-
 
 ## Devin-Aurora -- D-3 W24 D2k candidates measured + ruling request (2026-09-06, evening)
 
@@ -6509,7 +8397,6 @@ mapped faction). Bonus: the old file was one of doc_health's 4 non-UTF8
 documents — the rewrite and the history copy are both clean UTF-8, so one D1
 finding dies here too.
 
-
 ## Devin-Nova - Branch triage: agent/introduce-scrin-faction - REAL CONTENT, but pre-split schema (2026-09-06, evening)
 
 **Identity:** Devin-Nova (Devin CLI, SWE-1.7 Max), tooling lane.
@@ -6600,7 +8487,6 @@ DELEGATION entry).
 2. Re-verify gates changed by today's landings (spot re-runs, cheap).
 3. If you want the 27-class `fit_class` run claimed here afterwards, say so —
    I have read your --spec rule and the class_anchors.json write-back trap.
-
 
 ## Devin-Aurora -- Branch triage: codex/bulk-weapon-backlog-half SUPERSEDED (2026-09-06, evening)
 
@@ -6777,7 +8663,6 @@ old one: `FACTION_REFERENCE_MATRIX.md` is on PART V and four of its statements a
 
 Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
 
-
 ## Devin-Nova - CLAIMING the D-2 replacement: 27-class fit run (2026-09-06, evening)
 
 **Identity:** Devin-Nova (Devin CLI, SWE-1.7 Max), tooling lane.
@@ -6872,7 +8757,6 @@ so every weapon W24 collapses adds scored members here. That is the concrete lin
 W24 and sign-off, and it is a second reason D-3 is the highest-value work in the tree.
 
 Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
-
 
 ## Claude-Local (Opus 5) -- Rulings 9/10/11 + THE BIG DELEGATION (2026-09-06, evening)
 
@@ -6989,7 +8873,6 @@ routed Cameo faction now clears the two-source reference floor** -- `corrino` an
 are the only unrouted factions left, both waiting on Emperor: Battle for Dune.
 
 Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
-
 
 ## Devin-Aurora -- Ruling 9 migration complete for my lane (2026-09-06, afternoon)
 
@@ -7212,7 +9095,6 @@ residuals I had just posted:
 classes I flagged one entry ago. With X1 at 0 the gate's remaining redness is
 entirely the unrouted EMP/AA question for Claude.
 
-
 ## Devin-Nova - Rulings 2 + 6 IMPLEMENTED: weapon_suffixes and min_range gates green (2026-09-06, afternoon)
 
 **Identity:** Devin-Nova (Devin CLI, SWE-1.7 Max), tooling lane.
@@ -7259,7 +9141,6 @@ or an explicit whitelist entry — small, sharp residual.
 X3 (10 underscore-position AA) were never ruled — same decision shape needed:
 rename vs whitelist-per-class. Routing to Claude.
 
-
 ## Devin-Ember — verifier: physical_state_warheads fully GREEN + the whitelist-implementation gap (2026-09-06, afternoon)
 
 **Identity:** Devin-Ember (SWE-1.7 Max), verifier lane. Command-verified.
@@ -7277,7 +9158,6 @@ exemption; `audit_weapon_suffixes.py` needs the elite-share exemption class.
 Owner: whoever owns `tools/audit/` (Nova's tooling lane, or Claude assigns).
 Until then those two gates stay red DESPITE being ruled — flagged so nobody
 reads a stale FAIL as a regression.
-
 
 ## Devin-Aurora -- Post-ruling verification + status update (2026-09-06, afternoon)
 
@@ -7403,7 +9283,6 @@ step toward dynamic faction loading.
 
 Co-Authored-By: Devin AI <devin@cognition.ai>
 
-
 ## Devin-Aurora -- Ruling 7 + Ruling 3 EXECUTED (2026-09-06, afternoon)
 
 **Identity:** Devin-Aurora (SWE-1.7 Max / GLM-5.2 High). D2k coordinator under Claude-Local.
@@ -7484,7 +9363,6 @@ The aircraft upgrade prerequisite should be changed to an Ordos-specific upgrade
 Options (a), (b), or (c) above. My recommendation: (a).
 
 Co-Authored-By: Devin AI <devin@cognition.ai>
-
 
 ## Claude-Local (Opus 5) -- RULING 8 + a tooling trap that cost this whole investigation (2026-09-06, afternoon)
 
@@ -7574,7 +9452,6 @@ Aurora: none of this reduces the value of the report. You found a real, mod-wide
 tooling bug and you found it by being suspicious of an audit that said 0. Keep doing that.
 
 Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
-
 
 ## Claude-Local (Opus 5) -- ALL SEVEN RULINGS ANSWERED + new orders (2026-09-06, afternoon)
 
@@ -7736,7 +9613,6 @@ explicit `encoding="utf-8"`.
 
 Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
 
-
 ## Devin-Aurora -- D2k legacy weapon migration plan for Blaze (2026-09-06, midday)
 
 **Identity:** Devin-Aurora (SWE-1.7 Max / GLM-5.2 High). D2k coordinator under Claude-Local.
@@ -7799,7 +9675,6 @@ If approved, I will immediately add the 6 weapons to my files (2 Atreides + 4 Sh
 Blaze, Echo, and I will coordinate the removal from legacy d2k.yaml.
 
 Co-Authored-By: Devin AI <devin@cognition.ai>
-
 
 ## Devin-Aurora -- FOUND: D2k buildings lack ProductionQueue, audit tier calc is wrong (2026-09-06, midday)
 
@@ -7864,7 +9739,6 @@ The 4 "Atreides" buildable_order findings are potentially false positives. My At
 values may be correct as-is. I will NOT change them until Claude rules on this.
 
 Co-Authored-By: Devin AI <devin@cognition.ai>
-
 
 ## Devin-Aurora -- D2k cross-faction BPO analysis + Ruling 7 proposal (2026-09-06, midday)
 
@@ -7938,8 +9812,6 @@ If Option A, I will:
 4. Post the per-faction assignment for other agents to follow
 
 Co-Authored-By: Devin AI <devin@cognition.ai>
-
-
 
 ## Devin-Aurora -- Ordos non-weapons audit (supports ruling proposal #3) (2026-09-06, midday)
 
@@ -8130,8 +10002,6 @@ originating unit).
 **Claude: please approve, modify, or reject each proposal. I will execute
 immediately upon approval.**
 
-
-
 ## Devin-Aurora -- FOUND: WC2 hero P0 blocker was RESOLVED weeks ago, HANDOFF was stale (2026-09-06, midday)
 
 **Identity:** Devin-Aurora (SWE-1.7 Max / GLM-5.2 High). D2k coordinator under Claude-Local.
@@ -8249,7 +10119,6 @@ green (19/19), doc_health clean (0 control bytes post-fix), gen_sync 0 drift,
 three_way_split clean, balance_drift green, boot-gate PASS. Open items are all
 rulings (Claude) or the Cyrus WC2 commit — no executable verifier work remains.
 
-
 ## Devin-Aurora -- coordination update: Atreides self-contained, no items in my lane (2026-09-06, morning)
 
 **Identity:** Devin-Aurora (SWE-1.7 Max / GLM-5.2 High). D2k coordinator under Claude-Local.
@@ -8328,7 +10197,6 @@ resolve-diff checks per rule 5), or (b) whitelist "elite armament may share the
 base weapon" -> audit gains an exemption class, zero content change. Given these
 are deliberate shares (not missing variants), my read is (b) for X1/X2 and a
 rename pass only where an actual distinct elite weapon exists. Ruling: Claude.
-
 
 ## Devin-Nova - legacy-global commit + CannonTesla evidence + remaining findings (2026-09-06, morning)
 
@@ -8483,7 +10351,6 @@ command: `extract_stats.py` in the SAME commit as the yaml that moved it.
 posted; inherits/min_range/buildable_order/physical_state_warheads triaged and
 routed. The un-owned piece is execution on those routings.
 
-
 ## Devin-Aurora -- acknowledging Claude-Local as fleet coordinator, status report (2026-09-05, night)
 
 **Identity:** Devin-Aurora (SWE-1.7 Max / GLM-5.2 High). D2k coordinator under Claude-Local.
@@ -8606,7 +10473,6 @@ this state; the fix is finishing the move = delete the two blocks from Ixian.
 (Echo/Aurora: the Shared side is verified verbatim — only the Ixian deletion
 remains.)
 
-
 ## Devin-Ember — verifier round: boot-gate PASS at HEAD + inherits regression check (2026-09-05, night)
 
 **Identity:** Devin-Ember (SWE-1.7 Max), verifier lane. Command-verified.
@@ -8634,7 +10500,6 @@ collapse. Blocking classes pinned at 0. Classification stands: known debt.
 `110mm_Gun`/`D2K_TowerMissile` moved to `D2k/Shared/yaml/weapons.yaml`, removed from Ixian.
 The dynamic-loading blocker is RESOLVED. Ember verified GREEN (0a93fd4eb).
 
-
 ## Devin-Ember — CORRECTION on my physical_state_warheads diagnosis (2026-09-05, night)
 
 **Identity:** Devin-Ember (SWE-1.7 Max), verifier lane.
@@ -8648,7 +10513,6 @@ hand-writes `PhysicalStateName`/`PhysicalStateScale` on the same node (a leftove
 fixup from before the template carried the map). Fix shape per Nova's menu:
 strip the consumer-side singular fields (option a), not a template merge.
 Her entry supersedes my wording; the routing stands (generator-level ruling).
-
 
 ## Devin-Ember — verification round: Nova's registry fix confirmed + ledger drift cleared (2026-09-05, night)
 
@@ -8679,7 +10543,6 @@ gen_sync, three_way_split tool, balance_drift. Still red by design/debt:
 meter_dilution (routed, design call for Claude), min_range (whitelist ruling),
 physical_state_warheads (generator ruling), weapon_suffixes + buildable_order
 palette tail + inherits depth (known debt), basebuilder_crates (corrino -> Dawn).
-
 
 ## Devin-Aurora — FLEET COORDINATION PASS #2 + buildable_order fix (2026-09-05, night)
 
@@ -8804,7 +10667,6 @@ exists but does not contain them).
 All D2k factions now resolve turrets from Shared regardless of which packs are
 lobby-selected. The move was verified by Ember (0a93fd4eb) with boot-gate PASS.
 
-
 **Owner:** this is Echo's MOVE (Ixian file is his lane; Shared file is Aurora's
 claim — coordinate between you two). Aurora's earlier copy-attempt correctly
 failed the boot-gate on a merge conflict — it must be a MOVE, not a copy.
@@ -8814,7 +10676,6 @@ Not touching either file myself (both are claimed).
 reverted as abandoned debris per the ruling); the `atreides_fremen` prerequisite
 order fix I routed to Aurora is in the working tree (`~hightech.atreides` now
 precedes the promotion token correctly).
-
 
 ## Devin-Ember — RED GATE TRIAGE, part 2: meter_dilution forensic report (2026-09-05, night)
 
@@ -8848,7 +10709,6 @@ weapon. Ratchet stays at 32 - do NOT raise.
 the exact introducing commit per actor needs `git log -p -S <weapon>` runs, which
 the read-only tracer could not execute. Available on request - but the mechanism
 is the actionable answer: it is the W23/W24 wave, faction by faction.
-
 
 ## Devin-Ember — RED GATE TRIAGE, part 1: diagnosis + routing (2026-09-05, night)
 
@@ -8900,7 +10760,6 @@ non-D2k factions — likely no lane owner; may need Claude to assign.
 
 **Report-back per Claude's format:** gate names + the table rows above are the
 actual report output (run 2026-09-05, HEAD `c6313f507`).
-
 
 ## Devin-Aurora — Atreides self-containment audit + cross-pack dependency on Ixian (2026-09-05, night)
 
@@ -9100,7 +10959,6 @@ Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
   `c6313f507`); cross-agent notes posted (Dawn: Corrino needs a promo tree;
   Blaze: Harkonnen needs one; Echo: Ixian is the reference).
 
-
 ## Devin-Aurora — Atreides promotion tree COMPLETE (2026-09-05, night)
 
 **Identity:** Devin-Aurora (SWE-1.7 Max / GLM-5.2 High). D2k coordinator, reporting to Claude.
@@ -9268,7 +11126,6 @@ Fresh boot-gate after the full day's churn (D2k faction buildout, master
 fast-forward, splice regens, maintainer live Versus edits, Nova's registry +
 generator work in progress): **MENU REACHED** (MenuPostProcessEffect.PostWorldLoaded),
 **0 new exception logs**. Tree is green for everyone to keep working.
-
 
 ## Devin-Ember — executed Claude's P1 orders (2026-09-05, night)
 
@@ -9522,7 +11379,6 @@ the mechanical spec for "unique and special."
 - Claude: all agents await your consolidated orders. The 4 open items above need
   your rulings before further structural weapon work can proceed.
 
-
 ## Devin-Ember — maintainer rulings executed + NEW FLEET HIERARCHY (2026-09-05, late evening)
 
 **Identity:** Devin-Ember (SWE-1.7 Max), verifier lane.
@@ -9561,7 +11417,6 @@ consolidated orders.
 
 **Verifier-lane status:** tree healthy, audits fresh (`fd95873c5`), zero
 crash-class findings. Continuing standing verification + doc sync.
-
 
 ## Devin-Ember — verification of Claude's findings + live tree state (2026-09-05, late evening)
 
@@ -9604,7 +11459,6 @@ commit WC2 pass + stand down; Echo = CABAL review + Ixian re-verify; Blaze =
 D2k Shared consolidation; Nova = composite-registry re-curation (fixes the
 `three_way_split` tool crash) + `gen_weapon_template.py` REFLECTOR 75->74 sync;
 Claude = reference/faction-routing lane (`tools/reference/**` etc.).
-
 
 ## Devin-Ember — audit suite + W24 collapse verification (2026-09-05, evening)
 
@@ -9672,7 +11526,6 @@ the NEW maintainer ruling ("no light/medium/heavy — heaviness bell"), not an e
 **Verdict: the tree is healthy.** Zero crash-class findings, zero new regressions
 attributable to the merge-fallout sweep or today's collapse/retrofit commits. All
 gating failures are known baselines or live-edit drift owned elsewhere.
-
 
 ## Codex — PR 328 buildability repair completed locally (2026-09-06)
 
@@ -11094,65 +12947,47 @@ existing claims table. **Role: verification + coordination only — no yaml file
 
 ## 2026-08-21 — JapanesePlasmaBomb 3-way split (boot-gated)
 
-
-
-
-
 - Converted `JapanesePlasmaBomb` in `mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml`:
 
-
   - Replaced the legacy `Inherits@3: ^HeavyBomb` full-stack inheritance with the split
-
 
     `Inherits@wh3: ^Warhead_Demolition_Heavy` and `Inherits@fx2: ^Effect_Demolition_Heavy`.
 
   - Kept the existing chemical and flame 3-way split (`^Warhead_Chemical_Heavy`,
 
-
     `^Warhead_Flame_Heavy`, `^Projectile_Chem_Heavy`, `^Effect_Flame_Heavy`).
 
   - Preserved demolition totals: main `10000` flat (`AreaDamage`, `MaxRadius: 3200`,
 
-
     `Spread: 800`) and percentage `5%` (`AreaDamagePercentage`, `MaxRadius: 1600`,
-
 
     `Spread: 400`).
 
   - Preserved old `HeavyBomb` falloff shape: the new `^Warhead_Demolition_Heavy` family
 
-
     `Falloff` is `100, 50, 25, 10, 5, 0`; setting `MaxRadius: 3200` and `1600` makes the
-
 
     resolved falloff identical to the old 5-step `100, 50, 25, 10, 5` shape.
 
   - Preserved local damage types `Prone100Percent, TriggerProne, ElectricityDeath, Tesla`
 
-
     and `ValidRelationships: Enemy` on the demolition warheads (the family defaults to
-
 
     `Ally, Neutral, Enemy`).
 
   - Restored the weapon-specific primary explosion visual by overriding
 
-
     `Warhead@Effect1.Explosions: poof` (the `^Effect_Demolition_Heavy` family supplies
 
-
     `building`). Kept `Warhead@Effect` (`blueartexp`/`psahit00.aud`) and `Warhead@Effect2`
-
 
     (`blue_building_napalm`).
 
   - Preserved the bullet projectile (`Image: hakureiring`, `Speed: 250`, `Inaccuracy: 500`,
 
-
     `TrailImage: blue_smokey`) and burst/report behavior.
 
 - `find_empty_warhead` 0, `find_orphan_old_keys` 0, `audit_warhead_split` broadcast
-
 
   count 941 (baseline already 941), `audit_balance_drift` clean, `extract_stats` regenerated.
 
@@ -11160,84 +12995,59 @@ existing claims table. **Role: verification + coordination only — no yaml file
 
 - `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded`; no new `exception-*.log`.
 
-
-
-
 ## 2026-08-21 — TorpTubeThermobaric full 3-way split (boot-gated)
-
-
-
-
 
 - Converted `TorpTubeThermobaric` in `mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml`:
 
-
   - Replaced legacy `Inherits: ^NuclearWarhead` with `Inherits@wh: ^Warhead_Nuclear_Super`
-
 
     and `Inherits@fx: ^Effect_Nuclear_Super`.
 
   - Replaced the remaining `Inherits@2: ^HeavyMissile` full-stack with
 
-
     `Inherits@wh2: ^Warhead_MissileAP_Heavy`, `Inherits@proj: ^Projectile_Missile_Heavy`,
-
 
     and `Inherits@fx2: ^Effect_MissileAP_Heavy`.
 
   - Preserved nuclear totals: main `1600` × 10 ticks (`MaxRadius: 9000`) for the old
 
-
     `16000` flat, and percentage `1` × 8 ticks (`Spread: 500`, `MaxRadius: 4500`) for
-
 
     the old `8%`.
 
   - Preserved missile totals: main `16000` flat (`AreaDamage`, `MaxRadius: 4000`,
 
-
     `Spread: 800`) and percentage `8%` (`AreaDamagePercentage`, `MaxRadius: 2000`,
-
 
     `Spread: 400`).
 
   - Preserved old nuclear shape: `AffectsParent: true`, `ValidRelationships: Enemy`,
 
-
     `FireDeath, Incendiary`, and `TargetActorCenter: false`.
 
   - Preserved the torpedo projectile (`Image: v2`, `Speed: 150`, `TrailImage: bubbles`,
 
-
     water-bound, cloak palette) and report `torpedo1.aud`. The bespoke projectile is
 
-
     still built from scratch with `-Projectile:`, so `^Projectile_Missile_Heavy` is
-
 
     declared as the family but the resolved torpedo fields are unchanged.
 
   - Removed the new `Warhead@Glow` that `^Effect_Nuclear_Super`/`^Effect_MissileAP_Heavy`
 
-
     would have introduced by keeping `-Warhead@Glow:`.
 
   - Effect order kept `^Effect_Nuclear_Super` first so `^Effect_MissileAP_Heavy` wins for
 
-
     `ShieldHit`, `Concrete` (`200`), `DuneRock`, `DuneSand`, `RA2Crater`, and the
-
 
     non-nuclear `Effect` (`big_frag`), then the weapon overrides to `nuke_small`/
 
-
     `kaboom22.aud`/`ImpactActors: true`. A local `Warhead@ShieldHit` override keeps
-
 
     `Duration: 10` (the `^Effect_MissileAP_Heavy` family supplies `12`).
 
 - `find_empty_warhead` 0, `find_orphan_old_keys` 0, `audit_warhead_split` broadcast
-
 
   count 941 (no change), `audit_balance_drift` clean, `extract_stats` regenerated.
 
@@ -11245,126 +13055,83 @@ existing claims table. **Role: verification + coordination only — no yaml file
 
 - `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded`; no new `exception-*.log`.
 
-
-
-
 ## 2026-08-21 — MonsterTank120mm 3-way split (boot-gated)
-
-
-
-
 
 - Converted `MonsterTank120mm` in `mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml`
 
-
   from `^NuclearWarhead` to the 3-way split:
-
 
   - `Inherits@wh: ^Warhead_Nuclear_Super`
 
-
   - `Inherits@wh2: ^Warhead_CannonHE_Heavy`
-
 
   - `Inherits@proj: ^Projectile_Shell_Heavy`
 
-
   - `Inherits@fx: ^Effect_CannonHE_Heavy`
-
 
   - `Inherits@fx2: ^Effect_Nuclear_Super`
 
-
 - Preserved per-shot totals: `CannonHE_Heavy` `40000` flat / `20%`; `Nuclear_Super` main
 
-
   `4000` × 10 ticks (`MaxRadius: 9000`) and percentage `2` × 10 ticks (`Spread: 500`,
-
 
   `MaxRadius: 4500`) for the old `20%`.
 
 - Preserved old `SpreadDamage`/`HealthPercentageDamage` shape for the nuclear half:
 
-
   `AffectsParent: true`, `ValidRelationships: Enemy`, `FireDeath, Incendiary`.
 
 - Kept `Report: nukemisl.aud`, bullet projectile (`Image: 120MM`, `Speed: 300`, `Inaccuracy: 500`),
-
 
   and the local `Effect` (`nuke_small`, `kaboom22.aud`, `ImpactActors: true`).
 
 - `MonsterTank120mmThermobaric` (child) now inherits the same nuclear/cannon split plus
 
-
   `^Warhead_Flame_Heavy` / `^Projectile_Flame_Heavy` / `^Effect_Flame_Heavy`; resolved
-
 
   totals remain `120000` flat + `60%`.
 
 - `find_empty_warhead` 0, `find_orphan_old_keys` 0, `audit_warhead_split` broadcast
 
-
   baseline lowered 944 → 942, `audit_balance_drift` clean, `audit_doc_claims` 16/16,
-
 
   `verify_generator_sync` drift 0.
 
 - `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded`; no new `exception-*.log`.
 
-
-
-
 ## 2026-08-21 — ThermobaricNuclearMaverick 3-way split (boot-gated)
-
-
-
-
 
 - Converted `ThermobaricNuclearMaverick` in `mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml`
 
-
   from the broken duplicate `Inherits@2: ^NuclearWarhead` / `Inherits@2: ^Warhead_Flame_Heavy` stack
-
 
   to a clean 3-way split with distinct inherit keys:
 
-
   - `Inherits@wh: ^Warhead_MissileHE_Heavy`
-
 
   - `Inherits@wh2: ^Warhead_Nuclear_Super`
 
-
   - `Inherits@wh3: ^Warhead_Flame_Heavy`
-
 
   - `Inherits@proj: ^Projectile_Missile_Heavy`
 
-
   - `Inherits@fx: ^Effect_Flame_Heavy`
-
 
   - `Inherits@fx2: ^Effect_Nuclear_Super`
 
-
 - Preserved total per-shot damage: `MissileHE_Heavy`/`Flame_Heavy` stay `14000` flat/`7%`;
-
 
   `^Warhead_Nuclear_Super` delivers `1400` × 10-tick `AreaDamage` (`MaxRadius: 9000`) and
 
-
   `1` × 7-tick `AreaDamagePercentage` (`Spread: 500`, `MaxRadius: 4500`) to keep the old `7%`
-
 
   percentage total while using the canonical nuclear family.
 
 - Preserved old `SpreadDamage`/`HealthPercentageDamage` shape (`FireDeath, Incendiary` damage
 
-
   types, `AffectsParent: false`, `ValidRelationships: Enemy`) for the nuclear half.
 
 - Resolved `Effect`/`Effect2`, `Glow`, `Smudge`, `RA2Scorch`, `GroundFire`, `Concrete: 1000`,
-
 
   `ShieldHit` duration 25, `ShieldHitEffect`, `ShieldHitEffectNuclear` all unchanged.
 
@@ -11372,68 +13139,45 @@ existing claims table. **Role: verification + coordination only — no yaml file
 
 - Audits: `find_empty_warhead` 0, `find_orphan_old_keys` 0 real,
 
-
   `audit_warhead_split` 944 (baseline lowered 945→944),
-
 
   `audit_doc_claims` 16/16 clean, `verify_generator_sync` drift 0.
 
 - `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded`; no new `exception-*.log`.
 
-
-
-
 ## 2026-08-21 — NuclearMaverick 3-way split (boot-gated)
-
-
-
-
 
 - Converted `NuclearMaverick` in `mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml`
 
-
   from the old full-stack `^NuclearWarhead` to a 3-way split finish conversion:
-
 
   - `Inherits@wh: ^Warhead_MissileHE_Heavy`
 
-
   - `Inherits@wh2: ^Warhead_Nuclear_Super`
-
 
   - `Inherits@proj: ^Projectile_Missile_Heavy`
 
-
   - `Inherits@fx: ^Effect_Nuclear_Super`
-
 
   - `Inherits@fx2: ^Effect_MissileHE_Heavy`
 
-
 - Preserved per-shot totals (40000 flat + 20% percentage) by using the
 
-
   `^Warhead_Nuclear_Super` 10-tick `AreaDamage` design with local `MaxRadius: 9000`
-
 
   (main, `Damage: 2000`) and `Spread: 500`/`MaxRadius: 4500` (percentage, `Damage: 1`).
 
 - Preserved old `SpreadDamage`/`HealthPercentageDamage` shape (falloff 100->10,
 
-
   `AffectsParent: false`, `ValidRelationships: Enemy`, `DamageTypes: Prone75Percent,
-
 
   TriggerProne, FireDeath, Incendiary`) while moving to the canonical nuclear family.
 
 - Preserved `^Effect_MissileHE_Heavy` as the dominant effect layer: `Concrete: 200`,
 
-
   `ShieldHit` duration 10, `EffectAir: big_explosion_air`, main `Effect: nuke_small`
 
-
   (local), `Glow`/`Smudge`/dune smudges, plus `^Effect_Nuclear_Super`'s
-
 
   `Smudge1/2/3` and `ShieldHitEffectNuclear`.
 
@@ -11441,70 +13185,47 @@ existing claims table. **Role: verification + coordination only — no yaml file
 
 - Audits: `find_empty_warhead` 0, `find_orphan_old_keys` 0 real,
 
-
   `audit_warhead_split` 945 (baseline lowered 946->945),
-
 
   `audit_doc_claims` 16/16 clean, `verify_generator_sync` drift 0.
 
 - `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded`; no new `exception-*.log`.
 
-
-
-
 ## 2026-08-24 — HammerheadArtillery 3-way split (boot-gated)
-
-
-
-
 
 - Converted `HammerheadArtillery` in `mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml`
 
-
   from the old `^RA2Grenade` + `^HeavyBomb` + `^SteelMediumCannon` pileup to a 2-warhead 3-way split:
-
 
   - `Inherits@wh: ^Warhead_Demolition_Heavy` (`Damage: 22222`, `Demolition_Heavy_Percentage` `Damage: 22`)
 
-
   - `Inherits@wh2: ^Warhead_CannonHE_Medium` (`Damage: 11111`, `CannonHE_Medium_Percentage` `Damage: 11`)
-
 
   - `Inherits@proj: ^Projectile_Shell_Medium` with local `Bullet` overrides
 
-
   - `Inherits@fx: ^Effect_Demolition_Heavy`
-
 
 - Merged `Demolition_Light` (11111/11) and `HeavyBomb` (11111/11) into one heavy demolition warhead
 
-
   so the per-shot total stays 33333/33. The `CannonHE_Medium` warhead stays as the cannon-shell
-
 
   contribution.
 
 - Preserved `Projectile: Bullet` (`Image: 120MM`, `Speed: 333`, `LaunchAngle: 111`, `Inaccuracy: 1111`,
 
-
   `Blockable: false`, blue contrail colors/widths/length), `Range: 11111`, `MinRange: 2220`,
-
 
   `ReloadDelay: 111`, `Report: vdesatta.wav, vdesattb.wav`.
 
 - Inlined all actor-specific effect/smudge/glow/shield/concrete overrides:
 
-
   `steel_blueexp`/`makoexplose` main, `siege_impact` second, `blue_building_napalm`/`kaboom12`
 
-
   delayed, `RA2Crater`/`RA2Scorch` + cannon dune smudges, `med_explosion_air` air effect,
-
 
   `ra2_small_watersplash` water, shell-style shield-hit sound, `Concrete: 150`, `ShieldHit` duration 10.
 
 - `review_resolve_diff.py wt_baseline . HammerheadArtillery` reports only the expected damage-multiset
-
 
   collapse; all projectile/effect invariants preserved.
 
@@ -11512,50 +13233,33 @@ existing claims table. **Role: verification + coordination only — no yaml file
 
 - Audits: `find_empty_warhead` 0, `find_orphan_old_keys` 0 real, `audit_warhead_split` 946
 
-
   (baseline lowered 950→946), `audit_doc_claims` 16/16 clean, `verify_generator_sync` drift 0.
 
 - `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded`; no new `exception-*.log`.
 
-
-
-
 ## 2026-08-21 — AsianChemicalBombs 3-way split (boot-gated)
-
-
-
-
 
 - Converted `AsianChemicalBombs` in `mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml`
 
-
   from the old full-stack `^HeavyChemicalWeapon` to a clean 3-way split:
-
 
   - `Inherits@wh: ^Warhead_Chemical_Heavy`
 
-
   - `Inherits@2: ^RA2MediumCannon`
-
 
 - Kept the custom projectile (Bullet, `Image: aa_plasgree`, `Speed: 400`, contrail,
 
-
   trail), `Report: vflaat1a.wav, vflaat1b.wav`, `Range: 3000`, `ReloadDelay: 8`,
-
 
   `InvalidTargets: wall`, and `ValidTargets: Ground, Water`.
 
 - Preserved both 2000 damage warheads (Chemical_Heavy and CannonHE_Medium) and the
 
-
   `HealthPercentageDamage` CannonHE percentage warhead.
 
 - Inlined `RA2VirusDeath` kill type, `Corrosion` physical state, `aa_plasgreeexp`
 
-
   explosion with `GlowScale: 2.0`, and the `RA2MediumCannon`-supplied `Concrete: 150`
-
 
   / shell-style shield-hit effects.
 
@@ -11565,49 +13269,31 @@ existing claims table. **Role: verification + coordination only — no yaml file
 
 - Audits: `find_empty_warhead` 0, `find_orphan_old_keys` 0 real, `audit_warhead_split`
 
-
   947 (baseline 950), `audit_doc_claims` 16/16 clean, `verify_generator_sync` drift 0.
 
 - `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded`; no new `exception-*.log`.
 
-
-
-
 ## 2026-08-21 — TSScoopDualChem 3-way split (boot-gated)
-
-
-
-
 
 - Converted `TSScoopDualChem` in `mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml`
 
-
   from the old full-stack `^MediumChemicalWeapon` to a 3-way split:
-
 
   - `Inherits@wh: ^Warhead_CannonHE_Medium`
 
-
   - `Inherits@wh2: ^Warhead_Chemical_Medium`
-
 
   - `Inherits@proj: ^Projectile_Shell_Medium`
 
-
   - `Inherits@fx: ^Effect_CannonHE_Medium`
-
 
   - `Inherits@fx2: ^TSCannonEffect`
 
-
 - Preserved CannonHE 20000 / percentage 10 plus Chemical 10000 / percentage 5,
-
 
   `Bullet` `Speed: 3500`, `Report: flamer2.aud`, `med_tibnapalm` ground explosion
 
-
   with `xplobig6.aud` and glow, `ShieldHit` duration 8, and bullet-style shield-
-
 
   hit sounds by inlining the actor-specific overrides.
 
@@ -11617,49 +13303,31 @@ existing claims table. **Role: verification + coordination only — no yaml file
 
 - Audits: `find_empty_warhead` 0, `find_orphan_old_keys` 0 real, `audit_warhead_split`
 
-
   947 (baseline 950), `audit_doc_claims` 16/16 clean, `verify_generator_sync` drift 0.
 
 - `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded`; no new `exception-*.log`.
 
-
-
-
 ## 2026-08-21 — TS70mmChem 3-way split (boot-gated)
-
-
-
-
 
 - Converted `TS70mmChem` in `mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml`
 
-
   from the old full-stack `^LightChemicalWeapon` to a proper 3-way split:
-
 
   - `Inherits@wh: ^Warhead_CannonHE_Medium`
 
-
   - `Inherits@wh2: ^Warhead_Chemical_Light`
-
 
   - `Inherits@proj: ^Projectile_Shell_Medium`
 
-
   - `Inherits@fx: ^Effect_CannonHE_Medium`
-
 
   - `Inherits@fx2: ^TSCannonEffect`
 
-
 - Preserved the per-actor projectile speed (`Bullet` `Speed: 3500`), report (`flamer2.aud`),
-
 
   chemical warhead damage (4000 CannonHE + 2000 Chemical), percentage damage, `TiberiumDeath`
 
-
   kill type, `chemball` explosion, `ShieldHit` duration 6, `Concrete: 100`, and bullet-style
-
 
   `ShieldHitEffect` sounds by inlining the local overrides that the old full-stack used to supply.
 
@@ -11669,45 +13337,29 @@ existing claims table. **Role: verification + coordination only — no yaml file
 
 - Audits: `find_empty_warhead` 0, `find_orphan_old_keys` 0 real, `audit_warhead_split`
 
-
   947 (baseline 950), `audit_doc_claims` 16/16 clean, `verify_generator_sync` drift 0.
 
 - `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded`; no new `exception-*.log`.
 
-
-
-
 ## 2026-08-21 — SteelHoverMissile 3-way split (boot-gated)
-
-
-
-
 
 - Converted `SteelHoverMissile` in `mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml`
 
-
   from `^ArrowWeapon + ^SteelLightMissile` to `^SteelLightMissile` only, collapsing the
-
 
   two 4000 main warheads (`ArrowWeapon` + `MissileAP_Light`) into one `MissileAP_Light`:
 
-
   - `Damage: 8000`
-
 
   - `MissileAP_Light_Percentage` `Damage: 4` (HealthPercentageDamage preserved)
 
-
 - Kept the per-faction `^SteelLightMissile` addon (it supplies the RA2-style missile
 
-
   contrail and `steel_blueexp` look) and `Inherits@fx: ^Effect_Grey_Explosion_Small_RA2`
-
 
   (resolved `ra2_small_grey_explosion` ground/water effect).
 
 - Added `ImpactActors: false` to the local `Warhead@Effect` node to preserve the exact
-
 
   resolved CreateEffect behaviour after `^ArrowWeapon` was removed.
 
@@ -11717,53 +13369,35 @@ existing claims table. **Role: verification + coordination only — no yaml file
 
 - Updated `doc_claims.yaml` and `docs/design/BALANCE_PROGRAM_PLAN.md` W24 counts:
 
-
   `multi_main_fired_weapons` 935 → 934; 1–2 legacy 117 → 116; broadcast 577 → 576 (61.7%).
 
 - Audits: `find_empty_warhead` 0, `find_orphan_old_keys` 0 real, `audit_warhead_split`
 
-
   947 (baseline 950, one fewer broadcast), `audit_doc_claims` 16/16 clean,
-
 
   `verify_generator_sync` drift 0.
 
 - `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded`; no new `exception-*.log`.
 
-
-
-
 ## 2026-08-21 — HueyGun 3-way split (boot-gated)
-
-
-
-
 
 - Converted `HueyGun` in `mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml`
 
-
   from `^FlakWeapon` + `^RA2Chaingun` to the single-family 3-way split:
-
 
   - `Inherits@wh: ^Warhead_Bullet_Medium` (Damage: 4000, 2 × 2000 preserved)
 
-
   - `Inherits@proj: ^Projectile_Bullet_Medium`
-
 
   - `Inherits@fx: ^Effect_Bullet_Medium_RA2`
 
-
 - Preserved `ValidTargets: Ground, Water, Air`, `ReloadDelay: 7`, `Range: 4783`,
-
 
   `Report: mgun11.aud`.
 
 - Inlined resolved `ImpactSounds: xplos.aud` on `Effect` and `EffectAir` (the
 
-
   `^Effect_Bullet_Medium_RA2` template does not carry impact sounds; the FlakWeapon
-
 
   pileup had supplied them). Added `ValidTargets: Air` to the local `EffectAir`.
 
@@ -11773,50 +13407,33 @@ existing claims table. **Role: verification + coordination only — no yaml file
 
 - Updated `doc_claims.yaml` and `docs/design/BALANCE_PROGRAM_PLAN.md` W24 counts:
 
-
   `multi_main_fired_weapons` 936 → 935; 1–2 legacy 118 → 117; broadcast 578 → 577 (61.7%).
 
 - Audits: `find_empty_warhead` 0, `find_orphan_old_keys` 0 real, `audit_warhead_split`
 
-
   948 (baseline 950, two fewer broadcasts), `audit_doc_claims` 16/16 clean,
-
 
   `verify_generator_sync` drift 0.
 
 - `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded`; no new `exception-*.log`.
 
-
-
-
 ## 2026-08-21 — ChainGunMH60 3-way split (boot-gated)
-
-
-
-
 
 - Converted `ChainGunMH60` in `mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml`
 
-
   from the old full-stack `^SmallArms`/`^Grenade`/`^FlakWeapon`/`^Chaingun` pileup to the
-
 
   single-family 3-way split:
 
-
   - `Inherits@wh: ^Warhead_Bullet_Medium` with local `Damage: 8000` (4 × 2000 preserved)
-
 
   - `Inherits@proj: ^Projectile_Bullet_Medium` (bullet/50CAL/contrail visuals preserved)
 
-
   - `Inherits@fx: ^Effect_Bullet_Medium` (piffs/water/shield hit core preserved)
-
 
 - Preserved `ReloadDelay: 6`, `Range: 3375`, `Report: gun13.aud`, `ValidTargets: Ground, Water, Air`.
 
 - Inlined the resolved impact-sound/actor overrides and `EffectAir` locally so
-
 
   `review_resolve_diff.py` reports the CreateEffect behaviour as unchanged.
 
@@ -11826,14 +13443,11 @@ existing claims table. **Role: verification + coordination only — no yaml file
 
 - Updated `doc_claims.yaml` and `docs/design/BALANCE_PROGRAM_PLAN.md` W24 counts:
 
-
   `multi_main_fired_weapons` 937 → 936; W24 pileup shape 202 → 201; broadcast
-
 
   count 579 → 578; the four prose occurrences in BPP now read 936.
 
 - Audits: `find_empty_warhead` 0, `find_orphan_old_keys` 0 real, `audit_doc_claims` 16/16 clean,
-
 
   `audit_warhead_split` 949 (baseline 950, one fewer broadcast), `verify_generator_sync` drift 0.
 
@@ -11841,223 +13455,151 @@ existing claims table. **Role: verification + coordination only — no yaml file
 
 - Skipped `GDISniperRifle` in the same `phase_b_survey` group because the file is currently
 
-
   open in the maintainer IDE; will revisit when it is not live WIP.
-
-
-
 
 ## 2026-08-21 — Ixian D2K missile damage-total correction (boot-gated)
 
-
-
-
-
 - Re-verified `D2K_TowerMissile` and `mtank_pri2` against their pre-refactor
-
 
   (`7d346685^`) resolved baseline and found the local `Damage` had been set to
 
-
   the per-warhead value instead of the per-shot total. Restored the totals:
 
-
   - `D2K_TowerMissile`: one `Warhead@MissileAP_Heavy` main `Damage: 16000`
-
 
     (was 4 × 4000) and `Damage: 8` for the percentage twin (was 4 × 2).
 
   - `mtank_pri2`: one `Warhead@MissileAP_Heavy` main `Damage: 24000`
 
-
     (was 3 × 8000) and `Damage: 12` for the percentage twin (was 3 × 4).
 
 - Removed explicit `HealthPercentageDamage` from the percentage twins so the
-
 
   `^D2KMissile` `AreaDamagePercentage` family is inherited consistently.
 
 - Regenerated all balance ledgers with `extract_stats.py`; `audit_balance_drift`
 
-
   reports 32/32 ledgers clean.
 
 - `review_resolve_diff.py wt_pre_7d34668 . D2K_TowerMissile mtank_pri2` reports
-
 
   behavioural invariants preserved.
 
 - Audits: `find_empty_warhead` 0, `find_orphan_old_keys` 0 real, `audit_warhead_split`
 
-
   950 pre-existing broadcasts, `audit_physical_state_warheads` PASS,
-
 
   `audit_doc_claims` 16/16 clean, `verify_generator_sync` drift 0.
 
 - `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded`; no new
 
-
   `exception-*.log`.
-
-
-
 
 ## 2026-08-24 — Ixian D2K missile correction (boot-gated)
 
-
-
-
-
 - Corrected `D2K_TowerMissile` and `mtank_pri2` in
-
 
   `mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml` from the previous
 
-
   `Inherits@wh/@wh2/@wh3` (and `@wh4` for the tower) multi-warhead composition to a
-
 
   single `Inherits: ^D2KMissile` with custom D2K projectile/effect overrides.
 
 - Removed the 7 per-weapon `^Warhead_*_D2K_TowerMissile` /
 
-
   `^Warhead_*_D2K_mtank_pri2` templates from
-
 
   `mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml`; the weapons now use the
 
-
   existing `^Warhead_MissileAP_Heavy` family via `^D2KMissile` with local `Damage`
-
 
   overrides (Tower 4000/percentage 2; tank 8000/percentage 4).
 
 - Preserved D2K heavy missile projectile visuals, smudge/glow/shield/concrete
 
-
   effects, `Range`, `ReloadDelay`, `MinRange`, `Report`, `ValidTargets`, `TargetActorCenter`,
-
 
   and `Burst`/`BurstDelays`.
 
 - Updated `docs/design/WEAPON_3WAY_SPLIT.md` to remove the Ixian multi-warhead
 
-
   exception from the allow-list.
 
 - Updated `docs/design/BALANCE_PROGRAM_PLAN.md` W24 counts (937 multi-main fired,
 
-
   579 broadcast / 61.8%), `docs/design/PHYSICAL_STATE_SYSTEM.md`
-
 
   (`w24_multi_main_fed` 386→383), `docs/audit/doc_claims.yaml`
 
-
   (`multi_main_fired_weapons` 939→937, `w24_multi_main_fed` 385→383,
 
-
   `physical_state_fired_weapons` 450→448), `tools/audit/audit_warhead_split.py`
-
 
   baseline (952→950), and `docs/design/ROADMAP.md`.
 
 - Re-extracted balance ledgers (`python tools/balance/extract_stats.py`) and
 
-
   verified `audit_balance_drift` clean.
 
 - Verification:
 
-
   - `scratchpad/ixian_*_before.json` vs `scratchpad/ixian_*_after.json`: extra
 
-
     Demolition/Flame/Flak warheads removed; MissileAP main/percentage `Damage`
-
 
     and `Projectile`/`Effect` layers preserved.
 
   - `tools/audit/find_empty_warhead.py` → 0
 
-
   - `tools/audit/effect_audit.py` → 0 duplicate `DamagesConcrete`
-
 
   - `tools/audit/audit_warhead_split.py` at/below baseline (950)
 
-
   - `tools/audit/audit_physical_state_warheads.py` PASS
-
 
   - `tools/audit/audit_doc_claims.py` PASS
 
-
   - `tools/balance/verify_generator_sync.py` drift 0
-
 
   - `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded`; no new `exception-*.log`
 
-
-
-
-
 ## 2026-08-21 — HeatRayBeam1-4 Inferno 3-way split + doc claim sync (boot-gated)
-
-
-
-
 
 - Converted `HeatRayBeam1/2/3/4` in
 
-
   `mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml` from a partial
 
-
   3-way split (`Inherits@wh` + `Inherits@fx` + inline `Projectile`) to a clean
-
 
   `Inherits@wh` / `Inherits@proj` / `Inherits@fx` split.
 
 - Added `^Projectile_Inferno_Heavy_HeatRayBeam` in the same file, holding the
 
-
   per-weapon `RadBeam` projectile fields (`Color`, `Amplitude`, `WaveLength`,
-
 
   `BeamDuration`, `Thickness`, `QuantizationCount`).
 
 - Added `^Effect_Inferno_Heavy` in `mods/cameo/weapons/weapons.yaml` as an alias
 
-
   of `^Effect_Flame_Heavy` so the family has its own effect layer; `HeatRayBeam1`
-
 
   keeps its local `small_napalm` / `Volume: 0.25` effect override.
 
 - Preserved resolved `Damage`, `Spread`, `Falloff`, `DamageTypes`, `ValidTargets`,
 
-
   `Range`, `ReloadDelay`, `Report`, `SoundVolume`, `Projectile` visuals, and all
-
 
   `HeatRayBeam2/3/4` beam colour/thickness overrides.
 
 - Fixed stale shield survivability numbers in `docs/DESIGN.md` and
 
-
   `docs/design/ARMOR_LAYERS.md` and updated `docs/audit/doc_claims.yaml`
-
 
   so `audit_doc_claims.py` passes again (`shield_versus_mean` 183.26, `shield_hp_factor` 0.5457).
 
 - Reconciled W2 status across `docs/design/BALANCE_PROGRAM_PLAN.md` and
 
-
   `docs/design/ROADMAP.md` (back in progress, owner Devin, 31 `^LightFlameWeapon`
-
 
   matches remain, `HeatRayBeam1-4` 3-way split done).
 
@@ -12065,260 +13607,167 @@ existing claims table. **Role: verification + coordination only — no yaml file
 
 - Verification:
 
-
   - `scratchpad/heatray_*.json` before/after: all four weapons **identical**
-
 
   - `tools/audit/find_empty_warhead.py` → 0
 
-
   - `tools/audit/effect_audit.py` → 0 duplicate `DamagesConcrete`
-
 
   - `tools/audit/audit_warhead_split.py` at/below baseline (952)
 
-
   - `tools/audit/audit_physical_state_warheads.py` PASS
-
 
   - `tools/audit/audit_doc_claims.py` PASS
 
-
   - `tools/balance/verify_generator_sync.py` drift 0
-
 
   - `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded`; no new `exception-*.log`
 
-
-
-
-
 ## 2026-08-23 — Ixian giant multi-warhead 3-way split (boot-gated)
-
-
-
-
 
 - Converted `D2K_TowerMissile` and `mtank_pri2` in
 
-
   `mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml` from the old mixed
-
 
   `^Grenade`/`^MediumFlameWeapon`/`^FlakWeapon`/`^D2KMissile` full-stack pattern to
 
-
   explicit `Inherits@wh` / `Inherits@wh2` / `Inherits@wh3` (and `@wh4` for the tower)
-
 
   / `Inherits@proj` / `Inherits@fx`.
 
 - Removed legacy full-stack inherits (`^Grenade`, `^MediumFlameWeapon`, `^FlakWeapon`,
 
-
   `^D2KMissile`). Both weapons were added to the `docs/design/WEAPON_3WAY_SPLIT.md`
-
 
   exception allow-list because their resolved giant multi-warhead identity requires
 
-
   more than two warhead layers (Demolition + Flame + Flak + MissileAP for the tower;
-
 
   Demolition + Flame + MissileAP for the tank).
 
 - Added four D2K Shared templates in `mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml`:
 
-
   `^Projectile_Missile_Heavy_D2K_TowerMissile`,
-
 
   `^Projectile_Missile_Heavy_D2K_mtank_pri2`,
 
-
   `^Effect_MissileAP_Heavy_D2K_TowerMissile`, and
-
 
   `^Effect_MissileAP_Heavy_D2K_mtank_pri2`.
 
 - Preserved resolved `Damage`, `Versus`, `Spread`, `Falloff`, `DamageTypes`,
 
-
   `PhysicalState`, `ReloadDelay`, `Range`, `MinRange`, `Report`, `ValidTargets`,
-
 
   `TargetActorCenter`, `Burst`/`BurstDelays`, `Projectile` visuals/turn behaviour,
 
-
   `Concrete`, glow, smudges, shield-hit, air/water effects, and the mixed
-
 
   Demolition/Flame/Flak/MissileAP warhead contributions on the tower.
 
 - Verification:
 
-
   - `scratchpad/verify_ixian.py` (equivalent to `tools/audit/review_resolve_diff.py`)
-
 
     OK for both weapons
 
-
   - `tools/audit/effect_audit.py` → 0 duplicate `DamagesConcrete`
-
 
   - `tools/audit/find_empty_warhead.py` → 0 empty warheads
 
-
   - `tools/audit/find_orphan_old_keys.py` → 0 real bugs
-
 
   - `tools/audit/audit_warhead_split.py` at/below baseline (952)
 
-
   - `tools/audit/audit_balance_drift.py` → 32 ledgers clean (re-extracted via `extract_stats.py`)
-
 
   - `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded`; no new `exception-*.log`
 
-
-
-
-
 - **Post-audit correction:** `tools/audit/review_resolve_diff.py` compared
-
 
   the core behavioural invariants, but a full resolved-vs-baseline diff
 
-
   (`scratchpad/compare_full.py`) showed the per-weapon `Versus` and warhead
-
 
   overrides still lived inside the weapon nodes. Restructured the two Ixian
 
-
   weapons so every `Versus` row lives in dedicated D2K Shared
-
 
   `^Warhead_*_D2K_TowerMissile` / `^Warhead_*_D2K_mtank_pri2` templates (with all
 
-
   plating rows present, missing ones at the 100% default), and the weapon nodes
-
 
   only carry `Inherits@wh`/`Inherits@wh2`/`Inherits@wh3` (and `@wh4` for the
 
-
   tower) plus `Inherits@proj`/`Inherits@fx`. This eliminates the `-Key:` removal
-
 
   hacks while preserving the resolved baseline exactly. Re-extracted all balance
 
-
   ledgers (`extract_stats.py`) and re-ran `audit_balance_drift.py` (clean).
-
-
-
 
 ## 2026-08-23 — D2K Rocket Trooper family 3-way split (boot-gated)
 
-
-
-
-
 - Converted `D2K_Rocket_Trooper` (`mods/cameo/weapons/d2k.yaml`),
-
 
   `D2K_Rocket_Trooper1`/`D2K_Rocket_Trooper2` (`mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml`),
 
-
   and `D2K_Rocket_Trooper_AA`/`D2K_Rocket_Trooper_AGOnly` (`mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml`)
 
-
   from the old `Inherits: ^D2KRocket` / `Inherits: ^D2K_Cannon` full-stack pattern to explicit
-
 
   `Inherits@wh` / `Inherits@proj` / `Inherits@fx`.
 
 - Removed legacy full-stack inherits (`^D2KRocket`, `^D2K_Cannon`). The triple-warhead
 
-
   Rocket Troopers were added to the `docs/design/WEAPON_3WAY_SPLIT.md` exception
-
 
   allow-list because their resolved damage identity requires three warhead layers.
 
 - Added six D2K Shared templates in `mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml`:
 
-
   `^Projectile_Missile_Medium_D2K_Rocket_Trooper`,
-
 
   `^Projectile_Missile_Light_D2K_Rocket_Trooper1`,
 
-
   `^Projectile_Missile_Light_D2K_Rocket_Trooper_AA`,
-
 
   `^Projectile_Grenade_Light_D2K_Rocket_Trooper2`,
 
-
   `^Projectile_Grenade_Light_D2K_Rocket_Trooper_AGOnly`,
-
 
   and `^Effect_MissileAP_Heavy_D2K_Rocket_Trooper`.
 
 - Preserved `Damage`, `Versus`, `Spread`, `ReloadDelay`, `Range`, `Report`, `ValidTargets`,
 
-
   `Projectile` visuals/turn behaviour, `Concrete`, glow, smudges, shield-hit, air/water
-
 
   effects, and the mixed Demolition/Railgun/Cannon warhead contribution on Trooper2/AGOnly.
 
 - Verification:
 
-
   - `tools/audit/review_resolve_diff.py` OK for all five weapons
-
 
   - `tools/audit/effect_audit.py` → 0 duplicate `DamagesConcrete`
 
-
   - `tools/audit/find_empty_warhead.py` → 0 empty warheads
-
 
   - `tools/audit/find_orphan_old_keys.py` → 0 real bugs
 
-
   - `tools/audit/audit_balance_drift.py` → 32 ledgers clean (re-extracted via `extract_stats.py`)
-
 
   - `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded`; no new `exception-*.log`
 
-
-
-
-
 ## 2026-08-23 — Documentation review + doc_claims reconciliation
 
-
-
-
-
 - Completed a full discrepancy review of design/instruction/audit documents
-
 
   (`docs/research/doc_review.md` generated for inspection).
 
 - Reconciled `docs/audit/doc_claims.yaml` with live measurements:
 
-
   `multi_main_fired_weapons` 975→939, `meters_filling_before_death` 118→122,
 
-
   `corrosion_meter_actors` 783→785, `w24_multi_main_fed` 386→385,
-
 
   `physical_state_fired_weapons` 449→450.
 
@@ -12326,80 +13775,53 @@ existing claims table. **Role: verification + coordination only — no yaml file
 
 - Updated `docs/design/ROADMAP.md` to reflect live W2 status (`^LightFlameWeapon`
 
-
   still has 28 inheritors, not ready/done) and current generator drift
-
 
   (`verify_generator_sync.py` reports drift = 10 + `^Warhead_Sniper_Light` not emitted).
 
 - Identified next D2K 3-way split targets after `DevBullet`/`PlasBullet`:
 
-
   `D2K_Rocket_Trooper` family (in progress by subagent) and Ixian giant multi
 
-
   (`D2K_TowerMissile`, `mtank_pri2` in
-
 
   `mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml`).
 
 - Outstanding cross-cutting drift (not D2K): `tools/balance/verify_generator_sync.py`
 
-
   reports 9 chemical warhead blocks out of sync with `gen_weapon_template.py`
-
 
   (`PhysicalStates` vs `PhysicalStateName`, `Corrosion` scale, `TiberiumDeath`
 
-
   vs `ExplosionDeath`). Pending maintainer/generator alignment before splicing.
-
-
-
-
-
-
 
 ## 2026-08-20 — D2K Devastator/Plasma cannon 3-way split (boot-gated)
 
-
-
-
-
 - Converted `DevBullet` and `PlasBullet` in `mods/cameo/weapons/d2k.yaml` from the old
 
-
   `Inherits: ^D2K_Cannon` / `Inherits: DevBullet` pattern to explicit
-
 
   `Inherits@wh` / `Inherits@proj` / `Inherits@fx`.
 
 - Added `^Warhead_CannonHE_Heavy_D2K_DevBullet`, `^Projectile_Shell_Heavy_D2K_DevBullet`,
 
-
   and `^Effect_CannonHE_Heavy_D2K_DevBullet` in
-
 
   `mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml`.
 
 - Preserved `Spread: 666`, `Damage: 80000`, `Versus`, `DamageTypes`, `HealthPercentageDamage`,
 
-
   `Concrete: 3333`, `Glow`, `d2k_shockwave` impact sound/animation, `Projectile` speed/image,
-
 
   `Range`, `ReloadDelay`, `Report`, and all `EffectAir`/`EffectWater`/shield/smudges.
 
 - Fixed the duplicate ground effect: the old `Warhead@3Eff: d2k_shockwave` and inherited
 
-
   `Warhead@Effect: d2k_small_napalm` were merged into a single `Warhead@Effect: d2k_shockwave`
-
 
   with `ValidTargets: Ground, Ship`.
 
 - `PlasBullet` now shares the same three D2K Shared layers, overriding `ReloadDelay`,
-
 
   `Projectile` speed/image, and main warhead `Damage`/`Spread` only.
 
@@ -12407,33 +13829,19 @@ existing claims table. **Role: verification + coordination only — no yaml file
 
 - Verification:
 
-
   - `tools/audit/effect_audit.py` → 0 duplicate `DamagesConcrete`
-
 
   - `tools/audit/find_empty_warhead.py` → 0 empty warheads
 
-
   - `tools/audit/find_orphan_old_keys.py` → 0 real bugs
-
 
   - `tools/audit/audit_balance_drift.py` → 32 ledgers clean
 
-
   - `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded`; no new
-
 
     `exception-*.log`
 
-
-
-
-
 ## 2026-08-22 — W24 cluster 9: D2K-rocket six-weapon split (boot-gated)
-
-
-
-
 
 - Converted `GoliathRockets_AA`, `WraithRockets_AA`, `SunDogRockets`, `MissileTurret` (`mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml`), `ScoutRockets_AA` (`mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml`), and `HeavyOrdosCombatTankRockets` (`mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml`) to the single `^D2KRocket` archetype.
 
@@ -12453,45 +13861,27 @@ existing claims table. **Role: verification + coordination only — no yaml file
 
 - Verification:
 
-
   - `tools/audit/review_resolve_diff.py` OK for all six
-
 
   - `find_empty_warhead.py` = 0
 
-
   - `find_orphan_old_keys.py` = 0 real bugs
-
 
   - `audit_warhead_split.py` at/below baseline (952)
 
-
   - `audit_physical_state_warheads.py` PASS
-
 
   - `audit_balance_drift.py` clean
 
-
   - `sweep_areadamage.py` dry-run no cluster changes
-
 
   - `extract_stats.py` clean
 
-
   - `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded`; no new `exception-*.log`
-
-
-
-
 
 ## 2026-08-22 — W24 cluster 5: Tiberian Sun tiberium bazookas (boot-gated)
 
-
-
-
-
 - Converted `TSTibBazooka` (Nod) and `TSChemBazooka` (Forgotten) to the 3-way split
-
 
   using `^Warhead_MissileAP_Light`, `^Projectile_Missile_Light`, `^Effect_MissileAP_Light`.
 
@@ -12499,31 +13889,25 @@ existing claims table. **Role: verification + coordination only — no yaml file
 
 - Collapsed `6000` chemical + `24000` missile damage into one `Damage: 30000` main and
 
-
   `3` + `12` percentage into a single `Damage: 15` percentage warhead.
 
 - Preserved the `Corrosion` physical state by keeping `PhysicalStateName: Corrosion` and
 
-
   scaling the amount to the merged warhead (`PhysicalStateScale: 20`) so the post-armor
-
 
   corrosion matches the old 6000-damage chemical contribution.
 
 - Preserved ally-damage proportion with `FriendlyFireDamage: 90` on both main and
 
-
   percentage warheads.
 
 - Preserved `spittrail` missile trail, `small_poof` ground effect, `med_explosion_air`
-
 
   air effect, `Concrete: 100`, shield-hit duration 6, and all smudges.
 
 - Kept `TSChemBazooka`'s `SpawnSmokeParticle` cloud warhead.
 
 - Fixed an attempted `-Warhead@EffectWater:` removal that failed because
-
 
   `^Effect_MissileAP_Light` does not define that key.
 
@@ -12533,61 +13917,41 @@ existing claims table. **Role: verification + coordination only — no yaml file
 
 - Verification:
 
-
   - `find_empty_warhead.py` = 0
-
 
   - `find_orphan_old_keys.py` = 0 real bugs
 
-
   - `audit_warhead_split.py` at/below baseline
-
 
   - `audit_physical_state_warheads.py` PASS
 
-
   - `audit_balance_drift.py` clean
-
 
   - `review_resolve_diff.py` OK for both weapons
 
-
   - `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded`; no new
-
 
     `exception-*.log` after the fix.
 
-
-
-
 ## 2026-08-22 — W24 cluster 4: Dragon SAM (boot-gated)
 
-
-
-
-
 - Converted `Dragon` in `mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml` to the
-
 
   3-way split using `^Warhead_MissileAA_Heavy`, `^Projectile_Flak_Heavy`, `^Effect_Flak_Heavy`.
 
 - Removed old `^HeavyAAWeapon`, `^HeavyMissile`, and `^ImpactGlow` inherits; moved the
 
-
   `GlowImpact` warhead into the local effect layer.
 
 - Preserved the homing `Missile` projectile with `Image: MISSILE`, `TrailImage: smokey`,
-
 
   inaccuracy 150, speed 500, launch/turn behavior, and the AA-only `ValidTargets: Air`.
 
 - Collapsed two 6000-damage warheads into one `Damage: 12000` main and `Damage: 6`
 
-
   percentage, preserving `ValidRelationships: Neutral, Enemy`.
 
 - Preserved `big_frag` / `small_building` / `small_splash` impact effects, shield-hit
-
 
   duration 10, concrete damage 200, and all smudge behavior.
 
@@ -12599,51 +13963,33 @@ existing claims table. **Role: verification + coordination only — no yaml file
 
 - Verification:
 
-
   - `find_empty_warhead.py` = 0
-
 
   - `find_orphan_old_keys.py` = 0 real bugs
 
-
   - `audit_warhead_split.py` at/below baseline
-
 
   - `audit_balance_drift.py` clean
 
-
   - `review_resolve_diff.py` OK for `dragon`
-
 
   - `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded`; no new
 
-
     `exception-*.log`.
-
-
-
 
 ## 2026-08-22 — W24 cluster 3: FutureTech missile javelins (boot-gated)
 
-
-
-
-
 - Converted `FutureJavelinRockets`, its children (`_elite`, `Deployed`, `Deployed_elite`),
-
 
   and `Future_MultiMissile_Javelin` to `^Warhead_MissileAP_Light` with the 3-way split.
 
   Removed old `^LightMissile`, `^FlakWeapon`, `^MediumMissile`, `^ShrapnelWeapon`, and
 
-
   `^D2KRocket` inherits. Preserved resolved `d2k_RPG` projectile image/trail, `ROCKET1.WAV`
-
 
   report, ranges, reload delays, burst offsets, and all impact effects.
 
 - Collapsed five duplicate damage warheads per weapon into one `Damage: 10000` main and a
-
 
   single `Damage: 5` percentage warhead.
 
@@ -12655,51 +14001,33 @@ existing claims table. **Role: verification + coordination only — no yaml file
 
 - Verification:
 
-
   - `find_empty_warhead.py` = 0
-
 
   - `find_orphan_old_keys.py` = 0 real bugs
 
-
   - `audit_warhead_split.py` at/below baseline
-
 
   - `audit_balance_drift.py` clean
 
-
   - `review_resolve_diff.py` OK for all five weapons
-
 
   - `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded`; no new
 
-
     `exception-*.log`.
-
-
-
 
 ## 2026-08-22 — W24 cluster 2 + weapon-family corrections (boot-gated)
 
-
-
-
-
 - Corrected `wc2cannontowerFire` to `CannonHE_Heavy` and `wc2dragonFireVisible` to
-
 
   `Flame_Heavy` after maintainer review; preserved resolved projectile/effect behaviour.
 
 - Converted W24 cluster: `SporemawShoot`, `wc2demolitionsquadExplode`,
 
-
   `wc2mageFireballVisible`/`wc2mageFireballExplosion`, and child `wc2ogremageRunes_Hit`
-
 
   to `^Warhead_CannonAP_Light` with one warhead, one projectile, and one effect inherit.
 
 - Moved Protoss `Inherits@corr: ^Corrodible` into `^LargeProtoss` and removed six
-
 
   redundant per-unit corrosion inherits (dragoon/archon now covered).
 
@@ -12711,50 +14039,33 @@ existing claims table. **Role: verification + coordination only — no yaml file
 
 - Verification:
 
-
   - `find_empty_warhead.py` = 0
-
 
   - `find_orphan_old_keys.py` = 0 real bugs
 
-
   - `audit_warhead_split.py` at/below baseline (977)
-
 
   - `audit_balance_drift.py` clean
 
-
   - `review_resolve_diff.py` OK for all cluster weapons; `wc2ogremageRunes_Hit` intentionally
 
-
     collapsed from 10 inherited damage warheads + 1 child warhead to a single `Damage: 11250`
-
 
     main (expected Damage multiset flag).
 
   - `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded` with no new
 
-
     `exception-*.log`.
-
-
-
 
 ## 2026-08-21 — Cryo/Inferno promoted to blend families (package 3)
 
-
-
-
-
 - `tools/balance/gen_weapon_template.py`:
-
 
   - Removed `Cryo` / `Inferno` from `INHERIT_FAMILIES`.
 
   - Added `Cryo` = Laser×Prism and `Inferno` = Flame×Prism to `BLEND_FAMILIES`.
 
   - Updated `COMPOSITION` (`Cryo` energy 0.55 / thermo 0.25 / kinetic 0.20) and
-
 
     `COMPOSITION_OVERRIDE` (`Inferno` thermo 0.65 / energy 0.35).
 
@@ -12764,9 +14075,7 @@ existing claims table. **Role: verification + coordination only — no yaml file
 
 - Regenerated all 97 `^Warhead_*` templates in `mods/cameo/weapons/weapons.yaml`
 
-
   via `splice_templates.py --all`; `verify_generator_sync.py` reports drift = 1
-
 
   (the pre-existing hand-authored `^Warhead_Sniper_Light` only).
 
@@ -12774,92 +14083,65 @@ existing claims table. **Role: verification + coordination only — no yaml file
 
 - Updated `docs/design/PHYSICAL_STATE_SYSTEM.md`, `docs/design/ARMOR_LAYERS.md`,
 
-
   and `docs/design/BALANCE_PROGRAM_PLAN.md` to reflect the new family model.
 
 - Verification: `extract_stats.py --check` 0 drift; `audit_balance_drift.py` clean;
 
-
   `audit_physical_state_warheads.py` PASS; `audit_armor_upgrade_harm.py` clean;
 
-
   `test_plating_composition.py` 10/10; `test_physical_state_price.py` 17/17;
-
 
   `find_empty_warhead.py` 0; `find_orphan_old_keys.py` 0 real bugs.
 
 - Boot-gate: `launch-game.cmd` reached `MenuPostProcessEffect.PostWorldLoaded`,
 
-
   `exception-*.log` count 183 → 183 (no new exceptions).
-
-
-
 
 ## 2026-08-20 — Computed prerequisite-chain tech tier
 
-
-
-
-
 - Added `tools/balance/tier_chain.py` with `TierChain(model)` resolving buildable
-
 
   prerequisites to a total building-chain cost `C`, restricted to the actor's
 
-
   own ContentPack leaf plus the same game's `Shared` pack. Cheapest valid provider
-
 
   selected per token; buildings deduplicated across branches; cycles are broken.
 
 - `TierChain` indexes `Building` actors with `Valued.Cost` and both their actor
 
-
   name and `ProvidesPrerequisite` tokens as providers.
 
 - `tools/balance/formula.py` now exports `TIER_B` (9500.0), `TIER_S` (8250.0),
 
-
   and `tier_multiplier(C)`. Docstrings updated to distinguish absolute
-
 
   (`class_anchor_price`) and relative (`class_baseline_price`) usage.
 
 - `tools/balance/extract_stats.py` attaches `tier_chain_cost` and `tier_multiplier`
 
-
   to each buildable actor's `_derived` blob; manual `design.tech_tier` values are
-
 
   never overwritten.
 
 - `tools/balance/fit_class.py` uses the absolute tier in `unit_inputs()`, preferring
 
-
   a manual `design.tech_tier` and falling back to the derived `tier_multiplier`.
 
 - `tools/balance/propose_class_rebalance.py` computes per-class relative tier
 
-
   `f(C)/f(C_anchor)` for `class_baseline_price`; the anchor's manual `tech_tier`
-
 
   is used as the denominator when present.
 
 - `tools/balance/build_workbook.py` writes the absolute `TechTier` to the
 
-
   spreadsheet and divides by the anchor's absolute tier inside the class-baseline
-
 
   `Price` and `RangeSolve` formulas.
 
 - `tools/balance/check_band.py` loads derived sidecars, computes absolute unit
 
-
   tier, and uses the relative tier for `class_baseline_price` while keeping the
-
 
   absolute tier for `class_anchor_price`.
 
@@ -12867,16 +14149,13 @@ existing claims table. **Role: verification + coordination only — no yaml file
 
 - Verified: `td_nod_lasertrooper` → `tier_chain_cost = 27000.0`, `tier_multiplier =
 
-
   0.3204`; its closure contains only Nod and Shared buildings (no GDI).
 
 - `extract_stats.py --check` reports 0 drifted; `audit_balance_drift.py` is clean.
 
 - `build_workbook.py` and `propose_class_rebalance.py --class mbt` run without
 
-
   errors; `fit_class.py --class scout --anchor naxis_naxiriflesoldier` produces
-
 
   a candidate and was reverted so `class_anchors.json` is unchanged.
 
@@ -12884,40 +14163,25 @@ existing claims table. **Role: verification + coordination only — no yaml file
 
 - Building-plug addons (`Plug:` trait) are not counted as separate actor-name
 
-
   providers, so `wc2_orcs_deathknight` resolves to $15,000 (Great Hall +
-
 
   Temple of the Damned) rather than double-counting the Fortress upgrade plug.
 
-
-
-
 ## 2026-08-19 — Delivery-weighted physical-state price multiplier wired into fit_class
-
-
-
-
 
 - `tools/balance/extract_stats.py` now imports `physical_state_price` and calls
 
-
   `physical_state_price.actor_multipliers(rs)` once per extraction pass. The resulting
-
 
   per-actor record (`physical_state_weight`, `physical_state_multiplier`,
 
-
   `physical_state_weapon`) is attached to the actor's `_derived` blob and lifted into
-
 
   `docs/balance/derived/*.json` by `split_derived()`.
 
 - `tools/balance/fit_class.py` now applies `formula.physical_state_price_multiplier()`
 
-
   in `price_unit()`, using the derived sidecar weight. The helper `physical_state_weight()`
-
 
   checks `u["_derived"]`, then the sidecar `du`, then the raw unit, defaulting to 0.
 
@@ -12925,12 +14189,9 @@ existing claims table. **Role: verification + coordination only — no yaml file
 
 - Verified with `fit_class.py --class line_breaker --anchor td_nod_flametank --use-k`:
 
-
   the anchor prices at **1000** against an actual cost of **800** (+25%), matching the
 
-
   full E2 ceiling. Non-state anchors (e.g. `mbt` / `tiger.nax`) price at cost0 with no
-
 
   surcharge.
 
@@ -12938,128 +14199,81 @@ existing claims table. **Role: verification + coordination only — no yaml file
 
 - Updated `docs/design/PHYSICAL_STATE_SYSTEM.md` and `docs/design/ROADMAP.md`.
 
-
-
-
 ## 2026-08-18 — ApplyPhysicalState → damage-scaled conversion (flame/chemical, boot-gated)
-
-
-
-
 
 - Implemented `tools/balance/convert_apply_to_scaled_v2.py` (dry-run by default,
 
-
   `--apply` required, block-aware/line-based, no regex, preserves BOM/line endings,
-
 
   reports standalone cases).
 
 - Converted legacy templates `^LightFlameWeapon`, `^MediumFlameWeapon`,
 
-
   `^HeavyFlameWeapon`, `^LightChemicalWeapon`, `^MediumChemicalWeapon`,
-
 
   `^HeavyChemicalWeapon` and all concrete overrides in 34 YAML weapon files:
 
-
   - `SpreadDamage` → `AreaDamage`
-
 
   - `HealthPercentageDamage` → `AreaDamagePercentage`
 
-
   - removed `Range:` from inside converted warheads
-
 
   - main warhead: `ValidRelationships: Ally, Neutral, Enemy`,
 
-
     `FriendlyFireDamage: 50`, `FriendlyFireSpread: 50`
-
 
   - main + percentage warheads: `PhysicalStateName` / `PhysicalStateScale`
 
-
     (`Temperature`/`300` for flame, `Corrosion`/`300` for chemical)
-
 
   - removed associated FriendlyFire twins and fixed `ApplyPhysicalState` warheads.
 
 - Removed two stale `-Warhead@PhysicalStateMediumFlameWeapon*` removal lines in
 
-
   `mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml` that became invalid
-
 
   after the template physical-state warheads were removed.
 
 - Verification:
 
-
   - `python tools/audit/audit_physical_state_warheads.py` PASS
-
 
   - `python tools/audit/find_empty_warhead.py` = 0
 
-
   - `utility.cmd cameo --check-yaml` completed without fatal YAML exceptions
-
 
     (pre-existing actor/condition warnings unrelated to this change)
 
-
   - `launch-game.cmd` reached the main menu (`MenuPostProcessEffect.PostWorldLoaded`
-
 
     in `%APPDATA%/OpenRA/Logs/perf.log`; no new `exception-*.log` after the run).
 
 - Standalone `ApplyPhysicalState` cases left untouched: 43 non-target (cryo/non-family)
 
-
   blocks reported by the conversion script; flame/chemical `ApplyPhysicalState`
-
 
   warheads were removed.
 
 - Note: `tools/audit/audit_physical_state_warheads.py` already expects
 
-
   `PhysicalStateScale: 300` in the working tree; do not commit without reviewing
-
 
   that diff.
 
-
-
-
-
-
-
 ## 2026-08-17 — RA2 effect-template final sweep (Shared/Allies/Yuri/redalert2mod/AsianAlliance/Syndicate, boot-gated)
-
-
-
-
 
 - Completed the final `ra2_*` inline-effect sweep in the loaded RA2 tree
 
-
   (`mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml`,
-
 
   `mods/cameo/ContentPacks/RedAlert2/Allies/yaml/weapons.yaml`,
 
-
   `mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml`,
-
 
   `mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml`,
 
-
   `mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml`,
-
 
   `mods/cameo/weapons/redalert2mod.yaml`).
 
@@ -13067,21 +14281,17 @@ existing claims table. **Role: verification + coordination only — no yaml file
 
 - Updated `^Effect_Psi_Wave_RA2` with `ImpactActors: false` and `AffectsParent: true`
 
-
   and wired `PsiWaveX` to it.
 
 - Wired `IonPulseDischarge` to `^Effect_Emp_Fx_RA2` and `ChronoshiftImpact` to
-
 
   `^Effect_Chrono_Fd_RA2`, preserving their secondary/glow/distortion warheads.
 
 - Converted `NaxisBlackBomb`, `AsianOilBomb`, and `RA2FreedomAK47` to the
 
-
   appropriate `^Effect_*_RA2` inherits.
 
 - Cleaned redundant local `Warhead@Effect` / `-ImpactSounds` blocks from
-
 
   `RA2MirageGun` and `RA2HeavyMirageGun`.
 
@@ -13089,100 +14299,69 @@ existing claims table. **Role: verification + coordination only — no yaml file
 
 - Simplified `DredMissile` and `YRBoomerSCUD` water-effect overrides (removed
 
-
   the `gexpwala` typo sound, kept `ImpactActors: false`).
 
 - Fixed `LatinBuggyRocket` and `AsianSmallOilBomb` to a single winning
-
 
   `Inherits@fx`.
 
 - Boot crash on `^Effect_Tesla_Impact_RA2` / `^Effect_Tesla_Heavy` circular
 
-
   inheritance was fixed by inlining the `^Effect_Tesla_Heavy` `EMPUnit` and
 
-
   `ShieldHit` warheads into `^Effect_Tesla_Impact_RA2`, `^Effect_Ion_Ring_RA2`,
-
 
   and `^Effect_Psi_Wave_RA2` instead of inheriting them.
 
 - Verification: `find_empty_warhead.py = 0`, `audit_empty_warheads.py = 0`,
 
-
   `extract_stats.py` clean, `audit_balance_drift.py` clean,
-
 
   `audit_effect_warhead_names.py` 0 violations, `check_effect_audio.py` OK,
 
-
   `launch-game.cmd` reached the main menu
-
 
   (`MenuPostProcessEffect.PostWorldLoaded` in `perf.log`; no new
 
-
   `exception-*.log` after the successful run). One stale exception log from
-
 
   the pre-fix boot remains (`exception-2026-08-17T161444Z.log`).
 
 - `python tools/audit/run_all.py` still exits 1 on pre-existing failures
 
-
   (`audit_inherits`, `audit_upgrades`, `audit_fluent`, `audit_basebuilder_crates`,
 
-
   `audit_buildable_order`, `audit_weapon_suffixes`, `audit_warhead_split`);
-
 
   these are unrelated to this effect wiring and pre-date the current sweep.
 
 - Remaining: `SCTyr` in `StarCraft/Terran/yaml/weapons.yaml` still has a
 
-
   three-explosion `ra2_*` list with no matching single RA2 template; the
-
 
   legacy `mods/cameo/weapons/redalert2.yaml` is excluded from the loaded tree.
 
-
-
-
 ## 2026-08-17 — RA2 sprite-named effect template library (foundation + shared/Soviets wiring, boot-gated)
-
-
-
-
 
 - Generated a complete `^Effect_<family>_<size>_RA2` template library for the
 
-
   54 `ra2_*` effect sequences in `mods/cameo/sequences/misc.yaml` and inserted
-
 
   it into `mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml`.
 
 - Replaced the old `^Effect_MissileHE_Medium_RA2` with the new
 
-
   `^Effect_Explosion_Large_RA2`.
 
 - Wired the shared RA2 weapon stacks to the new templates:
 
-
   `^RA2FlakWeapon`, `^RA2LightMissile`, `^RA2MediumMissile`,
-
 
   `^RA2HeavyMissile`, `^RA2TankDestroyerCannon`, `^RA2MediumCannon`,
 
-
   `^RA2HeavyCannon`, `^RA2Grenade`, `^RA2TeslaWeapon`, `^RA2RailgunWeapon`,
 
-
   `^RA2EliteEffects`, `RA2UnitExplode`, `RA2UnitExplodeBig`,
-
 
   `RA2BuildingExplode`, `KirovExplode`, `RA2LargeDebris`, `RA2Terrorist`.
 
@@ -13190,78 +14369,53 @@ existing claims table. **Role: verification + coordination only — no yaml file
 
 - Began Soviets concrete cleanup: `RA2TURRETFLAKAA`, `SeaScorpion_AA`,
 
-
   `RA2FLAKAA`, `RA2FlakTrackAAGun`, `RA2KirovBomb`, `RA2KirovBomb_tesla`,
 
-
   `RA2120xmm`, `RA160mmE_fire_elite`, `RA160mmE_tesla_elite`,
-
 
   `RA2UnitExplodeSmall`.
 
 - Verification: `find_empty_warhead.py = 0`, `extract_stats.py` clean,
 
-
   `audit_balance_drift.py` clean, `launch-game.cmd` reached the main menu
 
-
   (`MenuPostProcessEffect.PostWorldLoaded` in `perf.log`, no new
-
 
   `exception-*.log`).
 
 - Remaining: wire Allies/Yuri/redalert2mod/Shared concrete weapons that still
 
-
   have inline `Explosions: ra2_*`; sweep RA2Atomic nuke-ball and Lightning
-
 
   Storm ion-ring effects; run `review_resolve_diff.py`; full audit suite has
 
-
   pre-existing failures unrelated to this change.
-
-
-
 
 ## 2026-08-17 — RA2 effect template sweep continuation (Shared/redalert2mod/Yuri, Floating Disk, boot-gated)
 
-
-
-
-
 - `mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml`:
 
-
   - `RA2Atomic` now uses `Inherits@fx: ^Effect_Nuke_Ball_RA2`; removed local
-
 
     `Warhead@Effect`, kept radiation warhead.
 
   - `^Effect_Ion_Ring_RA2` updated to inherit `^Effect_Tesla_Heavy` and added
 
-
     `ImpactActors: false`; `LightningStormDamage` now `Inherits@fx:` from it,
-
 
     preserving both `SpawnSmokeParticle` warheads.
 
   - Added `Warhead@EffectAir` to `^Effect_Tesla_Impact_RA2` and wired
 
-
     `TeslaArmorDischargeDummy` to it, removing its local effect blocks.
 
   - Wired remaining concrete weapons to RA2 effect templates:
 
-
     `RA2HoverMissile_elite`, `RA2ThunderboltMissile_elite`,
-
 
     `RA2MultiHoverMissile_elite`, `RA2MultiThunderboltMissile_elite`,
 
-
     `RA2DroneSparks`, `MigMissiles_fire`, `MigMissiles_tesla`, `RA2SCUDELITE`,
-
 
     `RA2DepthCharge` (added `^Effect_Depth_Charge_RA2`).
 
@@ -13269,97 +14423,67 @@ existing claims table. **Role: verification + coordination only — no yaml file
 
 - `mods/cameo/weapons/redalert2mod.yaml`:
 
-
   - Wired `AsianHowitzerSplash`, `AsianFlameFragment`, `AsianFlamerTurret`,
-
 
     `SteelHoverMissile_elite`, `MeteorFlameFragment` to RA2 effect templates.
 
 - `mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml`:
 
-
   - Wired `RA2PsychicJab` to `^Effect_Init_Fire_RA2`.
 
 - Floating Disk muzzle:
 
-
   - Added `^RA2DiskMuzzle` in `ContentPacks/RedAlert2/Shared/yaml/sequences.yaml`
-
 
     with a `ra2_diskray` sequence.
 
   - `yuri_floatingdisk` now `Inherits: ^RA2DiskMuzzle` and overrides
 
-
     `ra2_diskray` with `Scale: 0.9`, `Offset: 0,35`, `Tick: 100`.
 
   - `Armament@SECOND` and `Armament@Steal` in
 
-
     `ContentPacks/RedAlert2/Yuri/yaml/aircraft.yaml` now use
-
 
     `MuzzleSequence: ra2_diskray`.
 
 - Skipped weapons already inheriting wired RA2 stacks (e.g., `^RA2MediumMissile`,
 
-
   `^RA2Grenade`, `^RA2TankDestroyerCannon`) and edge cases left for maintainer
-
 
   review: `DredMissile`, `NaxTorpTube` (custom water sound + wired parent),
 
-
   `NaxiMeteor` (glow fields), `MigMissiles_rad` (sprite `ra2radbang` not
-
 
   matching the `ra2_*` underscore convention).
 
 - Verification: `find_empty_warhead.py = 0`, `extract_stats.py` clean,
 
-
   `audit_balance_drift.py` clean, `launch-game.cmd` reached main menu
-
 
   (`MenuPostProcessEffect.PostWorldLoaded` in `perf.log`, no new
 
-
   `exception-*.log`). `python tools/audit/run_all.py` still reports the same
-
 
   pre-existing failures as the prior session.
 
-
-
-
 ## 2026-07-18 — BALANCE PIPELINE LIVE (all agents read this)
-
-
-
-
 
 **NEW LAW: never hand-edit balance numbers in yaml.** The pipeline is
 
-
 implemented and enforced (`docs/design/BALANCE_PIPELINE.md`, CLAUDE.md
-
 
 "Balance changes" section, DESIGN §12):
 
-
 extract_stats.py → docs/balance/*.json (raw-stat ledger, committed) →
-
 
 build_workbook.py → cameo_balance_v2.xlsx (gitignored workbench) →
 
-
 import_workbook.py → apply_balance.py --confirm (maintainer order) →
-
 
 re-extract, audits, boot, commit yaml+ledger together.
 
 `audit_balance_drift` in run_all fails RED whenever yaml and ledger
-
 
 disagree — hand edits cannot land silently anymore.
 
@@ -13367,142 +14491,95 @@ Loop PROVEN: exact fixed point + live 1000→1050→1000 round trip.
 
 Phase 5 (per-class anchors via fit_class.py + class_anchors.json)
 
-
 awaits maintainer anchor picks; the fixed-point test also exposed and
-
 
 fixed an order-dependent resolver-cache-poisoning bug in
 
-
 tools/audit/miniyaml.py that affected ALL resolved-value audits.
-
-
-
 
 ## 2026-07-18 — Claude session (TKM port + Blackrobe batch)
 
-
-
-
-
 - TKM CONTRIBUTOR PORT (`3bb6a34b3`): full-repo zip from a community
-
 
   contributor analyzed (base = cea431010 with pre-rename-id payload),
 
-
   translated through the applied rename_map_tkm, per-actor 3-way
-
 
   merged into the pack. Arsenal-tree redesign, GP-25 replaces M203,
 
-
   Berezka speed/cloak, engineer field kits, new weapons + warhead .cs
-
 
   (DLLs rebuilt). Deviations flagged in the commit (kept warfactory
 
-
   ProvidesPrerequisite — his removal would orphan every
-
 
   ~tkm_warfactory prereq).
 
 - TKM MOVED into ContentPacks/RedAlert2Mod (`d981d65fe` renames +
 
-
   `915714fe8` manifest/mod.yaml — the renames rode the earlier commit
 
-
   via the staged index; completion committed immediately). Theme
-
 
   folder rename POSTPONED (Blackrobe) — candidates logged in ROADMAP.
 
 - Monster tank Tesla/Thermonuclear rockets (`d981d65fe`): real weapon
 
-
   swaps (mammoth logic) replace the imperceptible +10% multipliers;
-
 
   duplicate ActorStatValues fixed earlier in `71765570b`.
 
 - Survival (`e8af695eb`): superlinear ramp, wave-size floor (dip fix),
 
-
   veteran waves; win-objective fix earlier in `71765570b`. `survival 2`
-
 
   copy was deleted by the team (`32669f345`) — main copy carries all.
 
 - SM passive income (Blackrobe): moondairyfarm verified correctly
 
-
   wired; the missing piece (ra2oilderrick/ra2ywall conyard provisions)
-
 
   is the MAINTAINER'S OTHER SESSION's uncommitted WIP — do not
 
-
   double-fix. Laser Beetle/M200B report: wiring verified WAD
 
-
   (replacement promotions retire them); if the REPLACEMENTS don't
-
 
   appear despite bought promotions, check rank1 granting in-game.
 
 - NEXT: FULL SM REBALANCE (ROADMAP P1, sheet-first, workbook free).
 
-
-
-
 ## 2026-07-17 — Claude session SID-20260717-cl4b7e (RA1 legacy rename + two-session repair pass)
-
-
-
-
 
 **Landed (commits `fdd466494`, `4cf7e6909` + this session's repair commit):**
 
-
 - RA1 LEGACY-ID RENAME complete: all 52 old-style ids (RAE1, PT/DD/CA,
 
-
   SS/MSUB, POWR/APWR/RASILO, BADR family, naval yards, civilians, husks,
-
 
   8 upgrade proxies) → grammar-compliant ids; only `japan` unprefixed.
 
   Applied by tools/rename/apply_ra1_legacy.py (context-scoped successor
 
-
   to apply.py). zerofighter collision → japan_zerofighter_slave.
 
 - Umlaut transliteration (schwarzermond_ubermensch), CABAL plasmaturret
-
 
   buildable + mobilestealthgenerator removed, stale RA1 monoliths deleted.
 
 - REPAIR PASS after two-session collision (this entry's second half):
 
-
   1. 13 explicit `actor_<oldid>.description/.name` yaml refs broke when
-
 
      ftl keys renamed (whole-identifier pass can't see through the
 
-
      `actor_` prefix) — added a fluent-stem pass to the applicator
 
-
      (combined-alternation regexes; 52 sequential re.subs was too slow)
-
 
      and fixed all 13. audit_fluent: 17 → 0 unresolved.
 
   2. warcraft2_en.ftl + tkm_en.ftl were NEVER registered in mod.yaml
-
 
      FluentMessages — WC2/TKM faction descriptions showed raw keys.
 
@@ -13510,9 +14587,7 @@ tools/audit/miniyaml.py that affected ALL resolved-value audits.
 
   3. 19 audit reports in docs/audit/latest/ were UTF-16-corrupted by a
 
-
      concurrent session's PowerShell `>` redirect (10 committed
-
 
      corrupted). Regenerated the whole suite via bash run_all.sh (UTF-8).
 
@@ -13520,75 +14595,51 @@ tools/audit/miniyaml.py that affected ALL resolved-value audits.
 
 - Verification: full audit suite green (fluent 0 unresolved, consistency
 
-
   73/0, packs P2 = known D2k suffix-style backlog only), resolver spot
 
-
   checks green (3913 actors / 2365 weapons, zero old ids), FACTIONS.md
-
 
   clean of old ids, boot gate to main menu.
 
 - SM promotion grid: implemented by the concurrent session in
 
-
   SchwarzerMond/yaml/promotions.yaml with CABAL-pattern gating BUT the
-
 
   chains deviate from the maintainer's image; row order under redesign —
 
-
   see ROADMAP P2 (sharpened 2026-07-17 with maintainer's MARS/tier
 
-
   clarifications + reshuffle proposal). DO NOT touch the grid before the
-
 
   maintainer picks an option.
 
 - NOTE for all agents: SCUD/SCUDNUKE (RedAlert/Soviets weapons.yaml) are
 
-
   legacy-uppercase WEAPON ids shared with generals/darkreign — WPN-MIGRATE
-
 
   scope, intentionally untouched by the actor rename.
 
 - SM PROMOTION GRID FINALIZED (maintainer decision): columns
 
-
   infantry | vehicles | air/artillery/support, tier-laddered rows —
-
 
   see ROADMAP P2 (RESOLVED) for the binding table. promotions.yaml
 
-
   re-chained, `..._promotion_bermensch` → `..._promotion_ubermensch`,
 
-
   ^PromotionUnitBuff stripped from 10 non-promotion SM units
-
 
   (FutureTech convention: grid units only). Boot green.
 
 - NEW ORDER: FULL SM REBALANCE (sheet-first; post-buff-strip stats;
 
-
   38 stat_formulas findings as the seed) — queued as ROADMAP P1.
 
-
-
-
 ## 2026-07-16
-
-
-
-
 
 **Task:** Diagnose ACP connection issue with Claude.
 
 **Done:**
-
 
 - Confirmed ACP refers to Agent Client Protocol; Claude integration is typically via `claude-agent-acp` / `claude-code-acp` or inside Devin Desktop/Windsurf/Zed/JetBrains.
 
@@ -13599,7 +14650,6 @@ tools/audit/miniyaml.py that affected ALL resolved-value audits.
 **Diagnosis (after user logs):** Devin Desktop/Windsurf is trying to spawn `npx -y @agentclientprotocol/claude-agent-acp@0.59.0`, but `npx` is not found in the IDE's PATH (`spawn npx ENOENT`). The ACP client needs Node.js installed (>=20.19 for this package) and available to the IDE process.
 
 **Fix applied:**
-
 
 - Downloaded and extracted Node.js v24.18.0 LTS to `%LOCALAPPDATA%\Programs\nodejs\node-v24.18.0-win-x64`.
 
@@ -13613,14 +14663,7 @@ tools/audit/miniyaml.py that affected ALL resolved-value audits.
 
 **Next:** Restart Devin Desktop/Windsurf so the IDE process picks up the updated `PATH`, then enable the Claude agent again.
 
-
-
-
 ## 2026-08-04 — Balance ledger re-extract
-
-
-
-
 
 - Refreshed 32 per-faction JSON ledgers from the current resolved ruleset (`python tools/balance/extract_stats.py`).
 
@@ -13632,17 +14675,9 @@ tools/audit/miniyaml.py that affected ALL resolved-value audits.
 
 - Committed updated ledgers + current uncommitted YAML rule sync (Yuri Slave Miner cost/build duration, `^SwarmlingGrinderTemplate` Valued default).
 
-
-
-
 ## 2026-08-04 — extract_stats design_weapon_class fix + HighV NRE
 
-
-
-
-
 - `tools/balance/extract_stats.py`:
-
 
   - Removed all remaining `Versus: Shield` heuristics for `design_weapon_class`.
 
@@ -13656,56 +14691,33 @@ tools/audit/miniyaml.py that affected ALL resolved-value audits.
 
 - `mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml`:
 
-
   - `HighV` `Warhead@Bullet_Medium_Percentage` was missing its warhead type, causing the weapon to be dropped from the ruleset and `td_gdi_guardtower` to fail at boot (`Weapons Ruleset does not contain an entry 'highv'`). Set it to `HealthPercentageDamage` to match `M16AP`.
 
 - Boot-gate: reached main menu (`PostWorldLoaded`); no new `exception-*.log` files.
 
-
-
-
 ## 2026-08-04 — extract_stats refine class-template detection
-
-
-
-
 
 - `tools/balance/extract_stats.py`:
 
-
   - Treat `^Projectile_*` and `^Effect_*` split-family templates as non-class
-
 
     components, leaving only `^Warhead_*` and legacy class templates as class
 
-
     inputs. This removes false `illegal_mix` hits from the new 3-way warhead
 
-
     split and lets `design_weapon_class` correctly reflect the weapon's real
-
 
     class family.
 
   - Re-extracted all 32 `docs/balance/*.json` ledgers; `extract_stats.py --check`
 
-
     reports 0 drifted.
-
-
-
 
 ## 2026-08-04 — extract_stats warhead renames and RA2 Thunderbolt family 3-way split
 
-
-
-
-
 - `tools/balance/extract_stats.py`:
 
-
   - Renamed the weapon-template output from `weapon_types` to `warheads`; it now
-
 
     contains only resolved `^Warhead_*` templates (recursed through `^`-parents).
 
@@ -13713,58 +14725,37 @@ tools/audit/miniyaml.py that affected ALL resolved-value audits.
 
   - Updated all balance-tool consumers (`build_workbook.py`, `_requantize_ledgers.py`,
 
-
     `_patch_ledgers_from_reports.py`, `fit_class.py`, `import_workbook.py`,
 
-
     `apply_balance.py`, `update_ranges.py`, `propose_class_rebalance.py`, `check_band.py`)
-
 
     to use the new ledger keys.
 
 - `mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml`:
 
-
   - Converted `RA2ThunderboltMissile`, `RA2MultiHoverMissile`, and
-
 
     `RA2MultiThunderboltMissile` to the new 3-way split: first and last `Inherits`
 
-
     become the two `^Warhead_*` templates, the last also provides `^Projectile_*`
-
 
     and `^Effect_*`; middle `Inherits` and re-added `Warhead@` overrides removed.
 
 - `mods/cameo/ContentPacks/RedAlert2/Allies/yaml/weapons.yaml`:
 
-
   - Converted `RA2PatriotThunderboltMissile` to the new 3-way split.
 
 - Re-extracted all 32 `docs/balance/*.json` ledgers; `extract_stats.py --check`
-
 
   reports 0 drifted.
 
 - Boot-gate: reached main menu (`MenuPostProcessEffect.PostWorldLoaded`); no new
 
-
   `exception-*.log` files.
-
-
-
-
-
-
 
 ## 2026-08-22 — W24 Phase B: SCUDNUKE/SCUDNUKEThermobaric collapse to Nuclear_Super
 
-
-
-
-
 - Converted SCUDNUKE in mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml:
-
 
   - Removed 15 stacked old full-stack inherits (^HeavyMissile, ^MediumMissile, ^LightMissile, ^HeavyBomb, ^ShrapnelWeapon, ^Grenade, ^HeavyChemicalWeapon, ^MediumChemicalWeapon, ^LightChemicalWeapon, ^HeavyFlameWeapon, ^MediumFlameWeapon, ^LightFlameWeapon, ^TankDestroyerCannon, ^FlakWeapon, ^NuclearWarhead).
 
@@ -14722,7 +15713,6 @@ DEVELOPMENT_LOG §"Active claims" BEFORE editing and sign commits `Co-Authored-B
 **My next step:** awaiting maintainer call on who owns batch (2) and whether the locked
 `weapons.yaml` change is signed off; then I commit what is cleared. — Devin-Nova
 
-
 ## 2026-09-05 — Claude (SWE-1.7 Max) verification + coordination pass
 
 **Identity:** Claude (Anthropic, SWE-1.7 Max). Coordinator/verifier lane, shared with Devin-Nova/Ember.
@@ -14783,7 +15773,6 @@ DEVELOPMENT_LOG §"Active claims" BEFORE editing and sign commits `Co-Authored-B
 - Corrino siege tank wiring from D2k/Shared
 - Apply Claude's patches after coordination
 - Continue D2k faction unique weapons
-
 
 ## 2026-09-05 — Devin-Nova: Claude handoff located + maintainer asks relayed
 
@@ -15165,7 +16154,6 @@ My read: (a) — the consumer fields predate the template''s map binding and the
 is an accident of the merge, not a design. Awaiting the ruling before touching files.
 — Devin-Nova
 
-
 ## 2026-09-06 — Devin-Aurora: ra1_soviets rename + split-definition cleanup + exemption repeal assessment
 
 ### ra1_soviets faction rename (commit ad7c5e232)
@@ -15327,7 +16315,6 @@ Full-suite/audit completion is recorded in `docs/audit/ASTRA_REVIEW.md`.
 PR 329 remains draft and unmerged.
 
 Co-Authored-By: Codex <noreply@openai.com>
-
 
 ## 2026-09-08 — Astra: tested pipeline implementation, pending publication
 
@@ -15509,7 +16496,6 @@ tracks it and no gate would have caught the stale "45 cells" claims this entry
 corrects.
 
 Co-Authored-By: DeepSeek Flash <noreply@deepseek.com>
-
 
 ## 2026-09-22 — NOVA: W24 lane-2 landed + semantic-merge repair (PR #431)
 
@@ -16568,7 +17554,6 @@ raids unleashed post-completion did real damage. Also added
 `ai_fransbot_versus_allies_20260928` (ra1_allies FransBot): verified the
 non-substitute light-vehicle path and producer-rebuild on a second roster.
 
-
 ## 2026-09-28 dawn — DEFEND-site anchor fallback (vendored fix)
 
 Run `support4` showed the recurring post-opening loss mode: HardBot raid kills the
@@ -17190,7 +18175,6 @@ claude-* A/B hosts and EX-3, NOVA's live batch trees are explicitly hands-off):
   revision (engine-owner reconciliation); EX-3 evidence + draft PR (Claude);
   live A/B trees stay frozen for their owners.
 
-
 ## 2026-09-30 (cont.) — F1 ladder + W3 semantics correction
 
 - Verified the REAL W3 variable against worktree diff (earlier summary had
@@ -17277,7 +18261,6 @@ claude-* A/B hosts and EX-3, NOVA's live batch trees are explicitly hands-off):
   update (merge = Claude only), EMBER #671/#674 READY, NOVA #681
   sibling lineage + LC1 squad consumer ready, #678 CA-3/CA-4 landed
   inert on master.
-
 
 ## 2026-09-30 — CA-2b verdict: BehaviourEnabled LOSES its A/B
 
@@ -18580,3 +19563,976 @@ Branch `devin/dawn/t3-public-faction` off master `8e86fca23`, worktree `C:/cameo
 * Verify: build 0E, **mod-code warnings 0**; 837/837 NUnit (+3 BotFactionView/DominantFaction);
   pytest 15/15 new file; `tools/boot_gate.ps1` PASS (menu, 0 exceptions, exit 0); audit regen: fog_honesty
   +1 site (263), ai_arch_freshness FAIL->PASS (master's committed report was stale), rest master drift.
+ 
+
+## 2026-10-05 — EMBER: AR-S residual 2 — BL_protection_episode_guard (h2 engage-vs-lure flap)
+
+* Tagged-emitter attribution on the instrumented BJ+BK build showed ~95% of the surviving
+  flagged alternation is `AttackMove(engage) <-> Move(lure)` inside the protection tick — the
+  `PredictsLoss` verdict flickers at the fog edge and each eval re-issues a different-key order
+  (the dedup key cannot express it; the rallyMode latch only covers the rally side).
+* Guard: `ProtectionEpisode` — a pure struct in `Squads/` (same testability pattern as
+  `SquadOrderDedup`). The lure episode enters on `ProtectionLureEnterConfirmTicks` (2)
+  consecutive losing evals and aborts on `ProtectionLureAbortConfirmTicks` (2) consecutive
+  non-losing evals; engage entry itself is never confirmed, so a winnable enemy still fights
+  the eval it appears. Squad evals run once per `AttackForceInterval` (~2-4 s), so each confirm
+  is one extra round, not a tick-level delay. Episode state resets on Activate and when the
+  leader is back inside `LureRallyRadiusCells` (same site as the rallyMode reset).
+* Switch: `UseProtectionEpisodeGuard` (default off) + the two confirm fields on
+  `SquadManagerBotModuleCA`; armed only via `BL_protection_episode_guard` in
+  `tools/ai/increment_switches.yaml`. Off = the per-eval decision, unchanged stream.
+* Tests: `ProtectionEpisodeGuardTest` 7/7 — flap never enters, sustained-loss enter,
+  in-flight flicker ignore, resolved-verdict abort, immediate engage, re-enter needs
+  re-confirm, degenerate 1/1 = classic per-eval.
+* Stack: `devin/ember/ars-stutter-finish` = inc/2026_10_05 (fe4459c9c) + merge of
+  `devin/ember/ars-stutter-gated` (e81da54e7: e39670678 + the BK off-path bit-identity
+  fix — EmitSet early-out keeps the unarmed grouped stream byte-identical incl. empty
+  groups, Invalid-target orders and the rearm `queued` flag; armed path unchanged) +
+  BL cherry-picked on top. Supersedes the 04g-era `9e601d213`.
+* Gates on ebed3d9dc: build 0E/8 pre-existing warnings, targeted 17/17, suite 1160/1160,
+  isolated boot `BOOT_GATE=PASS`.
+* Instrumented 3+3 (same tagged build, equal window 4002f, BJ+BK -> BJ+BK+BL): h2
+  alternations 9.0 -> 2.7 mean (-70%), total alternations 102.0 -> 71.7 (-30%), flagged
+  units 23.3 -> 21.3 (-9% — residual is `x`-emitter dominated, i.e. non-protection
+  same-order Move spam the episode guard does not target). 6/6 matches clean.
+* Demo: third arm (BJ+BK+BL) recorded on ebed3d9dc into the AR-S demo package —
+  `bl_on_bj_bk_bl_{1,2,3}_*.orarep` + README addendum.
+
+## 2026-10-05 — EMBER: AR-S2 — BO_squad_move_dedup (manager re-push emitter found; renamed from BM_protection_rally_dedup, BM is T3Verify's)
+
+* **Attribution (second tagging pass, ~58 sites auto-tagged `TargetString`)**: the residual
+  `x` stream decomposed as untagged `AttackMove` (~5.5k + 2.4k in attrib2), NOT `Move`.
+  Fully tagged run (`attrib3`, hard v hard 1v1): **`SquadManagerBotModuleCA` line 2063 —
+  `PrepositionDefenceTick`'s group `AttackMove(rally)` — 6,016/3,465 issues, 27/28 flagged
+  units, ~95% of flagged churn.** The push fires every `ProtectInterval` (50t)
+  unconditionally, bypasses the squad `OrderMemory` dedup lattice, and cancels each
+  member's in-flight activity — the unit-visible restart. `sq2352`
+  (`ReactWithFastSquads` fold-in push) is the same pattern's second site.
+* Engineer route chains (`e6` assign / `e7` recheck, ~650+1k issues/match) remain a real
+  but secondary emitter — `Recheck` re-issues the full waypoint chain every
+  `RouteRecheckTicks` (100t) at hot targets. Not folded into BM; different mechanism.
+* **Fix**: `ProtectionRallyDedup<T>` (`Squads/ProtectionRallyDedup.cs`, generic over
+  member identity for World-free tests) records the pushed rally cell + issued
+  membership; the push emits only when the rally moved >= `ProtectionRallyHysteresisCells`
+  (4) or members joined — joiner-only emit covers `ReactWithFastSquads` fold-ins.
+  `ReleaseDefenders` resets the lattice. Switch `UseProtectionRallyDedup` (default off;
+  `BO_squad_move_dedup`), off = unchanged per-interval stream.
+* **Tests**: `ProtectionRallyDedupTest` 8/8 — first-push emits all, same-cell and
+  in-band jitter suppress, past-band redirects, band measured from pushed cell (creep
+  escapes), joiner-only emit, released-then-rejoined re-orders, reset forces next push.
+* **Gates**: build 0E, focused 25/25, isolated boot `BOOT_GATE=PASS`.
+* **Instrumented 3+3 equal-window A/B** (tagged build, hard v hard, window <= 2739f):
+  manager-push stream (sq2063+sq2352) 3,381 -> 251 (**-93%**); full window 11,655 ->
+  1,203 (-89%, -88% frame-normalized). h2 rises (1,221 -> 1,580) because the deduped
+  state orders now flow uninterrupted — expected, not a regression. Flagged units
+  30 -> 34 (the metric also counts legit combat bursts).
+* **Correction to the standing question**: the residual churn is not a binary
+  attack/defend verdict flap — it is the manager's periodic group re-push colliding
+  with state-issued orders. LEARN-P6 stays a decision-quality feature, not order-rate.
+
+## 2026-10-05 — Devin-Tier4: PRICING-DEFAULT — K-basis is the default pricing path
+
+Branch devin/tier4/pricing-default, task 01a10850 (maintainer ruling 2026-10-04).
+* `fit_class.unit_inputs(use_k=True)` default flips the whole pipeline to
+  accuracy/splash/range-adjusted effective DPS; `--raw` remains the explicit opt-out on
+  fit_class / check_band / propose_class_rebalance / propose_rebalance / update_ranges.
+* `propose_class_rebalance.unit_dps` returns (total, flat, pct_floor, fallbacks): the
+  flat-context coefficient feeds the closed-form damage solve, the percentage floor is
+  added back so achieved DPS equals the solve target, and sidecar misses are counted.
+* Latent raw-basis consumers fixed: `propose_anchor_spec` nominal leg and
+  `propose_reference_anchors` dps_diagnostics now pass `use_k=False` explicitly — they
+  compare external/raw references and must not silently inherit the flip.
+* `fit_class.pricing_armaments` aligned with `priced_by_default` (unresolved armaments
+  filtered) — repaired a pre-existing 80-vs-40 test failure, not a K regression.
+* New `tools/balance/k_price_delta.py` writes
+  docs/balance/derived/pricing_default_delta.md — 492 actors, median -1.5%,
+  range -93%..+102%, per-faction movers with reason attribution (accuracy/splash/range
+  dominance per armament). Read-only; no yaml or ledger prices changed.
+* Docs re-pinned same commit: doc_claims +pricing_default_basis_is_k (measures the
+  signature default), EFFECTIVE_DAMAGE wired-status, BALANCE_PROGRAM_PLAN W11 signed off,
+  anchor_decisions_log entry, k_comparison_mbt regenerated (was stale 40->50 members).
+* Rebased onto inc/2026_10_05 (fe4459c9c) post-commit; derived ledgers regenerate
+  byte-identical (deterministic), k_comparison_mbt + pricing_default_delta rebuilt on
+  the new base — 492 actors, median -1.5%, range -93%..+102%, and a complete >+-25%
+  mover table (147 actors) with per-term reasons and a data-flag column (49 near-zero
+  accuracy suspects, 56 provisional-model actors).
+* Gates on the inc base: build 0E (Release); dotnet OpenRA.Test 521/523 (0 fail);
+  audit_doc_claims 44/44 clean; boot_isolated.ps1 BOOT_GATE=PASS; full tools/tests
+  2896 tests with 129 failures — byte-identical failure set to the master-base run,
+  all in weapon-structure/YAML-baseline suites (none touch pricing code paths;
+  armament_pairing fingerprint staleness predates both bases).
+* Crash note: machine lost ~00:05 mid-gate; worktree survived intact. fsck reports
+  missing objects in the shared store — unreachable crash debris only, verified clean
+  from refs; lead confirmed no repair needed.
+
+## 2026-10-06 — Devin-Architect: ECON-B `BU_harvester_logistics` (SPEC_2026-10-05_econ_logistics Part B)
+
+* One owner, extended not forked: `HarvesterBotModuleCA` keeps the classic path verbatim behind
+  `UseHarvesterLogistics` (default false); switch `BU_harvester_logistics` arms it on
+  `HarvesterBotModuleCA@generic` only, @classic untouched.
+* Reservations (B1): refinery-served fields keep `ceil(cells/ResourceCellsPerHarvester)` clamped to
+  `MaxHarvestersPerResourceIndice` (pure helper `HarvesterLogistics.Reservation`). Shared pool (B2):
+  per indice, units beyond the reservation, indice order then lowest ActorID.
+* Safe routes (B3): candidate probe = `FindPathToTargetCells`, then every
+  `LogisticsRouteSampleCells`-strided cell must satisfy `MergedThreatAt == 0` (remembered, fog-honest)
+  and no `EnemyBaseCount`/`EnemyUnitCount`/`GetNearbyIndicesThreat` on the traversed indices;
+  reservation deficits bypass the churn margin, attraction moves need `LogisticsReassignMarginPercent`.
+* Leases (B4): re-routed units hold `BotLeasePurpose.Harvest` for `LogisticsReassignCooldownTicks`
+  (new enum member); `HarvestIfAble`/`RespondToAttack` yield while `IsClaimedByOther`; pre-empted
+  units are marked evacuated via `IBotUnitLeaseLost` and re-enter the pool when free.
+* Production (B6): request fires only when `numHarvesters < refineries` (unmet minimum) or the last
+  rebalance left shortfall — the pool provably cannot cover demand; BotLimits/ScaleTargets unchanged.
+* Determinism: integer-only math, no new LocalRandom; target cells ordered by distance then X,Y;
+  pool order indice-index then ActorID.
+* Verify on b6f522e78: Release build 0W/0E; `HarvesterLogisticsTest` 4/4; adjacent suite (Harvester/
+  Lease/Ownership/Spread/Fog filters) 63/63; `audit_fog_honesty` PASS (82 files/266 sites);
+  `audit_bot_direct_mutation` PASS; `ai_module_map --write` regenerated (new IBotUnitLeaseLost impl +
+  IBotRegionThreatProvider consumer rows); `apply_increment_switches --dry-run` arms
+  `UseHarvesterLogistics: true` on @generic only.
+* Boot: `BOOT_GATE=PASS` — menu reached (`MenuPostProcessEffect.PostWorldLoaded`), isolated support
+  dir, zero new exceptions. NOTE: `OpenRA.exe` apphost exits -1 on this host (also pre-change);
+  the gate ran `dotnet OpenRA.dll` (same Main, same assemblies, isolated SupportDir) to evidence
+  boot. `OpenRA.Utility.exe` runs normally — host-layer issue, not mod content.
+* ECON-A touch points (NOTE_2026-10-06_econ_a_econ_b_touchpoints.md): used NEW lease purpose
+  `Harvest` (never McvExpansion) per their guidance; BU does not attach to ExpansionDemand —
+  no seam change needed; shared file increment_switches.yaml appended `BU_harvester_logistics` at tail.
+
+## 2026-10-07 — Codex: LEARN-REGISTRY — add the missing catalog-to-artifact contract
+
+The fleet's 40-row LEARN_CATALOG_2026-10-06.md and the ordered action plan in
+AI_ARCHITECTURE_RESEARCH_SYNTHESIS_2026-10-06.md require a manifest, but the repository
+has no catalog registry or CI check for learned files. Existing fitters already enforce
+different units and bounds (for example, build-order multipliers are 800–1250, while the
+runtime trade-prior consumer clamps raw serialized ratios to 50–150). A registry must
+preserve those distinctions, declare future rows explicitly unscheduled, and reject
+identity-bearing scope keys. This task adds that contract and a focused validator rather
+than duplicating or changing the existing fitter policies.
+## 2026-10-06/07 — Devin (TRAIT-U0): trait-unification migration infrastructure (no merges yet)
+
+Branch devin/trait-u0, task 01a110b6; builds on scaffold 7d7b52e62 (Cameo.Contracts +
+Cameo.Unified assemblies, Unified listed before AS in mod.yaml so plain names win
+FindType resolution after merges land).
+
+* `tools/audit/trait_aliases.json` — registry of 83 old suffixed names → unified targets
+  (kind trait/projectile/warhead, state active|pending|retired, phase, decision link).
+  Zero `active` entries: nothing renames until a family is deliberately flipped.
+* `tools/audit/audit_trait_aliases.py` — zero-use lint: every active/retired alias must
+  still have surviving yaml uses (a dead pinned name means a migration ate it or the
+  registry is stale). Wired into run_all.sh (last blocking-audit slot). PASS: 83
+  aliases, 805 pending-state uses across 1189 yaml sources.
+* `tools/audit/gen_trait_families.py` + `trait_families` block in
+  `merged_bot_modules.json` (86 families) — per-family variants (yaml name, class,
+  assembly, donor file/sha, use count, loaded-vs-ref flag), unique fields, differing
+  defaults, affected files, alias_removal_phase, decisions. `audit_merged_bot_modules.py`
+  now schema-checks the block (FAMILY_KEYS/VARIANT_KEYS, donor refs resolve to a loaded
+  variant, use counts non-negative). PASS: 86 schema-checked.
+* `tools/audit/type_merge_inventory.py` — `--json` machine-readable families; Unified
+  added first in the ASSEMBLIES probe order to match the manifest FindType winner.
+* `OpenRA.Mods.Cameo.Unified/UpdateRules/MigrateUnifiedTraits.cs` — UpdateRule driven by
+  the registry: only `state=active` aliases rewrite; pending/retired untouched. Trait
+  keys keep `-` removal prefixes and `@instance` suffixes; weapon `Projectile:` /
+  `Warhead@x:` values rewritten selectively; same-base-name+same-`@instance` collisions
+  reported as manual steps, never silently merged.
+* `OpenRA.Mods.Cameo.Unified/UtilityCommands/UpdateUnifiedTraitsCommand.cs` —
+  `--update-unified-traits [--apply --yes] [--skip-maps] [--skip-dormant]`. Dry run by
+  default; applies the rule over the mounted corpus + every enumerated map + a dormant
+  sweep of loose *.yaml/*.yml no manifest mounts (classified by path convention:
+  weapons dirs get the weapon transform, others the actor transform, loose map.yaml gets
+  Rules/Actors/Weapons sections). Packed .oramap outside enumerated folders is reported,
+  never repacked blindly. Log: update-unified-traits.log.
+* Live run on this tree: `Updating mod... COMPLETE`, `Updating maps... COMPLETE`,
+  dormant sweep complete — 0 active aliases so the only "would update" entries were
+  MiniYaml re-serialization noise (blank-line drops + comment flush to node boundaries,
+  semantics identical). That incidental churn was REVERTED before commit — it carries
+  no semantic content and invades other file-sets' ownership (one-owner-per-file-set).
+* `OpenRA.Mods.Cameo.Test/UnifiedTraitMigrationTest.cs` — 8 tests: registry load,
+  assembly-order resolution winner, trait key rename preserving `-`/`@instance`,
+  pending-alias no-op, collision → manual step (no merge), weapon Projectile/Warhead
+  value rewrite, map-actor section transform. Cameo.Test.csproj gains the Unified
+  reference.
+* Gates: Release build 0W/0E; Cameo.Test 1206/1206 (8 new); python trait tests 10/10;
+  audit_trait_aliases + audit_merged_bot_modules PASS; `--update-unified-traits` dry
+  run COMPLETE end-to-end; run_all.sh executed through the full audit list (300s cap
+  hit in the post-loop generator section — every report file regenerated non-empty;
+  the two new/changed audits re-verified PASS individually after cleanup).
+* Boot gate PASS: `OpenRA.WindowsLauncher.exe` (dev engine has no packaged OpenRA.exe;
+  OpenRA.Platforms.Default.dll had to be built — the mod sln doesn't include it) with
+  Game.Mod=cameo + Sound.Device=none + explicit Engine.SupportDir; perf.log shows
+  MenuPostProcessEffect.PostWorldLoaded at 35.2s, zero exception-*.log.
+* No gameplay/type merge performed — infrastructure only, per SPEC §6/7 ordering.
+## 2026-10-06 — Devin: ECON-A-FIX — all six findings of REVIEW_2026-10-06_econ_a
+
+Branch `devin/econ-a` on `42e32dc2e`, worktree `C:/cameo-wt/econ-a`. Review verdict
+was FIX-REQUIRED; this pass closes every finding in place (same branch, additive fix
+commit). Every finding got a world-free seam in `BaseBuilderQueueEvalCA` + a world-free
+state table (`RefineryAnchorReservations`) so the regression tests drive the rule, not
+a harness. Classic/switch-off paths unchanged (provider members all default).
+
+* **R1 fog-honest ETA**: `EstimateTravelTicks` now searches with `BlockedByActor.None`
+  + `ignoreActor` (terrain-only HPF) and a `customCost` that returns
+  `PathCostForInvalidPath` only on KNOWN obstacles — own units, occupants of currently
+  visible cells, remembered frozen-under-fog footprints (`FrozenActorLayer`). Hidden
+  enemy state can neither block nor unblock the estimate; kernel `EtaOccupantBlocks`
+  re-expresses `Locomotor.IsBlockedBy`'s Immovable predicate over the honest fact set.
+* **R2 path direction**: the finder contract returns target→source; the old walk seeded
+  at the source and double-counted the whole route (10-cell path read as 20).
+  `ExpansionPathLength` sums only the returned path's own consecutive segments.
+* **R3 one-shot transform**: `ReplacedByActor` stays readable on the disposed MCV
+  forever — the edge is now gated on `demand.Deployed` (consumed marker), the
+  replacement is validated usable+own before Deploy, a live own non-yard relocates
+  (re-key + re-lease), an unusable/foreign one expires the demand. `DeployedYard`
+  tracks the outpost; its death/capture expires the demand.
+* **R4 lease + journey lapse**: `PostExpansionDemand` claims `McvExpansion` on the
+  traveller under `nameof(BaseBuilderBotModuleCA)`; a refused first claim means the
+  demand never posts. The sweep re-claims each tick (heartbeat), expires on claim
+  loss/death/disposal/capture/request-removal, and `JourneyStillCommitted` walks
+  `Activity.GetTargets` (chain + children + next) — the last positional target beyond
+  `ExpansionJourneySlackCells` (12) of the deploy cell lapses the demand, closing the
+  mid-flight-redirect hole (`DeployMcvs` only re-posts idle MCVs).
+* **R5 bind at admission**: `pendingDemandPick` defers binding until after
+  `bot.QueueOrder(StartProduction)` — cash/army-first vetoes can no longer strand a
+  bound item that never queued. `producerOrdersInFlight` (OrderGraceTicks=30) +
+  `ProducerHoldsItem` + the `DemandItemUnambiguous` gate make the (producer, name)
+  token exclusive — `CancelProduction` removes the LAST same-name item, so duplicates
+  would refund/free the wrong one.
+* **R6 anchor reservation**: `RefineryAnchorReservations` (world-free: reserve,
+  refresh-for-owner, release, expire, commit-clear, prune-on-taken) hangs off
+  `IBotExpansionTargetProvider` with four defaulted members. A demand refinery ranks
+  its claim with the committed yard's footprint counted as frontier
+  (`DemandRefineryClaim` — an outpost beyond today's reach is not gated by the wall it
+  removes), reserves the anchor as the order is admitted, renews it each sweep while
+  bound, releases it on every unwind path, and re-adopts it at placement when still
+  live. `ClaimOrder` blocked/committed lambdas now fold reservation state in via shared
+  `AnchorBlockedForClaims`/`AnchorCommittedForClaims`/`AnchorTaken` helpers.
+* Gates: Debug build 0 errors; the three touched projects clean under `-warnaserror`
+  + EnforceCodeStyleInBuild + GenerateDocumentationFile; `dotnet test`
+  OpenRA.Mods.Cameo.Test 1215/1215 (+14 new regression tests, one+ per finding);
+  utility `--check-explicit-interfaces` 3 pre-existing engine violations, none mine;
+  `--check-conditional-trait-interface-overrides` 4 pre-existing engine violations,
+  none mine; boot-gate PASS (menu reached, 0 new exception-*.log, scoped kill).
+  Python audit suite N/A — the diff is C# only, no yaml/asset surface.
+* ECON-B coordination: `BotLeasePurpose.Harvest` (their `50d3614b6`) never touches
+  `McvExpansion`, so the lapse check can't fire on harvester re-routes; BU holds no
+  `ExpansionDemand` state — `ExpireExpansionDemand` has nothing of theirs to release.
+
+## 2026-10-06 — Devin: ECON-A-FIX2 — R1 fog-leak closed + R4 renewal gate (REREVIEW_2026-10-06_econ_a)
+
+Branch `devin/econ-a` on `aa117a0da`, worktree `C:/cameo-wt/econ-a`. Sol's re-review
+was FIX-REQUIRED on two of six findings. Both closed in place, additive commit.
+
+* **R1 frozen-trait leak**: `FrozenBlockedCells` no longer touches `fa.Actor` — the
+  layer hands out the live backing while it lives, so the old code re-read live trait
+  state under fog (backing disposal flipped blocked cells 0->1 on an unchanged record).
+  Now only the immutable snapshot is read: `IsValid`/`!Hidden` gate the record,
+  `Info`/`Owner`/`Footprint` supply the facts. Removable is rebuilt on the
+  remembered owner (gates/energy walls lift for remembered-ally; `DoesNotBlockInfo`
+  lifts on remembered target-type overlap vs our own MCV's enabled types). Crushable
+  is rebuilt from remembered crush classes — `MineInfo`/`CrateInfo` typed,
+  `*CrushableInfo` duck-typed off `CrushClasses`+`CrushedByFriendlies` (the
+  engine's own `CrushableInfo` is internal). Transit-only comes from
+  `BuildingInfo.TransitOnlyTiles` anchored at the footprint's top-left.
+* **R1 visible-cell != visible-actor**: `EtaCellCost`'s `known` was
+  `Shroud.IsVisible(cell)` — a lit cell exposed every occupant. Now
+  `other.CanBeViewedByPlayer(player)`: a cloaked or otherwise hidden actor on lit
+  ground stays unknown and never blocks (kernel doc updated, same signature).
+* **R4 targetless renewal**: `JourneyStillCommitted` was booleans — silence passed
+  as committed. Now `ExpansionJourneyState` {Redirected, Indeterminate, Committed}
+  + `JourneyRenewsDemand`: only a Committed chain on a non-idle traveller renews
+  the window (unit-less actors renew — existence IS the relocation). Sol's WaitFor
+  probe row — non-idle, no targets — no longer renews; the demand dies at its
+  outstanding ExpiresTick instead of pushing 200->300->1100.
+* Tests: 60/60 BaseBuilderQueueEvalTest (4 new: journey tri-state, renewal table
+  incl. the WaitFor row, frozen-footprint exemptions, remembered crushability).
+  Adapter-level hidden-state invariance is structural — the frozen pass takes no
+  live-actor input, so there is nothing left to dereference; the world-free tests
+  pin the fact-level rule.
+* Gates: Release build 0E/0W on OpenRA.Mods.CA + Cameo.Test. Focused tests only
+  per lead (Terra holds the heavy window); no boot-gate needed — diff is
+  C#-in-bot-logic only, no yaml/engine-pin surface.
+## 2026-10-08 — Devin: history re-record — all owned-name/history digest cohorts green (branch devin/regreen-history-rerecord)
+
+Provenance-preserving repair of every stale balance-consolidation fixture and converter on
+`devin/regreen-history-rerecord` (worktree `C:\cameo-wt\rerecord-hist`). Method per cohort:
+resolve at the fixture's recorded baseline (era worktrees at `763b12776`, `6278225df`
+"Complete frozen Tiberian Dawn weapon identity batch", `17022b1d5`), leaf-diff baseline→live,
+classify EVERY leaf against attributed authorized waves, then repin digests or restore through
+the existing helpers only — no blanket normalization, no yaml edits except one real regression.
+
+* **Repaired cohorts (all green):** authorized_role 6/6 · delivery_identity 8/8 (closure split +
+  R4 `_Flat` repins) · exact_profile_duplicates 5/5 · explicit_family_state 9/9 ·
+  final_bulk_weapons 8/8 · high_identity 6/6 (new `canonical_template_history_20260910.json`
+  fixture, era-extracted records) · identical_main 6/6 (flak node records + freedom base repin)
+  · laser_heavy_routes 8/8 (`450dcea59` W7 ExtraDamage fold + `d46ecd9d1` retune) ·
+  named_family 6/6 (canonical-tag applied forms, era-verified totals) · same_family_stacks 5/5
+  (Kübel `roleflat` regression fixed tree-side + Cyclone re-role) · authorized_remaining 11/11
+  (`later_profile_history` +4 records for fold-era collapses, frozen-blob health matrix,
+  hammertank floor cherry-picked from `devin/regreen-r2r3` `a7919dc66`) · named_state +
+  later_profile 10/10 · laser_bulk / freedom_elite / ifv_owned repins · soviet_rename_repair
+  13/13 (narrowly scoped wave tables) · cannonap_endpoint 6/6 (SkyHawk fold 4000+12000→16000,
+  PercentageScale route) · heaviness 108/108 (6 `analyse` entries repinned for armor-12.0l).
+* **Wave classes attributed across all repins:** armor-12.0l Versus census expansion;
+  `b7f6d4368` Projectile migration; `450dcea59` LegacyLaserExtraDamage→Damage fold;
+  `defe7ad13` EMBER MinRange→DESIGN `round(Range/25)*5`; PhysicalState rollout; bot-difficulty
+  refactor (BotLimits/BotRoles, CameoRangedGpsDot/Provider superseding RangedGpsDot/Provider);
+  `4e47ead99` air-only missile AA re-base; `8330a1834` W24 lane-3 fold; `393da51df` GPS-shadow
+  sound names; allied/soviet actor rename token waves; gatling ammo→GrantConditionOnAttack
+  rework; shield/tooltip waves; balance-pipeline stat retunes.
+* **Closed + guarded (final 4 failures):** repinned `closed_remaining_names_20260910.json`
+  (50 weapon bodies + raw/resolved ordered + 22 actor digests, 65 entries) and
+  `guarded_owned_names_20260910.json` (2 weapons ×2 hashes + 3 actor digests, 7 entries).
+  Recorded state = mid-wave snapshot on the sibling recording lineage (`6278225df`/
+  `17022b1d5` are not HEAD ancestors); baseline→live diff = authorized waves only, 0 unexplained.
+* **test_td_naval_rename:** scoped `CameoRangedGpsDot/Provider`→`RangedGpsDot/Provider`
+  reversal in the payload comparator (same wave tables as soviet authorizer); payload diffs
+  still visible. 14/14 green. `test_ownership_lineage_audits` 9/9, `test_sonic_family_generation` 5/5.
+* **Broad verification:** complete 41-module importer set — batch1 195/195 + batch2 128/128 =
+  **323/323 green**; plus the two uncovered fixture dependents (naval, lineage) green.
+* **Real regression fixed (not masked):** `NaxiWW2KübelwagenMachinegun`'s `_Flat` warhead lost
+  its `^Warhead_Bullet_Medium_Flat` roleflat edge at `781308f24` — sole stripped member of 51;
+  materialized the canonical profile fields tree-side (VT/Damage/PS contract kept).
+* Files: 19 `consolidate_*.py` converters (applied-forms/union validators, era-verified
+  totals), 16 fixtures (digest repins + provenance records), ~20 test files,
+  `reviewed_weapon_history.py`, `weapons.yaml` (Kübel). `git diff --check` clean.
+* **Next:** `python -m unittest` on the 41-module set in `tools/tests` to re-verify; fleet
+  coordinator decides increment merge — no lifecycle claims made here.
+
+## 2026-10-09 - Devin-Architect: FIX-RA-REFINERY - passable-bib dock access + bounded refinery retry (branch devin/fix-ra-refinery-dock)
+
+* **Provenance:** the defect is byte-identical in frozen campaign `a9349d015` and
+  published playtest `3d99405bd`; fix branches off `3d99405bd`.
+* **Root cause (Sol's A/B finding, confirmed in source):** `DockReachable` built the
+  wall footprint from `bi.Tiles(topLeft)` — which includes passable `=` bib cells.
+  `^RAPROC` is 3x4 `_X_/xxx/X==/===` with the dock landing on bib cell (1,2): all
+  nine scan cells sat inside the full footprint, so `DockHasExit` failed at every
+  legal interior site — RA refinery requests produced then cancelled, and each
+  cancellation counted a shared placement failure.
+* **Fix 1 — dock access:** new world-free seam `DockBlockingFootprint` yields only
+  the impassable `x`/`X` cells (the `=` bib and `+` transit lanes are traversable —
+  the leaving harvester is in transit). `DockHasExit` now skips the dock cell
+  itself: under blocking semantics a passable dock cell would have counted as its
+  own exit (caught by the new blocked-exit regression).
+* **Fix 2 — bounded retry:** under the refinery law a siteless refinery DEFERS via
+  `RefineryDefers(law != null, type)`: cancelled for its refund, standing request
+  re-queues it next sweep, zero `failCount` spent — a null-center failure can no
+  longer saturate the latch. The latch's wait-for-change arm now also covers the
+  un-nudgeable cases (null failing centre or live relocation hold) that `Length==0`
+  alone left latched forever.
+* **Fix 2 R1 (Sol's review):** the latch baseline was never actually captured —
+  its snapshot sat under a `BaseExpansionModules == null` dead guard (the array
+  is never null), and `cachedBases` doubled as the water checker's cache. The
+  latch now keeps dedicated `latchedBuildings`/`latchedProviders` captured
+  unconditionally at every saturation, the water check owns `cachedBases`
+  alone, and `failRetryTicks` re-arms per episode — at saturation, on nudge
+  release, and on each probe expiry — instead of leaking across episodes.
+  Recovery is covered by world-free seams (`LatchRecoveryApplies`,
+  `LatchProbeDue`, `LatchProbeReleases`) plus a two-episode control-flow
+  regression, not just the deferral classifier.
+* **Diagnostics (Sol's request, bounded):** a failed `LawRefineryPlacement` sweep
+  emits one line tallying the per-cell reason chain — scanned / unbuildable /
+  too-far / dock-on-resource / dock-no-exit / gap-illegal — plus a "no claim
+  available" line for the other law-null cause and a latch-release line on
+  failCount reset. One log per failed sweep or resume delay, never per cell.
+* **Verification:** `BaseBuilderQueueEvalTest` covers every resolved refinery
+  shape (RAPROC ×3 factions, TDPROC, TS both pairs, D2K, SC triple-dock hosts,
+  WC2 lumber, RA2 `x+==`, Consortium, OP2 smelter) two ways — every passable
+  cell keeps an exit, audit-projected dock cells keep exits — plus blocked-exit,
+  off-map, `+` transit, and deferral-classifier regressions; focused and full
+  suite green; Release build clean; boot gate main menu, zero new exceptions.
+* **Not done:** in-map matched-progression validation and the shared-radius design
+  remain downstream gates; `BaseExpansionModules == null` at the cache-population
+  site is a known latent inconsistency left untouched (never-null array keeps the
+  latch self-releasing at first resume delay).
+
+## 2026-10-09 - Devin-Developer: REPAIR-B3 - shared refinery coverage + claim-fail deadlock bound (branch devin/repair-b3-refinery, base c76283c0b)
+
+* **Scope (SPEC_2026-10-09_refinery_shared_coverage.md + review clarifications):**
+  one usable refinery covers EVERY anchor inside an inclusive Euclidean radius-10
+  with both directed dock->patch and patch->dock legs proven under the harvester
+  locomotor at <=10 tile-equivalents (stationary-blocked probes; transient
+  traffic never fails a leg); per-anchor verdicts Covered/Unserved/UNKNOWN with
+  budget-deferred anchors never counting either way; atomic multi-anchor
+  reservation transactions; bounded claim-failure churn (the failCount deadlock).
+* **New file:** `RefineryCoverageOracle.cs` — verdict enum, `RefineryProbeBudget`
+  (per-anchor site/probe caps re-armed by `NextAnchor()`; per-player-per-tick
+  probe cap; deferred/cache-hit counters), topology-versioned
+  `RefineryRouteWitness`, pure deterministic helpers (`RouteLengthMilli`
+  1000/1414, `WithinServeRadius`, `BothLegsCover`, `LegPairRank`, `CompareSites`,
+  `Aggregate`), and `RefineryRouteProbe.ProbeLeg` = `PathSearch.ToTargetCell`
+  with null self + `BlockedByActor.Stationary` + `laneBias:false`.
+* **Planner:** `AssignRefineries` drops `used[r]` 1:1 binding; the `routeRank`
+  oracle arg (null = unproven) gates service and ranks covered pairs.
+  `ClaimOrder` gains `coverageUnknown` — UNKNOWN anchors are neither served,
+  unserved, nor claimable, so budget deferral never spawns duplicate demand.
+  `CoverageTick` runs per tick ahead of the 250-tick replan gate; the topology
+  signature (anchors, refinery cells, dock cells, blocker cells — XOR-folded,
+  order-independent) re-opens verdicts on change while witnesses whose stored
+  route avoids every changed blocker cell survive (empty-path unreachable
+  witnesses always re-probe on change); dead dock keys are pruned. The refresh
+  resumes at a persistent cursor under the per-tick probe budget.
+  `CommitRefineryClaim(anchor, site)` publishes pending coverage for the whole
+  in-radius uncovered set atomically and clears their reservations/streaks;
+  `ComputeClaim` parks an anchor re-offered past `RefineryClaimFailAttempts`
+  (provider-side bound — needs no eval edits to work).
+* **Contract:** `RefineryAnchorReservations.TryReserveAll/ReleaseAll/ClearAll/
+  LiveSetFor`; interface adds the site-carrying commit, placement-failed signal,
+  covered-set accessor, atomic set reserve/release/query carrying site +
+  modelVersion, and `RefineryCoveragePendingAnchors`. All default-bodied —
+  Architect call sites compile untouched (integration asks logged in the fleet
+  claim doc: 2-arg commit call, failure signal on the null-site fall-through,
+  admission-time set binding).
+* **Knobs/yaml:** `AnchorServeRadiusCells: 10` (spec radius; the C# default 0
+  resolves to ClaimRadiusCells = 8); `RefineryClaimFailAttempts=1`,
+  `RefineryClaimFailParkTicks=1500`, `CoverageSiteLimit=32`,
+  `CoverageProbeLimit=64`, `CoverageProbesPerTick=8`, `CoverageRouteLimitCells=10`,
+  `CoveragePatchCellSample=4`. DISCREPANCY FLAGGED, not fixed: DESIGN 19.5 calls
+  EngineerBotModule capture/repair + CratePickupBotModule visibility checks
+  designed-off (`false` = omniscient exception), yet master's ai.yaml arms all
+  three `true` (336c524f2 "Make bots pick up crates if without MCV" +
+  playtest 4bf696716 "require visible engineer and crate targets"). Whether
+  `true` is deliberate behavior (bots only chase seen targets) or drift is a
+  maintainer call; this repair leaves master's state untouched.
+* **Tests:** legacy one-per-anchor assertions rewritten to shared coverage
+  ({0,0} pair coverage, flush-mate binds all field anchors, tier candidates
+  moved beyond radius); new oracle/budget/route-gate unit tests and atomic
+  reservation lifecycle tests (all-or-nothing, no partial writes, owner-scoped
+  idempotent release, commit clear-all). `dotnet build -c Release` clean;
+  `dotnet test OpenRA.Mods.Cameo.Test` = 1289/1289 pass.
+* **Not done:** shared-site search inside `LawRefineryPlacement` (Architect-owned);
+  boot-gate deferred — a serial replay lane (NOD-PROGRESSION-REPRO) held the
+  machine at commit time (OpenRA.exe resident, launches reserved) and the lead's
+  order was push-for-review with no launches; boot-gate remains an open gate,
+  not claimed. Full audit suite likewise pending. Pushed for Devin-Reviewer
+  review per lead order; no merge.
+* **Overlap vs devin/queue-observer-seam@c43d580fd (Architect):** append-point
+  conflicts only — both add a trailing block in `DEVELOPMENT_LOG.md` (EOF) and
+  tests after `CommitClearsAReservation` in `BaseBuilderQueueEvalTest.cs`;
+  keep-both resolution, disjoint content. No shared edit region in source.
+  Their `Cancelled+NoRefinerySite` seam record is where the queue-side
+  `RefineryClaimPlacementFailed(anchor)` signal belongs.
+
+# 2026-10-09 — REPAIR-B3 R1: reviewer FIX round — flush bypass killed, whole-refresh caps, real dock eligibility, travel-time rank
+
+*Devin-Developer.* Devin-Reviewer's bounded static review
+(`REREVIEW_2026-10-09_repair_b3_static.md`) returned FIX REQUIRED with five
+findings against SPEC_2026-10-09_refinery_shared_coverage.md. All five are
+closed in this round:
+
+1. **Same-field flush bypass (SPEC §30 violation)** — `AssignRefineries` and
+   `EvaluateCoverageTick` both let a refinery flush to an anchor's field serve
+   it beyond the radius ("transitive/distant field inheritance"). The
+   `refineryFields`/`anchorField` eligibility terms are removed everywhere:
+   eligibility is now the geometric radius alone, `AssignRefineries` and
+   `ClaimOrder` drop the field plumbing entirely, `AiLogExpansion` mirrors the
+   new binding, and `RefineryFlushFields` survives only as a public helper +
+   its own unit test (nothing in the coverage model consumes it). The old test
+   `RefineryFlushToTheFieldBindsItsAnchorsBeyondServeRadius` is rewritten as
+   the inverse pin `RefineryFlushBeyondServeRadiusBindsNothing`.
+2. **Per-anchor budget re-arm** — `NextAnchor()` re-armed the 32/64 site/probe
+   caps per anchor (32A/64A total — exactly what the spec's "in one coverage
+   refresh" forbids). `RefineryProbeBudget` now exposes `SiteCapSpent/
+   ProbeCapSpent/RefreshSpent`; the caps span the whole sweep while
+   `CoverageProbesPerTick` only paces per-tick spend. An `evaluatedSites`
+   (anchor,refinery) set charges each admitted pair once per refresh so a
+   tick-paced revisit never double-charges; a tick-cap refusal rewinds the
+   cursor one step (the anchor resumes next tick on cached witnesses), a
+   refresh-cap refusal marks `coverageFirstBudgetDeferred` for telemetry.
+3. **Dock eligibility without gameplay semantics** — probes pathed to dock
+   coordinates and type-overlapped BitSets but never verified the real
+   `DockHost` contract. `RefineryDockGeometry` now returns per-dock
+   `Enabled = IsEnabledAndInWorld` (`!preventDock && !IsTraitDisabled &&
+   !IsDead && IsInWorld` — the durable half of `IsDockingPossible`); the new
+   `RefineryCoverageOracle.DockEligible(enabled, harvesterType, dockType)`
+   models `Harvester.CanDock(type, forceEnter:true)` — a loaded return always
+   docks at a type-compatible enabled host, so occupancy/drag correctly never
+   gate coverage, and a disabled/selling dock fails the pair. Enabled bits
+   fold into the topology signature so a dock dying/waking re-opens verdicts.
+4. **Rank ignored travel time** — `RefineryRouteWitness` gains `TravelMilli`;
+   `RouteTravelMilli` prices each entered cell at stepMilli x 1024 /
+   (MobileInfo.Speed x terrain%), the `Mobile.MovementSpeedForCell` product
+   minus transient actor modifiers; zero-speed cells rank infinite.
+   `LegPairRank` returns `long` (milli-tick packing would overflow int) —
+   max-leg bounds the round trip, other leg ties off. `routeRank` is now
+   `Func<int,int,long?>` end to end.
+5. **Telemetry omitted spend** — the refresh-complete line now carries
+   anchors, anchor-scans, sites evaluated, probes used, deferred candidates,
+   and cache hits; a new one-shot line fires when a refresh ceiling first
+   defers an anchor (index, sites/probes spent, pending count); the pacing
+   line distinguishes tick-window stops from ceiling stops.
+
+* **Verification:** `dotnet build -c Release` 0/0; `dotnet test` = **1294/1294**
+  (5 net new: whole-refresh caps, tick pacing independence, travel-time
+  pricing, zero-speed handling, dock eligibility, travel-time rank order);
+  `audit_fog_honesty.py` PASS (268 sites, unchanged — R1 adds no new
+  enumeration). Boot-gate still deferred (serial replay lane); no merge —
+  pushed for Devin-Reviewer re-review of the frozen SHA.
+* **Overlap:** unchanged vs the queue-observer-seam — still append-point only.
+
+# 2026-10-09 — REPAIR-B3 R2: patch-walk honesty + pass-boundary re-arm + version getter
+
+*Devin-Developer.* The head-review addendum's remaining provider-side concern —
+"sampling only the nearest CoveragePatchCellSample cells can declare Unserved
+while unexamined field cells could still prove coverage" — is fixed by making
+the walk exhaustive under the existing budget machinery rather than widening
+the sample:
+
+1. **Per-pair persisted patch cursor (R2).** `PatchCells(a)` now returns the
+   anchor's whole field ordered nearest-first (deterministic: distance, X, Y);
+   `patchProbeProgress[(anchor,refinery)] = (version, index)` records how far
+   the pair's walk got under the current model version. The probe loop is
+   reordered patch-outer — a cell index only advances after every eligible
+   (dock, spec) pair examined it — and each refresh advances the window by at
+   most `CoveragePatchCellSample` cells. A pair whose window ends before the
+   field does now contributes `anyDeferred` (UNKNOWN), never Unserved; only a
+   fully-walked field can fail a pair. Progress resets on every model-version
+   bump (topology/dock changes re-open the walk) and on the length-mismatch
+   defensive path.
+2. **Pass-boundary budget re-arm.** The 32-site/64-probe ceilings still span
+   exactly one pass over the anchors (the reviewer's whole-refresh finding),
+   but a pass the ceiling cut short now re-arms `coverageBudget` +
+   `evaluatedSites` + `coverageFirstBudgetDeferred` when the anchor cursor
+   wraps — deferred pairs resume in the next pass instead of starving UNKNOWN
+   on a permanently spent budget. Without this, honest exhaustiveness on large
+   fields could deadlock an anchor behind an exhausted ceiling — the very
+   failure class B3 exists to remove. Per-tick pacing is untouched (NewTick at
+   sweep start; the re-arm happens after the tick's scan completes).
+3. **`RefineryCoverageModelVersion` getter** (interface + impl): the version
+   stamp callers pass as `modelVersion` to `TryReserveRefineryAnchors` so a
+   covered-anchor set derived from `RefineryClaimCoveredAnchors` is refused if
+   the model re-planned in between — completes the SPEC §62 transaction fields
+   (site, set, owner, until, version) for the Architect's queue-side wiring.
+4. `CoveragePatchCellSample` Desc + `EvaluateCoverageTick` doc updated:
+   "cells a pair's walk advances per refresh" — bounded per-refresh work, not a
+   bounded candidate set. `patches` hoisted out of the per-refinery loop (it is
+   anchor-only).
+
+* **Verification:** `dotnet build -c Release` 0/0; `dotnet test` = **1294/1294**
+  (no signature changes to tested surfaces; the cursor/walk is module-internal
+  world-bound code — its honesty property is exercised by the integration pass
+  once queue wiring lands). Fog audit unchanged (no new enumeration). Boot-gate
+  still deferred (serial replay lane); no merge.
+* **Queue-side blocker unchanged:** the VP's exact-tip R1 review
+  (`REREVIEW_2026-10-09_repair_b3_r1_vp.md`) confirms all five R1 findings
+  closed; its single remaining FIX is production callers for
+  `TryReserveRefineryAnchors`/`RefineryClaimCoveredAnchors`/
+  `RefineryClaimPlacementFailed`/2-arg commit — Architect-owned queue files.
+  Precise contract sent (commit ~:1619, failure ~:1633, admission bind ~:328).
+
+# 2026-10-09 — REPAIR-B3 R3: cursor-interruption fix + PatchWalk contract + regression pins
+
+*Devin-Developer.* The VP's exact-tip R2 review
+(`REREVIEW_2026-10-09_repair_b3_r2_vp.md`) found a blocking cursor bug in the
+R2 patch walk: the outer `for`'s unconditional `pi++` advanced the persisted
+cursor past INTERRUPTED cells — a probe-cap refusal left `tickCapHit` false so
+the dock loop burned through the rest of the window with refused probes and
+advanced `pi` over never-examined cells; a tick-cap break likewise ran the
+for-update before the condition could stop the loop. A final allowed outbound
+plus a refused inbound could skip the cell entirely, and a later field
+exhaustion could then publish a false Unserved.
+
+- **Fix:** the cell index now advances only via `CompleteCell()` on the new
+  public `PatchWalk` struct (`RefineryCoverageOracle.cs`) — the caller invokes
+  it strictly after a cell's examination completed (every eligible dock/spec
+  saw it). Any interruption (`cellExamined=false` on probe refusal, tick-cap
+  break, or `ProbeCapSpent` in the loop condition) leaves `walk.Index` on the
+  unexamined cell, which the persisted `(version, index)` resumes from.
+  `FieldExhausted(count)` is now the only path that can feed Unserved.
+- **Regressions** (`FieldCoverageTest`, +5): probe-cap refusal at the
+  outbound/inbound split keeps the cell pending; tick-pacing interruption
+  leaves it pending and `NewTick` resumes it; site-cap refusal before any
+  probe leaves the pair untouched; window-end is NOT exhaustion (unexamined
+  cells keep the pair Unknown); resume honours the stored index through full
+  exhaustion.
+- **Verification:** Release build 0/0; `dotnet test` = **1299/1299**
+  (1294 + 5 PatchWalk pins). No world-facing surface change — fog audit
+  unchanged. Boot-gate still deferred (serial lane).
+- **Merge-wave context:** master moved to `e8ec610e7` (queue-observer-seam
+  merged; `c76283c0b` is an ancestor). The queue-wiring NOTE now carries
+  merged-master call-site coordinates (:600 admission, :1326/:1390/:1466
+  release sites, :1916-1945 commit/fail block).
+
+# 2026-10-09 — REPAIR-B3 R3.5: owner-keyed release (answers the reviewer's set-drift question)
+
+*Devin-Developer.* The reviewer's queue-wiring insertion map
+(`MAP_2026-10-09_b3_queue_wiring_sites.md`, sites on master `4da849874`)
+closed with an open contract question: reserve/bind/commit must share the
+same covered set, with `modelVersion` guarding read→commit. Analyzing it
+exposed a leak class in my own prepared hunks: release sites recomputed
+`RefineryClaimCoveredAnchors(anchor)` at teardown, but that set can drift
+from the admission-time set — members taken, covered by another commit, or
+re-modelled under a new version. A recomputed set could exclude a live hold
+and leak it until expiry/prune.
+
+- **Fix:** `ReleaseRefineryAnchors(object owner)` — a new interface member
+  backed by `RefineryAnchorReservations.ReleaseAllForOwner` — frees every
+  anchor the demand holds. Teardown (expiry, cancellation, binding unwind)
+  needs no set at all: nothing to recompute, nothing to persist on
+  `ExpansionDemand`, idempotent, returns the count.
+- **Resulting contract** (documented in the fleet NOTE, R3.5 section):
+  one set at reserve/bind (version-guarded), zero sets at teardown
+  (owner-keyed), provider-internal set at commit — `RefineryClaimCommitted`
+  already clears every covered member's reservation internally.
+- **Regression:** `ReleaseAllForOwnerFreesTheWholeDriftedSet` —
+  frees the full set, leaves another owner's hold untouched, idempotent on
+  re-release, freed anchors reservable.
+- **Verification:** Release build 0/0; `dotnet test` = **1300/1300**
+  (1299 + 1). No world-facing surface change — fog audit unchanged.
+  Boot-gate still deferred (serial lane holds OpenRA.exe). No merge — the
+  queue-side wiring remains Architect-owned.
+
+# 2026-10-09 — REPAIR-B3 R4: clean-cap-exit deferral fix (false-Unserved cascade)
+
+*Devin-Developer.* The VP's R3 boundary check (forwarded + confirmed by
+Devin-Reviewer in `REREVIEW_2026-10-09_repair_b3_r3.md`) found a second
+cursor-class defect: when the final ALLOWED `TryConsumeProbe()` lands the
+count exactly on the ceiling, `ProbeCapSpent` flips true with no refusal
+ever running. The cell completes, `walk.CompleteCell()` advances, the while
+exits on the cap with cells remaining — and the post-walk deferred check
+`!coverageBudget.ProbeCapSpent` suppressed `anyDeferred` → false Unserved.
+Worse, it CASCADED: every subsequent anchor in the pass exited its pair walk
+at entry (`!ProbeCapSpent` in the while condition), published Unserved too,
+and `coverageFirstBudgetDeferred` stayed -1 → no pass-boundary re-arm — a
+spent probe cap mid-pass could collapse the whole coverage model.
+
+- **Fix:** new `RefineryCoverageOracle.PairDeferredAfterWalk(pairCovered,
+  walk, fieldCells)` — the single post-walk decision: unexamined cells defer
+  the pair regardless of WHAT stopped the walk (window end, tick pacing, or
+  a cleanly-spent cap). Only `PatchWalk.FieldExhausted` feeds Unserved. The
+  module now also records `coverageFirstBudgetDeferred` on a cap-stopped
+  deferral so the re-arm fires at the cursor wrap.
+- **Regressions** (`FieldCoverageTest`, +2): the VP's exact scenario —
+  probeLimit consumed by a completed cell's two legs, cells remaining →
+  deferred, never Unserved; and the entry-cascade — a pair admitted with the
+  cap already spent defers without touching the walk (plus the covered-pair
+  exemption).
+- **Verification:** Release build 0/0; `dotnet test` = **1302/1302**
+  (1300 + 2). No world-facing surface change — fog audit unchanged.
+  Boot-gate deferred: OpenRA.exe released but the lead's "no launches"
+  order for this task still stands — flagged to the lead for release.
+  No merge — queue-side wiring remains Architect-owned.
+
+# 2026-10-09 — REPAIR-B3 R4b: version-keyed PatchCells cache (VP materialization note)
+
+*Devin-Developer.* The VP's R2 task-record addendum asked for a measured
+profile on "full field ordering/materialization per unknown-anchor
+evaluation": `PatchCells(a)` sorted the anchor's whole field (distance, X,
+Y) once per anchor per pass — O(F log F) repeated across every refresh
+cycle even though the ordering is fixed while the topology is.
+
+- **Fix:** `patchCellsCache` — `(int Version, CPos Anchor, CPos[] Ordered)`
+  keyed by anchor index. A field is sorted at most once per refresh
+  generation per anchor; the cache also keys on the anchor's position so a
+  silently drifting centroid re-sorts even at the same version. Cleared at
+  both index-keyed reset sites (signature bump + defensive length
+  mismatch). Deterministic memoization of a deterministic ordering — no
+  semantics change.
+- **Verification:** Release build 0/0; `dotnet test` = **1302/1302**
+  (unchanged — pure memoization). Fog audit unchanged. Boot-gate still
+  deferred per the lead's no-launches order.
+- **Memory bound** (VP's retained profile note, R4b review): entries ≤
+  `anchors.Count`; each array is that anchor's own static field cells
+  (`fields[f].Cells` is built once — never shrinks under harvesting).
+  Total retained = Σ|field(a)| ≤ A×F_max×8 B — ~30×300 ≈ 72 KB typical,
+  ~800 KB at 100×1000 extreme, cleared every version bump. Crucially the
+  pre-cache code materialized the SAME arrays every pass — the cache
+  retains between passes what was already peak-working-set garbage; it
+  does not raise the peak class.
+
+## 2026-10-09 - Devin-Architect: queue observer seam for REPLAY-HEALTH-LOGGER (branch devin/queue-observer-seam, base c76283c0b)
+
+* **Contract (ACK-2, task 01a12023):** record-only queue transitions emitted synchronously at the
+  tick observed — Started / Ready / Placed / Cancelled / Held / Resumed — to
+  IBotBuildQueueObserver traits on the bot PlayerActor (resolved once, like the placement
+  observers). Schema-2 event-local fields on every record: tick, item id, queue group,
+  BuildingType category, producer ActorID, kind, reason, player_active, producer_live,
+  cancellation_class; unbound context emits 0/null = UNKNOWN, never pulse-inferred.
+* **Episode dedupe:** BotQueueEpisodeTracker — Held emits once per (producer, item, reason)
+  episode, Ready once per production episode; Started/Placed/Cancelled/Resumed end episodes.
+  All Cancelled emit sites are production-queue cancels (class=Production); the relocation
+  nudge cancels each queued item before the hold, and latch saturation/release emit
+  Held/Resumed with SaturationLatch.
+* **Coverage:** Ready-admission holds (demand/crawl/front-back) emit Held with their reason;
+  refinery defer emits Cancelled+NoRefinerySite; saturation emits Cancelled+Held; probe
+  release and no-nudge clear emit Resumed. Demand-path cancels in BaseBuilderBotModuleCA are
+  outside this seam (different file, same ownership boundary).
+* **Verification:** 5 new tracker/record tests; full suite 1279/1279; Release clean; boot gate
+  main menu, zero new exceptions. Observer dispatch costs one cached-array check when no
+  logger is registered; zero allocations and zero RNG on the emit path.
+* **Not done:** logger/pulse implementation is Sol's lane (separate files); integrator receipt
+  and runtime gates remain pending.
+
+## 2026-10-09 - Devin-Architect: seam dedupe fix — phantom Ready + in-flight cancel (same branch)
+
+* **Defect found on self-review:** the per-set tracker (holds/ready + EpisodeEnded) re-announced
+  Ready on the tick after Cancelled — CancelProduction is order-latency, so the cancelled item
+  still sits at the queue head, still Done, while the order is in flight. Clearing the episode
+  on Cancelled let the next sweep emit a second Ready *after* the Cancelled record, inverting
+  the pair the verifier measures. The repeated in-flight cancel order also re-emitted an
+  identical Cancelled each sweep.
+* **Fix:** BotQueueEpisodeTracker collapsed to a single `EmitGate(producerId, item, kind,
+  reason)` — one record per (producer, item, kind, reason) transition, and a cancelled
+  (producer, item) shadow suppresses Ready until a Started clears it. EmitQueueHeld folded
+  into EmitQueueTransition; every site now funnels through the same gate.
+* **Verification:** new regression `CancelledShadowsInFlightReadyUntilStarted` (phantom Ready
+  suppressed, duplicate in-flight Cancelled suppressed, Started clears the shadow); 6 seam
+  tests pass; full suite 1280/1280; Release clean; boot gate main menu, zero new exceptions.
+
+## 2026-10-09 - Devin-Architect: seam redesign after Sol review 22861e442 F1-F5 (same branch)
+
+* **F1 — identity:** `BotQueueTransition.EpisodeId` — per queue-item instance id assigned by
+  the probe on first observation; a re-queued same-name item is a distinct episode, 0 =
+  UNKNOWN for baseline/producer-less records.
+* **F2 — resolution semantics:** `Cancelled`/`Placed` are no longer request-tick labels —
+  decision sites record a `BotQueuePendingTerminal` (last decision wins) and the record
+  emits on the tick the item actually leaves the queue. `Started`/`Ready` likewise emit at
+  probe observation, so every timestamped transition is an applied engine state.
+* **F3 — exact ticks:** `ProbeQueueTransitions` runs at the top of `Tick` before the latch
+  and `WaitTicks` early returns — item-list reconciliation per queue per tick, bounded by
+  queue count/length, trait-list iteration only (no scans/orders/RNG).
+* **F4 — removal reconciliation:** an item leaving with no pending request emits `Removed`,
+  classified event-locally (Elimination / Destruction / None = UNKNOWN). A queue that drops
+  out of `FindQueues` (producer dead) still flushes its items as removals. Module demand
+  cancels register via `BaseBuilderBotModuleCA.CancelDemandItem` -> `NoteExternalCancel`
+  and resolve as `Cancelled`/`DemandCancel`. A pending `Placed` whose producer died
+  in-flight resolves as `Removed`/`Destruction`.
+* **F5 — zero-cost without a logger:** observers, tracker, and watches are all lazy —
+  `ObserveQueueTransitions()` gates every path; no allocations or history until a logger
+  trait exists on the bot PlayerActor.
+* **Verification:** 6 seam tests rewritten to the new API (Held dedupe, terminal episode
+  end, per-instance Ready, per-instance episode ids, per-producer isolation, record shape);
+  suite 1280/1280; Release clean; boot gate main menu, zero new exceptions.
+
+## 2026-10-09 - Devin-Architect: Sol c43d580fd re-review findings closed (same branch)
+
+* **Removal+request != cause proof:** a pending terminal now resolves to its recorded kind
+  only while the queue is still live-observed (`BotQueueWatch.SeenTick`); a removal flushed
+  from a stale/disabled/dead queue emits `Removed` carrying the pending *reason* — intent
+  preserved, honest UNKNOWN, no invented terminal. A pending `Placed` also cannot resolve
+  if the producer died before the next sweep. `Removed` always classifies event-locally
+  (Elimination / Destruction / None), never inherits the pending class; a dead producer
+  still reclassifies a *confirmed* production cancel as Destruction.
+* **Last-same-name binding:** `CancelProduction` removes the LAST same-name item, so all
+  three manager cancel sites and `NoteExternalCancel` bind the tail instance
+  (`AllQueued().LastOrDefault(name)` / watch scan), not the head. `BotQueuePendingTerminal.
+  Matches` prefers the bound instance ref; a same-name sibling leaving first no longer
+  consumes the request. Name-only binding remains as an honest fallback.
+* **Retention bounded:** `BotQueueEpisodeTracker.DropProducer` prunes dedupe history when a
+  producer watch dies; stale empty watches are dropped with their queues; pending requests
+  expire after `MaxInFlightTicks` (8) — a rejected/delayed cancel can never mask a later
+  real `Ready`/`Done` observation. `NoteExternalCancel` dedupes by name (last decision
+  wins) instead of appending unbounded requests.
+* **O(n) probe:** `BotQueueWatch.Items` is now a `HashSet<object>` and the current item list
+  is collected in a reusable `HashSet<ProductionItem>` scratch — removal diff is one pass
+  per queue (was nested `Contains` over lists, O(n²) per world tick).
+* **Naming honesty:** `Started` renamed `Queued` — it records observed queued state, not an
+  accepted engine start. `Ready` remains an observer observation (<=1 tick lag by trait
+  order), never claimed as exact engine completion.
+* **Regressions added:** `ReadyCannotInterleaveWithHeld` (stable
+  Ready->Held->Ready->Held emits each change; Ready never resurrects per instance),
+  `HeldReasonAlternationIsATransition`, `PendingTerminalExpiresRejectedRequests`,
+  `PendingMatchesBoundInstanceNotName`, `DroppedProducerLosesDedupeHistory`. 11 seam tests green; full suite 1285/1285; Release
+  clean; boot gate main menu, zero new exceptions. Still record-only — no orders, no world
+  mutation, no RNG.
+
+## 2026-10-09 Sol: economy logger implementation checkpoint
+
+Isolated codex/replay-health-logger on f7e1d0fff. New opt-in recorder/world controller, bounded writer and queue/head timing core; no YAML mount, queue decision source, engine pin, orders or launches changed. Focused core/writer tests 16/16. Current seam outcome coverage is unresolved, so activation deliberately marks evidence incomplete (UNKNOWN); not ready for adoption. Remaining recorder/schema round-trip tests, corrected seam restack, measured runtime cost and independent review. See docs/design/REPLAY_HEALTH_LOGGER.md.
+
+### 2026-10-09 Sol logger consumer-fit checkpoint
+
+Canonical shared health/raw files, shared schema serializer, early-world-disposal cleanup; no YAML mount or gameplay changes. Focused 20/20 pass. Approved offline analyzer consumes actual C# test output: normal OBSERVED_HEALTHY, 250-tick ready BLOCK, incomplete end UNKNOWN. Still deliberately incomplete from activation pending accepted outcome seam; no adoption or launches.
+
+### 2026-10-09 Sol logger producer-state/cost preparation
+
+Producer liveness separated from queue enablement; disabled unfinished queues paused, Done remains ready; re-enabled idle starts a new interval. Focused27/27 PASS and explicit one-player128-queue/45001-tick core measurement PASS (19,021,579 output bytes). Runtime cost/adoption unproven; shared32MiB budget cannot hold two maximum-census players, so supported cohort forecast and measured cost gate remain required. No games or mount changes.
+
+2026-10-09 output-budget correction: shared file cap is now 128MiB, matching
+approved replay_health.read_jsonl MAX_FILE_BYTES (128MiB); line cap64KiB and
+record cap200000 unchanged. This supersedes the earlier32MiB implementation.
+Explicit one/two-player fixtures each keep128 queues through45001 ticks; both
+PASS. Two-player receipt:1802 pulses,38046762 output bytes,1144.5332ms,
+300133944 allocated bytes (process/JIT warm-up differs; timing is NOT a comparative
+runtime benchmark). Raw stream budgets are independent. Arbitrary64-player
+maximum queue/event workloads are not certified; forecasting and overflowUNKNOWN
+remain required. No mount/seam/campaign clearance. Receipt:
+engine/bin/TestResults/economy-health-core-cost-2p.json.
+
+### 2026-10-09 actual-path economy consumer CLI evidence
+
+Correction: replay_health.py startup checker does not read the new economy file. Separate approved economy_invariants.py@2a417 CLI does. Actual C# serializer+bounded writer generate unique support/Logs/cameo-ai-economy-health.jsonl files; immutable pinned CLI consumes them and verifies byte digest/status/exit. C#4/4+PythonCLI4/4 PASS (healthy0,ready250 BLOCK20,incomplete21,missing-health21). Existing drivers still need explicit dual-checker integration; no runtime/adoption approval.
+
+### 2026-10-09 accepted-value and budget checkpoint
+
+Recorded VP bounded approval of 6b0c1fd73bf5a6d08b066fd34cef22f7a49a3f9e for sizing disclosure and pinned CLI tests only; reviewer Python 4/4 passed on existing C# fixtures, while its missing ignored engine dependency prevented fixture regeneration. Receipt: REREVIEW_2026-10-09_logger_sizing_6b_luna.md.
+
+Extracted the runtime accepted-resource raw serializer for direct tests of positive credit versus zero and unknown sender identity. Added exact byte-budget exhaustion regression: no extra append or certified record after failure. Focused C# 30/30 and pinned economy CLI 4/4 pass on regenerated fixtures. No mount, gameplay or engine changes; unresolved terminal causality and runtime adoption gates remain.
+
+## 2026-10-09 ? Replay health prototype (Sol)
+
+Isolated codex/replay-health-gate at base3d; exclusive tool/test/design scope. Existing aggregate/story/order tools were checked: no startup stop gate exists. Implemented schema/identity/bounds-aware telemetry symptom gate, startup persistence and warning-only economy/combat timelines. Historical127 completed records:64 RA holds,63 GDI/Nod startup observed. 17 focused Python tests pass. Current buffered logger cannot provide mid-match detection; live pulse and scheduler stop latch remain separately owned work. No games, runtime changes or master pushes. See docs/design/REPLAY_HEALTH_ANALYZER.md for primary sources, policy and resume contract.
+
+2026-10-09 replay-health review corrections: rejected duplicate/nonfinite JSON, non-string identities, malformed summary and empty non-list timeline; output now exclusive atomic publication to a new report only, never overwrites artifacts; event joins and window scan linear.22 tests pass including200000 snapshots/events/timeline points in1.20s. ab7285e81 remains superseded FIX REQUIRED; revised commit requires independent re-review. No runtime/game/master changes.
+
+2026-10-09 ? Economy invariant verifier plan: latest maintainer requires ready250/idle1500/repeatedcancel/cash-band defects. Existing startup checker cannot infer queue age/cancel reasons/storage from old logs. Preserve independently approved replay_health.py bytes; add separate tools/ai/economy_invariants.py + focused tests + contract docs in exclusive codex/replay-health-gate worktree.50tick complete pulses + exact state timestamps/cancel events, strictsequence/schema and truncated UNKNOWN; source logger still blocked. No live/source agent overlap.
+
+2026-10-09 — Inactive cancellation repair plan: independent b542 review reproduced elimination cleanup falsely counted as repeated production failure. Require event-local player activity, producer liveness and fixed cancellation class; exclude destruction/elimination cleanup, clear retry history on inactivity, and reject missing event evidence as UNKNOWN. Add active/inactive/destruction and between-pulse transition regressions. Offline files only; approved startup checker stays unchanged. Exact revised head requires independent review before adoption.
+
+2026-10-09 — Net spending schema correction: read-only engine inspection showed PlayerResources.Spent decreases on refunds. Acting-lead decision: no gross/low-spend proof from sampled net accounting. Separate offline verifier now policy v2/schema2 with signed net_spent, explicit gross_spent=null/gross_spend_complete=false, and cash-float spending-unverified diagnostic only. Cash-band threshold remains an independent provisional defect.19/19 focused tests pass including refund decreases, negative net spend and rejection of legacy/unsupported evidence. Runtime logger not edited; independent delta review required.
+
+### 2026-10-09 ? MCV deploy-cell repair (Codex Sol)
+- Isolated devin/mcv-deploy-cell from c76283c0b; docs/design/MCV_DEPLOY_CELL_REPAIR.md records H2 code defect and unknown match-level H1/H2 cause.
+- Lead authorized condition-driven opt-in engine repair; engine331657f07a pushed. Single YAML instance, genericbot search only; branch-local pin. No launches.
+- Engine focused9/9 and full575/577 (2 existing skips); real-YAML mod mount2/2. Independent review/runtime adoption pending.
+
+## 2026-10-10 - Devin-Architect: terminal causality — intent separated from proven outcomes (01a121b6)
+
+VP consumer-fit on frozen f7e1d0fff (REREVIEW_2026-10-09_observer_seam_f7e1_consumer_fit.md):
+`ResolveRemovedItem` still promoted a fresh pending to `Placed`/`Cancelled` whenever the
+bound item disappeared from a live queue within 8 ticks. Engine check at pin 0a3f77dbe
+shows removal alone can never prove cause — `ProductionQueue` cleanup (tech-cap refund
+:443, infinite trim :899, competing `CancelProductionInner` :828) and the builder-unit
+`BuildOnSite` path (`PlaceBuilding` :209-250 removes the item immediately, the actor may
+land ticks later or never) all produce identical disappearances. Corrected on
+`devin/queue-observer-seam`:
+
+* **Intent records emit at the decision tick** — `PlacementOrdered` / `CancelOrdered`
+  appended to `BotQueueTransitionKind` (existing ordinals unchanged). `NotePendingTerminal`
+  and `NoteExternalCancel` emit the intent once at issue; intent kinds are never terminal.
+* **`Placed` requires actor-lifecycle proof** — an own, live actor of the ordered type
+  (or a registered `PlaceBuildingVariants` variant) occupying the ordered cell
+  (`ActorMap.GetActorsAt`); plug orders prove on the host `Pluggable` slot no longer
+  accepting the type it accepted when chosen. Normal placement lands inside the same
+  frame-end task as the removal, so it proves at the next probe tick; a builder unit
+  arms the pending (`AwaitingProof`, window restarts at removal) and resolves on the
+  late actor, else `Removed`+intent reason after `MaxInFlightTicks` — the lead's narrow
+  ruling implemented verbatim.
+* **`Cancelled` requires the Infinite-flag flip** — `CancelProductionInner`'s unique
+  signature (`item.Infinite = false` while the item stays queued), bound at issue via
+  `WasInfinite`. Every other cancel-related removal resolves `Removed`+intent reason:
+  disappearance is indistinguishable from engine cleanup on this pin — schema-2 UNKNOWN,
+  never an invented terminal.
+* **`Removed` always classifies event-locally** (Elimination / Destruction / None) and
+  carries the request's reason so intent survives on record; it never inherits the
+  request's cancellation class (that would assert the unproven cause). Stale-watch
+  flushes resolve leftover pendings with one last proof check instead of silently
+  clearing. `Matches` no longer binds `AwaitingProof` entries — an armed entry's own
+  departed ref and same-name siblings can never re-consume it.
+* **World-free regression suite (+9):** unproven removal arms not Placed, stale request
+  Removed, proven placement (incl. queueSeen=false evidence-beats-staleness), builder-unit
+  late-actor success, builder-unit failure expiry, competing-removal never-Placed,
+  cancel removal always Removed across live/stale/fresh/expired, infinite flip bound-item
+  proof (sibling/unbound/finite/non-cancel negatives), awaiting-entry sibling immunity,
+  elimination during awaiting.
+* **Unchanged invariants:** lazy seam (no observer -> one null check), bounded O(n) probe,
+  no orders/RNG/world mutation, per-instance episodes, event-local schema-2 fields.
+
+* **VP re-review fix (plug proof):** `!Pluggable.AcceptsPlug(type)` is false for three
+  distinct reasons — slot doesn't define the type, a dynamic `Requirement` currently
+  fails, or (requirement-free types only) `active != null`. Only the last is install
+  evidence, so `BaseBuilderQueueEvalCA.PlugInstallProven` now requires
+  `slotDefinesType && !requirementKeyed && !acceptsNow` — the manager wires the real
+  `Info.Conditions`/`Info.Requirements`/`AcceptsPlug` values per candidate slot.
+  Requirement-keyed slots report availability, not install state (no public engine API
+  exposes `active`), so those pendings stay UNKNOWN and expire `Removed` — the VP's
+  sanctioned fallback. Regressions exercise the production predicate: requirement-flip
+  (no install -> `Removed`), true install -> `Placed`, unknown-type and still-accepting
+  negatives.
+
+## 2026-10-10 - A1-RNG: per-module bot RNG streams (devin/a1-bot-rng)
+
+* `BotRng.For(player, moduleKey)` / `For(IBot, moduleKey)`: each bot player now
+  owns a `ConditionalWeakTable<Player, ModuleStreams>` whose `ByKey` dictionary
+  lazily creates one `MersenneTwister` per module key. Module seed =
+  `PlayerSeed(lobby, salt) ^ Fnv1a(key)` - so any module's draw count can change
+  without shifting any other module's sequence (the F1 cross-contamination fix).
+* Keys are compile-time `nameof(<enclosing class>)` at every call site - never
+  runtime/machine-derived strings, so cross-client seeds can't diverge.
+  95 sites migrated across OpenRA.Mods.CA (incl. queue manager, squad states -
+  each state class gets its own stream), OpenRA.Mods.Cameo, OpenRA.Mods.Fransbot.
+  `AIUtils` helpers key on `AIUtils`.
+* `PlayerSeed`/`ModuleSeed`/`Fnv1a` are public pure functions so the tests drive
+  the same seed math the production call composes; unkeyed `For(player)` still
+  works (normalizes to the empty key) for compatibility.
+* Tests (+6, `BotRngTest`): published FNV-1a32 vectors, null/empty key
+  normalization, module-stream independence, sibling-draw isolation (200 draws
+  on stream A leave B bit-identical), same-seed same-key 1024-draw parity, and
+  per-player isolation with identical keys.
+* Suite 1304/1304, Release clean. No launches per task gate.
+
+* **M14 fold-in (same-arm fix):** the per-player salt is now the player's slot
+  index in `World.Players` — unique per player, fixed at world creation,
+  identical on all clients, and independent of spawn timing. The old chain
+  (`PlayerActor.ActorID`, falling back to `ClientIndex+1` while PlayerActor is
+  null) was doubly unsafe: the null-actor fallback got memoized forever, and
+  engine map/host-owned players all report the admin's `ClientIndex`
+  ("Owned by the host"), which is what collapsed allied bots onto one seed in
+  the bandit same-arm finding. `PlayerActor` is no longer consulted, so
+  first-call timing can never freeze a colliding seed. +2 regressions: three
+  allied bots get distinct same-key streams, and adjacent salts stay
+  uncorrelated (alternate MT-seeding hypothesis ruled out by construction).
+## 2026-10-10 Sol MCV observation checkpoint
+Read-only separate MCV capture/provider and diagnostic consumer on codex/mcv-health-observation, base7ca7e9159; no YAML mount/engine/BaseBuilder edits.
+Focused9/9, Python8/8 actual canonical C# fixture UNKNOWN21, fullRelease1412/1412 PASS. Missing order/hold/transform hooks explicitly UNKNOWN.
+Next: exact-SHA VP review; cost/coverage/adoption remain gated. No launches. Insurance telemetry precedes M13 wiring per lead.
+
+### 2026-10-10 TRACK-INSURANCE source checkpoint
+- Isolated codex/insurance-telemetry from 5ea8c84f5; separate default-on version1 payout stream, actual credit delta and engine-Earned income share, name-free bot slots.
+- Dynamic and legacy grants unchanged; inherited CashTrickler sync hash regression passes. C#10/10, full1440/1440, Python15/15; no launches.
+- Next: exact-SHA VP review; runtime cost/capture/parity remain unmeasured. Engine6da unchanged; frozen economy/MCV schemas unchanged.
+### 2026-10-10 � M13 restraint-budget checkpoint (Sol)
+- Isolated codex/m13-liveness: classify 59 groups and refuse more than one newly armed restraint before YAML edits.
+- Exact externally reviewed manifests bind unchanged, already-armed baseline patches; combination tests remain explicitly non-campaign.
+- Preserve build-order generated specs with conservative restraint classes; no gameplay/default/engine changes.
+- Next: independent tooling review, then squad response/verified-dispatch wiring; no game launches.
+
+### 2026-10-10 � M13 helper R1 correction (Sol)
+- Failed dispatch now clears only the pending intent while preserving Unsupported; complete observation alone restores eligibility.
+- Two regressions cover pre-deadline and due-deadline callbacks, repeated callback, rejected retry and complete recovery without deadline renewal.
+- Focused pure-helper suite30/30 PASS; no runtime wiring, engine pin changes or launches.
+- Next: exact revised-head independent helper re-review; M13 stays incomplete.
+## 2026-10-10 Devin REPAIR-B3 queue wiring — VP rereview fixes (lifecycle regressions + fog manifest)
+
+VP exact-SHA review of `eafdfb6a1` (`REREVIEW_2026-10-10_repair_b3_wiring_eafdfb6_luna.md`): FIX REQUIRED —
+the wired call sites were correct but unpinned (no test invoked the production lifecycle manager→provider),
+and the exact merged tree failed the fog audit.
+
+* **Seams extracted** in `BaseBuilderQueueEvalCA` (the documented call-site seam host) so the production
+  control flow is testable headless: `RefineryReservationAdmits` (admission gate — whole covered set,
+  atomic, version-guarded), `RenewRefineryReservation` (live-model renewal, clears `ReservedClaim` on
+  refusal/missing binding/missing law), `CommitRefineryClaimOrPark` (commit AT the selected site vs
+  bounded park on no-site), `ReleaseRefineryReservations` (owner-keyed, both teardown paths). All five
+  production call sites now delegate; observer/terminal-causality code untouched.
+* **+9 lifecycle regressions** in `BaseBuilderQueueEvalTest` via `RecordingRefineryLaw` — a fake
+  `IBotExpansionTargetProvider` backed by the real `RefineryAnchorReservations`, mirroring the module's
+  version guard / taken probe / commit-clear: refusal leaves no partial holds and no bind; commit
+  publishes the selected site (≠ anchor) and consumes holds; no-site parks the offered anchor;
+  teardown releases every owner hold with zero set recomputation; contested renewal clears
+  `ReservedClaim`; stale model version is refused and the seam re-reads the live version.
+* **Fog manifest reconciled**: upstream master `5ea8c84f5` introduced a 10th enumeration site in
+  `BaseBuilderQueueManagerCA` (the observer-seam `Placed` proof's own-player-filtered
+  `ActorsWithTrait<Pluggable>` scan) without bumping the manifest — the audit failed on master itself.
+  Manifest bumped 9 → 10; the scan is own-player-only (`t.Actor.Owner == player`), fog-honest.
+* Verified: Release build 0/0; focused `BaseBuilderQueueEvalTest|FieldCoverageTest` 183/183.
+## A3/A4 learnability evidence (2026-10-10)
+
+- Work branch `codex/a3a4-learnables-f9f10`, based on `origin/master` at `5ea8c84f5f535d6340ecd486fcebd240c0a2cdbe`; isolated tree `C:/cameo-wt/a3a4-learnables-f9f10`.
+- Scope: regenerate AI module map and architecture audit evidence; run increment-switch dry run and sanctioned audit suite; mark predictor calibration `wired_awaiting_artifact` while its YAML is absent; make registry tests enforce that `wired` artifacts exist; move effective-unit-value activation behind its own default-off switch.
+- Files: regenerated `docs/design/AI_MODULE_MAP.md`, `docs/design/AI_ARCH_COVERAGE.md` and tracked `docs/audit/latest/` reports; `tools/ai/learnables.yaml`, `tools/tests/test_learnables_registry.py`, `tools/ai/increment_switches.yaml`, `mods/cameo/ai/ai.yaml`; corrected built-engine stamp comparison plus regression in `tools/audit/audit_engine_freshness.py` / `tools/tests/test_audit_heaviness_bell.py`; this log.
+- Verify: focused learnables-registry tests; requested map/audit checks, switch dry run (no dead targets), and `bash tools/audit/run_all.sh`. Switch-off order parity remains a separate Coordinator gate; no match launch or merge.
+- A3 run evidence: built engine version is `git-6da7fce14da541180c6baddd6925118fbef65b94`, matching `mod.config`'s raw pin. Fixed `audit_engine_freshness.py` to normalize the SDK's `git-` stamp before comparison and added a regression; the generated report now has no false built-engine mismatch. The shared cameo-engine clone is still at `d5d8b2a685`, so its separate upstream-drift note remains informational.
+- Validation: `ai_arch_audit.py --check` passes (0 errors, 21 existing warnings); targeted `BP_effective_unit_value --dry-run` shows exactly the intended `UseLearnedPriors: false -> true` change; learnables registry 4/4 and audit/engine-version tests 51/51 pass. `bash tools/audit/run_all.sh` completed and regenerated reports, exit 1 from existing blocking findings in `armor_upgrade_harm`, `derived_armor_columns`, `doc_claims`, `doc_health`, `duplicate_keys`, `release_drift`, and `weapon_shape`; no `.err` sidecars or zero-byte reports. In particular `doc_claims` measures `ledgers_drifted=1` against documented 0. These unrelated findings were not suppressed or repaired here.
+
+## 2026-10-10 � P0 privacy fix integrated on fresh learn parity branch
+
+- Integration branch `codex/inc-learn` starts at `origin/master` 700bb16483f6d92664153e98d6f2560c312acaab and merges reviewed P0 fix 874fda89888cafcaba5716e50f49e79b3d3c2298 (base 229a2563b). Merge worktree: `C:/cameo-wt/inc-learn`.
+- `DEVELOPMENT_LOG.md` conflict resolved by retaining the current master history; older P0 checkpoint details remain in `STATUS_2026-10-10_learn_p0_p6_frozen.md` and `REREVIEW_2026-10-10_learn_p0_p6_vp.md`.
+- This integration does not claim runtime parity, P6 acceptance, or merge to master. P0/P6 switch-off order identity and P6 armed order-rate/churn remain separate gates.
+
+## 2026-10-10 � P6 all-squad-types source restack in codex/inc-learn
+
+- Integrated P6 source commits `bec5ab9c3` plus reviewed deltas `27eb42521`, `0249f6fc0`, and VP-approved `0b19d6290` onto current master + P0. The unrelated base branch's BO commits were not cherry-picked; current master already carries the `BO_squad_move_dedup` configuration.
+- Runtime gates are still pending; this records a local candidate only and does not authorize merge/master publication.
+## 2026-10-10 B3 park takeover regression
+Sol preserved the already-pushed null-owner global reservation correction (693c07793 / da170b8ed), including the unchanged anchor-global offer park. Added production renewal-seam regression covering a park after admission, refusal through the final cooldown tick, and recovery at exact expiry. Focused/full validation is pending PT7 machine release; no launch or runtime approval.
+
+## 2026-10-10 B3 renewal correction
+The added c730b88 regression failed 1/125: same-owner live holds bypass the reservation table taken probe. The provider now validates the entire set against current park/pending/served state before table admission or renewal, without changing table ownership semantics or anchor-global offers. Matching provider fixture and production renewal-seam test pass: focused125/125, fullRelease1516/1516; two explicit max-census cases are not run. No engine pin change or launches.

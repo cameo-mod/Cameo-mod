@@ -1,0 +1,771 @@
+{
+  "_doc": "TRAIT-U0 alias registry (SPEC_2026-10-05_trait_unification.md): old yaml name -> plain name. state: pending (declared, not migrating), active (MigrateUnifiedTraits rewrites it), retired (name removed; zero use allowed). phase: U1..U7 target phase, null = unscheduled (open decision). decision: spec §8.1 open-decision id. `new` is null for KNOWN_PAIRS members while D3 (canonical union name) is undecided. Do not mark an entry active until its family union lands in OpenRA.Mods.Cameo.Unified.",
+  "version": 1,
+  "states": [
+    "pending",
+    "active",
+    "retired"
+  ],
+  "aliases": [
+    {
+      "old": "AirstrikeMasterCA",
+      "new": "AirstrikeMaster",
+      "kind": "trait",
+      "family": "airstrikemaster (trait)",
+      "state": "pending",
+      "phase": "U3",
+      "decision": null
+    },
+    {
+      "old": "AirstrikePowerAS",
+      "new": "AirstrikePower",
+      "kind": "trait",
+      "family": "airstrikepower (trait)",
+      "state": "pending",
+      "phase": "U4",
+      "decision": "D7"
+    },
+    {
+      "old": "AirstrikePowerRV",
+      "new": "AirstrikePower",
+      "kind": "trait",
+      "family": "airstrikepower (trait)",
+      "state": "pending",
+      "phase": "U4",
+      "decision": "D7"
+    },
+    {
+      "old": "AirstrikeSlaveCA",
+      "new": "AirstrikeSlave",
+      "kind": "trait",
+      "family": "airstrikeslave (trait)",
+      "state": "pending",
+      "phase": "U3",
+      "decision": null
+    },
+    {
+      "old": "AmbientSoundCA",
+      "new": "AmbientSound",
+      "kind": "trait",
+      "family": "ambientsound (trait)",
+      "state": "pending",
+      "phase": "U2",
+      "decision": null
+    },
+    {
+      "old": "AnnounceOnKillAS",
+      "new": "AnnounceOnKill",
+      "kind": "trait",
+      "family": "announceonkill (trait)",
+      "state": "pending",
+      "phase": "U2",
+      "decision": null
+    },
+    {
+      "old": "AttackAircraftCA",
+      "new": "AttackAircraft",
+      "kind": "trait",
+      "family": "attackaircraft (trait)",
+      "state": "pending",
+      "phase": "U3",
+      "decision": null
+    },
+    {
+      "old": "AttackBomberCA",
+      "new": "AttackBomber",
+      "kind": "trait",
+      "family": "attackbomber (trait)",
+      "state": "pending",
+      "phase": "U3",
+      "decision": null
+    },
+    {
+      "old": "AttackGarrisonedSP",
+      "new": "AttackGarrisoned",
+      "kind": "trait",
+      "family": "attackgarrisoned (trait)",
+      "state": "pending",
+      "phase": "U3",
+      "decision": "D4"
+    },
+    {
+      "old": "AttackInfectCA",
+      "new": "AttackInfect",
+      "kind": "trait",
+      "family": "attackinfect (trait)",
+      "state": "pending",
+      "phase": "U3",
+      "decision": "D9"
+    },
+    {
+      "old": "AttackLeapAS",
+      "new": "AttackLeap",
+      "kind": "trait",
+      "family": "attackleap (trait)",
+      "state": "pending",
+      "phase": "U3",
+      "decision": null
+    },
+    {
+      "old": "AttackPrismSupportedCA",
+      "new": "AttackPrismSupported",
+      "kind": "trait",
+      "family": "attackprismsupported (trait)",
+      "state": "pending",
+      "phase": "U3",
+      "decision": null
+    },
+    {
+      "old": "AttackSoundsCA",
+      "new": "AttackSounds",
+      "kind": "trait",
+      "family": "attacksounds (trait)",
+      "state": "pending",
+      "phase": "U2",
+      "decision": null
+    },
+    {
+      "old": "BallisticMissileCA",
+      "new": "BallisticMissile",
+      "kind": "trait",
+      "family": "ballisticmissile (trait)",
+      "state": "pending",
+      "phase": "U3",
+      "decision": null
+    },
+    {
+      "old": "BaseBuilderBotModuleCA",
+      "new": "BaseBuilderBotModule",
+      "kind": "trait",
+      "family": "basebuilderbotmodule (trait)",
+      "state": "pending",
+      "phase": "U5",
+      "decision": null
+    },
+    {
+      "old": "BuildingRepairBotModuleCA",
+      "new": "BuildingRepairBotModule",
+      "kind": "trait",
+      "family": "buildingrepairbotmodule (trait)",
+      "state": "pending",
+      "phase": "U5",
+      "decision": null
+    },
+    {
+      "old": "BulletAS",
+      "new": "Bullet",
+      "kind": "projectile",
+      "family": "bullet (projectile)",
+      "state": "pending",
+      "phase": "U1",
+      "decision": null
+    },
+    {
+      "old": "CaptureManagerBotModuleCA",
+      "new": null,
+      "kind": "trait",
+      "family": "engineer capture",
+      "state": "pending",
+      "phase": "U5",
+      "decision": "D3"
+    },
+    {
+      "old": "ChangeOwnerAS",
+      "new": "ChangeOwner",
+      "kind": "warhead",
+      "family": "changeowner (warhead)",
+      "state": "pending",
+      "phase": "U3",
+      "decision": null
+    },
+    {
+      "old": "ChronoshiftableCA",
+      "new": "Chronoshiftable",
+      "kind": "trait",
+      "family": "chronoshiftable (trait)",
+      "state": "pending",
+      "phase": "U3",
+      "decision": null
+    },
+    {
+      "old": "CloakPaletteEffectCA",
+      "new": "CloakPaletteEffect",
+      "kind": "trait",
+      "family": "cloakpaletteeffect (trait)",
+      "state": "pending",
+      "phase": "U2",
+      "decision": null
+    },
+    {
+      "old": "DetonateWeaponPowerCA",
+      "new": "DetonateWeaponPower",
+      "kind": "trait",
+      "family": "detonateweaponpower (trait)",
+      "state": "pending",
+      "phase": "U4",
+      "decision": null
+    },
+    {
+      "old": "DroneSpawnerMasterCA",
+      "new": "DroneSpawnerMaster",
+      "kind": "trait",
+      "family": "dronespawnermaster (trait)",
+      "state": "pending",
+      "phase": "U3",
+      "decision": "D9"
+    },
+    {
+      "old": "EjectOnDeathAS",
+      "new": "EjectOnDeath",
+      "kind": "trait",
+      "family": "ejectondeath (trait)",
+      "state": "pending",
+      "phase": "U3",
+      "decision": null
+    },
+    {
+      "old": "FactionCA",
+      "new": "Faction",
+      "kind": "trait",
+      "family": "faction (trait)",
+      "state": "pending",
+      "phase": null,
+      "decision": "D2"
+    },
+    {
+      "old": "FireClusterAS",
+      "new": "FireCluster",
+      "kind": "warhead",
+      "family": "firecluster (warhead)",
+      "state": "pending",
+      "phase": "U3",
+      "decision": null
+    },
+    {
+      "old": "FireWarheadsOnDeathCA",
+      "new": "FireWarheadsOnDeath",
+      "kind": "trait",
+      "family": "firewarheadsondeath (trait)",
+      "state": "pending",
+      "phase": "U3",
+      "decision": "D9"
+    },
+    {
+      "old": "FrozenUnderFogUpdatedByGpsAS",
+      "new": "FrozenUnderFogUpdatedByGps",
+      "kind": "trait",
+      "family": "frozenunderfogupdatedbygps (trait)",
+      "state": "pending",
+      "phase": "U2",
+      "decision": null
+    },
+    {
+      "old": "GpsDotAS",
+      "new": "GpsDot",
+      "kind": "trait",
+      "family": "gpsdot (trait)",
+      "state": "pending",
+      "phase": "U2",
+      "decision": null
+    },
+    {
+      "old": "GrantConditionOnAttackCA",
+      "new": "GrantConditionOnAttack",
+      "kind": "trait",
+      "family": "grantconditiononattack (trait)",
+      "state": "pending",
+      "phase": "U2",
+      "decision": null
+    },
+    {
+      "old": "GrantConditionOnBotOwnerCA",
+      "new": "GrantConditionOnBotOwner",
+      "kind": "trait",
+      "family": "grantconditiononbotowner (trait)",
+      "state": "pending",
+      "phase": "U2",
+      "decision": null
+    },
+    {
+      "old": "GrantConditionOnPrerequisiteCA",
+      "new": "GrantConditionOnPrerequisite",
+      "kind": "trait",
+      "family": "grantconditiononprerequisite (trait)",
+      "state": "pending",
+      "phase": "U2",
+      "decision": "D6"
+    },
+    {
+      "old": "GrantConditionOnPrerequisiteManagerCA",
+      "new": "GrantConditionOnPrerequisiteManager",
+      "kind": "trait",
+      "family": "grantconditiononprerequisitemanager (trait)",
+      "state": "pending",
+      "phase": "U2",
+      "decision": "D6"
+    },
+    {
+      "old": "GrantExternalConditionPowerCA",
+      "new": "GrantExternalConditionPower",
+      "kind": "trait",
+      "family": "grantexternalconditionpower (trait)",
+      "state": "pending",
+      "phase": "U4",
+      "decision": "D7"
+    },
+    {
+      "old": "HarvesterBotModuleCA",
+      "new": "HarvesterBotModule",
+      "kind": "trait",
+      "family": "harvesterbotmodule (trait)",
+      "state": "pending",
+      "phase": "U5",
+      "decision": null
+    },
+    {
+      "old": "InfectableCA",
+      "new": "Infectable",
+      "kind": "trait",
+      "family": "infectable (trait)",
+      "state": "pending",
+      "phase": "U3",
+      "decision": "D9"
+    },
+    {
+      "old": "InfiltrateForSupportPowerCA",
+      "new": "InfiltrateForSupportPower",
+      "kind": "trait",
+      "family": "infiltrateforsupportpower (trait)",
+      "state": "pending",
+      "phase": "U4",
+      "decision": null
+    },
+    {
+      "old": "LaserZapCA",
+      "new": "LaserZap",
+      "kind": "projectile",
+      "family": "laserzap (projectile)",
+      "state": "pending",
+      "phase": "U1",
+      "decision": null
+    },
+    {
+      "old": "LeavesTrailsCA",
+      "new": "LeavesTrails",
+      "kind": "trait",
+      "family": "leavestrails (trait)",
+      "state": "pending",
+      "phase": "U2",
+      "decision": null
+    },
+    {
+      "old": "LoadCargoBotModuleAS",
+      "new": "LoadCargoBotModule",
+      "kind": "trait",
+      "family": "loadcargobotmodule (trait)",
+      "state": "pending",
+      "phase": "U5",
+      "decision": "D9"
+    },
+    {
+      "old": "LoadGarrisonerBotModuleCA",
+      "new": "LoadGarrisonerBotModule",
+      "kind": "trait",
+      "family": "loadgarrisonerbotmodule (trait)",
+      "state": "pending",
+      "phase": "U5",
+      "decision": null
+    },
+    {
+      "old": "MadTankCA",
+      "new": "MadTank",
+      "kind": "trait",
+      "family": "madtank (trait)",
+      "state": "pending",
+      "phase": "U3",
+      "decision": null
+    },
+    {
+      "old": "MindControllableCA",
+      "new": "MindControllable",
+      "kind": "trait",
+      "family": "mindcontrollable (trait)",
+      "state": "pending",
+      "phase": "U3",
+      "decision": null
+    },
+    {
+      "old": "MindControllerCA",
+      "new": "MindController",
+      "kind": "trait",
+      "family": "mindcontroller (trait)",
+      "state": "pending",
+      "phase": "U3",
+      "decision": null
+    },
+    {
+      "old": "MissileSpawnerMasterCA",
+      "new": "MissileSpawnerMaster",
+      "kind": "trait",
+      "family": "missilespawnermaster (trait)",
+      "state": "pending",
+      "phase": "U3",
+      "decision": null
+    },
+    {
+      "old": "MissileTA",
+      "new": "Missile",
+      "kind": "projectile",
+      "family": "missile (projectile)",
+      "state": "pending",
+      "phase": "U1",
+      "decision": null
+    },
+    {
+      "old": "NukePowerCA",
+      "new": "NukePower",
+      "kind": "trait",
+      "family": "nukepower (trait)",
+      "state": "pending",
+      "phase": "U4",
+      "decision": null
+    },
+    {
+      "old": "PeriodicProducerCA",
+      "new": "PeriodicProducer",
+      "kind": "trait",
+      "family": "periodicproducer (trait)",
+      "state": "pending",
+      "phase": "U4",
+      "decision": null
+    },
+    {
+      "old": "PlugSpawnerBotModuleCA",
+      "new": "PlugSpawnerBotModule",
+      "kind": "trait",
+      "family": "plugspawnerbotmodule (trait)",
+      "state": "pending",
+      "phase": "U5",
+      "decision": "D9"
+    },
+    {
+      "old": "PortableChronoCA",
+      "new": "PortableChrono",
+      "kind": "trait",
+      "family": "portablechrono (trait)",
+      "state": "pending",
+      "phase": "U3",
+      "decision": null
+    },
+    {
+      "old": "ProductionAirdropCA",
+      "new": "ProductionAirdrop",
+      "kind": "trait",
+      "family": "productionairdrop (trait)",
+      "state": "pending",
+      "phase": "U4",
+      "decision": null
+    },
+    {
+      "old": "ProductionParadropCA",
+      "new": "ProductionParadrop",
+      "kind": "trait",
+      "family": "productionparadrop (trait)",
+      "state": "pending",
+      "phase": "U4",
+      "decision": null
+    },
+    {
+      "old": "ProductionQueueFromSelectionCA",
+      "new": "ProductionQueueFromSelection",
+      "kind": "trait",
+      "family": "productionqueuefromselection (trait)",
+      "state": "pending",
+      "phase": "U4",
+      "decision": null
+    },
+    {
+      "old": "ReloadAmmoPoolCA",
+      "new": "ReloadAmmoPool",
+      "kind": "trait",
+      "family": "reloadammopool (trait)",
+      "state": "pending",
+      "phase": "U4",
+      "decision": null
+    },
+    {
+      "old": "RenderRangeCircleCA",
+      "new": "RenderRangeCircle",
+      "kind": "trait",
+      "family": "renderrangecircle (trait)",
+      "state": "pending",
+      "phase": "U2",
+      "decision": "D9"
+    },
+    {
+      "old": "RenderShroudCircleCA",
+      "new": "RenderShroudCircle",
+      "kind": "trait",
+      "family": "rendershroudcircle (trait)",
+      "state": "pending",
+      "phase": "U2",
+      "decision": null
+    },
+    {
+      "old": "ResourcePurifierCA",
+      "new": "ResourcePurifier",
+      "kind": "trait",
+      "family": "resourcepurifier (trait)",
+      "state": "pending",
+      "phase": "U4",
+      "decision": null
+    },
+    {
+      "old": "RevealOnFireCA",
+      "new": "RevealOnFire",
+      "kind": "trait",
+      "family": "revealonfire (trait)",
+      "state": "pending",
+      "phase": "U2",
+      "decision": null
+    },
+    {
+      "old": "SquadManagerBotModuleCA",
+      "new": "SquadManagerBotModule",
+      "kind": "trait",
+      "family": "squadmanagerbotmodule (trait)",
+      "state": "pending",
+      "phase": "U5",
+      "decision": null
+    },
+    {
+      "old": "TemporaryOwnerManagerAS",
+      "new": "TemporaryOwnerManager",
+      "kind": "trait",
+      "family": "temporaryownermanager (trait)",
+      "state": "pending",
+      "phase": "U3",
+      "decision": null
+    },
+    {
+      "old": "TerrainLightSourceCA",
+      "new": "TerrainLightSource",
+      "kind": "trait",
+      "family": "terrainlightsource (trait)",
+      "state": "pending",
+      "phase": "U2",
+      "decision": "D9"
+    },
+    {
+      "old": "TurnOnIdleCA",
+      "new": "TurnOnIdle",
+      "kind": "trait",
+      "family": "turnonidle (trait)",
+      "state": "pending",
+      "phase": "U3",
+      "decision": null
+    },
+    {
+      "old": "UnitBuilderBotModuleCA",
+      "new": "UnitBuilderBotModule",
+      "kind": "trait",
+      "family": "unitbuilderbotmodule (trait)",
+      "state": "pending",
+      "phase": "U5",
+      "decision": null
+    },
+    {
+      "old": "WarheadTrailProjectileCA",
+      "new": "WarheadTrailProjectile",
+      "kind": "projectile",
+      "family": "warheadtrailprojectile (projectile)",
+      "state": "pending",
+      "phase": "U1",
+      "decision": null
+    },
+    {
+      "old": "WithBuildingBibCA",
+      "new": "WithBuildingBib",
+      "kind": "trait",
+      "family": "withbuildingbib (trait)",
+      "state": "pending",
+      "phase": "U2",
+      "decision": "D9"
+    },
+    {
+      "old": "WithMindControlArcCA",
+      "new": "WithMindControlArc",
+      "kind": "trait",
+      "family": "withmindcontrolarc (trait)",
+      "state": "pending",
+      "phase": "U3",
+      "decision": null
+    },
+    {
+      "old": "WithMuzzleOverlayCA",
+      "new": "WithMuzzleOverlay",
+      "kind": "trait",
+      "family": "withmuzzleoverlay (trait)",
+      "state": "pending",
+      "phase": "U2",
+      "decision": null
+    },
+    {
+      "old": "WithNameTagDecorationCA",
+      "new": "WithNameTagDecoration",
+      "kind": "trait",
+      "family": "withnametagdecoration (trait)",
+      "state": "pending",
+      "phase": "U2",
+      "decision": null
+    },
+    {
+      "old": "WithProductionDoorOverlayCA",
+      "new": "WithProductionDoorOverlay",
+      "kind": "trait",
+      "family": "withproductiondooroverlay (trait)",
+      "state": "pending",
+      "phase": "U2",
+      "decision": null
+    },
+    {
+      "old": "WithRangeCircleCA",
+      "new": "WithRangeCircle",
+      "kind": "trait",
+      "family": "withrangecircle (trait)",
+      "state": "pending",
+      "phase": "U2",
+      "decision": null
+    },
+    {
+      "old": "MissileCA",
+      "new": "Missile",
+      "kind": "projectile",
+      "family": "missile (projectile)",
+      "state": "pending",
+      "phase": "U1",
+      "decision": "D1",
+      "note": "152 dormant Projectile: MissileCA literals in 22 unmounted files (spec §2); port or drop decision is open"
+    },
+    {
+      "old": "ProjetcileHusk",
+      "new": "ProjectileHusk",
+      "kind": "projectile",
+      "family": "projectilehusk (projectile)",
+      "state": "pending",
+      "phase": "U6",
+      "decision": "D5",
+      "note": "SP donor typo name; needed before aircraft-husk content mounts"
+    },
+    {
+      "old": "AttackOpenTopped",
+      "new": "AttackGarrisoned",
+      "kind": "trait",
+      "family": "attackgarrisoned (trait)",
+      "state": "pending",
+      "phase": "U3",
+      "decision": "D4",
+      "note": "Common/AS AttackOpenTopped merges into the AttackGarrisoned union (spec §8.1 D4)"
+    },
+    {
+      "old": "BevManagerBotModule",
+      "new": null,
+      "kind": "trait",
+      "family": "mcvexpansion (BEV)",
+      "state": "pending",
+      "phase": "U5",
+      "decision": "D3",
+      "note": "different-name bot family; canonical union name is open under spec §8.1 D3"
+    },
+    {
+      "old": "McvExpansionManagerBotModule",
+      "new": null,
+      "kind": "trait",
+      "family": "mcvexpansion (BEV)",
+      "state": "pending",
+      "phase": "U5",
+      "decision": "D3",
+      "note": "different-name bot family; canonical union name is open under spec §8.1 D3"
+    },
+    {
+      "old": "McvManagerBotModuleCA",
+      "new": null,
+      "kind": "trait",
+      "family": "mcvexpansion (BEV)",
+      "state": "pending",
+      "phase": "U5",
+      "decision": "D3",
+      "note": "different-name bot family; canonical union name is open under spec §8.1 D3"
+    },
+    {
+      "old": "McvManagerBotModule",
+      "new": null,
+      "kind": "trait",
+      "family": "mcvexpansion (BEV)",
+      "state": "pending",
+      "phase": "U5",
+      "decision": "D3",
+      "note": "different-name bot family; canonical union name is open under spec §8.1 D3"
+    },
+    {
+      "old": "McvManagerASBotModule",
+      "new": null,
+      "kind": "trait",
+      "family": "mcvexpansion (BEV)",
+      "state": "pending",
+      "phase": "U5",
+      "decision": "D3",
+      "note": "different-name bot family; canonical union name is open under spec §8.1 D3"
+    },
+    {
+      "old": "FransMcvExpansionManagerBotModule",
+      "new": null,
+      "kind": "trait",
+      "family": "mcvexpansion (BEV)",
+      "state": "pending",
+      "phase": "U5",
+      "decision": "D3",
+      "note": "different-name bot family; canonical union name is open under spec §8.1 D3"
+    },
+    {
+      "old": "CncEngineerBotModule",
+      "new": null,
+      "kind": "trait",
+      "family": "engineer capture",
+      "state": "pending",
+      "phase": "U5",
+      "decision": "D3",
+      "note": "different-name bot family; canonical union name is open under spec §8.1 D3"
+    },
+    {
+      "old": "CncEngineerManagerBotModule",
+      "new": null,
+      "kind": "trait",
+      "family": "engineer capture",
+      "state": "pending",
+      "phase": "U5",
+      "decision": "D3",
+      "note": "different-name bot family; canonical union name is open under spec §8.1 D3"
+    },
+    {
+      "old": "CaptureManagerBotModule",
+      "new": null,
+      "kind": "trait",
+      "family": "engineer capture",
+      "state": "pending",
+      "phase": "U5",
+      "decision": "D3",
+      "note": "different-name bot family; canonical union name is open under spec §8.1 D3"
+    },
+    {
+      "old": "CaptureManagerBotASModule",
+      "new": null,
+      "kind": "trait",
+      "family": "engineer capture",
+      "state": "pending",
+      "phase": "U5",
+      "decision": "D3",
+      "note": "different-name bot family; canonical union name is open under spec §8.1 D3"
+    }
+  ]
+}

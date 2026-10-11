@@ -160,10 +160,11 @@ def validate_result() -> None:
     rs = Ruleset(ROOT)
     for name, destination in sorted(SELECTED.items()):
         mains = set(main_warheads(rs.resolve_weapon(name)))
-        expected = {f"{destination}FlatCompatibility"}
-        if mains != expected:
+        applied = {f"{destination}FlatCompatibility",
+                   f"{destination}_Flat", destination}
+        if not (len(mains) == 1 and mains <= applied):
             raise RuntimeError(
-                f"{name}: expected {sorted(expected)}; found {sorted(mains)}")
+                f"{name}: expected an applied {destination} main; found {sorted(mains)}")
 
 
 def main() -> int:

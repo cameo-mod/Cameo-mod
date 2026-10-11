@@ -59,7 +59,19 @@ class SonicFamilyGenerationTest(unittest.TestCase):
                     main = node.child('Warhead@' + name + '_' + level)
                     status = node.child('Warhead@' + name + '_' + level + '_Debuff')
                     self.assertIsNotNone(main)
-                    self.assertIsNone(status)
+                    # W7 follow-up (FINDING_2026-09-24_dawn_w7_double_feed): the
+                    # _Debuff node survives as a flat ApplyPhysicalState area
+                    # feed — it refills the Resonance meter over a ring twice
+                    # the damage radius regardless of the damage roll. Only the
+                    # binary GrantExternalCondition mark is retired.
+                    self.assertIsNotNone(status)
+                    self.assertEqual(status.value, 'ApplyPhysicalState')
+                    psn, amount, rmul = gen.FAMILY_AREA_STATE[name]
+                    self.assertEqual(status.get('PhysicalStateName'), psn)
+                    self.assertEqual(status.get('Amount'), str(amount))
+                    self.assertEqual(status.get('Range'),
+                                     str(int(main.get('Spread')) * rmul))
+                    self.assertEqual(status.get('ValidTargets'), vt + ', Structure, wall')
                     self.assertIsNone(next((c for c in node.children
                                             if c.value == 'GrantExternalCondition'), None))
                     self.assertEqual(main.get('ValidTargets'), vt)

@@ -71,7 +71,6 @@ TSProton:
 		Blockable: false
 		Shadow: false
 		Image: tstorpedo
-		RangeLimit: 12c0
 	Warhead@MediumFlameWeaponPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water, Air
 		Damage: 15
@@ -224,10 +223,8 @@ TSStankTibTusk:
 		ContrailLength: 0
 		MaximumLaunchSpeed: 250
 		MinimumLaunchSpeed: 250
-		CloseEnough: 500
 		Acceleration: 3
 		HomingActivationDelay: 2
-		RangeLimit: 25000
 		PointDefenseTypes: Missile
 	Warhead@MediumMissilePercentage: AreaDamagePercentage
 		Damage: 5
@@ -323,6 +320,7 @@ TSStankTibTusk:
 
 TSNODRedEye:
 	Inherits@missilerole: ^Warhead_MissileAA_Heavy
+	Inherits@projectileaa: ^Projectile_Missile_AA
 	Inherits@proj: ^Projectile_Missile_Heavy
 	Inherits@fx: ^ts_nod_tsnodredeye
 	ReloadDelay: 50
@@ -338,7 +336,6 @@ TSNODRedEye:
 		MinimumLaunchAngle: 75
 		Acceleration: 5
 		AllowSnapping: true
-		CloseEnough: 500
 	Warhead@MissileAA_Heavy: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
 		FriendlyFireDamage: 50
@@ -349,8 +346,17 @@ TSNODRedEye:
 		PercentageScale: 10000
 		PercentageSpread: 50
 
+
+	Projectile: Missile
+		Inaccuracy: 150
+		ContrailLength: 0
+		MaximumLaunchSpeed: 200
+		MinimumLaunchSpeed: 200
+		HomingActivationDelay: 3
+
 TSNODTibRedEye:
 	Inherits@w71: ^Warhead_MissileAA_Heavy
+	Inherits@projectileaa: ^Projectile_Missile_AA
 	Inherits@w72: ^Projectile_Missile_Heavy
 	Inherits@w73: ^ts_nod_tsnodredeye
 	Projectile: Missile
@@ -359,7 +365,6 @@ TSNODTibRedEye:
 		Speed: 500
 		Acceleration: 5
 		HorizontalRateOfTurn: 25
-		CloseEnough: 500
 		MinimumLaunchAngle: 75
 	Warhead@MissileAA_Heavy: AreaDamage
 		ValidRelationships: Ally, Neutral, Enemy
@@ -377,6 +382,14 @@ TSNODTibRedEye:
 	ReloadDelay: 50
 	Range: 13176
 	Burst: 3
+
+	Projectile: Missile
+		Inaccuracy: 150
+		ContrailLength: 0
+		MaximumLaunchSpeed: 200
+		MinimumLaunchSpeed: 200
+		HomingActivationDelay: 3
+
 TSFireballLauncher:
 	Inherits@wh: ^Warhead_Flame_Medium
 	Inherits@proj: ^Projectile_Flame_Medium

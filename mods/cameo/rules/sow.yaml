@@ -225,6 +225,7 @@ Player:
 	Turreted@satprot:
 		TurnSpeed: 1023
 	AutoTarget@satprot:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 		ScanRadius: -1
 	AutoTargetPriority@satprot:
@@ -1532,6 +1533,7 @@ sow_gun_tower:
 	DetectCloaked:
 		Range: 5c0
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 		ScanRadius: -1
 	Power:
@@ -1576,6 +1578,7 @@ sow_antiair_tower:
 	WithSpriteTurret:
 	-MustBeDestroyed:
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 		ScanRadius: -1
 	Armament:
@@ -1644,6 +1647,7 @@ sow_plasma_tower:
 		Range: 6c0
 	-WithDeathAnimation:
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 		ScanRadius: -1
 	Power:
@@ -1693,6 +1697,7 @@ sow_minigun_tower:
 	WithSpriteTurret:
 	-MustBeDestroyed:
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 		ScanRadius: -1
 	Armament:
@@ -1741,6 +1746,7 @@ sow_defragmenter_tower:
 		BuildSounds: sow_turret_place.aud
 	-RenderDetectionCircle:
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 		ScanRadius: -1
 	Health:
@@ -1805,6 +1811,7 @@ sow_vulcano_tower:
 	RevealsShroud:
 		Range: 16c0
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 		ScanRadius: -1
 	Turreted:
@@ -1869,6 +1876,7 @@ sow_lt_cannon:
 	Selectable:
 		Bounds: 1066, 1066
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 		ScanRadius: -1
 	Armament:
@@ -1919,6 +1927,7 @@ sow_lt_flame:
 	Power:
 		Amount: -10
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 		ScanRadius: -1
 	Armor:
@@ -1981,6 +1990,7 @@ sow_lt_siege:
 	Turreted:
 		TurnSpeed: 24
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 		ScanRadius: -1
 	Passenger:
@@ -2035,6 +2045,7 @@ sow_lt_special:
 	RevealsShroud:
 		Range: 4c0
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 		ScanRadius: -1
 	Turreted:
@@ -2081,6 +2092,7 @@ sow_lt_antiair:
 		TurnSpeed: 40
 		Locomotor: lighttracked
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 		ScanRadius: -1
 	AutoTargetPriority:
@@ -2148,6 +2160,7 @@ sow_mt_cannon:
 	RevealsShroud:
 		Range: 6c256
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 		ScanRadius: -1
 	Turreted:
@@ -2195,6 +2208,7 @@ sow_mt_flame:
 		Speed: 60
 		TurnSpeed: 32
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 		ScanRadius: -1
 	Health:
@@ -2250,6 +2264,7 @@ sow_mt_siege:
 		Speed: 60
 		TurnSpeed: 32
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 		ScanRadius: -1
 	Health:
@@ -2305,6 +2320,7 @@ sow_mt_special:
 		Speed: 60
 		TurnSpeed: 32
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 		ScanRadius: -1
 	Health:
@@ -2364,6 +2380,7 @@ sow_mt_antiair:
 	Power:
 		Amount: -25
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 		ScanRadius: -1
 	AutoTargetPriority:
@@ -2421,6 +2438,7 @@ sow_ht_cannon:
 		TurnSpeed: 24
 		Locomotor: heavytracked
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 		ScanRadius: -1
 	Health:
@@ -2480,6 +2498,7 @@ sow_ht_flame:
 		TurnSpeed: 24
 		Locomotor: heavytracked
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 		ScanRadius: -1
 	Health:
@@ -2539,6 +2558,7 @@ sow_ht_siege:
 		TurnSpeed: 24
 		Locomotor: heavytracked
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 		ScanRadius: -1
 	Health:
@@ -2598,6 +2618,7 @@ sow_ht_special:
 		TurnSpeed: 24
 		Locomotor: heavytracked
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 		ScanRadius: -1
 	Health:
@@ -2669,6 +2690,7 @@ sow_ht_antiair:
 	Turreted:
 		TurnSpeed: 16
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 		ScanRadius: -1
 	AutoTargetPriority:
@@ -2737,6 +2759,7 @@ sow_abc:
 	Power:
 		Amount: -100
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 9999
 		RequiresCondition: botmicro
 	AutoTargetPriority@attackbase:
@@ -2807,6 +2830,7 @@ sow_advancer:
 		AttackType: Hover
 		Voice: Attack
 	AutoTarget:
+		DynamicWeaponPriority: true
 		AllowMovement: true
 		ScanRadius: 9999
 		ScanOnIdle: true
@@ -3022,6 +3046,7 @@ sow_mech_avenger:
 		TurnSpeed: 28
 		Speed: 50
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 		ScanRadius: -1
 	Health:
@@ -3140,6 +3165,7 @@ sow_mech_kodiak:
 		TurnSpeed: 28
 		Speed: 50
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 		ScanRadius: -1
 	Health:
@@ -3249,6 +3275,7 @@ sow_mech_gatling:
 	Selectable:
 		Bounds: 2048, 2048
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 		ScanRadius: -1
 	Health:
@@ -3312,6 +3339,7 @@ sow_mech_gatling_mk2:
 	Armor:
 		Type: Medium
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 		ScanRadius: -1
 	AutoTargetPriority:
@@ -3360,6 +3388,7 @@ sow_mech_jaguar:
 	Selectable:
 		Bounds: 2048, 2048
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 		ScanRadius: -1
 	Buildable:
@@ -3427,6 +3456,7 @@ sow_mech_jaguar_mk2:
 		TurnSpeed: 48
 		Speed: 90
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 		ScanRadius: -1
 	AutoTargetPriority:
@@ -3480,6 +3510,7 @@ sow_mech_achilles:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 		ScanRadius: -1
 	AutoTargetPriority:
@@ -4095,6 +4126,7 @@ sowasteroid:
 		Weapon: sowasteroid_c
 		LocalOffset: 6000,-300,90, -300,600,90, -600,500,30, 1500,900,60, 1600,900,-30, 200,-500,-40, -1100,-500,60, -1300,-600,50
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 		ScanRadius: 9999
 	AttackMove:

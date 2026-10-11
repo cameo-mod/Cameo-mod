@@ -95,7 +95,6 @@ spearFire:
 	ValidTargets: Ground
 	Projectile: Missile
 		Speed: 0c440
-		RangeLimit: 6c0
 	Warhead@1Dam: SpreadDamage
 		Spread: 200
 		Damage: 2000
@@ -108,7 +107,6 @@ wc_tower_fire_aa:
 	Inherits: bowFire_AA
 	Range: 9728
 	Projectile: Missile
-		RangeLimit: 19c0
 		HorizontalRateOfTurn: 100
 		VerticalRateOfTurn: 100
 	Warhead@1Dam: SpreadDamage

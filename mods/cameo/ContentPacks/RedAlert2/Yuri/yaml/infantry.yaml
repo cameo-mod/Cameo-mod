@@ -111,6 +111,7 @@ yuri_initiate:
 	ChangesHealth@SelfHealing:
 		Step: 24
 	AutoTarget:
+		DynamicWeaponPriority: true
 	Armament@PRIMARY:
 		Name: primary
 		Weapon: RA2PsychicJab
@@ -334,6 +335,7 @@ yuri_clone:
 		ControllingCondition: controlling
 	ReloadArmamentsBar:
 	AutoTarget:
+		DynamicWeaponPriority: true
 		RequiresCondition: (!controlling && !yuri_upgrade_domination) || (controlling < 3 && yuri_upgrade_domination)
 	AttackFrontal:
 		FacingTolerance: 0
@@ -502,6 +504,7 @@ yuri_yurix:
 		RequiresCondition: controlling == 10
 	ReloadArmamentsBar:
 	AutoTarget:
+		DynamicWeaponPriority: true
 	AttackFrontal:
 		FacingTolerance: 0
 	WithInfantryBody:
@@ -577,6 +580,7 @@ yuri_gatlingtrooper:
 	ChangesHealth@SelfHealing:
 		Step: 36
 	AutoTarget:
+		DynamicWeaponPriority: true
 	Armament@PRIMARY:
 		Weapon: RA2GattlingInf
 		LocalOffset: 544,100,256

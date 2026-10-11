@@ -34,7 +34,7 @@ instead of within them.
 | Formula | `Σ(main warhead Damage) × FirepowerMultiplier` | `Σ base × (reliability + SWARM_W × footprint)` |
 | ExtraDamage chips | **excluded** (paid for by K / charge delay) | **included** |
 | FirepowerMultiplier | **applied** | **not applied** (actor-level, not weapon-level) |
-| Used for | uniqueness rule #3 (5 stats per class) | ranking / pricing input (**not yet wired**) |
+| Used for | uniqueness rule #3 (5 stats per class) | ranking / **the default pricing basis** (PRICING-DEFAULT 2026-10-04) |
 
 They are **not interchangeable**. A ledger row's `effective_damage` must never be fed to
 the uniqueness audit, and the uniqueness stat must never be called `effective_damage` in
@@ -336,11 +336,16 @@ one.
 as a short readable diff at the top of the tree, not only as thousands of shifted
 decimals underneath it.
 
-`fit_class.py --use-k` reads `effective_dps`, and `--compare-k` produces a side-by-side
-raw-versus-effective report without writing an anchor candidate. The default fit,
-`apply_balance.py`, the proposal tools, and the workbook remain on the raw-stat path.
-K-adjusted pricing is therefore available for review, but is not the default pipeline
-until the maintainer signs off on the comparison.
+`fit_class.py` reads `effective_dps` as its **default pricing basis**
+(PRICING-DEFAULT, maintainer ruling 2026-10-04 — the sign-off this section used to
+wait on). `--raw` opts back into the legacy raw damage/reload basis for
+reproducibility, `--use-k` remains accepted for explicitness, and `--compare-k`
+produces a side-by-side raw-versus-effective report without writing an anchor
+candidate. `check_band.py`, `propose_class_rebalance.py`, `update_ranges.py`,
+`propose_rebalance.py`, `fit_baseband.py`, `derive_virtual_anchor.py` and
+`anchor_readiness.py` price on the same basis through the canonical
+`fit_class.unit_inputs`; `tools/balance/k_price_delta.py` writes the per-faction
+before/after evidence at `docs/balance/derived/pricing_default_delta.md`.
 
 ### 5.1 The "RAW STATS ONLY" ledger law — restored
 

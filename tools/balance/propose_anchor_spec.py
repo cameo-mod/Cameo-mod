@@ -226,7 +226,7 @@ def actor_snapshot(actor, records, rules, sidecars=None, live_cache=None):
     section, unit = record
     live = resolve_live(rules, actor, records, live_cache)
     derived = (sidecars or {}).get(actor, {})
-    raw, _ = fit_class.unit_inputs(unit, derived)
+    raw, _ = fit_class.unit_inputs(unit, derived, use_k=False)
     weighted, fallbacks = fit_class.unit_inputs(unit, derived, use_k=True)
     tier_known = ((unit.get("design") or {}).get("tech_tier") is not None
                   or derived.get("tier_multiplier") is not None)

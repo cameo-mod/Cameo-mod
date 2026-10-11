@@ -838,6 +838,7 @@ ordos_leech:
 	Targetable:
 		RequiresCondition: !parachute && !untargetable && !jousting
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 	AutoTargetPriority@DEFAULT:
 		ValidTargets: TerrorDronable

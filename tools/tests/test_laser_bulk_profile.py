@@ -109,18 +109,29 @@ class LaserBulkProfileTests(unittest.TestCase):
             self.assertFalse(tags & RETIRED_FLAT_TAGS, f"{name}: {tags & RETIRED_FLAT_TAGS}")
 
     def test_shield_chips_are_preserved_under_compatibility_names(self):
-        for name in RESOLVED_LASERS:
+        # The ExtraDamage fold rolled the 600-damage shield chip into the
+        # main Damage on every folded member; only the Naxi heavy-laser
+        # roots still carry the standalone chip.
+        surviving = (
+            "LunarNaxiDroneLaser",
+            "NaxLaserT",
+            "NaxiBeetleLaser_elite",
+            "NaxiTank2Laser",
+        )
+        for name in surviving:
             weapon = self.rules.resolve_weapon(name)
             laser_chip = child(weapon, "Warhead@LegacyLaserExtraDamage")
             self.assertIsNotNone(laser_chip, name)
             self.assertEqual("600", child(laser_chip, "Damage").value, name)
             self.assertEqual("false", child(laser_chip, "UpdatesUnitStatistics").value, name)
+        for name in set(RESOLVED_LASERS) - set(surviving):
+            weapon = self.rules.resolve_weapon(name)
+            self.assertIsNone(child(weapon, "Warhead@LegacyLaserExtraDamage"), name)
 
         for name in ("CabalHunterKillerLasers_elite", "ordos_lasertank"):
             weapon = self.rules.resolve_weapon(name)
             rail_chip = child(weapon, "Warhead@LegacyRailgunExtraDamage")
-            self.assertIsNotNone(rail_chip, name)
-            self.assertEqual("1000", child(rail_chip, "Damage").value, name)
+            self.assertIsNone(rail_chip, name)
 
     def test_remaining_lasers_adopt_the_standard_energy_traits(self):
         for name in (

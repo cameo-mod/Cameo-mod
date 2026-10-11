@@ -54,6 +54,7 @@ ra1_soviets_dog:
 	GrantConditionWhileAiming:
 		Condition: run
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 	AutoTargetPriority@DEFAULT:
 		ValidTargets: Infantry
@@ -827,6 +828,7 @@ ra1_soviets_cyberdog:
 	GrantConditionWhileAiming:
 		Condition: run
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 	AutoTargetPriority@DEFAULT:
 		ValidTargets: Infantry

@@ -13,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using OpenRA.Mods.CA;
 using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Mods.Common.Traits.Radar;
@@ -61,7 +62,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		[Desc("Use the committed learned multipliers and opening posteriors (LearnedFile). False (default) = presets and jitter only.")]
 		public readonly bool UseLearnedBuildOrder = false;
 
-		[Desc("Mod-relative path of the file written by tools/ai/tune_build_order.py --write.")]
+		[Desc("Mod-relative path of the file written by tools/ai/tune_build_order.py --write.",
+			"A bare path resolves inside the cameo package; an explicit 'package|path' is honoured.")]
 		public readonly string LearnedFile = "ai/learned/build_order_knobs.yaml";
 
 		[Desc("Ticks between react evaluations.")]
@@ -324,7 +326,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			// One jitter draw per knob and nothing else, in a fixed order, from the host's random.
 			jitterDraws = new int[Knobs.Length];
 			for (var i = 0; i < Knobs.Length; i++)
-				jitterDraws[i] = world.LocalRandom.Next(0, 2001);
+				jitterDraws[i] = BotRng.For(player, nameof(BuildOrderKnobsBotModule)).Next(0, 2001);
 
 			if (Info.UseLearnedBuildOrder)
 				LoadLearned();
@@ -335,13 +337,14 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		void LoadLearned()
 		{
 			var fs = Game.ModData.DefaultFileSystem;
-			if (!fs.Exists(Info.LearnedFile))
+			var learnedPath = LearnedFilePath.Resolve(Info.LearnedFile);
+			if (!fs.Exists(learnedPath))
 			{
 				Log.Write("debug", $"AI {player.InternalName}: BO learned: {Info.LearnedFile} missing, everything neutral");
 				return;
 			}
 
-			using (var stream = fs.Open(Info.LearnedFile))
+			using (var stream = fs.Open(learnedPath))
 				learned = BuildOrderLearned.Parse(MiniYaml.FromStream(stream, Info.LearnedFile));
 
 			Log.Write("debug", $"AI {player.InternalName}: BO learned: {learned.ScopeCount} knob scopes, {learned.OpeningScopeCount} opening scopes");
@@ -379,7 +382,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var faction = player.Faction?.InternalName ?? "";
 			var name = BuildOrderKnobsEval.ChooseOpening(weights,
 				o => Info.UseLearnedBuildOrder ? learned.Posterior(personality, faction, enemyFaction, o) : (1, 1),
-				() => world.LocalRandom.NextFloat());
+				() => BotRng.For(player, nameof(BuildOrderKnobsBotModule)).NextFloat());
 			if (name == null || !Info.Openings.TryGetValue(name, out var steps))
 				return;
 

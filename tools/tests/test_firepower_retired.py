@@ -27,14 +27,14 @@ class DecomposeSolvesExactly(unittest.TestCase):
     def test_never_prescribes_a_multiplier(self):
         for target in (10.0, 137.5, 1000.0, 12345.6):
             with self.subTest(target=target):
-                _, fp = pcr.decompose_dps(target, base_dps=100.0, cur_sum=2000.0, n_wh=1)
+                _, fp = pcr.decompose_dps(target, flat_dps=100.0, cur_sum=2000.0, n_wh=1)
                 self.assertEqual(fp, 1.0)
 
     def test_dead_ends_also_return_unity(self):
         # No positive DPS prices the unit: park at the grid floor, never at a
         # 0.05 multiplier of a 2000 main (the old `2000, 0.05` dead-end).
-        for bad in (dict(base_dps=0.0, cur_sum=2000.0),
-                    dict(base_dps=100.0, cur_sum=0.0)):
+        for bad in (dict(flat_dps=0.0, cur_sum=2000.0),
+                    dict(flat_dps=100.0, cur_sum=0.0)):
             with self.subTest(**bad):
                 D, fp = pcr.decompose_dps(1000.0, n_wh=1, **bad)
                 self.assertEqual(fp, 1.0)
@@ -50,7 +50,7 @@ class DecomposeSolvesExactly(unittest.TestCase):
 
     def test_lands_on_the_grid(self):
         for target in (1.0, 55.0, 617.3, 9001.0):
-            D, _ = pcr.decompose_dps(target, base_dps=100.0, cur_sum=2000.0, n_wh=3)
+            D, _ = pcr.decompose_dps(target, flat_dps=100.0, cur_sum=2000.0, n_wh=3)
             with self.subTest(target=target):
                 self.assertEqual(D % formula.DAMAGE_STEP, 0)
                 self.assertGreaterEqual(D, formula.DAMAGE_STEP)

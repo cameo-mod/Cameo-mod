@@ -12,6 +12,7 @@
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using NUnit.Framework;
+using OpenRA.Mods.Cameo.Test.TestFixtures;
 using OpenRA.Mods.Cameo.Traits.BotModules;
 using OpenRA.Traits;
 
@@ -27,7 +28,7 @@ namespace OpenRA.Mods.Cameo.Test
 
 		static OpenRA.Player PlayerWithDisplayFaction(FactionInfo faction)
 		{
-			var player = (OpenRA.Player)RuntimeHelpers.GetUninitializedObject(typeof(OpenRA.Player));
+			var player = Uninitialized.Player();
 			DisplayFaction(player) = faction;
 			return player;
 		}

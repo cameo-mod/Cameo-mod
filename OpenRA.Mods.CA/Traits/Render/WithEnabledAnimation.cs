@@ -35,7 +35,8 @@ namespace OpenRA.Mods.CA.Traits.Render
 		public WithEnabledAnimation(Actor self, WithEnabledAnimationInfo info)
 			: base(info)
 		{
-			wsb = self.TraitsImplementing<WithSpriteBody>().Single(w => w.Info.Name == Info.Body);
+			wsb = self.TraitsImplementing<WithSpriteBody>().FirstOrDefault(w => !w.IsTraitDisabled && w.Info.Name == Info.Body)
+				?? self.TraitsImplementing<WithSpriteBody>().First(w => w.Info.Name == Info.Body);
 		}
 
 		protected override void TraitEnabled(Actor self)

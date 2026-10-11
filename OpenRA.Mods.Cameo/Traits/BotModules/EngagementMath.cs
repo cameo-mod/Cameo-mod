@@ -11,6 +11,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace OpenRA.Mods.Cameo.Traits.BotModules
 {
@@ -349,6 +351,87 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var all = new List<EngagementState>(open);
 			open.Clear();
 			return all;
+		}
+	}
+
+	/// <summary>
+	/// PRIORS-CARRY (SPEC_2026-10-04): the additive `balance` block on engagement records — a fingerprint of the
+	/// rules version plus the resolved Versus percent of every delivery-tag x armour-class cell the fight touched,
+	/// keyed `Tag|Armor`, so the offline fitter (fit_engagement_priors.record_balance_stats) can price each log
+	/// with the stats it was produced under. Pure helpers; the world-side gathering lives in EngagementLogBotModule.
+	/// </summary>
+	public static class EngagementBalance
+	{
+		/// <summary>Deterministic fingerprint over the caller-supplied provenance parts (mod identity, rule file digests, map).</summary>
+		public static string Fingerprint(IEnumerable<string> parts)
+		{
+			var sb = new StringBuilder();
+			foreach (var p in parts)
+				sb.Append(p).Append('\n');
+
+			return "sha256:" + Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(sb.ToString()))).ToLowerInvariant();
+		}
+
+		/// <summary>weapon name (lowercase) -> the weapon's `Warhead@<tag>` children in order, exactly as WeaponInfo.LoadWarheads iterates them.</summary>
+		public static Dictionary<string, List<(string Tag, string Type)>> WarheadTable(IReadOnlyList<MiniYamlNode> weaponNodes)
+		{
+			var table = new Dictionary<string, List<(string, string)>>(StringComparer.Ordinal);
+			foreach (var weapon in weaponNodes)
+			{
+				var refs = new List<(string, string)>();
+				foreach (var child in weapon.Value?.Nodes ?? [])
+				{
+					if (child.Key == null || !child.Key.StartsWith("Warhead", StringComparison.Ordinal))
+						continue;
+
+					var at = child.Key.IndexOf('@');
+					refs.Add((at >= 0 ? child.Key[(at + 1)..] : "", child.Value.Value ?? ""));
+				}
+
+				table[weapon.Key.ToLowerInvariant()] = refs;
+			}
+
+			return table;
+		}
+
+		/// <summary>
+		/// The `Warhead@<tag>` suffix behind `Warheads[warheadIndex]`: zips the yaml children against the loaded
+		/// objects; a node whose type produced no object (LoadWarheads skips null) consumes no array slot.
+		/// "" when the index can't be traced back to a tagged node.
+		/// </summary>
+		public static string WarheadTag(IReadOnlyList<(string Tag, string Type)> refs, IReadOnlyList<string> warheadTypeNames, int warheadIndex)
+		{
+			var wi = 0;
+			foreach (var (tag, type) in refs)
+			{
+				if (wi >= warheadTypeNames.Count)
+					break;
+				if (warheadTypeNames[wi] != type + "Warhead")
+					continue;
+				if (wi == warheadIndex)
+					return tag;
+				wi++;
+			}
+
+			return "";
+		}
+
+		/// <summary>
+		/// Every delivery-tag x armour-class cell one direction of the fight touched, keyed `Tag|Armor` and
+		/// valued by the resolved Versus percent (an armour absent from the table is the engine's 100).
+		/// </summary>
+		public static void AddCells(SortedDictionary<string, int> cells,
+			IEnumerable<IReadOnlyList<(string Tag, IReadOnlyDictionary<string, int> Versus)>> attackerTypes,
+			IEnumerable<string> defenderArmours)
+		{
+			foreach (var weapons in attackerTypes)
+			foreach (var (tag, versus) in weapons)
+			{
+				if (tag.Length == 0)
+					continue;
+				foreach (var armour in defenderArmours)
+					cells[tag + "|" + armour] = versus.GetValueOrDefault(armour, 100);
+			}
 		}
 	}
 }

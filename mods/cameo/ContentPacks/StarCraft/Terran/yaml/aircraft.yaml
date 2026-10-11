@@ -349,6 +349,7 @@ terran_raven:
 	# 	Weapon: RavenTurretSpawner
 	# 	ForceTargetRelationships: Enemy, Neutral
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 10
 		InitialStance: AttackAnything
 	AttackAircraft:
@@ -494,7 +495,7 @@ terran_pythean:
 		AfterUnloadDelay: 0
 		LoadedCondition: loaded
 		InitialUnits: terran_marine, terran_madcap, terran_firebat, terran_harakan, terran_marauder, terran_ghost, terran_specter, terran_reaper, terran_medic
-	AttackOpenTopped:
+	AttackGarrisoned:
 		Voice: Attack
 		Armaments: garrisoned
 		PortOffsets: 384,0,128, 224,-341,128, 224,341,128, 0,-341,128, 0,341,128, -224,-341,128, -224,341,128, -384,0,128, 0,0,128
@@ -576,6 +577,7 @@ terran_medivac:
 		ForceTargetRelationships: None
 		LocalOffset: 600,-100,256
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 	AutoTargetPriority@DEFAULT:
 		ValidTargets: Infantry, plagued, ivanattached, lockdowned

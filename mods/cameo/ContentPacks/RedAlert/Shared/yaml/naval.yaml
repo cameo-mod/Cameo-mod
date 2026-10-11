@@ -207,8 +207,6 @@ ra1_allies_cruiser:
 		RecoilRecovery: 35
 		MuzzleSequence: muzzle
 		RequiresCondition: !ra1_allies_upgrade_cryomissiles
-	AttackTurreted:
-		Turrets: primary, secondary
 	WithMuzzleOverlay:
 	WithSpriteTurret:
 	Selectable:
@@ -242,6 +240,11 @@ ra1_allies_cruiser:
 		MuzzleSequence: muzzle
 		Weapon: ra1_allies_cruiser_8inchcryo
 		RequiresCondition: ra1_allies_upgrade_cryomissiles
+	-AttackTurreted:
+	AttackMultiTurreted:
+		PauseOnCondition: disabled || blinded
+		Turrets: primary, secondary
+
 japan_japanesespeedboat:
 	Inherits: ^BoatUnit
 	Inherits@Template: ^ScoutShipTemplate
@@ -376,8 +379,6 @@ japan_yamatobattleship:
 		Recoil: 25
 		RecoilRecovery: 10
 		MuzzleSequence: muzzle
-	AttackTurreted:
-		Turrets: primary, secondary, flak
 	WithMuzzleOverlay:
 	WithSpriteTurret:
 	Selectable:
@@ -396,6 +397,11 @@ japan_yamatobattleship:
 		PlayerPalette: player_rgba
 	ActorStatValues:
 		Upgrades: japan_upgrade_superiorwarengines, japan_upgrade_nanotechrepairs
+
+	-AttackTurreted:
+	AttackMultiTurreted:
+		PauseOnCondition: disabled || blinded
+		Turrets: primary, secondary, flak
 
 japan_japanesecarrier:
 	Inherits: ^BoatUnit
@@ -525,6 +531,7 @@ japan_zerofighter_slave:
 	CarrierSlave:
 		LandingDistance: 8000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStanceAI: AttackAnything
 		InitialStance: AttackAnything
 	HasParent:

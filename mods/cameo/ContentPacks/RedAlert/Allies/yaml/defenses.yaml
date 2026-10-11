@@ -455,10 +455,6 @@ ra1_allies_bastionartillerybunker:
 	Cargo:
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 5
-	AttackTurreted:
-		Turrets: primary, cannon
-		Armaments: primary, cannon
-		RequiresCondition: !build-incomplete
 	AttackGarrisoned:
 		Armaments: garrisoned
 		PortOffsets: 768,0,256, 448,-682,256, -448,-682,256, -768,0,256, -448,682,256, 448,682,256
@@ -486,6 +482,11 @@ ra1_allies_bastionartillerybunker:
 		Range: 5092
 	ActorStatValues:
 		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_reinforcedstructures, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_cryomissiles, ra1_allies_upgrade_gpssatellitesupport
+
+	AttackMultiTurreted:
+		Turrets: primary, cannon
+		Armaments: primary, cannon
+		RequiresCondition: !build-incomplete
 
 ra1_allies_gapgenerator:
 	Inherits: ^Defense

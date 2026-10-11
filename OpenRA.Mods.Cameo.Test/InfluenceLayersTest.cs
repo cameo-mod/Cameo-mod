@@ -12,8 +12,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using NUnit.Framework;
+using OpenRA.Mods.Cameo.Test.TestFixtures;
 using OpenRA.Mods.Cameo.Traits.BotModules;
 
 namespace OpenRA.Mods.Cameo.Test
@@ -21,38 +21,10 @@ namespace OpenRA.Mods.Cameo.Test
 	[TestFixture]
 	public class InfluenceLayersTest
 	{
-		// Engine-free stand-in for TacticalMapBotModule (same fake as ZoneRegionMemoryTest,
-		// with a settable resource-cell count per zone for the Interest layer).
-		sealed class FakeZoneTopology : IBotZoneTopology
-		{
-			readonly Dictionary<CPos, int> idByCell = new();
-
-			public readonly List<Zone> ZoneList = new();
-			public int Generation { get; set; }
-
-			public IReadOnlyList<Zone> Regions => ZoneList;
-			public IReadOnlyList<ZoneChokepoint> Chokepoints => Array.Empty<ZoneChokepoint>();
-			public IReadOnlyList<ZoneTerritoryDoor> TerritoryDoors => Array.Empty<ZoneTerritoryDoor>();
-			public IReadOnlyCollection<CPos> Territory => Array.Empty<CPos>();
-
-			public int RegionIdAt(CPos cell) => idByCell.GetValueOrDefault(cell, -1);
-			public int NearestRegionId(CPos cell) => RegionIdAt(cell);
-			public bool IsPassableCell(CPos cell) => idByCell.ContainsKey(cell);
-			public OpenRA.Player RegionOwner(int regionId) => null;
-			public bool IsInTerritory(CPos cell) => false;
-
-			public void AddZone(IEnumerable<CPos> cells, int resourceCells = 0, params int[] adjacent)
-			{
-				var id = ZoneList.Count;
-				var cellArray = cells.ToArray();
-				ZoneList.Add(new Zone(id, cellArray, [], adjacent, resourceCells, cellArray.Length, []));
-				foreach (var cell in cellArray)
-					idByCell[cell] = id;
-			}
-		}
-
 		static RegionMemory Grid() => new(new CPos(0, 0), new CPos(63, 63), 8);
 
+		// Exact-only nearest-region semantics (no ring search): the Interest
+		// layer's contract is zone-membership, not proximity.
 		static RegionMemory Zoned(FakeZoneTopology topology) =>
 			new(new CPos(0, 0), new CPos(63, 63), 8, topology);
 
@@ -62,9 +34,6 @@ namespace OpenRA.Mods.Cameo.Test
 				for (var dx = 0; dx < size; dx++)
 					yield return new CPos(x + dx, y + dy);
 		}
-
-		static OpenRA.Player FakePlayer() =>
-			(OpenRA.Player)RuntimeHelpers.GetUninitializedObject(typeof(OpenRA.Player));
 
 		static BotInfluenceLayers Layers() => new(new MasterAiBotModuleInfo());
 
@@ -122,7 +91,7 @@ namespace OpenRA.Mods.Cameo.Test
 		[Test]
 		public void LayersSizeToTheZoneCount()
 		{
-			var topology = new FakeZoneTopology();
+			var topology = new FakeZoneTopology { NearestSearchRadius = 0 };
 			topology.AddZone(Block(0, 0));
 			topology.AddZone(Block(8, 0));
 			topology.AddZone(Block(16, 0));
@@ -139,7 +108,7 @@ namespace OpenRA.Mods.Cameo.Test
 		public void RememberedValuesPublishIntoTheLayers()
 		{
 			var regions = Grid();
-			var enemy = FakePlayer();
+			var enemy = Uninitialized.Player();
 			var cells = new RegionMemory.Region[regions.CellCount];
 			cells[3] = new RegionMemory.Region
 			{
@@ -170,7 +139,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(layers.Staleness[0], Is.EqualTo(100 + info.InfluenceStaleAfterTicks),
 				"no enemy memory at all reads as never-seen (mirrors ScoutBotModule.Staleness)");
 
-			var enemy = FakePlayer();
+			var enemy = Uninitialized.Player();
 			regions.SetRegions(enemy, new RegionMemory.Region[regions.CellCount]);
 			layers.Refresh(regions, Array.Empty<OpenRA.Actor>(), null, null, 100);
 			Assert.That(layers.Staleness[0], Is.EqualTo(100 + info.InfluenceStaleAfterTicks),
@@ -181,7 +150,7 @@ namespace OpenRA.Mods.Cameo.Test
 		public void SeenRegionStalenessIsTheAgeOfTheSighting()
 		{
 			var regions = Grid();
-			var enemy = FakePlayer();
+			var enemy = Uninitialized.Player();
 			var cells = new RegionMemory.Region[regions.CellCount];
 			cells[7] = new RegionMemory.Region { EverSeen = true, LastSeenTick = 40 };
 			regions.SetRegions(enemy, cells);
@@ -198,8 +167,8 @@ namespace OpenRA.Mods.Cameo.Test
 		public void ThreatSumsAcrossEveryEnemyTable()
 		{
 			var regions = Grid();
-			var enemyA = FakePlayer();
-			var enemyB = FakePlayer();
+			var enemyA = Uninitialized.Player();
+			var enemyB = Uninitialized.Player();
 			var cellsA = new RegionMemory.Region[regions.CellCount];
 			cellsA[2] = new RegionMemory.Region { ArmyValue = 300, EverSeen = true, LastSeenTick = 100 };
 			var cellsB = new RegionMemory.Region[regions.CellCount];
@@ -217,7 +186,7 @@ namespace OpenRA.Mods.Cameo.Test
 		public void StaleThreatBlendsTowardTheZoneHistory()
 		{
 			var regions = Grid();
-			var enemy = FakePlayer();
+			var enemy = Uninitialized.Player();
 			var cells = new RegionMemory.Region[regions.CellCount];
 			cells[5] = new RegionMemory.Region { ArmyValue = 1000, EverSeen = true, LastSeenTick = 6250 };
 			regions.SetRegions(enemy, cells);
@@ -233,11 +202,11 @@ namespace OpenRA.Mods.Cameo.Test
 		[Test]
 		public void GenerationBumpDropsTheHistoryWithTheIds()
 		{
-			var topology = new FakeZoneTopology();
+			var topology = new FakeZoneTopology { NearestSearchRadius = 0 };
 			topology.AddZone(Block(0, 0));
 			topology.AddZone(Block(8, 0));
 			var regions = Zoned(topology);
-			var enemy = FakePlayer();
+			var enemy = Uninitialized.Player();
 
 			var cells = new RegionMemory.Region[regions.CellCount];
 			cells[1] = new RegionMemory.Region { ArmyValue = 1000, EverSeen = true, LastSeenTick = 10 };
@@ -262,7 +231,7 @@ namespace OpenRA.Mods.Cameo.Test
 		[Test]
 		public void ZoneResourceCellsFeedInterest()
 		{
-			var topology = new FakeZoneTopology();
+			var topology = new FakeZoneTopology { NearestSearchRadius = 0 };
 			topology.AddZone(Block(0, 0));
 			topology.AddZone(Block(8, 0), resourceCells: 40);
 			var regions = Zoned(topology);
@@ -278,7 +247,7 @@ namespace OpenRA.Mods.Cameo.Test
 		public void ThreatSpreadsIntoNeighbourRegions()
 		{
 			var regions = Grid();
-			var enemy = FakePlayer();
+			var enemy = Uninitialized.Player();
 			var cells = new RegionMemory.Region[regions.CellCount];
 			cells[3] = new RegionMemory.Region { ArmyValue = 1000, EverSeen = true, LastSeenTick = 100 };
 			regions.SetRegions(enemy, cells);
@@ -298,12 +267,12 @@ namespace OpenRA.Mods.Cameo.Test
 		[Test]
 		public void SpreadFollowsZoneAdjacency()
 		{
-			var topology = new FakeZoneTopology();
-			topology.AddZone(Block(0, 0), 0, 1);      // zone 0 neighbours zone 1
-			topology.AddZone(Block(8, 0), 0, 0);      // zone 1 neighbours zone 0 only
-			topology.AddZone(Block(16, 0), 0);        // zone 2 has no declared neighbours
+			var topology = new FakeZoneTopology { NearestSearchRadius = 0 };
+			topology.AddZone(Block(0, 0), adjacent: new[] { 1 });   // zone 0 neighbours zone 1
+			topology.AddZone(Block(8, 0), adjacent: new[] { 0 });   // zone 1 neighbours zone 0 only
+			topology.AddZone(Block(16, 0));                         // zone 2 has no declared neighbours
 			var regions = Zoned(topology);
-			var enemy = FakePlayer();
+			var enemy = Uninitialized.Player();
 
 			var cells = new RegionMemory.Region[regions.CellCount];
 			cells[0] = new RegionMemory.Region { ArmyValue = 800, EverSeen = true, LastSeenTick = 100 };
@@ -320,7 +289,7 @@ namespace OpenRA.Mods.Cameo.Test
 		[Test]
 		public void MatchesIndexSpaceTracksTheTriple()
 		{
-			var topology = new FakeZoneTopology();
+			var topology = new FakeZoneTopology { NearestSearchRadius = 0 };
 			topology.AddZone(Block(0, 0));
 			var regions = Zoned(topology);
 			var layers = Layers();

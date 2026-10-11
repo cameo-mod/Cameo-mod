@@ -102,6 +102,7 @@ asianalliance_ksub:
 		Weapon: AsianDemoSubTargeting
 		LocalOffset: 208,0,80
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: Defend
 		InitialStanceAI: AttackAnything
 		ScanRadius: 10

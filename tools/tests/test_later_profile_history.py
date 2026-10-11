@@ -16,7 +16,7 @@ class LaterProfileHistoryTests(unittest.TestCase):
         cls.fixture = json.loads((ROOT / 'tools/tests/fixtures/later_profile_history_20260910.json').read_text(encoding='utf-8'))
 
     def test_exact_checkpoint_provenance_and_modern_payloads(self):
-        self.assertEqual(15, len(self.fixture))
+        self.assertEqual(19, len(self.fixture))
         for name, record in self.fixture.items():
             with self.subTest(weapon=name):
                 self.assertEqual('584a5e4cb4667820b60388fd05d90090c88513d7', record['current_commit'])

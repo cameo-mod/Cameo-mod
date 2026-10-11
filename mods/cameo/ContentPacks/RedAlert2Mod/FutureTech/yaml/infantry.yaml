@@ -27,6 +27,7 @@ futuretech_enforcer:
 	ChangesHealth@SelfHealing:
 		Step: 30
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: Defend
 	RenderRangeCircle:
 		RequiresCondition: deployed

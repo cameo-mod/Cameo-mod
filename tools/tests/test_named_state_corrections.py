@@ -94,7 +94,11 @@ class NamedStateCorrectionTests(unittest.TestCase):
         for name in EMP_WALL_PINS:
             resolved = restore_target_policy_fields(self, self.rules.resolve_weapon(name))
             self.assertIsNotNone(resolved, name)
-            self.assertEqual({"Tesla_Super"},
+            # 4e47ead99 rebased air-only missiles onto AA templates: the
+            # dedicated _AA EMP variants resolve MissileAA_Heavy while the
+            # ground EMP wall pins keep the deferred Tesla_Super family.
+            expected = "MissileAA_Heavy" if name.endswith("_AA") else "Tesla_Super"
+            self.assertEqual({expected},
                              set(main_warheads(resolved)), name)
             self.assertEqual("wall", str(resolved.get("InvalidTargets")), name)
 

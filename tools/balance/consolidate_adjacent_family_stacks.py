@@ -28,8 +28,15 @@ HEALTH_VALUES = active_health_values(ROOT)
 SPECS = {
     # Higher-damage missile/cannon/sonic candidates are intentionally excluded:
     # merging their folded percentage hits overflows at active high-health values.
-    "CycloneRockets": ({"MissileHE_Light", "MissileHE_Medium"}, "MissileHE_Light", {"CycloneRocketsLockOn"}),
+    # CycloneRockets was held-rolled onto the canonical MissileAP_Light role by
+    # the held-missile-role wave; the retired HE mains stay as the baseline.
+    "CycloneRockets": ({"MissileHE_Light", "MissileHE_Medium"}, "MissileAP_Light", {"CycloneRocketsLockOn"}),
     "RA2Chemspray2": ({"Chemical_Medium", "Chemical_Heavy"}, "Chemical_Heavy", {"RA2Chemspray_elite"}),
+}
+
+APPLIED_TAGS = {
+    root: {f"{destination}FlatCompatibility", f"{destination}_Flat", destination}
+    for root, (_old, destination, _children) in SPECS.items()
 }
 
 
@@ -155,8 +162,7 @@ def validate(rs: Ruleset) -> dict[str, set[str]]:
         if resolved is None:
             raise RuntimeError(f"{root}: missing")
         mains = positive_main_keys(resolved)
-        compatibility = f"{destination}FlatCompatibility"
-        already = compatibility in mains and not (old_keys & mains)
+        already = len(mains) == 1 and mains <= APPLIED_TAGS[root]
         if not already and not old_keys <= mains:
             raise RuntimeError(f"{root}: expected {sorted(old_keys)}, found {sorted(mains)}")
     return closures
@@ -166,11 +172,11 @@ def validate_result() -> None:
     rs = Ruleset(ROOT)
     closures = validate(rs)
     for root, (old_keys, destination, _) in SPECS.items():
-        expected = f"{destination}FlatCompatibility"
+        expected = APPLIED_TAGS[root]
         for name in [root, *sorted(closures[root])]:
             node = rs.resolve_weapon(name)
             mains = positive_main_keys(node)
-            if expected not in mains or old_keys & mains:
+            if not (len(mains) == 1 and mains <= expected):
                 raise RuntimeError(f"{name}: unresolved consolidation: {sorted(mains)}")
 
 

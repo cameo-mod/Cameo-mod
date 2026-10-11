@@ -181,7 +181,7 @@ Player:
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 7
 		EjectOnDeath: false
-	AttackOpenTopped:
+	AttackGarrisoned:
 		Armaments: garrisoned
 		PortOffsets: 768,0,612, 448,-682,612, -448,-682,612, -768,0,612, -448,682,612, 448,682,612
 		PauseOnCondition: chronobeamed
@@ -3750,7 +3750,7 @@ swpalace:
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 5
 		EjectOnDeath: false
-	AttackOpenTopped:
+	AttackGarrisoned:
 		Armaments: garrisoned
 		PortOffsets: 768,0,1024, 448,-682,1024, -448,-682,1024, -768,0,1024, -448,682,1024, 448,682,1024
 		PauseOnCondition: chronobeamed
@@ -4193,6 +4193,7 @@ swsite.soldier:
 	Health:
 		HP: 7777
 	AutoTarget:
+		DynamicWeaponPriority: true
 		AllowMovement: false
 	AttackFrontal:
 		FacingTolerance: 0
@@ -4227,6 +4228,7 @@ swsite.bantha:
 	Health:
 		HP: 33333
 	AutoTarget:
+		DynamicWeaponPriority: true
 		AllowMovement: false
 	AttackFrontal:
 		FacingTolerance: 0
@@ -4792,6 +4794,7 @@ swe1droidmob:
 	Armament:
 		Weapon: AngryMobTargeting
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 6
 	WithSpriteBody:
 		Sequence: dot
@@ -4985,6 +4988,7 @@ swe3:
 	Health:
 		HP: 4500
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 6
 	Armament@PRIMARY:
 		Weapon: SWGreenLaser
@@ -5027,6 +5031,7 @@ swe3troop:
 	Health:
 		HP: 6000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 6
 	Armament@PRIMARY:
 		Weapon: SWrBigRedLaser
@@ -5060,6 +5065,7 @@ swe3clone:
 	Health:
 		HP: 6000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 6
 	Armament@PRIMARY:
 		Weapon: SWCloneBazooka
@@ -5088,6 +5094,7 @@ swe3droid:
 	Health:
 		HP: 3000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 6
 	Voiced:
 		VoiceSet: SWDroidInfantryVoice
@@ -5155,6 +5162,7 @@ swe6:
 	RenderSprites:
 		Image: swe6
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 6
 		InitialStance: AttackAnything
 	Armament@PRIMARY:
@@ -5749,6 +5757,7 @@ swltnk:
 		Weapon: SWWalkerDisable2
 		LocalOffset: 0,0,0
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 5
 	AttackAircraft:
 		FacingTolerance: 80
@@ -5822,6 +5831,7 @@ swheli:
 		LocalOffset: 128,-213,-85, 128,213,-85
 		PauseOnCondition: !ammo
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	AttackAircraft:
 		FacingTolerance: 80
@@ -5904,6 +5914,7 @@ swdroidheli:
 	FirepowerMultiplier:
 		Modifier: 30
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	AttackAircraft:
 		FacingTolerance: 80
@@ -5973,6 +5984,7 @@ swxwing:
 		LocalOffset: 128,-213,-85, 128,213,-85
 		PauseOnCondition: !ammo
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	AttackAircraft:
 		FacingTolerance: 80
@@ -6047,6 +6059,7 @@ swstarfighter:
 		LocalOffset: 128,-213,-85, 128,213,-85
 		PauseOnCondition: !ammo
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	AttackAircraft:
 		FacingTolerance: 80
@@ -6117,6 +6130,7 @@ swstarfighterj:
 		LocalOffset: 128,-213,-85, 128,213,-85
 		PauseOnCondition: !ammo
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 		ScanRadius: 15
 	AttackAircraft:
@@ -6216,6 +6230,7 @@ swfalc:
 		LocalOffset: 128,-213,-85, 128,213,-85
 		PauseOnCondition: !ammo
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 10
 		InitialStance: AttackAnything
 	AttackAircraft:
@@ -6294,6 +6309,7 @@ sworca:
 		LocalOffset: 427,-171,-213, 427,171,-213
 		PauseOnCondition: !ammo
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 5
 	AttackAircraft:
 		FacingTolerance: 80
@@ -6367,6 +6383,7 @@ swtrifighter:
 		LocalOffset: 427,-171,-213, 427,171,-213
 		PauseOnCondition: !ammo
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 5
 	AttackAircraft:
 		FacingTolerance: 80
@@ -6432,6 +6449,7 @@ swywing:
 		Weapon: SWYWingShell
 		PauseOnCondition: !ammo
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 5
 	AttackAircraft:
 		FacingTolerance: 80
@@ -6746,6 +6764,7 @@ swlaat:
 		LocalOffset: 128,-213,-85, 128,213,-85
 		PauseOnCondition: !ammo
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	AttackAircraft:
 		FacingTolerance: 80
@@ -6889,6 +6908,7 @@ swc17player:
 		Weapon: SWMonCalamariGun_AA
 		LocalOffset: 128,-213,-85, 128,213,-85, -128,-213,-85, 128,213,-85
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 		ScanRadius: 15
 	Turreted:
@@ -7005,6 +7025,7 @@ swstard:
 		Weapon: SWStarDestroyerLaser_AA
 		LocalOffset: 128,-213,-85, 128,213,-85, -128,-213,-85, 128,213,-85
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 		ScanRadius: 15
 	Turreted:
@@ -7080,6 +7101,7 @@ swexecutor:
 		Weapon: SWExecutorLaser
 		LocalOffset: 228,-213,-85, 228,213,-85, -228,-213,-85, -228,213,-85
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Turreted:
 	AttackTurreted:
@@ -7174,6 +7196,7 @@ swaclamator:
 		Weapon: SWAclamatorLaser_AA
 		LocalOffset: 128,-213,-85, 128,213,-85, -128,-213,-85, 128,213,-85
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 		ScanRadius: 15
 	Turreted:
@@ -7387,6 +7410,7 @@ swdarty:
 		FacingTolerance: 0
 	WithMuzzleOverlay:
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStanceAI: Defend
 	Explodes:
 		Weapon: ArtilleryShell
@@ -8605,7 +8629,7 @@ swjabbaparty:
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 10
 		EjectOnDeath: false #desync
-	AttackOpenTopped:
+	AttackGarrisoned:
 		Armaments: garrisoned
 		PortOffsets: 384,0,128, 224,-341,128, -224,-341,128, -384,0,128, -224,341,128, 224,341,128
 		PauseOnCondition: chronobeamed
@@ -8616,6 +8640,7 @@ swjabbaparty:
 	Selectable:
 		Class: swjabbaparty
 	AutoTarget:
+		DynamicWeaponPriority: true
 		AllowMovement: true
 	Turreted:
 		TurnSpeed: 40

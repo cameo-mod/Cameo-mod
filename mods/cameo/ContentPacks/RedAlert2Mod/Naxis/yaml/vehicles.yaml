@@ -1076,7 +1076,7 @@ naxis_shoekarn:
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 2
 		InitialUnits: naxis_naxiriflesoldier,naxis_naxiriflesoldier
-	AttackOpenTopped:
+	AttackGarrisoned:
 		Voice: Attack
 		Armaments: garrisoned
 		PortOffsets: 1,-1024,80, 1,1024,80
@@ -1132,7 +1132,9 @@ naxis_nokana:
 		LocalOffset: 400,0,300
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-	AttackOpenTopped:
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 		Voice: Attack
 		Armaments: primary, secondary, garrisoned
 		PortOffsets: 1,-1024,80, 1,1024,80
@@ -1213,7 +1215,7 @@ naxis_oldtank:
 		InitialUnits: naxis_undead,naxis_undead,naxis_undead,naxis_undead
 		ExclusiveDeploy: true
 		DeployType: Battlefortress
-	AttackOpenTopped:
+	AttackGarrisoned:
 		Voice: Attack
 		Armaments: garrisoned
 		PortOffsets: 384,0,128, -384,0,128, 224,-341,128, -224,-341,128, 224,341,128, -224,341,128
@@ -1221,6 +1223,7 @@ naxis_oldtank:
 	RevealOnFire:
 		ArmamentNames: primary, garrisoned
 	AutoTarget:
+		DynamicWeaponPriority: true
 		AllowMovement: true
 	Selectable:
 		DecorationBounds: 1440, 1440, 0, -128

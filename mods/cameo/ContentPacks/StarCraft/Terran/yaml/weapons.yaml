@@ -219,11 +219,9 @@ CycloneRockets:
 		Blockable: false
 		MaximumLaunchSpeed: 250
 		MinimumLaunchSpeed: 250
-		RangeLimit: 25000
 		Speed: 500
 		Inaccuracy: 25
 		Acceleration: 5
-		CloseEnough: 500
 		AllowSnapping: true
 		InaccuracyType: PerCellIncrement
 		Image: d2k_RPG
@@ -278,9 +276,7 @@ MarauderMissiles:
 		VerticalRateOfTurn: 30
 		TrailInterval: 1
 		ContrailLength: 0
-		CloseEnough: 500
 		HomingActivationDelay: 2
-		RangeLimit: 25000
 		PointDefenseTypes: Missile
 	Warhead@TankDestroyerCannonPercentage: AreaDamagePercentage
 		ValidTargets: Ground, Water
@@ -581,7 +577,6 @@ SCTyrAA:
 		Speed: 400
 		Arm: 2
 		Inaccuracy: 800
-		RangeLimit: 16000
 		Image: d2k_missile2
 		Palette: d2keffect
 		TrailImage: large_trail
@@ -2127,6 +2122,7 @@ GoliathMG:
 
 GoliathRockets_AA:
 	Inherits@wh: ^Warhead_MissileAA_Heavy
+	Inherits@projectileaa: ^Projectile_Missile_AA
 	Inherits@proj: ^Projectile_Missile_Heavy_SC
 	Inherits@fx: ^Effect_MissileHE_Heavy_SC
 	Range: 6000
@@ -2137,11 +2133,9 @@ GoliathRockets_AA:
 		Blockable: false
 		MaximumLaunchSpeed: 250
 		MinimumLaunchSpeed: 250
-		RangeLimit: 25000
 		Speed: 500
 		Inaccuracy: 25
 		Acceleration: 5
-		CloseEnough: 500
 		AllowSnapping: true
 		ContrailZOffset: 4000
 		ContrailStartColor: FF884400
@@ -2152,6 +2146,19 @@ GoliathRockets_AA:
 		ValidTargets: Air
 		Damage: 30000
 	Inherits@w6fx: ^sc_terran_goliathrockets_aa
+
+	Projectile: Missile
+		Inaccuracy: 25
+		Image: d2k_missile2
+		VerticalRateOfTurn: 20
+		TrailImage: large_trail
+		ContrailLength: 0
+		MaximumLaunchSpeed: 250
+		MinimumLaunchSpeed: 250
+		Speed: 500
+		Acceleration: 5
+		HomingActivationDelay: 3
+
 GoliathMk2MG:
 	Inherits: ^Warhead_CannonHE_Heavy
 	Inherits@2: ^Projectile_Shell_Heavy
@@ -2274,6 +2281,7 @@ GoliathMk2MG:
 
 GoliathMk2Rockets_AA:
 	Inherits@wh: ^Warhead_MissileAA_Heavy
+	Inherits@projectileaa: ^Projectile_Missile_AA
 	Inherits@proj: ^Projectile_Missile_Heavy_Rocket_SC
 	Inherits@fx: ^Effect_MissileAP_Heavy_Rocket_SC
 	ReloadDelay: 40
@@ -2284,11 +2292,9 @@ GoliathMk2Rockets_AA:
 		Blockable: false
 		MaximumLaunchSpeed: 250
 		MinimumLaunchSpeed: 250
-		RangeLimit: 25000
 		Speed: 500
 		Inaccuracy: 25
 		Acceleration: 5
-		CloseEnough: 500
 		AllowSnapping: true
 		Arm: 0
 		Shadow: true
@@ -2425,6 +2431,20 @@ GoliathMk2Rockets_AA:
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
 		UpdatesUnitStatistics: false
 	Inherits@w6fx: ^sc_terran_goliathmk2rockets_aa
+
+	Projectile: Missile
+		Speed: 500
+		Inaccuracy: 25
+		Image: d2k_RPG
+		TrailImage: bazooka_trail2
+		MaximumLaunchSpeed: 250
+		MinimumLaunchSpeed: 250
+		Acceleration: 5
+		HorizontalRateOfTurn: 30
+		VerticalRateOfTurn: 16
+		HomingActivationDelay: 2
+		ContrailLength: 0
+
 ^sc_terran_wraithrockets_aa:
 	Warhead@EffectWater: CreateEffect
 		Explosions: small_splash
@@ -2433,6 +2453,7 @@ GoliathMk2Rockets_AA:
 
 WraithRockets_AA:
 	Inherits@wh: ^Warhead_MissileAA_Heavy
+	Inherits@projectileaa: ^Projectile_Missile_AA
 	Inherits@proj: ^Projectile_Missile_Heavy_SC
 	Inherits@fx: ^Effect_MissileHE_Heavy_SC
 	Report: TPhFi200.aud
@@ -2443,11 +2464,9 @@ WraithRockets_AA:
 		Blockable: false
 		MaximumLaunchSpeed: 250
 		MinimumLaunchSpeed: 250
-		RangeLimit: 25000
 		Speed: 500
 		Inaccuracy: 25
 		Acceleration: 5
-		CloseEnough: 500
 		AllowSnapping: true
 		ContrailStartColor: 4488FF88
 		ContrailEndColor: 88BBFF44
@@ -2458,6 +2477,19 @@ WraithRockets_AA:
 		ValidTargets: Air
 		Damage: 10000
 	Inherits@w6fx: ^sc_terran_wraithrockets_aa
+
+	Projectile: Missile
+		Inaccuracy: 25
+		Image: d2k_missile2
+		VerticalRateOfTurn: 20
+		TrailImage: large_trail
+		ContrailLength: 0
+		MaximumLaunchSpeed: 250
+		MinimumLaunchSpeed: 250
+		Speed: 500
+		Acceleration: 5
+		HomingActivationDelay: 3
+
 WraithLaser:
 	Inherits@wh: ^Warhead_Laser_Heavy
 	Inherits@proj: ^Projectile_Laser_Heavy
@@ -2497,11 +2529,9 @@ SunDogRockets:
 		Blockable: false
 		MaximumLaunchSpeed: 250
 		MinimumLaunchSpeed: 250
-		RangeLimit: 25000
 		Speed: 500
 		Inaccuracy: 25
 		Acceleration: 5
-		CloseEnough: 500
 		AllowSnapping: true
 		ContrailZOffset: 4000
 		ContrailStartColor: FF884400
@@ -2534,6 +2564,7 @@ SunDogLaser:
 
 ValkyrieRockets:
 	Inherits@missilerole: ^Warhead_MissileAA_Heavy
+	Inherits@projectileaa: ^Projectile_Missile_AA
 	Inherits@4: ^SCRocket
 	Inherits: ^Effect_Watersplash_Huge_SC
 	Report: TPhFi200.aud
@@ -2547,11 +2578,9 @@ ValkyrieRockets:
 		Blockable: false
 		MaximumLaunchSpeed: 250
 		MinimumLaunchSpeed: 250
-		RangeLimit: 25000
 		Speed: 500
 		Inaccuracy: 50
 		Acceleration: 5
-		CloseEnough: 500
 		AllowSnapping: true
 		ContrailStartColor: 4488FF88
 		ContrailEndColor: 88BBFF44
@@ -2700,6 +2729,20 @@ ValkyrieRockets:
 		Damage: 240
 	Warhead@Smudge:
 		SmudgeType: SandCrater, RockCrater
+
+	Projectile: Missile
+		Speed: 500
+		Inaccuracy: 50
+		Image: d2k_RPG
+		TrailImage: bazooka_trail2
+		MaximumLaunchSpeed: 250
+		MinimumLaunchSpeed: 250
+		Acceleration: 5
+		ContrailLength: 10
+		HomingActivationDelay: 2
+		HorizontalRateOfTurn: 30
+		VerticalRateOfTurn: 30
+
 WyvernRockets:
 	Inherits@collapseflat: ^Warhead_MissileAP_Heavy_Flat
 	ValidTargets: Ground, Water, Air
@@ -2721,11 +2764,9 @@ WyvernRockets:
 		Blockable: false
 		MaximumLaunchSpeed: 250
 		MinimumLaunchSpeed: 250
-		RangeLimit: 25000
 		Speed: 500
 		Inaccuracy: 50
 		Acceleration: 5
-		CloseEnough: 500
 		AllowSnapping: true
 		ContrailStartColor: 4488FF88
 		ContrailEndColor: 88BBFF44
@@ -3510,6 +3551,7 @@ PhobosLaser:
 
 MissileTurret:
 	Inherits@wh: ^Warhead_MissileAA_Heavy
+	Inherits@projectileaa: ^Projectile_Missile_AA
 	Inherits@proj: ^Projectile_Missile_Heavy_SC
 	Inherits@fx: ^Effect_MissileHE_Heavy_SC
 	Report: TPhFi200.aud
@@ -3521,11 +3563,9 @@ MissileTurret:
 		Blockable: false
 		MaximumLaunchSpeed: 250
 		MinimumLaunchSpeed: 250
-		RangeLimit: 25000
 		Speed: 500
 		Inaccuracy: 25
 		Acceleration: 5
-		CloseEnough: 500
 		AllowSnapping: true
 		ContrailZOffset: 4000
 		ContrailStartColor: FF884400
@@ -3536,6 +3576,19 @@ MissileTurret:
 		ValidTargets: Air
 		Damage: 20000
 	Inherits@w6fx: ^sc_terran_missileturret
+
+	Projectile: Missile
+		Inaccuracy: 25
+		Image: d2k_missile2
+		VerticalRateOfTurn: 12
+		TrailImage: large_trail
+		ContrailLength: 0
+		MaximumLaunchSpeed: 250
+		MinimumLaunchSpeed: 250
+		Speed: 500
+		Acceleration: 5
+		HomingActivationDelay: 3
+
 SCVULTURESUMMON:
 	ReloadDelay: 5
 	Projectile: InstantExplode
@@ -3718,7 +3771,6 @@ ScienceVesselDefenseMatrix:
 		Shadow: true
 		TrailImage: blue_smokey_small
 		Speed: 375
-		RangeLimit: 12500
 		PointDefenseType: Missile
 		ContrailStartColor: 77CCFF
 		ContrailEndColorUsePlayerColor: true
@@ -3749,7 +3801,6 @@ ScienceVesselIrradiate:
 		Shadow: true
 		TrailImage: smokey
 		Speed: 375
-		RangeLimit: 12500
 		PointDefenseType: Missile
 	Warhead@1: TargetDamage
 	Warhead@Radiation: CreateTintedCells
@@ -3788,7 +3839,6 @@ ScienceVessel_EMP:
 		Shadow: true
 		TrailImage: smokey
 		Speed: 375
-		RangeLimit: 12500
 		PointDefenseType: Missile
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 200000

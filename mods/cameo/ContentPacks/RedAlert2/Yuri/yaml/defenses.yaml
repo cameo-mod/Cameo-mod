@@ -421,6 +421,7 @@ yuri_gatlingcannon:
 	WithVoxelTurret:
 		RequiresCondition: !build-incomplete
 	AutoTarget:
+		DynamicWeaponPriority: true
 	RenderVoxels:
 		Scale: 17 #6.9
 	-WithVoxelBody:
@@ -486,6 +487,7 @@ yuri_psychictower:
 	AttackTurreted:
 	Turreted:
 	AutoTarget:
+		DynamicWeaponPriority: true
 	ProvidesPrerequisite@buildingname:
 	WithIdleOverlay@top:
 		Sequence: idle-top

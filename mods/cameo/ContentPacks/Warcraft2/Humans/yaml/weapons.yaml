@@ -671,7 +671,6 @@ wc2mageSlow:
 	ValidTargets: Ground, Water, Air
 	Projectile: Missile
 		Speed: 10c0
-		RangeLimit: 21c0
 		HorizontalRateOfTurn: 256
 		VerticalRateOfTurn: 256
 		AllowSnapping: True
@@ -714,7 +713,6 @@ wc2magePolymorph:
 	InvalidTargets: Structure
 	Projectile: Missile
 		Speed: 10c0
-		RangeLimit: 21c0
 		HorizontalRateOfTurn: 256
 		VerticalRateOfTurn: 256
 		AllowSnapping: True
@@ -891,9 +889,7 @@ wc2_humans_alleria_arrow:
 		Speed: 750
 		HorizontalRateOfTurn: 75
 		VerticalRateOfTurn: 75
-		RangeLimit: 16000
 		AllowSnapping: True
-		CloseEnough: 600
 		ContrailLength: 0
 	Warhead@Arrow_Medium:
 		Damage: 36000
@@ -917,9 +913,7 @@ wc2_humans_alleria_arrow_elite:
 		Speed: 850
 		HorizontalRateOfTurn: 80
 		VerticalRateOfTurn: 80
-		RangeLimit: 16000
 		AllowSnapping: True
-		CloseEnough: 600
 		ContrailLength: 0
 	Warhead@Arrow_Heavy:
 		Damage: 48000

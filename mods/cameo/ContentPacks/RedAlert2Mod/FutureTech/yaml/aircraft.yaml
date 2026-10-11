@@ -355,6 +355,7 @@ futu_landcarr_drone:
 		PersistentTargeting: false
 	-AutoTarget:
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStanceAI: Defend
 		InitialStance: Defend
 		ScanRadius: 12

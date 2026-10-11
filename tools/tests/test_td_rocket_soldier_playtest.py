@@ -134,7 +134,7 @@ class TdRocketSoldierPlaytestTests(unittest.TestCase):
                 encoding="utf-8"
             )
         )["rocket_trooper"]
-        inputs = check_band.unit_inputs(raw, derived)
+        inputs = check_band.unit_inputs(raw, derived, use_k=False)
         price = check_band.price_for("rocket_trooper", anchor, inputs)
         self.assertEqual(280, round(price / 10) * 10)
         self.assertEqual(

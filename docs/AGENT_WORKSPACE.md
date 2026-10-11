@@ -33,12 +33,14 @@ and every other agent can see the same picture without asking. If your row is st
 
 | Agent | Model / host | Branch | File-set it owns | Status |
 |---|---|---|---|---|
+| **Codex Sol (team slot 01a11068)** | GPT-6.1 Sol / AionUi | `codex/learn-p6-fix` | P6 provider, ground stance controller, integer predictor, regression tests, scoped docs | leader-authorized 2026-10-06; review handoff; independent review and replay gates pending |
 | **Claude-Local** | Opus 5, local CLI | `claude/weapon_inherit_audit_and_map` | the REFERENCE pipeline: `tools/balance/{assign_references,reference_targets,reference_distribution,reference_coverage,build_reference_report,faction_routes}.py`, `tools/reference/variant_pool.py` | ACTIVE 2026-09-13 |
 | **Codex (Astra)** | GPT-6, Blackrobe's host | `codex/recovery-pr345-merge-20260912`, `codex/overnight-integration-20260910` | INI/DTA extraction, evidence gates, the four-faction review pipeline, `tools/tests/` | ACTIVE 2026-09-13 |
 | Devin — Aurora | Devin AI | `devin/aurora/lane*` | AA range/audit lanes, extractor cargo | idle since 2026-09-08 |
 | Devin — Ember | Devin AI (SWE-2 Max) | `devin/ember/b13-corrino-crate` | naming sweeps (R18 dot-rule), W7 remainders, versus-profile audit (R16), audit-tool fixes | ACTIVE 2026-09-26 — #488–#503 merged; #504 open; queue clean, awaiting assignment |
 | Devin — Nova | Devin AI | `devin/nova/*` | naming sweeps, AreaDamage class-2d, dead-field scales | idle since 2026-09-06 |
 | **OMP Astra** | GPT-6 Astra, Blackrobe's host | `omp/ready_deployment_20260928` | scout ownership follow-up, classic-four regression callers, reference/AI status corrections; scoped PR deployment | VERIFIED 2026-09-28; engine rollout remains gated on the human click-test |
+| **Codex (gpt-6-luna)** | GPT-6 Luna, Cameo Dev Team | `codex/garrison-p3-fix` (engine); `codex/garrison-p3-fix` (mod) | Garrison F1–F5: disabled capability, allocation-free reconcile, visible alias guidance, stance docs, deterministic scan phase | ACTIVE 2026-10-07; engine @ `2db0db2`; required suites and BOOT_GATE pass; no merge |
 
 **Signing rule (restating `CLAUDE.md` rule 10 because it keeps being got wrong):** sign with your
 OWN identity and your REAL model name. Claude Opus 5 signs `Co-Authored-By: Claude Opus 5

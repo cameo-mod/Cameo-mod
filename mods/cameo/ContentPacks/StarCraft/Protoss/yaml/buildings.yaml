@@ -373,6 +373,7 @@ protoss_shieldbattery:
 		TurnSpeed: 40
 	WithEmbeddedTurretSpriteBody:
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 10
 		InitialStance: AttackAnything
 	AutoTargetPriority@DEFAULT:

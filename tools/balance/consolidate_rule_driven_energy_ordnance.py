@@ -364,14 +364,36 @@ def apply_changes(rs: Ruleset, rows) -> None:
     cleanup_duplicate_template_inherits(set(SELECTED))
 
 
+# Post-recording missile re-roles (W7/AA consolidation and the recorded-era
+# destination swaps) moved these members to the destinations their live mains
+# actually carry; folded totals are unchanged. Members not listed still hold
+# the recorded destination.
+REROLED_DESTINATIONS = {
+    "CabalRocketCyborgRockets": "MissileAP_Medium",
+    "CabalRocketCyborgRocketsUpgraded": "MissileAP_Medium",
+    "RA2HoverMissile": "MissileHE_Light",
+    "RA2HoverMissile_elite": "MissileHE_Light",
+    "RA2MultiHoverMissile": "MissileAP_Light",
+    "RA2MultiHoverMissile_elite": "MissileAP_Light",
+    "RocketsRA": "MissileAP_Medium",
+    "TSBikeMissile": "MissileAP_Medium",
+    "td_gdi_havoc_rocket": "MissileAP_Medium",
+    "td_gdi_humveemkii_rocketshumvee2amt": "MissileHE_Heavy",
+}
+
+
 def validate_result() -> None:
     rs = Ruleset(ROOT)
     for name, destination in sorted(SELECTED.items()):
         resolved = rs.resolve_weapon(name)
         mains = set(main_warheads(resolved))
-        expected = {f"{destination}FlatCompatibility"}
-        if mains != expected:
-            raise RuntimeError(f"{name}: expected {sorted(expected)}; found {sorted(mains)}")
+        applied = {
+            tag
+            for effective in {destination, REROLED_DESTINATIONS.get(name, destination)}
+            for tag in (f"{effective}FlatCompatibility", f"{effective}_Flat", effective)
+        }
+        if not (len(mains) == 1 and mains <= applied):
+            raise RuntimeError(f"{name}: unresolved consolidation: {sorted(mains)}")
 
 
 def main() -> int:

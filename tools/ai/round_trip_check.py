@@ -17,6 +17,7 @@ from __future__ import annotations
 import contextlib
 import io
 import pathlib
+import re
 import sys
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
@@ -215,6 +216,17 @@ def check(dirs: list[pathlib.Path]) -> list[tuple[str, str, str]]:
     else:
         state = PASS
     rows.append(("learning", state, f"{len(learned)} LEARNED line(s), {fit_note}"))
+
+    # 9b. learned-file resolution (M9): a "missing" log for a yaml that exists under mods/cameo means
+    # the configured path could not be resolved — bare subpaths miss the package file index, which
+    # lists top-level names only, and must go through the cameo| package prefix.
+    mod_root = pathlib.Path(__file__).resolve().parents[2] / "mods" / "cameo"
+    phantom = sorted({m.group(1) for ln in lines
+                      for m in (re.search(r"([A-Za-z0-9_./|]+\.yaml) missing", ln),)
+                      if m and mod_root.joinpath(*m.group(1).split("|")[-1].split("/")).is_file()})
+    rows.append(("learned files", FAIL if phantom else PASS,
+                 f"{len(phantom)} file(s) logged missing but present in the tree"
+                 + (f": {', '.join(phantom)}" if phantom else "")))
 
     # 10. tools
     failures = []

@@ -1,5 +1,7 @@
 ^AMTProjectile:
 	Projectile: Missile
+		RangeLimitPercent: 150
+		CloseEnoughFromSpeed: true
 		MaximumLaunchSpeed: 400
 		MinimumLaunchSpeed: 400
 		HorizontalRateOfTurn: 25

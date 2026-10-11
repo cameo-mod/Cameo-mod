@@ -52,6 +52,19 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 		internal CPos DeployCooldownCell;
 		internal int DeployCooldownTick = int.MinValue / 2;
 
+		// AR-S residual (2026-10-04): the last (order, quantized target) a dedup call site queued
+		// per member — survives state changes, so even a new state repeating the same order is
+		// suppressed. Armed by UseSquadOrderDedup; empty while unarmed (bit-identical stream).
+		internal readonly Dictionary<Actor, SquadOrderKey> OrderMemory = new();
+
+		// AR-S: the armed-path flee-episode home latch. Retreat(flee: true) re-rolls
+		// HomeLocation every squad tick — a fresh random building each pass cancels
+		// the in-flight leg and wanders the squad forever. The latch holds the pick
+		// until the whole squad is idle (the episode's end); a new leg then re-rolls.
+		internal CPos? FleeHomeCell;
+
+		SquadDesireController<Actor> desireController;
+
 		// internal CPos BaseLocation;
 
 		public SquadCA(IBot bot, SquadManagerBotModuleCA squadManager, SquadCAType type)
@@ -62,7 +75,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			Bot = bot;
 			SquadManager = squadManager;
 			World = bot.Player.PlayerActor.World;
-			Random = World.LocalRandom;
+			Random = BotRng.For(bot, nameof(SquadCA));
 			Type = type;
 			Target = Target.FromActor(target);
 			FuzzyStateMachine = new StateMachineCA();
@@ -111,22 +124,52 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			}
 		}
 
+		// The production factory remains world-backed; offline consumer tests replace only
+		// observation and the order sink, while Update/provider lookup/controller stay real.
+		internal virtual ISquadDesireExecution<Actor> CreateDesireExecution() => new LiveSquadDesireExecution(this);
+
 		public void Update()
 		{
 			if (IsValid)
 			{
+				var desire = SquadManager.Info.UseSquadDesire && SquadDesireOrders.Supports(Type)
+					? SquadManager.SquadDesire : null;
 				// LC6: the target the state is about to act on must still be
 				// observable — an Actor that went hidden while committed is
 				// stale consumption and the canary logs it. FrozenActor memory
 				// targets are legal by design and skip the check.
-				if (Target.Type == TargetType.Actor)
+				if (desire == null && Target.Type == TargetType.Actor)
 					SquadManager.CanaryObserved(Target.Actor, "squad-update-target");
 
-				FuzzyStateMachine.Update(this);
+				if (desire != null)
+					(desireController ??= new SquadDesireController<Actor>()).Tick(CreateDesireExecution(), desire);
+				else
+					FuzzyStateMachine.Update(this);
+
+				if (SquadManager.Info.UseSquadOrderDedup)
+				{
+					if (OrderMemory.Count > 0)
+						foreach (var stale in OrderMemory.Keys.Where(a => !Units.Any(u => u.Actor == a)).ToList())
+							OrderMemory.Remove(stale);
+
+					if (FleeHomeCell != null && Units.All(u => u.Actor.IsIdle))
+						FleeHomeCell = null;
+				}
 			}
 		}
 
 		public bool IsValid => Units.Count > 0;
+
+		/// <summary>
+		/// Deduped order issue (UseSquadOrderDedup): true when queuing <paramref name="key"/> to
+		/// <paramref name="member"/> is a real change — different order/target, first order, or a
+		/// completed mobile order on an idle member. Terminal orders (Stop/ReturnToBase/Scatter)
+		/// pass <paramref name="terminal"/> = true and never repeat to the same effect.
+		/// </summary>
+		internal bool OrderChanged(Actor member, SquadOrderKey key, bool terminal = false)
+		{
+			return SquadOrderDedup.Changed(OrderMemory, SquadManager.Info.UseSquadOrderDedup, member, key, terminal);
+		}
 
 		public Actor TargetActor
 		{

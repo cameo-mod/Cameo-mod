@@ -153,7 +153,7 @@ asianalliance_dragonfly:
 		InitialUnits: asianalliance_militia, asianalliance_militia, asianalliance_tankkiller, asianalliance_tankkiller
 		ExclusiveDeploy: true
 		DeployType: Battlefortress
-	AttackOpenTopped:
+	AttackGarrisoned:
 		Voice: Attack
 		Armaments: garrisoned
 		PortOffsets: 224,-341,128, 224,341,128, -224,-341,128, -224,341,128
@@ -274,6 +274,7 @@ asianalliance_oiltruck:
 	Armament@PRIMARY:
 		Weapon: DemoTruckTargeting
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: Defend
 		InitialStanceAI: AttackAnything
 		ScanRadius: 10
@@ -954,7 +955,7 @@ asianalliance_warturtle:
 		InitialUnits: asianalliance_militia,asianalliance_tankkiller,asianalliance_plasmatrooper,asianalliance_flametrooper,asianalliance_fanatic,asianalliance_veteranarcher,asianalliance_asdf
 		ExclusiveDeploy: true
 		DeployType: Battlefortress
-	AttackOpenTopped:
+	AttackGarrisoned:
 		Voice: Attack
 		Armaments: garrisoned
 		PortOffsets: 384,0,128, 224,-341,128, -224,-341,128, -384,0,128, -224,341,128, 224,341,128, 0,0,128
@@ -962,6 +963,7 @@ asianalliance_warturtle:
 	RevealOnFire:
 		ArmamentNames: primary, garrisoned
 	AutoTarget:
+		DynamicWeaponPriority: true
 		AllowMovement: true
 	Selectable:
 		DecorationBounds: 1440, 1440, 0, -128

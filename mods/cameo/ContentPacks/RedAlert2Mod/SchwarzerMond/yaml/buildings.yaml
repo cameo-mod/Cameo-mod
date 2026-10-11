@@ -197,6 +197,7 @@ schwarzermond_airfield:
 	Armament@PRIMARY:
 		Weapon: NaxDefensivePlaneTarget
 	AutoTarget:
+		DynamicWeaponPriority: true
 
 schwarzermond_lasertower:
 	Inherits: ^RA2Defense
@@ -256,6 +257,7 @@ schwarzermond_lasertower:
 	WithSpriteTurret:
 		RequiresCondition: !build-incomplete
 	AutoTarget:
+		DynamicWeaponPriority: true
 	Power:
 		Amount: -40
 	RevealsShroud:
@@ -316,6 +318,7 @@ schwarzermond_sturmcannon:
 	WithSpriteTurret:
 		RequiresCondition: !build-incomplete
 	AutoTarget:
+		DynamicWeaponPriority: true
 	Power:
 		Amount: -50
 	RevealsShroud:

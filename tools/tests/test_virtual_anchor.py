@@ -161,8 +161,12 @@ class VirtualAnchorTests(unittest.TestCase):
             self.assertIn("O0=800.00 P0=800.00 Q0=800.00", output.getvalue())
             self.assertEqual(anchors.read_bytes(), b"original\r\n")
 
-    def test_virtual_k_requires_real_anchor(self):
-        with patch.object(sys, "argv", ["fit_class", "--class", "mbt", "--spec", "1,1,1,100,1,1", "--use-k"]), \
+    def test_compare_k_requires_real_anchor(self):
+        """--compare-k needs a real anchor: a virtual --spec has no armaments,
+        so it has no K to compare. (PRICING-DEFAULT 2026-10-04 made K the default
+        basis, so the old spec+K rejection no longer exists — this is the gate
+        that remains.)"""
+        with patch.object(sys, "argv", ["fit_class", "--class", "mbt", "--spec", "1,1,1,100,1,1", "--compare-k"]), \
                 contextlib.redirect_stderr(io.StringIO()), self.assertRaises(SystemExit):
             fit_class.main()
 

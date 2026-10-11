@@ -43,12 +43,12 @@ namespace OpenRA.Mods.Cameo.Test
 		{
 			var b = new StringBuilder();
 			AiMatchLogWriter.AppendObjectStart(b);
-			AiMatchLogWriter.AppendNumber(b, "schema", 2, true);
-			AiMatchLogWriter.AppendString(b, "record_id", "game|Multi0");
+			AiMatchLogWriter.AppendNumber(b, "schema", 3, true);
+			AiMatchLogWriter.AppendString(b, "record_id", "game|seat_1");
 			AiMatchLogWriter.AppendNumber(b, "duration_ticks", 2400);
 
 			AiMatchLogWriter.AppendObjectPropertyStart(b, "player");
-			AiMatchLogWriter.AppendString(b, "name", "Multi0", true);
+			AiMatchLogWriter.AppendString(b, "seat", "seat_1", true);
 			AiMatchLogWriter.AppendString(b, "personality", "rush");
 			AiMatchLogWriter.AppendNumber(b, "personality_switches", 2);
 			AiMatchLogWriter.AppendTimeline(b, timeline);
@@ -121,13 +121,13 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
-		public void EmptySchema2FieldsStillProduceParseableJson()
+		public void EmptySchema3FieldsStillProduceParseableJson()
 		{
 			using var doc = JsonDocument.Parse(BuildPlayerLine(null));
 			var player = doc.RootElement.GetProperty("player");
 			Assert.That(player.GetProperty("composition_timeline").GetArrayLength(), Is.EqualTo(0));
 			Assert.That(player.GetProperty("episode_timeline").GetArrayLength(), Is.EqualTo(0));
-			Assert.That(doc.RootElement.GetProperty("schema").GetInt32(), Is.EqualTo(2));
+			Assert.That(doc.RootElement.GetProperty("schema").GetInt32(), Is.EqualTo(3));
 		}
 
 		[Test]
@@ -141,6 +141,22 @@ namespace OpenRA.Mods.Cameo.Test
 			using var doc = JsonDocument.Parse(b.ToString());
 			Assert.That(doc.RootElement.GetProperty("map_title").GetString(),
 				Is.EqualTo("a \"quoted\"	map\name"));
+		}
+
+		[TestCase(false)]
+		[TestCase(true)]
+		public void OpponentSignatureRecordSeparatesSeenAndTruth(bool seen)
+		{
+			var builder = new StringBuilder();
+			var profile = seen ? new EnemyProfile { FactionName = "td_nod", ArmyValue = 1200 } : null;
+			AiMatchLogWriter.AppendOpponentSignature(builder, "seat_2", profile, "td_nod", "lost");
+			using var doc = JsonDocument.Parse(builder.ToString());
+			Assert.That(doc.RootElement.GetProperty("seat").GetString(), Is.EqualTo("seat_2"));
+			Assert.That(doc.RootElement.GetProperty("seen").ValueKind,
+				Is.EqualTo(seen ? JsonValueKind.Object : JsonValueKind.Null));
+			Assert.That(doc.RootElement.GetProperty("truth").GetProperty("faction").GetString(), Is.EqualTo("td_nod"));
+			Assert.That(doc.RootElement.GetProperty("truth").GetProperty("outcome").GetString(), Is.EqualTo("lost"));
+			Assert.That(doc.RootElement.TryGetProperty("name", out _), Is.False);
 		}
 
 		// stats_timeline follows kills_cost inside "stats", so a missing separator would break every

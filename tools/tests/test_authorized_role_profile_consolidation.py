@@ -57,7 +57,8 @@ class AuthorizedRoleProfileConsolidationTests(unittest.TestCase):
             self.assertEqual([destination], [node.key.split("@", 1)[1] for node in nodes], name)
             self.assertEqual(cohort.TOTALS[name], int(nodes[0].get("Damage")), name)
             self.assertEqual("AreaDamage", nodes[0].value, name)
-            self.assertEqual(cohort.EXPECTED_CONTRACT, cohort.contract(nodes[0]), name)
+            self.assertEqual(cohort.EXPECTED_CONTRACT_OVERRIDES.get(
+                name, cohort.EXPECTED_CONTRACT), cohort.contract(nodes[0]), name)
             self.assertEqual("10000", nodes[0].get("PercentageScale"), name)
             self.assertEqual(cohort.RUNTIME_UNITS[name], sum(
                 int(application["runtime_units"])

@@ -44,7 +44,7 @@ namespace OpenRA.Mods.Common.Traits
 		public static bool IsRadar(ActorInfo a) => IsBuilding(a) && a.HasTraitInfo<ProvidesRadarInfo>();
 		public static bool IsRepairDepot(ActorInfo a) => IsBuilding(a) && a.HasTraitInfo<RepairsUnitsInfo>();
 		public static bool IsSilo(ActorInfo a) => IsBuilding(a) && a.HasTraitInfo<StoresPlayerResourcesInfo>();
-		public static bool IsPowerPlant(ActorInfo a) => IsBuilding(a) && a.TraitInfoOrDefault<PowerInfo>() is { } p && p.Amount > 0;
+		public static bool IsPowerPlant(ActorInfo a) => IsBuilding(a) && a.TraitInfos<PowerInfo>().Any(p => p.Amount > 0);
 		public static bool IsSuperweapon(ActorInfo a) => IsBuilding(a) && a.TraitInfos<SupportPowerInfo>().Any();
 
 		/// <summary>Tech-center class: building granting a *tech*/tek/hq/lab prerequisite (atek/stek analogues).</summary>

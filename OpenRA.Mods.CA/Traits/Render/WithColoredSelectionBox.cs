@@ -90,7 +90,7 @@ namespace OpenRA.Mods.CA.Traits.Render
 
 		protected override void Created(Actor self)
 		{
-			interactable = self.TraitOrDefault<Interactable>();
+			interactable = self.TraitsImplementing<Interactable>().FirstOrDefault();
 		}
 
 		IEnumerable<IRenderable> IRenderAnnotations.RenderAnnotations(Actor self, WorldRenderer wr)

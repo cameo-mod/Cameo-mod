@@ -8068,26 +8068,29 @@
         "damage": "8000",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
-        "tag": "Flak_Medium_Flat",
+        "tag": "MissileAA_Medium",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "8409",
       "reloaddelay": "54",
       "requires": "!forgotten_upgrade_chemicalweapons",
       "slot": "Armament@SECONDARY",
       "versus_templates": [
+       "^Warhead_MissileAA_Medium",
+       "^Projectile_Missile_AA",
        "^ts_forgotten_tsadatsmissile_aa",
        "^ts_forgotten_tsadatsmissile_aa_1",
-       "^ts_forgotten_tsadatsmissile_aa_2",
-       "^Warhead_Flak_Medium_Flat"
+       "^ts_forgotten_tsadatsmissile_aa_2"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileAA_Medium"
+      ],
       "weapon": "TSAdatsMissile_AA",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",
@@ -8149,23 +8152,27 @@
         "damage": "12000",
         "falloff": "100, 58, 32, 16, 6, 0",
         "spread": "110",
-        "tag": "Flak_Medium_Flat",
+        "tag": "MissileAA_Medium",
         "type": "AreaDamage"
        }
       ],
       "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "8409",
       "reloaddelay": "54",
       "requires": "forgotten_upgrade_chemicalweapons",
       "slot": "Armament@UPGRADEAA",
       "versus_templates": [
+       "^Warhead_MissileAA_Medium",
+       "^Projectile_Missile_AA",
        "^ts_tiberiansun_tschemadatsmissile_aa"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileAA_Medium"
+      ],
       "weapon": "TSChemAdatsMissile_AA",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      }
     ],
     "armor": {

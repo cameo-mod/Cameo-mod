@@ -1024,6 +1024,7 @@ VAL_PBOX:
 		Dimensions: 1,1
 	RenderDetectionCircle:
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 		ScanRadius: 25
 	Health:
@@ -1075,6 +1076,7 @@ VAL_AGUN:
 		Dimensions: 1,1
 	RenderDetectionCircle:
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 		ScanRadius: 15
 	Health:
@@ -1220,6 +1222,7 @@ valentine_e7:
 	Valued:
 		Cost: 1000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 		InitialStanceAI: AttackAnything
 		ScanRadius: 25
@@ -1255,6 +1258,7 @@ valentine_ra2tany:
 	Valued:
 		Cost: 2000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 		InitialStanceAI: AttackAnything
 		ScanRadius: 25
@@ -1284,6 +1288,7 @@ valentine_chlotus:
 	Valued:
 		Cost: 1000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 		InitialStanceAI: AttackAnything
 		ScanRadius: 25
@@ -1337,6 +1342,7 @@ valentine_315amanda:
 	Valued:
 		Cost: 10000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 		InitialStanceAI: AttackAnything
 		ScanRadius: 25
@@ -1432,6 +1438,7 @@ lovebaby:
 		RequiresCondition: !disabled
 		ControllingCondition: controlling
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 		InitialStanceAI: AttackAnything
 		ScanRadius: 25
@@ -1479,6 +1486,7 @@ lovebaby2:
 	AcceptsDeliveredExperience:
 		ValidTypes: infantry
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 		InitialStanceAI: AttackAnything
 		ScanRadius: 25
@@ -1495,6 +1503,7 @@ loveballista:
 	Valued:
 		Cost: 500
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 		InitialStanceAI: AttackAnything
 		ScanRadius: 25
@@ -1603,6 +1612,7 @@ valovecraft:
 		RepulsionSpeed: 50
 		MaximumPitch: 56
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 		InitialStanceAI: AttackAnything
 		ScanRadius: 25
@@ -1681,6 +1691,7 @@ loveletter:
 		TurnSpeed: 20
 		Speed: 200
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 		InitialStanceAI: AttackAnything
 		ScanRadius: 25
@@ -1775,6 +1786,7 @@ giantcupido:
 		RepulsionSpeed: 25
 		MaximumPitch: 50
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 		InitialStanceAI: AttackAnything
 		ScanRadius: 25
@@ -1879,6 +1891,7 @@ cute_kirov:
 	Power:
 		Amount: -300
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 		InitialStanceAI: AttackAnything
 		ScanRadius: 25
@@ -1969,6 +1982,7 @@ lovealienmob:
 	Armament:
 		Weapon: AngryMobTargeting
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 		InitialStanceAI: AttackAnything
 		ScanRadius: 25
@@ -2143,6 +2157,7 @@ svsgreen:
 		ForceFireIgnoresActors: True
 		FacingTolerance: 0
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 		InitialStanceAI: AttackAnything
 		ScanRadius: 25
@@ -2278,6 +2293,7 @@ valentine_mod4tnkgirl:
 	RenderSprites:
 		Image: mod4tnkgirl
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 		InitialStanceAI: AttackAnything
 		ScanRadius: 25
@@ -2328,6 +2344,7 @@ valentines_teletubby_po:
 	Power:
 		Amount: -200
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 		InitialStanceAI: AttackAnything
 		ScanRadius: 25
@@ -2400,6 +2417,7 @@ valentines_white_knight:
 	Power:
 		Amount: -50
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 		InitialStanceAI: AttackAnything
 		ScanRadius: 25
@@ -2449,6 +2467,7 @@ valentines_giga_chad:
 	Power:
 		Amount: -50
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 7
 		InitialStance: AttackAnything
 	Armament:
@@ -2492,6 +2511,7 @@ valentines_dd:
 	Armor:
 		Type: Medium
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 		InitialStanceAI: AttackAnything
 		ScanRadius: 25
@@ -2552,6 +2572,7 @@ valentines_ca:
 	Armor:
 		Type: Heavy
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 		InitialStanceAI: AttackAnything
 		ScanRadius: 25
@@ -2629,6 +2650,7 @@ valentines_pt:
 	Armor:
 		Type: Light
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 		InitialStanceAI: AttackAnything
 		ScanRadius: 25
@@ -2684,6 +2706,7 @@ valentines_swan:
 	Valued:
 		Cost: 5000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 		InitialStanceAI: AttackAnything
 		ScanRadius: 25

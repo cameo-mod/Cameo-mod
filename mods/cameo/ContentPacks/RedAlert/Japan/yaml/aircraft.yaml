@@ -164,6 +164,7 @@ japan_japanesebomber:
 		Speed: 165
 		IdealSeparation: 2500
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: Defend
 		InitialStanceAI: AttackAnything
 		ScanRadius: 10

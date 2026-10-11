@@ -552,6 +552,7 @@ cabal_repairdrone:
 		TargetRelationships: Ally
 		ForceTargetRelationships: Ally
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 		InitialStanceAI: AttackAnything
 		ScanRadius: 12

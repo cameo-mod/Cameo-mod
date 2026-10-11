@@ -120,4 +120,9 @@ Rules: `git fetch` each clone and count commits since what Cameo absorbed (the d
 mechanic that appears in several upstreams is harvested ONCE, from the best source, and the duplicates are MERGED
 (DESIGN §22, `tools/audit/type_merge_inventory.py`). **Re-vendor first, then apply Cameo-side conversions** (never the
 other way round). Port mechanics DERIVED from existing values, not copied literals (the disc drain: CA hard-codes −2x
-per plant; Cameo uses a −100% multiplier). Status of 2026-10-01: RV 0, SP 0, CN 0 new; CA 24; Fransbot 25; GA 53.
+per plant; Cameo uses a −100% multiplier). Status of 2026-10-04 (EMBER): RV 0, CN 0 new; **Fransbot 33** (`main` = v1.29.55-4 —
+VD-1 "Victory Drive" opportunity-generator series landed upstream; harvest-review
+candidate); **GA 58**; openra/bleed ≈ +17 since the 2026-08-01 pin (baseline sha absent
+in local clone — re-pin on next survey regen). SP/CA/OpenHV/DR/OP2/E2140/Schwerpunkt/YR
+clones absent locally — last counted 2026-10-01 (CA 24, SP 0, GA was 53).
+Previous: 2026-10-01: RV 0, SP 0, CN 0 new; CA 24; Fransbot 25; GA 53.

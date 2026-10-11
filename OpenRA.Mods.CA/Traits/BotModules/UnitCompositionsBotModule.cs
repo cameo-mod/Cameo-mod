@@ -117,11 +117,16 @@ namespace OpenRA.Mods.CA.Traits
 			}
 
 			// Populate the UnitPrerequisitesByQueue for each composition, so the bot doesn't have to look them up repeatedly
+			var compositionOrdinal = 0;
 			foreach (var composition in UnitCompositions)
 			{
-				// Fallback for compositions that were not assigned an id during loading.
+				// Fallback for compositions that were not assigned an id during loading: a stable
+				// ordinal, NOT a Guid - the id keys decision state (MinInterval tracking) and must
+				// be identical on every client and across same-seed runs.
 				if (string.IsNullOrEmpty(composition.Id))
-					composition.Id = Guid.NewGuid().ToString();
+					composition.Id = $"CompositionFallback{compositionOrdinal}";
+
+				compositionOrdinal++;
 
 				composition.UnitPrerequisitesByQueue = new Dictionary<string, Dictionary<string, string[]>>();
 

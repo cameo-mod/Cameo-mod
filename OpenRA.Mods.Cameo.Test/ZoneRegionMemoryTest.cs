@@ -12,8 +12,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using NUnit.Framework;
+using OpenRA.Mods.Cameo.Test.TestFixtures;
 using OpenRA.Mods.Cameo.Traits.BotModules;
 
 namespace OpenRA.Mods.Cameo.Test
@@ -21,70 +21,6 @@ namespace OpenRA.Mods.Cameo.Test
 	[TestFixture]
 	public class ZoneRegionMemoryTest
 	{
-		// Engine-free stand-in for TacticalMapBotModule: a fixed cell->zone map plus an
-		// explicit adjacency list, and the same nearest-region ring contract the module
-		// implements (own id first, then a small expanding scan, then -1).
-		sealed class FakeZoneTopology : IBotZoneTopology
-		{
-			readonly Dictionary<CPos, int> idByCell = new();
-
-			public readonly List<Zone> ZoneList = new();
-			public int Generation { get; set; }
-
-			public IReadOnlyList<Zone> Regions => ZoneList;
-			public IReadOnlyList<ZoneChokepoint> Chokepoints => Array.Empty<ZoneChokepoint>();
-			public IReadOnlyList<ZoneTerritoryDoor> TerritoryDoors => Array.Empty<ZoneTerritoryDoor>();
-			public IReadOnlyCollection<CPos> Territory => Array.Empty<CPos>();
-
-			public int RegionIdAt(CPos cell) => idByCell.GetValueOrDefault(cell, -1);
-
-			public int NearestRegionId(CPos cell)
-			{
-				var id = RegionIdAt(cell);
-				if (id >= 0)
-					return id;
-
-				for (var radius = 1; radius <= 3; radius++)
-				{
-					for (var dx = -radius; dx <= radius; dx++)
-					{
-						for (var dy = -radius; dy <= radius; dy++)
-						{
-							if (Math.Max(Math.Abs(dx), Math.Abs(dy)) != radius)
-								continue;
-
-							id = RegionIdAt(cell + new CVec(dx, dy));
-							if (id >= 0)
-								return id;
-						}
-					}
-				}
-
-				return -1;
-			}
-
-			public bool IsPassableCell(CPos cell) => idByCell.ContainsKey(cell);
-			public OpenRA.Player RegionOwner(int regionId) => null;
-			public bool IsInTerritory(CPos cell) => false;
-
-			public void AddZone(IEnumerable<CPos> cells, params int[] adjacent)
-			{
-				var id = ZoneList.Count;
-				var cellArray = cells.ToArray();
-				ZoneList.Add(new Zone(id, cellArray, [], adjacent, 0, cellArray.Length, []));
-				foreach (var cell in cellArray)
-					idByCell[cell] = id;
-			}
-
-			// A re-cut: the shared Regions list is refilled in place and every zone id
-			// re-derived, exactly like the module's bridge-change rebuild.
-			public void Recut()
-			{
-				ZoneList.Clear();
-				idByCell.Clear();
-			}
-		}
-
 		static RegionMemory Zoned(FakeZoneTopology topology) =>
 			new(new CPos(0, 0), new CPos(63, 63), 8, topology);
 
@@ -180,10 +116,11 @@ namespace OpenRA.Mods.Cameo.Test
 		{
 			// Diamond: 0 -> {1, 2} -> 3. Threat on zone 1 must push the route through zone 2.
 			var topology = new FakeZoneTopology();
-			topology.AddZone(Block(0, 0), 1, 2);
-			topology.AddZone(Block(16, 0), 0, 3);
-			topology.AddZone(Block(16, 16), 0, 3);
-			topology.AddZone(Block(32, 8), 1, 2);
+			topology.AddZone(Block(0, 0), new[] { 1, 2 });
+			topology.AddZone(Block(16, 0), new[] { 0, 3 });
+			topology.AddZone(Block(16, 16), new[] { 0, 3 });
+			topology.AddZone(Block(32, 8), new[] { 1, 2 });
+
 			var regions = Zoned(topology);
 
 			var route = RegionRouter.Route(regions, new CPos(2, 2), new CPos(36, 10),
@@ -275,7 +212,7 @@ namespace OpenRA.Mods.Cameo.Test
 		{
 			var topology = ChainTopology(4);
 			var regions = Zoned(topology);
-			var enemy = (OpenRA.Player)RuntimeHelpers.GetUninitializedObject(typeof(OpenRA.Player));
+			var enemy = Uninitialized.Player();
 
 			var cells = new RegionMemory.Region[regions.CellCount];
 			cells[1] = new RegionMemory.Region { EverSeen = true, ArmyValue = 500 };
@@ -299,7 +236,7 @@ namespace OpenRA.Mods.Cameo.Test
 
 			// The re-cut's zones occupy different ground: cached centres die with the old ids.
 			topology.Recut();
-			topology.AddZone(Block(0, 24), 1);
+			topology.AddZone(Block(0, 24), new[] { 1 });
 			topology.AddZone(Block(40, 24));
 			topology.Generation++;
 

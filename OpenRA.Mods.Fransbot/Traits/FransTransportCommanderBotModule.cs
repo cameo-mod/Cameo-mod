@@ -642,6 +642,17 @@ namespace OpenRA.Mods.Common.Traits
 			orderBot = bot;
 		}
 
+		// AR-8 / §19.6: the capture-transport service runs inside the CALLER's tick (SpecOps, the
+		// engineer seam, the bid broker...), but the orders it emits — boarding, transport moves,
+		// the releases behind consume/cancel — belong to THIS module: it transferred the leases to
+		// itself, so only its own issuer clears the order gate. IssueAs charges every provider entry
+		// point to the provider; called from its own tick the scope just re-pushes the same name.
+		string IssuerName => issuerName ??= BotIssuer.Of(this, player.PlayerActor);
+		string issuerName;
+
+		T AsSelf<T>(Func<T> f) { using var _ = BotIssuer.IssueAs(IssuerName); return f(); }
+		void AsSelf(Action a) { using var _ = BotIssuer.IssueAs(IssuerName); a(); }
+
 		protected override void TraitEnabled(Actor self)
 		{
 			if (world.Type == WorldType.Editor)
@@ -888,6 +899,7 @@ namespace OpenRA.Mods.Common.Traits
 		bool IFransCaptureTransportService.TryRequestReusableTransport(
 			IBot bot, Actor passenger, Actor target, bool landPathAvailable)
 		{
+			using var _ = BotIssuer.IssueAs(IssuerName);
 			if (!HasPotentialTransport(passenger, target, landPathAvailable, reusableRoundTrip: true, out var existing))
 				return false;
 			if (existing != null)
@@ -903,6 +915,7 @@ namespace OpenRA.Mods.Common.Traits
 
 		bool IFransCaptureTransportService.TryConsumeCompletedReusableInsertion(Actor passenger, out Actor target)
 		{
+			using var _ = BotIssuer.IssueAs(IssuerName);
 			target = null;
 			if (passenger == null || !missions.TryGetValue(passenger, out var mission) || !mission.ReusableRoundTrip ||
 				mission.State != MissionState.Handoff)
@@ -926,6 +939,7 @@ namespace OpenRA.Mods.Common.Traits
 
 		bool IFransCaptureTransportService.TryBeginReusableExtraction(IBot bot, Actor passenger)
 		{
+			using var _ = BotIssuer.IssueAs(IssuerName);
 			if (passenger == null || !missions.TryGetValue(passenger, out var mission) || !mission.ReusableRoundTrip ||
 				mission.State != MissionState.Standby || passenger.Disposed || !passenger.IsInWorld || passenger.IsDead ||
 				!ValidateAssignedTransport(mission))
@@ -962,6 +976,7 @@ namespace OpenRA.Mods.Common.Traits
 		bool IFransCaptureTransportService.TryRequestCaptureTransport(
 			IBot bot, Actor passenger, Actor target, bool landPathAvailable)
 		{
+			using var _ = BotIssuer.IssueAs(IssuerName);
 			if (!HasPotentialTransport(passenger, target, landPathAvailable, reusableRoundTrip: false, out var existing))
 				return false;
 
@@ -1029,6 +1044,7 @@ namespace OpenRA.Mods.Common.Traits
 		bool IFransCaptureTransportService.TryRequestCaptureRun(
 			IBot bot, IReadOnlyList<Actor> passengers, IReadOnlyList<Actor> targets)
 		{
+			using var _ = BotIssuer.IssueAs(IssuerName);
 			if (bot == null || passengers == null || targets == null ||
 				passengers.Count == 0 || passengers.Count != targets.Count)
 				return false;
@@ -1114,6 +1130,7 @@ namespace OpenRA.Mods.Common.Traits
 
 		bool IFransCaptureTransportService.TryConsumeDelivered(Actor passenger, out Actor target)
 		{
+			using var _ = BotIssuer.IssueAs(IssuerName);
 			target = null;
 			if (passenger == null || !missions.TryGetValue(passenger, out var mission) ||
 				mission.State != MissionState.Handoff || mission.RunLegs == null)
@@ -1175,16 +1192,20 @@ namespace OpenRA.Mods.Common.Traits
 		// the Frans capture-transport service — one transport system (DESIGN §22), not two.
 		bool IBotCaptureTransportProvider.TryRequestCaptureRun(IBot bot, IReadOnlyList<Actor> passengers,
 			IReadOnlyList<Actor> targets) =>
-			((IFransCaptureTransportService)this).TryRequestCaptureRun(bot, passengers, targets);
+			AsSelf(() => ((IFransCaptureTransportService)this).TryRequestCaptureRun(bot, passengers, targets));
 
 		bool IBotCaptureTransportProvider.IsHandlingPassenger(Actor passenger) =>
-			((IFransCaptureTransportService)this).IsHandlingPassenger(passenger);
+			AsSelf(() => ((IFransCaptureTransportService)this).IsHandlingPassenger(passenger));
 
-		bool IBotCaptureTransportProvider.TryConsumeDelivered(Actor passenger, out Actor target) =>
-			((IFransCaptureTransportService)this).TryConsumeDelivered(passenger, out target);
+		bool IBotCaptureTransportProvider.TryConsumeDelivered(Actor passenger, out Actor target)
+		{
+			using var _ = BotIssuer.IssueAs(IssuerName);
+			return ((IFransCaptureTransportService)this).TryConsumeDelivered(passenger, out target);
+		}
 
 		void IFransCaptureTransportService.CancelCaptureTransport(IBot bot, Actor passenger)
 		{
+			using var _ = BotIssuer.IssueAs(IssuerName);
 			if (passenger == null || !missions.TryGetValue(passenger, out var mission))
 				return;
 
@@ -1232,6 +1253,7 @@ namespace OpenRA.Mods.Common.Traits
 
 		void IFransCaptureTransportService.CancelCaptureTransport(IBot bot, uint passengerActorId)
 		{
+			using var _ = BotIssuer.IssueAs(IssuerName);
 			if (passengerActorId == 0)
 				return;
 
@@ -1387,6 +1409,7 @@ namespace OpenRA.Mods.Common.Traits
 
 		bool IFransCaptureTransportService.TryReserveStrategicExpansionTransport(Actor transport, Actor reservationOwner)
 		{
+			using var _ = BotIssuer.IssueAs(IssuerName);
 			if (!IsLiveOwnedTransport(transport) || reservationOwner == null ||
 				!Info.LandingCraftTypes.Contains(transport.Info.Name))
 				return false;
@@ -2986,8 +3009,7 @@ namespace OpenRA.Mods.Common.Traits
 				player.RelationshipWith(threat.Owner) != PlayerRelationship.Enemy || !threat.CanBeViewedByPlayer(player))
 				return false;
 
-			var attackFollow = threat.TraitOrDefault<AttackFollow>();
-			if (attackFollow != null)
+			foreach (var attackFollow in threat.TraitsImplementing<AttackFollow>())
 			{
 				if (attackFollow.RequestedTarget.Type == TargetType.Actor && attackFollow.RequestedTarget.Actor == engineer)
 					return true;

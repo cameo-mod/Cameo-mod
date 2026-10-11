@@ -81,6 +81,7 @@ ra2_allies_dog:
 	GrantConditionWhileAiming:
 		Condition: run
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 	AutoTargetPriority@DEFAULT:
 		ValidTargets: Infantry

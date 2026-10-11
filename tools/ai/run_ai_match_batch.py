@@ -113,6 +113,7 @@ import time
 import zipfile
 
 REPO_ROOT = pathlib.Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 
 # OpenAL Soft AVs in alcOpenDevice on this host since the .NET 10 / bleed
 # update; the null driver gives headless matches a silent device. Same
@@ -392,6 +393,19 @@ def mp_spawn_cells(map_text: str) -> list[tuple[int, int]]:
     return cells
 
 
+def physical_spawn(record: dict, map_text: str) -> int | None:
+    home = (record.get("player") or {}).get("home")
+    homes = re.findall(r"^\tPlayerReference@(?:Multi[0-9]+|Bot[A-Z]):\n(?:(?:\t\t[^\n]*\n)*)", map_text, re.MULTILINE)
+    for block in homes:
+        ref = re.search(r"PlayerReference@(Multi([0-9]+)|Bot([A-Z])):", block)
+        cell = re.search(r"^\t\tHomeLocation: (-?[0-9]+,-?[0-9]+)$", block, re.MULTILINE)
+        if ref and cell and cell.group(1) == home:
+            return int(ref.group(2)) if ref.group(2) is not None else ord(ref.group(3)) - ord("A")
+    # A lobby spawn is 1-based; never silently attribute every unknown map bot to 0.
+    chosen = (record.get("player") or {}).get("spawn", 0)
+    return chosen - 1 if isinstance(chosen, int) and chosen > 0 else None
+
+
 def split_spawn_sides(cells: list[tuple[int, int]], team_size: int) -> list[tuple[int, int]]:
     """Return spawn cells reordered so indices 0..team_size-1 are one geographic
     half of the map and team_size..2*team_size-1 are the other.
@@ -507,6 +521,35 @@ def patch_mp_block(
     return text[:start] + block + text[block_end:]
 
 
+# Harness-authored rules are shipped under a reserved filename so the copy
+# can never clobber an archive's own rules.yaml, and so the name can never
+# collide with a shipped Rules include.
+HARNESS_RULES_NAME = "duel_rules.yaml"
+
+
+def _insert_side_actors(text: str, rendered: str) -> str:
+    """Append rendered bare actor entries at the END of the Actors: section,
+    creating the section at EOF when absent. Appending preserves original
+    actor creation order/ids (SpawnMapActors assigns NextAID in file order);
+    prepending would shift every existing actor's id and perturb RNG-visible
+    behaviour."""
+    headers = list(re.finditer(r"(?m)^Actors:[ \t]*$", text))
+    if len(headers) > 1:
+        fail("map.yaml contains more than one Actors: section")
+    if not headers:
+        return text.rstrip("\n") + "\n\nActors:\n" + rendered
+
+    header = headers[0]
+    next_root = re.search(r"\n\S", text[header.end():])
+    block_end = header.end() + next_root.start() if next_root else len(text)
+    block = text[header.end():block_end]
+    for name in re.findall(r"(?m)^\t(\w+):", rendered):
+        if re.search(rf"(?m)^\t{name}:", block):
+            fail(f"synthetic actor id '{name}' collides with an existing actor")
+    block = block.rstrip("\n")
+    return text[: header.end()] + block + "\n" + rendered + text[block_end:]
+
+
 def write_variant_from_oramap(oramap: pathlib.Path, dest: pathlib.Path, matchup: dict, time_limit: int) -> None:
     """Extract a shipped .oramap into a variant dir and convert its Multi slots
     into map-side bot duelists. The referee seat is added for the local client;
@@ -531,11 +574,27 @@ def write_variant_from_oramap(oramap: pathlib.Path, dest: pathlib.Path, matchup:
             ref = f"Multi{i}"
             if text.count(f"	PlayerReference@{ref}:") != 1:
                 fail(f"team-size {team_size} expects exactly one PlayerReference@{ref} block")
-    if not re.search(r"^Rules: ", text, re.MULTILINE):
+    if (dest / HARNESS_RULES_NAME).exists():
+        fail(f"map archive already ships reserved file {HARNESS_RULES_NAME}")
+
+    rules_line = re.search(r"(?m)^Rules:[ \t]*([^\n]*)$", text)
+    if rules_line:
+        value = rules_line.group(1)
+        comment = ""
+        if "#" in value:
+            value, comment = value.split("#", 1)
+            comment = " #" + comment
+        entries = [e.strip() for e in value.split(",") if e.strip()]
+        if HARNESS_RULES_NAME in entries:
+            fail(f"map Rules already references reserved file {HARNESS_RULES_NAME}")
+        entries.append(HARNESS_RULES_NAME)
+        new_line = "Rules: " + ",".join(entries) + comment
+        text = text[:rules_line.start()] + new_line + text[rules_line.end():]
+    else:
         categories = re.search(r"^Categories: .+$", text, re.MULTILINE)
         if not categories:
             fail("map.yaml has no Categories line to anchor the Rules key")
-        text = text[:categories.end()] + "\n\nRules: rules.yaml" + text[categories.end():]
+        text = text[:categories.end()] + f"\n\nRules: {HARNESS_RULES_NAME}" + text[categories.end():]
 
     marker = "\tPlayerReference@Multi0:"
     if text.count(marker) != 1:
@@ -569,12 +628,14 @@ def write_variant_from_oramap(oramap: pathlib.Path, dest: pathlib.Path, matchup:
             ("Multi1", matchup["side_b"]["faction"], spawns[1]),
         ]
     rendered = "".join(render_side_actors(ref, faction, home) for ref, faction, home in sides)
-    text = text.rstrip("\n") + "\n" + rendered
+    text = _insert_side_actors(text, rendered)
     text += f"\n# ai-match-batch variant: {dest.name}\n"
     map_yaml.write_text(text, encoding="utf-8")
 
-    shutil.copyfile(TEMPLATE_MAP / "rules.yaml", dest / "rules.yaml")
-    rules_yaml = dest / "rules.yaml"
+    # Harness rules ship under the reserved name so an archive's own
+    # rules.yaml is never overwritten.
+    shutil.copyfile(TEMPLATE_MAP / "rules.yaml", dest / HARNESS_RULES_NAME)
+    rules_yaml = dest / HARNESS_RULES_NAME
     rules = rules_yaml.read_text(encoding="utf-8")
     patched, count = re.subn(r"TimeLimitDefault: \d+", f"TimeLimitDefault: {time_limit}", rules)
     if count != 1:
@@ -617,6 +678,25 @@ def write_variant(template: Path, dest: pathlib.Path, matchup: dict, time_limit:
     if count != 1:
         fail("variant rules.yaml is missing exactly one TimeLimitDefault line")
     rules_yaml.write_text(patched, encoding="utf-8")
+
+
+def legacy_template_dir_error(path: pathlib.Path, allow_temporary: bool = False) -> str | None:
+    """Validate the fixed-layout BotA/B directory-map path used by A5 diagnostics."""
+    if not path.is_dir() or path.resolve() == TEMPLATE_MAP.resolve():
+        return None
+    if not allow_temporary:
+        return f"only the bundled template dir is supported for directory maps: {TEMPLATE_MAP}"
+    required = ("map.bin", "map.png", "map.yaml", "rules.yaml")
+    missing = [name for name in required if not (path / name).is_file()]
+    if missing:
+        return "temporary template dir missing required files: " + ", ".join(missing)
+    map_yaml = (path / "map.yaml").read_text(encoding="utf-8", errors="replace")
+    rules_yaml = (path / "rules.yaml").read_text(encoding="utf-8", errors="replace")
+    if "PlayerReference@BotA:" not in map_yaml or "PlayerReference@BotB:" not in map_yaml:
+        return "temporary template dir must contain the fixed BotA/B player references"
+    if not re.search(r"(?m)^\s*TimeLimitDefault:\s*\d+", rules_yaml):
+        return "temporary template dir missing TimeLimitDefault in rules.yaml"
+    return None
 
 
 def output_tail(output: str) -> str:
@@ -801,7 +881,7 @@ def team_scoreboard(results: list[dict]) -> dict:
             allies = row.get("allies") or []
             members = frozenset(
                 {str(row.get("record_id") or "").rsplit("|", 1)[1]}
-                | {str(a.get("name")) for a in allies}
+                | {str(a.get("seat")) for a in allies}
             )
             team = by_members.get(members)
             if team is None:
@@ -975,6 +1055,22 @@ def fingerprint_drift(baseline: dict, current: dict) -> dict:
     }
 
 
+def run_round_trip(support: pathlib.Path, summary: dict) -> int:
+    """Run round_trip_check.py on the batch's own support dir and fold the
+    verdict into batch_summary.json. Returns the checker exit code — any FAIL
+    layer is nonzero and the caller fails the batch."""
+    import round_trip_check
+
+    print("\nround-trip check (every learning-loop layer must leave evidence):")
+    rc = round_trip_check.main([str(support)])
+    summary["round_trip"] = {"exit": rc}
+    (support / "batch_summary.json").write_text(
+        json.dumps(summary, indent=2), encoding="utf-8")
+    if rc != 0:
+        print("round-trip: FAIL layer(s) above — the batch fails even if every match was clean")
+    return rc
+
+
 def _short_hash(value: str | None) -> str:
     return value[:12] if value else "null"
 
@@ -993,6 +1089,8 @@ def main() -> int:
     parser.add_argument("--map", dest="map_path", type=pathlib.Path, default=DEFAULT_MAP,
                         help="duel map: the shipped .oramap (default: A Nuclear Winter) "
                              "or the legacy ai_duel_gate template dir")
+    parser.add_argument("--allow-temporary-template", action="store_true",
+                        help="allow a validated temporary fixed-layout legacy template directory")
     parser.add_argument("--swap-bots", action="store_true",
                         help="alternate which bot occupies which spawn per repeat — "
                              "the A/B acceptance requires both spawns covered")
@@ -1013,6 +1111,10 @@ def main() -> int:
                         help="log arm drift between attempts and keep running "
                              "(default: abort the batch — a changed arm voids the A/B)")
     parser.add_argument("--keep-variants", action="store_true", help="do not delete variant map dirs on success")
+    parser.add_argument("--round-trip", action="store_true",
+                        help="after the batch, run round_trip_check.py on this support dir; "
+                             "any FAIL layer fails the batch (the learning-loop audit in the run, "
+                             "not an afterthought)")
     parser.add_argument("--render", choices=("fast", "default"), default="fast",
                         help="fast (default): VSync off + a 640x480 window. The engine renders once after EVERY logic tick, "
                              "so with VSync on a match is held to the monitor refresh (~50 ticks/s measured 2026-10-01). "
@@ -1044,8 +1146,9 @@ def main() -> int:
     map_source = map_arg.resolve()
     if not map_source.exists():
         fail(f"map source missing: {map_source}")
-    if map_source.is_dir() and map_source != TEMPLATE_MAP:
-        fail(f"only the bundled template dir is supported for directory maps: {TEMPLATE_MAP}")
+    template_error = legacy_template_dir_error(map_source, args.allow_temporary_template)
+    if template_error:
+        fail(template_error)
 
     mod_id, engine = load_config()
     executable = engine / "bin" / "OpenRA.exe"
@@ -1260,16 +1363,15 @@ def main() -> int:
                     # player.spawn is the lobby SpawnPoint — 0 for map-side
                     # duelists. The physical spawn is the slot binding:
                     # Multi0/BotA -> index 0, Multi1/BotB -> index 1.
-                    "spawn": SPAWN_INDEX_BY_SLOT.get((r.get("player") or {}).get("name"),
-                                                   (r.get("player") or {}).get("spawn")),
+                    "spawn": physical_spawn(r, (variants_root / m["variant"] / "map.yaml").read_text(encoding="utf-8")),
                     "opponent": {"bot_type": ((r.get("opponents") or [{}])[0] or {}).get("bot_type")},
                     # Full relationship lists (2v2: one ally, two opponents).
                     "allies": [
-                        {"name": a.get("name"), "bot_type": a.get("bot_type"), "outcome": a.get("outcome")}
+                        {"seat": a.get("seat"), "bot_type": a.get("bot_type"), "outcome": a.get("outcome")}
                         for a in (r.get("allies") or [])
                     ],
                     "opponents": [
-                        {"name": o.get("name"), "bot_type": o.get("bot_type"), "outcome": o.get("outcome")}
+                        {"seat": o.get("seat"), "bot_type": o.get("bot_type"), "outcome": o.get("outcome")}
                         for o in (r.get("opponents") or [])
                     ],
                 }
@@ -1342,9 +1444,13 @@ def main() -> int:
         for name in variants:
             shutil.rmtree(variants_root / name, ignore_errors=True)
 
+    round_trip_failed = args.round_trip and run_round_trip(support, summary) != 0
+
     if drift_aborted is not None:
         return 1
     if new_exceptions:
+        return 1
+    if round_trip_failed:
         return 1
     if not any(r["records"] for r in results):
         return 2

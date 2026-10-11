@@ -10,11 +10,11 @@
 #endregion
 
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.Json;
 using NUnit.Framework;
 using OpenRA.Mods.CA.Traits;
+using OpenRA.Mods.Cameo.Test.TestFixtures;
 using OpenRA.Mods.Cameo.Traits;
 using OpenRA.Mods.Cameo.Traits.BotModules;
 
@@ -29,8 +29,7 @@ namespace OpenRA.Mods.Cameo.Test
 		// A shared MainTarget means allies committed to the same enemy Player; the
 		// tests only need distinct references, so uninitialised Players stand in
 		// (the same fixture trick ZoneRegionMemoryTest uses).
-		static OpenRA.Player FakePlayer() =>
-			(OpenRA.Player)RuntimeHelpers.GetUninitializedObject(typeof(OpenRA.Player));
+		static OpenRA.Player FakePlayer() => Uninitialized.Player();
 
 		static TeamBroadcast Broadcast(int ownArmyValue = 0, int urgencyLevel = 0, int directorTension = 0,
 			DirectorPhase directorPhase = DirectorPhase.BuildUp, OpenRA.Player mainTarget = null,

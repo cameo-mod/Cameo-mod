@@ -66,6 +66,8 @@
 	Inherits@proj: ^Projectile_Missile_Light
 	Inherits@fx: ^Effect_MissileAP_Light
 	Projectile: Missile
+		RangeLimitPercent: 150
+		CloseEnoughFromSpeed: true
 		Image: ra2_dragon
 		-TrailImage:
 		-TrailInterval:
@@ -89,6 +91,8 @@
 	Inherits@proj: ^Projectile_Missile_Medium
 	Inherits@fx: ^Effect_MissileAP_Medium
 	Projectile: Missile
+		RangeLimitPercent: 150
+		CloseEnoughFromSpeed: true
 		Image: patriot
 		-TrailImage:
 		-TrailInterval:
@@ -410,7 +414,6 @@ RA2ThunderboltMissile:
 		Speed: 800
 		Arm: 2
 		Inaccuracy: 400
-		RangeLimit: 16000
 		Image: d2k_missile2
 		Palette: d2keffect
 		TrailImage: large_trail
@@ -585,7 +588,6 @@ RA2MultiThunderboltMissile:
 		Speed: 800
 		Arm: 2
 		Inaccuracy: 400
-		RangeLimit: 16000
 		Image: d2k_missile2
 		Palette: d2keffect
 		TrailImage: large_trail
@@ -721,7 +723,6 @@ RA2TRIPODPLAZMA:
 		Speed: 204
 		Inaccuracy: 0c256
 		Image: plasma
-		RangeLimit: 10c0
 		Shadow: True
 	Warhead@1Dam_impact: SpreadDamage
 		Spread: 0c213
@@ -778,7 +779,6 @@ RA2REVENANTAA:
 		TrailImage: fb2
 		Image: fireball
 		Inaccuracy: 0c128
-		RangeLimit: 13c0
 		HorizontalRateOfTurn: 40
 	Warhead@1Dam_impact: SpreadDamage
 		Spread: 128
@@ -1610,7 +1610,6 @@ MigMissiles:
 		Speed: 400
 		Arm: 2
 		Inaccuracy: 1000
-		RangeLimit: 15c0
 		Image: d2k_missile2
 		Palette: d2keffect
 		TrailImage: large_trail
@@ -1966,7 +1965,6 @@ YRBoomerSCUD:
 		Speed: 200
 		Image: MISSILE
 		TrailImage: bomb
-		RangeLimit: 20000
 	Warhead@MissileAP_Heavy: AreaDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 20000
@@ -2009,7 +2007,6 @@ RA2TorpTube:
 		Speed: 180
 		Acceleration: 1
 		HorizontalRateOfTurn: 5
-		RangeLimit: 18000
 		BoundToTerrainType: Water
 		Palette: cloak
 		MaximumLaunchAngle: 0

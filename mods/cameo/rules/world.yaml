@@ -911,6 +911,7 @@ World:
 		Max: 24
 	CameoCareerFinalizer:
 	AiMatchLogWriter:
+	InsuranceTelemetry:
 	AiSituationLogWriter:
 	# FE-0 / BO-0: record-only placement + build-order log, cameo-ai-placements.jsonl (AI_ARCHITECTURE 12.24, 12.25).
 	AiPlacementLogWriter:
@@ -1122,6 +1123,11 @@ World:
 		ShortGameCheckboxDisplayOrder: 2
 		TechLevelDropdownDisplayOrder: 2
 		GameSpeedDropdownDisplayOrder: 3
+		# Maintainer policy (playtest B2): Limited superweapons is the lobby default.
+		# Unlimited stays selectable via the same techlevel dropdown (player.yaml
+		# ProvidesTechPrerequisite@unlimited-sw). Limited adds global-swlimit, which
+		# engages SuperweaponPlugLimit admission counting on SW plug production.
+		TechLevel: superweapons
 	CreateMapPlayers:
 	CashTransferToAllies:
 		CheckboxEnabled: true
@@ -1326,7 +1332,13 @@ World:
 	# Stock ValidateOrder removed: CameoValidateOrder shadows it below with identical
 	# authority plus takeover seats (validator order can't veto, only tighten).
 	CameoValidateOrder:
+	SuperweaponPlugLimit:
+		# Declared SW-plug occupancy tokens (lobby-cap wiring): td_gdi advcom
+		# uplink -> ionc, td_nod temple silo -> nodnuke, cabal core silo ->
+		# cabalnuke_swlimit, ts_gdi upgrade-center uplink -> tsionc.
+		OccupancyTokens: ionc, nodnuke, cabalnuke_swlimit, tsionc
 	BotTakeoverTracker:
+	CameoAutoOrders:
 	LobbySystemActorConditionCheckbox@BOT_TAKEOVER:
 		ID: bot_takeover
 		Label: checkbox_bot_takeover.label

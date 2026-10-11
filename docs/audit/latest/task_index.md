@@ -1,8 +1,8 @@
 # audit_task_index — is the task routing table pointing at real things?
 
-task rows          : **26**
-documents linked   : **72**
-tools referenced   : **86**
+task rows          : **28**
+documents linked   : **78**
+tools referenced   : **93**
 
 | check | finding |
 |---|--:|

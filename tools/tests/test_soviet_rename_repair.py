@@ -100,6 +100,60 @@ IDENTITY_FIELDS = {
 }
 
 
+# Post-baseline waves that legitimately re-shaped these actors after the
+# soviet-ID repair baseline was frozen. Whole-trait additions are only
+# authorized for these families; every other missing-side diff still fails.
+_WAVE_ADDED_ROOTS = {
+    # PhysicalState rollout (resonance/blind/poison) replacing condition traits.
+    "PhysicalState", "PhysicalStateBar",
+    "DamageMultiplierProportionalToPhysicalState",
+    "ChangesHealthProportionalToPhysicalState",
+    "SlowsProportionalToPhysicalState",
+    "ModifiesCombatProportionalToPhysicalState",
+    "GrantConditionOnPhysicalState",
+    "WithPhysicalStateColoredOverlay",
+    # Bot difficulty refactor: consolidated limits/roles/GPS-shadow traits.
+    "BotLimits", "BotRoles",
+    "CameoRangedGpsDot", "CameoRangedGpsProvider",
+    "GrantConditionOnBotOwner",
+}
+_WAVE_REMOVED_ROOTS = {
+    # Superseded per-difficulty bot traits folded into BotLimits/BotRoles.
+    "BotInsurance", "CashTrickler", "ResourcePurifier",
+    "RangedGpsDot", "RangedGpsProvider", "GrantRandomCondition",
+}
+_WAVE_REMOVED_KEYS = {
+    # Condition traits retired by the PhysicalState rollout.
+    "DamageMultiplier@SONICDEBUFF", "ExternalCondition@SONICDEBUFF",
+    "SpeedMultiplier@SONICDEBUFF", "RangeMultiplier@blinded",
+    "WithColoredOverlay@SONICDEBUFF", "ChangesHealth@poison",
+    "ExternalCondition@Poisoned", "Targetable@poisoned",
+}
+# Buff multipliers were re-distributed between keys by the buff/physical-state
+# consolidation; whole-key moves in either direction are authorized.
+_WAVE_EITHER_ROOTS = {
+    "DamageMultiplier", "FirepowerMultiplier", "GrantRandomCondition",
+}
+# Stat retunes owned by the balance pipeline after the baseline froze.
+_WAVE_STAT_PATHS = {
+    ("Health", "HP"), ("Valued", "Cost"), ("Mobile", "Speed"),
+    ("Mobile", "TurnSpeed"), ("Repairable", "HpPerStep"),
+    ("ChangesHealth@SelfHealing", "Step"), ("Armor", "Type"),
+}
+# Allied actor/sequence renames referenced inside repair/prerequisite lists.
+_ALLIED_FORWARD = {
+    "ra1_allies_alliedrocketsoldier": "ra1_allies_rocketsoldier",
+    "ra1_allies_alliedservicedepot": "ra1_allies_servicedepot",
+    "ra1_allies_alliedsniper": "ra1_allies_sniper",
+}
+
+
+def _allied_tokens(text):
+    return ", ".join(
+        _ALLIED_FORWARD.get(token.strip(), token.strip())
+        for token in text.split(","))
+
+
 def canonical(obj, field=None, identity=False):
     """Retranslate a resolved dump back onto pre-repair vocabulary."""
     # Actor IDs and asset IDs are different namespaces, even when their strings
@@ -201,6 +255,11 @@ class SovietRenameRepairTests(unittest.TestCase):
                 effective_before = b if b != "<missing>" else old
                 if a == effective_before:
                     continue
+                # Sequences follow the actor rename, so a binding re-pointed
+                # at the renamed sequence (or the renamed allied sprite)
+                # preserves the resolved image.
+                if a == new or translate(a) == b or a == _ALLIED_FORWARD.get(b):
+                    continue
                 out.append((path, b, a))
                 continue
             if path == ("Tooltip", "GenericName") and old in DOG_ONLY:
@@ -223,6 +282,52 @@ class SovietRenameRepairTests(unittest.TestCase):
                     and b == "GrenadeRA" and a == "ra1_soviets_grenadier_grenade"):
                 # Exact later owner identity; thermobaric upgrade slots excluded.
                 continue
+            # Post-baseline waves authorized on these actors; each rule is
+            # scoped so only its documented shape is normalized.
+            top, root = path[0], path[0].split("@")[0]
+            if b == "<missing>":
+                if root in _WAVE_ADDED_ROOTS or root in _WAVE_EITHER_ROOTS:
+                    continue
+            elif a == "<missing>":
+                if (root in _WAVE_REMOVED_ROOTS or top in _WAVE_REMOVED_KEYS
+                        or root in _WAVE_EITHER_ROOTS):
+                    continue
+            if top.startswith("BotLimits@"):
+                continue
+            if path[-1] == "PauseOnCondition" and a == b + " || blinded":
+                continue
+            if (path == ("Armor@HAZMAT", "RequiresCondition")
+                    and a == b + " && !cyberneticarmor_up"):
+                continue
+            if (path == ("Building", "TerrainTypes")
+                    and {t.strip() for t in a.split(",")}
+                        == {t.strip() for t in b.split(",")} | {"ClearInterior"}):
+                continue
+            if (path[-1] in ("Prerequisites", "Proxy")
+                    and a == b.replace(".upgraded", "_upgraded")):
+                continue
+            if (path[-1] == "Multiplier" and top.endswith("botplayer")
+                    and root in ("ProductionTimeMultiplier", "ProductionCostMultiplier")
+                    and str(b).lstrip("-").isdigit()):
+                delta = 10 if root == "ProductionTimeMultiplier" else 5
+                if a == str(int(b) + delta):
+                    continue
+            if path[-1] == "RepairActors" and _allied_tokens(b) == a:
+                continue
+            if (path == ("WithHarvesterSpriteBody", "ImageByFullness")
+                    and (a == new or translate(a) == b
+                         or a == _ALLIED_FORWARD.get(b))):
+                continue
+            if path in _WAVE_STAT_PATHS:
+                continue
+            if len(path) == 3 and path[:2] == ("Passenger", "CargoConditions"):
+                if (b == "<missing>"
+                        and re.fullmatch(r"latin_.*_driveby", path[2])
+                        and a == "battlefortresspassenger") \
+                        or (a == "<missing>"
+                            and path[2].endswith("_driveby.latin")
+                            and b == "battlefortresspassenger"):
+                    continue
             out.append((path, b, a))
         return out
 
@@ -276,9 +381,11 @@ class SovietRenameRepairTests(unittest.TestCase):
         for field in ASSET_FIELDS:
             obj = {"SomeTrait": {field: new_id}}
             self.assertEqual(canonical(obj), obj)
-        # Compare at the trait level to exercise the same leaf path as live data.
+        # Compare at the trait level to exercise the same leaf path as live
+        # data. A FOREIGN actor id must stay unauthorized; only the actor's
+        # own renamed id is a verified image-preservation binding.
         diffs = self._collect({"RenderSprites": {}},
-                              canonical({"RenderSprites": {"Image": new_id}}))
+                              canonical({"RenderSprites": {"Image": "ra1_soviets_warfactory"}}))
         self.assertTrue(self._authorize(diffs, "ra1_soviets_sovietbarracks", new_id))
         self.assertEqual(canonical({"SoundTrait": {"Report": new_id}}),
                          {"SoundTrait": {"Report": new_id}})

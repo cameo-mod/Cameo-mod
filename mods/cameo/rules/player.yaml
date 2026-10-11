@@ -264,7 +264,7 @@ Player:
 		Condition: secondaryinsurance
 		Threshold: 10000
 		ThresholdDuration: 1500
-	CashTrickler@secondaryinsurance:
+	InsuranceCashTrickler@secondaryinsurance:
 		Interval: 1
 		Amount: 1
 		ShowTicks: False

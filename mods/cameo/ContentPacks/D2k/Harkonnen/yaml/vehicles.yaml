@@ -167,6 +167,7 @@ missile_tank:
 		FacingTolerance: 0
 		TargetFrozenActors: true
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStanceAI: Defend
 	FireWarheadsOnDeath:
 		Weapon: D2KUnitExplodeMed
@@ -227,6 +228,7 @@ harkonnen_rockettank:
 		FacingTolerance: 0
 		TargetFrozenActors: true
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStanceAI: Defend
 	FireWarheadsOnDeath:
 		Weapon: D2KUnitExplodeMed
@@ -607,6 +609,7 @@ harkonnen_inkvine:
 		FacingTolerance: 10
 		TargetFrozenActors: true
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStanceAI: Defend
 	FireWarheadsOnDeath:
 		Weapon: D2KUnitExplodeMed

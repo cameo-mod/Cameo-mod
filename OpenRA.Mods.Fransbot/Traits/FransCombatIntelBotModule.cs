@@ -158,10 +158,17 @@ namespace OpenRA.Mods.Common.Traits
 		public IReadOnlyList<FransCombatIntelContact> EnemyCombatContacts => enemyCombatContacts;
 
 		// Fog-honest enemy-composition feed for AdaptiveCounterProduction: only mobile combat
-		// contacts this bot has actually seen (live + remembered). Always returns true — an empty
-		// sample is a truthful "seen nothing", never a license for the omniscient fallback.
+		// contacts this bot has actually seen (live + remembered). Returns true even for an
+		// empty sample — a truthful "seen nothing", never a license for the omniscient
+		// fallback — but false while the trait is disabled, as the interface contract rules.
 		bool OpenRA.Mods.CA.Traits.IBotEnemyCompositionProvider.TryGetEnemyComposition(out IReadOnlyDictionary<string, int> valueByActorType)
 		{
+			if (IsTraitDisabled)
+			{
+				valueByActorType = null;
+				return false;
+			}
+
 			var sample = new Dictionary<string, int>();
 			foreach (var contact in enemyCombatContacts)
 			{

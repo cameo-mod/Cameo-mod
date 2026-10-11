@@ -192,6 +192,114 @@ def restore_endpoint_weapon(test, node):
     return before
 
 
+# Authorized post-recording drift on the live freedom-elite contract. The
+# `before` fixture stays era-frozen; these pin the current resolved payload:
+# b7f6d4368 (missile range/proximity feel-test defaults) migrated the
+# projectile fields, the armor-12.0l wave expanded and retuned every Versus
+# table, and the re-author pass reordered the resolved children.
+FREEDOM_ELITE_LIVE_PROJECTILE = {
+    "Acceleration": "3", "AllowSnapping": "true", "Arm": "0",
+    "Blockable": "false", "CloseEnoughFromSpeed": "true",
+    "ContrailColor": "E60000", "ContrailEndColor": "FFFFFF",
+    "ContrailEndColorUsePlayerColor": "true", "ContrailEndWidth": "1",
+    "ContrailLength": "35", "ContrailStartColor": "E60000",
+    "ContrailStartWidth": "33", "ContrailZOffset": "4000",
+    "HomingActivationDelay": "2", "HorizontalRateOfTurn": "30",
+    "Image": "red_dragon", "Inaccuracy": "100",
+    "MaximumLaunchSpeed": "250", "MinimumLaunchAngle": "60",
+    "MinimumLaunchSpeed": "250", "PointDefenseTypes": "Missile",
+    "RangeLimitPercent": "150", "Shadow": "true", "Speed": "800",
+    "TrailImage": "red_smokey", "TrailInterval": "1",
+    "VerticalRateOfTurn": "16", "__value": "Missile",
+}
+
+FREEDOM_ELITE_LIVE_VERSUS = {
+    "Warhead@MissileAP_Medium": {
+        "Versus": {
+            "ARMOR": "70", "AntiAirBuilding": "81", "AntiAirInfantry": "51",
+            "AntiAirShip": "113", "AntiAirVehicle": "160", "BLAST": "69",
+            "Bomber": "124", "COMPOSITE": "44", "Concrete": "95",
+            "CyborgHeavy": "119", "CyborgHeroic": "99", "CyborgLight": "83",
+            "CyborgMedium": "98", "Fighter": "89", "Flak": "57",
+            "FlyingInfantry": "98", "HAZMAT": "94", "Heavy": "181",
+            "Helicopter": "134", "Heroic": "49", "Light": "154",
+            "Medium": "167", "None": "45", "Plate": "78", "REFLECTOR": "71",
+            "Scout": "125", "Shield": "145", "ShipHeavy": "112",
+            "ShipLight": "101", "ShipMedium": "126", "ShipSuperheavy": "117",
+            "Spaceship": "135", "Steel": "69", "SubmarineHeavy": "150",
+            "SubmarineLight": "151", "Superheavy": "200", "Wood": "66",
+        },
+        "PercentageVersus": {
+            "AntiAirBuilding": "10", "AntiAirInfantry": "5",
+            "AntiAirShip": "13", "AntiAirVehicle": "17", "Bomber": "13",
+            "Concrete": "11", "CyborgHeavy": "12", "CyborgHeroic": "13",
+            "CyborgLight": "9", "CyborgMedium": "10", "Fighter": "12",
+            "Flak": "6", "FlyingInfantry": "11", "Heavy": "19",
+            "Helicopter": "14", "Heroic": "8", "Light": "17", "Medium": "18",
+            "None": "5", "Plate": "7", "Scout": "16", "Shield": "25",
+            "ShipHeavy": "14", "ShipLight": "12", "ShipMedium": "14",
+            "ShipSuperheavy": "14", "Spaceship": "15", "Steel": "10",
+            "SubmarineHeavy": "17", "SubmarineLight": "16",
+            "Superheavy": "20", "Wood": "9",
+        },
+    },
+    "Warhead@FlakWeaponPercentage": {
+        "Versus": {
+            "AntiAirBuilding": "5", "AntiAirInfantry": "15",
+            "AntiAirShip": "8", "AntiAirVehicle": "10", "Bomber": "19",
+            "Concrete": "6", "CyborgHeavy": "11", "CyborgHeroic": "10",
+            "CyborgLight": "13", "CyborgMedium": "12", "Fighter": "20",
+            "Flak": "15", "FlyingInfantry": "15", "Heavy": "9",
+            "Helicopter": "18", "Heroic": "13", "Light": "11",
+            "Medium": "10", "None": "16", "Plate": "14", "Scout": "12",
+            "Shield": "25", "ShipHeavy": "7", "ShipLight": "9",
+            "ShipMedium": "8", "ShipSuperheavy": "6", "Spaceship": "17",
+            "Steel": "5", "SubmarineHeavy": "7", "SubmarineLight": "8",
+            "Superheavy": "8", "Wood": "7",
+        },
+    },
+    "Warhead@ShrapnelWeaponPercentage": {
+        "Versus": {
+            "AntiAirBuilding": "13", "AntiAirInfantry": "17",
+            "AntiAirShip": "15", "AntiAirVehicle": "15", "Bomber": "7",
+            "Concrete": "15", "CyborgHeavy": "12", "CyborgHeroic": "9",
+            "CyborgLight": "18", "CyborgMedium": "15", "Fighter": "8",
+            "Flak": "16", "FlyingInfantry": "12", "Heavy": "11",
+            "Helicopter": "6", "Heroic": "10", "Light": "17", "Medium": "14",
+            "None": "19", "Plate": "13", "Scout": "20", "Shield": "25",
+            "ShipHeavy": "11", "ShipLight": "17", "ShipMedium": "14",
+            "ShipSuperheavy": "10", "Spaceship": "5", "Steel": "12",
+            "SubmarineHeavy": "10", "SubmarineLight": "12",
+            "Superheavy": "9", "Wood": "18",
+        },
+    },
+    "Warhead@FreedomElitePreservedPercentage": {
+        "Versus": {
+            "AntiAirBuilding": "10", "AntiAirInfantry": "5",
+            "AntiAirShip": "13", "AntiAirVehicle": "17", "Bomber": "13",
+            "Concrete": "11", "CyborgHeavy": "12", "CyborgHeroic": "13",
+            "CyborgLight": "9", "CyborgMedium": "10", "Fighter": "12",
+            "Flak": "6", "FlyingInfantry": "11", "Heavy": "19",
+            "Helicopter": "14", "Heroic": "8", "Light": "17", "Medium": "18",
+            "None": "5", "Plate": "7", "Scout": "16", "Shield": "25",
+            "ShipHeavy": "14", "ShipLight": "12", "ShipMedium": "14",
+            "ShipSuperheavy": "14", "Spaceship": "15", "Steel": "10",
+            "SubmarineHeavy": "17", "SubmarineLight": "16",
+            "Superheavy": "20", "Wood": "9",
+        },
+    },
+}
+
+FREEDOM_ELITE_LIVE_ORDER = (
+    'Warhead@MissileAP_Medium', 'Warhead@Glow', 'Warhead@Smudge',
+    'Warhead@DuneRock', 'Warhead@DuneSand', 'Warhead@RA2Crater',
+    'Warhead@Effect', 'Warhead@EffectAir', 'Warhead@ShieldHit',
+    'Warhead@Concrete', 'Warhead@ShieldHitEffect', 'Warhead@EffectWater',
+    'Warhead@FlakWeaponPercentage', 'Warhead@ShrapnelWeaponPercentage',
+    'Warhead@FreedomElitePreservedPercentage',
+)
+
+
 def restore_freedom_elite(test, node):
     """Assert the exact new contract before presenting the frozen old converter view."""
     from dump_resolved import node_to_obj
@@ -214,11 +322,14 @@ def restore_freedom_elite(test, node):
     companion.child('Falloff').value = '100, 50, 0'
     companion.child('Range').value = '0, 32, 33'
     expected[companion.key] = node_to_obj(companion)
-    # Removing the compatibility parent leaves every surviving inherited event
-    # in its original position; the explicit companion is appended by the elite.
-    expected_order = [n.key for n in before.children if n.key.startswith('Warhead@')
-                      and n.key != 'Warhead@MissileAP_MediumFlatCompatibility']
-    expected_order.append(companion.key)
+    # Authorized post-recording drift on the live contract (the `before` view
+    # stays frozen): b7f6d4368 migrated the projectile feel fields and the
+    # armor-12.0l wave expanded and retuned every Versus table, with the
+    # re-author pass reordering the resolved children.
+    expected['Projectile'] = FREEDOM_ELITE_LIVE_PROJECTILE
+    for key, fields in FREEDOM_ELITE_LIVE_VERSUS.items():
+        expected[key].update(fields)
+    expected_order = list(FREEDOM_ELITE_LIVE_ORDER)
     test.assertEqual(expected_order,
                      [n.key for n in node.children if n.key.startswith('Warhead@')])
     test.assertEqual(expected, node_to_obj(node))
@@ -301,7 +412,9 @@ FIELD_CHANGES = {
         (("Warhead@MissileAP_Medium", "Versus", "COMPOSITE"), "44", "44"),
     ),
     "RA2FreedomRocket_elite": (
-        (("Warhead@MissileAP_Medium", "Versus", "COMPOSITE"), "44", "44"),
+        # `after` is the era fixture's own value (45); `before` restores the
+        # recorded consolidated-contract value (44) the compat node carried.
+        (("Warhead@MissileAP_Medium", "Versus", "COMPOSITE"), "44", "45"),
     ),
     "PositronBounce1": (
         (("Warhead@CannonHE_Medium", "Versus", "BLAST"), "40", "40"),
@@ -365,6 +478,13 @@ def missile_parent_role_changes():
                        'missile_parent_role_history_20260910.json').read_text(encoding='utf-8'))
 
 
+@lru_cache(maxsize=1)
+def canonical_template_changes():
+    """Reviewed canonical-template nodes frozen before the W23-RA retrofit."""
+    return json.loads((pathlib.Path(__file__).parent / 'fixtures' /
+                       'canonical_template_history_20260910.json').read_text(encoding='utf-8'))
+
+
 def restore_missile_role(test, node, source=False):
     """Validate the complete new role checkpoint before exposing its predecessor."""
     def ordered(n):
@@ -372,7 +492,8 @@ def restore_missile_role(test, node, source=False):
     def rebuild(row):
         return Node(row[0], row[1], [rebuild(c) for c in row[2]])
     copy = node.deep_copy()
-    for history in (missile_parent_role_changes(), missile_role_changes()):
+    for history in (missile_parent_role_changes(), missile_role_changes(),
+                    canonical_template_changes()):
         record = history.get(copy.key)
         if record is None:
             continue
@@ -520,9 +641,14 @@ def historical_copy(test, node):
     for tag in CORROSION_CLEANUP.get(node.key, ()):
         warhead = copy.child("Warhead@" + tag)
         test.assertIsNotNone(warhead, (node.key, tag))
-        test.assertEqual(8, len(warhead.children), (node.key, tag))
-        test.assertEqual("PhysicalStates", warhead.children[7].key, (node.key, tag))
-        test.assertEqual("100", warhead.child("PhysicalStates").get("Corrosion"))
+        # The armour-class expansion appended a Versus table after
+        # PhysicalStates; the state fields the cleanup restores are unchanged.
+        physical = warhead.child("PhysicalStates")
+        test.assertIsNotNone(physical, (node.key, tag))
+        index = next(i for i, c in enumerate(warhead.children) if c is physical)
+        trailing = {c.key for c in warhead.children[index + 1:]}
+        test.assertTrue(trailing <= {"Versus"}, (node.key, tag))
+        test.assertEqual("100", physical.get("Corrosion"))
         test.assertIsNone(warhead.child("PhysicalStateName"))
         test.assertIsNone(warhead.child("PhysicalStateScale"))
         warhead.children.extend([Node("PhysicalStateName", "Corrosion"), Node("PhysicalStateScale", "100")])

@@ -1571,11 +1571,14 @@
       "requires": "!ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament",
       "versus_templates": [
+       "^Warhead_MissileAA_Medium",
+       "^Projectile_Missile_AA",
        "^Warhead_MissileAP_Medium",
        "^Projectile_Missile_Medium",
        "^Effect_Clsn_Medium_RA2"
       ],
       "warheads": [
+       "^Warhead_MissileAA_Medium",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "RA2Patriot",
@@ -3675,11 +3678,14 @@
       "reloaddelay": "100",
       "slot": "Armament@AA",
       "versus_templates": [
+       "^Warhead_MissileAA_Medium",
+       "^Projectile_Missile_AA",
        "^Warhead_MissileAP_Medium",
        "^Projectile_Missile_Medium",
        "^Effect_Clsn_Medium_RA2"
       ],
       "warheads": [
+       "^Warhead_MissileAA_Medium",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "RA2Medusa_AA",
@@ -3698,7 +3704,7 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Allies/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
+      "design_weapon_class": null,
       "pricing": true,
       "range": "9000",
       "reloaddelay": "100",
@@ -3710,10 +3716,11 @@
       ],
       "warheads": [
        "^Warhead_MissileHE_Medium",
+       "^Warhead_MissileAA_Medium",
        "^Warhead_MissileAP_Medium"
       ],
       "weapon": "RA2MedusaAG",
-      "weapon_class_source": "template"
+      "weapon_class_source": "illegal_mix"
      }
     ],
     "armor": {
@@ -5857,12 +5864,14 @@
       "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_sniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && !rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@primaryAA",
       "versus_templates": [
-       "^Warhead_MissileAA_Light_Flat",
+       "^Warhead_MissileAA_Light",
+       "^Projectile_Missile_AA",
        "^Warhead_MissileAP_Light",
        "^Projectile_Missile_Light",
        "^Effect_Grey_Explosion_Small_RA2"
       ],
       "warheads": [
+       "^Warhead_MissileAA_Light",
        "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2HoverMissile_AA",
@@ -5889,10 +5898,12 @@
       "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_sniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@primaryeliteAA",
       "versus_templates": [
-       "^Warhead_MissileAA_Light_Flat",
+       "^Warhead_MissileAA_Light",
+       "^Projectile_Missile_AA",
        "RA2HoverMissile_elite"
       ],
       "warheads": [
+       "^Warhead_MissileAA_Light",
        "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2HoverMissile_AA_elite",
@@ -5972,6 +5983,7 @@
       "slot": "Armament@primaryAAThunderbolt",
       "versus_templates": [
        "^Warhead_MissileAA_Light",
+       "^Projectile_Missile_AA",
        "RA2ThunderboltMissile"
       ],
       "warheads": [
@@ -6001,6 +6013,7 @@
       "slot": "Armament@primaryeliteAAThunderbolt",
       "versus_templates": [
        "^Warhead_MissileAA_Light",
+       "^Projectile_Missile_AA",
        "RA2ThunderboltMissile_elite"
       ],
       "warheads": [
@@ -6049,21 +6062,24 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "9255",
       "reloaddelay": "20",
       "requires": "ifv-miss && !rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@missileAA",
       "versus_templates": [
-       "^Warhead_MissileAA_Light_Flat",
+       "^Warhead_MissileAA_Light",
+       "^Projectile_Missile_AA",
        "^Warhead_MissileHE_Light_Flat",
        "^Projectile_Missile_Light",
        "^Effect_MissileHE_Light"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileAA_Light"
+      ],
       "weapon": "RA2MultiHoverMissile_AA",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",
@@ -6077,19 +6093,22 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "10255",
       "reloaddelay": "20",
       "requires": "ifv-miss && rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@missileeliteAA",
       "versus_templates": [
-       "^Warhead_MissileAA_Light_Flat",
+       "^Warhead_MissileAA_Light",
+       "^Projectile_Missile_AA",
        "RA2MultiHoverMissile_elite"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileAA_Light"
+      ],
       "weapon": "RA2MultiHoverMissile_AA_elite",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -6162,6 +6181,7 @@
       "slot": "Armament@missileAAThunderbolt",
       "versus_templates": [
        "^Warhead_MissileAA_Light",
+       "^Projectile_Missile_AA",
        "RA2MultiThunderboltMissile"
       ],
       "warheads": [
@@ -6190,6 +6210,7 @@
       "slot": "Armament@missileeliteAAThunderbolt",
       "versus_templates": [
        "^Warhead_MissileAA_Light",
+       "^Projectile_Missile_AA",
        "RA2MultiThunderboltMissile_elite"
       ],
       "warheads": [
@@ -7215,12 +7236,14 @@
       "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_sniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && !rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@primaryAA",
       "versus_templates": [
-       "^Warhead_MissileAA_Light_Flat",
+       "^Warhead_MissileAA_Light",
+       "^Projectile_Missile_AA",
        "^Warhead_MissileAP_Light",
        "^Projectile_Missile_Light",
        "^Effect_Grey_Explosion_Small_RA2"
       ],
       "warheads": [
+       "^Warhead_MissileAA_Light",
        "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2HoverMissile_AA",
@@ -7247,10 +7270,12 @@
       "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_sniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@primaryeliteAA",
       "versus_templates": [
-       "^Warhead_MissileAA_Light_Flat",
+       "^Warhead_MissileAA_Light",
+       "^Projectile_Missile_AA",
        "RA2HoverMissile_elite"
       ],
       "warheads": [
+       "^Warhead_MissileAA_Light",
        "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2HoverMissile_AA_elite",
@@ -7330,6 +7355,7 @@
       "slot": "Armament@primaryAAThunderbolt",
       "versus_templates": [
        "^Warhead_MissileAA_Light",
+       "^Projectile_Missile_AA",
        "RA2ThunderboltMissile"
       ],
       "warheads": [
@@ -7359,6 +7385,7 @@
       "slot": "Armament@primaryeliteAAThunderbolt",
       "versus_templates": [
        "^Warhead_MissileAA_Light",
+       "^Projectile_Missile_AA",
        "RA2ThunderboltMissile_elite"
       ],
       "warheads": [
@@ -7407,21 +7434,24 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "9255",
       "reloaddelay": "20",
       "requires": "ifv-miss && !rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@missileAA",
       "versus_templates": [
-       "^Warhead_MissileAA_Light_Flat",
+       "^Warhead_MissileAA_Light",
+       "^Projectile_Missile_AA",
        "^Warhead_MissileHE_Light_Flat",
        "^Projectile_Missile_Light",
        "^Effect_MissileHE_Light"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileAA_Light"
+      ],
       "weapon": "RA2MultiHoverMissile_AA",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",
@@ -7435,19 +7465,22 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "10255",
       "reloaddelay": "20",
       "requires": "ifv-miss && rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@missileeliteAA",
       "versus_templates": [
-       "^Warhead_MissileAA_Light_Flat",
+       "^Warhead_MissileAA_Light",
+       "^Projectile_Missile_AA",
        "RA2MultiHoverMissile_elite"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileAA_Light"
+      ],
       "weapon": "RA2MultiHoverMissile_AA_elite",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -7520,6 +7553,7 @@
       "slot": "Armament@missileAAThunderbolt",
       "versus_templates": [
        "^Warhead_MissileAA_Light",
+       "^Projectile_Missile_AA",
        "RA2MultiThunderboltMissile"
       ],
       "warheads": [
@@ -7548,6 +7582,7 @@
       "slot": "Armament@missileeliteAAThunderbolt",
       "versus_templates": [
        "^Warhead_MissileAA_Light",
+       "^Projectile_Missile_AA",
        "RA2MultiThunderboltMissile_elite"
       ],
       "warheads": [
@@ -8575,12 +8610,14 @@
       "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_sniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && !rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@primaryAA",
       "versus_templates": [
-       "^Warhead_MissileAA_Light_Flat",
+       "^Warhead_MissileAA_Light",
+       "^Projectile_Missile_AA",
        "^Warhead_MissileAP_Light",
        "^Projectile_Missile_Light",
        "^Effect_Grey_Explosion_Small_RA2"
       ],
       "warheads": [
+       "^Warhead_MissileAA_Light",
        "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2HoverMissile_AA",
@@ -8607,10 +8644,12 @@
       "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_sniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@primaryeliteAA",
       "versus_templates": [
-       "^Warhead_MissileAA_Light_Flat",
+       "^Warhead_MissileAA_Light",
+       "^Projectile_Missile_AA",
        "RA2HoverMissile_elite"
       ],
       "warheads": [
+       "^Warhead_MissileAA_Light",
        "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2HoverMissile_AA_elite",
@@ -8690,6 +8729,7 @@
       "slot": "Armament@primaryAAThunderbolt",
       "versus_templates": [
        "^Warhead_MissileAA_Light",
+       "^Projectile_Missile_AA",
        "RA2ThunderboltMissile"
       ],
       "warheads": [
@@ -8719,6 +8759,7 @@
       "slot": "Armament@primaryeliteAAThunderbolt",
       "versus_templates": [
        "^Warhead_MissileAA_Light",
+       "^Projectile_Missile_AA",
        "RA2ThunderboltMissile_elite"
       ],
       "warheads": [
@@ -8767,21 +8808,24 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "9255",
       "reloaddelay": "20",
       "requires": "ifv-miss && !rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@missileAA",
       "versus_templates": [
-       "^Warhead_MissileAA_Light_Flat",
+       "^Warhead_MissileAA_Light",
+       "^Projectile_Missile_AA",
        "^Warhead_MissileHE_Light_Flat",
        "^Projectile_Missile_Light",
        "^Effect_MissileHE_Light"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileAA_Light"
+      ],
       "weapon": "RA2MultiHoverMissile_AA",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",
@@ -8795,19 +8839,22 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "10255",
       "reloaddelay": "20",
       "requires": "ifv-miss && rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@missileeliteAA",
       "versus_templates": [
-       "^Warhead_MissileAA_Light_Flat",
+       "^Warhead_MissileAA_Light",
+       "^Projectile_Missile_AA",
        "RA2MultiHoverMissile_elite"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileAA_Light"
+      ],
       "weapon": "RA2MultiHoverMissile_AA_elite",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -8880,6 +8927,7 @@
       "slot": "Armament@missileAAThunderbolt",
       "versus_templates": [
        "^Warhead_MissileAA_Light",
+       "^Projectile_Missile_AA",
        "RA2MultiThunderboltMissile"
       ],
       "warheads": [
@@ -8908,6 +8956,7 @@
       "slot": "Armament@missileeliteAAThunderbolt",
       "versus_templates": [
        "^Warhead_MissileAA_Light",
+       "^Projectile_Missile_AA",
        "RA2MultiThunderboltMissile_elite"
       ],
       "warheads": [
@@ -9935,12 +9984,14 @@
       "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_sniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && !rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@primaryAA",
       "versus_templates": [
-       "^Warhead_MissileAA_Light_Flat",
+       "^Warhead_MissileAA_Light",
+       "^Projectile_Missile_AA",
        "^Warhead_MissileAP_Light",
        "^Projectile_Missile_Light",
        "^Effect_Grey_Explosion_Small_RA2"
       ],
       "warheads": [
+       "^Warhead_MissileAA_Light",
        "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2HoverMissile_AA",
@@ -9967,10 +10018,12 @@
       "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_sniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@primaryeliteAA",
       "versus_templates": [
-       "^Warhead_MissileAA_Light_Flat",
+       "^Warhead_MissileAA_Light",
+       "^Projectile_Missile_AA",
        "RA2HoverMissile_elite"
       ],
       "warheads": [
+       "^Warhead_MissileAA_Light",
        "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2HoverMissile_AA_elite",
@@ -10050,6 +10103,7 @@
       "slot": "Armament@primaryAAThunderbolt",
       "versus_templates": [
        "^Warhead_MissileAA_Light",
+       "^Projectile_Missile_AA",
        "RA2ThunderboltMissile"
       ],
       "warheads": [
@@ -10079,6 +10133,7 @@
       "slot": "Armament@primaryeliteAAThunderbolt",
       "versus_templates": [
        "^Warhead_MissileAA_Light",
+       "^Projectile_Missile_AA",
        "RA2ThunderboltMissile_elite"
       ],
       "warheads": [
@@ -10127,21 +10182,24 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "9255",
       "reloaddelay": "20",
       "requires": "ifv-miss && !rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@missileAA",
       "versus_templates": [
-       "^Warhead_MissileAA_Light_Flat",
+       "^Warhead_MissileAA_Light",
+       "^Projectile_Missile_AA",
        "^Warhead_MissileHE_Light_Flat",
        "^Projectile_Missile_Light",
        "^Effect_MissileHE_Light"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileAA_Light"
+      ],
       "weapon": "RA2MultiHoverMissile_AA",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",
@@ -10155,19 +10213,22 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "10255",
       "reloaddelay": "20",
       "requires": "ifv-miss && rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@missileeliteAA",
       "versus_templates": [
-       "^Warhead_MissileAA_Light_Flat",
+       "^Warhead_MissileAA_Light",
+       "^Projectile_Missile_AA",
        "RA2MultiHoverMissile_elite"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileAA_Light"
+      ],
       "weapon": "RA2MultiHoverMissile_AA_elite",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -10240,6 +10301,7 @@
       "slot": "Armament@missileAAThunderbolt",
       "versus_templates": [
        "^Warhead_MissileAA_Light",
+       "^Projectile_Missile_AA",
        "RA2MultiThunderboltMissile"
       ],
       "warheads": [
@@ -10268,6 +10330,7 @@
       "slot": "Armament@missileeliteAAThunderbolt",
       "versus_templates": [
        "^Warhead_MissileAA_Light",
+       "^Projectile_Missile_AA",
        "RA2MultiThunderboltMissile_elite"
       ],
       "warheads": [
@@ -11294,12 +11357,14 @@
       "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_sniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && !rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@primaryAA",
       "versus_templates": [
-       "^Warhead_MissileAA_Light_Flat",
+       "^Warhead_MissileAA_Light",
+       "^Projectile_Missile_AA",
        "^Warhead_MissileAP_Light",
        "^Projectile_Missile_Light",
        "^Effect_Grey_Explosion_Small_RA2"
       ],
       "warheads": [
+       "^Warhead_MissileAA_Light",
        "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2HoverMissile_AA",
@@ -11326,10 +11391,12 @@
       "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_sniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@primaryeliteAA",
       "versus_templates": [
-       "^Warhead_MissileAA_Light_Flat",
+       "^Warhead_MissileAA_Light",
+       "^Projectile_Missile_AA",
        "RA2HoverMissile_elite"
       ],
       "warheads": [
+       "^Warhead_MissileAA_Light",
        "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2HoverMissile_AA_elite",
@@ -11409,6 +11476,7 @@
       "slot": "Armament@primaryAAThunderbolt",
       "versus_templates": [
        "^Warhead_MissileAA_Light",
+       "^Projectile_Missile_AA",
        "RA2ThunderboltMissile"
       ],
       "warheads": [
@@ -11438,6 +11506,7 @@
       "slot": "Armament@primaryeliteAAThunderbolt",
       "versus_templates": [
        "^Warhead_MissileAA_Light",
+       "^Projectile_Missile_AA",
        "RA2ThunderboltMissile_elite"
       ],
       "warheads": [
@@ -11486,21 +11555,24 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "9255",
       "reloaddelay": "20",
       "requires": "ifv-miss && !rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@missileAA",
       "versus_templates": [
-       "^Warhead_MissileAA_Light_Flat",
+       "^Warhead_MissileAA_Light",
+       "^Projectile_Missile_AA",
        "^Warhead_MissileHE_Light_Flat",
        "^Projectile_Missile_Light",
        "^Effect_MissileHE_Light"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileAA_Light"
+      ],
       "weapon": "RA2MultiHoverMissile_AA",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",
@@ -11514,19 +11586,22 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "10255",
       "reloaddelay": "20",
       "requires": "ifv-miss && rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@missileeliteAA",
       "versus_templates": [
-       "^Warhead_MissileAA_Light_Flat",
+       "^Warhead_MissileAA_Light",
+       "^Projectile_Missile_AA",
        "RA2MultiHoverMissile_elite"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileAA_Light"
+      ],
       "weapon": "RA2MultiHoverMissile_AA_elite",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -11599,6 +11674,7 @@
       "slot": "Armament@missileAAThunderbolt",
       "versus_templates": [
        "^Warhead_MissileAA_Light",
+       "^Projectile_Missile_AA",
        "RA2MultiThunderboltMissile"
       ],
       "warheads": [
@@ -11627,6 +11703,7 @@
       "slot": "Armament@missileeliteAAThunderbolt",
       "versus_templates": [
        "^Warhead_MissileAA_Light",
+       "^Projectile_Missile_AA",
        "RA2MultiThunderboltMissile_elite"
       ],
       "warheads": [
@@ -12653,12 +12730,14 @@
       "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_sniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && !rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@primaryAA",
       "versus_templates": [
-       "^Warhead_MissileAA_Light_Flat",
+       "^Warhead_MissileAA_Light",
+       "^Projectile_Missile_AA",
        "^Warhead_MissileAP_Light",
        "^Projectile_Missile_Light",
        "^Effect_Grey_Explosion_Small_RA2"
       ],
       "warheads": [
+       "^Warhead_MissileAA_Light",
        "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2HoverMissile_AA",
@@ -12685,10 +12764,12 @@
       "requires": "!ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_sniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@primaryeliteAA",
       "versus_templates": [
-       "^Warhead_MissileAA_Light_Flat",
+       "^Warhead_MissileAA_Light",
+       "^Projectile_Missile_AA",
        "RA2HoverMissile_elite"
       ],
       "warheads": [
+       "^Warhead_MissileAA_Light",
        "^Warhead_MissileAP_Light"
       ],
       "weapon": "RA2HoverMissile_AA_elite",
@@ -12768,6 +12849,7 @@
       "slot": "Armament@primaryAAThunderbolt",
       "versus_templates": [
        "^Warhead_MissileAA_Light",
+       "^Projectile_Missile_AA",
        "RA2ThunderboltMissile"
       ],
       "warheads": [
@@ -12797,6 +12879,7 @@
       "slot": "Armament@primaryeliteAAThunderbolt",
       "versus_templates": [
        "^Warhead_MissileAA_Light",
+       "^Projectile_Missile_AA",
        "RA2ThunderboltMissile_elite"
       ],
       "warheads": [
@@ -12845,21 +12928,24 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "9255",
       "reloaddelay": "20",
       "requires": "ifv-miss && !rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@missileAA",
       "versus_templates": [
-       "^Warhead_MissileAA_Light_Flat",
+       "^Warhead_MissileAA_Light",
+       "^Projectile_Missile_AA",
        "^Warhead_MissileHE_Light_Flat",
        "^Projectile_Missile_Light",
        "^Effect_MissileHE_Light"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileAA_Light"
+      ],
       "weapon": "RA2MultiHoverMissile_AA",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "burst": "4",
@@ -12873,19 +12959,22 @@
        }
       ],
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": null,
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "10255",
       "reloaddelay": "20",
       "requires": "ifv-miss && rank-elite && !ra2_allies_upgrade_thunderboltmissiles",
       "slot": "Armament@missileeliteAA",
       "versus_templates": [
-       "^Warhead_MissileAA_Light_Flat",
+       "^Warhead_MissileAA_Light",
+       "^Projectile_Missile_AA",
        "RA2MultiHoverMissile_elite"
       ],
-      "warheads": [],
+      "warheads": [
+       "^Warhead_MissileAA_Light"
+      ],
       "weapon": "RA2MultiHoverMissile_AA_elite",
-      "weapon_class_source": "none"
+      "weapon_class_source": "template"
      },
      {
       "damage_warheads": [
@@ -12958,6 +13047,7 @@
       "slot": "Armament@missileAAThunderbolt",
       "versus_templates": [
        "^Warhead_MissileAA_Light",
+       "^Projectile_Missile_AA",
        "RA2MultiThunderboltMissile"
       ],
       "warheads": [
@@ -12986,6 +13076,7 @@
       "slot": "Armament@missileeliteAAThunderbolt",
       "versus_templates": [
        "^Warhead_MissileAA_Light",
+       "^Projectile_Missile_AA",
        "RA2MultiThunderboltMissile_elite"
       ],
       "warheads": [

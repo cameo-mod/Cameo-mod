@@ -477,6 +477,7 @@ steelconsortium_consortiumsentryturret:
 	WithSpriteTurret:
 		RequiresCondition: !build-incomplete
 	AutoTarget:
+		DynamicWeaponPriority: true
 	Power:
 		Amount: -35
 	RevealsShroud:
@@ -540,6 +541,7 @@ steelconsortium_antiairquantummissileturret:
 	WithSpriteTurret:
 		RequiresCondition: !build-incomplete
 	AutoTarget:
+		DynamicWeaponPriority: true
 	Power:
 		Amount: -45
 	RevealsShroud:
@@ -624,6 +626,7 @@ steelconsortium_quantumcannon:
 		RequiresCondition: !build-incomplete
 	WithRangeCircle:
 	AutoTarget:
+		DynamicWeaponPriority: true
 	DamageMultiplier@2x2Shape:
 		Modifier: 50
 	Power:

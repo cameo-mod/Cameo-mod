@@ -180,6 +180,7 @@ modant:
 		Locomotor: lighttracked
 	-Crushable:
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 25
 	AttackFrontal:
 		FacingTolerance: 0
@@ -752,6 +753,7 @@ defenseant:
 		TurnSpeed: 48
 	Crushable:
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 25
 	WithInfantryBody:
 		DefaultAttackSequence: bite
@@ -772,6 +774,7 @@ defenseant:
 	-MapEditorData:
 	-ActorLostNotification:
 	AutoTarget:
+		DynamicWeaponPriority: true
 		AllowMovement: false
 		InitialStanceAI: Defend
 		EnableStances: false
@@ -821,6 +824,7 @@ flyant:
 		Weapon: Spit_AA
 		LocalOffset: 384,0,0
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 15
 	AttackAircraft:
 		FacingTolerance: 80

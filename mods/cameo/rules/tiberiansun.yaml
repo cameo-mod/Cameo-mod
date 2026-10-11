@@ -474,6 +474,7 @@ TSE3:
 ^MutSWCreature:
 	RejectsOrders:
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 	KillsSelf:
 		Delay: 600
@@ -671,6 +672,7 @@ tsprobe:
 	Voiced:
 		VoiceSet: RobotTankVoice
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 40
 		RequiresCondition: autonomous
 		InitialStance: AttackAnything

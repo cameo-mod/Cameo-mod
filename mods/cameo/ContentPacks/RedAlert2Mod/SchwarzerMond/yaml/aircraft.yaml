@@ -55,6 +55,7 @@ schwarzermond_drone:
 	CarrierSlave:
 		LandingDistance: 8000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStanceAI: AttackAnything
 		InitialStance: AttackAnything
 	HasParent:
@@ -322,6 +323,7 @@ schwarzermond_blackbomb:
 	Armament@PRIMARY:
 		Weapon: DemoTruckTargeting
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: Defend
 		InitialStanceAI: AttackAnything
 		ScanRadius: 10

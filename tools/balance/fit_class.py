@@ -61,6 +61,7 @@ def pricing_armaments(unit):
             guard.get("reason", "pricing scope has no priced offensive armament")
         )
     live = [arm for arm in unit.get("armaments", []) if arm.get("pricing", True)
+            and not arm.get("unresolved")
             and formula.condition_holds_by_default(arm.get("requires"))]
     ground = [arm for arm in live if not is_anti_air_armament(arm)]
     return ground or live
@@ -117,14 +118,17 @@ def derived_dps_index(du):
     return idx
 
 
-def unit_inputs(u, du=None, use_k=False):
+def unit_inputs(u, du=None, use_k=True):
     """((hp, speed, range_wdist, dps, special, unit_class, tech_tier), fallbacks),
     or (None, 0) when the unit has no usable combat stats.
 
-    With use_k, each armament contributes its K-adjusted `effective_dps` from the
-    derived sidecar instead of raw damage/reload. Armaments the sidecar has no
-    entry for fall back to raw DPS and are COUNTED, so the report can state its
-    coverage rather than quietly mixing two units of measurement.
+    `use_k` defaults TRUE (PRICING-DEFAULT, maintainer ruling 2026-10-04): each
+    armament contributes its K-adjusted `effective_dps` from the derived sidecar
+    — accuracy, splash, falloff, range, dead zone and reachable targets already
+    folded in — instead of raw damage/reload. `use_k=False` restores the legacy
+    raw basis. Armaments the sidecar has no entry for fall back to raw DPS and
+    are COUNTED, so the report can state its coverage rather than quietly mixing
+    two units of measurement.
 
     The return shape is the same either way on purpose: a tuple that changes shape
     with a flag is exactly the kind of thing that silently misprices a roster.
@@ -355,9 +359,12 @@ def main() -> int:
                     "need not exist in game (Tiger-style baseline)")
     ap.add_argument("--actors", nargs="*", help="explicit member list "
                     "(otherwise: design.class_anchor == --class)")
-    ap.add_argument("--use-k", action="store_true",
-                    help="price on K-adjusted effective DPS (derived sidecar) "
-                         "instead of raw damage/reload (W11)")
+    ap.add_argument("--use-k", action="store_true", default=True,
+                    help="kept for explicitness; K-adjusted effective DPS is "
+                         "the default basis (PRICING-DEFAULT 2026-10-04)")
+    ap.add_argument("--raw", action="store_true",
+                    help="opt out of the default: price on raw damage/reload "
+                         "instead of K-adjusted effective DPS")
     ap.add_argument("--compare-k", action="store_true",
                     help="W11: price the class BOTH ways and write a comparison "
                          "report to docs/balance/derived/. Writes no candidate "
@@ -368,8 +375,12 @@ def main() -> int:
     if args.compare_k and args.spec:
         ap.error("--compare-k needs a real --anchor: a virtual --spec has no "
                  "armaments, so it has no K to compare")
-    if args.spec and args.use_k:
-        ap.error("--use-k requires a real anchor; a virtual model has no measured K")
+    # A --spec anchor is a nominal K=1 baseline by construction (see
+    # derive_virtual_anchor's `model` note), so K-adjusted member pricing against
+    # it is the designed default rather than an error. --raw keeps the legacy
+    # raw-DPS basis for both anchor forms.
+    use_k = not args.raw
+    args.use_k = use_k
     if args.spec:
         try:
             spec = virtual_spec(args.spec)

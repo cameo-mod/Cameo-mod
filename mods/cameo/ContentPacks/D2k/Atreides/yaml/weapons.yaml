@@ -75,7 +75,6 @@ OrniMissile:
 		MinimumLaunchAngle: -128
 		Inaccuracy: 666
 		Speed: 333
-		RangeLimit: 33333
 	-Warhead@MissileAP_Heavy:
 	-Warhead@1Dam:
 	Warhead@MissileHE_Heavy:
@@ -208,7 +207,6 @@ PhoenixRocket:
 	Projectile: Missile
 		Inaccuracy: 96
 		Speed: 256
-		RangeLimit: 4c512
 	Warhead@1Dam: SpreadDamage
 		Spread: 1c0
 		Damage: 7500

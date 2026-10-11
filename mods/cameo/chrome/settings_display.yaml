@@ -23,9 +23,9 @@ Container@DISPLAY_PANEL:
 							Font: TinyBold
 							Align: Center
 							Text: label-profile-section-header
-				Container@ROW:
+				Container@PROFILE_ROW:
 					Width: PARENT_WIDTH - 24
-					Height: 30
+					Height: 50
 					Children:
 						Container@PLAYER_CONTAINER:
 							X: 10
@@ -63,6 +63,51 @@ Container@DISPLAY_PANEL:
 											Y: 6
 											Width: PARENT_WIDTH - 35
 											Height: PARENT_HEIGHT - 12
+				Background@DISPLAY_SECTION_HEADER:
+					X: 5
+					Width: PARENT_WIDTH - 24 - 10
+					Height: 13
+					Background: separator
+					ClickThrough: True
+					Children:
+						Label@LABEL:
+							Width: PARENT_WIDTH
+							Height: PARENT_HEIGHT
+							Font: TinyBold
+							Align: Center
+							Text: label-display-section-header
+				Container@UI_THEME_ROW:
+					Width: PARENT_WIDTH - 24
+					Height: 50
+					Children:
+						Container@UI_THEME_CONTAINER:
+							X: 10
+							Width: PARENT_WIDTH / 2 - 20
+							Children:
+								Label@UI_THEME_DROP_DOWN_LABEL:
+									Width: PARENT_WIDTH
+									Height: 20
+									Font: Regular
+									Text: ui_theme_label
+								DropDownButton@UI_THEME_DROP_DOWN:
+									Y: 25
+									Width: PARENT_WIDTH
+									Height: 25
+									Font: Regular
+						Container@UI_THEME_HINT_CONTAINER:
+							X: PARENT_WIDTH / 2 + 10
+							Width: PARENT_WIDTH / 2 - 20
+							Children:
+								Label@UI_THEME_RESTART_HINT:
+									Y: 25
+									Width: PARENT_WIDTH
+									Height: 25
+									Font: Regular
+									Text: ui_theme_restart_hint
+				Container@CAMERA_ROW:
+					Width: PARENT_WIDTH - 24
+					Height: 50
+					Children:
 						Container@BATTLEFIELD_CAMERA_DROPDOWN_CONTAINER:
 							X: 10
 							Width: PARENT_WIDTH / 2 - 20
@@ -89,6 +134,10 @@ Container@DISPLAY_PANEL:
 									Width: PARENT_WIDTH
 									Height: 25
 									Font: Regular
+				Container@UI_SCALE_ROW:
+					Width: PARENT_WIDTH - 24
+					Height: 50
+					Children:
 						Container@UI_SCALE_DROPDOWN_CONTAINER:
 							X: 10
 							Width: PARENT_WIDTH / 2 - 20
@@ -116,18 +165,26 @@ Container@DISPLAY_PANEL:
 									Width: PARENT_WIDTH
 									Height: 25
 									Font: Regular
+				Container@CURSORDOUBLE_ROW:
+					Width: PARENT_WIDTH - 24
+					Height: 20
+					Children:
 						Container@CURSORDOUBLE_CHECKBOX_CONTAINER:
 							X: 10
-							Width: PARENT_WIDTH / 2 - 20
+							Width: PARENT_WIDTH - 20
 							Children:
 								Checkbox@CURSORDOUBLE_CHECKBOX:
 									Width: PARENT_WIDTH
 									Height: 20
 									Font: Regular
 									Text: checkbox-cursordouble-container
+				Container@PLAYER_STANCE_COLORS_ROW:
+					Width: PARENT_WIDTH - 24
+					Height: 20
+					Children:
 						Container@PLAYER_STANCE_COLORS_CHECKBOX_CONTAINER:
-							X: PARENT_WIDTH / 2 + 10
-							Width: PARENT_WIDTH / 2 - 20
+							X: 10
+							Width: PARENT_WIDTH - 20
 							Children:
 								Checkbox@PLAYER_STANCE_COLORS_CHECKBOX:
 									Width: PARENT_WIDTH
@@ -136,9 +193,13 @@ Container@DISPLAY_PANEL:
 									Text: checkbox-player-stance-colors-container.label
 									TooltipText: checkbox-player-stance-colors-container.tooltip
 									TooltipContainer: SETTINGS_TOOLTIP_CONTAINER
+				Container@UI_FEEDBACK_ROW:
+					Width: PARENT_WIDTH - 24
+					Height: 20
+					Children:
 						Container@UI_FEEDBACK_CHECKBOX_CONTAINER:
 							X: 10
-							Width: PARENT_WIDTH / 2 - 10
+							Width: PARENT_WIDTH - 20
 							Children:
 								Checkbox@UI_FEEDBACK_CHECKBOX:
 									Width: PARENT_WIDTH
@@ -147,9 +208,13 @@ Container@DISPLAY_PANEL:
 									Text: checkbox-ui-feedback-container.label
 									TooltipText: checkbox-ui-feedback-container.tooltip
 									TooltipContainer: SETTINGS_TOOLTIP_CONTAINER
+				Container@TRANSIENTS_ROW:
+					Width: PARENT_WIDTH - 24
+					Height: 20
+					Children:
 						Container@TRANSIENTS_CHECKBOX_CONTAINER:
-							X: PARENT_WIDTH / 2 + 10
-							Width: PARENT_WIDTH / 2 - 20
+							X: 10
+							Width: PARENT_WIDTH - 20
 							Children:
 								Checkbox@TRANSIENTS_CHECKBOX:
 									Width: PARENT_WIDTH
@@ -158,9 +223,13 @@ Container@DISPLAY_PANEL:
 									Text: checkbox-transients-container.label
 									TooltipText: checkbox-transients-container.tooltip
 									TooltipContainer: SETTINGS_TOOLTIP_CONTAINER
+				Container@FLASH_TRANSIENTS_ROW:
+					Width: PARENT_WIDTH - 24
+					Height: 20
+					Children:
 						Container@FLASH_TRANSIENTS_CHECKBOX_CONTAINER:
-							X: PARENT_WIDTH / 2 + 10
-							Width: PARENT_WIDTH / 2 - 20
+							X: 10
+							Width: PARENT_WIDTH - 20
 							Children:
 								Checkbox@FLASH_TRANSIENTS_CHECKBOX:
 									Width: PARENT_WIDTH
@@ -169,33 +238,49 @@ Container@DISPLAY_PANEL:
 									Text: checkbox_flash_transients_container.label
 									TooltipText: checkbox_flash_transients_container.tooltip
 									TooltipContainer: SETTINGS_TOOLTIP_CONTAINER
+				Container@PAUSE_SHELLMAP_ROW:
+					Width: PARENT_WIDTH - 24
+					Height: 20
+					Children:
 						Container@PAUSE_SHELLMAP_CHECKBOX_CONTAINER:
 							X: 10
-							Width: PARENT_WIDTH / 2 - 10
+							Width: PARENT_WIDTH - 20
 							Children:
 								Checkbox@PAUSE_SHELLMAP_CHECKBOX:
 									Width: PARENT_WIDTH
 									Height: 20
 									Font: Regular
 									Text: checkbox-pause-shellmap-container
+				Container@HIDE_REPLAY_CHAT_ROW:
+					Width: PARENT_WIDTH - 24
+					Height: 20
+					Children:
 						Container@HIDE_REPLAY_CHAT_CHECKBOX_CONTAINER:
-							X: PARENT_WIDTH / 2 + 10
-							Width: PARENT_WIDTH / 2 - 10
+							X: 10
+							Width: PARENT_WIDTH - 20
 							Children:
 								Checkbox@HIDE_REPLAY_CHAT_CHECKBOX:
 									Width: PARENT_WIDTH
 									Height: 20
 									Font: Regular
 									Text: checkbox-hide-replay-chat-container
+				Container@SELECTIONTOOLTIP_ROW:
+					Width: PARENT_WIDTH - 24
+					Height: 20
+					Children:
 						Container@SELECTIONTOOLTIP_CHECKBOX_CONTAINER:
 							X: 10
-							Width: PARENT_RIGHT / 2 - 10
+							Width: PARENT_WIDTH - 20
 							Children:
 								Checkbox@SELECTIONTOOLTIP_CHECKBOX:
-									Width: PARENT_RIGHT
+									Width: PARENT_WIDTH
 									Height: 20
 									Font: Regular
 									Text: Selected Unit Tooltip
+				Container@REMASTER_ART_ROW:
+					Width: PARENT_WIDTH - 24
+					Height: 20
+					Children:
 						Container@REMASTER_ART_CHECKBOX_CONTAINER:
 							X: 10
 							Width: PARENT_WIDTH - 20
@@ -207,6 +292,23 @@ Container@DISPLAY_PANEL:
 									Text: checkbox-remaster-art-container.label
 									TooltipText: checkbox-remaster-art-container.tooltip
 									TooltipContainer: SETTINGS_TOOLTIP_CONTAINER
+				Background@VIDEO_SECTION_HEADER:
+					X: 5
+					Width: PARENT_WIDTH - 24 - 10
+					Height: 13
+					Background: separator
+					ClickThrough: True
+					Children:
+						Label@LABEL:
+							Width: PARENT_WIDTH
+							Height: PARENT_HEIGHT
+							Font: TinyBold
+							Align: Center
+							Text: label-video-section-header
+				Container@VIDEO_MODE_ROW:
+					Width: PARENT_WIDTH - 24
+					Height: 50
+					Children:
 						Container@VIDEO_MODE_DROPDOWN_CONTAINER:
 							X: 10
 							Width: PARENT_WIDTH / 2 - 20
@@ -264,6 +366,10 @@ Container@DISPLAY_PANEL:
 									Height: 25
 									Font: Regular
 									Text: dropdownbutton-display-selection-container-dropdown
+				Container@FRAME_LIMIT_ROW:
+					Width: PARENT_WIDTH - 24
+					Height: 50
+					Children:
 						Container@FRAME_LIMIT_CHECKBOX_CONTAINER:
 							X: 10
 							Width: PARENT_WIDTH / 2 - 20
@@ -302,6 +408,10 @@ Container@DISPLAY_PANEL:
 									Height: 20
 									Font: Regular
 									Text: checkbox-frame-limit-gamespeed-container
+				Container@SPRITE_CACHE_ROW:
+					Width: PARENT_WIDTH - 24
+					Height: 20
+					Children:
 						Container@CROSSMAPSPRITECACHE_CHECKBOX_CONTAINER:
 							X: 10
 							Width: PARENT_WIDTH - 20
@@ -311,6 +421,10 @@ Container@DISPLAY_PANEL:
 									Height: 20
 									Font: Regular
 									Text: checkbox-cross-map-sprite-cache-container
+				Container@GL_LIGHTING_ROW:
+					Width: PARENT_WIDTH - 24
+					Height: 50
+					Children:
 						Container@GL_PROFILE_DROPDOWN_CONTAINER:
 							X: 10
 							Width: PARENT_WIDTH / 2 - 20
@@ -339,6 +453,10 @@ Container@DISPLAY_PANEL:
 									MinimumValue: 0.1
 									MaximumValue: 1.0
 									Ticks: 10
+				Container@LASER_GLOW_ROW:
+					Width: PARENT_WIDTH - 24
+					Height: 20
+					Children:
 						Container@LASER_GLOW_CHECKBOX_CONTAINER:
 							X: 10
 							Width: PARENT_WIDTH - 20
@@ -348,6 +466,10 @@ Container@DISPLAY_PANEL:
 									Height: 20
 									Font: Regular
 									Text: checkbox-laser-glow
+				Container@TANK_MUZZLE_FLASHES_ROW:
+					Width: PARENT_WIDTH - 24
+					Height: 20
+					Children:
 						Container@TANK_MUZZLE_FLASHES_CHECKBOX_CONTAINER:
 							X: 10
 							Width: PARENT_WIDTH - 20
@@ -357,6 +479,10 @@ Container@DISPLAY_PANEL:
 									Height: 20
 									Font: Regular
 									Text: checkbox-tank-muzzle-flashes
+				Container@HEAT_DISTORTION_ROW:
+					Width: PARENT_WIDTH - 24
+					Height: 20
+					Children:
 						Container@HEAT_DISTORTION_CHECKBOX_CONTAINER:
 							X: 10
 							Width: PARENT_WIDTH - 20
@@ -366,6 +492,10 @@ Container@DISPLAY_PANEL:
 									Height: 20
 									Font: Regular
 									Text: checkbox-heat-distortion
+				Container@SHOCKWAVE_ROW:
+					Width: PARENT_WIDTH - 24
+					Height: 20
+					Children:
 						Container@SHOCKWAVE_CHECKBOX_CONTAINER:
 							X: 10
 							Width: PARENT_WIDTH - 20
@@ -375,6 +505,10 @@ Container@DISPLAY_PANEL:
 									Height: 20
 									Font: Regular
 									Text: checkbox-shockwave
+				Container@SCREEN_SHAKE_ROW:
+					Width: PARENT_WIDTH - 24
+					Height: 20
+					Children:
 						Container@SCREEN_SHAKE_CHECKBOX_CONTAINER:
 							X: 10
 							Width: PARENT_WIDTH - 20
@@ -384,6 +518,10 @@ Container@DISPLAY_PANEL:
 									Height: 20
 									Font: Regular
 									Text: checkbox-screen-shake
+				Container@GROUND_FIRE_SMOKE_ROW:
+					Width: PARENT_WIDTH - 24
+					Height: 20
+					Children:
 						Container@GROUND_FIRE_SMOKE_CHECKBOX_CONTAINER:
 							X: 10
 							Width: PARENT_WIDTH - 20
@@ -393,6 +531,10 @@ Container@DISPLAY_PANEL:
 									Height: 20
 									Font: Regular
 									Text: checkbox-ground-fire-smoke
+				Container@RESTART_REQUIRED_ROW:
+					Width: PARENT_WIDTH - 24
+					Height: 20
+					Children:
 						Container@RESTART_REQUIRED_CONTAINER:
 							X: 10
 							Width: PARENT_WIDTH - 20
@@ -403,59 +545,3 @@ Container@DISPLAY_PANEL:
 									Font: Tiny
 									Text: label-restart-required-container-video-desc
 									Align: Center
-
-				Container@SPACER:
-				Background@DISPLAY_SECTION_HEADER:
-					X: 5
-					Width: PARENT_WIDTH - 24 - 10
-					Height: 13
-					Background: separator
-					ClickThrough: True
-					Children:
-						Label@LABEL:
-							Width: PARENT_WIDTH
-							Height: PARENT_HEIGHT
-							Font: TinyBold
-							Align: Center
-							Text: label-display-section-header
-				Container@UI_THEME_ROW:
-					Width: PARENT_WIDTH - 24
-					Height: 50
-					Children:
-						Container@UI_THEME_CONTAINER:
-							X: 10
-							Width: PARENT_WIDTH / 2 - 20
-							Children:
-								Label@UI_THEME_DROP_DOWN_LABEL:
-									Width: PARENT_WIDTH
-									Height: 20
-									Font: Regular
-									Text: ui_theme_label
-								DropDownButton@UI_THEME_DROP_DOWN:
-									Y: 25
-									Width: PARENT_WIDTH
-									Height: 25
-									Font: Regular
-						Container@UI_THEME_HINT_CONTAINER:
-							X: PARENT_WIDTH / 2 + 10
-							Width: PARENT_WIDTH / 2 - 20
-							Children:
-								Label@UI_THEME_RESTART_HINT:
-									Y: 25
-									Width: PARENT_WIDTH
-									Height: 25
-									Font: Regular
-									Text: ui_theme_restart_hint
-				Background@VIDEO_SECTION_HEADER:
-					X: 5
-					Width: PARENT_WIDTH - 24 - 10
-					Height: 13
-					Background: separator
-					ClickThrough: True
-					Children:
-						Label@LABEL:
-							Width: PARENT_WIDTH
-							Height: PARENT_HEIGHT
-							Font: TinyBold
-							Align: Center
-							Text: label-video-section-header

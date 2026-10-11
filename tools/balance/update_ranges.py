@@ -57,8 +57,21 @@ def load_anchors():
     return {k: v for k, v in data.items() if isinstance(v, dict) and "spec" in v}
 
 
-def unit_dps(u, fp_factor=None):
-    """Optional legacy factor applies only without resolved data."""
+def unit_dps(u, fp_factor=None, du=None, use_k=True):
+    """Optional legacy factor applies only without resolved data.
+
+    `use_k` defaults TRUE (PRICING-DEFAULT 2026-10-04): the solve prices on the
+    derived sidecar's K-adjusted `effective_dps` — accuracy, splash, range,
+    dead zone and reachable targets folded in — matching the canonical pricing
+    basis in fit_class. Armaments without a sidecar entry fall back to raw
+    damage/reload. `use_k=False` restores the legacy raw basis.
+    """
+    kidx = {}
+    if use_k:
+        for a in (du or {}).get("armaments", []):
+            v = fnum(a.get("effective_dps"))
+            if v is not None:
+                kidx[(a.get("slot"), a.get("weapon"))] = v
     total = 0.0
     for arm in u.get("armaments", []):
         if not priced_by_default(arm):
@@ -71,7 +84,9 @@ def unit_dps(u, fp_factor=None):
         bd = arm.get("burstdelays")
         fp = (fp_factor if fp_factor is not None and 'resolved_firepower_modifiers' not in u
               else armament_firepower(u, arm))
-        total += formula.dps(dmg, rd, burst, bd, fp)
+        keyed = kidx.get((arm.get("slot"), arm.get("weapon")))
+        total += (keyed * fp if keyed is not None
+                  else formula.dps(dmg, rd, burst, bd, fp))
     return total
 
 
@@ -90,12 +105,17 @@ def ensure_write_supported(doc, anchors, faction_filter):
                     'Anchor and replacement-armament range policies need review.')
 
 
-def process_ledger(path: pathlib.Path, anchors, faction_filter, confirm: bool):
+def process_ledger(path: pathlib.Path, anchors, faction_filter, confirm: bool,
+                   use_k: bool = True):
     doc = json.loads(path.read_text(encoding="utf-8"))
     if confirm:
         ensure_write_supported(doc, anchors, faction_filter)
     if faction_filter and faction_filter not in doc.get("ledger", ""):
         return 0
+    dpath = LEDGER_DIR / "derived" / path.name
+    ddoc = (json.loads(dpath.read_text(encoding="utf-8-sig"))
+            if dpath.is_file() else {})
+    dsec = ddoc.get("sections") or {}
     changes = 0
     for section, sec in doc.get("sections", {}).items():
         for aid, u in sec.items():
@@ -112,7 +132,8 @@ def process_ledger(path: pathlib.Path, anchors, faction_filter, confirm: bool):
             tech_tier = fnum(design.get("tech_tier")) or 1.0
             if None in (cost, hp, speed):
                 continue
-            dps_eff = unit_dps(u)
+            dps_eff = unit_dps(u, du=(dsec.get(section) or {}).get(aid),
+                             use_k=use_k)
             if dps_eff <= 0:
                 continue
             rng = formula.solve_class_baseline_range(
@@ -143,6 +164,9 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--confirm", action="store_true", help="write updated ledgers")
     ap.add_argument("--faction", help="ledger name substring filter")
+    ap.add_argument("--raw", action="store_true",
+                    help="opt out of the default K-adjusted effective-DPS "
+                         "basis and solve ranges on raw damage/reload")
     args = ap.parse_args()
 
     anchors = load_anchors()
@@ -155,7 +179,8 @@ def main() -> int:
     for jf in sorted(LEDGER_DIR.glob("*.json")):
         if jf.name == "class_anchors.json":
             continue
-        total += process_ledger(jf, anchors, args.faction, args.confirm)
+        total += process_ledger(jf, anchors, args.faction, args.confirm,
+                                use_k=not args.raw)
     if args.confirm:
         print(f"WROTE {total} range updates to ledgers")
     else:

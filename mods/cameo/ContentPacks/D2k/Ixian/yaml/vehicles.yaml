@@ -133,6 +133,7 @@ ixian_ixsiegetank:
 		Weapon: D2KUnitExplodeMed
 		EmptyWeapon: D2KUnitExplodeMed
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStanceAI: Defend
 	AmmoPool:
 		Ammo: 3
@@ -206,6 +207,7 @@ ixian_ixmissiletank:
 	AttackFrontal:
 		FacingTolerance: 0
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStanceAI: Defend
 	FireWarheadsOnDeath:
 		Weapon: D2KUnitExplodeMed
@@ -608,6 +610,7 @@ ixian_mongoose:
 	ChangesHealth@SelfHealing:
 		Step: 30
 	AutoTarget:
+		DynamicWeaponPriority: true
 	Armament@primary:
 		Weapon: MongooseRocket
 		LocalOffset: 128,0,512

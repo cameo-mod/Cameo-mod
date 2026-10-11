@@ -124,7 +124,7 @@ def read_appended_records(log_path: pathlib.Path, before_length: int) -> list[di
             record = json.loads(line)
         except json.JSONDecodeError as error:
             fail(f"appended situation log line {line_number} is not JSON: {error}", line)
-        if isinstance(record, dict) and record.get("kind") == "situation" and record.get("player") == "HardBot":
+        if isinstance(record, dict) and record.get("kind") == "situation" and record.get("bot_type") == "hard":
             records.append(record)
     return records
 
@@ -148,15 +148,15 @@ def assert_records(records: list[dict]) -> dict:
     for field in ("personality_candidate", "personality_current"):
         if not isinstance(latest.get(field), str) or not latest[field]:
             fail(f"latest HardBot record has empty {field}", latest)
-    if latest.get("main_target") != "Player":
-        fail("latest HardBot record main_target is not Player", latest)
+    if not isinstance(latest.get("main_target"), str) or not latest["main_target"].startswith("seat_"):
+        fail("latest HardBot record main_target is not an anonymous seat", latest)
 
     enemies = latest.get("enemies")
     if not isinstance(enemies, list):
         fail("latest HardBot record has no enemies array", latest)
-    player_enemy = next((enemy for enemy in enemies if enemy.get("name") == "Player"), None)
+    player_enemy = next((enemy for enemy in enemies if enemy.get("seat") == latest.get("main_target")), None)
     if player_enemy is None:
-        fail("latest HardBot record has no Player enemy entry", latest)
+        fail("latest HardBot record has no main-target enemy entry", latest)
     score = player_enemy.get("score")
     if not isinstance(score, (int, float)) or isinstance(score, bool) or not 0 < score < 1000:
         fail("latest Player enemy score is not strictly between 0 and 1000", latest)

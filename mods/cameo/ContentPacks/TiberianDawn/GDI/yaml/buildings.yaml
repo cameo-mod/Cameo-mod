@@ -276,6 +276,7 @@ td_gdi_advancedcommunicationscenter:
 	ProvidesPrerequisite@swlimit:
 		Prerequisite: ionc
 		RequiresCondition: ionc
+		RequiresPrerequisites: global-swlimit
 	ProvidesPrerequisite@techcenter:
 		Prerequisite: techcenter
 		RequiresCondition: !(powerdown || infiltrated)

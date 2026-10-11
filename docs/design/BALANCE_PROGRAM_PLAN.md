@@ -5,7 +5,7 @@
 
 `warhead_family_reach` measures **1,526 distinct fired weapon identities** whose
 transitive inheritance reaches a `^Warhead_*` family in the current PR340 source.
-(2026-09-23 resync, post-#438: `physical_state_fired_weapons` = **537**, `unconverted_template_inheritors` = **1163**.) **2026-09-23b (post-#456/#457 wave): `physical_state_fired_weapons` = 533, `unconverted_template_inheritors` = 827** — DAWN's W23 retrofit (#456) stripped most legacy template inherits; NOVA batch-2 (#457) landed the RA2Mod folds. **2026-09-24 (post-#476/#478): `physical_state_fired_weapons` = 542** — W7's Resonance meter feeds (`ApplyPhysicalState`/`PhysicalStates`) added meter-carrying warheads back onto fired weapons; the claim's `docs:` citation and `doc_claims.yaml` were resynced to the measured value in the same commit. **2026-09-24b (post-#490 merge wave): `physical_state_fired_weapons` = 544, `unconverted_template_inheritors` = 385.** **2026-09-26 (master `afb66c9b5` resync): `physical_state_fired_weapons` = 548, `unconverted_template_inheritors` = 390.** **2026-09-27 (`devin/nova/w7-packs` post-merge): `unconverted_template_inheritors` = 394** — W7 chain-collapse splices copy parent `Inherits:` edges into children, so four indirect reaches became direct inheritors (structural, not new legacy usage). **2026-09-27 (DAWN stack merge): `warhead_family_reach` = 1526, `unconverted_template_inheritors` = 391.** **2026-09-27b (#534+#516 combined tree): `warhead_family_reach` = 1509, `unconverted_template_inheritors` = 395.** **2026-09-27 (#534+#516 merged tree): `warhead_family_reach` = 1509, `unconverted_template_inheritors` = 395** (union of both branches' conversions; splice mechanics, not new legacy usage). **2026-09-28 (post-#252 Scrin pack, `5d7bbd6bd`): `physical_state_fired_weapons` = 549, `unconverted_template_inheritors` = 402.**
+(2026-09-23 resync, post-#438: `physical_state_fired_weapons` = **537**, `unconverted_template_inheritors` = **1163**.) **2026-09-23b (post-#456/#457 wave): `physical_state_fired_weapons` = 533, `unconverted_template_inheritors` = 827** — DAWN's W23 retrofit (#456) stripped most legacy template inherits; NOVA batch-2 (#457) landed the RA2Mod folds. **2026-09-24 (post-#476/#478): `physical_state_fired_weapons` = 542** — W7's Resonance meter feeds (`ApplyPhysicalState`/`PhysicalStates`) added meter-carrying warheads back onto fired weapons; the claim's `docs:` citation and `doc_claims.yaml` were resynced to the measured value in the same commit. **2026-09-24b (post-#490 merge wave): `physical_state_fired_weapons` = 544, `unconverted_template_inheritors` = 385.** **2026-09-26 (master `afb66c9b5` resync): `physical_state_fired_weapons` = 548, `unconverted_template_inheritors` = 390.** **2026-09-27 (`devin/nova/w7-packs` post-merge): `unconverted_template_inheritors` = 394** — W7 chain-collapse splices copy parent `Inherits:` edges into children, so four indirect reaches became direct inheritors (structural, not new legacy usage). **2026-09-27 (DAWN stack merge): `warhead_family_reach` = 1526, `unconverted_template_inheritors` = 391.** **2026-09-27b (#534+#516 combined tree): `warhead_family_reach` = 1509, `unconverted_template_inheritors` = 395.** **2026-09-27 (#534+#516 merged tree): `warhead_family_reach` = 1509, `unconverted_template_inheritors` = 395** (union of both branches' conversions; splice mechanics, not new legacy usage). **2026-09-28 (post-#252 Scrin pack, `5d7bbd6bd`): `physical_state_fired_weapons` = 549, `unconverted_template_inheritors` = 402.** **2026-10-06 (garrison + missile-feel increment merge): `warhead_family_reach` = 1510.**
 The registry's previous value was 1,415; it is updated upward to this measured
 count with the same predicate and zero tolerance. Ownership wrappers can expose
 more distinct fired identities for existing family payloads: this increase does
@@ -1142,7 +1142,7 @@ the max-meter uses remain.
 
 ---
 
-### W11 — Wire K into `fit_class.py` ✅ BUILT · ⬜ awaiting maintainer sign-off
+### W11 — Wire K into `fit_class.py` ✅ BUILT · ✅ sign-off received 2026-10-04 (default)
 
 W3/W4/W5 were all ✅ long before anyone re-read this line — the ⛔ was stale, which is
 why this sat "blocked" while its dependencies were done.
@@ -1154,6 +1154,15 @@ K is read from the sidecar, never recomputed, so there is one definition of it. 
 anchor is re-fitted in whichever mode is running — pricing members on K against an
 anchor fitted on raw DPS would compare two scales and make every delta meaningless.
 `--compare-k` deliberately writes **no candidate anchor**: it is a report, not a fit.
+
+**FLIPPED TO DEFAULT (PRICING-DEFAULT, maintainer ruling 2026-10-04):** K-adjusted
+`effective_dps` is now the DEFAULT basis in `fit_class.unit_inputs` and every
+consumer that goes through it (`check_band`, `anchor_readiness`, `fit_baseband`,
+`derive_virtual_anchor`), plus `propose_class_rebalance`, `update_ranges` and
+`propose_rebalance`. Each tool keeps `--raw` as the explicit opt-out, and
+`--use-k` stays accepted for script compatibility. The per-faction before/after
+evidence lives at `docs/balance/derived/pricing_default_delta.md`
+(`tools/balance/k_price_delta.py`, read-only — it changes no yaml or ledger).
 
 **⚠ TWO PIPELINE BUGS FOUND BY ACTUALLY RUNNING IT** — both pre-existing, both far more
 consequential than the flag:
@@ -1187,8 +1196,9 @@ maintainer already considers CORRECT, and checking whether K pulls those towards
 away from them.
 
 **VERIFY:** `python tools/balance/fit_class.py --class mbt --anchor naxis_tiger --compare-k`
-→ report in `docs/balance/derived/`, `class_anchors.json` untouched. Sign-off still owed
-in `anchor_decisions_log.md` before `--use-k` becomes the default.
+→ report in `docs/balance/derived/`, `class_anchors.json` untouched. The sign-off
+arrived as the PRICING-DEFAULT ruling (2026-10-04): K is now the default basis;
+record the flip in `anchor_decisions_log.md`.
 
 ---
 

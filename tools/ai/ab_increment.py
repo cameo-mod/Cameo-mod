@@ -523,7 +523,7 @@ def validate_groups(args: argparse.Namespace, arms: list[Arm]) -> None:
     import apply_increment_switches as applier
     if not applier.SPEC.is_file():
         fail(f"increment switch spec missing: {applier.SPEC}")
-    _, groups = applier.load_spec(applier.SPEC)
+    _, groups, needs = applier.load_spec(applier.SPEC)
     wanted: set[str] = set()
     for a in arms:
         if a.groups and a.groups != "all":
@@ -531,6 +531,14 @@ def validate_groups(args: argparse.Namespace, arms: list[Arm]) -> None:
     unknown = sorted(wanted - set(groups))
     if unknown:
         fail(f"unknown switch group(s) {unknown}; spec knows {list(groups)}")
+    for a in arms:
+        if not a.groups or a.groups == "all":
+            continue
+        arm_groups = {g.strip() for g in a.groups.split(",") if g.strip()}
+        for w in arm_groups:
+            unmet = [d for d in needs.get(w, []) if d not in arm_groups]
+            if unmet:
+                fail(f"switch group {w} needs {unmet} in the same arm (increment_switches.yaml needs: section)")
 
 
 def run_step(cmd: list, what: str, cwd: pathlib.Path | None = None, env: dict | None = None) -> None:

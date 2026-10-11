@@ -45,6 +45,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using OpenRA.Graphics;
+using OpenRA.Mods.CA;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Traits;
 using CAAIUtils = OpenRA.Mods.CA.AIUtils;
@@ -508,12 +509,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			highGroundBuilding.Clear();
 			highGroundSource.Clear();
 			highGroundCursor = -1;
-			highGroundRefreshTick = world.WorldTick + world.LocalRandom.Next(interval);
+			highGroundRefreshTick = world.WorldTick + BotRng.For(player, nameof(TacticalMapBotModule)).Next(interval);
 			highGroundLastBaseRef = null;
 			usefulChokepoints.Clear();
 			usefulBuilding.Clear();
 			usefulCursor = -1;
-			usefulNextRefreshTick = world.WorldTick + world.LocalRandom.Next(interval);
+			usefulNextRefreshTick = world.WorldTick + BotRng.For(player, nameof(TacticalMapBotModule)).Next(interval);
 			usefulLastBaseRef = null;
 			usefulLastEnemyCount = -1;
 			sealableCorridors.Clear();
@@ -522,7 +523,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			corridorCursor = -1;
 			corridorLastBaseRef = null;
 			corridorLastEnemyCount = -1;
-			corridorNextRefreshTick = world.WorldTick + world.LocalRandom.Next(interval);
+			corridorNextRefreshTick = world.WorldTick + BotRng.For(player, nameof(TacticalMapBotModule)).Next(interval);
 
 			// ZG-b belief caches: territory, doors and region owners were derived against the old cut's
 			// corridors and region ids (and the old fog-memory picture), so they are dropped and rebuilt
@@ -535,9 +536,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			horizon.Clear();
 			territoryLastBaseRef = null;
 			territoryLastEnemyCount = -1;
-			territoryNextRefreshTick = world.WorldTick + world.LocalRandom.Next(interval);
+			territoryNextRefreshTick = world.WorldTick + BotRng.For(player, nameof(TacticalMapBotModule)).Next(interval);
 			regionOwners = [];
-			regionOwnershipNextRefreshTick = world.WorldTick + world.LocalRandom.Next(interval);
+			regionOwnershipNextRefreshTick = world.WorldTick + BotRng.For(player, nameof(TacticalMapBotModule)).Next(interval);
 		}
 
 		// Adopt a shared topology built by another bot: reference the heavy data, copy the small lists.
@@ -882,12 +883,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var round = 0;
 
 			// Cheap insurance, not a tuning knob: dropping is monotone, so this terminates on its own -
-			// and it all happens once inside BuildOwnTopology, never per tick. One piece goes per round
-			// now, so the ceiling has to be the number of droppable pieces rather than a flat ten, which
-			// would have stopped the merge a tenth of the way through. Each extra round is one more
-			// full-map fill, paid once at map load.
-			var maxMergeRounds = pieces.Count + 1;
-
+			// and it all happens once inside BuildOwnTopology, never per tick. The ceiling is the number
+			// of pieces rather than a flat ten, which would have stopped the merge a tenth of the way
+			// through. Each extra round is one more full-map fill, paid once at map load.
 			for (; ; round++)
 			{
 				var barrier = new HashSet<CPos>();
@@ -898,7 +896,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				FloodRegions(barrier, cellToCorridorIndex, domainNodeCount);
 				regionBarrier = barrier;
 
-				if (minRegionSize == 0 || round >= maxMergeRounds - 1)
+				if (!RegionMergeEval.MergeContinues(minRegionSize, round, pieces.Count))
 					break;
 
 				// Every INDEPENDENT drop of the round at once. Dropping every qualifying piece together was
@@ -926,11 +924,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					if (touching.Count < 2)
 						continue;
 
-					var separated = int.MaxValue;
-					foreach (var id in touching)
-						separated = Math.Min(separated, regions[id].Size);
-
-					if (separated < minRegionSize)
+					var separated = RegionMergeEval.SmallestTouchingSize(touching.Select(id => regions[id].Size));
+					if (RegionMergeEval.IsMergeEligible(active[i], pieces[i].Droppable, touching.Count, separated, minRegionSize))
 						eligible.Add((i, separated, touching));
 				}
 
@@ -938,16 +933,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					break;
 
 				// Worst first, so where two genuinely do conflict the more urgent one goes this round and
-				// the other is re-measured in the next.
-				eligible.Sort((a, b) => a.Separated.CompareTo(b.Separated));
-
-				var claimed = new HashSet<int>();
-				foreach (var (index, _, touching) in eligible)
+				// the other is re-measured in the next; disjoint-claim batching inside.
+				foreach (var index in RegionMergeEval.SelectRoundDrops(eligible))
 				{
-					if (touching.Overlaps(claimed))
-						continue;
-
-					claimed.UnionWith(touching);
 					active[index] = false;
 					piecesDropped++;
 				}

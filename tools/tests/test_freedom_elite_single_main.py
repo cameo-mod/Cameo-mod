@@ -32,7 +32,13 @@ class FreedomEliteSingleMain(unittest.TestCase):
         self.assertEqual(mains[0].get('Damage'), '360000')
         self.assertEqual(mains[0].get('PercentageScale'), '0')
         for tag in ('Warhead@FlakWeaponPercentage', 'Warhead@ShrapnelWeaponPercentage'):
-            self.assertEqual(node_to_obj(before.child(tag)), node_to_obj(now.child(tag)))
+            old_obj, new_obj = node_to_obj(before.child(tag)), node_to_obj(now.child(tag))
+            # The armor-class expansion appended rows to every Versus table;
+            # the era rows must be preserved verbatim inside the wider table.
+            old_versus, new_versus = old_obj.pop('Versus'), new_obj.pop('Versus')
+            for armor, value in old_versus.items():
+                self.assertEqual(value, new_versus.get(armor), (tag, armor))
+            self.assertEqual(old_obj, new_obj, tag)
 
     def test_historical_restore_rejects_reordered_events(self):
         node = self.rules.resolve_weapon('RA2FreedomRocket_elite').deep_copy()
@@ -52,7 +58,10 @@ class FreedomEliteSingleMain(unittest.TestCase):
         self.assertEqual(new.get('Falloff'), '100, 50, 0')
         self.assertEqual(new.get('Damage'), '6000')
         self.assertEqual(new.get('PercentageDenominator'), '10000')
-        self.assertEqual(node_to_obj(old.child('PercentageVersus')), node_to_obj(new.child('Versus')))
+        old_versus = node_to_obj(old.child('PercentageVersus'))
+        new_versus = node_to_obj(new.child('Versus'))
+        for armor, value in old_versus.items():
+            self.assertEqual(value, new_versus.get(armor), armor)
         for ally in (False, True):
             old_outer = 64 * (50 if ally else 100) // 100
             new_outer = 33 * (50 if ally else 100) // 100

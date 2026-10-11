@@ -570,6 +570,7 @@ asianalliance_sentryflamer:
 	WithSpriteTurret:
 		RequiresCondition: !build-incomplete
 	AutoTarget:
+		DynamicWeaponPriority: true
 	Power:
 		Amount: -25
 	RevealsShroud:
@@ -626,6 +627,7 @@ asianalliance_cgpnch:
 	WithSpriteTurret:
 		RequiresCondition: !build-incomplete
 	AutoTarget:
+		DynamicWeaponPriority: true
 	Power:
 		Amount: -60
 	RevealsShroud:
@@ -805,6 +807,7 @@ asianalliance_chaostower:
 	WithSpriteTurret:
 		RequiresCondition: !build-incomplete
 	AutoTarget:
+		DynamicWeaponPriority: true
 	Power:
 		Amount: -50
 	RevealsShroud:
@@ -855,6 +858,7 @@ asianalliance_plasmacannon:
 		RequiresCondition: !build-incomplete
 	WithRangeCircle:
 	AutoTarget:
+		DynamicWeaponPriority: true
 	DamageMultiplier@2x2Shape:
 		Modifier: 50
 	Power:
@@ -905,6 +909,7 @@ asianalliance_hyperionprojector:
 	WithSpriteTurret:
 		RequiresCondition: !build-incomplete
 	AutoTarget:
+		DynamicWeaponPriority: true
 	Power:
 		Amount: -50
 	RevealsShroud:
@@ -957,6 +962,7 @@ asianalliance_spitfire:
 		RequiresCondition: !build-incomplete
 	WithRangeCircle:
 	AutoTarget:
+		DynamicWeaponPriority: true
 	DamageMultiplier@2x2Shape:
 		Modifier: 50
 	Power:

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Aggregate the record-only AI match log into per-matchup outcome tables.
 
-Reads the JSONL written by AiMatchLogWriter (schema 1) and reports, per
+Reads the JSONL written by AiMatchLogWriter (schema 3) and reports, per
 (bot faction x personality x enemy faction), how often that combination won.
 This is the OFFLINE half of the learning loop: the game never reads this
 output. Nothing here adjusts the bots; a human reviews the table and decides.
@@ -37,15 +37,13 @@ import sys
 from collections import defaultdict
 from pathlib import Path
 
-# Schema 2 adds player.composition[_switches|_timeline] and player.episode_timeline
-# ({tick, personality, composition, kills_cost, deaths_cost} boundaries, cumulative
-# snapshots) written by AiMatchLogWriter; schema-1 records aggregate as before.
-SCHEMAS = (1, 2)
+# Schema 3 uses anonymous seat keys throughout.
+SCHEMAS = (3,)
 
 # A record must have these top-level keys to be usable at all.
 REQUIRED_TOP = ("schema", "record_id", "duration_ticks", "player", "stats", "opponents", "allies")
-REQUIRED_PLAYER = ("faction", "bot_type", "handicap", "outcome", "personality")
-REQUIRED_OPPONENT = ("faction", "bot_type", "handicap", "outcome")
+REQUIRED_PLAYER = ("seat", "faction", "bot_type", "handicap", "outcome", "personality")
+REQUIRED_OPPONENT = ("seat", "faction", "outcome")
 
 
 def default_log_paths() -> list[Path]:
@@ -276,7 +274,7 @@ def aggregate(records: list[dict], min_ticks: int, skips: Skips):
             player["personality"],
             opponent["faction"],
             player["bot_type"],
-            opponent["bot_type"],
+            opponent.get("bot_type", ""),
             int(player.get("handicap") or 0),
             int(opponent.get("handicap") or 0),
         )
@@ -286,7 +284,7 @@ def aggregate(records: list[dict], min_ticks: int, skips: Skips):
         # in team games they could not be attributed to one opponent, so they
         # stay duel-only like the matchup table.
         ep_key_prefix = (player["faction"], opponent["faction"],
-                         player["bot_type"], opponent["bot_type"],
+                         player["bot_type"], opponent.get("bot_type", ""),
                          int(player.get("handicap") or 0), int(opponent.get("handicap") or 0))
         for personality, composition, ticks, kills, deaths in episodes_of(record):
             ecell = episodes[ep_key_prefix + (personality, composition)]

@@ -12,14 +12,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.Json;
 using NUnit.Framework;
 using OpenRA;
 using OpenRA.Mods.CA.Traits;
+using OpenRA.Mods.Cameo.Test.TestFixtures;
 using OpenRA.Mods.Cameo.Traits;
 using OpenRA.Mods.Cameo.Traits.BotModules;
+using OpenRA.Support;
 
 namespace OpenRA.Mods.Cameo.Test
 {
@@ -76,11 +77,11 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(doc.RootElement.GetProperty("enemies").GetArrayLength(), Is.Zero);
 			Assert.That(doc.RootElement.EnumerateObject().Select(p => p.Name), Is.EqualTo(new[]
 			{
-				"schema", "kind", "record_id", "game_uid", "map_uid", "player", "faction", "bot_type",
+				"schema", "kind", "record_id", "game_uid", "map_uid", "seat", "faction", "bot_type",
 				"tick", "urgency", "personality_current", "personality_candidate", "main_target",
 				"main_target_score", "mission", "mission_assignment", "hints", "demand", "own", "enemies"
 			}));
-			Assert.That(doc.RootElement.GetProperty("schema").GetInt32(), Is.EqualTo(2));
+			Assert.That(doc.RootElement.GetProperty("schema").GetInt32(), Is.EqualTo(3));
 			Assert.That(doc.RootElement.GetProperty("mission").ValueKind, Is.EqualTo(JsonValueKind.Null));
 			Assert.That(doc.RootElement.GetProperty("own").GetProperty("losses_by_role").EnumerateObject().Count(), Is.Zero);
 		}
@@ -133,7 +134,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(threat.GetProperty("eta").GetInt32(), Is.EqualTo(800));
 			Assert.That(threat.GetProperty("vx_per_kilotick").GetInt32(), Is.EqualTo(50));
 			var enemyJson = doc.RootElement.GetProperty("enemies")[0];
-			Assert.That(enemyJson.GetProperty("name").GetString(), Is.EqualTo("Multi1"));
+			Assert.That(enemyJson.GetProperty("seat").GetString(), Is.EqualTo("seat_2"));
 			Assert.That(enemyJson.GetProperty("faction").GetString(), Is.EqualTo("td_nod"));
 			Assert.That(enemyJson.GetProperty("army_value").GetInt32(), Is.EqualTo(8100));
 			Assert.That(enemyJson.GetProperty("buildings").GetInt32(), Is.EqualTo(9));
@@ -144,7 +145,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(doc.RootElement.GetProperty("mission").GetProperty("region_index").GetInt32(), Is.EqualTo(18));
 			Assert.That(enemyJson.EnumerateObject().Select(p => p.Name), Is.EqualTo(new[]
 			{
-				"name", "faction", "alive", "army_value", "infantry_value", "vehicle_value", "air_value",
+				"seat", "faction", "alive", "army_value", "infantry_value", "vehicle_value", "air_value",
 				"naval_value", "defence_count", "defence_value", "tech_buildings", "production_buildings",
 				"buildings", "expansion_clusters", "harvesters", "harvester_count", "known_regions",
 				"refineries", "pressure_value", "stealth_share", "nearest_cells", "last_seen_tick", "score",
@@ -706,6 +707,73 @@ namespace OpenRA.Mods.Cameo.Test
 					new[] { "personality-berserker" }, "personality-", pins));
 		}
 
+		// AR-2 (fleet orders 2026-10-04b): the initial personality draw is unconditional —
+		// exactly one SharedRandom call, pinned or not, so the shared stream cannot diverge
+		// on pin state. TotalCount is the engine's own sync-report counter.
+		[Test]
+		public void InitialPersonalityConsumesOneSharedRandomCallPinnedOrNot()
+		{
+			var conditions = new BotPersonalityControllerInfo().Conditions;
+			var prefix = new BotPersonalityControllerInfo().PersonalityPrefix;
+
+			var unpinned = new MersenneTwister(42);
+			var pinned = new MersenneTwister(42);
+			BotPersonalityController.ChooseInitialCondition(conditions, prefix, null, unpinned);
+			BotPersonalityController.ChooseInitialCondition(conditions, prefix, "turtle", pinned);
+
+			Assert.That(unpinned.TotalCount, Is.EqualTo(1));
+			Assert.That(pinned.TotalCount, Is.EqualTo(unpinned.TotalCount),
+				"pinned and unpinned clients must leave the shared stream aligned");
+		}
+
+		[Test]
+		public void InitialPersonalityIsDeterministicAcrossClients()
+		{
+			// The two-client equivalence: same seed, same inputs -> same condition on both.
+			var conditions = new BotPersonalityControllerInfo().Conditions;
+			var prefix = new BotPersonalityControllerInfo().PersonalityPrefix;
+			foreach (var pinned in new string[] { null, "rush", "turtle", "tech", "expansion", "steamroller", "guerrilla" })
+			{
+				var a = BotPersonalityController.ChooseInitialCondition(conditions, prefix, pinned, new MersenneTwister(7));
+				var b = BotPersonalityController.ChooseInitialCondition(conditions, prefix, pinned, new MersenneTwister(7));
+				Assert.That(a, Is.EqualTo(b), $"pin '{pinned}'");
+			}
+		}
+
+		[Test]
+		public void InitialPersonalityPinOverridesTheDraw()
+		{
+			var conditions = new BotPersonalityControllerInfo().Conditions;
+			var prefix = new BotPersonalityControllerInfo().PersonalityPrefix;
+			Assert.That(BotPersonalityController.ChooseInitialCondition(conditions, prefix, "rush", new MersenneTwister(42)),
+				Is.EqualTo("personality-rush"));
+		}
+
+		[Test]
+		public void InitialPersonalityPinMissFallsBackToTheDraw()
+		{
+			// A map may narrow Conditions so the pin names no offered personality —
+			// dead-but-legal config: the random draw stands (same rule the pin validation documents).
+			var conditions = new[] { "personality-rush" };
+			Assert.That(BotPersonalityController.ChooseInitialCondition(conditions, "personality-", "turtle", new MersenneTwister(42)),
+				Is.EqualTo("personality-rush"));
+		}
+
+		// AR-2 order path: the bandit pin is the only personality the host may put on the wire
+		// while it is in effect — one issue per sim second until the controller reflects it.
+		[Test]
+		public void BanditPinOrderReissuesUntilReflected()
+		{
+			Assert.That(MasterAiBotModule.BanditPinOrder("rush", "turtle", 1000, -25), Is.EqualTo("rush"));
+			Assert.That(MasterAiBotModule.BanditPinOrder("rush", "rush", 1000, -25), Is.Null,
+				"already reflected — nothing to put on the wire");
+			Assert.That(MasterAiBotModule.BanditPinOrder("rush", "turtle", 1000, 990), Is.Null,
+				"inside the one-per-second throttle window");
+			Assert.That(MasterAiBotModule.BanditPinOrder("rush", "turtle", 1000, 975), Is.EqualTo("rush"));
+			Assert.That(MasterAiBotModule.BanditPinOrder(null, "turtle", 1000, -25), Is.Null,
+				"no bandit pin — the candidate-switch path decides instead");
+		}
+
 		[TestCase("rush", "turtle", 1000, 1000 + 2999, false, 3000, 1000, false)]
 		[TestCase("rush", "turtle", 1001, 1000 + 3000, false, 3000, 1000, false)]
 		[TestCase("rush", "turtle", 1000, 1000 + 3000, false, 3000, 1000, true)]
@@ -930,7 +998,7 @@ namespace OpenRA.Mods.Cameo.Test
 					EconomyValue = value.Economy,
 					EverSeen = true
 				};
-			var enemy = (OpenRA.Player)RuntimeHelpers.GetUninitializedObject(typeof(OpenRA.Player));
+			var enemy = Uninitialized.Player();
 			regions.SetRegions(enemy, cells);
 			return (regions, enemy);
 		}
@@ -1009,25 +1077,23 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(MasterAiBotModule.ReservationActive(100, 1601, 1500), Is.False);
 		}
 
-		sealed class StubMissionProvider : IBotMissionProvider
-		{
-			public IReadOnlyList<BotMission> Missions { get; set; } = Array.Empty<BotMission>();
-			public void MissionTaken(BotMission mission) { }
-		}
-
 		[Test]
-		public void BestAffordableMissionUsesProviderAndPublishedOrder()
+		public void BestAffordableMissionUsesTheDeclaredPriorityOrdering()
 		{
-			var first = new BotMission { RequiredValue = 500, RegionIndex = 1 };
-			var second = new BotMission { RequiredValue = 100, RegionIndex = 2 };
-			var third = new BotMission { RequiredValue = 50, RegionIndex = 3 };
+			var first = new BotMission { RequiredValue = 500, RegionIndex = 1, Priority = 90 };
+			var second = new BotMission { RequiredValue = 100, RegionIndex = 2, Priority = 10 };
+			var third = new BotMission { RequiredValue = 50, RegionIndex = 3, Priority = 80 };
 			var providers = new[]
 			{
 				new StubMissionProvider { Missions = new[] { first, second } },
 				new StubMissionProvider { Missions = new[] { third } }
 			};
 
-			Assert.That(SquadManagerBotModuleCA.BestAffordableMission(providers, 100), Is.SameAs(second));
+			// AR-7: every enabled provider's cards compete on one ordering — Priority
+			// desc, RequiredValue asc, publish order. `first` is unaffordable; `third`
+			// outranks `second` despite sitting on a later provider (the old code
+			// silently yielded to provider order).
+			Assert.That(SquadManagerBotModuleCA.BestAffordableMission(providers, 100), Is.SameAs(third));
 			Assert.That(SquadManagerBotModuleCA.BestAffordableMission(providers, 25), Is.Null);
 		}
 

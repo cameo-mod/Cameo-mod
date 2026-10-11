@@ -20,6 +20,13 @@ the static gap between them:
      vs TryClaim/Preempt/Transfer sites.                                            WARN
   R6 dead knobs — `public readonly bool Use*`/`int Max*`/`FrozenSet|string HashSet<string>`
      Info fields never referenced outside their declaration.                       WARN
+  R7 provider precedence — every bot seam implemented by >1 loaded module type must
+     declare its merge semantics in PROVIDER_MERGES below; the consumers' code must
+     express it.                                                                 ERROR
+  R8 tick phases — the BotTick fan-out order is the resolved `Player` child order
+     (merged across every rules file, ContentPack ai.yaml included); every loaded
+     IBotTick module type must declare its layer in LAYER_OF, and a seam declared
+     in FRESH_EDGES must not read one tick late.                                 ERROR
 
 `--write` emits docs/design/AI_ARCH_COVERAGE.md (fully regenerated); `--check` exits 1 when that
 doc is stale or any ERROR finding exists. A missing `engine/` tree is tolerated: the
@@ -72,6 +79,7 @@ LAYER_OF = {
     "FransCombatIntelBotModule": "PERCEPTION",
     "FransMineClusterBotModule": "PERCEPTION",
     "FransRiskModelBotModule": "PERCEPTION",
+    "RadarContactsBotModule": "PERCEPTION",
     # SITUATION — BotSituation feeds, personality, utility axes, leads, counter-demand
     "BotCounterDemandController": "SITUATION",
     "BotPersonalityController": "SITUATION",
@@ -80,6 +88,8 @@ LAYER_OF = {
     "BotRoleSets": "SITUATION",
     "BotUnitRoles": "SITUATION",
     "SiegeEvaluatorBotModule": "SITUATION",
+    "RegionRolesBotModule": "SITUATION",
+    "ArmyStagingBotModule": "SITUATION",
     "FransEconomicSaturationBotModule": "SITUATION",
     # STRATEGY — master AI, director, team role split, expansion planner, mission providers
     "MasterAiBotModule": "STRATEGY",
@@ -91,6 +101,11 @@ LAYER_OF = {
     "FransCommanderCoreBotModule": "STRATEGY",
     "FransCommandBidBotModule": "STRATEGY",
     "PlanBanditBotModule": "STRATEGY",
+    "ScaleTargetsBotModule": "STRATEGY",
+    "BuildOrderKnobsBotModule": "STRATEGY",
+    "InMatchAdaptBotModule": "STRATEGY",
+    "ArmyFirstBotModule": "STRATEGY",
+    "BaseFrontBackPlannerBotModule": "STRATEGY",
     # EXECUTION — squad manager, mission consumers, engineers/capturers/garrison/repair,
     # crate/beacon, harvesters, MCV drivers, commanders
     "SquadManagerBotModuleCA": "EXECUTION",
@@ -104,11 +119,14 @@ LAYER_OF = {
     "CratePickupBotModule": "EXECUTION",
     "BeaconResponderBotModule": "EXECUTION",
     "DeployBotModule": "EXECUTION",
+    "GarrisonContestBotModule": "EXECUTION",
+    "PlugSpawnerBotModuleCA": "EXECUTION",
     "HarvesterBotModuleCA": "EXECUTION",
     "FransHarvesterBotModule": "EXECUTION",
     "McvExpansionManagerBotModule": "EXECUTION",
     "FransMcvExpansionManagerBotModule": "EXECUTION",
     "LoadCargoBotModule": "EXECUTION",
+    "LoadCargoBotModuleAS": "EXECUTION",
     "LoadGarrisonerBotModuleCA": "EXECUTION",
     "MinelayerBotModule": "EXECUTION",
     "FransMinelayerBotModule": "EXECUTION",
@@ -143,11 +161,138 @@ LAYER_OF = {
     "HumanPaceBotModule": "SUPPORT",
     # TELEMETRY — log writers, record sinks
     "AiMissionLogWriter": "TELEMETRY",
+    "EngagementLogBotModule": "TELEMETRY",
+    "EngagementPriorsBotModule": "TELEMETRY",
 }
 
 # ----------------------------------------------------------------------------- #
-# condition machinery
+# R7 declared provider merges
 # ----------------------------------------------------------------------------- #
+#
+# A seam consumed through `TraitsImplementing<I>` with more than one loaded provider
+# type is a shared decision surface: unless its merge is declared, consumers drift
+# into each picking their own (AR-5's sum-vs-max divergence) or silently depending
+# on trait order (AR-7). The declared kinds in use:
+#
+#   multicast      — every enabled provider is invoked/notified (lifecycle & sinks)
+#   union          — every enabled provider's values are concatenated
+#   any            — a boolean vote OR-ed across enabled providers
+#   max            — the largest enabled-provider reading wins
+#   first-enabled  — the first IsTraitEnabled() provider; providers are gate-disjoint
+#   first-non-null — first enabled provider publishing a non-null value
+#   priority-merge — all enabled providers' items compete on one shared ordering
+#
+# Add a row when mounting a second provider on a seam, or when a consumer changes
+# the declared semantics — the row is what the generated coverage doc prints.
+PROVIDER_MERGES = {
+    "IBotTick": "multicast (ModularBot ticks every enabled module)",
+    "IBotEnabled": "multicast (ModularBot notifies every enabled module)",
+    "IBotRespondToAttack": "multicast (ModularBot fans the event to every enabled module)",
+    "IBotPositionsUpdated": "multicast (every publisher's updates are consumed)",
+    "IBotNotifyIdleBaseUnits": "multicast (every publisher's idle-unit list is consumed)",
+    "IBotMissionOutcomeSink": "multicast (every sink is notified)",
+    "IBotCaptureClaimSource": "union (every enabled source's claim cells, arbitrated downstream by participant key)",
+    "IBotRequestPauseUnitProduction": "any (any enabled voter holds production)",
+    "IBotRegionThreatProvider": "max (BotRegionThreatMerge.MergedThreatAt over enabled providers)",
+    "IBotMissionProvider": "priority-merge (Priority desc, RequiredValue asc, publish order — BestAffordableMission/BestRaidForSteering)",
+    "IBotMissionAssignmentProvider": "first-non-null among enabled providers (personality-gated instances are disjoint)",
+    "IBotEnemyCompositionProvider": "first-enabled (observation providers are gate-disjoint; inc3_frans_services can co-mount)",
+    "IBotRequestUnitProduction": "first-enabled (genericbot vs fransbot builders are gate-disjoint)",
+    "IBotSuggestRefineryProduction": "first-enabled (CA vs Frans base builders are gate-disjoint)",
+    "IBotBaseExpansion": "first-enabled (CA vs Frans MCV expansion are gate-disjoint)",
+    "IBotUnitLeaseLost": "owner-matched dispatch (BotUnitLeaseRegistry calls a provider's LeaseLost only when its type name is the lost lease's previous owner)",
+}
+
+# ----------------------------------------------------------------------------- #
+# R8 tick phases (AR-10: sense -> decide -> act)
+# ----------------------------------------------------------------------------- #
+#
+# ModularBot ticks the player's IBotTick modules in resolved `Player` child order —
+# i.e. the merged yaml order across every rules file that adds a `Player` child
+# (ContentPack ai.yaml row-injection files load BEFORE mods/cameo/ai/ai.yaml, so the
+# leading positions come from whichever pack loads first, not from the central file).
+# That order decides the freshness of every provider read made inside BotTick: a
+# consumer positioned BEFORE its provider reads the provider's PREVIOUS BotTick
+# output — a one-tick-old snapshot. No seam today requires same-tick freshness:
+# everything publishes on its own cadence (25-125 ticks) and is consumed as a
+# snapshot, so one extra tick of lag is noise inside the cadence window.
+#
+# LAYER_OF is the phase declaration (PERCEPTION+SITUATION = sense, STRATEGY =
+# decide, EXECUTION+PRODUCTION = act, SUPPORT = infra, TELEMETRY = observe): every
+# loaded IBotTick type must appear in it (R8a). FRESH_EDGES declares the seams
+# that DO require same-tick freshness, if one is ever added (R8b) — the audit
+# errors when a declared fresh edge reads stale. The full tick order and the
+# computed stale-read table land in the generated coverage doc, so a reorder (in
+# the central yaml OR in a ContentPack include) cannot land silently: --check
+# fails until the doc is regenerated deliberately.
+#
+#   FRESH_EDGES: {(consumer, interface, provider), ...}
+#
+FRESH_EDGES = set()
+
+# Lifecycle/callback seams are fan-out, not BotTick state reads — freshness does not apply.
+R8_NOT_STATE_READS = {
+    "IBotTick", "IBotEnabled", "IBotRespondToAttack", "IBotPositionsUpdated",
+    "IBotNotifyIdleBaseUnits", "IBotMissionOutcomeSink", "IBot", "IBotInfo",
+    "IBotCA", "IBotCAInfo",
+}
+# Consumers that drive ticks or resolve providers at Activate, not inside BotTick.
+R8_NOT_TICKING = {"ModularBot", "Bot"}
+
+
+def tick_model(actors, loaded_rows, provides, consumers):
+    """Effective IBotTick order + the stale-read edge table.
+
+    tick_order: [(position, instance_key, type_name)] — resolved `Player` child
+    order, which is the BotTick fan-out order. stale: {(consumer, iface, provider,
+    consumer_pos, provider_pos)} — ticking consumers that tick before a ticking
+    provider they read (the read sees the previous tick's output). calltime:
+    {(consumer, iface, provider)} — ticking consumers of NON-ticking providers
+    (state is event- or call-computed, not tick-published; freshness N/A)."""
+    ipos, bpos = {}, {}
+    for i, key in enumerate(actors.get("Player", {})):
+        ipos[key] = i
+        base = key.split("@", 1)[0]
+        bpos[base] = min(i, bpos.get(base, i))
+
+    by_name = {}
+    for r in loaded_rows:
+        if not r["inst"]:
+            continue
+        yaml_key = r["inst"][0][1].split("@", 1)[0]
+        if yaml_key not in bpos:
+            continue
+        # A type's freshness position is its earliest instance: any instance
+        # ticking before a provider makes the read stale.
+        pvals = [ipos[k] for _, k, _ in r["inst"] if k in ipos]
+        if not pvals:
+            continue
+        by_name[r["name"]] = {"pos": min(pvals), "tick": "IBotTick" in r["impl"],
+                              "inst": r["inst"]}
+
+    tick_order = []
+    for name, m in by_name.items():
+        for _, ikey, _ in m["inst"]:
+            if ikey in ipos and m["tick"]:
+                tick_order.append((ipos[ikey], ikey, name))
+    tick_order.sort()
+
+    stale, calltime = set(), set()
+    for iface in set(provides) & set(consumers):
+        if iface in R8_NOT_STATE_READS:
+            continue
+        for c in consumers[iface]:
+            if c in R8_NOT_TICKING or not by_name.get(c, {}).get("tick"):
+                continue
+            for p in provides[iface]:
+                if p in R8_NOT_TICKING or p == c or p not in by_name:
+                    continue
+                if not by_name[p]["tick"]:
+                    calltime.add((c, iface, p))
+                    continue
+                if by_name[c]["pos"] < by_name[p]["pos"]:
+                    stale.add((c, iface, p, by_name[c]["pos"], by_name[p]["pos"]))
+    return tick_order, stale, calltime
 
 TERM = re.compile(r"[A-Za-z0-9_.\-]+")
 
@@ -213,7 +358,9 @@ def switch_spec():
     code path that applies the arms. Missing file -> no groups."""
     if not SWITCHES.is_file():
         return [], collections.OrderedDict()
-    return apply_increment_switches.load_spec(SWITCHES)
+    # load_spec also returns the co-arm `needs` map (harvest ledger P3); the audit reads groups only.
+    skip, groups, _ = apply_increment_switches.load_spec(SWITCHES)
+    return skip, groups
 
 
 # ----------------------------------------------------------------------------- #
@@ -424,8 +571,8 @@ def cs_corpus():
 # ----------------------------------------------------------------------------- #
 
 def audit():
-    classes, bot_interfaces = ai_module_map.scan_csharp()
-    rows, loaded_rows, provides, consumers, c1, c2, _c3, _c4 = ai_module_map.build()
+    classes, bot_interfaces, _helper_lookups = ai_module_map.scan_csharp()
+    rows, loaded_rows, provides, consumers, _helpers, c1, c2, _c3, _c4 = ai_module_map.build()
     rs, actors, loaded, granters, bot_types = load_yaml_side()
     skip, groups = switch_spec()
 
@@ -764,7 +911,52 @@ def audit():
         for f, fl in dead:
             findings.append(("R6", "WARN", f"`{f}` in {fl}: declared, never read anywhere"))
 
+    # ---- R7: provider precedence ------------------------------------------------
+    n_multi = 0
+    for i in sorted(provides):
+        ps = provides[i]
+        if len(ps) < 2:
+            continue
+        n_multi += 1
+        names = ", ".join(f"`{p}`" for p in sorted(ps))
+        merge = PROVIDER_MERGES.get(i)
+        if merge is None:
+            findings.append(("R7", "ERROR",
+                             f"`{i}` has {len(ps)} loaded providers ({names}) and no declared "
+                             "merge — add the semantics to PROVIDER_MERGES and make every "
+                             "consumer express it"))
+        else:
+            findings.append(("R7", "ok",
+                             f"`{i}` ({len(ps)} providers: {names}) — {merge}"))
+    for i, merge in sorted(PROVIDER_MERGES.items()):
+        if i in provides and len(provides[i]) >= 2:
+            continue  # already reported above
+        findings.append(("R7", "ok",
+                         f"`{i}` declared `{merge}` (single/no loaded provider today — "
+                         "row guards the day a second one mounts)"))
+
     # coverage rows: even a clean check states what it looked at
+    findings.append(("R7", "ok", f"{n_multi} multi-provider seams checked against PROVIDER_MERGES"))
+
+    # ---- R8: tick phases (sense -> decide -> act) -------------------------------
+    tick_order, stale_edges, calltime_edges = tick_model(actors, loaded_rows, provides, consumers)
+    for r in loaded_rows:
+        if "IBotTick" in r["impl"] and r["inst"] and r["name"] not in LAYER_OF:
+            findings.append(("R8", "ERROR",
+                             f"`{r['name']}` implements IBotTick but has no declared layer "
+                             "— add it to LAYER_OF (the tick-phase declaration)"))
+    for c, iface, p in sorted(FRESH_EDGES):
+        hit = next((e for e in stale_edges if e[0] == c and e[1] == iface and e[2] == p), None)
+        if hit is not None:
+            findings.append(("R8", "ERROR",
+                             f"FRESH_EDGES `{c}` reads `{iface}` from `{p}` one tick late "
+                             f"(tick {hit[3]} < {hit[4]}) — reorder the yaml or drop the "
+                             "freshness requirement"))
+    findings.append(("R8", "ok",
+                     f"{len(tick_order)} ticking instances in declared order; "
+                     f"{len(stale_edges)} last-tick read edges (documented in the doc), "
+                     f"{len(calltime_edges)} reads of call-time providers, "
+                     f"{len(FRESH_EDGES)} declared fresh edges"))
     n_armed = sum(1 for v in reachable_note.values() if v == "armed")
     findings.append(("R1", "ok", f"{n_gated} gated instances checked; {n_armed} dormant "
                                  "on master until their increment arm"))
@@ -778,6 +970,8 @@ def audit():
         "n_gated": n_gated, "n_targets": n_targets, "granters": granters,
         "arm_note": arm_note, "loaded_rows": loaded_rows, "rows": rows,
         "bot_type_names": bot_type_names,
+        "tick_order": tick_order, "stale_edges": stale_edges,
+        "calltime_edges": calltime_edges,
     }
 
 
@@ -844,17 +1038,55 @@ def render_doc(res):
     L.append("## Interface seams")
     L.append("")
     L.append("Each `IBot*` seam: who provides it, who consumes it. `STARVED` = consumed but no "
-             "loaded provider (R3/C1); `DEAD-END` = provided but no consumer (R3/C2).")
+             "loaded provider (R3/C1); `DEAD-END` = provided but no consumer (R3/C2). `Merge` = "
+             "the declared multi-provider semantics (R7 — `PROVIDER_MERGES` in "
+             "`tools/ai/ai_arch_audit.py`); a seam with >1 loaded provider and no declaration "
+             "fails the audit.")
     L.append("")
-    L.append("| Interface | Provided by | Consumed by | Status |")
-    L.append("|---|---|---|---|")
+    L.append("| Interface | Provided by | Consumed by | Merge | Status |")
+    L.append("|---|---|---|---|---|")
     provides, consumers = res["provides"], res["consumers"]
     for i in sorted(k for k in set(provides) | set(consumers)
                     if k in res["bot_interfaces"]):
         status = "STARVED" if i in res["c1"] else "DEAD-END" if i in res["c2"] else "ok"
         L.append(f"| `{i}` | {', '.join(f'`{x}`' for x in sorted(provides.get(i, []))) or '—'} "
                  f"| {', '.join(f'`{x}`' for x in sorted(consumers.get(i, []))) or '—'} "
-                 f"| {status} |")
+                 f"| {PROVIDER_MERGES.get(i, '—')} | {status} |")
+    L.append("")
+    L.append("## Tick order (sense → decide → act)")
+    L.append("")
+    L.append("`ModularBot` ticks each enabled `IBotTick` module in resolved `Player` child "
+             "order — the merged yaml order across EVERY rules file that adds a `Player` "
+             "child (each `ContentPacks/*/ai.yaml` row-injection file contributes; pack "
+             "files load before `mods/cameo/ai/ai.yaml`, so the leading positions belong to "
+             "whichever pack merges first — currently TiberianDawn). The contract: every "
+             "ticking module declares its layer in `LAYER_OF` (R8a — PERCEPTION+SITUATION "
+             "= sense, STRATEGY = decide, EXECUTION+PRODUCTION = act, SUPPORT = infra, "
+             "TELEMETRY = observe); a consumer positioned before its provider reads that "
+             "provider's previous-tick output, which is SAFE because every seam publishes "
+             "on its own cadence and is consumed as a snapshot (R8 documents the table; "
+             "`FRESH_EDGES` in `tools/ai/ai_arch_audit.py` declares any seam that ever "
+             "requires same-tick freshness).")
+    L.append("")
+    L.append("| # | Instance | Layer | Gate |")
+    L.append("|---|---|---|---|")
+    for pos, ikey, name in res["tick_order"]:
+        gate = next((g for _, k, g in res["modules"].get(name, {}).get("insts", [])
+                     if k == ikey), "")
+        L.append(f"| {pos} | `{ikey}` | {LAYER_OF.get(name, 'UNMAPPED')} | {gate or '—'} |")
+    L.append("")
+    L.append("### Last-tick read edges (documented, not violations)")
+    L.append("")
+    L.append("Each row: a `BotTick` consumer positioned BEFORE the `IBotTick` provider it "
+             "reads — the read sees the previous tick's publication. Reads of non-ticking "
+             "providers (call-time/event-computed state) are excluded.")
+    L.append("")
+    L.append("| Consumer | Interface | Provider | Ticks |")
+    L.append("|---|---|---|---|")
+    for c, iface, p, pc, pp in sorted(res["stale_edges"], key=lambda e: (e[0], e[1], e[2])):
+        L.append(f"| `{c}` | `{iface}` | `{p}` | {pc} < {pp} |")
+    if not res["stale_edges"]:
+        L.append("| — | — | — | — |")
     L.append("")
     L.append("## Order-issuer matrix")
     L.append("")

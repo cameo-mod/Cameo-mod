@@ -23,6 +23,11 @@ import math
 import pathlib
 import sys
 
+try:
+    from .insurance_summary import print_summary as print_insurance_summary
+except ImportError:
+    from insurance_summary import print_summary as print_insurance_summary
+
 
 def wilson(wins: int, n: int, z: float = 1.96) -> tuple[float, float]:
     if n == 0:
@@ -143,6 +148,7 @@ def main(argv: list[str]) -> int:
                     if isinstance(v, int):
                         health[bot]["gate"][k] += v
 
+    print_insurance_summary(paths, timestep)
     print(f"{len(games)} match(es)")
     print("| bot type | won | lost | draw | win rate | 95% interval | wins by side | mean length (ticks) |")
     print("|---|--:|--:|--:|--:|---|---|--:|")

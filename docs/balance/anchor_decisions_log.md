@@ -1168,6 +1168,22 @@ effective reload still 125 (RA1: ReloadDelay 100 + InitialChargeDelay 25). See.
 
 ---
 
+## ✅ PRICING-DEFAULT — K-adjusted `effective_dps` is the DEFAULT pricing basis (maintainer 2026-10-04)
+
+The W11 sign-off: accuracy/splash/range-adjusted effective damage becomes the DEFAULT
+pricing path. `fit_class.unit_inputs` and every consumer through it (`check_band`,
+`anchor_readiness`, `fit_baseband`, `derive_virtual_anchor`) now default to the derived
+sidecar's `effective_dps`; `propose_class_rebalance`, `update_ranges` and
+`propose_rebalance` were wired to the same basis. `--raw` opts back into the legacy
+raw damage/reload path everywhere for reproducibility; `--use-k` stays accepted.
+The anchor is always fitted in the same mode as its members. Per-faction before/after
+evidence: `docs/balance/derived/pricing_default_delta.md` (492 actors, median −1.5%,
+range −93%…+102%; read-only `tools/balance/k_price_delta.py`). No rules-yaml price
+was changed — prices stay where they are until the pipeline's normal review applies
+new ledger values.
+
+---
+
 ## 🔤 NAMING FIX — dropped umlauts (maintainer 2026-07-26) — BOOT-GATED, via rename tool
 
 Rule: umlauts transliterate to the base letter (ü→u, ö→o, ä→a, ß→ss). A roster scan (display-name

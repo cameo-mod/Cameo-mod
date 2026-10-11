@@ -33,9 +33,11 @@ RA2120_SELECTED = {
 RA2120_DESCENDANTS = RA2120_SELECTED - {"RA2120xmm"} | {
     "RA2120xmm_rad", "RA2120xmm_rad_elite",
 }
+# Live closure after the W7 de-parenting wave: the two AAGunBoat weapons lost
+# their weapon-to-weapon edge to RA2FlakTrackGun but remain pinned through
+# FLAK_BRANCH_PRESERVED_HASHES and the protected-role assertions.
 FLAK_DESCENDANTS = {
-    "AAGunBoatFlak", "AAGunBoatFlak_elite", "RA2FlakTrackAAGun",
-    "RA2FlakTrackAAGun_elite", "RA2FlakTrackGun_elite",
+    "RA2FlakTrackAAGun", "RA2FlakTrackAAGun_elite", "RA2FlakTrackGun_elite",
 }
 TESLA_ARMOR = {
     "TeslaArmorDischargeArc", "TeslaArmorDischargeFragment1",
@@ -73,32 +75,32 @@ SPECS = {
 # Hashes exclude only the selected ordinary mains.  They pin every percentage
 # companion and every projectile/effect/status/relationship descendant field.
 PRESERVED_HASHES = {
-    "RA2120xmm": "d67388638aee17cf11036eb137630243943cb637e83b660e7853604805fc7861",
-    "RA2120xmm_elite": "1c644e2f3d9935b4fe81566b7c48f08ace9dd5c5f645f4f6b3df09191f02df53",
-    "RA2120xmm_fire": "3009fc8b632319618c83c7b1f050001a524b89c869484f6a27a6966b34a7e75a",
-    "RA2120xmm_fire_elite": "5c549cbb86cc91046b5e93dda2d6c11e609b7c4253ea0666302f543823cbfc91",
-    "RA2120xmm_tesla": "0d9570cf658c1fde88d0fbbfad8430565710d500152878cc2d4c087d1efc9fc0",
-    "RA2120xmm_tesla_elite": "a538d971d04320c09efaf8cad970a5eee92daa89536e8ecfe75735693e085e1e",
-    "RA2FlakTrackGun": "efa8f008172e35f9330dbd4c33e3a04380f9a39135d15a564cd57a9564ceb5ef",
+    "RA2120xmm": "9aca747d2481825e76a335c6bcaa200908e0849db77005ecd5ac110266f91eda",
+    "RA2120xmm_elite": "a5d6eccc30f7149cf8c94acfd8a997bdb8d09fc5bc0f9e30a0932590cb2e2eee",
+    "RA2120xmm_fire": "bbbc91f4c0712947fd40c9e7aa569a9e0120d0c1f3900886abbcb7d5151f394f",
+    "RA2120xmm_fire_elite": "a96e88666b24619a3b1e44f82d40a056162376ef5cdf9d078dfcce1c1375c34d",
+    "RA2120xmm_tesla": "0998a3d8f5347f92e5c7ee1a8e20d015e9e207084f19faa1682c86bba00d7bf2",
+    "RA2120xmm_tesla_elite": "9c450162c7f5a805361af33d81fe5c16f32c0418a6940c56b107a9e288921ad4",
+    "RA2FlakTrackGun": "6adae7daf20a7040652e87a3a1dd236f7da9c83300a36d97b07387e27a6de983",
     "TSPulseCannon_EMP": "14e7fa57163f8d0dac0d00cbe93c884276c116bd35e6806c998c3266a3438197",
-    "TeslaArmorDischargeArc": "8f135ba858dbba4b8ea2c5f34fd53674f715a19675e04be3cacaa032c77ed05a",
-    "TeslaArmorDischargeFragment1": "89e58222b175e91a1159b794ec943c1bf77663d23f511419d71d2dc2bbee4ef1",
-    "TeslaArmorDischargeFragment2": "f60726e144e238cbf9ba289f1d4e40abdd41ee21d5bfb5063f8773634fec76f8",
+    "TeslaArmorDischargeArc": "548bed3215faaf5c8d43d088f9c802fb6858fe64bc6b804bd4213cb74b2beab2",
+    "TeslaArmorDischargeFragment1": "27c67e62918c543f05ae50825fdf6f90f618f8247d0294ed310070717b7911cd",
+    "TeslaArmorDischargeFragment2": "1c7196b61858c9bf38aa9687974850b322ca754ccb68c278c58ad33c629db639",
 }
 
 # These branches deliberately do not collapse with their parent.  Full resolved
 # hashes make the converter restore their routing/profile behavior exactly.
 BRANCH_HASHES = {
-    "RA2120xmm_rad": "d5fe7864b7d66a5e456103b497b5aff210a128b248f09a60c90955449e64a8a4",
-    "RA2120xmm_rad_elite": "82a22798e8c9f9785b51613dce5df897fc8b8a3d6ecc9f980035626d56919702",
-    "RA2FlakTrackAAGun": "1ad8c6319e39e5be189d96ce21b53ad5cd3f27ccef8db7cf0fbfae06885ae902",
-    "RA2FlakTrackAAGun_elite": "9ae7e8b0bda299b069740bf6ca3a93d8b542022cf7b0c9347c8603fc97ea70b1",
+    "RA2120xmm_rad": "c8df6ab7ef6f39bcba1eb5cdcd05e4e868ece9618048521212bd6adc27138337",
+    "RA2120xmm_rad_elite": "f8786f49119270f6945f0fc6c5871b75fc14a749fca15853dd408ee994e59cac",
+    "RA2FlakTrackAAGun": "620988f56a51068a1931dbe8df7dd41ed811728ba325d1acaca26c3a3198bc6d",
+    "RA2FlakTrackAAGun_elite": "190ce15e42f54a31d35bbc51d1a92b0c7988c8ffc1b35af8e5151ef7d63f1af1",
 }
 
 FLAK_BRANCH_PRESERVED_HASHES = {
-    "RA2FlakTrackGun_elite": "4a6bc47b3d2a677a2394c554caddbe678fccadcd532c6b70db51dc79705c1176",
-    "AAGunBoatFlak": "e0b8751f05235e6a9968f78adfa0a77c66009a1253c4fefdc3e858e6543f4575",
-    "AAGunBoatFlak_elite": "25cd1fb56eb643ac44d3072d097f6df10437c698f93e8ae92c1b1b2b3f1fd2dc",
+    "RA2FlakTrackGun_elite": "3733f8194ba951fc012a36d36fc5bb04d8de27a46d88e90232a59274d569c12c",
+    "AAGunBoatFlak": "89878bceaab33146e15e29111c81da5585750d2a0c5a56139c86b461e87757d5",
+    "AAGunBoatFlak_elite": "5f5d8ecb9f26d48fe860f559a5b56a28238291bfa24d0cf3baa46cffc0369d69",
 }
 
 

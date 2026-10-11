@@ -114,6 +114,7 @@ M16Laser:
 		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
 td_nod_samsite_dragon:
 	Inherits@w71: ^Warhead_MissileAA_Heavy
+	Inherits@projectileaa: ^Projectile_Missile_AA
 	Warhead@MissileAA_Heavy:
 		ValidTargets: Air
 		Damage: 12000
@@ -122,7 +123,6 @@ td_nod_samsite_dragon:
 	ReloadDelay: 40
 	Inherits@w72: ^Projectile_Missile_Heavy
 	Projectile: Missile
-		CloseEnough: 500
 		ContrailStartColor: FF884400
 		Acceleration: 5
 		HorizontalRateOfTurn: 25
@@ -138,6 +138,18 @@ td_nod_samsite_dragon:
 	Report: rocket2.aud
 	Burst: 2
 	BurstDelays: 10
+
+	Projectile: Missile
+		Inaccuracy: 150
+		HorizontalRateOfTurn: 25
+		VerticalRateOfTurn: 12
+		ContrailLength: 0
+		MaximumLaunchSpeed: 200
+		MinimumLaunchSpeed: 200
+		Speed: 500
+		Acceleration: 5
+		HomingActivationDelay: 3
+
 td_nod_rocketsoldier_rockets:
 	Inherits@w71: ^Warhead_MissileAP_Light
 	Inherits@w72: ^Projectile_Missile_Light
@@ -584,7 +596,6 @@ td_nod_reconbike_rocket:
 		AllowSnapping: true
 		Arm: 0
 		Blockable: false
-		CloseEnough: 600
 		ContrailEndColor: 000000FF
 		ContrailEndWidth: 100
 		ContrailLength: 0
@@ -598,7 +609,6 @@ td_nod_reconbike_rocket:
 		MaximumLaunchSpeed: 300
 		MinimumLaunchSpeed: 300
 		PointDefenseTypes: Missile
-		RangeLimit: 20000
 		Shadow: true
 		Speed: 600
 		TrailImage: smokey
@@ -901,7 +911,6 @@ td_nod_stealthtank_stealthtankmissilesshrapnel:
 		TrailImage: large_trail
 		Speed: 333
 		Acceleration: 3
-		RangeLimit: 33333
 		Inaccuracy: 333
 	Warhead@Flame_Light:
 		ValidTargets: Ground, Water, Air
@@ -1525,10 +1534,8 @@ Dragon:
 		TrailInterval: 1
 		MaximumLaunchSpeed: 200
 		MinimumLaunchSpeed: 200
-		CloseEnough: 500
 		Acceleration: 5
 		HomingActivationDelay: 3
-		RangeLimit: 30000
 		PointDefenseTypes: Missile
 		MinimumLaunchAngle: 75
 	Warhead@MissileAA_Heavy:
@@ -1604,7 +1611,6 @@ td_nod_chemicalrocketsoldier_chemrockets:
 		AllowSnapping: true
 		Arm: 0
 		Blockable: false
-		CloseEnough: 600
 		ContrailLength: 0
 		HomingActivationDelay: 1
 		HorizontalRateOfTurn: 40
@@ -1614,7 +1620,6 @@ td_nod_chemicalrocketsoldier_chemrockets:
 		MaximumLaunchSpeed: 300
 		MinimumLaunchSpeed: 300
 		PointDefenseTypes: Missile
-		RangeLimit: 20000
 		Shadow: true
 		Speed: 600
 		TrailInterval: 1
@@ -1894,14 +1899,12 @@ td_nod_chemicalrocketsoldier_chemrocketsexplosion:
 		TrailImage: spittrail
 		Speed: 600
 		Acceleration: 4
-		RangeLimit: 20000
 		Arm: 0
 		Blockable: false
 		Inaccuracy: 50
 		MinimumLaunchSpeed: 300
 		HorizontalRateOfTurn: 40
 		MaximumLaunchSpeed: 300
-		CloseEnough: 600
 		PointDefenseTypes: Missile
 		AllowSnapping: true
 		HomingActivationDelay: 1
@@ -1932,7 +1935,6 @@ td_nod_chemicalattackbike_chemicalbikerockets:
 		AllowSnapping: true
 		Arm: 0
 		Blockable: false
-		CloseEnough: 500
 		ContrailEndColor: 000000FF
 		ContrailEndWidth: 100
 		ContrailLength: 0
@@ -1946,7 +1948,6 @@ td_nod_chemicalattackbike_chemicalbikerockets:
 		MaximumLaunchSpeed: 250
 		MinimumLaunchSpeed: 250
 		PointDefenseTypes: Missile
-		RangeLimit: 25000
 		Shadow: true
 		Speed: 500
 		TrailInterval: 1
@@ -2142,7 +2143,6 @@ td_nod_chemicalattackbike_chemicalbikerocketsexplosion:
 		MaximumLaunchSpeed: 250
 		ContrailEndWidth: 100
 		ContrailZOffset: 4000
-		CloseEnough: 500
 		MinimumLaunchAngle: 75
 		MaximumLaunchAngle: 75
 		Image: DRAGON
@@ -2150,7 +2150,6 @@ td_nod_chemicalattackbike_chemicalbikerocketsexplosion:
 		TrailInterval: 1
 		ContrailEndColor: 000000FF
 		Speed: 500
-		RangeLimit: 25000
 		Blockable: false
 		Inaccuracy: 100
 		PointDefenseTypes: Missile
@@ -2344,7 +2343,6 @@ td_nod_chemicalstealthtank_chemicalstealthtankmissiles:
 		AllowSnapping: true
 		Arm: 0
 		Blockable: false
-		CloseEnough: 500
 		ContrailLength: 0
 		HomingActivationDelay: 2
 		HorizontalRateOfTurn: 30
@@ -2352,7 +2350,6 @@ td_nod_chemicalstealthtank_chemicalstealthtankmissiles:
 		MaximumLaunchSpeed: 250
 		MinimumLaunchSpeed: 250
 		PointDefenseTypes: Missile
-		RangeLimit: 25000
 		Shadow: true
 		Speed: 500
 		TrailInterval: 1
@@ -2504,14 +2501,12 @@ td_nod_chemicalstealthtank_chemicalstealthtankexplosion:
 		TrailImage: spittrail
 		Speed: 500
 		Acceleration: 3
-		RangeLimit: 25000
 		Arm: 0
 		Blockable: false
 		Inaccuracy: 100
 		MinimumLaunchSpeed: 250
 		HorizontalRateOfTurn: 30
 		MaximumLaunchSpeed: 250
-		CloseEnough: 500
 		PointDefenseTypes: Missile
 		AllowSnapping: true
 		HomingActivationDelay: 2
@@ -3554,7 +3549,6 @@ td_nod_stealthsoldier_bhreddarts:
 		AllowSnapping: true
 		Arm: 0
 		Blockable: false
-		CloseEnough: 500
 		ContrailEndWidth: 80
 		ContrailStartWidth: 40
 		ContrailZOffset: 4000
@@ -3564,7 +3558,6 @@ td_nod_stealthsoldier_bhreddarts:
 		MaximumLaunchSpeed: 250
 		MinimumLaunchSpeed: 250
 		PointDefenseTypes: Missile
-		RangeLimit: 25000
 		Shadow: true
 		Speed: 500
 		TrailInterval: 1
@@ -4094,7 +4087,6 @@ td_nod_attacksubmarine_nodtorptube:
 		Speed: 160
 		Acceleration: 1
 		HorizontalRateOfTurn: 8
-		RangeLimit: 16000
 		BoundToTerrainType: Water
 		Palette: cloak
 		MaximumLaunchAngle: 0
@@ -4125,7 +4117,6 @@ td_nod_attacksubmarine_nodtorptubeblackmarket:
 		Speed: 160
 		Acceleration: 1
 		HorizontalRateOfTurn: 8
-		RangeLimit: 16000
 		BoundToTerrainType: Water
 		Palette: cloak
 		MaximumLaunchAngle: 0
@@ -4159,7 +4150,6 @@ td_nod_lasercorvette_corvettedragon:
 		VerticalRateOfTurn: 24
 		Acceleration: 5
 		AllowSnapping: true
-		CloseEnough: 500
 	Warhead@MissileAP_Heavy:
 		Damage: 10000
 		Spread: 500

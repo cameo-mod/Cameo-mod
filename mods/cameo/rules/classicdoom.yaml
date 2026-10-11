@@ -837,6 +837,7 @@ wolfe1:
 	Health:
 		HP: 5000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: WolfenPistol
@@ -877,6 +878,7 @@ wolfe2:
 	Health:
 		HP: 15000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: WolfenSSPistol
@@ -917,6 +919,7 @@ wolfe3:
 	Health:
 		HP: 8500
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: WolfenMutantGun
@@ -959,6 +962,7 @@ wolfe4:
 	Health:
 		HP: 8000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: WolfenOficialPistol
@@ -1014,6 +1018,7 @@ wolffake:
 	Health:
 		HP: 5000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: FireballLauncher
@@ -1080,6 +1085,7 @@ wolfdog:
 	GrantConditionWhileAiming:
 		Condition: run
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 	AutoTargetPriority@DEFAULT:
 		ValidTargets: Infantry
@@ -1138,6 +1144,7 @@ wolfgroose:
 	Health:
 		HP: 35000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: WolfenGrooseMinigun
@@ -1182,6 +1189,7 @@ wolfgretel:
 	Health:
 		HP: 35000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: WolfenGrooseMinigun
@@ -1227,6 +1235,7 @@ wolfotto:
 	Health:
 		HP: 35000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: 227mm_stnk
@@ -1272,6 +1281,7 @@ wolfgasps:
 	Health:
 		HP: 35000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: WolfenGrooseMinigun
@@ -1323,6 +1333,7 @@ wolfhetler1:
 	Health:
 		HP: 75000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: WolfenMechaHetlerMinigun
@@ -1371,6 +1382,7 @@ wolfhetler2:
 	Health:
 		HP: 35000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: WolfenGrooseMinigun
@@ -1417,6 +1429,7 @@ wolfschabbs:
 	Health:
 		HP: 35000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: WolfenSchabbsMutate
@@ -1462,6 +1475,7 @@ wolftrans:
 	Health:
 		HP: 48000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: WolfenGrooseMinigun
@@ -1507,6 +1521,7 @@ wolfuber:
 	Health:
 		HP: 48000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: WolfenMechaHetlerMinigun
@@ -1551,6 +1566,7 @@ wolfknight:
 	Health:
 		HP: 55000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: WolfenMechaHetlerMinigun
@@ -1594,6 +1610,7 @@ wolfdemon:
 	Health:
 		HP: 35000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY: ########## Requires Doom Hell Baron Projectile
 		Weapon: FireballLauncher
@@ -2041,6 +2058,7 @@ doomguy.pistol:
 	Health:
 		HP: 7000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: DoomPistol

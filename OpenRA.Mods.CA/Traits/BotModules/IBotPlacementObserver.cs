@@ -20,8 +20,11 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>
 		/// A bot issued the placement order for <paramref name="actor"/> at <paramref name="cell"/>.
 		/// <paramref name="reason"/> is one of crawl, refinery_claim, base, defence, other; <paramref name="queuedTick"/> is the tick the
-		/// item entered production (the placed tick when that was not seen).
+		/// item entered production (the placed tick when that was not seen). <paramref name="frontBackClass"/> is the
+		/// front/back advisor's class label for the placed actor (BP-2, §19.15) — null when no advisor is active;
+		/// <paramref name="frontBackPick"/> carries the advisor's pick diagnostics when it claimed the cell.
 		/// </summary>
-		void BuildingPlaced(Player owner, int tick, string actor, CPos cell, string reason, int queuedTick);
+		void BuildingPlaced(Player owner, int tick, string actor, CPos cell, string reason, int queuedTick,
+			FrontBackClass? frontBackClass, FrontBackPick? frontBackPick);
 	}
 }

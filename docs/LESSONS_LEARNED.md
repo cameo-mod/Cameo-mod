@@ -11,6 +11,34 @@ add it to the Contents below: `audit_doc_health` D7 fails if the index misses on
 ---
 
 
+### 2026-10-08 — Devin: every FindTilesInAnnulus radius must respect MapGrid.MaximumTileSearchRange
+
+Playtest crash C1 (`ArgumentOutOfRangeException` on 'Imminent Destruction'): the front/back planner
+derived the approach annulus as `(FrontProj + depth)/coneCos + 1` = 71 and passed it straight to
+`FindTilesInAnnulus`, which throws above `MaximumTileSearchRange = 50` — and also when
+`minRange > maxRange`. Any derived search radius that grows with map geometry (a defence line that
+crawled outward, a map-size margin, a stride × factor) can exceed 50; constants like
+`BaseCrawlRadius = 50` are exactly AT the cap and legal, so audits of constants alone won't catch it.
+Fix pattern (`BaseFrontBackPlannerBotModule.ApproachSpace`): compute band bounds in `double`
+(promoting operands BEFORE `frontProj + depth` / `frontProj - 1` — int overflow and
+`(int)Math.Ceiling(Inf)+1` → `int.MinValue` wrap both fake legal ranges), use the exact annulus when
+the outer edge is `<= world.Map.Grid.MaximumTileSearchRange`, and beyond it enumerate the playable
+Chebyshev box of half-side `ceil(outer)` — a guaranteed superset, since `TilesByDistance` rings are
+Euclidean in CPos space on every grid (`i²+j² ≤ d²` ⇒ `|dx|,|dy| ≤ ceil(outer)`). Apply the same
+`map.Contains` playable filter the annulus default uses (raw `AllCells` spans the cordon and would
+inflate coverage). **The cell domain is grid-dependent**: `MapSize`/`[0, MapSize)` is the MPos
+*storage* domain — CPos itself only coincides with it on `MapGridType.Rectangular`. On
+`RectangularIsometric` `MPos.ToCPos` unwraps to `x = u + v/2`, `y = v/2 - u` (200×200 map:
+`M(100,100)→C(150,-50)`, `M(199,198)→C(298,-100)`), so a `[0, MapSize)` CPos clip silently drops
+real negative-Y / beyond-MapSize playable cells (Sol's v4 finding). Rectangular iterates the box ∩
+`[0, MapSize)` directly; any other grid enumerates `map.AllCells` — the engine's own MPos→CPos
+`CellRegion`, the true domain — filtered by the box and `map.Contains`. **A band past the cap is
+still real coverage** — clamping it away silently zeroes `frontUncoveredApproach` and the radar
+planner under-builds (review: Luna/Sol). Never degrade "not measurable" into "zero uncovered". Grep
+new code for `FindTilesInAnnulus` / `FindTilesInCircle` call sites whose radius isn't a bounded Info
+constant, and never assume CPos bounds follow MapSize — enumerate MPos→CPos for full-domain work.
+
+
 ### 2026-09-28 — Claude: actor ids are LOWERCASED at load — an uppercase id in a bot list never matches
 
 `Ruleset.cs:130` builds every actor as `new ActorInfo(..., k.Key.ToLowerInvariant(), ...)`, so the
@@ -194,6 +222,7 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 
 **Process, tooling and platform**
 
+- [Building and boot-gating in a Linux cloud container (2026-10-09)](#building-and-boot-gating-in-a-linux-cloud-container-2026-10-09)
 - [⛔ The pinned engine commit is NOT on `cameo-engine` — branch an engine change from the PIN (2026-09-29)](#-the-pinned-engine-commit-is-not-on-cameo-engine--branch-an-engine-change-from-the-pin-2026-09-29)
 - [Switching a worktree branch mid-batch corrupts the REST of the batch — yaml is re-read per match (2026-09-29)](#switching-a-worktree-branch-mid-batch-corrupts-the-rest-of-the-batch--yaml-is-re-read-per-match-2026-09-29)
 - [Never run a batch from the auto-synced main checkout — the 15-minute sync lands new yaml under old DLLs (2026-09-30, EMBER)](#never-run-a-batch-from-the-auto-synced-main-checkout--the-15-minute-sync-lands-new-yaml-under-old-dlls-2026-09-30-ember)
@@ -254,8 +283,31 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 - [⛔ git stash is SHARED by every worktree — never stash in this repo (2026-09-27)](#-git-stash-is-shared-by-every-worktree--never-stash-in-this-repo-2026-09-27)
 - [⛔ Editor writes to `GroundStatesCA.cs` are silently lost — verify C# edits with grep+stat (2026-09-27)](#-editor-writes-to-groundstatescacs-are-silently-lost--verify-c-edits-with-grepstat-2026-09-27)
 - [A faction rollout is not AI-complete until the central `*Types` lists carry its ids (2026-09-28)](#a-faction-rollout-is-not-ai-complete-until-the-central-types-lists-carry-its-ids-2026-09-28)
+- [Tooltip `BeforeRender` mutations persist between hovers — reset Visible/Text/Bounds every pass (2026-10-09, Devin)](#tooltip-beforerender-mutations-persist-between-hovers--reset-visibletextbounds-every-pass-2026-10-09-devin)
 
 ---
+
+## Building and boot-gating in a Linux cloud container (2026-10-09)
+
+On Windows the route is `make.cmd` → `all`, then `launch-game.cmd`, with the .NET 10 SDK installed (maintainer). A
+Claude Code cloud container is Ubuntu 24.04 with no `dotnet`, and the same route works through the SDK's POSIX twins
+once three obstacles are cleared (verified 2026-10-09 on master `5c8cfe04`, engine pin `331657f07a`):
+
+1. **SDK:** `dot.net/v1/dotnet-install.sh` is refused by the egress proxy (`builds.dotnet.microsoft.com`), but Ubuntu's
+   own archive carries it: `apt-get install -y dotnet-sdk-10.0` (10.0.112).
+2. **Engine fetch:** `make all` → `fetch-engine.sh` downloads the pin as a GitHub zipball, and the proxy returns an
+   error page instead of a zip ("End-of-central-directory signature not found"), which leaves an empty `engine/`.
+   `git` to github.com works, so fetch the **exact pin** and export it without `.git` (`engine/` must never hold
+   one): `git fetch --depth 1 origin <pin> && git archive <pin> | tar -x -C engine`, then
+   `(cd engine && make version VERSION=<pin>)` so `engine/VERSION` matches `mod.config`, then `make all` (0 errors,
+   ~1 min).
+3. **Boot gate without a display:** `ALSOFT_DRIVERS=null xvfb-run -a -s "-screen 0 1280x720x24" ./launch-game.sh
+   Engine.SupportDir=<fresh dir>`. It renders through Mesa llvmpipe and reached `MenuPostProcessEffect.PostWorldLoaded`
+   after ~57 s of loading, with no `exception-*.log` in the fresh support dir. The game stays at the menu, so bound it
+   with `timeout` and read `perf.log`.
+
+With `engine/` built, the generators work here too (`ai_module_map.py --check`, `ai_arch_audit.py --check`). The
+checkout is still shallow, so `run_all.sh` audit reports remain off-limits (CLAUDE.md rule 8).
 
 ## ⛔ The pinned engine commit is NOT on `cameo-engine` — branch an engine change from the PIN (2026-09-29)
 
@@ -1419,6 +1471,19 @@ cd engine && ./bin/OpenRA.exe Game.Mod=cameo Engine.EngineDir=".." \
 `Engine.LaunchPath` must point at the launcher script (the mod worktree), NOT `engine/bin` —
 the wrong path aborts with `Unknown or invalid mod 'cameo'` and a zero-byte perf.log.
 Always confirm `perf.log` has a FRESH timestamp before trusting the menu line.
+
+#### After `PostWorldLoaded`, kill the REAL game process — not the wrapper (2026-10-07)
+
+`OpenRA.WindowsLauncher.exe` (and `launch-game.cmd`) spawn the game as a **child**
+process; the `cmd`/launcher handle you started can exit while the game keeps sitting
+at the main menu — a 4.5 GB working set per leftover instance. During a shared RAM
+window, repeated gates left several instances alive until teammates killed them on
+maintainer instruction. The recipe: poll `perf.log` for
+`MenuPostProcessEffect.PostWorldLoaded`, then `tasklist /FI "IMAGENAME eq
+OpenRA.WindowsLauncher.exe"` (or `OpenRA.exe`) and `taskkill /PID` the instance whose
+`(Get-Process …).Path` matches YOUR worktree — never kill by the handle you launched,
+and never leave the menu standing open. A "process exited" reading on the wrapper
+says nothing about the game child.
 
 ## The canonical engine update pipeline (binding, uniform process)
 
@@ -3255,6 +3320,25 @@ looked finished and passed weaker gates:
 strict-removal replay over the OUTPUT files, (c) the boot gate — each catches a class the others
 miss.
 
+## `FrozenActor.Actor` is live-backed — fog-honest code must read the snapshot, never the backing (2026-10-06, Devin)
+
+`FrozenActorLayer` hands out the live backing actor via `fa.Actor` for as long as the real unit
+still lives; it flips to null when the hidden actor dies/disposes. Bot code that reads
+`fa.Actor.TraitOrDefault<...>` under fog leaks the difference between "actor still alive" and
+"actor gone" — Sol's probe killed the backing under fog and watched `blocked_cells` flip 0->1 on
+an unchanged frozen record. The remembered facts are `fa.IsValid` (record intact), `fa.Hidden`
+(masked at last sight — skip), `fa.Info`, `fa.Owner`, `fa.Footprint`: rebuild exemptions
+(removable/crushable/transit-only) from THOSE, and gate the recorded relationship on
+`fa.Owner` — never on live trait state.
+
+The twin trap: `Shroud.IsVisible(cell)` is CELL visibility, not actor legality — a cloaked or
+otherwise hidden actor on lit ground is still unknown. Use `other.CanBeViewedByPlayer(player)`.
+
+**Rule:** for frozen records use only immutable remembered facts (`Info`, `Owner`, `Footprint`);
+`fa.Actor` may be touched only by code that is allowed to know the actor is alive right now.
+For live ActorMap occupants, per-actor `CanBeViewedByPlayer` is the visibility test — a lit
+cell does not reveal a hidden actor on it. (ECON-A-FIX2, `BaseBuilderBotModuleCA.FrozenBlockedCells`.)
+
 ## `launch-game.cmd` fails from Git Bash — GNU `find` shadows Windows `find.exe` (2026-10-02, EMBER)
 
 The batch file's `find %ENGINE_VERSION% %ENGINE_DIRECTORY%\VERSION` check resolves `find`
@@ -3262,3 +3346,38 @@ against PATH; under Git Bash that's GNU find, which treats the hash as a path
 (`find: 'd5d8b2a…': No such file or directory`) and the launcher exits with "Required
 engine files not found" even when `engine/` is fine. Run the batch via PowerShell/cmd, or
 launch `engine\bin\OpenRA.exe` directly as WORKFLOW.md already prescribes.
+
+## Tooltip `BeforeRender` mutations persist between hovers — reset Visible/Text/Bounds every pass (2026-10-09, Devin)
+
+`TooltipContainerWidget` invokes the tooltip logic's `BeforeRender` on every hovered frame;
+Cameo's logics early-return when `lastUnit` is unchanged, so `Text`/`Visible`/`Bounds` written for
+unit A carry into unit B unless explicitly reset. Playtest B4/B5 were this defect class:
+
+- `extrasLabel.Visible = true` was set when extras existed but never cleared — the stale extras
+  line (e.g. queue-efficiency text) then rendered for later hovers, drawn beneath a box sized for
+  the CURRENT content. Same class hit both `ArmyTooltipCameoLogic` and `ActorIconTooltipCameoLogic`.
+- `descLabel.Bounds.Y += extraSize.Y` accumulated across hover targets — each new hover pushed the
+  description lower forever. Capture the baseline Y once and re-assign from it; never `+=` a
+  mutable widget origin.
+- `BuildableInfo.GetTraitForQueue(...)`, `TraitInfos<TooltipInfo>().FirstOrDefault().Name` and
+  `buildable.Description` are all null inside `BeforeRender` for cross-queue/non-buildable
+  palette items — the null deref threw and the whole tooltip failed to appear (intermittent
+  hover absence). Every trait/`BuildableInfo` lookup in that path needs a null-guarded fallback.
+- The width aggregate must include EVERY measured label (`extraSize.X` among them) —
+  `Math.Max(name, desc)` alone let long extras escape the right edge.
+- `ProductionPaletteWidget.TooltipIcon` is only written on `MouseInputEvent.Move`, but
+  `RefreshIcons()` rebuilds the `icons` dictionary every `Tick`. A queued cell shifting
+  under a stationary cursor (item completes, buildables appear/disappear, scroll) leaves
+  `TooltipIcon` bound to a removed `ProductionIcon` — the tooltip then shows the wrong
+  unit or nothing until the pointer moves. `QuotaProductionPaletteWidget` now resolves
+  `GetTooltipIcon` live against `Viewport.LastMousePos`, matching `DrawHoverHeader`.
+
+Rule: in tooltip `BeforeRender`, re-assign `Visible`, `Text` and `Bounds` from captured baselines
+on every pass, feed every measured label into the parent bounds aggregate, and null-guard every
+trait lookup — an exception there kills the tooltip silently, and stale widget state leaks across
+hover targets. And when a widget rebuilds its hit-test map every tick, resolve the hovered item
+against the cursor at read time — a Move-event snapshot goes stale the next refresh.
+
+Scope note: this entry covers palette/icon tooltip absence and stale-layout defects only.
+The world-hover absence (hovering a live world actor yields no tooltip at all) is NOT explained
+by this fix and stays explicitly unresolved pending in-game evidence.

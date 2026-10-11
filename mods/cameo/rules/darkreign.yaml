@@ -1684,6 +1684,7 @@ drguardian:
 	Health:
 		HP: 10000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: DRLaserPistol
@@ -1729,6 +1730,7 @@ drbion:
 	Armor:
 		Type: Wood
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@AG:
 		Weapon: DRBionWeapon
@@ -1777,6 +1779,7 @@ drext:
 	Health:
 		HP: 12000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 5
 	Armament@PRIMARY:
 		Weapon: DRPolyGrenade
@@ -2002,6 +2005,7 @@ dramp:
 		FacingTolerance: 0
 	-WithFacingSpriteBody:
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 	AutoTargetPriority@DEFAULT:
 		ValidTargets: Infantry, plagued
@@ -2206,6 +2210,7 @@ drscarab:
 		FacingTolerance: 0
 	WithMuzzleOverlay:
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStanceAI: Defend
 	Explodes:
 		Weapon: ArtilleryShell
@@ -2609,6 +2614,7 @@ drcyclone:
 		LocalOffset: 128,-213,-85, 128,213,-85
 		PauseOnCondition: !ammo
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	AttackAircraft:
 		FacingTolerance: 80
@@ -2659,6 +2665,7 @@ drskyfort:
 		LocalOffset: 128,-213,-85, 128,213,-85
 		PauseOnCondition: !ammo
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	AttackAircraft:
 		FacingTolerance: 80
@@ -3604,6 +3611,7 @@ drraid:
 	Health:
 		HP: 8000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: DRLaserPistol
@@ -3706,6 +3714,7 @@ drmercenary:
 	Health:
 		HP: 25000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: DRPortableRailgun
@@ -3758,6 +3767,7 @@ drsnipe:
 	Health:
 		HP: 8000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: DRSniperRifle
@@ -3811,6 +3821,7 @@ drmartyr:
 	Health:
 		HP: 25000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: DRSuicideBomb
@@ -3856,6 +3867,7 @@ drsabot:
 	Health:
 		HP: 8000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@c4:
 		Weapon: DRSabouteurAttach
@@ -3922,6 +3934,7 @@ drmech:
 	Voiced:
 		VoiceSet: DRMechanicVoice
 	AutoTarget:
+		DynamicWeaponPriority: true
 	AutoTargetPriority@DEFAULT:
 		ValidTargets: Vehicle, lockdowned, ivanattached
 	RenderSprites:
@@ -3961,6 +3974,7 @@ drmedi:
 	Voiced:
 		VoiceSet: DRMedicVoice
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 	AutoTargetPriority@DEFAULT:
 		ValidTargets: Infantry, plagued
@@ -3989,6 +4003,7 @@ drjebradec:
 	Health:
 		HP: 15000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 7
 	Armament@PRIMARY:
 		Weapon: DRJebRadecRifle
@@ -4229,6 +4244,7 @@ drarty:
 		FacingTolerance: 0
 	WithMuzzleOverlay:
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStanceAI: Defend
 	Explodes:
 		Weapon: ArtilleryShell
@@ -4456,6 +4472,7 @@ drjack:
 	Health:
 		HP: 15000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 6
 	Armament@PRIMARY:
 		Weapon: DRMetalFragments
@@ -4595,6 +4612,7 @@ drskybike:
 		Weapon: DRSkyBikeMissile
 		PauseOnCondition: !ammo
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	AttackAircraft:
 		FacingTolerance: 80
@@ -4647,6 +4665,7 @@ droutrider:
 		Weapon: DROutriderMissiles
 		PauseOnCondition: !ammo
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	AttackAircraft:
 		FacingTolerance: 80
@@ -5176,6 +5195,7 @@ drreaper:
 	Health:
 		HP: 12000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 6
 	Armament@PRIMARY:
 		Weapon: DRReaperWeapon
@@ -5399,6 +5419,7 @@ drhades:
 		LocalOffset: 128,-213,-85, 128,213,-85
 		PauseOnCondition: !ammo
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	AttackAircraft:
 		FacingTolerance: 80
@@ -5449,6 +5470,7 @@ drempdisable:
 		LocalOffset: 128,-213,-85, 128,213,-85
 		PauseOnCondition: !ammo
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	AttackAircraft:
 		FacingTolerance: 80
@@ -5797,6 +5819,7 @@ drtrainer:
 	Health:
 		HP: 7500
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: DRTrainerAnimalControl
@@ -6137,6 +6160,7 @@ dravenger:
 		Weapon: DRAvengerBomb
 		PauseOnCondition: !ammo
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	AttackAircraft:
 		FacingTolerance: 80
@@ -6748,6 +6772,7 @@ drshok:
 	Health:
 		HP: 9000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: DRShokPistol
@@ -6791,6 +6816,7 @@ drbiocontrol:
 	Armor:
 		Type: Wood
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@AG:
 		Weapon: DRBioConntrolEnergy
@@ -7844,6 +7870,7 @@ drrasta:
 	Health:
 		HP: 10000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: DRRastaLaser
@@ -7897,6 +7924,7 @@ drjailbrk:
 	Health:
 		HP: 20000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: DRRastaLaser2
@@ -7948,6 +7976,7 @@ drfatso:
 	Health:
 		HP: 30000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: DRRastaLaser2
@@ -8250,6 +8279,7 @@ drtarty:
 		FacingTolerance: 0
 	WithMuzzleOverlay:
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStanceAI: Defend
 	Explodes:
 		Weapon: ArtilleryShell
@@ -8358,6 +8388,7 @@ drspiner:
 		Weapon: DRSpinnerLaserAA
 		PauseOnCondition: !ammo
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	AttackAircraft:
 		FacingTolerance: 80
@@ -9212,6 +9243,7 @@ drramnoth:
 	Health:
 		HP: 8000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: DRLaserPistol
@@ -9251,6 +9283,7 @@ drmamnoth:
 	Health:
 		HP: 8000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: DRGeminisLightLaser
@@ -9293,6 +9326,7 @@ drrelmnoth:
 	Health:
 		HP: 12000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 5
 	Armament@PRIMARY:
 		Weapon: DRSpiderBikeRailgun
@@ -9778,6 +9812,7 @@ drlynoth:
 		Weapon: DRSkyBikeMissile
 		PauseOnCondition: !ammo
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	AttackAircraft:
 		FacingTolerance: 80
@@ -9839,6 +9874,7 @@ drcarrier:
 		Weapon: DRReaperWeapon
 		LocalOffset: 128,-213,-85, 128,213,-85
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	AttackAircraft:
 		FacingTolerance: 80
@@ -9952,6 +9988,7 @@ drblazer:
 		Weapon: DRBioConntrolEnergy
 		PauseOnCondition: !ammo
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	AttackAircraft:
 		FacingTolerance: 80
@@ -10006,6 +10043,7 @@ drbomber:
 		Weapon: DRTNissileTurretAG
 		PauseOnCondition: !ammo
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	AttackAircraft:
 		FacingTolerance: 80
@@ -10058,6 +10096,7 @@ drthunder:
 	Armament@G2:
 		Weapon: DRShokWaveQuakeSound
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	AttackAircraft:
 		FacingTolerance: 80
@@ -10878,6 +10917,7 @@ drarmciv:
 	Health:
 		HP: 6000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: DRLaserShotgun
@@ -10918,6 +10958,7 @@ drzombie:
 	Health:
 		HP: 7000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: DRSuicideBomb
@@ -10962,6 +11003,7 @@ drsatanclawz:
 	Health:
 		HP: 18000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: DRSatanClawzMG
@@ -10990,6 +11032,7 @@ drsatanclawzevent:
 	Health:
 		HP: 18000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 5
 	SpawnActorOnDeath@Santa:
 		Actor: SATANCLAWZCRATE
@@ -11028,6 +11071,7 @@ drsatanglobi:
 	Health:
 		HP: 10000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 10
 	Armament@PRIMARY:
 		Weapon: M16

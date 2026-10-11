@@ -1,6 +1,6 @@
 # audit_fluent — localization drift (B12)
 
-Fluent messages loaded: **5768** — unresolved fluent refs in rules: **0**, orphaned actor-* messages: **534**
+Fluent messages loaded: **5774** — unresolved fluent refs in rules: **0**, orphaned actor-* messages: **534**
 
 
 ## F1 — rules reference fluent keys that don't exist (shows raw key in-game)

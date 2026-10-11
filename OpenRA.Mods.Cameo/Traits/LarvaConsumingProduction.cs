@@ -57,7 +57,7 @@ namespace OpenRA.Mods.Cameo.Traits
 		protected override void Created(Actor self)
 		{
 			base.Created(self);
-			spawnerMaster = self.TraitOrDefault<BaseSpawnerMaster>();
+			spawnerMaster = self.TraitsImplementing<BaseSpawnerMaster>().FirstOrDefault();
 			queue = self.TraitOrDefault<LarvaProductionQueue>();
 		}
 

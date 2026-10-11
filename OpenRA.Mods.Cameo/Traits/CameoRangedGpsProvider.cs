@@ -43,6 +43,13 @@ namespace OpenRA.Mods.Cameo.Traits
 			this.self = self;
 		}
 
+		// RADAR-A: the provider-proximity channel for the bot contacts module.
+		// The list contents are populated by the synced proximity trigger, so
+		// reading them in bot code is as deterministic as the render effect's
+		// per-actor Providers read — same data, other direction.
+		internal Actor Self => self;
+		internal IReadOnlyList<Actor> ActorsInRange => actorsInRange;
+
 		void ActorEntered(Actor other)
 		{
 			var dot = other.TraitOrDefault<CameoRangedGpsDot>();

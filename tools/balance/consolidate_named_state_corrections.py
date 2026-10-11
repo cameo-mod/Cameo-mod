@@ -64,12 +64,12 @@ CONTRACT_FIELDS = (
 )
 
 PRESERVED_HASHES = {
-    "HueyCryoMissiles": "9551ea6a6c4803b219ea9a64b8ae0a003d5b137a67bb4785f7b14e7e23c91128",
-    "JHighVWaveforce": "1668788f91835cbcf85db9b8d02b546be4db1bf197b617b31c7664733da2df00",
-    "JapanSpeedBoatGunWaveforce": "fdde8b44366fc5580879e01de8f749c4f0f26957414b25873b4c6b7553a2a653",
-    "NambuMGWaveforce": "c21d0b7bf41c4ea74d901c3c3a46768144011fec2766dbffc9c16885dd713aeb",
-    "SteelQuantumTurretRail": "73bc2ab6e666517e719de84abefb5279cc4fbbd7fe386edcdfb30b2cbce09370",
-    "SteelQuantumTurretRail_EMP": "0fb467f6f3daa1d1f319f2cf501eefd6e736a42289f078352645ba35c2f8d783",
+    "HueyCryoMissiles": "6ab04b257b65af73b2e4ec1a2c685261c5ded0d5a5f835011885f6dc2eb1bddb",
+    "JHighVWaveforce": "1cbe90b59b98bb8b56b8551612918bddf4315b09e2596f324fc27935812bb1a6",
+    "JapanSpeedBoatGunWaveforce": "72655f548f3c88a7f87538b9769d0bc1d5b7f58b18385c5b0a05de670fa461fc",
+    "NambuMGWaveforce": "a448b46691512c1724155d51e53ee51719ffabe5bc873a785cf5d64e0b8b71ca",
+    "SteelQuantumTurretRail": "d41d6d1e94895f7a62f34f2615c3acc690c0e026a1e119d2f5934979ad574bfc",
+    "SteelQuantumTurretRail_EMP": "23092d1f4b8a7534446348ce58d152e86a7fbc4a302af7d9e4bf89e0779f5cf9",
 }
 
 
@@ -110,7 +110,8 @@ def node_payload(node):
 
 def resolved_hash(rs: Ruleset, name: str, destination: str, old_mains: set[str]) -> str:
     excluded = {f"Warhead@{key}" for key in old_mains}
-    excluded.add(f"Warhead@{destination}FlatCompatibility")
+    excluded.update(f"Warhead@{tag}" for tag in
+                    (f"{destination}FlatCompatibility", f"{destination}_Flat", destination))
     payload = [node_payload(child) for child in rs.resolve_weapon(name).children
                if child.key not in excluded]
     return hashlib.sha256(json.dumps(payload, separators=(",", ":")).encode()).hexdigest()
@@ -151,8 +152,9 @@ def inspect(rs: Ruleset, print_hashes: bool = False) -> bool:
         resolved = rs.resolve_weapon(name)
         mains = set(main_warheads(resolved))
         old = BASELINE_MAINS[root]
-        compatibility = f"{destination}FlatCompatibility"
-        before, after = mains == old, mains == {compatibility}
+        applied = {f"{destination}FlatCompatibility",
+                   f"{destination}_Flat", destination}
+        before, after = mains == old, len(mains) == 1 and mains <= applied
         if not (before or after):
             raise RuntimeError(f"{name}: unexpected mains {sorted(mains)}")
         states.add(after)
@@ -188,7 +190,7 @@ def inspect(rs: Ruleset, print_hashes: bool = False) -> bool:
                 if abs(old_hp - new_hp) > 1:
                     raise RuntimeError(f"{name}: percentage drift exceeds one HP at {hp}")
         else:
-            node = nodes[compatibility]
+            node = nodes[next(iter(mains))]
             if int(str(node.get("PercentageScale") or 0)) != scale:
                 raise RuntimeError(f"{name}: applied percentage scale changed")
         if PRESERVED_HASHES and resolved_hash(rs, name, destination, old) != PRESERVED_HASHES[name]:

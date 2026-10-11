@@ -66,6 +66,7 @@ PVICE2:
 		Weapon: Munch
 	-Explodes:
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 		ScanRadius: 2
 	Targetable:
@@ -133,6 +134,7 @@ BSPI:
 		FireDelay: 1
 	-Explodes:
 	AutoTarget:
+		DynamicWeaponPriority: true
 	Targetable:
 	RenderSprites:
 		Image: bspi
@@ -257,6 +259,7 @@ PINKY:
 		Voice: Select
 		Bounds: 1152, 1322, 0, 213
 	AutoTarget:
+		DynamicWeaponPriority: true
 	Armament@PRIMARY:
 		LocalOffset: 600,0,0
 		Weapon: FireBurst
@@ -312,6 +315,7 @@ MANC:
 	RevealsShroud:
 		Range: 7c0
 	AutoTarget:
+		DynamicWeaponPriority: true
 	RenderSprites:
 		Image: manc
 		Palette: spidercostume
@@ -509,6 +513,7 @@ TRIPOD:
 	RenderSprites:
 		Image: tripod
 	AutoTarget:
+		DynamicWeaponPriority: true
 	Armament@PRIMARY:
 		Weapon: Lazer
 		LocalOffset: 100,650,0
@@ -742,6 +747,7 @@ SNIPER.soviets:
 	Targetable:
 		TargetTypes: Disguise
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStanceAI: AttackAnything
 	RenderSprites:
 		Image: LightSniper

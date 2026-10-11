@@ -850,6 +850,7 @@ ra1_allies_phasetransport:
 		Speed: 125
 		TurnSpeed: 25
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: HoldFire
 		InitialStanceAI: AttackAnything
 	Armament:

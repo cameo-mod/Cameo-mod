@@ -43,6 +43,7 @@ siege_tank:
 		Weapon: D2KUnitExplodeMed
 		EmptyWeapon: D2KUnitExplodeMed
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStanceAI: Defend
 	GrantConditionOnPrerequisite@ixian_upgrade_reinforcedbarrel:
 		Condition: ixian_upgrade_reinforcedbarrel

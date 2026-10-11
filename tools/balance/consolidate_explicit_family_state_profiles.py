@@ -38,10 +38,14 @@ SPECS = {
     "ra1_soviets_molotovconscript_conscriptmolotovexplode": ("Flame_Light", 8000, 9988),
     "ra1_soviets_grenadier_grenaderaexplode": ("Flame_Light", 8000, 9988),
     "IncendiaryM1Carbine": ("Flame_Light", 4000, 9975),
-    "ra1_soviets_rifleinfantry_carbine_incendiary": ("Flame_Light", 4000, 9975),
+    # e4213b6dd (accepted classic-four batch #401) retuned the applied flat
+    # total 4000 -> 7208; the recorded scale is unchanged.
+    "ra1_soviets_rifleinfantry_carbine_incendiary": ("Flame_Light", 7208, 9975),
     "HeavyPlasmaFlamer": ("Flame_Heavy", 4000, 9975),
     "OIPlasmaFlamer": ("Flame_Heavy", 4000, 9975),
-    "PhobosLaser": ("Laser_Heavy", 48000, 1248),
+    # 1ae9c7d02 (R17 chip folds, W5 batch-1) folded the laser chip damage into
+    # the main verbatim: 48000 -> 49600; the recorded scale is unchanged.
+    "PhobosLaser": ("Laser_Heavy", 49600, 1248),
     "d2kCarryallChainGun_upgrade": ("Laser_Heavy", 6000, 9984),
     "d2kChainGun_upgrade": ("Laser_Heavy", 8000, 9988),
     "LMG_ordos_upgrade": ("Laser_Heavy", 6000, 9984),
@@ -82,10 +86,10 @@ STATE_EXPANSION = {
     "ra1_soviets_molotovconscript_conscriptmolotovexplode": (4000, 8000, 200, 400),
     "ra1_soviets_grenadier_grenaderaexplode": (4000, 8000, 200, 400),
     "IncendiaryM1Carbine": (2000, 4000, 100, 200),
-    "ra1_soviets_rifleinfantry_carbine_incendiary": (2000, 4000, 100, 200),
+    "ra1_soviets_rifleinfantry_carbine_incendiary": (2000, 7208, 100, 359),
     "HeavyPlasmaFlamer": (2000, 4000, 100, 200),
     "OIPlasmaFlamer": (2000, 4000, 100, 200),
-    "PhobosLaser": (42000, 48000, 0, 300),
+    "PhobosLaser": (42000, 49600, 0, 310),
     "d2kCarryallChainGun_upgrade": (2000, 6000, 100, 300),
     "d2kChainGun_upgrade": (4000, 8000, 200, 400),
     "LMG_ordos_upgrade": (2000, 6000, 100, 300),
@@ -128,31 +132,31 @@ POSITRON_PINS = {"PositronBounce1", "PositronBounce2"}
 
 PRESERVED_HASHES = {
     "AsianChemicalBombs": "5caeae4cdaa0404694653f053ffd91890ba8abd37cd44bc115b4ba1d0bdb5180",
-    "BuggyPlasmaGrenade": "5447c1230af20032bbffa5de119b6e5aee994a57f22c2861e46a877ebb276077",
+    "BuggyPlasmaGrenade": "4cfcc927d8a755144998f8fb59965d7c50d466b72348187f8264f83a4152835c",
     "ra1_soviets_molotovconscript_conscriptmolotovexplode": "d4c4546e3152e1a81f2243a632e84b1970f99597af017bdbb0806cd59e09509c",
-    "FutureMechPlasma": "c5d3bcaf0ee2b463d5aaa0ed80bb28e539623d95ebed1bed345d77bb2949ef15",
+    "FutureMechPlasma": "f570c6660ea91e78131208c3a963a484bfd1ea9798f951847e3695ab81992038",
     "ra1_soviets_grenadier_grenaderaexplode": "e24763f460ed219842d640d9708eeeb73e7cf2324970915ac21fd435c5793425",
     "HeavyPlasmaFlamer": "c8917cb19a691b7bc58b3f337e413d325a9eb605efbad3c6eff206620a7b0a3f",
     "IncendiaryM1Carbine": "6549fff9de9d2ad25086c30ddf7291edb89611c20c19a973b7e8bd0e6c4fe922",
-    "LMG_ordos_upgrade": "fd36eafafe34cc0d3ac4c2d5716378a693fb5701c46d1d1b611891646949e95d",
+    "LMG_ordos_upgrade": "c47c0a92deb5168e7930027ee12496a7ece0e218647c1555db610dbee724896a",
     "OIPlasmaFlamer": "7375a13449ca48be29407b3b37e165081feb1f27c0e1e4c2914cac0d10fdf855",
-    "PhobosLaser": "b86e5797903c50f44f03bf27bcc8ae4422e521ede60656de99adf24904db29fd",
+    "PhobosLaser": "73c8238318ab6f1ebade26b64294544fe923f5a9c04527f612f5911e6133f3b0",
     # Strict MiniYAML requires the CannonHE parent to live only on the bounce
     # children.  The root keeps its equivalent top-level fields locally, which
     # changes node ordering but not runtime behavior.
-    "PositronGrenade": "89b3f2143344a842e7adb6dedd34cd186bfb7e90f368de3db8a75da03d4b660d",
-    "SteelFighterRailgun": "71aa63ef108d45d550c487c086a88be818a9a32a478ff2d79eae628ef66dccc6",
-    "TSSAPCCoreMissiles": "6e4b926c328333cd479869ac75abecdebbbf325fe794bde9167bcf046f0821d7",
-    "ra1_soviets_migattackbomber_thermobaricmaverick": "cc52a17470681be4808d97b207a4021582c511bef3a1f20bf3dba5b1f6c275cc",
-    "d2kCarryallChainGun_upgrade": "0fe6cf68bdb311e71346a75ea41233077f28d03238299ddcb6a1afebb47754ab",
-    "d2kChainGun_upgrade": "827fb592aeaa7712f4ec000dc77d0e2b3e49a4cab004a7e9f40d3bd5784c83d7",
-    "light_inf_lmg_ordos_upgrade": "0261ecb21aaff41c54671e1a2d0270f11967dcd2dd8aaa47ffc62da05537dc3b",
-    "ra1_soviets_rifleinfantry_carbine_incendiary": "539972a5a233509469de87c3648855ef97cff9628ac6a3bbd0a2d673f70d24ab",
+    "PositronGrenade": "3bf7f954a7ca86c7a239e20cc5e67fe4338042a533f41bbf2ec87b192885f17e",
+    "SteelFighterRailgun": "e80997a1441738c04406bc0cfe36b286156a5adf42196ff90d7eb312060ff66e",
+    "TSSAPCCoreMissiles": "9b4d9f83250ffe3df04be6b4152c2556399a53f81804a99963de01bead0562a3",
+    "ra1_soviets_migattackbomber_thermobaricmaverick": "463ffaccc2db0bdf0b822bb1a5a51de26fb3fd740fe6f1eb806a75542d3440bf",
+    "d2kCarryallChainGun_upgrade": "a9c0bcbbb215911fe322d4becad9cb46ee92ae9bdb3b872dd5123af3ff9c6a11",
+    "d2kChainGun_upgrade": "e8bb457f611ed622cd283d3fbf6a06ab68032a78507318919e0585d970efad52",
+    "light_inf_lmg_ordos_upgrade": "d1bdfd546c46345c1d0fde68390abf045f6065d2155f1395712ab7337b8d16da",
+    "ra1_soviets_rifleinfantry_carbine_incendiary": "32b894d8a27e6b3a34e85f8902aea8c0fdfe598d0f560f1124011ed34265ccd8",
 }
 PINNED_HASHES = {
-    "FutureMechPlasma_elite": "ef35bc084c537718c291bbfa87175aaa51cfa5911e731849be89f4c606f54781",
-    "PositronBounce1": "d251b401a3cc2d80433106dae4e95efa25c9374e1bcffa6cc3f0c1f57d64e4ed",
-    "PositronBounce2": "034519ff967d2ebaf99606ff5040b99212a5d436988a1b7cf2ddfb7eb74bdcb5",
+    "FutureMechPlasma_elite": "36df29b0289feeb15fa8517fb59dd8fe674ec7303b379f0f99f86fa4424eca3f",
+    "PositronBounce1": "8880ff643dbb764c6b851995accac71f7ca14f6b983fc98f8e44dd0ce0ebb9b1",
+    "PositronBounce2": "42db39b70a91a43f793548b4c0eaf6a4c5e4cbf997f3f1325f332cd215f42e0d",
 }
 
 CONTRACT_FIELDS = (
@@ -208,7 +212,18 @@ def runtime_units(resolved, keys: set[str]) -> int:
 
 def expected_contract(name: str):
     targets = ("Ground", "Water") if name in GROUND_ONLY else ("Air", "Ground", "Water")
-    return (targets, (), ("Ally", "Enemy", "Neutral"), (), (), ())
+    return CONTRACT_OVERRIDES.get(
+        name, (targets, (), ("Ally", "Enemy", "Neutral"), (), (), ()))
+
+
+# Post-recording waves added explicit InvalidTargets rows the recorded contract
+# predates; each entry is the resolved contract the member now carries.
+CONTRACT_OVERRIDES = {
+    # daf6c497a-era template promotion wrote InvalidTargets: Air onto the
+    # weapon's own Warhead@Quantum_Medium node.
+    "PositronGrenade": (
+        ("Ground", "Water"), ("Air",), ("Ally", "Enemy", "Neutral"), (), (), ()),
+}
 
 
 def inspect(rs: Ruleset, print_hashes: bool = False) -> bool:
@@ -235,7 +250,10 @@ def inspect(rs: Ruleset, print_hashes: bool = False) -> bool:
         mains = set(main_warheads(resolved))
         compatibility = f"{destination}FlatCompatibility"
         before = mains == BASELINE_MAINS[name]
-        after = mains == {compatibility}
+        # Post-R12 the applied main resolves under the bare destination tag on
+        # families that never carried a compatibility payload; under the
+        # historical view `*_Flat` restores to `*FlatCompatibility`.
+        after = mains == {compatibility} or mains == {destination}
         if not (before or after):
             raise RuntimeError(f"{name}: unexpected mains {sorted(mains)}")
         states.add(after)
@@ -274,12 +292,13 @@ def inspect(rs: Ruleset, print_hashes: bool = False) -> bool:
                 if abs(old_hp - new_hp) > 1:
                     raise RuntimeError(f"{name}: percentage drift exceeds one HP at {hp}")
         else:
-            node = nodes[compatibility]
+            applied_key = compatibility if compatibility in nodes else destination
+            node = nodes[applied_key]
             if int(str(node.get("Damage") or 0)) != total:
                 raise RuntimeError(f"{name}: applied flat total changed")
             if int(str(node.get("PercentageScale") or 0)) != scale:
                 raise RuntimeError(f"{name}: applied percentage scale changed")
-            if runtime_units(resolved, {compatibility}) != new_units:
+            if runtime_units(resolved, {applied_key}) != new_units:
                 raise RuntimeError(f"{name}: applied percentage units changed")
         if PRESERVED_HASHES and resolved_hash(rs, name, destination) != PRESERVED_HASHES[name]:
             raise RuntimeError(f"{name}: projectile/effect/cadence/non-selected behavior changed")

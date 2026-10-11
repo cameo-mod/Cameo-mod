@@ -123,7 +123,7 @@ def load_engagement_means(batch_dirs: list[pathlib.Path]) -> dict[tuple[str, str
             total = score.get("total_milli")
             if total is None or r.get("skirmish"):
                 continue
-            s = means.setdefault((r.get("game_uid", ""), r.get("player", "")), [0.0, 0])
+            s = means.setdefault((r.get("game_uid", ""), r.get("seat", "")), [0.0, 0])
             s[0] += total
             s[1] += 1
     return means
@@ -137,7 +137,7 @@ def load_engagement_coverage(batch_dirs: list[pathlib.Path]) -> dict[tuple[str, 
     census: dict[tuple[str, str, str], list] = {}
     for d in batch_dirs:
         for r in read_jsonl(d / "Logs" / "cameo-ai-engagements.jsonl"):
-            c = census.setdefault((arm_of(d), r.get("game_uid", ""), r.get("player", "")), [0, 0, 0])
+            c = census.setdefault((arm_of(d), r.get("game_uid", ""), r.get("seat", "")), [0, 0, 0])
             c[2] += 1
             score = r.get("score") or {}
             if r.get("skirmish"):
@@ -188,14 +188,14 @@ def load_matches_detailed(batch_dirs: list[pathlib.Path]) -> tuple[list[dict], d
             bo = build_order_of(s)
             if bo is None:
                 continue
-            key = (s.get("game_uid", ""), s.get("player", ""))
+            key = (s.get("game_uid", ""), s.get("seat", ""))
             first_bo.setdefault(key, bo)
             last_bo[key] = bo
 
         for r in records:
             player = r.get("player") or {}
             opponents = r.get("opponents") or []
-            key = (r.get("game_uid", ""), player.get("name", ""))
+            key = (r.get("game_uid", ""), player.get("seat", ""))
             b = bucket(r, arm, first_bo.get(key))
             b["seen"] += 1
             if len(opponents) != 1 or r.get("allies"):
@@ -627,7 +627,11 @@ def switches_text(arms: list[str]) -> str:
              "# Arm with: python tools/ai/apply_increment_switches.py <worktree> --spec <this file> --groups AK_build_order_knobs_arm",
              "# (AK_build_order_knobs from the main spec arms the provider; each arm adds its learned file). Copy <arm>.yaml to",
              "# <worktree>/mods/cameo/ai/learned/ first.",
-             "skip: [SquadManagerBotModuleCA@classic]", "", "groups:"]
+             "skip: [SquadManagerBotModuleCA@classic]", "", "effect_classes:"]
+    # These arms activate the same learned policy surface as AK_build_order_knobs.
+    # Treat each as a restraint conservatively; never implicitly co-arm multiple arms.
+    lines += [f"  {arm}: restraint" for arm in arms]
+    lines += ["", "groups:"]
     for arm in arms:
         lines += [f"  {arm}:", "    BuildOrderKnobsBotModule:", "      UseLearnedBuildOrder: true",
                   f"      LearnedFile: ai/learned/{arm}.yaml"]

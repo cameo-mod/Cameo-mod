@@ -6,12 +6,12 @@ Upstream: `C:\Users\AedisToru\Documents\GitHub\CAmod` at `b67e28746` (`origin/HE
 
 | status | files |
 |---|--:|
-| IDENTICAL | 80 |
+| IDENTICAL | 74 |
 | STALE | 0 |
-| MODIFIED | 27 |
+| MODIFIED | 33 |
 | MODIFIED+STALE | 45 |
 | MOVED/REMOVED | 13 |
-| CAMEO_ONLY | 72 |
+| CAMEO_ONLY | 92 |
 | MISSING (upstream files never copied) | 313 |
 
 ## MODIFIED+STALE: port the upstream diff by hand (45)
@@ -40,7 +40,13 @@ Upstream: `C:\Users\AedisToru\Documents\GitHub\CAmod` at `b67e28746` (`origin/HE
     - 2025-12-02 Encyclopedia updates.
     - 2025-10-29 - Mini Drones inherit cloak from parent. - Corrected TD Harvester palette. - Fixed Mini Drone attach sound.
     - 2025-07-02 Scale point defense laser in the same way as point defense shield.
-- `OpenRA.Mods.CA/Activities/TeleportCA.cs`: base 2023-08-05, 7 upstream commits since, Cameo diff 2 lines
+- `OpenRA.Mods.CA/Traits/BotModules/Squads/States/ProtectionStatesCA.cs`: base 2020-11-21, 8 upstream commits since, Cameo diff 253 lines
+    - 2026-02-08 Skirmish AI indirect routes of attack.
+    - 2025-08-10 AI updates.
+    - 2023-05-27 Updated copyright notice. Removed unused imports. Namespace corrections.
+    - 2021-04-08 Change CA AI Back for further Development
+    - 2021-02-14 AI-cs-fix
+- `OpenRA.Mods.CA/Activities/TeleportCA.cs`: base 2023-08-05, 7 upstream commits since, Cameo diff 4 lines
     - 2025-07-02 Engine update fixes part 3.
     - 2025-01-20 Fixed queued Chrono Tank telports incorrectly calculating the pre-charge time.
     - 2024-11-29 Removed Temporal Flux range boost.
@@ -58,7 +64,7 @@ Upstream: `C:\Users\AedisToru\Documents\GitHub\CAmod` at `b67e28746` (`origin/HE
     - 2024-12-18 - Increased Grand Cannon damage vs heavy armor. Increased range by from 9 to 10. First shot is accurate. - Replaced Patriot Strike with Black Sky Strike. Hits up to 6 ground targets, prioritizing the most valuable. - Reduced Troop Crawler cost from 1600 to 1500. - Hoplite range reduced by 1. Added empowered shots which blind enemies (9s cooldown). - Increased Black Eagle splash damage. - Avatar shadow. - Stealth Harvester research icon. - Fix Teleport/Leap abilities being permanently disabled if unit is warped while recharging. - Fix Chrono Tank moving to destination if long distance teleport is temporarily interrupted by being warped.
     - 2024-11-20 - Allow Chrono Tank to teleport 48 cells, but longer distances require scaling charge up time. Increased cost to 1500. - Cryostorm has EVA warning and takes 5 seconds to appear. - Removed X external link from menu screen. - Hornet/Invader tooltip clarification. - Mission 22 difficulty tweaks.
     - 2024-01-12 Updates. - Added Hypercharge upgrade for Scrin Seeker & Lacerator. - Chem Warrior gains Tiberium Surge ability. - Yuri/Mastermind ability no longer kills slaves. Slaves are killed either manually by deploying them, or when exceeding capacity. - Minor mission 9 fix - prevent MAD Tank deploying when player does a sat hack on it. - Minor mission 15 fix - prevent player's units auto attacking disabled defenses. - Reduce Kirov separation distance to make them less prone to blocking each other from dropping bombs. - Improvements to targeted ability traits. - Battle Drone self-repairs to 50% instead of 100%.
-- `OpenRA.Mods.CA/Traits/SupportPowers/GrantExternalConditionPowerCA.cs`: base 2024-06-23, 7 upstream commits since, Cameo diff 15 lines
+- `OpenRA.Mods.CA/Traits/SupportPowers/GrantExternalConditionPowerCA.cs`: base 2024-06-23, 7 upstream commits since, Cameo diff 17 lines
     - 2026-06-04 Warning fix.
     - 2026-06-04 - The full XP of any destroyed ARC drones will now be added to a singular reclaimable XP pool. On production of new drones, this XP will be drawn from up to veterancy level 2. - Mini Drones will transfer their XP to the parent unit on attaching. They will then inherit the veterancy level of the parent unit, and any damage dealt will be given to the parent unit. - Suppression Field can be applied as long as one valid unit is visible within the target circle (non-visible units within the circle will then be affected upon activation). - Made Templar laser with Quantum Capacitors more visually distinct. - Red skull icon for Assassins. - Fixed triple SSM with Black Napalm burst count. Adjusted reload to bring DPS into line. - Removed duplicate lasher warhead.
     - 2025-12-07 Clean up trait lookups.
@@ -76,25 +82,19 @@ Upstream: `C:\Users\AedisToru\Documents\GitHub\CAmod` at `b67e28746` (`origin/HE
     - 2026-06-05 Add Glow Effect to CA Projectiles
     - 2025-07-02 Engine update part 10 (projectiles).
     - 2025-07-02 Engine update fixes part 3.
-- `OpenRA.Mods.CA/Traits/BotModules/SquadManagerBotModuleCA.cs`: base 2025-07-02, 6 upstream commits since, Cameo diff 3249 lines
+- `OpenRA.Mods.CA/Traits/BotModules/SquadManagerBotModuleCA.cs`: base 2025-07-02, 6 upstream commits since, Cameo diff 3409 lines
     - 2026-02-12 - Increased IFV HP from 30k to 32k. - Tiger Guard IFV prioritizes vehicle targets. - Increased Peacemaker damage vs defenses. - Clean up V3 upgrade remnants. - AI tweaks.
     - 2026-02-09 Compositions.
     - 2026-02-08 Updated AI routing.
     - 2026-02-08 AI harasser squads.
     - 2026-02-08 Skirmish AI indirect routes of attack.
-- `OpenRA.Mods.CA/Traits/BotModules/Squads/States/GroundStatesCA.cs`: base 2023-12-22, 6 upstream commits since, Cameo diff 1381 lines
+- `OpenRA.Mods.CA/Traits/BotModules/Squads/States/GroundStatesCA.cs`: base 2023-12-22, 6 upstream commits since, Cameo diff 1581 lines
     - 2026-02-09 Compositions.
     - 2026-02-08 Updated AI routing.
     - 2026-02-08 - V3 now Ukraine unique unit. - Siege Tank now replaces V2 for Ukraine. - Yaml fixes.
     - 2026-02-08 AI harasser squads.
     - 2026-02-08 Skirmish AI indirect routes of attack.
-- `OpenRA.Mods.CA/Traits/BotModules/Squads/States/ProtectionStatesCA.cs`: base 2021-02-04, 6 upstream commits since, Cameo diff 304 lines
-    - 2026-02-08 Skirmish AI indirect routes of attack.
-    - 2025-08-10 AI updates.
-    - 2023-05-27 Updated copyright notice. Removed unused imports. Namespace corrections.
-    - 2021-04-08 Change CA AI Back for further Development
-    - 2021-02-14 AI-cs-fix
-- `OpenRA.Mods.CA/Traits/MadTankCA.cs`: base 2023-05-27, 6 upstream commits since, Cameo diff 35 lines
+- `OpenRA.Mods.CA/Traits/MadTankCA.cs`: base 2023-05-27, 6 upstream commits since, Cameo diff 37 lines
     - 2025-10-09 - Mission adjustments. - Simplified MAD Tank code (fixes reload time buffs). - Enmity fix.
     - 2025-10-05 MAD Tank bug fix.
     - 2025-07-02 Engine update part 7.
@@ -117,12 +117,12 @@ Upstream: `C:\Users\AedisToru\Documents\GitHub\CAmod` at `b67e28746` (`origin/HE
     - 2025-07-02 Engine update part 7.
     - 2025-07-02 Engine update fixes part 3.
     - 2024-12-07 - Added voice announcement for when Covenants become available. - Added tracers effects to Wolverine & updated firing sound. - Increased Chrono Tank rate of fire, damage vs light/buildings, range (+1) and turn speed. Reduced HP from 45k to 32k. - Increased JumpJet/Bombardier speed. - Ships targetable by Anathema. - Tripled PAC damage vs buildings. - Reduced duration of Cyborg Reaper snare from 8s to 6s. - Zone Defender shield stacks up to 6 times providing between 25% and 50% damage reduction. - Updated Stromberg maps.
-- `OpenRA.Mods.CA/Traits/BotModules/Squads/SquadCA.cs`: base 2023-05-27, 4 upstream commits since, Cameo diff 104 lines
+- `OpenRA.Mods.CA/Traits/BotModules/Squads/SquadCA.cs`: base 2023-05-27, 4 upstream commits since, Cameo diff 144 lines
     - 2026-02-08 Updated AI routing.
     - 2026-02-08 AI harasser squads.
     - 2026-02-08 Skirmish AI indirect routes of attack.
     - 2025-08-10 AI updates.
-- `OpenRA.Mods.CA/Traits/BotModules/Squads/States/AirStatesCA.cs`: base 2023-05-27, 4 upstream commits since, Cameo diff 344 lines
+- `OpenRA.Mods.CA/Traits/BotModules/Squads/States/AirStatesCA.cs`: base 2023-05-27, 4 upstream commits since, Cameo diff 354 lines
     - 2026-01-09 Fix AI aircraft limits.
     - 2025-08-10 AI updates.
     - 2025-06-08 AI crash fix.
@@ -132,7 +132,7 @@ Upstream: `C:\Users\AedisToru\Documents\GitHub\CAmod` at `b67e28746` (`origin/HE
     - 2025-05-24 ReloadAmmoPoolCA refactoring.
     - 2025-05-24 - Obliterator charge drains gradually instead of immediately if targeting is interrupted. Added minimum range to prevent direction bug. - EMP Grenadiers don't get range bonus from Heroes of the Union. - Fixed Voidspike visual glitch if hit by weapons which flash the target. - Added Health to Mind Spark so its death animation plays.
     - 2023-12-29 Buggy decoy upgrade.
-- `OpenRA.Mods.CA/Traits/BotModules/Squads/States/StateBaseCA.cs`: base 2023-05-27, 3 upstream commits since, Cameo diff 244 lines
+- `OpenRA.Mods.CA/Traits/BotModules/Squads/States/StateBaseCA.cs`: base 2023-05-27, 3 upstream commits since, Cameo diff 274 lines
     - 2026-02-08 Updated AI routing.
     - 2026-02-08 Skirmish AI indirect routes of attack.
     - 2025-08-10 AI updates.
@@ -170,11 +170,11 @@ Upstream: `C:\Users\AedisToru\Documents\GitHub\CAmod` at `b67e28746` (`origin/HE
     - 2024-05-18 Scrin allegiances, Eviscerator, Obliterator, Nullifier, Overlord's Wrath, Gateway & Watcher.
 - `OpenRA.Mods.CA/Traits/Attack/AttackFrontalCharged.cs`: base 2025-10-06, 1 upstream commits since, Cameo diff 3 lines
     - 2025-12-07 Clean up trait lookups.
-- `OpenRA.Mods.CA/Traits/BotModules/BaseBuilderBotModuleCA.cs`: base 2025-07-02, 1 upstream commits since, Cameo diff 922 lines
+- `OpenRA.Mods.CA/Traits/BotModules/BaseBuilderBotModuleCA.cs`: base 2025-07-02, 1 upstream commits since, Cameo diff 1692 lines
     - 2025-08-10 AI updates.
-- `OpenRA.Mods.CA/Traits/BotModules/BotModuleLogic/BaseBuilderQueueManagerCA.cs`: base 2023-05-27, 1 upstream commits since, Cameo diff 977 lines
+- `OpenRA.Mods.CA/Traits/BotModules/BotModuleLogic/BaseBuilderQueueManagerCA.cs`: base 2023-05-27, 1 upstream commits since, Cameo diff 2070 lines
     - 2025-08-10 AI updates.
-- `OpenRA.Mods.CA/Traits/BotModules/Squads/States/NavyStatesCA.cs`: base 2025-07-02, 1 upstream commits since, Cameo diff 437 lines
+- `OpenRA.Mods.CA/Traits/BotModules/Squads/States/NavyStatesCA.cs`: base 2025-07-02, 1 upstream commits since, Cameo diff 454 lines
     - 2025-08-10 AI updates.
 - `OpenRA.Mods.CA/Traits/Conditions/GrantChargingCondition.cs`: base 2023-05-27, 1 upstream commits since, Cameo diff 2 lines
     - 2026-09-06 Chapter 9 WIP.

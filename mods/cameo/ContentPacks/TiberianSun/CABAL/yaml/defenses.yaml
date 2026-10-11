@@ -342,6 +342,7 @@ cabal_plasmaturret:
 	WithVoxelTurret:
 		ShowShadow: false
 	AutoTarget:
+		DynamicWeaponPriority: true
 	DetectCloaked:
 		Range: 3c0
 	-WithVoxelBody:

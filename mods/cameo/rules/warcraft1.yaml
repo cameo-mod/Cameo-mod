@@ -433,6 +433,7 @@ wc_h_guard_tower:
 		Dimensions: 2,2
 	RenderDetectionCircle:
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 		ScanRadius: 15
 	DamageMultiplier@DamageReduction:
@@ -942,6 +943,7 @@ rainoffire:
 		Weapon: rainoffire
 		LocalOffset: 200,4000,90, -900,-4200,90, 900,10000,30, 4000,-800,60, -2600,500,-30, 6600,500,40, 500,500,60, 1000,1300,50
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 		ScanRadius: 9999
 	AttackMove:
@@ -1205,6 +1207,7 @@ poisoncloud:
 		LocalOffset: 200,4000,90, -900,-4200,90, 900,10000,30, 4000,-800,60, -2600,500,-30, 6600,500,40, 500,500,60, 1000,1300,50
 		Weapon: poisoncloud
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 		ScanRadius: 9999
 	AttackMove:
@@ -1267,6 +1270,7 @@ wc_h_peasant:
 	Power:
 		Amount: -5
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	WithDeathAnimation:
 		UseDeathTypeSuffix: false
@@ -1321,6 +1325,7 @@ wc_h_peasant_engineer:
 	Power:
 		Amount: -5
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	WithDeathAnimation:
 		UseDeathTypeSuffix: false
@@ -1469,6 +1474,7 @@ wc_h_footman:
 	Power:
 		Amount: -5
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 6
 		InitialStance: AttackAnything
 	Armament:
@@ -1530,6 +1536,7 @@ wc_h_archer:
 	Power:
 		Amount: -5
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament:
 		Weapon: bowFire
@@ -1587,6 +1594,7 @@ wc_h_knight:
 	Power:
 		Amount: -10
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 7
 		InitialStance: AttackAnything
 	Armament:
@@ -1643,6 +1651,7 @@ wc_h_catapult:
 	Power:
 		Amount: -30
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament:
 		Weapon: catapultfire
@@ -1685,6 +1694,7 @@ wc_h_conjurer:
 	Power:
 		Amount: -20
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament:
 		Weapon: summon1_conjurer
@@ -1737,6 +1747,7 @@ wc_h_cleric:
 	Power:
 		Amount: -20
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 		InitialStance: AttackAnything
 	Armament:
@@ -1797,6 +1808,7 @@ wc_h_scorpion:
 		Delay: 20
 		StartIfBelow: 100
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 		ScanRadius: 6
 	Armament:
@@ -1861,6 +1873,7 @@ wc_h_waterelemental:
 	Power:
 		Amount: 0
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 		ScanRadius: 8
 	Armament:
@@ -2333,6 +2346,7 @@ wc_o_skeleton:
 	Mobile:
 		Speed: 75
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 		ScanRadius: 6
 	ChangesHealth:
@@ -2357,6 +2371,7 @@ wc_o_demon:
 	Armament:
 		Weapon: demonSlice
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 		ScanRadius: 6
 	Selectable:
@@ -2436,6 +2451,7 @@ wc_o_skeleton_army:
 	Armament:
 		Weapon: AngryMobTargeting
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 6
 	WithSpriteBody:
 		Sequence: dot
@@ -2484,6 +2500,7 @@ wc_n_brigand:
 	Power:
 		Amount: 0
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament:
 		Weapon: footmanSlice
@@ -2527,6 +2544,7 @@ wc_n_ogre:
 	Power:
 		Amount: 0
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament:
 		Weapon: ogreBash
@@ -2574,6 +2592,7 @@ wc_n_slime:
 	AttackLeap:
 		FacingTolerance: 512
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament:
 		Weapon: SlimeJump

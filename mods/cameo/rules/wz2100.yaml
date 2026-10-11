@@ -448,6 +448,7 @@ Player:
 	-WithSpriteBody:
 	WithEmbeddedTurretSpriteBody:
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 3
 		InitialStance: AttackAnything
 	AutoTargetPriority@DEFAULT:
@@ -3152,6 +3153,7 @@ psc2100chopshop2:
 		TargetRelationships: Ally
 		LocalOffset: 350,0,150
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 		InitialStance: AttackAnything
 	AutoTargetPriority@DEFAULT:
@@ -3288,6 +3290,7 @@ psc2100chopshop2:
 		ControllingCondition: controlling
 	ReloadArmamentsBar:
 	AutoTarget:
+		DynamicWeaponPriority: true
 		RequiresCondition: controlling
 ^2100ConstructorCyborg:
 	Inherits: ^2100VEHICLE
@@ -3569,6 +3572,7 @@ psc2100chopshop2:
 	SpeedMultiplier@2100Tanks:
 		Modifier: 60
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 7
 		InitialStance: AttackAnything
 	AutoTargetPriority@DEFAULT:
@@ -3588,6 +3592,7 @@ psc2100chopshop2:
 	SpeedMultiplier@2100Tanks:
 		Modifier: 45
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 7
 		InitialStance: AttackAnything
 	AutoTargetPriority@DEFAULT:
@@ -3607,6 +3612,7 @@ psc2100chopshop2:
 	SpeedMultiplier@2100Tanks:
 		Modifier: 45
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 7
 		InitialStance: AttackAnything
 	AutoTargetPriority@DEFAULT:
@@ -3626,6 +3632,7 @@ psc2100chopshop2:
 	SpeedMultiplier@2100Tanks:
 		Modifier: 40
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 7
 		InitialStance: AttackAnything
 	AutoTargetPriority@DEFAULT:
@@ -3645,6 +3652,7 @@ psc2100chopshop2:
 	SpeedMultiplier@2100Tanks:
 		Modifier: 35
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 9
 		InitialStance: AttackAnything
 	AutoTargetPriority@DEFAULT:
@@ -3664,6 +3672,7 @@ psc2100chopshop2:
 	SpeedMultiplier@2100Tanks:
 		Modifier: 60
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 7
 		InitialStance: AttackAnything
 	AutoTargetPriority@DEFAULT:
@@ -3815,6 +3824,7 @@ psc2100chopshop2:
 		ReloadDelay: 7
 		AmmoCondition: ammo
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	AttackAircraft:
 		FacingTolerance: 80
@@ -3847,6 +3857,7 @@ psc2100chopshop2:
 		PersistentTargeting: false
 		PauseOnCondition: disabled
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: HoldFire
 		InitialStanceAI: HoldFire
 	WithMuzzleOverlay:
@@ -3867,6 +3878,7 @@ psc2100chopshop2:
 		ReloadDelay: 2
 		AmmoCondition: ammo
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	AttackAircraft:
 		FacingTolerance: 80
@@ -3894,6 +3906,7 @@ psc2100chopshop2:
 		ReloadDelay: 2
 		AmmoCondition: ammo
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	AttackAircraft:
 		FacingTolerance: 80
@@ -3926,6 +3939,7 @@ psc2100chopshop2:
 	Health:
 		HP: 5000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament@PRIMARY:
 		Weapon: ScavPistol
@@ -4165,6 +4179,7 @@ psc2100chopshop2:
 	Selectable:
 		Class: 2100repairtruck
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 7
 		InitialStance: AttackAnything
 	AutoTargetPriority@DEFAULT:
@@ -4823,6 +4838,7 @@ psc2100chopshop2:
 	-Harvester:
 	-WithHarvesterPipsDecoration:
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 30
 	RenderSprites:
 		Image: 2100repairtruck
@@ -4879,6 +4895,7 @@ psc2100chopshop2:
 	Selectable:
 		Class: 2100repairtruck
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 7
 		InitialStance: AttackAnything
 	AutoTargetPriority@DEFAULT:
@@ -5443,6 +5460,7 @@ psc2100chopshop2:
 	Selectable:
 		Class: 2100repairtruck
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 7
 		InitialStance: AttackAnything
 	AutoTargetPriority@DEFAULT:
@@ -5892,6 +5910,7 @@ psc2100chopshop2:
 	Selectable:
 		Class: 2100repairtruck
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 7
 		InitialStance: AttackAnything
 	AutoTargetPriority@DEFAULT:
@@ -6760,6 +6779,7 @@ psc2100chopshop2:
 		TurnSpeed: 40
 		Offset: -12,0,52
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 7
 		InitialStance: AttackAnything
 	AutoTargetPriority@DEFAULT:
@@ -6857,6 +6877,7 @@ psc2100chopshop2:
 		TurnSpeed: 40
 		Offset: -12,0,52
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 7
 		InitialStance: AttackAnything
 	AutoTargetPriority@DEFAULT:
@@ -7586,6 +7607,7 @@ psc2100chopshop2:
 		FacingTolerance: 0
 	WithMuzzleOverlay:
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStanceAI: Defend
 	Explodes:
 		Weapon: wallcanonmedium
@@ -7701,6 +7723,7 @@ psc2100chopshop2:
 		Prerequisites: up2100uptracks1, 2100CRC, 2100chopshop3
 		Description: Control Unit
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 25
 		InitialStance: AttackAnything
 	RenderSprites:
@@ -7791,6 +7814,7 @@ psc2100chopshop2:
 	-Harvester:
 	-WithHarvesterPipsDecoration:
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 30
 	RenderSprites:
 		Image: 2100crane2
@@ -7889,6 +7913,7 @@ psc2100chopshop2:
 		LocalOffset: 128,-213,-85, 128,213,-85
 		PauseOnCondition: !ammo
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	AttackAircraft:
 		FacingTolerance: 80
@@ -8040,6 +8065,7 @@ psc2100chopshop2:
 		LocalOffset: 427,0,-213, 427,0,-213
 		PauseOnCondition: !ammo
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	AttackAircraft:
 		FacingTolerance: 80

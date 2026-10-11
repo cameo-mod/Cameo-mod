@@ -14,6 +14,7 @@ using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using OpenRA.Mods.CA;
 using OpenRA.Mods.CA.Traits;
 using OpenRA.Primitives;
 using OpenRA.Traits;
@@ -283,7 +284,7 @@ namespace OpenRA.Mods.Common.Traits
 
 		IBotRequestPauseUnitProduction[] requestPause;
 		AdaptiveCounterProduction counters;
-		IBotEnemyCompositionProvider compositionProvider;
+		IBotEnemyCompositionProvider[] compositionProviders;
 		IFransEconomicSaturationService economicSaturationService;
 		IFransBaseBuilderService openingBuildOrderService;
 		IFransCombatIntelService combatIntelService;
@@ -338,7 +339,7 @@ namespace OpenRA.Mods.Common.Traits
 			groundCommanderService = self.Owner.PlayerActor.TraitsImplementing<IFransCommanderCoreService>().FirstOrDefault()
 				?? throw new InvalidOperationException("FransUnitBuilderBotModule requires Ground Commander service.");
 			playerResources = self.Owner.PlayerActor.Trait<PlayerResources>();
-			compositionProvider = self.Owner.PlayerActor.TraitsImplementing<IBotEnemyCompositionProvider>().FirstOrDefault();
+			compositionProviders = self.Owner.PlayerActor.TraitsImplementing<IBotEnemyCompositionProvider>().ToArray();
 		}
 
 		protected override void TraitEnabled(Actor self)
@@ -369,7 +370,10 @@ namespace OpenRA.Mods.Common.Traits
 			var economicState = economicSaturationService.State;
 			UpdateEconomicStateTransition(economicState);
 
-			counters.Observe(Info.AdaptiveCounterObservationInterval, compositionProvider);
+			// AR-6: resolve the enabled provider at use time — a conditional provider
+			// disabled at Created (or later) must not serve; two providers can mount
+			// under inc3_frans_services (FransCombatIntel + MasterAi), first-enabled wins.
+			counters.Observe(Info.AdaptiveCounterObservationInterval, compositionProviders.FirstEnabledTraitOrDefault());
 
 			var hasHarvesterDebt = queuedBuildRequests.Any(Info.HarvesterTypes.Contains);
 
@@ -986,7 +990,7 @@ namespace OpenRA.Mods.Common.Traits
 		{
 			// Build the owned-unit snapshot once for this whole throughput-probe pass instead of
 			// rescanning ActorIndex separately for every individual production queue.
-			var allUnits = unitsToBuild.Actors.Where(a => !a.IsDead).ToArray();
+			var allUnits = unitsToBuild.Actors.Where(a => !a.IsDead).OrderBy(a => a.ActorID).ToArray();
 
 			foreach (var category in Info.UnitQueues)
 			{
@@ -1185,7 +1189,7 @@ namespace OpenRA.Mods.Common.Traits
 			if (live + queued >= Info.EconomicEmergencyMinimumAirCombatReserve)
 				return false;
 
-			var allUnits = unitsToBuild.Actors.Where(a => !a.IsDead).ToArray();
+			var allUnits = unitsToBuild.Actors.Where(a => !a.IsDead).OrderBy(a => a.ActorID).ToArray();
 			foreach (var category in QueueDomains.Air)
 				foreach (var queue in queuesByCategory[category].Where(IsFreeUsableQueue).OrderByDescending(q => q.Actor.ActorID))
 				{
@@ -1536,7 +1540,7 @@ namespace OpenRA.Mods.Common.Traits
 		ActorInfo ChooseRandomUnitToBuild(ProductionQueue queue)
 		{
 			return ChooseRandomUnitToBuild(queue,
-				unitsToBuild.Actors.Where(a => !a.IsDead).ToArray(),
+				unitsToBuild.Actors.Where(a => !a.IsDead).OrderBy(a => a.ActorID).ToArray(),
 				ignorePositiveUnitLimits: false);
 		}
 
@@ -1685,7 +1689,7 @@ namespace OpenRA.Mods.Common.Traits
 			// unrelated under-target vehicle cannot win merely because Shuffle happened to list it
 			// first. Once the 33% pool is satisfied, ARTY/V2RL are held as queue-saturation fallback
 			// rather than continuing to inflate beyond the requested combined vehicle share.
-			var buildableThings = queue.BuildableItems().Shuffle(world.LocalRandom)
+			var buildableThings = queue.BuildableItems().Shuffle(BotRng.For(player, nameof(FransUnitBuilderBotModule)))
 				.OrderByDescending(a => artilleryUnderTarget && Info.GroundVehicleArtilleryTypes.Contains(a.Name))
 				.ToArray();
 			if (buildableThings.Length == 0)

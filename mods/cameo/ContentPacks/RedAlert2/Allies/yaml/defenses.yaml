@@ -323,6 +323,7 @@ ra2_allies_patriotmissilesystem:
 		RequiresCondition: !build-incomplete
 	WithMuzzleOverlay:
 	AutoTarget:
+		DynamicWeaponPriority: true
 	-WithVoxelBody:
 	-Cloak@TDcloak:
 	Power:
@@ -475,6 +476,7 @@ ra2_allies_grandcannon:
 	WithVoxelBarrel:
 		RequiresCondition: !build-incomplete
 	AutoTarget:
+		DynamicWeaponPriority: true
 	DamageMultiplier@2x2Shape:
 		Modifier: 50
 	Power:

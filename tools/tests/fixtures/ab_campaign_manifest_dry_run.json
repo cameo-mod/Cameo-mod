@@ -1,0 +1,61 @@
+{
+  "schema": 1,
+  "campaign_id": "fixture-campaign-v1",
+  "execution_approved": false,
+  "pairs_per_stratum": 20,
+  "team_size": 1,
+  "bot_type": "hard",
+  "seeds": [
+    20261001,
+    20261002,
+    20261003,
+    20261004,
+    20261005,
+    20261006,
+    20261007,
+    20261008,
+    20261009,
+    20261010,
+    20261011,
+    20261012,
+    20261013,
+    20261014,
+    20261015,
+    20261016,
+    20261017,
+    20261018,
+    20261019,
+    20261020
+  ],
+  "switches": [
+    "BU_harvester_logistics",
+    "U_ut4_expansion_appetite",
+    "AF_harvester_spread"
+  ],
+  "map_strata": [
+    {
+      "name": "small_gate",
+      "path": "mods/cameo/maps/_ra_pitfight.oramap",
+      "sha256": "f50f2399a38346c501f1b1ff91614f7eb9c73b9d0b8eadeffaa067a5bcf4c4d8"
+    },
+    {
+      "name": "open_economy",
+      "path": "mods/cameo/maps/_ra_ore-gardens.oramap",
+      "sha256": "e74bfaacaf0accfbaf34624e10e0708e61468867c1164aa24927c4f24a750842"
+    },
+    {
+      "name": "chokepoint",
+      "path": "mods/cameo/maps/_ra_siberian-pass.oramap",
+      "sha256": "dd1143299340094a604a5e2a02474dd095916f4f0dd75e9de0a1be23910bdd75"
+    }
+  ],
+  "pins": {
+    "source_commit": "700bb16483f6d92664153e98d6f2560c312acaab",
+    "engine_version": "6da7fce14da541180c6baddd6925118fbef65b94"
+  },
+  "world_tick_cap": 45000,
+  "wall_timeout_s": 3000,
+  "stall_timeout_s": 180,
+  "memory_limit_bytes": 8589934592,
+  "serial_workers": 1
+}

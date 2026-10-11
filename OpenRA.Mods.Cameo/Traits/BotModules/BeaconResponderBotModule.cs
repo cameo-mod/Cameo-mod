@@ -12,6 +12,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using OpenRA.Mods.CA;
 using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.Common.Traits;
 using CAAIUtils = OpenRA.Mods.CA.AIUtils;
@@ -71,7 +72,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		protected override void TraitEnabled(Actor self)
 		{
 			threatProviders = self.TraitsImplementing<IBotRegionThreatProvider>().ToArray();
-			scanTicks = world.LocalRandom.Next(0, Info.ScanInterval);
+			scanTicks = BotRng.For(player, nameof(BeaconResponderBotModule)).Next(0, Info.ScanInterval);
 		}
 
 		void IBotEnabled.BotEnabled(IBot bot) { }
@@ -146,7 +147,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		void Respond(IBot bot, BeaconTracker.Entry entry)
 		{
 			var cell = world.Map.CellContaining(entry.Position);
-			var threat = threatProviders == null ? 0 : threatProviders.Max(p => p.RememberedEnemyThreatAt(cell));
+			var threat = threatProviders.MergedThreatAt(cell);
 
 			// Visible enemies near the beacon count too — gated by CanBeViewedByPlayer so
 			// actors hidden under fog/shroud do not leak into the response decision.

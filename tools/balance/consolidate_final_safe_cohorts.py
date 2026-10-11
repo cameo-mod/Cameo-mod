@@ -65,6 +65,40 @@ ROOTS = {
     "TS70mmTur": ("CannonAP_Light", set()),
 }
 
+# Live descendants per root. ROOTS keeps the reviewed member sets, which the
+# batch still converts; these pin the current inheritance edges so W7
+# de-parenting is recorded here instead of silently widening the cohort.
+EXPECTED_CLOSURES = {
+    "APCGun": {"td_gdi_apc_apcgun_AA"},
+    "ra1_allies_alliedapc_gun": set(),
+    "NaxHaenebuQuadCannon": {"NaxHaenebuQuadCannon_elite"},
+    "TKMQuadCannonAG": {"TKMQuadCannonAA"},
+    "TKMZazaCannonAG": {"TKMZazaCannonAA"},
+    "CorsairFlash": set(),
+    "RA2FlakTrackGun_elite": set(),
+    "TKMAATurretCannon": set(),
+    "TS30mm": set(),
+    "TSAAPCCannon": set(),
+    "TSMutApcCannon": set(),
+    "BorisAKM": set(),
+    "asianalliance_fanatic_shotgun": set(),
+    "ASDFGun": {"ASDFGun2"},
+    "CHGuardRifle": set(),
+    "NaxPlanegun_elite": set(),
+    "RA2CRM60": set(),
+    "TSAssaultCannon": set(),
+    "TSBowlerCannon": set(),
+    "TSJumpCannon": set(),
+    "elitecadregun": set(),
+    "ra1_soviets_ak47conscript_rifle": set(),
+    "td_gdi_shotgunner_shotgun": set(),
+    "HindMissiles": set(),
+    "HueyTwinMissiles": set(),
+    "RA2HornetMissile": set(),
+    "RA2Gren60mm": {"RA2Gren60mm_elite"},
+    "TS70mmTur": set(),
+}
+
 # These two nested compatibility folds are authored by the companion converter
 # but share the same post-apply stale-removal cleanup requirement.
 COMPATIBILITY_NESTED = {"DeviatorMissile_Artillery", "wc2highArrowFire"}
@@ -92,10 +126,11 @@ def selections(rs: Ruleset) -> dict[str, str]:
     result: dict[str, str] = {}
     for root, (destination, expected) in ROOTS.items():
         actual = descendants(rs, root)
-        if actual != expected:
+        closure = EXPECTED_CLOSURES[root]
+        if actual != closure:
             raise RuntimeError(
-                f"{root}: closure changed; added={sorted(actual - expected)}, "
-                f"missing={sorted(expected - actual)}")
+                f"{root}: closure changed; added={sorted(actual - closure)}, "
+                f"missing={sorted(closure - actual)}")
         for name in {root, *expected}:
             if name in result and result[name] != destination:
                 raise RuntimeError(f"{name}: conflicting destinations")
@@ -153,7 +188,7 @@ def inspect_baseline(rs: Ruleset, selected: dict[str, str]):
             raise RuntimeError(f"{name}: missing resolved weapon")
         mains = set(main_warheads(resolved))
         compatibility = f"{destination}FlatCompatibility"
-        if mains == {compatibility}:
+        if mains in ({compatibility}, {f"{destination}_Flat"}):
             plans[name] = None
             continue
         if destination not in mains or len(mains) < 2:

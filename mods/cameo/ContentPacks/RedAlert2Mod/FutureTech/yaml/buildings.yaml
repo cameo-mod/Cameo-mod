@@ -439,6 +439,7 @@ futuretech_frostbiteturret:
 	WithSpriteTurret:
 		RequiresCondition: !build-incomplete
 	AutoTarget:
+		DynamicWeaponPriority: true
 	Power:
 		Amount: -75
 	RevealsShroud:
@@ -562,6 +563,7 @@ futuretech_multiturretsystem:
 	-WithSpriteBody:
 	WithEmbeddedTurretSpriteBody:
 	AutoTarget:
+		DynamicWeaponPriority: true
 	ActorStatValues:
 		Stats: Armor, Sight, Speed, Damage, ReloadDelay, MaxRange, Cargo, Kills
 	Power:

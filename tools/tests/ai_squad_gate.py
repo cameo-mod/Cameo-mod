@@ -130,7 +130,7 @@ def read_appended_records(log_path: pathlib.Path, before_length: int) -> list[di
             record = json.loads(line)
         except json.JSONDecodeError as error:
             fail(f"appended situation log line {line_number} is not JSON: {error}", line)
-        if isinstance(record, dict) and record.get("kind") == "situation" and record.get("player") == "HardBot":
+        if isinstance(record, dict) and record.get("kind") == "situation" and record.get("bot_type") == "hard":
             records.append(record)
     return records
 

@@ -1095,6 +1095,7 @@ WORMUZI:
 	Power:
 		Amount: -1
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament:
 		Weapon: WormsUZI
@@ -1132,6 +1133,7 @@ WORMGRENADE:
 	Health:
 		HP: 12000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament:
 		Weapon: WormsGrenade
@@ -1173,6 +1175,7 @@ WORMBAZOOKA:
 	Health:
 		HP: 12000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 6
 	Armament:
 		Weapon: WormsRockets
@@ -1221,6 +1224,7 @@ WORMFLAMER:
 	Health:
 		HP: 13000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament:
 		Weapon: Flamethrower
@@ -1306,6 +1310,7 @@ WORMDYNAMITE:
 	RevealsShroud:
 		Range: 6c0
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 8
 	Demolition:
 		DetonationDelay: 45
@@ -1383,6 +1388,7 @@ SKUNK:
 	Health:
 		HP: 20000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament:
 		Weapon: Skunkspray
@@ -1898,6 +1904,7 @@ WORMS_UFO:
 	Armament@SECONDARY2:
 		Weapon: WormsRockets
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 5
 	AttackAircraft:
 		FacingTolerance: 80
@@ -1962,6 +1969,7 @@ WORMS_APACHE:
 		MuzzleSequence: muzzle
 		PauseOnCondition: !ammo
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	AttackAircraft:
 		FacingTolerance: 80

@@ -314,6 +314,11 @@ class ReadVersionFile(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             self.assertIsNone(fresh.read_version_file(pathlib.Path(tmp) / "absent"))
 
+    def test_sdk_git_stamp_matches_raw_mod_pin(self):
+        self.assertTrue(fresh.built_version_matches_pin("git-" + self.HASH, self.HASH))
+        self.assertFalse(fresh.built_version_matches_pin("git-" + self.HASH, "0" * 40))
+        self.assertFalse(fresh.built_version_matches_pin(None, self.HASH))
+
 
 class GitHelper(unittest.TestCase):
     def test_a_failed_git_call_returns_none_rather_than_raising(self):

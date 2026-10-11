@@ -46,7 +46,8 @@ namespace OpenRA.Mods.CA.Traits.Render
 			this.info = info;
 			self = init.Self;
 			facing = self.Trait<IFacing>();
-			body = init.Self.TraitsImplementing<WithSpriteBody>().Single(w => w.Info.Name == info.Body);
+			body = init.Self.TraitsImplementing<WithSpriteBody>().FirstOrDefault(w => !w.IsTraitDisabled && w.Info.Name == info.Body)
+				?? init.Self.TraitsImplementing<WithSpriteBody>().First(w => w.Info.Name == info.Body);
 		}
 
 		public bool ShouldBeOpen()

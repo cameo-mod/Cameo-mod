@@ -181,6 +181,7 @@ tkm_juggernaut:
 	ChangesHealth@SelfHealing:
 		Step: 16
 	AutoTarget:
+		DynamicWeaponPriority: true
 	Armament@PRIMARY:
 		Weapon: tkm_juggernaut
 		LocalOffset: 544,100,256
@@ -254,6 +255,7 @@ tkm_thermonaut:
 	ChangesHealth@SelfHealing:
 		Step: 60
 	AutoTarget:
+		DynamicWeaponPriority: true
 	Armament@PRIMARY:
 		Weapon: ThermoF
 		LocalOffset: 544,100,256
@@ -896,6 +898,7 @@ tkmworker:
 	AttackFrontal:
 		FacingTolerance: 2
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 10
 		RequiresCondition: freed
 	Voiced:

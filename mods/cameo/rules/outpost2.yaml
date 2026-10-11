@@ -161,6 +161,7 @@ op2_commonore_beacon_3bar:
 	AutoTargetPriority@DEFAULT:
 	AutoTargetPriority@ATTACKANYTHING:
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Passenger:
 		PipType: Yellow
@@ -2710,6 +2711,7 @@ PLYMOUTH_SPIDER:
 		ForceTargetStances: None
 	AttackFrontal:
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 6
 		InitialStance: AttackAnything
 	CaptureManager:

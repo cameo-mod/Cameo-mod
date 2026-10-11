@@ -610,6 +610,7 @@
 
 ^AutoTargetGround:
 	AutoTarget:
+		DynamicWeaponPriority: true
 		AttackAnythingCondition: stance-attackanything
 	AutoTargetPriority@DEFAULT:
 		RequiresCondition: !stance-attackanything
@@ -638,12 +639,14 @@
 
 ^AutoTargetAir:
 	AutoTarget:
+		DynamicWeaponPriority: true
 	AutoTargetPriority@DEFAULT:
 		ValidTargets: Air
 		InvalidTargets: NoAutoTarget
 
 ^AutoTargetAll:
 	AutoTarget:
+		DynamicWeaponPriority: true
 		AttackAnythingCondition: stance-attackanything
 	AutoTargetPriority@DEFAULT:
 		RequiresCondition: !stance-attackanything
@@ -1173,6 +1176,7 @@
 		Name: dummy
 		Weapon: dummytargeting
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 	AutoTargetPriority@DEFAULT:
 		ValidTargets: Infantry, plagued, ivanattached, lockdowned
@@ -1202,6 +1206,7 @@
 		Name: dummy
 		Weapon: dummytargeting
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 	AutoTargetPriority@DEFAULT:
 		ValidTargets: Infantry, plagued, ivanattached, lockdowned
@@ -1394,6 +1399,7 @@
 	RevealsShroud:
 		Range: 5000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 10
 		InitialStance: AttackAnything
 	Crushable:
@@ -1730,6 +1736,7 @@
 	RevealsShroud:
 		Range: 8000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 10
 	Buildable:
 		Description: Heavy siege unit.\n  Strong vs Buildings, Vehicles\n  Weak vs Infantry
@@ -2015,6 +2022,7 @@
 	DetectCloaked:
 		Range: 5000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: Defend
 		InitialStanceAI: AttackAnything
 		ScanRadius: 12
@@ -2045,6 +2053,7 @@
 		Range: 8000
 		Type: GroundPosition
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: Defend
 		InitialStanceAI: AttackAnything
 		ScanRadius: 12
@@ -2079,6 +2088,7 @@
 	DetectCloaked:
 		Range: 4500
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: Defend
 		InitialStanceAI: AttackAnything
 		ScanRadius: 12
@@ -2110,6 +2120,7 @@
 	DetectCloaked:
 		Range: 6666
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: Defend
 		InitialStanceAI: AttackAnything
 		ScanRadius: 12
@@ -2194,6 +2205,7 @@
 	DetectCloaked:
 		Range: 3500
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: Defend
 		InitialStanceAI: AttackAnything
 		ScanRadius: 10
@@ -3269,6 +3281,7 @@
 		Type: Circle
 			Radius: 128
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 		InitialStanceAI: AttackAnything
 		AllowMovement: false
@@ -3746,6 +3759,7 @@
 	Selectable:
 		Bounds: 1024, 1024, 0, -170
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 		ScanRadius: 10
 	WithInfantryBody:
@@ -3859,6 +3873,7 @@
 	WithDeathAnimation:
 		UseDeathTypeSuffix: false
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	AttackMove:
 		Voice: Attack
@@ -3901,6 +3916,7 @@
 	Targetable:
 		TargetTypes: Ground, Creep
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 5
 	AttackMove:
 		Voice: Attack
@@ -4435,7 +4451,9 @@
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 8
 		RequiresCondition: owned
-	AttackOpenTopped:
+	AttackGarrisoned:
+		# Existing geometry is retained; excess occupants have no firing station.
+		NoFireOverflow: true
 		Armaments: garrisoned
 		PortOffsets: 768,0,256, 448,-682,256, -448,-682,256, -768,0,256, -448,682,256, 448,682,256
 		PauseOnCondition: disabled || blinded
@@ -4560,7 +4578,7 @@
 			engineer: pip-yellow
 			special: pip-blue
 			hero: pip-red
-	AttackOpenTopped:
+	AttackGarrisoned:
 		Armaments: garrisoned
 		PortOffsets: 768,0,256, 448,-682,256, -448,-682,256, -768,0,256, -448,682,256, 448,682,256
 		RequiresCondition: !chronobeamed && !damaged
@@ -4944,6 +4962,7 @@
 	Capturable:
 		Types: defense
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: AttackAnything
 		InitialStanceAI: AttackAnything
 	ProductionCostMultiplier@DuneDefenseUpgrade:
@@ -6963,6 +6982,7 @@ CPQDEBUGDUMMY:
 	Rearmable:
 		RearmActors: dummy_dock,td_gdi_helipad,td_nod_helipad,ra1_allies_helipad,ra1_soviets_airfield,ra1_soviets_largesovietairfield,japan_japaneseairfield,ixian_launchpad,ra2_allies_airforcecommandhq,ra2_soviets_airfield,asianalliance_airforcecommand,steelconsortium_consortiumairpad,latinsyndicate_airstation,naxis_airfield,tkm_airpad,ts_gdi_helipad,forgotten_helipad,ts_nod_helipad,cabal_helipad
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: HoldFire
 	# DamageMultiplier@RearmableAircraft:
 		# Modifier: 160
@@ -10086,6 +10106,7 @@ CPQDEBUGDUMMY:
 	Armament@PRIMARY:
 		Weapon: DemoTruckTargeting
 	AutoTarget:
+		DynamicWeaponPriority: true
 		InitialStance: Defend
 		InitialStanceAI: AttackAnything
 		ScanRadius: 10
@@ -10152,7 +10173,7 @@ CPQDEBUGDUMMY:
 		UnloadVoice: Move
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 3
-	AttackOpenTopped:
+	AttackGarrisoned:
 		Voice: Attack
 		Armaments: garrisoned
 		PortOffsets: 256,0,128, 384,-128,128, 384,128,128
@@ -10160,6 +10181,7 @@ CPQDEBUGDUMMY:
 	RevealOnFire:
 		ArmamentNames: primary, garrisoned
 	AutoTarget:
+		DynamicWeaponPriority: true
 		AllowMovement: true
 	Selectable:
 		Bounds: 1280, 1280, 0, -128

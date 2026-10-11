@@ -585,6 +585,7 @@ xmas_green_elf:
 	Power:
 		Amount: -5
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament:
 		Weapon: xmas_pickaxe
@@ -637,6 +638,7 @@ xmas_red_elf:
 	Power:
 		Amount: -3
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	Armament:
 		Weapon: SuicideBomberTargeting
@@ -705,6 +707,7 @@ xmas_green_elf_worker:
 	Armament:
 		Weapon: xmas_pickaxe
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 4
 	WithDeathAnimation:
 		UseDeathTypeSuffix: false
@@ -787,6 +790,7 @@ xmas_satangoblin:
 	Health:
 		HP: 9000
 	AutoTarget:
+		DynamicWeaponPriority: true
 		ScanRadius: 10
 	Armament@PRIMARY:
 		Weapon: DRSatanClawzMinionMG

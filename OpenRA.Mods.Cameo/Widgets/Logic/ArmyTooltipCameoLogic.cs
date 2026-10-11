@@ -34,6 +34,7 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 
 			ArmyUnit lastArmyUnit = null;
 			var descLabelPadding = descLabel.Bounds.Height;
+			var descLabelY = descLabel.Bounds.Y;
 
 			tooltipContainer.BeforeRender = () =>
 			{
@@ -54,20 +55,24 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 				extrasLabel.Text = String.Join("\n", extras.Select(extra => FluentProvider.GetMessage(extra.Description)));
 				var extraSize = new int2(0, 0);
 
-				if (extrasLabel.Text != "")
+				// The extras shift must be re-based each pass: `+=` drifted DESC down permanently and
+				// its text ended up rendered under the shrunken box (same stale-bounds class as B5).
+				extrasLabel.Visible = extrasLabel.Text != "";
+				if (extrasLabel.Visible)
 				{
 					extraSize = extrasFont.Measure(extrasLabel.Text);
-					extrasLabel.Visible = true;
-					descLabel.Bounds.Y += extraSize.Y;
+					descLabel.Bounds.Y = descLabelY + extraSize.Y;
 				}
+				else
+					descLabel.Bounds.Y = descLabelY;
 
-				var desc = string.IsNullOrEmpty(buildable.Description) ? "" : FluentProvider.GetMessage(buildable.Description);
+				var desc = string.IsNullOrEmpty(buildable?.Description) ? "" : FluentProvider.GetMessage(buildable.Description);
 				descLabel.GetText = () => desc;
 				var descSize = descFont.Measure(desc);
 				descLabel.Bounds.Width = descSize.X;
 				descLabel.Bounds.Height = descSize.Y + descLabelPadding;
 
-				var leftWidth = Math.Max(nameSize.X, descSize.X);
+				var leftWidth = new[] { nameSize.X, descSize.X, extraSize.X }.Max();
 
 				widget.Bounds.Width = leftWidth + 2 * nameLabel.Bounds.X;
 

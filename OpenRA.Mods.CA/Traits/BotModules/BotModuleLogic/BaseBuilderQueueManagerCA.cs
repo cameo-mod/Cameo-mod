@@ -13,8 +13,10 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Xml.Linq;
+using OpenRA.Mods.AS.Traits;
 using OpenRA.Mods.Common;
 using OpenRA.Mods.Common.Traits;
+using OpenRA.Mods.Common.Traits.Radar;
 using OpenRA.Traits;
 
 namespace OpenRA.Mods.CA.Traits
@@ -37,17 +39,32 @@ namespace OpenRA.Mods.CA.Traits
 		string lastFailedBuilding;
 		int checkForBasesTicks;
 		int cachedBases;
-		int cachedBuildings;
+
+		// FIX-RA-REFINERY R1: the latch keeps its own baseline — cachedBases belongs to the water
+		// check and was being clobbered by it, and the old capture site was guarded by
+		// `BaseExpansionModules == null` which never runs (the array is never null).
+		int latchedBuildings;
+		int latchedProviders;
 		int minimumExcessPower;
 		int minCashRequirement;
 		CPos? baseCenterKeepsFailing = null;
+
+		// ECON-A: ChooseBuildLocation set this when an expansion-demand cell came from the
+		// defence-placement advisor — TickQueue's advisedDefense local predates the demand path
+		// and can't be reached from inside the helper. Folded into the same telemetry flag.
+		bool demandAdvisedDefense = false;
+
+		// ECON-A-FIX (R5/R6): the demand pick deferred until the StartProduction order is actually
+		// admitted — binding at pick time lets a veto (cash floor, army-first) strand a bound item
+		// that never queues, and an anchor may only be reserved once the order is going out.
+		(ExpansionDemand Demand, bool IsRefinery, RefineryAnchorClaim? Claim) pendingDemandPick;
 
 		bool itemQueuedThisTick = false;
 
 		// An empty tolerance list in yaml would make ImmutableArray.Random throw.
 		int RandomTolerance(ImmutableArray<int> values)
 		{
-			return values.IsDefaultOrEmpty ? 0 : values.Random(world.LocalRandom);
+			return values.IsDefaultOrEmpty ? 0 : values.Random(BotRng.For(player, nameof(BaseBuilderQueueManagerCA)));
 		}
 		bool limitBuildRadius = false;
 
@@ -62,6 +79,14 @@ namespace OpenRA.Mods.CA.Traits
 		// Cameo (§12.20): lazy — resolved on first TickQueue, an OR-of-vetoes pause on new building
 		// production. Empty = nothing pauses, upstream-identical.
 		IBotRequestPauseBuildingProduction[] pauseBuilding;
+
+		// REPLAY-HEALTH-LOGGER (ACK-2, task 01a12023): record-only queue-transition dispatch.
+		// Everything here is lazy — with no observer trait on the PlayerActor the seam is one
+		// null check per Tick and no state is ever allocated (Sol review F5).
+		IBotBuildQueueObserver[] queueObservers;
+		BotQueueEpisodeTracker queueEpisodes;
+		Dictionary<ProductionQueue, BotQueueWatch> queueWatches;
+		HashSet<ProductionItem> queueProbeScratch;
 
 		public BaseBuilderQueueManagerCA(BaseBuilderBotModuleCA baseBuilder, string category, Player p, PowerManager pm,
 			PlayerResources pr, IResourceLayer rl)
@@ -97,6 +122,360 @@ namespace OpenRA.Mods.CA.Traits
 			buildingIntervalModifier = botLimits.Info.BuildingIntervalModifier;
 		}
 
+		// REPLAY-HEALTH-LOGGER (ACK-2, Sol review F1/F3/F5): a registered observer turns the
+		// seam on — observers resolve once, the tracker and per-queue watches allocate lazily.
+		bool ObserveQueueTransitions()
+		{
+			queueObservers ??= player.PlayerActor.TraitsImplementing<IBotBuildQueueObserver>().ToArray();
+			if (queueObservers.Length == 0)
+				return false;
+
+			queueEpisodes ??= new BotQueueEpisodeTracker();
+			queueWatches ??= new Dictionary<ProductionQueue, BotQueueWatch>();
+			queueProbeScratch ??= new HashSet<ProductionItem>();
+			return true;
+		}
+
+		// Every-tick item-list reconciliation (F2/F3/F4): runs before the latch and WaitTicks
+		// early returns so Started/Ready carry the exact observation tick and terminal records
+		// fire when the item actually leaves the queue. A queue that drops out of FindQueues
+		// (producer dead -> trait disabled) still resolves its contents as removals, so a
+		// destroyed producer never silently swallows records. Bounded by queue count and
+		// length — trait-list iteration only, no scans, orders, or RNG.
+		void ProbeQueueTransitions()
+		{
+			var tick = world.WorldTick;
+			foreach (var queue in AIUtils.FindQueues(player, Category))
+			{
+				if (!queueWatches.TryGetValue(queue, out var watch))
+					queueWatches[queue] = watch = new BotQueueWatch();
+
+				watch.SeenTick = tick;
+				var now = queue.AllQueued();
+
+				queueProbeScratch.Clear();
+				foreach (var it in now)
+					queueProbeScratch.Add(it);
+
+				foreach (var old in watch.Items)
+				{
+					var oldItem = (ProductionItem)old;
+					if (!queueProbeScratch.Contains(oldItem))
+						ResolveRemovedItem(queue, watch, oldItem, queueSeen: true);
+				}
+
+				// Expire requests whose item is still queued: the order was rejected or
+				// lost. Done after the removal diff so a leaving item still carries the
+				// request's intent on its Removed record, and before the proof scans so
+				// an expired request can never claim a late signature. Armed entries are
+				// not dropped silently — they resolve through the proof scan below.
+				watch.Pending.RemoveAll(p => p.Stale(tick) && !p.AwaitingProof);
+
+				// The only provable cancellation: a cancel request on an Infinite item sees
+				// item.Infinite flipped to false while the item STAYS queued — the unique
+				// signature of CancelProductionInner (EndProduction removals are
+				// indistinguishable from engine cleanup). The item keeps its episode.
+				List<BotQueuePendingTerminal> proven = null;
+				foreach (var p in watch.Pending)
+					if (p.Item is ProductionItem pi && queueProbeScratch.Contains(pi) && p.CancelProvenByFlagFlip())
+						(proven ??= new List<BotQueuePendingTerminal>()).Add(p);
+				if (proven != null)
+					foreach (var p in proven)
+					{
+						watch.Pending.Remove(p);
+						EmitQueueTransition(queue, queue.Actor, p.Item, p.ItemName, QueueCategoryOf(p.ItemName),
+							BotQueueTransitionKind.Cancelled, p.Reason, p.Class, queueEpisodes.EpisodeOf(p.Item));
+					}
+
+				// Armed placement requests awaiting actor proof: the actor landing on the
+				// ordered cell resolves Placed; expiry or elimination resolves Removed
+				// carrying the intent reason (schema-2 UNKNOWN).
+				List<(BotQueuePendingTerminal Pending, BotQueuePendingResolution Outcome)> outcomes = null;
+				var live = !queue.Actor.IsDead && !queue.Actor.Disposed;
+				foreach (var p in watch.Pending)
+				{
+					if (!p.AwaitingProof)
+						continue;
+
+					var res = p.ResolveWhileAwaiting(tick, PlacementProof(p), player.WinState != WinState.Undefined);
+					if (res != BotQueuePendingResolution.Unresolved)
+						(outcomes ??= new List<(BotQueuePendingTerminal, BotQueuePendingResolution)>()).Add((p, res));
+				}
+
+				if (outcomes != null)
+					foreach (var (p, res) in outcomes)
+					{
+						watch.Pending.Remove(p);
+						EmitTerminalOutcome(queue, p.Item, p.ItemName, p, res == BotQueuePendingResolution.EmitRequested, live);
+					}
+
+				foreach (var it in now)
+				{
+					if (watch.Items.Contains(it))
+						continue;
+
+					var episode = queueEpisodes.BeginEpisode(it);
+					EmitQueueTransition(queue, queue.Actor, it, it.Item, QueueCategoryOf(it.Item),
+						BotQueueTransitionKind.Queued, BotQueueTransitionReason.None,
+						BotQueueCancellationClass.None, episode);
+				}
+
+				var head = now.FirstOrDefault();
+				if (head != null && head.Done && queueEpisodes.AnnounceReady(head))
+					EmitQueueTransition(queue, queue.Actor, head, head.Item, QueueCategoryOf(head.Item),
+						BotQueueTransitionKind.Ready, BotQueueTransitionReason.None);
+
+				watch.Items.Clear();
+				foreach (var it in now)
+					watch.Items.Add(it);
+			}
+
+			// Stale watches: the queue left FindQueues (disabled or destroyed producer) —
+			// every remaining item resolves as a removal on this observation tick.
+			List<ProductionQueue> dead = null;
+			foreach (var kv in queueWatches)
+			{
+				var watch = kv.Value;
+				if (watch.SeenTick == tick)
+					continue;
+
+				foreach (var old in watch.Items)
+					ResolveRemovedItem(kv.Key, watch, (ProductionItem)old, queueSeen: false);
+
+				// Requests left over after the item flush — armed proof entries get one
+				// last actor check (a builder unit's BuildOnSite survives its producer's
+				// death), everything else resolves Removed carrying its intent reason so
+				// a registered request's fate is never silently cleared.
+				var staleLive = !kv.Key.Actor.IsDead && !kv.Key.Actor.Disposed;
+				foreach (var p in watch.Pending)
+				{
+					var res = p.AwaitingProof && p.ResolveWhileAwaiting(tick, PlacementProof(p), player.WinState != WinState.Undefined) == BotQueuePendingResolution.EmitRequested;
+					EmitTerminalOutcome(kv.Key, p.Item, p.ItemName, p, res, staleLive);
+				}
+
+				watch.Items.Clear();
+				watch.Pending.Clear();
+				watch.SeenTick = tick;
+
+				// A dead producer can never re-enable its queue — drop the watch and its
+				// dedupe entry so history stays bounded to live producers (F5 pruning).
+				if (kv.Key.Actor.IsDead || kv.Key.Actor.Disposed)
+				{
+					dead ??= new List<ProductionQueue>();
+					dead.Add(kv.Key);
+					queueEpisodes.DropProducer(kv.Key.Actor.ActorID);
+				}
+			}
+
+			if (dead != null)
+				foreach (var queue in dead)
+					queueWatches.Remove(queue);
+		}
+
+		// The item left its queue. Removal alone NEVER proves a terminal cause (VP 01a121b6):
+		// the engine's own cleanup paths remove items too — tech-cap refunds, infinite trims,
+		// competing cancels, dead-producer disable — so request+removal is correlation, not
+		// proof. A Placed request emits Placed only on actor-lifecycle proof: an own, live
+		// actor of the ordered type occupying the ordered cell (or the plug slot occupied).
+		// Without proof the request stays armed for the bounded window — a builder unit's
+		// BuildOnSite lands late or never — and ends Removed + intent reason. A cancel
+		// request can never be proven by disappearance (cleanup is indistinguishable), so it
+		// always resolves Removed + intent reason — cause UNKNOWN, schema-2 non-pass.
+		void ResolveRemovedItem(ProductionQueue queue, BotQueueWatch watch, ProductionItem oldItem, bool queueSeen)
+		{
+			var pending = FindPending(watch, oldItem);
+			var live = !queue.Actor.IsDead && !queue.Actor.Disposed;
+
+			if (pending != null)
+			{
+				var resolution = pending.ResolveOnRemoval(world.WorldTick, queueSeen, PlacementProof(pending));
+				if (resolution == BotQueuePendingResolution.KeepAwaitingProof)
+				{
+					// The item is gone but the actor may still land — the request and its
+					// episode stay armed for the bounded proof window, which restarts now.
+					pending.AwaitingProof = true;
+					pending.IssuedTick = world.WorldTick;
+					return;
+				}
+
+				watch.Pending.Remove(pending);
+				EmitTerminalOutcome(queue, oldItem, pending.ItemName, pending,
+					resolution == BotQueuePendingResolution.EmitRequested, live);
+			}
+			else
+			{
+				var episode = queueEpisodes.EpisodeOf(oldItem);
+				queueEpisodes.EndEpisode(oldItem);
+				var cls = player.WinState != WinState.Undefined ? BotQueueCancellationClass.Elimination
+					: !live ? BotQueueCancellationClass.Destruction
+					: BotQueueCancellationClass.None;
+				EmitQueueTransition(queue, queue.Actor, oldItem, oldItem.Item, QueueCategoryOf(oldItem.Item),
+					BotQueueTransitionKind.Removed, BotQueueTransitionReason.None, cls, episode);
+			}
+		}
+
+		// Terminal emit for a resolved request: proof emits the requested kind (Placed); the
+		// unproven path emits Removed carrying the request's reason so the intent stays on
+		// record, classified event-locally — never the request's class, which would assert
+		// the unproven cause.
+		void EmitTerminalOutcome(ProductionQueue queue, object itemRef, string itemName, BotQueuePendingTerminal pending, bool proven, bool live)
+		{
+			var episode = queueEpisodes.EpisodeOf(itemRef);
+			queueEpisodes.EndEpisode(itemRef);
+			var cls = proven ? BotQueueCancellationClass.None
+				: player.WinState != WinState.Undefined ? BotQueueCancellationClass.Elimination
+				: !live ? BotQueueCancellationClass.Destruction
+				: BotQueueCancellationClass.None;
+			EmitQueueTransition(queue, queue.Actor, itemRef, itemName, QueueCategoryOf(itemName),
+				proven ? pending.Kind : BotQueueTransitionKind.Removed, pending.Reason, cls, episode);
+		}
+
+		// Actor-lifecycle proof for a Placed request — the lead's "building actor added to
+		// the world" criterion: an own, live actor of the ordered type occupying the ordered
+		// cell. Normal placement lands inside the same frame-end task as the removal, so it
+		// is already provable at the next probe tick; a builder unit lands whenever
+		// BuildOnSite completes (or never, on failure). A plug order creates no actor — its
+		// proof is the host slot's installed plug state: only a requirement-free slot
+		// refusing the type it accepted is positive evidence (EnablePlug is the sole writer
+		// of active). A requirement-keyed or unknown-type slot reports availability, not
+		// install — those pendings stay UNKNOWN and expire Removed.
+		bool PlacementProof(BotQueuePendingTerminal p)
+		{
+			if (p.Kind != BotQueueTransitionKind.Placed || p.Site == null)
+				return false;
+
+			var site = p.Site.Value;
+			if (p.PlugType != null)
+				return world.ActorsWithTrait<Pluggable>().Any(t => t.Actor.Owner == player
+					&& t.Actor.Location + t.Trait.Info.Offset == site
+					&& BaseBuilderQueueEvalCA.PlugInstallProven(
+						t.Trait.Info.Conditions.ContainsKey(p.PlugType),
+						t.Trait.Info.Requirements.ContainsKey(p.PlugType),
+						t.Trait.AcceptsPlug(p.PlugType)));
+
+			return world.ActorMap.GetActorsAt(site).Any(a => !a.IsDead && a.Owner == player && PlacedNameMatches(p.ItemName, a));
+		}
+
+		bool PlacedNameMatches(string itemName, Actor placed)
+		{
+			if (placed.Info.Name == itemName)
+				return true;
+
+			// PlaceBuildingVariants: the order may carry a variant override — the created
+			// actor's name differs from the queue item name but is a registered variant.
+			var info = world.Map.Rules.Actors[itemName].TraitInfoOrDefault<PlaceBuildingVariantsInfo>();
+			return info?.Actors != null && info.Actors.Contains(placed.Info.Name);
+		}
+
+		static BotQueuePendingTerminal FindPending(BotQueueWatch watch, object item)
+		{
+			var name = (item as ProductionItem)?.Item;
+			foreach (var p in watch.Pending)
+				if (p.Matches(item, name))
+					return p;
+
+			return null;
+		}
+
+		// A manager-issued terminal is a REQUEST — the intent record emits now, at the
+		// decision tick, and the outcome resolves separately on removal/proof (VP 01a121b6:
+		// request intent and proven outcome are distinct records, never fused). Last
+		// decision wins: a later request for the same item supersedes the earlier pending.
+		void NotePendingTerminal(ProductionQueue queue, ProductionItem itemRef, string itemName,
+			BotQueueTransitionKind kind, BotQueueTransitionReason reason, BotQueueCancellationClass cls,
+			CPos? site = null, string plugType = null)
+		{
+			if (queueWatches == null || !queueWatches.TryGetValue(queue, out var watch))
+				return;
+
+			watch.Pending.RemoveAll(p => ReferenceEquals(p.Item, itemRef) || (p.Item == null && p.ItemName == itemName));
+			watch.Pending.Add(new BotQueuePendingTerminal
+			{
+				Item = itemRef, ItemName = itemName, Kind = kind, Reason = reason, Class = cls,
+				IssuedTick = world.WorldTick, Site = site, PlugType = plugType,
+				WasInfinite = (itemRef as ProductionItem)?.Infinite ?? false
+			});
+
+			EmitQueueTransition(queue, queue.Actor, itemRef, itemName, QueueCategoryOf(itemName),
+				kind == BotQueueTransitionKind.Placed ? BotQueueTransitionKind.PlacementOrdered : BotQueueTransitionKind.CancelOrdered,
+				reason, cls, queueEpisodes.EpisodeOf(itemRef));
+		}
+
+		/// <summary>REPLAY-HEALTH-LOGGER (F4): a demand-path cancel issued outside the manager
+		/// (BaseBuilderBotModuleCA.CancelDemandItem) registers its intent here — the record is
+		/// a non-terminal CancelOrdered; the bound item's later removal resolves Removed with
+		/// the DemandCancel reason (disappearance alone never proves a cancel).</summary>
+		public void NoteExternalCancel(Actor producer, string item)
+		{
+			if (queueWatches == null)
+				return;
+
+			foreach (var kv in queueWatches)
+			{
+				if (kv.Key.Actor != producer)
+					continue;
+
+				// Same binding rule as the manager's own cancels: CancelProduction resolves
+				// the LAST same-name item in queue order (a HashSet's LastOrDefault would be
+				// bucket order, not the tail). Last decision wins — never an unbounded append.
+				var target = kv.Key.AllQueued().LastOrDefault(i => i.Item == item);
+				if (target == null)
+					continue;
+
+				kv.Value.Pending.RemoveAll(p => p.ItemName == item);
+				kv.Value.Pending.Add(new BotQueuePendingTerminal
+				{
+					Item = target, ItemName = item, Kind = BotQueueTransitionKind.Cancelled,
+					Reason = BotQueueTransitionReason.DemandCancel, Class = BotQueueCancellationClass.Production,
+					IssuedTick = world.WorldTick, WasInfinite = target.Infinite
+				});
+
+				EmitQueueTransition(kv.Key, producer, target, item, QueueCategoryOf(item),
+					BotQueueTransitionKind.CancelOrdered, BotQueueTransitionReason.DemandCancel,
+					BotQueueCancellationClass.Production, queueEpisodes.EpisodeOf(target));
+			}
+		}
+
+		// One record-only transition to every registered observer. Event-local state is
+		// resolved here, at the emit tick — a producer-less transition (latch resume)
+		// carries ProducerActorId 0 and ProducerLive null = UNKNOWN; an item unobserved by
+		// the probe carries EpisodeId 0 = UNKNOWN.
+		void EmitQueueTransition(ProductionQueue queue, Actor producer, object itemRef, string item, BuildingType category,
+			BotQueueTransitionKind kind, BotQueueTransitionReason reason,
+			BotQueueCancellationClass cancellationClass = BotQueueCancellationClass.None,
+			uint episodeOverride = 0)
+		{
+			if (!ObserveQueueTransitions())
+				return;
+
+			var producerId = producer?.ActorID ?? 0;
+			if (!queueEpisodes.EmitGate(producerId, itemRef, item, kind, reason))
+				return;
+
+			var transition = new BotQueueTransition(world.WorldTick, item,
+				queue?.Info.Group ?? Category, category, producerId,
+				episodeOverride != 0 ? episodeOverride : queueEpisodes.EpisodeOf(itemRef),
+				kind, reason,
+				player.WinState == WinState.Undefined,
+				producer == null ? (bool?)null : !producer.IsDead && !producer.Disposed,
+				cancellationClass);
+			foreach (var observer in queueObservers)
+				observer.OnQueueTransition(in transition);
+		}
+
+		BuildingType QueueCategoryOf(string item)
+		{
+			if (item == null || baseBuilder.Info == null)
+				return BuildingType.Building;
+			if (baseBuilder.Info.RefineryTypes.Contains(item))
+				return BuildingType.Refinery;
+			if (baseBuilder.Info.DefenseTypes.Contains(item))
+				return BuildingType.Defense;
+			if (baseBuilder.Info.FragileTypes.Contains(item))
+				return BuildingType.Fragile;
+			return BuildingType.Building;
+		}
+
 		// Scale targets (DESIGN 19.10): an enabled provider's production target replaces BotLimits.ProductionTypeLimit
 		// (0 stays "no limit" when there are no BotLimits at all).
 		int ProductionTypeLimit => productionTypeLimit > 0 && baseBuilder.TryGetScaleTarget("production", out var scaled)
@@ -120,6 +499,12 @@ namespace OpenRA.Mods.CA.Traits
 
 		public void Tick(IBot bot)
 		{
+			// REPLAY-HEALTH-LOGGER (F3): the probe reconciles queue state every tick so
+			// transition records carry exact observation ticks — it must run before the
+			// latch and WaitTicks early returns below. No observer = one lazy-resolve check.
+			if (ObserveQueueTransitions())
+				ProbeQueueTransitions();
+
 			foreach (KeyValuePair<string, int> i in activeBuildingIntervals.ToList())
 			{
 				activeBuildingIntervals[i.Key]--;
@@ -138,6 +523,7 @@ namespace OpenRA.Mods.CA.Traits
 					{
 						var stuckConyard = baseBuilder.ConstructionYardBuildings.Actors
 							.Where(a => (a.Location - baseCenterKeepsFailing.Value).LengthSquared <= baseBuilder.Info.MaxBaseRadius * baseBuilder.Info.MaxBaseRadius)
+							.OrderBy(a => a.ActorID)
 							.MinByOrDefault(a => (a.Location - baseCenterKeepsFailing.Value).LengthSquared);
 
 						if (stuckConyard != null)
@@ -146,34 +532,58 @@ namespace OpenRA.Mods.CA.Traits
 							foreach (var queue in stuckConyard.TraitsImplementing<ProductionQueue>())
 							{
 								foreach (var item in queue.AllQueued().ToArray())
+								{
+									// The record resolves on the tick the item actually
+									// leaves the queue (F2); queues outside this manager's
+									// category surface as Removed on their own manager.
+									NotePendingTerminal(queue, item, item.Item, BotQueueTransitionKind.Cancelled,
+										BotQueueTransitionReason.RelocationLatch, BotQueueCancellationClass.Production);
 									bot.QueueOrder(Order.CancelProduction(queue.Actor, item.Item, 1));
+								}
 							}
 
 							foreach (var be in baseBuilder.BaseExpansionModules)
 								be.UpdateExpansionParams(bot, false, true, stuckConyard);
 
+							EmitQueueTransition(null, stuckConyard, null, lastFailedBuilding, QueueCategoryOf(lastFailedBuilding),
+								BotQueueTransitionKind.Held, BotQueueTransitionReason.RelocationLatch);
 							failCount = 0;
+							failRetryTicks = baseBuilder.Info.StructureProductionResumeDelay;
 							return;
 						}
 					}
 
+					EmitQueueTransition(null, null, null, lastFailedBuilding, QueueCategoryOf(lastFailedBuilding),
+						BotQueueTransitionKind.Resumed, BotQueueTransitionReason.SaturationLatch);
 					failCount = 0;
+					failRetryTicks = baseBuilder.Info.StructureProductionResumeDelay;
 				}
 
-				// No BaseExpansionModules exist. Only bother resetting failCount when either
-				// a) the number of buildings has decreased since last failure M ticks ago,
+				// When the nudge above can't act — no BaseExpansionModules, no failing centre, or a
+				// relocation hold live — only bother resetting failCount when either
+				// a) the number of buildings has decreased since the snapshot taken at saturation,
 				// or b) number of BaseProviders (construction yard or similar) has increased since then.
-				// Otherwise reset failRetryTicks instead to wait again.
-				// (BaseExpansionModules is a .ToArray() — never null; Length==0 was the intent.)
-				else if (baseBuilder.BaseExpansionModules.Length == 0 && --failRetryTicks <= 0)
+				// Otherwise the probe waits another resume delay.
+				// (BaseExpansionModules is a .ToArray() — never null; Length==0 covers "no modules".)
+				// FIX-RA-REFINERY: the widened gate serves every un-nudgeable case; R1 moved the
+				// baseline off cachedBases (the water checker's field) onto latched* fields captured
+				// unconditionally at saturation, and rearmed the timer per episode.
+				else if (BaseBuilderQueueEvalCA.LatchRecoveryApplies(baseBuilder.BaseExpansionModules.Length,
+					baseCenterKeepsFailing != null, baseBuilder.RelocationHoldConyard != null)
+					&& BaseBuilderQueueEvalCA.LatchProbeDue(ref failRetryTicks, baseBuilder.Info.StructureProductionResumeDelay))
 				{
 					var currentBuildings = world.ActorsHavingTrait<Building>().Count(a => a.Owner == player);
 					var baseProviders = world.ActorsHavingTrait<BaseProvider>().Count(a => a.Owner == player);
 
-					if (currentBuildings < cachedBuildings || baseProviders > cachedBases)
+					if (BaseBuilderQueueEvalCA.LatchProbeReleases(currentBuildings, latchedBuildings, baseProviders, latchedProviders))
+					{
+						// FIX-RA-REFINERY diagnostics: observe the latch release — once per resume
+						// delay at most, never per tick.
+						AIUtils.BotDebug($"{player} placement latch released (buildings {latchedBuildings} -> {currentBuildings}, providers {latchedProviders} -> {baseProviders}) at tick {world.WorldTick}");
+						EmitQueueTransition(null, null, null, lastFailedBuilding, QueueCategoryOf(lastFailedBuilding),
+							BotQueueTransitionKind.Resumed, BotQueueTransitionReason.SaturationLatch);
 						failCount = 0;
-					else
-						failRetryTicks = baseBuilder.Info.StructureProductionResumeDelay;
+					}
 				}
 
 				if (failCount >= baseBuilder.Info.MaximumFailedPlacementAttempts)
@@ -217,6 +627,9 @@ namespace OpenRA.Mods.CA.Traits
 			if (knobs != null)
 				minimumExcessPower = BotBuildOrderKnobs.Scale(minimumExcessPower, knobs.KnobMilli(BuildOrderKnob.PowerMargin));
 
+			// BP-2 (§19.15): the advisor's radar power reserve — one Refresh-priced read per queue tick.
+			radarPowerMargin = FrontBackAdvisor()?.RadarPowerMargin ?? 0;
+
 			// PERF: Queue only one actor at a time per category
 			itemQueuedThisTick = false;
 			var active = false;
@@ -228,7 +641,7 @@ namespace OpenRA.Mods.CA.Traits
 
 			// Add a random factor so not every AI produces at the same tick early in the game.
 			// Minimum should not be negative as delays in HackyAI could be zero.
-			var randomFactor = world.LocalRandom.Next(0, baseBuilder.Info.StructureProductionRandomBonusDelay);
+			var randomFactor = BotRng.For(player, nameof(BaseBuilderQueueManagerCA)).Next(0, baseBuilder.Info.StructureProductionRandomBonusDelay);
 
 			WaitTicks = active ? baseBuilder.Info.StructureProductionActiveDelay + randomFactor
 				: baseBuilder.Info.StructureProductionInactiveDelay + randomFactor;
@@ -248,8 +661,19 @@ namespace OpenRA.Mods.CA.Traits
 			// Waiting to build something
 			if (currentBuilding == null && failCount < baseBuilder.Info.MaximumFailedPlacementAttempts)
 			{
+				pendingDemandPick = default;
 				var item = ChooseBuildingToBuild(queue);
 				if (item == null)
+					return false;
+
+				var demandPick = pendingDemandPick;
+
+				// ECON-A-FIX (R5): producer+name exclusivity — an ordinary pick must never duplicate a
+				// demand-bound name on this producer: CancelProduction removes the LAST same-name item,
+				// so a duplicate would refund or free the wrong one. The demand's own pick (and an
+				// ordinary same-name duplicate of an ORDINARY item, legal before) pass unchanged.
+				if (baseBuilder.ExpansionPrebuildEnabled && demandPick.Demand == null
+					&& baseBuilder.DemandForQueuedItem(item.Name, queue.Actor) != null)
 					return false;
 
 				// We shouldn't be queueing new buildings (other than refineries) when we're low on cash.
@@ -259,10 +683,12 @@ namespace OpenRA.Mods.CA.Traits
 				var lawWants = baseBuilder.RefineryLawProvider();
 				var plannerWant = lawWants != null
 					&& (item.Name == lawWants.WantedLinkBuilding || item.Name == lawWants.WantedMcvPrerequisite);
-				if ((playerResources.GetCashAndResources() < minCashRequirement
-						&& !baseBuilder.Info.RefineryTypes.Contains(item.Name)
-						&& !(plannerWant && playerResources.GetCashAndResources() >= queue.GetProductionCost(item)))
-					|| itemQueuedThisTick)
+
+				// ECON-A: a demand-bound item rides at its own cost floor like the planner wants —
+				// the reserve gate would push it past the ETA it was scheduled to meet.
+				if (BaseBuilderQueueEvalCA.BlockedByCash(playerResources.GetCashAndResources(), minCashRequirement,
+						baseBuilder.Info.RefineryTypes.Contains(item.Name), plannerWant || demandPick.Demand != null,
+						queue.GetProductionCost(item), itemQueuedThisTick))
 					return false;
 
 				// Cameo (§12.20): the army-first vote - a provider (ArmyFirstBotModule, the one owner) can hold new
@@ -276,15 +702,64 @@ namespace OpenRA.Mods.CA.Traits
 						return false;
 				}
 
+				// ECON-A-FIX (R6): the demand's refinery reserves its claim's anchor as the order is
+				// admitted — taken off every other claim while the item is in flight. A pick whose
+				// anchor is no longer reservable (served, parked, pending, or another demand got there)
+				// never reaches the queue and retries next sweep.
+				// REPAIR-B3 (SPEC §3): the claim's WHOLE covered set binds atomically under the current
+				// coverage model version — a contested member or a stale-model set refuses the whole
+				// admission, so two queues can never split the set and each admit a duplicate.
+				if (demandPick.Demand != null && demandPick.IsRefinery && lawWants != null
+					&& !BaseBuilderQueueEvalCA.RefineryReservationAdmits(
+						lawWants, demandPick.Claim, demandPick.Demand,
+						world.WorldTick + baseBuilder.Info.ExpansionDemandIdleTicks))
+				{
+					pendingDemandPick = default;
+					return false;
+				}
+
 				baseBuilder.RecordOpeningStructureQueued(queue, item);
 				baseBuilder.BuildOrderKnobs?.NotifyQueued(item.Name);
 				bot.QueueOrder(Order.StartProduction(queue.Actor, item.Name, 1));
 				queuedAt[queue.Actor.ActorID] = (item.Name, world.WorldTick);
+				if (demandPick.Demand != null)
+				{
+					// ECON-A-FIX (R5): bind on the admitted order, not the pick — the recorded in-flight
+					// order and this binding are the same (producer, item) token CancelProduction needs.
+					if (demandPick.IsRefinery)
+						demandPick.Demand.BindRefinery(item.Name, queue.Actor, world.WorldTick, demandPick.Claim);
+					else
+						demandPick.Demand.BindDefence(item.Name, queue.Actor, world.WorldTick);
+
+					pendingDemandPick = default;
+				}
+
+				baseBuilder.RecordProducerOrder(queue.Actor, item.Name);
 				itemQueuedThisTick = true;
 				SetBuildingInterval(item.Name);
+
+				// REPLAY-HEALTH-LOGGER (F2/F3): no emit here — the probe records Started on
+				// the tick the engine applies the order, not the request tick.
 			}
 			else if (currentBuilding != null && currentBuilding.Done)
 			{
+				// REPLAY-HEALTH-LOGGER (F3): Ready also comes from the probe — the exact tick
+				// the head item flips Done, not this WaitTicks-gated sweep.
+
+				// ECON-A (§4 Ready-hold): a bound demand item sits at Queue[0] until its MCV deploys —
+				// returning false holds it without spending failure budget (the same mechanic the REF-1
+				// crawl hold and the BP-2 front/back hold use below). One held item per queue is the
+				// engine's own guarantee: only the head item produces, and the head is the held item.
+				var heldDemand = baseBuilder.ExpansionPrebuildEnabled
+					? baseBuilder.DemandForQueuedItem(currentBuilding.Item, queue.Actor)
+					: null;
+				if (heldDemand != null && !heldDemand.Deployed)
+				{
+					EmitQueueTransition(queue, queue.Actor, currentBuilding, currentBuilding.Item, QueueCategoryOf(currentBuilding.Item),
+						BotQueueTransitionKind.Held, BotQueueTransitionReason.DemandHold);
+					return false;
+				}
+
 				// Production is complete
 				// Choose the placement logic
 				// HACK: HACK HACK HACK
@@ -299,9 +774,15 @@ namespace OpenRA.Mods.CA.Traits
 				// Check if we've hit the limit for this building already, if so cancel it
 				if (baseBuilder.TryGetBuildingLimit(currentBuilding.Item, out var currentLimit))
 				{
-					if ((AIUtils.CountBuildingByCommonName(new HashSet<string> { currentBuilding.Item }, player) >= currentLimit))
+					if (BaseBuilderQueueEvalCA.LimitReached(AIUtils.CountBuildingByCommonName(new HashSet<string> { currentBuilding.Item }, player), currentLimit))
 					{
 						AIUtils.BotDebug($"{player} has already has enough {currentBuilding.Item}; cancelling production");
+
+						// CancelProduction removes the LAST same-name item — bind that
+						// instance, not the head, so the removal resolves to this request.
+						var cancelTarget = queue.AllQueued().LastOrDefault(i => i.Item == currentBuilding.Item) ?? currentBuilding;
+						NotePendingTerminal(queue, cancelTarget, currentBuilding.Item, BotQueueTransitionKind.Cancelled,
+							BotQueueTransitionReason.LimitReached, BotQueueCancellationClass.Production);
 						bot.QueueOrder(Order.CancelProduction(queue.Actor, currentBuilding.Item, 1));
 					}
 				}
@@ -312,14 +793,24 @@ namespace OpenRA.Mods.CA.Traits
 				var valueInfo = actorInfo.TraitInfoOrDefault<ValuedInfo>();
 				var distanceToBaseIsImportant = true;
 				CPos? advisedDefense = null;
+				var refineryDefers = false;
 				refineryClaimed = false;
+				lastFrontBackPick = null;
+				frontBackHold = false;
+				demandAdvisedDefense = false;
 				if (plugInfo != null)
 				{
-					var possibleBuilding = world.ActorsWithTrait<Pluggable>().FirstOrDefault(a =>
-						a.Actor.Owner == player && a.Trait.AcceptsPlug(plugInfo.Type));
+					// Maintainer ruling (playtest repair): the normal base builder picks a
+					// random eligible installation slot — synced BotRng over ActorID-ordered
+					// candidates, never first-match and never unsynced LocalRandom.
+					var plugCandidates = world.ActorsWithTrait<Pluggable>()
+						.Where(a => a.Actor.Owner == player && a.Trait.AcceptsPlug(plugInfo.Type))
+						.OrderBy(a => a.Actor.ActorID)
+						.ToArray();
 
-					if (possibleBuilding.Actor != null)
+					if (plugCandidates.Length > 0)
 					{
+						var possibleBuilding = plugCandidates[BotRng.For(player).Next(plugCandidates.Length)];
 						orderString = "PlacePlug";
 						location = possibleBuilding.Actor.Location + possibleBuilding.Trait.Info.Offset;
 					}
@@ -328,76 +819,145 @@ namespace OpenRA.Mods.CA.Traits
 				{
 					var law = baseBuilder.RefineryLawProvider();
 
-					// Check if Building is a defense and if we should place it towards the enemy or not.
-					// REF-1 B1 (§12.24 v2): the planner's crawl want is always a BaseCrawl placement — the want
-					// exists to close the gap to the target field, so the chance roll and cost threshold that
-					// gate organic crawl never apply to it (no random draw is consumed on this path).
-					if (law != null && currentBuilding.Item == law.WantedLinkBuilding)
-						type = BuildingType.BaseCrawl;
-					else if (baseBuilder.Info.RefineryTypes.Contains(actorInfo.Name))
+					if (heldDemand != null)
 					{
-						type = BuildingType.Refinery;
+						// ECON-A (§5): the MCV deployed — the held refinery takes the refinery-law claim
+						// path biased to the demand's own outpost, the defence places at the outpost.
+						// The class is decided by the binding itself; no random draw is consumed on
+						// this path (SPEC §8).
+						type = heldDemand.RefineryItem == currentBuilding.Item && heldDemand.RefineryProducer == queue.Actor
+							? BuildingType.Refinery
+							: BuildingType.Defense;
 					}
-					else if (baseBuilder.Info.FragileTypes.Contains(actorInfo.Name))
+					else
 					{
-						type = BuildingType.Fragile;
-						// distanceToBaseIsImportant = false;
-					}
-					else if (actorInfo.HasTraitInfo<AttackBaseInfo>())
-					{
-						// Cameo: an active advisor picks the cell itself, skipping the roll (no random draw is consumed);
-						// without one, or when it has no answer, the code below is unchanged.
-						advisedDefense = AdvisedDefenseCell(actorInfo, distanceToBaseIsImportant, queue.Actor);
-						if (advisedDefense == null)
+						// Check if Building is a defense and if we should place it towards the enemy or not.
+						// REF-1 B1 (§12.24 v2): the planner's crawl want is always a BaseCrawl placement — the want
+						// exists to close the gap to the target field, so the chance roll and cost threshold that
+						// gate organic crawl never apply to it (no random draw is consumed on this path).
+						var lawLink = law != null && currentBuilding.Item == law.WantedLinkBuilding;
+						var isRefinery = false;
+						var isFragile = false;
+						var hasAttackBase = false;
+						var defenseRoll = false;
+						var organicCrawlRoll = false;
+						if (!lawLink)
 						{
-							if (baseBuilder.Info.AntiAirTypes.Contains(actorInfo.Name))
-								placeDefenseTowardsEnemyChance = (int)Math.Ceiling(placeDefenseTowardsEnemyChance / 1.5);
+							if (baseBuilder.Info.RefineryTypes.Contains(actorInfo.Name))
+								isRefinery = true;
+							else if (baseBuilder.Info.FragileTypes.Contains(actorInfo.Name))
+								isFragile = true;
+							else if (actorInfo.HasTraitInfo<AttackBaseInfo>())
+							{
+								hasAttackBase = true;
 
-							if (world.LocalRandom.Next(100) < placeDefenseTowardsEnemyChance)
-								type = BuildingType.Defense;
+								// Cameo: an active advisor picks the cell itself, skipping the roll (no random draw is consumed);
+								// without one, or when it has no answer, the code below is unchanged.
+								advisedDefense = AdvisedDefenseCell(actorInfo, distanceToBaseIsImportant, queue.Actor);
+								if (advisedDefense == null)
+								{
+									if (baseBuilder.Info.AntiAirTypes.Contains(actorInfo.Name))
+										placeDefenseTowardsEnemyChance = (int)Math.Ceiling(placeDefenseTowardsEnemyChance / 1.5);
+
+									defenseRoll = BotRng.For(player, nameof(BaseBuilderQueueManagerCA)).Next(100) < placeDefenseTowardsEnemyChance;
+								}
+							}
+							// REF-1 (B1 maintainer ruling): a crawl placement must extend the buildable area —
+							// under the law, buildings without GivesBuildableArea (silos) never take the
+							// organic crawl roll and place at home instead; the GBA check precedes the draw
+							// so it consumes no randoms on the law path.
+							else
+							{
+								organicCrawlRoll = !limitBuildRadius && valueInfo != null && valueInfo.Cost < baseBuilder.Info.BaseCrawlCostThreshold
+									&& RefineryLawCrawlRoll.LegalLink(law != null, actorInfo)
+									&& BotRng.For(player, nameof(BaseBuilderQueueManagerCA)).Next(100) < baseBuilder.Info.BaseCrawlChance;
+							}
 						}
+
+						type = BaseBuilderQueueEvalCA.ClassifyPlacement(lawLink, isRefinery, isFragile, hasAttackBase, defenseRoll, organicCrawlRoll);
 					}
-					// REF-1 (B1 maintainer ruling): a crawl placement must extend the buildable area —
-					// under the law, buildings without GivesBuildableArea (silos) never take the
-					// organic crawl roll and place at home instead; the GBA check precedes the draw
-					// so it consumes no randoms on the law path.
-					else if (!limitBuildRadius && valueInfo != null && valueInfo.Cost < baseBuilder.Info.BaseCrawlCostThreshold
-						&& (law == null || actorInfo.HasTraitInfo<GivesBuildableAreaInfo>())
-						&& world.LocalRandom.Next(100) < baseBuilder.Info.BaseCrawlChance)
-						type = BuildingType.BaseCrawl;
+
+					// FIX-RA-REFINERY: decided here so the null-location branch below can tell a
+					// law refinery's "retry later" from an ordinary placement failure.
+					refineryDefers = BaseBuilderQueueEvalCA.RefineryDefers(law != null, type);
 
 					// REF-1 B1 (crawl-trace §8): under the law a crawl placement with no aim holds — returning
 					// keeps the produced building queued (and spends no failure budget) instead of wasting the
 					// link on an un-aimed fallback cell.
-					if (type == BuildingType.BaseCrawl && law != null
-						&& law.CrawlTargetEdge == null && baseBuilder.ExpansionTarget() == null)
+					if (BaseBuilderQueueEvalCA.CrawlHold(type, law != null, law?.CrawlTargetEdge != null, baseBuilder.ExpansionTarget() != null))
+					{
+						EmitQueueTransition(queue, queue.Actor, currentBuilding, currentBuilding.Item, type,
+							BotQueueTransitionKind.Held, BotQueueTransitionReason.CrawlHold);
 						return false;
+					}
 
 					if (advisedDefense != null)
 						location = advisedDefense;
 					else
-						(location, baseCenterKeepsFailing, actorVariant) = ChooseBuildLocation(currentBuilding.Item, distanceToBaseIsImportant, queue.Actor, type);
+					{
+						(location, baseCenterKeepsFailing, actorVariant) = ChooseBuildLocation(currentBuilding.Item, distanceToBaseIsImportant, queue.Actor, type, heldDemand);
+
+						// BP-2 (§19.15): the front/back advisor's hold — no legal cell and no fallback
+						// (a radar on a front with no defence line waits; it never goes forward). Same
+						// semantics as the REF-1 crawl hold above: queued, no failure budget spent.
+						if (frontBackHold)
+						{
+							EmitQueueTransition(queue, queue.Actor, currentBuilding, currentBuilding.Item, type,
+								BotQueueTransitionKind.Held, BotQueueTransitionReason.FrontBackHold);
+							return false;
+						}
+					}
 				}
 
 				if (location == null)
 				{
+					// FIX-RA-REFINERY: under the law a siteless refinery defers — cancelled for its
+					// refund while the standing request re-queues it on a later sweep. Spending
+					// shared failure budget here let one unreachable field saturate the latch and
+					// starve every other structure indefinitely.
+					if (refineryDefers)
+					{
+						AIUtils.BotDebug($"{player} defers {currentBuilding.Item}: no legal refinery site this sweep");
+						var cancelTarget = queue.AllQueued().LastOrDefault(i => i.Item == currentBuilding.Item) ?? currentBuilding;
+						NotePendingTerminal(queue, cancelTarget, currentBuilding.Item, BotQueueTransitionKind.Cancelled,
+							BotQueueTransitionReason.NoRefinerySite, BotQueueCancellationClass.Production);
+						bot.QueueOrder(Order.CancelProduction(queue.Actor, currentBuilding.Item, 1));
+					}
+
 					// If we just reached the maximum fail count, cache the number of current structures
-					if (++failCount >= baseBuilder.Info.MaximumFailedPlacementAttempts)
+					else if (++failCount >= baseBuilder.Info.MaximumFailedPlacementAttempts)
 					{
 						AIUtils.BotDebug($"{player} has nowhere to place {currentBuilding.Item}");
+						var cancelTarget = queue.AllQueued().LastOrDefault(i => i.Item == currentBuilding.Item) ?? currentBuilding;
+						NotePendingTerminal(queue, cancelTarget, currentBuilding.Item, BotQueueTransitionKind.Cancelled,
+							BotQueueTransitionReason.SaturationLatch, BotQueueCancellationClass.Production);
 						bot.QueueOrder(Order.CancelProduction(queue.Actor, currentBuilding.Item, 1));
+						EmitQueueTransition(queue, queue.Actor, currentBuilding, currentBuilding.Item, QueueCategoryOf(currentBuilding.Item),
+							BotQueueTransitionKind.Held, BotQueueTransitionReason.SaturationLatch);
 						lastFailedBuilding = currentBuilding.Item;
-						if (baseBuilder.BaseExpansionModules == null)
-						{
-							cachedBuildings = world.ActorsHavingTrait<Building>().Count(a => a.Owner == player);
-							cachedBases = world.ActorsHavingTrait<BaseProvider>().Count(a => a.Owner == player);
-						}
+
+						// FIX-RA-REFINERY R1: the latch snapshot is taken at every saturation —
+						// the old `BaseExpansionModules == null` guard never ran (the array is
+						// never null), which left the recovery probe comparing stale or
+						// water-check-owned baselines. The probe timer re-arms per episode.
+						latchedBuildings = world.ActorsHavingTrait<Building>().Count(a => a.Owner == player);
+						latchedProviders = world.ActorsHavingTrait<BaseProvider>().Count(a => a.Owner == player);
+						failRetryTicks = baseBuilder.Info.StructureProductionResumeDelay;
 					}
 				}
 				else
 				{
 					failCount = 0;
-					NotifyPlacement(currentBuilding.Item, location.Value, queue.Actor.ActorID, orderString, type, advisedDefense != null);
+					NotifyPlacement(currentBuilding.Item, location.Value, queue.Actor.ActorID, orderString, type, advisedDefense != null || demandAdvisedDefense, lastFrontBackPick);
+
+					// REPLAY-HEALTH-LOGGER (F2): the place order is in flight — the intent
+					// emits as PlacementOrdered now; Placed resolves only on actor-lifecycle
+					// proof (the building on the ordered cell / the plug slot occupied), so
+					// the request carries its site and plug type. A builder unit's
+					// BuildOnSite can still land after the item leaves the queue.
+					NotePendingTerminal(queue, currentBuilding, currentBuilding.Item, BotQueueTransitionKind.Placed,
+						BotQueueTransitionReason.None, BotQueueCancellationClass.None,
+						location.Value, orderString == "PlacePlug" ? plugInfo?.Type : null);
 
 					bot.QueueOrder(new Order(orderString, player.PlayerActor, Target.FromCell(world, location.Value), false)
 					{
@@ -431,9 +991,9 @@ namespace OpenRA.Mods.CA.Traits
 						// still exist beyond reach. Classic/switch-off keep the old count.
 						if (RefineryLawNudge.Due(baseBuilder.RefineryLawProvider(), numRef,
 								baseBuilder.Info.InititalMinimumRefineryCount + baseBuilder.Info.AdditionalMinimumRefineryCount)
-							&& numProd > 0 && numProd + numTech - RandomTolerance(baseBuilder.Info.ExpansionTolerate) - tolerateOnCash >= numRef)
+							&& numProd > 0 && BaseBuilderQueueEvalCA.ExpansionBalance(numProd, numTech, RandomTolerance(baseBuilder.Info.ExpansionTolerate), tolerateOnCash, numRef))
 						{
-							var undeployEvenNoBase = numProd + numTech - RandomTolerance(baseBuilder.Info.ForceExpansionTolerate) - tolerateOnCash >= numRef;
+							var undeployEvenNoBase = BaseBuilderQueueEvalCA.ExpansionBalance(numProd, numTech, RandomTolerance(baseBuilder.Info.ForceExpansionTolerate), tolerateOnCash, numRef);
 
 							foreach (var be in baseBuilder.BaseExpansionModules)
 								be.UpdateExpansionParams(bot, true, undeployEvenNoBase, null);
@@ -452,7 +1012,24 @@ namespace OpenRA.Mods.CA.Traits
 		bool refineryClaimed;
 		IBotPlacementObserver[] placementObservers;
 
-		void NotifyPlacement(string item, CPos cell, uint producerId, string orderString, BuildingType type, bool advisedDefence)
+		// BP-2 (§19.15): the front/back advisor seam. The trait array is cached once; IsActive is
+		// re-checked per call so a condition-disabled planner never claims a class. lastFrontBackPick
+		// carries the pick diagnostics of the placement attempt in flight to the placement log;
+		// frontBackHold means "wait — no legal cell, do not fall back" (the produced building stays
+		// queued and spends no failure budget, like the REF-1 crawl hold). radarPowerMargin is the
+		// advisor's power reserve for the radars it plans, refreshed once per queue tick.
+		IBotFrontBackAdvisor[] frontBackAdvisors;
+		FrontBackPick? lastFrontBackPick;
+		bool frontBackHold;
+		int radarPowerMargin;
+
+		IBotFrontBackAdvisor FrontBackAdvisor()
+		{
+			frontBackAdvisors ??= player.PlayerActor.TraitsImplementing<IBotFrontBackAdvisor>().ToArray();
+			return frontBackAdvisors.FirstOrDefault(a => a.IsActive);
+		}
+
+		void NotifyPlacement(string item, CPos cell, uint producerId, string orderString, BuildingType type, bool advisedDefence, FrontBackPick? frontBackPick)
 		{
 			placementObservers ??= world.WorldActor.TraitsImplementing<IBotPlacementObserver>().ToArray();
 			if (placementObservers.Length == 0)
@@ -463,9 +1040,20 @@ namespace OpenRA.Mods.CA.Traits
 				: type == BuildingType.BaseCrawl ? "crawl"
 				: type == BuildingType.Refinery && refineryClaimed ? "refinery_claim"
 				: "base";
+
+			// BP-2 (§19.15): the advisor's class label for every placement while one is active. The
+			// queue's own type wins for crawl (a crawl link is role, not identity — Classify sees a
+			// plain building); every other class is the advisor's rules-derived verdict.
+			FrontBackClass? frontBackClass = null;
+			var frontBack = FrontBackAdvisor();
+			if (frontBack != null)
+				frontBackClass = type == BuildingType.BaseCrawl ? FrontBackClass.Crawl
+					: world.Map.Rules.Actors.TryGetValue(item, out var placedInfo) ? frontBack.Classify(placedInfo)
+					: FrontBackClass.Building;
+
 			var queued = queuedAt.TryGetValue(producerId, out var q) && q.Item == item ? q.Tick : world.WorldTick;
 			foreach (var observer in placementObservers)
-				observer.BuildingPlaced(player, world.WorldTick, item, cell, reason, queued);
+				observer.BuildingPlaced(player, world.WorldTick, item, cell, reason, queued, frontBackClass, frontBackPick);
 		}
 
 		ActorInfo GetProducibleBuilding(IReadOnlySet<string> actors, IEnumerable<ActorInfo> buildables, Func<ActorInfo, int> orderBy = null)
@@ -476,17 +1064,55 @@ namespace OpenRA.Mods.CA.Traits
 				if (!actors.Contains(actor.Name))
 					return false;
 
-				if (!baseBuilder.TryGetBuildingLimit(actor.Name, out var limit))
-					return true;
-
-				return playerBuildings.Count(a => a.Info.Name == actor.Name) +
-					(baseBuilder.BuildingsBeingProduced.TryGetValue(actor.Name, out var beingProduced) ? beingProduced : 0) < limit;
+				return BaseBuilderQueueEvalCA.LimitAdmits(baseBuilder.TryGetBuildingLimit(actor.Name, out var limit), limit,
+					playerBuildings.Count(a => a.Info.Name == actor.Name),
+					baseBuilder.BuildingsBeingProduced.TryGetValue(actor.Name, out var beingProduced) ? beingProduced : 0);
 			});
 
 			if (orderBy != null)
 				return available.MaxByOrDefault(orderBy);
 
-			return available.RandomOrDefault(world.LocalRandom);
+			return available.RandomOrDefault(BotRng.For(player, nameof(BaseBuilderQueueManagerCA)));
+		}
+
+		// BP-2 (§19.15): a rules-derived radar provider — same two-trait check the Cameo planner runs
+		// (the assemblies cannot share the helper; keep the expression identical).
+		static bool IsRadarProvider(ActorInfo info)
+		{
+			return info.HasTraitInfo<RangedGpsProviderInfo>() || info.HasTraitInfo<ProvidesRadarInfo>();
+		}
+
+		// Owned + already-in-production radar providers — the count the advisor's absolute target is
+		// met against, so a queued provider is never double-wanted.
+		int OwnedRadarProviders()
+		{
+			var owned = playerBuildings.Count(a => IsRadarProvider(a.Info));
+			if (baseBuilder.BuildingsBeingProduced != null)
+				owned += baseBuilder.BuildingsBeingProduced
+					.Where(kv => world.Map.Rules.Actors.TryGetValue(kv.Key, out var produced) && IsRadarProvider(produced))
+					.Sum(kv => kv.Value);
+			return owned;
+		}
+
+		// Radar providers the queue can actually start: trait-filtered and under the same
+		// BuildingLimits rule every other want honours.
+		List<ActorInfo> GetRadarProducibles(IEnumerable<ActorInfo> buildables)
+		{
+			var list = new List<ActorInfo>();
+			foreach (var actor in buildables)
+			{
+				if (!IsRadarProvider(actor))
+					continue;
+
+				if (baseBuilder.TryGetBuildingLimit(actor.Name, out var limit)
+					&& playerBuildings.Count(a => a.Info.Name == actor.Name)
+						+ (baseBuilder.BuildingsBeingProduced.TryGetValue(actor.Name, out var beingProduced) ? beingProduced : 0) >= limit)
+					continue;
+
+				list.Add(actor);
+			}
+
+			return list;
 		}
 
 		bool HasSufficientPowerForActor(ActorInfo actorInfo)
@@ -496,11 +1122,14 @@ namespace OpenRA.Mods.CA.Traits
 		}
 
 		// Build-order knobs (12.25): power_margin scales the configured surplus floor too.
+		// BP-2 (§19.15): the front/back advisor's radar reserve rides the same floor — a queued
+		// radar's drain is held back so an owned or planned provider is never built blind.
 		int ScaledBaseMinimumExcessPower()
 		{
 			var knobs = baseBuilder.BuildOrderKnobs;
-			return knobs == null ? baseBuilder.Info.MinimumExcessPower
+			var floor = knobs == null ? baseBuilder.Info.MinimumExcessPower
 				: BotBuildOrderKnobs.Scale(baseBuilder.Info.MinimumExcessPower, knobs.KnobMilli(BuildOrderKnob.PowerMargin));
+			return floor + radarPowerMargin;
 		}
 
 		// Build-order knobs (12.25): the milli multiplier of a building's fraction by its rules-derived category (1000 = none).
@@ -538,14 +1167,14 @@ namespace OpenRA.Mods.CA.Traits
 				var count = playerBuildings.Count(a => a.Info.Name == name) +
 					(baseBuilder.BuildingsBeingProduced.TryGetValue(name, out var num) ? num : 0);
 
-				if (botLimits != null && baseBuilder.Info.ProductionTypes.Contains(name) && count >= ProductionTypeLimit)
+				if (botLimits != null && baseBuilder.Info.ProductionTypes.Contains(name) && BaseBuilderQueueEvalCA.LimitReached(count, ProductionTypeLimit))
 					continue;
 
-				if (baseBuilder.TryGetBuildingLimit(name, out var limit) && limit <= count)
+				if (baseBuilder.TryGetBuildingLimit(name, out var limit) && BaseBuilderQueueEvalCA.LimitReached(count, limit))
 					continue;
 
 				var fraction = baseBuilder.Info.BuildingFractions != null && baseBuilder.Info.BuildingFractions.TryGetValue(name, out var f) ? f : 0;
-				if (best == null || fraction > bestFraction || fraction == bestFraction && string.CompareOrdinal(name, best.Name) < 0)
+				if (best == null || BaseBuilderQueueEvalCA.BetterOpeningCandidate(fraction, bestFraction, name, best.Name))
 				{
 					best = candidate;
 					bestFraction = fraction;
@@ -560,6 +1189,96 @@ namespace OpenRA.Mods.CA.Traits
 
 			AIUtils.BotDebug("{0} decided to build {1}: opening step {2}", player, best.Name, wanted);
 			return best;
+		}
+
+		/// <summary>
+		/// ECON-A (SPEC_2026-10-05_econ_logistics Part A §3): the item an expansion demand wants on this
+		/// queue, or null. Refinery first — the shortest-build refinery the queue can make, gated by the
+		/// same HasMaxRefineriesFor anchor law every other refinery honours — then the demand's defence
+		/// pick. Both wait for their ETA window (finish ~= etaTick); an already-due item starts now.
+		/// Deterministic: demands iterate in Mcv.ActorID order; a second demand never binds the same
+		/// item name on the same producer (the hold tracks producer+item, not the order itself).
+		/// </summary>
+		ActorInfo ChooseExpansionDemandItem(ProductionQueue queue, IEnumerable<ActorInfo> buildableThings)
+		{
+			var demands = baseBuilder.ExpansionDemands;
+			if (demands.Count == 0)
+				return null;
+
+			var now = world.WorldTick;
+			var buildables = buildableThings as IReadOnlyList<ActorInfo> ?? buildableThings.ToList();
+			foreach (var demand in demands.Values.OrderBy(d => d.Mcv.ActorID))
+			{
+				if (demand.Deployed)
+					continue;
+
+				if (demand.RefineryItem == null)
+				{
+					var refinery = buildables
+						.Where(a => baseBuilder.Info.RefineryTypes.Contains(a.Name))
+						.OrderBy(a => queue.GetBuildTime(a, BuildableInfo.GetTraitForQueue(a, queue.Info.Type)))
+						.ThenBy(a => a.Name, StringComparer.Ordinal)
+						.FirstOrDefault();
+					if (refinery != null && DemandRefineryQuota(demand, refinery))
+					{
+						var buildTime = queue.GetBuildTime(refinery, BuildableInfo.GetTraitForQueue(refinery, queue.Info.Type));
+
+						// ECON-A-FIX (R5): the pick stands only while the (producer, name) token stays
+						// unambiguous — no same-name item queued or still in flight, none bound to
+						// another demand. The binding itself happens at order admission, not here.
+						if (BaseBuilderQueueEvalCA.ExpansionDue(demand.EtaTick, buildTime, now)
+							&& BaseBuilderQueueEvalCA.DemandItemUnambiguous(
+								baseBuilder.ProducerHoldsItem(queue.Actor, refinery.Name, now),
+								DemandItemHeldElsewhere(demand, refinery.Name, queue.Actor)))
+						{
+							pendingDemandPick = (demand, true, baseBuilder.DemandClaimFor(demand));
+							return refinery;
+						}
+					}
+				}
+
+				if (demand.DefenceType != null && demand.DefenceItem == null)
+				{
+					var defence = buildables.FirstOrDefault(a => a.Name == demand.DefenceType);
+					if (defence != null)
+					{
+						var buildTime = queue.GetBuildTime(defence, BuildableInfo.GetTraitForQueue(defence, queue.Info.Type));
+						if (BaseBuilderQueueEvalCA.ExpansionDue(demand.EtaTick, buildTime, now)
+							&& baseBuilder.DefenceHoldPermitted(queue, demand, now)
+							&& BaseBuilderQueueEvalCA.DemandItemUnambiguous(
+								baseBuilder.ProducerHoldsItem(queue.Actor, defence.Name, now),
+								DemandItemHeldElsewhere(demand, defence.Name, queue.Actor)))
+						{
+							pendingDemandPick = (demand, false, null);
+							return defence;
+						}
+					}
+				}
+			}
+
+			return null;
+		}
+
+		/// <summary>
+		/// ECON-A-FIX (R6): the demand's refinery quota — under the refinery law it IS the demand's own
+		/// reservable claim, ranked from the outpost with the committed yard's footprint counting as
+		/// frontier (an expansion beyond today's reach is not gated by the wall it removes). Without the
+		/// law the classic yard-based cap stands.
+		/// </summary>
+		bool DemandRefineryQuota(ExpansionDemand demand, ActorInfo refinery)
+		{
+			return baseBuilder.RefineryLawProvider() != null
+				? baseBuilder.DemandClaimFor(demand) != null
+				: !baseBuilder.HasMaxRefineriesFor(refinery);
+		}
+
+		// Another demand already holds this item name on this producer — a second binding would fight
+		// over the same queued item (the hold tracks producer+item, not the order itself).
+		bool DemandItemHeldElsewhere(ExpansionDemand demand, string item, Actor producer)
+		{
+			return baseBuilder.ExpansionDemands.Values.Any(other => !ReferenceEquals(other, demand)
+				&& ((other.RefineryProducer == producer && other.RefineryItem == item)
+					|| (other.DefenceProducer == producer && other.DefenceItem == item)));
 		}
 
 		static int DivideByKnob(int ticks, int milli) => milli == BuildOrderKnob.Neutral ? ticks : (int)(ticks * 1000L / Math.Max(1, milli));
@@ -609,9 +1328,10 @@ namespace OpenRA.Mods.CA.Traits
 			// This gets used quite a bit, so let's cache it here
 			var power = GetProducibleBuilding(baseBuilder.Info.PowerTypes, buildableThings,
 				a => a.TraitInfos<PowerInfo>().Where(i => i.EnabledByDefault).Sum(p => p.Amount));
-			var openingBarracksPolicyActive = botLimits != null && botLimits.Info.PrioritizeBarracksBeforeRefinery
-				&& baseBuilder.Info.BarracksBeforeRefineryFactions.Contains(player.Faction.InternalName)
-				&& !baseBuilder.OpeningBarracksPriorityCompleted;
+			var openingBarracksPolicyActive = BaseBuilderQueueEvalCA.OpeningBarracksPolicy(botLimits != null,
+				botLimits != null && botLimits.Info.PrioritizeBarracksBeforeRefinery,
+				baseBuilder.Info.BarracksBeforeRefineryFactions.Contains(player.Faction.InternalName),
+				baseBuilder.OpeningBarracksPriorityCompleted);
 
 			// Wait for the queued opening structure to be placed before allowing another construction queue to proceed.
 			if (openingBarracksPolicyActive && (baseBuilder.HasQueuedPowerPlant() || baseBuilder.HasQueuedBarracks()))
@@ -666,16 +1386,12 @@ namespace OpenRA.Mods.CA.Traits
 				// been reached by a different faction's construction yard.
 				if (refinery != null && !baseBuilder.HasMaxRefineriesFor(refinery))
 				{
-					if (HasSufficientPowerForActor(refinery))
+					var pick = BaseBuilderQueueEvalCA.PickOrPower(refinery, power, HasSufficientPowerForActor);
+					if (pick != null)
 					{
-						AIUtils.BotDebug("{0} decided to build {1}: Priority override (refinery)", queue.Actor.Owner, refinery.Name);
-						return refinery;
-					}
-
-					if (power != null && !HasSufficientPowerForActor(refinery))
-					{
-						AIUtils.BotDebug("{0} decided to build {1}: Priority override (would be low power)", queue.Actor.Owner, power.Name);
-						return power;
+						AIUtils.BotDebug("{0} decided to build {1}: Priority override ({2})", queue.Actor.Owner, pick.Name,
+							pick == refinery ? "refinery" : "would be low power");
+						return pick;
 					}
 				}
 			}
@@ -696,16 +1412,12 @@ namespace OpenRA.Mods.CA.Traits
 					if (pick == null)
 						continue;
 
-					if (HasSufficientPowerForActor(pick))
+					var wantPick = BaseBuilderQueueEvalCA.PickOrPower(pick, power, HasSufficientPowerForActor);
+					if (wantPick != null)
 					{
-						AIUtils.BotDebug("{0} decided to build {1}: Priority override (REF-1 planner want)", queue.Actor.Owner, pick.Name);
-						return pick;
-					}
-
-					if (power != null)
-					{
-						AIUtils.BotDebug("{0} decided to build {1}: Priority override (planner want would be low power)", queue.Actor.Owner, power.Name);
-						return power;
+						AIUtils.BotDebug("{0} decided to build {1}: Priority override ({2})", queue.Actor.Owner, wantPick.Name,
+							wantPick == pick ? "REF-1 planner want" : "planner want would be low power");
+						return wantPick;
 					}
 				}
 			}
@@ -719,23 +1431,30 @@ namespace OpenRA.Mods.CA.Traits
 					return opening;
 			}
 
+			// ECON-A (SPEC_2026-10-05_econ_logistics Part A §3): an expansion demand injects its
+			// refinery (then defence) just above ordinary wants — every essential override above
+			// (power, the opening, the economy refinery, the planner's own wants) still wins.
+			// Items schedule so finishTick ~= etaTick: they wait until eta - buildTime <= now.
+			if (baseBuilder.ExpansionPrebuildEnabled)
+			{
+				var demandPick = ChooseExpansionDemandItem(queue, buildableThings);
+				if (demandPick != null)
+					return demandPick;
+			}
+
 			// Make sure that we can spend as fast as we are earning
 			if (NewProductionCashThreshold > 0 && playerResources.GetCashAndResources() > NewProductionCashThreshold)
 			{
 				var production = GetProducibleBuilding(baseBuilder.Info.ProductionTypes, buildableThings);
 
-				if (production != null && (ProductionTypeLimit <= 0 || playerBuildings.Count(a => a.Info.Name == production.Name) < ProductionTypeLimit))
+				if (production != null && (ProductionTypeLimit <= 0 || !BaseBuilderQueueEvalCA.LimitReached(playerBuildings.Count(a => a.Info.Name == production.Name), ProductionTypeLimit)))
 				{
-					if (HasSufficientPowerForActor(production))
+					var pick = BaseBuilderQueueEvalCA.PickOrPower(production, power, HasSufficientPowerForActor);
+					if (pick != null)
 					{
-						AIUtils.BotDebug("{0} decided to build {1}: Priority override (production)", queue.Actor.Owner, production.Name);
-						return production;
-					}
-
-					if (power != null && !HasSufficientPowerForActor(production))
-					{
-						AIUtils.BotDebug("{0} decided to build {1}: Priority override (would be low power)", queue.Actor.Owner, power.Name);
-						return power;
+						AIUtils.BotDebug("{0} decided to build {1}: Priority override ({2})", queue.Actor.Owner, pick.Name,
+							pick == production ? "production" : "would be low power");
+						return pick;
 					}
 				}
 			}
@@ -746,16 +1465,12 @@ namespace OpenRA.Mods.CA.Traits
 				&& AIUtils.IsAreaAvailable<GivesBuildableArea>(world, player, world.Map, baseBuilder.Info.CheckForWaterRadius, baseBuilder.Info.WaterTerrainTypes))
 			{
 				var navalproduction = GetProducibleBuilding(baseBuilder.Info.NavalProductionTypes, buildableThings);
-				if (navalproduction != null && HasSufficientPowerForActor(navalproduction))
+				var navalPick = BaseBuilderQueueEvalCA.PickOrPower(navalproduction, power, HasSufficientPowerForActor);
+				if (navalPick != null)
 				{
-					AIUtils.BotDebug("{0} decided to build {1}: Priority override (navalproduction)", queue.Actor.Owner, navalproduction.Name);
-					return navalproduction;
-				}
-
-				if (power != null && navalproduction != null && !HasSufficientPowerForActor(navalproduction))
-				{
-					AIUtils.BotDebug("{0} decided to build {1}: Priority override (would be low power)", queue.Actor.Owner, power.Name);
-					return power;
+					AIUtils.BotDebug("{0} decided to build {1}: Priority override ({2})", queue.Actor.Owner, navalPick.Name,
+						navalPick == navalproduction ? "navalproduction" : "would be low power");
+					return navalPick;
 				}
 			}
 
@@ -770,34 +1485,46 @@ namespace OpenRA.Mods.CA.Traits
 			if (wantSilo)
 			{
 				var silo = GetProducibleBuilding(baseBuilder.Info.SiloTypes, buildableThings);
-				if (silo != null && HasSufficientPowerForActor(silo))
+				var siloPick = BaseBuilderQueueEvalCA.PickOrPower(silo, power, HasSufficientPowerForActor);
+				if (siloPick != null)
 				{
-					AIUtils.BotDebug("{0} decided to build {1}: Priority override (silo)", queue.Actor.Owner, silo.Name);
-					return silo;
+					AIUtils.BotDebug("{0} decided to build {1}: Priority override ({2})", queue.Actor.Owner, siloPick.Name,
+						siloPick == silo ? "silo" : "would be low power");
+					return siloPick;
 				}
+			}
 
-				if (power != null && silo != null && !HasSufficientPowerForActor(silo))
+			// BP-2 (§19.15): the front/back advisor's radar want — one provider per defended front plus
+			// justified extras. It slots after the economy overrides (production, naval, silo) and before
+			// the fraction roll: radar never starves spending, but a met need never eats the build slot.
+			var frontBack = FrontBackAdvisor();
+			if (frontBack != null && frontBack.WantedRadarProviders > OwnedRadarProviders())
+			{
+				var radar = frontBack.PreferredRadarProvider(GetRadarProducibles(buildableThings));
+				var radarPick = BaseBuilderQueueEvalCA.PickOrPower(radar, power, HasSufficientPowerForActor);
+				if (radarPick != null)
 				{
-					AIUtils.BotDebug("{0} decided to build {1}: Priority override (would be low power)", queue.Actor.Owner, power.Name);
-					return power;
+					AIUtils.BotDebug("{0} decided to build {1}: Priority override ({2})", queue.Actor.Owner, radarPick.Name,
+						radarPick == radar ? "radar for front" : "radar would be low power");
+					return radarPick;
 				}
 			}
 
 			// Build everything else
-			foreach (var frac in baseBuilder.Info.BuildingFractions.Shuffle(world.LocalRandom))
+			foreach (var frac in baseBuilder.Info.BuildingFractions.OrderBy(kv => kv.Key).Shuffle(BotRng.For(player, nameof(BaseBuilderQueueManagerCA))))
 			{
 				var name = frac.Key;
 
 				// Does this building have initial delay, if so have we passed it?
 				if (baseBuilder.Info.BuildingDelays != null &&
 					baseBuilder.Info.BuildingDelays.TryGetValue(name, out var delay) &&
-					KnobTicks(delay * buildingDelayModifier / 100, name) > world.WorldTick)
+					BaseBuilderQueueEvalCA.StillDelayed(KnobTicks(delay * buildingDelayModifier / 100, name), world.WorldTick))
 					continue;
 
 				// Does this building have an interval which hasn't elapsed yet?
-				if (baseBuilder.Info.BuildingIntervals != null &&
-					baseBuilder.Info.BuildingIntervals.ContainsKey(name) &&
-					activeBuildingIntervals.ContainsKey(name))
+				if (BaseBuilderQueueEvalCA.IntervalBlocks(
+						baseBuilder.Info.BuildingIntervals != null && baseBuilder.Info.BuildingIntervals.ContainsKey(name),
+						activeBuildingIntervals.ContainsKey(name)))
 					continue;
 
 				// Can we build this structure?
@@ -815,16 +1542,16 @@ namespace OpenRA.Mods.CA.Traits
 
 				// Do we want to build this structure?
 				// Build-order knobs (12.25): production/tech/defence/support/greed scale the fraction of their categories (milli = 1000 without a provider).
-				if (count * 100L * 1000 > (long)frac.Value * FractionMilli(name) * playerBuildings.Length)
+				if (!BaseBuilderQueueEvalCA.FractionAdmits(count, frac.Value, FractionMilli(name), playerBuildings.Length))
 					continue;
 
-				if (botLimits != null && baseBuilder.Info.ProductionTypes.Contains(name) && count >= ProductionTypeLimit)
+				if (botLimits != null && baseBuilder.Info.ProductionTypes.Contains(name) && BaseBuilderQueueEvalCA.LimitReached(count, ProductionTypeLimit))
 				{
 					AIUtils.BotDebug("{0} decided to build {1} but limit of {2} already reached)", queue.Actor.Owner, name, ProductionTypeLimit);
 					continue;
 				}
 
-				if (baseBuilder.TryGetBuildingLimit(name, out var limit) && limit <= count)
+				if (baseBuilder.TryGetBuildingLimit(name, out var limit) && BaseBuilderQueueEvalCA.LimitReached(count, limit))
 				{
 					AIUtils.BotDebug("{0} decided to build {1} but limit of {2} already reached)", queue.Actor.Owner, name, limit);
 					continue;
@@ -836,14 +1563,14 @@ namespace OpenRA.Mods.CA.Traits
 				// If we're considering to build a naval structure, check whether there is enough water inside the base perimeter
 				// and any structure providing buildable area close enough to that water.
 				// TODO: Extend this check to cover any naval structure, not just production.
-				if (baseBuilder.Info.NavalProductionTypes.Contains(name)
-					&& (waterState == WaterCheck.NotEnoughWater
-						|| !AIUtils.IsAreaAvailable<GivesBuildableArea>(world, player, world.Map, baseBuilder.Info.CheckForWaterRadius, baseBuilder.Info.WaterTerrainTypes)))
+				if (BaseBuilderQueueEvalCA.NavalBlocked(baseBuilder.Info.NavalProductionTypes.Contains(name),
+						waterState == WaterCheck.NotEnoughWater,
+						() => AIUtils.IsAreaAvailable<GivesBuildableArea>(world, player, world.Map, baseBuilder.Info.CheckForWaterRadius, baseBuilder.Info.WaterTerrainTypes)))
 					continue;
 
 				// Will this put us into low power?
 				var actor = world.Map.Rules.Actors[name];
-				if (playerPower != null && (playerPower.ExcessPower < minimumExcessPower || !HasSufficientPowerForActor(actor)))
+				if (BaseBuilderQueueEvalCA.LowPowerBlocked(playerPower != null, playerPower?.ExcessPower ?? 0, minimumExcessPower, HasSufficientPowerForActor(actor)))
 				{
 					// Try building a power plant instead
 					if (power != null && power.TraitInfos<PowerInfo>().Where(i => i.EnabledByDefault).Sum(pi => pi.Amount) > 0)
@@ -883,22 +1610,19 @@ namespace OpenRA.Mods.CA.Traits
 
 		// REF-1 (§12.24 v2): the harvester dock cell must not sit on valuable resources, and needs at least one on-map
 		// neighbour outside the footprint so the dock stays reachable — a refinery walled off the field is useless.
-		bool DockReachable(ActorInfo actorInfo, BuildingInfo bi, CPos topLeft, WVec dockOffset, IReadOnlySet<string> valuable)
+		// FIX-RA-REFINERY: "the footprint" here means the impassable cells — BuildingInfo.Tiles also
+		// yields the passable '=' bib, which walled the RA proc's dock inside its own footprint and
+		// failed the exit check at every legal site.
+		enum DockAccess { Clear, OnResource, NoExit }
+
+		DockAccess CheckDockAccess(ActorInfo actorInfo, BuildingInfo bi, CPos topLeft, WVec dockOffset, IReadOnlySet<string> valuable)
 		{
 			var dock = world.Map.CellContaining(world.Map.CenterOfCell(topLeft) + bi.CenterOffset(world) + dockOffset);
 			if (valuable != null && resourceLayer != null && valuable.Contains(resourceLayer.GetResource(dock).Type))
-				return false;
+				return DockAccess.OnResource;
 
-			var footprint = new HashSet<CPos>(bi.Tiles(topLeft));
-			for (var dy = -1; dy <= 1; dy++)
-				for (var dx = -1; dx <= 1; dx++)
-				{
-					var n = new CPos(dock.X + dx, dock.Y + dy);
-					if (!footprint.Contains(n) && world.Map.Contains(n))
-						return true;
-				}
-
-			return false;
+			var footprint = new HashSet<CPos>(BaseBuilderQueueEvalCA.DockBlockingFootprint(bi.Footprint, topLeft));
+			return BaseBuilderQueueEvalCA.DockHasExit(dock, footprint, world.Map.Contains) ? DockAccess.Clear : DockAccess.NoExit;
 		}
 
 		// REF-1 (§12.24 v2): the placeable cell NEAREST the anchor whose footprint sits flush on the claim's resource
@@ -923,34 +1647,85 @@ namespace OpenRA.Mods.CA.Traits
 				zone1.ExceptWith(zone0);
 			}
 
-			var dockOffset = actorInfo.TraitInfoOrDefault<DockHostInfo>()?.DockOffset ?? WVec.Zero;
+			// Every dock counts: nexus/hatchery/assimilator carry DockHost + @DOCK2 + @DOCK3,
+			// and checking only the first instance can reject a cell whose other docks are fine.
+			// No DockHost falls back to a zero offset, exactly as before.
+			var dockOffsets = actorInfo.TraitInfos<DockHostInfo>().Select(d => d.DockOffset).DefaultIfEmpty(WVec.Zero).ToList();
 			var valuable = baseBuilder.ResourceMapModule?.Info.ValuableResourceTypes;
 
 			CPos? gap1 = null;
+
+			// FIX-RA-REFINERY diagnostics: tally the per-cell rejection reasons so a failed sweep
+			// emits one bounded line — the reason chain (buildability / too-far / dock-on-resource /
+			// no-exit / gap-illegal) instead of a per-cell dump.
+			var scanned = 0;
+			var rejectedBuild = 0;
+			var rejectedFar = 0;
+			var rejectedDockResource = 0;
+			var rejectedDockExit = 0;
+			var rejectedGap = 0;
 			foreach (var cell in world.Map.FindTilesInAnnulus(anchor, 0, claimRadius)
 				.OrderBy(c => (c - anchor).LengthSquared).ThenBy(c => c.X).ThenBy(c => c.Y))
 			{
+				scanned++;
 				if (!world.CanPlaceBuilding(cell, actorInfo, bi, null))
+				{
+					rejectedBuild++;
 					continue;
+				}
 
 				if (distanceToBaseIsImportant && !bi.IsCloseEnoughToBase(world, player, actorInfo, producer, cell))
+				{
+					rejectedFar++;
 					continue;
+				}
 
-				if (!DockReachable(actorInfo, bi, cell, dockOffset, valuable))
+				// A cell fails the dock check only when every dock is unreachable; a dock that lost
+				// solely to the valuable-resource rule keeps the resource signature for the tally.
+				var dockOk = false;
+				var dockAllResource = true;
+				foreach (var off in dockOffsets)
+				{
+					var access = CheckDockAccess(actorInfo, bi, cell, off, valuable);
+					if (access == DockAccess.Clear)
+					{
+						dockOk = true;
+						break;
+					}
+
+					if (access != DockAccess.OnResource)
+						dockAllResource = false;
+				}
+
+				if (!dockOk)
+				{
+					if (dockAllResource)
+						rejectedDockResource++;
+					else
+						rejectedDockExit++;
+
 					continue;
+				}
 
 				if (zone0 == null)
 					return (cell, -1, 0);
 
 				var footprint = bi.Tiles(cell).ToList();
-				if (footprint.Any(zone0.Contains))
+				var gap = BaseBuilderQueueEvalCA.FootprintGap(footprint, zone0, zone1);
+				if (gap == 0)
 					return (cell, 0, 0);
 
-				if (gap1 == null && footprint.Any(zone1.Contains))
+				if (gap == 1 && gap1 == null)
 					gap1 = cell;
+				else if (gap < 0)
+					rejectedGap++;
 			}
 
-			return gap1.HasValue ? (gap1.Value, 1, 0) : (null, -1, 0);
+			if (gap1.HasValue)
+				return (gap1.Value, 1, 0);
+
+			AIUtils.BotDebug($"{player} law refinery {actorType}: no site at anchor {anchor} — {scanned} scanned, {rejectedBuild} unbuildable, {rejectedFar} too-far, {rejectedDockResource} dock-on-resource, {rejectedDockExit} dock-no-exit, {rejectedGap} gap-illegal at tick {world.WorldTick}");
+			return (null, -1, 0);
 		}
 
 		// Find the buildable cell that is closest to pos and centered around center.
@@ -984,43 +1759,22 @@ namespace OpenRA.Mods.CA.Traits
 				// If we don't have Facings in buildingVariantInfo, use a random variant
 				if (buildingVariantInfo?.Actors != null)
 				{
-					if (buildingVariantInfo.Facings != null)
-					{
-						var vector = world.Map.CenterOfCell(target) - world.Map.CenterOfCell(center);
-
-						// FE-1: centre == target (anchor placement) has no direction; keep variant 0 instead of dividing by zero.
-						if (vector.Length == 0)
-							vector = new WVec(0, 1, 0);
-
-						// The rotation Y point to upside vertically, so -Y = Y(rotation)
-						var desireFacing = new WAngle(WAngle.ArcSin((int)((long)Math.Abs(vector.X) * 1024 / vector.Length)).Angle);
-						if (vector.X > 0 && vector.Y >= 0)
-							desireFacing = new WAngle(512) - desireFacing;
-						else if (vector.X < 0 && vector.Y >= 0)
-							desireFacing = new WAngle(512) + desireFacing;
-						else if (vector.X < 0 && vector.Y < 0)
-							desireFacing = -desireFacing;
-
-						for (int i = 0, e = 1024; i < buildingVariantInfo.Facings.Length; i++)
-						{
-							var minDelta = Math.Min((desireFacing - buildingVariantInfo.Facings[i]).Angle, (buildingVariantInfo.Facings[i] - desireFacing).Angle);
-							if (e > minDelta)
-							{
-								e = minDelta;
-								actorVariant = i;
-							}
-						}
-					}
+					if (BaseBuilderQueueEvalCA.PicksRandomVariant(true, buildingVariantInfo.Facings != null))
+						actorVariant = BotRng.For(player, nameof(BaseBuilderQueueManagerCA)).Next(buildingVariantInfo.Actors.Length + 1);
 					else
-						actorVariant = world.LocalRandom.Next(buildingVariantInfo.Actors.Length + 1);
+					{
+						// The rotation Y point to upside vertically, so -Y = Y(rotation)
+						actorVariant = BaseBuilderQueueEvalCA.PickFacingVariant(
+							world.Map.CenterOfCell(target) - world.Map.CenterOfCell(center), buildingVariantInfo.Facings);
+					}
 				}
 			}
 			else
 			{
-				cells = cells.Shuffle(world.LocalRandom);
+				cells = cells.Shuffle(BotRng.For(player, nameof(BaseBuilderQueueManagerCA)));
 
 				if (buildingVariantInfo?.Actors != null)
-					actorVariant = world.LocalRandom.Next(buildingVariantInfo.Actors.Length + 1);
+					actorVariant = BotRng.For(player, nameof(BaseBuilderQueueManagerCA)).Next(buildingVariantInfo.Actors.Length + 1);
 			}
 
 			if (actorVariant != 0)
@@ -1053,16 +1807,11 @@ namespace OpenRA.Mods.CA.Traits
 				var candidates = new List<CPos>();
 				foreach (var cell in cells)
 				{
-					if (!world.CanPlaceBuilding(cell, actorInfo, bi, null))
-						continue;
-
-					if (distanceToBaseIsImportant && !bi.IsCloseEnoughToBase(world, player, actorInfo, producer, cell))
-						continue;
-
-					if (distanceRequirement > 0 && (cell - target).LengthSquared > distanceRequirement * distanceRequirement)
-						continue;
-
-					if (ownBuildingBuffer != null && !bi.AllowInvalidPlacement && bi.Tiles(cell).Any(ownBuildingBuffer.Contains))
+					if (!BaseBuilderQueueEvalCA.PlacementCellAdmitted(
+							() => world.CanPlaceBuilding(cell, actorInfo, bi, null),
+							() => !distanceToBaseIsImportant || bi.IsCloseEnoughToBase(world, player, actorInfo, producer, cell),
+							() => distanceRequirement <= 0 || (cell - target).LengthSquared <= distanceRequirement * distanceRequirement,
+							() => ownBuildingBuffer == null || bi.AllowInvalidPlacement || !bi.Tiles(cell).Any(ownBuildingBuffer.Contains)))
 						continue;
 
 					candidates.Add(cell);
@@ -1074,26 +1823,18 @@ namespace OpenRA.Mods.CA.Traits
 				{
 					var chosen = advisor.ChooseCell(actorInfo, candidates,
 						c => world.CanPlaceBuilding(c, actorInfo, bi, null));
-					if (chosen.HasValue && candidates.Contains(chosen.Value))
-						return (chosen.Value, center, actorVariant);
-
-					return (candidates[0], center, actorVariant);
+					return (BaseBuilderQueueEvalCA.AdvisorPick(chosen, candidates), center, actorVariant);
 				}
 			}
 			else
 			{
 				foreach (var cell in cells)
 				{
-					if (!world.CanPlaceBuilding(cell, actorInfo, bi, null))
-						continue;
-
-					if (distanceToBaseIsImportant && !bi.IsCloseEnoughToBase(world, player, actorInfo, producer, cell))
-						continue;
-
-					if (distanceRequirement > 0 && (cell - target).LengthSquared > distanceRequirement * distanceRequirement)
-						continue;
-
-					if (ownBuildingBuffer != null && !bi.AllowInvalidPlacement && bi.Tiles(cell).Any(ownBuildingBuffer.Contains))
+					if (!BaseBuilderQueueEvalCA.PlacementCellAdmitted(
+							() => world.CanPlaceBuilding(cell, actorInfo, bi, null),
+							() => !distanceToBaseIsImportant || bi.IsCloseEnoughToBase(world, player, actorInfo, producer, cell),
+							() => distanceRequirement <= 0 || (cell - target).LengthSquared <= distanceRequirement * distanceRequirement,
+							() => ownBuildingBuffer == null || bi.AllowInvalidPlacement || !bi.Tiles(cell).Any(ownBuildingBuffer.Contains)))
 						continue;
 
 					return (cell, center, actorVariant);
@@ -1117,14 +1858,14 @@ namespace OpenRA.Mods.CA.Traits
 
 		// Cameo: ask the first ACTIVE defence-placement advisor (resolved on each use, so a late-enabled one is seen)
 		// for a cell. canPlace is the check findPos applies.
-		CPos? AdvisedDefenseCell(ActorInfo actorInfo, bool distanceToBaseIsImportant, Actor producer)
+		CPos? AdvisedDefenseCell(ActorInfo actorInfo, bool distanceToBaseIsImportant, Actor producer, CPos? baseCenterOverride = null)
 		{
 			var advisor = player.PlayerActor.TraitsImplementing<IBotDefensePlacementAdvisor>().FirstOrDefault(a => a.IsActive);
 			var bi = actorInfo.TraitInfoOrDefault<BuildingInfo>();
 			if (advisor == null || bi == null)
 				return null;
 
-			var baseCenter = baseBuilder.GetBaseCenterForActor(actorInfo);
+			var baseCenter = baseCenterOverride ?? baseBuilder.GetBaseCenterForActor(actorInfo);
 
 			// The advisor's candidate cells get the same spacing rule as findPos defenses.
 			var gap = BuildingGapRule.Resolve(player.PlayerActor.TraitsImplementing<IBotPlacementAdvisor>().FirstOrDefault(a => a.IsActive), true);
@@ -1136,13 +1877,120 @@ namespace OpenRA.Mods.CA.Traits
 					&& (ownBuildingBuffer == null || bi.AllowInvalidPlacement || !bi.Tiles(cell).Any(ownBuildingBuffer.Contains)));
 		}
 
-		(CPos? Location, CPos? BaseCenter, int Variant) ChooseBuildLocation(string actorType, bool distanceToBaseIsImportant, Actor producer, BuildingType type)
+		// BP-2 (§19.15): every cell in the base annulus that already passes the checks findPos applies —
+		// CanPlaceBuilding, IsCloseEnoughToBase, the spacing-advisor gap. The advisor picks among these;
+		// an empty list means "no legal cell anywhere", which the planner reads as its hold case.
+		List<CPos> AdvisorLegalCells(ActorInfo actorInfo, bool distanceToBaseIsImportant, Actor producer, CPos? baseCenterOverride = null)
 		{
-			var baseCenter = baseBuilder.GetBaseCenterForActor(world.Map.Rules.Actors[actorType]);
+			var bi = actorInfo.TraitInfoOrDefault<BuildingInfo>();
+			var legal = new List<CPos>();
+			if (bi == null)
+				return legal;
+
+			var baseCenter = baseCenterOverride ?? baseBuilder.GetBaseCenterForActor(actorInfo);
+			var spacingAdvisor = player.PlayerActor.TraitsImplementing<IBotPlacementAdvisor>().FirstOrDefault(a => a.IsActive);
+			var gap = BuildingGapRule.Resolve(spacingAdvisor, false);
+			var ownBuildingBuffer = gap > 0 ? OwnBuildingBufferCells(gap) : null;
+
+			foreach (var cell in world.Map.FindTilesInAnnulus(baseCenter, baseBuilder.Info.MinBaseRadius,
+				Math.Max(baseBuilder.Info.MaxBaseRadius, baseBuilder.Info.MaximumDefenseRadius)))
+			{
+				// The same admission gate findPos applies, minus the requirement-distance clause —
+				// the advisor's own front/back distance semantics cover that axis.
+				if (!BaseBuilderQueueEvalCA.PlacementCellAdmitted(
+						() => world.CanPlaceBuilding(cell, actorInfo, bi, null),
+						() => !distanceToBaseIsImportant || bi.IsCloseEnoughToBase(world, player, actorInfo, producer, cell),
+						() => true,
+						() => ownBuildingBuffer == null || bi.AllowInvalidPlacement || !bi.Tiles(cell).Any(ownBuildingBuffer.Contains)))
+					continue;
+
+				legal.Add(cell);
+			}
+
+			return legal;
+		}
+
+		// The variant an advisor-claimed placement uses: findPos's non-facing random draw, 0 otherwise
+		// (a front-side facing is the advisor's to encode later; the default facing is honest today).
+		int FrontBackVariant(ActorInfo actorInfo)
+		{
+			var variants = actorInfo.TraitInfoOrDefault<PlaceBuildingVariantsInfo>();
+			return BaseBuilderQueueEvalCA.PicksRandomVariant(variants?.Actors != null,
+				variants != null && variants.Facings != null)
+					? BotRng.For(player, nameof(BaseBuilderQueueManagerCA)).Next(variants.Actors.Length + 1) : 0;
+		}
+
+		(CPos? Location, CPos? BaseCenter, int Variant) ChooseBuildLocation(string actorType, bool distanceToBaseIsImportant, Actor producer, BuildingType type, ExpansionDemand demand = null)
+		{
+			var actorInfo = world.Map.Rules.Actors[actorType];
+			var baseCenter = baseBuilder.GetBaseCenterForActor(actorInfo);
+
+			// BP-2 (§19.15): an active front/back advisor owns the Radar, Production and Valuable cells —
+			// the classes the Building/Fragile names only approximated. The pick carries the diagnostics
+			// for the placement log. Hold keeps the produced building queued (a radar on a front with no
+			// defence line waits — it never goes forward); a null cell without Hold falls back to the
+			// classic path below. Every other class — and every placement with no active advisor — is
+			// untouched, draw for draw.
+			if (type == BuildingType.Building || type == BuildingType.Fragile)
+			{
+				var frontBack = FrontBackAdvisor();
+				if (frontBack != null)
+				{
+					var cls = frontBack.Classify(actorInfo);
+					if (cls == FrontBackClass.Radar || cls == FrontBackClass.Production || cls == FrontBackClass.Valuable)
+					{
+						var pick = frontBack.ChooseCell(cls, actorInfo, baseCenter, AdvisorLegalCells(actorInfo, distanceToBaseIsImportant, producer));
+						lastFrontBackPick = pick;
+						if (pick.Hold)
+						{
+							frontBackHold = true;
+							return (null, null, 0);
+						}
+
+						if (pick.Cell != null)
+							return (pick.Cell, baseCenter, FrontBackVariant(actorInfo));
+					}
+				}
+			}
 
 			switch (type)
 			{
 				case BuildingType.Defense:
+
+					// ECON-A (SPEC_2026-10-05 Part A §5): the held defence places at the new outpost —
+					// the front/back advisor's Defence class first (BP-SPEC §12.35), then the
+					// defence-placement advisor around the outpost, then the classic defence scan
+					// centred there, aimed at the field the refinery serves. A null cell runs the
+					// normal placement failure path — the item retries like every other building.
+					if (demand != null)
+					{
+						var outpost = demand.Deployed ? demand.DeployedYardLoc : demand.ConyardLoc;
+						var demandFrontBack = FrontBackAdvisor();
+						if (demandFrontBack != null)
+						{
+							var pick = demandFrontBack.ChooseCell(FrontBackClass.Defence, actorInfo, outpost,
+								AdvisorLegalCells(actorInfo, distanceToBaseIsImportant, producer, outpost));
+							lastFrontBackPick = pick;
+							if (pick.Hold)
+							{
+								frontBackHold = true;
+								return (null, null, 0);
+							}
+
+							if (pick.Cell != null)
+								return (pick.Cell, outpost, FrontBackVariant(actorInfo));
+						}
+
+						var outpostAdvised = AdvisedDefenseCell(actorInfo, distanceToBaseIsImportant, producer, outpost);
+						if (outpostAdvised != null)
+						{
+							demandAdvisedDefense = true;
+							return (outpostAdvised, outpost, 0);
+						}
+
+						return findPos(actorType, distanceToBaseIsImportant, producer, outpost, demand.ResourceLoc,
+							baseBuilder.Info.MinimumDefenseRadius, baseBuilder.Info.MaximumDefenseRadius, defenseGap: true);
+					}
 
 					// Build near the closest enemy structure
 					var defenseCenter = baseBuilder.DefenseCenter ?? baseCenter;
@@ -1162,7 +2010,14 @@ namespace OpenRA.Mods.CA.Traits
 
 				case BuildingType.Refinery:
 
-					var requestRef = baseBuilder.RequestedRefineries.Count > 0 ? baseBuilder.RequestedRefineries.Keys.First() : null;
+					// ECON-A: a deployed demand's refinery serves its own outpost — the entry keyed on
+					// its MCV is the request, so the law's claim and the classic paths below need no
+					// special-casing (they already consume RequestedRefineries on success). A same-named
+					// bound twin can place after the entry was consumed — drop the stale key to null
+					// rather than let the indexer reads below throw.
+					var requestRef = demand?.Mcv ?? BaseBuilderQueueEvalCA.FirstRequestedRefinery(baseBuilder.RequestedRefineries);
+					if (requestRef != null && !baseBuilder.RequestedRefineries.ContainsKey(requestRef))
+						requestRef = null;
 
 					// REF-1 (§12.24 v2, DESIGN §19.1b): under the refinery law EVERY refinery path routes through the
 					// provider's claim — the first refinery, the MCV-requested one (its yard's nearest unserved field
@@ -1174,19 +2029,41 @@ namespace OpenRA.Mods.CA.Traits
 					if (law != null)
 					{
 						var near = requestRef != null ? baseBuilder.RequestedRefineries[requestRef].ConyardLoc : (CPos?)null;
-						if (law.NextRefineryClaim(near) is RefineryAnchorClaim claim)
+
+						// ECON-A-FIX (R6): a bound demand's refinery re-adopts the anchor it reserved at
+						// queue admission — held out of every other claim in between. A lost or stale
+						// hold takes whatever the law offers now; the law's claim order stands either way.
+						RefineryAnchorClaim? claim = null;
+						if (demand?.ReservedClaim is { } reserved
+							&& law.RefineryAnchorReserved(reserved.Anchor, demand))
+							claim = reserved;
+						else
+							claim = law.NextRefineryClaim(near);
+
+						if (claim is { } c)
 						{
 							var placed = LawRefineryPlacement(actorType, distanceToBaseIsImportant, producer,
-								claim.Anchor, claim.ResourceCells, law.ExpansionTargetClaimRadius);
-							if (placed.Location != null)
+								c.Anchor, c.ResourceCells, law.ExpansionTargetClaimRadius);
+
+							// REPAIR-B3: a legal selected site commits the claim AT THE SITE (the provider
+							// publishes pending coverage for the whole in-radius set); an offered claim
+							// with no site frees the demand's whole reserved set at once (lead ruling
+							// 2026-10-10 — the fail cooldown is the only retry bound) and parks the anchor
+							// for that owner instead of holding the set hostage until UntilTick.
+							if (BaseBuilderQueueEvalCA.CommitRefineryClaimOrPark(law, c, placed.Location, demand))
 							{
-								Log.Write("debug", $"AI ({player.ClientIndex}): REF-1 refinery {actorType} at {placed.Location.Value} claims anchor {claim.Anchor} field {claim.FieldId} tier {claim.Tier} gap {placed.Gap} at tick {world.WorldTick}");
-								law.RefineryClaimCommitted(claim.Anchor);
+								Log.Write("debug", $"AI ({player.ClientIndex}): REF-1 refinery {actorType} at {placed.Location.Value} claims anchor {c.Anchor} field {c.FieldId} tier {c.Tier} gap {placed.Gap} at tick {world.WorldTick}");
 								refineryClaimed = true;
 								if (requestRef != null)
 									baseBuilder.RequestedRefineries.Remove(requestRef);
-								return (placed.Location, claim.Anchor, placed.Variant);
+								return (placed.Location, c.Anchor, placed.Variant);
 							}
+						}
+						else
+						{
+							// FIX-RA-REFINERY diagnostics: the other law-null reason — nothing claimed
+							// this sweep. Bounded: one line per failed placement attempt.
+							AIUtils.BotDebug($"{player} law refinery {actorType}: no claim available at tick {world.WorldTick}");
 						}
 
 						return (null, null, 0);
@@ -1200,7 +2077,7 @@ namespace OpenRA.Mods.CA.Traits
 						// EX-2c: the claim field may differ from the crawl aim — any free field already in
 						// reach qualifies, so an outpost yard claims its local field without waiting to
 						// become the crawl target. Null falls back to the expansion target (EX-2).
-						var field = claimer.RefineryClaimTarget ?? claimer.ExpansionTarget.Value;
+						var field = BaseBuilderQueueEvalCA.ClaimFieldOrTarget(claimer.RefineryClaimTarget, claimer.ExpansionTarget.Value);
 
 						// The annulus must be around the FIELD, not baseCenter: a crawled-to field sits beyond
 						// baseCenter + MaxBaseRadius + claimRadius, so centering on the base yields zero candidate
@@ -1219,8 +2096,9 @@ namespace OpenRA.Mods.CA.Traits
 					if (resourceLayer != null)
 					{
 						// If we have failed to place to the requested refinery point, try and place it near the base center
-						var resourceBaseCenter = failCount > 0 ? baseCenter :
-							(requestRef != null ? baseBuilder.RequestedRefineries[requestRef].ConyardLoc : (baseBuilder.ResourceConyardCenter ?? baseCenter));
+						var resourceBaseCenter = BaseBuilderQueueEvalCA.ResourcePickCenter(failCount, baseCenter,
+							requestRef != null && failCount <= 0 ? baseBuilder.RequestedRefineries[requestRef].ConyardLoc : null,
+							baseBuilder.ResourceConyardCenter);
 
 						// If we have a ResourceMapModule, only consider the resource types it considers valuable
 						// Otherwise consider any resource type
@@ -1232,13 +2110,13 @@ namespace OpenRA.Mods.CA.Traits
 
 						// Find the closest refinery we have if we have any when not failing to place for the first time
 						var closestRefinery = failCount <= 0
-							? baseBuilder.RefineryBuildings.Actors.Where(a => !a.IsDead)?.ClosestToIgnoringPath(world.Map.CenterOfCell(resourceBaseCenter))
+							? baseBuilder.RefineryBuildings.Actors.Where(a => !a.IsDead).OrderBy(a => a.ActorID).ClosestToIgnoringPath(world.Map.CenterOfCell(resourceBaseCenter))
 							: null;
 
 						IEnumerable<CPos> resourcesShouldCheck = null;
 
 						if (closestRefinery == null)
-							resourcesShouldCheck = nearbyResources.Shuffle(world.LocalRandom).Take(baseBuilder.Info.MaxResourceCellsToCheck);
+							resourcesShouldCheck = nearbyResources.Shuffle(BotRng.For(player, nameof(BaseBuilderQueueManagerCA))).Take(baseBuilder.Info.MaxResourceCellsToCheck);
 						else if (requestRef != null)
 						{
 							resourcesShouldCheck = nearbyResources.OrderBy(c => (c - baseBuilder.RequestedRefineries[requestRef].ResourceLoc).LengthSquared)
@@ -1313,7 +2191,7 @@ namespace OpenRA.Mods.CA.Traits
 					{
 						var nearbyResources = world.Map.FindTilesInAnnulus(baseCenter, baseBuilder.Info.MinBaseRadius, baseBuilder.Info.BaseCrawlRadius)
 							.Where(a => resourceLayer.GetResource(a).Type != null)
-							.Shuffle(world.LocalRandom).Take(baseBuilder.Info.MaxResourceCellsToCheck);
+							.Shuffle(BotRng.For(player, nameof(BaseBuilderQueueManagerCA))).Take(baseBuilder.Info.MaxResourceCellsToCheck);
 
 						foreach (var r in nearbyResources)
 						{
