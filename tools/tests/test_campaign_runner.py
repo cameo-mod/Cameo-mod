@@ -1,4 +1,4 @@
-import json, pathlib, sys, tempfile, unittest
+import hashlib, json, pathlib, sys, tempfile, unittest
 ROOT=pathlib.Path(__file__).resolve().parents[2]
 sys.path.insert(0,str(ROOT/"tools"/"ai"))
 import campaign_runner as runner
@@ -66,8 +66,9 @@ class CampaignRunnerTests(unittest.TestCase):
 			self.assertIn(field, required, f"persisted receipt must carry analyzer join field: {field}")
 
 	def test_bounds_and_parallel_policy(self):
-		self.assertEqual(runner.pilot.HEADLESS_PEAK_BYTES + 3 * 1024**3, runner.PRIVATE_LIMIT)
-		self.assertEqual(14 * 1024**3, runner.FREE_RAM_FLOOR)
+		self.assertEqual(int(10.5 * 1024**3), runner.PRIVATE_LIMIT)
+		self.assertEqual(runner.pilot.HEADLESS_PEAK_BYTES + 3 * 1024**3, runner.FREE_RAM_FLOOR)
+		self.assertEqual(14 * 1024**3, runner.pilot.PARALLEL_SMALL_RAM_FLOOR_BYTES)
 		self.assertEqual(3 * 1024**3, runner.FREE_RAM_HARD_FLOOR)
 		self.assertEqual(4 * 1024**3, runner.FREE_RAM_SOFT_FLOOR)
 		self.assertEqual(45000, runner.CAP_TICK)
@@ -82,8 +83,33 @@ class CampaignRunnerTests(unittest.TestCase):
 		with self.assertRaisesRegex(ValueError, "A5 parity receipt required"):
 			runner.execution_gate(manifest, a5_receipt=None, a5_receipt_sha256=None, source_commit="a" * 40, engine_version="engine")
 		a5 = {"verdict":"PASS", "order_stream_verdict":"IDENTICAL_TAIL_FLUSH", "source_commit":"b"*40, "engine_version":"engine", "seed_pin_verified":True, "run_count":2, "cap_below_natural_end":True}
-		with self.assertRaisesRegex(ValueError, "pin mismatch"):
+		with self.assertRaisesRegex(ValueError, "exact-baseline A5 parity receipt required"):
 			runner.execution_gate(manifest, a5_receipt=a5, a5_receipt_sha256="d"*64, source_commit="a"*40, engine_version="engine")
+
+	def test_execution_gate_accepts_exact_pinned_tail_flush_a5_receipt(self):
+		"""Exercise the gate with the exact external receipt pinned by the candidate manifest."""
+		manifest_path = ROOT / "docs" / "audit" / "ab_pilot_manifest_candidate.json"
+		manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+		receipt_path = pathlib.Path(manifest["a5_parity_receipt_path"])
+		if not receipt_path.is_file():
+			self.skipTest(f"pinned A5 receipt is unavailable: {receipt_path}")
+		receipt_bytes = receipt_path.read_bytes()
+		receipt_sha256 = hashlib.sha256(receipt_bytes).hexdigest()
+		self.assertEqual(manifest["a5_parity_receipt_sha256"], receipt_sha256)
+		receipt = json.loads(receipt_bytes.decode("utf-8"))
+		self.assertTrue(receipt["a5_diagnostic_passed"])
+		self.assertEqual("IDENTICAL_TAIL_FLUSH", receipt["order_stream_verdict"])
+		self.assertFalse(receipt["campaign_gate_passed"])
+		# The checked-in candidate remains unapproved; this in-memory copy exercises
+		# the A5 evidence gate without authorizing an execution manifest.
+		manifest["execution_approved"] = True
+		runner.execution_gate(
+			manifest,
+			a5_receipt=receipt,
+			a5_receipt_sha256=receipt_sha256,
+			source_commit=manifest["pins"]["source_commit"],
+			engine_version=manifest["pins"]["engine_version"],
+		)
 
 	def test_receipt_cap_must_not_claim_winner_and_needs_marker(self):
 		receipt = {"schema_version":1,"campaign_id":"c","manifest_sha256":"a"*64,"cell_id":"cell-1","game_uid":"game-1","status":"CENSORED_CAP","seats":[{"home":"M0"}],"baseline_commit":"b"*40,"engine_sha256":"c"*64,"switch":"s","setup_id":"x","pair_id":"p","pair_member":0,"seed":1,"seed_proof":{},"teams":{},"map":{"required_seats":1},"resolved_seats":[{"seat_id":"M0","team":"A","arm":"control","bot_type":"hard","faction":"td_gdi","home":"M0","spawn":0,"proof_source":"map+records","outcome":"lost","metrics":{"timeline":[]}}],"end_class":"CAP","end_reason":"cap","winner_team":None,"world_tick":45000,"cap":{"world_tick_cap":45000,"marker_observed":True,"marker_tick":45000},"memory":{"peak_private_bytes":0,"limit_private_bytes":runner.PRIVATE_LIMIT,"samples":[]},"runtime":{},"artifacts":{}}
