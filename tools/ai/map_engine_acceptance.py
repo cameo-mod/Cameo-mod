@@ -48,12 +48,12 @@ import run_ai_match_batch as batch  # noqa: E402
 
 HEADLESS_PLATFORM = batch.HEADLESS_PLATFORM
 
-# Maintainer ruling 2026-10-11 04:50Z (reaffirmed in the F1 takeover): 10.5 GiB private
-# cap, 3 GiB emergency host stop. No measured Windows headless peak exists yet for this
-# acceptance tool, so admission bootstraps the "measured peak" to the cap itself until a
-# real measurement replaces it; review REVIEW_2026-10-11_ccr_b337_luna.md F1.
+# Maintainer ruling 2026-10-11: 10.5 GiB private cap, 3 GiB emergency host stop.
+# The accepted e49 headless A5 pair measured 3,042,615,296 bytes peak private; admission
+# for one game is that measured peak plus the 3 GiB hard reserve. Two small games require
+# 14 GiB free before launch and large-team games remain exclusive.
 PRIVATE_CAP_BYTES = int(10.5 * 1024**3)
-BOOTSTRAP_HEADLESS_PEAK_BYTES = PRIVATE_CAP_BYTES
+BOOTSTRAP_HEADLESS_PEAK_BYTES = 3042615296
 ADMISSION_RESERVE_BYTES = 3 * 1024**3
 EMERGENCY_STOP_FREE_BYTES = 3 * 1024**3
 

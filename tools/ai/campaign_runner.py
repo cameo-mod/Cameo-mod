@@ -283,14 +283,46 @@ def execution_gate(manifest: dict, *, a5_receipt: dict | None, a5_receipt_sha256
 		raise ValueError("manifest source pin mismatch")
 	if manifest.get("pins", {}).get("engine_version") != engine_version:
 		raise ValueError("manifest engine pin mismatch")
-	if not isinstance(a5_receipt, dict) or a5_receipt.get("verdict") != "PASS" or a5_receipt.get("order_stream_verdict") not in ("IDENTICAL", "IDENTICAL_TAIL_FLUSH"):
+	if not isinstance(a5_receipt, dict) or a5_receipt.get("a5_diagnostic_passed") is not True or a5_receipt.get("order_stream_verdict") not in ("IDENTICAL", "IDENTICAL_TAIL_FLUSH"):
 		raise ValueError("exact-baseline A5 parity receipt required")
-	if a5_receipt.get("source_commit") != source_commit or a5_receipt.get("engine_version") != engine_version:
+	if a5_receipt.get("source_head") != source_commit or a5_receipt.get("baseline_commit") != source_commit or a5_receipt.get("engine_version") != engine_version:
 		raise ValueError("A5 parity receipt pin mismatch")
 	if manifest.get("a5_parity_receipt_sha256") != a5_receipt_sha256:
 		raise ValueError("A5 parity receipt SHA mismatch")
-	if a5_receipt.get("seed_pin_verified") is not True or a5_receipt.get("run_count") != 2 or a5_receipt.get("cap_below_natural_end") is not True:
-		raise ValueError("A5 receipt lacks two pinned deterministic capped runs")
+	if a5_receipt.get("campaign_gate_passed") is not False or a5_receipt.get("render_mode") != "headless":
+		raise ValueError("A5 receipt is not qualification-only headless evidence")
+	if (a5_receipt.get("process_private_cap_bytes") != PRIVATE_LIMIT or
+		a5_receipt.get("host_emergency_floor_bytes") != FREE_RAM_HARD_FLOOR):
+		raise ValueError("A5 memory guardrails differ from the approved campaign policy")
+	pair = a5_receipt.get("pair")
+	if not isinstance(pair, list) or len(pair) != 2 or a5_receipt.get("seed") != manifest.get("seeds", [None])[0]:
+		raise ValueError("A5 receipt lacks the two planned same-seed runs")
+	if a5_receipt.get("system_openra_process_count") != "0":
+		raise ValueError("A5 receipt records a remaining OpenRA process")
+	binary_pins = manifest.get("binary_sha256", {})
+	receipt_binaries = {str(k).replace("\\", "/").removeprefix("engine/"): v
+		for k, v in a5_receipt.get("binary_sha256", {}).items()}
+	if receipt_binaries != binary_pins:
+		raise ValueError("A5 receipt binary SHA differs from the approved campaign pin")
+	for run in pair:
+		if (not isinstance(run, dict) or run.get("source_head") != source_commit or
+			run.get("baseline_parent") != source_commit or run.get("engine_version") != engine_version or
+			run.get("exit_code") != 0 or run.get("stop_reason") != "PROCESS_EXIT" or
+			run.get("seed") != a5_receipt["seed"] or run.get("seed_pin_verified") is not True or
+			run.get("records_verified") is not True or run.get("valid_game") is not True or
+			run.get("censored_cap_verified") is not True or run.get("natural_below_cap") is not True or
+			run.get("cap_tick") != a5_receipt.get("cap_tick") or
+			run.get("observed_cap_tick") != a5_receipt.get("cap_tick", -1) + 1 or
+			run.get("replay_count") != 1 or not run.get("fingerprint_id") or
+			run.get("stop_threshold_bytes") != PRIVATE_LIMIT or
+			run.get("host_hard_floor_bytes") != FREE_RAM_HARD_FLOOR or
+			run.get("peak_private_bytes", PRIVATE_LIMIT) >= PRIVATE_LIMIT):
+			raise ValueError("A5 receipt contains an incomplete or unpinned capped run")
+		run_binaries = {str(k).replace("\\", "/").removeprefix("engine/"): v for k, v in run.get("binary_sha256", {}).items()}
+		if not run_binaries or any(binary_pins.get(k) != v for k, v in run_binaries.items()):
+			raise ValueError("A5 run binary SHA differs from the approved campaign pin")
+	if len({(run.get("seed"), run.get("fingerprint_id"), tuple(sorted(run.get("binary_sha256", {}).items()))) for run in pair}) != 1:
+		raise ValueError("A5 pair does not share an identical seed/fingerprint/binary")
 
 
 def monitor_process(process, *, driver_log: pathlib.Path, actor_log: pathlib.Path,
@@ -380,7 +412,7 @@ def run_one(manifest: dict, manifest_sha: str, job: dict, *, root: pathlib.Path,
 	pilot.validate(manifest, root, engine_root, execution=True)
 	execution_gate(manifest, a5_receipt=a5_receipt, a5_receipt_sha256=a5_receipt_sha256,
 		source_commit=manifest["pins"]["source_commit"], engine_version=manifest["pins"]["engine_version"])
-	if available_ram_bytes() < FREE_RAM_FLOOR: raise ValueError("available RAM below 14 GiB admission floor")
+	if available_ram_bytes() < FREE_RAM_FLOOR: raise ValueError("available RAM below measured headless peak plus 3 GiB reserve")
 	queue = ResumeQueue(support_root / "campaign_queue.sqlite", manifest_sha)
 	queue.install(pilot.make_jobs(manifest))
 	queue.recover_orphans(kill_game=lambda cell, pid: kill_owned_pid(pid, executable,

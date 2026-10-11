@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "campaign_id": "ab-bu-pilot-2026-10-11-exec",
+  "campaign_id": "ab-bu-pilot-2026-10-11",
   "switch": "BU_harvester_logistics",
   "pairs_per_setup": 2,
   "team_size_scope": [
@@ -32,32 +32,38 @@
     "min_kill_exchange_improvement": 0.0
   },
   "slot_policy": {
-    "max_parallel_small_games": 3,
+    "max_parallel_small_games": 2,
     "small_team_size_max": 2,
     "large_game_exclusive": true,
-    "min_free_ram_bytes": 14495514624,
-    "max_private_bytes": 11274289152
+    "min_free_ram_bytes": 6263840768,
+    "parallel_small_min_free_ram_bytes": 15032385536,
+    "max_private_bytes": 11274289152,
+    "headless_peak_bytes": 3042615296,
+    "process_headroom_bytes": 8231673856,
+    "soft_free_ram_bytes": 4294967296,
+    "hard_free_ram_bytes": 3221225472
   },
   "baseline_manifest_path": "docs/audit/ab_baseline_manifest_pilot.json",
-  "baseline_manifest_sha256": "eecadb954680b13c4f832ad32dee5249634f255a4e3a91ad92586cb0705bb76a",
+  "baseline_manifest_sha256": "1008cffc06a88c3ed744d6efb1fc5f623cfa813c12c8391fbd9c5b99b5b00e4e",
   "pins": {
-    "source_commit": "964cdb630b1514e1c1a0baed55cbdbc427d5fc11",
-    "engine_version": "6da7fce14da541180c6baddd6925118fbef65b94"
+    "source_commit": "e49acf41a1b3699f01d44e4def06ed4bf83af038",
+    "engine_version": "4f69df005fe0d893526890fcb5bbc42e442d6fd6"
   },
   "switch_patch_sha256": "d710567579cb3673eb33701ec881495f0a2a17d6203194b0efdc8052f4de4523",
   "baseline_ai_payload_sha256": "932e2e5c919de6f5b493e1722e6e66e39a3a5f1577b29aa58a571492b7de9d69",
   "treatment_ai_payload_sha256": "acdfd3a3e2c7d405a776703593f1d52c5f357b423e75ffb224392159c009c725",
+  "tool_hash_algorithm": "sha256-lf-normalized-v1",
   "tool_sha256": {
-    "driver_analyzer": "bb77a8e224a372b8e6b67d4b6ccfa97f56605b7a380802896c9677e8755df373",
-    "campaign_runner": "3f6e2db7fbca0f2dbedc33b8d16261f2575d05777d6237c10d77014f3e764055",
-    "batch_runner": "072225d79e70011545bb43b9228a7c1f2686c033c04c4b3fa02dd92edcf6a6ce",
-    "switch_applier": "5376258709f2ff6512e402abeaf09e164abe483142980830bc72269af047f97e"
+    "driver_analyzer": "7b861b930c6b466a768cbcc06d4e792462cc8a24c1d1ef336d6a52118b0b43c6",
+    "campaign_runner": "c203ff74e09aff7549a04ac34bb87bb0ac5c74e8dfcad871536cd8b46dead6c5",
+    "batch_runner": "03247f59f2744ea001c9d35a5a03c16bef077ac450d24ef05c08f167d16fcad5",
+    "switch_applier": "9e9f678871cc2d8adeca0e7b5c2c28a30a041252f8f630005593bc7f241a6bdd"
   },
-  "receipt_schema_sha256": "3d0e39057ded3c28354812bfad1db6727e891e16a25250bd6a9caff6063fa164",
+  "receipt_schema_sha256": "0073f316a9b34b791156ddc18ed203da88651c90af0f3d62680d0dfd5a73995f",
   "binary_sha256": {
-    "bin/OpenRA.exe": "5693f355792ebb68699793f96ef2167b733c5e7756f580858c5090226418c984",
-    "bin/OpenRA.Game.dll": "167fcbd8985dc3cd74ae2747c6d4a43db0d51cbda99dc029712fdb72182f6b80",
-    "bin/OpenRA.Mods.Cameo.dll": "3b69b0d49d88914d4e003fbae2c35faf9e8bad0625e161effb2773e5e5575853"
+    "bin/OpenRA.exe": "a4d4645dd668241dd73f0e102fe1e6145d72932ee9b38447e4a7ea93b7f1cd55",
+    "bin/OpenRA.Game.dll": "819ec01a7546ba184a132f82c9b43b15fd2df86bf8f651fcacf7df68584d9624",
+    "bin/OpenRA.Mods.Cameo.dll": "64f073697437953b5fd7458da4851e2847e442cf13917e3c39903c8daf23cd1e"
   },
   "maps": [
     {
@@ -259,8 +265,8 @@
       ]
     }
   ],
-  "execution_approved": true,
-  "notes": "execution manifest; approved by maintainer 2026-10-11 (lead order: launch BU pilot)",
-  "a5_parity_receipt_sha256": "6f4f827637693074331769bcde9d8c138a8554140fb0149118881c6d79064707",
-  "a5_parity_receipt_path": "results/campaign-a5-fixed-tick-parity-20261010-attempt2/A5_parity_gate_receipt.json"
+  "execution_approved": false,
+  "notes": "DISARMED stale approval. Refreshed pins and A5 evidence; maintainer re-signature required after remaining gates.",
+  "a5_parity_receipt_path": "C:\\cameo-wt\\land-personality-seat\\results\\campaign-a5-e49acf41-manager-20261011-attempt2\\A5_memory_probe_receipt.json",
+  "a5_parity_receipt_sha256": "2bb6dffafced59ffc810e8f1c938c4465621834b134552e27b676da72c098f0f"
 }

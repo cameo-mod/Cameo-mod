@@ -35,15 +35,18 @@
     "max_parallel_small_games": 2,
     "small_team_size_max": 2,
     "large_game_exclusive": true,
-    "min_free_ram_bytes": 15032385536,
-    "max_private_bytes": 8844591104,
-    "headless_peak_bytes": 5623365632,
-    "process_headroom_bytes": 3221225472
+    "min_free_ram_bytes": 6263840768,
+    "parallel_small_min_free_ram_bytes": 15032385536,
+    "max_private_bytes": 11274289152,
+    "headless_peak_bytes": 3042615296,
+    "process_headroom_bytes": 8231673856,
+    "soft_free_ram_bytes": 4294967296,
+    "hard_free_ram_bytes": 3221225472
   },
   "baseline_manifest_path": "docs/audit/ab_baseline_manifest_pilot.json",
-  "baseline_manifest_sha256": "0086954f9b3a1787e50f365dca07474e8a47bf4342da6da2ad5924a805e3dae6",
+  "baseline_manifest_sha256": "1008cffc06a88c3ed744d6efb1fc5f623cfa813c12c8391fbd9c5b99b5b00e4e",
   "pins": {
-    "source_commit": "964cdb630b1514e1c1a0baed55cbdbc427d5fc11",
+    "source_commit": "e49acf41a1b3699f01d44e4def06ed4bf83af038",
     "engine_version": "4f69df005fe0d893526890fcb5bbc42e442d6fd6"
   },
   "switch_patch_sha256": "d710567579cb3673eb33701ec881495f0a2a17d6203194b0efdc8052f4de4523",
@@ -51,8 +54,8 @@
   "treatment_ai_payload_sha256": "acdfd3a3e2c7d405a776703593f1d52c5f357b423e75ffb224392159c009c725",
   "tool_hash_algorithm": "sha256-lf-normalized-v1",
   "tool_sha256": {
-    "driver_analyzer": "90f82358edf973f80ba80bbcd67ffe227cfb17941d386a79def6eae363292e01",
-    "campaign_runner": "6a17f2c14f35c4a64b21173ea3e6767a5961b322180f7b6c262af34770c30f67",
+    "driver_analyzer": "7b861b930c6b466a768cbcc06d4e792462cc8a24c1d1ef336d6a52118b0b43c6",
+    "campaign_runner": "c203ff74e09aff7549a04ac34bb87bb0ac5c74e8dfcad871536cd8b46dead6c5",
     "batch_runner": "03247f59f2744ea001c9d35a5a03c16bef077ac450d24ef05c08f167d16fcad5",
     "switch_applier": "9e9f678871cc2d8adeca0e7b5c2c28a30a041252f8f630005593bc7f241a6bdd"
   },
@@ -263,7 +266,7 @@
     }
   ],
   "execution_approved": false,
-  "notes": "non-executable candidate; execution approval remains false until Windows engine acceptance, headless measurement, fresh A5 receipt, and maintainer sign-off",
-  "a5_parity_receipt_path": null,
-  "a5_parity_receipt_sha256": null
+  "notes": "Refreshed candidate for e49acf41 / engine 4f69df with exact A5 attempt2 receipt and current tool hashes. Not execution-approved; require refreshed map acceptance/analyzer gates and maintainer re-signature.",
+  "a5_parity_receipt_path": "C:\\cameo-wt\\land-personality-seat\\results\\campaign-a5-e49acf41-manager-20261011-attempt2\\A5_memory_probe_receipt.json",
+  "a5_parity_receipt_sha256": "2bb6dffafced59ffc810e8f1c938c4465621834b134552e27b676da72c098f0f"
 }

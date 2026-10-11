@@ -30,20 +30,21 @@ SETUPS = [
  ("3v3_winter_asg",3,"winters_end_rich",("ra1_allies","ra1_soviets","td_gdi")),("3v3_winter_sgn",3,"winters_end_rich",("ra1_soviets","td_gdi","td_nod")),
  ("4v4_sahara",4,"great_sahara_2",("td_gdi","td_nod","ra1_allies","ra1_soviets")),("4v4_ice",4,"ice_cold",("td_gdi","td_nod","ra1_allies","ra1_soviets")),
 ]
-# Maintainer-approved campaign gate: serial-safe per-process ceiling with a
-# 4 GiB soft pressure threshold, 3 GiB hard host reserve, and 15.5 GiB launch
-# admission for the two-small-game slot. Linux RSS measurements are diagnostic
-# only; Windows private bytes must be recorded on the final engine before pilot.
-HEADLESS_PEAK_BYTES = 5623365632
+# Maintainer-approved campaign gate: measured Windows headless peak from the
+# accepted e49 A5 receipt, 3 GiB hard host reserve, 4 GiB soft threshold, and
+# 14 GiB pre-launch headroom for two small games. A single game needs only the
+# measured peak plus 3 GiB; large-team games remain exclusive.
+HEADLESS_PEAK_BYTES = 3042615296
 PROCESS_CAP_BYTES = int(10.5 * 1024**3)
-RAM_FLOOR_BYTES = int(15.5 * 1024**3)
+RAM_FLOOR_BYTES = HEADLESS_PEAK_BYTES + 3 * 1024**3
+PARALLEL_SMALL_RAM_FLOOR_BYTES = 14 * 1024**3
 ROUND_STAGES = [16,32,48,64]
 ECONOMY_INTERVAL_TICKS = tuple(range(5000, 45001, 5000))
 FIX_SAFETY_SWITCHES = frozenset("K_cn2_unit_repair AL_emergency_net_loss AN_combat_veto AG_assault_fanout BJ_squad_hysteresis BK_squad_order_dedup BL_protection_episode_guard BN_squad_pool_fixes BO_squad_move_dedup".split())
 _, _ALL_GROUPS, _ = increment.load_spec(pathlib.Path(__file__).with_name("increment_switches.yaml"))
 BEHAVIOR_SWITCHES = tuple(name for name in _ALL_GROUPS if name not in FIX_SAFETY_SWITCHES)
 DEFAULT_THRESHOLDS = {"early_accept_share":0.75,"early_reject_share":0.25,"win_noninferiority_delta":0.0,"min_earned_spent_improvement":0.0,"min_army_efficiency_improvement":0.0,"min_kill_exchange_improvement":0.0}
-SLOT_POLICY={"max_parallel_small_games":2,"small_team_size_max":2,"large_game_exclusive":True,"min_free_ram_bytes":RAM_FLOOR_BYTES,"max_private_bytes":PROCESS_CAP_BYTES,"headless_peak_bytes":HEADLESS_PEAK_BYTES,"process_headroom_bytes":PROCESS_CAP_BYTES-HEADLESS_PEAK_BYTES,"soft_free_ram_bytes":4*1024**3,"hard_free_ram_bytes":3*1024**3}
+SLOT_POLICY={"max_parallel_small_games":2,"small_team_size_max":2,"large_game_exclusive":True,"min_free_ram_bytes":RAM_FLOOR_BYTES,"parallel_small_min_free_ram_bytes":PARALLEL_SMALL_RAM_FLOOR_BYTES,"max_private_bytes":PROCESS_CAP_BYTES,"headless_peak_bytes":HEADLESS_PEAK_BYTES,"process_headroom_bytes":PROCESS_CAP_BYTES-HEADLESS_PEAK_BYTES,"soft_free_ram_bytes":4*1024**3,"hard_free_ram_bytes":3*1024**3}
 
 def treatment_baseline(accepted_switches, candidate):
  """Ratchet rule: accepted groups stay in control; treatment adds one candidate."""
@@ -76,10 +77,11 @@ def acceptance_decision(*, rounds, treatment_wins, control_wins, economy_not_wor
 def regression_due(accepted_count):
  return accepted_count>0 and accepted_count%5==0
 
-def slots_available(team_size, free_ram_bytes, active_private_bytes=(), active_slots=0, active_team_sizes=(), max_small_slots=3):
+def slots_available(team_size, free_ram_bytes, active_private_bytes=(), active_slots=0, active_team_sizes=(), max_small_slots=2):
  """Admission policy for the amended slot counter; callers still need OS memory monitoring."""
  if free_ram_bytes<RAM_FLOOR_BYTES or any(x>=PROCESS_CAP_BYTES for x in active_private_bytes): return False
  if team_size>=3: return active_slots==0
+ if active_slots and (free_ram_bytes+sum(active_private_bytes)<PARALLEL_SMALL_RAM_FLOOR_BYTES): return False
  return active_slots<max_small_slots and not any(size>=3 for size in active_team_sizes)
 
 class SqliteSlotCounter:
@@ -307,7 +309,7 @@ def validate(manifest,root,engine_root=None,execution=False):
  basepath=(root/pathlib.PurePosixPath(manifest.get("baseline_manifest_path",""))).resolve()
  require(root.resolve() in basepath.parents and basepath.is_file() and text_sha(basepath)==baseline,"ratchet baseline manifest file/hash mismatch")
  pins=manifest.get("pins")
- require(isinstance(pins,dict) and pins.get("source_commit")=="964cdb630b1514e1c1a0baed55cbdbc427d5fc11" and pins.get("engine_version")=="4f69df005fe0d893526890fcb5bbc42e442d6fd6","source/engine pin mismatch")
+ require(isinstance(pins,dict) and pins.get("source_commit")=="e49acf41a1b3699f01d44e4def06ed4bf83af038" and pins.get("engine_version")=="4f69df005fe0d893526890fcb5bbc42e442d6fd6","source/engine pin mismatch")
  p=subprocess.run(["git","-C",str(root),"cat-file","-e",pins["source_commit"]+"^{commit}"],capture_output=True,timeout=20)
  require(p.returncode==0,"pinned source commit unavailable")
  require(manifest.get("switch_patch_sha256")==increment.group_patch_sha256(increment.load_spec(pathlib.Path(__file__).with_name("increment_switches.yaml"))[1][SWITCH]),"BU patch SHA mismatch")
