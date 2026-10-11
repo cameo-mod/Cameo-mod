@@ -65,7 +65,7 @@ Post-mortem of attempts 2/3/4 (evidence: `1v1_nuclear_gdi_1337_0.attempt2_toolin
 
 Consequence: every cell attempted so far is degenerate base-mod gameplay with no AIs — none may be scored even partially. The 8-map `map_engine_acceptance.py` gate (seen running under `ab-campaign-pidguard-integration`) exercises `Launch.Map` against the real `mods/` tree and does NOT cover the dual-arm overlay path; a green acceptance run does not clear this blocker.
 
-Fix direction for the campaign-tooling owner: make the overlay a complete mod root — junction (directory symlink, no file copying) every `mods/cameo/` subtree except `ai/` into `Overlay/mods/cameo/`, keep `mod.yaml` + materialized `ai/`. A single shared overlay per campaign suffices — the payload is identical for all 64 cells; only Support/maps differ per cell.
+Fix direction for the campaign-tooling owner (junction approach **tested and retracted** — this host refuses to traverse `mklink /J` junctions: "untrusted mount point"): write the materialized dual-arm `ai/*.yaml` into a real full `mods/cameo` worktree (e.g. the `codex/ab-campaign` checkout) once per campaign, and set `Engine.ModSearchPaths=<that_worktree>\mods,<engine>\mods` with no Overlay dir — the same pattern `map_engine_acceptance.py` already uses successfully (its runs record `hard_control`/`hard_treatment` engine seats). Alternatively keep the Overlay root but add mounts for the real mod tree — unverified, junctions unusable.
 
 ## 2026-10-11 — incident: live-cell staging deleted during investigation
 
