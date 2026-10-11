@@ -53,6 +53,17 @@ def parse_actor_samples(text: str) -> list[dict]:
 
 def pid_alive(pid: int | None) -> bool:
 	if type(pid) is not int or pid <= 0: return False
+	if os.name == "nt":
+		# os.kill(pid, 0) is not a safe probe on Windows; ask the kernel instead.
+		handle = ctypes.windll.kernel32.OpenProcess(0x0400, False, pid)  # PROCESS_QUERY_LIMITED_INFORMATION
+		if not handle:
+			return False
+		try:
+			code = ctypes.c_ulong()
+			ok = ctypes.windll.kernel32.GetExitCodeProcess(handle, ctypes.byref(code))
+			return bool(ok) and code.value == 259  # STILL_ACTIVE
+		finally:
+			ctypes.windll.kernel32.CloseHandle(handle)
 	try:
 		os.kill(pid, 0); return True
 	except PermissionError:
@@ -84,36 +95,51 @@ def kill_owned_pid(pid: int, expected_executable: pathlib.Path, expected_support
 		return False
 
 
-def resolve_game_pid(process, timeout_seconds: float = 20.0) -> int:
+def resolve_game_pid(process, support_dir: pathlib.Path, timeout_seconds: float = 25.0) -> int:
 	"""Return the real game process id.
 
-	bin/OpenRA.exe is the Windows launcher: it spawns a second OpenRA.exe
-	(the actual game) as its child. The Popen pid is only the launcher
-	(~25 MiB); memory caps and PID-scoped cleanup must target the child.
-	Falls back to the launcher's pid when no child appears.
+	bin/OpenRA.exe is the Windows launcher: it spawns short-lived children
+	and then the actual game (a child OpenRA.exe whose command line carries
+	this cell's Engine.SupportDir). The Popen pid is only the launcher
+	(~25 MiB); memory caps and PID-scoped cleanup must target the real game.
+	Requires the same support-tagged child to survive two consecutive polls
+	so transient launcher children are not mistaken for the game. Falls back
+	to the launcher's pid when no stable child appears.
 	"""
 	if os.name != "nt":
 		return process.pid
+	tag = str(support_dir.resolve())
+	probe = (
+		"Get-CimInstance Win32_Process -Filter \"Name='OpenRA.exe'\" | "
+		"Where-Object { $_.CommandLine -and $_.CommandLine.Contains('" + tag.replace("'", "''") + "') } | "
+		"Select-Object ProcessId,ParentProcessId,CommandLine | ConvertTo-Json -Compress")
 	deadline = time.monotonic() + timeout_seconds
+	candidate = None
 	while time.monotonic() < deadline:
 		if process.poll() is not None:
 			return process.pid
 		try:
 			out = subprocess.run(
-				["powershell.exe", "-NoProfile", "-NonInteractive", "-Command",
-				 "Get-CimInstance Win32_Process -Filter \"Name='OpenRA.exe'\" | "
-				 "Select-Object ProcessId,ParentProcessId | ConvertTo-Json -Compress"],
+				["powershell.exe", "-NoProfile", "-NonInteractive", "-Command", probe],
 				capture_output=True, text=True, timeout=15).stdout
 			procs = json.loads(out) if out.strip() else []
 			if isinstance(procs, dict):
 				procs = [procs]
 			for proc in procs:
-				if proc.get("ParentProcessId") == process.pid:
-					return int(proc["ProcessId"])
+				pid = int(proc.get("ProcessId") or 0)
+				if proc.get("ParentProcessId") != process.pid or pid <= 0:
+					continue
+				if "Engine.LaunchPath" not in (proc.get("CommandLine") or ""):
+					continue  # launcher-spawned transient, not the game re-exec
+				if not pid_alive(pid):
+					continue
+				if pid == candidate:
+					return pid  # stable across two polls: not a transient
+				candidate = pid
 		except (OSError, subprocess.SubprocessError, ValueError):
 			pass
-		time.sleep(1.0)
-	return process.pid
+		time.sleep(1.5)
+	return candidate if candidate and pid_alive(candidate) else process.pid
 
 
 def available_ram_bytes() -> int:
@@ -459,7 +485,7 @@ def run_one(manifest: dict, manifest_sha: str, job: dict, *, root: pathlib.Path,
 	env = os.environ.copy(); env["CAMEO_DEV_SEED"] = str(job["seed"])
 	with driver_log.open("w", encoding="utf-8") as output:
 		process = subprocess.Popen(args, cwd=engine_root, env=env, stdout=output, stderr=subprocess.STDOUT)
-	game_pid = resolve_game_pid(process)
+	game_pid = resolve_game_pid(process, game_support)
 	queue.set_game_pid(job["cell_id"], game_pid)
 	def heartbeat(row):
 		if row["private_bytes"] < PRIVATE_LIMIT:
