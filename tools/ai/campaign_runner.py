@@ -51,6 +51,28 @@ def parse_actor_samples(text: str) -> list[dict]:
 	return [{"world_tick": int(t), "actor_count": int(n)} for t, n in ACTOR_SAMPLE_RE.findall(text)]
 
 
+def link_mod_tree(src: pathlib.Path, dst: pathlib.Path, skip_top=()):
+	"""Clone a mod directory into dst using hardlinks: real files with no reparse
+	points, so this host's untrusted-mount-point policy cannot reject them.
+	Top-level names in skip_top are omitted (the dual-arm ai/ payload is written
+	separately). Falls back to a byte copy when a link is unavailable."""
+	for dirpath, dirnames, filenames in os.walk(src):
+		rel = pathlib.Path(dirpath).relative_to(src)
+		if not rel.parts:
+			dirnames[:] = [d for d in dirnames if d not in skip_top]
+		elif rel.parts[0] in skip_top:
+			dirnames[:] = []
+			continue
+		target = dst / rel
+		target.mkdir(parents=True, exist_ok=True)
+		for name in filenames:
+			s = pathlib.Path(dirpath) / name
+			d = target / name
+			if d.exists(): d.unlink()
+			try: os.link(s, d)
+			except OSError: shutil.copy2(s, d)
+
+
 def pid_alive(pid: int | None) -> bool:
 	if type(pid) is not int or pid <= 0: return False
 	if os.name == "nt":
@@ -470,8 +492,14 @@ def run_one(manifest: dict, manifest_sha: str, job: dict, *, root: pathlib.Path,
 	game_support = game_root / "Support"; game_support.mkdir()
 	logs = game_support / "Logs"; logs.mkdir()
 	maps = game_support / "maps" / "cameo" / "{DEV_VERSION}"; maps.mkdir(parents=True)
-	overlay = game_root / "Overlay"; pilot.materialize_dual_arm_ai(root, overlay, job["switch"], manifest.get("ratchet_accepted_switches", []))
-	shutil.copyfile(root / "mods" / "cameo" / "mod.yaml", overlay / "mods" / "cameo" / "mod.yaml")
+	# A thin Overlay/mods/cameo dir is rejected at the ContentPacks mount
+	# (mod.yaml:247) which drops every arm bot type; junctions are refused by
+	# this host. Materialize a full mod tree instead: arm ai/ payload first,
+	# then a hardlink clone of every other mods/cameo entry (same pattern
+	# map_engine_acceptance.py uses against the real mods/ tree).
+	full_mods = game_root / "FullMods"
+	pilot.materialize_dual_arm_ai(root, full_mods, job["switch"], manifest.get("ratchet_accepted_switches", []))
+	link_mod_tree(root / "mods" / "cameo", full_mods / "mods" / "cameo", skip_top=("ai",))
 	variant = maps / ("campaign_" + re.sub(r"[^A-Za-z0-9_.-]", "_", job["cell_id"]))
 	proof = pilot.prove_generated_map(job, root, variant)
 	map_yaml = variant / "map.yaml"; map_yaml_sha = sha(map_yaml)
@@ -479,7 +507,7 @@ def run_one(manifest: dict, manifest_sha: str, job: dict, *, root: pathlib.Path,
 	server_log = logs / "server.log"; driver_log = game_root / "driver.log"
 	if not executable.is_file(): raise ValueError("pinned OpenRA executable missing")
 	args = [str(executable), "Game.Mod=cameo", "Sound.Device=none", "Engine.EngineDir=..",
-		f"Engine.ModSearchPaths={overlay / 'mods'},{root / 'mods'},{engine_root / 'mods'}",
+		f"Engine.ModSearchPaths={full_mods / 'mods'},{root / 'mods'},{engine_root / 'mods'}",
 		f"Engine.SupportDir={game_support}", f"Launch.Map={variant.name}", "Launch.Benchmark=ai-duel-batch-",
 		"Graphics.VSync=False", "Graphics.Mode=Windowed", "Graphics.WindowedSize=640,480"]
 	env = os.environ.copy(); env["CAMEO_DEV_SEED"] = str(job["seed"])
