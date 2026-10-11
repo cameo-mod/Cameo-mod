@@ -718,14 +718,20 @@ namespace OpenRA.Mods.CA.Traits
 					return false;
 				}
 
+				// TF-1: the planner's crawl-link want is claimed atomically at admission — the first
+				// queue through holds the pending claim, a second queue in the same window is refused
+				// here (the published want alone admits nothing). The claim becomes paid only when the
+				// item is seen in this producer's queue; an intent that never arrives drops uncharged.
+				if (lawWants != null && item.Name == lawWants.WantedLinkBuilding
+					&& !lawWants.TryClaimCrawlLink(queue.Actor, item.Name, queue.GetProductionCost(item)))
+				{
+					pendingDemandPick = default;
+					return false;
+				}
+
 				baseBuilder.RecordOpeningStructureQueued(queue, item);
 				baseBuilder.BuildOrderKnobs?.NotifyQueued(item.Name);
 				bot.QueueOrder(Order.StartProduction(queue.Actor, item.Name, 1));
-
-				// TF-1: a paid planner crawl-link admission charges its episode allowance — the
-				// ledger binds optional supply to real spend, not queued intent.
-				if (lawWants != null && item.Name == lawWants.WantedLinkBuilding)
-					lawWants.CrawlLinkPaid(queue.GetProductionCost(item));
 
 				queuedAt[queue.Actor.ActorID] = (item.Name, world.WorldTick);
 				if (demandPick.Demand != null)

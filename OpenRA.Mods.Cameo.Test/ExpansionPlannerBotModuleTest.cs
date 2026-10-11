@@ -363,7 +363,8 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		// TF-1 (FINDINGS_2026-10-11_turtle_regression increment 1): the optional crawl-link episode —
-		// the bound spends only PAID link admissions the queue reports, the route lives only while the
+		// a queue's StartProduction intent is a pending claim that becomes paid only when the item is
+		// seen in its production queue, admission is atomic per owner, the route lives only while the
 		// frontier keeps closing on the aim, and a changed target opens a fresh episode.
 
 		static ExpansionPlannerBotModule.CrawlLinkAllowance Episode(CPos target, CPos aim, int distSq, int maxNonprogress = 4)
@@ -374,16 +375,27 @@ namespace OpenRA.Mods.Cameo.Test
 			return ep;
 		}
 
+		static Dictionary<object, HashSet<string>> InProduction(object owner, string item) =>
+			new() { { owner, new HashSet<string> { item } } };
+
+		/// <summary>The real admission path: the queue claims, then its queue shows the item in production.</summary>
+		static void AdmitPaid(ExpansionPlannerBotModule.CrawlLinkAllowance ep, object owner, int cost, string item = "link")
+		{
+			Assert.That(ep.TryClaim(owner, item, cost, false, 0, 0), Is.True, "the admission gate claims the link");
+			ep.Reconcile(InProduction(owner, item), 2);
+		}
+
 		[Test]
 		public void ATruePowerDeficitAdmitsALinkTheAllowanceWouldRefuse()
 		{
 			// Case 1: the episode's cost headroom is spent, but mandatory power skips the allowance.
+			var owner = new object();
 			var target = new CPos(40, 10);
 			var aim = new CPos(40, 10);
 			var ep = Episode(target, aim, 400);
-			ep.RecordPaid(600);
-			ep.NoteDistance(300, aim, 4); // the paid link advanced the frontier — the window clears
-			ep.RecordPaid(400);
+			AdmitPaid(ep, owner, 600);
+			ep.NoteDistance(300, aim, 4); // the paid link advanced the frontier — the claim settles
+			AdmitPaid(ep, owner, 400);
 			ep.NoteDistance(200, aim, 4); // advanced again: only the paid-cost bound can refuse now
 
 			Assert.That(ep.OptionalLinkAdmissible(200, 1000, 4, 200), Is.False,
@@ -396,15 +408,20 @@ namespace OpenRA.Mods.Cameo.Test
 		[Test]
 		public void AnAdvancingAffordableLinkIsAdmittedSerially()
 		{
-			// Case 2: supply flows one outstanding link at a time, each progress step re-arms it.
+			// Case 2: supply flows one outstanding claim at a time, each progress step re-arms it.
+			var owner = new object();
 			var aim = new CPos(40, 10);
 			var ep = Episode(new CPos(40, 10), aim, 400);
 
 			Assert.That(ep.OptionalLinkAdmissible(500, 6000, 4, 400), Is.True,
 				"a measured frontier and headroom admit the first link");
-			ep.RecordPaid(500);
+			Assert.That(ep.TryClaim(owner, "link", 500, false, 6000, 4), Is.True);
 			Assert.That(ep.OptionalLinkAdmissible(500, 6000, 4, 400), Is.False,
-				"the outstanding paid link must advance before the next is supplied");
+				"the outstanding claim must advance before the next is supplied");
+			ep.Reconcile(InProduction(owner, "link"), 2); // accepted — now PAID, still outstanding
+			Assert.That(ep.PaidCost, Is.EqualTo(500));
+			Assert.That(ep.OptionalLinkAdmissible(500, 6000, 4, 400), Is.False,
+				"the accepted-but-unadvanced link still holds the window");
 
 			ep.NoteDistance(300, aim, 4); // the link landed forward — progress
 			Assert.That(ep.AwaitingProgress, Is.EqualTo(0));
@@ -415,10 +432,11 @@ namespace OpenRA.Mods.Cameo.Test
 		[Test]
 		public void ANonadvancingRouteParksAndThePaidCountBoundRefuses()
 		{
-			// Case 3: a paid link that never advances the frontier counts stalled re-plans to the park.
+			// Case 3: a link that never advances the frontier counts stalled re-plans to the park.
+			var owner = new object();
 			var aim = new CPos(40, 10);
 			var ep = Episode(new CPos(40, 10), aim, 400);
-			ep.RecordPaid(500);
+			AdmitPaid(ep, owner, 500);
 			for (var i = 0; i < 4; i++)
 				ep.NoteDistance(400, aim, 4);
 			Assert.That(ep.Parked, Is.True, "four measured re-plans without progress park the route");
@@ -429,7 +447,7 @@ namespace OpenRA.Mods.Cameo.Test
 			for (var i = 0; i < 4; i++)
 			{
 				Assert.That(ep2.OptionalLinkAdmissible(500, 6000, 4, 400 - 100 * i), Is.True);
-				ep2.RecordPaid(500);
+				AdmitPaid(ep2, owner, 500);
 				ep2.NoteDistance(300 - 100 * i, aim, 4); // each link advances — progress, not stalls
 			}
 
@@ -443,9 +461,10 @@ namespace OpenRA.Mods.Cameo.Test
 		public void AChangedTargetOpensAFreshEpisode()
 		{
 			// Case 4: the parked route retires — a new target field gets a clean ledger.
+			var owner = new object();
 			var aim = new CPos(40, 10);
 			var ep = Episode(new CPos(40, 10), aim, 400);
-			ep.RecordPaid(500);
+			AdmitPaid(ep, owner, 500);
 			for (var i = 0; i < 4; i++)
 				ep.NoteDistance(400, aim, 4);
 			Assert.That(ep.Parked, Is.True);
@@ -484,6 +503,111 @@ namespace OpenRA.Mods.Cameo.Test
 
 			Assert.That(ExpansionPlannerBotModule.FrontierAnchor(frontier, null), Is.Null);
 			Assert.That(ExpansionPlannerBotModule.FrontierAnchor(new List<CPos>(), aim), Is.Null);
+		}
+
+		// TF-1 repair (Sol review of 5bedabace): admission is an atomic CLAIM at the queue's order,
+		// not a published want; a claim charges only once its item is observed in production.
+
+		[Test]
+		public void TwoQueuesCompetingForTheWantOnlyOneClaimsIt()
+		{
+			// Both queues see the published want in the same window: the first TryClaim wins, the
+			// second is refused — the want alone admitted nothing to anyone.
+			var queueA = new object();
+			var queueB = new object();
+			var ep = Episode(new CPos(40, 10), new CPos(40, 10), 400);
+
+			Assert.That(ep.TryClaim(queueA, "link", 500, false, 6000, 4), Is.True);
+			Assert.That(ep.TryClaim(queueB, "link", 500, false, 6000, 4), Is.False,
+				"a second queue in the same window is refused — no double admission");
+			Assert.That(ep.TryClaim(queueB, "link", 500, false, 6000, 4), Is.False,
+				"and it stays refused while the first claim is outstanding");
+			Assert.That(ep.PaidCount, Is.EqualTo(0), "intents charged nothing");
+
+			ep.Reconcile(InProduction(queueA, "link"), 2); // queue A's item accepted
+			Assert.That(ep.PaidCount, Is.EqualTo(1));
+			Assert.That(ep.TryClaim(queueB, "link", 500, false, 6000, 4), Is.False,
+				"queue B stays refused while queue A's paid link awaits progress");
+
+			ep.NoteDistance(300, new CPos(40, 10), 4); // the paid link advanced — claims settle
+			Assert.That(ep.TryClaim(queueB, "link", 500, false, 6000, 4), Is.True,
+				"progress re-opens the supply for the next claimant");
+		}
+
+		[Test]
+		public void ARejectedIntentDropsUnchargedAndReopensSupply()
+		{
+			// The queue's order never makes it into production: the pending claim ages out, the
+			// episode spends nothing, and the window re-opens for a fresh claimant.
+			var owner = new object();
+			var ep = Episode(new CPos(40, 10), new CPos(40, 10), 400);
+
+			Assert.That(ep.TryClaim(owner, "link", 500, false, 6000, 4), Is.True);
+			Assert.That(ep.AwaitingProgress, Is.EqualTo(1));
+			Assert.That(ep.OptionalLinkAdmissible(500, 6000, 4, 400), Is.False,
+				"the pending intent serializes the supply while it may still land");
+
+			var nothing = new Dictionary<object, HashSet<string>>();
+			ep.Reconcile(nothing, 2); // first unseen re-plan: still pending
+			Assert.That(ep.AwaitingProgress, Is.EqualTo(1));
+			ep.Reconcile(nothing, 2); // aged out: dropped
+			Assert.That(ep.AwaitingProgress, Is.EqualTo(0));
+			Assert.That(ep.PaidCost, Is.EqualTo(0));
+			Assert.That(ep.PaidCount, Is.EqualTo(0),
+				"a rejected intent never charges the episode");
+			Assert.That(ep.OptionalLinkAdmissible(500, 6000, 4, 400), Is.True);
+		}
+
+		[Test]
+		public void AnAcceptedLinkThatLeavesProductionKeepsItsCharge()
+		{
+			// A paid item that leaves the queue — completed or cancelled — consumed its spend
+			// window: the charge stands and the claim clears for the next admission.
+			var owner = new object();
+			var ep = Episode(new CPos(40, 10), new CPos(40, 10), 400);
+			AdmitPaid(ep, owner, 500);
+			Assert.That(ep.PaidCost, Is.EqualTo(500));
+
+			ep.Reconcile(new Dictionary<object, HashSet<string>>(), 2); // it left production
+			Assert.That(ep.AwaitingProgress, Is.EqualTo(0));
+			Assert.That(ep.PaidCost, Is.EqualTo(500), "accepted spend stays charged");
+			Assert.That(ep.PaidCount, Is.EqualTo(1));
+			Assert.That(ep.TryClaim(owner, "link", 500, false, 6000, 4), Is.True,
+				"the cleared window admits the next link — the count bound is the real cap");
+		}
+
+		[Test]
+		public void AMandatoryClaimBypassesEveryBound()
+		{
+			// Mandatory power outranks a spent allowance and even an outstanding optional claim.
+			var queueA = new object();
+			var queueB = new object();
+			var ep = Episode(new CPos(40, 10), new CPos(40, 10), 400);
+			Assert.That(ep.TryClaim(queueA, "link", 500, false, 6000, 4), Is.True);
+
+			Assert.That(ep.TryClaim(queueB, "link", 500, true, 6000, 4), Is.True,
+				"a real deficit claims even while an optional claim is outstanding");
+
+			var ep2 = Episode(new CPos(40, 10), new CPos(40, 10), 400);
+			Assert.That(ep2.TryClaim(queueA, "link", 500, false, 6000, 4), Is.True);
+			for (var i = 0; i < 4; i++)
+				ep2.NoteDistance(400, new CPos(40, 10), 4);
+			Assert.That(ep2.Parked, Is.True);
+			Assert.That(ep2.TryClaim(queueB, "link", 500, false, 6000, 4), Is.False);
+			Assert.That(ep2.TryClaim(queueB, "link", 500, true, 6000, 4), Is.True,
+				"mandatory power claims on a parked route");
+		}
+
+		[Test]
+		public void PaidCountersSaturateInsteadOfWrapping()
+		{
+			var owner = new object();
+			var ep = Episode(new CPos(40, 10), new CPos(40, 10), 400);
+			AdmitPaid(ep, owner, int.MaxValue - 10);
+			ep.NoteDistance(300, new CPos(40, 10), 4);
+			AdmitPaid(ep, owner, int.MaxValue - 10);
+			Assert.That(ep.PaidCost, Is.EqualTo(int.MaxValue), "the bound saturates, never wraps negative");
+			Assert.That(ep.PaidCount, Is.EqualTo(2));
 		}
 	}
 }

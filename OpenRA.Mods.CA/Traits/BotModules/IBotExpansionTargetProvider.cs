@@ -341,10 +341,14 @@ namespace OpenRA.Mods.CA.Traits
 		CPos? CrawlFrontierAnchor => null;
 
 		/// <summary>
-		/// TF-1: the queue's paid-admission signal — the crawl-link want's item started production at
-		/// this cost, charged to the episode's allowance. Default no-op (classic / switch-off).
+		/// TF-1: the atomic admission gate for the published <see cref="WantedLinkBuilding"/>. The
+		/// queue calls it just before its StartProduction order: the first queue through holds the
+		/// pending claim and may proceed; a second queue in the same window is refused — the
+		/// published want alone admits nothing. The claim becomes paid only once the item is
+		/// observed in the claimant's production queue; an intent that never arrives drops
+		/// uncharged. Default admit (classic / switch-off providers leave admission unchanged).
 		/// </summary>
-		void CrawlLinkPaid(int cost) { }
+		bool TryClaimCrawlLink(object owner, string item, int cost) => true;
 
 		/// <summary>
 		/// REF-1 B2: the name of the cheapest currently-buildable provider of a due construction MCV's missing

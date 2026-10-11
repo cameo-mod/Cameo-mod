@@ -1,3 +1,25 @@
+# 2026-10-11 â€” Devin: TF-1 repair â€” atomic admission claims + paid-reconcile lifecycle (branch `devin/turtle-fix-1-crawl-allowance`)
+
+*Devin-Developer*, Sol review `fleet/REVIEW_2026-10-11_tf1_5bed_sol.md` (REQUEST CHANGES on `5bedabace`).
+
+- **Queue intent is no longer charged as paid spend.** `CrawlLinkPaid` (called at `QueueOrder`) is
+  replaced by `TryClaimCrawlLink(owner, item, cost)` â€” the queue's atomic admission gate invoked
+  just before `StartProduction`. The claim starts PENDING and becomes PAID only when the planner's
+  per-replan `Reconcile` sees the item in that producer's queue (`QueuedItemNamesByProducer` scans
+  `BuildingQueueTypes`/`FindQueues`/`AllQueued` names keyed on `queue.Actor`). An intent never seen
+  ages out after `OptionalLinkPendingReplans` (2) re-plans and drops uncharged; an accepted item
+  that leaves production keeps its charge (it consumed the spend window).
+- **Published want no longer double-admits.** The first queue's `TryClaim` holds the claim; a second
+  queue in the same window is refused (claims.Count > 0 blocks optional claims). Mandatory power
+  bypasses every bound including the outstanding claim â€” a real deficit outranks the allowance;
+  its claim still serializes via the same dict.
+- **Counters saturate** (`PaidCost`/`PaidCount` via long-min-add) â€” no wrap on unbounded configs.
+- **Tests:** 11 focused. New lifecycle coverage â€” two-queue competing claim (second refused while
+  the first is pending AND paid-unadvanced), rejected-intent drop-uncharged-and-reopen,
+  accepted-then-vanish keeps charge, mandatory over outstanding claim and over parked route,
+  saturation. Existing cases 1-5 + frontier anchor re-pinned through the claim path.
+- **Verification:** Release 0/0; focused 39/39; full suite 1692/1692; boot gate PASS (menu @69s,
+  0 new exception-*.log, PID-scoped kill, no leftovers). No runtime clearance implied; defaults off.
 
 *Devin-Developer 2026-10-10 (rereview fix, devin/repair-b3-park-release @ 693c07793).* VP exact-tip review of 560a413 caught that owner-scoped AnchorTakenForOwner (ReferenceEquals only) made NULL-owner parks — offer-streak churn bounds, ParkTicks, the parameterless failure overload — invisible to every reservation probe. Restored global semantics for null-owner parks (park.Owner == null || ReferenceEquals) while keeping the lead-ruled owner scoping for failure cooldowns; fake provider mirrors it. New regression NullOwnerParkStaysGlobalAndBlocksForeignReservation. Verified: build 0 errors, focused 124/124, full 1515/1515, fog audit PASS (269 sites). No fresh boot gate — host has no execution slot (pytest ~9.7GB + seat_verify resident); branch boot-gated clean at dad8c6753.
 # 2026-10-10 — Devin: REPAIR-B3 follow-up — park frees the whole set; owner-scoped cooldown (branch `devin/repair-b3-park-release`)
