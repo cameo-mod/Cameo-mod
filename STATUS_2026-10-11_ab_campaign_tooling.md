@@ -4,7 +4,7 @@ Combined DevOps follow-up `c2a25ea5154e40693ef17c7ebd8bf1d3c98cb30b` onto latest
 
 Validation on the combined tree: focused pilot+runner tests 22/22 PASS; exact engine no-launch dry run PASS (64 games, 32 variants, 144 seats, 11.07 worker-hours / 11.07 slot-wall hours, 0 launches). Candidate manifest SHA `6a477d24d4d85778e3d0b0741f3fa407dca7cbc82acb3edd0963a508ce68f226`; A5 receipt SHA remains `0e6fc98982af8ca3c67f3846a121512fab4e3982b8de565db67172c865a382f4`.
 
-Next: review/land this combined candidate, then close runtime engine acceptance and symmetric-seat proof on all eight maps. Launch still requires candidate approval and >=15.5 GiB free RAM with zero OpenRA. Latest host observation before this merge was 12.35 GiB free, below admission; do not launch outcome cells or lower the 15.5 GiB gate.
+Next: review/land this combined candidate, then close runtime engine acceptance and symmetric-seat proof on all eight maps. Launch still requires candidate approval and >=15.5 GiB free RAM with zero OpenRA. Latest host observation 2026-10-11T04:17Z was 11.94 GiB free, below admission, with zero OpenRA processes; do not launch outcome cells or lower the 15.5 GiB gate.
 
 ## Resume (2026-10-11, engine VERSION encoding preflight)
 Branch `codex/ab-campaign-version-bom` is based on reviewed `devin/ab-launch-unblock@9633b352885245096630d6edd71c9025962487eb`. Runner validation now accepts ASCII, UTF-8 BOM, and UTF-16 BOM VERSION files and strips the engine-generated `git-` prefix; focused runner tests pass 10/10. No games launched.
