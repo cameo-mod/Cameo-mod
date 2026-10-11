@@ -149,6 +149,30 @@ and consumer, first-wave/runtime cost proof, switch-off replay parity, and paire
 No deadline/launch guarantee, adoption or campaign activation is approved here.
 The turtle fallback experiment remains a separate subsequent increment.
 
+### Clock restore transport checkpoint (2026-10-11)
+
+`AttackLivenessEvalCA.Capture/TryRestore` preserves the original interval, floor,
+dispatch lead, pending/issued wave identity, accepted-wave history and soft-restraint
+receipt. Restoration is one-shot into a fresh clock. Invalid versions, future ticks,
+inconsistent interval/history, unknown enums/flags and missing snapshots refuse
+restoration permanently; fresh observations cannot erase that refusal. A saved
+Unsupported phase retains the original deadline and still requires complete evidence
+to resume. An overdue pending intent stays pending until explicitly failed; restore
+does not certify dispatch or renew a deadline. Rejected activity observations may
+advance the clock tick without recomputing phase, so validation accepts that genuine
+state and the next eligibility observation recomputes urgency.
+
+This helper is transport only and has no manager caller. The live save hook still
+invalidates evidence. Player identity/global wave sequence, actual squad/member mapping,
+response ownership and membership, and the combined manager save adapter remain open.
+The existing response-budget snapshot is unchanged. This checkpoint does not complete
+M13 persistence or authorize runtime/adoption or a wholesale lineage merge.
+
+Validation of the clock transport delta: 18 new restore cases; combined focused
+restore/liveness/progress 45 passed; full Release C# suite 1640 passed. Two existing
+explicit maximum-census fixtures were not selected. No boot/game or Python directory
+suite ran. The frozen gameplay parent remains unchanged for its separate review.
+
 Validation: Release build passed. Focused M13 launch/player-state, budget, claim and
 activity cases: 118 passed. Final full Release C# suite: 1622 passed; two existing
 explicit maximum-census fixtures were not selected by the default run. No whole
