@@ -18,10 +18,11 @@ class RestraintBudgetTests(unittest.TestCase):
     def test_reviewed_catalogue_covers_every_group(self):
         _, groups, _ = switches.load_spec(switches.SPEC)
         classes = switches.load_effect_classes(switches.SPEC, groups)
-        self.assertEqual(Counter(classes.values()), {"restraint": 27, "capability": 24, "neutral": 10})
+        self.assertEqual(Counter(classes.values()), {"restraint": 28, "capability": 24, "neutral": 10})
+        self.assertEqual(classes["BP_squad_desire"], "restraint")
         self.assertEqual(classes["AE_army_first"], "restraint")
         self.assertEqual(classes["BT_expansion_prebuild"], "restraint")
-        self.assertEqual(classes["BP_squad_desire"], "restraint")
+        self.assertEqual(classes["BV_m13_liveness"], "restraint")
 
     def test_class_metadata_fails_closed(self):
         for text in ("", "effect_classes:\n  a: wrong\n", "effect_classes:\n  b: neutral\n",

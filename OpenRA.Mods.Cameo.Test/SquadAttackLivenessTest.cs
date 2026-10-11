@@ -62,13 +62,13 @@ namespace OpenRA.Mods.Cameo.Test
 			var state = new AttackLivenessEvalCA();
 			Eligible(state, 0);
 			Assert.That(state.NoteDispatchIntent(1), Is.True);
-			Assert.That(state.ObserveDispatch(1, 1, members, owned, activity, target, complete), Is.False);
-			Assert.That(state.VerifiedLaunchCount, Is.Zero);
+			Assert.That(state.ObserveOffensiveActivity(1, 1, members, owned, activity, target, complete), Is.False);
+			Assert.That(state.ObservedOffensiveCount, Is.Zero);
 			Assert.That(state.EligibleSinceTick, Is.Zero);
 		}
 
 		[Test]
-		public void FailedOrderKeepsDeadlineAndAllowsNewWaveVerifiedExactlyOnce()
+		public void FailedOrderKeepsDeadlineAndObservedWaveResetsExactlyOnce()
 		{
 			var state = new AttackLivenessEvalCA();
 			Eligible(state, 0);
@@ -78,11 +78,26 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(state.NoteDispatchIntent(1), Is.False);
 			Assert.That(state.DeadlineTick, Is.EqualTo(7500));
 			Assert.That(state.NoteDispatchIntent(2), Is.True);
-			Assert.That(state.ObserveDispatch(7500, 1, 1, true, true, true, true), Is.False);
-			Assert.That(state.ObserveDispatch(7500, 2, 1, true, true, true, true), Is.True);
-			Assert.That(state.ObserveDispatch(7500, 2, 1, true, true, true, true), Is.False);
-			Assert.That(state.VerifiedLaunchCount, Is.EqualTo(1));
-			Assert.That(state.LastVerifiedLaunchTick, Is.EqualTo(7500));
+			Assert.That(state.ObserveOffensiveActivity(7500, 1, 1, true, false, true, true), Is.False);
+			Assert.That(state.ObserveOffensiveActivity(7500, 2, 1, true, true, true, true), Is.True);
+			Assert.That(state.ObserveOffensiveActivity(7500, 2, 1, true, true, true, true), Is.False);
+			Assert.That(state.ObservedOffensiveCount, Is.EqualTo(1));
+			Assert.That(state.LastObservedOffensiveTick, Is.EqualTo(7500));
+		}
+
+		[Test]
+		public void ObservedActivityNeedsNoIntentAndCannotCertifyDispatchOrRenewForTheSameWave()
+		{
+			var state = new AttackLivenessEvalCA();
+			Eligible(state, 0);
+			Assert.That(state.ObserveOffensiveActivity(100, 2, 1, true, true, true, true), Is.True);
+			Assert.That(state.Phase, Is.EqualTo(AttackLivenessPhaseCA.ObservedOffensiveActivity));
+			Eligible(state, 101);
+			Assert.That(state.DeadlineTick, Is.EqualTo(7601));
+			Assert.That(state.ObserveOffensiveActivity(200, 2, 1, true, true, true, true), Is.False);
+			Assert.That(state.ObserveOffensiveActivity(201, 1, 1, true, true, true, true), Is.False);
+			Assert.That(state.DeadlineTick, Is.EqualTo(7601));
+			Assert.That(state.ObservedOffensiveCount, Is.EqualTo(1));
 		}
 
 		[TestCase(7000)]
@@ -100,7 +115,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(state.NoteDispatchIntent(2), Is.False);
 			Assert.That(state.EligibleSinceTick, Is.Zero);
 			Assert.That(state.DeadlineTick, Is.EqualTo(7500));
-			Assert.That(state.VerifiedLaunchCount, Is.Zero);
+			Assert.That(state.ObservedOffensiveCount, Is.Zero);
 			Eligible(state, tick + 1);
 			Assert.That(state.Phase, Is.EqualTo(tick < 7350
 				? AttackLivenessPhaseCA.EligibleWaiting : AttackLivenessPhaseCA.DispatchDue));

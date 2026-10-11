@@ -19,6 +19,8 @@ needs:
   AA_cn4_region_roles: [D_zone_topology]        # role fronts need zone-graph regions
 
 effect_classes:
+  BP_squad_desire: restraint          # Existing group; classify its stance hold consistently with the reviewed catalogue.
+  BV_m13_liveness: restraint
   D_zone_topology: capability
   E_engt_transport: capability
   H_influence_layers: capability
@@ -82,6 +84,9 @@ effect_classes:
   BP_squad_desire: restraint           # LEARN-P6 stance provider replaces the squad state machine and can pick Defend/Retreat/Regroup over Attack = a hold (M13: any hold part makes the group a restraint); merge gap from a55954c1
 
 groups:
+  BV_m13_liveness:
+    SquadManagerBotModuleCA:
+      AttackLivenessEnabled: true
   # SHIPPED 2026-10-01 as master defaults after the INC-1+2+3 A/B (all 13-3, 81% vs ctrl 12-4, 75%): former groups
   # A_squad_tactics, B_ownership_engineers_missions, C_f1_frans_services (C on every genericbot tier, §19.1).
   # Still OFF on master, for the next increment A/B:

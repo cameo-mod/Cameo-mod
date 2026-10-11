@@ -34,6 +34,7 @@ namespace OpenRA.Mods.CA.Traits
 	/// </summary>
 	public sealed class CoalitionRescueAssignment
 	{
+		public readonly BotClaimEpisode Episode;
 		/// <summary>ClientIndex of the broadcast that published the defend request.</summary>
 		public readonly int RequesterClientIndex;
 
@@ -54,13 +55,14 @@ namespace OpenRA.Mods.CA.Traits
 		public readonly string ResponderId;
 
 		public CoalitionRescueAssignment(int requesterClientIndex, WPos defendPosition, int responderClientIndex,
-			string requesterId = null, string responderId = null)
+			string requesterId = null, string responderId = null, BotClaimEpisode episode = default)
 		{
 			RequesterClientIndex = requesterClientIndex;
 			DefendPosition = defendPosition;
 			ResponderClientIndex = responderClientIndex;
 			RequesterId = requesterId;
 			ResponderId = responderId;
+			Episode = episode.BelongsTo(requesterId) ? episode : default;
 		}
 	}
 
@@ -71,6 +73,7 @@ namespace OpenRA.Mods.CA.Traits
 	/// </summary>
 	public sealed class CoalitionAssistAssignment
 	{
+		public readonly BotClaimEpisode Episode;
 		/// <summary>ClientIndex of the broadcast that published the assist request.</summary>
 		public readonly int RequesterClientIndex;
 
@@ -91,13 +94,14 @@ namespace OpenRA.Mods.CA.Traits
 		public readonly string ResponderId;
 
 		public CoalitionAssistAssignment(int requesterClientIndex, WPos assistPosition, int responderClientIndex,
-			string requesterId = null, string responderId = null)
+			string requesterId = null, string responderId = null, BotClaimEpisode episode = default)
 		{
 			RequesterClientIndex = requesterClientIndex;
 			AssistPosition = assistPosition;
 			ResponderClientIndex = responderClientIndex;
 			RequesterId = requesterId;
 			ResponderId = responderId;
+			Episode = episode.BelongsTo(requesterId) ? episode : default;
 		}
 	}
 
@@ -211,7 +215,7 @@ namespace OpenRA.Mods.CA.Traits
 				// distinct responders (or none once the pool runs dry).
 				freePool.Remove(responder);
 				rescue.Add(new CoalitionRescueAssignment(req.ClientIndex, req.DefendPosition, responder.ClientIndex,
-					ParticipantKey(req), ParticipantKey(responder)));
+					ParticipantKey(req), ParticipantKey(responder), req.DefenceEpisode));
 			}
 
 			// Assist (§12.28): a second election pass over what the rescue left —
@@ -240,7 +244,7 @@ namespace OpenRA.Mods.CA.Traits
 
 				freePool.Remove(responder);
 				assist.Add(new CoalitionAssistAssignment(req.ClientIndex, req.ExpansionAssist, responder.ClientIndex,
-					requesterKey, ParticipantKey(responder)));
+					requesterKey, ParticipantKey(responder), req.ExpansionAssistEpisode));
 			}
 
 			// Phase: Defend overrides Push; Push needs a target and a synchronized wave.
