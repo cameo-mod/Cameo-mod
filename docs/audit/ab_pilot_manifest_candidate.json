@@ -45,26 +45,26 @@
     "hard_free_ram_bytes": 3221225472
   },
   "baseline_manifest_path": "docs/audit/ab_baseline_manifest_pilot.json",
-  "baseline_manifest_sha256": "1008cffc06a88c3ed744d6efb1fc5f623cfa813c12c8391fbd9c5b99b5b00e4e",
+  "baseline_manifest_sha256": "69d4cee5cdd63441bd24b39592bfe6ad1e4e236c22ffdddfe92f8e1150df09dd",
   "pins": {
-    "source_commit": "e49acf41a1b3699f01d44e4def06ed4bf83af038",
-    "engine_version": "ad061ebf79029da4dcd3a841a9b2540e39cbf968"
+    "source_commit": "68be89ca0650faaedde2cedd649aa0ac75aa17bf",
+    "engine_version": "4f69df005fe0d893526890fcb5bbc42e442d6fd6"
   },
   "switch_patch_sha256": "d710567579cb3673eb33701ec881495f0a2a17d6203194b0efdc8052f4de4523",
-  "baseline_ai_payload_sha256": "02a3e1d3c53e63e441538964cba87e0f856242b685f4ccef1239ff5837244f38",
-  "treatment_ai_payload_sha256": "e25d7ecf8b5044e05c2c3afaad451d1078483f1d678b1b440213f71d5e2cccb5",
+  "baseline_ai_payload_sha256": "daadb3ca7db6619dfe3225dd59602d009ccd7bba88a0cf0283a7a9913fe96b84",
+  "treatment_ai_payload_sha256": "f6aaa8f7e3475cb11e09d492a441bf4cbb78d1162487b9c44bc8549d96c6107c",
   "tool_hash_algorithm": "sha256-lf-normalized-v1",
   "tool_sha256": {
-    "driver_analyzer": "1caa7e7fc5e2cfdeb4fabf31e7ab9d51eabf578429ef9d7db659defe7e336013",
-    "campaign_runner": "d1225881c3da6411da2948bea9e3667c6eceb4c6a382842d7cd64546870d7d31",
+    "driver_analyzer": "73fc1710dfd2e9ad4544809467ecc10fd14a0ec2f433c917ed278f7c9c893081",
+    "campaign_runner": "b637189c842083b7034f1915c7334e5debc97ff47dcbec9c53c6e266493b2133",
     "batch_runner": "03247f59f2744ea001c9d35a5a03c16bef077ac450d24ef05c08f167d16fcad5",
     "switch_applier": "9e9f678871cc2d8adeca0e7b5c2c28a30a041252f8f630005593bc7f241a6bdd"
   },
-  "receipt_schema_sha256": "a9b8d3402dea824b17a3889c83bf324596a1b0efd9a888c2dd0ea1f32b03b077",
+  "receipt_schema_sha256": "aacc0510b2231a4cb40e71dea871833600a54a25b3c25051b67b0fc459a3ae86",
   "binary_sha256": {
-    "bin/OpenRA.exe": "6cfcc75cbf60745c69b5db587342f5a87ee37fda677b94c904d20b98701f0ae4",
-    "bin/OpenRA.Game.dll": "b678f92d5233f2631a56cd6bd5b3a477f55b701e48f46f92f369acd966829059",
-    "bin/OpenRA.Mods.Cameo.dll": "933f77c892f0ed82a2731ead88bd831adea9bccd044cf650cd95b7a600ca5baf"
+    "bin/OpenRA.exe": "b8985f1f106d4a9135f7dc39bfff4f502a6264aaf90b7e5ec548bb03f36d47a0",
+    "bin/OpenRA.Game.dll": "5eaac9dfd67699a650c55c9767379db67c7ca9a0f56ddd87aa1a60c22a02cf03",
+    "bin/OpenRA.Mods.Cameo.dll": "9b5f8dd130f7b4410cb8901459820626553f6bc2d20179114fd7491608038874"
   },
   "maps": [
     {
