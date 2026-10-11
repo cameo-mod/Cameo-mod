@@ -1,3 +1,46 @@
+# 2026-10-11 — Devin Coordinator: canonical A/B candidate line, engine bump on cameo-engine, gate-ready A5 staged (branch `codex/ab-campaign-port-fixes`)
+
+*Devin*, acting as sole integrator while lead/DevOps/Luna were paused. Branch is the declared canonical
+campaign candidate (lead ruling). HEAD `83514e73c`, pushed.
+
+- **Engine bump landed on `cameo-engine` mainline:** `04f9a38bae` → `ad061ebf79` =
+  Devin-Developer's `Player.cs` bot-name fallback (`65feb80c48`, fixes the cap-Lua `ResolvePlayerName`
+  crash path) + the Capsule long-math fix mirroring the already-landed polygon fix (`ad061ebf79`,
+  `int2.LengthSquared` overflow domain; Rectangle/Circle flagged in `docs/hitshape-int32-overflow-findings.md`
+  as the follow-up). sol gave BOUNDED APPROVE; `mod.config` pinned; rebuilt + boot-gated.
+- **Runner/pilot integration (three merges):** DevOps's maintainer-mandated deployment guard
+  (any bot not deployed by tick 100 → kill, `INVALID_NO_DEPLOY`, no retry, queue stop; shared
+  `highest_world_tick` helper used by runner AND map acceptance), sol's review demands
+  (missing-marker early abort, duplicate-seat validation, handle-only cleanup), Luna Manager's
+  PID/root-fallback acceptance fixes, the analyzer spec (`claude/ab-campaign-analyzer-spec`),
+  `min_setup_veto_sample: 4`, and `e49acf41` (personality-seat telemetry) as the source pin.
+  Real bug found in sol's regression test: `kill_owned_pid` path-identity check failed on
+  **mixed 8.3/long CommandLine forms** (`C:\Users\AEDIST~1\...` prefix + long suffix) — the
+  child survived every kill. Fixed via `_path_variants` emitting `short(prefix)+suffix` for every
+  ancestor prefix. Also: strict `game_uid` (mixed present/missing rows now fail),
+  `text_sha`/`tool_sha` lone-CR normalization, `read_engine_version` UTF-16 BOM.
+- **`ai.yaml` rush-pin:** `BotPersonalityController` on `genericbot` now draws `personality-rush`
+  (was weighted across personalities; team games turtled into stalemates). User-reported symptom;
+  payload hash change, not a balance edit.
+- **Early-end fix line merged** (`devin/port-early-end-v2@eaedd3e3b`, Luna-approved): NATURAL
+  classification requires an authoritative `end_tick`; the "all-AIs-dead-but-game-won't-end" class
+  is now fail-closed INVALID instead of scored.
+- **Builds are nondeterministic** — rebuilt binaries differ from prior pins at identical VERSION.
+  Manifests now pin the actual boot-gated set (exe `1a3a1fcb…`, Game `ec2d2d79…`, Cameo `d07d4761…`).
+  Candidate `e1320e468e6c…` / execution `6d7986b4a6…`: source `e49acf41`, engine `ad061ebf79`,
+  veto floor 4, slot policy per ruling, a5 = explicit null placeholder, `execution_approved=false`.
+- **A5 probe emits the full `execution_gate` schema** (`d86841f20`): `render_mode`,
+  `process_private_cap_bytes`, `host_emergency_floor_bytes`, per-run `stop_threshold_bytes` =
+  `PRIVATE_LIMIT` (armed bound kept as `diagnostic_stop_threshold_bytes`), 3-binary sha set,
+  `orchestration_sha256` provenance, strict `match_game_uid`.
+- **A5 staged, awaiting HEAVY_RUN_WINDOW:** detached worktree at `e49acf41a` (HEAD==BASELINE,
+  scoped paths clean), pinned engine copied, probe+libs at `tools/ai_overlay/` (committed-at-pin
+  batch runner + order-stream differ execute the launch). No-launch preflight + all `--execute`
+  gate preconditions verified; admission 7.5/3.25 GiB against ~13.4 GiB free.
+- Dry-run PASS: `NO_LAUNCH`, 64 games / 32 maps / 0 launches (`results/dryrun-eaedd3e3b.json`).
+  Focused suite 109 tests, 1 skip (pinned-A5 test, expected while the receipt is pending).
+- Killed an in-flight 4v4 diagnostic cell on the lead's "no heavy runs without a window" order.
+
 # 2026-10-10 — Claude: A/B launch blockers fixed, headless platform, runtime map acceptance (branch `ccr-c7f51935-i53fkj`)
 
 *Claude (Opus)*, maintainer request: fix what kept Codex/Devin from running the A/B tests. Base `c07bef43`, engine `6da7fce14`.
