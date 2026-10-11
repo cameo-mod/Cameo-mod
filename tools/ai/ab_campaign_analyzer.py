@@ -37,6 +37,15 @@ NATURAL, CAP, INCOMPLETE = "NATURAL", "CAP", "INCOMPLETE"
 # censoring (CAP) or a single stall/timeout is not a crash. Keep this list narrow and
 # explicit rather than treating every INCOMPLETE as catastrophic.
 CRASH_END_REASONS = frozenset({"CRASH", "SENTINEL", "MEMORY_KILL", "PROCESS_DIED", "INVALID_MOD_REGISTRATION"})
+# Devin-Reviewer finding (2026-10-11, exact-SHA review of 497d737f6): a percentile
+# bootstrap over a single value is degenerate — every resample draws that same value,
+# so paired_bootstrap_interval([-1], seed) == [-1.0, -1.0] looks like a tight, confident
+# interval when it is actually one noisy observation. Require this many pairs in a
+# setup before its CI is trusted to veto a pooled ACCEPT; below the floor the setup is
+# reported but cannot veto. 4 is a pragmatic floor (not a formal power calculation):
+# enough that a unanimous run is not just one game, still small since stage 1 only
+# plans ~1 pair/setup pooled across 16 setups. Flagged to the lead for confirmation.
+MIN_SETUP_VETO_SAMPLE = 4
 
 
 def require(ok: bool, msg: str) -> None:
@@ -395,9 +404,18 @@ def summarize(receipts: list[dict], manifest: dict | None) -> dict[str, Any]:
     # ruling named "REJECT/PARK" without picking one; PARK is used here (a would-be
     # ACCEPT becomes "needs review", not an outright kill) since the pooled signal
     # was otherwise positive. A pooled REJECT/CONTINUE/PARK is never upgraded.
+    #
+    # A setup below MIN_SETUP_VETO_SAMPLE is reported (harm_veto_ineligible_setups)
+    # but excluded from the veto itself: see MIN_SETUP_VETO_SAMPLE docstring above.
     harm_veto_setups = sorted(
         setup_id for setup_id, s in by_setup.items()
         if s["paired_bootstrap_95ci"] is not None and s["paired_bootstrap_95ci"][1] < 0
+        and len(s["win_diffs"]) >= MIN_SETUP_VETO_SAMPLE
+    )
+    harm_veto_ineligible_setups = sorted(
+        setup_id for setup_id, s in by_setup.items()
+        if s["paired_bootstrap_95ci"] is not None and s["paired_bootstrap_95ci"][1] < 0
+        and len(s["win_diffs"]) < MIN_SETUP_VETO_SAMPLE
     )
     pre_veto_decision = decision
     if decision == "ACCEPT" and harm_veto_setups:
@@ -421,6 +439,8 @@ def summarize(receipts: list[dict], manifest: dict | None) -> dict[str, Any]:
             "verdict": decision,
             "pre_veto_verdict": pre_veto_decision,
             "harm_veto_setups": harm_veto_setups,
+            "harm_veto_ineligible_setups": harm_veto_ineligible_setups,
+            "harm_veto_min_sample": MIN_SETUP_VETO_SAMPLE,
             "rounds": pooled_n, "treatment_wins": treatment_wins, "control_wins": control_wins,
             "crashed": crashed, "thresholds": thresholds,
             "earned_spent_delta": earned_spent_delta, "army_efficiency_delta": army_efficiency_delta,

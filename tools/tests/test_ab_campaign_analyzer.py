@@ -184,17 +184,34 @@ class SequentialDecision(unittest.TestCase):
 
 class HarmVeto(unittest.TestCase):
     """Lead ruling 2026-10-11: a per-setup CI entirely below zero overrides a pooled
-    ACCEPT, even when the pooled signal alone would clear the 75% bar."""
+    ACCEPT, even when the pooled signal alone would clear the 75% bar. Devin-Reviewer
+    finding (exact-SHA review of 497d737f6): a 1-pair setup's bootstrap CI is
+    degenerate (every resample is that one value), so it must not be veto-eligible —
+    see MIN_SETUP_VETO_SAMPLE."""
 
     def test_harmed_setup_downgrades_pooled_accept_to_park(self):
         good = []
-        for i in range(15):
+        for i in range(12):
             good += matched_pair(setup_id="1v1_nuclear_gdi", pair_index=i, treatment_wins=(True, True))
-        harmed = matched_pair(setup_id="1v1_nuclear_nod", pair_index=0, treatment_wins=(False, False))
+        harmed = []
+        for i in range(az.MIN_SETUP_VETO_SAMPLE):
+            harmed += matched_pair(setup_id="1v1_nuclear_nod", pair_index=i, treatment_wins=(False, False))
         result = az.summarize(good + harmed, None)
         self.assertEqual(result["sequential_decision"]["pre_veto_verdict"], "ACCEPT")
         self.assertEqual(result["sequential_decision"]["harm_veto_setups"], ["1v1_nuclear_nod"])
         self.assertEqual(result["sequential_decision"]["verdict"], "PARK")
+
+    def test_single_pair_setup_is_not_veto_eligible(self):
+        """Devin-Reviewer's exact regression request: one noisy pair must not veto."""
+        good = []
+        for i in range(15):
+            good += matched_pair(setup_id="1v1_nuclear_gdi", pair_index=i, treatment_wins=(True, True))
+        one_pair_sweep = matched_pair(setup_id="1v1_nuclear_nod", pair_index=0, treatment_wins=(False, False))
+        result = az.summarize(good + one_pair_sweep, None)
+        self.assertEqual(result["sequential_decision"]["harm_veto_setups"], [])
+        self.assertEqual(result["sequential_decision"]["harm_veto_ineligible_setups"], ["1v1_nuclear_nod"])
+        self.assertEqual(result["sequential_decision"]["pre_veto_verdict"], "ACCEPT")
+        self.assertEqual(result["sequential_decision"]["verdict"], "ACCEPT")
 
     def test_harm_veto_never_upgrades_a_reject(self):
         bad = []
