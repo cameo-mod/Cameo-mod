@@ -6,6 +6,12 @@ from unittest.mock import patch
 
 
 class CampaignRunnerTests(unittest.TestCase):
+	def test_campaign_maps_use_declared_support_mapfolder(self):
+		support = pathlib.Path("run") / "Support"
+		maps = runner.campaign_map_directory(support)
+		self.assertEqual(support / pathlib.Path(runner.batch.USER_MAP_DIR), maps)
+		self.assertEqual(("maps", "cameo", "{DEV_VERSION}"), maps.relative_to(support).parts)
+
 	def test_engine_version_accepts_ascii_utf8_bom_and_utf16_bom(self):
 		with tempfile.TemporaryDirectory() as temp:
 			path = pathlib.Path(temp) / "VERSION"

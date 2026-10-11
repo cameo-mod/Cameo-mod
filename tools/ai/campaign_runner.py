@@ -20,9 +20,11 @@ import subprocess
 import sys
 import tempfile
 import time
+import shutil
 from contextlib import contextmanager
 
 import ab_campaign_pilot as pilot
+import run_ai_match_batch as batch
 
 CAP_TICK = 45000
 PRIVATE_LIMIT = int(10.5 * 1024**3)
@@ -373,6 +375,11 @@ def _file_artifact(path: pathlib.Path | None, missing_reason: str | None = None)
 	return {"path": str(path), "sha256": sha(path), "missing_reason": None}
 
 
+def campaign_map_directory(game_support: pathlib.Path) -> pathlib.Path:
+	"""Use the exact support-map folder declared by Cameo's mod.yaml/batch driver."""
+	return pathlib.Path(game_support) / pathlib.Path(batch.USER_MAP_DIR)
+
+
 def run_one(manifest: dict, manifest_sha: str, job: dict, *, root: pathlib.Path,
 			engine_root: pathlib.Path, a5_receipt: dict, a5_receipt_sha256: str, support_root: pathlib.Path,
 			slot_db: pathlib.Path) -> dict:
@@ -399,7 +406,7 @@ def run_one(manifest: dict, manifest_sha: str, job: dict, *, root: pathlib.Path,
 	game_root.mkdir(parents=True, exist_ok=False)
 	game_support = game_root / "Support"; game_support.mkdir()
 	logs = game_support / "Logs"; logs.mkdir()
-	maps = game_support / "UserMaps"; maps.mkdir()
+	maps = campaign_map_directory(game_support); maps.mkdir(parents=True)
 	overlay = game_root / "Overlay"; pilot.materialize_dual_arm_ai(root, overlay, job["switch"], manifest.get("ratchet_accepted_switches", []))
 	shutil.copyfile(root / "mods" / "cameo" / "mod.yaml", overlay / "mods" / "cameo" / "mod.yaml")
 	variant = maps / ("campaign_" + re.sub(r"[^A-Za-z0-9_.-]", "_", job["cell_id"]))
