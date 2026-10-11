@@ -33,7 +33,7 @@ SEED = 1337
 CAP_TICK = 16000
 POLL = 0.25
 WALL = 900
-PROCESS_STOP = int(3.0 * 1024**3)
+PROCESS_STOP = int(8.24 * 1024**3)
 HOST_SOFT_STOP = int(7.0 * 1024**3)
 HOST_HARD_FLOOR = 3 * 1024**3
 HOST_LAUNCH_HEADROOM = 1 * 1024**3
@@ -392,8 +392,8 @@ def main() -> int:
 		help="explicitly run two bounded A5 qualification cells; never campaign outcomes")
 	parser.add_argument("--output-dir", type=pathlib.Path, default=OUT,
 		help="new, non-existing artifact directory; existing evidence is never overwritten")
-	parser.add_argument("--process-stop-gib", type=float, default=3.0,
-		help="PID-scoped diagnostic stop threshold; maximum 9.5 GiB for current host headroom")
+	parser.add_argument("--process-stop-gib", type=float, default=8.24,
+		help="PID-scoped stop threshold: measured headless peak plus 3 GiB")
 	parser.add_argument("--host-soft-stop-gib", type=float, default=7.0,
 		help="stop before the hard free-RAM floor")
 	parser.add_argument("--host-hard-floor-gib", type=float, default=3.0,
@@ -406,8 +406,8 @@ def main() -> int:
 	if not 1000 <= args.tick_cap < 17000:
 		raise RuntimeError("A5 parity cap must be in [1000, 17000) to stay below observed natural end")
 	CAP_TICK = args.tick_cap
-	if not (3.0 <= args.process_stop_gib <= 9.5):
-		raise RuntimeError("process stop must be between 3 and 9.5 GiB pending larger host headroom")
+	if not (3.0 <= args.process_stop_gib <= 8.24):
+		raise RuntimeError("process stop must not exceed the measured headless peak plus 3 GiB")
 	if not (3.0 <= args.host_hard_floor_gib < args.host_soft_stop_gib):
 		raise RuntimeError("host hard floor must be >=3 GiB and strictly below host soft stop")
 	PROCESS_STOP = int(args.process_stop_gib * 1024**3)

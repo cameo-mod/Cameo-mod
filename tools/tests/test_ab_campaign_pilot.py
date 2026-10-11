@@ -29,8 +29,8 @@ class PilotPlanTests(unittest.TestCase):
   result=pilot.dry_run(m,ROOT)
   self.assertEqual(0,result["launches"]);self.assertFalse(result["execution_authorized"])
   self.assertEqual(11.07,result["worker_hours_estimate_at_8_5m_each"])
-  self.assertEqual(7.29,result["parallel_slot_wall_estimate_hours_at_8_5m_each"])
-  self.assertEqual([5.11,9.47],result["parallel_slot_wall_estimate_range_hours_5_to_12m_each"])
+  self.assertEqual(8.23,result["parallel_slot_wall_estimate_hours_at_8_5m_each"])
+  self.assertEqual([5.67,10.8],result["parallel_slot_wall_estimate_range_hours_5_to_12m_each"])
 
  def test_generated_map_writer_proves_mixed_faction_4v4_seats_without_launch(self):
   m=manifest();job=next(j for j in pilot.make_jobs(m) if j["team_size"]==4 and j["game_in_pair"]==1)

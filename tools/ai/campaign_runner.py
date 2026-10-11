@@ -28,12 +28,12 @@ import ab_campaign_pilot as pilot
 import run_ai_match_batch as batch
 
 CAP_TICK = 45000
-PRIVATE_LIMIT = int(10.5 * 1024**3)     # decided cell ceiling (was 6.5 GiB; startup burst peaks ~9.5 GiB)
-FREE_RAM_FLOOR = int(13.5 * 1024**3)    # admission = cap(10.5) + hard floor(3): worst-case free >=3.9 GiB at full cap
+PRIVATE_LIMIT = pilot.PROCESS_CAP_BYTES
+FREE_RAM_FLOOR = pilot.RAM_FLOOR_BYTES
 FREE_RAM_HARD_FLOOR = 3 * 1024**3       # runtime stop: available RAM below this kills the cell
 FREE_RAM_SOFT_FLOOR = 4 * 1024**3       # soft floor: telemetry threshold for low-RAM pressure
 ACTOR_SAMPLE_INTERVAL = 5000
-SLOT_PARALLEL_SMALL = 3
+SLOT_PARALLEL_SMALL = 2
 SMALL_TEAM_MAX = 2
 ACTOR_SAMPLE_RE = re.compile(r"AB_CAMPAIGN_ACTOR_SAMPLE tick=(\d+) actor_count=(\d+)")
 RECEIPT_SCHEMA = pathlib.Path(__file__).with_name("ab_campaign_receipt.schema.json")
@@ -45,6 +45,11 @@ def sha(path: pathlib.Path) -> str:
 		for block in iter(lambda: f.read(1024 * 1024), b""):
 			h.update(block)
 	return h.hexdigest()
+
+
+def campaign_map_directory(game_support: pathlib.Path) -> pathlib.Path:
+	"""Resolve the UserMaps location declared by the batch launcher."""
+	return game_support / pathlib.Path(batch.USER_MAP_DIR)
 
 
 def parse_actor_samples(text: str) -> list[dict]:
@@ -233,11 +238,13 @@ def validate_receipt(receipt: dict) -> None:
 	"""Validate the producer's semantic invariants; JSON Schema is published alongside."""
 	if not isinstance(receipt, dict) or receipt.get("schema_version") != 1:
 		raise ValueError("receipt schema_version must be 1")
-	for key in ("campaign_id", "manifest_sha256", "baseline_commit", "engine_sha256", "switch", "setup_id", "pair_id", "seed", "seed_proof", "teams", "resolved_seats", "end_class", "end_reason", "winner_team", "world_tick", "cap", "memory", "runtime", "artifacts"):
+	for key in ("campaign_id", "manifest_sha256", "cell_id", "game_uid", "status", "seats", "seat_proof_source", "map_yaml_sha256", "control_side", "treatment_side", "arm_bot_types", "cap_marker", "cap_tick", "support_complete", "setup", "map_sha256", "pair", "game_in_pair", "duration_ticks", "peak_memory_bytes", "baseline_commit", "engine_sha256", "switch", "setup_id", "pair_id", "seed", "seed_proof", "teams", "resolved_seats", "end_class", "end_reason", "winner_team", "world_tick", "cap", "memory", "runtime", "artifacts"):
 		if key not in receipt:
 			raise ValueError("receipt missing required field: " + key)
 	if receipt["end_class"] not in ("NATURAL", "CAP", "INCOMPLETE"):
 		raise ValueError("invalid end_class")
+	if receipt["end_class"] != "INCOMPLETE" and (not isinstance(receipt["game_uid"], str) or not receipt["game_uid"]):
+		raise ValueError("completed receipt requires nonempty game_uid")
 	if receipt["end_class"] != "NATURAL" and receipt["winner_team"] is not None:
 		raise ValueError("censored/incomplete receipt cannot name a winner")
 	if receipt["winner_team"] not in (None, "A", "B"):
@@ -253,7 +260,7 @@ def validate_receipt(receipt: dict) -> None:
 	if receipt["end_class"] == "NATURAL" and (not isinstance(receipt["end_reason"], str) or receipt["winner_team"] is None):
 		raise ValueError("NATURAL classification lacks authoritative winner/end reason")
 	if receipt["memory"].get("limit_private_bytes") != PRIVATE_LIMIT:
-		raise ValueError("receipt memory threshold differs from the frozen 10.5 GiB limit")
+		raise ValueError("receipt memory threshold differs from the measured headless peak plus 3 GiB")
 	if receipt["memory"].get("peak_private_bytes", 0) >= PRIVATE_LIMIT and not (receipt["end_class"] == "INCOMPLETE" and receipt["end_reason"] == "MEMORY_KILL"):
 		raise ValueError("memory threshold reached without INCOMPLETE MEMORY_KILL")
 	if len(receipt["resolved_seats"]) != receipt["map"].get("required_seats"):
@@ -373,7 +380,7 @@ def run_one(manifest: dict, manifest_sha: str, job: dict, *, root: pathlib.Path,
 	pilot.validate(manifest, root, engine_root, execution=True)
 	execution_gate(manifest, a5_receipt=a5_receipt, a5_receipt_sha256=a5_receipt_sha256,
 		source_commit=manifest["pins"]["source_commit"], engine_version=manifest["pins"]["engine_version"])
-	if available_ram_bytes() < FREE_RAM_FLOOR: raise ValueError("available RAM below 13.5 GiB admission floor")
+	if available_ram_bytes() < FREE_RAM_FLOOR: raise ValueError("available RAM below 14 GiB admission floor")
 	queue = ResumeQueue(support_root / "campaign_queue.sqlite", manifest_sha)
 	queue.install(pilot.make_jobs(manifest))
 	queue.recover_orphans(kill_game=lambda cell, pid: kill_owned_pid(pid, executable,

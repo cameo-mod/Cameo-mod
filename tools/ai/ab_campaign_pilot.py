@@ -30,15 +30,20 @@ SETUPS = [
  ("3v3_winter_asg",3,"winters_end_rich",("ra1_allies","ra1_soviets","td_gdi")),("3v3_winter_sgn",3,"winters_end_rich",("ra1_soviets","td_gdi","td_nod")),
  ("4v4_sahara",4,"great_sahara_2",("td_gdi","td_nod","ra1_allies","ra1_soviets")),("4v4_ice",4,"ice_cold",("td_gdi","td_nod","ra1_allies","ra1_soviets")),
 ]
-RAM_FLOOR_BYTES = int(13.5 * 1024**3)   # admission = cap(10.5) + hard floor(3): worst-case free >=3.9 GiB at full cap
-PROCESS_CAP_BYTES = int(10.5 * 1024**3) # decided cell ceiling (was 6.5 GiB; startup burst peaks ~9.5 GiB)
+# Latest measured headless peak in the acceptance receipt (5,623,365,632 B)
+# plus the maintainer's 3 GiB headroom. Re-measure on the final engine/host
+# before freezing the executable manifest. Admission rounds 2*peak + 3 GiB
+# upward to 14 GiB for two concurrent 1v1/2v2 cells.
+HEADLESS_PEAK_BYTES = 5623365632
+PROCESS_CAP_BYTES = HEADLESS_PEAK_BYTES + 3 * 1024**3
+RAM_FLOOR_BYTES = 14 * 1024**3
 ROUND_STAGES = [16,32,48,64]
 ECONOMY_INTERVAL_TICKS = tuple(range(5000, 45001, 5000))
 FIX_SAFETY_SWITCHES = frozenset("K_cn2_unit_repair AL_emergency_net_loss AN_combat_veto AG_assault_fanout BJ_squad_hysteresis BK_squad_order_dedup BL_protection_episode_guard BN_squad_pool_fixes BO_squad_move_dedup".split())
 _, _ALL_GROUPS, _ = increment.load_spec(pathlib.Path(__file__).with_name("increment_switches.yaml"))
 BEHAVIOR_SWITCHES = tuple(name for name in _ALL_GROUPS if name not in FIX_SAFETY_SWITCHES)
 DEFAULT_THRESHOLDS = {"early_accept_share":0.75,"early_reject_share":0.25,"win_noninferiority_delta":0.0,"min_earned_spent_improvement":0.0,"min_army_efficiency_improvement":0.0,"min_kill_exchange_improvement":0.0}
-SLOT_POLICY={"max_parallel_small_games":3,"small_team_size_max":2,"large_game_exclusive":True,"min_free_ram_bytes":RAM_FLOOR_BYTES,"max_private_bytes":PROCESS_CAP_BYTES}
+SLOT_POLICY={"max_parallel_small_games":2,"small_team_size_max":2,"large_game_exclusive":True,"min_free_ram_bytes":RAM_FLOOR_BYTES,"max_private_bytes":PROCESS_CAP_BYTES,"headless_peak_bytes":HEADLESS_PEAK_BYTES,"process_headroom_bytes":3*1024**3}
 
 def treatment_baseline(accepted_switches, candidate):
  """Ratchet rule: accepted groups stay in control; treatment adds one candidate."""
@@ -136,6 +141,13 @@ class SlotCounter:
   with self._lock: self._active.pop(cell_id,None);self._sizes.pop(cell_id,None)
 
 def sha(path): return hashlib.sha256(path.read_bytes()).hexdigest()
+def read_engine_version(path):
+ raw=pathlib.Path(path).read_bytes()
+ if raw.startswith((b"\xff\xfe",b"\xfe\xff")): text=raw.decode("utf-16")
+ elif raw.startswith(b"\xef\xbb\xbf"): text=raw.decode("utf-8-sig")
+ else: text=raw.decode("ascii")
+ version=text.strip()
+ return version[4:] if version.startswith("git-") else version
 def text_sha(path):
  """sha256 of a TEXT pin with CRLF folded to LF. .gitattributes' `* text=lf` is not a valid
  eol value, so a Windows checkout gets CRLF .py/.json files and a Linux one LF: a byte hash
@@ -325,9 +337,10 @@ def dry_run(m,root,engine_root=None,minutes_per_game=8.5,setup_hours=2.0):
  validate(m,root,engine_root); jobs=make_jobs(m)
  small_games=sum(4 for _,s,_,_ in SETUPS if s<=2); large_games=len(jobs)-small_games
  serial_hours=round(len(jobs)*minutes_per_game/60+setup_hours,2)
- slot_hours=round((small_games/3+large_games)*minutes_per_game/60+setup_hours,2)
+ small_parallel=m["slot_policy"]["max_parallel_small_games"]
+ slot_hours=round((small_games/small_parallel+large_games)*minutes_per_game/60+setup_hours,2)
  serial_range=[round(len(jobs)*5/60+setup_hours,2),round(len(jobs)*12/60+setup_hours,2)]
- slot_range=[round((small_games/3+large_games)*5/60+setup_hours,2),round((small_games/3+large_games)*12/60+setup_hours,2)]
+ slot_range=[round((small_games/small_parallel+large_games)*5/60+setup_hours,2),round((small_games/small_parallel+large_games)*12/60+setup_hours,2)]
  return {"mode":"NO_LAUNCH_DRY_RUN","switch":SWITCH,"setups":len(SETUPS),"pairs":32,"games":len(jobs),"jobs":jobs,"launches":0,"execution_authorized":False,"worker_hours_estimate_at_8_5m_each":serial_hours,"parallel_slot_wall_estimate_hours_at_8_5m_each":slot_hours,"parallel_slot_wall_estimate_range_hours_5_to_12m_each":slot_range,"serial_wall_estimate_range_hours_5_to_12m_each":serial_range,"map_engine_acceptance_and_symmetric_spawn_proof":"PENDING_ENGINE_PREFLIGHT","round_stages":ROUND_STAGES,"acceptance_thresholds":m["acceptance_thresholds"],"slot_policy":m["slot_policy"],"ratchet_baseline_manifest_sha256":m["baseline_manifest_sha256"],"missing_campaign_gates":["lead-approved executable manifest and exact-baseline A5 parity receipt","engine acceptance plus symmetric spawn proof for all eight maps","fixture/negative-control acceptance for the downstream paired analyzer"]}
 
 def install_campaign_monitor(dest,seat_count,cap_tick=45000,sample_interval=5000,rules_filename="duel_rules.yaml",seat_names=None):

@@ -1,3 +1,13 @@
+## Resume (2026-10-11, consolidated branch pending commit/push)
+
+Current task: consolidate the four authorized campaign branches on `codex/ab-campaign`, based at master `2209a6e7`. Merged runner-final, engine-maproot-1011, tooling-manager, and ccr-c7f51935. ccr's `tools/ai/map_engine_acceptance.py` remains an acceptance-only preflight; its capped records are never campaign outcomes.
+
+Policy follows the latest lead ruling: two concurrent 1v1/2v2 cells only when free RAM is at least 14 GiB; per-process stop is measured headless peak + 3 GiB. Current provisional value uses ccr's reported Linux peak RSS of 5,623,365,632 bytes, giving an 8,844,591,104-byte process ceiling. This is not a Windows private-byte measurement: rerun headless memory and map acceptance on the final engine before execution approval, and refresh all manifest/tool/binary hashes. The manifest remains `execution_approved=false`.
+
+A5 qualification accepts `IDENTICAL` and maintainer-approved `IDENTICAL_TAIL_FLUSH`. No outcome cells are authorized until the sprite-load-wave engine bump lands and a fresh exact-baseline A5 pair passes. Current focused test set: 32/32 PASS across campaign runner, pilot, A5 probe, and map acceptance; `py_compile` and `git diff --check` PASS. Engine build and host-specific acceptance/memory runs remain open because the consolidated mod worktree has no engine checkout/binaries.
+
+Next: commit and push this branch, then get exact-SHA review. After the engine bump lands, rerun build, focused tests, map acceptance and headless memory on this host; regenerate the manifest, rerun A5, and only then re-evaluate the launch gate.
+
 ## Resume (2026-10-10 late, Claude: launch blockers fixed + runtime acceptance; branch `ccr-c7f51935-i53fkj`)
 
 Maintainer directive: fix what stopped the local agents from running the A/B. A capped REAL-engine run of the pilot path

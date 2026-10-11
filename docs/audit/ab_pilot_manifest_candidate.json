@@ -32,11 +32,13 @@
     "min_kill_exchange_improvement": 0.0
   },
   "slot_policy": {
-    "max_parallel_small_games": 3,
+    "max_parallel_small_games": 2,
     "small_team_size_max": 2,
     "large_game_exclusive": true,
-    "min_free_ram_bytes": 16642998272,
-    "max_private_bytes": 11274289152
+    "min_free_ram_bytes": 15032385536,
+    "max_private_bytes": 8844591104,
+    "headless_peak_bytes": 5623365632,
+    "process_headroom_bytes": 3221225472
   },
   "baseline_manifest_path": "docs/audit/ab_baseline_manifest_pilot.json",
   "baseline_manifest_sha256": "524dedbfdad22aa1641365501d64b00a084c23bb5d66a1901a0b2d5e3dc5d71c",
@@ -48,12 +50,12 @@
   "baseline_ai_payload_sha256": "932e2e5c919de6f5b493e1722e6e66e39a3a5f1577b29aa58a571492b7de9d69",
   "treatment_ai_payload_sha256": "acdfd3a3e2c7d405a776703593f1d52c5f357b423e75ffb224392159c009c725",
   "tool_sha256": {
-    "driver_analyzer": "1e0bfaaf171022ca965182e35068fc28a90fc5e8cf9bf296e60f2f521a197226",
-    "campaign_runner": "269dfb824ec85190ea1acf0beb209f8f20df839dc85a8ded1f8c2a5fcf6b36fe",
+    "driver_analyzer": "07973e54d04a12d95124d9af5f2caa9fab3b82867a3d5f013ac461d321e0a38e",
+    "campaign_runner": "6a17f2c14f35c4a64b21173ea3e6767a5961b322180f7b6c262af34770c30f67",
     "batch_runner": "03247f59f2744ea001c9d35a5a03c16bef077ac450d24ef05c08f167d16fcad5",
     "switch_applier": "9e9f678871cc2d8adeca0e7b5c2c28a30a041252f8f630005593bc7f241a6bdd"
   },
-  "receipt_schema_sha256": "cd88670dc6d3ffc0a1c5acc370f8ec7cf4d17edbc4216c511674646e3faf913d",
+  "receipt_schema_sha256": "0073f316a9b34b791156ddc18ed203da88651c90af0f3d62680d0dfd5a73995f",
   "binary_sha256": {
     "bin/OpenRA.exe": "5693f355792ebb68699793f96ef2167b733c5e7756f580858c5090226418c984",
     "bin/OpenRA.Game.dll": "167fcbd8985dc3cd74ae2747c6d4a43db0d51cbda99dc029712fdb72182f6b80",
@@ -260,5 +262,5 @@
     }
   ],
   "execution_approved": false,
-  "notes": "candidate dry-run manifest; maintainer flips execution_approved at sign-off after the open-item proposal is ruled on"
+  "notes": "non-executable candidate; policy uses measured acceptance headless peak + 3 GiB, 2 small-game slots, >=14 GiB admission; remeasure on final Windows engine and refresh all pins before approval"
 }
