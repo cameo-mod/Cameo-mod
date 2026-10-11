@@ -10,4 +10,8 @@ Read `FINDINGS_2026-10-11_turtle_regression.md` and the frozen artifact set at `
 
 ## Provenance / ownership
 
-Own analysis branch inherits old review/tooling base; do not merge wholesale. Scripts stream local files and publish only analysis artifacts. Paths and299 source-artifact hashes are frozen in input_hashes.json. Open scope includes unavailable cloud captures and matched regression/bisect evidence. Team task remains in_progress; no campaign/adoption approval.
+Own analysis branch inherits old review/tooling base; do not merge wholesale. Scripts stream local files and publish only analysis artifacts. Paths and300 source-artifact hashes are frozen in input_hashes.json. Open scope includes unavailable cloud captures and matched regression/bisect evidence. Team task remains in_progress; no campaign/adoption approval.
+
+## Crawl trace follow-up
+
+235 EX-1 diagnostics join uniquely by tick/type/cell to seat placements. Seat3 places67 plants at one field aim, seat9 places42 at another, with no later placement closer than the first in either sequence. Code searches a50-cell annulus around a construction yard rather than the GBA frontier; optional supply can remain wanted. Findings now includes this mechanism and frontier-progress regression proposal. No code fix or new launch. Cloud provenance/matched baseline gates remain open.

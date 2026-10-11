@@ -54,6 +54,18 @@ Selected time slices (latest situation <= requested tick; remaining seats and al
 | seat_9 | 30000 / 29851 | 5560 | 11100 | 73 | 11 | 937 | 49 |
 | seat_9 | 45000 / 44851 | 0 | 0 | 0 | 14 | 2131 | 56 |
 
+## Focused crawl trace follow-up
+
+Exact `tick + actor type + placement cell` joins connect EX-1 debug diagnostics to seat-tagged placement records; the debug prefix `AI (0)` is shared by hosted bots and is never treated as a seat. All235 emitted crawl diagnostics in the complete Ice Cold capture join uniquely (zero ambiguous/unmatched records); `ice_crawl_diagnostics.csv` preserves each target and coordinate.
+
+Seat3 sends67 `nuke` placements toward the same aim cell20,5 from tick17710 onward. First placement34,11 has squared cell distance232; no later placement toward this aim improves that distance. The final placement68,61 at44610 has distance5440. Seat9 sends42 `ra1_powerplant` placements toward aim20,138; first56,122 at18190 has distance1552, and no later placement toward this aim improves it. These are placement-to-aim distances, not proof of surviving global frontier or legal route distance; losses, footprints and topology still need owner-produced provenance.
+
+The code explains a specific failure mode: `ChooseBuildLocation(BaseCrawl)` calls `findPos` with `center = GetBaseCenterForActor`, `maxRange = BaseCrawlRadius`; `findPos` enumerates the annulus around that center and sorts its remaining legal cells by distance to the target. `GetBaseCenterForActor` chooses a construction yard, not the advancing GBA frontier. Archived YAML has BaseCrawlRadius50/MinBaseRadius5. Therefore extending buildable area does not itself extend the search annulus; a far target can stay wanted while each success consumes another legal cell around a yard, progressively farther from the target. Combined with unconditional optional link supply, this can produce a broad power-plant base rather than an advancing chain. The recorded long repeated aims and nonimproving placements are consistent with this mechanism. Exact loaded CA source/binary reconciliation remains open; this is not proof of a newly introduced Oct10 commit.
+
+Refine proposal1: place an optional link from a deterministic frontier/GBA candidate set that can actually extend reach toward the episode's route, and refuse optional supply when no such candidate exists. Retain mandatory power placement; distinguish route obstruction from cash/power refusal; park or change plan after bounded nonprogress. Check progress against footprint/buildable reach and route topology, not only cell-center distance. Do not consume extra RNG merely to change the placement center. Add regression fixtures with a target beyond50 cells from the only yard and a valid advancing GBA chain, plus a blocked chain where optional repeated power plants are refused.
+
+Late activity cross-check (ticks30000?45001): control seats3/4/5/6 still produce30/115/91/82 local engagement records whose start tick is in this window. Seat3 places51 power plants in the window. Offensive registration counters never decrease; control-seat increases continue at44701/44851/45001/45001 (the terminal tick is cap-boundary and not accepted-progress proof). Thus heavy late construction coexists with late combat in this capture; do not label the entire interval 'no attacks'.
+
 ## Earlier baseline and regression localization
 
 Earlier local 2026-10-08 captures are 1v1, not matched 4v4 Ice Cold. Durable STATUS_2026-10-08_ab_ready_feature.md identifies mod a9349d015 / engine0a3f77dbe1a; initial seed1337 fixtures create a primary objective at load and cap at14900, and later BJ fixtures corrected that harness. These cohorts are characterization, not interchangeable campaign counterfactuals.
