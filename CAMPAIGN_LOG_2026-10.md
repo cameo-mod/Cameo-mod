@@ -96,3 +96,12 @@ Follow-up commits on `codex/ab-campaign-tooling-manager` (all pushed; DevOps fol
 - `c67e3ae30` — **stale execution manifest revoked**: `ab_pilot_manifest_execution.json` still carried `execution_approved: true` on engine `6da7fce14d`; set false with a revocation note. The same commit absorbed a pending `campaign_runner` tool-hash refresh — tool SHAs must be regenerated on `codex/ab-campaign` after consolidation anyway.
 
 Remaining handoff chain (unchanged): DevOps merges these into `codex/ab-campaign`, regenerates manifest/tool SHAs, reruns fixed-tick A5 on `e49acf41` with engine `4f69df005f`, closes analyzer fixtures + serial map/overlay acceptance, then gets explicit re-approval before outcome cells. No OpenRA or armed launchers remain from this lane.
+
+## 2026-10-11 — consolidated-branch review: RAM ruling inverted, port (not merge) required
+
+Reviewed `codex/ab-campaign@169388f97` against `codex/ab-campaign-tooling-manager@4029a47d0` (merge base `433a95d30`):
+
+- **Launch-fatal**: `54d432b7c` set `PROCESS_CAP_BYTES = HEADLESS_PEAK + 3 GiB ≈ 8.24 GiB` (the per-process MEMORY_KILL cap) and `RAM_FLOOR_BYTES = 14 GiB` (all admission). The 04:50Z ruling is the other way: cap stays 10.5 GiB (startup bursts ~9.5 GiB make an 8.24 GiB cap a guaranteed kill), admission = peak+3 ≈ 8.24 GiB for the first game and ≥14 GiB only for a second parallel small game. Reference impl: `ddd16354d`.
+- **Still unfixed there**: thin `Overlay` materialization (the launch blocker — port `01b15da12`), `set_game_pid(process.pid)` launcher-PID regression + `os.kill(pid,0)` liveness (port `a12ff4aa4` chain), `cap_match` reads only `server.log` while `AB_CAMPAIGN_CAP` lands in `driver.log` (port `4029a47d0`), no degenerate/debug.log guard (port `c259a8ceb`), execution manifest still `approved:true` on `6da7fce` (port `c67e3ae30`).
+- **Keep theirs (my branch is stale on these — do not regress in merge)**: `make_jobs` geographic-home seat fix, `text_sha` CRLF folding, `read_engine_version` BOM handling, engine pin `4f69df005f` in `validate`, expanded receipt required fields, `campaign_map_directory`.
+- Reported to DevOps and lead; DevOps paused at send time.
