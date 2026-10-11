@@ -182,6 +182,37 @@ class SequentialDecision(unittest.TestCase):
         self.assertEqual(result["sequential_decision"]["verdict"], "REJECT")
 
 
+class HarmVeto(unittest.TestCase):
+    """Lead ruling 2026-10-11: a per-setup CI entirely below zero overrides a pooled
+    ACCEPT, even when the pooled signal alone would clear the 75% bar."""
+
+    def test_harmed_setup_downgrades_pooled_accept_to_park(self):
+        good = []
+        for i in range(15):
+            good += matched_pair(setup_id="1v1_nuclear_gdi", pair_index=i, treatment_wins=(True, True))
+        harmed = matched_pair(setup_id="1v1_nuclear_nod", pair_index=0, treatment_wins=(False, False))
+        result = az.summarize(good + harmed, None)
+        self.assertEqual(result["sequential_decision"]["pre_veto_verdict"], "ACCEPT")
+        self.assertEqual(result["sequential_decision"]["harm_veto_setups"], ["1v1_nuclear_nod"])
+        self.assertEqual(result["sequential_decision"]["verdict"], "PARK")
+
+    def test_harm_veto_never_upgrades_a_reject(self):
+        bad = []
+        for i in range(16):
+            bad += matched_pair(setup_id="1v1_nuclear_gdi", pair_index=i, treatment_wins=(False, False))
+        result = az.summarize(bad, None)
+        self.assertEqual(result["sequential_decision"]["pre_veto_verdict"], "REJECT")
+        self.assertEqual(result["sequential_decision"]["verdict"], "REJECT")
+
+    def test_no_harmed_setup_leaves_accept_untouched(self):
+        games = []
+        for i in range(16):
+            games += matched_pair(setup_id="1v1_nuclear_gdi", pair_index=i, treatment_wins=(i < 13, i < 13))
+        result = az.summarize(games, None)
+        self.assertEqual(result["sequential_decision"]["harm_veto_setups"], [])
+        self.assertEqual(result["sequential_decision"]["verdict"], "ACCEPT")
+
+
 class PerSetupDenominators(unittest.TestCase):
     def test_every_pooled_pair_attributed_to_its_setup(self):
         a = matched_pair(setup_id="1v1_nuclear_gdi")

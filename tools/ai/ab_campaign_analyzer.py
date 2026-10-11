@@ -389,6 +389,20 @@ def summarize(receipts: list[dict], manifest: dict | None) -> dict[str, Any]:
         kill_exchange_delta=kill_exchange_delta, crashed=crashed, thresholds=thresholds,
     )
 
+    # Lead ruling 2026-10-11: pool per switch across setups (above), stratified by
+    # setup (by_setup, above), PLUS a per-setup harm veto — a setup whose paired
+    # win-effect 95% CI lies entirely below zero overrides a pooled ACCEPT. The
+    # ruling named "REJECT/PARK" without picking one; PARK is used here (a would-be
+    # ACCEPT becomes "needs review", not an outright kill) since the pooled signal
+    # was otherwise positive. A pooled REJECT/CONTINUE/PARK is never upgraded.
+    harm_veto_setups = sorted(
+        setup_id for setup_id, s in by_setup.items()
+        if s["paired_bootstrap_95ci"] is not None and s["paired_bootstrap_95ci"][1] < 0
+    )
+    pre_veto_decision = decision
+    if decision == "ACCEPT" and harm_veto_setups:
+        decision = "PARK"
+
     return {
         "schema": SCHEMA,
         "switch": switch,
@@ -405,6 +419,8 @@ def summarize(receipts: list[dict], manifest: dict | None) -> dict[str, Any]:
         "team_metrics": teams,
         "sequential_decision": {
             "verdict": decision,
+            "pre_veto_verdict": pre_veto_decision,
+            "harm_veto_setups": harm_veto_setups,
             "rounds": pooled_n, "treatment_wins": treatment_wins, "control_wins": control_wins,
             "crashed": crashed, "thresholds": thresholds,
             "earned_spent_delta": earned_spent_delta, "army_efficiency_delta": army_efficiency_delta,
