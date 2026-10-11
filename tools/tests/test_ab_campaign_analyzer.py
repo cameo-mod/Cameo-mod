@@ -64,7 +64,8 @@ def receipt(*, switch="BU_harvester_logistics", setup_id="1v1_nuclear_gdi", pair
         },
         "resolved_seats": seats, "end_class": end_class, "end_reason": end_reason,
         "winner_team": winner_team if end_class == "NATURAL" else None,
-        "world_tick": 30000, "cap": {"world_tick_cap": 45000, "marker_observed": end_class == "CAP", "marker_tick": 45000 if end_class == "CAP" else None},
+        "world_tick": 30000, "end_tick": 30000 if deployed else None,
+        "cap": {"world_tick_cap": 45000, "marker_observed": end_class == "CAP", "marker_tick": 45000 if end_class == "CAP" else None},
         "memory": {"process_id": 1, "peak_private_bytes": 0, "limit_private_bytes": runner_private_limit(), "samples": []},
         "runtime": {"started_utc": None, "finished_utc": None, "exit_code": 0, "wall_seconds": 1.0, "stall_seconds": 180, "pid_scoped_cleanup": True},
         "artifacts": {k: {"path": None, "sha256": None, "missing_reason": "fixture"} for k in
