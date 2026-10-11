@@ -427,6 +427,15 @@ def adjudicate(records, receipt, job, manifest_sha):
   return {"verdict":"INVALID_UNKNOWN","reason":"seat assignment/bot binding differs from planned arms"}
  expected_seats={s["home"]:s for s in job["seat_assignments"]}
  if set(byhome)!=set(expected_seats): return {"verdict":"INVALID_UNKNOWN","reason":"resolved homes differ from planned spawn rotation"}
+ # A seat records its declared bot type even when the engine rejected it, so a
+ # brainless seat (overlay mod failed to register) still produces rows. Every
+ # timeline staying at exactly zero earned/spent means no AI economy ever ran —
+ # such a cell is a fixture failure, never a playable result or a cap censor.
+ def _flat(r):
+  t=normalized_timeline(r)
+  return bool(t) and all((row.get("earned") or 0)==0 and (row.get("spent") or 0)==0 for row in t)
+ if records and all(_flat(r) for r in records):
+  return {"verdict":"DEGENERATE_NO_ECONOMY","reason":"all seats recorded zero earned/spent across every timeline sample — seat bots never ran (check debug.log for 'Invalid bot type' / overlay mod registration failure)"}
  for home,seat in byhome.items():
   expected=expected_seats[home]
   if any(seat.get(k)!=expected[k] for k in ("spawn","side","arm","bot_type","faction")):

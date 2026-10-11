@@ -499,6 +499,12 @@ def run_one(manifest: dict, manifest_sha: str, job: dict, *, root: pathlib.Path,
 	finished = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
 	log_text = server_log.read_text(encoding="utf-8", errors="replace") if server_log.exists() else ""
 	driver_text = driver_log.read_text(encoding="utf-8", errors="replace") if driver_log.exists() else ""
+	debug_log = logs / "debug.log"
+	debug_text = debug_log.read_text(encoding="utf-8", errors="replace") if debug_log.exists() else ""
+	# A thin overlay whose mod registration fails leaves "Invalid bot type" /
+	# "YamlException" in debug.log; the game then runs brainless seats and can
+	# still produce cap-censored rows — never classify that as a played cell.
+	mod_failed = "Invalid bot type" in debug_text or "YamlException" in debug_text
 	match_rows = batch.read_appended_records(match_log, before)
 	cap_match = re.search(r"AB_CAMPAIGN_CAP tick=(\d+)", driver_text)
 	seed_line = next((line for line in log_text.splitlines() if f"RandomSeed={job['seed']}" in line and "CAMEO DEV SEED pinned" in line), None)
@@ -507,9 +513,10 @@ def run_one(manifest: dict, manifest_sha: str, job: dict, *, root: pathlib.Path,
 	known_incomplete = {"MEMORY_KILL", "MEMORY_SAMPLE_FAILED", "LOW_FREE_RAM", "STALL", "WALL_TIMEOUT"}
 	internal_status = monitor_result["end_reason"] if monitor_result["end_reason"] in known_incomplete else "INCOMPLETE"
 	end_reason = monitor_result["end_reason"]
-	if monitor_result["end_reason"] == "PROCESS_EXIT" and monitor_result["exit_code"] == 0 and seed_line and len(match_rows) == job["required_seats"]:
+	if monitor_result["end_reason"] == "PROCESS_EXIT" and monitor_result["exit_code"] == 0 and seed_line and len(match_rows) == job["required_seats"] and not mod_failed:
 		if cap_match and int(cap_match.group(1)) >= CAP_TICK: internal_status="CENSORED_CAP"; end_reason="cap"
 		else: internal_status="NATURAL_END"; end_reason="natural"
+	if mod_failed: internal_status="INCOMPLETE"; end_reason="INVALID_MOD_REGISTRATION"
 	internal = {"cell_id":job["cell_id"], "manifest_sha256":manifest_sha, "switch":job["switch"], "setup":job["setup"], "map":job["map"], "map_sha256":job["map_sha256"], "seed":job["seed"], "pair":job["pair"], "game_in_pair":job["game_in_pair"], "control_side":job["control_side"], "treatment_side":job["treatment_side"], "arm_bot_types":job["arm_bot_types"], "status":internal_status, "end_reason":end_reason, "cap_marker":bool(cap_match), "cap_tick":int(cap_match.group(1)) if cap_match else None, "support_complete":len(match_rows)==job["required_seats"], "seat_proof_source":"generated_map.yaml", "map_yaml_sha256":map_yaml_sha, "seats":resolved, "peak_memory_bytes":monitor_result["peak_private_bytes"], "duration_ticks":int(cap_match.group(1)) if cap_match else None}
 	classification = pilot.adjudicate(match_rows, internal, job, manifest_sha)
 	end_class = {"CENSORED_CAP":"CAP", "TREATMENT_WIN":"NATURAL", "CONTROL_WIN":"NATURAL"}.get(classification["verdict"], "INCOMPLETE")
