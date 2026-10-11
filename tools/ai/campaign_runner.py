@@ -30,6 +30,7 @@ import run_ai_match_batch as batch
 CAP_TICK = 45000
 PRIVATE_LIMIT = pilot.PROCESS_CAP_BYTES
 FREE_RAM_FLOOR = pilot.RAM_FLOOR_BYTES
+SECOND_SMALL_GAME_RAM_FLOOR = pilot.SECOND_SMALL_GAME_ADMISSION_BYTES
 FREE_RAM_HARD_FLOOR = 3 * 1024**3       # runtime stop: available RAM below this kills the cell
 FREE_RAM_SOFT_FLOOR = 4 * 1024**3       # soft floor: telemetry threshold for low-RAM pressure
 ACTOR_SAMPLE_INTERVAL = 5000
@@ -358,7 +359,8 @@ def plan_summary(manifest: dict, manifest_sha: str, root: pathlib.Path, engine_r
 	return {"manifest_sha256": manifest_sha, "source_commit": manifest["pins"]["source_commit"],
 		"planned_games": len(jobs), "pilot_games": len(jobs), "setup_count": len(pilot.SETUPS),
 		"small_game_workers_max": SLOT_PARALLEL_SMALL, "large_games_exclusive": True,
-		"process_private_limit_bytes": PRIVATE_LIMIT, "free_ram_floor_bytes": FREE_RAM_FLOOR,
+		"process_private_limit_bytes": PRIVATE_LIMIT, "single_game_admission_bytes": FREE_RAM_FLOOR,
+		"second_small_game_admission_bytes": SECOND_SMALL_GAME_RAM_FLOOR,
 		"free_ram_hard_floor_bytes": FREE_RAM_HARD_FLOOR, "free_ram_soft_floor_bytes": FREE_RAM_SOFT_FLOOR,
 		"cap_tick": CAP_TICK, "actor_sample_interval_ticks": ACTOR_SAMPLE_INTERVAL,
 		"queue_mode": "RESUME_SAFE_CLAIM_ONCE", "launches": 0,
@@ -371,6 +373,33 @@ def _file_artifact(path: pathlib.Path | None, missing_reason: str | None = None)
 	return {"path": str(path), "sha256": sha(path), "missing_reason": None}
 
 
+def _link_or_copy(source: str, destination: str) -> str:
+	"""Hard-link immutable mod payloads when possible; copy across volumes/ACLs."""
+	try:
+		os.link(source, destination)
+		return destination
+	except OSError:
+		return shutil.copy2(source, destination)
+
+
+def materialize_campaign_overlay(root: pathlib.Path, destination: pathlib.Path,
+							 switch: str, accepted_switches=()) -> dict:
+	"""Build a complete mod root so ModSearchPaths cannot reject a thin overlay."""
+	root = root.resolve()
+	base_mod = root / "mods" / "cameo"
+	pilot.materialize_dual_arm_ai(root, destination, switch, accepted_switches)
+	overlay_mod = destination / "mods" / "cameo"
+	def skip_ai(directory, names):
+		return {"ai"} if pathlib.Path(directory).resolve() == base_mod and "ai" in names else set()
+	shutil.copytree(base_mod, overlay_mod, dirs_exist_ok=True, copy_function=_link_or_copy,
+		ignore=skip_ai)
+	if not (overlay_mod / "ContentPacks" / "Outpost2" / "content.yaml").is_file():
+		raise ValueError("complete campaign overlay is missing ContentPacks/Outpost2/content.yaml")
+	if not (overlay_mod / "ai" / "ai.yaml").is_file():
+		raise ValueError("complete campaign overlay lost dual-arm ai.yaml")
+	return {"mod_root": str(overlay_mod), "complete_mod_tree": True}
+
+
 def run_one(manifest: dict, manifest_sha: str, job: dict, *, root: pathlib.Path,
 			engine_root: pathlib.Path, a5_receipt: dict, a5_receipt_sha256: str, support_root: pathlib.Path,
 			slot_db: pathlib.Path) -> dict:
@@ -380,7 +409,6 @@ def run_one(manifest: dict, manifest_sha: str, job: dict, *, root: pathlib.Path,
 	pilot.validate(manifest, root, engine_root, execution=True)
 	execution_gate(manifest, a5_receipt=a5_receipt, a5_receipt_sha256=a5_receipt_sha256,
 		source_commit=manifest["pins"]["source_commit"], engine_version=manifest["pins"]["engine_version"])
-	if available_ram_bytes() < FREE_RAM_FLOOR: raise ValueError("available RAM below 14 GiB admission floor")
 	queue = ResumeQueue(support_root / "campaign_queue.sqlite", manifest_sha)
 	queue.install(pilot.make_jobs(manifest))
 	queue.recover_orphans(kill_game=lambda cell, pid: kill_owned_pid(pid, executable,
@@ -398,8 +426,8 @@ def run_one(manifest: dict, manifest_sha: str, job: dict, *, root: pathlib.Path,
 	game_support = game_root / "Support"; game_support.mkdir()
 	logs = game_support / "Logs"; logs.mkdir()
 	maps = game_support / "maps" / "cameo" / "{DEV_VERSION}"; maps.mkdir(parents=True)
-	overlay = game_root / "Overlay"; pilot.materialize_dual_arm_ai(root, overlay, job["switch"], manifest.get("ratchet_accepted_switches", []))
-	shutil.copyfile(root / "mods" / "cameo" / "mod.yaml", overlay / "mods" / "cameo" / "mod.yaml")
+	overlay = game_root / "Overlay"
+	materialize_campaign_overlay(root, overlay, job["switch"], manifest.get("ratchet_accepted_switches", []))
 	variant = maps / ("campaign_" + re.sub(r"[^A-Za-z0-9_.-]", "_", job["cell_id"]))
 	proof = pilot.prove_generated_map(job, root, variant)
 	map_yaml = variant / "map.yaml"; map_yaml_sha = sha(map_yaml)

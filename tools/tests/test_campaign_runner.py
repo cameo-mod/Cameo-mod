@@ -1,4 +1,4 @@
-import json, pathlib, sys, tempfile, unittest
+import json, pathlib, shutil, sys, tempfile, unittest
 ROOT=pathlib.Path(__file__).resolve().parents[2]
 sys.path.insert(0,str(ROOT/"tools"/"ai"))
 import campaign_runner as runner
@@ -66,13 +66,29 @@ class CampaignRunnerTests(unittest.TestCase):
 			self.assertIn(field, required, f"persisted receipt must carry analyzer join field: {field}")
 
 	def test_bounds_and_parallel_policy(self):
-		self.assertEqual(runner.pilot.HEADLESS_PEAK_BYTES + 3 * 1024**3, runner.PRIVATE_LIMIT)
-		self.assertEqual(14 * 1024**3, runner.FREE_RAM_FLOOR)
+		self.assertEqual(int(10.5 * 1024**3), runner.PRIVATE_LIMIT)
+		self.assertEqual(runner.pilot.HEADLESS_PEAK_BYTES + 3 * 1024**3, runner.FREE_RAM_FLOOR)
+		self.assertEqual(14 * 1024**3, runner.SECOND_SMALL_GAME_RAM_FLOOR)
 		self.assertEqual(3 * 1024**3, runner.FREE_RAM_HARD_FLOOR)
 		self.assertEqual(4 * 1024**3, runner.FREE_RAM_SOFT_FLOOR)
 		self.assertEqual(45000, runner.CAP_TICK)
 		self.assertEqual(5000, runner.ACTOR_SAMPLE_INTERVAL)
 		self.assertEqual(2, runner.SLOT_PARALLEL_SMALL)
+
+	def test_campaign_overlay_is_a_complete_mod_tree(self):
+		with tempfile.TemporaryDirectory() as temp:
+			root = pathlib.Path(temp) / "repo"
+			base_mod = root / "mods" / "cameo"
+			shutil.copytree(ROOT / "mods" / "cameo" / "ai", base_mod / "ai")
+			(base_mod / "mod.yaml").parent.mkdir(parents=True, exist_ok=True)
+			(base_mod / "mod.yaml").write_text("Metadata:\\n\tTitle: Overlay Test\\n", encoding="utf-8")
+			content = base_mod / "ContentPacks" / "Outpost2" / "content.yaml"
+			content.parent.mkdir(parents=True)
+			content.write_text("Rules:\\n", encoding="utf-8")
+			overlay = pathlib.Path(temp) / "campaign-overlay"
+			runner.materialize_campaign_overlay(root, overlay, runner.pilot.SWITCH)
+			self.assertEqual(content.read_bytes(), (overlay / "mods" / "cameo" / "ContentPacks" / "Outpost2" / "content.yaml").read_bytes())
+			self.assertIn("hard_control", (overlay / "mods" / "cameo" / "ai" / "ai.yaml").read_text(encoding="utf-8"))
 
 	def test_execution_gate_rejects_unapproved_or_missing_a5(self):
 		manifest = {"execution_approved": False, "pins": {"source_commit": "a" * 40, "engine_version": "engine"}}

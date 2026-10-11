@@ -32,18 +32,20 @@ SETUPS = [
 ]
 # Latest measured headless peak in the acceptance receipt (5,623,365,632 B)
 # plus the maintainer's 3 GiB headroom. Re-measure on the final engine/host
-# before freezing the executable manifest. Admission rounds 2*peak + 3 GiB
-# upward to 14 GiB for two concurrent 1v1/2v2 cells.
+# before freezing the executable manifest. One game needs measured peak +
+# 3 GiB free; a second small game needs >= 14 GiB; big games are exclusive.
 HEADLESS_PEAK_BYTES = 5623365632
-PROCESS_CAP_BYTES = HEADLESS_PEAK_BYTES + 3 * 1024**3
-RAM_FLOOR_BYTES = 14 * 1024**3
+PROCESS_CAP_BYTES = int(10.5 * 1024**3)
+SINGLE_GAME_ADMISSION_BYTES = HEADLESS_PEAK_BYTES + 3 * 1024**3
+SECOND_SMALL_GAME_ADMISSION_BYTES = 14 * 1024**3
+RAM_FLOOR_BYTES = SINGLE_GAME_ADMISSION_BYTES  # compatibility alias: first-game floor
 ROUND_STAGES = [16,32,48,64]
 ECONOMY_INTERVAL_TICKS = tuple(range(5000, 45001, 5000))
 FIX_SAFETY_SWITCHES = frozenset("K_cn2_unit_repair AL_emergency_net_loss AN_combat_veto AG_assault_fanout BJ_squad_hysteresis BK_squad_order_dedup BL_protection_episode_guard BN_squad_pool_fixes BO_squad_move_dedup".split())
 _, _ALL_GROUPS, _ = increment.load_spec(pathlib.Path(__file__).with_name("increment_switches.yaml"))
 BEHAVIOR_SWITCHES = tuple(name for name in _ALL_GROUPS if name not in FIX_SAFETY_SWITCHES)
 DEFAULT_THRESHOLDS = {"early_accept_share":0.75,"early_reject_share":0.25,"win_noninferiority_delta":0.0,"min_earned_spent_improvement":0.0,"min_army_efficiency_improvement":0.0,"min_kill_exchange_improvement":0.0}
-SLOT_POLICY={"max_parallel_small_games":2,"small_team_size_max":2,"large_game_exclusive":True,"min_free_ram_bytes":RAM_FLOOR_BYTES,"max_private_bytes":PROCESS_CAP_BYTES,"headless_peak_bytes":HEADLESS_PEAK_BYTES,"process_headroom_bytes":3*1024**3}
+SLOT_POLICY={"max_parallel_small_games":2,"small_team_size_max":2,"large_game_exclusive":True,"min_free_ram_bytes":SINGLE_GAME_ADMISSION_BYTES,"second_small_game_min_free_ram_bytes":SECOND_SMALL_GAME_ADMISSION_BYTES,"max_private_bytes":PROCESS_CAP_BYTES,"headless_peak_bytes":HEADLESS_PEAK_BYTES,"process_headroom_bytes":3*1024**3}
 
 def treatment_baseline(accepted_switches, candidate):
  """Ratchet rule: accepted groups stay in control; treatment adds one candidate."""
@@ -76,11 +78,14 @@ def acceptance_decision(*, rounds, treatment_wins, control_wins, economy_not_wor
 def regression_due(accepted_count):
  return accepted_count>0 and accepted_count%5==0
 
-def slots_available(team_size, free_ram_bytes, active_private_bytes=(), active_slots=0, active_team_sizes=(), max_small_slots=3):
+def slots_available(team_size, free_ram_bytes, active_private_bytes=(), active_slots=0, active_team_sizes=(), max_small_slots=2):
  """Admission policy for the amended slot counter; callers still need OS memory monitoring."""
- if free_ram_bytes<RAM_FLOOR_BYTES or any(x>=PROCESS_CAP_BYTES for x in active_private_bytes): return False
- if team_size>=3: return active_slots==0
- return active_slots<max_small_slots and not any(size>=3 for size in active_team_sizes)
+ if any(x>=PROCESS_CAP_BYTES for x in active_private_bytes): return False
+ if team_size>=3:
+  return active_slots==0 and free_ram_bytes>=SINGLE_GAME_ADMISSION_BYTES
+ if any(size>=3 for size in active_team_sizes) or active_slots>=max_small_slots: return False
+ floor=SECOND_SMALL_GAME_ADMISSION_BYTES if active_slots else SINGLE_GAME_ADMISSION_BYTES
+ return free_ram_bytes>=floor
 
 class SqliteSlotCounter:
  """Process-shared lease counter. Runtime must heartbeat and monitor process/RAM continuously."""
