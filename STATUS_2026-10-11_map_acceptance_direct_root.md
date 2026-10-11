@@ -1,8 +1,8 @@
 ## Resume (2026-10-11, sampled descendant cleanup)
 
-Next: exact review `d47503dce8f...` then refresh acceptance tool pin and request a fresh reservation before any runtime map acceptance. No runtime acceptance or outcome cells were launched for this change; PILOT HOLD remains.
+Next: exact review `d47503dce6da69ad84d8ef448b74441ada69b945` then refresh acceptance tool pin and request a fresh reservation before any runtime map acceptance. No runtime acceptance or outcome cells were launched for this change; PILOT HOLD remains.
 
-Exact pushed code commit: `d47503dce8f...` on `codex/ab-campaign-pidguard-integration`, parent `208079d90d28bc67cb9b441e799918bcaa19c131`. During a live, previously validated root, the monitor stores descendant identity (PID, parent PID, normalized engine executable, CreationDate). If the root exits, final discovery/cleanup may trust that exact previously observed identity even when the child argv omits SupportDir; a newly discovered process still needs the exact cell SupportDir. PID-scoped kill remains.
+Exact pushed code commit: `d47503dce6da69ad84d8ef448b74441ada69b945` on `codex/ab-campaign-pidguard-integration`, parent `208079d90d28bc67cb9b441e799918bcaa19c131`. During a live, previously validated root, the monitor stores descendant identity (PID, parent PID, normalized engine executable, CreationDate). If the root exits, final discovery/cleanup may trust that exact previously observed identity even when the child argv omits SupportDir; a newly discovered process still needs the exact cell SupportDir. PID-scoped kill remains.
 
 Focused map acceptance tests: 21/21 PASS; py_compile and `git diff --check` PASS. Regression covers an observed child without SupportDir surviving launcher exit, PID-scoped cleanup, and rejection of a newly discovered unattributed child. No games launched.
 # Map acceptance direct-process monitor status
