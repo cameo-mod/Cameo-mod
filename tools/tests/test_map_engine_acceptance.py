@@ -262,6 +262,47 @@ class OwnedProcessMonitoringTests(unittest.TestCase):
             self.assertEqual([], remaining)
             self.assertEqual([["taskkill.exe", "/PID", "2", "/T", "/F"]], calls)
 
+    def test_sampled_descendant_without_support_arg_is_cleaned_but_new_one_is_rejected(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = pathlib.Path(d) / "engine"
+            (root / "bin").mkdir(parents=True)
+            support = pathlib.Path(d) / "cell/Support"
+            support.mkdir(parents=True)
+            exe = root / "bin/OpenRA.Game.exe"
+            exe.write_bytes(b"engine stub")
+            child = {"ProcessId": 2, "ParentProcessId": 1, "ExecutablePath": str(exe),
+                "CommandLine": "OpenRA.Game.exe", "CreationDate": "20261011060000.000000+000"}
+
+            class ExitedPopen:
+                pid = 1
+                def poll(self): return 0
+
+            observed = {2: acceptance.process_identity(child)}
+            self.assertIsNotNone(observed[2])
+            calls = []
+            def run(args, **kwargs):
+                calls.append(args)
+                return type("Result", (), {"returncode": 0, "stdout": "", "stderr": ""})()
+
+            with patch.object(acceptance.os, "name", "nt"), \
+                 patch.object(acceptance, "process_rows", side_effect=[[child], [child], []]), \
+                 patch.object(acceptance.subprocess, "run", side_effect=run):
+                recovered = acceptance.discover_owned_tree(ExitedPopen(), root, support,
+                    previously_observed=observed)
+                remaining = acceptance.cleanup_orphaned_owned_pids({2}, root, support,
+                    previously_observed=observed)
+
+            self.assertEqual([2], [int(row["ProcessId"]) for row in recovered["rows"]])
+            self.assertEqual([], remaining)
+            self.assertEqual([["taskkill.exe", "/PID", "2", "/T", "/F"]], calls)
+
+            new_child = dict(child, ProcessId=3)
+            with patch.object(acceptance.os, "name", "nt"), \
+                 patch.object(acceptance, "process_rows", return_value=[new_child]):
+                with self.assertRaisesRegex(RuntimeError, "does not match this cell"):
+                    acceptance.discover_owned_tree(ExitedPopen(), root, support,
+                        previously_observed=observed)
+
     def test_tree_cleanup_uses_root_pid_and_tree_scope(self):
         with tempfile.TemporaryDirectory() as d:
             root = pathlib.Path(d) / "engine"

@@ -132,7 +132,7 @@ def process_rows() -> list[dict]:
 	if os.name != "nt":
 		return []
 	p = subprocess.run(["powershell.exe", "-NoProfile", "-NonInteractive", "-Command",
-		"Get-CimInstance Win32_Process | Select-Object ProcessId,ParentProcessId,ExecutablePath,CommandLine | ConvertTo-Json -Compress"],
+		"Get-CimInstance Win32_Process | Select-Object ProcessId,ParentProcessId,ExecutablePath,CommandLine,CreationDate | ConvertTo-Json -Compress"],
 		capture_output=True, text=True, timeout=15)
 	if p.returncode:
 		raise RuntimeError("process identity query failed: " + p.stderr[-400:])
@@ -171,8 +171,23 @@ def command_has_argument(command: str, argument: str) -> bool:
 	return re.search(pattern, command) is not None
 
 
+def process_identity(row: dict) -> tuple | None:
+	"""Stable enough identity to recognize a previously sampled PID without trusting PID reuse."""
+	try:
+		created = row.get("CreationDate")
+		path = pathlib.Path(str(row.get("ExecutablePath") or "")).resolve()
+		pid = int(row["ProcessId"])
+		parent = int(row.get("ParentProcessId") or 0)
+		if not created or not path.is_file():
+			return None
+		return pid, parent, os.path.normcase(str(path)), str(created)
+	except (KeyError, OSError, TypeError, ValueError):
+		return None
+
+
 def discover_owned_tree(process, engine: pathlib.Path, support: pathlib.Path, *, require_game_child: bool = True,
-				direct_game_args: tuple[str, ...] | None = None) -> dict:
+				direct_game_args: tuple[str, ...] | None = None,
+				previously_observed: dict[int, tuple] | None = None) -> dict:
 	"""Identify the launched root plus descendants; verify root identity before trusting the tree."""
 	if os.name != "nt":
 		return {"rows": [{"ProcessId": process.pid, "ParentProcessId": 0,
@@ -188,14 +203,18 @@ def discover_owned_tree(process, engine: pathlib.Path, support: pathlib.Path, *,
 		bin_dir = (engine / "bin").resolve()
 		children = [row for row in rows if int(row["ProcessId"]) != process.pid]
 		for row in children:
+			pid = int(row["ProcessId"])
+			identity = process_identity(row)
+			observed_match = (identity is not None and previously_observed is not None
+				and previously_observed.get(pid) == identity)
 			try:
 				path = pathlib.Path(str(row.get("ExecutablePath") or "")).resolve()
 				path.relative_to(bin_dir)
-				same_cell = os.path.normcase(str(support.absolute())) in os.path.normcase(
-					str(row.get("CommandLine") or ""))
+				same_cell = command_has_argument(str(row.get("CommandLine") or ""),
+					f"Engine.SupportDir={support.absolute()}")
 			except (OSError, ValueError):
 				same_cell = False
-			if not same_cell:
+			if not same_cell and not observed_match:
 				raise RuntimeError(f"orphan PID {row.get('ProcessId')} does not match this cell's engine/SupportDir")
 		if require_game_child and not children:
 			return {"rows": [], "child_found": False}
@@ -291,7 +310,8 @@ def terminate_owned_tree(process, engine: pathlib.Path, support: pathlib.Path) -
 			raise RuntimeError("owned process tree remained after PID-scoped cleanup")
 
 
-def cleanup_orphaned_owned_pids(pids: set[int], engine: pathlib.Path, support: pathlib.Path) -> list[int]:
+def cleanup_orphaned_owned_pids(pids: set[int], engine: pathlib.Path, support: pathlib.Path,
+								previously_observed: dict[int, tuple] | None = None) -> list[int]:
 	"""If the launcher exited first, clean up only previously observed, revalidated game PIDs."""
 	if os.name != "nt" or not pids:
 		return []
@@ -301,13 +321,17 @@ def cleanup_orphaned_owned_pids(pids: set[int], engine: pathlib.Path, support: p
 	bin_dir = (engine / "bin").resolve()
 	for pid in left:
 		row = by_pid[pid]
+		identity = process_identity(row)
+		observed_match = (identity is not None and previously_observed is not None
+			and previously_observed.get(pid) == identity)
 		try:
 			path = pathlib.Path(str(row.get("ExecutablePath") or "")).resolve()
 			path.relative_to(bin_dir)
-			same_cell = os.path.normcase(str(support.absolute())) in os.path.normcase(str(row.get("CommandLine") or ""))
+			same_cell = command_has_argument(str(row.get("CommandLine") or ""),
+				f"Engine.SupportDir={support.absolute()}")
 		except (OSError, ValueError):
 			same_cell = False
-		if not same_cell:
+		if not same_cell and not observed_match:
 			raise RuntimeError(f"refusing to clean PID {pid}: it no longer matches the owned engine/support identity")
 	for pid in left:
 		p = subprocess.run(["taskkill.exe", "/PID", str(pid), "/T", "/F"],
@@ -407,6 +431,7 @@ def run_cell(job: dict, *, root: pathlib.Path, engine: pathlib.Path, overlay: pa
 	min_host_free = None
 	memory_samples = []
 	owned_pids = set()
+	observed_owned = {}
 	child_seen = False
 	monitor_error = None
 	with (cell_dir / "driver.log").open("w", encoding="utf-8") as output:
@@ -416,6 +441,12 @@ def run_cell(job: dict, *, root: pathlib.Path, engine: pathlib.Path, overlay: pa
 			try:
 				tree = discover_owned_tree(process, engine, support, direct_game_args=direct_game_args)
 				owned_pids.update(int(row["ProcessId"]) for row in tree["rows"])
+				for row in tree["rows"]:
+					pid = int(row["ProcessId"])
+					if pid != process.pid:
+						identity = process_identity(row)
+						if identity is not None:
+							observed_owned[pid] = identity
 				child_seen |= tree["child_found"]
 				if os.name == "nt" and not child_seen and time.monotonic() - started > 30:
 					end_reason = "CHILD_PROCESS_NOT_FOUND"
@@ -464,13 +495,15 @@ def run_cell(job: dict, *, root: pathlib.Path, engine: pathlib.Path, overlay: pa
 	try:
 		# Always take one last snapshot: Popen may have exited before the first loop
 		# iteration, leaving a same-cell game child absent from the sampled PID set.
-		final_tree = discover_owned_tree(process, engine, support, direct_game_args=direct_game_args)
+		final_tree = discover_owned_tree(process, engine, support, direct_game_args=direct_game_args,
+			previously_observed=observed_owned)
 		final_children = {int(row["ProcessId"]) for row in final_tree["rows"] if
 			int(row["ProcessId"]) != process.pid}
 		new_orphaned = final_children - (owned_pids - {process.pid})
 		owned_pids.update(final_children)
 		child_seen |= final_tree["child_found"]
-		orphaned = cleanup_orphaned_owned_pids(owned_pids - {process.pid}, engine, support)
+		orphaned = cleanup_orphaned_owned_pids(owned_pids - {process.pid}, engine, support,
+			previously_observed=observed_owned)
 		if new_orphaned or orphaned:
 			end_reason = "ORPHANED_GAME_CLEANED"
 			monitor_error = f"launcher exited while owned game PIDs remained: {sorted(new_orphaned | set(orphaned))}"
