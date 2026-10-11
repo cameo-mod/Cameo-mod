@@ -721,6 +721,12 @@ namespace OpenRA.Mods.CA.Traits
 				baseBuilder.RecordOpeningStructureQueued(queue, item);
 				baseBuilder.BuildOrderKnobs?.NotifyQueued(item.Name);
 				bot.QueueOrder(Order.StartProduction(queue.Actor, item.Name, 1));
+
+				// TF-1: a paid planner crawl-link admission charges its episode allowance — the
+				// ledger binds optional supply to real spend, not queued intent.
+				if (lawWants != null && item.Name == lawWants.WantedLinkBuilding)
+					lawWants.CrawlLinkPaid(queue.GetProductionCost(item));
+
 				queuedAt[queue.Actor.ActorID] = (item.Name, world.WorldTick);
 				if (demandPick.Demand != null)
 				{
@@ -2177,7 +2183,12 @@ namespace OpenRA.Mods.CA.Traits
 						// on this aimed path so the distance sort survives (crawl-trace §8).
 						var crawlLaw = baseBuilder.RefineryLawProvider();
 						var crawlAim = crawlLaw?.CrawlTargetEdge ?? expansionTarget;
-						var toward = findPos(actorType, distanceToBaseIsImportant, producer, baseCenter, crawlAim.Value,
+
+						// TF-1: the bounded path anchors the search at the frontier cell nearest the
+						// aim — an admitted link must land forward; without a published anchor (legacy,
+						// switch-off) the yard centre stays the search centre as before.
+						var anchor = crawlLaw?.CrawlFrontierAnchor ?? baseCenter;
+						var toward = findPos(actorType, distanceToBaseIsImportant, producer, anchor, crawlAim.Value,
 							baseBuilder.Info.MinBaseRadius, baseBuilder.Info.BaseCrawlRadius, bypassAdvisor: crawlLaw != null);
 						if (toward.Location != null)
 						{

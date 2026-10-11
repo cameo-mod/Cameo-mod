@@ -20563,3 +20563,43 @@ Validation: `dotnet test OpenRA.Mods.Cameo.Test -c Release` â€” 1516 passed
 (3/3 new tests green). Boot-gate PASS â€” main menu reached, no new exception-*.log.
 Verify pending: rerun of cell `all/duel_nod_2103` to cap with no exception log â€”
 coordinator-owned per PT7 runner authority.
+
+## 2026-10-11 - TF-1 bounded optional crawl-link supply (FINDINGS_2026-10-11_turtle_regression increment 1)
+
+Problem (fleet FINDINGS doc + Sol's trace): the planner's crawl-link want is unbounded - the
+queue treats `WantedLinkBuilding` as an economy investment that rides its own cost floor and
+is re-picked every sweep, so a route that never advances the frontier keeps spending (the
+traced turtler stacked ~51 power placements). Placement also searched the 50-cell annulus
+around the yard centre, not the frontier nearest the target.
+
+Change (default-off; `BoundCrawlLinkSupply: false` preserves the traced behaviour):
+
+- `ExpansionPlannerBotModuleInfo.BoundCrawlLinkSupply` + `OptionalLinkCostAllowance` (6000),
+  `OptionalLinkCountAllowance` (4), `OptionalLinkNonprogressReplans` (6 ~ 1500 ticks at
+  ReplanTicks=250).
+- New nested `CrawlLinkAllowance` ledger (world-free): episodes key on the target field's
+  centre; `RecordPaid` charges only paid link admissions the queue reports (`CrawlLinkPaid`);
+  `NoteDistance` measures frontier-to-aim distance^2 each re-plan - a moved aim re-baselines,
+  a strictly smaller distance is progress, stalls park the route after
+  `OptionalLinkNonprogressReplans`; `OptionalLinkAdmissible` requires measured evidence, one
+  outstanding unadvanced link, and headroom under both paid bounds.
+- `OptionalLinkAdmitted(mandatoryPower, admissible)` - mandatory power
+  (`PowerManager.ExcessPower < 0`) publishes the want regardless; its paid admission still
+  charges the episode. Refinery deployment is untouched (the bound only gates
+  `WantedLinkBuilding`).
+- `CrawlFrontierAnchor` (interface default null): the planner's own building cell nearest the
+  aim. The queue's BaseCrawl `findPos` centres its annulus on it instead of `baseCenter`
+  (Sol's trace: frontier-nearest-target placement, not the 50-cell yard annulus). Legacy
+  behaviour kept when no anchor publishes.
+- Provenance: ADMITTED / REFUSED debug+BotDebug lines carry target, aim, distSq,
+  paid/allowance counters and the refusal reason (logged once per reason change, not per
+  re-plan).
+
+Tests (`OpenRA.Mods.Cameo.Test/ExpansionPlannerBotModuleTest.cs`, 6 new):
+deficit admits over the allowance; serial admit-progress-rearm; nonadvancing route parks +
+paid-count bound refuses even with progress; changed target opens a fresh episode; missing
+evidence refuses; frontier anchor is the argmin cell.
+
+Validation: `dotnet test OpenRA.Mods.Cameo.Test -c Debug` - 1687 passed, 0 failed
+(34/34 ExpansionPlanner). Release build clean. Boot-gate PASS - main menu reached, no new
+exception-*.log. TF-2 (unit-spend reservation) remains a separate increment per the board.

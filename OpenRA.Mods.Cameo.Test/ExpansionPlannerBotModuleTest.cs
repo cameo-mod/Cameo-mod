@@ -361,5 +361,129 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(scores[1].Index, Is.EqualTo(3));
 			Assert.That(scores[2].Index, Is.EqualTo(7));
 		}
+
+		// TF-1 (FINDINGS_2026-10-11_turtle_regression increment 1): the optional crawl-link episode —
+		// the bound spends only PAID link admissions the queue reports, the route lives only while the
+		// frontier keeps closing on the aim, and a changed target opens a fresh episode.
+
+		static ExpansionPlannerBotModule.CrawlLinkAllowance Episode(CPos target, CPos aim, int distSq, int maxNonprogress = 4)
+		{
+			var ep = new ExpansionPlannerBotModule.CrawlLinkAllowance();
+			ep.ForTarget(target);
+			ep.NoteDistance(distSq, aim, maxNonprogress);
+			return ep;
+		}
+
+		[Test]
+		public void ATruePowerDeficitAdmitsALinkTheAllowanceWouldRefuse()
+		{
+			// Case 1: the episode's cost headroom is spent, but mandatory power skips the allowance.
+			var target = new CPos(40, 10);
+			var aim = new CPos(40, 10);
+			var ep = Episode(target, aim, 400);
+			ep.RecordPaid(600);
+			ep.NoteDistance(300, aim, 4); // the paid link advanced the frontier — the window clears
+			ep.RecordPaid(400);
+			ep.NoteDistance(200, aim, 4); // advanced again: only the paid-cost bound can refuse now
+
+			Assert.That(ep.OptionalLinkAdmissible(200, 1000, 4, 200), Is.False,
+				"paid cost at the allowance refuses the OPTIONAL link");
+			Assert.That(ExpansionPlannerBotModule.OptionalLinkAdmitted(false, false), Is.False);
+			Assert.That(ExpansionPlannerBotModule.OptionalLinkAdmitted(true, false), Is.True,
+				"a real power deficit admits anyway — mandatory power never consults the allowance");
+		}
+
+		[Test]
+		public void AnAdvancingAffordableLinkIsAdmittedSerially()
+		{
+			// Case 2: supply flows one outstanding link at a time, each progress step re-arms it.
+			var aim = new CPos(40, 10);
+			var ep = Episode(new CPos(40, 10), aim, 400);
+
+			Assert.That(ep.OptionalLinkAdmissible(500, 6000, 4, 400), Is.True,
+				"a measured frontier and headroom admit the first link");
+			ep.RecordPaid(500);
+			Assert.That(ep.OptionalLinkAdmissible(500, 6000, 4, 400), Is.False,
+				"the outstanding paid link must advance before the next is supplied");
+
+			ep.NoteDistance(300, aim, 4); // the link landed forward — progress
+			Assert.That(ep.AwaitingProgress, Is.EqualTo(0));
+			Assert.That(ep.OptionalLinkAdmissible(500, 6000, 4, 300), Is.True,
+				"progress re-arms the supply for the same episode");
+		}
+
+		[Test]
+		public void ANonadvancingRouteParksAndThePaidCountBoundRefuses()
+		{
+			// Case 3: a paid link that never advances the frontier counts stalled re-plans to the park.
+			var aim = new CPos(40, 10);
+			var ep = Episode(new CPos(40, 10), aim, 400);
+			ep.RecordPaid(500);
+			for (var i = 0; i < 4; i++)
+				ep.NoteDistance(400, aim, 4);
+			Assert.That(ep.Parked, Is.True, "four measured re-plans without progress park the route");
+			Assert.That(ep.OptionalLinkAdmissible(500, 6000, 4, 400), Is.False);
+
+			// The paid-count bound: progressing links still exhaust the episode's allowance.
+			var ep2 = Episode(new CPos(40, 10), aim, 400);
+			for (var i = 0; i < 4; i++)
+			{
+				Assert.That(ep2.OptionalLinkAdmissible(500, 6000, 4, 400 - 100 * i), Is.True);
+				ep2.RecordPaid(500);
+				ep2.NoteDistance(300 - 100 * i, aim, 4); // each link advances — progress, not stalls
+			}
+
+			Assert.That(ep2.PaidCount, Is.EqualTo(4));
+			Assert.That(ep2.Parked, Is.False);
+			Assert.That(ep2.OptionalLinkAdmissible(500, 6000, 4, 100), Is.False,
+				"the fourth paid link spent the count allowance even with steady progress");
+		}
+
+		[Test]
+		public void AChangedTargetOpensAFreshEpisode()
+		{
+			// Case 4: the parked route retires — a new target field gets a clean ledger.
+			var aim = new CPos(40, 10);
+			var ep = Episode(new CPos(40, 10), aim, 400);
+			ep.RecordPaid(500);
+			for (var i = 0; i < 4; i++)
+				ep.NoteDistance(400, aim, 4);
+			Assert.That(ep.Parked, Is.True);
+
+			Assert.That(ep.ForTarget(new CPos(10, 40)), Is.True, "a different field resets the episode");
+			Assert.That(ep.Parked, Is.False);
+			Assert.That(ep.PaidCount, Is.EqualTo(0));
+			Assert.That(ep.ForTarget(new CPos(10, 40)), Is.False, "the same target keeps the episode");
+
+			ep.NoteDistance(500, new CPos(10, 40), 4);
+			Assert.That(ep.OptionalLinkAdmissible(500, 6000, 4, 500), Is.True,
+				"the new episode supplies once its own frontier is measured");
+		}
+
+		[Test]
+		public void MissingProgressEvidenceRefusesAnOptionalLink()
+		{
+			// Case 5: no measured frontier distance — the want may not be supplied at all.
+			var ep = new ExpansionPlannerBotModule.CrawlLinkAllowance();
+			ep.ForTarget(new CPos(40, 10));
+			Assert.That(ep.OptionalLinkAdmissible(500, 6000, 4, -1), Is.False,
+				"an unmeasurable frontier is missing evidence, not a free pass");
+
+			ep.NoteDistance(-1, null, 4); // a replan that could not measure counts nothing
+			Assert.That(ep.NonprogressReplans, Is.EqualTo(0));
+			Assert.That(ep.OptionalLinkAdmissible(500, 6000, 4, -1), Is.False);
+		}
+
+		[Test]
+		public void TheFrontierAnchorIsTheBuildingCellNearestTheAim()
+		{
+			var aim = new CPos(40, 10);
+			var frontier = new List<CPos> { new CPos(10, 10), new CPos(30, 12), new CPos(20, 30) };
+			Assert.That(ExpansionPlannerBotModule.FrontierAnchor(frontier, aim), Is.EqualTo(new CPos(30, 12)),
+				"the bounded search centres on the frontier cell nearest the aim, not the yard");
+
+			Assert.That(ExpansionPlannerBotModule.FrontierAnchor(frontier, null), Is.Null);
+			Assert.That(ExpansionPlannerBotModule.FrontierAnchor(new List<CPos>(), aim), Is.Null);
+		}
 	}
 }

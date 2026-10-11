@@ -50,6 +50,22 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			"False = telemetry only (EX-0).")]
 		public readonly bool DriveBaseCrawl = false;
 
+		[Desc("TF-1 (FINDINGS_2026-10-11_turtle_regression increment 1): bound OPTIONAL crawl-link supply to a",
+			"per-target allowance that only paid link admissions spend, gated on deterministic frontier progress",
+			"toward the aim — a stalled route parks until the target moves. Mandatory power and refinery",
+			"deployment never consult it. False = the traced unbounded supply (default off).")]
+		public readonly bool BoundCrawlLinkSupply = false;
+
+		[Desc("TF-1: paid cost an optional-link episode may supply before the route parks. 0 = no cost bound.")]
+		public readonly int OptionalLinkCostAllowance = 6000;
+
+		[Desc("TF-1: paid links an optional-link episode may supply before the route parks. 0 = no count bound.")]
+		public readonly int OptionalLinkCountAllowance = 4;
+
+		[Desc("TF-1: re-plans an outstanding paid link may go without advancing the frontier before the route",
+			"parks. At ReplanTicks=250, 6 re-plans is ~1500 ticks — a slow build's produce-and-place window.")]
+		public readonly int OptionalLinkNonprogressReplans = 6;
+
 		[Desc("EX-2: while the target field is in reach and unclaimed, ask the base builder for a refinery there, beyond",
 			"its fixed optimum (every field in reach gets one). Needs DriveBaseCrawl, which publishes the target.")]
 		public readonly bool DriveRefineries = false;
@@ -262,6 +278,97 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			}
 		}
 
+		/// <summary>
+		/// TF-1 (FINDINGS_2026-10-11_turtle_regression increment 1): the optional crawl-link episode
+		/// ledger. Episodes key on the target field's centre; the bound spends only PAID link
+		/// admissions the queue reports back, and the route lives only while the frontier keeps
+		/// closing on the aim — `maxNonprogress` measured re-plans without progress park it until
+		/// the target moves. World-free: distances and aims are supplied, so the whole lifecycle —
+		/// episode, progress, park, reset — is directly testable.
+		/// </summary>
+		public sealed class CrawlLinkAllowance
+		{
+			public CPos? Target { get; private set; }
+			public int PaidCost { get; private set; }
+			public int PaidCount { get; private set; }
+			public int AwaitingProgress { get; private set; }
+			public int NonprogressReplans { get; private set; }
+			public bool Parked { get; private set; }
+			public int BestDistanceSq { get; private set; } = -1;
+			public CPos? LastAim { get; private set; }
+
+			/// <summary>
+			/// A changed target opens a fresh episode: the whole ledger resets. A want that blinks
+			/// off and back on under the SAME target must not re-open the allowance, so callers key
+			/// on the field's centre and never pass null mid-route. Returns whether a new episode
+			/// started — the caller logs the reset once.
+			/// </summary>
+			public bool ForTarget(CPos target)
+			{
+				if (Target == target)
+					return false;
+
+				Target = target;
+				PaidCost = 0;
+				PaidCount = 0;
+				AwaitingProgress = 0;
+				NonprogressReplans = 0;
+				Parked = false;
+				BestDistanceSq = -1;
+				LastAim = null;
+				return true;
+			}
+
+			/// <summary>
+			/// The per-replan frontier→aim measure. A moved aim re-baselines without counting; a
+			/// strictly smaller distance is progress (clears the outstanding wait and the stall
+			/// count); otherwise an outstanding paid link counts a stalled re-plan and
+			/// `maxNonprogress` of them park the route. `distanceSq` &lt; 0 means the frontier could
+			/// not be measured — nothing counts.
+			/// </summary>
+			public void NoteDistance(int distanceSq, CPos? aim, int maxNonprogress)
+			{
+				if (distanceSq < 0 || Parked)
+					return;
+
+				if (LastAim != aim)
+				{
+					LastAim = aim;
+					BestDistanceSq = distanceSq;
+					return;
+				}
+
+				if (distanceSq < BestDistanceSq)
+				{
+					BestDistanceSq = distanceSq;
+					AwaitingProgress = 0;
+					NonprogressReplans = 0;
+					return;
+				}
+
+				if (AwaitingProgress > 0 && ++NonprogressReplans >= maxNonprogress)
+					Parked = true;
+			}
+
+			/// <summary>
+			/// An optional link is supplied only with progress evidence (a measured distance), one
+			/// outstanding unadvanced link at a time, headroom under the paid bounds, and a live
+			/// route. `maxCost`/`maxCount` of 0 leave that bound uncapped.
+			/// </summary>
+			public bool OptionalLinkAdmissible(int cost, int maxCost, int maxCount, int distanceSq) =>
+				!Parked && distanceSq >= 0 && AwaitingProgress == 0
+				&& (maxCost <= 0 || PaidCost + cost <= maxCost)
+				&& (maxCount <= 0 || PaidCount < maxCount);
+
+			/// <summary>The queue's paid-admission signal: charges the episode and arms the progress window.</summary>
+			public void RecordPaid(int cost)
+			{
+				PaidCost += cost;
+				PaidCount++;
+				AwaitingProgress++;
+			}
+		}
+
 		readonly World world;
 		readonly OpenRA.Player player;
 		readonly Dictionary<int, int> initialCells = new();
@@ -327,6 +434,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		// produced while the target field is out of reach, and the aim refined to the field's resource edge.
 		string wantedLinkBuilding;
 		CPos? crawlTargetEdge;
+
+		// TF-1 (bounded optional supply): the episode ledger, the frontier anchor the queue searches around,
+		// and the last refusal reason — logged once per change, not per re-plan.
+		readonly CrawlLinkAllowance crawlAllowance = new();
+		CPos? crawlFrontierAnchor;
+		string lastCrawlRefusal;
 
 		// REF-1 B2: the cheapest buildable provider of a due MCV's missing prerequisite (td_gdi: the repair
 		// facility). REF-1 B3: the last refinery estimate seen, kept so a transiently unbuildable refinery no
@@ -658,6 +771,18 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		CPos? IBotExpansionTargetProvider.CrawlTargetEdge =>
 			LawActive && Info.DriveBaseCrawl ? crawlTargetEdge : null;
+
+		// TF-1: the frontier anchor a bounded placement searches around (its own building cell nearest
+		// the aim) and the queue's paid-admission signal that charges the episode — both ride the
+		// interface defaults (null / no-op) under classic and the switch-off path.
+		CPos? IBotExpansionTargetProvider.CrawlFrontierAnchor =>
+			LawActive && Info.DriveBaseCrawl && Info.BoundCrawlLinkSupply ? crawlFrontierAnchor : null;
+
+		void IBotExpansionTargetProvider.CrawlLinkPaid(int cost)
+		{
+			if (LawActive && Info.DriveBaseCrawl && Info.BoundCrawlLinkSupply)
+				crawlAllowance.RecordPaid(cost);
+		}
 
 		string IBotExpansionTargetProvider.WantedMcvPrerequisite =>
 			LawActive && Info.DriveMcvRequests ? wantedMcvPrerequisite : null;
@@ -2027,11 +2152,97 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		{
 			wantedLinkBuilding = null;
 			crawlTargetEdge = null;
+			crawlFrontierAnchor = null;
 			if (!LinkBuildingWanted(Info.DriveBaseCrawl, Target?.Hops, claimableAnchorsInReach, link.Info != null))
+			{
+				// TF-1: the ledger survives a want that blinks off — only a different target field
+				// opens a fresh episode, so an off/on flap can never re-open the allowance.
 				return;
+			}
 
-			wantedLinkBuilding = link.Info.Name;
 			crawlTargetEdge = LinkTargetEdge(fields, Target.Value, buildingTiles);
+			if (!Info.BoundCrawlLinkSupply)
+			{
+				// REF-1 B1 legacy path: the want rides unbounded (switch-off keeps the traced behaviour).
+				wantedLinkBuilding = link.Info.Name;
+				return;
+			}
+
+			// TF-1: the episode keys on the target field's centre; the frontier→aim distance is the
+			// route-progress measure (the same argmin LinkTargetEdge uses, summed over building tiles).
+			crawlAllowance.ForTarget(Target.Value.Center);
+			var distanceSq = crawlTargetEdge.HasValue && buildingTiles.Count > 0
+				? buildingTiles.Min(b => (b - crawlTargetEdge.Value).LengthSquared) : -1;
+			crawlAllowance.NoteDistance(distanceSq, crawlTargetEdge, Info.OptionalLinkNonprogressReplans);
+
+			// Mandatory power never consults the allowance: a real deficit admits the (power-first)
+			// link outright; its paid admission still charges the episode.
+			var mandatoryPower = player.PlayerActor.TraitOrDefault<PowerManager>()?.ExcessPower < 0;
+			var admissible = crawlAllowance.OptionalLinkAdmissible(link.Cost,
+				Info.OptionalLinkCostAllowance, Info.OptionalLinkCountAllowance, distanceSq);
+			if (!OptionalLinkAdmitted(mandatoryPower, admissible))
+			{
+				var reason = crawlAllowance.Parked ? "route parked"
+					: distanceSq < 0 ? "no frontier evidence"
+					: crawlAllowance.AwaitingProgress > 0 ? "awaiting frontier progress"
+					: "allowance spent";
+				if (lastCrawlRefusal != reason)
+				{
+					lastCrawlRefusal = reason;
+					var refusal = string.Format(
+						"AI ({0}): TF-1 crawl link {1} REFUSED ({2}) target {3} aim {4} distSq {5} paid {6}/{7} count {8}/{9} stall {10} at tick {11}",
+						player.ClientIndex, link.Info.Name, reason, Target.Value.Center, crawlTargetEdge, distanceSq,
+						crawlAllowance.PaidCost, Info.OptionalLinkCostAllowance, crawlAllowance.PaidCount,
+						Info.OptionalLinkCountAllowance, crawlAllowance.NonprogressReplans, world.WorldTick);
+					Log.Write("debug", refusal);
+					AIUtils.BotDebug(refusal);
+				}
+
+				return;
+			}
+
+			lastCrawlRefusal = null;
+			wantedLinkBuilding = link.Info.Name;
+			crawlFrontierAnchor = FrontierAnchor(buildingTiles, crawlTargetEdge);
+			var admitted = string.Format(
+				"AI ({0}): TF-1 crawl link {1} ADMITTED{2} target {3} aim {4} distSq {5} paid {6}/{7} count {8}/{9} at tick {10}",
+				player.ClientIndex, link.Info.Name, mandatoryPower ? " (mandatory power)" : "",
+				Target.Value.Center, crawlTargetEdge, distanceSq, crawlAllowance.PaidCost,
+				Info.OptionalLinkCostAllowance, crawlAllowance.PaidCount, Info.OptionalLinkCountAllowance, world.WorldTick);
+			Log.Write("debug", admitted);
+			AIUtils.BotDebug(admitted);
+		}
+
+		/// <summary>
+		/// TF-1: the bound publishes the want when mandatory power (a real deficit) or the episode
+		/// admits it — the only two reasons an optional link may be supplied. Pure, for the tests.
+		/// </summary>
+		public static bool OptionalLinkAdmitted(bool mandatoryPower, bool admissible) => mandatoryPower || admissible;
+
+		/// <summary>
+		/// TF-1: the frontier anchor — our own building cell nearest the published aim. A bounded crawl
+		/// placement searches its annulus around this cell instead of the yard centre, so an admitted
+		/// link must land forward of the frontier. Pure (argmin, ties keep enumeration order), for
+		/// the tests.
+		/// </summary>
+		internal static CPos? FrontierAnchor(IReadOnlyList<CPos> buildingTiles, CPos? aim)
+		{
+			if (!aim.HasValue || buildingTiles == null || buildingTiles.Count == 0)
+				return null;
+
+			var best = buildingTiles[0];
+			var bestSq = (best - aim.Value).LengthSquared;
+			for (var i = 1; i < buildingTiles.Count; i++)
+			{
+				var sq = (buildingTiles[i] - aim.Value).LengthSquared;
+				if (sq >= bestSq)
+					continue;
+
+				best = buildingTiles[i];
+				bestSq = sq;
+			}
+
+			return best;
 		}
 
 		/// <summary>
