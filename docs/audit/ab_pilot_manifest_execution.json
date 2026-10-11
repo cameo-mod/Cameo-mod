@@ -49,7 +49,7 @@
   "treatment_ai_payload_sha256": "acdfd3a3e2c7d405a776703593f1d52c5f357b423e75ffb224392159c009c725",
   "tool_sha256": {
     "driver_analyzer": "bb77a8e224a372b8e6b67d4b6ccfa97f56605b7a380802896c9677e8755df373",
-    "campaign_runner": "fdd7a1fc9b28a0aac9046337388b8bd45cb5405b3bc8b3e1ada1721c06023cab",
+    "campaign_runner": "8cf30dd7e733da69463afe52e2c8e7be342ed7e8d97ae86437cf06953ae1c0aa",
     "batch_runner": "072225d79e70011545bb43b9228a7c1f2686c033c04c4b3fa02dd92edcf6a6ce",
     "switch_applier": "5376258709f2ff6512e402abeaf09e164abe483142980830bc72269af047f97e"
   },
@@ -259,8 +259,8 @@
       ]
     }
   ],
-  "execution_approved": true,
-  "notes": "execution manifest; approved by maintainer 2026-10-11 (lead order: launch BU pilot)",
+  "execution_approved": false,
+  "notes": "REVOKED 2026-10-11: pinned engine 6da7fce14d is superseded by the sprite-load-wave merge 4f69df005f (ruling 04:50Z #2) and every attempted cell ran brainless seats (overlay mod registration failure). A new manifest must be regenerated on the fixed runner + new engine pin and re-approved before any outcome cell.",
   "a5_parity_receipt_path": "results/campaign-a5-fixed-tick-parity-20261010-attempt2/A5_parity_gate_receipt.json",
   "a5_parity_receipt_sha256": "6f4f827637693074331769bcde9d8c138a8554140fb0149118881c6d79064707"
 }
