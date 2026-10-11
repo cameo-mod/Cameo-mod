@@ -86,3 +86,13 @@ Root cause review showed the runner/adjudicator only checked that each row's *de
 3. New test `test_adjudicator_rejects_allzero_economy_degenerate_cell`: all-zero-timeline cap cell → `DEGENERATE_NO_ECONOMY`; one non-flat seat clears the sentinel (no false positive on partial activity).
 
 Focused tests 20/20 PASS, `py_compile` clean. Still open on `codex/ab-campaign` (reported to DevOps, not yet landed): full-tree overlay materialization, transient-PID hardening (`a12ff4aa4`), RAM floor correction (15.5 GiB → ruling's headless-peak+3 GiB ≈ 8.24 GiB single-game), stale execution manifest (old engine `6da7fce`, `execution_approved: True`) still able to drive a run — revoke or gate it before any launch.
+
+## 2026-10-11 — overlay fix + RAM ruling + manifest revocation landed on tooling-manager
+
+Follow-up commits on `codex/ab-campaign-tooling-manager` (all pushed; DevOps folds into `codex/ab-campaign`):
+
+- `01b15da12` — **launch-blocker fix**: `run_one` no longer builds a thin `Overlay/mods/cameo`. It materializes a complete per-cell mod tree: `materialize_dual_arm_ai` writes `FullMods/mods/cameo/ai/` first, then `link_mod_tree` clones every other `mods/cameo` entry via **hardlinks** (real files, no reparse points — the host's untrusted-mount-point rule does not apply; byte-copy fallback across volumes). `Engine.ModSearchPaths` puts `FullMods/mods` first. Verified offline: `mod.yaml` + `ContentPacks/Outpost2/content.yaml` + `hard_control`/`hard_treatment` all resolve; 33,472 entries linked.
+- `ddd16354d` — **04:50Z RAM ruling implemented**: `RAM_FLOOR_BYTES = MEASURED_HEADLESS_PEAK (5.24 GiB) + 3 GiB ≈ 8.24 GiB`; second small game needs ≥14 GiB (`PARALLEL_RAM_FLOOR_BYTES`); max parallel small games 3→2; 3v3/4v4 exclusive; 10.5 GiB cap and 3/4 GiB runtime floors unchanged. `FREE_RAM_FLOOR` in the runner references `pilot.RAM_FLOOR_BYTES` (single source).
+- `c67e3ae30` — **stale execution manifest revoked**: `ab_pilot_manifest_execution.json` still carried `execution_approved: true` on engine `6da7fce14d`; set false with a revocation note. The same commit absorbed a pending `campaign_runner` tool-hash refresh — tool SHAs must be regenerated on `codex/ab-campaign` after consolidation anyway.
+
+Remaining handoff chain (unchanged): DevOps merges these into `codex/ab-campaign`, regenerates manifest/tool SHAs, reruns fixed-tick A5 on `e49acf41` with engine `4f69df005f`, closes analyzer fixtures + serial map/overlay acceptance, then gets explicit re-approval before outcome cells. No OpenRA or armed launchers remain from this lane.
