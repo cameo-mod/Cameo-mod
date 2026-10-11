@@ -49,8 +49,8 @@
   "baseline_ai_payload_sha256": "932e2e5c919de6f5b493e1722e6e66e39a3a5f1577b29aa58a571492b7de9d69",
   "treatment_ai_payload_sha256": "acdfd3a3e2c7d405a776703593f1d52c5f357b423e75ffb224392159c009c725",
   "tool_sha256": {
-    "driver_analyzer": "1daef080aebca596259ccdaa998cde6ad60e17e574d3168f8ff1db31239a78c7",
-    "campaign_runner": "66368e1aa23d4cb2a1d7ea1a09a53949804f74a997560661689231577470ef1a",
+    "driver_analyzer": "2b740d211637119460f835128f15abcb3c53ce0a32f8b17bceeb340c2f8f1fc4",
+    "campaign_runner": "2fd50b0408debc73e8cc2ba3e3f6b3cf49021d0d05402866ba477652127a6c96",
     "batch_runner": "e9497b51574a7f907aa19b0c1742b68db5b96904f43ab65a5bd39ba7ce8a1964",
     "switch_applier": "5376258709f2ff6512e402abeaf09e164abe483142980830bc72269af047f97e"
   },
@@ -261,5 +261,6 @@
     }
   ],
   "execution_approved": false,
-  "notes": "candidate dry-run manifest; maintainer flips execution_approved at sign-off after the open-item proposal is ruled on"
+  "notes": "candidate dry-run manifest; maintainer flips execution_approved at sign-off after the open-item proposal is ruled on",
+  "a5_parity_receipt_path": "C:/cameo-wt/ab-campaign-tooling/results/campaign-a5-fixed-tick-parity-20261010-attempt2/A5_memory_probe_receipt.json"
 }

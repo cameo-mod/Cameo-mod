@@ -6,6 +6,15 @@ from unittest.mock import patch
 
 
 class CampaignRunnerTests(unittest.TestCase):
+	def test_engine_version_accepts_ascii_utf8_bom_and_utf16_bom(self):
+		with tempfile.TemporaryDirectory() as temp:
+			path = pathlib.Path(temp) / "VERSION"
+			for payload in (b"git-6da7fce14da541180c6baddd6925118fbef65b94\n",
+							"\ufeff6da7fce14da541180c6baddd6925118fbef65b94\n".encode("utf-8"),
+							"git-6da7fce14da541180c6baddd6925118fbef65b94\n".encode("utf-16")):
+				path.write_bytes(payload)
+				self.assertEqual("6da7fce14da541180c6baddd6925118fbef65b94", runner.pilot.read_engine_version(path))
+
 	def test_claim_once_and_orphan_is_incomplete(self):
 		with tempfile.TemporaryDirectory() as temp:
 			q = runner.ResumeQueue(pathlib.Path(temp) / "queue.sqlite", "a" * 64)
