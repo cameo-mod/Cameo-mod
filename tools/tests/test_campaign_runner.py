@@ -1,4 +1,4 @@
-import json, pathlib, sys, tempfile, unittest
+import json, os, pathlib, sys, tempfile, unittest
 ROOT=pathlib.Path(__file__).resolve().parents[2]
 sys.path.insert(0,str(ROOT/"tools"/"ai"))
 import campaign_runner as runner
@@ -6,6 +6,27 @@ from unittest.mock import patch
 
 
 class CampaignRunnerTests(unittest.TestCase):
+	def test_link_mod_tree_clones_everything_except_skipped_top_level(self):
+		# The thin-overlay defect dropped ContentPacks; the clone must carry every
+		# entry except the caller-skipped top dirs (real files, no reparse points).
+		with tempfile.TemporaryDirectory() as temp:
+			src = pathlib.Path(temp) / "src"
+			(src / "ai").mkdir(parents=True)
+			(src / "ContentPacks" / "Outpost2").mkdir(parents=True)
+			(src / "mod.yaml").write_text("id: cameo\n", encoding="utf-8")
+			(src / "ai" / "ai.yaml").write_text("Player:\n", encoding="utf-8")
+			(src / "ContentPacks" / "Outpost2" / "content.yaml").write_text("Include: x\n", encoding="utf-8")
+			dst = pathlib.Path(temp) / "dst" / "cameo"
+			runner.link_mod_tree(src, dst, skip_top=("ai",))
+			self.assertTrue((dst / "mod.yaml").is_file())
+			self.assertTrue((dst / "ContentPacks" / "Outpost2" / "content.yaml").is_file())
+			self.assertFalse((dst / "ai").exists())
+			# identical content regardless of link-vs-copy transport
+			self.assertEqual("id: cameo\n", (dst / "mod.yaml").read_text(encoding="utf-8"))
+			# destination must already exist-free or be a fresh dir; cloning into
+			# an existing file set never silently merges
+			self.assertEqual({"mod.yaml", "ContentPacks"}, {p.name for p in dst.iterdir()})
+
 	def test_campaign_maps_use_declared_support_mapfolder(self):
 		support = pathlib.Path("run") / "Support"
 		maps = runner.campaign_map_directory(support)
