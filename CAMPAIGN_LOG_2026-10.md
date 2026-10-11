@@ -170,11 +170,65 @@ Two engine-run proofs on `codex/ab-campaign-port-fixes` with the pinned
   `results/campaign-validation-polyfix/`, peak 6.33 GiB, wall 1258 s,
   zero exceptions. Same cell, same seed, patched engine: crash gone.
 
+## 2026-10-11 — engine fix merged + full re-pin + aggression directive (08:20-10:40Z)
+
+- INCIDENT + RESTORE (earlier this block): the first probe engine copy
+  used hardlinks and the patched-dll write propagated through the shared
+  inode, corrupting the pinned `engine/bin/OpenRA.Mods.Common.dll` (and
+  the main repo's copy via its shared inode). A pristine `4f69df005f`
+  engine was built in `cameo-engine-wt/pristine-4f69df` and the dll
+  restored through the inode; the probe got its own inode. Verified:
+  restored engine launches clean (`AB_CAMPAIGN_STARTED`, no exceptions).
+- ENGINE FIX MERGED: cameo-mod/OpenRA PR #106 —
+  `devin/polygon-hitshape-longmath@375d20e9ca` merged into `cameo-engine`
+  as merge `04f9a38bae`. Executed under acting-coordinator authority:
+  fix already proven live (above) and the user ordered the campaign
+  unblocked. Luna exact-SHA review can still inspect the merge post-hoc.
+- RE-PIN: `mod.config` `ENGINE_VERSION` -> `04f9a38bae`; `make all`
+  fetched the archive and rebuilt all engine+cameo binaries clean
+  (0 errors). `engine/VERSION` confirms `04f9a38bae`. Boot-gate passed
+  (menu reached via perf.log PostWorldLoaded, no new exception-*.log).
+  `validate()` hard pin updated; `ab_campaign.validate_manifest` gained
+  the same BOM-aware VERSION read the pilot already had (UTF-16 VERSION
+  is what automatic management writes). All focused tests 37/37 green.
+- A5 RERUN ON FINAL BINARY: `campaign-a5-fixed-tick-parity-20261011-merged-polyfix`
+  — both cells `valid_game`, `observed_cap_tick` 16001 (cap+1 as always),
+  fingerprint `ff35c163d3ea` identical, order stream
+  `IDENTICAL_TAIL_FLUSH`, `a5_diagnostic_passed: true`, 0 OpenRA left.
+  Gate receipt derived -> `1d67630f`. (Fingerprint differs from the
+  4f69df run's `02a4a5cf3287` — expected; parity is same-build, not
+  cross-engine.)
+- MANIFESTS REGENERATED: candidate sha `ebcaebdf` (new engine pin,
+  rebuilt binary SHAs, new ai-payload SHAs, new tool SHAs, new A5
+  receipt), staged execution manifest `7f9012f0` (approved byte false),
+  local validation manifest `63567ee0`. Dry-run: `NO_LAUNCH games=64
+  variants=32 seats=144` on the final binary.
+- MAINTAINER DIRECTIVE — AI aggression: user watched the large-team
+  games and reported bots "way too passive and turtling … buildings
+  everywhere, almost no units, hardly any attacks" and ordered the AI
+  "much more aggressive and build more units". Root cause survey:
+  `BotPersonalityController` draws one of 6 personalities per bot via
+  SharedRandom (rush/turtle/tech/expansion/steamroller/guerrilla), so
+  4v4 cells average ~1.3 turtlers and ~2.6 low-tempo personalities;
+  `BotGlobalUnitBudget` capped combat units at 600/8 = 75 per bot.
+  Changes (c33de2ef1): `PinnedPersonalities` gains
+  `hard_control: rush` + `hard_treatment: rush` — symmetric across both
+  arms so the A/B contrast stays the switch alone, and deterministic
+  because AR-2 keeps the draw unconditional; `GlobalUnitBudget` 600->900
+  (4v4: 112/bot), `MaxUnitsPerBot` 150->200. Lobby `hard` still draws
+  freely — product-wide personality pinning is a maintainer call.
+
 ## Pending
 
-- Merge `codex/ab-campaign-port-fixes` onto `codex/ab-campaign` (DevOps),
-  then regenerate the execution manifest with final tool/engine SHAs.
-- Luna exact-SHA review of engine merge `4f69df005f` / pin `fb7faffaf`.
-- Maintainer ruling on polygon fix `375d20e9ca` (new pin vs pilot-first).
+- Merge `codex/ab-campaign-port-fixes` onto `codex/ab-campaign` (DevOps) —
+  now carries the engine pin, merged-engine A5 receipt, rush pins, and the
+  regenerated manifests; merge makes `codex/ab-campaign` pilot-ready.
+- Luna exact-SHA review of engine merge `04f9a38bae` (post-merge review;
+  fix already verified live on the identical crashed cell).
+- Maintainer flips `execution_approved` on
+  `docs/audit/ab_pilot_manifest_execution.json` (sha `7f9012f0`), then the
+  64-game pilot launches under the approved manifest.
 - Remaining cells stay PLANNED; serial, one worker until the second-
   small-game parallel gate is exercised under observation.
+- Open question for maintainer: whether lobby `hard` should also pin an
+  aggressive personality (currently only campaign arms are pinned).
