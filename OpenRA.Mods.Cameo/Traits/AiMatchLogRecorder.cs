@@ -27,7 +27,8 @@ namespace OpenRA.Mods.Cameo.Traits
 			"personality-turtle",
 			"personality-tech",
 			"personality-expansion",
-			"personality-steamroller"
+			"personality-steamroller",
+			"personality-guerrilla"
 		};
 
 		public readonly string PersonalityPrefix = "personality-";
@@ -63,6 +64,9 @@ namespace OpenRA.Mods.Cameo.Traits
 		public int PersonalitySwitches => personalitySwitches;
 		public int CompositionSwitches => compositionSwitches;
 		public string CurrentPersonality => activePersonalities.Count > 0 ? activePersonalities[^1] : "";
+		// Final match telemetry records the last observed posture even after the
+		// controller revokes its live condition during disable/defeat cleanup.
+		public string LastObservedPersonality => timeline.Count > 0 ? timeline[^1].Personality : "";
 		public string CurrentComposition => currentComposition;
 
 		public AiMatchLogRecorder(AiMatchLogRecorderInfo info)
@@ -108,7 +112,10 @@ namespace OpenRA.Mods.Cameo.Traits
 			yield return new VariableObserver(PersonalityConditionsChanged, info.PersonalityConditions);
 		}
 
-		void PersonalityConditionsChanged(Actor self, IReadOnlyDictionary<string, int> conditions)
+		void PersonalityConditionsChanged(Actor self, IReadOnlyDictionary<string, int> conditions) =>
+			ObservePersonalityConditions(self.World.WorldTick, conditions);
+
+		internal void ObservePersonalityConditions(int tick, IReadOnlyDictionary<string, int> conditions)
 		{
 			foreach (var condition in info.PersonalityConditions)
 			{
@@ -123,12 +130,12 @@ namespace OpenRA.Mods.Cameo.Traits
 					if (timeline.Count > 0)
 						personalitySwitches++;
 
-					timeline.Add(new AiMatchLogPersonalityTransition(self.World.WorldTick, personality));
+					timeline.Add(new AiMatchLogPersonalityTransition(tick, personality));
 					if (timeline.Count > 64)
 						timeline.RemoveRange(32, timeline.Count - 64);
 
 					activePersonalities.Add(personality);
-					RecordEpisodeBoundary(self.World.WorldTick);
+					RecordEpisodeBoundary(tick);
 				}
 				else if (!enabled && active)
 					activePersonalities.Remove(personality);
