@@ -312,6 +312,18 @@ class CampaignRunnerTests(unittest.TestCase):
 		self.assertTrue(p.killed);self.assertEqual("MEMORY_KILL",result["end_reason"])
 		self.assertEqual(4242,p.pid);self.assertTrue(result["pid_scoped_cleanup"])
 
+	def test_match_game_uid_requires_every_row_to_carry_one_uid(self):
+		row = {"game_uid":"g-1","player":{"home":"M0"}}
+		self.assertEqual("g-1", runner.match_game_uid([dict(row), dict(row)]))
+		# Mixed present/missing: the unmarked row may belong to another launch.
+		self.assertIsNone(runner.match_game_uid([dict(row), {"player":{"home":"M1"}}]))
+		self.assertIsNone(runner.match_game_uid([dict(row), {"game_uid":None}]))
+		self.assertIsNone(runner.match_game_uid([dict(row), {"game_uid":""}]))
+		self.assertIsNone(runner.match_game_uid([dict(row), {"game_uid":123}]))
+		self.assertIsNone(runner.match_game_uid([dict(row), dict(row, game_uid="g-2")]))
+		self.assertIsNone(runner.match_game_uid([]))
+		self.assertIsNone(runner.match_game_uid([{"player":{"home":"M0"}}]))
+
 	def test_windows_orphan_kill_helper_invokes_identity_checked_powershell(self):
 		with tempfile.TemporaryDirectory() as temp:
 			exe = pathlib.Path(temp) / "OpenRA.exe"

@@ -164,7 +164,7 @@ def text_sha(path):
  """sha256 of a TEXT pin with CRLF folded to LF. .gitattributes' `* text=lf` is not a valid
  eol value, so a Windows checkout gets CRLF .py/.json files and a Linux one LF: a byte hash
  pinned on one host never matched the other (2026-10-10). Binary pins (maps, engine) stay sha()."""
- return hashlib.sha256(path.read_bytes().replace(b"\r\n",b"\n")).hexdigest()
+ return hashlib.sha256(path.read_bytes().replace(b"\r\n",b"\n").replace(b"\r",b"\n")).hexdigest()
 def ai_payload_sha(root,switch=None):
  skip,groups,_=increment.load_spec(pathlib.Path(__file__).with_name("increment_switches.yaml"));digest=hashlib.sha256()
  if switch is not None: require(switch in groups,"unknown AI payload switch")

@@ -358,6 +358,21 @@ def atomic_receipt(path: pathlib.Path, receipt: dict):
 		if os.path.exists(temp_name): os.unlink(temp_name)
 
 
+def match_game_uid(match_rows: list) -> str | None:
+	"""Return the game_uid only when EVERY match row carries the same nonempty
+	string uid. A row missing the field (or carrying a non-string/empty value)
+	means the log cannot be attributed to this launch — treating the surviving
+	subset's uid as authoritative would credit rows that may belong to another
+	game — so the whole set is rejected."""
+	if not match_rows:
+		return None
+	uids = {row.get("game_uid") for row in match_rows if isinstance(row, dict)}
+	if len(uids) != 1:
+		return None
+	uid = next(iter(uids))
+	return uid if isinstance(uid, str) and uid else None
+
+
 def validate_receipt(receipt: dict) -> None:
 	"""Validate the producer's semantic invariants; JSON Schema is published alongside."""
 	if not isinstance(receipt, dict) or receipt.get("schema_version") != 1:
@@ -670,8 +685,7 @@ def run_one(manifest: dict, manifest_sha: str, job: dict, *, root: pathlib.Path,
 	match_rows = batch.read_appended_records(match_log, before)
 	# Every match row must carry the same game_uid: mixed or missing uids mean
 	# the match log can't be attributed to this launch — cap evidence is moot.
-	game_uids = {r.get("game_uid") for r in match_rows if isinstance(r.get("game_uid"), str)}
-	game_uid = next(iter(game_uids)) if len(game_uids) == 1 else None
+	game_uid = match_game_uid(match_rows)
 	# The cap marker is emitted by the batch driver (verified in driver.log and
 	# lua.log on preserved attempts); check both plus server.log so a stream move
 	# can never silently turn a capped cell into a stall.
