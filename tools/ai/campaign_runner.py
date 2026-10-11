@@ -25,6 +25,7 @@ import zipfile
 from contextlib import contextmanager
 
 import ab_campaign_pilot as pilot
+import campaign_overlay
 import run_ai_match_batch as batch
 
 CAP_TICK = 45000
@@ -445,15 +446,15 @@ def run_one(manifest: dict, manifest_sha: str, job: dict, *, root: pathlib.Path,
 	logs = game_support / "Logs"; logs.mkdir()
 	maps = game_support / "maps" / "cameo" / "{DEV_VERSION}"; maps.mkdir(parents=True)
 	overlay = game_root / "Overlay"; pilot.materialize_dual_arm_ai(root, overlay, job["switch"], manifest.get("ratchet_accepted_switches", []))
-	shutil.copyfile(root / "mods" / "cameo" / "mod.yaml", overlay / "mods" / "cameo" / "mod.yaml")
+	campaign_overlay.materialize_manifest(root, overlay, engine_root)
 	variant = maps / ("campaign_" + re.sub(r"[^A-Za-z0-9_.-]", "_", job["cell_id"]))
 	proof = pilot.prove_generated_map(job, root, variant)
 	map_yaml = variant / "map.yaml"; map_yaml_sha = sha(map_yaml)
 	match_log = logs / "cameo-ai-matches.jsonl"; before = match_log.stat().st_size if match_log.exists() else 0
 	server_log = logs / "server.log"; driver_log = game_root / "driver.log"
 	if not executable.is_file(): raise ValueError("pinned OpenRA executable missing")
-	args = [str(executable), "Game.Mod=cameo", "Sound.Device=none", "Engine.EngineDir=..",
-		f"Engine.ModSearchPaths={overlay / 'mods'},{root / 'mods'},{engine_root / 'mods'}",
+	args = [str(executable), *campaign_overlay.launch_mod_arguments(root, engine_root, overlay),
+		"Sound.Device=none",
 		f"Engine.SupportDir={game_support}", f"Launch.Map={variant.name}", "Launch.Benchmark=ai-duel-batch-",
 		"Graphics.VSync=False", "Graphics.Mode=Windowed", "Graphics.WindowedSize=640,480"]
 	env = os.environ.copy(); env["CAMEO_DEV_SEED"] = str(job["seed"])
