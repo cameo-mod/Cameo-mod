@@ -379,7 +379,8 @@ def run_cell(index: int) -> dict:
 	deployment["verified"] = deployment_guard.valid(deployment, ["BotA", "BotB"])
 	if not deployment["verified"] and stop_reason is None: stop_reason = "INVALID_NO_DEPLOY"
 	seed_pin_verified = f"CAMEO DEV SEED pinned - RandomSeed={SEED} (parity harness)" in log_text
-	records_verified = len(match_rows) == 2 and len({r.get("game_uid") for r in match_rows}) == 1 and all((r.get("player") or {}).get("outcome") in ("won", "lost") for r in match_rows)
+	records_verified = (len(match_rows) == 2 and runner.match_game_uid(match_rows) is not None
+		and all((r.get("player") or {}).get("outcome") in ("won", "lost") for r in match_rows))
 	duration_ticks = match_rows[0].get("duration_ticks") if records_verified else None
 	natural_below_cap = type(duration_ticks) is int and duration_ticks < 60000
 	batch_result = summary.get("results", [{}])[0] if summary.get("results") else {}
@@ -394,10 +395,12 @@ def run_cell(index: int) -> dict:
 		["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip(),
 		"baseline_parent": BASELINE, "engine_version": pilot.read_engine_version(ROOT / "engine/VERSION"),
 		"binary_sha256": {str(p.relative_to(ROOT)): file_sha256(p) for p in (
-			ROOT / "engine/bin/OpenRA.exe", ROOT / "engine/bin/OpenRA.Mods.Cameo.dll") if p.is_file()},
+			ROOT / "engine/bin/OpenRA.exe", ROOT / "engine/bin/OpenRA.Game.dll",
+			ROOT / "engine/bin/OpenRA.Mods.Cameo.dll") if p.is_file()},
 		"exit_code": proc.returncode, "stop_reason": stop_reason or "PROCESS_EXIT",
 		"wall_seconds": round(time.monotonic() - start, 2), "peak_private_bytes": peak,
-		"stop_threshold_bytes": PROCESS_STOP, "host_soft_stop_bytes": HOST_SOFT_STOP,
+		"stop_threshold_bytes": runner.PRIVATE_LIMIT,
+		"diagnostic_stop_threshold_bytes": PROCESS_STOP, "host_soft_stop_bytes": HOST_SOFT_STOP,
 		"host_hard_floor_bytes": HOST_HARD_FLOOR, "ceiling_bytes": runner.PRIVATE_LIMIT,
 		"samples": samples, "support": str(support), "driver_stdout": str(stdout_path),
 		"runtime_counter_files": [str(support / f"System.Runtime-{pid}.csv") for pid in counters],
@@ -512,13 +515,28 @@ def main() -> int:
 		order_verdict = "INCOMPLETE_NO_PAIR_OF_REPLAYS"
 	processes_left = subprocess.run(["powershell.exe", "-NoProfile", "-NonInteractive", "-Command",
 		"@(Get-Process OpenRA -ErrorAction SilentlyContinue).Count"], capture_output=True, text=True)
+	orchestration = {pathlib.Path(m.__file__).name: file_sha256(m.__file__)
+		for m in (sys.modules[__name__], runner, pilot, deployment_guard) if getattr(m, "__file__", None)}
+	tool_dir = pathlib.Path(__file__).resolve().parent
+	overlay = tool_dir != (ROOT / "tools" / "ai").resolve()
+	if overlay:
+		for p in sorted(tool_dir.glob("*.py")):
+			orchestration["overlay:" + p.name] = file_sha256(p)
+	for aux in ("run_ai_match_batch.py", "order_stream_diff.py", "apply_increment_switches.py"):
+		aux_path = ROOT / "tools" / "ai" / aux
+		if aux_path.is_file():
+			orchestration["committed:" + aux] = file_sha256(aux_path)
 	receipt = {"purpose": "A5_FIXED_TICK_PARITY_QUALIFICATION_ONLY_NOT_CAMPAIGN_OUTCOME",
-		"cap_tick": CAP_TICK, "map_monitor": map_monitor,
+		"cap_tick": CAP_TICK, "map_monitor": map_monitor, "render_mode": "headless",
 		"baseline_commit": BASELINE, "source_head": subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip(),
 		"binary_sha256": {str(p.relative_to(ROOT)): file_sha256(p) for p in (
-			ROOT / "engine/bin/OpenRA.exe", ROOT / "engine/bin/OpenRA.Mods.Cameo.dll")},
+			ROOT / "engine/bin/OpenRA.exe", ROOT / "engine/bin/OpenRA.Game.dll",
+			ROOT / "engine/bin/OpenRA.Mods.Cameo.dll") if p.is_file()},
 		"dotnet_counters_sha256": file_sha256(COUNTERS_EXE),
 		"engine_version": ENGINE, "seed": SEED, "pair": results,
+		"process_private_cap_bytes": runner.PRIVATE_LIMIT,
+		"host_emergency_floor_bytes": runner.FREE_RAM_HARD_FLOOR,
+		"orchestration_sha256": orchestration,
 		"order_stream_verdict": order_verdict, "system_openra_process_count": processes_left.stdout.strip(),
 		"a5_diagnostic_passed": len(results) == 2 and all(r["valid_game"] for r in results) and
 			results[0].get("fingerprint_id") == results[1].get("fingerprint_id") and order_verdict in ("IDENTICAL", "IDENTICAL_TAIL_FLUSH"),
