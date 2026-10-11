@@ -183,6 +183,23 @@ class OwnedProcessMonitoringTests(unittest.TestCase):
             self.assertTrue(result["child_found"])
             self.assertEqual({1, 2}, {int(r["ProcessId"]) for r in result["rows"]})
 
+    def test_windows_missing_game_child_is_not_accepted_as_discovered(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = pathlib.Path(d) / "engine"
+            (root / "bin").mkdir(parents=True)
+            support = pathlib.Path(d) / "cell/Support"
+            support.mkdir(parents=True)
+            rows = [{"ProcessId": 1, "ParentProcessId": 0, "ExecutablePath": str(root / "bin/OpenRA.exe"),
+                "CommandLine": f"OpenRA.exe Engine.SupportDir={support}"}]
+
+            class Popen:
+                pid = 1
+                def poll(self): return None
+
+            with patch.object(acceptance.os, "name", "nt"), patch.object(acceptance, "process_rows", return_value=rows):
+                result = acceptance.discover_owned_tree(Popen(), root, support)
+            self.assertFalse(result["child_found"])
+
     def test_tree_cleanup_uses_root_pid_and_tree_scope(self):
         with tempfile.TemporaryDirectory() as d:
             root = pathlib.Path(d) / "engine"
