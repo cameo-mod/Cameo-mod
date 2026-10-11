@@ -441,7 +441,8 @@ def run_cell(job: dict, *, root: pathlib.Path, engine: pathlib.Path, overlay: pa
 	direct_game_args = (f"Launch.Map={variant.name}", f"Launch.Benchmark={batch.BENCHMARK_PREFIX}")
 	started = time.monotonic()
 	peak = 0
-	deployment_offset = 0
+	deployment_reader = deployment_guard.MarkerReader()
+	deployment_deadline = deployment_guard.DeploymentDeadline(started, campaign.DEPLOYMENT_WALL_TIMEOUT)
 	deployment = {"verified": False, "check_tick": None, "reported_seat_count": None,
 		"expected_seat_count": None, "seats": {}, "missing": []}
 	peak_private = 0
@@ -497,24 +498,14 @@ def run_cell(job: dict, *, root: pathlib.Path, engine: pathlib.Path, overlay: pa
 			memory_samples.append({"utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
 				"pids": metrics["pids"], "private_bytes": current_private,
 				"working_set_bytes": current_rss, "host_available_bytes": available})
-			# Tick-100 deployment guard: lua.log carries the map monitor's
-			# AB_CAMPAIGN_DEPLOY / DEPLOYMENT_CHECK markers. Preserve the highest
-			# trustworthy observed tick (sol finding 1) and bound the missing-
-			# marker case at DEPLOYMENT_WALL_TIMEOUT seconds of wall time.
-			lua_log = logs / "lua.log"
-			actor_ticks = ()
-			if lua_log.is_file():
-				with lua_log.open("r", encoding="utf-8", errors="replace") as stream:
-					stream.seek(deployment_offset); chunk = stream.read(); deployment_offset = stream.tell()
-				deployment = deployment_guard.merge(deployment, deployment_guard.parse(chunk))
-				actor_ticks = tuple(int(t) for t, _ in campaign.ACTOR_SAMPLE_RE.findall(chunk))
-				if deployment["check_tick"] is not None:
-					deployment["verified"] = deployment_guard.valid(deployment, [s["home"] for s in proof["seats"]])
-					if not deployment["verified"]: end_reason = "INVALID_NO_DEPLOY"
-			if not deployment["verified"]:
-				clock_tick = deployment_guard.highest_world_tick(deployment, logs / "debug.log", extra_ticks=actor_ticks)
-				if (clock_tick is not None and clock_tick >= 100) or time.monotonic() - started >= campaign.DEPLOYMENT_WALL_TIMEOUT:
-					end_reason = "INVALID_NO_DEPLOY"
+			# Lua and debug logs flush independently. Wait a fixed transport grace
+			# for the terminal Lua check, retaining the strict tick-100 rule.
+			chunk = deployment_reader.read(logs / "lua.log")
+			deployment = deployment_guard.merge(deployment, deployment_guard.parse(chunk))
+			actor_ticks = tuple(int(t) for t, _ in campaign.ACTOR_SAMPLE_RE.findall(chunk))
+			clock_tick = deployment_guard.highest_world_tick(deployment, logs / "debug.log", extra_ticks=actor_ticks)
+			if deployment_deadline.should_abort(deployment, [s["home"] for s in proof["seats"]], clock_tick, time.monotonic()):
+				end_reason = "INVALID_NO_DEPLOY"
 			if end_reason == "INVALID_NO_DEPLOY":
 				try:
 					terminate_owned_tree(process, engine, support)
@@ -592,8 +583,9 @@ def run_cell(job: dict, *, root: pathlib.Path, engine: pathlib.Path, overlay: pa
 		if batch.HEADLESS_LOG_MARKER not in (graphics.read_text(errors="replace") if graphics.is_file() else ""):
 			problems.append("engine fell back from the headless platform (see graphics.log)")
 	problems += seat_proof(proof["seats"], records)
-	if not deployment["verified"] and end_reason == "PROCESS_EXIT": end_reason = "INVALID_NO_DEPLOY"
+	deployment = deployment_guard.merge(deployment, deployment_guard.parse(lua_text))
 	deployment["verified"] = deployment_guard.valid(deployment, [s["home"] for s in proof["seats"]])
+	if not deployment["verified"] and end_reason == "PROCESS_EXIT": end_reason = "INVALID_NO_DEPLOY"
 	if not deployment["verified"]: problems.append("INVALID_NO_DEPLOY: per-seat construction yard evidence missing/invalid by tick 100")
 	return {"cell_id": job["cell_id"], "setup": job["setup"], "map": job["map"], "map_sha256": job["map_sha256"],
 		"team_size": job["team_size"], "seed": job["seed"], "game_in_pair": job["game_in_pair"],

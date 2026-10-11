@@ -203,22 +203,18 @@ def run_cell(index: int) -> dict:
 	trace_files = {}
 	trace_errors = {}
 	stop_reason = None
-	deployment_offset = 0
+	deployment_reader = deployment_guard.MarkerReader()
+	deployment_deadline = deployment_guard.DeploymentDeadline(start, runner.DEPLOYMENT_WALL_TIMEOUT)
 	deployment = {"verified": False, "check_tick": None, "reported_seat_count": None,
 		"expected_seat_count": None, "seats": {}, "missing": []}
 	with stdout_path.open("w", encoding="utf-8") as stdout:
 		proc = subprocess.Popen(command, cwd=ROOT, env=env, stdout=stdout, stderr=subprocess.STDOUT)
 		while proc.poll() is None:
 			time.sleep(POLL)
-			lua_log = support / "Logs" / "lua.log"
-			if lua_log.is_file():
-				with lua_log.open("r", encoding="utf-8", errors="replace") as stream:
-					stream.seek(deployment_offset); chunk = stream.read(); deployment_offset = stream.tell()
-				deployment = deployment_guard.merge(deployment, deployment_guard.parse(chunk))
-				if deployment["check_tick"] is not None:
-					deployment["verified"] = deployment_guard.valid(deployment, ["BotA", "BotB"])
-					if not deployment["verified"]: stop_reason = "INVALID_NO_DEPLOY"
-			if not deployment["verified"] and deployment_guard.latest_world_tick(support / "Logs" / "debug.log") is not None and deployment_guard.latest_world_tick(support / "Logs" / "debug.log") >= 100:
+			chunk = deployment_reader.read(support / "Logs" / "lua.log")
+			deployment = deployment_guard.merge(deployment, deployment_guard.parse(chunk))
+			world_tick = deployment_guard.highest_world_tick(deployment, support / "Logs" / "debug.log")
+			if deployment_deadline.should_abort(deployment, ["BotA", "BotB"], world_tick, time.monotonic()):
 				stop_reason = "INVALID_NO_DEPLOY"
 			if stop_reason == "INVALID_NO_DEPLOY":
 				proc.terminate()

@@ -72,14 +72,38 @@ class CampaignRunnerTests(unittest.TestCase):
 			def wait(self): return self.returncode
 		with tempfile.TemporaryDirectory() as temp:
 			root=pathlib.Path(temp); debug=root/"debug.log"; debug.write_text("[WT 100] state\n",encoding="utf-8")
-			proc=Process()
+			proc=Process(); now=[0.0]
 			with patch.object(runner, "private_bytes", return_value=1):
 				result=runner.monitor_process(proc, driver_log=debug, actor_log=root/"server.log", stall_log=debug,
 					required_seats=["Multi0"], deployment_log=root/"lua.log", poll_seconds=0.01,
-					clock=lambda: 10.0, sleep=lambda _: None)
+					clock=lambda: now[0], sleep=lambda _: now.__setitem__(0, now[0] + 1))
 			self.assertEqual("INVALID_NO_DEPLOY", result["end_reason"])
 			self.assertFalse(result["deployment"]["verified"])
 			self.assertEqual(-9, proc.returncode)
+
+	def test_monitor_waits_for_lua_flush_after_debug_reaches_tick_500(self):
+		class Process:
+			pid = 7
+			returncode = None
+			def poll(self): return self.returncode
+			def kill(self): self.returncode = -9
+			def wait(self): return self.returncode
+		with tempfile.TemporaryDirectory() as temp:
+			root=pathlib.Path(temp); debug=root/"debug.log"
+			debug.write_text("[WT 500] state\n", encoding="utf-8")
+			lua=root/"lua.log"; proc=Process(); now=[0.0]
+			def advance(_):
+				now[0] += 1
+				if now[0] == 5:
+					lua.write_text("AB_CAMPAIGN_DEPLOY seat=Multi0 tick=41 type=td_gdi_constructionyard\nAB_CAMPAIGN_DEPLOYMENT_CHECK tick=100 seat_count=1 expected_count=1\n", encoding="utf-8")
+				if now[0] == 6: proc.returncode=0
+			with patch.object(runner, "private_bytes", return_value=1):
+				result=runner.monitor_process(proc, driver_log=debug, actor_log=lua, stall_log=debug,
+					required_seats=["Multi0"], deployment_log=lua, poll_seconds=0.01,
+					clock=lambda: now[0], sleep=advance)
+			self.assertTrue(result["deployment"]["verified"])
+			self.assertNotEqual("INVALID_NO_DEPLOY", result["end_reason"])
+			self.assertEqual(0, proc.returncode)
 
 	def test_monitor_uses_highest_observed_tick_when_stall_clock_missing(self):
 		# Sol finding 1: actor samples prove tick 5000 but debug.log has no [WT N]
@@ -95,11 +119,11 @@ class CampaignRunnerTests(unittest.TestCase):
 			root=pathlib.Path(temp)
 			debug=root/"debug.log"; debug.write_text("startup only\n",encoding="utf-8")
 			actor=root/"actor.log"; actor.write_text("AB_CAMPAIGN_ACTOR_SAMPLE tick=5000 actor_count=42\n",encoding="utf-8")
-			proc=Process()
+			proc=Process(); now=[0.0]
 			with patch.object(runner, "private_bytes", return_value=1):
 				result=runner.monitor_process(proc, driver_log=debug, actor_log=actor, stall_log=debug,
 					required_seats=["Multi0"], deployment_log=root/"lua.log", poll_seconds=0.01,
-					clock=lambda: 10.0, sleep=lambda _: None)
+					clock=lambda: now[0], sleep=lambda _: now.__setitem__(0, now[0] + 1))
 			self.assertEqual("INVALID_NO_DEPLOY", result["end_reason"])
 			self.assertEqual(-9, proc.returncode)
 

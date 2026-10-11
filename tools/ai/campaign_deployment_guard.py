@@ -61,3 +61,47 @@ def highest_world_tick(deployment: dict, stall_log: pathlib.Path | None = None, 
 	if clock_tick is not None:
 		ticks.append(clock_tick)
 	return max(ticks, default=None)
+
+
+# Engine Log.FlushInterval is five seconds. Allow two intervals for transport,
+# never for simulation deployment: valid() still requires every yard by tick 100.
+FLUSH_WAIT_SECONDS = 10.0
+
+
+class MarkerReader:
+	"""Keep split log lines until complete; never interpret a partial terminal check."""
+	def __init__(self):
+		self.offset = 0
+		self.pending = ""
+
+	def read(self, path: pathlib.Path) -> str:
+		if not path.is_file(): return ""
+		with path.open("r", encoding="utf-8", errors="replace") as stream:
+			stream.seek(self.offset)
+			self.pending += stream.read()
+			self.offset = stream.tell()
+		end = self.pending.rfind("\n") + 1
+		complete, self.pending = self.pending[:end], self.pending[end:]
+		return complete
+
+
+class DeploymentDeadline:
+	"""Fixed transport grace after an independent clock crosses tick 100.
+
+	Explicit terminal negative evidence aborts immediately. Missing evidence waits
+	at most two engine flush intervals; observations cannot renew that deadline.
+	The existing startup wall bound also remains absolute.
+	"""
+	def __init__(self, started: float, wall_timeout: float):
+		self.started = started
+		self.wall_timeout = wall_timeout
+		self.tick_100_seen_at = None
+
+	def should_abort(self, evidence: dict, expected_seats: list[str], world_tick: int | None, now: float) -> bool:
+		evidence["verified"] = valid(evidence, expected_seats)
+		if evidence["verified"]: return False
+		if evidence.get("missing") or evidence.get("check_tick") is not None: return True
+		if world_tick is not None and world_tick >= 100 and self.tick_100_seen_at is None:
+			self.tick_100_seen_at = now
+		return (now - self.started >= self.wall_timeout
+			or (self.tick_100_seen_at is not None and now - self.tick_100_seen_at >= FLUSH_WAIT_SECONDS))

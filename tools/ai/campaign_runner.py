@@ -529,7 +529,8 @@ def monitor_process(process, *, driver_log: pathlib.Path, actor_log: pathlib.Pat
 	peak = 0
 	stop_reason = None
 	actor_offset = 0
-	deployment_offset = 0
+	deployment_reader = deployment_guard.MarkerReader()
+	deployment_deadline = deployment_guard.DeploymentDeadline(start, DEPLOYMENT_WALL_TIMEOUT)
 	last_actor = {"world_tick": None, "actor_count": None}
 	deployment = {"verified": False, "check_tick": None, "reported_seat_count": None, "expected_seat_count": None, "seats": {}, "missing": []}
 	while alive():
@@ -551,20 +552,13 @@ def monitor_process(process, *, driver_log: pathlib.Path, actor_log: pathlib.Pat
 				actor_stream.seek(actor_offset); chunk = actor_stream.read(); actor_offset = actor_stream.tell()
 				new_actors = parse_actor_samples(chunk)
 				if new_actors: last_actor = new_actors[-1]
-		if deployment_log is not None and pathlib.Path(deployment_log) != pathlib.Path(actor_log) and deployment_log.exists():
-			with deployment_log.open("r", encoding="utf-8", errors="replace") as stream:
-				stream.seek(deployment_offset); chunk = stream.read(); deployment_offset = stream.tell()
+		if deployment_log is not None:
+			chunk = deployment_reader.read(pathlib.Path(deployment_log))
 			deployment = deployment_guard.merge(deployment, deployment_guard.parse(chunk))
-			if deployment["check_tick"] is not None and required_seats is not None:
-				deployment["verified"] = deployment_guard.valid(deployment, list(required_seats))
-				if not deployment["verified"]: stop_reason = "INVALID_NO_DEPLOY"
-		# Preserve the highest trustworthy observed world tick (actor samples,
-		# deployment marker ticks, [WT N] clock lines) — sol finding 1: a stale
-		# or missing stall_log clock must never mask a known-advanced game.
-		if required_seats is not None and not deployment["verified"]:
+		if required_seats is not None:
 			world_tick_check = deployment_guard.highest_world_tick(deployment, stall_log,
 				extra_ticks=(last_actor["world_tick"],))
-			if (world_tick_check is not None and world_tick_check >= 100) or clock() - start >= DEPLOYMENT_WALL_TIMEOUT:
+			if deployment_deadline.should_abort(deployment, list(required_seats), world_tick_check, clock()):
 				stop_reason = "INVALID_NO_DEPLOY"
 		actor_count = last_actor["actor_count"]
 		world_tick = last_actor["world_tick"]
@@ -582,6 +576,11 @@ def monitor_process(process, *, driver_log: pathlib.Path, actor_log: pathlib.Pat
 		if private >= PRIVATE_LIMIT: stop_reason = "MEMORY_KILL"; break
 		if clock() - last_activity > stall_timeout: stop_reason = "STALL"; break
 		if clock() >= deadline: stop_reason = "WALL_TIMEOUT"; break
+	# A normal process exit may flush the last Lua lines after the final poll.
+	# Never clear a safety stop or rehabilitate a cell killed by the deadline.
+	if deployment_log is not None and not alive():
+		deployment = deployment_guard.merge(deployment, deployment_guard.parse(deployment_reader.read(pathlib.Path(deployment_log))))
+		if required_seats is not None: deployment["verified"] = deployment_guard.valid(deployment, list(required_seats))
 	if required_seats is not None and not deployment["verified"] and stop_reason is None: stop_reason = "INVALID_NO_DEPLOY"
 	if watch_pid and alive():
 		if expected_executable is not None and expected_support is not None:

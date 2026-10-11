@@ -35,5 +35,47 @@ AB_CAMPAIGN_DEPLOYMENT_CHECK tick=100 seat_count=2 expected_count=2
 			self.assertEqual(101, guard.latest_world_tick(path))
 
 
+class FlushLagTests(unittest.TestCase):
+	def test_independent_debug_flush_does_not_reject_lagging_lua(self):
+		with tempfile.TemporaryDirectory() as temp:
+			log = pathlib.Path(temp) / "lua.log"
+			reader = guard.MarkerReader()
+			deadline = guard.DeploymentDeadline(0, 420)
+			evidence = guard.parse("")
+			# debug.log has reached tick 500; Lua's five-second flush is pending.
+			self.assertFalse(deadline.should_abort(evidence, ["Multi0"], 500, 50))
+			log.write_text("AB_CAMPAIGN_DEPLOY seat=Multi0 tick=41 type=td_gdi_constructionyard\nAB_CAMPAIGN_DEPLOYMENT_CHECK tick=100 seat_count=1 expected_count=1\n", encoding="utf-8")
+			guard.merge(evidence, guard.parse(reader.read(log)))
+			self.assertFalse(deadline.should_abort(evidence, ["Multi0"], 900, 55))
+			self.assertTrue(evidence["verified"])
+
+	def test_partial_terminal_line_waits_for_complete_flush(self):
+		with tempfile.TemporaryDirectory() as temp:
+			log = pathlib.Path(temp) / "lua.log"; reader = guard.MarkerReader()
+			log.write_text("AB_CAMPAIGN_DEPLOYMENT_CHECK tick=100 seat_count=1 expected_count=", encoding="utf-8")
+			self.assertEqual("", reader.read(log))
+			with log.open("a", encoding="utf-8") as stream: stream.write("1\n")
+			self.assertEqual(1, guard.parse(reader.read(log))["expected_seat_count"])
+
+	def test_missing_evidence_deadline_cannot_be_renewed(self):
+		d = guard.DeploymentDeadline(0, 420); e = guard.parse("")
+		self.assertFalse(d.should_abort(e, ["Multi0"], 100, 50))
+		self.assertFalse(d.should_abort(e, ["Multi0"], 900, 59))
+		self.assertTrue(d.should_abort(e, ["Multi0"], None, 60))
+
+	def test_true_missing_late_or_wrong_seat_still_rejected(self):
+		for text in [
+			"AB_CAMPAIGN_NO_DEPLOY seat=Multi0 tick=100\n",
+			"AB_CAMPAIGN_DEPLOY seat=Multi0 tick=101 type=td_gdi_constructionyard\nAB_CAMPAIGN_DEPLOYMENT_CHECK tick=100 seat_count=1 expected_count=1\n",
+			"AB_CAMPAIGN_DEPLOY seat=Other tick=41 type=td_gdi_constructionyard\nAB_CAMPAIGN_DEPLOYMENT_CHECK tick=100 seat_count=1 expected_count=1\n"]:
+			with self.subTest(text=text):
+				self.assertTrue(guard.DeploymentDeadline(0, 420).should_abort(guard.parse(text), ["Multi0"], 100, 1))
+
+	def test_no_tick_wall_bound_is_not_extended(self):
+		d = guard.DeploymentDeadline(0, 420); e = guard.parse("")
+		self.assertFalse(d.should_abort(e, ["Multi0"], None, 419))
+		self.assertTrue(d.should_abort(e, ["Multi0"], None, 420))
+
+
 if __name__ == "__main__":
 	unittest.main()
