@@ -12,11 +12,14 @@ def manifest():
 class PilotPlanTests(unittest.TestCase):
  def test_tool_hash_is_checkout_newline_independent(self):
   with tempfile.TemporaryDirectory() as temp:
-   root=pathlib.Path(temp); lf=root/"lf.py"; crlf=root/"crlf.py"
+   root=pathlib.Path(temp); lf=root/"lf.py"; crlf=root/"crlf.py"; cr=root/"cr.py"
    lf.write_bytes(b"line one\nline two\n")
    crlf.write_bytes(b"line one\r\nline two\r\n")
+   cr.write_bytes(b"line one\rline two\r")
    self.assertNotEqual(pilot.sha(lf),pilot.sha(crlf))
    self.assertEqual(pilot.tool_sha(lf),pilot.tool_sha(crlf))
+   self.assertNotEqual(pilot.sha(lf),pilot.sha(cr))
+   self.assertEqual(pilot.tool_sha(lf),pilot.tool_sha(cr))
    crlf.write_bytes(b"line one changed\r\nline two\r\n")
    self.assertNotEqual(pilot.tool_sha(lf),pilot.tool_sha(crlf))
 

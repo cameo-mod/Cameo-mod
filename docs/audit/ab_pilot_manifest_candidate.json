@@ -38,7 +38,6 @@
     "min_free_ram_bytes": 16642998272,
     "max_private_bytes": 11274289152
   },
-  "a5_parity_receipt_sha256": "0e6fc98982af8ca3c67f3846a121512fab4e3982b8de565db67172c865a382f4",
   "baseline_manifest_path": "docs/audit/ab_baseline_manifest_pilot.json",
   "baseline_manifest_sha256": "eecadb954680b13c4f832ad32dee5249634f255a4e3a91ad92586cb0705bb76a",
   "pins": {
@@ -48,8 +47,9 @@
   "switch_patch_sha256": "d710567579cb3673eb33701ec881495f0a2a17d6203194b0efdc8052f4de4523",
   "baseline_ai_payload_sha256": "932e2e5c919de6f5b493e1722e6e66e39a3a5f1577b29aa58a571492b7de9d69",
   "treatment_ai_payload_sha256": "acdfd3a3e2c7d405a776703593f1d52c5f357b423e75ffb224392159c009c725",
+  "tool_hash_algorithm": "sha256-eol-normalized-lf-v1",
   "tool_sha256": {
-    "driver_analyzer": "845f73ac18b3e3c4bf70c1c9e0b3fc5f6ef7d97b0b6562f7b7a4c01b2d134d86",
+    "driver_analyzer": "7574dda3bf267795fd9f13a6a534b9f6431b5411ef5e8997407a0f7969aac06b",
     "campaign_runner": "e6db5a4df60260774a7350c95746c43ab48b80cb6060bd701a171446cb998cf4",
     "batch_runner": "1f6c6005c2f474bb9b8e87ec8b4a7081d3737b458d8423ab349a8e837fe6d6e0",
     "switch_applier": "9e9f678871cc2d8adeca0e7b5c2c28a30a041252f8f630005593bc7f241a6bdd"
@@ -261,7 +261,7 @@
     }
   ],
   "execution_approved": false,
-  "notes": "non-executable candidate; refreshed tool/schema pins and serial one-worker policy after exact-SHA review; maintainer must independently approve after map/analyzer/A5/RAM gates",
+  "notes": "non-executable candidate; execution approval remains false until maintainer sign-off",
   "a5_parity_receipt_path": "C:/cameo-wt/ab-campaign-tooling/results/campaign-a5-fixed-tick-parity-20261010-attempt2/A5_memory_probe_receipt.json",
-  "tool_hash_algorithm": "sha256-lf-normalized-v1"
+  "a5_parity_receipt_sha256": "0e6fc98982af8ca3c67f3846a121512fab4e3982b8de565db67172c865a382f4"
 }

@@ -10,7 +10,7 @@ from threading import Lock
 import apply_increment_switches as increment
 
 SWITCH = "BU_harvester_logistics"
-TOOL_HASH_ALGORITHM = "sha256-lf-normalized-v1"
+TOOL_HASH_ALGORITHM = "sha256-eol-normalized-lf-v1"
 MAPS = {
  "nuclear_winter": ("mods/cameo/maps/_ra_a-nuclear-winter.oramap", "191efefe3043acb2fd504b2e2e5c974a49f6498f8e016c1380159c9f7efc1c4a", 2),
  "satans_clutch": ("mods/cameo/maps/SatansClutch.oramap", "1bd3bee0bbb38c95015126ba689496c4284c2f4e8f8b6573711a9fdadcbf16cb", 2),
@@ -139,8 +139,8 @@ class SlotCounter:
 def sha(path): return hashlib.sha256(path.read_bytes()).hexdigest()
 def tool_sha(path):
  raw=pathlib.Path(path).read_bytes()
- # Tool pins describe source content, independent of Git's checkout EOL policy.
- return hashlib.sha256(raw.replace(b"\r\n",b"\n")).hexdigest()
+ # Tool pins describe source content, independent of CRLF/LF/CR checkout policy.
+ return hashlib.sha256(raw.replace(b"\r\n",b"\n").replace(b"\r",b"\n")).hexdigest()
 def read_engine_version(path):
  raw=pathlib.Path(path).read_bytes()
  if raw.startswith((b"\xff\xfe",b"\xfe\xff")): text=raw.decode("utf-16")
