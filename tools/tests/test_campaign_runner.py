@@ -171,7 +171,7 @@ class CampaignRunnerTests(unittest.TestCase):
 			"setup":"s","map_sha256":"m","pair":0,"game_in_pair":0,"duration_ticks":None,"peak_memory_bytes":0,
 			"baseline_commit":"b","engine_sha256":"e","switch":"BU_harvester_logistics","setup_id":"s","pair_id":"p",
 			"seed":1337,"seed_proof":{},"teams":{},"end_class":"INCOMPLETE","end_reason":"INVALID_NO_DEPLOY",
-			"winner_team":None,"world_tick":None,
+			"winner_team":None,"world_tick":None,"end_tick":None,
 			"cap":{"world_tick_cap":45000,"marker_observed":False,"marker_tick":None},
 			"deployment":{"verified":False,"check_tick":None,"reported_seat_count":None,"expected_seat_count":None,"seats":{},"missing":[]},
 			"memory":{"process_id":1,"peak_private_bytes":1,"limit_private_bytes":runner.PRIVATE_LIMIT,"samples":[]},
@@ -263,7 +263,7 @@ class CampaignRunnerTests(unittest.TestCase):
 		)
 
 	def test_receipt_cap_must_not_claim_winner_and_needs_marker(self):
-		receipt = {"schema_version":1,"campaign_id":"c","manifest_sha256":"a"*64,"cell_id":"cell-1","game_uid":"game-1","status":"CENSORED_CAP","seats":[{"home":"M0"}],"baseline_commit":"b"*40,"engine_sha256":"c"*64,"switch":"s","setup_id":"x","pair_id":"p","pair_member":0,"seed":1,"seed_proof":{},"teams":{},"map":{"required_seats":1},"resolved_seats":[{"seat_id":"M0","team":"A","arm":"control","bot_type":"hard","faction":"td_gdi","home":"M0","spawn":0,"proof_source":"map+records","outcome":"lost","metrics":{"timeline":[]}}],"end_class":"CAP","end_reason":"cap","winner_team":None,"world_tick":45000,"cap":{"world_tick_cap":45000,"marker_observed":True,"marker_tick":45000},"memory":{"peak_private_bytes":0,"limit_private_bytes":runner.PRIVATE_LIMIT,"samples":[]},"runtime":{},"artifacts":{}}
+		receipt = {"schema_version":1,"campaign_id":"c","manifest_sha256":"a"*64,"cell_id":"cell-1","game_uid":"game-1","status":"CENSORED_CAP","seats":[{"home":"M0"}],"baseline_commit":"b"*40,"engine_sha256":"c"*64,"switch":"s","setup_id":"x","pair_id":"p","pair_member":0,"seed":1,"seed_proof":{},"teams":{},"map":{"required_seats":1},"resolved_seats":[{"seat_id":"M0","team":"A","arm":"control","bot_type":"hard","faction":"td_gdi","home":"M0","spawn":0,"proof_source":"map+records","outcome":"lost","metrics":{"timeline":[]}}],"end_class":"CAP","end_reason":"cap","winner_team":None,"world_tick":45000,"end_tick":45000,"cap":{"world_tick_cap":45000,"marker_observed":True,"marker_tick":45000},"memory":{"peak_private_bytes":0,"limit_private_bytes":runner.PRIVATE_LIMIT,"samples":[]},"runtime":{},"artifacts":{}}
 		receipt.update({"seat_proof_source":"generated_map.yaml","map_yaml_sha256":"d"*64,"control_side":"A","treatment_side":"B","arm_bot_types":{"control":"hard_control","treatment":"hard_treatment"},"cap_marker":True,"cap_tick":45000,"support_complete":True,"setup":"x","map_sha256":"e"*64,"pair":0,"game_in_pair":0,"duration_ticks":45000,"peak_memory_bytes":0})
 		receipt["deployment"]={"verified":True,"check_tick":100,"reported_seat_count":1,"expected_seat_count":1,"seats":{"M0":{"tick":50,"type":"td_gdi_constructionyard"}},"missing":[]}
 		runner.validate_receipt(receipt)
@@ -283,6 +283,27 @@ class CampaignRunnerTests(unittest.TestCase):
 		runner.validate_receipt(receipt)
 		receipt["cap"]["marker_tick"]=45002
 		with self.assertRaisesRegex(ValueError,"lacks valid cap evidence"):
+			runner.validate_receipt(receipt)
+
+	def test_match_end_tick_requires_every_row_to_agree(self):
+		row = {"duration_ticks":11980,"player":{"home":"M0"}}
+		self.assertEqual(11980, runner.match_end_tick([dict(row), dict(row, player={"home":"M1"})]))
+		self.assertIsNone(runner.match_end_tick([dict(row), {"player":{"home":"M1"}}]))
+		self.assertIsNone(runner.match_end_tick([dict(row), dict(row, duration_ticks=None)]))
+		self.assertIsNone(runner.match_end_tick([dict(row), dict(row, duration_ticks=11981)]))
+		self.assertIsNone(runner.match_end_tick([dict(row, duration_ticks="11980")]))
+		self.assertIsNone(runner.match_end_tick([]))
+
+	def test_natural_receipt_carries_winner_and_pre_cap_end_tick(self):
+		receipt = {"schema_version":1,"campaign_id":"c","manifest_sha256":"a"*64,"cell_id":"cell-1","game_uid":"game-1","status":"NATURAL_END","seats":[{"home":"M0"}],"baseline_commit":"b"*40,"engine_sha256":"c"*64,"switch":"s","setup_id":"x","pair_id":"p","pair_member":0,"seed":1,"seed_proof":{},"teams":{},"map":{"required_seats":1},"resolved_seats":[{"seat_id":"M0","team":"A","arm":"control","bot_type":"hard","faction":"td_gdi","home":"M0","spawn":0,"proof_source":"map+records","outcome":"won","metrics":{"timeline":[]}}],"end_class":"NATURAL","end_reason":"natural","winner_team":"A","world_tick":12000,"end_tick":11980,"cap":{"world_tick_cap":45000,"marker_observed":False,"marker_tick":None},"memory":{"peak_private_bytes":0,"limit_private_bytes":runner.PRIVATE_LIMIT,"samples":[]},"runtime":{},"artifacts":{}}
+		receipt.update({"seat_proof_source":"generated_map.yaml","map_yaml_sha256":"d"*64,"control_side":"A","treatment_side":"B","arm_bot_types":{"control":"hard_control","treatment":"hard_treatment"},"cap_marker":False,"cap_tick":None,"support_complete":True,"setup":"x","map_sha256":"e"*64,"pair":0,"game_in_pair":0,"duration_ticks":11980,"peak_memory_bytes":0})
+		receipt["deployment"]={"verified":True,"check_tick":100,"reported_seat_count":1,"expected_seat_count":1,"seats":{"M0":{"tick":50,"type":"td_gdi_constructionyard"}},"missing":[]}
+		runner.validate_receipt(receipt)
+		receipt["end_tick"]=None
+		with self.assertRaisesRegex(ValueError,"pre-cap end_tick"):
+			runner.validate_receipt(receipt)
+		receipt["end_tick"]=45000
+		with self.assertRaisesRegex(ValueError,"pre-cap end_tick"):
 			runner.validate_receipt(receipt)
 
 	def test_support_bundle_excludes_fullmods_and_stale_bundles(self):

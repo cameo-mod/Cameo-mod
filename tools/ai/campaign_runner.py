@@ -373,11 +373,25 @@ def match_game_uid(match_rows: list) -> str | None:
 	return uid if isinstance(uid, str) and uid else None
 
 
+def match_end_tick(match_rows: list) -> int | None:
+	"""Return the match's terminal world tick from duration_ticks, only when
+	EVERY match row carries the same nonnegative int. The record field is the
+	recorder's authoritative end-of-game tick; economy-timeline finals and
+	monitor samples are quantized and can underreport a natural early end."""
+	if not match_rows:
+		return None
+	ticks = {row.get("duration_ticks") for row in match_rows if isinstance(row, dict)}
+	if len(ticks) != 1:
+		return None
+	tick = next(iter(ticks))
+	return tick if type(tick) is int and tick >= 0 else None
+
+
 def validate_receipt(receipt: dict) -> None:
 	"""Validate the producer's semantic invariants; JSON Schema is published alongside."""
 	if not isinstance(receipt, dict) or receipt.get("schema_version") != 1:
 		raise ValueError("receipt schema_version must be 1")
-	for key in ("campaign_id", "manifest_sha256", "cell_id", "game_uid", "status", "seats", "seat_proof_source", "map_yaml_sha256", "control_side", "treatment_side", "arm_bot_types", "cap_marker", "cap_tick", "support_complete", "setup", "map_sha256", "pair", "game_in_pair", "duration_ticks", "peak_memory_bytes", "baseline_commit", "engine_sha256", "switch", "setup_id", "pair_id", "seed", "seed_proof", "teams", "resolved_seats", "end_class", "end_reason", "winner_team", "world_tick", "cap", "deployment", "memory", "runtime", "artifacts"):
+	for key in ("campaign_id", "manifest_sha256", "cell_id", "game_uid", "status", "seats", "seat_proof_source", "map_yaml_sha256", "control_side", "treatment_side", "arm_bot_types", "cap_marker", "cap_tick", "support_complete", "setup", "map_sha256", "pair", "game_in_pair", "duration_ticks", "peak_memory_bytes", "baseline_commit", "engine_sha256", "switch", "setup_id", "pair_id", "seed", "seed_proof", "teams", "resolved_seats", "end_class", "end_reason", "winner_team", "world_tick", "end_tick", "cap", "deployment", "memory", "runtime", "artifacts"):
 		if key not in receipt:
 			raise ValueError("receipt missing required field: " + key)
 	if receipt["end_class"] not in ("NATURAL", "CAP", "INCOMPLETE"):
@@ -400,6 +414,8 @@ def validate_receipt(receipt: dict) -> None:
 		raise ValueError("CAP classification lacks valid cap evidence")
 	if receipt["end_class"] == "NATURAL" and (not isinstance(receipt["end_reason"], str) or receipt["winner_team"] is None):
 		raise ValueError("NATURAL classification lacks authoritative winner/end reason")
+	if receipt["end_class"] == "NATURAL" and not (type(receipt["end_tick"]) is int and receipt["end_tick"] < CAP_TICK):
+		raise ValueError("NATURAL classification lacks a pre-cap end_tick")
 	if receipt["end_class"] != "INCOMPLETE" and receipt["deployment"].get("verified") is not True:
 		raise ValueError("completed receipt lacks verified tick-100 deployment evidence")
 	if receipt["memory"].get("limit_private_bytes") != PRIVATE_LIMIT:
@@ -732,8 +748,10 @@ def run_one(manifest: dict, manifest_sha: str, job: dict, *, root: pathlib.Path,
 	engine_digest = hashlib.sha256("".join(manifest["binary_sha256"][k] for k in sorted(manifest["binary_sha256"])).encode()).hexdigest()
 	# The receipt carries the internal classification fields verbatim: analyze()
 	# re-adjudicates stored receipts and validate_receipt requires both layers.
-	end_ticks=sorted((s["economy"]["tick"] for s in classification.get("seats",[]) if isinstance(s.get("economy"),dict) and type(s["economy"].get("tick")) is int),reverse=True)
-	end_tick=end_ticks[0] if end_ticks else (monitor_result["samples"][-1]["world_tick"] if monitor_result["samples"] else None)
+	end_tick=match_end_tick(match_rows)
+	if end_tick is None:
+		economy_ticks=sorted((s["economy"]["tick"] for s in classification.get("seats",[]) if isinstance(s.get("economy"),dict) and type(s["economy"].get("tick")) is int),reverse=True)
+		end_tick=economy_ticks[0] if economy_ticks else (monitor_result["samples"][-1]["world_tick"] if monitor_result["samples"] else None)
 	receipt = {**internal, "game_uid":game_uid,"schema_version":1,"campaign_id":manifest.get("campaign_id", "ab-campaign-2026-10-11-pilot"), "manifest_sha256":manifest_sha,
 		"baseline_commit":manifest["pins"]["source_commit"], "engine_sha256":engine_digest, "switch":job["switch"], "setup_id":job["setup"],
 		"map":{"name":job["map"],"path":job["map_path"],"sha256":job["map_sha256"],"generated_map_yaml_sha256":map_yaml_sha,"required_seats":job["required_seats"]},
