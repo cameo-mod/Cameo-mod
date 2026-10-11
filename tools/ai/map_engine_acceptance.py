@@ -165,7 +165,14 @@ def owned_tree_rows(root_pid: int, rows: list[dict]) -> list[dict]:
 	return selected
 
 
-def discover_owned_tree(process, engine: pathlib.Path, support: pathlib.Path, *, require_game_child: bool = True) -> dict:
+def command_has_argument(command: str, argument: str) -> bool:
+	"""Match one exact Windows argv token, allowing subprocess quote wrappers."""
+	pattern = r'(?i)(?:^|\s)"?' + re.escape(argument) + r'"?(?=\s|$)'
+	return re.search(pattern, command) is not None
+
+
+def discover_owned_tree(process, engine: pathlib.Path, support: pathlib.Path, *, require_game_child: bool = True,
+				direct_game_args: tuple[str, ...] | None = None) -> dict:
 	"""Identify the launched root plus descendants; verify root identity before trusting the tree."""
 	if os.name != "nt":
 		return {"rows": [{"ProcessId": process.pid, "ParentProcessId": 0,
@@ -198,7 +205,7 @@ def discover_owned_tree(process, engine: pathlib.Path, support: pathlib.Path, *,
 	if os.path.normcase(str(actual)) != os.path.normcase(str(expected)):
 		raise RuntimeError(f"owned root executable mismatch: {actual} != {expected}")
 	command = str(root.get("CommandLine") or "").casefold()
-	if os.path.normcase(str(support.absolute())) not in os.path.normcase(command):
+	if not command_has_argument(command, f"Engine.SupportDir={support.absolute()}"):
 		raise RuntimeError("owned root command line does not contain this cell's SupportDir")
 	bin_dir = (engine / "bin").resolve()
 	children = []
@@ -211,9 +218,10 @@ def discover_owned_tree(process, engine: pathlib.Path, support: pathlib.Path, *,
 			children.append(row)
 		except (OSError, ValueError):
 			continue
-	if require_game_child and not children:
+	direct_game = bool(direct_game_args) and all(command_has_argument(command, arg.casefold()) for arg in direct_game_args)
+	if require_game_child and not children and not direct_game:
 		return {"rows": rows, "child_found": False}
-	return {"rows": rows, "child_found": bool(children) or not require_game_child}
+	return {"rows": rows, "child_found": bool(children) or direct_game or not require_game_child}
 
 
 def sample_owned_tree(rows: list[dict]) -> dict:
@@ -392,6 +400,7 @@ def run_cell(job: dict, *, root: pathlib.Path, engine: pathlib.Path, overlay: pa
 		args.append(f"Game.Platform={HEADLESS_PLATFORM}")
 	env = os.environ.copy()
 	env["CAMEO_DEV_SEED"] = str(job["seed"])
+	direct_game_args = (f"Launch.Map={variant.name}", f"Launch.Benchmark={batch.BENCHMARK_PREFIX}")
 	started = time.monotonic()
 	peak = 0
 	peak_private = 0
@@ -405,7 +414,7 @@ def run_cell(job: dict, *, root: pathlib.Path, engine: pathlib.Path, overlay: pa
 		end_reason = "PROCESS_EXIT"
 		while process.poll() is None:
 			try:
-				tree = discover_owned_tree(process, engine, support)
+				tree = discover_owned_tree(process, engine, support, direct_game_args=direct_game_args)
 				owned_pids.update(int(row["ProcessId"]) for row in tree["rows"])
 				child_seen |= tree["child_found"]
 				if os.name == "nt" and not child_seen and time.monotonic() - started > 30:
@@ -455,7 +464,7 @@ def run_cell(job: dict, *, root: pathlib.Path, engine: pathlib.Path, overlay: pa
 	try:
 		# Always take one last snapshot: Popen may have exited before the first loop
 		# iteration, leaving a same-cell game child absent from the sampled PID set.
-		final_tree = discover_owned_tree(process, engine, support)
+		final_tree = discover_owned_tree(process, engine, support, direct_game_args=direct_game_args)
 		final_children = {int(row["ProcessId"]) for row in final_tree["rows"] if
 			int(row["ProcessId"]) != process.pid}
 		new_orphaned = final_children - (owned_pids - {process.pid})

@@ -202,6 +202,36 @@ class OwnedProcessMonitoringTests(unittest.TestCase):
                 result = acceptance.discover_owned_tree(Popen(), root, support)
             self.assertFalse(result["child_found"])
 
+    def test_windows_direct_game_root_is_accepted_only_with_exact_cell_arguments(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = pathlib.Path(d) / "engine"
+            (root / "bin").mkdir(parents=True)
+            support = pathlib.Path(d) / "cell/Support"
+            support.mkdir(parents=True)
+            expected = ("Launch.Map=acceptance_nuclear_1337_0",
+                f"Launch.Benchmark={acceptance.batch.BENCHMARK_PREFIX}")
+            row = {"ProcessId": 1, "ParentProcessId": 0,
+                "ExecutablePath": str(root / "bin/OpenRA.exe"),
+                "CommandLine": f'"{root / "bin/OpenRA.exe"}" Game.Mod=cameo '
+                    f'"Engine.SupportDir={support}" "{expected[0]}" "{expected[1]}"'}
+
+            class Popen:
+                pid = 1
+                def poll(self): return None
+
+            with patch.object(acceptance.os, "name", "nt"), patch.object(acceptance, "process_rows", return_value=[row]):
+                accepted = acceptance.discover_owned_tree(Popen(), root, support, direct_game_args=expected)
+                wrong_map = acceptance.discover_owned_tree(Popen(), root, support,
+                    direct_game_args=("Launch.Map=some_other_cell", expected[1]))
+                wrong_benchmark = acceptance.discover_owned_tree(Popen(), root, support,
+                    direct_game_args=(expected[0], "Launch.Benchmark=other"))
+                with self.assertRaisesRegex(RuntimeError, "SupportDir"):
+                    acceptance.discover_owned_tree(Popen(), root, support / "sibling", direct_game_args=expected)
+            self.assertTrue(accepted["child_found"])
+            self.assertEqual([1], [int(r["ProcessId"]) for r in accepted["rows"]])
+            self.assertFalse(wrong_map["child_found"])
+            self.assertFalse(wrong_benchmark["child_found"])
+
     def test_exited_launcher_still_discovers_and_pid_scoped_cleans_same_cell_child(self):
         with tempfile.TemporaryDirectory() as d:
             root = pathlib.Path(d) / "engine"
