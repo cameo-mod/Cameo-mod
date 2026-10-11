@@ -1,4 +1,5 @@
 """Offline checks for tools/ai/map_engine_acceptance.py; nothing here launches a game."""
+import json
 import pathlib
 import sys
 import tempfile
@@ -231,6 +232,68 @@ class OwnedProcessMonitoringTests(unittest.TestCase):
             self.assertEqual([1], [int(r["ProcessId"]) for r in accepted["rows"]])
             self.assertFalse(wrong_map["child_found"])
             self.assertFalse(wrong_benchmark["child_found"])
+
+    def test_batch_stops_after_first_rejected_cell_and_marks_remainder_not_run(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = pathlib.Path(d)
+            engine = root / "engine"
+            (engine / "bin").mkdir(parents=True)
+            (engine / "bin/OpenRA.exe").write_bytes(b"exe")
+            (engine / "bin/OpenRA.Platforms.Null.dll").write_bytes(b"platform")
+            (engine / "VERSION").write_text("test-engine\n", encoding="utf-8")
+            manifest_path = root / "manifest.json"
+            manifest_path.write_text(json.dumps({"seeds": [1337], "switch": "BT_test"}), encoding="utf-8")
+            out = root / "out"
+            jobs = [
+                {"cell_id": "cell-0", "setup": "setup", "map": "map", "seed": 1337,
+                 "game_in_pair": 0, "map_path": "map.yaml", "map_sha256": "maphash"},
+                {"cell_id": "cell-1", "setup": "setup", "map": "map", "seed": 1337,
+                 "game_in_pair": 1, "map_path": "map.yaml", "map_sha256": "maphash"},
+            ]
+            rejected = {"cell_id": "cell-0", "setup": "setup", "map": "map",
+                "game_in_pair": 0, "verdict": "REJECTED", "problems": ["test failure"],
+                "wall_seconds": 1}
+            with patch.object(acceptance.batch, "load_config", return_value=(None, engine)), \
+                 patch.object(pilot, "make_jobs", return_value=jobs), \
+                 patch.object(pilot, "sha", return_value="maphash"), \
+                 patch.object(pilot, "read_engine_version", return_value="test-engine"), \
+                 patch.object(pilot, "materialize_dual_arm_ai"), \
+                 patch.object(acceptance, "available_ram_bytes", return_value=20 * 1024**3), \
+                 patch.object(acceptance, "run_cell", return_value=rejected) as run_cell:
+                result = acceptance.main(["--manifest", str(manifest_path), "--out", str(out),
+                    "--repo-root", str(root), "--setups", "setup", "--games", "0,1"])
+            self.assertEqual(1, result)
+            run_cell.assert_called_once()
+            receipt = json.loads((out / "acceptance_receipt.json").read_text(encoding="utf-8"))
+            self.assertEqual(["REJECTED", "NOT_RUN_AFTER_PRIOR_FAILURE"],
+                [cell["verdict"] for cell in receipt["cells"]])
+            self.assertIn("cell-0", receipt["cells"][1]["problems"][0])
+
+    def test_windows_empty_root_path_requires_exact_popen_and_cell_command(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = pathlib.Path(d) / "engine"
+            (root / "bin").mkdir(parents=True)
+            support = pathlib.Path(d) / "cell/Support"
+            support.mkdir(parents=True)
+            expected = ("Launch.Map=acceptance_nuclear_1337_0",
+                f"Launch.Benchmark={acceptance.batch.BENCHMARK_PREFIX}")
+            command = (f'"{root / "bin/OpenRA.exe"}" Game.Mod=cameo '
+                f'"Engine.SupportDir={support}" "{expected[0]}" "{expected[1]}"')
+            row = {"ProcessId": 1, "ParentProcessId": 0, "ExecutablePath": "", "CommandLine": command}
+
+            class Popen:
+                pid = 1
+                args = [str(root / "bin/OpenRA.exe"), f"Engine.SupportDir={support}", *expected]
+                def poll(self): return None
+
+            with patch.object(acceptance.os, "name", "nt"), patch.object(acceptance, "process_rows", return_value=[row]):
+                accepted = acceptance.discover_owned_tree(Popen(), root, support, direct_game_args=expected)
+                self.assertTrue(accepted["child_found"])
+                self.assertEqual([1], [int(r["ProcessId"]) for r in accepted["rows"]])
+                bad_map = dict(row, CommandLine=command.replace(expected[0], "Launch.Map=other"))
+                with patch.object(acceptance, "process_rows", return_value=[bad_map]):
+                    with self.assertRaisesRegex(RuntimeError, "does not pin this cell's Launch arguments"):
+                        acceptance.discover_owned_tree(Popen(), root, support, direct_game_args=expected)
 
     def test_exited_launcher_still_discovers_and_pid_scoped_cleans_same_cell_child(self):
         with tempfile.TemporaryDirectory() as d:

@@ -220,10 +220,23 @@ def discover_owned_tree(process, engine: pathlib.Path, support: pathlib.Path, *,
 			return {"rows": [], "child_found": False}
 		return {"rows": children, "child_found": bool(children)}
 	expected = (engine / "bin" / "OpenRA.exe").resolve()
-	actual = pathlib.Path(str(root.get("ExecutablePath") or "")).resolve()
-	if os.path.normcase(str(actual)) != os.path.normcase(str(expected)):
-		raise RuntimeError(f"owned root executable mismatch: {actual} != {expected}")
 	command = str(root.get("CommandLine") or "").casefold()
+	actual_raw = root.get("ExecutablePath")
+	if actual_raw:
+		actual = pathlib.Path(str(actual_raw)).resolve()
+		if os.path.normcase(str(actual)) != os.path.normcase(str(expected)):
+			raise RuntimeError(f"owned root executable mismatch: {actual} != {expected}")
+	else:
+		# CIM may omit ExecutablePath for a visible process. Popen owns this live PID,
+		# but accept the root only when both its immutable launch argv and CIM command
+		# line independently identify the pinned engine and exact cell arguments.
+		args = process.args if isinstance(process.args, (list, tuple)) else []
+		launched = os.path.normcase(str(pathlib.Path(args[0]).resolve())) if args else ""
+		if process.poll() is not None or launched != os.path.normcase(str(expected)):
+			raise RuntimeError("owned root ExecutablePath missing and Popen identity is not verifiable")
+		if not command_has_argument(command, f"Engine.SupportDir={support.absolute()}") or not direct_game_args or not all(
+			command_has_argument(command, arg.casefold()) for arg in direct_game_args):
+			raise RuntimeError("owned root ExecutablePath missing and CIM command line does not pin this cell's Launch arguments")
 	if not command_has_argument(command, f"Engine.SupportDir={support.absolute()}"):
 		raise RuntimeError("owned root command line does not contain this cell's SupportDir")
 	bin_dir = (engine / "bin").resolve()
@@ -616,6 +629,16 @@ def main(argv=None) -> int:
 			receipt["cells"].append(cell)
 			print(f"    {cell['verdict']} in {cell['wall_seconds']}s {'; '.join(cell['problems'])}", flush=True)
 		path.write_text(json.dumps(receipt, indent=1) + "\n", encoding="utf-8")
+		if receipt["cells"][-1]["verdict"] != "ACCEPTED":
+			# A rejection or admission failure invalidates the environment. Preserve
+			# remaining jobs as NOT_RUN and stop before launching any further cell.
+			for remaining in jobs[len(receipt["cells"]):]:
+				receipt["cells"].append({"cell_id": remaining["cell_id"],
+					"setup": remaining["setup"], "map": remaining["map"],
+					"verdict": "NOT_RUN_AFTER_PRIOR_FAILURE",
+					"problems": [f"prior cell {job['cell_id']} was not accepted"]})
+			path.write_text(json.dumps(receipt, indent=1) + "\n", encoding="utf-8")
+			break
 	by_setup: dict[str, dict[int, dict]] = {}
 	for cell in receipt["cells"]:
 		if cell["verdict"] == "ACCEPTED":
