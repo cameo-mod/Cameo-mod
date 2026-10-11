@@ -49,7 +49,7 @@
   "baseline_ai_payload_sha256": "932e2e5c919de6f5b493e1722e6e66e39a3a5f1577b29aa58a571492b7de9d69",
   "treatment_ai_payload_sha256": "acdfd3a3e2c7d405a776703593f1d52c5f357b423e75ffb224392159c009c725",
   "tool_sha256": {
-    "driver_analyzer": "78541bbdd9e5cf14370fd9329dc2d3fc544b355d8ff9c62a49f2a7d5aaa2e0ae",
+    "driver_analyzer": "927eddf58da8e800763d1a5bc6cfea7748bb4bc35e050cf441277341194d3876",
     "campaign_runner": "e4b1199d4be351e3de93877ceb2d781975f1635e12c1fa027eaa7a331514e7f7",
     "batch_runner": "e9497b51574a7f907aa19b0c1742b68db5b96904f43ab65a5bd39ba7ce8a1964",
     "switch_applier": "5376258709f2ff6512e402abeaf09e164abe483142980830bc72269af047f97e"
@@ -261,5 +261,6 @@
     }
   ],
   "execution_approved": false,
-  "notes": "candidate dry-run manifest; maintainer flips execution_approved at sign-off after the open-item proposal is ruled on"
+  "notes": "candidate dry-run manifest; maintainer flips execution_approved at sign-off after the open-item proposal is ruled on",
+  "a5_parity_receipt_path": "C:/cameo-wt/ab-campaign-tooling/results/campaign-a5-fixed-tick-parity-20261010-attempt2/A5_memory_probe_receipt.json"
 }
