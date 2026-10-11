@@ -23,6 +23,7 @@ import shutil
 import signal
 
 import campaign_runner as runner
+import ab_campaign_pilot as pilot
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 OUT = ROOT / "results" / "campaign-a5-memory-diagnostic-20261010-sol-advice"
@@ -364,7 +365,7 @@ def run_cell(index: int) -> dict:
 		stop_reason = "A5_RECEIPT_VALIDATION_FAILED"
 	return {"cell": cell, "seed": SEED, "source_head": subprocess.check_output(
 		["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip(),
-		"baseline_parent": BASELINE, "engine_version": (ROOT / "engine/VERSION").read_text().strip(),
+		"baseline_parent": BASELINE, "engine_version": pilot.read_engine_version(ROOT / "engine/VERSION"),
 		"binary_sha256": {str(p.relative_to(ROOT)): file_sha256(p) for p in (
 			ROOT / "engine/bin/OpenRA.exe", ROOT / "engine/bin/OpenRA.Mods.Cameo.dll") if p.is_file()},
 		"exit_code": proc.returncode, "stop_reason": stop_reason or "PROCESS_EXIT",
@@ -429,7 +430,7 @@ def main() -> int:
 		raise RuntimeError("gameplay/tooling source is dirty; commit the exact probe before qualification")
 	if subprocess.run(["git", "merge-base", "--is-ancestor", BASELINE, "HEAD"], cwd=ROOT).returncode:
 		raise RuntimeError("pinned baseline is not an ancestor")
-	if (ROOT / "engine/VERSION").read_text().strip() != ENGINE:
+	if pilot.read_engine_version(ROOT / "engine/VERSION") != ENGINE:
 		raise RuntimeError("engine pin mismatch")
 	host = host_memory_status()
 	if not admission_ok(host["available_physical_bytes"], host["commit_available_bytes"]):
