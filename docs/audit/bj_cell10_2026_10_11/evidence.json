@@ -4,7 +4,9 @@
   "source_sha256": {
     "cameo-ai-matches.jsonl": "5df195b0e38fa8f7b621661990618ea44f8e7f9305c58a6b21ae05a94332516a",
     "cameo-ai-situations.jsonl": "67ac35770854e9a5cbc04e8d8d16e723442e2a2b447457c6dbb864581c2fcc85",
-    "cameo-ai-engagements.jsonl": "a6e88eba10901d7451b7b20699788f30829c79379203c4558738a6142370c834"
+    "cameo-ai-engagements.jsonl": "a6e88eba10901d7451b7b20699788f30829c79379203c4558738a6142370c834",
+    "cameo-ai-placements.jsonl": "bb4c05a4de61546d3b48a692d679f3fe92a31feea6488f06a1f0af8473c0c34e",
+    "debug.log": "14cd49571e05477952a1b86d26657ed607587124cd0b41de0596d71c0b488990"
   },
   "situation_samples": 100,
   "first_tick": 1,
@@ -98,5 +100,35 @@
     "Situation values use a different census from match stats; do not interchange army_value.",
     "engagement match-end summaries may close after match duration; exclude them from pre-cap survival evidence.",
     "Both recorded spawn fields are zero; use explicit player names and home coordinates."
+  ],
+  "hard_placements": [
+    {
+      "tick": 278,
+      "actor": "ra1_powerplant",
+      "cell": "73,24",
+      "category": "power",
+      "reason": "crawl"
+    },
+    {
+      "tick": 580,
+      "actor": "ra1_allies_barracks",
+      "cell": "69,25",
+      "category": "production",
+      "reason": "base"
+    },
+    {
+      "tick": 1495,
+      "actor": "ra1_allies_gunturret",
+      "cell": "66,26",
+      "category": "defence",
+      "reason": "defence"
+    },
+    {
+      "tick": 1947,
+      "actor": "ra1_allies_pillbox",
+      "cell": "66,24",
+      "category": "defence",
+      "reason": "defence"
+    }
   ]
 }
