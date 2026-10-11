@@ -100,14 +100,41 @@ Two engine-run proofs on `codex/ab-campaign-port-fixes` with the pinned
   `pilot.read_engine_version`; opt-in `--allow-stale-build` forwarder for
   hardlink-materialized engines (binary sha256 still receipted).
 
+### 2026-10-11 post-game receipt failure — diagnosed and fixed (cb4c920cc)
+
+- Cell `1v1_nuclear_gdi|1337|0` ran a FULL 45,000-tick game on the new
+  engine: cap marker at tick 45001, seed pin `RandomSeed=1337`, actor
+  counts 831->1030, both bots economically active (control earned 592k /
+  treatment 121k — the MCV-idle defect stays dead). Replay
+  `cameo-2026-10-11T070937Z.orarep` + match jsonl preserved.
+- The runner then died BEFORE `atomic_receipt`: `validate_receipt`
+  requires the internal classification fields (`cell_id`, `status`,
+  `seats`, `cap_marker`, `game_uid`, ...) — `analyze()` re-adjudicates
+  stored receipts via `receipt["game_uid"]` — but `run_one` never merged
+  them. `ValueError: receipt missing required field: cell_id`.
+- Second defect: adjudicator demanded `cap_tick == 45000` exactly while
+  the Lua monitor emits the marker on the first tick at/after the cap
+  (45001; A5 showed 16001 for cap 16000) — every capped cell classified
+  `INVALID_UNKNOWN`. `validate_receipt` had the same `marker_tick ==
+  CAP_TICK` bug. Both now accept `{cap, cap+1}`.
+- Third defect: `artifact_paths = game_root.rglob("*")` zipped the whole
+  ~33k-file FullMods hardlink tree -> 1.05 GB support_bundle.zip (x64
+  cells would be ~67 GB). `_is_support_artifact` now keeps cell evidence
+  only: FullMods excluded (reproducible from pins) + stale
+  `support_bundle*.zip` excluded (no self-bundling on re-processing).
+- game_uid consistency gate added: all match rows must share one uid or
+  the cell degrades to INCOMPLETE (no unattributable cap evidence).
+- Offline replay of the post-game path on the preserved cell (same code)
+  now yields `CENSORED_CAP | verified cap` -> `validate_receipt PASS`.
+  26/26 focused tests green. A live re-run on pair member
+  `1v1_nuclear_gdi|1337|1` is in flight to prove the path end-to-end.
+
 ## Pending
 
 - Merge `codex/ab-campaign-port-fixes` onto `codex/ab-campaign` (DevOps),
   then regenerate the execution manifest with final tool/engine SHAs.
 - Luna exact-SHA review of engine merge `4f69df005f` / pin `fb7faffaf`.
-- A5 fixed-tick parity rerun on source `e49acf41` + new engine binary.
-- Re-launch cell `1v1_nuclear_gdi|1337|0` under the corrected runner
-  once host free RAM >= ~8.24 GiB (admission floor, ruling 04:50Z).
-  No bounded wait may be armed outside the reserved launch window.
+- Confirm the live validation cell `1v1_nuclear_gdi|1337|1` writes a
+  CAP receipt under the corrected runner (in flight).
 - Remaining cells stay PLANNED; serial, one worker until the second-
   small-game parallel gate is exercised under observation.
