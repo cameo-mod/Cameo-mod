@@ -137,6 +137,12 @@ MATCH_LOG = "cameo-ai-matches.jsonl"
 CONFIG_KEYS = {"MOD_ID", "ENGINE_DIRECTORY"}
 BENCHMARK_PREFIX = "ai-duel-batch-"
 
+# --render headless: the mod-built OpenRA.Platforms.Null.dll (Game.Platform=Null). The
+# engine silently falls back to the Default platform when the dll is missing or fails, so the
+# batch checks the dll before launching and the platform's graphics.log line after each match.
+HEADLESS_PLATFORM = "Null"
+HEADLESS_LOG_MARKER = "Null platform: headless window"
+
 # The mod.yaml MapFolders entry for user maps resolves through this literal
 # directory name inside the support dir.
 USER_MAP_DIR = os.path.join("maps", "cameo", "{DEV_VERSION}")
@@ -643,7 +649,7 @@ def write_variant_from_oramap(oramap: pathlib.Path, dest: pathlib.Path, matchup:
     rules_yaml.write_text(patched, encoding="utf-8")
 
 
-def write_variant(template: Path, dest: pathlib.Path, matchup: dict, time_limit: int) -> None:
+def write_variant(template: pathlib.Path, dest: pathlib.Path, matchup: dict, time_limit: int) -> None:
     if template.suffix == ".oramap":
         write_variant_from_oramap(template, dest, matchup, time_limit)
         return
@@ -959,6 +965,32 @@ def _hash_files(base: pathlib.Path, files: list[pathlib.Path]) -> str:
     return digest.hexdigest()
 
 
+# Mod C# projects whose assembly the batch loads from engine/bin (CameoMod.sln, mod side).
+MOD_ASSEMBLY_PROJECTS = ("OpenRA.Mods.Cameo", "OpenRA.Mods.CA", "OpenRA.Mods.Fransbot",
+                         "OpenRA.Mods.Cameo.Contracts", "OpenRA.Mods.Cameo.Unified", "OpenRA.Platforms.Null")
+
+
+def stale_mod_assemblies(engine: pathlib.Path) -> list[str]:
+    """Mod projects whose newest .cs is newer than engine/bin/<project>.dll. A stale build
+    plays the OLD bot code against the NEW yaml: the 2026-10-10 A5 run-a failed with
+    `Cannot locate type: SquadDesireBotModuleInfo` from a copied stale OpenRA.Mods.Cameo.dll.
+    A checkout or branch switch also touches the sources, which is the CLAUDE.md rule 7
+    'rebuild after every branch switch' case. A project with no dll yet is not reported."""
+    stale = []
+    for name in MOD_ASSEMBLY_PROJECTS:
+        dll = engine / "bin" / f"{name}.dll"
+        project = REPO_ROOT / name
+        if not dll.is_file() or not project.is_dir():
+            continue
+        built = dll.stat().st_mtime
+        newest = max((p.stat().st_mtime for p in project.rglob("*.cs")
+                      if "obj" not in p.relative_to(project).parts and "bin" not in p.relative_to(project).parts),
+                     default=0.0)
+        if newest > built:
+            stale.append(name)
+    return stale
+
+
 def _mod_dlls_sha256(engine: pathlib.Path) -> str | None:
     """sha256 over the sorted engine/bin/OpenRA*.dll set — catches a mid-batch
     `dotnet build` changing behavior without changing any commit."""
@@ -1111,15 +1143,20 @@ def main() -> int:
                         help="log arm drift between attempts and keep running "
                              "(default: abort the batch — a changed arm voids the A/B)")
     parser.add_argument("--keep-variants", action="store_true", help="do not delete variant map dirs on success")
+    parser.add_argument("--allow-stale-build", action="store_true",
+                        help="launch even when a mod project's .cs is newer than its engine/bin dll (default: refuse)")
     parser.add_argument("--round-trip", action="store_true",
                         help="after the batch, run round_trip_check.py on this support dir; "
                              "any FAIL layer fails the batch (the learning-loop audit in the run, "
                              "not an afterthought)")
-    parser.add_argument("--render", choices=("fast", "default"), default="fast",
+    parser.add_argument("--render", choices=("fast", "default", "headless"), default="fast",
                         help="fast (default): VSync off + a 640x480 window. The engine renders once after EVERY logic tick, "
                              "so with VSync on a match is held to the monitor refresh (~50 ticks/s measured 2026-10-01). "
                              "Rendering never touches the simulation (bot logic is tick-based), so results are unchanged; "
-                             "'default' keeps the player's settings")
+                             "'default' keeps the player's settings; "
+                             "'headless': Game.Platform=Null (OpenRA.Platforms.Null.dll) - no window, no GPU textures, "
+                             "no RenderTick; same sim (same-seed sync hashes match the 'fast' run), far less memory, "
+                             "no display/Xvfb needed (LESSONS_LEARNED 'Headless bot matches')")
     args = parser.parse_args()
 
     factions = [f.strip() for f in args.factions.split(",") if f.strip()]
@@ -1154,6 +1191,12 @@ def main() -> int:
     executable = engine / "bin" / "OpenRA.exe"
     if not executable.is_file():
         fail(f"OpenRA executable is missing: {executable}; run make.cmd all first")
+    if args.render == "headless" and not (engine / "bin" / f"OpenRA.Platforms.{HEADLESS_PLATFORM}.dll").is_file():
+        fail(f"--render headless needs engine/bin/OpenRA.Platforms.{HEADLESS_PLATFORM}.dll; run make.cmd all first")
+    stale = stale_mod_assemblies(engine)
+    if stale and not args.allow_stale_build:
+        fail(f"C# sources are newer than their engine/bin dll for {', '.join(stale)} - rebuild "
+             "(make.cmd all, or DOTNET_ROLL_FORWARD=LatestMajor dotnet build -c Release) or pass --allow-stale-build")
 
     support = args.support_dir or pathlib.Path(tempfile.gettempdir()) / f"ai-match-batch-{int(time.time())}"
     support = support.resolve()
@@ -1257,8 +1300,11 @@ def main() -> int:
         # off so support-dir logs stay identical to the reference batches.
         if os.environ.get("CAMEO_BOT_DEBUG"):
             launch_args.append("Debug.BotDebug=true")
-        if getattr(args, "render", "fast") == "fast":
+        render = getattr(args, "render", "fast")
+        if render in ("fast", "headless"):
             launch_args += ["Graphics.VSync=False", "Graphics.Mode=Windowed", "Graphics.WindowedSize=640,480"]
+        if render == "headless":
+            launch_args.append(f"Game.Platform={HEADLESS_PLATFORM}")
 
         attempt = 0
         drift = None
@@ -1286,6 +1332,11 @@ def main() -> int:
             elapsed = int(time.time() - started)
             records = read_appended_records(log_path, before)
             new_exc = sorted(p.name for p in logs_dir.glob("exception-*.log") if p.name not in exc_before)
+            if render == "headless":
+                graphics_log = logs_dir / "graphics.log"
+                if HEADLESS_LOG_MARKER not in (graphics_log.read_text(errors="replace") if graphics_log.is_file() else ""):
+                    fail(f"--render headless: {graphics_log} has no '{HEADLESS_LOG_MARKER}' line - the engine fell back "
+                         "to the Default platform (see the exception in graphics.log); results would not be headless")
 
             # A nonzero exit with no exception log and no appended records is
             # the external-kill signature (TerminateProcess → exit 1; the

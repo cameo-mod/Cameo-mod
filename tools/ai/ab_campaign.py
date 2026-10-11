@@ -22,7 +22,7 @@ SWITCHES = ("BU_harvester_logistics", "U_ut4_expansion_appetite", "AF_harvester_
 MAPS = {
     "small_gate": ("mods/cameo/maps/_ra_pitfight.oramap", "f50f2399a38346c501f1b1ff91614f7eb9c73b9d0b8eadeffaa067a5bcf4c4d8"),
     "open_economy": ("mods/cameo/maps/_ra_ore-gardens.oramap", "e74bfaacaf0accfbaf34624e10e0708e61468867c1164aa24927c4f24a750842"),
-    "chokepoint": ("mods/cameo/maps/_ra_siberian-pass.oramap", "dd1143299340094a604a5e2a02474dd095916f4f0dd75e9de0a1be23910bdd75"),
+    "chokepoint": ("mods/cameo/maps/_ra_Siberian-Pass.oramap", "dd1143299340094a604a5e2a02474dd095916f4f0dd75e9de0a1be23910bdd75"),
 }
 MAX_MANIFEST = 128 * 1024
 MAX_INPUT = 512 * 1024 * 1024

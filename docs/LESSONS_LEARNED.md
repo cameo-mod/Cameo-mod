@@ -222,6 +222,8 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 
 **Process, tooling and platform**
 
+- [Headless bot matches: `OpenRA.Platforms.Null` drops texture memory, same sim (2026-10-10)](#headless-bot-matches-openraplatformsnull-drops-texture-memory-same-sim-2026-10-10)
+- [⛔ A runner that never ran a cell: nine A/B blockers one capped end-to-end run found (2026-10-10)](#-a-runner-that-never-ran-a-cell-nine-ab-blockers-one-capped-end-to-end-run-found-2026-10-10)
 - [Building and boot-gating in a Linux cloud container (2026-10-09)](#building-and-boot-gating-in-a-linux-cloud-container-2026-10-09)
 - [⛔ The pinned engine commit is NOT on `cameo-engine` — branch an engine change from the PIN (2026-09-29)](#-the-pinned-engine-commit-is-not-on-cameo-engine--branch-an-engine-change-from-the-pin-2026-09-29)
 - [Switching a worktree branch mid-batch corrupts the REST of the batch — yaml is re-read per match (2026-09-29)](#switching-a-worktree-branch-mid-batch-corrupts-the-rest-of-the-batch--yaml-is-re-read-per-match-2026-09-29)
@@ -286,6 +288,103 @@ win — **unless the artifact says otherwise, and then the artifact wins and you
 - [Tooltip `BeforeRender` mutations persist between hovers — reset Visible/Text/Bounds every pass (2026-10-09, Devin)](#tooltip-beforerender-mutations-persist-between-hovers--reset-visibletextbounds-every-pass-2026-10-09-devin)
 
 ---
+
+## Headless bot matches: `OpenRA.Platforms.Null` drops texture memory, same sim (2026-10-10)
+
+**What was blocking.** The BU-pilot A/B could not run on the maintainer's host because one bot match peaked at
+**8.4–8.8 GiB** private bytes (the 6.5 GiB cell cap killed runs; the policy then rose to a 10.5 GiB cap with a 15.5 GiB
+admission floor, which allows one game at a time). Codex/Devin found that it was native, load-phase memory (a GC dump showed only ~0.85 GB of
+live managed objects), but not what it was.
+
+**Cause (measured 2026-10-10, Linux, engine `6da7fce14`).** `dotnet-counters` on a live match: managed heap ~1.1 GB live
+/ 2.4 GB committed, working set 6.15 GB, so ~3.8 GB is NATIVE. A counter in `Sheet.GetTexture` (diagnostic build, not
+committed) showed why: a match creates **200+ 2048×2048 sprite sheets, ≥ 3.2 GiB of textures**, because sequences for
+every faction load at map load. The GL driver keeps them in process memory (Mesa llvmpipe here, the driver's
+system-memory copy on Windows), and the load peak adds each sheet's CPU buffer on top until it is uploaded.
+
+**Fix (mod-side, zero engine change).** `Game.CreatePlatform` loads `OpenRA.Platforms.<Game.Platform>.dll` from the bin
+dir, so the mod ships `OpenRA.Platforms.Null` (in `CameoMod.sln`; `make all` builds it). Its textures keep only their
+size, so a sheet's buffer is released instead of uploaded. Its window reports `IsSuspended`, so `Game.Loop` skips every
+`RenderTick` while `LogicTick` (world and UI) runs unchanged. Fonts and the dummy sound engine come from the Default
+platform. Select it with `Game.Platform=Null`: `run_ai_match_batch.py --render headless`,
+`campaign_runner.py execute-one --render headless`, `map_engine_acceptance.py` (default). No display or Xvfb is needed.
+
+| 1v1 td_gdi hard vs hard, Linux | rendered (`--render fast`) | headless |
+|---|---:|---:|
+| peak RSS during load | 8.62 GB (8.08 GB on the gate map) | 5.19 GB (5.28 GB) |
+| RSS in game | ~5.1 GB | ~2.6 GB |
+| speed after load | ~12–45 ticks/s | ~100 ticks/s (16,637 ticks in 260 s incl. ~100 s load) |
+| boot to menu | 8 GB (OOM-killed once next to two games) | menu reached, 0 exceptions |
+
+**Same sim, proven.** Same seed (`CAMEO_DEV_SEED=1337`), the A5 gate map capped at 8,000 ticks (A5 fixed-tick method),
+one rendered and one headless run, then `order_stream_diff.py`. All **2,673 shared net frames are identical**: every
+order and every per-frame sync hash, through the cap (tick 8001, about frame 2667). The only difference is after the
+rendered replay ends: the headless process kept recording post-game frames (2 bot orders after game over) before
+exiting, the A5 "end-tail" pattern. The strict verdict prints DIVERGENT because of those tail orders, so read
+`first_diff_frame` against the cap, never the verdict word alone.
+
+**Rules.** (1) Bot-only measurement (A/B, campaign, learning, acceptance) should run headless; play-testing and
+screenshots need the default platform. (2) The engine silently falls back to Default when the dll is missing or
+throws, so every tool checks the dll before launch and the `Null platform: headless window` line in `graphics.log`
+after it. (3) The memory policy constants (`PRIVATE_LIMIT`, `FREE_RAM_FLOOR`) were NOT changed. Re-measure headless
+private bytes on the Windows host first; the lead then decides whether two cells fit. (4) Remaining load peak (~5 GB):
+the CPU sheet buffers plus GC commit during sequence loading. The next step would be lazy sequence loading
+(engine-side, not needed now).
+
+## ⛔ A runner that never ran a cell: nine A/B blockers one capped end-to-end run found (2026-10-10)
+
+The BU-pilot tooling had 136 green offline tests and a "dry-run green" status, and still could not have produced one
+valid campaign game. Running the REAL launch path once per map, headless, capped at 1,500 ticks
+(`tools/ai/map_engine_acceptance.py`), together with a fresh look at the pins, found these:
+
+0. **⛔ The arms never reached the engine.** The runner put a dual-arm `ai.yaml` overlay FIRST in
+   `Engine.ModSearchPaths`, but `InstalledMods.GetInstalledMods` keeps the LAST `mods/cameo` it enumerates
+   (`ret[id] = mod`), so the overlay was silently ignored. (An overlay holding only `ai/*.yaml` would also have
+   lacked every other `cameo|...` include.) `debug.log`: `Invalid bot type: hard_control` / `hard_treatment`. Neither
+   arm's bot activated: two idle seats per game, and the campaign would have measured nothing. A symptom at the cap:
+   the monitor's `MarkFailedObjective` threw in `Player.ResolvePlayerName` (`botInfos.First` found no such bot type),
+   the Lua loop died after the first seat, and the other seat stayed `undecided`, which the adjudicator rejects as
+   INVALID. Fix: `ab_campaign_pilot.install_dual_arm_rules` writes the dual-arm file into the generated map as
+   `campaign_ai.yaml`, listed FIRST in `Rules:` (the harness's `duel_rules.yaml` keeps the last word). Map rules merge
+   over the mod rules, and the dual-arm file only adds or changes nodes, which is checked. Result: 0 invalid bot
+   types, both seats `lost` at the cap. The acceptance tool now fails any cell with `Invalid bot type` or a
+   `Fatal Lua Error`.
+1. **`campaign_runner.py` used `shutil`, `zipfile` and `batch` without importing them.** `execute-one` would have died
+   at `shutil.copyfile` before launch, and the other two after the game, before its receipt (the cell stays claimed).
+   It was the same class as the earlier unimported `subprocess`. Guard: `tools/tests/test_campaign_tools_names.py`
+   (static unbound-name check over the campaign tools).
+2. **The variant map was written to `Support/UserMaps`,** which is not a `MapFolders` entry (`mod.yaml`:
+   `~^SupportDir|maps/cameo/{DEV_VERSION}`). Every cell would end with `Could not find map` before tick 0. Now it uses
+   `batch.USER_MAP_DIR`.
+3. **The cap and actor-count markers were read from `server.log`.** Lua `print()` writes to `lua.log`; only the seed
+   pin is in `server.log`. A capped game could never be classified `CENSORED_CAP`, and the actor monitor saw nothing.
+   The A5 probe read `lua.log` correctly, which is why A5 passed.
+4. **⛔ The "side-swapped" pair never swapped the arms' spawns.** `make_jobs` flipped both the side→spawn and the
+   arm→side mapping in game 1, and the two flips cancelled. Control sat on `Multi0..size-1` in both games of every
+   pair (engine-proven: control at 11,45 in both Nuclear Winter games). A spawn advantage was therefore fully
+   confounded with the switch (in the first 2026-10-10 Nuclear Winter A/B pair, spawn 90,24 won both games). The old test asserted "the spawn lists
+   differ", which passed on list ORDER. The static spawn-symmetry audit then built its "both arms cover both halves"
+   conclusion on that assumption. Fix: sides are geographic and only the arm swaps; the test checks per-arm spawn
+   sets.
+5. **Tool pins were host-specific.** `.gitattributes` says `* text=lf`, which is not a valid eol value, so a Windows
+   checkout gets CRLF `.py`/`.json` files and Linux gets LF. The candidate manifest pinned the CRLF bytes, so it could
+   never validate on Linux (and two pins were stale on Windows too). Text pins (tools, receipt schema, baseline
+   manifest) now use `text_sha` (CRLF folded to LF); map and binary pins stay byte hashes.
+6. **A case-only path:** `ab_campaign.py` pinned `_ra_siberian-pass.oramap`; the file is `_ra_Siberian-Pass.oramap`.
+   That works on Windows and fails on Linux.
+7. **A switch group without an effect class** (`BP_squad_desire`, `a55954c1`) made `apply_increment_switches.py` refuse
+   EVERY `--groups` run, and its pinned test was red on master. Classified `restraint` (M13 rule: any hold part); the
+   test pins 27/24/10.
+8. **A stale copied `OpenRA.Mods.Cameo.dll`** cost one A5 attempt. `run_ai_match_batch.py` now refuses to launch when
+   any mod project's `.cs` is newer than its `engine/bin` dll (`--allow-stale-build` overrides).
+
+**Also:** never commit on the branch a batch is running from. `mod_commit` is part of the arm fingerprint, so the
+next match aborts the batch (the 2026-10-10 Red Spice pair lost its second game this way and was re-run). That is
+the harness working; schedule commits between batches.
+
+**Lesson.** An offline suite proves the parts you thought of. Before declaring launch tooling ready, run its real path
+once end to end at a tiny cap on every map it will use, and compare what the ENGINE did (records keyed by spawn
+coordinate) with what the plan said. Static proofs (generated `map.yaml`, geometry) inherit the planner's assumptions.
 
 ## Building and boot-gating in a Linux cloud container (2026-10-09)
 

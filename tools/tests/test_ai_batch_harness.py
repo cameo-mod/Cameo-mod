@@ -322,9 +322,6 @@ class ScoreboardTests(unittest.TestCase):
         self.assertEqual(batch.ab_scoreboard(results), {})
 
 
-if __name__ == "__main__":
-    unittest.main()
-
 
 class FingerprintTests(unittest.TestCase):
     """LC7: the batch fingerprint freezes the arms — mod commit, engine build,
@@ -540,3 +537,44 @@ class RoundTripGateTests(unittest.TestCase):
             round_trip_check.main = orig
         self.assertEqual(rc, 0)
         self.assertEqual(data["round_trip"]["exit"], 0)
+
+
+class StaleBuildAndHeadlessTests(unittest.TestCase):
+    def test_stale_mod_assembly_is_reported_and_fresh_or_unbuilt_is_not(self):
+        import os
+        with tempfile.TemporaryDirectory() as d:
+            root = pathlib.Path(d)
+            engine = root / "engine"
+            (engine / "bin").mkdir(parents=True)
+            project = root / "OpenRA.Mods.Cameo"
+            (project / "obj").mkdir(parents=True)
+            source = project / "Bot.cs"
+            source.write_text("class A {}", encoding="utf-8")
+            dll = engine / "bin" / "OpenRA.Mods.Cameo.dll"
+            dll.write_bytes(b"x")
+            os.utime(source, (1000, 1000))
+            os.utime(dll, (2000, 2000))
+            orig = batch.REPO_ROOT
+            batch.REPO_ROOT = root
+            try:
+                self.assertEqual([], batch.stale_mod_assemblies(engine))
+                generated = project / "obj" / "Gen.cs"
+                generated.write_text("class G {}", encoding="utf-8")
+                os.utime(generated, (3000, 3000))
+                self.assertEqual([], batch.stale_mod_assemblies(engine), "obj/ output is not a source")
+                os.utime(source, (3000, 3000))
+                self.assertEqual(["OpenRA.Mods.Cameo"], batch.stale_mod_assemblies(engine))
+                dll.unlink()
+                self.assertEqual([], batch.stale_mod_assemblies(engine), "an unbuilt project is not stale")
+            finally:
+                batch.REPO_ROOT = orig
+
+    def test_headless_platform_name_matches_the_mod_project(self):
+        self.assertTrue((batch.REPO_ROOT / f"OpenRA.Platforms.{batch.HEADLESS_PLATFORM}"
+                         / f"OpenRA.Platforms.{batch.HEADLESS_PLATFORM}.csproj").is_file())
+        source = (batch.REPO_ROOT / "OpenRA.Platforms.Null" / "NullPlatform.cs").read_text(encoding="utf-8")
+        self.assertIn(batch.HEADLESS_LOG_MARKER, source)
+
+
+if __name__ == "__main__":
+    unittest.main()

@@ -636,6 +636,104 @@ against `classic` on the same three maps, scored with `tools/ai/ab_summary.py` a
 
 ---
 
+# Part IIIc — 2026-10-10 re-review of master `c07bef43`, and the A/B infrastructure made runnable
+
+Re-checked by Claude (Opus) after 104 new master commits (engine pin `6da7fce14`). Everything below was verified
+against the tree or a run; the hashes are master commits. The A/B results of the same day are in RR4.
+
+## RR1. Findings F1–F12 and playtest mechanisms M1–M14 on today's master
+
+| Item | Status on `c07bef43` | Evidence |
+|---|---|---|
+| F1 shared random stream | **fixed except one call site**: `BotRng.For(player, key)` gives FNV-1a keyed streams; 95 of 96 call sites pass a key, and `163dad36` salts by `World.Players` slot (M14 same-arm collapse) | the unkeyed one: `BaseBuilderQueueManagerCA.cs:813` (plug candidate pick) |
+| F2 / F3 tick order, no scheduler | open (AR-10 / R8 audit is still the mechanism) | — |
+| F4 concrete hub coupling | unchanged: the same eight modules bind `MasterAiBotModule` (15 lookup sites) | grep `TraitOrDefault<MasterAiBotModule>` |
+| F5 order priority lane | open | — |
+| F6 gate judges leased units only | open; `round_trip_check.py` still counts crossed orders as WARN, not FAIL | `round_trip_check.py:100` |
+| F9 / F10 learning plane | **fixed**: `predictor_calibration` is `wired_awaiting_artifact`; `effective_unit_value` has its switch `BP_effective_unit_value` | `learnables.yaml`, `increment_switches.yaml` |
+| F12 DESIGN §19.6 rollout line | open (binding text, maintainer edit): `DESIGN.md:5206` still says the gate "is false until its A/B" | — |
+| M1–M5 restraint stack | moot: the groups are disarmed on master (each still yields changes in a dry run), and the M13 restraint budget now allows at most one new restraint per increment (`docs/design/M13_RESTRAINT_BUDGET.md`) | `apply_increment_switches.py --groups AE_army_first --dry-run` → 3 changes |
+| M7 dock latch / M8 omniscience | fixed (`368f4554` / `02241219`) | PT6 |
+| M9 learned files never load | fixed (`df00f2cf`, `LearnedFilePath.cs`) | — |
+| M10 front/back planner crash | fixed: past `MaximumTileSearchRange` the search leaves the engine's annulus rings for a map-bounded box scan | `BaseFrontBackPlannerBotModule.cs:331` |
+| M12 MCV lease conflict | fixed (`3c168848`, `ExpansionMcvLease.cs`) | — |
+| M13 team escort drain | partial: `99f89e48` adds the budget and liveness helpers, still unwired | — |
+| M14 team personality convergence | fixed: `fcec9cc8` sets `EmergencyKeepsPersonality: true`, `EmergencyLossArmyPct: 25` | `ai.yaml` |
+
+New on master and found broken: `a55954c1` added switch group `BP_squad_desire` without an `effect_classes` entry, so
+`apply_increment_switches.py` refused every `--groups` run and `test_increment_restraint_budget` failed. Fixed in this
+branch (classified `restraint`: the stance provider can choose Defend, Retreat or Regroup over Attack; counts 27/24/10).
+
+Performance and determinism baselines that master gained (from the campaign status files and audit reports):
+`docs/audit/2026-10-10_a6_module_perf.md` (ExpansionPlanner is the largest module cost, up to 115 ms per 300 ticks on
+Imminent; MasterAi about 8 ms per 300 ticks). A5 same-seed parity: a natural-length pair matched through frame 5809
+and differed only in the end tail (a `RepairBuilding` order at frame 5816). A pair capped at a fixed 16,000 ticks gave
+`IDENTICAL_TAIL_FLUSH`. Peak memory was 8.4–8.8 GiB per game.
+
+## RR2. Why the local agents could not run the A/B: nine blockers, fixed
+
+Codex and Devin closed several gates (seat join, memory policy, A5 parity), but no campaign cell had ever run end to
+end. A capped real-engine run on every pilot map (`tools/ai/map_engine_acceptance.py`) plus a fresh check of the pins
+found nine defects. Each would have voided or crashed the campaign. Full write-up and rules: LESSONS_LEARNED "A runner that
+never ran a cell".
+
+| # | Defect | Effect | Fix |
+|---|---|---|---|
+| 0 | dual-arm `ai.yaml` passed as a search-path overlay, which the engine ignores (last `mods/cameo` wins) | `Invalid bot type: hard_control/hard_treatment`: **no arm's bot ever ran**; the cap Lua then crashed and left a seat `undecided` | the arms ride in the generated map's `Rules:` (`install_dual_arm_rules`) |
+| 1 | `campaign_runner.py` used `shutil`, `zipfile`, `batch` unimported | crash before launch / after the game, before the receipt | imports + static name test |
+| 2 | variant written to `Support/UserMaps` (not a `MapFolders` entry) | `Could not find map` before tick 0 | `batch.USER_MAP_DIR` |
+| 3 | cap and actor markers read from `server.log` (Lua prints to `lua.log`) | a capped game can never be `CENSORED_CAP` | read `lua.log` |
+| 4 | the pair's two flips cancelled: control held the same spawns in both games | spawn advantage fully confounded with the switch | sides geographic, arm swaps; per-arm spawn test |
+| 5 | text pins hashed CRLF bytes (Windows checkout) | manifest invalid on any LF host; two pins stale everywhere | `text_sha` (CRLF→LF) for tools/schema/baseline |
+| 6 | `_ra_siberian-pass.oramap` vs the real `_ra_Siberian-Pass.oramap` | fails on case-sensitive hosts | exact case |
+| 7 | `BP_squad_desire` without effect class | applier refused every run | classified |
+| 8 | stale copied `OpenRA.Mods.Cameo.dll` (one A5 attempt lost) | old bot code under new yaml | the batch refuses a stale build |
+
+## RR3. The memory blocker: textures, and a headless platform
+
+One match created 200+ 2048×2048 sprite sheets (≥ 3.2 GiB of textures; sequences for every faction load at map
+load). The GL driver keeps them in process memory, and that, not the managed heap (~1.1 GB live), drove the 8–9 GiB
+peaks. The mod now ships `OpenRA.Platforms.Null` (`Game.Platform=Null`; harness `--render headless`; runner
+`execute-one --render headless`). It creates no textures and skips `RenderTick`, and logic is unchanged. Measured
+(Linux): peak 8.62 → 5.19 GB, in-game 5.1 → 2.6 GB, about 100 ticks/s after load. A same-seed rendered/headless pair
+matched on all 2,673 shared net frames (orders and sync hashes) through the 8,000-tick cap. LESSONS_LEARNED "Headless
+bot matches" has the table and the rules. The memory policy constants are unchanged: re-measure on the Windows host
+first.
+
+## RR4. A/B group games on today's master (BU pilot switch, `hard_treatment` vs `hard_control`)
+
+The arms are the pilot's: `BU_harvester_logistics` on the treatment only (dual-arm yaml from
+`ab_campaign_pilot.materialize_dual_arm_ai`). They were played with `run_ai_match_batch.py` (mirror factions,
+`--swap-bots`, so each arm plays each spawn set once), not through the campaign runner. Both arms activated in every
+game (0 `Invalid bot type`). The two 1v1 pairs were rendered and the rest headless. The first Red Spice pair was voided by
+the harness's own fingerprint check, because a commit landed mid-batch (`mod_commit` drift; correct fail-closed
+behaviour), so it was re-run in full.
+
+| Pair (mirror factions) | Games | Treatment wins | Treatment / control earned at tick 9,000 | Reading |
+|---|---:|---:|---|---|
+| 1v1 A Nuclear Winter, `td_gdi` | 2 | 1 | 0.86, 1.51 | spawn 90,24 won both games |
+| 1v1 Satan's Clutch, `ra1_soviets` | 2 | 0 | 0.69, 0.92 | control won from both spawns |
+| 2v2 Red Spice, `td_nod` | 2 | 0 | 0.86, 0.93 | control won from both sides; the losing treatment pairs all ended `turtle` |
+| 3v3 Winter's End (Rich), `ra1_allies` | 2 | 1 | 0.86, 0.82 | the bottom-right team won both games |
+| **pooled** | **8** | **2 (25 %)** | mean 0.93 at ticks 3,000 / 6,000 / 9,000 alike; 6 of 8 below 1.0 by 9,000 | — |
+
+Two maps were decided by spawn: the same side won both games whichever arm held it. On the other two maps, control won all four games
+from both sides. Early income, which comes before fights decide anything, is about 7 % lower for the treatment, but
+the per-game ratios spread from 0.69 to 1.51. **Verdict: no evidence for `BU_harvester_logistics`, and a weak
+signal against it. Eight games cannot decide it.** The 64-game pilot was built for this question. The early-tick
+income ratio is the metric to pre-register, because final income follows the winner.
+
+**`hard` vs `classic` reference (master as shipped, headless):** Terra Cotta 2v2 `td_gdi`: `hard` won 3 of 5 (the one
+earlier rendered game plus 4 side-swapped repeats). It went 2–0 from the bottom-right and 1–2 from the top-left. Both
+losses were fast (13,430 and 16,835 ticks) and in each the whole `hard` team ended `turtle`. Winter's End 3v3
+`td_gdi`: `hard` won from the top-left in 55,418 ticks. The 2026-10-09 pre-arm reference won the same Terra Cotta seats once. Master's
+`hard` is still ahead of `classic`, but the fast team-wide turtle losses are worth a look next to M14
+(`EmergencyKeepsPersonality` is on, so these are probably ordinary emergencies; check the personality timelines).
+
+Logging observation, not investigated: in the Satan's Clutch records the losing treatment seat ends with an empty
+`personality`, and the per-seat `personality_timeline` entries look shifted between seats. Check `AiMatchLogWriter`
+before the analyzer relies on these fields.
+
 # Part IV — The improvement plan
 
 ## 8. Goals and the measures that prove them
