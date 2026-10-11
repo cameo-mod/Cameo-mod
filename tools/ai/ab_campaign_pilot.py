@@ -30,7 +30,7 @@ SETUPS = [
  ("3v3_winter_asg",3,"winters_end_rich",("ra1_allies","ra1_soviets","td_gdi")),("3v3_winter_sgn",3,"winters_end_rich",("ra1_soviets","td_gdi","td_nod")),
  ("4v4_sahara",4,"great_sahara_2",("td_gdi","td_nod","ra1_allies","ra1_soviets")),("4v4_ice",4,"ice_cold",("td_gdi","td_nod","ra1_allies","ra1_soviets")),
 ]
-RAM_FLOOR_BYTES = int(15.5 * 1024**3)   # admission floor: 10.5 GiB cap + ~5 GiB host margin
+RAM_FLOOR_BYTES = int(13.5 * 1024**3)   # admission = cap(10.5) + hard floor(3): worst-case free >=3.9 GiB at full cap
 PROCESS_CAP_BYTES = int(10.5 * 1024**3) # decided cell ceiling (was 6.5 GiB; startup burst peaks ~9.5 GiB)
 ROUND_STAGES = [16,32,48,64]
 ECONOMY_INTERVAL_TICKS = tuple(range(5000, 45001, 5000))

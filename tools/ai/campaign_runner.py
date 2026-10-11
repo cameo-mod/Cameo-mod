@@ -15,18 +15,21 @@ import json
 import os
 import pathlib
 import re
+import shutil
 import sqlite3
 import subprocess
 import sys
 import tempfile
 import time
+import zipfile
 from contextlib import contextmanager
 
 import ab_campaign_pilot as pilot
+import run_ai_match_batch as batch
 
 CAP_TICK = 45000
 PRIVATE_LIMIT = int(10.5 * 1024**3)     # decided cell ceiling (was 6.5 GiB; startup burst peaks ~9.5 GiB)
-FREE_RAM_FLOOR = int(15.5 * 1024**3)    # admission floor: cap + ~5 GiB host margin
+FREE_RAM_FLOOR = int(13.5 * 1024**3)    # admission = cap(10.5) + hard floor(3): worst-case free >=3.9 GiB at full cap
 FREE_RAM_HARD_FLOOR = 3 * 1024**3       # runtime stop: available RAM below this kills the cell
 FREE_RAM_SOFT_FLOOR = 4 * 1024**3       # soft floor: telemetry threshold for low-RAM pressure
 ACTOR_SAMPLE_INTERVAL = 5000
@@ -370,7 +373,7 @@ def run_one(manifest: dict, manifest_sha: str, job: dict, *, root: pathlib.Path,
 	pilot.validate(manifest, root, engine_root, execution=True)
 	execution_gate(manifest, a5_receipt=a5_receipt, a5_receipt_sha256=a5_receipt_sha256,
 		source_commit=manifest["pins"]["source_commit"], engine_version=manifest["pins"]["engine_version"])
-	if available_ram_bytes() < FREE_RAM_FLOOR: raise ValueError("available RAM below 15.5 GiB admission floor")
+	if available_ram_bytes() < FREE_RAM_FLOOR: raise ValueError("available RAM below 13.5 GiB admission floor")
 	queue = ResumeQueue(support_root / "campaign_queue.sqlite", manifest_sha)
 	queue.install(pilot.make_jobs(manifest))
 	queue.recover_orphans(kill_game=lambda cell, pid: kill_owned_pid(pid, executable,
@@ -387,7 +390,7 @@ def run_one(manifest: dict, manifest_sha: str, job: dict, *, root: pathlib.Path,
 	game_root.mkdir(parents=True, exist_ok=False)
 	game_support = game_root / "Support"; game_support.mkdir()
 	logs = game_support / "Logs"; logs.mkdir()
-	maps = game_support / "UserMaps"; maps.mkdir()
+	maps = game_support / "maps" / "cameo" / "{DEV_VERSION}"; maps.mkdir(parents=True)
 	overlay = game_root / "Overlay"; pilot.materialize_dual_arm_ai(root, overlay, job["switch"], manifest.get("ratchet_accepted_switches", []))
 	shutil.copyfile(root / "mods" / "cameo" / "mod.yaml", overlay / "mods" / "cameo" / "mod.yaml")
 	variant = maps / ("campaign_" + re.sub(r"[^A-Za-z0-9_.-]", "_", job["cell_id"]))

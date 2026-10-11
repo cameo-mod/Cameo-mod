@@ -43,7 +43,7 @@ class CampaignRunnerTests(unittest.TestCase):
 
 	def test_bounds_and_parallel_policy(self):
 		self.assertEqual(int(10.5 * 1024**3), runner.PRIVATE_LIMIT)
-		self.assertEqual(int(15.5 * 1024**3), runner.FREE_RAM_FLOOR)
+		self.assertEqual(int(13.5 * 1024**3), runner.FREE_RAM_FLOOR)
 		self.assertEqual(3 * 1024**3, runner.FREE_RAM_HARD_FLOOR)
 		self.assertEqual(4 * 1024**3, runner.FREE_RAM_SOFT_FLOOR)
 		self.assertEqual(45000, runner.CAP_TICK)
