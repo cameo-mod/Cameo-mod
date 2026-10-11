@@ -2,8 +2,9 @@
 
 BU_harvester_logistics A/B pilot. Approved shape: 64 games, 16 setups,
 2 matched seed-pair members per setup (seeds 1337/2026), swapped sides,
-45,000 world-tick cap, one serial worker, 10.5 GiB process cap,
-13.5 GiB free-RAM admission floor (cap + 3 GiB hard runtime floor),
+45,000 world-tick cap, 10.5 GiB process cap, admission at measured
+headless peak (5.24 GiB) + 3 GiB reserve, >=14 GiB for a second parallel
+small game, max 2 parallel small games, 3v3/4v4 exclusive (ruling 04:50Z),
 claim-once queue, immutable receipts, incomplete cells preserved and
 never replaced or retried.
 
@@ -36,8 +37,47 @@ Cell `1v1_nuclear_gdi|1337|0` — attempt 1:
 - Also fixed on the same path before launch: missing `shutil`,
   `zipfile`, `run_ai_match_batch` imports (never-executed code path).
 
+## 2026-10-11 — consolidated-branch fix port (launch blockers, 06:30-07:10Z)
+
+Devin Coordinator review of codex/ab-campaign@169388f97 found the
+launch-blocking defects from the thin-overlay diagnosis plus an inverted
+memory ruling. Ported as `codex/ab-campaign-port-fixes@59cb7295c`
+(tooling-manager@{c259a8ceb,01b15da12,ddd16354d,c67e3ae30,4029a47d0}
+applied onto the consolidated head, preserving its newer text_sha /
+BOM-aware version read / geographic-home seat fix / 4f69df pin /
+receipt schema):
+
+- Inverted 04:50Z ruling corrected: 54d432b7c had set the per-process
+  cap to HEADLESS_PEAK+3 GiB (~8.24 GiB) — a kill threshold below the
+  documented ~9.5 GiB startup burst — while gating all admission at
+  14 GiB. Restored: cap 10.5 GiB, admission = peak+3 (~8.24 GiB),
+  second small game needs >=14 GiB, max 2 parallel, large exclusive.
+- Thin Overlay -> per-cell FullMods materialization (hardlink clone of
+  mods/cameo minus ai/, real files only). Fixes mod.yaml:247
+  ContentPacks/Outpost2/content.yaml YamlException that dropped the arm
+  bot registrations -> Invalid bot type -> brainless seats -> MCVs never
+  deployed in every attempt so far.
+- DEGENERATE_NO_ECONOMY adjudicator verdict + debug.log scan
+  (Invalid bot type / YamlException) -> INCOMPLETE/
+  INVALID_MOD_REGISTRATION; verified markers live in driver.log
+  (cap/actor), server.log (seed pin), debug.log (registration).
+- Windows-safe pid_alive, two-poll stable game-PID resolution,
+  monitor_process watch_pid ordering, game PID (not launcher) in
+  queue/receipt.
+- Stale execution manifest on dead 6da7fce pin revoked.
+
+Focused tests 24/24, py_compile clean, offline FullMods materialization
+verified on this tree (33,472 linked entries; mod.yaml, ContentPacks,
+hard_control/hard_treatment all resolve).
+
 ## Pending
 
+- Merge `codex/ab-campaign-port-fixes` onto `codex/ab-campaign` (DevOps),
+  then regenerate the execution manifest with final tool/engine SHAs.
+- Luna exact-SHA review of engine merge `4f69df005f` / pin `fb7faffaf`.
+- A5 fixed-tick parity rerun on source `e49acf41` + new engine binary.
 - Re-launch cell `1v1_nuclear_gdi|1337|0` under the corrected runner
-  once host free RAM >= 13.5 GiB (bounded wait active).
-- Remaining 63 cells stay PLANNED in the fresh queue; serial, one worker.
+  once host free RAM >= ~8.24 GiB (admission floor, ruling 04:50Z).
+  No bounded wait may be armed outside the reserved launch window.
+- Remaining cells stay PLANNED; serial, one worker until the second-
+  small-game parallel gate is exercised under observation.
