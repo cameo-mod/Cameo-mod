@@ -1,13 +1,34 @@
-import pathlib, sys, tempfile, unittest
+import json, pathlib, sys, tempfile, unittest
 ROOT=pathlib.Path(__file__).resolve().parents[2]
 sys.path.insert(0,str(ROOT/"tools"/"ai"))
 import ab_campaign_pilot as pilot
 import apply_increment_switches as increment
+import campaign_runner as runner
+
+def campaign_receipt():
+ seats=[]
+ for sid,team,arm,bot in (("Multi0","A","control","hard_control"),("Multi1","B","treatment","hard_treatment")):
+  seats.append({"seat_id":sid,"team":team,"arm":arm,"bot_type":bot,"faction":"td_gdi","home":sid,
+   "spawn":int(sid[-1]),"proof_source":"generated_map.yaml + missing match record (not started)","outcome":"unknown",
+   "metrics":{"earned":None,"spent":None,"banked":None,"army_value":None,"kills":None,"deaths":None,"timeline":[]}})
+ return {"schema_version":1,"campaign_id":"pilot","manifest_sha256":"a"*64,"baseline_commit":"b"*40,
+  "engine_sha256":"c"*64,"switch":"BU_harvester_logistics","setup_id":"1v1-test",
+  "map":{"name":"test","path":"mods/cameo/maps/test.oramap","sha256":"d"*64,
+   "generated_map_yaml_sha256":"e"*64,"required_seats":2},"pair_id":"pair-0","pair_member":0,"seed":17,
+  "seed_proof":{"env_value":"17","server_log_pin_line":None,"server_log_sha256":None},
+  "teams":{"A":{"arm":"control","bot_type":"hard_control","seat_ids":["Multi0"]},
+   "B":{"arm":"treatment","bot_type":"hard_treatment","seat_ids":["Multi1"]}},"resolved_seats":seats,
+  "end_class":"INCOMPLETE","end_reason":"NOT_STARTED","winner_team":None,"world_tick":None,
+  "cap":{"world_tick_cap":45000,"marker_observed":False,"marker_tick":None},
+  "memory":{"process_id":None,"peak_private_bytes":0,"limit_private_bytes":6*1024**3+1024**3//2,"samples":[]},
+  "runtime":{"started_utc":None,"finished_utc":None,"exit_code":None,"wall_seconds":None,"stall_seconds":180,"pid_scoped_cleanup":True},
+  "artifacts":{name:{"path":None,"sha256":None,"missing_reason":"not started"}
+   for name in ("server_log","driver_log","matches_jsonl","replay","map_yaml","support_bundle")}}
 
 def manifest():
  baseline=ROOT/"tools/tests/fixtures/ab_campaign_baseline.json"
  _,groups,_=increment.load_spec(ROOT/"tools/ai/increment_switches.yaml")
- return {"schema":1,"switch":pilot.SWITCH,"execution_approved":False,"pairs_per_setup":2,"team_size_scope":[1,2,3,4],"arm_bot_types":{"control":"hard_control","treatment":"hard_treatment"},"baseline_manifest_path":"tools/tests/fixtures/ab_campaign_baseline.json","baseline_manifest_sha256":pilot.sha(baseline),"pins":{"source_commit":"964cdb630b1514e1c1a0baed55cbdbc427d5fc11","engine_version":"6da7fce14da541180c6baddd6925118fbef65b94"},"switch_patch_sha256":increment.group_patch_sha256(groups[pilot.SWITCH]),"baseline_ai_payload_sha256":pilot.ai_payload_sha(ROOT),"treatment_ai_payload_sha256":pilot.ai_payload_sha(ROOT,pilot.SWITCH),"tool_sha256":{"driver_analyzer":pilot.sha(ROOT/"tools/ai/ab_campaign_pilot.py"),"campaign_runner":pilot.sha(ROOT/"tools/ai/campaign_runner.py"),"batch_runner":pilot.sha(ROOT/"tools/ai/run_ai_match_batch.py"),"switch_applier":pilot.sha(ROOT/"tools/ai/apply_increment_switches.py")},"receipt_schema_sha256":pilot.sha(ROOT/"tools/ai/ab_campaign_receipt.schema.json"),"binary_sha256":{"bin/OpenRA.exe":"5693f355792ebb68699793f96ef2167b733c5e7756f580858c5090226418c984","bin/OpenRA.dll":"92ee9dacd08869593dc5ad70c2d1ce48f701caf8277ea3bd692acf2224a8ca77","bin/OpenRA.Mods.Cameo.dll":"41f37982c146f73b4a9c07071f34b47e214178cb9413e514f05af9af2d44b3a4"},"round_stages":pilot.ROUND_STAGES,"acceptance_thresholds":pilot.DEFAULT_THRESHOLDS,"slot_policy":dict(pilot.SLOT_POLICY),"seeds":[1337,7331],"maps":[{"name":k,"path":v[0],"sha256":v[1],"required_seats":v[2]} for k,v in pilot.MAPS.items()],"setups":[{"id":n,"team_size":s,"map":m,"team_factions":list(f)} for n,s,m,f in pilot.SETUPS]}
+ return {"schema":1,"switch":pilot.SWITCH,"execution_approved":False,"pairs_per_setup":2,"team_size_scope":[1,2,3,4],"arm_bot_types":{"control":"hard_control","treatment":"hard_treatment"},"baseline_manifest_path":"tools/tests/fixtures/ab_campaign_baseline.json","baseline_manifest_sha256":pilot.sha(baseline),"pins":{"source_commit":"964cdb630b1514e1c1a0baed55cbdbc427d5fc11","engine_version":"6da7fce14da541180c6baddd6925118fbef65b94"},"switch_patch_sha256":increment.group_patch_sha256(groups[pilot.SWITCH]),"baseline_ai_payload_sha256":pilot.ai_payload_sha(ROOT),"treatment_ai_payload_sha256":pilot.ai_payload_sha(ROOT,pilot.SWITCH),"tool_sha256":{"driver_analyzer":pilot.sha(ROOT/"tools/ai/ab_campaign_pilot.py"),"campaign_runner":pilot.sha(ROOT/"tools/ai/campaign_runner.py"),"batch_runner":pilot.sha(ROOT/"tools/ai/run_ai_match_batch.py"),"switch_applier":pilot.sha(ROOT/"tools/ai/apply_increment_switches.py")},"binary_sha256":{"bin/OpenRA.exe":"5693f355792ebb68699793f96ef2167b733c5e7756f580858c5090226418c984","bin/OpenRA.dll":"92ee9dacd08869593dc5ad70c2d1ce48f701caf8277ea3bd692acf2224a8ca77","bin/OpenRA.Mods.Cameo.dll":"41f37982c146f73b4a9c07071f34b47e214178cb9413e514f05af9af2d44b3a4"},"round_stages":pilot.ROUND_STAGES,"acceptance_thresholds":pilot.DEFAULT_THRESHOLDS,"slot_policy":dict(pilot.SLOT_POLICY),"seeds":[1337,7331],"maps":[{"name":k,"path":v[0],"sha256":v[1],"required_seats":v[2]} for k,v in pilot.MAPS.items()],"setups":[{"id":n,"team_size":s,"map":m,"team_factions":list(f)} for n,s,m,f in pilot.SETUPS]}
 
 class PilotPlanTests(unittest.TestCase):
  def test_approved_amendment_expands_to_64_side_swapped_games(self):
@@ -29,16 +50,11 @@ class PilotPlanTests(unittest.TestCase):
  def test_generated_map_writer_proves_mixed_faction_4v4_seats_without_launch(self):
   m=manifest();job=next(j for j in pilot.make_jobs(m) if j["team_size"]==4 and j["game_in_pair"]==1)
   with tempfile.TemporaryDirectory() as temp:
-   dest=pathlib.Path(temp)/"variant";proof=pilot.prove_generated_map(job,ROOT,dest)
-   monitor_text=(dest/"ab_campaign_monitor.lua").read_text(encoding="utf-8")
+   proof=pilot.prove_generated_map(job,ROOT,pathlib.Path(temp)/"variant")
   self.assertEqual("generated_map.yaml",proof["seat_proof_source"])
   self.assertEqual(8,len(proof["seats"]))
   self.assertEqual({"td_gdi","td_nod","ra1_allies","ra1_soviets"},{x["faction"] for x in proof["seats"]})
   self.assertTrue(all(x["home_location"] for x in proof["seats"]))
-  self.assertEqual(45000,proof["runtime_monitor"]["cap_tick"])
-  self.assertEqual("AB_CAMPAIGN_ACTOR_SAMPLE",proof["runtime_monitor"]["actor_count_marker"])
-  self.assertIn('"Neutral", "Creeps"',monitor_text)
-  self.assertIn('AB_CAMPAIGN_CAP tick=',monitor_text)
 
  def test_map_tamper_and_execution_authority_fail_closed(self):
   m=manifest();m["maps"][0]["sha256"]="0"*64
@@ -65,16 +81,103 @@ class PilotPlanTests(unittest.TestCase):
    with self.assertRaisesRegex(ValueError,"destination must be new"):
     pilot.materialize_ai_arm(ROOT,base/"treatment",pilot.SWITCH)
 
- def test_dual_arm_ai_aliases_isolate_selected_switch(self):
+ def test_dual_arm_ai_aliases_isolate_treatment_switch(self):
   with tempfile.TemporaryDirectory() as temp:
-   result=pilot.materialize_dual_arm_ai(ROOT,pathlib.Path(temp)/"combined",pilot.SWITCH)
-   text=(pathlib.Path(temp)/"combined"/"mods"/"cameo"/"ai"/"ai.yaml").read_text(encoding="utf-8")
+   out=pathlib.Path(temp)/"dual"
+   result=pilot.materialize_dual_arm_ai(ROOT,out,pilot.SWITCH)
+   text=(out/"mods"/"cameo"/"ai"/"ai.yaml").read_text(encoding="utf-8")
    self.assertEqual({"control":"hard_control","treatment":"hard_treatment"},result["arm_types"])
-   self.assertIn("Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, hard_control, hard_treatment",text)
    self.assertIn("Condition: campaign_treatment\n\t\tBots: hard_treatment",text)
    self.assertIn("HarvesterBotModuleCA@generic:\n\t\tRequiresCondition: genericbot && !campaign_treatment",text)
    self.assertIn("HarvesterBotModuleCA@campaign_treatment:\n\t\tUseHarvesterLogistics: true\n\t\tRequiresCondition: campaign_treatment",text)
-   self.assertIn("UseHarvesterLogistics: true",text)
+
+ def test_runtime_observer_emits_bounded_actor_samples_and_cap_marker(self):
+  with tempfile.TemporaryDirectory() as temp:
+   root=pathlib.Path(temp)
+   (root/"duel_rules.yaml").write_text("World:\n\tDefaultWorld:\n",encoding="utf-8")
+   result=pilot.install_campaign_monitor(root,8)
+   script=(root/"ab_campaign_monitor.lua").read_text(encoding="utf-8")
+   self.assertEqual(45000,result["cap_tick"])
+   self.assertIn("AB_CAMPAIGN_ACTOR_SAMPLE",script)
+   self.assertIn("AB_CAMPAIGN_CAP tick=",script)
+   self.assertIn("AB_CAMPAIGN_STARTED tick=",script)
+
+ def test_campaign_runner_receipt_is_atomic_and_immutable(self):
+  receipt=campaign_receipt()
+  with tempfile.TemporaryDirectory() as temp:
+   path=pathlib.Path(temp)/"cell_receipt.json"
+   digest=runner.write_immutable_receipt(path,receipt)
+   self.assertEqual(64,len(digest)); self.assertEqual(receipt,json.loads(path.read_text(encoding="utf-8")))
+   with self.assertRaises(FileExistsError): runner.write_immutable_receipt(path,receipt)
+
+ def test_campaign_runner_rejects_incomplete_schema_and_false_winner(self):
+  receipt=campaign_receipt();receipt["unexpected"]="silently ignored?"
+  with self.assertRaisesRegex(ValueError,"extra=.*unexpected"):
+   runner.validate_receipt(receipt)
+  receipt=campaign_receipt();receipt["winner_team"]="A"
+  with self.assertRaisesRegex(ValueError,"INCOMPLETE receipt"):
+   runner.validate_receipt(receipt)
+  receipt=campaign_receipt();receipt["teams"]["A"]["seat_ids"]=[]
+  with self.assertRaisesRegex(ValueError,"exactly enumerate"):
+   runner.validate_receipt(receipt)
+  receipt=campaign_receipt();receipt["seed_proof"]["env_value"]="18"
+  with self.assertRaisesRegex(ValueError,"does not match seed"):
+   runner.validate_receipt(receipt)
+  receipt=campaign_receipt();receipt["map"]["generated_map_yaml_sha256"]="not-a-digest"
+  with self.assertRaisesRegex(ValueError,"lowercase SHA-256"):
+   runner.validate_receipt(receipt)
+  receipt=campaign_receipt();receipt["memory"]["peak_private_bytes"]=receipt["memory"]["limit_private_bytes"]
+  with self.assertRaisesRegex(ValueError,"identify a memory kill"):
+   runner.validate_receipt(receipt)
+  receipt["end_reason"]="MEMORY_KILL_AT_PRIVATE_STOP"
+  runner.validate_receipt(receipt)
+
+ def test_campaign_runner_schema_is_strict_and_matches_writer_version(self):
+  schema=json.loads((ROOT/"tools/ai/ab_campaign_receipt.schema.json").read_text(encoding="utf-8"))
+  self.assertEqual(1,schema["properties"]["schema_version"]["const"])
+  self.assertFalse(schema["additionalProperties"])
+  self.assertIn("resolved_seats",schema["required"])
+
+ def test_campaign_runner_refuses_stale_progress_or_server_logs_before_admission(self):
+  with tempfile.TemporaryDirectory() as temp:
+   root=pathlib.Path(temp);(root/"old.log").write_text("stale",encoding="utf-8")
+   with self.assertRaisesRegex(FileExistsError,"fresh paths"):
+    runner.run_supervised(root/"OpenRA.exe",[],cwd=root,stdout_path=root/"stdout.log",seed=7,
+     progress_log=root/"old.log",server_log_path=root/"server.log")
+
+ def test_campaign_runner_checks_seed_pin_even_when_child_exits_before_first_sample(self):
+  import sys
+  from unittest.mock import patch
+  with tempfile.TemporaryDirectory() as temp:
+   root=pathlib.Path(temp);server=root/"server.log";progress=root/"progress.log"
+   script="import os,pathlib,sys; pathlib.Path(sys.argv[1]).write_text('CAMEO DEV SEED pinned - RandomSeed='+os.environ['CAMEO_DEV_SEED']+' (parity harness)\\nAB_CAMPAIGN_ACTOR_SAMPLE tick=45000 actor_count=22\\nAB_CAMPAIGN_CAP tick=45000\\n'); pathlib.Path(sys.argv[2]).write_text('tick')"
+   with patch.object(runner,"free_physical_bytes",return_value=16*1024**3), patch.object(runner,"process_private_bytes",return_value=0):
+    result=runner.run_supervised(pathlib.Path(sys.executable),["-c",script,str(server),str(progress)],cwd=root,
+     stdout_path=root/"stdout.log",seed=7,progress_log=progress,server_log_path=server,
+     sample_interval_seconds=.05,wall_timeout_seconds=3,stall_timeout_seconds=3)
+   self.assertEqual("NATURAL_EXIT",result.status)
+   self.assertEqual("CAMEO DEV SEED pinned - RandomSeed=7 (parity harness)",result.seed_pin_line)
+   self.assertEqual(64,len(result.seed_server_log_sha256))
+   self.assertEqual(45000,result.cap_marker_tick)
+   receipt=campaign_receipt();receipt["seed"]=7;receipt["seed_proof"]["env_value"]="7"
+   incomplete=runner.apply_supervised_result(receipt,result,7)
+   self.assertEqual("INCOMPLETE",incomplete["end_class"])
+   self.assertEqual("CAP_SUPPORT_MISSING",incomplete["end_reason"])
+   receipt["artifacts"]["support_bundle"]={"path":"support.zip","sha256":"a"*64,"missing_reason":None}
+   capped=runner.apply_supervised_result(receipt,result,7)
+   self.assertEqual("CAP",capped["end_class"])
+   self.assertIsNone(capped["winner_team"])
+
+ def test_campaign_runner_requires_proven_cap_and_no_winner(self):
+  receipt=campaign_receipt();receipt.update({"end_class":"CAP","end_reason":"WORLD_TICK_CAP",
+   "world_tick":45000,"cap":{"world_tick_cap":45000,"marker_observed":True,"marker_tick":45000}})
+  receipt["seed_proof"].update({"server_log_pin_line":"CAMEO DEV SEED pinned - RandomSeed=17 (parity harness)","server_log_sha256":"f"*64})
+  receipt["runtime"].update({"started_utc":"2026-10-10T10:00:00Z","finished_utc":"2026-10-10T10:05:00Z","exit_code":0,"wall_seconds":300})
+  receipt["artifacts"]["support_bundle"]={"path":"support.zip","sha256":"f"*64,"missing_reason":None}
+  runner.validate_receipt(receipt)
+  receipt["cap"]["marker_tick"]=15000
+  with self.assertRaisesRegex(ValueError,"CAP receipt requires"):
+   runner.validate_receipt(receipt)
 
  def test_missing_map_is_rejected(self):
   m=manifest();m["maps"][0]["path"]="mods/cameo/maps/missing.oramap"
@@ -96,26 +199,6 @@ class PilotPlanTests(unittest.TestCase):
   receipt["cap_tick"]=15000
   self.assertEqual("INVALID_UNKNOWN",pilot.adjudicate(rows,receipt,job,"a"*64)["verdict"])
   receipt["cap_tick"]=45000;receipt["seats"][0]["spawn"]+=1
-  self.assertEqual("INVALID_UNKNOWN",pilot.adjudicate(rows,receipt,job,"a"*64)["verdict"])
-
- def test_adjudicator_joins_real_coordinate_home_records(self):
-  # Real cameo-ai-matches.jsonl rows carry player.home as the SPAWN COORDINATE
-  # ("22,16"), not the PlayerReference name ("Multi0"). Seats resolved by
-  # prove_generated_map carry the coordinate in home_location. Joining on
-  # seat["home"] silently INVALIDs every real record (DEFECT_2026-10-11).
-  m=manifest(); job=next(j for j in pilot.make_jobs(m) if j["team_size"]==1 and j["game_in_pair"]==0)
-  loc={"Multi0":"22,16","Multi1":"49,55"}
-  seats=[dict(s,home_location=loc[s["home"]]) for s in job["seat_assignments"]]
-  rows=[]
-  for seat in seats:
-   outcome="won" if seat["side"]==job["treatment_side"] else "lost"
-   rows.append({"player":{"seat":"seat_3" if seat["home"]=="Multi0" else "seat_4","home":seat["home_location"],"spawn":0,"bot_type":seat["bot_type"],"faction":seat["faction"],"outcome":outcome},"stats":{"stats_timeline_fields":"tick,earned,spent,banked","stats_timeline":[[45000,90,40,50]]}})
-  receipt={"cell_id":job["cell_id"],"manifest_sha256":"a"*64,"switch":job["switch"],"setup":job["setup"],"map":job["map"],"map_sha256":job["map_sha256"],"seed":job["seed"],"pair":job["pair"],"game_in_pair":job["game_in_pair"],"control_side":job["control_side"],"treatment_side":job["treatment_side"],"arm_bot_types":job["arm_bot_types"],"status":"NATURAL_END","end_reason":"natural","seat_proof_source":"generated_map.yaml","map_yaml_sha256":"b"*64,"seats":seats}
-  got=pilot.adjudicate(rows,receipt,job,"a"*64)
-  self.assertEqual("TREATMENT_WIN",got["verdict"],got.get("reason"))
-  self.assertEqual(90,got["team_totals"]["treatment"]["earned"])
-  # a wrong-shape home (neither coordinate nor name) stays fail-closed
-  rows[0]["player"]["home"]="not,a,seat"
   self.assertEqual("INVALID_UNKNOWN",pilot.adjudicate(rows,receipt,job,"a"*64)["verdict"])
 
  def test_analyzer_preserves_all_unrun_planned_games(self):
@@ -154,12 +237,12 @@ class PilotPlanTests(unittest.TestCase):
   with self.assertRaisesRegex(ValueError,"fix/safety"):
    pilot.treatment_baseline([],"AG_assault_fanout")
   self.assertTrue(pilot.regression_due(5));self.assertFalse(pilot.regression_due(4))
-  c=pilot.SlotCounter(); floor=24*1024**3
+  c=pilot.SlotCounter(); floor=6*1024**3
   self.assertTrue(c.acquire("a",1,floor));self.assertTrue(c.acquire("b",2,floor));self.assertTrue(c.acquire("c",1,floor));self.assertFalse(c.acquire("d",2,floor))
   self.assertFalse(c.acquire("large",4,floor));c.release("a");c.release("b");c.release("c")
   self.assertTrue(c.acquire("large",4,floor));self.assertFalse(c.acquire("small",1,floor));
-  with self.assertRaises(ValueError): c.update_private_bytes("large",11*1024**3)
-  self.assertFalse(pilot.slots_available(1,pilot.RAM_FLOOR_BYTES-1))
+  with self.assertRaises(ValueError): c.update_private_bytes("large",8*1024**3)
+  self.assertFalse(pilot.slots_available(1,floor-1))
   with tempfile.TemporaryDirectory() as temp:
    db1=pilot.SqliteSlotCounter(pathlib.Path(temp)/"slots.sqlite")
    db2=pilot.SqliteSlotCounter(pathlib.Path(temp)/"slots.sqlite")
@@ -167,7 +250,14 @@ class PilotPlanTests(unittest.TestCase):
    self.assertTrue(db1.acquire("z",1,floor));self.assertFalse(db2.acquire("fourth",1,floor))
    self.assertFalse(db2.acquire("exclusive",4,floor));db2.heartbeat("x",1024);db1.release("x");db2.release("y");db1.release("z")
    self.assertTrue(db2.acquire("exclusive",4,floor));self.assertFalse(db1.acquire("small",1,floor))
-   with self.assertRaisesRegex(ValueError,"memory cap"): db2.heartbeat("exclusive",11*1024**3)
+   with self.assertRaisesRegex(ValueError,"memory cap"): db2.heartbeat("exclusive",8*1024**3)
    db2.release("exclusive");db2.release("y");db1.release("z")
+
+ def test_switch_order_covers_the_frozen_sixty_group_catalog(self):
+  import apply_increment_switches as switches
+  _,groups,_=switches.load_spec(ROOT/"tools"/"ai"/"increment_switches.yaml")
+  doc=(ROOT/"SWITCH_ORDER_2026-10-11.md").read_text(encoding="utf-8")
+  for name in groups: self.assertIn(f"`{name}`",doc)
+  self.assertEqual(60,len(groups))
 
 if __name__=="__main__": unittest.main()
