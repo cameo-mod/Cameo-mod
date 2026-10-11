@@ -59,6 +59,17 @@ def parse_actor_samples(text: str) -> list[dict]:
 
 def pid_alive(pid: int | None) -> bool:
 	if type(pid) is not int or pid <= 0: return False
+	if os.name == "nt":
+		# os.kill(pid, 0) is not a safe probe on Windows; ask the kernel instead.
+		handle = ctypes.windll.kernel32.OpenProcess(0x0400, False, pid)  # PROCESS_QUERY_LIMITED_INFORMATION
+		if not handle:
+			return False
+		try:
+			code = ctypes.c_ulong()
+			ok = ctypes.windll.kernel32.GetExitCodeProcess(handle, ctypes.byref(code))
+			return bool(ok) and code.value == 259  # STILL_ACTIVE
+		finally:
+			ctypes.windll.kernel32.CloseHandle(handle)
 	try:
 		os.kill(pid, 0); return True
 	except PermissionError:
@@ -88,6 +99,53 @@ def kill_owned_pid(pid: int, expected_executable: pathlib.Path, expected_support
 		p.kill(); p.wait(timeout=10); return True
 	except Exception:
 		return False
+
+
+def resolve_game_pid(process, support_dir: pathlib.Path, timeout_seconds: float = 25.0) -> int:
+	"""Return the real game process id.
+
+	bin/OpenRA.exe is the Windows launcher: it spawns short-lived children
+	and then the actual game (a child OpenRA.exe whose command line carries
+	this cell's Engine.SupportDir). The Popen pid is only the launcher
+	(~25 MiB); memory caps and PID-scoped cleanup must target the real game.
+	Requires the same support-tagged child to survive two consecutive polls
+	so transient launcher children are not mistaken for the game. Falls back
+	to the launcher's pid when no stable child appears.
+	"""
+	if os.name != "nt":
+		return process.pid
+	tag = str(support_dir.resolve())
+	probe = (
+		"Get-CimInstance Win32_Process -Filter \"Name='OpenRA.exe'\" | "
+		"Where-Object { $_.CommandLine -and $_.CommandLine.Contains('" + tag.replace("'", "''") + "') } | "
+		"Select-Object ProcessId,ParentProcessId,CommandLine | ConvertTo-Json -Compress")
+	deadline = time.monotonic() + timeout_seconds
+	candidate = None
+	while time.monotonic() < deadline:
+		if process.poll() is not None:
+			return process.pid
+		try:
+			out = subprocess.run(
+				["powershell.exe", "-NoProfile", "-NonInteractive", "-Command", probe],
+				capture_output=True, text=True, timeout=15).stdout
+			procs = json.loads(out) if out.strip() else []
+			if isinstance(procs, dict):
+				procs = [procs]
+			for proc in procs:
+				pid = int(proc.get("ProcessId") or 0)
+				if proc.get("ParentProcessId") != process.pid or pid <= 0:
+					continue
+				if "Engine.LaunchPath" not in (proc.get("CommandLine") or ""):
+					continue  # launcher-spawned transient, not the game re-exec
+				if not pid_alive(pid):
+					continue
+				if pid == candidate:
+					return pid  # stable across two polls: not a transient
+				candidate = pid
+		except (OSError, subprocess.SubprocessError, ValueError):
+			pass
+		time.sleep(1.5)
+	return candidate if candidate and pid_alive(candidate) else process.pid
 
 
 def available_ram_bytes() -> int:
@@ -297,11 +355,16 @@ def execution_gate(manifest: dict, *, a5_receipt: dict | None, a5_receipt_sha256
 def monitor_process(process, *, driver_log: pathlib.Path, actor_log: pathlib.Path,
 				stall_log: pathlib.Path | None = None,
 				wall_timeout: int = 3000, stall_timeout: int = 180,
-				poll_seconds: float = 2.0, sample_callback=None,
+				poll_seconds: float = 2.0, sample_callback=None, watch_pid: int | None = None,
+				expected_executable: pathlib.Path | None = None,
+				expected_support: pathlib.Path | None = None,
 				clock=time.monotonic, sleep=time.sleep) -> dict:
-	"""Watch one owned process; any stop targets only the supplied Popen handle."""
+	"""Watch one process, sampling/cleaning the verified real-game PID when supplied."""
 	if wall_timeout != 3000 or stall_timeout != 180 or poll_seconds <= 0:
 		raise ValueError("campaign watchdog bounds must remain 3000s/180s")
+	pid = watch_pid or process.pid
+	def alive() -> bool:
+		return pid_alive(pid) if watch_pid else process.poll() is None
 	start = clock(); deadline = start + wall_timeout
 	stall_log = stall_log or driver_log
 	last_log_mtime = stall_log.stat().st_mtime if stall_log.exists() else None
@@ -311,7 +374,7 @@ def monitor_process(process, *, driver_log: pathlib.Path, actor_log: pathlib.Pat
 	stop_reason = None
 	actor_offset = 0
 	last_actor = {"world_tick": None, "actor_count": None}
-	while process.poll() is None:
+	while alive():
 		sleep(poll_seconds)
 		try:
 			mtime = stall_log.stat().st_mtime
@@ -321,7 +384,7 @@ def monitor_process(process, *, driver_log: pathlib.Path, actor_log: pathlib.Pat
 		except OSError:
 			pass
 		try:
-			private = private_bytes(process.pid)
+			private = private_bytes(pid)
 		except (OSError, RuntimeError):
 			stop_reason = "MEMORY_SAMPLE_FAILED"; break
 		peak = max(peak, private)
@@ -345,12 +408,22 @@ def monitor_process(process, *, driver_log: pathlib.Path, actor_log: pathlib.Pat
 		if private >= PRIVATE_LIMIT: stop_reason = "MEMORY_KILL"; break
 		if clock() - last_activity > stall_timeout: stop_reason = "STALL"; break
 		if clock() >= deadline: stop_reason = "WALL_TIMEOUT"; break
-	if stop_reason is not None and process.poll() is None:
-		process.kill()  # Popen.kill terminates this process handle/PID only.
-		process.wait()
+	if watch_pid and alive():
+		if expected_executable is not None and expected_support is not None:
+			kill_owned_pid(pid, expected_executable, expected_support)
+		if process.poll() is None:
+			process.kill()
+	elif stop_reason is not None and process.poll() is None:
+		process.kill()
+	try:
+		process.wait(timeout=15)
+	except (subprocess.TimeoutExpired, TypeError):
+		pass
 	return {"end_reason": stop_reason or "PROCESS_EXIT", "exit_code": process.poll(),
 		"wall_seconds": max(0, clock() - start), "peak_private_bytes": peak,
-		"samples": private_samples, "pid_scoped_cleanup": process.poll() is not None}
+		"samples": private_samples,
+		"pid_scoped_cleanup": (not pid_alive(pid)) if watch_pid else (process.poll() is not None),
+		"watched_pid": pid}
 
 
 def plan_summary(manifest: dict, manifest_sha: str, root: pathlib.Path, engine_root: pathlib.Path | None):
@@ -441,13 +514,15 @@ def run_one(manifest: dict, manifest_sha: str, job: dict, *, root: pathlib.Path,
 	env = os.environ.copy(); env["CAMEO_DEV_SEED"] = str(job["seed"])
 	with driver_log.open("w", encoding="utf-8") as output:
 		process = subprocess.Popen(args, cwd=engine_root, env=env, stdout=output, stderr=subprocess.STDOUT)
-	queue.set_game_pid(job["cell_id"], process.pid)
+	game_pid = resolve_game_pid(process, game_support)
+	queue.set_game_pid(job["cell_id"], game_pid)
 	def heartbeat(row):
 		if row["private_bytes"] < PRIVATE_LIMIT:
 			slot_counter.heartbeat(job["cell_id"], row["private_bytes"])
 		return "LOW_FREE_RAM" if available_ram_bytes() < FREE_RAM_HARD_FLOOR else None
 	monitor_result = monitor_process(process, driver_log=driver_log, actor_log=server_log, stall_log=logs / "debug.log",
-		sample_callback=heartbeat)
+		sample_callback=heartbeat, watch_pid=game_pid if game_pid != process.pid else None,
+		expected_executable=executable, expected_support=game_support)
 	slot_counter.release(job["cell_id"])
 	finished = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
 	log_text = server_log.read_text(encoding="utf-8", errors="replace") if server_log.exists() else ""
