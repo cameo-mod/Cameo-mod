@@ -389,7 +389,7 @@ def run_one(manifest: dict, manifest_sha: str, job: dict, *, root: pathlib.Path,
 	logs = game_support / "Logs"; logs.mkdir()
 	maps = game_support / "UserMaps"; maps.mkdir()
 	overlay = game_root / "Overlay"; pilot.materialize_dual_arm_ai(root, overlay, job["switch"], manifest.get("ratchet_accepted_switches", []))
-	shutil.copyfile(root / "mods" / "cameo" / "mod.yaml", overlay / "mods" / "cameo" / "mod.yaml")
+	pilot.materialize_runtime_overlay_mod(root, overlay)
 	variant = maps / ("campaign_" + re.sub(r"[^A-Za-z0-9_.-]", "_", job["cell_id"]))
 	proof = pilot.prove_generated_map(job, root, variant)
 	map_yaml = variant / "map.yaml"; map_yaml_sha = sha(map_yaml)

@@ -253,6 +253,29 @@ def materialize_dual_arm_ai(root,destination,switch,accepted_switches=()):
  changed=sorted(p.name for p in source.glob("*.yaml"))
  return {"switch":switch,"accepted_switches":list(accepted_switches),"ai_yaml_sha256":sha(path),"runtime_files":changed,"runnable":False,"arm_types":{"control":"hard_control","treatment":"hard_treatment"}}
 
+def materialize_runtime_overlay_mod(root, destination):
+ """Copy immutable mod content so OpenRA accepts the overlay ahead of baseline.
+
+ The dual-arm AI payload alone is insufficient: mod.yaml includes every
+ ContentPacks/*/content.yaml. If any include is absent, OpenRA rejects the
+ overlay and silently selects the later baseline mod, which has no campaign
+ bot aliases. Hard-link immutable content where possible; copy across volumes.
+ """
+ source = pathlib.Path(root) / "mods" / "cameo"
+ target = pathlib.Path(destination) / "mods" / "cameo"
+ require(target.is_dir(), "dual-arm overlay must exist before copying runtime mod content")
+ contentpacks = source / "ContentPacks"
+ require(contentpacks.is_dir(), "source Cameo ContentPacks are missing")
+ def link_or_copy(src, dst):
+  try: os.link(src, dst)
+  except OSError: shutil.copy2(src, dst)
+ shutil.copytree(contentpacks, target / "ContentPacks", copy_function=link_or_copy)
+ shutil.copyfile(source / "mod.yaml", target / "mod.yaml")
+ includes = re.findall(r"(?m)^Include:\s*(\S+)\s*$", (target / "mod.yaml").read_text(encoding="utf-8"))
+ require(includes and all((target / include).is_file() for include in includes),
+         "runtime overlay is missing one or more mod.yaml includes")
+ return {"include_count": len(includes), "outpost2_include": (target / "ContentPacks/Outpost2/content.yaml").is_file()}
+
 def make_jobs(manifest):
  seeds=manifest.get("seeds")
  require(isinstance(seeds,list) and len(seeds)==2 and len(set(seeds))==2 and all(type(x)==int and x>=0 for x in seeds),"pilot needs exactly two distinct nonnegative seeds")
@@ -351,14 +374,7 @@ end
  script=dest/"ab_campaign_monitor.lua";script.write_text(lua,encoding="utf-8")
  rules=dest/rules_filename;text=rules.read_text(encoding="utf-8")
  world=re.search(r"(?m)^World:\s*$",text);require(world is not None and "LuaScript:" not in text,"harness rules cannot accept campaign monitor Lua")
- # Batch maps do not display player notifications. More importantly, bot player
- # names are resolved from the map's IBotInfo table when ConquestVictoryConditions
- # reports a loss; some generated/overlaid bot types may not have a matching
- # entry there, which can throw while the cap marks all objectives failed.
- # Suppress only those UI/audio notifications; victory and loss state transitions
- # still run and remain available to the match recorder.
- player_rules="\nPlayer:\n\tConquestVictoryConditions:\n\t\tSuppressNotifications: true\n"
- text=text[:world.start()]+player_rules+text[world.start():]
+ # Keep the map's World rules unchanged apart from the campaign monitor.
  world=re.search(r"(?m)^World:\s*$",text)
  text=text[:world.end()]+"\n\tLuaScript:\n\t\tScripts: ab_campaign_monitor.lua"+text[world.end():]
  rules.write_text(text,encoding="utf-8")
