@@ -1,3 +1,11 @@
+## Resume (2026-10-11 04:38Z, shared host admission blocked)
+
+Current direct sample: 4.03 GiB free. OpenRA PID 37020 belongs to `C:/cameo-wt/integ-concave/engine/bin/OpenRA.exe` (Cameo mod; process created 06:37 local), not the campaign. I did not stop it. DevOps and the lead were notified; do not claim the exclusive campaign slot while it runs.
+
+Read-only review of DevOps worktree `C:/cameo-wt/ab-campaign-devops` at `532197a3b` found two launch blockers, reported to its owner and the lead: uncommitted 12 GiB process / 3 GiB admission settings conflict with the approved 10.5 GiB cap / 15.5 GiB admission / 4 GiB soft / 3 GiB hard policy; its A5 gate requires verdict `IDENTICAL`, but the exact maintainer-approved receipt is `IDENTICAL_TAIL_FLUSH` (`a5_diagnostic_passed=true`). I made no edits to that worktree.
+
+Next: DevOps must correct those gates and rerun focused tests against the pinned A5 receipt; analyzer fixtures and all-map runtime load acceptance remain required. No campaign launch by me. This Resume is on pushed branch `codex/ab-campaign-engine-maproot-1011` at `90b08d124` before this note.
+
 ## Resume (2026-10-11 04:37Z, review of DevOps working diff)
 
 DevOps worktree `C:/cameo-wt/ab-campaign-devops` was at HEAD `532197a3b` with uncommitted runner changes. Read-only review found two launch-blocking mismatches and reported both to DevOps and the lead: current edits set the process cap to 12 GiB and host admission floor to 3 GiB (plus a 5 GiB runtime stop), contradicting the maintainer's recorded policy of 10.5 GiB cap, 15.5 GiB admission, 4 GiB soft, 3 GiB hard; and both the probe and execution gate now require `IDENTICAL`, while the maintainer-approved pinned A5 receipt is `IDENTICAL_TAIL_FLUSH` (`a5_diagnostic_passed=true`). The exact pinned receipt was verified at `C:/cameo-wt/ab-campaign-tooling/results/campaign-a5-fixed-tick-parity-20261010-attempt2/A5_memory_probe_receipt.json`. I made no edits to DevOps' worktree and launched no game.
