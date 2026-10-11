@@ -10,6 +10,9 @@ from threading import Lock
 import apply_increment_switches as increment
 
 SWITCH = "BU_harvester_logistics"
+SOURCE_COMMIT = "e49acf41a1b3699f01d44e4def06ed4bf83af038"
+ENGINE_VERSION = "4f69df005fe0d893526890fcb5bbc42e442d6fd6"
+VERIFIED_DEPLOYMENT_TYPES = frozenset(("td_gdi_constructionyard", "td_nod_constructionyard", "ra1_allies_constructionyard", "ra1_soviets_constructionyard"))
 MAPS = {
  "nuclear_winter": ("mods/cameo/maps/_ra_a-nuclear-winter.oramap", "191efefe3043acb2fd504b2e2e5c974a49f6498f8e016c1380159c9f7efc1c4a", 2),
  "satans_clutch": ("mods/cameo/maps/SatansClutch.oramap", "1bd3bee0bbb38c95015126ba689496c4284c2f4e8f8b6573711a9fdadcbf16cb", 2),
@@ -30,15 +33,23 @@ SETUPS = [
  ("3v3_winter_asg",3,"winters_end_rich",("ra1_allies","ra1_soviets","td_gdi")),("3v3_winter_sgn",3,"winters_end_rich",("ra1_soviets","td_gdi","td_nod")),
  ("4v4_sahara",4,"great_sahara_2",("td_gdi","td_nod","ra1_allies","ra1_soviets")),("4v4_ice",4,"ice_cold",("td_gdi","td_nod","ra1_allies","ra1_soviets")),
 ]
-RAM_FLOOR_BYTES = int(15.5 * 1024**3)   # admission floor: 10.5 GiB cap + ~5 GiB host margin
-PROCESS_CAP_BYTES = int(10.5 * 1024**3) # decided cell ceiling (was 6.5 GiB; startup burst peaks ~9.5 GiB)
+# Latest measured headless peak on the pinned 4f69df engine (6,538,502,144 B).
+# Re-measure on the final engine/host before freezing the executable manifest.
+# Maintainer ruling 2026-10-11 04:50Z: the 10.5 GiB per-process cap is
+# unchanged (startup bursts reach ~9.5 GiB); single-game admission =
+# measured peak + 3 GiB hard reserve (~9.09 GiB); a second concurrent
+# 1v1/2v2 cell additionally requires >= 14 GiB free; 3v3/4v4 run alone.
+HEADLESS_PEAK_BYTES = 6538502144
+PROCESS_CAP_BYTES = int(10.5 * 1024**3)
+RAM_FLOOR_BYTES = HEADLESS_PEAK_BYTES + 3 * 1024**3
+PARALLEL_RAM_FLOOR_BYTES = 14 * 1024**3
 ROUND_STAGES = [16,32,48,64]
 ECONOMY_INTERVAL_TICKS = tuple(range(5000, 45001, 5000))
 FIX_SAFETY_SWITCHES = frozenset("K_cn2_unit_repair AL_emergency_net_loss AN_combat_veto AG_assault_fanout BJ_squad_hysteresis BK_squad_order_dedup BL_protection_episode_guard BN_squad_pool_fixes BO_squad_move_dedup".split())
 _, _ALL_GROUPS, _ = increment.load_spec(pathlib.Path(__file__).with_name("increment_switches.yaml"))
 BEHAVIOR_SWITCHES = tuple(name for name in _ALL_GROUPS if name not in FIX_SAFETY_SWITCHES)
 DEFAULT_THRESHOLDS = {"early_accept_share":0.75,"early_reject_share":0.25,"win_noninferiority_delta":0.0,"min_earned_spent_improvement":0.0,"min_army_efficiency_improvement":0.0,"min_kill_exchange_improvement":0.0}
-SLOT_POLICY={"max_parallel_small_games":3,"small_team_size_max":2,"large_game_exclusive":True,"min_free_ram_bytes":RAM_FLOOR_BYTES,"max_private_bytes":PROCESS_CAP_BYTES}
+SLOT_POLICY={"max_parallel_small_games":2,"small_team_size_max":2,"large_game_exclusive":True,"min_free_ram_bytes":RAM_FLOOR_BYTES,"parallel_min_free_ram_bytes":PARALLEL_RAM_FLOOR_BYTES,"max_private_bytes":PROCESS_CAP_BYTES,"headless_peak_bytes":HEADLESS_PEAK_BYTES,"process_headroom_bytes":3*1024**3}
 
 def treatment_baseline(accepted_switches, candidate):
  """Ratchet rule: accepted groups stay in control; treatment adds one candidate."""
@@ -71,11 +82,14 @@ def acceptance_decision(*, rounds, treatment_wins, control_wins, economy_not_wor
 def regression_due(accepted_count):
  return accepted_count>0 and accepted_count%5==0
 
-def slots_available(team_size, free_ram_bytes, active_private_bytes=(), active_slots=0, active_team_sizes=(), max_small_slots=3):
+def slots_available(team_size, free_ram_bytes, active_private_bytes=(), active_slots=0, active_team_sizes=(), max_small_slots=2):
  """Admission policy for the amended slot counter; callers still need OS memory monitoring."""
  if free_ram_bytes<RAM_FLOOR_BYTES or any(x>=PROCESS_CAP_BYTES for x in active_private_bytes): return False
  if team_size>=3: return active_slots==0
- return active_slots<max_small_slots and not any(size>=3 for size in active_team_sizes)
+ if active_slots>=max_small_slots or any(size>=3 for size in active_team_sizes): return False
+ # Ruling 04:50Z: a second small game needs the 14 GiB parallel floor, not the single-game floor.
+ if active_slots>=1 and free_ram_bytes<PARALLEL_RAM_FLOOR_BYTES: return False
+ return True
 
 class SqliteSlotCounter:
  """Process-shared lease counter. Runtime must heartbeat and monitor process/RAM continuously."""
@@ -136,6 +150,31 @@ class SlotCounter:
   with self._lock: self._active.pop(cell_id,None);self._sizes.pop(cell_id,None)
 
 def sha(path): return hashlib.sha256(path.read_bytes()).hexdigest()
+def read_engine_version(path):
+ raw=pathlib.Path(path).read_bytes()
+ if raw.startswith((b"\xff\xfe",b"\xfe\xff")): text=raw.decode("utf-16")
+ elif raw.startswith(b"\xef\xbb\xbf"): text=raw.decode("utf-8-sig")
+ else: text=raw.decode("ascii")
+ version=text.strip()
+ return version[4:] if version.startswith("git-") else version
+def text_sha(path):
+ """sha256 of a TEXT pin with CRLF folded to LF. .gitattributes' `* text=lf` is not a valid
+ eol value, so a Windows checkout gets CRLF .py/.json files and a Linux one LF: a byte hash
+ pinned on one host never matched the other (2026-10-10). Binary pins (maps, engine) stay sha()."""
+ return hashlib.sha256(path.read_bytes().replace(b"\r\n",b"\n")).hexdigest()
+def campaign_tool_paths(root):
+ root=pathlib.Path(root)
+ tools=root/"tools"/"ai"
+ return {
+  "driver_analyzer":tools/"ab_campaign_pilot.py",
+  "campaign_runner":tools/"campaign_runner.py",
+  "batch_runner":tools/"run_ai_match_batch.py",
+  "switch_applier":tools/"apply_increment_switches.py",
+  "a5_parity_probe":tools/"a5_memory_parity_probe.py",
+  "campaign_deployment_guard":tools/"campaign_deployment_guard.py",
+  "campaign_overlay":tools/"campaign_overlay.py",
+  "map_engine_acceptance":tools/"map_engine_acceptance.py",
+ }
 def ai_payload_sha(root,switch=None):
  skip,groups,_=increment.load_spec(pathlib.Path(__file__).with_name("increment_switches.yaml"));digest=hashlib.sha256()
  if switch is not None: require(switch in groups,"unknown AI payload switch")
@@ -264,7 +303,10 @@ def make_jobs(manifest):
     ca,ta=("A","B") if game==0 else ("B","A")
     assignments=[]
     for side in ("A","B"):
-     homes=range(0,size) if (side=="A")==(game==0) else range(size,2*size)
+     # Sides are geographic (A = the first spawn set every game); only the ARM swaps sides. Flipping the homes
+     # too cancelled the arm swap: control sat on Multi0..size-1 in BOTH games of every pair, so a spawn
+     # advantage was fully confounded with the switch (runtime seat proof, map_engine_acceptance 2026-10-10).
+     homes=range(0,size) if side=="A" else range(size,2*size)
      rotated=list(factions) if game==0 else list(reversed(factions))
      arm="control" if side==ca else "treatment"
      for offset,(spawn,faction) in enumerate(zip(homes,rotated)):
@@ -281,21 +323,20 @@ def validate(manifest,root,engine_root=None,execution=False):
  baseline=manifest.get("baseline_manifest_sha256")
  require(isinstance(baseline,str) and len(baseline)==64 and all(c in "0123456789abcdef" for c in baseline.lower()),"ratchet baseline manifest SHA required")
  basepath=(root/pathlib.PurePosixPath(manifest.get("baseline_manifest_path",""))).resolve()
- require(root.resolve() in basepath.parents and basepath.is_file() and sha(basepath)==baseline,"ratchet baseline manifest file/hash mismatch")
+ require(root.resolve() in basepath.parents and basepath.is_file() and text_sha(basepath)==baseline,"ratchet baseline manifest file/hash mismatch")
  pins=manifest.get("pins")
- require(isinstance(pins,dict) and pins.get("source_commit")=="964cdb630b1514e1c1a0baed55cbdbc427d5fc11" and pins.get("engine_version")=="6da7fce14da541180c6baddd6925118fbef65b94","source/engine pin mismatch")
+ require(isinstance(pins,dict) and pins.get("source_commit")==SOURCE_COMMIT and pins.get("engine_version")==ENGINE_VERSION,"source/engine pin mismatch")
  p=subprocess.run(["git","-C",str(root),"cat-file","-e",pins["source_commit"]+"^{commit}"],capture_output=True,timeout=20)
  require(p.returncode==0,"pinned source commit unavailable")
  require(manifest.get("switch_patch_sha256")==increment.group_patch_sha256(increment.load_spec(pathlib.Path(__file__).with_name("increment_switches.yaml"))[1][SWITCH]),"BU patch SHA mismatch")
  require(manifest.get("baseline_ai_payload_sha256")==ai_payload_sha(root),"baseline AI payload mismatch")
  require(manifest.get("treatment_ai_payload_sha256")==ai_payload_sha(root,SWITCH),"one-switch treatment AI payload mismatch")
- tool_paths={"driver_analyzer":pathlib.Path(__file__),"campaign_runner":root/"tools"/"ai"/"campaign_runner.py","batch_runner":root/"tools"/"ai"/"run_ai_match_batch.py","switch_applier":root/"tools"/"ai"/"apply_increment_switches.py"}
- require(manifest.get("tool_sha256")=={k:sha(v) for k,v in tool_paths.items()},"tool SHA pins mismatch")
- require(manifest.get("receipt_schema_sha256")==sha(root/"tools"/"ai"/"ab_campaign_receipt.schema.json"),"receipt schema SHA mismatch")
+ require(manifest.get("tool_sha256")=={k:text_sha(v) for k,v in campaign_tool_paths(root).items()},"tool SHA pins mismatch")
+ require(manifest.get("receipt_schema_sha256")==text_sha(root/"tools"/"ai"/"ab_campaign_receipt.schema.json"),"receipt schema SHA mismatch")
  binaries=manifest.get("binary_sha256")
  require(isinstance(binaries,dict) and len(binaries)==3 and all(len(v)==64 for v in binaries.values()),"engine binary SHA pins missing")
  if engine_root is not None:
-  require((engine_root/"VERSION").read_text(encoding="ascii").strip()==pins["engine_version"],"engine VERSION mismatch")
+  require(read_engine_version(engine_root/"VERSION")==pins["engine_version"],"engine VERSION mismatch")
   require({rel:sha((engine_root/pathlib.PurePosixPath(rel))) for rel in binaries}==binaries,"engine binary SHA mismatch")
  expected=[{"name":k,"path":v[0],"sha256":v[1],"required_seats":v[2]} for k,v in MAPS.items()]
  require(manifest.get("maps")==expected,"map path/SHA/seat-count pins mismatch")
@@ -317,18 +358,23 @@ def dry_run(m,root,engine_root=None,minutes_per_game=8.5,setup_hours=2.0):
  validate(m,root,engine_root); jobs=make_jobs(m)
  small_games=sum(4 for _,s,_,_ in SETUPS if s<=2); large_games=len(jobs)-small_games
  serial_hours=round(len(jobs)*minutes_per_game/60+setup_hours,2)
- slot_hours=round((small_games/3+large_games)*minutes_per_game/60+setup_hours,2)
+ small_parallel=m["slot_policy"]["max_parallel_small_games"]
+ slot_hours=round((small_games/small_parallel+large_games)*minutes_per_game/60+setup_hours,2)
  serial_range=[round(len(jobs)*5/60+setup_hours,2),round(len(jobs)*12/60+setup_hours,2)]
- slot_range=[round((small_games/3+large_games)*5/60+setup_hours,2),round((small_games/3+large_games)*12/60+setup_hours,2)]
+ slot_range=[round((small_games/small_parallel+large_games)*5/60+setup_hours,2),round((small_games/small_parallel+large_games)*12/60+setup_hours,2)]
  return {"mode":"NO_LAUNCH_DRY_RUN","switch":SWITCH,"setups":len(SETUPS),"pairs":32,"games":len(jobs),"jobs":jobs,"launches":0,"execution_authorized":False,"worker_hours_estimate_at_8_5m_each":serial_hours,"parallel_slot_wall_estimate_hours_at_8_5m_each":slot_hours,"parallel_slot_wall_estimate_range_hours_5_to_12m_each":slot_range,"serial_wall_estimate_range_hours_5_to_12m_each":serial_range,"map_engine_acceptance_and_symmetric_spawn_proof":"PENDING_ENGINE_PREFLIGHT","round_stages":ROUND_STAGES,"acceptance_thresholds":m["acceptance_thresholds"],"slot_policy":m["slot_policy"],"ratchet_baseline_manifest_sha256":m["baseline_manifest_sha256"],"missing_campaign_gates":["lead-approved executable manifest and exact-baseline A5 parity receipt","engine acceptance plus symmetric spawn proof for all eight maps","fixture/negative-control acceptance for the downstream paired analyzer"]}
 
 def install_campaign_monitor(dest,seat_count,cap_tick=45000,sample_interval=5000,rules_filename="duel_rules.yaml",seat_names=None):
  """Install map-local actor-count sampling and an explicit all-seat censor marker."""
  require(seat_count in (2,4,6,8) and type(cap_tick) is int and 1000<=cap_tick<=45000 and 0<sample_interval<=cap_tick,"campaign monitor bounds")
- names=", ".join(json.dumps(name) for name in (seat_names or [f"Multi{i}" for i in range(seat_count)]))+', "Neutral", "Creeps"'
+ campaign_seat_names=", ".join(json.dumps(name) for name in (seat_names or [f"Multi{i}" for i in range(seat_count)]))
+ names=campaign_seat_names+', "Neutral", "Creeps"'
+ verified_yards=", ".join("["+json.dumps(actor)+"]=true" for actor in sorted(VERIFIED_DEPLOYMENT_TYPES))
  lua=f'''local SeatNames = {{{names}}}
+local CampaignSeatNames = {{{campaign_seat_names}}}
 local CapTick = {cap_tick}
 local SampleInterval = {sample_interval}
+local DeploymentTick = 100
 local Objectives = {{}}
 local function SampleActors()
 \tlocal total = 0
@@ -338,9 +384,35 @@ local function SampleActors()
 \tend
 \tprint("AB_CAMPAIGN_ACTOR_SAMPLE tick=" .. DateTime.GameTime .. " actor_count=" .. total)
 end
+local VerifiedConstructionYards = {{{verified_yards}}}
+local Deployments = {{}}
+local function ProbeSeatDeployment()
+\tlocal tick = DateTime.GameTime
+\tfor _, name in ipairs(CampaignSeatNames) do
+\t\tif not Deployments[name] then
+\t\t\tlocal player = Player.GetPlayer(name)
+\t\t\tif player then for _, actor in ipairs(player.GetActors()) do
+\t\t\t\tif VerifiedConstructionYards[actor.Type] then
+\t\t\t\t\tDeployments[name] = {{ tick=tick, type=actor.Type }}
+\t\t\t\t\tprint("AB_CAMPAIGN_DEPLOY seat=" .. name .. " tick=" .. tick .. " type=" .. actor.Type)
+\t\t\t\t\tbreak
+\t\t\t\tend
+\t\t\tend end
+\t\tend
+\tend
+\tif tick >= DeploymentTick then
+\t\tlocal deployed = 0
+\t\tfor _, name in ipairs(CampaignSeatNames) do
+\t\t\tif Deployments[name] and Deployments[name].tick <= DeploymentTick then deployed = deployed + 1
+\t\t\telse print("AB_CAMPAIGN_NO_DEPLOY seat=" .. name .. " tick=" .. tick) end
+\t\tend
+\t\tprint("AB_CAMPAIGN_DEPLOYMENT_CHECK tick=" .. tick .. " seat_count=" .. deployed .. " expected_count=" .. #CampaignSeatNames)
+\telse Trigger.AfterDelay(1, ProbeSeatDeployment) end
+end
 WorldLoaded = function()
 \tfor _, name in ipairs(SeatNames) do local p = Player.GetPlayer(name); if p then Objectives[name] = p.AddPrimaryObjective("Campaign observation cap") end end
 \tprint("AB_CAMPAIGN_STARTED tick=" .. DateTime.GameTime .. " cap=" .. CapTick)
+\tTrigger.AfterDelay(1, ProbeSeatDeployment)
 \tfor tick = SampleInterval, CapTick - SampleInterval, SampleInterval do Trigger.AfterDelay(tick, SampleActors) end
 \tTrigger.AfterDelay(CapTick, function()
 \t\tSampleActors(); print("AB_CAMPAIGN_CAP tick=" .. DateTime.GameTime)
@@ -351,6 +423,7 @@ end
  script=dest/"ab_campaign_monitor.lua";script.write_text(lua,encoding="utf-8")
  rules=dest/rules_filename;text=rules.read_text(encoding="utf-8")
  world=re.search(r"(?m)^World:\s*$",text);require(world is not None and "LuaScript:" not in text,"harness rules cannot accept campaign monitor Lua")
+	# Keep the map's World rules unchanged apart from the campaign monitor.
  text=text[:world.end()]+"\n\tLuaScript:\n\t\tScripts: ab_campaign_monitor.lua"+text[world.end():]
  rules.write_text(text,encoding="utf-8")
  return {"script_sha256":sha(script),"rules_sha256":sha(rules),"sample_interval_ticks":sample_interval,"cap_tick":cap_tick,"actor_count_marker":"AB_CAMPAIGN_ACTOR_SAMPLE"}
@@ -392,6 +465,27 @@ def prove_generated_map(job,root,dest):
   proof.append({**seat,"home_location":actual["HomeLocation"]})
  return {"map_yaml_sha256":sha(dest/"map.yaml"),"seat_proof_source":"generated_map.yaml","seats":proof,"runtime_monitor":monitor}
 
+def install_dual_arm_rules(variant,overlay,root):
+ """Ship the dual-arm AI yaml INSIDE the generated map: list it first in map.yaml `Rules:` (before the harness's
+ duel_rules.yaml, which keeps the last word). A search-path overlay cannot do this: InstalledMods keeps the LAST
+ mods/cameo it enumerates, so an overlay listed first is silently ignored, and an overlay folder holding only ai/*.yaml
+ has none of the mod's other includes. The 2026-10-10 acceptance runs logged `Invalid bot type: hard_control` /
+ `hard_treatment`: neither arm's bot ever activated. Map rules merge over the mod rules; the dual-arm files only add
+ or change nodes (no `-Key:` removals), which is checked here."""
+ source=overlay/"mods"/"cameo"/"ai";installed={}
+ for path in sorted(source.glob("*.yaml")):
+  text=path.read_text(encoding="utf-8")
+  if text==(root/"mods"/"cameo"/"ai"/path.name).read_text(encoding="utf-8"): continue
+  require(re.search(r"(?m)^\t*-[^\s-]",text) is None,"dual-arm AI yaml uses a removal; map-rule merge cannot carry it: "+path.name)
+  name="campaign_"+path.name;(variant/name).write_text(text,encoding="utf-8");installed[name]=sha(variant/name)
+ require(installed,"dual-arm overlay changes no AI file")
+ map_yaml=variant/"map.yaml";text=map_yaml.read_text(encoding="utf-8")
+ rules=re.search(r"(?m)^Rules: (.+)$",text);require(rules is not None,"generated map.yaml has no Rules line")
+ listed=[x.strip() for x in rules.group(1).split(",")];require(not set(installed)&set(listed),"dual-arm rules already installed")
+ text=text[:rules.start()]+"Rules: "+", ".join(list(installed)+listed)+text[rules.end():]
+ map_yaml.write_text(text,encoding="utf-8")
+ return installed
+
 def preflight_generated_maps(m,root,directory):
  jobs=make_jobs(m);selected={}
  for job in jobs:selected.setdefault((job["setup"],job["game_in_pair"]),job)
@@ -410,7 +504,10 @@ def adjudicate(records, receipt, job, manifest_sha):
  if status in ("CRASH","INCOMPLETE","MEMORY_KILL","MEMORY_SAMPLE_FAILED","LOW_FREE_RAM","WALL_TIMEOUT","STALL","PROCESS_DIED"):
   return {"verdict":"INCOMPLETE_UNKNOWN","reason":status}
  cap=status=="CENSORED_CAP"
- if cap and not (receipt.get("cap_marker") is True and receipt.get("cap_tick")==45000 and receipt.get("support_complete") is True):
+ # The Lua monitor emits the cap marker on the first game tick AT/AFTER the
+ # configured cap — observed 45001 for cap 45000 here and 16001 for cap 16000
+ # in the A5 receipts — so accept the observed tick in {cap, cap+1}.
+ if cap and not (receipt.get("cap_marker") is True and receipt.get("cap_tick") in (45000,45001) and receipt.get("support_complete") is True):
   return {"verdict":"INVALID_UNKNOWN","reason":"cap evidence incomplete"}
  if not cap and (status!="NATURAL_END" or receipt.get("end_reason")!="natural"):
   return {"verdict":"INVALID_UNKNOWN","reason":"natural end proof missing"}
@@ -427,6 +524,15 @@ def adjudicate(records, receipt, job, manifest_sha):
   return {"verdict":"INVALID_UNKNOWN","reason":"seat assignment/bot binding differs from planned arms"}
  expected_seats={s["home"]:s for s in job["seat_assignments"]}
  if set(byhome)!=set(expected_seats): return {"verdict":"INVALID_UNKNOWN","reason":"resolved homes differ from planned spawn rotation"}
+ # A seat records its declared bot type even when the engine rejected it, so a
+ # brainless seat (overlay mod failed to register) still produces rows. Every
+ # timeline staying at exactly zero earned/spent means no AI economy ever ran —
+ # such a cell is a fixture failure, never a playable result or a cap censor.
+ def _flat(r):
+  t=normalized_timeline(r)
+  return bool(t) and all((row.get("earned") or 0)==0 and (row.get("spent") or 0)==0 for row in t)
+ if records and all(_flat(r) for r in records):
+  return {"verdict":"DEGENERATE_NO_ECONOMY","reason":"all seats recorded zero earned/spent across every timeline sample — seat bots never ran (check debug.log for 'Invalid bot type' / overlay mod registration failure)"}
  for home,seat in byhome.items():
   expected=expected_seats[home]
   if any(seat.get(k)!=expected[k] for k in ("spawn","side","arm","bot_type","faction")):

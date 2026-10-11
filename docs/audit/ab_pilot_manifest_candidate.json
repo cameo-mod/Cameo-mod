@@ -32,32 +32,39 @@
     "min_kill_exchange_improvement": 0.0
   },
   "slot_policy": {
-    "max_parallel_small_games": 3,
+    "max_parallel_small_games": 2,
     "small_team_size_max": 2,
     "large_game_exclusive": true,
-    "min_free_ram_bytes": 16642998272,
-    "max_private_bytes": 11274289152
+    "min_free_ram_bytes": 9759727616,
+    "parallel_min_free_ram_bytes": 15032385536,
+    "max_private_bytes": 11274289152,
+    "headless_peak_bytes": 6538502144,
+    "process_headroom_bytes": 3221225472
   },
   "baseline_manifest_path": "docs/audit/ab_baseline_manifest_pilot.json",
-  "baseline_manifest_sha256": "eecadb954680b13c4f832ad32dee5249634f255a4e3a91ad92586cb0705bb76a",
+  "baseline_manifest_sha256": "a339aa00e30d11e0cd3b2e6980803156deebd52c907a127ca3d6540845b36e87",
   "pins": {
-    "source_commit": "964cdb630b1514e1c1a0baed55cbdbc427d5fc11",
-    "engine_version": "6da7fce14da541180c6baddd6925118fbef65b94"
+    "source_commit": "e49acf41a1b3699f01d44e4def06ed4bf83af038",
+    "engine_version": "4f69df005fe0d893526890fcb5bbc42e442d6fd6"
   },
   "switch_patch_sha256": "d710567579cb3673eb33701ec881495f0a2a17d6203194b0efdc8052f4de4523",
   "baseline_ai_payload_sha256": "932e2e5c919de6f5b493e1722e6e66e39a3a5f1577b29aa58a571492b7de9d69",
   "treatment_ai_payload_sha256": "acdfd3a3e2c7d405a776703593f1d52c5f357b423e75ffb224392159c009c725",
   "tool_sha256": {
-    "driver_analyzer": "4ebf57187feadb0083916fc6a579259cfbaeb02c50a42acd1341cc26e1b1a514",
-    "campaign_runner": "725f010588190c87a4108f3c872065c19b61f647319842f1d9d6777b55b9a2fa",
-    "batch_runner": "072225d79e70011545bb43b9228a7c1f2686c033c04c4b3fa02dd92edcf6a6ce",
-    "switch_applier": "5376258709f2ff6512e402abeaf09e164abe483142980830bc72269af047f97e"
+    "driver_analyzer": "92004de4033771729867eec56b486f39f1ac0f8b0977ec5654f9ac757ef5a8fe",
+    "campaign_runner": "d20354f8742084b890cae0ab91ebe8e2346821e1d6f72104ea58884a52993fca",
+    "batch_runner": "1f6c6005c2f474bb9b8e87ec8b4a7081d3737b458d8423ab349a8e837fe6d6e0",
+    "switch_applier": "9e9f678871cc2d8adeca0e7b5c2c28a30a041252f8f630005593bc7f241a6bdd",
+    "a5_parity_probe": "4de31d5bcfb67218fd8f6250557ef458bbeb2db670854f19253c01858c47ac1d",
+    "campaign_deployment_guard": "bf7f28355490124d538407ec2ce0afe2e733b38e61c6ab4d31783ae8f627c465",
+    "campaign_overlay": "ed71a34c62318a3c1c5718c632fb5e7c0e344229630a0bb2499b60969816c1aa",
+    "map_engine_acceptance": "faaa1cde37d97a96f1eed426f777a9a1161c2339eb3a9bb69d469a4fdce42a03"
   },
-  "receipt_schema_sha256": "3d0e39057ded3c28354812bfad1db6727e891e16a25250bd6a9caff6063fa164",
+  "receipt_schema_sha256": "a9b8d3402dea824b17a3889c83bf324596a1b0efd9a888c2dd0ea1f32b03b077",
   "binary_sha256": {
-    "bin/OpenRA.exe": "5693f355792ebb68699793f96ef2167b733c5e7756f580858c5090226418c984",
-    "bin/OpenRA.Game.dll": "167fcbd8985dc3cd74ae2747c6d4a43db0d51cbda99dc029712fdb72182f6b80",
-    "bin/OpenRA.Mods.Cameo.dll": "3b69b0d49d88914d4e003fbae2c35faf9e8bad0625e161effb2773e5e5575853"
+    "bin/OpenRA.exe": "a4d4645dd668241dd73f0e102fe1e6145d72932ee9b38447e4a7ea93b7f1cd55",
+    "bin/OpenRA.Game.dll": "819ec01a7546ba184a132f82c9b43b15fd2df86bf8f651fcacf7df68584d9624",
+    "bin/OpenRA.Mods.Cameo.dll": "64f073697437953b5fd7458da4851e2847e442cf13917e3c39903c8daf23cd1e"
   },
   "maps": [
     {
@@ -260,5 +267,7 @@
     }
   ],
   "execution_approved": false,
-  "notes": "candidate dry-run manifest; maintainer flips execution_approved at sign-off after the open-item proposal is ruled on"
+  "notes": "candidate dry-run manifest; maintainer flips execution_approved at sign-off after the open-item proposal is ruled on",
+  "a5_parity_receipt_path": "docs/audit/receipts/A5_fixed_tick_e49_4f69_attempt2.json",
+  "a5_parity_receipt_sha256": "2bb6dffafced59ffc810e8f1c938c4465621834b134552e27b676da72c098f0f"
 }
