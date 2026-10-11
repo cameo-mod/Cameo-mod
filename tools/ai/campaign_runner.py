@@ -30,7 +30,7 @@ FREE_RAM_FLOOR = int(15.5 * 1024**3)
 FREE_RAM_HARD_FLOOR = 3 * 1024**3
 FREE_RAM_SOFT_FLOOR = 4 * 1024**3
 ACTOR_SAMPLE_INTERVAL = 5000
-SLOT_PARALLEL_SMALL = 3
+SLOT_PARALLEL_SMALL = 1
 SMALL_TEAM_MAX = 2
 ACTOR_SAMPLE_RE = re.compile(r"AB_CAMPAIGN_ACTOR_SAMPLE tick=(\d+) actor_count=(\d+)")
 RECEIPT_SCHEMA = pathlib.Path(__file__).with_name("ab_campaign_receipt.schema.json")
@@ -230,9 +230,15 @@ def validate_receipt(receipt: dict) -> None:
 	"""Validate the producer's semantic invariants; JSON Schema is published alongside."""
 	if not isinstance(receipt, dict) or receipt.get("schema_version") != 1:
 		raise ValueError("receipt schema_version must be 1")
-	for key in ("campaign_id", "manifest_sha256", "baseline_commit", "engine_sha256", "switch", "setup_id", "pair_id", "seed", "seed_proof", "teams", "resolved_seats", "end_class", "end_reason", "winner_team", "world_tick", "cap", "memory", "runtime", "artifacts"):
+	for key in ("campaign_id", "manifest_sha256", "cell_id", "game_uid", "status", "seats", "baseline_commit", "engine_sha256", "switch", "setup_id", "pair_id", "seed", "seed_proof", "teams", "resolved_seats", "end_class", "end_reason", "winner_team", "world_tick", "cap", "memory", "runtime", "artifacts"):
 		if key not in receipt:
 			raise ValueError("receipt missing required field: " + key)
+	if not isinstance(receipt["cell_id"], str) or not receipt["cell_id"] or not isinstance(receipt["status"], str) or not receipt["status"]:
+		raise ValueError("receipt cell_id/status must be nonempty strings")
+	if receipt["end_class"] != "INCOMPLETE" and (not isinstance(receipt["game_uid"], str) or not receipt["game_uid"]):
+		raise ValueError("completed receipt requires nonempty game_uid")
+	if not isinstance(receipt["seats"], list) or len(receipt["seats"]) != receipt.get("map", {}).get("required_seats"):
+		raise ValueError("receipt seats differ from required map seats")
 	if receipt["end_class"] not in ("NATURAL", "CAP", "INCOMPLETE"):
 		raise ValueError("invalid end_class")
 	if receipt["end_class"] != "NATURAL" and receipt["winner_team"] is not None:

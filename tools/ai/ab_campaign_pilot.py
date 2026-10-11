@@ -38,7 +38,7 @@ FIX_SAFETY_SWITCHES = frozenset("K_cn2_unit_repair AL_emergency_net_loss AN_comb
 _, _ALL_GROUPS, _ = increment.load_spec(pathlib.Path(__file__).with_name("increment_switches.yaml"))
 BEHAVIOR_SWITCHES = tuple(name for name in _ALL_GROUPS if name not in FIX_SAFETY_SWITCHES)
 DEFAULT_THRESHOLDS = {"early_accept_share":0.75,"early_reject_share":0.25,"win_noninferiority_delta":0.0,"min_earned_spent_improvement":0.0,"min_army_efficiency_improvement":0.0,"min_kill_exchange_improvement":0.0}
-SLOT_POLICY={"max_parallel_small_games":3,"small_team_size_max":2,"large_game_exclusive":True,"min_free_ram_bytes":RAM_FLOOR_BYTES,"max_private_bytes":PROCESS_CAP_BYTES}
+SLOT_POLICY={"max_parallel_small_games":1,"small_team_size_max":2,"large_game_exclusive":True,"min_free_ram_bytes":RAM_FLOOR_BYTES,"max_private_bytes":PROCESS_CAP_BYTES}
 
 def treatment_baseline(accepted_switches, candidate):
  """Ratchet rule: accepted groups stay in control; treatment adds one candidate."""
@@ -323,10 +323,11 @@ def validate(manifest,root,engine_root=None,execution=False):
 def dry_run(m,root,engine_root=None,minutes_per_game=8.5,setup_hours=2.0):
  validate(m,root,engine_root); jobs=make_jobs(m)
  small_games=sum(4 for _,s,_,_ in SETUPS if s<=2); large_games=len(jobs)-small_games
+ small_slots=SLOT_POLICY["max_parallel_small_games"]
  serial_hours=round(len(jobs)*minutes_per_game/60+setup_hours,2)
- slot_hours=round((small_games/3+large_games)*minutes_per_game/60+setup_hours,2)
+ slot_hours=round((small_games/small_slots+large_games)*minutes_per_game/60+setup_hours,2)
  serial_range=[round(len(jobs)*5/60+setup_hours,2),round(len(jobs)*12/60+setup_hours,2)]
- slot_range=[round((small_games/3+large_games)*5/60+setup_hours,2),round((small_games/3+large_games)*12/60+setup_hours,2)]
+ slot_range=[round((small_games/small_slots+large_games)*5/60+setup_hours,2),round((small_games/small_slots+large_games)*12/60+setup_hours,2)]
  return {"mode":"NO_LAUNCH_DRY_RUN","switch":SWITCH,"setups":len(SETUPS),"pairs":32,"games":len(jobs),"jobs":jobs,"launches":0,"execution_authorized":False,"worker_hours_estimate_at_8_5m_each":serial_hours,"parallel_slot_wall_estimate_hours_at_8_5m_each":slot_hours,"parallel_slot_wall_estimate_range_hours_5_to_12m_each":slot_range,"serial_wall_estimate_range_hours_5_to_12m_each":serial_range,"map_engine_acceptance_and_symmetric_spawn_proof":"PENDING_ENGINE_PREFLIGHT","round_stages":ROUND_STAGES,"acceptance_thresholds":m["acceptance_thresholds"],"slot_policy":m["slot_policy"],"ratchet_baseline_manifest_sha256":m["baseline_manifest_sha256"],"missing_campaign_gates":["lead-approved executable manifest and exact-baseline A5 parity receipt","engine acceptance plus symmetric spawn proof for all eight maps","fixture/negative-control acceptance for the downstream paired analyzer"]}
 
 def install_campaign_monitor(dest,seat_count,cap_tick=45000,sample_interval=5000,rules_filename="duel_rules.yaml",seat_names=None):
@@ -413,6 +414,11 @@ def adjudicate(records, receipt, job, manifest_sha):
   return {"verdict":"INVALID_UNKNOWN","reason":"cell or manifest pin mismatch"}
  map_pin=receipt.get("map") if isinstance(receipt.get("map"),str) else (receipt.get("map") or {}).get("name")
  job_pins={"switch":receipt.get("switch"),"setup":receipt.get("setup") or receipt.get("setup_id"),"map":map_pin,"map_sha256":receipt.get("map_sha256") or (receipt.get("map") or {}).get("sha256"),"seed":receipt.get("seed"),"pair":receipt.get("pair"),"game_in_pair":receipt.get("game_in_pair")}
+ game_uid=receipt.get("game_uid")
+ if not isinstance(game_uid,str) or not game_uid:
+  return {"verdict":"INVALID_UNKNOWN","reason":"INVALID_EMPTY_UID"}
+ if any(not isinstance(row,dict) or row.get("game_uid")!=game_uid for row in records):
+  return {"verdict":"INVALID_UNKNOWN","reason":"match records disagree with receipt game_uid"}
  if any(job_pins.get(k)!=job[k] for k in ("switch","setup","map","map_sha256","seed","pair","game_in_pair")):
   return {"verdict":"INVALID_UNKNOWN","reason":"receipt disagrees with planned job"}
  status=receipt.get("status")
@@ -430,6 +436,8 @@ def adjudicate(records, receipt, job, manifest_sha):
  byloc={s.get("home_location"):s for s in seats if isinstance(s,dict) and isinstance(s.get("home_location"),str)}
  if len(byhome)!=len(seats) or any(not isinstance(h,str) or not h for h in byhome):
   return {"verdict":"INVALID_UNKNOWN","reason":"seat homes missing or duplicated"}
+ if len(byloc)!=len(seats):
+  return {"verdict":"INVALID_UNKNOWN","reason":"generated map home locations missing or duplicated"}
  if receipt.get("seat_proof_source")!="generated_map.yaml" or not receipt.get("map_yaml_sha256"):
   return {"verdict":"INVALID_UNKNOWN","reason":"generated map.yaml proof missing"}
  if receipt.get("control_side")!=job["control_side"] or receipt.get("treatment_side")!=job["treatment_side"] or receipt.get("arm_bot_types")!=job["arm_bot_types"]:
@@ -442,7 +450,7 @@ def adjudicate(records, receipt, job, manifest_sha):
    return {"verdict":"INVALID_UNKNOWN","reason":"resolved map.yaml seats differ from planned side/spawn/faction assignment"}
  side_outcomes={"A":[],"B":[]}; arm_totals={"control":{"earned":0,"spent":0,"banked":0},"treatment":{"earned":0,"spent":0,"banked":0}}; seat_rows=[]; seen_homes=set()
  for r in records:
-  pl=r.get("player") or {}; home=pl.get("home"); seat=byloc.get(home) or byhome.get(home)
+  pl=r.get("player") or {}; home=pl.get("home"); seat=byloc.get(home)
   if seat is None or home in seen_homes or pl.get("faction")!=seat.get("faction") or pl.get("bot_type")!=seat.get("bot_type"):
    return {"verdict":"INVALID_UNKNOWN","reason":"record differs from resolved seat proof"}
   seen_homes.add(home)

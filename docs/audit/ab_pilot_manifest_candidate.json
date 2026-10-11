@@ -32,7 +32,7 @@
     "min_kill_exchange_improvement": 0.0
   },
   "slot_policy": {
-    "max_parallel_small_games": 3,
+    "max_parallel_small_games": 1,
     "small_team_size_max": 2,
     "large_game_exclusive": true,
     "min_free_ram_bytes": 16642998272,
@@ -49,12 +49,12 @@
   "baseline_ai_payload_sha256": "932e2e5c919de6f5b493e1722e6e66e39a3a5f1577b29aa58a571492b7de9d69",
   "treatment_ai_payload_sha256": "acdfd3a3e2c7d405a776703593f1d52c5f357b423e75ffb224392159c009c725",
   "tool_sha256": {
-    "driver_analyzer": "927eddf58da8e800763d1a5bc6cfea7748bb4bc35e050cf441277341194d3876",
-    "campaign_runner": "e4b1199d4be351e3de93877ceb2d781975f1635e12c1fa027eaa7a331514e7f7",
+    "driver_analyzer": "3eeca9d0909f9582752a4a7c58b4aafc3625abbe835ec1f7bc32fec144b71623",
+    "campaign_runner": "7f6a1fbbb704dc7b706f2486b6e0be4f12ae45e78fdd0e1cf58c1cac9f634fca",
     "batch_runner": "e9497b51574a7f907aa19b0c1742b68db5b96904f43ab65a5bd39ba7ce8a1964",
     "switch_applier": "5376258709f2ff6512e402abeaf09e164abe483142980830bc72269af047f97e"
   },
-  "receipt_schema_sha256": "ab744a4c12c57fa6b9e2b9b351baa093e89231d06d7e6f0069b221952b3cc36e",
+  "receipt_schema_sha256": "d6e1af245ecc0c99d418a2112f25a4478e0ed6460879de448eec44e1f80069a8",
   "binary_sha256": {
     "bin/OpenRA.exe": "5693f355792ebb68699793f96ef2167b733c5e7756f580858c5090226418c984",
     "bin/OpenRA.Game.dll": "167fcbd8985dc3cd74ae2747c6d4a43db0d51cbda99dc029712fdb72182f6b80",
@@ -261,6 +261,6 @@
     }
   ],
   "execution_approved": false,
-  "notes": "candidate dry-run manifest; maintainer flips execution_approved at sign-off after the open-item proposal is ruled on",
+  "notes": "non-executable candidate; refreshed tool/schema pins and serial one-worker policy after exact-SHA review; maintainer must independently approve after map/analyzer/A5/RAM gates",
   "a5_parity_receipt_path": "C:/cameo-wt/ab-campaign-tooling/results/campaign-a5-fixed-tick-parity-20261010-attempt2/A5_memory_probe_receipt.json"
 }

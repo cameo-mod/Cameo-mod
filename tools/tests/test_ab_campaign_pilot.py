@@ -23,8 +23,8 @@ class PilotPlanTests(unittest.TestCase):
   result=pilot.dry_run(m,ROOT)
   self.assertEqual(0,result["launches"]);self.assertFalse(result["execution_authorized"])
   self.assertEqual(11.07,result["worker_hours_estimate_at_8_5m_each"])
-  self.assertEqual(7.29,result["parallel_slot_wall_estimate_hours_at_8_5m_each"])
-  self.assertEqual([5.11,9.47],result["parallel_slot_wall_estimate_range_hours_5_to_12m_each"])
+  self.assertEqual(11.07,result["parallel_slot_wall_estimate_hours_at_8_5m_each"])
+  self.assertEqual([7.33,14.8],result["parallel_slot_wall_estimate_range_hours_5_to_12m_each"])
 
  def test_generated_map_writer_proves_mixed_faction_4v4_seats_without_launch(self):
   m=manifest();job=next(j for j in pilot.make_jobs(m) if j["team_size"]==4 and j["game_in_pair"]==1)
@@ -83,11 +83,11 @@ class PilotPlanTests(unittest.TestCase):
 
  def test_adjudicator_keeps_cap_unknown_and_sums_team_economy(self):
   m=manifest(); job=next(j for j in pilot.make_jobs(m) if j["team_size"]==2 and j["game_in_pair"]==0)
-  seats=[dict(s) for s in job["seat_assignments"]]; rows=[]
+  seats=[dict(s,home_location=location) for s,location in zip(job["seat_assignments"],("22,16","30,16","22,24","30,24"))]; rows=[]
   for seat in seats:
    outcome="won" if seat["side"]==job["treatment_side"] else "lost"
-   rows.append({"player":{"home":seat["home"],"bot_type":seat["bot_type"],"faction":seat["faction"],"outcome":outcome},"stats_timeline":[{"tick":100,"earned":12,"spent":5,"banked":7}]})
-  receipt={"cell_id":job["cell_id"],"manifest_sha256":"a"*64,"switch":job["switch"],"setup":job["setup"],"map":job["map"],"map_sha256":job["map_sha256"],"seed":job["seed"],"pair":job["pair"],"game_in_pair":job["game_in_pair"],"control_side":job["control_side"],"treatment_side":job["treatment_side"],"arm_bot_types":job["arm_bot_types"],"status":"NATURAL_END","end_reason":"natural","seat_proof_source":"generated_map.yaml","map_yaml_sha256":"b"*64,"seats":seats}
+   rows.append({"game_uid":"adjudicator-test","player":{"home":seat["home_location"],"bot_type":seat["bot_type"],"faction":seat["faction"],"outcome":outcome},"stats_timeline":[{"tick":100,"earned":12,"spent":5,"banked":7}]})
+  receipt={"cell_id":job["cell_id"],"game_uid":"adjudicator-test","manifest_sha256":"a"*64,"switch":job["switch"],"setup":job["setup"],"map":job["map"],"map_sha256":job["map_sha256"],"seed":job["seed"],"pair":job["pair"],"game_in_pair":job["game_in_pair"],"control_side":job["control_side"],"treatment_side":job["treatment_side"],"arm_bot_types":job["arm_bot_types"],"status":"NATURAL_END","end_reason":"natural","seat_proof_source":"generated_map.yaml","map_yaml_sha256":"b"*64,"seats":seats}
   got=pilot.adjudicate(rows,receipt,job,"a"*64)
   self.assertEqual("TREATMENT_WIN",got["verdict"]);self.assertEqual(24,got["team_totals"]["control"]["earned"])
   receipt.update({"status":"CENSORED_CAP","cap_marker":True,"cap_tick":45000,"support_complete":True})
@@ -102,12 +102,25 @@ class PilotPlanTests(unittest.TestCase):
   import campaign_runner as runner
   m=manifest(); job=next(j for j in pilot.make_jobs(m) if j["team_size"]==2 and j["game_in_pair"]==0)
   seats=[{**s,"home_location":f"{10+s['spawn']},{20+s['spawn']}"} for s in job["seat_assignments"]]
-  rows=[{"player":{"home":seat["home_location"],"bot_type":seat["bot_type"],"faction":seat["faction"],"outcome":"won" if seat["side"]==job["treatment_side"] else "lost"},"stats_timeline":[{"tick":100,"earned":12,"spent":5,"banked":7}]} for seat in seats]
+  rows=[{"game_uid":"g-1","player":{"home":seat["home_location"],"bot_type":seat["bot_type"],"faction":seat["faction"],"outcome":"won" if seat["side"]==job["treatment_side"] else "lost"},"stats_timeline":[{"tick":100,"earned":12,"spent":5,"banked":7}]} for seat in seats]
   resolved=[{"seat_id":s["home"],"team":s["side"],"arm":s["arm"],"bot_type":s["bot_type"],"faction":s["faction"],"home":s["home"],"spawn":s["spawn"],"proof_source":"generated map.yaml + cameo-ai-matches.jsonl","outcome":"won" if s["side"]==job["treatment_side"] else "lost","metrics":{"timeline":[]}} for s in seats]
   receipt={"schema_version":1,"campaign_id":"c","manifest_sha256":"a"*64,"baseline_commit":"b"*40,"engine_sha256":"c"*64,"switch":job["switch"],"setup_id":job["setup"],"pair_id":"p","pair_member":0,"seed":job["seed"],"seed_proof":{"env_value":str(job["seed"]),"server_log_pin_line":"pin","server_log_sha256":None},"teams":{"A":{"arm":"control","bot_type":"hard_control","seat_ids":[]},"B":{"arm":"treatment","bot_type":"hard_treatment","seat_ids":[]}},"map":{"name":job["map"],"path":"p","sha256":"d"*64,"generated_map_yaml_sha256":"e"*64,"required_seats":4},"resolved_seats":resolved,"end_class":"NATURAL","end_reason":"natural","winner_team":job["treatment_side"],"world_tick":40000,"cap":{"world_tick_cap":45000,"marker_observed":False,"marker_tick":None},"memory":{"process_id":1,"peak_private_bytes":8*1024**3,"limit_private_bytes":runner.PRIVATE_LIMIT,"samples":[]},"runtime":{"started_utc":None,"finished_utc":None,"exit_code":0,"wall_seconds":1.0,"stall_seconds":180,"pid_scoped_cleanup":True},"artifacts":{"server_log":{},"driver_log":{},"matches_jsonl":{},"replay":{},"map_yaml":{},"support_bundle":{}},
    "cell_id":job["cell_id"],"game_uid":"g-1","status":"NATURAL_END","seats":seats,"seat_proof_source":"generated_map.yaml","map_yaml_sha256":"e"*64,"control_side":job["control_side"],"treatment_side":job["treatment_side"],"arm_bot_types":job["arm_bot_types"],"cap_marker":False,"cap_tick":None,"support_complete":True,"setup":job["setup"],"map_sha256":job["map_sha256"],"pair":job["pair"],"game_in_pair":job["game_in_pair"],"duration_ticks":None,"peak_memory_bytes":8*1024**3}
   runner.validate_receipt(receipt)
   self.assertEqual("TREATMENT_WIN",pilot.adjudicate(rows,receipt,job,"a"*64)["verdict"])
+
+ def test_adjudicator_joins_real_engine_coordinate_home_to_generated_map_location(self):
+  m=manifest(); job=next(j for j in pilot.make_jobs(m) if j["team_size"]==2 and j["game_in_pair"]==0)
+  seats=[dict(s,home_location=location) for s,location in zip(job["seat_assignments"],("22,16","30,16","22,24","30,24"))]
+  rows=[]
+  for seat in seats:
+   rows.append({"game_uid":"real-shape-game","player":{"home":seat["home_location"],"bot_type":seat["bot_type"],"faction":seat["faction"],"outcome":"won" if seat["side"]==job["treatment_side"] else "lost"}})
+  receipt={"cell_id":job["cell_id"],"game_uid":"real-shape-game","manifest_sha256":"a"*64,"switch":job["switch"],"setup":job["setup"],"map":job["map"],"map_sha256":job["map_sha256"],"seed":job["seed"],"pair":job["pair"],"game_in_pair":job["game_in_pair"],"control_side":job["control_side"],"treatment_side":job["treatment_side"],"arm_bot_types":job["arm_bot_types"],"status":"NATURAL_END","end_reason":"natural","seat_proof_source":"generated_map.yaml","map_yaml_sha256":"b"*64,"seats":seats}
+  self.assertEqual("TREATMENT_WIN",pilot.adjudicate(rows,receipt,job,"a"*64)["verdict"])
+  rows[0]["player"]["home"]="99,99"
+  self.assertEqual("INVALID_UNKNOWN",pilot.adjudicate(rows,receipt,job,"a"*64)["verdict"])
+  rows[0]["player"]["home"]="22,16";receipt["game_uid"]=""
+  self.assertEqual("INVALID_UNKNOWN",pilot.adjudicate(rows,receipt,job,"a"*64)["verdict"])
 
  def test_analyzer_preserves_all_unrun_planned_games(self):
   result=pilot.analyze(manifest(),"a"*64,[],[])
@@ -123,10 +136,11 @@ class PilotPlanTests(unittest.TestCase):
   for job in jobs:
    uid="g-"+job["cell_id"]
    treatment_wins=(job["pair"]==0)
-   receipts.append({"cell_id":job["cell_id"],"game_uid":uid,"manifest_sha256":"a"*64,"switch":job["switch"],"setup":job["setup"],"map":job["map"],"map_sha256":job["map_sha256"],"seed":job["seed"],"pair":job["pair"],"game_in_pair":job["game_in_pair"],"control_side":job["control_side"],"treatment_side":job["treatment_side"],"arm_bot_types":job["arm_bot_types"],"status":"NATURAL_END","end_reason":"natural","seat_proof_source":"generated_map.yaml","map_yaml_sha256":"b"*64,"seats":job["seat_assignments"]})
-   for seat in job["seat_assignments"]:
+   seats=[dict(seat,home_location=f"{22+2*i},16") for i,seat in enumerate(job["seat_assignments"])]
+   receipts.append({"cell_id":job["cell_id"],"game_uid":uid,"manifest_sha256":"a"*64,"switch":job["switch"],"setup":job["setup"],"map":job["map"],"map_sha256":job["map_sha256"],"seed":job["seed"],"pair":job["pair"],"game_in_pair":job["game_in_pair"],"control_side":job["control_side"],"treatment_side":job["treatment_side"],"arm_bot_types":job["arm_bot_types"],"status":"NATURAL_END","end_reason":"natural","seat_proof_source":"generated_map.yaml","map_yaml_sha256":"b"*64,"seats":seats})
+   for seat in seats:
     won=(seat["side"]==job["treatment_side"])==treatment_wins
-    rows.append({"game_uid":uid,"player":{"home":seat["home"],"bot_type":seat["bot_type"],"faction":seat["faction"],"outcome":"won" if won else "lost"},"stats":{"stats_timeline_fields":"tick,earned,spent,banked","stats_timeline":[[5000,10,4,6],[45000,90,40,50]]},"campaign_events":[{"kind":"refinery_placed","tick":7000}]})
+    rows.append({"game_uid":uid,"player":{"home":seat["home_location"],"bot_type":seat["bot_type"],"faction":seat["faction"],"outcome":"won" if won else "lost"},"stats":{"stats_timeline_fields":"tick,earned,spent,banked","stats_timeline":[[5000,10,4,6],[45000,90,40,50]]},"campaign_events":[{"kind":"refinery_placed","tick":7000}]})
   result=pilot.analyze(m,"a"*64,receipts,rows)
   setup=next(x for x in result["setups"] if x["setup"]==jobs[0]["setup"])
   self.assertEqual(2,setup["complete_natural_pairs"])
