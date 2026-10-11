@@ -1,0 +1,27 @@
+# Combined engine exact-SHA review
+
+**BOUNDED APPROVE** `devin/engine-bump-botname-capsule@ad061ebf79029da4dcd3a841a9b2540e39cbf968`, remote equality verified. Review base is `4f69df005f`; intermediate `04f9a38bae` already merges polygon `375d20e9ca662345e9abe509311e2cf53dc3fd7f`; combined head adds the unchanged bot-name helper/tests from `a89dcb34dcf77641bf6502ff1cef8f7e14adf779` through cherry-pick `65feb80c48`, then Capsule widening. Polygon and Player/test bytes match those source refs exactly. Cumulative diff-check passes. No author tree modified, no game/boot launched.
+
+## Compatibility and determinism
+
+Define the **previously valid arithmetic domain** as inputs for which every evaluated old subtraction, multiply, squared length, endpoint comparison sum, projection, absolute value and final radius subtraction fits its declared signed type, with valid nonzero segment denominator. It is not every input that happened to return a nonnegative wrapped value.
+
+Within this domain Polygon chooses the same endpoints/interior branch, has the same dot product, and divides the same signed long numerator by the same denominator, truncating toward zero. Interior projection coordinates already fit int; removing the cast/int2 temporary preserves the result. Squared lengths and z-square are identical nonnegative integers. `ISqrt(int)` and `ISqrt(long)` both compute the same exact floor root by the same two-bit algorithm; the long overload uses a larger starting divisor but first shifts to the same effective divisor. Output saturation cannot affect an old representable result.
+
+Capsule retains the original **ab-squared /1024 quantization**, the same t division/truncation, `<0`/`>1024` endpoint branches, and projection **ab*t/1024**. It does not replace this with floating-point or a new geometric formula. Algebraically subtracting PointA before computing the residual gives the same vector when the old intermediate additions/subtractions fit. Root/radius subtraction/clamp then agree. Both endpoint paths now widen the square. No clock, random source, unordered iteration, floating-point arithmetic or new mutable synchronization state enters either implementation.
+
+Independent offline exact-source differential harness: `python engine_review_probe.py` extracts both revisions' production segment and Capsule methods plus production ISqrt implementations, compiles with checked arithmetic and deterministic seed1337, and compares **100,000 Polygon segment + 100,000 Capsule cases: zero mismatches**. Checked old arithmetic excludes wrapping cases rather than claiming them compatible. Extended-domain smoke: Capsule at (50000,0), segment (0,0)-(1024,0), radius426 returns **48550**; Polygon segment root **48976**, without old int-square overflow. This tests extracted arithmetic with minimal value-type scaffolding, not a loaded world/full engine suite. Prior author's fallback test receipt reports **2/2**, reused without rerunning unchanged tests. No exact-combined full-suite or replay identity claim is made.
+
+## Boundaries that must remain explicit
+
+Widening intentionally changes some formerly non-crashing *wrapped* results. For example, Polygon endpoint comparisons can wrap even when individual squared lengths are positive. Therefore a blanket statement that all historical replays are unaffected would be false; compatibility applies to the fully nonoverflowing domain above. Extended-range results are deterministic but can change simulation/order hashes compared with the broken engine.
+
+This is not an arbitrary-int32-coordinate hardening patch: int2 subtraction still precedes widening in several places; `Polygon` casts **after** `Math.Abs(v.Z)` so int.MinValue still throws; enormous vectors can overflow long squared sums/products before saturation, and initialization OuterRadius still uses existing int2.Length. These are old/extreme-domain limitations, not newly introduced failures within the reviewed domain. WDist saturation protects final representability only. Rectangle/Circle remain unchanged and explicitly documented follow-up findings; no approval of their safety is implied.
+
+## Bot-name fallback
+
+Registered bot lookup still selects the first matching IBotInfo and calls the exact same Fluent keys/arguments with the same World.Players enumeration and ordinal. Unknown type alone returns PlayerName; it does not activate an invalid bot, invent strategy, rename BotType, modify owner/state/orders, or swallow localization, null-provider/enumeration or unrelated exceptions. Constructor host-side `Invalid bot type: ...` diagnostic remains unchanged. Thus missing registration is tolerated for display/loss notification without removing its existing diagnostic, but **the fallback is not a registration/health acceptance test**. Tooling must continue rejecting inactive/misconfigured seats through its explicit deployment/activation gates. Two helper tests cover absent matching type and empty provider list; registered Fluent parity follows source equivalence, not a new localization fixture.
+
+## Resume / open gates
+
+Exact source/arithmetic review complete; paired replay/loaded-world acceptance and engine-pin publication belong to their owners. Preserve the invalid pilot record and independent early-deploy guards. A focused production HitShape regression for far endpoint/interior vectors would improve future protection; the current combined commit adds only fallback tests. Do not infer runtime campaign readiness or universal coordinate safety from this bounded approval.
