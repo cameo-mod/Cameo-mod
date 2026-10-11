@@ -198,6 +198,9 @@ def run_cell(index: int) -> dict:
 	trace_files = {}
 	trace_errors = {}
 	stop_reason = None
+	deployment_evidence = {"verified": False, "check_tick": None, "seats": {}, "missing": []}
+	deployment_offset = 0
+	deployment_seats = ["BotA", "BotB"]
 	with stdout_path.open("w", encoding="utf-8") as stdout:
 		proc = subprocess.Popen(command, cwd=ROOT, env=env, stdout=stdout, stderr=subprocess.STDOUT)
 		while proc.poll() is None:
@@ -218,6 +221,26 @@ def run_cell(index: int) -> dict:
 				except Exception as cleanup_error:
 					stop_reason += ":CLEANUP_FAILED:" + str(cleanup_error)
 				break
+			lua_path = support / "Logs" / "lua.log"
+			if lua_path.is_file():
+				with lua_path.open("r", encoding="utf-8", errors="replace") as stream:
+					stream.seek(deployment_offset); deployment_chunk = stream.read(); deployment_offset = stream.tell()
+				new_deployment = runner.parse_deployment_evidence(deployment_chunk)
+				deployment_evidence["seats"].update(new_deployment["seats"])
+				deployment_evidence["missing"].extend(new_deployment["missing"])
+				if new_deployment["check_tick"] is not None:
+					deployment_evidence.update({k: v for k, v in new_deployment.items() if k != "seats"})
+					deployment_evidence["verified"] = runner.deployment_evidence_valid(deployment_evidence, deployment_seats)
+					if not deployment_evidence["verified"]:
+						stop_reason = "INVALID_NO_DEPLOY"
+						if rows: kill_cell_processes(rows, support)
+					break
+			if not deployment_evidence["verified"]:
+				world_tick = log_snapshot(support)["world_tick"]
+				if world_tick is not None and world_tick > 100:
+					stop_reason = "INVALID_NO_DEPLOY"
+					if rows: kill_cell_processes(rows, support)
+					break
 			host = host_memory_status()
 			if not rows:
 				samples.append({"utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
@@ -304,6 +327,8 @@ def run_cell(index: int) -> dict:
 				proc.kill(); proc.wait()
 		else:
 			proc.wait()
+	if not deployment_evidence["verified"] and stop_reason is None:
+		stop_reason = "INVALID_NO_DEPLOY"
 	for pid, trace in traces.items():
 		try:
 			trace.wait(timeout=12)
@@ -359,7 +384,7 @@ def run_cell(index: int) -> dict:
 	valid_game = (summary.get("matches") == 1 and summary.get("completed") == 1
 		and batch_result.get("status") == "ok" and batch_result.get("exit_code") == 0 and batch_result.get("attempts") == 1
 		and not summary.get("new_exceptions") and seed_pin_verified and records_verified
-		and censored_cap_verified and len(replays) == 1 and stop_reason is None and peak < PROCESS_STOP)
+		and deployment_evidence["verified"] and censored_cap_verified and len(replays) == 1 and stop_reason is None and peak < PROCESS_STOP)
 	if not valid_game and stop_reason is None:
 		stop_reason = "A5_RECEIPT_VALIDATION_FAILED"
 	return {"cell": cell, "seed": SEED, "source_head": subprocess.check_output(
@@ -372,6 +397,7 @@ def run_cell(index: int) -> dict:
 		"stop_threshold_bytes": PROCESS_STOP, "host_soft_stop_bytes": HOST_SOFT_STOP,
 		"host_hard_floor_bytes": HOST_HARD_FLOOR, "ceiling_bytes": runner.PRIVATE_LIMIT,
 		"samples": samples, "support": str(support), "driver_stdout": str(stdout_path),
+		"deployment_evidence": deployment_evidence,
 		"runtime_counter_files": [str(support / f"System.Runtime-{pid}.csv") for pid in counters],
 		"runtime_counter_errors": counter_errors,
 		"allocation_trace_files": list(trace_files.values()),

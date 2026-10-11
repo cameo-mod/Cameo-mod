@@ -42,11 +42,16 @@ class CampaignRunnerTests(unittest.TestCase):
 				runner.atomic_receipt(path, {"end_class": "CAP", "winner_team": None})
 
 	def test_deployment_parser_reports_each_seat(self):
-		parsed = runner.parse_deployment_evidence("AB_CAMPAIGN_SEAT_DEPLOYED seat=Multi0 tick=100 actor_count=5\nAB_CAMPAIGN_SEAT_DEPLOYED seat=Multi1 tick=100 actor_count=0\nAB_CAMPAIGN_DEPLOYMENT_CHECK tick=100 seat_count=1")
+		parsed = runner.parse_deployment_evidence("AB_CAMPAIGN_DEPLOY seat=Multi0 tick=71 type=td_gdi_constructionyard\nAB_CAMPAIGN_NO_DEPLOY seat=Multi1 tick=100\nAB_CAMPAIGN_DEPLOYMENT_CHECK tick=100 seat_count=1 expected_count=2")
 		self.assertEqual(100, parsed["check_tick"])
 		self.assertEqual(1, parsed["reported_seat_count"])
-		self.assertEqual(5, parsed["seats"]["Multi0"]["actor_count"])
-		self.assertEqual(0, parsed["seats"]["Multi1"]["actor_count"])
+		self.assertEqual("td_gdi_constructionyard", parsed["seats"]["Multi0"]["type"])
+		self.assertEqual(["Multi1"], parsed["missing"])
+		self.assertFalse(runner.deployment_evidence_valid(parsed, ["Multi0", "Multi1"]))
+		valid = runner.parse_deployment_evidence("AB_CAMPAIGN_DEPLOY seat=Multi0 tick=71 type=td_gdi_constructionyard\nAB_CAMPAIGN_DEPLOY seat=Multi1 tick=98 type=td_nod_constructionyard\nAB_CAMPAIGN_DEPLOYMENT_CHECK tick=100 seat_count=2 expected_count=2")
+		self.assertTrue(runner.deployment_evidence_valid(valid, ["Multi0", "Multi1"]))
+		unknown = runner.parse_deployment_evidence("AB_CAMPAIGN_DEPLOY seat=Multi0 tick=71 type=mcv\nAB_CAMPAIGN_DEPLOYMENT_CHECK tick=100 seat_count=1 expected_count=1")
+		self.assertFalse(runner.deployment_evidence_valid(unknown, ["Multi0"]))
 
 	def test_missing_deployed_seat_kills_owned_process(self):
 		class FakeProcess:
@@ -57,12 +62,28 @@ class CampaignRunnerTests(unittest.TestCase):
 			def wait(self): return self.rc
 		with tempfile.TemporaryDirectory() as temp:
 			p=FakeProcess();d=pathlib.Path(temp)/"driver.log";a=pathlib.Path(temp)/"actor.log"
-			def emit(_): a.write_text("AB_CAMPAIGN_SEAT_DEPLOYED seat=Multi0 tick=100 actor_count=5\nAB_CAMPAIGN_SEAT_DEPLOYED seat=Multi1 tick=100 actor_count=0\nAB_CAMPAIGN_DEPLOYMENT_CHECK tick=100 seat_count=1",encoding="utf-8")
+			def emit(_): a.write_text("AB_CAMPAIGN_DEPLOY seat=Multi0 tick=71 type=td_gdi_constructionyard\nAB_CAMPAIGN_NO_DEPLOY seat=Multi1 tick=100\nAB_CAMPAIGN_DEPLOYMENT_CHECK tick=100 seat_count=1 expected_count=2",encoding="utf-8")
 			with patch.object(runner,"private_bytes",return_value=1), patch.object(runner,"available_ram_bytes",return_value=runner.FREE_RAM_FLOOR):
 				result=runner.monitor_process(p,driver_log=d,actor_log=a,sleep=emit,required_seats=["Multi0","Multi1"])
 		self.assertTrue(p.killed)
 		self.assertEqual("INVALID_NO_DEPLOY",result["end_reason"])
 		self.assertFalse(result["deployment"]["verified"])
+
+	def test_missing_deployment_evidence_at_world_tick_101_kills_owned_process(self):
+		class FakeProcess:
+			pid=4242
+			def __init__(self): self.rc=None;self.killed=False
+			def poll(self): return self.rc
+			def kill(self): self.killed=True;self.rc=-9
+			def wait(self): return self.rc
+		with tempfile.TemporaryDirectory() as temp:
+			p=FakeProcess();d=pathlib.Path(temp)/"driver.log";a=pathlib.Path(temp)/"actor.log";debug=pathlib.Path(temp)/"debug.log"
+			def emit(_): debug.write_text("[WT 101] world tick progressed",encoding="utf-8")
+			with patch.object(runner,"private_bytes",return_value=1):
+				result=runner.monitor_process(p,driver_log=d,actor_log=a,stall_log=debug,sleep=emit,required_seats=["Multi0"])
+		self.assertTrue(p.killed)
+		self.assertEqual("INVALID_NO_DEPLOY",result["end_reason"])
+		self.assertIsNone(result["deployment"]["check_tick"])
 
 	def test_no_deploy_parks_remaining_claim_once_queue(self):
 		with tempfile.TemporaryDirectory() as temp:
@@ -93,13 +114,16 @@ class CampaignRunnerTests(unittest.TestCase):
 			runner.execution_gate(manifest, a5_receipt=a5, a5_receipt_sha256="d"*64, source_commit="a"*40, engine_version="engine")
 
 	def test_receipt_cap_must_not_claim_winner_and_needs_marker(self):
-		receipt = {"schema_version":1,"campaign_id":"c","manifest_sha256":"a"*64,"baseline_commit":"b"*40,"engine_sha256":"c"*64,"switch":"s","setup_id":"x","pair_id":"p","pair_member":0,"seed":1,"seed_proof":{},"teams":{},"map":{"required_seats":1},"resolved_seats":[{"seat_id":"M0","team":"A","arm":"control","bot_type":"hard","faction":"td_gdi","home":"M0","spawn":0,"proof_source":"map+records","outcome":"lost","metrics":{"timeline":[]}}],"end_class":"CAP","end_reason":"cap","winner_team":None,"world_tick":45000,"cap":{"world_tick_cap":45000,"marker_observed":True,"marker_tick":45000},"memory":{"peak_private_bytes":0,"limit_private_bytes":runner.PRIVATE_LIMIT,"samples":[]},"runtime":{},"artifacts":{}}
+		receipt = {"schema_version":1,"campaign_id":"c","manifest_sha256":"a"*64,"baseline_commit":"b"*40,"engine_sha256":"c"*64,"switch":"s","setup_id":"x","pair_id":"p","pair_member":0,"seed":1,"seed_proof":{},"teams":{},"map":{"required_seats":1},"resolved_seats":[{"seat_id":"M0","team":"A","arm":"control","bot_type":"hard","faction":"td_gdi","home":"M0","spawn":0,"proof_source":"map+records","outcome":"lost","metrics":{"timeline":[]}}],"deployment":{"verified":True,"check_tick":100,"seats":[{"seat_id":"M0","tick":85,"type":"td_gdi_constructionyard"}],"missing":[]},"end_class":"CAP","end_reason":"cap","winner_team":None,"world_tick":45000,"cap":{"world_tick_cap":45000,"marker_observed":True,"marker_tick":45000},"memory":{"peak_private_bytes":0,"limit_private_bytes":runner.PRIVATE_LIMIT,"samples":[]},"runtime":{},"artifacts":{}}
 		runner.validate_receipt(receipt)
 		receipt["winner_team"]="A"
 		with self.assertRaisesRegex(ValueError,"cannot name a winner"):
 			runner.validate_receipt(receipt)
 		receipt["winner_team"]=None;receipt["cap"]["marker_observed"]=False
 		with self.assertRaisesRegex(ValueError,"lacks valid cap evidence"):
+			runner.validate_receipt(receipt)
+		receipt["cap"]["marker_observed"]=True;receipt["deployment"]["verified"]=False
+		with self.assertRaisesRegex(ValueError,"lacks deployment proof"):
 			runner.validate_receipt(receipt)
 
 	def test_memory_watch_kills_only_given_process_handle(self):

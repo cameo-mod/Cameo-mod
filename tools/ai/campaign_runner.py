@@ -23,6 +23,7 @@ import time
 from contextlib import contextmanager
 
 import ab_campaign_pilot as pilot
+import campaign_overlay
 
 CAP_TICK = 45000
 PRIVATE_LIMIT = int(10.5 * 1024**3)     # decided cell ceiling (was 6.5 GiB; startup burst peaks ~9.5 GiB)
@@ -33,8 +34,10 @@ ACTOR_SAMPLE_INTERVAL = 5000
 SLOT_PARALLEL_SMALL = 3
 SMALL_TEAM_MAX = 2
 ACTOR_SAMPLE_RE = re.compile(r"AB_CAMPAIGN_ACTOR_SAMPLE tick=(\d+) actor_count=(\d+)")
-SEAT_DEPLOYED_RE = re.compile(r"AB_CAMPAIGN_SEAT_DEPLOYED seat=([A-Za-z0-9_.-]+) tick=(\d+) actor_count=(\d+)")
-DEPLOYMENT_CHECK_RE = re.compile(r"AB_CAMPAIGN_DEPLOYMENT_CHECK tick=(\d+) seat_count=(\d+)")
+SEAT_DEPLOYED_RE = re.compile(r"AB_CAMPAIGN_DEPLOY seat=([A-Za-z0-9_.-]+) tick=(\d+) type=([A-Za-z0-9_.-]+)")
+NO_DEPLOY_RE = re.compile(r"AB_CAMPAIGN_NO_DEPLOY seat=([A-Za-z0-9_.-]+) tick=(\d+)")
+DEPLOYMENT_CHECK_RE = re.compile(r"AB_CAMPAIGN_DEPLOYMENT_CHECK tick=(\d+) seat_count=(\d+) expected_count=(\d+)")
+WORLD_TICK_RE = re.compile(r"\[WT\s+(\d+)\]")
 RECEIPT_SCHEMA = pathlib.Path(__file__).with_name("ab_campaign_receipt.schema.json")
 
 
@@ -53,9 +56,32 @@ def parse_actor_samples(text: str) -> list[dict]:
 def parse_deployment_evidence(text: str) -> dict:
 	checks = DEPLOYMENT_CHECK_RE.findall(text)
 	seats = SEAT_DEPLOYED_RE.findall(text)
+	missing = NO_DEPLOY_RE.findall(text)
 	return {"check_tick": int(checks[-1][0]) if checks else None,
 		"reported_seat_count": int(checks[-1][1]) if checks else None,
-		"seats": {name: {"tick": int(tick), "actor_count": int(count)} for name, tick, count in seats}}
+		"expected_seat_count": int(checks[-1][2]) if checks else None,
+		"seats": {name: {"tick": int(tick), "type": actor_type} for name, tick, actor_type in seats},
+		"missing": [name for name, _ in missing]}
+
+
+def deployment_evidence_valid(evidence: dict, expected_seats: list[str]) -> bool:
+	seats = evidence.get("seats", {})
+	return (evidence.get("check_tick") == 100
+		and evidence.get("reported_seat_count") == len(expected_seats)
+		and evidence.get("expected_seat_count") == len(expected_seats)
+		and not evidence.get("missing")
+		and set(seats) == set(expected_seats)
+		and all(type(seats[s].get("tick")) is int and 0 <= seats[s]["tick"] <= 100
+			and seats[s].get("type") in pilot.VERIFIED_DEPLOYMENT_TYPES for s in expected_seats))
+
+
+def latest_world_tick(path: pathlib.Path) -> int | None:
+	if not path.is_file(): return None
+	with path.open("rb") as stream:
+		stream.seek(max(0, path.stat().st_size - 65536))
+		text = stream.read().decode("utf-8", errors="replace")
+	ticks = WORLD_TICK_RE.findall(text)
+	return max((int(tick) for tick in ticks), default=None)
 
 
 def pid_alive(pid: int | None) -> bool:
@@ -245,7 +271,7 @@ def validate_receipt(receipt: dict) -> None:
 	"""Validate the producer's semantic invariants; JSON Schema is published alongside."""
 	if not isinstance(receipt, dict) or receipt.get("schema_version") != 1:
 		raise ValueError("receipt schema_version must be 1")
-	for key in ("campaign_id", "manifest_sha256", "baseline_commit", "engine_sha256", "switch", "setup_id", "pair_id", "seed", "seed_proof", "teams", "resolved_seats", "end_class", "end_reason", "winner_team", "world_tick", "cap", "memory", "runtime", "artifacts"):
+	for key in ("campaign_id", "manifest_sha256", "baseline_commit", "engine_sha256", "switch", "setup_id", "pair_id", "seed", "seed_proof", "teams", "resolved_seats", "deployment", "end_class", "end_reason", "winner_team", "world_tick", "cap", "memory", "runtime", "artifacts"):
 		if key not in receipt:
 			raise ValueError("receipt missing required field: " + key)
 	if receipt["end_class"] not in ("NATURAL", "CAP", "INCOMPLETE"):
@@ -270,6 +296,16 @@ def validate_receipt(receipt: dict) -> None:
 		raise ValueError("memory threshold reached without INCOMPLETE MEMORY_KILL")
 	if len(receipt["resolved_seats"]) != receipt["map"].get("required_seats"):
 		raise ValueError("resolved seat count differs from map proof")
+	deployment = receipt["deployment"]
+	if not isinstance(deployment, dict) or type(deployment.get("verified")) is not bool or not isinstance(deployment.get("seats"), list) or not isinstance(deployment.get("missing"), list):
+		raise ValueError("deployment evidence shape is invalid")
+	if deployment["verified"] and (deployment.get("check_tick") != 100 or deployment["missing"] or len(deployment["seats"]) != receipt["map"].get("required_seats")):
+		raise ValueError("verified deployment evidence is incomplete")
+	if receipt["end_class"] != "INCOMPLETE" and not deployment["verified"]:
+		raise ValueError("completed match lacks deployment proof")
+	for seat in deployment["seats"]:
+		if not isinstance(seat, dict) or seat.get("seat_id") not in {s.get("seat_id") for s in receipt["resolved_seats"]} or type(seat.get("tick")) is not int or not 0 <= seat["tick"] <= 100 or seat.get("type") not in pilot.VERIFIED_DEPLOYMENT_TYPES:
+			raise ValueError("deployment seat evidence is invalid")
 	for seat in receipt["resolved_seats"]:
 		if not isinstance(seat, dict) or any(k not in seat for k in ("seat_id", "team", "arm", "bot_type", "faction", "home", "spawn", "proof_source", "outcome", "metrics")):
 			raise ValueError("resolved seat is missing required proof/metric fields")
@@ -301,7 +337,7 @@ def execution_gate(manifest: dict, *, a5_receipt: dict | None, a5_receipt_sha256
 def monitor_process(process, *, driver_log: pathlib.Path, actor_log: pathlib.Path,
 				stall_log: pathlib.Path | None = None,
 				wall_timeout: int = 3000, stall_timeout: int = 180,
-				poll_seconds: float = 2.0, sample_callback=None, required_seats=None,
+				poll_seconds: float = 2.0, sample_callback=None, required_seats=None, deployment_log: pathlib.Path | None = None,
 				clock=time.monotonic, sleep=time.sleep) -> dict:
 	"""Watch one owned process; any stop targets only the supplied Popen handle."""
 	if wall_timeout != 3000 or stall_timeout != 180 or poll_seconds <= 0:
@@ -314,8 +350,9 @@ def monitor_process(process, *, driver_log: pathlib.Path, actor_log: pathlib.Pat
 	peak = 0
 	stop_reason = None
 	actor_offset = 0
+	deployment_offset = 0
 	last_actor = {"world_tick": None, "actor_count": None}
-	deployment = {"verified": False, "check_tick": None, "seats": {}}
+	deployment = {"verified": False, "check_tick": None, "seats": {}, "missing": []}
 	while process.poll() is None:
 		sleep(poll_seconds)
 		try:
@@ -337,14 +374,23 @@ def monitor_process(process, *, driver_log: pathlib.Path, actor_log: pathlib.Pat
 				if new_actors: last_actor = new_actors[-1]
 				new_deployment = parse_deployment_evidence(chunk)
 				deployment["seats"].update(new_deployment["seats"])
+				deployment["missing"].extend(new_deployment["missing"])
 				if new_deployment["check_tick"] is not None:
-					deployment["check_tick"] = new_deployment["check_tick"]
+					deployment.update({k: v for k, v in new_deployment.items() if k != "seats"})
 					if required_seats is not None:
-						valid = new_deployment["check_tick"] == 100 and new_deployment["reported_seat_count"] == len(required_seats) and all(
-							seat in deployment["seats"] and deployment["seats"][seat]["tick"] == 100 and deployment["seats"][seat]["actor_count"] > 0
-							for seat in required_seats)
-						deployment["verified"] = valid
-						if not valid: stop_reason = "INVALID_NO_DEPLOY"
+						deployment["verified"] = deployment_evidence_valid(deployment, list(required_seats))
+						if not deployment["verified"]: stop_reason = "INVALID_NO_DEPLOY"
+		if deployment_log is not None and pathlib.Path(deployment_log) != pathlib.Path(actor_log) and deployment_log.exists():
+			with deployment_log.open("r", encoding="utf-8", errors="replace") as stream:
+				stream.seek(deployment_offset); chunk = stream.read(); deployment_offset = stream.tell()
+			new_deployment = parse_deployment_evidence(chunk)
+			deployment["seats"].update(new_deployment["seats"])
+			deployment["missing"].extend(new_deployment["missing"])
+			if new_deployment["check_tick"] is not None:
+				deployment.update({k: v for k, v in new_deployment.items() if k != "seats"})
+				if required_seats is not None:
+					deployment["verified"] = deployment_evidence_valid(deployment, list(required_seats))
+					if not deployment["verified"]: stop_reason = "INVALID_NO_DEPLOY"
 		actor_count = last_actor["actor_count"]
 		world_tick = last_actor["world_tick"]
 		row = {"utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()), "world_tick": world_tick,
@@ -358,6 +404,9 @@ def monitor_process(process, *, driver_log: pathlib.Path, actor_log: pathlib.Pat
 			if requested_stop:
 				stop_reason = str(requested_stop); break
 		if stop_reason == "INVALID_NO_DEPLOY": break
+		world_tick = latest_world_tick(stall_log) if required_seats is not None and not deployment["verified"] else None
+		if world_tick is not None and world_tick > 100:
+			stop_reason = "INVALID_NO_DEPLOY"; break
 		if private >= PRIVATE_LIMIT: stop_reason = "MEMORY_KILL"; break
 		if clock() - last_activity > stall_timeout: stop_reason = "STALL"; break
 		if clock() >= deadline: stop_reason = "WALL_TIMEOUT"; break
@@ -419,15 +468,15 @@ def run_one(manifest: dict, manifest_sha: str, job: dict, *, root: pathlib.Path,
 	logs = game_support / "Logs"; logs.mkdir()
 	maps = game_support / "UserMaps"; maps.mkdir()
 	overlay = game_root / "Overlay"; pilot.materialize_dual_arm_ai(root, overlay, job["switch"], manifest.get("ratchet_accepted_switches", []))
-	pilot.materialize_runtime_overlay_mod(root, overlay)
+	campaign_overlay.materialize_manifest(root, overlay, engine_root)
 	variant = maps / ("campaign_" + re.sub(r"[^A-Za-z0-9_.-]", "_", job["cell_id"]))
 	proof = pilot.prove_generated_map(job, root, variant)
 	map_yaml = variant / "map.yaml"; map_yaml_sha = sha(map_yaml)
 	match_log = logs / "cameo-ai-matches.jsonl"; before = match_log.stat().st_size if match_log.exists() else 0
 	server_log = logs / "server.log"; driver_log = game_root / "driver.log"
 	if not executable.is_file(): raise ValueError("pinned OpenRA executable missing")
-	args = [str(executable), "Game.Mod=cameo", "Sound.Device=none", "Engine.EngineDir=..",
-		f"Engine.ModSearchPaths={overlay / 'mods'},{root / 'mods'},{engine_root / 'mods'}",
+	args = [str(executable), *campaign_overlay.launch_mod_arguments(root, engine_root, overlay),
+		"Sound.Device=none",
 		f"Engine.SupportDir={game_support}", f"Launch.Map={variant.name}", "Launch.Benchmark=ai-duel-batch-",
 		"Graphics.VSync=False", "Graphics.Mode=Windowed", "Graphics.WindowedSize=640,480"]
 	env = os.environ.copy(); env["CAMEO_DEV_SEED"] = str(job["seed"])
@@ -439,7 +488,7 @@ def run_one(manifest: dict, manifest_sha: str, job: dict, *, root: pathlib.Path,
 			slot_counter.heartbeat(job["cell_id"], row["private_bytes"])
 		return "LOW_FREE_RAM" if available_ram_bytes() < FREE_RAM_HARD_FLOOR else None
 	monitor_result = monitor_process(process, driver_log=driver_log, actor_log=server_log, stall_log=logs / "debug.log",
-		sample_callback=heartbeat, required_seats=[seat["home"] for seat in job["seat_assignments"]])
+		sample_callback=heartbeat, required_seats=[seat["home"] for seat in job["seat_assignments"]], deployment_log=logs / "lua.log")
 	slot_counter.release(job["cell_id"])
 	finished = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
 	log_text = server_log.read_text(encoding="utf-8", errors="replace") if server_log.exists() else ""
@@ -472,13 +521,19 @@ def run_one(manifest: dict, manifest_sha: str, job: dict, *, root: pathlib.Path,
 	with zipfile.ZipFile(bundle, "w", compression=zipfile.ZIP_DEFLATED) as z:
 		for file in artifact_paths:
 			if file.is_file() and file != bundle: z.write(file, file.relative_to(game_root))
+	deployment_missing = sorted(set(monitor_result["deployment"]["missing"]) |
+		(set(seat["home"] for seat in job["seat_assignments"]) - set(monitor_result["deployment"]["seats"])))
+	deployment_receipt = {"verified": monitor_result["deployment"]["verified"],
+		"check_tick": monitor_result["deployment"]["check_tick"],
+		"seats": [{"seat_id": seat, **proof} for seat, proof in sorted(monitor_result["deployment"]["seats"].items())],
+		"missing": deployment_missing}
 	engine_digest = hashlib.sha256("".join(manifest["binary_sha256"][k] for k in sorted(manifest["binary_sha256"])).encode()).hexdigest()
 	receipt = {"schema_version":1,"campaign_id":manifest.get("campaign_id", "ab-campaign-2026-10-11-pilot"), "manifest_sha256":manifest_sha,
 		"baseline_commit":manifest["pins"]["source_commit"], "engine_sha256":engine_digest, "switch":job["switch"], "setup_id":job["setup"],
 		"map":{"name":job["map"],"path":job["map_path"],"sha256":job["map_sha256"],"generated_map_yaml_sha256":map_yaml_sha,"required_seats":job["required_seats"]},
 	"pair_id":f"{job['setup']}:{job['seed']}:{job['pair']}","pair_member":job["game_in_pair"],"seed":job["seed"],
 		"seed_proof":{"env_value":str(job["seed"]),"server_log_pin_line":seed_line,"server_log_sha256":sha(server_log) if server_log.is_file() else None},
-		"teams":team_obj,"resolved_seats":resolved_out,"end_class":end_class,"end_reason":end_reason,
+		"teams":team_obj,"resolved_seats":resolved_out,"deployment":deployment_receipt,"end_class":end_class,"end_reason":end_reason,
 		"winner_team":classification.get("winner_side") if end_class=="NATURAL" else None,"world_tick":monitor_result["samples"][-1]["world_tick"] if monitor_result["samples"] else None,
 		"cap":{"world_tick_cap":CAP_TICK,"marker_observed":bool(cap_match),"marker_tick":int(cap_match.group(1)) if cap_match else None},
 		"memory":{"process_id":process.pid,"peak_private_bytes":monitor_result["peak_private_bytes"],"limit_private_bytes":PRIVATE_LIMIT,"samples":monitor_result["samples"]},

@@ -4,7 +4,7 @@
   "title": "Cameo A/B campaign per-game receipt",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schema_version", "campaign_id", "manifest_sha256", "baseline_commit", "engine_sha256", "switch", "setup_id", "map", "pair_id", "pair_member", "seed", "seed_proof", "teams", "resolved_seats", "end_class", "end_reason", "winner_team", "world_tick", "cap", "memory", "runtime", "artifacts"],
+  "required": ["schema_version", "campaign_id", "manifest_sha256", "baseline_commit", "engine_sha256", "switch", "setup_id", "map", "pair_id", "pair_member", "seed", "seed_proof", "teams", "resolved_seats", "deployment", "end_class", "end_reason", "winner_team", "world_tick", "cap", "memory", "runtime", "artifacts"],
   "properties": {
     "schema_version": {"const": 1},
     "campaign_id": {"type": "string", "minLength": 1},
@@ -20,6 +20,7 @@
     "seed_proof": {"type": "object", "additionalProperties": false, "required": ["env_value", "server_log_pin_line", "server_log_sha256"], "properties": {"env_value": {"type": "string"}, "server_log_pin_line": {"type": ["string", "null"]}, "server_log_sha256": {"anyOf": [{"$ref": "#/$defs/sha"}, {"type": "null"}]}}},
     "teams": {"type": "object", "additionalProperties": false, "required": ["A", "B"], "properties": {"A": {"$ref": "#/$defs/team"}, "B": {"$ref": "#/$defs/team"}}},
     "resolved_seats": {"type": "array", "minItems": 2, "items": {"$ref": "#/$defs/seat"}},
+    "deployment": {"type": "object", "additionalProperties": false, "required": ["verified", "check_tick", "seats", "missing"], "properties": {"verified": {"type": "boolean"}, "check_tick": {"type": ["integer", "null"], "minimum": 0}, "seats": {"type": "array", "items": {"type": "object", "additionalProperties": false, "required": ["seat_id", "tick", "type"], "properties": {"seat_id": {"type": "string"}, "tick": {"type": "integer", "minimum": 0}, "type": {"type": "string"}}}}, "missing": {"type": "array", "items": {"type": "string"}}}},
     "end_class": {"enum": ["NATURAL", "CAP", "INCOMPLETE"]},
     "end_reason": {"type": ["string", "null"]},
     "winner_team": {"enum": ["A", "B", null]},

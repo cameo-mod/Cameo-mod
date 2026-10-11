@@ -10,6 +10,7 @@ from threading import Lock
 import apply_increment_switches as increment
 
 SWITCH = "BU_harvester_logistics"
+VERIFIED_DEPLOYMENT_TYPES = frozenset(("td_gdi_constructionyard", "td_nod_constructionyard", "ra1_allies_constructionyard", "ra1_soviets_constructionyard"))
 MAPS = {
  "nuclear_winter": ("mods/cameo/maps/_ra_a-nuclear-winter.oramap", "191efefe3043acb2fd504b2e2e5c974a49f6498f8e016c1380159c9f7efc1c4a", 2),
  "satans_clutch": ("mods/cameo/maps/SatansClutch.oramap", "1bd3bee0bbb38c95015126ba689496c4284c2f4e8f8b6573711a9fdadcbf16cb", 2),
@@ -253,29 +254,6 @@ def materialize_dual_arm_ai(root,destination,switch,accepted_switches=()):
  changed=sorted(p.name for p in source.glob("*.yaml"))
  return {"switch":switch,"accepted_switches":list(accepted_switches),"ai_yaml_sha256":sha(path),"runtime_files":changed,"runnable":False,"arm_types":{"control":"hard_control","treatment":"hard_treatment"}}
 
-def materialize_runtime_overlay_mod(root, destination):
- """Copy immutable mod content so OpenRA accepts the overlay ahead of baseline.
-
- The dual-arm AI payload alone is insufficient: mod.yaml includes every
- ContentPacks/*/content.yaml. If any include is absent, OpenRA rejects the
- overlay and silently selects the later baseline mod, which has no campaign
- bot aliases. Hard-link immutable content where possible; copy across volumes.
- """
- source = pathlib.Path(root) / "mods" / "cameo"
- target = pathlib.Path(destination) / "mods" / "cameo"
- require(target.is_dir(), "dual-arm overlay must exist before copying runtime mod content")
- contentpacks = source / "ContentPacks"
- require(contentpacks.is_dir(), "source Cameo ContentPacks are missing")
- def link_or_copy(src, dst):
-  try: os.link(src, dst)
-  except OSError: shutil.copy2(src, dst)
- shutil.copytree(contentpacks, target / "ContentPacks", copy_function=link_or_copy)
- shutil.copyfile(source / "mod.yaml", target / "mod.yaml")
- includes = re.findall(r"(?m)^Include:\s*(\S+)\s*$", (target / "mod.yaml").read_text(encoding="utf-8"))
- require(includes and all((target / include).is_file() for include in includes),
-         "runtime overlay is missing one or more mod.yaml includes")
- return {"include_count": len(includes), "outpost2_include": (target / "ContentPacks/Outpost2/content.yaml").is_file()}
-
 def make_jobs(manifest):
  seeds=manifest.get("seeds")
  require(isinstance(seeds,list) and len(seeds)==2 and len(set(seeds))==2 and all(type(x)==int and x>=0 for x in seeds),"pilot needs exactly two distinct nonnegative seeds")
@@ -350,6 +328,7 @@ def install_campaign_monitor(dest,seat_count,cap_tick=45000,sample_interval=5000
  require(seat_count in (2,4,6,8) and type(cap_tick) is int and 1000<=cap_tick<=45000 and 0<sample_interval<=cap_tick,"campaign monitor bounds")
  campaign_seat_names=", ".join(json.dumps(name) for name in (seat_names or [f"Multi{i}" for i in range(seat_count)]))
  names=campaign_seat_names+', "Neutral", "Creeps"'
+ verified_yards=", ".join("["+json.dumps(actor)+"]=true" for actor in sorted(VERIFIED_DEPLOYMENT_TYPES))
  lua=f'''local SeatNames = {{{names}}}
 local CampaignSeatNames = {{{campaign_seat_names}}}
 local CapTick = {cap_tick}
@@ -364,21 +343,35 @@ local function SampleActors()
 \tend
 \tprint("AB_CAMPAIGN_ACTOR_SAMPLE tick=" .. DateTime.GameTime .. " actor_count=" .. total)
 end
-local function VerifySeatDeployment()
-\tlocal deployed = 0
+local VerifiedConstructionYards = {{{verified_yards}}}
+local Deployments = {{}}
+local function ProbeSeatDeployment()
+\tlocal tick = DateTime.GameTime
 \tfor _, name in ipairs(CampaignSeatNames) do
-\t\tlocal player = Player.GetPlayer(name)
-\t\tlocal count = 0
-\t\tif player then for _, actor in ipairs(player.GetActors()) do if actor.Type ~= "player" then count = count + 1 end end end
-\t\tif count > 0 then deployed = deployed + 1 end
-\t\tprint("AB_CAMPAIGN_SEAT_DEPLOYED seat=" .. name .. " tick=" .. DateTime.GameTime .. " actor_count=" .. count)
+\t\tif not Deployments[name] then
+\t\t\tlocal player = Player.GetPlayer(name)
+\t\t\tif player then for _, actor in ipairs(player.GetActors()) do
+\t\t\t\tif VerifiedConstructionYards[actor.Type] then
+\t\t\t\t\tDeployments[name] = {{ tick=tick, type=actor.Type }}
+\t\t\t\t\tprint("AB_CAMPAIGN_DEPLOY seat=" .. name .. " tick=" .. tick .. " type=" .. actor.Type)
+\t\t\t\t\tbreak
+\t\t\t\tend
+\t\t\tend end
+\t\tend
 \tend
-\tprint("AB_CAMPAIGN_DEPLOYMENT_CHECK tick=" .. DateTime.GameTime .. " seat_count=" .. deployed)
+\tif tick >= DeploymentTick then
+\t\tlocal deployed = 0
+\t\tfor _, name in ipairs(CampaignSeatNames) do
+\t\t\tif Deployments[name] and Deployments[name].tick <= DeploymentTick then deployed = deployed + 1
+\t\t\telse print("AB_CAMPAIGN_NO_DEPLOY seat=" .. name .. " tick=" .. tick) end
+\t\tend
+\t\tprint("AB_CAMPAIGN_DEPLOYMENT_CHECK tick=" .. tick .. " seat_count=" .. deployed .. " expected_count=" .. #CampaignSeatNames)
+\telse Trigger.AfterDelay(1, ProbeSeatDeployment) end
 end
 WorldLoaded = function()
 \tfor _, name in ipairs(SeatNames) do local p = Player.GetPlayer(name); if p then Objectives[name] = p.AddPrimaryObjective("Campaign observation cap") end end
 \tprint("AB_CAMPAIGN_STARTED tick=" .. DateTime.GameTime .. " cap=" .. CapTick)
-\tTrigger.AfterDelay(DeploymentTick, VerifySeatDeployment)
+\tTrigger.AfterDelay(1, ProbeSeatDeployment)
 \tfor tick = SampleInterval, CapTick - SampleInterval, SampleInterval do Trigger.AfterDelay(tick, SampleActors) end
 \tTrigger.AfterDelay(CapTick, function()
 \t\tSampleActors(); print("AB_CAMPAIGN_CAP tick=" .. DateTime.GameTime)

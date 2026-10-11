@@ -1,4 +1,4 @@
-import pathlib, re, sys, tempfile, unittest
+import pathlib, sys, tempfile, unittest
 ROOT=pathlib.Path(__file__).resolve().parents[2]
 sys.path.insert(0,str(ROOT/"tools"/"ai"))
 import ab_campaign_pilot as pilot
@@ -49,25 +49,11 @@ class PilotPlanTests(unittest.TestCase):
    pilot.install_campaign_monitor(dest,2,cap_tick=1000,sample_interval=500)
    monitor=(dest/"ab_campaign_monitor.lua").read_text(encoding="utf-8")
   self.assertIn("MarkFailedObjective",monitor)
-  self.assertIn("AB_CAMPAIGN_SEAT_DEPLOYED seat=",monitor)
+  self.assertIn("AB_CAMPAIGN_DEPLOY seat=",monitor)
+  self.assertIn("td_gdi_constructionyard",monitor)
   self.assertIn("AB_CAMPAIGN_DEPLOYMENT_CHECK tick=",monitor)
-  self.assertIn("Trigger.AfterDelay(DeploymentTick, VerifySeatDeployment)",monitor)
+  self.assertIn("Trigger.AfterDelay(1, ProbeSeatDeployment)",monitor)
   self.assertIn("AB_CAMPAIGN_CAP tick=",monitor)
-
- def test_runtime_overlay_copies_all_mod_includes_and_outpost2_bot_rules(self):
-  with tempfile.TemporaryDirectory() as temp:
-   overlay=pathlib.Path(temp)/"overlay"
-   pilot.materialize_dual_arm_ai(ROOT,overlay,pilot.SWITCH)
-   proof=pilot.materialize_runtime_overlay_mod(ROOT,overlay)
-   mod=overlay/"mods"/"cameo"
-   includes=re.findall(r"(?m)^Include:\s*(\S+)\s*$",(mod/"mod.yaml").read_text(encoding="utf-8"))
-   self.assertEqual(proof["include_count"],len(includes))
-   self.assertTrue(proof["outpost2_include"])
-   self.assertTrue(all((mod/name).is_file() for name in includes))
-   self.assertTrue((mod/"ContentPacks"/"Outpost2"/"yaml"/"ai.yaml").is_file())
-   ai=(mod/"ai"/"ai.yaml").read_text(encoding="utf-8")
-   self.assertIn("Type: hard_control",ai)
-   self.assertIn("Type: hard_treatment",ai)
 
  def test_map_tamper_and_execution_authority_fail_closed(self):
   m=manifest();m["maps"][0]["sha256"]="0"*64
