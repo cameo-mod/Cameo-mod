@@ -534,7 +534,9 @@ def run_one(manifest: dict, manifest_sha: str, job: dict, *, root: pathlib.Path,
 	# still produce cap-censored rows — never classify that as a played cell.
 	mod_failed = "Invalid bot type" in debug_text or "YamlException" in debug_text
 	match_rows = batch.read_appended_records(match_log, before)
-	cap_match = re.search(r"AB_CAMPAIGN_CAP tick=(\d+)", driver_text)
+	# The cap marker is emitted by the batch driver; check the server log too so a
+	# stream move can never silently turn a capped cell into a stall.
+	cap_match = re.search(r"AB_CAMPAIGN_CAP tick=(\d+)", driver_text) or re.search(r"AB_CAMPAIGN_CAP tick=(\d+)", log_text)
 	seed_line = next((line for line in log_text.splitlines() if f"RandomSeed={job['seed']}" in line and "CAMEO DEV SEED pinned" in line), None)
 	map_yaml_text = map_yaml.read_text(encoding="utf-8")
 	resolved = proof["seats"]
