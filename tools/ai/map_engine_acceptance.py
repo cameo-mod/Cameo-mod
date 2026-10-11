@@ -42,20 +42,48 @@ import time
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "tools" / "ai"))
 import ab_campaign_pilot as pilot  # noqa: E402
+import campaign_runner as campaign  # noqa: E402
 import run_ai_match_batch as batch  # noqa: E402
 
 HEADLESS_PLATFORM = batch.HEADLESS_PLATFORM
 
+# Maintainer ruling 2026-10-11 04:50Z (reaffirmed in the F1 takeover): 10.5 GiB private
+# cap, 3 GiB emergency host stop. No measured Windows headless peak exists yet for this
+# acceptance tool, so admission bootstraps the "measured peak" to the cap itself until a
+# real measurement replaces it; review REVIEW_2026-10-11_ccr_b337_luna.md F1.
+PRIVATE_CAP_BYTES = int(10.5 * 1024**3)
+BOOTSTRAP_HEADLESS_PEAK_BYTES = PRIVATE_CAP_BYTES
+ADMISSION_RESERVE_BYTES = 3 * 1024**3
+EMERGENCY_STOP_FREE_BYTES = 3 * 1024**3
+
+
+def admission_decision(free_bytes: int | None, min_free_bytes: float) -> str | None:
+	"""None admits the cell; otherwise a NOT_RUN reason. Fails closed when RAM is unmeasurable."""
+	if free_bytes is None:
+		return f"available RAM unknown < {min_free_bytes / 1024**3:.1f} GiB admission floor (fail-closed on unknown RAM)"
+	if free_bytes < min_free_bytes:
+		return f"available RAM {free_bytes / 1024**3:.1f} GiB < {min_free_bytes / 1024**3:.1f} GiB admission floor"
+	return None
+
+
+def run_stop_reason(current_private: int | None, available: int | None, *, private_cap: int, emergency_free: int) -> str | None:
+	"""None keeps the cell running; otherwise the end_reason to kill it with. Fails closed
+	when either reading is unmeasurable, and checks the private cap before the host floor."""
+	if current_private is None:
+		return "MEMORY_SAMPLE_FAILED"
+	if current_private >= private_cap:
+		return "MEMORY_KILL"
+	if available is None or available < emergency_free:
+		return "LOW_FREE_RAM"
+	return None
+
 
 def available_ram_bytes() -> int | None:
-	"""MemAvailable on Linux; None where /proc is absent (the admission check is then skipped)."""
+	"""Available physical RAM on Windows and Linux."""
 	try:
-		for line in pathlib.Path("/proc/meminfo").read_text().splitlines():
-			if line.startswith("MemAvailable:"):
-				return int(line.split()[1]) * 1024
-	except OSError:
+		return campaign.available_ram_bytes()
+	except (OSError, RuntimeError):
 		return None
-	return None
 
 
 def rss_bytes(pid: int) -> int | None:
@@ -66,6 +94,13 @@ def rss_bytes(pid: int) -> int | None:
 	except OSError:
 		return None
 	return None
+
+
+def private_bytes(pid: int) -> int | None:
+	try:
+		return campaign.private_bytes(pid)
+	except (OSError, RuntimeError, ValueError):
+		return None
 
 
 def set_monitor_cap(variant: pathlib.Path, cap_tick: int) -> None:
@@ -150,11 +185,22 @@ def run_cell(job: dict, *, root: pathlib.Path, engine: pathlib.Path, overlay: pa
 	env["CAMEO_DEV_SEED"] = str(job["seed"])
 	started = time.monotonic()
 	peak = 0
+	peak_private = 0
 	with (cell_dir / "driver.log").open("w", encoding="utf-8") as output:
 		process = subprocess.Popen(args, cwd=engine, env=env, stdout=output, stderr=subprocess.STDOUT)
 		end_reason = "PROCESS_EXIT"
 		while process.poll() is None:
 			peak = max(peak, rss_bytes(process.pid) or 0)
+			current_private = private_bytes(process.pid)
+			if current_private is not None:
+				peak_private = max(peak_private, current_private)
+			available = available_ram_bytes()
+			stop = run_stop_reason(current_private, available, private_cap=PRIVATE_CAP_BYTES, emergency_free=EMERGENCY_STOP_FREE_BYTES)
+			if stop is not None:
+				process.kill()
+				process.wait()
+				end_reason = stop
+				break
 			if time.monotonic() - started > timeout:
 				process.kill()
 				process.wait()
@@ -197,7 +243,9 @@ def run_cell(job: dict, *, root: pathlib.Path, engine: pathlib.Path, overlay: pa
 			"opponents": sorted(str(o.get("home")) for o in r.get("opponents", []))} for r in records],
 		"cap_tick": int(cap.group(1)) if cap else None, "exceptions": exceptions, "exit_code": process.returncode,
 		"end_reason": end_reason, "wall_seconds": round(time.monotonic() - started, 1),
-		"peak_rss_bytes": peak or None, "verdict": "ACCEPTED" if not problems else "REJECTED", "problems": problems}
+		"peak_rss_bytes": peak or None, "peak_private_bytes": peak_private or None,
+		"private_limit_bytes": PRIVATE_CAP_BYTES,
+		"verdict": "ACCEPTED" if not problems else "REJECTED", "problems": problems}
 
 
 def main(argv=None) -> int:
@@ -210,7 +258,8 @@ def main(argv=None) -> int:
 	parser.add_argument("--setups", default="", help="comma list of setup ids (default: all)")
 	parser.add_argument("--games", default="0,1", help="games in pair to run (default both = the swap proof)")
 	parser.add_argument("--timeout", type=int, default=1200, help="wall seconds per cell")
-	parser.add_argument("--min-free-gib", type=float, default=6.0, help="RAM admission before each launch (Linux)")
+	parser.add_argument("--min-free-gib", type=float, default=(BOOTSTRAP_HEADLESS_PEAK_BYTES + ADMISSION_RESERVE_BYTES) / 1024**3,
+		help="RAM admission before each serial acceptance cell: bootstrapped measured-peak (10.5 GiB cap) plus 3 GiB reserve")
 	args = parser.parse_args(argv)
 
 	root = args.repo_root.resolve()
@@ -240,14 +289,15 @@ def main(argv=None) -> int:
 	pilot.materialize_dual_arm_ai(root, overlay, manifest["switch"], manifest.get("ratchet_accepted_switches", []))
 	receipt = {"tool": "map_engine_acceptance", "tool_sha256": pilot.text_sha(pathlib.Path(__file__)),
 		"manifest_sha256": pilot.sha(args.manifest), "campaign_id": manifest.get("campaign_id"),
-		"engine_version": (engine / "VERSION").read_text(encoding="ascii").strip(), "render": args.render,
+		"engine_version": pilot.read_engine_version(engine / "VERSION"), "render": args.render,
 		"cap_tick": args.cap_tick, "preflight_only_never_outcome_cells": True, "cells": [], "pairs": []}
 	path = out / "acceptance_receipt.json"
 	for job in jobs:
 		free = available_ram_bytes()
-		if free is not None and free < args.min_free_gib * 1024**3:
+		not_admitted = admission_decision(free, args.min_free_gib * 1024**3)
+		if not_admitted is not None:
 			receipt["cells"].append({"cell_id": job["cell_id"], "setup": job["setup"], "map": job["map"],
-				"verdict": "NOT_RUN", "problems": [f"available RAM {free / 1024**3:.1f} GiB < {args.min_free_gib} GiB"]})
+				"verdict": "NOT_RUN", "problems": [not_admitted]})
 		else:
 			print(f"[{len(receipt['cells']) + 1}/{len(jobs)}] {job['cell_id']} ...", flush=True)
 			cell = run_cell(job, root=root, engine=engine, overlay=overlay, out=out, cap_tick=args.cap_tick,

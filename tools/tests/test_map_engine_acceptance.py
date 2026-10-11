@@ -101,5 +101,43 @@ class DualArmRulesTests(unittest.TestCase):
                 pilot.install_dual_arm_rules(variant, overlay, root)
 
 
+class AdmissionAndStopTests(unittest.TestCase):
+    """F1 (REVIEW_2026-10-11_ccr_b337_luna.md): admission must fail closed on unknown RAM,
+    and the in-run stop must check the private cap before the host emergency floor."""
+
+    def test_unknown_free_ram_fails_closed_at_admission(self):
+        reason = acceptance.admission_decision(None, 13.5 * 1024**3)
+        self.assertIsNotNone(reason)
+        self.assertIn("unknown", reason)
+
+    def test_admission_boundary_is_inclusive_of_the_floor(self):
+        floor = 13.5 * 1024**3
+        self.assertIsNone(acceptance.admission_decision(int(floor), floor))
+        self.assertIsNotNone(acceptance.admission_decision(int(floor) - 1, floor))
+
+    def test_unmeasurable_private_bytes_stops_fail_closed(self):
+        self.assertEqual("MEMORY_SAMPLE_FAILED",
+            acceptance.run_stop_reason(None, 10 * 1024**3, private_cap=acceptance.PRIVATE_CAP_BYTES, emergency_free=3 * 1024**3))
+
+    def test_private_cap_stops_before_the_host_floor_is_even_checked(self):
+        # available RAM here is healthy; only the process's own private-byte cap should trip.
+        self.assertEqual("MEMORY_KILL",
+            acceptance.run_stop_reason(acceptance.PRIVATE_CAP_BYTES, 20 * 1024**3,
+                private_cap=acceptance.PRIVATE_CAP_BYTES, emergency_free=3 * 1024**3))
+
+    def test_host_emergency_floor_stops_even_under_the_private_cap(self):
+        self.assertEqual("LOW_FREE_RAM",
+            acceptance.run_stop_reason(1 * 1024**3, 2 * 1024**3,
+                private_cap=acceptance.PRIVATE_CAP_BYTES, emergency_free=3 * 1024**3))
+
+    def test_healthy_readings_do_not_stop(self):
+        self.assertIsNone(acceptance.run_stop_reason(1 * 1024**3, 20 * 1024**3,
+            private_cap=acceptance.PRIVATE_CAP_BYTES, emergency_free=3 * 1024**3))
+
+    def test_default_admission_floor_matches_the_bootstrapped_peak_plus_reserve(self):
+        self.assertEqual(13.5 * 1024**3, acceptance.BOOTSTRAP_HEADLESS_PEAK_BYTES + acceptance.ADMISSION_RESERVE_BYTES)
+        self.assertEqual(10.5 * 1024**3, acceptance.PRIVATE_CAP_BYTES)
+
+
 if __name__ == "__main__":
     unittest.main()
