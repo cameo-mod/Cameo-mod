@@ -20598,3 +20598,8 @@ Validation: `dotnet test OpenRA.Mods.Cameo.Test -c Release` â€” 1516 passed
 (3/3 new tests green). Boot-gate PASS â€” main menu reached, no new exception-*.log.
 Verify pending: rerun of cell `all/duel_nod_2103` to cap with no exception log â€”
 coordinator-owned per PT7 runner authority.
+
+
+## 2026-10-11 - Sol to Boss handoff
+
+Reviewed M13/turtle/clock source797eb292e landed through68be89ca. Combined source focused296/fullRelease1821/Python19 pass. User explicitly transfers Sol tasks and A/B priority to Boss; exact handoff in fleet HANDOFF_2026-10-11_sol_to_boss.md, canonical pointer updated. Context1788 now recoverably pushed. No game/boot/full Python suite; test slot released. Runtime/source blockers and unsafe A5 incomplete evidence remain explicit.

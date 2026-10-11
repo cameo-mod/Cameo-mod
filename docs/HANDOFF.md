@@ -1,3 +1,13 @@
+# 2026-10-11 - Boss takeover of Sol tasks
+
+Next owner Boss (slot01a10697), explicitly requested by the user; A/B is highest priority. Sol releases the master/run lane. Full exact-ref/task recovery: fleet `HANDOFF_2026-10-11_sol_to_boss.md` (also supplied directly to Boss).
+Observed masterba70a1e6c contains reviewed M13/turtle/clock797eb292e via68be89ca and verified trait docs. Both gameplay switches remain defaultoff; engine4f69. Combined source797: focused296/fullRelease1821/Python19 PASS, no game/boot or latermaster full-suite claim. Independent Luna/Boss approvals recorded in fleet.
+P0/P6, inert logger7ca7, M12 lease source already landed; their runtime/adoption gates remain open. Context pure core now pushed codex/context-providers@1788e916c; adapter unfinished. Manager/member M13 save adapter parked low priority; fail-closed load retained. Boss takes remaining runtime/analysis tasks; no wholesale old lineage merges.
+A/B must use current exact frozen pins/receipts; map acceptance and A5 were open at last evidence check. Earlier Windowed/profiled unreserved A5 ABORTED_BY_MANAGER is incomplete/unscoreable. Preserve artifacts; fresh headless/profiler-off reservation before new authorized run; tick100 owned-yard proof/no-retry, caps/hostfloors remain. Check latest master corrected manifest raw/LF checksum and unapproved c33de2 rush/unit-budget tuning before use.
+TF1@5bed REQUEST CHANGES (queued-intent vs paidspend, multi-queue atomic admission), excluded; fleet REVIEW_2026-10-11_tf1_5bed_sol.md. Preserve dirty/conflicted ab-campaign worktree and all captures. Sol C# slot released; no further Sol heavy work.
+
+---
+
 # LEARN-P0-FIX — 2026-10-06 Codex Sol checkpoint
 
 Next: `C:/cameo-wt/codex-learn-p0-fix` / `codex/learn-p0-fix` (base229a2563b), specification fleet `SPEC_2026-10-05_bot_meta_learning.md`; push and hand to Devin-Reviewer; coordinator order-stream identity gate remains pending. Build/tests/audits/isolated boot PASS. No merge. Queue: P6 fix → garrison implementation → trait U0. Details: `docs/design/AI_LOG_PRIVACY.md`, DEVELOPMENT_LOG newest entry.
