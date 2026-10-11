@@ -1,3 +1,9 @@
+## Resume (2026-10-11 04:39Z, map acceptance gate path)
+
+Further read-only review of DevOps `532197a3b` diff found a circular gate: `ab_campaign_pilot.validate(execution=True)` requires all eight runtime `map_runtime_acceptance` receipts before `execute-one`, but no acceptance runner or CLI exists in `tools/ai`/tests, and `campaign_runner` exposes only `dry-run` and `execute-one`. Reported this to DevOps and the lead; acceptance receipts must come from a real bounded load path, never be synthesized. Prior current-host blocker remains: 4.03 GiB free and unrelated OpenRA PID 37020 (`integ-concave`), below 15.5 GiB admission.
+
+Next: DevOps/lead resolves the acceptance-only path alongside the previously reported RAM/A5 policy mismatches; only then can two maintainer gates be completed and the campaign owner proceed.
+
 ## Resume (2026-10-11 04:38Z, shared host admission blocked)
 
 Current direct sample: 4.03 GiB free. OpenRA PID 37020 belongs to `C:/cameo-wt/integ-concave/engine/bin/OpenRA.exe` (Cameo mod; process created 06:37 local), not the campaign. I did not stop it. DevOps and the lead were notified; do not claim the exclusive campaign slot while it runs.
