@@ -348,7 +348,7 @@ def monitor_process(process, *, driver_log: pathlib.Path, actor_log: pathlib.Pat
 				deployment["verified"] = deployment_guard.valid(deployment, list(required_seats))
 				if not deployment["verified"]: stop_reason = "INVALID_NO_DEPLOY"
 		world_tick_check = deployment_guard.latest_world_tick(stall_log) if required_seats is not None and not deployment["verified"] else None
-		if world_tick_check is not None and world_tick_check > 100: stop_reason = "INVALID_NO_DEPLOY"
+		if world_tick_check is not None and world_tick_check >= 100: stop_reason = "INVALID_NO_DEPLOY"
 		actor_count = last_actor["actor_count"]
 		world_tick = last_actor["world_tick"]
 		row = {"utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()), "world_tick": world_tick,

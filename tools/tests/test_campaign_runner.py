@@ -50,7 +50,7 @@ class CampaignRunnerTests(unittest.TestCase):
 			def kill(self): self.returncode = -9
 			def wait(self): return self.returncode
 		with tempfile.TemporaryDirectory() as temp:
-			root=pathlib.Path(temp); debug=root/"debug.log"; debug.write_text("[WT 101] state\n",encoding="utf-8")
+			root=pathlib.Path(temp); debug=root/"debug.log"; debug.write_text("[WT 100] state\n",encoding="utf-8")
 			proc=Process()
 			with patch.object(runner, "private_bytes", return_value=1):
 				result=runner.monitor_process(proc, driver_log=debug, actor_log=root/"server.log", stall_log=debug,

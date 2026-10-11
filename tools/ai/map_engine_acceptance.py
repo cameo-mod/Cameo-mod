@@ -167,7 +167,7 @@ def run_cell(job: dict, *, root: pathlib.Path, engine: pathlib.Path, overlay: pa
 				if deployment["check_tick"] is not None:
 					deployment["verified"] = deployment_guard.valid(deployment, [s["home"] for s in proof["seats"]])
 					if not deployment["verified"]: end_reason = "INVALID_NO_DEPLOY"
-			if not deployment["verified"] and deployment_guard.latest_world_tick(logs / "debug.log") is not None and deployment_guard.latest_world_tick(logs / "debug.log") > 100:
+			if not deployment["verified"] and deployment_guard.latest_world_tick(logs / "debug.log") is not None and deployment_guard.latest_world_tick(logs / "debug.log") >= 100:
 				end_reason = "INVALID_NO_DEPLOY"
 			if end_reason == "INVALID_NO_DEPLOY":
 				process.kill(); process.wait(); break
