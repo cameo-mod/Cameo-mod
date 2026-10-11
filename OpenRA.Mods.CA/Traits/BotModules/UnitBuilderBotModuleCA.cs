@@ -113,6 +113,15 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Maximum ticks before selecting a new composition.")]
 		public readonly int MaxCompositionSelectInterval = 7500;
 
+		[Desc("TF-2 (turtle regression increment 2): percentage of spendable cash held for mobile",
+			"production while the offensive pool needs replenishment — optional buildings must leave",
+			"it unspent. 0 = off; essential items (yard/refinery/power/first factory) are exempt.")]
+		public readonly int ReserveMobileProductionShare = 0;
+
+		[Desc("TF-2: alive offensive-role units below which the pool counts as needing replenishment.",
+			"The reserve holds only while the pool is under this floor.")]
+		public readonly int ReserveArmyFloor = 8;
+
 		public override void RulesetLoaded(Ruleset rules, ActorInfo ai)
 		{
 			base.RulesetLoaded(rules, ai);
@@ -131,7 +140,7 @@ namespace OpenRA.Mods.CA.Traits
 		public override object Create(ActorInitializer init) { return new UnitBuilderBotModuleCA(init.Self, this); }
 	}
 
-	public class UnitBuilderBotModuleCA : ConditionalTrait<UnitBuilderBotModuleCAInfo>, IBotTick, IBotNotifyIdleBaseUnits, IBotRequestUnitProduction, IGameSaveTraitData, IBotAircraftBuilder, INotifyActorDisposing
+	public class UnitBuilderBotModuleCA : ConditionalTrait<UnitBuilderBotModuleCAInfo>, IBotTick, IBotNotifyIdleBaseUnits, IBotRequestUnitProduction, IGameSaveTraitData, IBotAircraftBuilder, INotifyActorDisposing, IBotMobileSpendReserve
 	{
 		public const int FeedbackTime = 30; // ticks; = a bit over 1s. must be >= netlag.
 
@@ -168,6 +177,20 @@ namespace OpenRA.Mods.CA.Traits
 		PlayerResources playerResources;
 		BotLimits botLimits;
 		BaseBuilderBotModuleCA baseBuilder;
+
+		// TF-2: the mobile-production reservation ledger (world-free) and the offensive-pool
+		// replenish check — recomputed at the module's own cadence, so the standing share can
+		// flap off the moment the pool is full while in-flight items stay tracked per sweep.
+		readonly UnitSpendReservation mobileReserve = new();
+		int nextPoolCheckTick;
+		bool poolNeedsReplenish;
+
+		static readonly HashSet<string> OffensiveRoles = new(StringComparer.Ordinal)
+		{
+			BotUnitRole.Frontline, BotUnitRole.Skirmisher, BotUnitRole.AntiInfantry,
+			BotUnitRole.AntiArmour, BotUnitRole.Artillery, BotUnitRole.AntiAir,
+			BotUnitRole.Gunship, BotUnitRole.Fighter, BotUnitRole.Bomber
+		};
 
 		int ticks;
 		int openingDefenseTicks;
@@ -272,6 +295,10 @@ namespace OpenRA.Mods.CA.Traits
 				RefreshDifficultyTraits();
 				firstTick = false;
 			}
+
+			// TF-2: keep the reservation live even while unit production is paused — the floor
+			// must decay the moment its conditions stop holding, not linger until the next build.
+			UpdateMobileReserve();
 
 			if (CounterWeight > 0)
 				counters.Observe(Info.AdaptiveObservationInterval, compositionProvider);
@@ -475,6 +502,64 @@ namespace OpenRA.Mods.CA.Traits
 
 			activeUnitIntervals[name] = Info.UnitIntervals[name] * unitIntervalModifier / 100;
 		}
+
+		// TF-2: the reservation's per-tick upkeep — reconcile every producer's in-flight items so a
+		// refund/cancel/elimination settles promptly, refresh the standing share's conditions at the
+		// module cadence (the actor scan is the only expensive part, so it does not run per tick).
+		void UpdateMobileReserve()
+		{
+			if (Info.ReserveMobileProductionShare <= 0)
+				return;
+
+			var queues = Info.UnitQueues.SelectMany(c => AIUtils.FindQueues(player, c)).Distinct().ToList();
+			var feasible = queues.Any(q => q.Enabled);
+			var capacity = queues.Any(q => q is IHasParallelQueueSlots p ? p.AvailableSlots > 0 : !q.AllQueued().Any());
+			if (world.WorldTick >= nextPoolCheckTick)
+			{
+				nextPoolCheckTick = world.WorldTick + FeedbackTime;
+				poolNeedsReplenish = OffensivePoolNeedsReplenish();
+			}
+
+			mobileReserve.SetStanding(feasible, capacity, poolNeedsReplenish,
+				Info.ReserveMobileProductionShare, playerResources.GetCashAndResources());
+
+			foreach (var queue in queues)
+			{
+				var items = new Dictionary<string, (int Total, int Remaining)>(StringComparer.Ordinal);
+				foreach (var i in queue.AllQueued())
+					items[i.Item] = (i.TotalCost, i.RemainingCost);
+				mobileReserve.ReconcileUnits(queue.Actor, items);
+			}
+		}
+
+		// TF-2: the eligible offensive pool is the alive combat-role mass — under the configured
+		// floor it needs replenishment. No roles provider means no eligible pool at all, which is
+		// the conservative "needs replenishment" answer (the flag itself is opt-in).
+		bool OffensivePoolNeedsReplenish()
+		{
+			unitRoles ??= player.PlayerActor.TraitsImplementing<IBotUnitRoles>().FirstEnabledTraitOrDefault();
+			if (unitRoles == null)
+				return true;
+
+			var alive = 0;
+			foreach (var a in world.Actors)
+				if (!a.IsDead && a.Owner == player && OffensiveRoles.Contains(unitRoles.PrimaryRoleOf(a.Info.Name) ?? ""))
+					alive++;
+
+			return alive < Info.ReserveArmyFloor;
+		}
+
+		int IBotMobileSpendReserve.MobileSpendFloor =>
+			Info.ReserveMobileProductionShare > 0 && playerResources != null
+				? mobileReserve.Floor(playerResources.GetCashAndResources()) : 0;
+
+		int IBotMobileSpendReserve.PaidUnitSharePct => mobileReserve.PaidSharePct();
+
+		void IBotMobileSpendReserve.ReconcileUnitSpend(object owner, IReadOnlyDictionary<string, (int Total, int Remaining)> items) =>
+			mobileReserve.ReconcileUnits(owner, items);
+
+		void IBotMobileSpendReserve.ReconcileBuildingSpend(object owner, IReadOnlyDictionary<string, (int Total, int Remaining, bool Essential)> items) =>
+			mobileReserve.ReconcileBuildings(owner, items);
 
 		bool ShouldBuild(string name, bool ignoreUnitsToBuild, string queueCategory = null)
 		{
@@ -991,6 +1076,9 @@ namespace OpenRA.Mods.CA.Traits
 			{
 				new("QueuedBuildRequests", FieldSaver.FormatValue(queuedBuildRequests.ToArray())),
 				new("IdleUnitCount", FieldSaver.FormatValue(idleUnitCount)),
+				new("ReservePaidUnitCost", FieldSaver.FormatValue(mobileReserve.PaidUnitCost)),
+				new("ReservePaidOptionalCost", FieldSaver.FormatValue(mobileReserve.PaidOptionalCost)),
+				new("ReservePaidEssentialCost", FieldSaver.FormatValue(mobileReserve.PaidEssentialCost)),
 				new("CompositionLastUsed", "", compositionLastUsedTickById
 					.Select(kvp => new MiniYamlNode(kvp.Key, FieldSaver.FormatValue(kvp.Value)))
 					.ToList())
@@ -1013,6 +1101,13 @@ namespace OpenRA.Mods.CA.Traits
 			if (idleUnitCountNode != null)
 				idleUnitCount = FieldLoader.GetValue<int>("IdleUnitCount", idleUnitCountNode.Value.Value);
 
+			// TF-2: the settled paid counters persist across saves; in-flight items re-track
+			// themselves on the next reconcile from live queue state.
+			mobileReserve.RestoreSettled(
+				ReadSaveInt(data, "ReservePaidUnitCost"),
+				ReadSaveInt(data, "ReservePaidOptionalCost"),
+				ReadSaveInt(data, "ReservePaidEssentialCost"));
+
 			var compositionLastUsedNode = data.NodeWithKeyOrDefault("CompositionLastUsed");
 			if (compositionLastUsedNode != null)
 			{
@@ -1022,6 +1117,12 @@ namespace OpenRA.Mods.CA.Traits
 			}
 
 			counters.Load(data);
+		}
+
+		static int ReadSaveInt(MiniYaml data, string key)
+		{
+			var node = data.NodeWithKeyOrDefault(key);
+			return node != null ? FieldLoader.GetValue<int>(key, node.Value.Value) : 0;
 		}
 
 		void INotifyActorDisposing.Disposing(Actor self)

@@ -50,6 +50,26 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(BaseBuilderQueueEvalCA.BlockedByCash(49, 100, false, true, 50, false), Is.True);
 		}
 
+		// MobileSpendBlocks (TF-2): optional spend may not dip under the unit side's reserved share.
+
+		[Test]
+		public void OptionalSpendUnderTheReserveBlocks()
+		{
+			// cash 3000, item 2500 leaves 500 < the 1000 floor — refused.
+			Assert.That(BaseBuilderQueueEvalCA.MobileSpendBlocks(3000, 2500, 1000, false), Is.True);
+			// cash 3000, item 2000 leaves exactly 1000 — admitted at the boundary.
+			Assert.That(BaseBuilderQueueEvalCA.MobileSpendBlocks(3000, 2000, 1000, false), Is.False);
+		}
+
+		[Test]
+		public void EssentialsIgnoreTheReserveAndNoFloorBlocksNothing()
+		{
+			Assert.That(BaseBuilderQueueEvalCA.MobileSpendBlocks(1100, 1000, 2000, true), Is.False,
+				"yard/refinery/power/first-factory picks ride their own exemption");
+			Assert.That(BaseBuilderQueueEvalCA.MobileSpendBlocks(100, 90, 0, false), Is.False,
+				"floor 0 — classic and switch-off — admits everything the other gates did");
+		}
+
 		// ClassifyPlacement
 
 		[Test]
