@@ -30,24 +30,8 @@ SETUPS = [
  ("3v3_winter_asg",3,"winters_end_rich",("ra1_allies","ra1_soviets","td_gdi")),("3v3_winter_sgn",3,"winters_end_rich",("ra1_soviets","td_gdi","td_nod")),
  ("4v4_sahara",4,"great_sahara_2",("td_gdi","td_nod","ra1_allies","ra1_soviets")),("4v4_ice",4,"ice_cold",("td_gdi","td_nod","ra1_allies","ra1_soviets")),
 ]
-
-def generated_map_player_references(text):
- """Read generated MiniYaml PlayerReference nodes with the shared parser."""
- audit_tools=pathlib.Path(__file__).resolve().parents[1]/"audit"
- audit_path=str(audit_tools)
- if audit_path not in sys.path: sys.path.insert(0,audit_path)
- from miniyaml import load_text
- references={}
- for node in load_text(text,"<generated map.yaml>"):
-  if not node.key.startswith("PlayerReference@Multi"): continue
-  ref=node.key.split("@",1)[1]
-  if re.fullmatch(r"Multi\d+",ref) is None: continue
-  require(ref not in references,"generated map.yaml has duplicate Multi PlayerReference")
-  references[ref]={key:node.get(key) for key in ("Bot","Faction","HomeLocation","Playable")}
- return references
-
-RAM_FLOOR_BYTES = 6 * 1024**3
-PROCESS_CAP_BYTES = 8 * 1024**3
+RAM_FLOOR_BYTES = int(13.5 * 1024**3)   # admission = cap(10.5) + hard floor(3): worst-case free >=3.9 GiB at full cap
+PROCESS_CAP_BYTES = int(10.5 * 1024**3) # decided cell ceiling (was 6.5 GiB; startup burst peaks ~9.5 GiB)
 ROUND_STAGES = [16,32,48,64]
 ECONOMY_INTERVAL_TICKS = tuple(range(5000, 45001, 5000))
 FIX_SAFETY_SWITCHES = frozenset("K_cn2_unit_repair AL_emergency_net_loss AN_combat_veto AG_assault_fanout BJ_squad_hysteresis BK_squad_order_dedup BL_protection_episode_guard BN_squad_pool_fixes BO_squad_move_dedup".split())
@@ -288,7 +272,7 @@ def make_jobs(manifest):
     jobs.append({"cell_id":f"{setup}|{seed}|{game}","switch":SWITCH,"setup":setup,"team_size":size,"map":mapname,"map_path":rel,"map_sha256":digest,"seed":seed,"pair":pair,"game_in_pair":game,"control_side":ca,"treatment_side":ta,"team_factions":list(factions),"required_seats":2*size,"arm_bot_types":manifest["arm_bot_types"],"seat_assignments":assignments})
  return jobs
 
-def validate(manifest,root,engine_root=None):
+def validate(manifest,root,engine_root=None,execution=False):
  require(manifest.get("schema")==1 and manifest.get("switch")==SWITCH,"schema/switch mismatch")
  require(manifest.get("pairs_per_setup")==2 and manifest.get("team_size_scope")==[1,2,3,4],"pilot design mismatch")
  require(manifest.get("arm_bot_types")=={"control":"hard_control","treatment":"hard_treatment"},"distinct control/treatment hard bot bindings required")
@@ -307,6 +291,7 @@ def validate(manifest,root,engine_root=None):
  require(manifest.get("treatment_ai_payload_sha256")==ai_payload_sha(root,SWITCH),"one-switch treatment AI payload mismatch")
  tool_paths={"driver_analyzer":pathlib.Path(__file__),"campaign_runner":root/"tools"/"ai"/"campaign_runner.py","batch_runner":root/"tools"/"ai"/"run_ai_match_batch.py","switch_applier":root/"tools"/"ai"/"apply_increment_switches.py"}
  require(manifest.get("tool_sha256")=={k:sha(v) for k,v in tool_paths.items()},"tool SHA pins mismatch")
+ require(manifest.get("receipt_schema_sha256")==sha(root/"tools"/"ai"/"ab_campaign_receipt.schema.json"),"receipt schema SHA mismatch")
  binaries=manifest.get("binary_sha256")
  require(isinstance(binaries,dict) and len(binaries)==3 and all(len(v)==64 for v in binaries.values()),"engine binary SHA pins missing")
  if engine_root is not None:
@@ -325,7 +310,7 @@ def validate(manifest,root,engine_root=None):
   seats=len(set(re.findall(r"PlayerReference@Multi(\d+):",y)))
   require(seats>=entry["required_seats"],f"insufficient playable seats: {entry['name']}")
  # Explicitly non-executable: execution approvals and runtime backend do not exist in this tool.
- require(manifest.get("execution_approved") is False,"dry-run manifest must not authorize execution")
+ require(manifest.get("execution_approved") is execution,"dry-run manifest must not authorize execution" if not execution else "execution manifest must explicitly authorize execution")
  return True
 
 def dry_run(m,root,engine_root=None,minutes_per_game=8.5,setup_hours=2.0):
@@ -335,12 +320,12 @@ def dry_run(m,root,engine_root=None,minutes_per_game=8.5,setup_hours=2.0):
  slot_hours=round((small_games/3+large_games)*minutes_per_game/60+setup_hours,2)
  serial_range=[round(len(jobs)*5/60+setup_hours,2),round(len(jobs)*12/60+setup_hours,2)]
  slot_range=[round((small_games/3+large_games)*5/60+setup_hours,2),round((small_games/3+large_games)*12/60+setup_hours,2)]
- return {"mode":"NO_LAUNCH_DRY_RUN","switch":SWITCH,"setups":len(SETUPS),"pairs":32,"games":len(jobs),"jobs":jobs,"launches":0,"execution_authorized":False,"worker_hours_estimate_at_8_5m_each":serial_hours,"parallel_slot_wall_estimate_hours_at_8_5m_each":slot_hours,"parallel_slot_wall_estimate_range_hours_5_to_12m_each":slot_range,"serial_wall_estimate_range_hours_5_to_12m_each":serial_range,"map_engine_acceptance_and_symmetric_spawn_proof":"PENDING_ENGINE_PREFLIGHT","round_stages":ROUND_STAGES,"acceptance_thresholds":m["acceptance_thresholds"],"slot_policy":m["slot_policy"],"ratchet_baseline_manifest_sha256":m["baseline_manifest_sha256"],"missing_campaign_gates":["reviewed integration/source/engine/tool/AI payload hashes frozen in final manifest","actual map acceptance and symmetric spawn proof on pinned engine","runtime launch orchestration: seat-specific bot trees/map.yaml producer, live RSS and wall/stall watchdogs, immutable receipts/resume, PID-scoped cleanup; SQLite leases need live integration","A5 parity and analyzer fixture/negative-control acceptance"]}
+ return {"mode":"NO_LAUNCH_DRY_RUN","switch":SWITCH,"setups":len(SETUPS),"pairs":32,"games":len(jobs),"jobs":jobs,"launches":0,"execution_authorized":False,"worker_hours_estimate_at_8_5m_each":serial_hours,"parallel_slot_wall_estimate_hours_at_8_5m_each":slot_hours,"parallel_slot_wall_estimate_range_hours_5_to_12m_each":slot_range,"serial_wall_estimate_range_hours_5_to_12m_each":serial_range,"map_engine_acceptance_and_symmetric_spawn_proof":"PENDING_ENGINE_PREFLIGHT","round_stages":ROUND_STAGES,"acceptance_thresholds":m["acceptance_thresholds"],"slot_policy":m["slot_policy"],"ratchet_baseline_manifest_sha256":m["baseline_manifest_sha256"],"missing_campaign_gates":["lead-approved executable manifest and exact-baseline A5 parity receipt","engine acceptance plus symmetric spawn proof for all eight maps","fixture/negative-control acceptance for the downstream paired analyzer"]}
 
-def install_campaign_monitor(dest,seat_count,cap_tick=45000,sample_interval=5000):
+def install_campaign_monitor(dest,seat_count,cap_tick=45000,sample_interval=5000,rules_filename="duel_rules.yaml",seat_names=None):
  """Install map-local actor-count sampling and an explicit all-seat censor marker."""
- require(seat_count in (2,4,6,8) and cap_tick==45000 and 0<sample_interval<=cap_tick,"campaign monitor bounds")
- names=", ".join(json.dumps(f"Multi{i}") for i in range(seat_count))+', "Neutral", "Creeps"'
+ require(seat_count in (2,4,6,8) and type(cap_tick) is int and 1000<=cap_tick<=45000 and 0<sample_interval<=cap_tick,"campaign monitor bounds")
+ names=", ".join(json.dumps(name) for name in (seat_names or [f"Multi{i}" for i in range(seat_count)]))+', "Neutral", "Creeps"'
  lua=f'''local SeatNames = {{{names}}}
 local CapTick = {cap_tick}
 local SampleInterval = {sample_interval}
@@ -364,7 +349,7 @@ WorldLoaded = function()
 end
 '''
  script=dest/"ab_campaign_monitor.lua";script.write_text(lua,encoding="utf-8")
- rules=dest/"duel_rules.yaml";text=rules.read_text(encoding="utf-8")
+ rules=dest/rules_filename;text=rules.read_text(encoding="utf-8")
  world=re.search(r"(?m)^World:\s*$",text);require(world is not None and "LuaScript:" not in text,"harness rules cannot accept campaign monitor Lua")
  text=text[:world.end()]+"\n\tLuaScript:\n\t\tScripts: ab_campaign_monitor.lua"+text[world.end():]
  rules.write_text(text,encoding="utf-8")
@@ -392,7 +377,13 @@ def prove_generated_map(job,root,dest):
  batch.write_variant(map_path,dest,matchup,1)
  monitor=install_campaign_monitor(dest,job["required_seats"])
  text=(dest/"map.yaml").read_text(encoding="utf-8")
- blocks=generated_map_player_references(text)
+ blocks={}
+ marks=list(re.finditer(r"(?m)^\tPlayerReference@(Multi\d+):[ \t]*$",text))
+ for index,match in enumerate(marks):
+  end=marks[index+1].start() if index+1<len(marks) else len(text)
+  block=text[match.end():end]; ref=match.group(1)
+  values={k:(re.search(rf"(?m)^\t\t{k}: ([^\n]+)$",block).group(1) if re.search(rf"(?m)^\t\t{k}: ([^\n]+)$",block) else None) for k in ("Bot","Faction","HomeLocation","Playable")}
+  blocks[ref]=values
  proof=[]
  for seat in seats:
   ref=seat["home"]; actual=blocks.get(ref);expected_home=spawn_cells[seat["spawn"]]
@@ -416,7 +407,7 @@ def adjudicate(records, receipt, job, manifest_sha):
  if any(receipt.get(k)!=job[k] for k in ("switch","setup","map","map_sha256","seed","pair","game_in_pair")):
   return {"verdict":"INVALID_UNKNOWN","reason":"receipt disagrees with planned job"}
  status=receipt.get("status")
- if status in ("CRASH","INCOMPLETE","MEMORY_KILL","WALL_TIMEOUT","STALL","PROCESS_DIED"):
+ if status in ("CRASH","INCOMPLETE","MEMORY_KILL","MEMORY_SAMPLE_FAILED","LOW_FREE_RAM","WALL_TIMEOUT","STALL","PROCESS_DIED"):
   return {"verdict":"INCOMPLETE_UNKNOWN","reason":status}
  cap=status=="CENSORED_CAP"
  if cap and not (receipt.get("cap_marker") is True and receipt.get("cap_tick")==45000 and receipt.get("support_complete") is True):
@@ -427,6 +418,7 @@ def adjudicate(records, receipt, job, manifest_sha):
  if not isinstance(seats,list) or len(seats)!=job["required_seats"] or len(records)!=len(seats):
   return {"verdict":"INVALID_UNKNOWN","reason":"seat/record count mismatch"}
  byhome={s.get("home"):s for s in seats if isinstance(s,dict)}
+ byloc={s.get("home_location"):s for s in seats if isinstance(s,dict) and isinstance(s.get("home_location"),str)}
  if len(byhome)!=len(seats) or any(not isinstance(h,str) or not h for h in byhome):
   return {"verdict":"INVALID_UNKNOWN","reason":"seat homes missing or duplicated"}
  if receipt.get("seat_proof_source")!="generated_map.yaml" or not receipt.get("map_yaml_sha256"):
@@ -441,7 +433,7 @@ def adjudicate(records, receipt, job, manifest_sha):
    return {"verdict":"INVALID_UNKNOWN","reason":"resolved map.yaml seats differ from planned side/spawn/faction assignment"}
  side_outcomes={"A":[],"B":[]}; arm_totals={"control":{"earned":0,"spent":0,"banked":0},"treatment":{"earned":0,"spent":0,"banked":0}}; seat_rows=[]; seen_homes=set()
  for r in records:
-  pl=r.get("player") or {}; home=pl.get("home"); seat=byhome.get(home)
+  pl=r.get("player") or {}; home=pl.get("home"); seat=byloc.get(home) or byhome.get(home)
   if seat is None or home in seen_homes or pl.get("faction")!=seat.get("faction") or pl.get("bot_type")!=seat.get("bot_type"):
    return {"verdict":"INVALID_UNKNOWN","reason":"record differs from resolved seat proof"}
   seen_homes.add(home)
@@ -547,164 +539,10 @@ def analyze(m, manifest_sha, receipts, rows):
                  "synergy":"NOT_IDENTIFIABLE_FROM_PILOT (team-size strata lack matched individual counterfactuals)"})
  return {"schema":1,"switch":SWITCH,"games":result,"setups":setups,"unplanned_receipt_cells":extra,"unplanned_game_uids":extra_uids,"telemetry_intervals_ticks":list(ECONOMY_INTERVAL_TICKS),"note":"One game is one observation; seats are clustered. Natural win effect and paired bootstrap interval require complete side-swapped pairs. Synergy is not estimated because individual and team setups differ in map/roster context."}
 
-def validate_receipt_map_seats(job, map_yaml_path, resolved_seats):
- """Cross-check claimed seats against the hash-pinned generated map.yaml bytes."""
- import run_ai_match_batch as batch
- text=map_yaml_path.read_text(encoding="utf-8")
- blocks=generated_map_player_references(text)
- source_path=pathlib.Path(job["map_path"])
- if not source_path.is_absolute(): source_path=pathlib.Path(__file__).resolve().parents[2]/source_path
- with zipfile.ZipFile(source_path) as archive:
-  source_yaml=archive.read("map.yaml").decode("utf-8")
- spawn_cells=batch.mp_spawn_cells(source_yaml)
- if job["team_size"]>=2:
-  if len(spawn_cells)<job["required_seats"]: raise ValueError("pinned map has too few mpspawn actors")
-  spawn_cells=batch.split_spawn_sides(spawn_cells,job["team_size"])+spawn_cells[2*job["team_size"]:]
- expected={seat["home"]:seat for seat in job["seat_assignments"]}
- require(set(blocks)==set(expected),"generated map.yaml PlayerReference set differs from planned seats")
- require(len(resolved_seats)==len(expected),"receipt resolved seat count differs from plan")
- for seat in resolved_seats:
-  home=seat["home"];planned=expected.get(home);actual=blocks.get(home)
-  require(planned is not None and actual is not None,"receipt seat home absent from planned or generated map.yaml")
-  require(seat["spawn"]==planned["spawn"] and seat["team"]==planned["side"] and
-          all(seat[key]==planned[key] for key in ("arm","bot_type","faction")),"receipt resolved seat differs from planned seat")
-  require(planned["spawn"]<len(spawn_cells),"planned spawn index exceeds pinned map spawn list")
-  expected_location=spawn_cells[planned["spawn"]]
-  require(actual["Bot"]==planned["bot_type"] and actual["Faction"]==planned["faction"] and
-          actual["Playable"]=="False" and actual["HomeLocation"]==f"{expected_location[0]},{expected_location[1]}",
-          f"generated map.yaml seat proof mismatch: {home}")
-
-def normalize_campaign_receipts(manifest, manifest_sha, receipts, rows, artifact_root):
- """Convert the strict per-game receipt schema to analyzer input, proving every join.
-
- The producer stores each game's match log inside its unique support directory. We
- recover game_uid only from that hash-verified artifact, never by guessing from a
- seed/map/seat combination in the aggregate match log.
- """
- import campaign_runner
- root=pathlib.Path(artifact_root).resolve(strict=True)
- jobs=make_jobs(manifest); by_identity={}
- for job in jobs:
-  pair_id=f"{job['setup']}:{job['seed']}:{job['pair']}"
-  identity=(job["switch"],job["setup"],job["map"],job["map_sha256"],job["seed"],pair_id,job["game_in_pair"])
-  require(identity not in by_identity,"planned job identity is not unique")
-  by_identity[identity]=job
- grouped={}
- if rows is not None:
-  for row in rows:
-   uid=row.get("game_uid") if isinstance(row,dict) else None
-   require(isinstance(uid,str) and uid,"match row missing game_uid")
-   grouped.setdefault(uid,[]).append(row)
- uid_receipts={}; by_cell={}; verified_paths=set(); normalized=[]; artifact_rows_all=[]
-
- def load_artifact(artifact, label, *, allow_missing=False):
-  require(isinstance(artifact,dict),f"{label} artifact must be an object")
-  path_text=artifact.get("path")
-  if path_text is None:
-   require(allow_missing and artifact.get("sha256") is None and isinstance(artifact.get("missing_reason"),str),f"{label} artifact is required")
-   return None
-  candidate=pathlib.Path(path_text)
-  if not candidate.is_absolute(): candidate=root/candidate
-  path=candidate.resolve(strict=True)
-  require(root in path.parents,f"{label} artifact escapes artifact root")
-  require(path not in verified_paths,f"artifact path is reused across receipts: {label}")
-  verified_paths.add(path)
-  digest=hashlib.sha256(path.read_bytes()).hexdigest()
-  require(digest==artifact.get("sha256"),f"{label} artifact SHA mismatch")
-  return path
-
- def read_jsonl(path, label):
-  result=[]
-  for number,line in enumerate(path.read_text(encoding="utf-8").splitlines(),1):
-   if not line.strip(): continue
-   value=json.loads(line)
-   require(isinstance(value,dict),f"{label} line {number} is not an object")
-   result.append(value)
-  return result
-
- for receipt in receipts:
-  require(isinstance(receipt,dict),"receipt must be an object")
-  campaign_runner.validate_receipt(receipt)
-  map_info=receipt["map"]
-  pair_id=receipt["pair_id"]
-  identity=(receipt["switch"],receipt["setup_id"],map_info["name"],map_info["sha256"],receipt["seed"],pair_id,receipt["pair_member"])
-  job=by_identity.get(identity)
-  require(job is not None,"receipt does not map to exactly one planned job")
-  require(map_info["path"]==job["map_path"] and map_info["required_seats"]==job["required_seats"],"receipt map path/seat count differs from plan")
-  require(receipt["manifest_sha256"]==manifest_sha,"receipt manifest pin mismatch")
-  require(receipt["baseline_commit"]==manifest["pins"]["source_commit"],"receipt source pin mismatch")
-  binary_shas=manifest["binary_sha256"]
-  expected_engine_sha=hashlib.sha256("".join(binary_shas[k] for k in sorted(binary_shas)).encode()).hexdigest()
-  require(receipt["engine_sha256"]==expected_engine_sha,"receipt engine binary digest mismatch")
-  require(receipt["campaign_id"]==manifest.get("campaign_id","ab-campaign-2026-10-11-pilot"),"receipt campaign ID mismatch")
-  require(receipt["switch"]==SWITCH,"receipt switch differs from analyzer candidate")
-  cell=job["cell_id"]
-  require(cell not in by_cell,"duplicate planned cell receipt")
-  by_cell[cell]=receipt
-  map_path=load_artifact(receipt["artifacts"]["map_yaml"],f"{cell} map.yaml")
-  require(hashlib.sha256(map_path.read_bytes()).hexdigest()==map_info["generated_map_yaml_sha256"],"map.yaml artifact differs from receipt map hash")
-  validate_receipt_map_seats(job,map_path,receipt["resolved_seats"])
-  log_path=load_artifact(receipt["artifacts"]["server_log"],f"{cell} server.log",allow_missing=receipt["end_class"]=="INCOMPLETE")
-  seed_line=receipt["seed_proof"]["server_log_pin_line"]
-  if receipt["end_class"] in ("NATURAL","CAP"):
-   require(log_path is not None and receipt["seed_proof"]["server_log_sha256"]==receipt["artifacts"]["server_log"]["sha256"],"complete end lacks matching server-log artifact hash")
-   require(seed_line in log_path.read_text(encoding="utf-8",errors="replace").splitlines(),"server-log seed proof line not present in pinned artifact")
-  if log_path is not None and seed_line is not None:
-   require(seed_line in log_path.read_text(encoding="utf-8",errors="replace").splitlines(),"seed proof line not present in server log")
-  match_path=load_artifact(receipt["artifacts"]["matches_jsonl"],f"{cell} matches.jsonl",allow_missing=receipt["end_class"]=="INCOMPLETE")
-  match_rows=read_jsonl(match_path,f"{cell} matches.jsonl") if match_path is not None else []
-  uids={row.get("game_uid") for row in match_rows}
-  require(len(uids)<=1 and all(isinstance(uid,str) and uid for uid in uids),f"{cell} match artifact must contain exactly one game_uid")
-  if receipt["end_class"] in ("NATURAL","CAP"):
-   require(match_path is not None and len(match_rows)==job["required_seats"] and len(uids)==1,f"{cell} complete end lacks one full per-game match artifact")
-  if receipt["end_class"]=="NATURAL":
-   records_by_home={}
-   for row in match_rows:
-    player=row.get("player") or {};home=player.get("home")
-    require(isinstance(home,str) and home not in records_by_home,f"{cell} natural match rows have missing or duplicate homes")
-    records_by_home[home]=player
-   require(set(records_by_home)=={seat["home"] for seat in receipt["resolved_seats"]},f"{cell} natural match homes differ from receipt seats")
-   for seat in receipt["resolved_seats"]:
-    player=records_by_home[seat["home"]]
-    require(player.get("outcome")==seat["outcome"],f"{cell} match outcome contradicts receipt for {seat['home']}")
-  support_path=load_artifact(receipt["artifacts"]["support_bundle"],f"{cell} support bundle",allow_missing=receipt["end_class"]=="INCOMPLETE")
-  if receipt["end_class"]=="CAP": require(support_path is not None,"cap receipt lacks a hash-verified support bundle")
-  uid=next(iter(uids)) if uids else None
-  if uid is not None:
-   require(uid not in uid_receipts,"duplicate game_uid across receipts")
-   uid_receipts[uid]=receipt
-   artifact_rows_all.extend(match_rows)
-   if rows is not None:
-    require(uid in grouped,"per-game matches artifact UID absent from aggregate match input")
-    canonical=lambda values: sorted(json.dumps(x,sort_keys=True,separators=(",",":")) for x in values)
-    require(canonical(grouped[uid])==canonical(match_rows),f"{cell} aggregate rows differ from hash-verified per-game artifact")
-  team_arms={side:receipt["teams"][side]["arm"] for side in ("A","B")}
-  require(set(team_arms.values())=={"control","treatment"},"receipt teams do not contain opposite arms")
-  control_side=next(side for side,arm in team_arms.items() if arm=="control")
-  treatment_side=next(side for side,arm in team_arms.items() if arm=="treatment")
-  arm_types={receipt["teams"][side]["arm"]:receipt["teams"][side]["bot_type"] for side in ("A","B")}
-  require(arm_types==job["arm_bot_types"],"receipt team bot types differ from planned arm bindings")
-  seats=[]
-  for seat in receipt["resolved_seats"]:
-   require(seat["team"] in ("A","B"),"receipt seat has invalid team")
-   seats.append({"home":seat["home"],"spawn":seat["spawn"],"side":seat["team"],"arm":seat["arm"],"bot_type":seat["bot_type"],"faction":seat["faction"]})
-   proof=seat["proof_source"].lower()
-   require("map.yaml" in proof and "match" in proof,"seat proof source omits generated map or match evidence")
-  end_class=receipt["end_class"]
-  status={"NATURAL":"NATURAL_END","CAP":"CENSORED_CAP","INCOMPLETE":"INCOMPLETE"}[end_class]
-  reason=receipt["end_reason"]
-  if end_class=="NATURAL": require(reason=="natural","natural receipt has unexpected end_reason")
-  elif end_class=="CAP": require(reason=="cap","cap receipt has unexpected end_reason")
-  elif isinstance(reason,str) and reason.upper() in {"MEMORY_KILL","MEMORY_SAMPLE_FAILED","LOW_FREE_RAM","STALL","WALL_TIMEOUT","PROCESS_DIED"}:
-   status=reason.upper()
-  legacy={"cell_id":cell,"game_uid":uid,"manifest_sha256":manifest_sha,"switch":job["switch"],"setup":job["setup"],"map":job["map"],"map_sha256":job["map_sha256"],"seed":job["seed"],"pair":job["pair"],"game_in_pair":job["game_in_pair"],"control_side":control_side,"treatment_side":treatment_side,"arm_bot_types":arm_types,"status":status,"end_reason":reason,"cap_marker":receipt["cap"]["marker_observed"],"cap_tick":receipt["cap"]["marker_tick"],"support_complete":support_path is not None,"seat_proof_source":"generated_map.yaml","map_yaml_sha256":map_info["generated_map_yaml_sha256"],"seats":seats,"peak_memory_bytes":receipt["memory"]["peak_private_bytes"],"duration_ticks":receipt["world_tick"]}
-  normalized.append(legacy)
- return normalized, (rows if rows is not None else artifact_rows_all)
-
 def main(argv=None):
  p=argparse.ArgumentParser(description=__doc__); s=p.add_subparsers(dest="cmd",required=True)
  d=s.add_parser("dry-run");d.add_argument("--manifest",type=pathlib.Path,required=True);d.add_argument("--manifest-sha256",required=True);d.add_argument("--repo-root",type=pathlib.Path,required=True);d.add_argument("--engine-root",type=pathlib.Path);d.add_argument("--output",type=pathlib.Path,required=True);d.add_argument("--minutes-per-game",type=float,default=8.5);d.add_argument("--setup-hours",type=float,default=2.0)
- a=s.add_parser("analyze");a.add_argument("--manifest",type=pathlib.Path,required=True);a.add_argument("--manifest-sha256",required=True);a.add_argument("--matches",type=pathlib.Path,help="optional aggregate JSONL crosscheck");a.add_argument("--receipts",type=pathlib.Path,required=True);a.add_argument("--repo-root",type=pathlib.Path,required=True);a.add_argument("--artifact-root",type=pathlib.Path,required=True,help="root directory containing immutable per-game support artifacts");a.add_argument("--output",type=pathlib.Path,required=True)
+ a=s.add_parser("analyze");a.add_argument("--manifest",type=pathlib.Path,required=True);a.add_argument("--manifest-sha256",required=True);a.add_argument("--matches",type=pathlib.Path,required=True);a.add_argument("--receipts",type=pathlib.Path,required=True);a.add_argument("--repo-root",type=pathlib.Path,required=True);a.add_argument("--output",type=pathlib.Path,required=True)
  a=p.parse_args(argv)
  try:
   m=json.loads(a.manifest.read_text(encoding="utf-8"))
@@ -719,8 +557,6 @@ def main(argv=None):
    out["manifest_sha256"]=actual;a.output.parent.mkdir(parents=True,exist_ok=True);a.output.write_text(json.dumps(out,indent=2)+"\n",encoding="utf-8");print(f"NO_LAUNCH games={out['games']} generated_maps={len(out['generated_map_preflight'])} treatment_changes={out['arm_payload_preflight'][1]['changed_fields']} worker_hours={out['worker_hours_estimate_at_8_5m_each']} slot_wall_hours={out['parallel_slot_wall_estimate_hours_at_8_5m_each']} launches=0");return 0
   validate(m,a.repo_root); raw=a.manifest.read_bytes(); actual=hashlib.sha256(raw).hexdigest();require(actual==a.manifest_sha256,"manifest SHA mismatch")
   def jsonl(path): return [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
-  receipts=json.loads(a.receipts.read_text(encoding="utf-8"));rows=jsonl(a.matches) if a.matches else None
-  normalized,rows=normalize_campaign_receipts(m,actual,receipts,rows,a.artifact_root)
-  out=analyze(m,actual,normalized,rows);a.output.parent.mkdir(parents=True,exist_ok=True);a.output.write_text(json.dumps(out,indent=2)+"\n",encoding="utf-8");print(f"ANALYZED games={len(out['games'])} unplanned_receipts={len(out['unplanned_receipt_cells'])}");return 2 if out["unplanned_receipt_cells"] or out["unplanned_game_uids"] or any(g["verdict"]=="INVALID_UNKNOWN" for g in out["games"]) else 0
+  out=analyze(m,actual,json.loads(a.receipts.read_text(encoding="utf-8")),jsonl(a.matches));a.output.parent.mkdir(parents=True,exist_ok=True);a.output.write_text(json.dumps(out,indent=2)+"\n",encoding="utf-8");print(f"ANALYZED games={len(out['games'])} unplanned_receipts={len(out['unplanned_receipt_cells'])}");return 2 if out["unplanned_receipt_cells"] or out["unplanned_game_uids"] or any(g["verdict"]=="INVALID_UNKNOWN" for g in out["games"]) else 0
  except (OSError,ValueError,KeyError,TypeError) as e: print(f"error: {e}",file=sys.stderr);return 2
 if __name__=="__main__": raise SystemExit(main())

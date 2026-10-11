@@ -32,10 +32,10 @@
     "min_kill_exchange_improvement": 0.0
   },
   "slot_policy": {
-    "max_parallel_small_games": 1,
+    "max_parallel_small_games": 3,
     "small_team_size_max": 2,
     "large_game_exclusive": true,
-    "min_free_ram_bytes": 16642998272,
+    "min_free_ram_bytes": 14495514624,
     "max_private_bytes": 11274289152
   },
   "baseline_manifest_path": "docs/audit/ab_baseline_manifest_pilot.json",
@@ -47,14 +47,13 @@
   "switch_patch_sha256": "d710567579cb3673eb33701ec881495f0a2a17d6203194b0efdc8052f4de4523",
   "baseline_ai_payload_sha256": "932e2e5c919de6f5b493e1722e6e66e39a3a5f1577b29aa58a571492b7de9d69",
   "treatment_ai_payload_sha256": "acdfd3a3e2c7d405a776703593f1d52c5f357b423e75ffb224392159c009c725",
-  "tool_hash_algorithm": "sha256-eol-normalized-lf-v1",
   "tool_sha256": {
-    "driver_analyzer": "7574dda3bf267795fd9f13a6a534b9f6431b5411ef5e8997407a0f7969aac06b",
-    "campaign_runner": "e6db5a4df60260774a7350c95746c43ab48b80cb6060bd701a171446cb998cf4",
-    "batch_runner": "1f6c6005c2f474bb9b8e87ec8b4a7081d3737b458d8423ab349a8e837fe6d6e0",
-    "switch_applier": "9e9f678871cc2d8adeca0e7b5c2c28a30a041252f8f630005593bc7f241a6bdd"
+    "driver_analyzer": "bb77a8e224a372b8e6b67d4b6ccfa97f56605b7a380802896c9677e8755df373",
+    "campaign_runner": "3f6e2db7fbca0f2dbedc33b8d16261f2575d05777d6237c10d77014f3e764055",
+    "batch_runner": "072225d79e70011545bb43b9228a7c1f2686c033c04c4b3fa02dd92edcf6a6ce",
+    "switch_applier": "5376258709f2ff6512e402abeaf09e164abe483142980830bc72269af047f97e"
   },
-  "receipt_schema_sha256": "d6e1af245ecc0c99d418a2112f25a4478e0ed6460879de448eec44e1f80069a8",
+  "receipt_schema_sha256": "3d0e39057ded3c28354812bfad1db6727e891e16a25250bd6a9caff6063fa164",
   "binary_sha256": {
     "bin/OpenRA.exe": "5693f355792ebb68699793f96ef2167b733c5e7756f580858c5090226418c984",
     "bin/OpenRA.Game.dll": "167fcbd8985dc3cd74ae2747c6d4a43db0d51cbda99dc029712fdb72182f6b80",
@@ -261,7 +260,5 @@
     }
   ],
   "execution_approved": false,
-  "notes": "non-executable candidate; execution approval remains false until maintainer sign-off",
-  "a5_parity_receipt_path": "C:/cameo-wt/ab-campaign-tooling/results/campaign-a5-fixed-tick-parity-20261010-attempt2/A5_memory_probe_receipt.json",
-  "a5_parity_receipt_sha256": "0e6fc98982af8ca3c67f3846a121512fab4e3982b8de565db67172c865a382f4"
+  "notes": "candidate dry-run manifest; maintainer flips execution_approved at sign-off after the open-item proposal is ruled on"
 }
