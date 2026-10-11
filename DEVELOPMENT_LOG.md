@@ -1,3 +1,7 @@
+# 2026-10-11 — Boss (landed by lead): correct A5 qualification renderer
+
+The A5 probe now requests headless rendering instead of fast/windowed mode (cherry-picked from `869a7ffeb`). Four focused tests pass, including an intercepted-launch regression checking the renderer and seed. `docs/audit/A5_HEADLESS_2026_10_11.md` records the source checkpoint and next gates. The earlier staged A5 attempt was aborted and supplies no qualification evidence; a profiler-off reserved rerun and runtime map acceptance remain required.
+
 # 2026-10-10 — Claude: A/B launch blockers fixed, headless platform, runtime map acceptance (branch `ccr-c7f51935-i53fkj`)
 
 *Claude (Opus)*, maintainer request: fix what kept Codex/Devin from running the A/B tests. Base `c07bef43`, engine `6da7fce14`.

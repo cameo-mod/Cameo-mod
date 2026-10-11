@@ -187,7 +187,7 @@ def run_cell(index: int) -> dict:
 		str(OUT / "a5_fixed_tick_map"),
 		"--allow-temporary-template",
 		"--time-limit", "1", "--retries", "0", "--stall-timeout", "180",
-		"--keep-variants", "--render", "fast", "--support-dir", str(support)]
+		"--keep-variants", "--render", "headless", "--support-dir", str(support)]
 	if ALLOW_STALE_BUILD:
 		command.append("--allow-stale-build")
 	env = os.environ.copy()
