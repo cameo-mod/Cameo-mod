@@ -175,7 +175,24 @@ def discover_owned_tree(process, engine: pathlib.Path, support: pathlib.Path, *,
 	if root is None:
 		if process.poll() is None:
 			raise RuntimeError("launched root process is missing from the process snapshot")
-		return {"rows": [], "child_found": False}
+		# The launcher may exit before our first poll while OpenRA.Game remains alive. Its
+		# descendants are still attributable by ParentProcessId, but only trust/return them
+		# when every survivor is an engine binary for this exact cell's SupportDir.
+		bin_dir = (engine / "bin").resolve()
+		children = [row for row in rows if int(row["ProcessId"]) != process.pid]
+		for row in children:
+			try:
+				path = pathlib.Path(str(row.get("ExecutablePath") or "")).resolve()
+				path.relative_to(bin_dir)
+				same_cell = os.path.normcase(str(support.absolute())) in os.path.normcase(
+					str(row.get("CommandLine") or ""))
+			except (OSError, ValueError):
+				same_cell = False
+			if not same_cell:
+				raise RuntimeError(f"orphan PID {row.get('ProcessId')} does not match this cell's engine/SupportDir")
+		if require_game_child and not children:
+			return {"rows": [], "child_found": False}
+		return {"rows": children, "child_found": bool(children)}
 	expected = (engine / "bin" / "OpenRA.exe").resolve()
 	actual = pathlib.Path(str(root.get("ExecutablePath") or "")).resolve()
 	if os.path.normcase(str(actual)) != os.path.normcase(str(expected)):
@@ -436,10 +453,18 @@ def run_cell(job: dict, *, root: pathlib.Path, engine: pathlib.Path, overlay: pa
 				break
 			time.sleep(1)
 	try:
+		# Always take one last snapshot: Popen may have exited before the first loop
+		# iteration, leaving a same-cell game child absent from the sampled PID set.
+		final_tree = discover_owned_tree(process, engine, support)
+		final_children = {int(row["ProcessId"]) for row in final_tree["rows"] if
+			int(row["ProcessId"]) != process.pid}
+		new_orphaned = final_children - (owned_pids - {process.pid})
+		owned_pids.update(final_children)
+		child_seen |= final_tree["child_found"]
 		orphaned = cleanup_orphaned_owned_pids(owned_pids - {process.pid}, engine, support)
-		if orphaned:
+		if new_orphaned or orphaned:
 			end_reason = "ORPHANED_GAME_CLEANED"
-			monitor_error = f"launcher exited while owned game PIDs remained: {orphaned}"
+			monitor_error = f"launcher exited while owned game PIDs remained: {sorted(new_orphaned | set(orphaned))}"
 	except Exception as error:
 		end_reason = "CLEANUP_FAILED"
 		monitor_error = str(error)

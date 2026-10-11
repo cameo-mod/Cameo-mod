@@ -200,6 +200,36 @@ class OwnedProcessMonitoringTests(unittest.TestCase):
                 result = acceptance.discover_owned_tree(Popen(), root, support)
             self.assertFalse(result["child_found"])
 
+    def test_exited_launcher_still_discovers_and_pid_scoped_cleans_same_cell_child(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = pathlib.Path(d) / "engine"
+            (root / "bin").mkdir(parents=True)
+            support = pathlib.Path(d) / "cell/Support"
+            support.mkdir(parents=True)
+            child = {"ProcessId": 2, "ParentProcessId": 1,
+                "ExecutablePath": str(root / "bin/OpenRA.Game.exe"),
+                "CommandLine": f"OpenRA.Game.exe Engine.SupportDir={support}"}
+
+            class Popen:
+                pid = 1
+                def poll(self): return 0  # exited before the first monitor sample
+
+            calls = []
+            def run(args, **kwargs):
+                calls.append(args)
+                return type("Result", (), {"returncode": 0, "stdout": "", "stderr": ""})()
+
+            with patch.object(acceptance.os, "name", "nt"), \
+                 patch.object(acceptance, "process_rows", side_effect=[[child], [child], []]), \
+                 patch.object(acceptance.subprocess, "run", side_effect=run):
+                tree = acceptance.discover_owned_tree(Popen(), root, support)
+                self.assertTrue(tree["child_found"])
+                self.assertEqual([2], [int(row["ProcessId"]) for row in tree["rows"]])
+                remaining = acceptance.cleanup_orphaned_owned_pids({2}, root, support)
+
+            self.assertEqual([], remaining)
+            self.assertEqual([["taskkill.exe", "/PID", "2", "/T", "/F"]], calls)
+
     def test_tree_cleanup_uses_root_pid_and_tree_scope(self):
         with tempfile.TemporaryDirectory() as d:
             root = pathlib.Path(d) / "engine"
