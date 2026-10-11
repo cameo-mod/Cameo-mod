@@ -84,6 +84,38 @@ def kill_owned_pid(pid: int, expected_executable: pathlib.Path, expected_support
 		return False
 
 
+def resolve_game_pid(process, timeout_seconds: float = 20.0) -> int:
+	"""Return the real game process id.
+
+	bin/OpenRA.exe is the Windows launcher: it spawns a second OpenRA.exe
+	(the actual game) as its child. The Popen pid is only the launcher
+	(~25 MiB); memory caps and PID-scoped cleanup must target the child.
+	Falls back to the launcher's pid when no child appears.
+	"""
+	if os.name != "nt":
+		return process.pid
+	deadline = time.monotonic() + timeout_seconds
+	while time.monotonic() < deadline:
+		if process.poll() is not None:
+			return process.pid
+		try:
+			out = subprocess.run(
+				["powershell.exe", "-NoProfile", "-NonInteractive", "-Command",
+				 "Get-CimInstance Win32_Process -Filter \"Name='OpenRA.exe'\" | "
+				 "Select-Object ProcessId,ParentProcessId | ConvertTo-Json -Compress"],
+				capture_output=True, text=True, timeout=15).stdout
+			procs = json.loads(out) if out.strip() else []
+			if isinstance(procs, dict):
+				procs = [procs]
+			for proc in procs:
+				if proc.get("ParentProcessId") == process.pid:
+					return int(proc["ProcessId"])
+		except (OSError, subprocess.SubprocessError, ValueError):
+			pass
+		time.sleep(1.0)
+	return process.pid
+
+
 def available_ram_bytes() -> int:
 	if os.name != "nt":
 		try:
@@ -290,10 +322,21 @@ def monitor_process(process, *, driver_log: pathlib.Path, actor_log: pathlib.Pat
 				stall_log: pathlib.Path | None = None,
 				wall_timeout: int = 3000, stall_timeout: int = 180,
 				poll_seconds: float = 2.0, sample_callback=None,
+				watch_pid: int | None = None,
+				expected_executable: pathlib.Path | None = None,
+				expected_support: pathlib.Path | None = None,
 				clock=time.monotonic, sleep=time.sleep) -> dict:
-	"""Watch one owned process; any stop targets only the supplied Popen handle."""
+	"""Watch one owned process; any stop targets only the supplied Popen handle.
+
+	On Windows bin/OpenRA.exe is a launcher that spawns the real game as a
+	child; watch_pid lets the caller monitor/kill that child. Kill order is
+	scoped child first (identity-checked), then the launcher handle.
+	"""
 	if wall_timeout != 3000 or stall_timeout != 180 or poll_seconds <= 0:
 		raise ValueError("campaign watchdog bounds must remain 3000s/180s")
+	pid = watch_pid or process.pid
+	def alive() -> bool:
+		return pid_alive(pid) if watch_pid else process.poll() is None
 	start = clock(); deadline = start + wall_timeout
 	stall_log = stall_log or driver_log
 	last_log_mtime = stall_log.stat().st_mtime if stall_log.exists() else None
@@ -303,7 +346,7 @@ def monitor_process(process, *, driver_log: pathlib.Path, actor_log: pathlib.Pat
 	stop_reason = None
 	actor_offset = 0
 	last_actor = {"world_tick": None, "actor_count": None}
-	while process.poll() is None:
+	while alive():
 		sleep(poll_seconds)
 		try:
 			mtime = stall_log.stat().st_mtime
@@ -313,7 +356,7 @@ def monitor_process(process, *, driver_log: pathlib.Path, actor_log: pathlib.Pat
 		except OSError:
 			pass
 		try:
-			private = private_bytes(process.pid)
+			private = private_bytes(pid)
 		except (OSError, RuntimeError):
 			stop_reason = "MEMORY_SAMPLE_FAILED"; break
 		peak = max(peak, private)
@@ -337,12 +380,22 @@ def monitor_process(process, *, driver_log: pathlib.Path, actor_log: pathlib.Pat
 		if private >= PRIVATE_LIMIT: stop_reason = "MEMORY_KILL"; break
 		if clock() - last_activity > stall_timeout: stop_reason = "STALL"; break
 		if clock() >= deadline: stop_reason = "WALL_TIMEOUT"; break
-	if stop_reason is not None and process.poll() is None:
+	if watch_pid and alive():
+		if expected_executable is not None and expected_support is not None:
+			kill_owned_pid(pid, expected_executable, expected_support)
+		if process.poll() is None:
+			process.kill()
+	elif stop_reason is not None and process.poll() is None:
 		process.kill()  # Popen.kill terminates this process handle/PID only.
-		process.wait()
+	try:
+		process.wait(timeout=15)
+	except (subprocess.TimeoutExpired, TypeError):
+		pass
 	return {"end_reason": stop_reason or "PROCESS_EXIT", "exit_code": process.poll(),
 		"wall_seconds": max(0, clock() - start), "peak_private_bytes": peak,
-		"samples": private_samples, "pid_scoped_cleanup": process.poll() is not None}
+		"samples": private_samples,
+		"pid_scoped_cleanup": (not pid_alive(pid)) if watch_pid else (process.poll() is not None),
+		"watched_pid": pid}
 
 
 def plan_summary(manifest: dict, manifest_sha: str, root: pathlib.Path, engine_root: pathlib.Path | None):
@@ -406,18 +459,22 @@ def run_one(manifest: dict, manifest_sha: str, job: dict, *, root: pathlib.Path,
 	env = os.environ.copy(); env["CAMEO_DEV_SEED"] = str(job["seed"])
 	with driver_log.open("w", encoding="utf-8") as output:
 		process = subprocess.Popen(args, cwd=engine_root, env=env, stdout=output, stderr=subprocess.STDOUT)
-	queue.set_game_pid(job["cell_id"], process.pid)
+	game_pid = resolve_game_pid(process)
+	queue.set_game_pid(job["cell_id"], game_pid)
 	def heartbeat(row):
 		if row["private_bytes"] < PRIVATE_LIMIT:
 			slot_counter.heartbeat(job["cell_id"], row["private_bytes"])
 		return "LOW_FREE_RAM" if available_ram_bytes() < FREE_RAM_HARD_FLOOR else None
-	monitor_result = monitor_process(process, driver_log=driver_log, actor_log=server_log, stall_log=logs / "debug.log",
-		sample_callback=heartbeat)
+	monitor_result = monitor_process(process, driver_log=driver_log, actor_log=driver_log, stall_log=logs / "debug.log",
+		sample_callback=heartbeat,
+		watch_pid=game_pid if game_pid != process.pid else None,
+		expected_executable=executable, expected_support=game_support)
 	slot_counter.release(job["cell_id"])
 	finished = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
 	log_text = server_log.read_text(encoding="utf-8", errors="replace") if server_log.exists() else ""
+	driver_text = driver_log.read_text(encoding="utf-8", errors="replace") if driver_log.exists() else ""
 	match_rows = batch.read_appended_records(match_log, before)
-	cap_match = re.search(r"AB_CAMPAIGN_CAP tick=(\d+)", log_text)
+	cap_match = re.search(r"AB_CAMPAIGN_CAP tick=(\d+)", driver_text)
 	seed_line = next((line for line in log_text.splitlines() if f"RandomSeed={job['seed']}" in line and "CAMEO DEV SEED pinned" in line), None)
 	map_yaml_text = map_yaml.read_text(encoding="utf-8")
 	resolved = proof["seats"]
@@ -454,7 +511,7 @@ def run_one(manifest: dict, manifest_sha: str, job: dict, *, root: pathlib.Path,
 		"teams":team_obj,"resolved_seats":resolved_out,"end_class":end_class,"end_reason":end_reason,
 		"winner_team":classification.get("winner_side") if end_class=="NATURAL" else None,"world_tick":monitor_result["samples"][-1]["world_tick"] if monitor_result["samples"] else None,
 		"cap":{"world_tick_cap":CAP_TICK,"marker_observed":bool(cap_match),"marker_tick":int(cap_match.group(1)) if cap_match else None},
-		"memory":{"process_id":process.pid,"peak_private_bytes":monitor_result["peak_private_bytes"],"limit_private_bytes":PRIVATE_LIMIT,"samples":monitor_result["samples"]},
+		"memory":{"process_id":game_pid,"peak_private_bytes":monitor_result["peak_private_bytes"],"limit_private_bytes":PRIVATE_LIMIT,"samples":monitor_result["samples"]},
 		"runtime":{"started_utc":started,"finished_utc":finished,"exit_code":monitor_result["exit_code"],"wall_seconds":monitor_result["wall_seconds"],"stall_seconds":180,"pid_scoped_cleanup":monitor_result["pid_scoped_cleanup"]},
 		"artifacts":{"server_log":_file_artifact(server_log),"driver_log":_file_artifact(driver_log),"matches_jsonl":_file_artifact(match_log),"replay":_file_artifact(next(iter(game_root.rglob("*.orarep")), None)),"map_yaml":_file_artifact(map_yaml),"support_bundle":_file_artifact(bundle)}}
 	validate_receipt(receipt)
