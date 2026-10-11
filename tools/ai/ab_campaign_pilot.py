@@ -351,6 +351,15 @@ end
  script=dest/"ab_campaign_monitor.lua";script.write_text(lua,encoding="utf-8")
  rules=dest/rules_filename;text=rules.read_text(encoding="utf-8")
  world=re.search(r"(?m)^World:\s*$",text);require(world is not None and "LuaScript:" not in text,"harness rules cannot accept campaign monitor Lua")
+ # Batch maps do not display player notifications. More importantly, bot player
+ # names are resolved from the map's IBotInfo table when ConquestVictoryConditions
+ # reports a loss; some generated/overlaid bot types may not have a matching
+ # entry there, which can throw while the cap marks all objectives failed.
+ # Suppress only those UI/audio notifications; victory and loss state transitions
+ # still run and remain available to the match recorder.
+ player_rules="\nPlayer:\n\tConquestVictoryConditions:\n\t\tSuppressNotifications: true\n"
+ text=text[:world.start()]+player_rules+text[world.start():]
+ world=re.search(r"(?m)^World:\s*$",text)
  text=text[:world.end()]+"\n\tLuaScript:\n\t\tScripts: ab_campaign_monitor.lua"+text[world.end():]
  rules.write_text(text,encoding="utf-8")
  return {"script_sha256":sha(script),"rules_sha256":sha(rules),"sample_interval_ticks":sample_interval,"cap_tick":cap_tick,"actor_count_marker":"AB_CAMPAIGN_ACTOR_SAMPLE"}

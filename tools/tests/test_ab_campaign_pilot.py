@@ -31,6 +31,7 @@ class PilotPlanTests(unittest.TestCase):
   with tempfile.TemporaryDirectory() as temp:
    dest=pathlib.Path(temp)/"variant";proof=pilot.prove_generated_map(job,ROOT,dest)
    monitor_text=(dest/"ab_campaign_monitor.lua").read_text(encoding="utf-8")
+   duel_rules=(dest/"duel_rules.yaml").read_text(encoding="utf-8")
   self.assertEqual("generated_map.yaml",proof["seat_proof_source"])
   self.assertEqual(8,len(proof["seats"]))
   self.assertEqual({"td_gdi","td_nod","ra1_allies","ra1_soviets"},{x["faction"] for x in proof["seats"]})
@@ -39,6 +40,23 @@ class PilotPlanTests(unittest.TestCase):
   self.assertEqual("AB_CAMPAIGN_ACTOR_SAMPLE",proof["runtime_monitor"]["actor_count_marker"])
   self.assertIn('"Neutral", "Creeps"',monitor_text)
   self.assertIn('AB_CAMPAIGN_CAP tick=',monitor_text)
+  self.assertIn("Player:\n\tConquestVictoryConditions:\n\t\tSuppressNotifications: true",duel_rules)
+  self.assertIn("LuaScript:\n\t\tScripts: ab_campaign_monitor.lua",duel_rules)
+
+ def test_campaign_monitor_suppresses_name_resolution_on_cap_losses(self):
+  # OnPlayerLost formats a notification using Player.ResolvePlayerName. A bot
+  # with no corresponding IBotInfo in the runtime map rules throws there, so
+  # generated batch maps suppress display/audio notifications while preserving
+  # the objective loss state and resulting match-record outcome.
+  with tempfile.TemporaryDirectory() as temp:
+   dest=pathlib.Path(temp)
+   (dest/"duel_rules.yaml").write_text("World:\n\tMapOptions:\n",encoding="utf-8")
+   pilot.install_campaign_monitor(dest,2,cap_tick=1000,sample_interval=500)
+   rules=(dest/"duel_rules.yaml").read_text(encoding="utf-8")
+   monitor=(dest/"ab_campaign_monitor.lua").read_text(encoding="utf-8")
+  self.assertIn("SuppressNotifications: true",rules)
+  self.assertIn("MarkFailedObjective",monitor)
+  self.assertIn("AB_CAMPAIGN_CAP tick=",monitor)
 
  def test_map_tamper_and_execution_authority_fail_closed(self):
   m=manifest();m["maps"][0]["sha256"]="0"*64
