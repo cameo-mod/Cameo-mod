@@ -40,13 +40,13 @@ class FixedTickParityTests(unittest.TestCase):
             self.assertEqual(16000, receipt["cap_tick"])
             lua = (dest / "ab_campaign_monitor.lua").read_text(encoding="utf-8")
             self.assertIn("local CapTick = 16000", lua)
-			self.assertIn('"BotA", "BotB", "Neutral", "Creeps"', lua)
-			self.assertIn("local DeploymentTick = 100", lua)
-			self.assertIn("if not Deployments[name] then", lua)
-			self.assertIn("VerifiedConstructionYards[actor.Type]", lua)
-			self.assertIn('AB_CAMPAIGN_DEPLOYMENT_CHECK tick=', lua)
-			self.assertIn('AB_CAMPAIGN_NO_DEPLOY seat=', lua)
-			with self.assertRaises(ValueError):
+            self.assertIn('"BotA", "BotB", "Neutral", "Creeps"', lua)
+            self.assertIn("local DeploymentTick = 100", lua)
+            self.assertIn("if not Deployments[name] then", lua)
+            self.assertIn("VerifiedConstructionYards[actor.Type]", lua)
+            self.assertIn('AB_CAMPAIGN_DEPLOYMENT_CHECK tick=', lua)
+            self.assertIn('AB_CAMPAIGN_NO_DEPLOY seat=', lua)
+            with self.assertRaises(ValueError):
                 pilot.install_campaign_monitor(dest, 2, cap_tick=0)
 
 
