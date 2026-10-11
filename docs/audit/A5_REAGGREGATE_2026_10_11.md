@@ -2,7 +2,9 @@
 
 Live qualification records individual hashes for OpenRA.exe, OpenRA.Game.dll and OpenRA.Mods.Cameo.dll in both run and aggregate receipts. All three must exist before launch; missing binaries are never silently omitted. Lead's disposition: preserve raw 99d9 as a superseded PASS and perform a fresh qualification after review/landing, under the runtime owner's reservation. This change launches nothing.
 
-Focused validation: 50 tests run, 49 passed, one existing skip. No full tools/tests process or game launch.
+Follow-up gate hardening requires each run's normalized binary hash dictionary to equal the manifest pins exactly. A matching subset cannot authorize a run; missing or mismatched Game/Cameo DLL hashes are rejected for either seat. Null or malformed allocation-trace policies now produce a fail-closed ValueError.
+
+Focused validation after hardening: 51 tests run, 50 passed, one existing skip. No full tools/tests process or game launch.
 
 The emitter derives renderer, hard process ceiling, host emergency floor, actual stop threshold and allocation-trace status from the two matching run records. Offline mode bypasses launch preflight and all game execution. It requires an exact raw SHA, matching embedded/external per-run receipts, matching configurations and a new output path. Missing legacy renderer fields may be derived only from preserved headless graphics logs; their raw hashes and the per-run receipt hashes are recorded. No original artifacts are edited.
 
