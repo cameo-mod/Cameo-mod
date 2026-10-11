@@ -718,9 +718,21 @@ namespace OpenRA.Mods.CA.Traits
 					return false;
 				}
 
+				// TF-1: the planner's crawl-link want is claimed atomically at admission — the first
+				// queue through holds the pending claim, a second queue in the same window is refused
+				// here (the published want alone admits nothing). The claim becomes paid only when the
+				// item is seen in this producer's queue; an intent that never arrives drops uncharged.
+				if (lawWants != null && item.Name == lawWants.WantedLinkBuilding
+					&& !lawWants.TryClaimCrawlLink(queue.Actor, item.Name, queue.GetProductionCost(item)))
+				{
+					pendingDemandPick = default;
+					return false;
+				}
+
 				baseBuilder.RecordOpeningStructureQueued(queue, item);
 				baseBuilder.BuildOrderKnobs?.NotifyQueued(item.Name);
 				bot.QueueOrder(Order.StartProduction(queue.Actor, item.Name, 1));
+
 				queuedAt[queue.Actor.ActorID] = (item.Name, world.WorldTick);
 				if (demandPick.Demand != null)
 				{
@@ -2177,7 +2189,12 @@ namespace OpenRA.Mods.CA.Traits
 						// on this aimed path so the distance sort survives (crawl-trace §8).
 						var crawlLaw = baseBuilder.RefineryLawProvider();
 						var crawlAim = crawlLaw?.CrawlTargetEdge ?? expansionTarget;
-						var toward = findPos(actorType, distanceToBaseIsImportant, producer, baseCenter, crawlAim.Value,
+
+						// TF-1: the bounded path anchors the search at the frontier cell nearest the
+						// aim — an admitted link must land forward; without a published anchor (legacy,
+						// switch-off) the yard centre stays the search centre as before.
+						var anchor = crawlLaw?.CrawlFrontierAnchor ?? baseCenter;
+						var toward = findPos(actorType, distanceToBaseIsImportant, producer, anchor, crawlAim.Value,
 							baseBuilder.Info.MinBaseRadius, baseBuilder.Info.BaseCrawlRadius, bypassAdvisor: crawlLaw != null);
 						if (toward.Location != null)
 						{

@@ -1,3 +1,26 @@
+# 2026-10-11 — Devin: TF-1 repair — atomic admission claims + paid-reconcile lifecycle (branch `devin/turtle-fix-1-crawl-allowance`)
+
+*Devin-Developer*, Sol review `fleet/REVIEW_2026-10-11_tf1_5bed_sol.md` (REQUEST CHANGES on `5bedabace`).
+
+- **Queue intent is no longer charged as paid spend.** `CrawlLinkPaid` (called at `QueueOrder`) is
+  replaced by `TryClaimCrawlLink(owner, item, cost)` — the queue's atomic admission gate invoked
+  just before `StartProduction`. The claim starts PENDING and becomes PAID only when the planner's
+  per-replan `Reconcile` sees the item in that producer's queue (`QueuedItemNamesByProducer` scans
+  `BuildingQueueTypes`/`FindQueues`/`AllQueued` names keyed on `queue.Actor`). An intent never seen
+  ages out after `OptionalLinkPendingReplans` (2) re-plans and drops uncharged; an accepted item
+  that leaves production keeps its charge (it consumed the spend window).
+- **Published want no longer double-admits.** The first queue's `TryClaim` holds the claim; a second
+  queue in the same window is refused (claims.Count > 0 blocks optional claims). Mandatory power
+  bypasses every bound including the outstanding claim — a real deficit outranks the allowance;
+  its claim still serializes via the same dict.
+- **Counters saturate** (`PaidCost`/`PaidCount` via long-min-add) — no wrap on unbounded configs.
+- **Tests:** 11 focused. New lifecycle coverage — two-queue competing claim (second refused while
+  the first is pending AND paid-unadvanced), rejected-intent drop-uncharged-and-reopen,
+  accepted-then-vanish keeps charge, mandatory over outstanding claim and over parked route,
+  saturation. Existing cases 1-5 + frontier anchor re-pinned through the claim path.
+- **Verification:** Release 0/0; focused 39/39; full suite 1692/1692; boot gate PASS (menu @69s,
+  0 new exception-*.log, PID-scoped kill, no leftovers). No runtime clearance implied; defaults off.
+
 # 2026-10-11 — Boss (landed by lead): correct A5 qualification renderer
 
 The A5 probe now requests headless rendering instead of fast/windowed mode (cherry-picked from `869a7ffeb`). Four focused tests pass, including an intercepted-launch regression checking the renderer and seed. `docs/audit/A5_HEADLESS_2026_10_11.md` records the source checkpoint and next gates. The earlier staged A5 attempt was aborted and supplies no qualification evidence; a profiler-off reserved rerun and runtime map acceptance remain required.
@@ -36,7 +59,6 @@ The A5 probe now requests headless rendering instead of fast/windowed mode (cher
   - one A/B batch voided by `mod_commit` fingerprint drift (commit landed mid-batch) and re-run.
 - **Docs:** LESSONS_LEARNED (2 entries), STATUS resume, HANDOFF, master doc Part IIIc, TASK_INDEX A/B row,
   `MAP_ENGINE_ACCEPTANCE_2026-10-10.md`, correction note in `SPAWN_SYMMETRY_2026-10-11.md`, M13 counts.
-
 
 *Devin-Developer 2026-10-10 (rereview fix, devin/repair-b3-park-release @ 693c07793).* VP exact-tip review of 560a413 caught that owner-scoped AnchorTakenForOwner (ReferenceEquals only) made NULL-owner parks — offer-streak churn bounds, ParkTicks, the parameterless failure overload — invisible to every reservation probe. Restored global semantics for null-owner parks (park.Owner == null || ReferenceEquals) while keeping the lead-ruled owner scoping for failure cooldowns; fake provider mirrors it. New regression NullOwnerParkStaysGlobalAndBlocksForeignReservation. Verified: build 0 errors, focused 124/124, full 1515/1515, fog audit PASS (269 sites). No fresh boot gate — host has no execution slot (pytest ~9.7GB + seat_verify resident); branch boot-gated clean at dad8c6753.
 # 2026-10-10 — Devin: REPAIR-B3 follow-up — park frees the whole set; owner-scoped cooldown (branch `devin/repair-b3-park-release`)
@@ -20602,3 +20624,43 @@ Validation: `dotnet test OpenRA.Mods.Cameo.Test -c Release` â€” 1516 passed
 (3/3 new tests green). Boot-gate PASS â€” main menu reached, no new exception-*.log.
 Verify pending: rerun of cell `all/duel_nod_2103` to cap with no exception log â€”
 coordinator-owned per PT7 runner authority.
+
+## 2026-10-11 - TF-1 bounded optional crawl-link supply (FINDINGS_2026-10-11_turtle_regression increment 1)
+
+Problem (fleet FINDINGS doc + Sol's trace): the planner's crawl-link want is unbounded - the
+queue treats `WantedLinkBuilding` as an economy investment that rides its own cost floor and
+is re-picked every sweep, so a route that never advances the frontier keeps spending (the
+traced turtler stacked ~51 power placements). Placement also searched the 50-cell annulus
+around the yard centre, not the frontier nearest the target.
+
+Change (default-off; `BoundCrawlLinkSupply: false` preserves the traced behaviour):
+
+- `ExpansionPlannerBotModuleInfo.BoundCrawlLinkSupply` + `OptionalLinkCostAllowance` (6000),
+  `OptionalLinkCountAllowance` (4), `OptionalLinkNonprogressReplans` (6 ~ 1500 ticks at
+  ReplanTicks=250).
+- New nested `CrawlLinkAllowance` ledger (world-free): episodes key on the target field's
+  centre; `RecordPaid` charges only paid link admissions the queue reports (`CrawlLinkPaid`);
+  `NoteDistance` measures frontier-to-aim distance^2 each re-plan - a moved aim re-baselines,
+  a strictly smaller distance is progress, stalls park the route after
+  `OptionalLinkNonprogressReplans`; `OptionalLinkAdmissible` requires measured evidence, one
+  outstanding unadvanced link, and headroom under both paid bounds.
+- `OptionalLinkAdmitted(mandatoryPower, admissible)` - mandatory power
+  (`PowerManager.ExcessPower < 0`) publishes the want regardless; its paid admission still
+  charges the episode. Refinery deployment is untouched (the bound only gates
+  `WantedLinkBuilding`).
+- `CrawlFrontierAnchor` (interface default null): the planner's own building cell nearest the
+  aim. The queue's BaseCrawl `findPos` centres its annulus on it instead of `baseCenter`
+  (Sol's trace: frontier-nearest-target placement, not the 50-cell yard annulus). Legacy
+  behaviour kept when no anchor publishes.
+- Provenance: ADMITTED / REFUSED debug+BotDebug lines carry target, aim, distSq,
+  paid/allowance counters and the refusal reason (logged once per reason change, not per
+  re-plan).
+
+Tests (`OpenRA.Mods.Cameo.Test/ExpansionPlannerBotModuleTest.cs`, 6 new):
+deficit admits over the allowance; serial admit-progress-rearm; nonadvancing route parks +
+paid-count bound refuses even with progress; changed target opens a fresh episode; missing
+evidence refuses; frontier anchor is the argmin cell.
+
+Validation: `dotnet test OpenRA.Mods.Cameo.Test -c Debug` - 1687 passed, 0 failed
+(34/34 ExpansionPlanner). Release build clean. Boot-gate PASS - main menu reached, no new
+exception-*.log. TF-2 (unit-spend reservation) remains a separate increment per the board.

@@ -333,6 +333,24 @@ namespace OpenRA.Mods.CA.Traits
 		CPos? CrawlTargetEdge => null;
 
 		/// <summary>
+		/// TF-1 (bounded optional crawl supply): the frontier anchor — the provider's own building
+		/// cell nearest <see cref="CrawlTargetEdge"/>. A bounded crawl placement searches its annulus
+		/// around this cell instead of the yard centre, so an admitted link must land forward of the
+		/// frontier. Null outside the law or the switch-off path.
+		/// </summary>
+		CPos? CrawlFrontierAnchor => null;
+
+		/// <summary>
+		/// TF-1: the atomic admission gate for the published <see cref="WantedLinkBuilding"/>. The
+		/// queue calls it just before its StartProduction order: the first queue through holds the
+		/// pending claim and may proceed; a second queue in the same window is refused — the
+		/// published want alone admits nothing. The claim becomes paid only once the item is
+		/// observed in the claimant's production queue; an intent that never arrives drops
+		/// uncharged. Default admit (classic / switch-off providers leave admission unchanged).
+		/// </summary>
+		bool TryClaimCrawlLink(object owner, string item, int cost) => true;
+
+		/// <summary>
 		/// REF-1 B2: the name of the cheapest currently-buildable provider of a due construction MCV's missing
 		/// prerequisite (td_gdi: the repair facility). Null = none — the MCV is producible or none is due.
 		/// </summary>
