@@ -11,6 +11,7 @@ import ab_campaign_pilot as pilot
 
 SHA64 = "a" * 64
 SHA40 = "b" * 40
+_UNSET = object()  # lets receipt(end_tick=None) mean "explicitly null", distinct from "use the default"
 
 
 def seat(seat_id, team, arm, faction="td_gdi", outcome="won", earned=1000, spent=800, banked=200,
@@ -26,9 +27,13 @@ def seat(seat_id, team, arm, faction="td_gdi", outcome="won", earned=1000, spent
 
 def receipt(*, switch="BU_harvester_logistics", setup_id="1v1_nuclear_gdi", pair_index=0, pair_member,
             control_side, treatment_side, winner_team, end_class="NATURAL", end_reason="natural",
-            control_seat_kw=None, treatment_seat_kw=None):
+            end_tick=_UNSET, control_seat_kw=None, treatment_seat_kw=None):
     control_seat_kw = control_seat_kw or {}
     treatment_seat_kw = treatment_seat_kw or {}
+    # FIX-CAMPAIGN-NO-EARLY-END (Devin-Integrator, 2026-10-11): end_tick is now a
+    # required receipt field on canonical; NATURAL requires an int < CAP_TICK (45000),
+    # CAP/INCOMPLETE may be null. Default to a realistic pre-cap value for NATURAL.
+    resolved_end_tick = (30000 if end_class == "NATURAL" else None) if end_tick is _UNSET else end_tick
     seats = [
         seat(f"Multi{control_side}", control_side, "control",
              outcome="won" if winner_team == control_side else "lost", **control_seat_kw),
@@ -47,7 +52,8 @@ def receipt(*, switch="BU_harvester_logistics", setup_id="1v1_nuclear_gdi", pair
         },
         "resolved_seats": seats, "end_class": end_class, "end_reason": end_reason,
         "winner_team": winner_team if end_class == "NATURAL" else None,
-        "world_tick": 30000, "cap": {"world_tick_cap": 45000, "marker_observed": end_class == "CAP", "marker_tick": 45000 if end_class == "CAP" else None},
+        "world_tick": 30000, "end_tick": resolved_end_tick,
+        "cap": {"world_tick_cap": 45000, "marker_observed": end_class == "CAP", "marker_tick": 45000 if end_class == "CAP" else None},
         "memory": {"process_id": 1, "peak_private_bytes": 0, "limit_private_bytes": runner_private_limit(), "samples": []},
         "runtime": {"started_utc": None, "finished_utc": None, "exit_code": 0, "wall_seconds": 1.0, "stall_seconds": 180, "pid_scoped_cleanup": True},
         "artifacts": {k: {"path": None, "sha256": None, "missing_reason": "fixture"} for k in
@@ -67,6 +73,25 @@ def matched_pair(pair_index=0, treatment_wins=(True, True), **kw):
     r1 = receipt(pair_index=pair_index, pair_member=1, control_side="B", treatment_side="A",
                  winner_team=("A" if treatment_wins[1] else "B"), **kw)
     return [r0, r1]
+
+
+class ReceiptFixtureCarriesEndTick(unittest.TestCase):
+    """FIX-CAMPAIGN-NO-EARLY-END (Devin-Integrator): end_tick is now a required
+    receipt field on canonical. Fixtures must carry it so this test suite keeps
+    passing once ported onto a campaign_runner.validate_receipt that enforces it."""
+
+    def test_natural_fixture_gets_a_pre_cap_end_tick(self):
+        a, _ = matched_pair()
+        self.assertIsInstance(a["end_tick"], int)
+        self.assertLess(a["end_tick"], 45000)
+
+    def test_cap_fixture_defaults_end_tick_to_null(self):
+        r = receipt(pair_member=0, control_side="A", treatment_side="B", winner_team=None, end_class="CAP")
+        self.assertIsNone(r["end_tick"])
+
+    def test_end_tick_is_overridable(self):
+        r = receipt(pair_member=0, control_side="A", treatment_side="B", winner_team="A", end_tick=12345)
+        self.assertEqual(r["end_tick"], 12345)
 
 
 class LoadAndValidate(unittest.TestCase):
