@@ -66,3 +66,24 @@ episode and cannot claim fresh-wave proof. Full first-wave target coverage, comp
 save/restore, soft-restraint release/deadline dispatch, team response membership,
 combat stream/consumer and paired 3v3 remain separate pending implementation. This
 checkpoint supplies the conservative reset producer, not the complete guarantee.
+
+## Accepted-progress diagnostic receipt
+
+The default-off observation path now emits `M13_PROGRESS` only when the existing
+activity evaluator accepts a new, monotonically increasing offensive wave. The
+marker uses `Player.InternalName` (not the shared host client index), and records
+the tick, manager-local wave id, qualifying member count, accepted observation
+count, and the original eligibility start/deadline before clearing the interval.
+`dispatch_causality=UNKNOWN` is literal: this marker is neither order-resolution
+proof nor a launch/health approval. Rejected evidence, duplicate/older waves and
+registration alone produce no marker. `BotDebug` must be enabled to retain the
+marker in diagnostic logs. Wave ids remain manager-local and must be paired with
+manager identity before aggregation across personality instances; the diagnostic
+must not be used as a player-wide deduplication key.
+
+Regression coverage exercises the same production acceptance overload used by
+the manager: receipt provenance before reset, all hard evidence refusals, and
+repeated/older waves after a new interval begins. Release build and combined
+progress/activity/liveness tests: 40/40, zero skipped. No boot/game or full suite
+was run for this observational delta. All gameplay and stream gates listed above
+remain open; the absolute idle valve still needs downstream soft-hold bypass.

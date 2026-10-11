@@ -2949,7 +2949,12 @@ namespace OpenRA.Mods.CA.Traits
 								&& World.Map.CellContaining(target.CenterPosition) == enemy.Location))
 						members++;
 				}
-				AttackLiveness.ObserveOffensiveActivity(tick, wave, members, true, members > 0, true, true);
+				if (AttackLiveness.ObserveOffensiveActivity(tick, wave, members, true, members > 0, true, true,
+					out var progress))
+					AIUtils.BotDebug("M13_PROGRESS seat={0} manager={1} tick={2} wave={3} offensive_members={4} observed_count={5} prior_eligible_since={6} prior_deadline={7} dispatch_causality=UNKNOWN",
+						Player.InternalName, Array.IndexOf(Player.PlayerActor.TraitsImplementing<SquadManagerBotModuleCA>().ToArray(), this),
+						progress.Tick, progress.WaveId, progress.OffensiveMembers, progress.ObservedCount,
+						progress.PriorEligibleSinceTick, progress.PriorDeadlineTick);
 			}
 			foreach (var stale in livenessActivities.Keys.Where(a => !retained.Contains(a)).ToArray())
 				livenessActivities.Remove(stale);

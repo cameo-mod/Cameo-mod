@@ -3,6 +3,10 @@ using System;
 namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 {
 	public enum AttackLivenessPhaseCA { Ineligible, EligibleWaiting, DispatchDue, DispatchPending, ObservedOffensiveActivity, Unsupported }
+	// A receipt exists only when a fresh offensive wave actually resets the interval.
+	// It describes public activity facts, never acceptance of the original dispatch order.
+	public readonly record struct AttackLivenessProgressCA(int Tick, long WaveId, int OffensiveMembers,
+		int ObservedCount, int PriorEligibleSinceTick, long PriorDeadlineTick);
 	[Flags]
 	public enum AttackSoftRestraintCA
 	{
@@ -88,7 +92,14 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 		// the deadline. No queued intent is needed or certified by these public activity facts.
 		public bool ObserveOffensiveActivity(int tick, long waveId, int offensiveMembers,
 			bool ownedOffensiveWave, bool actualOffensiveActivity, bool legalTarget, bool evidenceComplete)
+			=> ObserveOffensiveActivity(tick, waveId, offensiveMembers, ownedOffensiveWave,
+				actualOffensiveActivity, legalTarget, evidenceComplete, out _);
+
+		public bool ObserveOffensiveActivity(int tick, long waveId, int offensiveMembers,
+			bool ownedOffensiveWave, bool actualOffensiveActivity, bool legalTarget, bool evidenceComplete,
+			out AttackLivenessProgressCA progress)
 		{
+			progress = default;
 			CheckTick(tick);
 			if (!evidenceComplete || !ownedOffensiveWave || !actualOffensiveActivity || !legalTarget
 				|| offensiveMembers <= 0 || waveId <= 0 || waveId <= lastObservedWave)
@@ -96,6 +107,8 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			LastObservedOffensiveTick = tick;
 			ObservedOffensiveCount++;
 			lastObservedWave = waveId;
+			progress = new(tick, waveId, offensiveMembers, ObservedOffensiveCount,
+				EligibleSinceTick, DeadlineTick);
 			ClearInterval();
 			Phase = AttackLivenessPhaseCA.ObservedOffensiveActivity;
 			return true;
