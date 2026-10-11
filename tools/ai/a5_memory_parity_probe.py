@@ -214,7 +214,7 @@ def run_cell(index: int) -> dict:
 				if deployment["check_tick"] is not None:
 					deployment["verified"] = deployment_guard.valid(deployment, ["BotA", "BotB"])
 					if not deployment["verified"]: stop_reason = "INVALID_NO_DEPLOY"
-			if not deployment["verified"] and deployment_guard.latest_world_tick(support / "Logs" / "debug.log") is not None and deployment_guard.latest_world_tick(support / "Logs" / "debug.log") > 100:
+			if not deployment["verified"] and deployment_guard.latest_world_tick(support / "Logs" / "debug.log") is not None and deployment_guard.latest_world_tick(support / "Logs" / "debug.log") >= 100:
 				stop_reason = "INVALID_NO_DEPLOY"
 			if stop_reason == "INVALID_NO_DEPLOY":
 				proc.terminate()
