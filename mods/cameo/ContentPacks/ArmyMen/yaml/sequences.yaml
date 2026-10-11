@@ -1,0 +1,130 @@
+army_grunt:
+	Inherits: ^RA2ArmedInfantry
+	Inherits@2: ^RA2MachineGunMuzzle
+	Defaults:
+		Filename: army_men_sprites|army_grunt.png
+	run:
+		Tick: 100
+		Start: 8
+		Length: 10
+		Facings: 8
+	walk:
+		Tick: 100
+		Start: 8
+		Length: 10
+		Facings: 8
+	stand:
+	idle1:
+		Start: 88
+	idle2:
+		Start: 103
+	prone-stand:
+		Frames: 122, 126, 132, 137, 143, 149, 155, 161
+		Facings: 8
+	prone-run:
+		Start: 118
+	die1:
+		Start: 166
+	die2:
+		Start: 181
+	shoot:
+		Start: 196
+	prone-shoot:
+		Start: 244
+	paradrop:
+		Start: 324
+	icon:
+		Filename: army_men_icons|army_grunt_icon.png
+
+
+
+army_tank:
+	idle:
+		Filename: army_men_sprites|army_tank.png
+		Facings: 64
+		Start: 64
+	turret:
+		Filename: army_men_sprites|army_tank.png
+		Facings: 64
+	icon:
+		Filename: army_men_icons|army_tank_icon.png
+	muzzle:
+		Filename: shared_sprites|gunfire2.shp
+		Length: 5
+
+army_halftrack:
+	idle:
+		Filename: army_men_sprites|army_halftrack.png
+		Facings: 64
+	turret:
+		Filename: army_men_sprites|army_halftrack.png
+		Facings: 64
+		Start: 64
+	icon:
+		Filename: army_men_icons|army_halftrack_icon.png
+	muzzle:
+		Filename: minigun.shp
+		Length: 6
+		Facings: 8
+
+army_harv:
+	Defaults:
+		Filename: army_men_sprites|army_harv.png
+	idle:
+		Facings: 64
+		Start: 64
+	turret:
+		Facings: 64
+	dock:
+		Facings: 64
+		Start: 64
+	dock-loop:
+		Facings: 64
+		Start: 64
+	icon:
+		Filename: army_men_icons|army_harv_icon.png
+	muzzle:
+		Filename: shared_sprites|gunfire2.shp
+		Length: 5
+	harvesting:
+		Filename: shared_sprites|ra2_oregath.shp
+		Length: 15
+		Facings: 8
+army_dozer:
+	idle:
+		Filename: army_men_sprites|army_dozer.png
+		Facings: 64
+	icon:
+		Filename: army_men_icons|army_dozer_icon.png
+army_medic:
+	idle:
+		Filename: army_men_sprites|army_medic.png
+		Facings: 64
+	icon:
+		Filename: army_men_icons|army_medic_icon.png
+army_minelayer:
+	idle:
+		Filename: army_men_sprites|army_minelayer.png
+		Facings: 64
+	icon:
+		Filename: army_men_icons|army_minelayer_icon.png
+army_helicopter:
+	Defaults:
+		Filename: army_men_sprites|army_helicopter.png
+	idle:
+		Facings: 64
+		Start: 64
+	rotor:
+		Filename: army_men_sprites|army_helicopter.png
+		Length: 64
+		Tick: 128
+	slow-rotor:
+		Filename: army_men_sprites|army_helicopter.png
+		Length: 64
+		Tick: 64
+	muzzle:
+		Filename: minigun.shp
+		Length: 6
+		Facings: 8
+	icon:
+		Filename: army_men_icons|army_helicopter_icon.png

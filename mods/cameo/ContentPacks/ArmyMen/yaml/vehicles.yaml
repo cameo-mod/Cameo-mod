@@ -1,0 +1,310 @@
+army_grunt:
+	Inherits: ^Soldier
+	Inherits@Template: ^SpecialForcesInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Valued:
+		Cost: 100
+	Tooltip:
+		Name: Grunt
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~army_barracks
+		Queue: Infantry, RAInfantry
+		Description: template_scout_infantry.description
+	Mobile:
+		Speed: 50
+	Health:
+		HP: 30000
+	ChangesHealth@SelfHealing:
+		Step: 30
+	Armament@PRIMARY:
+		Weapon: armymen_grunt_carbine
+		LocalOffset: 500,0,400
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: armymen_grunt_carbine
+	AttackFrontal:
+		FacingTolerance: 0
+	Voiced:
+		VoiceSet: Armymen_Grunt
+	RenderSprites:
+		PlayerPalette: player_rgba
+#Dozer now is a MCV
+army_dozer:
+	Inherits: ^RAMCV
+	Tooltip:
+		Name: Army Men Construction Dozer
+	Buildable:
+		Prerequisites: ~armymen_weap
+		Description: Deploys into a Construction Yard.\n  Unarmed
+	Transforms:
+		IntoActor: ra1_allies_constructionyard
+	Voiced:
+		VoiceSet: Armymen_Bulldozer
+	ChangesHealth@SelfHealing:
+		Step: 101
+	Repairable:
+		HpPerStep: 12650
+	Health:
+		HP: 253000
+	Mobile:
+		Speed: 70
+		TurnSpeed: 14
+	Valued:
+		Cost: 4650
+	RenderSprites:
+		Image: army_dozer
+		PlayerPalette: player_rgba
+
+army_tank:
+	Inherits: ^Tank
+	Inherits@Template: ^MainBattleTankTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		Prerequisites: ~armymen_weap
+		BuildPaletteOrder: 110
+		Description: template_mbt.description
+	Valued:
+		Cost: 1280
+	Tooltip:
+		Name: Plastic Tank
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 127000
+	Repairable:
+		HpPerStep: 6350
+	ChangesHealth@SelfHealing:
+		Step: 51
+	Mobile:
+		Speed: 81
+		TurnSpeed: 20
+	Turreted:
+		TurnSpeed: 20
+	Armament:
+		Weapon: armymen_tank_120mmhv
+		Recoil: 64
+		RecoilRecovery: 38
+		LocalOffset: 720,0,80
+		MuzzleSequence: muzzle
+	AttackTurreted:
+	WithMuzzleOverlay:
+	WithMuzzleSmoke:
+		Weapons: ra1_allies_alliedmediumtank_cannon
+	WithSpriteTurret:
+	FireWarheadsOnDeath:
+		Weapon: UnitExplode
+	#SpawnActorOnDeath:
+	#	Actor: 2TNK.Husk
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1280, 1280
+	Voiced:
+		VoiceSet: Armymen_Tank
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+army_minelayer:
+	Inherits: ^Tank
+	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@mines: ^DeployToClearMines
+	Inherits@rearm: ^RearmAtServiceDepot
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		BuildPaletteOrder: 310
+		Prerequisites: ~armymen_weap
+		Description: actor_mnly.description
+	Valued:
+		Cost: 800
+	Tooltip:
+		Name: Minelayer Jeep
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Selectable:
+		Priority: 5
+	Health:
+		HP: 30000
+	Armor:
+		Type: Medium
+	Mobile:
+		TurnSpeed: 26
+		Speed: 128
+	RevealsShroud:
+		Range: 5c0
+	Minelayer:
+		Mine: MINV
+		TileUnknownName: build-invalid
+	MineImmune:
+	AmmoPool:
+		Ammo: 10
+		RearmSound: minelay1.aud
+	DetectCloaked:
+		Range: 5c0
+		DetectionTypes: Mine
+	RenderDetectionCircle:
+	FireWarheadsOnDeath:
+		Weapon: ATMine
+	RenderSprites:
+		PlayerPalette: player_rgba
+	Voiced:
+		VoiceSet: Armymen_Minelayer
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+army_medic:
+	Inherits: ^Vehicle
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@pip: ^WithSpecialCargoPip
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@Heal: ^PrioritizeHeal
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		BuildPaletteOrder: 30
+		Prerequisites: ~armymen_weap
+		Description: actor_jeep.description
+	Armor:
+		Type: Light
+	Valued:
+		Cost: 600
+	Tooltip:
+		Name: Medic Jeep
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 40000
+	Repairable:
+		HpPerStep: 2000
+	ChangesHealth@SelfHealing:
+		Step: 16
+	Mobile:
+		Speed: 157
+		TurnSpeed: 35
+	Turreted:
+		TurnSpeed: 35
+		Offset: 0,0,128
+	Armament:
+		Weapon: Heal
+		#Cursor: heal
+		#OutsideRangeCursor: heal
+		TargetRelationships: Ally
+		ForceTargetRelationships: None
+	RenderRangeCircleCA:
+		Armaments: primary
+		RangeCircleType: heal
+	AttackTurreted:
+	FireWarheadsOnDeath:
+		Weapon: UnitExplodeSmall
+	Voiced:
+		VoiceSet: Armymen_Medic
+	RenderSprites:
+		PlayerPalette: player_rgba
+army_harv:
+	Inherits: ^Tank
+	Inherits@Template: ^HarvesterTemplate
+	Inherits@selection: ^SelectableEconomicUnit
+	Inherits@harv: ^Harvester
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Dump Truck
+	Buildable:
+		Prerequisites: ~armymen_weap
+		Queue: Vehicle, RAVehicle
+		Description: template_harvester.description
+	Mobile:
+		Speed: 115
+		TurnSpeed: 23
+		Voice: Move
+	Health:
+		HP: 85000
+	Repairable:
+		HpPerStep: 4250
+	ChangesHealth@SelfHealing:
+		Step: 34
+	Harvester:
+		# The engine field is HarvestVoice (Harvester.cs); a bare `Voice:` here was silently
+		# dropped by FieldLoader, so the harvest line never played.
+		HarvestVoice: Harvest
+		BaleLoadDelay: 3
+		BaleUnloadDelay: 2
+		EmptyCondition: no-tiberium
+	StoresResources:
+		Capacity: 32
+	Voiced:
+		VoiceSet: Armymen_Dumptruck
+	WithHarvestAnimation:
+	RenderSprites:
+		PlayerPalette: player_rgba
+	DockClientManager:
+	WithHarvestOverlay@harvesting:
+		Sequence: harvesting
+		Palette: ra2effect
+army_halftrack:
+	Inherits: ^Vehicle
+	Inherits@Template: ^AntiAirVehicleTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^TurretEMP
+	Inherits@cargo: ^CargoVehicle
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@botmicro: ^BotAutoDeployTransport
+	BotRoles:
+		Roles: guerrilla
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		BuildPaletteOrder: 60
+		Prerequisites: ~armymen_weap
+		Description: actor_ftrk.description
+	Valued:
+		Cost: 980
+	Tooltip:
+		Name: Half Track
+	Armor:
+		Type: Heavy
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+		OverrideActor: ra1_soviets_flaktruck
+	Health:
+		HP: 30000
+	Repairable:
+		HpPerStep: 1500
+	ChangesHealth@SelfHealing:
+		Step: 12
+	Mobile:
+		Speed: 120
+		TurnSpeed: 24
+	Turreted:
+		TurnSpeed: 24
+		Offset: -248,0,100
+	Armament@AA:
+		Weapon: armymen_halftrack_cannon_AA
+		Recoil: 43
+		LocalOffset: 512,0,192
+		MuzzleSequence: muzzle
+	Armament@AG:
+		Weapon: armymen_halftrack_cannon
+		Recoil: 43
+		LocalOffset: 512,0,192
+		MuzzleSequence: muzzle
+	AttackTurreted:
+	WithMuzzleOverlay:
+	WithSpriteTurret:
+	Cargo:
+		Types: Infantry, Hacker, Fremen
+		MaxWeight: 4
+		InitialUnits: army_grunt, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower
+	SelectionDecorations:
+	Selectable:
+		Class: ra1_soviets_flaktruck
+		DecorationBounds: 1280, 1280
+	Voiced:
+		VoiceSet: Armymen_Half_Track
+	FireWarheadsOnDeath:
+		Weapon: UnitExplodeSmall
+	RenderSprites:
+		PlayerPalette: player_rgba

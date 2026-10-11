@@ -99,6 +99,9 @@ FileSystem: CameoRemasterFileSystem
 		~cameo|ContentPacks/Outpost2/Shared/files/icons: op2_shared_icons
 		~cameo|ContentPacks/Outpost2/Shared/files/sounds: op2_shared_sounds
 		~cameo|ContentPacks/Outpost2/Shared/files/sprites: op2_shared_sprites
+		~cameo|ContentPacks/ArmyMen/files/icons: army_men_icons
+		~cameo|ContentPacks/ArmyMen/files/sounds: army_men_sounds
+		~cameo|ContentPacks/ArmyMen/files/sprites: army_men_sprites
 		cameo|bits: bits
 		~cameo|bits/temp
 		~cameo|bits/ratemperat
@@ -245,6 +248,7 @@ Include: ContentPacks/Warcraft2/content.yaml
 Include: ContentPacks/Warcraft2/Orcs/content.yaml
 Include: ContentPacks/Warcraft2/Humans/content.yaml
 Include: ContentPacks/Outpost2/content.yaml
+Include: ContentPacks/ArmyMen/content.yaml
 Rules:
 	cameo|rules/misc.yaml
 	cameo|rules/player.yaml
