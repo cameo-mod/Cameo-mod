@@ -378,6 +378,10 @@ valid campaign game. Running the REAL launch path once per map, headless, capped
 8. **A stale copied `OpenRA.Mods.Cameo.dll`** cost one A5 attempt. `run_ai_match_batch.py` now refuses to launch when
    any mod project's `.cs` is newer than its `engine/bin` dll (`--allow-stale-build` overrides).
 
+**Also:** never commit on the branch a batch is running from. `mod_commit` is part of the arm fingerprint, so the
+next match aborts the batch (the 2026-10-10 Red Spice pair lost its second game this way and was re-run). That is
+the harness working; schedule commits between batches.
+
 **Lesson.** An offline suite proves the parts you thought of. Before declaring launch tooling ready, run its real path
 once end to end at a tiny cap on every map it will use, and compare what the ENGINE did (records keyed by spawn
 coordinate) with what the plan said. Static proofs (generated `map.yaml`, geometry) inherit the planner's assumptions.

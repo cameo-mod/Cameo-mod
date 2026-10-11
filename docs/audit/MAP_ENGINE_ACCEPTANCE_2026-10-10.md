@@ -34,8 +34,34 @@ seats `lost` at the cap (the mutual-loss form `CENSORED_CAP` expects).
 `1v1_nuclear_gdi` pair (partial sweep): game 0 put control at 11,45 and treatment at 90,24; game 1 put treatment at
 11,45 and control at 90,24. Pair proof OK; peak RSS 4.9–5.0 GB; about 115 s per cell.
 
-**Full sweep:** RESULTS_TO_FOLLOW. The receipt goes to `docs/audit/map_engine_acceptance_2026-10-10.json`. 1v1–3v3
-setups run first. The two 8-seat maps (`great_sahara_2`, `ice_cold`) run when the container has RAM for them.
+**Full sweep: 32 of 32 cells and 16 of 16 pairs ACCEPTED, all eight maps.** That is all 16 setups, both games,
+seed 1337. Receipt: `docs/audit/map_engine_acceptance_2026-10-10.json`.
+
+| Map | Setups (team size) | Cells | Pairs (arm swap + faction mirror) |
+|---|---|---|---|
+| nuclear_winter | 1v1 gdi, 1v1 nod | 4/4 | 2/2 |
+| satans_clutch | 1v1 allies, 1v1 soviets | 4/4 | 2/2 |
+| red_spice | 2v2 ×3 | 6/6 | 3/3 |
+| terra_cotta | 2v2 ×3 | 6/6 | 3/3 |
+| back_to_basics | 3v3 ×2 | 4/4 | 2/2 |
+| winters_end_rich | 3v3 ×2 | 4/4 | 2/2 |
+| great_sahara_2 | 4v4 | 2/2 | 1/1 |
+| ice_cold | 4v4 | 2/2 | 1/1 |
+
+Every cell (144 seats in total) met all of the following:
+- both arms' bots activated;
+- no exception and no Lua error;
+- every seat `lost` at the cap (mutual loss);
+- seed pinned;
+- each seat on its planned spawn with its planned bot type and faction;
+- allies and opponents exactly the planned sides.
+
+Headless peak RSS was 4.76–5.24 GB (median 4.87), almost flat from 2 to 8 seats, because the textures are gone and
+what remains is load-phase. Each cell took 102–130 s.
+
+Provenance note: the receipt's `manifest_sha256` (`315adb74…`) is an earlier regeneration of the candidate. It differs from
+the committed `126d57ec…` only in `tool_sha256`. The tools and `OpenRA.Platforms.Null.dll` the sweep ran are
+byte-identical to the committed ones (checked with `cmp`).
 
 **On the Windows host:** re-run the tool with all 16 setups (the default) after `make.cmd all`; it needs
 `engine/bin/OpenRA.Platforms.Null.dll`. Keep the receipt with the campaign evidence. The DevOps lead and the

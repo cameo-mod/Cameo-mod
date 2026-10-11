@@ -30,7 +30,7 @@ and sync hashes). **The memory policy constants are unchanged:** first measure h
 (one `run_ai_match_batch.py --render headless` 1v1, sample `Get-Process OpenRA`), then the lead decides whether
 `PRIVATE_LIMIT` / `FREE_RAM_FLOOR` can drop to admit two cells.
 
-**Runtime acceptance (`tools/ai/map_engine_acceptance.py`, headless, cap 1,500 ticks, seed 1337):** fixed path proven on `1v1_nuclear_gdi` (both games: arms active, mutual loss at the cap, control 11,45 → 90,24 across the pair). The full sweep is running; see `docs/audit/MAP_ENGINE_ACCEPTANCE_2026-10-10.md`.
+**Runtime acceptance (`tools/ai/map_engine_acceptance.py`, headless, cap 1,500 ticks, seed 1337):** **32 of 32 cells and 16 of 16 pairs ACCEPTED on all eight maps**: arms active, 144 of 144 seats `lost` at the cap, every seat on its planned spawn, and each pair swaps the arms between spawn sets. Headless peak 4.76–5.24 GB, flat from 2 to 8 seats. Receipt `docs/audit/map_engine_acceptance_2026-10-10.json`, summary `docs/audit/MAP_ENGINE_ACCEPTANCE_2026-10-10.md` (Linux host; re-run on this host before sign-off).
 
 **Candidate manifest regenerated** (text pins only; design fields and Windows binary pins untouched):
 `docs/audit/ab_pilot_manifest_candidate.json` sha256 `126d57ec8219fbdc9a3aef7c20d2562953858ff5cd01706167867c50a351c0f7`. The pilot and runner dry-runs are

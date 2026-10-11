@@ -704,20 +704,35 @@ first.
 
 The arms are the pilot's: `BU_harvester_logistics` on the treatment only (dual-arm yaml from
 `ab_campaign_pilot.materialize_dual_arm_ai`). They were played with `run_ai_match_batch.py` (mirror factions,
-`--swap-bots`, so each arm plays each spawn), not through the campaign runner. Both arms activated: 0 `Invalid bot type`.
+`--swap-bots`, so each arm plays each spawn set once), not through the campaign runner. Both arms activated in every
+game (0 `Invalid bot type`). The two 1v1 pairs were rendered and the rest headless. The first Red Spice pair was voided by
+the harness's own fingerprint check, because a commit landed mid-batch (`mod_commit` drift; correct fail-closed
+behaviour), so it was re-run in full.
 
-| Pair | Result | Economy (earned per tick, treatment vs control from the same spawn) | Note |
-|---|---|---|---|
-| 1v1 A Nuclear Winter, `td_gdi`, rendered | 1–1; spawn 90,24 won both games | 13.37 vs 11.30 (90,24); 8.16 vs 8.85 (11,45) | the spawn dominates |
-| 1v1 Satan's Clutch, `ra1_soviets`, rendered | **control 2–0, from both spawns** | 7.92 vs 15.70 (49,20); 8.76 vs 12.40 (50,79) | treatment earned 29 % and 50 % less |
-| 2v2 Red Spice, 3v3 Winter's End (Rich), and `hard` vs `classic` references | running headless | — | results follow in this section |
+| Pair (mirror factions) | Games | Treatment wins | Treatment / control earned at tick 9,000 | Reading |
+|---|---:|---:|---|---|
+| 1v1 A Nuclear Winter, `td_gdi` | 2 | 1 | 0.86, 1.51 | spawn 90,24 won both games |
+| 1v1 Satan's Clutch, `ra1_soviets` | 2 | 0 | 0.69, 0.92 | control won from both spawns |
+| 2v2 Red Spice, `td_nod` | 2 | 0 | 0.86, 0.93 | control won from both sides; the losing treatment pairs all ended `turtle` |
+| 3v3 Winter's End (Rich), `ra1_allies` | 2 | 1 | 0.86, 0.82 | the bottom-right team won both games |
+| **pooled** | **8** | **2 (25 %)** | mean 0.93 at ticks 3,000 / 6,000 / 9,000 alike; 6 of 8 below 1.0 by 9,000 | — |
 
-Two pairs prove nothing about the switch (four games; personalities differ between games, and the 95 % interval spans
-almost everything). The Satan's Clutch economy gap is the one signal to watch, and it points against the switch on
-Red Alert ore. The pilot exists to measure exactly that over 64 games. Logging observation, not investigated: in the
-Satan's Clutch records the losing treatment seat ends with an empty `personality`, and the per-seat
-`personality_timeline` entries look shifted between seats. Check `AiMatchLogWriter` before the analyzer relies on
-these fields.
+Two maps were decided by spawn: the same side won both games whichever arm held it. On the other two maps, control won all four games
+from both sides. Early income, which comes before fights decide anything, is about 7 % lower for the treatment, but
+the per-game ratios spread from 0.69 to 1.51. **Verdict: no evidence for `BU_harvester_logistics`, and a weak
+signal against it. Eight games cannot decide it.** The 64-game pilot was built for this question. The early-tick
+income ratio is the metric to pre-register, because final income follows the winner.
+
+**`hard` vs `classic` reference (master as shipped, headless):** Terra Cotta 2v2 `td_gdi`: `hard` won 3 of 5 (the one
+earlier rendered game plus 4 side-swapped repeats). It went 2–0 from the bottom-right and 1–2 from the top-left. Both
+losses were fast (13,430 and 16,835 ticks) and in each the whole `hard` team ended `turtle`. Winter's End 3v3
+`td_gdi`: `hard` won from the top-left in 55,418 ticks. The 2026-10-09 pre-arm reference won the same Terra Cotta seats once. Master's
+`hard` is still ahead of `classic`, but the fast team-wide turtle losses are worth a look next to M14
+(`EmergencyKeepsPersonality` is on, so these are probably ordinary emergencies; check the personality timelines).
+
+Logging observation, not investigated: in the Satan's Clutch records the losing treatment seat ends with an empty
+`personality`, and the per-seat `personality_timeline` entries look shifted between seats. Check `AiMatchLogWriter`
+before the analyzer relies on these fields.
 
 # Part IV — The improvement plan
 

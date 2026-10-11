@@ -25,6 +25,11 @@
   aggregate, league.
 - Pre-existing and left alone: `test_replay_health` depth-limit case depends on the Python version (it reports UNKNOWN
   correctly either way).
+- **Runs (follow-up commit):**
+  - map acceptance: 32/32 cells, 16/16 pairs, all 8 maps, headless peak ≤ 5.24 GB;
+  - BU A/B: 8 games, treatment 2 wins, early income ×0.93;
+  - `hard` vs `classic`: Terra Cotta 3/5, Winter's End 1/1;
+  - one A/B batch voided by `mod_commit` fingerprint drift (commit landed mid-batch) and re-run.
 - **Docs:** LESSONS_LEARNED (2 entries), STATUS resume, HANDOFF, master doc Part IIIc, TASK_INDEX A/B row,
   `MAP_ENGINE_ACCEPTANCE_2026-10-10.md`, correction note in `SPAWN_SYMMETRY_2026-10-11.md`, M13 counts.
 

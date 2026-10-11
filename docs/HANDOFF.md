@@ -29,8 +29,11 @@ blockers, RR3 memory, RR4 A/B results).
 - **New tool:** `tools/ai/map_engine_acceptance.py`, a capped real-engine seat and pair-swap proof per map.
 - **Candidate manifest:** text pins regenerated (`126d57ec…`). Pilot and runner dry-runs are green on Linux.
 
-**Continue with:** (1) the acceptance sweep and A/B result write-up (RR4, `MAP_ENGINE_ACCEPTANCE_2026-10-10.md`; follow-up
-commit on this branch); (2) on the Windows host, STATUS steps 1–6 (build, tests, acceptance, a headless memory
+**Results:** map acceptance is 32/32 cells and 16/16 pairs on all 8 pilot maps (`docs/audit/MAP_ENGINE_ACCEPTANCE_2026-10-10.md`).
+A/B group (BU switch, 8 games): treatment won 2; 2 maps were spawn-decided; early income about 7 % lower (master doc RR4).
+No evidence for the switch; the 64-game pilot decides. `hard` vs `classic` on master: Terra Cotta 3 of 5, Winter's End 1 of 1.
+
+**Continue with:** (1) on the Windows host, STATUS steps 1–6 (build, tests, acceptance, a headless memory
 measurement, then the lead's memory-policy call, DevOps manifest sign-off, maintainer `execution_approved`); (3) PR
 to master when the maintainer asks.
 
