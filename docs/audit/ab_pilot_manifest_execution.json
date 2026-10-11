@@ -29,7 +29,8 @@
     "win_noninferiority_delta": 0.0,
     "min_earned_spent_improvement": 0.0,
     "min_army_efficiency_improvement": 0.0,
-    "min_kill_exchange_improvement": 0.0
+    "min_kill_exchange_improvement": 0.0,
+    "min_setup_veto_sample": 4
   },
   "slot_policy": {
     "max_parallel_small_games": 2,
@@ -54,7 +55,7 @@
   "treatment_ai_payload_sha256": "e25d7ecf8b5044e05c2c3afaad451d1078483f1d678b1b440213f71d5e2cccb5",
   "tool_hash_algorithm": "sha256-lf-normalized-v1",
   "tool_sha256": {
-    "driver_analyzer": "383c65633a551478a7c01114b9d66fc6d693dd96a2b5fd0c71cdf32884e3c29d",
+    "driver_analyzer": "1caa7e7fc5e2cfdeb4fabf31e7ab9d51eabf578429ef9d7db659defe7e336013",
     "campaign_runner": "d1225881c3da6411da2948bea9e3667c6eceb4c6a382842d7cd64546870d7d31",
     "batch_runner": "03247f59f2744ea001c9d35a5a03c16bef077ac450d24ef05c08f167d16fcad5",
     "switch_applier": "9e9f678871cc2d8adeca0e7b5c2c28a30a041252f8f630005593bc7f241a6bdd"
@@ -266,7 +267,7 @@
     }
   ],
   "execution_approved": false,
-  "notes": "REGENERATED 2026-10-11 on codex/ab-campaign-port-fixes@bc491da66: source pin e49acf41a1b3699f01d44e4def06ed4bf83af038, engine pin ad061ebf79029da4dcd3a841a9b2540e39cbf968 (sol BOUNDED APPROVE: polygon+capsule int64 sqrt fix + unknown-bot-name fallback). a5_parity_receipt_* intentionally null: the prior A5 receipt documents the superseded 04f9a38bae/964cdb63 pins and cannot satisfy the execution gate - a fresh A5 run on the new pins is pending a HEAVY_RUN_WINDOW reservation. execution_approved stays false until the maintainer/lead flips this byte at sign-off.",
+  "notes": "REGENERATED 2026-10-11 on codex/ab-campaign-port-fixes: source pin e49acf41a1b3699f01d44e4def06ed4bf83af038, engine pin ad061ebf79029da4dcd3a841a9b2540e39cbf968 (sol BOUNDED APPROVE: polygon+capsule int64 sqrt fix + unknown-bot-name fallback). acceptance_thresholds carries min_setup_veto_sample=4 per the analyzer spec (claude/ab-campaign-analyzer-spec@a92727528, merged). a5_parity_receipt_* intentionally null: the prior A5 receipt documents superseded 04f9a38bae/964cdb63 pins and cannot satisfy the execution gate - a fresh A5 run on the new pins is pending a HEAVY_RUN_WINDOW reservation. execution_approved stays false until the maintainer/lead flips this byte at sign-off.",
   "a5_parity_receipt_path": null,
   "a5_parity_receipt_sha256": null
 }

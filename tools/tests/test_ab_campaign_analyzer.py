@@ -35,11 +35,28 @@ def receipt(*, switch="BU_harvester_logistics", setup_id="1v1_nuclear_gdi", pair
         seat(f"Multi{treatment_side}", treatment_side, "treatment",
              outcome="won" if winner_team == treatment_side else "lost", **treatment_seat_kw),
     ]
+    homes = [s["home"] for s in seats]
+    deployed = end_class != "INCOMPLETE"
     return {
         "schema_version": 1, "campaign_id": "fixture", "manifest_sha256": SHA64, "baseline_commit": SHA40,
         "engine_sha256": SHA64, "switch": switch, "setup_id": setup_id,
+        # canonical producer fields required by campaign_runner.validate_receipt:
+        "cell_id": f"{setup_id}|1337|{pair_member}", "game_uid": f"uid-{pair_index}-{pair_member}" if deployed else None,
+        "status": {"NATURAL": "NATURAL_END", "CAP": "CENSORED_CAP", "INCOMPLETE": "INCOMPLETE"}[end_class],
+        "seats": seats, "seat_proof_source": "generated_map.yaml", "map_yaml_sha256": SHA64,
+        "control_side": control_side, "treatment_side": treatment_side,
+        "arm_bot_types": {"control": "hard_control", "treatment": "hard_treatment"},
+        "cap_marker": end_class == "CAP", "cap_tick": 45000 if end_class == "CAP" else None,
+        "support_complete": deployed, "setup": setup_id, "map_sha256": SHA64,
+        "pair": pair_index, "game_in_pair": pair_member, "duration_ticks": 30000,
+        "peak_memory_bytes": 0,
+        "deployment": {"verified": deployed, "check_tick": 100,
+                       "reported_seat_count": len(homes) if deployed else 0,
+                       "expected_seat_count": len(homes),
+                       "seats": ({h: {"tick": 50, "type": "td_gdi_constructionyard"} for h in homes} if deployed else {}),
+                       "missing": []},
         "map": {"name": "m", "path": "p", "sha256": SHA64, "generated_map_yaml_sha256": SHA64, "required_seats": 2},
-        "pair_id": f"{setup_id}:{pair_index}", "pair_member": pair_member, "seed": 1337,
+        "pair_id": f"{setup_id}:1337:{pair_index}", "pair_member": pair_member, "seed": 1337,
         "seed_proof": {"env_value": "1337", "server_log_pin_line": "x", "server_log_sha256": SHA64},
         "teams": {
             control_side: {"arm": "control", "bot_type": "hard_control", "seat_ids": [f"Multi{control_side}"]},
@@ -222,7 +239,8 @@ class HarmVeto(unittest.TestCase):
         silently default — otherwise the manifest SHA doesn't bind the veto threshold
         actually used."""
         games = matched_pair()
-        manifest_missing_field = {"acceptance_thresholds": dict(pilot.DEFAULT_THRESHOLDS)}
+        manifest_missing_field = {"acceptance_thresholds": {
+            k: v for k, v in pilot.DEFAULT_THRESHOLDS.items() if k != "min_setup_veto_sample"}}
         with self.assertRaises(ValueError):
             az.summarize(games, manifest_missing_field)
         manifest_wrong_type = {"acceptance_thresholds": {**pilot.DEFAULT_THRESHOLDS, "min_setup_veto_sample": "4"}}
