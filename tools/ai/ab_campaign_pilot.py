@@ -647,6 +647,16 @@ def normalize_campaign_receipts(manifest, manifest_sha, receipts, rows, artifact
   map_path=load_artifact(receipt["artifacts"]["map_yaml"],f"{cell} map.yaml")
   require(hashlib.sha256(map_path.read_bytes()).hexdigest()==map_info["generated_map_yaml_sha256"],"map.yaml artifact differs from receipt map hash")
   validate_receipt_map_seats(job,map_path,receipt["resolved_seats"])
+  # The engine's real match telemetry keys each seat by its "X,Y" HomeLocation
+  # coordinate (AiMatchLogWriter.cs), never by the receipt's "MultiN" seat label.
+  # Join through the proven generated map.yaml to recover the seat label.
+  blocks=generated_map_player_references(map_path.read_text(encoding="utf-8"))
+  home_by_location={}
+  for ref,info in blocks.items():
+   loc=info.get("HomeLocation")
+   if loc is None: continue
+   require(loc not in home_by_location,f"{cell} generated map.yaml has duplicate HomeLocation")
+   home_by_location[loc]=ref
   log_path=load_artifact(receipt["artifacts"]["server_log"],f"{cell} server.log",allow_missing=receipt["end_class"]=="INCOMPLETE")
   seed_line=receipt["seed_proof"]["server_log_pin_line"]
   if receipt["end_class"] in ("NATURAL","CAP"):
@@ -660,11 +670,17 @@ def normalize_campaign_receipts(manifest, manifest_sha, receipts, rows, artifact
   require(len(uids)<=1 and all(isinstance(uid,str) and uid for uid in uids),f"{cell} match artifact must contain exactly one game_uid")
   if receipt["end_class"] in ("NATURAL","CAP"):
    require(match_path is not None and len(match_rows)==job["required_seats"] and len(uids)==1,f"{cell} complete end lacks one full per-game match artifact")
+  translated_rows=[]
+  for row in match_rows:
+   player=row.get("player") or {};coord=player.get("home")
+   seat_ref=home_by_location.get(coord) if isinstance(coord,str) else None
+   require(seat_ref is not None,f"{cell} match row home coordinate does not match any proven generated-map seat")
+   translated_rows.append({**row,"player":{**player,"home":seat_ref}})
   if receipt["end_class"]=="NATURAL":
    records_by_home={}
-   for row in match_rows:
-    player=row.get("player") or {};home=player.get("home")
-    require(isinstance(home,str) and home not in records_by_home,f"{cell} natural match rows have missing or duplicate homes")
+   for row in translated_rows:
+    player=row["player"];home=player["home"]
+    require(home not in records_by_home,f"{cell} natural match rows have duplicate resolved homes")
     records_by_home[home]=player
    require(set(records_by_home)=={seat["home"] for seat in receipt["resolved_seats"]},f"{cell} natural match homes differ from receipt seats")
    for seat in receipt["resolved_seats"]:
@@ -676,7 +692,7 @@ def normalize_campaign_receipts(manifest, manifest_sha, receipts, rows, artifact
   if uid is not None:
    require(uid not in uid_receipts,"duplicate game_uid across receipts")
    uid_receipts[uid]=receipt
-   artifact_rows_all.extend(match_rows)
+   artifact_rows_all.extend(translated_rows)
    if rows is not None:
     require(uid in grouped,"per-game matches artifact UID absent from aggregate match input")
     canonical=lambda values: sorted(json.dumps(x,sort_keys=True,separators=(",",":")) for x in values)
@@ -702,7 +718,10 @@ def normalize_campaign_receipts(manifest, manifest_sha, receipts, rows, artifact
    status=reason.upper()
   legacy={"cell_id":cell,"game_uid":uid,"manifest_sha256":manifest_sha,"switch":job["switch"],"setup":job["setup"],"map":job["map"],"map_sha256":job["map_sha256"],"seed":job["seed"],"pair":job["pair"],"game_in_pair":job["game_in_pair"],"control_side":control_side,"treatment_side":treatment_side,"arm_bot_types":arm_types,"status":status,"end_reason":reason,"cap_marker":receipt["cap"]["marker_observed"],"cap_tick":receipt["cap"]["marker_tick"],"support_complete":support_path is not None,"seat_proof_source":"generated_map.yaml","map_yaml_sha256":map_info["generated_map_yaml_sha256"],"seats":seats,"peak_memory_bytes":receipt["memory"]["peak_private_bytes"],"duration_ticks":receipt["world_tick"]}
   normalized.append(legacy)
- return normalized, (rows if rows is not None else artifact_rows_all)
+ # The optional aggregate (rows) is only a byte-for-byte integrity cross-check against
+ # the hash-verified per-game artifacts above; the translated per-game rows are always
+ # the authoritative analyzer input since only they carry MultiN-resolved homes.
+ return normalized, artifact_rows_all
 
 def main(argv=None):
  p=argparse.ArgumentParser(description=__doc__); s=p.add_subparsers(dest="cmd",required=True)

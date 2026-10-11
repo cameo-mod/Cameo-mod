@@ -300,7 +300,9 @@ def build_full_receipt(job,m,manifest_sha,artifact_root,*,end_class,winner_side=
    # when the receipt driver censors the game at the tick cap; only the receipt-level
    # resolved_seats/winner_team stay unknown/null for CAP.
    match_outcome="won" if seat["side"]==winner_side else "lost"
-   match_rows.append({"game_uid":uid,"player":{"home":seat["home"],"bot_type":seat["bot_type"],
+   # Real telemetry (AiMatchLogWriter.cs) keys "home" by the "X,Y" HomeLocation
+   # coordinate, never the MultiN seat label; the adapter must join through the map.
+   match_rows.append({"game_uid":uid,"player":{"home":seat["home_location"],"bot_type":seat["bot_type"],
     "faction":seat["faction"],"outcome":match_outcome},
     "stats_timeline":[{"tick":5000,"earned":10,"spent":4,"banked":6},{"tick":45000,"earned":90,"spent":40,"banked":50}]})
   lines="\n".join(json.dumps(r,sort_keys=True) for r in match_rows)+"\n"
@@ -414,17 +416,47 @@ class ReceiptAdapterTests(unittest.TestCase):
    result=pilot.analyze(m,manifest_sha,normalized,rows)
    self.assertEqual("INCOMPLETE_UNKNOWN",next(g for g in result["games"] if g["cell_id"]==job["cell_id"])["verdict"])
 
- def test_seat_join_by_home_location_rejects_a_match_row_with_the_wrong_home(self):
+ def _rewrite_matches(self,root,receipt,rows):
+  lines="\n".join(json.dumps(r,sort_keys=True) for r in rows)+"\n"
+  data=lines.encode();path=root/receipt["artifacts"]["matches_jsonl"]["path"];path.write_bytes(data)
+  receipt["artifacts"]["matches_jsonl"]["sha256"]=hashlib.sha256(data).hexdigest()
+
+ def test_seat_join_by_home_location_positive_shape_matches_real_engine_coordinates(self):
+  # AiMatchLogWriter.cs writes player.home as "X,Y", never "MultiN"; confirm the
+  # fixture (and therefore the adapter it exercises) actually uses that real shape.
   m=manifest();raw=json.dumps(m).encode();manifest_sha=hashlib.sha256(raw).hexdigest()
   job=next(j for j in pilot.make_jobs(m) if j["team_size"]==1)
   with tempfile.TemporaryDirectory() as temp:
    root=pathlib.Path(temp)
-   receipt,rows,uid=build_full_receipt(job,m,manifest_sha,root,end_class="NATURAL",winner_side=job["treatment_side"])
-   tampered=[dict(r,player=dict(r["player"],home="MultiNotASeat")) if i==0 else r for i,r in enumerate(rows)]
-   lines="\n".join(json.dumps(r,sort_keys=True) for r in tampered)+"\n"
-   data=lines.encode();path=root/receipt["artifacts"]["matches_jsonl"]["path"];path.write_bytes(data)
-   receipt["artifacts"]["matches_jsonl"]["sha256"]=hashlib.sha256(data).hexdigest()
-   with self.assertRaisesRegex(ValueError,"natural match homes differ from receipt seats"):
+   receipt,rows,_=build_full_receipt(job,m,manifest_sha,root,end_class="NATURAL",winner_side=job["treatment_side"])
+   for row in rows: self.assertRegex(row["player"]["home"],r"^-?\d+,-?\d+$")
+   normalized,_=pilot.normalize_campaign_receipts(m,manifest_sha,[receipt],None,root)
+   self.assertEqual("NATURAL_END",normalized[0]["status"])
+
+ def test_seat_join_rejects_an_unknown_home_coordinate(self):
+  m=manifest();raw=json.dumps(m).encode();manifest_sha=hashlib.sha256(raw).hexdigest()
+  job=next(j for j in pilot.make_jobs(m) if j["team_size"]==1)
+  with tempfile.TemporaryDirectory() as temp:
+   root=pathlib.Path(temp)
+   receipt,rows,_=build_full_receipt(job,m,manifest_sha,root,end_class="NATURAL",winner_side=job["treatment_side"])
+   tampered=[dict(r,player=dict(r["player"],home="999,999")) if i==0 else r for i,r in enumerate(rows)]
+   self._rewrite_matches(root,receipt,tampered)
+   with self.assertRaisesRegex(ValueError,"does not match any proven generated-map seat"):
+    pilot.normalize_campaign_receipts(m,manifest_sha,[receipt],None,root)
+
+ def test_seat_join_detects_a_swapped_home_coordinate_as_an_outcome_contradiction(self):
+  # Both coordinates are real, proven seats; swapping them must still be caught
+  # because it silently reassigns one seat's recorded outcome to the other.
+  m=manifest();raw=json.dumps(m).encode();manifest_sha=hashlib.sha256(raw).hexdigest()
+  job=next(j for j in pilot.make_jobs(m) if j["team_size"]==1)
+  with tempfile.TemporaryDirectory() as temp:
+   root=pathlib.Path(temp)
+   receipt,rows,_=build_full_receipt(job,m,manifest_sha,root,end_class="NATURAL",winner_side=job["treatment_side"])
+   self.assertEqual(2,len(rows))
+   homes=[r["player"]["home"] for r in rows]
+   swapped=[dict(r,player=dict(r["player"],home=homes[1-i])) for i,r in enumerate(rows)]
+   self._rewrite_matches(root,receipt,swapped)
+   with self.assertRaisesRegex(ValueError,"match outcome contradicts receipt"):
     pilot.normalize_campaign_receipts(m,manifest_sha,[receipt],None,root)
 
  def test_fail_closed_on_tampered_map_artifact_bytes(self):
