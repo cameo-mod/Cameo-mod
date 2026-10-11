@@ -70,6 +70,36 @@ Focused tests 24/24, py_compile clean, offline FullMods materialization
 verified on this tree (33,472 linked entries; mod.yaml, ContentPacks,
 hard_control/hard_treatment all resolve).
 
+## 2026-10-11 — live smoke + A5 rerun on the new engine (06:43-07:00Z)
+
+Two engine-run proofs on `codex/ab-campaign-port-fixes` with the pinned
+`4f69df005f` binary (hardlink-materialized into the port worktree):
+
+- **Mod-registration smoke** (`results/smoke-modreg-064711`): first run
+  still showed `Invalid bot type` despite FullMods — root cause refined:
+  `InstalledMods` registers search-path candidates in order and the LAST
+  id wins (`ret[pair.Id] = mod`), so `repo/mods/cameo` silently
+  overrode the materialized tree (this also finally explains the old
+  attempts — the thin overlay's Manifest ctor threw the YamlException
+  during the LoadMod scan and the stock cameo won the dict anyway).
+  Fix: FullMods moved to the LAST ModSearchPaths position. Re-run:
+  debug.log clean (no Invalid bot type, no YamlException), actor counts
+  831->862->878 across 15k ticks (brainless baseline: +3/5k), seed pin
+  present. MCV-idle defect is closed.
+- **A5 fixed-tick parity rerun** (`results/campaign-a5-fixed-tick-parity-
+  20261011-newengine4`, probe @936d8cfc9, seed 1337, cap 16000): both
+  cells valid_game — seed_pin/records/censored_cap (tick 16001) verified,
+  identical `fingerprint_id 02a4a5cf3287`, order_stream verdict
+  `IDENTICAL_TAIL_FLUSH`, peaks 6.09/6.03 GiB, `a5_diagnostic_passed:
+  true`, zero OpenRA processes left. `campaign_gate_passed` stays false
+  until the execution manifest is regenerated + approved.
+- **Measurement note:** observed headless peak under the new engine is
+  ~6.0-6.1 GiB vs the coded 5.24 GiB `HEADLESS_PEAK_BYTES`; admission
+  floor may need re-measuring (peak+3 => ~9.1 GiB).
+- Probe fixes landed en route: UTF-16 BOM `engine/VERSION` read via
+  `pilot.read_engine_version`; opt-in `--allow-stale-build` forwarder for
+  hardlink-materialized engines (binary sha256 still receipted).
+
 ## Pending
 
 - Merge `codex/ab-campaign-port-fixes` onto `codex/ab-campaign` (DevOps),
