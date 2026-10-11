@@ -513,8 +513,11 @@ def run_one(manifest: dict, manifest_sha: str, job: dict, *, root: pathlib.Path,
 	match_log = logs / "cameo-ai-matches.jsonl"; before = match_log.stat().st_size if match_log.exists() else 0
 	server_log = logs / "server.log"; driver_log = game_root / "driver.log"
 	if not executable.is_file(): raise ValueError("pinned OpenRA executable missing")
+	# InstalledMods registers candidates in order and the LAST entry for a given
+	# mod id wins (ret[pair.Id] = mod), so FullMods must be the LAST search path
+	# or the stock repo mods/cameo silently overrides the materialized arm tree.
 	args = [str(executable), "Game.Mod=cameo", "Sound.Device=none", "Engine.EngineDir=..",
-		f"Engine.ModSearchPaths={full_mods / 'mods'},{root / 'mods'},{engine_root / 'mods'}",
+		f"Engine.ModSearchPaths={root / 'mods'},{engine_root / 'mods'},{full_mods / 'mods'}",
 		f"Engine.SupportDir={game_support}", f"Launch.Map={variant.name}", "Launch.Benchmark=ai-duel-batch-",
 		"Graphics.VSync=False", "Graphics.Mode=Windowed", "Graphics.WindowedSize=640,480"]
 	env = os.environ.copy(); env["CAMEO_DEV_SEED"] = str(job["seed"])
@@ -544,9 +547,14 @@ def run_one(manifest: dict, manifest_sha: str, job: dict, *, root: pathlib.Path,
 	# still produce cap-censored rows — never classify that as a played cell.
 	mod_failed = "Invalid bot type" in debug_text or "YamlException" in debug_text
 	match_rows = batch.read_appended_records(match_log, before)
-	# The cap marker is emitted by the batch driver; check the server log too so a
-	# stream move can never silently turn a capped cell into a stall.
-	cap_match = re.search(r"AB_CAMPAIGN_CAP tick=(\d+)", driver_text) or re.search(r"AB_CAMPAIGN_CAP tick=(\d+)", log_text)
+	# The cap marker is emitted by the batch driver (verified in driver.log and
+	# lua.log on preserved attempts); check both plus server.log so a stream move
+	# can never silently turn a capped cell into a stall.
+	lua_log = logs / "lua.log"
+	lua_text = lua_log.read_text(encoding="utf-8", errors="replace") if lua_log.exists() else ""
+	cap_match = (re.search(r"AB_CAMPAIGN_CAP tick=(\d+)", driver_text)
+		or re.search(r"AB_CAMPAIGN_CAP tick=(\d+)", lua_text)
+		or re.search(r"AB_CAMPAIGN_CAP tick=(\d+)", log_text))
 	seed_line = next((line for line in log_text.splitlines() if f"RandomSeed={job['seed']}" in line and "CAMEO DEV SEED pinned" in line), None)
 	map_yaml_text = map_yaml.read_text(encoding="utf-8")
 	resolved = proof["seats"]
