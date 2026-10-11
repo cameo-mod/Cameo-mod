@@ -69,6 +69,27 @@ class ReaggregateTests(unittest.TestCase):
                 bad=json.loads(json.dumps(out));bad["pair"][0]["stop_threshold_bytes"]=value
                 with self.subTest(stop=value),self.assertRaises(ValueError):gate(bad)
 
+    def test_gate_requires_each_run_to_hash_every_pinned_binary(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root=pathlib.Path(temp);path,sha,raw=self.fixture(root)
+            out=probe.reaggregate(path,sha,root/"derived.json")
+            pins={"bin/OpenRA.exe":"a"*64,"bin/OpenRA.Game.dll":"b"*64,"bin/OpenRA.Mods.Cameo.dll":"c"*64}
+            full={"engine/"+k:v for k,v in pins.items()}
+            def gate(receipt):
+                manifest=dict(execution_approved=True,pins=dict(source_commit=raw["source_head"],engine_version="engine"),
+                    a5_parity_receipt_sha256="x",seeds=[1337],binary_sha256=dict(pins))
+                runner.execution_gate(manifest,a5_receipt=receipt,a5_receipt_sha256="x",source_commit=raw["source_head"],engine_version="engine")
+            good=json.loads(json.dumps(out));good["binary_sha256"]=dict(full)
+            for run in good["pair"]:run["binary_sha256"]=dict(full)
+            gate(good)
+            for name in ("bin/OpenRA.Game.dll","bin/OpenRA.Mods.Cameo.dll"):
+                for mode in ("missing","mismatched"):
+                    bad=json.loads(json.dumps(good))
+                    for run in bad["pair"]:
+                        if mode=="missing":del run["binary_sha256"]["engine/"+name]
+                        else:run["binary_sha256"]["engine/"+name]="d"*64
+                    with self.subTest(binary=name,mode=mode),self.assertRaises(ValueError):gate(bad)
+
     def test_missing_record_config_or_graphics_fails_closed(self):
         for field in ("ceiling_bytes","host_hard_floor_bytes","stop_threshold_bytes","allocation_trace_policy","graphics"):
             with self.subTest(field=field),tempfile.TemporaryDirectory() as temp:

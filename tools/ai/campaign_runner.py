@@ -522,7 +522,7 @@ def execution_gate(manifest: dict, *, a5_receipt: dict | None, a5_receipt_sha256
 			run.get("peak_private_bytes", PRIVATE_LIMIT) >= PRIVATE_LIMIT):
 			raise ValueError("A5 receipt contains an incomplete or unpinned capped run")
 		run_binaries = {str(k).replace("\\", "/").removeprefix("engine/"): v for k, v in run.get("binary_sha256", {}).items()}
-		if not run_binaries or any(binary_pins.get(k) != v for k, v in run_binaries.items()):
+		if not run_binaries or run_binaries != binary_pins:
 			raise ValueError("A5 run binary SHA differs from the approved campaign pin")
 	if len({(run.get("seed"), run.get("fingerprint_id"), tuple(sorted(run.get("binary_sha256", {}).items()))) for run in pair}) != 1:
 		raise ValueError("A5 pair does not share an identical seed/fingerprint/binary")
