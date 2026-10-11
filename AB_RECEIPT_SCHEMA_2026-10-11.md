@@ -25,7 +25,7 @@ Schema version: `1`. One immutable UTF-8 JSON object is written for each planned
 | `winner_team` | `A`, `B`, or null | Required null for `CAP` and `INCOMPLETE`; natural winner only when all seat outcomes agree. |
 | `world_tick` | integer/null | Final observed world tick. |
 | `cap` | object | `world_tick_cap`, marker observed, marker tick; cap class requires valid marker and tick. |
-| `memory` | object | Process ID, `peak_private_bytes`, `limit_private_bytes` (6.5 GiB), and `samples`. Each sample has `utc`, `world_tick`, `private_bytes`, and `actor_count`. |
+| `memory` | object | Process ID, `peak_private_bytes`, `limit_private_bytes` (10.5 GiB), and `samples`. Each sample has `utc`, `world_tick`, `private_bytes`, and `actor_count`. |
 | `runtime` | object | `started_utc`, `finished_utc`, `exit_code`, `wall_seconds`, `stall_seconds`, and `pid_scoped_cleanup` boolean. |
 | `artifacts` | object | Paths and SHA-256 values for `server_log`, `driver_log`, `matches_jsonl`, `replay`, `map_yaml`, and support bundle; unavailable artifacts are null with an explanatory `missing_reason`. Present paths resolve under the explicit campaign artifact root. `matches_jsonl` is a unique per-game file, not the shared aggregate. |
 
@@ -38,7 +38,7 @@ Each `resolved_seats[]` entry contains `seat_id`, `team` (`A`/`B`), `arm`, `bot_
 - `NATURAL`: authoritative natural-end evidence and complete, consistent outcome records for all seats; `winner_team` may be set only when the team result is unambiguous.
 - `CAP`: cap marker and configured cap tick are both proven, and the support bundle is complete; `winner_team` must be null. This is censored, never a win/loss/draw.
 - `INCOMPLETE`: startup failure, crash/sentinel, memory kill, stall, wall timeout, unexpected process exit, or missing/invalid evidence; `winner_team` must be null and `end_reason` must preserve the concrete cause.
-- A missing receipt for a planned game is materialized by the analyzer as `INCOMPLETE` with `end_reason=NO_RECEIPT`; it must not be dropped or replaced silently.
+- Every NATURAL or CAP receipt must carry a nonempty `game_uid` shared by all associated match rows; an empty UID is invalid. INCOMPLETE receipts may carry null when no game was created. A missing receipt for a planned game is materialized by the analyzer as `INCOMPLETE` with `end_reason=NO_RECEIPT`; it must not be dropped or replaced silently.
 - Reject duplicate pair members, manifest/map/engine mismatches, absent or duplicate seats, seat/faction/spawn mismatch, seed-proof mismatch, memory over-limit without an `INCOMPLETE` memory-kill classification, and contradictory end evidence.
 - The analyzer derives the planned cell by exact `setup_id`, `map`, `seed`, `pair_id`, and `pair_member` matching. For started games it verifies the unique per-game `matches_jsonl` artifact hash and requires all its rows to contain exactly one `game_uid`. It can aggregate these verified per-game files directly; an optional aggregate JSONL is only a cross-check and must exactly equal the per-game rows. It does not infer a UID from seed/map/seats.
 - Driver writes to a temporary file, flushes it, then atomically renames it to the final receipt path. The final receipt is immutable; corrections are separate linked records.

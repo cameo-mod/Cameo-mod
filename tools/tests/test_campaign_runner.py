@@ -6,6 +6,21 @@ from unittest.mock import patch
 
 
 class CampaignRunnerTests(unittest.TestCase):
+	def test_campaign_maps_use_declared_support_mapfolder(self):
+		support = pathlib.Path("run") / "Support"
+		maps = runner.campaign_map_directory(support)
+		self.assertEqual(support / pathlib.Path(runner.batch.USER_MAP_DIR), maps)
+		self.assertEqual(("maps", "cameo", "{DEV_VERSION}"), maps.relative_to(support).parts)
+
+	def test_engine_version_accepts_ascii_utf8_bom_and_utf16_bom(self):
+		with tempfile.TemporaryDirectory() as temp:
+			path = pathlib.Path(temp) / "VERSION"
+			for payload in (b"git-6da7fce14da541180c6baddd6925118fbef65b94\n",
+							"\ufeff6da7fce14da541180c6baddd6925118fbef65b94\n".encode("utf-8"),
+							"git-6da7fce14da541180c6baddd6925118fbef65b94\n".encode("utf-16")):
+				path.write_bytes(payload)
+				self.assertEqual("6da7fce14da541180c6baddd6925118fbef65b94", runner.pilot.read_engine_version(path))
+
 	def test_claim_once_and_orphan_is_incomplete(self):
 		with tempfile.TemporaryDirectory() as temp:
 			q = runner.ResumeQueue(pathlib.Path(temp) / "queue.sqlite", "a" * 64)
@@ -41,6 +56,15 @@ class CampaignRunnerTests(unittest.TestCase):
 			with self.assertRaises(FileExistsError):
 				runner.atomic_receipt(path, {"end_class": "CAP", "winner_team": None})
 
+	def test_published_schema_covers_analyzer_join_fields(self):
+		schema = json.loads(runner.RECEIPT_SCHEMA.read_text(encoding="utf-8"))
+		required = set(schema["required"])
+		for field in ("cell_id", "game_uid", "status", "seats", "seat_proof_source", "map_yaml_sha256",
+				"control_side", "treatment_side", "arm_bot_types", "cap_marker", "cap_tick",
+				"support_complete", "setup", "map_sha256", "pair", "game_in_pair",
+				"duration_ticks", "peak_memory_bytes"):
+			self.assertIn(field, required, f"persisted receipt must carry analyzer join field: {field}")
+
 	def test_bounds_and_parallel_policy(self):
 		self.assertEqual(int(10.5 * 1024**3), runner.PRIVATE_LIMIT)
 		self.assertEqual(int(15.5 * 1024**3), runner.FREE_RAM_FLOOR)
@@ -48,7 +72,7 @@ class CampaignRunnerTests(unittest.TestCase):
 		self.assertEqual(4 * 1024**3, runner.FREE_RAM_SOFT_FLOOR)
 		self.assertEqual(45000, runner.CAP_TICK)
 		self.assertEqual(5000, runner.ACTOR_SAMPLE_INTERVAL)
-		self.assertEqual(3, runner.SLOT_PARALLEL_SMALL)
+		self.assertEqual(1, runner.SLOT_PARALLEL_SMALL)
 
 	def test_execution_gate_rejects_unapproved_or_missing_a5(self):
 		manifest = {"execution_approved": False, "pins": {"source_commit": "a" * 40, "engine_version": "engine"}}
@@ -62,8 +86,12 @@ class CampaignRunnerTests(unittest.TestCase):
 			runner.execution_gate(manifest, a5_receipt=a5, a5_receipt_sha256="d"*64, source_commit="a"*40, engine_version="engine")
 
 	def test_receipt_cap_must_not_claim_winner_and_needs_marker(self):
-		receipt = {"schema_version":1,"campaign_id":"c","manifest_sha256":"a"*64,"baseline_commit":"b"*40,"engine_sha256":"c"*64,"switch":"s","setup_id":"x","pair_id":"p","pair_member":0,"seed":1,"seed_proof":{},"teams":{},"map":{"required_seats":1},"resolved_seats":[{"seat_id":"M0","team":"A","arm":"control","bot_type":"hard","faction":"td_gdi","home":"M0","spawn":0,"proof_source":"map+records","outcome":"lost","metrics":{"timeline":[]}}],"end_class":"CAP","end_reason":"cap","winner_team":None,"world_tick":45000,"cap":{"world_tick_cap":45000,"marker_observed":True,"marker_tick":45000},"memory":{"peak_private_bytes":0,"limit_private_bytes":runner.PRIVATE_LIMIT,"samples":[]},"runtime":{},"artifacts":{}}
+		receipt = {"schema_version":1,"campaign_id":"c","manifest_sha256":"a"*64,"cell_id":"cell-1","game_uid":"game-1","status":"CENSORED_CAP","seats":[{"home":"M0"}],"baseline_commit":"b"*40,"engine_sha256":"c"*64,"switch":"s","setup_id":"x","pair_id":"p","pair_member":0,"seed":1,"seed_proof":{},"teams":{},"map":{"required_seats":1},"resolved_seats":[{"seat_id":"M0","team":"A","arm":"control","bot_type":"hard","faction":"td_gdi","home":"M0","spawn":0,"proof_source":"map+records","outcome":"lost","metrics":{"timeline":[]}}],"end_class":"CAP","end_reason":"cap","winner_team":None,"world_tick":45000,"cap":{"world_tick_cap":45000,"marker_observed":True,"marker_tick":45000},"memory":{"peak_private_bytes":0,"limit_private_bytes":runner.PRIVATE_LIMIT,"samples":[]},"runtime":{},"artifacts":{}}
 		runner.validate_receipt(receipt)
+		receipt["game_uid"] = None
+		with self.assertRaisesRegex(ValueError, "requires nonempty game_uid"):
+			runner.validate_receipt(receipt)
+		receipt["game_uid"] = "game-1"
 		receipt["winner_team"]="A"
 		with self.assertRaisesRegex(ValueError,"cannot name a winner"):
 			runner.validate_receipt(receipt)
