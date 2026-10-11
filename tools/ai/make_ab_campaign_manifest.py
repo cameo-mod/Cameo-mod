@@ -74,8 +74,8 @@ manifest = {
     "switch_patch_sha256": increment.group_patch_sha256(groups[pilot.SWITCH]),
     "baseline_ai_payload_sha256": pilot.ai_payload_sha(ROOT),
     "treatment_ai_payload_sha256": pilot.ai_payload_sha(ROOT, pilot.SWITCH),
-    "tool_hash_algorithm": "sha256-crlf-folded",
-    "tool_sha256": {k: pilot.text_sha(v) for k, v in tool_paths.items()},
+    "tool_hash_algorithm": pilot.TOOL_HASH_ALGORITHM,
+    "tool_sha256": {k: pilot.tool_sha(v) for k, v in tool_paths.items()},
     "receipt_schema_sha256": pilot.text_sha(ROOT / "tools" / "ai" / "ab_campaign_receipt.schema.json"),
     "binary_sha256": binary_sha,
     "maps": maps,
@@ -87,11 +87,14 @@ manifest = {
 out = ROOT / "docs" / "audit" / "ab_pilot_manifest_candidate.json"
 prior = json.loads(out.read_text(encoding="utf-8-sig")) if out.is_file() else {}
 a5_path = prior.get("a5_parity_receipt_path")
-if not a5_path or not pathlib.Path(a5_path).is_file():
-    raise SystemExit("existing candidate must identify the pinned A5 receipt file")
-manifest["a5_parity_receipt_path"] = a5_path
-manifest["a5_parity_receipt_sha256"] = sha(pathlib.Path(a5_path))
-manifest["notes"] = "non-executable candidate; execution approval remains false until maintainer sign-off"
+if a5_path and pathlib.Path(a5_path).is_file():
+    manifest["a5_parity_receipt_path"] = a5_path
+    manifest["a5_parity_receipt_sha256"] = sha(pathlib.Path(a5_path))
+else:
+    manifest["a5_parity_receipt_path"] = None
+    manifest["a5_parity_receipt_sha256"] = None
+manifest["execution_approved"] = False
+manifest["notes"] = "non-executable candidate; execution approval remains false until Windows engine acceptance, headless measurement, fresh A5 receipt, and maintainer sign-off"
 text = json.dumps(manifest, indent=2) + "\n"
 if "--write" in sys.argv:
     out.write_bytes(text.encode("utf-8"))

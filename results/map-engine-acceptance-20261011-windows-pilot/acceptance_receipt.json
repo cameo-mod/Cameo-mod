@@ -1,0 +1,80 @@
+{
+ "tool": "map_engine_acceptance",
+ "tool_sha256": "8596683c56ea28fb309314efb66e0249b1ba8f341d03edb0fea2c7fe63c022f6",
+ "manifest_sha256": "dbd0f619a84092b08a527c393c867df0cb9f5e761148f3d9b37f1f8ba3f33082",
+ "campaign_id": "ab-bu-pilot-2026-10-11",
+ "engine_version": "4f69df005fe0d893526890fcb5bbc42e442d6fd6",
+ "render": "headless",
+ "cap_tick": 1500,
+ "preflight_only_never_outcome_cells": true,
+ "cells": [
+  {
+   "cell_id": "1v1_nuclear_gdi|1337|0",
+   "setup": "1v1_nuclear_gdi",
+   "map": "nuclear_winter",
+   "map_sha256": "191efefe3043acb2fd504b2e2e5c974a49f6498f8e016c1380159c9f7efc1c4a",
+   "team_size": 1,
+   "seed": 1337,
+   "game_in_pair": 0,
+   "map_yaml_sha256": "40fe795e62c80c280885d048855eda0ea7db72a73f405ce38d653afc538b4169",
+   "dual_arm_rules_sha256": {
+    "campaign_ai.yaml": "b96ea938014d215110de87b84e2d1c84cd5d6a1220b29766c9e464ebac7c8fb4"
+   },
+   "seats": [
+    {
+     "home": "Multi0",
+     "spawn": 0,
+     "side": "A",
+     "arm": "control",
+     "bot_type": "hard_control",
+     "faction": "td_gdi",
+     "team_slot": 0,
+     "home_location": "11,45"
+    },
+    {
+     "home": "Multi1",
+     "spawn": 1,
+     "side": "B",
+     "arm": "treatment",
+     "bot_type": "hard_treatment",
+     "faction": "td_gdi",
+     "team_slot": 0,
+     "home_location": "90,24"
+    }
+   ],
+   "engine_seats": [
+    {
+     "home": "11,45",
+     "bot_type": "hard_control",
+     "faction": "td_gdi",
+     "outcome": "lost",
+     "allies": [],
+     "opponents": [
+      "90,24"
+     ]
+    },
+    {
+     "home": "90,24",
+     "bot_type": "hard_treatment",
+     "faction": "td_gdi",
+     "outcome": "lost",
+     "allies": [],
+     "opponents": [
+      "11,45"
+     ]
+    }
+   ],
+   "cap_tick": 1501,
+   "exceptions": [],
+   "exit_code": 0,
+   "end_reason": "PROCESS_EXIT",
+   "wall_seconds": 76.1,
+   "peak_rss_bytes": null,
+   "verdict": "ACCEPTED",
+   "problems": []
+  }
+ ],
+ "pairs": [],
+ "accepted_maps": [],
+ "all_selected_accepted": true
+}

@@ -46,3 +46,18 @@ def latest_world_tick(path: pathlib.Path) -> int | None:
 		text = stream.read().decode("utf-8", errors="replace")
 	ticks = WORLD_TICK_RE.findall(text)
 	return max((int(tick) for tick in ticks), default=None)
+
+
+def highest_world_tick(deployment: dict, stall_log: pathlib.Path | None = None, extra_ticks=()) -> int | None:
+	"""Highest trustworthy observed world tick. Combines deployment check/seat
+	marker ticks, [WT N] clock lines in the stall log and caller-supplied sample
+	ticks (e.g. actor samples) so a stale or missing clock can never mask a
+	known-advanced game (sol review finding 1)."""
+	ticks = [t for t in (deployment.get("check_tick"), *(extra_ticks or ())) if type(t) is int]
+	for seat in deployment.get("seats", {}).values():
+		if isinstance(seat, dict) and type(seat.get("tick")) is int:
+			ticks.append(seat["tick"])
+	clock_tick = latest_world_tick(stall_log) if stall_log is not None else None
+	if clock_tick is not None:
+		ticks.append(clock_tick)
+	return max(ticks, default=None)
