@@ -336,6 +336,32 @@ def validate(manifest,root,engine_root=None,execution=False):
   require(seats>=entry["required_seats"],f"insufficient playable seats: {entry['name']}")
  # Explicitly non-executable: execution approvals and runtime backend do not exist in this tool.
  require(manifest.get("execution_approved") is execution,"dry-run manifest must not authorize execution" if not execution else "execution manifest must explicitly authorize execution")
+ if execution:
+  validate_runtime_acceptance(manifest)
+ return True
+
+def validate_runtime_acceptance(manifest):
+ """Require real, per-map runtime load/seat/geometry receipts before any outcome cell."""
+ entries=manifest.get("map_runtime_acceptance")
+ require(isinstance(entries,list),"runtime map acceptance receipts are required before execution")
+ by_name={}
+ for entry in entries:
+  require(isinstance(entry,dict),"runtime map acceptance entry must be an object")
+  name=entry.get("map")
+  require(isinstance(name,str) and name not in by_name,"runtime map acceptance has missing/duplicate map")
+  by_name[name]=entry
+ require(set(by_name)==set(MAPS),"runtime map acceptance must cover exactly all pinned maps")
+ for name,entry in by_name.items():
+  digest=entry.get("receipt_sha256")
+  require(entry.get("verdict")=="ACCEPTED" and entry.get("seat_fidelity") is True and entry.get("geometry") is True,
+   f"runtime map acceptance is not complete for {name}")
+  require(isinstance(digest,str) and re.fullmatch(r"[0-9a-f]{64}",digest),f"runtime map acceptance receipt SHA missing for {name}")
+  require(entry.get("source_commit")==manifest.get("pins",{}).get("source_commit")
+   and entry.get("engine_version")==manifest.get("pins",{}).get("engine_version"),
+   f"runtime map acceptance source/engine pin mismatch for {name}")
+  require(entry.get("map_sha256")==MAPS[name][1],f"runtime map acceptance package pin mismatch for {name}")
+  peak=entry.get("peak_private_bytes")
+  require(type(peak) is int and 0 < peak < PROCESS_CAP_BYTES,f"runtime map acceptance memory proof missing/over cap for {name}")
  return True
 
 def dry_run(m,root,engine_root=None,minutes_per_game=8.5,setup_hours=2.0):
@@ -351,10 +377,14 @@ def dry_run(m,root,engine_root=None,minutes_per_game=8.5,setup_hours=2.0):
 def install_campaign_monitor(dest,seat_count,cap_tick=45000,sample_interval=5000,rules_filename="duel_rules.yaml",seat_names=None):
  """Install map-local actor-count sampling and an explicit all-seat censor marker."""
  require(seat_count in (2,4,6,8) and type(cap_tick) is int and 1000<=cap_tick<=45000 and 0<sample_interval<=cap_tick,"campaign monitor bounds")
- names=", ".join(json.dumps(name) for name in (seat_names or [f"Multi{i}" for i in range(seat_count)]))+', "Neutral", "Creeps"'
+ campaign_seats=seat_names or [f"Multi{i}" for i in range(seat_count)]
+ names=", ".join(json.dumps(name) for name in campaign_seats)+', "Neutral", "Creeps"'
+ campaign_names=", ".join(json.dumps(name) for name in campaign_seats)
  lua=f'''local SeatNames = {{{names}}}
+local CampaignSeatNames = {{{campaign_names}}}
 local CapTick = {cap_tick}
 local SampleInterval = {sample_interval}
+local DeploymentTick = 100
 local Objectives = {{}}
 local function SampleActors()
 \tlocal total = 0
@@ -364,9 +394,36 @@ local function SampleActors()
 \tend
 \tprint("AB_CAMPAIGN_ACTOR_SAMPLE tick=" .. DateTime.GameTime .. " actor_count=" .. total)
 end
+local VerifiedConstructionYards = {{ td_gdi_constructionyard=true, td_nod_constructionyard=true,
+\tra1_allies_constructionyard=true, ra1_soviets_constructionyard=true }}
+local Deployments = {{}}
+local function ProbeSeatDeployment()
+\tlocal tick = DateTime.GameTime
+\tfor _, name in ipairs(CampaignSeatNames) do
+\t\tif not Deployments[name] then
+\t\t\tlocal player = Player.GetPlayer(name)
+\t\t\tif player then for _, actor in ipairs(player.GetActors()) do
+\t\t\t\tif VerifiedConstructionYards[actor.Type] then
+\t\t\t\t\tDeployments[name] = {{ tick=tick, type=actor.Type }}
+\t\t\t\t\tprint("AB_CAMPAIGN_DEPLOY seat=" .. name .. " tick=" .. tick .. " type=" .. actor.Type)
+\t\t\t\t\tbreak
+\t\t\t\tend
+\t\t\tend end
+\t\tend
+\tend
+\tif tick >= DeploymentTick then
+\t\tlocal deployed = 0
+\t\tfor _, name in ipairs(CampaignSeatNames) do
+\t\t\tif Deployments[name] and Deployments[name].tick <= DeploymentTick then deployed = deployed + 1
+\t\t\telse print("AB_CAMPAIGN_NO_DEPLOY seat=" .. name .. " tick=" .. tick) end
+\t\tend
+\t\tprint("AB_CAMPAIGN_DEPLOYMENT_CHECK tick=" .. tick .. " seat_count=" .. deployed .. " expected_count=" .. #CampaignSeatNames)
+\telse Trigger.AfterDelay(1, ProbeSeatDeployment) end
+end
 WorldLoaded = function()
 \tfor _, name in ipairs(SeatNames) do local p = Player.GetPlayer(name); if p then Objectives[name] = p.AddPrimaryObjective("Campaign observation cap") end end
 \tprint("AB_CAMPAIGN_STARTED tick=" .. DateTime.GameTime .. " cap=" .. CapTick)
+\tTrigger.AfterDelay(1, ProbeSeatDeployment)
 \tfor tick = SampleInterval, CapTick - SampleInterval, SampleInterval do Trigger.AfterDelay(tick, SampleActors) end
 \tTrigger.AfterDelay(CapTick, function()
 \t\tSampleActors(); print("AB_CAMPAIGN_CAP tick=" .. DateTime.GameTime)
@@ -377,6 +434,10 @@ end
  script=dest/"ab_campaign_monitor.lua";script.write_text(lua,encoding="utf-8")
  rules=dest/rules_filename;text=rules.read_text(encoding="utf-8")
  world=re.search(r"(?m)^World:\s*$",text);require(world is not None and "LuaScript:" not in text,"harness rules cannot accept campaign monitor Lua")
+ # Suppress only notifications: objective state and match-record outcomes remain active.
+ player_rules="\nPlayer:\n\tConquestVictoryConditions:\n\t\tSuppressNotifications: true\n"
+ text=text[:world.start()]+player_rules+text[world.start():]
+ world=re.search(r"(?m)^World:\s*$",text)
  text=text[:world.end()]+"\n\tLuaScript:\n\t\tScripts: ab_campaign_monitor.lua"+text[world.end():]
  rules.write_text(text,encoding="utf-8")
  return {"script_sha256":sha(script),"rules_sha256":sha(rules),"sample_interval_ticks":sample_interval,"cap_tick":cap_tick,"actor_count_marker":"AB_CAMPAIGN_ACTOR_SAMPLE"}

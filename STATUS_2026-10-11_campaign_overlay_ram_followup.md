@@ -1,7 +1,9 @@
-﻿# STATUS: Campaign complete overlay + RAM thresholds
+﻿# STATUS: Campaign overlay, RAM tiers, and deployment guard follow-up
 
 ## Resume
-- Branch: `codex/ab-campaign-policy-overlay-followup`, based on `origin/codex/ab-campaign@169388f` (campaign branch still needs consolidation/rebase onto current master e49).
-- Source fixes: build the campaign mod root by hard-linking the complete pinned `mods/cameo` tree except `ai/`, preserving generated dual-arm AI; fallback to copy across volumes. Separate first-game admission (measured headless peak + 3 GiB), second small-game admission (14 GiB), 10.5 GiB process cap, 3 GiB hard host stop; big teams exclusive, max two small teams.
-- Focused verification: `py_compile` and `python -m unittest tools.tests.test_ab_campaign_pilot tools.tests.test_campaign_runner` (24 passed), `git diff --check`.
-- Open gates: refreshed manifest/tool hashes, consolidated-tree integration/review, runtime overlay acceptance. No game, boot, or acceptance was launched by this change.
+- Branch: `codex/ab-campaign-policy-overlay-followup`, based on `origin/codex/ab-campaign@169388f`; it is not the consolidated campaign branch and must be selectively integrated/rebased onto current master `e49acf41` before any manifest refresh.
+- Commits already on branch: full mod-root overlay + approved measured-peak RAM tiers (`0384b2038`), Windows-safe stable real-game PID resolution (`be4d8ee86`).
+- Current uncommitted work adds fail-closed PID resolution (no launcher fallback; exact executable + SupportDir + LaunchPath and two stable polls), samples/cleans the actual game PID and launcher handle, per-seat tick-100 deployment evidence with duplicate detection and missing-marker early abort, exact unique seat proof equality, receipt-level cleanup/deployment checks, and execution-time acceptance receipts for all 8 maps tied to source/engine/map pins. Cap maps suppress loss notifications only; objective outcome recording remains enabled.
+- RAM policy: one game admission = 5,623,365,632-byte measured headless peak + 3 GiB; second small game requires 14 GiB free; at most two 1v1/2v2 games; 3v3/4v4 exclusive; 10.5 GiB per-game cap, 4 GiB soft telemetry floor, 3 GiB hard stop.
+- Focused verification: `py -3 -m py_compile tools/ai/campaign_runner.py tools/ai/ab_campaign_pilot.py tools/ai/campaign_deployment_guard.py tools/tests/test_campaign_runner.py`; `py -3 -m unittest tools.tests.test_campaign_runner tools.tests.test_ab_campaign_pilot tools.tests.test_ab_campaign` (43 passed); schema JSON parse and `git diff --check` passed.
+- No games, boots, or runtime map-acceptance cells launched. Campaign execution remains on hold. Latest available runtime acceptance had 3 accepted map cells and one rejected cell due blank executable path, then stopped; it is not a complete 8-map acceptance receipt. Refresh all source/tool/schema/map/A5 pins and merge to the consolidated branch before further validation.

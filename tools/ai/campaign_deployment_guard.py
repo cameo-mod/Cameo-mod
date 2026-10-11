@@ -1,0 +1,62 @@
+"""Fail-closed validation for per-seat deployment evidence in campaign logs."""
+import pathlib
+import re
+
+DEPLOY_RE = re.compile(r"AB_CAMPAIGN_DEPLOY seat=([A-Za-z0-9_.-]+) tick=(\d+) type=([A-Za-z0-9_.-]+)")
+NO_DEPLOY_RE = re.compile(r"AB_CAMPAIGN_NO_DEPLOY seat=([A-Za-z0-9_.-]+) tick=(\d+)")
+CHECK_RE = re.compile(r"AB_CAMPAIGN_DEPLOYMENT_CHECK tick=(\d+) seat_count=(\d+) expected_count=(\d+)")
+WORLD_TICK_RE = re.compile(r"\[WT\s+(\d+)\]")
+VERIFIED_TYPES = frozenset(("td_gdi_constructionyard", "td_nod_constructionyard",
+	"ra1_allies_constructionyard", "ra1_soviets_constructionyard"))
+
+
+def parse(text: str) -> dict:
+	checks = CHECK_RE.findall(text)
+	seats = {}
+	duplicates = []
+	for name, tick, kind in DEPLOY_RE.findall(text):
+		if name in seats:
+			duplicates.append(name)
+		else:
+			seats[name] = {"tick": int(tick), "type": kind}
+	return {"check_tick": int(checks[-1][0]) if checks else None,
+		"reported_seat_count": int(checks[-1][1]) if checks else None,
+		"expected_seat_count": int(checks[-1][2]) if checks else None,
+		"seats": seats, "duplicates": duplicates,
+		"missing": [name for name, _ in NO_DEPLOY_RE.findall(text)]}
+
+
+def merge(current: dict, incoming: dict) -> dict:
+	for name, evidence in incoming.get("seats", {}).items():
+		if name in current["seats"]:
+			current.setdefault("duplicates", []).append(name)
+		else:
+			current["seats"][name] = evidence
+	current.setdefault("duplicates", []).extend(incoming.get("duplicates", []))
+	current["missing"].extend(incoming.get("missing", []))
+	for key in ("check_tick", "reported_seat_count", "expected_seat_count"):
+		if incoming.get(key) is not None:
+			current[key] = incoming[key]
+	return current
+
+
+def valid(evidence: dict, expected_seats: list[str]) -> bool:
+	seats = evidence.get("seats", {})
+	return (evidence.get("check_tick") == 100
+		and evidence.get("reported_seat_count") == len(expected_seats)
+		and evidence.get("expected_seat_count") == len(expected_seats)
+		and not evidence.get("missing") and not evidence.get("duplicates")
+		and len(seats) == len(expected_seats) and set(seats) == set(expected_seats)
+		and all(type(seats[s].get("tick")) is int and 0 <= seats[s]["tick"] <= 100
+			and seats[s].get("type") in VERIFIED_TYPES for s in expected_seats))
+
+
+def latest_world_tick(path: pathlib.Path) -> int | None:
+	path = pathlib.Path(path)
+	if not path.is_file():
+		return None
+	with path.open("rb") as stream:
+		stream.seek(max(0, path.stat().st_size - 65536))
+		text = stream.read().decode("utf-8", errors="replace")
+	ticks = WORLD_TICK_RE.findall(text)
+	return max((int(tick) for tick in ticks), default=None)
