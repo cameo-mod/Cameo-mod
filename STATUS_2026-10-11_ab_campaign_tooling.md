@@ -1,3 +1,35 @@
+## Resume (2026-10-11 evening, canonical ff + rebuilt pinned set — pre-A5 review pending)
+
+Current branch: `codex/ab-campaign-port-fixes@e0c17eaef` (pushed). Now on the Luna-approved
+`eaedd3e3b` (early-end fix `3d186c823` NATURAL-requires-authoritative-end_tick + analyzer fix
+`6c1105ab9` + canonical fixtures) plus `d86841f20` (A5 probe emits the execution-gate receipt
+schema: render_mode/process_private_cap_bytes/host_emergency_floor_bytes, per-run
+stop_threshold_bytes=PRIVATE_LIMIT with the armed bound kept as diagnostic_stop_threshold_bytes,
+3-binary sha set incl. OpenRA.Game.dll, orchestration_sha256 provenance, strict match_game_uid).
+
+Pinned binary set REBUILT + boot-gated (builds are nondeterministic — Luna's hash mismatch was a
+different local build in the raw `engine-ad061` engine checkout; the pinned set is what runs):
+`C:\cameo-wt\ab-campaign-port\engine\bin` — OpenRA.exe `1a3a1fcbb581181fe7b572fab0f95ed1c7325a47f46bfa52226b1242ff1c2c27`,
+OpenRA.Game.dll `ec2d2d79b00be5d74351da0e629bc40ea02e3acfb3607e5928324e2ec4d0d835`,
+OpenRA.Mods.Cameo.dll `d07d4761ca6ec5b776ba0843f444fb5e163a4e0d936bc4cd2a1c2fae066e8619`.
+engine/VERSION `ad061ebf79029da4dcd3a841a9b2540e39cbf968`. Boot-gate PASS on these bytes.
+
+Manifests regenerated via the c38e864 generator only: candidate sha
+`e1320e468e6c0cbb8b06f76e6aa09a55f79db495d72370fec36f57cbe9239cd2`, execution sha
+`6d7986b4a6abc96c0db98662c6bf4e4b92a6dc2c07a10b6679c1563475e6a220` — source e49acf41, engine
+ad061ebf79, min_setup_veto_sample=4, slot policy per ruling, a5 fields = explicit null
+placeholder, execution_approved=false. No-launch dry-run PASS: 64 games/32 maps/1 treatment
+change/0 launches (receipt `results/dryrun-eaedd3e3b.json`). Focused suite 109 tests green (1
+skip = pinned-A5 test, expected while the receipt is pending).
+
+A5 is launch-ready pending the HEAVY_RUN_WINDOW grant: detached worktree
+`C:\cameo-wt\a5-e49-ad061` at `e49acf41a` (HEAD==BASELINE, scoped paths clean) + the pinned
+engine copied in + probe/libs overlaid at `tools/ai_overlay/` (committed-at-pin tools/ai
+untouched — batch runner and order differ execute from the pinned tree; the receipt records
+every orchestration sha). All probe gate preconditions verified incl. admission at
+7.5/3.25 GiB stops (needs 11.75 GiB; ~13.4 free). Runs `--process-stop-gib 7.5
+--host-soft-stop-gib 3.25 --tick-cap 16000`, two serial same-seed 1v1 baseline cells.
+
 ## Resume (2026-10-11, four-branch consolidation + landed engine pin)
 
 Current branch: `codex/ab-campaign`; tested source/tree SHA `1bd7751fbcf7ec947140dd6d4cfe0078bf0d7831`. Consolidated runner-final, engine-maproot-1011, tooling-manager, and ccr-c7f51935, initially based on master `2209a6e7`. Engine-bump commit `fb7faffaf` has since landed on master; this branch merges it and pins `mod.config` to engine `4f69df005fe0d893526890fcb5bbc42e442d6fd6`. ccr's `tools/ai/map_engine_acceptance.py` remains an acceptance-only preflight; its capped records are never campaign outcomes.
