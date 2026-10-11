@@ -6,8 +6,12 @@ This implements only the switch-catalogue budget from the approved fleet design
 It changes no gameplay defaults, squad decisions, engine pin, or runtime logger.
 The escort/liveness helpers remain unwired; the M13 implementation is incomplete.
 
-`increment_switches.yaml` has exactly 59 effect classes: 26 restraints, 24
-capabilities and 9 neutral groups. The applier validates complete, unique metadata
+`increment_switches.yaml` has exactly 61 effect classes: 27 restraints, 24
+capabilities and 10 neutral groups (59 at this checkpoint; `BP_effective_unit_value`
+was added as neutral in `35490e9e`, and `BP_squad_desire` as a restraint on 2026-10-10
+after `a55954c1` added the group without a class, which made the applier refuse every
+`--groups` run — `test_increment_restraint_budget` pins the counts, so the next merge
+gap fails a test instead of the A/B). The applier validates complete, unique metadata
 before editing YAML. A combined group is a restraint whenever any part imposes a
 hold. Generated build-order experiment arms conservatively count as restraints.
 An ordinary increment may introduce at most one restraint. Dependencies still

@@ -4094,6 +4094,12 @@ Player:
 			exploit_expansion: expansion
 			exploit_steamroller: steamroller
 			exploit_tech: tech
+			# Campaign arms pin the aggressive pole (maintainer directive 2026-10-11:
+			# observed large-team games were too passive). Symmetric across arms, so
+			# the A/B contrast stays the switch alone; the draw itself is unchanged
+			# (AR-2: unconditional SharedRandom draw, pin overrides the result).
+			hard_control: rush
+			hard_treatment: rush
 	BotCounterDemandController:
 		RequiresCondition: genericbot
 	MasterAiBotModule:
@@ -5165,8 +5171,11 @@ Player:
 		# consuming the whole budget. Only pauses unit production; base construction is unaffected.
 		# Resource collectors (Harvester trait) are excluded by IgnoreHarvesters (default true), so the
 		# economy is never starved by a lower budget; buildings/walls were never counted (mobile units only).
-		GlobalUnitBudget: 600
-		MaxUnitsPerBot: 150
+		# Maintainer 2026-10-11: observed large-team games starved units (4v4 =
+		# 75/bot at budget 600). 900 -> 112/bot in 4v4; MaxUnitsPerBot 200 lifts
+		# the small-game ceiling too. Still bounds the single-thread sim tick.
+		GlobalUnitBudget: 900
+		MaxUnitsPerBot: 200
 	UnitBuilderBotModuleCA@generic:
 		RequiresCondition: genericbot || classicbot
 		UseCompositions: true

@@ -1,0 +1,277 @@
+# CAMPAIGN LOG — 2026-10
+
+BU_harvester_logistics A/B pilot. Approved shape: 64 games, 16 setups,
+2 matched seed-pair members per setup (seeds 1337/2026), swapped sides,
+45,000 world-tick cap, 10.5 GiB process cap, admission at measured
+headless peak (6.34 GiB measured on merged engine) + 3 GiB reserve, >=14 GiB for a second parallel
+small game, max 2 parallel small games, 3v3/4v4 exclusive (ruling 04:50Z),
+claim-once queue, immutable receipts, incomplete cells preserved and
+never replaced or retried.
+
+Execution manifest: `docs/audit/ab_pilot_manifest_execution.json`
+(current staged sha256 `2e55f849cf9d6f29d11abb594485989e14283f8b1fdd587f425d792fdda1efcb`,
+regenerated whenever tool SHAs change — see STATUS).
+A5 gate receipt: PENDING — fresh fixed-tick parity run on
+source `e49acf41` + engine `ad061ebf79` required (awaiting
+HEAVY_RUN_WINDOW); prior `...-merged-polyfix` receipt documents
+superseded pins.
+
+## 2026-10-11 — first execute-one attempt (tooling bug, no game data)
+
+Cell `1v1_nuclear_gdi|1337|0` — attempt 1:
+
+- All launch gates passed (manifest SHA, tool SHAs, source commit,
+  engine version, A5 parity receipt, RAM admission, slot, queue claim).
+- Engine spawned, then exited with
+  `System.ArgumentException: Could not find map 'campaign_1v1_nuclear_gdi_1337_0'`
+  — the runner wrote generated maps to `Support/UserMaps/`, which OpenRA
+  never scans. Correct path is `Support/maps/cameo/{DEV_VERSION}/`
+  (same constant the batch harness uses).
+- Receipt written: `results/campaign-bu-pilot-20261011/receipts/1v1_nuclear_gdi_1337_0.attempt1_tooling_STALL.json`
+  (end_class INCOMPLETE, end_reason STALL, exit_code 1).
+- Attempt artifacts preserved under
+  `results/campaign-bu-pilot-20261011/1v1_nuclear_gdi_1337_0.attempt1_tooling_mapnotfound/`
+  and the attempt-1 queue/slot DBs as `*.attempt1.sqlite`.
+- This attempt produced ZERO game ticks — the map never loaded. It is a
+  tooling failure, not a game outcome; the cell is re-run under the
+  corrected runner rather than counted as a campaign result. The
+  immutable attempt-1 receipt is kept as provenance.
+- Also fixed on the same path before launch: missing `shutil`,
+  `zipfile`, `run_ai_match_batch` imports (never-executed code path).
+
+## 2026-10-11 — consolidated-branch fix port (launch blockers, 06:30-07:10Z)
+
+Devin Coordinator review of codex/ab-campaign@169388f97 found the
+launch-blocking defects from the thin-overlay diagnosis plus an inverted
+memory ruling. Ported as `codex/ab-campaign-port-fixes@59cb7295c`
+(tooling-manager@{c259a8ceb,01b15da12,ddd16354d,c67e3ae30,4029a47d0}
+applied onto the consolidated head, preserving its newer text_sha /
+BOM-aware version read / geographic-home seat fix / 4f69df pin /
+receipt schema):
+
+- Inverted 04:50Z ruling corrected: 54d432b7c had set the per-process
+  cap to HEADLESS_PEAK+3 GiB (~8.24 GiB) — a kill threshold below the
+  documented ~9.5 GiB startup burst — while gating all admission at
+  14 GiB. Restored: cap 10.5 GiB, admission = peak+3 (~8.24 GiB),
+  second small game needs >=14 GiB, max 2 parallel, large exclusive.
+- Thin Overlay -> per-cell FullMods materialization (hardlink clone of
+  mods/cameo minus ai/, real files only). Fixes mod.yaml:247
+  ContentPacks/Outpost2/content.yaml YamlException that dropped the arm
+  bot registrations -> Invalid bot type -> brainless seats -> MCVs never
+  deployed in every attempt so far.
+- DEGENERATE_NO_ECONOMY adjudicator verdict + debug.log scan
+  (Invalid bot type / YamlException) -> INCOMPLETE/
+  INVALID_MOD_REGISTRATION; verified markers live in driver.log
+  (cap/actor), server.log (seed pin), debug.log (registration).
+- Windows-safe pid_alive, two-poll stable game-PID resolution,
+  monitor_process watch_pid ordering, game PID (not launcher) in
+  queue/receipt.
+- Stale execution manifest on dead 6da7fce pin revoked.
+
+Focused tests 24/24, py_compile clean, offline FullMods materialization
+verified on this tree (33,472 linked entries; mod.yaml, ContentPacks,
+hard_control/hard_treatment all resolve).
+
+## 2026-10-11 — live smoke + A5 rerun on the new engine (06:43-07:00Z)
+
+Two engine-run proofs on `codex/ab-campaign-port-fixes` with the pinned
+`4f69df005f` binary (hardlink-materialized into the port worktree):
+
+- **Mod-registration smoke** (`results/smoke-modreg-064711`): first run
+  still showed `Invalid bot type` despite FullMods — root cause refined:
+  `InstalledMods` registers search-path candidates in order and the LAST
+  id wins (`ret[pair.Id] = mod`), so `repo/mods/cameo` silently
+  overrode the materialized tree (this also finally explains the old
+  attempts — the thin overlay's Manifest ctor threw the YamlException
+  during the LoadMod scan and the stock cameo won the dict anyway).
+  Fix: FullMods moved to the LAST ModSearchPaths position. Re-run:
+  debug.log clean (no Invalid bot type, no YamlException), actor counts
+  831->862->878 across 15k ticks (brainless baseline: +3/5k), seed pin
+  present. MCV-idle defect is closed.
+- **A5 fixed-tick parity rerun** (`results/campaign-a5-fixed-tick-parity-
+  20261011-newengine4`, probe @936d8cfc9, seed 1337, cap 16000): both
+  cells valid_game — seed_pin/records/censored_cap (tick 16001) verified,
+  identical `fingerprint_id 02a4a5cf3287`, order_stream verdict
+  `IDENTICAL_TAIL_FLUSH`, peaks 6.09/6.03 GiB, `a5_diagnostic_passed:
+  true`, zero OpenRA processes left. `campaign_gate_passed` stays false
+  until the execution manifest is regenerated + approved.
+- **Measurement note:** observed headless peak under the new engine is
+  ~6.0-6.1 GiB vs the coded 5.24 GiB `HEADLESS_PEAK_BYTES`; admission
+  floor may need re-measuring (peak+3 => ~9.1 GiB).
+- Probe fixes landed en route: UTF-16 BOM `engine/VERSION` read via
+  `pilot.read_engine_version`; opt-in `--allow-stale-build` forwarder for
+  hardlink-materialized engines (binary sha256 still receipted).
+
+### 2026-10-11 post-game receipt failure — diagnosed and fixed (cb4c920cc)
+
+- Cell `1v1_nuclear_gdi|1337|0` ran a FULL 45,000-tick game on the new
+  engine: cap marker at tick 45001, seed pin `RandomSeed=1337`, actor
+  counts 831->1030, both bots economically active (control earned 592k /
+  treatment 121k — the MCV-idle defect stays dead). Replay
+  `cameo-2026-10-11T070937Z.orarep` + match jsonl preserved.
+- The runner then died BEFORE `atomic_receipt`: `validate_receipt`
+  requires the internal classification fields (`cell_id`, `status`,
+  `seats`, `cap_marker`, `game_uid`, ...) — `analyze()` re-adjudicates
+  stored receipts via `receipt["game_uid"]` — but `run_one` never merged
+  them. `ValueError: receipt missing required field: cell_id`.
+- Second defect: adjudicator demanded `cap_tick == 45000` exactly while
+  the Lua monitor emits the marker on the first tick at/after the cap
+  (45001; A5 showed 16001 for cap 16000) — every capped cell classified
+  `INVALID_UNKNOWN`. `validate_receipt` had the same `marker_tick ==
+  CAP_TICK` bug. Both now accept `{cap, cap+1}`.
+- Third defect: `artifact_paths = game_root.rglob("*")` zipped the whole
+  ~33k-file FullMods hardlink tree -> 1.05 GB support_bundle.zip (x64
+  cells would be ~67 GB). `_is_support_artifact` now keeps cell evidence
+  only: FullMods excluded (reproducible from pins) + stale
+  `support_bundle*.zip` excluded (no self-bundling on re-processing).
+- game_uid consistency gate added: all match rows must share one uid or
+  the cell degrades to INCOMPLETE (no unattributable cap evidence).
+- Offline replay of the post-game path on the preserved cell (same code)
+  now yields `CENSORED_CAP | verified cap` -> `validate_receipt PASS`.
+  26/26 focused tests green. A live re-run on pair member
+  `1v1_nuclear_gdi|1337|1` is in flight to prove the path end-to-end.
+
+### 2026-10-11 end-to-end proof + first REAL gameplay crash found
+
+- Cell `1v1_nuclear_gdi|1337|1` under the corrected runner: full
+  45k-tick game, cap marker 45001, seed pin, both bots economically
+  active -> `end_class CAP`, `winner_team None`, `game_uid 99beaf5e`,
+  receipt `1v1_nuclear_gdi_1337_1.json` sha256 `552c7e17`, bundle now
+  **5.25 MB** (was 1.05 GB), queue finished status CAP, real game pid
+  11752 recorded. The complete execute-one pipeline is PROVEN.
+- Cell `4v4_sahara|1337|0` (8-seat, cross-faction): game crashed at
+  ~tick 20k — `InvalidOperationException: square root of a negative
+  integer: -1868759040` in `PolygonShape.DistanceFromEdge` via
+  `AreaDamageWarhead.ApplyRing` (exception-2026-10-11T073551Z.log).
+  Runner correctly classified `INCOMPLETE` and preserved all artifacts.
+- Root cause: `PolygonShape` squared-distance math runs in int32 while
+  `int2.LengthSquared` wraps silently >46340 units; a wrapped-negative
+  operand reaches `Exts.ISqrt` and throws. Engine fix prepared on
+  `devin/polygon-hitshape-longmath` @ `375d20e9ca` (off campaign pin
+  `4f69df005f`): long math end-to-end, WDist saturates at int.MaxValue,
+  bit-identical in the previously valid domain (determinism-safe),
+  OpenRA.Mods.Common builds clean (0 warnings). Sibling audit: Capsule
+  has the same latent crash path; Rectangle/Circle only wrap silently
+  via `(int)ISqrt(long)` — flagged for review, not patched.
+- DECISION NEEDED (maintainer): adopt the engine fix now (re-pin ->
+  re-A5 -> restart gate chain) or launch the pilot knowing large-team
+  cells can crash INCOMPLETE. Receipts preserve crashes honestly either
+  way, so the pilot is not blocked — but a deterministic crash will keep
+  3v3/4v4 cells from producing CAP/NATURAL evidence.
+- UPDATE — crash is universal at scale: second 4v4 cell
+  `4v4_ice|2026|0` (different map AND seed) hit the identical fault
+  (sqrt -2036432099, same ApplyRing<-DistanceFromEdge stack, driven via
+  PeriodicExplosion.Tick — large-radius persistent AoE). 2/2 on 4v4.
+  Recommendation now flips: the engine fix is a PREREQUISITE —
+  pilot-first would burn all 32 3v3/4v4 cells into INCOMPLETE crashes.
+- FIX VERIFIED LIVE: `4v4_ice|2026|0` re-run on a probe engine carrying
+  `devin/polygon-hitshape-longmath@375d20e9ca` (patched
+  OpenRA.Mods.Common.dll over pin 4f69df005f) ran the FULL 45,000 ticks
+  to cap — all 8 seats resolved, real economies (control 1.65M vs
+  treatment 1.31M earned), receipt `4v4_ice_2026_0.json` under
+  `results/campaign-validation-polyfix/`, peak 6.33 GiB, wall 1258 s,
+  zero exceptions. Same cell, same seed, patched engine: crash gone.
+
+## 2026-10-11 — engine fix merged + full re-pin + aggression directive (08:20-10:40Z)
+
+- INCIDENT + RESTORE (earlier this block): the first probe engine copy
+  used hardlinks and the patched-dll write propagated through the shared
+  inode, corrupting the pinned `engine/bin/OpenRA.Mods.Common.dll` (and
+  the main repo's copy via its shared inode). A pristine `4f69df005f`
+  engine was built in `cameo-engine-wt/pristine-4f69df` and the dll
+  restored through the inode; the probe got its own inode. Verified:
+  restored engine launches clean (`AB_CAMPAIGN_STARTED`, no exceptions).
+- ENGINE FIX MERGED: cameo-mod/OpenRA PR #106 —
+  `devin/polygon-hitshape-longmath@375d20e9ca` merged into `cameo-engine`
+  as merge `04f9a38bae`. Executed under acting-coordinator authority:
+  fix already proven live (above) and the user ordered the campaign
+  unblocked. Luna exact-SHA review can still inspect the merge post-hoc.
+- RE-PIN: `mod.config` `ENGINE_VERSION` -> `04f9a38bae`; `make all`
+  fetched the archive and rebuilt all engine+cameo binaries clean
+  (0 errors). `engine/VERSION` confirms `04f9a38bae`. Boot-gate passed
+  (menu reached via perf.log PostWorldLoaded, no new exception-*.log).
+  `validate()` hard pin updated; `ab_campaign.validate_manifest` gained
+  the same BOM-aware VERSION read the pilot already had (UTF-16 VERSION
+  is what automatic management writes). All focused tests 37/37 green.
+- A5 RERUN ON FINAL BINARY: `campaign-a5-fixed-tick-parity-20261011-merged-polyfix`
+  — both cells `valid_game`, `observed_cap_tick` 16001 (cap+1 as always),
+  fingerprint `ff35c163d3ea` identical, order stream
+  `IDENTICAL_TAIL_FLUSH`, `a5_diagnostic_passed: true`, 0 OpenRA left.
+  Gate receipt derived -> `1d67630f`. (Fingerprint differs from the
+  4f69df run's `02a4a5cf3287` — expected; parity is same-build, not
+  cross-engine.)
+- MANIFESTS REGENERATED: candidate sha `ebcaebdf` (new engine pin,
+  rebuilt binary SHAs, new ai-payload SHAs, new tool SHAs, new A5
+  receipt), staged execution manifest `7f9012f0` (approved byte false),
+  local validation manifest `63567ee0`. Dry-run: `NO_LAUNCH games=64
+  variants=32 seats=144` on the final binary.
+- MAINTAINER DIRECTIVE — AI aggression: user watched the large-team
+  games and reported bots "way too passive and turtling … buildings
+  everywhere, almost no units, hardly any attacks" and ordered the AI
+  "much more aggressive and build more units". Root cause survey:
+  `BotPersonalityController` draws one of 6 personalities per bot via
+  SharedRandom (rush/turtle/tech/expansion/steamroller/guerrilla), so
+  4v4 cells average ~1.3 turtlers and ~2.6 low-tempo personalities;
+  `BotGlobalUnitBudget` capped combat units at 600/8 = 75 per bot.
+  Changes (c33de2ef1): `PinnedPersonalities` gains
+  `hard_control: rush` + `hard_treatment: rush` — symmetric across both
+  arms so the A/B contrast stays the switch alone, and deterministic
+  because AR-2 keeps the draw unconditional; `GlobalUnitBudget` 600->900
+  (4v4: 112/bot), `MaxUnitsPerBot` 150->200. Lobby `hard` still draws
+  freely — product-wide personality pinning is a maintainer call.
+
+## 2026-10-11 — lead-directed integration: combined engine bump + consolidated runner (12:30-15:00Z)
+
+Lead ruling (single integrator on `codex/ab-campaign-port-fixes`; DevOps,
+Luna Manager, Sonnet paused; PILOT HOLD active — no launches without a
+HEAVY_RUN_WINDOW reservation):
+
+- ENGINE: maintainer adopted the polygon fix. Combined bump built as
+  `devin/engine-bump-botname-capsule@ad061ebf79` = merged-engine base
+  `04f9a38bae` (polygon long-math) + bot-name fallback `65feb80c48` +
+  Capsule long-math + `docs/hitshape-int32-overflow-findings.md`
+  (Rectangle/Circle recorded as follow-up findings, not patched).
+  **Sol BOUNDED APPROVE** on exact SHA `ad061ebf79029da4dcd3a841a9b2540e39cbf968`
+  (200k-case differential, zero mismatches). Fast-forwarded onto
+  `cameo-engine` mainline; `mod.config` pinned; `make all` rebuilt clean;
+  boot-gate PASS (menu, no new exceptions, no leftovers).
+- SOURCE PIN corrected per lead resend: `e49acf41a` (NOT 964cdb63) merged
+  into this branch; every `source_commit`/`engine_version` pin in tools,
+  tests, fixtures, manifests updated.
+- RUNNER consolidation on `f2811ac0e`: deployment guard
+  `codex/campaign-deployment-guard@ca95040` + Luna root/PID fallback
+  `98eaa192c`/`f1d9255` + sol review fixes — bounded missing-marker abort
+  (`DEPLOYMENT_WALL_TIMEOUT` + highest_world_tick), duplicate-seat
+  rejection (unique seat_id/home + exact set equality), PID-scoped
+  cleanup hardened (`kill_owned_pid` + `_path_variants`: Windows
+  CommandLine can carry 8.3/long/MIXED-prefix path spellings — a
+  long-form-only containment check silently refused the kill), guard in
+  map_engine_acceptance + A5, policy constants per ruling (10.5 GiB cap /
+  peak+3 admit / >=14 GiB 2nd small / large exclusive / 3 GiB stop).
+- Reviewer-flagged guard regressions checked: `tool_hash_algorithm`
+  enforcement kept, BOM-aware engine VERSION read kept, `text_sha`
+  lone-CR fold restored (guard had dropped it), RAM constants = ruling.
+- Luna FAIL on `cb4c920cc` fixed: `match_game_uid` requires EVERY match
+  row to carry the same nonempty uid — mixed present/missing rejected;
+  regression test added.
+- `results/map-engine-acceptance-20261011-windows-pilot` (my fixture run
+  without reservation) renamed `*-UNAUTHORIZED-NONAUTHORITATIVE` per lead.
+- Manifests regenerated + staged on the integrated SHA `181703996`:
+  candidate sha `374fd362`, execution sha `2e55f849` (approved byte
+  false). `a5_parity_receipt_*` intentionally null — the prior receipt
+  documents superseded pins; fresh A5 on e49acf41+ad061ebf79 is required.
+  Dry-run: `NO_LAUNCH games=64` on the final binary. 72 focused tests.
+
+## Pending
+
+- LEAD: grant HEAVY_RUN_WINDOW -> A5 fixed-tick parity on
+  source `e49acf41` + engine `ad061ebf79` -> new A5 receipt ->
+  regen+re-sign exec manifest -> dry-run -> report (<=5 lines, STATUS
+  Resume). THEN maintainer flips `execution_approved`.
+- PILOT HOLD: no outcome cells until lead lifts it; every launch of any
+  kind requires a HEAVY_RUN_WINDOW reservation first.
+- Follow-up task: Rectangle/Circle hitshape long-math (findings file).
+- Open question for maintainer: whether lobby `hard` should also pin an
+  aggressive personality (currently only campaign arms are pinned).
+- User-reported blocker still open: "all AIs of a team destroyed but the
+  game is still not ending" — no-early-end proof remains a pilot blocker.

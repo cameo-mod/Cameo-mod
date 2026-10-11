@@ -22,7 +22,7 @@ SWITCHES = ("BU_harvester_logistics", "U_ut4_expansion_appetite", "AF_harvester_
 MAPS = {
     "small_gate": ("mods/cameo/maps/_ra_pitfight.oramap", "f50f2399a38346c501f1b1ff91614f7eb9c73b9d0b8eadeffaa067a5bcf4c4d8"),
     "open_economy": ("mods/cameo/maps/_ra_ore-gardens.oramap", "e74bfaacaf0accfbaf34624e10e0708e61468867c1164aa24927c4f24a750842"),
-    "chokepoint": ("mods/cameo/maps/_ra_siberian-pass.oramap", "dd1143299340094a604a5e2a02474dd095916f4f0dd75e9de0a1be23910bdd75"),
+    "chokepoint": ("mods/cameo/maps/_ra_Siberian-Pass.oramap", "dd1143299340094a604a5e2a02474dd095916f4f0dd75e9de0a1be23910bdd75"),
 }
 MAX_MANIFEST = 128 * 1024
 MAX_INPUT = 512 * 1024 * 1024
@@ -54,6 +54,19 @@ def sha256(path: pathlib.Path) -> str:
     return h.hexdigest()
 
 
+def read_engine_pin(path: pathlib.Path) -> str:
+    """Read VERSION across Windows UTF-16 and Unix UTF-8 engine packages."""
+    raw = path.read_bytes()
+    if raw.startswith((b"\xff\xfe", b"\xfe\xff")):
+        text = raw.decode("utf-16")
+    elif raw.startswith(b"\xef\xbb\xbf"):
+        text = raw.decode("utf-8-sig")
+    else:
+        text = raw.decode("ascii")
+    value = text.strip()
+    return value[4:] if value.startswith("git-") else value
+
+
 def require(condition: bool, message: str):
     if not condition:
         raise ValueError(message)
@@ -77,7 +90,7 @@ def validate_manifest(m: dict[str, Any], root: pathlib.Path, *, executable=False
     require(pinned.returncode == 0, "frozen source commit is absent from this repository")
     engine_version = root / "engine" / "VERSION"
     if engine_version.exists():
-        require(engine_version.read_text(encoding="ascii").strip().lower() == pins["engine_version"].lower(),
+        require(read_engine_pin(engine_version).lower() == pins["engine_version"].lower(),
                 "engine VERSION differs from frozen pin")
     require(type(m.get("world_tick_cap")) is int and m["world_tick_cap"] == 45000, "world cap must be 45000")
     require(type(m.get("wall_timeout_s")) is int and m["wall_timeout_s"] == 3000, "wall timeout must be 3000")

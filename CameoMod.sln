@@ -18,6 +18,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenRA.Mods.Cameo.Contracts
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenRA.Mods.Cameo.Unified", "OpenRA.Mods.Cameo.Unified\OpenRA.Mods.Cameo.Unified.csproj", "{BA257CC1-CD5A-4401-90EF-79D443D5A41E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenRA.Platforms.Null", "OpenRA.Platforms.Null\OpenRA.Platforms.Null.csproj", "{F7976D12-D74E-4E9C-8EA9-37206213B56E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -77,6 +79,12 @@ Global
 		{BA257CC1-CD5A-4401-90EF-79D443D5A41E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BA257CC1-CD5A-4401-90EF-79D443D5A41E}.Release-x86|Any CPU.ActiveCfg = Debug|Any CPU
 		{BA257CC1-CD5A-4401-90EF-79D443D5A41E}.Release-x86|Any CPU.Build.0 = Debug|Any CPU
+		{F7976D12-D74E-4E9C-8EA9-37206213B56E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7976D12-D74E-4E9C-8EA9-37206213B56E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7976D12-D74E-4E9C-8EA9-37206213B56E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7976D12-D74E-4E9C-8EA9-37206213B56E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7976D12-D74E-4E9C-8EA9-37206213B56E}.Release-x86|Any CPU.ActiveCfg = Release|Any CPU
+		{F7976D12-D74E-4E9C-8EA9-37206213B56E}.Release-x86|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

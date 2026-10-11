@@ -1,3 +1,38 @@
+# 2026-10-10 — Claude: A/B launch blockers fixed, headless platform, runtime map acceptance (branch `ccr-c7f51935-i53fkj`)
+
+*Claude (Opus)*, maintainer request: fix what kept Codex/Devin from running the A/B tests. Base `c07bef43`, engine `6da7fce14`.
+
+- **Root cause of the 8–9 GiB match peaks:** 200+ 2048² sprite sheets (≥ 3.2 GiB of textures) held by the GL driver.
+  The managed heap is ~1.1 GB live (`dotnet-counters`, `dotnet-gcdump`, a texture counter in a throwaway engine copy).
+- **`OpenRA.Platforms.Null`** (new mod project in `CameoMod.sln`; loaded by `Game.Platform=Null`, no engine change).
+  No textures, skips `RenderTick`, fonts and dummy sound delegated to Default. `--render headless` in
+  `run_ai_match_batch.py` and `campaign_runner.py execute-one`; the harness verifies the dll and the `graphics.log`
+  marker. Measured: peak 8.62 → 5.19 GB, in game 5.1 → 2.6 GB, ~100 ticks/s. Same-seed parity: 2,673 of 2,673 shared
+  frames identical (orders + sync hashes) through the 8,000-tick cap.
+- **Campaign tooling fixes:**
+  - dual-arm AI shipped as map rules (`install_dual_arm_rules`); the overlay search path was ignored, so the arms
+    never ran;
+  - `make_jobs` arm swap;
+  - runner imports, map dir and lua.log markers;
+  - `text_sha` pins;
+  - `_ra_Siberian-Pass` case;
+  - `BP_squad_desire` effect class (test pinned at 27/24/10);
+  - stale-build refusal.
+- **New:** `tools/ai/map_engine_acceptance.py`; tests `test_map_engine_acceptance.py`, `test_campaign_tools_names.py`
+  (static unbound-name guard), new cases in `test_ai_batch_harness.py` and `test_ab_campaign_pilot.py`.
+- **Candidate manifest** regenerated (text pins only) to `126d57ec…`, and the pilot dry-run fixture refreshed.
+  Campaign suites green: pilot, runner, acceptance, names, ab_campaign, harness, A5 probe, budget, increment, summary,
+  aggregate, league.
+- Pre-existing and left alone: `test_replay_health` depth-limit case depends on the Python version (it reports UNKNOWN
+  correctly either way).
+- **Runs (follow-up commit):**
+  - map acceptance: 32/32 cells, 16/16 pairs, all 8 maps, headless peak ≤ 5.24 GB;
+  - BU A/B: 8 games, treatment 2 wins, early income ×0.93;
+  - `hard` vs `classic`: Terra Cotta 3/5, Winter's End 1/1;
+  - one A/B batch voided by `mod_commit` fingerprint drift (commit landed mid-batch) and re-run.
+- **Docs:** LESSONS_LEARNED (2 entries), STATUS resume, HANDOFF, master doc Part IIIc, TASK_INDEX A/B row,
+  `MAP_ENGINE_ACCEPTANCE_2026-10-10.md`, correction note in `SPAWN_SYMMETRY_2026-10-11.md`, M13 counts.
+
 
 *Devin-Developer 2026-10-10 (rereview fix, devin/repair-b3-park-release @ 693c07793).* VP exact-tip review of 560a413 caught that owner-scoped AnchorTakenForOwner (ReferenceEquals only) made NULL-owner parks — offer-streak churn bounds, ParkTicks, the parameterless failure overload — invisible to every reservation probe. Restored global semantics for null-owner parks (park.Owner == null || ReferenceEquals) while keeping the lead-ruled owner scoping for failure cooldowns; fake provider mirrors it. New regression NullOwnerParkStaysGlobalAndBlocksForeignReservation. Verified: build 0 errors, focused 124/124, full 1515/1515, fog audit PASS (269 sites). No fresh boot gate — host has no execution slot (pytest ~9.7GB + seat_verify resident); branch boot-gated clean at dad8c6753.
 # 2026-10-10 — Devin: REPAIR-B3 follow-up — park frees the whole set; owner-scoped cooldown (branch `devin/repair-b3-park-release`)
