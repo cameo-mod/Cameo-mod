@@ -47,7 +47,9 @@ ECONOMY_INTERVAL_TICKS = tuple(range(5000, 45001, 5000))
 FIX_SAFETY_SWITCHES = frozenset("K_cn2_unit_repair AL_emergency_net_loss AN_combat_veto AG_assault_fanout BJ_squad_hysteresis BK_squad_order_dedup BL_protection_episode_guard BN_squad_pool_fixes BO_squad_move_dedup".split())
 _, _ALL_GROUPS, _ = increment.load_spec(pathlib.Path(__file__).with_name("increment_switches.yaml"))
 BEHAVIOR_SWITCHES = tuple(name for name in _ALL_GROUPS if name not in FIX_SAFETY_SWITCHES)
-DEFAULT_THRESHOLDS = {"early_accept_share":0.75,"early_reject_share":0.25,"win_noninferiority_delta":0.0,"min_earned_spent_improvement":0.0,"min_army_efficiency_improvement":0.0,"min_kill_exchange_improvement":0.0}
+# min_setup_veto_sample binds the analyzer's per-setup harm-veto floor (analyzer
+# raises when a supplied manifest omits it; the lead-approved default is 4).
+DEFAULT_THRESHOLDS = {"early_accept_share":0.75,"early_reject_share":0.25,"win_noninferiority_delta":0.0,"min_earned_spent_improvement":0.0,"min_army_efficiency_improvement":0.0,"min_kill_exchange_improvement":0.0,"min_setup_veto_sample":4}
 SLOT_POLICY={"max_parallel_small_games":2,"small_team_size_max":2,"large_game_exclusive":True,"min_free_ram_bytes":RAM_FLOOR_BYTES,"parallel_min_free_ram_bytes":PARALLEL_RAM_FLOOR_BYTES,"max_private_bytes":PROCESS_CAP_BYTES,"headless_peak_bytes":HEADLESS_PEAK_BYTES,"process_headroom_bytes":3*1024**3,"soft_free_ram_bytes":4*1024**3,"hard_free_ram_bytes":3*1024**3}
 
 def treatment_baseline(accepted_switches, candidate):
