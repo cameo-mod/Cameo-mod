@@ -2,6 +2,7 @@ import pathlib
 import sys
 import tempfile
 import unittest
+from unittest import mock
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "tools" / "ai"))
@@ -11,6 +12,16 @@ import run_ai_match_batch as batch
 
 
 class FixedTickParityTests(unittest.TestCase):
+    def test_qualification_launch_is_headless_and_seeded(self):
+        with tempfile.TemporaryDirectory() as temp:
+            with mock.patch.object(probe, "OUT", pathlib.Path(temp)):
+                with mock.patch.object(probe.subprocess, "Popen", side_effect=RuntimeError("launch intercepted")) as launch:
+                    with self.assertRaisesRegex(RuntimeError, "launch intercepted"):
+                        probe.run_cell(1)
+        command = launch.call_args.args[0]
+        self.assertEqual(command[command.index("--render") + 1], "headless")
+        self.assertEqual(launch.call_args.kwargs["env"]["CAMEO_DEV_SEED"], str(probe.SEED))
+
     def test_temporary_map_template_requires_opt_in_and_fixed_layout(self):
         with tempfile.TemporaryDirectory() as temp:
             dest = pathlib.Path(temp)

@@ -1,3 +1,7 @@
+# 2026-10-11 — Boss: correct A5 qualification renderer
+
+The A5 probe now requests headless rendering instead of fast/windowed mode. Four focused tests pass, including an intercepted-launch regression checking the renderer and seed. `docs/audit/A5_HEADLESS_2026_10_11.md` records the source checkpoint and next gates. The earlier staged A5 attempt described below was aborted and supplies no qualification evidence; a profiler-off reserved rerun and runtime map acceptance remain required.
+
 # 2026-10-11 — Devin Coordinator: canonical A/B candidate line, engine bump on cameo-engine, gate-ready A5 staged (branch `codex/ab-campaign-port-fixes`)
 
 *Devin*, acting as sole integrator while lead/DevOps/Luna were paused. Branch is the declared canonical
