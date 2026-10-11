@@ -30,20 +30,20 @@ SETUPS = [
  ("3v3_winter_asg",3,"winters_end_rich",("ra1_allies","ra1_soviets","td_gdi")),("3v3_winter_sgn",3,"winters_end_rich",("ra1_soviets","td_gdi","td_nod")),
  ("4v4_sahara",4,"great_sahara_2",("td_gdi","td_nod","ra1_allies","ra1_soviets")),("4v4_ice",4,"ice_cold",("td_gdi","td_nod","ra1_allies","ra1_soviets")),
 ]
-# Latest measured headless peak in the acceptance receipt (5,623,365,632 B)
-# plus the maintainer's 3 GiB headroom. Re-measure on the final engine/host
-# before freezing the executable manifest. Admission rounds 2*peak + 3 GiB
-# upward to 14 GiB for two concurrent 1v1/2v2 cells.
+# Maintainer-approved campaign gate: serial-safe per-process ceiling with a
+# 4 GiB soft pressure threshold, 3 GiB hard host reserve, and 15.5 GiB launch
+# admission for the two-small-game slot. Linux RSS measurements are diagnostic
+# only; Windows private bytes must be recorded on the final engine before pilot.
 HEADLESS_PEAK_BYTES = 5623365632
-PROCESS_CAP_BYTES = HEADLESS_PEAK_BYTES + 3 * 1024**3
-RAM_FLOOR_BYTES = 14 * 1024**3
+PROCESS_CAP_BYTES = int(10.5 * 1024**3)
+RAM_FLOOR_BYTES = int(15.5 * 1024**3)
 ROUND_STAGES = [16,32,48,64]
 ECONOMY_INTERVAL_TICKS = tuple(range(5000, 45001, 5000))
 FIX_SAFETY_SWITCHES = frozenset("K_cn2_unit_repair AL_emergency_net_loss AN_combat_veto AG_assault_fanout BJ_squad_hysteresis BK_squad_order_dedup BL_protection_episode_guard BN_squad_pool_fixes BO_squad_move_dedup".split())
 _, _ALL_GROUPS, _ = increment.load_spec(pathlib.Path(__file__).with_name("increment_switches.yaml"))
 BEHAVIOR_SWITCHES = tuple(name for name in _ALL_GROUPS if name not in FIX_SAFETY_SWITCHES)
 DEFAULT_THRESHOLDS = {"early_accept_share":0.75,"early_reject_share":0.25,"win_noninferiority_delta":0.0,"min_earned_spent_improvement":0.0,"min_army_efficiency_improvement":0.0,"min_kill_exchange_improvement":0.0}
-SLOT_POLICY={"max_parallel_small_games":2,"small_team_size_max":2,"large_game_exclusive":True,"min_free_ram_bytes":RAM_FLOOR_BYTES,"max_private_bytes":PROCESS_CAP_BYTES,"headless_peak_bytes":HEADLESS_PEAK_BYTES,"process_headroom_bytes":3*1024**3}
+SLOT_POLICY={"max_parallel_small_games":2,"small_team_size_max":2,"large_game_exclusive":True,"min_free_ram_bytes":RAM_FLOOR_BYTES,"max_private_bytes":PROCESS_CAP_BYTES,"headless_peak_bytes":HEADLESS_PEAK_BYTES,"process_headroom_bytes":PROCESS_CAP_BYTES-HEADLESS_PEAK_BYTES,"soft_free_ram_bytes":4*1024**3,"hard_free_ram_bytes":3*1024**3}
 
 def treatment_baseline(accepted_switches, candidate):
  """Ratchet rule: accepted groups stay in control; treatment adds one candidate."""
@@ -141,6 +141,10 @@ class SlotCounter:
   with self._lock: self._active.pop(cell_id,None);self._sizes.pop(cell_id,None)
 
 def sha(path): return hashlib.sha256(path.read_bytes()).hexdigest()
+TOOL_HASH_ALGORITHM = "sha256-lf-normalized-v1"
+def tool_sha(path):
+ raw=pathlib.Path(path).read_bytes().replace(b"\r\n",b"\n").replace(b"\r",b"\n")
+ return hashlib.sha256(raw).hexdigest()
 def read_engine_version(path):
  raw=pathlib.Path(path).read_bytes()
  if raw.startswith((b"\xff\xfe",b"\xfe\xff")): text=raw.decode("utf-16")
@@ -310,12 +314,13 @@ def validate(manifest,root,engine_root=None,execution=False):
  require(manifest.get("baseline_ai_payload_sha256")==ai_payload_sha(root),"baseline AI payload mismatch")
  require(manifest.get("treatment_ai_payload_sha256")==ai_payload_sha(root,SWITCH),"one-switch treatment AI payload mismatch")
  tool_paths={"driver_analyzer":pathlib.Path(__file__),"campaign_runner":root/"tools"/"ai"/"campaign_runner.py","batch_runner":root/"tools"/"ai"/"run_ai_match_batch.py","switch_applier":root/"tools"/"ai"/"apply_increment_switches.py"}
- require(manifest.get("tool_sha256")=={k:text_sha(v) for k,v in tool_paths.items()},"tool SHA pins mismatch")
+ require(manifest.get("tool_hash_algorithm")==TOOL_HASH_ALGORITHM,"tool hash algorithm mismatch")
+ require(manifest.get("tool_sha256")=={k:tool_sha(v) for k,v in tool_paths.items()},"tool SHA pins mismatch")
  require(manifest.get("receipt_schema_sha256")==text_sha(root/"tools"/"ai"/"ab_campaign_receipt.schema.json"),"receipt schema SHA mismatch")
  binaries=manifest.get("binary_sha256")
  require(isinstance(binaries,dict) and len(binaries)==3 and all(len(v)==64 for v in binaries.values()),"engine binary SHA pins missing")
  if engine_root is not None:
-  require((engine_root/"VERSION").read_text(encoding="ascii").strip()==pins["engine_version"],"engine VERSION mismatch")
+  require(read_engine_version(engine_root/"VERSION")==pins["engine_version"],"engine VERSION mismatch")
   require({rel:sha((engine_root/pathlib.PurePosixPath(rel))) for rel in binaries}==binaries,"engine binary SHA mismatch")
  expected=[{"name":k,"path":v[0],"sha256":v[1],"required_seats":v[2]} for k,v in MAPS.items()]
  require(manifest.get("maps")==expected,"map path/SHA/seat-count pins mismatch")

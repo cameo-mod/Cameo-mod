@@ -49,17 +49,18 @@
   "switch_patch_sha256": "d710567579cb3673eb33701ec881495f0a2a17d6203194b0efdc8052f4de4523",
   "baseline_ai_payload_sha256": "932e2e5c919de6f5b493e1722e6e66e39a3a5f1577b29aa58a571492b7de9d69",
   "treatment_ai_payload_sha256": "acdfd3a3e2c7d405a776703593f1d52c5f357b423e75ffb224392159c009c725",
+  "tool_hash_algorithm": "sha256-lf-normalized-v1",
   "tool_sha256": {
-    "driver_analyzer": "02429657b021784a35940b94ca2359c8ba94ef8b92852d1ad8491797f06b1c69",
+    "driver_analyzer": "90f82358edf973f80ba80bbcd67ffe227cfb17941d386a79def6eae363292e01",
     "campaign_runner": "6a17f2c14f35c4a64b21173ea3e6767a5961b322180f7b6c262af34770c30f67",
     "batch_runner": "03247f59f2744ea001c9d35a5a03c16bef077ac450d24ef05c08f167d16fcad5",
     "switch_applier": "9e9f678871cc2d8adeca0e7b5c2c28a30a041252f8f630005593bc7f241a6bdd"
   },
   "receipt_schema_sha256": "0073f316a9b34b791156ddc18ed203da88651c90af0f3d62680d0dfd5a73995f",
   "binary_sha256": {
-    "bin/OpenRA.exe": "5693f355792ebb68699793f96ef2167b733c5e7756f580858c5090226418c984",
-    "bin/OpenRA.Game.dll": "167fcbd8985dc3cd74ae2747c6d4a43db0d51cbda99dc029712fdb72182f6b80",
-    "bin/OpenRA.Mods.Cameo.dll": "3b69b0d49d88914d4e003fbae2c35faf9e8bad0625e161effb2773e5e5575853"
+    "bin/OpenRA.exe": "a4d4645dd668241dd73f0e102fe1e6145d72932ee9b38447e4a7ea93b7f1cd55",
+    "bin/OpenRA.Game.dll": "819ec01a7546ba184a132f82c9b43b15fd2df86bf8f651fcacf7df68584d9624",
+    "bin/OpenRA.Mods.Cameo.dll": "64f073697437953b5fd7458da4851e2847e442cf13917e3c39903c8daf23cd1e"
   },
   "maps": [
     {
@@ -262,5 +263,7 @@
     }
   ],
   "execution_approved": false,
-  "notes": "non-executable candidate; engine pin updated to landed 4f69df005f; final Windows engine binaries, headless profile, map acceptance, A5 receipt and tool pins must be refreshed before approval"
+  "notes": "non-executable candidate; execution approval remains false until Windows engine acceptance, headless measurement, fresh A5 receipt, and maintainer sign-off",
+  "a5_parity_receipt_path": null,
+  "a5_parity_receipt_sha256": null
 }

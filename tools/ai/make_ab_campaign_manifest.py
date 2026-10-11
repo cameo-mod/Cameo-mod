@@ -66,7 +66,7 @@ manifest = {
     "acceptance_thresholds": pilot.DEFAULT_THRESHOLDS,
     "slot_policy": pilot.SLOT_POLICY,
     "baseline_manifest_path": baseline_path.relative_to(ROOT).as_posix(),
-    "baseline_manifest_sha256": sha(baseline_path),
+    "baseline_manifest_sha256": pilot.text_sha(baseline_path),
     "pins": {
         "source_commit": "964cdb630b1514e1c1a0baed55cbdbc427d5fc11",
         "engine_version": "4f69df005fe0d893526890fcb5bbc42e442d6fd6",
@@ -76,7 +76,7 @@ manifest = {
     "treatment_ai_payload_sha256": pilot.ai_payload_sha(ROOT, pilot.SWITCH),
     "tool_hash_algorithm": pilot.TOOL_HASH_ALGORITHM,
     "tool_sha256": {k: pilot.tool_sha(v) for k, v in tool_paths.items()},
-    "receipt_schema_sha256": sha(ROOT / "tools" / "ai" / "ab_campaign_receipt.schema.json"),
+    "receipt_schema_sha256": pilot.text_sha(ROOT / "tools" / "ai" / "ab_campaign_receipt.schema.json"),
     "binary_sha256": binary_sha,
     "maps": maps,
     "setups": setups,
@@ -87,11 +87,14 @@ manifest = {
 out = ROOT / "docs" / "audit" / "ab_pilot_manifest_candidate.json"
 prior = json.loads(out.read_text(encoding="utf-8-sig")) if out.is_file() else {}
 a5_path = prior.get("a5_parity_receipt_path")
-if not a5_path or not pathlib.Path(a5_path).is_file():
-    raise SystemExit("existing candidate must identify the pinned A5 receipt file")
-manifest["a5_parity_receipt_path"] = a5_path
-manifest["a5_parity_receipt_sha256"] = sha(pathlib.Path(a5_path))
-manifest["notes"] = "non-executable candidate; execution approval remains false until maintainer sign-off"
+if a5_path and pathlib.Path(a5_path).is_file():
+    manifest["a5_parity_receipt_path"] = a5_path
+    manifest["a5_parity_receipt_sha256"] = sha(pathlib.Path(a5_path))
+else:
+    manifest["a5_parity_receipt_path"] = None
+    manifest["a5_parity_receipt_sha256"] = None
+manifest["execution_approved"] = False
+manifest["notes"] = "non-executable candidate; execution approval remains false until Windows engine acceptance, headless measurement, fresh A5 receipt, and maintainer sign-off"
 text = json.dumps(manifest, indent=2) + "\n"
 if "--write" in sys.argv:
     out.write_bytes(text.encode("utf-8"))
