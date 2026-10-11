@@ -1,0 +1,111 @@
+{
+  "replay": "C:\\cameo-wt\\sol-ab-1008\\results-20261008T144912Z\\tournament-10-ctrl-ra1_allies\\Replays\\cameo\\{DEV_VERSION}\\cameo-2026-10-08T151028Z.orarep",
+  "sha256": "97a7cb75a3a9d2e0462f0a22e8a52f51a8a0ef6c842a9be020b9e095643767bc",
+  "parser_sha256": "88d9be75d73c36233ad9e7d341c505b1ff761507ebe23f58438f6d59e1586014",
+  "unparsed_tails": 0,
+  "incomplete": false,
+  "subject4_seat_binding": "Four PlaceBuilding item/decoded-cell pairs match exactly the four Multi1 placement records. Host client0 is not seat identity.",
+  "orders": [
+    {
+      "client": 0,
+      "replay_frame": 45,
+      "order": "StartProduction",
+      "subject_actor": 4,
+      "item": "ra1_powerplant",
+      "cell": null,
+      "flags": 172,
+      "extra_hex": "01000000"
+    },
+    {
+      "client": 0,
+      "replay_frame": 95,
+      "order": "PlaceBuilding",
+      "subject_actor": 4,
+      "item": "ra1_powerplant",
+      "cell": "73,24",
+      "flags": 229,
+      "extra_hex": "04000000"
+    },
+    {
+      "client": 0,
+      "replay_frame": 104,
+      "order": "StartProduction",
+      "subject_actor": 4,
+      "item": "ra1_allies_barracks",
+      "cell": null,
+      "flags": 172,
+      "extra_hex": "01000000"
+    },
+    {
+      "client": 0,
+      "replay_frame": 196,
+      "order": "PlaceBuilding",
+      "subject_actor": 4,
+      "item": "ra1_allies_barracks",
+      "cell": "69,25",
+      "flags": 229,
+      "extra_hex": "04000000"
+    },
+    {
+      "client": 0,
+      "replay_frame": 207,
+      "order": "StartProduction",
+      "subject_actor": 4,
+      "item": "ra1_allies_orerefinery",
+      "cell": null,
+      "flags": 172,
+      "extra_hex": "01000000"
+    },
+    {
+      "client": 0,
+      "replay_frame": 231,
+      "order": "StartProduction",
+      "subject_actor": 4,
+      "item": "ra1_allies_gunturret",
+      "cell": null,
+      "flags": 172,
+      "extra_hex": "01000000"
+    },
+    {
+      "client": 0,
+      "replay_frame": 480,
+      "order": "CancelProduction",
+      "subject_actor": 4,
+      "item": "ra1_allies_orerefinery",
+      "cell": null,
+      "flags": 164,
+      "extra_hex": "01000000"
+    },
+    {
+      "client": 0,
+      "replay_frame": 501,
+      "order": "PlaceBuilding",
+      "subject_actor": 4,
+      "item": "ra1_allies_gunturret",
+      "cell": "66,26",
+      "flags": 229,
+      "extra_hex": "04000000"
+    },
+    {
+      "client": 0,
+      "replay_frame": 509,
+      "order": "StartProduction",
+      "subject_actor": 4,
+      "item": "ra1_allies_pillbox",
+      "cell": null,
+      "flags": 172,
+      "extra_hex": "01000000"
+    },
+    {
+      "client": 0,
+      "replay_frame": 651,
+      "order": "PlaceBuilding",
+      "subject_actor": 4,
+      "item": "ra1_allies_pillbox",
+      "cell": "66,24",
+      "flags": 229,
+      "extra_hex": "04000000"
+    }
+  ],
+  "limits": "Replay frames are not world ticks. Orders prove intent, not queue acceptance, payment or cancellation outcome."
+}
