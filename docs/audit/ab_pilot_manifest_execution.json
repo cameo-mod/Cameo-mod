@@ -45,23 +45,23 @@
   "baseline_manifest_sha256": "0086954f9b3a1787e50f365dca07474e8a47bf4342da6da2ad5924a805e3dae6",
   "pins": {
     "source_commit": "964cdb630b1514e1c1a0baed55cbdbc427d5fc11",
-    "engine_version": "4f69df005fe0d893526890fcb5bbc42e442d6fd6"
+    "engine_version": "04f9a38baed23a760973a3313762ff5d4534a733"
   },
   "switch_patch_sha256": "d710567579cb3673eb33701ec881495f0a2a17d6203194b0efdc8052f4de4523",
-  "baseline_ai_payload_sha256": "932e2e5c919de6f5b493e1722e6e66e39a3a5f1577b29aa58a571492b7de9d69",
-  "treatment_ai_payload_sha256": "acdfd3a3e2c7d405a776703593f1d52c5f357b423e75ffb224392159c009c725",
+  "baseline_ai_payload_sha256": "02a3e1d3c53e63e441538964cba87e0f856242b685f4ccef1239ff5837244f38",
+  "treatment_ai_payload_sha256": "e25d7ecf8b5044e05c2c3afaad451d1078483f1d678b1b440213f71d5e2cccb5",
   "tool_hash_algorithm": "sha256-crlf-folded",
   "tool_sha256": {
-    "driver_analyzer": "b9bab25047220362a3a8ae41bc7106c3a8b89fac85ef18ef272946027af7fb5b",
-    "campaign_runner": "2240164de399076525ed49c8ce9760c3adbd865ac3f3f420674d2fb6e311e536",
+    "driver_analyzer": "34ad59f9cea28167ce7741b88589d5acee47323475307f120b2de7f9c5e75610",
+    "campaign_runner": "7ed1b1390e3f0eadc11889565376aec6d8ad50b42e90005b32db1c9f0d3885ce",
     "batch_runner": "03247f59f2744ea001c9d35a5a03c16bef077ac450d24ef05c08f167d16fcad5",
     "switch_applier": "9e9f678871cc2d8adeca0e7b5c2c28a30a041252f8f630005593bc7f241a6bdd"
   },
   "receipt_schema_sha256": "0073f316a9b34b791156ddc18ed203da88651c90af0f3d62680d0dfd5a73995f",
   "binary_sha256": {
-    "bin/OpenRA.exe": "a4d4645dd668241dd73f0e102fe1e6145d72932ee9b38447e4a7ea93b7f1cd55",
-    "bin/OpenRA.Game.dll": "819ec01a7546ba184a132f82c9b43b15fd2df86bf8f651fcacf7df68584d9624",
-    "bin/OpenRA.Mods.Cameo.dll": "64f073697437953b5fd7458da4851e2847e442cf13917e3c39903c8daf23cd1e"
+    "bin/OpenRA.exe": "460d24bdeb69671d6babf36b98643fe9136aa2afa72e3b3cb4d7fa9aacad6394",
+    "bin/OpenRA.Game.dll": "b50e7ec6ff42157698b24fb5537f74c230b29b940040010734fba783b5a278d3",
+    "bin/OpenRA.Mods.Cameo.dll": "56016395e5804daee6157256c7b85519ca69684557efd2d9c3768c6d2040b152"
   },
   "maps": [
     {
@@ -264,7 +264,7 @@
     }
   ],
   "execution_approved": false,
-  "notes": "REGENERATED 2026-10-11 on codex/ab-campaign-port-fixes post-merge: pins new engine 4f69df005f and the new-engine A5 gate receipt (IDENTICAL_TAIL_FLUSH, fingerprint 02a4a5cf3287). execution_approved stays false until the maintainer/lead flips this byte at sign-off \u2014 the dry-run gate (validate(execution=True)) then enforces every pin below. Supersedes the revoked 6da7fce-pinned manifest.",
-  "a5_parity_receipt_path": "results/campaign-a5-fixed-tick-parity-20261011-newengine4/A5_parity_gate_receipt.json",
-  "a5_parity_receipt_sha256": "b23d620e62b54b7e7b8f62a0a687ad537a3ec101764e54e2f391a3d64c49024f"
+  "notes": "REGENERATED 2026-10-11 on codex/ab-campaign-port-fixes post-merge: pins merged engine 04f9a38bae (polygon hitshape long-math, cameo-mod/OpenRA PR #106) and its A5 gate receipt (IDENTICAL_TAIL_FLUSH, fingerprint ff35c163d3ea). execution_approved stays false until the maintainer/lead flips this byte at sign-off - the dry-run gate (validate(execution=True)) then enforces every pin below. Supersedes the 4f69df005f-pinned manifest.",
+  "a5_parity_receipt_path": "results/campaign-a5-fixed-tick-parity-20261011-merged-polyfix/A5_parity_gate_receipt.json",
+  "a5_parity_receipt_sha256": "1d67630f30fabb88c1c2973fb4d2610eea9160b432d0ac8887341f028ad68652"
 }
