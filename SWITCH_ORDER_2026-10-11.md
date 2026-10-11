@@ -1,6 +1,6 @@
 # SWITCH_ORDER_2026-10-11
 
-**Scope:** inventory of the 60 increment-switch groups in `tools/ai/increment_switches.yaml` at base `700bb16483f6d92664153e98d6f2560c312acaab`. This is a review proposal, not approval to integrate or launch. Fix/safety category means test and same-seed parity, no causal A/B; move into a ratcheted baseline only after its separate review/integration gate. Behavior order is a review-priority hypothesis, not an empirical ranking.
+**Scope:** inventory of the 61 increment-switch groups in `tools/ai/increment_switches.yaml` at base `964cdb630b1514e1c1a0baed55cbdbc427d5fc11`. This is a review proposal, not approval to integrate or launch. Fix/safety category means test and same-seed parity, no causal A/B; move into a ratcheted baseline only after its separate review/integration gate. Behavior order is a review-priority hypothesis, not an empirical ranking.
 
 ## Fix/safety: test and parity, skip A/B (9)
 
@@ -16,7 +16,7 @@
 | `BO_squad_move_dedup` | Corrective repeated-move suppression. |
 | `K_cn2_unit_repair` | Repair-path correctness; safety/correctness gate. |
 
-## Behavior switches ? impact-prioritized A/B queue (51)
+## Behavior switches ? impact-prioritized A/B queue (52)
 
 Each effect is isolated against the current ratchet baseline. Accepted switches join the next control baseline; every test pins that baseline manifest SHA and one added patch. The first three are the amended BU pilot, expansion appetite, and harvester spread. Remaining order is triage only; validate live consumers and nonzero deltas on the reviewed base before freezing a manifest.
 
@@ -73,6 +73,7 @@ Each effect is isolated against the current ratchet baseline. Accepted switches 
 | 49 | `AA_cn4_region_roles` |  |
 | 50 | `BI_front_back_placement` |  |
 | 51 | `AI_radar_contacts` |  |
+| 52 | `BP_squad_desire` | Default-off per-squad stance provider; no provider wired yet, so baseline has zero behavioral delta until one is added. |
 
 ## Sequential acceptance and regression cadence
 

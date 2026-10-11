@@ -37,8 +37,11 @@ def generated_map_player_references(text):
  audit_path=str(audit_tools)
  if audit_path not in sys.path: sys.path.insert(0,audit_path)
  from miniyaml import load_text
+ top=load_text(text,"<generated map.yaml>")
+ players=[n for n in top if n.key=="Players"]
+ require(len(players)==1,"generated map.yaml must have exactly one Players block")
  references={}
- for node in load_text(text,"<generated map.yaml>"):
+ for node in players[0].children:
   if not node.key.startswith("PlayerReference@Multi"): continue
   ref=node.key.split("@",1)[1]
   if re.fullmatch(r"Multi\d+",ref) is None: continue

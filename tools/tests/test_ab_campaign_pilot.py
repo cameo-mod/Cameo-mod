@@ -1,4 +1,4 @@
-import json, pathlib, sys, tempfile, unittest
+import hashlib, json, pathlib, sys, tempfile, unittest
 ROOT=pathlib.Path(__file__).resolve().parents[2]
 sys.path.insert(0,str(ROOT/"tools"/"ai"))
 import ab_campaign_pilot as pilot
@@ -258,6 +258,247 @@ class PilotPlanTests(unittest.TestCase):
   _,groups,_=switches.load_spec(ROOT/"tools"/"ai"/"increment_switches.yaml")
   doc=(ROOT/"SWITCH_ORDER_2026-10-11.md").read_text(encoding="utf-8")
   for name in groups: self.assertIn(f"`{name}`",doc)
-  self.assertEqual(60,len(groups))
+  self.assertEqual(61,len(groups))
+
+def jobs_for(m,setup_name):
+ return [j for j in pilot.make_jobs(m) if j["setup"]==setup_name]
+
+def engine_sha(m):
+ b=m["binary_sha256"]
+ return hashlib.sha256("".join(b[k] for k in sorted(b)).encode()).hexdigest()
+
+def write_artifact(root,relpath,data):
+ path=root/relpath;path.parent.mkdir(parents=True,exist_ok=True);path.write_bytes(data)
+ return {"path":relpath,"sha256":hashlib.sha256(data).hexdigest(),"missing_reason":None}
+
+def missing_artifact(reason): return {"path":None,"sha256":None,"missing_reason":reason}
+
+def build_full_receipt(job,m,manifest_sha,artifact_root,*,end_class,winner_side=None,memory_kill=False,force_uid=None):
+ """Build one strict schema_version=1 receipt with real generated-map and match artifacts
+ under artifact_root, satisfying campaign_runner.validate_receipt and the home-location seat join."""
+ cell=job["cell_id"].replace("|","_")
+ proof=pilot.prove_generated_map(job,ROOT,artifact_root/cell/"map")
+ map_rel=f"{cell}/map/map.yaml"
+ seats=proof["seats"]; natural=end_class=="NATURAL"
+ resolved=[{"seat_id":s["home"],"team":s["side"],"arm":s["arm"],"bot_type":s["bot_type"],
+  "faction":s["faction"],"home":s["home"],"spawn":s["spawn"],
+  "proof_source":"generated_map.yaml + match record",
+  "outcome":(("won" if s["side"]==winner_side else "lost") if natural else "unknown"),
+  "metrics":{"earned":None,"spent":None,"banked":None,"army_value":None,"kills":None,"deaths":None,"timeline":[]}}
+  for s in seats]
+ uid=force_uid or f"g-{job['cell_id']}"
+ seed_line=f"CAMEO DEV SEED pinned - RandomSeed={job['seed']} (parity harness)"
+ artifacts={"server_log":missing_artifact("not started"),"driver_log":missing_artifact("not started"),
+  "matches_jsonl":missing_artifact("not started"),"replay":missing_artifact("not started"),
+  "map_yaml":{"path":map_rel,"sha256":proof["map_yaml_sha256"],"missing_reason":None},
+  "support_bundle":missing_artifact("not started")}
+ match_rows=[]
+ if end_class in ("NATURAL","CAP"):
+  artifacts["server_log"]=write_artifact(artifact_root,f"{cell}/server.log",(seed_line+"\n").encode())
+  for seat in seats:
+   # The underlying match telemetry always records a definitive won/lost outcome even
+   # when the receipt driver censors the game at the tick cap; only the receipt-level
+   # resolved_seats/winner_team stay unknown/null for CAP.
+   match_outcome="won" if seat["side"]==winner_side else "lost"
+   match_rows.append({"game_uid":uid,"player":{"home":seat["home"],"bot_type":seat["bot_type"],
+    "faction":seat["faction"],"outcome":match_outcome},
+    "stats_timeline":[{"tick":5000,"earned":10,"spent":4,"banked":6},{"tick":45000,"earned":90,"spent":40,"banked":50}]})
+  lines="\n".join(json.dumps(r,sort_keys=True) for r in match_rows)+"\n"
+  artifacts["matches_jsonl"]=write_artifact(artifact_root,f"{cell}/matches.jsonl",lines.encode())
+ if end_class in ("NATURAL","CAP"):
+  artifacts["support_bundle"]=write_artifact(artifact_root,f"{cell}/support.zip",b"support-bundle")
+ arm_bot_types=job["arm_bot_types"]
+ teams={side:{"arm":"control" if side==job["control_side"] else "treatment",
+  "bot_type":arm_bot_types["control" if side==job["control_side"] else "treatment"],
+  "seat_ids":[s["home"] for s in seats if s["side"]==side]} for side in ("A","B")}
+ peak=runner.PRIVATE_STOP_BYTES+1024 if memory_kill else 2*1024**3
+ end_reason={"NATURAL":"natural","CAP":"cap"}.get(end_class,"MEMORY_KILL" if memory_kill else "PROCESS_DIED")
+ receipt={"schema_version":1,"campaign_id":m.get("campaign_id","ab-campaign-2026-10-11-pilot"),
+  "manifest_sha256":manifest_sha,"baseline_commit":m["pins"]["source_commit"],
+  "engine_sha256":engine_sha(m),"switch":job["switch"],"setup_id":job["setup"],
+  "map":{"name":job["map"],"path":job["map_path"],"sha256":job["map_sha256"],
+   "generated_map_yaml_sha256":proof["map_yaml_sha256"],"required_seats":job["required_seats"]},
+  "pair_id":f"{job['setup']}:{job['seed']}:{job['pair']}","pair_member":job["game_in_pair"],
+  "seed":job["seed"],
+  "seed_proof":{"env_value":str(job["seed"]),
+   "server_log_pin_line":seed_line if end_class in ("NATURAL","CAP") else None,
+   "server_log_sha256":artifacts["server_log"]["sha256"]},
+  "teams":teams,"resolved_seats":resolved,"end_class":end_class,"end_reason":end_reason,
+  "winner_team":winner_side if natural else None,
+  "world_tick":45000 if end_class=="CAP" else (32000 if natural else None),
+  "cap":{"world_tick_cap":45000,"marker_observed":end_class=="CAP","marker_tick":45000 if end_class=="CAP" else None},
+  "memory":{"process_id":4242,"peak_private_bytes":peak,"limit_private_bytes":runner.PRIVATE_STOP_BYTES,"samples":[]},
+  "runtime":{"started_utc":"2026-10-11T00:00:00Z","finished_utc":"2026-10-11T00:05:00Z",
+   "exit_code":0 if end_class!="INCOMPLETE" else None,"wall_seconds":300.0,
+   "stall_seconds":runner.STALL_TIMEOUT_SECONDS,"pid_scoped_cleanup":True},
+  "artifacts":artifacts}
+ return receipt,match_rows,uid
+
+class ReceiptAdapterTests(unittest.TestCase):
+ """Focused fixtures for ab_campaign_pilot.normalize_campaign_receipts: the strict
+ per-game receipt -> legacy analyzer-input adapter DevOps added on this branch."""
+
+ def test_matched_pair_and_side_swap_flow_through_the_adapter_to_analyze(self):
+  m=manifest();raw=json.dumps(m).encode();manifest_sha=hashlib.sha256(raw).hexdigest()
+  setup=pilot.SETUPS[0][0]  # 1v1_nuclear_gdi
+  jobs=jobs_for(m,setup)
+  with tempfile.TemporaryDirectory() as temp:
+   root=pathlib.Path(temp)
+   receipts=[]
+   for job in jobs:
+    receipt,_,_=build_full_receipt(job,m,manifest_sha,root,end_class="NATURAL",winner_side=job["treatment_side"])
+    receipts.append(receipt)
+   normalized,rows=pilot.normalize_campaign_receipts(m,manifest_sha,receipts,None,root)
+   self.assertEqual(4,len(normalized))
+   result=pilot.analyze(m,manifest_sha,normalized,rows)
+  games=[g for g in result["games"] if g["setup"]==setup]
+  self.assertEqual(4,len(games))
+  self.assertTrue(all(g["verdict"]=="TREATMENT_WIN" for g in games))
+  setup_row=next(s for s in result["setups"] if s["setup"]==setup)
+  self.assertEqual(2,setup_row["complete_natural_pairs"])
+  self.assertEqual([1.0,1.0],setup_row["paired_win_differences"])
+  self.assertEqual(1.0,setup_row["paired_win_effect"])
+  # side swap: each pair's two games used opposite control/treatment sides
+  for pair in (0,1):
+   pg=[j for j in jobs if j["pair"]==pair]
+   self.assertEqual({("A","B"),("B","A")},{(j["control_side"],j["treatment_side"]) for j in pg})
+
+ def test_team_synergy_economy_aggregates_across_seats_and_is_unidentifiable(self):
+  m=manifest();raw=json.dumps(m).encode();manifest_sha=hashlib.sha256(raw).hexdigest()
+  setup=next(n for n,s,_,_ in pilot.SETUPS if s==4)  # 4v4_sahara
+  jobs=[j for j in jobs_for(m,setup) if j["pair"]==0]
+  self.assertEqual(2,len(jobs))
+  with tempfile.TemporaryDirectory() as temp:
+   root=pathlib.Path(temp)
+   receipts=[build_full_receipt(job,m,manifest_sha,root,end_class="NATURAL",winner_side=job["treatment_side"])[0] for job in jobs]
+   normalized,rows=pilot.normalize_campaign_receipts(m,manifest_sha,receipts,None,root)
+   result=pilot.analyze(m,manifest_sha,normalized,rows)
+  setup_row=next(s for s in result["setups"] if s["setup"]==setup)
+  self.assertEqual(1,setup_row["complete_natural_pairs"])
+  # 4 seats/team/game, final timeline row earned=90, across 2 side-swapped games
+  self.assertEqual(2*4*90,setup_row["team_economy_totals"]["treatment"]["earned"])
+  self.assertEqual(2*4*90,setup_row["team_economy_totals"]["control"]["earned"])
+  self.assertEqual("NOT_IDENTIFIABLE_FROM_PILOT (team-size strata lack matched individual counterfactuals)",setup_row["synergy"])
+
+ def test_cap_classification_flows_through_as_censored_with_no_winner(self):
+  m=manifest();raw=json.dumps(m).encode();manifest_sha=hashlib.sha256(raw).hexdigest()
+  job=next(j for j in pilot.make_jobs(m) if j["team_size"]==1)
+  with tempfile.TemporaryDirectory() as temp:
+   root=pathlib.Path(temp)
+   receipt,_,_=build_full_receipt(job,m,manifest_sha,root,end_class="CAP",winner_side=job["treatment_side"])
+   normalized,rows=pilot.normalize_campaign_receipts(m,manifest_sha,[receipt],None,root)
+   self.assertEqual("CENSORED_CAP",normalized[0]["status"])
+   self.assertTrue(normalized[0]["cap_marker"]);self.assertEqual(45000,normalized[0]["cap_tick"])
+   self.assertTrue(normalized[0]["support_complete"])
+   result=pilot.analyze(m,manifest_sha,normalized,rows)
+  game=next(g for g in result["games"] if g["cell_id"]==job["cell_id"])
+  self.assertEqual("CENSORED_CAP",game["verdict"])
+  self.assertNotIn("winner_side",game)
+
+ def test_incomplete_plain_and_memory_kill_both_classify_as_incomplete_unknown(self):
+  m=manifest();raw=json.dumps(m).encode();manifest_sha=hashlib.sha256(raw).hexdigest()
+  job=next(j for j in pilot.make_jobs(m) if j["team_size"]==1)
+  with tempfile.TemporaryDirectory() as temp:
+   root=pathlib.Path(temp)
+   plain,_,_=build_full_receipt(job,m,manifest_sha,root/"plain",end_class="INCOMPLETE")
+   normalized,rows=pilot.normalize_campaign_receipts(m,manifest_sha,[plain],None,root/"plain")
+   self.assertEqual("PROCESS_DIED",normalized[0]["status"])
+   result=pilot.analyze(m,manifest_sha,normalized,rows)
+   self.assertEqual("INCOMPLETE_UNKNOWN",next(g for g in result["games"] if g["cell_id"]==job["cell_id"])["verdict"])
+  with tempfile.TemporaryDirectory() as temp:
+   root=pathlib.Path(temp)
+   killed,_,_=build_full_receipt(job,m,manifest_sha,root,end_class="INCOMPLETE",memory_kill=True)
+   runner.validate_receipt(killed)  # memory-over-limit INCOMPLETE must still pass the strict schema
+   normalized,rows=pilot.normalize_campaign_receipts(m,manifest_sha,[killed],None,root)
+   self.assertEqual("MEMORY_KILL",normalized[0]["status"])
+   result=pilot.analyze(m,manifest_sha,normalized,rows)
+   self.assertEqual("INCOMPLETE_UNKNOWN",next(g for g in result["games"] if g["cell_id"]==job["cell_id"])["verdict"])
+
+ def test_seat_join_by_home_location_rejects_a_match_row_with_the_wrong_home(self):
+  m=manifest();raw=json.dumps(m).encode();manifest_sha=hashlib.sha256(raw).hexdigest()
+  job=next(j for j in pilot.make_jobs(m) if j["team_size"]==1)
+  with tempfile.TemporaryDirectory() as temp:
+   root=pathlib.Path(temp)
+   receipt,rows,uid=build_full_receipt(job,m,manifest_sha,root,end_class="NATURAL",winner_side=job["treatment_side"])
+   tampered=[dict(r,player=dict(r["player"],home="MultiNotASeat")) if i==0 else r for i,r in enumerate(rows)]
+   lines="\n".join(json.dumps(r,sort_keys=True) for r in tampered)+"\n"
+   data=lines.encode();path=root/receipt["artifacts"]["matches_jsonl"]["path"];path.write_bytes(data)
+   receipt["artifacts"]["matches_jsonl"]["sha256"]=hashlib.sha256(data).hexdigest()
+   with self.assertRaisesRegex(ValueError,"natural match homes differ from receipt seats"):
+    pilot.normalize_campaign_receipts(m,manifest_sha,[receipt],None,root)
+
+ def test_fail_closed_on_tampered_map_artifact_bytes(self):
+  m=manifest();raw=json.dumps(m).encode();manifest_sha=hashlib.sha256(raw).hexdigest()
+  job=next(j for j in pilot.make_jobs(m) if j["team_size"]==1)
+  with tempfile.TemporaryDirectory() as temp:
+   root=pathlib.Path(temp)
+   receipt,_,_=build_full_receipt(job,m,manifest_sha,root,end_class="NATURAL",winner_side=job["treatment_side"])
+   map_path=root/receipt["artifacts"]["map_yaml"]["path"]
+   map_path.write_bytes(map_path.read_bytes()+b"\n# tampered")
+   with self.assertRaisesRegex(ValueError,"SHA mismatch"):
+    pilot.normalize_campaign_receipts(m,manifest_sha,[receipt],None,root)
+
+ def test_fail_closed_on_artifact_path_escaping_the_root(self):
+  m=manifest();raw=json.dumps(m).encode();manifest_sha=hashlib.sha256(raw).hexdigest()
+  job=next(j for j in pilot.make_jobs(m) if j["team_size"]==1)
+  with tempfile.TemporaryDirectory() as temp:
+   root=pathlib.Path(temp)/"root";root.mkdir()
+   receipt,_,_=build_full_receipt(job,m,manifest_sha,root,end_class="NATURAL",winner_side=job["treatment_side"])
+   outside=pathlib.Path(temp)/"outside.yaml";outside.write_bytes((root/receipt["artifacts"]["map_yaml"]["path"]).read_bytes())
+   receipt["artifacts"]["map_yaml"]["path"]="../outside.yaml"
+   with self.assertRaisesRegex(ValueError,"escapes artifact root"):
+    pilot.normalize_campaign_receipts(m,manifest_sha,[receipt],None,root)
+
+ def test_fail_closed_on_receipt_not_matching_any_planned_job(self):
+  m=manifest();raw=json.dumps(m).encode();manifest_sha=hashlib.sha256(raw).hexdigest()
+  job=next(j for j in pilot.make_jobs(m) if j["team_size"]==1)
+  with tempfile.TemporaryDirectory() as temp:
+   root=pathlib.Path(temp)
+   receipt,_,_=build_full_receipt(job,m,manifest_sha,root,end_class="NATURAL",winner_side=job["treatment_side"])
+   receipt["setup_id"]="not-a-real-setup"
+   with self.assertRaisesRegex(ValueError,"does not map to exactly one planned job"):
+    pilot.normalize_campaign_receipts(m,manifest_sha,[receipt],None,root)
+
+ def test_fail_closed_on_duplicate_game_uid_across_receipts(self):
+  m=manifest();raw=json.dumps(m).encode();manifest_sha=hashlib.sha256(raw).hexdigest()
+  jobs=[j for j in pilot.make_jobs(m) if j["team_size"]==1][:2]
+  self.assertNotEqual(jobs[0]["cell_id"],jobs[1]["cell_id"])
+  with tempfile.TemporaryDirectory() as temp:
+   root=pathlib.Path(temp)
+   shared_uid="g-shared-uid"
+   r1,_,_=build_full_receipt(jobs[0],m,manifest_sha,root,end_class="NATURAL",winner_side=jobs[0]["treatment_side"],force_uid=shared_uid)
+   r2,_,_=build_full_receipt(jobs[1],m,manifest_sha,root,end_class="NATURAL",winner_side=jobs[1]["treatment_side"],force_uid=shared_uid)
+   with self.assertRaisesRegex(ValueError,"duplicate game_uid across receipts"):
+    pilot.normalize_campaign_receipts(m,manifest_sha,[r1,r2],None,root)
+
+ def test_fail_closed_on_manifest_hash_mismatch(self):
+  m=manifest();raw=json.dumps(m).encode();manifest_sha=hashlib.sha256(raw).hexdigest()
+  job=next(j for j in pilot.make_jobs(m) if j["team_size"]==1)
+  with tempfile.TemporaryDirectory() as temp:
+   root=pathlib.Path(temp)
+   receipt,_,_=build_full_receipt(job,m,manifest_sha,root,end_class="NATURAL",winner_side=job["treatment_side"])
+   with self.assertRaisesRegex(ValueError,"receipt manifest pin mismatch"):
+    pilot.normalize_campaign_receipts(m,"0"*64,[receipt],None,root)
+
+class AcceptanceThresholdTests(unittest.TestCase):
+ """Fills in ACCEPT/REJECT/PARK coverage gaps left by test_ratchet_acceptance_regression_and_slot_rules."""
+
+ def test_crash_always_rejects_regardless_of_other_inputs(self):
+  self.assertEqual("REJECT",pilot.acceptance_decision(rounds=64,treatment_wins=64,control_wins=0,
+   economy_not_worse=True,economy_better=True,army_not_worse=True,crashed=True))
+
+ def test_early_reject_at_or_below_the_floor_share(self):
+  self.assertEqual("REJECT",pilot.acceptance_decision(rounds=16,treatment_wins=4,control_wins=12,
+   economy_not_worse=True,economy_better=False,army_not_worse=True))
+
+ def test_final_round_rejects_on_win_share_below_noninferiority(self):
+  self.assertEqual("REJECT",pilot.acceptance_decision(rounds=64,treatment_wins=28,control_wins=36,
+   economy_not_worse=True,economy_better=True,army_not_worse=True,
+   earned_spent_delta=.01,army_efficiency_delta=.01,kill_exchange_delta=.01))
+
+ def test_final_round_rejects_when_win_share_passes_but_improvement_metrics_fail(self):
+  self.assertEqual("REJECT",pilot.acceptance_decision(rounds=64,treatment_wins=34,control_wins=30,
+   economy_not_worse=True,economy_better=True,army_not_worse=True,
+   earned_spent_delta=-.01,army_efficiency_delta=.02,kill_exchange_delta=.01))
 
 if __name__=="__main__": unittest.main()
