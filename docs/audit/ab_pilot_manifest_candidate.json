@@ -41,16 +41,16 @@
     "process_headroom_bytes": 3221225472
   },
   "baseline_manifest_path": "docs/audit/ab_baseline_manifest_pilot.json",
-  "baseline_manifest_sha256": "524dedbfdad22aa1641365501d64b00a084c23bb5d66a1901a0b2d5e3dc5d71c",
+  "baseline_manifest_sha256": "0086954f9b3a1787e50f365dca07474e8a47bf4342da6da2ad5924a805e3dae6",
   "pins": {
     "source_commit": "964cdb630b1514e1c1a0baed55cbdbc427d5fc11",
-    "engine_version": "6da7fce14da541180c6baddd6925118fbef65b94"
+    "engine_version": "4f69df005fe0d893526890fcb5bbc42e442d6fd6"
   },
   "switch_patch_sha256": "d710567579cb3673eb33701ec881495f0a2a17d6203194b0efdc8052f4de4523",
   "baseline_ai_payload_sha256": "932e2e5c919de6f5b493e1722e6e66e39a3a5f1577b29aa58a571492b7de9d69",
   "treatment_ai_payload_sha256": "acdfd3a3e2c7d405a776703593f1d52c5f357b423e75ffb224392159c009c725",
   "tool_sha256": {
-    "driver_analyzer": "07973e54d04a12d95124d9af5f2caa9fab3b82867a3d5f013ac461d321e0a38e",
+    "driver_analyzer": "02429657b021784a35940b94ca2359c8ba94ef8b92852d1ad8491797f06b1c69",
     "campaign_runner": "6a17f2c14f35c4a64b21173ea3e6767a5961b322180f7b6c262af34770c30f67",
     "batch_runner": "03247f59f2744ea001c9d35a5a03c16bef077ac450d24ef05c08f167d16fcad5",
     "switch_applier": "9e9f678871cc2d8adeca0e7b5c2c28a30a041252f8f630005593bc7f241a6bdd"
@@ -262,5 +262,5 @@
     }
   ],
   "execution_approved": false,
-  "notes": "non-executable candidate; policy uses measured acceptance headless peak + 3 GiB, 2 small-game slots, >=14 GiB admission; remeasure on final Windows engine and refresh all pins before approval"
+  "notes": "non-executable candidate; engine pin updated to landed 4f69df005f; final Windows engine binaries, headless profile, map acceptance, A5 receipt and tool pins must be refreshed before approval"
 }

@@ -3,8 +3,8 @@
 
 Runs two serial same-seed baseline-vs-baseline 1v1 cells, samples only the
 OpenRA process whose command line names that cell's support directory, and
-stops at 3 GiB by default. A bounded higher diagnostic stop may be explicitly
-selected up to 9.5 GiB when host RAM headroom is proven. It does not create an
+stops at the measured headless peak plus 3 GiB by default. The stop is
+constrained by the host hard reserve. It does not create an
 execution manifest or authorize campaign jobs.
 """
 from __future__ import annotations
@@ -28,7 +28,7 @@ ROOT = pathlib.Path(__file__).resolve().parents[2]
 OUT = ROOT / "results" / "campaign-a5-memory-diagnostic-20261010-sol-advice"
 BASELINE = "964cdb630b1514e1c1a0baed55cbdbc427d5fc11"
 MEMORY_FIX = "173038d7881fe45d012a05d2a37ebd7b17f85ffe"
-ENGINE = "6da7fce14da541180c6baddd6925118fbef65b94"
+ENGINE = "4f69df005fe0d893526890fcb5bbc42e442d6fd6"
 SEED = 1337
 CAP_TICK = 16000
 POLL = 0.25
