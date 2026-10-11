@@ -387,6 +387,14 @@ def match_end_tick(match_rows: list) -> int | None:
 	return tick if type(tick) is int and tick >= 0 else None
 
 
+def completed_natural_tick(match_rows: list) -> int | None:
+	"""The authoritative pre-cap terminal tick for a completed game, or None.
+	A NATURAL classification needs it: missing, inconsistent, or cap-or-later
+	record durations can never be replaced by a quantized sample."""
+	tick = match_end_tick(match_rows)
+	return tick if tick is not None and tick < CAP_TICK else None
+
+
 def validate_receipt(receipt: dict) -> None:
 	"""Validate the producer's semantic invariants; JSON Schema is published alongside."""
 	if not isinstance(receipt, dict) or receipt.get("schema_version") != 1:
@@ -716,11 +724,13 @@ def run_one(manifest: dict, manifest_sha: str, job: dict, *, root: pathlib.Path,
 	known_incomplete = {"MEMORY_KILL", "MEMORY_SAMPLE_FAILED", "LOW_FREE_RAM", "STALL", "WALL_TIMEOUT", "INVALID_NO_DEPLOY"}
 	internal_status = monitor_result["end_reason"] if monitor_result["end_reason"] in known_incomplete else "INCOMPLETE"
 	end_reason = monitor_result["end_reason"]
+	natural_tick = completed_natural_tick(match_rows)
 	if monitor_result["end_reason"] == "PROCESS_EXIT" and monitor_result["exit_code"] == 0 and seed_line and len(match_rows) == job["required_seats"] and not mod_failed and game_uid:
 		if cap_match and int(cap_match.group(1)) >= CAP_TICK: internal_status="CENSORED_CAP"; end_reason="cap"
+		elif natural_tick is None: internal_status="INCOMPLETE"; end_reason="MISSING_AUTHORITATIVE_END_TICK"
 		else: internal_status="NATURAL_END"; end_reason="natural"
 	if mod_failed: internal_status="INCOMPLETE"; end_reason="INVALID_MOD_REGISTRATION"
-	internal = {"cell_id":job["cell_id"], "manifest_sha256":manifest_sha, "switch":job["switch"], "setup":job["setup"], "map":job["map"], "map_sha256":job["map_sha256"], "seed":job["seed"], "pair":job["pair"], "game_in_pair":job["game_in_pair"], "control_side":job["control_side"], "treatment_side":job["treatment_side"], "arm_bot_types":job["arm_bot_types"], "status":internal_status, "end_reason":end_reason, "cap_marker":bool(cap_match), "cap_tick":int(cap_match.group(1)) if cap_match else None, "support_complete":len(match_rows)==job["required_seats"], "seat_proof_source":"generated_map.yaml", "map_yaml_sha256":map_yaml_sha, "seats":resolved, "peak_memory_bytes":monitor_result["peak_private_bytes"], "duration_ticks":int(cap_match.group(1)) if cap_match else None}
+	internal = {"cell_id":job["cell_id"], "manifest_sha256":manifest_sha, "switch":job["switch"], "setup":job["setup"], "map":job["map"], "map_sha256":job["map_sha256"], "seed":job["seed"], "pair":job["pair"], "game_in_pair":job["game_in_pair"], "control_side":job["control_side"], "treatment_side":job["treatment_side"], "arm_bot_types":job["arm_bot_types"], "status":internal_status, "end_reason":end_reason, "cap_marker":bool(cap_match), "cap_tick":int(cap_match.group(1)) if cap_match else None, "support_complete":len(match_rows)==job["required_seats"], "seat_proof_source":"generated_map.yaml", "map_yaml_sha256":map_yaml_sha, "seats":resolved, "peak_memory_bytes":monitor_result["peak_private_bytes"], "duration_ticks":int(cap_match.group(1)) if cap_match else natural_tick}
 	classification = pilot.adjudicate(match_rows, internal, job, manifest_sha)
 	end_class = {"CENSORED_CAP":"CAP", "TREATMENT_WIN":"NATURAL", "CONTROL_WIN":"NATURAL"}.get(classification["verdict"], "INCOMPLETE")
 	if monitor_result["end_reason"] == "INVALID_NO_DEPLOY":
@@ -749,7 +759,9 @@ def run_one(manifest: dict, manifest_sha: str, job: dict, *, root: pathlib.Path,
 	# The receipt carries the internal classification fields verbatim: analyze()
 	# re-adjudicates stored receipts and validate_receipt requires both layers.
 	end_tick=match_end_tick(match_rows)
-	if end_tick is None:
+	if end_tick is None and internal_status != "NATURAL_END":
+		# CAP/INCOMPLETE tolerate a quantized approximation; a NATURAL receipt
+		# may only ever carry the authoritative match duration (gated above).
 		economy_ticks=sorted((s["economy"]["tick"] for s in classification.get("seats",[]) if isinstance(s.get("economy"),dict) and type(s["economy"].get("tick")) is int),reverse=True)
 		end_tick=economy_ticks[0] if economy_ticks else (monitor_result["samples"][-1]["world_tick"] if monitor_result["samples"] else None)
 	receipt = {**internal, "game_uid":game_uid,"schema_version":1,"campaign_id":manifest.get("campaign_id", "ab-campaign-2026-10-11-pilot"), "manifest_sha256":manifest_sha,

@@ -294,6 +294,17 @@ class CampaignRunnerTests(unittest.TestCase):
 		self.assertIsNone(runner.match_end_tick([dict(row, duration_ticks="11980")]))
 		self.assertIsNone(runner.match_end_tick([]))
 
+	def test_completed_natural_tick_fails_closed_on_missing_or_conflicting_duration(self):
+		# A NATURAL end may only ever carry the record-authoritative duration:
+		# missing, conflicting, or cap-or-later values downgrade the cell, never
+		# substitute a quantized monitor/economy sample.
+		row = {"duration_ticks":11980,"player":{"home":"M0"}}
+		self.assertEqual(11980, runner.completed_natural_tick([dict(row), dict(row, player={"home":"M1"})]))
+		self.assertIsNone(runner.completed_natural_tick([dict(row), {"player":{"home":"M1"}}]))
+		self.assertIsNone(runner.completed_natural_tick([dict(row), dict(row, duration_ticks=11981)]))
+		self.assertIsNone(runner.completed_natural_tick([dict(row), dict(row, duration_ticks=45000)]))
+		self.assertIsNone(runner.completed_natural_tick([]))
+
 	def test_natural_receipt_carries_winner_and_pre_cap_end_tick(self):
 		receipt = {"schema_version":1,"campaign_id":"c","manifest_sha256":"a"*64,"cell_id":"cell-1","game_uid":"game-1","status":"NATURAL_END","seats":[{"home":"M0"}],"baseline_commit":"b"*40,"engine_sha256":"c"*64,"switch":"s","setup_id":"x","pair_id":"p","pair_member":0,"seed":1,"seed_proof":{},"teams":{},"map":{"required_seats":1},"resolved_seats":[{"seat_id":"M0","team":"A","arm":"control","bot_type":"hard","faction":"td_gdi","home":"M0","spawn":0,"proof_source":"map+records","outcome":"won","metrics":{"timeline":[]}}],"end_class":"NATURAL","end_reason":"natural","winner_team":"A","world_tick":12000,"end_tick":11980,"cap":{"world_tick_cap":45000,"marker_observed":False,"marker_tick":None},"memory":{"peak_private_bytes":0,"limit_private_bytes":runner.PRIVATE_LIMIT,"samples":[]},"runtime":{},"artifacts":{}}
 		receipt.update({"seat_proof_source":"generated_map.yaml","map_yaml_sha256":"d"*64,"control_side":"A","treatment_side":"B","arm_bot_types":{"control":"hard_control","treatment":"hard_treatment"},"cap_marker":False,"cap_tick":None,"support_complete":True,"setup":"x","map_sha256":"e"*64,"pair":0,"game_in_pair":0,"duration_ticks":11980,"peak_memory_bytes":0})
