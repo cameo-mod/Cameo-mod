@@ -1,0 +1,102 @@
+{
+  "scope": "Offline existing evidence; no launch, no activation or causal claim",
+  "source_root": "C:\\cameo-wt\\sol-ab-1008\\results-20261008T144912Z\\tournament-10-ctrl-ra1_allies\\Logs",
+  "source_sha256": {
+    "cameo-ai-matches.jsonl": "5df195b0e38fa8f7b621661990618ea44f8e7f9305c58a6b21ae05a94332516a",
+    "cameo-ai-situations.jsonl": "67ac35770854e9a5cbc04e8d8d16e723442e2a2b447457c6dbb864581c2fcc85",
+    "cameo-ai-engagements.jsonl": "a6e88eba10901d7451b7b20699788f30829c79379203c4558738a6142370c834"
+  },
+  "situation_samples": 100,
+  "first_tick": 1,
+  "last_tick": 14851,
+  "zero_harvester_samples": 100,
+  "zero_refinery_samples": 100,
+  "hard_seat": "Multi1",
+  "hard_home": "75,30",
+  "classic_home": "23,68",
+  "personality_switch": [
+    {
+      "tick": 1807,
+      "personality": "turtle"
+    }
+  ],
+  "first_attack_tick": 151,
+  "last_attack_count": 2,
+  "last_situation": {
+    "army_value": 0,
+    "defence_value": 0,
+    "buildings": 1,
+    "harvesters": 0,
+    "kills_cost_window": 0,
+    "deaths_cost_window": 1760,
+    "squad_count": 0,
+    "squad_units": 0,
+    "losses_by_role": {
+      "guerrilla": 1040,
+      "idle": 1220,
+      "protection": 6240
+    },
+    "away_losses_by_role": {
+      "guerrilla": 1040
+    },
+    "combat_ratio_pct": 100,
+    "combat_ratio_defended_pct": 100,
+    "production_window": 0,
+    "production_per_game_min": 0,
+    "econ_destroyed_window": 0,
+    "econ_destroyed": 0,
+    "attacks_launched": 2,
+    "first_attack_tick": 151,
+    "attacks_per_game_min": 0,
+    "regions_fresh": 8,
+    "regions_total": 169,
+    "regions_enemy_presence": 8,
+    "guerrilla_lead": 1,
+    "enemy_production_per_game_min": 400,
+    "steamroller_lead": 0,
+    "rush_lead": 0,
+    "banked_cash": 8676,
+    "brownout_ticks": 0,
+    "idle_production_ticks": 42007,
+    "production_queues": 12,
+    "repair_orders": 14,
+    "repair_sweep_orders": 0,
+    "repair_toggles_avoided": 7,
+    "utility_turtlerush": 0,
+    "utility_techrushexpansion": 13,
+    "utility_steamrollerguerrilla": 63,
+    "director_tension": 11,
+    "director_phase": "buildup",
+    "team_allied_bots": 0,
+    "team_army_value": 0,
+    "team_max_tension": 0,
+    "team_defend_requests": 0,
+    "team_shared_target": 0,
+    "team_any_climax": 0,
+    "coalition_phase": 0,
+    "coalition_main_target": "",
+    "fb_fronts": 0,
+    "fb_fronts_without_radar": 0,
+    "fb_radar_union_cells": 0,
+    "fb_radar_approach_cells": 0,
+    "threats": [
+      {
+        "value": 3000,
+        "count": 3,
+        "x": 71,
+        "y": 28,
+        "vx_per_kilotick": 2,
+        "vy_per_kilotick": 0,
+        "target": "",
+        "target_value": 0,
+        "eta": 0
+      }
+    ]
+  },
+  "match_duration_ticks": 14902,
+  "schema_limitations": [
+    "Situation values use a different census from match stats; do not interchange army_value.",
+    "engagement match-end summaries may close after match duration; exclude them from pre-cap survival evidence.",
+    "Both recorded spawn fields are zero; use explicit player names and home coordinates."
+  ]
+}
