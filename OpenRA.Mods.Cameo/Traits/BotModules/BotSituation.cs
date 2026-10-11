@@ -247,6 +247,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			"no forced turtle at the transition and no turtle candidate just because urgency is Emergency; " +
 			"candidates proceed as under Pressured. False keeps the legacy emergency-turtle override.")]
 		public readonly bool EmergencyKeepsPersonality = false;
+
+		[Desc("Default-off terminal turtle fallback hold: outside visible base danger, keep a legal " +
+			"offensive incumbent for twice the tier personality reaction delay. Pressure cannot renew expiry.")]
+		public readonly bool UseTurtleFallbackExpiry = false;
 		public readonly int PressuredArmyRatio = 60;
 		public readonly int EmergencyCheckInterval = 25;
 		public readonly int SnapshotInterval = 150;
@@ -576,6 +580,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		bool costCountersInitialized;
 		BotUrgency currentUrgency;
 		int lastPersonalitySwitchTick;
+		readonly TurtleFallbackPolicy turtleFallback = new();
+		TurtleFallbackDecision lastTurtleFallbackDecision;
 		int lastBanditPinOrderTick = -25;
 		int personalityCandidateSince;
 		string sustainedCandidate = "";
@@ -1162,6 +1168,35 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var availablePersonalities = AvailablePersonalities();
 			var candidatePersonality = CandidatePersonality(urgency, targetProfile, ownArmy,
 				profiles.Values, currentPersonality, availablePersonalities, Info);
+			if (Info.UseTurtleFallbackExpiry)
+			{
+				var choice = CandidatePersonalityChoice(urgency, targetProfile, ownArmy,
+					profiles.Values, currentPersonality, availablePersonalities, Info);
+				var bases = ownBuildings.Where(a => a.OccupiesSpace != null
+					&& a.Info.HasTraitInfo<BaseBuildingInfo>()).ToArray();
+				// Visibility precedes enemy location access. Remote losses and remembered
+				// pressure do not establish a current breach of the construction-yard base.
+				var danger = bases.Length == 0 || actors.Any(a => a.Owner != player
+					&& player.RelationshipWith(a.Owner) == PlayerRelationship.Enemy
+					&& a.OccupiesSpace != null && a.CanBeViewedByPlayer(player) && IsCombatUnit(a)
+					&& bases.Any(b => (a.Location - b.Location).Length <= Info.PressureRadius));
+				var offensive = currentPersonality == "rush" || currentPersonality == "steamroller"
+					|| currentPersonality == "guerrilla";
+				var legal = offensive && ownArmy > 0 && targetProfile != null
+					&& targetProfile.Alive && targetProfile.NearestCells >= 0
+					&& availablePersonalities.Contains(currentPersonality);
+				var delay = player.PlayerActor.TraitsImplementing<BotLimits>()
+					.FirstEnabledTraitOrDefault()?.Info.PersonalityReactionDelay ?? Info.DefaultPersonalityReactionDelay;
+				var holdTicks = delay <= 0 ? 0 : (int)Math.Min(int.MaxValue, 2L * delay);
+				var selected = turtleFallback.Select(tick, true, choice, currentPersonality, legal, danger, holdTicks);
+				candidatePersonality = selected.Personality;
+				if (selected != lastTurtleFallbackDecision)
+				{
+					Log.Write("bot-situation", $"TURTLE_FALLBACK seat={player.InternalName} tick={tick} " +
+						$"reason={selected.Reason} candidate={choice.Personality} selected={selected.Personality} expiry={selected.ExpiresTick}");
+					lastTurtleFallbackDecision = selected;
+				}
+			}
 			incumbentPersonality = candidatePersonality;
 			personalityCandidateSince = SustainedCandidateSince(candidatePersonality, sustainedCandidate,
 				personalityCandidateSince, tick);
@@ -2088,43 +2123,50 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		internal static string CandidatePersonality(BotUrgency urgency, EnemyProfile target, int ownArmy,
 			IEnumerable<EnemyProfile> enemies, string incumbent, IEnumerable<string> availablePersonalities,
 			MasterAiBotModuleInfo info)
+			=> CandidatePersonalityChoice(urgency, target, ownArmy, enemies, incumbent, availablePersonalities, info).Personality;
+
+		internal static PersonalityChoice CandidatePersonalityChoice(BotUrgency urgency, EnemyProfile target, int ownArmy,
+			IEnumerable<EnemyProfile> enemies, string incumbent, IEnumerable<string> availablePersonalities,
+			MasterAiBotModuleInfo info)
 		{
 			var available = availablePersonalities.ToHashSet(StringComparer.Ordinal);
 			foreach (var candidate in PersonalityCandidates(urgency, target, ownArmy, enemies, info))
-				if (available.Contains(candidate))
+				if (available.Contains(candidate.Personality))
 					return candidate;
 
-			return incumbent != null && available.Contains(incumbent) ? incumbent : "";
+			return new(incumbent != null && available.Contains(incumbent) ? incumbent : "", PersonalityCandidateReason.Candidate);
 		}
 
 		internal static string UnfilteredCandidatePersonality(BotUrgency urgency, EnemyProfile target, int ownArmy,
 			IEnumerable<EnemyProfile> enemies, string incumbent, MasterAiBotModuleInfo info)
 		{
-			return PersonalityCandidates(urgency, target, ownArmy, enemies, info).FirstOrDefault() ?? incumbent ?? "";
+			return PersonalityCandidates(urgency, target, ownArmy, enemies, info).FirstOrDefault().Personality ?? incumbent ?? "";
 		}
 
-		static IEnumerable<string> PersonalityCandidates(BotUrgency urgency, EnemyProfile target, int ownArmy,
+		static IEnumerable<PersonalityChoice> PersonalityCandidates(BotUrgency urgency, EnemyProfile target, int ownArmy,
 			IEnumerable<EnemyProfile> enemies, MasterAiBotModuleInfo info)
 		{
 			if (urgency == BotUrgency.Emergency && !info.EmergencyKeepsPersonality)
-				yield return "turtle";
+				yield return new("turtle", PersonalityCandidateReason.LegacyEmergency);
 			if (target != null && target.DefenceCount >= info.FortifiedDefenceCount && ownArmy >= info.SteamrollerMinArmyValue)
-				yield return "steamroller";
+				yield return new("steamroller", PersonalityCandidateReason.Candidate);
 			if (target != null && target.ExpansionClusters >= info.GuerrillaMinClusters)
-				yield return "guerrilla";
+				yield return new("guerrilla", PersonalityCandidateReason.Candidate);
 			if (target != null && target.TechBuildings >= info.TechEnemyTechBuildings &&
 				target.ArmyValue < info.RushMaxEnemyArmyValue * 2)
-				yield return "tech";
+				yield return new("tech", PersonalityCandidateReason.Candidate);
 			if (target != null && target.ArmyValue <= info.RushMaxEnemyArmyValue &&
 				target.DefenceCount <= info.RushMaxEnemyDefenceCount)
-				yield return "rush";
+				yield return new("rush", PersonalityCandidateReason.Candidate);
 			if (!enemies.Any(e => e.Alive && e.NearestCells >= 0))
-				yield return "expansion";
+				yield return new("expansion", PersonalityCandidateReason.Candidate);
 
 			// Terminal posture so a thin fogged enemy profile cannot latch the
 			// incumbent forever: under pressure consolidate defensively, when
 			// calm keep spreading out.
-			yield return urgency >= BotUrgency.Pressured ? "turtle" : "expansion";
+			yield return urgency >= BotUrgency.Pressured
+				? new("turtle", PersonalityCandidateReason.TerminalPressure)
+				: new("expansion", PersonalityCandidateReason.Candidate);
 		}
 
 		static CounterDemand BuildDemand(IEnumerable<EnemyProfile> enemies, EnemyProfile target, int totalArmy)
@@ -2249,6 +2291,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		void IGameSaveTraitData.ResolveTraitData(Actor self, MiniYaml data)
 		{
+			// This increment does not restore hold provenance; never mint a fresh hold on load.
+			if (Info.UseTurtleFallbackExpiry)
+				turtleFallback.Invalidate();
 			if (self.World.IsReplay)
 				return;
 

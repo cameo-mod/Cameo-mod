@@ -19,6 +19,8 @@ needs:
   AA_cn4_region_roles: [D_zone_topology]        # role fronts need zone-graph regions
 
 effect_classes:
+  BP_squad_desire: restraint          # Existing group; classify its stance hold consistently with the reviewed catalogue.
+  TF4_turtle_fallback_expiry: restraint
   D_zone_topology: capability
   E_engt_transport: capability
   H_influence_layers: capability
@@ -81,6 +83,9 @@ effect_classes:
   BP_effective_unit_value: neutral    # learned arsenal weight feed into the unit builder (a3a4); sibling weight feeds AP_tier1_priors / I_derived_unit_weights are neutral
 
 groups:
+  TF4_turtle_fallback_expiry:       # Default-off bounded terminal-pressure fallback; no campaign adoption approval.
+    MasterAiBotModule:
+      UseTurtleFallbackExpiry: true
   # SHIPPED 2026-10-01 as master defaults after the INC-1+2+3 A/B (all 13-3, 81% vs ctrl 12-4, 75%): former groups
   # A_squad_tactics, B_ownership_engineers_missions, C_f1_frans_services (C on every genericbot tier, §19.1).
   # Still OFF on master, for the next increment A/B:
