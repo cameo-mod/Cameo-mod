@@ -156,6 +156,12 @@ Two engine-run proofs on `codex/ab-campaign-port-fixes` with the pinned
   cells can crash INCOMPLETE. Receipts preserve crashes honestly either
   way, so the pilot is not blocked — but a deterministic crash will keep
   3v3/4v4 cells from producing CAP/NATURAL evidence.
+- UPDATE — crash is universal at scale: second 4v4 cell
+  `4v4_ice|2026|0` (different map AND seed) hit the identical fault
+  (sqrt -2036432099, same ApplyRing<-DistanceFromEdge stack, driven via
+  PeriodicExplosion.Tick — large-radius persistent AoE). 2/2 on 4v4.
+  Recommendation now flips: the engine fix is a PREREQUISITE —
+  pilot-first would burn all 32 3v3/4v4 cells into INCOMPLETE crashes.
 
 ## Pending
 
