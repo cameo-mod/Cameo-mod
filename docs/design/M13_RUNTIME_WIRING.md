@@ -1,5 +1,9 @@
 # M13 runtime wiring checkpoints
 
+Current gameplay checkpoint: see **Absolute dispatch and response admission** below.
+Earlier sections describe frozen historical checkpoints; their unwired limitations
+are superseded only where the current section explicitly states implementation.
+
 Base: accepted claim-provider tip `59e80a95a6142c001360fb587682cfdab515dc4a`.
 The default-off increment is `BV_m13_liveness`, classified as one restraint; the
 applier skips the classic squad-manager instance. No YAML enables it by default.
@@ -87,3 +91,70 @@ repeated/older waves after a new interval begins. Release build and combined
 progress/activity/liveness tests: 40/40, zero skipped. No boot/game or full suite
 was run for this observational delta. All gameplay and stream gates listed above
 remain open; the absolute idle valve still needs downstream soft-hold bypass.
+
+## Absolute dispatch and response admission (2026-10-11)
+
+This source checkpoint remains behind `AttackLivenessEnabled`, enabled only by
+`BV_m13_liveness`; no default, tier value, engine pin, campaign arm or YAML changed.
+The first armed squad-manager trait on each player retains a shared liveness clock,
+response budget and monotonic wave allocator even while its personality is disabled.
+No static, team-wide or random state is introduced. Accepted progress now uses the
+shared per-player wave sequence; the earlier manager-local identity description is
+historical. Seat and manager diagnostic fields remain explicit.
+
+The absolute threshold is checked against a stable ActorID assault draft before the
+ordinary attack-delay timer. Its independent admission route bypasses the normal
+value/count scaling, composition, director, mission/Defend and pre-launch combat
+holds. It excludes artillery, fire support, aircraft/naval units, harvesters,
+buildings, cargo carriers, unorderable actors and foreign leases. Current visibility,
+weapon capability and path checks remain hard. It forms a nonempty Rush squad and
+queues AttackMove directly, entering the ordinary marching FSM; live combat/flee
+safety is retained. It removes only drafted actors from the idle pool. The off path
+retains the old registration point and normal launch logic.
+
+Liveness eligibility includes unobserved offensive registrations and held response
+members, so intent or a soft role diversion does not reset the interval. Newly
+unmanaged owned assault actors cover a personality handoff. A visible legal target
+is selected independently of an existing squad, with deterministic distance/ActorID
+ordering. Frozen-only target evidence stays Unsupported and retains an established
+deadline. Deadline dispatch uses a lead of max(150, 2*AttackForceInterval+1); this is a
+scheduler allowance, not a proved engine resolution bound. Failed/timed-out intents
+retain the original deadline and supply no dispatch causality. Actual enemy damage
+inside the base grants a finite ProtectInterval review window, refreshed only by
+new damage; prediction, personality and request pulses cannot refresh that exception.
+Only the reviewed actual offensive observation resets the interval.
+
+Own protection requests and allied defend responses require a known owner-produced
+claim episode, active/fresh requester, locally observed contest, and capacity exactly
+one. Unsupported expansion-assist provenance is refused. Admission takes a stable
+assault prefix only while the residual pool retains both normal launch bars and
+required composition roles. Missing role evidence refuses the optional response.
+The shared budget fixes expiry at first admission; refreshes can change the destination
+and evidence, never membership or expiry. Every tick evaluates expiry, freshness,
+requester activity, contest and reserve loss. Stand-down cancels owned guard orders,
+removes actual protection membership, releases its unit leases, returns orderable
+nonforeign actors to the idle pool, notifies pool observers, and installs the
+claim-episode cooldown. Personality disable releases membership with that same
+cooldown. Own emergency defense remains separate; forward non-emergency drafts also
+preserve the normal assault reserve. Diagnostics emit admission, release, intent and
+accepted progress separately, with dispatch causality UNKNOWN.
+
+Save restoration deliberately invalidates shared evidence: no saved interval,
+wave/member mapping or response-slot adapter is implemented yet. It refuses urgent
+admission and optional response admission rather than recycling history. This is
+fail-closed compatibility, not completed M13 persistence. Other remaining gates:
+actual loaded-world manager/order-sink and reclaim regressions, save/restore adapter,
+finite failure recovery for busy/stuck offensive members, semantic combat emitter
+and consumer, first-wave/runtime cost proof, switch-off replay parity, and paired3v3.
+No deadline/launch guarantee, adoption or campaign activation is approved here.
+The turtle fallback experiment remains a separate subsequent increment.
+
+Validation: Release build passed. Focused M13 launch/player-state, budget, claim and
+activity cases: 118 passed. Final full Release C# suite: 1622 passed; two existing
+explicit maximum-census fixtures were not selected by the default run. No whole
+Python test directory, boot or game was run. New tests exercise the production urgent
+commit boundary at N-1/N under every soft-hold flag, hard refusals, fixed-floor
+lead/deadline behavior, intent failure without renewal, independent player state,
+and unsupported restoration/danger expiry. These are controller tests, not a
+loaded-world adapter run. Source needs its own exact-SHA delta review and a reviewed
+port from this older isolated lineage before any landing.

@@ -40,6 +40,8 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 		// 6f: artillery squads attach to an assault squad and bombard what it can
 		// see. Runtime-only — not serialized; the state reattaches after load.
 		internal SquadCA Parent;
+		// Default-off observation bookkeeping; registration/intent is not progress.
+		internal bool M13ObservedProgress;
 
 		// 6g (CN A3): rules-derived BotTargetTags this squad prefers when picking
 		// targets (e.g. air raiders prefer artillery). Empty = no preference.
