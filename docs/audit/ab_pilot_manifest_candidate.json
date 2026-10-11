@@ -29,7 +29,8 @@
     "win_noninferiority_delta": 0.0,
     "min_earned_spent_improvement": 0.0,
     "min_army_efficiency_improvement": 0.0,
-    "min_kill_exchange_improvement": 0.0
+    "min_kill_exchange_improvement": 0.0,
+    "min_setup_veto_sample": 4
   },
   "slot_policy": {
     "max_parallel_small_games": 2,
@@ -54,7 +55,7 @@
   "treatment_ai_payload_sha256": "acdfd3a3e2c7d405a776703593f1d52c5f357b423e75ffb224392159c009c725",
   "tool_hash_algorithm": "sha256-lf-normalized-v1",
   "tool_sha256": {
-    "driver_analyzer": "7b861b930c6b466a768cbcc06d4e792462cc8a24c1d1ef336d6a52118b0b43c6",
+    "driver_analyzer": "586d67ec81f8006d3c9280d12ddf9857b0a8ceacb5ee332a71fc17268c7a6807",
     "campaign_runner": "c203ff74e09aff7549a04ac34bb87bb0ac5c74e8dfcad871536cd8b46dead6c5",
     "batch_runner": "03247f59f2744ea001c9d35a5a03c16bef077ac450d24ef05c08f167d16fcad5",
     "switch_applier": "9e9f678871cc2d8adeca0e7b5c2c28a30a041252f8f630005593bc7f241a6bdd"
