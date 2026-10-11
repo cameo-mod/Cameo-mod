@@ -1,4 +1,4 @@
-import pathlib, sys, tempfile, unittest
+﻿import pathlib, sys, tempfile, unittest
 ROOT=pathlib.Path(__file__).resolve().parents[2]
 sys.path.insert(0,str(ROOT/"tools"/"ai"))
 import ab_campaign_pilot as pilot
@@ -7,9 +7,27 @@ import apply_increment_switches as increment
 def manifest():
  baseline=ROOT/"tools/tests/fixtures/ab_campaign_baseline.json"
  _,groups,_=increment.load_spec(ROOT/"tools/ai/increment_switches.yaml")
- return {"schema":1,"switch":pilot.SWITCH,"execution_approved":False,"pairs_per_setup":2,"team_size_scope":[1,2,3,4],"arm_bot_types":{"control":"hard_control","treatment":"hard_treatment"},"baseline_manifest_path":"tools/tests/fixtures/ab_campaign_baseline.json","baseline_manifest_sha256":pilot.sha(baseline),"pins":{"source_commit":"964cdb630b1514e1c1a0baed55cbdbc427d5fc11","engine_version":"6da7fce14da541180c6baddd6925118fbef65b94"},"switch_patch_sha256":increment.group_patch_sha256(groups[pilot.SWITCH]),"baseline_ai_payload_sha256":pilot.ai_payload_sha(ROOT),"treatment_ai_payload_sha256":pilot.ai_payload_sha(ROOT,pilot.SWITCH),"tool_sha256":{"driver_analyzer":pilot.sha(ROOT/"tools/ai/ab_campaign_pilot.py"),"campaign_runner":pilot.sha(ROOT/"tools/ai/campaign_runner.py"),"batch_runner":pilot.sha(ROOT/"tools/ai/run_ai_match_batch.py"),"switch_applier":pilot.sha(ROOT/"tools/ai/apply_increment_switches.py")},"receipt_schema_sha256":pilot.sha(ROOT/"tools/ai/ab_campaign_receipt.schema.json"),"binary_sha256":{"bin/OpenRA.exe":"5693f355792ebb68699793f96ef2167b733c5e7756f580858c5090226418c984","bin/OpenRA.dll":"92ee9dacd08869593dc5ad70c2d1ce48f701caf8277ea3bd692acf2224a8ca77","bin/OpenRA.Mods.Cameo.dll":"41f37982c146f73b4a9c07071f34b47e214178cb9413e514f05af9af2d44b3a4"},"round_stages":pilot.ROUND_STAGES,"acceptance_thresholds":pilot.DEFAULT_THRESHOLDS,"slot_policy":dict(pilot.SLOT_POLICY),"seeds":[1337,7331],"maps":[{"name":k,"path":v[0],"sha256":v[1],"required_seats":v[2]} for k,v in pilot.MAPS.items()],"setups":[{"id":n,"team_size":s,"map":m,"team_factions":list(f)} for n,s,m,f in pilot.SETUPS]}
+ return {"schema":1,"switch":pilot.SWITCH,"execution_approved":False,"pairs_per_setup":2,"team_size_scope":[1,2,3,4],"arm_bot_types":{"control":"hard_control","treatment":"hard_treatment"},"baseline_manifest_path":"tools/tests/fixtures/ab_campaign_baseline.json","baseline_manifest_sha256":pilot.sha(baseline),"pins":{"source_commit":"964cdb630b1514e1c1a0baed55cbdbc427d5fc11","engine_version":"6da7fce14da541180c6baddd6925118fbef65b94"},"switch_patch_sha256":increment.group_patch_sha256(groups[pilot.SWITCH]),"baseline_ai_payload_sha256":pilot.ai_payload_sha(ROOT),"treatment_ai_payload_sha256":pilot.ai_payload_sha(ROOT,pilot.SWITCH),"tool_hash_algorithm":pilot.TOOL_HASH_ALGORITHM,"tool_sha256":{"driver_analyzer":pilot.tool_sha(ROOT/"tools/ai/ab_campaign_pilot.py"),"campaign_runner":pilot.tool_sha(ROOT/"tools/ai/campaign_runner.py"),"batch_runner":pilot.tool_sha(ROOT/"tools/ai/run_ai_match_batch.py"),"switch_applier":pilot.tool_sha(ROOT/"tools/ai/apply_increment_switches.py")},"receipt_schema_sha256":pilot.sha(ROOT/"tools/ai/ab_campaign_receipt.schema.json"),"binary_sha256":{"bin/OpenRA.exe":"5693f355792ebb68699793f96ef2167b733c5e7756f580858c5090226418c984","bin/OpenRA.dll":"92ee9dacd08869593dc5ad70c2d1ce48f701caf8277ea3bd692acf2224a8ca77","bin/OpenRA.Mods.Cameo.dll":"41f37982c146f73b4a9c07071f34b47e214178cb9413e514f05af9af2d44b3a4"},"round_stages":pilot.ROUND_STAGES,"acceptance_thresholds":pilot.DEFAULT_THRESHOLDS,"slot_policy":dict(pilot.SLOT_POLICY),"seeds":[1337,7331],"maps":[{"name":k,"path":v[0],"sha256":v[1],"required_seats":v[2]} for k,v in pilot.MAPS.items()],"setups":[{"id":n,"team_size":s,"map":m,"team_factions":list(f)} for n,s,m,f in pilot.SETUPS]}
 
 class PilotPlanTests(unittest.TestCase):
+ def test_tool_hash_is_checkout_newline_independent(self):
+  with tempfile.TemporaryDirectory() as temp:
+   root=pathlib.Path(temp); lf=root/"lf.py"; crlf=root/"crlf.py"
+   lf.write_bytes(b"line one\nline two\n")
+   crlf.write_bytes(b"line one\r\nline two\r\n")
+   self.assertNotEqual(pilot.sha(lf),pilot.sha(crlf))
+   self.assertEqual(pilot.tool_sha(lf),pilot.tool_sha(crlf))
+   crlf.write_bytes(b"line one changed\r\nline two\r\n")
+   self.assertNotEqual(pilot.tool_sha(lf),pilot.tool_sha(crlf))
+
+ def test_tool_pin_and_hash_policy_fail_closed(self):
+  m=manifest();m["tool_sha256"]["campaign_runner"]="0"*64
+  with self.assertRaisesRegex(ValueError,"tool SHA pins mismatch"):
+   pilot.validate(m,ROOT)
+  m=manifest();m["tool_hash_algorithm"]="raw-sha256"
+  with self.assertRaisesRegex(ValueError,"tool hash normalization policy"):
+   pilot.validate(m,ROOT)
+
  def test_approved_amendment_expands_to_64_side_swapped_games(self):
   m=manifest();self.assertTrue(pilot.validate(m,ROOT)); jobs=pilot.make_jobs(m)
   self.assertEqual(16,len(pilot.SETUPS));self.assertEqual(64,len(jobs))

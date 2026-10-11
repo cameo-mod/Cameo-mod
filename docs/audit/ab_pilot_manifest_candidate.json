@@ -49,10 +49,10 @@
   "baseline_ai_payload_sha256": "932e2e5c919de6f5b493e1722e6e66e39a3a5f1577b29aa58a571492b7de9d69",
   "treatment_ai_payload_sha256": "acdfd3a3e2c7d405a776703593f1d52c5f357b423e75ffb224392159c009c725",
   "tool_sha256": {
-    "driver_analyzer": "01d81e467d1a3289f13f8397741d9ba27cbcdbbe2a497069b5258ed48fd704c6",
-    "campaign_runner": "4fda5a1ae9bc9bbb1163cbfdbbfab8099d75784f22fe20616775e554ad75f61e",
-    "batch_runner": "e9497b51574a7f907aa19b0c1742b68db5b96904f43ab65a5bd39ba7ce8a1964",
-    "switch_applier": "5376258709f2ff6512e402abeaf09e164abe483142980830bc72269af047f97e"
+    "driver_analyzer": "845f73ac18b3e3c4bf70c1c9e0b3fc5f6ef7d97b0b6562f7b7a4c01b2d134d86",
+    "campaign_runner": "e6db5a4df60260774a7350c95746c43ab48b80cb6060bd701a171446cb998cf4",
+    "batch_runner": "1f6c6005c2f474bb9b8e87ec8b4a7081d3737b458d8423ab349a8e837fe6d6e0",
+    "switch_applier": "9e9f678871cc2d8adeca0e7b5c2c28a30a041252f8f630005593bc7f241a6bdd"
   },
   "receipt_schema_sha256": "d6e1af245ecc0c99d418a2112f25a4478e0ed6460879de448eec44e1f80069a8",
   "binary_sha256": {
@@ -262,5 +262,6 @@
   ],
   "execution_approved": false,
   "notes": "non-executable candidate; refreshed tool/schema pins and serial one-worker policy after exact-SHA review; maintainer must independently approve after map/analyzer/A5/RAM gates",
-  "a5_parity_receipt_path": "C:/cameo-wt/ab-campaign-tooling/results/campaign-a5-fixed-tick-parity-20261010-attempt2/A5_memory_probe_receipt.json"
+  "a5_parity_receipt_path": "C:/cameo-wt/ab-campaign-tooling/results/campaign-a5-fixed-tick-parity-20261010-attempt2/A5_memory_probe_receipt.json",
+  "tool_hash_algorithm": "sha256-lf-normalized-v1"
 }

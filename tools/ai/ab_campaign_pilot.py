@@ -10,6 +10,7 @@ from threading import Lock
 import apply_increment_switches as increment
 
 SWITCH = "BU_harvester_logistics"
+TOOL_HASH_ALGORITHM = "sha256-lf-normalized-v1"
 MAPS = {
  "nuclear_winter": ("mods/cameo/maps/_ra_a-nuclear-winter.oramap", "191efefe3043acb2fd504b2e2e5c974a49f6498f8e016c1380159c9f7efc1c4a", 2),
  "satans_clutch": ("mods/cameo/maps/SatansClutch.oramap", "1bd3bee0bbb38c95015126ba689496c4284c2f4e8f8b6573711a9fdadcbf16cb", 2),
@@ -136,6 +137,10 @@ class SlotCounter:
   with self._lock: self._active.pop(cell_id,None);self._sizes.pop(cell_id,None)
 
 def sha(path): return hashlib.sha256(path.read_bytes()).hexdigest()
+def tool_sha(path):
+ raw=pathlib.Path(path).read_bytes()
+ # Tool pins describe source content, independent of Git's checkout EOL policy.
+ return hashlib.sha256(raw.replace(b"\r\n",b"\n")).hexdigest()
 def read_engine_version(path):
  raw=pathlib.Path(path).read_bytes()
  if raw.startswith((b"\xff\xfe",b"\xfe\xff")): text=raw.decode("utf-16")
@@ -285,6 +290,7 @@ def validate(manifest,root,engine_root=None,execution=False):
  require(manifest.get("arm_bot_types")=={"control":"hard_control","treatment":"hard_treatment"},"distinct control/treatment hard bot bindings required")
  require(manifest.get("round_stages")==ROUND_STAGES and manifest.get("acceptance_thresholds")==DEFAULT_THRESHOLDS,"round stages and exact acceptance thresholds must be frozen")
  require(manifest.get("slot_policy")==SLOT_POLICY,"parallel slot/memory policy must be frozen")
+ require(manifest.get("tool_hash_algorithm")==TOOL_HASH_ALGORITHM,"tool hash normalization policy mismatch")
  baseline=manifest.get("baseline_manifest_sha256")
  require(isinstance(baseline,str) and len(baseline)==64 and all(c in "0123456789abcdef" for c in baseline.lower()),"ratchet baseline manifest SHA required")
  basepath=(root/pathlib.PurePosixPath(manifest.get("baseline_manifest_path",""))).resolve()
@@ -297,7 +303,7 @@ def validate(manifest,root,engine_root=None,execution=False):
  require(manifest.get("baseline_ai_payload_sha256")==ai_payload_sha(root),"baseline AI payload mismatch")
  require(manifest.get("treatment_ai_payload_sha256")==ai_payload_sha(root,SWITCH),"one-switch treatment AI payload mismatch")
  tool_paths={"driver_analyzer":pathlib.Path(__file__),"campaign_runner":root/"tools"/"ai"/"campaign_runner.py","batch_runner":root/"tools"/"ai"/"run_ai_match_batch.py","switch_applier":root/"tools"/"ai"/"apply_increment_switches.py"}
- require(manifest.get("tool_sha256")=={k:sha(v) for k,v in tool_paths.items()},"tool SHA pins mismatch")
+ require(manifest.get("tool_sha256")=={k:tool_sha(v) for k,v in tool_paths.items()},"tool SHA pins mismatch")
  require(manifest.get("receipt_schema_sha256")==sha(root/"tools"/"ai"/"ab_campaign_receipt.schema.json"),"receipt schema SHA mismatch")
  binaries=manifest.get("binary_sha256")
  require(isinstance(binaries,dict) and len(binaries)==3 and all(len(v)==64 for v in binaries.values()),"engine binary SHA pins missing")
