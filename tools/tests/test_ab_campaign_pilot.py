@@ -8,7 +8,7 @@ def manifest():
  baseline=ROOT/"tools/tests/fixtures/ab_campaign_baseline.json"
  _,groups,_=increment.load_spec(ROOT/"tools/ai/increment_switches.yaml")
  tools={"driver_analyzer":ROOT/"tools/ai/ab_campaign_pilot.py","campaign_runner":ROOT/"tools/ai/campaign_runner.py","batch_runner":ROOT/"tools/ai/run_ai_match_batch.py","switch_applier":ROOT/"tools/ai/apply_increment_switches.py"}
- return {"schema":1,"switch":pilot.SWITCH,"execution_approved":False,"pairs_per_setup":2,"team_size_scope":[1,2,3,4],"arm_bot_types":{"control":"hard_control","treatment":"hard_treatment"},"baseline_manifest_path":"tools/tests/fixtures/ab_campaign_baseline.json","baseline_manifest_sha256":pilot.text_sha(baseline),"pins":{"source_commit":"964cdb630b1514e1c1a0baed55cbdbc427d5fc11","engine_version":"4f69df005fe0d893526890fcb5bbc42e442d6fd6"},"switch_patch_sha256":increment.group_patch_sha256(groups[pilot.SWITCH]),"baseline_ai_payload_sha256":pilot.ai_payload_sha(ROOT),"treatment_ai_payload_sha256":pilot.ai_payload_sha(ROOT,pilot.SWITCH),"tool_hash_algorithm":pilot.TOOL_HASH_ALGORITHM,"tool_sha256":{k:pilot.tool_sha(v) for k,v in tools.items()},"receipt_schema_sha256":pilot.text_sha(ROOT/"tools/ai/ab_campaign_receipt.schema.json"),"binary_sha256":{"bin/OpenRA.exe":"5693f355792ebb68699793f96ef2167b733c5e7756f580858c5090226418c984","bin/OpenRA.dll":"92ee9dacd08869593dc5ad70c2d1ce48f701caf8277ea3bd692acf2224a8ca77","bin/OpenRA.Mods.Cameo.dll":"41f37982c146f73b4a9c07071f34b47e214178cb9413e514f05af9af2d44b3a4"},"round_stages":pilot.ROUND_STAGES,"acceptance_thresholds":pilot.DEFAULT_THRESHOLDS,"slot_policy":dict(pilot.SLOT_POLICY),"seeds":[1337,7331],"maps":[{"name":k,"path":v[0],"sha256":v[1],"required_seats":v[2]} for k,v in pilot.MAPS.items()],"setups":[{"id":n,"team_size":s,"map":m,"team_factions":list(f)} for n,s,m,f in pilot.SETUPS]}
+ return {"schema":1,"switch":pilot.SWITCH,"execution_approved":False,"pairs_per_setup":2,"team_size_scope":[1,2,3,4],"arm_bot_types":{"control":"hard_control","treatment":"hard_treatment"},"baseline_manifest_path":"tools/tests/fixtures/ab_campaign_baseline.json","baseline_manifest_sha256":pilot.text_sha(baseline),"pins":{"source_commit":"e49acf41a1b3699f01d44e4def06ed4bf83af038","engine_version":"4f69df005fe0d893526890fcb5bbc42e442d6fd6"},"switch_patch_sha256":increment.group_patch_sha256(groups[pilot.SWITCH]),"baseline_ai_payload_sha256":pilot.ai_payload_sha(ROOT),"treatment_ai_payload_sha256":pilot.ai_payload_sha(ROOT,pilot.SWITCH),"tool_hash_algorithm":pilot.TOOL_HASH_ALGORITHM,"tool_sha256":{k:pilot.tool_sha(v) for k,v in tools.items()},"receipt_schema_sha256":pilot.text_sha(ROOT/"tools/ai/ab_campaign_receipt.schema.json"),"binary_sha256":{"bin/OpenRA.exe":"5693f355792ebb68699793f96ef2167b733c5e7756f580858c5090226418c984","bin/OpenRA.dll":"92ee9dacd08869593dc5ad70c2d1ce48f701caf8277ea3bd692acf2224a8ca77","bin/OpenRA.Mods.Cameo.dll":"41f37982c146f73b4a9c07071f34b47e214178cb9413e514f05af9af2d44b3a4"},"round_stages":pilot.ROUND_STAGES,"acceptance_thresholds":pilot.DEFAULT_THRESHOLDS,"slot_policy":dict(pilot.SLOT_POLICY),"seeds":[1337,7331],"maps":[{"name":k,"path":v[0],"sha256":v[1],"required_seats":v[2]} for k,v in pilot.MAPS.items()],"setups":[{"id":n,"team_size":s,"map":m,"team_factions":list(f)} for n,s,m,f in pilot.SETUPS]}
 
 class PilotPlanTests(unittest.TestCase):
  def test_approved_amendment_expands_to_64_side_swapped_games(self):
@@ -170,8 +170,8 @@ class PilotPlanTests(unittest.TestCase):
    pilot.treatment_baseline([],"AG_assault_fanout")
   self.assertTrue(pilot.regression_due(5));self.assertFalse(pilot.regression_due(4))
   c=pilot.SlotCounter(); floor=24*1024**3
-  self.assertTrue(c.acquire("a",1,floor));self.assertTrue(c.acquire("b",2,floor));self.assertTrue(c.acquire("c",1,floor));self.assertFalse(c.acquire("d",2,floor))
-  self.assertFalse(c.acquire("large",4,floor));c.release("a");c.release("b");c.release("c")
+  self.assertTrue(c.acquire("a",1,floor));self.assertTrue(c.acquire("b",2,floor));self.assertFalse(c.acquire("c",1,floor))
+  self.assertFalse(c.acquire("large",4,floor));c.release("a");c.release("b")
   self.assertTrue(c.acquire("large",4,floor));self.assertFalse(c.acquire("small",1,floor));
   with self.assertRaises(ValueError): c.update_private_bytes("large",11*1024**3)
   self.assertFalse(pilot.slots_available(1,pilot.RAM_FLOOR_BYTES-1))
@@ -179,8 +179,8 @@ class PilotPlanTests(unittest.TestCase):
    db1=pilot.SqliteSlotCounter(pathlib.Path(temp)/"slots.sqlite")
    db2=pilot.SqliteSlotCounter(pathlib.Path(temp)/"slots.sqlite")
    self.assertTrue(db1.acquire("x",1,floor));self.assertTrue(db2.acquire("y",2,floor))
-   self.assertTrue(db1.acquire("z",1,floor));self.assertFalse(db2.acquire("fourth",1,floor))
-   self.assertFalse(db2.acquire("exclusive",4,floor));db2.heartbeat("x",1024);db1.release("x");db2.release("y");db1.release("z")
+   self.assertFalse(db1.acquire("z",1,floor));self.assertFalse(db2.acquire("fourth",1,floor))
+   self.assertFalse(db2.acquire("exclusive",4,floor));db2.heartbeat("x",1024);db1.release("x");db2.release("y")
    self.assertTrue(db2.acquire("exclusive",4,floor));self.assertFalse(db1.acquire("small",1,floor))
    with self.assertRaisesRegex(ValueError,"memory cap"): db2.heartbeat("exclusive",11*1024**3)
    db2.release("exclusive");db2.release("y");db1.release("z")

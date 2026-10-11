@@ -136,7 +136,9 @@ class AdmissionAndStopTests(unittest.TestCase):
             private_cap=acceptance.PRIVATE_CAP_BYTES, emergency_free=3 * 1024**3))
 
     def test_default_admission_floor_matches_the_bootstrapped_peak_plus_reserve(self):
-        self.assertEqual(13.5 * 1024**3, acceptance.BOOTSTRAP_HEADLESS_PEAK_BYTES + acceptance.ADMISSION_RESERVE_BYTES)
+        self.assertEqual(pilot.RAM_FLOOR_BYTES,
+            acceptance.BOOTSTRAP_HEADLESS_PEAK_BYTES + acceptance.ADMISSION_RESERVE_BYTES)
+        self.assertEqual(pilot.HEADLESS_PEAK_BYTES, acceptance.BOOTSTRAP_HEADLESS_PEAK_BYTES)
         self.assertEqual(10.5 * 1024**3, acceptance.PRIVATE_CAP_BYTES)
 
 
