@@ -732,6 +732,8 @@ def run_one(manifest: dict, manifest_sha: str, job: dict, *, root: pathlib.Path,
 	engine_digest = hashlib.sha256("".join(manifest["binary_sha256"][k] for k in sorted(manifest["binary_sha256"])).encode()).hexdigest()
 	# The receipt carries the internal classification fields verbatim: analyze()
 	# re-adjudicates stored receipts and validate_receipt requires both layers.
+	end_ticks=sorted((s["economy"]["tick"] for s in classification.get("seats",[]) if isinstance(s.get("economy"),dict) and type(s["economy"].get("tick")) is int),reverse=True)
+	end_tick=end_ticks[0] if end_ticks else (monitor_result["samples"][-1]["world_tick"] if monitor_result["samples"] else None)
 	receipt = {**internal, "game_uid":game_uid,"schema_version":1,"campaign_id":manifest.get("campaign_id", "ab-campaign-2026-10-11-pilot"), "manifest_sha256":manifest_sha,
 		"baseline_commit":manifest["pins"]["source_commit"], "engine_sha256":engine_digest, "switch":job["switch"], "setup_id":job["setup"],
 		"map":{"name":job["map"],"path":job["map_path"],"sha256":job["map_sha256"],"generated_map_yaml_sha256":map_yaml_sha,"required_seats":job["required_seats"]},
@@ -739,6 +741,7 @@ def run_one(manifest: dict, manifest_sha: str, job: dict, *, root: pathlib.Path,
 		"seed_proof":{"env_value":str(job["seed"]),"server_log_pin_line":seed_line,"server_log_sha256":sha(server_log) if server_log.is_file() else None},
 		"teams":team_obj,"resolved_seats":resolved_out,"end_class":end_class,"end_reason":end_reason,"deployment":monitor_result["deployment"],
 		"winner_team":classification.get("winner_side") if end_class=="NATURAL" else None,"world_tick":monitor_result["samples"][-1]["world_tick"] if monitor_result["samples"] else None,
+		"end_tick":end_tick,
 		"cap":{"world_tick_cap":CAP_TICK,"marker_observed":bool(cap_match),"marker_tick":int(cap_match.group(1)) if cap_match else None},
 		"memory":{"process_id":game_pid,"peak_private_bytes":monitor_result["peak_private_bytes"],"limit_private_bytes":PRIVATE_LIMIT,"samples":monitor_result["samples"]},
 		"runtime":{"started_utc":started,"finished_utc":finished,"exit_code":monitor_result["exit_code"],"wall_seconds":monitor_result["wall_seconds"],"stall_seconds":180,"pid_scoped_cleanup":monitor_result["pid_scoped_cleanup"]},
