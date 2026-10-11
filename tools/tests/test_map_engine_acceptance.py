@@ -3,6 +3,7 @@ import pathlib
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "tools" / "ai"))
@@ -137,6 +138,80 @@ class AdmissionAndStopTests(unittest.TestCase):
     def test_default_admission_floor_matches_the_bootstrapped_peak_plus_reserve(self):
         self.assertEqual(13.5 * 1024**3, acceptance.BOOTSTRAP_HEADLESS_PEAK_BYTES + acceptance.ADMISSION_RESERVE_BYTES)
         self.assertEqual(10.5 * 1024**3, acceptance.PRIVATE_CAP_BYTES)
+
+
+class OwnedProcessMonitoringTests(unittest.TestCase):
+    def test_owned_tree_includes_children_and_excludes_unrelated_processes(self):
+        rows = [
+            {"ProcessId": 10, "ParentProcessId": 1},
+            {"ProcessId": 1, "ParentProcessId": 0},
+            {"ProcessId": 12, "ParentProcessId": 10},
+            {"ProcessId": 13, "ParentProcessId": 99},
+        ]
+        self.assertEqual({1, 10, 12}, {int(r["ProcessId"]) for r in acceptance.owned_tree_rows(1, rows)})
+
+    def test_sample_aggregates_launcher_and_game_and_fails_closed(self):
+        rows = [{"ProcessId": 1}, {"ProcessId": 2}]
+        with patch.object(acceptance, "private_bytes", side_effect=[100, 200]), \
+             patch.object(acceptance, "rss_bytes", side_effect=[30, 40]):
+            self.assertEqual({"pids": [1, 2], "private_bytes": 300, "working_set_bytes": 70},
+                acceptance.sample_owned_tree(rows))
+        with patch.object(acceptance, "private_bytes", side_effect=[100, None]), \
+             patch.object(acceptance, "rss_bytes", side_effect=[30, 40]):
+            with self.assertRaisesRegex(RuntimeError, "required memory sample missing for owned PID 2"):
+                acceptance.sample_owned_tree(rows)
+
+    def test_windows_child_discovery_requires_engine_descendant(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = pathlib.Path(d) / "engine"
+            (root / "bin").mkdir(parents=True)
+            support = pathlib.Path(d) / "cell/Support"
+            support.mkdir(parents=True)
+            rows = [
+                {"ProcessId": 1, "ParentProcessId": 0, "ExecutablePath": str(root / "bin/OpenRA.exe"),
+                 "CommandLine": f"OpenRA.exe Engine.SupportDir={support}"},
+                {"ProcessId": 2, "ParentProcessId": 1, "ExecutablePath": str(root / "bin/OpenRA.Game.exe"),
+                 "CommandLine": "OpenRA.Game.exe"},
+            ]
+
+            class Popen:
+                pid = 1
+                def poll(self): return None
+
+            with patch.object(acceptance.os, "name", "nt"), patch.object(acceptance, "process_rows", return_value=rows):
+                result = acceptance.discover_owned_tree(Popen(), root, support)
+            self.assertTrue(result["child_found"])
+            self.assertEqual({1, 2}, {int(r["ProcessId"]) for r in result["rows"]})
+
+    def test_tree_cleanup_uses_root_pid_and_tree_scope(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = pathlib.Path(d) / "engine"
+            (root / "bin").mkdir(parents=True)
+            support = pathlib.Path(d) / "cell/Support"
+            support.mkdir(parents=True)
+            rows = [
+                {"ProcessId": 1, "ParentProcessId": 0, "ExecutablePath": str(root / "bin/OpenRA.exe"),
+                 "CommandLine": f"OpenRA.exe Engine.SupportDir={support}"},
+                {"ProcessId": 2, "ParentProcessId": 1, "ExecutablePath": str(root / "bin/OpenRA.Game.exe"),
+                 "CommandLine": f"OpenRA.Game.exe Engine.SupportDir={support}"},
+            ]
+
+            class Popen:
+                pid = 1
+                returncode = None
+                def poll(self): return self.returncode
+                def wait(self, timeout=None): self.returncode = -9
+
+            proc = Popen()
+            calls = []
+            def run(args, **kwargs):
+                calls.append(args)
+                return type("Result", (), {"returncode": 0, "stdout": "", "stderr": ""})()
+            with patch.object(acceptance.os, "name", "nt"), \
+                 patch.object(acceptance, "process_rows", side_effect=[rows, []]), \
+                 patch.object(acceptance.subprocess, "run", side_effect=run):
+                acceptance.terminate_owned_tree(proc, root, support)
+            self.assertEqual(["taskkill.exe", "/PID", "1", "/T", "/F"], calls[0])
 
 
 if __name__ == "__main__":

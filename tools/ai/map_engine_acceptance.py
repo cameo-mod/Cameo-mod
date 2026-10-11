@@ -31,6 +31,7 @@ Exit code 0 only when every selected cell and every complete pair is ACCEPTED.
 from __future__ import annotations
 
 import argparse
+import ctypes
 import json
 import os
 import pathlib
@@ -87,11 +88,34 @@ def available_ram_bytes() -> int | None:
 
 
 def rss_bytes(pid: int) -> int | None:
+	if os.name == "nt":
+		class PROCESS_MEMORY_COUNTERS_EX(ctypes.Structure):
+			_fields_ = [("cb", ctypes.c_ulong), ("PageFaultCount", ctypes.c_ulong),
+				("PeakWorkingSetSize", ctypes.c_size_t), ("WorkingSetSize", ctypes.c_size_t),
+				("QuotaPeakPagedPoolUsage", ctypes.c_size_t), ("QuotaPagedPoolUsage", ctypes.c_size_t),
+				("QuotaPeakNonPagedPoolUsage", ctypes.c_size_t), ("QuotaNonPagedPoolUsage", ctypes.c_size_t),
+				("PagefileUsage", ctypes.c_size_t), ("PeakPagefileUsage", ctypes.c_size_t),
+				("PrivateUsage", ctypes.c_size_t)]
+		kernel = ctypes.windll.kernel32
+		kernel.OpenProcess.restype = ctypes.c_void_p
+		kernel.OpenProcess.argtypes = [ctypes.c_ulong, ctypes.c_bool, ctypes.c_ulong]
+		kernel.CloseHandle.argtypes = [ctypes.c_void_p]
+		handle = kernel.OpenProcess(0x0400 | 0x0010, False, pid)
+		if not handle:
+			return None
+		try:
+			counters = PROCESS_MEMORY_COUNTERS_EX(); counters.cb = ctypes.sizeof(counters)
+			get_info = ctypes.windll.psapi.GetProcessMemoryInfo
+			get_info.argtypes = [ctypes.c_void_p, ctypes.POINTER(PROCESS_MEMORY_COUNTERS_EX), ctypes.c_ulong]
+			get_info.restype = ctypes.c_bool
+			return int(counters.WorkingSetSize) if get_info(handle, ctypes.byref(counters), counters.cb) else None
+		finally:
+			kernel.CloseHandle(handle)
 	try:
 		for line in pathlib.Path(f"/proc/{pid}/status").read_text().splitlines():
 			if line.startswith("VmRSS:"):
 				return int(line.split()[1]) * 1024
-	except OSError:
+	except (OSError, ValueError):
 		return None
 	return None
 
@@ -101,6 +125,174 @@ def private_bytes(pid: int) -> int | None:
 		return campaign.private_bytes(pid)
 	except (OSError, RuntimeError, ValueError):
 		return None
+
+
+def process_rows() -> list[dict]:
+	"""Read one process snapshot; callers build ownership only from the Popen PID."""
+	if os.name != "nt":
+		return []
+	p = subprocess.run(["powershell.exe", "-NoProfile", "-NonInteractive", "-Command",
+		"Get-CimInstance Win32_Process | Select-Object ProcessId,ParentProcessId,ExecutablePath,CommandLine | ConvertTo-Json -Compress"],
+		capture_output=True, text=True, timeout=15)
+	if p.returncode:
+		raise RuntimeError("process identity query failed: " + p.stderr[-400:])
+	if not p.stdout.strip():
+		return []
+	rows = json.loads(p.stdout)
+	return rows if isinstance(rows, list) else [rows]
+
+
+def owned_tree_rows(root_pid: int, rows: list[dict]) -> list[dict]:
+	"""Return only the root process and its current descendants from a process snapshot."""
+	owned = {root_pid}
+	selected = []
+	changed = True
+	while changed:
+		changed = False
+		for row in rows:
+			try:
+				pid, parent = int(row["ProcessId"]), int(row.get("ParentProcessId") or 0)
+			except (KeyError, TypeError, ValueError):
+				continue
+			if pid not in owned and parent in owned:
+				owned.add(pid); changed = True
+	for row in rows:
+		try:
+			if int(row["ProcessId"]) in owned:
+				selected.append(row)
+		except (KeyError, TypeError, ValueError):
+			continue
+	return selected
+
+
+def discover_owned_tree(process, engine: pathlib.Path, support: pathlib.Path, *, require_game_child: bool = True) -> dict:
+	"""Identify the launched root plus descendants; verify root identity before trusting the tree."""
+	if os.name != "nt":
+		return {"rows": [{"ProcessId": process.pid, "ParentProcessId": 0,
+			"ExecutablePath": str(engine / "bin" / "OpenRA.exe"), "CommandLine": ""}], "child_found": True}
+	rows = owned_tree_rows(process.pid, process_rows())
+	root = next((r for r in rows if int(r["ProcessId"]) == process.pid), None)
+	if root is None:
+		if process.poll() is None:
+			raise RuntimeError("launched root process is missing from the process snapshot")
+		return {"rows": [], "child_found": False}
+	expected = (engine / "bin" / "OpenRA.exe").resolve()
+	actual = pathlib.Path(str(root.get("ExecutablePath") or "")).resolve()
+	if os.path.normcase(str(actual)) != os.path.normcase(str(expected)):
+		raise RuntimeError(f"owned root executable mismatch: {actual} != {expected}")
+	command = str(root.get("CommandLine") or "").casefold()
+	if os.path.normcase(str(support.absolute())) not in os.path.normcase(command):
+		raise RuntimeError("owned root command line does not contain this cell's SupportDir")
+	bin_dir = (engine / "bin").resolve()
+	children = []
+	for row in rows:
+		if int(row["ProcessId"]) == process.pid or not row.get("ExecutablePath"):
+			continue
+		try:
+			path = pathlib.Path(row["ExecutablePath"]).resolve()
+			path.relative_to(bin_dir)
+			children.append(row)
+		except (OSError, ValueError):
+			continue
+	if require_game_child and not children:
+		return {"rows": rows, "child_found": False}
+	return {"rows": rows, "child_found": bool(children) or not require_game_child}
+
+
+def sample_owned_tree(rows: list[dict]) -> dict:
+	"""Sum launcher and child memory. Missing any live-process metric is a hard sample failure."""
+	if not rows:
+		raise RuntimeError("owned process tree is empty")
+	private_total = 0
+	working_set_total = 0
+	pids = []
+	for row in rows:
+		pid = int(row["ProcessId"])
+		private, working = private_bytes(pid), rss_bytes(pid)
+		if private is None or working is None:
+			raise RuntimeError(f"required memory sample missing for owned PID {pid}")
+		pids.append(pid)
+		private_total += private
+		working_set_total += working
+	return {"pids": sorted(pids), "private_bytes": private_total, "working_set_bytes": working_set_total}
+
+
+def terminate_owned_tree(process, engine: pathlib.Path, support: pathlib.Path) -> None:
+	"""Terminate only the verified Popen-owned process tree and confirm it is gone."""
+	try:
+		owned = discover_owned_tree(process, engine, support, require_game_child=False)["rows"]
+	except Exception:
+		# CIM can fail independently of the already-held Popen handle. The launch arguments are
+		# immutable and cell-specific, so taskkill remains scoped to this exact root PID tree.
+		args = process.args if isinstance(process.args, (list, tuple)) else []
+		expected = os.path.normcase(os.path.abspath(str(engine / "bin" / "OpenRA.exe")))
+		launched_exe = os.path.normcase(os.path.abspath(str(args[0]))) if args else ""
+		cell_marker = os.path.normcase(f"Engine.SupportDir={support.absolute()}")
+		if os.name != "nt" or process.poll() is not None or launched_exe != expected or not any(
+			cell_marker in os.path.normcase(str(arg)) for arg in args[1:]):
+			raise
+		p = subprocess.run(["taskkill.exe", "/PID", str(process.pid), "/T", "/F"],
+			capture_output=True, text=True, timeout=20)
+		if p.returncode:
+			raise RuntimeError("PID-scoped fallback taskkill failed: " + p.stderr[-400:])
+		process.wait(timeout=20)
+		return
+	if not owned:
+		if process.poll() is None:
+			raise RuntimeError("cannot verify owned tree before cleanup")
+		return
+	owned_pids = [int(row["ProcessId"]) for row in owned]
+	if os.name == "nt":
+		p = subprocess.run(["taskkill.exe", "/PID", str(process.pid), "/T", "/F"],
+			capture_output=True, text=True, timeout=20)
+		if p.returncode and process.poll() is None:
+			raise RuntimeError("PID-scoped taskkill failed: " + p.stderr[-400:])
+	else:
+		# The non-Windows acceptance runner has no detached process group; signal only Popen-owned PIDs.
+		for pid in reversed(owned_pids):
+			try:
+				os.kill(pid, 9)
+			except ProcessLookupError:
+				pass
+	process.wait(timeout=20)
+	if process.poll() is None:
+		raise RuntimeError("Popen root still running after PID-scoped tree cleanup")
+	if os.name == "nt":
+		ids = ",".join(str(pid) for pid in owned_pids)
+		script = f"$ids=@({ids}); Get-CimInstance Win32_Process | Where-Object {{ $ids -contains [int]$_.ProcessId }} | Select-Object -ExpandProperty ProcessId | ConvertTo-Json -Compress"
+		p = subprocess.run(["powershell.exe", "-NoProfile", "-NonInteractive", "-Command", script],
+			capture_output=True, text=True, timeout=15)
+		if p.returncode or p.stdout.strip() not in ("", "null"):
+			raise RuntimeError("owned process tree remained after PID-scoped cleanup")
+
+
+def cleanup_orphaned_owned_pids(pids: set[int], engine: pathlib.Path, support: pathlib.Path) -> list[int]:
+	"""If the launcher exited first, clean up only previously observed, revalidated game PIDs."""
+	if os.name != "nt" or not pids:
+		return []
+	rows = process_rows()
+	by_pid = {int(row["ProcessId"]): row for row in rows if str(row.get("ProcessId", "")).isdigit()}
+	left = sorted(pids.intersection(by_pid))
+	bin_dir = (engine / "bin").resolve()
+	for pid in left:
+		row = by_pid[pid]
+		try:
+			path = pathlib.Path(str(row.get("ExecutablePath") or "")).resolve()
+			path.relative_to(bin_dir)
+			same_cell = os.path.normcase(str(support.absolute())) in os.path.normcase(str(row.get("CommandLine") or ""))
+		except (OSError, ValueError):
+			same_cell = False
+		if not same_cell:
+			raise RuntimeError(f"refusing to clean PID {pid}: it no longer matches the owned engine/support identity")
+	for pid in left:
+		p = subprocess.run(["taskkill.exe", "/PID", str(pid), "/T", "/F"],
+			capture_output=True, text=True, timeout=20)
+		if p.returncode:
+			raise RuntimeError(f"PID-scoped orphan cleanup failed for {pid}: {p.stderr[-300:]}")
+	if left:
+		remaining = {int(row["ProcessId"]) for row in process_rows() if str(row.get("ProcessId", "")).isdigit()}
+		left = sorted(set(left).intersection(remaining))
+	return left
 
 
 def set_monitor_cap(variant: pathlib.Path, cap_tick: int) -> None:
@@ -186,27 +378,71 @@ def run_cell(job: dict, *, root: pathlib.Path, engine: pathlib.Path, overlay: pa
 	started = time.monotonic()
 	peak = 0
 	peak_private = 0
+	min_host_free = None
+	memory_samples = []
+	owned_pids = set()
+	child_seen = False
+	monitor_error = None
 	with (cell_dir / "driver.log").open("w", encoding="utf-8") as output:
 		process = subprocess.Popen(args, cwd=engine, env=env, stdout=output, stderr=subprocess.STDOUT)
 		end_reason = "PROCESS_EXIT"
 		while process.poll() is None:
-			peak = max(peak, rss_bytes(process.pid) or 0)
-			current_private = private_bytes(process.pid)
-			if current_private is not None:
-				peak_private = max(peak_private, current_private)
-			available = available_ram_bytes()
+			try:
+				tree = discover_owned_tree(process, engine, support)
+				owned_pids.update(int(row["ProcessId"]) for row in tree["rows"])
+				child_seen |= tree["child_found"]
+				if os.name == "nt" and not child_seen and time.monotonic() - started > 30:
+					end_reason = "CHILD_PROCESS_NOT_FOUND"
+					raise RuntimeError("OpenRA game child was not discovered within 30 seconds")
+				metrics = sample_owned_tree(tree["rows"])
+				current_private = metrics["private_bytes"]
+				current_rss = metrics["working_set_bytes"]
+				available = available_ram_bytes()
+				if available is None:
+					end_reason = "MEMORY_SAMPLE_FAILED"
+					raise RuntimeError("host available-RAM sample is missing")
+			except Exception as error:
+				if end_reason == "PROCESS_EXIT":
+					end_reason = "MEMORY_SAMPLE_FAILED"
+				monitor_error = str(error)
+				try:
+					terminate_owned_tree(process, engine, support)
+				except Exception as cleanup_error:
+					end_reason = "CLEANUP_FAILED"
+					monitor_error += f"; cleanup failed: {cleanup_error}"
+				break
+			peak = max(peak, current_rss)
+			peak_private = max(peak_private, current_private)
+			min_host_free = available if min_host_free is None else min(min_host_free, available)
+			memory_samples.append({"utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+				"pids": metrics["pids"], "private_bytes": current_private,
+				"working_set_bytes": current_rss, "host_available_bytes": available})
 			stop = run_stop_reason(current_private, available, private_cap=PRIVATE_CAP_BYTES, emergency_free=EMERGENCY_STOP_FREE_BYTES)
 			if stop is not None:
-				process.kill()
-				process.wait()
 				end_reason = stop
+				try:
+					terminate_owned_tree(process, engine, support)
+				except Exception as error:
+					end_reason = "CLEANUP_FAILED"
+					monitor_error = str(error)
 				break
 			if time.monotonic() - started > timeout:
-				process.kill()
-				process.wait()
 				end_reason = "WALL_TIMEOUT"
+				try:
+					terminate_owned_tree(process, engine, support)
+				except Exception as error:
+					end_reason = "CLEANUP_FAILED"
+					monitor_error = str(error)
 				break
 			time.sleep(1)
+	try:
+		orphaned = cleanup_orphaned_owned_pids(owned_pids - {process.pid}, engine, support)
+		if orphaned:
+			end_reason = "ORPHANED_GAME_CLEANED"
+			monitor_error = f"launcher exited while owned game PIDs remained: {orphaned}"
+	except Exception as error:
+		end_reason = "CLEANUP_FAILED"
+		monitor_error = str(error)
 	exceptions = sorted(p.name for p in logs.glob("exception-*.log"))
 	lua_log = logs / "lua.log"  # Lua print() output: the campaign monitor's AB_CAMPAIGN_* markers
 	lua_text = lua_log.read_text(encoding="utf-8", errors="replace") if lua_log.is_file() else ""
@@ -217,6 +453,12 @@ def run_cell(job: dict, *, root: pathlib.Path, engine: pathlib.Path, overlay: pa
 	problems = []
 	if end_reason != "PROCESS_EXIT" or process.returncode != 0:
 		problems.append(f"{end_reason}, exit code {process.returncode}")
+	if monitor_error:
+		problems.append(monitor_error)
+	if not memory_samples:
+		problems.append("no complete process-tree and host-RAM samples were collected")
+	if os.name == "nt" and not child_seen:
+		problems.append("owned OpenRA game child was not discovered")
 	if exceptions:
 		problems.append(f"exception logs: {exceptions}")
 	debug_log = logs / "debug.log"
@@ -243,7 +485,9 @@ def run_cell(job: dict, *, root: pathlib.Path, engine: pathlib.Path, overlay: pa
 			"opponents": sorted(str(o.get("home")) for o in r.get("opponents", []))} for r in records],
 		"cap_tick": int(cap.group(1)) if cap else None, "exceptions": exceptions, "exit_code": process.returncode,
 		"end_reason": end_reason, "wall_seconds": round(time.monotonic() - started, 1),
-		"peak_rss_bytes": peak or None, "peak_private_bytes": peak_private or None,
+		"peak_rss_bytes": peak or None, "peak_working_set_bytes": peak or None,
+		"peak_private_bytes": peak_private or None, "minimum_host_available_bytes": min_host_free,
+		"memory_samples": memory_samples, "owned_process_ids": sorted(owned_pids),
 		"private_limit_bytes": PRIVATE_CAP_BYTES,
 		"verdict": "ACCEPTED" if not problems else "REJECTED", "problems": problems}
 
