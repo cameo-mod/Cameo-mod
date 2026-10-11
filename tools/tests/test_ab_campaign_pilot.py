@@ -46,6 +46,22 @@ class PilotPlanTests(unittest.TestCase):
   self.assertIn('"Neutral", "Creeps"',monitor_text)
   self.assertIn('AB_CAMPAIGN_CAP tick=',monitor_text)
 
+ def test_campaign_monitor_preserves_early_conquest_end(self):
+  # A required "cap" objective permanently blocks the survivor's win: MissionObjectives.MarkCompleted
+  # only fires OnPlayerWon when every required objective is Completed. The monitor must therefore not
+  # add any objective; at cap it fails each campaign seat's existing primary (conquest) objective.
+  with tempfile.TemporaryDirectory() as temp:
+   dest=pathlib.Path(temp)
+   (dest/"duel_rules.yaml").write_text("World:\n\tMapOptions:\n",encoding="utf-8")
+   pilot.install_campaign_monitor(dest,2,cap_tick=1000,sample_interval=500)
+   monitor=(dest/"ab_campaign_monitor.lua").read_text(encoding="utf-8")
+  self.assertNotIn("AddPrimaryObjective",monitor)
+  self.assertNotIn("AddSecondaryObjective",monitor)
+  self.assertIn("CampaignSeatNames",monitor)
+  self.assertIn("GetObjectiveType",monitor)
+  self.assertIn("MarkFailedObjective",monitor)
+  self.assertIn("AB_CAMPAIGN_CAP tick=",monitor)
+
  def test_map_tamper_and_execution_authority_fail_closed(self):
   m=manifest();m["maps"][0]["sha256"]="0"*64
   with self.assertRaisesRegex(ValueError,"map path/SHA"):

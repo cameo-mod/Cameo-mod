@@ -453,13 +453,23 @@ def run_one(manifest: dict, manifest_sha: str, job: dict, *, root: pathlib.Path,
 		for file in artifact_paths:
 			if file.is_file() and file != bundle: z.write(file, file.relative_to(game_root))
 	engine_digest = hashlib.sha256("".join(manifest["binary_sha256"][k] for k in sorted(manifest["binary_sha256"])).encode()).hexdigest()
+	end_ticks=sorted((s["economy"]["tick"] for s in classification.get("seats",[]) if isinstance(s.get("economy"),dict) and type(s["economy"].get("tick")) is int),reverse=True)
+	end_tick=end_ticks[0] if end_ticks else (monitor_result["samples"][-1]["world_tick"] if monitor_result["samples"] else None)
+	game_uid=next((u for r in match_rows for u in (r.get("game_uid"),str(r.get("record_id") or "").split("|")[0]) if isinstance(u,str) and u),None)
 	receipt = {"schema_version":1,"campaign_id":manifest.get("campaign_id", "ab-campaign-2026-10-11-pilot"), "manifest_sha256":manifest_sha,
+		"cell_id":job["cell_id"], "game_uid":game_uid, "status":internal_status, "seats":resolved,
+		"seat_proof_source":"generated_map.yaml", "map_yaml_sha256":map_yaml_sha, "control_side":job["control_side"],
+		"treatment_side":job["treatment_side"], "arm_bot_types":job["arm_bot_types"], "cap_marker":bool(cap_match),
+		"cap_tick":int(cap_match.group(1)) if cap_match else None, "support_complete":len(match_rows)==job["required_seats"],
+		"setup":job["setup"], "map_sha256":job["map_sha256"], "pair":job["pair"], "game_in_pair":job["game_in_pair"],
+		"duration_ticks":int(cap_match.group(1)) if cap_match else end_tick, "peak_memory_bytes":monitor_result["peak_private_bytes"],
 		"baseline_commit":manifest["pins"]["source_commit"], "engine_sha256":engine_digest, "switch":job["switch"], "setup_id":job["setup"],
 		"map":{"name":job["map"],"path":job["map_path"],"sha256":job["map_sha256"],"generated_map_yaml_sha256":map_yaml_sha,"required_seats":job["required_seats"]},
 	"pair_id":f"{job['setup']}:{job['seed']}:{job['pair']}","pair_member":job["game_in_pair"],"seed":job["seed"],
 		"seed_proof":{"env_value":str(job["seed"]),"server_log_pin_line":seed_line,"server_log_sha256":sha(server_log) if server_log.is_file() else None},
 		"teams":team_obj,"resolved_seats":resolved_out,"end_class":end_class,"end_reason":end_reason,
 		"winner_team":classification.get("winner_side") if end_class=="NATURAL" else None,"world_tick":monitor_result["samples"][-1]["world_tick"] if monitor_result["samples"] else None,
+		"end_tick":end_tick,
 		"cap":{"world_tick_cap":CAP_TICK,"marker_observed":bool(cap_match),"marker_tick":int(cap_match.group(1)) if cap_match else None},
 		"memory":{"process_id":process.pid,"peak_private_bytes":monitor_result["peak_private_bytes"],"limit_private_bytes":PRIVATE_LIMIT,"samples":monitor_result["samples"]},
 		"runtime":{"started_utc":started,"finished_utc":finished,"exit_code":monitor_result["exit_code"],"wall_seconds":monitor_result["wall_seconds"],"stall_seconds":180,"pid_scoped_cleanup":monitor_result["pid_scoped_cleanup"]},

@@ -346,11 +346,12 @@ def dry_run(m,root,engine_root=None,minutes_per_game=8.5,setup_hours=2.0):
 def install_campaign_monitor(dest,seat_count,cap_tick=45000,sample_interval=5000,rules_filename="duel_rules.yaml",seat_names=None):
  """Install map-local actor-count sampling and an explicit all-seat censor marker."""
  require(seat_count in (2,4,6,8) and type(cap_tick) is int and 1000<=cap_tick<=45000 and 0<sample_interval<=cap_tick,"campaign monitor bounds")
- names=", ".join(json.dumps(name) for name in (seat_names or [f"Multi{i}" for i in range(seat_count)]))+', "Neutral", "Creeps"'
+ campaign_seat_names=", ".join(json.dumps(name) for name in (seat_names or [f"Multi{i}" for i in range(seat_count)]))
+ names=campaign_seat_names+', "Neutral", "Creeps"'
  lua=f'''local SeatNames = {{{names}}}
+local CampaignSeatNames = {{{campaign_seat_names}}}
 local CapTick = {cap_tick}
 local SampleInterval = {sample_interval}
-local Objectives = {{}}
 local function SampleActors()
 \tlocal total = 0
 \tfor _, name in ipairs(SeatNames) do
@@ -359,13 +360,23 @@ local function SampleActors()
 \tend
 \tprint("AB_CAMPAIGN_ACTOR_SAMPLE tick=" .. DateTime.GameTime .. " actor_count=" .. total)
 end
+local function FailPrimaryObjectives(player)
+\tlocal id = 0
+\twhile true do
+\t\tlocal ok, otype = pcall(function() return player.GetObjectiveType(id) end)
+\t\tif not ok then break end
+\t\tif otype == "Primary" and not player.IsObjectiveFailed(id) and not player.IsObjectiveCompleted(id) then
+\t\t\tplayer.MarkFailedObjective(id)
+\t\tend
+\t\tid = id + 1
+\tend
+end
 WorldLoaded = function()
-\tfor _, name in ipairs(SeatNames) do local p = Player.GetPlayer(name); if p then Objectives[name] = p.AddPrimaryObjective("Campaign observation cap") end end
 \tprint("AB_CAMPAIGN_STARTED tick=" .. DateTime.GameTime .. " cap=" .. CapTick)
 \tfor tick = SampleInterval, CapTick - SampleInterval, SampleInterval do Trigger.AfterDelay(tick, SampleActors) end
 \tTrigger.AfterDelay(CapTick, function()
 \t\tSampleActors(); print("AB_CAMPAIGN_CAP tick=" .. DateTime.GameTime)
-\t\tfor _, name in ipairs(SeatNames) do local p = Player.GetPlayer(name); if p and Objectives[name] then p.MarkFailedObjective(Objectives[name]) end end
+\t\tfor _, name in ipairs(CampaignSeatNames) do local p = Player.GetPlayer(name); if p then FailPrimaryObjectives(p) end end
 \tend)
 end
 '''
