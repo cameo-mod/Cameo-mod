@@ -80,6 +80,10 @@ namespace OpenRA.Mods.CA.Traits
 		// production. Empty = nothing pauses, upstream-identical.
 		IBotRequestPauseBuildingProduction[] pauseBuilding;
 
+		// TF-2: lazy — the unit side's mobile-production reservation. Null = classic (floor 0,
+		// no spend feed, admission unchanged).
+		IBotMobileSpendReserve mobileReserve;
+
 		// REPLAY-HEALTH-LOGGER (ACK-2, task 01a12023): record-only queue-transition dispatch.
 		// Everything here is lazy — with no observer trait on the PlayerActor the seam is one
 		// null check per Tick and no state is ever allocated (Sol review F5).
@@ -656,6 +660,18 @@ namespace OpenRA.Mods.CA.Traits
 			if (queue.Actor == baseBuilder.RelocationHoldConyard)
 				return false;
 
+			// TF-2: feed the unit side's spend ledger — every in-flight item with total/remaining
+			// cost and its army-first flag, so the paid-share metric is real and an item that
+			// leaves the queue (produced, refunded, cancelled, producer gone) settles exactly once.
+			mobileReserve ??= player.PlayerActor.TraitsImplementing<IBotMobileSpendReserve>().FirstEnabledTraitOrDefault();
+			if (mobileReserve != null)
+			{
+				var inflight = new Dictionary<string, (int Total, int Remaining, bool Essential)>(StringComparer.Ordinal);
+				foreach (var i in queue.AllQueued())
+					inflight[i.Item] = (i.TotalCost, i.RemainingCost, IsArmyFirstEssential(world.Map.Rules.Actors[i.Item]));
+				mobileReserve.ReconcileBuildingSpend(queue.Actor, inflight);
+			}
+
 			var currentBuilding = queue.AllQueued().FirstOrDefault();
 
 			// Waiting to build something
@@ -695,11 +711,22 @@ namespace OpenRA.Mods.CA.Traits
 				// non-essential buildings so cash flows to unit production while it needs to. Construction yards,
 				// refineries, power and the first production building are essential and always pass.
 				pauseBuilding ??= player.PlayerActor.TraitsImplementing<IBotRequestPauseBuildingProduction>().ToArray();
-				if (pauseBuilding.Length > 0)
+				mobileReserve ??= player.PlayerActor.TraitsImplementing<IBotMobileSpendReserve>().FirstEnabledTraitOrDefault();
+				var reserveFloor = mobileReserve?.MobileSpendFloor ?? 0;
+				if (pauseBuilding.Length > 0 || reserveFloor > 0)
 				{
 					var essential = IsArmyFirstEssential(item);
 					if (pauseBuilding.Any(p => p.PausesBuilding(item, essential)))
 						return false;
+
+					// TF-2: the reservation — optional spend (optional defences, crawl links) may
+					// not push cash below the reserved mobile share; essentials keep the old floor.
+					if (BaseBuilderQueueEvalCA.MobileSpendBlocks(playerResources.GetCashAndResources(),
+							queue.GetProductionCost(item), reserveFloor, essential))
+					{
+						pendingDemandPick = default;
+						return false;
+					}
 				}
 
 				// ECON-A-FIX (R6): the demand's refinery reserves its claim's anchor as the order is
