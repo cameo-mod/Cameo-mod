@@ -49,6 +49,7 @@ TRACE_BUFFER_MB = 32
 TRACE_MAX_OUTPUT = 64 * 1024**2
 TRACE_DURATION = "00:00:00:10"
 TRACE_ENABLED = True
+ALLOW_STALE_BUILD = False
 
 
 def admission_ok(available_physical: int, available_commit: int) -> bool:
@@ -186,6 +187,8 @@ def run_cell(index: int) -> dict:
 		"--allow-temporary-template",
 		"--time-limit", "1", "--retries", "0", "--stall-timeout", "180",
 		"--keep-variants", "--render", "fast", "--support-dir", str(support)]
+	if ALLOW_STALE_BUILD:
+		command.append("--allow-stale-build")
 	env = os.environ.copy()
 	env["CAMEO_DEV_SEED"] = str(SEED)
 	start = time.monotonic()
@@ -387,7 +390,7 @@ def run_cell(index: int) -> dict:
 
 
 def main() -> int:
-	global OUT, PROCESS_STOP, HOST_SOFT_STOP, HOST_HARD_FLOOR, TRACE_ENABLED, CAP_TICK
+	global OUT, PROCESS_STOP, HOST_SOFT_STOP, HOST_HARD_FLOOR, TRACE_ENABLED, CAP_TICK, ALLOW_STALE_BUILD
 	parser = argparse.ArgumentParser(description=__doc__)
 	parser.add_argument("--execute-a5-diagnostic", action="store_true",
 		help="explicitly run two bounded A5 qualification cells; never campaign outcomes")
@@ -403,6 +406,10 @@ def main() -> int:
 		help="disable gc-verbose profiler for parity runs; System.Runtime counters remain enabled")
 	parser.add_argument("--tick-cap", type=int, default=16000,
 		help="fixed world-tick cap for A5 parity; keeps the qualification below natural match end")
+	parser.add_argument("--allow-stale-build", action="store_true",
+		help="forward to the batch harness when this worktree's mod sources are "
+			"newer than the pinned engine/bin dlls only by checkout timestamp "
+			"(e.g. hardlink-materialized engine); receipt records binary sha256")
 	args = parser.parse_args()
 	if not 1000 <= args.tick_cap < 17000:
 		raise RuntimeError("A5 parity cap must be in [1000, 17000) to stay below observed natural end")
@@ -415,6 +422,7 @@ def main() -> int:
 	HOST_HARD_FLOOR = int(args.host_hard_floor_gib * 1024**3)
 	HOST_SOFT_STOP = int(args.host_soft_stop_gib * 1024**3)
 	TRACE_ENABLED = not args.no_allocation_trace
+	ALLOW_STALE_BUILD = args.allow_stale_build
 	output_dir = args.output_dir if args.output_dir.is_absolute() else ROOT / args.output_dir
 	OUT = output_dir.resolve()
 	if not args.execute_a5_diagnostic:
