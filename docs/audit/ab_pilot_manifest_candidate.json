@@ -267,7 +267,10 @@
     }
   ],
   "execution_approved": false,
-  "notes": "non-executable candidate; execution approval remains false until Windows engine acceptance, headless measurement, fresh A5 receipt, and maintainer sign-off",
-  "a5_parity_receipt_path": null,
-  "a5_parity_receipt_sha256": null
+  "notes": "disarmed candidate; fcb3 A5 qualification and 32-cell map acceptance receipts pinned; execution_approved remains false",
+  "a5_parity_receipt_path": "docs/audit/ab_a5_fcb3_20261011.json",
+  "a5_parity_receipt_sha256": "659c19b8ca17415ef3b7ce1470d2c6b3b4450f0fb35f4212613810cfc0309a3d",
+  "map_engine_acceptance_receipt_path": "docs/audit/ab_map_acceptance_fcb3_v5_20261011.json",
+  "map_engine_acceptance_receipt_sha256": "d25a649cfc5efacf5a026df4caf1476747d981a1881e1623076147169a991301",
+  "map_engine_acceptance_passed": true
 }
