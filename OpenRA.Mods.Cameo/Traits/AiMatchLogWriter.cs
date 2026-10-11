@@ -454,8 +454,7 @@ namespace OpenRA.Mods.Cameo.Traits
 				// so the home cell is what tells the two sides of a duel apart.
 				AppendString(lines, "home", $"{player.HomeLocation.X},{player.HomeLocation.Y}");
 				AppendString(lines, "outcome", Outcome(player.WinState));
-				AppendString(lines, "personality", recorder?.CurrentPersonality ?? "");
-				AppendNumber(lines, "personality_switches", recorder?.PersonalitySwitches ?? 0);
+				AppendPersonalitySummary(lines, recorder);
 				var priorsStates = player.PlayerActor.TraitsImplementing<OpenRA.Mods.CA.Traits.BotModuleLogic.IBotEngagementPriors>()
 					.Select(p => p.PriorsState).Where(s => s != null).ToArray();
 				if (priorsStates.Length > 0)
@@ -685,6 +684,12 @@ namespace OpenRA.Mods.Cameo.Traits
 			}
 
 			builder.Append(']');
+		}
+
+		internal static void AppendPersonalitySummary(StringBuilder builder, AiMatchLogRecorder recorder)
+		{
+			AppendString(builder, "personality", recorder?.LastObservedPersonality ?? "");
+			AppendNumber(builder, "personality_switches", recorder?.PersonalitySwitches ?? 0);
 		}
 
 		internal static void AppendTimeline(StringBuilder builder, IReadOnlyList<AiMatchLogPersonalityTransition> timeline, bool first = false)
