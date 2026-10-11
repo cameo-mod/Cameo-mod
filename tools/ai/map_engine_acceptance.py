@@ -475,13 +475,19 @@ def run_cell(job: dict, *, root: pathlib.Path, engine: pathlib.Path, overlay: pa
 				current_rss = metrics["working_set_bytes"]
 				available = available_ram_bytes()
 				if available is None:
-					end_reason = "MEMORY_SAMPLE_FAILED"
 					raise RuntimeError("host available-RAM sample is missing")
 			except Exception as error:
 				if "ExecutablePath missing" in str(error) and identity_gaps < 10:
 					identity_gaps += 1
 					time.sleep(0.5)
 					continue
+				# poll() may have raced with process-tree discovery or sampling. Only
+				# accept it as a normal exit after a prior complete sample; final tree
+				# discovery below still performs PID-scoped cleanup of any survivor.
+				if deployment_guard.sampling_failure_is_exit_race(end_reason,
+						process_exited=process.poll() is not None, valid_sample_count=len(memory_samples)):
+					end_reason = "PROCESS_EXIT"
+					break
 				if end_reason == "PROCESS_EXIT":
 					end_reason = "MEMORY_SAMPLE_FAILED"
 				monitor_error = str(error)
@@ -531,6 +537,11 @@ def run_cell(job: dict, *, root: pathlib.Path, engine: pathlib.Path, overlay: pa
 					monitor_error = str(error)
 				break
 			time.sleep(1)
+	if not memory_samples and end_reason == "PROCESS_EXIT":
+		# A process that exits before the first complete tree+host sample remains
+		# unmeasured and must not pass acceptance.
+		end_reason = "MEMORY_SAMPLE_FAILED"
+		monitor_error = "no complete memory samples were recorded"
 	try:
 		# Always take one last snapshot: Popen may have exited before the first loop
 		# iteration, leaving a same-cell game child absent from the sampled PID set.

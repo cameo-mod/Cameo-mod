@@ -6,6 +6,59 @@ from unittest.mock import patch
 
 
 class CampaignRunnerTests(unittest.TestCase):
+	def test_monitor_accepts_sample_race_after_prior_sample_and_exit(self):
+		class Process:
+			pid = 7
+			returncode = None
+			def poll(self): return self.returncode
+			def kill(self): self.returncode = -9
+			def wait(self, timeout=None): return self.returncode
+		with tempfile.TemporaryDirectory() as temp:
+			root = pathlib.Path(temp); proc = Process(); sleeps = [0]
+			def sleep(_):
+				sleeps[0] += 1
+				if sleeps[0] == 2: proc.returncode = 0
+			with patch.object(runner, "private_bytes", side_effect=[100, RuntimeError("PID exited")]):
+				result = runner.monitor_process(proc, driver_log=root / "driver.log",
+					actor_log=root / "actor.log", stall_log=root / "driver.log",
+					poll_seconds=0.01, clock=lambda: 0, sleep=sleep)
+		self.assertEqual("PROCESS_EXIT", result["end_reason"])
+		self.assertEqual(1, len(result["samples"]))
+		self.assertEqual(0, result["exit_code"])
+
+	def test_monitor_live_sample_failure_still_fails_closed_after_prior_sample(self):
+		class Process:
+			pid = 7
+			returncode = None
+			def poll(self): return self.returncode
+			def kill(self): self.returncode = -9
+			def wait(self, timeout=None): return self.returncode
+		with tempfile.TemporaryDirectory() as temp:
+			root = pathlib.Path(temp); proc = Process()
+			with patch.object(runner, "private_bytes", side_effect=[100, RuntimeError("sample denied")]):
+				result = runner.monitor_process(proc, driver_log=root / "driver.log",
+					actor_log=root / "actor.log", stall_log=root / "driver.log",
+					poll_seconds=0.01, clock=lambda: 0, sleep=lambda _: None)
+		self.assertEqual("MEMORY_SAMPLE_FAILED", result["end_reason"])
+		self.assertEqual(-9, result["exit_code"])
+
+	def test_monitor_exit_race_with_zero_samples_still_fails_closed(self):
+		class Process:
+			pid = 7
+			returncode = None
+			def poll(self): return self.returncode
+			def kill(self): self.returncode = -9
+			def wait(self, timeout=None): return self.returncode
+		with tempfile.TemporaryDirectory() as temp:
+			root = pathlib.Path(temp); proc = Process()
+			def exit_during_sleep(_): proc.returncode = 0
+			with patch.object(runner, "private_bytes", side_effect=RuntimeError("PID exited")):
+				result = runner.monitor_process(proc, driver_log=root / "driver.log",
+					actor_log=root / "actor.log", stall_log=root / "driver.log",
+					poll_seconds=0.01, clock=lambda: 0, sleep=exit_during_sleep)
+		self.assertEqual("MEMORY_SAMPLE_FAILED", result["end_reason"])
+		self.assertEqual(0, result["exit_code"])
+
 	def test_link_mod_tree_clones_everything_except_skipped_top_level(self):
 		# The thin-overlay defect dropped ContentPacks; the clone must carry every
 		# entry except the caller-skipped top dirs (real files, no reparse points).

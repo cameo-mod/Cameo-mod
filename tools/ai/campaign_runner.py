@@ -573,7 +573,15 @@ def monitor_process(process, *, driver_log: pathlib.Path, actor_log: pathlib.Pat
 		try:
 			private = private_bytes(pid)
 		except (OSError, RuntimeError):
-			stop_reason = "MEMORY_SAMPLE_FAILED"; break
+			# The PID may disappear after alive() and before private_bytes().
+			# A prior valid sample permits normal PROCESS_EXIT adjudication; with
+			# a live process or no prior sample, fail closed as before.
+			if deployment_guard.sampling_failure_is_exit_race(stop_reason,
+					process_exited=not alive(), valid_sample_count=len(private_samples)):
+				break
+			if stop_reason is None:
+				stop_reason = "MEMORY_SAMPLE_FAILED"
+			break
 		peak = max(peak, private)
 		if actor_log.exists():
 			with actor_log.open("r", encoding="utf-8", errors="replace") as actor_stream:
@@ -604,6 +612,9 @@ def monitor_process(process, *, driver_log: pathlib.Path, actor_log: pathlib.Pat
 		if private >= PRIVATE_LIMIT: stop_reason = "MEMORY_KILL"; break
 		if clock() - last_activity > stall_timeout: stop_reason = "STALL"; break
 		if clock() >= deadline: stop_reason = "WALL_TIMEOUT"; break
+	if not private_samples and stop_reason is None:
+		# A fast exit before the first memory read is not a measured execution.
+		stop_reason = "MEMORY_SAMPLE_FAILED"
 	# A normal process exit may flush the last Lua lines after the final poll.
 	# Never clear a safety stop or rehabilitate a cell killed by the deadline.
 	if deployment_log is not None and not alive():
