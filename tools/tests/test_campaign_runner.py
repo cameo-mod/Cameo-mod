@@ -36,11 +36,11 @@ class CampaignRunnerTests(unittest.TestCase):
 	def test_engine_version_accepts_ascii_utf8_bom_and_utf16_bom(self):
 		with tempfile.TemporaryDirectory() as temp:
 			path = pathlib.Path(temp) / "VERSION"
-			for payload in (b"git-4f69df005fe0d893526890fcb5bbc42e442d6fd6\n",
-							"\ufeff4f69df005fe0d893526890fcb5bbc42e442d6fd6\n".encode("utf-8"),
-							"git-4f69df005fe0d893526890fcb5bbc42e442d6fd6\n".encode("utf-16")):
+			for payload in (b"git-04f9a38baed23a760973a3313762ff5d4534a733\n",
+							"\ufeff04f9a38baed23a760973a3313762ff5d4534a733\n".encode("utf-8"),
+							"git-04f9a38baed23a760973a3313762ff5d4534a733\n".encode("utf-16")):
 				path.write_bytes(payload)
-				self.assertEqual("4f69df005fe0d893526890fcb5bbc42e442d6fd6", runner.pilot.read_engine_version(path))
+				self.assertEqual("04f9a38baed23a760973a3313762ff5d4534a733", runner.pilot.read_engine_version(path))
 
 	def test_claim_once_and_orphan_is_incomplete(self):
 		with tempfile.TemporaryDirectory() as temp:

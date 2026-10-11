@@ -77,7 +77,14 @@ def validate_manifest(m: dict[str, Any], root: pathlib.Path, *, executable=False
     require(pinned.returncode == 0, "frozen source commit is absent from this repository")
     engine_version = root / "engine" / "VERSION"
     if engine_version.exists():
-        require(engine_version.read_text(encoding="ascii").strip().lower() == pins["engine_version"].lower(),
+        raw = engine_version.read_bytes()
+        if raw.startswith((b"\xff\xfe", b"\xfe\xff")):
+            text = raw.decode("utf-16")
+        elif raw.startswith(b"\xef\xbb\xbf"):
+            text = raw.decode("utf-8-sig")
+        else:
+            text = raw.decode("ascii")
+        require(text.strip().removeprefix("git-").lower() == pins["engine_version"].lower(),
                 "engine VERSION differs from frozen pin")
     require(type(m.get("world_tick_cap")) is int and m["world_tick_cap"] == 45000, "world cap must be 45000")
     require(type(m.get("wall_timeout_s")) is int and m["wall_timeout_s"] == 3000, "wall timeout must be 3000")
