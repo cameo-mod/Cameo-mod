@@ -4,7 +4,7 @@
   "title": "Cameo A/B campaign per-game receipt",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schema_version", "campaign_id", "manifest_sha256", "baseline_commit", "engine_sha256", "switch", "setup_id", "map", "pair_id", "pair_member", "seed", "seed_proof", "teams", "resolved_seats", "end_class", "end_reason", "winner_team", "world_tick", "cap", "memory", "runtime", "artifacts"],
+  "required": ["schema_version", "campaign_id", "manifest_sha256", "baseline_commit", "engine_sha256", "switch", "setup_id", "cell_id", "game_uid", "map", "pair_id", "pair_member", "seed", "seed_proof", "teams", "resolved_seats", "end_class", "end_reason", "winner_team", "world_tick", "cap", "memory", "runtime", "artifacts"],
   "properties": {
     "schema_version": {"const": 1},
     "campaign_id": {"type": "string", "minLength": 1},
@@ -13,6 +13,8 @@
     "engine_sha256": {"$ref": "#/$defs/sha"},
     "switch": {"type": "string", "minLength": 1},
     "setup_id": {"type": "string", "minLength": 1},
+    "cell_id": {"type": "string", "minLength": 1},
+    "game_uid": {"type": ["string", "null"], "minLength": 1},
     "map": {"type": "object", "additionalProperties": false, "required": ["name", "path", "sha256", "generated_map_yaml_sha256", "required_seats"], "properties": {"name": {"type": "string"}, "path": {"type": "string"}, "sha256": {"$ref": "#/$defs/sha"}, "generated_map_yaml_sha256": {"$ref": "#/$defs/sha"}, "required_seats": {"type": "integer", "minimum": 2}}},
     "pair_id": {"type": "string", "minLength": 1},
     "pair_member": {"type": "integer", "enum": [0, 1]},
@@ -25,7 +27,7 @@
     "winner_team": {"enum": ["A", "B", null]},
     "world_tick": {"type": ["integer", "null"], "minimum": 0},
     "cap": {"type": "object", "additionalProperties": false, "required": ["world_tick_cap", "marker_observed", "marker_tick"], "properties": {"world_tick_cap": {"const": 45000}, "marker_observed": {"type": "boolean"}, "marker_tick": {"type": ["integer", "null"], "minimum": 0}}},
-    "memory": {"type": "object", "additionalProperties": false, "required": ["process_id", "peak_private_bytes", "limit_private_bytes", "samples"], "properties": {"process_id": {"type": ["integer", "null"], "minimum": 1}, "peak_private_bytes": {"type": "integer", "minimum": 0}, "limit_private_bytes": {"const": 6979321856}, "samples": {"type": "array", "items": {"type": "object", "additionalProperties": false, "required": ["utc", "world_tick", "private_bytes", "actor_count"], "properties": {"utc": {"type": "string", "format": "date-time"}, "world_tick": {"type": ["integer", "null"], "minimum": 0}, "private_bytes": {"type": "integer", "minimum": 0}, "actor_count": {"type": ["integer", "null"], "minimum": 0}}}}}},
+    "memory": {"type": "object", "additionalProperties": false, "required": ["process_id", "peak_private_bytes", "limit_private_bytes", "samples"], "properties": {"process_id": {"type": ["integer", "null"], "minimum": 1}, "peak_private_bytes": {"type": "integer", "minimum": 0}, "limit_private_bytes": {"const": 11274289152}, "samples": {"type": "array", "items": {"type": "object", "additionalProperties": false, "required": ["utc", "world_tick", "private_bytes", "actor_count"], "properties": {"utc": {"type": "string", "format": "date-time"}, "world_tick": {"type": ["integer", "null"], "minimum": 0}, "private_bytes": {"type": "integer", "minimum": 0}, "actor_count": {"type": ["integer", "null"], "minimum": 0}}}}}},
     "runtime": {"type": "object", "additionalProperties": false, "required": ["started_utc", "finished_utc", "exit_code", "wall_seconds", "stall_seconds", "pid_scoped_cleanup"], "properties": {"started_utc": {"type": ["string", "null"], "format": "date-time"}, "finished_utc": {"type": ["string", "null"], "format": "date-time"}, "exit_code": {"type": ["integer", "null"]}, "wall_seconds": {"type": ["number", "null"], "minimum": 0}, "stall_seconds": {"const": 180}, "pid_scoped_cleanup": {"type": "boolean"}}},
     "artifacts": {"type": "object", "additionalProperties": false, "required": ["server_log", "driver_log", "matches_jsonl", "replay", "map_yaml", "support_bundle"], "properties": {"server_log": {"$ref": "#/$defs/artifact"}, "driver_log": {"$ref": "#/$defs/artifact"}, "matches_jsonl": {"$ref": "#/$defs/artifact"}, "replay": {"$ref": "#/$defs/artifact"}, "map_yaml": {"$ref": "#/$defs/artifact"}, "support_bundle": {"$ref": "#/$defs/artifact"}}}
   },
@@ -34,10 +36,10 @@
     "team": {"type": "object", "additionalProperties": false, "required": ["arm", "bot_type", "seat_ids"], "properties": {"arm": {"enum": ["control", "treatment"]}, "bot_type": {"type": "string"}, "seat_ids": {"type": "array", "items": {"type": "string"}}}},
     "seat": {
       "type": "object", "additionalProperties": false,
-      "required": ["seat_id", "team", "arm", "bot_type", "faction", "home", "spawn", "proof_source", "outcome", "metrics"],
+      "required": ["seat_id", "team", "arm", "bot_type", "faction", "home", "home_location", "spawn", "proof_source", "outcome", "metrics"],
       "properties": {
         "seat_id": {"type": "string"}, "team": {"enum": ["A", "B"]}, "arm": {"enum": ["control", "treatment"]},
-        "bot_type": {"type": "string"}, "faction": {"type": "string"}, "home": {"type": "string"},
+        "bot_type": {"type": "string"}, "faction": {"type": "string"}, "home": {"type": "string"}, "home_location": {"type": "string", "pattern": "^\\d+,\\d+$"},
         "spawn": {"type": "integer", "minimum": 0}, "proof_source": {"type": "string"}, "outcome": {"enum": ["won", "lost", "draw", "unknown"]},
         "metrics": {
           "type": "object", "additionalProperties": false,
@@ -63,6 +65,7 @@
   },
   "allOf": [
     {"if": {"properties": {"end_class": {"const": "NATURAL"}}, "required": ["end_class"]}, "then": {"properties": {"end_reason": {"type": "string"}}}},
-    {"if": {"properties": {"end_class": {"enum": ["CAP", "INCOMPLETE"]}}, "required": ["end_class"]}, "then": {"properties": {"winner_team": {"type": "null"}}}}
+    {"if": {"properties": {"end_class": {"enum": ["CAP", "INCOMPLETE"]}}, "required": ["end_class"]}, "then": {"properties": {"winner_team": {"type": "null"}}}},
+    {"if": {"properties": {"end_class": {"const": "CAP"}}, "required": ["end_class"]}, "then": {"properties": {"cap": {"properties": {"world_tick_cap": {"const": 45000}, "marker_observed": {"const": true}, "marker_tick": {"const": 45001}}}}}}
   ]
 }

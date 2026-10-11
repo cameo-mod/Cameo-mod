@@ -30,15 +30,15 @@ SETUPS = [
  ("3v3_winter_asg",3,"winters_end_rich",("ra1_allies","ra1_soviets","td_gdi")),("3v3_winter_sgn",3,"winters_end_rich",("ra1_soviets","td_gdi","td_nod")),
  ("4v4_sahara",4,"great_sahara_2",("td_gdi","td_nod","ra1_allies","ra1_soviets")),("4v4_ice",4,"ice_cold",("td_gdi","td_nod","ra1_allies","ra1_soviets")),
 ]
-RAM_FLOOR_BYTES = 6 * 1024**3
-PROCESS_CAP_BYTES = int(6.5 * 1024**3)
+RAM_FLOOR_BYTES = int(15.5 * 1024**3)
+PROCESS_CAP_BYTES = int(10.5 * 1024**3)
 ROUND_STAGES = [16,32,48,64]
 ECONOMY_INTERVAL_TICKS = tuple(range(5000, 45001, 5000))
 FIX_SAFETY_SWITCHES = frozenset("K_cn2_unit_repair AL_emergency_net_loss AN_combat_veto AG_assault_fanout BJ_squad_hysteresis BK_squad_order_dedup BL_protection_episode_guard BN_squad_pool_fixes BO_squad_move_dedup".split())
 _, _ALL_GROUPS, _ = increment.load_spec(pathlib.Path(__file__).with_name("increment_switches.yaml"))
 BEHAVIOR_SWITCHES = tuple(name for name in _ALL_GROUPS if name not in FIX_SAFETY_SWITCHES)
 DEFAULT_THRESHOLDS = {"early_accept_share":0.75,"early_reject_share":0.25,"win_noninferiority_delta":0.0,"min_earned_spent_improvement":0.0,"min_army_efficiency_improvement":0.0,"min_kill_exchange_improvement":0.0}
-SLOT_POLICY={"max_parallel_small_games":3,"small_team_size_max":2,"large_game_exclusive":True,"min_free_ram_bytes":RAM_FLOOR_BYTES,"max_private_bytes":PROCESS_CAP_BYTES}
+SLOT_POLICY={"max_parallel_small_games":1,"small_team_size_max":2,"large_game_exclusive":True,"min_free_ram_bytes":RAM_FLOOR_BYTES,"max_private_bytes":PROCESS_CAP_BYTES}
 
 def treatment_baseline(accepted_switches, candidate):
  """Ratchet rule: accepted groups stay in control; treatment adds one candidate."""
@@ -71,7 +71,7 @@ def acceptance_decision(*, rounds, treatment_wins, control_wins, economy_not_wor
 def regression_due(accepted_count):
  return accepted_count>0 and accepted_count%5==0
 
-def slots_available(team_size, free_ram_bytes, active_private_bytes=(), active_slots=0, active_team_sizes=(), max_small_slots=3):
+def slots_available(team_size, free_ram_bytes, active_private_bytes=(), active_slots=0, active_team_sizes=(), max_small_slots=1):
  """Admission policy for the amended slot counter; callers still need OS memory monitoring."""
  if free_ram_bytes<RAM_FLOOR_BYTES or any(x>=PROCESS_CAP_BYTES for x in active_private_bytes): return False
  if team_size>=3: return active_slots==0
@@ -309,6 +309,14 @@ def validate(manifest,root,engine_root=None,execution=False):
   except Exception as e: raise ValueError(f"invalid .oramap {entry['name']}: {e}")
   seats=len(set(re.findall(r"PlayerReference@Multi(\d+):",y)))
   require(seats>=entry["required_seats"],f"insufficient playable seats: {entry['name']}")
+ if execution:
+  approvals=manifest.get("map_runtime_acceptance")
+  require(isinstance(approvals,list) and len(approvals)==len(expected),"execution manifest lacks exact runtime acceptance for all eight maps")
+  by_name={item.get("name"):item for item in approvals if isinstance(item,dict)}
+  require(set(by_name)=={item["name"] for item in expected},"runtime map acceptance set differs from the pinned map inventory")
+  for item in expected:
+   approval=by_name[item["name"]]
+   require(approval.get("package_sha256")==item["sha256"] and approval.get("engine_acceptance")=="PASS" and approval.get("seat_fidelity_verified") is True and approval.get("spawn_geometry") in ("SYMMETRY_PROVEN","ASYMMETRY_APPROVED") and isinstance(approval.get("receipt_sha256"),str) and re.fullmatch(r"[0-9a-f]{64}",approval["receipt_sha256"]),f"runtime acceptance or symmetry ruling missing for {item['name']}")
  # Explicitly non-executable: execution approvals and runtime backend do not exist in this tool.
  require(manifest.get("execution_approved") is execution,"dry-run manifest must not authorize execution" if not execution else "execution manifest must explicitly authorize execution")
  return True
@@ -317,10 +325,11 @@ def dry_run(m,root,engine_root=None,minutes_per_game=8.5,setup_hours=2.0):
  validate(m,root,engine_root); jobs=make_jobs(m)
  small_games=sum(4 for _,s,_,_ in SETUPS if s<=2); large_games=len(jobs)-small_games
  serial_hours=round(len(jobs)*minutes_per_game/60+setup_hours,2)
- slot_hours=round((small_games/3+large_games)*minutes_per_game/60+setup_hours,2)
+ small_parallel=m["slot_policy"]["max_parallel_small_games"]
+ slot_hours=round((small_games/small_parallel+large_games)*minutes_per_game/60+setup_hours,2)
  serial_range=[round(len(jobs)*5/60+setup_hours,2),round(len(jobs)*12/60+setup_hours,2)]
- slot_range=[round((small_games/3+large_games)*5/60+setup_hours,2),round((small_games/3+large_games)*12/60+setup_hours,2)]
- return {"mode":"NO_LAUNCH_DRY_RUN","switch":SWITCH,"setups":len(SETUPS),"pairs":32,"games":len(jobs),"jobs":jobs,"launches":0,"execution_authorized":False,"worker_hours_estimate_at_8_5m_each":serial_hours,"parallel_slot_wall_estimate_hours_at_8_5m_each":slot_hours,"parallel_slot_wall_estimate_range_hours_5_to_12m_each":slot_range,"serial_wall_estimate_range_hours_5_to_12m_each":serial_range,"map_engine_acceptance_and_symmetric_spawn_proof":"PENDING_ENGINE_PREFLIGHT","round_stages":ROUND_STAGES,"acceptance_thresholds":m["acceptance_thresholds"],"slot_policy":m["slot_policy"],"ratchet_baseline_manifest_sha256":m["baseline_manifest_sha256"],"missing_campaign_gates":["lead-approved executable manifest and exact-baseline A5 parity receipt","engine acceptance plus symmetric spawn proof for all eight maps","fixture/negative-control acceptance for the downstream paired analyzer"]}
+ slot_range=[round((small_games/small_parallel+large_games)*5/60+setup_hours,2),round((small_games/small_parallel+large_games)*12/60+setup_hours,2)]
+ return {"mode":"NO_LAUNCH_DRY_RUN","switch":SWITCH,"setups":len(SETUPS),"pairs":32,"games":len(jobs),"jobs":jobs,"launches":0,"execution_authorized":False,"worker_hours_estimate_at_8_5m_each":serial_hours,"slot_wall_estimate_hours_at_8_5m_each":slot_hours,"slot_wall_estimate_range_hours_5_to_12m_each":slot_range,"serial_wall_estimate_range_hours_5_to_12m_each":serial_range,"map_engine_acceptance_and_symmetric_spawn_proof":"PENDING_ENGINE_PREFLIGHT","round_stages":ROUND_STAGES,"acceptance_thresholds":m["acceptance_thresholds"],"slot_policy":m["slot_policy"],"ratchet_baseline_manifest_sha256":m["baseline_manifest_sha256"],"missing_campaign_gates":["lead-approved executable manifest and exact-baseline A5 parity receipt","engine acceptance plus symmetric spawn proof for all eight maps (Great Sahara asymmetry requires explicit maintainer ruling)","schema-v1 analyzer fixture and negative-control acceptance"]}
 
 def install_campaign_monitor(dest,seat_count,cap_tick=45000,sample_interval=5000):
  """Install map-local actor-count sampling and an explicit all-seat censor marker."""
@@ -410,7 +419,7 @@ def adjudicate(records, receipt, job, manifest_sha):
  if status in ("CRASH","INCOMPLETE","MEMORY_KILL","MEMORY_SAMPLE_FAILED","LOW_FREE_RAM","WALL_TIMEOUT","STALL","PROCESS_DIED"):
   return {"verdict":"INCOMPLETE_UNKNOWN","reason":status}
  cap=status=="CENSORED_CAP"
- if cap and not (receipt.get("cap_marker") is True and receipt.get("cap_tick")==45000 and receipt.get("support_complete") is True):
+ if cap and not (receipt.get("cap_marker") is True and receipt.get("cap_tick")==45001 and receipt.get("support_complete") is True):
   return {"verdict":"INVALID_UNKNOWN","reason":"cap evidence incomplete"}
  if not cap and (status!="NATURAL_END" or receipt.get("end_reason")!="natural"):
   return {"verdict":"INVALID_UNKNOWN","reason":"natural end proof missing"}
@@ -418,7 +427,9 @@ def adjudicate(records, receipt, job, manifest_sha):
  if not isinstance(seats,list) or len(seats)!=job["required_seats"] or len(records)!=len(seats):
   return {"verdict":"INVALID_UNKNOWN","reason":"seat/record count mismatch"}
  byhome={s.get("home"):s for s in seats if isinstance(s,dict)}
- if len(byhome)!=len(seats) or any(not isinstance(h,str) or not h for h in byhome):
+ bylocation={s.get("home_location"):s for s in seats if isinstance(s,dict)}
+ if (len(byhome)!=len(seats) or any(not isinstance(h,str) or not h for h in byhome) or
+     len(bylocation)!=len(seats) or any(not isinstance(loc,str) or not re.fullmatch(r"\d+,\d+",loc) for loc in bylocation)):
   return {"verdict":"INVALID_UNKNOWN","reason":"seat homes missing or duplicated"}
  if receipt.get("seat_proof_source")!="generated_map.yaml" or not receipt.get("map_yaml_sha256"):
   return {"verdict":"INVALID_UNKNOWN","reason":"generated map.yaml proof missing"}
@@ -432,12 +443,12 @@ def adjudicate(records, receipt, job, manifest_sha):
    return {"verdict":"INVALID_UNKNOWN","reason":"resolved map.yaml seats differ from planned side/spawn/faction assignment"}
  side_outcomes={"A":[],"B":[]}; arm_totals={"control":{"earned":0,"spent":0,"banked":0},"treatment":{"earned":0,"spent":0,"banked":0}}; seat_rows=[]; seen_homes=set()
  for r in records:
-  pl=r.get("player") or {}; home=pl.get("home"); seat=byhome.get(home)
+  pl=r.get("player") or {}; home=pl.get("home"); seat=bylocation.get(home)
   if seat is None or home in seen_homes or pl.get("faction")!=seat.get("faction") or pl.get("bot_type")!=seat.get("bot_type"):
    return {"verdict":"INVALID_UNKNOWN","reason":"record differs from resolved seat proof"}
   seen_homes.add(home)
   arm,side=seat.get("arm"),seat.get("side"); outcome=pl.get("outcome")
-  if arm not in arm_totals or side not in side_outcomes or outcome not in ("won","lost"):
+  if arm not in arm_totals or side not in side_outcomes or outcome not in (("won","lost","draw","unknown") if cap else ("won","lost")):
    return {"verdict":"INVALID_UNKNOWN","reason":"invalid arm/side/outcome"}
   if seat.get("bot_type")!=job["arm_bot_types"].get(arm):
    return {"verdict":"INVALID_UNKNOWN","reason":"resolved bot type does not prove arm"}
@@ -453,7 +464,7 @@ def adjudicate(records, receipt, job, manifest_sha):
   eco["campaign_events"]=events if isinstance(events,list) and all(isinstance(e,dict) and isinstance(e.get("kind"),str) and type(e.get("tick")) is int for e in events) else None
   if all(type(eco.get(k)) is int for k in ("earned","spent","banked")):
    for k in ("earned","spent","banked"): arm_totals[arm][k]+=eco[k]
-  seat_rows.append({"home":home,"side":side,"arm":arm,"faction":seat.get("faction"),"outcome":outcome,"economy":eco})
+  seat_rows.append({"home":seat.get("home"),"home_location":home,"side":side,"arm":arm,"faction":seat.get("faction"),"outcome":outcome,"economy":eco})
  if any(len(side_outcomes[s])!=job["team_size"] for s in ("A","B")):
   return {"verdict":"INVALID_UNKNOWN","reason":"resolved sides lack expected seat count"}
  if sorted(s.get("faction") for s in seats if s.get("side")=="A")!=sorted(job["team_factions"]) or sorted(s.get("faction") for s in seats if s.get("side")=="B")!=sorted(job["team_factions"]):
@@ -480,15 +491,77 @@ def adjudicate(records, receipt, job, manifest_sha):
          "campaign_events":{"status":"RECORDED" if any(s["economy"].get("campaign_events") is not None for s in seat_rows) else "UNKNOWN","counts":event_totals,"first_tick":event_first},
          "synergy":"NOT_IDENTIFIABLE_FROM_PILOT (team-size strata lack matched individual counterfactuals)"}
 
+def adapt_schema1_receipt(receipt, job, manifest_sha, manifest):
+ """Validate the published v1 receipt contract and adapt it to adjudicate's internal shape."""
+ require(isinstance(receipt,dict) and receipt.get("schema_version")==1,"unsupported or malformed receipt schema")
+ for key in ("campaign_id","manifest_sha256","baseline_commit","engine_sha256","switch","setup_id","cell_id","game_uid","map","pair_id","pair_member","seed","seed_proof","teams","resolved_seats","end_class","end_reason","winner_team","world_tick","cap","memory","runtime","artifacts"):
+  require(key in receipt,"receipt missing required field: "+key)
+ require(receipt["cell_id"]==job["cell_id"] and receipt["manifest_sha256"]==manifest_sha,"cell or manifest pin mismatch")
+ require(receipt["baseline_commit"]==manifest["pins"]["source_commit"],"receipt source baseline mismatch")
+ engine_sha=hashlib.sha256("".join(manifest["binary_sha256"][key] for key in sorted(manifest["binary_sha256"])).encode()).hexdigest()
+ require(receipt["engine_sha256"]==engine_sha,"receipt engine binary digest mismatch")
+ require((isinstance(receipt["game_uid"],str) and bool(receipt["game_uid"])) or (receipt["game_uid"] is None and receipt["end_class"]=="INCOMPLETE"),"completed/censored receipt has empty game_uid")
+ require(receipt["switch"]==job["switch"] and receipt["setup_id"]==job["setup"],"receipt switch/setup mismatch")
+ require(receipt["pair_id"]==f"{job['setup']}:{job['seed']}:{job['pair']}" and receipt["pair_member"]==job["game_in_pair"],"receipt pair identity mismatch")
+ require(receipt["seed"]==job["seed"],"receipt seed differs from planned job")
+ proof=receipt["seed_proof"]
+ require(isinstance(proof,dict) and proof.get("env_value")==str(job["seed"]),"receipt seed environment proof mismatch")
+ pin=proof.get("server_log_pin_line")
+ require(isinstance(pin,str) and "CAMEO DEV SEED pinned" in pin and f"RandomSeed={job['seed']}" in pin,"receipt server seed pin is missing or mismatched")
+ require(isinstance(proof.get("server_log_sha256"),str) and re.fullmatch(r"[0-9a-f]{64}",proof["server_log_sha256"]),"receipt server log hash missing")
+ map_proof=receipt["map"]
+ require(isinstance(map_proof,dict) and map_proof.get("name")==job["map"] and map_proof.get("path")==job["map_path"] and map_proof.get("sha256")==job["map_sha256"],"receipt package map pin mismatch")
+ require(map_proof.get("required_seats")==job["required_seats"] and isinstance(map_proof.get("generated_map_yaml_sha256"),str) and re.fullmatch(r"[0-9a-f]{64}",map_proof["generated_map_yaml_sha256"]),"receipt generated map proof missing")
+ raw_seats=receipt["resolved_seats"]
+ require(isinstance(raw_seats,list) and len(raw_seats)==job["required_seats"],"receipt resolved seat count mismatch")
+ require(receipt["cell_id"]==job["cell_id"],"receipt cell id mismatch")
+ teams=receipt["teams"]
+ require(isinstance(teams,dict) and set(teams)=={"A","B"},"receipt team binding missing")
+ expected={seat["home"]:seat for seat in job["seat_assignments"]}; seats=[]; seen=set()
+ for seat in raw_seats:
+  require(isinstance(seat,dict),"resolved seat is malformed")
+  for key in ("seat_id","team","arm","bot_type","faction","home","home_location","spawn","proof_source","outcome","metrics"):
+   require(key in seat,"resolved seat missing "+key)
+  home=seat["home"]; require(home in expected and home not in seen,"resolved seat home is unplanned or duplicated"); seen.add(home)
+  planned=expected[home]
+  require(seat["seat_id"]==home and seat["team"]==planned["side"] and seat["arm"]==planned["arm"] and seat["bot_type"]==planned["bot_type"] and seat["faction"]==planned["faction"] and seat["spawn"]==planned["spawn"],"resolved seat differs from planned team/arm/faction/spawn")
+  require(seat["proof_source"]=="generated map.yaml + cameo-ai-matches.jsonl","resolved seat proof source mismatch")
+  require(seat["outcome"] in ("won","lost","draw","unknown") and isinstance(seat["metrics"],dict) and isinstance(seat["metrics"].get("timeline"),list),"resolved seat outcome/metrics malformed")
+  require(isinstance(seat["home_location"],str) and re.fullmatch(r"\d+,\d+",seat["home_location"]),"resolved seat home_location is invalid")
+  seats.append({"home":home,"home_location":seat["home_location"],"spawn":seat["spawn"],"side":seat["team"],"arm":seat["arm"],"bot_type":seat["bot_type"],"faction":seat["faction"]})
+ for side in ("A","B"):
+  assigned=[seat for seat in raw_seats if seat["team"]==side]
+  arm="control" if side==job["control_side"] else "treatment"
+  binding=teams[side]
+  require(isinstance(binding,dict) and binding.get("arm")==arm and binding.get("bot_type")==job["arm_bot_types"][arm],"team arm/bot binding differs from planned side swap")
+  require(binding.get("seat_ids")==[seat["home"] for seat in assigned],"team seat ids differ from resolved seat proof")
+ require(set(seen)==set(expected),"receipt does not prove every planned home")
+ artifacts=receipt["artifacts"]; require(isinstance(artifacts,dict) and isinstance(artifacts.get("map_yaml"),dict),"receipt map artifact missing")
+ require(artifacts["map_yaml"].get("sha256")==map_proof["generated_map_yaml_sha256"],"map artifact hash disagrees with generated-map proof")
+ memory=receipt["memory"]
+ require(isinstance(memory,dict) and memory.get("limit_private_bytes")==PROCESS_CAP_BYTES and type(memory.get("peak_private_bytes")) is int and memory["peak_private_bytes"]>=0,"receipt memory limit/sample proof invalid")
+ if memory["peak_private_bytes"]>=PROCESS_CAP_BYTES:
+  require(receipt["end_class"]=="INCOMPLETE" and receipt["end_reason"]=="MEMORY_KILL","memory cap reached without incomplete MEMORY_KILL classification")
+ end_class=receipt["end_class"]; require(end_class in ("NATURAL","CAP","INCOMPLETE"),"invalid receipt end_class")
+ require(receipt["winner_team"] in (None,"A","B"),"invalid winner_team")
+ if end_class!="NATURAL": require(receipt["winner_team"] is None,"censored/incomplete receipt names a winner")
+ cap=receipt["cap"]
+ require(isinstance(cap,dict),"receipt cap evidence malformed")
+ if end_class=="CAP": require(cap.get("marker_observed") is True and cap.get("world_tick_cap")==CAP_TICK and cap.get("marker_tick")==CAP_TICK+1,"receipt cap marker is not verified at the frozen tick")
+ if end_class=="NATURAL": require(isinstance(receipt["end_reason"],str) and receipt["winner_team"] is not None,"natural receipt lacks authoritative end/winner")
+ status={"NATURAL":"NATURAL_END","CAP":"CENSORED_CAP","INCOMPLETE":"INCOMPLETE"}[end_class]
+ return {"cell_id":receipt["cell_id"],"manifest_sha256":receipt["manifest_sha256"],"switch":receipt["switch"],"setup":receipt["setup_id"],"map":job["map"],"map_sha256":job["map_sha256"],"seed":receipt["seed"],"pair":job["pair"],"game_in_pair":receipt["pair_member"],"control_side":job["control_side"],"treatment_side":job["treatment_side"],"arm_bot_types":job["arm_bot_types"],"status":status,"end_reason":"natural" if end_class=="NATURAL" else ("cap" if end_class=="CAP" else receipt["end_reason"] or "INCOMPLETE"),"cap_marker":cap.get("marker_observed") is True,"cap_tick":cap.get("marker_tick"),"support_complete":len(raw_seats)==job["required_seats"],"seat_proof_source":"generated_map.yaml","map_yaml_sha256":map_proof["generated_map_yaml_sha256"],"seats":seats,"peak_memory_bytes":receipt["memory"].get("peak_private_bytes"),"duration_ticks":receipt["world_tick"]}
+
 def analyze(m, manifest_sha, receipts, rows):
- jobs={j["cell_id"]:j for j in make_jobs(m)}; by_cell={}; uid_receipts={}
+ jobs={j["cell_id"]:j for j in make_jobs(m)}; by_cell={}; uid_receipts={}; adaptation_errors={}
  for r in receipts:
   require(isinstance(r,dict) and isinstance(r.get("cell_id"),str),"receipt requires cell_id")
   require(r["cell_id"] not in by_cell,"duplicate cell receipt")
   by_cell[r["cell_id"]]=r
-  if isinstance(r.get("game_uid"),str):
+  if isinstance(r.get("game_uid"),str) and r["game_uid"]:
    require(r["game_uid"] not in uid_receipts,"duplicate receipt game_uid")
    uid_receipts[r["game_uid"]]=r
+  elif r.get("end_class")!="INCOMPLETE": adaptation_errors[r["cell_id"]]="completed/censored receipt has empty game_uid"
  grouped={}
  for r in rows:
   uid=r.get("game_uid");require(isinstance(uid,str),"match row missing game_uid")
@@ -497,7 +570,14 @@ def analyze(m, manifest_sha, receipts, rows):
  for cell,job in jobs.items():
   receipt=by_cell.get(cell)
   if receipt is None: verdict={"verdict":"INCOMPLETE_UNKNOWN","reason":"planned cell has no receipt"}
-  else: verdict=adjudicate(grouped.get(receipt.get("game_uid"),[]),receipt,job,manifest_sha)
+  elif cell in adaptation_errors: verdict={"verdict":"INVALID_UNKNOWN","reason":adaptation_errors[cell]}
+  else:
+   try: adapted=adapt_schema1_receipt(receipt,job,manifest_sha,m)
+   except (KeyError,TypeError,ValueError) as exc: verdict={"verdict":"INVALID_UNKNOWN","reason":str(exc)}
+   else:
+    verdict=adjudicate(grouped.get(receipt["game_uid"],[]),adapted,job,manifest_sha)
+    if receipt["end_class"]=="NATURAL" and verdict.get("winner_side")!=receipt["winner_team"]:
+     verdict={"verdict":"INVALID_UNKNOWN","reason":"receipt winner differs from match-record outcomes"}
   result.append({"cell_id":cell,"setup":job["setup"],"team_size":job["team_size"],"map":job["map"],"seed":job["seed"],"pair":job["pair"],"game_in_pair":job["game_in_pair"],"duration_ticks":receipt.get("duration_ticks") if receipt else None,"peak_memory_bytes":receipt.get("peak_memory_bytes") if receipt else None,**verdict})
  extra=sorted(set(by_cell)-set(jobs))
  extra_uids=sorted(set(grouped)-set(uid_receipts))

@@ -1,4 +1,4 @@
-import pathlib, sys, tempfile, unittest
+import hashlib, pathlib, sys, tempfile, unittest
 ROOT=pathlib.Path(__file__).resolve().parents[2]
 sys.path.insert(0,str(ROOT/"tools"/"ai"))
 import ab_campaign_pilot as pilot
@@ -23,8 +23,8 @@ class PilotPlanTests(unittest.TestCase):
   result=pilot.dry_run(m,ROOT)
   self.assertEqual(0,result["launches"]);self.assertFalse(result["execution_authorized"])
   self.assertEqual(11.07,result["worker_hours_estimate_at_8_5m_each"])
-  self.assertEqual(7.29,result["parallel_slot_wall_estimate_hours_at_8_5m_each"])
-  self.assertEqual([5.11,9.47],result["parallel_slot_wall_estimate_range_hours_5_to_12m_each"])
+  self.assertEqual(11.07,result["slot_wall_estimate_hours_at_8_5m_each"])
+  self.assertEqual([7.33,14.8],result["slot_wall_estimate_range_hours_5_to_12m_each"])
 
  def test_generated_map_writer_proves_mixed_faction_4v4_seats_without_launch(self):
   m=manifest();job=next(j for j in pilot.make_jobs(m) if j["team_size"]==4 and j["game_in_pair"]==1)
@@ -83,19 +83,21 @@ class PilotPlanTests(unittest.TestCase):
 
  def test_adjudicator_keeps_cap_unknown_and_sums_team_economy(self):
   m=manifest(); job=next(j for j in pilot.make_jobs(m) if j["team_size"]==2 and j["game_in_pair"]==0)
-  seats=[dict(s) for s in job["seat_assignments"]]; rows=[]
+  seats=[{**s,"home_location":f"{20+s['spawn']},16"} for s in job["seat_assignments"]]; rows=[]
   for seat in seats:
    outcome="won" if seat["side"]==job["treatment_side"] else "lost"
-   rows.append({"player":{"home":seat["home"],"bot_type":seat["bot_type"],"faction":seat["faction"],"outcome":outcome},"stats_timeline":[{"tick":100,"earned":12,"spent":5,"banked":7}]})
+   rows.append({"player":{"home":seat["home_location"],"bot_type":seat["bot_type"],"faction":seat["faction"],"outcome":outcome},"stats_timeline":[{"tick":100,"earned":12,"spent":5,"banked":7}]})
   receipt={"cell_id":job["cell_id"],"manifest_sha256":"a"*64,"switch":job["switch"],"setup":job["setup"],"map":job["map"],"map_sha256":job["map_sha256"],"seed":job["seed"],"pair":job["pair"],"game_in_pair":job["game_in_pair"],"control_side":job["control_side"],"treatment_side":job["treatment_side"],"arm_bot_types":job["arm_bot_types"],"status":"NATURAL_END","end_reason":"natural","seat_proof_source":"generated_map.yaml","map_yaml_sha256":"b"*64,"seats":seats}
   got=pilot.adjudicate(rows,receipt,job,"a"*64)
   self.assertEqual("TREATMENT_WIN",got["verdict"]);self.assertEqual(24,got["team_totals"]["control"]["earned"])
-  receipt.update({"status":"CENSORED_CAP","cap_marker":True,"cap_tick":45000,"support_complete":True})
+  bad_rows=[dict(r,player={**r["player"],"home":"999,999"}) for r in rows]
+  self.assertEqual("INVALID_UNKNOWN",pilot.adjudicate(bad_rows,receipt,job,"a"*64)["verdict"])
+  receipt.update({"status":"CENSORED_CAP","cap_marker":True,"cap_tick":45001,"support_complete":True})
   censored=pilot.adjudicate(rows,receipt,job,"a"*64)
-  self.assertEqual("CENSORED_CAP",censored["verdict"]);self.assertEqual(24,censored["team_totals"]["treatment"]["earned"])
+  self.assertEqual("CENSORED_CAP",censored["verdict"],censored);self.assertEqual(24,censored["team_totals"]["treatment"]["earned"])
   receipt["cap_tick"]=15000
   self.assertEqual("INVALID_UNKNOWN",pilot.adjudicate(rows,receipt,job,"a"*64)["verdict"])
-  receipt["cap_tick"]=45000;receipt["seats"][0]["spawn"]+=1
+  receipt["cap_tick"]=45001;receipt["seats"][0]["spawn"]+=1
   self.assertEqual("INVALID_UNKNOWN",pilot.adjudicate(rows,receipt,job,"a"*64)["verdict"])
 
  def test_analyzer_preserves_all_unrun_planned_games(self):
@@ -112,13 +114,18 @@ class PilotPlanTests(unittest.TestCase):
   for job in jobs:
    uid="g-"+job["cell_id"]
    treatment_wins=(job["pair"]==0)
-   receipts.append({"cell_id":job["cell_id"],"game_uid":uid,"manifest_sha256":"a"*64,"switch":job["switch"],"setup":job["setup"],"map":job["map"],"map_sha256":job["map_sha256"],"seed":job["seed"],"pair":job["pair"],"game_in_pair":job["game_in_pair"],"control_side":job["control_side"],"treatment_side":job["treatment_side"],"arm_bot_types":job["arm_bot_types"],"status":"NATURAL_END","end_reason":"natural","seat_proof_source":"generated_map.yaml","map_yaml_sha256":"b"*64,"seats":job["seat_assignments"]})
+   engine_digest=hashlib.sha256("".join(m["binary_sha256"][key] for key in sorted(m["binary_sha256"])).encode()).hexdigest()
+   resolved=[]
    for seat in job["seat_assignments"]:
     won=(seat["side"]==job["treatment_side"])==treatment_wins
-    rows.append({"game_uid":uid,"player":{"home":seat["home"],"bot_type":seat["bot_type"],"faction":seat["faction"],"outcome":"won" if won else "lost"},"stats":{"stats_timeline_fields":"tick,earned,spent,banked","stats_timeline":[[5000,10,4,6],[45000,90,40,50]]},"campaign_events":[{"kind":"refinery_placed","tick":7000}]})
+    resolved.append({"seat_id":seat["home"],"team":seat["side"],"arm":seat["arm"],"bot_type":seat["bot_type"],"faction":seat["faction"],"home":seat["home"],"home_location":f"{20+seat['spawn']},16","spawn":seat["spawn"],"proof_source":"generated map.yaml + cameo-ai-matches.jsonl","outcome":"won" if won else "lost","metrics":{"earned":None,"spent":None,"banked":None,"army_value":None,"kills":None,"deaths":None,"timeline":[]}})
+   receipts.append({"schema_version":1,"campaign_id":"test","manifest_sha256":"a"*64,"baseline_commit":m["pins"]["source_commit"],"engine_sha256":engine_digest,"switch":job["switch"],"setup_id":job["setup"],"cell_id":job["cell_id"],"game_uid":uid,"map":{"name":job["map"],"path":job["map_path"],"sha256":job["map_sha256"],"generated_map_yaml_sha256":"b"*64,"required_seats":job["required_seats"]},"pair_id":f"{job['setup']}:{job['seed']}:{job['pair']}","pair_member":job["game_in_pair"],"seed":job["seed"],"seed_proof":{"env_value":str(job["seed"]),"server_log_pin_line":f"CAMEO DEV SEED pinned RandomSeed={job['seed']}","server_log_sha256":"c"*64},"teams":{"A":{"arm":"control" if job["control_side"]=="A" else "treatment","bot_type":job["arm_bot_types"]["control" if job["control_side"]=="A" else "treatment"],"seat_ids":[s["home"] for s in resolved if s["team"]=="A"]},"B":{"arm":"control" if job["control_side"]=="B" else "treatment","bot_type":job["arm_bot_types"]["control" if job["control_side"]=="B" else "treatment"],"seat_ids":[s["home"] for s in resolved if s["team"]=="B"]}},"resolved_seats":resolved,"end_class":"NATURAL","end_reason":"natural","winner_team":job["treatment_side"] if treatment_wins else job["control_side"],"world_tick":45000,"cap":{"world_tick_cap":45000,"marker_observed":False,"marker_tick":None},"memory":{"process_id":1,"peak_private_bytes":0,"limit_private_bytes":pilot.PROCESS_CAP_BYTES,"samples":[]},"runtime":{"started_utc":None,"finished_utc":None,"exit_code":0,"wall_seconds":1,"stall_seconds":180,"pid_scoped_cleanup":True},"artifacts":{key:{"path":None,"sha256":"b"*64 if key=="map_yaml" else None,"missing_reason":"fixture"} for key in ("server_log","driver_log","matches_jsonl","replay","map_yaml","support_bundle")}})
+   for seat in job["seat_assignments"]:
+    won=(seat["side"]==job["treatment_side"])==treatment_wins
+    rows.append({"game_uid":uid,"player":{"home":f"{20+seat['spawn']},16","bot_type":seat["bot_type"],"faction":seat["faction"],"outcome":"won" if won else "lost"},"stats":{"stats_timeline_fields":"tick,earned,spent,banked","stats_timeline":[[5000,10,4,6],[45000,90,40,50]]},"campaign_events":[{"kind":"refinery_placed","tick":7000}]})
   result=pilot.analyze(m,"a"*64,receipts,rows)
   setup=next(x for x in result["setups"] if x["setup"]==jobs[0]["setup"])
-  self.assertEqual(2,setup["complete_natural_pairs"])
+  self.assertEqual(2,setup["complete_natural_pairs"],result["games"])
   self.assertEqual([1.0,-1.0],setup["paired_win_differences"])
   self.assertEqual(0.0,setup["paired_win_effect"])
   self.assertEqual(4,setup["fixed_interval_team_economy"]["treatment"]["5000"]["seat_samples"])
@@ -134,20 +141,20 @@ class PilotPlanTests(unittest.TestCase):
   with self.assertRaisesRegex(ValueError,"fix/safety"):
    pilot.treatment_baseline([],"AG_assault_fanout")
   self.assertTrue(pilot.regression_due(5));self.assertFalse(pilot.regression_due(4))
-  c=pilot.SlotCounter(); floor=6*1024**3
-  self.assertTrue(c.acquire("a",1,floor));self.assertTrue(c.acquire("b",2,floor));self.assertTrue(c.acquire("c",1,floor));self.assertFalse(c.acquire("d",2,floor))
-  self.assertFalse(c.acquire("large",4,floor));c.release("a");c.release("b");c.release("c")
+  c=pilot.SlotCounter(); floor=pilot.RAM_FLOOR_BYTES
+  self.assertTrue(c.acquire("a",1,floor));self.assertFalse(c.acquire("b",2,floor));self.assertFalse(c.acquire("c",1,floor));self.assertFalse(c.acquire("d",2,floor))
+  self.assertFalse(c.acquire("large",4,floor));c.release("a")
   self.assertTrue(c.acquire("large",4,floor));self.assertFalse(c.acquire("small",1,floor));
-  with self.assertRaises(ValueError): c.update_private_bytes("large",8*1024**3)
+  with self.assertRaises(ValueError): c.update_private_bytes("large",pilot.PROCESS_CAP_BYTES)
   self.assertFalse(pilot.slots_available(1,floor-1))
   with tempfile.TemporaryDirectory() as temp:
    db1=pilot.SqliteSlotCounter(pathlib.Path(temp)/"slots.sqlite")
    db2=pilot.SqliteSlotCounter(pathlib.Path(temp)/"slots.sqlite")
-   self.assertTrue(db1.acquire("x",1,floor));self.assertTrue(db2.acquire("y",2,floor))
-   self.assertTrue(db1.acquire("z",1,floor));self.assertFalse(db2.acquire("fourth",1,floor))
-   self.assertFalse(db2.acquire("exclusive",4,floor));db2.heartbeat("x",1024);db1.release("x");db2.release("y");db1.release("z")
+   self.assertTrue(db1.acquire("x",1,floor));self.assertFalse(db2.acquire("y",2,floor))
+   self.assertFalse(db1.acquire("z",1,floor));self.assertFalse(db2.acquire("fourth",1,floor))
+   self.assertFalse(db2.acquire("exclusive",4,floor));db2.heartbeat("x",1024);db1.release("x")
    self.assertTrue(db2.acquire("exclusive",4,floor));self.assertFalse(db1.acquire("small",1,floor))
-   with self.assertRaisesRegex(ValueError,"memory cap"): db2.heartbeat("exclusive",8*1024**3)
+   with self.assertRaisesRegex(ValueError,"memory cap"): db2.heartbeat("exclusive",pilot.PROCESS_CAP_BYTES)
    db2.release("exclusive");db2.release("y");db1.release("z")
 
 if __name__=="__main__": unittest.main()

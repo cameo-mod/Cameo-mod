@@ -25,10 +25,12 @@ from contextlib import contextmanager
 import ab_campaign_pilot as pilot
 
 CAP_TICK = 45000
-PRIVATE_LIMIT = int(6.5 * 1024**3)
-FREE_RAM_FLOOR = 6 * 1024**3
+PRIVATE_LIMIT = int(10.5 * 1024**3)
+FREE_RAM_FLOOR = 3 * 1024**3
+FREE_RAM_SOFT_STOP = 4 * 1024**3
+FREE_RAM_ADMISSION_MARGIN = 2 * 1024**3
 ACTOR_SAMPLE_INTERVAL = 5000
-SLOT_PARALLEL_SMALL = 3
+SLOT_PARALLEL_SMALL = 1
 SMALL_TEAM_MAX = 2
 ACTOR_SAMPLE_RE = re.compile(r"AB_CAMPAIGN_ACTOR_SAMPLE tick=(\d+) actor_count=(\d+)")
 RECEIPT_SCHEMA = pathlib.Path(__file__).with_name("ab_campaign_receipt.schema.json")
@@ -228,9 +230,13 @@ def validate_receipt(receipt: dict) -> None:
 	"""Validate the producer's semantic invariants; JSON Schema is published alongside."""
 	if not isinstance(receipt, dict) or receipt.get("schema_version") != 1:
 		raise ValueError("receipt schema_version must be 1")
-	for key in ("campaign_id", "manifest_sha256", "baseline_commit", "engine_sha256", "switch", "setup_id", "pair_id", "seed", "seed_proof", "teams", "resolved_seats", "end_class", "end_reason", "winner_team", "world_tick", "cap", "memory", "runtime", "artifacts"):
+	for key in ("campaign_id", "manifest_sha256", "baseline_commit", "engine_sha256", "switch", "setup_id", "cell_id", "game_uid", "map", "pair_id", "seed", "seed_proof", "teams", "resolved_seats", "end_class", "end_reason", "winner_team", "world_tick", "cap", "memory", "runtime", "artifacts"):
 		if key not in receipt:
 			raise ValueError("receipt missing required field: " + key)
+	if not isinstance(receipt["cell_id"], str) or not receipt["cell_id"]:
+		raise ValueError("receipt cell_id must be nonempty")
+	if receipt["game_uid"] is not None and (not isinstance(receipt["game_uid"], str) or not receipt["game_uid"]):
+		raise ValueError("receipt game_uid must be nonempty when present")
 	if receipt["end_class"] not in ("NATURAL", "CAP", "INCOMPLETE"):
 		raise ValueError("invalid end_class")
 	if receipt["end_class"] != "NATURAL" and receipt["winner_team"] is not None:
@@ -243,19 +249,21 @@ def validate_receipt(receipt: dict) -> None:
 		raise ValueError("memory.samples must be a list")
 	if receipt["memory"].get("peak_private_bytes", 0) > PRIVATE_LIMIT and receipt["end_reason"] != "MEMORY_KILL":
 		raise ValueError("memory limit exceeded without MEMORY_KILL classification")
-	if receipt["end_class"] == "CAP" and not (receipt["cap"].get("marker_observed") is True and receipt["cap"].get("marker_tick") == CAP_TICK):
+	if receipt["end_class"] == "CAP" and not (receipt["cap"].get("marker_observed") is True and receipt["cap"].get("marker_tick") == CAP_TICK + 1):
 		raise ValueError("CAP classification lacks valid cap evidence")
 	if receipt["end_class"] == "NATURAL" and (not isinstance(receipt["end_reason"], str) or receipt["winner_team"] is None):
 		raise ValueError("NATURAL classification lacks authoritative winner/end reason")
 	if receipt["memory"].get("limit_private_bytes") != PRIVATE_LIMIT:
-		raise ValueError("receipt memory threshold differs from the frozen 6.5 GiB limit")
+		raise ValueError("receipt memory threshold differs from the frozen 10.5 GiB limit")
 	if receipt["memory"].get("peak_private_bytes", 0) >= PRIVATE_LIMIT and not (receipt["end_class"] == "INCOMPLETE" and receipt["end_reason"] == "MEMORY_KILL"):
 		raise ValueError("memory threshold reached without INCOMPLETE MEMORY_KILL")
 	if len(receipt["resolved_seats"]) != receipt["map"].get("required_seats"):
 		raise ValueError("resolved seat count differs from map proof")
 	for seat in receipt["resolved_seats"]:
-		if not isinstance(seat, dict) or any(k not in seat for k in ("seat_id", "team", "arm", "bot_type", "faction", "home", "spawn", "proof_source", "outcome", "metrics")):
+		if not isinstance(seat, dict) or any(k not in seat for k in ("seat_id", "team", "arm", "bot_type", "faction", "home", "home_location", "spawn", "proof_source", "outcome", "metrics")):
 			raise ValueError("resolved seat is missing required proof/metric fields")
+		if not isinstance(seat["home_location"], str) or not re.fullmatch(r"\d+,\d+", seat["home_location"]):
+			raise ValueError("resolved seat home_location is invalid")
 		if seat["team"] not in ("A", "B") or seat["arm"] not in ("control", "treatment"):
 			raise ValueError("resolved seat team/arm is invalid")
 		if not isinstance(seat["metrics"].get("timeline"), list):
@@ -271,13 +279,19 @@ def execution_gate(manifest: dict, *, a5_receipt: dict | None, a5_receipt_sha256
 		raise ValueError("manifest source pin mismatch")
 	if manifest.get("pins", {}).get("engine_version") != engine_version:
 		raise ValueError("manifest engine pin mismatch")
-	if not isinstance(a5_receipt, dict) or a5_receipt.get("verdict") != "PASS" or a5_receipt.get("order_stream_verdict") not in ("IDENTICAL", "IDENTICAL_TAIL_FLUSH"):
+	if not isinstance(a5_receipt, dict) or a5_receipt.get("a5_diagnostic_passed") is not True or a5_receipt.get("order_stream_verdict") != "IDENTICAL":
 		raise ValueError("exact-baseline A5 parity receipt required")
-	if a5_receipt.get("source_commit") != source_commit or a5_receipt.get("engine_version") != engine_version:
+	if a5_receipt.get("baseline_commit") != source_commit or a5_receipt.get("engine_version") != engine_version:
 		raise ValueError("A5 parity receipt pin mismatch")
 	if manifest.get("a5_parity_receipt_sha256") != a5_receipt_sha256:
 		raise ValueError("A5 parity receipt SHA mismatch")
-	if a5_receipt.get("seed_pin_verified") is not True or a5_receipt.get("run_count") != 2 or a5_receipt.get("cap_below_natural_end") is not True:
+	pair = a5_receipt.get("pair")
+	if not isinstance(pair, list) or len(pair) != 2:
+		raise ValueError("A5 receipt must contain exactly two runs")
+	if (not all(isinstance(run, dict) and run.get("valid_game") is True and
+			run.get("seed_pin_verified") is True and run.get("fixed_tick_cap_verified") is True and
+				run.get("fixed_tick_cap") == 16000 and run.get("fixed_tick_cap_tick") == 16001 for run in pair) or
+			pair[0].get("fingerprint_id") != pair[1].get("fingerprint_id")):
 		raise ValueError("A5 receipt lacks two pinned deterministic capped runs")
 
 
@@ -347,6 +361,8 @@ def plan_summary(manifest: dict, manifest_sha: str, root: pathlib.Path, engine_r
 		"planned_games": len(jobs), "pilot_games": len(jobs), "setup_count": len(pilot.SETUPS),
 		"small_game_workers_max": SLOT_PARALLEL_SMALL, "large_games_exclusive": True,
 		"process_private_limit_bytes": PRIVATE_LIMIT, "free_ram_floor_bytes": FREE_RAM_FLOOR,
+		"free_ram_soft_stop_bytes": FREE_RAM_SOFT_STOP,
+		"single_worker_admission_bytes": PRIVATE_LIMIT + FREE_RAM_FLOOR + FREE_RAM_ADMISSION_MARGIN,
 		"cap_tick": CAP_TICK, "actor_sample_interval_ticks": ACTOR_SAMPLE_INTERVAL,
 		"queue_mode": "RESUME_SAFE_CLAIM_ONCE", "launches": 0,
 		"engine_load_test": "PENDING_A5_PARITY_AND_MAP_ENGINE_ACCEPTANCE",
@@ -367,7 +383,8 @@ def run_one(manifest: dict, manifest_sha: str, job: dict, *, root: pathlib.Path,
 	pilot.validate(manifest, root, engine_root, execution=True)
 	execution_gate(manifest, a5_receipt=a5_receipt, a5_receipt_sha256=a5_receipt_sha256,
 		source_commit=manifest["pins"]["source_commit"], engine_version=manifest["pins"]["engine_version"])
-	if available_ram_bytes() < FREE_RAM_FLOOR: raise ValueError("available RAM below 6 GiB slot floor")
+	if available_ram_bytes() < PRIVATE_LIMIT + FREE_RAM_FLOOR + FREE_RAM_ADMISSION_MARGIN:
+		raise ValueError("available RAM below 10.5 GiB process cap + 3 GiB hard reserve + 2 GiB admission margin")
 	queue = ResumeQueue(support_root / "campaign_queue.sqlite", manifest_sha)
 	queue.install(pilot.make_jobs(manifest))
 	queue.recover_orphans(kill_game=lambda cell, pid: kill_owned_pid(pid, executable,
@@ -404,13 +421,15 @@ def run_one(manifest: dict, manifest_sha: str, job: dict, *, root: pathlib.Path,
 	def heartbeat(row):
 		if row["private_bytes"] < PRIVATE_LIMIT:
 			slot_counter.heartbeat(job["cell_id"], row["private_bytes"])
-		return "LOW_FREE_RAM" if available_ram_bytes() < FREE_RAM_FLOOR else None
+		return "LOW_FREE_RAM" if available_ram_bytes() < FREE_RAM_SOFT_STOP else None
 	monitor_result = monitor_process(process, driver_log=driver_log, actor_log=server_log, stall_log=logs / "debug.log",
 		sample_callback=heartbeat)
 	slot_counter.release(job["cell_id"])
 	finished = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
 	log_text = server_log.read_text(encoding="utf-8", errors="replace") if server_log.exists() else ""
 	match_rows = batch.read_appended_records(match_log, before)
+	game_uids = {row.get("game_uid") for row in match_rows if isinstance(row.get("game_uid"), str) and row.get("game_uid")}
+	game_uid = next(iter(game_uids)) if len(game_uids) == 1 and len(match_rows) == job["required_seats"] else None
 	cap_match = re.search(r"AB_CAMPAIGN_CAP tick=(\d+)", log_text)
 	seed_line = next((line for line in log_text.splitlines() if f"RandomSeed={job['seed']}" in line and "CAMEO DEV SEED pinned" in line), None)
 	map_yaml_text = map_yaml.read_text(encoding="utf-8")
@@ -428,10 +447,10 @@ def run_one(manifest: dict, manifest_sha: str, job: dict, *, root: pathlib.Path,
 	match_by_home = {(r.get("player") or {}).get("home"): r for r in match_rows}
 	resolved_out = []
 	for seat in resolved:
-		r = match_by_home.get(seat["home"], {}); pl = r.get("player") or {}; timeline = pilot.normalized_timeline(r); last = timeline[-1] if timeline else {}
+		r = match_by_home.get(seat["home_location"], {}); pl = r.get("player") or {}; timeline = pilot.normalized_timeline(r); last = timeline[-1] if timeline else {}
 		metrics = {key: last.get(key) for key in ("earned", "spent", "banked", "army_value", "kills", "deaths")}
 		metrics["timeline"] = [{key: row.get(key) for key in ("tick", "earned", "spent", "banked", "army_value", "kills", "deaths")} for row in timeline]
-		resolved_out.append({"seat_id": seat["home"], "team": seat["side"], "arm": seat["arm"], "bot_type": seat["bot_type"], "faction": seat["faction"], "home": seat["home"], "spawn": seat["spawn"], "proof_source":"generated map.yaml + cameo-ai-matches.jsonl", "outcome": pl.get("outcome", "unknown"), "metrics": metrics})
+		resolved_out.append({"seat_id": seat["home"], "team": seat["side"], "arm": seat["arm"], "bot_type": seat["bot_type"], "faction": seat["faction"], "home": seat["home"], "home_location": seat["home_location"], "spawn": seat["spawn"], "proof_source":"generated map.yaml + cameo-ai-matches.jsonl", "outcome": pl.get("outcome", "unknown"), "metrics": metrics})
 	team_obj = {side:{"arm":"control" if side==job["control_side"] else "treatment", "bot_type":job["arm_bot_types"]["control" if side==job["control_side"] else "treatment"], "seat_ids":[s["home"] for s in resolved_out if s["team"]==side]} for side in ("A", "B")}
 	logs.mkdir(exist_ok=True)
 	artifact_paths = list(game_root.rglob("*"))
@@ -442,6 +461,7 @@ def run_one(manifest: dict, manifest_sha: str, job: dict, *, root: pathlib.Path,
 	engine_digest = hashlib.sha256("".join(manifest["binary_sha256"][k] for k in sorted(manifest["binary_sha256"])).encode()).hexdigest()
 	receipt = {"schema_version":1,"campaign_id":manifest.get("campaign_id", "ab-campaign-2026-10-11-pilot"), "manifest_sha256":manifest_sha,
 		"baseline_commit":manifest["pins"]["source_commit"], "engine_sha256":engine_digest, "switch":job["switch"], "setup_id":job["setup"],
+		"cell_id":job["cell_id"], "game_uid":game_uid,
 		"map":{"name":job["map"],"path":job["map_path"],"sha256":job["map_sha256"],"generated_map_yaml_sha256":map_yaml_sha,"required_seats":job["required_seats"]},
 	"pair_id":f"{job['setup']}:{job['seed']}:{job['pair']}","pair_member":job["game_in_pair"],"seed":job["seed"],
 		"seed_proof":{"env_value":str(job["seed"]),"server_log_pin_line":seed_line,"server_log_sha256":sha(server_log) if server_log.is_file() else None},

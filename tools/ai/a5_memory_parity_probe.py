@@ -3,9 +3,8 @@
 
 Runs two serial same-seed baseline-vs-baseline 1v1 cells, samples only the
 OpenRA process whose command line names that cell's support directory, and
-stops at 3 GiB by default. A bounded higher diagnostic stop may be explicitly
-selected up to 9.5 GiB when host RAM headroom is proven. It does not create an
-execution manifest or authorize campaign jobs.
+uses a bounded process ceiling subject to host-RAM admission. It does not create
+an execution manifest or authorize campaign jobs.
 """
 from __future__ import annotations
 
@@ -32,12 +31,13 @@ ENGINE = "6da7fce14da541180c6baddd6925118fbef65b94"
 SEED = 1337
 POLL = 0.25
 WALL = 900
-PROCESS_STOP = int(3.0 * 1024**3)
-HOST_SOFT_STOP = int(7.0 * 1024**3)
+PROCESS_STOP = int(10.5 * 1024**3)
+HOST_SOFT_STOP = int(4.0 * 1024**3)
 HOST_HARD_FLOOR = 3 * 1024**3
 HOST_LAUNCH_HEADROOM = 1 * 1024**3
 COMMIT_HEADROOM = 2 * 1024**3
 WORLD_TICK_RE = re.compile(r"\[WT\s+(\d+)\]")
+FIXED_TICK_CAP = 16000
 COUNTERS_EXE = pathlib.Path(os.environ.get("DOTNET_COUNTERS_EXE") or
 	(shutil.which("dotnet-counters") or r"C:\tmp\a5diagtools\dotnet-counters.exe"))
 TRACE_EXE = pathlib.Path(os.environ.get("DOTNET_TRACE_EXE") or
@@ -162,7 +162,7 @@ def kill_cell_processes(rows: list[dict], support: pathlib.Path) -> None:
 			raise RuntimeError(f"could not verify PID-scoped stop for {pid}")
 
 
-def run_cell(index: int) -> dict:
+def run_cell(index: int, fixed_tick_cap: int = FIXED_TICK_CAP) -> dict:
 	cell = f"run-{index:02d}"
 	support = OUT / cell
 	support.mkdir(parents=True, exist_ok=False)
@@ -172,6 +172,7 @@ def run_cell(index: int) -> dict:
 		"--team-size", "1", "--repeats", "1", "--map",
 		str(ROOT / "mods/cameo/maps/ai_duel_gate_20260928"),
 		"--time-limit", "1", "--retries", "0", "--stall-timeout", "180",
+		"--fixed-tick-cap", str(fixed_tick_cap),
 		"--keep-variants", "--render", "fast", "--support-dir", str(support)]
 	env = os.environ.copy()
 	env["CAMEO_DEV_SEED"] = str(SEED)
@@ -338,12 +339,14 @@ def run_cell(index: int) -> dict:
 	seed_pin_verified = server_log.is_file() and f"CAMEO DEV SEED pinned - RandomSeed={SEED} (parity harness)" in server_log.read_text(encoding="utf-8", errors="replace")
 	records_verified = len(match_rows) == 2 and len({r.get("game_uid") for r in match_rows}) == 1 and all((r.get("player") or {}).get("outcome") in ("won", "lost") for r in match_rows)
 	duration_ticks = match_rows[0].get("duration_ticks") if records_verified else None
-	natural_below_cap = type(duration_ticks) is int and duration_ticks < 60000
+	cap_tick = fixed_tick_cap + 1  # Trigger.AfterDelay(n) executes on the following game tick.
+	cap_line = f"A5_FIXED_TICK_CAP requested={fixed_tick_cap} tick={cap_tick}"
+	fixed_cap_verified = server_log.is_file() and cap_line in server_log.read_text(encoding="utf-8", errors="replace")
 	batch_result = summary.get("results", [{}])[0] if summary.get("results") else {}
 	valid_game = (summary.get("matches") == 1 and summary.get("completed") == 1
 		and batch_result.get("status") == "ok" and batch_result.get("exit_code") == 0 and batch_result.get("attempts") == 1
 		and not summary.get("new_exceptions") and seed_pin_verified and records_verified
-		and natural_below_cap and len(replays) == 1 and stop_reason is None and peak < PROCESS_STOP)
+		and fixed_cap_verified and len(replays) == 1 and stop_reason is None and peak < PROCESS_STOP)
 	if not valid_game and stop_reason is None:
 		stop_reason = "A5_RECEIPT_VALIDATION_FAILED"
 	return {"cell": cell, "seed": SEED, "source_head": subprocess.check_output(
@@ -354,7 +357,9 @@ def run_cell(index: int) -> dict:
 		"exit_code": proc.returncode, "stop_reason": stop_reason or "PROCESS_EXIT",
 		"wall_seconds": round(time.monotonic() - start, 2), "peak_private_bytes": peak,
 		"stop_threshold_bytes": PROCESS_STOP, "host_soft_stop_bytes": HOST_SOFT_STOP,
-		"host_hard_floor_bytes": HOST_HARD_FLOOR, "ceiling_bytes": runner.PRIVATE_LIMIT,
+		"host_hard_floor_bytes": HOST_HARD_FLOOR, "ceiling_bytes": PROCESS_STOP,
+		"fixed_tick_cap": fixed_tick_cap, "fixed_tick_cap_tick": cap_tick if fixed_cap_verified else None,
+		"fixed_tick_cap_verified": fixed_cap_verified,
 		"samples": samples, "support": str(support), "driver_stdout": str(stdout_path),
 		"runtime_counter_files": [str(support / f"System.Runtime-{pid}.csv") for pid in counters],
 		"runtime_counter_errors": counter_errors,
@@ -365,7 +370,7 @@ def run_cell(index: int) -> dict:
 			"duration": TRACE_DURATION, "enabled": TRACE_ENABLED, "poll_seconds": POLL},
 		"fingerprint_id": summary.get("fingerprint_id"), "seed_pin_verified": seed_pin_verified,
 		"records_verified": records_verified, "duration_ticks": duration_ticks,
-		"natural_below_cap": natural_below_cap, "replay_count": len(replays), "valid_game": valid_game}
+		"replay_count": len(replays), "valid_game": valid_game}
 
 
 def main() -> int:
@@ -375,17 +380,21 @@ def main() -> int:
 		help="explicitly run two bounded A5 qualification cells; never campaign outcomes")
 	parser.add_argument("--output-dir", type=pathlib.Path, default=OUT,
 		help="new, non-existing artifact directory; existing evidence is never overwritten")
-	parser.add_argument("--process-stop-gib", type=float, default=3.0,
-		help="PID-scoped diagnostic stop threshold; maximum 9.5 GiB for current host headroom")
-	parser.add_argument("--host-soft-stop-gib", type=float, default=7.0,
+	parser.add_argument("--process-stop-gib", type=float, default=10.5,
+		help="PID-scoped process ceiling; default 10.5 GiB, subject to host-RAM admission")
+	parser.add_argument("--fixed-tick-cap", type=int, default=FIXED_TICK_CAP,
+		help="fixed game-tick cap applied to both A5 qualification runs")
+	parser.add_argument("--host-soft-stop-gib", type=float, default=4.0,
 		help="stop before the hard free-RAM floor")
 	parser.add_argument("--host-hard-floor-gib", type=float, default=3.0,
 		help="minimum free physical RAM; user-authorized reserve")
 	parser.add_argument("--no-allocation-trace", action="store_true",
 		help="disable gc-verbose profiler for parity runs; System.Runtime counters remain enabled")
 	args = parser.parse_args()
-	if not (3.0 <= args.process_stop_gib <= 9.5):
-		raise RuntimeError("process stop must be between 3 and 9.5 GiB pending larger host headroom")
+	if not (3.0 <= args.process_stop_gib <= 10.5):
+		raise RuntimeError("process stop must be between 3 and 10.5 GiB")
+	if not (1 <= args.fixed_tick_cap <= 60000):
+		raise RuntimeError("fixed tick cap must be between 1 and 60000")
 	if not (3.0 <= args.host_hard_floor_gib < args.host_soft_stop_gib):
 		raise RuntimeError("host hard floor must be >=3 GiB and strictly below host soft stop")
 	PROCESS_STOP = int(args.process_stop_gib * 1024**3)
@@ -399,7 +408,8 @@ def main() -> int:
 			"memory_fix": MEMORY_FIX, "seed": SEED, "cells": 2,
 			"per_process_stop_bytes": PROCESS_STOP, "host_soft_stop_bytes": HOST_SOFT_STOP,
 			"host_hard_floor_bytes": HOST_HARD_FLOOR, "poll_seconds": POLL,
-			"allocation_trace_enabled": TRACE_ENABLED, "campaign_gate_passed": False}, indent=2))
+			"allocation_trace_enabled": TRACE_ENABLED, "fixed_tick_cap": args.fixed_tick_cap,
+			"campaign_gate_passed": False}, indent=2))
 		return 0
 	if subprocess.run(["git", "merge-base", "--is-ancestor", MEMORY_FIX, "HEAD"], cwd=ROOT).returncode:
 		raise RuntimeError("memory-fix commit is not an ancestor")
@@ -432,7 +442,7 @@ def main() -> int:
 		if subprocess.run(["powershell.exe", "-NoProfile", "-NonInteractive", "-Command",
 			"if (Get-Process OpenRA -ErrorAction SilentlyContinue) { exit 1 } else { exit 0 }"]).returncode:
 			raise RuntimeError("foreign OpenRA process exists before launch")
-		result = run_cell(index)
+		result = run_cell(index, args.fixed_tick_cap)
 		results.append(result)
 		(OUT / f"{result['cell']}.receipt.json").write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
 		if not result["valid_game"]:
@@ -460,7 +470,8 @@ def main() -> int:
 		"engine_version": ENGINE, "seed": SEED, "pair": results,
 		"order_stream_verdict": order_verdict, "system_openra_process_count": processes_left.stdout.strip(),
 		"a5_diagnostic_passed": len(results) == 2 and all(r["valid_game"] for r in results) and
-			results[0].get("fingerprint_id") == results[1].get("fingerprint_id") and order_verdict in ("IDENTICAL", "IDENTICAL_TAIL_FLUSH"),
+			results[0].get("fingerprint_id") == results[1].get("fingerprint_id") and
+			all(r.get("fixed_tick_cap_verified") for r in results) and order_verdict == "IDENTICAL",
 		"campaign_gate_passed": False}
 	(OUT / "A5_memory_probe_receipt.json").write_text(json.dumps(receipt, indent=2) + "\n", encoding="utf-8")
 	print(json.dumps({"output": str(OUT), "pair_count": len(results),
