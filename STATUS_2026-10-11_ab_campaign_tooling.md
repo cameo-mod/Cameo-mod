@@ -1,27 +1,8 @@
-## Resume (2026-10-11T04:24Z, exact engine distribution verified)
-Authoritative engine root `C:\cameo-wt\ab-campaign-tooling\engine` now hash-checks against the current candidate: VERSION `6da7fce14da541180c6baddd6925118fbef65b94`; all three binary pins match (`OpenRA.exe` `5693f355�`, `OpenRA.Game.dll` `167fcbd8�`, `OpenRA.Mods.Cameo.dll` `3b69b0d4�`). Candidate manifest SHA `f68c4f0325e737f5299356731002f25760d55cee535d5fbd4e25646bbb98cce6`; `execution_approved:false`.
-Remaining gates: maintainer flips executable approval and closes unresolved Amendment-2 decisions in fleet `OPEN_DECISIONS.md`; then first serial cell can serve as engine/map acceptance per lead guidance. At 04:24Z host free RAM was 11.86 GiB (<15.5 admission), zero OpenRA; do not launch until the floor and approved manifest both hold.
-## Resume (2026-10-11T04:23Z, corrected maproot candidate)
-Source of truth: `codex/ab-campaign-engine-maproot-1011@8e0f6fa01becd95d99f7bc0ba652714e475f95d6` (93d BOM fix + c2 receipt hardening + maproot path + disk-byte pin repair). Exact-SHA reviews PASS; focused tests 23/23 and committed-tree no-launch dry run 64 games / 32 variants / 144 seats / 11.07h serial / 0 launches.
-Candidate manifest SHA-256 `f68c4f0325e737f5299356731002f25760d55cee535d5fbd4e25646bbb98cce6`; `execution_approved:false`; A5 receipt pin `0e6fc98982af8ca3c67f3846a121512fab4e3982b8de565db67172c865a382f4`.
-No launch: host sampled at 11.88 GiB free RAM and zero OpenRA, below 15.5 GiB admission. Remaining: maintainer executable approval; complete exact engine binary distribution and in-engine map acceptance/spawn proof; resolve open Amendment-2 allocation/estimand questions in fleet `OPEN_DECISIONS.md`; then recheck RAM/serial slot immediately before first approved cell.
-## Resume (2026-10-11, generated-map support path fix)
-Current branch `codex/ab-campaign-engine-maproot-1011`, based on reviewed `codex/ab-campaign-exec-gates-93d@a3136f34` (approved ancestor `6d98ba478`). The launch runner now writes generated maps under `Support/maps/cameo/{DEV_VERSION}`, matching `mod.yaml` and `run_ai_match_batch.USER_MAP_DIR`; the regression test checks this exact contract. Candidate remains `execution_approved:false`; only static no-launch validation was performed.
-Focused `test_campaign_runner.py` + `test_ab_campaign_pilot.py`: 23/23 PASS; `py_compile` and `git diff --check` PASS. No-launch dry run: 64 games, 32 variants, 144 seats, 11.07h worker/serial estimate, 0 launches; candidate SHA-256 `aebc0085cabd539fffc61a8d195544621abbd877fb90dc7ef21d4d9f545414a3`.
-Open gates: exact-SHA review/landing of this path fix; engine-level map-load acceptance on approved first serial cells; candidate execution approval; immediate host admission check (latest free RAM 11.93 GiB, below 15.5 floor; no OpenRA). Do not start cells below the floor or with `execution_approved:false`.
-## Resume (2026-10-11, receipt join hardening on latest reviewed base)
+﻿## Resume (2026-10-11 04:26Z)
 
-Combined DevOps follow-up `c2a25ea5154e40693ef17c7ebd8bf1d3c98cb30b` onto latest reviewed `devin/ab-launch-unblock@93d571602136df1293afa7abdaedd701054b3f62`; conflict resolution retains the engine VERSION BOM fix, map/setup alias normalization, strict unique generated-home coordinate joins, and requires consistent nonempty `game_uid` for completed receipt/record sets. Candidate uses the one-worker slot policy, keeps process cap 10.5 GiB and admission floor 15.5 GiB, and remains `execution_approved:false`.
+Amendment-2 run order is documented in `docs/audit/AB_PILOT_EXECUTION_ORDER_2026-10-11.json` (sha256 `73f111dc2b2619bef2d6204b355236424a92a691375db039b095b644b315dc87`), derived from frozen manifest sha `f68c4f0325e737f5299356731002f25760d55cee535d5fbd4e25646bbb98cce6` at `94ed219ef5cd3cf5d770c2545a769b3ca96813b4`. Pair-major ordering puts all 16 pair-0 matched rounds (32 side-swap games, every setup stratum once) before pair-1; launch_authorized=false. Recommended maintainer rulings: stages cumulative global matched rounds [16,32,48,64] with pilot stages 16/32; report seat sums/team totals descriptively, no causal synergy claim; ratify admission 15.5 GiB, private stop 10.5 GiB, continuous host-free stop <3 GiB (4 GiB soft warning). These are proposals, not ratification.
 
-Validation on the combined tree: focused pilot+runner tests 22/22 PASS; exact engine no-launch dry run PASS (64 games, 32 variants, 144 seats, 11.07 worker-hours / 11.07 slot-wall hours, 0 launches). Candidate manifest SHA `6a477d24d4d85778e3d0b0741f3fa407dca7cbc82acb3edd0963a508ce68f226`; A5 receipt SHA remains `0e6fc98982af8ca3c67f3846a121512fab4e3982b8de565db67172c865a382f4`.
-
-Next: review/land this combined candidate, then close runtime engine acceptance and symmetric-seat proof on all eight maps. Launch still requires candidate approval and >=15.5 GiB free RAM with zero OpenRA. Latest host observation 2026-10-11T04:17Z was 11.94 GiB free, below admission, with zero OpenRA processes; do not launch outcome cells or lower the 15.5 GiB gate.
-
-## Resume (2026-10-11, engine VERSION encoding preflight)
-Branch `codex/ab-campaign-version-bom` is based on reviewed `devin/ab-launch-unblock@9633b352885245096630d6edd71c9025962487eb`. Runner validation now accepts ASCII, UTF-8 BOM, and UTF-16 BOM VERSION files and strips the engine-generated `git-` prefix; focused runner tests pass 10/10. No games launched.
-Next: commit/push this compatibility fix; the non-executable candidate manifest now pins the revised driver/analyzer and runner hashes (manifest SHA `0e8a53a8745555cb19ab1d87fbccb556dec50345dbb23be5f067225a3d01d2d4`) and the fixed-tick A5 receipt (`0e6fc98982af8ca3c67f3846a121512fab4e3982b8de565db67172c865a382f4`). Rerun dry-run with the exact pinned engine distribution (the attempted `a3a4-engine-6da7` source checkout has OpenRA.exe but lacks the pinned Cameo DLL, so it is not valid runtime evidence). Preserve `execution_approved:false` until all gates and memory admission pass.
-Open launch gate: host free RAM was 14.85 GiB at 19:08Z, below current 15.5 GiB admission; engine binary root not located/accepted for dry-run. No campaign outcome cells launched.
-
+Candidate manifest is still execution_approved=false. Last observed free RAM 12.31 GiB (<15.5 GiB); no OpenRA process was observed. Next: maintainer ratification / execution approval, then wait for >=15.5 GiB and exclusive slot; first launched serial cells can provide map runtime acceptance. No A/B outcome cells launched by this update.
 ## Resume (2026-10-10 19:02Z, A5 fixed-tick parity PASS)
 A5 fixed-tick qualification PASS at commit `bcdd89e5451f4be8a66add9d506392adb5e17e52`, exact baseline ancestry `964cdb630b1514e1c1a0baed55cbdbc427d5fc11`, engine `6da7fce14da541180c6baddd6925118fbef65b94`, seed 1337, same runtime fingerprint `3d90631faa76`. Both runs verified Lua cap marker tick16001, complete two-seat mutual-loss CENSORED_CAP rows, and exactly one complete replay each; strict comparator returned `IDENTICAL_TAIL_FLUSH` (same shared per-frame orders/hashes, terminal sync-only flush). Durations 16601/16640; do not score either censored result. Peak private 8.55/8.53 GiB; host free at finish14.98 GiB; zero OpenRA processes.
 Receipt and all raw evidence: `results/campaign-a5-fixed-tick-parity-20261010-attempt2/A5_memory_probe_receipt.json`, `order_stream_diff.json`, run receipts/logs/replays. The prior failed preflight attempt remains preserved separately as INCOMPLETE_PREFLIGHT_REJECTION.
@@ -57,11 +38,11 @@ Step 1 receipt schema and Step 2 eight-map inventory are complete. Step 3 toolin
 
 ## Progress
 
-### Step 1 — receipt schema contract
+### Step 1 â€” receipt schema contract
 
 `AB_RECEIPT_SCHEMA_2026-10-11.md` defines immutable per-game receipt fields for campaign/source/engine/manifest pins; experiment/setup/map/pair/seed; seed proof; team-to-arm assignment; resolved seats/factions/spawns; natural/cap/incomplete classification and winner; per-seat economy/army/combat/timeline; peak private bytes and actor-count samples; runtime/PID cleanup; and artifact hashes. Caps and incomplete games have no winner. Missing receipts are preserved as incomplete. Exact path sent to Luna DevOps.
 
-### Step 2 — map inventory
+### Step 2 â€” map inventory
 
 `MAP_PREFLIGHT_2026-10-11.md` records all eight amended-scope maps resolved at the exact baseline pin. All package SHAs match the previously pinned assets; parsed playable seat references and spawn actor counts match the required 2/4/6/8 seats. Counts do not prove spawn symmetry or engine acceptance; those remain gates.
 
@@ -74,15 +55,15 @@ Pinned for all remaining work: `origin/master@964cdb630b1514e1c1a0baed55cbdbc427
 - `tools/ai/ab_campaign_receipt.schema.json` is the strict machine-readable receipt contract; `AB_RECEIPT_SCHEMA_2026-10-11.md` is its human-readable companion. Luna DevOps was sent the paths.
 - `tools/ai/campaign_runner.py` supports fail-closed dry-run and gated `execute-one`, atomically claims immutable jobs in SQLite, uses the shared size/RAM slot counter, resolves the exact map and seat roster, runs with an in-process pinned seed, samples private bytes and actor count, enforces 45,000 tick / 3,000 second / 180 second stall limits, kills only its Popen handle or verifies PID+image+support path before orphan cleanup, and emits immutable per-game receipts.
 - `tools/ai/ab_campaign_pilot.py` verifies baseline/map/tool/schema/binary hashes; control/treatment aliases differ only by one candidate over the ratchet baseline. Private-memory and slot ceiling are 6.5 GiB per process and free-RAM floor is 6 GiB.
-- Focused tests: `py -3 -m unittest tools.tests.test_ab_campaign_pilot tools.tests.test_campaign_runner -q` — 17/17 PASS; `py_compile` and JSON schema parse pass. Never run `tools/tests` as one suite.
-- No-launch dry run on the pinned 964 source and 6da7fce engine: 64 games, 32 map variants, 144 seat proofs; 11.07 estimated worker-hours, 7.29 slot-wall hours (5.11–9.47 range); 0 launches. Receipt: `tools/tests/fixtures/ab_campaign_pilot_dry_run_receipt.json`.
+- Focused tests: `py -3 -m unittest tools.tests.test_ab_campaign_pilot tools.tests.test_campaign_runner -q` â€” 17/17 PASS; `py_compile` and JSON schema parse pass. Never run `tools/tests` as one suite.
+- No-launch dry run on the pinned 964 source and 6da7fce engine: 64 games, 32 map variants, 144 seat proofs; 11.07 estimated worker-hours, 7.29 slot-wall hours (5.11â€“9.47 range); 0 launches. Receipt: `tools/tests/fixtures/ab_campaign_pilot_dry_run_receipt.json`.
 - No campaign/A5 games were launched. Engine map acceptance and symmetric-spawn proof remain untested. The execution gate requires an explicit approved manifest plus a two-run exact-pin A5 JSON receipt with seed pins and `IDENTICAL`/`IDENTICAL_TAIL_FLUSH` order stream verdict.
 
 ## Resume (2026-10-10 17:22Z, correction)
 
 Current branch `codex/ab-campaign-tooling`, commit `69e0f5acb4e586c239ff6dca318b6ec7fb37c04`, pushed. The earlier statement that no A5 games had been launched is superseded: one A5 run-a was attempted under the reserved parity slot. Gameplay source `mods/cameo` has no diff against baseline 964, but the game failed before a match during ruleset initialization with `Cannot locate type: SquadDesireBotModuleInfo`; failure log: `results/campaign-a5-20261010/run-a/Logs/exception-2026-10-10T171521Z.log`. Classify it `INCOMPLETE_PREFLIGHT_FAILURE`; preserve all artifacts; no second A5 run or campaign outcome cells launched. No OpenRA process from this attempt remains.
 
-Next: diagnose why the binary identified by `engine/VERSION=6da7fce14da541180c6baddd6925118fbef65b94` cannot load a trait required by exact-baseline mod sources. VERSION is descriptive and does not prove binary/source compatibility. Do not relax pin checks. After compatibility is proven, rerun both A5 seeds and verify order streams. Remaining gates: execution-approved manifest and engine acceptance plus symmetric-spawn proof for all eight maps. Current no-launch dry run remains 64 games / 32 variants / 144 seat proofs, estimated 7.29 slot-wall hours (5.11�9.47 range).
+Next: diagnose why the binary identified by `engine/VERSION=6da7fce14da541180c6baddd6925118fbef65b94` cannot load a trait required by exact-baseline mod sources. VERSION is descriptive and does not prove binary/source compatibility. Do not relax pin checks. After compatibility is proven, rerun both A5 seeds and verify order streams. Remaining gates: execution-approved manifest and engine acceptance plus symmetric-spawn proof for all eight maps. Current no-launch dry run remains 64 games / 32 variants / 144 seat proofs, estimated 7.29 slot-wall hours (5.11ï¿½9.47 range).
 
 ### A5 parity gate attempt (2026-10-10)
 
@@ -96,7 +77,7 @@ No replay parity comparison is valid; no exact-baseline A5 receipt was produced;
 
 ## Resume (handoff, 2026-10-10)
 Branch `codex/ab-campaign-tooling-manager` includes map inventory, schema, guarded runner, fixtures/tests and A5 failure status; HEAD pinned below.
-No-launch dry run: 64 games / 32 variants / 144 seat proofs; 0 launches; estimated 7.29 slot-wall hours (5.11�9.47 range).
+No-launch dry run: 64 games / 32 variants / 144 seat proofs; 0 launches; estimated 7.29 slot-wall hours (5.11ï¿½9.47 range).
 A5 parity gate failed: initial stale-DLL load failure; rebuilt run-a exceeded 6.5 GiB; run-b hit 8.07 GiB and was PID-scoped stopped; campaign cells never started.
 Preserved logs: `C:\cameo-wt\ab-campaign-tooling\results\campaign-a5-20261010`; schema: `C:\cameo-wt\ab-campaign-tooling\tools\ai\ab_campaign_receipt.schema.json`.
 Next owner is Luna DevOps; do not run any campaign cells until memory-safe exact-baseline A5 parity and map/manifest gates pass.
