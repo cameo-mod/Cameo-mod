@@ -35,6 +35,31 @@ class CampaignRunnerTests(unittest.TestCase):
 			self.assertEqual({"INCOMPLETE_UNKNOWN": 1}, q.counts())
 			self.assertIsNone(q.claim(job["cell_id"], 789))
 
+	def test_invalid_deployment_parks_unclaimed_queue_cells(self):
+		with tempfile.TemporaryDirectory() as temp:
+			q = runner.ResumeQueue(pathlib.Path(temp) / "queue.sqlite", "a" * 64)
+			q.install([{"cell_id": "one"}, {"cell_id": "two"}])
+			self.assertEqual(2, q.park_planned("INVALID_NO_DEPLOY"))
+			self.assertEqual({"PARKED_INVALID_NO_DEPLOY": 2}, q.counts())
+
+	def test_monitor_kills_cell_if_tick_100_deployment_evidence_is_missing(self):
+		class Process:
+			pid = 7
+			returncode = None
+			def poll(self): return self.returncode
+			def kill(self): self.returncode = -9
+			def wait(self): return self.returncode
+		with tempfile.TemporaryDirectory() as temp:
+			root=pathlib.Path(temp); debug=root/"debug.log"; debug.write_text("[WT 101] state\n",encoding="utf-8")
+			proc=Process()
+			with patch.object(runner, "private_bytes", return_value=1):
+				result=runner.monitor_process(proc, driver_log=debug, actor_log=root/"server.log", stall_log=debug,
+					required_seats=["Multi0"], deployment_log=root/"lua.log", poll_seconds=0.01,
+					clock=lambda: 10.0, sleep=lambda _: None)
+			self.assertEqual("INVALID_NO_DEPLOY", result["end_reason"])
+			self.assertFalse(result["deployment"]["verified"])
+			self.assertEqual(-9, proc.returncode)
+
 	def test_manifest_pin_and_job_immutability(self):
 		with tempfile.TemporaryDirectory() as temp:
 			path = pathlib.Path(temp) / "queue.sqlite"
@@ -62,7 +87,7 @@ class CampaignRunnerTests(unittest.TestCase):
 		for field in ("cell_id", "game_uid", "status", "seats", "seat_proof_source", "map_yaml_sha256",
 				"control_side", "treatment_side", "arm_bot_types", "cap_marker", "cap_tick",
 				"support_complete", "setup", "map_sha256", "pair", "game_in_pair",
-				"duration_ticks", "peak_memory_bytes"):
+				"duration_ticks", "peak_memory_bytes", "deployment"):
 			self.assertIn(field, required, f"persisted receipt must carry analyzer join field: {field}")
 
 	def test_bounds_and_parallel_policy(self):
@@ -114,6 +139,7 @@ class CampaignRunnerTests(unittest.TestCase):
 	def test_receipt_cap_must_not_claim_winner_and_needs_marker(self):
 		receipt = {"schema_version":1,"campaign_id":"c","manifest_sha256":"a"*64,"cell_id":"cell-1","game_uid":"game-1","status":"CENSORED_CAP","seats":[{"home":"M0"}],"baseline_commit":"b"*40,"engine_sha256":"c"*64,"switch":"s","setup_id":"x","pair_id":"p","pair_member":0,"seed":1,"seed_proof":{},"teams":{},"map":{"required_seats":1},"resolved_seats":[{"seat_id":"M0","team":"A","arm":"control","bot_type":"hard","faction":"td_gdi","home":"M0","spawn":0,"proof_source":"map+records","outcome":"lost","metrics":{"timeline":[]}}],"end_class":"CAP","end_reason":"cap","winner_team":None,"world_tick":45000,"cap":{"world_tick_cap":45000,"marker_observed":True,"marker_tick":45000},"memory":{"peak_private_bytes":0,"limit_private_bytes":runner.PRIVATE_LIMIT,"samples":[]},"runtime":{},"artifacts":{}}
 		receipt.update({"seat_proof_source":"generated_map.yaml","map_yaml_sha256":"d"*64,"control_side":"A","treatment_side":"B","arm_bot_types":{"control":"hard_control","treatment":"hard_treatment"},"cap_marker":True,"cap_tick":45000,"support_complete":True,"setup":"x","map_sha256":"e"*64,"pair":0,"game_in_pair":0,"duration_ticks":45000,"peak_memory_bytes":0})
+		receipt["deployment"]={"verified":True,"check_tick":100,"reported_seat_count":1,"expected_seat_count":1,"seats":{"M0":{"tick":50,"type":"td_gdi_constructionyard"}},"missing":[]}
 		runner.validate_receipt(receipt)
 		receipt["game_uid"] = None
 		with self.assertRaisesRegex(ValueError, "requires nonempty game_uid"):
