@@ -66,8 +66,9 @@ class CampaignRunnerTests(unittest.TestCase):
 			self.assertIn(field, required, f"persisted receipt must carry analyzer join field: {field}")
 
 	def test_bounds_and_parallel_policy(self):
-		self.assertEqual(runner.pilot.HEADLESS_PEAK_BYTES + 3 * 1024**3, runner.PRIVATE_LIMIT)
-		self.assertEqual(14 * 1024**3, runner.FREE_RAM_FLOOR)
+		# Ruling 04:50Z: process cap stays 10.5 GiB; admission = measured headless peak + 3 GiB reserve.
+		self.assertEqual(int(10.5 * 1024**3), runner.PRIVATE_LIMIT)
+		self.assertEqual(runner.pilot.HEADLESS_PEAK_BYTES + 3 * 1024**3, runner.FREE_RAM_FLOOR)
 		self.assertEqual(3 * 1024**3, runner.FREE_RAM_HARD_FLOOR)
 		self.assertEqual(4 * 1024**3, runner.FREE_RAM_SOFT_FLOOR)
 		self.assertEqual(45000, runner.CAP_TICK)

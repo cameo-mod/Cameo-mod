@@ -56,8 +56,41 @@ def parse_actor_samples(text: str) -> list[dict]:
 	return [{"world_tick": int(t), "actor_count": int(n)} for t, n in ACTOR_SAMPLE_RE.findall(text)]
 
 
+def link_mod_tree(src: pathlib.Path, dst: pathlib.Path, skip_top=()):
+	"""Clone a mod directory into dst using hardlinks: real files with no reparse
+	points, so this host's untrusted-mount-point policy cannot reject them.
+	Top-level names in skip_top are omitted (the dual-arm ai/ payload is written
+	separately). Falls back to a byte copy when a link is unavailable."""
+	for dirpath, dirnames, filenames in os.walk(src):
+		rel = pathlib.Path(dirpath).relative_to(src)
+		if not rel.parts:
+			dirnames[:] = [d for d in dirnames if d not in skip_top]
+		elif rel.parts[0] in skip_top:
+			dirnames[:] = []
+			continue
+		target = dst / rel
+		target.mkdir(parents=True, exist_ok=True)
+		for name in filenames:
+			s = pathlib.Path(dirpath) / name
+			d = target / name
+			if d.exists(): d.unlink()
+			try: os.link(s, d)
+			except OSError: shutil.copy2(s, d)
+
+
 def pid_alive(pid: int | None) -> bool:
 	if type(pid) is not int or pid <= 0: return False
+	if os.name == "nt":
+		# os.kill(pid, 0) is not a safe probe on Windows; ask the kernel instead.
+		handle = ctypes.windll.kernel32.OpenProcess(0x0400, False, pid)  # PROCESS_QUERY_LIMITED_INFORMATION
+		if not handle:
+			return False
+		try:
+			code = ctypes.c_ulong()
+			ok = ctypes.windll.kernel32.GetExitCodeProcess(handle, ctypes.byref(code))
+			return bool(ok) and code.value == 259  # STILL_ACTIVE
+		finally:
+			ctypes.windll.kernel32.CloseHandle(handle)
 	try:
 		os.kill(pid, 0); return True
 	except PermissionError:
@@ -87,6 +120,53 @@ def kill_owned_pid(pid: int, expected_executable: pathlib.Path, expected_support
 		p.kill(); p.wait(timeout=10); return True
 	except Exception:
 		return False
+
+
+def resolve_game_pid(process, support_dir: pathlib.Path, timeout_seconds: float = 25.0) -> int:
+	"""Return the real game process id.
+
+	bin/OpenRA.exe is the Windows launcher: it spawns short-lived children
+	and then the actual game (a child OpenRA.exe whose command line carries
+	this cell's Engine.SupportDir). The Popen pid is only the launcher
+	(~25 MiB); memory caps and PID-scoped cleanup must target the real game.
+	Requires the same support-tagged child to survive two consecutive polls
+	so transient launcher children are not mistaken for the game. Falls back
+	to the launcher's pid when no stable child appears.
+	"""
+	if os.name != "nt":
+		return process.pid
+	tag = str(support_dir.resolve())
+	probe = (
+		"Get-CimInstance Win32_Process -Filter \"Name='OpenRA.exe'\" | "
+		"Where-Object { $_.CommandLine -and $_.CommandLine.Contains('" + tag.replace("'", "''") + "') } | "
+		"Select-Object ProcessId,ParentProcessId,CommandLine | ConvertTo-Json -Compress")
+	deadline = time.monotonic() + timeout_seconds
+	candidate = None
+	while time.monotonic() < deadline:
+		if process.poll() is not None:
+			return process.pid
+		try:
+			out = subprocess.run(
+				["powershell.exe", "-NoProfile", "-NonInteractive", "-Command", probe],
+				capture_output=True, text=True, timeout=15).stdout
+			procs = json.loads(out) if out.strip() else []
+			if isinstance(procs, dict):
+				procs = [procs]
+			for proc in procs:
+				pid = int(proc.get("ProcessId") or 0)
+				if proc.get("ParentProcessId") != process.pid or pid <= 0:
+					continue
+				if "Engine.LaunchPath" not in (proc.get("CommandLine") or ""):
+					continue  # launcher-spawned transient, not the game re-exec
+				if not pid_alive(pid):
+					continue
+				if pid == candidate:
+					return pid  # stable across two polls: not a transient
+				candidate = pid
+		except (OSError, subprocess.SubprocessError, ValueError):
+			pass
+		time.sleep(1.5)
+	return candidate if candidate and pid_alive(candidate) else process.pid
 
 
 def available_ram_bytes() -> int:
@@ -260,7 +340,7 @@ def validate_receipt(receipt: dict) -> None:
 	if receipt["end_class"] == "NATURAL" and (not isinstance(receipt["end_reason"], str) or receipt["winner_team"] is None):
 		raise ValueError("NATURAL classification lacks authoritative winner/end reason")
 	if receipt["memory"].get("limit_private_bytes") != PRIVATE_LIMIT:
-		raise ValueError("receipt memory threshold differs from the measured headless peak plus 3 GiB")
+		raise ValueError("receipt memory threshold differs from the frozen 10.5 GiB limit")
 	if receipt["memory"].get("peak_private_bytes", 0) >= PRIVATE_LIMIT and not (receipt["end_class"] == "INCOMPLETE" and receipt["end_reason"] == "MEMORY_KILL"):
 		raise ValueError("memory threshold reached without INCOMPLETE MEMORY_KILL")
 	if len(receipt["resolved_seats"]) != receipt["map"].get("required_seats"):
@@ -297,10 +377,21 @@ def monitor_process(process, *, driver_log: pathlib.Path, actor_log: pathlib.Pat
 				stall_log: pathlib.Path | None = None,
 				wall_timeout: int = 3000, stall_timeout: int = 180,
 				poll_seconds: float = 2.0, sample_callback=None,
+				watch_pid: int | None = None,
+				expected_executable: pathlib.Path | None = None,
+				expected_support: pathlib.Path | None = None,
 				clock=time.monotonic, sleep=time.sleep) -> dict:
-	"""Watch one owned process; any stop targets only the supplied Popen handle."""
+	"""Watch one owned process; any stop targets only the supplied Popen handle.
+
+	On Windows bin/OpenRA.exe is a launcher that spawns the real game as a
+	child; watch_pid lets the caller monitor/kill that child. Kill order is
+	scoped child first (identity-checked), then the launcher handle.
+	"""
 	if wall_timeout != 3000 or stall_timeout != 180 or poll_seconds <= 0:
 		raise ValueError("campaign watchdog bounds must remain 3000s/180s")
+	pid = watch_pid or process.pid
+	def alive() -> bool:
+		return pid_alive(pid) if watch_pid else process.poll() is None
 	start = clock(); deadline = start + wall_timeout
 	stall_log = stall_log or driver_log
 	last_log_mtime = stall_log.stat().st_mtime if stall_log.exists() else None
@@ -310,7 +401,7 @@ def monitor_process(process, *, driver_log: pathlib.Path, actor_log: pathlib.Pat
 	stop_reason = None
 	actor_offset = 0
 	last_actor = {"world_tick": None, "actor_count": None}
-	while process.poll() is None:
+	while alive():
 		sleep(poll_seconds)
 		try:
 			mtime = stall_log.stat().st_mtime
@@ -320,7 +411,7 @@ def monitor_process(process, *, driver_log: pathlib.Path, actor_log: pathlib.Pat
 		except OSError:
 			pass
 		try:
-			private = private_bytes(process.pid)
+			private = private_bytes(pid)
 		except (OSError, RuntimeError):
 			stop_reason = "MEMORY_SAMPLE_FAILED"; break
 		peak = max(peak, private)
@@ -344,12 +435,22 @@ def monitor_process(process, *, driver_log: pathlib.Path, actor_log: pathlib.Pat
 		if private >= PRIVATE_LIMIT: stop_reason = "MEMORY_KILL"; break
 		if clock() - last_activity > stall_timeout: stop_reason = "STALL"; break
 		if clock() >= deadline: stop_reason = "WALL_TIMEOUT"; break
-	if stop_reason is not None and process.poll() is None:
+	if watch_pid and alive():
+		if expected_executable is not None and expected_support is not None:
+			kill_owned_pid(pid, expected_executable, expected_support)
+		if process.poll() is None:
+			process.kill()
+	elif stop_reason is not None and process.poll() is None:
 		process.kill()  # Popen.kill terminates this process handle/PID only.
-		process.wait()
+	try:
+		process.wait(timeout=15)
+	except (subprocess.TimeoutExpired, TypeError):
+		pass
 	return {"end_reason": stop_reason or "PROCESS_EXIT", "exit_code": process.poll(),
 		"wall_seconds": max(0, clock() - start), "peak_private_bytes": peak,
-		"samples": private_samples, "pid_scoped_cleanup": process.poll() is not None}
+		"samples": private_samples,
+		"pid_scoped_cleanup": (not pid_alive(pid)) if watch_pid else (process.poll() is not None),
+		"watched_pid": pid}
 
 
 def plan_summary(manifest: dict, manifest_sha: str, root: pathlib.Path, engine_root: pathlib.Path | None):
@@ -380,7 +481,7 @@ def run_one(manifest: dict, manifest_sha: str, job: dict, *, root: pathlib.Path,
 	pilot.validate(manifest, root, engine_root, execution=True)
 	execution_gate(manifest, a5_receipt=a5_receipt, a5_receipt_sha256=a5_receipt_sha256,
 		source_commit=manifest["pins"]["source_commit"], engine_version=manifest["pins"]["engine_version"])
-	if available_ram_bytes() < FREE_RAM_FLOOR: raise ValueError("available RAM below 14 GiB admission floor")
+	if available_ram_bytes() < FREE_RAM_FLOOR: raise ValueError(f"available RAM below {FREE_RAM_FLOOR / 1024**3:.2f} GiB admission floor")
 	queue = ResumeQueue(support_root / "campaign_queue.sqlite", manifest_sha)
 	queue.install(pilot.make_jobs(manifest))
 	queue.recover_orphans(kill_game=lambda cell, pid: kill_owned_pid(pid, executable,
@@ -398,8 +499,14 @@ def run_one(manifest: dict, manifest_sha: str, job: dict, *, root: pathlib.Path,
 	game_support = game_root / "Support"; game_support.mkdir()
 	logs = game_support / "Logs"; logs.mkdir()
 	maps = game_support / "maps" / "cameo" / "{DEV_VERSION}"; maps.mkdir(parents=True)
-	overlay = game_root / "Overlay"; pilot.materialize_dual_arm_ai(root, overlay, job["switch"], manifest.get("ratchet_accepted_switches", []))
-	shutil.copyfile(root / "mods" / "cameo" / "mod.yaml", overlay / "mods" / "cameo" / "mod.yaml")
+	# A thin Overlay/mods/cameo dir is rejected at the ContentPacks mount
+	# (mod.yaml:247) which drops every arm bot type; junctions are refused by
+	# this host. Materialize a full mod tree instead: arm ai/ payload first,
+	# then a hardlink clone of every other mods/cameo entry (same pattern
+	# map_engine_acceptance.py uses against the real mods/ tree).
+	full_mods = game_root / "FullMods"
+	pilot.materialize_dual_arm_ai(root, full_mods, job["switch"], manifest.get("ratchet_accepted_switches", []))
+	link_mod_tree(root / "mods" / "cameo", full_mods / "mods" / "cameo", skip_top=("ai",))
 	variant = maps / ("campaign_" + re.sub(r"[^A-Za-z0-9_.-]", "_", job["cell_id"]))
 	proof = pilot.prove_generated_map(job, root, variant)
 	map_yaml = variant / "map.yaml"; map_yaml_sha = sha(map_yaml)
@@ -407,33 +514,49 @@ def run_one(manifest: dict, manifest_sha: str, job: dict, *, root: pathlib.Path,
 	server_log = logs / "server.log"; driver_log = game_root / "driver.log"
 	if not executable.is_file(): raise ValueError("pinned OpenRA executable missing")
 	args = [str(executable), "Game.Mod=cameo", "Sound.Device=none", "Engine.EngineDir=..",
-		f"Engine.ModSearchPaths={overlay / 'mods'},{root / 'mods'},{engine_root / 'mods'}",
+		f"Engine.ModSearchPaths={full_mods / 'mods'},{root / 'mods'},{engine_root / 'mods'}",
 		f"Engine.SupportDir={game_support}", f"Launch.Map={variant.name}", "Launch.Benchmark=ai-duel-batch-",
 		"Graphics.VSync=False", "Graphics.Mode=Windowed", "Graphics.WindowedSize=640,480"]
 	env = os.environ.copy(); env["CAMEO_DEV_SEED"] = str(job["seed"])
 	with driver_log.open("w", encoding="utf-8") as output:
 		process = subprocess.Popen(args, cwd=engine_root, env=env, stdout=output, stderr=subprocess.STDOUT)
-	queue.set_game_pid(job["cell_id"], process.pid)
+	game_pid = resolve_game_pid(process, game_support)
+	queue.set_game_pid(job["cell_id"], game_pid)
 	def heartbeat(row):
 		if row["private_bytes"] < PRIVATE_LIMIT:
 			slot_counter.heartbeat(job["cell_id"], row["private_bytes"])
 		return "LOW_FREE_RAM" if available_ram_bytes() < FREE_RAM_HARD_FLOOR else None
-	monitor_result = monitor_process(process, driver_log=driver_log, actor_log=server_log, stall_log=logs / "debug.log",
-		sample_callback=heartbeat)
+	# AB_CAMPAIGN_CAP / AB_CAMPAIGN_ACTOR_SAMPLE are written by the batch driver
+	# to driver.log (verified on preserved attempts); server.log carries only
+	# the seed pin line.
+	monitor_result = monitor_process(process, driver_log=driver_log, actor_log=driver_log, stall_log=logs / "debug.log",
+		sample_callback=heartbeat,
+		watch_pid=game_pid if game_pid != process.pid else None,
+		expected_executable=executable, expected_support=game_support)
 	slot_counter.release(job["cell_id"])
 	finished = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
 	log_text = server_log.read_text(encoding="utf-8", errors="replace") if server_log.exists() else ""
+	driver_text = driver_log.read_text(encoding="utf-8", errors="replace") if driver_log.exists() else ""
+	debug_log = logs / "debug.log"
+	debug_text = debug_log.read_text(encoding="utf-8", errors="replace") if debug_log.exists() else ""
+	# A thin overlay whose mod registration fails leaves "Invalid bot type" /
+	# "YamlException" in debug.log; the game then runs brainless seats and can
+	# still produce cap-censored rows — never classify that as a played cell.
+	mod_failed = "Invalid bot type" in debug_text or "YamlException" in debug_text
 	match_rows = batch.read_appended_records(match_log, before)
-	cap_match = re.search(r"AB_CAMPAIGN_CAP tick=(\d+)", log_text)
+	# The cap marker is emitted by the batch driver; check the server log too so a
+	# stream move can never silently turn a capped cell into a stall.
+	cap_match = re.search(r"AB_CAMPAIGN_CAP tick=(\d+)", driver_text) or re.search(r"AB_CAMPAIGN_CAP tick=(\d+)", log_text)
 	seed_line = next((line for line in log_text.splitlines() if f"RandomSeed={job['seed']}" in line and "CAMEO DEV SEED pinned" in line), None)
 	map_yaml_text = map_yaml.read_text(encoding="utf-8")
 	resolved = proof["seats"]
 	known_incomplete = {"MEMORY_KILL", "MEMORY_SAMPLE_FAILED", "LOW_FREE_RAM", "STALL", "WALL_TIMEOUT"}
 	internal_status = monitor_result["end_reason"] if monitor_result["end_reason"] in known_incomplete else "INCOMPLETE"
 	end_reason = monitor_result["end_reason"]
-	if monitor_result["end_reason"] == "PROCESS_EXIT" and monitor_result["exit_code"] == 0 and seed_line and len(match_rows) == job["required_seats"]:
+	if monitor_result["end_reason"] == "PROCESS_EXIT" and monitor_result["exit_code"] == 0 and seed_line and len(match_rows) == job["required_seats"] and not mod_failed:
 		if cap_match and int(cap_match.group(1)) >= CAP_TICK: internal_status="CENSORED_CAP"; end_reason="cap"
 		else: internal_status="NATURAL_END"; end_reason="natural"
+	if mod_failed: internal_status="INCOMPLETE"; end_reason="INVALID_MOD_REGISTRATION"
 	internal = {"cell_id":job["cell_id"], "manifest_sha256":manifest_sha, "switch":job["switch"], "setup":job["setup"], "map":job["map"], "map_sha256":job["map_sha256"], "seed":job["seed"], "pair":job["pair"], "game_in_pair":job["game_in_pair"], "control_side":job["control_side"], "treatment_side":job["treatment_side"], "arm_bot_types":job["arm_bot_types"], "status":internal_status, "end_reason":end_reason, "cap_marker":bool(cap_match), "cap_tick":int(cap_match.group(1)) if cap_match else None, "support_complete":len(match_rows)==job["required_seats"], "seat_proof_source":"generated_map.yaml", "map_yaml_sha256":map_yaml_sha, "seats":resolved, "peak_memory_bytes":monitor_result["peak_private_bytes"], "duration_ticks":int(cap_match.group(1)) if cap_match else None}
 	classification = pilot.adjudicate(match_rows, internal, job, manifest_sha)
 	end_class = {"CENSORED_CAP":"CAP", "TREATMENT_WIN":"NATURAL", "CONTROL_WIN":"NATURAL"}.get(classification["verdict"], "INCOMPLETE")
@@ -461,7 +584,7 @@ def run_one(manifest: dict, manifest_sha: str, job: dict, *, root: pathlib.Path,
 		"teams":team_obj,"resolved_seats":resolved_out,"end_class":end_class,"end_reason":end_reason,
 		"winner_team":classification.get("winner_side") if end_class=="NATURAL" else None,"world_tick":monitor_result["samples"][-1]["world_tick"] if monitor_result["samples"] else None,
 		"cap":{"world_tick_cap":CAP_TICK,"marker_observed":bool(cap_match),"marker_tick":int(cap_match.group(1)) if cap_match else None},
-		"memory":{"process_id":process.pid,"peak_private_bytes":monitor_result["peak_private_bytes"],"limit_private_bytes":PRIVATE_LIMIT,"samples":monitor_result["samples"]},
+		"memory":{"process_id":game_pid,"peak_private_bytes":monitor_result["peak_private_bytes"],"limit_private_bytes":PRIVATE_LIMIT,"samples":monitor_result["samples"]},
 		"runtime":{"started_utc":started,"finished_utc":finished,"exit_code":monitor_result["exit_code"],"wall_seconds":monitor_result["wall_seconds"],"stall_seconds":180,"pid_scoped_cleanup":monitor_result["pid_scoped_cleanup"]},
 		"artifacts":{"server_log":_file_artifact(server_log),"driver_log":_file_artifact(driver_log),"matches_jsonl":_file_artifact(match_log),"replay":_file_artifact(next(iter(game_root.rglob("*.orarep")), None)),"map_yaml":_file_artifact(map_yaml),"support_bundle":_file_artifact(bundle)}}
 	validate_receipt(receipt)

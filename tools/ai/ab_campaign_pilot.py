@@ -30,20 +30,23 @@ SETUPS = [
  ("3v3_winter_asg",3,"winters_end_rich",("ra1_allies","ra1_soviets","td_gdi")),("3v3_winter_sgn",3,"winters_end_rich",("ra1_soviets","td_gdi","td_nod")),
  ("4v4_sahara",4,"great_sahara_2",("td_gdi","td_nod","ra1_allies","ra1_soviets")),("4v4_ice",4,"ice_cold",("td_gdi","td_nod","ra1_allies","ra1_soviets")),
 ]
-# Latest measured headless peak in the acceptance receipt (5,623,365,632 B)
-# plus the maintainer's 3 GiB headroom. Re-measure on the final engine/host
-# before freezing the executable manifest. Admission rounds 2*peak + 3 GiB
-# upward to 14 GiB for two concurrent 1v1/2v2 cells.
+# Latest measured headless peak in the acceptance receipt (5,623,365,632 B).
+# Re-measure on the final engine/host before freezing the executable manifest.
+# Maintainer ruling 2026-10-11 04:50Z: the 10.5 GiB per-process cap is
+# unchanged (startup bursts reach ~9.5 GiB); single-game admission =
+# measured peak + 3 GiB hard reserve (~8.24 GiB); a second concurrent
+# 1v1/2v2 cell additionally requires >= 14 GiB free; 3v3/4v4 run alone.
 HEADLESS_PEAK_BYTES = 5623365632
-PROCESS_CAP_BYTES = HEADLESS_PEAK_BYTES + 3 * 1024**3
-RAM_FLOOR_BYTES = 14 * 1024**3
+PROCESS_CAP_BYTES = int(10.5 * 1024**3)
+RAM_FLOOR_BYTES = HEADLESS_PEAK_BYTES + 3 * 1024**3
+PARALLEL_RAM_FLOOR_BYTES = 14 * 1024**3
 ROUND_STAGES = [16,32,48,64]
 ECONOMY_INTERVAL_TICKS = tuple(range(5000, 45001, 5000))
 FIX_SAFETY_SWITCHES = frozenset("K_cn2_unit_repair AL_emergency_net_loss AN_combat_veto AG_assault_fanout BJ_squad_hysteresis BK_squad_order_dedup BL_protection_episode_guard BN_squad_pool_fixes BO_squad_move_dedup".split())
 _, _ALL_GROUPS, _ = increment.load_spec(pathlib.Path(__file__).with_name("increment_switches.yaml"))
 BEHAVIOR_SWITCHES = tuple(name for name in _ALL_GROUPS if name not in FIX_SAFETY_SWITCHES)
 DEFAULT_THRESHOLDS = {"early_accept_share":0.75,"early_reject_share":0.25,"win_noninferiority_delta":0.0,"min_earned_spent_improvement":0.0,"min_army_efficiency_improvement":0.0,"min_kill_exchange_improvement":0.0}
-SLOT_POLICY={"max_parallel_small_games":2,"small_team_size_max":2,"large_game_exclusive":True,"min_free_ram_bytes":RAM_FLOOR_BYTES,"max_private_bytes":PROCESS_CAP_BYTES,"headless_peak_bytes":HEADLESS_PEAK_BYTES,"process_headroom_bytes":3*1024**3}
+SLOT_POLICY={"max_parallel_small_games":2,"small_team_size_max":2,"large_game_exclusive":True,"min_free_ram_bytes":RAM_FLOOR_BYTES,"parallel_min_free_ram_bytes":PARALLEL_RAM_FLOOR_BYTES,"max_private_bytes":PROCESS_CAP_BYTES,"headless_peak_bytes":HEADLESS_PEAK_BYTES,"process_headroom_bytes":3*1024**3}
 
 def treatment_baseline(accepted_switches, candidate):
  """Ratchet rule: accepted groups stay in control; treatment adds one candidate."""
@@ -76,11 +79,14 @@ def acceptance_decision(*, rounds, treatment_wins, control_wins, economy_not_wor
 def regression_due(accepted_count):
  return accepted_count>0 and accepted_count%5==0
 
-def slots_available(team_size, free_ram_bytes, active_private_bytes=(), active_slots=0, active_team_sizes=(), max_small_slots=3):
+def slots_available(team_size, free_ram_bytes, active_private_bytes=(), active_slots=0, active_team_sizes=(), max_small_slots=2):
  """Admission policy for the amended slot counter; callers still need OS memory monitoring."""
  if free_ram_bytes<RAM_FLOOR_BYTES or any(x>=PROCESS_CAP_BYTES for x in active_private_bytes): return False
  if team_size>=3: return active_slots==0
- return active_slots<max_small_slots and not any(size>=3 for size in active_team_sizes)
+ if active_slots>=max_small_slots or any(size>=3 for size in active_team_sizes): return False
+ # Ruling 04:50Z: a second small game needs the 14 GiB parallel floor, not the single-game floor.
+ if active_slots>=1 and free_ram_bytes<PARALLEL_RAM_FLOOR_BYTES: return False
+ return True
 
 class SqliteSlotCounter:
  """Process-shared lease counter. Runtime must heartbeat and monitor process/RAM continuously."""
@@ -469,6 +475,15 @@ def adjudicate(records, receipt, job, manifest_sha):
   return {"verdict":"INVALID_UNKNOWN","reason":"seat assignment/bot binding differs from planned arms"}
  expected_seats={s["home"]:s for s in job["seat_assignments"]}
  if set(byhome)!=set(expected_seats): return {"verdict":"INVALID_UNKNOWN","reason":"resolved homes differ from planned spawn rotation"}
+ # A seat records its declared bot type even when the engine rejected it, so a
+ # brainless seat (overlay mod failed to register) still produces rows. Every
+ # timeline staying at exactly zero earned/spent means no AI economy ever ran —
+ # such a cell is a fixture failure, never a playable result or a cap censor.
+ def _flat(r):
+  t=normalized_timeline(r)
+  return bool(t) and all((row.get("earned") or 0)==0 and (row.get("spent") or 0)==0 for row in t)
+ if records and all(_flat(r) for r in records):
+  return {"verdict":"DEGENERATE_NO_ECONOMY","reason":"all seats recorded zero earned/spent across every timeline sample — seat bots never ran (check debug.log for 'Invalid bot type' / overlay mod registration failure)"}
  for home,seat in byhome.items():
   expected=expected_seats[home]
   if any(seat.get(k)!=expected[k] for k in ("spawn","side","arm","bot_type","faction")):

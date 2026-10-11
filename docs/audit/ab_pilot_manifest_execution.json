@@ -259,8 +259,8 @@
       ]
     }
   ],
-  "execution_approved": true,
-  "notes": "execution manifest; approved by maintainer 2026-10-11 (lead order: launch BU pilot)",
+  "execution_approved": false,
+  "notes": "REVOKED 2026-10-11: pinned engine 6da7fce14d is superseded by the sprite-load-wave merge 4f69df005f (ruling 04:50Z #2) and every attempted cell ran brainless seats (overlay mod registration failure). A new manifest must be regenerated on the fixed runner + new engine pin and re-approved before any outcome cell.",
   "a5_parity_receipt_sha256": "6f4f827637693074331769bcde9d8c138a8554140fb0149118881c6d79064707",
   "a5_parity_receipt_path": "results/campaign-a5-fixed-tick-parity-20261010-attempt2/A5_parity_gate_receipt.json"
 }
