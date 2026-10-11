@@ -33,6 +33,8 @@ ACTOR_SAMPLE_INTERVAL = 5000
 SLOT_PARALLEL_SMALL = 3
 SMALL_TEAM_MAX = 2
 ACTOR_SAMPLE_RE = re.compile(r"AB_CAMPAIGN_ACTOR_SAMPLE tick=(\d+) actor_count=(\d+)")
+SEAT_DEPLOYED_RE = re.compile(r"AB_CAMPAIGN_SEAT_DEPLOYED seat=([A-Za-z0-9_.-]+) tick=(\d+) actor_count=(\d+)")
+DEPLOYMENT_CHECK_RE = re.compile(r"AB_CAMPAIGN_DEPLOYMENT_CHECK tick=(\d+) seat_count=(\d+)")
 RECEIPT_SCHEMA = pathlib.Path(__file__).with_name("ab_campaign_receipt.schema.json")
 
 
@@ -46,6 +48,14 @@ def sha(path: pathlib.Path) -> str:
 
 def parse_actor_samples(text: str) -> list[dict]:
 	return [{"world_tick": int(t), "actor_count": int(n)} for t, n in ACTOR_SAMPLE_RE.findall(text)]
+
+
+def parse_deployment_evidence(text: str) -> dict:
+	checks = DEPLOYMENT_CHECK_RE.findall(text)
+	seats = SEAT_DEPLOYED_RE.findall(text)
+	return {"check_tick": int(checks[-1][0]) if checks else None,
+		"reported_seat_count": int(checks[-1][1]) if checks else None,
+		"seats": {name: {"tick": int(tick), "actor_count": int(count)} for name, tick, count in seats}}
 
 
 def pid_alive(pid: int | None) -> bool:
@@ -205,6 +215,11 @@ class ResumeQueue:
 			cur = db.execute("UPDATE cells SET status=?,updated=?,receipt_path=? WHERE cell_id=? AND status='RUNNING'", (status, time.time(), str(receipt_path), cell_id))
 			if cur.rowcount != 1: raise ValueError("cell not owned by this queue runner")
 
+	def park_planned(self, reason: str):
+		if reason != "INVALID_NO_DEPLOY": raise ValueError("unsupported queue stop reason")
+		with self.connect() as db:
+			return db.execute("UPDATE cells SET status='PARKED_INVALID_NO_DEPLOY',updated=? WHERE status='PLANNED'", (time.time(),)).rowcount
+
 	def counts(self) -> dict[str, int]:
 		with self.connect() as db:
 			return dict(db.execute("SELECT status,count(*) FROM cells GROUP BY status").fetchall())
@@ -286,7 +301,7 @@ def execution_gate(manifest: dict, *, a5_receipt: dict | None, a5_receipt_sha256
 def monitor_process(process, *, driver_log: pathlib.Path, actor_log: pathlib.Path,
 				stall_log: pathlib.Path | None = None,
 				wall_timeout: int = 3000, stall_timeout: int = 180,
-				poll_seconds: float = 2.0, sample_callback=None,
+				poll_seconds: float = 2.0, sample_callback=None, required_seats=None,
 				clock=time.monotonic, sleep=time.sleep) -> dict:
 	"""Watch one owned process; any stop targets only the supplied Popen handle."""
 	if wall_timeout != 3000 or stall_timeout != 180 or poll_seconds <= 0:
@@ -300,6 +315,7 @@ def monitor_process(process, *, driver_log: pathlib.Path, actor_log: pathlib.Pat
 	stop_reason = None
 	actor_offset = 0
 	last_actor = {"world_tick": None, "actor_count": None}
+	deployment = {"verified": False, "check_tick": None, "seats": {}}
 	while process.poll() is None:
 		sleep(poll_seconds)
 		try:
@@ -319,6 +335,16 @@ def monitor_process(process, *, driver_log: pathlib.Path, actor_log: pathlib.Pat
 				actor_stream.seek(actor_offset); chunk = actor_stream.read(); actor_offset = actor_stream.tell()
 				new_actors = parse_actor_samples(chunk)
 				if new_actors: last_actor = new_actors[-1]
+				new_deployment = parse_deployment_evidence(chunk)
+				deployment["seats"].update(new_deployment["seats"])
+				if new_deployment["check_tick"] is not None:
+					deployment["check_tick"] = new_deployment["check_tick"]
+					if required_seats is not None:
+						valid = new_deployment["check_tick"] == 100 and new_deployment["reported_seat_count"] == len(required_seats) and all(
+							seat in deployment["seats"] and deployment["seats"][seat]["tick"] == 100 and deployment["seats"][seat]["actor_count"] > 0
+							for seat in required_seats)
+						deployment["verified"] = valid
+						if not valid: stop_reason = "INVALID_NO_DEPLOY"
 		actor_count = last_actor["actor_count"]
 		world_tick = last_actor["world_tick"]
 		row = {"utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()), "world_tick": world_tick,
@@ -331,15 +357,19 @@ def monitor_process(process, *, driver_log: pathlib.Path, actor_log: pathlib.Pat
 				stop_reason = "MEMORY_SAMPLE_FAILED"; break
 			if requested_stop:
 				stop_reason = str(requested_stop); break
+		if stop_reason == "INVALID_NO_DEPLOY": break
 		if private >= PRIVATE_LIMIT: stop_reason = "MEMORY_KILL"; break
 		if clock() - last_activity > stall_timeout: stop_reason = "STALL"; break
 		if clock() >= deadline: stop_reason = "WALL_TIMEOUT"; break
+	if required_seats is not None and not deployment["verified"] and stop_reason is None:
+		stop_reason = "INVALID_NO_DEPLOY"
 	if stop_reason is not None and process.poll() is None:
 		process.kill()  # Popen.kill terminates this process handle/PID only.
 		process.wait()
 	return {"end_reason": stop_reason or "PROCESS_EXIT", "exit_code": process.poll(),
 		"wall_seconds": max(0, clock() - start), "peak_private_bytes": peak,
-		"samples": private_samples, "pid_scoped_cleanup": process.poll() is not None}
+		"samples": private_samples, "pid_scoped_cleanup": process.poll() is not None,
+		"deployment": deployment}
 
 
 def plan_summary(manifest: dict, manifest_sha: str, root: pathlib.Path, engine_root: pathlib.Path | None):
@@ -409,7 +439,7 @@ def run_one(manifest: dict, manifest_sha: str, job: dict, *, root: pathlib.Path,
 			slot_counter.heartbeat(job["cell_id"], row["private_bytes"])
 		return "LOW_FREE_RAM" if available_ram_bytes() < FREE_RAM_HARD_FLOOR else None
 	monitor_result = monitor_process(process, driver_log=driver_log, actor_log=server_log, stall_log=logs / "debug.log",
-		sample_callback=heartbeat)
+		sample_callback=heartbeat, required_seats=[seat["home"] for seat in job["seat_assignments"]])
 	slot_counter.release(job["cell_id"])
 	finished = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
 	log_text = server_log.read_text(encoding="utf-8", errors="replace") if server_log.exists() else ""
@@ -418,7 +448,7 @@ def run_one(manifest: dict, manifest_sha: str, job: dict, *, root: pathlib.Path,
 	seed_line = next((line for line in log_text.splitlines() if f"RandomSeed={job['seed']}" in line and "CAMEO DEV SEED pinned" in line), None)
 	map_yaml_text = map_yaml.read_text(encoding="utf-8")
 	resolved = proof["seats"]
-	known_incomplete = {"MEMORY_KILL", "MEMORY_SAMPLE_FAILED", "LOW_FREE_RAM", "STALL", "WALL_TIMEOUT"}
+	known_incomplete = {"MEMORY_KILL", "MEMORY_SAMPLE_FAILED", "LOW_FREE_RAM", "STALL", "WALL_TIMEOUT", "INVALID_NO_DEPLOY"}
 	internal_status = monitor_result["end_reason"] if monitor_result["end_reason"] in known_incomplete else "INCOMPLETE"
 	end_reason = monitor_result["end_reason"]
 	if monitor_result["end_reason"] == "PROCESS_EXIT" and monitor_result["exit_code"] == 0 and seed_line and len(match_rows) == job["required_seats"]:
@@ -427,7 +457,7 @@ def run_one(manifest: dict, manifest_sha: str, job: dict, *, root: pathlib.Path,
 	internal = {"cell_id":job["cell_id"], "manifest_sha256":manifest_sha, "switch":job["switch"], "setup":job["setup"], "map":job["map"], "map_sha256":job["map_sha256"], "seed":job["seed"], "pair":job["pair"], "game_in_pair":job["game_in_pair"], "control_side":job["control_side"], "treatment_side":job["treatment_side"], "arm_bot_types":job["arm_bot_types"], "status":internal_status, "end_reason":end_reason, "cap_marker":bool(cap_match), "cap_tick":int(cap_match.group(1)) if cap_match else None, "support_complete":len(match_rows)==job["required_seats"], "seat_proof_source":"generated_map.yaml", "map_yaml_sha256":map_yaml_sha, "seats":resolved, "peak_memory_bytes":monitor_result["peak_private_bytes"], "duration_ticks":int(cap_match.group(1)) if cap_match else None}
 	classification = pilot.adjudicate(match_rows, internal, job, manifest_sha)
 	end_class = {"CENSORED_CAP":"CAP", "TREATMENT_WIN":"NATURAL", "CONTROL_WIN":"NATURAL"}.get(classification["verdict"], "INCOMPLETE")
-	if end_class == "INCOMPLETE": end_reason = classification.get("reason") or end_reason
+	if end_class == "INCOMPLETE" and end_reason != "INVALID_NO_DEPLOY": end_reason = classification.get("reason") or end_reason
 	match_by_home = {(r.get("player") or {}).get("home"): r for r in match_rows}
 	resolved_out = []
 	for seat in resolved:
@@ -458,6 +488,7 @@ def run_one(manifest: dict, manifest_sha: str, job: dict, *, root: pathlib.Path,
 	receipt_path = support_root / "receipts" / (re.sub(r"[^A-Za-z0-9_.-]", "_", job["cell_id"]) + ".json")
 	atomic_receipt(receipt_path, receipt)
 	queue.finish(job["cell_id"], end_class, receipt_path)
+	if end_reason == "INVALID_NO_DEPLOY": queue.park_planned(end_reason)
 	return receipt
 
 

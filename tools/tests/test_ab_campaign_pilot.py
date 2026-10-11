@@ -49,6 +49,9 @@ class PilotPlanTests(unittest.TestCase):
    pilot.install_campaign_monitor(dest,2,cap_tick=1000,sample_interval=500)
    monitor=(dest/"ab_campaign_monitor.lua").read_text(encoding="utf-8")
   self.assertIn("MarkFailedObjective",monitor)
+  self.assertIn("AB_CAMPAIGN_SEAT_DEPLOYED seat=",monitor)
+  self.assertIn("AB_CAMPAIGN_DEPLOYMENT_CHECK tick=",monitor)
+  self.assertIn("Trigger.AfterDelay(DeploymentTick, VerifySeatDeployment)",monitor)
   self.assertIn("AB_CAMPAIGN_CAP tick=",monitor)
 
  def test_runtime_overlay_copies_all_mod_includes_and_outpost2_bot_rules(self):

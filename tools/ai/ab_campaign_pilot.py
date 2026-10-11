@@ -348,10 +348,13 @@ def dry_run(m,root,engine_root=None,minutes_per_game=8.5,setup_hours=2.0):
 def install_campaign_monitor(dest,seat_count,cap_tick=45000,sample_interval=5000,rules_filename="duel_rules.yaml",seat_names=None):
  """Install map-local actor-count sampling and an explicit all-seat censor marker."""
  require(seat_count in (2,4,6,8) and type(cap_tick) is int and 1000<=cap_tick<=45000 and 0<sample_interval<=cap_tick,"campaign monitor bounds")
- names=", ".join(json.dumps(name) for name in (seat_names or [f"Multi{i}" for i in range(seat_count)]))+', "Neutral", "Creeps"'
+ campaign_seat_names=", ".join(json.dumps(name) for name in (seat_names or [f"Multi{i}" for i in range(seat_count)]))
+ names=campaign_seat_names+', "Neutral", "Creeps"'
  lua=f'''local SeatNames = {{{names}}}
+local CampaignSeatNames = {{{campaign_seat_names}}}
 local CapTick = {cap_tick}
 local SampleInterval = {sample_interval}
+local DeploymentTick = 100
 local Objectives = {{}}
 local function SampleActors()
 \tlocal total = 0
@@ -361,9 +364,21 @@ local function SampleActors()
 \tend
 \tprint("AB_CAMPAIGN_ACTOR_SAMPLE tick=" .. DateTime.GameTime .. " actor_count=" .. total)
 end
+local function VerifySeatDeployment()
+\tlocal deployed = 0
+\tfor _, name in ipairs(CampaignSeatNames) do
+\t\tlocal player = Player.GetPlayer(name)
+\t\tlocal count = 0
+\t\tif player then for _, actor in ipairs(player.GetActors()) do if actor.Type ~= "player" then count = count + 1 end end end
+\t\tif count > 0 then deployed = deployed + 1 end
+\t\tprint("AB_CAMPAIGN_SEAT_DEPLOYED seat=" .. name .. " tick=" .. DateTime.GameTime .. " actor_count=" .. count)
+\tend
+\tprint("AB_CAMPAIGN_DEPLOYMENT_CHECK tick=" .. DateTime.GameTime .. " seat_count=" .. deployed)
+end
 WorldLoaded = function()
 \tfor _, name in ipairs(SeatNames) do local p = Player.GetPlayer(name); if p then Objectives[name] = p.AddPrimaryObjective("Campaign observation cap") end end
 \tprint("AB_CAMPAIGN_STARTED tick=" .. DateTime.GameTime .. " cap=" .. CapTick)
+\tTrigger.AfterDelay(DeploymentTick, VerifySeatDeployment)
 \tfor tick = SampleInterval, CapTick - SampleInterval, SampleInterval do Trigger.AfterDelay(tick, SampleActors) end
 \tTrigger.AfterDelay(CapTick, function()
 \t\tSampleActors(); print("AB_CAMPAIGN_CAP tick=" .. DateTime.GameTime)
@@ -432,7 +447,7 @@ def adjudicate(records, receipt, job, manifest_sha):
  if any(receipt.get(k)!=job[k] for k in ("switch","setup","map","map_sha256","seed","pair","game_in_pair")):
   return {"verdict":"INVALID_UNKNOWN","reason":"receipt disagrees with planned job"}
  status=receipt.get("status")
- if status in ("CRASH","INCOMPLETE","MEMORY_KILL","MEMORY_SAMPLE_FAILED","LOW_FREE_RAM","WALL_TIMEOUT","STALL","PROCESS_DIED"):
+ if status in ("CRASH","INCOMPLETE","INVALID_NO_DEPLOY","MEMORY_KILL","MEMORY_SAMPLE_FAILED","LOW_FREE_RAM","WALL_TIMEOUT","STALL","PROCESS_DIED"):
   return {"verdict":"INCOMPLETE_UNKNOWN","reason":status}
  cap=status=="CENSORED_CAP"
  if cap and not (receipt.get("cap_marker") is True and receipt.get("cap_tick")==45000 and receipt.get("support_complete") is True):

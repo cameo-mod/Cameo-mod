@@ -41,6 +41,37 @@ class CampaignRunnerTests(unittest.TestCase):
 			with self.assertRaises(FileExistsError):
 				runner.atomic_receipt(path, {"end_class": "CAP", "winner_team": None})
 
+	def test_deployment_parser_reports_each_seat(self):
+		parsed = runner.parse_deployment_evidence("AB_CAMPAIGN_SEAT_DEPLOYED seat=Multi0 tick=100 actor_count=5\nAB_CAMPAIGN_SEAT_DEPLOYED seat=Multi1 tick=100 actor_count=0\nAB_CAMPAIGN_DEPLOYMENT_CHECK tick=100 seat_count=1")
+		self.assertEqual(100, parsed["check_tick"])
+		self.assertEqual(1, parsed["reported_seat_count"])
+		self.assertEqual(5, parsed["seats"]["Multi0"]["actor_count"])
+		self.assertEqual(0, parsed["seats"]["Multi1"]["actor_count"])
+
+	def test_missing_deployed_seat_kills_owned_process(self):
+		class FakeProcess:
+			pid=4242
+			def __init__(self): self.rc=None;self.killed=False
+			def poll(self): return self.rc
+			def kill(self): self.killed=True;self.rc=-9
+			def wait(self): return self.rc
+		with tempfile.TemporaryDirectory() as temp:
+			p=FakeProcess();d=pathlib.Path(temp)/"driver.log";a=pathlib.Path(temp)/"actor.log"
+			def emit(_): a.write_text("AB_CAMPAIGN_SEAT_DEPLOYED seat=Multi0 tick=100 actor_count=5\nAB_CAMPAIGN_SEAT_DEPLOYED seat=Multi1 tick=100 actor_count=0\nAB_CAMPAIGN_DEPLOYMENT_CHECK tick=100 seat_count=1",encoding="utf-8")
+			with patch.object(runner,"private_bytes",return_value=1), patch.object(runner,"available_ram_bytes",return_value=runner.FREE_RAM_FLOOR):
+				result=runner.monitor_process(p,driver_log=d,actor_log=a,sleep=emit,required_seats=["Multi0","Multi1"])
+		self.assertTrue(p.killed)
+		self.assertEqual("INVALID_NO_DEPLOY",result["end_reason"])
+		self.assertFalse(result["deployment"]["verified"])
+
+	def test_no_deploy_parks_remaining_claim_once_queue(self):
+		with tempfile.TemporaryDirectory() as temp:
+			q=runner.ResumeQueue(pathlib.Path(temp)/"queue.sqlite","a"*64)
+			q.install([{"cell_id":"one"},{"cell_id":"two"}])
+			self.assertEqual(2,q.park_planned("INVALID_NO_DEPLOY"))
+			self.assertEqual({"PARKED_INVALID_NO_DEPLOY":2},q.counts())
+			self.assertIsNone(q.claim("one",123))
+
 	def test_bounds_and_parallel_policy(self):
 		self.assertEqual(int(10.5 * 1024**3), runner.PRIVATE_LIMIT)
 		self.assertEqual(int(15.5 * 1024**3), runner.FREE_RAM_FLOOR)
