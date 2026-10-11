@@ -122,6 +122,25 @@ class Pairing(unittest.TestCase):
         verdict = az.classify_pair({0: az.validate_and_tag(matched_pair()[0])})
         self.assertEqual(verdict["status"], "INCOMPLETE")
 
+    def test_synthetic_no_receipt_paired_with_a_real_natural_is_incomplete_not_invalid(self):
+        """Found by running against a real receipt batch + the real execution
+        manifest: a NO_RECEIPT placeholder (materialize_missing) has empty `teams`,
+        which must not be run through side_swap_consistent (it would fail and get
+        misclassified as a data-integrity INVALID instead of INCOMPLETE)."""
+        real = az.validate_and_tag(matched_pair()[0])
+        placeholder = {"_valid": True, "_invalid_reason": None, "_synthetic": True,
+                        "end_class": az.INCOMPLETE, "end_reason": "NO_RECEIPT",
+                        "winner_team": None, "teams": {}, "resolved_seats": []}
+        verdict = az.classify_pair({0: real, 1: placeholder})
+        self.assertEqual(verdict["status"], "INCOMPLETE")
+
+    def test_two_synthetic_no_receipts_are_incomplete_not_invalid(self):
+        placeholder = {"_valid": True, "_invalid_reason": None, "_synthetic": True,
+                        "end_class": az.INCOMPLETE, "end_reason": "NO_RECEIPT",
+                        "winner_team": None, "teams": {}, "resolved_seats": []}
+        verdict = az.classify_pair({0: dict(placeholder), 1: dict(placeholder)})
+        self.assertEqual(verdict["status"], "INCOMPLETE")
+
     def test_duplicate_pair_member_flagged_invalid(self):
         a, b = matched_pair()
         b["pair_member"] = 0

@@ -207,17 +207,23 @@ def classify_pair(members: dict[int, dict]) -> dict[str, Any]:
     a, b = members[0], members[1]
     if "_duplicate_with" in a or "_duplicate_with" in b:
         return {"status": "INVALID", "reason": "duplicate pair member", "natural": False}
+    end_classes = {a.get("end_class"), b.get("end_class")}
+    # Check INCOMPLETE (including synthetic NO_RECEIPT placeholders, whose `teams` is
+    # deliberately empty) before side_swap_consistent: a placeholder/attempt that never
+    # resolved real team/arm data would otherwise fail the side-swap check and get
+    # misclassified as a data-integrity INVALID instead of the correct INCOMPLETE. Found
+    # by running against a real receipt batch + the real execution manifest, where most
+    # planned pairs are materialized NO_RECEIPT.
+    if INCOMPLETE in end_classes:
+        return {"status": INCOMPLETE, "reason": "at least one member incomplete", "natural": False}
     if not side_swap_consistent(a, b):
         return {"status": "INVALID", "reason": "matched-pair side-swap proof missing/inconsistent", "natural": False}
-    end_classes = {a.get("end_class"), b.get("end_class")}
     if end_classes == {NATURAL}:
         wa, wb = treatment_won(a), treatment_won(b)
         if wa is None or wb is None:
             return {"status": "INVALID", "reason": "natural end lacks unambiguous winner", "natural": False}
         diff = int(wa) + int(wb) - 1  # +1 treatment swept, 0 split, -1 control swept
         return {"status": NATURAL, "reason": "natural end, both members", "natural": True, "win_diff": diff}
-    if INCOMPLETE in end_classes:
-        return {"status": INCOMPLETE, "reason": "at least one member incomplete", "natural": False}
     if CAP in end_classes:
         return {"status": CAP, "reason": "at least one member capped, none incomplete", "natural": False}
     return {"status": "INVALID", "reason": "unrecognized end_class combination", "natural": False}
