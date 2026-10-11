@@ -19,6 +19,43 @@ using OpenRA.Traits;
 
 namespace OpenRA.Mods.Cameo.Traits.BotModules
 {
+	// Record-only lifecycle of this provider's published defence request. An observed
+	// false -> true admission mints once; pulses never renew identity. No target/tick input.
+	internal sealed class BotDefenceClaimEpisodes
+	{
+		readonly BotClaimEpisodeCounter counter;
+		bool active;
+		BotClaimEpisode episode;
+
+		public BotDefenceClaimEpisodes(string participantId, int providerInstance)
+		{
+			counter = new BotClaimEpisodeCounter(participantId, nameof(MasterAiBotModule), providerInstance);
+		}
+
+		public BotClaimEpisode Observe(bool requestsDefence)
+		{
+			if (!requestsDefence)
+			{
+				active = false;
+				episode = default;
+			}
+			else if (!active)
+			{
+				active = true;
+				episode = counter.Admit();
+			}
+
+			return episode;
+		}
+
+		public void Invalidate()
+		{
+			counter.Invalidate();
+			active = false;
+			episode = default;
+		}
+	}
+
 	public enum BotUrgency { Normal, Pressured, Emergency }
 
 	public sealed class EnemyProfile
@@ -597,6 +634,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		// same per-snapshot point as the Director fold and published through
 		// IBotTeamMember; a disabled or never-snapshotted master reads Empty instead.
 		TeamBroadcast broadcast = TeamBroadcast.Empty;
+		readonly BotDefenceClaimEpisodes defenceClaimEpisodes;
 
 		// TC-3 (AI_ARCHITECTURE §12.18): the coalition directive folded from own +
 		// allied broadcasts at the same snapshot cadence and published through
@@ -915,6 +953,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			: base(info)
 		{
 			player = self.Owner;
+			defenceClaimEpisodes = new BotDefenceClaimEpisodes(player.InternalName,
+				self.Info.TraitInfos<MasterAiBotModuleInfo>().ToList().IndexOf(info));
 			fogMemory = new BotFogMemory(player, info);
 			influenceLayers = new BotInfluenceLayers(info);
 			costCountersInitialized = !player.World.IsLoadingGameSave;
@@ -1344,7 +1384,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				player.ClientIndex,
 				expansionClaim.HasValue ? player.World.Map.CenterOfCell(expansionClaim.Value) : WPos.Zero,
 				armyCentroid: armyCentroid, expansionAssist: expansionAssist, spawnPoint: spawnPoint,
-				captureClaims: captureClaims, participantId: player.InternalName);
+				captureClaims: captureClaims, participantId: player.InternalName,
+				defenceEpisode: defenceClaimEpisodes.Observe(requestsDefence));
+			// ExpansionAssistTarget has no owner-produced admission episode API. Its
+			// metadata remains UNKNOWN; a snapshot/location cannot manufacture one.
 
 			// TC-3 (§12.18): fold own + allied broadcasts into the coalition directive —
 			// every member runs the identical function over the identical set, so all
@@ -2249,6 +2292,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		void IGameSaveTraitData.ResolveTraitData(Actor self, MiniYaml data)
 		{
+			// Legacy saved state has no defence admission history. Preserve save/gameplay
+			// behavior, but never recycle a known identity after restoration.
+			defenceClaimEpisodes.Invalidate();
 			if (self.World.IsReplay)
 				return;
 
