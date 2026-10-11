@@ -76,3 +76,13 @@ While diagnosing the MCV symptom I ran `clean_prelaunch.py`, which removed the i
 - Engine: `devin/sprite-load-wave@d4d3c78e9e` merged into the pinned engine line as `4f69df005fe0d893526890fcb5bbc42e442d6fd6` on `devin/cameo-engine-merge-sprite-wave`; commit is contained in `origin/cameo-engine`.
 - Cameo pin: `ENGINE_VERSION=4f69df005fe0d893526890fcb5bbc42e442d6fd6` in `mod.config` on `devin/engine-bump-sprite-wave@fb7faffaf`, pushed to origin, based on master chain (base `2209a6e7b`).
 - Pending: Luna Manager exact-SHA review (render/load-only), then DevOps reruns fixed-tick A5 on `e49acf41` with the new binary before any pilot outcome cell.
+
+## 2026-10-11 — degenerate-game guard landed (`codex/ab-campaign-tooling-manager@c259a8ceb`)
+
+Root cause review showed the runner/adjudicator only checked that each row's *declared* `bot_type` matched the seat plan — but the engine emits that declared string even when the bot was rejected, so all four brainless-seat attempts would have survived bot-type checks. Two fail-closed additions on `codex/ab-campaign-tooling-manager` for DevOps to fold into `codex/ab-campaign`:
+
+1. `ab_campaign_pilot.py::adjudicate` — new `DEGENERATE_NO_ECONOMY` verdict: if every seat's entire stats timeline stays at exactly zero earned/spent, the cell is a fixture failure, never a cap-censor or a win/loss. Placed before outcome validation and before the cap branch so `undecided`-outcome degenerate rows and cap-flagged degenerate rows both land here (mapped INCOMPLETE downstream).
+2. `campaign_runner.py::run_cell` — `debug.log` scan for `Invalid bot type` / `YamlException`; any marker forces `INCOMPLETE` / `INVALID_MOD_REGISTRATION` even when `PROCESS_EXIT` was clean and all seats produced rows.
+3. New test `test_adjudicator_rejects_allzero_economy_degenerate_cell`: all-zero-timeline cap cell → `DEGENERATE_NO_ECONOMY`; one non-flat seat clears the sentinel (no false positive on partial activity).
+
+Focused tests 20/20 PASS, `py_compile` clean. Still open on `codex/ab-campaign` (reported to DevOps, not yet landed): full-tree overlay materialization, transient-PID hardening (`a12ff4aa4`), RAM floor correction (15.5 GiB → ruling's headless-peak+3 GiB ≈ 8.24 GiB single-game), stale execution manifest (old engine `6da7fce`, `execution_approved: True`) still able to drive a run — revoke or gate it before any launch.
