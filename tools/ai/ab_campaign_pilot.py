@@ -315,7 +315,7 @@ def validate(manifest,root,engine_root=None,execution=False):
  basepath=(root/pathlib.PurePosixPath(manifest.get("baseline_manifest_path",""))).resolve()
  require(root.resolve() in basepath.parents and basepath.is_file() and text_sha(basepath)==baseline,"ratchet baseline manifest file/hash mismatch")
  pins=manifest.get("pins")
- require(isinstance(pins,dict) and pins.get("source_commit")=="964cdb630b1514e1c1a0baed55cbdbc427d5fc11" and pins.get("engine_version")=="04f9a38baed23a760973a3313762ff5d4534a733","source/engine pin mismatch")
+ require(isinstance(pins,dict) and pins.get("source_commit")=="e49acf41a1b3699f01d44e4def06ed4bf83af038" and pins.get("engine_version")=="ad061ebf79029da4dcd3a841a9b2540e39cbf968","source/engine pin mismatch")
  p=subprocess.run(["git","-C",str(root),"cat-file","-e",pins["source_commit"]+"^{commit}"],capture_output=True,timeout=20)
  require(p.returncode==0,"pinned source commit unavailable")
  require(manifest.get("switch_patch_sha256")==increment.group_patch_sha256(increment.load_spec(pathlib.Path(__file__).with_name("increment_switches.yaml"))[1][SWITCH]),"BU patch SHA mismatch")

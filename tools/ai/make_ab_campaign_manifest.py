@@ -31,8 +31,8 @@ baseline_doc = {
     "purpose": "ratchet baseline for the 64-game BU pilot — zero accepted switches",
     "accepted_switches": [],
     "control_groups": [],
-    "source_commit": "964cdb630b1514e1c1a0baed55cbdbc427d5fc11",
-    "engine_version": "04f9a38baed23a760973a3313762ff5d4534a733",
+    "source_commit": "e49acf41a1b3699f01d44e4def06ed4bf83af038",
+    "engine_version": "ad061ebf79029da4dcd3a841a9b2540e39cbf968",
     "note": "control arm materializes stock hard AI payload; each ratchet stage adds accepted groups to both arms",
 }
 if not baseline_path.is_file():
@@ -68,8 +68,8 @@ manifest = {
     "baseline_manifest_path": baseline_path.relative_to(ROOT).as_posix(),
     "baseline_manifest_sha256": pilot.text_sha(baseline_path),
     "pins": {
-        "source_commit": "964cdb630b1514e1c1a0baed55cbdbc427d5fc11",
-        "engine_version": "04f9a38baed23a760973a3313762ff5d4534a733",
+        "source_commit": "e49acf41a1b3699f01d44e4def06ed4bf83af038",
+        "engine_version": "ad061ebf79029da4dcd3a841a9b2540e39cbf968",
     },
     "switch_patch_sha256": increment.group_patch_sha256(groups[pilot.SWITCH]),
     "baseline_ai_payload_sha256": pilot.ai_payload_sha(ROOT),

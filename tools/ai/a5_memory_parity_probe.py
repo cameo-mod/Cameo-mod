@@ -28,9 +28,9 @@ import campaign_deployment_guard as deployment_guard
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 OUT = ROOT / "results" / "campaign-a5-memory-diagnostic-20261010-sol-advice"
-BASELINE = "964cdb630b1514e1c1a0baed55cbdbc427d5fc11"
+BASELINE = "e49acf41a1b3699f01d44e4def06ed4bf83af038"
 MEMORY_FIX = "173038d7881fe45d012a05d2a37ebd7b17f85ffe"
-ENGINE = "04f9a38baed23a760973a3313762ff5d4534a733"
+ENGINE = "ad061ebf79029da4dcd3a841a9b2540e39cbf968"
 SEED = 1337
 CAP_TICK = 16000
 POLL = 0.25
