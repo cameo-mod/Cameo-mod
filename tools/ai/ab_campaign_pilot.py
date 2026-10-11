@@ -10,6 +10,8 @@ from threading import Lock
 import apply_increment_switches as increment
 
 SWITCH = "BU_harvester_logistics"
+SOURCE_COMMIT = "e49acf41a1b3699f01d44e4def06ed4bf83af038"
+ENGINE_VERSION = "ad061ebf79029da4dcd3a841a9b2540e39cbf968"
 VERIFIED_DEPLOYMENT_TYPES = frozenset(("td_gdi_constructionyard", "td_nod_constructionyard", "ra1_allies_constructionyard", "ra1_soviets_constructionyard"))
 MAPS = {
  "nuclear_winter": ("mods/cameo/maps/_ra_a-nuclear-winter.oramap", "191efefe3043acb2fd504b2e2e5c974a49f6498f8e016c1380159c9f7efc1c4a", 2),
@@ -161,10 +163,20 @@ def read_engine_version(path):
  version=text.strip()
  return version[4:] if version.startswith("git-") else version
 def text_sha(path):
- """sha256 of a TEXT pin with CRLF folded to LF. .gitattributes' `* text=lf` is not a valid
- eol value, so a Windows checkout gets CRLF .py/.json files and a Linux one LF: a byte hash
- pinned on one host never matched the other (2026-10-10). Binary pins (maps, engine) stay sha()."""
- return hashlib.sha256(path.read_bytes().replace(b"\r\n",b"\n")).hexdigest()
+	"""SHA256 for text pins with CRLF and lone CR normalized to LF."""
+	return hashlib.sha256(path.read_bytes().replace(b"\r\n",b"\n").replace(b"\r",b"\n")).hexdigest()
+def campaign_tool_paths(root):
+	tools = pathlib.Path(root) / "tools" / "ai"
+	return {
+		"driver_analyzer": tools / "ab_campaign_pilot.py",
+		"campaign_runner": tools / "campaign_runner.py",
+		"batch_runner": tools / "run_ai_match_batch.py",
+		"switch_applier": tools / "apply_increment_switches.py",
+		"a5_parity_probe": tools / "a5_memory_parity_probe.py",
+		"campaign_deployment_guard": tools / "campaign_deployment_guard.py",
+		"campaign_overlay": tools / "campaign_overlay.py",
+		"map_engine_acceptance": tools / "map_engine_acceptance.py",
+	}
 def ai_payload_sha(root,switch=None):
  skip,groups,_=increment.load_spec(pathlib.Path(__file__).with_name("increment_switches.yaml"));digest=hashlib.sha256()
  if switch is not None: require(switch in groups,"unknown AI payload switch")
@@ -315,13 +327,13 @@ def validate(manifest,root,engine_root=None,execution=False):
  basepath=(root/pathlib.PurePosixPath(manifest.get("baseline_manifest_path",""))).resolve()
  require(root.resolve() in basepath.parents and basepath.is_file() and text_sha(basepath)==baseline,"ratchet baseline manifest file/hash mismatch")
  pins=manifest.get("pins")
- require(isinstance(pins,dict) and pins.get("source_commit")=="964cdb630b1514e1c1a0baed55cbdbc427d5fc11" and pins.get("engine_version")=="04f9a38baed23a760973a3313762ff5d4534a733","source/engine pin mismatch")
+ require(isinstance(pins,dict) and pins.get("source_commit")==SOURCE_COMMIT and pins.get("engine_version")==ENGINE_VERSION,"source/engine pin mismatch")
  p=subprocess.run(["git","-C",str(root),"cat-file","-e",pins["source_commit"]+"^{commit}"],capture_output=True,timeout=20)
  require(p.returncode==0,"pinned source commit unavailable")
  require(manifest.get("switch_patch_sha256")==increment.group_patch_sha256(increment.load_spec(pathlib.Path(__file__).with_name("increment_switches.yaml"))[1][SWITCH]),"BU patch SHA mismatch")
  require(manifest.get("baseline_ai_payload_sha256")==ai_payload_sha(root),"baseline AI payload mismatch")
  require(manifest.get("treatment_ai_payload_sha256")==ai_payload_sha(root,SWITCH),"one-switch treatment AI payload mismatch")
- tool_paths={"driver_analyzer":pathlib.Path(__file__),"campaign_runner":root/"tools"/"ai"/"campaign_runner.py","batch_runner":root/"tools"/"ai"/"run_ai_match_batch.py","switch_applier":root/"tools"/"ai"/"apply_increment_switches.py"}
+ tool_paths=campaign_tool_paths(root)
  require(manifest.get("tool_hash_algorithm")==TOOL_HASH_ALGORITHM,"tool hash algorithm mismatch")
  require(manifest.get("tool_sha256")=={k:tool_sha(v) for k,v in tool_paths.items()},"tool SHA pins mismatch")
  require(manifest.get("receipt_schema_sha256")==text_sha(root/"tools"/"ai"/"ab_campaign_receipt.schema.json"),"receipt schema SHA mismatch")

@@ -208,6 +208,17 @@ def resolve_game_pid(process, support_dir: pathlib.Path, timeout_seconds: float 
 	return candidate if candidate and pid_alive(candidate) else process.pid
 
 
+def consistent_game_uid(match_rows: list[dict]) -> str | None:
+	"""Return the shared nonempty UID only when every match row carries it."""
+	if not match_rows:
+		return None
+	uids = [row.get("game_uid") if isinstance(row, dict) else None for row in match_rows]
+	if any(not isinstance(uid, str) or not uid.strip() for uid in uids):
+		return None
+	unique = set(uids)
+	return next(iter(unique)) if len(unique) == 1 else None
+
+
 def available_ram_bytes() -> int:
 	if os.name != "nt":
 		try:
@@ -670,8 +681,7 @@ def run_one(manifest: dict, manifest_sha: str, job: dict, *, root: pathlib.Path,
 	match_rows = batch.read_appended_records(match_log, before)
 	# Every match row must carry the same game_uid: mixed or missing uids mean
 	# the match log can't be attributed to this launch — cap evidence is moot.
-	game_uids = {r.get("game_uid") for r in match_rows if isinstance(r.get("game_uid"), str)}
-	game_uid = next(iter(game_uids)) if len(game_uids) == 1 else None
+	game_uid = consistent_game_uid(match_rows)
 	# The cap marker is emitted by the batch driver (verified in driver.log and
 	# lua.log on preserved attempts); check both plus server.log so a stream move
 	# can never silently turn a capped cell into a stall.

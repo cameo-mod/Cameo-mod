@@ -113,9 +113,17 @@ class AdmissionAndStopTests(unittest.TestCase):
         self.assertIn("unknown", reason)
 
     def test_admission_boundary_is_inclusive_of_the_floor(self):
-        floor = 13.5 * 1024**3
+        floor = pilot.RAM_FLOOR_BYTES
         self.assertIsNone(acceptance.admission_decision(int(floor), floor))
         self.assertIsNotNone(acceptance.admission_decision(int(floor) - 1, floor))
+
+    def test_caller_cannot_lower_pinned_first_game_ram_floor(self):
+        self.assertEqual(pilot.RAM_FLOOR_BYTES, acceptance.resolve_admission_floor(None))
+        self.assertGreaterEqual(acceptance.resolve_admission_floor(14.0), pilot.RAM_FLOOR_BYTES)
+        with self.assertRaisesRegex(ValueError, "cannot lower"):
+            acceptance.resolve_admission_floor(pilot.RAM_FLOOR_BYTES / 1024**3 - 0.01)
+        with self.assertRaisesRegex(ValueError, "positive finite"):
+            acceptance.resolve_admission_floor(float("inf"))
 
     def test_unmeasurable_private_bytes_stops_fail_closed(self):
         self.assertEqual("MEMORY_SAMPLE_FAILED",
@@ -257,17 +265,39 @@ class OwnedProcessMonitoringTests(unittest.TestCase):
                  patch.object(pilot, "make_jobs", return_value=jobs), \
                  patch.object(pilot, "sha", return_value="maphash"), \
                  patch.object(pilot, "read_engine_version", return_value="test-engine"), \
+                 patch.object(pilot, "validate", return_value=True) as validate, \
                  patch.object(pilot, "materialize_dual_arm_ai"), \
                  patch.object(acceptance, "available_ram_bytes", return_value=20 * 1024**3), \
                  patch.object(acceptance, "run_cell", return_value=rejected) as run_cell:
                 result = acceptance.main(["--manifest", str(manifest_path), "--out", str(out),
                     "--repo-root", str(root), "--setups", "setup", "--games", "0,1"])
             self.assertEqual(1, result)
+            validate.assert_called_once()
             run_cell.assert_called_once()
             receipt = json.loads((out / "acceptance_receipt.json").read_text(encoding="utf-8"))
             self.assertEqual(["REJECTED", "NOT_RUN_AFTER_PRIOR_FAILURE"],
                 [cell["verdict"] for cell in receipt["cells"]])
             self.assertIn("cell-0", receipt["cells"][1]["problems"][0])
+
+    def test_manifest_pin_failure_stops_before_ram_sample_or_launch(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = pathlib.Path(d)
+            engine = root / "engine"
+            engine.mkdir()
+            manifest_path = root / "manifest.json"
+            manifest_path.write_text("{}", encoding="utf-8")
+            out = root / "out"
+            with patch.object(acceptance.batch, "load_config", return_value=(None, engine)), \
+                 patch.object(pilot, "validate", side_effect=ValueError("engine pin mismatch")) as validate, \
+                 patch.object(acceptance, "available_ram_bytes") as ram, \
+                 patch.object(acceptance, "run_cell") as run_cell:
+                with self.assertRaises(SystemExit) as error:
+                    acceptance.main(["--manifest", str(manifest_path), "--out", str(out), "--repo-root", str(root)])
+            self.assertEqual(2, error.exception.code)
+            validate.assert_called_once()
+            ram.assert_not_called()
+            run_cell.assert_not_called()
+            self.assertFalse(out.exists())
 
     def test_windows_empty_root_path_requires_exact_popen_and_cell_command(self):
         with tempfile.TemporaryDirectory() as d:

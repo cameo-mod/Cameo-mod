@@ -31,21 +31,15 @@ baseline_doc = {
     "purpose": "ratchet baseline for the 64-game BU pilot — zero accepted switches",
     "accepted_switches": [],
     "control_groups": [],
-    "source_commit": "964cdb630b1514e1c1a0baed55cbdbc427d5fc11",
-    "engine_version": "04f9a38baed23a760973a3313762ff5d4534a733",
+    "source_commit": pilot.SOURCE_COMMIT,
+    "engine_version": pilot.ENGINE_VERSION,
     "note": "control arm materializes stock hard AI payload; each ratchet stage adds accepted groups to both arms",
 }
-if not baseline_path.is_file():
-    baseline_path.parent.mkdir(parents=True, exist_ok=True)
-    baseline_path.write_bytes((json.dumps(baseline_doc, indent=2) + "\n").encode("utf-8"))
-    print(f"wrote {baseline_path}")
+baseline_path.parent.mkdir(parents=True, exist_ok=True)
+baseline_path.write_bytes((json.dumps(baseline_doc, indent=2) + "\n").encode("utf-8"))
+print(f"wrote {baseline_path}")
 
-tool_paths = {
-    "driver_analyzer": pathlib.Path(pilot.__file__),
-    "campaign_runner": ROOT / "tools" / "ai" / "campaign_runner.py",
-    "batch_runner": ROOT / "tools" / "ai" / "run_ai_match_batch.py",
-    "switch_applier": ROOT / "tools" / "ai" / "apply_increment_switches.py",
-}
+tool_paths = pilot.campaign_tool_paths(ROOT)
 
 binary_names = ["OpenRA.exe", "OpenRA.Game.dll", "OpenRA.Mods.Cameo.dll"]
 engine_root = ENGINE or (ROOT / "engine")
@@ -68,8 +62,8 @@ manifest = {
     "baseline_manifest_path": baseline_path.relative_to(ROOT).as_posix(),
     "baseline_manifest_sha256": pilot.text_sha(baseline_path),
     "pins": {
-        "source_commit": "964cdb630b1514e1c1a0baed55cbdbc427d5fc11",
-        "engine_version": "04f9a38baed23a760973a3313762ff5d4534a733",
+        "source_commit": pilot.SOURCE_COMMIT,
+        "engine_version": pilot.ENGINE_VERSION,
     },
     "switch_patch_sha256": increment.group_patch_sha256(groups[pilot.SWITCH]),
     "baseline_ai_payload_sha256": pilot.ai_payload_sha(ROOT),
@@ -87,19 +81,27 @@ manifest = {
 out = ROOT / "docs" / "audit" / "ab_pilot_manifest_candidate.json"
 prior = json.loads(out.read_text(encoding="utf-8-sig")) if out.is_file() else {}
 a5_path = prior.get("a5_parity_receipt_path")
-if a5_path and pathlib.Path(a5_path).is_file():
-    manifest["a5_parity_receipt_path"] = a5_path
-    manifest["a5_parity_receipt_sha256"] = sha(pathlib.Path(a5_path))
+receipt_path = (ROOT / pathlib.Path(a5_path)).resolve() if isinstance(a5_path, str) and a5_path else None
+if receipt_path and ROOT in receipt_path.parents and receipt_path.is_file():
+    receipt = json.loads(receipt_path.read_text(encoding="utf-8-sig"))
+    if receipt.get("source_head") != pilot.SOURCE_COMMIT or receipt.get("baseline_commit") != pilot.SOURCE_COMMIT or receipt.get("engine_version") != pilot.ENGINE_VERSION:
+        print("ignoring A5 receipt for a different source or engine pin")
+        manifest["a5_parity_receipt_path"] = None
+        manifest["a5_parity_receipt_sha256"] = None
+    else:
+        manifest["a5_parity_receipt_path"] = a5_path
+        manifest["a5_parity_receipt_sha256"] = sha(receipt_path)
 else:
     manifest["a5_parity_receipt_path"] = None
     manifest["a5_parity_receipt_sha256"] = None
 manifest["execution_approved"] = False
 manifest["notes"] = "non-executable candidate; execution approval remains false until Windows engine acceptance, headless measurement, fresh A5 receipt, and maintainer sign-off"
 text = json.dumps(manifest, indent=2) + "\n"
+payload = text.encode("utf-8")
 if "--write" in sys.argv:
-    out.write_bytes(text.encode("utf-8"))
-print("manifest_sha256", hashlib.sha256(text.encode("utf-8")).hexdigest())
-print("bytes", len(text.encode("utf-8")), "->", out)
+    out.write_bytes(payload)
+print("manifest_sha256", hashlib.sha256(payload).hexdigest())
+print("bytes", len(payload), "->", out)
 jobs = pilot.make_jobs(manifest)
 print("jobs", len(jobs), "expected 64")
 print("sample cell", jobs[0]["cell_id"], "| seats:", len(jobs[0]["seat_assignments"]))

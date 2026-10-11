@@ -8,7 +8,7 @@ def manifest():
  baseline=ROOT/"tools/tests/fixtures/ab_campaign_baseline.json"
  _,groups,_=increment.load_spec(ROOT/"tools/ai/increment_switches.yaml")
  tools={"driver_analyzer":ROOT/"tools/ai/ab_campaign_pilot.py","campaign_runner":ROOT/"tools/ai/campaign_runner.py","batch_runner":ROOT/"tools/ai/run_ai_match_batch.py","switch_applier":ROOT/"tools/ai/apply_increment_switches.py"}
- return {"schema":1,"switch":pilot.SWITCH,"execution_approved":False,"pairs_per_setup":2,"team_size_scope":[1,2,3,4],"arm_bot_types":{"control":"hard_control","treatment":"hard_treatment"},"baseline_manifest_path":"tools/tests/fixtures/ab_campaign_baseline.json","baseline_manifest_sha256":pilot.text_sha(baseline),"pins":{"source_commit":"964cdb630b1514e1c1a0baed55cbdbc427d5fc11","engine_version":"04f9a38baed23a760973a3313762ff5d4534a733"},"switch_patch_sha256":increment.group_patch_sha256(groups[pilot.SWITCH]),"baseline_ai_payload_sha256":pilot.ai_payload_sha(ROOT),"treatment_ai_payload_sha256":pilot.ai_payload_sha(ROOT,pilot.SWITCH),"tool_hash_algorithm":pilot.TOOL_HASH_ALGORITHM,"tool_sha256":{k:pilot.tool_sha(v) for k,v in tools.items()},"receipt_schema_sha256":pilot.text_sha(ROOT/"tools/ai/ab_campaign_receipt.schema.json"),"binary_sha256":{"bin/OpenRA.exe":"5693f355792ebb68699793f96ef2167b733c5e7756f580858c5090226418c984","bin/OpenRA.dll":"92ee9dacd08869593dc5ad70c2d1ce48f701caf8277ea3bd692acf2224a8ca77","bin/OpenRA.Mods.Cameo.dll":"41f37982c146f73b4a9c07071f34b47e214178cb9413e514f05af9af2d44b3a4"},"round_stages":pilot.ROUND_STAGES,"acceptance_thresholds":pilot.DEFAULT_THRESHOLDS,"slot_policy":dict(pilot.SLOT_POLICY),"seeds":[1337,7331],"maps":[{"name":k,"path":v[0],"sha256":v[1],"required_seats":v[2]} for k,v in pilot.MAPS.items()],"setups":[{"id":n,"team_size":s,"map":m,"team_factions":list(f)} for n,s,m,f in pilot.SETUPS]}
+ return {"schema":1,"switch":pilot.SWITCH,"execution_approved":False,"pairs_per_setup":2,"team_size_scope":[1,2,3,4],"arm_bot_types":{"control":"hard_control","treatment":"hard_treatment"},"baseline_manifest_path":"tools/tests/fixtures/ab_campaign_baseline.json","baseline_manifest_sha256":pilot.text_sha(baseline),"pins":{"source_commit":pilot.SOURCE_COMMIT,"engine_version":pilot.ENGINE_VERSION},"switch_patch_sha256":increment.group_patch_sha256(groups[pilot.SWITCH]),"baseline_ai_payload_sha256":pilot.ai_payload_sha(ROOT),"treatment_ai_payload_sha256":pilot.ai_payload_sha(ROOT,pilot.SWITCH),"tool_hash_algorithm":pilot.TOOL_HASH_ALGORITHM,"tool_sha256":{k:pilot.tool_sha(v) for k,v in pilot.campaign_tool_paths(ROOT).items()},"receipt_schema_sha256":pilot.text_sha(ROOT/"tools/ai/ab_campaign_receipt.schema.json"),"binary_sha256":{"bin/OpenRA.exe":"5693f355792ebb68699793f96ef2167b733c5e7756f580858c5090226418c984","bin/OpenRA.dll":"92ee9dacd08869593dc5ad70c2d1ce48f701caf8277ea3bd692acf2224a8ca77","bin/OpenRA.Mods.Cameo.dll":"41f37982c146f73b4a9c07071f34b47e214178cb9413e514f05af9af2d44b3a4"},"round_stages":pilot.ROUND_STAGES,"acceptance_thresholds":pilot.DEFAULT_THRESHOLDS,"slot_policy":dict(pilot.SLOT_POLICY),"seeds":[1337,7331],"maps":[{"name":k,"path":v[0],"sha256":v[1],"required_seats":v[2]} for k,v in pilot.MAPS.items()],"setups":[{"id":n,"team_size":s,"map":m,"team_factions":list(f)} for n,s,m,f in pilot.SETUPS]}
 
 class PilotPlanTests(unittest.TestCase):
  def test_approved_amendment_expands_to_64_side_swapped_games(self):
@@ -87,9 +87,10 @@ class PilotPlanTests(unittest.TestCase):
   # A Windows checkout (CRLF .py/.json) and a Linux one (LF) must pin the same tool hash;
   # binary pins (map packages, engine) keep byte hashes.
   with tempfile.TemporaryDirectory() as d:
-   lf=pathlib.Path(d)/"lf.py";crlf=pathlib.Path(d)/"crlf.py"
-   lf.write_bytes(b"a = 1\nb = 2\n");crlf.write_bytes(b"a = 1\r\nb = 2\r\n")
+   lf=pathlib.Path(d)/"lf.py";crlf=pathlib.Path(d)/"crlf.py";lone_cr=pathlib.Path(d)/"lone-cr.py"
+   lf.write_bytes(b"a = 1\nb = 2\n");crlf.write_bytes(b"a = 1\r\nb = 2\r\n");lone_cr.write_bytes(b"a = 1\rb = 2\r")
    self.assertEqual(pilot.text_sha(lf),pilot.text_sha(crlf))
+   self.assertEqual(pilot.text_sha(lf),pilot.text_sha(lone_cr))
    self.assertNotEqual(pilot.sha(lf),pilot.sha(crlf))
  def test_missing_map_is_rejected(self):
   m=manifest();m["maps"][0]["path"]="mods/cameo/maps/missing.oramap"

@@ -6,6 +6,13 @@ from unittest.mock import patch
 
 
 class CampaignRunnerTests(unittest.TestCase):
+	def test_consistent_game_uid_rejects_missing_or_mixed_row_ids(self):
+		valid = [{"game_uid": "g-1"}, {"game_uid": "g-1"}]
+		self.assertEqual("g-1", runner.consistent_game_uid(valid))
+		self.assertIsNone(runner.consistent_game_uid([{"game_uid": "g-1"}, {}]))
+		self.assertIsNone(runner.consistent_game_uid([{"game_uid": "g-1"}, {"game_uid": "g-2"}]))
+		self.assertIsNone(runner.consistent_game_uid([{"game_uid": "g-1"}, {"game_uid": None}]))
+
 	def test_link_mod_tree_clones_everything_except_skipped_top_level(self):
 		# The thin-overlay defect dropped ContentPacks; the clone must carry every
 		# entry except the caller-skipped top dirs (real files, no reparse points).
@@ -238,7 +245,10 @@ class CampaignRunnerTests(unittest.TestCase):
 		"""Exercise the gate with the exact external receipt pinned by the candidate manifest."""
 		manifest_path = ROOT / "docs" / "audit" / "ab_pilot_manifest_candidate.json"
 		manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
-		receipt_path = pathlib.Path(manifest["a5_parity_receipt_path"])
+		a5_path = manifest.get("a5_parity_receipt_path")
+		if not isinstance(a5_path, str) or not a5_path:
+			self.skipTest("disarmed candidate has no A5 receipt for its current engine pin")
+		receipt_path = pathlib.Path(a5_path)
 		if not receipt_path.is_file():
 			self.skipTest(f"pinned A5 receipt is unavailable: {receipt_path}")
 		receipt_bytes = receipt_path.read_bytes()

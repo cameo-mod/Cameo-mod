@@ -11,6 +11,10 @@ docs/reference/peer_corpus/*.jsonl -text
 docs/balance/checkpoints/20260911/claude-continuation/inputs.zip -text
 docs/balance/checkpoints/20260911/claude-continuation/*.json.gz -text
 
+# A5 receipts are SHA-pinned as exact evidence artifacts. Preserve their bytes
+# across checkout platforms; normalize only the separate manifest's text pins.
+results/**/A5_*receipt.json -text
+
 # Frozen snapshot hashes were captured from CRLF bytes. Preserve those checkout
 # bytes on every platform without changing their existing normalized Git blobs.
 docs/reference/cameo_baselines/pre_reference_20260910.json text eol=crlf

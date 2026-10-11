@@ -33,6 +33,7 @@ from __future__ import annotations
 import argparse
 import ctypes
 import json
+import math
 import os
 import pathlib
 import re
@@ -66,6 +67,19 @@ def admission_decision(free_bytes: int | None, min_free_bytes: float) -> str | N
 	if free_bytes < min_free_bytes:
 		return f"available RAM {free_bytes / 1024**3:.1f} GiB < {min_free_bytes / 1024**3:.1f} GiB admission floor"
 	return None
+
+
+def resolve_admission_floor(requested_gib: float | None) -> int:
+	"""Acceptance is serial: a caller may raise, but never lower, the pinned floor."""
+	minimum = pilot.RAM_FLOOR_BYTES
+	if requested_gib is None:
+		return minimum
+	if not math.isfinite(requested_gib) or requested_gib <= 0:
+		raise ValueError("--min-free-gib must be a positive finite number")
+	requested = int(requested_gib * 1024**3)
+	if requested < minimum:
+		raise ValueError(f"--min-free-gib cannot lower the pinned admission floor ({minimum / 1024**3:.2f} GiB)")
+	return requested
 
 
 def run_stop_reason(current_private: int | None, available: int | None, *, private_cap: int, emergency_free: int) -> str | None:
@@ -614,7 +628,7 @@ def main(argv=None) -> int:
 	parser.add_argument("--setups", default="", help="comma list of setup ids (default: all)")
 	parser.add_argument("--games", default="0,1", help="games in pair to run (default both = the swap proof)")
 	parser.add_argument("--timeout", type=int, default=1200, help="wall seconds per cell")
-	parser.add_argument("--min-free-gib", type=float, default=(BOOTSTRAP_HEADLESS_PEAK_BYTES + ADMISSION_RESERVE_BYTES) / 1024**3,
+	parser.add_argument("--min-free-gib", type=float, default=None,
 		help="RAM admission before each serial acceptance cell: bootstrapped measured-peak (10.5 GiB cap) plus 3 GiB reserve")
 	args = parser.parse_args(argv)
 
@@ -622,6 +636,11 @@ def main(argv=None) -> int:
 	manifest = json.loads(args.manifest.read_text(encoding="utf-8"))
 	_, engine = batch.load_config()
 	engine = engine.resolve()
+	try:
+		pilot.validate(manifest, root, engine)
+		min_free_bytes = resolve_admission_floor(args.min_free_gib)
+	except (ValueError, OSError) as e:
+		parser.error(str(e))
 	if not (engine / "bin" / "OpenRA.exe").is_file():
 		parser.error(f"engine executable missing under {engine}; run make.cmd all first")
 	if args.render == "headless" and not (engine / "bin" / f"OpenRA.Platforms.{HEADLESS_PLATFORM}.dll").is_file():
@@ -651,7 +670,7 @@ def main(argv=None) -> int:
 	for job in jobs:
 		cell = None
 		free = available_ram_bytes()
-		not_admitted = admission_decision(free, args.min_free_gib * 1024**3)
+		not_admitted = admission_decision(free, min_free_bytes)
 		if not_admitted is not None:
 			receipt["cells"].append({"cell_id": job["cell_id"], "setup": job["setup"], "map": job["map"],
 				"verdict": "NOT_RUN", "problems": [not_admitted]})
