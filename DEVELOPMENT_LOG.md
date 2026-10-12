@@ -69,24 +69,28 @@ switch group existed.
   subtests. Scratch-tree apply: `apply_increment_switches.py <scratch> --groups
   BY_crawl_safety` → `ExpansionPlannerBotModule.UseCrawlSafety: (default) -> true`, 1 change,
   `new_restraint_count: 1`, `ordinary_increment_allowed: true`.
-- **RESOLVED — the mounted-trait question is settled:** what SquadManager does with
-  CRAWL-SAFETY's `Episode=default` escort request when `AttackLivenessEnabled` is true.
-  **The code reading wins; the CS review's claim ("still forms as a standard protection
-  squad") is disproven.** Chain: CS publishes 3-arg `BotProtectionRequest` — `Episode =
-  default` (`ExpansionPlannerBotModule.cs:2637`) → under `AttackLivenessEnabled` the sole
-  request path enters the `if` at `SquadManagerBotModuleCA.cs:2150` →
+- **Source finding (helper contract pinned; mounted integration UNVERIFIED):** what
+  SquadManager does with CRAWL-SAFETY's `Episode=default` escort request when
+  `AttackLivenessEnabled` is true. Chain: CS publishes 3-arg `BotProtectionRequest` —
+  `Episode = default` (`ExpansionPlannerBotModule.cs:2637`) → under `AttackLivenessEnabled`
+  the sole request path enters the `if` at `SquadManagerBotModuleCA.cs:2150` →
   `M13ResponseClaimCA.TryKey` requires `request.Episode.BelongsTo(participant)` →
   `default` episode has `IsKnown == false` → `TryKey` false → `return` at :2155, before
-  any drafting. **No escort squad can ever form from a CS request while M13 is armed.**
-  EngineerBotModule requests carry real episodes (`EngineerBotModule.cs:1332`) and are
-  unaffected. Latent today (M13 default-off; legacy rolling path serves episode-less
-  requests); bites exactly when M13 + BY are armed together — i.e. the P3 evaluation
-  configuration. Safety is not lost: `RefuseSafety("front contested")` still refuses the
-  frontier; only the escort is silently absent. Pinned by the new test
-  `M13ResponseClaimTest.EpisodelessRequestCannotKeyAResponse` (all 3 claim channels,
-  the exact 3-arg publisher shape). Resolution: P3's escort contract in rev-3 §4.2 item 2
-  (publisher attaches a known `BotClaimEpisode`) is REQUIRED, not optional, for BY+M13 —
-  or CS must publish episodes for its frontier requests before that combination arms.
+  any drafting. **The source trace predicts no escort squad can form from a CS request
+  while M13 is armed** — the CS review's claim ("still forms as a standard protection
+  squad") is not supported by this source. The new test
+  `M13ResponseClaimTest.EpisodelessRequestCannotKeyAResponse` pins the pure helper
+  contract only (all 3 claim channels, the exact 3-arg publisher shape): it does NOT
+  mount `SquadManager` or a live publisher, so the mounted integration remains
+  unverified and stays an open runtime gate. EngineerBotModule requests carry real
+  episodes (`EngineerBotModule.cs:1332`) and are unaffected by this reading. Latent
+  today (M13 default-off; legacy rolling path serves episode-less requests); would bite
+  when M13 + BY are armed together — i.e. the P3 evaluation configuration. Safety is not
+  predicted to be lost: `RefuseSafety("front contested")` still refuses the frontier;
+  only the escort would be silently absent. Resolution: P3's escort contract in rev-3
+  §4.2 item 2 (publisher attaches a known `BotClaimEpisode`) is REQUIRED, not optional,
+  for BY+M13 — or CS must publish episodes for its frontier requests before that
+  combination arms.
 
 ---
 # 2026-10-12 — Devin: BZ_production_scaling — income-driven production buildings + extra MCVs (branch `devin/prod-scaling`)
