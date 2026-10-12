@@ -1,3 +1,36 @@
+# 2026-10-12 — Devin: TF-2 F1/F2 review fixes + rebase onto landed TF-1 (branch `devin/turtle-fix-2-unit-spend-reservation`)
+
+*Devin-Developer*, Devin-Reviewer receipt `fleet/REVIEW_2026-10-11_turtle_fix2_devin.md`
+(APPROVE default-off landing; F1+F2 must close before `ReserveMobileProductionShare` arms).
+Rebased `bfd1b7682` → `2bbb066c3` onto `a5ab375ba` (contains the landed TF-1 `3cb0fcf1b`) —
+three-way merge clean, no manual resolution.
+
+- **F1 — same-name queue items were collapsing.** Both feeds keyed items by `i.Item` name into
+  a dictionary, so five queued tanks reported as one — `UnitOutstanding` and every settled
+  `Paid*` portion undercounted. The reconcile contract is now a LIST per queue
+  (`IReadOnlyList<(Item, Total, Remaining[, Essential])>`), and each `(owner, item)` group
+  tracks a descending multiset of per-instance remainders. Reconcile matches each reported
+  remainder to the closest tracked remainder ≥ it (a live item's remaining never grows, so a
+  larger reported remainder is a fresh instance); unmatched tracked entries vanished and
+  settle their last-observed paid portion — front completions settle the progressed entry,
+  mid-queue cancels settle the unprogressed one, completion+refill in one sweep still settles.
+- **F2 — dead/disabled producers never reconciled.** A producer that leaves `FindQueues`
+  (destroyed or `Trait.Enabled` false) can never call reconcile, so its tracked items held the
+  floor forever and never credited their paid part. New `FlushUnseenUnits`/`FlushUnseenBuildings`
+  on the ledger settle every group whose owner is absent from the sweep's live-producer set —
+  the ProbeQueueTransitions stale-watch pattern. Feeds: the unit sweep passes every unit-queue
+  actor it enumerated; each queue manager enumerates the UNION of `BuildingQueues` +
+  `DefenseQueues` (FindQueues is per-tick cached), so sibling managers flush the shared ledger
+  idempotently without stealing each other's owners.
+- **Interface:** `ReconcileUnitSpend`/`ReconcileBuildingSpend` signatures → lists; new
+  `FlushUnitSpendOwners`/`FlushBuildingSpendOwners` (default no-op, classic providers unchanged).
+- **Tests:** helpers now feed lists; +5 cases — per-instance counts, completion+refill,
+  tail-cancel, dead-producer flush (paid credited, remainder released, idempotent),
+  essential/optional split on a dead conyard.
+- **Verification:** Cameo.Test 1848/1848 pass on the rebased tree. Boot gate DEFERRED —
+  Luna Manager's A/B reservation is held; no launches. `ReserveMobileProductionShare` stays 0
+  (default-off) until armed via the increment switch.
+
 # 2026-10-11 — Devin: TF-1 repair — atomic admission claims + paid-reconcile lifecycle (branch `devin/turtle-fix-1-crawl-allowance`)
 
 *Devin-Developer*, Sol review `fleet/REVIEW_2026-10-11_tf1_5bed_sol.md` (REQUEST CHANGES on `5bedabace`).

@@ -41,16 +41,31 @@ namespace OpenRA.Mods.CA.Traits
 
 		/// <summary>
 		/// The unit side's reconcile feed, one call per mobile-producing queue per sweep:
-		/// the queue's in-flight items by name with total/remaining cost. Items an owner stops
+		/// the queue's in-flight items with total/remaining cost — a LIST so same-name
+		/// duplicates count per instance instead of collapsing (F1). Items an owner stops
 		/// reporting settle exactly once — produced, refunded, cancelled or producer-eliminated
 		/// all release the same way; their paid-so-far portion counts, the rest frees.
 		/// </summary>
-		void ReconcileUnitSpend(object owner, IReadOnlyDictionary<string, (int Total, int Remaining)> items) { }
+		void ReconcileUnitSpend(object owner, IReadOnlyList<(string Item, int Total, int Remaining)> items) { }
 
 		/// <summary>
 		/// The building side's paid-spend feed for the share metric — every in-flight building
-		/// item with its army-first essential flag. Same settle-exactly-once rule per owner.
+		/// item with its army-first essential flag. Same multiset and settle-exactly-once rule.
 		/// </summary>
-		void ReconcileBuildingSpend(object owner, IReadOnlyDictionary<string, (int Total, int Remaining, bool Essential)> items) { }
+		void ReconcileBuildingSpend(object owner, IReadOnlyList<(string Item, int Total, int Remaining, bool Essential)> items) { }
+
+		/// <summary>
+		/// Sweep-end flush (F2): settle every tracked unit owner absent from
+		/// <paramref name="liveOwners"/> — a destroyed or disabled producer can never reconcile
+		/// itself, so its unpaid remainder must not hold the floor forever.
+		/// </summary>
+		void FlushUnitSpendOwners(IReadOnlyCollection<object> liveOwners) { }
+
+		/// <summary>
+		/// Sweep-end flush for the building side — same contract as
+		/// <see cref="FlushUnitSpendOwners"/>. The caller's live set must span every
+		/// building+defense queue category, not only the manager's own.
+		/// </summary>
+		void FlushBuildingSpendOwners(IReadOnlyCollection<object> liveOwners) { }
 	}
 }

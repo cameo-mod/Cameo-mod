@@ -27,12 +27,16 @@ namespace OpenRA.Mods.CA.Traits
 	/// </summary>
 	public sealed class UnitSpendReservation
 	{
+		// F1: a same-name queue is a MULTISET — queueing five tanks reports five entries, so the
+		// tracked remainder is a descending list of per-instance remaining costs, never one
+		// collapsed record.
 		sealed class Tracked
 		{
 			public int Total;
-			public int Remaining;
 			public bool Essential;
-			public int Paid => Math.Max(0, Total - Remaining);
+			public readonly List<int> Remaining = new();
+			public int Outstanding => Remaining.Sum();
+			public int Paid => Math.Max(0, Remaining.Count * Total - Outstanding);
 		}
 
 		readonly Dictionary<(object Owner, string Item), Tracked> units = new();
@@ -48,10 +52,10 @@ namespace OpenRA.Mods.CA.Traits
 		public int PaidEssentialCost { get; private set; }
 
 		/// <summary>Still-unpaid cash committed to in-flight unit items — freed when they leave.</summary>
-		public int UnitOutstanding => units.Values.Sum(t => t.Remaining);
+		public int UnitOutstanding => units.Values.Sum(t => t.Outstanding);
 
-		public int UnitItemsInFlight => units.Count;
-		public int BuildingItemsInFlight => buildings.Count;
+		public int UnitItemsInFlight => units.Values.Sum(t => t.Remaining.Count);
+		public int BuildingItemsInFlight => buildings.Values.Sum(t => t.Remaining.Count);
 
 		/// <summary>
 		/// The standing pool: `sharePct` of spendable, held only while production is feasible, a
@@ -86,57 +90,106 @@ namespace OpenRA.Mods.CA.Traits
 		/// The unit side's per-sweep reconcile for one producer queue: items the owner no longer
 		/// reports settle exactly once — produced, refunded, cancelled or producer-eliminated all
 		/// end the same claim — their paid-so-far portion counts and the unpaid rest frees off the
-		/// floor. Items reported again just update; a repeated settle can never double-count.
+		/// floor. Same-name entries reconcile as a multiset: duplicate queued units are tracked
+		/// per instance instead of collapsing to one. Items reported again just update; a repeated
+		/// settle can never double-count.
 		/// </summary>
-		public void ReconcileUnits(object owner, IReadOnlyDictionary<string, (int Total, int Remaining)> items)
-		{
-			foreach (var key in units.Keys.Where(k => ReferenceEquals(k.Owner, owner)).ToList())
-			{
-				if (!items.ContainsKey(key.Item))
-				{
-					PaidUnitCost = SaturateAdd(PaidUnitCost, units[key].Paid);
-					units.Remove(key);
-				}
-			}
-
-			foreach (var kv in items)
-			{
-				var key = (owner, kv.Key);
-				if (!units.TryGetValue(key, out var tracked))
-					units[key] = tracked = new Tracked();
-				tracked.Total = Math.Max(0, kv.Value.Total);
-				tracked.Remaining = Math.Max(0, kv.Value.Remaining);
-			}
-		}
+		public void ReconcileUnits(object owner, IReadOnlyList<(string Item, int Total, int Remaining)> items) =>
+			ReconcileSide(units, owner, items.Select(i => (i.Item, i.Total, i.Remaining, false)).ToList(), true);
 
 		/// <summary>
 		/// The building side's per-sweep reconcile for one producer queue — the metric feed, split
-		/// by the army-first essential flag at settle time. Same settle-exactly-once rule.
+		/// by the army-first essential flag at settle time. Same multiset and settle-exactly-once
+		/// rule as the unit side.
 		/// </summary>
-		public void ReconcileBuildings(object owner, IReadOnlyDictionary<string, (int Total, int Remaining, bool Essential)> items)
+		public void ReconcileBuildings(object owner, IReadOnlyList<(string Item, int Total, int Remaining, bool Essential)> items) =>
+			ReconcileSide(buildings, owner, items, false);
+
+		void ReconcileSide(Dictionary<(object Owner, string Item), Tracked> map, object owner,
+			IReadOnlyList<(string Item, int Total, int Remaining, bool Essential)> items, bool unitSide)
 		{
-			foreach (var key in buildings.Keys.Where(k => ReferenceEquals(k.Owner, owner)).ToList())
+			var reported = items.GroupBy(i => i.Item, StringComparer.Ordinal)
+				.ToDictionary(g => g.Key, g => g.ToList(), StringComparer.Ordinal);
+
+			foreach (var key in map.Keys.Where(k => ReferenceEquals(k.Owner, owner) && !reported.ContainsKey(k.Item)).ToList())
+				SettleGroup(map, key, unitSide);
+
+			foreach (var kv in reported)
+				ReconcileGroup(map, (owner, kv.Key), kv.Value, unitSide);
+		}
+
+		/// <summary>
+		/// Multiset reconcile of one (owner, item) group: each reported remainder adopts the closest
+		/// tracked remainder that is not smaller than it — a live item's remaining never grows, so a
+		/// reported remainder LARGER than every tracked one is a fresh instance and a tracked entry
+		/// nobody adopted vanished (a completed front, a cancel, a refund). Every vanished entry
+		/// settles its last-observed paid portion exactly once.
+		/// </summary>
+		void ReconcileGroup(Dictionary<(object Owner, string Item), Tracked> map,
+			(object Owner, string Item) key, List<(string Item, int Total, int Remaining, bool Essential)> reported, bool unitSide)
+		{
+			if (!map.TryGetValue(key, out var tracked))
+				map[key] = tracked = new Tracked();
+
+			tracked.Total = Math.Max(0, reported.Max(r => r.Total));
+			tracked.Essential = reported[0].Essential;
+
+			var wants = reported.Select(r => Math.Max(0, r.Remaining)).OrderByDescending(r => r).ToList();
+			var candidates = new List<int>(tracked.Remaining);
+			foreach (var want in wants)
 			{
-				if (!items.ContainsKey(key.Item))
-				{
-					var paid = buildings[key].Paid;
-					if (buildings[key].Essential)
-						PaidEssentialCost = SaturateAdd(PaidEssentialCost, paid);
-					else
-						PaidOptionalCost = SaturateAdd(PaidOptionalCost, paid);
-					buildings.Remove(key);
-				}
+				var best = -1;
+				for (var i = 0; i < candidates.Count; i++)
+					if (candidates[i] >= want && (best < 0 || candidates[i] < candidates[best]))
+						best = i;
+
+				if (best >= 0)
+					candidates.RemoveAt(best);
 			}
 
-			foreach (var kv in items)
-			{
-				var key = (owner, kv.Key);
-				if (!buildings.TryGetValue(key, out var tracked))
-					buildings[key] = tracked = new Tracked();
-				tracked.Total = Math.Max(0, kv.Value.Total);
-				tracked.Remaining = Math.Max(0, kv.Value.Remaining);
-				tracked.Essential = kv.Value.Essential;
-			}
+			foreach (var vanished in candidates)
+				SettleEntry(tracked, vanished, unitSide);
+
+			tracked.Remaining.Clear();
+			tracked.Remaining.AddRange(wants);
+		}
+
+		/// <summary>
+		/// Sweep-end flush (the F2 dead-producer fix): every tracked owner absent from the sweep's
+		/// live producer set settles its whole remainder — a destroyed or disabled producer can
+		/// never reconcile itself, and without the flush its unpaid items would hold the floor
+		/// forever. The caller passes the producers it observed this sweep.
+		/// </summary>
+		public void FlushUnseenUnits(IReadOnlyCollection<object> liveOwners) =>
+			FlushUnseen(units, liveOwners, true);
+
+		public void FlushUnseenBuildings(IReadOnlyCollection<object> liveOwners) =>
+			FlushUnseen(buildings, liveOwners, false);
+
+		void FlushUnseen(Dictionary<(object Owner, string Item), Tracked> map, IReadOnlyCollection<object> liveOwners, bool unitSide)
+		{
+			foreach (var key in map.Keys.Where(k => !liveOwners.Contains(k.Owner)).ToList())
+				SettleGroup(map, key, unitSide);
+		}
+
+		void SettleGroup(Dictionary<(object Owner, string Item), Tracked> map, (object Owner, string Item) key, bool unitSide)
+		{
+			var tracked = map[key];
+			foreach (var remaining in tracked.Remaining)
+				SettleEntry(tracked, remaining, unitSide);
+
+			map.Remove(key);
+		}
+
+		void SettleEntry(Tracked tracked, int remaining, bool unitSide)
+		{
+			var paid = Math.Max(0, tracked.Total - Math.Min(tracked.Total, Math.Max(0, remaining)));
+			if (unitSide)
+				PaidUnitCost = SaturateAdd(PaidUnitCost, paid);
+			else if (tracked.Essential)
+				PaidEssentialCost = SaturateAdd(PaidEssentialCost, paid);
+			else
+				PaidOptionalCost = SaturateAdd(PaidOptionalCost, paid);
 		}
 
 		/// <summary>Save/load: the settled counters persist; in-flight items re-track from live queue state.</summary>

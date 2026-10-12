@@ -10,6 +10,7 @@
 #endregion
 
 using System.Collections.Generic;
+using System.Linq;
 using NUnit.Framework;
 using OpenRA.Mods.CA.Traits;
 
@@ -22,21 +23,11 @@ namespace OpenRA.Mods.Cameo.Test
 	[TestFixture]
 	public class UnitSpendReservationTest
 	{
-		static Dictionary<string, (int Total, int Remaining)> Units(params (string Name, int Total, int Remaining)[] items)
-		{
-			var d = new Dictionary<string, (int, int)>();
-			foreach (var i in items)
-				d[i.Name] = (i.Total, i.Remaining);
-			return d;
-		}
+		static List<(string Item, int Total, int Remaining)> Units(params (string Name, int Total, int Remaining)[] items) =>
+			items.Select(i => (i.Name, i.Total, i.Remaining)).ToList();
 
-		static Dictionary<string, (int Total, int Remaining, bool Essential)> Buildings(params (string Name, int Total, int Remaining, bool Essential)[] items)
-		{
-			var d = new Dictionary<string, (int, int, bool)>();
-			foreach (var i in items)
-				d[i.Name] = (i.Total, i.Remaining, i.Essential);
-			return d;
-		}
+		static List<(string Item, int Total, int Remaining, bool Essential)> Buildings(params (string Name, int Total, int Remaining, bool Essential)[] items) =>
+			items.Select(i => (i.Name, i.Total, i.Remaining, i.Essential)).ToList();
 
 		[Test]
 		public void StandingHoldsOnlyWhileAllThreeConditionsHold()
@@ -175,6 +166,108 @@ namespace OpenRA.Mods.Cameo.Test
 			var r = new UnitSpendReservation();
 			r.RestoreSettled(1500, 500, 1000);
 			Assert.That(r.PaidSharePct(), Is.EqualTo(50));
+		}
+
+		// F1 (REVIEW_2026-10-11_turtle_fix2_devin.md): five same-name units on one producer are
+		// five instances, not one — a name-keyed feed collapsed them and undercounted both the
+		// in-flight remainder and every settled paid portion.
+
+		[Test]
+		public void SameNameQueuedUnitsCountPerInstance()
+		{
+			var r = new UnitSpendReservation();
+			var factory = new object();
+			r.SetStanding(true, true, true, 25, 8000);
+
+			r.ReconcileUnits(factory, Units(
+				("tank", 900, 900), ("tank", 900, 900), ("tank", 900, 900)));
+			Assert.That(r.UnitItemsInFlight, Is.EqualTo(3));
+			Assert.That(r.UnitOutstanding, Is.EqualTo(2700),
+				"three queued tanks hold three remainders, not one collapsed entry");
+
+			// The front tank pays down; the queue still reports three.
+			r.ReconcileUnits(factory, Units(
+				("tank", 900, 900), ("tank", 900, 900), ("tank", 900, 400)));
+			Assert.That(r.UnitOutstanding, Is.EqualTo(2200));
+
+			// It finishes: two remain, its last-observed paid portion settles.
+			r.ReconcileUnits(factory, Units(("tank", 900, 900), ("tank", 900, 900)));
+			Assert.That(r.UnitItemsInFlight, Is.EqualTo(2));
+			Assert.That(r.PaidUnitCost, Is.EqualTo(500),
+				"the completed front item settles its paid progress, the others keep flying");
+		}
+
+		[Test]
+		public void CompletionAndRefillInTheSameSweepStillSettleTheFinishedItem()
+		{
+			var r = new UnitSpendReservation();
+			var factory = new object();
+
+			r.ReconcileUnits(factory, Units(("tank", 900, 400)));
+			// One sweep later the finished tank is gone and a fresh one queued behind it.
+			r.ReconcileUnits(factory, Units(("tank", 900, 900)));
+			Assert.That(r.PaidUnitCost, Is.EqualTo(500),
+				"a remainder that grows means a new instance — the old one settles");
+			Assert.That(r.UnitOutstanding, Is.EqualTo(900));
+		}
+
+		[Test]
+		public void ATailCancelReleasesNothingWhileProgressedItemsSurvive()
+		{
+			var r = new UnitSpendReservation();
+			var factory = new object();
+			r.ReconcileUnits(factory, Units(
+				("tank", 900, 900), ("tank", 900, 900), ("tank", 900, 400)));
+
+			// The unstarted tail is cancelled: the vanished entry is the unprogressed one —
+			// it settles paid 0, the front keeps its progress.
+			r.ReconcileUnits(factory, Units(("tank", 900, 900), ("tank", 900, 350)));
+			Assert.That(r.PaidUnitCost, Is.EqualTo(0));
+			Assert.That(r.UnitOutstanding, Is.EqualTo(1250));
+		}
+
+		// F2: a producer that leaves FindQueues (destroyed or disabled) can never call reconcile —
+		// the sweep-end flush settles its tracked items so the unpaid remainder does not pin the
+		// floor and the paid-so-far part still credits.
+
+		[Test]
+		public void AVanishedProducerFlushesItsClaimsAndCreditsThePaidPart()
+		{
+			var r = new UnitSpendReservation();
+			var warFactory = new object();
+			var airfield = new object();
+			r.SetStanding(true, true, true, 25, 8000);
+			r.ReconcileUnits(warFactory, Units(("tank", 900, 900), ("tank", 900, 300)));
+			r.ReconcileUnits(airfield, Units(("heli", 1200, 600)));
+
+			// The airfield dies: it never reconciles again — the flush settles it.
+			r.FlushUnseenUnits(new HashSet<object> { warFactory });
+			Assert.That(r.PaidUnitCost, Is.EqualTo(600));
+			Assert.That(r.UnitOutstanding, Is.EqualTo(1200),
+				"only the living producer's remainder holds");
+			Assert.That(r.UnitItemsInFlight, Is.EqualTo(2));
+
+			// And the flush is idempotent for sibling managers sharing the ledger.
+			r.FlushUnseenUnits(new HashSet<object> { warFactory });
+			Assert.That(r.PaidUnitCost, Is.EqualTo(600));
+			Assert.That(r.UnitItemsInFlight, Is.EqualTo(2));
+		}
+
+		[Test]
+		public void ADeadConyardSettlesEssentialAndOptionalSeparately()
+		{
+			var r = new UnitSpendReservation();
+			var conyard = new object();
+			var defense = new object();
+			r.ReconcileBuildings(conyard, Buildings(("refinery", 2000, 1000, true)));
+			r.ReconcileBuildings(defense, Buildings(("turret", 800, 400, false)));
+
+			// The conyard is destroyed; the defence producer still reports next sweep.
+			r.FlushUnseenBuildings(new HashSet<object> { defense });
+			Assert.That(r.PaidEssentialCost, Is.EqualTo(1000));
+			Assert.That(r.PaidOptionalCost, Is.EqualTo(0),
+				"the live producer's optional item keeps flying");
+			Assert.That(r.BuildingItemsInFlight, Is.EqualTo(1));
 		}
 	}
 }

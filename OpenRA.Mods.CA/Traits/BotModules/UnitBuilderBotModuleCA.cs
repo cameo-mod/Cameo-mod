@@ -523,13 +523,21 @@ namespace OpenRA.Mods.CA.Traits
 			mobileReserve.SetStanding(feasible, capacity, poolNeedsReplenish,
 				Info.ReserveMobileProductionShare, playerResources.GetCashAndResources());
 
+			// TF-2 F1: feed a LIST — same-name queued units must count per instance, a
+			// name-keyed dict would collapse them. F2: after the sweep, producers this
+			// enumeration can no longer see (destroyed or disabled) flush their tracked
+			// items — a dead producer can never reconcile itself.
+			var liveOwners = new HashSet<object>();
 			foreach (var queue in queues)
 			{
-				var items = new Dictionary<string, (int Total, int Remaining)>(StringComparer.Ordinal);
+				liveOwners.Add(queue.Actor);
+				var items = new List<(string Item, int Total, int Remaining)>();
 				foreach (var i in queue.AllQueued())
-					items[i.Item] = (i.TotalCost, i.RemainingCost);
+					items.Add((i.Item, i.TotalCost, i.RemainingCost));
 				mobileReserve.ReconcileUnits(queue.Actor, items);
 			}
+
+			mobileReserve.FlushUnseenUnits(liveOwners);
 		}
 
 		// TF-2: the eligible offensive pool is the alive combat-role mass — under the configured
@@ -555,11 +563,17 @@ namespace OpenRA.Mods.CA.Traits
 
 		int IBotMobileSpendReserve.PaidUnitSharePct => mobileReserve.PaidSharePct();
 
-		void IBotMobileSpendReserve.ReconcileUnitSpend(object owner, IReadOnlyDictionary<string, (int Total, int Remaining)> items) =>
+		void IBotMobileSpendReserve.ReconcileUnitSpend(object owner, IReadOnlyList<(string Item, int Total, int Remaining)> items) =>
 			mobileReserve.ReconcileUnits(owner, items);
 
-		void IBotMobileSpendReserve.ReconcileBuildingSpend(object owner, IReadOnlyDictionary<string, (int Total, int Remaining, bool Essential)> items) =>
+		void IBotMobileSpendReserve.ReconcileBuildingSpend(object owner, IReadOnlyList<(string Item, int Total, int Remaining, bool Essential)> items) =>
 			mobileReserve.ReconcileBuildings(owner, items);
+
+		void IBotMobileSpendReserve.FlushUnitSpendOwners(IReadOnlyCollection<object> liveOwners) =>
+			mobileReserve.FlushUnseenUnits(liveOwners);
+
+		void IBotMobileSpendReserve.FlushBuildingSpendOwners(IReadOnlyCollection<object> liveOwners) =>
+			mobileReserve.FlushUnseenBuildings(liveOwners);
 
 		bool ShouldBuild(string name, bool ignoreUnitsToBuild, string queueCategory = null)
 		{
