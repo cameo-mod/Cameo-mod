@@ -20538,3 +20538,24 @@ biggest single lever = releasing sheet CPU buffers post-upload (~2.4 GB).
 Recommended the one allowed repro = same cell + a read-only memory sampler to
 separate managed vs native growth; requires Luna Manager for the serial
 heavy-run slot.
+
+## 2026-10-10 â€” A/B unblock forensics (read-only, Devin-Developer)
+
+- Parsed Luna DevOps's preserved `gc-verbose-26588.nettrace` with a TraceEvent
+  tool (`%TEMP%\gcanalyze`; speedscope/chromium conversions retain no GC data):
+  **6.78 GB allocated in 9.44 s** during `Mapâ†’LoadSequences` â€” retained
+  gen2 2.59 GB + LOH ~2.0 GB (>=4 MB band = sheet-buffer-sized, 1.6 GB).
+  Confirms the A5 "memory spike" is the content-load envelope, not a leak;
+  supports Reviewer's cap-calibration verdict with measured numbers.
+- Reviewed the `campaign-a5-parity-20261010-user12gb` pair (both completed,
+  peaks 8.43/8.84 GiB): strict comparator's DIVERGENT verdict is a
+  `match_end` boundary artifact â€” all 5,809 shared SYNCHASH values and all
+  orders identical through frame 5809; the only diffs are A's 6 tail
+  SYNCHASHes + 1 `RepairBuilding` inside a ~20-tick end-window (match_end at
+  tick 17,429 vs 17,449); arsenal stats + outcome byte-identical. Recommended
+  fixed-tick cap for parity cells or an end-window verdict class.
+- 1902 stall forensics: hang is first-tick (post-WT0 banners, zero WT>0),
+  spawn-pair specific, arm-independent.
+- Fleet docs: ANALYSIS_2026-10-10_a5_gc_trace_parsed_devin.md,
+  ANALYSIS_2026-10-10_a5_parity_divergent_tail_devin.md,
+  NOTE_2026-10-10_devin_parity1902_stall_forensics.md.
