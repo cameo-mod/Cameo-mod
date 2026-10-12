@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.Json;
 using NUnit.Framework;
 using OpenRA.Mods.CA;
@@ -96,6 +97,83 @@ namespace OpenRA.Mods.Cameo.Test
 				System.Array.Empty<EconomyQueueSnapshot>(), 5000, 0, 1000, 0));
 			rows.Add(AiEconomyHealthSchema.End(Identity(rows.Count, 50, "end"), true));
 			AiEconomyHealthSchemaTest.WriteCliFixture(name, rows);
+		}
+
+		[Test]
+		public void CancellationQueueIndexResolvesUniqueProducerGroup()
+		{
+			var index = AiEconomyQueueEvidence.BuildCancellationQueueIndex(new[]
+			{
+				(17u, "Building", "Building"), (23u, "Vehicle", "Vehicle"), (31u, "Building", "Building"),
+			}, AiEconomyHealthState.MaximumQueues);
+
+			Assert.That(index, Is.Not.Null);
+			Assert.That(AiEconomyQueueEvidence.ResolveCancellationQueueId(index, 17, "Building"),
+				Is.EqualTo("17:Building:Building"));
+			Assert.That(AiEconomyQueueEvidence.ResolveCancellationQueueId(index, 31, "Building"),
+				Is.EqualTo("31:Building:Building"), "same group on different producers stays distinct");
+			Assert.That(AiEconomyQueueEvidence.ResolveCancellationQueueId(index, 23, "Vehicle"),
+				Is.EqualTo("23:Vehicle:Vehicle"));
+			Assert.That(AiEconomyQueueEvidence.ResolveCancellationQueueId(index, 17, "Vehicle"), Is.Null,
+				"a group the producer does not own cannot resolve");
+			Assert.That(AiEconomyQueueEvidence.ResolveCancellationQueueId(index, 99, "Building"), Is.Null);
+		}
+
+		[Test]
+		public void CancellationQueueIndexAmbiguityAndOverflowFailClosed()
+		{
+			var ambiguous = AiEconomyQueueEvidence.BuildCancellationQueueIndex(new[]
+			{
+				(17u, "Building", "Building"), (17u, "Building", "Building"),
+			}, AiEconomyHealthState.MaximumQueues);
+			Assert.That(AiEconomyQueueEvidence.ResolveCancellationQueueId(ambiguous, 17, "Building"), Is.Null,
+				"two queue traits claiming one producer+group can never bind a canonical id");
+
+			var overflow = AiEconomyQueueEvidence.BuildCancellationQueueIndex(
+				System.Linq.Enumerable.Range(0, AiEconomyHealthState.MaximumQueues + 1)
+					.Select(i => ((uint)i + 1, "Building", "Building")), AiEconomyHealthState.MaximumQueues);
+			Assert.That(overflow, Is.Null, ">MaximumQueues own queues poisons the whole index");
+			Assert.That(AiEconomyQueueEvidence.ResolveCancellationQueueId(overflow, 1, "Building"), Is.Null);
+			Assert.That(AiEconomyQueueEvidence.ResolveCancellationQueueId(null, 1, "Building"), Is.Null);
+		}
+
+		[Test]
+		public void EmitOffGridTerminalCoverageFixtures()
+		{
+			// A terminal observe at a tick not divisible by 50 still emits its own pulse and
+			// end record; a transition callback on the same tick lands before them.
+			var terminal = new List<string>
+			{
+				AiEconomyHealthSchema.Pulse(Identity(0, 0, "pulse"), true, true,
+					System.Array.Empty<EconomyQueueSnapshot>(), 5000, 0, 1000, 100),
+				AiEconomyHealthSchema.Pulse(Identity(1, 50, "pulse"), true, true,
+					System.Array.Empty<EconomyQueueSnapshot>(), 5000, 0, 1000, 100),
+				AiEconomyHealthSchema.Pulse(Identity(2, 100, "pulse"), true, true,
+					System.Array.Empty<EconomyQueueSnapshot>(), 5000, 0, 1000, 100),
+			};
+			var t = Transition(BotQueueTransitionKind.Cancelled, episode: 4);
+			Assert.That(AiEconomyQueueEvidence.TryCancellation(in t, "17:Building:Building", out var evidence), Is.True);
+			terminal.Add(AiEconomyHealthSchema.Cancel(Identity(3, 137, "cancel"), evidence));
+			terminal.Add(AiEconomyHealthSchema.Pulse(Identity(4, 137, "pulse"), true, true,
+				System.Array.Empty<EconomyQueueSnapshot>(), 5000, 0, 1000, 100));
+			terminal.Add(AiEconomyHealthSchema.End(Identity(5, 137, "end"), true));
+			AiEconomyHealthSchemaTest.WriteCliFixture("terminal", terminal);
+
+			// The terminal watermark is only covered by a pulse within 50 ticks; a gap fails closed.
+			AiEconomyHealthSchemaTest.WriteCliFixture("terminal-gap", new[] {
+				AiEconomyHealthSchema.Pulse(Identity(0, 0, "pulse"), true, true,
+					System.Array.Empty<EconomyQueueSnapshot>(), 5000, 0, 1000, 100),
+				AiEconomyHealthSchema.Pulse(Identity(1, 50, "pulse"), true, true,
+					System.Array.Empty<EconomyQueueSnapshot>(), 5000, 0, 1000, 100),
+				AiEconomyHealthSchema.End(Identity(2, 137, "end"), true) });
+
+			// Capture must start at world tick zero; a late first pulse is not coverage.
+			AiEconomyHealthSchemaTest.WriteCliFixture("start-gap", new[] {
+				AiEconomyHealthSchema.Pulse(Identity(0, 37, "pulse"), true, true,
+					System.Array.Empty<EconomyQueueSnapshot>(), 5000, 0, 1000, 100),
+				AiEconomyHealthSchema.Pulse(Identity(1, 87, "pulse"), true, true,
+					System.Array.Empty<EconomyQueueSnapshot>(), 5000, 0, 1000, 100),
+				AiEconomyHealthSchema.End(Identity(2, 87, "end"), true) });
 		}
 
 		[Test]

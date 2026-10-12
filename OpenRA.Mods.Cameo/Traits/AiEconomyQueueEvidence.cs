@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Globalization;
 using OpenRA.Mods.CA.Traits;
 
@@ -45,5 +46,28 @@ namespace OpenRA.Mods.Cameo.Traits
 			BotQueueCancellationClass.Elimination => "elimination",
 			_ => null
 		};
+
+		// Amortized canonical queue resolution: one bounded own-queue enumeration per world
+		// tick instead of one scan per proven cancellation. The fail-closed contract is
+		// unchanged — more than maximumQueues own queues poisons the index (null), and a
+		// missing or ambiguous (producer, group) pair resolves to null.
+		internal static Dictionary<(uint Producer, string Group), string> BuildCancellationQueueIndex(
+			IEnumerable<(uint Producer, string QueueType, string Group)> ownQueues, int maximumQueues)
+		{
+			var index = new Dictionary<(uint, string), string>();
+			var count = 0;
+			foreach (var (producer, queueType, group) in ownQueues)
+			{
+				if (++count > maximumQueues)
+					return null;
+				var key = (producer, group);
+				index[key] = index.ContainsKey(key) ? null : $"{producer}:{queueType}:{group}";
+			}
+			return index;
+		}
+
+		internal static string ResolveCancellationQueueId(
+			IReadOnlyDictionary<(uint Producer, string Group), string> index, uint producer, string group) =>
+			index != null && index.TryGetValue((producer, group), out var id) ? id : null;
 	}
 }

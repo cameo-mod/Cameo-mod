@@ -160,6 +160,44 @@ Everything behind `UseProductionScaling`, default OFF; off = bit-identical.
   `MenuPostProcessEffect.PostWorldLoaded` in perf.log, zero new `exception-*.log` (187→187).
   No runtime behaviour claim beyond boot — no A/B launched; the arm is unarmed on master.
 
+# 2026-10-12 — Devin: REPLAY-HEALTH-LOGGER gates — amortized cancel lookup, terminal coverage fixtures, dual-checker analyzer (branch `devin/logger-gates`)
+
+*Devin-Integrator*, task `01a12023` (Boss reassigned by lead; base master `ebea34c82`, which already
+contains the reviewed restack `7ca7e9159` byte-identical — receipt `REVIEW_2026-10-12_logger_restack_7ca7_devin.md`).
+
+- **Per-cancel lookup amortized.** `AiEconomyQueueEvidence.BuildCancellationQueueIndex` +
+  `ResolveCancellationQueueId`: the recorder builds the canonical `(producer, group) -> queue_id`
+  map from its own configured `ProductionQueue` traits at most once per world tick (cached on
+  `transition.Tick`), replacing a world scan per cancellation. Index poisons at `>MaximumQueues`
+  own queues, duplicate `(producer, group)` resolves null, mid-tick-created queues resolve null —
+  all fail-closed; canonical evidence semantics unchanged. Focused tests pin unique resolution,
+  same-group different-producer distinction, ambiguity, overflow and null-index resolution.
+- **Terminal/off-grid coverage pinned through the consumer.** New fixtures emitted by
+  `EmitOffGridTerminalCoverageFixtures` and checked by `test_economy_logger_cli` against pinned
+  `economy_invariants@2a417dc3`: a terminal `cancel@137 + pulse@137 + end@137` sequence returns
+  `OBSERVED_HEALTHY` (callback ordering at a non-50 tick); `end@137` after `pulse@50` returns
+  `UNKNOWN` (`terminal health watermark not covered by pulse`); a first `pulse@37` returns
+  `UNKNOWN` (`missing capture-start pulse at world tick zero`). State seam adds
+  `SameTickReobservationFromInterleavedCallbacksStaysComplete` and `PulseDue(-1) == false`.
+- **Dual-checker gate in `ab_campaign_analyzer.py`.** New `--econ-health-dir` arms a second
+  per-seat family (`economy-invariants-v2`) next to `--health-dir` (`startup-economy-v1`).
+  `family_view` partitions loaded reports per policy (foreign policy stays in the view and fails
+  SCHEMA_MISMATCH; the other armed family's reports are ignored); `worst_verdict` combines armed
+  families `BLOCK > SCHEMA_MISMATCH > MISSING > UNKNOWN > HEALTHY`. A game pools only when every
+  expected seat is HEALTHY under every armed checker; the report gains `econ_armed`/`econ_policy`
+  and invalidation reasons name the failing family. Absent dirs keep the loud-warning posture;
+  single-family operation is unchanged. 13 `DualGate` tests cover healthy, missing, BLOCK
+  dominance, UNKNOWN, conflicting duplicates, seat-name mismatch, foreign-policy containment and
+  the CLI arming/warning paths.
+- **Bounds:** activation remains deliberately incomplete (sticky `MarkIncomplete` on `Activate`);
+  no YAML mount, no runtime capture, no launch, no runtime cost claimed. Boot gate DEFERRED —
+  launches are held for the lead's explicit go under the merge-wave reservation.
+- **Verification:** Release build 0 errors/0 warnings; rebuilt Cameo.Test 1952/1952 (AiEconomy
+  filter 50/50); `test_economy_logger_cli` 12/12 (new terminal/terminal-gap/start-gap fixtures
+  through pinned `economy_invariants@2a417dc3`); `test_ab_campaign_analyzer_health` 35/35;
+  `test_ab_campaign_analyzer` 29/29; `git diff --check` clean. Boot gate DEFERRED — launches held
+  for the lead's explicit go under the merge-wave reservation; nothing runtime claimed.
+
 # 2026-10-12 — Devin: M13 manager save/restore adapter (branch `devin/m13-liveness`)
 
 *Devin-Developer*, IMPL-M13-LIVENESS save/restore gap from `docs/design/M13_RUNTIME_WIRING.md`;

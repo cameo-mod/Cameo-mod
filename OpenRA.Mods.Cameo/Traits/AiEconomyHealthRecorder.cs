@@ -39,7 +39,14 @@ namespace OpenRA.Mods.Cameo.Traits
 		int sequence;
 		int rawSequence;
 		int lastPulse = -1;
+		int queueIndexTick = -1;
 		bool finished;
+
+		// Own-queue canonical index, rebuilt at most once per world tick on the first proven
+		// cancellation: one enumeration of world production queues amortizes every cancel in
+		// that tick instead of scanning per event. A queue created mid-tick after the index was
+		// built resolves to null — fail-closed UNKNOWN, never a wrong binding.
+		IReadOnlyDictionary<(uint Producer, string Group), string> queueIndex;
 
 		public AiEconomyHealthRecorder(Actor self) { this.self = self; }
 
@@ -153,23 +160,24 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		string CancellationQueueId(in BotQueueTransition transition)
 		{
-			string id = null;
-			var count = 0;
+			if (queueIndexTick != transition.Tick)
+			{
+				queueIndexTick = transition.Tick;
+				queueIndex = AiEconomyQueueEvidence.BuildCancellationQueueIndex(
+					OwnConfiguredQueues(), AiEconomyHealthState.MaximumQueues);
+			}
+			return AiEconomyQueueEvidence.ResolveCancellationQueueId(
+				queueIndex, transition.ProducerActorId, transition.Queue);
+		}
+
+		IEnumerable<(uint Producer, string QueueType, string Group)> OwnConfiguredQueues()
+		{
 			foreach (var pair in self.World.ActorsWithTrait<ProductionQueue>())
 			{
 				var queue = pair.Trait;
-				if (pair.Actor.Owner != self.Owner || !groups.Contains(queue.Info.Group))
-					continue;
-				if (++count > AiEconomyHealthState.MaximumQueues)
-					return null;
-				if (pair.Actor.ActorID != transition.ProducerActorId || queue.Info.Group != transition.Queue)
-					continue;
-				// The seam names the group, not the queue trait instance. Ambiguity is UNKNOWN.
-				if (id != null)
-					return null;
-				id = $"{pair.Actor.ActorID}:{queue.Info.Type}:{queue.Info.Group}";
+				if (pair.Actor.Owner == self.Owner && groups.Contains(queue.Info.Group))
+					yield return (pair.Actor.ActorID, queue.Info.Type, queue.Info.Group);
 			}
-			return id;
 		}
 
 		void INotifyResourceAccepted.OnResourceAccepted(Actor actor, Actor refinery, string resourceType, int count, int value)

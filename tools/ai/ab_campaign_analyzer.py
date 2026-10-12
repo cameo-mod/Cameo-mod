@@ -110,11 +110,16 @@ def validate_and_tag(receipt: dict) -> dict:
 # ---------------------------------------------------------------------------
 
 HEALTH_POLICY = "startup-economy-v1"
+ECON_POLICY = "economy-invariants-v2"
 HEALTHY = "OBSERVED_HEALTHY"
 MARKER_REASON = "INCOMPLETE_UNKNOWN"  # host-restart marker: provisional detection, see is_marker()
 HEALTH_NOT_SUPPLIED_WARNING = (
     "WARNING: no --health-dir supplied; replay_health is NOT applied, so games with a BLOCK/UNKNOWN/missing "
     "startup-economy verdict are still pooled. Do not use this readout as campaign evidence."
+)
+ECON_HEALTH_NOT_SUPPLIED_WARNING = (
+    "WARNING: no --econ-health-dir supplied; economy_invariants is NOT applied, so games with a BLOCK/UNKNOWN/missing "
+    "economy-invariants verdict are still pooled. Do not use this readout as campaign evidence."
 )
 
 
@@ -178,21 +183,39 @@ def expected_health_players(receipt: dict) -> tuple[set[str] | None, str, str]:
     return players, "OK", ""
 
 
-def health_verdict(by_player: dict[str, list[dict]] | None, expected_seats: int,
-                   expected_players: set[str] | None = None) -> tuple[str, str]:
-    """HEALTHY | BLOCK | UNKNOWN | MISSING | SCHEMA_MISMATCH for one game. BLOCK dominates; anything that is not
-    every expected seat OBSERVED_HEALTHY is not poolable. With expected_players the coverage check is by NAME
-    (missing seat -> MISSING, foreign seat -> SCHEMA_MISMATCH); without it, only the seat COUNT is checked."""
+def family_view(by_player: dict[str, list[dict]] | None, policy: str,
+                ignore_policies: frozenset[str] = frozenset()) -> dict[str, list[dict]] | None:
+    """One checker family's view of the loaded reports: per seat, the reports matching `policy` PLUS any
+    foreign-policy reports (kept so the verdict flags them SCHEMA_MISMATCH). Reports belonging to another
+    armed checker family (ignore_policies) are left to that family's own verdict. A seat with no reports in
+    the view is absent -> MISSING for this family."""
     if not by_player:
-        return "MISSING", "no replay_health report for this game_uid"
+        return None
+    out: dict[str, list[dict]] = {}
+    for player, reps in by_player.items():
+        fam = [rep for rep in reps if rep.get("policy") == policy or rep.get("policy") not in ignore_policies]
+        if fam:
+            out[player] = fam
+    return out or None
+
+
+def health_verdict(by_player: dict[str, list[dict]] | None, expected_seats: int,
+                   expected_players: set[str] | None = None, policy: str = HEALTH_POLICY,
+                   family: str = "replay_health") -> tuple[str, str]:
+    """HEALTHY | BLOCK | UNKNOWN | MISSING | SCHEMA_MISMATCH for one game, one checker family. BLOCK dominates;
+    anything that is not every expected seat OBSERVED_HEALTHY is not poolable. With expected_players the
+    coverage check is by NAME (missing seat -> MISSING, foreign seat -> SCHEMA_MISMATCH); without it, only
+    the seat COUNT is checked."""
+    if not by_player:
+        return "MISSING", f"no {family} report for this game_uid"
     reports = [rep for reps in by_player.values() for rep in reps]
     statuses = {rep.get("status") for rep in reports}
     if "BLOCK" in statuses:
-        return "BLOCK", "replay_health BLOCK on at least one seat"
-    bad = [rep for rep in reports if rep.get("policy") != HEALTH_POLICY or not isinstance(rep.get("status"), str)
+        return "BLOCK", f"{family} BLOCK on at least one seat"
+    bad = [rep for rep in reports if rep.get("policy") != policy or not isinstance(rep.get("status"), str)
            or not isinstance(rep.get("player"), str) or not rep.get("player")]
     if bad:
-        return "SCHEMA_MISMATCH", f"{len(bad)} report(s) with policy != {HEALTH_POLICY} or missing status/player"
+        return "SCHEMA_MISMATCH", f"{len(bad)} report(s) with policy != {policy} or missing status/player"
     conflicting = [p for p, reps in by_player.items() if len({rep["status"] for rep in reps}) > 1]
     if conflicting:
         return "SCHEMA_MISMATCH", f"conflicting duplicate reports for seat(s) {sorted(conflicting)}"
@@ -210,6 +233,15 @@ def health_verdict(by_player: dict[str, list[dict]] | None, expected_seats: int,
     return "HEALTHY", ""
 
 
+# Deterministic precedence when two checker families are armed: an active defect outranks corrupt evidence,
+# which outranks absent or unverifiable evidence.
+VERDICT_ORDER = {"BLOCK": 0, "SCHEMA_MISMATCH": 1, "MISSING": 2, "UNKNOWN": 3, "HEALTHY": 4}
+
+
+def worst_verdict(a: tuple[str, str], b: tuple[str, str]) -> tuple[str, str]:
+    return min((a, b), key=lambda vd: VERDICT_ORDER.get(vd[0], 3))
+
+
 def is_marker(receipt: dict) -> bool:
     """Host-restart INCOMPLETE_UNKNOWN marker. Detection is provisional (end_reason/status equals the marker
     token) until the producer's on-disk shape is confirmed; either way an INCOMPLETE receipt is never pooled."""
@@ -217,12 +249,19 @@ def is_marker(receipt: dict) -> bool:
 
 
 def apply_health_gate(receipts: list[dict], health: dict[str, Any]) -> tuple[list[dict], dict[str, Any]]:
+    """Dual-checker gate: every loaded checker family arms independently ("games" = replay_health,
+    "econ_games" = economy_invariants) and every ARMED family must return HEALTHY for a game to pool.
+    Verdicts combine through worst_verdict (BLOCK > SCHEMA_MISMATCH > MISSING > UNKNOWN > HEALTHY)."""
+    replay_armed = "games" in health
+    econ_armed = "econ_games" in health
     report: dict[str, Any] = {
         "mode": "APPLIED", "policy": HEALTH_POLICY, "load_errors": health.get("errors", []),
+        "econ_armed": econ_armed, "econ_policy": ECON_POLICY if econ_armed else None,
         "verdict_counts": collections.Counter(), "excluded_by_setup": {}, "excluded_games": [],
         "marker_reruns_replaced": [], "marker_reruns_rejected": [], "identity_unverified_games": [],
     }
     games = health.get("games", {})
+    econ_games = health.get("econ_games", {})
 
     def exclude(r: dict, verdict: str, detail: str) -> None:
         setup = r.get("setup_id")
@@ -246,8 +285,19 @@ def apply_health_gate(receipts: list[dict], health: dict[str, Any]) -> tuple[lis
         if bridge == "SCHEMA_MISMATCH":
             verdict, detail = bridge, bridge_detail
         else:
-            verdict, detail = health_verdict(games.get(uid) if isinstance(uid, str) else None,
-                                             len(r.get("resolved_seats") or []), expected)
+            seat_count = len(r.get("resolved_seats") or [])
+            verdict, detail = "HEALTHY", ""
+            if replay_armed:
+                verdict, detail = health_verdict(
+                    family_view(games.get(uid) if isinstance(uid, str) else None,
+                                HEALTH_POLICY, {ECON_POLICY} if econ_armed else frozenset()),
+                    seat_count, expected, policy=HEALTH_POLICY, family="replay_health")
+            if econ_armed:
+                verdict, detail = worst_verdict(
+                    (verdict, detail),
+                    health_verdict(family_view(econ_games.get(uid) if isinstance(uid, str) else None,
+                                               ECON_POLICY, {HEALTH_POLICY}),
+                                   seat_count, expected, policy=ECON_POLICY, family="economy_invariants"))
         r["_health_verdict"] = verdict
         report["verdict_counts"][verdict] += 1
         if verdict == "HEALTHY":
@@ -257,7 +307,7 @@ def apply_health_gate(receipts: list[dict], health: dict[str, Any]) -> tuple[lis
         exclude(r, verdict, detail)
         if verdict == "BLOCK":
             r["_valid"] = False
-            r["_invalid_reason"] = f"replay_health BLOCK: {detail}"
+            r["_invalid_reason"] = detail
             continue
         r["_health_excluded"] = True
         r["_original_end_class"] = r.get("end_class")
@@ -695,6 +745,14 @@ def analyze_cmd(args: argparse.Namespace) -> int:
     health = load_health(args.health_dir) if args.health_dir else None
     if health is None:
         print(HEALTH_NOT_SUPPLIED_WARNING, file=sys.stderr)
+    if args.econ_health_dir:
+        econ = load_health(args.econ_health_dir)
+        if health is None:
+            health = {"errors": []}
+        health["econ_games"] = econ["games"]
+        health["errors"] = health.get("errors", []) + econ.get("errors", [])
+    else:
+        print(ECON_HEALTH_NOT_SUPPLIED_WARNING, file=sys.stderr)
     result = summarize(receipts, manifest, health)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, default=str) + "\n", encoding="utf-8")
@@ -713,6 +771,9 @@ def main(argv=None):
     a.add_argument("--manifest", type=pathlib.Path, help="frozen campaign manifest, for missing-receipt detection only")
     a.add_argument("--health-dir", nargs="+", type=pathlib.Path,
                    help="replay_health sidecar files/directories; when given, a game counts only if every seat is OBSERVED_HEALTHY")
+    a.add_argument("--econ-health-dir", nargs="+", type=pathlib.Path,
+                   help="economy_invariants sidecar files/directories; arms a second per-seat gate "
+                        "(economy-invariants-v2) alongside replay_health — every armed checker must return HEALTHY")
     a.add_argument("--output", type=pathlib.Path, required=True)
     a.set_defaults(fn=analyze_cmd)
     args = p.parse_args(argv)
