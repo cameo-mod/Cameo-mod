@@ -40,9 +40,11 @@ namespace OpenRA.Mods.Cameo.Test
 			public readonly Actor Host, Rifle, Infantry;
 			public readonly AttackGarrisoned Attack;
 			public readonly OpenRA.Test.AttackGarrisonedTest.Recorder Recorder;
+			readonly List<Actor> occupants = [];
+			readonly OpenRA.Test.AttackGarrisonedTest.Fixture shell;
 			public MountedFixture(string host, string infantry)
 			{
-				var shell = new OpenRA.Test.AttackGarrisonedTest.Fixture();
+				shell = new OpenRA.Test.AttackGarrisonedTest.Fixture();
 				var actors = shell.World.Map.Rules.Actors.ToDictionary(p => p.Key, p => p.Value);
 				var weapons = shell.World.Map.Rules.Weapons.ToDictionary(p => p.Key, p => p.Value);
 				Configure(actors, weapons, host, infantry);
@@ -60,11 +62,24 @@ namespace OpenRA.Mods.Cameo.Test
 			{
 				if (Host.TraitOrDefault<Cargo>() is Cargo cargo) cargo.Load(Host, Rifle);
 				else Host.Trait<OpenRA.Mods.AS.Traits.Garrisonable>().Load(Host, Rifle);
+				typeof(Actor).GetProperty("IsInWorld").SetValue(Rifle, false); occupants.Add(Rifle);
+			}
+			public void Fill()
+			{
+				var garrison = Host.Trait<OpenRA.Mods.AS.Traits.Garrisonable>();
+				for (var i = 1; i < garrison.Info.MaxWeight; i++)
+				{
+					var actor = shell.Create("rifle", Host.Owner, WPos.Zero);
+					actor.Trait<AutoTarget>().SetStance(actor, UnitStance.Defend);
+					garrison.Load(Host, actor);
+					typeof(Actor).GetProperty("IsInWorld").SetValue(actor, false); occupants.Add(actor);
+				}
 			}
 			public void Tick()
 			{
 				((ITick)Attack).Tick(Host);
-				foreach (var arm in Rifle.TraitsImplementing<Armament>()) ((ITick)arm).Tick(Rifle);
+				foreach (var actor in occupants)
+					foreach (var arm in actor.TraitsImplementing<Armament>()) ((ITick)arm).Tick(actor);
 			}
 		}
 
@@ -140,6 +155,35 @@ namespace OpenRA.Mods.Cameo.Test
 			foreach (var position in new[] { new WPos(0, -2048, 0), new WPos(2048, 0, 0),
 				new WPos(0, 2048, 0), new WPos(-2048, 0, 0) })
 				AssertFires(host, "ra1_allies_machinegunner", explicitAttack, position);
+		}
+
+		static IEnumerable<TestCaseData> CivilianCases()
+		{
+			foreach (var host in new[] { "V01", "V20", "V23", "V37" })
+				foreach (var full in new[] { false, true })
+					foreach (var ordered in new[] { false, true })
+						yield return new TestCaseData(host, full, ordered);
+		}
+		[TestCaseSource(nameof(CivilianCases))]
+		public void CivilianProfilesFireInEightDirectionsWithOneOrFullLoad(string host, bool full, bool ordered)
+		{
+			foreach (var p in new[] { new WPos(0, -2048, 0), new WPos(1448, -1448, 0),
+				new WPos(2048, 0, 0), new WPos(1448, 1448, 0), new WPos(0, 2048, 0),
+				new WPos(-1448, 1448, 0), new WPos(-2048, 0, 0), new WPos(-1448, -1448, 0) })
+			{
+				var f = new MountedFixture(host, "td_gdi_minigunner");
+				f.Host.Trait<AutoTarget>().SetStance(f.Host, UnitStance.Defend);
+				f.Rifle.Trait<AutoTarget>().SetStance(f.Rifle, UnitStance.Defend);
+				f.Infantry.Trait<IPositionable>().SetCenterPosition(f.Infantry, p);
+				f.Enter(); if (full) f.Fill();
+				if (ordered) f.Attack.GetAttackActivity(f.Host, AttackSource.Default,
+					Target.FromActor(f.Infantry), false, false).TickOuter(f.Host);
+				for (var i = 0; i < 30; i++) f.Tick();
+				var fired = f.Recorder.Events.Select(e => e.Split(':')[1]).Distinct().Count();
+				var expected = full ? Math.Min(f.Attack.Info.PortOffsets.Length,
+					f.Host.Trait<OpenRA.Mods.AS.Traits.Garrisonable>().Info.MaxWeight) : 1;
+				Assert.That(fired, Is.EqualTo(expected), $"{host} full={full} ordered={ordered} {p}");
+			}
 		}
 	}
 }
