@@ -1,0 +1,148 @@
+diff --git a/mods/cameo/ai/ai.yaml b/mods/cameo/ai/ai.yaml
+index d864ee57b..73a14305a 100644
+--- a/mods/cameo/ai/ai.yaml
++++ b/mods/cameo/ai/ai.yaml
+@@ -4290,6 +4290,8 @@ Player:
+ 		RequiresCondition: genericbot && personality-rush
+ 		Notification: notification-bot-personality-rush
+ 	SquadManagerBotModuleCA@rush:
++		UseProtectionEpisodeGuard: true
++		FormationHoldHysteresisCells: 2
+ 		UseProtectionRequests: true
+ 		# CA-2 (AI_ARCHITECTURE 12.6): the defend draft keeps a reserve instead of
+ 		# stripping the idle pool on every ping (FransGroundDefendForcePreservationGuard
+@@ -4317,12 +4319,12 @@ Player:
+ 		EnsureArtillerySiege: true
+ 		EnsureAntiAirEscort: true
+ 		SquadMicroEnabled: true
+-		UseSquadOrderDedup: false
++		UseSquadOrderDedup: true
+ 		FormationMovement: true
+ 		# AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only
+ 		# orders and the latched leader wait - the per-tick identical Stop/AttackMove
+ 		# re-issues cancelled every MoveTo (army stutter). Off = the classic order stream.
+-		UseFormationHysteresis: false
++		UseFormationHysteresis: true
+ 		RequiresCondition: genericbot && personality-rush
+ 		# CA-3 starting mix (§12.5): % of own mobile combat units per role; unlisted roles still produce at
+ 		# the RoleMixRoleFloorPct floor. Inert until switch group J_rolemix_production arms UseRoleMix.
+@@ -4388,6 +4390,8 @@ Player:
+ 		RequiresCondition: genericbot && personality-turtle
+ 		Notification: notification-bot-personality-turtle
+ 	SquadManagerBotModuleCA@turtle:
++		UseProtectionEpisodeGuard: true
++		FormationHoldHysteresisCells: 2
+ 		UseProtectionRequests: true
+ 		UseDefendPreservation: false
+ 		UseDirectorPacing: false
+@@ -4410,12 +4414,12 @@ Player:
+ 		EnsureArtillerySiege: true
+ 		EnsureAntiAirEscort: true
+ 		SquadMicroEnabled: true
+-		UseSquadOrderDedup: false
++		UseSquadOrderDedup: true
+ 		FormationMovement: true
+ 		# AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only
+ 		# orders and the latched leader wait - the per-tick identical Stop/AttackMove
+ 		# re-issues cancelled every MoveTo (army stutter). Off = the classic order stream.
+-		UseFormationHysteresis: false
++		UseFormationHysteresis: true
+ 		RequiresCondition: genericbot && personality-turtle
+ 		# CA-3 starting mix (§12.5): % of own mobile combat units per role; unlisted roles still produce at
+ 		# the RoleMixRoleFloorPct floor. Inert until switch group J_rolemix_production arms UseRoleMix.
+@@ -4480,6 +4484,8 @@ Player:
+ 		RequiresCondition: genericbot && personality-tech
+ 		Notification: notification-bot-personality-tech
+ 	SquadManagerBotModuleCA@tech:
++		UseProtectionEpisodeGuard: true
++		FormationHoldHysteresisCells: 2
+ 		UseProtectionRequests: true
+ 		UseDefendPreservation: false
+ 		UseDirectorPacing: false
+@@ -4502,12 +4508,12 @@ Player:
+ 		EnsureArtillerySiege: true
+ 		EnsureAntiAirEscort: true
+ 		SquadMicroEnabled: true
+-		UseSquadOrderDedup: false
++		UseSquadOrderDedup: true
+ 		FormationMovement: true
+ 		# AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only
+ 		# orders and the latched leader wait - the per-tick identical Stop/AttackMove
+ 		# re-issues cancelled every MoveTo (army stutter). Off = the classic order stream.
+-		UseFormationHysteresis: false
++		UseFormationHysteresis: true
+ 		RequiresCondition: genericbot && personality-tech
+ 		# CA-3 starting mix (§12.5): % of own mobile combat units per role; unlisted roles still produce at
+ 		# the RoleMixRoleFloorPct floor. Inert until switch group J_rolemix_production arms UseRoleMix.
+@@ -4574,6 +4580,8 @@ Player:
+ 		RequiresCondition: genericbot && personality-expansion
+ 		Notification: notification-bot-personality-expansion
+ 	SquadManagerBotModuleCA@expansion:
++		UseProtectionEpisodeGuard: true
++		FormationHoldHysteresisCells: 2
+ 		UseProtectionRequests: true
+ 		UseDefendPreservation: false
+ 		UseDirectorPacing: false
+@@ -4596,12 +4604,12 @@ Player:
+ 		EnsureArtillerySiege: true
+ 		EnsureAntiAirEscort: true
+ 		SquadMicroEnabled: true
+-		UseSquadOrderDedup: false
++		UseSquadOrderDedup: true
+ 		FormationMovement: true
+ 		# AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only
+ 		# orders and the latched leader wait - the per-tick identical Stop/AttackMove
+ 		# re-issues cancelled every MoveTo (army stutter). Off = the classic order stream.
+-		UseFormationHysteresis: false
++		UseFormationHysteresis: true
+ 		RequiresCondition: genericbot && personality-expansion
+ 		# CA-3 starting mix (§12.5): % of own mobile combat units per role; unlisted roles still produce at
+ 		# the RoleMixRoleFloorPct floor. Inert until switch group J_rolemix_production arms UseRoleMix.
+@@ -4667,6 +4675,8 @@ Player:
+ 		RequiresCondition: genericbot && personality-steamroller
+ 		Notification: notification-bot-personality-steamroller
+ 	SquadManagerBotModuleCA@steamroller:
++		UseProtectionEpisodeGuard: true
++		FormationHoldHysteresisCells: 2
+ 		UseProtectionRequests: true
+ 		UseDefendPreservation: false
+ 		UseDirectorPacing: false
+@@ -4689,12 +4699,12 @@ Player:
+ 		EnsureArtillerySiege: true
+ 		EnsureAntiAirEscort: true
+ 		SquadMicroEnabled: true
+-		UseSquadOrderDedup: false
++		UseSquadOrderDedup: true
+ 		FormationMovement: true
+ 		# AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only
+ 		# orders and the latched leader wait - the per-tick identical Stop/AttackMove
+ 		# re-issues cancelled every MoveTo (army stutter). Off = the classic order stream.
+-		UseFormationHysteresis: false
++		UseFormationHysteresis: true
+ 		RequiresCondition: genericbot && personality-steamroller
+ 		# CA-3 starting mix (§12.5): % of own mobile combat units per role; unlisted roles still produce at
+ 		# the RoleMixRoleFloorPct floor. Inert until switch group J_rolemix_production arms UseRoleMix.
+@@ -4758,6 +4768,8 @@ Player:
+ 		RequiresCondition: genericbot && personality-guerrilla
+ 		Notification: notification-bot-personality-guerrilla
+ 	SquadManagerBotModuleCA@guerrilla:
++		UseProtectionEpisodeGuard: true
++		FormationHoldHysteresisCells: 2
+ 		UseProtectionRequests: true
+ 		UseDefendPreservation: false
+ 		UseDirectorPacing: false
+@@ -4780,12 +4792,12 @@ Player:
+ 		EnsureArtillerySiege: true
+ 		EnsureAntiAirEscort: true
+ 		SquadMicroEnabled: true
+-		UseSquadOrderDedup: false
++		UseSquadOrderDedup: true
+ 		FormationMovement: true
+ 		# AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only
+ 		# orders and the latched leader wait - the per-tick identical Stop/AttackMove
+ 		# re-issues cancelled every MoveTo (army stutter). Off = the classic order stream.
+-		UseFormationHysteresis: false
++		UseFormationHysteresis: true
+ 		RequiresCondition: genericbot && personality-guerrilla
+ 		# CA-3 starting mix (§12.5): % of own mobile combat units per role; unlisted roles still produce at
+ 		# the RoleMixRoleFloorPct floor. Inert until switch group J_rolemix_production arms UseRoleMix.
