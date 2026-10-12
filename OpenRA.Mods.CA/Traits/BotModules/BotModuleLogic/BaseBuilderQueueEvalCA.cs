@@ -527,6 +527,25 @@ namespace OpenRA.Mods.CA.Traits
 		public static bool PlugInstallProven(bool slotDefinesType, bool requirementKeyed, bool acceptsNow)
 			=> slotDefinesType && !requirementKeyed && !acceptsNow;
 
+		/// <summary>PLACEMENT-PROOF-LOCATION-FIX (01a131ba): the occupied-cell proof —
+		/// an own, live, name-matching actor occupies the ordered site cell itself. The
+		/// ActorMap hit at `site` carries only actors that INFLUENCE that cell; a building
+		/// whose footprint marks its top-left '_' never does, so its Location cell is
+		/// provably absent. Proven when such an actor is found at the site cell.</summary>
+		public static bool OccupiedSiteProven(bool live, bool own, bool nameMatches)
+			=> live && own && nameMatches;
+
+		/// <summary>PLACEMENT-PROOF-LOCATION-FIX (01a131ba): the location fallback —
+		/// `Tiles(location)` skips '_' cells, so a '_'-top-left footprint (every
+		/// ^TDPROC refinery, td_gdi_repairfacility) never occupies its own Location in
+		/// BuildingInfluence and the occupied-cell proof can never find it at `site`.
+		/// Its own Location IS still `site` (the order's top-left), so an own, live,
+		/// name-matching actor whose Location equals the ordered site proves placement:
+		/// name+owner+liveness already bind the candidate, and a matching actor standing
+		/// at the order's top-left is exactly the evidence the request asked for.</summary>
+		public static bool LocationSiteProven(bool live, bool own, bool nameMatches, bool locationEqualsSite)
+			=> live && own && nameMatches && locationEqualsSite;
+
 		/// <summary>
 		/// REPAIR-B3 (SPEC_2026-10-09 §3): the admission gate — reserve the claim's WHOLE covered
 		/// set atomically under the provider's current coverage-model version. False = refuse

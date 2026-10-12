@@ -1863,5 +1863,91 @@ namespace OpenRA.Mods.Cameo.Test
 				BaseBuilderQueueEvalCA.AirDefenceAdmits(BaseBuilderQueueEvalCA.IsDedicatedAntiAir(samsite), true),
 				Is.True, "a seen enemy air capability ungates the dedicated-AA front defence");
 		}
+
+		// PLACEMENT-PROOF-LOCATION-FIX (01a131ba): '_' top-left footprints (every
+		// ^TDPROC refinery, td_gdi_repairfacility) never influence their own Location
+		// cell — BuildingInfo.Tiles() skips '_' — so the ActorMap occupancy probe at the
+		// ordered site can never see them and their Placed request always expired
+		// Removed -> UNKNOWN, OBSERVED_HEALTHY unreachable. The proof is now a union:
+		// the occupied-cell path (unchanged) OR an own live name-matching actor whose
+		// Location equals the ordered site.
+
+		[Test]
+		public void LocationFallbackProvesUnderscoreTopLeftFootprint()
+		{
+			// The refinery shape end to end: site scan finds nothing (the building does
+			// not influence its own top-left), but its Location IS the ordered site.
+			Assert.That(BaseBuilderQueueEvalCA.LocationSiteProven(
+					live: true, own: true, nameMatches: true, locationEqualsSite: true),
+				Is.True, "own live matching actor at Location == site proves the '_' top-left placement");
+
+			var pending = new BotQueuePendingTerminal
+			{
+				Item = new object(), ItemName = "proc", Kind = BotQueueTransitionKind.Placed,
+				IssuedTick = 100, Site = new CPos(3, 4), AwaitingProof = true
+			};
+			var fallbackProven = BaseBuilderQueueEvalCA.LocationSiteProven(
+				live: true, own: true, nameMatches: true, locationEqualsSite: true);
+			Assert.That(pending.ResolveWhileAwaiting(104, placementProven: fallbackProven, playerEliminated: false),
+				Is.EqualTo(BotQueuePendingResolution.EmitRequested),
+				"the armed refinery request resolves Placed through the location fallback");
+		}
+
+		[Test]
+		public void LocationFallbackRejectsWrongNameOwnerOrSite()
+		{
+			// Every leg must hold: a wrong-named neighbour, an enemy building, a dead
+			// husk, or a same-name building one cell over is never proof.
+			Assert.That(BaseBuilderQueueEvalCA.LocationSiteProven(true, true, nameMatches: false, true),
+				Is.False, "a different building at the site cell does not prove this request");
+			Assert.That(BaseBuilderQueueEvalCA.LocationSiteProven(true, own: false, true, true),
+				Is.False, "an enemy's same-name building at the cell is not our placement");
+			Assert.That(BaseBuilderQueueEvalCA.LocationSiteProven(live: false, true, true, true),
+				Is.False, "a dead/sold actor at the site is residue, not proof");
+			Assert.That(BaseBuilderQueueEvalCA.LocationSiteProven(true, true, true, locationEqualsSite: false),
+				Is.False, "a same-name building at a different top-left cannot satisfy the ordered site");
+		}
+
+		[Test]
+		public void OccupiedCellPathStillProvesPlacement()
+		{
+			// The original evidence is untouched: an own live name-matching actor that
+			// INFLUENCES the ordered cell (every ordinary-x' top-left footprint) still
+			// proves — the fallback adds a leg, it does not replace this one.
+			Assert.That(BaseBuilderQueueEvalCA.OccupiedSiteProven(live: true, own: true, nameMatches: true),
+				Is.True, "building occupying the site cell proves, as before");
+			Assert.That(BaseBuilderQueueEvalCA.OccupiedSiteProven(live: false, own: true, nameMatches: true),
+				Is.False);
+			Assert.That(BaseBuilderQueueEvalCA.OccupiedSiteProven(true, own: false, true), Is.False);
+			Assert.That(BaseBuilderQueueEvalCA.OccupiedSiteProven(true, true, nameMatches: false), Is.False);
+
+			var pending = new BotQueuePendingTerminal
+			{
+				Item = new object(), ItemName = "powr", Kind = BotQueueTransitionKind.Placed,
+				IssuedTick = 100, Site = new CPos(7, 8)
+			};
+			var occupiedProven = BaseBuilderQueueEvalCA.OccupiedSiteProven(true, true, true);
+			Assert.That(pending.ResolveOnRemoval(101, queueSeen: true, placementProven: occupiedProven),
+				Is.EqualTo(BotQueuePendingResolution.EmitRequested),
+				"occupied-cell evidence still resolves Placed at removal");
+		}
+
+		[Test]
+		public void UnprovenPendingStillExpiresToRemoved()
+		{
+			// Neither leg proving leaves the armed request honestly UNKNOWN: it expires
+			// Removed carrying the intent reason, never a guessed Placed.
+			var pending = new BotQueuePendingTerminal
+			{
+				Item = new object(), ItemName = "proc", Kind = BotQueueTransitionKind.Placed,
+				IssuedTick = 100, Site = new CPos(3, 4), AwaitingProof = true
+			};
+			var neitherLeg = BaseBuilderQueueEvalCA.OccupiedSiteProven(true, true, false)
+				|| BaseBuilderQueueEvalCA.LocationSiteProven(true, true, true, false);
+			Assert.That(neitherLeg, Is.False, "neither occupancy nor location evidence exists");
+			Assert.That(pending.ResolveWhileAwaiting(110, placementProven: neitherLeg, playerEliminated: false),
+				Is.EqualTo(BotQueuePendingResolution.EmitRemoved),
+				"unproven placement still expires Removed -> schema-2 UNKNOWN");
+		}
 	}
 }

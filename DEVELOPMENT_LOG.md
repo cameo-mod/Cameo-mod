@@ -1,3 +1,48 @@
+# 2026-10-13 — Devin: PLACEMENT-PROOF-LOCATION-FIX (01a131ba) — own-actor `Location == site` fallback
+
+*Devin-Developer.* Task 01a131ba (blocks REPLAY-HEALTH-LOGGER `01a12023`): the queue
+watch's `PlacementProof` used only `world.ActorMap.GetActorsAt(site)`, which returns
+actors whose BuildingInfluence covers the ordered cell. Buildings whose footprint marks
+the top-left `'_'` — every `^TDPROC` refinery, `td_gdi_repairfacility` — never occupy
+their own `Location` cell (`BuildingInfo.Tiles()` skips `'_'`, `FootprintCellType.Empty`),
+so the proof could never see them: every refinery-shaped `Placed` request expired
+`Removed` → schema-2 `UNKNOWN`, and `economy_invariants` could never reach
+`OBSERVED_HEALTHY`.
+
+- **Fix (behaviour of proof only, no order/claim/budget change):**
+  `BaseBuilderQueueManagerCA.PlacementProof` keeps the `GetActorsAt(site)` occupied-cell
+  check verbatim (now named `BaseBuilderQueueEvalCA.OccupiedSiteProven`) and adds the
+  fallback: `world.ActorsHavingTrait<Building>().Any(a => LocationSiteProven(!a.IsDead,
+  a.Owner == player, PlacedNameMatches(p.ItemName, a), a.Location == site))`.
+  The `PlugType` branch is untouched. Contract: keep occupied path, additive fallback,
+  `!IsDead` + own + `PlacedNameMatches` + `Location == site` — implemented verbatim.
+- **Seams (BaseBuilderQueueEvalCA, house pattern beside `PlugInstallProven`):**
+  `OccupiedSiteProven(live, own, nameMatches)` and
+  `LocationSiteProven(live, own, nameMatches, locationEqualsSite)` — pure predicates so
+  the union legs are unit-testable; `ActorsHavingTrait<Building>` bounds the fallback
+  scan to placed buildings (placement items are buildings; plugs never reach this
+  branch), the smallest-set-first order the lead's spec confirmation calls for.
+- **Regression coverage (BaseBuilderQueueEvalTest +4, not run — no build/test admission
+  this slot):** `LocationFallbackProvesUnderscoreTopLeftFootprint` (fallback →
+  `EmitRequested`/`Placed` through the armed pending), `LocationFallbackRejectsWrongNameOwnerOrSite`
+  (each rejecting leg), `OccupiedCellPathStillProvesPlacement` (leg preserved + pending
+  resolves at removal), `UnprovenPendingStillExpiresToRemoved` (fail-closed UNKNOWN).
+  No fixtures mutate — `WriteCliFixture` paths feed synthetic transitions, never
+  `PlacementProof`; no seq renumbering needed.
+- **False-positive review:** `site` is the order's `Target.FromCell` top-left
+  (`NotePendingTerminal(location.Value)`); a same-name own live actor at that top-left is
+  exactly the evidence the request asked for — a wrong-named or enemy actor cannot match,
+  and a dead/sold one is excluded.
+- **Verification — static only:** `git diff --check` clean; brace/paren balance identical
+  to base; `Building` resolves `OpenRA.Mods.Common.Traits` (imported, no CA shadow);
+  `ActorsWithTrait<T>` enumerates all trait pairs (`!IsDead` covers liveness); all
+  symbols verified against base. No build/test/launch — the standing serial-admission
+  lock is held by the logger lane; the suite run belongs to that admission.
+- **Branch:** `devin/01a131ba-placement-proof-site` on contract base `e8c69f92c`
+  (per task record — the in-flight logger commits `34af9662d` stay upstream; merge is
+  the integrator's). Handed in for exact-SHA review; status + review request filed in
+  the fleet folder.
+
 # 2026-10-13 — Devin: maintainer merge wave `devin/merge-wave-20261013`
 
 *Devin Coordinator.* Maintainer directive: merge current-cycle work to master, then run a fresh

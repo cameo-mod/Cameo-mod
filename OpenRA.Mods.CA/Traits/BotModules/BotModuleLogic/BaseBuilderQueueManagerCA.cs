@@ -353,7 +353,21 @@ namespace OpenRA.Mods.CA.Traits
 						t.Trait.Info.Requirements.ContainsKey(p.PlugType),
 						t.Trait.AcceptsPlug(p.PlugType)));
 
-			return world.ActorMap.GetActorsAt(site).Any(a => !a.IsDead && a.Owner == player && PlacedNameMatches(p.ItemName, a));
+			// Occupied-cell proof first: the actor lands inside the same frame-end task
+			// the item leaves in, so the building influencing the ordered cell proves
+			// the placement. PLACEMENT-PROOF-LOCATION-FIX (01a131ba): buildings whose
+			// footprint marks the top-left '_' (every ^TDPROC refinery,
+			// td_gdi_repairfacility) never influence their own Location cell — Tiles()
+			// skips '_' — so the site scan can never see them. Their Location still IS
+			// the ordered site; a live own name-matching actor at that Location proves
+			// the placement without weakening the cell-occupancy evidence.
+			if (world.ActorMap.GetActorsAt(site).Any(a => BaseBuilderQueueEvalCA.OccupiedSiteProven(
+				!a.IsDead, a.Owner == player, PlacedNameMatches(p.ItemName, a))))
+				return true;
+
+			return world.ActorsHavingTrait<Building>().Any(a => BaseBuilderQueueEvalCA.LocationSiteProven(
+				!a.IsDead, a.Owner == player, PlacedNameMatches(p.ItemName, a),
+				a.Location == site));
 		}
 
 		bool PlacedNameMatches(string itemName, Actor placed)
