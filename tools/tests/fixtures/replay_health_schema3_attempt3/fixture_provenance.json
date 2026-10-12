@@ -1,0 +1,27 @@
+{
+  "description": "Unmodified JSON records selected from the frozen attempt3 capture for a deterministic replay_health regression fixture.",
+  "fixture_records_sha256": {
+    "cameo-ai-matches.jsonl": "162ee06c153ffd19425eda02adce2124e3deda63a6054b9fc75ca0aa8251c963",
+    "cameo-ai-placements.jsonl": "9e2eaf5f79ca743f34e6fca71dbd2a493877af0df85ad40fc0baeab91f5e15e9",
+    "cameo-ai-situations.jsonl": "59395a966699edc9e0ef472571b0f46e64fb2d1c592f3077ceb1e68829328e3e"
+  },
+  "selection": {
+    "game_uid": "27198fe4-be54-4d14-b304-d74d3923a674",
+    "placement_ticks": [
+      1360
+    ],
+    "seat": "seat_3",
+    "situation_ticks": [
+      3001,
+      4501,
+      5851
+    ]
+  },
+  "source_capture": "results/pilot-fcb3-master-d500-attempt3-20261011/cells/1v1_nuclear_gdi_1337_0/Support/Logs",
+  "source_files_sha256": {
+    "cameo-ai-matches.jsonl": "e02134dd70a4dee2867419da726e223c726f06fa402334552c5f145c5a1c87f8",
+    "cameo-ai-placements.jsonl": "604029d770da39c0f47dfc7951171e55893826b06469b625c7f6c32d992ec11e",
+    "cameo-ai-situations.jsonl": "e75b9748d2d43b0ccb19f354795cad6f73e5875cec72cde8cf9682a27e8111ba"
+  },
+  "source_worktree": "C:/cameo-wt/review-a7aea1f10 (read only)"
+}

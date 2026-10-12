@@ -22,6 +22,62 @@ MAX_LINE_BYTES = 1024 * 1024
 MAX_ROWS = 200000
 REFERENCE_BOTS = {"classic", "classic_hard"}
 
+# Schema 3 is the current anonymous logger format. Keep the allow-lists for the
+# row and nested objects whose fields either select evidence or feed the health
+# verdict. An additive change to one of these shapes must be reviewed here
+# instead of being silently ignored by an older checker.
+SITUATION_V3_FIELDS = {
+    "schema", "kind", "record_id", "game_uid", "map_uid", "seat", "player",
+    "faction", "bot_type", "tick", "urgency", "personality_current",
+    "personality_candidate", "main_target", "main_target_score", "mission",
+    "mission_assignment", "hints", "demand", "own", "expansion", "enemies",
+}
+OWN_V3_FIELDS = {
+    "army_value", "defence_value", "buildings", "harvesters", "kills_cost_window",
+    "deaths_cost_window", "squad_count", "squad_units", "losses_by_role",
+    "away_losses_by_role", "combat_ratio_pct", "combat_ratio_defended_pct",
+    "production_window", "production_per_game_min", "econ_destroyed_window",
+    "econ_destroyed", "attacks_launched", "first_attack_tick", "attacks_per_game_min",
+    "regions_fresh", "regions_total", "regions_enemy_presence", "guerrilla_lead",
+    "enemy_production_per_game_min", "steamroller_lead", "rush_lead", "banked_cash",
+    "brownout_ticks", "idle_production_ticks", "production_queues", "repair_orders",
+    "repair_sweep_orders", "repair_toggles_avoided", "utility_turtlerush",
+    "utility_techrushexpansion", "utility_steamrollerguerrilla", "director_tension",
+    "director_phase", "team_allied_bots", "team_army_value", "team_max_tension",
+    "team_defend_requests", "team_shared_target", "team_any_climax",
+    "coalition_phase", "coalition_main_target", "fb_fronts", "fb_fronts_without_radar",
+    "fb_radar_union_cells", "fb_radar_approach_cells", "threats",
+}
+EXPANSION_V3_FIELDS = {
+    "fields_known", "fields_in_reach", "fields_served", "fields_harvested",
+    "anchors_spreader", "anchors_field", "refineries", "excess_refineries",
+    "unassigned_refineries", "anchor_dist_mean", "anchor_dist_max",
+    "refineries_per_anchor_max", "anchors_in_reach_unserved", "fields_in_reach_unserved",
+    "fields_in_reach_unserved_ids", "conyards", "outposts", "crawl_target", "mcv_site",
+    "crawl_mcv_angle", "coverage_milli",
+}
+PLACEMENT_FIELDS = {
+    "schema", "kind", "record_id", "game_uid", "map_uid", "seed", "seat", "player",
+    "faction", "bot_type", "personality", "tick", "queued_tick", "placed_tick",
+    "actor", "cell", "category", "reason", "anchor_cell", "anchor_dist", "anchor_kind",
+    "field_id", "resource_gap", "tier", "cause",
+}
+MATCH_V3_FIELDS = {
+    "schema", "record_id", "recorded_utc", "mod_version", "game_uid", "map_uid",
+    "map_title", "duration_ticks", "timestep", "player", "stats", "seats", "allies",
+    "opponents", "opponent_signatures", "ownership", "arsenal", "order_gate",
+}
+MATCH_PLAYER_V3_FIELDS = {
+    "seat", "name", "bot_type", "faction", "team", "handicap", "spawn", "home",
+    "outcome", "personality", "personality_switches", "personality_timeline",
+    "composition", "composition_switches", "composition_timeline", "episode_timeline",
+}
+MATCH_STATS_V3_FIELDS = {
+    "units_killed", "units_lost", "buildings_killed", "buildings_lost", "kills_cost",
+    "deaths_cost", "army_value", "assets_value", "resources_earned", "resources_spent",
+    "stats_timeline_fields", "stats_timeline",
+}
+
 
 class EvidenceError(ValueError):
     pass
@@ -52,6 +108,12 @@ def identity(value):
 def row_identity(row):
     """A row's own selectable identity: top-level 'seat' (newer privacy schema) or 'player'."""
     return row.get("seat", row.get("player"))
+
+
+def reject_unknown_fields(row, allowed, label):
+    unknown = set(row) - allowed
+    if unknown:
+        raise EvidenceError(f"unsupported {label} field(s): {', '.join(sorted(unknown))}")
 
 
 def player_identity(player_dict):
@@ -155,8 +217,18 @@ def analyze(situations, placements, matches, game_uid, player, *, live=False,
         return report
     snapshots, previous = [], -1
     for r in rows:
-        if type(r.get("schema")) is not int or r.get("schema") != 2 or r.get("kind") != "situation":
+        schema = r.get("schema")
+        if type(schema) is not int or schema not in {2, 3} or r.get("kind") != "situation":
             raise EvidenceError("unsupported situation schema/kind")
+        if schema == 3:
+            reject_unknown_fields(r, SITUATION_V3_FIELDS, "schema-3 situation")
+            if "seat" in r and "player" in r and r["seat"] != r["player"]:
+                raise EvidenceError("conflicting situation seat/player identity")
+            own_row, expansion_row = r.get("own"), r.get("expansion")
+            if isinstance(own_row, dict):
+                reject_unknown_fields(own_row, OWN_V3_FIELDS, "schema-3 own-state")
+            if isinstance(expansion_row, dict):
+                reject_unknown_fields(expansion_row, EXPANSION_V3_FIELDS, "schema-3 expansion")
         if (r.get("faction"), r.get("bot_type"), r.get("map_uid")) != (faction, bot, map_uid):
             raise EvidenceError("identity drift within selected snapshots")
         tick = integer(r.get("tick"))
@@ -172,8 +244,13 @@ def analyze(situations, placements, matches, game_uid, player, *, live=False,
                           "bank": integer(own.get("banked_cash"))})
     own_ref_ticks, peer_ref_ticks, own_lifecycle_ticks = [], [], []
     for r in placed:
-        if type(r.get("schema")) is not int or r.get("schema") != 1 or r.get("kind") not in {"placement", "refinery_acquired", "refinery_lost"} or r.get("map_uid") != map_uid:
+        schema = r.get("schema")
+        if type(schema) is not int or schema not in {1, 2} or r.get("kind") not in {"placement", "refinery_acquired", "refinery_lost"} or r.get("map_uid") != map_uid:
             raise EvidenceError("unsupported placement schema/kind or mismatched map")
+        if schema == 2:
+            reject_unknown_fields(r, PLACEMENT_FIELDS, "schema-2 placement")
+            if "seat" in r and "player" in r and r["seat"] != r["player"]:
+                raise EvidenceError("conflicting placement seat/player identity")
         tick = integer(r.get("tick"))
         if r.get("kind") != "placement":
             # Loss/acquisition proves prior ownership; it is not a placement.
@@ -187,9 +264,18 @@ def analyze(situations, placements, matches, game_uid, player, *, live=False,
                 peer_ref_ticks.append(tick)
     final = finals[0] if finals else None
     if final:
-        if type(final.get("schema")) is not int or final.get("schema") != 2 or final.get("map_uid") != map_uid or (
+        schema = final.get("schema")
+        if type(schema) is not int or schema not in {2, 3} or final.get("map_uid") != map_uid or (
                 final["player"].get("faction"), final["player"].get("bot_type")) != (faction, bot):
             raise EvidenceError("terminal schema or identity drift")
+        if schema == 3:
+            reject_unknown_fields(final, MATCH_V3_FIELDS, "schema-3 match")
+            reject_unknown_fields(final["player"], MATCH_PLAYER_V3_FIELDS, "schema-3 match player")
+            if "seat" in final["player"] and "name" in final["player"] and final["player"]["seat"] != final["player"]["name"]:
+                raise EvidenceError("conflicting terminal seat/name identity")
+            stats_row = final.get("stats")
+            if isinstance(stats_row, dict):
+                reject_unknown_fields(stats_row, MATCH_STATS_V3_FIELDS, "schema-3 match stats")
         if integer(final.get("duration_ticks")) < snapshots[-1]["tick"]:
             raise EvidenceError("snapshot after terminal duration")
     report["metrics"].update({"faction": faction, "bot_type": bot, "map_uid": map_uid,
