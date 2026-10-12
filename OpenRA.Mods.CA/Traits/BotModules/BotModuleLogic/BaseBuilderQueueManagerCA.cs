@@ -682,7 +682,8 @@ namespace OpenRA.Mods.CA.Traits
 				// reserve-sized gate starved the frontier in the trace.
 				var lawWants = baseBuilder.RefineryLawProvider();
 				var plannerWant = lawWants != null
-					&& (item.Name == lawWants.WantedLinkBuilding || item.Name == lawWants.WantedMcvPrerequisite);
+					&& (item.Name == lawWants.WantedLinkBuilding || item.Name == lawWants.WantedMcvPrerequisite
+						|| item.Name == lawWants.WantedFrontDefence);
 
 				// ECON-A: a demand-bound item rides at its own cost floor like the planner wants —
 				// the reserve gate would push it past the ETA it was scheduled to meet.
@@ -724,6 +725,15 @@ namespace OpenRA.Mods.CA.Traits
 				// item is seen in this producer's queue; an intent that never arrives drops uncharged.
 				if (lawWants != null && item.Name == lawWants.WantedLinkBuilding
 					&& !lawWants.TryClaimCrawlLink(queue.Actor, item.Name, queue.GetProductionCost(item)))
+				{
+					pendingDemandPick = default;
+					return false;
+				}
+
+				// CRAWL-SAFETY (S3): the front defence is claimed atomically at admission like the
+				// crawl link — one defence in flight at the frontier, never two queues at once.
+				if (lawWants != null && item.Name == lawWants.WantedFrontDefence
+					&& !lawWants.TryClaimFrontDefence(queue.Actor, item.Name, queue.GetProductionCost(item)))
 				{
 					pendingDemandPick = default;
 					return false;
@@ -848,12 +858,17 @@ namespace OpenRA.Mods.CA.Traits
 						// exists to close the gap to the target field, so the chance roll and cost threshold that
 						// gate organic crawl never apply to it (no random draw is consumed on this path).
 						var lawLink = law != null && currentBuilding.Item == law.WantedLinkBuilding;
+
+						// CRAWL-SAFETY (S3): the planner's front defence is a Defense placement aimed at
+						// the frontier cell — the chance roll and advisor that gate organic defences do
+						// not apply to it (no random draw consumed, same as lawLink).
+						var lawFrontDefence = law != null && currentBuilding.Item == law.WantedFrontDefence;
 						var isRefinery = false;
 						var isFragile = false;
 						var hasAttackBase = false;
 						var defenseRoll = false;
 						var organicCrawlRoll = false;
-						if (!lawLink)
+						if (!lawLink && !lawFrontDefence)
 						{
 							if (baseBuilder.Info.RefineryTypes.Contains(actorInfo.Name))
 								isRefinery = true;
@@ -886,7 +901,8 @@ namespace OpenRA.Mods.CA.Traits
 							}
 						}
 
-						type = BaseBuilderQueueEvalCA.ClassifyPlacement(lawLink, isRefinery, isFragile, hasAttackBase, defenseRoll, organicCrawlRoll);
+						type = lawFrontDefence ? BuildingType.Defense
+							: BaseBuilderQueueEvalCA.ClassifyPlacement(lawLink, isRefinery, isFragile, hasAttackBase, defenseRoll, organicCrawlRoll);
 					}
 
 					// FIX-RA-REFINERY: decided here so the null-location branch below can tell a
@@ -1415,7 +1431,8 @@ namespace OpenRA.Mods.CA.Traits
 			var law = baseBuilder.RefineryLawProvider();
 			if (law != null)
 			{
-				foreach (var want in new[] { law.WantedMcvPrerequisite, law.WantedLinkBuilding })
+				// CRAWL-SAFETY: the front defence rides ahead of the link it precedes.
+				foreach (var want in new[] { law.WantedMcvPrerequisite, law.WantedFrontDefence, law.WantedLinkBuilding })
 				{
 					if (want == null || (baseBuilder.BuildingsBeingProduced?.ContainsKey(want) ?? false))
 						continue;
@@ -1968,6 +1985,20 @@ namespace OpenRA.Mods.CA.Traits
 			switch (type)
 			{
 				case BuildingType.Defense:
+
+					// CRAWL-SAFETY (S3): the planner's front defence stands at the crawl frontier it was
+					// wanted for — the defence advisor around the frontier first (a legal cell in buildable
+					// area), then the defence annulus centred there. A null cell runs the normal failure path.
+					var frontDefenceLaw = baseBuilder.RefineryLawProvider();
+					if (frontDefenceLaw?.WantedFrontDefence == actorType && frontDefenceLaw.FrontDefenceCell is { } frontCell)
+					{
+						var frontAdvised = AdvisedDefenseCell(actorInfo, distanceToBaseIsImportant, producer, frontCell);
+						if (frontAdvised != null)
+							return (frontAdvised, frontCell, 0);
+
+						return findPos(actorType, distanceToBaseIsImportant, producer, frontCell, frontCell,
+							baseBuilder.Info.MinimumDefenseRadius, baseBuilder.Info.MaximumDefenseRadius, defenseGap: true);
+					}
 
 					// ECON-A (SPEC_2026-10-05 Part A §5): the held defence places at the new outpost —
 					// the front/back advisor's Defence class first (BP-SPEC §12.35), then the
