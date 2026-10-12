@@ -163,3 +163,33 @@ activation change, checker change or engine/source pin change is included. Actua
 tick0/callback/pulse/end ordering, capability/census/terminal coverage, mounted
 parity and CPU/allocation/disk cost, Coordinator dual-gate wiring and fresh
 reservation remain adoption gates. No runtime capture or launch was performed.
+
+2026-10-12 logger-gates closure (Devin-Integrator, on master ebea34c82 which
+already contains the reviewed restack 7ca7e9159 byte-identical):
+
+- Per-cancellation own-queue lookup is now amortized: the recorder caches a
+  canonical (producer, group) -> queue_id index built once per world tick on the
+  first proven cancellation (BuildCancellationQueueIndex over own configured
+  ProductionQueue traits, ResolveCancellationQueueId for O(1) binds). The index
+  is capped at MaximumQueues; duplicate producer/group ownership resolves null;
+  a queue created mid-tick after the index resolves null — all fail-closed,
+  canonical evidence semantics unchanged. Replaces the per-cancel world scan.
+- Coverage/order fixtures extended through the pinned consumer: an off-grid
+  terminal (pulse/cancel/pulse/end all landing at tick 137, not a 50 multiple)
+  returns OBSERVED_HEALTHY; a terminal end 87 ticks after the last pulse returns
+  UNKNOWN (terminal watermark uncovered); a first pulse at tick 37 returns
+  UNKNOWN (capture must start at tick zero). A same-tick double-observe state
+  test pins callback interleaving as complete; PulseDue(-1) is false.
+- Dual-gate campaign wiring landed in ab_campaign_analyzer.py: the new
+  --econ-health-dir loads economy_invariants reports as an independent family
+  (econ_games) alongside --health-dir (replay_health). Each armed family gets
+  its own per-seat verdict through family_view + health_verdict; verdicts
+  combine under worst_verdict (BLOCK > SCHEMA_MISMATCH > MISSING > UNKNOWN >
+  HEALTHY). A game pools only when every armed checker is HEALTHY for every
+  expected seat; foreign-policy reports in a family's view stay SCHEMA_MISMATCH.
+  The report gains econ_armed/econ_policy; invalidation reasons name the
+  failing checker family. Missing dirs keep the loud-warning opt-in posture.
+- Bounds unchanged: activation still deliberately incomplete; no YAML mount,
+  no runtime capture, no launch, no measured runtime cost. The dual gate is
+  analyzer-side tooling only — it does not mount the recorder or claim live
+  coverage.

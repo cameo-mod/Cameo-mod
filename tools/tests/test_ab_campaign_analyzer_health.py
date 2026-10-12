@@ -128,7 +128,8 @@ class HealthJoin(unittest.TestCase):
             err = io.StringIO()
             with contextlib.redirect_stderr(err), contextlib.redirect_stdout(io.StringIO()):
                 az.main(["analyze", "--receipts", str(rdir), "--health-dir", str(hdir), "--output", str(tmp / "health.json")])
-            self.assertNotIn("WARNING", err.getvalue())
+            self.assertNotIn("no --health-dir", err.getvalue())
+            self.assertIn("no --econ-health-dir", err.getvalue())
             out = json.loads((tmp / "health.json").read_text(encoding="utf-8"))
             self.assertEqual(out["health"]["mode"], "APPLIED")
             self.assertEqual(out["health"]["excluded_by_setup"], {"1v1_nuclear_gdi": {"MISSING": 1}})
@@ -279,6 +280,142 @@ class LoadHealth(unittest.TestCase):
             loaded = az.load_health([tmp])
         self.assertEqual(list(loaded["games"]), ["g1"])
         self.assertEqual(len(loaded["errors"]), 1)
+
+
+def econ_health_for(games, statuses=None, seats=2, replay_health=None):
+    """Loaded-health structure carrying the economy_invariants family alongside replay_health."""
+    health = replay_health if replay_health is not None else health_for(games)
+    statuses = statuses or {}
+    by_game = {}
+    for g in games:
+        uid = g["game_uid"]
+        if uid is None:
+            continue
+        for n in range(seats):
+            status = statuses.get((uid, n), "OBSERVED_HEALTHY")
+            if status is None:
+                continue
+            by_game.setdefault(uid, {}).setdefault(f"seat_{n}", []).append(
+                health_report(uid, f"seat_{n}", status, az.ECON_POLICY))
+    health = dict(health)
+    health["econ_games"] = by_game
+    return health
+
+
+class DualGate(unittest.TestCase):
+    def test_both_gates_healthy_counts_the_pair(self):
+        games = matched_pair()
+        res = az.summarize(games, None, econ_health_for(games))
+        self.assertEqual(res["pooled"]["complete_natural_pairs"], 1)
+        self.assertEqual(res["health"]["mode"], "APPLIED")
+        self.assertEqual(res["health"]["econ_armed"], True)
+        self.assertEqual(res["health"]["econ_policy"], az.ECON_POLICY)
+        self.assertEqual(res["health"]["verdict_counts"], {"HEALTHY": 2})
+        self.assertEqual(res["health"]["excluded_games"], [])
+
+    def test_econ_missing_excludes_the_game(self):
+        games = matched_pair()
+        res = az.summarize(games, None, econ_health_for(
+            games, {("uid-0-0", 0): None, ("uid-0-0", 1): None}))
+        self.assertEqual(res["pooled"]["complete_natural_pairs"], 0)
+        self.assertEqual(res["health"]["excluded_by_setup"], {"1v1_nuclear_gdi": {"MISSING": 1}})
+
+    def test_econ_partial_seat_coverage_is_missing(self):
+        games = matched_pair()
+        res = az.summarize(games, None, econ_health_for(games, {("uid-0-0", 1): None}))
+        self.assertEqual(res["pooled"]["complete_natural_pairs"], 0)
+        self.assertEqual(res["health"]["excluded_games"][0]["verdict"], "MISSING")
+
+    def test_econ_block_invalidates_the_game_and_names_the_family(self):
+        games = matched_pair()
+        res = az.summarize(games, None, econ_health_for(games, {("uid-0-0", 0): "BLOCK"}))
+        self.assertEqual(res["pooled"]["complete_natural_pairs"], 0)
+        self.assertEqual(res["invalid_receipt_count"], 1)
+        self.assertIn("economy_invariants BLOCK", res["invalid_receipts"][0]["reason"])
+
+    def test_econ_block_dominates_replay_missing(self):
+        games = matched_pair()
+        res = az.summarize(games, None, econ_health_for(
+            games, {("uid-0-1", 0): "BLOCK"},
+            replay_health=health_for(games, {("uid-0-1", 0): None, ("uid-0-1", 1): None})))
+        self.assertEqual({e["verdict"] for e in res["health"]["excluded_games"]}, {"BLOCK"})
+
+    def test_econ_unknown_is_incomplete(self):
+        games = matched_pair()
+        res = az.summarize(games, None, econ_health_for(games, {("uid-0-0", 0): "UNKNOWN"}))
+        self.assertEqual(res["pooled"]["complete_natural_pairs"], 0)
+        self.assertEqual(res["health"]["excluded_games"][0]["verdict"], "UNKNOWN")
+        self.assertEqual(res["pooled"]["status_counts"], {"INCOMPLETE": 1})
+
+    def test_econ_conflicting_duplicates_are_not_trusted(self):
+        games = matched_pair()
+        health = econ_health_for(games)
+        health["econ_games"]["uid-0-0"]["seat_0"].append(
+            health_report("uid-0-0", "seat_0", "UNKNOWN", az.ECON_POLICY))
+        res = az.summarize(games, None, health)
+        self.assertEqual(res["pooled"]["complete_natural_pairs"], 0)
+        self.assertEqual(res["health"]["excluded_games"][0]["verdict"], "SCHEMA_MISMATCH")
+
+    def test_econ_seat_identity_mismatch_is_schema_mismatch(self):
+        games = matched_pair()
+        health = econ_health_for(games)
+        health["econ_games"]["uid-0-0"]["seat_7"] = [health_report("uid-0-0", "seat_7", policy=az.ECON_POLICY)]
+        res = az.summarize(games, None, health)
+        self.assertEqual(res["pooled"]["complete_natural_pairs"], 0)
+        self.assertEqual(res["health"]["excluded_games"][0]["verdict"], "SCHEMA_MISMATCH")
+
+    def test_econ_reports_in_replay_dir_do_not_silently_arm_the_family(self):
+        games = matched_pair()
+        # An econ report that leaks into --health-dir without --econ-health-dir stays foreign evidence.
+        health = health_for(games)
+        health["games"]["uid-0-0"]["seat_0"].append(
+            health_report("uid-0-0", "seat_0", policy=az.ECON_POLICY))
+        res = az.summarize(games, None, health)
+        self.assertEqual(res["pooled"]["complete_natural_pairs"], 0)
+        self.assertEqual(res["health"]["excluded_games"][0]["verdict"], "SCHEMA_MISMATCH")
+        self.assertEqual(res["health"]["econ_armed"], False)
+
+    def test_replay_missing_and_econ_healthy_is_missing(self):
+        games = matched_pair()
+        res = az.summarize(games, None, econ_health_for(
+            games, replay_health=health_for(games, {("uid-0-0", 0): None, ("uid-0-0", 1): None})))
+        self.assertEqual(res["pooled"]["complete_natural_pairs"], 0)
+        self.assertEqual(res["health"]["excluded_games"][0]["verdict"], "MISSING")
+
+    def test_cli_econ_dir_arms_the_dual_gate_and_warns_when_absent(self):
+        games = matched_pair()
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp = pathlib.Path(tmp)
+            rdir, hdir, edir = tmp / "receipts", tmp / "health", tmp / "econ"
+            for d in (rdir, hdir, edir):
+                d.mkdir()
+            for i, g in enumerate(games):
+                (rdir / f"r{i}.json").write_text(json.dumps(g), encoding="utf-8")
+                for n in range(2):
+                    (hdir / f"h{i}_{n}.json").write_text(
+                        json.dumps(health_report(g["game_uid"], f"seat_{n}")), encoding="utf-8")
+                    (edir / f"e{i}_{n}.json").write_text(
+                        json.dumps(health_report(g["game_uid"], f"seat_{n}", policy=az.ECON_POLICY)),
+                        encoding="utf-8")
+
+            err = io.StringIO()
+            with contextlib.redirect_stderr(err), contextlib.redirect_stdout(io.StringIO()):
+                az.main(["analyze", "--receipts", str(rdir), "--health-dir", str(hdir),
+                         "--output", str(tmp / "single.json")])
+            self.assertIn("no --econ-health-dir", err.getvalue())
+            single = json.loads((tmp / "single.json").read_text(encoding="utf-8"))
+            self.assertEqual(single["health"]["econ_armed"], False)
+            self.assertEqual(single["pooled"]["complete_natural_pairs"], 1)
+
+            err = io.StringIO()
+            with contextlib.redirect_stderr(err), contextlib.redirect_stdout(io.StringIO()):
+                az.main(["analyze", "--receipts", str(rdir), "--health-dir", str(hdir),
+                         "--econ-health-dir", str(edir), "--output", str(tmp / "dual.json")])
+            self.assertNotIn("WARNING", err.getvalue())
+            dual = json.loads((tmp / "dual.json").read_text(encoding="utf-8"))
+            self.assertEqual(dual["health"]["econ_armed"], True)
+            self.assertEqual(dual["health"]["econ_policy"], az.ECON_POLICY)
+            self.assertEqual(dual["pooled"]["complete_natural_pairs"], 1)
 
 
 if __name__ == "__main__":

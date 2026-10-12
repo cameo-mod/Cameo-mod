@@ -108,8 +108,24 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void SameTickReobservationFromInterleavedCallbacksStaysComplete()
+		{
+			// A transition callback inside one world tick may force a second census at that
+			// tick; the tick watermark must not regress and coverage stays provable.
+			var state = new AiEconomyHealthState();
+			state.Observe(0, new[] { Queue(new object(), null, "idle", "a") });
+			state.Observe(0, new[] { Queue(new object(), null, "idle", "b") });
+			Assert.That(state.Complete, Is.True);
+			var snapshots = new List<EconomyQueueSnapshot>();
+			state.CopySnapshots(snapshots);
+			Assert.That(snapshots[0].QueueId, Is.EqualTo("b"));
+			Assert.That(snapshots[0].StateSinceTick, Is.Zero);
+		}
+
+		[Test]
 		public void PulseAndDeliveryRulesUseWorldTicksAndPositiveAcceptedValue()
 		{
+			Assert.That(AiEconomyHealthState.PulseDue(-1), Is.False);
 			Assert.That(AiEconomyHealthState.PulseDue(0), Is.True);
 			Assert.That(AiEconomyHealthState.PulseDue(50), Is.True);
 			Assert.That(AiEconomyHealthState.PulseDue(750), Is.True);
