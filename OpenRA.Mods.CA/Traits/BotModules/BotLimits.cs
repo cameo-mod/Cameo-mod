@@ -31,6 +31,10 @@ namespace OpenRA.Mods.CA.Traits
 
 		[Desc("M13 maximum continuously eligible no-launch interval. Used only by the default-off M13 consumer.")]
 		public readonly int AttackLivenessMaxNoLaunchTicks = 7500;
+		[Desc("M13 first-wave cap (BV_m13_liveness): until the shared clock records its first accepted",
+			"offensive wave, an eligible interval's deadline is eligibleSince + min(this,",
+			"AttackLivenessMaxNoLaunchTicks). 0 = disabled.")]
+		public readonly int AttackLivenessFirstWaveMaxTicks = 0;
 		[Desc("M13 non-renewing response expiry from first admission; a delay on the difficulty line.")]
 		public readonly int TeamResponseMaxLeaseTicks = 1500;
 		[Desc("M13 response re-admission cooldown for the same claim episode.")]

@@ -20,6 +20,8 @@ class M13TierKnobsTests(unittest.TestCase):
                 blocks = re.findall(r"^\tBotLimits@" + tier + r":\n((?:\t\t[^\n]*\n)+)", text, re.M)
                 self.assertEqual(len(blocks), 1)
                 expected = {"AttackLivenessMaxNoLaunchTicks": 7500 + 500 * step,
+                            # FirstWave is exactly half the tier's no-launch cap.
+                            "AttackLivenessFirstWaveMaxTicks": (7500 + 500 * step) // 2,
                             # BV_m13_liveness tempo arms: one equal-step line each (DESIGN §19.1).
                             "BankSaturationCash": 3000 + 300 * step,
                             "TeamResponseMaxLeaseTicks": 1500 + 100 * step,

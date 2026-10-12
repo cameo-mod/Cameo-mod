@@ -3157,7 +3157,8 @@ namespace OpenRA.Mods.CA.Traits
 			AttackLiveness.Observe(World.WorldTick, M13StateOwner.m13State.EvidenceComplete && !frozenOnly, Player.WinState == WinState.Undefined,
 				legal, eligibility.Count > 0, value, Info.SquadValue,
 				botLimits?.Info.AttackLivenessMaxNoLaunchTicks ?? 0,
-				(int)Math.Min(int.MaxValue, Math.Max(150L, 2L * Info.AttackForceInterval + 1)), AttackSoftRestraintCA.None);
+				(int)Math.Min(int.MaxValue, Math.Max(150L, 2L * Info.AttackForceInterval + 1)), AttackSoftRestraintCA.None,
+				botLimits?.Info.AttackLivenessFirstWaveMaxTicks ?? 0);
 			if (Player.WinState != WinState.Undefined || World.WorldTick <= M13StateOwner.m13State.BaseDangerUntilTick
 				|| !M13LaunchPolicyCA.Urgent(true, roster.Count,
 				Info.MaxIdleUnits, legal, AttackLiveness.Phase))
