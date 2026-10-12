@@ -1624,9 +1624,23 @@ namespace OpenRA.Mods.CA.Traits
 					stagingOrders.Remove(dead);
 		}
 
+		// IsValidEnemyUnit requires GetEnabledTargetTypes() to be non-empty, i.e. at least
+		// one enabled ITargetable trait, so every passing candidate is in this trait index.
+		// The index is a superset of the old World.Actors candidates and yields actors in
+		// the same ascending-ActorID order — same set, same ordering, narrower scan.
+		List<Actor> PreferredEnemyCandidates()
+		{
+			return World.ActorsHavingTrait<ITargetable>().Where(IsPreferredEnemyUnit).ToList();
+		}
+
+		List<Actor> HighValueTargetCandidates()
+		{
+			return World.ActorsHavingTrait<ITargetable>().Where(IsHighValueTarget).ToList();
+		}
+
 		internal Actor FindClosestEnemy(Actor sourceActor, SquadCA owner = null)
 		{
-			var units = World.Actors.Where(IsPreferredEnemyUnit).ToList();
+			var units = PreferredEnemyCandidates();
 			var mainTarget = EffectiveMainTarget();
 			units = PreferOwned(units, mainTarget == null ? null : a => a.Owner == mainTarget);
 			units = PreferSquadTargets(units, owner, TagsOf);
@@ -1655,7 +1669,7 @@ namespace OpenRA.Mods.CA.Traits
 		// candidate fails the gate the squad holds instead of suiciding.
 		internal Actor FindClosestEnemy(Actor sourceActor, int attackerValue, SquadCA owner = null)
 		{
-			var units = World.Actors.Where(IsPreferredEnemyUnit).ToList();
+			var units = PreferredEnemyCandidates();
 			var mainTarget = EffectiveMainTarget();
 			units = PreferOwned(units, mainTarget == null ? null : a => a.Owner == mainTarget);
 			units = PreferSquadTargets(units, owner, TagsOf);
@@ -1678,7 +1692,7 @@ namespace OpenRA.Mods.CA.Traits
 			if (targetPlayer == null)
 				return null;
 
-			var units = World.Actors
+			var units = World.ActorsHavingTrait<ITargetable>()
 				.Where(a => a.Owner == targetPlayer && IsPreferredEnemyUnit(a))
 				.ToList();
 			units = PreferSquadTargets(units, owner, TagsOf);
@@ -1696,7 +1710,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		internal Actor FindHighValueTarget(WPos pos)
 		{
-			var units = World.Actors.Where(IsHighValueTarget).ToList();
+			var units = HighValueTargetCandidates();
 			if (FoggedScans)
 				units = units.Where(IsNotHiddenUnit).ToList();
 
@@ -1709,7 +1723,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		internal Actor FindHighValueTarget(WPos pos, int attackerValue)
 		{
-			var units = World.Actors.Where(IsHighValueTarget).ToList();
+			var units = HighValueTargetCandidates();
 			if (FoggedScans)
 				units = units.Where(IsNotHiddenUnit).ToList();
 
