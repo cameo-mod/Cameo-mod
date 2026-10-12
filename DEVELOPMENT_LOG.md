@@ -1,3 +1,34 @@
+# 2026-10-12 — Devin: extractor review verdict + deliberate-pin note (branch `devin/human-demo-extract`)
+
+*Devin-Developer.* Devin-Reviewer exact-SHA static review of
+`dbb7bcfa809792ab966af30c6796aa9c4faf729a`: **APPROVE** (receipt
+`Cameo-mod-fleet/REVIEW_2026-10-12_human_demo_extract_devin.md`). Merge-base
+`a28364114`; branch is behind master `ebea34c82` — integrator rebases, no
+mod/engine surface conflicts expected. Three bounded notes, disposition
+below.
+
+- **`wave1_scheduler.TOOL_SHA256['order_stream_diff.py'] = 1e089b45…` is
+  DELIBERATE — do not "fix" it.** The pin targets the post-repair /
+  pre-refactor comparator revision because the frozen wave-1 worktree
+  carries copies of *that* rev and `verify_tools` must keep validating
+  them. Comparator verdicts are byte-identical to the refactored tip via
+  the legacy projection (asserted by test), so the pin is consistent
+  fail-closed design, not staleness. **If a wave worktree copies tools
+  from this branch tip, `verify_tools` fails closed until a deliberate
+  re-pin to `52883a81…`** — that re-pin is a decision for whoever adopts
+  the tip, never a drive-by fix.
+- Deferred (cosmetic, reviewer-flagged non-blocking): `order_trace.py`
+  `break`s on malformed target-type where the comparator raises — a
+  diagnostic-vs-evidence asymmetry, defensible; a clarifying comment would
+  touch a self-pinned tool file, so it waits for a deliberate re-pin.
+  `test_p0_truncated_stream` carries a dead `if False` arm — test-only,
+  no behavioural surface; cleaned on the next substantive test touch.
+- Author evidence as reported: 62/62 focused tests, real-file smoke
+  19,286 orders / 0 unparsed / 62 frozen_actor. Reviewer's pass static
+  per scope — no runtime/campaign authorization implied.
+
+---
+
 # 2026-10-12 — Devin: human-demo P0+P1 offline extractor (branch `devin/human-demo-extract`)
 
 *Devin-Developer.* Coordinator assignment implementing contract rev2 (Boss
