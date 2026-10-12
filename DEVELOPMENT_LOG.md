@@ -20668,3 +20668,7 @@ exception-*.log. TF-2 (unit-spend reservation) remains a separate increment per 
 ### 2026-10-12 — RA1 pillbox directional firing regression
 
 Restore all-direction passenger firing for normal/camo RA1 pillboxes using full-turn cones with independent station bindings and offsets retained. Lead approved the two-profile scope; exact-SHA review remains required before landing. Mounted combat-profile tests reproduce 4 failures on old cones and pass 8/8 after the fix; focused fire-port Python tests pass 5/5. No engine pin change or game launch. Civilian firing and bot Cargo recruitment remain open.
+
+### 2026-10-12 — Qualify the already-pinned resource sheet overflow fix
+
+Historical Imminent Destruction crash used engine0a3f77dbe; current4f69 already includes multi-batch terrain layer fix3c92c0ea0f and testsed6a34e4ef. Verified exact map UID and resource-sprite-layer caller; atlas sheets, not14resource types, exhaust the old8sheet array. Added real pinned-selector regressions for14primary/28primary+secondary sheets and reuse:2/2PASS; existingengine4/4PASS. No pin, renderer-limit, packing or runtime change; no launch. See docs/audit/SHEET_OVERFLOW_2026-10-12.md; notification cache retention remains separate.
