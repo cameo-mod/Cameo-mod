@@ -32,7 +32,8 @@ approved Route A' driver set bb46784b/0cdd46eb/a7cef93c/8fff80a7 stays byte-froz
 - Already on master (no remerge): garrison-p3 `d8ccd7da`, multi-turret `fa59898f`,
   m13-master-port `a4efc2b5`, turtle-fallback `b231bf08`, garrison-no-fire cherries,
   wbl-p1 `3a2ee8e4`/`147071140`, playtest-telemetry-v2, replay-health-logger-restack `7ca7e915`.
-- **Verification state:** build 0 err/0 warn; Cameo.Test **2008/2008** (incl. ProductionScaling
+- **Verification state:** build 0 err / 9 pre-existing engine warnings (test-project
+  build 0 warn) — Sol correction vs build_wave4.log; Cameo.Test **2008/2008** (incl. ProductionScaling
   +8, M13ResponseClaim +3). Python suite (bounded per Lead chunking rule after the single
   discovery run hit ~19 GiB working set and was self-killed): full pass pre-kill showed
   **66F/3432P** — all in stale-pin digest classes on master yaml churn (this wave's only
@@ -46,10 +47,16 @@ approved Route A' driver set bb46784b/0cdd46eb/a7cef93c/8fff80a7 stays byte-froz
   forgotten_cannonap, soviet_owned_weapon_names, td_naval_rename) rerun on detached
   `ebea34c82` reproduce identical failures (5/5/3/3/6 = 22). Zero wave-caused failures,
   now proven at subtest granularity.
-- **Open gates before master landing:** Devin-Reviewer exact-SHA on `91965acbe` → Lead
-  landing ruling on the 66 pre-existing red pins → boot-gate slot (Luna
-  admission, serial) → hand verified branch to Sol for the FF push (Sol = sole master writer
-  per Lead ruling; I sequence+verify, Sol pushes).
+- **Late IN-ELIGIBLE candidates (Integrator ruling, both pending Devin-Reviewer exact-SHA
+  verdicts):** `devin/replay-health-logger-gates @463b52d63` (+430/-26, 9 files — merge
+  checked: only DEVELOPMENT_LOG union conflict) and `devin/wbl-p1-crawl-link-fallback
+  @29f29a73c` (+83/-1, 3 files, record-only — merge checked: fully clean). Ruling: merge
+  in-wave if verdicts land before wave close; otherwise land immediately post-wave on
+  disjoint file sets.
+- **Open gates before master landing:** Devin-Reviewer exact-SHA on `91965acbe` (+
+  `463b52d63`, `29f29a73c` if admitted) → Lead landing ruling on the 66 pre-existing red
+  pins → boot-gate slot (Luna admission, serial) → hand verified branch to Sol for the
+  FF push (Sol = sole master writer per Lead ruling; I sequence+verify, Sol pushes).
 - **A/B handoff note (campaign tooling lives outside the repo):** the frozen wave-1 driver's
   `TOOL_SHA256['order_stream_diff.py'] = 1e089b45` deliberately pins the frozen worktree's
   comparator rev; a fresh post-merge campaign tree MUST re-pin deliberately to `52883a81`
