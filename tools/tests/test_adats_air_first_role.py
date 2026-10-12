@@ -43,7 +43,7 @@ class ADATSAirFirstRoleTests(unittest.TestCase):
                 "Ground, Water", "5606",
                 {"None": "93", "Light": "156", "Heavy": "96"}),
             "TSAdatsMissile_AA": (
-                "Flak_Medium_Flat", "8000", "9988",
+                "MissileAA_Medium", "8000", "9988",
                 "Air", "8409",
                 {"Fighter": "197", "Bomber": "196", "Helicopter": "155"}),
         }
@@ -66,7 +66,7 @@ class ADATSAirFirstRoleTests(unittest.TestCase):
             "TSChemAdatsMissile": (
                 "MissileChem_Light", "12000", "Ground, Water"),
             "TSChemAdatsMissile_AA": (
-                "Flak_Medium_Flat", "12000", "Air"),
+                "MissileAA_Medium", "12000", "Air"),
         }
         for name, (profile, damage, targets) in expected.items():
             weapon = self.rules.resolve_weapon(name)
