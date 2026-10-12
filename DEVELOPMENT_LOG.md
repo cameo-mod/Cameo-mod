@@ -25,11 +25,24 @@ switch group existed.
   subtests. Scratch-tree apply: `apply_increment_switches.py <scratch> --groups
   BY_crawl_safety` → `ExpansionPlannerBotModule.UseCrawlSafety: (default) -> true`, 1 change,
   `new_restraint_count: 1`, `ordinary_increment_allowed: true`.
-- **OPEN (recorded for the fleet receipt, not attempted):** the mounted-trait question of what
-  SquadManager does with CRAWL-SAFETY's `Episode=default` escort request when
-  `AttackLivenessEnabled` is true (CS review O1 says the escort is honoured; source 2150-2155
-  reads as an early return before drafting) needs a runtime/NUnit slot — cannot be settled by
-  reading.
+- **RESOLVED — the mounted-trait question is settled:** what SquadManager does with
+  CRAWL-SAFETY's `Episode=default` escort request when `AttackLivenessEnabled` is true.
+  **The code reading wins; the CS review's claim ("still forms as a standard protection
+  squad") is disproven.** Chain: CS publishes 3-arg `BotProtectionRequest` — `Episode =
+  default` (`ExpansionPlannerBotModule.cs:2637`) → under `AttackLivenessEnabled` the sole
+  request path enters the `if` at `SquadManagerBotModuleCA.cs:2150` →
+  `M13ResponseClaimCA.TryKey` requires `request.Episode.BelongsTo(participant)` →
+  `default` episode has `IsKnown == false` → `TryKey` false → `return` at :2155, before
+  any drafting. **No escort squad can ever form from a CS request while M13 is armed.**
+  EngineerBotModule requests carry real episodes (`EngineerBotModule.cs:1332`) and are
+  unaffected. Latent today (M13 default-off; legacy rolling path serves episode-less
+  requests); bites exactly when M13 + BY are armed together — i.e. the P3 evaluation
+  configuration. Safety is not lost: `RefuseSafety("front contested")` still refuses the
+  frontier; only the escort is silently absent. Pinned by the new test
+  `M13ResponseClaimTest.EpisodelessRequestCannotKeyAResponse` (all 3 claim channels,
+  the exact 3-arg publisher shape). Resolution: P3's escort contract in rev-3 §4.2 item 2
+  (publisher attaches a known `BotClaimEpisode`) is REQUIRED, not optional, for BY+M13 —
+  or CS must publish episodes for its frontier requests before that combination arms.
 
 ---
 
