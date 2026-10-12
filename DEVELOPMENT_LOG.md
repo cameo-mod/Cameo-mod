@@ -20724,3 +20724,23 @@ Restore all-direction passenger firing for normal/camo RA1 pillboxes using full-
 ### 2026-10-12 — Qualify the already-pinned resource sheet overflow fix
 
 Historical Imminent Destruction crash used engine0a3f77dbe; current4f69 already includes multi-batch terrain layer fix3c92c0ea0f and testsed6a34e4ef. Verified exact map UID and resource-sprite-layer caller; atlas sheets, not14resource types, exhaust the old8sheet array. Added real pinned-selector regressions for14primary/28primary+secondary sheets and reuse:2/2PASS; existingengine4/4PASS. No pin, renderer-limit, packing or runtime change; no launch. See docs/audit/SHEET_OVERFLOW_2026-10-12.md; notification cache retention remains separate.
+
+### 2026-10-12 — S8 memory telemetry channel + DevBuild refreshes
+
+FINDINGS_2026-10-12 S8 asked for a private-bytes growth channel after hosted games died >8 GB
+with no reconstruction possible. Landed as merge 9058a2a48 + O1 fixup 3f2bf8c21 (Devin-Reviewer
+approved): `AiMemoryTelemetry` world trait writes bounded `cameo-ai-memory-<uid>.jsonl` rows
+every 250 WT (private/working-set/paged/virtual bytes, full GCMemoryInfo counters, per-gen
+collections, live actor count, per-bot probe rows). New `IAiMemoryTelemetryProbe`
+(OpenRA.Mods.CA) lets bot modules report retention counters; `FransCombatIntelBotModule` —
+the lead suspect — reports enemyCombatMemory/contact/snapshot sizes, so the next long game
+directly shows whether that structure grows. `SignatureHistoryCapPerPair` (default 0)
+bounds the one unbounded mod-side history found. Reviewer O1 folded in: sampling faults
+terminate the channel fail-closed, never the game. Audit verdict: all named mod-side
+suspects verified bounded; engine `TextNotificationsManager.NotificationsCache` is the
+remaining latent unbounded structure (reported for the cameo-engine pipeline).
+
+DevBuild: refreshed to 3f2bf8c21 then 332856532 (pillbox 03a083cc2 + crawl-safety +
+terrain-sheet-overflow crash fix); ENGINE_VERSION 4f69df005fe0 unchanged; BUILD_SHA.txt
+added; complete runnable backup of the old d50079112 tree at
+DevBuild_backup_20261012\devbuild for replay playback.
