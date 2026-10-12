@@ -10,6 +10,7 @@
 
 using System;
 using System.IO;
+using System.Linq;
 using NUnit.Framework;
 using OpenRA.Mods.Cameo.Traits;
 
@@ -175,13 +176,22 @@ namespace OpenRA.Mods.Cameo.Test
 		[Test]
 		public void NoOtherModCodeQueuesActivitiesBehindAHarvestAfterADock()
 		{
-			// Audit pin (2026-10-12): in OpenRA.Mods.Cameo the only code that queues a MoveToDock is the
-			// slave's guarded delivery pair, which always carries its own FindAndDeliverResources.
+			// Audit pin (2026-10-12): across every mod project (Cameo, CA, Unified, Fransbot) the only code that
+			// queues a MoveToDock is the slave's guarded delivery pair, which always carries its own FindAndDeliverResources.
 			var slave = Source("SlaveMinerSpawnerSlave.cs");
 			var pair = Section(slave, "if (SlaveIdleRescue.ShouldAppendDeliveryPair(", "return true;");
 			Assert.That(pair, Does.Contain("new MoveToDock("));
 			Assert.That(pair, Does.Contain("new FindAndDeliverResources(self)"));
-			Assert.That(slave.Split(new[] { "new MoveToDock(" }, StringSplitOptions.None).Length - 1, Is.EqualTo(1));
+
+			var root = Path.Combine(AppContext.BaseDirectory, "source", "mods");
+			var files = Directory.GetFiles(root, "*.cs", SearchOption.AllDirectories);
+			Assert.That(files, Is.Not.Empty, "mod sources must be copied next to the test DLL");
+
+			var sites = files
+				.SelectMany(f => File.ReadLines(f).Where(l => l.Contains("new MoveToDock(") && !l.TrimStart().StartsWith("//", StringComparison.Ordinal))
+					.Select(_ => Path.GetFileName(f)))
+				.ToList();
+			Assert.That(sites, Is.EqualTo(new[] { "SlaveMinerSpawnerSlave.cs" }), "a new MoveToDock site needs the same guard-interaction review");
 		}
 
 		[Test]
