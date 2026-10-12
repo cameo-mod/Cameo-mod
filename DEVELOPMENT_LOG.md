@@ -1,3 +1,60 @@
+# 2026-10-13 — Devin: `01a13167` garrison bisect fixture (source-only, no launch)
+
+*Devin-Developer.* Lead re-scoped `GARRISON-PASSENGER-FIRE-FIXTURE-QUALIFICATION` to
+source-only: build the runtime-bisect fixture package so post-review verification
+executes instantly under a future admission. Branch `devin/01a13167-garrison-fixture`
+off `origin/master` `871973f74` in worktree `C:\cameo-wt\devin-garrison-fixture`.
+NO builds, NO launches, NO merge/push — integrator holds the only run lock.
+
+- **New map `mods/cameo/maps/garrison_bisect_20261013/`** — terrain/preview reused
+  verbatim from `heaviness_probe_20260910` (98x98 RA_DESERT); map.yaml mirrors the
+  probe's player/shroud/world convention. All five fixture cells verified on
+  clear-sand tile type by parsing `map.bin` directly (BinaryDataHeader format-2
+  layout confirmed against `OpenRA.Game/Map/Map.cs`).
+- **5-cell bisect + control, all deterministic** (shape updated after Sol's Red
+  Spice replay parse + reviewer erratum 3/3a/3b landed mid-work: decisive order
+  venue = civilian single-AttackBase host + ordinary `Attack`; force and
+  dual-trait-race arms also retained):
+  - `c1`: `fixture_civ_defend` (V20/`^CivBuilding`, Garrisonable/IFirePortOccupantProvider
+    route) + 2x `fixture_rifle_defend` + `fixture_target` (Ground,Vehicle) →
+    autonomous fire expected.
+  - `c2`: same host + `fixture_target_structure` (Ground,Structure — absent from
+    `^AutoTargetAll` Defend `ValidTargets`, so autonomous scans can never select it)
+    + scripted ordinary `host.Attack(target,false,false)` at t60 → requested path.
+  - `c2f`: same host + `fixture_target_structure` + `host.Attack(target,false,true)`
+    at t60 → force variant arm (mirrors the replay's ForceAttack-on-actor).
+  - `c3`: `fixture_bunker_defend` (naxis_naxibunker, Cargo.Passengers route,
+    dual-AttackBase host) + 2x `fixture_rifle_defend` + `fixture_target` →
+    autonomous fire; ordinary `Attack` at t120 probes the pre-existing
+    `AttackGarrisoned`+`AttackTurreted` order race (Lua orders are queued=true —
+    whichever activity claims the current slot first wins; both outcomes are
+    diagnostic evidence).
+  - `ctl`: `fixture_civ_holdfire` (HoldFire occupants) + `fixture_target` →
+    silence; proves a usable-but-sub-Defend occupant AT does not fall back to host AT.
+  - Documented gap: terrain force-attack has no Lua binding (`Actor.Attack` takes
+    only `Actor`); the c2f actor-force arm carries force-path coverage.
+- **Occupants pre-garrisoned via `InitialUnits`** on both traits
+  (`GarrisonableInfo.InitialUnits`, `CargoInfo.InitialUnits`; occupants inherit host
+  owner). Stances pinned on BOTH `InitialStance`/`InitialStanceAI` — non-playable
+  owners take `InitialStanceAI` (engine default AttackAnything).
+- **`AttackGarrisoned: LogFireDiagnostics: true`** on all fixture hosts — opt-in
+  dev flag on the patch branch emits per-station `bind`/`scan`/`*-silent`/`request`/
+  `fire` lines to debug.log. README.md in the map dir documents the full line
+  vocabulary and per-cell expected signatures (roster counts `cargo` vs `provider`,
+  `occAT`/`effAT` states, first `Eligible()` rejects, `order-resolve` vs
+  `activity-tick` vs pre-empted classification, CheckFire lines) plus the runner
+  procedure for the eventual admission.
+- `test.lua` mirrors probe conventions: `Actor.Create` at tick 0, ForceAttack at
+  tick 60, `GARRISON_BISECT_RESULT` at tick 600; `Trigger.OnDamaged` hit counters
+  give a log-independent confirmation of `fire:` lines.
+- **Verification — static only:** all symbols/fields validated against the pinned
+  engine worktree (`InCone` returns true when PortCones unset — targets placed
+  freely; `EffectiveAutoTarget` occupant-first gating; `InitialUnits` owner
+  inheritance; Lua `Attack(target,allowMove,forceAttack)` → `AttackTarget` →
+  `PassengerFirePortAttackActivity` + `OnResolveAttackOrder` queued path →
+  `via=activity-tick`). Rifle `Range: 5000` covers all ports at the 4-5-cell
+  offsets; `RangeMultiplier@Garrisoned` (+15%) only widens margin.
+
 # 2026-10-13 — Devin: maintainer merge wave `devin/merge-wave-20261013`
 
 *Devin Coordinator.* Maintainer directive: merge current-cycle work to master, then run a fresh

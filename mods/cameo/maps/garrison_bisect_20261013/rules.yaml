@@ -1,0 +1,100 @@
+World:
+	LuaScript:
+		Scripts: test.lua
+	-CrateSpawner:
+	-SpawnStartingUnits:
+	-MapStartingLocations:
+	MapOptions:
+		ShortGameEnabled: False
+
+Player:
+	-ConquestVictoryConditions:
+Shroud:
+	FogCheckboxEnabled: False
+	ExploredMapCheckboxEnabled: True
+PlayerResources:
+	DefaultCash: 0
+
+# Occupants. Both stance fields are pinned because non-playable owners take
+# InitialStanceAI, which defaults to AttackAnything.
+fixture_rifle_defend:
+	Inherits: naxis_naxiriflesoldier
+	Tooltip:
+		Name: Fixture Rifle (Defend)
+	AutoTarget:
+		InitialStance: Defend
+		InitialStanceAI: Defend
+
+fixture_rifle_holdfire:
+	Inherits: naxis_naxiriflesoldier
+	Tooltip:
+		Name: Fixture Rifle (HoldFire)
+	AutoTarget:
+		InitialStance: HoldFire
+		InitialStanceAI: HoldFire
+
+# C1/C2 host: civilian Garrisonable-route host (IFirePortOccupantProvider roster).
+fixture_civ_defend:
+	Inherits: V20
+	Tooltip:
+		Name: Fixture Garrison (Defend)
+	AutoTarget:
+		InitialStance: Defend
+		InitialStanceAI: Defend
+	Garrisonable:
+		InitialUnits: fixture_rifle_defend, fixture_rifle_defend
+	AttackGarrisoned:
+		LogFireDiagnostics: true
+
+# CTL host: identical route, HoldFire occupants must stay silent.
+fixture_civ_holdfire:
+	Inherits: V20
+	Tooltip:
+		Name: Fixture Garrison (HoldFire)
+	AutoTarget:
+		InitialStance: Defend
+		InitialStanceAI: Defend
+	Garrisonable:
+		InitialUnits: fixture_rifle_holdfire, fixture_rifle_holdfire
+	AttackGarrisoned:
+		LogFireDiagnostics: true
+
+# C3 host: Cargo-route bunker host (Cargo.Passengers roster) that also carries a
+# second AttackBase (AttackTurreted) with no active armaments.
+fixture_bunker_defend:
+	Inherits: naxis_naxibunker
+	Tooltip:
+		Name: Fixture Bunker (Defend)
+	AutoTarget:
+		InitialStance: Defend
+		InitialStanceAI: Defend
+	Cargo:
+		InitialUnits: fixture_rifle_defend, fixture_rifle_defend
+	AttackGarrisoned:
+		LogFireDiagnostics: true
+
+# Autonomous-eligible target: Vehicle is in the ^AutoTargetAll Defend priority
+# set and Ground satisfies the rifle weapon's ValidTargets.
+fixture_target:
+	Immobile:
+	HiddenUnderShroud:
+		AlwaysVisibleRelationships: Ally, Neutral, Enemy
+	BodyOrientation:
+		QuantizedFacings: 0
+	ScriptTriggers:
+	Health:
+		HP: 1000000
+	Armor:
+		Type: Medium
+	Targetable:
+		TargetTypes: Ground, Vehicle
+	HitShape:
+		Type: Circle
+			Radius: 1
+
+# Order-only target: Structure is absent from the Defend priority set, so
+# autonomous scans can never select it; only a requested target can fire on it.
+fixture_target_structure:
+	Inherits: fixture_target
+	Targetable:
+		TargetTypes: Ground, Structure
