@@ -20,6 +20,8 @@ class M13TierKnobsTests(unittest.TestCase):
                 blocks = re.findall(r"^\tBotLimits@" + tier + r":\n((?:\t\t[^\n]*\n)+)", text, re.M)
                 self.assertEqual(len(blocks), 1)
                 expected = {"AttackLivenessMaxNoLaunchTicks": 7500 + 500 * step,
+                            # BV_m13_liveness tempo arms: one equal-step line each (DESIGN §19.1).
+                            "BankSaturationCash": 3000 + 300 * step,
                             "TeamResponseMaxLeaseTicks": 1500 + 100 * step,
                             "TeamResponseRearmCooldownTicks": 750 + 50 * step,
                             "TeamResponseLeaseLimit": 1}
@@ -33,7 +35,8 @@ class M13TierKnobsTests(unittest.TestCase):
         classes = switches.load_effect_classes(switches.SPEC, groups)
         self.assertIn("SquadManagerBotModuleCA@classic", skip)
         self.assertEqual(groups["BV_m13_liveness"],
-                         {"SquadManagerBotModuleCA": {"AttackLivenessEnabled": "true"}})
+                         {"SquadManagerBotModuleCA": {"AttackLivenessEnabled": "true"},
+                          "UnitBuilderBotModuleCA": {"BankSaturationCash": "1"}})
         self.assertEqual(switches.restraint_budget(["BV_m13_liveness"], classes)["new_restraint_count"], 1)
         info = (ROOT / "OpenRA.Mods.CA/Traits/BotModules/SquadManagerBotModuleCA.cs").read_text()
         self.assertIn("readonly bool AttackLivenessEnabled = false;", info)

@@ -172,6 +172,7 @@
 		PersonalityReactionDelay: 7500
 		NewProductionCashThreshold: 20000
 		MaximiseProductionCashRequirement: 9500
+		BankSaturationCash: 4200
 		AdaptiveCounterWeight: 0
 		RetreatRatioPct: 10
 		RequiresCondition: easiestbot
@@ -192,6 +193,7 @@
 		PersonalityReactionDelay: 6750
 		NewProductionCashThreshold: 18000
 		MaximiseProductionCashRequirement: 8500
+		BankSaturationCash: 3900
 		AdaptiveCounterWeight: 4
 		RetreatRatioPct: 20
 		RequiresCondition: veryeasybot
@@ -212,6 +214,7 @@
 		PersonalityReactionDelay: 6000
 		NewProductionCashThreshold: 16000
 		MaximiseProductionCashRequirement: 7500
+		BankSaturationCash: 3600
 		AdaptiveCounterWeight: 9
 		RetreatRatioPct: 30
 		RequiresCondition: easybot
@@ -232,6 +235,7 @@
 		PersonalityReactionDelay: 5250
 		NewProductionCashThreshold: 14000
 		MaximiseProductionCashRequirement: 6500
+		BankSaturationCash: 3300
 		AdaptiveCounterWeight: 13
 		RetreatRatioPct: 40
 		RequiresCondition: mediumbot
@@ -253,6 +257,7 @@
 		PersonalityReactionDelay: 4500
 		NewProductionCashThreshold: 12000
 		MaximiseProductionCashRequirement: 5500
+		BankSaturationCash: 3000
 		AdaptiveCounterWeight: 18
 		RetreatRatioPct: 50
 		RequiresCondition: hardbot
@@ -274,6 +279,7 @@
 		PersonalityReactionDelay: 3750
 		NewProductionCashThreshold: 10000
 		MaximiseProductionCashRequirement: 4500
+		BankSaturationCash: 2700
 		AdaptiveCounterWeight: 22
 		RetreatRatioPct: 60
 		RequiresCondition: veryhardbot
@@ -295,6 +301,7 @@
 		PersonalityReactionDelay: 3000
 		NewProductionCashThreshold: 8000
 		MaximiseProductionCashRequirement: 3500
+		BankSaturationCash: 2400
 		AdaptiveCounterWeight: 27
 		RetreatRatioPct: 70
 		RequiresCondition: brutalbot
@@ -316,6 +323,7 @@
 		PersonalityReactionDelay: 2250
 		NewProductionCashThreshold: 6000
 		MaximiseProductionCashRequirement: 2500
+		BankSaturationCash: 2100
 		AdaptiveCounterWeight: 31
 		RetreatRatioPct: 80
 		RequiresCondition: challengerbot
@@ -337,6 +345,7 @@
 		PersonalityReactionDelay: 1500
 		NewProductionCashThreshold: 4000
 		MaximiseProductionCashRequirement: 1500
+		BankSaturationCash: 1800
 		AdaptiveCounterWeight: 36
 		RetreatRatioPct: 90
 		RequiresCondition: unbeatablebot
@@ -358,6 +367,7 @@
 		PersonalityReactionDelay: 750
 		NewProductionCashThreshold: 2000
 		MaximiseProductionCashRequirement: 500
+		BankSaturationCash: 1500
 		AdaptiveCounterWeight: 40
 		RetreatRatioPct: 100
 		RequiresCondition: cameogodbot
@@ -5218,6 +5228,9 @@ Player:
 		MaxUnitsPerBot: 200
 	UnitBuilderBotModuleCA@generic:
 		RequiresCondition: genericbot || classicbot
+		# BV_m13_liveness arms BankSaturationCash on this shared instance; classic
+		# never carries genericbot, so its switch fields stay inert there.
+		SwitchCondition: genericbot
 		UseCompositions: true
 		# UW-1 (AI_ARCHITECTURE §2.8b item 3): derive the UnitsToBuild weights from the enabled
 		# personality's RoleMix x each unit's Versus-weighted strength. Off until the next increment

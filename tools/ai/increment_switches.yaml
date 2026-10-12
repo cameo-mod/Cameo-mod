@@ -87,6 +87,8 @@ groups:
   BV_m13_liveness:
     SquadManagerBotModuleCA:
       AttackLivenessEnabled: true
+    UnitBuilderBotModuleCA:
+      BankSaturationCash: 1        # arm flag only; the cash bar is the tier's BotLimits.BankSaturationCash
   TF4_turtle_fallback_expiry:       # Default-off bounded terminal-pressure fallback; no campaign adoption approval.
     MasterAiBotModule:
       UseTurtleFallbackExpiry: true
