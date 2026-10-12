@@ -197,7 +197,7 @@ namespace OpenRA.Mods.Cameo.Traits
 		public string ActorName;
 		public CPos Cell;
 		public int Tick;
-		public bool WasDead;
+		public string Cause;
 	}
 
 	internal sealed class SeatSample
@@ -216,6 +216,7 @@ namespace OpenRA.Mods.Cameo.Traits
 		public bool WaveActive;
 		public bool FirstUnitLogged;
 		public int ExpansionDeploys;
+		public int EventSeq;
 		public int IdleProductionTicks;
 		public int TechTier;
 		public readonly SeatSample Sample = new();
@@ -443,6 +444,15 @@ namespace OpenRA.Mods.Cameo.Traits
 			return actor.Info.TraitInfos<ValuedInfo>().FirstOrDefault()?.Cost ?? 0;
 		}
 
+		static string LossCause(Actor actor)
+		{
+			// actor.IsDead conflates kill with disposal: Dispose() marks it dead for sells,
+			// transforms and cleanups alike. The truth is the health trait — only a real
+			// kill leaves IsDead. Everything else is "removed": a sell vs a transform vs a
+			// mission cleanup cannot be told apart from actor state at removal time.
+			return actor.TraitOrDefault<IHealth>()?.IsDead ?? false ? "killed" : "removed";
+		}
+
 		void ActorAdded(Actor actor)
 		{
 			if (ended || writer == null)
@@ -537,7 +547,7 @@ namespace OpenRA.Mods.Cameo.Traits
 							ActorName = actor.Info.Name,
 							Cell = actor.Location,
 							Tick = world.WorldTick,
-							WasDead = actor.IsDead
+							Cause = LossCause(actor)
 						});
 					return;
 				}
@@ -545,7 +555,7 @@ namespace OpenRA.Mods.Cameo.Traits
 				var seat = Seat(actor.Owner);
 				if (seat != null)
 					EmitEvent(seat, "structure_lost", actor.Info.Name, actor.Location,
-						cause: actor.IsDead ? "killed" : "sold",
+						cause: LossCause(actor),
 						startDist: Cells(actor.Location, seat.Home));
 			}
 			catch (Exception e)
@@ -586,7 +596,7 @@ namespace OpenRA.Mods.Cameo.Traits
 				var seat = Seat(p.Owner);
 				if (seat != null)
 					EmitEvent(seat, "structure_lost", p.ActorName, p.Cell,
-						cause: p.WasDead ? "killed" : "sold",
+						cause: p.Cause,
 						startDist: Cells(p.Cell, seat.Home));
 			}
 		}
@@ -901,15 +911,19 @@ namespace OpenRA.Mods.Cameo.Traits
 		void EmitEvent(SeatTelemetry seat, string kind, string actor, CPos? cell,
 			double startDist = -1, string cause = null, string toSeat = null, int units = 0)
 		{
+			// seq is per-seat monotonic: same-tick events keep a recoverable total order
+			// (Boss P3a request — placement/build order must survive same-tick ties).
+			var seq = ++seat.EventSeq;
 			var b = new StringBuilder(256);
 			AiMatchLogWriter.AppendObjectStart(b);
 			AiMatchLogWriter.AppendString(b, "schema", "cameo-player-event", true);
 			AiMatchLogWriter.AppendNumber(b, "version", 1);
 			AiMatchLogWriter.AppendString(b, "game_uid", uid);
-			AiMatchLogWriter.AppendString(b, "record_id", uid + "|" + seat.Seat + "|" + kind + "|" + world.WorldTick + "|" + (actor ?? ""));
+			AiMatchLogWriter.AppendString(b, "record_id", uid + "|" + seat.Seat + "|" + kind + "|" + world.WorldTick + "|" + seq);
 			AiMatchLogWriter.AppendNumber(b, "tick", world.WorldTick);
 			AiMatchLogWriter.AppendString(b, "seat", seat.Seat);
 			AiMatchLogWriter.AppendString(b, "kind", kind);
+			AiMatchLogWriter.AppendNumber(b, "seq", seq);
 			if (actor != null)
 				AiMatchLogWriter.AppendString(b, "actor", actor);
 			if (cell.HasValue)

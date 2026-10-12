@@ -81,6 +81,8 @@ def read_channel(path):
             if row.get("version") != 1:
                 raise health.EvidenceError("unsupported player-event version")
             health.integer(row.get("tick"))
+            if "seq" in row:
+                health.integer(row["seq"])
             kind = row.get("kind")
             if kind not in health.PLAYER_EVENT_KINDS:
                 raise health.EvidenceError(f"unsupported player-event kind: {kind}")
