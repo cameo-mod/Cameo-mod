@@ -41,6 +41,11 @@ approved Route A' driver set bb46784b/0cdd46eb/a7cef93c/8fff80a7 stays byte-froz
 - **Open gates before master landing:** python drift attribution → boot-gate slot (Luna
   admission, serial) → hand verified branch to Sol for the FF push (Sol = sole master writer
   per Lead ruling; I sequence+verify, Sol pushes).
+- **A/B handoff note (campaign tooling lives outside the repo):** the frozen wave-1 driver's
+  `TOOL_SHA256['order_stream_diff.py'] = 1e089b45` deliberately pins the frozen worktree's
+  comparator rev; a fresh post-merge campaign tree MUST re-pin deliberately to `52883a81`
+  (branch-tip rev) or `verify_tools` fails closed. Do not "fix" the pin by accident —
+  Devin-Integrator flag 2026-10-12.
 
 # 2026-10-12 — Devin: BY_crawl_safety arm group, draft for review (branch `devin/p3-0-crawl-safety-switch`)
 
