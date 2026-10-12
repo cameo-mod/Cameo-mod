@@ -20664,3 +20664,7 @@ evidence refuses; frontier anchor is the argmin cell.
 Validation: `dotnet test OpenRA.Mods.Cameo.Test -c Debug` - 1687 passed, 0 failed
 (34/34 ExpansionPlanner). Release build clean. Boot-gate PASS - main menu reached, no new
 exception-*.log. TF-2 (unit-spend reservation) remains a separate increment per the board.
+
+### 2026-10-12 — RA1 pillbox directional firing regression
+
+Restore all-direction passenger firing for normal/camo RA1 pillboxes using full-turn cones with independent station bindings and offsets retained. Lead approved the two-profile scope; exact-SHA review remains required before landing. Mounted combat-profile tests reproduce 4 failures on old cones and pass 8/8 after the fix; focused fire-port Python tests pass 5/5. No engine pin change or game launch. Civilian firing and bot Cargo recruitment remain open.

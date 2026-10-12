@@ -196,7 +196,8 @@ ra1_allies_pillbox:
 		Armaments: garrisoned
 		PortOffsets: 384,0,128, 224,-341,128, -224,-341,128, -384,0,128, -224,341,128, 224,341,128
 		PortYaws: 0, 176, 341, 512, 682, 853
-		PortCones: 88, 88, 88, 88, 88, 88
+		# Exclusive passenger stations must each cover all sides of a stationary pillbox.
+		PortCones: 512, 512, 512, 512, 512, 512
 		PauseOnCondition: disabled
 	WithCargoPipsDecoration:
 		Position: BottomLeft
@@ -375,7 +376,8 @@ ra1_allies_camopillbox:
 		Armaments: garrisoned
 		PortOffsets: 384,0,128, 224,-341,128, -224,-341,128, -384,0,128, -224,341,128, 224,341,128
 		PortYaws: 0, 176, 341, 512, 682, 853
-		PortCones: 88, 88, 88, 88, 88, 88
+		# Preserve omnidirectional fire when only one of the two seats is occupied.
+		PortCones: 512, 512, 512, 512, 512, 512
 		PauseOnCondition: chronobeamed
 	-MustBeDestroyed:
 	WithCargoPipsDecoration:
