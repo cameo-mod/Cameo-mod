@@ -255,6 +255,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public readonly BitSet<TargetableType> NavalTargetTypes = new("Water", "Ship");
 		public readonly BitSet<TargetableType> DefenceTargetTypes = new("Defense");
 
+		// S2 (FINDINGS_2026-10-12): production-queue names that yield aircraft in this
+		// ruleset — every Buildable queue an AircraftInfo actor declares. Derived at
+		// RulesetLoaded, never yaml, and read by BotFogMemory.Classify for the
+		// ProducesAircraft flag behind IBotEnemyAirIntelProvider.
+		internal readonly HashSet<string> AircraftQueueNames = new(StringComparer.OrdinalIgnoreCase);
+
 		[Desc("Value per unit of garrison weight of an enemy-held garrisonable building that has no Valued cost",
 			"(the civilian houses), so fog memory prices the garrison, not the house (AI_ARCHITECTURE §12.12).",
 			"0 keeps the house's own cost, which is none.")]
@@ -524,6 +530,13 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public override void RulesetLoaded(Ruleset rules, ActorInfo ai)
 		{
 			base.RulesetLoaded(rules, ai);
+			AircraftQueueNames.Clear();
+			if (rules != null)
+				foreach (var actor in rules.Actors.Values)
+					if (actor.HasTraitInfo<AircraftInfo>())
+						foreach (var queue in actor.TraitInfos<BuildableInfo>().SelectMany(b => b.Queue))
+							AircraftQueueNames.Add(queue);
+
 			ValidateDemandThreshold("AntiAir", AntiAirDemandOn, AntiAirDemandOff);
 			ValidateDemandThreshold("AntiArmour", AntiArmourDemandOn, AntiArmourDemandOff);
 			ValidateDemandThreshold("AntiInfantry", AntiInfantryDemandOn, AntiInfantryDemandOff);
@@ -577,7 +590,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		}
 	}
 
-	public class MasterAiBotModule : ConditionalTrait<MasterAiBotModuleInfo>, IBotTick, IGameSaveTraitData, IBotMainTargetProvider, IBotRegionThreatProvider, IBotFoggedEnemyProvider, IBotRouteThreatRouter, IBotMissionProvider, IBotMissionOutcomeSink, IBotEnemyCompositionProvider, IBotThreatPredictionProvider, IBotRememberedDefenceProvider, IBotSiegeFailureMemory, IBotPersonalityLeadProvider, IBotUtilityAxes, IBotDirector, IBotTeamMember, IBotCoalition
+	public class MasterAiBotModule : ConditionalTrait<MasterAiBotModuleInfo>, IBotTick, IGameSaveTraitData, IBotMainTargetProvider, IBotRegionThreatProvider, IBotFoggedEnemyProvider, IBotRouteThreatRouter, IBotMissionProvider, IBotMissionOutcomeSink, IBotEnemyCompositionProvider, IBotEnemyAirIntelProvider, IBotThreatPredictionProvider, IBotRememberedDefenceProvider, IBotSiegeFailureMemory, IBotPersonalityLeadProvider, IBotUtilityAxes, IBotDirector, IBotTeamMember, IBotCoalition
 	{
 		static readonly string[] DefaultPersonalities = { "rush", "turtle", "tech", "expansion", "steamroller", "guerrilla" };
 		internal static readonly string[] DemandNames = { "antiair", "antiarmour", "antiinfantry", "detector", "artillery" };
@@ -952,6 +965,32 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			}
 
 			valueByActorType = composition;
+			return true;
+		}
+
+		// S2 (FINDINGS_2026-10-12): the enemy air capability as SEEN — a remembered enemy
+		// aircraft or a remembered enemy aircraft-producing structure. Same fog contract as
+		// the composition feed: false means "not observing through fog" and keeps the
+		// caller's ungated behaviour (what classic runs).
+		bool IBotEnemyAirIntelProvider.TryGetEnemyAirIntel(out bool airThreatObserved)
+		{
+			airThreatObserved = false;
+			if (!((IBotFoggedEnemyProvider)this).FoggedObservation)
+				return false;
+
+			foreach (var enemy in player.World.Players)
+			{
+				if (enemy == player || enemy.NonCombatant || player.RelationshipWith(enemy) != PlayerRelationship.Enemy)
+					continue;
+
+				foreach (var seen in fogMemory.Remembered(enemy))
+					if (seen.Aircraft || seen.ProducesAircraft)
+					{
+						airThreatObserved = true;
+						return true;
+					}
+			}
+
 			return true;
 		}
 

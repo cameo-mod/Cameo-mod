@@ -1656,6 +1656,46 @@ namespace OpenRA.Mods.CA.Traits
 			incomeWindowStartEarned = playerResources.Earned;
 		}
 
+		// S2 (FINDINGS_2026-10-12 §4): dedicated anti-air defences only after the bot has
+		// fog-honestly observed an enemy air capability — a remembered aircraft or a
+		// remembered aircraft-producing structure. No air-intel provider (classic) or a
+		// provider not observing through fog keeps the pre-gate behaviour. Cached per tick:
+		// one build evaluation may check several fraction entries.
+		int airIntelTick = -1;
+		bool airIntelOpen = true;
+		HashSet<string> gatedAirDefences;
+
+		internal bool DedicatedAntiAirAllowed
+		{
+			get
+			{
+				if (airIntelTick != world.WorldTick)
+				{
+					airIntelTick = world.WorldTick;
+					var provider = player.PlayerActor.TraitsImplementing<IBotEnemyAirIntelProvider>().FirstEnabledTraitOrDefault();
+					airIntelOpen = provider == null || !provider.TryGetEnemyAirIntel(out var observed) || observed;
+				}
+
+				return airIntelOpen;
+			}
+		}
+
+		/// <summary>The dedicated-AA members of <see cref="BaseBuilderBotModuleCAInfo.AntiAirTypes"/> — every
+		/// armament air-only. Dual-role air/ground defences stay ungated (FINDINGS S2: the FutureTech
+		/// multiturret is the ground defence too). Ruleset-derived once.</summary>
+		internal bool IsGatedAirDefence(string name)
+		{
+			if (gatedAirDefences == null)
+			{
+				gatedAirDefences = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+				foreach (var n in Info.AntiAirTypes)
+					if (world.Map.Rules.Actors.TryGetValue(n, out var ai) && BaseBuilderQueueEvalCA.IsDedicatedAntiAir(ai))
+						gatedAirDefences.Add(n);
+			}
+
+			return gatedAirDefences.Contains(name);
+		}
+
 		/// <summary>
 		/// ECON-A (§1): the strongest affordable defence for the demand — AttackBase buildings from
 		/// Info.DefenseTypes that a defence queue can actually produce, affordable at the ETA against
@@ -1670,6 +1710,11 @@ namespace OpenRA.Mods.CA.Traits
 			var candidates = new List<(ActorInfo Info, int Strength, int Cost)>();
 			foreach (var name in Info.DefenseTypes)
 			{
+				// S2: dedicated anti-air waits for fog-fair enemy air intel — the demand's
+				// defence slot then takes the strongest anti-ground pick instead.
+				if (!BaseBuilderQueueEvalCA.AirDefenceAdmits(IsGatedAirDefence(name), DedicatedAntiAirAllowed))
+					continue;
+
 				if (!world.Map.Rules.Actors.TryGetValue(name, out var info) || !info.HasTraitInfo<AttackBaseInfo>())
 					continue;
 

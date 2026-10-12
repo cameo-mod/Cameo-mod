@@ -13,9 +13,12 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using NUnit.Framework;
+using OpenRA.GameRules;
 using OpenRA.Mods.CA;
 using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.Common.Traits;
+using OpenRA.Primitives;
+using OpenRA.Traits;
 
 namespace OpenRA.Mods.Cameo.Test
 {
@@ -1776,6 +1779,62 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(pending.ResolveWhileAwaiting(104, placementProven: installed, playerEliminated: false),
 				Is.EqualTo(BotQueuePendingResolution.EmitRequested),
 				"slot occupied by EnablePlug -> Placed");
+		}
+
+		// S2 (FINDINGS_2026-10-12 §4): dedicated-AA classification + the intel gate.
+
+		static ArmamentInfo Armament(params string[] validTargets)
+		{
+			var weapon = new WeaponInfo();
+			typeof(WeaponInfo).GetField("ValidTargets").SetValue(weapon, new BitSet<TargetableType>(validTargets));
+			var armament = new ArmamentInfo();
+			typeof(ArmamentInfo).GetField("<WeaponInfo>k__BackingField", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic)
+				.SetValue(armament, weapon);
+			return armament;
+		}
+
+		[Test]
+		public void AirOnlyArmamentIsDedicatedAntiAir()
+		{
+			// The samsite shape: one armament whose ValidTargets is exactly Air.
+			var samsite = new ActorInfo("samsite", new BuildingInfo(), Armament("Air"));
+			Assert.That(BaseBuilderQueueEvalCA.IsDedicatedAntiAir(samsite), Is.True);
+		}
+
+		[Test]
+		public void DualRoleArmamentIsNotDedicatedAntiAir()
+		{
+			// FINDINGS S2's guard: Future_MultiMissile (Ground, Water, Air) is the
+			// FutureTech multiturret's ground defence too — it must stay ungated.
+			var multiturret = new ActorInfo("multi", new BuildingInfo(), Armament("Ground", "Water", "Air"));
+			Assert.That(BaseBuilderQueueEvalCA.IsDedicatedAntiAir(multiturret), Is.False);
+		}
+
+		[Test]
+		public void GroundOnlyAndUnarmedAreNotDedicatedAntiAir()
+		{
+			var gun = new ActorInfo("gun", new BuildingInfo(), Armament("Ground"));
+			Assert.That(BaseBuilderQueueEvalCA.IsDedicatedAntiAir(gun), Is.False);
+
+			var empty = new ActorInfo("empty", new BuildingInfo());
+			Assert.That(BaseBuilderQueueEvalCA.IsDedicatedAntiAir(empty), Is.False);
+		}
+
+		[Test]
+		public void MixedArmamentsAreNotDedicatedAntiAir()
+		{
+			// One air armament beside a ground gun = a ground-role turret that also
+			// swats air; gating it would strip the ground defence.
+			var mixed = new ActorInfo("mixed", new BuildingInfo(), Armament("Air"), Armament("Ground", "Water"));
+			Assert.That(BaseBuilderQueueEvalCA.IsDedicatedAntiAir(mixed), Is.False);
+		}
+
+		[Test]
+		public void DedicatedAntiAirWaitsForAirIntel()
+		{
+			Assert.That(BaseBuilderQueueEvalCA.AirDefenceAdmits(true, false), Is.False, "dedicated AA stays queued while no air was seen");
+			Assert.That(BaseBuilderQueueEvalCA.AirDefenceAdmits(true, true), Is.True, "first air sighting opens it");
+			Assert.That(BaseBuilderQueueEvalCA.AirDefenceAdmits(false, false), Is.True, "non-AA picks never gate");
 		}
 	}
 }

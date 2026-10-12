@@ -1173,6 +1173,11 @@ namespace OpenRA.Mods.CA.Traits
 				if (!BuildOrderCategory.Satisfies(wanted, knobs.CategoryOf(name)))
 					continue;
 
+				// S2 (FINDINGS_2026-10-12 §4): the opening obeys the same air-intel
+				// gate — no dedicated AA before the first fog-fair air sighting.
+				if (!BaseBuilderQueueEvalCA.AirDefenceAdmits(baseBuilder.IsGatedAirDefence(name), baseBuilder.DedicatedAntiAirAllowed))
+					continue;
+
 				if (baseBuilder.Info.NavalProductionTypes.Contains(name) || baseBuilder.Info.RefineryTypes.Contains(name) && baseBuilder.HasMaxRefineriesFor(candidate))
 					continue;
 
@@ -1526,6 +1531,12 @@ namespace OpenRA.Mods.CA.Traits
 			foreach (var frac in baseBuilder.Info.BuildingFractions.OrderBy(kv => kv.Key).Shuffle(BotRng.For(player, nameof(BaseBuilderQueueManagerCA))))
 			{
 				var name = frac.Key;
+
+				// S2 (FINDINGS_2026-10-12 §4): dedicated anti-air waits for fog-fair
+				// enemy air intel; the rolled share then flows to the remaining
+				// (anti-ground) entries of this same pass.
+				if (!BaseBuilderQueueEvalCA.AirDefenceAdmits(baseBuilder.IsGatedAirDefence(name), baseBuilder.DedicatedAntiAirAllowed))
+					continue;
 
 				// Does this building have initial delay, if so have we passed it?
 				if (baseBuilder.Info.BuildingDelays != null &&
