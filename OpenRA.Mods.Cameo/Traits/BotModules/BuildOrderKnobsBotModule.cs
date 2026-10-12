@@ -62,8 +62,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		[Desc("Use the committed learned multipliers and opening posteriors (LearnedFile). False (default) = presets and jitter only.")]
 		public readonly bool UseLearnedBuildOrder = false;
 
-		[Desc("Mod-relative path of the file written by tools/ai/tune_build_order.py --write.")]
-		public readonly string LearnedFile = "ai/learned/build_order_knobs.yaml";
+		[Desc("Path of the file written by tools/ai/tune_build_order.py --write, mounted through the explicit",
+			"cameo| package prefix (M9: a bare mod-relative path never resolves through FileSystem.Exists, since",
+			"Folder.Contents only indexes top-level names; cameo| takes the explicit-mount path instead, which",
+			"checks the real nested path).")]
+		public readonly string LearnedFile = "cameo|ai/learned/build_order_knobs.yaml";
 
 		[Desc("Ticks between react evaluations.")]
 		public readonly int ReactEvalTicks = 125;

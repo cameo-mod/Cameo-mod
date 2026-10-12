@@ -630,7 +630,7 @@ def switches_text(arms: list[str]) -> str:
              "skip: [SquadManagerBotModuleCA@classic]", "", "groups:"]
     for arm in arms:
         lines += [f"  {arm}:", "    BuildOrderKnobsBotModule:", "      UseLearnedBuildOrder: true",
-                  f"      LearnedFile: ai/learned/{arm}.yaml"]
+                  f"      LearnedFile: cameo|ai/learned/{arm}.yaml"]
     return "\n".join(lines) + "\n"
 
 

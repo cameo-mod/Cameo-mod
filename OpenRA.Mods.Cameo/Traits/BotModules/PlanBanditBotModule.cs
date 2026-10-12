@@ -44,8 +44,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		"armed, so the fitter can condition on survivorship filters. No orders, no actor access — record and steering only.")]
 	public class PlanBanditBotModuleInfo : ConditionalTraitInfo
 	{
-		[Desc("Mod-relative path of the learned posteriors written by tools/ai/tune_plan_bandits.py --write.")]
-		public readonly string LearnedFile = "ai/learned/plan_bandits.yaml";
+		[Desc("Path of the learned posteriors written by tools/ai/tune_plan_bandits.py --write, mounted through",
+			"the explicit cameo| package prefix (M9: a bare mod-relative path never resolves through",
+			"FileSystem.Exists, since Folder.Contents only indexes top-level names; cameo| takes the",
+			"explicit-mount path instead, which checks the real nested path).")]
+		public readonly string LearnedFile = "cameo|ai/learned/plan_bandits.yaml";
 
 		[Desc("Personality bandit arms: personality names (no prefix) that must match a BotPersonalityController condition.",
 			"Empty = the personality bandit does not run and nothing is pinned.")]

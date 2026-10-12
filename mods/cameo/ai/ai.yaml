@@ -3779,7 +3779,7 @@ Player:
 		KnobMax: 1600
 		JitterPct: 8
 		UseLearnedBuildOrder: false
-		LearnedFile: ai/learned/build_order_knobs.yaml
+		LearnedFile: cameo|ai/learned/build_order_knobs.yaml
 		ReactEvalTicks: 125
 		ReactStep: 100
 		ReactDecayPerMinute: 150
@@ -3911,7 +3911,7 @@ Player:
 	# master until the increment A/B arms it (switch group AO_tier3_bandits).
 	PlanBanditBotModule:
 		RequiresCondition: genericbot && plan_bandits
-		LearnedFile: ai/learned/plan_bandits.yaml
+		LearnedFile: cameo|ai/learned/plan_bandits.yaml
 		PersonalityArms: rush, turtle, tech, expansion, steamroller, guerrilla
 		PriorCount: 8
 		LcbZ: 164
@@ -4091,6 +4091,11 @@ Player:
 		RaidFailuresBeforeDormant: 2
 		RequiresCondition: genericbot
 		UseFoggedObservation: true
+		# M14 default (DESIGN §19.11, maintainer ruling 2026-10-03, binding): Emergency means LOSING, and it
+		# never rewrites the personality (no forced turtle) -- target + urgency only. This is the ruling's own
+		# baseline, not an experiment: switch group AL_emergency_net_loss exists only for an A/B that disarms it.
+		EmergencyLossArmyPct: 25
+		EmergencyKeepsPersonality: true
 		# ZG-c: spatial memory + risk routing index by the zone graph when an enabled, built
 		# TacticalMapBotModule exists (genericbot); the square grid stays the fallback otherwise.
 		UseZoneTopology: false # ZG-c merged default-on without an A/B (#718); switch group D re-arms it for the next increment A/B

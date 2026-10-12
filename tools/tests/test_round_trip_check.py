@@ -54,3 +54,40 @@ def test_dangling_attempt_fails(tmp_path, capsys):
     assert s["outcomes"] == "FAIL"
     assert round_trip_check.main([str(d)]) == 1
     assert "1 dangling" in capsys.readouterr().out
+
+
+def test_missing_but_present_detects_regression(tmp_path, monkeypatch):
+    # M9: a configured learned path logged "missing" while it physically exists in the mod
+    # tree means the load-gate's Exists() check regressed — this is the exact asymmetry M9 hit.
+    monkeypatch.setattr(round_trip_check, "MOD_ROOT", tmp_path)
+    learned = tmp_path / "ai" / "learned"
+    learned.mkdir(parents=True)
+    (learned / "plan_bandits.yaml").write_text("BotPlanBandits:\n", encoding="utf-8")
+
+    present = round_trip_check.missing_but_present(
+        ["AI Multi0: plan-bandit learned: cameo|ai/learned/plan_bandits.yaml missing, priors only"])
+    assert present == ["cameo|ai/learned/plan_bandits.yaml"]
+
+    # A path that is genuinely absent from the tree is a normal "no learned data yet" state,
+    # not a regression — must not be flagged.
+    absent = round_trip_check.missing_but_present(
+        ["AI Multi0: TIER1 priors: none (cameo|ai/learned/engagement_priors.yaml missing), neutral"])
+    assert absent == []
+
+
+def test_learned_paths_row_fails_when_logged_missing_but_present(tmp_path, monkeypatch):
+    monkeypatch.setattr(round_trip_check, "MOD_ROOT", tmp_path)
+    learned = tmp_path / "ai" / "learned"
+    learned.mkdir(parents=True)
+    (learned / "plan_bandits.yaml").write_text("BotPlanBandits:\n", encoding="utf-8")
+
+    d = make_dir(tmp_path / "match", "SUCCESS")
+    debug_log = d / "Logs" / "debug.log"
+    debug_log.write_text(
+        debug_log.read_text(encoding="utf-8")
+        + "AI Multi0: plan-bandit learned: cameo|ai/learned/plan_bandits.yaml missing, priors only\n",
+        encoding="utf-8")
+
+    s = states(round_trip_check.check([d]))
+    assert s["learned paths"] == "FAIL"
+    assert round_trip_check.main([str(d)]) == 1

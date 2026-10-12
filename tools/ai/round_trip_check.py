@@ -17,6 +17,7 @@ from __future__ import annotations
 import contextlib
 import io
 import pathlib
+import re
 import sys
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
@@ -27,6 +28,10 @@ import mission_story  # noqa: E402
 
 REFERENCE_BOTS = fit_arsenal_priors.REFERENCE_BOTS
 PASS, WARN, FAIL = "PASS", "WARN", "FAIL"
+
+# M9 (ai/learned/*.yaml never resolving through FileSystem.Exists): the mod root a logged
+# "<path> missing" is checked against. tools/ai/ -> tools -> repo root -> mods/cameo.
+MOD_ROOT = pathlib.Path(__file__).resolve().parent.parent.parent / "mods" / "cameo"
 
 
 def logs_of(dirs: list[pathlib.Path]) -> list[pathlib.Path]:
@@ -47,6 +52,31 @@ def jsonl(dirs: list[pathlib.Path], name: str) -> list[dict]:
     for logs in logs_of(dirs):
         rows.extend(fit_arsenal_priors.read_jsonl(logs / name))
     return rows
+
+
+def missing_but_present(lines: list[str]) -> list[str]:
+    """M9 regression guard: every learned-file "missing" log line names the configured path right
+    before the word "missing" (`BO learned: <path> missing`, `plan-bandit learned: <path> missing`, ...).
+    A path logged missing while it physically exists in the mod tree means the load-gate's existence
+    check regressed (the Exists()/Folder.Contents index asymmetry M9 hit) — distinct from a path that
+    is genuinely absent, which is a normal "no learned data yet" state, not a bug.
+    """
+    hits = []
+    seen = set()
+    for ln in lines:
+        if " missing" not in ln:
+            continue
+        m = re.search(r"(\S+\.yaml) missing", ln)
+        if not m:
+            continue
+        path = m.group(1)
+        if path in seen:
+            continue
+        seen.add(path)
+        rel = path.split("|", 1)[1] if "|" in path else path
+        if (MOD_ROOT / rel).is_file():
+            hits.append(path)
+    return hits
 
 
 def generic_players(matches: list[dict]) -> list[dict]:
@@ -215,6 +245,15 @@ def check(dirs: list[pathlib.Path]) -> list[tuple[str, str, str]]:
     else:
         state = PASS
     rows.append(("learning", state, f"{len(learned)} LEARNED line(s), {fit_note}"))
+
+    # 9b. learned paths (M9 regression guard) — a configured learned file logged "missing" while it
+    # physically exists in the mod tree is always a FAIL, never a WARN: a soft signal is exactly how
+    # M9 (the bare-path/Exists() asymmetry) went unnoticed until a cloud review caught it by reading
+    # the source, not the logs.
+    stuck = missing_but_present(lines)
+    rows.append(("learned paths", FAIL if stuck else PASS,
+                 f"{len(stuck)} path(s) logged missing but present in the tree"
+                 + (f": {sorted(stuck)}" if stuck else "")))
 
     # 10. tools
     failures = []

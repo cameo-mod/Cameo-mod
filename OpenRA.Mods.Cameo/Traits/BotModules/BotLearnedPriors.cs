@@ -86,8 +86,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			"builder takes its original path, random draws included.")]
 		public readonly bool UseLearnedPriors = false;
 
-		[Desc("Mod-relative path of the priors file written by tools/ai/fit_arsenal_priors.py --write.")]
-		public readonly string PriorsFile = "ai/learned/arsenal_priors.yaml";
+		[Desc("Path of the priors file written by tools/ai/fit_arsenal_priors.py --write, mounted through the",
+			"explicit cameo| package prefix (M9: a bare mod-relative path never resolves through FileSystem.Exists,",
+			"since Folder.Contents only indexes top-level names; cameo| takes the explicit-mount path instead,",
+			"which checks the real nested path).")]
+		public readonly string PriorsFile = "cameo|ai/learned/arsenal_priors.yaml";
 
 		[Desc("Lowest weight (percent) the priors may give a candidate.")]
 		public readonly int MinWeightPercent = 50;
