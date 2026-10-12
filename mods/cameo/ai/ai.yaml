@@ -4327,6 +4327,10 @@ Player:
 		# site handouts whose deploy annulus holds no placeable cell (MCV-EXPAND-IDLE H1). Off until
 		# the increment A/B arms it.
 		UseProductionScaling: false
+		# CB_frontier_observe (P3a, DESIGN_2026-10-12_protected_frontier s7.1): read-only shadow of the
+		# protected-frontier stage machine; emits outpost_stage v2 rows on the player-telemetry channel.
+		# Records only - moves no flag/claim/RNG/order. Off until the increment A/B arms it.
+		UseFrontierObservation: false
 	# Whole-base defence cover: each defence goes where its range covers the most uncovered base, outer edge and
 	# enemy side first (genericbot only; classic, sharing BaseBuilderBotModuleCA@generic, gets no advisor). Off until Enabled.
 	DefenseCoveragePlanner:

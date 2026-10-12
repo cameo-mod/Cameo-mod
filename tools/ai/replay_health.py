@@ -98,6 +98,13 @@ PLAYER_EVENT_KINDS = {
     "first_unit_enemy_territory", "attack_wave_start", "superweapon_built",
     "superweapon_fired",
 }
+# CB_frontier_observe (P3a, DESIGN_2026-10-12_protected_frontier §8): outpost_stage
+# rows emit at version 2 — the field/kind sets dispatch on the row's own version so
+# v1 rows still validate against a v1-only tool (fail-closed is unchanged).
+PLAYER_EVENT_V2_FIELDS = PLAYER_EVENT_V1_FIELDS | {
+    "stage", "cover_value", "at_risk_value", "reason", "episode", "escort_seq",
+}
+PLAYER_EVENT_V2_KINDS = PLAYER_EVENT_KINDS | {"outpost_stage"}
 # WBL-P1 CONVERSION-DIAGNOSTICS (lead task 2026-10-12): bot seats get a third
 # record shape in the same channel — a 250-tick production-queue sample with
 # per-category conversion counters and the reason each queue is not producing.
@@ -502,8 +509,16 @@ def players_channel(logs, game_uid, player, live=False):
             if row.get("seat") == player:
                 last_tick = max(last_tick, row["tick"])
         elif schema == "cameo-player-event":
-            reject_unknown_fields(row, PLAYER_EVENT_V1_FIELDS, "player-event v1")
-            if row.get("version") != 1:
+            # CB_frontier_observe: version dispatches FIRST — a v2 row carrying
+            # stage/cover_value/... would otherwise die on the v1 field check.
+            version = row.get("version")
+            if version == 1:
+                reject_unknown_fields(row, PLAYER_EVENT_V1_FIELDS, "player-event v1")
+                known_kinds = PLAYER_EVENT_KINDS
+            elif version == 2:
+                reject_unknown_fields(row, PLAYER_EVENT_V2_FIELDS, "player-event v2")
+                known_kinds = PLAYER_EVENT_V2_KINDS
+            else:
                 raise EvidenceError("unsupported player-event version")
             integer(row.get("tick"))
             if "seq" in row:
@@ -511,8 +526,17 @@ def players_channel(logs, game_uid, player, live=False):
             if "actor_id" in row:
                 integer(row["actor_id"])
             kind = row.get("kind")
-            if kind not in PLAYER_EVENT_KINDS:
+            if kind not in known_kinds:
                 raise EvidenceError(f"unsupported player-event kind: {kind}")
+            if version == 2:
+                if "cover_value" in row:
+                    integer(row["cover_value"])
+                if "at_risk_value" in row:
+                    integer(row["at_risk_value"])
+                if "episode" in row:
+                    integer(row["episode"])
+                if "escort_seq" in row:
+                    integer(row["escort_seq"])
             if row.get("seat") == player:
                 events[kind] = events.get(kind, 0) + 1
         elif schema == "cameo-bot-queue":
