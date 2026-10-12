@@ -121,7 +121,7 @@
 	# group BP_squad_desire); empty by default - inert on master.
 	GrantConditionOnBotOwner@squaddesire:
 		Condition: squad_desire
-		Bots:
+		Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla, exploit_expansion, exploit_steamroller, exploit_tech
 	# Combat veto (AI_ARCHITECTURE 12.31, INC-N): one fog-honest provider consulted where a squad commits an
 	# attack or a retreat — predicted-loss attacks and outrun retreats are blocked, every veto a mission card.
 	# The arm sets Bots (switch group AN_combat_veto); empty by default - inert on master.
@@ -4312,6 +4312,7 @@ Player:
 		RequiresCondition: genericbot && personality-rush
 		Notification: notification-bot-personality-rush
 	SquadManagerBotModuleCA@rush:
+		UseSquadDesire: true
 		UseProtectionRequests: true
 		# CA-2 (AI_ARCHITECTURE 12.6): the defend draft keeps a reserve instead of
 		# stripping the idle pool on every ping (FransGroundDefendForcePreservationGuard
@@ -4410,6 +4411,7 @@ Player:
 		RequiresCondition: genericbot && personality-turtle
 		Notification: notification-bot-personality-turtle
 	SquadManagerBotModuleCA@turtle:
+		UseSquadDesire: true
 		UseProtectionRequests: true
 		UseDefendPreservation: false
 		UseDirectorPacing: false
@@ -4502,6 +4504,7 @@ Player:
 		RequiresCondition: genericbot && personality-tech
 		Notification: notification-bot-personality-tech
 	SquadManagerBotModuleCA@tech:
+		UseSquadDesire: true
 		UseProtectionRequests: true
 		UseDefendPreservation: false
 		UseDirectorPacing: false
@@ -4596,6 +4599,7 @@ Player:
 		RequiresCondition: genericbot && personality-expansion
 		Notification: notification-bot-personality-expansion
 	SquadManagerBotModuleCA@expansion:
+		UseSquadDesire: true
 		UseProtectionRequests: true
 		UseDefendPreservation: false
 		UseDirectorPacing: false
@@ -4689,6 +4693,7 @@ Player:
 		RequiresCondition: genericbot && personality-steamroller
 		Notification: notification-bot-personality-steamroller
 	SquadManagerBotModuleCA@steamroller:
+		UseSquadDesire: true
 		UseProtectionRequests: true
 		UseDefendPreservation: false
 		UseDirectorPacing: false
@@ -4780,6 +4785,7 @@ Player:
 		RequiresCondition: genericbot && personality-guerrilla
 		Notification: notification-bot-personality-guerrilla
 	SquadManagerBotModuleCA@guerrilla:
+		UseSquadDesire: true
 		UseProtectionRequests: true
 		UseDefendPreservation: false
 		UseDirectorPacing: false
