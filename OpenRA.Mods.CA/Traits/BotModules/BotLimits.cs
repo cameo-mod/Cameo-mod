@@ -69,11 +69,15 @@ namespace OpenRA.Mods.CA.Traits
 			"has observed (through fog when the master AI observes through fog). 0 disables adaptive counters.")]
 		public readonly int AdaptiveCounterWeight = 0;
 
-		[Desc("S1 (FINDINGS_2026-10-12 §3): live capturer units (engineers and kin) at most this percent",
-			"of live armed infantry — the engineer:combat-infantry ratio the maintainer capped at <= half.",
-			"On the difficulty line like every BotLimits field: easier tiers keep a wider engineer share.",
-			"Overrides UnitBuilderBotModuleCA.CapturerInfantryLimitPct. Negative: use the module's value.")]
+		[Desc("S1b (ENGINEER-CAP-10PCT, maintainer 2026-10-12): live capturer units (engineers and kin)",
+			"at most this percent of live armed infantry. Flat 10 on every tier — CapturerLimitPctCeiling",
+			"clamps anything higher, so a difficulty may only go lower. Negative: use the module's value.")]
 		public readonly int CapturerInfantryLimitPct = -1;
+
+		[Desc("S1b: minimum ticks between capturer completions; on the difficulty line (longer pacing",
+			"on easier tiers), skipped while a known capturable-target allowance remains. 0 = off.",
+			"Negative: use the module's value.")]
+		public readonly int EngineerCompletionIntervalTicks = -1;
 
 		[Desc("Self-preservation (AI_DEEP_RESEARCH.md §7, Zero-K's lesson): a ground squad using the combat predictor",
 			"retreats when its predicted strength ratio against the enemies it sees falls below this percent. Higher",

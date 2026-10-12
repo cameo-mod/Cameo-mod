@@ -1836,5 +1836,32 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(BaseBuilderQueueEvalCA.AirDefenceAdmits(true, true), Is.True, "first air sighting opens it");
 			Assert.That(BaseBuilderQueueEvalCA.AirDefenceAdmits(false, false), Is.True, "non-AA picks never gate");
 		}
+
+		// E1 bypass fix (lead ruling 2026-10-12): the crawl-safety front defence rides the same
+		// gate — ExpansionPlannerBotModule's pick calls AirDefenceAdmits(IsDedicatedAntiAir(item),
+		// gateOpen) exactly like this; a closed gate must skip the SAM and keep the ground turret.
+
+		[Test]
+		public void FrontDefencePickSkipsSamsWhileTheIntelGateIsClosed()
+		{
+			var samsite = new ActorInfo("samsite", new BuildingInfo(), Armament("Air"));
+			var gun = new ActorInfo("gun", new BuildingInfo(), Armament("Ground"));
+
+			Assert.That(
+				BaseBuilderQueueEvalCA.AirDefenceAdmits(BaseBuilderQueueEvalCA.IsDedicatedAntiAir(samsite), false),
+				Is.False, "dedicated-AA structure is not an eligible front defence while no air was seen");
+			Assert.That(
+				BaseBuilderQueueEvalCA.AirDefenceAdmits(BaseBuilderQueueEvalCA.IsDedicatedAntiAir(gun), false),
+				Is.True, "the cheapest anti-ground defence stays eligible — it is the pick instead");
+		}
+
+		[Test]
+		public void FrontDefencePickAdmitsSamsOnceTheGateIsOpen()
+		{
+			var samsite = new ActorInfo("samsite", new BuildingInfo(), Armament("Air"));
+			Assert.That(
+				BaseBuilderQueueEvalCA.AirDefenceAdmits(BaseBuilderQueueEvalCA.IsDedicatedAntiAir(samsite), true),
+				Is.True, "a seen enemy air capability ungates the dedicated-AA front defence");
+		}
 	}
 }

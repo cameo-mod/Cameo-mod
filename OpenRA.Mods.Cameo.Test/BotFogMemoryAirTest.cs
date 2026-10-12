@@ -9,6 +9,8 @@
  */
 #endregion
 
+using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using NUnit.Framework;
 using OpenRA.Mods.Cameo.Traits.BotModules;
@@ -76,6 +78,42 @@ namespace OpenRA.Mods.Cameo.Test
 			var orca = new ActorInfo("orca", new AircraftInfo());
 			Assert.That(Seen(orca, info).Aircraft, Is.True);
 			Assert.That(Seen(orca, info).ProducesAircraft, Is.False);
+		}
+
+		// E1 (lead ruling 2026-10-12): the per-enemy latch — once an enemy's air was seen the
+		// gate stays open against that enemy for the match; stale sightings never close it.
+
+		[Test]
+		public void AStaleSightingKeepsTheLatchOpen()
+		{
+			var latched = new HashSet<string>(StringComparer.Ordinal);
+			Assert.That(MasterAiBotModule.NoteEnemyAirSighting(latched, "enemy1", () => true), Is.True,
+				"the live sighting opens the gate");
+			Assert.That(MasterAiBotModule.NoteEnemyAirSighting(latched, "enemy1", () => false), Is.True,
+				"the expired sighting must not close it again");
+		}
+
+		[Test]
+		public void TheLatchIsPerEnemyPlayer()
+		{
+			var latched = new HashSet<string>(StringComparer.Ordinal);
+			Assert.That(MasterAiBotModule.NoteEnemyAirSighting(latched, "enemy1", () => true), Is.True);
+			Assert.That(MasterAiBotModule.NoteEnemyAirSighting(latched, "enemy2", () => false), Is.False,
+				"enemy2 never showed air — its gate stays closed");
+			Assert.That(MasterAiBotModule.NoteEnemyAirSighting(latched, "enemy1", () => false), Is.True);
+		}
+
+		[Test]
+		public void ANeverSightedEnemyStaysClosedAndTheScanStaysLazy()
+		{
+			var latched = new HashSet<string>(StringComparer.Ordinal);
+			Assert.That(MasterAiBotModule.NoteEnemyAirSighting(latched, "enemy1", () => false), Is.False);
+			Assert.That(latched, Is.Empty, "a closed query must not record a latch");
+
+			MasterAiBotModule.NoteEnemyAirSighting(latched, "enemy1", () => true);
+			var scanned = false;
+			Assert.That(MasterAiBotModule.NoteEnemyAirSighting(latched, "enemy1", () => { scanned = true; return false; }), Is.True);
+			Assert.That(scanned, Is.False, "a latched enemy skips the fog scan entirely");
 		}
 	}
 }

@@ -56,6 +56,15 @@ namespace OpenRA.Mods.CA.Traits
 			"survives even before the infantry army exists.")]
 		public readonly int CapturerMinimumUnits = 2;
 
+		[Desc("S1b (ENGINEER-CAP-10PCT, maintainer 2026-10-12): most extra capturers admitted on top",
+			"of the ratio cap while KNOWN uncaptured capturable targets remain (+1 per fog-fair target",
+			"the engineer owner reports through IBotCapturerTargetAllowance). 0 = no allowance.")]
+		public readonly int CapturerAllowanceMax = 4;
+
+		[Desc("S1b: fallback for BotLimits.EngineerCompletionIntervalTicks on a ruleset without the",
+			"difficulty line — minimum ticks between capturer completions. 0 = off.")]
+		public readonly int EngineerCompletionIntervalTicks = 0;
+
 		[Desc("How often should the unit builder check to build more units")]
 		public readonly int UnitBuilderInterval = 0;
 
@@ -151,6 +160,10 @@ namespace OpenRA.Mods.CA.Traits
 	{
 		public const int FeedbackTime = 30; // ticks; = a bit over 1s. must be >= netlag.
 
+		// S1b (maintainer 2026-10-12): the flat capturer-ratio ceiling — a difficulty line may only
+		// go LOWER, never higher. Clamped inside CapturerCapAdmits so the invariant is testable.
+		public const int CapturerLimitPctCeiling = 10;
+
 		readonly World world;
 		readonly Player player;
 
@@ -223,16 +236,39 @@ namespace OpenRA.Mods.CA.Traits
 			}
 		}
 
-		// S1 pure seam: cap = floor(armed infantry * pct / 100), floored at
-		// capturerMinimumUnits so capture capability survives an empty infantry count.
-		// Self-correcting: over-cap engineers die back or succeed before more queue.
-		public static bool CapturerCapAdmits(int capturerLimitPct, int capturerUnits, int armedInfantryUnits, int capturerMinimumUnits)
+		// S1 pure seam: cap = floor(armed infantry * pct / 100) + the capturable-target allowance,
+		// floored at capturerMinimumUnits so capture capability survives an empty infantry count.
+		// S1b tightens it (ENGINEER-CAP-10PCT): pct never exceeds CapturerLimitPctCeiling (a
+		// difficulty may only go lower), at most one capturer sits in production, and completions
+		// keep a minimum interval while no known target justifies the allowance. Self-correcting:
+		// over-cap engineers die back or succeed before more queue.
+		public static bool CapturerCapAdmits(int capturerLimitPct, int capturerUnits, int armedInfantryUnits,
+			int capturerMinimumUnits, int capturerAllowanceMax, int knownCapturableTargets,
+			int queuedCapturers, int ticksSinceLastCompletion, int completionIntervalTicks)
 		{
-			if (capturerLimitPct <= 0)
+			var pct = Math.Min(CapturerLimitPctCeiling, Math.Max(0, capturerLimitPct));
+			if (pct <= 0)
 				return true;
-			var cap = Math.Max(capturerMinimumUnits, (int)Math.Floor(armedInfantryUnits * (long)capturerLimitPct / 100.0));
+
+			// One capturer in production at a time: a queued or building one blocks the next.
+			if (queuedCapturers >= 1)
+				return false;
+
+			var allowance = Math.Min(Math.Max(0, capturerAllowanceMax), Math.Max(0, knownCapturableTargets));
+
+			// Minimum interval between completions — skipped while free targets remain.
+			if (allowance <= 0 && completionIntervalTicks > 0 && ticksSinceLastCompletion >= 0 &&
+				ticksSinceLastCompletion < completionIntervalTicks)
+				return false;
+
+			var cap = Math.Max(capturerMinimumUnits, (int)Math.Floor(armedInfantryUnits * (long)pct / 100.0)) + allowance;
 			return capturerUnits < cap;
 		}
+
+		// F1 (lead ruling 2026-10-12): the cap is armed only above 0 — hoisted ahead of
+		// the world scan so an off cap (classic, where CapturerLimitPct reads 0) never
+		// pays the army walk. CapturerCapAdmits keeps its own <=0 admit as the invariant.
+		public static bool CapturerCapActive(int capturerLimitPct) => capturerLimitPct > 0;
 
 		// "Combat infantry" for the ratio: an actor the enemy would target as Infantry
 		// (the Infantry targetable type, the same marker squads use) that actually carries
@@ -248,6 +284,7 @@ namespace OpenRA.Mods.CA.Traits
 		// Counts are world-state per tick; ShouldBuild may see several capturer
 		// candidates in one queue pass, so scan once and cache.
 		int capturerCountsTick = -1, capturerUnitsCached, armedInfantryCached;
+		int capturerUnitsLastSample, lastCapturerCompletionTick = -1;
 
 		void CapturerArmyCounts(out int capturerUnits, out int armedInfantryUnits)
 		{
@@ -270,9 +307,53 @@ namespace OpenRA.Mods.CA.Traits
 					armedInfantryCached++;
 			}
 
+			// S1b: a rising capturer count is a completion (or any gain): stamp it so the pacing
+			// interval measures from the last capturer that actually finished.
+			if (capturerUnitsCached > capturerUnitsLastSample)
+				lastCapturerCompletionTick = capturerCountsTick;
+			capturerUnitsLastSample = capturerUnitsCached;
+
 			capturerUnits = capturerUnitsCached;
 			armedInfantryUnits = armedInfantryCached;
 		}
+
+		// S1b: KNOWN uncaptured capturable targets, reported by the engineer owner (none = 0).
+		// Resolved lazily — the provider's own conditions settle after Created; per-tick cached.
+		IBotCapturerTargetAllowance capturerAllowanceProvider;
+		int capturerAllowanceTick = -1, capturerAllowanceCached;
+
+		int CapturerAllowance()
+		{
+			if (capturerAllowanceTick == world.WorldTick)
+				return capturerAllowanceCached;
+
+			capturerAllowanceTick = world.WorldTick;
+			capturerAllowanceProvider ??= player.PlayerActor
+				.TraitsImplementing<IBotCapturerTargetAllowance>().FirstEnabledTraitOrDefault();
+			return capturerAllowanceCached = capturerAllowanceProvider?.CapturerTargetAllowance ?? 0;
+		}
+
+		// S1b: capturers sitting in our own production queues — one in production at a time.
+		int QueuedCapturers()
+		{
+			var count = 0;
+			foreach (var group in OpenRA.Mods.Common.AIUtils.FindQueuesByCategory(player))
+				foreach (var q in group)
+					foreach (var item in q.AllQueued())
+						if (world.Map.Rules.Actors.TryGetValue(item.Item, out var queued) && queued.HasTraitInfo<CapturesInfo>())
+							count++;
+
+			return count;
+		}
+
+		// S1b: the difficulty-line pacing interval (BotLimits value; 0 = off) and the ticks since
+		// the last detected capturer completion (-1 until the first one finishes).
+		int EngineerCompletionInterval =>
+			botLimits != null && botLimits.Info.EngineerCompletionIntervalTicks >= 0
+				? botLimits.Info.EngineerCompletionIntervalTicks : Info.EngineerCompletionIntervalTicks;
+
+		int TicksSinceLastCapturerCompletion() =>
+			lastCapturerCompletionTick < 0 ? -1 : world.WorldTick - lastCapturerCompletionTick;
 
 		// BV_m13_liveness arm: the module field is only a flag, the cash bar is the tier's
 		// BotLimits value. Classic shares this instance but never carries genericbot, so
@@ -643,14 +724,17 @@ namespace OpenRA.Mods.CA.Traits
 				world.Actors.Count(a => !a.IsDead && a.Owner == player && a.Info.Name == name) >= Info.UnitLimits[name])
 				return false;
 
-			// S1: the capturer ratio — counts only when the candidate IS a capturer;
-			// single actor scan covers both counts and is skipped entirely when
-			// the cap is off (classic) or the unit has no Captures trait.
-			if (world.Map.Rules.Actors.TryGetValue(name, out var candidate) &&
+			// S1/F1: the capturer ratio — counts only while the cap is on AND the candidate
+			// IS a capturer; the off cap (classic: CapturerLimitPct reads 0) short-circuits
+			// before both the ruleset lookup and the army scan — no wasted work.
+			if (CapturerCapActive(CapturerLimitPct) &&
+				world.Map.Rules.Actors.TryGetValue(name, out var candidate) &&
 				candidate.HasTraitInfo<CapturesInfo>())
 			{
 				CapturerArmyCounts(out var capturerUnits, out var armedInfantryUnits);
-				if (!CapturerCapAdmits(CapturerLimitPct, capturerUnits, armedInfantryUnits, Info.CapturerMinimumUnits))
+				if (!CapturerCapAdmits(CapturerLimitPct, capturerUnits, armedInfantryUnits, Info.CapturerMinimumUnits,
+						Info.CapturerAllowanceMax, CapturerAllowance(), QueuedCapturers(),
+						TicksSinceLastCapturerCompletion(), EngineerCompletionInterval))
 					return false;
 			}
 
