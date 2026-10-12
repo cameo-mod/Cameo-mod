@@ -233,6 +233,35 @@ namespace OpenRA.Mods.Cameo.Traits
 				return "crawl_link";
 			return "tech";
 		}
+
+		/// <summary>
+		/// Order-issue marker key shared by the unit-production seam (which writes it
+		/// from the owning player's actor id) and the queue poll (which looks it up
+		/// with the same player actor id). The poll's per-queue head dictionary keeps
+		/// the queue HOST actor id instead — in this mod ProductionQueue traits live
+		/// on factory buildings, never the player entity — so the two key families
+		/// deliberately differ. One constructor for both call sites keeps them equal.
+		/// </summary>
+		public static string SeamKey(long actorId, string queueType, string item)
+		{
+			return actorId + ":" + queueType + "|" + item;
+		}
+
+		/// <summary>
+		/// Consume one pending order-issue marker: true when a marker existed (the
+		/// head-diff must NOT count that acceptance/spend again), false otherwise (the
+		/// start came through a path the seam does not observe and is counted here).
+		/// </summary>
+		public static bool ConsumeSeamStart(Dictionary<string, int> markers, string key)
+		{
+			if (!markers.TryGetValue(key, out var pending) || pending <= 0)
+				return false;
+			if (pending == 1)
+				markers.Remove(key);
+			else
+				markers[key] = pending - 1;
+			return true;
+		}
 	}
 
 	internal sealed class BuildingTrack
@@ -288,10 +317,7 @@ namespace OpenRA.Mods.Cameo.Traits
 		public bool QueueHelpersResolved;
 		public int LastSpent = -1;
 		public BaseBuilderBotModuleCA BaseBuilder;
-		public UnitBuilderBotModuleCA UnitBuilder;
-		public BotLimits Limits;
 		public PlayerResources Resources;
-		public IBotPersonalityLeadProvider[] LeadProviders = [];
 		public readonly Dictionary<string, int> QueueRequested = new(StringComparer.Ordinal);
 		public readonly Dictionary<string, int> QueueAccepted = new(StringComparer.Ordinal);
 		public readonly Dictionary<string, int> QueueCompleted = new(StringComparer.Ordinal);
@@ -299,8 +325,10 @@ namespace OpenRA.Mods.Cameo.Traits
 		public readonly Dictionary<string, int> QueueSkipped = new(StringComparer.Ordinal);
 		public readonly Dictionary<string, ProductionItem> QueueHeads = new(StringComparer.Ordinal);
 
-		// Order-issue markers ("{actorId}:{queueType}|{item}") left by the unit-production
-		// seam so the head-diff does not count the same acceptance a second time.
+		// Order-issue markers left by the unit-production seam so the head-diff does not
+		// count the same acceptance a second time. Keys come from PlayerTelemetryMath.SeamKey
+		// on the player-actor id at both sites — queue hosts are factory buildings, so the
+		// marker pool is shared by a seat's same-type queues and the totals stay exact.
 		public readonly Dictionary<string, int> SeamStarts = new(StringComparer.Ordinal);
 	}
 
@@ -939,9 +967,11 @@ namespace OpenRA.Mods.Cameo.Traits
 				// the head — mark it so the acceptance is counted exactly once. A stale
 				// marker (item cancelled before heading) at most skips one later same-name
 				// head, which is the same single acceptance in the window accounting.
+				// The key is player-actor-scoped: queue hosts are factory buildings in
+				// this mod, and PlayerActor.ActorID is what the poll looks the marker up by.
 				var actorId = owner.PlayerActor?.ActorID;
 				if (actorId.HasValue)
-					Bump(seat.SeamStarts, actorId.Value + ":" + queueType + "|" + actor);
+					Bump(seat.SeamStarts, PlayerTelemetryMath.SeamKey(actorId.Value, queueType, actor));
 			}
 			catch (Exception e)
 			{
@@ -998,23 +1028,31 @@ namespace OpenRA.Mods.Cameo.Traits
 			if (actor == null || actor.IsDead || actor.Disposed)
 				return;
 
-			seat.UnitBuilder = actor.TraitsImplementing<UnitBuilderBotModuleCA>().FirstEnabledTraitOrDefault();
 			seat.BaseBuilder = actor.TraitsImplementing<BaseBuilderBotModuleCA>().FirstEnabledTraitOrDefault();
-			seat.Limits = actor.TraitsImplementing<BotLimits>().FirstEnabledTraitOrDefault();
 			seat.Resources = actor.TraitOrDefault<PlayerResources>();
-			seat.LeadProviders = actor.TraitsImplementing<IBotPersonalityLeadProvider>().ToArray();
+		}
+
+		// The gate is resolved per poll, not cached: a conditional unit builder can
+		// arm late (grant conditions) or go dormant, and only the currently-enabled
+		// module's verdicts are gate truth.
+		IBotUnitProductionGateInfo GateFor(SeatTelemetry seat)
+		{
+			var actor = seat.Player.PlayerActor;
+			return actor == null || actor.IsDead || actor.Disposed
+				? null
+				: actor.TraitsImplementing<IBotUnitProductionGateInfo>().FirstEnabledTraitOrDefault();
 		}
 
 		bool UnitCapped(SeatTelemetry seat, string[] buildable,
-			Dictionary<string, int> owned, Dictionary<string, int> queued)
+			Dictionary<string, int> owned, Dictionary<string, int> queued,
+			IBotUnitProductionGateInfo gate)
 		{
-			var limits = seat.UnitBuilder?.Info.UnitLimits;
-			if (limits == null || buildable.Length == 0)
+			if (gate == null || buildable.Length == 0)
 				return false;
 
 			foreach (var name in buildable)
-				if (!limits.TryGetValue(name, out var cap)
-					|| owned.GetValueOrDefault(name) + queued.GetValueOrDefault(name) < cap)
+				if (!gate.UnitProductionLimited(name,
+					owned.GetValueOrDefault(name), queued.GetValueOrDefault(name)))
 					return false;
 
 			return true;
@@ -1045,26 +1083,18 @@ namespace OpenRA.Mods.Cameo.Traits
 				var spentDelta = seat.LastSpent < 0 ? spent : spent - seat.LastSpent;
 				seat.LastSpent = spent;
 
-				// The same gates the unit builder consults, in its own decision order.
-				var voterActor = seat.Player.PlayerActor;
-				var voters = voterActor == null || voterActor.IsDead || voterActor.Disposed
-					? []
-					: voterActor.TraitsImplementing<IBotRequestPauseUnitProduction>()
-						.Where(v => v.IsTraitEnabled() && v.PauseUnitProduction)
-						.Select(v => v.GetType().Name)
-						.OrderBy(n => n, StringComparer.Ordinal)
-						.ToArray();
-				var cashFloor = seat.UnitBuilder != null
-					? BotPersonalityLeads.Scaled(seat.UnitBuilder.Info.ProductionMinCashRequirement,
-						BotPersonalityLeads.Lean(seat.LeadProviders, "steamroller"))
-					: 0;
-				var threshold = seat.Limits?.Info.BankSaturationCash > 0
-					&& (seat.UnitBuilder?.Info.BankSaturationCash ?? 0) > 0
-					? seat.Limits.Info.BankSaturationCash
-					: 0;
+				// Enforced gate truth, from whichever unit-builder module the seat runs
+				// (CA or Frans — both expose IBotUnitProductionGateInfo). No gate impl
+				// means only the queue-physical reasons (disabled/busy/paused, missing
+				// prerequisites, no desire) can ever be reported for the seat.
+				var gate = GateFor(seat);
+				var voters = gate?.UnitProductionReservedBy ?? [];
+				var cashFloor = gate?.UnitProductionCashFloor ?? 0;
+				var threshold = gate?.UnitProductionSaturationCash ?? 0;
 				var saturated = ProductionSaturationCA.Saturated(cash, threshold);
 				var belowFloor = cash < cashFloor;
 				var reserved = voters.Length > 0;
+				var playerActorId = seat.Player.PlayerActor?.ActorID;
 
 				// Owned + already-queued counts, shared across this seat's queues — only
 				// computed when an idle queue needs the unit-cap verdict.
@@ -1102,7 +1132,7 @@ namespace OpenRA.Mods.Cameo.Traits
 							{
 								owned ??= CountOwned(seat);
 								queued ??= CountQueued(seat);
-								capped = UnitCapped(seat, names, owned, queued);
+								capped = UnitCapped(seat, names, owned, queued, gate);
 							}
 
 							reason = PlayerTelemetryMath.IdleReason(reserved, belowFloor, saturated,
@@ -1115,23 +1145,20 @@ namespace OpenRA.Mods.Cameo.Traits
 
 					// Acceptance: a different head item than the last poll means this queue
 					// started producing that item between samples (reference compare — a
-					// same-name re-queue is still a new episode). Starts already counted by
-					// the unit-production seam are consumed, not counted twice; starts from
-					// other paths (building queues, direct orders) are counted here.
+					// same-name re-queue is still a new episode). QueueHeads stays keyed on
+					// the queue HOST actor (queues live on factory buildings here); the
+					// order-issue marker is looked up under the same player-actor key the
+					// seam wrote — consumed markers are not counted again, while starts
+					// from paths the seam does not observe still count exactly once.
 					var key = pair.Actor.ActorID + ":" + queue.Info.Type;
 					if (!seat.QueueHeads.TryGetValue(key, out var prev) || !ReferenceEquals(prev, head))
 					{
 						if (head != null)
 						{
-							var seamKey = key + "|" + head.Item;
-							if (seat.SeamStarts.TryGetValue(seamKey, out var pending) && pending > 0)
-							{
-								if (pending == 1)
-									seat.SeamStarts.Remove(seamKey);
-								else
-									seat.SeamStarts[seamKey] = pending - 1;
-							}
-							else
+							var consumed = playerActorId.HasValue
+								&& PlayerTelemetryMath.ConsumeSeamStart(seat.SeamStarts,
+									PlayerTelemetryMath.SeamKey(playerActorId.Value, queue.Info.Type, head.Item));
+							if (!consumed)
 							{
 								var cat = ItemCategory(seat, head.Item);
 								Bump(seat.QueueAccepted, cat);

@@ -9,6 +9,7 @@
  */
 #endregion
 
+using System;
 using System.Collections.Generic;
 using NUnit.Framework;
 using OpenRA.Mods.Cameo.Traits;
@@ -152,6 +153,51 @@ namespace OpenRA.Mods.Cameo.Test
 			// Defence outranks the other families when a type list overlaps.
 			Assert.That(PlayerTelemetryMath.BuildingCategory(true, true, true), Is.EqualTo("defence"));
 			Assert.That(PlayerTelemetryMath.BuildingCategory(false, true, true), Is.EqualTo("economy"));
+		}
+
+		[Test]
+		public void SeamKeyIsIdenticalForSeamWriteAndPollLookup()
+		{
+			// The regression this guards: the seam wrote "{playerActorId}:{type}|{item}"
+			// while the head-diff looked up "{queueHostActorId}:{type}|{item}" — queue
+			// hosts are factory buildings, never the player entity, so every seamed
+			// start double-counted. One constructor at both sites keeps them equal.
+			var write = PlayerTelemetryMath.SeamKey(7, "VEHICLE", "td_gdi_mediumtank");
+			var lookup = PlayerTelemetryMath.SeamKey(7, "VEHICLE", "td_gdi_mediumtank");
+			Assert.That(write, Is.EqualTo(lookup));
+			Assert.That(write, Is.EqualTo("7:VEHICLE|td_gdi_mediumtank"));
+
+			// A different queue host actor id, queue type, or item can never collide.
+			Assert.That(write, Is.Not.EqualTo(PlayerTelemetryMath.SeamKey(9, "VEHICLE", "td_gdi_mediumtank")));
+			Assert.That(write, Is.Not.EqualTo(PlayerTelemetryMath.SeamKey(7, "INFANTRY", "td_gdi_mediumtank")));
+			Assert.That(write, Is.Not.EqualTo(PlayerTelemetryMath.SeamKey(7, "VEHICLE", "td_gdi_humvee")));
+		}
+
+		[Test]
+		public void ConsumeSeamStartCountsAnOrderIssueStartExactlyOnce()
+		{
+			var markers = new Dictionary<string, int>(StringComparer.Ordinal);
+			var key = PlayerTelemetryMath.SeamKey(7, "VEHICLE", "td_gdi_mediumtank");
+
+			// No marker: the head-diff counts the start itself.
+			Assert.That(PlayerTelemetryMath.ConsumeSeamStart(markers, key), Is.False);
+
+			// One marker: consumed once — a second look for the same episode must not
+			// also count it (the accepted/spend double-count regression).
+			markers[key] = 1;
+			Assert.That(PlayerTelemetryMath.ConsumeSeamStart(markers, key), Is.True);
+			Assert.That(PlayerTelemetryMath.ConsumeSeamStart(markers, key), Is.False);
+			Assert.That(markers, Is.Empty);
+
+			// Two seamed starts of the same item and queue type drain two markers.
+			markers[key] = 2;
+			Assert.That(PlayerTelemetryMath.ConsumeSeamStart(markers, key), Is.True);
+			Assert.That(PlayerTelemetryMath.ConsumeSeamStart(markers, key), Is.True);
+			Assert.That(PlayerTelemetryMath.ConsumeSeamStart(markers, key), Is.False);
+
+			// A marker for a different item on the same queue type never matches.
+			markers[PlayerTelemetryMath.SeamKey(7, "VEHICLE", "td_gdi_humvee")] = 1;
+			Assert.That(PlayerTelemetryMath.ConsumeSeamStart(markers, key), Is.False);
 		}
 	}
 }

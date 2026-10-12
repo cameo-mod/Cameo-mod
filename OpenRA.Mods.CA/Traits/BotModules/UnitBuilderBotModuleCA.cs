@@ -147,7 +147,7 @@ namespace OpenRA.Mods.CA.Traits
 		public override object Create(ActorInitializer init) { return new UnitBuilderBotModuleCA(init.Self, this); }
 	}
 
-	public class UnitBuilderBotModuleCA : ConditionalTrait<UnitBuilderBotModuleCAInfo>, IBotTick, IBotNotifyIdleBaseUnits, IBotRequestUnitProduction, IGameSaveTraitData, IBotAircraftBuilder, INotifyActorDisposing
+	public class UnitBuilderBotModuleCA : ConditionalTrait<UnitBuilderBotModuleCAInfo>, IBotTick, IBotNotifyIdleBaseUnits, IBotRequestUnitProduction, IGameSaveTraitData, IBotAircraftBuilder, INotifyActorDisposing, IBotUnitProductionGateInfo
 	{
 		public const int FeedbackTime = 30; // ticks; = a bit over 1s. must be >= netlag.
 
@@ -471,6 +471,28 @@ namespace OpenRA.Mods.CA.Traits
 			foreach (var observer in UnitObservers)
 				observer.UnitProductionStarted(player, world.WorldTick, name, queueType);
 		}
+
+		// Record-only gate view (WBL-P1): the poll reads enforced truth from the same
+		// fields this module's own gates consult, so it never approximates internals.
+		// baseBuilder's pause vote DOES starve every ordinary unit queue (the module
+		// only exempts its opening-defense path inside BotTick), so it stays a voter.
+		int IBotUnitProductionGateInfo.UnitProductionCashFloor =>
+			BotPersonalityLeads.Scaled(Info.ProductionMinCashRequirement,
+				BotPersonalityLeads.Lean(leadProviders, "steamroller"));
+
+		int IBotUnitProductionGateInfo.UnitProductionSaturationCash => BankSaturationThreshold;
+
+		string[] IBotUnitProductionGateInfo.UnitProductionReservedBy =>
+			requestPause == null
+				? []
+				: requestPause
+					.Where(rp => rp.IsTraitEnabled() && rp.PauseUnitProduction)
+					.Select(rp => rp.GetType().Name)
+					.OrderBy(n => n, StringComparer.Ordinal)
+					.ToArray();
+
+		bool IBotUnitProductionGateInfo.UnitProductionLimited(string actor, int owned, int queued) =>
+			Info.UnitLimits != null && Info.UnitLimits.TryGetValue(actor, out var limit) && owned >= limit;
 
 		void IBotRequestUnitProduction.RequestUnitProduction(IBot bot, string requestedActor)
 		{

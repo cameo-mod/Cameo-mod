@@ -270,7 +270,7 @@ namespace OpenRA.Mods.Common.Traits
 
 	public class FransUnitBuilderBotModule : ConditionalTrait<FransUnitBuilderBotModuleInfo>,
 		IBotTick, IBotRequestUnitProduction, IGameSaveTraitData, INotifyActorDisposing,
-		IFransOpeningUnitPlanService, IFransSpecOpsProductionMailbox
+		IFransOpeningUnitPlanService, IFransSpecOpsProductionMailbox, IBotUnitProductionGateInfo
 	{
 		public const int FeedbackTime = 30;
 
@@ -1324,6 +1324,35 @@ namespace OpenRA.Mods.Common.Traits
 			foreach (var observer in UnitObservers)
 				observer.UnitProductionSkipped(player, world.WorldTick, actor, reason);
 		}
+
+		// Record-only gate view (WBL-P1): mirrors this module's own BotTick gates so the
+		// poll reads enforced truth — the harvester-debt/opening/normal floor triage at
+		// IBotTick.BotTick, the same requestPause vote, zero saturation stop (the Frans
+		// economic state is a spending diagnosis, never an idle order), and the
+		// UnitLimits rule from IsRatioCandidateEligible: 0 is always a hard disable,
+		// positive limits are composition targets unless PositiveCombatUnitLimitsAreSoft
+		// is off.
+		int IBotUnitProductionGateInfo.UnitProductionCashFloor =>
+			queuedBuildRequests.Any(Info.HarvesterTypes.Contains)
+				? Info.HarvesterProductionMinCashRequirement
+				: openingBuildOrderService != null && !openingBuildOrderService.OpeningComplete
+					? Info.OpeningProductionMinCashRequirement
+					: Info.ProductionMinCashRequirement;
+
+		int IBotUnitProductionGateInfo.UnitProductionSaturationCash => 0;
+
+		string[] IBotUnitProductionGateInfo.UnitProductionReservedBy =>
+			requestPause == null
+				? []
+				: requestPause
+					.Where(rp => rp.PauseUnitProduction)
+					.Select(rp => rp.GetType().Name)
+					.OrderBy(n => n, StringComparer.Ordinal)
+					.ToArray();
+
+		bool IBotUnitProductionGateInfo.UnitProductionLimited(string actor, int owned, int queued) =>
+			Info.UnitLimits.TryGetValue(actor, out var limit)
+			&& (limit == 0 || (!Info.PositiveCombatUnitLimitsAreSoft && owned >= limit));
 
 		void IBotRequestUnitProduction.RequestUnitProduction(IBot bot, string requestedActor)
 		{
