@@ -1,0 +1,6 @@
+MSBUILD : error MSB1008: Only one project can be specified.
+    Full command line: 'C:\Program Files\dotnet\sdk\10.0.301\MSBuild.exe -maxcpucount --verbosity:m -tlp:default=auto --property:Configuration=Release --property:NuGetInteractive=false --restoreProperty:Configuration=Release --restoreProperty:NuGetInteractive=false --restoreProperty:EnableDefaultCompileItems=false --restoreProperty:EnableDefaultEmbeddedResourceItems=false --restoreProperty:EnableDefaultNoneItems=false --verbosity:m --nologo OpenRA.Mods.Cameo.Test\OpenRA.Mods.Cameo.Test.csproj ; echo EXIT 0 -consoleloggerparameters:Summary -restore -distributedlogger:Microsoft.DotNet.Cli.Commands.MSBuild.MSBuildLogger,C:\Program Files\dotnet\sdk\10.0.301\dotnet.dll*Microsoft.DotNet.Cli.Commands.MSBuild.MSBuildForwardingLogger,C:\Program Files\dotnet\sdk\10.0.301\dotnet.dll'
+  Switches appended by response files:
+Switch: ;
+
+For switch syntax, type "MSBuild -help"
