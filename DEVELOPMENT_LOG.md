@@ -20898,21 +20898,29 @@ observer leaves behaviour bit-identical (verified: notifies sit after
   per-window counters requested/accepted/completed/skipped/spend over
   categories {unit, defence, crawl_link, tech, economy} plus `banked` and
   `spent_delta`.
-- Hold reasons mirror the module's own gate order (public signals only):
-  cash_reserved (IBotRequestPauseUnitProduction voters, e.g. refinery
-  starvation, global unit budget, FransBaseBuilder) > no_cash (the module's
-  own Scaled ProductionMinCashRequirement incl. the steamroller lean) >
-  saturation_stop (ProductionSaturationCA.Saturated on the same threshold
-  rule) > prerequisite_missing (BuildableItems empty) > unit_cap
-  (UnitLimits over owned+queued counts) > no_desire.
+- Hold reasons come from a second record-only seam,
+  `IBotUnitProductionGateInfo` (same CA BotModules namespace): each builder
+  module reports the gates it actually enforces — cash floor incl. its own
+  adjustments (CA: steamroller-scaled `ProductionMinCashRequirement`;
+  Frans: the harvester-debt/opening/normal triage from its own BotTick),
+  reservation-voter names (each module's own `requestPause` set — CA's
+  includes `BaseBuilderBotModuleCA` because its vote does starve ordinary
+  unit queues), bank-saturation bar (CA's `BankSaturationThreshold`
+  including its `SwitchCondition` arm; Frans returns 0 — its economic
+  state is a spending diagnosis, never an idle order), and per-type
+  limits (CA: owned >= limit; Frans: 0 always blocks, positive limits
+  are composition targets while `PositiveCombatUnitLimitsAreSoft` holds).
+  Idle precedence unchanged: cash_reserved > no_cash > saturation_stop >
+  prerequisite_missing > unit_cap > no_desire.
 - Acceptance accounting: the seam counts order-issue (complete coverage of
   builder starts); the head-diff counts starts from non-seam paths (building
   queues, direct orders) and consumes `SeamStarts` markers so a builder order
   is never counted twice. Completion comes from ActorAdded; ConYard deploys
   are transforms and stay out of `completed`.
 - Dedup ruling honored: no parallel counters — the poll reads
-  ProductionQueue/PlayerResources/pause-voter/module-Info surfaces; the only
-  new seam is the per-request notify, which no existing counter can see.
+  ProductionQueue/PlayerResources plus the modules' gate interface; the
+  only new seams are the per-request notify and the gate view, neither of
+  which an existing counter can see.
 - Readers: `replay_health.validate_bot_queue_row` (shared, fail-closed
   allow-lists for fields, categories, states, reasons, skip reasons, bounds)
   feeds both `players_channel` metrics (`player_channel_queue_rows`) and
@@ -20921,17 +20929,37 @@ observer leaves behaviour bit-identical (verified: notifies sit after
 - Counters reset per 250-tick window; `QueueHeads`/`SeamStarts` persist
   (dedup state, not counters).
 
-**Known honest bounds.** Unit-cap/saturate/cash-floor reasons are computed
-from the same public signals the module reads but are inference, not the
-module's private verdict; fransbot's exact-cash-reserve machinery still reads
-as `no_desire`/`cash_reserved` where visible. A cancelled-before-head seam
-order can leave a stale marker that skips one later same-name head — same
-single acceptance in window terms. `building accepted` via head-diff is an
-order-issue approximation (head arrival within the window).
+**Review respin (F1 fixed, F2 resolved).** Exact-SHA review found the
+`SeamStarts` marker keys could never match: the seam keyed on the player
+entity actor while the head-diff looked up the queue-HOST actor — in this
+mod `ProductionQueue` traits live on factory buildings (`^IsBarrack`,
+`^IsWeaponFactory`, `^Conyard`, faction HQs), so every seamed start was
+counted twice (~2x accepted+spend on unit queues). Fix: both sides now
+build the marker through `PlayerTelemetryMath.SeamKey` on the player
+actor id (`QueueHeads` keeps its per-factory key — head-diff keying was
+correct); `ConsumeSeamStart` drains exactly one marker, and a NUnit
+regression locks write/lookup key identity and the count-once contract.
+Marker fungibility across same-type factories keeps totals exact: a
+marker binds {player, queueType, item}, not a specific building, so any
+order-issue marker still retires exactly one same-item head. F2: the
+gate-info interface resolves the earlier Frans-coverage boundary —
+`no_cash`, `unit_cap`, `cash_reserved` are now real per-module verdicts
+for both builders instead of CA-only approximations. `saturation_stop`
+remains CA-only by design (Frans: no such stop exists).
 
-**Verification.** Build 0/0 Release; Cameo.Test 1932/1932 (3 new
+**Known honest bounds.** Gates not covered by the interface (Frans's
+protected-proc/MCV reserve machinery, CA's unit-interval cooldowns,
+candidate shares/delays) still read as `no_desire` — never relabelled.
+A cancelled-before-head seam order can leave a stale marker that skips
+one later same-name head — same single acceptance in window terms.
+`building accepted` via head-diff is an order-issue approximation (head
+arrival within the window). The gate view is resolved per poll so
+late-arming or dormant conditional modules read truthfully.
+
+**Verification.** Build 0/0 Release; Cameo.Test 1934/1934 (5
 PlayerTelemetryMath tests: QueueState order, IdleReason gate order,
-BuildingCategory map); python 36/36 (27 replay_health + 9 playtest_stats
-incl. new schema fixtures, bad-shape fail-closed cases, aggregation).
-No runtime evidence claimed — no game was launched.
+BuildingCategory map, SeamKey write/lookup identity,
+ConsumeSeamStart count-once); python 36/36 (27 replay_health + 9
+playtest_stats incl. new schema fixtures, bad-shape fail-closed cases,
+aggregation). No runtime evidence claimed — no game was launched.
 
