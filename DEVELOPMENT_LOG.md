@@ -1,3 +1,26 @@
+# 2026-10-12 — Devin: M13 manager save/restore adapter (branch `devin/m13-liveness`)
+
+*Devin-Developer*, IMPL-M13-LIVENESS save/restore gap from `docs/design/M13_RUNTIME_WIRING.md`;
+Boss's tempo increment (`codex/m13-tempo-boss` `7a74bb8b1`/`b181b63bb`/`76203c856` + merge `cde0fbc39`) is the base — untouched.
+
+- **Squad-bound bookkeeping.** `livenessWaves`/`m13Intents` dictionaries replaced by serialized squad
+  fields: `M13WaveId`, `M13ObservedProgress`, `M13IntentTick`/`M13IntentWave`, `M13Response`,
+  `M13Corrupt`. `m13IntentSquad` keeps the pending wave's subject alive across squad removal.
+- **`M13Player` node** on the first armed manager: seat identity, wave counter, base-danger window,
+  full clock + budget transports, sorted cooldowns. Response binding (channel/request/episode) rides
+  the claimant manager's own nodes. No emission while `EvidenceComplete` is false.
+- **Fail-closed restore.** `M13PlayerStateCA.TryRestore` composes both transports + counter/identity/
+  window checks — one-shot; missing/corrupt → UNKNOWN, exactly the old unconditional invalidate.
+  `RestoreSeen` marks a load that never saw a record (legacy save, disabled owner).
+- **Cross-manager validation at first armed tick** (`M13RestoreMembershipCA.Evaluate`): wave-counter
+  dominance, ≤1 intent flag equal to the pending wave, observed requires wave, ≤1 protection binding
+  reproducing `ActiveKey` via `TryKey` with matching `Owner`. Dead pending intent resolves once as a
+  dispatch failure — no renewal, no invented membership. Any other inconsistency → global UNKNOWN.
+- **Tests:** `M13RestoreAdapterTest` — round-trip, corrupt/half records, dead-intent resolution,
+  consistent acceptance, 10 inconsistency classes. Focused 39/39 pass (new + clock-restore suite).
+  Release build 0 errors/0 warnings. No loaded-world save cycle, boot gate, parity or 3v3 claimed;
+  A/B reservation untouched (no game launches).
+
 # 2026-10-12 — Devin: CRAWL-SAFETY — scout/escort/defence/army-parity gates on the optional crawl link (branch `devin/crawl-safety`)
 
 *Devin-Developer*, task 01a12ecb (FINDINGS_2026-10-12_playtest_forensics.md §S3; maintainer
@@ -49,6 +72,28 @@ army production takes priority while behind). Base `3cb0fcf1b` (TF-1 landed), en
 - **Default-off proposal:** keep `UseCrawlSafety=false` at land — it changes build-order timing and
   is A/B-measurable via `apply_increment_switches`, but unverified at runtime until the reservation
   clears; arming it for the next increment A/B is the honest path.
+
+# 2026-10-12 — Devin: M13 tempo arms on BV_m13_liveness (branch `codex/m13-tempo-boss`)
+
+*Devin subagent*, lead-settled design; inert unless the existing `BV_m13_liveness` switch arms it.
+
+- **1/3 bank saturation** (`7a74bb8b1`): `BotLimits.BankSaturationCash` (one equal-step line, hard 3000 →
+  god 1500) + `UnitBuilderBotModuleCA.BankSaturationCash` switch flag on `@generic` (new `SwitchCondition:
+  genericbot` keeps it inert on the classic share). Saturated banks skip the Maximise break, fill ≤2 free
+  queues per category per cycle, and retry a share-rejected pick once without the share test. Correctness
+  gates (cash floor, pause votes, queue/slot emptiness, buildability, limits, intervals, composition,
+  air caps) untouched. Spec deviation: asymmetric +500/−250 steps cannot sit on one equal-step line with both
+  stated endpoints (hard 3000, god 1500); shipped the single −300 line through both — see
+  `docs/design/M13_TEMPO.md`.
+- **2/3 first-wave cap** (`b181b63bb`): `BotLimits.AttackLivenessFirstWaveMaxTicks` = NoLaunch/2 per tier;
+  `AttackLivenessEvalCA.Observe` optional arg caps a newly eligible interval's deadline while the shared clock
+  has zero accepted waves. Never renews, never exceeds NoLaunch; restore untouched.
+- **3/3 min wave floor**: `BotLimits.TempoMinWaveUnits` 4..13; ordinary `ShouldLaunch` count arm becomes
+  `max(requiredSize, floor)` when armed. MaxIdleUnits overflow, ValueOnly, and the urgent/deadline path are
+  exempt — deadline dispatch cannot be deferred by the floor.
+- Tests: `ProductionSaturationTest`, `M13TempoTest` (NUnit); `test_m13_tier_knobs.py` pins all three tables
+  + the NoLaunch/2 relation. C# build/tests NOT run: worktree has no `engine/` and Luna's AB pilot attempt-3
+  reservation was active (expiry 2026-10-12T16:11:19Z); python tools tests run locally. No boot gate claimed.
 
 # 2026-10-11 — Devin: TF-1 repair — atomic admission claims + paid-reconcile lifecycle (branch `devin/turtle-fix-1-crawl-allowance`)
 

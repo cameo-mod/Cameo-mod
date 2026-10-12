@@ -89,6 +89,52 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void OverflowCommitDuringPendingIntentKeepsFirstWaveInTheSlot()
+		{
+			var clock = Waiting();
+			clock.Observe(7449, true, true, true, true, 1000, 9000, 9000, 200, (AttackSoftRestraintCA)2047);
+			Assert.That(clock.Phase, Is.EqualTo(AttackLivenessPhaseCA.DispatchDue));
+
+			// Mirror the manager commit callback: the slot + intent marker may only
+			// change when the clock accepted the intent.
+			long slotWave = 0, markerWave = 0;
+			var markerTick = -1;
+			Assert.That(M13LaunchPolicyCA.TryCommit(true, 1, 1000, 36, true, clock, () =>
+			{
+				if (M13LaunchPolicyCA.TryMarkDispatchIntent(clock, 1))
+				{
+					slotWave = 1;
+					markerTick = 0;
+					markerWave = 1;
+				}
+			}), Is.True);
+			Assert.That(clock.Phase, Is.EqualTo(AttackLivenessPhaseCA.DispatchPending));
+			Assert.That(slotWave, Is.EqualTo(1));
+
+			// AbsoluteOverflow still commits while DispatchPending, but its wave must
+			// not claim the intent slot or overwrite the first wave's marker.
+			Assert.That(M13LaunchPolicyCA.TryCommit(true, 36, 1000, 36, true, clock, () =>
+			{
+				if (M13LaunchPolicyCA.TryMarkDispatchIntent(clock, 2))
+				{
+					slotWave = 2;
+					markerTick = 0;
+					markerWave = 2;
+				}
+			}), Is.True);
+			Assert.That(slotWave, Is.EqualTo(1), "overflow wave claimed the intent slot");
+			Assert.That(markerWave, Is.EqualTo(1));
+			Assert.That(markerTick, Is.EqualTo(0));
+
+			// The first intent's timeout still resolves the pending wave, and the
+			// deadline DispatchDue path is reachable afterward.
+			Assert.That(clock.NoteDispatchFailed(2), Is.False, "mismatched wave resolved the pending intent");
+			Assert.That(clock.NoteDispatchFailed(1), Is.True);
+			Assert.That(clock.Phase, Is.EqualTo(AttackLivenessPhaseCA.DispatchDue));
+			Assert.That(M13LaunchPolicyCA.TryCommit(true, 1, 1000, 36, true, clock, () => { }), Is.True);
+		}
+
+		[Test]
 		public void UnknownRestoreEvidenceStaysUnsupportedAndDangerExpires()
 		{
 			var player = new M13PlayerStateCA();

@@ -201,3 +201,45 @@ No boot/game or full tools/tests run occurred. Exact port review and integrator
 landing remain required; runtime/parity/3v3/adoption remain open. The separate
 turtle-fallback branch also carries the BP classification; when combining switches,
 retain it once and update the catalogue count for the combined group set.
+
+## Manager save/restore adapter (2026-10-12)
+
+The unconditional evidence invalidation at load is replaced by a validated adapter.
+All M13 bookkeeping that was runtime-only (squad-wave dictionary, pending-intent
+dictionary, observation flag, response membership) now lives on the squad record:
+`M13WaveId`, `M13ObservedProgress`, `M13IntentTick`/`M13IntentWave` (the intent's
+wave snapshot survives squad removal and dead-wave cleanup), `M13Response` and a
+`M13Corrupt` parse marker. The intent subject keeps a manager reference
+(`m13IntentSquad`) so a detached squad still resolves its pending wave.
+
+`IssueTraitData` adds, per armed manager, the response binding (channel, rally,
+value, expiry, and the full claim-episode identity) when it holds a live flagged
+protection squad; the first armed manager (`M13StateOwner`) also emits `M13Player`
+with seat identity, wave counter, base-danger window, the complete liveness clock
+transport and the complete response-budget transport including sorted cooldowns.
+Nothing emits while `EvidenceComplete` is false, so a dead state cannot resurrect.
+
+`ResolveTraitData` rebuilds per-manager bindings from squad records, re-reads the
+response binding on the claimant, and lets the owner replay `M13Player` through
+`M13PlayerStateCA.TryRestore` — a one-shot composition of both component
+transports plus counter/identity/window checks. Missing, malformed or rejected
+records invalidate exactly like the old code (evidence UNKNOWN). `RestoreSeen`
+distinguishes a load with no record (legacy save or disabled owner) from a fresh
+game; the first armed tick checks it before any liveness use.
+
+Cross-manager membership validates once at the first armed tick via the pure
+`M13RestoreMembershipCA.Evaluate`: restored waves must not exceed the counter,
+at most one intent flag may exist and must equal the pending wave, observed flags
+require a live wave, at most one protection flag/binding may exist, and an active
+budget claim requires exactly one valid flagged squad whose owning manager
+reproduces `ActiveKey` via `M13ResponseClaimCA.TryKey` with `Owner` identity.
+A pending wave whose intent squad did not survive resolves once as a dispatch
+failure (no renewal, no invented causality). Any other inconsistency invalidates
+the shared evidence and clears restored M13 state on every armed manager.
+
+Regression coverage (`M13RestoreAdapterTest`): player record round-trip of
+identity/counter/budget/clock, missing/corrupt/half-restored records failing
+closed, dead-pending-intent resolution, consistent membership acceptance, and ten
+inconsistency classes. No loaded-world adapter run, save/load cycle, boot gate,
+parity or paired 3v3 is claimed by this checkpoint; the manager-level save/load
+path and the switch-off replay parity gate remain open.

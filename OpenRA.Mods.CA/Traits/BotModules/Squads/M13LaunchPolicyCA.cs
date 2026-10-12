@@ -27,5 +27,12 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			commit();
 			return true;
 		}
+
+		// AbsoluteOverflow commits may fire while the clock already has a pending intent
+		// (Urgent allows any phase except Unsupported). Only the wave whose intent the
+		// clock accepted may carry the intent marker and own the caller's pending slot —
+		// an overflow wave must not clobber the earlier intent's timeout bookkeeping.
+		public static bool TryMarkDispatchIntent(AttackLivenessEvalCA clock, long waveId) =>
+			clock.NoteDispatchIntent(waveId);
 	}
 }

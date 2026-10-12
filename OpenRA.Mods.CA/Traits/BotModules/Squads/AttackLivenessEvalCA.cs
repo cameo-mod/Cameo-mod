@@ -111,7 +111,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 		public void Observe(int tick, bool evidenceComplete, bool active, bool legalTarget,
 			bool orderableRoster, long eligibleValue, long configuredFloor, int maxNoLaunchTicks,
-			int dispatchLeadTicks, AttackSoftRestraintCA restraints)
+			int dispatchLeadTicks, AttackSoftRestraintCA restraints, int firstWaveMaxTicks = 0)
 		{
 			CheckTick(tick);
 			Restraints = restraints;
@@ -133,7 +133,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			{
 				EligibleSinceTick = tick;
 				ValueFloor = configuredFloor;
-				DeadlineTick = (long)tick + maxNoLaunchTicks;
+				DeadlineTick = (long)tick + IntervalCap(maxNoLaunchTicks, firstWaveMaxTicks, ObservedOffensiveCount);
 				dispatchLead = dispatchLeadTicks;
 			}
 			Phase = pendingWave != 0 ? AttackLivenessPhaseCA.DispatchPending
@@ -190,6 +190,13 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			Phase = AttackLivenessPhaseCA.ObservedOffensiveActivity;
 			return true;
 		}
+
+		// First-wave arm (BV_m13_liveness): before this clock's first accepted wave the interval
+		// deadline is capped at the tier's first-wave max. It can only shorten — it never renews
+		// or extends an already created interval, and 0 disables it outright.
+		public static int IntervalCap(int maxNoLaunchTicks, int firstWaveMaxTicks, long observedOffensiveCount) =>
+			firstWaveMaxTicks > 0 && observedOffensiveCount == 0
+				? Math.Min(maxNoLaunchTicks, firstWaveMaxTicks) : maxNoLaunchTicks;
 
 		public static bool AbsoluteOverflow(int eligibleCount, int configuredMaxIdleUnits) =>
 			eligibleCount > 0 && configuredMaxIdleUnits > 0 && eligibleCount >= configuredMaxIdleUnits;

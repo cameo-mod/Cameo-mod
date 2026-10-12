@@ -166,12 +166,15 @@
 		UnitIntervalModifier: 250
 		InitialAttackDelay: 6750
 		AttackLivenessMaxNoLaunchTicks: 9500
+		AttackLivenessFirstWaveMaxTicks: 4750
+		TempoMinWaveUnits: 4
 		TeamResponseMaxLeaseTicks: 1900
 		TeamResponseRearmCooldownTicks: 950
 		TeamResponseLeaseLimit: 1
 		PersonalityReactionDelay: 7500
 		NewProductionCashThreshold: 20000
 		MaximiseProductionCashRequirement: 9500
+		BankSaturationCash: 4200
 		AdaptiveCounterWeight: 0
 		CapturerInfantryLimitPct: 80
 		RetreatRatioPct: 10
@@ -187,12 +190,15 @@
 		UnitIntervalModifier: 225
 		InitialAttackDelay: 6000
 		AttackLivenessMaxNoLaunchTicks: 9000
+		AttackLivenessFirstWaveMaxTicks: 4500
+		TempoMinWaveUnits: 5
 		TeamResponseMaxLeaseTicks: 1800
 		TeamResponseRearmCooldownTicks: 900
 		TeamResponseLeaseLimit: 1
 		PersonalityReactionDelay: 6750
 		NewProductionCashThreshold: 18000
 		MaximiseProductionCashRequirement: 8500
+		BankSaturationCash: 3900
 		AdaptiveCounterWeight: 4
 		CapturerInfantryLimitPct: 72
 		RetreatRatioPct: 20
@@ -208,12 +214,15 @@
 		UnitIntervalModifier: 200
 		InitialAttackDelay: 5250
 		AttackLivenessMaxNoLaunchTicks: 8500
+		AttackLivenessFirstWaveMaxTicks: 4250
+		TempoMinWaveUnits: 6
 		TeamResponseMaxLeaseTicks: 1700
 		TeamResponseRearmCooldownTicks: 850
 		TeamResponseLeaseLimit: 1
 		PersonalityReactionDelay: 6000
 		NewProductionCashThreshold: 16000
 		MaximiseProductionCashRequirement: 7500
+		BankSaturationCash: 3600
 		AdaptiveCounterWeight: 9
 		CapturerInfantryLimitPct: 64
 		RetreatRatioPct: 30
@@ -229,12 +238,15 @@
 		UnitIntervalModifier: 175
 		InitialAttackDelay: 4500
 		AttackLivenessMaxNoLaunchTicks: 8000
+		AttackLivenessFirstWaveMaxTicks: 4000
+		TempoMinWaveUnits: 7
 		TeamResponseMaxLeaseTicks: 1600
 		TeamResponseRearmCooldownTicks: 800
 		TeamResponseLeaseLimit: 1
 		PersonalityReactionDelay: 5250
 		NewProductionCashThreshold: 14000
 		MaximiseProductionCashRequirement: 6500
+		BankSaturationCash: 3300
 		AdaptiveCounterWeight: 13
 		CapturerInfantryLimitPct: 57
 		RetreatRatioPct: 40
@@ -250,6 +262,8 @@
 		UnitIntervalModifier: 150
 		InitialAttackDelay: 3750
 		AttackLivenessMaxNoLaunchTicks: 7500
+		AttackLivenessFirstWaveMaxTicks: 3750
+		TempoMinWaveUnits: 8
 		TeamResponseMaxLeaseTicks: 1500
 		TeamResponseRearmCooldownTicks: 750
 		TeamResponseLeaseLimit: 1
@@ -257,6 +271,7 @@
 		PersonalityReactionDelay: 4500
 		NewProductionCashThreshold: 12000
 		MaximiseProductionCashRequirement: 5500
+		BankSaturationCash: 3000
 		AdaptiveCounterWeight: 18
 		CapturerInfantryLimitPct: 49
 		RetreatRatioPct: 50
@@ -272,6 +287,8 @@
 		UnitIntervalModifier: 125
 		InitialAttackDelay: 3000
 		AttackLivenessMaxNoLaunchTicks: 7000
+		AttackLivenessFirstWaveMaxTicks: 3500
+		TempoMinWaveUnits: 9
 		TeamResponseMaxLeaseTicks: 1400
 		TeamResponseRearmCooldownTicks: 700
 		TeamResponseLeaseLimit: 1
@@ -279,6 +296,7 @@
 		PersonalityReactionDelay: 3750
 		NewProductionCashThreshold: 10000
 		MaximiseProductionCashRequirement: 4500
+		BankSaturationCash: 2700
 		AdaptiveCounterWeight: 22
 		CapturerInfantryLimitPct: 41
 		RetreatRatioPct: 60
@@ -294,6 +312,8 @@
 		UnitIntervalModifier: 100
 		InitialAttackDelay: 2250
 		AttackLivenessMaxNoLaunchTicks: 6500
+		AttackLivenessFirstWaveMaxTicks: 3250
+		TempoMinWaveUnits: 10
 		TeamResponseMaxLeaseTicks: 1300
 		TeamResponseRearmCooldownTicks: 650
 		TeamResponseLeaseLimit: 1
@@ -301,6 +321,7 @@
 		PersonalityReactionDelay: 3000
 		NewProductionCashThreshold: 8000
 		MaximiseProductionCashRequirement: 3500
+		BankSaturationCash: 2400
 		AdaptiveCounterWeight: 27
 		CapturerInfantryLimitPct: 33
 		RetreatRatioPct: 70
@@ -316,6 +337,8 @@
 		UnitIntervalModifier: 75
 		InitialAttackDelay: 1500
 		AttackLivenessMaxNoLaunchTicks: 6000
+		AttackLivenessFirstWaveMaxTicks: 3000
+		TempoMinWaveUnits: 11
 		TeamResponseMaxLeaseTicks: 1200
 		TeamResponseRearmCooldownTicks: 600
 		TeamResponseLeaseLimit: 1
@@ -323,6 +346,7 @@
 		PersonalityReactionDelay: 2250
 		NewProductionCashThreshold: 6000
 		MaximiseProductionCashRequirement: 2500
+		BankSaturationCash: 2100
 		AdaptiveCounterWeight: 31
 		CapturerInfantryLimitPct: 26
 		RetreatRatioPct: 80
@@ -338,6 +362,8 @@
 		UnitIntervalModifier: 50
 		InitialAttackDelay: 750
 		AttackLivenessMaxNoLaunchTicks: 5500
+		AttackLivenessFirstWaveMaxTicks: 2750
+		TempoMinWaveUnits: 12
 		TeamResponseMaxLeaseTicks: 1100
 		TeamResponseRearmCooldownTicks: 550
 		TeamResponseLeaseLimit: 1
@@ -345,6 +371,7 @@
 		PersonalityReactionDelay: 1500
 		NewProductionCashThreshold: 4000
 		MaximiseProductionCashRequirement: 1500
+		BankSaturationCash: 1800
 		AdaptiveCounterWeight: 36
 		CapturerInfantryLimitPct: 18
 		RetreatRatioPct: 90
@@ -360,6 +387,8 @@
 		UnitIntervalModifier: 25
 		InitialAttackDelay: 0
 		AttackLivenessMaxNoLaunchTicks: 5000
+		AttackLivenessFirstWaveMaxTicks: 2500
+		TempoMinWaveUnits: 13
 		TeamResponseMaxLeaseTicks: 1000
 		TeamResponseRearmCooldownTicks: 500
 		TeamResponseLeaseLimit: 1
@@ -367,6 +396,7 @@
 		PersonalityReactionDelay: 750
 		NewProductionCashThreshold: 2000
 		MaximiseProductionCashRequirement: 500
+		BankSaturationCash: 1500
 		AdaptiveCounterWeight: 40
 		CapturerInfantryLimitPct: 10
 		RetreatRatioPct: 100
@@ -5240,6 +5270,8 @@ Player:
 		# (the A/B control) never sees genericbot, so its engineer spam is untouched there.
 		# CapturerInfantryLimitPct lives on the BotLimits difficulty line; 50 is only the
 		# fallback for a ruleset that ships no BotLimits.
+		# BV_m13_liveness arms BankSaturationCash on this shared instance; classic
+		# never carries genericbot, so its switch fields stay inert there.
 		SwitchCondition: genericbot
 		CapturerInfantryLimitPct: 50
 		CapturerMinimumUnits: 2

@@ -66,6 +66,11 @@ namespace OpenRA.Mods.CA.Traits
 			"BotLimits.MaximiseProductionCashRequirement overrides this per difficulty (DESIGN §19.1).")]
 		public readonly int MaximiseProductionCashRequirement = 10000;
 
+		[Desc("M13 tempo (BV_m13_liveness): non-zero arms the bank-saturation override on this instance.",
+			"The cash bar itself is the tier's BotLimits.BankSaturationCash; SwitchCondition must exclude",
+			"classic on this shared @generic instance. 0 = off, bit-identical.")]
+		public readonly int BankSaturationCash = 0;
+
 		[Desc("Ticks between samples of the enemy army for adaptive counter-production (BotLimits.AdaptiveCounterWeight).")]
 		public readonly int AdaptiveObservationInterval = 250;
 
@@ -268,6 +273,12 @@ namespace OpenRA.Mods.CA.Traits
 			armedInfantryUnits = armedInfantryCached;
 		}
 
+		// BV_m13_liveness arm: the module field is only a flag, the cash bar is the tier's
+		// BotLimits value. Classic shares this instance but never carries genericbot, so
+		// SwitchCondition keeps the whole override inert there.
+		int BankSaturationThreshold => switchesActive && Info.BankSaturationCash > 0 && botLimits != null
+			? Math.Max(0, botLimits.Info.BankSaturationCash) : 0;
+
 		public UnitBuilderBotModuleCA(Actor self, UnitBuilderBotModuleCAInfo info)
 			: base(info)
 		{
@@ -405,11 +416,17 @@ namespace OpenRA.Mods.CA.Traits
 
 					if (AIUtils.FindQueues(player, Info.UnitQueues[currentQueueIndex]).Any())
 					{
+						// BV_m13_liveness: re-evaluated per category with the same cash accounting —
+						// while the bank stays at/above the tier bar the MaximiseProductionCash break is skipped.
+						var saturated = ProductionSaturationCA.Saturated(
+							playerResources.Cash + playerResources.Resources, BankSaturationThreshold);
+
 						// PERF: We tick only one type of valid queue at a time
 						// if AI gets enough cash, it can fill all of its queues with enough ticks
-						BuildUnit(bot, Info.UnitQueues[currentQueueIndex], idleUnitCount < Info.IdleBaseUnitsMaximum, false);
+						BuildUnit(bot, Info.UnitQueues[currentQueueIndex], idleUnitCount < Info.IdleBaseUnitsMaximum, false, saturated);
 
-						if (playerResources.Cash + playerResources.Resources < BotPersonalityLeads.Scaled(MaximiseProductionCash, cashLean))
+						if (ProductionSaturationCA.StopCategorySweep(saturated, playerResources.Cash + playerResources.Resources,
+							BotPersonalityLeads.Scaled(MaximiseProductionCash, cashLean)))
 							break;
 					}
 				}
@@ -452,7 +469,7 @@ namespace OpenRA.Mods.CA.Traits
 			return queuedBuildRequests.Count(r => r == requestedActor);
 		}
 
-		void BuildUnit(IBot bot, string category, bool buildRandom, bool excludeLimited)
+		void BuildUnit(IBot bot, string category, bool buildRandom, bool excludeLimited, bool saturated = false)
 		{
 			// For queues that support parallel production (e.g. Zerg hatchery), find one with a free slot.
 			// For standard queues, require the queue to be completely empty.
@@ -460,7 +477,7 @@ namespace OpenRA.Mods.CA.Traits
 			// cap — three war factories produce in parallel instead of feeding one and idling the rest.
 			// No provider = first free queue only, byte-identical to upstream; classic mounts none.
 			productionWidth ??= player.PlayerActor.TraitsImplementing<IBotProductionWidth>().FirstEnabledTraitOrDefault();
-			var maxQueues = productionWidth?.MaxQueuesPerCategory ?? 1;
+			var maxQueues = ProductionSaturationCA.QueuesPerCategory(saturated, productionWidth?.MaxQueuesPerCategory ?? 0);
 			var queues = AIUtils.FindQueues(player, category)
 				.Where(q =>
 				{
@@ -468,7 +485,7 @@ namespace OpenRA.Mods.CA.Traits
 						return p.AvailableSlots > 0;
 					return !q.AllQueued().Any();
 				})
-				.Take(Math.Max(1, maxQueues));
+				.Take(maxQueues);
 
 			foreach (var queue in queues)
 			{
@@ -479,9 +496,14 @@ namespace OpenRA.Mods.CA.Traits
 
 				for (var slot = 0; slot < slotsToFill; slot++)
 				{
+					// Saturation lapses mid-fill: stop slotting the moment the bank drops below the bar.
+					if (saturated && !ProductionSaturationCA.Saturated(
+						playerResources.Cash + playerResources.Resources, BankSaturationThreshold))
+						break;
+
 					var unit = buildRandom ?
 						ChooseRandomUnitToBuild(queue, excludeLimited) :
-						ChooseUnitToBuild(queue, excludeLimited);
+						ChooseUnitToBuild(queue, excludeLimited, saturated);
 
 					if (unit == null)
 					{
@@ -497,7 +519,7 @@ namespace OpenRA.Mods.CA.Traits
 					{
 						if (!excludeLimited)
 						{
-							BuildUnit(bot, category, buildRandom, true);
+							BuildUnit(bot, category, buildRandom, true, saturated);
 							return;
 						}
 
@@ -647,7 +669,7 @@ namespace OpenRA.Mods.CA.Traits
 			return candidates[^1];
 		}
 
-		ActorInfo ChooseUnitToBuild(ProductionQueue queue, bool excludeLimited)
+		ActorInfo ChooseUnitToBuild(ProductionQueue queue, bool excludeLimited, bool saturated = false)
 		{
 			var buildableThings = queue.BuildableItems();
 			if (!buildableThings.Any())
@@ -677,6 +699,21 @@ namespace OpenRA.Mods.CA.Traits
 						if (myUnits.Count(a => a == unit.Key) * 100 < ShareFor(unit.Key, unit.Value) * myUnits.Count)
 							if (CanBuildMoreOfAircraft(world.Map.Rules.Actors[unit.Key]))
 								return world.Map.Rules.Actors[unit.Key];
+
+			// BV_m13_liveness: with a saturated bank the share test alone must not idle the queue —
+			// one deterministic (no extra RNG) retry that skips only the proportional-share check.
+			if (saturated)
+			{
+				var fallback = ProductionSaturationCA.PickExcludingShare(
+					unitsToBuildShares.OrderBy(kv => kv.Key).Select(kv => kv.Key),
+					name => buildableThings.Any(b => b.Name == name),
+					name => (!excludeLimited || Info.UnitLimits == null || !Info.UnitLimits.ContainsKey(name))
+						&& ShouldBuild(name, false, queue.Info.Type)
+						&& CanBuildMoreOfAircraft(world.Map.Rules.Actors[name]));
+
+				if (fallback != null)
+					return world.Map.Rules.Actors[fallback];
+			}
 
 			return null;
 		}

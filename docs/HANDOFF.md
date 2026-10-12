@@ -4,6 +4,8 @@ Next: `C:/cameo-wt/codex-learn-p0-fix` / `codex/learn-p0-fix` (base229a2563b), s
 
 # Cameo — THE HANDOFF
 
+Current Boss pointer (2026-10-12): M13 tempo arms for `BV_m13_liveness` on `codex/m13-tempo-boss` (base c4766c189) - bank saturation, first-wave cap, min-wave floor; knobs/tier tables/non-bypassed gates in `docs/design/M13_TEMPO.md`. Default-off; classic untouched; no boot/runtime claim.
+
 ## 2026-10-10 — Claude: the A/B blockers the local agents could not clear are fixed — continue from here
 
 `Agent: Claude (Opus) · branch ccr-c7f51935-i53fkj · cloud container · base c07bef43 · engine 6da7fce14` · boot gate:

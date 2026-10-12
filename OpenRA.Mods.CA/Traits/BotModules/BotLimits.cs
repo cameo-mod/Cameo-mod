@@ -31,6 +31,14 @@ namespace OpenRA.Mods.CA.Traits
 
 		[Desc("M13 maximum continuously eligible no-launch interval. Used only by the default-off M13 consumer.")]
 		public readonly int AttackLivenessMaxNoLaunchTicks = 7500;
+		[Desc("M13 first-wave cap (BV_m13_liveness): until the shared clock records its first accepted",
+			"offensive wave, an eligible interval's deadline is eligibleSince + min(this,",
+			"AttackLivenessMaxNoLaunchTicks). 0 = disabled.")]
+		public readonly int AttackLivenessFirstWaveMaxTicks = 0;
+		[Desc("M13 tempo min wave floor (BV_m13_liveness): raises the ordinary launch gate's unit-count",
+			"bar only; MaxIdleUnits overflow, ValueOnlyAttackLaunch and the liveness deadline path are",
+			"untouched. 0 = off.")]
+		public readonly int TempoMinWaveUnits = 0;
 		[Desc("M13 non-renewing response expiry from first admission; a delay on the difficulty line.")]
 		public readonly int TeamResponseMaxLeaseTicks = 1500;
 		[Desc("M13 response re-admission cooldown for the same claim episode.")]
@@ -51,6 +59,11 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Cash above which the unit builder fills every unit queue in one pass.",
 			"Overrides UnitBuilderBotModuleCA.MaximiseProductionCashRequirement. Negative: use the module's value.")]
 		public readonly int MaximiseProductionCashRequirement = -1;
+
+		[Desc("M13 tempo (BV_m13_liveness): cash+resources at or above this tier bar saturate the bank — the armed",
+			"unit builder stops honouring MaximiseProductionCashRequirement, fills up to two free queues per category",
+			"per cycle, and retries a share-rejected pick once without the share test. 0 = off.")]
+		public readonly int BankSaturationCash = 0;
 
 		[Desc("Percent (0-100) of mobile combat picks the unit builder may spend on COUNTERS to the enemy army it",
 			"has observed (through fog when the master AI observes through fog). 0 disables adaptive counters.")]
