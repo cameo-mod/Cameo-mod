@@ -80,6 +80,23 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(mismatchBranch, Does.Contain("self.QueueActivity(new FindAndDeliverResources(self))"));
 		}
 
+		[Test]
+		public void StopOrderOnFreeWillMasterDoesNotStrandSlaves()
+		{
+			var source = File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "source", "SlaveMinerSpawnerMaster.cs"));
+			var method = source.IndexOf("public void ResolveOrder(Actor self, Order order)", StringComparison.Ordinal);
+			Assert.That(method, Is.GreaterThanOrEqualTo(0));
+
+			var guard = source.IndexOf("if (Info.SlavesHaveFreeWill)", method, StringComparison.Ordinal);
+			var stop = source.IndexOf("StopSlaves();", method, StringComparison.Ordinal);
+
+			// AssignSlaveActivity never runs for free-will slaves, so nothing restarts
+			// them after StopSlaves() cancels their harvest activity.
+			Assert.That(guard, Is.GreaterThan(method), "the free-will guard must be active, not commented out");
+			Assert.That(stop, Is.GreaterThan(guard), "the free-will guard must precede StopSlaves()");
+			Assert.That(source.Substring(guard, 60), Does.Contain("return;"));
+		}
+
 		static string MethodBodyFromFragment(string source)
 		{
 			var start = source.IndexOf('{');
