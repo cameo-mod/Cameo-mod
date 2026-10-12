@@ -20826,3 +20826,25 @@ no launches while the A/B reservation is held.
 - Verification: Release build clean (engine fetched at pin 4f69df0 — sibling
   engines were stale/other pins); Cameo.Test 1849/1849; audit_ai_personalities
   PASS. boot-gate + commit SHAs reported to lead.
+
+## 2026-10-13 — devin/playtest-telemetry-v2: per-seat event seq + honest loss cause (e0d67f353)
+
+Boss pre-landing request + a defect his schema review surfaced, one commit on top of
+13ee10173 (tip now `e0d67f353ab993025f6912c7741d32a47ccc39e4`, pushed for exact-SHA
+re-review):
+
+- Every `cameo-player-event` row carries `seq`: a seat-scoped monotonically
+  increasing counter, also embedded in `record_id` (uid|seat|kind|tick|seq), so
+  same-tick event order is recoverable. Added to `PLAYER_EVENT_V1_FIELDS` in
+  `tools/ai/replay_health.py` and integer-validated in both readers.
+- `structure_lost` cause now derives from `IHealth.IsDead`, not `Actor.IsDead` —
+  the latter includes `Disposed` and mislabeled sells/transforms as killed.
+  cause is `killed|removed`; `captured` stays a separate ownership-observation
+  path. Honest caveat logged: sell vs transform vs cleanup is indistinguishable
+  at the world `ActorRemoved` hook, so `removed` means "left the world without
+  dying", not "sold" — a true sold classification would need an actor-level
+  sell notification, not world observation.
+- `outpost_stage` deliberately NOT folded (Boss hold: later v2 bump).
+
+Verification: Release build 0/0; PlayerTelemetryMathTest 7/7; replay_health 27 +
+playtest_stats 5 python tests green.
