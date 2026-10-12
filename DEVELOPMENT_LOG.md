@@ -20848,3 +20848,26 @@ re-review):
 
 Verification: Release build 0/0; PlayerTelemetryMathTest 7/7; replay_health 27 +
 playtest_stats 5 python tests green.
+
+## 2026-10-13 — devin/playtest-telemetry-v2: actor_id joins + same-tick dedupe (1224c3d94)
+
+Second review-round delta (Sol's measurement-contract findings + reviewer note N1),
+tip now `1224c3d94fb677a3cf5ca693f9605a4e17c1d362`:
+
+- `actor_id` (per-match `Actor.ActorID`) on every actor-scoped event:
+  building_placed, structure_lost (immediate/deferred/captured), conyard_deployed,
+  conyard_packed, first_unit_enemy_territory, superweapon_built. placed→lost
+  lifecycle joins are exact within a match. attack_wave_start and superweapon_fired
+  are collective events and correctly carry no instance id. Field added to
+  `PLAYER_EVENT_V1_FIELDS`; integer-validated in both readers.
+- Reviewer N1 (duplicate-tick final sample): emit-side skips the IGameOver
+  EconomySample when a periodic sample already went out at that tick
+  (`lastSampleTick`); the stats reader tolerates same-tick rows keep-last.
+- Remaining honest limits (stated for consumers): `removed` cannot distinguish
+  sell vs transform vs cleanup at the world removal hook — an exact `sold`
+  classification needs an actor-level sell notification, not world observation;
+  `actor_id` is match-scoped and not replay-stable.
+
+Verification: build clean (9 pre-existing OpenRA.Game StyleCop warnings, none
+new); PlayerTelemetryMathTest 7/7; replay_health 27/27; playtest_stats 7/7
+(+2 tests: seq/actor_id validation, same-tick keep-last).
