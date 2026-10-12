@@ -35,10 +35,19 @@ approved Route A' driver set bb46784b/0cdd46eb/a7cef93c/8fff80a7 stays byte-froz
 - **Verification state:** build 0 err/0 warn; Cameo.Test **2008/2008** (incl. ProductionScaling
   +8, M13ResponseClaim +3). Python suite (bounded per Lead chunking rule after the single
   discovery run hit ~19 GiB working set and was self-killed): full pass pre-kill showed
-  **66F/3432P** — all in stale-pin digest classes on master yaml churn; baseline comparison
-  on detached `ebea34c82` running per-file to prove pre-existence (this wave's only mods/
-  diff is `ai.yaml` switch rows).
-- **Open gates before master landing:** python drift attribution → boot-gate slot (Luna
+  **66F/3432P** — all in stale-pin digest classes on master yaml churn (this wave's only
+  mods/ diff is `ai.yaml` switch rows).
+- **Drift attribution — FINAL (subfail-aware, Sol receipt-gap catch reconciled):** first
+  pass (`cmp_fails.py`) matched `^FAILED ` only → 43 ids vs 43 baseline, but silently
+  dropped `SUBFAILED(actor=...)` rows and left 5 subfail-only files unrun on baseline.
+  Corrected (`cmp_fails3.py`, `(SUB)?FAILED(param) path::test`): **wave 66 entries
+  (43 test + 23 subtest) == baseline 66 identical entries across 34 files, wave-only
+  set = {}**. The 5 uncovered files (headquarters_refinery_cleanup, d2k_faction_fluent,
+  forgotten_cannonap, soviet_owned_weapon_names, td_naval_rename) rerun on detached
+  `ebea34c82` reproduce identical failures (5/5/3/3/6 = 22). Zero wave-caused failures,
+  now proven at subtest granularity.
+- **Open gates before master landing:** Devin-Reviewer exact-SHA on `91965acbe` → Lead
+  landing ruling on the 66 pre-existing red pins → boot-gate slot (Luna
   admission, serial) → hand verified branch to Sol for the FF push (Sol = sole master writer
   per Lead ruling; I sequence+verify, Sol pushes).
 - **A/B handoff note (campaign tooling lives outside the repo):** the frozen wave-1 driver's
