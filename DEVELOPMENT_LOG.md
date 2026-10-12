@@ -1,3 +1,25 @@
+# 2026-10-12 — Devin: M13 tempo arms on BV_m13_liveness (branch `codex/m13-tempo-boss`)
+
+*Devin subagent*, lead-settled design; inert unless the existing `BV_m13_liveness` switch arms it.
+
+- **1/3 bank saturation** (`7a74bb8b1`): `BotLimits.BankSaturationCash` (one equal-step line, hard 3000 →
+  god 1500) + `UnitBuilderBotModuleCA.BankSaturationCash` switch flag on `@generic` (new `SwitchCondition:
+  genericbot` keeps it inert on the classic share). Saturated banks skip the Maximise break, fill ≤2 free
+  queues per category per cycle, and retry a share-rejected pick once without the share test. Correctness
+  gates (cash floor, pause votes, queue/slot emptiness, buildability, limits, intervals, composition,
+  air caps) untouched. Spec deviation: asymmetric +500/−250 steps cannot sit on one equal-step line with both
+  stated endpoints (hard 3000, god 1500); shipped the single −300 line through both — see
+  `docs/design/M13_TEMPO.md`.
+- **2/3 first-wave cap** (`b181b63bb`): `BotLimits.AttackLivenessFirstWaveMaxTicks` = NoLaunch/2 per tier;
+  `AttackLivenessEvalCA.Observe` optional arg caps a newly eligible interval's deadline while the shared clock
+  has zero accepted waves. Never renews, never exceeds NoLaunch; restore untouched.
+- **3/3 min wave floor**: `BotLimits.TempoMinWaveUnits` 4..13; ordinary `ShouldLaunch` count arm becomes
+  `max(requiredSize, floor)` when armed. MaxIdleUnits overflow, ValueOnly, and the urgent/deadline path are
+  exempt — deadline dispatch cannot be deferred by the floor.
+- Tests: `ProductionSaturationTest`, `M13TempoTest` (NUnit); `test_m13_tier_knobs.py` pins all three tables
+  + the NoLaunch/2 relation. C# build/tests NOT run: worktree has no `engine/` and Luna's AB pilot attempt-3
+  reservation was active (expiry 2026-10-12T16:11:19Z); python tools tests run locally. No boot gate claimed.
+
 # 2026-10-11 — Devin: TF-1 repair — atomic admission claims + paid-reconcile lifecycle (branch `devin/turtle-fix-1-crawl-allowance`)
 
 *Devin-Developer*, Sol review `fleet/REVIEW_2026-10-11_tf1_5bed_sol.md` (REQUEST CHANGES on `5bedabace`).

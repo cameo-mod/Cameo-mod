@@ -3644,6 +3644,8 @@ namespace OpenRA.Mods.CA.Traits
 
 			var requiredValue = ApplyForceScale(desiredValue, forceScale);
 			var requiredSize = ApplyForceScale(desiredAttackForceSize, forceScale);
+			if (Info.AttackLivenessEnabled)
+				requiredSize = AttackForceEvalCA.RequiredSize(requiredSize, botLimits?.Info.TempoMinWaveUnits ?? 0);
 
 			// CA F2p2 (A5-2): ValueOnlyAttackLaunch drops the unit-count gate when a squad value threshold is configured; MaxIdleUnits still applies.
 			if (AttackForceEvalCA.ShouldLaunch(unitsHangingAroundTheBase.Count, maxIdleUnits,

@@ -35,6 +35,10 @@ namespace OpenRA.Mods.CA.Traits
 			"offensive wave, an eligible interval's deadline is eligibleSince + min(this,",
 			"AttackLivenessMaxNoLaunchTicks). 0 = disabled.")]
 		public readonly int AttackLivenessFirstWaveMaxTicks = 0;
+		[Desc("M13 tempo min wave floor (BV_m13_liveness): raises the ordinary launch gate's unit-count",
+			"bar only; MaxIdleUnits overflow, ValueOnlyAttackLaunch and the liveness deadline path are",
+			"untouched. 0 = off.")]
+		public readonly int TempoMinWaveUnits = 0;
 		[Desc("M13 non-renewing response expiry from first admission; a delay on the difficulty line.")]
 		public readonly int TeamResponseMaxLeaseTicks = 1500;
 		[Desc("M13 response re-admission cooldown for the same claim episode.")]

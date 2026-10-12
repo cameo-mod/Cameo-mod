@@ -24,6 +24,7 @@ class M13TierKnobsTests(unittest.TestCase):
                             "AttackLivenessFirstWaveMaxTicks": (7500 + 500 * step) // 2,
                             # BV_m13_liveness tempo arms: one equal-step line each (DESIGN §19.1).
                             "BankSaturationCash": 3000 + 300 * step,
+                            "TempoMinWaveUnits": 8 - step,
                             "TeamResponseMaxLeaseTicks": 1500 + 100 * step,
                             "TeamResponseRearmCooldownTicks": 750 + 50 * step,
                             "TeamResponseLeaseLimit": 1}
