@@ -30,7 +30,7 @@ offline only, no runtime consumers.
   `sealed|partial|excluded`. Tool pins (CRLF checkout SHA-256) for the
   patched decoder + `tools/audit/miniyaml.py` verify at startup, fail
   closed — the d500-frozen comparator copies stay barred.
-- **Tests `tools/tests/test_human_demo_extract.py` (+22):** golden
+- **Tests `tools/tests/test_human_demo_extract.py` (+26):** golden
   synthetic replays covering all three target cases (no-target ok /
   decoded actor, terrain cell+pos, frozen actor / unsupported tt=0 and
   tt=9), unparsed-tail censoring incl. a non-seat client's failure,
@@ -38,7 +38,18 @@ offline only, no runtime consumers.
   exclusion, requested_item allowlist (SyncInfo blob never leaks),
   seat renumbering, deterministic demo ids, identity-audit and §14.2
   banned-field sweeps. Legacy-projection equivalence is pinned too.
-- **Gates:** focused suite 58/58 (22 new + 36 decoder regressions).
+- **Self-review hardening (second commit):** three defects found and fixed
+  before reviewer pass — (a) engine-known non-order packets (Ack/Ping/
+  TickScale per `OrderType`) are recognized and skipped instead of falling
+  into the generic unparsed-tail bucket (a benign server packet could have
+  censored a whole stream); (b) malformed known-type packets (wrong-length
+  SYNCHASH/DISCONNECT — fatal in the engine's TryParse*) now flag
+  `unparsed_stream` AND censor the record tail, not just the inventory
+  flag; (c) `target_ref` on `unparsed_tail` records is null unless
+  provable (flags decoded with Target bit clear → `none`) — never a
+  fabricated kind. Non-order anomaly records (`other` kind, failed
+  handshakes) censor the tail but emit no fabricated request record.
+- **Gates:** focused suite 62/62 (26 new + 36 decoder regressions).
   Real-file smoke on four playtest captures: 19,286 order records, zero
   unparsed bytes (the 62 `frozen_actor` targets that were UNPARSED tails
   under the stale decoder now decode), `requested_item` carries real item

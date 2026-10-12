@@ -254,13 +254,29 @@ def stream_scan(data):
             continue
         frame, = struct.unpack_from('<i', pkt, 0)
         if len(pkt) > 4 and pkt[4] == osd.PKT_SYNCHASH:
+            # Engine requires exactly 4 + SyncHashOrderLength bytes
+            # (OrderIO.TryParseSync); a wrong-length 0x65 is malformed.
+            if len(pkt) != 4 + 13:
+                if first_unparsed is None:
+                    first_unparsed = p - plen
+                packets.append((client, frame, [], True))
+                continue
             last_sync_frame = frame
             continue
         if len(pkt) > 4 and pkt[4] == osd.PKT_DISCONNECT:
-            # [i32 frame][0xBF][i32 clientId] (OrderIO.TryParseDisconnect)
-            if len(pkt) >= 9:
+            # [i32 frame][0xBF][i32 clientId] (OrderIO.TryParseDisconnect —
+            # server-generated, FromClient must be 0, length exactly 9).
+            if len(pkt) == 9 and client == 0:
                 dc, = struct.unpack_from('<i', pkt, 5)
                 disconnects.append({'client_id': dc, 'frame': frame})
+            else:
+                if first_unparsed is None:
+                    first_unparsed = p - plen
+                packets.append((client, frame, [], True))
+            continue
+        if len(pkt) > 4 and pkt[4] in (0x10, 0x20, 0x76):
+            # OrderType Ack / Ping / TickScale: known non-order stream
+            # records — recognized, not unparsed (they carry no request).
             continue
         recs, tails = osd.parse_orders_detail(pkt)
         if tails and first_unparsed is None:
@@ -281,6 +297,14 @@ def _target_ref(rec):
     kind = rec.get('target_kind')
     if kind == 'unsupported':
         return {'kind': 'unsupported', 'ref': None}
+    if rec.get('parse') != 'ok':
+        # unparsed tail: 'none' is only provable when the flags decoded and
+        # the Target bit is clear; otherwise the target state is
+        # undetermined — null, never a fabricated kind.
+        flags = rec.get('flags')
+        if flags is not None and not (flags & 0x01):
+            return {'kind': 'none', 'ref': None}
+        return None
     if kind in (None, 'none'):
         return {'kind': 'none', 'ref': None}
     return {'kind': kind, 'ref': rec.get('target_ref')}
@@ -447,8 +471,17 @@ def extract_file(path):
                 unparsed_hit = True
                 continue
             for rec in recs:
-                if rec.get('kind') == 'handshake':
-                    continue            # auth material — never emit
+                # ANY parse failure — order, handshake, or unknown tag —
+                # censors every record from the first unparsed byte onward
+                # (§8), including failures on non-seat clients.
+                if rec.get('parse') in ('unsupported_target',
+                                        'unparsed_tail'):
+                    unparsed_hit = True
+                # Only decoded order records are requests — handshakes are
+                # auth material, 'other' records are stream anomalies; both
+                # censor the tail but emit no record.
+                if rec.get('kind') != 'order' or client not in demo_of:
+                    continue
                 censor = CENSOR_NONE
                 if client in seat_disconnect and frame is not None \
                         and frame > seat_disconnect[client]:
@@ -459,15 +492,6 @@ def extract_file(path):
                         and frame is not None \
                         and frame > scan['last_sync_frame']:
                     censor = CENSOR_NO_SYNC
-                if rec.get('parse') in ('unsupported_target',
-                                        'unparsed_tail'):
-                    unparsed_hit = True
-                    if client not in demo_of:
-                        continue      # a non-seat client's failure still
-                                      # censors everything after it
-                    censor = CENSOR_UNPARSED
-                if client not in demo_of:
-                    continue          # only human-seat requests are records
                 orders.append(order_record(demo_of[client],
                                            seat_of[client], frame, rec,
                                            censor))

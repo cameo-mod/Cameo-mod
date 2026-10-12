@@ -354,8 +354,57 @@ def test_p1_unparsed_tail_then_censored(tmp_path):
     inv, _, orders = extract(tmp_path, blob)
     assert orders[0]['parse'] == 'unparsed_tail'
     assert orders[0]['censor'] == 'from_unparsed_byte'
+    # Target flag was set but undecodable — null, never a fabricated kind.
+    assert orders[0]['target_ref'] is None
     assert orders[1]['censor'] == 'from_unparsed_byte'
     assert inv['status'] == 'partial'
+
+
+def test_p1_tail_flags_no_target_kind_none(tmp_path):
+    # Flags decoded without the Target bit before the extras overrun —
+    # 'none' is provable even on a failed order.
+    bad = (b'\xff' + s7('Move') + struct.pack('<h', 0x82)
+           + struct.pack('<I', 7) + struct.pack('<i', 2))  # claims 2 extras
+    blob = base_replay(extra_pkts=[packet(1, 30, bad)])
+    _, _, orders = extract(tmp_path, blob)
+    assert orders[0]['parse'] == 'unparsed_tail'
+    assert orders[0]['target_ref'] == {'kind': 'none', 'ref': None}
+
+
+def test_known_nonorder_packets_not_unparsed(tmp_path):
+    # Ping (0x20), Ack (0x10), TickScale (0x76) are engine-known stream
+    # records — recognized and skipped, never an unparsed tail.
+    blob = base_replay(extra_pkts=[
+        packet(0, 30, b'\x20' + b'\x00' * 8),
+        packet(0, 30, b'\x10' + b'\x00' * 5),
+        packet(0, 30, b'\x76' + b'\x00' * 4),
+        packet(1, 31, order('Move', flags=0x80, subject=9))])
+    inv, _, orders = extract(tmp_path, blob)
+    assert inv['unparsed_stream'] is False
+    assert orders[0]['censor'] == 'none'
+
+
+def test_malformed_disconnect_marks_unparsed(tmp_path):
+    # 0xBF with wrong length (engine treats as fatal — InvalidDataException)
+    blob = base_replay(extra_pkts=[
+        packet(0, 30, b'\xbf' + b'\x99'),
+        packet(1, 31, order('Move', flags=0x80, subject=9))])
+    inv, _, orders = extract(tmp_path, blob)
+    assert inv['unparsed_stream'] is True
+    assert orders[0]['censor'] == 'from_unparsed_byte'
+
+
+def test_unknown_order_tag_no_record_but_censors(tmp_path):
+    # Unknown order-type byte: an anomaly, not a request — nothing emitted
+    # for it, the tail is still censored.
+    blob = base_replay(extra_pkts=[
+        packet(1, 30, b'\x42' + b'\x00' * 6),
+        packet(1, 31, order('Move', flags=0x80, subject=9))])
+    inv, _, orders = extract(tmp_path, blob)
+    assert len(orders) == 1
+    assert orders[0]['order_type'] == 'Move'
+    assert orders[0]['censor'] == 'from_unparsed_byte'
+    assert inv['unparsed_stream'] is True
 
 
 def test_p1_nonhuman_failure_still_censors_tail(tmp_path):
