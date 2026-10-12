@@ -73,41 +73,68 @@ def read_str(b, p):
 KNOWN_ORDER_FLAGS = 0x1FF  # Target|ExtraActors|TargetString|Queued|ExtraLocation|ExtraData|TargetIsCell|Subject|Grouped
 
 
-def parse_orders(pkt):
-    """Canonical tuples for the Field/Handshake orders in one packet.
+def parse_orders_detail(pkt):
+    """Rich per-order records for one packet — the canonical parse, surfaced.
 
-    Every order tuple preserves the raw i16 flags (Queued 0x08 / TargetIsCell
-    0x40 carry no field payload but are semantically significant) and every
-    consumed field byte. Anything the parser cannot consume — an unknown order
-    type, unknown flag bits, or a field that would run past the packet — is
-    emitted as an ('UNPARSED', hex) record carrying the remaining bytes, so the
-    comparison never silently discards payload.
-    Returns (orders, unparsed_tail_count).
+    Same byte-level parse as parse_orders() (this function IS that parse;
+    parse_orders() projects these records onto the legacy tuples). Every
+    record carries kind/parse plus whatever decoded before any failure:
+
+      ok order:       {'kind':'order','parse':'ok','order':bytes,
+                       'flags':int,'subject':u32|None,
+                       'target_kind':'none|actor|frozen_actor|terrain_cell'
+                                     '|terrain_pos',
+                       'target_ref':None|dict,'target_hex':str,
+                       'target_string':bytes|None,
+                       'extra_actor_ids':[u32],'extra_hex':str,
+                       'undecoded_hex':str (extraLocation+extraData raw),
+                       'grouped_ids':[u32],'grouped_hex':str,'raw_hex':str}
+      ok handshake:   {'kind':'handshake','parse':'ok','name':bytes,
+                       'target':bytes,'raw_hex':str}
+      failed:         {'kind':'order|handshake|other',
+                       'parse':'unsupported_target|unparsed_tail',
+                       'reason':str,'order':bytes|None,'flags':int|None,
+                       'subject':u32|None,'target_kind':str|None,
+                       'raw_hex':str (preserved tail incl. type byte)}
+
+    'unsupported_target' is the ONE distinguished failure: Target flag set
+    with a type byte the engine cannot have produced (0 = Invalid, or any
+    byte > 3 — Target.cs enum is 0..3 and Serialize never sets the flag for
+    Invalid). Everything else is 'unparsed_tail'.
+    Returns (records, unparsed_tail_count) — the count matches parse_orders.
     """
     p = 4
     out = []
     unparsed = 0
     while p < len(pkt):
         t = pkt[p]
+        rec_start = p
         if t == ORDER_HANDSHAKE:
             p += 1
-            start = p
             try:
                 name, p = read_str(pkt, p)
                 target, p = read_str(pkt, p)
             except (IndexError, ValueError):
-                out.append(('UNPARSED', pkt[start - 1:].hex()))
+                out.append({'kind': 'handshake', 'parse': 'unparsed_tail',
+                            'reason': 'handshake_overrun', 'order': None,
+                            'flags': None, 'subject': None,
+                            'target_kind': None,
+                            'raw_hex': pkt[rec_start:].hex()})
                 unparsed += 1
                 break
-            out.append(('HS', name,
-                        PER_LAUNCH_FIELDS.sub(rb'\1<NORM>', target)))
+            out.append({'kind': 'handshake', 'parse': 'ok', 'name': name,
+                        'target': target, 'raw_hex': pkt[rec_start:p].hex()})
             continue
         if t != ORDER_FIELDS:
-            out.append(('UNPARSED', pkt[p:].hex()))
+            out.append({'kind': 'other', 'parse': 'unparsed_tail',
+                        'reason': 'unknown_order_tag', 'order': None,
+                        'flags': None, 'subject': None, 'target_kind': None,
+                        'raw_hex': pkt[p:].hex()})
             unparsed += 1
             break
         p += 1
         order_start = p - 1
+        order = flags = subject = None
         try:
             order, p = read_str(pkt, p)
             flags, = struct.unpack_from('<h', pkt, p)
@@ -119,6 +146,8 @@ def parse_orders(pkt):
                 subject, = struct.unpack_from('<I', pkt, p)
                 p += 4
             target_hex = ''
+            target_kind = 'none'
+            target_ref = None
             if flags & 0x01:
                 start = p
                 tt = pkt[p]
@@ -127,10 +156,15 @@ def parse_orders(pkt):
                 # FrozenActor=3. Serialize sets the Target flag only when the
                 # type is not Invalid, so tt=0 on the wire is malformed.
                 if tt == 1:           # Actor: u32 actorID + i32 generation
+                    aid, gen = struct.unpack_from('<Ii', pkt, p)
                     p += 8
+                    target_kind = 'actor'
+                    target_ref = {'actor_id': aid, 'generation': gen}
                 elif tt == 2:         # Terrain
                     if flags & 0x40:  # TargetIsCell: i32 + u8
                         p += 5
+                        target_kind = 'terrain_cell'
+                        target_ref = {'bits': pkt[p - 5:p].hex()}
                     else:
                         p += 12
                         n, = struct.unpack_from('<h', pkt, p)
@@ -139,8 +173,14 @@ def parse_orders(pkt):
                             raise ValueError('bad terrain count')
                         if n != -1:
                             p += 12 * n
+                        target_kind = 'terrain_pos'
+                        target_ref = {'bits': pkt[start + 1:p].hex()}
                 elif tt == 3:         # FrozenActor: u32 viewerPlayerActorID + u32 frozenActorID
+                    viewer, frozen = struct.unpack_from('<II', pkt, p)
                     p += 8
+                    target_kind = 'frozen_actor'
+                    target_ref = {'viewer_player_actor_id': viewer,
+                                  'frozen_actor_id': frozen}
                 else:
                     raise ValueError('unknown target type')
                 if p > len(pkt):
@@ -149,15 +189,19 @@ def parse_orders(pkt):
             target_string = None
             if flags & 0x04:
                 target_string, p = read_str(pkt, p)
-                target_string = PER_LAUNCH_FIELDS.sub(rb'\1<NORM>',
-                                                      target_string)
             extra_hex = ''
+            undecoded_hex = ''
+            extra_actor_ids = []
             start = p
             if flags & 0x02:          # ExtraActors: i32 n + n u32
                 n, = struct.unpack_from('<i', pkt, p)
                 if n < 0:
                     raise ValueError('bad extras count')
-                p += 4 + 4 * n
+                p += 4
+                extra_actor_ids = list(
+                    struct.unpack_from(f'<{n}I', pkt, p)) if n else []
+                p += 4 * n
+            undecoded_start = p
             if flags & 0x10:          # ExtraLocation: i32
                 p += 4
             if flags & 0x20:          # ExtraData: i32
@@ -165,20 +209,70 @@ def parse_orders(pkt):
             if p > len(pkt):
                 raise ValueError('extras overrun')
             extra_hex = pkt[start:p].hex()
+            undecoded_hex = pkt[undecoded_start:p].hex()
             grouped_hex = ''
+            grouped_ids = []
             if flags & 0x100:
                 n, = struct.unpack_from('<i', pkt, p)
                 if n < 0 or p + 4 + 4 * n > len(pkt):
                     raise ValueError('bad grouped count')
                 p += 4
+                grouped_ids = list(
+                    struct.unpack_from(f'<{n}I', pkt, p)) if n else []
                 grouped_hex = pkt[p:p + 4 * n].hex()
                 p += 4 * n
-        except (IndexError, ValueError, struct.error):
-            out.append(('UNPARSED', pkt[order_start:].hex()))
+        except (IndexError, ValueError, struct.error) as exc:
+            # 'unknown target type' is the single distinguished failure:
+            # flag set + byte the engine never emits (0/unknown). Every
+            # other parse failure is an opaque unparsed tail.
+            unsupported = (isinstance(exc, ValueError)
+                           and str(exc) == 'unknown target type')
+            out.append({'kind': 'order',
+                    'parse': 'unsupported_target' if unsupported
+                             else 'unparsed_tail',
+                    'reason': str(exc), 'order': order, 'flags': flags,
+                    'subject': subject,
+                    'target_kind': 'unsupported' if unsupported else None,
+                    'raw_hex': pkt[order_start:].hex()})
             unparsed += 1
             break
-        out.append(('O', order, flags, subject, target_hex, target_string,
-                    extra_hex, grouped_hex))
+        out.append({'kind': 'order', 'parse': 'ok', 'order': order,
+                    'flags': flags, 'subject': subject,
+                    'target_kind': target_kind, 'target_ref': target_ref,
+                    'target_hex': target_hex, 'target_string': target_string,
+                    'extra_actor_ids': extra_actor_ids,
+                    'extra_hex': extra_hex, 'undecoded_hex': undecoded_hex,
+                    'grouped_ids': grouped_ids, 'grouped_hex': grouped_hex,
+                    'raw_hex': pkt[order_start:p].hex()})
+    return out, unparsed
+
+
+def parse_orders(pkt):
+    """Canonical tuples for the Field/Handshake orders in one packet.
+
+    Every order tuple preserves the raw i16 flags (Queued 0x08 / TargetIsCell
+    0x40 carry no field payload but are semantically significant) and every
+    consumed field byte. Anything the parser cannot consume — an unknown order
+    type, unknown flag bits, or a field that would run past the packet — is
+    emitted as an ('UNPARSED', hex) record carrying the remaining bytes, so the
+    comparison never silently discards payload.
+    Returns (orders, unparsed_tail_count).
+    """
+    records, unparsed = parse_orders_detail(pkt)
+    out = []
+    for r in records:
+        if r['kind'] == 'handshake' and r['parse'] == 'ok':
+            out.append(('HS', r['name'],
+                        PER_LAUNCH_FIELDS.sub(rb'\1<NORM>', r['target'])))
+        elif r['parse'] != 'ok':
+            out.append(('UNPARSED', r['raw_hex']))
+        else:
+            out.append(('O', r['order'], r['flags'], r['subject'],
+                        r['target_hex'],
+                        PER_LAUNCH_FIELDS.sub(rb'\1<NORM>',
+                                              r['target_string'])
+                        if r['target_string'] is not None else None,
+                        r['extra_hex'], r['grouped_hex']))
     return out, unparsed
 
 
