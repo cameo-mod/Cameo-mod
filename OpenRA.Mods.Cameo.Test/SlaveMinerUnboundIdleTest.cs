@@ -159,8 +159,9 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
-		public void EngineStillHasTheGuardAndTheHarvestInterrupt()
+		public void EngineSourceStillHasTheGuardAndTheHarvestInterrupt()
 		{
+			// Source-text contract, not a runtime integration test: it reads the engine .cs files and does not run the engine.
 			// The model above is only valid while the engine behaves this way; an engine bump that changes either
 			// rule must revisit the slave code, so fail here instead of idling slaves in a playtest.
 			var harvester = Source("engine_Harvester.cs");
