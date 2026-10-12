@@ -1,0 +1,18 @@
+Platform is Windows (X64)
+Engine version is 0a3f77dbe1a90bc59ff3ef5ad81534e8fbcf7695
+Runtime: .NET CLR 10.0.9
+Internal mods:
+	all (0a3f77dbe1a90bc59ff3ef5ad81534e8fbcf7695)
+	cnc (0a3f77dbe1a90bc59ff3ef5ad81534e8fbcf7695)
+	cnc-content (0a3f77dbe1a90bc59ff3ef5ad81534e8fbcf7695)
+	d2k (0a3f77dbe1a90bc59ff3ef5ad81534e8fbcf7695)
+	d2k-content (0a3f77dbe1a90bc59ff3ef5ad81534e8fbcf7695)
+	ra (0a3f77dbe1a90bc59ff3ef5ad81534e8fbcf7695)
+	ra-content (0a3f77dbe1a90bc59ff3ef5ad81534e8fbcf7695)
+	ts (0a3f77dbe1a90bc59ff3ef5ad81534e8fbcf7695)
+	ts-content (0a3f77dbe1a90bc59ff3ef5ad81534e8fbcf7695)
+Exception of type `System.InvalidOperationException`: Unknown or invalid mod 'cameo'.
+   at OpenRA.Game.Initialize(Arguments args) in C:\cameo-wt\integ-b1b7\engine\OpenRA.Game\Game.cs:line 440
+   at OpenRA.Game.InitializeAndRun(String[] args) in C:\cameo-wt\integ-b1b7\engine\OpenRA.Game\Game.cs:line 351
+   at OpenRA.Launcher.Program.Main(String[] args) in C:\cameo-wt\parity-wave1-bd\engine\OpenRA.Launcher\Program.cs:line 46
+

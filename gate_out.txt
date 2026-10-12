@@ -1,0 +1,42 @@
+ASSERTION FAILED: no B17_RECEIPT lines were printed
+OpenRA output tail:
+	ts (0a3f77dbe1a90bc59ff3ef5ad81534e8fbcf7695)
+	ts-content (0a3f77dbe1a90bc59ff3ef5ad81534e8fbcf7695)
+External mods:
+	cameo-{DEV_VERSION} ({DEV_VERSION})
+	cnc-{DEV_VERSION} ({DEV_VERSION})
+Using SDL 2.32.10 with OpenGL (ANGLE) renderer
+Desktop resolution: 2560x1440
+Using resolution: 640x480
+Using window scale 1,00
+OpenGL renderer: ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 Direct3D11 vs_5_0 ps_5_0, D3D11-32.0.15.9186)
+OpenGL version: OpenGL ES 3.0.0 (ANGLE 2.1.20989 git hash: 5c0b4251bd2c)
+Loading mod: cameo
+Saving benchmark data into C:\Users\AedisToru\AppData\Roaming\OpenRA\Logs
+[2026-10-09T14:32:49] Game started.
+Lua debug: AI_B1B7_GATE_STARTED bot=HardBot type=hard
+Lua debug: AI_B1B7_POS exorcist_baseline tick=9 pos=56832,36352,0
+Lua debug: AI_B1B7_GATE_BASELINE tick=9
+Lua debug: AI_B1B7_POS exorcist_spellcard tick=301 pos=56832,36352,0
+Lua debug: AI_B1B7_GATE_SPELLCARD tick=301
+Lua debug: AI_B1B7_DIAG bait2_alive_at_950 hp=0
+Lua debug: AI_B1B7_POS exorcist_final tick=1401 pos=61952,36352,0
+Lua debug: B17_RECEIPT b1_orbprobe hp0=294000 hpmin=294000 hp1=294000 z=0
+Lua debug: B17_RECEIPT b7_moving hp0=104000 hpmin=104000 hp1=104000 z=2000
+Lua debug: B17_RECEIPT b7_friendly hp0=175000 hpmin=175000 hp1=175000 z=0
+Lua debug: B17_RECEIPT b7_landed hp0=88000 hpmin=88000 hp1=88000 z=0
+Lua debug: B17_RECEIPT b1_tank_b hp0=294000 hpmin=294000 hp1=294000 z=0
+Lua debug: B17_RECEIPT b1_tank_a hp0=294000 hpmin=294000 hp1=294000 z=0
+Lua debug: B17_RECEIPT b7_high hp0=104000 hpmin=104000 hp1=104000 z=4000
+Lua debug: B17_RECEIPT b7_hover hp0=88000 hpmin=88000 hp1=88000 z=2000
+Lua debug: B17_RECEIPT b1_bosstarget hp0=96000 hpmin=0 hp1=0 z=-1
+Lua debug: B17_RECEIPT b1_psionic hp0=96000 hpmin=96000 hp1=96000 z=0
+Lua debug: B17_RECEIPT b1_monster hp0=96000 hpmin=96000 hp1=96000 z=0
+Lua debug: B17_RECEIPT b7_bait_b hp0=300000 hpmin=300000 hp1=300000 z=0
+Lua debug: B17_RECEIPT b1_epic hp0=96000 hpmin=90352 hp1=96000 z=0
+Lua debug: B17_RECEIPT b1_bait2 hp0=96000 hpmin=0 hp1=0 z=-1
+Lua debug: B17_RECEIPT b7_ground hp0=294000 hpmin=294000 hp1=294000 z=0
+Lua debug: B17_RECEIPT b7_bait_a hp0=500000 hpmin=500000 hp1=500000 z=0
+Lua debug: B17_RECEIPT b1_exorcist hp0=75000 hpmin=75000 hp1=75000 z=0
+Lua debug: B17_RECEIPT b1_tank_c hp0=294000 hpmin=294000 hp1=294000 z=0
+Lua debug: AI_B1B7_GATE_COMPLETED tick=1401

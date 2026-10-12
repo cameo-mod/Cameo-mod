@@ -1,0 +1,102 @@
+World:
+	LuaScript:
+		Scripts: test.lua
+	-CrateSpawner:
+	-SpawnStartingUnits:
+	-MapStartingLocations:
+	MapOptions:
+		ShortGameEnabled: False
+		# Pin Limited superweapons so the shrine's ~techlevel.superweapons
+		# prerequisite is provided regardless of the lobby default.
+		TechLevel: superweapons
+
+# Fast charge so the gate finishes inside the benchmark window. The live
+# default (10500 ticks) is untouched; this applies to this map only.
+japan_japaneseshrine:
+	DetonateWeaponPowerCA:
+		ChargeInterval: 250
+
+# Gate-only spellcard grant: the exorcist's orb ring is PeriodicExplosion ->
+# ReimuDreamSeal gated on the `spellcard` condition, which is normally granted
+# by GrantTimedConditionOnDeploy (a manual order). ExternalCondition gives the
+# lua script a GrantCondition('spellcard') provider so the gate can arm the
+# orb emitter deterministically without a deploy order. Map-local only.
+japan_exorcist:
+	ExternalCondition@gate_spellcard:
+		Condition: spellcard
+	ExternalCondition@gate_rooted:
+		Condition: gate_rooted
+	SpeedMultiplier@gate_rooted:
+		Modifier: 0
+		RequiresCondition: gate_rooted
+
+# Gate-only passivity: every probe uses a type that is unarmed by design
+# (transport helicopters, the MCV, and the gapgen's dummy targeting
+# weapon), so nothing can chase or return fire. No combat traits are
+# removed anywhere: stripping AutoTarget/AttackBase cascades into
+# Armament/AutoTargetPriority/RenderRangeCircle dependency failures.
+#
+# gate_high_transport: the B7 "cruise-altitude" case - an unarmed hip
+# transport pinned to z=4000 by a CruiseAltitude override, documenting the
+# altitude edge of the 3D blast envelope.
+gate_high_transport:
+	Inherits: ra1_soviets_hiptransport
+	Aircraft:
+		CruiseAltitude: 4000
+	RenderSprites:
+		Image: ra1_soviets_hiptransport
+
+# gate_ff_probe: bot-owned friendly-fire probe inside the orb annulus.
+# SupportPowerBotASModule MagicOrbHailstorm Consideration@2 subtracts
+# (Ally value x 10) within 10000wu of the aim point - a normal building's
+# Valued.Cost would make the strike unattractive and it would never fire.
+# A zero-cost clone keeps the friendly-fire measurement without
+# suppressing the launch decision.
+gate_ff_probe:
+	Inherits: japan_waveforcereactor
+	Valued:
+		Cost: 0
+	RenderSprites:
+		Image: japan_waveforcereactor
+
+# Passive typed dummies for the B1 exclusion controls. They inherit the
+# passive ra1_allies_mobilegapgenerator chassis (dummy weapon, no movement
+# drive) but REPLACE its target-type set so the orb missiles' aim/impact
+# filter sees exactly one exclusion tag each:
+#   gate_monster_dummy  -> {Ground, Vehicle, Monster}
+#   gate_psionic_dummy  -> {Ground, Vehicle, Psionic}
+# The Epic control is the plain mobilegapgenerator ({Ground, Vehicle, Epic}).
+# RA2TRIPOD and friends are unusable: rules/monsters.yaml is commented out of
+# mod.yaml, so no loaded-rules Monster actor exists; wc2_orcs_ogre qualifies
+# but its AutoTarget would chase the exorcist and ruin the parked-control
+# geometry.
+gate_monster_dummy:
+	Inherits: ra1_allies_mobilegapgenerator
+	-Targetable@Epic:
+	Targetable:
+		TargetTypes: Monster
+	RenderSprites:
+		Image: ra1_allies_mobilegapgenerator
+
+gate_psionic_dummy:
+	Inherits: ra1_allies_mobilegapgenerator
+	-Targetable@Epic:
+	Targetable:
+		TargetTypes: Psionic
+	RenderSprites:
+		Image: ra1_allies_mobilegapgenerator
+
+Player:
+	-ConquestVictoryConditions:
+	BotPersonalityController:
+		Conditions: personality-rush
+	BotLimits@hard:
+		InitialAttackDelay: 0
+	Shroud:
+		# No fog and no shroud: the gate measures weapon damage, not
+		# visibility. SupportPowerBotASModule MagicOrbHailstorm has
+		# IgnoreVisibility: false, so a fully visible board is required.
+		FogCheckboxEnabled: False
+		ExploredMapCheckboxEnabled: False
+	PlayerResources:
+		DefaultCash: 0
