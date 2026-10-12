@@ -1308,6 +1308,14 @@ in-game); actors + stats + structure are LOCKED. Full anchor store:
 
 ## P0 — Crashes (always first)
 
+- [ ] **P0 BUG: NAXIS refinery-spawned slaves stop harvesting** (reported 2026-10-12;
+  fix under review): `SlaveMinerSpawnerSlave.UpdateMasterDock` reserved the refinery dock
+  before a `MoveToDock` activity existed. `FindAndDeliverResources` interprets any
+  reservation as an active delivery and waits, leaving a loaded slave idle after a failed
+  harvest search. The branch removes this premature reservation, repairs live-master owner
+  binding, and restarts harvesting after master disposal. Source-contract regressions pass;
+  no game was launched, so maintainer playtest remains required.
+
 - [x] **P0 CRASH: InvalidOperationException in ClassicProductionQueueProperties**
   (2026-07-31, fixed): `System.InvalidOperationException: Sequence contains no
   elements` at `ProductionProperties.cs:line 226` —

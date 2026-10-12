@@ -20826,3 +20826,7 @@ no launches while the A/B reservation is held.
 - Verification: Release build clean (engine fetched at pin 4f69df0 — sibling
   engines were stale/other pins); Cameo.Test 1849/1849; audit_ai_personalities
   PASS. boot-gate + commit SHAs reported to lead.
+
+## 2026-10-12 - NAXIS refinery-spawned slave idle fix
+
+The slave cached and reserved its refinery dock during world insertion, before a `MoveToDock` activity existed. The engine harvest search interprets an existing reservation as an active delivery and waits, stranding loaded slaves. The fix defers reservation to `MoveToDock`, preserves bindings when a captured refinery and slave share an owner, and clears/restarts harvest after master loss or incompatible ownership changes. Three focused source-contract tests pass. No game was launched under the A/B reservation; gameplay remains unverified pending maintainer playtest. Branch: `codex/01a12ecb-naxis-slave-idle` (exact SHA to follow).
