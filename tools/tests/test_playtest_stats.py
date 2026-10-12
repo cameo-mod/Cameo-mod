@@ -117,6 +117,44 @@ class ChannelFixture(unittest.TestCase):
                 stats.read_channel(pathlib.Path(temp) / "Logs" /
                     f"cameo-ai-players-{hashlib.sha256(UID.encode()).hexdigest()}.jsonl")
 
+    def test_same_tick_final_sample_keeps_last(self):
+        # A game ending on a sample tick emits a same-tick final row;
+        # the reader keeps the last snapshot rather than failing.
+        with tempfile.TemporaryDirectory() as temp:
+            final = sample("seat_1", 1500)
+            final["harvesters"] = 7
+            write_channel(temp, [sample("seat_1", 750), sample("seat_1", 1500), final])
+            samples, _ = stats.read_channel(
+                pathlib.Path(temp) / "Logs" /
+                f"cameo-ai-players-{hashlib.sha256(UID.encode()).hexdigest()}.jsonl")
+            self.assertEqual(samples["seat_1"]["harvesters"], 7)
+
+    def test_event_seq_and_actor_id_validate(self):
+        with tempfile.TemporaryDirectory() as temp:
+            rows = [
+                event("seat_1", "building_placed", 1200, actor="powr",
+                      seq=1, actor_id=41, cell="12,40", start_dist=3.6),
+                event("seat_1", "structure_lost", 5000, actor="powr",
+                      seq=2, actor_id=41, cause="killed"),
+                event("seat_1", "building_placed", 1200, actor="proc",
+                      seq=3, actor_id=42, cell="14,40", start_dist=5.0),
+            ]
+            write_channel(temp, rows)
+            _, metrics = health.players_channel(
+                pathlib.Path(temp) / "Logs", UID, "seat_1")
+            self.assertEqual(metrics["player_channel_events"],
+                             {"building_placed": 2, "structure_lost": 1})
+            samples, events = stats.read_channel(
+                pathlib.Path(temp) / "Logs" /
+                f"cameo-ai-players-{hashlib.sha256(UID.encode()).hexdigest()}.jsonl")
+            self.assertEqual(events["seat_1"]["structure_lost"], 1)
+        with tempfile.TemporaryDirectory() as temp:
+            bad = event("seat_1", "building_placed", 10, seq="abc")
+            write_channel(temp, [bad])
+            with self.assertRaises(health.EvidenceError):
+                stats.read_channel(pathlib.Path(temp) / "Logs" /
+                    f"cameo-ai-players-{hashlib.sha256(UID.encode()).hexdigest()}.jsonl")
+
     def test_stats_rows_cover_every_seat(self):
         with tempfile.TemporaryDirectory() as temp:
             write_channel(temp, self.rows())

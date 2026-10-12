@@ -195,6 +195,7 @@ namespace OpenRA.Mods.Cameo.Traits
 	{
 		public OpenRA.Player Owner;
 		public string ActorName;
+		public long ActorId;
 		public CPos Cell;
 		public int Tick;
 		public string Cause;
@@ -234,6 +235,7 @@ namespace OpenRA.Mods.Cameo.Traits
 		readonly List<PendingConyardRemoval> pendingConyardRemoved = [];
 		readonly Dictionary<OpenRA.Player, SeatTelemetry> seats = new();
 		static readonly List<(string Seat, CPos Home)> NoEnemies = [];
+		int lastSampleTick = -1;
 
 		IReadOnlyDictionary<string, HashSet<string>> tagMap;
 		Dictionary<string, string> categoryCache;
@@ -468,7 +470,7 @@ namespace OpenRA.Mods.Cameo.Traits
 						return;
 
 					EmitEvent(seat, "building_placed", actor.Info.Name, actor.Location,
-						startDist: Cells(actor.Location, seat.Home));
+						startDist: Cells(actor.Location, seat.Home), actorId: actor.ActorID);
 					if (IsConyardBuilding(actor, tagMap)
 						&& TryMatchDeploy(mcvRemoved, actor.Owner, actor.Location, world.WorldTick))
 					{
@@ -485,12 +487,12 @@ namespace OpenRA.Mods.Cameo.Traits
 							seat.ExpansionDeploys++;
 
 						EmitEvent(seat, "conyard_deployed", actor.Info.Name, actor.Location,
-							startDist: Cells(actor.Location, seat.Home));
+							startDist: Cells(actor.Location, seat.Home), actorId: actor.ActorID);
 					}
 
 					if (tagMap.TryGetValue(actor.Info.Name, out var tags) && tags.Contains(BotTargetTags.Superweapon))
 						EmitEvent(seat, "superweapon_built", actor.Info.Name, actor.Location,
-							startDist: Cells(actor.Location, seat.Home));
+							startDist: Cells(actor.Location, seat.Home), actorId: actor.ActorID);
 				}
 				else if (IsMobileConyard(actor))
 				{
@@ -508,7 +510,7 @@ namespace OpenRA.Mods.Cameo.Traits
 						var seat = Seat(actor.Owner);
 						if (seat != null)
 							EmitEvent(seat, "conyard_packed", p.ActorName, p.Cell,
-								startDist: Cells(p.Cell, seat.Home));
+								startDist: Cells(p.Cell, seat.Home), actorId: p.ActorId);
 						break;
 					}
 				}
@@ -545,6 +547,7 @@ namespace OpenRA.Mods.Cameo.Traits
 						{
 							Owner = actor.Owner,
 							ActorName = actor.Info.Name,
+							ActorId = actor.ActorID,
 							Cell = actor.Location,
 							Tick = world.WorldTick,
 							Cause = LossCause(actor)
@@ -556,7 +559,7 @@ namespace OpenRA.Mods.Cameo.Traits
 				if (seat != null)
 					EmitEvent(seat, "structure_lost", actor.Info.Name, actor.Location,
 						cause: LossCause(actor),
-						startDist: Cells(actor.Location, seat.Home));
+						startDist: Cells(actor.Location, seat.Home), actorId: actor.ActorID);
 			}
 			catch (Exception e)
 			{
@@ -597,7 +600,7 @@ namespace OpenRA.Mods.Cameo.Traits
 				if (seat != null)
 					EmitEvent(seat, "structure_lost", p.ActorName, p.Cell,
 						cause: p.Cause,
-						startDist: Cells(p.Cell, seat.Home));
+						startDist: Cells(p.Cell, seat.Home), actorId: p.ActorId);
 			}
 		}
 
@@ -644,7 +647,8 @@ namespace OpenRA.Mods.Cameo.Traits
 				if (loser != null)
 					EmitEvent(loser, "structure_lost", track.Actor.Info.Name, track.Actor.Location,
 						cause: "captured", toSeat: winner?.Seat,
-						startDist: Cells(track.Actor.Location, loser.Home));
+						startDist: Cells(track.Actor.Location, loser.Home),
+						actorId: track.Actor.ActorID);
 			}
 		}
 
@@ -682,7 +686,7 @@ namespace OpenRA.Mods.Cameo.Traits
 					{
 						seat.FirstUnitLogged = true;
 						EmitEvent(seat, "first_unit_enemy_territory", actor.Info.Name,
-							actor.Location, toSeat: reachSeat);
+							actor.Location, toSeat: reachSeat, actorId: actor.ActorID);
 					}
 				}
 
@@ -787,6 +791,7 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		void EconomySample(World world, int tick)
 		{
+			lastSampleTick = tick;
 			foreach (var seat in seats.Values)
 			{
 				seat.Sample.Harvesters = seat.Sample.Refineries = seat.Sample.Conyards
@@ -909,7 +914,8 @@ namespace OpenRA.Mods.Cameo.Traits
 		}
 
 		void EmitEvent(SeatTelemetry seat, string kind, string actor, CPos? cell,
-			double startDist = -1, string cause = null, string toSeat = null, int units = 0)
+			double startDist = -1, string cause = null, string toSeat = null, int units = 0,
+			long actorId = -1)
 		{
 			// seq is per-seat monotonic: same-tick events keep a recoverable total order
 			// (Boss P3a request — placement/build order must survive same-tick ties).
@@ -926,6 +932,8 @@ namespace OpenRA.Mods.Cameo.Traits
 			AiMatchLogWriter.AppendNumber(b, "seq", seq);
 			if (actor != null)
 				AiMatchLogWriter.AppendString(b, "actor", actor);
+			if (actorId >= 0)
+				AiMatchLogWriter.AppendNumber(b, "actor_id", actorId);
 			if (cell.HasValue)
 				AiMatchLogWriter.AppendString(b, "cell",
 					cell.Value.X.ToString(CultureInfo.InvariantCulture) + "," + cell.Value.Y.ToString(CultureInfo.InvariantCulture));
@@ -968,7 +976,9 @@ namespace OpenRA.Mods.Cameo.Traits
 			Unsubscribe();
 			try
 			{
-				EconomySample(world, world.WorldTick);
+				// A periodic sample on the same tick already holds the snapshot.
+				if (world.WorldTick != lastSampleTick)
+					EconomySample(world, world.WorldTick);
 			}
 			catch (Exception e)
 			{

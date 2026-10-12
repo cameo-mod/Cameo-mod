@@ -91,7 +91,7 @@ PLAYER_SAMPLE_V1_FIELDS = {
 PLAYER_SAMPLE_ARMY_FIELDS = {"infantry", "vehicle", "air", "naval", "defence"}
 PLAYER_EVENT_V1_FIELDS = {
     "schema", "version", "game_uid", "record_id", "tick", "seat", "kind",
-    "seq", "actor", "cell", "start_dist", "cause", "to_seat", "units",
+    "seq", "actor", "actor_id", "cell", "start_dist", "cause", "to_seat", "units",
 }
 PLAYER_EVENT_KINDS = {
     "building_placed", "structure_lost", "conyard_deployed", "conyard_packed",
@@ -449,6 +449,8 @@ def players_channel(logs, game_uid, player, live=False):
             integer(row.get("tick"))
             if "seq" in row:
                 integer(row["seq"])
+            if "actor_id" in row:
+                integer(row["actor_id"])
             kind = row.get("kind")
             if kind not in PLAYER_EVENT_KINDS:
                 raise EvidenceError(f"unsupported player-event kind: {kind}")

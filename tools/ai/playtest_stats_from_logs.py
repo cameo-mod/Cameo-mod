@@ -73,8 +73,10 @@ def read_channel(path):
             if not isinstance(seat, str) or not seat.startswith("seat_"):
                 raise health.EvidenceError("player-sample seat must be an anonymous seat_N")
             previous = samples.get(seat)
-            if previous is not None and row["tick"] <= previous["tick"]:
+            if previous is not None and row["tick"] < previous["tick"]:
                 raise health.EvidenceError("non-monotonic sample ticks for seat")
+            # A game ending on a sample tick may emit a same-tick final row;
+            # keep the last (fullest) snapshot.
             samples[seat] = row
         elif schema == "cameo-player-event":
             health.reject_unknown_fields(row, health.PLAYER_EVENT_V1_FIELDS, "player-event v1")
@@ -83,6 +85,8 @@ def read_channel(path):
             health.integer(row.get("tick"))
             if "seq" in row:
                 health.integer(row["seq"])
+            if "actor_id" in row:
+                health.integer(row["actor_id"])
             kind = row.get("kind")
             if kind not in health.PLAYER_EVENT_KINDS:
                 raise health.EvidenceError(f"unsupported player-event kind: {kind}")
