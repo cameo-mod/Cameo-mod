@@ -65,6 +65,16 @@ class HealthTests(unittest.TestCase):
                 with self.assertRaisesRegex(health.EvidenceError, "unsupported"):
                     health.analyze(changed_situations, changed_placements, changed_matches, uid, "seat_3")
 
+    def test_known_conditional_schema3_own_providers_are_accepted(self):
+        support = Path(__file__).parent / "fixtures" / "replay_health_schema3_attempt3" / "Logs"
+        situations = [health.strict_json(line) for line in (support / "cameo-ai-situations.jsonl").read_text(encoding="utf-8").splitlines()]
+        placements = [health.strict_json(line) for line in (support / "cameo-ai-placements.jsonl").read_text(encoding="utf-8").splitlines()]
+        matches = [health.strict_json(line) for line in (support / "cameo-ai-matches.jsonl").read_text(encoding="utf-8").splitlines()]
+        situations[0]["own"].update({"scale_targets": {}, "build_order": {}, "bandit": {}, "contacts": {}})
+        report = health.analyze(situations, placements, matches,
+                                "27198fe4-be54-4d14-b304-d74d3923a674", "seat_3")
+        self.assertEqual(report["status"], "OBSERVED_HEALTHY")
+
     def test_duplicate_keys_and_nonfinite_constants_rejected(self):
         for raw in ('{"schema":1,"schema":2}', '{"own":{"x":1,"x":2}}', '{"tick":NaN}'):
             with self.assertRaises(health.EvidenceError):

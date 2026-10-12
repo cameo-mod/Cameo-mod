@@ -46,7 +46,8 @@ OWN_V3_FIELDS = {
     "director_phase", "team_allied_bots", "team_army_value", "team_max_tension",
     "team_defend_requests", "team_shared_target", "team_any_climax",
     "coalition_phase", "coalition_main_target", "fb_fronts", "fb_fronts_without_radar",
-    "fb_radar_union_cells", "fb_radar_approach_cells", "threats",
+    "fb_radar_union_cells", "fb_radar_approach_cells", "threats", "scale_targets",
+    "build_order", "bandit", "contacts",
 }
 EXPANSION_V3_FIELDS = {
     "fields_known", "fields_in_reach", "fields_served", "fields_harvested",
