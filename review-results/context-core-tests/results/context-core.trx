@@ -1,0 +1,261 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="a0e646dc-011a-4202-8c03-aec0b96442e9" name="AedisToru@CAMEODEVPC 2026-10-06 20:21:51" runUser="CAMEODEVPC\AedisToru" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-06T20:21:51.9483008+02:00" queuing="2026-10-06T20:21:51.9483013+02:00" start="2026-10-06T20:21:51.1083700+02:00" finish="2026-10-06T20:21:52.0860237+02:00" />
+  <TestSettings name="default" id="cb09141d-9541-45bb-8e93-aa1f8b695771">
+    <Deployment runDeploymentRoot="AedisToru_CAMEODEVPC_2026-10-06_20_21_51" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="4706a58f-43fb-464b-af6a-6957e7e7e4fe" testId="88eaca36-cf51-1593-dbea-3c730f71a1eb" testName="SchemaHasExactlyTheReviewedFields(Opponent,61)" computerName="CAMEODEVPC" duration="00:00:00.0003480" startTime="2026-10-06T20:21:51.9863595+02:00" endTime="2026-10-06T20:21:51.9867076+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4706a58f-43fb-464b-af6a-6957e7e7e4fe" />
+    <UnitTestResult executionId="5853833a-ef9d-4fb1-95ca-1492fcff7343" testId="26f74356-f850-ace5-2359-ba6571e4fc49" testName="MissingCannotCarryStaleValueOrConfidence" computerName="CAMEODEVPC" duration="00:00:00.0008740" startTime="2026-10-06T20:21:51.9614240+02:00" endTime="2026-10-06T20:21:51.9622985+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="5853833a-ef9d-4fb1-95ca-1492fcff7343" />
+    <UnitTestResult executionId="e7676cb9-0366-4550-a8d5-a13b6299e381" testId="b196e15a-315f-0b2c-93c5-be709f346cad" testName="UnreachableAndPrivateStartAssignmentsStayMissing" computerName="CAMEODEVPC" duration="00:00:00.0004710" startTime="2026-10-06T20:21:51.9961298+02:00" endTime="2026-10-06T20:21:51.9966005+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e7676cb9-0366-4550-a8d5-a13b6299e381" />
+    <UnitTestResult executionId="28fcb2d5-278d-4044-ade3-38ee4455db97" testId="a8816bfc-1a14-5378-9555-1ecf208c0bb1" testName="LargestNumbersFitWithinTheWireBudget(Map)" computerName="CAMEODEVPC" duration="00:00:00.0018560" startTime="2026-10-06T20:21:51.9555498+02:00" endTime="2026-10-06T20:21:51.9574055+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="28fcb2d5-278d-4044-ade3-38ee4455db97" />
+    <UnitTestResult executionId="3405c12b-8147-41c4-b7c5-24f3ddf10505" testId="d4205051-be2e-d5f1-68bb-811c8a1994c8" testName="ArbitraryKeysCannotEnterTheVector(&quot;map_uid&quot;)" computerName="CAMEODEVPC" duration="00:00:00.0002790" startTime="2026-10-06T20:21:51.8623907+02:00" endTime="2026-10-06T20:21:51.8626697+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3405c12b-8147-41c4-b7c5-24f3ddf10505" />
+    <UnitTestResult executionId="87dfbed9-eb3f-449b-be4c-5cb8cc08707e" testId="32656b7f-5100-4356-65b2-284c5df19071" testName="MalformedGeometryCannotSlipIntoPathCalculations" computerName="CAMEODEVPC" duration="00:00:00.0003970" startTime="2026-10-06T20:21:51.9578068+02:00" endTime="2026-10-06T20:21:51.9582035+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="87dfbed9-eb3f-449b-be4c-5cb8cc08707e" />
+    <UnitTestResult executionId="4516b8b4-35db-40b6-bae2-16dfbb695012" testId="9148a864-b9b3-96b7-5f22-eabab68bbd90" testName="CensusCopiesItsRolesAndUsesUnclampedDenominatorForShares" computerName="CAMEODEVPC" duration="00:00:00.0003820" startTime="2026-10-06T20:21:51.8652707+02:00" endTime="2026-10-06T20:21:51.8656527+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4516b8b4-35db-40b6-bae2-16dfbb695012" />
+    <UnitTestResult executionId="a702c01a-6b2d-4675-a4f9-5df4ac6bf574" testId="061e4155-7c87-0f78-0efa-b99144d3572e" testName="VertexCutsMatchBruteForceRemovalAcrossEverySmallGraph" computerName="CAMEODEVPC" duration="00:00:00.0294260" startTime="2026-10-06T20:21:51.9972829+02:00" endTime="2026-10-06T20:21:52.0267086+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a702c01a-6b2d-4675-a4f9-5df4ac6bf574" />
+    <UnitTestResult executionId="79e63825-dfa6-449c-9477-0a16c5b32ed5" testId="c43bf1f4-9b45-f16e-8084-9cf2c848e351" testName="LargestNumbersFitWithinTheWireBudget(Opponent)" computerName="CAMEODEVPC" duration="00:00:00.0003490" startTime="2026-10-06T20:21:51.9574217+02:00" endTime="2026-10-06T20:21:51.9577701+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="79e63825-dfa6-449c-9477-0a16c5b32ed5" />
+    <UnitTestResult executionId="653a1d7d-2071-468c-b459-1f32ec8af1a5" testId="bd6ef144-e7d6-c2d7-0e88-f7233d2022a2" testName="ArbitraryKeysCannotEnterTheVector(&quot;x&quot;)" computerName="CAMEODEVPC" duration="00:00:00.0000580" startTime="2026-10-06T20:21:51.8627669+02:00" endTime="2026-10-06T20:21:51.8628247+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="653a1d7d-2071-468c-b459-1f32ec8af1a5" />
+    <UnitTestResult executionId="8fbfcb38-4af8-49b1-bce0-0dec9b6da5f9" testId="c0ca81fe-b642-f8b9-1ae2-ad882c8452d7" testName="SymmetricOwnStartSwapPreservesRelativeDistances" computerName="CAMEODEVPC" duration="00:00:00.0006849" startTime="2026-10-06T20:21:51.9938008+02:00" endTime="2026-10-06T20:21:51.9944861+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="8fbfcb38-4af8-49b1-bce0-0dec9b6da5f9" />
+    <UnitTestResult executionId="68df4f2f-86d6-475f-9069-c121659140d5" testId="8eac79cc-37e1-6e3b-b3b4-d82f1251fa66" testName="MapAggregatesClampOnlyAfterDivision" computerName="CAMEODEVPC" duration="00:00:00.0031950" startTime="2026-10-06T20:21:51.9582117+02:00" endTime="2026-10-06T20:21:51.9614068+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="68df4f2f-86d6-475f-9069-c121659140d5" />
+    <UnitTestResult executionId="1a35c613-cdb9-4e65-8d0a-b28fef8ac887" testId="38df9480-151f-5715-58fd-df545fa26de6" testName="EnemyAndAllyAssociationsAreExclusiveAndNeverIncludeOwnStart" computerName="CAMEODEVPC" duration="00:00:00.0044920" startTime="2026-10-06T20:21:51.9434819+02:00" endTime="2026-10-06T20:21:51.9479732+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1a35c613-cdb9-4e65-8d0a-b28fef8ac887" />
+    <UnitTestResult executionId="b39116a6-9305-4aad-9e83-cddfef84ace6" testId="a027a3a7-211a-aaf4-fecd-92449a42a8cf" testName="CoverageAndRecencyReduceConfidenceWithoutRemovingHiddenArmy" computerName="CAMEODEVPC" duration="00:00:00.0005390" startTime="2026-10-06T20:21:51.8656794+02:00" endTime="2026-10-06T20:21:51.8662178+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b39116a6-9305-4aad-9e83-cddfef84ace6" />
+    <UnitTestResult executionId="398be7e1-b0ed-4545-a200-1b576f75492c" testId="873c0c0a-7a91-220c-613d-e97b15a9b3c3" testName="IntegerRateDoesNotDependOnTickOriginOrEnumeration" computerName="CAMEODEVPC" duration="00:00:00.0015500" startTime="2026-10-06T20:21:51.9490901+02:00" endTime="2026-10-06T20:21:51.9506400+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="398be7e1-b0ed-4545-a200-1b576f75492c" />
+    <UnitTestResult executionId="04b34938-a9bf-4147-b93a-cca952ece2a1" testId="43f450b6-d650-8f5f-eafc-13a3f1188309" testName="ArbitraryKeysCannotEnterTheVector(&quot;PrivatePlayerName&quot;)" computerName="CAMEODEVPC" duration="00:00:00.0000510" startTime="2026-10-06T20:21:51.8628288+02:00" endTime="2026-10-06T20:21:51.8628800+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="04b34938-a9bf-4147-b93a-cca952ece2a1" />
+    <UnitTestResult executionId="92834f75-af4a-4a37-9b3d-5e49b81a7726" testId="37f6bbfa-492a-5804-54a2-db157837afc5" testName="DuplicatesAndInvalidConfidenceAreRejected" computerName="CAMEODEVPC" duration="00:00:00.0005850" startTime="2026-10-06T20:21:51.9273262+02:00" endTime="2026-10-06T20:21:51.9279114+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="92834f75-af4a-4a37-9b3d-5e49b81a7726" />
+    <UnitTestResult executionId="9c5e4b5c-5c54-40e0-b0bf-8f74dfc2a740" testId="0f834a77-2282-e575-1d83-1543b0298aa7" testName="ArmyRateDoesNotFlattenWhenRoleTotalsExceedInt32" computerName="CAMEODEVPC" duration="00:00:00.0011050" startTime="2026-10-06T20:21:51.8641555+02:00" endTime="2026-10-06T20:21:51.8652606+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9c5e4b5c-5c54-40e0-b0bf-8f74dfc2a740" />
+    <UnitTestResult executionId="ca06477c-df3f-4628-a9d8-dc6e650b1343" testId="5c7ca386-c2ca-b855-6688-3c46fc5364ad" testName="ZeroCoverageAndUnknownEventsNeverBecomeConfidentZero" computerName="CAMEODEVPC" duration="00:00:00.0038630" startTime="2026-10-06T20:21:52.0267432+02:00" endTime="2026-10-06T20:21:52.0306062+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ca06477c-df3f-4628-a9d8-dc6e650b1343" />
+    <UnitTestResult executionId="425068d8-ab06-4927-a1c7-ce7f03ddf6e5" testId="06c2af2b-9825-909f-7c20-c9f2cee68a5e" testName="TwoIndependentCorridorsRequireTwoInteriorCuts" computerName="CAMEODEVPC" duration="00:00:00.0016070" startTime="2026-10-06T20:21:51.9945077+02:00" endTime="2026-10-06T20:21:51.9961147+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="425068d8-ab06-4927-a1c7-ce7f03ddf6e5" />
+    <UnitTestResult executionId="ebf10d84-74ed-4a9a-bc8f-2e783ffcb006" testId="c55aaa12-fed8-0f92-34e1-0b855213c3dc" testName="SquareRootAndBacklineProjectionStayExactWithoutFloatingPoint" computerName="CAMEODEVPC" duration="00:00:00.0021020" startTime="2026-10-06T20:21:51.9916838+02:00" endTime="2026-10-06T20:21:51.9937857+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ebf10d84-74ed-4a9a-bc8f-2e783ffcb006" />
+    <UnitTestResult executionId="5c161779-0270-4689-8975-7fb3f19c8694" testId="795077aa-9df3-a7dc-d380-1ad8e353d1b0" testName="ExtremeArithmeticSaturatesAfterExactDivision" computerName="CAMEODEVPC" duration="00:00:00.0003790" startTime="2026-10-06T20:21:51.9486905+02:00" endTime="2026-10-06T20:21:51.9490695+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="5c161779-0270-4689-8975-7fb3f19c8694" />
+    <UnitTestResult executionId="8bf1cb17-f324-4423-819f-ce0894f48903" testId="2e00b597-f216-d678-153d-51ed3121c999" testName="SamplingFloorCannotBeSatisfiedByRepeatedRecords" computerName="CAMEODEVPC" duration="00:00:00.0011190" startTime="2026-10-06T20:21:51.9807194+02:00" endTime="2026-10-06T20:21:51.9818386+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="8bf1cb17-f324-4423-819f-ce0894f48903" />
+    <UnitTestResult executionId="0fec9508-65e3-47fb-a790-ea91608c6356" testId="8bb2934f-fca3-0abb-fc36-de87eab3fdea" testName="PublicShapeMeasurementsDoNotCountUnreachableResourceAsNearby" computerName="CAMEODEVPC" duration="00:00:00.0005320" startTime="2026-10-06T20:21:51.9772854+02:00" endTime="2026-10-06T20:21:51.9778177+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0fec9508-65e3-47fb-a790-ea91608c6356" />
+    <UnitTestResult executionId="480e6b35-29d5-4f7f-b03f-703cac5335f8" testId="5a589ad3-4ae9-47b7-770d-29d7f1e3c192" testName="EntropyIsTrueNormalizedIntegerEntropy" computerName="CAMEODEVPC" duration="00:00:00.0006350" startTime="2026-10-06T20:21:51.9480149+02:00" endTime="2026-10-06T20:21:51.9486493+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="480e6b35-29d5-4f7f-b03f-703cac5335f8" />
+    <UnitTestResult executionId="4ed05b52-4d32-4afc-9ecd-13f85cd229ea" testId="747ad89d-da09-b558-3914-9e2c1bdb8123" testName="DirectedComponentsDoNotDependOnTheFirstSeed" computerName="CAMEODEVPC" duration="00:00:00.0610570" startTime="2026-10-06T20:21:51.8662282+02:00" endTime="2026-10-06T20:21:51.9272851+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4ed05b52-4d32-4afc-9ecd-13f85cd229ea" />
+    <UnitTestResult executionId="68dd61c1-d97b-45b2-82fa-1f4f8e25905c" testId="097bbc43-fc90-54ff-b22c-78e10f8c77e3" testName="VertexCutAgreesWithRemovingTheOnlyInteriorCell" computerName="CAMEODEVPC" duration="00:00:00.0006590" startTime="2026-10-06T20:21:51.9966155+02:00" endTime="2026-10-06T20:21:51.9972740+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="68dd61c1-d97b-45b2-82fa-1f4f8e25905c" />
+    <UnitTestResult executionId="7e6ba9db-0000-45f1-94a1-8ba92c4ba667" testId="ab4efdc5-fce0-b4de-343c-dfdf1d826a82" testName="ArbitraryKeysCannotEnterTheVector(&quot;player_name&quot;)" computerName="CAMEODEVPC" duration="00:00:00.0070410" startTime="2026-10-06T20:21:51.8553237+02:00" endTime="2026-10-06T20:21:51.8623645+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7e6ba9db-0000-45f1-94a1-8ba92c4ba667" />
+    <UnitTestResult executionId="d7a7e11e-5247-44d1-af84-0b44e2dde67d" testId="761927ea-5202-b5f9-ae1e-68721c779066" testName="IslandNavalRouteCanExistWhenNoGroundRouteExists" computerName="CAMEODEVPC" duration="00:00:00.0048310" startTime="2026-10-06T20:21:51.9506563+02:00" endTime="2026-10-06T20:21:51.9554865+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d7a7e11e-5247-44d1-af84-0b44e2dde67d" />
+    <UnitTestResult executionId="f95cf852-5f94-40a4-b65a-f677c11f31e3" testId="cd1c7c21-8ab4-8db8-fb12-9bf3a35f7502" testName="AccelerationRequiresTwoSeparate750TickWindows" computerName="CAMEODEVPC" duration="00:00:00.0331310" startTime="2026-10-06T20:21:51.8194594+02:00" endTime="2026-10-06T20:21:51.8524931+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f95cf852-5f94-40a4-b65a-f677c11f31e3" />
+    <UnitTestResult executionId="2395cd1c-ed83-49bf-84fd-b22c2c2187bf" testId="3dcd5d8c-ac9a-1388-7aac-45aa10c9dbbf" testName="PublicDefenceArcRequiresARealGeometryDenominator" computerName="CAMEODEVPC" duration="00:00:00.0031110" startTime="2026-10-06T20:21:51.9623123+02:00" endTime="2026-10-06T20:21:51.9654234+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2395cd1c-ed83-49bf-84fd-b22c2c2187bf" />
+    <UnitTestResult executionId="74f0ee05-7de1-4101-9aa8-a016035a5d52" testId="3290000a-b77d-4336-3cf4-9cfb32800c74" testName="EncoderIsCanonicalAndMeasuredZeroRemainsPresent" computerName="CAMEODEVPC" duration="00:00:00.0155040" startTime="2026-10-06T20:21:51.9279288+02:00" endTime="2026-10-06T20:21:51.9434328+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="74f0ee05-7de1-4101-9aa8-a016035a5d52" />
+    <UnitTestResult executionId="6df0eb8f-ff84-498c-a8ab-234e0a3094aa" testId="fab4f754-4f7a-3bef-c047-d4c7b6a0050b" testName="PublicGeometryHasIndependentPathAndResourceExpectations" computerName="CAMEODEVPC" duration="00:00:00.0007530" startTime="2026-10-06T20:21:51.9654378+02:00" endTime="2026-10-06T20:21:51.9661903+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6df0eb8f-ff84-498c-a8ab-234e0a3094aa" />
+    <UnitTestResult executionId="03c6947c-94e1-4a56-b132-5df42012e2ac" testId="addf284d-2a62-2b4f-e34e-32449b7d7b46" testName="ArbitraryKeysCannotEnterTheVector(&quot;seat_1&quot;)" computerName="CAMEODEVPC" duration="00:00:00.0000770" startTime="2026-10-06T20:21:51.8626847+02:00" endTime="2026-10-06T20:21:51.8627611+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="03c6947c-94e1-4a56-b132-5df42012e2ac" />
+    <UnitTestResult executionId="9132f9ab-77b4-49dd-b38a-cc7d2bd0ec44" testId="9a52aa9a-e6a7-4f7d-344d-26f311ba5beb" testName="ShufflingGeometryDoesNotChangeTheCanonicalVector" computerName="CAMEODEVPC" duration="00:00:00.0020610" startTime="2026-10-06T20:21:51.9896087+02:00" endTime="2026-10-06T20:21:51.9916698+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9132f9ab-77b4-49dd-b38a-cc7d2bd0ec44" />
+    <UnitTestResult executionId="2dfd0a8d-e234-42a7-8c8a-81c13f2cdb49" testId="bdc65fb3-64af-a22d-12f0-b7b7ba20f14f" testName="PublicPoiAndCorridorGeometryHasKnownDistancesAndWidths" computerName="CAMEODEVPC" duration="00:00:00.0110400" startTime="2026-10-06T20:21:51.9662050+02:00" endTime="2026-10-06T20:21:51.9772449+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2dfd0a8d-e234-42a7-8c8a-81c13f2cdb49" />
+    <UnitTestResult executionId="5a3fce69-23a1-4fc8-a807-2e624f343e4a" testId="269714cc-2f49-627c-6c96-ed1eed21576b" testName="RecomputeCadenceIs250TicksAndHistoryIsBounded" computerName="CAMEODEVPC" duration="00:00:00.0028690" startTime="2026-10-06T20:21:51.9778321+02:00" endTime="2026-10-06T20:21:51.9807015+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="5a3fce69-23a1-4fc8-a807-2e624f343e4a" />
+    <UnitTestResult executionId="867bfec3-a90f-4427-bd47-aaf7ac804862" testId="64406197-996c-cae9-4b54-2bff81fa401b" testName="SchemaHasExactlyTheReviewedFields(Map,57)" computerName="CAMEODEVPC" duration="00:00:00.0044580" startTime="2026-10-06T20:21:51.9818744+02:00" endTime="2026-10-06T20:21:51.9863318+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="867bfec3-a90f-4427-bd47-aaf7ac804862" />
+    <UnitTestResult executionId="191778d3-8180-4439-b3ed-b964164d97c0" testId="319cf1ef-7b9b-66be-80c6-25ab423f221a" testName="ShortestTerrainCostCanChooseMoreStepsThanTheDirectEdge" computerName="CAMEODEVPC" duration="00:00:00.0028580" startTime="2026-10-06T20:21:51.9867323+02:00" endTime="2026-10-06T20:21:51.9895901+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="191778d3-8180-4439-b3ed-b964164d97c0" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="SchemaHasExactlyTheReviewedFields(Map,57)" storage="c:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\release\net10.0\context-core-tests.dll" id="64406197-996c-cae9-4b54-2bff81fa401b">
+      <Execution id="867bfec3-a90f-4427-bd47-aaf7ac804862" />
+      <TestMethod codeBase="C:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\Release\net10.0\context-core-tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.ContextFeaturesTest" name="SchemaHasExactlyTheReviewedFields(Map,57)" />
+    </UnitTest>
+    <UnitTest name="SquareRootAndBacklineProjectionStayExactWithoutFloatingPoint" storage="c:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\release\net10.0\context-core-tests.dll" id="c55aaa12-fed8-0f92-34e1-0b855213c3dc">
+      <Execution id="ebf10d84-74ed-4a9a-bc8f-2e783ffcb006" />
+      <TestMethod codeBase="C:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\Release\net10.0\context-core-tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.ContextFeaturesTest" name="SquareRootAndBacklineProjectionStayExactWithoutFloatingPoint" />
+    </UnitTest>
+    <UnitTest name="UnreachableAndPrivateStartAssignmentsStayMissing" storage="c:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\release\net10.0\context-core-tests.dll" id="b196e15a-315f-0b2c-93c5-be709f346cad">
+      <Execution id="e7676cb9-0366-4550-a8d5-a13b6299e381" />
+      <TestMethod codeBase="C:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\Release\net10.0\context-core-tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.ContextFeaturesTest" name="UnreachableAndPrivateStartAssignmentsStayMissing" />
+    </UnitTest>
+    <UnitTest name="RecomputeCadenceIs250TicksAndHistoryIsBounded" storage="c:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\release\net10.0\context-core-tests.dll" id="269714cc-2f49-627c-6c96-ed1eed21576b">
+      <Execution id="5a3fce69-23a1-4fc8-a807-2e624f343e4a" />
+      <TestMethod codeBase="C:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\Release\net10.0\context-core-tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.ContextFeaturesTest" name="RecomputeCadenceIs250TicksAndHistoryIsBounded" />
+    </UnitTest>
+    <UnitTest name="EncoderIsCanonicalAndMeasuredZeroRemainsPresent" storage="c:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\release\net10.0\context-core-tests.dll" id="3290000a-b77d-4336-3cf4-9cfb32800c74">
+      <Execution id="74f0ee05-7de1-4101-9aa8-a016035a5d52" />
+      <TestMethod codeBase="C:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\Release\net10.0\context-core-tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.ContextFeaturesTest" name="EncoderIsCanonicalAndMeasuredZeroRemainsPresent" />
+    </UnitTest>
+    <UnitTest name="MapAggregatesClampOnlyAfterDivision" storage="c:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\release\net10.0\context-core-tests.dll" id="8eac79cc-37e1-6e3b-b3b4-d82f1251fa66">
+      <Execution id="68df4f2f-86d6-475f-9069-c121659140d5" />
+      <TestMethod codeBase="C:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\Release\net10.0\context-core-tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.ContextFeaturesTest" name="MapAggregatesClampOnlyAfterDivision" />
+    </UnitTest>
+    <UnitTest name="LargestNumbersFitWithinTheWireBudget(Map)" storage="c:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\release\net10.0\context-core-tests.dll" id="a8816bfc-1a14-5378-9555-1ecf208c0bb1">
+      <Execution id="28fcb2d5-278d-4044-ade3-38ee4455db97" />
+      <TestMethod codeBase="C:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\Release\net10.0\context-core-tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.ContextFeaturesTest" name="LargestNumbersFitWithinTheWireBudget(Map)" />
+    </UnitTest>
+    <UnitTest name="LargestNumbersFitWithinTheWireBudget(Opponent)" storage="c:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\release\net10.0\context-core-tests.dll" id="c43bf1f4-9b45-f16e-8084-9cf2c848e351">
+      <Execution id="79e63825-dfa6-449c-9477-0a16c5b32ed5" />
+      <TestMethod codeBase="C:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\Release\net10.0\context-core-tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.ContextFeaturesTest" name="LargestNumbersFitWithinTheWireBudget(Opponent)" />
+    </UnitTest>
+    <UnitTest name="IntegerRateDoesNotDependOnTickOriginOrEnumeration" storage="c:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\release\net10.0\context-core-tests.dll" id="873c0c0a-7a91-220c-613d-e97b15a9b3c3">
+      <Execution id="398be7e1-b0ed-4545-a200-1b576f75492c" />
+      <TestMethod codeBase="C:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\Release\net10.0\context-core-tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.ContextFeaturesTest" name="IntegerRateDoesNotDependOnTickOriginOrEnumeration" />
+    </UnitTest>
+    <UnitTest name="MalformedGeometryCannotSlipIntoPathCalculations" storage="c:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\release\net10.0\context-core-tests.dll" id="32656b7f-5100-4356-65b2-284c5df19071">
+      <Execution id="87dfbed9-eb3f-449b-be4c-5cb8cc08707e" />
+      <TestMethod codeBase="C:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\Release\net10.0\context-core-tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.ContextFeaturesTest" name="MalformedGeometryCannotSlipIntoPathCalculations" />
+    </UnitTest>
+    <UnitTest name="VertexCutsMatchBruteForceRemovalAcrossEverySmallGraph" storage="c:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\release\net10.0\context-core-tests.dll" id="061e4155-7c87-0f78-0efa-b99144d3572e">
+      <Execution id="a702c01a-6b2d-4675-a4f9-5df4ac6bf574" />
+      <TestMethod codeBase="C:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\Release\net10.0\context-core-tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.ContextFeaturesTest" name="VertexCutsMatchBruteForceRemovalAcrossEverySmallGraph" />
+    </UnitTest>
+    <UnitTest name="EnemyAndAllyAssociationsAreExclusiveAndNeverIncludeOwnStart" storage="c:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\release\net10.0\context-core-tests.dll" id="38df9480-151f-5715-58fd-df545fa26de6">
+      <Execution id="1a35c613-cdb9-4e65-8d0a-b28fef8ac887" />
+      <TestMethod codeBase="C:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\Release\net10.0\context-core-tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.ContextFeaturesTest" name="EnemyAndAllyAssociationsAreExclusiveAndNeverIncludeOwnStart" />
+    </UnitTest>
+    <UnitTest name="CensusCopiesItsRolesAndUsesUnclampedDenominatorForShares" storage="c:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\release\net10.0\context-core-tests.dll" id="9148a864-b9b3-96b7-5f22-eabab68bbd90">
+      <Execution id="4516b8b4-35db-40b6-bae2-16dfbb695012" />
+      <TestMethod codeBase="C:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\Release\net10.0\context-core-tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.ContextFeaturesTest" name="CensusCopiesItsRolesAndUsesUnclampedDenominatorForShares" />
+    </UnitTest>
+    <UnitTest name="ArmyRateDoesNotFlattenWhenRoleTotalsExceedInt32" storage="c:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\release\net10.0\context-core-tests.dll" id="0f834a77-2282-e575-1d83-1543b0298aa7">
+      <Execution id="9c5e4b5c-5c54-40e0-b0bf-8f74dfc2a740" />
+      <TestMethod codeBase="C:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\Release\net10.0\context-core-tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.ContextFeaturesTest" name="ArmyRateDoesNotFlattenWhenRoleTotalsExceedInt32" />
+    </UnitTest>
+    <UnitTest name="CoverageAndRecencyReduceConfidenceWithoutRemovingHiddenArmy" storage="c:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\release\net10.0\context-core-tests.dll" id="a027a3a7-211a-aaf4-fecd-92449a42a8cf">
+      <Execution id="b39116a6-9305-4aad-9e83-cddfef84ace6" />
+      <TestMethod codeBase="C:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\Release\net10.0\context-core-tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.ContextFeaturesTest" name="CoverageAndRecencyReduceConfidenceWithoutRemovingHiddenArmy" />
+    </UnitTest>
+    <UnitTest name="ArbitraryKeysCannotEnterTheVector(&quot;map_uid&quot;)" storage="c:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\release\net10.0\context-core-tests.dll" id="d4205051-be2e-d5f1-68bb-811c8a1994c8">
+      <Execution id="3405c12b-8147-41c4-b7c5-24f3ddf10505" />
+      <TestMethod codeBase="C:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\Release\net10.0\context-core-tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.ContextFeaturesTest" name="ArbitraryKeysCannotEnterTheVector(&quot;map_uid&quot;)" />
+    </UnitTest>
+    <UnitTest name="SamplingFloorCannotBeSatisfiedByRepeatedRecords" storage="c:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\release\net10.0\context-core-tests.dll" id="2e00b597-f216-d678-153d-51ed3121c999">
+      <Execution id="8bf1cb17-f324-4423-819f-ce0894f48903" />
+      <TestMethod codeBase="C:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\Release\net10.0\context-core-tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.ContextFeaturesTest" name="SamplingFloorCannotBeSatisfiedByRepeatedRecords" />
+    </UnitTest>
+    <UnitTest name="PublicGeometryHasIndependentPathAndResourceExpectations" storage="c:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\release\net10.0\context-core-tests.dll" id="fab4f754-4f7a-3bef-c047-d4c7b6a0050b">
+      <Execution id="6df0eb8f-ff84-498c-a8ab-234e0a3094aa" />
+      <TestMethod codeBase="C:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\Release\net10.0\context-core-tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.ContextFeaturesTest" name="PublicGeometryHasIndependentPathAndResourceExpectations" />
+    </UnitTest>
+    <UnitTest name="ShortestTerrainCostCanChooseMoreStepsThanTheDirectEdge" storage="c:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\release\net10.0\context-core-tests.dll" id="319cf1ef-7b9b-66be-80c6-25ab423f221a">
+      <Execution id="191778d3-8180-4439-b3ed-b964164d97c0" />
+      <TestMethod codeBase="C:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\Release\net10.0\context-core-tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.ContextFeaturesTest" name="ShortestTerrainCostCanChooseMoreStepsThanTheDirectEdge" />
+    </UnitTest>
+    <UnitTest name="PublicDefenceArcRequiresARealGeometryDenominator" storage="c:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\release\net10.0\context-core-tests.dll" id="3dcd5d8c-ac9a-1388-7aac-45aa10c9dbbf">
+      <Execution id="2395cd1c-ed83-49bf-84fd-b22c2c2187bf" />
+      <TestMethod codeBase="C:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\Release\net10.0\context-core-tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.ContextFeaturesTest" name="PublicDefenceArcRequiresARealGeometryDenominator" />
+    </UnitTest>
+    <UnitTest name="SymmetricOwnStartSwapPreservesRelativeDistances" storage="c:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\release\net10.0\context-core-tests.dll" id="c0ca81fe-b642-f8b9-1ae2-ad882c8452d7">
+      <Execution id="8fbfcb38-4af8-49b1-bce0-0dec9b6da5f9" />
+      <TestMethod codeBase="C:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\Release\net10.0\context-core-tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.ContextFeaturesTest" name="SymmetricOwnStartSwapPreservesRelativeDistances" />
+    </UnitTest>
+    <UnitTest name="ArbitraryKeysCannotEnterTheVector(&quot;PrivatePlayerName&quot;)" storage="c:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\release\net10.0\context-core-tests.dll" id="43f450b6-d650-8f5f-eafc-13a3f1188309">
+      <Execution id="04b34938-a9bf-4147-b93a-cca952ece2a1" />
+      <TestMethod codeBase="C:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\Release\net10.0\context-core-tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.ContextFeaturesTest" name="ArbitraryKeysCannotEnterTheVector(&quot;PrivatePlayerName&quot;)" />
+    </UnitTest>
+    <UnitTest name="PublicPoiAndCorridorGeometryHasKnownDistancesAndWidths" storage="c:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\release\net10.0\context-core-tests.dll" id="bdc65fb3-64af-a22d-12f0-b7b7ba20f14f">
+      <Execution id="2dfd0a8d-e234-42a7-8c8a-81c13f2cdb49" />
+      <TestMethod codeBase="C:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\Release\net10.0\context-core-tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.ContextFeaturesTest" name="PublicPoiAndCorridorGeometryHasKnownDistancesAndWidths" />
+    </UnitTest>
+    <UnitTest name="ArbitraryKeysCannotEnterTheVector(&quot;x&quot;)" storage="c:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\release\net10.0\context-core-tests.dll" id="bd6ef144-e7d6-c2d7-0e88-f7233d2022a2">
+      <Execution id="653a1d7d-2071-468c-b459-1f32ec8af1a5" />
+      <TestMethod codeBase="C:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\Release\net10.0\context-core-tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.ContextFeaturesTest" name="ArbitraryKeysCannotEnterTheVector(&quot;x&quot;)" />
+    </UnitTest>
+    <UnitTest name="PublicShapeMeasurementsDoNotCountUnreachableResourceAsNearby" storage="c:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\release\net10.0\context-core-tests.dll" id="8bb2934f-fca3-0abb-fc36-de87eab3fdea">
+      <Execution id="0fec9508-65e3-47fb-a790-ea91608c6356" />
+      <TestMethod codeBase="C:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\Release\net10.0\context-core-tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.ContextFeaturesTest" name="PublicShapeMeasurementsDoNotCountUnreachableResourceAsNearby" />
+    </UnitTest>
+    <UnitTest name="SchemaHasExactlyTheReviewedFields(Opponent,61)" storage="c:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\release\net10.0\context-core-tests.dll" id="88eaca36-cf51-1593-dbea-3c730f71a1eb">
+      <Execution id="4706a58f-43fb-464b-af6a-6957e7e7e4fe" />
+      <TestMethod codeBase="C:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\Release\net10.0\context-core-tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.ContextFeaturesTest" name="SchemaHasExactlyTheReviewedFields(Opponent,61)" />
+    </UnitTest>
+    <UnitTest name="ZeroCoverageAndUnknownEventsNeverBecomeConfidentZero" storage="c:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\release\net10.0\context-core-tests.dll" id="5c7ca386-c2ca-b855-6688-3c46fc5364ad">
+      <Execution id="ca06477c-df3f-4628-a9d8-dc6e650b1343" />
+      <TestMethod codeBase="C:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\Release\net10.0\context-core-tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.ContextFeaturesTest" name="ZeroCoverageAndUnknownEventsNeverBecomeConfidentZero" />
+    </UnitTest>
+    <UnitTest name="TwoIndependentCorridorsRequireTwoInteriorCuts" storage="c:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\release\net10.0\context-core-tests.dll" id="06c2af2b-9825-909f-7c20-c9f2cee68a5e">
+      <Execution id="425068d8-ab06-4927-a1c7-ce7f03ddf6e5" />
+      <TestMethod codeBase="C:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\Release\net10.0\context-core-tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.ContextFeaturesTest" name="TwoIndependentCorridorsRequireTwoInteriorCuts" />
+    </UnitTest>
+    <UnitTest name="AccelerationRequiresTwoSeparate750TickWindows" storage="c:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\release\net10.0\context-core-tests.dll" id="cd1c7c21-8ab4-8db8-fb12-9bf3a35f7502">
+      <Execution id="f95cf852-5f94-40a4-b65a-f677c11f31e3" />
+      <TestMethod codeBase="C:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\Release\net10.0\context-core-tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.ContextFeaturesTest" name="AccelerationRequiresTwoSeparate750TickWindows" />
+    </UnitTest>
+    <UnitTest name="VertexCutAgreesWithRemovingTheOnlyInteriorCell" storage="c:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\release\net10.0\context-core-tests.dll" id="097bbc43-fc90-54ff-b22c-78e10f8c77e3">
+      <Execution id="68dd61c1-d97b-45b2-82fa-1f4f8e25905c" />
+      <TestMethod codeBase="C:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\Release\net10.0\context-core-tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.ContextFeaturesTest" name="VertexCutAgreesWithRemovingTheOnlyInteriorCell" />
+    </UnitTest>
+    <UnitTest name="ArbitraryKeysCannotEnterTheVector(&quot;player_name&quot;)" storage="c:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\release\net10.0\context-core-tests.dll" id="ab4efdc5-fce0-b4de-343c-dfdf1d826a82">
+      <Execution id="7e6ba9db-0000-45f1-94a1-8ba92c4ba667" />
+      <TestMethod codeBase="C:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\Release\net10.0\context-core-tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.ContextFeaturesTest" name="ArbitraryKeysCannotEnterTheVector(&quot;player_name&quot;)" />
+    </UnitTest>
+    <UnitTest name="IslandNavalRouteCanExistWhenNoGroundRouteExists" storage="c:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\release\net10.0\context-core-tests.dll" id="761927ea-5202-b5f9-ae1e-68721c779066">
+      <Execution id="d7a7e11e-5247-44d1-af84-0b44e2dde67d" />
+      <TestMethod codeBase="C:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\Release\net10.0\context-core-tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.ContextFeaturesTest" name="IslandNavalRouteCanExistWhenNoGroundRouteExists" />
+    </UnitTest>
+    <UnitTest name="ExtremeArithmeticSaturatesAfterExactDivision" storage="c:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\release\net10.0\context-core-tests.dll" id="795077aa-9df3-a7dc-d380-1ad8e353d1b0">
+      <Execution id="5c161779-0270-4689-8975-7fb3f19c8694" />
+      <TestMethod codeBase="C:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\Release\net10.0\context-core-tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.ContextFeaturesTest" name="ExtremeArithmeticSaturatesAfterExactDivision" />
+    </UnitTest>
+    <UnitTest name="ShufflingGeometryDoesNotChangeTheCanonicalVector" storage="c:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\release\net10.0\context-core-tests.dll" id="9a52aa9a-e6a7-4f7d-344d-26f311ba5beb">
+      <Execution id="9132f9ab-77b4-49dd-b38a-cc7d2bd0ec44" />
+      <TestMethod codeBase="C:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\Release\net10.0\context-core-tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.ContextFeaturesTest" name="ShufflingGeometryDoesNotChangeTheCanonicalVector" />
+    </UnitTest>
+    <UnitTest name="MissingCannotCarryStaleValueOrConfidence" storage="c:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\release\net10.0\context-core-tests.dll" id="26f74356-f850-ace5-2359-ba6571e4fc49">
+      <Execution id="5853833a-ef9d-4fb1-95ca-1492fcff7343" />
+      <TestMethod codeBase="C:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\Release\net10.0\context-core-tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.ContextFeaturesTest" name="MissingCannotCarryStaleValueOrConfidence" />
+    </UnitTest>
+    <UnitTest name="DuplicatesAndInvalidConfidenceAreRejected" storage="c:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\release\net10.0\context-core-tests.dll" id="37f6bbfa-492a-5804-54a2-db157837afc5">
+      <Execution id="92834f75-af4a-4a37-9b3d-5e49b81a7726" />
+      <TestMethod codeBase="C:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\Release\net10.0\context-core-tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.ContextFeaturesTest" name="DuplicatesAndInvalidConfidenceAreRejected" />
+    </UnitTest>
+    <UnitTest name="ArbitraryKeysCannotEnterTheVector(&quot;seat_1&quot;)" storage="c:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\release\net10.0\context-core-tests.dll" id="addf284d-2a62-2b4f-e34e-32449b7d7b46">
+      <Execution id="03c6947c-94e1-4a56-b132-5df42012e2ac" />
+      <TestMethod codeBase="C:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\Release\net10.0\context-core-tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.ContextFeaturesTest" name="ArbitraryKeysCannotEnterTheVector(&quot;seat_1&quot;)" />
+    </UnitTest>
+    <UnitTest name="DirectedComponentsDoNotDependOnTheFirstSeed" storage="c:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\release\net10.0\context-core-tests.dll" id="747ad89d-da09-b558-3914-9e2c1bdb8123">
+      <Execution id="4ed05b52-4d32-4afc-9ecd-13f85cd229ea" />
+      <TestMethod codeBase="C:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\Release\net10.0\context-core-tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.ContextFeaturesTest" name="DirectedComponentsDoNotDependOnTheFirstSeed" />
+    </UnitTest>
+    <UnitTest name="EntropyIsTrueNormalizedIntegerEntropy" storage="c:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\release\net10.0\context-core-tests.dll" id="5a589ad3-4ae9-47b7-770d-29d7f1e3c192">
+      <Execution id="480e6b35-29d5-4f7f-b03f-703cac5335f8" />
+      <TestMethod codeBase="C:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\Release\net10.0\context-core-tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.ContextFeaturesTest" name="EntropyIsTrueNormalizedIntegerEntropy" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="88eaca36-cf51-1593-dbea-3c730f71a1eb" executionId="4706a58f-43fb-464b-af6a-6957e7e7e4fe" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="26f74356-f850-ace5-2359-ba6571e4fc49" executionId="5853833a-ef9d-4fb1-95ca-1492fcff7343" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b196e15a-315f-0b2c-93c5-be709f346cad" executionId="e7676cb9-0366-4550-a8d5-a13b6299e381" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a8816bfc-1a14-5378-9555-1ecf208c0bb1" executionId="28fcb2d5-278d-4044-ade3-38ee4455db97" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="d4205051-be2e-d5f1-68bb-811c8a1994c8" executionId="3405c12b-8147-41c4-b7c5-24f3ddf10505" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="32656b7f-5100-4356-65b2-284c5df19071" executionId="87dfbed9-eb3f-449b-be4c-5cb8cc08707e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="9148a864-b9b3-96b7-5f22-eabab68bbd90" executionId="4516b8b4-35db-40b6-bae2-16dfbb695012" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="061e4155-7c87-0f78-0efa-b99144d3572e" executionId="a702c01a-6b2d-4675-a4f9-5df4ac6bf574" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c43bf1f4-9b45-f16e-8084-9cf2c848e351" executionId="79e63825-dfa6-449c-9477-0a16c5b32ed5" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="bd6ef144-e7d6-c2d7-0e88-f7233d2022a2" executionId="653a1d7d-2071-468c-b459-1f32ec8af1a5" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c0ca81fe-b642-f8b9-1ae2-ad882c8452d7" executionId="8fbfcb38-4af8-49b1-bce0-0dec9b6da5f9" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="8eac79cc-37e1-6e3b-b3b4-d82f1251fa66" executionId="68df4f2f-86d6-475f-9069-c121659140d5" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="38df9480-151f-5715-58fd-df545fa26de6" executionId="1a35c613-cdb9-4e65-8d0a-b28fef8ac887" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a027a3a7-211a-aaf4-fecd-92449a42a8cf" executionId="b39116a6-9305-4aad-9e83-cddfef84ace6" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="873c0c0a-7a91-220c-613d-e97b15a9b3c3" executionId="398be7e1-b0ed-4545-a200-1b576f75492c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="43f450b6-d650-8f5f-eafc-13a3f1188309" executionId="04b34938-a9bf-4147-b93a-cca952ece2a1" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="37f6bbfa-492a-5804-54a2-db157837afc5" executionId="92834f75-af4a-4a37-9b3d-5e49b81a7726" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="0f834a77-2282-e575-1d83-1543b0298aa7" executionId="9c5e4b5c-5c54-40e0-b0bf-8f74dfc2a740" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="5c7ca386-c2ca-b855-6688-3c46fc5364ad" executionId="ca06477c-df3f-4628-a9d8-dc6e650b1343" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="06c2af2b-9825-909f-7c20-c9f2cee68a5e" executionId="425068d8-ab06-4927-a1c7-ce7f03ddf6e5" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c55aaa12-fed8-0f92-34e1-0b855213c3dc" executionId="ebf10d84-74ed-4a9a-bc8f-2e783ffcb006" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="795077aa-9df3-a7dc-d380-1ad8e353d1b0" executionId="5c161779-0270-4689-8975-7fb3f19c8694" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="2e00b597-f216-d678-153d-51ed3121c999" executionId="8bf1cb17-f324-4423-819f-ce0894f48903" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="8bb2934f-fca3-0abb-fc36-de87eab3fdea" executionId="0fec9508-65e3-47fb-a790-ea91608c6356" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="5a589ad3-4ae9-47b7-770d-29d7f1e3c192" executionId="480e6b35-29d5-4f7f-b03f-703cac5335f8" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="747ad89d-da09-b558-3914-9e2c1bdb8123" executionId="4ed05b52-4d32-4afc-9ecd-13f85cd229ea" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="097bbc43-fc90-54ff-b22c-78e10f8c77e3" executionId="68dd61c1-d97b-45b2-82fa-1f4f8e25905c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ab4efdc5-fce0-b4de-343c-dfdf1d826a82" executionId="7e6ba9db-0000-45f1-94a1-8ba92c4ba667" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="761927ea-5202-b5f9-ae1e-68721c779066" executionId="d7a7e11e-5247-44d1-af84-0b44e2dde67d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="cd1c7c21-8ab4-8db8-fb12-9bf3a35f7502" executionId="f95cf852-5f94-40a4-b65a-f677c11f31e3" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="3dcd5d8c-ac9a-1388-7aac-45aa10c9dbbf" executionId="2395cd1c-ed83-49bf-84fd-b22c2c2187bf" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="3290000a-b77d-4336-3cf4-9cfb32800c74" executionId="74f0ee05-7de1-4101-9aa8-a016035a5d52" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="fab4f754-4f7a-3bef-c047-d4c7b6a0050b" executionId="6df0eb8f-ff84-498c-a8ab-234e0a3094aa" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="addf284d-2a62-2b4f-e34e-32449b7d7b46" executionId="03c6947c-94e1-4a56-b132-5df42012e2ac" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="9a52aa9a-e6a7-4f7d-344d-26f311ba5beb" executionId="9132f9ab-77b4-49dd-b38a-cc7d2bd0ec44" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="bdc65fb3-64af-a22d-12f0-b7b7ba20f14f" executionId="2dfd0a8d-e234-42a7-8c8a-81c13f2cdb49" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="269714cc-2f49-627c-6c96-ed1eed21576b" executionId="5a3fce69-23a1-4fc8-a807-2e624f343e4a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="64406197-996c-cae9-4b54-2bff81fa401b" executionId="867bfec3-a90f-4427-bd47-aaf7ac804862" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="319cf1ef-7b9b-66be-80c6-25ab423f221a" executionId="191778d3-8180-4439-b3ed-b964164d97c0" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="39" executed="39" passed="39" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>NUnit Adapter 4.6.0.0: Test execution started&#xD;
+Running all tests in C:\cameo-wt\codex-context-providers\review-results\context-core-tests\bin\Release\net10.0\context-core-tests.dll&#xD;
+   NUnit3TestExecutor discovered 39 of 39 NUnit test cases using Current Discovery mode, Non-Explicit run&#xD;
+NUnit Adapter 4.6.0.0: Test execution complete&#xD;
+</StdOut>
+    </Output>
+  </ResultSummary>
+</TestRun>
