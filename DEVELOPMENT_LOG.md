@@ -21331,3 +21331,28 @@ Luna-granted admission window (RAM). No game launched. Overlaps
 codex/01a12ecb-naxis-slave-idle@79fa19b05 in the same file (different
 hunks; master already carries the equivalent SetMasterDock/ClearMasterBinding
 changes) — rebase onto post-wave master before landing.
+
+### Addendum — why it worked in release playtest-20260709 (lead, 2026-10-12)
+
+The engine interaction behind BUG-NAXIS-UNBOUND-SLAVE-IDLE is the **Harvester.OnDockCompleted
+guard + FindAndDeliverResources interrupt** interaction. Engine 35b13f077b (2026-07-21, "Make
+chrono miners remember resource fields") restored the guard in `Harvester.OnDockCompleted`: a new
+`FindAndDeliverResources` is queued only if the current activity is null, or is not FAR and has no
+`NextActivity` (be9c3d6674, 2024, had commented it out). `FindAndDeliverResources.Tick` stops itself
+after the first delivered load whenever a `NextActivity` exists. In the release every dock completion
+re-queued harvesting, so the bare `MoveToDock` that `SlaveMinerSpawnerSlave.MovingToDock` appended for
+unbound slaves was harmless. With the guard back, that stray `MoveToDock` is the NextActivity that stops
+the harvest and suppresses the re-queue, so the slave idles. Mod YAML and mod C# did not change since
+the release; the engine did.
+
+**Audit of other post-dock activity queueing (2026-10-12).** Nothing else is exposed:
+`ChronoResourceTeleport` queues `[MoveToDock, FindAndDeliverResources]` (a harvest follows);
+`CarryableHarvester` and `ChronoResourceDelivery.MovingToDock` queue no activities; the CA and Frans
+harvester bot modules issue unqueued `ForceDock` orders (cancel, then a lone `MoveToDock`, which the
+guard handles); the slave's bound path appends a guarded `[MoveToDock, FindAndDeliverResources]` pair.
+The only mod code that queued a harvest-less dock trip was the unbound slave branch.
+
+**Tests added** (`SlaveMinerUnboundIdleTest`): a model of the guard and the interrupt shows a queued
+next activity at dock completion idles the slave without the fix and keeps it harvesting with it;
+source contracts pin the engine guard and interrupt text (so an engine bump re-opens this) and the
+single guarded `new MoveToDock(` in the slave. Not yet built or run after this addendum.

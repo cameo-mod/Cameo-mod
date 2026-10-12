@@ -217,8 +217,10 @@ namespace OpenRA.Mods.Cameo.Traits
 			}
 
 			// A slave without a master dock needs nothing queued: the engine's own MoveToDock
-			// already drives this trip, and appending another bare MoveToDock with no harvest
-			// after it leaves the slave idle once FindAndDeliverResources stops itself.
+			// already drives this trip. A bare MoveToDock appended here becomes the NextActivity of
+			// the running FindAndDeliverResources, which then stops itself after the first delivery,
+			// and Harvester.OnDockCompleted (engine 35b13f077b) only re-queues a harvest when nothing
+			// else is queued behind the current activity, so the slave idles.
 		}
 
 		void INotifyDockClientMoving.MovementCancelled(Actor self) { Reset(self); }

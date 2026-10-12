@@ -24,6 +24,12 @@
     <None Include="../OpenRA.Mods.Cameo/Traits/SlaveMinerSpawnerMaster.cs"
           Link="source/SlaveMinerSpawnerMaster.cs"
           CopyToOutputDirectory="Always" />
+    <None Include="../engine/OpenRA.Mods.Common/Traits/Harvester.cs"
+          Link="source/engine_Harvester.cs"
+          CopyToOutputDirectory="Always" />
+    <None Include="../engine/OpenRA.Mods.Common/Activities/FindAndDeliverResources.cs"
+          Link="source/engine_FindAndDeliverResources.cs"
+          CopyToOutputDirectory="Always" />
   </ItemGroup>
   <!-- CannonAP generated-heaviness fixtures, copied next to the test DLL and
        referenced via a relative output path (no absolute machine paths). -->
