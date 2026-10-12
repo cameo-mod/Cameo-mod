@@ -8,6 +8,7 @@
  */
 #endregion
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using OpenRA.Mods.Common.Traits;
@@ -42,6 +43,15 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 		internal SquadCA Parent;
 		// Default-off observation bookkeeping; registration/intent is not progress.
 		internal bool M13ObservedProgress;
+
+		// M13 save/restore: the wave identity allocated at RegisterNewSquad (0 = none),
+		// the dispatch-intent bookkeeping (tick + wave snapshot, -1 tick = no intent),
+		// the protection-squad membership flag, and a deserialization-corrupt marker.
+		internal long M13WaveId;
+		internal int M13IntentTick = -1;
+		internal long M13IntentWave;
+		internal bool M13Response;
+		internal bool M13Corrupt;
 
 		// 6g (CN A3): rules-derived BotTargetTags this squad prefers when picking
 		// targets (e.g. air raiders prefer artillery). Empty = no preference.
@@ -195,6 +205,19 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			if (Target.Type == TargetType.Actor)
 				nodes.Add(new MiniYamlNode("Target", FieldSaver.FormatValue(Target.Actor.ActorID)));
 
+			if (M13WaveId > 0)
+				nodes.Add(new MiniYamlNode("M13Wave", FieldSaver.FormatValue(M13WaveId)));
+			if (M13ObservedProgress)
+				nodes.Add(new MiniYamlNode("M13Observed", FieldSaver.FormatValue(true)));
+			if (M13IntentTick >= 0)
+			{
+				nodes.Add(new MiniYamlNode("M13IntentTick", FieldSaver.FormatValue(M13IntentTick)));
+				nodes.Add(new MiniYamlNode("M13IntentWave", FieldSaver.FormatValue(M13IntentWave)));
+			}
+
+			if (M13Response)
+				nodes.Add(new MiniYamlNode("M13Response", FieldSaver.FormatValue(true)));
+
 			return new MiniYaml("", nodes);
 		}
 
@@ -230,6 +253,31 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 					squad.Units.Add(new UnitWposWrapper(a));
 				}
 			}
+
+			// M13 nodes absent in legacy saves parse as defaults; malformed values mark
+			// the squad corrupt so the manager adapter leaves restored evidence UNKNOWN.
+			try
+			{
+				var waveNode = yaml.NodeWithKeyOrDefault("M13Wave");
+				if (waveNode != null)
+					squad.M13WaveId = FieldLoader.GetValue<long>("M13Wave", waveNode.Value.Value);
+				var observedNode = yaml.NodeWithKeyOrDefault("M13Observed");
+				if (observedNode != null)
+					squad.M13ObservedProgress = FieldLoader.GetValue<bool>("M13Observed", observedNode.Value.Value);
+				var intentTickNode = yaml.NodeWithKeyOrDefault("M13IntentTick");
+				if (intentTickNode != null)
+					squad.M13IntentTick = FieldLoader.GetValue<int>("M13IntentTick", intentTickNode.Value.Value);
+				var intentWaveNode = yaml.NodeWithKeyOrDefault("M13IntentWave");
+				if (intentWaveNode != null)
+					squad.M13IntentWave = FieldLoader.GetValue<long>("M13IntentWave", intentWaveNode.Value.Value);
+				var responseNode = yaml.NodeWithKeyOrDefault("M13Response");
+				if (responseNode != null)
+					squad.M13Response = FieldLoader.GetValue<bool>("M13Response", responseNode.Value.Value);
+			}
+			catch (InvalidCastException) { squad.M13Corrupt = true; }
+			catch (FormatException) { squad.M13Corrupt = true; }
+			catch (OverflowException) { squad.M13Corrupt = true; }
+			catch (YamlException) { squad.M13Corrupt = true; }
 
 			return squad;
 		}

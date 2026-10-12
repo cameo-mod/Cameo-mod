@@ -1,3 +1,26 @@
+# 2026-10-12 — Devin: M13 manager save/restore adapter (branch `devin/m13-liveness`)
+
+*Devin-Developer*, IMPL-M13-LIVENESS save/restore gap from `docs/design/M13_RUNTIME_WIRING.md`;
+Boss's tempo increment (`codex/m13-tempo-boss` `7a74bb8b1`/`b181b63bb`/`76203c856` + merge `cde0fbc39`) is the base — untouched.
+
+- **Squad-bound bookkeeping.** `livenessWaves`/`m13Intents` dictionaries replaced by serialized squad
+  fields: `M13WaveId`, `M13ObservedProgress`, `M13IntentTick`/`M13IntentWave`, `M13Response`,
+  `M13Corrupt`. `m13IntentSquad` keeps the pending wave's subject alive across squad removal.
+- **`M13Player` node** on the first armed manager: seat identity, wave counter, base-danger window,
+  full clock + budget transports, sorted cooldowns. Response binding (channel/request/episode) rides
+  the claimant manager's own nodes. No emission while `EvidenceComplete` is false.
+- **Fail-closed restore.** `M13PlayerStateCA.TryRestore` composes both transports + counter/identity/
+  window checks — one-shot; missing/corrupt → UNKNOWN, exactly the old unconditional invalidate.
+  `RestoreSeen` marks a load that never saw a record (legacy save, disabled owner).
+- **Cross-manager validation at first armed tick** (`M13RestoreMembershipCA.Evaluate`): wave-counter
+  dominance, ≤1 intent flag equal to the pending wave, observed requires wave, ≤1 protection binding
+  reproducing `ActiveKey` via `TryKey` with matching `Owner`. Dead pending intent resolves once as a
+  dispatch failure — no renewal, no invented membership. Any other inconsistency → global UNKNOWN.
+- **Tests:** `M13RestoreAdapterTest` — round-trip, corrupt/half records, dead-intent resolution,
+  consistent acceptance, 10 inconsistency classes. Focused 39/39 pass (new + clock-restore suite).
+  Release build 0 errors/0 warnings. No loaded-world save cycle, boot gate, parity or 3v3 claimed;
+  A/B reservation untouched (no game launches).
+
 # 2026-10-12 — Devin: CRAWL-SAFETY — scout/escort/defence/army-parity gates on the optional crawl link (branch `devin/crawl-safety`)
 
 *Devin-Developer*, task 01a12ecb (FINDINGS_2026-10-12_playtest_forensics.md §S3; maintainer
