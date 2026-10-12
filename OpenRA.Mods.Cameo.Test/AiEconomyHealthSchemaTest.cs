@@ -102,8 +102,8 @@ namespace OpenRA.Mods.Cameo.Test
 			// The consumer UNKNOWNs unless the whole tuple holds: dropped=0 on every
 			// record, queues_complete=true on pulses, complete=true on the end record.
 			var state = new AiEconomyHealthState();
-			state.Observe(0, Array.Empty<EconomyQueueObservation>());
-			state.Observe(50, Array.Empty<EconomyQueueObservation>());
+			for (var t = 0; t <= 50; t++)
+				state.Observe(t, Array.Empty<EconomyQueueObservation>());
 			Assert.That(state.Complete, Is.True);
 			using var healthStream = new MemoryStream();
 			using var rawStream = new MemoryStream();
