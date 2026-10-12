@@ -9,20 +9,38 @@ approved Route A' driver set bb46784b/0cdd46eb/a7cef93c/8fff80a7 stays byte-froz
   closure, capturer pct<=0 hoist) + ENGINEER-CAP-10PCT `8495901e5` (flat 10% cap, known-target
   allowance, completion pacing). Devin-Reviewer APPROVE receipt
   `REVIEW_2026-10-12_aa_gate_engineer_cap_devin.md`; wave build clean, Cameo.Test 1932/1932.
-- **Pending merge:** `claude/context-providers-restack` `2c1ba5754` — 9 files, pure telemetry
-  primitives (ContextFeatureEncoding / OpponentFeatureWindow / PublicMapFeatureGraph /
-  IBotMapFeatures), no gameplay consumer; trial merge clean; Devin-Reviewer verdict pending.
+- **Merged (Lead ruling IN):** `claude/context-providers-restack` `2c1ba5754` — 9 files, pure
+  telemetry primitives, no gameplay consumer (Devin-Reviewer APPROVE). `devin/p3-0-crawl-safety-switch`
+  `783c9b98f` — BY_crawl_safety default-off draft + M13 episode-less request pin (Sol APPROVE).
+  `devin/bz-production-scaling` `924aaae05` — BZ_production_scaling default-off capability arm
+  (Devin-Reviewer APPROVE, receipt REVIEW_2026-10-12_bz_production_scaling_devin.md).
+  Merge conflicts were mechanical unions only: DEVELOPMENT_LOG appends, increment_switches.yaml
+  group additions, restraint-budget pin {restraint 30, capability 25, neutral 10}.
+- **test(regreen) on branch:** `91965acbe` — pre-existing master drift: `4e47ead99` rebased
+  air missiles on AA templates (Oct 6) after the ADATS pin was written (Oct 1); both AA weapons
+  now resolve `MissileAA_Medium`. All asserted scalars preserved (verified via miniyaml
+  resolver); only the profile-name expectation updated. 6/6 green.
 - **Dropped as redundant:** `codex/01a12ecb-naxis-slave-idle` `79fa19b05f` (fix byte-identical
-  to master's `6bbb5443f`, master test superset) and `codex/m13-state-restore` `0c77867f`
-  (content already ported via `797eb292e`).
-- **Held pending maintainer ruling:** `codex/learn-p0-fix` `874fda898` / `learn-p6-fix`
-  `0b19d629` — task gates require parity proof before merge; no waiver received yet.
+  to master's `6bbb5443f`, master test superset), `claude/naxis-slave-idle-extend` `ea6d7461d`
+  (content on master via `3e5478e27`), `codex/m13-state-restore` `0c77867f` (ported via
+  `797eb292e`). Note: `claude/naxis-unbound-slave-idle` (c21783291 + ec68ba28e) is a separate
+  un-ruled proposal, NOT in this wave.
+- **Engine pin:** Lead's "ad061ebf79 if master commit" resolves already-landed (`bc491da66`
+  ancestor); current pin `4f69df0` (fb7faffaf sprite load-wave, Oct 11) is newer — no change.
+- **Held (Lead OUT):** `codex/learn-p0-fix` / `learn-p6-fix` (parity gates), replay-health-logger
+  (Integrator owns), campaign tooling, `c33de2ef1`, `devin/human-demo-extract` (review pending).
 - Already on master (no remerge): garrison-p3 `d8ccd7da`, multi-turret `fa59898f`,
   m13-master-port `a4efc2b5`, turtle-fallback `b231bf08`, garrison-no-fire cherries,
   wbl-p1 `3a2ee8e4`/`147071140`, playtest-telemetry-v2, replay-health-logger-restack `7ca7e915`.
-- **Open gates before master landing:** ctx verdict → wave build+test → boot-gate slot
-  (Luna admission; machine had a recurring mod_subset_runner + dotnet test tree, unowned,
-  now exited; build-server daemons reaped) → acting-lead merge authorization.
+- **Verification state:** build 0 err/0 warn; Cameo.Test **2008/2008** (incl. ProductionScaling
+  +8, M13ResponseClaim +3). Python suite (bounded per Lead chunking rule after the single
+  discovery run hit ~19 GiB working set and was self-killed): full pass pre-kill showed
+  **66F/3432P** — all in stale-pin digest classes on master yaml churn; baseline comparison
+  on detached `ebea34c82` running per-file to prove pre-existence (this wave's only mods/
+  diff is `ai.yaml` switch rows).
+- **Open gates before master landing:** python drift attribution → boot-gate slot (Luna
+  admission, serial) → hand verified branch to Sol for the FF push (Sol = sole master writer
+  per Lead ruling; I sequence+verify, Sol pushes).
 
 # 2026-10-12 — Devin: BY_crawl_safety arm group, draft for review (branch `devin/p3-0-crawl-safety-switch`)
 
