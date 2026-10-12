@@ -235,6 +235,25 @@ namespace OpenRA.Mods.Cameo.Traits
 		}
 
 		/// <summary>
+		/// Union of every FragileTypes list declared on the player actor: the crawl/link
+		/// family is a content-level taxonomy, not per-module truth, so a seat without a
+		/// live CA base builder (Frans) still classifies fragile-family items instead of
+		/// silently falling through to tech.
+		/// </summary>
+		public static HashSet<string> UnionFragileTypes(IEnumerable<IEnumerable<string>> declared)
+		{
+			var set = new HashSet<string>(StringComparer.Ordinal);
+			if (declared == null)
+				return set;
+
+			foreach (var d in declared)
+				if (d != null)
+					set.UnionWith(d);
+
+			return set;
+		}
+
+		/// <summary>
 		/// Order-issue marker key shared by the unit-production seam (which writes it
 		/// from the owning player's actor id) and the queue poll (which looks it up
 		/// with the same player actor id). The poll's per-queue head dictionary keeps
@@ -344,6 +363,7 @@ namespace OpenRA.Mods.Cameo.Traits
 		int lastQueueTick = -1;
 
 		IReadOnlyDictionary<string, HashSet<string>> tagMap;
+		HashSet<string> rulesetFragileTypes;
 		Dictionary<string, string> categoryCache;
 		Dictionary<string, int> techDepth;
 		HashSet<string> superpowerTokens;
@@ -389,6 +409,10 @@ namespace OpenRA.Mods.Cameo.Traits
 			try
 			{
 				tagMap = BotTargetTags.BuildTagMap(world.Map.Rules);
+				rulesetFragileTypes = PlayerTelemetryMath.UnionFragileTypes(
+					world.Map.Rules.Actors.TryGetValue(SystemActors.Player.ToString().ToLowerInvariant(), out var playerActorInfo)
+						? playerActorInfo.TraitInfos<BaseBuilderBotModuleCAInfo>().Select(i => i.FragileTypes)
+						: null);
 				categoryCache = new Dictionary<string, string>(StringComparer.Ordinal);
 				techDepth = BuildTechDepths(world.Map.Rules);
 				superpowerTokens = BuildSuperpowerTokens(world.Map.Rules);
@@ -1007,7 +1031,9 @@ namespace OpenRA.Mods.Cameo.Traits
 				|| tagMap.TryGetValue(actorName, out var refTags) && refTags.Contains(BotTargetTags.Refinery);
 			var defence = builder != null && builder.Info.DefenseTypes.Contains(actorName)
 				|| tagMap.TryGetValue(actorName, out var defTags) && defTags.Contains(BotTargetTags.Defence);
-			var crawl = builder != null && builder.Info.FragileTypes.Contains(actorName);
+			var crawl = builder != null
+				? builder.Info.FragileTypes.Contains(actorName)
+				: rulesetFragileTypes != null && rulesetFragileTypes.Contains(actorName);
 			return PlayerTelemetryMath.BuildingCategory(defence, refinery, crawl);
 		}
 

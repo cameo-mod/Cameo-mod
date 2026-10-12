@@ -199,5 +199,30 @@ namespace OpenRA.Mods.Cameo.Test
 			markers[PlayerTelemetryMath.SeamKey(7, "VEHICLE", "td_gdi_humvee")] = 1;
 			Assert.That(PlayerTelemetryMath.ConsumeSeamStart(markers, key), Is.False);
 		}
+
+		[Test]
+		public void UnionFragileTypesCoversModuleAbsentSeats()
+		{
+			// The regression this guards: crawl_link classification read the live CA
+			// base builder's FragileTypes, so Frans seats (no CA module) classified
+			// fragile-family items as tech. The ruleset union is identical content
+			// for module seats and covers module-absent ones.
+			var declared = new[]
+			{
+				new HashSet<string>(StringComparer.Ordinal) { "naxis_academy", "ra2_soviets_nuclearmissilesilo" },
+				new HashSet<string>(StringComparer.Ordinal) { "yuri_battlelab" },
+			};
+
+			var union = PlayerTelemetryMath.UnionFragileTypes(declared);
+			Assert.That(union.Contains("naxis_academy"), Is.True);
+			Assert.That(union.Contains("ra2_soviets_nuclearmissilesilo"), Is.True);
+			Assert.That(union.Contains("yuri_battlelab"), Is.True);
+			Assert.That(union.Contains("td_gdi_mediumtank"), Is.False);
+			Assert.That(union.Count, Is.EqualTo(3));
+
+			// Missing or empty declarations degrade to an empty set, never to a null.
+			Assert.That(PlayerTelemetryMath.UnionFragileTypes(null), Is.Empty);
+			Assert.That(PlayerTelemetryMath.UnionFragileTypes(new IEnumerable<string>[] { null, new HashSet<string>() }), Is.Empty);
+		}
 	}
 }

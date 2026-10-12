@@ -21200,3 +21200,34 @@ ConsumeSeamStart count-once); python 36/36 (27 replay_health + 9
 playtest_stats incl. new schema fixtures, bad-shape fail-closed cases,
 aggregation). No runtime evidence claimed — no game was launched.
 
+
+## 2026-10-12 — WBL-P1-FOLLOWUP: crawl_link ruleset fallback (devin/wbl-p1-crawl-link-fallback)
+
+Task 01a13094: the exact-SHA review of WBL-P1 noted one non-blocking gap —
+`crawl_link` classified from the live CA base builder's `FragileTypes`, so a
+seat without that module (Fransbot) silently classified fragile-family
+building requests as `tech`. Record-only, default-on, no gameplay change.
+
+**Design.** `FragileTypes` is a ruleset declaration (`Player` actor,
+`@generic` in `mods/cameo/ai/ai.yaml`) — a content-level taxonomy, not
+per-module truth. `AiPlayerTelemetry` now builds `rulesetFragileTypes` once
+in `WorldLoaded` as `PlayerTelemetryMath.UnionFragileTypes` over every
+`BaseBuilderBotModuleCAInfo` on the player actor; `BuildingCategoryOf`
+prefers the live module's list and falls back to the union only when no
+module exists. For CA seats the union contains the live list — identical
+verdicts; for Frans seats `crawl_link` becomes reachable. Frans's
+`AdvancedTechCenterTypes` was rejected as the source — different semantics
+would drift the CA/Frans taxonomy apart.
+
+**Bounds.** The union is empty (never null) when no declaration exists, so
+a ruleset without fragile types degrades to today's `tech` verdict for
+module-absent seats. `FragileTypes` flows as `IEnumerable<string>`
+(FrozenSet covariance); the union's Ordinal comparer matches the live
+path's containment. Nothing feeds back into AI decisions.
+
+**Verification.** Release build 0 errors / 9 pre-existing engine warnings;
+rebuilt Cameo.Test 1949/1949 (PlayerTelemetry filter 13/13 incl. new
+`UnionFragileTypesCoversModuleAbsentSeats` covering union membership and
+null/empty-declaration degradation); `git diff --check` clean. Boot gate
+DEFERRED — launches are held for the lead's explicit go under the
+merge-wave reservation. No runtime evidence claimed.
