@@ -233,6 +233,11 @@ namespace OpenRA.Mods.CA.Traits
 			return capturerUnits < cap;
 		}
 
+		// F1 (lead ruling 2026-10-12): the cap is armed only above 0 — hoisted ahead of
+		// the world scan so an off cap (classic, where CapturerLimitPct reads 0) never
+		// pays the army walk. CapturerCapAdmits keeps its own <=0 admit as the invariant.
+		public static bool CapturerCapActive(int capturerLimitPct) => capturerLimitPct > 0;
+
 		// "Combat infantry" for the ratio: an actor the enemy would target as Infantry
 		// (the Infantry targetable type, the same marker squads use) that actually carries
 		// a weapon. Capture bodies, unarmed medics/mechanics and slaved units never count.
@@ -597,10 +602,11 @@ namespace OpenRA.Mods.CA.Traits
 				world.Actors.Count(a => !a.IsDead && a.Owner == player && a.Info.Name == name) >= Info.UnitLimits[name])
 				return false;
 
-			// S1: the capturer ratio — counts only when the candidate IS a capturer;
-			// single actor scan covers both counts and is skipped entirely when
-			// the cap is off (classic) or the unit has no Captures trait.
-			if (world.Map.Rules.Actors.TryGetValue(name, out var candidate) &&
+			// S1/F1: the capturer ratio — counts only while the cap is on AND the candidate
+			// IS a capturer; the off cap (classic: CapturerLimitPct reads 0) short-circuits
+			// before both the ruleset lookup and the army scan — no wasted work.
+			if (CapturerCapActive(CapturerLimitPct) &&
+				world.Map.Rules.Actors.TryGetValue(name, out var candidate) &&
 				candidate.HasTraitInfo<CapturesInfo>())
 			{
 				CapturerArmyCounts(out var capturerUnits, out var armedInfantryUnits);

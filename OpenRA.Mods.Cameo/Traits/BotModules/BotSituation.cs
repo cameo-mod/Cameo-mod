@@ -597,6 +597,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		readonly OpenRA.Player player;
 		readonly BotFogMemory fogMemory;
 
+		// E1 (lead ruling 2026-10-12): the sticky air-intel latch — enemy InternalNames whose
+		// air capability was fog-fairly seen this match. Deliberately not in MasterAiBotSavedState:
+		// only a world load resets it, and a save/load re-derives it from fog memory on first query.
+		readonly HashSet<string> airIntelLatchedEnemies = new(StringComparer.Ordinal);
+
 		// IM-1: the persistent layers object — its EMA history lives across snapshots, so it is
 		// constructed once and republished in place (Situation.Influence hands out the live read).
 		readonly BotInfluenceLayers influenceLayers;
@@ -972,6 +977,23 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		// aircraft or a remembered enemy aircraft-producing structure. Same fog contract as
 		// the composition feed: false means "not observing through fog" and keeps the
 		// caller's ungated behaviour (what classic runs).
+		//
+		// E1 (lead ruling 2026-10-12): the observation LATCHES per enemy player — once seen,
+		// the gate stays open against that enemy for the rest of the match even after the
+		// sighting expires; only a world load resets. The fog scan stays lazy: it is skipped
+		// for an already-latched enemy.
+		public static bool NoteEnemyAirSighting(HashSet<string> latchedEnemies, string enemyInternalName, Func<bool> airSighted) =>
+			latchedEnemies.Contains(enemyInternalName) || (airSighted() && latchedEnemies.Add(enemyInternalName));
+
+		bool FogShowsEnemyAir(OpenRA.Player enemy)
+		{
+			foreach (var seen in fogMemory.Remembered(enemy))
+				if (seen.Aircraft || seen.ProducesAircraft)
+					return true;
+
+			return false;
+		}
+
 		bool IBotEnemyAirIntelProvider.TryGetEnemyAirIntel(out bool airThreatObserved)
 		{
 			airThreatObserved = false;
@@ -983,14 +1005,25 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				if (enemy == player || enemy.NonCombatant || player.RelationshipWith(enemy) != PlayerRelationship.Enemy)
 					continue;
 
-				foreach (var seen in fogMemory.Remembered(enemy))
-					if (seen.Aircraft || seen.ProducesAircraft)
-					{
-						airThreatObserved = true;
-						return true;
-					}
+				if (NoteEnemyAirSighting(airIntelLatchedEnemies, enemy.InternalName, () => FogShowsEnemyAir(enemy)))
+				{
+					airThreatObserved = true;
+					return true;
+				}
 			}
 
+			return true;
+		}
+
+		bool IBotEnemyAirIntelProvider.TryGetEnemyAirIntel(OpenRA.Player enemy, out bool airThreatObserved)
+		{
+			airThreatObserved = false;
+			if (!((IBotFoggedEnemyProvider)this).FoggedObservation)
+				return false;
+			if (enemy == null || enemy == player || enemy.NonCombatant || player.RelationshipWith(enemy) != PlayerRelationship.Enemy)
+				return true;
+
+			airThreatObserved = NoteEnemyAirSighting(airIntelLatchedEnemies, enemy.InternalName, () => FogShowsEnemyAir(enemy));
 			return true;
 		}
 

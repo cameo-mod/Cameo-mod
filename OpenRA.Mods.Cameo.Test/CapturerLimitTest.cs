@@ -63,5 +63,27 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(UnitBuilderBotModuleCA.CapturerCapAdmits(80, 23, 30, 2), Is.True);
 			Assert.That(UnitBuilderBotModuleCA.CapturerCapAdmits(80, 24, 30, 2), Is.False);
 		}
+
+		// F1 (lead ruling 2026-10-12): the off-cap early return is hoisted above the army
+		// scan — CapturerCapActive gates the whole check, so classic never pays the walk.
+
+		[Test]
+		public void AnOffCapIsNotActive()
+		{
+			Assert.That(UnitBuilderBotModuleCA.CapturerCapActive(0), Is.False,
+				"classic reads 0 — the caller short-circuits before the scan");
+			Assert.That(UnitBuilderBotModuleCA.CapturerCapActive(-1), Is.False);
+			Assert.That(UnitBuilderBotModuleCA.CapturerCapActive(49), Is.True);
+			Assert.That(UnitBuilderBotModuleCA.CapturerCapActive(80), Is.True);
+		}
+
+		[Test]
+		public void TheOffCapInvariantStillAdmits()
+		{
+			// The hoist relies on CapturerCapAdmits <= 0 already being a pass — pinned so the
+			// early return can never change the outcome, only the work spent reaching it.
+			Assert.That(UnitBuilderBotModuleCA.CapturerCapAdmits(0, 100, 30, 2), Is.True);
+			Assert.That(UnitBuilderBotModuleCA.CapturerCapAdmits(-1, 100, 30, 2), Is.True);
+		}
 	}
 }

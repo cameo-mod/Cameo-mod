@@ -3504,6 +3504,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			(ActorInfo Info, int Cost, int BuildTicks) CrawlLink, (ActorInfo Info, int Cost, int BuildTicks) Defence,
 			int Queues) CheapestBuildables()
 		{
+			// E1 bypass fix (lead ruling 2026-10-12): the front-defence pick rides the same
+			// AA intel gate as the base builder — dedicated-AA candidates are only eligible
+			// while the gate is open; closed means the cheapest anti-ground defence instead.
+			// No provider (classic) or a non-observing provider keeps the ungated pick.
+			var airIntel = player.PlayerActor.TraitsImplementing<IBotEnemyAirIntelProvider>().FirstEnabledTraitOrDefault();
+			var dedicatedAntiAirAllowed = airIntel == null || !airIntel.TryGetEnemyAirIntel(out var airObserved) || airObserved;
 			(ActorInfo Info, int Cost, int BuildTicks) refinery = default, link = default, linkPower = default, linkOther = default, defence = default;
 			var queues = 0;
 			foreach (var queue in BuildingQueueTypes().SelectMany(type => CAAIUtils.FindQueues(player, type)).Distinct())
@@ -3541,8 +3547,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 						}
 
 						// CRAWL-SAFETY: the front defence is the cheapest armed structure — a turret
-						// standing at the frontier, not a wall (walls carry no AttackBase).
+						// standing at the frontier, not a wall (walls carry no AttackBase). E1: a
+						// dedicated-AA pick additionally needs the air-intel gate open.
 						if (cost > 0 && item.HasTraitInfo<AttackBaseInfo>()
+							&& BaseBuilderQueueEvalCA.AirDefenceAdmits(BaseBuilderQueueEvalCA.IsDedicatedAntiAir(item), dedicatedAntiAirAllowed)
 							&& (defence.Info == null || cost < defence.Cost))
 							defence = entry;
 					}
