@@ -1,0 +1,415 @@
+#region Copyright & License Information
+/**
+ * Copyright (c) The OpenRA Combined Arms Developers (see CREDITS).
+ * This file is part of OpenRA Combined Arms, which is free software.
+ * It is made available to you under the terms of the GNU General Public License
+ * as published by the Free Software Foundation, either version 3 of the License,
+ * or (at your option) any later version. For more information, see COPYING.
+ */
+#endregion
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using OpenRA.Activities;
+using OpenRA.Mods.Common.Activities;
+using OpenRA.Mods.Common.Traits;
+using OpenRA.Traits;
+
+namespace OpenRA.Mods.CA.Traits.BotModules.Squads
+{
+	abstract class StateBaseCA
+	{
+		protected static void GoToRandomOwnBuilding(SquadCA squad)
+		{
+			var loc = HomeLocation(squad);
+			// CA F2p2 (2bad89a77): AttackMove instead of Move, so the squad fights on the way home.
+			var orderName = squad.SquadManager.Info.UseUpstreamStateTweaks ? "AttackMove" : "Move";
+			foreach (var a in squad.Units)
+				squad.Bot.QueueOrder(new Order(orderName, a.Actor, Target.FromCell(squad.World, loc), false));
+		}
+
+		// DESIGN 19.12: a ground squad that falls back or goes idle returns to the staging point nearest to it (the front, with the
+		// defences) when a staging provider is enabled. Air and naval squads, and every squad without a provider, keep the random
+		// own building (the provider branch draws no random number).
+		protected static CPos HomeLocation(SquadCA squad)
+		{
+			if (squad.Type != SquadCAType.Air && squad.Type != SquadCAType.Naval && squad.Units.Count > 0)
+			{
+				var from = squad.Units[0].Actor.Location;
+				var cell = squad.SquadManager.ArmyStaging?.StagingCellNear(from);
+				if (cell != null)
+					return cell.Value;
+			}
+
+			return RandomBuildingLocation(squad);
+		}
+
+		protected static CPos RandomBuildingLocation(SquadCA squad)
+		{
+			var location = squad.SquadManager.GetRandomBaseCenter();
+			var buildings = squad.World.ActorsHavingTrait<Building>()
+				.Where(a => a.Owner == squad.Bot.Player).ToList();
+			if (buildings.Count > 0)
+				location = buildings.Random(squad.Random).Location;
+
+			return location;
+		}
+
+		/// <summary>
+		/// AR-S (2026-10-04): grouped order over only the members whose (order, quantized target)
+		/// actually changed — an identical re-issue cancels the member's in-flight activity, the
+		/// stop-start stutter the maintainer reported. With UseSquadOrderDedup off every member
+		/// "changed", reproducing the pre-change stream (minus empty orders, which carry nothing).
+		/// </summary>
+		protected static void QueueDeduped(SquadCA owner, string orderName, SquadOrderKey key, Target target, IReadOnlyList<Actor> members, bool terminal = false)
+		{
+			var changed = members.Where(a => owner.OrderChanged(a, key, terminal)).ToArray();
+			if (changed.Length > 0)
+				owner.Bot.QueueOrder(new Order(orderName, null, target, false, groupedActors: changed));
+		}
+
+		protected static bool BusyAttack(Actor a)
+		{
+			if (a.IsIdle)
+				return false;
+
+			var activity = a.CurrentActivity;
+			var type = activity.GetType();
+			if (type == typeof(Attack) || type == typeof(FlyAttack))
+				return true;
+
+			var next = activity.NextActivity;
+			if (next == null)
+				return false;
+
+			var nextType = next.GetType();
+			if (nextType == typeof(Attack) || nextType == typeof(FlyAttack))
+				return true;
+
+			return false;
+		}
+
+		protected static (bool IsFiring, bool TryAttacking) IsAttackingAndTryAttack(Actor a)
+		{
+			if (a.IsIdle)
+				return (false, false);
+
+			var isFiring = false;
+			var tryAttacking = false;
+			var activity = a.CurrentActivity;
+			var type = activity.ActivityType;
+
+			var arms = a.TraitsImplementing<Armament>();
+			var isValid = false;
+			foreach (var arm in arms)
+			{
+				if (arm.IsTraitDisabled)
+					continue;
+
+				if ((arm.Info.TargetRelationships & PlayerRelationship.Enemy) != 0)
+				{
+					isValid = true;
+					break;
+				}
+			}
+
+			if (!isValid)
+				return (false, false);
+
+			if (type == ActivityType.Attack)
+			{
+				tryAttacking = true;
+
+				var childActivity = activity.ChildActivity;
+				if (childActivity == null)
+					isFiring = true;
+				else
+				{
+					var childType = childActivity.ActivityType;
+					if (childType != ActivityType.Move)
+						isFiring = true;
+				}
+			}
+
+			return (isFiring, tryAttacking);
+		}
+
+		protected static bool CanAttackTarget(Actor a, Actor target)
+		{
+			if (a.IsDead || !a.Info.HasTraitInfo<AttackBaseInfo>())
+				return false;
+
+			var targetTypes = target.GetEnabledTargetTypes();
+			if (targetTypes.IsEmpty)
+				return false;
+
+			var arms = a.TraitsImplementing<Armament>();
+			foreach (var arm in arms)
+			{
+				if (arm.IsTraitDisabled)
+					continue;
+
+				if (arm.Weapon.IsValidTarget(targetTypes))
+					return true;
+			}
+
+			return false;
+		}
+
+		protected virtual bool ShouldFlee(SquadCA squad, Func<IEnumerable<Actor>, bool> flee)
+		{
+			if (!squad.IsValid)
+				return false;
+
+			var randomSquadUnit = squad.Units.Random(squad.Random);
+			var dangerRadius = squad.SquadManager.Info.DangerScanRadius;
+			var units = squad.World.FindActorsInCircle(randomSquadUnit.Actor.CenterPosition, WDist.FromCells(dangerRadius)).ToList();
+
+			// If there are any own buildings within the DangerRadius, don't flee
+			// PERF: Avoid LINQ
+			foreach (var u in units)
+				if ((u.Owner == squad.Bot.Player && u.Info.HasTraitInfo<BuildingInfo>()))
+					return false;
+
+			var enemyAroundUnit = units.Where(unit => squad.SquadManager.IsPreferredObservedEnemyUnit(unit) && unit.Info.HasTraitInfo<AttackBaseInfo>()).ToList();
+			if (enemyAroundUnit.Count == 0)
+				return false;
+
+			// INC-N combat veto (§12.31): the veto blocks a retreat the pursuit would outrun — the squad
+			// stands and fights instead of being run down with its back turned. No provider = false.
+			return flee(enemyAroundUnit) && !squad.SquadManager.VetoFlee(squad, enemyAroundUnit, out _);
+		}
+
+		protected virtual bool ShouldFleeSimple(SquadCA squad)
+		{
+			if (!squad.IsValid)
+				return false;
+
+			var squadUnit = squad.Units[0].Actor;
+			var dangerRadius = squad.SquadManager.Info.DangerScanRadius;
+			var units = squad.World.FindActorsInCircle(squadUnit.CenterPosition, WDist.FromCells(dangerRadius)).ToList();
+
+			var enemyAroundUnit = units.Where(unit => squad.SquadManager.IsPreferredObservedEnemyUnit(unit) && unit.Info.HasTraitInfo<AttackBaseInfo>()).ToList();
+			if (enemyAroundUnit.Count == 0)
+				return false;
+
+			var panic = (enemyAroundUnit.Count + squad.Units.Count - units.Count) * (int)DamageState.Critical;
+			foreach (var u in squad.Units)
+			{
+				var health = u.Actor.TraitOrDefault<IHealth>();
+				if (health != null)
+					panic += (int)health.DamageState;
+			}
+
+			if (panic > squad.Units.Count * (int)DamageState.Medium)
+				return true;
+
+			return false;
+		}
+
+		// CA F2p2 (b831676de): behind UseUpstreamStateTweaks the whole activity chain is searched for Resupply/ReturnToBase
+		// (not just the current and next activity). Deeper detection classes more units as rearming, so it is switched.
+		protected static bool IsRearming(Actor a, SquadCA squad)
+		{
+			if (!squad.SquadManager.Info.UseUpstreamStateTweaks)
+				return IsRearming(a);
+
+			return !a.IsIdle && (a.CurrentActivity.ActivitiesImplementing<Resupply>().Any()
+				|| a.CurrentActivity.ActivitiesImplementing<ReturnToBase>().Any());
+		}
+
+		protected static bool IsRearming(Actor a)
+		{
+			if (a.IsIdle)
+				return false;
+
+			var activity = a.CurrentActivity;
+			var activityType = activity.GetType();
+			if (activityType == typeof(Resupply) || activityType == typeof(ReturnToBase))
+				return true;
+
+			var next = activity.NextActivity;
+			if (next == null)
+				return false;
+
+			var nextType = next.GetType();
+
+			if (nextType == typeof(Resupply) || nextType == typeof(ReturnToBase))
+				return true;
+
+			return false;
+		}
+
+		protected static bool FullAmmo(IEnumerable<AmmoPool> ammoPools)
+		{
+			foreach (var ap in ammoPools)
+				if (!ap.HasFullAmmo)
+					return false;
+
+			return true;
+		}
+
+		protected static bool HasAmmo(IEnumerable<AmmoPool> ammoPools)
+		{
+			foreach (var ap in ammoPools)
+				if (ap.HasAmmo)
+					return true;
+
+			return false;
+		}
+
+		protected static bool ReloadsAutomatically(IEnumerable<AmmoPool> ammoPools, Rearmable rearmable)
+		{
+			if (rearmable == null)
+				return true;
+
+			foreach (var ap in ammoPools)
+				if (rearmable.Info.AmmoPools.Contains(ap.Info.Name))
+					return false;
+
+			return true;
+		}
+
+		protected static void Retreat(SquadCA squad, bool flee, bool rearm, bool repair)
+		{
+			// HACK: "alreadyRepair" is to solve AI repair orders performance,
+			// which is only allow one goes to repairpad at the same time to avoid queueing too many orders.
+			// if repairpad logic is better we can just drop it.
+			var alreadyRepair = false;
+
+			var rearmingUnits = new List<Actor>();
+			var fleeingUnits = new List<Actor>();
+
+			foreach (var u in squad.Units)
+			{
+				if (IsRearming(u.Actor, squad) || IsAttackingAndTryAttack(u.Actor).IsFiring)
+					continue;
+
+				var orderQueued = false;
+
+				// Units need to rearm will be added to rearming group.
+				if (rearm)
+				{
+					var ammoPools = u.Actor.TraitsImplementing<AmmoPool>().ToArray();
+					if (!ReloadsAutomatically(ammoPools, u.Actor.TraitOrDefault<Rearmable>()) && !FullAmmo(ammoPools))
+					{
+						rearmingUnits.Add(u.Actor);
+						orderQueued = true;
+					}
+				}
+
+				// Try repair units.
+				// Don't use grounp order here becuase we have 2 kinds of repaid orders and we need to find repair building for both traits.
+				if (repair && !alreadyRepair)
+				{
+					Actor repairBuilding = null;
+					var orderId = "Repair";
+					var health = u.Actor.TraitOrDefault<IHealth>();
+
+					if (health != null && health.DamageState > DamageState.Undamaged)
+					{
+						var repairable = u.Actor.TraitOrDefault<Repairable>();
+						if (repairable != null)
+							repairBuilding = repairable.FindRepairBuilding(u.Actor);
+						else
+						{
+							var repairableNear = u.Actor.TraitOrDefault<RepairableNear>();
+							if (repairableNear != null)
+							{
+								orderId = "RepairNear";
+								repairBuilding = repairableNear.FindRepairBuilding(u.Actor);
+							}
+						}
+
+						if (repairBuilding != null)
+						{
+							if (squad.OrderChanged(u.Actor, SquadOrderKey.ForActor(orderId, repairBuilding)))
+								squad.Bot.QueueOrder(new Order(orderId, u.Actor, Target.FromActor(repairBuilding), orderQueued));
+
+							orderQueued = true;
+							alreadyRepair = true;
+						}
+					}
+				}
+
+				// If there is no order in queue and units should flee, add unit to fleeing group.
+				if (flee && !orderQueued)
+					fleeingUnits.Add(u.Actor);
+			}
+
+			if (rearmingUnits.Count > 0)
+			{
+				var rearmChanged = rearmingUnits.Where(a => squad.OrderChanged(a, SquadOrderKey.Plain("ReturnToBase"), terminal: true)).ToArray();
+				if (rearmChanged.Length > 0)
+					squad.Bot.QueueOrder(new Order("ReturnToBase", null, true, groupedActors: rearmChanged));
+			}
+
+			if (fleeingUnits.Count > 0)
+			{
+				// Armed: one home pick per flee episode — a fresh random building per
+				// tick cancels the leg every time (the wander the maintainer saw).
+				var home = HomeLocation(squad);
+				if (squad.SquadManager.Info.UseSquadOrderDedup)
+				{
+					if (squad.FleeHomeCell == null)
+						squad.FleeHomeCell = home;
+					else
+						home = squad.FleeHomeCell.Value;
+				}
+
+				QueueDeduped(squad, "Move", SquadOrderKey.ForCell("Move", home), Target.FromCell(squad.World, home), fleeingUnits);
+			}
+		}
+
+		protected static UnitWposWrapper GetPathfindLeader(SquadCA squad, HashSet<string> locomotorTypes)
+		{
+			if (!squad.IsValid)
+				return null;
+
+			// var nonAircraft = new UnitWposWrapper(null); // HACK: Becuase Mobile is always affected by terrain, so we always select a nonAircraft as leader
+			var squadUnits = new List<Actor>();
+			foreach (var u in squad.Units)
+			{
+				var mt = u.Actor.TraitsImplementing<Mobile>().FirstOrDefault(t => !t.IsTraitDisabled && !t.IsTraitPaused);
+				if (mt != null)
+				{
+					// nonAircraft = u;
+					if (locomotorTypes.Contains(mt.Info.Locomotor))
+						squadUnits.Add(u.Actor);
+				}
+			}
+
+			// if (nonAircraft.Actor != null)
+			//	return nonAircraft;
+
+			// TODO just identify closest unit within the locomotor search
+			if (squadUnits.Count > 0)
+			{
+				return squad.TargetActor != null
+					? new UnitWposWrapper(squadUnits.ClosestToIgnoringPath(squad.TargetActor))
+					: new UnitWposWrapper(squadUnits[0]);
+			}
+
+			return squad.Units[0];
+		}
+
+		protected static bool CheckReachability(Actor sourceActor, Actor targetActor)
+		{
+			return CheckReachability(sourceActor, targetActor.Location);
+		}
+
+		protected static bool CheckReachability(Actor sourceActor, CPos targetCell)
+		{
+			var mobile = sourceActor.TraitOrDefault<Mobile>();
+			if (mobile == null)
+				return false;
+			else
+			{
+				var locomotor = mobile.Locomotor;
+				return mobile.PathFinder.PathExistsForLocomotor(locomotor, sourceActor.Location, targetCell);
+			}
+		}
+
+	}
+}

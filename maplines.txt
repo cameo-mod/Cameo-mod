@@ -1,0 +1,93 @@
+6:harness — a script and a map rotation, not engine work.
+9:variant of the duel map. Per the 2026-09-28 maintainer ruling, the default
+10:map is the shipped tournament map "A Nuclear Winter"
+11:(mods/cameo/maps/_ra_a-nuclear-winter.oramap): the harness extracts it into
+13:converts Multi0/Multi1 into map-side bot players (Playable: False + Bot: +
+14:HomeLocation taken from the map's mpspawn actors), and cross-wires their
+15:Enemies. --map can point at the legacy ai_duel_gate_20260928 template dir for
+18:The variant's map.yaml gets its two duelists patched (Bot/Faction) and their
+20:a Local server, so no lobby bot seating exists and the duelists are map-side
+25:The local client occupies the map's declared-NonCombatant "Referee" slot —
+30:ConquestVictoryConditions decides on elimination and the map's locked
+36:slots) and the default map becomes the shipped doubles map
+37:mods/cameo/maps/_ra_doubles.oramap, whose consecutive Multi pairs are the
+38:teams (Multi0+Multi1 vs Multi2+Multi3). The engine resolves map-side stances
+40:enemy refs in Enemies: (the map's own Creeps hostility is preserved). A 2v2
+69:the map source, and the batch spec. The fingerprint is recomputed before
+87:                                    Multi pairs (default map _ra_doubles.oramap)
+88:    --map PATH                      duel map (default: _ra_a-nuclear-winter.oramap)
+122:TEMPLATE_MAP = REPO_ROOT / "mods" / "cameo" / "maps" / "ai_duel_gate_20260928"
+125:# tournament duel map "A Nuclear Winter" — generated shell fixtures are only
+126:# kept for the bespoke per-gate maps. Default --map points at the shipped
+127:# .oramap; variants are extracted copies patched in the support dir, so the
+128:# packaged map itself is never touched.
+129:DEFAULT_MAP = REPO_ROOT / "mods" / "cameo" / "maps" / "_ra_a-nuclear-winter.oramap"
+131:# --team-size 2 default: the shipped 4-player doubles map — consecutive Multi
+133:DEFAULT_TEAM_MAP = REPO_ROOT / "mods" / "cameo" / "maps" / "_ra_doubles.oramap"
+139:# The mod.yaml MapFolders entry for user maps resolves through this literal
+141:USER_MAP_DIR = os.path.join("maps", "cameo", "{DEV_VERSION}")
+201:    Spawn side is a real axis (corner map geometry is asymmetric), so repeat
+260:        fail(f"template map is missing {marker}")
+336:    """Map Actors nodes owning the faction's starting force to the map-side
+362:        fail("template map.yaml must contain exactly one AI_DUEL_BOT_UNITS sentinel")
+367:def mp_spawn_cells(map_text: str) -> list[tuple[int, int]]:
+373:    # _d2k_Desert_Valley mixes orders within one map. Parse each actor block's
+377:        map_text, re.MULTILINE,
+391:        fail("real-map mode needs a map with at least two mpspawn actors")
+397:    half of the map and team_size..2*team_size-1 are the other.
+399:    Slots bind teams by index (slots_a = range(n)), but shipped maps interleave
+437:    Existing entries keep their position (a shipped map's `Enemies: Creeps`
+461:    """Convert a Playable Multi slot into a map-side bot duelist.
+463:    Multi refs on shipped maps carry `Playable: True` + `Faction: Random` and
+465:    We write everything the map-side bot branch honors and declare every
+466:    stance explicitly while keeping the map's declared Creeps hostility.
+469:    `Enemies:`; `ally_refs` into `Allies:`. The engine resolves map-side
+479:        fail(f"map is missing {marker}")
+510:def write_variant_from_oramap(oramap: pathlib.Path, dest: pathlib.Path, matchup: dict, time_limit: int) -> None:
+511:    """Extract a shipped .oramap into a variant dir and convert its Multi slots
+512:    into map-side bot duelists. The referee seat is added for the local client;
+518:    with zipfile.ZipFile(oramap) as archive:
+521:    map_yaml = dest / "map.yaml"
+522:    text = map_yaml.read_text(encoding="utf-8")
+528:            fail(f"team-size {team_size} needs a map with at least {2 * team_size} mpspawn actors, got {len(spawns)}")
+537:            fail("map.yaml has no Categories line to anchor the Rules key")
+542:        fail("real-map mode expects exactly one PlayerReference@Multi0 block")
+574:    map_yaml.write_text(text, encoding="utf-8")
+586:    if template.suffix == ".oramap":
+587:        write_variant_from_oramap(template, dest, matchup, time_limit)
+596:    map_yaml = dest / "map.yaml"
+597:    text = map_yaml.read_text(encoding="utf-8")
+612:    map_yaml.write_text(text, encoding="utf-8")
+835:# checkout, the built DLLs, the resolved AI yaml, the map source and the
+838:# engine/bin, a map edit — silently swaps the arms (league-3 lost 15 matches
+916:def _map_sha256(map_source: pathlib.Path) -> str | None:
+917:    """A .oramap file hashes its bytes; a template dir hashes every file in it."""
+918:    if map_source.is_file():
+919:        return hashlib.sha256(map_source.read_bytes()).hexdigest()
+920:    if map_source.is_dir():
+921:        return _hash_files(map_source, [p for p in map_source.rglob("*") if p.is_file()])
+926:    map_source: pathlib.Path,
+932:    read (no git, no engine, no map) records None rather than failing."""
+956:        "map_sha256": _map_sha256(map_source),
+991:                             "consecutive Multi pairs on a 4-player map (default _ra_doubles.oramap)")
+993:    parser.add_argument("--map", dest="map_path", type=pathlib.Path, default=DEFAULT_MAP,
+994:                        help="duel map: the shipped .oramap (default: A Nuclear Winter) "
+1002:                        help="template map dir (default: the A Nuclear Winter duel fixture)")
+1006:    # Real maps sustain ~25tps vs the flat fixture's ~100 — module-timing
+1015:    parser.add_argument("--keep-variants", action="store_true", help="do not delete variant map dirs on success")
+1041:    map_arg = args.map_path
+1042:    if args.team_size == 2 and map_arg == DEFAULT_MAP:
+1043:        map_arg = DEFAULT_TEAM_MAP
+1044:    map_source = map_arg.resolve()
+1045:    if not map_source.exists():
+1046:        fail(f"map source missing: {map_source}")
+1047:    if map_source.is_dir() and map_source != TEMPLATE_MAP:
+1048:        fail(f"only the bundled template dir is supported for directory maps: {TEMPLATE_MAP}")
+1079:    batch_fingerprint = compute_fingerprint(map_source, engine, batch_config)
+1106:        f"map={_short_hash(batch_fingerprint['map_sha256'])}"
+1112:                f"{v['team_a'][0]['faction']}({'+'.join(m['bot'] for m in v['team_a'])})@{'/'.join(map(str, v['slots_a']))} vs "
+1113:                f"{v['team_b'][0]['faction']}({'+'.join(m['bot'] for m in v['team_b'])})@{'/'.join(map(str, v['slots_b']))}"
+1125:            write_variant(map_source, variants_root / name, v, args.time_limit)
+1127:            write_variant(map_source, variants_root / name, {"side_a": v["a"], "side_b": v["b"]}, args.time_limit)
+1168:            current_fingerprint = compute_fingerprint(map_source, engine, batch_config)
+1260:                    # player.spawn is the lobby SpawnPoint — 0 for map-side

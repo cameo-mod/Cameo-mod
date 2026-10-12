@@ -1,0 +1,16 @@
+batch: 3 match(es) across 1 variant(s), support=C:\cameo-wt\_ars_demo
+fingerprint 05db4f763e91: commit=26fe581b72eeec4ded1726c51a52193d99c8f9c4 dirty=False engine=d5d8b2a6853bff3b5a00cc5db7d86b03d4f30684 dlls=e0d136eb8155 ai_yaml=eb8a30be7177 (43 files) yaml=790011985d80 (813 files) map=191efefe3043
+  variant ai_duel_td_gdi_hard_vs_td_gdi_hard: td_gdi(hard) vs td_gdi(hard)
+[1/3] ai_duel_td_gdi_hard_vs_td_gdi_hard (repeat 0, attempt 1) ...
+    -> ok in 155s, 2 record(s): [('td_gdi', 'lost'), ('td_gdi', 'won')]
+[2/3] ai_duel_td_gdi_hard_vs_td_gdi_hard (repeat 1, attempt 1) ...
+    -> ok in 215s, 2 record(s): [('td_gdi', 'lost'), ('td_gdi', 'won')]
+[3/3] ai_duel_td_gdi_hard_vs_td_gdi_hard (repeat 2, attempt 1) ...
+    -> ok in 160s, 2 record(s): [('td_gdi', 'lost'), ('td_gdi', 'won')]
+
+batch done: 3/3 clean, 0 timeout, 0 stalled, 0 died, 0 norecord (0 retried), exceptions=none
+
+A/B scoreboard (decided 1v1s, deduplicated by game):
+  hard vs hard: 3-3  (spawn 0: 1-2, spawn 1: 2-1)
+records appended to C:\cameo-wt\_ars_demo\Logs\cameo-ai-matches.jsonl; aggregate with tools/ai/aggregate_ai_matches.py
+win-rate + Wilson interval per bot type: tools/ai/ab_summary.py C:\cameo-wt\_ars_demo
