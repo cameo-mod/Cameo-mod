@@ -79,6 +79,27 @@ MATCH_STATS_V3_FIELDS = {
     "stats_timeline_fields", "stats_timeline",
 }
 
+# PLAYTEST-TELEMETRY-V2 (maintainer request 2026-10-12): the per-player channel
+# covers every seat in cameo-ai-players-<sha256(game_uid)>.jsonl. Two record
+# shapes share the file, distinguished by 'schema'.
+PLAYER_SAMPLE_V1_FIELDS = {
+    "schema", "version", "game_uid", "record_id", "tick", "seat", "bot_type",
+    "faction", "team", "harvesters", "refineries", "conyards", "expansions",
+    "mcv_deploys", "production_buildings", "tech_tier", "idle_production_ticks",
+    "buildings", "units", "army", "unit_types",
+}
+PLAYER_SAMPLE_ARMY_FIELDS = {"infantry", "vehicle", "air", "naval", "defence"}
+PLAYER_EVENT_V1_FIELDS = {
+    "schema", "version", "game_uid", "record_id", "tick", "seat", "kind",
+    "actor", "cell", "start_dist", "cause", "to_seat", "units",
+}
+PLAYER_EVENT_KINDS = {
+    "building_placed", "structure_lost", "conyard_deployed", "conyard_packed",
+    "first_unit_enemy_territory", "attack_wave_start", "superweapon_built",
+    "superweapon_fired",
+}
+MAX_PLAYER_FILES = 64
+
 
 class EvidenceError(ValueError):
     pass
@@ -388,6 +409,57 @@ def analyze(situations, placements, matches, game_uid, player, *, live=False,
     return report
 
 
+def players_channel(logs, game_uid, player, live=False):
+    """Validate the PLAYTEST-TELEMETRY-V2 per-player channel for the selected game.
+
+    The file exists only for matches recorded by a build with AiPlayerTelemetry;
+    absent channel => absent evidence, never an error. Returns (receipt, metrics)
+    or (None, {}) when no channel file exists.
+    """
+    expected = logs / f"cameo-ai-players-{hashlib.sha256(game_uid.encode('utf-8')).hexdigest()}.jsonl"
+    if len(list(logs.glob("cameo-ai-players-*.jsonl"))) > MAX_PLAYER_FILES:
+        raise EvidenceError("player-telemetry file bound exceeded")
+    if not expected.exists():
+        return None, {}
+    rows, receipt = read_jsonl(expected, live)
+    samples, events, last_tick = 0, {}, -1
+    for row in rows:
+        schema = row.get("schema")
+        if schema == "cameo-player-sample":
+            reject_unknown_fields(row, PLAYER_SAMPLE_V1_FIELDS, "player-sample v1")
+            if row.get("version") != 1:
+                raise EvidenceError("unsupported player-sample version")
+            integer(row.get("tick"))
+            army = row.get("army")
+            if isinstance(army, dict):
+                reject_unknown_fields(army, PLAYER_SAMPLE_ARMY_FIELDS, "player-sample army")
+                for value in army.values():
+                    integer(value)
+            types = row.get("unit_types")
+            if isinstance(types, dict):
+                for value in types.values():
+                    integer(value)
+            samples += 1
+            if row.get("seat") == player:
+                last_tick = max(last_tick, row["tick"])
+        elif schema == "cameo-player-event":
+            reject_unknown_fields(row, PLAYER_EVENT_V1_FIELDS, "player-event v1")
+            if row.get("version") != 1:
+                raise EvidenceError("unsupported player-event version")
+            integer(row.get("tick"))
+            kind = row.get("kind")
+            if kind not in PLAYER_EVENT_KINDS:
+                raise EvidenceError(f"unsupported player-event kind: {kind}")
+            if row.get("seat") == player:
+                events[kind] = events.get(kind, 0) + 1
+        else:
+            raise EvidenceError(f"unsupported player-telemetry schema: {schema}")
+    metrics = {"player_channel_samples": samples,
+               "player_channel_events": events,
+               "player_channel_last_sample_tick": last_tick if last_tick >= 0 else None}
+    return receipt, metrics
+
+
 def inspect(support, game_uid, player, live=False):
     logs = support / "Logs"
     files, receipts = [], []
@@ -397,6 +469,10 @@ def inspect(support, game_uid, player, live=False):
         receipts.append(receipt)
     report = analyze(*files, game_uid, player, live=live)
     report["inputs"] = receipts
+    channel_receipt, channel_metrics = players_channel(logs, game_uid, player, live)
+    if channel_receipt is not None:
+        report["inputs"].append(channel_receipt)
+        report["metrics"].update(channel_metrics)
     report["mode"] = "live-prefix" if live else "final"
     summary = support / "batch_summary.json"
     if summary.exists():

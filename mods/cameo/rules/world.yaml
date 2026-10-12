@@ -914,6 +914,9 @@ World:
 	InsuranceTelemetry:
 	# S8: record-only private-bytes/GC growth channel, cameo-ai-memory-*.jsonl (FINDINGS_2026-10-12 S8).
 	AiMemoryTelemetry:
+	# PLAYTEST-TELEMETRY-V2: record-only per-player samples + event stream for every seat,
+	# cameo-ai-players-*.jsonl (maintainer request 2026-10-12).
+	AiPlayerTelemetry:
 	AiSituationLogWriter:
 	# FE-0 / BO-0: record-only placement + build-order log, cameo-ai-placements.jsonl (AI_ARCHITECTURE 12.24, 12.25).
 	AiPlacementLogWriter:
