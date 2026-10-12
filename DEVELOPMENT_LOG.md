@@ -1,3 +1,38 @@
+# 2026-10-12 — Devin: BY_crawl_safety arm group, draft for review (branch `devin/p3-0-crawl-safety-switch`)
+
+*Devin-Developer.* Boss's TASK P3-0 (lead-authorised; design
+`Cameo-mod-fleet/DESIGN_2026-10-12_protected_frontier.md` rev 3b §7.1/§4.2): the CRAWL-SAFETY
+gates landed in merge `332856532` sit behind `ExpansionPlannerBotModuleInfo.UseCrawlSafety`
+(default `false`, `ExpansionPlannerBotModule.cs:80`) but nothing could arm them — no increment
+switch group existed.
+
+- **`tools/ai/increment_switches.yaml`:** new group `BY_crawl_safety` →
+  `ExpansionPlannerBotModule.UseCrawlSafety: true` (the only field; NO `needs`,
+  `BoundCrawlLinkSupply`/`DriveBaseCrawl` untouched — BX's business / already true in ai.yaml);
+  `effect_classes` → `restraint` (refuses optional links when unsafe — same reasoning as
+  BV_m13_liveness / TF4_turtle_fallback_expiry). **Default-off, draft only — no arming, no
+  landing, no gameplay change; the lead decides arming.**
+- **`tools/tests/test_increment_restraint_budget.py`:** catalogue count pin 29→30 restraints
+  (BY is the 30th; minimal consequence update).
+- **Verification (python/grep only, no builds/launches — A/B campaign holds the runtime
+  lane):** field exists at `ExpansionPlannerBotModule.cs:80` as
+  `public readonly bool UseCrawlSafety = false`; the single
+  `ExpansionPlannerBotModule:` instance (`ai.yaml:4278`, `RequiresCondition: genericbot`)
+  matches the group's trait key and is not in `skip` (skip =
+  `SquadManagerBotModuleCA@classic` only); `UseCrawlSafety` absent from ai.yaml = default-off
+  confirmed. Focused checks: `pytest test_increment_restraint_budget test_m13_tier_knobs
+  test_learnables_registry test_conflict_markers test_ab_campaign_pilot` → 38 passed + 19
+  subtests. Scratch-tree apply: `apply_increment_switches.py <scratch> --groups
+  BY_crawl_safety` → `ExpansionPlannerBotModule.UseCrawlSafety: (default) -> true`, 1 change,
+  `new_restraint_count: 1`, `ordinary_increment_allowed: true`.
+- **OPEN (recorded for the fleet receipt, not attempted):** the mounted-trait question of what
+  SquadManager does with CRAWL-SAFETY's `Episode=default` escort request when
+  `AttackLivenessEnabled` is true (CS review O1 says the escort is honoured; source 2150-2155
+  reads as an early return before drafting) needs a runtime/NUnit slot — cannot be settled by
+  reading.
+
+---
+
 # 2026-10-12 — Devin: M13 manager save/restore adapter (branch `devin/m13-liveness`)
 
 *Devin-Developer*, IMPL-M13-LIVENESS save/restore gap from `docs/design/M13_RUNTIME_WIRING.md`;
