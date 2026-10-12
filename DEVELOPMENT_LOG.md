@@ -20664,3 +20664,7 @@ evidence refuses; frontier anchor is the argmin cell.
 Validation: `dotnet test OpenRA.Mods.Cameo.Test -c Debug` - 1687 passed, 0 failed
 (34/34 ExpansionPlanner). Release build clean. Boot-gate PASS - main menu reached, no new
 exception-*.log. TF-2 (unit-spend reservation) remains a separate increment per the board.
+
+## 2026-10-12 - NAXIS refinery-spawned slave idle fix
+
+The slave cached and reserved its refinery dock during world insertion, before a `MoveToDock` activity existed. The engine harvest search interprets an existing reservation as an active delivery and waits, stranding loaded slaves. The fix defers reservation to `MoveToDock`, preserves bindings when a captured refinery and slave share an owner, and clears/restarts harvest after master loss or incompatible ownership changes. Three focused source-contract tests pass. No game was launched under the A/B reservation; gameplay remains unverified pending maintainer playtest. Branch: `codex/01a12ecb-naxis-slave-idle` (exact SHA to follow).
