@@ -1624,7 +1624,7 @@ namespace OpenRA.Mods.CA.Traits
 			}
 
 			foreach (var kv in byCell)
-				bot.QueueOrder(new Order("AttackMove", null, Target.FromCell(World, kv.Key), false, groupedActors: kv.Value.ToArray()));
+				bot.QueueOrder(new Order("AttackMove", null, Target.FromCell(World, kv.Key), false, groupedActors: kv.Value.ToArray()) { TargetString = "h8" });
 
 			if (stagingOrders.Count > 256)
 				foreach (var dead in stagingOrders.Keys.Where(a => a.IsDead || !a.IsInWorld).ToList())
@@ -2047,7 +2047,7 @@ namespace OpenRA.Mods.CA.Traits
 				? Math.Min(request.Value.ExpiresTick, World.WorldTick + Info.ProtectInterval * 10)
 				: World.WorldTick + threat.Value.EtaTicks + Info.ProtectInterval * 10;
 			bot.QueueOrder(new Order("AttackMove", null, Target.FromCell(World, rally), false,
-				groupedActors: protectSq.Units.Select(u => u.Actor).ToArray()));
+				groupedActors: protectSq.Units.Select(u => u.Actor).ToArray()) { TargetString = "h2" });
 
 			if (allyDefendAnswer != null)
 				CommitAllyDefend(allyDefendAnswer, rally, protectSq.Units.Count);
@@ -2336,7 +2336,7 @@ namespace OpenRA.Mods.CA.Traits
 					protectSq.Units.AddRange(sq.Units);
 					sq.Units.Clear();
 					bot.QueueOrder(new Order("AttackMove", null, Target.FromCell(World, rally), false,
-						groupedActors: protectSq.Units.Select(u => u.Actor).ToArray()));
+						groupedActors: protectSq.Units.Select(u => u.Actor).ToArray()) { TargetString = "h2" });
 					continue;
 				}
 

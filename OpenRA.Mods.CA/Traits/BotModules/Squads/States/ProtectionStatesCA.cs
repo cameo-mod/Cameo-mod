@@ -200,10 +200,10 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 			tryAttack++;
 
-			QueueDeduped(owner, "ReturnToBase", SquadOrderKey.Plain("ReturnToBase"), Target.Invalid, resupplyingUnits, terminal: true);
-			QueueDeduped(owner, "AttackMove", SquadOrderKey.ForCell("AttackMove", leader.Location), Target.FromCell(owner.World, leader.Location), followingUnits);
+			QueueDeduped(owner, "ReturnToBase", SquadOrderKey.Plain("ReturnToBase"), Target.Invalid, resupplyingUnits, terminal: true, arsTag: "h2");
+			QueueDeduped(owner, "AttackMove", SquadOrderKey.ForCell("AttackMove", leader.Location), Target.FromCell(owner.World, leader.Location), followingUnits, arsTag: "h2");
 			if (owner.TargetActor != null)
-				QueueDeduped(owner, "AttackMove", SquadOrderKey.ForActor("AttackMove", owner.TargetActor), Target.FromActor(owner.TargetActor), attackingUnits);
+				QueueDeduped(owner, "AttackMove", SquadOrderKey.ForActor("AttackMove", owner.TargetActor), Target.FromActor(owner.TargetActor), attackingUnits, arsTag: "h2");
 		}
 
 		// AR-S: the latch wins over the freshly computed mode — a lure that goes quiet keeps
@@ -218,7 +218,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				.Where(a => owner.OrderChanged(a, SquadOrderKey.ForCell(orderName, rally))).ToArray();
 			if (changed.Length > 0)
 				owner.Bot.QueueOrder(new Order(orderName, null, Target.FromCell(owner.World, rally), false,
-					groupedActors: changed));
+					groupedActors: changed) { TargetString = "h2" });
 		}
 
 		public void Deactivate(SquadCA owner) { }

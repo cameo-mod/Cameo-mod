@@ -26,7 +26,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			// CA F2p2 (2bad89a77): AttackMove instead of Move, so the squad fights on the way home.
 			var orderName = squad.SquadManager.Info.UseUpstreamStateTweaks ? "AttackMove" : "Move";
 			foreach (var a in squad.Units)
-				squad.Bot.QueueOrder(new Order(orderName, a.Actor, Target.FromCell(squad.World, loc), false));
+				squad.Bot.QueueOrder(new Order(orderName, a.Actor, Target.FromCell(squad.World, loc), false) { TargetString = "h8" });
 		}
 
 		// DESIGN 19.12: a ground squad that falls back or goes idle returns to the staging point nearest to it (the front, with the
@@ -62,11 +62,11 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 		/// stop-start stutter the maintainer reported. With UseSquadOrderDedup off every member
 		/// "changed", reproducing the pre-change stream (minus empty orders, which carry nothing).
 		/// </summary>
-		protected static void QueueDeduped(SquadCA owner, string orderName, SquadOrderKey key, Target target, IReadOnlyList<Actor> members, bool terminal = false)
+		protected static void QueueDeduped(SquadCA owner, string orderName, SquadOrderKey key, Target target, IReadOnlyList<Actor> members, bool terminal = false, string arsTag = null)
 		{
 			var changed = members.Where(a => owner.OrderChanged(a, key, terminal)).ToArray();
 			if (changed.Length > 0)
-				owner.Bot.QueueOrder(new Order(orderName, null, target, false, groupedActors: changed));
+				owner.Bot.QueueOrder(new Order(orderName, null, target, false, groupedActors: changed) { TargetString = arsTag });
 		}
 
 		protected static bool BusyAttack(Actor a)
@@ -342,7 +342,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			{
 				var rearmChanged = rearmingUnits.Where(a => squad.OrderChanged(a, SquadOrderKey.Plain("ReturnToBase"), terminal: true)).ToArray();
 				if (rearmChanged.Length > 0)
-					squad.Bot.QueueOrder(new Order("ReturnToBase", null, true, groupedActors: rearmChanged));
+					squad.Bot.QueueOrder(new Order("ReturnToBase", null, true, groupedActors: rearmChanged) { TargetString = "h8" });
 			}
 
 			if (fleeingUnits.Count > 0)
@@ -358,7 +358,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 						home = squad.FleeHomeCell.Value;
 				}
 
-				QueueDeduped(squad, "Move", SquadOrderKey.ForCell("Move", home), Target.FromCell(squad.World, home), fleeingUnits);
+				QueueDeduped(squad, "Move", SquadOrderKey.ForCell("Move", home), Target.FromCell(squad.World, home), fleeingUnits, arsTag: "h8");
 			}
 		}
 
