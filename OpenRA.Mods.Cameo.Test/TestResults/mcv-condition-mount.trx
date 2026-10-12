@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="460326d5-8ff0-4e93-b982-3958ddc75ff3" name="AedisToru@CAMEODEVPC 2026-10-09 19:25:35" runUser="CAMEODEVPC\AedisToru" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-09T19:25:35.0217586+02:00" queuing="2026-10-09T19:25:35.0217590+02:00" start="2026-10-09T19:25:34.2524908+02:00" finish="2026-10-09T19:25:35.0269609+02:00" />
+  <TestSettings name="default" id="a7818dea-1340-4600-9ee9-1e5b7ebb439a">
+    <Deployment runDeploymentRoot="AedisToru_CAMEODEVPC_2026-10-09_19_25_35" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="ee68d412-69a2-4048-a753-3a9d62d65cad" testId="b29e9974-0af8-156f-7d30-0da88d86668f" testName="RealYamlArmsOnlyGenericAndRetainsClassicDefaults" computerName="CAMEODEVPC" duration="00:00:00.0411000" startTime="2026-10-09T19:25:34.8554650+02:00" endTime="2026-10-09T19:25:34.8965644+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ee68d412-69a2-4048-a753-3a9d62d65cad" />
+    <UnitTestResult executionId="7e25dd17-2700-4b7f-90a2-9c1fe8ae710b" testId="285baed4-48ee-0c07-f4e7-4f2b0ad3eb20" testName="OriginalInstanceIsByteIdenticalExceptForAddedSearchCondition" computerName="CAMEODEVPC" duration="00:00:00.0265050" startTime="2026-10-09T19:25:34.8277713+02:00" endTime="2026-10-09T19:25:34.8542133+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7e25dd17-2700-4b7f-90a2-9c1fe8ae710b" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="OriginalInstanceIsByteIdenticalExceptForAddedSearchCondition" storage="c:\cameo-wt\sol-mcv-deploy-cell\engine\bin\openra.mods.cameo.test.dll" id="285baed4-48ee-0c07-f4e7-4f2b0ad3eb20">
+      <Execution id="7e25dd17-2700-4b7f-90a2-9c1fe8ae710b" />
+      <TestMethod codeBase="C:\cameo-wt\sol-mcv-deploy-cell\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.McvDeployCellMountTest" name="OriginalInstanceIsByteIdenticalExceptForAddedSearchCondition" />
+    </UnitTest>
+    <UnitTest name="RealYamlArmsOnlyGenericAndRetainsClassicDefaults" storage="c:\cameo-wt\sol-mcv-deploy-cell\engine\bin\openra.mods.cameo.test.dll" id="b29e9974-0af8-156f-7d30-0da88d86668f">
+      <Execution id="ee68d412-69a2-4048-a753-3a9d62d65cad" />
+      <TestMethod codeBase="C:\cameo-wt\sol-mcv-deploy-cell\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.McvDeployCellMountTest" name="RealYamlArmsOnlyGenericAndRetainsClassicDefaults" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="b29e9974-0af8-156f-7d30-0da88d86668f" executionId="ee68d412-69a2-4048-a753-3a9d62d65cad" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="285baed4-48ee-0c07-f4e7-4f2b0ad3eb20" executionId="7e25dd17-2700-4b7f-90a2-9c1fe8ae710b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="2" executed="2" passed="2" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>NUnit Adapter 4.6.0.0: Test execution started&#xD;
+Running selected tests in C:\cameo-wt\sol-mcv-deploy-cell\engine\bin\OpenRA.Mods.Cameo.Test.dll&#xD;
+   NUnit3TestExecutor discovered 2 of 2 NUnit test cases using Current Discovery mode, Non-Explicit run&#xD;
+NUnit Adapter 4.6.0.0: Test execution complete&#xD;
+</StdOut>
+    </Output>
+  </ResultSummary>
+</TestRun>
