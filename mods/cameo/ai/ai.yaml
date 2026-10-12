@@ -173,6 +173,7 @@
 		NewProductionCashThreshold: 20000
 		MaximiseProductionCashRequirement: 9500
 		AdaptiveCounterWeight: 0
+		CapturerInfantryLimitPct: 80
 		RetreatRatioPct: 10
 		RequiresCondition: easiestbot
 	BotLimits@veryeasy:
@@ -193,6 +194,7 @@
 		NewProductionCashThreshold: 18000
 		MaximiseProductionCashRequirement: 8500
 		AdaptiveCounterWeight: 4
+		CapturerInfantryLimitPct: 72
 		RetreatRatioPct: 20
 		RequiresCondition: veryeasybot
 	BotLimits@easy:
@@ -213,6 +215,7 @@
 		NewProductionCashThreshold: 16000
 		MaximiseProductionCashRequirement: 7500
 		AdaptiveCounterWeight: 9
+		CapturerInfantryLimitPct: 64
 		RetreatRatioPct: 30
 		RequiresCondition: easybot
 	BotLimits@medium:
@@ -233,6 +236,7 @@
 		NewProductionCashThreshold: 14000
 		MaximiseProductionCashRequirement: 6500
 		AdaptiveCounterWeight: 13
+		CapturerInfantryLimitPct: 57
 		RetreatRatioPct: 40
 		RequiresCondition: mediumbot
 	BotLimits@hard:
@@ -254,6 +258,7 @@
 		NewProductionCashThreshold: 12000
 		MaximiseProductionCashRequirement: 5500
 		AdaptiveCounterWeight: 18
+		CapturerInfantryLimitPct: 49
 		RetreatRatioPct: 50
 		RequiresCondition: hardbot
 	BotLimits@veryhard:
@@ -275,6 +280,7 @@
 		NewProductionCashThreshold: 10000
 		MaximiseProductionCashRequirement: 4500
 		AdaptiveCounterWeight: 22
+		CapturerInfantryLimitPct: 41
 		RetreatRatioPct: 60
 		RequiresCondition: veryhardbot
 	BotLimits@brutal:
@@ -296,6 +302,7 @@
 		NewProductionCashThreshold: 8000
 		MaximiseProductionCashRequirement: 3500
 		AdaptiveCounterWeight: 27
+		CapturerInfantryLimitPct: 33
 		RetreatRatioPct: 70
 		RequiresCondition: brutalbot
 	BotLimits@challenger:
@@ -317,6 +324,7 @@
 		NewProductionCashThreshold: 6000
 		MaximiseProductionCashRequirement: 2500
 		AdaptiveCounterWeight: 31
+		CapturerInfantryLimitPct: 26
 		RetreatRatioPct: 80
 		RequiresCondition: challengerbot
 	BotLimits@unbeatable:
@@ -338,6 +346,7 @@
 		NewProductionCashThreshold: 4000
 		MaximiseProductionCashRequirement: 1500
 		AdaptiveCounterWeight: 36
+		CapturerInfantryLimitPct: 18
 		RetreatRatioPct: 90
 		RequiresCondition: unbeatablebot
 	BotLimits@god:
@@ -359,6 +368,7 @@
 		NewProductionCashThreshold: 2000
 		MaximiseProductionCashRequirement: 500
 		AdaptiveCounterWeight: 40
+		CapturerInfantryLimitPct: 10
 		RetreatRatioPct: 100
 		RequiresCondition: cameogodbot
 
@@ -4328,7 +4338,15 @@ Player:
 		CaptureTargetTries: 3
 		CaptureFailuresBeforeDormant: 2
 		CaptureRetreatsBeforeDormant: 4
+		# S1 (FINDINGS_2026-10-12 §3): the flat 3000-tick shelf produced 42 sorties / 6 captures —
+		# a target that keeps repelling engineers now backs off 3000 -> 6000 -> 9000 -> 12000.
+		CaptureDormantEscalationMax: 4
 		MaxEngineersPerTarget: 1
+		# S1: generic's priority list (its non-empty set overrides the classic list above —
+		# PriorityCapturableActorTypes falls back to shared only when empty). ConYards,
+		# unit production and tech structures outrank the civilian buildings the classic
+		# list already had; they also become escort-eligible.
+		PriorityCapturableActorTypes: v19, hosp, fcom, miss, ramiss, rabio, oilb, v19.husk, hosp.husk, bio.husk, miss.husk, fcom.husk, oilb.husk, td_gdi_constructionyard, td_nod_constructionyard, td_gdi_weaponsfactory, td_nod_airstrip, ts_nod_techcenter, ts_gdi_techcenter, cabal_techcenter, tsnttmpl, cabal_core, td_nod_templeofnod, td_nod_templeprime, ra1_allies_constructionyard, ra1_soviets_constructionyard, japan_japaneseconstructionyard, ra1_soviets_warfactory, ra1_soviets_largefactory, ra1_allies_warfactory, japan_japanesewarfactory, ra1_soviets_airfield, ra1_soviets_largesovietairfield, japan_japaneseairfield, ra1_allies_techcenter, ra1_soviets_techcenter, japan_japanesetechcenter, ra2_soviets_constructionyard, ra2_allies_constructionyard, yuri_constructionyard, ra2_soviets_warfactory, ra2_allies_warfactory, yuri_warfactory, ra2_allies_airforcecommandhq, ra2_allies_battlelab, ra2_soviets_battlelab, yuri_battlelab, yuri_lunarcommandcenter, asianalliance_constructionyard, asianalliance_warfactory, asianalliance_battlelab, ixian_constructionyard, ixian_advancedheavyfactory, ixian_ixresearchcenter, ixian_starport, latinsyndicate_syndicateconstructionyard, latinsyndicate_syndicatefactory, naxis_constructionyard, naxis_warfactory, naxis_academy, naxis_techcenter, schwarzermond_constructionyard, schwarzermond_warfactory, schwarzermond_techcenter, futuretech_constructionyard, futuretech_warpgate, futuretech_transmissioncenter, futuretech_battlelab, terran_commandcenter, terran_weaponsfactory, terran_academy, tkm_constructionyard, atreides_constructionyard, corrino_constructionyard, harkonnen_constructionyard, atreides_lightfactory, corrino_lightfactory, harkonnen_lightfactory, atreides_heavyfactory, corrino_heavyfactory, harkonnen_heavyfactory, atreides_hightechfactory, corrino_hightechfactory, harkonnen_hightechfactory, atreides_ixresearchcenter, corrino_ixresearchcenter, harkonnen_ixresearchcenter, atreides_starport, corrino_starport, harkonnen_starport, eden_factory_structure, eden_factory_vehicle, eden_factory_consumer, plymouth_structure_factory, plymouth_factory_vehicle, plymouth_factory_arachnid
 		# FB2: Frans SpecOps demand-capturers — safe targets justify building a specialist (switch T).
 		UseDemandCapturers: false
 		# TC-2e: yield a capture target to the outranking ally's published claim (switch group BF).
@@ -5218,6 +5236,13 @@ Player:
 		MaxUnitsPerBot: 200
 	UnitBuilderBotModuleCA@generic:
 		RequiresCondition: genericbot || classicbot
+		# S1 (FINDINGS_2026-10-12 §3): the switch gate also arms the capturer ratio — classic
+		# (the A/B control) never sees genericbot, so its engineer spam is untouched there.
+		# CapturerInfantryLimitPct lives on the BotLimits difficulty line; 50 is only the
+		# fallback for a ruleset that ships no BotLimits.
+		SwitchCondition: genericbot
+		CapturerInfantryLimitPct: 50
+		CapturerMinimumUnits: 2
 		UseCompositions: true
 		# UW-1 (AI_ARCHITECTURE §2.8b item 3): derive the UnitsToBuild weights from the enabled
 		# personality's RoleMix x each unit's Versus-weighted strength. Off until the next increment

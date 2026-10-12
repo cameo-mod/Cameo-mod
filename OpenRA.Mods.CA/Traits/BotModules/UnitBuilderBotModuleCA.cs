@@ -11,8 +11,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using OpenRA.Mods.AS.Traits;
 using OpenRA.Mods.Common;
 using OpenRA.Mods.Common.Traits;
+using OpenRA.Primitives;
 using OpenRA.Support;
 using OpenRA.Traits;
 
@@ -44,6 +46,15 @@ namespace OpenRA.Mods.CA.Traits
 
 		[Desc("Minimum duration between building a specific unit.")]
 		public readonly Dictionary<string, int> UnitIntervals = null;
+
+		[Desc("S1 (FINDINGS_2026-10-12 §3): live capturer units (engineers and kin) at most this percent",
+			"of live armed infantry — the engineer:combat-infantry ratio. 0 disables. BotLimits",
+			".CapturerInfantryLimitPct overrides per difficulty; the switch gate keeps it off classic.")]
+		public readonly int CapturerInfantryLimitPct = 0;
+
+		[Desc("S1: live capturers below this floor are always admitted — the capture capability",
+			"survives even before the infantry army exists.")]
+		public readonly int CapturerMinimumUnits = 2;
 
 		[Desc("How often should the unit builder check to build more units")]
 		public readonly int UnitBuilderInterval = 0;
@@ -189,6 +200,73 @@ namespace OpenRA.Mods.CA.Traits
 
 		int MaximiseProductionCash => botLimits != null && botLimits.Info.MaximiseProductionCashRequirement >= 0
 			? botLimits.Info.MaximiseProductionCashRequirement : Info.MaximiseProductionCashRequirement;
+
+		// S1 (FINDINGS_2026-10-12 §3): engineer:combat-infantry ratio cap — OFF for classic
+		// (switchesActive is only ever true under genericbot), so a bot's share of the
+		// unit mix can never stack capturers past the difficulty-scaled portion of its
+		// infantry. Difficulty ladder wins over the module default, like every BotLimits override.
+		int CapturerLimitPct
+		{
+			get
+			{
+				if (!switchesActive)
+					return 0;
+				if (botLimits != null && botLimits.Info.CapturerInfantryLimitPct >= 0)
+					return botLimits.Info.CapturerInfantryLimitPct;
+				return Info.CapturerInfantryLimitPct;
+			}
+		}
+
+		// S1 pure seam: cap = floor(armed infantry * pct / 100), floored at
+		// capturerMinimumUnits so capture capability survives an empty infantry count.
+		// Self-correcting: over-cap engineers die back or succeed before more queue.
+		public static bool CapturerCapAdmits(int capturerLimitPct, int capturerUnits, int armedInfantryUnits, int capturerMinimumUnits)
+		{
+			if (capturerLimitPct <= 0)
+				return true;
+			var cap = Math.Max(capturerMinimumUnits, (int)Math.Floor(armedInfantryUnits * (long)capturerLimitPct / 100.0));
+			return capturerUnits < cap;
+		}
+
+		// "Combat infantry" for the ratio: an actor the enemy would target as Infantry
+		// (the Infantry targetable type, the same marker squads use) that actually carries
+		// a weapon. Capture bodies, unarmed medics/mechanics and slaved units never count.
+		static readonly BitSet<TargetableType> InfantryTargetTypes = new("Infantry");
+
+		static bool IsArmedInfantry(ActorInfo info) =>
+			info.GetAllTargetTypes().Overlaps(InfantryTargetTypes) &&
+			!info.HasTraitInfo<CapturesInfo>() &&
+			!info.HasTraitInfo<CarrierSlaveInfo>() &&
+			info.TraitInfos<ArmamentInfo>().Any(arm => arm.WeaponInfo != null);
+
+		// Counts are world-state per tick; ShouldBuild may see several capturer
+		// candidates in one queue pass, so scan once and cache.
+		int capturerCountsTick = -1, capturerUnitsCached, armedInfantryCached;
+
+		void CapturerArmyCounts(out int capturerUnits, out int armedInfantryUnits)
+		{
+			if (capturerCountsTick == world.WorldTick)
+			{
+				capturerUnits = capturerUnitsCached;
+				armedInfantryUnits = armedInfantryCached;
+				return;
+			}
+
+			capturerCountsTick = world.WorldTick;
+			capturerUnitsCached = 0;
+			armedInfantryCached = 0;
+			foreach (var actor in world.Actors.Where(actor => actor.Owner == player && !actor.IsDead && actor.IsInWorld))
+			{
+				var info = actor.Info;
+				if (info.HasTraitInfo<CapturesInfo>())
+					capturerUnitsCached++;
+				else if (IsArmedInfantry(info))
+					armedInfantryCached++;
+			}
+
+			capturerUnits = capturerUnitsCached;
+			armedInfantryUnits = armedInfantryCached;
+		}
 
 		public UnitBuilderBotModuleCA(Actor self, UnitBuilderBotModuleCAInfo info)
 			: base(info)
@@ -496,6 +574,17 @@ namespace OpenRA.Mods.CA.Traits
 				Info.UnitLimits.ContainsKey(name) &&
 				world.Actors.Count(a => !a.IsDead && a.Owner == player && a.Info.Name == name) >= Info.UnitLimits[name])
 				return false;
+
+			// S1: the capturer ratio — counts only when the candidate IS a capturer;
+			// single actor scan covers both counts and is skipped entirely when
+			// the cap is off (classic) or the unit has no Captures trait.
+			if (world.Map.Rules.Actors.TryGetValue(name, out var candidate) &&
+				candidate.HasTraitInfo<CapturesInfo>())
+			{
+				CapturerArmyCounts(out var capturerUnits, out var armedInfantryUnits);
+				if (!CapturerCapAdmits(CapturerLimitPct, capturerUnits, armedInfantryUnits, Info.CapturerMinimumUnits))
+					return false;
+			}
 
 			return true;
 		}

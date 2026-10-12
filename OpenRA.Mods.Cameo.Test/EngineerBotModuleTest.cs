@@ -134,5 +134,38 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(EngineerBotModule.GoesDormant(10, 0), Is.False,
 				"a zero threshold is the off switch — a retreat/death run never rests");
 		}
+
+		// S1 (FINDINGS_2026-10-12 §3): the escalating shelf. Each shelve of one mission costs the
+		// next episode one more CaptureDormantTicks, capped by CaptureDormantEscalationMax — the
+		// 42-sortie churn cannot ride the flat 3000-tick shelf any more.
+		[Test]
+		public void TheShelfEscalatesPerEpisode()
+		{
+			Assert.That(EngineerBotModule.DormantWindowTicks(3000, 1, 4), Is.EqualTo(3000));
+			Assert.That(EngineerBotModule.DormantWindowTicks(3000, 2, 4), Is.EqualTo(6000));
+			Assert.That(EngineerBotModule.DormantWindowTicks(3000, 3, 4), Is.EqualTo(9000));
+			Assert.That(EngineerBotModule.DormantWindowTicks(3000, 4, 4), Is.EqualTo(12000));
+			Assert.That(EngineerBotModule.DormantWindowTicks(3000, 9, 4), Is.EqualTo(12000),
+				"episodes past the escalation cap rest the capped window, not a longer one");
+		}
+
+		[Test]
+		public void TheShelfIsFlatWhenEscalationIsOff()
+		{
+			// CaptureDormantEscalationMax 1 is the old flat behaviour — A/B control shape.
+			Assert.That(EngineerBotModule.DormantWindowTicks(3000, 1, 1), Is.EqualTo(3000));
+			Assert.That(EngineerBotModule.DormantWindowTicks(3000, 7, 1), Is.EqualTo(3000));
+		}
+
+		[Test]
+		public void TheShelfIsDefensiveAgainstBadConfig()
+		{
+			Assert.That(EngineerBotModule.DormantWindowTicks(0, 3, 4), Is.EqualTo(0), "a zero shelf never parks a mission");
+			Assert.That(EngineerBotModule.DormantWindowTicks(-5, 3, 4), Is.EqualTo(0));
+			Assert.That(EngineerBotModule.DormantWindowTicks(3000, 0, 4), Is.EqualTo(3000), "episode 0 is clamped to the first shelf");
+			Assert.That(EngineerBotModule.DormantWindowTicks(3000, 5, 0), Is.EqualTo(3000), "a zero escalation max still shelves once");
+			Assert.That(EngineerBotModule.DormantWindowTicks(int.MaxValue, 4, 4), Is.EqualTo(int.MaxValue),
+				"the multiplier can never overflow the until-tick");
+		}
 	}
 }
