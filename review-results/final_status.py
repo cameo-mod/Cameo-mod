@@ -1,0 +1,2 @@
+﻿from pathlib import Path
+p=Path('C:/Users/AedisToru/Documents/GitHub/Cameo-mod-fleet/STATUS_2026-10-07_multi_turret_targeting.md');s=p.read_text(encoding='utf-8');s=s.replace('Engine local codex/','Engine origin/codex/').replace('Mod local codex/','Mod origin/codex/').replace('Branches NOT pushed;', 'Isolated branches pushed under VP approval20:42Z;').replace('Independent review and publication authorization remain;', 'Independent review remains;');p.write_text(s,encoding='utf-8')

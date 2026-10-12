@@ -1,0 +1,837 @@
+[
+  {
+    "actor": "japan_exorcistoitank",
+    "turrets": [
+      "primary",
+      "secondary",
+      "main",
+      "back"
+    ],
+    "attacks": [
+      "AttackTurreted"
+    ],
+    "arms": [
+      {
+        "key": "Armament@MAIN",
+        "name": "primary",
+        "turret": "main",
+        "weapon": "OIHakureiring",
+        "condition": null
+      },
+      {
+        "key": "Armament@AntiEpic",
+        "name": "primary",
+        "turret": "main",
+        "weapon": "OIHakureiring2",
+        "condition": null
+      },
+      {
+        "key": "Armament@PRIMARY",
+        "name": "primary",
+        "turret": "primary",
+        "weapon": "OISmallCannon",
+        "condition": "!japan_upgrade_advancedplasmaweapons"
+      },
+      {
+        "key": "Armament@SECONDARY",
+        "name": "primary",
+        "turret": "secondary",
+        "weapon": "OISmallCannon",
+        "condition": "!japan_upgrade_advancedplasmaweapons"
+      },
+      {
+        "key": "Armament@Back",
+        "name": "primary",
+        "turret": "back",
+        "weapon": "OISmallCannon",
+        "condition": "!japan_upgrade_advancedplasmaweapons"
+      },
+      {
+        "key": "Armament@UpgradePRIMARY",
+        "name": "primary",
+        "turret": "primary",
+        "weapon": "OISmallPlasmaCannon",
+        "condition": "japan_upgrade_advancedplasmaweapons"
+      },
+      {
+        "key": "Armament@UpgradeSECONDARY",
+        "name": "primary",
+        "turret": "secondary",
+        "weapon": "OISmallPlasmaCannon",
+        "condition": "japan_upgrade_advancedplasmaweapons"
+      },
+      {
+        "key": "Armament@UpgradeBack",
+        "name": "primary",
+        "turret": "back",
+        "weapon": "OISmallPlasmaCannon",
+        "condition": "japan_upgrade_advancedplasmaweapons"
+      },
+      {
+        "key": "Armament@PRIMARYFlame",
+        "name": "primary",
+        "turret": "primary",
+        "weapon": "OIFlamer",
+        "condition": "!japan_upgrade_advancedplasmaweapons"
+      },
+      {
+        "key": "Armament@SECONDARYFlame",
+        "name": "secondary",
+        "turret": "secondary",
+        "weapon": "OIFlamer",
+        "condition": "!japan_upgrade_advancedplasmaweapons"
+      },
+      {
+        "key": "Armament@UpgradePRIMARYFlame",
+        "name": "primary",
+        "turret": "primary",
+        "weapon": "OIPlasmaFlamer",
+        "condition": "japan_upgrade_advancedplasmaweapons"
+      },
+      {
+        "key": "Armament@UpgradeSECONDARYFlame",
+        "name": "secondary",
+        "turret": "secondary",
+        "weapon": "OIPlasmaFlamer",
+        "condition": "japan_upgrade_advancedplasmaweapons"
+      }
+    ]
+  },
+  {
+    "actor": "japan_oitank",
+    "turrets": [
+      "primary",
+      "secondary",
+      "main",
+      "back"
+    ],
+    "attacks": [
+      "AttackTurreted"
+    ],
+    "arms": [
+      {
+        "key": "Armament@MAIN",
+        "name": "primary",
+        "turret": "main",
+        "weapon": "OIBigCannon",
+        "condition": "!japan_upgrade_advancedplasmaweapons"
+      },
+      {
+        "key": "Armament@Upgrade",
+        "name": "primary",
+        "turret": "main",
+        "weapon": "OIBigPlasmaCannon",
+        "condition": "japan_upgrade_advancedplasmaweapons"
+      },
+      {
+        "key": "Armament@PRIMARY",
+        "name": "primary",
+        "turret": "primary",
+        "weapon": "OISmallCannon",
+        "condition": "!japan_upgrade_advancedplasmaweapons"
+      },
+      {
+        "key": "Armament@SECONDARY",
+        "name": "primary",
+        "turret": "secondary",
+        "weapon": "OISmallCannon",
+        "condition": "!japan_upgrade_advancedplasmaweapons"
+      },
+      {
+        "key": "Armament@Back",
+        "name": "primary",
+        "turret": "back",
+        "weapon": "OISmallCannon",
+        "condition": "!japan_upgrade_advancedplasmaweapons"
+      },
+      {
+        "key": "Armament@UpgradePRIMARY",
+        "name": "primary",
+        "turret": "primary",
+        "weapon": "OISmallPlasmaCannon",
+        "condition": "japan_upgrade_advancedplasmaweapons"
+      },
+      {
+        "key": "Armament@UpgradeSECONDARY",
+        "name": "primary",
+        "turret": "secondary",
+        "weapon": "OISmallPlasmaCannon",
+        "condition": "japan_upgrade_advancedplasmaweapons"
+      },
+      {
+        "key": "Armament@UpgradeBack",
+        "name": "primary",
+        "turret": "back",
+        "weapon": "OISmallPlasmaCannon",
+        "condition": "japan_upgrade_advancedplasmaweapons"
+      },
+      {
+        "key": "Armament@PRIMARYFlame",
+        "name": "primary",
+        "turret": "primary",
+        "weapon": "OIFlamer",
+        "condition": "!japan_upgrade_advancedplasmaweapons"
+      },
+      {
+        "key": "Armament@SECONDARYFlame",
+        "name": "secondary",
+        "turret": "secondary",
+        "weapon": "OIFlamer",
+        "condition": "!japan_upgrade_advancedplasmaweapons"
+      },
+      {
+        "key": "Armament@UpgradePRIMARYFlame",
+        "name": "primary",
+        "turret": "primary",
+        "weapon": "OIPlasmaFlamer",
+        "condition": "japan_upgrade_advancedplasmaweapons"
+      },
+      {
+        "key": "Armament@UpgradeSECONDARYFlame",
+        "name": "secondary",
+        "turret": "secondary",
+        "weapon": "OIPlasmaFlamer",
+        "condition": "japan_upgrade_advancedplasmaweapons"
+      }
+    ]
+  },
+  {
+    "actor": "japan_yamatobattleship",
+    "turrets": [
+      "primary",
+      "secondary",
+      "flak"
+    ],
+    "attacks": [
+      "AttackTurreted"
+    ],
+    "arms": [
+      {
+        "key": "Armament@PRIMARY",
+        "name": "primary",
+        "turret": "primary",
+        "weapon": "YamatoCannon",
+        "condition": null
+      },
+      {
+        "key": "Armament@SECONDARY",
+        "name": "secondary",
+        "turret": "secondary",
+        "weapon": "YamatoCannon",
+        "condition": null
+      },
+      {
+        "key": "Armament@AA",
+        "name": "primary",
+        "turret": "flak",
+        "weapon": "YamatoFlak",
+        "condition": null
+      }
+    ]
+  },
+  {
+    "actor": "nax_bitsmark",
+    "turrets": [
+      "primary",
+      "secondary",
+      "tercera",
+      "cuarta"
+    ],
+    "attacks": [
+      "AttackTurreted"
+    ],
+    "arms": [
+      {
+        "key": "Armament@PRIMARY",
+        "name": "primary",
+        "turret": "primary",
+        "weapon": "8Inch",
+        "condition": null
+      },
+      {
+        "key": "Armament@SECONDARY",
+        "name": "secondary",
+        "turret": "secondary",
+        "weapon": "8Inch",
+        "condition": null
+      },
+      {
+        "key": "Armament@TERCERA",
+        "name": "primary",
+        "turret": "tercera",
+        "weapon": "8Inch",
+        "condition": null
+      },
+      {
+        "key": "Armament@CUARTA",
+        "name": "primary",
+        "turret": "cuarta",
+        "weapon": "8Inch",
+        "condition": null
+      }
+    ]
+  },
+  {
+    "actor": "naxis_naximachinegunners",
+    "turrets": [
+      "deploy",
+      "dummy"
+    ],
+    "attacks": [
+      "AttackTurreted"
+    ],
+    "arms": [
+      {
+        "key": "Armament@Dummy",
+        "name": "dummy",
+        "turret": "dummy",
+        "weapon": "NaxiWW2MachinegunnerTargeting",
+        "condition": "!deployed"
+      },
+      {
+        "key": "Armament@Deployed",
+        "name": "deployed",
+        "turret": "deploy",
+        "weapon": "NaxiWW2Machinegunner",
+        "condition": "(deployed || undeployed) && !rank-elite"
+      },
+      {
+        "key": "Armament@DEPLOYEDELITE",
+        "name": "deployed",
+        "turret": "deploy",
+        "weapon": "NaxiWW2Machinegunner_elite",
+        "condition": "(deployed || undeployed) && rank-elite"
+      },
+      {
+        "key": "Armament@GARRISONED",
+        "name": "garrisoned",
+        "turret": "primary",
+        "weapon": "NaxiWW2Machinegunner",
+        "condition": "!rank-elite"
+      },
+      {
+        "key": "Armament@GARRISONEDELITE",
+        "name": "garrisoned",
+        "turret": "primary",
+        "weapon": "NaxiWW2Machinegunner_elite",
+        "condition": "rank-elite"
+      }
+    ]
+  },
+  {
+    "actor": "naxis_portableflak",
+    "turrets": [
+      "deploy",
+      "dummy"
+    ],
+    "attacks": [
+      "AttackTurreted"
+    ],
+    "arms": [
+      {
+        "key": "Armament@Dummy",
+        "name": "dummy",
+        "turret": "dummy",
+        "weapon": "NaxQuadCannonTargeting",
+        "condition": "!deployed"
+      },
+      {
+        "key": "Armament@Deployed",
+        "name": "deployed",
+        "turret": "deploy",
+        "weapon": "PortableFlak",
+        "condition": "(deployed || undeployed) && !rank-elite"
+      },
+      {
+        "key": "Armament@DEPLOYEDELITE",
+        "name": "deployed",
+        "turret": "deploy",
+        "weapon": "PortableFlak_elite",
+        "condition": "(deployed || undeployed) && rank-elite"
+      },
+      {
+        "key": "Armament@GARRISONED",
+        "name": "garrisoned",
+        "turret": "primary",
+        "weapon": "PortableFlak",
+        "condition": "!rank-elite"
+      },
+      {
+        "key": "Armament@GARRISONEDELITE",
+        "name": "garrisoned",
+        "turret": "primary",
+        "weapon": "PortableFlak_elite",
+        "condition": "rank-elite"
+      }
+    ]
+  },
+  {
+    "actor": "ra1_allies_bastionartillerybunker",
+    "turrets": [
+      "primary",
+      "cannon"
+    ],
+    "attacks": [
+      "AttackTurreted"
+    ],
+    "arms": [
+      {
+        "key": "Armament",
+        "name": "cannon",
+        "turret": "cannon",
+        "weapon": "ra1_allies_bastionartillerybunker_155mmbastion",
+        "condition": "!disabled && !lowpower && !ra1_allies_upgrade_cryomissiles"
+      },
+      {
+        "key": "Armament@Upgrade",
+        "name": "cannon",
+        "turret": "cannon",
+        "weapon": "ra1_allies_bastionartillerybunker_155mmbastioncryo",
+        "condition": "!disabled && !lowpower && ra1_allies_upgrade_cryomissiles"
+      }
+    ]
+  },
+  {
+    "actor": "ra1_allies_cruiser",
+    "turrets": [
+      "primary",
+      "secondary"
+    ],
+    "attacks": [
+      "AttackTurreted"
+    ],
+    "arms": [
+      {
+        "key": "Armament@PRIMARY",
+        "name": "primary",
+        "turret": "primary",
+        "weapon": "ra1_allies_cruiser_8inch",
+        "condition": "!ra1_allies_upgrade_cryomissiles"
+      },
+      {
+        "key": "Armament@SECONDARY",
+        "name": "secondary",
+        "turret": "secondary",
+        "weapon": "ra1_allies_cruiser_8inch",
+        "condition": "!ra1_allies_upgrade_cryomissiles"
+      },
+      {
+        "key": "Armament@PRIMARYCryo",
+        "name": "primary",
+        "turret": "primary",
+        "weapon": "ra1_allies_cruiser_8inchcryo",
+        "condition": "ra1_allies_upgrade_cryomissiles"
+      },
+      {
+        "key": "Armament@SECONDARYCryo",
+        "name": "secondary",
+        "turret": "secondary",
+        "weapon": "ra1_allies_cruiser_8inchcryo",
+        "condition": "ra1_allies_upgrade_cryomissiles"
+      }
+    ]
+  },
+  {
+    "actor": "td_gdi_defenserig",
+    "turrets": [
+      "pointdefense",
+      "pointdefensedeployed",
+      "targeting",
+      "targetingdeployed",
+      "primary",
+      "tower",
+      "railgun",
+      "missilepod"
+    ],
+    "attacks": [
+      "AttackTurreted"
+    ],
+    "arms": [
+      {
+        "key": "Armament@pointdefense",
+        "name": "pointdefense",
+        "turret": "pointdefense",
+        "weapon": "GDIRigPDLaser",
+        "condition": "undeployed"
+      },
+      {
+        "key": "Armament@pointdefensedeployed",
+        "name": "primary",
+        "turret": "pointdefensedeployed",
+        "weapon": "GDIRigPDLaserTower",
+        "condition": "deployed"
+      },
+      {
+        "key": "Armament@DroneTargeting",
+        "name": "targeting",
+        "turret": "targeting",
+        "weapon": "GDIRigDroneTargeting",
+        "condition": "undeployed"
+      },
+      {
+        "key": "Armament@DroneTargetingDeployed",
+        "name": "targetingdeployed",
+        "turret": "targetingdeployed",
+        "weapon": "GDIRigDroneTargetingTower",
+        "condition": "deployed"
+      },
+      {
+        "key": "Armament@mobile",
+        "name": "primary",
+        "turret": "primary",
+        "weapon": "td_gdi_defenserig_gdirigphalanx",
+        "condition": "undeployed"
+      },
+      {
+        "key": "Armament@Phalanx",
+        "name": "deployed",
+        "turret": "tower",
+        "weapon": "td_gdi_defenserig_gdirigphalanxtower",
+        "condition": "deployed"
+      },
+      {
+        "key": "Armament@Railgun",
+        "name": "deployed",
+        "turret": "railgun",
+        "weapon": "td_gdi_defenserig_gdirigrailgun",
+        "condition": "deployed"
+      },
+      {
+        "key": "Armament@MissilePod",
+        "name": "deployed",
+        "turret": "missilepod",
+        "weapon": "td_gdi_defenserig_gdirigmissilepod",
+        "condition": "!td_gdi_upgrade_advancedmissiletargeting && deployed"
+      },
+      {
+        "key": "Armament@AdvancedMissileTargeting",
+        "name": "primary",
+        "turret": "missilepod",
+        "weapon": "td_gdi_defenserig_gdirigmissilepodamt",
+        "condition": "td_gdi_upgrade_advancedmissiletargeting && deployed"
+      }
+    ]
+  },
+  {
+    "actor": "td_gdi_railgunbattleship",
+    "turrets": [
+      "primary",
+      "secondary"
+    ],
+    "attacks": [
+      "AttackTurreted"
+    ],
+    "arms": [
+      {
+        "key": "Armament@PRIMARY",
+        "name": "primary",
+        "turret": "primary",
+        "weapon": "td_gdi_railgunbattleship_gdibattleshiprailgun",
+        "condition": null
+      },
+      {
+        "key": "Armament@SECONDARY",
+        "name": "secondary",
+        "turret": "secondary",
+        "weapon": "td_gdi_railgunbattleship_gdibattleshiprailgun",
+        "condition": null
+      }
+    ]
+  },
+  {
+    "actor": "td_nod_lasercorvette",
+    "turrets": [
+      "primary",
+      "secondary"
+    ],
+    "attacks": [
+      "AttackTurreted"
+    ],
+    "arms": [
+      {
+        "key": "Armament@PRIMARY",
+        "name": "primary",
+        "turret": "primary",
+        "weapon": "td_nod_lasercorvette_corvettelaserobelisk",
+        "condition": null
+      },
+      {
+        "key": "Armament@SECONDARY",
+        "name": "secondary",
+        "turret": "secondary",
+        "weapon": "td_nod_lasercorvette_corvettedragon",
+        "condition": null
+      }
+    ]
+  },
+  {
+    "actor": "terran_matador",
+    "turrets": [
+      "primary",
+      "deployed"
+    ],
+    "attacks": [
+      "AttackTurreted"
+    ],
+    "arms": [
+      {
+        "key": "Armament",
+        "name": "primary",
+        "turret": "primary",
+        "weapon": "MatadorFlamer",
+        "condition": "undeployed"
+      },
+      {
+        "key": "Armament@DEPLOYED",
+        "name": "deployed",
+        "turret": "deployed",
+        "weapon": "MatadorLaser",
+        "condition": "deployed"
+      }
+    ]
+  },
+  {
+    "actor": "ts_gdi_carrier",
+    "turrets": [
+      "primary",
+      "secondary",
+      "tercera",
+      "cuarta",
+      "quinta",
+      "sexta"
+    ],
+    "attacks": [
+      "AttackTurreted"
+    ],
+    "arms": [
+      {
+        "key": "Armament@PRIMARY",
+        "name": "primary",
+        "turret": "primary",
+        "weapon": "TSAPCGun",
+        "condition": null
+      },
+      {
+        "key": "Armament@SECONDARY",
+        "name": "secondary",
+        "turret": "secondary",
+        "weapon": "TSAPCGun",
+        "condition": null
+      },
+      {
+        "key": "Armament@TERCERA",
+        "name": "primary",
+        "turret": "tercera",
+        "weapon": "TSAPCGun",
+        "condition": null
+      },
+      {
+        "key": "Armament@CUARTA",
+        "name": "primary",
+        "turret": "cuarta",
+        "weapon": "TSAPCGun",
+        "condition": null
+      },
+      {
+        "key": "Armament@QUINTA",
+        "name": "primary",
+        "turret": "quinta",
+        "weapon": "TSCarrierTarget",
+        "condition": null
+      }
+    ]
+  },
+  {
+    "actor": "ts_gdi_cruiser",
+    "turrets": [
+      "primary",
+      "secondary",
+      "tercera",
+      "cuarta",
+      "quinta",
+      "sexta"
+    ],
+    "attacks": [
+      "AttackTurreted"
+    ],
+    "arms": [
+      {
+        "key": "Armament@PRIMARY",
+        "name": "primary",
+        "turret": "primary",
+        "weapon": "TS8Inch",
+        "condition": null
+      },
+      {
+        "key": "Armament@SECONDARY",
+        "name": "secondary",
+        "turret": "secondary",
+        "weapon": "TS8Inch",
+        "condition": null
+      },
+      {
+        "key": "Armament@TERCERA",
+        "name": "primary",
+        "turret": "tercera",
+        "weapon": "TS8Inch",
+        "condition": null
+      },
+      {
+        "key": "Armament@CUARTA",
+        "name": "primary",
+        "turret": "cuarta",
+        "weapon": "TS8Inch",
+        "condition": null
+      },
+      {
+        "key": "Armament@QUINTA",
+        "name": "primary",
+        "turret": "quinta",
+        "weapon": "TSHoverMissile",
+        "condition": null
+      },
+      {
+        "key": "Armament@SEXTA",
+        "name": "primary",
+        "turret": "sexta",
+        "weapon": "TSHoverMissile",
+        "condition": null
+      }
+    ]
+  },
+  {
+    "actor": "ts_gdi_juggernaut",
+    "turrets": [
+      "deploy",
+      "dummy"
+    ],
+    "attacks": [
+      "AttackTurreted"
+    ],
+    "arms": [
+      {
+        "key": "Armament@Dummy",
+        "name": "dummy",
+        "turret": "dummy",
+        "weapon": "TSJuggTargeting",
+        "condition": "!deployed"
+      },
+      {
+        "key": "Armament@Deployed",
+        "name": "deployed",
+        "turret": "deploy",
+        "weapon": "TSJugg90mm",
+        "condition": "deployed || undeployed"
+      }
+    ]
+  },
+  {
+    "actor": "ts_nod_artillery",
+    "turrets": [
+      "deploy",
+      "dummy"
+    ],
+    "attacks": [
+      "AttackTurreted"
+    ],
+    "arms": [
+      {
+        "key": "Armament@Dummy",
+        "name": "dummy",
+        "turret": "dummy",
+        "weapon": "TSArtyTargeting",
+        "condition": "!deployed"
+      },
+      {
+        "key": "Armament@Deployed",
+        "name": "deployed",
+        "turret": "deploy",
+        "weapon": "TS155mm",
+        "condition": "(deployed || undeployed) && !ts_nod_upgrade_auxiliaryweapon"
+      },
+      {
+        "key": "Armament@DeployedUpgrade",
+        "name": "deployed",
+        "turret": "deploy",
+        "weapon": "TSAux155mm",
+        "condition": "(deployed || undeployed) && ts_nod_upgrade_auxiliaryweapon"
+      }
+    ]
+  },
+  {
+    "actor": "ts_nod_cruiser",
+    "turrets": [
+      "primary",
+      "secondary",
+      "tercera",
+      "cuarta",
+      "quinta"
+    ],
+    "attacks": [
+      "AttackTurreted"
+    ],
+    "arms": [
+      {
+        "key": "Armament@PRIMARY",
+        "name": "primary",
+        "turret": "primary",
+        "weapon": "TS8Inch",
+        "condition": null
+      },
+      {
+        "key": "Armament@SECONDARY",
+        "name": "secondary",
+        "turret": "secondary",
+        "weapon": "TS8Inch",
+        "condition": null
+      },
+      {
+        "key": "Armament@TERCERA",
+        "name": "primary",
+        "turret": "tercera",
+        "weapon": "TS8Inch",
+        "condition": null
+      },
+      {
+        "key": "Armament@CUARTA",
+        "name": "primary",
+        "turret": "cuarta",
+        "weapon": "TS8Inch",
+        "condition": null
+      },
+      {
+        "key": "Armament@QUINTA",
+        "name": "primary",
+        "turret": "quinta",
+        "weapon": "TS8Inch",
+        "condition": null
+      }
+    ]
+  },
+  {
+    "actor": "zerg_lurker",
+    "turrets": [
+      "deploy",
+      "dummy"
+    ],
+    "attacks": [
+      "AttackTurreted"
+    ],
+    "arms": [
+      {
+        "key": "Armament@Dummy",
+        "name": "dummy",
+        "turret": "dummy",
+        "weapon": "LurkerTargeting",
+        "condition": "!deployed"
+      },
+      {
+        "key": "Armament@Deployed",
+        "name": "deployed",
+        "turret": "deploy",
+        "weapon": "LurkerSpines",
+        "condition": "deployed || undeployed"
+      }
+    ]
+  }
+]
