@@ -21304,3 +21304,30 @@ the channel, never the game or the notifying module.
 lock held by the logger lane). git diff scoped to the 7 sites + signature;
 symbols resolve against 871973f74. Steps 2 (repro) and 3 (localized fix)
 await a bounded runtime admission.
+
+
+## 2026-10-12 — BUG-NAXIS-UNBOUND-SLAVE-IDLE (claude/naxis-unbound-slave-idle)
+
+**Bug.** Barracks-built (unbound) naxis slaves idled after the first delivery
+(playback 184914Z: 61 of 67 unbound slaves idled, 0 of 2,591 refinery-bound
+samples). `SlaveMinerSpawnerSlave.MovingToDock` appended a bare `MoveToDock`
+on every engine notification for a slave with no master dock; with no
+`FindAndDeliverResources` behind it, the queue ran dry once the harvest
+activity stopped itself after its first full cycle.
+
+**Fix.** (1) The unbound branch of `MovingToDock` now appends nothing; the
+engine's own `MoveToDock` already drives the trip. (2) The slave ticks itself
+(`ITick`, `IdleCheckTick` = 103, floor 100 via `SlaveIdleRescue.Cadence`) when
+it has no master and runs the same `Decide` policy as the master rescue; both
+paths share one `Rescue` method. Bound slaves are unchanged and still rescued
+by their master. RNG-free; no yaml change needed.
+
+**Tests.** `SlaveMinerUnboundIdleTest` (6): source contracts on the unbound
+branch, the master-only guard on the self tick, a single shared Decide call
+site, cadence arming and floor, policy truth rows, no randomness.
+
+**Status.** Source and tests written; NOT built or run yet — build waits for a
+Luna-granted admission window (RAM). No game launched. Overlaps
+codex/01a12ecb-naxis-slave-idle@79fa19b05 in the same file (different
+hunks; master already carries the equivalent SetMasterDock/ClearMasterBinding
+changes) — rebase onto post-wave master before landing.
