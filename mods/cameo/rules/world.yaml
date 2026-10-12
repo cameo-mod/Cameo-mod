@@ -917,6 +917,10 @@ World:
 	# PLAYTEST-TELEMETRY-V2: record-only per-player samples + event stream for every seat,
 	# cameo-ai-players-*.jsonl (maintainer request 2026-10-12).
 	AiPlayerTelemetry:
+	# REPLAY-HEALTH-LOGGER: opt-in economy health capture controller; activates
+	# AiEconomyHealthRecorder on loggable bot seats, emits cameo-ai-economy-health.jsonl
+	# and cameo-ai-economy-raw.jsonl (record-only; activation approved 2026-10-13).
+	AiEconomyHealthCapture:
 	AiSituationLogWriter:
 	# FE-0 / BO-0: record-only placement + build-order log, cameo-ai-placements.jsonl (AI_ARCHITECTURE 12.24, 12.25).
 	AiPlacementLogWriter:

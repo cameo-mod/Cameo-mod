@@ -4173,6 +4173,11 @@ Player:
 	# Bookkeeping only; classicbot emits mission records too, so it runs on both stacks.
 	BotMissionAttemptTracker:
 		RequiresCondition: genericbot || classicbot
+	# REPLAY-HEALTH-LOGGER activation (2026-10-13): per-seat record-only queue/resource
+	# observer feeding AiEconomyHealthCapture; the seat gate is IsLoggableBot inside the
+	# capture controller (combatant bots only) — RequiresCondition would be a dead key
+	# on a plain TraitInfo. Never orders, zero cost outside bot matches.
+	AiEconomyHealthRecorder:
 	BotPersonalityController:
 		RequiresCondition: genericbot
 		# League exploiters hold one pole forever (AI_DEEP_RESEARCH §6.2);
