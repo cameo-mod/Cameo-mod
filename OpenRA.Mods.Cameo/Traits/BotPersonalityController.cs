@@ -14,6 +14,7 @@ using System.Linq;
 using OpenRA.GameRules;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Primitives;
+using OpenRA.Support;
 using OpenRA.Traits;
 
 namespace OpenRA.Mods.Cameo.Traits
@@ -97,30 +98,31 @@ namespace OpenRA.Mods.Cameo.Traits
 			if (pinnedTo == null)
 			{
 				var botType = self.Owner.IsBot ? self.Owner.BotType : null;
-				pinnedTo = PinnedPersonality(Info.PinnedPersonalities, botType) ?? BanditPin(self) ?? "";
+				pinnedTo = PinnedPersonality(Info.PinnedPersonalities, botType) ?? "";
 			}
 
 			return pinnedTo.Length > 0 ? pinnedTo : null;
 		}
 
-		// Tier-3: a plan-bandit personality arm pins the same way as a harness pin. The bandit resolves
-		// lazily on first read, so this is safe no matter which trait enables first. Harness pins win.
-		static string BanditPin(Actor self)
-		{
-			var bandit = self.TraitsImplementing<BotModules.PlanBanditBotModule>().FirstOrDefault(t => !t.IsTraitDisabled);
-			var arm = bandit?.PinnedPersonalityArm;
-			return arm != null && arm.Length > 0 ? arm : null;
-		}
-
 		protected override void TraitEnabled(Actor self)
 		{
-			var pinned = PinnedPersonality(self);
-			var condition = pinned != null
-				? Info.Conditions.FirstOrDefault(c => PersonalityName(c, Info.PersonalityPrefix) == pinned)
-				: null;
-			condition ??= Info.Conditions.Random(self.World.SharedRandom);
+			var condition = ChooseInitialCondition(Info.Conditions, Info.PersonalityPrefix,
+				PinnedPersonality(self), self.World.SharedRandom);
 			personalityToken = self.GrantCondition(condition);
 			CurrentPersonality = PersonalityName(condition, Info.PersonalityPrefix);
+		}
+
+		// AR-2 (fleet orders 2026-10-04b): the draw is unconditional — every client consumes exactly
+		// one SharedRandom draw at enable so the shared stream never depends on pin state. The bandit
+		// pin must never be read here: it is host-side state (LocalRandom + a local learned file) and
+		// reaches the world only as a synced SetBotPersonality order from the host's BotTick.
+		internal static string ChooseInitialCondition(string[] conditions, string prefix, string pinned, MersenneTwister rng)
+		{
+			var drawn = conditions.Random(rng);
+			if (pinned == null)
+				return drawn;
+
+			return conditions.FirstOrDefault(c => PersonalityName(c, prefix) == pinned) ?? drawn;
 		}
 
 		protected override void TraitDisabled(Actor self)

@@ -1,0 +1,1 @@
+Get-ChildItem -Recurse C:\cameo-wt\_ars_ev_before\Replays, C:\cameo-wt\_ars_ev_after\Replays -Filter *.orarep -ErrorAction SilentlyContinue | Select-Object FullName, Length

@@ -1,0 +1,445 @@
+diff --git a/OpenRA.Mods.CA/Traits/BotModules/SquadManagerBotModuleCA.cs b/OpenRA.Mods.CA/Traits/BotModules/SquadManagerBotModuleCA.cs
+index 25dba6778..51fccd8cc 100644
+--- a/OpenRA.Mods.CA/Traits/BotModules/SquadManagerBotModuleCA.cs
++++ b/OpenRA.Mods.CA/Traits/BotModules/SquadManagerBotModuleCA.cs
+@@ -574,6 +574,13 @@ public class SquadManagerBotModuleCAInfo : ConditionalTraitInfo
+ 			"0 (Turtle) x1.5. Off, or no enabled provider, keeps the unchanged delay.")]
+ 		public readonly bool UseUtilityAxes = false;
+ 
++		[Desc("AR-S residual (2026-10-04): squad states only queue an order to a member when the " +
++			"(order, quantized target) actually changed — identical per-tick re-issues cancel the " +
++			"in-flight activity and read as stop-start stutter. Also latches the protection " +
++			"rally/lure mode and the shared Retreat flee-home pick per episode. " +
++			"Off = pre-change order stream.")]
++		public readonly bool UseSquadOrderDedup = false;
++
+ 		public override void RulesetLoaded(Ruleset rules, ActorInfo ai)
+ 		{
+ 			base.RulesetLoaded(rules, ai);
+diff --git a/OpenRA.Mods.CA/Traits/BotModules/Squads/SquadCA.cs b/OpenRA.Mods.CA/Traits/BotModules/Squads/SquadCA.cs
+index 8a7fd7ecb..7e3fc80d8 100644
+--- a/OpenRA.Mods.CA/Traits/BotModules/Squads/SquadCA.cs
++++ b/OpenRA.Mods.CA/Traits/BotModules/Squads/SquadCA.cs
+@@ -52,6 +52,17 @@ public class SquadCA
+ 		internal CPos DeployCooldownCell;
+ 		internal int DeployCooldownTick = int.MinValue / 2;
+ 
++		// AR-S residual (2026-10-04): the last (order, quantized target) a dedup call site queued
++		// per member — survives state changes, so even a new state repeating the same order is
++		// suppressed. Armed by UseSquadOrderDedup; empty while unarmed (bit-identical stream).
++		internal readonly Dictionary<Actor, SquadOrderKey> OrderMemory = new();
++
++		// AR-S: the armed-path flee-episode home latch. Retreat(flee: true) re-rolls
++		// HomeLocation every squad tick — a fresh random building each pass cancels
++		// the in-flight leg and wanders the squad forever. The latch holds the pick
++		// until the whole squad is idle (the episode's end); a new leg then re-rolls.
++		internal CPos? FleeHomeCell;
++
+ 		// internal CPos BaseLocation;
+ 
+ 		public SquadCA(IBot bot, SquadManagerBotModuleCA squadManager, SquadCAType type)
+@@ -123,11 +134,32 @@ public void Update()
+ 					SquadManager.CanaryObserved(Target.Actor, "squad-update-target");
+ 
+ 				FuzzyStateMachine.Update(this);
++
++				if (SquadManager.Info.UseSquadOrderDedup)
++				{
++					if (OrderMemory.Count > 0)
++						foreach (var stale in OrderMemory.Keys.Where(a => !Units.Any(u => u.Actor == a)).ToList())
++							OrderMemory.Remove(stale);
++
++					if (FleeHomeCell != null && Units.All(u => u.Actor.IsIdle))
++						FleeHomeCell = null;
++				}
+ 			}
+ 		}
+ 
+ 		public bool IsValid => Units.Count > 0;
+ 
++		/// <summary>
++		/// Deduped order issue (UseSquadOrderDedup): true when queuing <paramref name="key"/> to
++		/// <paramref name="member"/> is a real change — different order/target, first order, or a
++		/// completed mobile order on an idle member. Terminal orders (Stop/ReturnToBase/Scatter)
++		/// pass <paramref name="terminal"/> = true and never repeat to the same effect.
++		/// </summary>
++		internal bool OrderChanged(Actor member, SquadOrderKey key, bool terminal = false)
++		{
++			return SquadOrderDedup.Changed(OrderMemory, SquadManager.Info.UseSquadOrderDedup, member, key, terminal);
++		}
++
+ 		public Actor TargetActor
+ 		{
+ 			get => Target.Actor;
+diff --git a/OpenRA.Mods.CA/Traits/BotModules/Squads/SquadOrderDedup.cs b/OpenRA.Mods.CA/Traits/BotModules/Squads/SquadOrderDedup.cs
+new file mode 100644
+index 000000000..9e6418695
+--- /dev/null
++++ b/OpenRA.Mods.CA/Traits/BotModules/Squads/SquadOrderDedup.cs
+@@ -0,0 +1,95 @@
++#region Copyright & License Information
++/**
++ * Copyright (c) The OpenRA Combined Arms Developers (see CREDITS).
++ * This file is part of OpenRA Combined Arms, which is free software.
++ * It is made available to you under the terms of the GNU General Public License
++ * as published by the Free Software Foundation, either version 3 of the License,
++ * or (at your option) any later version. For more information, see COPYING.
++ */
++#endregion
++
++using System.Collections.Generic;
++using OpenRA.Mods.Common.Traits;
++
++namespace OpenRA.Mods.CA.Traits.BotModules.Squads
++{
++	/// <summary>
++	/// What a squad last ordered one member to do. Cell targets are quantized to CPos so a
++	/// drifting WPos or a moving leader only re-issues once the destination cell actually
++	/// changes; actor targets key on the target's identity; target-less orders (Stop,
++	/// Scatter, ReturnToBase) key on the order name alone.
++	/// </summary>
++	public readonly struct SquadOrderKey
++	{
++		public readonly string Order;
++		public readonly CPos Cell;
++		public readonly uint TargetActorId;
++
++		public SquadOrderKey(string order, CPos cell, uint targetActorId)
++		{
++			Order = order;
++			Cell = cell;
++			TargetActorId = targetActorId;
++		}
++
++		public static SquadOrderKey ForCell(string order, CPos cell) => new(order, cell, 0);
++		public static SquadOrderKey ForActor(string order, Actor target) => new(order, CPos.Zero, target.ActorID);
++		public static SquadOrderKey Plain(string order) => new(order, CPos.Zero, 0);
++	}
++
++	/// <summary>
++	/// AR-S residual lane (2026-10-04): the per-tick identical-order guard. A re-issued order
++	/// identical to the in-flight one cancels the activity and restarts the path — the
++	/// move-one-tile, stand, move-one-tile march the maintainer reported. The rule keeps
++	/// micro-management (the maintainer explicitly allows per-second re-tasking while a unit
++	/// is in motion or attacking): suppression applies ONLY when the queued order is the same
++	/// (order, quantized target) the member already carries.
++	///
++	/// Terminal orders (Stop, Scatter, ReturnToBase — the ones whose completion leaves the
++	/// member idle) are suppressed whenever the same order was already issued: re-sending
++	/// them does nothing the first order did not. Mobile orders (Move, AttackMove, Attack)
++	/// additionally re-issue when the member is idle — its earlier order completed (arrived,
++	/// path exhausted), so the repeat is a genuine retry, not a cancellation.
++	/// </summary>
++	public static class SquadOrderDedup
++	{
++		/// <summary>The pure rule. All branches pinned by SquadOrderDedupTest.</summary>
++		public static bool ShouldIssue(bool armed, bool hasPrev, bool sameKey, bool idle, bool terminal)
++		{
++			// Unarmed: the pre-change order stream, bit-identical.
++			if (!armed)
++				return true;
++
++			// First order for this member, or a real change of intent.
++			if (!hasPrev || !sameKey)
++				return true;
++
++			// Same key, member idle, mobile order: the earlier order completed — retry is real work.
++			if (idle && !terminal)
++				return true;
++
++			// Same order already in flight (or a terminal order already given): suppress.
++			return false;
++		}
++
++		/// <summary>
++		/// Records and answers whether <paramref name="member"/>'s queued order is a change.
++		/// Callers filter their member lists through this before building the order, so a
++		/// grouped order only carries members whose (order, target) actually moved.
++		/// </summary>
++		public static bool Changed(Dictionary<Actor, SquadOrderKey> memory, bool armed, Actor member, SquadOrderKey key, bool terminal)
++		{
++			var hasPrev = memory.TryGetValue(member, out var prev);
++			var idle = member.IsIdle;
++			var same = hasPrev && prev.Equals(key);
++
++			if (!ShouldIssue(armed, hasPrev, same, idle, terminal))
++				return false;
++
++			if (armed)
++				memory[member] = key;
++
++			return true;
++		}
++	}
++}
+diff --git a/OpenRA.Mods.CA/Traits/BotModules/Squads/States/GroundStatesCA.cs b/OpenRA.Mods.CA/Traits/BotModules/Squads/States/GroundStatesCA.cs
+index eb9bc4698..481dd4099 100644
+--- a/OpenRA.Mods.CA/Traits/BotModules/Squads/States/GroundStatesCA.cs
++++ b/OpenRA.Mods.CA/Traits/BotModules/Squads/States/GroundStatesCA.cs
+@@ -277,7 +277,9 @@ public void Tick(SquadCA owner)
+ 				if ((u.Actor.CenterPosition - parentPos).LengthSquared <= followRangeSquared)
+ 					continue;
+ 
+-				owner.Bot.QueueOrder(new Order("Move", u.Actor, Target.FromPos(parentPos), false));
++				var cell = owner.World.Map.CellContaining(parentPos);
++				if (owner.OrderChanged(u.Actor, SquadOrderKey.ForCell("Move", cell)))
++					owner.Bot.QueueOrder(new Order("Move", u.Actor, Target.FromPos(parentPos), false));
+ 			}
+ 		}
+ 
+@@ -1005,7 +1007,9 @@ public void Tick(SquadCA owner)
+ 				if (micro && TryIssueMicroOrder(owner, a.Actor, focus, focusProfile))
+ 					continue;
+ 
+-				owner.Bot.QueueOrder(new Order("AttackMove", a.Actor, Target.FromActor(owner.TargetActor), false));
++				if (owner.TargetActor != null
++					&& owner.OrderChanged(a.Actor, SquadOrderKey.ForActor("AttackMove", owner.TargetActor)))
++					owner.Bot.QueueOrder(new Order("AttackMove", a.Actor, Target.FromActor(owner.TargetActor), false));
+ 			}
+ 
+ 			if (ShouldFlee(owner))
+@@ -1273,8 +1277,11 @@ public void Tick(SquadCA owner)
+ 					owner.FuzzyStateMachine.ChangeState(owner, new GuerrillaUnitsRunState(), true);
+ 			}
+ 
+-			owner.Bot.QueueOrder(new Order("AttackMove", null, Target.FromCell(owner.World, leader.Location), false, groupedActors: followingUnits.ToArray()));
+-			owner.Bot.QueueOrder(new Order("AttackMove", null, Target.FromActor(owner.TargetActor), false, groupedActors: attackingUnits.ToArray()));
++			QueueDeduped(owner, "AttackMove", SquadOrderKey.ForCell("AttackMove", leader.Location),
++				Target.FromCell(owner.World, leader.Location), followingUnits);
++			if (owner.TargetActor != null)
++				QueueDeduped(owner, "AttackMove", SquadOrderKey.ForActor("AttackMove", owner.TargetActor),
++					Target.FromActor(owner.TargetActor), attackingUnits);
+ 
+ 			isFirstTick = false;
+ 		}
+diff --git a/OpenRA.Mods.CA/Traits/BotModules/Squads/States/NavyStatesCA.cs b/OpenRA.Mods.CA/Traits/BotModules/Squads/States/NavyStatesCA.cs
+index ae451fbf1..1869c6efd 100644
+--- a/OpenRA.Mods.CA/Traits/BotModules/Squads/States/NavyStatesCA.cs
++++ b/OpenRA.Mods.CA/Traits/BotModules/Squads/States/NavyStatesCA.cs
+@@ -217,9 +217,12 @@ public void Tick(SquadCA owner)
+ 				{
+ 					leader = GetPathfindLeader(owner, owner.SquadManager.Info.SuggestedNavyLeaderLocomotor);
+ 					leader.WPos = leader.Actor.CenterPosition;
+-					owner.Bot.QueueOrder(new Order("AttackMove", leader.Actor, Target.FromPos(owner.Target.CenterPosition), false));
+-					owner.Bot.QueueOrder(new Order("Stop", null, false, groupedActors: stopUnits.ToArray()));
+-					owner.Bot.QueueOrder(new Order("AttackMove", null, Target.FromCell(owner.World, leader.Actor.Location), false, groupedActors: otherUnits.ToArray()));
++					var kickTargetCell = owner.World.Map.CellContaining(owner.Target.CenterPosition);
++					if (owner.OrderChanged(leader.Actor, SquadOrderKey.ForCell("AttackMove", kickTargetCell)))
++						owner.Bot.QueueOrder(new Order("AttackMove", leader.Actor, Target.FromPos(owner.Target.CenterPosition), false));
++					QueueDeduped(owner, "Stop", SquadOrderKey.Plain("Stop"), Target.Invalid, stopUnits.ToList(), terminal: true);
++					QueueDeduped(owner, "AttackMove", SquadOrderKey.ForCell("AttackMove", leader.Actor.Location),
++						Target.FromCell(owner.World, leader.Actor.Location), otherUnits.ToList());
+ 					kickStuck--;
+ 				}
+ 				else if (kickStuck == 1)
+@@ -242,8 +245,10 @@ public void Tick(SquadCA owner)
+ 				if (makeWay > 1)
+ 				{
+ 					var others = owner.Units.Where(u => u.Actor != leader.Actor).Select(u => u.Actor);
+-					owner.Bot.QueueOrder(new Order("Scatter", null, false, groupedActors: others.ToArray()));
+-					owner.Bot.QueueOrder(new Order("AttackMove", leader.Actor, Target.FromPos(owner.Target.CenterPosition), false));
++					QueueDeduped(owner, "Scatter", SquadOrderKey.Plain("Scatter"), Target.Invalid, others.ToList(), terminal: true);
++					var makeWayTargetCell = owner.World.Map.CellContaining(owner.Target.CenterPosition);
++					if (owner.OrderChanged(leader.Actor, SquadOrderKey.ForCell("AttackMove", makeWayTargetCell)))
++						owner.Bot.QueueOrder(new Order("AttackMove", leader.Actor, Target.FromPos(owner.Target.CenterPosition), false));
+ 					makeWay--;
+ 				}
+ 				else if (makeWay == 1)
+@@ -304,12 +309,20 @@ public void Tick(SquadCA owner)
+ 			// Leader will wait squad members that left behind, unless
+ 			// next tick is kick stuck unit (we need leader move in advance).
+ 			if (leaderWaitCheck && kickStuck <= 0)
+-				owner.Bot.QueueOrder(new Order("Stop", leader.Actor, false));
++			{
++				if (owner.OrderChanged(leader.Actor, SquadOrderKey.Plain("Stop"), terminal: true))
++					owner.Bot.QueueOrder(new Order("Stop", leader.Actor, false));
++			}
+ 			else
+-				owner.Bot.QueueOrder(new Order("AttackMove", leader.Actor, Target.FromPos(owner.Target.CenterPosition), false));
++			{
++				var driveCell = owner.World.Map.CellContaining(owner.Target.CenterPosition);
++				if (owner.OrderChanged(leader.Actor, SquadOrderKey.ForCell("AttackMove", driveCell)))
++					owner.Bot.QueueOrder(new Order("AttackMove", leader.Actor, Target.FromPos(owner.Target.CenterPosition), false));
++			}
+ 
+-			var unitsHurryUp = owner.Units.Where(u => (u.Actor.CenterPosition - leader.Actor.CenterPosition).HorizontalLengthSquared >= occupiedArea * 2).Select(u => u.Actor);
+-			owner.Bot.QueueOrder(new Order("AttackMove", null, Target.FromCell(owner.World, leader.Actor.Location), false, groupedActors: unitsHurryUp.ToArray()));
++			var unitsHurryUp = owner.Units.Where(u => (u.Actor.CenterPosition - leader.Actor.CenterPosition).HorizontalLengthSquared >= occupiedArea * 2).Select(u => u.Actor).ToList();
++			QueueDeduped(owner, "AttackMove", SquadOrderKey.ForCell("AttackMove", leader.Actor.Location),
++				Target.FromCell(owner.World, leader.Actor.Location), unitsHurryUp);
+ 		}
+ 
+ 		public void Deactivate(SquadCA owner) { }
+@@ -415,8 +428,11 @@ public void Tick(SquadCA owner)
+ 
+ 			tryAttack++;
+ 
+-			owner.Bot.QueueOrder(new Order("AttackMove", null, Target.FromCell(owner.World, leader.Location), false, groupedActors: followingUnits.ToArray()));
+-			owner.Bot.QueueOrder(new Order("AttackMove", null, Target.FromActor(owner.TargetActor), false, groupedActors: attackingUnits.ToArray()));
++			QueueDeduped(owner, "AttackMove", SquadOrderKey.ForCell("AttackMove", leader.Location),
++				Target.FromCell(owner.World, leader.Location), followingUnits);
++			if (owner.TargetActor != null)
++				QueueDeduped(owner, "AttackMove", SquadOrderKey.ForActor("AttackMove", owner.TargetActor),
++					Target.FromActor(owner.TargetActor), attackingUnits);
+ 		}
+ 
+ 		public void Deactivate(SquadCA owner) { }
+diff --git a/OpenRA.Mods.CA/Traits/BotModules/Squads/States/ProtectionStatesCA.cs b/OpenRA.Mods.CA/Traits/BotModules/Squads/States/ProtectionStatesCA.cs
+index f74ee4d46..d33247cb9 100644
+--- a/OpenRA.Mods.CA/Traits/BotModules/Squads/States/ProtectionStatesCA.cs
++++ b/OpenRA.Mods.CA/Traits/BotModules/Squads/States/ProtectionStatesCA.cs
+@@ -30,9 +30,17 @@ class UnitsForProtectionAttackState : GroundStateBaseCA, IState
+ 		internal int Backoff = BackoffTicks;
+ 		int tryAttack = 0;
+ 
++		// AR-S (2026-10-04): the rally-return mode latch. 0 = not returning; 1 = holding
++		// (AttackMove to rally); 2 = luring (Move to rally). A fog-edge flicker otherwise
++		// alternates AttackMove<->Move to the same cell every squad tick — each issue cancels
++		// the in-flight path. The lure mode wins once entered (a losing squad keeps falling
++		// back); the latch clears when the leader is back inside the rally radius.
++		int rallyMode;
++
+ 		public void Activate(SquadCA owner)
+ 		{
+ 			tryAttackTick = owner.SquadManager.Info.ProtectionScanRadius;
++			rallyMode = 0;
+ 		}
+ 
+ 		public void Tick(SquadCA owner)
+@@ -48,6 +56,9 @@ public void Tick(SquadCA owner)
+ 			var closestEnemy = owner.SquadManager.FindClosestEnemy(leader, protectionScanRadius);
+ 
+ 			var holding = owner.SquadManager.TryGetProtectionRally(out var rally);
++			if (!holding || (leader.Location - rally).LengthSquared <= owner.SquadManager.Info.LureRallyRadiusCells * owner.SquadManager.Info.LureRallyRadiusCells)
++				rallyMode = 0;
++
+ 			// "Quiet" also covers a target that is still valid but invisible (fled into fog): the squad cannot
+ 			// fight it and would otherwise loop Attack→Flee forever with the release timer reset every pass.
+ 			if (closestEnemy == null && (!owner.IsTargetValid || !owner.IsTargetVisible))
+@@ -56,8 +67,7 @@ public void Tick(SquadCA owner)
+ 				if (holding)
+ 				{
+ 					if ((leader.Location - rally).LengthSquared > owner.SquadManager.Info.LureRallyRadiusCells * owner.SquadManager.Info.LureRallyRadiusCells)
+-						owner.Bot.QueueOrder(new Order("AttackMove", null, Target.FromCell(owner.World, rally), false,
+-							groupedActors: owner.Units.Select(u => u.Actor).ToArray()));
++						QueueRallyOrder(owner, 1, rally);
+ 					return;
+ 				}
+ 
+@@ -68,6 +78,12 @@ public void Tick(SquadCA owner)
+ 					return;
+ 				}
+ 
++				// AR-S armed: hold position instead of fleeing — the Flee->Idle->Attack cycle issued a
++				// fresh random-building Move every pass while the release timer counted down.
++				// Quiet defenders keep their post until the release fires or the enemy returns.
++				if (owner.SquadManager.Info.UseSquadOrderDedup)
++					return;
++
+ 				owner.FuzzyStateMachine.ChangeState(owner, new UnitsForProtectionFleeState(), false);
+ 				return;
+ 			}
+@@ -79,8 +95,7 @@ public void Tick(SquadCA owner)
+ 				&& (leader.Location - rally).LengthSquared > owner.SquadManager.Info.LureRallyRadiusCells * owner.SquadManager.Info.LureRallyRadiusCells
+ 				&& owner.SquadManager.PredictsLoss(owner, owner.SquadManager.VisibleEnemiesNear(leader.CenterPosition, protectionScanRadius)))
+ 			{
+-				owner.Bot.QueueOrder(new Order("Move", null, Target.FromCell(owner.World, rally), false,
+-					groupedActors: owner.Units.Select(u => u.Actor).ToArray()));
++				QueueRallyOrder(owner, 2, rally);
+ 				return;
+ 			}
+ 			else if (closestEnemy != null && owner.TargetActor != closestEnemy)
+@@ -185,9 +200,25 @@ public void Tick(SquadCA owner)
+ 
+ 			tryAttack++;
+ 
+-			owner.Bot.QueueOrder(new Order("ReturnToBase", null, false, groupedActors: resupplyingUnits.ToArray()));
+-			owner.Bot.QueueOrder(new Order("AttackMove", null, Target.FromCell(owner.World, leader.Location), false, groupedActors: followingUnits.ToArray()));
+-			owner.Bot.QueueOrder(new Order("AttackMove", null, Target.FromActor(owner.TargetActor), false, groupedActors: attackingUnits.ToArray()));
++			QueueDeduped(owner, "ReturnToBase", SquadOrderKey.Plain("ReturnToBase"), Target.Invalid, resupplyingUnits, terminal: true);
++			QueueDeduped(owner, "AttackMove", SquadOrderKey.ForCell("AttackMove", leader.Location), Target.FromCell(owner.World, leader.Location), followingUnits);
++			if (owner.TargetActor != null)
++				QueueDeduped(owner, "AttackMove", SquadOrderKey.ForActor("AttackMove", owner.TargetActor), Target.FromActor(owner.TargetActor), attackingUnits);
++		}
++
++		// AR-S: the latch wins over the freshly computed mode — a lure that goes quiet keeps
++		// falling back (Move), never downgrades to fighting on the way; a holding squad that
++		// starts losing upgrades to the lure run. Grouped order only carries changed members.
++		void QueueRallyOrder(SquadCA owner, int mode, CPos rally)
++		{
++			rallyMode = System.Math.Max(rallyMode, mode);
++
++			var orderName = rallyMode == 2 ? "Move" : "AttackMove";
++			var changed = owner.Units.Select(u => u.Actor)
++				.Where(a => owner.OrderChanged(a, SquadOrderKey.ForCell(orderName, rally))).ToArray();
++			if (changed.Length > 0)
++				owner.Bot.QueueOrder(new Order(orderName, null, Target.FromCell(owner.World, rally), false,
++					groupedActors: changed));
+ 		}
+ 
+ 		public void Deactivate(SquadCA owner) { }
+diff --git a/OpenRA.Mods.CA/Traits/BotModules/Squads/States/StateBaseCA.cs b/OpenRA.Mods.CA/Traits/BotModules/Squads/States/StateBaseCA.cs
+index 9d0541748..29927f3af 100644
+--- a/OpenRA.Mods.CA/Traits/BotModules/Squads/States/StateBaseCA.cs
++++ b/OpenRA.Mods.CA/Traits/BotModules/Squads/States/StateBaseCA.cs
+@@ -56,6 +56,19 @@ protected static CPos RandomBuildingLocation(SquadCA squad)
+ 			return location;
+ 		}
+ 
++		/// <summary>
++		/// AR-S (2026-10-04): grouped order over only the members whose (order, quantized target)
++		/// actually changed — an identical re-issue cancels the member's in-flight activity, the
++		/// stop-start stutter the maintainer reported. With UseSquadOrderDedup off every member
++		/// "changed", reproducing the pre-change stream (minus empty orders, which carry nothing).
++		/// </summary>
++		protected static void QueueDeduped(SquadCA owner, string orderName, SquadOrderKey key, Target target, IReadOnlyList<Actor> members, bool terminal = false)
++		{
++			var changed = members.Where(a => owner.OrderChanged(a, key, terminal)).ToArray();
++			if (changed.Length > 0)
++				owner.Bot.QueueOrder(new Order(orderName, null, target, false, groupedActors: changed));
++		}
++
+ 		protected static bool BusyAttack(Actor a)
+ 		{
+ 			if (a.IsIdle)
+@@ -311,7 +324,9 @@ protected static void Retreat(SquadCA squad, bool flee, bool rearm, bool repair)
+ 
+ 						if (repairBuilding != null)
+ 						{
+-							squad.Bot.QueueOrder(new Order(orderId, u.Actor, Target.FromActor(repairBuilding), orderQueued));
++							if (squad.OrderChanged(u.Actor, SquadOrderKey.ForActor(orderId, repairBuilding)))
++								squad.Bot.QueueOrder(new Order(orderId, u.Actor, Target.FromActor(repairBuilding), orderQueued));
++
+ 							orderQueued = true;
+ 							alreadyRepair = true;
+ 						}
+@@ -324,10 +339,27 @@ protected static void Retreat(SquadCA squad, bool flee, bool rearm, bool repair)
+ 			}
+ 
+ 			if (rearmingUnits.Count > 0)
+-				squad.Bot.QueueOrder(new Order("ReturnToBase", null, true, groupedActors: rearmingUnits.ToArray()));
++			{
++				var rearmChanged = rearmingUnits.Where(a => squad.OrderChanged(a, SquadOrderKey.Plain("ReturnToBase"), terminal: true)).ToArray();
++				if (rearmChanged.Length > 0)
++					squad.Bot.QueueOrder(new Order("ReturnToBase", null, true, groupedActors: rearmChanged));
++			}
+ 
+ 			if (fleeingUnits.Count > 0)
+-				squad.Bot.QueueOrder(new Order("Move", null, Target.FromCell(squad.World, HomeLocation(squad)), false, groupedActors: fleeingUnits.ToArray()));
++			{
++				// Armed: one home pick per flee episode — a fresh random building per
++				// tick cancels the leg every time (the wander the maintainer saw).
++				var home = HomeLocation(squad);
++				if (squad.SquadManager.Info.UseSquadOrderDedup)
++				{
++					if (squad.FleeHomeCell == null)
++						squad.FleeHomeCell = home;
++					else
++						home = squad.FleeHomeCell.Value;
++				}
++
++				QueueDeduped(squad, "Move", SquadOrderKey.ForCell("Move", home), Target.FromCell(squad.World, home), fleeingUnits);
++			}
+ 		}
+ 
+ 		protected static UnitWposWrapper GetPathfindLeader(SquadCA squad, HashSet<string> locomotorTypes)

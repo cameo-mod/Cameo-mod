@@ -1,0 +1,62 @@
+[off1] units_ordered=130 alternations=199 stutter_units(>=2alt/s)=19 samekey_reissues=646 max_frame=3771
+    unit 850: peak 2 alt/s, 8 alternations over 44 orders
+    unit 793: peak 2 alt/s, 7 alternations over 42 orders
+    unit 794: peak 2 alt/s, 5 alternations over 15 orders
+    unit 877: peak 2 alt/s, 2 alternations over 27 orders
+    unit 891: peak 2 alt/s, 4 alternations over 27 orders
+    unit 893: peak 2 alt/s, 2 alternations over 16 orders
+    unit 894: peak 2 alt/s, 8 alternations over 20 orders
+    unit 897: peak 2 alt/s, 8 alternations over 25 orders
+    unit 909: peak 2 alt/s, 12 alternations over 21 orders
+    unit 919: peak 2 alt/s, 18 alternations over 32 orders
+    unit 924: peak 2 alt/s, 10 alternations over 16 orders
+    unit 947: peak 2 alt/s, 19 alternations over 53 orders
+    order mix: {'AttackMove': 501, 'Move': 284, 'StartProduction': 159, 'ReturnToBase': 116, 'SetRallyPoint': 62, 'PlaceBuilding': 45, 'RepairBuilding': 25, 'EnterGarrison': 20}
+[off2] units_ordered=300 alternations=445 stutter_units(>=2alt/s)=71 samekey_reissues=4457 max_frame=5545
+    unit 1023: peak 3 alt/s, 7 alternations over 147 orders
+    unit 1027: peak 3 alt/s, 13 alternations over 87 orders
+    unit 1030: peak 3 alt/s, 5 alternations over 128 orders
+    unit 1038: peak 3 alt/s, 4 alternations over 41 orders
+    unit 1033: peak 3 alt/s, 5 alternations over 124 orders
+    unit 1052: peak 3 alt/s, 4 alternations over 123 orders
+    unit 1028: peak 3 alt/s, 4 alternations over 125 orders
+    unit 1034: peak 3 alt/s, 4 alternations over 78 orders
+    unit 1046: peak 3 alt/s, 4 alternations over 75 orders
+    unit 1047: peak 3 alt/s, 5 alternations over 132 orders
+    unit 1050: peak 3 alt/s, 4 alternations over 79 orders
+    unit 1051: peak 3 alt/s, 5 alternations over 132 orders
+    order mix: {'AttackMove': 930, 'Move': 894, 'StartProduction': 333, 'ReturnToBase': 173, 'SetRallyPoint': 128, 'PlaceBuilding': 74, 'Stop': 61, 'CaptureActor': 51}
+[off3] units_ordered=261 alternations=366 stutter_units(>=2alt/s)=27 samekey_reissues=2330 max_frame=5537
+    unit 1263: peak 3 alt/s, 5 alternations over 29 orders
+    unit 795: peak 2 alt/s, 3 alternations over 8 orders
+    unit 803: peak 2 alt/s, 2 alternations over 62 orders
+    unit 857: peak 2 alt/s, 2 alternations over 59 orders
+    unit 888: peak 2 alt/s, 3 alternations over 78 orders
+    unit 907: peak 2 alt/s, 4 alternations over 90 orders
+    unit 913: peak 2 alt/s, 2 alternations over 15 orders
+    unit 929: peak 2 alt/s, 9 alternations over 12 orders
+    unit 948: peak 2 alt/s, 7 alternations over 188 orders
+    unit 966: peak 2 alt/s, 6 alternations over 41 orders
+    unit 970: peak 2 alt/s, 5 alternations over 31 orders
+    unit 981: peak 2 alt/s, 6 alternations over 32 orders
+    order mix: {'Move': 1052, 'AttackMove': 888, 'StartProduction': 248, 'ReturnToBase': 186, 'SetRallyPoint': 91, 'Harvest': 88, 'RepairBuilding': 71, 'CaptureActor': 66}
+{
+ "off1": {
+  "units_ordered": 130,
+  "alternations": 199,
+  "stutter_units": 19,
+  "samekey_reissues": 646
+ },
+ "off2": {
+  "units_ordered": 300,
+  "alternations": 445,
+  "stutter_units": 71,
+  "samekey_reissues": 4457
+ },
+ "off3": {
+  "units_ordered": 261,
+  "alternations": 366,
+  "stutter_units": 27,
+  "samekey_reissues": 2330
+ }
+}

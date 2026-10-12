@@ -1,0 +1,156 @@
+diff --git a/OpenRA.Mods.CA/Traits/BotModules/UnitBuilderBotModuleCA.cs b/OpenRA.Mods.CA/Traits/BotModules/UnitBuilderBotModuleCA.cs
+index 3c3a4d85d..a44f94645 100644
+--- a/OpenRA.Mods.CA/Traits/BotModules/UnitBuilderBotModuleCA.cs
++++ b/OpenRA.Mods.CA/Traits/BotModules/UnitBuilderBotModuleCA.cs
+@@ -171,7 +171,7 @@ public class UnitBuilderBotModuleCA : ConditionalTrait<UnitBuilderBotModuleCAInf
+ 		bool firstTick = true;
+ 
+ 		readonly AdaptiveCounterProduction counters;
+-		IBotEnemyCompositionProvider compositionProvider;
++		IBotEnemyCompositionProvider[] compositionProviders;
+ 		IBotPersonalityLeadProvider[] leadProviders;
+ 		IBotUnitRoles unitRoles;
+ 
+@@ -217,7 +217,7 @@ protected override void Created(Actor self)
+ 			requestPause = self.TraitsImplementing<IBotRequestPauseUnitProduction>().ToArray();
+ 			playerResources = self.Owner.PlayerActor.Trait<PlayerResources>();
+ 			techTree = self.Owner.PlayerActor.TraitOrDefault<TechTree>();
+-			compositionProvider = self.TraitsImplementing<IBotEnemyCompositionProvider>().FirstEnabledTraitOrDefault();
++			compositionProviders = self.TraitsImplementing<IBotEnemyCompositionProvider>().ToArray();
+ 			leadProviders = self.TraitsImplementing<IBotPersonalityLeadProvider>().ToArray();
+ 			compositionsModule = Info.UseCompositions ? self.World.WorldActor.TraitOrDefault<UnitCompositionsBotModule>() : null;
+ 
+@@ -269,7 +269,7 @@ void IBotTick.BotTick(IBot bot)
+ 			}
+ 
+ 			if (CounterWeight > 0)
+-				counters.Observe(Info.AdaptiveObservationInterval, compositionProvider);
++				counters.Observe(Info.AdaptiveObservationInterval, compositionProviders.FirstEnabledTraitOrDefault());
+ 
+ 			// Decrement any active unit intervals, removing any that reach zero
+ 			foreach (KeyValuePair<string, int> i in activeUnitIntervals.ToList())
+@@ -969,7 +969,8 @@ List<string> QueuedAircraft(bool ownOnly)
+ 		// legacy omniscient world count stays, so the classic A/B reference is unchanged.
+ 		int EnemyAirThreatCount()
+ 		{
+-			if (ObservedThreats && compositionProvider != null && compositionProvider.TryGetEnemyComposition(out var valueByType))
++			var compositionProvider = ObservedThreats ? compositionProviders.FirstEnabledTraitOrDefault() : null;
++			if (compositionProvider != null && compositionProvider.TryGetEnemyComposition(out var valueByType))
+ 				return AirLimits.EstimateObservedThreatCount(valueByType, Info.AirThreatUnits,
+ 					type => world.Map.Rules.Actors.TryGetValue(type, out var ai) ? ai.TraitInfoOrDefault<ValuedInfo>()?.Cost ?? 0 : 0);
+ 
+diff --git a/OpenRA.Mods.Cameo.Test/BotSeamResolutionTest.cs b/OpenRA.Mods.Cameo.Test/BotSeamResolutionTest.cs
+new file mode 100644
+index 000000000..f175908fe
+--- /dev/null
++++ b/OpenRA.Mods.Cameo.Test/BotSeamResolutionTest.cs
+@@ -0,0 +1,77 @@
++#region Copyright & License Information
++/*
++ * Copyright (c) The OpenRA Developers and Contributors
++ * This file is part of OpenRA, which is free software. It is made
++ * available to you under the terms of the GNU General Public License
++ * as published by the Free Software Foundation, either version 3 of
++ * the License, or (at your option) any later version. For more
++ * information, see COPYING.
++ */
++#endregion
++
++using System.Collections.Generic;
++using NUnit.Framework;
++using OpenRA.Mods.CA.Traits;
++using OpenRA.Traits;
++
++namespace OpenRA.Mods.Cameo.Test
++{
++	[TestFixture]
++	public class BotSeamResolutionTest
++	{
++		// A provider trait is constructed disabled (RequiresCondition grants later), so a consumer
++		// that caches `FirstEnabledTraitOrDefault()` at Created/TraitEnabled caches null forever.
++		// The seam contract is: cache the candidate ARRAY, resolve enabled at each use — then a
++		// provider that enables after the consumer's construction is still found.
++		sealed class StubMainTargetProvider : IBotMainTargetProvider, IDisabledTrait
++		{
++			public bool IsTraitDisabled { get; set; }
++			public Player MainTarget => null;
++		}
++
++		sealed class StubEnemyCompositionProvider : IBotEnemyCompositionProvider, IDisabledTrait
++		{
++			public bool IsTraitDisabled { get; set; }
++			public bool TryGetEnemyComposition(out IReadOnlyDictionary<string, int> valueByActorType)
++			{
++				valueByActorType = null;
++				return false;
++			}
++		}
++
++		[Test]
++		public void LateEnabledMainTargetProviderIsSeen()
++		{
++			var provider = new StubMainTargetProvider { IsTraitDisabled = true };
++			var candidates = new IBotMainTargetProvider[] { provider };
++
++			// The cached-at-enable-time read fails while the provider is still disabled.
++			Assert.That(candidates.FirstEnabledTraitOrDefault(), Is.Null);
++
++			provider.IsTraitDisabled = false;
++			Assert.That(candidates.FirstEnabledTraitOrDefault(), Is.SameAs(provider));
++		}
++
++		[Test]
++		public void LateEnabledCompositionProviderIsSeen()
++		{
++			var provider = new StubEnemyCompositionProvider { IsTraitDisabled = true };
++			var candidates = new IBotEnemyCompositionProvider[] { provider };
++
++			Assert.That(candidates.FirstEnabledTraitOrDefault(), Is.Null);
++
++			provider.IsTraitDisabled = false;
++			Assert.That(candidates.FirstEnabledTraitOrDefault(), Is.SameAs(provider));
++		}
++
++		[Test]
++		public void DisabledProviderStaysSkipped()
++		{
++			var disabled = new StubMainTargetProvider { IsTraitDisabled = true };
++			var enabled = new StubMainTargetProvider { IsTraitDisabled = false };
++			var candidates = new IBotMainTargetProvider[] { disabled, enabled };
++
++			Assert.That(candidates.FirstEnabledTraitOrDefault(), Is.SameAs(enabled));
++		}
++	}
++}
+diff --git a/OpenRA.Mods.Cameo/Traits/BotModules/ScoutBotModule.cs b/OpenRA.Mods.Cameo/Traits/BotModules/ScoutBotModule.cs
+index c01c6c1fd..94df10899 100644
+--- a/OpenRA.Mods.Cameo/Traits/BotModules/ScoutBotModule.cs
++++ b/OpenRA.Mods.Cameo/Traits/BotModules/ScoutBotModule.cs
+@@ -97,7 +97,7 @@ public class ScoutBotModule : ConditionalTrait<ScoutBotModuleInfo>, IBotTick, IB
+ 		int lastRegionsGeneration = -1;
+ 
+ 		ResourceMapBotModule resourceMap;
+-		IBotMainTargetProvider mainTargetProvider;
++		IBotMainTargetProvider[] mainTargetProviders;
+ 		IBotRequestUnitProduction[] unitBuilders;
+ 		IBotPersonalityLeadProvider[] leadProviders;
+ 		int lastScoutRequestTick = -1;
+@@ -118,7 +118,7 @@ public ScoutBotModule(Actor self, ScoutBotModuleInfo info)
+ 		protected override void TraitEnabled(Actor self)
+ 		{
+ 			resourceMap = self.TraitsImplementing<ResourceMapBotModule>().FirstOrDefault(t => t.IsTraitEnabled());
+-			mainTargetProvider = self.TraitsImplementing<IBotMainTargetProvider>().FirstEnabledTraitOrDefault();
++			mainTargetProviders = self.TraitsImplementing<IBotMainTargetProvider>().ToArray();
+ 			unitBuilders = self.TraitsImplementing<IBotRequestUnitProduction>().ToArray();
+ 			leadProviders = self.Owner.PlayerActor.TraitsImplementing<IBotPersonalityLeadProvider>().ToArray();
+ 			scanTicks = world.LocalRandom.Next(0, Info.ScanInterval);
+@@ -450,7 +450,8 @@ int Interest(RegionMemory regions, int index)
+ 			if (Info.EnemySpawnBonus > 0 && EnemySpawnRegions(regions).Contains(index))
+ 				interest += Info.EnemySpawnBonus;
+ 
+-			if (Info.UseTargetIntelBias && mainTargetProvider != null)
++			var mainTargetProvider = Info.UseTargetIntelBias ? mainTargetProviders.FirstEnabledTraitOrDefault() : null;
++			if (mainTargetProvider != null)
+ 			{
+ 				var target = mainTargetProvider.MainTarget;
+ 				if (target != null

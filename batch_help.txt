@@ -1,0 +1,146 @@
+usage: run_ai_match_batch.py [-h] [--factions FACTIONS] [--bot-a BOT_A]
+                             [--bot-b BOT_B] [--team-size {1,2,3,4,5,6,7,8}]
+                             [--repeats REPEATS] [--map MAP_PATH]
+                             [--swap-bots] [--time-limit {0,1,2,3,4,6,9}]
+                             [--support-dir SUPPORT_DIR] [--template TEMPLATE]
+                             [--retries RETRIES]
+                             [--stall-timeout STALL_TIMEOUT] [--dry-run]
+                             [--allow-fingerprint-drift] [--keep-variants]
+                             [--render {fast,default}]
+
+Run repeated headless AI-vs-AI matches and harvest match-log records.
+
+This is the Stage D data tap of the AI architecture: the schema-2 records in
+cameo-ai-matches.jsonl only become useful at volume, and volume needs a
+harness — a script and a map rotation, not engine work.
+
+Each matchup is a (faction x bot) vs (faction x bot) pairing on a generated
+variant of the duel map. Per the 2026-09-28 maintainer ruling, the default
+map is the shipped tournament map "A Nuclear Winter"
+(mods/cameo/maps/_ra_a-nuclear-winter.oramap): the harness extracts it into
+the support dir, adds the NonCombatant referee seat for the local client,
+converts Multi0/Multi1 into map-side bot players (Playable: False + Bot: +
+HomeLocation taken from the map's mpspawn actors), and cross-wires their
+Enemies. --map can point at the legacy ai_duel_gate_20260928 template dir for
+the old generated-fixture behavior.
+
+The variant's map.yaml gets its two duelists patched (Bot/Faction) and their
+starting forces written into the Actors: section — headless Launch.Map runs
+a Local server, so no lobby bot seating exists and the duelists are map-side
+players (Playable: False + Bot:), which SpawnStartingUnits cannot serve; the
+harness therefore resolves each faction's StartingUnits group from the mod
+yaml and pre-places it.
+
+The local client occupies the map's declared-NonCombatant "Referee" slot —
+lobby clients ignore PlayerReference.NonCombatant, so the match writer checks
+the declared flag and keeps it out of every bot's opponents/allies. The
+referee's "empty" start class loses its conquest objective on the first tick,
+so it never blocks game-over. Launch.Benchmark exits the process on GameOver;
+ConquestVictoryConditions decides on elimination and the map's locked
+TimeLimitManager is the stalemate failsafe (a timed-out duel records both
+bots "lost" — an honest draw, not an engine-invented winner).
+
+--team-size N turns each side into an N-player team (2v2+): --bot-a/--bot-b take a
+comma-separated bot type per seat (a single name duplicates across both
+slots) and the default map becomes the shipped doubles map
+mods/cameo/maps/_ra_doubles.oramap, whose consecutive Multi pairs are the
+teams (Multi0+Multi1 vs Multi2+Multi3). The engine resolves map-side stances
+per ORDERED pair, so each member declares its teammate in Allies: and BOTH
+enemy refs in Enemies: (the map's own Creeps hostility is preserved). A 2v2
+match appends four schema-2 records sharing one game_uid; the team verdict
+is "any member record won" — a teammate eliminated early still records lost.
+
+The fixture locks `gamespeed` to `maximum` (1 ms timestep): bot tests run
+uncapped at whatever tick rate the CPU sustains, so decisive matches resolve
+many times sooner in wall time. At maximum one in-game minute is 60,000 ticks,
+so the fixture offers TimeLimitOptions 0/1/2/3/4/6/9 (tick for tick the
+insane-era 0/10/20/30/40/60/90) and the default is 3 = 180,000 ticks: the
+ENGINE ends a stalemate at that depth and the match is recorded (both sides
+`lost`: a timed-out stalemate has no winner),
+where a 30-minute cap (1.8M ticks) left the harness to kill it with no record.
+The stall detector
+(debug.log goes quiet after its first write this run — arming skips the load
+phase) kills hung matches in ~2 minutes while a generous wall bound protects
+slow-but-live ones. Run
+bot batches serially and prefer an idle machine for consistent timings.
+
+On a shared box a bigger hazard is external kills: another agent's
+taskkill/Stop-Process sweep terminates every OpenRA.exe by name, which
+surfaces as a bare "exit=N" mid-match — no exception log, no appended
+records. Those matches get one automatic retry (--retries); real crashes
+write exception-*.log and are never retried. Per-match results also append
+to <support>/batch_results.jsonl as they land, so a batch whose driver is
+itself swept still leaves usable evidence.
+
+The batch fingerprints its arms once at start (LC7): the mod commit and its
+dirty state, the engine VERSION, a sha256 over engine/bin/OpenRA*.dll, a
+sha256 over the resolved AI yaml set (mods/**/ai.yaml + mods/**/ai/*.yaml),
+the map source, and the batch spec. The fingerprint is recomputed before
+every match attempt and any drift aborts the batch — a mid-batch checkout or
+rebuild (the auto-sync service landing new yaml under stale DLLs killed
+league-3 this way) silently changes the A/B arms otherwise.
+--allow-fingerprint-drift records the drift and keeps running.
+
+Usage:
+    python tools/ai/run_ai_match_batch.py [options]
+
+    --factions td_gdi,td_nod        factions for the matrix (default: td_gdi,td_nod)
+    --bot-a hard --bot-b classic   bot types per side (default: hard — the Frankenstein
+                                    candidate — vs the omniscient classic reference bot)
+    --repeats 4                     matches per matchup (spawn sides alternate)
+    --swap-bots                     also alternate which bot takes which spawn —
+                                    the A/B acceptance requires both spawns
+    --team-size 2 --bot-a hard,hard --bot-b classic,classic
+                                    2v2: one bot type per team slot (a single
+                                    name duplicates); teams seat on consecutive
+                                    Multi pairs (default map _ra_doubles.oramap)
+    --map PATH                      duel map (default: _ra_a-nuclear-winter.oramap)
+    --time-limit 30                 per-match cap in minutes (engine options only)
+    --support-dir PATH              batch support dir (default: %TEMP%/ai-match-batch-<ts>)
+    --dry-run                       print the matrix + variants, launch nothing
+    --allow-fingerprint-drift       log mid-batch arm changes and continue
+                                    (default: abort — a changed arm voids the A/B)
+
+Exit codes: 0 = batch complete, 2 = no usable records collected, 1 = failure.
+
+options:
+  -h, --help            show this help message and exit
+  --factions FACTIONS   comma-separated faction internal names
+  --bot-a BOT_A         bot type for side A (default: hard — the Frankenstein
+                        candidate); with --team-size N a comma-separated list
+                        (hard,classic,...) — one name fills all slots
+  --bot-b BOT_B         bot type for side B (default: classic — the omniscient
+                        pre-wave reference bot); with --team-size N a comma-
+                        separated list — one name fills all slots
+  --team-size {1,2,3,4,5,6,7,8}
+                        members per side: 1 = duel (default), 2 = 2v2 — each
+                        team's seats are consecutive Multi pairs on a 4-player
+                        map (default _ra_doubles.oramap)
+  --repeats REPEATS     matches per matchup; sides alternate (default: 4)
+  --map MAP_PATH        duel map: the shipped .oramap (default: A Nuclear
+                        Winter) or the legacy ai_duel_gate template dir
+  --swap-bots           alternate which bot occupies which spawn per repeat —
+                        the A/B acceptance requires both spawns covered
+  --time-limit {0,1,2,3,4,6,9}
+  --support-dir SUPPORT_DIR
+  --template TEMPLATE   template map dir (default: the A Nuclear Winter duel
+                        fixture)
+  --retries RETRIES     extra attempts per match that dies without an
+                        exception log (external kill signature); crashes with
+                        an exception are not retried
+  --stall-timeout STALL_TIMEOUT
+                        seconds of debug.log silence before a live match
+                        counts as hung
+  --dry-run
+  --allow-fingerprint-drift
+                        log arm drift between attempts and keep running
+                        (default: abort the batch — a changed arm voids the
+                        A/B)
+  --keep-variants       do not delete variant map dirs on success
+  --render {fast,default}
+                        fast (default): VSync off + a 640x480 window. The
+                        engine renders once after EVERY logic tick, so with
+                        VSync on a match is held to the monitor refresh (~50
+                        ticks/s measured 2026-10-01). Rendering never touches
+                        the simulation (bot logic is tick-based), so results
+                        are unchanged; 'default' keeps the player's settings
