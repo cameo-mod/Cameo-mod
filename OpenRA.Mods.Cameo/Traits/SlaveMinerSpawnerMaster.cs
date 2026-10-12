@@ -120,8 +120,10 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		public void ResolveOrder(Actor self, Order order)
 		{
-			// if (Info.SlavesHaveFreeWill)
-			//	return;
+			// Free-will slaves are never reassigned by AssignSlaveActivity, so a Stop on the
+			// master would strand them idle with nothing to restart harvesting.
+			if (Info.SlavesHaveFreeWill)
+				return;
 
 			switch (order.OrderString)
 			{
