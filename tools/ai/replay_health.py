@@ -79,6 +79,44 @@ MATCH_STATS_V3_FIELDS = {
     "stats_timeline_fields", "stats_timeline",
 }
 
+# PLAYTEST-TELEMETRY-V2 (maintainer request 2026-10-12): the per-player channel
+# covers every seat in cameo-ai-players-<sha256(game_uid)>.jsonl. Two record
+# shapes share the file, distinguished by 'schema'.
+PLAYER_SAMPLE_V1_FIELDS = {
+    "schema", "version", "game_uid", "record_id", "tick", "seat", "bot_type",
+    "faction", "team", "harvesters", "refineries", "conyards", "expansions",
+    "mcv_deploys", "production_buildings", "tech_tier", "idle_production_ticks",
+    "buildings", "units", "army", "unit_types",
+}
+PLAYER_SAMPLE_ARMY_FIELDS = {"infantry", "vehicle", "air", "naval", "defence"}
+PLAYER_EVENT_V1_FIELDS = {
+    "schema", "version", "game_uid", "record_id", "tick", "seat", "kind",
+    "seq", "actor", "actor_id", "cell", "start_dist", "cause", "to_seat", "units",
+}
+PLAYER_EVENT_KINDS = {
+    "building_placed", "structure_lost", "conyard_deployed", "conyard_packed",
+    "first_unit_enemy_territory", "attack_wave_start", "superweapon_built",
+    "superweapon_fired",
+}
+# WBL-P1 CONVERSION-DIAGNOSTICS (lead task 2026-10-12): bot seats get a third
+# record shape in the same channel — a 250-tick production-queue sample with
+# per-category conversion counters and the reason each queue is not producing.
+BOT_QUEUE_V1_FIELDS = {
+    "schema", "version", "game_uid", "record_id", "tick", "seat", "banked",
+    "spent_delta", "requested", "accepted", "completed", "skipped", "spend",
+    "queues",
+}
+BOT_QUEUE_CATEGORY_FIELDS = {"unit", "defence", "crawl_link", "tech", "economy"}
+BOT_QUEUE_ROW_FIELDS = {"queue", "group", "state", "item", "reason", "reserved_by"}
+BOT_QUEUE_STATES = {"idle", "busy", "paused", "disabled"}
+BOT_QUEUE_REASONS = {
+    "queue_disabled", "producing", "paused", "cash_reserved", "no_cash",
+    "saturation_stop", "prerequisite_missing", "unit_cap", "no_desire",
+}
+BOT_QUEUE_SKIP_REASONS = {"should_build", "no_queue", "duplicate", "in_production"}
+MAX_BOT_QUEUE_ROWS = 32
+MAX_PLAYER_FILES = 64
+
 
 class EvidenceError(ValueError):
     pass
@@ -388,6 +426,108 @@ def analyze(situations, placements, matches, game_uid, player, *, live=False,
     return report
 
 
+def validate_bot_queue_row(row):
+    """Fail-closed shape check for one cameo-bot-queue v1 row (WBL-P1).
+    Shared by the health channel reader and the playtest stats aggregator."""
+    reject_unknown_fields(row, BOT_QUEUE_V1_FIELDS, "bot-queue v1")
+    if row.get("version") != 1:
+        raise EvidenceError("unsupported bot-queue version")
+    integer(row.get("tick"))
+    integer(row.get("banked"))
+    integer(row.get("spent_delta"))
+    for key in ("requested", "accepted", "completed", "spend"):
+        values = row.get(key)
+        if not isinstance(values, dict):
+            raise EvidenceError(f"bot-queue {key} must be an object")
+        reject_unknown_fields(values, BOT_QUEUE_CATEGORY_FIELDS, f"bot-queue {key}")
+        for value in values.values():
+            integer(value)
+    skipped = row.get("skipped")
+    if not isinstance(skipped, dict):
+        raise EvidenceError("bot-queue skipped must be an object")
+    for reason, count in skipped.items():
+        if reason not in BOT_QUEUE_SKIP_REASONS:
+            raise EvidenceError(f"unsupported bot-queue skip reason: {reason}")
+        integer(count)
+    queues = row.get("queues")
+    if not isinstance(queues, list) or len(queues) > MAX_BOT_QUEUE_ROWS:
+        raise EvidenceError("bot-queue queues must be a bounded list")
+    for queue in queues:
+        if not isinstance(queue, dict):
+            raise EvidenceError("bot-queue queue row must be an object")
+        reject_unknown_fields(queue, BOT_QUEUE_ROW_FIELDS, "bot-queue queue")
+        identity(queue.get("queue"))
+        if queue.get("state") not in BOT_QUEUE_STATES:
+            raise EvidenceError(f"unsupported bot-queue state: {queue.get('state')}")
+        if "reason" in queue and queue["reason"] not in BOT_QUEUE_REASONS:
+            raise EvidenceError(f"unsupported bot-queue reason: {queue['reason']}")
+        voters = queue.get("reserved_by", [])
+        if not isinstance(voters, list) or len(voters) > MAX_BOT_QUEUE_ROWS:
+            raise EvidenceError("bot-queue reserved_by must be a bounded list")
+        for voter in voters:
+            identity(voter)
+
+
+def players_channel(logs, game_uid, player, live=False):
+    """Validate the PLAYTEST-TELEMETRY-V2 per-player channel for the selected game.
+
+    The file exists only for matches recorded by a build with AiPlayerTelemetry;
+    absent channel => absent evidence, never an error. Returns (receipt, metrics)
+    or (None, {}) when no channel file exists.
+    """
+    expected = logs / f"cameo-ai-players-{hashlib.sha256(game_uid.encode('utf-8')).hexdigest()}.jsonl"
+    if len(list(logs.glob("cameo-ai-players-*.jsonl"))) > MAX_PLAYER_FILES:
+        raise EvidenceError("player-telemetry file bound exceeded")
+    if not expected.exists():
+        return None, {}
+    rows, receipt = read_jsonl(expected, live)
+    samples, events, queue_rows, last_tick = 0, {}, 0, -1
+    for row in rows:
+        schema = row.get("schema")
+        if schema == "cameo-player-sample":
+            reject_unknown_fields(row, PLAYER_SAMPLE_V1_FIELDS, "player-sample v1")
+            if row.get("version") != 1:
+                raise EvidenceError("unsupported player-sample version")
+            integer(row.get("tick"))
+            army = row.get("army")
+            if isinstance(army, dict):
+                reject_unknown_fields(army, PLAYER_SAMPLE_ARMY_FIELDS, "player-sample army")
+                for value in army.values():
+                    integer(value)
+            types = row.get("unit_types")
+            if isinstance(types, dict):
+                for value in types.values():
+                    integer(value)
+            samples += 1
+            if row.get("seat") == player:
+                last_tick = max(last_tick, row["tick"])
+        elif schema == "cameo-player-event":
+            reject_unknown_fields(row, PLAYER_EVENT_V1_FIELDS, "player-event v1")
+            if row.get("version") != 1:
+                raise EvidenceError("unsupported player-event version")
+            integer(row.get("tick"))
+            if "seq" in row:
+                integer(row["seq"])
+            if "actor_id" in row:
+                integer(row["actor_id"])
+            kind = row.get("kind")
+            if kind not in PLAYER_EVENT_KINDS:
+                raise EvidenceError(f"unsupported player-event kind: {kind}")
+            if row.get("seat") == player:
+                events[kind] = events.get(kind, 0) + 1
+        elif schema == "cameo-bot-queue":
+            validate_bot_queue_row(row)
+            if row.get("seat") == player:
+                queue_rows += 1
+        else:
+            raise EvidenceError(f"unsupported player-telemetry schema: {schema}")
+    metrics = {"player_channel_samples": samples,
+               "player_channel_events": events,
+               "player_channel_queue_rows": queue_rows,
+               "player_channel_last_sample_tick": last_tick if last_tick >= 0 else None}
+    return receipt, metrics
+
+
 def inspect(support, game_uid, player, live=False):
     logs = support / "Logs"
     files, receipts = [], []
@@ -397,6 +537,10 @@ def inspect(support, game_uid, player, live=False):
         receipts.append(receipt)
     report = analyze(*files, game_uid, player, live=live)
     report["inputs"] = receipts
+    channel_receipt, channel_metrics = players_channel(logs, game_uid, player, live)
+    if channel_receipt is not None:
+        report["inputs"].append(channel_receipt)
+        report["metrics"].update(channel_metrics)
     report["mode"] = "live-prefix" if live else "final"
     summary = support / "batch_summary.json"
     if summary.exists():

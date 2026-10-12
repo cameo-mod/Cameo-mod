@@ -20859,3 +20859,144 @@ no launches while the A/B reservation is held.
   difficulty_scale_failures NONE. AI_MODULE_MAP regenerated (+ upstream
   CRAWL-SAFETY drift). Dormant-escalation backoff untouched.
 - Pending: Devin-Reviewer exact-SHA review; boot-gate waits on a Luna slot.
+
+## 2026-10-12 - NAXIS refinery-spawned slave idle fix
+
+The slave cached and reserved its refinery dock during world insertion, before a `MoveToDock` activity existed. The engine harvest search interprets an existing reservation as an active delivery and waits, stranding loaded slaves. The fix defers reservation to `MoveToDock`, preserves bindings when a captured refinery and slave share an owner, and clears/restarts harvest after master loss or incompatible ownership changes. Three focused source-contract tests pass. No game was launched under the A/B reservation; gameplay remains unverified pending maintainer playtest. Branch: `codex/01a12ecb-naxis-slave-idle` (exact SHA to follow).
+
+## 2026-10-13 — devin/playtest-telemetry-v2: per-seat event seq + honest loss cause (e0d67f353)
+
+Boss pre-landing request + a defect his schema review surfaced, one commit on top of
+13ee10173 (tip now `e0d67f353ab993025f6912c7741d32a47ccc39e4`, pushed for exact-SHA
+re-review):
+
+- Every `cameo-player-event` row carries `seq`: a seat-scoped monotonically
+  increasing counter, also embedded in `record_id` (uid|seat|kind|tick|seq), so
+  same-tick event order is recoverable. Added to `PLAYER_EVENT_V1_FIELDS` in
+  `tools/ai/replay_health.py` and integer-validated in both readers.
+- `structure_lost` cause now derives from `IHealth.IsDead`, not `Actor.IsDead` —
+  the latter includes `Disposed` and mislabeled sells/transforms as killed.
+  cause is `killed|removed`; `captured` stays a separate ownership-observation
+  path. Honest caveat logged: sell vs transform vs cleanup is indistinguishable
+  at the world `ActorRemoved` hook, so `removed` means "left the world without
+  dying", not "sold" — a true sold classification would need an actor-level
+  sell notification, not world observation.
+- `outpost_stage` deliberately NOT folded (Boss hold: later v2 bump).
+
+Verification: Release build 0/0; PlayerTelemetryMathTest 7/7; replay_health 27 +
+playtest_stats 5 python tests green.
+
+## 2026-10-13 — devin/playtest-telemetry-v2: actor_id joins + same-tick dedupe (1224c3d94)
+
+Second review-round delta (Sol's measurement-contract findings + reviewer note N1),
+tip now `1224c3d94fb677a3cf5ca693f9605a4e17c1d362`:
+
+- `actor_id` (per-match `Actor.ActorID`) on every actor-scoped event:
+  building_placed, structure_lost (immediate/deferred/captured), conyard_deployed,
+  conyard_packed, first_unit_enemy_territory, superweapon_built. placed→lost
+  lifecycle joins are exact within a match. attack_wave_start and superweapon_fired
+  are collective events and correctly carry no instance id. Field added to
+  `PLAYER_EVENT_V1_FIELDS`; integer-validated in both readers.
+- Reviewer N1 (duplicate-tick final sample): emit-side skips the IGameOver
+  EconomySample when a periodic sample already went out at that tick
+  (`lastSampleTick`); the stats reader tolerates same-tick rows keep-last.
+- Remaining honest limits (stated for consumers): `removed` cannot distinguish
+  sell vs transform vs cleanup at the world removal hook — an exact `sold`
+  classification needs an actor-level sell notification, not world observation;
+  `actor_id` is match-scoped and not replay-stable.
+
+Verification: build clean (9 pre-existing OpenRA.Game StyleCop warnings, none
+new); PlayerTelemetryMathTest 7/7; replay_health 27/27; playtest_stats 7/7
+(+2 tests: seq/actor_id validation, same-tick keep-last).
+
+## 2026-10-12 — WBL-P1 CONVERSION-DIAGNOSTICS (devin/wbl-p1-conversion-diagnostics)
+
+Lead task 01a12fe8: log why bots skip legal unit production + per-category spend
+(FINDINGS_2026-10-12_why_bots_lose.md priority 1). Record-only, default-on.
+
+**Design.** New `IBotUnitProductionObserver` seam in OpenRA.Mods.CA.BotModules,
+resolved lazily from the world actor exactly like `IBotPlacementObserver` —
+the CA and Fransbot unit builders ignore everything about it, so an absent
+observer leaves behaviour bit-identical (verified: notifies sit after
+`bot.QueueOrder`, never before the decision).
+
+- `UnitBuilderBotModuleCA`: `UnitProductionRequested` at `RequestUnitProduction`
+  enqueue; `UnitProductionStarted` at all three `Order.StartProduction` sites
+  (opening defense, category sweep, external request); `UnitProductionSkipped`
+  on `should_build` (policy gate refused) and `no_queue` (no queue could build).
+- `FransUnitBuilderBotModule`: all 13 `StartProduction` sites routed through
+  `QueueUnitProduction` which notifies after queueing; request seam on enqueue;
+  skipped reasons `duplicate` (priority type already pending) and
+  `in_production` (already live+queued).
+- `AiPlayerTelemetry` implements the observer plus a 250-tick per-bot-seat
+  queue poll that emits the third channel schema `cameo-bot-queue` v1 on the
+  same `cameo-ai-players-<sha256(uid)>.jsonl` file: per-queue state
+  (idle|busy|paused|disabled), hold reason, `reserved_by` voter names, and
+  per-window counters requested/accepted/completed/skipped/spend over
+  categories {unit, defence, crawl_link, tech, economy} plus `banked` and
+  `spent_delta`.
+- Hold reasons come from a second record-only seam,
+  `IBotUnitProductionGateInfo` (same CA BotModules namespace): each builder
+  module reports the gates it actually enforces — cash floor incl. its own
+  adjustments (CA: steamroller-scaled `ProductionMinCashRequirement`;
+  Frans: the harvester-debt/opening/normal triage from its own BotTick),
+  reservation-voter names (each module's own `requestPause` set — CA's
+  includes `BaseBuilderBotModuleCA` because its vote does starve ordinary
+  unit queues), bank-saturation bar (CA's `BankSaturationThreshold`
+  including its `SwitchCondition` arm; Frans returns 0 — its economic
+  state is a spending diagnosis, never an idle order), and per-type
+  limits (CA: owned >= limit; Frans: 0 always blocks, positive limits
+  are composition targets while `PositiveCombatUnitLimitsAreSoft` holds).
+  Idle precedence unchanged: cash_reserved > no_cash > saturation_stop >
+  prerequisite_missing > unit_cap > no_desire.
+- Acceptance accounting: the seam counts order-issue (complete coverage of
+  builder starts); the head-diff counts starts from non-seam paths (building
+  queues, direct orders) and consumes `SeamStarts` markers so a builder order
+  is never counted twice. Completion comes from ActorAdded; ConYard deploys
+  are transforms and stay out of `completed`.
+- Dedup ruling honored: no parallel counters — the poll reads
+  ProductionQueue/PlayerResources plus the modules' gate interface; the
+  only new seams are the per-request notify and the gate view, neither of
+  which an existing counter can see.
+- Readers: `replay_health.validate_bot_queue_row` (shared, fail-closed
+  allow-lists for fields, categories, states, reasons, skip reasons, bounds)
+  feeds both `players_channel` metrics (`player_channel_queue_rows`) and
+  `playtest_stats_from_logs` aggregation (per-seat rows, spend by category,
+  top hold reasons). `MAX_BOT_QUEUE_ROWS = 32` matches the emitter cap.
+- Counters reset per 250-tick window; `QueueHeads`/`SeamStarts` persist
+  (dedup state, not counters).
+
+**Review respin (F1 fixed, F2 resolved).** Exact-SHA review found the
+`SeamStarts` marker keys could never match: the seam keyed on the player
+entity actor while the head-diff looked up the queue-HOST actor — in this
+mod `ProductionQueue` traits live on factory buildings (`^IsBarrack`,
+`^IsWeaponFactory`, `^Conyard`, faction HQs), so every seamed start was
+counted twice (~2x accepted+spend on unit queues). Fix: both sides now
+build the marker through `PlayerTelemetryMath.SeamKey` on the player
+actor id (`QueueHeads` keeps its per-factory key — head-diff keying was
+correct); `ConsumeSeamStart` drains exactly one marker, and a NUnit
+regression locks write/lookup key identity and the count-once contract.
+Marker fungibility across same-type factories keeps totals exact: a
+marker binds {player, queueType, item}, not a specific building, so any
+order-issue marker still retires exactly one same-item head. F2: the
+gate-info interface resolves the earlier Frans-coverage boundary —
+`no_cash`, `unit_cap`, `cash_reserved` are now real per-module verdicts
+for both builders instead of CA-only approximations. `saturation_stop`
+remains CA-only by design (Frans: no such stop exists).
+
+**Known honest bounds.** Gates not covered by the interface (Frans's
+protected-proc/MCV reserve machinery, CA's unit-interval cooldowns,
+candidate shares/delays) still read as `no_desire` — never relabelled.
+A cancelled-before-head seam order can leave a stale marker that skips
+one later same-name head — same single acceptance in window terms.
+`building accepted` via head-diff is an order-issue approximation (head
+arrival within the window). The gate view is resolved per poll so
+late-arming or dormant conditional modules read truthfully.
+
+**Verification.** Build 0/0 Release; Cameo.Test 1934/1934 (5
+PlayerTelemetryMath tests: QueueState order, IdleReason gate order,
+BuildingCategory map, SeamKey write/lookup identity,
+ConsumeSeamStart count-once); python 36/36 (27 replay_health + 9
+playtest_stats incl. new schema fixtures, bad-shape fail-closed cases,
+aggregation). No runtime evidence claimed — no game was launched.
+
