@@ -20871,3 +20871,67 @@ tip now `1224c3d94fb677a3cf5ca693f9605a4e17c1d362`:
 Verification: build clean (9 pre-existing OpenRA.Game StyleCop warnings, none
 new); PlayerTelemetryMathTest 7/7; replay_health 27/27; playtest_stats 7/7
 (+2 tests: seq/actor_id validation, same-tick keep-last).
+
+## 2026-10-12 — WBL-P1 CONVERSION-DIAGNOSTICS (devin/wbl-p1-conversion-diagnostics)
+
+Lead task 01a12fe8: log why bots skip legal unit production + per-category spend
+(FINDINGS_2026-10-12_why_bots_lose.md priority 1). Record-only, default-on.
+
+**Design.** New `IBotUnitProductionObserver` seam in OpenRA.Mods.CA.BotModules,
+resolved lazily from the world actor exactly like `IBotPlacementObserver` —
+the CA and Fransbot unit builders ignore everything about it, so an absent
+observer leaves behaviour bit-identical (verified: notifies sit after
+`bot.QueueOrder`, never before the decision).
+
+- `UnitBuilderBotModuleCA`: `UnitProductionRequested` at `RequestUnitProduction`
+  enqueue; `UnitProductionStarted` at all three `Order.StartProduction` sites
+  (opening defense, category sweep, external request); `UnitProductionSkipped`
+  on `should_build` (policy gate refused) and `no_queue` (no queue could build).
+- `FransUnitBuilderBotModule`: all 13 `StartProduction` sites routed through
+  `QueueUnitProduction` which notifies after queueing; request seam on enqueue;
+  skipped reasons `duplicate` (priority type already pending) and
+  `in_production` (already live+queued).
+- `AiPlayerTelemetry` implements the observer plus a 250-tick per-bot-seat
+  queue poll that emits the third channel schema `cameo-bot-queue` v1 on the
+  same `cameo-ai-players-<sha256(uid)>.jsonl` file: per-queue state
+  (idle|busy|paused|disabled), hold reason, `reserved_by` voter names, and
+  per-window counters requested/accepted/completed/skipped/spend over
+  categories {unit, defence, crawl_link, tech, economy} plus `banked` and
+  `spent_delta`.
+- Hold reasons mirror the module's own gate order (public signals only):
+  cash_reserved (IBotRequestPauseUnitProduction voters, e.g. refinery
+  starvation, global unit budget, FransBaseBuilder) > no_cash (the module's
+  own Scaled ProductionMinCashRequirement incl. the steamroller lean) >
+  saturation_stop (ProductionSaturationCA.Saturated on the same threshold
+  rule) > prerequisite_missing (BuildableItems empty) > unit_cap
+  (UnitLimits over owned+queued counts) > no_desire.
+- Acceptance accounting: the seam counts order-issue (complete coverage of
+  builder starts); the head-diff counts starts from non-seam paths (building
+  queues, direct orders) and consumes `SeamStarts` markers so a builder order
+  is never counted twice. Completion comes from ActorAdded; ConYard deploys
+  are transforms and stay out of `completed`.
+- Dedup ruling honored: no parallel counters — the poll reads
+  ProductionQueue/PlayerResources/pause-voter/module-Info surfaces; the only
+  new seam is the per-request notify, which no existing counter can see.
+- Readers: `replay_health.validate_bot_queue_row` (shared, fail-closed
+  allow-lists for fields, categories, states, reasons, skip reasons, bounds)
+  feeds both `players_channel` metrics (`player_channel_queue_rows`) and
+  `playtest_stats_from_logs` aggregation (per-seat rows, spend by category,
+  top hold reasons). `MAX_BOT_QUEUE_ROWS = 32` matches the emitter cap.
+- Counters reset per 250-tick window; `QueueHeads`/`SeamStarts` persist
+  (dedup state, not counters).
+
+**Known honest bounds.** Unit-cap/saturate/cash-floor reasons are computed
+from the same public signals the module reads but are inference, not the
+module's private verdict; fransbot's exact-cash-reserve machinery still reads
+as `no_desire`/`cash_reserved` where visible. A cancelled-before-head seam
+order can leave a stale marker that skips one later same-name head — same
+single acceptance in window terms. `building accepted` via head-diff is an
+order-issue approximation (head arrival within the window).
+
+**Verification.** Build 0/0 Release; Cameo.Test 1932/1932 (3 new
+PlayerTelemetryMath tests: QueueState order, IdleReason gate order,
+BuildingCategory map); python 36/36 (27 replay_health + 9 playtest_stats
+incl. new schema fixtures, bad-shape fail-closed cases, aggregation).
+No runtime evidence claimed — no game was launched.
+
