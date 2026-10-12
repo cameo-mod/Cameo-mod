@@ -1,3 +1,55 @@
+# 2026-10-12 — Devin: CRAWL-SAFETY — scout/escort/defence/army-parity gates on the optional crawl link (branch `devin/crawl-safety`)
+
+*Devin-Developer*, task 01a12ecb (FINDINGS_2026-10-12_playtest_forensics.md §S3; maintainer
+refinement: ARMY-PARITY gate — own mobile army vs observed enemy army, fog-fair, difficulty-scaled,
+army production takes priority while behind). Base `3cb0fcf1b` (TF-1 landed), engine `4f69df`.
+
+- **`CrawlFrontSafety` ledger** (world-free, unit-tested): the corridor watch diffs own
+  buildable-area cells near the frontier→aim segment re-plan to re-plan; a disappeared cell counts
+  a loss only while still inside the current corridor (an advancing frontier slides cells out
+  without losing them). Cells within `LossCellRadiusCells` pool their counts — the S3
+  rebuilt-15x farmed cell accumulates one count; at the difficulty-scaled bound
+  (`LossesToParkEasy`→`LossesToParkHard`) the target's route parks for `LossParkTicks`
+  (`crawlParkedUntil` in the score loop) and another frontier takes the crawl. Plus the bounded
+  scout-wait counter and `ResetCorridor` so a dead corridor re-baselines without phantom losses.
+- **Gates in `UpdateCrawlWant` → `UpdateCrawlSafety`** (armed by `UseCrawlSafety`, default OFF;
+  mandatory power bypasses every gate):
+  1. *Corridor losses* — farmed route parks (above).
+  2. *Army parity* — `ArmyParityAdmits(situation.CombatRatioPct, floor)`; floor =
+     `BotDifficultyLadder.Scale(ArmyParityPctEasy=40, ArmyParityPctHard=80)`. Below floor no
+     optional link is wanted at all — the want being null means the base builder spends nothing
+     on links/defences, so unit production keeps the cash (army priority is the refusal itself).
+     Empty remembered enemy scores MaxRatio → an unseen army never blocks (fog-fair).
+  3. *Scout first* — an unexplored `crawlTargetEdge` holds the want up to `ScoutWaitReplans`
+     re-plans while the cell rides to `ScoutBotModule` via the new `IBotScoutInterestProvider`
+     (`ProviderInterestBonus` on the region's interest score; publishing grants no vision).
+  4. *Front defence* — on a contested front (`MergedThreatAt(frontier|edge) > 0`), own armed
+     buildings within `FrontCoverRadiusCells` must reach `FrontCoverMinValue`; below it the
+     planner publishes `WantedFrontDefence`/`FrontDefenceCell` (cheapest armed buildable —
+     walls don't count) and the link waits.
+  5. *Escort* — contested front also requires own guard value ≥ `FrontGuardPercent`% of the
+     remembered threat (`FrontGuardAdmits`, pure); below it a `BotProtectionRequest` at the
+     frontier publishes via `IBotProtectionRequestProvider` for `EscortRequestTicks`. A stronger
+     local force still crawls — the gate refuses only an underpowered escort, never the march.
+- **Queue manager** (`BaseBuilderQueueManagerCA`): `WantedFrontDefence` rides the planner-want
+  low-cash path; `TryClaimFrontDefence` = same atomic one-in-flight admission as the crawl link
+  (claim frees when the item leaves the claimant's queue; `BuildingsBeingProduced` dedups same-name
+  picks); priority order MCV-prereq → front defence → link; a law front defence classifies as
+  `Defense` (no organic defence roll consumed) and places at `FrontDefenceCell` via the defence
+  advisor first, then the defence annulus — ordinary retry/failure if no legal cell.
+- **Fog-fair**: parity reads `BotSituation.CombatRatioPct` (remembered mobile units only);
+  threat = `IBotRegionThreatProvider.MergedThreatAt`; scout = `Shroud.IsExplored` of the aim.
+  No omniscient reads anywhere.
+- **Difficulty line**: parity floor, losses-to-park via `BotDifficultyLadder.Scale`
+  (unranked → hard end, the stricter/safer default).
+- **Files:** new `IBotScoutInterestProvider.cs`; +20 `IBotExpansionTargetProvider`; planner +~390;
+  queue manager +39; scout module +45; tests +130 (7 new focused).
+- **Verification:** Release build 0 errors / 9 pre-existing engine warnings; Cameo.Test 1840/1840.
+  **Boot gate DEFERRED — Luna Manager's A/B heavy-run reservation is held; no launches.**
+- **Default-off proposal:** keep `UseCrawlSafety=false` at land — it changes build-order timing and
+  is A/B-measurable via `apply_increment_switches`, but unverified at runtime until the reservation
+  clears; arming it for the next increment A/B is the honest path.
+
 # 2026-10-11 — Devin: TF-1 repair — atomic admission claims + paid-reconcile lifecycle (branch `devin/turtle-fix-1-crawl-allowance`)
 
 *Devin-Developer*, Sol review `fleet/REVIEW_2026-10-11_tf1_5bed_sol.md` (REQUEST CHANGES on `5bedabace`).

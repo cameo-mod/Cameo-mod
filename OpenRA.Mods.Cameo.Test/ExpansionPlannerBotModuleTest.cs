@@ -8,6 +8,7 @@
  */
 #endregion
 
+using System;
 using System.Collections.Generic;
 using NUnit.Framework;
 using OpenRA.Mods.Cameo.Traits.BotModules;
@@ -608,6 +609,138 @@ namespace OpenRA.Mods.Cameo.Test
 			AdmitPaid(ep, owner, int.MaxValue - 10);
 			Assert.That(ep.PaidCost, Is.EqualTo(int.MaxValue), "the bound saturates, never wraps negative");
 			Assert.That(ep.PaidCount, Is.EqualTo(2));
+		}
+
+		// CRAWL-SAFETY (FINDINGS_2026-10-12 S3): the front ledger — the corridor watch diffs own
+		// building cells re-plan to re-plan, lost cells pool their counts within the merge radius
+		// (a link rebuilt on the same farmed spot), the scout hold bounds an unexplored aim, and a
+		// dead corridor diffs from nothing so it can never phantom-loss.
+
+		[Test]
+		public void TheCorridorDistanceIsToTheSegmentNotItsEnds()
+		{
+			var a = new CPos(10, 10);
+			var b = new CPos(30, 10);
+			Assert.That(ExpansionPlannerBotModule.CrawlFrontSafety.PointToSegmentDistanceSq(new CPos(20, 13), a, b),
+				Is.EqualTo(9L), "a point three cells off the route measures three");
+			Assert.That(ExpansionPlannerBotModule.CrawlFrontSafety.PointToSegmentDistanceSq(new CPos(22, 10), a, b),
+				Is.EqualTo(0L), "a point on the route measures zero");
+			Assert.That(ExpansionPlannerBotModule.CrawlFrontSafety.PointToSegmentDistanceSq(new CPos(40, 10), a, b),
+				Is.EqualTo(100L), "beyond the far end it clamps to the endpoint");
+			Assert.That(ExpansionPlannerBotModule.CrawlFrontSafety.PointToSegmentDistanceSq(new CPos(5, 5), a, b),
+				Is.EqualTo(50L), "behind the frontier it clamps to the near endpoint");
+		}
+
+		[Test]
+		public void TheFirstWatchIsABaselineAndLostCellsCount()
+		{
+			var safety = new ExpansionPlannerBotModule.CrawlFrontSafety();
+			var cell = new CPos(20, 10);
+			var watch = new List<CPos> { cell, new CPos(24, 10) };
+
+			Assert.That(safety.NoteWatch(watch, 4, out _), Is.EqualTo(0),
+				"the first set establishes the baseline — nothing is a loss yet");
+
+			watch.RemoveAt(0);
+			Assert.That(safety.NoteWatch(watch, 4, out var hottest), Is.EqualTo(1),
+				"the vanished cell counts its first loss");
+			Assert.That(hottest, Is.EqualTo(cell));
+			Assert.That(safety.TotalLosses, Is.EqualTo(1));
+		}
+
+		[Test]
+		public void LostCellsInsideTheMergeRadiusPoolTheirCounts()
+		{
+			// The S3 farm: the same ground rebuilt and lost again and again — losses at cells
+			// within the merge radius sum into one farmed-cell count that trips the park bound.
+			var safety = new ExpansionPlannerBotModule.CrawlFrontSafety();
+			var first = new List<CPos> { new CPos(20, 10) };
+			var second = new List<CPos> { new CPos(21, 11) };
+			var third = new List<CPos> { new CPos(19, 12) };
+
+			safety.NoteWatch(first, 4, out _);          // baseline
+			safety.NoteWatch(second, 4, out _);          // (20,10) lost
+			safety.NoteWatch(third, 4, out _);           // (21,11) lost
+			var worst = safety.NoteWatch(new List<CPos>(), 4, out var hottest); // (19,12) lost
+
+			Assert.That(worst, Is.EqualTo(3), "three same-spot losses pool through the merge radius");
+			Assert.That(hottest, Is.EqualTo(new CPos(19, 12)));
+			Assert.That(safety.LossesNear(new CPos(20, 10), 4), Is.EqualTo(3));
+			Assert.That(safety.LossesNear(new CPos(50, 50), 4), Is.EqualTo(0),
+				"a far cell sees none of the farm");
+		}
+
+		[Test]
+		public void ACellSlidOutOfTheCorridorIsNotALoss()
+		{
+			// The frontier advancing past a watched building must not count it lost — only a cell
+			// that is still inside the corridor when it disappears is a real loss.
+			var safety = new ExpansionPlannerBotModule.CrawlFrontSafety();
+			Predicate<CPos> nearFront = c => c.X >= 15; // the corridor's leading edge moved forward
+			safety.NoteWatch(new List<CPos> { new CPos(20, 10), new CPos(8, 10) }, 4, out _, nearFront);
+
+			Assert.That(safety.NoteWatch(new List<CPos> { new CPos(20, 10) }, 4, out _, nearFront),
+				Is.EqualTo(0), "the cell left behind by the advance slid out — not lost");
+			Assert.That(safety.TotalLosses, Is.EqualTo(0));
+
+			Assert.That(safety.NoteWatch(new List<CPos>(), 4, out _, nearFront), Is.EqualTo(1),
+				"the cell still inside the corridor that vanished counts");
+		}
+
+		[Test]
+		public void ADeadCorridorCannotPhantomLoss()
+		{
+			var safety = new ExpansionPlannerBotModule.CrawlFrontSafety();
+			safety.NoteWatch(new List<CPos> { new CPos(20, 10) }, 4, out _);
+			safety.ResetCorridor(); // the want or frontier blinked off — the watch is void
+
+			Assert.That(safety.NoteWatch(new List<CPos>(), 4, out _), Is.EqualTo(0),
+				"the next watch re-baselines instead of counting the old cells as lost");
+			Assert.That(safety.TotalLosses, Is.EqualTo(0));
+		}
+
+		[Test]
+		public void TheScoutWaitBoundsAnUnexploredAim()
+		{
+			var safety = new ExpansionPlannerBotModule.CrawlFrontSafety();
+			Assert.That(safety.ScoutHolds(3), Is.True, "the first unexplored re-plans hold");
+			Assert.That(safety.ScoutHolds(3), Is.True);
+			Assert.That(safety.ScoutHolds(3), Is.False,
+				"the bound spent — a stubbornly unscouted aim must not freeze the crawl");
+
+			safety.ResetScoutWait();
+			Assert.That(safety.ScoutHolds(3), Is.True, "explored ground reset the wait");
+
+			var unbounded = new ExpansionPlannerBotModule.CrawlFrontSafety();
+			for (var i = 0; i < 20; i++)
+				Assert.That(unbounded.ScoutHolds(0), Is.True, "a 0 bound holds until explored, forever");
+		}
+
+		[Test]
+		public void TheParityGateAdmitsOnlyAtOrAboveTheFloor()
+		{
+			Assert.That(ExpansionPlannerBotModule.ArmyParityAdmits(30, 60), Is.False,
+				"well below the remembered enemy — the crawl starves the army it needs");
+			Assert.That(ExpansionPlannerBotModule.ArmyParityAdmits(60, 60), Is.True, "at parity the gate opens");
+			Assert.That(ExpansionPlannerBotModule.ArmyParityAdmits(10000, 60), Is.True,
+				"an unobserved enemy scores MaxRatio — no unseen army ever blocks");
+			Assert.That(ExpansionPlannerBotModule.ArmyParityAdmits(0, 0), Is.True,
+				"a disabled floor never gates");
+		}
+
+		[Test]
+		public void TheEscortGateStillCrawlsIntoAContestedFrontWhenStronger()
+		{
+			// The maintainer's constraint: a contested crawl proceeds when the local force is
+			// stronger — the gate refuses only an UNDERpowered escort, never the march itself.
+			Assert.That(ExpansionPlannerBotModule.FrontGuardAdmits(2200, 2000, 110), Is.True,
+				"guard at 110% of the remembered threat — the escorted crawl goes");
+			Assert.That(ExpansionPlannerBotModule.FrontGuardAdmits(1000, 2000, 110), Is.False,
+				"half the threat — the link waits for defenders instead");
+			Assert.That(ExpansionPlannerBotModule.FrontGuardAdmits(0, 0, 110), Is.True,
+				"an uncontested front never needs an escort");
+			Assert.That(ExpansionPlannerBotModule.FrontGuardAdmits(0, 2000, 110), Is.False,
+				"a bare frontier into a remembered army holds");
 		}
 	}
 }
