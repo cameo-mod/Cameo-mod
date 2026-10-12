@@ -47,14 +47,18 @@ approved Route A' driver set bb46784b/0cdd46eb/a7cef93c/8fff80a7 stays byte-froz
   forgotten_cannonap, soviet_owned_weapon_names, td_naval_rename) rerun on detached
   `ebea34c82` reproduce identical failures (5/5/3/3/6 = 22). Zero wave-caused failures,
   now proven at subtest granularity.
-- **Late IN-ELIGIBLE candidates (Integrator ruling, both pending Devin-Reviewer exact-SHA
-  verdicts):** `devin/replay-health-logger-gates @463b52d63` (+430/-26, 9 files — merge
-  checked: only DEVELOPMENT_LOG union conflict) and `devin/wbl-p1-crawl-link-fallback
-  @29f29a73c` (+83/-1, 3 files, record-only — merge checked: fully clean). Ruling: merge
-  in-wave if verdicts land before wave close; otherwise land immediately post-wave on
-  disjoint file sets.
-- **Open gates before master landing:** Devin-Reviewer exact-SHA on `91965acbe` (+
-  `463b52d63`, `29f29a73c` if admitted) → Lead landing ruling on the 66 pre-existing red
+- **Late candidates MERGED (all three exact-SHA verdicts landed —
+  REVIEW_2026-10-12_logger_gates_wbl_fallback_adats_devin.md):** `43d73845b` =
+  logger-gates `463b52d63` (+430/-26, DEVELOPMENT_LOG union-resolved, both entries kept);
+  `9bb755c3a` = wbl-p1 crawl-link fallback `29f29a73c` (+83/-1, fully clean automerge).
+  ADATS `91965acbe` also confirmed CORRECT at exact SHA — zero unreviewed commits remain.
+- **Post-merge verification (final tip `9bb755c3a`):** Release build 0 err / 9 pre-existing
+  engine warnings; test-project 0/0; Cameo.Test **2013/2013** (+5: logger AiEconomy +
+  PlayerTelemetryMath additions); focused pytest on logger-touched files 76/76;
+  known-failing-file re-run (34 files, bounded per-file): **66 entries == baseline
+  66 identical, wave-only = ∅** — zero wave-caused failures re-verified on the final tip
+  at subtest granularity.
+- **Open gates before master landing:** Lead landing ruling on the 66 pre-existing red
   pins → boot-gate slot (Luna admission, serial) → hand verified branch to Sol for the
   FF push (Sol = sole master writer per Lead ruling; I sequence+verify, Sol pushes).
 - **A/B handoff note (campaign tooling lives outside the repo):** the frozen wave-1 driver's
