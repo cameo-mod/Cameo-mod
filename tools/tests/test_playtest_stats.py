@@ -46,6 +46,32 @@ def event(seat, kind, tick, **kw):
     return row
 
 
+def botqueue(seat, tick, **kw):
+    row = {
+        "schema": "cameo-bot-queue", "version": 1, "game_uid": UID,
+        "record_id": f"{UID}|{seat}|queue|{tick}", "tick": tick, "seat": seat,
+        "banked": 10800, "spent_delta": 3400,
+        "requested": {"unit": 4, "defence": 0, "crawl_link": 0, "tech": 0,
+                      "economy": 0},
+        "accepted": {"unit": 3, "defence": 1, "crawl_link": 0, "tech": 0,
+                     "economy": 0},
+        "completed": {"unit": 2, "defence": 0, "crawl_link": 0, "tech": 1,
+                      "economy": 0},
+        "skipped": {"should_build": 1},
+        "spend": {"unit": 2400, "defence": 1000, "crawl_link": 0, "tech": 0,
+                  "economy": 0},
+        "queues": [
+            {"queue": "Vehicle", "group": "vehicles", "state": "idle",
+             "reason": "cash_reserved",
+             "reserved_by": ["BaseBuilderBotModuleCA"]},
+            {"queue": "Infantry", "group": "infantry", "state": "busy",
+             "item": "e1", "reason": "producing"},
+        ],
+    }
+    row.update(kw)
+    return row
+
+
 def write_channel(directory, rows):
     logs = pathlib.Path(directory) / "Logs"
     logs.mkdir(parents=True, exist_ok=True)
@@ -124,7 +150,7 @@ class ChannelFixture(unittest.TestCase):
             final = sample("seat_1", 1500)
             final["harvesters"] = 7
             write_channel(temp, [sample("seat_1", 750), sample("seat_1", 1500), final])
-            samples, _ = stats.read_channel(
+            samples, _, _ = stats.read_channel(
                 pathlib.Path(temp) / "Logs" /
                 f"cameo-ai-players-{hashlib.sha256(UID.encode()).hexdigest()}.jsonl")
             self.assertEqual(samples["seat_1"]["harvesters"], 7)
@@ -144,7 +170,7 @@ class ChannelFixture(unittest.TestCase):
                 pathlib.Path(temp) / "Logs", UID, "seat_1")
             self.assertEqual(metrics["player_channel_events"],
                              {"building_placed": 2, "structure_lost": 1})
-            samples, events = stats.read_channel(
+            _, events, _ = stats.read_channel(
                 pathlib.Path(temp) / "Logs" /
                 f"cameo-ai-players-{hashlib.sha256(UID.encode()).hexdigest()}.jsonl")
             self.assertEqual(events["seat_1"]["structure_lost"], 1)
@@ -158,12 +184,12 @@ class ChannelFixture(unittest.TestCase):
     def test_stats_rows_cover_every_seat(self):
         with tempfile.TemporaryDirectory() as temp:
             write_channel(temp, self.rows())
-            samples, events = stats.read_channel(
+            samples, events, _ = stats.read_channel(
                 pathlib.Path(temp) / "Logs" /
                 f"cameo-ai-players-{hashlib.sha256(UID.encode()).hexdigest()}.jsonl")
             self.assertEqual(set(samples), {"seat_1", "seat_2"})
             row = stats.seat_row(UID, "seat_2", samples["seat_2"],
-                                 events["seat_2"], None)
+                                 events["seat_2"], None, None)
             self.assertEqual(row["bot"], "cameo_hard")
             self.assertEqual(row["deploys"], 1)
             self.assertEqual(row["exp"], 1)
@@ -172,6 +198,66 @@ class ChannelFixture(unittest.TestCase):
             self.assertEqual(row["army_total"], 4000)
             self.assertIn("hmmv", row["top_units"])
             self.assertIsNone(row["first_contact"])
+
+    def test_bot_queue_row_validates_and_aggregates(self):
+        with tempfile.TemporaryDirectory() as temp:
+            write_channel(temp, [
+                botqueue("seat_2", 250),
+                botqueue("seat_2", 500, banked=12000, spent_delta=800),
+            ])
+            _, metrics = health.players_channel(
+                pathlib.Path(temp) / "Logs", UID, "seat_2")
+            self.assertEqual(metrics["player_channel_queue_rows"], 2)
+            _, _, queues = stats.read_channel(
+                pathlib.Path(temp) / "Logs" /
+                f"cameo-ai-players-{hashlib.sha256(UID.encode()).hexdigest()}.jsonl")
+            agg = queues["seat_2"]
+            self.assertEqual(agg["rows"], 2)
+            self.assertEqual(agg["banked"], 12000)
+            self.assertEqual(agg["spent_total"], 4200)
+            self.assertEqual(agg["requested"]["unit"], 8)
+            self.assertEqual(agg["accepted"]["defence"], 2)
+            self.assertEqual(agg["skipped"]["should_build"], 2)
+            self.assertEqual(agg["hold_reasons"]["cash_reserved"], 2)
+            row = stats.seat_row(UID, "seat_2", None, {}, agg, None)
+            self.assertEqual(row["req"], 8)
+            self.assertEqual(row["acc"], 8)
+            self.assertEqual(row["done"], 6)
+            self.assertEqual(row["spent_total"], 4200)
+            self.assertIn("cash_reserved", row["hold_top"])
+
+    def test_bot_queue_bad_shapes_fail_closed(self):
+        # An unsupported hold reason must not pass silently.
+        with tempfile.TemporaryDirectory() as temp:
+            bad = botqueue("seat_2", 250)
+            bad["queues"][0]["reason"] = "gremlins"
+            write_channel(temp, [bad])
+            with self.assertRaisesRegex(health.EvidenceError, "reason"):
+                stats.read_channel(pathlib.Path(temp) / "Logs" /
+                    f"cameo-ai-players-{hashlib.sha256(UID.encode()).hexdigest()}.jsonl")
+        # Unknown skip counters are additive-with-review, never silent.
+        with tempfile.TemporaryDirectory() as temp:
+            bad = botqueue("seat_2", 250)
+            bad["skipped"]["invented_reason"] = 1
+            write_channel(temp, [bad])
+            with self.assertRaisesRegex(health.EvidenceError, "skip"):
+                stats.read_channel(pathlib.Path(temp) / "Logs" /
+                    f"cameo-ai-players-{hashlib.sha256(UID.encode()).hexdigest()}.jsonl")
+        # Unknown category keys fail the strict allow-list.
+        with tempfile.TemporaryDirectory() as temp:
+            bad = botqueue("seat_2", 250)
+            bad["requested"]["mystery"] = 1
+            write_channel(temp, [bad])
+            with self.assertRaisesRegex(health.EvidenceError, "requested"):
+                stats.read_channel(pathlib.Path(temp) / "Logs" /
+                    f"cameo-ai-players-{hashlib.sha256(UID.encode()).hexdigest()}.jsonl")
+        # A non-integer bank must fail the integer check.
+        with tempfile.TemporaryDirectory() as temp:
+            bad = botqueue("seat_2", 250, banked=-5)
+            write_channel(temp, [bad])
+            with self.assertRaises(health.EvidenceError):
+                stats.read_channel(pathlib.Path(temp) / "Logs" /
+                    f"cameo-ai-players-{hashlib.sha256(UID.encode()).hexdigest()}.jsonl")
 
 
 if __name__ == "__main__":

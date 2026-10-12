@@ -59,9 +59,10 @@ def player_files(paths):
 
 
 def read_channel(path):
-    """(samples-by-seat, events-by-seat) from one bounded, validated channel file."""
+    """(samples-by-seat, events-by-seat, queues-by-seat) from one bounded,
+    validated channel file. Queue aggregates cover WBL-P1 bot seats only."""
     rows, _ = health.read_jsonl(path)
-    samples, events = {}, collections.defaultdict(collections.Counter)
+    samples, events, queues = {}, collections.defaultdict(collections.Counter), {}
     for row in rows:
         schema = row.get("schema")
         if schema == "cameo-player-sample":
@@ -93,9 +94,34 @@ def read_channel(path):
             events[row.get("seat")][kind] += 1
             if kind == "first_unit_enemy_territory":
                 events[row["seat"]]["first_contact_tick"] = row["tick"]
+        elif schema == "cameo-bot-queue":
+            health.validate_bot_queue_row(row)
+            seat = row.get("seat")
+            if not isinstance(seat, str) or not seat.startswith("seat_"):
+                raise health.EvidenceError("bot-queue seat must be an anonymous seat_N")
+            agg = queues.setdefault(seat, {
+                "rows": 0, "last_tick": -1, "banked": 0, "spent_total": 0,
+                "requested": collections.Counter(), "accepted": collections.Counter(),
+                "completed": collections.Counter(), "spend": collections.Counter(),
+                "skipped": collections.Counter(), "hold_reasons": collections.Counter(),
+            })
+            if row["tick"] < agg["last_tick"]:
+                raise health.EvidenceError("non-monotonic bot-queue ticks for seat")
+            # Same-tick rows (a game-over flush on a sample tick) keep the last.
+            agg["last_tick"] = row["tick"]
+            agg["rows"] += 1
+            agg["banked"] = row.get("banked", 0)
+            agg["spent_total"] += row.get("spent_delta", 0)
+            for key in ("requested", "accepted", "completed", "spend", "skipped"):
+                for name, count in row.get(key, {}).items():
+                    agg[key][name] += count
+            for queue in row.get("queues", []):
+                reason = queue.get("reason")
+                if reason and reason != "producing":
+                    agg["hold_reasons"][reason] += 1
         else:
             raise health.EvidenceError(f"unsupported player-telemetry schema: {schema}")
-    return samples, events
+    return samples, events, queues
 
 
 def match_records(support_dirs):
@@ -114,11 +140,16 @@ def match_records(support_dirs):
     return out
 
 
-def seat_row(uid, seat, sample, events, match):
+def seat_row(uid, seat, sample, events, queue, match):
     army = (sample or {}).get("army") or {}
     types = (sample or {}).get("unit_types") or {}
     top = ", ".join(f"{k}x{v}" for k, v in
                    sorted(types.items(), key=lambda kv: (-kv[1], kv[0]))[:4])
+    requested = sum((queue or {}).get("requested", {}).values()) if queue else None
+    accepted = sum((queue or {}).get("accepted", {}).values()) if queue else None
+    completed = sum((queue or {}).get("completed", {}).values()) if queue else None
+    hold = (queue or {}).get("hold_reasons", collections.Counter())
+    hold_top = ", ".join(f"{k}x{v}" for k, v in hold.most_common(2))
     return {
         "game_uid": uid[:12], "seat": seat,
         "bot": (sample or {}).get("bot_type", ""),
@@ -142,6 +173,14 @@ def seat_row(uid, seat, sample, events, match):
         "first_contact": events.get("first_contact_tick"),
         "sw_built": events.get("superweapon_built", 0),
         "sw_fired": events.get("superweapon_fired", 0),
+        # WBL-P1 conversion columns (bot seats only; humans get None).
+        "spent_total": (queue or {}).get("spent_total"),
+        "banked_last": (queue or {}).get("banked"),
+        "req": requested, "acc": accepted, "done": completed,
+        "spend_by_cat": ", ".join(f"{k}:{v}" for k, v in
+                                  sorted((queue or {}).get("spend", {}).items())
+                                  if v) if queue else "",
+        "hold_top": hold_top,
     }
 
 
@@ -156,7 +195,7 @@ def main(argv=None):
     matches = match_records(args.paths)
     rows_out = []
     for path in files:
-        samples, events = read_channel(path)
+        samples, events, queues = read_channel(path)
         # The file name is sha256(game_uid); recover game_uid from any row.
         game_uid = None
         if samples:
@@ -172,11 +211,11 @@ def main(argv=None):
             except ValueError:
                 return 999
 
-        seats = sorted(samples.keys() | events.keys(), key=seat_index)
+        seats = sorted(samples.keys() | events.keys() | queues.keys(), key=seat_index)
         game_rows = []
         for seat in seats:
             row = seat_row(game_uid, seat, samples.get(seat), events.get(seat),
-                           matches.get(game_uid, {}).get(seat))
+                           queues.get(seat), matches.get(game_uid, {}).get(seat))
             game_rows.append(row)
             rows_out.append(row)
         if args.csv or not game_rows:
@@ -184,16 +223,22 @@ def main(argv=None):
         print(f"\n## game {game_uid[:12]}… ({len(game_rows)} seats)")
         print("| seat | bot | faction | outcome | tick | harv | ref | cony | exp |"
               " deploys | prod | tier | idle | army | placed | lost | waves |"
-              " first_contact | sw b/f | top units |")
-        print("|---|---|---|---|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--|---|")
+              " first_contact | sw b/f | spent | banked | req/acc/done | hold | top units |")
+        print("|---|---|---|---|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--|--:|--:|--|---|---|")
         for r in game_rows:
             army = f"{r['army_total']}" if r["army_total"] is not None else "?"
             contact = r["first_contact"] if r["first_contact"] is not None else "-"
+            spent = r["spent_total"] if r["spent_total"] is not None else "-"
+            banked = r["banked_last"] if r["banked_last"] is not None else "-"
+            conv = (f"{r['req']}/{r['acc']}/{r['done']}" if r["req"] is not None
+                    else "-")
+            hold = r["hold_top"] or "-"
             print(f"| {r['seat']} | {r['bot']} | {r['faction']} | {r['outcome']} |"
                   f" {r['tick']} | {r['harv']} | {r['ref']} | {r['cony']} | {r['exp']} |"
                   f" {r['deploys']} | {r['prod']} | {r['tier']} | {r['idle_ticks']} |"
                   f" {army} | {r['placed']} | {r['lost']} | {r['waves']} |"
-                  f" {contact} | {r['sw_built']}/{r['sw_fired']} | {r['top_units']} |")
+                  f" {contact} | {r['sw_built']}/{r['sw_fired']} |"
+                  f" {spent} | {banked} | {conv} | {hold} | {r['top_units']} |")
     if args.csv:
         writer = csv.DictWriter(sys.stdout, fieldnames=list(rows_out[0].keys()) if rows_out
                                 else ["empty"])

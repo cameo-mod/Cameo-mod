@@ -179,6 +179,7 @@ namespace OpenRA.Mods.CA.Traits
 		TechTree techTree;
 
 		IBotRequestPauseUnitProduction[] requestPause;
+		IBotUnitProductionObserver[] unitObservers;
 		int idleUnitCount;
 		int currentQueueIndex = 0;
 		PlayerResources playerResources;
@@ -454,13 +455,27 @@ namespace OpenRA.Mods.CA.Traits
 
 				SetUnitInterval(unit.Name);
 				bot.QueueOrder(Order.StartProduction(queue.Actor, unit.Name, 1));
+				NotifyStarted(unit.Name, queue.Info.Type);
 				AIUtils.BotDebug("AI: {0} decided to build {1} from the opening defense budget.", player, unit.Name);
 				return;
 			}
 		}
 
+		// Record-only diagnostics seam (WBL-P1): resolved lazily from the world actor like the
+		// placement observer — absent observers keep the production path allocation-free.
+		IBotUnitProductionObserver[] UnitObservers =>
+			unitObservers ??= world.WorldActor.TraitsImplementing<IBotUnitProductionObserver>().ToArray();
+
+		void NotifyStarted(string name, string queueType)
+		{
+			foreach (var observer in UnitObservers)
+				observer.UnitProductionStarted(player, world.WorldTick, name, queueType);
+		}
+
 		void IBotRequestUnitProduction.RequestUnitProduction(IBot bot, string requestedActor)
 		{
+			foreach (var observer in UnitObservers)
+				observer.UnitProductionRequested(player, world.WorldTick, requestedActor);
 			queuedBuildRequests.Add(requestedActor);
 		}
 
@@ -528,6 +543,7 @@ namespace OpenRA.Mods.CA.Traits
 
 					SetUnitInterval(name);
 					bot.QueueOrder(Order.StartProduction(queue.Actor, name, 1));
+					NotifyStarted(name, queue.Info.Type);
 					counters.Record(unit);
 					if (activeComposition != null && CompositionAppliesToCategory(activeComposition, queue.Info.Type))
 						AddToActiveCompositionProducedValue(unit);
@@ -548,7 +564,11 @@ namespace OpenRA.Mods.CA.Traits
 			foreach (var buildableInfo in actorInfo.TraitInfos<BuildableInfo>())
 			{
 				if (!ShouldBuild(name, true))
+				{
+					foreach (var observer in UnitObservers)
+						observer.UnitProductionSkipped(player, world.WorldTick, name, "should_build");
 					return;
+				}
 
 				ProductionQueue queue = null;
 				foreach (var pq in buildableInfo.Queue)
@@ -562,10 +582,14 @@ namespace OpenRA.Mods.CA.Traits
 				{
 					SetUnitInterval(name);
 					bot.QueueOrder(Order.StartProduction(queue.Actor, name, 1));
+					NotifyStarted(name, queue.Info.Type);
 					AIUtils.BotDebug("AI: {0} decided to build {1} (external request)", queue.Actor.Owner, name);
 					return;
 				}
 			}
+
+			foreach (var observer in UnitObservers)
+				observer.UnitProductionSkipped(player, world.WorldTick, name, "no_queue");
 		}
 
 		void SetUnitInterval(string name)

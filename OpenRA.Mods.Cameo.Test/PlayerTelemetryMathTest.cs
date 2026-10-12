@@ -114,5 +114,44 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(depths["loop_a"], Is.EqualTo(2));
 			Assert.That(depths["loop_b"], Is.EqualTo(1));
 		}
+
+		[Test]
+		public void QueueStatePrefersDisabledThenBusy()
+		{
+			Assert.That(PlayerTelemetryMath.QueueState(false, true, true), Is.EqualTo("disabled"));
+			Assert.That(PlayerTelemetryMath.QueueState(false, false, false), Is.EqualTo("disabled"));
+			Assert.That(PlayerTelemetryMath.QueueState(true, false, false), Is.EqualTo("idle"));
+			Assert.That(PlayerTelemetryMath.QueueState(true, true, true), Is.EqualTo("paused"));
+			Assert.That(PlayerTelemetryMath.QueueState(true, true, false), Is.EqualTo("busy"));
+		}
+
+		[Test]
+		public void IdleReasonFollowsTheModuleGateOrder()
+		{
+			// Every flag true: the earliest gate (a reservation vote) wins the label.
+			Assert.That(PlayerTelemetryMath.IdleReason(true, true, true, true, true), Is.EqualTo("cash_reserved"));
+			Assert.That(PlayerTelemetryMath.IdleReason(false, true, true, true, true), Is.EqualTo("no_cash"));
+			Assert.That(PlayerTelemetryMath.IdleReason(false, false, true, true, true), Is.EqualTo("saturation_stop"));
+			Assert.That(PlayerTelemetryMath.IdleReason(false, false, false, true, true), Is.EqualTo("prerequisite_missing"));
+			Assert.That(PlayerTelemetryMath.IdleReason(false, false, false, false, true), Is.EqualTo("unit_cap"));
+			Assert.That(PlayerTelemetryMath.IdleReason(false, false, false, false, false), Is.EqualTo("no_desire"));
+
+			// A later gate never masks an earlier one.
+			Assert.That(PlayerTelemetryMath.IdleReason(true, false, false, false, false), Is.EqualTo("cash_reserved"));
+			Assert.That(PlayerTelemetryMath.IdleReason(false, true, false, false, false), Is.EqualTo("no_cash"));
+		}
+
+		[Test]
+		public void BuildingCategoryMapsTheSpecBuckets()
+		{
+			Assert.That(PlayerTelemetryMath.BuildingCategory(true, false, false), Is.EqualTo("defence"));
+			Assert.That(PlayerTelemetryMath.BuildingCategory(false, true, false), Is.EqualTo("economy"));
+			Assert.That(PlayerTelemetryMath.BuildingCategory(false, false, true), Is.EqualTo("crawl_link"));
+			Assert.That(PlayerTelemetryMath.BuildingCategory(false, false, false), Is.EqualTo("tech"));
+
+			// Defence outranks the other families when a type list overlaps.
+			Assert.That(PlayerTelemetryMath.BuildingCategory(true, true, true), Is.EqualTo("defence"));
+			Assert.That(PlayerTelemetryMath.BuildingCategory(false, true, true), Is.EqualTo("economy"));
+		}
 	}
 }

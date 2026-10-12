@@ -98,6 +98,23 @@ PLAYER_EVENT_KINDS = {
     "first_unit_enemy_territory", "attack_wave_start", "superweapon_built",
     "superweapon_fired",
 }
+# WBL-P1 CONVERSION-DIAGNOSTICS (lead task 2026-10-12): bot seats get a third
+# record shape in the same channel — a 250-tick production-queue sample with
+# per-category conversion counters and the reason each queue is not producing.
+BOT_QUEUE_V1_FIELDS = {
+    "schema", "version", "game_uid", "record_id", "tick", "seat", "banked",
+    "spent_delta", "requested", "accepted", "completed", "skipped", "spend",
+    "queues",
+}
+BOT_QUEUE_CATEGORY_FIELDS = {"unit", "defence", "crawl_link", "tech", "economy"}
+BOT_QUEUE_ROW_FIELDS = {"queue", "group", "state", "item", "reason", "reserved_by"}
+BOT_QUEUE_STATES = {"idle", "busy", "paused", "disabled"}
+BOT_QUEUE_REASONS = {
+    "queue_disabled", "producing", "paused", "cash_reserved", "no_cash",
+    "saturation_stop", "prerequisite_missing", "unit_cap", "no_desire",
+}
+BOT_QUEUE_SKIP_REASONS = {"should_build", "no_queue", "duplicate", "in_production"}
+MAX_BOT_QUEUE_ROWS = 32
 MAX_PLAYER_FILES = 64
 
 
@@ -409,6 +426,48 @@ def analyze(situations, placements, matches, game_uid, player, *, live=False,
     return report
 
 
+def validate_bot_queue_row(row):
+    """Fail-closed shape check for one cameo-bot-queue v1 row (WBL-P1).
+    Shared by the health channel reader and the playtest stats aggregator."""
+    reject_unknown_fields(row, BOT_QUEUE_V1_FIELDS, "bot-queue v1")
+    if row.get("version") != 1:
+        raise EvidenceError("unsupported bot-queue version")
+    integer(row.get("tick"))
+    integer(row.get("banked"))
+    integer(row.get("spent_delta"))
+    for key in ("requested", "accepted", "completed", "spend"):
+        values = row.get(key)
+        if not isinstance(values, dict):
+            raise EvidenceError(f"bot-queue {key} must be an object")
+        reject_unknown_fields(values, BOT_QUEUE_CATEGORY_FIELDS, f"bot-queue {key}")
+        for value in values.values():
+            integer(value)
+    skipped = row.get("skipped")
+    if not isinstance(skipped, dict):
+        raise EvidenceError("bot-queue skipped must be an object")
+    for reason, count in skipped.items():
+        if reason not in BOT_QUEUE_SKIP_REASONS:
+            raise EvidenceError(f"unsupported bot-queue skip reason: {reason}")
+        integer(count)
+    queues = row.get("queues")
+    if not isinstance(queues, list) or len(queues) > MAX_BOT_QUEUE_ROWS:
+        raise EvidenceError("bot-queue queues must be a bounded list")
+    for queue in queues:
+        if not isinstance(queue, dict):
+            raise EvidenceError("bot-queue queue row must be an object")
+        reject_unknown_fields(queue, BOT_QUEUE_ROW_FIELDS, "bot-queue queue")
+        identity(queue.get("queue"))
+        if queue.get("state") not in BOT_QUEUE_STATES:
+            raise EvidenceError(f"unsupported bot-queue state: {queue.get('state')}")
+        if "reason" in queue and queue["reason"] not in BOT_QUEUE_REASONS:
+            raise EvidenceError(f"unsupported bot-queue reason: {queue['reason']}")
+        voters = queue.get("reserved_by", [])
+        if not isinstance(voters, list) or len(voters) > MAX_BOT_QUEUE_ROWS:
+            raise EvidenceError("bot-queue reserved_by must be a bounded list")
+        for voter in voters:
+            identity(voter)
+
+
 def players_channel(logs, game_uid, player, live=False):
     """Validate the PLAYTEST-TELEMETRY-V2 per-player channel for the selected game.
 
@@ -422,7 +481,7 @@ def players_channel(logs, game_uid, player, live=False):
     if not expected.exists():
         return None, {}
     rows, receipt = read_jsonl(expected, live)
-    samples, events, last_tick = 0, {}, -1
+    samples, events, queue_rows, last_tick = 0, {}, 0, -1
     for row in rows:
         schema = row.get("schema")
         if schema == "cameo-player-sample":
@@ -456,10 +515,15 @@ def players_channel(logs, game_uid, player, live=False):
                 raise EvidenceError(f"unsupported player-event kind: {kind}")
             if row.get("seat") == player:
                 events[kind] = events.get(kind, 0) + 1
+        elif schema == "cameo-bot-queue":
+            validate_bot_queue_row(row)
+            if row.get("seat") == player:
+                queue_rows += 1
         else:
             raise EvidenceError(f"unsupported player-telemetry schema: {schema}")
     metrics = {"player_channel_samples": samples,
                "player_channel_events": events,
+               "player_channel_queue_rows": queue_rows,
                "player_channel_last_sample_tick": last_tick if last_tick >= 0 else None}
     return receipt, metrics
 

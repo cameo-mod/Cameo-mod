@@ -283,6 +283,7 @@ namespace OpenRA.Mods.Common.Traits
 		readonly ActorIndex.OwnerAndNames resourceControlStructures;
 
 		IBotRequestPauseUnitProduction[] requestPause;
+		IBotUnitProductionObserver[] unitObservers;
 		AdaptiveCounterProduction counters;
 		IBotEnemyCompositionProvider[] compositionProviders;
 		IFransEconomicSaturationService economicSaturationService;
@@ -659,7 +660,7 @@ namespace OpenRA.Mods.Common.Traits
 						if (cost > available)
 							continue;
 
-						bot.QueueOrder(Order.StartProduction(queue.Actor, unit.Name, 1));
+						QueueUnitProduction(bot, queue, unit.Name);
 						counters.Record(unit);
 						available -= cost;
 						FransBotLog.BotDebug(world,
@@ -720,7 +721,7 @@ namespace OpenRA.Mods.Common.Traits
 					if (cost > available)
 						return false;
 
-					bot.QueueOrder(Order.StartProduction(selected.Actor, name, 1));
+					QueueUnitProduction(bot, selected, name);
 					available -= cost;
 					RecordOpeningProduction(name, openingPlanUnit: true);
 					FransBotLog.BotDebug(world,
@@ -759,7 +760,7 @@ namespace OpenRA.Mods.Common.Traits
 				if (cost > available)
 					continue;
 
-				bot.QueueOrder(Order.StartProduction(queue.Actor, request, 1));
+				QueueUnitProduction(bot, queue, request);
 				available -= cost;
 				specOpsBuildRequests.Remove(request);
 				RecordOpeningProduction(request);
@@ -876,7 +877,7 @@ namespace OpenRA.Mods.Common.Traits
 					if (selected == null)
 						continue;
 
-					bot.QueueOrder(Order.StartProduction(selected.Actor, name, 1));
+					QueueUnitProduction(bot, selected, name);
 					RecordOpeningProduction(name, openingPlanUnit: true);
 					FransBotLog.BotDebug(world,
 						"{0}: Fransbot opening starts {1} from {2}: {3}.",
@@ -918,7 +919,7 @@ namespace OpenRA.Mods.Common.Traits
 			if (bestQueue == null)
 				return false;
 
-			bot.QueueOrder(Order.StartProduction(bestQueue.Actor, bestUnit.Name, 1));
+			QueueUnitProduction(bot, bestQueue, bestUnit.Name);
 			openingLightVehicleSatisfied = true;
 			RecordOpeningProduction(bestUnit.Name);
 			FransBotLog.BotDebug(world,
@@ -1018,7 +1019,7 @@ namespace OpenRA.Mods.Common.Traits
 					if (unit == null)
 						continue;
 
-					bot.QueueOrder(Order.StartProduction(queue.Actor, unit.Name, 1));
+					QueueUnitProduction(bot, queue, unit.Name);
 					counters.Record(unit);
 					var capMode = !ignorePositiveUnitLimits ? "hard" : "soft";
 					FransBotLog.BotDebug(world, "{0}: Production saturation fills {1} queue {2} with {3}; positive unit caps are {4}.",
@@ -1068,7 +1069,7 @@ namespace OpenRA.Mods.Common.Traits
 				if (IsUnitDelayed(request) || !QueueCanBuild(queue, request))
 					continue;
 
-				bot.QueueOrder(Order.StartProduction(queue.Actor, request, 1));
+				QueueUnitProduction(bot, queue, request);
 				specOpsBuildRequests.Remove(request);
 				RecordOpeningProduction(request);
 				FransBotLog.BotDebug(world,
@@ -1169,7 +1170,7 @@ namespace OpenRA.Mods.Common.Traits
 							!world.Map.Rules.Actors.TryGetValue(actorType, out var actorInfo) || !HasAdequateAirUnitReloadBuildings(actorInfo))
 							continue;
 
-						bot.QueueOrder(Order.StartProduction(queue.Actor, actorType, 1));
+						QueueUnitProduction(bot, queue, actorType);
 						FransBotLog.BotDebug(world,
 							"{0}: PIONEER AIR-SCOUT DEMAND starts one {1} in {2}: active expansion objective is on another Ground landmass, exact RECON is required, and live+queued combat Air was 0. Normal Air saturation remains unchanged.",
 							player, actorType, queue.Actor);
@@ -1197,7 +1198,7 @@ namespace OpenRA.Mods.Common.Traits
 					if (unit == null || !IsConfiguredAirCombatType(unit.Name))
 						continue;
 
-					bot.QueueOrder(Order.StartProduction(queue.Actor, unit.Name, 1));
+					QueueUnitProduction(bot, queue, unit.Name);
 					counters.Record(unit);
 					FransBotLog.BotDebug(world,
 						"{0}: ECONOMIC DEFENSIVE AIR RESERVE: suspended Air domain starts {1} in {2}; live {3}, queued {4}, reserve target {5}.",
@@ -1306,18 +1307,42 @@ namespace OpenRA.Mods.Common.Traits
 		}
 
 
+		// Record-only diagnostics seam (WBL-P1): resolved lazily from the world actor like the
+		// placement observer — absent observers keep the production path allocation-free.
+		IBotUnitProductionObserver[] UnitObservers =>
+			unitObservers ??= world.WorldActor.TraitsImplementing<IBotUnitProductionObserver>().ToArray();
+
+		void QueueUnitProduction(IBot bot, ProductionQueue queue, string name)
+		{
+			bot.QueueOrder(Order.StartProduction(queue.Actor, name, 1));
+			foreach (var observer in UnitObservers)
+				observer.UnitProductionStarted(player, world.WorldTick, name, queue.Info.Type);
+		}
+
+		void NotifySkipped(string actor, string reason)
+		{
+			foreach (var observer in UnitObservers)
+				observer.UnitProductionSkipped(player, world.WorldTick, actor, reason);
+		}
+
 		void IBotRequestUnitProduction.RequestUnitProduction(IBot bot, string requestedActor)
 		{
 
 			// External resource-economy requests remain valid in every economic state, including Surplus.
 			// Post-opening HARV demand comes from FransHarvester; UnitBuilder only executes the request.
 
+			foreach (var observer in UnitObservers)
+				observer.UnitProductionRequested(player, world.WorldTick, requestedActor);
+
 			// MCV/HARV are strategic single-debt requests. Never stack another copy while one
 			// is already requested or physically present in an enabled production queue.
 			if (Info.PriorityRequestedUnitTypes.Contains(requestedActor))
 			{
 				if (queuedBuildRequests.Contains(requestedActor))
+				{
+					NotifySkipped(requestedActor, "duplicate");
 					return;
+				}
 
 				combatIntelService.EnsureCurrentSnapshot();
 				var alreadyInProduction = combatIntelService.OwnedActors
@@ -1325,7 +1350,10 @@ namespace OpenRA.Mods.Common.Traits
 					.Any(q => q.Enabled && q.AllQueued().Any(item => item.Item == requestedActor));
 
 				if (alreadyInProduction)
+				{
+					NotifySkipped(requestedActor, "in_production");
 					return;
+				}
 			}
 
 			queuedBuildRequests.Add(requestedActor);
@@ -1355,7 +1383,7 @@ namespace OpenRA.Mods.Common.Traits
 					var unit = ChooseRandomUnitToBuild(selected);
 					if (unit != null)
 					{
-						bot.QueueOrder(Order.StartProduction(selected.Actor, unit.Name, 1));
+						QueueUnitProduction(bot, selected, unit.Name);
 						counters.Record(unit);
 						FransBotLog.BotDebug(world, "{0}: {1} producer {2} is building {3}{4}.",
 							player, category, selected.Actor, unit.Name,
@@ -1375,7 +1403,7 @@ namespace OpenRA.Mods.Common.Traits
 			if (fallbackUnit == null)
 				return;
 
-			bot.QueueOrder(Order.StartProduction(queue.Actor, fallbackUnit.Name, 1));
+			QueueUnitProduction(bot, queue, fallbackUnit.Name);
 			counters.Record(fallbackUnit);
 		}
 
@@ -1409,7 +1437,7 @@ namespace OpenRA.Mods.Common.Traits
 
 					if (selected != null)
 					{
-						bot.QueueOrder(Order.StartProduction(selected.Actor, name, 1));
+						QueueUnitProduction(bot, selected, name);
 						RecordOpeningProduction(name);
 						if (!openingBuildOrderService.OpeningComplete && Info.PriorityRequestedUnitTypes.Contains(name) && !Info.HarvesterTypes.Contains(name))
 						{
@@ -1436,7 +1464,7 @@ namespace OpenRA.Mods.Common.Traits
 				if (fallback == null)
 					continue;
 
-				bot.QueueOrder(Order.StartProduction(fallback.Actor, name, 1));
+				QueueUnitProduction(bot, fallback, name);
 				RecordOpeningProduction(name);
 				if (!openingBuildOrderService.OpeningComplete && Info.PriorityRequestedUnitTypes.Contains(name) && !Info.HarvesterTypes.Contains(name))
 				{

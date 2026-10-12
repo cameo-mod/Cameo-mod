@@ -64,6 +64,12 @@ namespace OpenRA.Mods.Cameo.Traits
 		[Desc("ConYard removals held back while a matching MCV appearance can still arrive (Transforms remove the source first).")]
 		public readonly int MaxPendingConyardRemovals = 64;
 
+		[Desc("World ticks between per-bot production-queue samples (WBL-P1 conversion diagnostics).")]
+		public readonly int QueueIntervalTicks = 250;
+
+		[Desc("Per-seat cap on queue rows inside one bot-queue sample.")]
+		public readonly int MaxQueueRowsPerSeat = 32;
+
 		public override object Create(ActorInitializer init) { return new AiPlayerTelemetry(this); }
 	}
 
@@ -176,6 +182,57 @@ namespace OpenRA.Mods.Cameo.Traits
 
 			return depths;
 		}
+
+		/// <summary>Spend categories of the bot-queue row (WBL-P1 spec: unit, defence, crawl/link, tech, economy).</summary>
+		public static readonly string[] QueueCategories = ["unit", "defence", "crawl_link", "tech", "economy"];
+
+		/// <summary>Queue row state: disabled beats busy; a paused head item reads paused, not idle.</summary>
+		public static string QueueState(bool enabled, bool hasHead, bool paused)
+		{
+			if (!enabled)
+				return "disabled";
+			if (!hasHead)
+				return "idle";
+			return paused ? "paused" : "busy";
+		}
+
+		/// <summary>
+		/// Idle-queue hold reason in the unit builder's own gate order: a pause vote (cash
+		/// reserved by a named provider) outranks the cash floor, which outranks the
+		/// bank-saturation sweep stop, then prerequisites and the unit cap; the remainder
+		/// is genuinely no desire. Inferred from the same public signals the module reads.
+		/// </summary>
+		public static string IdleReason(bool reserved, bool belowCashFloor, bool saturated,
+			bool noBuildable, bool atUnitCap)
+		{
+			if (reserved)
+				return "cash_reserved";
+			if (belowCashFloor)
+				return "no_cash";
+			if (saturated)
+				return "saturation_stop";
+			if (noBuildable)
+				return "prerequisite_missing";
+			if (atUnitCap)
+				return "unit_cap";
+			return "no_desire";
+		}
+
+		/// <summary>
+		/// Spend category of a produced item: defence types and the defence tag map to
+		/// defence, refinery types/tag to economy, fragile (crawl/link family) types to
+		/// crawl_link, every other building to tech. Unit-queue items are always unit.
+		/// </summary>
+		public static string BuildingCategory(bool defence, bool refinery, bool crawlLink)
+		{
+			if (defence)
+				return "defence";
+			if (refinery)
+				return "economy";
+			if (crawlLink)
+				return "crawl_link";
+			return "tech";
+		}
 	}
 
 	internal sealed class BuildingTrack
@@ -225,9 +282,29 @@ namespace OpenRA.Mods.Cameo.Traits
 		public readonly Dictionary<uint, (double Home, double Enemy)> Dists = new();
 		public readonly Dictionary<uint, (double Home, double Enemy)> PreviousDists = new();
 		public readonly Dictionary<string, bool> PowerReady = new(StringComparer.Ordinal);
+
+		// WBL-P1 conversion diagnostics (bot seats only): per-window counters reset after
+		// each queue sample; QueueHeads persists so a new head item reads as an acceptance.
+		public bool QueueHelpersResolved;
+		public int LastSpent = -1;
+		public BaseBuilderBotModuleCA BaseBuilder;
+		public UnitBuilderBotModuleCA UnitBuilder;
+		public BotLimits Limits;
+		public PlayerResources Resources;
+		public IBotPersonalityLeadProvider[] LeadProviders = [];
+		public readonly Dictionary<string, int> QueueRequested = new(StringComparer.Ordinal);
+		public readonly Dictionary<string, int> QueueAccepted = new(StringComparer.Ordinal);
+		public readonly Dictionary<string, int> QueueCompleted = new(StringComparer.Ordinal);
+		public readonly Dictionary<string, long> QueueSpend = new(StringComparer.Ordinal);
+		public readonly Dictionary<string, int> QueueSkipped = new(StringComparer.Ordinal);
+		public readonly Dictionary<string, ProductionItem> QueueHeads = new(StringComparer.Ordinal);
+
+		// Order-issue markers ("{actorId}:{queueType}|{item}") left by the unit-production
+		// seam so the head-diff does not count the same acceptance a second time.
+		public readonly Dictionary<string, int> SeamStarts = new(StringComparer.Ordinal);
 	}
 
-	public sealed class AiPlayerTelemetry : IWorldLoaded, ITick, IGameOver, INotifyActorDisposing
+	public sealed class AiPlayerTelemetry : IWorldLoaded, ITick, IGameOver, INotifyActorDisposing, IBotUnitProductionObserver
 	{
 		readonly AiPlayerTelemetryInfo info;
 		readonly Dictionary<uint, BuildingTrack> buildings = new();
@@ -236,6 +313,7 @@ namespace OpenRA.Mods.Cameo.Traits
 		readonly Dictionary<OpenRA.Player, SeatTelemetry> seats = new();
 		static readonly List<(string Seat, CPos Home)> NoEnemies = [];
 		int lastSampleTick = -1;
+		int lastQueueTick = -1;
 
 		IReadOnlyDictionary<string, HashSet<string>> tagMap;
 		Dictionary<string, string> categoryCache;
@@ -471,8 +549,9 @@ namespace OpenRA.Mods.Cameo.Traits
 
 					EmitEvent(seat, "building_placed", actor.Info.Name, actor.Location,
 						startDist: Cells(actor.Location, seat.Home), actorId: actor.ActorID);
-					if (IsConyardBuilding(actor, tagMap)
-						&& TryMatchDeploy(mcvRemoved, actor.Owner, actor.Location, world.WorldTick))
+					var deployMatched = IsConyardBuilding(actor, tagMap)
+						&& TryMatchDeploy(mcvRemoved, actor.Owner, actor.Location, world.WorldTick);
+					if (deployMatched)
 					{
 						// An expansion deploy adds a ConYard while one already stands; the
 						// starting MCV's first deploy (none owned) and a pack/redeploy
@@ -489,6 +568,15 @@ namespace OpenRA.Mods.Cameo.Traits
 						EmitEvent(seat, "conyard_deployed", actor.Info.Name, actor.Location,
 							startDist: Cells(actor.Location, seat.Home), actorId: actor.ActorID);
 					}
+					else
+					{
+						// A ConYard only ever appears through an MCV transform, never from a
+						// queue — deploys are not completed production; the MCV was counted
+						// as a completed unit when it appeared.
+						var bot = BotSeat(actor.Owner);
+						if (bot != null)
+							Bump(bot.QueueCompleted, BuildingCategoryOf(bot, actor.Info.Name));
+					}
 
 					if (tagMap.TryGetValue(actor.Info.Name, out var tags) && tags.Contains(BotTargetTags.Superweapon))
 						EmitEvent(seat, "superweapon_built", actor.Info.Name, actor.Location,
@@ -498,6 +586,7 @@ namespace OpenRA.Mods.Cameo.Traits
 				{
 					// Transform removes the source first (Transform.cs: Dispose then CreateActor), so
 					// an MCV arriving now can close a ConYard removal that is still pending — repack.
+					var repacked = false;
 					for (var i = pendingConyardRemoved.Count - 1; i >= 0; i--)
 					{
 						var p = pendingConyardRemoved[i];
@@ -506,6 +595,7 @@ namespace OpenRA.Mods.Cameo.Traits
 							|| Math.Max(Math.Abs(p.Cell.X - actor.Location.X), Math.Abs(p.Cell.Y - actor.Location.Y)) > info.DeployMatchCells)
 							continue;
 
+						repacked = true;
 						pendingConyardRemoved.RemoveAt(i);
 						var seat = Seat(actor.Owner);
 						if (seat != null)
@@ -513,6 +603,16 @@ namespace OpenRA.Mods.Cameo.Traits
 								startDist: Cells(p.Cell, seat.Home), actorId: p.ActorId);
 						break;
 					}
+
+					// An MCV that closes no repack window was produced — completed unit output.
+					if (!repacked && BotSeat(actor.Owner) is { } bot)
+						Bump(bot.QueueCompleted, "unit");
+				}
+				else if (BotSeat(actor.Owner) is { } bot)
+				{
+					// A mobile actor appearing is a completed unit production for the bot-queue
+					// row (transforms land in the building branch's deploy match instead).
+					Bump(bot.QueueCompleted, "unit");
 				}
 			}
 			catch (Exception e)
@@ -620,6 +720,9 @@ namespace OpenRA.Mods.Cameo.Traits
 				}
 
 				PollSupportPowers();
+
+				if (info.QueueIntervalTicks > 0 && tick % info.QueueIntervalTicks == 0)
+					QueueSample(self.World, tick);
 
 				if (tick % info.SampleIntervalTicks == 0)
 					EconomySample(self.World, tick);
@@ -787,6 +890,378 @@ namespace OpenRA.Mods.Cameo.Traits
 					seat.PowerReady[kv.Key] = ready;
 				}
 			}
+		}
+
+		// ----- WBL-P1 conversion diagnostics (bot seats only) -----
+		// Record-only: the observer seam is notified inside the unit builders, the 250-tick
+		// poll reads the same public surfaces the modules decide on. Nothing here writes to
+		// synced state, orders, or RNG, and a fault ends the channel through Fail(), never
+		// the game or the notifying module.
+
+		SeatTelemetry BotSeat(OpenRA.Player player)
+		{
+			return player != null && AiMatchLogWriter.IsLoggableBot(player) && seats.TryGetValue(player, out var seat)
+				? seat
+				: null;
+		}
+
+		static void Bump(Dictionary<string, int> counts, string key)
+		{
+			counts[key] = counts.TryGetValue(key, out var n) ? n + 1 : 1;
+		}
+
+		void IBotUnitProductionObserver.UnitProductionRequested(OpenRA.Player owner, int tick, string actor)
+		{
+			try
+			{
+				var seat = BotSeat(owner);
+				if (seat != null)
+					Bump(seat.QueueRequested, "unit");
+			}
+			catch (Exception e)
+			{
+				Fail(e);
+			}
+		}
+
+		void IBotUnitProductionObserver.UnitProductionStarted(OpenRA.Player owner, int tick, string actor, string queueType)
+		{
+			try
+			{
+				var seat = BotSeat(owner);
+				if (seat == null)
+					return;
+
+				Bump(seat.QueueAccepted, "unit");
+				seat.QueueSpend["unit"] = seat.QueueSpend.GetValueOrDefault("unit") + CostOfName(actor);
+
+				// The poll's head-diff would see this order again when the item reaches
+				// the head — mark it so the acceptance is counted exactly once. A stale
+				// marker (item cancelled before heading) at most skips one later same-name
+				// head, which is the same single acceptance in the window accounting.
+				var actorId = owner.PlayerActor?.ActorID;
+				if (actorId.HasValue)
+					Bump(seat.SeamStarts, actorId.Value + ":" + queueType + "|" + actor);
+			}
+			catch (Exception e)
+			{
+				Fail(e);
+			}
+		}
+
+		void IBotUnitProductionObserver.UnitProductionSkipped(OpenRA.Player owner, int tick, string actor, string reason)
+		{
+			try
+			{
+				var seat = BotSeat(owner);
+				if (seat != null && reason != null)
+					Bump(seat.QueueSkipped, reason);
+			}
+			catch (Exception e)
+			{
+				Fail(e);
+			}
+		}
+
+		int CostOfName(string actorName)
+		{
+			return world.Map.Rules.Actors.TryGetValue(actorName, out var ai)
+				? ai.TraitInfos<ValuedInfo>().FirstOrDefault()?.Cost ?? 0
+				: 0;
+		}
+
+		string BuildingCategoryOf(SeatTelemetry seat, string actorName)
+		{
+			var builder = seat.BaseBuilder;
+			var refinery = builder != null && builder.Info.RefineryTypes.Contains(actorName)
+				|| tagMap.TryGetValue(actorName, out var refTags) && refTags.Contains(BotTargetTags.Refinery);
+			var defence = builder != null && builder.Info.DefenseTypes.Contains(actorName)
+				|| tagMap.TryGetValue(actorName, out var defTags) && defTags.Contains(BotTargetTags.Defence);
+			var crawl = builder != null && builder.Info.FragileTypes.Contains(actorName);
+			return PlayerTelemetryMath.BuildingCategory(defence, refinery, crawl);
+		}
+
+		string ItemCategory(SeatTelemetry seat, string actorName)
+		{
+			return world.Map.Rules.Actors.TryGetValue(actorName, out var ai) && ai.HasTraitInfo<BuildingInfo>()
+				? BuildingCategoryOf(seat, actorName)
+				: "unit";
+		}
+
+		void ResolveQueueHelpers(SeatTelemetry seat)
+		{
+			if (seat.QueueHelpersResolved)
+				return;
+			seat.QueueHelpersResolved = true;
+
+			var actor = seat.Player.PlayerActor;
+			if (actor == null || actor.IsDead || actor.Disposed)
+				return;
+
+			seat.UnitBuilder = actor.TraitsImplementing<UnitBuilderBotModuleCA>().FirstEnabledTraitOrDefault();
+			seat.BaseBuilder = actor.TraitsImplementing<BaseBuilderBotModuleCA>().FirstEnabledTraitOrDefault();
+			seat.Limits = actor.TraitsImplementing<BotLimits>().FirstEnabledTraitOrDefault();
+			seat.Resources = actor.TraitOrDefault<PlayerResources>();
+			seat.LeadProviders = actor.TraitsImplementing<IBotPersonalityLeadProvider>().ToArray();
+		}
+
+		bool UnitCapped(SeatTelemetry seat, string[] buildable,
+			Dictionary<string, int> owned, Dictionary<string, int> queued)
+		{
+			var limits = seat.UnitBuilder?.Info.UnitLimits;
+			if (limits == null || buildable.Length == 0)
+				return false;
+
+			foreach (var name in buildable)
+				if (!limits.TryGetValue(name, out var cap)
+					|| owned.GetValueOrDefault(name) + queued.GetValueOrDefault(name) < cap)
+					return false;
+
+			return true;
+		}
+
+		sealed class QueueRow
+		{
+			public string Queue;
+			public string Group;
+			public string State;
+			public string Item;
+			public string Reason;
+			public string[] ReservedBy;
+		}
+
+		void QueueSample(World world, int tick)
+		{
+			lastQueueTick = tick;
+			foreach (var seat in seats.Values)
+			{
+				if (!AiMatchLogWriter.IsLoggableBot(seat.Player))
+					continue;
+
+				ResolveQueueHelpers(seat);
+				var resources = seat.Resources;
+				var cash = (resources?.Cash ?? 0) + (resources?.Resources ?? 0);
+				var spent = resources?.Spent ?? 0;
+				var spentDelta = seat.LastSpent < 0 ? spent : spent - seat.LastSpent;
+				seat.LastSpent = spent;
+
+				// The same gates the unit builder consults, in its own decision order.
+				var voterActor = seat.Player.PlayerActor;
+				var voters = voterActor == null || voterActor.IsDead || voterActor.Disposed
+					? []
+					: voterActor.TraitsImplementing<IBotRequestPauseUnitProduction>()
+						.Where(v => v.IsTraitEnabled() && v.PauseUnitProduction)
+						.Select(v => v.GetType().Name)
+						.OrderBy(n => n, StringComparer.Ordinal)
+						.ToArray();
+				var cashFloor = seat.UnitBuilder != null
+					? BotPersonalityLeads.Scaled(seat.UnitBuilder.Info.ProductionMinCashRequirement,
+						BotPersonalityLeads.Lean(seat.LeadProviders, "steamroller"))
+					: 0;
+				var threshold = seat.Limits?.Info.BankSaturationCash > 0
+					&& (seat.UnitBuilder?.Info.BankSaturationCash ?? 0) > 0
+					? seat.Limits.Info.BankSaturationCash
+					: 0;
+				var saturated = ProductionSaturationCA.Saturated(cash, threshold);
+				var belowFloor = cash < cashFloor;
+				var reserved = voters.Length > 0;
+
+				// Owned + already-queued counts, shared across this seat's queues — only
+				// computed when an idle queue needs the unit-cap verdict.
+				Dictionary<string, int> owned = null;
+				Dictionary<string, int> queued = null;
+				var rows = new List<QueueRow>();
+				foreach (var pair in world.ActorsWithTrait<ProductionQueue>())
+				{
+					if (rows.Count >= info.MaxQueueRowsPerSeat)
+						break;
+					if (pair.Actor.Owner != seat.Player || pair.Actor.IsDead || !pair.Actor.IsInWorld)
+						continue;
+
+					var queue = pair.Trait;
+					var head = queue.Enabled ? queue.CurrentItem() : null;
+					var state = PlayerTelemetryMath.QueueState(queue.Enabled, head != null, head?.Paused ?? false);
+					string reason = null;
+					string[] reservedBy = null;
+					switch (state)
+					{
+						case "disabled":
+							reason = "queue_disabled";
+							break;
+						case "busy":
+							reason = "producing";
+							break;
+						case "paused":
+							reason = "paused";
+							break;
+						default:
+						{
+							var names = queue.BuildableItems().Select(bi => bi.Name).ToArray();
+							var capped = false;
+							if (names.Length > 0 && !reserved && !belowFloor && !saturated)
+							{
+								owned ??= CountOwned(seat);
+								queued ??= CountQueued(seat);
+								capped = UnitCapped(seat, names, owned, queued);
+							}
+
+							reason = PlayerTelemetryMath.IdleReason(reserved, belowFloor, saturated,
+								names.Length == 0, capped);
+							if (reason == "cash_reserved")
+								reservedBy = voters;
+							break;
+						}
+					}
+
+					// Acceptance: a different head item than the last poll means this queue
+					// started producing that item between samples (reference compare — a
+					// same-name re-queue is still a new episode). Starts already counted by
+					// the unit-production seam are consumed, not counted twice; starts from
+					// other paths (building queues, direct orders) are counted here.
+					var key = pair.Actor.ActorID + ":" + queue.Info.Type;
+					if (!seat.QueueHeads.TryGetValue(key, out var prev) || !ReferenceEquals(prev, head))
+					{
+						if (head != null)
+						{
+							var seamKey = key + "|" + head.Item;
+							if (seat.SeamStarts.TryGetValue(seamKey, out var pending) && pending > 0)
+							{
+								if (pending == 1)
+									seat.SeamStarts.Remove(seamKey);
+								else
+									seat.SeamStarts[seamKey] = pending - 1;
+							}
+							else
+							{
+								var cat = ItemCategory(seat, head.Item);
+								Bump(seat.QueueAccepted, cat);
+								seat.QueueSpend[cat] = seat.QueueSpend.GetValueOrDefault(cat) + CostOfName(head.Item);
+							}
+						}
+
+						seat.QueueHeads[key] = head;
+					}
+
+					rows.Add(new QueueRow
+					{
+						Queue = queue.Info.Type,
+						Group = queue.Info.Group ?? "",
+						State = state,
+						Item = head?.Item,
+						Reason = reason,
+						ReservedBy = reservedBy
+					});
+				}
+
+				EmitQueueRow(seat, tick, cash, spentDelta, rows);
+
+				// The counters are per-window: emitted, then reset for the next interval.
+				seat.QueueRequested.Clear();
+				seat.QueueAccepted.Clear();
+				seat.QueueCompleted.Clear();
+				seat.QueueSpend.Clear();
+				seat.QueueSkipped.Clear();
+			}
+		}
+
+		Dictionary<string, int> CountOwned(SeatTelemetry seat)
+		{
+			var counts = new Dictionary<string, int>(StringComparer.Ordinal);
+			foreach (var a in world.Actors)
+				if (a.IsInWorld && !a.IsDead && a.Owner == seat.Player)
+					Bump(counts, a.Info.Name);
+			return counts;
+		}
+
+		Dictionary<string, int> CountQueued(SeatTelemetry seat)
+		{
+			var counts = new Dictionary<string, int>(StringComparer.Ordinal);
+			foreach (var pair in world.ActorsWithTrait<ProductionQueue>())
+				if (pair.Actor.Owner == seat.Player)
+					foreach (var item in pair.Trait.AllQueued())
+						Bump(counts, item.Item);
+			return counts;
+		}
+
+		void EmitQueueRow(SeatTelemetry seat, int tick, int banked, long spentDelta, List<QueueRow> rows)
+		{
+			var b = new StringBuilder(768);
+			AiMatchLogWriter.AppendObjectStart(b);
+			AiMatchLogWriter.AppendString(b, "schema", "cameo-bot-queue", true);
+			AiMatchLogWriter.AppendNumber(b, "version", 1);
+			AiMatchLogWriter.AppendString(b, "game_uid", uid);
+			AiMatchLogWriter.AppendString(b, "record_id", uid + "|" + seat.Seat + "|queue|" + tick);
+			AiMatchLogWriter.AppendNumber(b, "tick", tick);
+			AiMatchLogWriter.AppendString(b, "seat", seat.Seat);
+			AiMatchLogWriter.AppendNumber(b, "banked", banked);
+			AiMatchLogWriter.AppendNumber(b, "spent_delta", spentDelta);
+
+			AppendCategoryMap(b, "requested", seat.QueueRequested);
+			AppendCategoryMap(b, "accepted", seat.QueueAccepted);
+			AppendCategoryMap(b, "completed", seat.QueueCompleted);
+
+			AiMatchLogWriter.AppendObjectPropertyStart(b, "skipped");
+			var first = true;
+			foreach (var kv in seat.QueueSkipped.OrderBy(x => x.Key, StringComparer.Ordinal))
+			{
+				AiMatchLogWriter.AppendNumber(b, kv.Key, kv.Value, first);
+				first = false;
+			}
+
+			b.Append('}');
+
+			AiMatchLogWriter.AppendObjectPropertyStart(b, "spend");
+			foreach (var category in PlayerTelemetryMath.QueueCategories)
+				AiMatchLogWriter.AppendNumber(b, category, seat.QueueSpend.GetValueOrDefault(category),
+					category == PlayerTelemetryMath.QueueCategories[0]);
+			b.Append('}');
+
+			AiMatchLogWriter.AppendArrayPropertyStart(b, "queues");
+			first = true;
+			foreach (var row in rows)
+			{
+				if (!first)
+					b.Append(',');
+				AiMatchLogWriter.AppendObjectStart(b);
+				AiMatchLogWriter.AppendString(b, "queue", row.Queue, true);
+				AiMatchLogWriter.AppendString(b, "group", row.Group);
+				AiMatchLogWriter.AppendString(b, "state", row.State);
+				if (row.Item != null)
+					AiMatchLogWriter.AppendString(b, "item", row.Item);
+				if (row.Reason != null)
+					AiMatchLogWriter.AppendString(b, "reason", row.Reason);
+				if (row.ReservedBy != null)
+				{
+					AiMatchLogWriter.AppendArrayPropertyStart(b, "reserved_by");
+					var inner = true;
+					foreach (var voter in row.ReservedBy)
+					{
+						if (!inner)
+							b.Append(',');
+						b.Append('"');
+						b.Append(voter);
+						b.Append('"');
+						inner = false;
+					}
+
+					b.Append(']');
+				}
+
+				b.Append('}');
+				first = false;
+			}
+
+			b.Append("]}");
+			writer.TryWrite(b.ToString());
+		}
+
+		static void AppendCategoryMap(StringBuilder b, string name, Dictionary<string, int> counts)
+		{
+			AiMatchLogWriter.AppendObjectPropertyStart(b, name);
+			foreach (var category in PlayerTelemetryMath.QueueCategories)
+				AiMatchLogWriter.AppendNumber(b, category, counts.GetValueOrDefault(category),
+					category == PlayerTelemetryMath.QueueCategories[0]);
+			b.Append('}');
 		}
 
 		void EconomySample(World world, int tick)
@@ -979,6 +1454,8 @@ namespace OpenRA.Mods.Cameo.Traits
 				// A periodic sample on the same tick already holds the snapshot.
 				if (world.WorldTick != lastSampleTick)
 					EconomySample(world, world.WorldTick);
+				if (world.WorldTick != lastQueueTick)
+					QueueSample(world, world.WorldTick);
 			}
 			catch (Exception e)
 			{
