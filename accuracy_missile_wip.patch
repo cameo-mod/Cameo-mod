@@ -1,0 +1,34 @@
+This patch preserves the discarded Gaussian terminal-miss experiment for reference.
+DO NOT APPLY as the implementation: lead ruled that follow-up must be derived from
+Missile.cs runtime detonation/ImpactPosition behavior, not a sigma override.
+
+diff --git a/tools/balance/effective_damage.py b/tools/balance/effective_damage.py
+--- a/tools/balance/effective_damage.py
++++ b/tools/balance/effective_damage.py
+@@
++HOMING_MISSILE_TERMINAL_ENV = "BM_HOMING_MISSILE_TERMINAL_MISS"
++
++def homing_missile_reliably_reaches_target(resolved, target_radius: int) -> bool:
++    """Experimental predicate: locked Missile + step-safe CloseEnough,
++    blast reaches target footprint, range/fuel covers shot, and turn rate > 0.
++    This Gaussian-suppression experiment was removed by lead ruling; future
++    work must model runtime detonation and missile ImpactPosition instead.
++    """
++    projectile = resolved.child("Projectile")
++    if projectile is None or projectile.value != "Missile":
++        return False
++    probability = parse_int32(resolved.get("Projectile", "LockOnProbability"),
++                              "Missile.LockOnProbability", 100)
++    if probability < 99:
++        return False
++    speed = parse_wdist(resolved.get("Projectile", "Speed") or "17")
++    close = parse_wdist(resolved.get("Projectile", "CloseEnough") or "298")
++    if close <= speed:
++        return False
++    # The discarded implementation also checked maximum live warhead spread,
++    # RangeLimit against authored weapon range, and both turn rates > 0.
++    return True
++
++# Discarded hook in effective_damage()/weapon_efficiency.analyse():
++# if switch_enabled and homing_missile_reliably_reaches_target(...):
++#     sigma = 0.0
