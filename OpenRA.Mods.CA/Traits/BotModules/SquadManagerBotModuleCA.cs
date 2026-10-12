@@ -3194,14 +3194,17 @@ namespace OpenRA.Mods.CA.Traits
 					foreach (var u in roster)
 						unitsHangingAroundTheBase.Remove(u);
 					wave.FuzzyStateMachine.ChangeState(wave, new GroundUnitsAttackMoveStateCA(), false);
-					AttackLiveness.NoteDispatchIntent(wave.M13WaveId);
-					m13IntentSquad = wave;
-					wave.M13IntentTick = World.WorldTick;
-					wave.M13IntentWave = wave.M13WaveId;
+					if (M13LaunchPolicyCA.TryMarkDispatchIntent(AttackLiveness, wave.M13WaveId))
+					{
+						m13IntentSquad = wave;
+						wave.M13IntentTick = World.WorldTick;
+						wave.M13IntentWave = wave.M13WaveId;
+						AIUtils.BotDebug("M13_INTENT seat={0} wave={1} members={2} deadline={3} dispatch_causality=UNKNOWN",
+							Player.InternalName, wave.M13WaveId, roster.Count, AttackLiveness.DeadlineTick);
+					}
+
 					bot.QueueOrder(new Order("AttackMove", null, Target.FromCell(World, targetCell), false,
 						groupedActors: roster.Select(u => u.Actor).ToArray()));
-					AIUtils.BotDebug("M13_INTENT seat={0} wave={1} members={2} deadline={3} dispatch_causality=UNKNOWN",
-						Player.InternalName, wave.M13WaveId, roster.Count, AttackLiveness.DeadlineTick);
 					foreach (var n in notifyIdleBaseUnits)
 						n.UpdatedIdleBaseUnits(unitsHangingAroundTheBase);
 				});
