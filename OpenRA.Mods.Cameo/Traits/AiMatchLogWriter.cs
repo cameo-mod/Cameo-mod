@@ -30,6 +30,9 @@ namespace OpenRA.Mods.Cameo.Traits
 		[Desc("World ticks between two stats_timeline samples (earned, spent, army, assets, kills/deaths cost). 0 disables it.")]
 		public readonly int SampleIntervalTicks = 750;
 
+		[Desc("Per (observer, enemy) opponent-signature history cap; oldest samples drop once exceeded. 0 keeps the full history for the match record.")]
+		public readonly int SignatureHistoryCapPerPair = 0;
+
 		public override object Create(ActorInitializer init) { return new AiMatchLogWriter(this); }
 	}
 
@@ -536,6 +539,8 @@ namespace OpenRA.Mods.Cameo.Traits
 					var truth = ProfileOf(owned.Select(a => BotModules.BotFogMemory.Classify(a.Info,
 						a.ActorID, a.Location, a.GetEnabledTargetTypes(), world.WorldTick, signatureInfo)));
 					history.Add(new SignatureSample { Tick = world.WorldTick, Seen = seen, Truth = truth });
+					if (info.SignatureHistoryCapPerPair > 0 && history.Count > info.SignatureHistoryCapPerPair)
+						history.RemoveRange(0, history.Count - info.SignatureHistoryCapPerPair);
 				}
 			}
 		}
