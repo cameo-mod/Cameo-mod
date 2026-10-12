@@ -273,6 +273,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public bool Harvester;
 		public bool Cloaked;
 		public bool Aircraft;
+
+		// S2 (FINDINGS_2026-10-12): a building whose ProductionInfo feeds a queue an
+		// aircraft declares — the air-capability intel that ungates dedicated AA before
+		// the first aircraft is ever launched.
+		public bool ProducesAircraft;
 		public bool AntiAir;
 		public bool Infantry;
 		public bool Vehicle;
@@ -423,6 +428,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				Refinery = building && actorInfo.HasTraitInfo<RefineryInfo>(),
 				Harvester = actorInfo.HasTraitInfo<HarvesterInfo>(),
 				Aircraft = actorInfo.HasTraitInfo<AircraftInfo>(),
+				ProducesAircraft = building && actorInfo.TraitInfos<ProductionInfo>()
+					.SelectMany(p => p.Produces).Any(info.AircraftQueueNames.Contains),
 				AntiAir = HasAntiAirWeapon(actorInfo),
 				Infantry = targetTypes.Overlaps(info.InfantryTargetTypes),
 				Vehicle = targetTypes.Overlaps(info.VehicleTargetTypes),

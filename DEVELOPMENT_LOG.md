@@ -20744,3 +20744,40 @@ DevBuild: refreshed to 3f2bf8c21 then 332856532 (pillbox 03a083cc2 + crawl-safet
 terrain-sheet-overflow crash fix); ENGINE_VERSION 4f69df005fe0 unchanged; BUILD_SHA.txt
 added; complete runnable backup of the old d50079112 tree at
 DevBuild_backup_20261012\devbuild for replay playback.
+
+## 2026-10-13 — devin/intel-gated-defence: S2 intel-gated AA + S1 engineer cap/backoff
+
+FINDINGS_2026-10-12 §3/§4 (maintainer playtest forensics), two commits on
+`devin/intel-gated-defence` off 3cb0fcf1b — branch -> exact-SHA review -> non-force land;
+no launches while the A/B reservation is held.
+
+- S2: dedicated anti-air (every armament air-only — samsite class) now waits for
+  fog-fair enemy air intel before any production path admits it (building-fraction
+  roll, opening pick, demand defence — the denied share flows to anti-ground). New
+  `IBotEnemyAirIntelProvider` (CA) implemented by MasterAiBotModule from fog memory:
+  a remembered enemy aircraft OR a remembered aircraft-producing structure
+  (`ObservedActor.ProducesAircraft`, ProductionInfo.Produces intersected with
+  ruleset-derived aircraft queue names — AircraftQueueNames from every AircraftInfo
+  actor's Buildable queues at RulesetLoaded, no hand-listed faction queues).
+  Dual-role air/ground defences stay ungated — FutureTech's multiturret
+  (Ground/Water/Air) is the ground defence too. No provider / not fog-observing
+  keeps pre-gate behaviour, so classic is untouched.
+- S1: engineer:combat-infantry ratio cap. `UnitBuilderBotModuleCA` gates capturer
+  candidates (CapturesInfo) in ShouldBuild — the authoritative path both the unit
+  mix and RequestUnitProduction drain through — on `CapturerInfantryLimitPct`
+  (BotLimits difficulty line 80,72,64,57,49,41,33,26,18,10 — hard tier caps 14
+  live engineers vs 30 armed infantry, 14:30 < the maintainer's 15:30 bar;
+  CapturerMinimumUnits 2 keeps capture alive pre-army). "Combat infantry" =
+  Infantry targetable-type + a real armament; capture bodies and unarmed units
+  never count. SwitchCondition: genericbot on the shared module keeps classic
+  byte-identical. Equal-step audit passes.
+- S1: escalating dormant shelf — `CaptureDormantEscalationMax: 4` (generic yaml):
+  each shelve of a mission costs the next episode one more CaptureDormantTicks
+  (3000 -> 6000 -> 9000 -> 12000 cap); success still clears the streaks, voluntary
+  retreats keep the parallel retreat streak, multiplier capped never the date.
+  Generic PriorityCapturableActorTypes now overrides classic's civilian list with
+  ConYards + unit production + tech (83 ids) — the ConYard-capture wins stay
+  possible and become escort-eligible.
+- Verification: Release build clean (engine fetched at pin 4f69df0 — sibling
+  engines were stale/other pins); Cameo.Test 1849/1849; audit_ai_personalities
+  PASS. boot-gate + commit SHAs reported to lead.

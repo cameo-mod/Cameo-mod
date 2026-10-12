@@ -14,6 +14,8 @@ using System.Collections.Immutable;
 using System.Linq;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Mods.Common.Warheads;
+using OpenRA.Primitives;
+using OpenRA.Traits;
 
 namespace OpenRA.Mods.CA.Traits
 {
@@ -94,6 +96,36 @@ namespace OpenRA.Mods.CA.Traits
 
 		/// <summary>Standing + in-flight count has reached a per-building or production-type cap.</summary>
 		public static bool LimitReached(int count, int limit) => count >= limit;
+
+		// S2 (FINDINGS_2026-10-12 §4): the air-target probe, matching BotFogMemory's.
+		static readonly BitSet<TargetableType> AirTargetTypes = new("Air");
+
+		/// <summary>
+		/// S2: a dedicated anti-air structure — every enabled armament can hit air and
+		/// none can hit anything else. A dual-role air/ground turret keeps its ground
+		/// defence role and stays ungated (the FutureTech multiturret is the ground
+		/// defence too); an unarmed building is no defence at all.
+		/// </summary>
+		public static bool IsDedicatedAntiAir(ActorInfo info)
+		{
+			var airArmament = false;
+			foreach (var armament in info.TraitInfos<ArmamentInfo>())
+			{
+				var weapon = armament.WeaponInfo;
+				if (weapon == null || !weapon.IsValidTarget(AirTargetTypes) ||
+					weapon.ValidTargets.Any(t => t.ToString() != "Air"))
+					return false;
+
+				airArmament = true;
+			}
+
+			return airArmament;
+		}
+
+		/// <summary>S2: a dedicated-AA pick waits for observed enemy air capability;
+		/// every other pick is unchanged.</summary>
+		public static bool AirDefenceAdmits(bool dedicatedAntiAir, bool airThreatObserved) =>
+			!dedicatedAntiAir || airThreatObserved;
 
 		/// <summary>GetProducibleBuilding's admit test: no limit configured, or standing plus producing under it.</summary>
 		public static bool LimitAdmits(bool hasLimit, int limit, int standing, int producing) =>

@@ -115,6 +115,12 @@ few hundred ticks, forever (`capture:td_nod_airstrip:306` — four commits by on
 `Failed` and `Success` both clear it, a `Failed` still feeds the death streak. Same `CaptureDormantTicks` rest.
 The dormant record is identical (`DORMANT`, reason `outmatched`) — the round-trip storm layer sees it either way.
 
+*2026-10-13 (S1, FINDINGS_2026-10-12 §3 — 42 committed captures / 6 successes):* the flat 3000-tick
+rest still let a stubborn target churn forever — each shelve now costs the mission's NEXT episode one more
+`CaptureDormantTicks` (`CaptureDormantEscalationMax`, genericbot armed at 4: 3000 -> 6000 -> 9000 -> 12000).
+Episode count survives a `Failed`/`Released` churn loop; the multiplier is capped, the until-tick never is —
+a shelved target always comes back eventually, just later each time.
+
 **Escorted captures — one mission, two executors (maintainer 2026-09-30, `EscortDefendedCaptures`, off until its A/B).**
 **Maintainer's rule: escorts are only for TECH buildings in an unsafe area; the enemy base is taken by stealth.** A
 building in the enemy's base is never escorted — an escort gives the engineer away; it sneaks in alone along

@@ -168,6 +168,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		[Desc("Ticks a dormant capture mission rests before its target may be tried again.")]
 		public readonly int CaptureDormantTicks = 3000;
 
+		[Desc("S1 (FINDINGS_2026-10-12 §3): how many dormant episodes may stack on one mission — each shelve",
+			"costs the next episode one more CaptureDormantTicks (episode N rests N ticks of shelf), so a target",
+			"that keeps killing or repelling engineers backs off instead of churning on the flat shelf. 1 = flat;",
+			"caps the multiplier, never the date — a far-future shelf still expires.")]
+		public readonly int CaptureDormantEscalationMax = 1;
+
 		[Desc("Consecutive released/outmatched retreats on the same capture mission that shelve it for",
 			"CaptureDormantTicks. The death streak (CaptureFailuresBeforeDormant) is unchanged — a voluntary",
 			"retreat is still not a failure — but a target whose route stays hot through every recheck produces",
@@ -254,6 +260,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		readonly Dictionary<string, int> missionFailStreak = [];
 		readonly Dictionary<string, int> missionRetreatStreak = [];
 		readonly Dictionary<string, int> dormantUntil = [];
+		readonly Dictionary<string, int> dormantEpisodes = [];
 
 		// The one escorted capture in progress: the mission waits (no attempt) until the escort holds the target area.
 		sealed class EscortPlan
@@ -1309,7 +1316,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				Player = player, MissionId = escort.MissionId, Event = BotMissionEvent.Denied, Reason = BotMissionReasons.NoUnits,
 				Executor = "Engineers", MissionType = "capture", TargetCell = t.Location, Value = escort.DefenceValue
 			});
-			dormantUntil[escort.MissionId] = tick + Info.CaptureDormantTicks;
+			Shelve(escort.MissionId, tick);
 			BotMissionLog.Write(new BotMissionRecord
 			{
 				Player = player, MissionId = escort.MissionId, Event = BotMissionEvent.Dormant, Reason = BotMissionReasons.NoUnits,
@@ -1336,6 +1343,26 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		/// <summary>The dormant shelf's trigger, free of world state so it can be tested.</summary>
 		public static bool GoesDormant(int failStreak, int threshold) => threshold > 0 && failStreak >= threshold;
+
+		/// <summary>S1: the escalating shelf. Episode 1 rests CaptureDormantTicks; every further shelve of the
+		/// same mission adds another, capped at CaptureDormantEscalationMax × base. Free of world state.</summary>
+		public static int DormantWindowTicks(int baseTicks, int episode, int escalationMax)
+		{
+			if (baseTicks <= 0)
+				return 0;
+			var multiplier = Math.Clamp(episode, 1, Math.Max(1, escalationMax));
+			return (int)Math.Min(int.MaxValue, (long)baseTicks * multiplier);
+		}
+
+		/// <summary>Parks a mission on the dormant shelf for this episode's escalated window.</summary>
+		int Shelve(string missionId, int tick)
+		{
+			var episode = dormantEpisodes.GetValueOrDefault(missionId) + 1;
+			dormantEpisodes[missionId] = episode;
+			var until = tick + DormantWindowTicks(Info.CaptureDormantTicks, episode, Info.CaptureDormantEscalationMax);
+			dormantUntil[missionId] = until;
+			return until;
+		}
 
 		bool Dormant(Actor target) =>
 			dormantUntil.TryGetValue(CaptureMissionId(target.Info.Name, target.ActorID), out var until) && world.WorldTick < until;
@@ -1428,7 +1455,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				if (GoesDormant(streak, Info.CaptureFailuresBeforeDormant))
 				{
 					missionFailStreak.Remove(job.MissionId);
-					dormantUntil[job.MissionId] = world.WorldTick + Info.CaptureDormantTicks;
+					Shelve(job.MissionId, world.WorldTick);
 					BotMissionLog.Write(new BotMissionRecord
 					{
 						Player = player, MissionId = job.MissionId, Event = BotMissionEvent.Dormant, Reason = BotMissionReasons.Outmatched,
@@ -1443,7 +1470,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				if (GoesDormant(retreats, Info.CaptureRetreatsBeforeDormant))
 				{
 					missionRetreatStreak.Remove(job.MissionId);
-					dormantUntil[job.MissionId] = world.WorldTick + Info.CaptureDormantTicks;
+					Shelve(job.MissionId, world.WorldTick);
 					BotMissionLog.Write(new BotMissionRecord
 					{
 						Player = player, MissionId = job.MissionId, Event = BotMissionEvent.Dormant, Reason = BotMissionReasons.Outmatched,
