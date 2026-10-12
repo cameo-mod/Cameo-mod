@@ -1,0 +1,777 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="52d58923-a5fe-4d77-add0-0c49f33a631d" name="AedisToru@CAMEODEVPC 2026-10-10 18:41:37" runUser="CAMEODEVPC\AedisToru" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-10T18:41:37.9437833+02:00" queuing="2026-10-10T18:41:37.9437835+02:00" start="2026-10-10T18:41:36.8276227+02:00" finish="2026-10-10T18:41:38.0066101+02:00" />
+  <TestSettings name="default" id="5b3e9eaf-ed94-4947-951e-3be1223955f8">
+    <Deployment runDeploymentRoot="AedisToru_CAMEODEVPC_2026-10-10_18_41_37" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="e8f41070-594d-4c96-bba6-2c3c8de52c07" testId="3f614668-e4f9-9e5a-b730-36e9d4135db2" testName="DemandBindingNeedsAnExclusiveName" computerName="CAMEODEVPC" duration="00:00:00.0001330" startTime="2026-10-10T18:41:37.8910722+02:00" endTime="2026-10-10T18:41:37.8912047+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e8f41070-594d-4c96-bba6-2c3c8de52c07" />
+    <UnitTestResult executionId="33a444d1-32cf-4702-be07-4f86c73b86bf" testId="37284bb4-35be-4f65-80cf-930750a96acf" testName="RenewalRefreshesUnderTheLiveModelAndRefusalClearsTheClaim" computerName="CAMEODEVPC" duration="00:00:00.0003360" startTime="2026-10-10T18:41:37.9358463+02:00" endTime="2026-10-10T18:41:37.9361823+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="33a444d1-32cf-4702-be07-4f86c73b86bf" />
+    <UnitTestResult executionId="3c36c819-623c-48cc-b7dd-e43c128d7733" testId="87e4e4b3-81d1-abf7-2d46-1626a5f68e39" testName="InfiniteCancelProvenOnlyByBoundFlagFlip" computerName="CAMEODEVPC" duration="00:00:00.0002599" startTime="2026-10-10T18:41:37.9126104+02:00" endTime="2026-10-10T18:41:37.9128703+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3c36c819-623c-48cc-b7dd-e43c128d7733" />
+    <UnitTestResult executionId="d864f5c9-e8a1-4b20-a144-9aa507779cfc" testId="45fb1b7c-3b63-084b-5bee-e9f8c0de3c9d" testName="LatchRecoveryCoversEveryUnNudgeableCase" computerName="CAMEODEVPC" duration="00:00:00.0002450" startTime="2026-10-10T18:41:37.9147372+02:00" endTime="2026-10-10T18:41:37.9149816+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d864f5c9-e8a1-4b20-a144-9aa507779cfc" />
+    <UnitTestResult executionId="2f7f5923-555b-445f-a016-b098a60b2d85" testId="2035d773-80f5-ca02-5699-39408ee9966d" testName="FractionBoundaryAdmitsAtEquality" computerName="CAMEODEVPC" duration="00:00:00.0001410" startTime="2026-10-10T18:41:37.9113452+02:00" endTime="2026-10-10T18:41:37.9114862+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2f7f5923-555b-445f-a016-b098a60b2d85" />
+    <UnitTestResult executionId="cb29f011-fb6c-4c6b-b663-555d9897b025" testId="c1c842f3-a451-7c2f-43a6-2bab8ed7f1c9" testName="AttackNeedsTheRollAndOrdinaryNeedsTheCrawlRoll" computerName="CAMEODEVPC" duration="00:00:00.0005840" startTime="2026-10-10T18:41:37.8797007+02:00" endTime="2026-10-10T18:41:37.8802846+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="cb29f011-fb6c-4c6b-b663-555d9897b025" />
+    <UnitTestResult executionId="d6c34e5d-3b9a-4174-88e8-3c73c4bde851" testId="efa90bfc-0f4c-a6d0-1681-ed697dfa4831" testName="HiddenOccupantsNeverBlockTheEta" computerName="CAMEODEVPC" duration="00:00:00.0002990" startTime="2026-10-10T18:41:37.9120466+02:00" endTime="2026-10-10T18:41:37.9123457+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d6c34e5d-3b9a-4174-88e8-3c73c4bde851" />
+    <UnitTestResult executionId="ba8a925b-b2c6-49a4-b749-7f05df82548a" testId="a91634f3-a726-7f28-e7c9-db06dcac5597" testName="ReadyCannotInterleaveWithHeld" computerName="CAMEODEVPC" duration="00:00:00.0001830" startTime="2026-10-10T18:41:37.9331232+02:00" endTime="2026-10-10T18:41:37.9333057+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ba8a925b-b2c6-49a4-b749-7f05df82548a" />
+    <UnitTestResult executionId="665aecbb-0668-41d9-b2f7-2f200637ac1c" testId="f14c3200-7417-c2c7-6e82-c61050c19b62" testName="EveryPassableCellOfRealRefineryShapeKeepsAnExit(&quot;RAPROC_RA1_Allies_Soviets_Japan&quot;,&quot;_X_&quot;,&quot;xxx&quot;,&quot;X==&quot;,&quot;===&quot;)" computerName="CAMEODEVPC" duration="00:00:00.0048840" startTime="2026-10-10T18:41:37.8983238+02:00" endTime="2026-10-10T18:41:37.9032073+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="665aecbb-0668-41d9-b2f7-2f200637ac1c" />
+    <UnitTestResult executionId="c1893173-bb2e-4dc0-81b3-dc5409ba55c8" testId="e2903c5a-5a57-8902-aa23-49926dcfd35e" testName="BuilderUnitPlacementFailureExpiresToRemoved" computerName="CAMEODEVPC" duration="00:00:00.0006840" startTime="2026-10-10T18:41:37.8806356+02:00" endTime="2026-10-10T18:41:37.8813195+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c1893173-bb2e-4dc0-81b3-dc5409ba55c8" />
+    <UnitTestResult executionId="b6ee250f-6001-421d-ba97-a6de7d8f203d" testId="e65df13c-7983-d723-04bb-7d7129eb8aef" testName="AdmitNeedsAllFourChecks" computerName="CAMEODEVPC" duration="00:00:00.0006590" startTime="2026-10-10T18:41:37.8763440+02:00" endTime="2026-10-10T18:41:37.8770031+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b6ee250f-6001-421d-ba97-a6de7d8f203d" />
+    <UnitTestResult executionId="af788c25-9f23-4256-bb7d-7bca07f128b5" testId="8b7646c4-7e73-571b-b7f8-215078c93e1d" testName="AdmitShortCircuitsInOrder" computerName="CAMEODEVPC" duration="00:00:00.0003930" startTime="2026-10-10T18:41:37.8770172+02:00" endTime="2026-10-10T18:41:37.8774099+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="af788c25-9f23-4256-bb7d-7bca07f128b5" />
+    <UnitTestResult executionId="62f2f596-627f-4632-b958-f02595a296b2" testId="dd5fd2ef-e3b6-ae15-4370-31fab08d3ac1" testName="ParkedClaimFreesTheWholeSetAndRecyclesToAnotherDemand" computerName="CAMEODEVPC" duration="00:00:00.0007600" startTime="2026-10-10T18:41:37.9182182+02:00" endTime="2026-10-10T18:41:37.9189784+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="62f2f596-627f-4632-b958-f02595a296b2" />
+    <UnitTestResult executionId="3e334dc5-d853-4cd3-88a8-7e0523484b6d" testId="0c0cde12-c81a-9e06-8c34-436fb2d6e8b1" testName="EveryPassableCellOfRealRefineryShapeKeepsAnExit(&quot;TS_GDI_Nod&quot;,&quot;xxx_&quot;,&quot;xxx=&quot;,&quot;_===&quot;)" computerName="CAMEODEVPC" duration="00:00:00.0000150" startTime="2026-10-10T18:41:37.9034173+02:00" endTime="2026-10-10T18:41:37.9034324+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3e334dc5-d853-4cd3-88a8-7e0523484b6d" />
+    <UnitTestResult executionId="1ed8aade-f6ea-4b89-b164-b840110947fa" testId="f7942e4c-6336-069c-dc41-2a104f76b760" testName="SoleProducerHoldsOnlyInsideTheSlackWindow" computerName="CAMEODEVPC" duration="00:00:00.0000960" startTime="2026-10-10T18:41:37.9375876+02:00" endTime="2026-10-10T18:41:37.9376832+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1ed8aade-f6ea-4b89-b164-b840110947fa" />
+    <UnitTestResult executionId="a0a63b32-7556-422c-afae-9efa8e828808" testId="274079df-f99d-cc60-0b96-453eea8f0f25" testName="EpisodesArePerProducer" computerName="CAMEODEVPC" duration="00:00:00.0001830" startTime="2026-10-10T18:41:37.8981039+02:00" endTime="2026-10-10T18:41:37.8982864+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a0a63b32-7556-422c-afae-9efa8e828808" />
+    <UnitTestResult executionId="4635f46e-8065-444c-8224-ecc4a9546b0c" testId="6411e9e1-4ae1-d6d2-72f3-caf3ff586314" testName="RenewalDropsTheClaimWhenTheLawOrTheBindingIsGone" computerName="CAMEODEVPC" duration="00:00:00.0002030" startTime="2026-10-10T18:41:37.9356332+02:00" endTime="2026-10-10T18:41:37.9358362+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4635f46e-8065-444c-8224-ecc4a9546b0c" />
+    <UnitTestResult executionId="48be2972-f895-40b7-8f84-3b65445e04af" testId="d5012c2b-d846-e1f5-8b25-100733eb8778" testName="RaRefineryDockCellsThatWereWallsArePassable" computerName="CAMEODEVPC" duration="00:00:00.0124010" startTime="2026-10-10T18:41:37.9207012+02:00" endTime="2026-10-10T18:41:37.9331024+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="48be2972-f895-40b7-8f84-3b65445e04af" />
+    <UnitTestResult executionId="0f0d0c82-8b20-45ec-b181-9404a6b1d0ea" testId="5007a20c-a143-e6ec-5c49-54e5d412e426" testName="StrongestAffordableDefenceWins" computerName="CAMEODEVPC" duration="00:00:00.0001310" startTime="2026-10-10T18:41:37.9381201+02:00" endTime="2026-10-10T18:41:37.9382506+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0f0d0c82-8b20-45ec-b181-9404a6b1d0ea" />
+    <UnitTestResult executionId="f5ff9196-9445-47c8-b9c7-232588847cf4" testId="b006f13d-426f-cd9e-de62-495b807b9d55" testName="RandomVariantNeedsVariantsWithoutFacings" computerName="CAMEODEVPC" duration="00:00:00.0001810" startTime="2026-10-10T18:41:37.9205117+02:00" endTime="2026-10-10T18:41:37.9206927+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f5ff9196-9445-47c8-b9c7-232588847cf4" />
+    <UnitTestResult executionId="6937b8ae-723d-4e6f-b931-e2a117fee665" testId="5e557682-c446-0ba8-26eb-1f76afac27ef" testName="NullOwnerParkRefusesRenewalUntilExpiry" computerName="CAMEODEVPC" duration="00:00:00.0008060" startTime="2026-10-10T18:41:37.9167492+02:00" endTime="2026-10-10T18:41:37.9175547+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6937b8ae-723d-4e6f-b931-e2a117fee665" />
+    <UnitTestResult executionId="0f5c9d5a-0e1c-452c-b320-e6d83184204d" testId="b0614acc-74c1-7d40-202e-77c2eef464bb" testName="LawLinkClassifiesAsCrawlBeforeEveryRule" computerName="CAMEODEVPC" duration="00:00:00.0000800" startTime="2026-10-10T18:41:37.9151803+02:00" endTime="2026-10-10T18:41:37.9152605+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0f5c9d5a-0e1c-452c-b320-e6d83184204d" />
+    <UnitTestResult executionId="7a74d378-e710-43b5-a371-f4f0e19f94d3" testId="a70b8abd-fada-dd48-0bec-e52cc19085da" testName="LatchProbeReleasesOnlyOnWorldChange" computerName="CAMEODEVPC" duration="00:00:00.0007829" startTime="2026-10-10T18:41:37.9137463+02:00" endTime="2026-10-10T18:41:37.9145289+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7a74d378-e710-43b5-a371-f4f0e19f94d3" />
+    <UnitTestResult executionId="ad028d54-929a-461c-b6e9-9f9730149b3c" testId="037f8850-7117-a467-0fef-6e19107dd6ed" testName="ReversedPathHasNoSourceToTargetChord" computerName="CAMEODEVPC" duration="00:00:00.0002140" startTime="2026-10-10T18:41:37.9373653+02:00" endTime="2026-10-10T18:41:37.9375789+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ad028d54-929a-461c-b6e9-9f9730149b3c" />
+    <UnitTestResult executionId="c202ba73-dda5-43da-88ee-8db812c6e99e" testId="b792b1c5-a034-839b-be0f-c5af72838836" testName="ReleaseAllForOwnerFreesTheWholeDriftedSet" computerName="CAMEODEVPC" duration="00:00:00.0008200" startTime="2026-10-10T18:41:37.9342371+02:00" endTime="2026-10-10T18:41:37.9350568+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c202ba73-dda5-43da-88ee-8db812c6e99e" />
+    <UnitTestResult executionId="42f2448b-9b91-4c15-86c4-437d5868a6ed" testId="fa429aef-83cd-965f-764f-bc64257fc02d" testName="RealRefineryDockCellKeepsAnExit(&quot;D2K_off_footprint_dock&quot;,[&quot;=xx&quot;, &quot;xx=&quot;, &quot;===&quot;],3,2)" computerName="CAMEODEVPC" duration="00:00:00.0000050" startTime="2026-10-10T18:41:37.9340617+02:00" endTime="2026-10-10T18:41:37.9340664+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="42f2448b-9b91-4c15-86c4-437d5868a6ed" />
+    <UnitTestResult executionId="d705cadf-4e5d-4e6a-b92d-19d21d92ee0e" testId="5c660de8-16f8-ea58-310f-b566e41d7a16" testName="IntervalBlocksOnlyWhenConfiguredAndCooling" computerName="CAMEODEVPC" duration="00:00:00.0001240" startTime="2026-10-10T18:41:37.9128803+02:00" endTime="2026-10-10T18:41:37.9130038+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d705cadf-4e5d-4e6a-b92d-19d21d92ee0e" />
+    <UnitTestResult executionId="1eae20a4-3e23-4d5b-b9ca-490c31005c69" testId="2366b42f-2c4c-7a74-2e45-7be06fb081a0" testName="OpeningPolicyNeedsLimitsFactionAndUnfinished" computerName="CAMEODEVPC" duration="00:00:00.0001490" startTime="2026-10-10T18:41:37.9179679+02:00" endTime="2026-10-10T18:41:37.9181167+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1eae20a4-3e23-4d5b-b9ca-490c31005c69" />
+    <UnitTestResult executionId="8f1559b3-7e1a-4a8e-a0d0-e8b112afd8a1" testId="911d8b93-1aee-e96d-6207-26ff4f189593" testName="DemandItemQueuesOnlyInsideItsEtaWindow" computerName="CAMEODEVPC" duration="00:00:00.0001210" startTime="2026-10-10T18:41:37.8912129+02:00" endTime="2026-10-10T18:41:37.8913334+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="8f1559b3-7e1a-4a8e-a0d0-e8b112afd8a1" />
+    <UnitTestResult executionId="07d6a474-fb0a-45d8-8869-1965a48cba97" testId="95eb0d9d-6c1b-0099-b56c-583462b8cf32" testName="LowCashBlocksOrdinaryButNotRefinery" computerName="CAMEODEVPC" duration="00:00:00.0001410" startTime="2026-10-10T18:41:37.9156293+02:00" endTime="2026-10-10T18:41:37.9157700+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="07d6a474-fb0a-45d8-8869-1965a48cba97" />
+    <UnitTestResult executionId="cd40e945-2dcb-40f0-8e4f-e65692eddabb" testId="b8ce258a-d1bc-6f1d-90da-1436ff081cc4" testName="EveryPassableCellOfRealRefineryShapeKeepsAnExit(&quot;RA2_Allies_Soviets&quot;,&quot;xxx=&quot;,&quot;xxx=&quot;,&quot;x+==&quot;)" computerName="CAMEODEVPC" duration="00:00:00.0000140" startTime="2026-10-10T18:41:37.9034824+02:00" endTime="2026-10-10T18:41:37.9034962+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="cd40e945-2dcb-40f0-8e4f-e65692eddabb" />
+    <UnitTestResult executionId="e40238fd-2fe5-4260-8743-4b9129949649" testId="850f22f8-82d6-9811-4786-b6062d87f5b4" testName="CommittedPlacementPublishesTheSelectedSiteAndClearsHolds" computerName="CAMEODEVPC" duration="00:00:00.0025990" startTime="2026-10-10T18:41:37.8831840+02:00" endTime="2026-10-10T18:41:37.8857828+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e40238fd-2fe5-4260-8743-4b9129949649" />
+    <UnitTestResult executionId="281b7085-da81-4975-bbaa-80b1c4e62de1" testId="444b63e6-8d68-8a8c-2a9a-3ca7a0fb9435" testName="TeardownReleasesByOwnerKeyWithoutRecomputingTheSet" computerName="CAMEODEVPC" duration="00:00:00.0003640" startTime="2026-10-10T18:41:37.9389546+02:00" endTime="2026-10-10T18:41:37.9393184+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="281b7085-da81-4975-bbaa-80b1c4e62de1" />
+    <UnitTestResult executionId="8d70ea9d-d497-473a-8595-18c2bc523d66" testId="b91349e9-7093-1b84-5335-3d837360cbad" testName="CompetingRemovalAfterPlacementNeverConfirms" computerName="CAMEODEVPC" duration="00:00:00.0020600" startTime="2026-10-10T18:41:37.8857926+02:00" endTime="2026-10-10T18:41:37.8878520+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="8d70ea9d-d497-473a-8595-18c2bc523d66" />
+    <UnitTestResult executionId="bf0c839c-6bc1-44d2-a9ea-b349c51c6744" testId="5a8649f4-631c-0104-5883-e962a734774e" testName="StalledOrPathlessTravelIsFarFuture" computerName="CAMEODEVPC" duration="00:00:00.0000960" startTime="2026-10-10T18:41:37.9380167+02:00" endTime="2026-10-10T18:41:37.9381126+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="bf0c839c-6bc1-44d2-a9ea-b349c51c6744" />
+    <UnitTestResult executionId="ae84a755-3770-4253-959e-c3f994f1c374" testId="ce4a2c0d-015d-c10f-b762-224d07b19810" testName="RememberedCrushableNeedsOverlapAndANonAlliedOwner" computerName="CAMEODEVPC" duration="00:00:00.0001540" startTime="2026-10-10T18:41:37.9354713+02:00" endTime="2026-10-10T18:41:37.9356250+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ae84a755-3770-4253-959e-c3f994f1c374" />
+    <UnitTestResult executionId="7591b27e-0c39-451b-a0f6-a6acf9bab687" testId="73318e42-c0ab-39ba-d72a-2067344435fd" testName="LowPowerBlocksWithoutManagerOrFloorOrSufficiency" computerName="CAMEODEVPC" duration="00:00:00.0002150" startTime="2026-10-10T18:41:37.9157791+02:00" endTime="2026-10-10T18:41:37.9159936+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7591b27e-0c39-451b-a0f6-a6acf9bab687" />
+    <UnitTestResult executionId="83500f4d-123a-46fc-91fb-2ccf4e052696" testId="4ed0118e-834e-1146-f8ac-9ae69a0d2ff6" testName="TargetlessActivityNeverRenewsTheDemand" computerName="CAMEODEVPC" duration="00:00:00.0001680" startTime="2026-10-10T18:41:37.9387787+02:00" endTime="2026-10-10T18:41:37.9389464+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="83500f4d-123a-46fc-91fb-2ccf4e052696" />
+    <UnitTestResult executionId="433d714c-64b9-444f-9fa7-86491d39505b" testId="209414d6-849e-7bf4-2608-ebf4222d7482" testName="PlugInstallProofRequiresPositiveSlotState" computerName="CAMEODEVPC" duration="00:00:00.0001660" startTime="2026-10-10T18:41:37.9200854+02:00" endTime="2026-10-10T18:41:37.9202513+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="433d714c-64b9-444f-9fa7-86491d39505b" />
+    <UnitTestResult executionId="8c1266c6-6cab-4261-9340-cb02cc617190" testId="818d3f45-f2c2-3902-15c6-09c5ee6b4700" testName="EpisodeIdsArePerInstance" computerName="CAMEODEVPC" duration="00:00:00.0022100" startTime="2026-10-10T18:41:37.8958839+02:00" endTime="2026-10-10T18:41:37.8980941+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="8c1266c6-6cab-4261-9340-cb02cc617190" />
+    <UnitTestResult executionId="fb77936a-ad06-4dca-8427-c3d558744b8f" testId="ad6a0041-56b1-fdb8-a4cf-51cd36e321db" testName="OpeningCandidateWinsOnFractionThenOrdinalName" computerName="CAMEODEVPC" duration="00:00:00.0001950" startTime="2026-10-10T18:41:37.9177636+02:00" endTime="2026-10-10T18:41:37.9179584+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="fb77936a-ad06-4dca-8427-c3d558744b8f" />
+    <UnitTestResult executionId="a64286ed-4729-419a-bd7a-afe552a089fd" testId="4a7760c3-6a27-800c-f612-3d414bf05d18" testName="UnaffordableDefenceIsSkippedAtEta" computerName="CAMEODEVPC" duration="00:00:00.0001600" startTime="2026-10-10T18:41:37.9413887+02:00" endTime="2026-10-10T18:41:37.9415486+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a64286ed-4729-419a-bd7a-afe552a089fd" />
+    <UnitTestResult executionId="142850b0-9b7a-4eab-9ad4-6faaa475cb70" testId="819da809-53a5-2141-af36-db4d1d128d12" testName="EveryPassableCellOfRealRefineryShapeKeepsAnExit(&quot;SC_Zerg_Terran_Protoss_townhall&quot;,&quot;xxx&quot;,&quot;xxx&quot;,&quot;===&quot;)" computerName="CAMEODEVPC" duration="00:00:00.0000060" startTime="2026-10-10T18:41:37.9034596+02:00" endTime="2026-10-10T18:41:37.9034656+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="142850b0-9b7a-4eab-9ad4-6faaa475cb70" />
+    <UnitTestResult executionId="e0904bb3-ac43-4e83-adaa-71156c0cf192" testId="1e7b05ae-9afe-1d97-9ee9-97998d00e737" testName="ClearAllDropsAWholeCommittedSet" computerName="CAMEODEVPC" duration="00:00:00.0006430" startTime="2026-10-10T18:41:37.8822452+02:00" endTime="2026-10-10T18:41:37.8828880+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e0904bb3-ac43-4e83-adaa-71156c0cf192" />
+    <UnitTestResult executionId="44395114-6ca6-43c8-a87b-87d0450a49e6" testId="c9b69dc3-dd45-aaaf-6411-72b103064a8c" testName="LatchRecoveryEpisodeReleasesOnlyAfterFreshProbe" computerName="CAMEODEVPC" duration="00:00:00.0001820" startTime="2026-10-10T18:41:37.9149899+02:00" endTime="2026-10-10T18:41:37.9151721+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="44395114-6ca6-43c8-a87b-87d0450a49e6" />
+    <UnitTestResult executionId="000461bc-9530-4a73-b688-1459d201bfb1" testId="28dbad99-ed78-0361-ff13-f778c4f78018" testName="ReserveAllCommitsTheWholeSetOrNothing" computerName="CAMEODEVPC" duration="00:00:00.0002760" startTime="2026-10-10T18:41:37.9363287+02:00" endTime="2026-10-10T18:41:37.9366043+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="000461bc-9530-4a73-b688-1459d201bfb1" />
+    <UnitTestResult executionId="e190d882-af43-4521-bd57-8201f679595d" testId="fc100c06-d82e-fa11-4d79-29dedfe98b4f" testName="EliminationDuringAwaitingResolvesRemoved" computerName="CAMEODEVPC" duration="00:00:00.0001540" startTime="2026-10-10T18:41:37.8957212+02:00" endTime="2026-10-10T18:41:37.8958750+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e190d882-af43-4521-bd57-8201f679595d" />
+    <UnitTestResult executionId="a9023d7b-aa84-410b-a067-7db77c3f11e4" testId="cb756fcf-e37f-78ea-201f-6d421fe62671" testName="ProvenPlacementEmitsPlacedAtRemoval" computerName="CAMEODEVPC" duration="00:00:00.0001290" startTime="2026-10-10T18:41:37.9202593+02:00" endTime="2026-10-10T18:41:37.9203884+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a9023d7b-aa84-410b-a067-7db77c3f11e4" />
+    <UnitTestResult executionId="22e5d69d-43aa-452a-bca8-551928699705" testId="9dd03a4f-d790-c40b-f08c-b445375d049d" testName="HeldEmitsOncePerEpisode" computerName="CAMEODEVPC" duration="00:00:00.0001330" startTime="2026-10-10T18:41:37.9116649+02:00" endTime="2026-10-10T18:41:37.9117980+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="22e5d69d-43aa-452a-bca8-551928699705" />
+    <UnitTestResult executionId="3259e386-1ab7-44a6-92cb-431237c4642a" testId="5b6593bd-ae5a-2272-eef6-b92876d37c9e" testName="FirstByOrderPicksTheLowestKeyNotInsertionOrder" computerName="CAMEODEVPC" duration="00:00:00.0001880" startTime="2026-10-10T18:41:37.9105135+02:00" endTime="2026-10-10T18:41:37.9107012+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3259e386-1ab7-44a6-92cb-431237c4642a" />
+    <UnitTestResult executionId="4fd679a4-1881-42ed-8a11-d0d9845c81e0" testId="045c56f8-44dc-132b-fdbd-573fd5fb2947" testName="ExpansionBalanceComparesNetEconomyToRefineries" computerName="CAMEODEVPC" duration="00:00:00.0001450" startTime="2026-10-10T18:41:37.9046838+02:00" endTime="2026-10-10T18:41:37.9048287+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4fd679a4-1881-42ed-8a11-d0d9845c81e0" />
+    <UnitTestResult executionId="7fe2cfec-7332-4d32-9072-754ece3886e5" testId="d8335209-c148-691f-e026-7db6b29a4bbb" testName="AHeldAnchorRefusesOtherDemands" computerName="CAMEODEVPC" duration="00:00:00.0002430" startTime="2026-10-10T18:41:37.8794377+02:00" endTime="2026-10-10T18:41:37.8796803+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7fe2cfec-7332-4d32-9072-754ece3886e5" />
+    <UnitTestResult executionId="2166a3e7-85b2-4b50-8f68-527b845d1eb8" testId="858c5bc0-f6e3-9bfa-c973-6e7f55b4b710" testName="AwaitingProofEntryCannotBindSiblingRemoval" computerName="CAMEODEVPC" duration="00:00:00.0003230" startTime="2026-10-10T18:41:37.8802986+02:00" endTime="2026-10-10T18:41:37.8806216+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2166a3e7-85b2-4b50-8f68-527b845d1eb8" />
+    <UnitTestResult executionId="4e16e6c6-5312-44e5-a345-3a74e9162fd5" testId="c1966f96-21a0-11cd-8afd-56549b2f784f" testName="CrawlHoldNeedsAllFourConditions" computerName="CAMEODEVPC" duration="00:00:00.0002250" startTime="2026-10-10T18:41:37.8878634+02:00" endTime="2026-10-10T18:41:37.8880887+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4e16e6c6-5312-44e5-a345-3a74e9162fd5" />
+    <UnitTestResult executionId="8c7a79ec-a13b-4626-8a82-e54c7aa519dc" testId="2031eda2-438c-cc5c-d898-5c772492607b" testName="HeldReasonAlternationIsATransition" computerName="CAMEODEVPC" duration="00:00:00.0001170" startTime="2026-10-10T18:41:37.9119214+02:00" endTime="2026-10-10T18:41:37.9120388+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="8c7a79ec-a13b-4626-8a82-e54c7aa519dc" />
+    <UnitTestResult executionId="2b76b54e-b2c3-4939-a070-3bb7003025a9" testId="78113380-e3f7-5d84-5565-bbe3af9a0d6f" testName="RealRefineryDockCellKeepsAnExit(&quot;RA2_Allies&quot;,[&quot;xxx=&quot;, &quot;xxx=&quot;, &quot;x+==&quot;],3,1)" computerName="CAMEODEVPC" duration="00:00:00.0000060" startTime="2026-10-10T18:41:37.9340527+02:00" endTime="2026-10-10T18:41:37.9340587+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2b76b54e-b2c3-4939-a070-3bb7003025a9" />
+    <UnitTestResult executionId="53f24bae-4f98-41d9-bb85-b100a203197f" testId="e6a52021-6c87-e512-c447-a82ae92caf17" testName="DefenceTiesBreakOnCostThenOrdinalName" computerName="CAMEODEVPC" duration="00:00:00.0026570" startTime="2026-10-10T18:41:37.8882660+02:00" endTime="2026-10-10T18:41:37.8909232+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="53f24bae-4f98-41d9-bb85-b100a203197f" />
+    <UnitTestResult executionId="05cf3d5f-41a5-4ed1-8d8f-e27be599ecf1" testId="69744bf5-ba22-37d8-9343-d371cb359961" testName="ResourceScanCentresHomeWhileFailing" computerName="CAMEODEVPC" duration="00:00:00.0002890" startTime="2026-10-10T18:41:37.9370681+02:00" endTime="2026-10-10T18:41:37.9373569+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="05cf3d5f-41a5-4ed1-8d8f-e27be599ecf1" />
+    <UnitTestResult executionId="c98ced54-3b77-4654-842d-b3208f330359" testId="8a04b82f-b9f9-eeeb-23e3-9bc8a58bc954" testName="KnownImmovableBlocksButKnownPassablesDoNot" computerName="CAMEODEVPC" duration="00:00:00.0001520" startTime="2026-10-10T18:41:37.9135874+02:00" endTime="2026-10-10T18:41:37.9137387+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c98ced54-3b77-4654-842d-b3208f330359" />
+    <UnitTestResult executionId="ac9a2ac7-4b0d-4ef0-8ec1-7a3128602c1c" testId="08e02e69-ba60-3e1e-16db-c38a846b48a9" testName="DroppedProducerLosesDedupeHistory" computerName="CAMEODEVPC" duration="00:00:00.0022889" startTime="2026-10-10T18:41:37.8934203+02:00" endTime="2026-10-10T18:41:37.8957095+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ac9a2ac7-4b0d-4ef0-8ec1-7a3128602c1c" />
+    <UnitTestResult executionId="f1b436a9-f02c-478e-ab92-83e7721a05d6" testId="638a5bbe-d4e4-2a60-6daa-1aea89f5b967" testName="BuilderUnitPlacementProvesOnLateActorArrival" computerName="CAMEODEVPC" duration="00:00:00.0001360" startTime="2026-10-10T18:41:37.8813286+02:00" endTime="2026-10-10T18:41:37.8814645+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f1b436a9-f02c-478e-ab92-83e7721a05d6" />
+    <UnitTestResult executionId="74db52be-a564-4fa7-a462-49084fad4615" testId="3a950d59-8a7e-c39c-d754-e27050784121" testName="TravelTicksDividePathLengthBySpeed" computerName="CAMEODEVPC" duration="00:00:00.0001030" startTime="2026-10-10T18:41:37.9411465+02:00" endTime="2026-10-10T18:41:37.9412491+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="74db52be-a564-4fa7-a462-49084fad4615" />
+    <UnitTestResult executionId="92957243-086a-4a73-884d-829e87d7920b" testId="a17dc3f3-1d40-7a21-3906-9309d3baae42" testName="CashAboveFloorNeverBlocks" computerName="CAMEODEVPC" duration="00:00:00.0001230" startTime="2026-10-10T18:41:37.8818895+02:00" endTime="2026-10-10T18:41:37.8820124+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="92957243-086a-4a73-884d-829e87d7920b" />
+    <UnitTestResult executionId="c35013bc-eb99-4f66-87fb-e522d34f35ab" testId="b9833e38-4bc2-62d7-8101-5a80937a4a9e" testName="EveryPassableCellOfRealRefineryShapeKeepsAnExit(&quot;WC2_Humans_Orcs_lumber&quot;,&quot;xxx&quot;,&quot;xxx&quot;,&quot;===&quot;)" computerName="CAMEODEVPC" duration="00:00:00.0000060" startTime="2026-10-10T18:41:37.9034734+02:00" endTime="2026-10-10T18:41:37.9034794+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c35013bc-eb99-4f66-87fb-e522d34f35ab" />
+    <UnitTestResult executionId="2a0a6ddf-ba82-452c-a89c-e7aacf403367" testId="bb926909-3803-179f-a3c3-e533b6d24552" testName="RealRefineryDockCellKeepsAnExit(&quot;TDPROC&quot;,[&quot;_x_&quot;, &quot;xxx&quot;, &quot;===&quot;, &quot;===&quot;],0,2)" computerName="CAMEODEVPC" duration="00:00:00.0002490" startTime="2026-10-10T18:41:37.9337377+02:00" endTime="2026-10-10T18:41:37.9339868+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2a0a6ddf-ba82-452c-a89c-e7aacf403367" />
+    <UnitTestResult executionId="942fbb32-591f-4dbe-a925-c196d06dbd93" testId="675566a8-2d57-432c-449a-fa619f2d5189" testName="FacingTiesKeepTheEarliestIndex" computerName="CAMEODEVPC" duration="00:00:00.0003570" startTime="2026-10-10T18:41:37.9064672+02:00" endTime="2026-10-10T18:41:37.9068242+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="942fbb32-591f-4dbe-a925-c196d06dbd93" />
+    <UnitTestResult executionId="84ebab38-876d-4ab5-942b-80ea92e2b0a6" testId="c29e009d-ee3b-cecb-4a81-e6406d80306b" testName="HeldEpisodeEndsOnTerminalTransition" computerName="CAMEODEVPC" duration="00:00:00.0001080" startTime="2026-10-10T18:41:37.9118059+02:00" endTime="2026-10-10T18:41:37.9119138+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="84ebab38-876d-4ab5-942b-80ea92e2b0a6" />
+    <UnitTestResult executionId="8586e498-9fe6-42fa-ae43-3e00116d9bc5" testId="46ac34bf-0218-b9e4-6100-1fb024b34179" testName="AdjacentPathCountsOnlyItsOwnSegment" computerName="CAMEODEVPC" duration="00:00:00.0045160" startTime="2026-10-10T18:41:37.8577713+02:00" endTime="2026-10-10T18:41:37.8622228+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="8586e498-9fe6-42fa-ae43-3e00116d9bc5" />
+    <UnitTestResult executionId="5812d43f-83bb-4fe8-8729-2fe23f07be3b" testId="8d9a0d59-f1bd-3ddb-bd51-6430936ad085" testName="TheOwningDemandRefreshesItsHold" computerName="CAMEODEVPC" duration="00:00:00.0002290" startTime="2026-10-10T18:41:37.9393281+02:00" endTime="2026-10-10T18:41:37.9395572+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="5812d43f-83bb-4fe8-8729-2fe23f07be3b" />
+    <UnitTestResult executionId="93339b18-051e-4015-9690-b449521ca986" testId="12596005-dee9-d8c0-9b31-1739809d8a64" testName="RealRefineryDockCellKeepsAnExit(&quot;WC2_OP2_inherited_zero_offset&quot;,[&quot;xxx&quot;, &quot;xxx&quot;, &quot;===&quot;],1,1)" computerName="CAMEODEVPC" duration="00:00:00.0000190" startTime="2026-10-10T18:41:37.9340164+02:00" endTime="2026-10-10T18:41:37.9340354+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="93339b18-051e-4015-9690-b449521ca986" />
+    <UnitTestResult executionId="e5a68371-8f02-407f-9fce-744088601c77" testId="fc1ed300-53fc-cc3a-f422-7a705441c34c" testName="FailedPlacementParksTheOfferedAnchorAndCommitsNothing" computerName="CAMEODEVPC" duration="00:00:00.0019589" startTime="2026-10-10T18:41:37.9068395+02:00" endTime="2026-10-10T18:41:37.9087983+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e5a68371-8f02-407f-9fce-744088601c77" />
+    <UnitTestResult executionId="14f0861c-c094-4439-8fc2-f490761ff3a5" testId="0fa5a670-c9d9-3c43-2b52-f7064333e54b" testName="PlannerWantRidesAtItsOwnCostFloor" computerName="CAMEODEVPC" duration="00:00:00.0000980" startTime="2026-10-10T18:41:37.9199791+02:00" endTime="2026-10-10T18:41:37.9200773+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="14f0861c-c094-4439-8fc2-f490761ff3a5" />
+    <UnitTestResult executionId="c5f1679b-217b-4460-86ae-ed6600db7284" testId="831a06ea-79b4-3559-e0f1-ae66f39e31a9" testName="NullOwnerParkStaysGlobalAndBlocksForeignReservation" computerName="CAMEODEVPC" duration="00:00:00.0001920" startTime="2026-10-10T18:41:37.9175635+02:00" endTime="2026-10-10T18:41:37.9177553+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c5f1679b-217b-4460-86ae-ed6600db7284" />
+    <UnitTestResult executionId="49915ffb-0ae7-4d34-94e5-75c0ac316777" testId="b817ea00-9e1d-7929-08ec-e8cc04a579e6" testName="QueuedThisTickAlwaysBlocks" computerName="CAMEODEVPC" duration="00:00:00.0000980" startTime="2026-10-10T18:41:37.9204038+02:00" endTime="2026-10-10T18:41:37.9205020+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="49915ffb-0ae7-4d34-94e5-75c0ac316777" />
+    <UnitTestResult executionId="9698de4b-2b13-4655-8e63-c5d90d13ba29" testId="aa4a7191-d8f3-4889-5f79-2d4522f1adeb" testName="UnusableOrCapturedReplacementFailsTheDemand" computerName="CAMEODEVPC" duration="00:00:00.0000910" startTime="2026-10-10T18:41:37.9416392+02:00" endTime="2026-10-10T18:41:37.9417297+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9698de4b-2b13-4655-8e63-c5d90d13ba29" />
+    <UnitTestResult executionId="8aadc638-e43f-43a1-bfd4-e4b4c1bb96b7" testId="65c5e5a2-7c9b-96ea-1337-3b84d7c3c1b8" testName="RealRefineryDockCellKeepsAnExit(&quot;OP2_smelter_zero_offset&quot;,[&quot;xxx&quot;, &quot;x==&quot;, &quot;===&quot;],1,1)" computerName="CAMEODEVPC" duration="00:00:00.0000070" startTime="2026-10-10T18:41:37.9340420+02:00" endTime="2026-10-10T18:41:37.9340494+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="8aadc638-e43f-43a1-bfd4-e4b4c1bb96b7" />
+    <UnitTestResult executionId="bd2dbb33-3363-49e2-987a-ba85a973f86a" testId="d5ea9c68-4461-22fa-6efd-428ed103d8e3" testName="PendingTerminalExpiresRejectedRequests" computerName="CAMEODEVPC" duration="00:00:00.0000950" startTime="2026-10-10T18:41:37.9193337+02:00" endTime="2026-10-10T18:41:37.9194288+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="bd2dbb33-3363-49e2-987a-ba85a973f86a" />
+    <UnitTestResult executionId="07c2bac9-8eb8-47ec-83d8-fa0df90d91b2" testId="7dceeef8-e6f2-0457-3591-83f18760ffba" testName="EveryPassableCellOfRealRefineryShapeKeepsAnExit(&quot;OP2_Eden_Plymouth_smelter&quot;,&quot;xxx&quot;,&quot;x==&quot;,&quot;===&quot;)" computerName="CAMEODEVPC" duration="00:00:00.0000090" startTime="2026-10-10T18:41:37.9035083+02:00" endTime="2026-10-10T18:41:37.9035174+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="07c2bac9-8eb8-47ec-83d8-fa0df90d91b2" />
+    <UnitTestResult executionId="60ae7e49-2068-421d-abec-0158e6f0ef51" testId="d82e0bd6-3674-9853-941d-237316ad9acf" testName="PendingMatchesBoundInstanceNotName" computerName="CAMEODEVPC" duration="00:00:00.0001490" startTime="2026-10-10T18:41:37.9191766+02:00" endTime="2026-10-10T18:41:37.9193258+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="60ae7e49-2068-421d-abec-0158e6f0ef51" />
+    <UnitTestResult executionId="b7a6c4d2-f931-4d7e-91d9-ec366e560ba7" testId="e5c7848e-0fad-e3aa-6f18-f5976d6aff80" testName="RefineryAndFragileBeatDefenseAndCrawl" computerName="CAMEODEVPC" duration="00:00:00.0001299" startTime="2026-10-10T18:41:37.9340984+02:00" endTime="2026-10-10T18:41:37.9342282+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b7a6c4d2-f931-4d7e-91d9-ec366e560ba7" />
+    <UnitTestResult executionId="0a960cac-2f89-49fd-b6ec-bac050168e68" testId="98296d0d-1a5c-cee7-bb17-6c77e8730d53" testName="StalePlacementRequestEndsRemovedAtRemoval" computerName="CAMEODEVPC" duration="00:00:00.0001170" startTime="2026-10-10T18:41:37.9378923+02:00" endTime="2026-10-10T18:41:37.9380088+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0a960cac-2f89-49fd-b6ec-bac050168e68" />
+    <UnitTestResult executionId="0ba5772c-7fac-43b3-b11a-22816f11ce2f" testId="bf4bfa9d-76ba-6763-b1ff-ed1b9d0d7ebf" testName="TransformWithoutReplacementOrWaitingKeepsWaiting" computerName="CAMEODEVPC" duration="00:00:00.0000840" startTime="2026-10-10T18:41:37.9395659+02:00" endTime="2026-10-10T18:41:37.9396496+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0ba5772c-7fac-43b3-b11a-22816f11ce2f" />
+    <UnitTestResult executionId="e566b1c5-bcb1-4454-a161-99a3a0025b20" testId="16158a2f-b09a-b5e9-4c21-3501f643941c" testName="JourneyClassifiesRedirectSilenceAndCommitment" computerName="CAMEODEVPC" duration="00:00:00.0005620" startTime="2026-10-10T18:41:37.9130173+02:00" endTime="2026-10-10T18:41:37.9135791+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e566b1c5-bcb1-4454-a161-99a3a0025b20" />
+    <UnitTestResult executionId="b7b7b1cf-236c-4361-af5e-bee428e273fe" testId="97dd48d6-8a20-6b0e-d726-54368bb1676f" testName="AdmissionConflictRefusesTheWholeSetAndLeavesNoHold" computerName="CAMEODEVPC" duration="00:00:00.0007360" startTime="2026-10-10T18:41:37.8755939+02:00" endTime="2026-10-10T18:41:37.8763296+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b7b7b1cf-236c-4361-af5e-bee428e273fe" />
+    <UnitTestResult executionId="736326f2-3e7b-41e3-a5b7-02c9155c44b4" testId="571bca49-df9d-ffbd-8009-9587763a12e1" testName="FirstByOrderYieldsDefaultOnNullOrEmpty" computerName="CAMEODEVPC" duration="00:00:00.0002980" startTime="2026-10-10T18:41:37.9107144+02:00" endTime="2026-10-10T18:41:37.9110123+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="736326f2-3e7b-41e3-a5b7-02c9155c44b4" />
+    <UnitTestResult executionId="dc2af0a1-736c-48ea-b9b1-49cfcc24a72f" testId="02e02ebe-1219-f7d6-b036-65cecf53f7d3" testName="DefenceHoldAlwaysAllowedWithMultipleProducers" computerName="CAMEODEVPC" duration="00:00:00.0001580" startTime="2026-10-10T18:41:37.8880987+02:00" endTime="2026-10-10T18:41:37.8882563+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="dc2af0a1-736c-48ea-b9b1-49cfcc24a72f" />
+    <UnitTestResult executionId="3a24d614-4af9-48c4-bd5e-9595c9c28331" testId="e3f9d027-a7dd-ecee-f3e2-11c15f6ae24d" testName="EveryPassableCellOfRealRefineryShapeKeepsAnExit(&quot;D2K_five_factions&quot;,&quot;=xx&quot;,&quot;xx=&quot;,&quot;===&quot;)" computerName="CAMEODEVPC" duration="00:00:00.0000120" startTime="2026-10-10T18:41:37.9034358+02:00" endTime="2026-10-10T18:41:37.9034479+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3a24d614-4af9-48c4-bd5e-9595c9c28331" />
+    <UnitTestResult executionId="34948204-46bb-4be7-89b2-ab26fc14bcb8" testId="5290a0d3-5ad2-a4e8-07b6-398a90ee0f11" testName="DelayBlocksUntilTheTickPasses" computerName="CAMEODEVPC" duration="00:00:00.0001310" startTime="2026-10-10T18:41:37.8909329+02:00" endTime="2026-10-10T18:41:37.8910641+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="34948204-46bb-4be7-89b2-ab26fc14bcb8" />
+    <UnitTestResult executionId="f0da5f47-4c45-47b5-9354-b00efcaf8cdb" testId="667c3a1f-45e6-7593-1518-0b6efea593e6" testName="NullClaimRefusesAdmissionBeforeAnyReserveCall" computerName="CAMEODEVPC" duration="00:00:00.0001620" startTime="2026-10-10T18:41:37.9165774+02:00" endTime="2026-10-10T18:41:37.9167388+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f0da5f47-4c45-47b5-9354-b00efcaf8cdb" />
+    <UnitTestResult executionId="75d0c76a-6268-4958-94ef-5f7aa928df9d" testId="a71842f1-47ca-b24c-fb57-55a9685f10ee" testName="TakenAnchorsCannotBeReservedOrSurvivePrune" computerName="CAMEODEVPC" duration="00:00:00.0005100" startTime="2026-10-10T18:41:37.9382585+02:00" endTime="2026-10-10T18:41:37.9387689+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="75d0c76a-6268-4958-94ef-5f7aa928df9d" />
+    <UnitTestResult executionId="4036d4df-e41f-445f-9bbe-1df66b0fb68c" testId="6b409ab5-fdbd-a60d-0852-28287e6ab280" testName="MissingOrEmptyFacingsKeepVariantZero" computerName="CAMEODEVPC" duration="00:00:00.0001830" startTime="2026-10-10T18:41:37.9160021+02:00" endTime="2026-10-10T18:41:37.9161852+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4036d4df-e41f-445f-9bbe-1df66b0fb68c" />
+    <UnitTestResult executionId="7fcc6618-5372-485d-926c-c3ba3ff02c2d" testId="3e9f8bcb-89ef-6255-e9dd-bfde9c1b8b16" testName="AdvisorChoiceStandsOnlyWhenItWasOffered" computerName="CAMEODEVPC" duration="00:00:00.0019990" startTime="2026-10-10T18:41:37.8774233+02:00" endTime="2026-10-10T18:41:37.8794224+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7fcc6618-5372-485d-926c-c3ba3ff02c2d" />
+    <UnitTestResult executionId="da133f81-bc39-492a-9375-a87939242546" testId="7908dd1d-e896-adb3-82ab-8eea18983b42" testName="ExpiredAndReleasedHoldsFreeTheAnchor" computerName="CAMEODEVPC" duration="00:00:00.0004430" startTime="2026-10-10T18:41:37.9048370+02:00" endTime="2026-10-10T18:41:37.9052798+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="da133f81-bc39-492a-9375-a87939242546" />
+    <UnitTestResult executionId="580eba69-18eb-41bf-8ae3-c036a6fa0e51" testId="d92532d1-a86d-f303-9cfe-22146d07e82e" testName="LatchProbeTimerTicksDownAndRearms" computerName="CAMEODEVPC" duration="00:00:00.0001920" startTime="2026-10-10T18:41:37.9145378+02:00" endTime="2026-10-10T18:41:37.9147292+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="580eba69-18eb-41bf-8ae3-c036a6fa0e51" />
+    <UnitTestResult executionId="6245826c-0bff-4ed6-9614-a7ba355f4b9f" testId="412277e5-bb66-8517-e309-16ccb3018dde" testName="DockNeedsAnOnMapExitOutsideTheFootprint" computerName="CAMEODEVPC" duration="00:00:00.0014710" startTime="2026-10-10T18:41:37.8919217+02:00" endTime="2026-10-10T18:41:37.8933925+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6245826c-0bff-4ed6-9614-a7ba355f4b9f" />
+    <UnitTestResult executionId="95cd2fe5-4625-41bd-bdd1-67f2134d64b1" testId="1aa5699c-040a-5c08-bb21-130e3446c343" testName="NavalScanRunsOnlyWhenNavalAndWatered" computerName="CAMEODEVPC" duration="00:00:00.0003669" startTime="2026-10-10T18:41:37.9162007+02:00" endTime="2026-10-10T18:41:37.9165680+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="95cd2fe5-4625-41bd-bdd1-67f2134d64b1" />
+    <UnitTestResult executionId="e0efd22d-b66b-4c15-b9a4-86dfc3290762" testId="02aa4238-c032-1429-75d8-6aae264cdda0" testName="ClaimFieldOverridesTheCrawlAim" computerName="CAMEODEVPC" duration="00:00:00.0002170" startTime="2026-10-10T18:41:37.8820204+02:00" endTime="2026-10-10T18:41:37.8822357+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e0efd22d-b66b-4c15-b9a4-86dfc3290762" />
+    <UnitTestResult executionId="a6d8cfcd-2f74-4c36-b14e-b4579f80b2f6" testId="5c69ccc2-1229-d978-2f69-d88ebc91a5b7" testName="ReserveAllRefusesTakenMembersWithoutPartialWrites" computerName="CAMEODEVPC" duration="00:00:00.0002020" startTime="2026-10-10T18:41:37.9368574+02:00" endTime="2026-10-10T18:41:37.9370588+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a6d8cfcd-2f74-4c36-b14e-b4579f80b2f6" />
+    <UnitTestResult executionId="f8d10db2-7662-4d26-a736-613f0967a674" testId="70acf9a6-5cff-338e-b13c-ff2b027b819c" testName="FacingFollowsTheDirectionAndFoldRules" computerName="CAMEODEVPC" duration="00:00:00.0011550" startTime="2026-10-10T18:41:37.9053028+02:00" endTime="2026-10-10T18:41:37.9064580+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f8d10db2-7662-4d26-a736-613f0967a674" />
+    <UnitTestResult executionId="298a6a4b-eefa-49dd-bced-1715407aeb14" testId="057f8622-5753-d180-54ea-e3a6d6e87325" testName="EveryPassableCellOfRealRefineryShapeKeepsAnExit(&quot;TDPROC_TD_GDI_Nod_TS_Forgotten_Cabal&quot;,&quot;_x_&quot;,&quot;xxx&quot;,&quot;===&quot;,&quot;===&quot;)" computerName="CAMEODEVPC" duration="00:00:00.0001830" startTime="2026-10-10T18:41:37.9032178+02:00" endTime="2026-10-10T18:41:37.9034010+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="298a6a4b-eefa-49dd-bced-1715407aeb14" />
+    <UnitTestResult executionId="bd64c23f-6985-49d2-98e2-c239792860c6" testId="4f584c4c-21da-d441-8d12-47e19ae0056f" testName="StaleModelVersionRefusesAndTheFreshReadRetries" computerName="CAMEODEVPC" duration="00:00:00.0001910" startTime="2026-10-10T18:41:37.9376909+02:00" endTime="2026-10-10T18:41:37.9378821+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="bd64c23f-6985-49d2-98e2-c239792860c6" />
+    <UnitTestResult executionId="243e4195-4132-4774-a379-009e6c0a0947" testId="7f21d31d-f03d-3871-8dbc-038e965bc2f2" testName="TransitionRecordCarriesSchema2Fields" computerName="CAMEODEVPC" duration="00:00:00.0014800" startTime="2026-10-10T18:41:37.9396575+02:00" endTime="2026-10-10T18:41:37.9411375+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="243e4195-4132-4774-a379-009e6c0a0947" />
+    <UnitTestResult executionId="eb66eff2-b298-4ddf-aa7a-ee8a645fe4f4" testId="439a233d-b2f0-222e-9ee7-ca58c650d151" testName="RequirementFlipPlugPendingExpiresToRemoved" computerName="CAMEODEVPC" duration="00:00:00.0001290" startTime="2026-10-10T18:41:37.9361909+02:00" endTime="2026-10-10T18:41:37.9363196+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="eb66eff2-b298-4ddf-aa7a-ee8a645fe4f4" />
+    <UnitTestResult executionId="9ca10afd-31d2-4a18-bc2e-aed4ae861f15" testId="028d7a14-bbfe-7b25-b378-1083bdd3a156" testName="CommitClearsAReservation" computerName="CAMEODEVPC" duration="00:00:00.0002790" startTime="2026-10-10T18:41:37.8828966+02:00" endTime="2026-10-10T18:41:37.8831757+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9ca10afd-31d2-4a18-bc2e-aed4ae861f15" />
+    <UnitTestResult executionId="42e8bb21-7168-4d1b-955b-375ff5e18e36" testId="ae528a16-0f51-bc3d-3fcc-733703d53d69" testName="ReserveAllRefreshesTheOwnersExistingHolds" computerName="CAMEODEVPC" duration="00:00:00.0002360" startTime="2026-10-10T18:41:37.9366128+02:00" endTime="2026-10-10T18:41:37.9368490+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="42e8bb21-7168-4d1b-955b-375ff5e18e36" />
+    <UnitTestResult executionId="26f2e8b2-41e7-46cb-96f0-c209fd4f4ade" testId="a122ee52-e8a5-ab40-227e-9a05f829d847" testName="OwnNonYardReplacementRelocatesTheDemand" computerName="CAMEODEVPC" duration="00:00:00.0000860" startTime="2026-10-10T18:41:37.9181246+02:00" endTime="2026-10-10T18:41:37.9182107+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="26f2e8b2-41e7-46cb-96f0-c209fd4f4ade" />
+    <UnitTestResult executionId="a2672255-eaab-43c3-a308-12e95706d5d2" testId="37faf0e7-bcbc-c982-f4a1-cfbd8b405deb" testName="LawRefineryNoSiteDefersInsteadOfFailing" computerName="CAMEODEVPC" duration="00:00:00.0001499" startTime="2026-10-10T18:41:37.9152682+02:00" endTime="2026-10-10T18:41:37.9154177+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a2672255-eaab-43c3-a308-12e95706d5d2" />
+    <UnitTestResult executionId="3daa371a-2ca0-4ad5-9e58-db4f37756cf2" testId="0d8f0c63-8d35-cd09-b4cb-794b7318a752" testName="FirstByOrderIsStableUnderKeyEnumerationOrder" computerName="CAMEODEVPC" duration="00:00:00.0016910" startTime="2026-10-10T18:41:37.9088140+02:00" endTime="2026-10-10T18:41:37.9105045+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3daa371a-2ca0-4ad5-9e58-db4f37756cf2" />
+    <UnitTestResult executionId="b0a65eba-f87d-4cfd-80a8-5a031038dbb3" testId="040314a3-abcd-e570-0687-5ea64ae86b4e" testName="EveryPassableCellOfRealRefineryShapeKeepsAnExit(&quot;RA2Mod_Consortium&quot;,&quot;xxx=&quot;,&quot;xxxx&quot;,&quot;=xx=&quot;)" computerName="CAMEODEVPC" duration="00:00:00.0000070" startTime="2026-10-10T18:41:37.9034990+02:00" endTime="2026-10-10T18:41:37.9035056+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b0a65eba-f87d-4cfd-80a8-5a031038dbb3" />
+    <UnitTestResult executionId="d5da0be0-65d9-4ef7-bfaa-c8148b1fe4c2" testId="aa00f8e5-baf8-761f-3674-96fd8fb9452d" testName="AdmissionBindsTheWholeCoveredSetAtomically" computerName="CAMEODEVPC" duration="00:00:00.0121320" startTime="2026-10-10T18:41:37.8634350+02:00" endTime="2026-10-10T18:41:37.8755670+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d5da0be0-65d9-4ef7-bfaa-c8148b1fe4c2" />
+    <UnitTestResult executionId="3e8ecd1d-d5e8-4ae2-aa57-99e428f2acff" testId="d552d7c2-c5f7-0c7d-2bd8-f29a1e3620e8" testName="LimitsCompareAgainstStandingAndProducing" computerName="CAMEODEVPC" duration="00:00:00.0001960" startTime="2026-10-10T18:41:37.9154256+02:00" endTime="2026-10-10T18:41:37.9156212+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3e8ecd1d-d5e8-4ae2-aa57-99e428f2acff" />
+    <UnitTestResult executionId="784815a3-5949-4056-81f0-d4c1f1e912d2" testId="c4c371fc-50b0-85a4-a515-e3b43f95f756" testName="ReadyEmitsOncePerItemInstance" computerName="CAMEODEVPC" duration="00:00:00.0001600" startTime="2026-10-10T18:41:37.9333157+02:00" endTime="2026-10-10T18:41:37.9334753+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="784815a3-5949-4056-81f0-d4c1f1e912d2" />
+    <UnitTestResult executionId="15daaff7-164a-4f97-9c3a-dc595afee919" testId="60f8ba61-7e08-4486-86a5-ee5bbba1b2d7" testName="ReleaseAllIsIdempotentAndClearsOnlyTheOwnersMembers" computerName="CAMEODEVPC" duration="00:00:00.0003970" startTime="2026-10-10T18:41:37.9350662+02:00" endTime="2026-10-10T18:41:37.9354628+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="15daaff7-164a-4f97-9c3a-dc595afee919" />
+    <UnitTestResult executionId="3085861e-8096-4648-963a-5829860b41c6" testId="5ffa30db-2a1f-394a-bb5b-87a104b6ca5a" testName="ImpassableCellsStillWallTheDock" computerName="CAMEODEVPC" duration="00:00:00.0002480" startTime="2026-10-10T18:41:37.9123539+02:00" endTime="2026-10-10T18:41:37.9126020+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3085861e-8096-4648-963a-5829860b41c6" />
+    <UnitTestResult executionId="c3cdb990-f9c3-4398-a992-ff79482f6de5" testId="799b3e75-31c5-b9b4-7955-8f73919166a6" testName="PathLengthIsZeroForDegeneratePaths" computerName="CAMEODEVPC" duration="00:00:00.0001820" startTime="2026-10-10T18:41:37.9189869+02:00" endTime="2026-10-10T18:41:37.9191685+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c3cdb990-f9c3-4398-a992-ff79482f6de5" />
+    <UnitTestResult executionId="a05d7dc4-79f0-4b2a-997e-bdb8ec02356b" testId="ebbc13c1-a74a-cbc3-3928-1276b1f25c7a" testName="RealRefineryDockCellKeepsAnExit(&quot;RAPROC&quot;,[&quot;_X_&quot;, &quot;xxx&quot;, &quot;X==&quot;, &quot;===&quot;],1,2)" computerName="CAMEODEVPC" duration="00:00:00.0002190" startTime="2026-10-10T18:41:37.9335099+02:00" endTime="2026-10-10T18:41:37.9337291+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a05d7dc4-79f0-4b2a-997e-bdb8ec02356b" />
+    <UnitTestResult executionId="51592bfa-1c12-4463-b333-69ce458f3971" testId="85bf94a0-8bb0-05aa-0d41-e6b8baa514ff" testName="UnreachableEtaIsNeverDue" computerName="CAMEODEVPC" duration="00:00:00.0000740" startTime="2026-10-10T18:41:37.9415571+02:00" endTime="2026-10-10T18:41:37.9416315+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="51592bfa-1c12-4463-b333-69ce458f3971" />
+    <UnitTestResult executionId="4f4b964b-0e65-47b6-95ed-273c54e85c2a" testId="c494541e-88f1-f931-e7af-050b7fc7cfb0" testName="EveryPassableCellOfRealRefineryShapeKeepsAnExit(&quot;SC_Terran_Protoss_Zerg&quot;,&quot;_x_&quot;,&quot;xxx&quot;,&quot;===&quot;)" computerName="CAMEODEVPC" duration="00:00:00.0000060" startTime="2026-10-10T18:41:37.9034507+02:00" endTime="2026-10-10T18:41:37.9034568+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4f4b964b-0e65-47b6-95ed-273c54e85c2a" />
+    <UnitTestResult executionId="c09b27ac-7630-4f63-9cc8-0c85d481975b" testId="d8b77c05-37cd-4336-eacc-281c92f6c5d3" testName="DeployTransitionFiresExactlyOnce" computerName="CAMEODEVPC" duration="00:00:00.0005640" startTime="2026-10-10T18:41:37.8913488+02:00" endTime="2026-10-10T18:41:37.8919130+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c09b27ac-7630-4f63-9cc8-0c85d481975b" />
+    <UnitTestResult executionId="2eb3fa4f-486b-49c4-9d18-db5724de8f1a" testId="8ee00b6f-bd69-7a43-9d0d-e2156cf105c2" testName="CancelRemovalNeverConfirmsCancelled" computerName="CAMEODEVPC" duration="00:00:00.0004090" startTime="2026-10-10T18:41:37.8814723+02:00" endTime="2026-10-10T18:41:37.8818814+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2eb3fa4f-486b-49c4-9d18-db5724de8f1a" />
+    <UnitTestResult executionId="71bd0432-c383-4951-80c7-aae03c5a5840" testId="0dae696b-37ed-5794-ea7c-5fcadb65e56e" testName="TruePlugInstallProvesPlaced" computerName="CAMEODEVPC" duration="00:00:00.0001240" startTime="2026-10-10T18:41:37.9412571+02:00" endTime="2026-10-10T18:41:37.9413804+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="71bd0432-c383-4951-80c7-aae03c5a5840" />
+    <UnitTestResult executionId="ad81035b-45dc-48f5-82b0-2c50ea876863" testId="6f68acad-a8e8-9af8-1c3f-1b07f325c66b" testName="PlacementRemovalWithoutProofArmsProofWindow" computerName="CAMEODEVPC" duration="00:00:00.0001530" startTime="2026-10-10T18:41:37.9198178+02:00" endTime="2026-10-10T18:41:37.9199710+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ad81035b-45dc-48f5-82b0-2c50ea876863" />
+    <UnitTestResult executionId="ad6dede4-0548-4ec5-abe3-f8bd1792f0f3" testId="64f4d202-8180-5677-d37d-8337077dc640" testName="FrozenFootprintBlocksUnlessRememberedPassable" computerName="CAMEODEVPC" duration="00:00:00.0001620" startTime="2026-10-10T18:41:37.9114949+02:00" endTime="2026-10-10T18:41:37.9116566+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ad6dede4-0548-4ec5-abe3-f8bd1792f0f3" />
+    <UnitTestResult executionId="ba23fe78-29b0-4b09-9aae-ac245d2da050" testId="bb819fa0-7edf-fa27-8d2b-70224d7b43f0" testName="PickOrPowerDecidesOnlyOnAPick" computerName="CAMEODEVPC" duration="00:00:00.0003720" startTime="2026-10-10T18:41:37.9194367+02:00" endTime="2026-10-10T18:41:37.9198090+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ba23fe78-29b0-4b09-9aae-ac245d2da050" />
+    <UnitTestResult executionId="19e201cf-51e5-4044-bc9d-bf808154218f" testId="c27997eb-04b5-c7b8-6c34-7a0ba83b28d6" testName="FootprintGapClassifiesFlushThenRingThenIllegal" computerName="CAMEODEVPC" duration="00:00:00.0003150" startTime="2026-10-10T18:41:37.9110213+02:00" endTime="2026-10-10T18:41:37.9113360+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="19e201cf-51e5-4044-bc9d-bf808154218f" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="ReleaseAllIsIdempotentAndClearsOnlyTheOwnersMembers" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="60f8ba61-7e08-4486-86a5-ee5bbba1b2d7">
+      <Execution id="15daaff7-164a-4f97-9c3a-dc595afee919" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="ReleaseAllIsIdempotentAndClearsOnlyTheOwnersMembers" />
+    </UnitTest>
+    <UnitTest name="RealRefineryDockCellKeepsAnExit(&quot;OP2_smelter_zero_offset&quot;,[&quot;xxx&quot;, &quot;x==&quot;, &quot;===&quot;],1,1)" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="65c5e5a2-7c9b-96ea-1337-3b84d7c3c1b8">
+      <Execution id="8aadc638-e43f-43a1-bfd4-e4b4c1bb96b7" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="RealRefineryDockCellKeepsAnExit(&quot;OP2_smelter_zero_offset&quot;,[&quot;xxx&quot;, &quot;x==&quot;, &quot;===&quot;],1,1)" />
+    </UnitTest>
+    <UnitTest name="RealRefineryDockCellKeepsAnExit(&quot;WC2_OP2_inherited_zero_offset&quot;,[&quot;xxx&quot;, &quot;xxx&quot;, &quot;===&quot;],1,1)" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="12596005-dee9-d8c0-9b31-1739809d8a64">
+      <Execution id="93339b18-051e-4015-9690-b449521ca986" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="RealRefineryDockCellKeepsAnExit(&quot;WC2_OP2_inherited_zero_offset&quot;,[&quot;xxx&quot;, &quot;xxx&quot;, &quot;===&quot;],1,1)" />
+    </UnitTest>
+    <UnitTest name="LatchRecoveryEpisodeReleasesOnlyAfterFreshProbe" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="c9b69dc3-dd45-aaaf-6411-72b103064a8c">
+      <Execution id="44395114-6ca6-43c8-a87b-87d0450a49e6" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="LatchRecoveryEpisodeReleasesOnlyAfterFreshProbe" />
+    </UnitTest>
+    <UnitTest name="UnaffordableDefenceIsSkippedAtEta" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="4a7760c3-6a27-800c-f612-3d414bf05d18">
+      <Execution id="a64286ed-4729-419a-bd7a-afe552a089fd" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="UnaffordableDefenceIsSkippedAtEta" />
+    </UnitTest>
+    <UnitTest name="ExpiredAndReleasedHoldsFreeTheAnchor" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="7908dd1d-e896-adb3-82ab-8eea18983b42">
+      <Execution id="da133f81-bc39-492a-9375-a87939242546" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="ExpiredAndReleasedHoldsFreeTheAnchor" />
+    </UnitTest>
+    <UnitTest name="RealRefineryDockCellKeepsAnExit(&quot;TDPROC&quot;,[&quot;_x_&quot;, &quot;xxx&quot;, &quot;===&quot;, &quot;===&quot;],0,2)" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="bb926909-3803-179f-a3c3-e533b6d24552">
+      <Execution id="2a0a6ddf-ba82-452c-a89c-e7aacf403367" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="RealRefineryDockCellKeepsAnExit(&quot;TDPROC&quot;,[&quot;_x_&quot;, &quot;xxx&quot;, &quot;===&quot;, &quot;===&quot;],0,2)" />
+    </UnitTest>
+    <UnitTest name="RefineryAndFragileBeatDefenseAndCrawl" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="e5c7848e-0fad-e3aa-6f18-f5976d6aff80">
+      <Execution id="b7a6c4d2-f931-4d7e-91d9-ec366e560ba7" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="RefineryAndFragileBeatDefenseAndCrawl" />
+    </UnitTest>
+    <UnitTest name="PendingMatchesBoundInstanceNotName" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="d82e0bd6-3674-9853-941d-237316ad9acf">
+      <Execution id="60ae7e49-2068-421d-abec-0158e6f0ef51" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="PendingMatchesBoundInstanceNotName" />
+    </UnitTest>
+    <UnitTest name="FirstByOrderYieldsDefaultOnNullOrEmpty" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="571bca49-df9d-ffbd-8009-9587763a12e1">
+      <Execution id="736326f2-3e7b-41e3-a5b7-02c9155c44b4" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="FirstByOrderYieldsDefaultOnNullOrEmpty" />
+    </UnitTest>
+    <UnitTest name="FirstByOrderPicksTheLowestKeyNotInsertionOrder" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="5b6593bd-ae5a-2272-eef6-b92876d37c9e">
+      <Execution id="3259e386-1ab7-44a6-92cb-431237c4642a" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="FirstByOrderPicksTheLowestKeyNotInsertionOrder" />
+    </UnitTest>
+    <UnitTest name="BuilderUnitPlacementProvesOnLateActorArrival" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="638a5bbe-d4e4-2a60-6daa-1aea89f5b967">
+      <Execution id="f1b436a9-f02c-478e-ab92-83e7721a05d6" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="BuilderUnitPlacementProvesOnLateActorArrival" />
+    </UnitTest>
+    <UnitTest name="CrawlHoldNeedsAllFourConditions" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="c1966f96-21a0-11cd-8afd-56549b2f784f">
+      <Execution id="4e16e6c6-5312-44e5-a345-3a74e9162fd5" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="CrawlHoldNeedsAllFourConditions" />
+    </UnitTest>
+    <UnitTest name="ClearAllDropsAWholeCommittedSet" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="1e7b05ae-9afe-1d97-9ee9-97998d00e737">
+      <Execution id="e0904bb3-ac43-4e83-adaa-71156c0cf192" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="ClearAllDropsAWholeCommittedSet" />
+    </UnitTest>
+    <UnitTest name="DefenceTiesBreakOnCostThenOrdinalName" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="e6a52021-6c87-e512-c447-a82ae92caf17">
+      <Execution id="53f24bae-4f98-41d9-bb85-b100a203197f" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="DefenceTiesBreakOnCostThenOrdinalName" />
+    </UnitTest>
+    <UnitTest name="OpeningPolicyNeedsLimitsFactionAndUnfinished" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="2366b42f-2c4c-7a74-2e45-7be06fb081a0">
+      <Execution id="1eae20a4-3e23-4d5b-b9ca-490c31005c69" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="OpeningPolicyNeedsLimitsFactionAndUnfinished" />
+    </UnitTest>
+    <UnitTest name="UnreachableEtaIsNeverDue" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="85bf94a0-8bb0-05aa-0d41-e6b8baa514ff">
+      <Execution id="51592bfa-1c12-4463-b333-69ce458f3971" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="UnreachableEtaIsNeverDue" />
+    </UnitTest>
+    <UnitTest name="StalePlacementRequestEndsRemovedAtRemoval" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="98296d0d-1a5c-cee7-bb17-6c77e8730d53">
+      <Execution id="0a960cac-2f89-49fd-b6ec-bac050168e68" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="StalePlacementRequestEndsRemovedAtRemoval" />
+    </UnitTest>
+    <UnitTest name="ReadyEmitsOncePerItemInstance" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="c4c371fc-50b0-85a4-a515-e3b43f95f756">
+      <Execution id="784815a3-5949-4056-81f0-d4c1f1e912d2" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="ReadyEmitsOncePerItemInstance" />
+    </UnitTest>
+    <UnitTest name="FrozenFootprintBlocksUnlessRememberedPassable" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="64f4d202-8180-5677-d37d-8337077dc640">
+      <Execution id="ad6dede4-0548-4ec5-abe3-f8bd1792f0f3" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="FrozenFootprintBlocksUnlessRememberedPassable" />
+    </UnitTest>
+    <UnitTest name="ImpassableCellsStillWallTheDock" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="5ffa30db-2a1f-394a-bb5b-87a104b6ca5a">
+      <Execution id="3085861e-8096-4648-963a-5829860b41c6" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="ImpassableCellsStillWallTheDock" />
+    </UnitTest>
+    <UnitTest name="PathLengthIsZeroForDegeneratePaths" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="799b3e75-31c5-b9b4-7955-8f73919166a6">
+      <Execution id="c3cdb990-f9c3-4398-a992-ff79482f6de5" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="PathLengthIsZeroForDegeneratePaths" />
+    </UnitTest>
+    <UnitTest name="StaleModelVersionRefusesAndTheFreshReadRetries" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="4f584c4c-21da-d441-8d12-47e19ae0056f">
+      <Execution id="bd64c23f-6985-49d2-98e2-c239792860c6" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="StaleModelVersionRefusesAndTheFreshReadRetries" />
+    </UnitTest>
+    <UnitTest name="FacingFollowsTheDirectionAndFoldRules" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="70acf9a6-5cff-338e-b13c-ff2b027b819c">
+      <Execution id="f8d10db2-7662-4d26-a736-613f0967a674" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="FacingFollowsTheDirectionAndFoldRules" />
+    </UnitTest>
+    <UnitTest name="ReserveAllRefreshesTheOwnersExistingHolds" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="ae528a16-0f51-bc3d-3fcc-733703d53d69">
+      <Execution id="42e8bb21-7168-4d1b-955b-375ff5e18e36" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="ReserveAllRefreshesTheOwnersExistingHolds" />
+    </UnitTest>
+    <UnitTest name="RequirementFlipPlugPendingExpiresToRemoved" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="439a233d-b2f0-222e-9ee7-ca58c650d151">
+      <Execution id="eb66eff2-b298-4ddf-aa7a-ee8a645fe4f4" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="RequirementFlipPlugPendingExpiresToRemoved" />
+    </UnitTest>
+    <UnitTest name="LatchProbeTimerTicksDownAndRearms" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="d92532d1-a86d-f303-9cfe-22146d07e82e">
+      <Execution id="580eba69-18eb-41bf-8ae3-c036a6fa0e51" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="LatchProbeTimerTicksDownAndRearms" />
+    </UnitTest>
+    <UnitTest name="LatchProbeReleasesOnlyOnWorldChange" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="a70b8abd-fada-dd48-0bec-e52cc19085da">
+      <Execution id="7a74d378-e710-43b5-a371-f4f0e19f94d3" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="LatchProbeReleasesOnlyOnWorldChange" />
+    </UnitTest>
+    <UnitTest name="DockNeedsAnOnMapExitOutsideTheFootprint" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="412277e5-bb66-8517-e309-16ccb3018dde">
+      <Execution id="6245826c-0bff-4ed6-9614-a7ba355f4b9f" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="DockNeedsAnOnMapExitOutsideTheFootprint" />
+    </UnitTest>
+    <UnitTest name="SoleProducerHoldsOnlyInsideTheSlackWindow" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="f7942e4c-6336-069c-dc41-2a104f76b760">
+      <Execution id="1ed8aade-f6ea-4b89-b164-b840110947fa" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="SoleProducerHoldsOnlyInsideTheSlackWindow" />
+    </UnitTest>
+    <UnitTest name="ResourceScanCentresHomeWhileFailing" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="69744bf5-ba22-37d8-9343-d371cb359961">
+      <Execution id="05cf3d5f-41a5-4ed1-8d8f-e27be599ecf1" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="ResourceScanCentresHomeWhileFailing" />
+    </UnitTest>
+    <UnitTest name="StalledOrPathlessTravelIsFarFuture" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="5a8649f4-631c-0104-5883-e962a734774e">
+      <Execution id="bf0c839c-6bc1-44d2-a9ea-b349c51c6744" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="StalledOrPathlessTravelIsFarFuture" />
+    </UnitTest>
+    <UnitTest name="CancelRemovalNeverConfirmsCancelled" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="8ee00b6f-bd69-7a43-9d0d-e2156cf105c2">
+      <Execution id="2eb3fa4f-486b-49c4-9d18-db5724de8f1a" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="CancelRemovalNeverConfirmsCancelled" />
+    </UnitTest>
+    <UnitTest name="AttackNeedsTheRollAndOrdinaryNeedsTheCrawlRoll" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="c1c842f3-a451-7c2f-43a6-2bab8ed7f1c9">
+      <Execution id="cb29f011-fb6c-4c6b-b663-555d9897b025" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="AttackNeedsTheRollAndOrdinaryNeedsTheCrawlRoll" />
+    </UnitTest>
+    <UnitTest name="EveryPassableCellOfRealRefineryShapeKeepsAnExit(&quot;TDPROC_TD_GDI_Nod_TS_Forgotten_Cabal&quot;,&quot;_x_&quot;,&quot;xxx&quot;,&quot;===&quot;,&quot;===&quot;)" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="057f8622-5753-d180-54ea-e3a6d6e87325">
+      <Execution id="298a6a4b-eefa-49dd-bced-1715407aeb14" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="EveryPassableCellOfRealRefineryShapeKeepsAnExit(&quot;TDPROC_TD_GDI_Nod_TS_Forgotten_Cabal&quot;,&quot;_x_&quot;,&quot;xxx&quot;,&quot;===&quot;,&quot;===&quot;)" />
+    </UnitTest>
+    <UnitTest name="TravelTicksDividePathLengthBySpeed" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="3a950d59-8a7e-c39c-d754-e27050784121">
+      <Execution id="74db52be-a564-4fa7-a462-49084fad4615" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="TravelTicksDividePathLengthBySpeed" />
+    </UnitTest>
+    <UnitTest name="EveryPassableCellOfRealRefineryShapeKeepsAnExit(&quot;SC_Zerg_Terran_Protoss_townhall&quot;,&quot;xxx&quot;,&quot;xxx&quot;,&quot;===&quot;)" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="819da809-53a5-2141-af36-db4d1d128d12">
+      <Execution id="142850b0-9b7a-4eab-9ad4-6faaa475cb70" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="EveryPassableCellOfRealRefineryShapeKeepsAnExit(&quot;SC_Zerg_Terran_Protoss_townhall&quot;,&quot;xxx&quot;,&quot;xxx&quot;,&quot;===&quot;)" />
+    </UnitTest>
+    <UnitTest name="ClaimFieldOverridesTheCrawlAim" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="02aa4238-c032-1429-75d8-6aae264cdda0">
+      <Execution id="e0efd22d-b66b-4c15-b9a4-86dfc3290762" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="ClaimFieldOverridesTheCrawlAim" />
+    </UnitTest>
+    <UnitTest name="ProvenPlacementEmitsPlacedAtRemoval" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="cb756fcf-e37f-78ea-201f-6d421fe62671">
+      <Execution id="a9023d7b-aa84-410b-a067-7db77c3f11e4" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="ProvenPlacementEmitsPlacedAtRemoval" />
+    </UnitTest>
+    <UnitTest name="RealRefineryDockCellKeepsAnExit(&quot;RAPROC&quot;,[&quot;_X_&quot;, &quot;xxx&quot;, &quot;X==&quot;, &quot;===&quot;],1,2)" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="ebbc13c1-a74a-cbc3-3928-1276b1f25c7a">
+      <Execution id="a05d7dc4-79f0-4b2a-997e-bdb8ec02356b" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="RealRefineryDockCellKeepsAnExit(&quot;RAPROC&quot;,[&quot;_X_&quot;, &quot;xxx&quot;, &quot;X==&quot;, &quot;===&quot;],1,2)" />
+    </UnitTest>
+    <UnitTest name="RealRefineryDockCellKeepsAnExit(&quot;RA2_Allies&quot;,[&quot;xxx=&quot;, &quot;xxx=&quot;, &quot;x+==&quot;],3,1)" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="78113380-e3f7-5d84-5565-bbe3af9a0d6f">
+      <Execution id="2b76b54e-b2c3-4939-a070-3bb7003025a9" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="RealRefineryDockCellKeepsAnExit(&quot;RA2_Allies&quot;,[&quot;xxx=&quot;, &quot;xxx=&quot;, &quot;x+==&quot;],3,1)" />
+    </UnitTest>
+    <UnitTest name="FirstByOrderIsStableUnderKeyEnumerationOrder" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="0d8f0c63-8d35-cd09-b4cb-794b7318a752">
+      <Execution id="3daa371a-2ca0-4ad5-9e58-db4f37756cf2" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="FirstByOrderIsStableUnderKeyEnumerationOrder" />
+    </UnitTest>
+    <UnitTest name="FootprintGapClassifiesFlushThenRingThenIllegal" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="c27997eb-04b5-c7b8-6c34-7a0ba83b28d6">
+      <Execution id="19e201cf-51e5-4044-bc9d-bf808154218f" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="FootprintGapClassifiesFlushThenRingThenIllegal" />
+    </UnitTest>
+    <UnitTest name="ReleaseAllForOwnerFreesTheWholeDriftedSet" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="b792b1c5-a034-839b-be0f-c5af72838836">
+      <Execution id="c202ba73-dda5-43da-88ee-8db812c6e99e" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="ReleaseAllForOwnerFreesTheWholeDriftedSet" />
+    </UnitTest>
+    <UnitTest name="PlugInstallProofRequiresPositiveSlotState" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="209414d6-849e-7bf4-2608-ebf4222d7482">
+      <Execution id="433d714c-64b9-444f-9fa7-86491d39505b" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="PlugInstallProofRequiresPositiveSlotState" />
+    </UnitTest>
+    <UnitTest name="KnownImmovableBlocksButKnownPassablesDoNot" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="8a04b82f-b9f9-eeeb-23e3-9bc8a58bc954">
+      <Execution id="c98ced54-3b77-4654-842d-b3208f330359" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="KnownImmovableBlocksButKnownPassablesDoNot" />
+    </UnitTest>
+    <UnitTest name="OwnNonYardReplacementRelocatesTheDemand" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="a122ee52-e8a5-ab40-227e-9a05f829d847">
+      <Execution id="26f2e8b2-41e7-46cb-96f0-c209fd4f4ade" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="OwnNonYardReplacementRelocatesTheDemand" />
+    </UnitTest>
+    <UnitTest name="PickOrPowerDecidesOnlyOnAPick" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="bb819fa0-7edf-fa27-8d2b-70224d7b43f0">
+      <Execution id="ba23fe78-29b0-4b09-9aae-ac245d2da050" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="PickOrPowerDecidesOnlyOnAPick" />
+    </UnitTest>
+    <UnitTest name="AHeldAnchorRefusesOtherDemands" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="d8335209-c148-691f-e026-7db6b29a4bbb">
+      <Execution id="7fe2cfec-7332-4d32-9072-754ece3886e5" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="AHeldAnchorRefusesOtherDemands" />
+    </UnitTest>
+    <UnitTest name="LimitsCompareAgainstStandingAndProducing" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="d552d7c2-c5f7-0c7d-2bd8-f29a1e3620e8">
+      <Execution id="3e8ecd1d-d5e8-4ae2-aa57-99e428f2acff" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="LimitsCompareAgainstStandingAndProducing" />
+    </UnitTest>
+    <UnitTest name="EpisodesArePerProducer" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="274079df-f99d-cc60-0b96-453eea8f0f25">
+      <Execution id="a0a63b32-7556-422c-afae-9efa8e828808" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="EpisodesArePerProducer" />
+    </UnitTest>
+    <UnitTest name="EveryPassableCellOfRealRefineryShapeKeepsAnExit(&quot;TS_GDI_Nod&quot;,&quot;xxx_&quot;,&quot;xxx=&quot;,&quot;_===&quot;)" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="0c0cde12-c81a-9e06-8c34-436fb2d6e8b1">
+      <Execution id="3e334dc5-d853-4cd3-88a8-7e0523484b6d" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="EveryPassableCellOfRealRefineryShapeKeepsAnExit(&quot;TS_GDI_Nod&quot;,&quot;xxx_&quot;,&quot;xxx=&quot;,&quot;_===&quot;)" />
+    </UnitTest>
+    <UnitTest name="EveryPassableCellOfRealRefineryShapeKeepsAnExit(&quot;RA2_Allies_Soviets&quot;,&quot;xxx=&quot;,&quot;xxx=&quot;,&quot;x+==&quot;)" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="b8ce258a-d1bc-6f1d-90da-1436ff081cc4">
+      <Execution id="cd40e945-2dcb-40f0-8e4f-e65692eddabb" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="EveryPassableCellOfRealRefineryShapeKeepsAnExit(&quot;RA2_Allies_Soviets&quot;,&quot;xxx=&quot;,&quot;xxx=&quot;,&quot;x+==&quot;)" />
+    </UnitTest>
+    <UnitTest name="EliminationDuringAwaitingResolvesRemoved" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="fc100c06-d82e-fa11-4d79-29dedfe98b4f">
+      <Execution id="e190d882-af43-4521-bd57-8201f679595d" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="EliminationDuringAwaitingResolvesRemoved" />
+    </UnitTest>
+    <UnitTest name="DemandBindingNeedsAnExclusiveName" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="3f614668-e4f9-9e5a-b730-36e9d4135db2">
+      <Execution id="e8f41070-594d-4c96-bba6-2c3c8de52c07" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="DemandBindingNeedsAnExclusiveName" />
+    </UnitTest>
+    <UnitTest name="NullClaimRefusesAdmissionBeforeAnyReserveCall" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="667c3a1f-45e6-7593-1518-0b6efea593e6">
+      <Execution id="f0da5f47-4c45-47b5-9354-b00efcaf8cdb" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="NullClaimRefusesAdmissionBeforeAnyReserveCall" />
+    </UnitTest>
+    <UnitTest name="RealRefineryDockCellKeepsAnExit(&quot;D2K_off_footprint_dock&quot;,[&quot;=xx&quot;, &quot;xx=&quot;, &quot;===&quot;],3,2)" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="fa429aef-83cd-965f-764f-bc64257fc02d">
+      <Execution id="42f2448b-9b91-4c15-86c4-437d5868a6ed" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="RealRefineryDockCellKeepsAnExit(&quot;D2K_off_footprint_dock&quot;,[&quot;=xx&quot;, &quot;xx=&quot;, &quot;===&quot;],3,2)" />
+    </UnitTest>
+    <UnitTest name="AdmissionConflictRefusesTheWholeSetAndLeavesNoHold" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="97dd48d6-8a20-6b0e-d726-54368bb1676f">
+      <Execution id="b7b7b1cf-236c-4361-af5e-bee428e273fe" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="AdmissionConflictRefusesTheWholeSetAndLeavesNoHold" />
+    </UnitTest>
+    <UnitTest name="MissingOrEmptyFacingsKeepVariantZero" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="6b409ab5-fdbd-a60d-0852-28287e6ab280">
+      <Execution id="4036d4df-e41f-445f-9bbe-1df66b0fb68c" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="MissingOrEmptyFacingsKeepVariantZero" />
+    </UnitTest>
+    <UnitTest name="ReserveAllCommitsTheWholeSetOrNothing" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="28dbad99-ed78-0361-ff13-f778c4f78018">
+      <Execution id="000461bc-9530-4a73-b688-1459d201bfb1" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="ReserveAllCommitsTheWholeSetOrNothing" />
+    </UnitTest>
+    <UnitTest name="CompetingRemovalAfterPlacementNeverConfirms" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="b91349e9-7093-1b84-5335-3d837360cbad">
+      <Execution id="8d70ea9d-d497-473a-8595-18c2bc523d66" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="CompetingRemovalAfterPlacementNeverConfirms" />
+    </UnitTest>
+    <UnitTest name="DemandItemQueuesOnlyInsideItsEtaWindow" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="911d8b93-1aee-e96d-6207-26ff4f189593">
+      <Execution id="8f1559b3-7e1a-4a8e-a0d0-e8b112afd8a1" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="DemandItemQueuesOnlyInsideItsEtaWindow" />
+    </UnitTest>
+    <UnitTest name="BuilderUnitPlacementFailureExpiresToRemoved" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="e2903c5a-5a57-8902-aa23-49926dcfd35e">
+      <Execution id="c1893173-bb2e-4dc0-81b3-dc5409ba55c8" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="BuilderUnitPlacementFailureExpiresToRemoved" />
+    </UnitTest>
+    <UnitTest name="HeldEpisodeEndsOnTerminalTransition" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="c29e009d-ee3b-cecb-4a81-e6406d80306b">
+      <Execution id="84ebab38-876d-4ab5-942b-80ea92e2b0a6" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="HeldEpisodeEndsOnTerminalTransition" />
+    </UnitTest>
+    <UnitTest name="PlannerWantRidesAtItsOwnCostFloor" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="0fa5a670-c9d9-3c43-2b52-f7064333e54b">
+      <Execution id="14f0861c-c094-4439-8fc2-f490761ff3a5" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="PlannerWantRidesAtItsOwnCostFloor" />
+    </UnitTest>
+    <UnitTest name="RememberedCrushableNeedsOverlapAndANonAlliedOwner" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="ce4a2c0d-015d-c10f-b762-224d07b19810">
+      <Execution id="ae84a755-3770-4253-959e-c3f994f1c374" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="RememberedCrushableNeedsOverlapAndANonAlliedOwner" />
+    </UnitTest>
+    <UnitTest name="AdvisorChoiceStandsOnlyWhenItWasOffered" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="3e9f8bcb-89ef-6255-e9dd-bfde9c1b8b16">
+      <Execution id="7fcc6618-5372-485d-926c-c3ba3ff02c2d" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="AdvisorChoiceStandsOnlyWhenItWasOffered" />
+    </UnitTest>
+    <UnitTest name="FacingTiesKeepTheEarliestIndex" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="675566a8-2d57-432c-449a-fa619f2d5189">
+      <Execution id="942fbb32-591f-4dbe-a925-c196d06dbd93" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="FacingTiesKeepTheEarliestIndex" />
+    </UnitTest>
+    <UnitTest name="AdjacentPathCountsOnlyItsOwnSegment" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="46ac34bf-0218-b9e4-6100-1fb024b34179">
+      <Execution id="8586e498-9fe6-42fa-ae43-3e00116d9bc5" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="AdjacentPathCountsOnlyItsOwnSegment" />
+    </UnitTest>
+    <UnitTest name="HiddenOccupantsNeverBlockTheEta" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="efa90bfc-0f4c-a6d0-1681-ed697dfa4831">
+      <Execution id="d6c34e5d-3b9a-4174-88e8-3c73c4bde851" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="HiddenOccupantsNeverBlockTheEta" />
+    </UnitTest>
+    <UnitTest name="TruePlugInstallProvesPlaced" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="0dae696b-37ed-5794-ea7c-5fcadb65e56e">
+      <Execution id="71bd0432-c383-4951-80c7-aae03c5a5840" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="TruePlugInstallProvesPlaced" />
+    </UnitTest>
+    <UnitTest name="PlacementRemovalWithoutProofArmsProofWindow" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="6f68acad-a8e8-9af8-1c3f-1b07f325c66b">
+      <Execution id="ad81035b-45dc-48f5-82b0-2c50ea876863" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="PlacementRemovalWithoutProofArmsProofWindow" />
+    </UnitTest>
+    <UnitTest name="ParkedClaimFreesTheWholeSetAndRecyclesToAnotherDemand" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="dd5fd2ef-e3b6-ae15-4370-31fab08d3ac1">
+      <Execution id="62f2f596-627f-4632-b958-f02595a296b2" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="ParkedClaimFreesTheWholeSetAndRecyclesToAnotherDemand" />
+    </UnitTest>
+    <UnitTest name="CashAboveFloorNeverBlocks" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="a17dc3f3-1d40-7a21-3906-9309d3baae42">
+      <Execution id="92957243-086a-4a73-884d-829e87d7920b" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="CashAboveFloorNeverBlocks" />
+    </UnitTest>
+    <UnitTest name="EveryPassableCellOfRealRefineryShapeKeepsAnExit(&quot;RAPROC_RA1_Allies_Soviets_Japan&quot;,&quot;_X_&quot;,&quot;xxx&quot;,&quot;X==&quot;,&quot;===&quot;)" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="f14c3200-7417-c2c7-6e82-c61050c19b62">
+      <Execution id="665aecbb-0668-41d9-b2f7-2f200637ac1c" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="EveryPassableCellOfRealRefineryShapeKeepsAnExit(&quot;RAPROC_RA1_Allies_Soviets_Japan&quot;,&quot;_X_&quot;,&quot;xxx&quot;,&quot;X==&quot;,&quot;===&quot;)" />
+    </UnitTest>
+    <UnitTest name="EveryPassableCellOfRealRefineryShapeKeepsAnExit(&quot;SC_Terran_Protoss_Zerg&quot;,&quot;_x_&quot;,&quot;xxx&quot;,&quot;===&quot;)" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="c494541e-88f1-f931-e7af-050b7fc7cfb0">
+      <Execution id="4f4b964b-0e65-47b6-95ed-273c54e85c2a" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="EveryPassableCellOfRealRefineryShapeKeepsAnExit(&quot;SC_Terran_Protoss_Zerg&quot;,&quot;_x_&quot;,&quot;xxx&quot;,&quot;===&quot;)" />
+    </UnitTest>
+    <UnitTest name="HeldEmitsOncePerEpisode" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="9dd03a4f-d790-c40b-f08c-b445375d049d">
+      <Execution id="22e5d69d-43aa-452a-bca8-551928699705" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="HeldEmitsOncePerEpisode" />
+    </UnitTest>
+    <UnitTest name="OpeningCandidateWinsOnFractionThenOrdinalName" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="ad6a0041-56b1-fdb8-a4cf-51cd36e321db">
+      <Execution id="fb77936a-ad06-4dca-8427-c3d558744b8f" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="OpeningCandidateWinsOnFractionThenOrdinalName" />
+    </UnitTest>
+    <UnitTest name="HeldReasonAlternationIsATransition" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="2031eda2-438c-cc5c-d898-5c772492607b">
+      <Execution id="8c7a79ec-a13b-4626-8a82-e54c7aa519dc" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="HeldReasonAlternationIsATransition" />
+    </UnitTest>
+    <UnitTest name="RandomVariantNeedsVariantsWithoutFacings" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="b006f13d-426f-cd9e-de62-495b807b9d55">
+      <Execution id="f5ff9196-9445-47c8-b9c7-232588847cf4" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="RandomVariantNeedsVariantsWithoutFacings" />
+    </UnitTest>
+    <UnitTest name="TheOwningDemandRefreshesItsHold" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="8d9a0d59-f1bd-3ddb-bd51-6430936ad085">
+      <Execution id="5812d43f-83bb-4fe8-8729-2fe23f07be3b" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="TheOwningDemandRefreshesItsHold" />
+    </UnitTest>
+    <UnitTest name="ReadyCannotInterleaveWithHeld" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="a91634f3-a726-7f28-e7c9-db06dcac5597">
+      <Execution id="ba8a925b-b2c6-49a4-b749-7f05df82548a" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="ReadyCannotInterleaveWithHeld" />
+    </UnitTest>
+    <UnitTest name="RaRefineryDockCellsThatWereWallsArePassable" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="d5012c2b-d846-e1f5-8b25-100733eb8778">
+      <Execution id="48be2972-f895-40b7-8f84-3b65445e04af" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="RaRefineryDockCellsThatWereWallsArePassable" />
+    </UnitTest>
+    <UnitTest name="LawLinkClassifiesAsCrawlBeforeEveryRule" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="b0614acc-74c1-7d40-202e-77c2eef464bb">
+      <Execution id="0f5c9d5a-0e1c-452c-b320-e6d83184204d" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="LawLinkClassifiesAsCrawlBeforeEveryRule" />
+    </UnitTest>
+    <UnitTest name="TeardownReleasesByOwnerKeyWithoutRecomputingTheSet" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="444b63e6-8d68-8a8c-2a9a-3ca7a0fb9435">
+      <Execution id="281b7085-da81-4975-bbaa-80b1c4e62de1" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="TeardownReleasesByOwnerKeyWithoutRecomputingTheSet" />
+    </UnitTest>
+    <UnitTest name="DroppedProducerLosesDedupeHistory" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="08e02e69-ba60-3e1e-16db-c38a846b48a9">
+      <Execution id="ac9a2ac7-4b0d-4ef0-8ec1-7a3128602c1c" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="DroppedProducerLosesDedupeHistory" />
+    </UnitTest>
+    <UnitTest name="CommittedPlacementPublishesTheSelectedSiteAndClearsHolds" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="850f22f8-82d6-9811-4786-b6062d87f5b4">
+      <Execution id="e40238fd-2fe5-4260-8743-4b9129949649" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="CommittedPlacementPublishesTheSelectedSiteAndClearsHolds" />
+    </UnitTest>
+    <UnitTest name="FractionBoundaryAdmitsAtEquality" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="2035d773-80f5-ca02-5699-39408ee9966d">
+      <Execution id="2f7f5923-555b-445f-a016-b098a60b2d85" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="FractionBoundaryAdmitsAtEquality" />
+    </UnitTest>
+    <UnitTest name="LatchRecoveryCoversEveryUnNudgeableCase" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="45fb1b7c-3b63-084b-5bee-e9f8c0de3c9d">
+      <Execution id="d864f5c9-e8a1-4b20-a144-9aa507779cfc" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="LatchRecoveryCoversEveryUnNudgeableCase" />
+    </UnitTest>
+    <UnitTest name="StrongestAffordableDefenceWins" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="5007a20c-a143-e6ec-5c49-54e5d412e426">
+      <Execution id="0f0d0c82-8b20-45ec-b181-9404a6b1d0ea" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="StrongestAffordableDefenceWins" />
+    </UnitTest>
+    <UnitTest name="RenewalDropsTheClaimWhenTheLawOrTheBindingIsGone" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="6411e9e1-4ae1-d6d2-72f3-caf3ff586314">
+      <Execution id="4635f46e-8065-444c-8224-ecc4a9546b0c" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="RenewalDropsTheClaimWhenTheLawOrTheBindingIsGone" />
+    </UnitTest>
+    <UnitTest name="TransitionRecordCarriesSchema2Fields" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="7f21d31d-f03d-3871-8dbc-038e965bc2f2">
+      <Execution id="243e4195-4132-4774-a379-009e6c0a0947" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="TransitionRecordCarriesSchema2Fields" />
+    </UnitTest>
+    <UnitTest name="RenewalRefreshesUnderTheLiveModelAndRefusalClearsTheClaim" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="37284bb4-35be-4f65-80cf-930750a96acf">
+      <Execution id="33a444d1-32cf-4702-be07-4f86c73b86bf" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="RenewalRefreshesUnderTheLiveModelAndRefusalClearsTheClaim" />
+    </UnitTest>
+    <UnitTest name="DefenceHoldAlwaysAllowedWithMultipleProducers" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="02e02ebe-1219-f7d6-b036-65cecf53f7d3">
+      <Execution id="dc2af0a1-736c-48ea-b9b1-49cfcc24a72f" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="DefenceHoldAlwaysAllowedWithMultipleProducers" />
+    </UnitTest>
+    <UnitTest name="DelayBlocksUntilTheTickPasses" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="5290a0d3-5ad2-a4e8-07b6-398a90ee0f11">
+      <Execution id="34948204-46bb-4be7-89b2-ab26fc14bcb8" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="DelayBlocksUntilTheTickPasses" />
+    </UnitTest>
+    <UnitTest name="NullOwnerParkRefusesRenewalUntilExpiry" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="5e557682-c446-0ba8-26eb-1f76afac27ef">
+      <Execution id="6937b8ae-723d-4e6f-b931-e2a117fee665" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="NullOwnerParkRefusesRenewalUntilExpiry" />
+    </UnitTest>
+    <UnitTest name="AdmissionBindsTheWholeCoveredSetAtomically" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="aa00f8e5-baf8-761f-3674-96fd8fb9452d">
+      <Execution id="d5da0be0-65d9-4ef7-bfaa-c8148b1fe4c2" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="AdmissionBindsTheWholeCoveredSetAtomically" />
+    </UnitTest>
+    <UnitTest name="LawRefineryNoSiteDefersInsteadOfFailing" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="37faf0e7-bcbc-c982-f4a1-cfbd8b405deb">
+      <Execution id="a2672255-eaab-43c3-a308-12e95706d5d2" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="LawRefineryNoSiteDefersInsteadOfFailing" />
+    </UnitTest>
+    <UnitTest name="ExpansionBalanceComparesNetEconomyToRefineries" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="045c56f8-44dc-132b-fdbd-573fd5fb2947">
+      <Execution id="4fd679a4-1881-42ed-8a11-d0d9845c81e0" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="ExpansionBalanceComparesNetEconomyToRefineries" />
+    </UnitTest>
+    <UnitTest name="IntervalBlocksOnlyWhenConfiguredAndCooling" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="5c660de8-16f8-ea58-310f-b566e41d7a16">
+      <Execution id="d705cadf-4e5d-4e6a-b92d-19d21d92ee0e" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="IntervalBlocksOnlyWhenConfiguredAndCooling" />
+    </UnitTest>
+    <UnitTest name="NavalScanRunsOnlyWhenNavalAndWatered" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="1aa5699c-040a-5c08-bb21-130e3446c343">
+      <Execution id="95cd2fe5-4625-41bd-bdd1-67f2134d64b1" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="NavalScanRunsOnlyWhenNavalAndWatered" />
+    </UnitTest>
+    <UnitTest name="TargetlessActivityNeverRenewsTheDemand" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="4ed0118e-834e-1146-f8ac-9ae69a0d2ff6">
+      <Execution id="83500f4d-123a-46fc-91fb-2ccf4e052696" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="TargetlessActivityNeverRenewsTheDemand" />
+    </UnitTest>
+    <UnitTest name="CommitClearsAReservation" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="028d7a14-bbfe-7b25-b378-1083bdd3a156">
+      <Execution id="9ca10afd-31d2-4a18-bc2e-aed4ae861f15" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="CommitClearsAReservation" />
+    </UnitTest>
+    <UnitTest name="EveryPassableCellOfRealRefineryShapeKeepsAnExit(&quot;D2K_five_factions&quot;,&quot;=xx&quot;,&quot;xx=&quot;,&quot;===&quot;)" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="e3f9d027-a7dd-ecee-f3e2-11c15f6ae24d">
+      <Execution id="3a24d614-4af9-48c4-bd5e-9595c9c28331" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="EveryPassableCellOfRealRefineryShapeKeepsAnExit(&quot;D2K_five_factions&quot;,&quot;=xx&quot;,&quot;xx=&quot;,&quot;===&quot;)" />
+    </UnitTest>
+    <UnitTest name="UnusableOrCapturedReplacementFailsTheDemand" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="aa4a7191-d8f3-4889-5f79-2d4522f1adeb">
+      <Execution id="9698de4b-2b13-4655-8e63-c5d90d13ba29" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="UnusableOrCapturedReplacementFailsTheDemand" />
+    </UnitTest>
+    <UnitTest name="NullOwnerParkStaysGlobalAndBlocksForeignReservation" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="831a06ea-79b4-3559-e0f1-ae66f39e31a9">
+      <Execution id="c5f1679b-217b-4460-86ae-ed6600db7284" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="NullOwnerParkStaysGlobalAndBlocksForeignReservation" />
+    </UnitTest>
+    <UnitTest name="InfiniteCancelProvenOnlyByBoundFlagFlip" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="87e4e4b3-81d1-abf7-2d46-1626a5f68e39">
+      <Execution id="3c36c819-623c-48cc-b7dd-e43c128d7733" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="InfiniteCancelProvenOnlyByBoundFlagFlip" />
+    </UnitTest>
+    <UnitTest name="EveryPassableCellOfRealRefineryShapeKeepsAnExit(&quot;RA2Mod_Consortium&quot;,&quot;xxx=&quot;,&quot;xxxx&quot;,&quot;=xx=&quot;)" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="040314a3-abcd-e570-0687-5ea64ae86b4e">
+      <Execution id="b0a65eba-f87d-4cfd-80a8-5a031038dbb3" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="EveryPassableCellOfRealRefineryShapeKeepsAnExit(&quot;RA2Mod_Consortium&quot;,&quot;xxx=&quot;,&quot;xxxx&quot;,&quot;=xx=&quot;)" />
+    </UnitTest>
+    <UnitTest name="EveryPassableCellOfRealRefineryShapeKeepsAnExit(&quot;OP2_Eden_Plymouth_smelter&quot;,&quot;xxx&quot;,&quot;x==&quot;,&quot;===&quot;)" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="7dceeef8-e6f2-0457-3591-83f18760ffba">
+      <Execution id="07c2bac9-8eb8-47ec-83d8-fa0df90d91b2" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="EveryPassableCellOfRealRefineryShapeKeepsAnExit(&quot;OP2_Eden_Plymouth_smelter&quot;,&quot;xxx&quot;,&quot;x==&quot;,&quot;===&quot;)" />
+    </UnitTest>
+    <UnitTest name="ReserveAllRefusesTakenMembersWithoutPartialWrites" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="5c69ccc2-1229-d978-2f69-d88ebc91a5b7">
+      <Execution id="a6d8cfcd-2f74-4c36-b14e-b4579f80b2f6" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="ReserveAllRefusesTakenMembersWithoutPartialWrites" />
+    </UnitTest>
+    <UnitTest name="FailedPlacementParksTheOfferedAnchorAndCommitsNothing" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="fc1ed300-53fc-cc3a-f422-7a705441c34c">
+      <Execution id="e5a68371-8f02-407f-9fce-744088601c77" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="FailedPlacementParksTheOfferedAnchorAndCommitsNothing" />
+    </UnitTest>
+    <UnitTest name="ReversedPathHasNoSourceToTargetChord" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="037f8850-7117-a467-0fef-6e19107dd6ed">
+      <Execution id="ad028d54-929a-461c-b6e9-9f9730149b3c" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="ReversedPathHasNoSourceToTargetChord" />
+    </UnitTest>
+    <UnitTest name="LowPowerBlocksWithoutManagerOrFloorOrSufficiency" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="73318e42-c0ab-39ba-d72a-2067344435fd">
+      <Execution id="7591b27e-0c39-451b-a0f6-a6acf9bab687" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="LowPowerBlocksWithoutManagerOrFloorOrSufficiency" />
+    </UnitTest>
+    <UnitTest name="EveryPassableCellOfRealRefineryShapeKeepsAnExit(&quot;WC2_Humans_Orcs_lumber&quot;,&quot;xxx&quot;,&quot;xxx&quot;,&quot;===&quot;)" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="b9833e38-4bc2-62d7-8101-5a80937a4a9e">
+      <Execution id="c35013bc-eb99-4f66-87fb-e522d34f35ab" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="EveryPassableCellOfRealRefineryShapeKeepsAnExit(&quot;WC2_Humans_Orcs_lumber&quot;,&quot;xxx&quot;,&quot;xxx&quot;,&quot;===&quot;)" />
+    </UnitTest>
+    <UnitTest name="TransformWithoutReplacementOrWaitingKeepsWaiting" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="bf4bfa9d-76ba-6763-b1ff-ed1b9d0d7ebf">
+      <Execution id="0ba5772c-7fac-43b3-b11a-22816f11ce2f" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="TransformWithoutReplacementOrWaitingKeepsWaiting" />
+    </UnitTest>
+    <UnitTest name="AdmitNeedsAllFourChecks" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="e65df13c-7983-d723-04bb-7d7129eb8aef">
+      <Execution id="b6ee250f-6001-421d-ba97-a6de7d8f203d" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="AdmitNeedsAllFourChecks" />
+    </UnitTest>
+    <UnitTest name="EpisodeIdsArePerInstance" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="818d3f45-f2c2-3902-15c6-09c5ee6b4700">
+      <Execution id="8c1266c6-6cab-4261-9340-cb02cc617190" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="EpisodeIdsArePerInstance" />
+    </UnitTest>
+    <UnitTest name="LowCashBlocksOrdinaryButNotRefinery" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="95eb0d9d-6c1b-0099-b56c-583462b8cf32">
+      <Execution id="07d6a474-fb0a-45d8-8869-1965a48cba97" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="LowCashBlocksOrdinaryButNotRefinery" />
+    </UnitTest>
+    <UnitTest name="JourneyClassifiesRedirectSilenceAndCommitment" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="16158a2f-b09a-b5e9-4c21-3501f643941c">
+      <Execution id="e566b1c5-bcb1-4454-a161-99a3a0025b20" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="JourneyClassifiesRedirectSilenceAndCommitment" />
+    </UnitTest>
+    <UnitTest name="AdmitShortCircuitsInOrder" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="8b7646c4-7e73-571b-b7f8-215078c93e1d">
+      <Execution id="af788c25-9f23-4256-bb7d-7bca07f128b5" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="AdmitShortCircuitsInOrder" />
+    </UnitTest>
+    <UnitTest name="DeployTransitionFiresExactlyOnce" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="d8b77c05-37cd-4336-eacc-281c92f6c5d3">
+      <Execution id="c09b27ac-7630-4f63-9cc8-0c85d481975b" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="DeployTransitionFiresExactlyOnce" />
+    </UnitTest>
+    <UnitTest name="PendingTerminalExpiresRejectedRequests" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="d5ea9c68-4461-22fa-6efd-428ed103d8e3">
+      <Execution id="bd2dbb33-3363-49e2-987a-ba85a973f86a" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="PendingTerminalExpiresRejectedRequests" />
+    </UnitTest>
+    <UnitTest name="TakenAnchorsCannotBeReservedOrSurvivePrune" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="a71842f1-47ca-b24c-fb57-55a9685f10ee">
+      <Execution id="75d0c76a-6268-4958-94ef-5f7aa928df9d" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="TakenAnchorsCannotBeReservedOrSurvivePrune" />
+    </UnitTest>
+    <UnitTest name="AwaitingProofEntryCannotBindSiblingRemoval" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="858c5bc0-f6e3-9bfa-c973-6e7f55b4b710">
+      <Execution id="2166a3e7-85b2-4b50-8f68-527b845d1eb8" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="AwaitingProofEntryCannotBindSiblingRemoval" />
+    </UnitTest>
+    <UnitTest name="QueuedThisTickAlwaysBlocks" storage="c:\cameo-wt\sol-land-b3-park\engine\bin\openra.mods.cameo.test.dll" id="b817ea00-9e1d-7929-08ec-e8cc04a579e6">
+      <Execution id="49915ffb-0ae7-4d34-94e5-75c0ac316777" />
+      <TestMethod codeBase="C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="OpenRA.Mods.Cameo.Test.BaseBuilderQueueEvalTest" name="QueuedThisTickAlwaysBlocks" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="3f614668-e4f9-9e5a-b730-36e9d4135db2" executionId="e8f41070-594d-4c96-bba6-2c3c8de52c07" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="37284bb4-35be-4f65-80cf-930750a96acf" executionId="33a444d1-32cf-4702-be07-4f86c73b86bf" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="87e4e4b3-81d1-abf7-2d46-1626a5f68e39" executionId="3c36c819-623c-48cc-b7dd-e43c128d7733" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="45fb1b7c-3b63-084b-5bee-e9f8c0de3c9d" executionId="d864f5c9-e8a1-4b20-a144-9aa507779cfc" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="2035d773-80f5-ca02-5699-39408ee9966d" executionId="2f7f5923-555b-445f-a016-b098a60b2d85" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c1c842f3-a451-7c2f-43a6-2bab8ed7f1c9" executionId="cb29f011-fb6c-4c6b-b663-555d9897b025" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="efa90bfc-0f4c-a6d0-1681-ed697dfa4831" executionId="d6c34e5d-3b9a-4174-88e8-3c73c4bde851" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a91634f3-a726-7f28-e7c9-db06dcac5597" executionId="ba8a925b-b2c6-49a4-b749-7f05df82548a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f14c3200-7417-c2c7-6e82-c61050c19b62" executionId="665aecbb-0668-41d9-b2f7-2f200637ac1c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e2903c5a-5a57-8902-aa23-49926dcfd35e" executionId="c1893173-bb2e-4dc0-81b3-dc5409ba55c8" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e65df13c-7983-d723-04bb-7d7129eb8aef" executionId="b6ee250f-6001-421d-ba97-a6de7d8f203d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="8b7646c4-7e73-571b-b7f8-215078c93e1d" executionId="af788c25-9f23-4256-bb7d-7bca07f128b5" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="dd5fd2ef-e3b6-ae15-4370-31fab08d3ac1" executionId="62f2f596-627f-4632-b958-f02595a296b2" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="0c0cde12-c81a-9e06-8c34-436fb2d6e8b1" executionId="3e334dc5-d853-4cd3-88a8-7e0523484b6d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f7942e4c-6336-069c-dc41-2a104f76b760" executionId="1ed8aade-f6ea-4b89-b164-b840110947fa" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="274079df-f99d-cc60-0b96-453eea8f0f25" executionId="a0a63b32-7556-422c-afae-9efa8e828808" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="6411e9e1-4ae1-d6d2-72f3-caf3ff586314" executionId="4635f46e-8065-444c-8224-ecc4a9546b0c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="d5012c2b-d846-e1f5-8b25-100733eb8778" executionId="48be2972-f895-40b7-8f84-3b65445e04af" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="5007a20c-a143-e6ec-5c49-54e5d412e426" executionId="0f0d0c82-8b20-45ec-b181-9404a6b1d0ea" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b006f13d-426f-cd9e-de62-495b807b9d55" executionId="f5ff9196-9445-47c8-b9c7-232588847cf4" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="5e557682-c446-0ba8-26eb-1f76afac27ef" executionId="6937b8ae-723d-4e6f-b931-e2a117fee665" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b0614acc-74c1-7d40-202e-77c2eef464bb" executionId="0f5c9d5a-0e1c-452c-b320-e6d83184204d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a70b8abd-fada-dd48-0bec-e52cc19085da" executionId="7a74d378-e710-43b5-a371-f4f0e19f94d3" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="037f8850-7117-a467-0fef-6e19107dd6ed" executionId="ad028d54-929a-461c-b6e9-9f9730149b3c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b792b1c5-a034-839b-be0f-c5af72838836" executionId="c202ba73-dda5-43da-88ee-8db812c6e99e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="fa429aef-83cd-965f-764f-bc64257fc02d" executionId="42f2448b-9b91-4c15-86c4-437d5868a6ed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="5c660de8-16f8-ea58-310f-b566e41d7a16" executionId="d705cadf-4e5d-4e6a-b92d-19d21d92ee0e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="2366b42f-2c4c-7a74-2e45-7be06fb081a0" executionId="1eae20a4-3e23-4d5b-b9ca-490c31005c69" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="911d8b93-1aee-e96d-6207-26ff4f189593" executionId="8f1559b3-7e1a-4a8e-a0d0-e8b112afd8a1" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="95eb0d9d-6c1b-0099-b56c-583462b8cf32" executionId="07d6a474-fb0a-45d8-8869-1965a48cba97" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b8ce258a-d1bc-6f1d-90da-1436ff081cc4" executionId="cd40e945-2dcb-40f0-8e4f-e65692eddabb" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="850f22f8-82d6-9811-4786-b6062d87f5b4" executionId="e40238fd-2fe5-4260-8743-4b9129949649" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="444b63e6-8d68-8a8c-2a9a-3ca7a0fb9435" executionId="281b7085-da81-4975-bbaa-80b1c4e62de1" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b91349e9-7093-1b84-5335-3d837360cbad" executionId="8d70ea9d-d497-473a-8595-18c2bc523d66" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="5a8649f4-631c-0104-5883-e962a734774e" executionId="bf0c839c-6bc1-44d2-a9ea-b349c51c6744" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ce4a2c0d-015d-c10f-b762-224d07b19810" executionId="ae84a755-3770-4253-959e-c3f994f1c374" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="73318e42-c0ab-39ba-d72a-2067344435fd" executionId="7591b27e-0c39-451b-a0f6-a6acf9bab687" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="4ed0118e-834e-1146-f8ac-9ae69a0d2ff6" executionId="83500f4d-123a-46fc-91fb-2ccf4e052696" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="209414d6-849e-7bf4-2608-ebf4222d7482" executionId="433d714c-64b9-444f-9fa7-86491d39505b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="818d3f45-f2c2-3902-15c6-09c5ee6b4700" executionId="8c1266c6-6cab-4261-9340-cb02cc617190" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ad6a0041-56b1-fdb8-a4cf-51cd36e321db" executionId="fb77936a-ad06-4dca-8427-c3d558744b8f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="4a7760c3-6a27-800c-f612-3d414bf05d18" executionId="a64286ed-4729-419a-bd7a-afe552a089fd" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="819da809-53a5-2141-af36-db4d1d128d12" executionId="142850b0-9b7a-4eab-9ad4-6faaa475cb70" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1e7b05ae-9afe-1d97-9ee9-97998d00e737" executionId="e0904bb3-ac43-4e83-adaa-71156c0cf192" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c9b69dc3-dd45-aaaf-6411-72b103064a8c" executionId="44395114-6ca6-43c8-a87b-87d0450a49e6" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="28dbad99-ed78-0361-ff13-f778c4f78018" executionId="000461bc-9530-4a73-b688-1459d201bfb1" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="fc100c06-d82e-fa11-4d79-29dedfe98b4f" executionId="e190d882-af43-4521-bd57-8201f679595d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="cb756fcf-e37f-78ea-201f-6d421fe62671" executionId="a9023d7b-aa84-410b-a067-7db77c3f11e4" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="9dd03a4f-d790-c40b-f08c-b445375d049d" executionId="22e5d69d-43aa-452a-bca8-551928699705" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="5b6593bd-ae5a-2272-eef6-b92876d37c9e" executionId="3259e386-1ab7-44a6-92cb-431237c4642a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="045c56f8-44dc-132b-fdbd-573fd5fb2947" executionId="4fd679a4-1881-42ed-8a11-d0d9845c81e0" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="d8335209-c148-691f-e026-7db6b29a4bbb" executionId="7fe2cfec-7332-4d32-9072-754ece3886e5" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="858c5bc0-f6e3-9bfa-c973-6e7f55b4b710" executionId="2166a3e7-85b2-4b50-8f68-527b845d1eb8" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c1966f96-21a0-11cd-8afd-56549b2f784f" executionId="4e16e6c6-5312-44e5-a345-3a74e9162fd5" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="2031eda2-438c-cc5c-d898-5c772492607b" executionId="8c7a79ec-a13b-4626-8a82-e54c7aa519dc" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="78113380-e3f7-5d84-5565-bbe3af9a0d6f" executionId="2b76b54e-b2c3-4939-a070-3bb7003025a9" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e6a52021-6c87-e512-c447-a82ae92caf17" executionId="53f24bae-4f98-41d9-bb85-b100a203197f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="69744bf5-ba22-37d8-9343-d371cb359961" executionId="05cf3d5f-41a5-4ed1-8d8f-e27be599ecf1" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="8a04b82f-b9f9-eeeb-23e3-9bc8a58bc954" executionId="c98ced54-3b77-4654-842d-b3208f330359" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="08e02e69-ba60-3e1e-16db-c38a846b48a9" executionId="ac9a2ac7-4b0d-4ef0-8ec1-7a3128602c1c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="638a5bbe-d4e4-2a60-6daa-1aea89f5b967" executionId="f1b436a9-f02c-478e-ab92-83e7721a05d6" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="3a950d59-8a7e-c39c-d754-e27050784121" executionId="74db52be-a564-4fa7-a462-49084fad4615" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a17dc3f3-1d40-7a21-3906-9309d3baae42" executionId="92957243-086a-4a73-884d-829e87d7920b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b9833e38-4bc2-62d7-8101-5a80937a4a9e" executionId="c35013bc-eb99-4f66-87fb-e522d34f35ab" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="bb926909-3803-179f-a3c3-e533b6d24552" executionId="2a0a6ddf-ba82-452c-a89c-e7aacf403367" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="675566a8-2d57-432c-449a-fa619f2d5189" executionId="942fbb32-591f-4dbe-a925-c196d06dbd93" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c29e009d-ee3b-cecb-4a81-e6406d80306b" executionId="84ebab38-876d-4ab5-942b-80ea92e2b0a6" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="46ac34bf-0218-b9e4-6100-1fb024b34179" executionId="8586e498-9fe6-42fa-ae43-3e00116d9bc5" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="8d9a0d59-f1bd-3ddb-bd51-6430936ad085" executionId="5812d43f-83bb-4fe8-8729-2fe23f07be3b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="12596005-dee9-d8c0-9b31-1739809d8a64" executionId="93339b18-051e-4015-9690-b449521ca986" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="fc1ed300-53fc-cc3a-f422-7a705441c34c" executionId="e5a68371-8f02-407f-9fce-744088601c77" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="0fa5a670-c9d9-3c43-2b52-f7064333e54b" executionId="14f0861c-c094-4439-8fc2-f490761ff3a5" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="831a06ea-79b4-3559-e0f1-ae66f39e31a9" executionId="c5f1679b-217b-4460-86ae-ed6600db7284" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b817ea00-9e1d-7929-08ec-e8cc04a579e6" executionId="49915ffb-0ae7-4d34-94e5-75c0ac316777" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="aa4a7191-d8f3-4889-5f79-2d4522f1adeb" executionId="9698de4b-2b13-4655-8e63-c5d90d13ba29" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="65c5e5a2-7c9b-96ea-1337-3b84d7c3c1b8" executionId="8aadc638-e43f-43a1-bfd4-e4b4c1bb96b7" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="d5ea9c68-4461-22fa-6efd-428ed103d8e3" executionId="bd2dbb33-3363-49e2-987a-ba85a973f86a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="7dceeef8-e6f2-0457-3591-83f18760ffba" executionId="07c2bac9-8eb8-47ec-83d8-fa0df90d91b2" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="d82e0bd6-3674-9853-941d-237316ad9acf" executionId="60ae7e49-2068-421d-abec-0158e6f0ef51" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e5c7848e-0fad-e3aa-6f18-f5976d6aff80" executionId="b7a6c4d2-f931-4d7e-91d9-ec366e560ba7" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="98296d0d-1a5c-cee7-bb17-6c77e8730d53" executionId="0a960cac-2f89-49fd-b6ec-bac050168e68" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="bf4bfa9d-76ba-6763-b1ff-ed1b9d0d7ebf" executionId="0ba5772c-7fac-43b3-b11a-22816f11ce2f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="16158a2f-b09a-b5e9-4c21-3501f643941c" executionId="e566b1c5-bcb1-4454-a161-99a3a0025b20" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="97dd48d6-8a20-6b0e-d726-54368bb1676f" executionId="b7b7b1cf-236c-4361-af5e-bee428e273fe" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="571bca49-df9d-ffbd-8009-9587763a12e1" executionId="736326f2-3e7b-41e3-a5b7-02c9155c44b4" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="02e02ebe-1219-f7d6-b036-65cecf53f7d3" executionId="dc2af0a1-736c-48ea-b9b1-49cfcc24a72f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e3f9d027-a7dd-ecee-f3e2-11c15f6ae24d" executionId="3a24d614-4af9-48c4-bd5e-9595c9c28331" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="5290a0d3-5ad2-a4e8-07b6-398a90ee0f11" executionId="34948204-46bb-4be7-89b2-ab26fc14bcb8" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="667c3a1f-45e6-7593-1518-0b6efea593e6" executionId="f0da5f47-4c45-47b5-9354-b00efcaf8cdb" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a71842f1-47ca-b24c-fb57-55a9685f10ee" executionId="75d0c76a-6268-4958-94ef-5f7aa928df9d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="6b409ab5-fdbd-a60d-0852-28287e6ab280" executionId="4036d4df-e41f-445f-9bbe-1df66b0fb68c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="3e9f8bcb-89ef-6255-e9dd-bfde9c1b8b16" executionId="7fcc6618-5372-485d-926c-c3ba3ff02c2d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="7908dd1d-e896-adb3-82ab-8eea18983b42" executionId="da133f81-bc39-492a-9375-a87939242546" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="d92532d1-a86d-f303-9cfe-22146d07e82e" executionId="580eba69-18eb-41bf-8ae3-c036a6fa0e51" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="412277e5-bb66-8517-e309-16ccb3018dde" executionId="6245826c-0bff-4ed6-9614-a7ba355f4b9f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1aa5699c-040a-5c08-bb21-130e3446c343" executionId="95cd2fe5-4625-41bd-bdd1-67f2134d64b1" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="02aa4238-c032-1429-75d8-6aae264cdda0" executionId="e0efd22d-b66b-4c15-b9a4-86dfc3290762" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="5c69ccc2-1229-d978-2f69-d88ebc91a5b7" executionId="a6d8cfcd-2f74-4c36-b14e-b4579f80b2f6" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="70acf9a6-5cff-338e-b13c-ff2b027b819c" executionId="f8d10db2-7662-4d26-a736-613f0967a674" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="057f8622-5753-d180-54ea-e3a6d6e87325" executionId="298a6a4b-eefa-49dd-bced-1715407aeb14" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="4f584c4c-21da-d441-8d12-47e19ae0056f" executionId="bd64c23f-6985-49d2-98e2-c239792860c6" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="7f21d31d-f03d-3871-8dbc-038e965bc2f2" executionId="243e4195-4132-4774-a379-009e6c0a0947" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="439a233d-b2f0-222e-9ee7-ca58c650d151" executionId="eb66eff2-b298-4ddf-aa7a-ee8a645fe4f4" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="028d7a14-bbfe-7b25-b378-1083bdd3a156" executionId="9ca10afd-31d2-4a18-bc2e-aed4ae861f15" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ae528a16-0f51-bc3d-3fcc-733703d53d69" executionId="42e8bb21-7168-4d1b-955b-375ff5e18e36" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a122ee52-e8a5-ab40-227e-9a05f829d847" executionId="26f2e8b2-41e7-46cb-96f0-c209fd4f4ade" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="37faf0e7-bcbc-c982-f4a1-cfbd8b405deb" executionId="a2672255-eaab-43c3-a308-12e95706d5d2" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="0d8f0c63-8d35-cd09-b4cb-794b7318a752" executionId="3daa371a-2ca0-4ad5-9e58-db4f37756cf2" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="040314a3-abcd-e570-0687-5ea64ae86b4e" executionId="b0a65eba-f87d-4cfd-80a8-5a031038dbb3" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="aa00f8e5-baf8-761f-3674-96fd8fb9452d" executionId="d5da0be0-65d9-4ef7-bfaa-c8148b1fe4c2" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="d552d7c2-c5f7-0c7d-2bd8-f29a1e3620e8" executionId="3e8ecd1d-d5e8-4ae2-aa57-99e428f2acff" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c4c371fc-50b0-85a4-a515-e3b43f95f756" executionId="784815a3-5949-4056-81f0-d4c1f1e912d2" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="60f8ba61-7e08-4486-86a5-ee5bbba1b2d7" executionId="15daaff7-164a-4f97-9c3a-dc595afee919" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="5ffa30db-2a1f-394a-bb5b-87a104b6ca5a" executionId="3085861e-8096-4648-963a-5829860b41c6" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="799b3e75-31c5-b9b4-7955-8f73919166a6" executionId="c3cdb990-f9c3-4398-a992-ff79482f6de5" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ebbc13c1-a74a-cbc3-3928-1276b1f25c7a" executionId="a05d7dc4-79f0-4b2a-997e-bdb8ec02356b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="85bf94a0-8bb0-05aa-0d41-e6b8baa514ff" executionId="51592bfa-1c12-4463-b333-69ce458f3971" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c494541e-88f1-f931-e7af-050b7fc7cfb0" executionId="4f4b964b-0e65-47b6-95ed-273c54e85c2a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="d8b77c05-37cd-4336-eacc-281c92f6c5d3" executionId="c09b27ac-7630-4f63-9cc8-0c85d481975b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="8ee00b6f-bd69-7a43-9d0d-e2156cf105c2" executionId="2eb3fa4f-486b-49c4-9d18-db5724de8f1a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="0dae696b-37ed-5794-ea7c-5fcadb65e56e" executionId="71bd0432-c383-4951-80c7-aae03c5a5840" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="6f68acad-a8e8-9af8-1c3f-1b07f325c66b" executionId="ad81035b-45dc-48f5-82b0-2c50ea876863" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="64f4d202-8180-5677-d37d-8337077dc640" executionId="ad6dede4-0548-4ec5-abe3-f8bd1792f0f3" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="bb819fa0-7edf-fa27-8d2b-70224d7b43f0" executionId="ba23fe78-29b0-4b09-9aae-ac245d2da050" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c27997eb-04b5-c7b8-6c34-7a0ba83b28d6" executionId="19e201cf-51e5-4044-bc9d-bf808154218f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="125" executed="125" passed="125" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>NUnit Adapter 4.6.0.0: Test execution started&#xD;
+Running selected tests in C:\cameo-wt\sol-land-b3-park\engine\bin\OpenRA.Mods.Cameo.Test.dll&#xD;
+   NUnit3TestExecutor discovered 125 of 125 NUnit test cases using Current Discovery mode, Non-Explicit run&#xD;
+NUnit Adapter 4.6.0.0: Test execution complete&#xD;
+</StdOut>
+    </Output>
+  </ResultSummary>
+</TestRun>
