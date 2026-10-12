@@ -23,6 +23,7 @@ from __future__ import annotations
 
 import argparse
 import collections
+import hashlib
 import json
 import pathlib
 import sys
@@ -100,6 +101,198 @@ def validate_and_tag(receipt: dict) -> dict:
     receipt["_valid"] = True
     receipt["_invalid_reason"] = None
     return receipt
+
+
+# ---------------------------------------------------------------------------
+# Optional read-only replay_health sidecar join. Receipts and the receipt schema are
+# untouched: per-game health reports (tools/ai/replay_health.py output, one per seat) are
+# joined by game_uid. A game counts only if every seat is OBSERVED_HEALTHY.
+# ---------------------------------------------------------------------------
+
+HEALTH_POLICY = "startup-economy-v1"
+HEALTHY = "OBSERVED_HEALTHY"
+MARKER_REASON = "INCOMPLETE_UNKNOWN"  # host-restart marker: provisional detection, see is_marker()
+HEALTH_NOT_SUPPLIED_WARNING = (
+    "WARNING: no --health-dir supplied; replay_health is NOT applied, so games with a BLOCK/UNKNOWN/missing "
+    "startup-economy verdict are still pooled. Do not use this readout as campaign evidence."
+)
+
+
+def load_health(paths: list[pathlib.Path]) -> dict[str, Any]:
+    """Collect replay_health reports under the given files/directories: {"games": {game_uid: {player: [report]}},
+    "errors": [...]}. Receipts and unrelated JSON are ignored; an unparseable file is an error row, never a
+    silent skip (the game it belonged to will simply have no healthy report and stay out of the pool)."""
+    games: dict[str, dict[str, list[dict]]] = {}
+    errors: list[dict] = []
+    for raw in paths:
+        p = pathlib.Path(raw)
+        files = [p] if p.is_file() else sorted(p.rglob("*.json"))
+        for f in files:
+            try:
+                data = json.loads(f.read_text(encoding="utf-8"))
+            except (OSError, UnicodeDecodeError, json.JSONDecodeError) as e:
+                errors.append({"path": str(f), "reason": f"{type(e).__name__}: {e}"})
+                continue
+            if not isinstance(data, dict) or "resolved_seats" in data or "pair_id" in data:
+                continue
+            if not isinstance(data.get("game_uid"), str) or ("policy" not in data and "findings" not in data):
+                continue
+            player = data.get("player")
+            games.setdefault(data["game_uid"], {}).setdefault(player if isinstance(player, str) else "", []).append(data)
+    return {"games": games, "errors": errors}
+
+
+def expected_health_players(receipt: dict) -> tuple[set[str] | None, str, str]:
+    """Bridge receipt seats to the report namespace (matches JSONL seat_N) by (home cell, faction, bot_type).
+    Returns (players, status, detail): status OK, UNAVAILABLE (no usable bridge: caller falls back to a seat COUNT
+    and marks the game identity-unverified) or SCHEMA_MISMATCH (bridge present but wrong/ambiguous)."""
+    art = (receipt.get("artifacts") or {}).get("matches_jsonl") or {}
+    path = art.get("path")
+    seats = receipt.get("seats")
+    if not isinstance(path, str) or not path or not isinstance(seats, list) or not seats             or any(not isinstance(x, dict) or not x.get("home_location") for x in seats):
+        return None, "UNAVAILABLE", "receipt has no matches_jsonl path or seats[].home_location"
+    try:
+        raw = pathlib.Path(path).read_bytes()
+    except OSError as e:
+        return None, "UNAVAILABLE", f"matches_jsonl unreadable: {type(e).__name__}"
+    expected_sha = art.get("sha256")
+    if isinstance(expected_sha, str) and hashlib.sha256(raw).hexdigest() != expected_sha:
+        return None, "SCHEMA_MISMATCH", "matches_jsonl sha256 differs from the receipt artifact record"
+    rows = []
+    for line in raw.decode("utf-8", errors="replace").splitlines():
+        try:
+            row = json.loads(line)
+        except json.JSONDecodeError:
+            continue
+        if isinstance(row, dict) and row.get("game_uid") == receipt.get("game_uid") and isinstance(row.get("player"), dict):
+            rows.append(row["player"])
+    players: set[str] = set()
+    for x in seats:
+        hits = [r for r in rows if r.get("home") == x["home_location"] and r.get("faction") == x.get("faction")
+                and r.get("bot_type") == x.get("bot_type") and isinstance(r.get("seat"), str)]
+        if len(hits) != 1:
+            return None, "SCHEMA_MISMATCH", f"{len(hits)} matches rows for receipt seat at {x['home_location']}"
+        players.add(hits[0]["seat"])
+    if len(players) != len(seats):
+        return None, "SCHEMA_MISMATCH", "two receipt seats bridge to the same matches seat"
+    return players, "OK", ""
+
+
+def health_verdict(by_player: dict[str, list[dict]] | None, expected_seats: int,
+                   expected_players: set[str] | None = None) -> tuple[str, str]:
+    """HEALTHY | BLOCK | UNKNOWN | MISSING | SCHEMA_MISMATCH for one game. BLOCK dominates; anything that is not
+    every expected seat OBSERVED_HEALTHY is not poolable. With expected_players the coverage check is by NAME
+    (missing seat -> MISSING, foreign seat -> SCHEMA_MISMATCH); without it, only the seat COUNT is checked."""
+    if not by_player:
+        return "MISSING", "no replay_health report for this game_uid"
+    reports = [rep for reps in by_player.values() for rep in reps]
+    statuses = {rep.get("status") for rep in reports}
+    if "BLOCK" in statuses:
+        return "BLOCK", "replay_health BLOCK on at least one seat"
+    bad = [rep for rep in reports if rep.get("policy") != HEALTH_POLICY or not isinstance(rep.get("status"), str)
+           or not isinstance(rep.get("player"), str) or not rep.get("player")]
+    if bad:
+        return "SCHEMA_MISMATCH", f"{len(bad)} report(s) with policy != {HEALTH_POLICY} or missing status/player"
+    conflicting = [p for p, reps in by_player.items() if len({rep["status"] for rep in reps}) > 1]
+    if conflicting:
+        return "SCHEMA_MISMATCH", f"conflicting duplicate reports for seat(s) {sorted(conflicting)}"
+    if expected_players is not None:
+        missing = sorted(expected_players - set(by_player))
+        extra = sorted(set(by_player) - expected_players)
+        if missing:
+            return "MISSING", f"no report for seat(s) {missing}"
+        if extra:
+            return "SCHEMA_MISMATCH", f"report(s) for seat(s) not in this game: {extra}"
+    elif len(by_player) != expected_seats or expected_seats <= 0:
+        return ("MISSING" if len(by_player) < expected_seats else "SCHEMA_MISMATCH"),             f"{len(by_player)} seat report(s) for {expected_seats} receipt seat(s)"
+    if statuses != {HEALTHY}:
+        return "UNKNOWN", f"statuses {sorted(statuses)}"
+    return "HEALTHY", ""
+
+
+def is_marker(receipt: dict) -> bool:
+    """Host-restart INCOMPLETE_UNKNOWN marker. Detection is provisional (end_reason/status equals the marker
+    token) until the producer's on-disk shape is confirmed; either way an INCOMPLETE receipt is never pooled."""
+    return receipt.get("end_reason") == MARKER_REASON or receipt.get("status") == MARKER_REASON
+
+
+def apply_health_gate(receipts: list[dict], health: dict[str, Any]) -> tuple[list[dict], dict[str, Any]]:
+    report: dict[str, Any] = {
+        "mode": "APPLIED", "policy": HEALTH_POLICY, "load_errors": health.get("errors", []),
+        "verdict_counts": collections.Counter(), "excluded_by_setup": {}, "excluded_games": [],
+        "marker_reruns_replaced": [], "marker_reruns_rejected": [], "identity_unverified_games": [],
+    }
+    games = health.get("games", {})
+
+    def exclude(r: dict, verdict: str, detail: str) -> None:
+        setup = r.get("setup_id")
+        report["excluded_by_setup"].setdefault(setup, collections.Counter())[verdict] += 1
+        report["excluded_games"].append({"cell_id": r.get("cell_id"), "game_uid": r.get("game_uid"), "setup_id": setup,
+                                         "pair_id": r.get("pair_id"), "pair_member": r.get("pair_member"),
+                                         "verdict": verdict, "detail": detail,
+                                         "original_end_class": r.get("end_class"), "original_end_reason": r.get("end_reason")})
+
+    for r in receipts:
+        if not r.get("_valid") or r.get("_synthetic"):
+            continue
+        if is_marker(r):
+            r["_health_excluded"] = True
+            r["_health_verdict"] = "MARKER"
+            report["verdict_counts"]["MARKER"] += 1
+            exclude(r, "MARKER", "INCOMPLETE_UNKNOWN host-restart marker: never pooled")
+            continue
+        uid = r.get("game_uid")
+        expected, bridge, bridge_detail = expected_health_players(r)
+        if bridge == "SCHEMA_MISMATCH":
+            verdict, detail = bridge, bridge_detail
+        else:
+            verdict, detail = health_verdict(games.get(uid) if isinstance(uid, str) else None,
+                                             len(r.get("resolved_seats") or []), expected)
+        r["_health_verdict"] = verdict
+        report["verdict_counts"][verdict] += 1
+        if verdict == "HEALTHY":
+            if bridge == "UNAVAILABLE":
+                report["identity_unverified_games"].append({"cell_id": r.get("cell_id"), "game_uid": uid, "reason": bridge_detail})
+            continue
+        exclude(r, verdict, detail)
+        if verdict == "BLOCK":
+            r["_valid"] = False
+            r["_invalid_reason"] = f"replay_health BLOCK: {detail}"
+            continue
+        r["_health_excluded"] = True
+        r["_original_end_class"] = r.get("end_class")
+        r["_original_end_reason"] = r.get("end_reason")
+        r["end_class"] = INCOMPLETE
+        r["end_reason"] = f"HEALTH_{verdict}"
+        r["winner_team"] = None
+
+    # A re-run receipt replaces its host-restart marker only if it is NATURAL and healthy; otherwise the
+    # marker stands (pair stays INCOMPLETE) and the re-run is reported, not pooled.
+    slots: dict[tuple, list[dict]] = collections.defaultdict(list)
+    for r in receipts:
+        if r.get("_synthetic") or "_load_error" in r:
+            continue
+        slots[(r.get("switch"), r.get("setup_id"), r.get("pair_id"), r.get("pair_member"))].append(r)
+    drop: set[int] = set()
+    for key, group in slots.items():
+        markers = [r for r in group if is_marker(r)]
+        reruns = [r for r in group if not is_marker(r)]
+        if not markers or not reruns:
+            continue
+        ok = (len(reruns) == 1 and reruns[0].get("_valid") and not reruns[0].get("_health_excluded")
+              and reruns[0].get("end_class") == NATURAL)
+        if ok:
+            drop.update(id(m) for m in markers)
+            report["marker_reruns_replaced"].append({"slot": list(key), "rerun_cell_id": reruns[0].get("cell_id")})
+        else:
+            drop.update(id(x) for x in reruns)
+            report["marker_reruns_rejected"].append({"slot": list(key), "reruns": [
+                {"cell_id": x.get("cell_id"), "end_class": x.get("_original_end_class", x.get("end_class")),
+                 "health": x.get("_health_verdict")} for x in reruns]})
+    kept = [r for r in receipts if id(r) not in drop]
+    report["verdict_counts"] = dict(report["verdict_counts"])
+    report["excluded_by_setup"] = {k: dict(v) for k, v in report["excluded_by_setup"].items()}
+    return kept, report
 
 
 # ---------------------------------------------------------------------------
@@ -245,7 +438,7 @@ def income_army_metrics(receipts: list[dict]) -> dict[str, dict[str, float | Non
     totals = {arm: {"earned": 0.0, "spent": 0.0, "banked": 0.0, "army_value": 0.0, "kills": 0, "deaths": 0,
                      "seats_with_metrics": 0, "seats_missing_metrics": 0} for arm in ("control", "treatment")}
     for r in receipts:
-        if not r.get("_valid") or r.get("_synthetic"):
+        if not r.get("_valid") or r.get("_synthetic") or r.get("_health_excluded"):
             continue
         by_arm = seat_metrics_by_arm(r)
         for arm, seats in by_arm.items():
@@ -283,7 +476,7 @@ def team_metrics(receipts: list[dict]) -> dict[str, Any]:
     """
     team_totals: dict[str, dict[str, Any]] = {}
     for r in receipts:
-        if not r.get("_valid") or r.get("_synthetic"):
+        if not r.get("_valid") or r.get("_synthetic") or r.get("_health_excluded"):
             continue
         setup = r.get("setup_id")
         by_arm_seats: dict[str, list[dict]] = {"control": [], "treatment": []}
@@ -327,8 +520,11 @@ def team_metrics(receipts: list[dict]) -> dict[str, Any]:
 # Per-setup / overall summary + sequential ACCEPT/REJECT/PARK
 # ---------------------------------------------------------------------------
 
-def summarize(receipts: list[dict], manifest: dict | None) -> dict[str, Any]:
+def summarize(receipts: list[dict], manifest: dict | None, health: dict[str, Any] | None = None) -> dict[str, Any]:
     receipts = [validate_and_tag(dict(r)) for r in receipts]
+    health_report: dict[str, Any] = {"mode": "NOT_APPLIED", "warning": HEALTH_NOT_SUPPLIED_WARNING}
+    if health is not None:
+        receipts, health_report = apply_health_gate(receipts, health)
     switches = sorted({r.get("switch") for r in receipts if r.get("_valid")})
     require(len(switches) <= 1, f"analyzer input mixes switches: {switches}; run one switch at a time")
     switch = switches[0] if switches else None
@@ -474,6 +670,7 @@ def summarize(receipts: list[dict], manifest: dict | None) -> dict[str, Any]:
             "earned_spent_delta": earned_spent_delta, "army_efficiency_delta": army_efficiency_delta,
             "kill_exchange_delta": kill_exchange_delta,
         },
+        "health": health_report,
         "invalid_receipt_count": len(invalid_rows),
         "invalid_receipts": [{"path": r.get("_path"), "reason": r.get("_invalid_reason")} for r in invalid_rows],
         "telemetry_gaps": [
@@ -495,7 +692,10 @@ def summarize(receipts: list[dict], manifest: dict | None) -> dict[str, Any]:
 def analyze_cmd(args: argparse.Namespace) -> int:
     receipts = load_receipts(args.receipts)
     manifest = json.loads(args.manifest.read_text(encoding="utf-8")) if args.manifest else None
-    result = summarize(receipts, manifest)
+    health = load_health(args.health_dir) if args.health_dir else None
+    if health is None:
+        print(HEALTH_NOT_SUPPLIED_WARNING, file=sys.stderr)
+    result = summarize(receipts, manifest, health)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, default=str) + "\n", encoding="utf-8")
     print(json.dumps({
@@ -511,6 +711,8 @@ def main(argv=None):
     a = sub.add_parser("analyze", help="read immutable campaign receipts and produce the SPEC_2026-10-11 readout")
     a.add_argument("--receipts", nargs="+", type=pathlib.Path, required=True, help="receipt files or directories")
     a.add_argument("--manifest", type=pathlib.Path, help="frozen campaign manifest, for missing-receipt detection only")
+    a.add_argument("--health-dir", nargs="+", type=pathlib.Path,
+                   help="replay_health sidecar files/directories; when given, a game counts only if every seat is OBSERVED_HEALTHY")
     a.add_argument("--output", type=pathlib.Path, required=True)
     a.set_defaults(fn=analyze_cmd)
     args = p.parse_args(argv)

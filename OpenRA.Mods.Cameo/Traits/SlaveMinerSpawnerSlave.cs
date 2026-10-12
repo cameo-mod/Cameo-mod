@@ -52,6 +52,36 @@ namespace OpenRA.Mods.Cameo.Traits
 		CPos harvestedField;
 		IDockHost masterDock;
 		DockClientManager dockClient;
+		bool freed;
+
+		// Called by the master on a bounded cadence. A free-will slave whose activity queue
+		// emptied (a manual order that finished, a cancelled dock trip, ...) would otherwise
+		// stand still forever; put it back to work without touching slaves that are busy.
+		public void RescueIdle(Actor self, Actor master)
+		{
+			var harvester = self.TraitOrDefault<Harvester>();
+			var action = SlaveIdleRescue.Decide(
+				self.IsIdle, self.IsInWorld, self.IsDead, self.Owner == master.Owner,
+				freed, harvester != null && !harvester.IsTraitDisabled, harvester != null && harvester.IsFull);
+
+			switch (action)
+			{
+				case SlaveIdleRescueAction.Harvest:
+					self.QueueActivity(new FindAndDeliverResources(self));
+					break;
+
+				case SlaveIdleRescueAction.DeliverThenHarvest:
+					if (!DeliverToMaster(self))
+					{
+						// FindAndDeliverResources waits whenever ReservedHost is set, so drop a stale
+						// reservation and let it queue its own MoveToDock.
+						dockClient.UnreserveHost();
+						self.QueueActivity(new FindAndDeliverResources(self));
+					}
+
+					break;
+			}
+		}
 
 		public bool IsMoving(CPos gatherlocation)
 		{
@@ -108,15 +138,28 @@ namespace OpenRA.Mods.Cameo.Traits
 		{
 			if (masterActor == null)
 			{
-				masterDock = null;
+				SetMasterDock(null);
 				return;
 			}
 			var dock = dockClient.AvailableDockHosts(masterActor, default, true).ClosestDock(self, dockClient);
-			if (dock.HasValue)
-			{
-				masterDock = dock.Value.Trait;
-				dockClient.ReserveHost(masterActor, masterDock);
-			}
+			// Cache the preferred dock, but don't reserve it until MoveToDock starts.
+			// FindAndDeliverResources treats any existing reservation as an active
+			// delivery and waits instead of creating a MoveToDock activity.
+			SetMasterDock(dock.HasValue ? dock.Value.Trait : null);
+		}
+
+		void SetMasterDock(IDockHost dock)
+		{
+			if (masterDock != dock && dockClient.ReservedHost == masterDock)
+				dockClient.UnreserveHost();
+
+			masterDock = dock;
+		}
+
+		void ClearMasterBinding()
+		{
+			masterActor = null;
+			SetMasterDock(null);
 		}
 
 		public void UpdateOnTransform(Actor self)
@@ -170,12 +213,24 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		bool DeliverToMaster(Actor self)
 		{
-			if (masterActor != null && masterDock != null)
+			if (masterActor == null || masterDock == null)
+				return false;
+
+			if (SlaveIdleRescue.ShouldAppendDeliveryPair(true, HasQueuedHarvest(self)))
 			{
 				self.QueueActivity(new MoveToDock(self, masterActor, masterDock, true));
 				self.QueueActivity(new FindAndDeliverResources(self));
-				return true;
 			}
+
+			return true;
+		}
+
+		static bool HasQueuedHarvest(Actor self)
+		{
+			for (var a = self.CurrentActivity?.NextActivity; a != null; a = a.NextActivity)
+				if (a is FindAndDeliverResources)
+					return true;
+
 			return false;
 		}
 
@@ -193,17 +248,23 @@ namespace OpenRA.Mods.Cameo.Traits
 					self.Kill(killer, Info.DamageTypes);
 					break;
 				case SpawnerSlaveDisposal.GiveSlavesToAttacker:
-					masterActor = null;
+					ClearMasterBinding();
+					dockClient.UnreserveHost();
 					self.CancelActivity();
 					self.ChangeOwner(killer.Owner);
 					if (!string.IsNullOrEmpty(Info.FreedCondition) && Info.FreeingRelationships.HasRelationship(killer.Owner.RelationshipWith(self.Owner)))
 					{
+						freed = true;
 						self.GrantCondition(Info.FreedCondition);
 						Game.Sound.Play(SoundType.World, Info.FreedSound, self.CenterPosition);
 					}
+					self.QueueActivity(new FindAndDeliverResources(self));
 					break;
 				case SpawnerSlaveDisposal.DoNothing:
-					masterActor = null;
+					ClearMasterBinding();
+					dockClient.UnreserveHost();
+					self.CancelActivity();
+					self.QueueActivity(new FindAndDeliverResources(self));
 					break;
 				default:
 					break;
@@ -222,7 +283,10 @@ namespace OpenRA.Mods.Cameo.Traits
 					UpdateOnTransform(self);
 					break;
 				case SpawnerSlaveDisposal.DoNothing:
-					masterActor = null;
+					ClearMasterBinding();
+					dockClient.UnreserveHost();
+					self.CancelActivity();
+					self.QueueActivity(new FindAndDeliverResources(self));
 					break;
 				default:
 					break;
@@ -231,9 +295,25 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		public override void OnOwnerChanged(Actor self, OpenRA.Player oldOwner, OpenRA.Player newOwner)
 		{
-			if (Master == null || !Master.IsDead)
+			if (Master == null)
 			{
-				masterActor = null;
+				ClearMasterBinding();
+				dockClient.UnreserveHost();
+				return;
+			}
+
+			if (!Master.IsDead)
+			{
+				// When the refinery changes hands, the spawned slaves change owner too.
+				// Keep the binding when they now belong to their still-live master.
+				if (Master.Owner != newOwner)
+				{
+					ClearMasterBinding();
+					dockClient.UnreserveHost();
+					self.CancelActivity();
+					self.QueueActivity(new FindAndDeliverResources(self));
+				}
+
 				return;
 			}
 
@@ -245,7 +325,8 @@ namespace OpenRA.Mods.Cameo.Traits
 
 			if (Info.AllowOwnerChange)
 			{
-				masterActor = null;
+				ClearMasterBinding();
+				dockClient.UnreserveHost();
 				return;
 			}
 
