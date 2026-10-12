@@ -5563,3 +5563,7 @@ Next: exact-SHA VP review; cost/coverage/adoption remain gated. No launches. Ins
 ### Sol — M13 helper R1 correction, 2026-10-10
 - C:/cameo-wt/sol-m13-liveness, codex/m13-liveness: Unsupported survives failed-intent callbacks; focused30/30.
 - Next: exact-tip helper re-review, then explicitly grounded claim/dispatch integration. Helpers remain unwired; no launches.
+
+## 2026-10-12 - NAXIS refinery slave idle fix (under review)
+
+Worktree `bug-naxis-slave-idle`, branch `codex/01a12ecb-naxis-slave-idle`, based on `origin/master` at `a5ab375ba`. Root cause: the slave reserved the refinery dock before `MoveToDock` began; `FindAndDeliverResources` treated the reservation as an active delivery and waited. The patch defers reservation, preserves a captured live-refinery binding, and restarts harvesting after master disposal. Three focused source-contract tests pass. No game launched during the active A/B reservation. Next: exact-SHA review, coordinator landing after approval, then maintainer playtest.
