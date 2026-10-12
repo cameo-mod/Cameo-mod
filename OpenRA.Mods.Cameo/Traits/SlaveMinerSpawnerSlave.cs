@@ -52,6 +52,36 @@ namespace OpenRA.Mods.Cameo.Traits
 		CPos harvestedField;
 		IDockHost masterDock;
 		DockClientManager dockClient;
+		bool freed;
+
+		// Called by the master on a bounded cadence. A free-will slave whose activity queue
+		// emptied (a manual order that finished, a cancelled dock trip, ...) would otherwise
+		// stand still forever; put it back to work without touching slaves that are busy.
+		public void RescueIdle(Actor self, Actor master)
+		{
+			var harvester = self.TraitOrDefault<Harvester>();
+			var action = SlaveIdleRescue.Decide(
+				self.IsIdle, self.IsInWorld, self.IsDead, self.Owner == master.Owner,
+				freed, harvester != null && !harvester.IsTraitDisabled, harvester != null && harvester.IsFull);
+
+			switch (action)
+			{
+				case SlaveIdleRescueAction.Harvest:
+					self.QueueActivity(new FindAndDeliverResources(self));
+					break;
+
+				case SlaveIdleRescueAction.DeliverThenHarvest:
+					if (!DeliverToMaster(self))
+					{
+						// FindAndDeliverResources waits whenever ReservedHost is set, so drop a stale
+						// reservation and let it queue its own MoveToDock.
+						dockClient.UnreserveHost();
+						self.QueueActivity(new FindAndDeliverResources(self));
+					}
+
+					break;
+			}
+		}
 
 		public bool IsMoving(CPos gatherlocation)
 		{
@@ -183,12 +213,24 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		bool DeliverToMaster(Actor self)
 		{
-			if (masterActor != null && masterDock != null)
+			if (masterActor == null || masterDock == null)
+				return false;
+
+			if (SlaveIdleRescue.ShouldAppendDeliveryPair(true, HasQueuedHarvest(self)))
 			{
 				self.QueueActivity(new MoveToDock(self, masterActor, masterDock, true));
 				self.QueueActivity(new FindAndDeliverResources(self));
-				return true;
 			}
+
+			return true;
+		}
+
+		static bool HasQueuedHarvest(Actor self)
+		{
+			for (var a = self.CurrentActivity?.NextActivity; a != null; a = a.NextActivity)
+				if (a is FindAndDeliverResources)
+					return true;
+
 			return false;
 		}
 
@@ -212,6 +254,7 @@ namespace OpenRA.Mods.Cameo.Traits
 					self.ChangeOwner(killer.Owner);
 					if (!string.IsNullOrEmpty(Info.FreedCondition) && Info.FreeingRelationships.HasRelationship(killer.Owner.RelationshipWith(self.Owner)))
 					{
+						freed = true;
 						self.GrantCondition(Info.FreedCondition);
 						Game.Sound.Play(SoundType.World, Info.FreedSound, self.CenterPosition);
 					}
