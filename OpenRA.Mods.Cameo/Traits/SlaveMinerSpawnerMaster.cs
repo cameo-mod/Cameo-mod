@@ -70,6 +70,7 @@ namespace OpenRA.Mods.Cameo.Traits
 		WPos preLoc;
 
 		int remainingIdleCheckTick;
+		int idleRescueCountdown;
 		bool isAircraft;
 		bool hasSpawnInitialLoad;
 
@@ -88,6 +89,7 @@ namespace OpenRA.Mods.Cameo.Traits
 			base.Created(self);
 
 			remainingIdleCheckTick = Info.IdleCheckTick;
+			idleRescueCountdown = SlaveIdleRescue.Cadence(Info.IdleCheckTick);
 
 			for (var i = 0; i < Info.GatherCell.Length; i++)
 				slaveEntries[i].GatherOffsetCell = Info.GatherCell[i];
@@ -173,7 +175,14 @@ namespace OpenRA.Mods.Cameo.Traits
 					spawnReplaceTicks--;
 			}
 
-			if (!Info.SlavesHaveFreeWill)
+			if (Info.SlavesHaveFreeWill)
+			{
+				if (!transforming && SlaveIdleRescue.Due(ref idleRescueCountdown, Info.IdleCheckTick))
+					foreach (var se in slaveEntries)
+						if (se.IsValid && se.Actor.IsInWorld)
+							se.SpawnerSlave.RescueIdle(se.Actor, self);
+			}
+			else
 				AssignSlaveActivity(self);
 
 			if (followTick > 0)
