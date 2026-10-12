@@ -1,3 +1,49 @@
+# 2026-10-12 — Devin: BZ_production_scaling — income-driven production buildings + extra MCVs (branch `devin/prod-scaling`)
+
+*Devin-Developer*, task PRODUCTION-SCALING + MULTI-MCV (maintainer/lead: build more production
+buildings and extra MCVs when income supports it; design receipt
+`Cameo-mod-fleet/DESIGN_2026-10-12_production_scaling_devin.md`, audit
+`AUDIT_2026-10-12_production_scaling_multi_mcv_devin.md`). Base `ebea34c82` (post merge-wave), engine `4f69df`.
+Everything behind `UseProductionScaling`, default OFF; off = bit-identical.
+
+- **Pure seam** `BotModuleLogic/ProductionScalingCA.cs` (integer math, no RNG, every gate fails
+  closed on a non-positive bar): `CashHeld` (banked-cash persistence window), `AllBusy` (every
+  derived unit-production queue holds work — a parallel queue with no free slot counts busy),
+  `SpareIncomeMet` (net income per producer over the line, integer-exact product), `IncomeMet`
+  and `McvAllowance` (the extra-MCV arm).
+- **Building side** (`BaseBuilderBotModuleCA` + `BaseBuilderQueueManagerCA`): new default-off
+  Info fields (`UseProductionScaling`, `ProductionScalingCash/Persist/Spare` Easy↔Hard pairs,
+  difficulty-line via `BotDifficultyLadder.Scale` — never fit to these matches, WBL §108).
+  `ProductionQueueTypes` derives the bot's unit-production queue types from `ProductionTypes`
+  through the ruleset (`ProductionQueueInfo.Type`, ordinal-sorted — no hardcoded actor names).
+  `UpdateProductionScaling` ticks a banked-cash persistence counter; `SampleExpansionIncome`
+  now windows `PlayerResources.Spent` alongside `Earned` so `ScalingNetIncomePerTick` is measured
+  surplus, not guessed. `ChooseProductionScalingItem` (between the expansion-demand pick and the
+  cash-threshold override) admits when CashHeld∧AllBusy OR SpareIncomeMet, then picks the
+  least-provisioned queue type's production building — same `ProductionTypeLimit`, buildability,
+  `PickOrPower` and pause votes as the existing override; `a => 0` pick = deterministic, no RNG.
+- **MCV side** (`ExpansionPlannerBotModule`): `RequestMcv` raises `targetCount` by
+  `ScalingMcvMaxExtra` while `McvAllowance` admits (windowed `CurrentIncomePerTick` ≥ line,
+  a far field free, `ArmyParityAdmits` on the fog-honest situation ratio — missing snapshot
+  admits, same as CRAWL-SAFETY). `McvDue` still requires a free far field and headroom;
+  production stays cash-gated at the queue — the ceiling rises, the gates don't.
+- **MCV-EXPAND-IDLE H1** (fleet-traced: field-centre annuli with no placeable cell produce an
+  MCV that drives out and never deploys): under the arm, `Eligible` runs `ScalingDeployCellExists`
+  — the engine's own `FindDeployCell` predicate (`world.CanPlaceBuilding` at `cell + TransformsInfo.Offset`,
+  yard `ActorInfo` + `BuildingInfo`, MCV ignored as blocker) over the union annulus of every
+  `McvExpansionManager` mode. No placeable cell → the field parks `ParkTicks` (cheap re-check while
+  blockers may clear); null profile never rejects. Lazy per-MCV-type profile + annulus caches.
+- **Switch wiring** (`increment_switches.yaml`, `capability` class): `SwitchCondition: genericbot`
+  + `UseProductionScaling` on `BaseBuilderBotModuleCA` (the F2/BT shared-@generic guard — classic
+  stays the A/B reference) and `UseProductionScaling` on `ExpansionPlannerBotModule` (already
+  `RequiresCondition: genericbot`). Apply verified dry-run + scratch: exactly the three keys land.
+- **Tests:** `ProductionScalingTest` — 8 tests, every gate's admit/refuse/fail-closed edges.
+  Focused 8/8, full `OpenRA.Mods.Cameo.Test` 1956/1956, `test_increment_restraint_budget` 17+9
+  (capability count 24→25 pinned), `test_learnables_registry` 4/4, `audit_bot_wiring` clean.
+  Release build 0 errors/0 warnings. **Boot-gate PASSED** (`launch-game.cmd`, warm map cache):
+  `MenuPostProcessEffect.PostWorldLoaded` in perf.log, zero new `exception-*.log` (187→187).
+  No runtime behaviour claim beyond boot — no A/B launched; the arm is unarmed on master.
+
 # 2026-10-12 — Devin: M13 manager save/restore adapter (branch `devin/m13-liveness`)
 
 *Devin-Developer*, IMPL-M13-LIVENESS save/restore gap from `docs/design/M13_RUNTIME_WIRING.md`;

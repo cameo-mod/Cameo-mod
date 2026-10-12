@@ -187,6 +187,25 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			"commitment, not the map: finished MCVs leave the queue and a new one is requested while fields remain.")]
 		public readonly int CoverAllFieldsMaxInflight = 2;
 
+		[Desc("BZ_production_scaling: on top of the active MCV target, admit up to ScalingMcvMaxExtra",
+			"extra construction MCVs while windowed income holds above the difficulty line, a reachable",
+			"far field stays free, and the army-parity floor admits expansion. Also makes MCV site",
+			"handouts skip fields whose deploy annulus holds no placeable cell (MCV-EXPAND-IDLE).",
+			"Armed by the increment switch; false keeps today's behaviour bit-identical.")]
+		public readonly bool UseProductionScaling = false;
+
+		[Desc("BZ: windowed income per tick admitting the extra-MCV arm (easiest pole; difficulty line via BotDifficultyLadder).")]
+		public readonly int ScalingMcvIncomeEasy = 60;
+
+		[Desc("BZ: windowed income bar (hardest pole).")]
+		public readonly int ScalingMcvIncomeHard = 30;
+
+		[Desc("BZ: concurrent extra MCVs over the active target (easiest pole).")]
+		public readonly int ScalingMcvMaxExtraEasy = 1;
+
+		[Desc("BZ: concurrent extra MCVs (hardest pole).")]
+		public readonly int ScalingMcvMaxExtraHard = 3;
+
 		[Desc("TC-2c (AI_ARCHITECTURE §12.17): yield a free field to an allied bot's published expansion claim",
 			"when it outranks us (lower ClientIndex). Deterministic precedence, so contested fields converge",
 			"instead of oscillating. Inert in 1v1 — no allied broadcasts exist.")]
@@ -619,6 +638,13 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		// (kept as their own class: a future transport objective, FB1).
 		(int Field, int Count) mcvHandout = (-1, 0);
 		readonly HashSet<int> landUnreachableLogged = new();
+
+		// BZ_production_scaling (MCV-EXPAND-IDLE H1): deployability is checked once per field while it is
+		// parked — the yard profile per MCV type (transform target + footprint + offset) and the union of
+		// the engine manager's deploy annuli, both resolved lazily.
+		readonly HashSet<int> deployRejectedLogged = new();
+		readonly Dictionary<string, (ActorInfo Info, BuildingInfo Building, CVec Offset)?> deployProfiles = new();
+		(int Min, int Max)? deployAnnulus;
 		IPathFinder pathFinder;
 		Actor self;
 		(int Field, int Refineries) wanting = (-1, 0);
@@ -1828,6 +1854,19 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			return Math.Max(1, baseTarget - (int)Math.Round((IBotUtilityAxes.Neutral - Math.Max(0, axis)) / (double)IBotUtilityAxes.Neutral * techrushMinus));
 		}
 
+		// BZ_production_scaling: difficulty-line bars (identical Scale() call shape as the crawl-safety floor).
+		int ScalingMcvIncomeBar => BotDifficultyLadder.Scale(Info.ScalingMcvIncomeEasy, Info.ScalingMcvIncomeHard, player, Info.ScalingMcvIncomeHard);
+		int ScalingMcvMaxExtra => BotDifficultyLadder.Scale(Info.ScalingMcvMaxExtraEasy, Info.ScalingMcvMaxExtraHard, player, Info.ScalingMcvMaxExtraHard);
+		int ScalingParityFloor => BotDifficultyLadder.Scale(Info.ArmyParityPctEasy, Info.ArmyParityPctHard, player, Info.ArmyParityPctHard);
+
+		/// <summary>Windowed income per tick from the rolling sample queue (0 before the first sample).</summary>
+		double CurrentIncomePerTick()
+		{
+			var first = income.Count > 0 ? income.Peek() : (Tick: world.WorldTick, Earned: resources.Earned);
+			var span = Math.Max(1, world.WorldTick - first.Tick);
+			return (resources.Earned - first.Earned) / (double)span;
+		}
+
 		void RequestMcv(IBot bot)
 		{
 			wantedMcvPrerequisite = null;
@@ -1874,6 +1913,21 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					&& !(parkedUntil.TryGetValue(f.Index, out var until) && tick < until));
 				var inflightCap = Math.Min(Math.Max(freeFarFields, 1), Math.Max(1, Info.CoverAllFieldsMaxInflight));
 				targetCount = Math.Max(targetCount, active + inflightCap);
+			}
+
+			// BZ_production_scaling: while windowed income holds over the difficulty line and the
+			// army-parity floor admits expansion, the target carries up to ScalingMcvMaxExtra extra
+			// construction MCVs (a missing situation snapshot admits, same as CRAWL-SAFETY). McvDue
+			// still requires a free far field and pipeline headroom, and production stays cash-gated
+			// at the queue — this raises the ceiling only.
+			if (Info.UseProductionScaling)
+			{
+				var ratio = player.PlayerActor.TraitOrDefault<MasterAiBotModule>()?.Situation?.CombatRatioPct;
+				targetCount += ProductionScalingCA.McvAllowance(
+					ProductionScalingCA.IncomeMet(CurrentIncomePerTick(), ScalingMcvIncomeBar),
+					farFieldFree,
+					ratio == null || ArmyParityAdmits(ratio.Value, ScalingParityFloor),
+					ScalingMcvMaxExtra);
 			}
 
 			// REF-1 B2: the request rides under the cash reserve — queueing the MCV costs nothing until
@@ -1946,6 +2000,18 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					return false;
 				}
 
+				// BZ_production_scaling (MCV-EXPAND-IDLE H1): a field whose deploy annulus holds no cell the
+				// yard can legally occupy is a dead handout — the MCV drives there and never deploys. Park it
+				// like a stale handout; the park makes the re-check cheap while blockers may clear.
+				if (Info.UseProductionScaling && !ScalingDeployCellExists(mcv, f.Center))
+				{
+					parkedUntil[f.Index] = tick + Info.ParkTicks;
+					if (deployRejectedLogged.Add(f.Index))
+						Log.Write("debug", $"AI ({player.ClientIndex}): BZ field {f.Index} at {f.Center} parked {Info.ParkTicks} ticks — no deployable cell in the annulus for {mcv.Info.Name} at tick {tick}");
+
+					return false;
+				}
+
 				return true;
 			}
 
@@ -1992,6 +2058,53 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			}
 
 			return null;
+		}
+
+		/// <summary>
+		/// BZ_production_scaling: does the yard this MCV transforms into have at least one legally placeable
+		/// cell inside the engine manager's deploy annulus around the field centre? Mirrors the engine's
+		/// FindDeployCell predicate verbatim (CanPlaceBuilding at cell + transform offset, the MCV ignored
+		/// as a blocker). Null profile = nothing to validate — never reject on missing data.
+		/// </summary>
+		bool ScalingDeployCellExists(Actor mcv, CPos fieldCenter)
+		{
+			var profile = DeployProfile(mcv);
+			if (profile == null)
+				return true;
+
+			var (info, bi, offset) = profile.Value;
+			var annulus = deployAnnulus ??= DeployAnnulusRadii();
+			return world.Map.FindTilesInAnnulus(fieldCenter, annulus.Min, annulus.Max)
+				.Any(cell => world.CanPlaceBuilding(cell + offset, info, bi, mcv));
+		}
+
+		(ActorInfo Info, BuildingInfo Building, CVec Offset)? DeployProfile(Actor mcv)
+		{
+			if (deployProfiles.TryGetValue(mcv.Info.Name, out var cached))
+				return cached;
+
+			(ActorInfo Info, BuildingInfo Building, CVec Offset)? profile = null;
+			var transforms = mcv.Info.TraitInfos<TransformsInfo>().FirstOrDefault();
+			if (transforms != null && world.Map.Rules.Actors.TryGetValue(transforms.IntoActor, out var into)
+				&& into.TraitInfoOrDefault<BuildingInfo>() is { } bi)
+				profile = (into, bi, transforms.Offset);
+
+			return deployProfiles[mcv.Info.Name] = profile;
+		}
+
+		/// <summary>
+		/// The union of every deploy annulus the engine's McvExpansionManager can search under any mode —
+		/// the site provider cannot see the live mode, so a field only parks when NO mode's annulus holds a
+		/// placeable cell (conservative: never reject a field a live mode could still deploy on).
+		/// </summary>
+		(int Min, int Max) DeployAnnulusRadii()
+		{
+			var infos = self.Info.TraitInfos<McvExpansionManagerBotModuleInfo>().ToArray();
+			if (infos.Length == 0)
+				return (2, 20);
+
+			return (infos.Min(i => Math.Min(i.CRmodeMinDeployRadius, i.CBmodeMinDeployRadius)),
+				infos.Max(i => Math.Max(i.CRmodeMaxDeployRadius, i.CBmodeMaxDeployRadius)));
 		}
 
 		/// <summary>
@@ -2218,9 +2331,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			}
 
 			var diagonalCells = Info.FieldCoverage ? MapDiagonalCells() : 1;
-			var first = income.Count > 0 ? income.Peek() : (Tick: world.WorldTick, Earned: resources.Earned);
-			var span = Math.Max(1, world.WorldTick - first.Tick);
-			var incomePerTick = (resources.Earned - first.Earned) / (double)span;
+			var incomePerTick = CurrentIncomePerTick();
 			var reach = Info.ReachCells;
 			var scores = new List<FieldScore>();
 			var fieldIndexCount = resourceMap.GetIndicesLength();
