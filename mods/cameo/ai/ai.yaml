@@ -4317,6 +4317,11 @@ Player:
 		# REPAIR-B3 (SPEC_2026-10-09 §1): shared coverage — a usable own refinery serves every anchor inside an
 		# inclusive Euclidean radius-10 (the default 0 would fall back to ClaimRadiusCells = 8).
 		AnchorServeRadiusCells: 10
+		# BZ_production_scaling: up to ScalingMcvMaxExtra extra construction MCVs while windowed income
+		# holds over the difficulty line, a far field is free and army parity admits; also parks MCV
+		# site handouts whose deploy annulus holds no placeable cell (MCV-EXPAND-IDLE H1). Off until
+		# the increment A/B arms it.
+		UseProductionScaling: false
 	# Whole-base defence cover: each defence goes where its range covers the most uncovered base, outer edge and
 	# enemy side first (genericbot only; classic, sharing BaseBuilderBotModuleCA@generic, gets no advisor). Off until Enabled.
 	DefenseCoveragePlanner:
@@ -5119,6 +5124,11 @@ Player:
 		MaximumDefenseRadius: 50
 		MaxResourceCellsToCheck: 5
 		NewProductionCashThreshold: 0
+		# BZ_production_scaling: banked cash held over the difficulty line while every unit queue is busy
+		# (or net income per producer over the line) queues another production building for the
+		# least-provisioned queue type. SwitchCondition-gated — classic keeps today's behaviour. Off
+		# until the increment A/B arms it.
+		UseProductionScaling: false
 		BuildingProductionMinCashRequirement: 1000
 		DefenseProductionMinCashRequirement: 1500
 		BuildingQueues: Building, RABuilding, BuildingAddons

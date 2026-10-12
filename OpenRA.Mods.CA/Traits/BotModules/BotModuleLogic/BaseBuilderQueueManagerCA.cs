@@ -1293,6 +1293,64 @@ namespace OpenRA.Mods.CA.Traits
 		}
 
 		/// <summary>
+		/// BZ_production_scaling: the starved-category production pick. Gate 1 — the bank held over the
+		/// difficulty line for the whole persist window AND every unit-production queue busy. Gate 2 —
+		/// net income per producer over the difficulty line. Either admits a production building for
+		/// the least-provisioned queue type (then the same ProductionTypeLimit and power checks as the
+		/// cash-threshold override apply verbatim). Deterministic: no RNG.
+		/// </summary>
+		ActorInfo ChooseProductionScalingItem(ProductionQueue queue, IEnumerable<ActorInfo> buildableThings, ActorInfo power)
+		{
+			var types = baseBuilder.ProductionQueueTypes;
+			if (types.Count == 0)
+				return null;
+
+			var producers = new int[types.Count];
+			var busyQueues = 0;
+			var totalQueues = 0;
+			for (var i = 0; i < types.Count; i++)
+			{
+				var qs = AIUtils.FindQueues(player, types[i]).ToArray();
+				producers[i] = qs.Length;
+				totalQueues += qs.Length;
+				busyQueues += qs.Count(q => q is IHasParallelQueueSlots p ? p.AvailableSlots <= 0 : q.AllQueued().Any());
+			}
+
+			if (!((ProductionScalingCA.CashHeld(baseBuilder.ScalingCashHeldTicks, baseBuilder.ScalingPersistBar)
+					&& ProductionScalingCA.AllBusy(busyQueues, totalQueues))
+				|| ProductionScalingCA.SpareIncomeMet(baseBuilder.ScalingNetIncomePerTick, totalQueues, baseBuilder.ScalingSpareBar)))
+				return null;
+
+			foreach (var i in Enumerable.Range(0, types.Count)
+				.Where(i => producers[i] > 0)
+				.OrderBy(i => producers[i]))
+			{
+				var type = types[i];
+				var names = new HashSet<string>(baseBuilder.Info.ProductionTypes
+					.Where(n => world.Map.Rules.Actors.TryGetValue(n, out var ai)
+						&& ai.TraitInfos<ProductionQueueInfo>().Any(q => q.Type == type)));
+
+				// a => 0: first-in-enumeration order — deterministic, unlike the RNG default.
+				var production = GetProducibleBuilding(names, buildableThings, a => 0);
+				if (production == null)
+					continue;
+
+				if (ProductionTypeLimit > 0 && BaseBuilderQueueEvalCA.LimitReached(playerBuildings.Count(a => a.Info.Name == production.Name), ProductionTypeLimit))
+					continue;
+
+				var pick = BaseBuilderQueueEvalCA.PickOrPower(production, power, HasSufficientPowerForActor);
+				if (pick == null)
+					continue;
+
+				AIUtils.BotDebug("{0} decided to build {1}: BZ production scaling ({2})", queue.Actor.Owner, pick.Name,
+					pick == production ? $"starved {type}" : $"starved {type} would be low power");
+				return pick;
+			}
+
+			return null;
+		}
+
+		/// <summary>
 		/// ECON-A-FIX (R6): the demand's refinery quota — under the refinery law it IS the demand's own
 		/// reservable claim, ranked from the outpost with the committed yard's footprint counting as
 		/// frontier (an expansion beyond today's reach is not gated by the wall it removes). Without the
@@ -1474,6 +1532,16 @@ namespace OpenRA.Mods.CA.Traits
 				var demandPick = ChooseExpansionDemandItem(queue, buildableThings);
 				if (demandPick != null)
 					return demandPick;
+			}
+
+			// BZ_production_scaling: banked cash held over the difficulty line while every unit
+			// queue is busy (or net income per producer above the line) queues another production
+			// building for the starved category — same limit and power checks as the override below.
+			if (baseBuilder.ProductionScalingEnabled)
+			{
+				var scalingPick = ChooseProductionScalingItem(queue, buildableThings, power);
+				if (scalingPick != null)
+					return scalingPick;
 			}
 
 			// Make sure that we can spend as fast as we are earning
