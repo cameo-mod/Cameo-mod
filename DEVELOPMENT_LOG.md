@@ -1,3 +1,55 @@
+# 2026-10-12 — Devin: CRAWL-SAFETY — scout/escort/defence/army-parity gates on the optional crawl link (branch `devin/crawl-safety`)
+
+*Devin-Developer*, task 01a12ecb (FINDINGS_2026-10-12_playtest_forensics.md §S3; maintainer
+refinement: ARMY-PARITY gate — own mobile army vs observed enemy army, fog-fair, difficulty-scaled,
+army production takes priority while behind). Base `3cb0fcf1b` (TF-1 landed), engine `4f69df`.
+
+- **`CrawlFrontSafety` ledger** (world-free, unit-tested): the corridor watch diffs own
+  buildable-area cells near the frontier→aim segment re-plan to re-plan; a disappeared cell counts
+  a loss only while still inside the current corridor (an advancing frontier slides cells out
+  without losing them). Cells within `LossCellRadiusCells` pool their counts — the S3
+  rebuilt-15x farmed cell accumulates one count; at the difficulty-scaled bound
+  (`LossesToParkEasy`→`LossesToParkHard`) the target's route parks for `LossParkTicks`
+  (`crawlParkedUntil` in the score loop) and another frontier takes the crawl. Plus the bounded
+  scout-wait counter and `ResetCorridor` so a dead corridor re-baselines without phantom losses.
+- **Gates in `UpdateCrawlWant` → `UpdateCrawlSafety`** (armed by `UseCrawlSafety`, default OFF;
+  mandatory power bypasses every gate):
+  1. *Corridor losses* — farmed route parks (above).
+  2. *Army parity* — `ArmyParityAdmits(situation.CombatRatioPct, floor)`; floor =
+     `BotDifficultyLadder.Scale(ArmyParityPctEasy=40, ArmyParityPctHard=80)`. Below floor no
+     optional link is wanted at all — the want being null means the base builder spends nothing
+     on links/defences, so unit production keeps the cash (army priority is the refusal itself).
+     Empty remembered enemy scores MaxRatio → an unseen army never blocks (fog-fair).
+  3. *Scout first* — an unexplored `crawlTargetEdge` holds the want up to `ScoutWaitReplans`
+     re-plans while the cell rides to `ScoutBotModule` via the new `IBotScoutInterestProvider`
+     (`ProviderInterestBonus` on the region's interest score; publishing grants no vision).
+  4. *Front defence* — on a contested front (`MergedThreatAt(frontier|edge) > 0`), own armed
+     buildings within `FrontCoverRadiusCells` must reach `FrontCoverMinValue`; below it the
+     planner publishes `WantedFrontDefence`/`FrontDefenceCell` (cheapest armed buildable —
+     walls don't count) and the link waits.
+  5. *Escort* — contested front also requires own guard value ≥ `FrontGuardPercent`% of the
+     remembered threat (`FrontGuardAdmits`, pure); below it a `BotProtectionRequest` at the
+     frontier publishes via `IBotProtectionRequestProvider` for `EscortRequestTicks`. A stronger
+     local force still crawls — the gate refuses only an underpowered escort, never the march.
+- **Queue manager** (`BaseBuilderQueueManagerCA`): `WantedFrontDefence` rides the planner-want
+  low-cash path; `TryClaimFrontDefence` = same atomic one-in-flight admission as the crawl link
+  (claim frees when the item leaves the claimant's queue; `BuildingsBeingProduced` dedups same-name
+  picks); priority order MCV-prereq → front defence → link; a law front defence classifies as
+  `Defense` (no organic defence roll consumed) and places at `FrontDefenceCell` via the defence
+  advisor first, then the defence annulus — ordinary retry/failure if no legal cell.
+- **Fog-fair**: parity reads `BotSituation.CombatRatioPct` (remembered mobile units only);
+  threat = `IBotRegionThreatProvider.MergedThreatAt`; scout = `Shroud.IsExplored` of the aim.
+  No omniscient reads anywhere.
+- **Difficulty line**: parity floor, losses-to-park via `BotDifficultyLadder.Scale`
+  (unranked → hard end, the stricter/safer default).
+- **Files:** new `IBotScoutInterestProvider.cs`; +20 `IBotExpansionTargetProvider`; planner +~390;
+  queue manager +39; scout module +45; tests +130 (7 new focused).
+- **Verification:** Release build 0 errors / 9 pre-existing engine warnings; Cameo.Test 1840/1840.
+  **Boot gate DEFERRED — Luna Manager's A/B heavy-run reservation is held; no launches.**
+- **Default-off proposal:** keep `UseCrawlSafety=false` at land — it changes build-order timing and
+  is A/B-measurable via `apply_increment_switches`, but unverified at runtime until the reservation
+  clears; arming it for the next increment A/B is the honest path.
+
 # 2026-10-12 — Devin: M13 tempo arms on BV_m13_liveness (branch `codex/m13-tempo-boss`)
 
 *Devin subagent*, lead-settled design; inert unless the existing `BV_m13_liveness` switch arms it.
@@ -20694,3 +20746,23 @@ Restore all-direction passenger firing for normal/camo RA1 pillboxes using full-
 ### 2026-10-12 — Qualify the already-pinned resource sheet overflow fix
 
 Historical Imminent Destruction crash used engine0a3f77dbe; current4f69 already includes multi-batch terrain layer fix3c92c0ea0f and testsed6a34e4ef. Verified exact map UID and resource-sprite-layer caller; atlas sheets, not14resource types, exhaust the old8sheet array. Added real pinned-selector regressions for14primary/28primary+secondary sheets and reuse:2/2PASS; existingengine4/4PASS. No pin, renderer-limit, packing or runtime change; no launch. See docs/audit/SHEET_OVERFLOW_2026-10-12.md; notification cache retention remains separate.
+
+### 2026-10-12 — S8 memory telemetry channel + DevBuild refreshes
+
+FINDINGS_2026-10-12 S8 asked for a private-bytes growth channel after hosted games died >8 GB
+with no reconstruction possible. Landed as merge 9058a2a48 + O1 fixup 3f2bf8c21 (Devin-Reviewer
+approved): `AiMemoryTelemetry` world trait writes bounded `cameo-ai-memory-<uid>.jsonl` rows
+every 250 WT (private/working-set/paged/virtual bytes, full GCMemoryInfo counters, per-gen
+collections, live actor count, per-bot probe rows). New `IAiMemoryTelemetryProbe`
+(OpenRA.Mods.CA) lets bot modules report retention counters; `FransCombatIntelBotModule` —
+the lead suspect — reports enemyCombatMemory/contact/snapshot sizes, so the next long game
+directly shows whether that structure grows. `SignatureHistoryCapPerPair` (default 0)
+bounds the one unbounded mod-side history found. Reviewer O1 folded in: sampling faults
+terminate the channel fail-closed, never the game. Audit verdict: all named mod-side
+suspects verified bounded; engine `TextNotificationsManager.NotificationsCache` is the
+remaining latent unbounded structure (reported for the cameo-engine pipeline).
+
+DevBuild: refreshed to 3f2bf8c21 then 332856532 (pillbox 03a083cc2 + crawl-safety +
+terrain-sheet-overflow crash fix); ENGINE_VERSION 4f69df005fe0 unchanged; BUILD_SHA.txt
+added; complete runnable backup of the old d50079112 tree at
+DevBuild_backup_20261012\devbuild for replay playback.

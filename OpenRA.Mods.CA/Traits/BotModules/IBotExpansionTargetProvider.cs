@@ -351,6 +351,26 @@ namespace OpenRA.Mods.CA.Traits
 		bool TryClaimCrawlLink(object owner, string item, int cost) => true;
 
 		/// <summary>
+		/// CRAWL-SAFETY (FINDINGS_2026-10-12 S3): the name of the armed building the planner wants at the
+		/// crawl frontier before the next link — published while a contested front has no defence cover.
+		/// Null = none (classic, switch off, or the front is covered).
+		/// </summary>
+		string WantedFrontDefence => null;
+
+		/// <summary>
+		/// CRAWL-SAFETY: the cell <see cref="WantedFrontDefence"/> aims at — the crawl frontier anchor the
+		/// defence must stand beside. Null = no want.
+		/// </summary>
+		CPos? FrontDefenceCell => null;
+
+		/// <summary>
+		/// CRAWL-SAFETY: the atomic admission gate for <see cref="WantedFrontDefence"/> — the same contract
+		/// as <see cref="TryClaimCrawlLink"/>: one front defence in flight at a time, a second queue in the
+		/// same window is refused. Default admit (classic / switch-off providers leave admission unchanged).
+		/// </summary>
+		bool TryClaimFrontDefence(object owner, string item, int cost) => true;
+
+		/// <summary>
 		/// REF-1 B2: the name of the cheapest currently-buildable provider of a due construction MCV's missing
 		/// prerequisite (td_gdi: the repair facility). Null = none — the MCV is producible or none is due.
 		/// </summary>

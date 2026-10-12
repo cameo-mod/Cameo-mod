@@ -69,6 +69,60 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		/// <summary>Measured re-plans a pending queue intent may go unobserved in production before it drops uncharged.</summary>
 		public readonly int OptionalLinkPendingReplans = 2;
 
+		[Desc("CRAWL-SAFETY (FINDINGS_2026-10-12 S3): scout, escort, defend and army-parity gates on the",
+			"optional crawl link. An unexplored aim is scouted first (the want waits ScoutWaitReplans while",
+			"publishing a scout-interest cell); a contested frontier (remembered enemy value at the aim)",
+			"publishes a front defence until covered and an escort request until our guard outweighs the",
+			"threat; while the remembered own-vs-enemy army ratio sits below the difficulty-scaled floor no",
+			"optional link is wanted at all (army production keeps priority); N links lost near the frontier",
+			"park the target's route for LossParkTicks. Mandatory power bypasses every gate. False = the want",
+			"rides bare (default off).")]
+		public readonly bool UseCrawlSafety = false;
+
+		[Desc("CS: remembered own-vs-enemy army ratio below which no optional link is wanted, on the",
+			"BotSituation.CombatRatioPct scale (100 = even, larger = we win) — the EASY end of the",
+			"difficulty line, interpolated to the HARD end by bot rank. 0 disables the gate.")]
+		public readonly int ArmyParityPctEasy = 40;
+
+		public readonly int ArmyParityPctHard = 80;
+
+		[Desc("CS: links lost within LossCellRadiusCells of one another park the target's route — the",
+			"farmed-cell bound at the EASY end of the difficulty line (easier bots tolerate more farming).",
+			"0 disables loss parking.")]
+		public readonly int LossesToParkEasy = 5;
+
+		public readonly int LossesToParkHard = 2;
+
+		[Desc("CS: own building cells within this distance (cells) of the frontier->aim segment belong to",
+			"the watched corridor — losses there count toward the park.")]
+		public readonly int LossWatchRadiusCells = 14;
+
+		[Desc("CS: lost cells this close together count as the same farmed cell.")]
+		public readonly int LossCellRadiusCells = 4;
+
+		[Desc("CS: ticks a loss-farmed target field stays out of the candidates.")]
+		public readonly int LossParkTicks = 7500;
+
+		[Desc("CS: re-plans an unexplored aim may hold the link want while scouts close in. 0 = hold until",
+			"explored without bound (the interest cell keeps drawing scouts either way).")]
+		public readonly int ScoutWaitReplans = 4;
+
+		[Desc("CS: own guard value must reach this percent of the remembered enemy value at the front",
+			"before a contested link admits — below it the frontier publishes an escort request instead.")]
+		public readonly int FrontGuardPercent = 110;
+
+		[Desc("CS: own armed-building value within FrontCoverRadiusCells of the frontier that a contested",
+			"front demands before the next link — below it the planner publishes a front-defence want",
+			"instead. 0 disables the defence want.")]
+		public readonly int FrontCoverMinValue = 600;
+
+		[Desc("CS: radius (cells) around the frontier anchor inside which own armed buildings count as",
+			"front cover.")]
+		public readonly int FrontCoverRadiusCells = 10;
+
+		[Desc("CS: ticks a published escort request stays live between re-plans (re-emitted each plan).")]
+		public readonly int EscortRequestTicks = 600;
+
 		[Desc("EX-2: while the target field is in reach and unclaimed, ask the base builder for a refinery there, beyond",
 			"its fixed optimum (every field in reach gets one). Needs DriveBaseCrawl, which publishes the target.")]
 		public readonly bool DriveRefineries = false;
@@ -255,7 +309,8 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 	}
 
 	public class ExpansionPlannerBotModule : ConditionalTrait<ExpansionPlannerBotModuleInfo>, IBotTick, IBotExpansionTargetProvider,
-		IBotMcvExpansionSiteProvider, IBotPositionsUpdated, IBotExpansionAssistProvider
+		IBotMcvExpansionSiteProvider, IBotPositionsUpdated, IBotExpansionAssistProvider,
+		IBotProtectionRequestProvider, IBotScoutInterestProvider
 	{
 		public readonly struct FieldScore
 		{
@@ -445,6 +500,106 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			static int SaturateAdd(int a, int b) => (int)Math.Min(int.MaxValue, (long)a + b);
 		}
 
+		/// <summary>
+		/// CRAWL-SAFETY (FINDINGS_2026-10-12 S3): the crawl front ledger — the corridor watch that counts
+		/// lost link buildings per cell and the scout-wait counter. World-free: watch sets, radii and
+		/// re-plan bounds are supplied, so the whole lifecycle — watch diff, per-cell loss merge, park
+		/// trigger, scout hold — is directly testable.
+		/// </summary>
+		public sealed class CrawlFrontSafety
+		{
+			readonly Dictionary<CPos, int> losses = new();
+			HashSet<CPos> lastWatch = new();
+			bool watching;
+
+			public int ScoutWaitReplans { get; private set; }
+			public int TotalLosses => losses.Values.Sum();
+
+			/// <summary>
+			/// Squared distance of <paramref name="p"/> to the segment a-b — the corridor the loss watch
+			/// keeps is every own building cell within LossWatchRadiusCells of the frontier→aim line.
+			/// The projection lands inside the segment by the dot product; the distance itself is
+			/// |AP|² − dot²/|AB|² — pure integer math, deterministic on every client.
+			/// </summary>
+			public static long PointToSegmentDistanceSq(CPos p, CPos a, CPos b)
+			{
+				var abx = (long)b.X - a.X;
+				var aby = (long)b.Y - a.Y;
+				var denom = abx * abx + aby * aby;
+				var apx = (long)p.X - a.X;
+				var apy = (long)p.Y - a.Y;
+				if (denom == 0)
+					return apx * apx + apy * apy;
+
+				var dot = apx * abx + apy * aby;
+				if (dot <= 0)
+					return apx * apx + apy * apy;
+
+				if (dot >= denom)
+				{
+					var bpx = (long)p.X - b.X;
+					var bpy = (long)p.Y - b.Y;
+					return bpx * bpx + bpy * bpy;
+				}
+
+				return apx * apx + apy * apy - dot * dot / denom;
+			}
+
+			/// <summary>
+			/// The per-replan corridor watch: cells gone since the last set count a loss at their own
+			/// cell; cells within <paramref name="mergeRadiusCells"/> of each other pool their counts so
+			/// a link rebuilt on the same farmed spot accumulates one count. A disappeared cell counts
+			/// only while <paramref name="stillInCorridor"/> says it is — an advancing frontier slides
+			/// cells out of the corridor without losing them. Returns the worst pooled count at a
+			/// newly-lost cell and that cell — the caller compares it against the park bound.
+			/// </summary>
+			public int NoteWatch(IReadOnlyCollection<CPos> watch, int mergeRadiusCells, out CPos hottest,
+				Predicate<CPos> stillInCorridor = null)
+			{
+				hottest = default;
+				var worst = 0;
+				if (watching)
+					foreach (var cell in lastWatch)
+						if (!watch.Contains(cell) && (stillInCorridor == null || stillInCorridor(cell)))
+						{
+							losses[cell] = losses.GetValueOrDefault(cell) + 1;
+							var near = LossesNear(cell, mergeRadiusCells);
+							if (near > worst)
+							{
+								worst = near;
+								hottest = cell;
+							}
+						}
+
+				lastWatch = new HashSet<CPos>(watch);
+				watching = true;
+				return worst;
+			}
+
+			/// <summary>The pooled loss count within <paramref name="radiusCells"/> of <paramref name="cell"/>.</summary>
+			public int LossesNear(CPos cell, int radiusCells)
+			{
+				var radiusSq = (long)radiusCells * radiusCells;
+				var sum = 0;
+				foreach (var kv in losses)
+					if ((kv.Key - cell).LengthSquared <= radiusSq)
+						sum += kv.Value;
+
+				return sum;
+			}
+
+			/// <summary>
+			/// The scout-wait bound: an unexplored aim may hold the want while the counter stays under
+			/// the bound — true while it still holds; a bound of 0 holds until explored forever.
+			/// </summary>
+			public bool ScoutHolds(int maxReplans) => maxReplans <= 0 || ++ScoutWaitReplans < maxReplans;
+
+			public void ResetScoutWait() => ScoutWaitReplans = 0;
+
+			/// <summary>The corridor ended (target or want gone) — the next watch diffs from nothing.</summary>
+			public void ResetCorridor() => watching = false;
+		}
+
 		readonly World world;
 		readonly OpenRA.Player player;
 		readonly Dictionary<int, int> initialCells = new();
@@ -517,6 +672,18 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		readonly CrawlLinkAllowance crawlAllowance = new();
 		CPos? crawlFrontierAnchor;
 		string lastCrawlRefusal;
+
+		// CRAWL-SAFETY (S3): the front ledger and what it publishes per re-plan — the escort request for
+		// the squad manager, the scout-interest cell for the scout module, the front-defence want with
+		// its atomic in-flight claim for the base builder, and the per-target loss park.
+		readonly CrawlFrontSafety frontSafety = new();
+		readonly List<BotProtectionRequest> protectionRequests = new(1);
+		readonly List<CPos> scoutInterestCells = new(1);
+		readonly Dictionary<int, int> crawlParkedUntil = new();
+		string wantedFrontDefence;
+		CPos? frontDefenceCell;
+		(object Owner, string Item)? frontDefenceClaim;
+		string safetyRefusal;
 
 		// REF-1 B2: the cheapest buildable provider of a due MCV's missing prerequisite (td_gdi: the repair
 		// facility). REF-1 B3: the last refinery estimate seen, kept so a transiently unbuildable refinery no
@@ -864,6 +1031,37 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			return crawlAllowance.TryClaim(owner, item, cost, wantWasMandatory,
 				Info.OptionalLinkCostAllowance, Info.OptionalLinkCountAllowance);
 		}
+
+		// CRAWL-SAFETY (S3): the front-defence want, its aim cell (the frontier anchor) and the same
+		// single-in-flight admission the crawl link uses — the first queue through claims it, a second
+		// queue in the same window is refused. All ride the interface defaults (null / admit) under
+		// classic and switch-off.
+		string IBotExpansionTargetProvider.WantedFrontDefence =>
+			LawActive && Info.DriveBaseCrawl && Info.UseCrawlSafety ? wantedFrontDefence : null;
+
+		CPos? IBotExpansionTargetProvider.FrontDefenceCell =>
+			LawActive && Info.DriveBaseCrawl && Info.UseCrawlSafety ? frontDefenceCell : null;
+
+		bool IBotExpansionTargetProvider.TryClaimFrontDefence(object owner, string item, int cost)
+		{
+			if (item != wantedFrontDefence)
+				return true;
+
+			if (frontDefenceClaim is { } claim)
+				return ReferenceEquals(claim.Owner, owner);
+
+			frontDefenceClaim = (owner, item);
+			return true;
+		}
+
+		// CRAWL-SAFETY (S3): the escort request for the squad manager and the scout-interest cell for
+		// the scout module — re-published each re-plan while the front needs them, masked off-law like
+		// the other provider surfaces (a lapsed law must not leave a stale front guarded or scouted).
+		IReadOnlyList<BotProtectionRequest> IBotProtectionRequestProvider.ProtectionRequests =>
+			LawActive && Info.DriveBaseCrawl && Info.UseCrawlSafety ? protectionRequests : Array.Empty<BotProtectionRequest>();
+
+		IReadOnlyList<CPos> IBotScoutInterestProvider.ScoutInterestCells =>
+			LawActive && Info.DriveBaseCrawl && Info.UseCrawlSafety ? scoutInterestCells : Array.Empty<CPos>();
 
 		string IBotExpansionTargetProvider.WantedMcvPrerequisite =>
 			LawActive && Info.DriveMcvRequests ? wantedMcvPrerequisite : null;
@@ -1922,7 +2120,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		void Replan(IBot bot)
 		{
-			var (refinery, link, crawlLink, queues) = CheapestBuildables();
+			var (refinery, link, crawlLink, defence, queues) = CheapestBuildables();
 
 			// REF-1 B3 (§12.24 v2): a transiently unbuildable refinery (prerequisite missing, queue disabled)
 			// must not silence the planner — the estimate only feeds field scoring's payback term, so the last
@@ -1954,6 +2152,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var refineryDocks = new List<(CPos[] Cells, BitSet<DockType>[] Types, bool[] Enabled)>();
 			var buildingTiles = new List<CPos>();
 			var guards = new List<(CPos Cell, int Value)>();
+			var defences = Info.UseCrawlSafety ? new List<(CPos Cell, int Value)>() : null;
 			var allBuildingCells = new List<CPos>();
 			var yardCells = new List<CPos>();
 			foreach (var a in world.Actors)
@@ -1980,6 +2179,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 					if (constructionYardTypes.Contains(a.Info.Name))
 						yardCells.Add(a.Location);
 				}
+
+				// CRAWL-SAFETY: armed own buildings count as front cover — collected for both GBA
+				// branches, so a defence tower keeps scoring even without buildable area.
+				if (defences != null && a.Info.HasTraitInfo<AttackBaseInfo>() && a.Info.HasTraitInfo<BuildingInfo>())
+					defences.Add((a.Location, a.Info.TraitInfos<ValuedInfo>().FirstOrDefault()?.Cost ?? 0));
 
 				if (a.Info.HasTraitInfo<GivesBuildableAreaInfo>())
 				{
@@ -2093,6 +2297,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				if (parkedUntil.TryGetValue(i, out var until) && world.WorldTick < until)
 					continue;
 
+				// CRAWL-SAFETY (S3): a route that kept losing links at the same cells is parked —
+				// another frontier gets the crawl until the farm expires.
+				if (Info.UseCrawlSafety && crawlParkedUntil.TryGetValue(i, out var lossUntil) && world.WorldTick < lossUntil)
+					continue;
+
 				// TC-2c: an outranking ally already aims at this field — yield instead of stacking.
 				if (YieldToAllyClaim(allyClaims, world.Map.CenterOfCell(center), player.ClientIndex, Info.AllyClaimRadiusCells))
 					continue;
@@ -2137,12 +2346,13 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (Info.FieldCoverage && Info.DriveRefineries)
 			{
 				UpdateAnchorClaim(refineryCells, refineryTiles, buildingTiles, refineryDocks);
-				UpdateCrawlWant(crawlLink, buildingTiles);
+				UpdateCrawlWant(crawlLink, defence, buildingTiles, buildingCells, guards, defences);
 			}
 			else
 			{
 				wantedLinkBuilding = null;
 				crawlTargetEdge = null;
+				frontSafety.ResetCorridor();
 			}
 
 			(claimField, wantsRefinery) = ClaimSelection(lawClaims, wantsRefinery,
@@ -2229,31 +2439,63 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		public static (FieldScore? Claim, bool Want) ClaimSelection(bool lawActive, bool lawWanted, FieldScore? bestClaim) =>
 			lawActive ? (null, lawWanted) : (bestClaim, bestClaim.HasValue);
 
-		void UpdateCrawlWant((ActorInfo Info, int Cost, int BuildTicks) link, List<CPos> buildingTiles)
+		void UpdateCrawlWant((ActorInfo Info, int Cost, int BuildTicks) link, (ActorInfo Info, int Cost, int BuildTicks) defence,
+			List<CPos> buildingTiles, List<CPos> buildingCells, List<(CPos Cell, int Value)> guards, List<(CPos Cell, int Value)> defences)
 		{
 			wantedLinkBuilding = null;
 			wantWasMandatory = false;
 			crawlTargetEdge = null;
 			crawlFrontierAnchor = null;
+			wantedFrontDefence = null;
+			frontDefenceCell = null;
+			protectionRequests.Clear();
+			scoutInterestCells.Clear();
+
+			// One queue scan serves the claim reconciles below (TF-1's and the front defence's).
+			IReadOnlyDictionary<object, HashSet<string>> inflightByOwner = null;
+			if ((Info.BoundCrawlLinkSupply && crawlAllowance.HasClaims) || frontDefenceClaim != null)
+				inflightByOwner = QueuedItemNamesByProducer();
+
 			if (Info.BoundCrawlLinkSupply && crawlAllowance.HasClaims)
 			{
 				// TF-1: reconcile outstanding claims against the real queues every re-plan — a pending
 				// intent that entered production becomes paid; one that never arrived drops uncharged.
-				crawlAllowance.Reconcile(QueuedItemNamesByProducer(), Info.OptionalLinkPendingReplans);
+				crawlAllowance.Reconcile(inflightByOwner, Info.OptionalLinkPendingReplans);
 			}
+
+			// CRAWL-SAFETY: the front-defence claim frees the moment its item leaves the claimant's
+			// queue — it landed (cover decides next plan) or was cancelled (the want re-admits).
+			if (frontDefenceClaim is { } claimedDefence
+				&& !(inflightByOwner.TryGetValue(claimedDefence.Owner, out var claimedItems) && claimedItems.Contains(claimedDefence.Item)))
+				frontDefenceClaim = null;
 
 			if (!LinkBuildingWanted(Info.DriveBaseCrawl, Target?.Hops, claimableAnchorsInReach, link.Info != null))
 			{
 				// TF-1: the ledger survives a want that blinks off — only a different target field
 				// opens a fresh episode, so an off/on flap can never re-open the allowance.
+				frontSafety.ResetCorridor();
 				return;
 			}
 
 			crawlTargetEdge = LinkTargetEdge(fields, Target.Value, buildingTiles);
+
+			// Mandatory power never consults a gate: a real deficit admits the (power-first) link
+			// outright; under TF-1 its paid admission still charges the episode.
+			var mandatoryPower = player.PlayerActor.TraitOrDefault<PowerManager>()?.ExcessPower < 0;
+
+			// CRAWL-SAFETY (S3): the front ledger evaluates the corridor — a farmed route parks the
+			// target, the parity/scout/cover/escort gates may refuse the optional want; the published
+			// escort request, scout cell and front-defence want ride as side effects either way.
+			var frontier = FrontierAnchor(buildingTiles, crawlTargetEdge);
+			var safetyAdmits = !Info.UseCrawlSafety
+				|| UpdateCrawlSafety(link, defence, frontier, buildingCells, guards, defences);
+
 			if (!Info.BoundCrawlLinkSupply)
 			{
-				// REF-1 B1 legacy path: the want rides unbounded (switch-off keeps the traced behaviour).
-				wantedLinkBuilding = link.Info.Name;
+				// REF-1 B1 legacy path: the want rides unbounded (switch-off keeps the traced behaviour);
+				// CRAWL-SAFETY still gates it when armed, mandatory power aside.
+				if (OptionalLinkAdmitted(mandatoryPower, safetyAdmits))
+					wantedLinkBuilding = link.Info.Name;
 				return;
 			}
 
@@ -2266,12 +2508,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 			// Mandatory power never consults the allowance: a real deficit admits the (power-first)
 			// link outright; its paid admission still charges the episode.
-			var mandatoryPower = player.PlayerActor.TraitOrDefault<PowerManager>()?.ExcessPower < 0;
 			var admissible = crawlAllowance.OptionalLinkAdmissible(link.Cost,
-				Info.OptionalLinkCostAllowance, Info.OptionalLinkCountAllowance, distanceSq);
+				Info.OptionalLinkCostAllowance, Info.OptionalLinkCountAllowance, distanceSq) && safetyAdmits;
 			if (!OptionalLinkAdmitted(mandatoryPower, admissible))
 			{
-				var reason = crawlAllowance.Parked ? "route parked"
+				var reason = !safetyAdmits ? safetyRefusal
+					: crawlAllowance.Parked ? "route parked"
 					: distanceSq < 0 ? "no frontier evidence"
 					: crawlAllowance.AwaitingProgress > 0 ? "awaiting frontier progress"
 					: "allowance spent";
@@ -2302,6 +2544,127 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			Log.Write("debug", admitted);
 			AIUtils.BotDebug(admitted);
 		}
+
+		/// <summary>
+		/// CRAWL-SAFETY (FINDINGS_2026-10-12 S3): the per-replan front evaluation for the live corridor.
+		/// Counts lost links near the frontier->aim segment (a farmed cell parks this target's route),
+		/// applies the fog-fair army-parity gate, demands a scouted aim (bounded hold, the cell rides to
+		/// the scout module as interest), and on a contested front demands defence cover then an escort
+		/// before the optional link may be wanted. Publishes the escort request, the scout cell and the
+		/// front-defence want as side effects; returns whether the OPTIONAL link admits — mandatory
+		/// power bypasses every gate at the caller.
+		/// </summary>
+		bool UpdateCrawlSafety((ActorInfo Info, int Cost, int BuildTicks) link,
+			(ActorInfo Info, int Cost, int BuildTicks) defence, CPos? frontier,
+			List<CPos> buildingCells, List<(CPos Cell, int Value)> guards, List<(CPos Cell, int Value)> defences)
+		{
+			var tick = world.WorldTick;
+			safetyRefusal = null;
+
+			// (d) the corridor watch — own buildable-area cells near the frontier->aim segment whose
+			// disappearance since the last re-plan is a lost link; a farmed cell parks this target's
+			// route so another frontier gets the crawl (S3's rebuilt-15x farm).
+			if (frontier.HasValue && crawlTargetEdge.HasValue)
+			{
+				var radiusSq = (long)Info.LossWatchRadiusCells * Info.LossWatchRadiusCells;
+				var watch = new List<CPos>();
+				foreach (var c in buildingCells)
+					if (CrawlFrontSafety.PointToSegmentDistanceSq(c, frontier.Value, crawlTargetEdge.Value) <= radiusSq)
+						watch.Add(c);
+
+				var bound = Info.LossesToParkEasy <= 0 ? 0
+					: BotDifficultyLadder.Scale(Info.LossesToParkEasy, Info.LossesToParkHard, player, Info.LossesToParkHard);
+				var worst = frontSafety.NoteWatch(watch, Info.LossCellRadiusCells, out var hottest,
+					c => CrawlFrontSafety.PointToSegmentDistanceSq(c, frontier.Value, crawlTargetEdge.Value) <= radiusSq);
+				if (bound > 0 && worst >= bound)
+				{
+					crawlParkedUntil[Target.Value.Index] = tick + Info.LossParkTicks;
+					var parked = string.Format(
+						"AI ({0}): CRAWL-SAFETY parked target field {1} for {2} ticks — {3} links lost near {4} at tick {5}",
+						player.ClientIndex, Target.Value.Index, Info.LossParkTicks, worst, hottest, tick);
+					Log.Write("debug", parked);
+					AIUtils.BotDebug(parked);
+					return RefuseSafety("route farmed");
+				}
+			}
+			else
+				frontSafety.ResetCorridor();
+
+			// (e) the army-parity gate — remembered own army vs the enemy army as this bot has SEEN it:
+			// while the predicted combat ratio sits under the difficulty-scaled floor a crawl starves
+			// the army it needs to survive, so no optional link is wanted and unit production keeps
+			// priority. A missing snapshot or a floor of 0 never blocks.
+			var situation = player.PlayerActor.TraitOrDefault<MasterAiBotModule>()?.Situation;
+			var parityFloor = BotDifficultyLadder.Scale(Info.ArmyParityPctEasy, Info.ArmyParityPctHard, player, Info.ArmyParityPctHard);
+			if (situation != null && !ArmyParityAdmits(situation.CombatRatioPct, parityFloor))
+				return RefuseSafety($"army parity {situation.CombatRatioPct}<{parityFloor}");
+
+			// (a) the aim must be explored ground — while it isn't, the want waits the bounded hold
+			// and the aim cell rides to the scout module as interest (scouting first, then the link).
+			if (crawlTargetEdge.HasValue && player.Shroud != null && !player.Shroud.IsExplored(crawlTargetEdge.Value))
+			{
+				scoutInterestCells.Add(crawlTargetEdge.Value);
+				if (frontSafety.ScoutHolds(Info.ScoutWaitReplans))
+					return RefuseSafety("aim unscouted");
+			}
+			else
+				frontSafety.ResetScoutWait();
+
+			// (b)+(c) the contested front — remembered enemy value at the aim or frontier means the
+			// next link waits for defence cover, then for an escort that outweighs the threat.
+			if (frontier.HasValue)
+			{
+				var threat = threatProviders.MergedThreatAt(frontier.Value);
+				if (crawlTargetEdge.HasValue)
+					threat = Math.Max(threat, threatProviders.MergedThreatAt(crawlTargetEdge.Value));
+
+				if (threat > 0)
+				{
+					var coverRadiusSq = (long)Info.FrontCoverRadiusCells * Info.FrontCoverRadiusCells;
+					var cover = defences.Where(d => (d.Cell - frontier.Value).LengthSquared <= coverRadiusSq).Sum(d => d.Value);
+					if (Info.FrontCoverMinValue > 0 && cover < Info.FrontCoverMinValue && defence.Info != null)
+					{
+						wantedFrontDefence = defence.Info.Name;
+						frontDefenceCell = frontier.Value;
+						return RefuseSafety($"front uncovered ({cover}<{Info.FrontCoverMinValue})");
+					}
+
+					var guardRadiusSq = (long)Info.GuardRadiusCells * Info.GuardRadiusCells;
+					var guard = guards.Where(g => (g.Cell - frontier.Value).LengthSquared <= guardRadiusSq).Sum(g => g.Value);
+					if (!FrontGuardAdmits(guard, threat, Info.FrontGuardPercent))
+					{
+						protectionRequests.Add(new BotProtectionRequest(frontier.Value,
+							Math.Max(threat, link.Cost), tick + Info.EscortRequestTicks));
+						return RefuseSafety($"front contested (guard {guard} vs {threat})");
+					}
+				}
+			}
+
+			return true;
+		}
+
+		bool RefuseSafety(string reason)
+		{
+			safetyRefusal = reason;
+			return false;
+		}
+
+		/// <summary>
+		/// CRAWL-SAFETY: the army-parity gate — a missing floor never blocks; the remembered
+		/// own-vs-enemy ratio must reach it (an unseen enemy scores MaxRatio and passes).
+		/// Pure, for the tests.
+		/// </summary>
+		public static bool ArmyParityAdmits(int combatRatioPct, int floorPct) =>
+			floorPct <= 0 || combatRatioPct >= floorPct;
+
+		/// <summary>
+		/// CRAWL-SAFETY: the contested-front escort gate — an uncontested front always admits;
+		/// contested ground admits only while our guard reaches the required percent of the
+		/// remembered threat (a stronger local force still crawls; a weaker one waits for escort).
+		/// Pure, for the tests.
+		/// </summary>
+		public static bool FrontGuardAdmits(int guardValue, int threat, int percent) =>
+			threat <= 0 || guardValue * 100L >= threat * (long)percent;
 
 		/// <summary>
 		/// TF-1: the bound publishes the want when mandatory power (a real deficit) or the episode
@@ -3138,9 +3501,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			power.Info != null ? power : other;
 
 		((ActorInfo Info, int Cost, int BuildTicks) Refinery, (ActorInfo Info, int Cost, int BuildTicks) Link,
-			(ActorInfo Info, int Cost, int BuildTicks) CrawlLink, int Queues) CheapestBuildables()
+			(ActorInfo Info, int Cost, int BuildTicks) CrawlLink, (ActorInfo Info, int Cost, int BuildTicks) Defence,
+			int Queues) CheapestBuildables()
 		{
-			(ActorInfo Info, int Cost, int BuildTicks) refinery = default, link = default, linkPower = default, linkOther = default;
+			(ActorInfo Info, int Cost, int BuildTicks) refinery = default, link = default, linkPower = default, linkOther = default, defence = default;
 			var queues = 0;
 			foreach (var queue in BuildingQueueTypes().SelectMany(type => CAAIUtils.FindQueues(player, type)).Distinct())
 			{
@@ -3175,11 +3539,17 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 							else if (linkOther.Info == null || cost < linkOther.Cost)
 								linkOther = entry;
 						}
+
+						// CRAWL-SAFETY: the front defence is the cheapest armed structure — a turret
+						// standing at the frontier, not a wall (walls carry no AttackBase).
+						if (cost > 0 && item.HasTraitInfo<AttackBaseInfo>()
+							&& (defence.Info == null || cost < defence.Cost))
+							defence = entry;
 					}
 				}
 			}
 
-			return (refinery, link, PickCrawlLink(linkPower, linkOther), queues);
+			return (refinery, link, PickCrawlLink(linkPower, linkOther), defence, queues);
 		}
 	}
 }
