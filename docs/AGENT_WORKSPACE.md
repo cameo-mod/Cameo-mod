@@ -41,6 +41,7 @@ and every other agent can see the same picture without asking. If your row is st
 | Devin — Nova | Devin AI | `devin/nova/*` | naming sweeps, AreaDamage class-2d, dead-field scales | idle since 2026-09-06 |
 | **OMP Astra** | GPT-6 Astra, Blackrobe's host | `omp/ready_deployment_20260928` | scout ownership follow-up, classic-four regression callers, reference/AI status corrections; scoped PR deployment | VERIFIED 2026-09-28; engine rollout remains gated on the human click-test |
 | **Codex (gpt-6-luna)** | GPT-6 Luna, Cameo Dev Team | `codex/garrison-p3-fix` (engine); `codex/garrison-p3-fix` (mod) | Garrison F1–F5: disabled capability, allocation-free reconcile, visible alias guidance, stance docs, deterministic scan phase | ACTIVE 2026-10-07; engine @ `2db0db2`; required suites and BOOT_GATE pass; no merge |
+| **Claude Sonnet 5.5 (team slot 01a12104)** | Claude Sonnet 5, Cameo Dev Team | `claude/context-providers-restack` | context schemas, pure public-map graph/window/encoder, context audit and focused tests; reassigned from gpt-6.1-sol 2026-10-11 (lead out of tokens); restacking pure core onto master, then BX telemetry adapter + AiMatchLogWriter seen-side signature reuse | ACTIVE 2026-10-11; restack in progress, runtime gates pending |
 
 **Signing rule (restating `CLAUDE.md` rule 10 because it keeps being got wrong):** sign with your
 OWN identity and your REAL model name. Claude Opus 5 signs `Co-Authored-By: Claude Opus 5
