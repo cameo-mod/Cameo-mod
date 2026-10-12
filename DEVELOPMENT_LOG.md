@@ -24,6 +24,54 @@ approved Route A' driver set bb46784b/0cdd46eb/a7cef93c/8fff80a7 stays byte-froz
   (Luna admission; machine had a recurring mod_subset_runner + dotnet test tree, unowned,
   now exited; build-server daemons reaped) → acting-lead merge authorization.
 
+# 2026-10-12 — Devin: BY_crawl_safety arm group, draft for review (branch `devin/p3-0-crawl-safety-switch`)
+
+*Devin-Developer.* Boss's TASK P3-0 (lead-authorised; design
+`Cameo-mod-fleet/DESIGN_2026-10-12_protected_frontier.md` rev 3b §7.1/§4.2): the CRAWL-SAFETY
+gates landed in merge `332856532` sit behind `ExpansionPlannerBotModuleInfo.UseCrawlSafety`
+(default `false`, `ExpansionPlannerBotModule.cs:80`) but nothing could arm them — no increment
+switch group existed.
+
+- **`tools/ai/increment_switches.yaml`:** new group `BY_crawl_safety` →
+  `ExpansionPlannerBotModule.UseCrawlSafety: true` (the only field; NO `needs`,
+  `BoundCrawlLinkSupply`/`DriveBaseCrawl` untouched — BX's business / already true in ai.yaml);
+  `effect_classes` → `restraint` (refuses optional links when unsafe — same reasoning as
+  BV_m13_liveness / TF4_turtle_fallback_expiry). **Default-off, draft only — no arming, no
+  landing, no gameplay change; the lead decides arming.**
+- **`tools/tests/test_increment_restraint_budget.py`:** catalogue count pin 29→30 restraints
+  (BY is the 30th; minimal consequence update).
+- **Verification (python/grep only, no builds/launches — A/B campaign holds the runtime
+  lane):** field exists at `ExpansionPlannerBotModule.cs:80` as
+  `public readonly bool UseCrawlSafety = false`; the single
+  `ExpansionPlannerBotModule:` instance (`ai.yaml:4278`, `RequiresCondition: genericbot`)
+  matches the group's trait key and is not in `skip` (skip =
+  `SquadManagerBotModuleCA@classic` only); `UseCrawlSafety` absent from ai.yaml = default-off
+  confirmed. Focused checks: `pytest test_increment_restraint_budget test_m13_tier_knobs
+  test_learnables_registry test_conflict_markers test_ab_campaign_pilot` → 38 passed + 19
+  subtests. Scratch-tree apply: `apply_increment_switches.py <scratch> --groups
+  BY_crawl_safety` → `ExpansionPlannerBotModule.UseCrawlSafety: (default) -> true`, 1 change,
+  `new_restraint_count: 1`, `ordinary_increment_allowed: true`.
+- **RESOLVED — the mounted-trait question is settled:** what SquadManager does with
+  CRAWL-SAFETY's `Episode=default` escort request when `AttackLivenessEnabled` is true.
+  **The code reading wins; the CS review's claim ("still forms as a standard protection
+  squad") is disproven.** Chain: CS publishes 3-arg `BotProtectionRequest` — `Episode =
+  default` (`ExpansionPlannerBotModule.cs:2637`) → under `AttackLivenessEnabled` the sole
+  request path enters the `if` at `SquadManagerBotModuleCA.cs:2150` →
+  `M13ResponseClaimCA.TryKey` requires `request.Episode.BelongsTo(participant)` →
+  `default` episode has `IsKnown == false` → `TryKey` false → `return` at :2155, before
+  any drafting. **No escort squad can ever form from a CS request while M13 is armed.**
+  EngineerBotModule requests carry real episodes (`EngineerBotModule.cs:1332`) and are
+  unaffected. Latent today (M13 default-off; legacy rolling path serves episode-less
+  requests); bites exactly when M13 + BY are armed together — i.e. the P3 evaluation
+  configuration. Safety is not lost: `RefuseSafety("front contested")` still refuses the
+  frontier; only the escort is silently absent. Pinned by the new test
+  `M13ResponseClaimTest.EpisodelessRequestCannotKeyAResponse` (all 3 claim channels,
+  the exact 3-arg publisher shape). Resolution: P3's escort contract in rev-3 §4.2 item 2
+  (publisher attaches a known `BotClaimEpisode`) is REQUIRED, not optional, for BY+M13 —
+  or CS must publish episodes for its frontier requests before that combination arms.
+
+---
+
 # 2026-10-12 — Devin: M13 manager save/restore adapter (branch `devin/m13-liveness`)
 
 *Devin-Developer*, IMPL-M13-LIVENESS save/restore gap from `docs/design/M13_RUNTIME_WIRING.md`;

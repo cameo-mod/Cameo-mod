@@ -84,6 +84,20 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(key, Is.Null);
 		}
 
+		[TestCase(PrepositionChannelCA.Request)]
+		[TestCase(PrepositionChannelCA.DefendAnswer)]
+		[TestCase(PrepositionChannelCA.AssistAnswer)]
+		public void EpisodelessRequestCannotKeyAResponse(PrepositionChannelCA channel)
+		{
+			// CRAWL-SAFETY publishes 3-arg BotProtectionRequests (Episode = default). Under
+			// AttackLivenessEnabled the only request path runs through TryKey, so an
+			// episode-less request is dropped before any drafting — no escort can form.
+			var request = new BotProtectionRequest(new CPos(7, 9), 1500, 5000);
+			Assert.That(request.Episode.IsKnown, Is.False);
+			Assert.That(M13ResponseClaimCA.TryKey(channel, request, "Multi0", out var key), Is.False);
+			Assert.That(key, Is.Null);
+		}
+
 		[Test]
 		public void UnsupportedAssistAndForeignClaimStayUnknown()
 		{
