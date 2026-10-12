@@ -20826,3 +20826,36 @@ no launches while the A/B reservation is held.
 - Verification: Release build clean (engine fetched at pin 4f69df0 — sibling
   engines were stale/other pins); Cameo.Test 1849/1849; audit_ai_personalities
   PASS. boot-gate + commit SHAs reported to lead.
+
+## 2026-10-12 - ENGINEER-CAP-10PCT (maintainer ruling, flat 10% engineer cap + pacing)
+
+- Motivation: Fawaf playtest â€” Steel Consortium bot ended 30 engineers vs 30 hover
+  grenadiers; engineers are support, not combat. The landed 80->10 line still
+  admitted ~14 live engineers against 30 armed infantry on hard.
+- Flat 10% ceiling: every BotLimits tier now writes CapturerInfantryLimitPct: 10;
+  CapturerLimitPctCeiling = 10 clamps inside CapturerCapAdmits, so a difficulty
+  may only go lower (a legacy 49/80 computes at 10).
+- +allowance: +1 capturer per KNOWN uncaptured capturable target, bounded at
+  CapturerAllowanceMax 4. Source = new CA seam IBotCapturerTargetAllowance
+  implemented by EngineerBotModule (the capture owner): fog-fair
+  CanBeViewedByPlayer (NOT the Â§19.5 omniscient pass), alive/in-world,
+  CaptureManager-traited, owner != us â€” Neutral tech buildings OR
+  PriorityCapturableActorTypes enemy structures, honoring CapturableActorTypes
+  whitelist. Pure seam CountsTowardCapturerAllowance. Rises while tech is free,
+  falls to 0 once taken.
+- Pacing: at most one capturer in production (own AllQueued scan); minimum ticks
+  between completions from new BotLimits.EngineerCompletionIntervalTicks
+  (difficulty line 2000->200 step 200 = ~80s->8s), skipped while allowance > 0.
+  Completions detected as a rising own-capturer count (lastCompletion stamp).
+  Interpretation: the skip applies to the interval only; one-in-production is
+  unconditional â€” flagged for review.
+- Cap arithmetic: cap = max(CapturerMinimumUnits 2, floor(armed*pct/100)) +
+  min(allowanceMax, knownTargets). 30 grenadiers -> <=3+allowance.
+- Gate unchanged: CapturerCapActive(CapturerLimitPct>0) short-circuits before any
+  scan â€” classic (no genericbot) never pays the walks; pct<=0 in the seam admits
+  everything (no ratio, no pacing).
+- Verification: CA+Cameo+Test Release builds 0 errors; Cameo.Test 1932/1932 PASS
+  (8 rewritten/new capturer tests); audit_ai_personalities
+  difficulty_scale_failures NONE. AI_MODULE_MAP regenerated (+ upstream
+  CRAWL-SAFETY drift). Dormant-escalation backoff untouched.
+- Pending: Devin-Reviewer exact-SHA review; boot-gate waits on a Luna slot.

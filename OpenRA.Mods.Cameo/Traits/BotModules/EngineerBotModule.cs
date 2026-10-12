@@ -229,7 +229,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 	public enum EngineerCheck { Working, Done, Stuck, Gone }
 
 	public class EngineerBotModule : ConditionalTrait<EngineerBotModuleInfo>, IBotTick, IBotPositionsUpdated, IGameSaveTraitData,
-		IBotProtectionRequestProvider, IBotCaptureClaimSource
+		IBotProtectionRequestProvider, IBotCaptureClaimSource, IBotCapturerTargetAllowance
 	{
 		const string LeaseOwner = nameof(EngineerBotModule);
 
@@ -338,6 +338,52 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				return positions;
 			}
 		}
+
+		// ENGINEER-CAP-10PCT (maintainer 2026-10-12): +1 per KNOWN capturable target this bot has
+		// fog-fairly seen and not captured — neutral tech buildings plus priority-listed enemy
+		// structures. Reported raw; the unit builder clamps it into the capturer cap. §19.5's fog
+		// exception does NOT apply here: the allowance only counts honestly-visible targets.
+		int capturerAllowanceTick = -1, capturerAllowanceCached;
+
+		public int CapturerTargetAllowance
+		{
+			get
+			{
+				if (IsTraitDisabled)
+					return 0;
+
+				if (capturerAllowanceTick == world.WorldTick)
+					return capturerAllowanceCached;
+
+				capturerAllowanceTick = world.WorldTick;
+				var count = 0;
+				foreach (var a in world.Actors)
+				{
+					if (a.IsDead || !a.IsInWorld || a.Owner == player)
+						continue;
+
+					if (a.TraitOrDefault<CaptureManager>() == null || !a.CanBeViewedByPlayer(player))
+						continue;
+
+					var name = a.Info.Name.ToLowerInvariant();
+					var relationship = player.RelationshipWith(a.Owner);
+					if (!CountsTowardCapturerAllowance(
+							relationship == PlayerRelationship.Neutral,
+							relationship == PlayerRelationship.Enemy && priorityCapturableTypes.Contains(name),
+							capturableTypes.Count == 0 || capturableTypes.Contains(name)))
+						continue;
+
+					count++;
+				}
+
+				return capturerAllowanceCached = count;
+			}
+		}
+
+		/// <summary>Pure seam: a target feeds the engineer allowance only as a neutral tech building
+		/// or a priority-listed enemy structure, inside the capturable whitelist when one exists.</summary>
+		public static bool CountsTowardCapturerAllowance(bool neutralOwned, bool enemyPriorityListed, bool capturableWhitelistOk)
+			=> capturableWhitelistOk && (neutralOwned || enemyPriorityListed);
 
 		public EngineerBotModule(Actor self, EngineerBotModuleInfo info)
 			: base(info)

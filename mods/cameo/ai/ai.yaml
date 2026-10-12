@@ -176,7 +176,8 @@
 		MaximiseProductionCashRequirement: 9500
 		BankSaturationCash: 4200
 		AdaptiveCounterWeight: 0
-		CapturerInfantryLimitPct: 80
+		CapturerInfantryLimitPct: 10
+		EngineerCompletionIntervalTicks: 2000
 		RetreatRatioPct: 10
 		RequiresCondition: easiestbot
 	BotLimits@veryeasy:
@@ -200,7 +201,8 @@
 		MaximiseProductionCashRequirement: 8500
 		BankSaturationCash: 3900
 		AdaptiveCounterWeight: 4
-		CapturerInfantryLimitPct: 72
+		CapturerInfantryLimitPct: 10
+		EngineerCompletionIntervalTicks: 1800
 		RetreatRatioPct: 20
 		RequiresCondition: veryeasybot
 	BotLimits@easy:
@@ -224,7 +226,8 @@
 		MaximiseProductionCashRequirement: 7500
 		BankSaturationCash: 3600
 		AdaptiveCounterWeight: 9
-		CapturerInfantryLimitPct: 64
+		CapturerInfantryLimitPct: 10
+		EngineerCompletionIntervalTicks: 1600
 		RetreatRatioPct: 30
 		RequiresCondition: easybot
 	BotLimits@medium:
@@ -248,7 +251,8 @@
 		MaximiseProductionCashRequirement: 6500
 		BankSaturationCash: 3300
 		AdaptiveCounterWeight: 13
-		CapturerInfantryLimitPct: 57
+		CapturerInfantryLimitPct: 10
+		EngineerCompletionIntervalTicks: 1400
 		RetreatRatioPct: 40
 		RequiresCondition: mediumbot
 	BotLimits@hard:
@@ -273,7 +277,8 @@
 		MaximiseProductionCashRequirement: 5500
 		BankSaturationCash: 3000
 		AdaptiveCounterWeight: 18
-		CapturerInfantryLimitPct: 49
+		CapturerInfantryLimitPct: 10
+		EngineerCompletionIntervalTicks: 1200
 		RetreatRatioPct: 50
 		RequiresCondition: hardbot
 	BotLimits@veryhard:
@@ -298,7 +303,8 @@
 		MaximiseProductionCashRequirement: 4500
 		BankSaturationCash: 2700
 		AdaptiveCounterWeight: 22
-		CapturerInfantryLimitPct: 41
+		CapturerInfantryLimitPct: 10
+		EngineerCompletionIntervalTicks: 1000
 		RetreatRatioPct: 60
 		RequiresCondition: veryhardbot
 	BotLimits@brutal:
@@ -323,7 +329,8 @@
 		MaximiseProductionCashRequirement: 3500
 		BankSaturationCash: 2400
 		AdaptiveCounterWeight: 27
-		CapturerInfantryLimitPct: 33
+		CapturerInfantryLimitPct: 10
+		EngineerCompletionIntervalTicks: 800
 		RetreatRatioPct: 70
 		RequiresCondition: brutalbot
 	BotLimits@challenger:
@@ -348,7 +355,8 @@
 		MaximiseProductionCashRequirement: 2500
 		BankSaturationCash: 2100
 		AdaptiveCounterWeight: 31
-		CapturerInfantryLimitPct: 26
+		CapturerInfantryLimitPct: 10
+		EngineerCompletionIntervalTicks: 600
 		RetreatRatioPct: 80
 		RequiresCondition: challengerbot
 	BotLimits@unbeatable:
@@ -373,7 +381,8 @@
 		MaximiseProductionCashRequirement: 1500
 		BankSaturationCash: 1800
 		AdaptiveCounterWeight: 36
-		CapturerInfantryLimitPct: 18
+		CapturerInfantryLimitPct: 10
+		EngineerCompletionIntervalTicks: 400
 		RetreatRatioPct: 90
 		RequiresCondition: unbeatablebot
 	BotLimits@god:
@@ -399,6 +408,7 @@
 		BankSaturationCash: 1500
 		AdaptiveCounterWeight: 40
 		CapturerInfantryLimitPct: 10
+		EngineerCompletionIntervalTicks: 200
 		RetreatRatioPct: 100
 		RequiresCondition: cameogodbot
 
@@ -5268,13 +5278,18 @@ Player:
 		RequiresCondition: genericbot || classicbot
 		# S1 (FINDINGS_2026-10-12 §3): the switch gate also arms the capturer ratio — classic
 		# (the A/B control) never sees genericbot, so its engineer spam is untouched there.
-		# CapturerInfantryLimitPct lives on the BotLimits difficulty line; 50 is only the
+		# S1b (ENGINEER-CAP-10PCT, maintainer 2026-10-12): the line is flat 10 on every tier —
+		# CapturerLimitPctCeiling clamps anything higher; the +allowance comes from the
+		# engineer owner's fog-fair KNOWN-target count (IBotCapturerTargetAllowance), and
+		# EngineerCompletionIntervalTicks paces completions on the difficulty line.
+		# CapturerInfantryLimitPct lives on the BotLimits difficulty line; 10 is only the
 		# fallback for a ruleset that ships no BotLimits.
 		# BV_m13_liveness arms BankSaturationCash on this shared instance; classic
 		# never carries genericbot, so its switch fields stay inert there.
 		SwitchCondition: genericbot
-		CapturerInfantryLimitPct: 50
+		CapturerInfantryLimitPct: 10
 		CapturerMinimumUnits: 2
+		CapturerAllowanceMax: 4
 		UseCompositions: true
 		# UW-1 (AI_ARCHITECTURE §2.8b item 3): derive the UnitsToBuild weights from the enabled
 		# personality's RoleMix x each unit's Versus-weighted strength. Off until the next increment
