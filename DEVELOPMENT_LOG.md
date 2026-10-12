@@ -1,3 +1,29 @@
+# 2026-10-13 — Devin: maintainer merge wave `devin/merge-wave-20261013`
+
+*Devin Coordinator.* Maintainer directive: merge current-cycle work to master, then run a fresh
+A/B on the merged tree (supersedes the frozen attempt-3 continuation, which is shelved — its
+approved Route A' driver set bb46784b/0cdd46eb/a7cef93c/8fff80a7 stays byte-frozen for reuse).
+
+- **Wave-1 merged:** `e38ec6028` = devin/01a12fda-aa-gate-followups restacked onto master
+  ebea34c82 — AA-GATE-FOLLOWUPS `0921a60ff` (sticky air-intel latch, front-defence AA bypass
+  closure, capturer pct<=0 hoist) + ENGINEER-CAP-10PCT `8495901e5` (flat 10% cap, known-target
+  allowance, completion pacing). Devin-Reviewer APPROVE receipt
+  `REVIEW_2026-10-12_aa_gate_engineer_cap_devin.md`; wave build clean, Cameo.Test 1932/1932.
+- **Pending merge:** `claude/context-providers-restack` `2c1ba5754` — 9 files, pure telemetry
+  primitives (ContextFeatureEncoding / OpponentFeatureWindow / PublicMapFeatureGraph /
+  IBotMapFeatures), no gameplay consumer; trial merge clean; Devin-Reviewer verdict pending.
+- **Dropped as redundant:** `codex/01a12ecb-naxis-slave-idle` `79fa19b05f` (fix byte-identical
+  to master's `6bbb5443f`, master test superset) and `codex/m13-state-restore` `0c77867f`
+  (content already ported via `797eb292e`).
+- **Held pending maintainer ruling:** `codex/learn-p0-fix` `874fda898` / `learn-p6-fix`
+  `0b19d629` — task gates require parity proof before merge; no waiver received yet.
+- Already on master (no remerge): garrison-p3 `d8ccd7da`, multi-turret `fa59898f`,
+  m13-master-port `a4efc2b5`, turtle-fallback `b231bf08`, garrison-no-fire cherries,
+  wbl-p1 `3a2ee8e4`/`147071140`, playtest-telemetry-v2, replay-health-logger-restack `7ca7e915`.
+- **Open gates before master landing:** ctx verdict → wave build+test → boot-gate slot
+  (Luna admission; machine had a recurring mod_subset_runner + dotnet test tree, unowned,
+  now exited; build-server daemons reaped) → acting-lead merge authorization.
+
 # 2026-10-12 — Devin: M13 manager save/restore adapter (branch `devin/m13-liveness`)
 
 *Devin-Developer*, IMPL-M13-LIVENESS save/restore gap from `docs/design/M13_RUNTIME_WIRING.md`;
