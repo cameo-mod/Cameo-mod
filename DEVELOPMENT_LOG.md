@@ -1,3 +1,10 @@
+## 2026-10-05 — Boss trait-unification specification
+
+- Task `01a10dcd-55b6-7d10-96a8-4a60b7d99d56`: spec only, no implementation. Fleet entry point: `C:/Users/AedisToru/Documents/GitHub/Cameo-mod-fleet/SPEC_2026-10-05_trait_unification.md` with declaration inventory, uncovered capability appendix and frozen evidence archive alongside it.
+- Source baseline `b6f522e78d41c68649e66e315363a42fc0bb683c`, engine pin `d5d8b2a6853bff3b5a00cc5db7d86b03d4f30684`. The initial main-checkout capture at `0fd6ec67e` was corrected because it was based on INC-e. Six donor repository SHAs are recorded in the spec.
+- Findings: 152 MissileCA declarations are in 22 unmounted files, with zero mounted/resolved users; the donor type exists in CAmod. Equal fields can hide different behavior (trail impact/expiry, clocks, condition callbacks, bot leases). Core Faction requires an engine route; mod factory shadowing alone is insufficient for CLR typed consumers.
+- Design: selective plain-name unified assembly, shared Cameo contracts, explicit default/semantic migration, map/save/replay policy, existing-family consolidation before new capability ports. Next: coordinator review and phase assignment; no build, lint or boot PASS is claimed.
+
 # 2026-10-04 — Boss (Devin): corrective review leaves T4 and B1 open
 
 Reviewed takeover `3d6c39ae3` (all six files: implementation, tests, DESIGN/AI_MATCH_LOG/development log): T1/T2/T3 resolved statically; T4 still loses logs when a spectator admin departs because AdminConnected never clears. A mod-side exclusive-controller writer policy and regression matrix were sent to T3Verify. BP `7690ddd07` still has B1 allocation open; B2/B3/B4 resolved. `docs/review_2026_10_04_takeover_bp.md` preserves both remaining issues and author-reported validation. Both corrective tasks remain active; no gameplay or merge approval; no source/game work by reviewer.

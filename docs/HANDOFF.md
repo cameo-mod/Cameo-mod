@@ -1,5 +1,7 @@
 # Cameo — THE HANDOFF
 
+Current Boss recovery pointer (2026-10-05): trait-unification spec and all evidence are in `C:/Users/AedisToru/Documents/GitHub/Cameo-mod-fleet/SPEC_2026-10-05_trait_unification.md`. Source baseline is `b6f522e78`, not this older documentation branch. Next: coordinator reviews the spec and assigns implementation phases. No implementation or runtime validation was performed. Prior takeover/BP re-review was completed by peer substitution as recorded in task `01a106a8-ff84-7771-905f-f71f4640facf`; its older findings below are historical. Portable documentation branch: devin/boss_trait_unification_2026_10_05 at C:/cameo-wt/boss_trait_docs.
+
 ## 2026-10-04 — Boss (Devin): corrective review leaves T4 and B1 open
 
 Reviewed takeover `3d6c39ae3`: T1/T2/T3 resolved statically; T4 still loses logs when a spectator admin departs. A mod-side exclusive-controller writer policy and regression matrix were sent to T3Verify. BP `7690ddd07` still has B1 allocation open; B2/B3/B4 resolved. [Current verdict](review_2026_10_04_takeover_bp.md) preserves both remaining issues and author-reported validation. Both corrective tasks remain active; no gameplay or merge approval.
