@@ -66,7 +66,10 @@ namespace OpenRA.Mods.Cameo.Traits
 				writer = new AiEconomyHealthLogWriter(Path.Combine(directory, $"cameo-ai-memory-{key}.jsonl"));
 				process = Process.GetCurrentProcess();
 			}
-			catch (Exception e) when (e is IOException or UnauthorizedAccessException)
+			// Fail closed on any setup fault — Process/GC APIs may throw beyond IO
+			// (platform-not-supported, access-denied variants); telemetry must never
+			// prevent a world from loading.
+			catch (Exception e)
 			{
 				writer?.Dispose();
 				writer = null;
@@ -89,6 +92,22 @@ namespace OpenRA.Mods.Cameo.Traits
 		}
 
 		void Sample(World world)
+		{
+			try
+			{
+				SampleUnsafe(world);
+			}
+			// Fail closed: a sampling fault ends the channel, never the game.
+			catch (Exception e)
+			{
+				ended = true;
+				writer?.Dispose();
+				writer = null;
+				Log.Write("debug", "Memory telemetry terminated after a sampling error: " + e.GetType().Name);
+			}
+		}
+
+		void SampleUnsafe(World world)
 		{
 			process.Refresh();
 			var gc = GC.GetGCMemoryInfo();
@@ -174,7 +193,7 @@ namespace OpenRA.Mods.Cameo.Traits
 
 			ended = true;
 			Sample(world);
-			writer.Dispose();
+			writer?.Dispose();
 		}
 
 		void INotifyActorDisposing.Disposing(Actor self)
