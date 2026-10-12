@@ -23,6 +23,7 @@ from __future__ import annotations
 
 import argparse
 import collections
+import hashlib
 import json
 import pathlib
 import sys
@@ -141,9 +142,47 @@ def load_health(paths: list[pathlib.Path]) -> dict[str, Any]:
     return {"games": games, "errors": errors}
 
 
-def health_verdict(by_player: dict[str, list[dict]] | None, expected_seats: int) -> tuple[str, str]:
+def expected_health_players(receipt: dict) -> tuple[set[str] | None, str, str]:
+    """Bridge receipt seats to the report namespace (matches JSONL seat_N) by (home cell, faction, bot_type).
+    Returns (players, status, detail): status OK, UNAVAILABLE (no usable bridge: caller falls back to a seat COUNT
+    and marks the game identity-unverified) or SCHEMA_MISMATCH (bridge present but wrong/ambiguous)."""
+    art = (receipt.get("artifacts") or {}).get("matches_jsonl") or {}
+    path = art.get("path")
+    seats = receipt.get("seats")
+    if not isinstance(path, str) or not path or not isinstance(seats, list) or not seats             or any(not isinstance(x, dict) or not x.get("home_location") for x in seats):
+        return None, "UNAVAILABLE", "receipt has no matches_jsonl path or seats[].home_location"
+    try:
+        raw = pathlib.Path(path).read_bytes()
+    except OSError as e:
+        return None, "UNAVAILABLE", f"matches_jsonl unreadable: {type(e).__name__}"
+    expected_sha = art.get("sha256")
+    if isinstance(expected_sha, str) and hashlib.sha256(raw).hexdigest() != expected_sha:
+        return None, "SCHEMA_MISMATCH", "matches_jsonl sha256 differs from the receipt artifact record"
+    rows = []
+    for line in raw.decode("utf-8", errors="replace").splitlines():
+        try:
+            row = json.loads(line)
+        except json.JSONDecodeError:
+            continue
+        if isinstance(row, dict) and row.get("game_uid") == receipt.get("game_uid") and isinstance(row.get("player"), dict):
+            rows.append(row["player"])
+    players: set[str] = set()
+    for x in seats:
+        hits = [r for r in rows if r.get("home") == x["home_location"] and r.get("faction") == x.get("faction")
+                and r.get("bot_type") == x.get("bot_type") and isinstance(r.get("seat"), str)]
+        if len(hits) != 1:
+            return None, "SCHEMA_MISMATCH", f"{len(hits)} matches rows for receipt seat at {x['home_location']}"
+        players.add(hits[0]["seat"])
+    if len(players) != len(seats):
+        return None, "SCHEMA_MISMATCH", "two receipt seats bridge to the same matches seat"
+    return players, "OK", ""
+
+
+def health_verdict(by_player: dict[str, list[dict]] | None, expected_seats: int,
+                   expected_players: set[str] | None = None) -> tuple[str, str]:
     """HEALTHY | BLOCK | UNKNOWN | MISSING | SCHEMA_MISMATCH for one game. BLOCK dominates; anything that is not
-    every seat OBSERVED_HEALTHY is not poolable."""
+    every expected seat OBSERVED_HEALTHY is not poolable. With expected_players the coverage check is by NAME
+    (missing seat -> MISSING, foreign seat -> SCHEMA_MISMATCH); without it, only the seat COUNT is checked."""
     if not by_player:
         return "MISSING", "no replay_health report for this game_uid"
     reports = [rep for reps in by_player.values() for rep in reps]
@@ -157,8 +196,15 @@ def health_verdict(by_player: dict[str, list[dict]] | None, expected_seats: int)
     conflicting = [p for p, reps in by_player.items() if len({rep["status"] for rep in reps}) > 1]
     if conflicting:
         return "SCHEMA_MISMATCH", f"conflicting duplicate reports for seat(s) {sorted(conflicting)}"
-    if len(by_player) < expected_seats:
-        return "MISSING", f"{len(by_player)} of {expected_seats} seats have a report"
+    if expected_players is not None:
+        missing = sorted(expected_players - set(by_player))
+        extra = sorted(set(by_player) - expected_players)
+        if missing:
+            return "MISSING", f"no report for seat(s) {missing}"
+        if extra:
+            return "SCHEMA_MISMATCH", f"report(s) for seat(s) not in this game: {extra}"
+    elif len(by_player) != expected_seats or expected_seats <= 0:
+        return ("MISSING" if len(by_player) < expected_seats else "SCHEMA_MISMATCH"),             f"{len(by_player)} seat report(s) for {expected_seats} receipt seat(s)"
     if statuses != {HEALTHY}:
         return "UNKNOWN", f"statuses {sorted(statuses)}"
     return "HEALTHY", ""
@@ -174,7 +220,7 @@ def apply_health_gate(receipts: list[dict], health: dict[str, Any]) -> tuple[lis
     report: dict[str, Any] = {
         "mode": "APPLIED", "policy": HEALTH_POLICY, "load_errors": health.get("errors", []),
         "verdict_counts": collections.Counter(), "excluded_by_setup": {}, "excluded_games": [],
-        "marker_reruns_replaced": [], "marker_reruns_rejected": [],
+        "marker_reruns_replaced": [], "marker_reruns_rejected": [], "identity_unverified_games": [],
     }
     games = health.get("games", {})
 
@@ -183,7 +229,8 @@ def apply_health_gate(receipts: list[dict], health: dict[str, Any]) -> tuple[lis
         report["excluded_by_setup"].setdefault(setup, collections.Counter())[verdict] += 1
         report["excluded_games"].append({"cell_id": r.get("cell_id"), "game_uid": r.get("game_uid"), "setup_id": setup,
                                          "pair_id": r.get("pair_id"), "pair_member": r.get("pair_member"),
-                                         "verdict": verdict, "detail": detail})
+                                         "verdict": verdict, "detail": detail,
+                                         "original_end_class": r.get("end_class"), "original_end_reason": r.get("end_reason")})
 
     for r in receipts:
         if not r.get("_valid") or r.get("_synthetic"):
@@ -195,10 +242,17 @@ def apply_health_gate(receipts: list[dict], health: dict[str, Any]) -> tuple[lis
             exclude(r, "MARKER", "INCOMPLETE_UNKNOWN host-restart marker: never pooled")
             continue
         uid = r.get("game_uid")
-        verdict, detail = health_verdict(games.get(uid) if isinstance(uid, str) else None, len(r.get("resolved_seats") or []))
+        expected, bridge, bridge_detail = expected_health_players(r)
+        if bridge == "SCHEMA_MISMATCH":
+            verdict, detail = bridge, bridge_detail
+        else:
+            verdict, detail = health_verdict(games.get(uid) if isinstance(uid, str) else None,
+                                             len(r.get("resolved_seats") or []), expected)
         r["_health_verdict"] = verdict
         report["verdict_counts"][verdict] += 1
         if verdict == "HEALTHY":
+            if bridge == "UNAVAILABLE":
+                report["identity_unverified_games"].append({"cell_id": r.get("cell_id"), "game_uid": uid, "reason": bridge_detail})
             continue
         exclude(r, verdict, detail)
         if verdict == "BLOCK":
@@ -207,6 +261,7 @@ def apply_health_gate(receipts: list[dict], health: dict[str, Any]) -> tuple[lis
             continue
         r["_health_excluded"] = True
         r["_original_end_class"] = r.get("end_class")
+        r["_original_end_reason"] = r.get("end_reason")
         r["end_class"] = INCOMPLETE
         r["end_reason"] = f"HEALTH_{verdict}"
         r["winner_team"] = None

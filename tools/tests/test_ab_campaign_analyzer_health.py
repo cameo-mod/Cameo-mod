@@ -184,6 +184,90 @@ class HostRestartMarkers(unittest.TestCase):
         self.assertEqual(len(res["health"]["marker_reruns_rejected"]), 1)
 
 
+class SeatIdentityBridge(unittest.TestCase):
+    """Reports are named seat_N (matches namespace); receipts say Multi0/Multi1. The bridge is
+    (home cell, faction, bot_type) from receipt.seats[] to matches JSONL player rows."""
+
+    HOMES = ("11,45", "90,24")
+
+    def bridged(self, tmp, uid_suffix="0-0", mutate=None):
+        game = receipt(pair_index=0, pair_member=0, control_side="A", treatment_side="B", winner_team="B")
+        uid = game["game_uid"]
+        game["seats"] = [
+            {"arm": "control", "bot_type": "hard_control", "faction": "td_gdi", "home": "Multi0", "home_location": self.HOMES[0]},
+            {"arm": "treatment", "bot_type": "hard_treatment", "faction": "td_gdi", "home": "Multi1", "home_location": self.HOMES[1]},
+        ]
+        pairs = [("seat_3", self.HOMES[0], "hard_control"), ("seat_4", self.HOMES[1], "hard_treatment")]
+        lines = [json.dumps({"game_uid": uid, "player": {"seat": s, "home": h, "faction": "td_gdi", "bot_type": b},
+                              "seats": [{"seat": a, "home": c, "faction": "td_gdi"} for a, c, _ in pairs]}) for s, h, b in pairs]
+        path = pathlib.Path(tmp) / "cameo-ai-matches.jsonl"
+        data = ("\n".join(lines) + "\n").encode("utf-8")
+        path.write_bytes(data)
+        import hashlib
+        game["artifacts"]["matches_jsonl"] = {"path": str(path), "sha256": hashlib.sha256(data).hexdigest(), "missing_reason": None}
+        if mutate:
+            mutate(game, path)
+        return game, uid
+
+    def health(self, uid, players, status="OBSERVED_HEALTHY"):
+        return {"games": {uid: {p: [health_report(uid, p, status)] for p in players}}, "errors": []}
+
+    def test_correct_seat_names_are_healthy_and_identity_verified(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            game, uid = self.bridged(tmp)
+            res = az.summarize([game], None, self.health(uid, ["seat_3", "seat_4"]))
+        self.assertEqual(res["health"]["verdict_counts"], {"HEALTHY": 1})
+        self.assertEqual(res["health"]["identity_unverified_games"], [])
+
+    def test_foreign_seat_name_with_matching_count_is_not_admitted(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            game, uid = self.bridged(tmp)
+            res = az.summarize([game], None, self.health(uid, ["seat_3", "seat_99"]))
+        self.assertEqual(res["health"]["excluded_games"][0]["verdict"], "MISSING")
+        self.assertIn("seat_4", res["health"]["excluded_games"][0]["detail"])
+        self.assertEqual(res["pooled"]["complete_natural_pairs"], 0)
+
+    def test_extra_foreign_seat_is_a_schema_mismatch(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            game, uid = self.bridged(tmp)
+            res = az.summarize([game], None, self.health(uid, ["seat_3", "seat_4", "seat_99"]))
+        self.assertEqual(res["health"]["excluded_games"][0]["verdict"], "SCHEMA_MISMATCH")
+
+    def test_matches_artifact_hash_mismatch_is_a_schema_mismatch(self):
+        def tamper(game, path):
+            path.write_bytes(path.read_bytes() + b"\n")
+        with tempfile.TemporaryDirectory() as tmp:
+            game, uid = self.bridged(tmp, mutate=tamper)
+            res = az.summarize([game], None, self.health(uid, ["seat_3", "seat_4"]))
+        self.assertEqual(res["health"]["excluded_games"][0]["verdict"], "SCHEMA_MISMATCH")
+        self.assertIn("sha256", res["health"]["excluded_games"][0]["detail"])
+
+    def test_ambiguous_bridge_is_a_schema_mismatch(self):
+        def same_home(game, path):
+            game["seats"][1]["home_location"] = game["seats"][0]["home_location"]
+            game["artifacts"]["matches_jsonl"]["sha256"] = None
+        with tempfile.TemporaryDirectory() as tmp:
+            game, uid = self.bridged(tmp, mutate=same_home)
+            res = az.summarize([game], None, self.health(uid, ["seat_3", "seat_4"]))
+        self.assertEqual(res["health"]["excluded_games"][0]["verdict"], "SCHEMA_MISMATCH")
+
+    def test_unavailable_bridge_falls_back_to_count_and_is_reported(self):
+        games = matched_pair()
+        res = az.summarize(games, None, health_for(games))
+        self.assertEqual(res["health"]["verdict_counts"], {"HEALTHY": 2})
+        self.assertEqual(len(res["health"]["identity_unverified_games"]), 2)
+
+    def test_count_fallback_rejects_extra_seats_and_zero_expected(self):
+        self.assertEqual(az.health_verdict({f"s{i}": [health_report("g", f"s{i}")] for i in range(3)}, 2)[0], "SCHEMA_MISMATCH")
+        self.assertEqual(az.health_verdict({"s0": [health_report("g", "s0")]}, 0)[0], "SCHEMA_MISMATCH")
+
+    def test_original_end_reason_is_kept_for_excluded_games(self):
+        games = matched_pair()
+        res = az.summarize(games, None, health_for(games, {("uid-0-0", 0): "UNKNOWN"}))
+        row = res["health"]["excluded_games"][0]
+        self.assertEqual((row["original_end_class"], row["original_end_reason"]), ("NATURAL", "natural"))
+
+
 class LoadHealth(unittest.TestCase):
     def test_receipts_and_foreign_json_are_ignored_and_corrupt_files_are_reported(self):
         with tempfile.TemporaryDirectory() as tmp:
