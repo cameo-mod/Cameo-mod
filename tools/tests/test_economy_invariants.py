@@ -184,6 +184,78 @@ class InvariantTests(unittest.TestCase):
             mutate(rows)
             self.assertEqual(verifier.analyze(rows, "g", "p")["status"], "UNKNOWN")
 
+    def test_missed_scheduled_pulse_gap_is_unknown(self):
+        # Producer cadence is one pulse per 50 world ticks (run C: 0/50/../13150).
+        # Dropping one scheduled pulse leaves a >50 gap the coverage guard rejects.
+        rows = capture(200)
+        rows.pop(2)
+        for seq, row in enumerate(rows):
+            row["seq"] = seq
+        report = verifier.analyze(rows, "g", "p")
+        self.assertEqual(report["status"], "UNKNOWN")
+        self.assertIn("pulse coverage gap", report["error"])
+
+    def test_terminal_pulse_off_boundary_is_legal(self):
+        # Run C (uid 25060589): last scheduled pulse at 13150, terminal observe at
+        # 13191 emits one extra off-boundary pulse plus the end record. The checker
+        # intentionally accepts this terminal-only off-boundary pulse; no strict
+        # modulo rule applies.
+        rows = capture(150)
+        end = rows.pop()
+        rows.append({**rows[-1], "kind": "pulse", "tick": 191})
+        rows.append({**end, "tick": 191})
+        for seq, row in enumerate(rows):
+            row["seq"] = seq
+        report = verifier.analyze(rows, "g", "p")
+        self.assertEqual(report["status"], "OBSERVED_HEALTHY")
+        self.assertEqual(report["pulses"], 5)
+
+    def test_terminal_watermark_uncovered_is_unknown(self):
+        rows = capture(150)
+        rows[-1]["tick"] = 201
+        report = verifier.analyze(rows, "g", "p")
+        self.assertEqual(report["status"], "UNKNOWN")
+        self.assertIn("terminal health watermark", report["error"])
+
+    def test_record_after_terminal_is_unknown(self):
+        rows = capture(150)
+        end = rows.pop()
+        rows.append(end)
+        rows.append({**rows[-2], "tick": end["tick"]})
+        for seq, row in enumerate(rows):
+            row["seq"] = seq
+        report = verifier.analyze(rows, "g", "p")
+        self.assertEqual(report["status"], "UNKNOWN")
+        self.assertIn("record after terminal", report["error"])
+
+    def test_incomplete_terminal_is_unknown(self):
+        rows = capture(150)
+        rows[-1]["complete"] = False
+        report = verifier.analyze(rows, "g", "p")
+        self.assertEqual(report["status"], "UNKNOWN")
+        self.assertIn("incomplete terminal", report["error"])
+
+    def test_missing_terminal_is_unknown(self):
+        report = verifier.analyze(capture(150)[:-1], "g", "p")
+        self.assertEqual(report["status"], "UNKNOWN")
+        self.assertIn("no complete terminal", report["error"])
+
+    def test_clean_capture_requires_full_completeness_tuple(self):
+        # Post-lift acceptance needs the whole tuple, not just dropped=0:
+        # dropped=0 on every record, queues_complete=true on pulses,
+        # complete=true on the end record.
+        rows = capture(150)
+        for row in rows:
+            self.assertEqual(row["dropped"], 0)
+            if row["kind"] == "pulse":
+                self.assertIs(row["queues_complete"], True)
+            elif row["kind"] == "end":
+                self.assertIs(row["complete"], True)
+        report = verifier.analyze(rows, "g", "p")
+        self.assertEqual(report["status"], "OBSERVED_HEALTHY")
+        self.assertNotIn("error", report)
+        self.assertEqual(report["pulses"], 4)
+
     def test_malformed_queue_storage_and_future_state_fail_closed(self):
         for mutate in (lambda r: r.update(resources=10001),
                        lambda r: r.update(queues_complete=False),

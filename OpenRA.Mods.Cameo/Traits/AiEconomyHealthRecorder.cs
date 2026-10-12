@@ -56,9 +56,9 @@ namespace OpenRA.Mods.Cameo.Traits
 			health = healthWriter;
 			raw = rawWriter;
 			state = new AiEconomyHealthState();
-			// Outcome mapping is supported, but actual activation/census/terminal ordering
-			// and runtime coverage have not been validated. Keep adoption fail-closed.
-			state.MarkIncomplete();
+			// Activation/census/pulse/terminal ordering validated by admitted run C
+			// (game uid 25060589-136e-46b8-9d78-4c4ad7828688, 2026-10-12). 'complete'
+			// stays a one-way latch: every runtime failure path below still marks it.
 			observations = new List<EconomyQueueObservation>(AiEconomyHealthState.MaximumQueues);
 			snapshots = new List<EconomyQueueSnapshot>(AiEconomyHealthState.MaximumQueues);
 			groups = self.Info.TraitInfos<BaseBuilderBotModuleCAInfo>()
@@ -91,6 +91,8 @@ namespace OpenRA.Mods.Cameo.Traits
 					queue.Enabled ? "observed" : "producer-disabled"));
 			}
 			state.Observe(tick, observations);
+			// Scheduled pulses are %50-only; a terminal observe may add one off-boundary
+			// pulse before the end record. The consumer's <=50-tick watermark allows it.
 			if ((AiEconomyHealthState.PulseDue(tick) || terminal) && tick != lastPulse)
 				Pulse(tick);
 			if (terminal)
