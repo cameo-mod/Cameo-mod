@@ -332,12 +332,13 @@ class RecordSliceTests(unittest.TestCase):
                 {"game_uid": "g", "record_id": "g|seat_1",
                  "player": {"seat": "seat_1", "faction": "td_gdi"}},
                 {"game_uid": "g", "record_id": "g|seat_2",
-                 "player": {"seat": "seat_2", "faction": "td_gdi"}},
+                 "player": {"seat": "seat_2", "faction": "td_nod"}},
             ]
 
             def pulse(player, seq, tick, kind="pulse", terminal=False):
                 return {"schema": 2, "game_uid": "g", "player": player,
-                        "map_uid": "map", "faction": "td_gdi", "profile": "conventional",
+                        "map_uid": "map", "faction": "td_gdi" if player == "Multi0" else "td_nod",
+                        "profile": "conventional",
                         "profile_supported": True, "dropped": 0, "kind": kind,
                         "tick": tick, "seq": seq, "queues_complete": True,
                         "player_active": not terminal, "seat_state": "lost" if terminal else "active",
@@ -353,6 +354,10 @@ class RecordSliceTests(unittest.TestCase):
                              pulse(player, 3, 100, kind="end", terminal=True)])
             path.write_text("".join(json.dumps(row) + "\n" for row in rows), encoding="utf-8")
             self.assertEqual(batch.economy_health_file_status(support, records), ("OBSERVED_HEALTHY", None))
+
+            reversed_seats = [row for player in ("Multi1", "Multi0") for row in rows if row["player"] == player]
+            path.write_text("".join(json.dumps(row) + "\n" for row in reversed_seats), encoding="utf-8")
+            self.assertEqual(batch.economy_health_file_status(support, records)[0], "UNKNOWN")
 
             path.write_text("".join(json.dumps(row) + "\n" for row in rows[:-1]), encoding="utf-8")
             self.assertEqual(batch.economy_health_file_status(support, records)[0], "UNKNOWN")

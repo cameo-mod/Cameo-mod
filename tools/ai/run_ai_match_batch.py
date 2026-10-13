@@ -867,7 +867,7 @@ def economy_health_file_status(support: pathlib.Path, match_records: list[dict])
         rows, _receipt = read_jsonl(health_path)
         if not rows:
             return "UNKNOWN", f"no economy-health rows: {health_path}"
-        expected_factions_by_uid: dict[str, list[str]] = {}
+        expected_seats_by_uid: dict[str, list[tuple[int, str]]] = {}
         record_ids: set[str] = set()
         for record in match_records:
             if not isinstance(record, dict):
@@ -877,26 +877,38 @@ def economy_health_file_status(support: pathlib.Path, match_records: list[dict])
             player = record.get("player")
             seat = player.get("seat") if isinstance(player, dict) else None
             faction = player.get("faction") if isinstance(player, dict) else None
+            seat_match = re.fullmatch(r"seat_(\d+)", seat) if isinstance(seat, str) else None
             if (not isinstance(record_id, str) or not isinstance(uid, str) or not uid
-                    or record_id.partition("|")[0] != uid or not isinstance(seat, str) or not seat
+                    or record_id.partition("|")[0] != uid or seat_match is None
                     or not isinstance(faction, str) or not faction):
                 return "UNKNOWN", "match records lack canonical game/seat/faction identity"
             if record_id in record_ids:
                 return "UNKNOWN", "duplicate match record/seat identity"
             record_ids.add(record_id)
-            expected_factions_by_uid.setdefault(uid, []).append(faction)
-        if len(expected_factions_by_uid) != 1 or not match_records:
+            expected_seats_by_uid.setdefault(uid, []).append((int(seat_match.group(1)), faction))
+        if len(expected_seats_by_uid) != 1 or not match_records:
             return "UNKNOWN", "per-game support leaf must contain exactly one match UID"
-        game_uid, expected_factions = next(iter(expected_factions_by_uid.items()))
+        game_uid, expected_seats = next(iter(expected_seats_by_uid.items()))
+        expected_seats.sort()
+        if len({seat for seat, _faction in expected_seats}) != len(expected_seats):
+            return "UNKNOWN", "duplicate anonymous match seat identity"
         if any(not isinstance(row, dict) or row.get("game_uid") != game_uid for row in rows):
             return "UNKNOWN", "economy-health stream contains malformed or foreign game UID rows"
-        players = {row.get("player") for row in rows if isinstance(row.get("player"), str)}
+        players: list[str] = []
+        seen_players: set[str] = set()
+        for row in rows:
+            player_name = row.get("player")
+            if isinstance(player_name, str) and player_name not in seen_players:
+                seen_players.add(player_name)
+                players.append(player_name)
         if len(players) != len(match_records):
             return "UNKNOWN", (f"economy-health seat coverage mismatch: {len(players)} player(s) "
                                 f"for {len(match_records)} match record(s)")
-        expected_factions = sorted(expected_factions)
+        # Both writers traverse world.Players in order. Match rows expose the
+        # anonymized seat_N key; health rows expose InternalName. Their first
+        # row order is the only supported bridge between those identities.
         actual_factions = []
-        for player_name in sorted(players):
+        for player_name in players:
             player_rows = [row for row in rows if row.get("player") == player_name]
             report = analyze_economy(rows, game_uid, player_name)
             if report.get("status") == "BLOCK":
@@ -908,8 +920,8 @@ def economy_health_file_status(support: pathlib.Path, match_records: list[dict])
             if len(factions) != 1 or not all(isinstance(value, str) and value for value in factions):
                 return "UNKNOWN", f"economy-health faction identity is missing or inconsistent ({player_name})"
             actual_factions.append(next(iter(factions)))
-        if sorted(actual_factions) != expected_factions:
-            return "UNKNOWN", "economy-health factions do not match recorded match seats"
+        if actual_factions != [faction for _seat, faction in expected_seats]:
+            return "UNKNOWN", "economy-health player order/factions do not match anonymous match seats"
     except (OSError, ValueError, TypeError, KeyError, ImportError) as exc:
         return "UNKNOWN", f"cannot inspect expected economy-health file {health_path}: {exc}"
     return "OBSERVED_HEALTHY", None
