@@ -29,8 +29,8 @@ var assembly = AssemblyLoadContext.Default.LoadFromAssemblyPath(dll);
 var schema = assembly.GetType("OpenRA.Mods.Cameo.Traits.AiEconomyHealthSchema", throwOnError: true)!;
 var flags = BindingFlags.Static | BindingFlags.NonPublic;
 var raw = schema.GetMethod("Raw", flags) ?? throw new InvalidOperationException("Raw serializer unavailable");
-var accepted = schema.GetMethod("AcceptedResourceEvidence", flags)
-    ?? throw new InvalidOperationException("Accepted-resource serializer unavailable");
+var accepted = schema.GetMethod("AcceptedResourceRollup", flags)
+    ?? throw new InvalidOperationException("Accepted-resource rollup serializer unavailable");
 var results = new List<object>();
 foreach (var (label, perTick, stress) in new[]
 {
@@ -50,9 +50,17 @@ foreach (var (label, perTick, stress) in new[]
         for (var player = 0; player < 2; player++)
         {
             var playerName = "hard-" + player;
-            for (var n = 0; n < perTick; n++)
+            if (perTick > 0)
             {
-                var evidence = accepted.Invoke(null, new object[] { (uint)(17 + player), token, 100, 100 })!;
+                var refineries = new object[perTick];
+                for (var n = 0; n < perTick; n++)
+                    refineries[n] = new
+                    {
+                        refinery = (uint)(17 + player + n), resource_type = token,
+                        count = 100, value = (long)100, events = 1
+                    };
+                var evidence = accepted.Invoke(null, new object[]
+                    { perTick, (long)(perTick * 100), (long)(perTick * 100), refineries, 0, tick })!;
                 Count("resource-accepted", evidence);
             }
 
@@ -97,7 +105,7 @@ if (!assemblyDigest.AsSpan().SequenceEqual(SHA256.HashData(File.ReadAllBytes(dll
 var receipt = new
 {
     schema = 1,
-    scope = "actual frozen compiled Raw/AcceptedResourceEvidence serializer; declared synthetic workloads only",
+    scope = "actual frozen compiled Raw/AcceptedResourceRollup serializer; declared synthetic workloads only",
     assembly_path = dll, assembly_sha256 = Convert.ToHexString(assemblyDigest).ToLowerInvariant(),
     runtime_cost_measured = false, disk_cost_measured = false, actual_event_coverage_measured = false,
     adoption_approved = false, results

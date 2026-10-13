@@ -36,6 +36,7 @@ namespace OpenRA.Mods.Cameo.Traits
 		HashSet<uint> resolvedEpisodes;
 		List<EconomyQueueObservation> observations;
 		List<EconomyQueueSnapshot> snapshots;
+		AcceptedDeliveryWindow acceptedWindow;
 		string gameUid;
 		int sequence;
 		int rawSequence;
@@ -63,6 +64,7 @@ namespace OpenRA.Mods.Cameo.Traits
 			observations = new List<EconomyQueueObservation>(AiEconomyHealthState.MaximumQueues);
 			snapshots = new List<EconomyQueueSnapshot>(AiEconomyHealthState.MaximumQueues);
 			resolvedEpisodes = new HashSet<uint>();
+			acceptedWindow = new AcceptedDeliveryWindow();
 			groups = self.Info.TraitInfos<BaseBuilderBotModuleCAInfo>()
 				.SelectMany(i => i.BuildingQueues).ToHashSet(StringComparer.Ordinal);
 			if (groups.Count == 0 || string.IsNullOrEmpty(uid))
@@ -73,6 +75,7 @@ namespace OpenRA.Mods.Cameo.Traits
 		{
 			if (state == null || finished)
 				return;
+			FlushAccepted();
 			observations.Clear();
 			foreach (var pair in self.World.ActorsWithTrait<ProductionQueue>())
 			{
@@ -214,24 +217,129 @@ namespace OpenRA.Mods.Cameo.Traits
 			}
 		}
 
+		void FlushAccepted()
+		{
+			if (!acceptedWindow.HasPending)
+				return;
+			WriteRaw("resource-accepted", acceptedWindow.FirstTick, acceptedWindow.RollupEvidence());
+			acceptedWindow.Clear();
+		}
+
 		void INotifyResourceAccepted.OnResourceAccepted(Actor actor, Actor refinery, string resourceType, int count, int value)
 		{
 			if (state == null || finished || refinery.Owner != self.Owner)
 				return;
-			WriteRaw("resource-accepted", self.World.WorldTick,
-				AiEconomyHealthSchema.AcceptedResourceEvidence(refinery.ActorID, resourceType, count, value));
+			if (!acceptedWindow.Add(refinery.ActorID, resourceType, count, value, self.World.WorldTick))
+				state.MarkIncomplete();
 		}
 	}
 	internal readonly record struct EconomyHealthIdentity(int Sequence, int Tick, string Kind,
 		string GameUid, string Player, string MapUid, string Faction, string Profile,
 		bool ProfileSupported, int Dropped);
 
+	// Accepted deliveries arrive one callback per delivery; the retired per-event raw
+	// shape emitted a record each time and could overflow the writer bound before
+	// end-of-match (three deliveries/player/tick measured 271808 raw records at
+	// 45001 ticks against the 200000 cap). The window folds deliveries by
+	// (refinery, resource type) so the recorder emits at most one rollup record per
+	// observe window. Distinct-key overflow folds into the window totals and reports
+	// false — the caller latches incomplete instead of dropping evidence.
+	internal sealed class AcceptedDeliveryWindow
+	{
+		internal const int MaximumKeys = 256;
+		readonly Dictionary<(uint Refinery, string Type), Aggregate> pending = new();
+		int events;
+		long credited;
+		long gross;
+		int foldedEvents;
+		int firstTick = -1;
+		int lastTick = -1;
+
+		struct Aggregate
+		{
+			internal int Events;
+			internal int Count;
+			internal long Value;
+		}
+
+		internal bool HasPending => pending.Count > 0 || foldedEvents > 0;
+		internal int FirstTick => firstTick;
+
+		internal bool Add(uint refinery, string resourceType, int count, int value, int tick)
+		{
+			if (firstTick < 0)
+				firstTick = tick;
+			lastTick = tick;
+			events++;
+			gross += value;
+			if (value > 0)
+				credited += value;
+			var key = (refinery, resourceType);
+			if (!pending.TryGetValue(key, out var aggregate))
+			{
+				if (pending.Count == MaximumKeys)
+				{
+					foldedEvents++;
+					return false;
+				}
+				aggregate = new Aggregate();
+			}
+			aggregate.Events++;
+			aggregate.Count += count;
+			aggregate.Value += value;
+			pending[key] = aggregate;
+			return true;
+		}
+
+		internal object RollupEvidence()
+		{
+			if (!HasPending)
+				return null;
+			// Ordinal key ordering keeps the rollup bytes deterministic.
+			var refineries = pending
+				.OrderBy(kv => kv.Key.Refinery)
+				.ThenBy(kv => kv.Key.Type, StringComparer.Ordinal)
+				.Select(kv => (object)new
+				{
+					refinery = kv.Key.Refinery,
+					resource_type = kv.Key.Type,
+					count = kv.Value.Count,
+					value = kv.Value.Value,
+					events = kv.Value.Events
+				})
+				.ToArray();
+			return AiEconomyHealthSchema.AcceptedResourceRollup(
+				events, credited, gross, refineries, foldedEvents, lastTick);
+		}
+
+		internal void Clear()
+		{
+			pending.Clear();
+			events = 0;
+			credited = 0;
+			gross = 0;
+			foldedEvents = 0;
+			firstTick = -1;
+			lastTick = -1;
+		}
+	}
+
 	// The runtime recorder and consumer-fit tests use the same serializer.
 	internal static class AiEconomyHealthSchema
 	{
-		internal static object AcceptedResourceEvidence(uint refinery, string type, int count, int value) =>
-			new { refinery, resource_type = type, count, value,
-				accepted_credit = AiEconomyHealthState.AcceptedDelivery(value), harvester = (uint?)null };
+		internal static object AcceptedResourceRollup(int deliveries, long credited, long grossValue,
+			IReadOnlyList<object> refineries, int foldedDeliveries, int lastTick) =>
+			new
+			{
+				deliveries,
+				credited,
+				gross_value = grossValue,
+				accepted_credit = credited > 0,
+				refineries,
+				folded_deliveries = foldedDeliveries,
+				last_tick = lastTick,
+				harvester = (uint?)null
+			};
 
 		internal static string Raw(int sequence, int tick, string gameUid, string player, string kind, object evidence) =>
 			JsonSerializer.Serialize(new { schema = 2, seq = sequence, tick, kind,

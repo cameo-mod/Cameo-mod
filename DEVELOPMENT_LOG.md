@@ -1,3 +1,46 @@
+# 2026-10-13 — Devin: ECON-RAW-FLOOD-AGG (01a13672-5acb) — per-window accepted-delivery rollup
+
+*Devin Coordinator.* Task 01a13672-5acb (sentinel hard blocker): the raw stream's
+`resource-accepted` kind wrote one record per accepted delivery; the c331 sizing
+receipt proved three deliveries/player/tick over 45001 ticks serializes to
+271808 records against the 200000-record writer bound — guaranteed UNKNOWN
+capture under real harvest load.
+
+- **Fix (record-only, bounded, fail-closed preserved):** new internal
+  `AcceptedDeliveryWindow` folds deliveries by (refinery id, resource type) and
+  tracks window totals — `deliveries`, `credited` (positive-value sum),
+  `gross_value` (signed sum), `first`/`last_tick`. `OnResourceAccepted` now only
+  accumulates; `Observe` calls `FlushAccepted()` first, emitting at most one
+  `resource-accepted` record per world tick per player (~45k worst case vs the
+  previous unbounded event rate). Ownership and finished-state guards unchanged.
+- **Evidence contract:** the rollup carries `deliveries`, `credited`,
+  `gross_value`, `accepted_credit` (credited > 0), `refineries` (ordinal-sorted
+  per-key detail: refinery, resource_type, count, value, events),
+  `folded_deliveries`, `last_tick`, `harvester` (explicit null — sender identity
+  stays unknown). Distinct-key overflow beyond `MaximumKeys = 256` folds into
+  window totals, returns false and latches incomplete via `MarkIncomplete`.
+  Raw `schema` stays 2; the payload shape of this kind changed deliberately.
+- **Determinism:** detail ordering is `OrderBy(refinery).ThenBy(type, Ordinal)`
+  — no dictionary iteration-order dependence; the window adds no simulation,
+  RNG, order-generation or multiplayer effect.
+- **Tests (C# +4 net, schema file — not run, no build/test admission this slot):**
+  same-key folding into one record with correct totals and ordinal detail;
+  zero/negative credit keeps `accepted_credit` false; 256-key overflow folds +
+  `folded_deliveries`; cleared window starts a fresh rollup; the flood pin —
+  3 deliveries/player/tick over 45001 windows emits exactly 45001 records
+  (< 200000 bound).
+- **Sizing fixture:** `tools/ai/raw-size-fixture` now calls the compiled
+  `AcceptedResourceRollup` serializer once per player/tick (workload `perTick`
+  parameterizes the folded detail, not the record count); README retains the
+  retired-shape 271808 receipt as historical defect evidence and states the
+  bound must be re-measured at exact head before it is re-claimed.
+- **Verification — static only:** `git diff --check` clean; no other consumer
+  references the removed `AcceptedResourceEvidence` serializer (fixture +
+  schema test were the only callers; analyzer/Python tooling consumes the
+  health stream, not raw). Build/NUnit/fixture re-run queued under DevOps
+  admission. Sentinel stays blocked pending review + land + re-gate.
+- **Branch:** `devin/econ-raw-flood-agg` on `ef73abbcb` (post-landing master).
+
 # 2026-10-13 — Devin: DEFEATED-SEAT-TAIL-FIX — Resolved-episode `Removed` + `seat_state`, DEFEATED verdict
 
 *Devin-Integrator.* Lead directive after the first master capture (uid

@@ -193,3 +193,25 @@ already contains the reviewed restack 7ca7e9159 byte-identical):
   no runtime capture, no launch, no measured runtime cost. The dual gate is
   analyzer-side tooling only — it does not mount the recorder or claim live
   coverage.
+
+2026-10-13 accepted-delivery rollup (ECON-RAW-FLOOD-AGG): the raw stream's
+`resource-accepted` kind now carries a per-window rollup instead of one record
+per delivery. `INotifyResourceAccepted` fires once per accepted delivery and the
+per-event shape could exceed the 200000-record writer bound before end-of-match —
+the c331 sizing receipt measured 271808 records for three deliveries/player/tick
+over 45001 ticks, which forced UNKNOWN capture. `AcceptedDeliveryWindow` folds
+deliveries by (refinery, resource type), tracks window totals (deliveries,
+positive credited value, gross value, first/last delivery tick), and the recorder
+flushes one rollup record at the top of each Observe — at most one
+`resource-accepted` record per world tick per player. Evidence fields:
+`deliveries`, `credited` (sum of positive values), `gross_value` (signed sum),
+`accepted_credit` (any positive credit), `refineries` (bounded ordinal-sorted
+per-key detail: refinery, resource_type, count, value, events),
+`folded_deliveries`, `last_tick`, `harvester` (explicit null — sender identity
+stays unknown). Distinct-key overflow beyond MaximumKeys=256 folds into the
+window totals, sets `folded_deliveries`, returns false and latches incomplete —
+bounded, fail-closed, no silent drop. Ownership and finished-state filtering are
+unchanged; the window adds no simulation, RNG, order or multiplayer effect.
+The raw record schema stays 2; the evidence payload for this kind changed shape,
+so the sizing fixture and schema tests were updated and a fresh exact-head
+measurement is required before the record bound is re-claimed.
