@@ -47,6 +47,15 @@ namespace OpenRA.Mods.CA.Traits
 			starveTicks > 0 && blockedSince >= 0 && now - blockedSince >= starveTicks;
 
 		/// <summary>
+		/// True when the cash floor itself is what holds a wanted item back — the exact floor term of
+		/// <see cref="BlockedByCash"/> (refineries and the planner's affordable wants ride past it).
+		/// The starvation clock runs only while this holds, so a same-tick queue block or a recovered
+		/// bank never counts toward starvation. Pure.
+		/// </summary>
+		public static bool FloorBlocks(int cash, int minCashRequirement, bool isRefinery, bool plannerWant, int productionCost) =>
+			cash < minCashRequirement && !isRefinery && !(plannerWant && cash >= productionCost);
+
+		/// <summary>
 		/// TF-2: the unit side's mobile-production reservation — optional spend (optional defences
 		/// and crawl links included) may not push cash below the reserved floor; army-first
 		/// essentials ride their own exemption. Pure, for the tests.
@@ -627,6 +636,47 @@ namespace OpenRA.Mods.CA.Traits
 		/// </summary>
 		public static int ReleaseRefineryReservations(IBotExpansionTargetProvider law, object owner) =>
 			law?.ReleaseRefineryAnchors(owner) ?? 0;
+	}
+
+	/// <summary>
+	/// Per-producer lifecycle of the cash-starvation clock. A producer's run starts the first tick the
+	/// cash floor blocks its wanted item and ends — timestamp dropped — the moment the floor stops
+	/// blocking, the producer is busy/held/latched, or it leaves the live set; a later floor block
+	/// therefore always restarts from zero. Pure state, integer ticks, no RNG.
+	/// </summary>
+	public sealed class CashStarvationClock
+	{
+		readonly Dictionary<uint, int> since = new Dictionary<uint, int>();
+
+		/// <summary>Feed the floor verdict of this sweep: starts the run on the first blocked tick, ends it otherwise.</summary>
+		public void Observe(uint producer, bool floorBlocks, int now)
+		{
+			if (floorBlocks)
+				since.TryAdd(producer, now);
+			else
+				since.Remove(producer);
+		}
+
+		/// <summary>The producer cannot take a new item this sweep (busy, held, relocation-held, latched, nothing wanted).</summary>
+		public void Reset(uint producer) => since.Remove(producer);
+
+		/// <summary>Drop every producer not seen this sweep (disabled or destroyed queues).</summary>
+		public void Retain(ISet<uint> live)
+		{
+			List<uint> gone = null;
+			foreach (var producer in since.Keys)
+				if (!live.Contains(producer))
+					(gone ??= new List<uint>()).Add(producer);
+
+			if (gone != null)
+				foreach (var producer in gone)
+					since.Remove(producer);
+		}
+
+		public bool Starved(uint producer, int now, int starveTicks) =>
+			since.TryGetValue(producer, out var start) && BaseBuilderQueueEvalCA.CashStarved(start, now, starveTicks);
+
+		public int Tracked => since.Count;
 	}
 
 	// REPLAY-HEALTH-LOGGER (ACK-2, task 01a12023): record-only queue transitions for the

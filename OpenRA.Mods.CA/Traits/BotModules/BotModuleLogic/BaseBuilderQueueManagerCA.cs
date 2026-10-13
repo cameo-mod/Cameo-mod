@@ -49,9 +49,11 @@ namespace OpenRA.Mods.CA.Traits
 		int minCashRequirement;
 
 		// Cash-starvation escape: per producer, the tick its wanted item first sat under the cash floor.
-		// Cleared the moment the queue admits an item (or has nothing wanted), so the escape only
-		// fires for an uninterrupted run of floor-blocked sweeps. Integer ticks, no RNG.
-		readonly Dictionary<uint, int> cashBlockedSince = new Dictionary<uint, int>();
+		// The run ends the moment the floor stops blocking, the producer is busy/held/latched/relocating,
+		// nothing is wanted, or the producer leaves the live set, so the escape only fires for an
+		// uninterrupted run of floor-blocked sweeps (CashStarvationClock). Integer ticks, no RNG.
+		readonly CashStarvationClock cashClock = new CashStarvationClock();
+		readonly HashSet<uint> sweptProducers = new HashSet<uint>();
 		CPos? baseCenterKeepsFailing = null;
 
 		// ECON-A: ChooseBuildLocation set this when an expansion-demand cell came from the
@@ -656,11 +658,16 @@ namespace OpenRA.Mods.CA.Traits
 			// PERF: Queue only one actor at a time per category
 			itemQueuedThisTick = false;
 			var active = false;
+			sweptProducers.Clear();
 			foreach (var queue in AIUtils.FindQueues(player, Category))
 			{
+				sweptProducers.Add(queue.Actor.ActorID);
 				if (TickQueue(bot, queue))
 					active = true;
 			}
+
+			// A producer that left FindQueues (disabled or destroyed) must not keep a stale starvation run.
+			cashClock.Retain(sweptProducers);
 
 			// TF-2 F2: the sweep-end flush — a producer that left FindQueues (destroyed or
 			// disabled) can never reconcile, so its tracked items settle here once instead of
@@ -691,7 +698,10 @@ namespace OpenRA.Mods.CA.Traits
 		bool TickQueue(IBot bot, ProductionQueue queue)
 		{
 			if (queue.Actor == baseBuilder.RelocationHoldConyard)
+			{
+				cashClock.Reset(queue.Actor.ActorID);
 				return false;
+			}
 
 			// TF-2: feed the unit side's spend ledger — every in-flight item with total/remaining
 			// cost and its army-first flag, so the paid-share metric is real and an item that
@@ -708,6 +718,10 @@ namespace OpenRA.Mods.CA.Traits
 
 			var currentBuilding = queue.AllQueued().FirstOrDefault();
 
+			// A busy producer (item queued/ready) or a placement-latched one takes no new item this sweep.
+			if (currentBuilding != null || failCount >= baseBuilder.Info.MaximumFailedPlacementAttempts)
+				cashClock.Reset(queue.Actor.ActorID);
+
 			// Waiting to build something
 			if (currentBuilding == null && failCount < baseBuilder.Info.MaximumFailedPlacementAttempts)
 			{
@@ -715,7 +729,7 @@ namespace OpenRA.Mods.CA.Traits
 				var item = ChooseBuildingToBuild(queue);
 				if (item == null)
 				{
-					cashBlockedSince.Remove(queue.Actor.ActorID);
+					cashClock.Reset(queue.Actor.ActorID);
 					return false;
 				}
 
@@ -729,7 +743,10 @@ namespace OpenRA.Mods.CA.Traits
 				// ordinary same-name duplicate of an ORDINARY item, legal before) pass unchanged.
 				if (baseBuilder.ExpansionPrebuildEnabled && demandPick.Demand == null
 					&& baseBuilder.DemandForQueuedItem(item.Name, queue.Actor) != null)
+				{
+					cashClock.Reset(queue.Actor.ActorID);
 					return false;
+				}
 
 				// We shouldn't be queueing new buildings (other than refineries) when we're low on cash.
 				// REF-1 B1/B2: under the refinery law the planner's own wants (the crawl link and the due MCV's
@@ -745,21 +762,19 @@ namespace OpenRA.Mods.CA.Traits
 				// Cash-starvation escape: units draining the bank under the floor every sweep must not
 				// hold construction out forever — after BuildingCashStarvationTicks floor-blocked ticks
 				// the item rides at its own cost (the same exemption the planner wants get).
+				// The clock follows the FLOOR verdict every sweep, whether or not a same-tick queue block also
+				// applies: it starts on the first floor-blocked sweep and ends the first sweep the floor lets go.
 				var cashNow = playerResources.GetCashAndResources();
-				var starved = cashBlockedSince.TryGetValue(queue.Actor.ActorID, out var blockedSince)
-					&& BaseBuilderQueueEvalCA.CashStarved(blockedSince, world.WorldTick, baseBuilder.Info.BuildingCashStarvationTicks);
-				if (BaseBuilderQueueEvalCA.BlockedByCash(cashNow, minCashRequirement,
-						baseBuilder.Info.RefineryTypes.Contains(item.Name), plannerWant || demandPick.Demand != null,
-						queue.GetProductionCost(item), itemQueuedThisTick, starved))
-				{
-					// Only a floor block starts the clock — a same-tick queue block says nothing about cash.
-					if (!itemQueuedThisTick && cashNow < minCashRequirement)
-						cashBlockedSince.TryAdd(queue.Actor.ActorID, world.WorldTick);
-
+				var isRefinery = baseBuilder.Info.RefineryTypes.Contains(item.Name);
+				var exempt = plannerWant || demandPick.Demand != null;
+				var cost = queue.GetProductionCost(item);
+				cashClock.Observe(queue.Actor.ActorID,
+					BaseBuilderQueueEvalCA.FloorBlocks(cashNow, minCashRequirement, isRefinery, exempt, cost), world.WorldTick);
+				var starved = cashClock.Starved(queue.Actor.ActorID, world.WorldTick, baseBuilder.Info.BuildingCashStarvationTicks);
+				if (BaseBuilderQueueEvalCA.BlockedByCash(cashNow, minCashRequirement, isRefinery, exempt, cost, itemQueuedThisTick, starved))
 					return false;
-				}
 
-				cashBlockedSince.Remove(queue.Actor.ActorID);
+				cashClock.Reset(queue.Actor.ActorID);
 
 				// Cameo (§12.20): the army-first vote - a provider (ArmyFirstBotModule, the one owner) can hold new
 				// non-essential buildings so cash flows to unit production while it needs to. Construction yards,

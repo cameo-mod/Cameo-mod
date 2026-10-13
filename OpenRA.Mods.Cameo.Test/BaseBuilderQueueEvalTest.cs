@@ -78,6 +78,94 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(BaseBuilderQueueEvalCA.CashStarved(0, 5000, -1), Is.False, "negative disables the escape");
 		}
 
+		[Test]
+		public void FloorBlocksIsTheFloorTermOfBlockedByCash()
+		{
+			Assert.That(BaseBuilderQueueEvalCA.FloorBlocks(625, 1000, false, false, 300), Is.True);
+			Assert.That(BaseBuilderQueueEvalCA.FloorBlocks(1000, 1000, false, false, 300), Is.False, "at the floor");
+			Assert.That(BaseBuilderQueueEvalCA.FloorBlocks(625, 1000, true, false, 700), Is.False, "refinery rides past");
+			Assert.That(BaseBuilderQueueEvalCA.FloorBlocks(625, 1000, false, true, 300), Is.False, "affordable planner want");
+			Assert.That(BaseBuilderQueueEvalCA.FloorBlocks(625, 1000, false, true, 700), Is.True, "unaffordable planner want");
+		}
+
+		// CashStarvationClock lifecycle (Sol review e4ef765ee): the run is per producer and ends whenever the
+		// floor stops blocking or the producer cannot take an item.
+
+		const uint P = 7;
+		const uint Q = 9;
+
+		[Test]
+		public void ClockStarvesOnlyAfterAnUninterruptedFloorBlockedRun()
+		{
+			var clock = new CashStarvationClock();
+			clock.Observe(P, true, 100);
+			Assert.That(clock.Starved(P, 399, 300), Is.False);
+			clock.Observe(P, true, 399);
+			Assert.That(clock.Starved(P, 400, 300), Is.True);
+		}
+
+		[Test]
+		public void ClockRestartsWhenTheFloorRecoversBetweenBlockedSweeps()
+		{
+			// Sol's sequence: blocked at 100 (cash 625/floor 1000); at 200 another producer took the sweep while
+			// the bank was >= 1000, so the floor no longer blocks; at 400 the bank is 625 again.
+			var clock = new CashStarvationClock();
+			clock.Observe(P, true, 100);
+			clock.Observe(P, false, 200);
+			clock.Observe(P, true, 400);
+			Assert.That(clock.Starved(P, 400, 300), Is.False, "the stale tick-100 run must not count");
+			Assert.That(clock.Starved(P, 699, 300), Is.False);
+			Assert.That(clock.Starved(P, 700, 300), Is.True, "a fresh run from tick 400 starves at 700");
+		}
+
+		[Test]
+		public void ClockResetsWhenTheProducerIsBusyHeldOrHasNothingWanted()
+		{
+			var clock = new CashStarvationClock();
+			clock.Observe(P, true, 100);
+			clock.Reset(P);
+			Assert.That(clock.Starved(P, 1000, 300), Is.False);
+			Assert.That(clock.Tracked, Is.EqualTo(0));
+
+			// Back to floor-blocked afterwards: restarts at the new tick.
+			clock.Observe(P, true, 900);
+			Assert.That(clock.Starved(P, 1000, 300), Is.False);
+			Assert.That(clock.Starved(P, 1200, 300), Is.True);
+		}
+
+		[Test]
+		public void ClockDropsProducersThatLeftTheLiveSet()
+		{
+			var clock = new CashStarvationClock();
+			clock.Observe(P, true, 100);
+			clock.Observe(Q, true, 100);
+			clock.Retain(new HashSet<uint> { Q });
+			Assert.That(clock.Starved(P, 1000, 300), Is.False, "the disabled producer's run is gone");
+			Assert.That(clock.Starved(Q, 1000, 300), Is.True, "the live producer keeps its run");
+			Assert.That(clock.Tracked, Is.EqualTo(1));
+		}
+
+		[Test]
+		public void ClockProducersAreIndependent()
+		{
+			var clock = new CashStarvationClock();
+			clock.Observe(P, true, 100);
+			clock.Observe(Q, true, 350);
+			Assert.That(clock.Starved(P, 400, 300), Is.True);
+			Assert.That(clock.Starved(Q, 400, 300), Is.False);
+			clock.Observe(P, false, 401);
+			Assert.That(clock.Starved(P, 401, 300), Is.False);
+			Assert.That(clock.Starved(Q, 650, 300), Is.True);
+		}
+
+		[Test]
+		public void ClockWithAZeroThresholdNeverStarves()
+		{
+			var clock = new CashStarvationClock();
+			clock.Observe(P, true, 0);
+			Assert.That(clock.Starved(P, 100000, 0), Is.False);
+		}
+
 		// MobileSpendBlocks (TF-2): optional spend may not dip under the unit side's reserved share.
 
 		[Test]
