@@ -543,7 +543,8 @@ class FingerprintTests(unittest.TestCase):
         tmp = self._tree()
         try:
             wrong_pin = "0" * 40
-            (tmp / "mod.config").write_text(f'ENGINE_VERSION="{wrong_pin}"\n', encoding="utf-8")
+            (tmp / "mod.config").write_text(
+                f'ENGINE_VERSION="{wrong_pin}"\nENGINE_DIRECTORY="engine"\n', encoding="utf-8")
             with self.assertRaisesRegex(ValueError, "does not match configured ENGINE_VERSION"):
                 batch.engine_runtime_provenance(tmp, tmp / "engine")
         finally:
@@ -577,6 +578,44 @@ class FingerprintTests(unittest.TestCase):
             after = batch.check_executable_after(provenance)
             self.assertTrue(after["executable_hash_unchanged"])
             self.assertEqual(after["executable_sha256_before"], after["executable_sha256_after"])
+        finally:
+            shutil.rmtree(tmp, ignore_errors=True)
+
+    def test_changed_executable_discards_match_records_before_scoring(self):
+        rows = [{"record_id": "seat-1"}, {"record_id": "seat-2"}]
+        trusted, discarded = batch.trusted_attempt_records(rows, executable_hash_unchanged=False)
+        self.assertEqual(trusted, [])
+        self.assertEqual(discarded, 2)
+
+    def test_each_retry_attempt_is_persisted_and_included_in_batch(self):
+        tmp = pathlib.Path(tempfile.mkdtemp(prefix="attempt-provenance-"))
+        try:
+            path = tmp / "attempt_provenance.jsonl"
+            attempts = []
+            for number, digest in ((1, "a" * 64), (2, "b" * 64)):
+                batch.append_attempt_provenance(path, attempts, {
+                    "variant": "cell-a",
+                    "repeat": 1,
+                    "attempt": number,
+                    "status": "exit=1" if number == 1 else "ok",
+                    "exit_code": 1 if number == 1 else 0,
+                    "runtime_engine": {
+                        "executable_sha256_before": digest,
+                        "executable_sha256_after": digest,
+                        "executable_hash_unchanged": True,
+                    },
+                })
+
+            batch_attempts = batch.all_attempt_provenance([{
+                "runtime_engine_attempts": attempts,
+            }])
+            persisted_attempts = [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines()]
+            self.assertEqual([item["attempt"] for item in batch_attempts], [1, 2])
+            self.assertEqual(
+                [item["runtime_engine"]["executable_sha256_before"] for item in batch_attempts],
+                ["a" * 64, "b" * 64],
+            )
+            self.assertEqual([item["attempt"] for item in persisted_attempts], [1, 2])
         finally:
             shutil.rmtree(tmp, ignore_errors=True)
 

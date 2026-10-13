@@ -1267,6 +1267,25 @@ def check_executable_after(provenance: dict) -> dict:
     }
 
 
+def trusted_attempt_records(records: list[dict], executable_hash_unchanged: bool) -> tuple[list[dict], int]:
+    """Exclude match rows when the launched executable cannot be verified unchanged."""
+    if executable_hash_unchanged:
+        return records, 0
+    return [], len(records)
+
+
+def append_attempt_provenance(path: pathlib.Path, records: list[dict], record: dict) -> None:
+    """Retain and durably record each launched attempt, including retries."""
+    records.append(record)
+    with path.open("a", encoding="utf-8") as f:
+        f.write(json.dumps(record, sort_keys=True) + "\n")
+
+
+def all_attempt_provenance(results: list[dict]) -> list[dict]:
+    """Flatten per-match attempt records for batch provenance summaries."""
+    return [attempt for result in results for attempt in result.get("runtime_engine_attempts", [])]
+
+
 def _hash_files(base: pathlib.Path, files: list[pathlib.Path]) -> str:
     """One sha256 over (relative name, bytes) per file in sorted order — set
     membership and contents both move the digest; an empty set hashes clean."""
@@ -1602,12 +1621,14 @@ def main() -> int:
 
     results = []
     progress_path = support / "batch_results.jsonl"
+    attempt_provenance_path = support / "attempt_provenance.jsonl"
     batch_id = f"{time.time_ns()}-{os.getpid()}"
     drift_aborted = None
     for run, m in enumerate(matchups, 1):
         render = getattr(args, "render", "fast")
 
         attempt = 0
+        runtime_engine_attempts = []
         drift = None
         current_fingerprint = batch_fingerprint
         while True:
@@ -1662,10 +1683,23 @@ def main() -> int:
                     "\nFAIL: launched OpenRA.exe changed or became unavailable during match: "
                     + str(executable_provenance.get("executable_hash_error") or "SHA256 mismatch")
                 )
+            attempt_record = {
+                "variant": m["variant"],
+                "repeat": m["repeat"],
+                "attempt": attempt,
+                "status": status,
+                "exit_code": exit_code,
+                "runtime_engine": {
+                    **current_fingerprint["runtime_engine"],
+                    **executable_provenance,
+                },
+            }
+            append_attempt_provenance(attempt_provenance_path, runtime_engine_attempts, attempt_record)
             elapsed = int(time.time() - started)
             records = read_appended_records(match_log_path, 0)
-            discarded_records = len(records) if executable_changed else 0
-            if executable_changed:
+            records, discarded_records = trusted_attempt_records(
+                records, executable_provenance["executable_hash_unchanged"])
+            if discarded_records:
                 # The bytes under the launched path no longer prove which engine
                 # produced these rows, so preserve raw logs but exclude them from
                 # summaries and scoreboards.
@@ -1757,6 +1791,7 @@ def main() -> int:
                 **current_fingerprint["runtime_engine"],
                 **executable_provenance,
             },
+            "runtime_engine_attempts": runtime_engine_attempts,
             "exit_code": exit_code,
             "attempts": attempt,
             "wall_seconds": elapsed,
@@ -1808,20 +1843,36 @@ def main() -> int:
     new_exceptions = sorted({name for result in results for name in result.get("new_exceptions", [])})
     scoreboard = ab_scoreboard(results)
     team_board = team_scoreboard(results) if args.team_size > 1 else None
-    attempt_provenance = [result["runtime_engine"] for result in results if "runtime_engine" in result]
+    attempt_provenance = all_attempt_provenance(results)
     runtime_engine_batch = dict(batch_fingerprint["runtime_engine"])
     runtime_engine_batch["executable_sha256_after"] = None
     runtime_engine_batch["executable_hash_unchanged"] = False
     runtime_engine_batch["executable_hash_error"] = "no completed match attempt"
     if attempt_provenance:
-        runtime_engine_batch["executable_sha256_after"] = attempt_provenance[-1].get("executable_sha256_after")
+        runtime_engine_batch["executable_sha256_after"] = attempt_provenance[-1]["runtime_engine"].get(
+            "executable_sha256_after")
         runtime_engine_batch["executable_hash_unchanged"] = all(
-            item.get("executable_hash_unchanged") is True for item in attempt_provenance
+            item["runtime_engine"].get("executable_hash_unchanged") is True for item in attempt_provenance
         )
         runtime_engine_batch["executable_hash_error"] = next(
-            (item.get("executable_hash_error") for item in attempt_provenance if not item.get("executable_hash_unchanged")),
+            (item["runtime_engine"].get("executable_hash_error") for item in attempt_provenance
+             if not item["runtime_engine"].get("executable_hash_unchanged")),
             None,
         )
+        runtime_engine_batch["match_attempts"] = [
+            {
+                "variant": item["variant"],
+                "repeat": item["repeat"],
+                "attempt": item["attempt"],
+                "status": item["status"],
+                "exit_code": item["exit_code"],
+                "executable_sha256_before": item["runtime_engine"].get("executable_sha256_before"),
+                "executable_sha256_after": item["runtime_engine"].get("executable_sha256_after"),
+                "executable_hash_unchanged": item["runtime_engine"].get("executable_hash_unchanged"),
+                "executable_hash_error": item["runtime_engine"].get("executable_hash_error"),
+            }
+            for item in attempt_provenance
+        ]
     summary = {
         "support_dir": str(support),
         "fingerprint": batch_fingerprint,
