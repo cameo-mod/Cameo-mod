@@ -580,6 +580,31 @@ namespace OpenRA.Mods.CA.Traits
 		public static bool LocationSiteProven(bool live, bool own, bool nameMatches, bool locationEqualsSite)
 			=> live && own && nameMatches && locationEqualsSite;
 
+		/// <summary>QUEUE-REMOVAL-DISCRIMINATOR (01a13686): the removal-cause ladder for an
+		/// item that left its queue — every rung is event-local state resolved at the emit
+		/// tick, never intent or correlation. Elimination trumps all (the seat ended); a
+		/// dead or disposed producer clears its queue on every lifecycle path (kill, sell,
+		/// demolish, transform — INotifyKilled/Selling/BeforeTransform all ClearQueue); a
+		/// live producer owned by someone else was captured (OnOwnerChanged → ClearQueue);
+		/// an item absent from the buildable set of its own live, owned, still-observed
+		/// queue left by rules eviction — the engine diffs exactly that set to evict
+		/// (CancelUnbuildableItems). Anything else stays None = UNKNOWN: queueSeen gates
+		/// the last benign rung because a stale watch on a live, owned queue is not
+		/// buildability evidence.</summary>
+		public static BotQueueCancellationClass RemovalCauseClass(
+			bool playerEliminated, bool producerLive, bool producerOwned, bool queueSeen, bool itemBuildable)
+		{
+			if (playerEliminated)
+				return BotQueueCancellationClass.Elimination;
+			if (!producerLive)
+				return BotQueueCancellationClass.Destruction;
+			if (!producerOwned)
+				return BotQueueCancellationClass.Captured;
+			if (queueSeen && !itemBuildable)
+				return BotQueueCancellationClass.Unbuildable;
+			return BotQueueCancellationClass.None;
+		}
+
 		/// <summary>
 		/// REPAIR-B3 (SPEC_2026-10-09 §3): the admission gate — reserve the claim's WHOLE covered
 		/// set atomically under the provider's current coverage-model version. False = refuse
@@ -754,7 +779,25 @@ namespace OpenRA.Mods.CA.Traits
 
 	public enum BotQueueTransitionReason { None, LimitReached, NoRefinerySite, SaturationLatch, RelocationLatch, DemandHold, CrawlHold, FrontBackHold, DemandCancel }
 
-	public enum BotQueueCancellationClass { None, Production, Destruction, Elimination }
+	public enum BotQueueCancellationClass
+	{
+		None,
+		Production,
+		Destruction,
+		Elimination,
+
+		/// <summary>QUEUE-REMOVAL-DISCRIMINATOR (01a13686): the producer actor is alive
+		/// but owned by another player at the emit tick — an ownership change cleared
+		/// the queue (INotifyOwnerChanged → ClearQueue). A proven capture, not an
+		/// unproven drop.</summary>
+		Captured,
+
+		/// <summary>QUEUE-REMOVAL-DISCRIMINATOR (01a13686): the item left a live, owned,
+		/// still-observed queue while absent from that queue's own BuildableItems set —
+		/// the exact set CancelUnbuildableItems diffs to evict. A proven rules eviction
+		/// (prerequisite/provider churn), not an unproven drop.</summary>
+		Unbuildable
+	}
 
 	public readonly struct BotQueueTransition
 	{
@@ -874,8 +917,13 @@ namespace OpenRA.Mods.CA.Traits
 	/// cleanup or cancellation can remove the same item within the window.</summary>
 	public sealed class BotQueuePendingTerminal
 	{
-		/// <summary>QueueOrder latency is ~1-2 ticks; a request older than this never resolved.</summary>
-		public const int MaxInFlightTicks = 8;
+		/// <summary>QueueOrder latency is ~1-2 ticks on an idle wire, but the observed
+		/// PlaceBuilding intent→removal lag reaches ~19 ticks under load
+		/// (RCA_2026-10-13_placement_order_never_lands_devin.md: 12–19 ticks across the
+		/// ra1/m1/m2 sentinel episodes). A request older than this never resolved; the
+		/// bound covers the worst observed order latency plus margin so a delayed-wire
+		/// placement can still arm its proof window instead of expiring Removed.</summary>
+		public const int MaxInFlightTicks = 24;
 
 		public object Item;
 		public string ItemName;

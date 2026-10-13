@@ -220,7 +220,7 @@ namespace OpenRA.Mods.CA.Traits
 					foreach (var (p, res) in outcomes)
 					{
 						watch.Pending.Remove(p);
-						EmitTerminalOutcome(queue, p.Item, p.ItemName, p, res == BotQueuePendingResolution.EmitRequested, live);
+						EmitTerminalOutcome(queue, p.Item, p.ItemName, p, res == BotQueuePendingResolution.EmitRequested, live, queueSeen: true);
 					}
 
 				foreach (var it in now)
@@ -264,7 +264,7 @@ namespace OpenRA.Mods.CA.Traits
 				foreach (var p in watch.Pending)
 				{
 					var res = p.AwaitingProof && p.ResolveWhileAwaiting(tick, PlacementProof(p), player.WinState != WinState.Undefined) == BotQueuePendingResolution.EmitRequested;
-					EmitTerminalOutcome(kv.Key, p.Item, p.ItemName, p, res, staleLive);
+					EmitTerminalOutcome(kv.Key, p.Item, p.ItemName, p, res, staleLive, queueSeen: false);
 				}
 
 				watch.Items.Clear();
@@ -294,7 +294,10 @@ namespace OpenRA.Mods.CA.Traits
 		// Without proof the request stays armed for the bounded window — a builder unit's
 		// BuildOnSite lands late or never — and ends Removed + intent reason. A cancel
 		// request can never be proven by disappearance (cleanup is indistinguishable), so it
-		// always resolves Removed + intent reason — cause UNKNOWN, schema-2 non-pass.
+		// always resolves Removed + intent reason. The Removed's cause class is resolved
+		// event-locally at the emit tick (Elimination/Destruction/Captured/Unbuildable —
+		// see ResolveRemovalCause); a live-queue removal with no proven cause stays
+		// None = UNKNOWN, schema-2 non-pass.
 		void ResolveRemovedItem(ProductionQueue queue, BotQueueWatch watch, ProductionItem oldItem, bool queueSeen)
 		{
 			var pending = FindPending(watch, oldItem);
@@ -314,17 +317,15 @@ namespace OpenRA.Mods.CA.Traits
 
 				watch.Pending.Remove(pending);
 				EmitTerminalOutcome(queue, oldItem, pending.ItemName, pending,
-					resolution == BotQueuePendingResolution.EmitRequested, live);
+					resolution == BotQueuePendingResolution.EmitRequested, live, queueSeen);
 			}
 			else
 			{
 				var episode = queueEpisodes.EpisodeOf(oldItem);
 				queueEpisodes.EndEpisode(oldItem);
-				var cls = player.WinState != WinState.Undefined ? BotQueueCancellationClass.Elimination
-					: !live ? BotQueueCancellationClass.Destruction
-					: BotQueueCancellationClass.None;
 				EmitQueueTransition(queue, queue.Actor, oldItem, oldItem.Item, QueueCategoryOf(oldItem.Item),
-					BotQueueTransitionKind.Removed, BotQueueTransitionReason.None, cls, episode);
+					BotQueueTransitionKind.Removed, BotQueueTransitionReason.None,
+					ResolveRemovalCause(queue, oldItem.Item, live, queueSeen), episode);
 			}
 		}
 
@@ -332,16 +333,30 @@ namespace OpenRA.Mods.CA.Traits
 		// unproven path emits Removed carrying the request's reason so the intent stays on
 		// record, classified event-locally — never the request's class, which would assert
 		// the unproven cause.
-		void EmitTerminalOutcome(ProductionQueue queue, object itemRef, string itemName, BotQueuePendingTerminal pending, bool proven, bool live)
+		void EmitTerminalOutcome(ProductionQueue queue, object itemRef, string itemName, BotQueuePendingTerminal pending,
+			bool proven, bool live, bool queueSeen)
 		{
 			var episode = queueEpisodes.EpisodeOf(itemRef);
 			queueEpisodes.EndEpisode(itemRef);
 			var cls = proven ? BotQueueCancellationClass.None
-				: player.WinState != WinState.Undefined ? BotQueueCancellationClass.Elimination
-				: !live ? BotQueueCancellationClass.Destruction
-				: BotQueueCancellationClass.None;
+				: ResolveRemovalCause(queue, itemName, live, queueSeen);
 			EmitQueueTransition(queue, queue.Actor, itemRef, itemName, QueueCategoryOf(itemName),
 				proven ? pending.Kind : BotQueueTransitionKind.Removed, pending.Reason, cls, episode);
+		}
+
+		// QUEUE-REMOVAL-DISCRIMINATOR (01a13686): event-local removal cause — resolved only
+		// from observable state at the emit tick, never from intent or correlation. The
+		// buildable probe is the engine's own eviction predicate: CancelUnbuildableItems
+		// diffs BuildableItems names, so an item absent from its live, owned, still-seen
+		// queue's set left by rules churn (prereq/provider loss). Proven causes observe;
+		// every other live-queue removal stays None = UNKNOWN.
+		BotQueueCancellationClass ResolveRemovalCause(ProductionQueue queue, string itemName, bool live, bool queueSeen)
+		{
+			var owned = queue.Actor.Owner == player;
+			var buildable = queueSeen && live && owned
+				&& queue.BuildableItems().Any(b => b.Name == itemName);
+			return BaseBuilderQueueEvalCA.RemovalCauseClass(
+				player.WinState != WinState.Undefined, live, owned, queueSeen, buildable);
 		}
 
 		// Actor-lifecycle proof for a Placed request — the lead's "building actor added to

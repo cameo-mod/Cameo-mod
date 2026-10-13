@@ -1656,8 +1656,8 @@ namespace OpenRA.Mods.Cameo.Test
 			// Requests and confirmed lifecycle stay separate: a pending older than the bound
 			// whose item is still queued is a rejected/lost order, dropped before reconcile.
 			var pending = new BotQueuePendingTerminal { IssuedTick = 100 };
-			Assert.That(pending.Stale(108), Is.False, "inside the bound the request may still resolve");
-			Assert.That(pending.Stale(109), Is.True, "past MaxInFlightTicks it never resolved");
+			Assert.That(pending.Stale(124), Is.False, "inside the bound the request may still resolve");
+			Assert.That(pending.Stale(125), Is.True, "past MaxInFlightTicks it never resolved");
 		}
 
 		[Test]
@@ -1740,7 +1740,7 @@ namespace OpenRA.Mods.Cameo.Test
 				Item = new object(), ItemName = "proc", Kind = BotQueueTransitionKind.Placed,
 				IssuedTick = 100, Site = new CPos(3, 4)
 			};
-			Assert.That(pending.ResolveOnRemoval(109, queueSeen: true, placementProven: false),
+			Assert.That(pending.ResolveOnRemoval(125, queueSeen: true, placementProven: false),
 				Is.EqualTo(BotQueuePendingResolution.EmitRemoved),
 				"a request older than the bound is a lost order — Removed, never the proof window");
 		}
@@ -1799,9 +1799,9 @@ namespace OpenRA.Mods.Cameo.Test
 
 			pending.AwaitingProof = true;
 			pending.IssuedTick = 101;
-			Assert.That(pending.ResolveWhileAwaiting(104, placementProven: false, playerEliminated: false),
-				Is.EqualTo(BotQueuePendingResolution.Unresolved), "inside the window — no record yet");
 			Assert.That(pending.ResolveWhileAwaiting(110, placementProven: false, playerEliminated: false),
+				Is.EqualTo(BotQueuePendingResolution.Unresolved), "inside the window — no record yet");
+			Assert.That(pending.ResolveWhileAwaiting(126, placementProven: false, playerEliminated: false),
 				Is.EqualTo(BotQueuePendingResolution.EmitRemoved),
 				"window expired without the actor -> Removed + intent reason");
 		}
@@ -1916,6 +1916,102 @@ namespace OpenRA.Mods.Cameo.Test
 				"a landed building still proves — elimination changes classification, not fact");
 		}
 
+		// QUEUE-REMOVAL-DISCRIMINATOR (01a13686): the RCA's two hard blockers — a wire
+		// latency longer than the old 8-tick bound, and removal causes the flat
+		// Removed record could not carry. The wire-latency test drives the pending
+		// state machine at the observed 19-tick lag; the cause ladder enumerates the
+		// emit-side classes event-local state can prove.
+
+		[Test]
+		public void DelayedWirePlacementInsideBoundStillArmsAndProves()
+		{
+			// RCA 2026-10-13: PlaceBuilding intent→removal ran 12–19 ticks in the
+			// sentinel episodes — past the old 8-tick bound, so every pending expired
+			// before its wire applied and the proof window never armed. Inside the
+			// 24-tick bound the request must still be fresh at removal.
+			var pending = new BotQueuePendingTerminal
+			{
+				Item = new object(), ItemName = "proc", Kind = BotQueueTransitionKind.Placed,
+				IssuedTick = 100, Site = new CPos(3, 4)
+			};
+			Assert.That(pending.Stale(119), Is.False, "the observed worst-case 19-tick lag stays inside the bound");
+			Assert.That(pending.ResolveOnRemoval(119, queueSeen: true, placementProven: false),
+				Is.EqualTo(BotQueuePendingResolution.KeepAwaitingProof),
+				"a delayed-wire removal arms the proof window instead of ending UNKNOWN");
+
+			// The probe arms the entry and restarts the window at the removal tick.
+			pending.AwaitingProof = true;
+			pending.IssuedTick = 119;
+			Assert.That(pending.ResolveWhileAwaiting(120, placementProven: true, playerEliminated: false),
+				Is.EqualTo(BotQueuePendingResolution.EmitRequested), "the actor lands -> Placed");
+		}
+
+		[Test]
+		public void RemovalCauseClassLadderEnumeratesProvenCauses()
+		{
+			// Elimination beats every other fact — a lost seat explains any removal.
+			Assert.That(BaseBuilderQueueEvalCA.RemovalCauseClass(true, false, false, false, false),
+				Is.EqualTo(BotQueueCancellationClass.Elimination));
+
+			// A dead/disposed producer clears its queue on every lifecycle path —
+			// kill, sell, demolish and transform are not separable mod-side, so all
+			// land on Destruction (INotifyKilled/Selling/BeforeTransform all ClearQueue).
+			Assert.That(BaseBuilderQueueEvalCA.RemovalCauseClass(false, false, true, true, true),
+				Is.EqualTo(BotQueueCancellationClass.Destruction));
+			Assert.That(BaseBuilderQueueEvalCA.RemovalCauseClass(false, false, false, false, false),
+				Is.EqualTo(BotQueueCancellationClass.Destruction),
+				"owner is unreadable on a dead actor — liveness is the stronger fact");
+
+			// A live producer owned by another player: the ownership change cleared
+			// its queue (OnOwnerChanged -> ClearQueue). Proven capture.
+			Assert.That(BaseBuilderQueueEvalCA.RemovalCauseClass(false, true, false, false, false),
+				Is.EqualTo(BotQueueCancellationClass.Captured));
+			Assert.That(BaseBuilderQueueEvalCA.RemovalCauseClass(false, true, false, false, true),
+				Is.EqualTo(BotQueueCancellationClass.Captured),
+				"an owner change outranks the buildable probe — capture explains the removal");
+
+			// Live, owned, still-observed queue whose item is absent from its own
+			// BuildableItems — CancelUnbuildableItems' own predicate — is a proven
+			// rules eviction (prereq/provider churn: dome/warfactory/promo loss).
+			Assert.That(BaseBuilderQueueEvalCA.RemovalCauseClass(false, true, true, true, false),
+				Is.EqualTo(BotQueueCancellationClass.Unbuildable));
+		}
+
+		[Test]
+		public void RemovalCauseClassFailClosedRungs()
+		{
+			// A stale watch on a live, owned producer carries no buildability
+			// evidence — the queue left observation, so nothing is provable.
+			Assert.That(BaseBuilderQueueEvalCA.RemovalCauseClass(false, true, true, false, false),
+				Is.EqualTo(BotQueueCancellationClass.None),
+				"queueSeen gates the buildable rung — an unobserved queue cannot prove rules churn");
+			Assert.That(BaseBuilderQueueEvalCA.RemovalCauseClass(false, true, true, false, true),
+				Is.EqualTo(BotQueueCancellationClass.None));
+
+			// ep53-like ambiguity (RCA 2026-10-13): the item left a live, owned,
+			// observed queue while still in its buildable set — no provider loss
+			// provable at the emit tick. It must stay None = UNKNOWN forever.
+			Assert.That(BaseBuilderQueueEvalCA.RemovalCauseClass(false, true, true, true, true),
+				Is.EqualTo(BotQueueCancellationClass.None),
+				"buildable at probe -> the removal is genuinely unproven");
+		}
+
+		[Test]
+		public void CancelRemovalStillNeverConfirmsInsideNewBound()
+		{
+			// The widened bound does not promote cancels: a pending cancel at wire-
+			// latency age still resolves Removed — disappearance is never proof.
+			var pending = new BotQueuePendingTerminal
+			{
+				Item = new object(), ItemName = "proc", Kind = BotQueueTransitionKind.Cancelled,
+				Reason = BotQueueTransitionReason.DemandCancel, Class = BotQueueCancellationClass.Production,
+				IssuedTick = 100
+			};
+			Assert.That(pending.ResolveOnRemoval(120, queueSeen: true, placementProven: false),
+				Is.EqualTo(BotQueuePendingResolution.EmitRemoved),
+				"a 20-tick-old cancel intent on a removal is still correlation, not proof");
+		}
+
 		// VP re-review of ae259554d: !AcceptsPlug is not install proof — the engine's
 		// AcceptsPlug is false for unknown types and failed dynamic Requirements too.
 		// These drive the real predicate the manager wires from the Pluggable trait.
@@ -1961,7 +2057,7 @@ namespace OpenRA.Mods.Cameo.Test
 
 			var requirementFlipped = BaseBuilderQueueEvalCA.PlugInstallProven(
 				slotDefinesType: true, requirementKeyed: true, acceptsNow: false);
-			Assert.That(pending.ResolveWhileAwaiting(110, placementProven: requirementFlipped, playerEliminated: false),
+			Assert.That(pending.ResolveWhileAwaiting(125, placementProven: requirementFlipped, playerEliminated: false),
 				Is.EqualTo(BotQueuePendingResolution.EmitRemoved),
 				"requirement flip -> no install -> expires Removed, never Placed");
 		}
@@ -2148,7 +2244,7 @@ namespace OpenRA.Mods.Cameo.Test
 			var neitherLeg = BaseBuilderQueueEvalCA.OccupiedSiteProven(true, true, false)
 				|| BaseBuilderQueueEvalCA.LocationSiteProven(true, true, true, false);
 			Assert.That(neitherLeg, Is.False, "neither occupancy nor location evidence exists");
-			Assert.That(pending.ResolveWhileAwaiting(110, placementProven: neitherLeg, playerEliminated: false),
+			Assert.That(pending.ResolveWhileAwaiting(125, placementProven: neitherLeg, playerEliminated: false),
 				Is.EqualTo(BotQueuePendingResolution.EmitRemoved),
 				"unproven placement still expires Removed -> schema-2 UNKNOWN");
 		}

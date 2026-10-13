@@ -1,3 +1,52 @@
+# 2026-10-13 — Devin: QUEUE-REMOVAL-DISCRIMINATOR (01a13686) — cause-aware `Removed` classes + 24t wire bound
+
+*Devin-Developer.* Campaign blocker B, assigned by Luna on current master
+`f69ad731a`. Builds on my placement-order RCA (fleet file
+`RCA_2026-10-13_placement_order_never_lands_devin.md`): every unexplained
+`Removed` on a live, owned queue was latchable UNKNOWN because the flat record
+carried no cause. Source+tests only; no build, test run, launch, push or land —
+awaiting exact-SHA review and DevOps admission.
+
+**Emitter (`BaseBuilderQueueEvalCA` + `BaseBuilderQueueManagerCA`, record-only).**
+- New `BotQueueCancellationClass` members `Captured` (producer live, owned by
+  another player at emit — `OnOwnerChanged` cleared the queue) and
+  `Unbuildable` (item absent from the live, owned, still-observed queue's own
+  `BuildableItems()` — the exact set `CancelUnbuildableItems` diffs to evict:
+  prerequisite/provider churn, the RCA's dominant unexplained class).
+- `RemovalCauseClass(eliminated, live, owned, queueSeen, buildable)` — a
+  world-free ladder resolved from event-local state only: Elimination →
+  Destruction → Captured → Unbuildable → None. `queueSeen` gates the buildable
+  rung — a stale watch on a live owned queue is not evidence. Sold vs killed
+  vs demolished vs transformed producers are indistinguishable mod-side (all
+  `ClearQueue` on the dying actor) and stay `Destruction`; no proxy inference.
+- `MaxInFlightTicks` 8 → 24: observed `PlaceBuilding` intent→removal latency is
+  12–19t, so the pending expired before its wire applied and the proof window
+  never armed. Cancel pendings still never confirm on disappearance.
+- `EmitTerminalOutcome` gains `queueSeen`; all three emit sites route the
+  class through `ResolveRemovalCause` (`BuildableItems` name membership —
+  bounded by the queue's producible set, only evaluated on live+owned+seen
+  removals; deterministic, no RNG, no order behaviour).
+
+**Evidence (`AiEconomyQueueEvidence`).** `Removed` with `Destruction`,
+`Elimination`, `Captured` or `Unbuildable` classifies `Observation` (accounted,
+never `MarkIncomplete`); `None` without a resolved episode stays `Unknown`.
+Serializer maps `captured`/`unbuildable`. Canonical cancel records unchanged —
+new classes only ever appear on `Removed` rows, so `economy_invariants.py`'s
+class whitelist needs no change.
+
+**Tests.** `BaseBuilderQueueEvalTest`: bound ticks re-pinned (124/125, expiry
+at 125/126); `DelayedWirePlacementInsideBoundStillArmsAndProves` (19t lag →
+KeepAwaitingProof → Placed); `RemovalCauseClassLadderEnumeratesProvenCauses` +
+`RemovalCauseClassFailClosedRungs` (every class, `queueSeen` gate, ep53-like
+buildable removal → `None`); `CancelRemovalStillNeverConfirmsInsideNewBound`.
+`AiEconomyQueueEvidenceTest`: `Captured`/`Unbuildable` join the proven Removed
+cases; `Ep53LikeUnprovenRemovalStaysUnknown` pins the ambiguous regression.
+
+**Cannot yet be proven (see REPLAY_HEALTH_LOGGER.md 2026-10-13 note):** sold vs
+killed vs demolished vs transformed producers; transform successor identity;
+sub-tick buildability flicker; name-only pending causation — all stay UNKNOWN.
+Real-capture proof remains an admission gate.
+
 # 2026-10-13 — Devin: DEFEATED-SEAT-TAIL-FIX — Resolved-episode `Removed` + `seat_state`, DEFEATED verdict
 
 *Devin-Integrator.* Lead directive after the first master capture (uid

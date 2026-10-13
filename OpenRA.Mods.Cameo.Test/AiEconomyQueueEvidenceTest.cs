@@ -41,15 +41,32 @@ namespace OpenRA.Mods.Cameo.Test
 
 		[TestCase(BotQueueCancellationClass.Destruction)]
 		[TestCase(BotQueueCancellationClass.Elimination)]
+		[TestCase(BotQueueCancellationClass.Captured)]
+		[TestCase(BotQueueCancellationClass.Unbuildable)]
 		public void RemovedWithProvenEventLocalRemovalCauseObserves(BotQueueCancellationClass cls)
 		{
 			// A collapsing seat's queue items leave with a proven event-local removal
 			// cause — the same evidence standard a Cancelled row carries. The removal is
-			// accounted, not missing data, so the tail stays complete.
+			// accounted, not missing data, so the tail stays complete. Captured and
+			// Unbuildable join the proven set: owner change on a live producer and
+			// absence from the queue's own buildable set are both emit-tick facts.
 			var t = Transition(BotQueueTransitionKind.Removed, cls: cls);
 			Assert.That(AiEconomyQueueEvidence.Classify(in t), Is.EqualTo(EconomyQueueEvidenceKind.Observation));
 			Assert.That(AiEconomyQueueEvidence.Classify(in t, false), Is.EqualTo(EconomyQueueEvidenceKind.Observation));
 			Assert.That(AiEconomyQueueEvidence.TryCancellation(in t, "17:Building:Building", out _), Is.False);
+		}
+
+		[Test]
+		public void Ep53LikeUnprovenRemovalStaysUnknown()
+		{
+			// RCA ep53 regression (2026-10-13): the powerplant left a live, owned,
+			// observed queue while still in its buildable set — no provider loss or
+			// other cause provable at the emit tick. The discriminator must not
+			// invent a benign class: the cause class stays None and the capture
+			// marks incomplete — fail-closed, forever.
+			var t = Transition(BotQueueTransitionKind.Removed, cls: BotQueueCancellationClass.None);
+			Assert.That(AiEconomyQueueEvidence.Classify(in t), Is.EqualTo(EconomyQueueEvidenceKind.Unknown));
+			Assert.That(AiEconomyQueueEvidence.Classify(in t, false), Is.EqualTo(EconomyQueueEvidenceKind.Unknown));
 		}
 
 		[TestCase(BotQueueCancellationClass.None)]
