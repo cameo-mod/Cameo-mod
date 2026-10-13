@@ -845,7 +845,42 @@ def prepare_match_support(support: pathlib.Path, variants_root: pathlib.Path, va
     return leaf
 
 
-def economy_health_file_status(support: pathlib.Path, match_records: list[dict]) -> tuple[str, str | None]:
+def planned_economy_seats(variant_map: pathlib.Path, matchup: dict) -> list[tuple[str, str]]:
+    """Derive canonical anonymous match seats from the generated variant map.
+
+    Match logging numbers every PlayerReference in map order, while economy
+    rows use each bot player's InternalName. Both writers traverse World.Players
+    in that same order, which binds the anonymized seat key to health identity.
+    """
+    text = variant_map.read_text(encoding="utf-8")
+    refs = list(re.finditer(r"(?m)^\tPlayerReference@([^:]+):\s*$", text))
+    seats = []
+    for index, ref in enumerate(refs):
+        next_ref = refs[index + 1].start() if index + 1 < len(refs) else len(text)
+        next_key = re.search(r"\n\S", text[ref.end():next_ref])
+        end = ref.end() + next_key.start() if next_key else next_ref
+        block = text[ref.start():end]
+        bot = re.search(r"(?m)^\t\tBot:\s*(\S+)\s*$", block)
+        if bot:
+            faction = re.search(r"(?m)^\t\tFaction:\s*(\S+)\s*$", block)
+            if faction is None:
+                raise ValueError(f"generated bot PlayerReference@{ref.group(1)} has no faction")
+            seats.append((f"seat_{index + 1}", faction.group(1)))
+
+    if "team_a" in matchup:
+        planned_factions = [seat["faction"] for seat in matchup["team_a"] + matchup["team_b"]]
+    else:
+        planned_factions = [matchup["side_a"]["faction"], matchup["side_b"]["faction"]]
+    if sorted(faction for _seat, faction in seats) != sorted(planned_factions):
+        raise ValueError("generated variant bot seats do not match the planned matchup")
+    return seats
+
+
+def economy_health_file_status(
+    support: pathlib.Path,
+    match_records: list[dict],
+    expected_seats: list[tuple[str, str]],
+) -> tuple[str, str | None]:
     """Require complete, per-seat economy evidence for one successful match.
 
     File presence is not evidence completeness: a partial JSONL, a foreign UID,
@@ -867,7 +902,7 @@ def economy_health_file_status(support: pathlib.Path, match_records: list[dict])
         rows, _receipt = read_jsonl(health_path)
         if not rows:
             return "UNKNOWN", f"no economy-health rows: {health_path}"
-        expected_seats_by_uid: dict[str, list[tuple[int, str]]] = {}
+        expected_seats_by_uid: dict[str, list[tuple[str, str]]] = {}
         record_ids: set[str] = set()
         for record in match_records:
             if not isinstance(record, dict):
@@ -885,13 +920,14 @@ def economy_health_file_status(support: pathlib.Path, match_records: list[dict])
             if record_id in record_ids:
                 return "UNKNOWN", "duplicate match record/seat identity"
             record_ids.add(record_id)
-            expected_seats_by_uid.setdefault(uid, []).append((int(seat_match.group(1)), faction))
+            expected_seats_by_uid.setdefault(uid, []).append((seat, faction))
         if len(expected_seats_by_uid) != 1 or not match_records:
             return "UNKNOWN", "per-game support leaf must contain exactly one match UID"
-        game_uid, expected_seats = next(iter(expected_seats_by_uid.items()))
-        expected_seats.sort()
-        if len({seat for seat, _faction in expected_seats}) != len(expected_seats):
-            return "UNKNOWN", "duplicate anonymous match seat identity"
+        game_uid, logged_seats = next(iter(expected_seats_by_uid.items()))
+        if (len(expected_seats) != len({seat for seat, _faction in expected_seats})
+                or len(match_records) != len(expected_seats)
+                or sorted(logged_seats) != sorted(expected_seats)):
+            return "UNKNOWN", "match record seat roster differs from the planned variant roster"
         if any(not isinstance(row, dict) or row.get("game_uid") != game_uid for row in rows):
             return "UNKNOWN", "economy-health stream contains malformed or foreign game UID rows"
         players: list[str] = []
@@ -901,9 +937,9 @@ def economy_health_file_status(support: pathlib.Path, match_records: list[dict])
             if isinstance(player_name, str) and player_name not in seen_players:
                 seen_players.add(player_name)
                 players.append(player_name)
-        if len(players) != len(match_records):
+        if len(players) != len(expected_seats):
             return "UNKNOWN", (f"economy-health seat coverage mismatch: {len(players)} player(s) "
-                                f"for {len(match_records)} match record(s)")
+                                f"for {len(expected_seats)} planned seat(s)")
         # Both writers traverse world.Players in order. Match rows expose the
         # anonymized seat_N key; health rows expose InternalName. Their first
         # row order is the only supported bridge between those identities.
@@ -925,6 +961,13 @@ def economy_health_file_status(support: pathlib.Path, match_records: list[dict])
     except (OSError, ValueError, TypeError, KeyError, ImportError) as exc:
         return "UNKNOWN", f"cannot inspect expected economy-health file {health_path}: {exc}"
     return "OBSERVED_HEALTHY", None
+
+
+def apply_economy_health_requirement(status: str, health_status: str, required: bool) -> str:
+    """Make required unhealthy evidence unscoreable while preserving optional runs."""
+    if required and status in ("ok", "norecord") and health_status != "OBSERVED_HEALTHY":
+        return "UNKNOWN"
+    return status
 
 
 PER_GAME_LOGS = {
@@ -1529,12 +1572,18 @@ def main() -> int:
         # A no-data run that exhausted its retries is still not a datapoint:
         # count it separately so a deterministic abort is visible in
         # batch_summary.json / run_league instead of reading as clean.
-        economy_health_status, economy_health_error = (
-            economy_health_file_status(match_support, records) if args.require_economy_health else ("NOT_REQUIRED", None))
+        if args.require_economy_health:
+            try:
+                expected_health_seats = planned_economy_seats(variants_root / m["variant"] / "map.yaml", m)
+                economy_health_status, economy_health_error = economy_health_file_status(
+                    match_support, records, expected_health_seats)
+            except (OSError, ValueError, KeyError, TypeError) as exc:
+                economy_health_status, economy_health_error = "UNKNOWN", f"cannot derive planned health seats: {exc}"
+        else:
+            economy_health_status, economy_health_error = "NOT_REQUIRED", None
         if status == "ok" and not records:
             status = "norecord"
-        if status in ("ok", "norecord") and economy_health_status != "OBSERVED_HEALTHY":
-            status = "UNKNOWN"
+        status = apply_economy_health_requirement(status, economy_health_status, args.require_economy_health)
 
         outcome = sorted(
             (r.get("player", {}).get("faction"), r.get("player", {}).get("outcome"))

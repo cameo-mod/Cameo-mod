@@ -316,12 +316,13 @@ class RecordSliceTests(unittest.TestCase):
                                 for leaf in leaves))
             match_records = [{"game_uid": "g", "record_id": "g|seat_1",
                               "player": {"seat": "seat_1", "faction": "td_gdi"}}]
-            self.assertEqual(batch.economy_health_file_status(leaves[0], match_records)[0], "UNKNOWN")
+            planned = [("seat_1", "td_gdi")]
+            self.assertEqual(batch.economy_health_file_status(leaves[0], match_records, planned)[0], "UNKNOWN")
             health = leaves[0] / "Logs" / "cameo-ai-economy-health.jsonl"
             health.touch()
-            self.assertEqual(batch.economy_health_file_status(leaves[0], match_records)[0], "UNKNOWN")
+            self.assertEqual(batch.economy_health_file_status(leaves[0], match_records, planned)[0], "UNKNOWN")
             health.write_text('{"schema":2}\n', encoding="utf-8")
-            self.assertEqual(batch.economy_health_file_status(leaves[0], match_records)[0], "UNKNOWN")
+            self.assertEqual(batch.economy_health_file_status(leaves[0], match_records, planned)[0], "UNKNOWN")
 
     def test_complete_health_evidence_requires_all_seats_and_terminal_rows(self):
         with tempfile.TemporaryDirectory(prefix="ai_complete_health_test_") as tmp_dir:
@@ -353,22 +354,47 @@ class RecordSliceTests(unittest.TestCase):
                              pulse(player, 2, 100, terminal=True),
                              pulse(player, 3, 100, kind="end", terminal=True)])
             path.write_text("".join(json.dumps(row) + "\n" for row in rows), encoding="utf-8")
-            self.assertEqual(batch.economy_health_file_status(support, records), ("OBSERVED_HEALTHY", None))
+            planned = [("seat_1", "td_gdi"), ("seat_2", "td_nod")]
+            self.assertEqual(batch.economy_health_file_status(support, records, planned), ("OBSERVED_HEALTHY", None))
 
             reversed_seats = [row for player in ("Multi1", "Multi0") for row in rows if row["player"] == player]
             path.write_text("".join(json.dumps(row) + "\n" for row in reversed_seats), encoding="utf-8")
-            self.assertEqual(batch.economy_health_file_status(support, records)[0], "UNKNOWN")
+            self.assertEqual(batch.economy_health_file_status(support, records, planned)[0], "UNKNOWN")
 
             path.write_text("".join(json.dumps(row) + "\n" for row in rows[:-1]), encoding="utf-8")
-            self.assertEqual(batch.economy_health_file_status(support, records)[0], "UNKNOWN")
+            self.assertEqual(batch.economy_health_file_status(support, records, planned)[0], "UNKNOWN")
 
             path.write_text("".join(json.dumps(row) + "\n" for row in rows) + "{malformed\n",
                             encoding="utf-8")
-            self.assertEqual(batch.economy_health_file_status(support, records)[0], "UNKNOWN")
+            self.assertEqual(batch.economy_health_file_status(support, records, planned)[0], "UNKNOWN")
 
             path.write_text("".join(json.dumps(row) + "\n" for row in rows if row["player"] != "Multi1"),
                             encoding="utf-8")
-            self.assertEqual(batch.economy_health_file_status(support, records)[0], "UNKNOWN")
+            self.assertEqual(batch.economy_health_file_status(support, records, planned)[0], "UNKNOWN")
+
+            # Removing the same seat from both match and health logs still
+            # fails because the variant contract requires both planned seats.
+            path.write_text("".join(json.dumps(row) + "\n" for row in rows if row["player"] == "Multi0"),
+                            encoding="utf-8")
+            self.assertEqual(batch.economy_health_file_status(support, records[:1], planned)[0], "UNKNOWN")
+
+    def test_planned_health_roster_comes_from_generated_variant_contract(self):
+        with tempfile.TemporaryDirectory(prefix="ai_health_roster_test_") as tmp_dir:
+            map_yaml = pathlib.Path(tmp_dir) / "map.yaml"
+            map_yaml.write_text(
+                "Players:\n"
+                "\tPlayerReference@Neutral:\n\t\tNonCombatant: True\n"
+                "\tPlayerReference@Referee:\n\t\tNonCombatant: True\n"
+                "\tPlayerReference@Multi0:\n\t\tBot: hard\n\t\tFaction: td_gdi\n"
+                "\tPlayerReference@Multi1:\n\t\tBot: classic\n\t\tFaction: td_nod\n"
+                "Actors:\n", encoding="utf-8")
+            matchup = {"side_a": {"faction": "td_gdi"}, "side_b": {"faction": "td_nod"}}
+            self.assertEqual(batch.planned_economy_seats(map_yaml, matchup),
+                             [("seat_3", "td_gdi"), ("seat_4", "td_nod")])
+
+    def test_optional_economy_health_does_not_change_success_status(self):
+        self.assertEqual(batch.apply_economy_health_requirement("ok", "NOT_REQUIRED", False), "ok")
+        self.assertEqual(batch.apply_economy_health_requirement("ok", "UNKNOWN", True), "UNKNOWN")
 
     def test_batch_promotes_other_ai_streams_but_keeps_fixed_health_per_game(self):
         with tempfile.TemporaryDirectory(prefix="ai_log_promotion_test_") as tmp_dir:
@@ -421,6 +447,11 @@ class ScoreboardTests(unittest.TestCase):
             self._record("g2", "Multi0", "fransbot", "won", "classic", 0)]}]
         self.assertEqual(batch.ab_scoreboard(blocked), {})
         self.assertEqual(batch.team_scoreboard(blocked), {})
+
+    def test_scoreboard_still_scores_successful_optional_health_run(self):
+        results = [{"status": "ok", "health_status": "NOT_REQUIRED", "bot_outcomes": [
+            self._record("g3", "Multi0", "fransbot", "won", "classic", 0)]}]
+        self.assertEqual(batch.ab_scoreboard(results)[("fransbot", "classic")]["won"], 1)
 
 
 
