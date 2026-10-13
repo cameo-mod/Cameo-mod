@@ -21280,3 +21280,27 @@ rebuilt Cameo.Test 1949/1949 (PlayerTelemetry filter 13/13 incl. new
 null/empty-declaration degradation); `git diff --check` clean. Boot gate
 DEFERRED — launches are held for the lead's explicit go under the
 merge-wave reservation. No runtime evidence claimed.
+
+
+## 2026-10-13 — TELEMETRY-NRE-HARDENING: site-tag the Fail() gate (devin/telemetry-nre-site-tags)
+
+Task 01a13181: debug.log shows 'Player telemetry terminated after a
+telemetry error: NullReferenceException' mid-match (2/2 acquired captures;
+Red Spice died at debug:71 after building_placed events at WT17/WT37) with
+no stack trace — the dying gate is unidentifiable among 7 identical Fail()
+call sites. Step 1 of the task: tag the gate so it names itself.
+
+**Design.** Fail(Exception e) gains a site string, set per catch to the
+gate name in event-kind style: init (rules/graph at WorldLoaded),
+actor_added, actor_removed (world event handlers), tick (periodic sampler
+incl. support-power/queue/economy polls), unit_requested, unit_started,
+unit_skipped (IBotUnitProductionObserver seam). The debug line keeps its
+prefix and appends ' site=<tag> frame=<first stack line>' (e.StackTrace
+first line, 'unknown' if absent) — the frame pinpoints the faulting call
+inside multi-call gates like tick. Record-only; the fail path still ends
+the channel, never the game or the notifying module.
+
+**Verification.** Static only — no build/test/launch (serial-admission
+lock held by the logger lane). git diff scoped to the 7 sites + signature;
+symbols resolve against 871973f74. Steps 2 (repro) and 3 (localized fix)
+await a bounded runtime admission.

@@ -435,7 +435,7 @@ namespace OpenRA.Mods.Cameo.Traits
 			// Fail closed: a rules/graph fault ends the channel, never the game.
 			catch (Exception e)
 			{
-				Fail(e);
+				Fail(e, "init");
 			}
 		}
 
@@ -669,7 +669,7 @@ namespace OpenRA.Mods.Cameo.Traits
 			}
 			catch (Exception e)
 			{
-				Fail(e);
+				Fail(e, "actor_added");
 			}
 		}
 
@@ -715,7 +715,7 @@ namespace OpenRA.Mods.Cameo.Traits
 			}
 			catch (Exception e)
 			{
-				Fail(e);
+				Fail(e, "actor_removed");
 			}
 		}
 
@@ -782,7 +782,7 @@ namespace OpenRA.Mods.Cameo.Traits
 			// Fail closed: a sampling fault ends the channel, never the game.
 			catch (Exception e)
 			{
-				Fail(e);
+				Fail(e, "tick");
 			}
 		}
 
@@ -972,7 +972,7 @@ namespace OpenRA.Mods.Cameo.Traits
 			}
 			catch (Exception e)
 			{
-				Fail(e);
+				Fail(e, "unit_requested");
 			}
 		}
 
@@ -999,7 +999,7 @@ namespace OpenRA.Mods.Cameo.Traits
 			}
 			catch (Exception e)
 			{
-				Fail(e);
+				Fail(e, "unit_started");
 			}
 		}
 
@@ -1013,7 +1013,7 @@ namespace OpenRA.Mods.Cameo.Traits
 			}
 			catch (Exception e)
 			{
-				Fail(e);
+				Fail(e, "unit_skipped");
 			}
 		}
 
@@ -1478,13 +1478,15 @@ namespace OpenRA.Mods.Cameo.Traits
 			writer.TryWrite(b.ToString());
 		}
 
-		void Fail(Exception e)
+		void Fail(Exception e, string site)
 		{
 			ended = true;
 			Unsubscribe();
 			writer?.Dispose();
 			writer = null;
-			Log.Write("debug", "Player telemetry terminated after a telemetry error: " + e.GetType().Name);
+			var frame = e.StackTrace == null ? "unknown" : e.StackTrace.Split('\n')[0].Trim();
+			Log.Write("debug", "Player telemetry terminated after a telemetry error: " + e.GetType().Name
+				+ " site=" + site + " frame=" + frame);
 		}
 
 		void Unsubscribe()
