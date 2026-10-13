@@ -1018,6 +1018,18 @@ def promote_unique_match_logs(match_support: pathlib.Path, batch_logs: pathlib.P
 SPAWN_INDEX_BY_SLOT = {"Multi0": 0, "Multi1": 1, "Multi2": 2, "Multi3": 3, "BotA": 0, "BotB": 1}
 
 
+def runtime_engine_result_valid(result: dict) -> bool:
+    """Reject a match from scoreboards if any launched attempt changed binaries."""
+    if result.get("status") == "executable_changed":
+        return False
+    attempts = result.get("runtime_engine_attempts") or []
+    if any(item.get("runtime_engine", {}).get("executable_hash_unchanged") is False
+           for item in attempts):
+        return False
+    runtime_engine = result.get("runtime_engine") or {}
+    return runtime_engine.get("executable_hash_unchanged") is not False
+
+
 def ab_scoreboard(results: list[dict]) -> dict:
     """Head-to-head table keyed by ordered (bot_type, enemy_bot_type) pairs.
 
@@ -1029,7 +1041,9 @@ def ab_scoreboard(results: list[dict]) -> dict:
     seen_records: set[str] = set()
     board: dict[tuple[str, str], dict] = {}
     for result in results:
-        if result.get("health_status") in ("UNKNOWN", "BLOCK") or result.get("status") == "UNKNOWN":
+        if (result.get("health_status") in ("UNKNOWN", "BLOCK")
+                or result.get("status") == "UNKNOWN"
+                or not runtime_engine_result_valid(result)):
             continue
         for record in result.get("bot_outcomes") or []:
             record_id = str(record.get("record_id") or "")
@@ -1067,7 +1081,9 @@ def team_scoreboard(results: list[dict]) -> dict:
     seen_records: set[str] = set()
     matches: dict[str, list[dict]] = {}
     for result in results:
-        if result.get("health_status") in ("UNKNOWN", "BLOCK") or result.get("status") == "UNKNOWN":
+        if (result.get("health_status") in ("UNKNOWN", "BLOCK")
+                or result.get("status") == "UNKNOWN"
+                or not runtime_engine_result_valid(result)):
             continue
         for record in result.get("bot_outcomes") or []:
             record_id = str(record.get("record_id") or "")

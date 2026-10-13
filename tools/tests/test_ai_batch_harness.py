@@ -586,6 +586,22 @@ class FingerprintTests(unittest.TestCase):
         trusted, discarded = batch.trusted_attempt_records(rows, executable_hash_unchanged=False)
         self.assertEqual(trusted, [])
         self.assertEqual(discarded, 2)
+        # Even if an upstream caller accidentally leaves outcome rows attached,
+        # a changed attempt cannot enter the A/B scoreboard.
+        board = batch.ab_scoreboard([{
+            "status": "executable_changed",
+            "runtime_engine_attempts": [{
+                "runtime_engine": {"executable_hash_unchanged": False},
+            }],
+            "bot_outcomes": [{
+                "record_id": "untrusted|seat-1",
+                "bot_type": "hard",
+                "opponent": {"bot_type": "easy"},
+                "outcome": "won",
+                "spawn": 0,
+            }],
+        }])
+        self.assertEqual(board, {})
 
     def test_each_retry_attempt_is_persisted_and_included_in_batch(self):
         tmp = pathlib.Path(tempfile.mkdtemp(prefix="attempt-provenance-"))
