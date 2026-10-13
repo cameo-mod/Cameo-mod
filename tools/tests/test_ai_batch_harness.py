@@ -533,8 +533,8 @@ class FingerprintTests(unittest.TestCase):
     def test_missing_engine_pin_fails_closed(self):
         tmp = self._tree()
         try:
-            (tmp / "mod.config").unlink()
-            with self.assertRaisesRegex(ValueError, "mod.config is missing"):
+            (tmp / "mod.config").write_text('ENGINE_DIRECTORY="engine"\n', encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "ENGINE_VERSION must be a 40-character Git SHA"):
                 batch.engine_runtime_provenance(tmp, tmp / "engine")
         finally:
             shutil.rmtree(tmp, ignore_errors=True)
@@ -634,6 +634,26 @@ class FingerprintTests(unittest.TestCase):
             self.assertEqual([item["attempt"] for item in persisted_attempts], [1, 2])
         finally:
             shutil.rmtree(tmp, ignore_errors=True)
+
+    def test_prelaunch_drift_result_retains_prior_launched_retry_provenance(self):
+        first_attempt = {
+            "variant": "cell-a",
+            "repeat": 1,
+            "attempt": 1,
+            "status": "exit=1",
+            "exit_code": 1,
+            "runtime_engine": {
+                "executable_sha256_before": "a" * 64,
+                "executable_sha256_after": "a" * 64,
+                "executable_hash_unchanged": True,
+            },
+        }
+        result = batch.fingerprint_drift_result(
+            "cell-a", {"engine": "pin"}, {"engine": {"was": "pin", "now": "other"}},
+            attempt=2, runtime_engine_attempts=[first_attempt])
+        batch_attempts = batch.all_attempt_provenance([result])
+        self.assertEqual(result["attempts"], 1)
+        self.assertEqual(batch_attempts, [first_attempt])
 
     def test_missing_executable_fails_closed(self):
         tmp = self._tree()

@@ -1302,6 +1302,20 @@ def all_attempt_provenance(results: list[dict]) -> list[dict]:
     return [attempt for result in results for attempt in result.get("runtime_engine_attempts", [])]
 
 
+def fingerprint_drift_result(variant: str, fingerprint: dict, drift: dict,
+                             attempt: int, runtime_engine_attempts: list[dict]) -> dict:
+    """Build a drift result without discarding provenance from earlier retries."""
+    return {
+        "variant": variant,
+        "status": "fingerprint_drift",
+        "fingerprint": fingerprint_id(fingerprint),
+        "fingerprint_drift": drift,
+        "attempts": attempt - 1,
+        "records": 0,
+        "runtime_engine_attempts": runtime_engine_attempts,
+    }
+
+
 def _hash_files(base: pathlib.Path, files: list[pathlib.Path]) -> str:
     """One sha256 over (relative name, bytes) per file in sorted order — set
     membership and contents both move the digest; an empty set hashes clean."""
@@ -1762,14 +1776,8 @@ def main() -> int:
             for key, change in drift.items():
                 print(f"    {key}: {json.dumps(change['was'], sort_keys=True)} -> "
                       f"{json.dumps(change['now'], sort_keys=True)}", flush=True)
-            result = {
-                "variant": m["variant"],
-                "status": "fingerprint_drift",
-                "fingerprint": fingerprint_id(current_fingerprint),
-                "fingerprint_drift": drift,
-                "attempts": attempt - 1,
-                "records": 0,
-            }
+            result = fingerprint_drift_result(
+                m["variant"], current_fingerprint, drift, attempt, runtime_engine_attempts)
             results.append(result)
             with progress_path.open("a", encoding="utf-8") as f:
                 f.write(json.dumps(result) + "\n")
