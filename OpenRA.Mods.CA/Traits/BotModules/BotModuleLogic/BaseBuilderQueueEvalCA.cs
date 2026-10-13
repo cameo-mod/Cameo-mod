@@ -651,7 +651,8 @@ namespace OpenRA.Mods.CA.Traits
 	/// sweeps that are ELIGIBLE: queue idle, producer available, the cash floor the only veto. Any ineligible
 	/// sweep, a different wanted item, an admission, or a producer leaving the live set drops the run, so a
 	/// later floor block always restarts from zero and no item inherits another's age. Pure state, integer
-	/// ticks, no RNG; transient like the manager's other sweep state (not saved — a resumed game restarts runs).
+	/// ticks, no RNG; runs persist through game-save data (StartTick survives save/load) while all other
+	/// manager sweep state stays transient.
 	/// </summary>
 	public sealed class CashStarvationClock
 	{
