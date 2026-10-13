@@ -17,12 +17,17 @@ namespace OpenRA.Mods.Cameo.Traits
 			if (transition.Kind == BotQueueTransitionKind.Removed)
 				// A Removed behind the episode's recorded resolution (cancel intent, proven
 				// cancellation, proven placement) is the dequeue of an outcome already on
-				// record, and an event-local Destruction/Elimination class is proven removal
-				// cause — neither loses evidence. Only an unresolved Removed with no proven
-				// cause is an unproven disappearance and stays UNKNOWN.
+				// record, and an event-local proven removal cause — Destruction,
+				// Elimination, Captured (owner changed on a live producer) or
+				// Unbuildable (item absent from its own live queue's BuildableItems,
+				// the engine's own eviction predicate) — is accounted evidence, not
+				// missing data. Only an unresolved Removed with no proven cause is an
+				// unproven disappearance and stays UNKNOWN.
 				return terminalEpisodeResolved
 					|| transition.CancellationClass is BotQueueCancellationClass.Destruction
 						or BotQueueCancellationClass.Elimination
+						or BotQueueCancellationClass.Captured
+						or BotQueueCancellationClass.Unbuildable
 					? EconomyQueueEvidenceKind.Observation
 					: EconomyQueueEvidenceKind.Unknown;
 			if (transition.Kind is not (BotQueueTransitionKind.Placed or BotQueueTransitionKind.Cancelled))
@@ -54,6 +59,8 @@ namespace OpenRA.Mods.Cameo.Traits
 			BotQueueCancellationClass.Production => "production",
 			BotQueueCancellationClass.Destruction => "destruction",
 			BotQueueCancellationClass.Elimination => "elimination",
+			BotQueueCancellationClass.Captured => "captured",
+			BotQueueCancellationClass.Unbuildable => "unbuildable",
 			_ => null
 		};
 

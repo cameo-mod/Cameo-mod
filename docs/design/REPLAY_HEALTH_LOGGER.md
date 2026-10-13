@@ -193,3 +193,38 @@ already contains the reviewed restack 7ca7e9159 byte-identical):
   no runtime capture, no launch, no measured runtime cost. The dual gate is
   analyzer-side tooling only — it does not mount the recorder or claim live
   coverage.
+
+2026-10-13 QUEUE-REMOVAL-DISCRIMINATOR (01a13686, Devin-Developer; campaign
+blocker B; source+tests only, no build/run/push — awaiting exact-SHA review and
+DevOps admission):
+
+- Removed terminals now carry a cause class resolved event-locally at the emit
+  tick (BaseBuilderQueueEvalCA.RemovalCauseClass, world-free): Elimination (seat
+  ended), Destruction (producer dead/disposed — kill, sell, demolish and
+  transform all ClearQueue and are not separable mod-side), Captured (producer
+  live but owned by another player — OnOwnerChanged -> ClearQueue), Unbuildable
+  (item absent from its own live, owned, still-observed queue's BuildableItems —
+  the exact set CancelUnbuildableItems diffs to evict; prerequisite/provider
+  churn per the 2026-10-13 placement-order RCA), else None.
+- The evidence classifier treats Destruction/Elimination/Captured/Unbuildable
+  on a Removed as proven cause -> Observation (benign, never MarkIncomplete);
+  a Removed with class None and no resolved episode stays UNKNOWN — fail-closed
+  unchanged. Canonical cancel records (EconomyCancellationEvidence) are
+  untouched: the new classes only ever appear on Removed-kind queue-observation
+  rows, so the pinned economy_invariants.py whitelist needs no change.
+- BotQueuePendingTerminal.MaxInFlightTicks 8 -> 24: the RCA measured
+  PlaceBuilding intent->removal wire latency of 12-19 ticks across the
+  ra1/m1/m2 sentinel episodes, so every placement pending expired before its
+  order applied and the proof window could never arm. The bound covers the
+  worst observed latency plus margin and still bounds pending retention; cancel
+  pendings still never confirm on disappearance.
+- queueSeen gates the Unbuildable rung: a stale watch (queue left observation)
+  on a live, owned producer carries no buildability evidence and stays UNKNOWN.
+- Still unprovable without an engine-side seam (kept UNKNOWN, documented for
+  the admission gate): sold vs killed vs demolished vs transformed producers
+  (identical observable state — all Destruction); a transform's successor actor
+  (inferring it is banned correlation); buildability flicker that restores
+  before the next probe tick (item reads buildable -> UNKNOWN); name-only
+  pending intent bound to a same-name removal. ep53-class episodes (item
+  removed from a live, owned, observed queue while still buildable) remain
+  UNKNOWN by construction.
