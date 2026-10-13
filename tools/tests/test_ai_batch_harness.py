@@ -451,7 +451,7 @@ class ScoreboardTests(unittest.TestCase):
     def test_scoreboard_still_scores_successful_optional_health_run(self):
         results = [{"status": "ok", "health_status": "NOT_REQUIRED", "bot_outcomes": [
             self._record("g3", "Multi0", "fransbot", "won", "classic", 0)]}]
-        self.assertEqual(batch.ab_scoreboard(results)[("fransbot", "classic")]["won"], 1)
+        self.assertEqual(batch.ab_scoreboard(results)["fransbot vs classic"]["won"], 1)
 
 
 
