@@ -1810,10 +1810,17 @@ def main() -> int:
     team_board = team_scoreboard(results) if args.team_size > 1 else None
     attempt_provenance = [result["runtime_engine"] for result in results if "runtime_engine" in result]
     runtime_engine_batch = dict(batch_fingerprint["runtime_engine"])
+    runtime_engine_batch["executable_sha256_after"] = None
+    runtime_engine_batch["executable_hash_unchanged"] = False
+    runtime_engine_batch["executable_hash_error"] = "no completed match attempt"
     if attempt_provenance:
         runtime_engine_batch["executable_sha256_after"] = attempt_provenance[-1].get("executable_sha256_after")
         runtime_engine_batch["executable_hash_unchanged"] = all(
             item.get("executable_hash_unchanged") is True for item in attempt_provenance
+        )
+        runtime_engine_batch["executable_hash_error"] = next(
+            (item.get("executable_hash_error") for item in attempt_provenance if not item.get("executable_hash_unchanged")),
+            None,
         )
     summary = {
         "support_dir": str(support),
