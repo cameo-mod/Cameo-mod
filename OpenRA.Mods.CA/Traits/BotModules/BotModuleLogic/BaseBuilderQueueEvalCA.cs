@@ -38,6 +38,14 @@ namespace OpenRA.Mods.CA.Traits
 			queuedThisTick || (cash < minCashRequirement && !isRefinery && !(plannerWant && cash >= productionCost));
 
 		/// <summary>
+		/// TF-2: the unit side's mobile-production reservation — optional spend (optional defences
+		/// and crawl links included) may not push cash below the reserved floor; army-first
+		/// essentials ride their own exemption. Pure, for the tests.
+		/// </summary>
+		public static bool MobileSpendBlocks(int cash, int productionCost, int reserveFloor, bool essential) =>
+			!essential && reserveFloor > 0 && cash - productionCost < reserveFloor;
+
+		/// <summary>
 		/// TQ3: the placement-type ladder — the planner's crawl want and refinery/fragile rules
 		/// classify first, then the defense roll (advisor-approved cells are placed by the caller
 		/// and never reach this), then the organic crawl roll. The random draws themselves stay

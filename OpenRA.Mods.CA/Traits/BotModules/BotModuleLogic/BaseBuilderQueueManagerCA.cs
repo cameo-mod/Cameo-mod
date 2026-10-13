@@ -80,6 +80,10 @@ namespace OpenRA.Mods.CA.Traits
 		// production. Empty = nothing pauses, upstream-identical.
 		IBotRequestPauseBuildingProduction[] pauseBuilding;
 
+		// TF-2: lazy — the unit side's mobile-production reservation. Null = classic (floor 0,
+		// no spend feed, admission unchanged).
+		IBotMobileSpendReserve mobileReserve;
+
 		// REPLAY-HEALTH-LOGGER (ACK-2, task 01a12023): record-only queue-transition dispatch.
 		// Everything here is lazy — with no observer trait on the PlayerActor the seam is one
 		// null check per Tick and no state is ever allocated (Sol review F5).
@@ -653,6 +657,20 @@ namespace OpenRA.Mods.CA.Traits
 					active = true;
 			}
 
+			// TF-2 F2: the sweep-end flush — a producer that left FindQueues (destroyed or
+			// disabled) can never reconcile, so its tracked items settle here once instead of
+			// holding the floor forever. The live set spans EVERY building+defense category:
+			// sibling managers share this ledger, and the flush is idempotent across them.
+			// FindQueues is per-tick cached, so the union scan costs one enumeration.
+			if (mobileReserve != null)
+			{
+				var liveOwners = new HashSet<object>();
+				foreach (var category in baseBuilder.Info.BuildingQueues.Concat(baseBuilder.Info.DefenseQueues).Distinct())
+					foreach (var liveQueue in AIUtils.FindQueues(player, category))
+						liveOwners.Add(liveQueue.Actor);
+				mobileReserve.FlushBuildingSpendOwners(liveOwners);
+			}
+
 			// Add a random factor so not every AI produces at the same tick early in the game.
 			// Minimum should not be negative as delays in HackyAI could be zero.
 			var randomFactor = BotRng.For(player, nameof(BaseBuilderQueueManagerCA)).Next(0, baseBuilder.Info.StructureProductionRandomBonusDelay);
@@ -669,6 +687,19 @@ namespace OpenRA.Mods.CA.Traits
 		{
 			if (queue.Actor == baseBuilder.RelocationHoldConyard)
 				return false;
+
+			// TF-2: feed the unit side's spend ledger — every in-flight item with total/remaining
+			// cost and its army-first flag, so the paid-share metric is real and an item that
+			// leaves the queue (produced, refunded, cancelled, producer gone) settles exactly once.
+			// F1: a LIST — same-name queued buildings must count per instance.
+			mobileReserve ??= player.PlayerActor.TraitsImplementing<IBotMobileSpendReserve>().FirstEnabledTraitOrDefault();
+			if (mobileReserve != null)
+			{
+				var inflight = new List<(string Item, int Total, int Remaining, bool Essential)>();
+				foreach (var i in queue.AllQueued())
+					inflight.Add((i.Item, i.TotalCost, i.RemainingCost, IsArmyFirstEssential(world.Map.Rules.Actors[i.Item])));
+				mobileReserve.ReconcileBuildingSpend(queue.Actor, inflight);
+			}
 
 			var currentBuilding = queue.AllQueued().FirstOrDefault();
 
@@ -710,11 +741,22 @@ namespace OpenRA.Mods.CA.Traits
 				// non-essential buildings so cash flows to unit production while it needs to. Construction yards,
 				// refineries, power and the first production building are essential and always pass.
 				pauseBuilding ??= player.PlayerActor.TraitsImplementing<IBotRequestPauseBuildingProduction>().ToArray();
-				if (pauseBuilding.Length > 0)
+				mobileReserve ??= player.PlayerActor.TraitsImplementing<IBotMobileSpendReserve>().FirstEnabledTraitOrDefault();
+				var reserveFloor = mobileReserve?.MobileSpendFloor ?? 0;
+				if (pauseBuilding.Length > 0 || reserveFloor > 0)
 				{
 					var essential = IsArmyFirstEssential(item);
 					if (pauseBuilding.Any(p => p.PausesBuilding(item, essential)))
 						return false;
+
+					// TF-2: the reservation — optional spend (optional defences, crawl links) may
+					// not push cash below the reserved mobile share; essentials keep the old floor.
+					if (BaseBuilderQueueEvalCA.MobileSpendBlocks(playerResources.GetCashAndResources(),
+							queue.GetProductionCost(item), reserveFloor, essential))
+					{
+						pendingDemandPick = default;
+						return false;
+					}
 				}
 
 				// ECON-A-FIX (R6): the demand's refinery reserves its claim's anchor as the order is

@@ -402,6 +402,38 @@ army production takes priority while behind). Base `3cb0fcf1b` (TF-1 landed), en
 - Tests: `ProductionSaturationTest`, `M13TempoTest` (NUnit); `test_m13_tier_knobs.py` pins all three tables
   + the NoLaunch/2 relation. C# build/tests NOT run: worktree has no `engine/` and Luna's AB pilot attempt-3
   reservation was active (expiry 2026-10-12T16:11:19Z); python tools tests run locally. No boot gate claimed.
+# 2026-10-12 — Devin: TF-2 F1/F2 review fixes + rebase onto landed TF-1 (branch `devin/turtle-fix-2-unit-spend-reservation`)
+
+*Devin-Developer*, Devin-Reviewer receipt `fleet/REVIEW_2026-10-11_turtle_fix2_devin.md`
+(APPROVE default-off landing; F1+F2 must close before `ReserveMobileProductionShare` arms).
+Rebased `bfd1b7682` → `2bbb066c3` onto `a5ab375ba` (contains the landed TF-1 `3cb0fcf1b`) —
+three-way merge clean, no manual resolution.
+
+- **F1 — same-name queue items were collapsing.** Both feeds keyed items by `i.Item` name into
+  a dictionary, so five queued tanks reported as one — `UnitOutstanding` and every settled
+  `Paid*` portion undercounted. The reconcile contract is now a LIST per queue
+  (`IReadOnlyList<(Item, Total, Remaining[, Essential])>`), and each `(owner, item)` group
+  tracks a descending multiset of per-instance remainders. Reconcile matches each reported
+  remainder to the closest tracked remainder ≥ it (a live item's remaining never grows, so a
+  larger reported remainder is a fresh instance); unmatched tracked entries vanished and
+  settle their last-observed paid portion — front completions settle the progressed entry,
+  mid-queue cancels settle the unprogressed one, completion+refill in one sweep still settles.
+- **F2 — dead/disabled producers never reconciled.** A producer that leaves `FindQueues`
+  (destroyed or `Trait.Enabled` false) can never call reconcile, so its tracked items held the
+  floor forever and never credited their paid part. New `FlushUnseenUnits`/`FlushUnseenBuildings`
+  on the ledger settle every group whose owner is absent from the sweep's live-producer set —
+  the ProbeQueueTransitions stale-watch pattern. Feeds: the unit sweep passes every unit-queue
+  actor it enumerated; each queue manager enumerates the UNION of `BuildingQueues` +
+  `DefenseQueues` (FindQueues is per-tick cached), so sibling managers flush the shared ledger
+  idempotently without stealing each other's owners.
+- **Interface:** `ReconcileUnitSpend`/`ReconcileBuildingSpend` signatures → lists; new
+  `FlushUnitSpendOwners`/`FlushBuildingSpendOwners` (default no-op, classic providers unchanged).
+- **Tests:** helpers now feed lists; +5 cases — per-instance counts, completion+refill,
+  tail-cancel, dead-producer flush (paid credited, remainder released, idempotent),
+  essential/optional split on a dead conyard.
+- **Verification:** Cameo.Test 1848/1848 pass on the rebased tree. Boot gate DEFERRED —
+  Luna Manager's A/B reservation is held; no launches. `ReserveMobileProductionShare` stays 0
+  (default-off) until armed via the increment switch.
 
 # 2026-10-11 — Devin: TF-1 repair — atomic admission claims + paid-reconcile lifecycle (branch `devin/turtle-fix-1-crawl-allowance`)
 
@@ -464,6 +496,8 @@ The A5 probe now requests headless rendering instead of fast/windowed mode (cher
   - one A/B batch voided by `mod_commit` fingerprint drift (commit landed mid-batch) and re-run.
 - **Docs:** LESSONS_LEARNED (2 entries), STATUS resume, HANDOFF, master doc Part IIIc, TASK_INDEX A/B row,
   `MAP_ENGINE_ACCEPTANCE_2026-10-10.md`, correction note in `SPAWN_SYMMETRY_2026-10-11.md`, M13 counts.
+
+*Devin-Developer 2026-10-11 (TURTLE-FIX-2, devin/turtle-fix-2-unit-spend-reservation @ <pending>).* Base `e49acf41a`. Reserve a reviewed share of spendable cash for mobile production while production is feasible, mobile queue capacity exists, and the offensive pool (primary role in CombatRoles) sits below `ReserveArmyFloor`. Unit builder reconciles real queue contents per producer each sweep — paid spend derives from `TotalCost - RemainingCost` on observed items, so cancel/refund/elimination release exactly once and order intent never charges (the TF-1 review correction carried forward by design). Building queue feeds its items into the same ledger keyed by `IsArmyFirstEssential`; non-essential admissions gate on `BaseBuilderQueueEvalCA.MobileSpendBlocks(cash, cost, floor, essential)` — post-spend cash must cover `standing share + in-flight unit remaining`. Essential items bypass; floor 0 bit-identical to legacy. `PaidUnitSharePct` ledger metric + `ReservePaid{Unit,Optional,Essential}Cost` save/load. Interface `IBotMobileSpendReserve` (defaults null/no-op) decouples the modules. Config: `ReserveMobileProductionShare=0` (off), `ReserveArmyFloor=8` — NOT armed in yaml. Tests: `UnitSpendReservationTest` (8: share math, in-flight floor, paid reconcile, completion credit, cancel release exactly-once, essential vs optional accounting, saturation, restore) + 6 `MobileSpendBlocks` gate cases. Verified: Release 0/0; focused 136/136; full 1692/1692; boot-gate PASS (menu marker in perf.log, 0 new exceptions, 0 survivors). Merge note for integrator: this branch and `devin/turtle-fix-1-crawl-allowance` both touch `BaseBuilderQueueManagerCA` — TF-1's TryClaimCrawlLink admission site and TF-2's reserve feed/gate are adjacent, non-conflicting-in-intent edits; combine order TF-1 then TF-2.
 
 *Devin-Developer 2026-10-10 (rereview fix, devin/repair-b3-park-release @ 693c07793).* VP exact-tip review of 560a413 caught that owner-scoped AnchorTakenForOwner (ReferenceEquals only) made NULL-owner parks — offer-streak churn bounds, ParkTicks, the parameterless failure overload — invisible to every reservation probe. Restored global semantics for null-owner parks (park.Owner == null || ReferenceEquals) while keeping the lead-ruled owner scoping for failure cooldowns; fake provider mirrors it. New regression NullOwnerParkStaysGlobalAndBlocksForeignReservation. Verified: build 0 errors, focused 124/124, full 1515/1515, fog audit PASS (269 sites). No fresh boot gate — host has no execution slot (pytest ~9.7GB + seat_verify resident); branch boot-gated clean at dad8c6753.
 # 2026-10-10 — Devin: REPAIR-B3 follow-up — park frees the whole set; owner-scoped cooldown (branch `devin/repair-b3-park-release`)
