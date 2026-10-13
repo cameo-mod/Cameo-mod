@@ -11,10 +11,20 @@ namespace OpenRA.Mods.Cameo.Traits
 	// Consumes the independently accepted terminal seam; never promotes order intent or disappearance.
 	internal static class AiEconomyQueueEvidence
 	{
-		internal static EconomyQueueEvidenceKind Classify(in BotQueueTransition transition)
+		internal static EconomyQueueEvidenceKind Classify(in BotQueueTransition transition,
+			bool terminalEpisodeResolved = false)
 		{
 			if (transition.Kind == BotQueueTransitionKind.Removed)
-				return EconomyQueueEvidenceKind.Unknown;
+				// A Removed behind the episode's recorded resolution (cancel intent, proven
+				// cancellation, proven placement) is the dequeue of an outcome already on
+				// record, and an event-local Destruction/Elimination class is proven removal
+				// cause — neither loses evidence. Only an unresolved Removed with no proven
+				// cause is an unproven disappearance and stays UNKNOWN.
+				return terminalEpisodeResolved
+					|| transition.CancellationClass is BotQueueCancellationClass.Destruction
+						or BotQueueCancellationClass.Elimination
+					? EconomyQueueEvidenceKind.Observation
+					: EconomyQueueEvidenceKind.Unknown;
 			if (transition.Kind is not (BotQueueTransitionKind.Placed or BotQueueTransitionKind.Cancelled))
 				return EconomyQueueEvidenceKind.Observation;
 			if (transition.ProducerActorId == 0 || transition.EpisodeId == 0 || transition.ProducerLive == null

@@ -10,13 +10,15 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "ai"))
 import economy_invariants as verifier
 
 
-def capture(duration=1500, state="producing", cash=5000, resources=0, capacity=10000):
+def capture(duration=1500, state="producing", cash=5000, resources=0, capacity=10000,
+            seat_state="active"):
     rows = []
     for tick in range(0, duration+1, 50):
         rows.append({"schema": 2, "game_uid": "g", "player": "p", "map_uid": "m",
                      "faction": "ra1_allies", "profile": "conventional", "profile_supported": True,
                      "dropped": 0, "kind": "pulse", "tick": tick, "seq": len(rows),
-                     "queues_complete": True, "player_active": True,
+                     "queues_complete": True, "player_active": seat_state == "active",
+                     "seat_state": seat_state,
                      "cash": cash, "resources": resources, "capacity": capacity,
                      "net_spent": tick * 10, "gross_spent": None, "gross_spend_complete": False,
                      "queues": [{"queue_id": "1:building", "producer_live": True,
@@ -100,6 +102,7 @@ class InvariantTests(unittest.TestCase):
             rows = capture(1500, state)
             for row in rows:
                 row["player_active"] = False
+                row["seat_state"] = "lost"
             self.assertEqual(codes(rows), set())
 
     def test_cash_float_spending_unverified_diagnostic(self):
@@ -157,6 +160,9 @@ class InvariantTests(unittest.TestCase):
         for r in rows:
             if r["kind"] == "pulse":
                 r["player_active"] = False
+                r["seat_state"] = "lost"
+            elif r["kind"] == "end":
+                r["seat_state"] = "lost"
             elif r["kind"] == "cancel":
                 r["tick"] = {10: 10, 60: 20, 110: 30}[r["tick"]]
         rows.sort(key=lambda r: (r["tick"], r["kind"] == "end"))
@@ -264,6 +270,64 @@ class InvariantTests(unittest.TestCase):
             rows = capture()
             mutate(rows[0])
             self.assertEqual(verifier.analyze(rows, "g", "p")["status"], "UNKNOWN")
+
+    def test_defeated_seat_is_explicit_terminal_verdict(self):
+        # The losing seat's collapse tail is complete data, not dropped evidence:
+        # seat_state "lost" on every pulse and the terminal record classifies DEFEATED.
+        for mutate_all in (True, False):
+            rows = capture(1500)
+            tail = rows if mutate_all else rows[20:]
+            for row in tail:
+                row["player_active"] = False
+                row["seat_state"] = "lost"
+            rows[-1]["seat_state"] = "lost"
+            report = verifier.analyze(rows, "g", "p")
+            self.assertEqual(report["status"], "DEFEATED")
+            self.assertTrue(report["defeated"])
+
+    def test_defect_before_defeat_still_blocks(self):
+        # A defect found while the seat was alive stays a defect after defeat.
+        rows = capture(1500, cash=15000)
+        rows[-1]["seat_state"] = "lost"
+        report = verifier.analyze(rows, "g", "p")
+        self.assertEqual(report["status"], "BLOCK")
+        self.assertTrue(report["defeated"])
+        self.assertIn("FUNDS_ABOVE_BAND", codes(rows))
+
+    def test_defeated_with_real_gap_still_unknown(self):
+        rows = capture(1500)
+        for row in rows:
+            row["player_active"] = False
+            row["seat_state"] = "lost"
+        rows[10]["dropped"] = 1
+        rows[10]["seat_state"] = "lost"
+        self.assertEqual(verifier.analyze(rows, "g", "p")["status"], "UNKNOWN")
+
+    def test_legacy_stream_missing_seat_state_is_unknown(self):
+        for drop in ("pulses_only", "all"):
+            rows = capture(150)
+            for row in rows:
+                if drop == "all" or row["kind"] == "pulse":
+                    row.pop("seat_state", None)
+            self.assertEqual(verifier.analyze(rows, "g", "p")["status"], "UNKNOWN")
+
+    def test_seat_state_mutation_or_disagreement_is_unknown(self):
+        # Reversion to active after a terminal seat state is corrupt evidence.
+        rows = capture(150)
+        rows[2]["seat_state"] = "lost"
+        rows[2]["player_active"] = False
+        self.assertEqual(verifier.analyze(rows, "g", "p")["status"], "UNKNOWN")
+        # player_active and seat_state disagreeing on one row is corrupt evidence.
+        rows = capture(150)
+        rows[1]["seat_state"] = "lost"
+        self.assertEqual(verifier.analyze(rows, "g", "p")["status"], "UNKNOWN")
+        # A terminal record that disagrees with defeated pulses is corrupt evidence.
+        rows = capture(150)
+        for row in rows:
+            row["player_active"] = False
+            row["seat_state"] = "lost"
+        rows[-1]["seat_state"] = "won"
+        self.assertEqual(verifier.analyze(rows, "g", "p")["status"], "UNKNOWN")
 
 
 if __name__ == "__main__":

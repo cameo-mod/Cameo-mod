@@ -1,3 +1,62 @@
+# 2026-10-13 — Devin: DEFEATED-SEAT-TAIL-FIX — Resolved-episode `Removed` + `seat_state`, DEFEATED verdict
+
+*Devin-Integrator.* Lead directive after the first master capture (uid
+`f1b3b4cf-97d2-4f41-9b1b-aa85c48ec66f`, seed 1337, cap 15000): BotB scored the
+lane's first `OBSERVED_HEALTHY`, but the overrun loser BotA went `UNKNOWN` —
+72/289 rows `dropped=1` from t10850→end while every data field stayed valid.
+
+**Root cause (leaf-verified).** `AiEconomyQueueEvidence.Classify` mapped *every*
+`Removed` transition to `Unknown` → `MarkIncomplete` → the one-way latch. At
+t10834 a Ready refinery was `CancelOrdered/NoRefinerySite` (class `Production`,
+an intent record), then at t10840 the item physically left the queue inside the
+still-armed proof window → `Removed + NoRefinerySite` → latch. The classification
+conflated "episode resolved by recorded intent" with "vanished unproven": ANY bot
+that cancels a ready building (routine under pressure) poisons its own stream —
+dying seats just hit it every game. `gross_spent=null` is unrelated: a schema stub
+hardcoded on all rows of both seats (the checker pins it on purpose).
+
+**Fix — emitter (record-only, bounded, fail-closed preserved).**
+- `Classify(in transition, terminalEpisodeResolved)`: `Removed` → `Observation`
+  iff (a) the episode already produced `CancelOrdered`/`Cancelled`/`Placed` on
+  the raw record — the dequeue is bookkeeping of a recorded outcome — or (b) the
+  event-local `CancellationClass` is `Destruction`/`Elimination` (proven removal
+  cause, same evidence standard a `Cancelled` row carries). Otherwise `Unknown`.
+  `PlacementOrdered` does NOT resolve — its proof window is still armed, so a
+  `Removed` there stays UNKNOWN. `EpisodeId` 0 never resolves.
+- Recorder keeps `resolvedEpisodes` (`HashSet<uint>`, bounded at `MaximumQueues`,
+  overflow → `MarkIncomplete`): adds on the three resolving kinds, consults on
+  `Removed`, frees on dequeue. A proven `Cancelled` whose queue id cannot resolve
+  during `Destruction`/`Elimination` now emits no cancel row instead of marking —
+  the queue's absence is the collapse, and an unbound `queue_id` would fail the
+  consumer schema anyway. Production-class cancels with unresolvable queues still
+  mark — genuinely missing binding while alive.
+- Pulses and the terminal `end` record carry `seat_state` ∈ {`active`,`won`,`lost`}
+  from `Player.WinState` — `player_active` is binary (any terminal WinState reads
+  inactive, so the winner also showed `false` at game end) and could not tell
+  defeat from victory.
+
+**Fix — consumer (`tools/ai/economy_invariants.py`).**
+- `seat_state` required on pulses and the end record; cross-checked against
+  `player_active`; must be monotonic (a terminal state never reverts).
+- A `lost` seat is evaluated through its defeat → `status: "DEFEATED"`,
+  `defeated: true`, exit 0 — an explicit terminal verdict, not missing telemetry.
+  Defects found while alive still `BLOCK` (carrying `defeated`). Dropped rows,
+  gaps, missing fields, and contradictory seat evidence still `UNKNOWN`.
+- Pre-fix captures re-check as `UNKNOWN` ("missing/invalid seat state") — correct:
+  the new verdict must not silently apply to old-format evidence.
+
+**WHY-BOTS-LOSE ledger.** BotA (hard) at t7300: `FUNDS_ABOVE_BAND` — funds
+11376 of 12200 capacity held 1500 ticks while being overrun (lost at t14335).
+Cash-hoard starvation is a genuine hard-bot weakness to log, not a logger defect.
+
+**Tests.** C# (+2 net): unresolved `Removed` (None/Production class) stays
+`Unknown`; `Destruction`/`Elimination` `Removed` observes; resolved-episode
+`Removed` observes. Python (+5): defeated tail → `DEFEATED`; pre-defeat defect →
+`BLOCK`+flag; dropped row → `UNKNOWN`; missing `seat_state` → `UNKNOWN`;
+mutation/disagreement → `UNKNOWN`. Suites: `OpenRA.Mods.Cameo.Test` 2021/2021,
+`test_economy_invariants` 31/31, `test_economy_logger_cli` 12/12 (pinned consumer
+unaffected — it ignores the additive field).
+
 # 2026-10-13 — Devin: PLACEMENT-PROOF-LOCATION-FIX (01a131ba) — own-actor `Location == site` fallback
 
 *Devin-Developer.* Task 01a131ba (blocks REPLAY-HEALTH-LOGGER `01a12023`): the queue

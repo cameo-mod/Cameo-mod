@@ -29,12 +29,38 @@ namespace OpenRA.Mods.Cameo.Test
 
 		[TestCase(BotQueueCancellationClass.None)]
 		[TestCase(BotQueueCancellationClass.Production)]
-		[TestCase(BotQueueCancellationClass.Destruction)]
-		[TestCase(BotQueueCancellationClass.Elimination)]
-		public void RemovedWithAnyRequestAttributionRemainsUnknown(BotQueueCancellationClass cls)
+		public void UnresolvedRemovedWithoutProvenCauseRemainsUnknown(BotQueueCancellationClass cls)
 		{
+			// An item that vanishes while its proof is still armed — no recorded cancel
+			// intent, no proven placement, no event-local removal cause — is UNKNOWN.
 			var t = Transition(BotQueueTransitionKind.Removed, cls: cls);
 			Assert.That(AiEconomyQueueEvidence.Classify(in t), Is.EqualTo(EconomyQueueEvidenceKind.Unknown));
+			Assert.That(AiEconomyQueueEvidence.Classify(in t, false), Is.EqualTo(EconomyQueueEvidenceKind.Unknown));
+			Assert.That(AiEconomyQueueEvidence.TryCancellation(in t, "17:Building:Building", out _), Is.False);
+		}
+
+		[TestCase(BotQueueCancellationClass.Destruction)]
+		[TestCase(BotQueueCancellationClass.Elimination)]
+		public void RemovedWithProvenEventLocalRemovalCauseObserves(BotQueueCancellationClass cls)
+		{
+			// A collapsing seat's queue items leave with a proven event-local removal
+			// cause — the same evidence standard a Cancelled row carries. The removal is
+			// accounted, not missing data, so the tail stays complete.
+			var t = Transition(BotQueueTransitionKind.Removed, cls: cls);
+			Assert.That(AiEconomyQueueEvidence.Classify(in t), Is.EqualTo(EconomyQueueEvidenceKind.Observation));
+			Assert.That(AiEconomyQueueEvidence.Classify(in t, false), Is.EqualTo(EconomyQueueEvidenceKind.Observation));
+			Assert.That(AiEconomyQueueEvidence.TryCancellation(in t, "17:Building:Building", out _), Is.False);
+		}
+
+		[TestCase(BotQueueCancellationClass.None)]
+		[TestCase(BotQueueCancellationClass.Production)]
+		public void RemovedAfterResolvedEpisodeIsBookkeeping(BotQueueCancellationClass cls)
+		{
+			// The t10840 leaf case: a Ready item the module withdrew with recorded
+			// CancelOrdered intent dequeues later as Removed. The outcome is already on
+			// record — the dequeue adds nothing and must not poison the capture.
+			var t = Transition(BotQueueTransitionKind.Removed, cls: cls);
+			Assert.That(AiEconomyQueueEvidence.Classify(in t, true), Is.EqualTo(EconomyQueueEvidenceKind.Observation));
 			Assert.That(AiEconomyQueueEvidence.TryCancellation(in t, "17:Building:Building", out _), Is.False);
 		}
 
