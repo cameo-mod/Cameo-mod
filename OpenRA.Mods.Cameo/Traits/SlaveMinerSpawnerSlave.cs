@@ -37,10 +37,13 @@ namespace OpenRA.Mods.Cameo.Traits
 		[Desc("Sound to play when the slave is freed.")]
 		public readonly string FreedSound = null;
 
+		[Desc("A slave without a master (e.g. built from a barracks) checks itself for idling in this many ticks. Never scans faster than every 100 ticks.")]
+		public readonly int IdleCheckTick = 103;
+
 		public override object Create(ActorInitializer init) { return new SlaveMinerSpawnerSlave(this); }
 	}
 
-	public class SlaveMinerSpawnerSlave : BaseSpawnerSlave, INotifyHarvestAction, INotifyDockClientMoving, INotifyAddedToWorld
+	public class SlaveMinerSpawnerSlave : BaseSpawnerSlave, INotifyHarvestAction, INotifyDockClientMoving, INotifyAddedToWorld, ITick
 	{
 		public IMove[] Moves { get; private set; }
 		public IPositionable Positionable { get; private set; }
@@ -53,15 +56,32 @@ namespace OpenRA.Mods.Cameo.Traits
 		IDockHost masterDock;
 		DockClientManager dockClient;
 		bool freed;
+		int idleRescueCountdown;
 
 		// Called by the master on a bounded cadence. A free-will slave whose activity queue
 		// emptied (a manual order that finished, a cancelled dock trip, ...) would otherwise
 		// stand still forever; put it back to work without touching slaves that are busy.
 		public void RescueIdle(Actor self, Actor master)
 		{
+			Rescue(self, self.Owner == master.Owner);
+		}
+
+		// Slaves with no master (built from a barracks, or orphaned by a dead or captured
+		// master) are invisible to any master's rescue scan, so they check themselves on the
+		// same cadence and with the same policy.
+		void ITick.Tick(Actor self)
+		{
+			if (masterActor != null || !SlaveIdleRescue.Due(ref idleRescueCountdown, Info.IdleCheckTick))
+				return;
+
+			Rescue(self, true);
+		}
+
+		void Rescue(Actor self, bool sameOwnerAsMaster)
+		{
 			var harvester = self.TraitOrDefault<Harvester>();
 			var action = SlaveIdleRescue.Decide(
-				self.IsIdle, self.IsInWorld, self.IsDead, self.Owner == master.Owner,
+				self.IsIdle, self.IsInWorld, self.IsDead, sameOwnerAsMaster,
 				freed, harvester != null && !harvester.IsTraitDisabled, harvester != null && harvester.IsFull);
 
 			switch (action)
@@ -122,6 +142,7 @@ namespace OpenRA.Mods.Cameo.Traits
 			IsAircraft = self.Info.HasTraitInfo<AircraftInfo>();
 
 			dockClient = self.Trait<DockClientManager>();
+			idleRescueCountdown = SlaveIdleRescue.Cadence(Info.IdleCheckTick);
 		}
 
 		public override void LinkMaster(Actor self, Actor master, BaseSpawnerMaster spawnerMaster)
@@ -194,8 +215,12 @@ namespace OpenRA.Mods.Cameo.Traits
 				harvestedField = self.World.Map.CellContaining(self.CenterPosition);
 				self.QueueActivity(new FindAndDeliverResources(self, harvestedField));
 			}
-			else
-				self.QueueActivity(new MoveToDock(self, hostActor, host, true));
+
+			// A slave without a master dock needs nothing queued: the engine's own MoveToDock
+			// already drives this trip. A bare MoveToDock appended here becomes the NextActivity of
+			// the running FindAndDeliverResources, which then stops itself after the first delivery,
+			// and Harvester.OnDockCompleted (engine 35b13f077b) only re-queues a harvest when nothing
+			// else is queued behind the current activity, so the slave idles.
 		}
 
 		void INotifyDockClientMoving.MovementCancelled(Actor self) { Reset(self); }

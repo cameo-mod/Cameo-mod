@@ -313,18 +313,18 @@ class DualGate(unittest.TestCase):
         self.assertEqual(res["health"]["verdict_counts"], {"HEALTHY": 2})
         self.assertEqual(res["health"]["excluded_games"], [])
 
-    def test_econ_missing_excludes_the_game(self):
+    def test_econ_missing_excludes_the_game_as_unknown(self):
         games = matched_pair()
         res = az.summarize(games, None, econ_health_for(
             games, {("uid-0-0", 0): None, ("uid-0-0", 1): None}))
         self.assertEqual(res["pooled"]["complete_natural_pairs"], 0)
-        self.assertEqual(res["health"]["excluded_by_setup"], {"1v1_nuclear_gdi": {"MISSING": 1}})
+        self.assertEqual(res["health"]["excluded_by_setup"], {"1v1_nuclear_gdi": {"UNKNOWN": 1}})
 
-    def test_econ_partial_seat_coverage_is_missing(self):
+    def test_econ_partial_seat_coverage_is_unknown(self):
         games = matched_pair()
         res = az.summarize(games, None, econ_health_for(games, {("uid-0-0", 1): None}))
         self.assertEqual(res["pooled"]["complete_natural_pairs"], 0)
-        self.assertEqual(res["health"]["excluded_games"][0]["verdict"], "MISSING")
+        self.assertEqual(res["health"]["excluded_games"][0]["verdict"], "UNKNOWN")
 
     def test_econ_block_invalidates_the_game_and_names_the_family(self):
         games = matched_pair()

@@ -351,7 +351,7 @@ namespace OpenRA.Mods.Cameo.Traits
 		public readonly Dictionary<string, int> SeamStarts = new(StringComparer.Ordinal);
 	}
 
-	public sealed class AiPlayerTelemetry : IWorldLoaded, ITick, IGameOver, INotifyActorDisposing, IBotUnitProductionObserver
+	public sealed class AiPlayerTelemetry : IWorldLoaded, ITick, IGameOver, INotifyActorDisposing, IBotUnitProductionObserver, IBotFrontierStageObserver
 	{
 		readonly AiPlayerTelemetryInfo info;
 		readonly Dictionary<uint, BuildingTrack> buildings = new();
@@ -435,7 +435,7 @@ namespace OpenRA.Mods.Cameo.Traits
 			// Fail closed: a rules/graph fault ends the channel, never the game.
 			catch (Exception e)
 			{
-				Fail(e);
+				Fail(e, "init");
 			}
 		}
 
@@ -669,7 +669,7 @@ namespace OpenRA.Mods.Cameo.Traits
 			}
 			catch (Exception e)
 			{
-				Fail(e);
+				Fail(e, "actor_added");
 			}
 		}
 
@@ -715,7 +715,7 @@ namespace OpenRA.Mods.Cameo.Traits
 			}
 			catch (Exception e)
 			{
-				Fail(e);
+				Fail(e, "actor_removed");
 			}
 		}
 
@@ -782,7 +782,7 @@ namespace OpenRA.Mods.Cameo.Traits
 			// Fail closed: a sampling fault ends the channel, never the game.
 			catch (Exception e)
 			{
-				Fail(e);
+				Fail(e, "tick");
 			}
 		}
 
@@ -824,7 +824,7 @@ namespace OpenRA.Mods.Cameo.Traits
 
 			foreach (var actor in world.Actors)
 			{
-				if (!actor.IsInWorld || actor.IsDead || actor.Owner == null)
+				if (!actor.IsInWorld || actor.IsDead || actor.Owner == null || actor.OccupiesSpace == null)
 					continue;
 
 				var seat = Seat(actor.Owner);
@@ -972,7 +972,7 @@ namespace OpenRA.Mods.Cameo.Traits
 			}
 			catch (Exception e)
 			{
-				Fail(e);
+				Fail(e, "unit_requested");
 			}
 		}
 
@@ -999,7 +999,7 @@ namespace OpenRA.Mods.Cameo.Traits
 			}
 			catch (Exception e)
 			{
-				Fail(e);
+				Fail(e, "unit_started");
 			}
 		}
 
@@ -1013,7 +1013,21 @@ namespace OpenRA.Mods.Cameo.Traits
 			}
 			catch (Exception e)
 			{
-				Fail(e);
+				Fail(e, "unit_skipped");
+			}
+		}
+
+		void IBotFrontierStageObserver.FrontierStageChanged(OpenRA.Player owner, int tick, in FrontierStageRow row)
+		{
+			try
+			{
+				var seat = BotSeat(owner);
+				if (seat != null)
+					EmitStageEvent(seat, in row);
+			}
+			catch (Exception e)
+			{
+				Fail(e, "frontier_stage");
 			}
 		}
 
@@ -1441,23 +1455,32 @@ namespace OpenRA.Mods.Cameo.Traits
 			writer.TryWrite(b.ToString());
 		}
 
-		void EmitEvent(SeatTelemetry seat, string kind, string actor, CPos? cell,
-			double startDist = -1, string cause = null, string toSeat = null, int units = 0,
-			long actorId = -1)
+		// CB_frontier_observe (P3a, integrator ruling O3): the shared record head, extracted so
+		// version-2 rows reuse it byte-for-byte — every existing kind keeps emitting at version 1.
+		StringBuilder BeginEvent(SeatTelemetry seat, string kind, int version, out int seq)
 		{
-			// seq is per-seat monotonic: same-tick events keep a recoverable total order
-			// (Boss P3a request — placement/build order must survive same-tick ties).
-			var seq = ++seat.EventSeq;
+			// seq is per-seat monotonic across both emit paths: same-tick events keep a
+			// recoverable total order (Boss P3a request — placement/build order must survive
+			// same-tick ties).
+			seq = ++seat.EventSeq;
 			var b = new StringBuilder(256);
 			AiMatchLogWriter.AppendObjectStart(b);
 			AiMatchLogWriter.AppendString(b, "schema", "cameo-player-event", true);
-			AiMatchLogWriter.AppendNumber(b, "version", 1);
+			AiMatchLogWriter.AppendNumber(b, "version", version);
 			AiMatchLogWriter.AppendString(b, "game_uid", uid);
 			AiMatchLogWriter.AppendString(b, "record_id", uid + "|" + seat.Seat + "|" + kind + "|" + world.WorldTick + "|" + seq);
 			AiMatchLogWriter.AppendNumber(b, "tick", world.WorldTick);
 			AiMatchLogWriter.AppendString(b, "seat", seat.Seat);
 			AiMatchLogWriter.AppendString(b, "kind", kind);
 			AiMatchLogWriter.AppendNumber(b, "seq", seq);
+			return b;
+		}
+
+		void EmitEvent(SeatTelemetry seat, string kind, string actor, CPos? cell,
+			double startDist = -1, string cause = null, string toSeat = null, int units = 0,
+			long actorId = -1)
+		{
+			var b = BeginEvent(seat, kind, 1, out _);
 			if (actor != null)
 				AiMatchLogWriter.AppendString(b, "actor", actor);
 			if (actorId >= 0)
@@ -1478,13 +1501,34 @@ namespace OpenRA.Mods.Cameo.Traits
 			writer.TryWrite(b.ToString());
 		}
 
-		void Fail(Exception e)
+		// CB_frontier_observe (P3a): version-2 rows carry the shadow stage-machine transition.
+		// cell = frozen field centre (the outpost key, O1); reason carries entry/retire/decline
+		// causes; escort_seq is always 0 — no escort episode exists until P3c.
+		void EmitStageEvent(SeatTelemetry seat, in FrontierStageRow row)
+		{
+			var b = BeginEvent(seat, "outpost_stage", 2, out _);
+			AiMatchLogWriter.AppendString(b, "cell",
+				row.Cell.X.ToString(CultureInfo.InvariantCulture) + "," + row.Cell.Y.ToString(CultureInfo.InvariantCulture));
+			AiMatchLogWriter.AppendString(b, "stage", row.Stage);
+			AiMatchLogWriter.AppendNumber(b, "cover_value", row.CoverValue);
+			AiMatchLogWriter.AppendNumber(b, "at_risk_value", row.AtRiskValue);
+			if (row.Reason != null)
+				AiMatchLogWriter.AppendString(b, "reason", row.Reason);
+			AiMatchLogWriter.AppendNumber(b, "episode", row.Episode);
+			AiMatchLogWriter.AppendNumber(b, "escort_seq", row.EscortSeq);
+			b.Append('}');
+			writer.TryWrite(b.ToString());
+		}
+
+		void Fail(Exception e, string site)
 		{
 			ended = true;
 			Unsubscribe();
 			writer?.Dispose();
 			writer = null;
-			Log.Write("debug", "Player telemetry terminated after a telemetry error: " + e.GetType().Name);
+			var frame = e.StackTrace == null ? "unknown" : e.StackTrace.Split('\n')[0].Trim();
+			Log.Write("debug", "Player telemetry terminated after a telemetry error: " + e.GetType().Name
+				+ " site=" + site + " frame=" + frame);
 		}
 
 		void Unsubscribe()

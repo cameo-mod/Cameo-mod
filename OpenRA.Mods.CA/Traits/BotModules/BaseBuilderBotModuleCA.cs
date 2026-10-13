@@ -12,6 +12,7 @@ using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.IO;
 using System.Linq;
 using OpenRA.Activities;
 using OpenRA.Mods.AS.Traits;
@@ -182,6 +183,14 @@ namespace OpenRA.Mods.CA.Traits
 
 		[Desc("Only queue construction of a new building when above this requirement.")]
 		public readonly int BuildingProductionMinCashRequirement = 1750;
+
+		[Desc("Cash-starvation escape: a building queue whose wanted item has been held by the",
+			"BuildingProductionMinCashRequirement floor this many ticks admits it at its own cost instead,",
+			"so unit production draining the bank below the floor cannot starve construction forever.",
+			"The item still needs cash >= its own cost; power, prerequisites and placement are unchanged.",
+			"300 ticks (12 s at 25 tps, roughly two building sweeps) ignores the brief dip after a unit buy",
+			"yet ends the observed 1500-tick idle spells quickly. 0 or less disables the escape (floor only).")]
+		public readonly int BuildingCashStarvationTicks = 300;
 
 		[Desc("Only queue construction of a new defense when above this requirement.")]
 		public readonly int DefenseProductionMinCashRequirement = 2250;
@@ -1867,7 +1876,7 @@ namespace OpenRA.Mods.CA.Traits
 			if (IsTraitDisabled)
 				return null;
 
-			return new List<MiniYamlNode>()
+			var data = new List<MiniYamlNode>()
 			{
 				new("InitialBaseCenter", FieldSaver.FormatValue(initialBaseCenter)),
 				new("DefenseCenter", FieldSaver.FormatValue(DefenseCenter)),
@@ -1881,12 +1890,46 @@ namespace OpenRA.Mods.CA.Traits
 				new("OpeningRefineryCostCommitted", FieldSaver.FormatValue(openingRefineryCostCommitted)),
 				new("OpeningDefenseCommittedCost", FieldSaver.FormatValue(openingDefenseCommittedCost))
 			};
+
+			var starvationManagers = builders.Select((builder, index) => (builder, index))
+				.Where(entry => entry.builder.TrackedCashStarvationRuns > 0)
+				.Select(entry => new MiniYamlNode("Manager", "", new List<MiniYamlNode>
+				{
+					new("Index", FieldSaver.FormatValue(entry.index)),
+					new("Category", FieldSaver.FormatValue(entry.builder.Category)),
+					new("Runs", "", entry.builder.SaveCashStarvationRuns())
+				})).ToList();
+			if (starvationManagers.Count > 0)
+				data.Add(new MiniYamlNode("CashStarvationClocks", "", starvationManagers));
+
+			return data;
 		}
 
 		void IGameSaveTraitData.ResolveTraitData(Actor self, MiniYaml data)
 		{
 			if (self.World.IsReplay)
 				return;
+
+			var starvationClocksNode = data.NodeWithKeyOrDefault("CashStarvationClocks");
+			if (starvationClocksNode != null)
+			{
+				foreach (var builder in builders)
+					builder.RestoreCashStarvationRuns(Enumerable.Empty<MiniYamlNode>());
+
+				var restoredManagers = new HashSet<int>();
+				foreach (var managerNode in starvationClocksNode.Value.Nodes)
+				{
+					var fields = managerNode.Value.ToDictionary();
+					var index = FieldLoader.GetValue<int>("Index", fields["Index"].Value);
+					var category = FieldLoader.GetValue<string>("Category", fields["Category"].Value);
+					if (index < 0 || index >= builders.Length || builders[index].Category != category || !restoredManagers.Add(index))
+						throw new InvalidDataException("Invalid or duplicate cash-starvation manager save state.");
+
+					var runsNode = managerNode.Value.NodeWithKeyOrDefault("Runs");
+					if (runsNode != null)
+						builders[index].RestoreCashStarvationRuns(runsNode.Value.Nodes);
+				}
+			}
 
 			var initialBaseCenterNode = data.NodeWithKeyOrDefault("InitialBaseCenter");
 			if (initialBaseCenterNode != null)

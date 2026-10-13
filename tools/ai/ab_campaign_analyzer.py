@@ -206,8 +206,9 @@ def health_verdict(by_player: dict[str, list[dict]] | None, expected_seats: int,
     anything that is not every expected seat OBSERVED_HEALTHY is not poolable. With expected_players the
     coverage check is by NAME (missing seat -> MISSING, foreign seat -> SCHEMA_MISMATCH); without it, only
     the seat COUNT is checked."""
+    missing_verdict = "UNKNOWN" if family == "economy_invariants" else "MISSING"
     if not by_player:
-        return "MISSING", f"no {family} report for this game_uid"
+        return missing_verdict, f"no {family} report for this game_uid"
     reports = [rep for reps in by_player.values() for rep in reps]
     statuses = {rep.get("status") for rep in reports}
     if "BLOCK" in statuses:
@@ -223,11 +224,12 @@ def health_verdict(by_player: dict[str, list[dict]] | None, expected_seats: int,
         missing = sorted(expected_players - set(by_player))
         extra = sorted(set(by_player) - expected_players)
         if missing:
-            return "MISSING", f"no report for seat(s) {missing}"
+            return missing_verdict, f"no report for seat(s) {missing}"
         if extra:
             return "SCHEMA_MISMATCH", f"report(s) for seat(s) not in this game: {extra}"
     elif len(by_player) != expected_seats or expected_seats <= 0:
-        return ("MISSING" if len(by_player) < expected_seats else "SCHEMA_MISMATCH"),             f"{len(by_player)} seat report(s) for {expected_seats} receipt seat(s)"
+        verdict = missing_verdict if len(by_player) < expected_seats else "SCHEMA_MISMATCH"
+        return verdict, f"{len(by_player)} seat report(s) for {expected_seats} receipt seat(s)"
     if statuses != {HEALTHY}:
         return "UNKNOWN", f"statuses {sorted(statuses)}"
     return "HEALTHY", ""

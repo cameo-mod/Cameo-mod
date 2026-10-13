@@ -47,6 +47,16 @@ namespace OpenRA.Mods.CA.Traits
 		int latchedProviders;
 		int minimumExcessPower;
 		int minCashRequirement;
+
+		// Cash-starvation escape: per producer, the tick its wanted item first sat under the cash floor.
+		// The run ends the moment the floor stops blocking, the producer is busy/held/latched/relocating,
+		// nothing is wanted, or the producer leaves the live set, so the escape only fires for an
+		// uninterrupted run of floor-blocked sweeps (CashStarvationClock). Integer ticks, no RNG.
+		readonly CashStarvationClock cashClock = new CashStarvationClock();
+		public int TrackedCashStarvationRuns => cashClock.Tracked;
+		public List<MiniYamlNode> SaveCashStarvationRuns() => cashClock.SaveState();
+		public void RestoreCashStarvationRuns(IEnumerable<MiniYamlNode> runs) => cashClock.RestoreState(runs);
+		readonly HashSet<uint> sweptProducers = new HashSet<uint>();
 		CPos? baseCenterKeepsFailing = null;
 
 		// ECON-A: ChooseBuildLocation set this when an expansion-demand cell came from the
@@ -79,6 +89,10 @@ namespace OpenRA.Mods.CA.Traits
 		// Cameo (§12.20): lazy — resolved on first TickQueue, an OR-of-vetoes pause on new building
 		// production. Empty = nothing pauses, upstream-identical.
 		IBotRequestPauseBuildingProduction[] pauseBuilding;
+
+		// TF-2: lazy — the unit side's mobile-production reservation. Null = classic (floor 0,
+		// no spend feed, admission unchanged).
+		IBotMobileSpendReserve mobileReserve;
 
 		// REPLAY-HEALTH-LOGGER (ACK-2, task 01a12023): record-only queue-transition dispatch.
 		// Everything here is lazy — with no observer trait on the PlayerActor the seam is one
@@ -353,7 +367,21 @@ namespace OpenRA.Mods.CA.Traits
 						t.Trait.Info.Requirements.ContainsKey(p.PlugType),
 						t.Trait.AcceptsPlug(p.PlugType)));
 
-			return world.ActorMap.GetActorsAt(site).Any(a => !a.IsDead && a.Owner == player && PlacedNameMatches(p.ItemName, a));
+			// Occupied-cell proof first: the actor lands inside the same frame-end task
+			// the item leaves in, so the building influencing the ordered cell proves
+			// the placement. PLACEMENT-PROOF-LOCATION-FIX (01a131ba): buildings whose
+			// footprint marks the top-left '_' (every ^TDPROC refinery,
+			// td_gdi_repairfacility) never influence their own Location cell — Tiles()
+			// skips '_' — so the site scan can never see them. Their Location still IS
+			// the ordered site; a live own name-matching actor at that Location proves
+			// the placement without weakening the cell-occupancy evidence.
+			if (world.ActorMap.GetActorsAt(site).Any(a => BaseBuilderQueueEvalCA.OccupiedSiteProven(
+				!a.IsDead, a.Owner == player, PlacedNameMatches(p.ItemName, a))))
+				return true;
+
+			return world.ActorsHavingTrait<Building>().Any(a => BaseBuilderQueueEvalCA.LocationSiteProven(
+				!a.IsDead, a.Owner == player, PlacedNameMatches(p.ItemName, a),
+				a.Location == site));
 		}
 
 		bool PlacedNameMatches(string itemName, Actor placed)
@@ -587,7 +615,10 @@ namespace OpenRA.Mods.CA.Traits
 				}
 
 				if (failCount >= baseBuilder.Info.MaximumFailedPlacementAttempts)
+				{
+					cashClock.ResetAll();
 					return;
+				}
 			}
 
 			if (waterState == WaterCheck.NotChecked)
@@ -633,10 +664,29 @@ namespace OpenRA.Mods.CA.Traits
 			// PERF: Queue only one actor at a time per category
 			itemQueuedThisTick = false;
 			var active = false;
+			sweptProducers.Clear();
 			foreach (var queue in AIUtils.FindQueues(player, Category))
 			{
+				sweptProducers.Add(queue.Actor.ActorID);
 				if (TickQueue(bot, queue))
 					active = true;
+			}
+
+			// A producer that left FindQueues (disabled or destroyed) must not keep a stale starvation run.
+			cashClock.Retain(sweptProducers);
+
+			// TF-2 F2: the sweep-end flush — a producer that left FindQueues (destroyed or
+			// disabled) can never reconcile, so its tracked items settle here once instead of
+			// holding the floor forever. The live set spans EVERY building+defense category:
+			// sibling managers share this ledger, and the flush is idempotent across them.
+			// FindQueues is per-tick cached, so the union scan costs one enumeration.
+			if (mobileReserve != null)
+			{
+				var liveOwners = new HashSet<object>();
+				foreach (var category in baseBuilder.Info.BuildingQueues.Concat(baseBuilder.Info.DefenseQueues).Distinct())
+					foreach (var liveQueue in AIUtils.FindQueues(player, category))
+						liveOwners.Add(liveQueue.Actor);
+				mobileReserve.FlushBuildingSpendOwners(liveOwners);
 			}
 
 			// Add a random factor so not every AI produces at the same tick early in the game.
@@ -654,9 +704,29 @@ namespace OpenRA.Mods.CA.Traits
 		bool TickQueue(IBot bot, ProductionQueue queue)
 		{
 			if (queue.Actor == baseBuilder.RelocationHoldConyard)
+			{
+				cashClock.Reset(queue.Actor.ActorID);
 				return false;
+			}
+
+			// TF-2: feed the unit side's spend ledger — every in-flight item with total/remaining
+			// cost and its army-first flag, so the paid-share metric is real and an item that
+			// leaves the queue (produced, refunded, cancelled, producer gone) settles exactly once.
+			// F1: a LIST — same-name queued buildings must count per instance.
+			mobileReserve ??= player.PlayerActor.TraitsImplementing<IBotMobileSpendReserve>().FirstEnabledTraitOrDefault();
+			if (mobileReserve != null)
+			{
+				var inflight = new List<(string Item, int Total, int Remaining, bool Essential)>();
+				foreach (var i in queue.AllQueued())
+					inflight.Add((i.Item, i.TotalCost, i.RemainingCost, IsArmyFirstEssential(world.Map.Rules.Actors[i.Item])));
+				mobileReserve.ReconcileBuildingSpend(queue.Actor, inflight);
+			}
 
 			var currentBuilding = queue.AllQueued().FirstOrDefault();
+
+			// A busy producer (item queued/ready) or a placement-latched one takes no new item this sweep.
+			if (currentBuilding != null || failCount >= baseBuilder.Info.MaximumFailedPlacementAttempts)
+				cashClock.Reset(queue.Actor.ActorID);
 
 			// Waiting to build something
 			if (currentBuilding == null && failCount < baseBuilder.Info.MaximumFailedPlacementAttempts)
@@ -664,7 +734,12 @@ namespace OpenRA.Mods.CA.Traits
 				pendingDemandPick = default;
 				var item = ChooseBuildingToBuild(queue);
 				if (item == null)
+				{
+					cashClock.Reset(queue.Actor.ActorID);
 					return false;
+				}
+
+				TraceThresholdShadow(queue, item);
 
 				var demandPick = pendingDemandPick;
 
@@ -674,7 +749,10 @@ namespace OpenRA.Mods.CA.Traits
 				// ordinary same-name duplicate of an ORDINARY item, legal before) pass unchanged.
 				if (baseBuilder.ExpansionPrebuildEnabled && demandPick.Demand == null
 					&& baseBuilder.DemandForQueuedItem(item.Name, queue.Actor) != null)
+				{
+					cashClock.Reset(queue.Actor.ActorID);
 					return false;
+				}
 
 				// We shouldn't be queueing new buildings (other than refineries) when we're low on cash.
 				// REF-1 B1/B2: under the refinery law the planner's own wants (the crawl link and the due MCV's
@@ -687,20 +765,52 @@ namespace OpenRA.Mods.CA.Traits
 
 				// ECON-A: a demand-bound item rides at its own cost floor like the planner wants —
 				// the reserve gate would push it past the ETA it was scheduled to meet.
-				if (BaseBuilderQueueEvalCA.BlockedByCash(playerResources.GetCashAndResources(), minCashRequirement,
-						baseBuilder.Info.RefineryTypes.Contains(item.Name), plannerWant || demandPick.Demand != null,
-						queue.GetProductionCost(item), itemQueuedThisTick))
+				// Cash-starvation escape: units draining the bank under the floor every sweep must not
+				// hold construction out forever — after BuildingCashStarvationTicks floor-blocked ticks
+				// the item rides at its own cost (the same exemption the planner wants get).
+				// The clock counts only ELIGIBLE sweeps — the cash floor is the ONLY veto: no sibling queue took
+				// this tick and no pause / mobile-reserve veto applies (both are side-effect-free queries). It is
+				// keyed by (producer, wanted item), so a different item never inherits elapsed ticks, and every
+				// ineligible sweep ends the run.
+				pauseBuilding ??= player.PlayerActor.TraitsImplementing<IBotRequestPauseBuildingProduction>().ToArray();
+				mobileReserve ??= player.PlayerActor.TraitsImplementing<IBotMobileSpendReserve>().FirstEnabledTraitOrDefault();
+				var reserveFloor = mobileReserve?.MobileSpendFloor ?? 0;
+				var cashNow = playerResources.GetCashAndResources();
+				var isRefinery = baseBuilder.Info.RefineryTypes.Contains(item.Name);
+				var exempt = plannerWant || demandPick.Demand != null;
+				var cost = queue.GetProductionCost(item);
+				var itemEssential = IsArmyFirstEssential(item);
+				var nonCashVeto = pauseBuilding.Any(p => p.PausesBuilding(item, itemEssential))
+					|| BaseBuilderQueueEvalCA.MobileSpendBlocks(cashNow, cost, reserveFloor, itemEssential);
+				cashClock.Observe(queue.Actor.ActorID, item.Name,
+					BaseBuilderQueueEvalCA.StarvationEligible(
+						BaseBuilderQueueEvalCA.FloorBlocks(cashNow, minCashRequirement, isRefinery, exempt, cost),
+						cashNow >= cost, itemQueuedThisTick, nonCashVeto),
+					world.WorldTick);
+				var starved = cashClock.Starved(queue.Actor.ActorID, item.Name, world.WorldTick, baseBuilder.Info.BuildingCashStarvationTicks);
+				if (BaseBuilderQueueEvalCA.BlockedByCash(cashNow, minCashRequirement, isRefinery, exempt, cost, itemQueuedThisTick, starved))
 					return false;
+
+				// Passed the cash gate: an admission (or a later non-cash veto below) ends the run either way.
+				cashClock.Reset(queue.Actor.ActorID);
 
 				// Cameo (§12.20): the army-first vote - a provider (ArmyFirstBotModule, the one owner) can hold new
 				// non-essential buildings so cash flows to unit production while it needs to. Construction yards,
 				// refineries, power and the first production building are essential and always pass.
-				pauseBuilding ??= player.PlayerActor.TraitsImplementing<IBotRequestPauseBuildingProduction>().ToArray();
-				if (pauseBuilding.Length > 0)
+				if (pauseBuilding.Length > 0 || reserveFloor > 0)
 				{
 					var essential = IsArmyFirstEssential(item);
 					if (pauseBuilding.Any(p => p.PausesBuilding(item, essential)))
 						return false;
+
+					// TF-2: the reservation — optional spend (optional defences, crawl links) may
+					// not push cash below the reserved mobile share; essentials keep the old floor.
+					if (BaseBuilderQueueEvalCA.MobileSpendBlocks(playerResources.GetCashAndResources(),
+							queue.GetProductionCost(item), reserveFloor, essential))
+					{
+						pendingDemandPick = default;
+						return false;
+					}
 				}
 
 				// ECON-A-FIX (R6): the demand's refinery reserves its claim's anchor as the order is
@@ -1411,6 +1521,47 @@ namespace OpenRA.Mods.CA.Traits
 			return false;
 		}
 
+		// Record-only economy trace (A/B sentinel triage 2026-10-13): why the NewProductionCashThreshold
+		// override did not run while the bank sat over it. Bounded — the first 8 lines per kind, then every
+		// 25th — written to the "debug" channel; moves no order, RNG or state the sim reads.
+		readonly Dictionary<string, int> econTraceCounts = new Dictionary<string, int>();
+
+		bool EconTraceDue(string kind)
+		{
+			econTraceCounts.TryGetValue(kind, out var n);
+			econTraceCounts[kind] = ++n;
+			return n <= 8 || n % 25 == 0;
+		}
+
+		string EconTraceState() =>
+			$"tick {world.WorldTick} bank {playerResources.GetCashAndResources()} threshold {NewProductionCashThreshold}"
+			+ $" excess {playerPower?.ExcessPower} minExcess {minimumExcessPower} buildings {playerBuildings.Count()}"
+			+ $" plants {playerBuildings.Count(a => baseBuilder.Info.PowerTypes.Contains(a.Info.Name))}"
+			+ $" production {playerBuildings.Count(a => baseBuilder.Info.ProductionTypes.Contains(a.Info.Name))}";
+
+		void TraceLowPowerOverride(ActorInfo power)
+		{
+			if (EconTraceDue("lowpower"))
+				Log.Write("debug", $"AI ({player.ClientIndex}): ECON-TRACE lowpower-override {power.Name} {EconTraceState()}");
+		}
+
+		void TraceThresholdOverride(string outcome, ActorInfo pick)
+		{
+			if (EconTraceDue("threshold-" + outcome))
+				Log.Write("debug", $"AI ({player.ClientIndex}): ECON-TRACE threshold-override {outcome} {pick?.Name ?? "-"} {EconTraceState()}");
+		}
+
+		// The bank is over the threshold yet an earlier priority took the queue: name the pre-emptor.
+		void TraceThresholdShadow(ProductionQueue queue, ActorInfo item)
+		{
+			if (NewProductionCashThreshold <= 0 || playerResources.GetCashAndResources() <= NewProductionCashThreshold
+				|| baseBuilder.Info.ProductionTypes.Contains(item.Name))
+				return;
+
+			if (EconTraceDue("shadow-" + item.Name))
+				Log.Write("debug", $"AI ({player.ClientIndex}): ECON-TRACE threshold-shadowed-by {item.Name} {EconTraceState()}");
+		}
+
 		ActorInfo ChooseBuildingToBuild(ProductionQueue queue)
 		{
 			var buildableThings = queue.BuildableItems();
@@ -1432,6 +1583,7 @@ namespace OpenRA.Mods.CA.Traits
 			if (playerPower != null && playerPower.ExcessPower < minimumExcessPower && power != null && power.TraitInfos<PowerInfo>().Where(i => i.EnabledByDefault).Sum(p => p.Amount) > 0)
 			{
 					AIUtils.BotDebug("{0} decided to build {1}: Priority override (low power)", queue.Actor.Owner, power.Name);
+					TraceLowPowerOverride(power);
 					return power;
 			}
 
@@ -1556,9 +1708,12 @@ namespace OpenRA.Mods.CA.Traits
 					{
 						AIUtils.BotDebug("{0} decided to build {1}: Priority override ({2})", queue.Actor.Owner, pick.Name,
 							pick == production ? "production" : "would be low power");
+						TraceThresholdOverride(pick == production ? "production" : "power-swap", pick);
 						return pick;
 					}
 				}
+
+				TraceThresholdOverride(production == null ? "no-producible" : "type-limit-or-no-pick", production);
 			}
 
 			// Only consider building this if there is enough water inside the base perimeter and there are close enough adjacent buildings

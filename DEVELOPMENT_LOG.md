@@ -1,3 +1,162 @@
+# 2026-10-13 — Devin: DEFEATED-SEAT-TAIL-FIX — Resolved-episode `Removed` + `seat_state`, DEFEATED verdict
+
+*Devin-Integrator.* Lead directive after the first master capture (uid
+`f1b3b4cf-97d2-4f41-9b1b-aa85c48ec66f`, seed 1337, cap 15000): BotB scored the
+lane's first `OBSERVED_HEALTHY`, but the overrun loser BotA went `UNKNOWN` —
+72/289 rows `dropped=1` from t10850→end while every data field stayed valid.
+
+**Root cause (leaf-verified).** `AiEconomyQueueEvidence.Classify` mapped *every*
+`Removed` transition to `Unknown` → `MarkIncomplete` → the one-way latch. At
+t10834 a Ready refinery was `CancelOrdered/NoRefinerySite` (class `Production`,
+an intent record), then at t10840 the item physically left the queue inside the
+still-armed proof window → `Removed + NoRefinerySite` → latch. The classification
+conflated "episode resolved by recorded intent" with "vanished unproven": ANY bot
+that cancels a ready building (routine under pressure) poisons its own stream —
+dying seats just hit it every game. `gross_spent=null` is unrelated: a schema stub
+hardcoded on all rows of both seats (the checker pins it on purpose).
+
+**Fix — emitter (record-only, bounded, fail-closed preserved).**
+- `Classify(in transition, terminalEpisodeResolved)`: `Removed` → `Observation`
+  iff (a) the episode already produced `CancelOrdered`/`Cancelled`/`Placed` on
+  the raw record — the dequeue is bookkeeping of a recorded outcome — or (b) the
+  event-local `CancellationClass` is `Destruction`/`Elimination` (proven removal
+  cause, same evidence standard a `Cancelled` row carries). Otherwise `Unknown`.
+  `PlacementOrdered` does NOT resolve — its proof window is still armed, so a
+  `Removed` there stays UNKNOWN. `EpisodeId` 0 never resolves.
+- Recorder keeps `resolvedEpisodes` (`HashSet<uint>`, bounded at `MaximumQueues`,
+  overflow → `MarkIncomplete`): adds on the three resolving kinds, consults on
+  `Removed`, frees on dequeue. A proven `Cancelled` whose queue id cannot resolve
+  during `Destruction`/`Elimination` now emits no cancel row instead of marking —
+  the queue's absence is the collapse, and an unbound `queue_id` would fail the
+  consumer schema anyway. Production-class cancels with unresolvable queues still
+  mark — genuinely missing binding while alive.
+- Pulses and the terminal `end` record carry `seat_state` ∈ {`active`,`won`,`lost`}
+  from `Player.WinState` — `player_active` is binary (any terminal WinState reads
+  inactive, so the winner also showed `false` at game end) and could not tell
+  defeat from victory.
+
+**Fix — consumer (`tools/ai/economy_invariants.py`).**
+- `seat_state` required on pulses and the end record; cross-checked against
+  `player_active`; must be monotonic (a terminal state never reverts).
+- A `lost` seat is evaluated through its defeat → `status: "DEFEATED"`,
+  `defeated: true`, exit 0 — an explicit terminal verdict, not missing telemetry.
+  Defects found while alive still `BLOCK` (carrying `defeated`). Dropped rows,
+  gaps, missing fields, and contradictory seat evidence still `UNKNOWN`.
+- Pre-fix captures re-check as `UNKNOWN` ("missing/invalid seat state") — correct:
+  the new verdict must not silently apply to old-format evidence.
+
+**WHY-BOTS-LOSE ledger.** BotA (hard) at t7300: `FUNDS_ABOVE_BAND` — funds
+11376 of 12200 capacity held 1500 ticks while being overrun (lost at t14335).
+Cash-hoard starvation is a genuine hard-bot weakness to log, not a logger defect.
+
+**Tests.** C# (+2 net): unresolved `Removed` (None/Production class) stays
+`Unknown`; `Destruction`/`Elimination` `Removed` observes; resolved-episode
+`Removed` observes. Python (+5): defeated tail → `DEFEATED`; pre-defeat defect →
+`BLOCK`+flag; dropped row → `UNKNOWN`; missing `seat_state` → `UNKNOWN`;
+mutation/disagreement → `UNKNOWN`. Suites: `OpenRA.Mods.Cameo.Test` 2021/2021,
+`test_economy_invariants` 31/31, `test_economy_logger_cli` 12/12 (pinned consumer
+unaffected — it ignores the additive field).
+
+# 2026-10-13 — Devin: PLACEMENT-PROOF-LOCATION-FIX (01a131ba) — own-actor `Location == site` fallback
+
+*Devin-Developer.* Task 01a131ba (blocks REPLAY-HEALTH-LOGGER `01a12023`): the queue
+watch's `PlacementProof` used only `world.ActorMap.GetActorsAt(site)`, which returns
+actors whose BuildingInfluence covers the ordered cell. Buildings whose footprint marks
+the top-left `'_'` — every `^TDPROC` refinery, `td_gdi_repairfacility` — never occupy
+their own `Location` cell (`BuildingInfo.Tiles()` skips `'_'`, `FootprintCellType.Empty`),
+so the proof could never see them: every refinery-shaped `Placed` request expired
+`Removed` → schema-2 `UNKNOWN`, and `economy_invariants` could never reach
+`OBSERVED_HEALTHY`.
+
+- **Fix (behaviour of proof only, no order/claim/budget change):**
+  `BaseBuilderQueueManagerCA.PlacementProof` keeps the `GetActorsAt(site)` occupied-cell
+  check verbatim (now named `BaseBuilderQueueEvalCA.OccupiedSiteProven`) and adds the
+  fallback: `world.ActorsHavingTrait<Building>().Any(a => LocationSiteProven(!a.IsDead,
+  a.Owner == player, PlacedNameMatches(p.ItemName, a), a.Location == site))`.
+  The `PlugType` branch is untouched. Contract: keep occupied path, additive fallback,
+  `!IsDead` + own + `PlacedNameMatches` + `Location == site` — implemented verbatim.
+- **Seams (BaseBuilderQueueEvalCA, house pattern beside `PlugInstallProven`):**
+  `OccupiedSiteProven(live, own, nameMatches)` and
+  `LocationSiteProven(live, own, nameMatches, locationEqualsSite)` — pure predicates so
+  the union legs are unit-testable; `ActorsHavingTrait<Building>` bounds the fallback
+  scan to placed buildings (placement items are buildings; plugs never reach this
+  branch), the smallest-set-first order the lead's spec confirmation calls for.
+- **Regression coverage (BaseBuilderQueueEvalTest +4, not run — no build/test admission
+  this slot):** `LocationFallbackProvesUnderscoreTopLeftFootprint` (fallback →
+  `EmitRequested`/`Placed` through the armed pending), `LocationFallbackRejectsWrongNameOwnerOrSite`
+  (each rejecting leg), `OccupiedCellPathStillProvesPlacement` (leg preserved + pending
+  resolves at removal), `UnprovenPendingStillExpiresToRemoved` (fail-closed UNKNOWN).
+  No fixtures mutate — `WriteCliFixture` paths feed synthetic transitions, never
+  `PlacementProof`; no seq renumbering needed.
+- **False-positive review:** `site` is the order's `Target.FromCell` top-left
+  (`NotePendingTerminal(location.Value)`); a same-name own live actor at that top-left is
+  exactly the evidence the request asked for — a wrong-named or enemy actor cannot match,
+  and a dead/sold one is excluded.
+- **Verification — static only:** `git diff --check` clean; brace/paren balance identical
+  to base; `Building` resolves `OpenRA.Mods.Common.Traits` (imported, no CA shadow);
+  `ActorsWithTrait<T>` enumerates all trait pairs (`!IsDead` covers liveness); all
+  symbols verified against base. No build/test/launch — the standing serial-admission
+  lock is held by the logger lane; the suite run belongs to that admission.
+- **Branch:** `devin/01a131ba-placement-proof-site` on contract base `e8c69f92c`
+  (per task record — the in-flight logger commits `34af9662d` stay upstream; merge is
+  the integrator's). Handed in for exact-SHA review; status + review request filed in
+  the fleet folder.
+# 2026-10-13 — Devin: CB_frontier_observe P3a observation-only shadow (branch `devin/01a130f7-p3a-frontier-observe`)
+
+*Devin-Developer.* Boss's P3-FRONTIER-LANE increment P3a (brief
+`Cameo-mod-fleet/BRIEF_2026-10-12_p3a_frontier_observe_devin.md`; design
+`Cameo-mod-fleet/DESIGN_2026-10-12_protected_frontier.md` §2/§5/§6/§7.1/§8), branched off the
+first post-merge-wave master tip `871973f74` (logger wiring on top of wave tip `7b93fb84e`).
+**Observation only — read-only shadow of the protected-frontier stage machine; changes no
+flag/claim/provider output/order/budget/RNG/iteration order. Default-off; no runtime validation
+claimed — no build/test/launch under the standing admission gate.**
+
+- **Contract:** `IBotFrontierStageObserver` + `readonly record struct FrontierStageRow` in
+  `OpenRA.Mods.CA` (assembly may not name the Cameo telemetry trait; the planner must ignore the
+  observer entirely). World-trait impl on `AiPlayerTelemetry` (`OpenRA.Mods.Cameo`), resolved
+  once via `TraitsImplementing` — absent observer ⇒ empty array ⇒ zero ledger allocation.
+- **Shadow ledger (`ExpansionPlannerBotModule`):** `UseFrontierObservation` (default false)
+  hooks the END of `Replan` — the pass that already computed all evidence. Per frozen
+  `initialCenters` field record: extend→claim→cover→arm→hold, with backoff/abandoned retire
+  states driven by field-vanished, stall deadlines (claim/arm at half the 9000 deadline),
+  parity freeze (12 re-plans below `ScalingParityFloor`, hysteresis +10pt resume), soft retreat
+  (3 re-plans below floor/2 — shadow interpretation, flagged in code), and pooled own-building
+  losses (≥2 losses within 4 cells, two consecutive misses). Bounds flat/permissive per §7:
+  MaxActive 3, RecordCap 32, WatchCap 64, LossRing 16, Backoff 6000 (×2/×4 ladder), max 3
+  episodes, re-entry 4 re-plans, 2-stall abandon. Censor declines emit once per (field, reason):
+  `record_cap_full`/`max_active`/`watch_overflow`.
+- **Evidence sources (own-actor, fog-honest only):** the pass's own `refineryCells`,
+  widened `defences` fill (crawl-safety's ledger — consumer stays flag-gated, behaviour
+  identical for either flag alone), and two flag-gated new lists: own `BuildingInfo` actors
+  (ActorID/cell/ValuedInfo cost → watch census + at-risk sum) and own producers with a non-`air`
+  `Produces` (ARM evidence). No new scans; reads the same `world.Actors` own-unit pass.
+- **Telemetry v2:** `BeginEvent` extracted (schema/version/game_uid/record_id/tick/seat/kind/seq)
+  so v1 rows are byte-identical; `EmitStageEvent` emits version-2 `outpost_stage` rows
+  (cell "x,y" invariant — same convention as v1, stage/cover_value/at_risk_value/reason/episode/
+  escort_seq=0). Same per-seat monotone EventSeq + `uid|seat|kind|tick|seq` record ids; observer
+  wrapped in the same try/`Fail` fail-closed path as the production observer.
+- **Validation tooling:** `replay_health.py` + `playtest_stats_from_logs.py` now dispatch on the
+  row's OWN version before field/kind checks — `PLAYER_EVENT_V2_FIELDS`/`PLAYER_EVENT_V2_KINDS`
+  supersets; v1 `outpost_stage` rejected at kind check; unknown v2 fields/kinds fail closed;
+  v2 numeric fields integer-checked. `EVENT_KINDS` union.
+- **Switches:** `CB_frontier_observe` group → `ExpansionPlannerBotModule.UseFrontierObservation:
+  true`; `effect_classes` → `neutral` (moves no behaviour — same class as AI_radar_contacts/
+  BK_squad_order_dedup); budget pin neutral 10→11; `ai.yaml` default-off flag on the genericbot
+  planner instance.
+- **Tests (static-reviewed, NOT RUN — gated):** `FrontierObserveTest.cs` — pure-helper tests
+  (half-deadline stages, backoff ladder, deadline inclusivity, stage-completion contract,
+  censor preference order) + design-constant drift pins (13 constants). `test_replay_health.py`
+  `PlayerEventVersionTests` — 7 cases: v1 still valid, v2 outpost_stage accepted, v1
+  outpost_stage kind-rejected, unknown v2 field, v1 row with v2 field, unknown v2 kind,
+  non-integer numeric field.
+- **Verification state:** static only — `py_compile` clean on all three touched .py files,
+  `git diff --check` clean, brace/paren balance verified, all symbol references resolved against
+  the base. One authoring defect found+fixed in self-review (orphaned XML-doc tail on
+  `LinkBuildingWanted` restored). SDK-glob projects pick up both new .cs files automatically.
+- **Notable context (from `REPORT_2026-10-13_bunker_session_acquisition_sol.md`):** a field
+  replay showed `AiPlayerTelemetry.Fail` NullReferenceException → 0-byte player channel at
+  engine pin 715. Pre-existing, unlocalized, orthogonal to this lane — the v2 path rides the
+  same fail-closed `Fail` semantics; flagging for the telemetry lane.
 # 2026-10-13 — Devin: garrison bisect fixture REV3 + order-clear engine commit (no launch)
 
 *Devin-Developer.* Acting-lead (Devin Coordinator) lane ruling after the maintainer
@@ -310,6 +469,94 @@ contains the reviewed restack `7ca7e9159` byte-identical — receipt `REVIEW_202
   through pinned `economy_invariants@2a417dc3`); `test_ab_campaign_analyzer_health` 35/35;
   `test_ab_campaign_analyzer` 29/29; `git diff --check` clean. Boot gate DEFERRED — launches held
   for the lead's explicit go under the merge-wave reservation; nothing runtime claimed.
+# 2026-10-12 — Devin: extractor review verdict + deliberate-pin note (branch `devin/human-demo-extract`)
+
+*Devin-Developer.* Devin-Reviewer exact-SHA static review of
+`dbb7bcfa809792ab966af30c6796aa9c4faf729a`: **APPROVE** (receipt
+`Cameo-mod-fleet/REVIEW_2026-10-12_human_demo_extract_devin.md`). Merge-base
+`a28364114`; branch is behind master `ebea34c82` — integrator rebases, no
+mod/engine surface conflicts expected. Three bounded notes, disposition
+below.
+
+- **`wave1_scheduler.TOOL_SHA256['order_stream_diff.py'] = 1e089b45…` is
+  DELIBERATE — do not "fix" it.** The pin targets the post-repair /
+  pre-refactor comparator revision because the frozen wave-1 worktree
+  carries copies of *that* rev and `verify_tools` must keep validating
+  them. Comparator verdicts are byte-identical to the refactored tip via
+  the legacy projection (asserted by test), so the pin is consistent
+  fail-closed design, not staleness. **If a wave worktree copies tools
+  from this branch tip, `verify_tools` fails closed until a deliberate
+  re-pin to `52883a81…`** — that re-pin is a decision for whoever adopts
+  the tip, never a drive-by fix.
+- Deferred (cosmetic, reviewer-flagged non-blocking): `order_trace.py`
+  `break`s on malformed target-type where the comparator raises — a
+  diagnostic-vs-evidence asymmetry, defensible; a clarifying comment would
+  touch a self-pinned tool file, so it waits for a deliberate re-pin.
+  `test_p0_truncated_stream` carries a dead `if False` arm — test-only,
+  no behavioural surface; cleaned on the next substantive test touch.
+- Author evidence as reported: 62/62 focused tests, real-file smoke
+  19,286 orders / 0 unparsed / 62 frozen_actor. Reviewer's pass static
+  per scope — no runtime/campaign authorization implied.
+
+---
+
+# 2026-10-12 — Devin: human-demo P0+P1 offline extractor (branch `devin/human-demo-extract`)
+
+*Devin-Developer.* Coordinator assignment implementing contract rev2 (Boss
+`DESIGN_2026-10-12_human_demo_contract.md` @ `6b636db2…`) stages P0+P1 plus
+`SPEC_2026-10-12_human_demo_extraction.md` §14.2 — request-level only,
+offline only, no runtime consumers.
+
+- **`tools/ai/order_stream_diff.py` — surfacing patch (rides with this
+  review, not silent):** `parse_orders()` refactored onto a new
+  `parse_orders_detail()` that returns rich per-order records (decoded
+  fields + `parse` status + preserved bytes); `parse_orders()` projects the
+  same legacy tuples byte-identical. The one distinguished failure,
+  `unsupported_target` (Target flag set with byte 0/>3 — engine
+  `TargetType` is Invalid0/Actor1/Terrain2/FrozenActor3 and Serialize never
+  flags Invalid), is now surfaced separately from generic `unparsed_tail`,
+  as the contract requires. Comparator verdicts unchanged.
+- **`tools/ai/human_demo_extract.py` (new):** P0 trailer+SyncInfo inventory
+  (`ReplayMetadata.cs` layout: `[i32 -1][i32 1][len-prefixed MiniYaml][i32
+  len][i32 -2]`; trailer's -1 doubles as the stream terminator) and P1
+  `human-demo-orders/1` records with the exact §14.2 field set. Seats are
+  anonymized (sorted ClientIndex → seat 0..N; identity fields live only in
+  the sealed demos file); `requested_item` comes from TargetString only for
+  declared item-bearing orders (SyncInfo blobs and chat text can never
+  leak); `payload_raw` carries undecoded extra-location/extra-data hex;
+  status ladder is request-only (`accepted/completed/... = "unknown"`).
+  Censoring per §8: `after_disconnect_frame` (trailer frame > 0 only — 0 is
+  the engine default), `from_unparsed_byte` (the failed order and every
+  record after it, any client — literal rule), `after_last_sync_frame`
+  (trailerless files). Exclusions: tick-0 deaths, no-human games; status
+  `sealed|partial|excluded`. Tool pins (CRLF checkout SHA-256) for the
+  patched decoder + `tools/audit/miniyaml.py` verify at startup, fail
+  closed — the d500-frozen comparator copies stay barred.
+- **Tests `tools/tests/test_human_demo_extract.py` (+26):** golden
+  synthetic replays covering all three target cases (no-target ok /
+  decoded actor, terrain cell+pos, frozen actor / unsupported tt=0 and
+  tt=9), unparsed-tail censoring incl. a non-seat client's failure,
+  disconnect censoring, trailerless sync-bound censoring, tick-0/no-human
+  exclusion, requested_item allowlist (SyncInfo blob never leaks),
+  seat renumbering, deterministic demo ids, identity-audit and §14.2
+  banned-field sweeps. Legacy-projection equivalence is pinned too.
+- **Self-review hardening (second commit):** three defects found and fixed
+  before reviewer pass — (a) engine-known non-order packets (Ack/Ping/
+  TickScale per `OrderType`) are recognized and skipped instead of falling
+  into the generic unparsed-tail bucket (a benign server packet could have
+  censored a whole stream); (b) malformed known-type packets (wrong-length
+  SYNCHASH/DISCONNECT — fatal in the engine's TryParse*) now flag
+  `unparsed_stream` AND censor the record tail, not just the inventory
+  flag; (c) `target_ref` on `unparsed_tail` records is null unless
+  provable (flags decoded with Target bit clear → `none`) — never a
+  fabricated kind. Non-order anomaly records (`other` kind, failed
+  handshakes) censor the tail but emit no fabricated request record.
+- **Gates:** focused suite 62/62 (26 new + 36 decoder regressions).
+  Real-file smoke on four playtest captures: 19,286 order records, zero
+  unparsed bytes (the 62 `frozen_actor` targets that were UNPARSED tails
+  under the stale decoder now decode), `requested_item` carries real item
+  ids only. Boot-gate N/A — Python tooling only, no engine content; no
+  launches during the campaign reservation either way.
 
 # 2026-10-12 — Devin: M13 manager save/restore adapter (branch `devin/m13-liveness`)
 
@@ -407,6 +654,38 @@ army production takes priority while behind). Base `3cb0fcf1b` (TF-1 landed), en
 - Tests: `ProductionSaturationTest`, `M13TempoTest` (NUnit); `test_m13_tier_knobs.py` pins all three tables
   + the NoLaunch/2 relation. C# build/tests NOT run: worktree has no `engine/` and Luna's AB pilot attempt-3
   reservation was active (expiry 2026-10-12T16:11:19Z); python tools tests run locally. No boot gate claimed.
+# 2026-10-12 — Devin: TF-2 F1/F2 review fixes + rebase onto landed TF-1 (branch `devin/turtle-fix-2-unit-spend-reservation`)
+
+*Devin-Developer*, Devin-Reviewer receipt `fleet/REVIEW_2026-10-11_turtle_fix2_devin.md`
+(APPROVE default-off landing; F1+F2 must close before `ReserveMobileProductionShare` arms).
+Rebased `bfd1b7682` → `2bbb066c3` onto `a5ab375ba` (contains the landed TF-1 `3cb0fcf1b`) —
+three-way merge clean, no manual resolution.
+
+- **F1 — same-name queue items were collapsing.** Both feeds keyed items by `i.Item` name into
+  a dictionary, so five queued tanks reported as one — `UnitOutstanding` and every settled
+  `Paid*` portion undercounted. The reconcile contract is now a LIST per queue
+  (`IReadOnlyList<(Item, Total, Remaining[, Essential])>`), and each `(owner, item)` group
+  tracks a descending multiset of per-instance remainders. Reconcile matches each reported
+  remainder to the closest tracked remainder ≥ it (a live item's remaining never grows, so a
+  larger reported remainder is a fresh instance); unmatched tracked entries vanished and
+  settle their last-observed paid portion — front completions settle the progressed entry,
+  mid-queue cancels settle the unprogressed one, completion+refill in one sweep still settles.
+- **F2 — dead/disabled producers never reconciled.** A producer that leaves `FindQueues`
+  (destroyed or `Trait.Enabled` false) can never call reconcile, so its tracked items held the
+  floor forever and never credited their paid part. New `FlushUnseenUnits`/`FlushUnseenBuildings`
+  on the ledger settle every group whose owner is absent from the sweep's live-producer set —
+  the ProbeQueueTransitions stale-watch pattern. Feeds: the unit sweep passes every unit-queue
+  actor it enumerated; each queue manager enumerates the UNION of `BuildingQueues` +
+  `DefenseQueues` (FindQueues is per-tick cached), so sibling managers flush the shared ledger
+  idempotently without stealing each other's owners.
+- **Interface:** `ReconcileUnitSpend`/`ReconcileBuildingSpend` signatures → lists; new
+  `FlushUnitSpendOwners`/`FlushBuildingSpendOwners` (default no-op, classic providers unchanged).
+- **Tests:** helpers now feed lists; +5 cases — per-instance counts, completion+refill,
+  tail-cancel, dead-producer flush (paid credited, remainder released, idempotent),
+  essential/optional split on a dead conyard.
+- **Verification:** Cameo.Test 1848/1848 pass on the rebased tree. Boot gate DEFERRED —
+  Luna Manager's A/B reservation is held; no launches. `ReserveMobileProductionShare` stays 0
+  (default-off) until armed via the increment switch.
 
 # 2026-10-11 — Devin: TF-1 repair — atomic admission claims + paid-reconcile lifecycle (branch `devin/turtle-fix-1-crawl-allowance`)
 
@@ -469,6 +748,8 @@ The A5 probe now requests headless rendering instead of fast/windowed mode (cher
   - one A/B batch voided by `mod_commit` fingerprint drift (commit landed mid-batch) and re-run.
 - **Docs:** LESSONS_LEARNED (2 entries), STATUS resume, HANDOFF, master doc Part IIIc, TASK_INDEX A/B row,
   `MAP_ENGINE_ACCEPTANCE_2026-10-10.md`, correction note in `SPAWN_SYMMETRY_2026-10-11.md`, M13 counts.
+
+*Devin-Developer 2026-10-11 (TURTLE-FIX-2, devin/turtle-fix-2-unit-spend-reservation @ <pending>).* Base `e49acf41a`. Reserve a reviewed share of spendable cash for mobile production while production is feasible, mobile queue capacity exists, and the offensive pool (primary role in CombatRoles) sits below `ReserveArmyFloor`. Unit builder reconciles real queue contents per producer each sweep — paid spend derives from `TotalCost - RemainingCost` on observed items, so cancel/refund/elimination release exactly once and order intent never charges (the TF-1 review correction carried forward by design). Building queue feeds its items into the same ledger keyed by `IsArmyFirstEssential`; non-essential admissions gate on `BaseBuilderQueueEvalCA.MobileSpendBlocks(cash, cost, floor, essential)` — post-spend cash must cover `standing share + in-flight unit remaining`. Essential items bypass; floor 0 bit-identical to legacy. `PaidUnitSharePct` ledger metric + `ReservePaid{Unit,Optional,Essential}Cost` save/load. Interface `IBotMobileSpendReserve` (defaults null/no-op) decouples the modules. Config: `ReserveMobileProductionShare=0` (off), `ReserveArmyFloor=8` — NOT armed in yaml. Tests: `UnitSpendReservationTest` (8: share math, in-flight floor, paid reconcile, completion credit, cancel release exactly-once, essential vs optional accounting, saturation, restore) + 6 `MobileSpendBlocks` gate cases. Verified: Release 0/0; focused 136/136; full 1692/1692; boot-gate PASS (menu marker in perf.log, 0 new exceptions, 0 survivors). Merge note for integrator: this branch and `devin/turtle-fix-1-crawl-allowance` both touch `BaseBuilderQueueManagerCA` — TF-1's TryClaimCrawlLink admission site and TF-2's reserve feed/gate are adjacent, non-conflicting-in-intent edits; combine order TF-1 then TF-2.
 
 *Devin-Developer 2026-10-10 (rereview fix, devin/repair-b3-park-release @ 693c07793).* VP exact-tip review of 560a413 caught that owner-scoped AnchorTakenForOwner (ReferenceEquals only) made NULL-owner parks — offer-streak churn bounds, ParkTicks, the parameterless failure overload — invisible to every reservation probe. Restored global semantics for null-owner parks (park.Owner == null || ReferenceEquals) while keeping the lead-ruled owner scoping for failure cooldowns; fake provider mirrors it. New regression NullOwnerParkStaysGlobalAndBlocksForeignReservation. Verified: build 0 errors, focused 124/124, full 1515/1515, fog audit PASS (269 sites). No fresh boot gate — host has no execution slot (pytest ~9.7GB + seat_verify resident); branch boot-gated clean at dad8c6753.
 # 2026-10-10 — Devin: REPAIR-B3 follow-up — park frees the whole set; owner-scoped cooldown (branch `devin/repair-b3-park-release`)
@@ -805,6 +1086,35 @@ statically; one real residual found and fixed:
   (`MenuPostProcessEffect.PostWorldLoaded`, no new exceptions, no orphan
   process). World-hover absence stays explicitly unresolved per Sol's scope
   note; interactive screenshot/hover-flow acceptance still needs a driven match.
+
+# 2026-10-08 — Devin-Architect: TargetType-enum repair — strict comparator + trace decoder re-pinned
+
+*Devin-Architect.* Sol's multiplayer-human replay audit found the published decoder accepting
+`tt in (0,1)` for target types while the engine enum is `TargetType : byte { Invalid, Actor,
+Terrain, FrozenActor }` (Target.cs:18). Consequence: legitimate `FrozenActor` (tt=3)
+CaptureActor/Attack packets went UNPARSED (Sol: BotsSuck4 23 tails, BotsSuck5 3 tails) and `tt=0`
+silently consumed an 8-byte Actor payload, desyncing the packet parse.
+
+- `order_stream_diff.py` and `order_trace.py` now decode per `Order.Serialize`/`Deserialize`
+  (Order.cs:392-435, 116-176): `tt=1` Actor `u32 actorID + i32 generation`; `tt=2` Terrain (cell
+  or position-list, unchanged); `tt=3` FrozenActor `u32 viewerPlayerActorID + u32 frozenActorID`;
+  `tt=0`/`tt>3` stay fail-closed UNPARSED — `Serialize` only sets the Target flag when the type is
+  not Invalid, so a 0/other byte on the wire is malformed for this engine.
+- Re-pin (coordinated): comparator `88d9be75…` -> `1e089b45d9ea4cf8fa70cf915dbfc8f8e6cc43fea9879019828b3266305ffe9e`,
+  trace `4da5b841…` -> `af14b88696f1600fd61f4c551370da46afbec19c8caa0aa56fd749d1b8f6d9c2` in
+  `wave1_scheduler.TOOL_SHA256` and `FROZEN_SHA256` in `test_order_stream_diff_bounded.py`.
+  The frozen wave-1 worktree copies (`parity-wave1-bd`) must be byte-updated to the repaired revs
+  before the next wave — `verify_tools()` fails closed on the stale pin, by design.
+- Regressions in `test_order_stream_diff.py` (+7): FrozenActor parse + intra-packet alignment +
+  payload diff; Actor parse + generation diff; `tt=0` and `tt=9` fail-closed UNPARSED.
+- Re-verified on the frozen wave-5 set: 6/6 `IDENTICAL_OUTCOME_BOUNDED_TAIL`, identical F_term/
+  M_term boundaries; all 12 captures extract cleanly with zero unparsed under the repaired decoder
+  (1v1 bot streams did not exercise FrozenActor — the defect bit human multiplayer captures).
+- Proof scope note: previous evidence derived under the old decoder treated tt=3 orders as UNPARSED
+  tail bytes; under the repair they compare as canonical ORDER records — strictly stronger.
+- Gates: combined comparator+scheduler suite 85/85. Branch `devin/bot-determinism`; no master push.
+
+---
 
 # 2026-10-08 — Devin-Architect: playtest C1 crash fix — approach annulus capped at MaximumTileSearchRange
 
@@ -21344,3 +21654,86 @@ rebuilt Cameo.Test 1949/1949 (PlayerTelemetry filter 13/13 incl. new
 null/empty-declaration degradation); `git diff --check` clean. Boot gate
 DEFERRED — launches are held for the lead's explicit go under the
 merge-wave reservation. No runtime evidence claimed.
+
+
+## 2026-10-13 — TELEMETRY-NRE-HARDENING: site-tag the Fail() gate (devin/telemetry-nre-site-tags)
+
+Task 01a13181: debug.log shows 'Player telemetry terminated after a
+telemetry error: NullReferenceException' mid-match (2/2 acquired captures;
+Red Spice died at debug:71 after building_placed events at WT17/WT37) with
+no stack trace — the dying gate is unidentifiable among 7 identical Fail()
+call sites. Step 1 of the task: tag the gate so it names itself.
+
+**Design.** Fail(Exception e) gains a site string, set per catch to the
+gate name in event-kind style: init (rules/graph at WorldLoaded),
+actor_added, actor_removed (world event handlers), tick (periodic sampler
+incl. support-power/queue/economy polls), unit_requested, unit_started,
+unit_skipped (IBotUnitProductionObserver seam). The debug line keeps its
+prefix and appends ' site=<tag> frame=<first stack line>' (e.StackTrace
+first line, 'unknown' if absent) — the frame pinpoints the faulting call
+inside multi-call gates like tick. Record-only; the fail path still ends
+the channel, never the game or the notifying module.
+
+**Verification.** Static only — no build/test/launch (serial-admission
+lock held by the logger lane). git diff scoped to the 7 sites + signature;
+symbols resolve against 871973f74. Steps 2 (repro) and 3 (localized fix)
+await a bounded runtime admission.
+
+
+## 2026-10-12 — BUG-NAXIS-UNBOUND-SLAVE-IDLE (claude/naxis-unbound-slave-idle)
+
+**Bug.** Barracks-built (unbound) naxis slaves idled after the first delivery
+(playback 184914Z: 61 of 67 unbound slaves idled, 0 of 2,591 refinery-bound
+samples). `SlaveMinerSpawnerSlave.MovingToDock` appended a bare `MoveToDock`
+on every engine notification for a slave with no master dock; with no
+`FindAndDeliverResources` behind it, the queue ran dry once the harvest
+activity stopped itself after its first full cycle.
+
+**Fix.** (1) The unbound branch of `MovingToDock` now appends nothing; the
+engine's own `MoveToDock` already drives the trip. (2) The slave ticks itself
+(`ITick`, `IdleCheckTick` = 103, floor 100 via `SlaveIdleRescue.Cadence`) when
+it has no master and runs the same `Decide` policy as the master rescue; both
+paths share one `Rescue` method. Bound slaves are unchanged and still rescued
+by their master. RNG-free; no yaml change needed.
+
+**Tests.** `SlaveMinerUnboundIdleTest` (6): source contracts on the unbound
+branch, the master-only guard on the self tick, a single shared Decide call
+site, cadence arming and floor, policy truth rows, no randomness.
+
+**Status.** Source and tests written; NOT built or run yet — build waits for a
+Luna-granted admission window (RAM). No game launched. Overlaps
+codex/01a12ecb-naxis-slave-idle@79fa19b05 in the same file (different
+hunks; master already carries the equivalent SetMasterDock/ClearMasterBinding
+changes) — rebase onto post-wave master before landing.
+
+### Addendum — why it worked in release playtest-20260709 (lead, 2026-10-12)
+
+The engine interaction behind BUG-NAXIS-UNBOUND-SLAVE-IDLE is the **Harvester.OnDockCompleted
+guard + FindAndDeliverResources interrupt** interaction. Engine 35b13f077b (2026-07-21, "Make
+chrono miners remember resource fields") restored the guard in `Harvester.OnDockCompleted`: a new
+`FindAndDeliverResources` is queued only if the current activity is null, or is not FAR and has no
+`NextActivity` (be9c3d6674, 2024, had commented it out). `FindAndDeliverResources.Tick` stops itself
+after the first delivered load whenever a `NextActivity` exists. In the release every dock completion
+re-queued harvesting, so the bare `MoveToDock` that `SlaveMinerSpawnerSlave.MovingToDock` appended for
+unbound slaves was harmless. With the guard back, that stray `MoveToDock` is the NextActivity that stops
+the harvest and suppresses the re-queue, so the slave idles. Mod YAML and mod C# did not change since
+the release; the engine did.
+
+**Audit of other post-dock activity queueing (2026-10-12).** Nothing else is exposed:
+`ChronoResourceTeleport` queues `[MoveToDock, FindAndDeliverResources]` (a harvest follows);
+`CarryableHarvester` and `ChronoResourceDelivery.MovingToDock` queue no activities; the CA and Frans
+harvester bot modules issue unqueued `ForceDock` orders (cancel, then a lone `MoveToDock`, which the
+guard handles); the slave's bound path appends a guarded `[MoveToDock, FindAndDeliverResources]` pair.
+The only mod code that queued a harvest-less dock trip was the unbound slave branch.
+
+**Tests added** (`SlaveMinerUnboundIdleTest`): a model of the guard and the interrupt shows a queued
+next activity at dock completion idles the slave without the fix and keeps it harvesting with it;
+source contracts pin the engine guard and interrupt text (so an engine bump re-opens this) and the
+single guarded `new MoveToDock(` in the slave. Not yet built or run after this addendum.
+
+### 2026-10-13 - BUG-NAXIS-UNBOUND-SLAVE-IDLE: live repro cancelled
+The lead cancelled the base-vs-fixed headless repro after the maintainer confirmed the fix in game. One base-build launch
+(ebea34c82) happened BEFORE Luna Manager's per-match preflight ACK: it is a pre-ACK, unadmitted startup attempt, not an
+admitted match. It exited after 2 s on a renderer init failure (OpenRA.Platforms.Default.dll not yet built) with no ticks,
+deliveries or replay; the fixed build was never launched. No runtime delivery evidence exists from this attempt. Artifacts
+and the full label are in C:\cw\ub-trace\RECEIPT_PRE_ACK_STARTUP_ATTEMPT.md. Runtime fix: c21783291; task stays open until landed.

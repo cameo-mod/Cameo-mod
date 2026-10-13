@@ -38,7 +38,7 @@ import replay_health as health  # strict_json/read_jsonl/EvidenceError + bounds
 
 MATCH_LOG = "cameo-ai-matches.jsonl"
 PLAYERS_GLOB = "cameo-ai-players-*.jsonl"
-EVENT_KINDS = sorted(health.PLAYER_EVENT_KINDS)
+EVENT_KINDS = sorted(health.PLAYER_EVENT_V2_KINDS)
 
 
 def player_files(paths):
@@ -80,8 +80,16 @@ def read_channel(path):
             # keep the last (fullest) snapshot.
             samples[seat] = row
         elif schema == "cameo-player-event":
-            health.reject_unknown_fields(row, health.PLAYER_EVENT_V1_FIELDS, "player-event v1")
-            if row.get("version") != 1:
+            # CB_frontier_observe: version dispatches FIRST, same as replay_health —
+            # a v2 row carrying stage/cover_value/... would otherwise die on the v1 field check.
+            version = row.get("version")
+            if version == 1:
+                health.reject_unknown_fields(row, health.PLAYER_EVENT_V1_FIELDS, "player-event v1")
+                known_kinds = health.PLAYER_EVENT_KINDS
+            elif version == 2:
+                health.reject_unknown_fields(row, health.PLAYER_EVENT_V2_FIELDS, "player-event v2")
+                known_kinds = health.PLAYER_EVENT_V2_KINDS
+            else:
                 raise health.EvidenceError("unsupported player-event version")
             health.integer(row.get("tick"))
             if "seq" in row:
@@ -89,7 +97,7 @@ def read_channel(path):
             if "actor_id" in row:
                 health.integer(row["actor_id"])
             kind = row.get("kind")
-            if kind not in health.PLAYER_EVENT_KINDS:
+            if kind not in known_kinds:
                 raise health.EvidenceError(f"unsupported player-event kind: {kind}")
             events[row.get("seat")][kind] += 1
             if kind == "first_unit_enemy_territory":

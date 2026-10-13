@@ -45,26 +45,26 @@
     "hard_free_ram_bytes": 3221225472
   },
   "baseline_manifest_path": "docs/audit/ab_baseline_manifest_pilot.json",
-  "baseline_manifest_sha256": "94dd68b617024f4f2a5936d2061fb208523d24ebaf6a1360085706d21624c4c8",
+  "baseline_manifest_sha256": "86566377dcb8c7c87cba2a21211f9e11f99a5b0065b83e981cbac59974ce2d2d",
   "pins": {
-    "source_commit": "fcb3e3e819b8705301d1668c9cef532d466149c9",
-    "engine_version": "4f69df005fe0d893526890fcb5bbc42e442d6fd6"
+    "source_commit": "b2297c361ccf2670472dc4e8d25c701b5b70a32a",
+    "engine_version": "723f50f9b1f98e463b55219288fba7a843f84307"
   },
   "switch_patch_sha256": "d710567579cb3673eb33701ec881495f0a2a17d6203194b0efdc8052f4de4523",
-  "baseline_ai_payload_sha256": "daadb3ca7db6619dfe3225dd59602d009ccd7bba88a0cf0283a7a9913fe96b84",
-  "treatment_ai_payload_sha256": "f6aaa8f7e3475cb11e09d492a441bf4cbb78d1162487b9c44bc8549d96c6107c",
+  "baseline_ai_payload_sha256": "cd86bc98ecfa9e1a8e6008cd16a49d2155f03fe4c0a3c314602978ad42733490",
+  "treatment_ai_payload_sha256": "d70d162364040805658ff7075376fa23483faac1d06c93a235b47968cb470cba",
   "tool_hash_algorithm": "sha256-lf-normalized-v1",
   "tool_sha256": {
-    "driver_analyzer": "a642275d09225e489558d8ec2eb0fcf2a3e3a759d1bb0eba067d6c8f4f938a88",
+    "driver_analyzer": "54640b88539eb973c047da74abef74f6978f6a0b0387ecf0edd31ebc6c23243e",
     "campaign_runner": "545d622bd6898b24f56a439669db42c5288790390f5c87a60ae091fe52936644",
     "batch_runner": "03247f59f2744ea001c9d35a5a03c16bef077ac450d24ef05c08f167d16fcad5",
     "switch_applier": "9e9f678871cc2d8adeca0e7b5c2c28a30a041252f8f630005593bc7f241a6bdd"
   },
   "receipt_schema_sha256": "aacc0510b2231a4cb40e71dea871833600a54a25b3c25051b67b0fc459a3ae86",
   "binary_sha256": {
-    "bin/OpenRA.exe": "35a431bb861de914eec85b8f2244acc2a3ef53d628d1ce48412b232b39270fff",
-    "bin/OpenRA.Game.dll": "f1c025af68fa9b8f23935c8ebe6064ae9c7e52dceeeff56a07f4fe6a1a8efe3b",
-    "bin/OpenRA.Mods.Cameo.dll": "54c66045c75adf14a059daa73e88f087c93c5faf2f2f07d177d5d44b00a929d9"
+    "bin/OpenRA.exe": "41ee8b9c5ebca54bf94a1921a42ea3845c9e26a2a292f688134bcec451a8adf1",
+    "bin/OpenRA.Game.dll": "6b8e5ed38ed09f9e5e1862c12c808f6ed942eec881418d2aaecf9cd9b8537945",
+    "bin/OpenRA.Mods.Cameo.dll": "1e0d921d35dc2343e7c630a916109864ab5806ce70669edd65ff7454a5c5e105"
   },
   "maps": [
     {
@@ -267,10 +267,7 @@
     }
   ],
   "execution_approved": false,
-  "notes": "disarmed candidate; fcb3 A5 qualification and 32-cell map acceptance receipts pinned; execution_approved remains false",
+  "notes": "non-executable candidate; execution approval remains false until Windows engine acceptance, headless measurement, fresh A5 receipt, and maintainer sign-off",
   "a5_parity_receipt_path": "docs/audit/ab_a5_fcb3_20261011.json",
-  "a5_parity_receipt_sha256": "659c19b8ca17415ef3b7ce1470d2c6b3b4450f0fb35f4212613810cfc0309a3d",
-  "map_engine_acceptance_receipt_path": "docs/audit/ab_map_acceptance_fcb3_v5_20261011.json",
-  "map_engine_acceptance_receipt_sha256": "d25a649cfc5efacf5a026df4caf1476747d981a1881e1623076147169a991301",
-  "map_engine_acceptance_passed": true
+  "a5_parity_receipt_sha256": "659c19b8ca17415ef3b7ce1470d2c6b3b4450f0fb35f4212613810cfc0309a3d"
 }

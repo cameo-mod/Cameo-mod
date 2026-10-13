@@ -92,7 +92,61 @@ namespace OpenRA.Mods.Cameo.Test
 			using var end = JsonDocument.Parse(rows[^1]);
 			Assert.That(end.RootElement.GetProperty("complete").GetBoolean(), Is.False);
 		}
-		internal static void WriteCliFixture(string name, IEnumerable<string> rows)
+
+		[Test]
+		public void CleanCoverageEmitsTheAcceptedCompletenessTuple()
+		{
+			// Mirrors AiEconomyHealthRecorder.Identity: dropped=0 requires all three
+			// completeness flags. Activation/census/terminal ordering was validated by
+			// admitted run C (game uid 25060589-136e-46b8-9d78-4c4ad7828688, 2026-10-12).
+			// The consumer UNKNOWNs unless the whole tuple holds: dropped=0 on every
+			// record, queues_complete=true on pulses, complete=true on the end record.
+			var state = new AiEconomyHealthState();
+			for (var t = 0; t <= 50; t++)
+				state.Observe(t, Array.Empty<EconomyQueueObservation>());
+			Assert.That(state.Complete, Is.True);
+			using var healthStream = new MemoryStream();
+			using var rawStream = new MemoryStream();
+			using var health = new AiEconomyHealthLogWriter(healthStream);
+			using var raw = new AiEconomyHealthLogWriter(rawStream);
+			var dropped = state.Complete && health.Complete && raw.Complete ? 0 : 1;
+			using var pulse = JsonDocument.Parse(AiEconomyHealthSchema.Pulse(
+				new EconomyHealthIdentity(0, 0, "pulse", "g", "p", "map", "td_nod", "hard", true, dropped),
+				true, state.Complete, Array.Empty<EconomyQueueSnapshot>(), 5000, 0, 1000, 100));
+			var root = pulse.RootElement;
+			Assert.That(root.GetProperty("dropped").GetInt32(), Is.Zero);
+			Assert.That(root.GetProperty("queues_complete").GetBoolean(), Is.True);
+			Assert.That(root.GetProperty("profile_supported").GetBoolean(), Is.True);
+			using var end = JsonDocument.Parse(AiEconomyHealthSchema.End(
+				new EconomyHealthIdentity(1, 50, "end", "g", "p", "map", "td_nod", "hard", true, dropped),
+				state.Complete && health.Complete && raw.Complete));
+			Assert.That(end.RootElement.GetProperty("dropped").GetInt32(), Is.Zero);
+			Assert.That(end.RootElement.GetProperty("complete").GetBoolean(), Is.True);
+		}
+
+		[Test]
+		public void WriterFailureFlipsTheIdentityTupleFailClosed()
+		{
+			// Representative forced failure: a writer-level failure poisons the emitted
+			// identity even while observation state stays complete. Census overflow and
+			// unclassified transitions are pinned in AiEconomyHealthStateTest and
+			// AiEconomyQueueEvidenceTest respectively; all share the one-way latch.
+			var state = new AiEconomyHealthState();
+			state.Observe(0, Array.Empty<EconomyQueueObservation>());
+			Assert.That(state.Complete, Is.True);
+			using var brokenStream = new MemoryStream();
+			using var broken = new AiEconomyHealthLogWriter(brokenStream, byteLimit: 4);
+			Assert.That(broken.TryWrite("12345"), Is.False);
+			Assert.That(broken.Complete, Is.False);
+			var dropped = state.Complete && broken.Complete ? 0 : 1;
+			using var end = JsonDocument.Parse(AiEconomyHealthSchema.End(
+				new EconomyHealthIdentity(1, 50, "end", "g", "p", "map", "td_nod", "hard", true, dropped),
+				state.Complete && broken.Complete));
+			Assert.That(end.RootElement.GetProperty("dropped").GetInt32(), Is.EqualTo(1));
+			Assert.That(end.RootElement.GetProperty("complete").GetBoolean(), Is.False);
+		}
+
+	internal static void WriteCliFixture(string name, IEnumerable<string> rows)
 		{
 			var directory = Path.Combine(TestContext.CurrentContext.WorkDirectory, "TestResults");
 			var support = Path.Combine(directory, "economy-cli-" + name + "-" + Guid.NewGuid().ToString("N"));

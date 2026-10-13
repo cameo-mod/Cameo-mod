@@ -823,6 +823,194 @@ def read_appended_records(log_path: pathlib.Path, before_length: int) -> list[di
     return records
 
 
+def prepare_match_support(support: pathlib.Path, variants_root: pathlib.Path, variant: str,
+                          run: int, repeat: int, attempt: int, batch_id: str) -> pathlib.Path:
+    """Create a new OpenRA SupportDir for exactly one game attempt.
+
+    Engine log producers intentionally use FileMode.CreateNew for canonical
+    telemetry filenames. Giving each game attempt a fresh SupportDir keeps
+    those names collision-free while retaining a batch-level aggregate log.
+    Retries receive distinct leaves too, so failed-attempt evidence is kept.
+    """
+    leaf = support / "games" / batch_id / f"match-{run:04d}-repeat-{repeat:02d}-attempt-{attempt:02d}"
+    if leaf.exists():
+        raise FileExistsError(f"refusing to reuse per-game SupportDir: {leaf}")
+    source_map = variants_root / variant
+    if not source_map.is_dir():
+        raise FileNotFoundError(f"generated map variant is missing: {source_map}")
+    map_dir = leaf / USER_MAP_DIR / variant
+    map_dir.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copytree(source_map, map_dir)
+    (leaf / "Logs").mkdir(parents=True, exist_ok=True)
+    return leaf
+
+
+def planned_economy_roster(variant_map: pathlib.Path, matchup: dict) -> list[tuple[str, str, str, str]]:
+    """Return configured combat bots by engine-visible identity, not seat index.
+
+    Player creation groups non-playable map references before lobby slots, so
+    raw YAML order cannot predict seat_N. The match log has bot/faction/home;
+    the economy log has InternalName/bot/faction. Joining each stream to this
+    configured roster avoids guessing engine indexes and excludes inert refs.
+    """
+    text = variant_map.read_text(encoding="utf-8")
+    refs = list(re.finditer(r"(?m)^\tPlayerReference@([^:]+):\s*$", text))
+    roster = []
+    for index, ref in enumerate(refs):
+        next_ref = refs[index + 1].start() if index + 1 < len(refs) else len(text)
+        block = text[ref.start():next_ref]
+        if re.search(r"(?m)^\t\tNonCombatant:\s*True\s*$", block, re.IGNORECASE):
+            continue
+        bot = re.search(r"(?m)^\t\tBot:\s*(\S+)\s*$", block)
+        if bot:
+            faction = re.search(r"(?m)^\t\tFaction:\s*(\S+)\s*$", block)
+            name = re.search(r"(?m)^\t\tName:\s*(.+?)\s*$", block)
+            home = re.search(r"(?m)^\t\tHomeLocation:\s*(-?\d+,-?\d+)\s*$", block)
+            if faction is None or home is None:
+                raise ValueError(f"generated bot PlayerReference@{ref.group(1)} lacks faction or HomeLocation")
+            roster.append((name.group(1) if name else ref.group(1), faction.group(1),
+                           bot.group(1), home.group(1)))
+
+    if "team_a" in matchup:
+        configured = [(seat["bot"], seat["faction"])
+                      for seat in matchup["team_a"] + matchup["team_b"]]
+    else:
+        configured = [(matchup[side]["bot"], matchup[side]["faction"]) for side in ("side_a", "side_b")]
+    if sorted((bot, faction) for _name, faction, bot, _home in roster) != sorted(configured):
+        raise ValueError("generated variant bot seats do not match the planned matchup")
+    if len({(name, home) for name, _faction, _bot, home in roster}) != len(roster):
+        raise ValueError("generated variant has ambiguous bot identity or HomeLocation")
+    return roster
+
+
+def economy_health_file_status(
+    support: pathlib.Path,
+    match_records: list[dict],
+    expected_roster: list[tuple[str, str, str, str]],
+) -> tuple[str, str | None]:
+    """Require complete, per-seat economy evidence for one successful match.
+
+    File presence is not evidence completeness: a partial JSONL, a foreign UID,
+    a missing bot seat, or a stream without a valid terminal record must not
+    leave a successful match eligible for scoring.
+    """
+    health_path = support / "Logs" / "cameo-ai-economy-health.jsonl"
+    try:
+        if not health_path.is_file():
+            return "UNKNOWN", f"missing expected economy-health file: {health_path}"
+        data = health_path.read_bytes()
+        if not data:
+            return "UNKNOWN", f"empty expected economy-health file: {health_path}"
+        if not data.endswith(b"\n"):
+            return "UNKNOWN", f"unterminated economy-health JSONL: {health_path}"
+        from replay_health import read_jsonl
+        from economy_invariants import analyze as analyze_economy
+
+        rows, _receipt = read_jsonl(health_path)
+        if not rows:
+            return "UNKNOWN", f"no economy-health rows: {health_path}"
+        expected_seats_by_uid: dict[str, list[tuple[str, str, str, str]]] = {}
+        record_ids: set[str] = set()
+        for record in match_records:
+            if not isinstance(record, dict):
+                return "UNKNOWN", "invalid match record while validating economy health"
+            record_id = record.get("record_id")
+            uid = record.get("game_uid")
+            player = record.get("player")
+            seat = player.get("seat") if isinstance(player, dict) else None
+            faction = player.get("faction") if isinstance(player, dict) else None
+            bot_type = player.get("bot_type") if isinstance(player, dict) else None
+            home = player.get("home") if isinstance(player, dict) else None
+            seat_match = re.fullmatch(r"seat_(\d+)", seat) if isinstance(seat, str) else None
+            if (not isinstance(record_id, str) or not isinstance(uid, str) or not uid
+                    or record_id != f"{uid}|{seat}" or seat_match is None
+                    or not isinstance(faction, str) or not faction
+                    or not isinstance(bot_type, str) or not bot_type
+                    or not isinstance(home, str) or not re.fullmatch(r"-?\d+,-?\d+", home)):
+                return "UNKNOWN", "match records lack canonical game/seat/bot/faction/home identity"
+            if record_id in record_ids:
+                return "UNKNOWN", "duplicate match record/seat identity"
+            record_ids.add(record_id)
+            expected_seats_by_uid.setdefault(uid, []).append((bot_type, faction, home, seat))
+        if len(expected_seats_by_uid) != 1 or not match_records:
+            return "UNKNOWN", "per-game support leaf must contain exactly one match UID"
+        game_uid, logged_seats = next(iter(expected_seats_by_uid.items()))
+        logged_ids = [seat for _bot, _faction, _home, seat in logged_seats]
+        if (len(expected_roster) != len({(name, home) for name, _faction, _bot, home in expected_roster})
+                or len(match_records) != len(expected_roster)
+                or len(set(logged_ids)) != len(logged_ids)
+                or sorted((bot, faction, home) for bot, faction, home, _seat in logged_seats)
+                != sorted((bot, faction, home) for _name, faction, bot, home in expected_roster)):
+            return "UNKNOWN", "match record roster differs from the configured variant roster"
+        if any(not isinstance(row, dict) or row.get("game_uid") != game_uid for row in rows):
+            return "UNKNOWN", "economy-health stream contains malformed or foreign game UID rows"
+        players: list[str] = []
+        seen_players: set[str] = set()
+        for row in rows:
+            player_name = row.get("player")
+            if isinstance(player_name, str) and player_name not in seen_players:
+                seen_players.add(player_name)
+                players.append(player_name)
+        if len(players) != len(expected_roster):
+            return "UNKNOWN", (f"economy-health seat coverage mismatch: {len(players)} player(s) "
+                                f"for {len(expected_roster)} configured bot(s)")
+        actual_roster = []
+        for player_name in players:
+            player_rows = [row for row in rows if row.get("player") == player_name]
+            report = analyze_economy(rows, game_uid, player_name)
+            if report.get("status") == "BLOCK":
+                return "BLOCK", f"economy invariant BLOCK for a recorded seat ({player_name})"
+            if report.get("status") != "OBSERVED_HEALTHY":
+                return "UNKNOWN", (f"incomplete economy evidence for a recorded seat ({player_name}): "
+                                    f"{report.get('error', 'terminal/integrity validation failed')}")
+            factions = {row.get("faction") for row in player_rows}
+            bot_types = {row.get("bot_type") for row in player_rows}
+            if (len(factions) != 1 or not all(isinstance(value, str) and value for value in factions)
+                    or len(bot_types) != 1 or not all(isinstance(value, str) and value for value in bot_types)):
+                return "UNKNOWN", f"economy-health player/bot/faction identity is missing or inconsistent ({player_name})"
+            actual_roster.append((player_name, next(iter(factions)), next(iter(bot_types))))
+        planned_health_roster = [(name, faction, bot) for name, faction, bot, _home in expected_roster]
+        if sorted(actual_roster) != sorted(planned_health_roster):
+            return "UNKNOWN", "economy-health player identities differ from the configured variant roster"
+    except (OSError, ValueError, TypeError, KeyError, ImportError) as exc:
+        return "UNKNOWN", f"cannot inspect expected economy-health file {health_path}: {exc}"
+    return "OBSERVED_HEALTHY", None
+
+
+def apply_economy_health_requirement(status: str, health_status: str, required: bool) -> str:
+    """Make required unhealthy evidence unscoreable while preserving optional runs."""
+    if required and status in ("ok", "norecord") and health_status != "OBSERVED_HEALTHY":
+        return "UNKNOWN"
+    return status
+
+
+PER_GAME_LOGS = {
+    "cameo-ai-economy-health.jsonl",
+    "cameo-ai-economy-raw.jsonl",
+    "cameo-ai-mcv-health.jsonl",
+}
+
+
+def promote_unique_match_logs(match_support: pathlib.Path, batch_logs: pathlib.Path) -> None:
+    """Aggregate AI JSONL telemetry except canonical health streams.
+
+    Other fixed-name AI streams are append-oriented and carry game_uid. The
+    three CreateNew health streams remain isolated in each game leaf.
+    """
+    source_logs = match_support / "Logs"
+    for source in source_logs.iterdir():
+        if (not source.is_file() or source.suffix != ".jsonl"
+                or not source.name.startswith("cameo-ai-")
+                or source.name in PER_GAME_LOGS or source.name == MATCH_LOG):
+            continue
+        destination = batch_logs / source.name
+        if destination.exists():
+            with destination.open("ab") as aggregate, source.open("rb") as game_log:
+                shutil.copyfileobj(game_log, aggregate, length=1024 * 1024)
+        else:
+            shutil.copy2(source, destination)
+
+
 SPAWN_INDEX_BY_SLOT = {"Multi0": 0, "Multi1": 1, "Multi2": 2, "Multi3": 3, "BotA": 0, "BotB": 1}
 
 
@@ -837,6 +1025,8 @@ def ab_scoreboard(results: list[dict]) -> dict:
     seen_records: set[str] = set()
     board: dict[tuple[str, str], dict] = {}
     for result in results:
+        if result.get("health_status") in ("UNKNOWN", "BLOCK") or result.get("status") == "UNKNOWN":
+            continue
         for record in result.get("bot_outcomes") or []:
             record_id = str(record.get("record_id") or "")
             if not record_id or record_id in seen_records:
@@ -873,6 +1063,8 @@ def team_scoreboard(results: list[dict]) -> dict:
     seen_records: set[str] = set()
     matches: dict[str, list[dict]] = {}
     for result in results:
+        if result.get("health_status") in ("UNKNOWN", "BLOCK") or result.get("status") == "UNKNOWN":
+            continue
         for record in result.get("bot_outcomes") or []:
             record_id = str(record.get("record_id") or "")
             if not record_id or record_id in seen_records:
@@ -1128,6 +1320,8 @@ def main() -> int:
                              "the A/B acceptance requires both spawns covered")
     parser.add_argument("--time-limit", type=int, default=3, choices=sorted(VALID_TIME_LIMITS))
     parser.add_argument("--support-dir", type=pathlib.Path, default=None)
+    parser.add_argument("--require-economy-health", action="store_true",
+                        help="mark a successful game UNKNOWN if its canonical economy-health JSONL is missing or empty")
     parser.add_argument("--template", type=pathlib.Path, default=TEMPLATE_MAP,
                         help="template map dir (default: the A Nuclear Winter duel fixture)")
     parser.add_argument("--retries", type=int, default=1,
@@ -1272,8 +1466,6 @@ def main() -> int:
         else:
             write_variant(map_source, variants_root / name, {"side_a": v["a"], "side_b": v["b"]}, args.time_limit)
 
-    exceptions_before = {p.name for p in logs_dir.glob("exception-*.log")} if logs_dir.is_dir() else set()
-
     # The fixture locks gamespeed to maximum (1 ms timestep) and scales its minute
     # options so the engine cap equals the insane-era depth (3 min = 180,000 ticks):
     # the engine ends a stalemate and records it. The wall bound allows that
@@ -1284,27 +1476,10 @@ def main() -> int:
 
     results = []
     progress_path = support / "batch_results.jsonl"
+    batch_id = f"{time.time_ns()}-{os.getpid()}"
     drift_aborted = None
     for run, m in enumerate(matchups, 1):
-        before = log_path.stat().st_size if log_path.is_file() else 0
-        launch_args = [
-            f"Game.Mod={mod_id}",
-            "Sound.Device=none",
-            "Engine.EngineDir=..",
-            f"Engine.ModSearchPaths={REPO_ROOT / 'mods'},{engine / 'mods'}",
-            f"Engine.SupportDir={support}",
-            f"Launch.Map={m['variant']}",
-            f"Launch.Benchmark={BENCHMARK_PREFIX}",
-        ]
-        # Opt-in verbose squad/formation telemetry (CAMEO_BOT_DEBUG=1); default
-        # off so support-dir logs stay identical to the reference batches.
-        if os.environ.get("CAMEO_BOT_DEBUG"):
-            launch_args.append("Debug.BotDebug=true")
         render = getattr(args, "render", "fast")
-        if render in ("fast", "headless"):
-            launch_args += ["Graphics.VSync=False", "Graphics.Mode=Windowed", "Graphics.WindowedSize=640,480"]
-        if render == "headless":
-            launch_args.append(f"Game.Platform={HEADLESS_PLATFORM}")
 
         attempt = 0
         drift = None
@@ -1321,19 +1496,40 @@ def main() -> int:
                     break
                 print(f"    fingerprint drift ({', '.join(drift)}) — continuing per --allow-fingerprint-drift",
                       flush=True)
-            exc_before = {p.name for p in logs_dir.glob("exception-*.log")}
+            match_support = prepare_match_support(
+                support, variants_root, m["variant"], run, m["repeat"], attempt, batch_id)
+            match_logs_dir = match_support / "Logs"
+            match_log_path = match_logs_dir / MATCH_LOG
+            launch_args = [
+                f"Game.Mod={mod_id}",
+                "Sound.Device=none",
+                "Engine.EngineDir=..",
+                f"Engine.ModSearchPaths={REPO_ROOT / 'mods'},{engine / 'mods'}",
+                f"Engine.SupportDir={match_support}",
+                f"Launch.Map={m['variant']}",
+                f"Launch.Benchmark={BENCHMARK_PREFIX}",
+            ]
+            # Opt-in verbose squad/formation telemetry (CAMEO_BOT_DEBUG=1); default
+            # off so support-dir logs stay identical to the reference batches.
+            if os.environ.get("CAMEO_BOT_DEBUG"):
+                launch_args.append("Debug.BotDebug=true")
+            if render in ("fast", "headless"):
+                launch_args += ["Graphics.VSync=False", "Graphics.Mode=Windowed", "Graphics.WindowedSize=640,480"]
+            if render == "headless":
+                launch_args.append(f"Game.Platform={HEADLESS_PLATFORM}")
+            exc_before = {p.name for p in match_logs_dir.glob("exception-*.log")}
             print(f"[{run}/{len(matchups)}] {m['variant']} (repeat {m['repeat']}, attempt {attempt}) ...", flush=True)
             started = time.time()
             exit_code, output, status = run_match(
                 executable, engine, launch_args, timeout,
-                stall_log=logs_dir / "debug.log",
+                stall_log=match_logs_dir / "debug.log",
                 stall_timeout=args.stall_timeout,
             )
             elapsed = int(time.time() - started)
-            records = read_appended_records(log_path, before)
-            new_exc = sorted(p.name for p in logs_dir.glob("exception-*.log") if p.name not in exc_before)
+            records = read_appended_records(match_log_path, 0)
+            new_exc = sorted(p.name for p in match_logs_dir.glob("exception-*.log") if p.name not in exc_before)
             if render == "headless":
-                graphics_log = logs_dir / "graphics.log"
+                graphics_log = match_logs_dir / "graphics.log"
                 if HEADLESS_LOG_MARKER not in (graphics_log.read_text(errors="replace") if graphics_log.is_file() else ""):
                     fail(f"--render headless: {graphics_log} has no '{HEADLESS_LOG_MARKER}' line - the engine fell back "
                          "to the Default platform (see the exception in graphics.log); results would not be headless")
@@ -1358,7 +1554,7 @@ def main() -> int:
             # a host-level event drops the loopback socket mid-match, e.g.
             # "An established connection was aborted by the software in your
             # host machine".
-            client_log = logs_dir / "client.log"
+            client_log = match_logs_dir / "client.log"
             if client_log.is_file():
                 tail = client_log.read_text(encoding="utf-8", errors="replace")[-2000:].strip()
                 if tail:
@@ -1390,8 +1586,18 @@ def main() -> int:
         # A no-data run that exhausted its retries is still not a datapoint:
         # count it separately so a deterministic abort is visible in
         # batch_summary.json / run_league instead of reading as clean.
+        if args.require_economy_health:
+            try:
+                expected_health_roster = planned_economy_roster(variants_root / m["variant"] / "map.yaml", m)
+                economy_health_status, economy_health_error = economy_health_file_status(
+                    match_support, records, expected_health_roster)
+            except (OSError, ValueError, KeyError, TypeError) as exc:
+                economy_health_status, economy_health_error = "UNKNOWN", f"cannot derive planned health seats: {exc}"
+        else:
+            economy_health_status, economy_health_error = "NOT_REQUIRED", None
         if status == "ok" and not records:
             status = "norecord"
+        status = apply_economy_health_requirement(status, economy_health_status, args.require_economy_health)
 
         outcome = sorted(
             (r.get("player", {}).get("faction"), r.get("player", {}).get("outcome"))
@@ -1400,6 +1606,9 @@ def main() -> int:
         result = {
             "variant": m["variant"],
             "status": status,
+            "health_status": economy_health_status,
+            "economy_health_file": str(match_support / "Logs" / "cameo-ai-economy-health.jsonl"),
+            "support_dir": str(match_support),
             "fingerprint": fingerprint_id(current_fingerprint),
             "exit_code": exit_code,
             "attempts": attempt,
@@ -1431,6 +1640,13 @@ def main() -> int:
         }
         if new_exc:
             result["new_exceptions"] = new_exc
+        if economy_health_error:
+            result["health_error"] = economy_health_error
+        if records:
+            with log_path.open("a", encoding="utf-8") as aggregate_log:
+                for record in records:
+                    aggregate_log.write(json.dumps(record, separators=(",", ":")) + "\n")
+        promote_unique_match_logs(match_support, logs_dir)
         results.append(result)
         # Durable per-match progress: a batch killed mid-run (the batch
         # process itself is as sweepable as the matches) still leaves this
@@ -1441,7 +1657,7 @@ def main() -> int:
         if status != "ok":
             print(f"    OpenRA output tail:\n{output_tail(output)}")
 
-    new_exceptions = sorted(p.name for p in logs_dir.glob("exception-*.log") if p.name not in exceptions_before)
+    new_exceptions = sorted({name for result in results for name in result.get("new_exceptions", [])})
     scoreboard = ab_scoreboard(results)
     team_board = team_scoreboard(results) if args.team_size > 1 else None
     summary = {
@@ -1454,6 +1670,7 @@ def main() -> int:
         "stalled": sum(1 for r in results if r["status"] == "stalled"),
         "died": sum(1 for r in results if r["status"].startswith("exit=")),
         "norecord": sum(1 for r in results if r["status"] == "norecord"),
+        "unknown": sum(1 for r in results if r["status"] == "UNKNOWN"),
         "retried": sum(1 for r in results if r["attempts"] > 1),
         "new_exceptions": new_exceptions,
         "scoreboard": scoreboard,
