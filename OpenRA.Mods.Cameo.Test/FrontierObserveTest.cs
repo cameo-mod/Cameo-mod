@@ -44,7 +44,7 @@ namespace OpenRA.Mods.Cameo.Test
 		[Test]
 		public void DeadlineExpiryIsInclusiveOfTheDeadline()
 		{
-			Assert.That(ExpansionPlannerBotModule.FrontierObserveCA.DeadlineExpired(100, 10999, 9000), Is.False);
+			Assert.That(ExpansionPlannerBotModule.FrontierObserveCA.DeadlineExpired(100, 9099, 9000), Is.False);
 			Assert.That(ExpansionPlannerBotModule.FrontierObserveCA.DeadlineExpired(100, 9100, 9000), Is.True);
 		}
 
