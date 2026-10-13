@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 """Mandatory economy defect checks over complete schema-2 health telemetry.
 
-No game launches or source repairs. Exit 0: observed checks passed; 20: defect
-review hold; 21: unsupported/incomplete evidence. Cash thresholds provisional.
+No game launches or source repairs. Exit 0: observed checks passed (healthy or
+defeated-terminal); 20: defect review hold; 21: unsupported/incomplete evidence.
+A seat reported seat_state "lost" is evaluated through its defeat and marked
+DEFEATED — a terminal verdict, not missing telemetry. Cash thresholds provisional.
 """
 import argparse
 from collections import deque
@@ -40,6 +42,8 @@ def analyze(rows, game_uid, player):
     pulses = 0
     float_diagnostic = False
     ended = False
+    defeated = False
+    previous_seat_state = None
     try:
         for row in selected:
             if ended:
@@ -95,6 +99,12 @@ def analyze(rows, game_uid, player):
                     raise EvidenceError("incomplete terminal health record")
                 if last_pulse is None or tick - last_pulse > 50:
                     raise EvidenceError("terminal health watermark not covered by pulse")
+                end_state = row.get("seat_state")
+                if end_state not in ("active", "won", "lost"):
+                    raise EvidenceError("missing/invalid terminal seat state")
+                if defeated and end_state != "lost":
+                    raise EvidenceError("terminal seat state disagrees with pulse defeat")
+                defeated = defeated or end_state == "lost"
                 ended = True
                 continue
             if kind != "pulse":
@@ -111,6 +121,16 @@ def analyze(rows, game_uid, player):
             active = row.get("player_active")
             if type(active) is not bool:
                 raise EvidenceError("missing player active state")
+            seat_state = row.get("seat_state")
+            if seat_state not in ("active", "won", "lost"):
+                raise EvidenceError("missing/invalid seat state")
+            if (seat_state == "active") != active:
+                raise EvidenceError("player_active/seat_state disagreement")
+            if previous_seat_state not in (None, "active") and seat_state != previous_seat_state:
+                raise EvidenceError("seat state mutated after terminal")
+            previous_seat_state = seat_state
+            if seat_state == "lost":
+                defeated = True
             if not active:
                 cancel_windows.clear()
             for queue in queues:
@@ -177,7 +197,10 @@ def analyze(rows, game_uid, player):
             raise EvidenceError("no complete terminal health record; live use requires shared watermark")
         if not pulses:
             raise EvidenceError("no pulse observations")
-        report["status"] = "BLOCK" if report["findings"] else "OBSERVED_HEALTHY"
+        if defeated:
+            report["defeated"] = True
+        report["status"] = "BLOCK" if report["findings"] else (
+            "DEFEATED" if defeated else "OBSERVED_HEALTHY")
         report["pulses"] = pulses
     except (EvidenceError, TypeError, KeyError) as error:
         report["error"] = str(error)
@@ -203,7 +226,8 @@ def main():
         except (EvidenceError, OSError, ValueError, TypeError) as error:
             report = {"policy": POLICY, "status": "UNKNOWN", "error": str(error)}
     print(json.dumps(report, allow_nan=False, indent=2))
-    return {"BLOCK": 20, "UNKNOWN": 21}.get(report["status"], 0)
+    return {"BLOCK": 20, "UNKNOWN": 21, "DEFEATED": 0,
+            "OBSERVED_HEALTHY": 0}.get(report["status"], 0)
 
 
 if __name__ == "__main__":
