@@ -64,9 +64,12 @@ to <support>/batch_results.jsonl as they land, so a batch whose driver is
 itself swept still leaves usable evidence.
 
 The batch fingerprints its arms once at start (LC7): the mod commit and its
-dirty state, the engine VERSION, a sha256 over engine/bin/OpenRA*.dll, a
-sha256 over the resolved AI yaml set (mods/**/ai.yaml + mods/**/ai/*.yaml),
-the map source, and the batch spec. The fingerprint is recomputed before
+dirty state, configured engine pin and matching clean engine Git HEAD, the
+resolved OpenRA.exe path and pre-launch SHA256, engine VERSION bytes, a SHA256
+over engine/bin/OpenRA*.dll, a SHA256 over the resolved AI yaml set
+(mods/**/ai.yaml + mods/**/ai/*.yaml), the map source, and the batch spec. The
+executable is hashed again after each match; any change invalidates that attempt.
+The fingerprint is recomputed before
 every match attempt and any drift aborts the batch — a mid-batch checkout or
 rebuild (the auto-sync service landing new yaml under stale DLLs killed
 league-3 this way) silently changes the A/B arms otherwise.
@@ -98,6 +101,7 @@ Exit codes: 0 = batch complete, 2 = no usable records collected, 1 = failure.
 from __future__ import annotations
 
 import argparse
+import base64
 import hashlib
 import itertools
 import json
@@ -1145,6 +1149,124 @@ def _git(repo_root: pathlib.Path, *args: str) -> str | None:
     return proc.stdout if proc.returncode == 0 else None
 
 
+def _sha256_file(path: pathlib.Path) -> str:
+    """Hash one required runtime artifact; missing/unreadable files fail closed."""
+    if not path.is_file():
+        raise ValueError(f"required runtime file is missing: {path}")
+    try:
+        return hashlib.sha256(path.read_bytes()).hexdigest()
+    except OSError as exc:
+        raise ValueError(f"cannot hash required runtime file {path}: {exc}") from exc
+
+
+def engine_runtime_provenance(repo_root: pathlib.Path, engine: pathlib.Path) -> dict:
+    """Validate and identify the exact engine checkout and executable to launch.
+
+    The configured pin is read only from mod.config. ENGINE_VERSION must name the
+    HEAD of a clean, separate Git checkout at ENGINE_DIRECTORY; a VERSION file or
+    DLL digest alone cannot stand in for source identity.
+    """
+    mod_config = repo_root / "mod.config"
+    if not mod_config.is_file():
+        raise ValueError(f"mod.config is missing: {mod_config}")
+    assignments = {}
+    assignment = re.compile(r"^\s*([A-Za-z_][A-Za-z0-9_]*)\s*=\s*(.*?)\s*$")
+    try:
+        config_text = mod_config.read_text(encoding="utf-8")
+    except OSError as exc:
+        raise ValueError(f"cannot read {mod_config}: {exc}") from exc
+    for line in config_text.splitlines():
+        match = assignment.match(line)
+        if match and match.group(1) == "ENGINE_VERSION":
+            value = match.group(2)
+            if len(value) >= 2 and value[0] == value[-1] and value[0] in "\"'":
+                value = value[1:-1]
+            assignments[match.group(1)] = value
+    engine_pin = assignments.get("ENGINE_VERSION")
+    if not engine_pin or not re.fullmatch(r"[0-9a-fA-F]{40}", engine_pin):
+        raise ValueError("mod.config ENGINE_VERSION must be a 40-character Git SHA")
+    configured_values: dict[str, str] = {}
+    read_config(mod_config, configured_values)
+    read_config(repo_root / "user.config", configured_values)
+    configured_directory = configured_values.get("ENGINE_DIRECTORY")
+    if not configured_directory:
+        raise ValueError("mod.config/user.config did not define ENGINE_DIRECTORY")
+    configured_engine = pathlib.Path(configured_directory)
+    if not configured_engine.is_absolute():
+        configured_engine = repo_root / configured_engine
+
+    try:
+        configured_engine = configured_engine.resolve(strict=True)
+        engine_root = engine.resolve(strict=True)
+    except OSError as exc:
+        raise ValueError(f"engine checkout path is unavailable: {exc}") from exc
+    if configured_engine != engine_root:
+        raise ValueError(f"resolved engine path mismatch: configured {configured_engine}, using {engine_root}")
+    try:
+        executable = (engine_root / "bin" / "OpenRA.exe").resolve(strict=True)
+        bin_root = (engine_root / "bin").resolve(strict=True)
+    except OSError as exc:
+        raise ValueError(f"engine checkout or executable path is unavailable: {exc}") from exc
+    if not engine_root.is_dir() or not executable.is_file():
+        raise ValueError("configured engine checkout or OpenRA.exe is not a directory/file")
+    if executable.parent != bin_root or executable.name.casefold() != "openra.exe":
+        raise ValueError("resolved OpenRA.exe path escapes the configured engine/bin directory")
+
+    git_root_text = _git(engine_root, "rev-parse", "--show-toplevel")
+    engine_head = (_git(engine_root, "rev-parse", "HEAD") or "").strip()
+    engine_status = _git(engine_root, "status", "--porcelain", "--untracked-files=all")
+    if git_root_text is None or engine_head == "" or engine_status is None:
+        raise ValueError("engine directory is not a readable Git checkout")
+    git_root = pathlib.Path(git_root_text.strip()).resolve()
+    if git_root != engine_root:
+        raise ValueError(f"engine Git root mismatch: expected {engine_root}, found {git_root}")
+    if engine_head.casefold() != engine_pin.casefold():
+        raise ValueError(f"engine HEAD {engine_head} does not match configured ENGINE_VERSION {engine_pin}")
+    if engine_status.strip():
+        raise ValueError("engine checkout is dirty or has untracked files")
+
+    version_file = engine_root / "VERSION"
+    version_raw = version_file.read_bytes() if version_file.is_file() else None
+    version_text = None
+    if version_raw is not None:
+        if version_raw.startswith((b"\xff\xfe", b"\xfe\xff")):
+            version_text = version_raw.decode("utf-16", errors="replace").strip() or None
+        else:
+            version_text = version_raw.decode("utf-8", errors="replace").strip() or None
+
+    return {
+        "engine_config_version": engine_pin,
+        "engine_checkout_path": str(engine_root),
+        "engine_checkout_head": engine_head,
+        "engine_checkout_clean": True,
+        "launched_executable_path": str(executable),
+        "executable_sha256_before": _sha256_file(executable),
+        "engine_version": version_text,
+        "engine_version_file_path": str(version_file.resolve()) if version_raw is not None else None,
+        "engine_version_file_raw_base64": base64.b64encode(version_raw).decode("ascii") if version_raw is not None else None,
+        "engine_version_file_sha256": hashlib.sha256(version_raw).hexdigest() if version_raw is not None else None,
+    }
+
+
+def check_executable_after(provenance: dict) -> dict:
+    """Capture post-match executable bytes; a missing/changed file invalidates the attempt."""
+    path = pathlib.Path(provenance["launched_executable_path"])
+    try:
+        after = _sha256_file(path)
+        error = None
+    except ValueError as exc:
+        after = None
+        error = str(exc)
+    before = provenance.get("executable_sha256_before")
+    unchanged = bool(before and after and before == after)
+    return {
+        "executable_sha256_before": before,
+        "executable_sha256_after": after,
+        "executable_hash_unchanged": unchanged,
+        "executable_hash_error": error,
+    }
+
+
 def _hash_files(base: pathlib.Path, files: list[pathlib.Path]) -> str:
     """One sha256 over (relative name, bytes) per file in sorted order — set
     membership and contents both move the digest; an empty set hashes clean."""
@@ -1232,8 +1354,8 @@ def compute_fingerprint(
     config: dict,
     repo_root: pathlib.Path = REPO_ROOT,
 ) -> dict:
-    """The batch's arms as one dict. Null-tolerant: a component that cannot be
-    read (no git, no engine, no map) records None rather than failing."""
+    """The batch's arms as one dict; engine identity is required and fail-closed."""
+    engine_provenance = engine_runtime_provenance(repo_root, engine)
     commit = (_git(repo_root, "rev-parse", "HEAD") or "").strip() or None
     status = _git(repo_root, "status", "--porcelain", "--", *FINGERPRINT_GIT_PATHS)
     version_file = engine / "VERSION"
@@ -1253,6 +1375,7 @@ def compute_fingerprint(
         "mod_dirty": None if status is None else bool(status.strip()),
         "engine_version": engine_version,
         "mod_dlls_sha256": _mod_dlls_sha256(engine),
+        "runtime_engine": engine_provenance,
         "ai_yaml_sha256": ai_sha,
         "ai_yaml_files": ai_count,
         "mod_yaml_sha256": mod_sha,
@@ -1382,7 +1505,7 @@ def main() -> int:
         fail(template_error)
 
     mod_id, engine = load_config()
-    executable = engine / "bin" / "OpenRA.exe"
+    executable = (engine / "bin" / "OpenRA.exe").resolve()
     if not executable.is_file():
         fail(f"OpenRA executable is missing: {executable}; run make.cmd all first")
     if args.render == "headless" and not (engine / "bin" / f"OpenRA.Platforms.{HEADLESS_PLATFORM}.dll").is_file():
@@ -1416,7 +1539,10 @@ def main() -> int:
         "swap_bots": args.swap_bots,
         "time_limit": args.time_limit,
     }
-    batch_fingerprint = compute_fingerprint(map_source, engine, batch_config)
+    try:
+        batch_fingerprint = compute_fingerprint(map_source, engine, batch_config)
+    except (OSError, ValueError) as exc:
+        fail(f"engine runtime provenance invalid before launch: {exc}")
     batch_fp_id = fingerprint_id(batch_fingerprint)
 
     # One variant dir per distinct matchup (repeats reuse it).
@@ -1489,7 +1615,10 @@ def main() -> int:
             # LC7: re-fingerprint before EVERY attempt — a rebuild or sync
             # landing mid-retry is still drift. Any changed component aborts
             # the batch rather than launching under different arms.
-            current_fingerprint = compute_fingerprint(map_source, engine, batch_config)
+            try:
+                current_fingerprint = compute_fingerprint(map_source, engine, batch_config)
+            except (OSError, ValueError) as exc:
+                fail(f"engine runtime provenance invalid before launch: {exc}")
             drift = fingerprint_drift(batch_fingerprint, current_fingerprint)
             if drift:
                 if not args.allow_fingerprint_drift:
@@ -1525,8 +1654,22 @@ def main() -> int:
                 stall_log=match_logs_dir / "debug.log",
                 stall_timeout=args.stall_timeout,
             )
+            executable_provenance = check_executable_after(current_fingerprint["runtime_engine"])
+            executable_changed = not executable_provenance["executable_hash_unchanged"]
+            if executable_changed:
+                status = "executable_changed"
+                output += (
+                    "\nFAIL: launched OpenRA.exe changed or became unavailable during match: "
+                    + str(executable_provenance.get("executable_hash_error") or "SHA256 mismatch")
+                )
             elapsed = int(time.time() - started)
             records = read_appended_records(match_log_path, 0)
+            discarded_records = len(records) if executable_changed else 0
+            if executable_changed:
+                # The bytes under the launched path no longer prove which engine
+                # produced these rows, so preserve raw logs but exclude them from
+                # summaries and scoreboards.
+                records = []
             new_exc = sorted(p.name for p in match_logs_dir.glob("exception-*.log") if p.name not in exc_before)
             if render == "headless":
                 graphics_log = match_logs_dir / "graphics.log"
@@ -1610,10 +1753,15 @@ def main() -> int:
             "economy_health_file": str(match_support / "Logs" / "cameo-ai-economy-health.jsonl"),
             "support_dir": str(match_support),
             "fingerprint": fingerprint_id(current_fingerprint),
+            "runtime_engine": {
+                **current_fingerprint["runtime_engine"],
+                **executable_provenance,
+            },
             "exit_code": exit_code,
             "attempts": attempt,
             "wall_seconds": elapsed,
             "records": len(records),
+            "discarded_records_binary_changed": discarded_records,
             "outcomes": outcome,
             "bot_outcomes": [
                 {
@@ -1660,9 +1808,17 @@ def main() -> int:
     new_exceptions = sorted({name for result in results for name in result.get("new_exceptions", [])})
     scoreboard = ab_scoreboard(results)
     team_board = team_scoreboard(results) if args.team_size > 1 else None
+    attempt_provenance = [result["runtime_engine"] for result in results if "runtime_engine" in result]
+    runtime_engine_batch = dict(batch_fingerprint["runtime_engine"])
+    if attempt_provenance:
+        runtime_engine_batch["executable_sha256_after"] = attempt_provenance[-1].get("executable_sha256_after")
+        runtime_engine_batch["executable_hash_unchanged"] = all(
+            item.get("executable_hash_unchanged") is True for item in attempt_provenance
+        )
     summary = {
         "support_dir": str(support),
         "fingerprint": batch_fingerprint,
+        "runtime_engine": runtime_engine_batch,
         "fingerprint_id": batch_fp_id,
         "matches": len(matchups),
         "completed": sum(1 for r in results if r["status"] == "ok"),
