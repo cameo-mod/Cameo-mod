@@ -9,6 +9,7 @@ import json
 import pathlib
 import re
 import shutil
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -465,10 +466,26 @@ class FingerprintTests(unittest.TestCase):
         (tmp / "mods" / "cameo" / "ai").mkdir(parents=True)
         (tmp / "mods" / "cameo" / "ai" / "ai.yaml").write_text("players: {}\n", encoding="utf-8")
         (tmp / "engine" / "bin").mkdir(parents=True)
+        engine = tmp / "engine"
+        (engine / ".gitignore").write_text("/bin/\n", encoding="utf-8")
         (tmp / "engine" / "bin" / "OpenRA.Game.dll").write_bytes(b"fake-dll-a")
         (tmp / "engine" / "bin" / "OpenRA.Mods.Cameo.dll").write_bytes(b"fake-dll-b")
+        (tmp / "engine" / "bin" / "OpenRA.exe").write_bytes(b"fake-openra-exe")
         (tmp / "engine" / "VERSION").write_text("abc123\n", encoding="utf-8")
         (tmp / "map.oramap").write_bytes(b"map-bytes")
+        subprocess.run(["git", "-C", str(engine), "init", "-q"], check=True, capture_output=True)
+        subprocess.run(["git", "-C", str(engine), "config", "user.name", "Fingerprint Test"],
+                       check=True, capture_output=True)
+        subprocess.run(["git", "-C", str(engine), "config", "user.email", "fingerprint@example.invalid"],
+                       check=True, capture_output=True)
+        subprocess.run(["git", "-C", str(engine), "add", ".gitignore", "VERSION"],
+                       check=True, capture_output=True)
+        subprocess.run(["git", "-C", str(engine), "commit", "-qm", "fixture engine pin"],
+                       check=True, capture_output=True)
+        engine_pin = subprocess.run(["git", "-C", str(engine), "rev-parse", "HEAD"],
+                                    check=True, capture_output=True, text=True).stdout.strip()
+        (tmp / "mod.config").write_text(
+            f'ENGINE_VERSION="{engine_pin}"\nENGINE_DIRECTORY="engine"\n', encoding="utf-8")
         return tmp
 
     def _fingerprint(self, tmp, config=None):
@@ -493,6 +510,165 @@ class FingerprintTests(unittest.TestCase):
             self.assertIsNone(fp["mod_commit"])
             self.assertIsNone(fp["mod_dirty"])
             self.assertEqual(fp["engine_version"], "abc123")
+        finally:
+            shutil.rmtree(tmp, ignore_errors=True)
+
+    def test_engine_provenance_binds_configured_pin_path_and_raw_version(self):
+        import base64
+        tmp = self._tree()
+        try:
+            provenance = batch.engine_runtime_provenance(tmp, tmp / "engine")
+            self.assertEqual(provenance["engine_config_version"], provenance["engine_checkout_head"])
+            self.assertTrue(provenance["engine_checkout_clean"])
+            self.assertEqual(provenance["launched_executable_path"], str((tmp / "engine/bin/OpenRA.exe").resolve()))
+            self.assertEqual(
+                base64.b64decode(provenance["engine_version_file_raw_base64"]),
+                (tmp / "engine/VERSION").read_bytes(),
+            )
+            self.assertRegex(provenance["engine_version_file_sha256"], r"^[0-9a-f]{64}$")
+            self.assertRegex(provenance["executable_sha256_before"], r"^[0-9a-f]{64}$")
+        finally:
+            shutil.rmtree(tmp, ignore_errors=True)
+
+    def test_missing_engine_pin_fails_closed(self):
+        tmp = self._tree()
+        try:
+            (tmp / "mod.config").write_text('ENGINE_DIRECTORY="engine"\n', encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "ENGINE_VERSION must be a 40-character Git SHA"):
+                batch.engine_runtime_provenance(tmp, tmp / "engine")
+        finally:
+            shutil.rmtree(tmp, ignore_errors=True)
+
+    def test_engine_head_mismatch_fails_closed(self):
+        tmp = self._tree()
+        try:
+            wrong_pin = "0" * 40
+            (tmp / "mod.config").write_text(
+                f'ENGINE_VERSION="{wrong_pin}"\nENGINE_DIRECTORY="engine"\n', encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "does not match configured ENGINE_VERSION"):
+                batch.engine_runtime_provenance(tmp, tmp / "engine")
+        finally:
+            shutil.rmtree(tmp, ignore_errors=True)
+
+    def test_dirty_engine_checkout_fails_closed(self):
+        tmp = self._tree()
+        try:
+            (tmp / "engine" / "untracked.txt").write_text("unexpected\n", encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "dirty or has untracked files"):
+                batch.engine_runtime_provenance(tmp, tmp / "engine")
+        finally:
+            shutil.rmtree(tmp, ignore_errors=True)
+
+    def test_executable_change_after_launch_invalidates_attempt(self):
+        tmp = self._tree()
+        try:
+            provenance = batch.engine_runtime_provenance(tmp, tmp / "engine")
+            exe = pathlib.Path(provenance["launched_executable_path"])
+            exe.write_bytes(b"changed while match ran")
+            after = batch.check_executable_after(provenance)
+            self.assertFalse(after["executable_hash_unchanged"])
+            self.assertNotEqual(after["executable_sha256_before"], after["executable_sha256_after"])
+        finally:
+            shutil.rmtree(tmp, ignore_errors=True)
+
+    def test_executable_unchanged_after_launch_is_recorded(self):
+        tmp = self._tree()
+        try:
+            provenance = batch.engine_runtime_provenance(tmp, tmp / "engine")
+            after = batch.check_executable_after(provenance)
+            self.assertTrue(after["executable_hash_unchanged"])
+            self.assertEqual(after["executable_sha256_before"], after["executable_sha256_after"])
+        finally:
+            shutil.rmtree(tmp, ignore_errors=True)
+
+    def test_changed_executable_discards_match_records_before_scoring(self):
+        rows = [{"record_id": "seat-1"}, {"record_id": "seat-2"}]
+        trusted, discarded = batch.trusted_attempt_records(rows, executable_hash_unchanged=False)
+        self.assertEqual(trusted, [])
+        self.assertEqual(discarded, 2)
+        # Even if an upstream caller accidentally leaves outcome rows attached,
+        # a changed attempt cannot enter the A/B scoreboard.
+        board = batch.ab_scoreboard([{
+            "status": "executable_changed",
+            "runtime_engine_attempts": [{
+                "runtime_engine": {"executable_hash_unchanged": False},
+            }],
+            "bot_outcomes": [{
+                "record_id": "untrusted|seat-1",
+                "bot_type": "hard",
+                "opponent": {"bot_type": "easy"},
+                "outcome": "won",
+                "spawn": 0,
+            }],
+        }])
+        self.assertEqual(board, {})
+
+    def test_each_retry_attempt_is_persisted_and_included_in_batch(self):
+        tmp = pathlib.Path(tempfile.mkdtemp(prefix="attempt-provenance-"))
+        try:
+            path = tmp / "attempt_provenance.jsonl"
+            attempts = []
+            for number, digest in ((1, "a" * 64), (2, "b" * 64)):
+                batch.append_attempt_provenance(path, attempts, {
+                    "variant": "cell-a",
+                    "repeat": 1,
+                    "attempt": number,
+                    "status": "exit=1" if number == 1 else "ok",
+                    "exit_code": 1 if number == 1 else 0,
+                    "runtime_engine": {
+                        "executable_sha256_before": digest,
+                        "executable_sha256_after": digest,
+                        "executable_hash_unchanged": True,
+                    },
+                })
+
+            batch_attempts = batch.all_attempt_provenance([{
+                "runtime_engine_attempts": attempts,
+            }])
+            persisted_attempts = [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines()]
+            self.assertEqual([item["attempt"] for item in batch_attempts], [1, 2])
+            self.assertEqual(
+                [item["runtime_engine"]["executable_sha256_before"] for item in batch_attempts],
+                ["a" * 64, "b" * 64],
+            )
+            self.assertEqual([item["attempt"] for item in persisted_attempts], [1, 2])
+        finally:
+            shutil.rmtree(tmp, ignore_errors=True)
+
+    def test_prelaunch_drift_result_retains_prior_launched_retry_provenance(self):
+        first_attempt = {
+            "variant": "cell-a",
+            "repeat": 1,
+            "attempt": 1,
+            "status": "exit=1",
+            "exit_code": 1,
+            "runtime_engine": {
+                "executable_sha256_before": "a" * 64,
+                "executable_sha256_after": "a" * 64,
+                "executable_hash_unchanged": True,
+            },
+        }
+        result = batch.fingerprint_drift_result(
+            "cell-a", {"engine": "pin"}, {"engine": {"was": "pin", "now": "other"}},
+            attempt=2, runtime_engine_attempts=[first_attempt])
+        batch_attempts = batch.all_attempt_provenance([result])
+        self.assertEqual(result["attempts"], 1)
+        self.assertEqual(batch_attempts, [first_attempt])
+
+    def test_missing_executable_fails_closed(self):
+        tmp = self._tree()
+        try:
+            (tmp / "engine" / "bin" / "OpenRA.exe").unlink()
+            with self.assertRaisesRegex(ValueError, "engine checkout or executable path is unavailable"):
+                batch.engine_runtime_provenance(tmp, tmp / "engine")
+        finally:
+            shutil.rmtree(tmp, ignore_errors=True)
+
+    def test_resolved_engine_path_mismatch_fails_closed(self):
+        tmp = self._tree()
+        try:
+            with self.assertRaisesRegex(ValueError, "resolved engine path mismatch"):
+                batch.engine_runtime_provenance(tmp, tmp / "engine" / "bin")
         finally:
             shutil.rmtree(tmp, ignore_errors=True)
 
