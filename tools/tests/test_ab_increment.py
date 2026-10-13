@@ -41,6 +41,7 @@ class ShardCommandTests(unittest.TestCase):
         self.assertIn("8", argv)
         self.assertIn("hard", argv)
         self.assertIn("classic", argv)
+        self.assertIn("--require-economy-health", argv)
 
     def test_comma_faction_rejected(self):
         with self.assertRaises(SystemExit):

@@ -143,6 +143,7 @@ def shard_argv(
         "--time-limit", str(time_limit),
         "--support-dir", str(support),
         "--stall-timeout", str(stall_timeout),
+        "--require-economy-health",
     ]
 
 
