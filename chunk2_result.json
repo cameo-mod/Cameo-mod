@@ -1,0 +1,156 @@
+[
+ {
+  "module": "test_soviet_rename_repair.py",
+  "rc": 1,
+  "tests": 13,
+  "sec": 4.1,
+  "tail": "_repair.py\", line 246, in test_resolved_payload_equivalence\n    self.assertEqual(diffs_seen, [], \"unexplained resolved differences\")\nAssertionError: Lists differ: [('ra1_soviets_samsite', ('AutoTarget', 'D[835 chars]ue')] != []\n\nFirst list contains 10 additional elements.\nFirst extra element 0:\n('ra1_soviets_samsite', ('AutoTarget', 'DynamicWeaponPriority'), '<missing>', 'true')\n\nDiff is 1037 characters long. Set self.maxDiff to None to see it. : unexplained resolved differences\n\n----------------------------------------------------------------------\nRan 13 tests in 2.998s\n\nFAILED (failures=1)\n"
+ },
+ {
+  "module": "test_status_event_value.py",
+  "rc": 0,
+  "tests": 3,
+  "sec": 0.1,
+  "tail": "----------------------------------------------------------------------\nRan 3 tests in 0.000s\n\nOK\n"
+ },
+ {
+  "module": "test_status_uptime.py",
+  "rc": 0,
+  "tests": 5,
+  "sec": 0.1,
+  "tail": "----------------------------------------------------------------------\nRan 5 tests in 0.000s\n\nOK\n"
+ },
+ {
+  "module": "test_structure_without_exemptions.py",
+  "rc": 0,
+  "tests": 3,
+  "sec": 0.1,
+  "tail": "----------------------------------------------------------------------\nRan 3 tests in 0.000s\n\nOK\n"
+ },
+ {
+  "module": "test_summarize_reference_geometry.py",
+  "rc": 0,
+  "tests": 4,
+  "sec": 0.1,
+  "tail": "----------------------------------------------------------------------\nRan 4 tests in 0.007s\n\nOK\n"
+ },
+ {
+  "module": "test_support_armament_pricing.py",
+  "rc": 0,
+  "tests": 5,
+  "sec": 0.7,
+  "tail": "----------------------------------------------------------------------\nRan 5 tests in 0.163s\n\nOK\n"
+ },
+ {
+  "module": "test_target_payload_routes.py",
+  "rc": 0,
+  "tests": 13,
+  "sec": 0.1,
+  "tail": "----------------------------------------------------------------------\nRan 13 tests in 0.020s\n\nOK\n"
+ },
+ {
+  "module": "test_td_naval_rename.py",
+  "rc": 1,
+  "tests": 14,
+  "sec": 5.1,
+  "tail": "-------\nTraceback (most recent call last):\n  File \"C:\\cameo-wt\\devin-engbump\\tools\\tests\\test_td_naval_rename.py\", line 314, in test_complete_normalized_resolved_payloads_match_baseline\n    self.assertEqual([], diffs)\nAssertionError: Lists differ: [] != ['/AutoTarget/DynamicWeaponPriority: added \"true\"']\n\nSecond list contains 1 additional elements.\nFirst extra element 0:\n'/AutoTarget/DynamicWeaponPriority: added \"true\"'\n\n- []\n+ ['/AutoTarget/DynamicWeaponPriority: added \"true\"']\n\n----------------------------------------------------------------------\nRan 14 tests in 3.729s\n\nFAILED (failures=6)\n"
+ },
+ {
+  "module": "test_td_nod_chinook_capacity.py",
+  "rc": 0,
+  "tests": 3,
+  "sec": 2.8,
+  "tail": "----------------------------------------------------------------------\nRan 3 tests in 2.746s\n\nOK\n"
+ },
+ {
+  "module": "test_td_owned_names.py",
+  "rc": 1,
+  "tests": 5,
+  "sec": 52.3,
+  "tail": "\\test_td_owned_names.py\", line 56, in test_twenty_three_exact_armaments_preserve_eight_complete_owners\n    self.assertEqual(digest(obj), self.before['actor_hashes'][actor], actor)\nAssertionError: 'da60bf73d8bf4590293545668b5d2d30dc24db1b72dba5c5784e62c265e64814' != 'c9ccd331f8b41b94dcc2d2457da1afbe4e2829f513204d2a8033c2f349281b60'\n- da60bf73d8bf4590293545668b5d2d30dc24db1b72dba5c5784e62c265e64814\n+ c9ccd331f8b41b94dcc2d2457da1afbe4e2829f513204d2a8033c2f349281b60\n : td_gdi_humvee\n\n----------------------------------------------------------------------\nRan 5 tests in 42.619s\n\nFAILED (failures=1)\n"
+ },
+ {
+  "module": "test_td_rocket_soldier_playtest.py",
+  "rc": 0,
+  "tests": 6,
+  "sec": 4.1,
+  "tail": "----------------------------------------------------------------------\nRan 6 tests in 2.662s\n\nOK\n"
+ },
+ {
+  "module": "test_tier_continuous_reporting.py",
+  "rc": 0,
+  "tests": 2,
+  "sec": 0.1,
+  "tail": "----------------------------------------------------------------------\nRan 2 tests in 0.000s\n\nOK\n"
+ },
+ {
+  "module": "test_tiger_weapon_ownership.py",
+  "rc": 1,
+  "tests": 5,
+  "sec": 48.6,
+  "tail": "n-engbump\\tools\\tests\\test_tiger_weapon_ownership.py\", line 62, in test_complete_actor_payloads_only_change_four_weapon_values\n    self.assertEqual(digest(obj),self.before['actor_hashes'][actor])\nAssertionError: 'd4259e37c96ff36fceefe4167bcbe6bbf5c4773525ebd8e2ae119eac6f58c679' != 'f481b0029be4c6ff974f60cfe9f2b1dd342e2718db1f7cfb01ecd389706b6940'\n- d4259e37c96ff36fceefe4167bcbe6bbf5c4773525ebd8e2ae119eac6f58c679\n+ f481b0029be4c6ff974f60cfe9f2b1dd342e2718db1f7cfb01ecd389706b6940\n\n\n----------------------------------------------------------------------\nRan 5 tests in 36.138s\n\nFAILED (failures=1)\n"
+ },
+ {
+  "module": "test_tkm_tank_turret_role.py",
+  "rc": 0,
+  "tests": 5,
+  "sec": 29.2,
+  "tail": "----------------------------------------------------------------------\nRan 5 tests in 24.458s\n\nOK\n"
+ },
+ {
+  "module": "test_trait_aliases.py",
+  "rc": 0,
+  "tests": 10,
+  "sec": 0.1,
+  "tail": "----------------------------------------------------------------------\nRan 10 tests in 0.011s\n\nOK\n"
+ },
+ {
+  "module": "test_triage_band_flags.py",
+  "rc": 0,
+  "tests": 5,
+  "sec": 0.1,
+  "tail": "----------------------------------------------------------------------\nRan 5 tests in 0.000s\n\nOK\n"
+ },
+ {
+  "module": "test_triage_missile_role_cases.py",
+  "rc": 0,
+  "tests": 3,
+  "sec": 0.1,
+  "tail": "----------------------------------------------------------------------\nRan 3 tests in 0.000s\n\nOK\n"
+ },
+ {
+  "module": "test_tune_build_order.py",
+  "rc": 5,
+  "tests": 0,
+  "sec": 0.1,
+  "tail": "----------------------------------------------------------------------\nRan 0 tests in 0.000s\n\nNO TESTS RAN\n"
+ },
+ {
+  "module": "test_tune_build_order_coverage.py",
+  "rc": 5,
+  "tests": 0,
+  "sec": 0.1,
+  "tail": "----------------------------------------------------------------------\nRan 0 tests in 0.000s\n\nNO TESTS RAN\n"
+ },
+ {
+  "module": "test_tune_plan_bandits.py",
+  "rc": 5,
+  "tests": 0,
+  "sec": 0.2,
+  "tail": "----------------------------------------------------------------------\nRan 0 tests in 0.000s\n\nNO TESTS RAN\n"
+ },
+ {
+  "module": "test_under100_physical_profile.py",
+  "rc": 0,
+  "tests": 6,
+  "sec": 0.1,
+  "tail": "----------------------------------------------------------------------\nRan 6 tests in 0.000s\n\nOK (skipped=6)\n"
+ },
+ {
+  "module": "test_upgrade_direction_contracts.py",
+  "rc": 0,
+  "tests": 4,
+  "sec": 15.0,
+  "tail": "----------------------------------------------------------------------\nRan 4 tests in 9.770s\n\nOK\n"
+ }
+]

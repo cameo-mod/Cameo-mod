@@ -1,0 +1,104 @@
+[
+ {
+  "module": "test_apply_carrier_slave_ammo_safety.py",
+  "rc": 0,
+  "sec": 1.2,
+  "tail": "3 passed in 0.81s"
+ },
+ {
+  "module": "test_audit_bot_insurance.py",
+  "rc": 1,
+  "sec": 11.7,
+  "tail": "=========================== short test summary info ===========================\nFAILED tools/tests/test_audit_bot_insurance.py::test_supported_bots_do_not_stack_the_legacy_no_base_fallback\n1 failed, 17 passed in 8.78s"
+ },
+ {
+  "module": "test_audit_ini_untagged.py",
+  "rc": 0,
+  "sec": 0.7,
+  "tail": "2 passed in 0.37s"
+ },
+ {
+  "module": "test_bot_insurance_model.py",
+  "rc": 0,
+  "sec": 5.4,
+  "tail": "69 passed in 4.97s"
+ },
+ {
+  "module": "test_compare_nuke_area_damage.py",
+  "rc": 0,
+  "sec": 0.4,
+  "tail": "3 passed in 0.10s"
+ },
+ {
+  "module": "test_deprecated_name_lane.py",
+  "rc": 0,
+  "sec": 0.5,
+  "tail": "3 passed in 0.14s"
+ },
+ {
+  "module": "test_duplicate_inherits_blocking.py",
+  "rc": 0,
+  "sec": 0.5,
+  "tail": "3 passed in 0.12s"
+ },
+ {
+  "module": "test_engagement_report.py",
+  "rc": 0,
+  "sec": 0.5,
+  "tail": "10 passed in 0.20s"
+ },
+ {
+  "module": "test_expansion_and_build_order_reports.py",
+  "rc": 0,
+  "sec": 0.5,
+  "tail": "5 passed in 0.24s"
+ },
+ {
+  "module": "test_fight_report.py",
+  "rc": 0,
+  "sec": 0.5,
+  "tail": "2 passed in 0.17s"
+ },
+ {
+  "module": "test_fit_arsenal_priors.py",
+  "rc": 0,
+  "sec": 0.4,
+  "tail": "3 passed in 0.12s"
+ },
+ {
+  "module": "test_fit_baseband.py",
+  "rc": 0,
+  "sec": 0.4,
+  "tail": "1 passed in 0.11s"
+ },
+ {
+  "module": "test_fit_engagement_priors.py",
+  "rc": 0,
+  "sec": 0.6,
+  "tail": "34 passed in 0.29s"
+ },
+ {
+  "module": "test_generate_chrome_scales.py",
+  "rc": 0,
+  "sec": 13.6,
+  "tail": "20 passed in 13.34s"
+ },
+ {
+  "module": "test_learn_p0_privacy_regressions.py",
+  "rc": 0,
+  "sec": 1.7,
+  "tail": "17 passed in 1.39s"
+ },
+ {
+  "module": "test_order_stream_diff.py",
+  "rc": 0,
+  "sec": 0.7,
+  "tail": "22 passed in 0.45s"
+ },
+ {
+  "module": "test_orphan_cancels_siblings.py",
+  "rc": 0,
+  "sec": 0.4,
+  "tail": "4 passed in 0.10s"
+ }
+]

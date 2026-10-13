@@ -1,0 +1,142 @@
+[
+ {
+  "module": "test_vector_codemod.py",
+  "rc": 0,
+  "tests": 5,
+  "sec": 0.1,
+  "tail": "----------------------------------------------------------------------\nRan 5 tests in 0.000s\n\nOK\n"
+ },
+ {
+  "module": "test_veto_scorecard.py",
+  "rc": 5,
+  "tests": 0,
+  "sec": 0.1,
+  "tail": "----------------------------------------------------------------------\nRan 0 tests in 0.000s\n\nNO TESTS RAN\n"
+ },
+ {
+  "module": "test_virtual_anchor.py",
+  "rc": 0,
+  "tests": 35,
+  "sec": 0.8,
+  "tail": "----------------------------------------------------------------------\nRan 35 tests in 0.695s\n\nOK\n"
+ },
+ {
+  "module": "test_virtual_readiness.py",
+  "rc": 0,
+  "tests": 13,
+  "sec": 1.1,
+  "tail": "----------------------------------------------------------------------\nRan 13 tests in 0.888s\n\nOK\n"
+ },
+ {
+  "module": "test_warhead_source_paths.py",
+  "rc": 0,
+  "tests": 4,
+  "sec": 0.1,
+  "tail": "----------------------------------------------------------------------\nRan 4 tests in 0.024s\n\nOK\n"
+ },
+ {
+  "module": "test_warhead_source_selection.py",
+  "rc": 0,
+  "tests": 3,
+  "sec": 0.1,
+  "tail": "----------------------------------------------------------------------\nRan 3 tests in 0.000s\n\nOK\n"
+ },
+ {
+  "module": "test_wave1_adjudication.py",
+  "rc": 5,
+  "tests": 0,
+  "sec": 0.1,
+  "tail": "----------------------------------------------------------------------\nRan 0 tests in 0.000s\n\nNO TESTS RAN\n"
+ },
+ {
+  "module": "test_weapon_audit_reconciliation.py",
+  "rc": 0,
+  "tests": 3,
+  "sec": 0.1,
+  "tail": "----------------------------------------------------------------------\nRan 3 tests in 0.001s\n\nOK\n"
+ },
+ {
+  "module": "test_weapon_context.py",
+  "rc": 0,
+  "tests": 21,
+  "sec": 4.4,
+  "tail": "----------------------------------------------------------------------\nRan 21 tests in 3.960s\n\nOK\n"
+ },
+ {
+  "module": "test_weapon_correctness_followups.py",
+  "rc": 1,
+  "tests": 10,
+  "sec": 6.1,
+  "tail": "pon_correctness_followups.py\", line 219, in test_active_actor_and_weapon_rules_have_no_exact_duplicate_traits\n    self.assertEqual([], findings)\nAssertionError: Lists differ: [] != ['mods\\\\cameo\\\\ContentPacks\\\\RedAlert\\\\Jap[5243 chars]758']\n\nSecond list contains 45 additional elements.\nFirst extra element 0:\n'mods\\\\cameo\\\\ContentPacks\\\\RedAlert\\\\Japan\\\\yaml\\\\weapons.yaml:Hakureiring2 > ValidTargets at 2497, 2536'\n\nDiff is 5700 characters long. Set self.maxDiff to None to see it.\n\n----------------------------------------------------------------------\nRan 10 tests in 5.305s\n\nFAILED (failures=2)\n"
+ },
+ {
+  "module": "test_weapon_decision_bundle.py",
+  "rc": 0,
+  "tests": 5,
+  "sec": 0.1,
+  "tail": "----------------------------------------------------------------------\nRan 5 tests in 0.000s\n\nOK (skipped=5)\n"
+ },
+ {
+  "module": "test_weapon_families.py",
+  "rc": 0,
+  "tests": 9,
+  "sec": 0.1,
+  "tail": "----------------------------------------------------------------------\nRan 9 tests in 0.011s\n\nOK\n"
+ },
+ {
+  "module": "test_weapon_name_map_checks.py",
+  "rc": 0,
+  "tests": 6,
+  "sec": 0.2,
+  "tail": "----------------------------------------------------------------------\nRan 6 tests in 0.053s\n\nOK\n"
+ },
+ {
+  "module": "test_weapon_source_key_integrity.py",
+  "rc": 1,
+  "tests": 8,
+  "sec": 5.7,
+  "tail": "-----------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\cameo-wt\\devin-engbump\\tools\\tests\\test_weapon_source_key_integrity.py\", line 205, in test_corrected_inheritance_keys_keep_every_authored_parent\n    self.assertTrue(expected <= actual, (name, expected - actual))\nAssertionError: False is not true : ('12MissilesSpawnerScud', {'^RA2Grenade', '^Effect_Flame_Medium', '^RA2HeavyMissile', '^Projectile_Flame_Medium'})\n\n----------------------------------------------------------------------\nRan 8 tests in 3.942s\n\nFAILED (failures=2, errors=1)\n"
+ },
+ {
+  "module": "test_weapon_structure_inventory.py",
+  "rc": 1,
+  "tests": 7,
+  "sec": 20.7,
+  "tail": "--------------------------------\nTraceback (most recent call last):\n  File \"C:\\cameo-wt\\devin-engbump\\tools\\tests\\test_weapon_structure_inventory.py\", line 53, in test_live_inventory_matches_committed_measurement_without_exemptions\n    self.assertEqual(committed, self.data)\nAssertionError: {'counts': {'concrete_weapons': 2434, 'exce[13021 chars]3']}} != {'exemption_policy': 'retired; reviewed par[5312 chars]r']}}\nDiff is 37395 characters long. Set self.maxDiff to None to see it.\n\n----------------------------------------------------------------------\nRan 7 tests in 15.041s\n\nFAILED (failures=1)\n"
+ },
+ {
+  "module": "test_weapon_upgrade_contracts.py",
+  "rc": 1,
+  "tests": 11,
+  "sec": 16.4,
+  "tail": "sts\\test_weapon_upgrade_contracts.py\", line 88, in test_thunderbolt_patriot_is_an_anti_air_upgrade\n    self._assert_not_weaker(\"RA2Patriot\", \"RA2PatriotThunderboltMissile\", upgrade.AIR)\n  File \"C:\\cameo-wt\\devin-engbump\\tools\\tests\\test_weapon_upgrade_contracts.py\", line 39, in _assert_not_weaker\n    self.assertGreaterEqual(\nAssertionError: 894.0555555555555 not greater than or equal to 905.5555555555555 : RA2PatriotThunderboltMissile regressed against Fighter versus RA2Patriot\n\n----------------------------------------------------------------------\nRan 11 tests in 11.461s\n\nFAILED (failures=2)\n"
+ },
+ {
+  "module": "test_workbook_roundtrip.py",
+  "rc": 0,
+  "tests": 11,
+  "sec": 0.4,
+  "tail": "s in 0.026s\n\nOK\n  fixture_tank/Armament@PRIMARY.range: 40960 -> 41984\n  fixture_tank/Armament@PRIMARY.burstdelays: 2, 7 -> 5 (engine default)\n  fixture_tank.design.subtype: Unclassified -> MainBattleTank\n  fixture_tank.design.tech_tier: None -> 1\n  fixture_tank.design.unit_class: None -> 1.25\n  fixture_tank.design.special: None -> 0.9\n  fixture_tank/Armament@PRIMARY.weapon_class: None -> 1.5\n  fixture_tank/Armament@PRIMARY.reloaddelay: 1.0 -> 4\n  fixture_tank/Armament@PRIMARY.burst: 1 -> 3\n  fixture_tank/Armament@PRIMARY.range: 0.0 -> 1000\n  fixture_tank/Armament@PRIMARY.reloaddelay: 60 -> 61\n"
+ },
+ {
+  "module": "test_yak_weapon_ownership.py",
+  "rc": 1,
+  "tests": 9,
+  "sec": 61.4,
+  "tail": "mp\\tools\\tests\\reviewed_weapon_history.py\", line 72, in restore_owned_checkpoint_actor\n    test.assertEqual(record['current_hash'], digest, (cohort, actor))\nAssertionError: '3a2883d43177683a389d462e51af0e52c09dce82abe507967e86c762eea24f94' != '04bdb4f653e1498ced1a848da931bef115c8afe12c9fb066597c07453924b49f'\n- 3a2883d43177683a389d462e51af0e52c09dce82abe507967e86c762eea24f94\n+ 04bdb4f653e1498ced1a848da931bef115c8afe12c9fb066597c07453924b49f\n : ('yak', 'ra1_soviets_yakscoutplane')\n\n----------------------------------------------------------------------\nRan 9 tests in 42.308s\n\nFAILED (failures=1)\n"
+ },
+ {
+  "module": "test_yuri_gatling_pricing.py",
+  "rc": 0,
+  "tests": 3,
+  "sec": 31.5,
+  "tail": "----------------------------------------------------------------------\nRan 3 tests in 26.226s\n\nOK\n"
+ },
+ {
+  "module": "test_yuri_gatling_range_split.py",
+  "rc": 0,
+  "tests": 6,
+  "sec": 3.7,
+  "tail": "----------------------------------------------------------------------\nRan 6 tests in 2.585s\n\nOK\n"
+ }
+]

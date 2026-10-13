@@ -1,0 +1,1206 @@
+.........................................................................................................error: unknown arm(s) ['nope']; known: ['ctrl', 'half', 'all']
+.error: shard --factions must name exactly one faction, got 'td_gdi,td_nod' (cross-faction matches measure faction balance, not the bot)
+error: shard --factions must name exactly one faction, got 'td_gdi,td_nod' (cross-faction matches measure faction balance, not the bot)
+.....................................................FF....F......F...........................................................FFFFF.......F...........F....................................................................................................................................................................F............{"mode": "NO_LAUNCH_REAGGREGATE", "output": "C:\\Users\\AEDIST~1\\AppData\\Local\\Temp\\tmp16awi_5_\\derived.json"}
+
+round-trip check (every learning-loop layer must leave evidence):
+| layer | result | evidence |
+|---|---|---|
+| load | FAIL | 0/0 genericbot players with the LC5 line, 0/0 records with ownership+order_gate |
+| perception | FAIL | 0 situation snapshot(s) |
+| missions | FAIL | 0 PUBLISHED/COMMITTED record(s) of 0 |
+| ownership | FAIL | 0 LC1 lease line(s), double_owner=0 |
+| order gate | FAIL | 0/0 records with the block, refused=0, crossed=0 |
+| outcomes | PASS | 0 attempt(s), 0 dangling, 0 in flight at match end |
+| execution | PASS | 0 published card(s) dead-ended past the 7500t open horizon, 0 still live at match end (of 0) |
+| storm | PASS | 0 mission(s) with >=3 fast-consecutive bleeding closes |
+| write-back | PASS | 0 DORMANT/REOPENED event(s) |
+| team | PASS | 0 team game(s), 0 with team-stack artifacts |
+| fog | PASS | 0 FOGCANARY-VIOLATION line(s) |
+| learning | WARN | 0 LEARNED line(s), fit() over 0 match(es) |
+| learned files | PASS | 0 file(s) logged missing but present in the tree |
+| tools | PASS | ab_summary and mission_story ran |
+round-trip: FAIL layer(s) above — the batch fails even if every match was clean
+ASSERTION FAILED: template map is missing 	PlayerReference@NotABot:
+ASSERTION FAILED: faction not_a_faction has no StartingUnits group for class light or none
+..............................................................................................................................................................................................unknown audit id 'nope'; known ids: security_scan
+..........................................................................................................................................................................F.F...................................................sssssssss.....FFFF...................................F................................FFFFF................................ssss.......................................................s..F....F........................FFFFFFFEF..............................................................................................................................REFUSING: C:\Users\AedisToru\AppData\Local\Temp\tmpri8hqqhs\external\out.json already exists with DIFFERENT content (existing bytes=9, new bytes=19526); delete it explicitly first
+.usage: python.exe -m unittest [-h] --source SOURCE --out OUT [--dry-run]
+                              [--quiet]
+python.exe -m unittest: error: the following arguments are required: --source, --out
+usage: python.exe -m unittest [-h] --source SOURCE --out OUT [--dry-run]
+                              [--quiet]
+python.exe -m unittest: error: the following arguments are required: --out
+usage: python.exe -m unittest [-h] --source SOURCE --out OUT [--dry-run]
+                              [--quiet]
+python.exe -m unittest: error: the following arguments are required: --source
+.............ssssssssss................................................................usage: faction_extrapolate.py [-h] [--report] [--by-class] [--rates]
+                              [--faction FACTION] [--min-pairs MIN_PAIRS]
+                              [--write]
+faction_extrapolate.py: error: --min-pairs must be >= 3 (the Phase B floor), got 2
+...usage: faction_extrapolate.py [-h] [--report] [--by-class] [--rates]
+                              [--faction FACTION] [--min-pairs MIN_PAIRS]
+                              [--write]
+faction_extrapolate.py: error: --min-pairs must be >= 3 (the Phase B floor), got 0
+usage: faction_extrapolate.py [-h] [--report] [--by-class] [--rates]
+                              [--faction FACTION] [--min-pairs MIN_PAIRS]
+                              [--write]
+faction_extrapolate.py: error: --min-pairs must be >= 3 (the Phase B floor), got -1
+........REFERENCE JOIN: hero_only=45; unresolved_in_available_pools=3
+  unresolved_in_available_pools: td_gdi_mammothtankmkiii / DTA Enhanced / HTNKARTY
+  unresolved_in_available_pools: td_gdi_humveemkii / DTA Enhanced / JEEPPTNK
+  unresolved_in_available_pools: td_nod_lighttankmkii / DTA Enhanced / LTNKCRUS
+.........................................................sssss....................................s........FFF................................................................................F..........................................................F..F................................................................................................................................................F......sssssssssssssss............................................................................................................................................F................wrote docs\balance\review\scout_references.md
+  members 1 · assigned 1 · NAME-backed >=2: 0 · with shape: 0
+   PROBLEM actor_a.Valued.Cost: refusing unexpected resolved value '9'; expected '1' or '2'
+REFUSED WRITING: resolved preflight failed; no batch files were written
+already current (not rewritten): C:\Users\AedisToru\AppData\Local\Temp\tmpri8hqqhs\external\out.json
+already current (not rewritten): C:\Users\AedisToru\AppData\Local\Temp\tmp4g2byks0\external\race.json
+already current (not rewritten): C:\Users\AedisToru\AppData\Local\Temp\tmp4g2byks0\external\race.json
+already current (not rewritten): C:\Users\AedisToru\AppData\Local\Temp\tmp4g2byks0\external\race.json
+already current (not rewritten): C:\Users\AedisToru\AppData\Local\Temp\tmp4g2byks0\external\race.json
+already current (not rewritten): C:\Users\AedisToru\AppData\Local\Temp\tmp4g2byks0\external\race.json
+PASS: 0 migration edits, 0 resolved port actors, 0 violations
+[1/2] cell-0 ...
+    REJECTED in 1s test failure
+..............F...................................................................................REFUSING: C:\Users\AedisToru\AppData\Local\Temp\tmp7960ea0e\external\out.json already exists with DIFFERENT content (existing bytes=9, new bytes=8959); delete it explicitly first
+.usage: python.exe -m unittest [-h] --source SOURCE --out OUT [--dry-run]
+                              [--quiet]
+python.exe -m unittest: error: the following arguments are required: --source, --out
+usage: python.exe -m unittest [-h] --source SOURCE --out OUT [--dry-run]
+                              [--quiet]
+python.exe -m unittest: error: the following arguments are required: --out
+usage: python.exe -m unittest [-h] --source SOURCE --out OUT [--dry-run]
+                              [--quiet]
+python.exe -m unittest: error: the following arguments are required: --source
+..........ssssssss......................................................................usage: python.exe -m unittest [-h]
+                              [--mod {ca,cn,cnc,d2,d2k,e2140,fnw,gen,hv,ra,ra2,ra2vsh,rv,sp,ts,yr}]
+                              [--dry-run] [--root ROOT] [--json JSON]
+                              [--expect-commit COMMIT]
+python.exe -m unittest: error: argument --mod: invalid choice: 'not_a_peer' (choose from ca, cn, cnc, d2, d2k, e2140, fnw, gen, hv, ra, ra2, ra2vsh, rv, sp, ts, yr)
+..............................................................................................................................................................................................................................................................................................................................................................................................................................................E...............................genericbot records found but none reach a checkable verdict (all n/a)
+......no situation or placement records found
+no situation or placement records found
+......................genericbot records found but none reach a checkable verdict (all n/a)
+.....triage: refusing non-immutable commit value 'abc' - expected a full 40-hex hash
+..triage: git merge-base --is-ancestor failed for aaaaaaaaaaaa..bbbbbbbbbbbb (fatal)
+......................triage: refusing non-immutable commit value 'abc' - expected a full 40-hex hash
+...........triage: refusing commit 1d2bcbae02b311ce0d426efdafc124f29bceb090 - not an ancestor of the current HEAD, so its hunks do not describe this tree's history
+................triage: git show failed for aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa (fatal: bad object)
+.triage: git status failed for R:/repo (fatal)
+.triage: cannot resolve HEAD for R:/repo (fatal: not a repo)
+.triage: refusing commit aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa - not an ancestor of the current HEAD, so its hunks do not describe this tree's history
+.triage: refusing non-immutable commit value 'abc123' - expected a full 40-hex hash
+..triage: refusing unknown commit 'bogus' - git cannot resolve it as a commit (fatal: ambiguous argument)
+......................triage: refusing unknown commit 'does-not-exist' - git cannot resolve it as a commit (fatal: Needed a single revision)
+........................................................................................................................................................................................................................................FF.F....F...................F....................FFF............F........................................FFFFFF...............F.........F..........................ssssss........................................................................................FF........sssss.................F.F.E....F..........F.F............F.................
+======================================================================
+ERROR: test_raw_filename_cannot_substitute_for_health (test_economy_logger_cli.EconomyLoggerCliTest.test_raw_filename_cannot_substitute_for_health)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_economy_logger_cli.py", line 83, in test_raw_filename_cannot_substitute_for_health
+    source = Path(pointer.read_text(encoding="utf-8-sig")) / "Logs/cameo-ai-economy-health.jsonl"
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AedisToru\AppData\Local\Programs\Python\Python312\Lib\pathlib.py", line 1027, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AedisToru\AppData\Local\Programs\Python\Python312\Lib\pathlib.py", line 1013, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\cameo-wt\\devin-engbump\\engine\\bin\\TestResults\\economy-health-schema-cli-input.txt'
+
+======================================================================
+ERROR: test_hero_projection_uses_separate_population (test_reference_map_requests.Requests.test_hero_projection_uses_separate_population)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_reference_map_requests.py", line 75, in test_hero_projection_uses_separate_population
+    report.emit([],['hero'],{'hero':row},{},{},set(),ordinary,frozen,counts,{}, {},(hero_dist,hero_frozen))
+  File "C:\cameo-wt\devin-engbump\tools\balance\build_reference_report.py", line 719, in emit
+    per_armament = has_structured_armament_components(a)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\cameo-wt\devin-engbump\tools\balance\build_reference_report.py", line 900, in has_structured_armament_components
+    entry = pairing_document().get("actors", {}).get(actor)
+            ^^^^^^^^^^^^^^^^^^
+  File "C:\cameo-wt\devin-engbump\tools\balance\build_reference_report.py", line 895, in pairing_document
+    _PAIRING.append(_validate_pairing_document(doc, bap.input_fingerprints(ROOT)))
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\cameo-wt\devin-engbump\tools\balance\build_reference_report.py", line 870, in _validate_pairing_document
+    raise ValueError(f"armament_pairing.json input fingerprints are incomplete or stale: {detail}")
+ValueError: armament_pairing.json input fingerprints are incomplete or stale: changed ['docs/balance/d2k_atreides.json', 'docs/balance/d2k_corrino.json', 'docs/balance/d2k_harkonnen.json', 'docs/balance/d2k_ixian.json', 'docs/balance/d2k_ordos.json', 'docs/balance/redalert2_allies.json', 'docs/balance/redalert2_soviets.json', 'docs/balance/redalert2_yuri.json', 'docs/balance/redalert2mod_asianalliance.json', 'docs/balance/redalert2mod_consortium.json', 'docs/balance/redalert2mod_futuretech.json', 'docs/balance/redalert2mod_naxis.json', 'docs/balance/redalert2mod_schwarzermond.json', 'docs/balance/redalert2mod_syndicate.json', 'docs/balance/redalert2mod_tkm.json', 'docs/balance/redalert_allies.json', 'docs/balance/redalert_japan.json', 'docs/balance/redalert_soviets.json', 'docs/balance/shared_d2k.json', 'docs/balance/shared_redalert.json', 'docs/balance/shared_redalert2.json', 'docs/balance/shared_tiberiansun.json', 'docs/balance/starcraft_protoss.json', 'docs/balance/starcraft_terran.json', 'docs/balance/starcraft_zerg.json', 'docs/balance/tiberiandawn_gdi.json', 'docs/balance/tiberiandawn_nod.json', 'docs/balance/tiberiansun_cabal.json', 'docs/balance/tiberiansun_forgotten.json', 'docs/balance/tiberiansun_gdi.json', 'docs/balance/tiberiansun_nod.json', 'docs/balance/warcraft2_humans.json', 'docs/balance/warcraft2_orcs.json', 'mods/cameo/ContentPacks/D2k/Atreides/yaml/vehicles.yaml', 'mods/cameo/ContentPacks/D2k/Atreides/yaml/weapons.yaml', 'mods/cameo/ContentPacks/D2k/Corrino/yaml/vehicles.yaml', 'mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml', 'mods/cameo/ContentPacks/D2k/Harkonnen/yaml/weapons.yaml', 'mods/cameo/ContentPacks/D2k/Ixian/yaml/ai.yaml', 'mods/cameo/ContentPacks/D2k/Ixian/yaml/aircraft.yaml', 'mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml', 'mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml', 'mods/cameo/ContentPacks/D2k/Ordos/yaml/ai.yaml', 'mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml', 'mods/cameo/ContentPacks/D2k/Ordos/yaml/infantry.yaml', 'mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml', 'mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml', 'mods/cameo/ContentPacks/D2k/Shared/yaml/infantry.yaml', 'mods/cameo/ContentPacks/D2k/Shared/yaml/templates.yaml', 'mods/cameo/ContentPacks/D2k/Shared/yaml/vehicles.yaml', 'mods/cameo/ContentPacks/D2k/Shared/yaml/weapons.yaml', 'mods/cameo/ContentPacks/RedAlert/Allies/yaml/ai.yaml', 'mods/cameo/ContentPacks/RedAlert/Allies/yaml/buildings.yaml', 'mods/cameo/ContentPacks/RedAlert/Allies/yaml/defenses.yaml', 'mods/cameo/ContentPacks/RedAlert/Allies/yaml/infantry.yaml', 'mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml', 'mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml', 'mods/cameo/ContentPacks/RedAlert/Japan/yaml/ai.yaml', 'mods/cameo/ContentPacks/RedAlert/Japan/yaml/aircraft.yaml', 'mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml', 'mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml', 'mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml', 'mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml', 'mods/cameo/ContentPacks/RedAlert/Soviets/yaml/ai.yaml', 'mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml', 'mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml', 'mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml', 'mods/cameo/ContentPacks/RedAlert2/Allies/yaml/ai.yaml', 'mods/cameo/ContentPacks/RedAlert2/Allies/yaml/defenses.yaml', 'mods/cameo/ContentPacks/RedAlert2/Allies/yaml/infantry.yaml', 'mods/cameo/ContentPacks/RedAlert2/Allies/yaml/vehicles.yaml', 'mods/cameo/ContentPacks/RedAlert2/Allies/yaml/weapons.yaml', 'mods/cameo/ContentPacks/RedAlert2/Shared/yaml/faction.yaml', 'mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml', 'mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml', 'mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/ai.yaml', 'mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/defenses.yaml', 'mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml', 'mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml', 'mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml', 'mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/buildings.yaml', 'mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/defenses.yaml', 'mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml', 'mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml', 'mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml', 'mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/ai.yaml', 'mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml', 'mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/buildings.yaml', 'mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/naval.yaml', 'mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml', 'mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml', 'mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/ai.yaml', 'mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/aircraft.yaml', 'mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/buildings.yaml', 'mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/vehicles.yaml', 'mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml', 'mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/aircraft.yaml', 'mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/buildings.yaml', 'mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/infantry.yaml', 'mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/vehicles.yaml', 'mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/weapons.yaml', 'mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/aircraft.yaml', 'mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/buildings.yaml', 'mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml', 'mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/naval.yaml', 'mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml', 'mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml', 'mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/aircraft.yaml', 'mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/buildings.yaml', 'mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml', 'mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/ai.yaml', 'mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/buildings.yaml', 'mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml', 'mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml', 'mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/aircraft.yaml', 'mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/defenses.yaml', 'mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml', 'mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml', 'mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml', 'mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml', 'mods/cameo/ContentPacks/StarCraft/Protoss/yaml/buildings.yaml', 'mods/cameo/ContentPacks/StarCraft/Protoss/yaml/infantry.yaml', 'mods/cameo/ContentPacks/StarCraft/Protoss/yaml/vehicles.yaml', 'mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml', 'mods/cameo/ContentPacks/StarCraft/Shared/yaml/weapons.yaml', 'mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml', 'mods/cameo/ContentPacks/StarCraft/Terran/yaml/defenses.yaml', 'mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml', 'mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml', 'mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml', 'mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml', 'mods/cameo/ContentPacks/StarCraft/Zerg/yaml/vehicles.yaml', 'mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml', 'mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/ai.yaml', 'mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/aircraft.yaml', 'mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/buildings.yaml', 'mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/naval.yaml', 'mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/vehicles.yaml', 'mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml', 'mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/ai.yaml', 'mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/buildings.yaml', 'mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/naval.yaml', 'mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml', 'mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml', 'mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml', 'mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/buildings.yaml', 'mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/defenses.yaml', 'mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml', 'mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/infantry.yaml', 'mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml', 'mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml', 'mods/cameo/ContentPacks/TiberianSun/GDI/yaml/ai.yaml', 'mods/cameo/ContentPacks/TiberianSun/GDI/yaml/aircraft.yaml', 'mods/cameo/ContentPacks/TiberianSun/GDI/yaml/buildings.yaml', 'mods/cameo/ContentPacks/TiberianSun/GDI/yaml/naval.yaml', 'mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml', 'mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml', 'mods/cameo/ContentPacks/TiberianSun/Nod/yaml/ai.yaml', 'mods/cameo/ContentPacks/TiberianSun/Nod/yaml/defenses.yaml', 'mods/cameo/ContentPacks/TiberianSun/Nod/yaml/naval.yaml', 'mods/cameo/ContentPacks/TiberianSun/Nod/yaml/vehicles.yaml', 'mods/cameo/ContentPacks/TiberianSun/Nod/yaml/weapons.yaml', 'mods/cameo/ContentPacks/TiberianSun/Shared/yaml/misc.yaml', 'mods/cameo/ContentPacks/TiberianSun/Shared/yaml/weapons.yaml', 'mods/cameo/ContentPacks/TiberiumWars/Scrin/yaml/weapons.yaml', 'mods/cameo/ContentPacks/Warcraft2/Humans/yaml/infantry.yaml', 'mods/cameo/ContentPacks/Warcraft2/Humans/yaml/templates.yaml', 'mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml', 'mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/templates.yaml', 'mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml', 'mods/cameo/ai/ai.yaml', 'mods/cameo/ai/fransbot_lists.yaml', 'mods/cameo/mod.yaml', 'mods/cameo/rules/civilian.yaml', 'mods/cameo/rules/civilian_desert.yaml', 'mods/cameo/rules/defaults.yaml', 'mods/cameo/rules/misc.yaml', 'mods/cameo/rules/outpost2.yaml', 'mods/cameo/rules/player.yaml', 'mods/cameo/rules/shared.yaml', 'mods/cameo/rules/starcraft.yaml', 'mods/cameo/rules/tech.yaml', 'mods/cameo/rules/tiberiansun.yaml', 'mods/cameo/rules/warcraft2.yaml', 'mods/cameo/rules/world.yaml', 'mods/cameo/weapons/d2k.yaml', 'mods/cameo/weapons/outpost2.yaml', 'mods/cameo/weapons/redalert2mod.yaml', 'mods/cameo/weapons/starcraft.yaml', 'mods/cameo/weapons/tiberiandawn.yaml', 'mods/cameo/weapons/tiberiansun.yaml', 'mods/cameo/weapons/warcraft2.yaml', 'mods/cameo/weapons/weapons.yaml']
+
+======================================================================
+ERROR: test_ordos_apc_duplicate_merge_preserves_the_resolved_binding (test_weapon_source_key_integrity.WeaponSourceKeyIntegrityTests.test_ordos_apc_duplicate_merge_preserves_the_resolved_binding)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_weapon_source_key_integrity.py", line 78, in test_ordos_apc_duplicate_merge_preserves_the_resolved_binding
+    warhead = next(child for child in weapon.children if child.key == key)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+StopIteration
+
+======================================================================
+FAIL: test_base_routes_have_one_role_specific_main (test_adats_air_first_role.ADATSAirFirstRoleTests.test_base_routes_have_one_role_specific_main)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_adats_air_first_role.py", line 52, in test_base_routes_have_one_role_specific_main
+    self.assertEqual([profile], main_warheads(weapon), name)
+AssertionError: Lists differ: ['Flak_Medium_Flat'] != ['MissileAA_Medium']
+
+First differing element 0:
+'Flak_Medium_Flat'
+'MissileAA_Medium'
+
+- ['Flak_Medium_Flat']
++ ['MissileAA_Medium'] : TSAdatsMissile_AA
+
+======================================================================
+FAIL: test_chemical_upgrade_routes_are_live_and_stronger (test_adats_air_first_role.ADATSAirFirstRoleTests.test_chemical_upgrade_routes_are_live_and_stronger)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_adats_air_first_role.py", line 73, in test_chemical_upgrade_routes_are_live_and_stronger
+    self.assertEqual([profile], main_warheads(weapon), name)
+AssertionError: Lists differ: ['Flak_Medium_Flat'] != ['MissileAA_Medium']
+
+First differing element 0:
+'Flak_Medium_Flat'
+'MissileAA_Medium'
+
+- ['Flak_Medium_Flat']
++ ['MissileAA_Medium'] : TSChemAdatsMissile_AA
+
+======================================================================
+FAIL: test_five_complete_actors_only_change_twelve_armament_identities (test_additional_owned_names.AdditionalOwnedNameTests.test_five_complete_actors_only_change_twelve_armament_identities)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_additional_owned_names.py", line 51, in test_five_complete_actors_only_change_twelve_armament_identities
+    obj=restore_owned_checkpoint_actor(self,self.rules,'additional',actor)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\cameo-wt\devin-engbump\tools\tests\reviewed_weapon_history.py", line 72, in restore_owned_checkpoint_actor
+    test.assertEqual(record['current_hash'], digest, (cohort, actor))
+AssertionError: 'c47b14d2bbdea378b9e001462cbda2b6e625e43231013f544014ba635817810e' != '8cd3debaad919cc2a92fe00e3c456de245fdd72e1e66acabc007c07c4b220960'
+- c47b14d2bbdea378b9e001462cbda2b6e625e43231013f544014ba635817810e
++ 8cd3debaad919cc2a92fe00e3c456de245fdd72e1e66acabc007c07c4b220960
+ : ('additional', 'ra1_allies_sheridanassaulttank')
+
+======================================================================
+FAIL: test_direct_single_domain_weapons_keep_damage_in_their_domain (test_aedis_target_policy.TargetPolicyTest.test_direct_single_domain_weapons_keep_damage_in_their_domain)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_aedis_target_policy.py", line 260, in test_direct_single_domain_weapons_keep_damage_in_their_domain
+    self.assertIn('Air', values.get('InvalidTargets', '').split(', '),
+AssertionError: 'Air' not found in [''] : ('Hakureiring', 'Warhead@Magic_Heavy')
+
+======================================================================
+FAIL: test_all_starcraft_and_warcraft_headquarters_are_protected (test_ai_headquarters_refinery_cleanup.HeadquartersRefineryCleanupTests.test_all_starcraft_and_warcraft_headquarters_are_protected) (actor='protoss_nexus')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_ai_headquarters_refinery_cleanup.py", line 35, in test_all_starcraft_and_warcraft_headquarters_are_protected
+    self.assertIn(name, self.protected)
+AssertionError: 'protoss_nexus' not found in {'zerg_lair', 'zerg_hive'}
+
+======================================================================
+FAIL: test_all_starcraft_and_warcraft_headquarters_are_protected (test_ai_headquarters_refinery_cleanup.HeadquartersRefineryCleanupTests.test_all_starcraft_and_warcraft_headquarters_are_protected) (actor='terran_commandcenter')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_ai_headquarters_refinery_cleanup.py", line 35, in test_all_starcraft_and_warcraft_headquarters_are_protected
+    self.assertIn(name, self.protected)
+AssertionError: 'terran_commandcenter' not found in {'zerg_lair', 'zerg_hive'}
+
+======================================================================
+FAIL: test_all_starcraft_and_warcraft_headquarters_are_protected (test_ai_headquarters_refinery_cleanup.HeadquartersRefineryCleanupTests.test_all_starcraft_and_warcraft_headquarters_are_protected) (actor='zerg_hatchery')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_ai_headquarters_refinery_cleanup.py", line 35, in test_all_starcraft_and_warcraft_headquarters_are_protected
+    self.assertIn(name, self.protected)
+AssertionError: 'zerg_hatchery' not found in {'zerg_lair', 'zerg_hive'}
+
+======================================================================
+FAIL: test_all_starcraft_and_warcraft_headquarters_are_protected (test_ai_headquarters_refinery_cleanup.HeadquartersRefineryCleanupTests.test_all_starcraft_and_warcraft_headquarters_are_protected) (actor='wc2_humans_townhall')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_ai_headquarters_refinery_cleanup.py", line 35, in test_all_starcraft_and_warcraft_headquarters_are_protected
+    self.assertIn(name, self.protected)
+AssertionError: 'wc2_humans_townhall' not found in {'zerg_lair', 'zerg_hive'}
+
+======================================================================
+FAIL: test_all_starcraft_and_warcraft_headquarters_are_protected (test_ai_headquarters_refinery_cleanup.HeadquartersRefineryCleanupTests.test_all_starcraft_and_warcraft_headquarters_are_protected) (actor='wc2_orcs_greathall')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_ai_headquarters_refinery_cleanup.py", line 35, in test_all_starcraft_and_warcraft_headquarters_are_protected
+    self.assertIn(name, self.protected)
+AssertionError: 'wc2_orcs_greathall' not found in {'zerg_lair', 'zerg_hive'}
+
+======================================================================
+FAIL: test_save_exclusion_is_captured_before_replay_in_clears_the_flag (test_ai_logging_integration.AiLoggingIntegrationTests.test_save_exclusion_is_captured_before_replay_in_clears_the_flag)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_ai_logging_integration.py", line 23, in test_save_exclusion_is_captured_before_replay_in_clears_the_flag
+    self.assertIn("eligibleAtWorldLoad = Eligible(world.Type, world.IsReplay, world.IsLoadingGameSave, Game.IsHost);", load)
+AssertionError: 'eligibleAtWorldLoad = Eligible(world.Type, world.IsReplay, world.IsLoadingGameSave, Game.IsHost);' not found in '(World world, WorldRenderer worldRenderer)\n\t\t{\n\t\t\ttakeover = world.WorldActor.TraitOrDefault<BotTakeoverTracker>();\n\n\t\t\t// Save replay-in eventually clears IsLoadingGameSave. Keep the exclusion\n\t\t\t// for this world\'s entire lifetime, including its eventual GameOver.\n\t\t\t// The owner check (admin host or elected takeover controller) is deferred to\n\t\t\t// capture: the controller is only elected once the tracker itself loads.\n\t\t\teligibleAtWorldLoad = Eligible(world.Type, world.IsReplay, world.IsLoadingGameSave, host: true);\n\t\t\tif (!eligibleAtWorldLoad)\n\t\t\t{\n\t\t\t\twritten = true;\n\t\t\t\treturn;\n\t\t\t}\n\n\t\t\tfallbackGameUid = Guid.NewGuid().ToString("N");\n\t\t\tappender = new AiLogFileAppender(info.FileName);\n\t\t}\n\n\t\t'
+
+======================================================================
+FAIL: test_complete_seven_actors_change_only_eighteen_arms_and_one_smoke_reference (test_allied_owned_names.AlliedOwnedNameTests.test_complete_seven_actors_change_only_eighteen_arms_and_one_smoke_reference)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_allied_owned_names.py", line 76, in test_complete_seven_actors_change_only_eighteen_arms_and_one_smoke_reference
+    self.assertEqual(digest(obj),self.before['actor_hashes'][actor],actor)
+AssertionError: '03ad0f13e350c3970865aa960860615368218a0537e9ed4b19d4c4657cb17c47' != 'f9eb558d32d5a2cac28d8f3c160c3c6bfefb67a6f4222bac9b5721ad6234eaae'
+- 03ad0f13e350c3970865aa960860615368218a0537e9ed4b19d4c4657cb17c47
++ f9eb558d32d5a2cac28d8f3c160c3c6bfefb67a6f4222bac9b5721ad6234eaae
+ : ra1_allies_ranger
+
+======================================================================
+FAIL: test_the_pairing_artifact_records_what_it_was_built_from (test_armament_roles.EvidenceFingerprintTests.test_the_pairing_artifact_records_what_it_was_built_from)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_armament_roles.py", line 511, in test_the_pairing_artifact_records_what_it_was_built_from
+    self.assertEqual(bap.input_fingerprints(ROOT), doc["inputs"])
+AssertionError: {'doc[373 chars]n': '116caaf6c71402a94466dc42fb25c81ada44b144e[63722 chars]79f'} != {'doc[373 chars]n': 'a5a630bb7ec861af217b29ba34b65f429ae53797e[63722 chars]79f'}
+Diff is 90018 characters long. Set self.maxDiff to None to see it.
+
+======================================================================
+FAIL: test_complete_actors_and_all_consumer_routes_are_exact (test_chained_owned_names.ChainedOwnedNamesTests.test_complete_actors_and_all_consumer_routes_are_exact)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_chained_owned_names.py", line 28, in test_complete_actors_and_all_consumer_routes_are_exact
+    self.assertEqual(digest(restore(node_to_obj(self.rules.resolve(actor)), self.reverse)), expected, actor)
+AssertionError: 'ee2b37d3c754dd820cac69134556bbaf46baea6f9dffc5a2fabbe404b13a6a9f' != '951d61ea00c4abac35d5cb3cfc61af772ee5007ebe0c8e1be689ab8ca5047f77'
+- ee2b37d3c754dd820cac69134556bbaf46baea6f9dffc5a2fabbe404b13a6a9f
++ 951d61ea00c4abac35d5cb3cfc61af772ee5007ebe0c8e1be689ab8ca5047f77
+ : ra1_soviets_btr80
+
+======================================================================
+FAIL: test_ninety_raw_resolved_and_ordered_payloads_are_exact (test_chained_owned_names.ChainedOwnedNamesTests.test_ninety_raw_resolved_and_ordered_payloads_are_exact)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_chained_owned_names.py", line 22, in test_ninety_raw_resolved_and_ordered_payloads_are_exact
+    self.assertEqual(digest(restore(node_to_obj(resolved), self.reverse)), self.before['all_weapon_hashes'][old], new)
+AssertionError: '1e112e9b55ede9c77333ab350a156e70b3c2cf40aae797aeb6866f4258418898' != 'f228cc15ac2f8702dd4f2cbc559a5af568a2c37b11d36f6ab211b23aaade701b'
+- 1e112e9b55ede9c77333ab350a156e70b3c2cf40aae797aeb6866f4258418898
++ f228cc15ac2f8702dd4f2cbc559a5af568a2c37b11d36f6ab211b23aaade701b
+ : td_nod_chemicalrocketsoldier_chemrockets
+
+======================================================================
+FAIL: test_source_bodies_only_change_five_internal_inheritance_links (test_closed_owner_names.ClosedOwnerNameTests.test_source_bodies_only_change_five_internal_inheritance_links)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_closed_owner_names.py", line 53, in test_source_bodies_only_change_five_internal_inheritance_links
+    self.assertEqual(digest([ordered(c) for c in node.children]),
+AssertionError: 'ebdd5b12e3acb1eb5787906b6d65a3f9fc894f8b3d02a187c2446422272cc3c4' != 'e844bdc1890bdc178a23fb73185cc1d8d3b829131c4c48c46df402023559931a'
+- ebdd5b12e3acb1eb5787906b6d65a3f9fc894f8b3d02a187c2446422272cc3c4
++ e844bdc1890bdc178a23fb73185cc1d8d3b829131c4c48c46df402023559931a
+ : ra1_soviets_submarine_torpedo
+
+======================================================================
+FAIL: test_twelve_complete_actors_only_change_thirty_three_exact_slots (test_closed_owner_names.ClosedOwnerNameTests.test_twelve_complete_actors_only_change_thirty_three_exact_slots)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_closed_owner_names.py", line 73, in test_twelve_complete_actors_only_change_thirty_three_exact_slots
+    self.assertEqual(digest(obj), self.before['actor_hashes'][actor], actor)
+AssertionError: 'd018ecd089f1fd834e416c60acf268fb98df10753a0786ebd299427ed4b58c9d' != '69080e48e0fe17684a18d678a7f3d1cc97610ddb7bd74ce83bf236ac028626da'
+- d018ecd089f1fd834e416c60acf268fb98df10753a0786ebd299427ed4b58c9d
++ 69080e48e0fe17684a18d678a7f3d1cc97610ddb7bd74ce83bf236ac028626da
+ : ra1_allies_raspy
+
+======================================================================
+FAIL: test_twenty_five_complete_ordered_weapon_payloads (test_closed_owner_names.ClosedOwnerNameTests.test_twenty_five_complete_ordered_weapon_payloads)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_closed_owner_names.py", line 40, in test_twenty_five_complete_ordered_weapon_payloads
+    self.assertEqual(digest(node_to_obj(node)), self.before['weapon_hashes'][old], new)
+AssertionError: 'e79e8e9f22a8b0ab17d2b66e686b6a9b861a0d157df8c8edb353430b18bfb241' != 'b108bc0e8e5ff5bc1744c32f9acabcb9601aab1342d39806be3afc14d0cf8fc1'
+- e79e8e9f22a8b0ab17d2b66e686b6a9b861a0d157df8c8edb353430b18bfb241
++ b108bc0e8e5ff5bc1744c32f9acabcb9601aab1342d39806be3afc14d0cf8fc1
+ : ra1_soviets_submarine_torpedo
+
+======================================================================
+FAIL: test_every_complete_owner_is_unchanged_after_identity_reversal (test_closed_remaining_names.ClosedRemainingNamesTests.test_every_complete_owner_is_unchanged_after_identity_reversal)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_closed_remaining_names.py", line 61, in test_every_complete_owner_is_unchanged_after_identity_reversal
+    self.assertEqual(digest(restore(restore(node_to_obj(self.rules.resolve(actor)), self.later_reverse), self.reverse)), expected, actor)
+AssertionError: 'e86119c4deb9cb71bac96003c7b44bce375641a0a507e371811fcd95dfcddbc9' != '18165be10fa55f212de6ba51c464e2d17b964958eb63d7c2beffc3959df86d50'
+- e86119c4deb9cb71bac96003c7b44bce375641a0a507e371811fcd95dfcddbc9
++ 18165be10fa55f212de6ba51c464e2d17b964958eb63d7c2beffc3959df86d50
+ : td_gdi_mammothtank
+
+======================================================================
+FAIL: test_complete_actors_and_all_consumer_routes_are_exact (test_converter_owned_names.ConverterOwnedNamesTests.test_complete_actors_and_all_consumer_routes_are_exact)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_converter_owned_names.py", line 30, in test_complete_actors_and_all_consumer_routes_are_exact
+    self.assertEqual(digest(restore(obj, self.reverse)), expected, actor)
+AssertionError: '6e759ae58d8dafa328446fb2fb13a3fba4afd1bf355cd9d71145067faccca8f6' != 'aa4edce2cc673108fc98d579da65fc4585e672299ad1817cabc801f5e67bf7ce'
+- 6e759ae58d8dafa328446fb2fb13a3fba4afd1bf355cd9d71145067faccca8f6
++ aa4edce2cc673108fc98d579da65fc4585e672299ad1817cabc801f5e67bf7ce
+ : ra1_soviets_heavytank
+
+======================================================================
+FAIL: test_requested_units_and_ordos_turrets_use_standard_fluent_copy (test_d2k_faction_fluent.D2KFactionFluentTests.test_requested_units_and_ordos_turrets_use_standard_fluent_copy) (actor='harkonnen_combat_tank')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_d2k_faction_fluent.py", line 122, in test_requested_units_and_ordos_turrets_use_standard_fluent_copy
+    self.assertEqual(f"{key}.name", resolved.get("Tooltip", "Name"))
+AssertionError: 'actor_harkonnen_combat_tank.name' != 'actor_combat_tank_harkonnen.name'
+- actor_harkonnen_combat_tank.name
++ actor_combat_tank_harkonnen.name
+
+
+======================================================================
+FAIL: test_requested_units_and_ordos_turrets_use_standard_fluent_copy (test_d2k_faction_fluent.D2KFactionFluentTests.test_requested_units_and_ordos_turrets_use_standard_fluent_copy) (actor='ixian_duelist_tank')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_d2k_faction_fluent.py", line 122, in test_requested_units_and_ordos_turrets_use_standard_fluent_copy
+    self.assertEqual(f"{key}.name", resolved.get("Tooltip", "Name"))
+AssertionError: 'actor_ixian_duelist_tank.name' != 'actor_duelist_tank_ixian.name'
+- actor_ixian_duelist_tank.name
+?      ------
++ actor_duelist_tank_ixian.name
+?                   ++++++
+
+
+======================================================================
+FAIL: test_requested_units_and_ordos_turrets_use_standard_fluent_copy (test_d2k_faction_fluent.D2KFactionFluentTests.test_requested_units_and_ordos_turrets_use_standard_fluent_copy) (actor='ixian_heavy_inf')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_d2k_faction_fluent.py", line 122, in test_requested_units_and_ordos_turrets_use_standard_fluent_copy
+    self.assertEqual(f"{key}.name", resolved.get("Tooltip", "Name"))
+AssertionError: 'actor_ixian_heavy_inf.name' != 'actor_heavy_inf_ixian.name'
+- actor_ixian_heavy_inf.name
+?      ------
++ actor_heavy_inf_ixian.name
+?                ++++++
+
+
+======================================================================
+FAIL: test_requested_units_and_ordos_turrets_use_standard_fluent_copy (test_d2k_faction_fluent.D2KFactionFluentTests.test_requested_units_and_ordos_turrets_use_standard_fluent_copy) (actor='ixian_heavy_rocket_raider')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_d2k_faction_fluent.py", line 122, in test_requested_units_and_ordos_turrets_use_standard_fluent_copy
+    self.assertEqual(f"{key}.name", resolved.get("Tooltip", "Name"))
+AssertionError: 'actor_ixian_heavy_rocket_raider.name' != 'actor_heavy_rocket_raider_ixian.name'
+- actor_ixian_heavy_rocket_raider.name
+?      ------
++ actor_heavy_rocket_raider_ixian.name
+?                          ++++++
+
+
+======================================================================
+FAIL: test_requested_units_and_ordos_turrets_use_standard_fluent_copy (test_d2k_faction_fluent.D2KFactionFluentTests.test_requested_units_and_ordos_turrets_use_standard_fluent_copy) (actor='ixian_rocket_raider')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_d2k_faction_fluent.py", line 122, in test_requested_units_and_ordos_turrets_use_standard_fluent_copy
+    self.assertEqual(f"{key}.name", resolved.get("Tooltip", "Name"))
+AssertionError: 'actor_ixian_rocket_raider.name' != 'actor_rocket_raider_ixian.name'
+- actor_ixian_rocket_raider.name
+?      ------
++ actor_rocket_raider_ixian.name
+?                    ++++++
+
+
+======================================================================
+FAIL: test_only_reviewed_masks_changed (test_dual_positive_payload.PositiveDualPayloadTest.test_only_reviewed_masks_changed)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_dual_positive_payload.py", line 29, in test_only_reviewed_masks_changed
+    self.assertEqual(expected, node_to_obj(self.rules.resolve_weapon(name)))
+AssertionError: {'Bur[164 chars]o', 'RangeLimit': '12c0', 'Shadow': 'false', '[7314 chars]ge'}} != {'Bur[164 chars]o', 'Shadow': 'false', 'Speed': '512', 'Width'[7292 chars]ge'}}
+Diff is 20334 characters long. Set self.maxDiff to None to see it.
+
+======================================================================
+FAIL: test_resolved_state_matches_the_recorded_after_snapshot (test_dual_target_payload_cohort.DualTargetPayloadCohortTest.test_resolved_state_matches_the_recorded_after_snapshot)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_dual_target_payload_cohort.py", line 140, in test_resolved_state_matches_the_recorded_after_snapshot
+    self.assertEqual(node_to_obj(self.rules.resolve_weapon(name)),
+AssertionError: {'Bur[157 chars]noughFromSpeed': 'true', 'ContrailEndColor': '[7922 chars]ge'}} != {'Bur[157 chars]nough': '600', 'ContrailEndColor': '4488FF00',[7907 chars]ge'}}
+Diff is 22069 characters long. Set self.maxDiff to None to see it. : SteelFighterRailgun
+
+======================================================================
+FAIL: test_canonical_emitted_file_healthy_cli (test_economy_logger_cli.EconomyLoggerCliTest.test_canonical_emitted_file_healthy_cli)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_economy_logger_cli.py", line 54, in test_canonical_emitted_file_healthy_cli
+    self.check_fixture("schema", "OBSERVED_HEALTHY", 0)
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_economy_logger_cli.py", line 36, in check_fixture
+    self.assertTrue(pointer.exists(), "Run the AiEconomy dotnet test filter first")
+AssertionError: False is not true : Run the AiEconomy dotnet test filter first
+
+======================================================================
+FAIL: test_canonical_emitted_ready_250_cli (test_economy_logger_cli.EconomyLoggerCliTest.test_canonical_emitted_ready_250_cli)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_economy_logger_cli.py", line 57, in test_canonical_emitted_ready_250_cli
+    report = self.check_fixture("ready", "BLOCK", 20)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_economy_logger_cli.py", line 36, in check_fixture
+    self.assertTrue(pointer.exists(), "Run the AiEconomy dotnet test filter first")
+AssertionError: False is not true : Run the AiEconomy dotnet test filter first
+
+======================================================================
+FAIL: test_canonical_incomplete_cli (test_economy_logger_cli.EconomyLoggerCliTest.test_canonical_incomplete_cli)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_economy_logger_cli.py", line 61, in test_canonical_incomplete_cli
+    self.check_fixture("incomplete", "UNKNOWN", 21)
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_economy_logger_cli.py", line 36, in check_fixture
+    self.assertTrue(pointer.exists(), "Run the AiEconomy dotnet test filter first")
+AssertionError: False is not true : Run the AiEconomy dotnet test filter first
+
+======================================================================
+FAIL: test_destruction_three_cancel_cli (test_economy_logger_cli.EconomyLoggerCliTest.test_destruction_three_cancel_cli)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_economy_logger_cli.py", line 71, in test_destruction_three_cancel_cli
+    self.check_fixture("cancel-destroyed", "OBSERVED_HEALTHY", 0)
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_economy_logger_cli.py", line 36, in check_fixture
+    self.assertTrue(pointer.exists(), "Run the AiEconomy dotnet test filter first")
+AssertionError: False is not true : Run the AiEconomy dotnet test filter first
+
+======================================================================
+FAIL: test_duplicate_episode_is_unknown (test_economy_logger_cli.EconomyLoggerCliTest.test_duplicate_episode_is_unknown)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_economy_logger_cli.py", line 74, in test_duplicate_episode_is_unknown
+    self.check_fixture("cancel-duplicate", "UNKNOWN", 21)
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_economy_logger_cli.py", line 36, in check_fixture
+    self.assertTrue(pointer.exists(), "Run the AiEconomy dotnet test filter first")
+AssertionError: False is not true : Run the AiEconomy dotnet test filter first
+
+======================================================================
+FAIL: test_inactive_three_cancel_cli (test_economy_logger_cli.EconomyLoggerCliTest.test_inactive_three_cancel_cli)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_economy_logger_cli.py", line 68, in test_inactive_three_cancel_cli
+    self.check_fixture("cancel-inactive", "OBSERVED_HEALTHY", 0)
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_economy_logger_cli.py", line 36, in check_fixture
+    self.assertTrue(pointer.exists(), "Run the AiEconomy dotnet test filter first")
+AssertionError: False is not true : Run the AiEconomy dotnet test filter first
+
+======================================================================
+FAIL: test_proven_active_three_cancel_cli (test_economy_logger_cli.EconomyLoggerCliTest.test_proven_active_three_cancel_cli)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_economy_logger_cli.py", line 64, in test_proven_active_three_cancel_cli
+    report = self.check_fixture("cancel-active", "BLOCK", 20)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_economy_logger_cli.py", line 36, in check_fixture
+    self.assertTrue(pointer.exists(), "Run the AiEconomy dotnet test filter first")
+AssertionError: False is not true : Run the AiEconomy dotnet test filter first
+
+======================================================================
+FAIL: test_unclassified_removed_coverage_is_unknown (test_economy_logger_cli.EconomyLoggerCliTest.test_unclassified_removed_coverage_is_unknown)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_economy_logger_cli.py", line 77, in test_unclassified_removed_coverage_is_unknown
+    self.check_fixture("removed-unknown", "UNKNOWN", 21)
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_economy_logger_cli.py", line 36, in check_fixture
+    self.assertTrue(pointer.exists(), "Run the AiEconomy dotnet test filter first")
+AssertionError: False is not true : Run the AiEconomy dotnet test filter first
+
+======================================================================
+FAIL: test_resolved_profile_and_firing_contract (test_forgotten_cannonap.ForgottenCannonAP.test_resolved_profile_and_firing_contract) (weapon='TSHighVelocity')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_forgotten_cannonap.py", line 43, in test_resolved_profile_and_firing_contract
+    self.assertTrue(all(a['runtime_units'] == 0 for a in
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_resolved_profile_and_firing_contract (test_forgotten_cannonap.ForgottenCannonAP.test_resolved_profile_and_firing_contract) (weapon='TSHighVelocity2')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_forgotten_cannonap.py", line 43, in test_resolved_profile_and_firing_contract
+    self.assertTrue(all(a['runtime_units'] == 0 for a in
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_resolved_profile_and_firing_contract (test_forgotten_cannonap.ForgottenCannonAP.test_resolved_profile_and_firing_contract) (weapon='TSHighVelocityTur')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_forgotten_cannonap.py", line 43, in test_resolved_profile_and_firing_contract
+    self.assertTrue(all(a['runtime_units'] == 0 for a in
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_three_complete_actors_only_change_six_weapon_references (test_guarded_owned_names.GuardedOwnedNameTests.test_three_complete_actors_only_change_six_weapon_references)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_guarded_owned_names.py", line 57, in test_three_complete_actors_only_change_six_weapon_references
+    self.assertEqual(digest(obj), self.before['actor_hashes'][actor], actor)
+AssertionError: 'a203b5ecc975069f5e39d4f0ae96815bf2896f6ab5daa5f336f4dd16741f739a' != 'f34214f49a3ffeda527381cfb989ba24d7f3c250ac7e19e81f5777fb6d68a170'
+- a203b5ecc975069f5e39d4f0ae96815bf2896f6ab5daa5f336f4dd16741f739a
++ f34214f49a3ffeda527381cfb989ba24d7f3c250ac7e19e81f5777fb6d68a170
+ : ra1_allies_longbow
+
+======================================================================
+FAIL: test_abstract_reference_and_all_seven_ifvs_are_preserved (test_ifv_owned_names.IFVOwnedNameTests.test_abstract_reference_and_all_seven_ifvs_are_preserved)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_ifv_owned_names.py", line 84, in test_abstract_reference_and_all_seven_ifvs_are_preserved
+    self.assertEqual(digest(node_to_obj(node)), self.before['ifv_actor_hashes'][actor], actor)
+AssertionError: 'e026b64639972fbf6146dc35e6eca080eba1a1700d8f90ec3d9aa8e0f5e70ede' != 'a1c4b1581da1dd285acde0b1b3c3bd0dba93423e4ae66d8684acacae8864b8c8'
+- e026b64639972fbf6146dc35e6eca080eba1a1700d8f90ec3d9aa8e0f5e70ede
++ a1c4b1581da1dd285acde0b1b3c3bd0dba93423e4ae66d8684acacae8864b8c8
+ : ra2_allies_ifv_chrono
+
+======================================================================
+FAIL: test_four_complete_owners_only_change_seven_armaments (test_ifv_owned_names.IFVOwnedNameTests.test_four_complete_owners_only_change_seven_armaments)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_ifv_owned_names.py", line 59, in test_four_complete_owners_only_change_seven_armaments
+    self.assertEqual(digest(obj), self.before['actor_hashes'][actor], actor)
+AssertionError: 'd794e04746db595a6efb85c945394ab54087d227a11381a6893eb6887d2a95af' != 'ae1e08d222a600c98fb09cbaba2c1d7c5abbdf2a11fd13bae0a37838ebcd155d'
+- d794e04746db595a6efb85c945394ab54087d227a11381a6893eb6887d2a95af
++ ae1e08d222a600c98fb09cbaba2c1d7c5abbdf2a11fd13bae0a37838ebcd155d
+ : ra1_allies_machinegunner
+
+======================================================================
+FAIL: test_actual_csharp_generated_schema_file (test_insurance_summary.InsuranceSummaryTest.test_actual_csharp_generated_schema_file)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_insurance_summary.py", line 91, in test_actual_csharp_generated_schema_file
+    self.assertTrue(pointer.exists(), "run focused InsuranceTelemetry C# tests first")
+AssertionError: False is not true : run focused InsuranceTelemetry C# tests first
+
+======================================================================
+FAIL: test_complete_actors_and_all_consumer_routes_are_exact (test_lookup_owned_names.LookupOwnedNamesTests.test_complete_actors_and_all_consumer_routes_are_exact)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_lookup_owned_names.py", line 32, in test_complete_actors_and_all_consumer_routes_are_exact
+    self.assertEqual(digest(restore(restore(obj, self.later_reverse), self.reverse)), expected, actor)
+AssertionError: '5ebbb00f303cc4e88bdcd72b0efd6fc9c814d9f62c413b090b0b2f9fe519a4b9' != '6a91915976ed20e0a497d981d694f25fe96f2ec9e483b1ff17b16b0c2dae0ce1'
+- 5ebbb00f303cc4e88bdcd72b0efd6fc9c814d9f62c413b090b0b2f9fe519a4b9
++ 6a91915976ed20e0a497d981d694f25fe96f2ec9e483b1ff17b16b0c2dae0ce1
+ : ra1_allies_bastionartillerybunker
+
+======================================================================
+FAIL: test_actual_csharp_path_cli_unknown_and_immutable (test_mcv_health.McvHealthTest.test_actual_csharp_path_cli_unknown_and_immutable)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_mcv_health.py", line 97, in test_actual_csharp_path_cli_unknown_and_immutable
+    self.assertTrue(pointer.exists(), "Run McvHealthObservationTest first")
+AssertionError: False is not true : Run McvHealthObservationTest first
+
+======================================================================
+FAIL: test_complete_owners_change_only_declared_identity_values (test_shared_owner_wrappers.SharedOwnerWrapperTests.test_complete_owners_change_only_declared_identity_values)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_shared_owner_wrappers.py", line 69, in test_complete_owners_change_only_declared_identity_values
+    self.assertEqual(digest(restore(node_to_obj(node), self.reverse)), self.before['all_actor_hashes'][actor], actor)
+AssertionError: 'edeb2e02ce14a6527d57fa7de3b0a13129f5f17d21e3eda63d53cb5f25b42557' != 'fc28fbfe3f18b38abedc53ce41bd4521292a1cb4773bdfc1bf14b08af8e9a653'
+- edeb2e02ce14a6527d57fa7de3b0a13129f5f17d21e3eda63d53cb5f25b42557
++ fc28fbfe3f18b38abedc53ce41bd4521292a1cb4773bdfc1bf14b08af8e9a653
+ : td_gdi_grenadier
+
+======================================================================
+FAIL: test_fifty_seven_wrappers_pin_shared_roots_and_materialized_bodies (test_shared_owner_wrappers.SharedOwnerWrapperTests.test_fifty_seven_wrappers_pin_shared_roots_and_materialized_bodies)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_shared_owner_wrappers.py", line 40, in test_fifty_seven_wrappers_pin_shared_roots_and_materialized_bodies
+    self.assertEqual(digest(node_to_obj(resolved)), expected, name)
+AssertionError: 'add92f7f9f2bc72d6f9239e278e6e424f991e472dfbd57df71469e7c646d44a1' != 'de824f085c82caf50de5a3fd5e98e1a4d9e54fd5ecb323766112ea434f94ec07'
+- add92f7f9f2bc72d6f9239e278e6e424f991e472dfbd57df71469e7c646d44a1
++ de824f085c82caf50de5a3fd5e98e1a4d9e54fd5ecb323766112ea434f94ec07
+ : Rockets
+
+======================================================================
+FAIL: test_legacy_map_alias_is_exactly_unchanged (test_shared_owner_wrappers.SharedOwnerWrapperTests.test_legacy_map_alias_is_exactly_unchanged)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_shared_owner_wrappers.py", line 72, in test_legacy_map_alias_is_exactly_unchanged
+    self.assertEqual(digest(node_to_obj(self.rules.resolve('E3'))),
+AssertionError: '80b0539f0f9a5c0c76d4e628f6e64d161aa8b2390079b480b49b389bbf58908b' != 'db2803f88b0fb30084c5ecfa19f79eb9e164274d0af882c1d9e60266591d7e92'
+- 80b0539f0f9a5c0c76d4e628f6e64d161aa8b2390079b480b49b389bbf58908b
++ db2803f88b0fb30084c5ecfa19f79eb9e164274d0af882c1d9e60266591d7e92
+
+
+======================================================================
+FAIL: test_shield_mean_and_factor_match_the_pre_rename_model (test_shield_class_invariance.ShieldModelInvariance.test_shield_mean_and_factor_match_the_pre_rename_model)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_shield_class_invariance.py", line 51, in test_shield_mean_and_factor_match_the_pre_rename_model
+    self.assertAlmostEqual(tm.pseudo_armor_mean("Shield"), SHIELD_MEAN, places=3)
+AssertionError: 185.62907268170426 != 184.7102 within 3 places (0.918872681704272 difference)
+
+======================================================================
+FAIL: test_dragunov_keeps_anti_materiel_profile_and_loses_to_mammoth (test_sniper_damage_profile.SniperDamageProfileTests.test_dragunov_keeps_anti_materiel_profile_and_loses_to_mammoth)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_sniper_damage_profile.py", line 184, in test_dragunov_keeps_anti_materiel_profile_and_loses_to_mammoth
+    self.assertGreater(dragunov_ttk, mammoth_ttk)
+AssertionError: 85.61413875533829 not greater than 89.40972222222223
+
+======================================================================
+FAIL: test_all_owner_traits_change_only_exact_armament_references (test_soviet_owned_weapon_names.OwnedWeaponNames.test_all_owner_traits_change_only_exact_armament_references) (actor='ra1_soviets_btr80')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_soviet_owned_weapon_names.py", line 61, in test_all_owner_traits_change_only_exact_armament_references
+    self.assertEqual(restore_owned_checkpoint_actor(self, self.rules, 'soviet', actor),
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\cameo-wt\devin-engbump\tools\tests\reviewed_weapon_history.py", line 72, in restore_owned_checkpoint_actor
+    test.assertEqual(record['current_hash'], digest, (cohort, actor))
+AssertionError: '73756e05dd2f5dfa99f505315801bbffd1760e1dd92990d9e19383495249cc1c' != 'ee2b37d3c754dd820cac69134556bbaf46baea6f9dffc5a2fabbe404b13a6a9f'
+- 73756e05dd2f5dfa99f505315801bbffd1760e1dd92990d9e19383495249cc1c
++ ee2b37d3c754dd820cac69134556bbaf46baea6f9dffc5a2fabbe404b13a6a9f
+ : ('soviet', 'ra1_soviets_btr80')
+
+======================================================================
+FAIL: test_all_owner_traits_change_only_exact_armament_references (test_soviet_owned_weapon_names.OwnedWeaponNames.test_all_owner_traits_change_only_exact_armament_references) (actor='ra1_soviets_flaktruck')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_soviet_owned_weapon_names.py", line 61, in test_all_owner_traits_change_only_exact_armament_references
+    self.assertEqual(restore_owned_checkpoint_actor(self, self.rules, 'soviet', actor),
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\cameo-wt\devin-engbump\tools\tests\reviewed_weapon_history.py", line 72, in restore_owned_checkpoint_actor
+    test.assertEqual(record['current_hash'], digest, (cohort, actor))
+AssertionError: 'e1d8d81318b608629ee69cbb44600e54e806ef599322f8b8782da5c293d84acd' != 'f9b914b6239d24b9e16406c429d59c42607543bf9c022283a94e66e4423f0b15'
+- e1d8d81318b608629ee69cbb44600e54e806ef599322f8b8782da5c293d84acd
++ f9b914b6239d24b9e16406c429d59c42607543bf9c022283a94e66e4423f0b15
+ : ('soviet', 'ra1_soviets_flaktruck')
+
+======================================================================
+FAIL: test_all_owner_traits_change_only_exact_armament_references (test_soviet_owned_weapon_names.OwnedWeaponNames.test_all_owner_traits_change_only_exact_armament_references) (actor='ra1_soviets_monstertank')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_soviet_owned_weapon_names.py", line 61, in test_all_owner_traits_change_only_exact_armament_references
+    self.assertEqual(restore_owned_checkpoint_actor(self, self.rules, 'soviet', actor),
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\cameo-wt\devin-engbump\tools\tests\reviewed_weapon_history.py", line 72, in restore_owned_checkpoint_actor
+    test.assertEqual(record['current_hash'], digest, (cohort, actor))
+AssertionError: '274c0728da95261aea15c3137ae6dcdea8889d332e04f66686f06a4c2fe1d5f9' != '1b71a4d3ee31e8e05353ee80511c04e2d3d4a8404b1da14f0e3329f78d349a92'
+- 274c0728da95261aea15c3137ae6dcdea8889d332e04f66686f06a4c2fe1d5f9
++ 1b71a4d3ee31e8e05353ee80511c04e2d3d4a8404b1da14f0e3329f78d349a92
+ : ('soviet', 'ra1_soviets_monstertank')
+
+======================================================================
+FAIL: test_resolved_payload_equivalence (test_soviet_rename_repair.SovietRenameRepairTests.test_resolved_payload_equivalence)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_soviet_rename_repair.py", line 246, in test_resolved_payload_equivalence
+    self.assertEqual(diffs_seen, [], "unexplained resolved differences")
+AssertionError: Lists differ: [('ra1_soviets_samsite', ('AutoTarget', 'D[835 chars]ue')] != []
+
+First list contains 10 additional elements.
+First extra element 0:
+('ra1_soviets_samsite', ('AutoTarget', 'DynamicWeaponPriority'), '<missing>', 'true')
+
+Diff is 1037 characters long. Set self.maxDiff to None to see it. : unexplained resolved differences
+
+======================================================================
+FAIL: test_complete_normalized_resolved_payloads_match_baseline (test_td_naval_rename.TdNavalRenameTests.test_complete_normalized_resolved_payloads_match_baseline) (actor='CNCCA -> td_gdi_railgunbattleship')
+Whole-payload comparison (every field, not selected stats), with
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_td_naval_rename.py", line 314, in test_complete_normalized_resolved_payloads_match_baseline
+    self.assertEqual([], diffs)
+AssertionError: Lists differ: [] != ['/AttackMultiTurreted: added {"PauseOnCon[217 chars]ue"']
+
+Second list contains 3 additional elements.
+First extra element 0:
+'/AttackMultiTurreted: added {"PauseOnCondition": "disabled || blinded", "Turrets": "primary, secondary"}'
+
+- []
++ ['/AttackMultiTurreted: added {"PauseOnCondition": "disabled || blinded", '
++  '"Turrets": "primary, secondary"}',
++  '/AttackTurreted: removed (baseline {"PauseOnCondition": "disabled", '
++  '"Turrets": "primary, secondary"})',
++  '/AutoTarget/DynamicWeaponPriority: added "true"']
+
+======================================================================
+FAIL: test_complete_normalized_resolved_payloads_match_baseline (test_td_naval_rename.TdNavalRenameTests.test_complete_normalized_resolved_payloads_match_baseline) (actor='CNCPT -> td_gdi_missileboat')
+Whole-payload comparison (every field, not selected stats), with
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_td_naval_rename.py", line 314, in test_complete_normalized_resolved_payloads_match_baseline
+    self.assertEqual([], diffs)
+AssertionError: Lists differ: [] != ['/AutoTarget/DynamicWeaponPriority: added "true"']
+
+Second list contains 1 additional elements.
+First extra element 0:
+'/AutoTarget/DynamicWeaponPriority: added "true"'
+
+- []
++ ['/AutoTarget/DynamicWeaponPriority: added "true"']
+
+======================================================================
+FAIL: test_complete_normalized_resolved_payloads_match_baseline (test_td_naval_rename.TdNavalRenameTests.test_complete_normalized_resolved_payloads_match_baseline) (actor='CNCSS -> td_nod_attacksubmarine')
+Whole-payload comparison (every field, not selected stats), with
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_td_naval_rename.py", line 314, in test_complete_normalized_resolved_payloads_match_baseline
+    self.assertEqual([], diffs)
+AssertionError: Lists differ: [] != ['/AutoTarget/DynamicWeaponPriority: added "true"']
+
+Second list contains 1 additional elements.
+First extra element 0:
+'/AutoTarget/DynamicWeaponPriority: added "true"'
+
+- []
++ ['/AutoTarget/DynamicWeaponPriority: added "true"']
+
+======================================================================
+FAIL: test_complete_normalized_resolved_payloads_match_baseline (test_td_naval_rename.TdNavalRenameTests.test_complete_normalized_resolved_payloads_match_baseline) (actor='gdicarrier -> td_gdi_supercarrier')
+Whole-payload comparison (every field, not selected stats), with
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_td_naval_rename.py", line 314, in test_complete_normalized_resolved_payloads_match_baseline
+    self.assertEqual([], diffs)
+AssertionError: Lists differ: [] != ['/AutoTarget/DynamicWeaponPriority: added "true"']
+
+Second list contains 1 additional elements.
+First extra element 0:
+'/AutoTarget/DynamicWeaponPriority: added "true"'
+
+- []
++ ['/AutoTarget/DynamicWeaponPriority: added "true"']
+
+======================================================================
+FAIL: test_complete_normalized_resolved_payloads_match_baseline (test_td_naval_rename.TdNavalRenameTests.test_complete_normalized_resolved_payloads_match_baseline) (actor='nodlasercorvette -> td_nod_lasercorvette')
+Whole-payload comparison (every field, not selected stats), with
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_td_naval_rename.py", line 314, in test_complete_normalized_resolved_payloads_match_baseline
+    self.assertEqual([], diffs)
+AssertionError: Lists differ: [] != ['/AttackMultiTurreted: added {"PauseOnCon[251 chars]ue"']
+
+Second list contains 3 additional elements.
+First extra element 0:
+'/AttackMultiTurreted: added {"PauseOnCondition": "disabled || blinded", "Turrets": "secondary", "Armaments": "secondary"}'
+
+- []
++ ['/AttackMultiTurreted: added {"PauseOnCondition": "disabled || blinded", '
++  '"Turrets": "secondary", "Armaments": "secondary"}',
++  '/AttackTurreted: removed (baseline {"Armaments": "secondary", '
++  '"PauseOnCondition": "disabled", "Turrets": "secondary"})',
++  '/AutoTarget/DynamicWeaponPriority: added "true"']
+
+======================================================================
+FAIL: test_complete_normalized_resolved_payloads_match_baseline (test_td_naval_rename.TdNavalRenameTests.test_complete_normalized_resolved_payloads_match_baseline) (actor='ssmsub -> td_nod_ballisticmissilesubmarine')
+Whole-payload comparison (every field, not selected stats), with
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_td_naval_rename.py", line 314, in test_complete_normalized_resolved_payloads_match_baseline
+    self.assertEqual([], diffs)
+AssertionError: Lists differ: [] != ['/AutoTarget/DynamicWeaponPriority: added "true"']
+
+Second list contains 1 additional elements.
+First extra element 0:
+'/AutoTarget/DynamicWeaponPriority: added "true"'
+
+- []
++ ['/AutoTarget/DynamicWeaponPriority: added "true"']
+
+======================================================================
+FAIL: test_twenty_three_exact_armaments_preserve_eight_complete_owners (test_td_owned_names.TDOwnedNameTests.test_twenty_three_exact_armaments_preserve_eight_complete_owners)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_td_owned_names.py", line 56, in test_twenty_three_exact_armaments_preserve_eight_complete_owners
+    self.assertEqual(digest(obj), self.before['actor_hashes'][actor], actor)
+AssertionError: 'da60bf73d8bf4590293545668b5d2d30dc24db1b72dba5c5784e62c265e64814' != 'c9ccd331f8b41b94dcc2d2457da1afbe4e2829f513204d2a8033c2f349281b60'
+- da60bf73d8bf4590293545668b5d2d30dc24db1b72dba5c5784e62c265e64814
++ c9ccd331f8b41b94dcc2d2457da1afbe4e2829f513204d2a8033c2f349281b60
+ : td_gdi_humvee
+
+======================================================================
+FAIL: test_complete_actor_payloads_only_change_four_weapon_values (test_tiger_weapon_ownership.TigerOwnershipTests.test_complete_actor_payloads_only_change_four_weapon_values)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_tiger_weapon_ownership.py", line 62, in test_complete_actor_payloads_only_change_four_weapon_values
+    self.assertEqual(digest(obj),self.before['actor_hashes'][actor])
+AssertionError: 'd4259e37c96ff36fceefe4167bcbe6bbf5c4773525ebd8e2ae119eac6f58c679' != 'f481b0029be4c6ff974f60cfe9f2b1dd342e2718db1f7cfb01ecd389706b6940'
+- d4259e37c96ff36fceefe4167bcbe6bbf5c4773525ebd8e2ae119eac6f58c679
++ f481b0029be4c6ff974f60cfe9f2b1dd342e2718db1f7cfb01ecd389706b6940
+
+
+======================================================================
+FAIL: test_active_actor_and_weapon_rules_have_no_duplicate_traits (test_weapon_correctness_followups.WeaponCorrectnessFollowupTests.test_active_actor_and_weapon_rules_have_no_duplicate_traits)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_weapon_correctness_followups.py", line 290, in test_active_actor_and_weapon_rules_have_no_duplicate_traits
+    self.assertEqual(expected, findings)
+AssertionError: Items in the second set but not the first:
+('AsianTurretPlasma', 'Warhead@FireShrapnel', '<missing>')
+('Naxis_Komet_AA', 'Projectile', '<missing>')
+('ConsortiumMissileSystem', 'Projectile', '<missing>')
+('ra1_soviets_volkov_volkovmagneticweaponincendiarytesla', 'ReloadDelay', '<missing>')
+('ManifoldMG', 'ValidTargets', '<missing>')
+('RA2MultiThunderboltMissile_AA', 'Projectile', '<missing>')
+('AsianChaosMine', 'Report', '<missing>')
+('RA2Medusa_AA', 'Projectile', '<missing>')
+('ScrinRiftDamage', 'Projectile', '-Projectile')
+('NanoReturnHeal', 'Warhead@Heal', '<missing>')
+('AAGunBoatFlak', 'Warhead@Concrete', '<missing>')
+('RA2FreedomAK47_elite', 'Warhead@Concrete', '<missing>')
+('schwarzermond_lunarsoldier_rifle', 'Report', '<missing>')
+('DeviatorMissile', 'Warhead@OwnerChange', '<missing>')
+('RA2MultiHoverMissile_AA_elite', 'Projectile', '<missing>')
+('RA2DepthCharge', 'ReloadDelay', '<missing>')
+('TS70mmTur', 'ReloadDelay', '<missing>')
+('AsianTurretPlasma', 'Warhead@Smudge', '<missing>')
+('NaxiMP40Laser', 'Warhead@DuneSand', '<missing>')
+('AsianTurretPlasma', 'Report', '<missing>')
+('ordos_airmine', 'Warhead@HeavyBombPercentage', '<missing>')
+('ordos_airmine', 'Warhead@TankDestroyerCannonPercentage', '<missing>')
+('Hakureiring2', 'ValidTargets', '<missing>')
+('DredMissile', 'Warhead@Demolition_Light', '<missing>')
+('DredMissile', 'Warhead@Effect', '<missing>')
+('AsianTurretPlasma', 'Warhead@DuneRock', '<missing>')
+('RA2FreedomAK47_elite', 'Warhead@EffectAir', '<missing>')
+('GoliathMk2Rockets_AA', 'Projectile', '<missing>')
+('YuriGatlingTankMG3', 'Warhead@Bullet_Medium_Flat', '<missing>')
+('NaxiMP40Laser', 'Warhead@ShieldHitEffect', '<missing>')
+('AsianTurretPlasma', 'Warhead@EffectAir', '<missing>')
+('NaxiMP40Laser', 'Warhead@RA2Crater', '<missing>')
+('RA2FreedomAK47_elite', 'Warhead@Glow', '<missing>')
+('RA2MammothTusk_AA', 'Projectile', '<missing>')
+('NaxiMP40Laser', 'ReloadDelay', '<missing>')
+('RA160mmE_elite', 'Warhead@Concussion_Medium_Flat', '<missing>')
+('HMG_Duelist_upgrade', 'Warhead@ShieldHit', '<missing>')
+('A10CarrierMissiles_AA', 'Projectile', '<missing>')
+('ordos_airmine', 'Warhead@LightChemicalWeaponPercentage', '<missing>')
+('ScoutRockets_AA', 'Projectile', '<missing>')
+('NaxiMP40Laser', 'Projectile', '<missing>')
+('CabalReaperMissiles_AA', 'Projectile', '<missing>')
+('RA2Virusgun2', 'ValidTargets', '<missing>')
+('o155mm', 'Warhead@CannonHE_Medium', '<missing>')
+('ManifoldMG', 'Range', '<missing>')
+('td_nod_samsite_dragon', 'Projectile', '<missing>')
+('schwarzermond_lunarsoldier_rifle', 'Range', '<missing>')
+('CabalReaperMissiles', 'Projectile', '<missing>')
+('NaxiMP40Laser', 'Warhead@Smudge', '<missing>')
+('RA2ThunderboltMissile_AA_elite', 'Projectile', '<missing>')
+('TSNODRedEye', 'Projectile', '<missing>')
+('schwarzermond_lunarsoldier_rifle', 'Projectile', '<missing>')
+('RA2Virusgun3', 'Warhead@ShieldHitEffect', '<missing>')
+('DredMissile', 'Projectile', '<missing>')
+('td_gdi_humveemkii_rocketshumvee2amt_AA', 'Projectile', '<missing>')
+('YuriGatlingTankMG2_AA', 'Warhead@Bullet_Medium_Flat', '<missing>')
+('Tentacle', 'Range', '<missing>')
+('WraithRockets_AA', 'Projectile', '<missing>')
+('TanyaBomb', 'Report', '<missing>')
+('D2K_APC_Rocket_AA', 'Projectile', '<missing>')
+('AsianQuasarBoatAG', 'Projectile', '-Projectile')
+('RA2120xmm_tesla_elite', 'Burst', '<missing>')
+('RA2FreedomAK47_elite', 'Warhead@ShieldHit', '<missing>')
+('RA2120xmm_fire_elite', 'BurstDelays', '<missing>')
+('ConsortiumMissileSystem_EMP', 'Projectile', '<missing>')
+('ra1_soviets_volkov_volkovmagneticweaponincendiarytesla', 'Warhead@ShieldHit', '<missing>')
+('ra1_soviets_volkov_volkovmagneticweaponincendiarytesla', 'Warhead@Concrete', '<missing>')
+('AAGunBoatFlak', 'Warhead@Flak_Medium', '<missing>')
+('RA2FreedomAK47_elite', 'Warhead@Effect', '<missing>')
+('RA2FreedomAK47_elite', 'Warhead@DuneRock', '<missing>')
+('ManifoldMG', 'ReloadDelay', '<missing>')
+('AAGunBoatFlak', 'Warhead@ShieldHit', '<missing>')
+('Spore_AA', 'Projectile', '<missing>')
+('GoliathRockets_AA', 'Projectile', '<missing>')
+('AsianQuasarBoatAG', 'Warhead@Plasma_Heavy_Flat', '-Warhead@Plasma_Heavy_Flat')
+('RA2MultiHoverMissile_elite', 'Projectile', '<missing>')
+('TSBombSonic', 'ValidTargets', '<missing>')
+('D2K_Rocket_Trooper_AA', 'Projectile', '<missing>')
+('AsianQuasarAG', 'Projectile', '-Projectile')
+('PhoenixRocket', 'Warhead@1Dam', '<missing>')
+('AAGunBoatFlak', 'ValidTargets', '<missing>')
+('RA2Virusgun3', 'Warhead@Cloud', '<missing>')
+('TSScoopDualTur', 'Range', '<missing>')
+('RA2MultiHoverMissile_elite', 'Range', '<missing>')
+('td_gdi_humveemkii_rocketshumvee2_AA', 'Projectile', '<missing>')
+('RA2MedusaAG', 'Projectile', '-Projectile')
+('ExplosiveDebris', 'Warhead@Demolition_Light', '<missing>')
+('schwarzermond_lunarsoldier_rifle', 'ReloadDelay', '<missing>')
+('YuriGatlingTankMG1', 'Warhead@Bullet_Medium_Flat', '<missing>')
+('NaxiMP40Laser', 'Warhead@ShieldHit', '<missing>')
+('RA2120xmm_tesla_elite', 'BurstDelays', '<missing>')
+('NaxiMP40Laser', 'Warhead@Concrete', '<missing>')
+('MutaliskSpore', 'Range', '<missing>')
+('TSNODTibRedEye', 'Projectile', '<missing>')
+('RA2MultiHoverMissile_elite', 'Warhead@MissileAP_Light', '<missing>')
+('RA2FreedomAK47_elite', 'Warhead@Effect2', '<missing>')
+('RA2ThunderboltMissile_AA', 'Projectile', '<missing>')
+('AAGunBoatFlak', 'Warhead@SmallArmsPercentage', '<missing>')
+('Tentacle', 'ReloadDelay', '<missing>')
+('o110mm_Gun', 'Projectile', '<missing>')
+('TSAegisMissile', 'Projectile', '<missing>')
+('RA2120xmm_fire_elite', 'Burst', '<missing>')
+('NaxiMP40Laser', 'Burst', '<missing>')
+('RA2APCRocket_AA', 'Projectile', '<missing>')
+('TSMutApcCannon', 'ValidTargets', '<missing>')
+('TSMammothTusk2II_AA', 'Projectile', '<missing>')
+('RA2FreedomAK47_elite', 'Warhead@ChaingunPercentage', '<missing>')
+('ra1_soviets_volkov_volkovmagneticweaponincendiarytesla', 'BurstDelays', '<missing>')
+('RA2120xmm_tesla_elite', 'Range', '<missing>')
+('CabalHeavyReaperMissiles_AA', 'Projectile', '<missing>')
+('TSAAPCCannon', 'ValidTargets', '<missing>')
+('AAGunBoatFlak', 'Warhead@GrenadePercentage', '<missing>')
+('AsianTurretPlasma', 'Warhead@Plasma_Heavy_Flat', '<missing>')
+('ScourgeExplosion', 'Projectile', '<missing>')
+('NaxiMP40Laser', 'Warhead@DuneRock', '<missing>')
+('RA2Virusgun3', 'Warhead@Toxic_Medium', '<missing>')
+('AAGunBoatFlak', 'Warhead@ChaingunPercentage', '<missing>')
+('NaxiMP40Laser', 'Warhead@EffectAir', '<missing>')
+('ordos_airmine', 'Warhead@FlakWeaponPercentage', '<missing>')
+('TSScoopDualTur', 'ReloadDelay', '<missing>')
+('TSGDIRedEye', 'Projectile', '<missing>')
+('RA2FreedomAK47_elite', 'Warhead@Bullet_Medium_Flat', '<missing>')
+('TS70mmTur', 'Range', '<missing>')
+('AsianTurretPlasma', 'Warhead@Effect', '<missing>')
+('TSMammothTusk2_AA', 'Projectile', '<missing>')
+('TSBombSonic', 'Range', '<missing>')
+('RA2Virusgun', 'Warhead@Toxic_Light', '<missing>')
+('YuriGatlingTankMG1_AA', 'Warhead@Bullet_Medium_Flat', '<missing>')
+('WyvernRockets', 'ReloadDelay', '<missing>')
+('RA2Virusgun3', 'Warhead@EffectAir', '<missing>')
+('RA2LargeDebris', 'Projectile', '<missing>')
+('ra1_soviets_volkov_volkovmagneticweaponincendiarytesla', 'Warhead@Effect', '<missing>')
+('ValkyrieRockets', 'Projectile', '<missing>')
+('RA2FreedomAK47_elite', 'Warhead@DuneSand', '<missing>')
+('d2k_air_drone_guns', 'Warhead@Bullet_Medium', '<missing>')
+('RA2DepthCharge', 'Report', '<missing>')
+('TSAdatsMissile_AA', 'ValidTargets', '<missing>')
+('NaxInterceptorRockets', 'Projectile', '<missing>')
+('RA2120xmm_fire_elite', 'Range', '<missing>')
+('YuriGatlingTankMG3_AA', 'Warhead@Bullet_Medium_Flat', '<missing>')
+('ordos_airmine', 'Warhead@MediumMissilePercentage', '<missing>')
+('RA2FreedomAK47_elite', 'Warhead@ShieldHitEffect', '<missing>')
+('RA2FreedomAK47_elite', 'Warhead@Effect1', '<missing>')
+('NaxiMP40Laser', 'Report', '<missing>')
+('MigMissiles_AA_elite', 'Projectile', '<missing>')
+('RA2MammothTusk_AA_elite', 'Projectile', '<missing>')
+('AsianTurretPlasma', 'ReloadDelay', '<missing>')
+('TSBombSonic', 'ReloadDelay', '<missing>')
+('RA2HoverMissile_AA', 'Projectile', '<missing>')
+('RA2FreedomAK47_elite', 'Warhead@EffectWater', '<missing>')
+('AsianTurretPlasma', 'Projectile', '<missing>')
+('CabalRocketCyborgRockets', 'Projectile', '<missing>')
+('NaxiMP40Laser', 'Warhead@Effect', '<missing>')
+('AAGunBoatFlak', 'Warhead@ShieldHitEffect', '<missing>')
+('RA2HoverMissile_AA_elite', 'Projectile', '<missing>')
+('ra1_soviets_volkov_volkovmagneticweaponincendiarytesla', 'Warhead@EffectWater', '<missing>')
+('RA2APCRocket_AA_elite', 'Projectile', '<missing>')
+('ra1_soviets_volkov_volkovmagneticweaponincendiarytesla', 'Warhead@GrenadePercentage', '<missing>')
+('ra1_soviets_volkov_volkovmagneticweaponincendiarytesla', 'Warhead@MediumChemicalWeaponPercentage', '<missing>')
+('RA2Virusgun3', 'Warhead@Concrete', '<missing>')
+('AsianTurretPlasma', 'Range', '<missing>')
+('oDevBullet', 'Warhead@CannonHE_Medium', '<missing>')
+('MissileTurret', 'Projectile', '<missing>')
+('RA2MultiThunderboltMissile_AA_elite', 'Projectile', '<missing>')
+('ra1_soviets_volkov_volkovmagneticweaponincendiarytesla', 'Projectile', '<missing>')
+('PhoenixRocket', 'Warhead@Shrapnel', '<missing>')
+('AAGunBoatFlak', 'Range', '<missing>')
+('RA2FreedomAK47_elite', 'Warhead@Smudge', '<missing>')
+('ExplosiveDebris', 'Projectile', '<missing>')
+('TSAdatsMissile_AA', 'Projectile', '<missing>')
+('TSMammothTusk_elite', 'Projectile', '<missing>')
+('ScrinRiftDamage', 'ReloadDelay', '<missing>')
+('RA2MultiHoverMissile_AA', 'Projectile', '<missing>')
+('TanyaBomb', 'Warhead@Effect', '<missing>')
+('MigMissiles_AA', 'Projectile', '<missing>')
+('D2K_Rocket_AA', 'Projectile', '<missing>')
+('ra1_soviets_volkov_volkovmagneticweaponincendiarytesla', 'Range', '<missing>')
+('YuriGatlingTankMG2', 'Warhead@Bullet_Medium_Flat', '<missing>')
+('RA2Virusgun3', 'Warhead@ShieldHit', '<missing>')
+('MutaliskSpore', 'ReloadDelay', '<missing>')
+('RA2DepthCharge', 'Projectile', '<missing>')
+('NaxiMP40Laser', 'Warhead@EffectWater', '<missing>')
+('oDeathHandCluster', 'Projectile', '<missing>')
+('RA2Virusgun3', 'Warhead@Effect', '<missing>')
+('oDeviatorMissile', 'Warhead@MissileAP_Heavy', '<missing>')
+('AsianTurretPlasma', 'Warhead@DuneSand', '<missing>')
+('GuardianShoot', 'ReloadDelay', '<missing>')
+('DeathHandCluster', 'Projectile', '<missing>')
+('RA2FreedomAK47_elite', 'Warhead@SniperWeaponExtraDamage', '<missing>')
+('TanyaBomb', 'Warhead@Demolition_Heavy_Flat', '<missing>')
+('RA2DepthCharge', 'Range', '<missing>')
+('o110mm_Gun', 'Warhead@CannonHE_Medium', '<missing>')
+('ordos_airmine', 'Warhead@Shrapnel', '<missing>')
+('AAGunBoatFlak', 'Warhead@Glow', '<missing>')
+('WyvernRockets', 'Range', '<missing>')
+('CabalRocketCyborgRocketsUpgraded', 'Projectile', '<missing>')
+('RA2Virusgun', 'ValidTargets', '<missing>')
+('D2K_Annihilator_AA', 'Projectile', '<missing>')
+('CabalHeavyReaperMissiles', 'Projectile', '<missing>')
+('AsianQuasarAG', 'Warhead@Plasma_Heavy_Flat', '-Warhead@Plasma_Heavy_Flat')
+('td_gdi_firehawk_firehawkmissiles_AA', 'Projectile', '<missing>')
+('RA2Patriot', 'Projectile', '<missing>')
+('GuardianShoot', 'Range', '<missing>')
+('NaxiMP40Laser', 'Range', '<missing>')
+('RA2FreedomAK47_elite', 'Warhead@RA2Crater', '<missing>')
+('RA2FreedomAK47_elite', 'Warhead@SniperWeaponPercentage', '<missing>')
+
+======================================================================
+FAIL: test_active_actor_and_weapon_rules_have_no_exact_duplicate_traits (test_weapon_correctness_followups.WeaponCorrectnessFollowupTests.test_active_actor_and_weapon_rules_have_no_exact_duplicate_traits)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_weapon_correctness_followups.py", line 219, in test_active_actor_and_weapon_rules_have_no_exact_duplicate_traits
+    self.assertEqual([], findings)
+AssertionError: Lists differ: [] != ['mods\\cameo\\ContentPacks\\RedAlert\\Jap[5243 chars]758']
+
+Second list contains 45 additional elements.
+First extra element 0:
+'mods\\cameo\\ContentPacks\\RedAlert\\Japan\\yaml\\weapons.yaml:Hakureiring2 > ValidTargets at 2497, 2536'
+
+Diff is 5700 characters long. Set self.maxDiff to None to see it.
+
+======================================================================
+FAIL: test_concrete_weapons_do_not_repeat_top_level_keys (test_weapon_source_key_integrity.WeaponSourceKeyIntegrityTests.test_concrete_weapons_do_not_repeat_top_level_keys)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_weapon_source_key_integrity.py", line 99, in test_concrete_weapons_do_not_repeat_top_level_keys
+    self.assertEqual([], duplicates)
+AssertionError: Lists differ: [] != [('A10CarrierMissiles_AA', 'Projectile', 2[9305 chars], 2)]
+
+Second list contains 206 additional elements.
+First extra element 0:
+('A10CarrierMissiles_AA', 'Projectile', 2)
+
+Diff is 10023 characters long. Set self.maxDiff to None to see it.
+
+======================================================================
+FAIL: test_corrected_inheritance_keys_keep_every_authored_parent (test_weapon_source_key_integrity.WeaponSourceKeyIntegrityTests.test_corrected_inheritance_keys_keep_every_authored_parent)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_weapon_source_key_integrity.py", line 205, in test_corrected_inheritance_keys_keep_every_authored_parent
+    self.assertTrue(expected <= actual, (name, expected - actual))
+AssertionError: False is not true : ('12MissilesSpawnerScud', {'^Effect_Flame_Medium', '^RA2HeavyMissile', '^Projectile_Flame_Medium', '^RA2Grenade'})
+
+======================================================================
+FAIL: test_live_inventory_matches_committed_measurement_without_exemptions (test_weapon_structure_inventory.WeaponStructureInventoryTests.test_live_inventory_matches_committed_measurement_without_exemptions)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_weapon_structure_inventory.py", line 53, in test_live_inventory_matches_committed_measurement_without_exemptions
+    self.assertEqual(committed, self.data)
+AssertionError: {'counts': {'concrete_weapons': 2434, 'exce[13021 chars]3']}} != {'exemption_policy': 'retired; reviewed par[5312 chars]r']}}
+Diff is 37395 characters long. Set self.maxDiff to None to see it.
+
+======================================================================
+FAIL: test_quantum_emp_anti_air_replacements_increase_damage (test_weapon_upgrade_contracts.WeaponUpgradeContractTest.test_quantum_emp_anti_air_replacements_increase_damage) (base='ConsortiumMissileSystem', upgraded='ConsortiumMissileSystem_EMP')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_weapon_upgrade_contracts.py", line 170, in test_quantum_emp_anti_air_replacements_increase_damage
+    self._assert_not_weaker(base, upgraded, upgrade.AIR)
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_weapon_upgrade_contracts.py", line 39, in _assert_not_weaker
+    self.assertGreaterEqual(
+AssertionError: 884.0 not greater than or equal to 954.8571428571428 : ConsortiumMissileSystem_EMP regressed against Fighter versus ConsortiumMissileSystem
+
+======================================================================
+FAIL: test_thunderbolt_patriot_is_an_anti_air_upgrade (test_weapon_upgrade_contracts.WeaponUpgradeContractTest.test_thunderbolt_patriot_is_an_anti_air_upgrade)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_weapon_upgrade_contracts.py", line 88, in test_thunderbolt_patriot_is_an_anti_air_upgrade
+    self._assert_not_weaker("RA2Patriot", "RA2PatriotThunderboltMissile", upgrade.AIR)
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_weapon_upgrade_contracts.py", line 39, in _assert_not_weaker
+    self.assertGreaterEqual(
+AssertionError: 894.0555555555555 not greater than or equal to 905.5555555555555 : RA2PatriotThunderboltMissile regressed against Fighter versus RA2Patriot
+
+======================================================================
+FAIL: test_all_five_actor_payloads_only_change_weapon_identity (test_yak_weapon_ownership.YakOwnershipTests.test_all_five_actor_payloads_only_change_weapon_identity)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\cameo-wt\devin-engbump\tools\tests\test_yak_weapon_ownership.py", line 81, in test_all_five_actor_payloads_only_change_weapon_identity
+    actual = restore_owned_checkpoint_actor(self, self.rules, 'yak', actor)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\cameo-wt\devin-engbump\tools\tests\reviewed_weapon_history.py", line 72, in restore_owned_checkpoint_actor
+    test.assertEqual(record['current_hash'], digest, (cohort, actor))
+AssertionError: '3a2883d43177683a389d462e51af0e52c09dce82abe507967e86c762eea24f94' != '04bdb4f653e1498ced1a848da931bef115c8afe12c9fb066597c07453924b49f'
+- 3a2883d43177683a389d462e51af0e52c09dce82abe507967e86c762eea24f94
++ 04bdb4f653e1498ced1a848da931bef115c8afe12c9fb066597c07453924b49f
+ : ('yak', 'ra1_soviets_yakscoutplane')
+
+----------------------------------------------------------------------
+Ran 3190 tests in 2062.626s
+
+FAILED (failures=68, errors=3, skipped=64)
+accepted maps (both games of a pair): []
+receipt: C:\Users\AedisToru\AppData\Local\Temp\tmpis3amhsb\out\acceptance_receipt.json
+already current (not rewritten): C:\Users\AedisToru\AppData\Local\Temp\tmp7960ea0e\external\out.json
+already current (not rewritten): C:\Users\AedisToru\AppData\Local\Temp\tmpjywdn4pl\external\race.json
+already current (not rewritten): C:\Users\AedisToru\AppData\Local\Temp\tmpjywdn4pl\external\race.json
+already current (not rewritten): C:\Users\AedisToru\AppData\Local\Temp\tmpjywdn4pl\external\race.json
+already current (not rewritten): C:\Users\AedisToru\AppData\Local\Temp\tmpjywdn4pl\external\race.json
+already current (not rewritten): C:\Users\AedisToru\AppData\Local\Temp\tmpjywdn4pl\external\race.json
+DRY RUN: 1 ledger(s); no YAML written
+staged 1 ledger(s); no YAML written
+refinery law check: 0 genericbot player-match(es), warn-latency=2500t
+FAIL = per_anchor_max>1 | base>0 | gap>1 | tier-2 while fields unserved; n/a = field absent from old logs
+
+genericbot
+verdict  map  game/player  refs  per_anchor_max  base  gap_hist  tier_viol  lat_p50  lat_p90  lat_max  lat_never  peak_cov  final_cov  fails;warns
+
+classic / non-generic (information only, never fails)
+verdict  map  game/player  refs  per_anchor_max  base  gap_hist  tier_viol  lat_p50  lat_p90  lat_max  lat_never  peak_cov  final_cov  fails;warns
+info     m1   g1/Multi1    1     1               0     {0: 1}    n/a        -        -        -        -          100       100        -
+
+per map (genericbot)
+map  matches  FAIL  WARN  PASS  n/a  worst_per_anchor  base  gap_max  tier_viol  lat_p90  lat_never
+refinery law check: 1 genericbot player-match(es), warn-latency=2500t
+FAIL = per_anchor_max>1 | base>0 | gap>1 | tier-2 while fields unserved; n/a = field absent from old logs
+
+genericbot
+verdict  map  game/player  refs  per_anchor_max  base  gap_hist  tier_viol  lat_p50  lat_p90  lat_max  lat_never  peak_cov  final_cov  fails;warns
+PASS     m1   g1/Multi0    1     1               0     {0: 1}    0          -        -        -        -          100       100        -
+
+per map (genericbot)
+map  matches  FAIL  WARN  PASS  n/a  worst_per_anchor  base  gap_max  tier_viol  lat_p90  lat_never
+m1   1        0     0     1     0    1                 0     0        0          -        -
+refinery law check: 1 genericbot player-match(es), warn-latency=2500t
+FAIL = per_anchor_max>1 | base>0 | gap>1 | tier-2 while fields unserved; n/a = field absent from old logs
+
+genericbot
+verdict  map  game/player  refs  per_anchor_max  base  gap_hist  tier_viol  lat_p50  lat_p90  lat_max  lat_never  peak_cov  final_cov  fails;warns
+FAIL     m1   g2/Multi0    1     1               1     {0: 1}    n/a        -        -        -        -          100       100        base_reason_count=1
+
+per map (genericbot)
+map  matches  FAIL  WARN  PASS  n/a  worst_per_anchor  base  gap_max  tier_viol  lat_p90  lat_never
+m1   1        1     0     0     0    1                 1     0        n/a        -        -
+refinery law check: 2 genericbot player-match(es), warn-latency=2500t
+FAIL = per_anchor_max>1 | base>0 | gap>1 | tier-2 while fields unserved; n/a = field absent from old logs
+
+genericbot
+verdict  map  game/player  refs  per_anchor_max  base  gap_hist  tier_viol  lat_p50  lat_p90  lat_max  lat_never  peak_cov  final_cov  fails;warns
+PASS     m1   g1/Multi0    1     1               0     {0: 1}    0          -        -        -        -          100       100        -
+FAIL     m1   g2/Multi0    1     1               1     {0: 1}    n/a        -        -        -        -          100       100        base_reason_count=1
+
+per map (genericbot)
+map  matches  FAIL  WARN  PASS  n/a  worst_per_anchor  base  gap_max  tier_viol  lat_p90  lat_never
+m1   2        1     0     1     0    1                 1     0        0          -        -
+refinery law check: 1 genericbot player-match(es), warn-latency=2500t
+FAIL = per_anchor_max>1 | base>0 | gap>1 | tier-2 while fields unserved; n/a = field absent from old logs
+
+genericbot
+verdict  map  game/player  refs  per_anchor_max  base  gap_hist  tier_viol  lat_p50  lat_p90  lat_max  lat_never  peak_cov  final_cov  fails;warns
+PASS     m1   g1/Multi0    1     1               0     {0: 1}    0          -        -        -        -          100       100        -
+
+per map (genericbot)
+map  matches  FAIL  WARN  PASS  n/a  worst_per_anchor  base  gap_max  tier_viol  lat_p90  lat_never
+m1   1        0     0     1     0    1                 0     0        0          -        -
+refinery law check: 1 genericbot player-match(es), warn-latency=2500t
+FAIL = per_anchor_max>1 | base>0 | gap>1 | tier-2 while fields unserved; n/a = field absent from old logs
+
+genericbot
+verdict  map  game/player  refs  per_anchor_max  base  gap_hist  tier_viol  lat_p50  lat_p90  lat_max  lat_never  peak_cov  final_cov  fails;warns
+n/a      m1   g1/Multi0    1     1               0     n/a       n/a        -        -        -        -          100       100        -
+
+per map (genericbot)
+map  matches  FAIL  WARN  PASS  n/a  worst_per_anchor  base  gap_max  tier_viol  lat_p90  lat_never
+m1   1        0     0     0     1    1                 0     n/a      n/a        -        -
+refinery law check: 1 genericbot player-match(es), warn-latency=1000t
+FAIL = per_anchor_max>1 | base>0 | gap>1 | tier-2 while fields unserved; n/a = field absent from old logs
+
+genericbot
+verdict  map  game/player  refs  per_anchor_max  base  gap_hist  tier_viol  lat_p50  lat_p90  lat_max  lat_never  peak_cov  final_cov  fails;warns
+WARN     m1   g1/Multi0    1     1               0     {0: 1}    0          5900     5900     5900     -          100       100        claim_latency_p90=5900
+
+per map (genericbot)
+map  matches  FAIL  WARN  PASS  n/a  worst_per_anchor  base  gap_max  tier_viol  lat_p90  lat_never
+m1   1        0     1     0     0    1                 0     0        0          5900     -
+unknown argument(s): --bogus; supported: --dry-run
+  fixture_tank/Armament@PRIMARY.range: 40960 -> 41984
+  fixture_tank/Armament@PRIMARY.burstdelays: 2, 7 -> 5 (engine default)
+  fixture_tank.design.subtype: Unclassified -> MainBattleTank
+  fixture_tank.design.tech_tier: None -> 1
+  fixture_tank.design.unit_class: None -> 1.25
+  fixture_tank.design.special: None -> 0.9
+  fixture_tank/Armament@PRIMARY.weapon_class: None -> 1.5
+  fixture_tank/Armament@PRIMARY.reloaddelay: 1.0 -> 4
+  fixture_tank/Armament@PRIMARY.burst: 1 -> 3
+  fixture_tank/Armament@PRIMARY.range: 0.0 -> 1000
+  fixture_tank/Armament@PRIMARY.reloaddelay: 60 -> 61

@@ -1,0 +1,80 @@
+OpenRA engine version ad061ebf79029da4dcd3a841a9b2540e39cbf968 is required.
+Downloading engine...
+Version strings set to 'ad061ebf79029da4dcd3a841a9b2540e39cbf968'.
+Building in Release configuration for AMD64 ...
+  Determining projects to restore...
+  Restored C:\cameo-wt\devin-engbump\engine\OpenRA.Utility\OpenRA.Utility.csproj (in 556 ms).
+  Restored C:\cameo-wt\devin-engbump\engine\OpenRA.Mods.D2k\OpenRA.Mods.D2k.csproj (in 556 ms).
+  Restored C:\cameo-wt\devin-engbump\engine\OpenRA.Game\OpenRA.Game.csproj (in 556 ms).
+  Restored C:\cameo-wt\devin-engbump\engine\OpenRA.Server\OpenRA.Server.csproj (in 556 ms).
+  Restored C:\cameo-wt\devin-engbump\engine\OpenRA.Launcher\OpenRA.Launcher.csproj (in 556 ms).
+  Restored C:\cameo-wt\devin-engbump\engine\OpenRA.Platforms.Default\OpenRA.Platforms.Default.csproj (in 556 ms).
+  Restored C:\cameo-wt\devin-engbump\engine\OpenRA.Mods.Common\OpenRA.Mods.Common.csproj (in 556 ms).
+  Restored C:\cameo-wt\devin-engbump\engine\OpenRA.Mods.AS\OpenRA.Mods.AS.csproj (in 556 ms).
+  Restored C:\cameo-wt\devin-engbump\engine\OpenRA.Test\OpenRA.Test.csproj (in 556 ms).
+  Restored C:\cameo-wt\devin-engbump\engine\OpenRA.Mods.Cnc\OpenRA.Mods.Cnc.csproj (in 556 ms).
+  OpenRA.Game -> C:\cameo-wt\devin-engbump\engine\bin\OpenRA.Game.dll
+  OpenRA.Launcher -> C:\cameo-wt\devin-engbump\engine\bin\OpenRA.dll
+  OpenRA.Server -> C:\cameo-wt\devin-engbump\engine\bin\OpenRA.Server.dll
+  OpenRA.Utility -> C:\cameo-wt\devin-engbump\engine\bin\OpenRA.Utility.dll
+  OpenRA.Platforms.Default -> C:\cameo-wt\devin-engbump\engine\bin\OpenRA.Platforms.Default.dll
+  OpenRA.Mods.Common -> C:\cameo-wt\devin-engbump\engine\bin\OpenRA.Mods.Common.dll
+  OpenRA.Mods.D2k -> C:\cameo-wt\devin-engbump\engine\bin\OpenRA.Mods.D2k.dll
+  OpenRA.Mods.Cnc -> C:\cameo-wt\devin-engbump\engine\bin\OpenRA.Mods.Cnc.dll
+  OpenRA.Mods.AS -> C:\cameo-wt\devin-engbump\engine\bin\OpenRA.Mods.AS.dll
+  OpenRA.Test -> C:\cameo-wt\devin-engbump\engine\bin\OpenRA.Test.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:10.98
+Build succeeded.
+Downloading IP2Location GeoIP database.
+
+Building cameo in Release configuration...
+  Determining projects to restore...
+  Restored C:\cameo-wt\devin-engbump\OpenRA.Platforms.Null\OpenRA.Platforms.Null.csproj (in 228 ms).
+  Restored C:\cameo-wt\devin-engbump\OpenRA.Mods.Fransbot\OpenRA.Mods.Fransbot.csproj (in 228 ms).
+  Restored C:\cameo-wt\devin-engbump\OpenRA.Mods.Cameo.Unified\OpenRA.Mods.Cameo.Unified.csproj (in 228 ms).
+  Restored C:\cameo-wt\devin-engbump\OpenRA.Mods.Cameo.Contracts\OpenRA.Mods.Cameo.Contracts.csproj (in 228 ms).
+  Restored C:\cameo-wt\devin-engbump\OpenRA.Mods.Cameo\OpenRA.Mods.Cameo.csproj (in 228 ms).
+  Restored C:\cameo-wt\devin-engbump\OpenRA.Mods.CA\OpenRA.Mods.CA.csproj (in 228 ms).
+  5 of 11 projects are up-to-date for restore.
+C:\cameo-wt\devin-engbump\engine\OpenRA.Game\Actor.cs(610,4): warning SA1512: Single-line comments should not be followed by blank line (https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1512.md) [C:\cameo-wt\devin-engbump\engine\OpenRA.Game\OpenRA.Game.csproj]
+C:\cameo-wt\devin-engbump\engine\OpenRA.Game\Actor.cs(610,4): warning SA1515: Single-line comment should be preceded by blank line (https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1515.md) [C:\cameo-wt\devin-engbump\engine\OpenRA.Game\OpenRA.Game.csproj]
+C:\cameo-wt\devin-engbump\engine\OpenRA.Game\ModData.cs(45,49): warning RCS1170: Use read-only auto-implemented property (https://josefpihrt.github.io/docs/roslynator/analyzers/RCS1170) [C:\cameo-wt\devin-engbump\engine\OpenRA.Game\OpenRA.Game.csproj]
+C:\cameo-wt\devin-engbump\engine\OpenRA.Game\Actor.cs(37,2): warning SA1505: An opening brace should not be followed by a blank line (https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1505.md) [C:\cameo-wt\devin-engbump\engine\OpenRA.Game\OpenRA.Game.csproj]
+C:\cameo-wt\devin-engbump\engine\OpenRA.Game\Server\OrderBuffer.cs(51,15): warning SA1203: Constant fields should appear before non-constant fields (https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1203.md) [C:\cameo-wt\devin-engbump\engine\OpenRA.Game\OpenRA.Game.csproj]
+C:\cameo-wt\devin-engbump\engine\OpenRA.Game\Sound\Sound.cs(54,16): warning SA1203: Constant fields should appear before non-constant fields (https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1203.md) [C:\cameo-wt\devin-engbump\engine\OpenRA.Game\OpenRA.Game.csproj]
+C:\cameo-wt\devin-engbump\engine\OpenRA.Game\Graphics\SpriteCache.cs(106,13): warning SA1203: Constant fields should appear before non-constant fields (https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1203.md) [C:\cameo-wt\devin-engbump\engine\OpenRA.Game\OpenRA.Game.csproj]
+C:\cameo-wt\devin-engbump\engine\OpenRA.Game\Map\MapCache.cs(268,1): warning SA1507: Code should not contain multiple blank lines in a row (https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1507.md) [C:\cameo-wt\devin-engbump\engine\OpenRA.Game\OpenRA.Game.csproj]
+CSC : warning SA0001: XML comment analysis is disabled due to project configuration (https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA0001.md) [C:\cameo-wt\devin-engbump\engine\OpenRA.Game\OpenRA.Game.csproj]
+  OpenRA.Game -> C:\cameo-wt\devin-engbump\engine\bin\OpenRA.Game.dll
+  OpenRA.Platforms.Null -> C:\cameo-wt\devin-engbump\engine\bin\OpenRA.Platforms.Null.dll
+  OpenRA.Mods.Common -> C:\cameo-wt\devin-engbump\engine\bin\OpenRA.Mods.Common.dll
+  OpenRA.Mods.Cameo.Contracts -> C:\cameo-wt\devin-engbump\engine\bin\OpenRA.Mods.Cameo.Contracts.dll
+  OpenRA.Mods.D2k -> C:\cameo-wt\devin-engbump\engine\bin\OpenRA.Mods.D2k.dll
+  OpenRA.Mods.Cnc -> C:\cameo-wt\devin-engbump\engine\bin\OpenRA.Mods.Cnc.dll
+  OpenRA.Mods.AS -> C:\cameo-wt\devin-engbump\engine\bin\OpenRA.Mods.AS.dll
+  OpenRA.Mods.CA -> C:\cameo-wt\devin-engbump\engine\bin\OpenRA.Mods.CA.dll
+  OpenRA.Mods.Cameo.Unified -> C:\cameo-wt\devin-engbump\engine\bin\OpenRA.Mods.Cameo.Unified.dll
+  OpenRA.Mods.Fransbot -> C:\cameo-wt\devin-engbump\engine\bin\OpenRA.Mods.Fransbot.dll
+  OpenRA.Mods.Cameo -> C:\cameo-wt\devin-engbump\engine\bin\OpenRA.Mods.Cameo.dll
+
+Build succeeded.
+
+C:\cameo-wt\devin-engbump\engine\OpenRA.Game\Actor.cs(610,4): warning SA1512: Single-line comments should not be followed by blank line (https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1512.md) [C:\cameo-wt\devin-engbump\engine\OpenRA.Game\OpenRA.Game.csproj]
+C:\cameo-wt\devin-engbump\engine\OpenRA.Game\Actor.cs(610,4): warning SA1515: Single-line comment should be preceded by blank line (https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1515.md) [C:\cameo-wt\devin-engbump\engine\OpenRA.Game\OpenRA.Game.csproj]
+C:\cameo-wt\devin-engbump\engine\OpenRA.Game\ModData.cs(45,49): warning RCS1170: Use read-only auto-implemented property (https://josefpihrt.github.io/docs/roslynator/analyzers/RCS1170) [C:\cameo-wt\devin-engbump\engine\OpenRA.Game\OpenRA.Game.csproj]
+C:\cameo-wt\devin-engbump\engine\OpenRA.Game\Actor.cs(37,2): warning SA1505: An opening brace should not be followed by a blank line (https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1505.md) [C:\cameo-wt\devin-engbump\engine\OpenRA.Game\OpenRA.Game.csproj]
+C:\cameo-wt\devin-engbump\engine\OpenRA.Game\Server\OrderBuffer.cs(51,15): warning SA1203: Constant fields should appear before non-constant fields (https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1203.md) [C:\cameo-wt\devin-engbump\engine\OpenRA.Game\OpenRA.Game.csproj]
+C:\cameo-wt\devin-engbump\engine\OpenRA.Game\Sound\Sound.cs(54,16): warning SA1203: Constant fields should appear before non-constant fields (https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1203.md) [C:\cameo-wt\devin-engbump\engine\OpenRA.Game\OpenRA.Game.csproj]
+C:\cameo-wt\devin-engbump\engine\OpenRA.Game\Graphics\SpriteCache.cs(106,13): warning SA1203: Constant fields should appear before non-constant fields (https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1203.md) [C:\cameo-wt\devin-engbump\engine\OpenRA.Game\OpenRA.Game.csproj]
+C:\cameo-wt\devin-engbump\engine\OpenRA.Game\Map\MapCache.cs(268,1): warning SA1507: Code should not contain multiple blank lines in a row (https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1507.md) [C:\cameo-wt\devin-engbump\engine\OpenRA.Game\OpenRA.Game.csproj]
+CSC : warning SA0001: XML comment analysis is disabled due to project configuration (https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA0001.md) [C:\cameo-wt\devin-engbump\engine\OpenRA.Game\OpenRA.Game.csproj]
+    9 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:18.22
+Build succeeded.

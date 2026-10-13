@@ -1,0 +1,50 @@
+[
+ {
+  "module": "test_reconcile_r12_consumer_closure.py",
+  "rc": 0,
+  "sec": 13.9,
+  "tail": "4 passed in 13.63s"
+ },
+ {
+  "module": "test_rename_r12_compatibility_cohort.py",
+  "rc": 1,
+  "sec": 18.3,
+  "tail": "=========================== short test summary info ===========================\nFAILED tools/tests/test_rename_r12_compatibility_cohort.py::test_current_tree_contains_only_the_renamed_cohort\n1 failed, 11 passed in 18.02s"
+ },
+ {
+  "module": "test_round_trip_check.py",
+  "rc": 0,
+  "sec": 0.6,
+  "tail": "2 passed in 0.29s"
+ },
+ {
+  "module": "test_tune_build_order.py",
+  "rc": 0,
+  "sec": 0.8,
+  "tail": "34 passed in 0.54s"
+ },
+ {
+  "module": "test_tune_build_order_coverage.py",
+  "rc": 0,
+  "sec": 0.5,
+  "tail": "6 passed in 0.23s"
+ },
+ {
+  "module": "test_tune_plan_bandits.py",
+  "rc": 0,
+  "sec": 0.4,
+  "tail": "15 passed in 0.12s"
+ },
+ {
+  "module": "test_veto_scorecard.py",
+  "rc": 0,
+  "sec": 0.4,
+  "tail": "5 passed in 0.11s"
+ },
+ {
+  "module": "test_wave1_adjudication.py",
+  "rc": 1,
+  "sec": 0.6,
+  "tail": "FAILED tools/tests/test_wave1_adjudication.py::test_sync_tail_with_differing_match_records_stays_divergent\nFAILED tools/tests/test_wave1_adjudication.py::test_sync_tail_with_missing_match_records_stays_divergent\n6 failed, 14 passed in 0.32s"
+ }
+]

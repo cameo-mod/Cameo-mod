@@ -1,0 +1,7 @@
+C:\cameo-wt\devin-engbump\tools\run-bounded-python.ps1 : You cannot call a method on a null-valued expression.
+At C:\cameo-wt\devin-engbump\tools\run-bounded-tests.ps1:27 char:17
++ ...     $log = (& (Join-Path $PSScriptRoot 'run-bounded-python.ps1') -Pyt ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (:) [run-bounded-python.ps1], RuntimeException
+    + FullyQualifiedErrorId : InvokeMethodOnNull,run-bounded-python.ps1
+ 

@@ -1,0 +1,156 @@
+[
+ {
+  "module": "test_role_complete_profile_consolidation.py",
+  "rc": 0,
+  "tests": 8,
+  "sec": 19.6,
+  "tail": "----------------------------------------------------------------------\nRan 8 tests in 7.264s\n\nOK\n"
+ },
+ {
+  "module": "test_round_trip_check.py",
+  "rc": 5,
+  "tests": 0,
+  "sec": 0.1,
+  "tail": "----------------------------------------------------------------------\nRan 0 tests in 0.000s\n\nNO TESTS RAN\n"
+ },
+ {
+  "module": "test_routed_role_cohort.py",
+  "rc": 0,
+  "tests": 6,
+  "sec": 20.1,
+  "tail": "----------------------------------------------------------------------\nRan 6 tests in 7.220s\n\nOK\n"
+ },
+ {
+  "module": "test_rule_driven_energy_ordnance.py",
+  "rc": 0,
+  "tests": 5,
+  "sec": 20.7,
+  "tail": "----------------------------------------------------------------------\nRan 5 tests in 3.168s\n\nOK\n"
+ },
+ {
+  "module": "test_rule_driven_final_tranches.py",
+  "rc": 0,
+  "tests": 10,
+  "sec": 18.8,
+  "tail": "----------------------------------------------------------------------\nRan 10 tests in 7.006s\n\nOK\n"
+ },
+ {
+  "module": "test_rule_driven_heavy_explosives.py",
+  "rc": 0,
+  "tests": 3,
+  "sec": 19.4,
+  "tail": "----------------------------------------------------------------------\nRan 3 tests in 6.694s\n\nOK\n"
+ },
+ {
+  "module": "test_run_league.py",
+  "rc": 0,
+  "tests": 9,
+  "sec": 0.2,
+  "tail": "----------------------------------------------------------------------\nRan 9 tests in 0.060s\n\nOK\n"
+ },
+ {
+  "module": "test_run_pipeline.py",
+  "rc": 0,
+  "tests": 14,
+  "sec": 0.1,
+  "tail": "----------------------------------------------------------------------\nRan 14 tests in 0.001s\n\nOK\n"
+ },
+ {
+  "module": "test_same_family_stack_consolidation.py",
+  "rc": 0,
+  "tests": 5,
+  "sec": 29.9,
+  "tail": "----------------------------------------------------------------------\nRan 5 tests in 8.022s\n\nOK\n"
+ },
+ {
+  "module": "test_scaled_bullet_overrides.py",
+  "rc": 0,
+  "tests": 4,
+  "sec": 21.3,
+  "tail": "----------------------------------------------------------------------\nRan 4 tests in 15.749s\n\nOK\n"
+ },
+ {
+  "module": "test_scoop_chemical_merge_regression.py",
+  "rc": 0,
+  "tests": 3,
+  "sec": 3.5,
+  "tail": "----------------------------------------------------------------------\nRan 3 tests in 2.519s\n\nOK\n"
+ },
+ {
+  "module": "test_secondary_payload_routes.py",
+  "rc": 0,
+  "tests": 4,
+  "sec": 0.1,
+  "tail": "----------------------------------------------------------------------\nRan 4 tests in 0.000s\n\nOK\n"
+ },
+ {
+  "module": "test_seed_design_identity.py",
+  "rc": 0,
+  "tests": 37,
+  "sec": 1.6,
+  "tail": "----------------------------------------------------------------------\nRan 37 tests in 1.131s\n\nOK\nunknown argument(s): --bogus; supported: --dry-run\n"
+ },
+ {
+  "module": "test_shared_owner_wrappers.py",
+  "rc": 1,
+  "tests": 5,
+  "sec": 44.6,
+  "tail": "e \"C:\\cameo-wt\\devin-engbump\\tools\\tests\\test_shared_owner_wrappers.py\", line 72, in test_legacy_map_alias_is_exactly_unchanged\n    self.assertEqual(digest(node_to_obj(self.rules.resolve('E3'))),\nAssertionError: '80b0539f0f9a5c0c76d4e628f6e64d161aa8b2390079b480b49b389bbf58908b' != 'db2803f88b0fb30084c5ecfa19f79eb9e164274d0af882c1d9e60266591d7e92'\n- 80b0539f0f9a5c0c76d4e628f6e64d161aa8b2390079b480b49b389bbf58908b\n+ db2803f88b0fb30084c5ecfa19f79eb9e164274d0af882c1d9e60266591d7e92\n\n\n----------------------------------------------------------------------\nRan 5 tests in 34.305s\n\nFAILED (failures=3)\n"
+ },
+ {
+  "module": "test_shellmap_actor_references.py",
+  "rc": 0,
+  "tests": 2,
+  "sec": 7.2,
+  "tail": "----------------------------------------------------------------------\nRan 2 tests in 5.994s\n\nOK\n"
+ },
+ {
+  "module": "test_shield_class_invariance.py",
+  "rc": 1,
+  "tests": 6,
+  "sec": 4.3,
+  "tail": "test_shield_mean_and_factor_match_the_pre_rename_model)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\cameo-wt\\devin-engbump\\tools\\tests\\test_shield_class_invariance.py\", line 51, in test_shield_mean_and_factor_match_the_pre_rename_model\n    self.assertAlmostEqual(tm.pseudo_armor_mean(\"Shield\"), SHIELD_MEAN, places=3)\nAssertionError: 185.62907268170426 != 184.7102 within 3 places (0.918872681704272 difference)\n\n----------------------------------------------------------------------\nRan 6 tests in 3.013s\n\nFAILED (failures=1)\n"
+ },
+ {
+  "module": "test_shrapnel_damage.py",
+  "rc": 0,
+  "tests": 10,
+  "sec": 0.4,
+  "tail": "----------------------------------------------------------------------\nRan 10 tests in 0.314s\n\nOK\n"
+ },
+ {
+  "module": "test_shrapnel_scenario_report.py",
+  "rc": 0,
+  "tests": 5,
+  "sec": 0.1,
+  "tail": "----------------------------------------------------------------------\nRan 5 tests in 0.000s\n\nOK\n"
+ },
+ {
+  "module": "test_sniper_damage_profile.py",
+  "rc": 1,
+  "tests": 5,
+  "sec": 3.7,
+  "tail": "r_damage_profile.SniperDamageProfileTests.test_dragunov_keeps_anti_materiel_profile_and_loses_to_mammoth)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\cameo-wt\\devin-engbump\\tools\\tests\\test_sniper_damage_profile.py\", line 184, in test_dragunov_keeps_anti_materiel_profile_and_loses_to_mammoth\n    self.assertGreater(dragunov_ttk, mammoth_ttk)\nAssertionError: 85.61413875533829 not greater than 89.40972222222223\n\n----------------------------------------------------------------------\nRan 5 tests in 2.638s\n\nFAILED (failures=1)\n"
+ },
+ {
+  "module": "test_sonic_family_generation.py",
+  "rc": 0,
+  "tests": 5,
+  "sec": 0.2,
+  "tail": "----------------------------------------------------------------------\nRan 5 tests in 0.148s\n\nOK\n"
+ },
+ {
+  "module": "test_source_channel_reducer.py",
+  "rc": 0,
+  "tests": 10,
+  "sec": 0.1,
+  "tail": "----------------------------------------------------------------------\nRan 10 tests in 0.001s\n\nOK\n"
+ },
+ {
+  "module": "test_soviet_owned_weapon_names.py",
+  "rc": 1,
+  "tests": 4,
+  "sec": 3.4,
+  "tail": "mp\\tools\\tests\\reviewed_weapon_history.py\", line 72, in restore_owned_checkpoint_actor\n    test.assertEqual(record['current_hash'], digest, (cohort, actor))\nAssertionError: '274c0728da95261aea15c3137ae6dcdea8889d332e04f66686f06a4c2fe1d5f9' != '1b71a4d3ee31e8e05353ee80511c04e2d3d4a8404b1da14f0e3329f78d349a92'\n- 274c0728da95261aea15c3137ae6dcdea8889d332e04f66686f06a4c2fe1d5f9\n+ 1b71a4d3ee31e8e05353ee80511c04e2d3d4a8404b1da14f0e3329f78d349a92\n : ('soviet', 'ra1_soviets_monstertank')\n\n----------------------------------------------------------------------\nRan 4 tests in 2.560s\n\nFAILED (failures=3)\n"
+ }
+]

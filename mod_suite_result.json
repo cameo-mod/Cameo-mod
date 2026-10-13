@@ -1,0 +1,1936 @@
+{
+ "modules": 320,
+ "completed": 236,
+ "failed": [
+  "test_adats_air_first_role.py",
+  "test_additional_owned_names.py",
+  "test_aedis_target_policy.py",
+  "test_ai_headquarters_refinery_cleanup.py",
+  "test_ai_logging_integration.py",
+  "test_allied_owned_names.py",
+  "test_apply_carrier_slave_ammo_safety.py",
+  "test_armament_roles.py",
+  "test_audit_bot_insurance.py",
+  "test_audit_ini_untagged.py",
+  "test_bot_insurance_model.py",
+  "test_chained_owned_names.py",
+  "test_closed_owner_names.py",
+  "test_closed_remaining_names.py",
+  "test_compare_nuke_area_damage.py",
+  "test_converter_owned_names.py",
+  "test_d2k_faction_fluent.py",
+  "test_deprecated_name_lane.py",
+  "test_dual_positive_payload.py",
+  "test_dual_target_payload_cohort.py",
+  "test_duplicate_inherits_blocking.py",
+  "test_economy_logger_cli.py",
+  "test_engagement_report.py",
+  "test_expansion_and_build_order_reports.py",
+  "test_fight_report.py",
+  "test_fit_arsenal_priors.py",
+  "test_fit_baseband.py",
+  "test_fit_engagement_priors.py",
+  "test_forgotten_cannonap.py",
+  "test_generate_chrome_scales.py",
+  "test_guarded_owned_names.py",
+  "test_ifv_owned_names.py",
+  "test_insurance_summary.py",
+  "test_learn_p0_privacy_regressions.py",
+  "test_lookup_owned_names.py",
+  "test_mcv_health.py",
+  "test_order_stream_diff.py",
+  "test_orphan_cancels_siblings.py"
+ ],
+ "timed_out": [
+  "test_reconcile_r12_consumer_closure.py"
+ ],
+ "tests_total": 2404,
+ "elapsed_sec": 4192.0,
+ "rows": [
+  {
+   "module": "test_a5_memory_parity_probe.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 4,
+   "sec": 0.3,
+   "tail": ""
+  },
+  {
+   "module": "test_a5_reaggregate.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 8,
+   "sec": 3.3,
+   "tail": ""
+  },
+  {
+   "module": "test_aa_weapon_routing.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 5,
+   "sec": 18.2,
+   "tail": ""
+  },
+  {
+   "module": "test_ab_campaign.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 11,
+   "sec": 0.4,
+   "tail": ""
+  },
+  {
+   "module": "test_ab_campaign_analyzer.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 29,
+   "sec": 0.4,
+   "tail": ""
+  },
+  {
+   "module": "test_ab_campaign_analyzer_health.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 24,
+   "sec": 0.2,
+   "tail": ""
+  },
+  {
+   "module": "test_ab_campaign_pilot.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 14,
+   "sec": 2.2,
+   "tail": ""
+  },
+  {
+   "module": "test_ab_increment.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 24,
+   "sec": 0.2,
+   "tail": ""
+  },
+  {
+   "module": "test_ab_summary.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 7,
+   "sec": 0.1,
+   "tail": ""
+  },
+  {
+   "module": "test_accepted_classic_four_cargo_prices.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 1,
+   "sec": 3.8,
+   "tail": ""
+  },
+  {
+   "module": "test_accepted_classic_four_harvester_batch.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 4,
+   "sec": 3.4,
+   "tail": ""
+  },
+  {
+   "module": "test_accepted_classic_four_support_durability_batch.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 2,
+   "sec": 3.3,
+   "tail": ""
+  },
+  {
+   "module": "test_accepted_classic_four_transport_chassis_batch.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 3,
+   "sec": 4.0,
+   "tail": ""
+  },
+  {
+   "module": "test_accepted_ra_allies_balance_batch.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 6,
+   "sec": 3.3,
+   "tail": ""
+  },
+  {
+   "module": "test_accepted_ra_soviets_balance_batch.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 6,
+   "sec": 3.5,
+   "tail": ""
+  },
+  {
+   "module": "test_accepted_td_gdi_balance_batch.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 6,
+   "sec": 3.4,
+   "tail": ""
+  },
+  {
+   "module": "test_accepted_td_nod_balance_batch.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 4,
+   "sec": 3.4,
+   "tail": ""
+  },
+  {
+   "module": "test_adats_air_first_role.py",
+   "status": "FAIL",
+   "rc": 1,
+   "tests": 6,
+   "sec": 22.7,
+   "tail": "d_stronger\n    self.assertEqual([profile], main_warheads(weapon), name)\nAssertionError: Lists differ: ['Flak_Medium_Flat'] != ['MissileAA_Medium']\n\nFirst differing element 0:\n'Flak_Medium_Flat'\n'MissileAA_Medium'\n\n- ['Flak_Medium_Flat']\n+ ['MissileAA_Medium'] : TSChemAdatsMissile_AA\n\n----------------------------------------------------------------------\nRan 6 tests in 18.048s\n\nFAILED (failures=2)\n"
+  },
+  {
+   "module": "test_additional_owned_names.py",
+   "status": "FAIL",
+   "rc": 1,
+   "tests": 6,
+   "sec": 43.0,
+   "tail": "3231013f544014ba635817810e' != '8cd3debaad919cc2a92fe00e3c456de245fdd72e1e66acabc007c07c4b220960'\n- c47b14d2bbdea378b9e001462cbda2b6e625e43231013f544014ba635817810e\n+ 8cd3debaad919cc2a92fe00e3c456de245fdd72e1e66acabc007c07c4b220960\n : ('additional', 'ra1_allies_sheridanassaulttank')\n\n----------------------------------------------------------------------\nRan 6 tests in 34.055s\n\nFAILED (failures=1)\n"
+  },
+  {
+   "module": "test_aedis_target_policy.py",
+   "status": "FAIL",
+   "rc": 1,
+   "tests": 15,
+   "sec": 13.9,
+   "tail": "\\devin-engbump\\tools\\tests\\test_aedis_target_policy.py\", line 260, in test_direct_single_domain_weapons_keep_damage_in_their_domain\n    self.assertIn('Air', values.get('InvalidTargets', '').split(', '),\nAssertionError: 'Air' not found in [''] : ('Hakureiring', 'Warhead@Magic_Heavy')\n\n----------------------------------------------------------------------\nRan 15 tests in 9.152s\n\nFAILED (failures=1)\n"
+  },
+  {
+   "module": "test_aggregate_ai_matches.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 3,
+   "sec": 0.3,
+   "tail": ""
+  },
+  {
+   "module": "test_ai_attackbase_lookup.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 1,
+   "sec": 2.9,
+   "tail": ""
+  },
+  {
+   "module": "test_ai_batch_harness.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 38,
+   "sec": 2.1,
+   "tail": ""
+  },
+  {
+   "module": "test_ai_combat_analysis.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 5,
+   "sec": 7.8,
+   "tail": ""
+  },
+  {
+   "module": "test_ai_headquarters_refinery_cleanup.py",
+   "status": "FAIL",
+   "rc": 1,
+   "tests": 3,
+   "sec": 3.3,
+   "tail": " last):\n  File \"C:\\cameo-wt\\devin-engbump\\tools\\tests\\test_ai_headquarters_refinery_cleanup.py\", line 35, in test_all_starcraft_and_warcraft_headquarters_are_protected\n    self.assertIn(name, self.protected)\nAssertionError: 'wc2_orcs_greathall' not found in {'zerg_lair', 'zerg_hive'}\n\n----------------------------------------------------------------------\nRan 3 tests in 2.362s\n\nFAILED (failures=5)\n"
+  },
+  {
+   "module": "test_ai_human_pace.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 4,
+   "sec": 5.6,
+   "tail": ""
+  },
+  {
+   "module": "test_ai_logging_integration.py",
+   "status": "FAIL",
+   "rc": 1,
+   "tests": 2,
+   "sec": 2.6,
+   "tail": "ld.Type, world.IsReplay, world.IsLoadingGameSave, host: true);\\n\\t\\t\\tif (!eligibleAtWorldLoad)\\n\\t\\t\\t{\\n\\t\\t\\t\\twritten = true;\\n\\t\\t\\t\\treturn;\\n\\t\\t\\t}\\n\\n\\t\\t\\tfallbackGameUid = Guid.NewGuid().ToString(\"N\");\\n\\t\\t\\tappender = new AiLogFileAppender(info.FileName);\\n\\t\\t}\\n\\n\\t\\t'\n\n----------------------------------------------------------------------\nRan 2 tests in 2.485s\n\nFAILED (failures=1)\n"
+  },
+  {
+   "module": "test_air_payload_contracts.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 8,
+   "sec": 3.4,
+   "tail": ""
+  },
+  {
+   "module": "test_allied_owned_names.py",
+   "status": "FAIL",
+   "rc": 1,
+   "tests": 6,
+   "sec": 37.4,
+   "tail": "3e350c3970865aa960860615368218a0537e9ed4b19d4c4657cb17c47' != 'f9eb558d32d5a2cac28d8f3c160c3c6bfefb67a6f4222bac9b5721ad6234eaae'\n- 03ad0f13e350c3970865aa960860615368218a0537e9ed4b19d4c4657cb17c47\n+ f9eb558d32d5a2cac28d8f3c160c3c6bfefb67a6f4222bac9b5721ad6234eaae\n : ra1_allies_ranger\n\n----------------------------------------------------------------------\nRan 6 tests in 28.558s\n\nFAILED (failures=1)\n"
+  },
+  {
+   "module": "test_allied_tank_destroyer_role_correction.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 8,
+   "sec": 3.2,
+   "tail": ""
+  },
+  {
+   "module": "test_anchor_dossier.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 33,
+   "sec": 29.6,
+   "tail": ""
+  },
+  {
+   "module": "test_anchor_readiness.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 17,
+   "sec": 4.5,
+   "tail": ""
+  },
+  {
+   "module": "test_anonymize_legacy_logs.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 2,
+   "sec": 1.4,
+   "tail": ""
+  },
+  {
+   "module": "test_apocalypse_merge_regression.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 4,
+   "sec": 6.6,
+   "tail": ""
+  },
+  {
+   "module": "test_apply_balance.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 50,
+   "sec": 1.8,
+   "tail": ""
+  },
+  {
+   "module": "test_apply_carrier_slave_ammo_safety.py",
+   "status": "FAIL",
+   "rc": 5,
+   "tests": 0,
+   "sec": 0.1,
+   "tail": "----------------------------------------------------------------------\nRan 0 tests in 0.000s\n\nNO TESTS RAN\n"
+  },
+  {
+   "module": "test_armament_mode_survey.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 12,
+   "sec": 0.4,
+   "tail": ""
+  },
+  {
+   "module": "test_armament_roles.py",
+   "status": "FAIL",
+   "rc": 1,
+   "tests": 81,
+   "sec": 27.6,
+   "tail": "fingerprints(ROOT), doc[\"inputs\"])\nAssertionError: {'doc[373 chars]n': '116caaf6c71402a94466dc42fb25c81ada44b144e[63722 chars]79f'} != {'doc[373 chars]n': 'a5a630bb7ec861af217b29ba34b65f429ae53797e[63722 chars]79f'}\nDiff is 90018 characters long. Set self.maxDiff to None to see it.\n\n----------------------------------------------------------------------\nRan 81 tests in 23.765s\n\nFAILED (failures=1)\n"
+  },
+  {
+   "module": "test_armor_projection.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 3,
+   "sec": 0.1,
+   "tail": ""
+  },
+  {
+   "module": "test_army_mix_report.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 5,
+   "sec": 3.4,
+   "tail": ""
+  },
+  {
+   "module": "test_assemble_four_voice_pilot.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 16,
+   "sec": 0.2,
+   "tail": ""
+  },
+  {
+   "module": "test_assign_references.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 18,
+   "sec": 29.5,
+   "tail": ""
+  },
+  {
+   "module": "test_atreides_ebfd_roster.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 6,
+   "sec": 3.5,
+   "tail": ""
+  },
+  {
+   "module": "test_audit_bot_insurance.py",
+   "status": "FAIL",
+   "rc": 5,
+   "tests": 0,
+   "sec": 0.7,
+   "tail": "----------------------------------------------------------------------\nRan 0 tests in 0.000s\n\nNO TESTS RAN\n"
+  },
+  {
+   "module": "test_audit_doc_claims.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 3,
+   "sec": 1.1,
+   "tail": ""
+  },
+  {
+   "module": "test_audit_doc_health.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 14,
+   "sec": 0.1,
+   "tail": ""
+  },
+  {
+   "module": "test_audit_duplicate_keys.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 10,
+   "sec": 0.1,
+   "tail": ""
+  },
+  {
+   "module": "test_audit_error_handling.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 13,
+   "sec": 0.1,
+   "tail": ""
+  },
+  {
+   "module": "test_audit_heaviness_bell.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 51,
+   "sec": 0.5,
+   "tail": ""
+  },
+  {
+   "module": "test_audit_ini_untagged.py",
+   "status": "FAIL",
+   "rc": 5,
+   "tests": 0,
+   "sec": 0.1,
+   "tail": "----------------------------------------------------------------------\nRan 0 tests in 0.000s\n\nNO TESTS RAN\n"
+  },
+  {
+   "module": "test_audit_k_linearity_inventory.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 11,
+   "sec": 0.4,
+   "tail": ""
+  },
+  {
+   "module": "test_audit_periodic_freshness.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 9,
+   "sec": 0.2,
+   "tail": ""
+  },
+  {
+   "module": "test_audit_recent_changes.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 10,
+   "sec": 0.1,
+   "tail": ""
+  },
+  {
+   "module": "test_audit_run_all_parser.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 9,
+   "sec": 0.1,
+   "tail": ""
+  },
+  {
+   "module": "test_audit_scanning.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 3,
+   "sec": 0.1,
+   "tail": ""
+  },
+  {
+   "module": "test_audit_security.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 18,
+   "sec": 0.1,
+   "tail": ""
+  },
+  {
+   "module": "test_audit_warhead_bases.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 25,
+   "sec": 0.4,
+   "tail": ""
+  },
+  {
+   "module": "test_authorized_remaining_profiles.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 11,
+   "sec": 65.4,
+   "tail": ""
+  },
+  {
+   "module": "test_authorized_role_profile_consolidation.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 6,
+   "sec": 12.9,
+   "tail": ""
+  },
+  {
+   "module": "test_band_scope.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 2,
+   "sec": 0.4,
+   "tail": ""
+  },
+  {
+   "module": "test_base_peer_corpus.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 4,
+   "sec": 1.8,
+   "tail": ""
+  },
+  {
+   "module": "test_bot_insurance_model.py",
+   "status": "FAIL",
+   "rc": 5,
+   "tests": 0,
+   "sec": 0.2,
+   "tail": "----------------------------------------------------------------------\nRan 0 tests in 0.000s\n\nNO TESTS RAN\n"
+  },
+  {
+   "module": "test_cameo_channel_curves.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 11,
+   "sec": 0.1,
+   "tail": ""
+  },
+  {
+   "module": "test_campaign_deployment_guard.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 13,
+   "sec": 0.1,
+   "tail": ""
+  },
+  {
+   "module": "test_campaign_overlay.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 4,
+   "sec": 0.5,
+   "tail": ""
+  },
+  {
+   "module": "test_campaign_runner.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 28,
+   "sec": 3.1,
+   "tail": ""
+  },
+  {
+   "module": "test_campaign_tools_names.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 1,
+   "sec": 0.2,
+   "tail": ""
+  },
+  {
+   "module": "test_cannonap_endpoint_cohort.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 6,
+   "sec": 3.5,
+   "tail": ""
+  },
+  {
+   "module": "test_cannonap_generated_fixture.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 5,
+   "sec": 0.4,
+   "tail": ""
+  },
+  {
+   "module": "test_cannonap_migration_comparison.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 9,
+   "sec": 0.1,
+   "tail": ""
+  },
+  {
+   "module": "test_cargo_pricing.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 4,
+   "sec": 0.1,
+   "tail": ""
+  },
+  {
+   "module": "test_chained_owned_names.py",
+   "status": "FAIL",
+   "rc": 1,
+   "tests": 3,
+   "sec": 5.7,
+   "tail": "e70b3c2cf40aae797aeb6866f4258418898' != 'f228cc15ac2f8702dd4f2cbc559a5af568a2c37b11d36f6ab211b23aaade701b'\n- 1e112e9b55ede9c77333ab350a156e70b3c2cf40aae797aeb6866f4258418898\n+ f228cc15ac2f8702dd4f2cbc559a5af568a2c37b11d36f6ab211b23aaade701b\n : td_nod_chemicalrocketsoldier_chemrockets\n\n----------------------------------------------------------------------\nRan 3 tests in 4.772s\n\nFAILED (failures=2)\n"
+  },
+  {
+   "module": "test_charge_aware_reference.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 6,
+   "sec": 8.2,
+   "tail": ""
+  },
+  {
+   "module": "test_check_band_membership.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 6,
+   "sec": 2.6,
+   "tail": ""
+  },
+  {
+   "module": "test_check_determinism.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 11,
+   "sec": 0.1,
+   "tail": ""
+  },
+  {
+   "module": "test_class_anchor_merge.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 6,
+   "sec": 0.1,
+   "tail": ""
+  },
+  {
+   "module": "test_class_membership.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 17,
+   "sec": 0.1,
+   "tail": ""
+  },
+  {
+   "module": "test_classic_four_faction_identity.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 4,
+   "sec": 3.3,
+   "tail": ""
+  },
+  {
+   "module": "test_classic_four_materializer.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 1,
+   "sec": 0.1,
+   "tail": ""
+  },
+  {
+   "module": "test_classify_remaining_weapons.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 9,
+   "sec": 0.1,
+   "tail": ""
+  },
+  {
+   "module": "test_closed_owner_names.py",
+   "status": "FAIL",
+   "rc": 1,
+   "tests": 8,
+   "sec": 40.3,
+   "tail": "2b66e686b6a9b861a0d157df8c8edb353430b18bfb241' != 'b108bc0e8e5ff5bc1744c32f9acabcb9601aab1342d39806be3afc14d0cf8fc1'\n- e79e8e9f22a8b0ab17d2b66e686b6a9b861a0d157df8c8edb353430b18bfb241\n+ b108bc0e8e5ff5bc1744c32f9acabcb9601aab1342d39806be3afc14d0cf8fc1\n : ra1_soviets_submarine_torpedo\n\n----------------------------------------------------------------------\nRan 8 tests in 31.662s\n\nFAILED (failures=3)\n"
+  },
+  {
+   "module": "test_closed_remaining_names.py",
+   "status": "FAIL",
+   "rc": 1,
+   "tests": 4,
+   "sec": 15.5,
+   "tail": "deb9cb71bac96003c7b44bce375641a0a507e371811fcd95dfcddbc9' != '18165be10fa55f212de6ba51c464e2d17b964958eb63d7c2beffc3959df86d50'\n- e86119c4deb9cb71bac96003c7b44bce375641a0a507e371811fcd95dfcddbc9\n+ 18165be10fa55f212de6ba51c464e2d17b964958eb63d7c2beffc3959df86d50\n : td_gdi_mammothtank\n\n----------------------------------------------------------------------\nRan 4 tests in 10.951s\n\nFAILED (failures=1)\n"
+  },
+  {
+   "module": "test_closure_isolation_consolidation.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 5,
+   "sec": 3.5,
+   "tail": ""
+  },
+  {
+   "module": "test_cluster_versus_source_weighting.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 3,
+   "sec": 0.1,
+   "tail": ""
+  },
+  {
+   "module": "test_compare_nuke_area_damage.py",
+   "status": "FAIL",
+   "rc": 5,
+   "tests": 0,
+   "sec": 0.1,
+   "tail": "----------------------------------------------------------------------\nRan 0 tests in 0.000s\n\nNO TESTS RAN\n"
+  },
+  {
+   "module": "test_condition_default.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 18,
+   "sec": 0.1,
+   "tail": ""
+  },
+  {
+   "module": "test_conflict_markers.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 1,
+   "sec": 143.0,
+   "tail": ""
+  },
+  {
+   "module": "test_conventional_weapon_core.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 5,
+   "sec": 3.0,
+   "tail": ""
+  },
+  {
+   "module": "test_converter_owned_names.py",
+   "status": "FAIL",
+   "rc": 1,
+   "tests": 3,
+   "sec": 4.2,
+   "tail": "8dafa328446fb2fb13a3fba4afd1bf355cd9d71145067faccca8f6' != 'aa4edce2cc673108fc98d579da65fc4585e672299ad1817cabc801f5e67bf7ce'\n- 6e759ae58d8dafa328446fb2fb13a3fba4afd1bf355cd9d71145067faccca8f6\n+ aa4edce2cc673108fc98d579da65fc4585e672299ad1817cabc801f5e67bf7ce\n : ra1_soviets_heavytank\n\n----------------------------------------------------------------------\nRan 3 tests in 3.253s\n\nFAILED (failures=1)\n"
+  },
+  {
+   "module": "test_corroborated_role_profile_consolidation.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 11,
+   "sec": 26.0,
+   "tail": ""
+  },
+  {
+   "module": "test_coverage_report.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 13,
+   "sec": 0.1,
+   "tail": ""
+  },
+  {
+   "module": "test_d2k_duplicate_weapon_definitions.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 3,
+   "sec": 3.2,
+   "tail": ""
+  },
+  {
+   "module": "test_d2k_faction_fluent.py",
+   "status": "FAIL",
+   "rc": 1,
+   "tests": 4,
+   "sec": 20.4,
+   "tail": "standard_fluent_copy\n    self.assertEqual(f\"{key}.name\", resolved.get(\"Tooltip\", \"Name\"))\nAssertionError: 'actor_ixian_rocket_raider.name' != 'actor_rocket_raider_ixian.name'\n- actor_ixian_rocket_raider.name\n?      ------\n+ actor_rocket_raider_ixian.name\n?                    ++++++\n\n\n----------------------------------------------------------------------\nRan 4 tests in 15.214s\n\nFAILED (failures=5)\n"
+  },
+  {
+   "module": "test_d2k_production_icon_geometry.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 2,
+   "sec": 13.7,
+   "tail": ""
+  },
+  {
+   "module": "test_dead_percentage_scale_cleanup.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 1,
+   "sec": 3.1,
+   "tail": ""
+  },
+  {
+   "module": "test_dead_warhead_fields.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 27,
+   "sec": 0.5,
+   "tail": ""
+  },
+  {
+   "module": "test_defense_tooltip_accuracy.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 2,
+   "sec": 3.3,
+   "tail": ""
+  },
+  {
+   "module": "test_deferred_weapon_redesign_boundary.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 4,
+   "sec": 0.1,
+   "tail": ""
+  },
+  {
+   "module": "test_delivery_identity_profile_consolidation.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 8,
+   "sec": 12.8,
+   "tail": ""
+  },
+  {
+   "module": "test_deprecated_name_lane.py",
+   "status": "FAIL",
+   "rc": 5,
+   "tests": 0,
+   "sec": 0.1,
+   "tail": "----------------------------------------------------------------------\nRan 0 tests in 0.000s\n\nNO TESTS RAN\n"
+  },
+  {
+   "module": "test_derived_armor_types.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 8,
+   "sec": 0.4,
+   "tail": ""
+  },
+  {
+   "module": "test_diagnostic_output.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 8,
+   "sec": 0.2,
+   "tail": ""
+  },
+  {
+   "module": "test_dog_weapon_ownership.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 6,
+   "sec": 3.4,
+   "tail": ""
+  },
+  {
+   "module": "test_dta_armor.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 4,
+   "sec": 0.1,
+   "tail": ""
+  },
+  {
+   "module": "test_dta_channel_curves.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 7,
+   "sec": 0.1,
+   "tail": ""
+  },
+  {
+   "module": "test_dta_corpus_evidence.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 14,
+   "sec": 1.1,
+   "tail": ""
+  },
+  {
+   "module": "test_dta_projectile_evidence.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 1,
+   "sec": 0.1,
+   "tail": ""
+  },
+  {
+   "module": "test_dual_positive_payload.py",
+   "status": "FAIL",
+   "rc": 1,
+   "tests": 3,
+   "sec": 3.1,
+   "tail": "_obj(self.rules.resolve_weapon(name)))\nAssertionError: {'Bur[164 chars]o', 'RangeLimit': '12c0', 'Shadow': 'false', '[7314 chars]ge'}} != {'Bur[164 chars]o', 'Shadow': 'false', 'Speed': '512', 'Width'[7292 chars]ge'}}\nDiff is 20334 characters long. Set self.maxDiff to None to see it.\n\n----------------------------------------------------------------------\nRan 3 tests in 2.124s\n\nFAILED (failures=1)\n"
+  },
+  {
+   "module": "test_dual_target_payload_cohort.py",
+   "status": "FAIL",
+   "rc": 1,
+   "tests": 9,
+   "sec": 5.1,
+   "tail": "e_weapon(name)),\nAssertionError: {'Bur[157 chars]noughFromSpeed': 'true', 'ContrailEndColor': '[7922 chars]ge'}} != {'Bur[157 chars]nough': '600', 'ContrailEndColor': '4488FF00',[7907 chars]ge'}}\nDiff is 22069 characters long. Set self.maxDiff to None to see it. : SteelFighterRailgun\n\n----------------------------------------------------------------------\nRan 9 tests in 3.599s\n\nFAILED (failures=1)\n"
+  },
+  {
+   "module": "test_duplicate_inherits_blocking.py",
+   "status": "FAIL",
+   "rc": 5,
+   "tests": 0,
+   "sec": 0.1,
+   "tail": "----------------------------------------------------------------------\nRan 0 tests in 0.000s\n\nNO TESTS RAN\n"
+  },
+  {
+   "module": "test_economy_invariants.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 19,
+   "sec": 0.2,
+   "tail": ""
+  },
+  {
+   "module": "test_economy_logger_cli.py",
+   "status": "FAIL",
+   "rc": 1,
+   "tests": 9,
+   "sec": 0.2,
+   "tail": "NOWN\", 21)\n  File \"C:\\cameo-wt\\devin-engbump\\tools\\tests\\test_economy_logger_cli.py\", line 36, in check_fixture\n    self.assertTrue(pointer.exists(), \"Run the AiEconomy dotnet test filter first\")\nAssertionError: False is not true : Run the AiEconomy dotnet test filter first\n\n----------------------------------------------------------------------\nRan 9 tests in 0.066s\n\nFAILED (failures=8, errors=1)\n"
+  },
+  {
+   "module": "test_effective_damage.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 46,
+   "sec": 0.4,
+   "tail": ""
+  },
+  {
+   "module": "test_effective_heaviness.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 58,
+   "sec": 22.1,
+   "tail": ""
+  },
+  {
+   "module": "test_element_role_bulk_profile.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 3,
+   "sec": 3.1,
+   "tail": ""
+  },
+  {
+   "module": "test_emperor_units.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 47,
+   "sec": 0.3,
+   "tail": ""
+  },
+  {
+   "module": "test_engagement_report.py",
+   "status": "FAIL",
+   "rc": 5,
+   "tests": 0,
+   "sec": 0.2,
+   "tail": "----------------------------------------------------------------------\nRan 0 tests in 0.000s\n\nNO TESTS RAN\n"
+  },
+  {
+   "module": "test_engineer_role_classification.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 3,
+   "sec": 2.9,
+   "tail": ""
+  },
+  {
+   "module": "test_exact_profile_duplicate_consolidation.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 5,
+   "sec": 16.7,
+   "tail": ""
+  },
+  {
+   "module": "test_expansion_and_build_order_reports.py",
+   "status": "FAIL",
+   "rc": 5,
+   "tests": 0,
+   "sec": 0.1,
+   "tail": "----------------------------------------------------------------------\nRan 0 tests in 0.000s\n\nNO TESTS RAN\n"
+  },
+  {
+   "module": "test_explain_unit.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 9,
+   "sec": 5.9,
+   "tail": ""
+  },
+  {
+   "module": "test_explicit_family_state_profile_consolidation.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 9,
+   "sec": 12.7,
+   "tail": ""
+  },
+  {
+   "module": "test_explicit_voice_group_assembler.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 12,
+   "sec": 0.1,
+   "tail": ""
+  },
+  {
+   "module": "test_extract_design_drop.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 6,
+   "sec": 0.5,
+   "tail": ""
+  },
+  {
+   "module": "test_extract_heal_repair_fields.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 5,
+   "sec": 4.0,
+   "tail": ""
+  },
+  {
+   "module": "test_extract_versus_dta_overlay.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 4,
+   "sec": 0.1,
+   "tail": ""
+  },
+  {
+   "module": "test_facedancer_ap_fold.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 4,
+   "sec": 3.0,
+   "tail": ""
+  },
+  {
+   "module": "test_faction_extrapolate.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 46,
+   "sec": 10.1,
+   "tail": ""
+  },
+  {
+   "module": "test_family_bases.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 25,
+   "sec": 3.0,
+   "tail": ""
+  },
+  {
+   "module": "test_fight_report.py",
+   "status": "FAIL",
+   "rc": 5,
+   "tests": 0,
+   "sec": 0.1,
+   "tail": "----------------------------------------------------------------------\nRan 0 tests in 0.000s\n\nNO TESTS RAN\n"
+  },
+  {
+   "module": "test_final_backlog_role_profile.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 5,
+   "sec": 0.1,
+   "tail": ""
+  },
+  {
+   "module": "test_final_bulk_weapon_consolidation.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 8,
+   "sec": 23.2,
+   "tail": ""
+  },
+  {
+   "module": "test_firepower_bake.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 6,
+   "sec": 0.1,
+   "tail": ""
+  },
+  {
+   "module": "test_firepower_consumers.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 16,
+   "sec": 0.7,
+   "tail": ""
+  },
+  {
+   "module": "test_firepower_retired.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 12,
+   "sec": 0.1,
+   "tail": ""
+  },
+  {
+   "module": "test_fit_arsenal_priors.py",
+   "status": "FAIL",
+   "rc": 5,
+   "tests": 0,
+   "sec": 0.1,
+   "tail": "----------------------------------------------------------------------\nRan 0 tests in 0.000s\n\nNO TESTS RAN\n"
+  },
+  {
+   "module": "test_fit_baseband.py",
+   "status": "FAIL",
+   "rc": 5,
+   "tests": 0,
+   "sec": 0.1,
+   "tail": "----------------------------------------------------------------------\nRan 0 tests in 0.000s\n\nNO TESTS RAN\n"
+  },
+  {
+   "module": "test_fit_engagement_priors.py",
+   "status": "FAIL",
+   "rc": 5,
+   "tests": 0,
+   "sec": 0.2,
+   "tail": "----------------------------------------------------------------------\nRan 0 tests in 0.000s\n\nNO TESTS RAN\n"
+  },
+  {
+   "module": "test_forgotten_cannonap.py",
+   "status": "FAIL",
+   "rc": 1,
+   "tests": 6,
+   "sec": 3.4,
+   "tail": "-----------------------------\nTraceback (most recent call last):\n  File \"C:\\cameo-wt\\devin-engbump\\tools\\tests\\test_forgotten_cannonap.py\", line 43, in test_resolved_profile_and_firing_contract\n    self.assertTrue(all(a['runtime_units'] == 0 for a in\nAssertionError: False is not true\n\n----------------------------------------------------------------------\nRan 6 tests in 2.391s\n\nFAILED (failures=3)\n"
+  },
+  {
+   "module": "test_formula_charge.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 16,
+   "sec": 0.1,
+   "tail": ""
+  },
+  {
+   "module": "test_four_source_group_inventory.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 7,
+   "sec": 0.1,
+   "tail": ""
+  },
+  {
+   "module": "test_four_source_synthesis_gate.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 16,
+   "sec": 0.1,
+   "tail": ""
+  },
+  {
+   "module": "test_freedom_elite_single_main.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 3,
+   "sec": 14.9,
+   "tail": ""
+  },
+  {
+   "module": "test_frozen_cameo_reference.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 5,
+   "sec": 3.9,
+   "tail": ""
+  },
+  {
+   "module": "test_frozen_hero_reference.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 3,
+   "sec": 5.7,
+   "tail": ""
+  },
+  {
+   "module": "test_garrison_fireports.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 5,
+   "sec": 0.2,
+   "tail": ""
+  },
+  {
+   "module": "test_gatling_unification.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 6,
+   "sec": 3.4,
+   "tail": ""
+  },
+  {
+   "module": "test_generate_chrome_scales.py",
+   "status": "FAIL",
+   "rc": 5,
+   "tests": 0,
+   "sec": 0.1,
+   "tail": "----------------------------------------------------------------------\nRan 0 tests in 0.000s\n\nNO TESTS RAN\n"
+  },
+  {
+   "module": "test_goliath_production_progression.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 2,
+   "sec": 3.3,
+   "tail": ""
+  },
+  {
+   "module": "test_ground_domain_pricing.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 10,
+   "sec": 2.5,
+   "tail": ""
+  },
+  {
+   "module": "test_guarded_owned_names.py",
+   "status": "FAIL",
+   "rc": 1,
+   "tests": 7,
+   "sec": 39.2,
+   "tail": "c975069f5e39d4f0ae96815bf2896f6ab5daa5f336f4dd16741f739a' != 'f34214f49a3ffeda527381cfb989ba24d7f3c250ac7e19e81f5777fb6d68a170'\n- a203b5ecc975069f5e39d4f0ae96815bf2896f6ab5daa5f336f4dd16741f739a\n+ f34214f49a3ffeda527381cfb989ba24d7f3c250ac7e19e81f5777fb6d68a170\n : ra1_allies_longbow\n\n----------------------------------------------------------------------\nRan 7 tests in 30.529s\n\nFAILED (failures=1)\n"
+  },
+  {
+   "module": "test_harkonnen_ebfd_roster.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 9,
+   "sec": 4.5,
+   "tail": ""
+  },
+  {
+   "module": "test_high_identity_profile_consolidation.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 6,
+   "sec": 16.6,
+   "tail": ""
+  },
+  {
+   "module": "test_hydra_candidate_screen.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 6,
+   "sec": 3.6,
+   "tail": ""
+  },
+  {
+   "module": "test_hydra_impact_lab.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 15,
+   "sec": 3.6,
+   "tail": ""
+  },
+  {
+   "module": "test_hydra_two_stage_pilot.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 11,
+   "sec": 7.9,
+   "tail": ""
+  },
+  {
+   "module": "test_hydralisk_strength_regression.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 4,
+   "sec": 3.0,
+   "tail": ""
+  },
+  {
+   "module": "test_identical_main_profile_consolidation.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 6,
+   "sec": 13.5,
+   "tail": ""
+  },
+  {
+   "module": "test_ifv_owned_names.py",
+   "status": "FAIL",
+   "rc": 1,
+   "tests": 8,
+   "sec": 39.2,
+   "tail": "5a6efb85c945394ab54087d227a11381a6893eb6887d2a95af' != 'ae1e08d222a600c98fb09cbaba2c1d7c5abbdf2a11fd13bae0a37838ebcd155d'\n- d794e04746db595a6efb85c945394ab54087d227a11381a6893eb6887d2a95af\n+ ae1e08d222a600c98fb09cbaba2c1d7c5abbdf2a11fd13bae0a37838ebcd155d\n : ra1_allies_machinegunner\n\n----------------------------------------------------------------------\nRan 8 tests in 30.615s\n\nFAILED (failures=2)\n"
+  },
+  {
+   "module": "test_increment_restraint_budget.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 17,
+   "sec": 1.1,
+   "tail": ""
+  },
+  {
+   "module": "test_infantry_artillery_pressure.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 2,
+   "sec": 0.1,
+   "tail": ""
+  },
+  {
+   "module": "test_ini_armament_roles.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 19,
+   "sec": 3.4,
+   "tail": ""
+  },
+  {
+   "module": "test_ini_consumer_evidence.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 20,
+   "sec": 1.3,
+   "tail": ""
+  },
+  {
+   "module": "test_ini_cycle_evidence.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 8,
+   "sec": 0.3,
+   "tail": ""
+  },
+  {
+   "module": "test_ini_faction_inference.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 9,
+   "sec": 0.1,
+   "tail": ""
+  },
+  {
+   "module": "test_ini_range_evidence.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 2,
+   "sec": 0.4,
+   "tail": ""
+  },
+  {
+   "module": "test_ini_source_pins.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 8,
+   "sec": 2.1,
+   "tail": ""
+  },
+  {
+   "module": "test_ini_weapon_evidence.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 51,
+   "sec": 0.3,
+   "tail": ""
+  },
+  {
+   "module": "test_ini_weapon_selection.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 3,
+   "sec": 0.4,
+   "tail": ""
+  },
+  {
+   "module": "test_insurance_summary.py",
+   "status": "FAIL",
+   "rc": 1,
+   "tests": 8,
+   "sec": 0.6,
+   "tail": "cameo-wt\\devin-engbump\\tools\\tests\\test_insurance_summary.py\", line 91, in test_actual_csharp_generated_schema_file\n    self.assertTrue(pointer.exists(), \"run focused InsuranceTelemetry C# tests first\")\nAssertionError: False is not true : run focused InsuranceTelemetry C# tests first\n\n----------------------------------------------------------------------\nRan 8 tests in 0.545s\n\nFAILED (failures=1)\n"
+  },
+  {
+   "module": "test_intentional_composite_registry.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 15,
+   "sec": 0.3,
+   "tail": ""
+  },
+  {
+   "module": "test_japan_armored_car_firepower_bake.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 3,
+   "sec": 3.3,
+   "tail": ""
+  },
+  {
+   "module": "test_japan_pilot.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 77,
+   "sec": 36.4,
+   "tail": ""
+  },
+  {
+   "module": "test_k_price_delta.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 14,
+   "sec": 0.1,
+   "tail": ""
+  },
+  {
+   "module": "test_katyusha_identity.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 7,
+   "sec": 13.1,
+   "tail": ""
+  },
+  {
+   "module": "test_laser_bulk_profile.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 6,
+   "sec": 3.5,
+   "tail": ""
+  },
+  {
+   "module": "test_laser_heavy_route_consolidation.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 8,
+   "sec": 16.2,
+   "tail": ""
+  },
+  {
+   "module": "test_later_profile_history.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 4,
+   "sec": 4.4,
+   "tail": ""
+  },
+  {
+   "module": "test_learn_p0_privacy_regressions.py",
+   "status": "FAIL",
+   "rc": 5,
+   "tests": 0,
+   "sec": 0.2,
+   "tail": "----------------------------------------------------------------------\nRan 0 tests in 0.000s\n\nNO TESTS RAN\n"
+  },
+  {
+   "module": "test_learnables_registry.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 4,
+   "sec": 0.1,
+   "tail": ""
+  },
+  {
+   "module": "test_ledger_split.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 9,
+   "sec": 0.5,
+   "tail": ""
+  },
+  {
+   "module": "test_legacy_name_aliases.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 8,
+   "sec": 3.0,
+   "tail": ""
+  },
+  {
+   "module": "test_lookup_owned_names.py",
+   "status": "FAIL",
+   "rc": 1,
+   "tests": 3,
+   "sec": 4.4,
+   "tail": "2b0efd6fc9c814d9f62c413b090b0b2f9fe519a4b9' != '6a91915976ed20e0a497d981d694f25fe96f2ec9e483b1ff17b16b0c2dae0ce1'\n- 5ebbb00f303cc4e88bdcd72b0efd6fc9c814d9f62c413b090b0b2f9fe519a4b9\n+ 6a91915976ed20e0a497d981d694f25fe96f2ec9e483b1ff17b16b0c2dae0ce1\n : ra1_allies_bastionartillerybunker\n\n----------------------------------------------------------------------\nRan 3 tests in 3.442s\n\nFAILED (failures=1)\n"
+  },
+  {
+   "module": "test_m13_tier_knobs.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 2,
+   "sec": 0.1,
+   "tail": ""
+  },
+  {
+   "module": "test_main_warhead_predicate.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 3,
+   "sec": 0.1,
+   "tail": ""
+  },
+  {
+   "module": "test_map_engine_acceptance.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 23,
+   "sec": 0.3,
+   "tail": ""
+  },
+  {
+   "module": "test_mcv_health.py",
+   "status": "FAIL",
+   "rc": 1,
+   "tests": 8,
+   "sec": 0.5,
+   "tail": "l last):\n  File \"C:\\cameo-wt\\devin-engbump\\tools\\tests\\test_mcv_health.py\", line 97, in test_actual_csharp_path_cli_unknown_and_immutable\n    self.assertTrue(pointer.exists(), \"Run McvHealthObservationTest first\")\nAssertionError: False is not true : Run McvHealthObservationTest first\n\n----------------------------------------------------------------------\nRan 8 tests in 0.400s\n\nFAILED (failures=1)\n"
+  },
+  {
+   "module": "test_miniyaml.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 11,
+   "sec": 0.1,
+   "tail": ""
+  },
+  {
+   "module": "test_missile_feel_defaults.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 4,
+   "sec": 3.4,
+   "tail": ""
+  },
+  {
+   "module": "test_missile_role_domains.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 3,
+   "sec": 0.1,
+   "tail": ""
+  },
+  {
+   "module": "test_missile_role_policy.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 4,
+   "sec": 3.4,
+   "tail": ""
+  },
+  {
+   "module": "test_mission_story.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 9,
+   "sec": 0.1,
+   "tail": ""
+  },
+  {
+   "module": "test_multi_turret_targeting.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 4,
+   "sec": 10.1,
+   "tail": ""
+  },
+  {
+   "module": "test_named_family_profile_consolidation.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 6,
+   "sec": 14.0,
+   "tail": ""
+  },
+  {
+   "module": "test_named_state_corrections.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 6,
+   "sec": 12.9,
+   "tail": ""
+  },
+  {
+   "module": "test_no_player_names_schema.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 6,
+   "sec": 0.9,
+   "tail": ""
+  },
+  {
+   "module": "test_nominal_condition_context.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 3,
+   "sec": 0.1,
+   "tail": ""
+  },
+  {
+   "module": "test_opendune_units.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 39,
+   "sec": 0.4,
+   "tail": ""
+  },
+  {
+   "module": "test_openra_warhead_platforms.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 2,
+   "sec": 0.1,
+   "tail": ""
+  },
+  {
+   "module": "test_order_stream_diff.py",
+   "status": "FAIL",
+   "rc": 5,
+   "tests": 0,
+   "sec": 0.1,
+   "tail": "----------------------------------------------------------------------\nRan 0 tests in 0.000s\n\nNO TESTS RAN\n"
+  },
+  {
+   "module": "test_ordos_advanced_turrets.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 7,
+   "sec": 3.3,
+   "tail": ""
+  },
+  {
+   "module": "test_original_reference_gap_repairs.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 6,
+   "sec": 1.2,
+   "tail": ""
+  },
+  {
+   "module": "test_orphan_cancels_siblings.py",
+   "status": "FAIL",
+   "rc": 5,
+   "tests": 0,
+   "sec": 0.1,
+   "tail": "----------------------------------------------------------------------\nRan 0 tests in 0.000s\n\nNO TESTS RAN\n"
+  },
+  {
+   "module": "test_ownership_lineage_audits.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 9,
+   "sec": 0.1,
+   "tail": ""
+  },
+  {
+   "module": "test_peer_base_state.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 3,
+   "sec": 4.9,
+   "tail": ""
+  },
+  {
+   "module": "test_peer_consumer_evidence.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 16,
+   "sec": 0.2,
+   "tail": ""
+  },
+  {
+   "module": "test_peer_corpus.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 17,
+   "sec": 2.1,
+   "tail": ""
+  },
+  {
+   "module": "test_peer_export.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 18,
+   "sec": 2.2,
+   "tail": ""
+  },
+  {
+   "module": "test_peer_nominal_evidence.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 14,
+   "sec": 1.5,
+   "tail": ""
+  },
+  {
+   "module": "test_peer_production_state.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 8,
+   "sec": 0.2,
+   "tail": ""
+  },
+  {
+   "module": "test_peer_range_evidence.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 4,
+   "sec": 1.0,
+   "tail": ""
+  },
+  {
+   "module": "test_peer_rank_states.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 17,
+   "sec": 0.3,
+   "tail": ""
+  },
+  {
+   "module": "test_peer_state_scenarios.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 14,
+   "sec": 0.4,
+   "tail": ""
+  },
+  {
+   "module": "test_peer_weapon_evidence.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 13,
+   "sec": 0.3,
+   "tail": ""
+  },
+  {
+   "module": "test_peer_weapon_primary.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 2,
+   "sec": 0.1,
+   "tail": ""
+  },
+  {
+   "module": "test_percentage_damage_model.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 59,
+   "sec": 24.5,
+   "tail": ""
+  },
+  {
+   "module": "test_percentage_runtime_audit.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 9,
+   "sec": 0.4,
+   "tail": ""
+  },
+  {
+   "module": "test_percentage_twin.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 17,
+   "sec": 12.7,
+   "tail": ""
+  },
+  {
+   "module": "test_physical_state_duplicate_bindings.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 9,
+   "sec": 2.4,
+   "tail": ""
+  },
+  {
+   "module": "test_physical_state_price.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 24,
+   "sec": 22.3,
+   "tail": ""
+  },
+  {
+   "module": "test_pinned_role_profile_consolidation.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 6,
+   "sec": 12.7,
+   "tail": ""
+  },
+  {
+   "module": "test_plating_composition.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 10,
+   "sec": 0.1,
+   "tail": ""
+  },
+  {
+   "module": "test_point_defense_payload.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 3,
+   "sec": 3.4,
+   "tail": ""
+  },
+  {
+   "module": "test_prepare_missile_role_decisions.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 3,
+   "sec": 0.1,
+   "tail": ""
+  },
+  {
+   "module": "test_prepare_promotion_discount.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 8,
+   "sec": 0.1,
+   "tail": ""
+  },
+  {
+   "module": "test_preview_role_derivation.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 24,
+   "sec": 0.1,
+   "tail": ""
+  },
+  {
+   "module": "test_projectile_role_bulk_profile.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 6,
+   "sec": 3.2,
+   "tail": ""
+  },
+  {
+   "module": "test_projectile_travel.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 8,
+   "sec": 0.1,
+   "tail": ""
+  },
+  {
+   "module": "test_promotion_safety.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 2,
+   "sec": 0.1,
+   "tail": ""
+  },
+  {
+   "module": "test_promotion_superiority.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 8,
+   "sec": 0.1,
+   "tail": ""
+  },
+  {
+   "module": "test_promotion_upgrade_interactions.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 5,
+   "sec": 0.1,
+   "tail": ""
+  },
+  {
+   "module": "test_proposal_contract.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 24,
+   "sec": 0.6,
+   "tail": ""
+  },
+  {
+   "module": "test_ra3_units.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 48,
+   "sec": 3.0,
+   "tail": ""
+  },
+  {
+   "module": "test_reachable_stack_planner.py",
+   "status": "ok",
+   "rc": 0,
+   "tests": 2,
+   "sec": 13.7,
+   "tail": ""
+  },
+  {
+   "module": "test_reconcile_r12_consumer_closure.py",
+   "status": "TIMEOUT",
+   "rc": -1,
+   "tests": 0,
+   "sec": 180,
+   "tail": ""
+  },
+  {
+   "module": "REMAINING",
+   "status": "TOTAL_TIMEOUT",
+   "rc": -99
+  }
+ ]
+}

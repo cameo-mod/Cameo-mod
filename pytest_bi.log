@@ -1,0 +1,16 @@
+.................F                                                       [100%]
+================================== FAILURES ===================================
+________ test_supported_bots_do_not_stack_the_legacy_no_base_fallback _________
+
+    def test_supported_bots_do_not_stack_the_legacy_no_base_fallback():
+        """The player trait survives conyard loss, so its supported bots must not get both payouts."""
+        rules = abi.miniyaml.Ruleset(str(pathlib.Path(__file__).resolve().parents[2]))
+        player = rules.resolve("Player")
+>       expr = player.child("CashTrickler@secondaryinsurance").get("RequiresCondition")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: 'NoneType' object has no attribute 'get'
+
+tools\tests\test_audit_bot_insurance.py:135: AttributeError
+=========================== short test summary info ===========================
+FAILED tools/tests/test_audit_bot_insurance.py::test_supported_bots_do_not_stack_the_legacy_no_base_fallback
+1 failed, 17 passed in 6.01s
