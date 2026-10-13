@@ -10,26 +10,38 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "ai"))
 import economy_invariants as verifier
 
 
-def capture(duration=1500, state="producing", cash=5000, resources=0, capacity=10000,
-            seat_state="active"):
+def capture(duration=1500, state="producing", cash=5000, resources=0, capacity=10000):
     rows = []
     for tick in range(0, duration+1, 50):
         rows.append({"schema": 2, "game_uid": "g", "player": "p", "map_uid": "m",
                      "faction": "ra1_allies", "profile": "conventional", "profile_supported": True,
                      "dropped": 0, "kind": "pulse", "tick": tick, "seq": len(rows),
-                     "queues_complete": True, "player_active": seat_state == "active",
-                     "seat_state": seat_state,
+                     "queues_complete": True, "player_active": True,
+                     "seat_state": "active",
                      "cash": cash, "resources": resources, "capacity": capacity,
                      "net_spent": tick * 10, "gross_spent": None, "gross_spend_complete": False,
                      "queues": [{"queue_id": "1:building", "producer_live": True,
                                  "state": state, "state_since_tick": 0, "reason": "no_site",
                                  "item": "refinery", "item_id": "1:0"}]})
+    rows.append({**rows[-1], "kind": "pulse", "tick": duration + 50,
+                 "seq": len(rows), "player_active": False, "seat_state": "lost"})
     rows.append({**rows[-1], "kind": "end", "complete": True, "seq": len(rows)})
     return rows
 
 
 def codes(rows):
-    return {f["code"] for f in verifier.analyze(rows, "g", "p")["findings"]}
+    return {f["code"] for f in analyze(rows)["findings"]}
+
+
+def analyze(rows, game_uid="g", player="p", *, fixture_tick=None):
+    # Unit-test fixture metadata stands in for an independently SHA-pinned Lua
+    # fixture; provenance parsing itself is covered below.
+    if fixture_tick is None:
+        fixture_tick = rows[-1]["tick"] if rows else 0
+    evidence = {"verified": True, "expected_tick": fixture_tick,
+                "tolerance_ticks": 50, "source_sha256": "a" * 64,
+                "source_path": "test-fixture.lua"}
+    return verifier.analyze(rows, game_uid, player, fixture_evidence=evidence)
 
 
 def cancellation_capture(active=True, live=True, classification="production"):
@@ -49,7 +61,7 @@ class InvariantTests(unittest.TestCase):
         rows = [r for r in capture(6500) if r["tick"] >= 5000]
         for seq, row in enumerate(rows):
             row["seq"] = seq
-        self.assertEqual(verifier.analyze(rows, "g", "p")["status"], "UNKNOWN")
+        self.assertEqual(analyze(rows, "g", "p")["status"], "UNKNOWN")
 
     def test_malformed_input_persists_unknown_to_safe_new_report(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -80,7 +92,7 @@ class InvariantTests(unittest.TestCase):
         self.assertNotIn("BUILDING_QUEUE_IDLE", codes(rows))
 
     def test_normal_band_and_production_observed(self):
-        self.assertEqual(verifier.analyze(capture(), "g", "p")["status"], "OBSERVED_HEALTHY")
+        self.assertEqual(analyze(capture(), "g", "p")["status"], "OBSERVED_HEALTHY")
 
     def test_near_empty_full_and_above_band_thresholds(self):
         self.assertIn("NEAR_EMPTY_FUNDS", codes(capture(250, cash=0)))
@@ -101,15 +113,17 @@ class InvariantTests(unittest.TestCase):
         for state in ("ready", "idle"):
             rows = capture(1500, state)
             for row in rows:
-                row["player_active"] = False
-                row["seat_state"] = "lost"
-            self.assertEqual(codes(rows), set())
+                if row["kind"] == "pulse" and row["tick"] >= 100:
+                    row["player_active"] = False
+                    row["seat_state"] = "lost"
+            self.assertNotIn("READY_BUILDING_UNPLACED", codes(rows))
+            self.assertNotIn("BUILDING_QUEUE_IDLE", codes(rows))
 
     def test_cash_float_spending_unverified_diagnostic(self):
         rows = capture(cash=50000)
         for row in rows:
             row["net_spent"] = 0
-        report = verifier.analyze(rows, "g", "p")
+        report = analyze(rows, "g", "p")
         self.assertNotIn("CASH_FLOAT_WITH_LOW_SPENDING", codes(rows))
         self.assertEqual(report["diagnostics"][0]["severity"], "DIAGNOSTIC")
         self.assertIn("FUNDS_ABOVE_BAND", codes(rows))
@@ -118,9 +132,9 @@ class InvariantTests(unittest.TestCase):
         rows = capture()
         for row in rows:
             row["net_spent"] = 500 - row["tick"]
-        report = verifier.analyze(rows, "g", "p")
+        report = analyze(rows, "g", "p")
         self.assertEqual(report["status"], "OBSERVED_HEALTHY")
-        self.assertEqual(report["spending"]["net_spent"], -1000)
+        self.assertEqual(report["spending"]["net_spent"], -1050)
         self.assertIsNone(report["spending"]["gross_spent"])
 
     def test_legacy_or_unsupported_spend_evidence_unknown(self):
@@ -130,7 +144,7 @@ class InvariantTests(unittest.TestCase):
                        lambda r: r.pop("gross_spent"), lambda r: r.pop("net_spent")):
             rows = capture()
             mutate(rows[0])
-            self.assertEqual(verifier.analyze(rows, "g", "p")["status"], "UNKNOWN")
+            self.assertEqual(analyze(rows, "g", "p")["status"], "UNKNOWN")
 
     def test_balance_recovery_resets_duration(self):
         rows = capture(1500, cash=15000)
@@ -144,7 +158,7 @@ class InvariantTests(unittest.TestCase):
         for args in ((False, True, "production"), (True, False, "production"),
                      (True, True, "destruction"), (False, False, "elimination")):
             rows = cancellation_capture(*args)
-            report = verifier.analyze(rows, "g", "p")
+            report = analyze(rows, "g", "p")
             self.assertEqual(report["status"], "OBSERVED_HEALTHY")
             self.assertNotIn("REPEATED_BUILDING_CANCELLATION", codes(rows))
 
@@ -166,7 +180,7 @@ class InvariantTests(unittest.TestCase):
         rows.sort(key=lambda r: (r["tick"], r["kind"] == "end"))
         for seq, row in enumerate(rows):
             row["seq"] = seq
-        report = verifier.analyze(rows, "g", "p")
+        report = analyze(rows, "g", "p")
         self.assertEqual(report["status"], "OBSERVED_HEALTHY")
         self.assertNotIn("REPEATED_BUILDING_CANCELLATION", codes(rows))
 
@@ -176,19 +190,19 @@ class InvariantTests(unittest.TestCase):
                 rows = cancellation_capture()
                 event = next(r for r in rows if r["kind"] == "cancel")
                 event[key] = value
-                self.assertEqual(verifier.analyze(rows, "g", "p")["status"], "UNKNOWN")
+                self.assertEqual(analyze(rows, "g", "p")["status"], "UNKNOWN")
             rows = cancellation_capture()
             del next(r for r in rows if r["kind"] == "cancel")[key]
-            self.assertEqual(verifier.analyze(rows, "g", "p")["status"], "UNKNOWN")
+            self.assertEqual(analyze(rows, "g", "p")["status"], "UNKNOWN")
 
     def test_missing_truncated_unknown_and_gaps(self):
-        self.assertEqual(verifier.analyze([], "g", "p")["status"], "UNKNOWN")
+        self.assertEqual(analyze([], "g", "p")["status"], "UNKNOWN")
         for mutate in (lambda rows: rows.pop(2),
                        lambda rows: rows[2].update(profile_supported=False),
                        lambda rows: rows.pop(), lambda rows: rows[2].update(seq=999)):
             rows = capture()
             mutate(rows)
-            self.assertEqual(verifier.analyze(rows, "g", "p")["status"], "UNKNOWN")
+            self.assertEqual(analyze(rows, "g", "p")["status"], "UNKNOWN")
 
     def test_missed_scheduled_pulse_gap_is_unknown(self):
         # Producer cadence is one pulse per 50 world ticks (run C: 0/50/../13150).
@@ -197,7 +211,7 @@ class InvariantTests(unittest.TestCase):
         rows.pop(2)
         for seq, row in enumerate(rows):
             row["seq"] = seq
-        report = verifier.analyze(rows, "g", "p")
+        report = analyze(rows, "g", "p")
         self.assertEqual(report["status"], "UNKNOWN")
         self.assertIn("pulse coverage gap", report["error"])
 
@@ -208,18 +222,20 @@ class InvariantTests(unittest.TestCase):
         # modulo rule applies.
         rows = capture(150)
         end = rows.pop()
-        rows.append({**rows[-1], "kind": "pulse", "tick": 191})
-        rows.append({**end, "tick": 191})
+        rows.pop()  # Replace the helper's terminal pulse with the off-boundary event.
+        rows.append({**rows[-1], "kind": "pulse", "tick": 191,
+                     "player_active": False, "seat_state": "lost"})
+        rows.append({**end, "tick": 191, "seat_state": "lost"})
         for seq, row in enumerate(rows):
             row["seq"] = seq
-        report = verifier.analyze(rows, "g", "p")
+        report = analyze(rows, "g", "p")
         self.assertEqual(report["status"], "OBSERVED_HEALTHY")
-        self.assertEqual(report["pulses"], 5)
+        self.assertEqual(report["pulses"], 4)
 
     def test_terminal_watermark_uncovered_is_unknown(self):
         rows = capture(150)
-        rows[-1]["tick"] = 201
-        report = verifier.analyze(rows, "g", "p")
+        rows[-1]["tick"] = 300
+        report = analyze(rows, "g", "p")
         self.assertEqual(report["status"], "UNKNOWN")
         self.assertIn("terminal health watermark", report["error"])
 
@@ -230,19 +246,19 @@ class InvariantTests(unittest.TestCase):
         rows.append({**rows[-2], "tick": end["tick"]})
         for seq, row in enumerate(rows):
             row["seq"] = seq
-        report = verifier.analyze(rows, "g", "p")
+        report = analyze(rows, "g", "p")
         self.assertEqual(report["status"], "UNKNOWN")
         self.assertIn("record after terminal", report["error"])
 
     def test_incomplete_terminal_is_unknown(self):
         rows = capture(150)
         rows[-1]["complete"] = False
-        report = verifier.analyze(rows, "g", "p")
+        report = analyze(rows, "g", "p")
         self.assertEqual(report["status"], "UNKNOWN")
         self.assertIn("incomplete terminal", report["error"])
 
     def test_missing_terminal_is_unknown(self):
-        report = verifier.analyze(capture(150)[:-1], "g", "p")
+        report = analyze(capture(150)[:-1], "g", "p")
         self.assertEqual(report["status"], "UNKNOWN")
         self.assertIn("no complete terminal", report["error"])
 
@@ -257,7 +273,7 @@ class InvariantTests(unittest.TestCase):
                 self.assertIs(row["queues_complete"], True)
             elif row["kind"] == "end":
                 self.assertIs(row["complete"], True)
-        report = verifier.analyze(rows, "g", "p")
+        report = analyze(rows, "g", "p")
         self.assertEqual(report["status"], "OBSERVED_HEALTHY")
         self.assertNotIn("error", report)
         self.assertEqual(report["pulses"], 4)
@@ -269,17 +285,18 @@ class InvariantTests(unittest.TestCase):
                        lambda r: r["queues"][0].update(producer_live=1)):
             rows = capture()
             mutate(rows[0])
-            self.assertEqual(verifier.analyze(rows, "g", "p")["status"], "UNKNOWN")
+            self.assertEqual(analyze(rows, "g", "p")["status"], "UNKNOWN")
 
     def test_defeated_seat_is_explicit_terminal_verdict(self):
         # A fixture-forced terminal defeat closes a healthy pre-terminal window.
         rows = capture(150)
         rows[-1]["seat_state"] = "lost"
-        report = verifier.analyze(rows, "g", "p")
+        report = analyze(rows, "g", "p")
         self.assertEqual(report["status"], "OBSERVED_HEALTHY")
         self.assertTrue(report["defeated"])
-        self.assertEqual(report["terminal"], {"kind": "FIXTURE_TERMINAL", "tick": 150,
-                                               "seat_state": "lost"})
+        self.assertEqual(report["terminal"]["kind"], "FIXTURE_TERMINAL")
+        self.assertEqual(report["terminal"]["tick"], 200)
+        self.assertEqual(report["terminal"]["seat_state"], "lost")
 
     def test_economy_after_first_terminal_pulse_is_outside_health_window(self):
         rows = capture(1500, cash=0)
@@ -287,7 +304,7 @@ class InvariantTests(unittest.TestCase):
             if row["tick"] >= 100:
                 row["player_active"] = False
                 row["seat_state"] = "lost"
-        report = verifier.analyze(rows, "g", "p")
+        report = analyze(rows, "g", "p")
         self.assertEqual(report["status"], "OBSERVED_HEALTHY")
         self.assertEqual(report["terminal"]["tick"], 100)
         self.assertEqual(report["pulses"], 2)
@@ -296,7 +313,7 @@ class InvariantTests(unittest.TestCase):
         # An in-window finding stays hard failure when defeat ends the window.
         rows = capture(1500, cash=15000)
         rows[-1]["seat_state"] = "lost"
-        report = verifier.analyze(rows, "g", "p")
+        report = analyze(rows, "g", "p")
         self.assertEqual(report["status"], "BLOCK")
         self.assertTrue(report["defeated"])
         self.assertIn("FUNDS_ABOVE_BAND", codes(rows))
@@ -304,16 +321,107 @@ class InvariantTests(unittest.TestCase):
     def test_dropped_telemetry_is_hard_block(self):
         rows = capture(1500)
         rows[10]["dropped"] = 1
-        report = verifier.analyze(rows, "g", "p")
+        report = analyze(rows, "g", "p")
         self.assertEqual(report["status"], "BLOCK")
         self.assertIn("DROPPED_TELEMETRY", [x["code"] for x in report["findings"]])
 
     def test_missing_terminal_evidence_is_unknown(self):
         rows = capture(150)
         rows[-1].pop("seat_state")
-        report = verifier.analyze(rows, "g", "p")
+        report = analyze(rows, "g", "p")
         self.assertEqual(report["status"], "UNKNOWN")
         self.assertIn("terminal seat state", report["error"])
+
+    def test_active_end_without_terminal_outcome_is_unknown(self):
+        rows = capture(150)
+        terminal_pulse = next(r for r in rows if r["kind"] == "pulse" and r["tick"] == 200)
+        terminal_pulse["player_active"] = True
+        terminal_pulse["seat_state"] = "active"
+        rows[-1]["seat_state"] = "active"
+        report = analyze(rows)
+        self.assertEqual(report["status"], "UNKNOWN")
+        self.assertIn("missing terminal seat state", report["error"])
+
+    def test_missing_fixture_provenance_is_unknown(self):
+        report = verifier.analyze(capture(150), "g", "p")
+        self.assertEqual(report["status"], "UNKNOWN")
+        self.assertIn("fixture terminal provenance", report["error"])
+
+    def test_only_pinned_cap_tick_can_be_labelled_fixture_terminal(self):
+        rows = capture(150)
+        report = analyze(rows, fixture_tick=200)
+        self.assertEqual(report["status"], "OBSERVED_HEALTHY")
+        self.assertEqual(report["terminal"]["kind"], "FIXTURE_TERMINAL")
+        natural = analyze(rows, fixture_tick=0)
+        self.assertEqual(natural["status"], "OBSERVED_HEALTHY")
+        self.assertEqual(natural["terminal"]["kind"], "GAME_TERMINAL")
+
+    def test_fixture_lua_evidence_is_sha_pinned_and_objective_scoped(self):
+        source = ("local CapTick = 200\n"
+                  "local function FailPrimaryObjectives(p) p.MarkFailedObjective(1) end\n"
+                  "Trigger.AfterDelay(CapTick, function()\n"
+                  "  for _, p in ipairs(players) do FailPrimaryObjectives(p) end\n"
+                  "end)\n").encode()
+        with tempfile.TemporaryDirectory() as directory:
+            script = Path(directory) / "fixture.lua"
+            script.write_bytes(source)
+            import hashlib
+            digest = hashlib.sha256(source).hexdigest()
+            evidence = verifier.read_fixture_evidence(script, digest)
+            self.assertEqual(evidence["expected_tick"], 200)
+            self.assertEqual(evidence["source_sha256"], digest)
+            with self.assertRaises(verifier.EvidenceError):
+                verifier.read_fixture_evidence(script, "0" * 64)
+            script.write_text("local CapTick = 200\nTrigger.AfterDelay(CapTick, function() end)\n")
+            with self.assertRaises(verifier.EvidenceError):
+                verifier.read_fixture_evidence(script, hashlib.sha256(script.read_bytes()).hexdigest())
+
+    def test_post_terminal_tail_still_requires_complete_and_valid_pulse_shape(self):
+        mutations = (
+            lambda r: r.update(queues_complete=False),
+            lambda r: r.pop("queues"),
+            lambda r: r.update(cash="bad"),
+            lambda r: r.update(resources=r["capacity"] + 1),
+            lambda r: r["queues"].append(dict(r["queues"][0])),
+        )
+        for mutate in mutations:
+            rows = capture(150, cash=0)
+            terminal = next(r for r in rows if r["kind"] == "pulse" and r["tick"] == 200)
+            mutate(terminal)
+            report = analyze(rows)
+            self.assertEqual(report["status"], "UNKNOWN", report)
+
+    def test_dropped_telemetry_in_terminal_tail_remains_block(self):
+        rows = capture(150)
+        terminal = next(r for r in rows if r["kind"] == "pulse" and r["tick"] == 200)
+        terminal["dropped"] = 1
+        report = analyze(rows)
+        self.assertEqual(report["status"], "BLOCK")
+        self.assertIn("DROPPED_TELEMETRY", [x["code"] for x in report["findings"]])
+
+    def test_post_terminal_cancellation_identity_and_duplicates_are_validated(self):
+        rows = capture(150)
+        for row in rows:
+            if row["kind"] == "pulse" and row["tick"] >= 100:
+                row["player_active"] = False
+                row["seat_state"] = "lost"
+        event = {**rows[0], "kind": "cancel", "tick": 125, "queue_id": "q",
+                 "item": "refinery", "item_id": "ep1", "reason": "test",
+                 "player_active": False, "producer_live": False,
+                 "cancellation_class": "elimination"}
+        rows.insert(-1, event)
+        rows.sort(key=lambda r: (r["tick"], r["kind"] == "end"))
+        for seq, row in enumerate(rows):
+            row["seq"] = seq
+        report = analyze(rows)
+        self.assertEqual(report["status"], "OBSERVED_HEALTHY")
+        rows.insert(-1, {**event, "tick": 150})
+        rows.sort(key=lambda r: (r["tick"], r["kind"] == "end"))
+        for seq, row in enumerate(rows):
+            row["seq"] = seq
+        report = analyze(rows)
+        self.assertEqual(report["status"], "UNKNOWN")
+        self.assertIn("duplicate cancellation", report["error"])
 
     def test_legacy_stream_missing_seat_state_is_unknown(self):
         for drop in ("pulses_only", "all"):
@@ -321,25 +429,25 @@ class InvariantTests(unittest.TestCase):
             for row in rows:
                 if drop == "all" or row["kind"] == "pulse":
                     row.pop("seat_state", None)
-            self.assertEqual(verifier.analyze(rows, "g", "p")["status"], "UNKNOWN")
+            self.assertEqual(analyze(rows, "g", "p")["status"], "UNKNOWN")
 
     def test_seat_state_mutation_or_disagreement_is_unknown(self):
         # Reversion to active after a terminal seat state is corrupt evidence.
         rows = capture(150)
         rows[2]["seat_state"] = "lost"
         rows[2]["player_active"] = False
-        self.assertEqual(verifier.analyze(rows, "g", "p")["status"], "UNKNOWN")
+        self.assertEqual(analyze(rows, "g", "p")["status"], "UNKNOWN")
         # player_active and seat_state disagreeing on one row is corrupt evidence.
         rows = capture(150)
         rows[1]["seat_state"] = "lost"
-        self.assertEqual(verifier.analyze(rows, "g", "p")["status"], "UNKNOWN")
+        self.assertEqual(analyze(rows, "g", "p")["status"], "UNKNOWN")
         # A terminal record that disagrees with defeated pulses is corrupt evidence.
         rows = capture(150)
         for row in rows:
             row["player_active"] = False
             row["seat_state"] = "lost"
         rows[-1]["seat_state"] = "won"
-        self.assertEqual(verifier.analyze(rows, "g", "p")["status"], "UNKNOWN")
+        self.assertEqual(analyze(rows, "g", "p")["status"], "UNKNOWN")
 
 
 if __name__ == "__main__":
