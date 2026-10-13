@@ -3,8 +3,8 @@
 
 Runs two serial same-seed baseline-vs-baseline 1v1 cells, samples only the
 OpenRA process whose command line names that cell's support directory, and
-stops at 3 GiB by default. A bounded higher diagnostic stop may be explicitly
-selected up to 9.5 GiB when host RAM headroom is proven. It does not create an
+stops at the measured headless peak plus 3 GiB by default. The stop is
+constrained by the host hard reserve. It does not create an
 execution manifest or authorize campaign jobs.
 """
 from __future__ import annotations
@@ -23,17 +23,19 @@ import shutil
 import signal
 
 import campaign_runner as runner
+import ab_campaign_pilot as pilot
+import campaign_deployment_guard as deployment_guard
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 OUT = ROOT / "results" / "campaign-a5-memory-diagnostic-20261010-sol-advice"
-BASELINE = "964cdb630b1514e1c1a0baed55cbdbc427d5fc11"
+BASELINE = "e49acf41a1b3699f01d44e4def06ed4bf83af038"
 MEMORY_FIX = "173038d7881fe45d012a05d2a37ebd7b17f85ffe"
-ENGINE = "6da7fce14da541180c6baddd6925118fbef65b94"
+ENGINE = "ad061ebf79029da4dcd3a841a9b2540e39cbf968"
 SEED = 1337
 CAP_TICK = 16000
 POLL = 0.25
 WALL = 900
-PROCESS_STOP = int(3.0 * 1024**3)
+PROCESS_STOP = int(8.24 * 1024**3)
 HOST_SOFT_STOP = int(7.0 * 1024**3)
 HOST_HARD_FLOOR = 3 * 1024**3
 HOST_LAUNCH_HEADROOM = 1 * 1024**3
@@ -48,6 +50,7 @@ TRACE_BUFFER_MB = 32
 TRACE_MAX_OUTPUT = 64 * 1024**2
 TRACE_DURATION = "00:00:00:10"
 TRACE_ENABLED = True
+ALLOW_STALE_BUILD = False
 
 
 def admission_ok(available_physical: int, available_commit: int) -> bool:
@@ -184,7 +187,9 @@ def run_cell(index: int) -> dict:
 		str(OUT / "a5_fixed_tick_map"),
 		"--allow-temporary-template",
 		"--time-limit", "1", "--retries", "0", "--stall-timeout", "180",
-		"--keep-variants", "--render", "fast", "--support-dir", str(support)]
+		"--keep-variants", "--render", "headless", "--support-dir", str(support)]
+	if ALLOW_STALE_BUILD:
+		command.append("--allow-stale-build")
 	env = os.environ.copy()
 	env["CAMEO_DEV_SEED"] = str(SEED)
 	start = time.monotonic()
@@ -198,10 +203,30 @@ def run_cell(index: int) -> dict:
 	trace_files = {}
 	trace_errors = {}
 	stop_reason = None
+	deployment_offset = 0
+	deployment = {"verified": False, "check_tick": None, "reported_seat_count": None,
+		"expected_seat_count": None, "seats": {}, "missing": []}
 	with stdout_path.open("w", encoding="utf-8") as stdout:
 		proc = subprocess.Popen(command, cwd=ROOT, env=env, stdout=stdout, stderr=subprocess.STDOUT)
 		while proc.poll() is None:
 			time.sleep(POLL)
+			lua_log = support / "Logs" / "lua.log"
+			if lua_log.is_file():
+				with lua_log.open("r", encoding="utf-8", errors="replace") as stream:
+					stream.seek(deployment_offset); chunk = stream.read(); deployment_offset = stream.tell()
+				deployment = deployment_guard.merge(deployment, deployment_guard.parse(chunk))
+				if deployment["check_tick"] is not None:
+					deployment["verified"] = deployment_guard.valid(deployment, ["BotA", "BotB"])
+					if not deployment["verified"]: stop_reason = "INVALID_NO_DEPLOY"
+			if not deployment["verified"] and deployment_guard.latest_world_tick(support / "Logs" / "debug.log") is not None and deployment_guard.latest_world_tick(support / "Logs" / "debug.log") >= 100:
+				stop_reason = "INVALID_NO_DEPLOY"
+			if stop_reason == "INVALID_NO_DEPLOY":
+				proc.terminate()
+				try: proc.wait(timeout=15)
+				except subprocess.TimeoutExpired: proc.kill(); proc.wait()
+				try: kill_cell_processes(process_rows(support), support)
+				except Exception as cleanup_error: stop_reason += ":CLEANUP_FAILED:" + str(cleanup_error)
+				break
 			try:
 				rows = process_rows(support)
 			except (OSError, RuntimeError, subprocess.SubprocessError, json.JSONDecodeError) as exc:
@@ -350,8 +375,12 @@ def run_cell(index: int) -> dict:
 	replays = list((support / "Replays").rglob("*.orarep")) if (support / "Replays").is_dir() else []
 	log_text = server_log.read_text(encoding="utf-8", errors="replace") if server_log.is_file() else ""
 	lua_text = lua_log.read_text(encoding="utf-8", errors="replace") if lua_log.is_file() else ""
+	deployment = deployment_guard.merge(deployment, deployment_guard.parse(lua_text))
+	deployment["verified"] = deployment_guard.valid(deployment, ["BotA", "BotB"])
+	if not deployment["verified"] and stop_reason is None: stop_reason = "INVALID_NO_DEPLOY"
 	seed_pin_verified = f"CAMEO DEV SEED pinned - RandomSeed={SEED} (parity harness)" in log_text
-	records_verified = len(match_rows) == 2 and len({r.get("game_uid") for r in match_rows}) == 1 and all((r.get("player") or {}).get("outcome") in ("won", "lost") for r in match_rows)
+	records_verified = (len(match_rows) == 2 and runner.match_game_uid(match_rows) is not None
+		and all((r.get("player") or {}).get("outcome") in ("won", "lost") for r in match_rows))
 	duration_ticks = match_rows[0].get("duration_ticks") if records_verified else None
 	natural_below_cap = type(duration_ticks) is int and duration_ticks < 60000
 	batch_result = summary.get("results", [{}])[0] if summary.get("results") else {}
@@ -359,17 +388,19 @@ def run_cell(index: int) -> dict:
 	valid_game = (summary.get("matches") == 1 and summary.get("completed") == 1
 		and batch_result.get("status") == "ok" and batch_result.get("exit_code") == 0 and batch_result.get("attempts") == 1
 		and not summary.get("new_exceptions") and seed_pin_verified and records_verified
-		and censored_cap_verified and len(replays) == 1 and stop_reason is None and peak < PROCESS_STOP)
+		and censored_cap_verified and deployment["verified"] and len(replays) == 1 and stop_reason is None and peak < PROCESS_STOP)
 	if not valid_game and stop_reason is None:
 		stop_reason = "A5_RECEIPT_VALIDATION_FAILED"
 	return {"cell": cell, "seed": SEED, "source_head": subprocess.check_output(
 		["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip(),
-		"baseline_parent": BASELINE, "engine_version": (ROOT / "engine/VERSION").read_text().strip(),
+		"baseline_parent": BASELINE, "engine_version": pilot.read_engine_version(ROOT / "engine/VERSION"),
 		"binary_sha256": {str(p.relative_to(ROOT)): file_sha256(p) for p in (
-			ROOT / "engine/bin/OpenRA.exe", ROOT / "engine/bin/OpenRA.Mods.Cameo.dll") if p.is_file()},
+			ROOT / "engine/bin/OpenRA.exe", ROOT / "engine/bin/OpenRA.Game.dll",
+			ROOT / "engine/bin/OpenRA.Mods.Cameo.dll") if p.is_file()},
 		"exit_code": proc.returncode, "stop_reason": stop_reason or "PROCESS_EXIT",
 		"wall_seconds": round(time.monotonic() - start, 2), "peak_private_bytes": peak,
-		"stop_threshold_bytes": PROCESS_STOP, "host_soft_stop_bytes": HOST_SOFT_STOP,
+		"stop_threshold_bytes": runner.PRIVATE_LIMIT,
+		"diagnostic_stop_threshold_bytes": PROCESS_STOP, "host_soft_stop_bytes": HOST_SOFT_STOP,
 		"host_hard_floor_bytes": HOST_HARD_FLOOR, "ceiling_bytes": runner.PRIVATE_LIMIT,
 		"samples": samples, "support": str(support), "driver_stdout": str(stdout_path),
 		"runtime_counter_files": [str(support / f"System.Runtime-{pid}.csv") for pid in counters],
@@ -382,18 +413,19 @@ def run_cell(index: int) -> dict:
 		"fingerprint_id": summary.get("fingerprint_id"), "seed_pin_verified": seed_pin_verified,
 		"records_verified": records_verified, "duration_ticks": duration_ticks,
 		"cap_tick": CAP_TICK, "observed_cap_tick": observed_cap_tick, "censored_cap_verified": censored_cap_verified,
-		"natural_below_cap": natural_below_cap, "replay_count": len(replays), "valid_game": valid_game}
+		"natural_below_cap": natural_below_cap, "deployment": deployment,
+		"replay_count": len(replays), "valid_game": valid_game}
 
 
 def main() -> int:
-	global OUT, PROCESS_STOP, HOST_SOFT_STOP, HOST_HARD_FLOOR, TRACE_ENABLED, CAP_TICK
+	global OUT, PROCESS_STOP, HOST_SOFT_STOP, HOST_HARD_FLOOR, TRACE_ENABLED, CAP_TICK, ALLOW_STALE_BUILD
 	parser = argparse.ArgumentParser(description=__doc__)
 	parser.add_argument("--execute-a5-diagnostic", action="store_true",
 		help="explicitly run two bounded A5 qualification cells; never campaign outcomes")
 	parser.add_argument("--output-dir", type=pathlib.Path, default=OUT,
 		help="new, non-existing artifact directory; existing evidence is never overwritten")
-	parser.add_argument("--process-stop-gib", type=float, default=3.0,
-		help="PID-scoped diagnostic stop threshold; maximum 9.5 GiB for current host headroom")
+	parser.add_argument("--process-stop-gib", type=float, default=8.24,
+		help="PID-scoped stop threshold: measured headless peak plus 3 GiB")
 	parser.add_argument("--host-soft-stop-gib", type=float, default=7.0,
 		help="stop before the hard free-RAM floor")
 	parser.add_argument("--host-hard-floor-gib", type=float, default=3.0,
@@ -402,18 +434,23 @@ def main() -> int:
 		help="disable gc-verbose profiler for parity runs; System.Runtime counters remain enabled")
 	parser.add_argument("--tick-cap", type=int, default=16000,
 		help="fixed world-tick cap for A5 parity; keeps the qualification below natural match end")
+	parser.add_argument("--allow-stale-build", action="store_true",
+		help="forward to the batch harness when this worktree's mod sources are "
+			"newer than the pinned engine/bin dlls only by checkout timestamp "
+			"(e.g. hardlink-materialized engine); receipt records binary sha256")
 	args = parser.parse_args()
 	if not 1000 <= args.tick_cap < 17000:
 		raise RuntimeError("A5 parity cap must be in [1000, 17000) to stay below observed natural end")
 	CAP_TICK = args.tick_cap
-	if not (3.0 <= args.process_stop_gib <= 9.5):
-		raise RuntimeError("process stop must be between 3 and 9.5 GiB pending larger host headroom")
+	if not (3.0 <= args.process_stop_gib <= 8.24):
+		raise RuntimeError("process stop must not exceed the measured headless peak plus 3 GiB")
 	if not (3.0 <= args.host_hard_floor_gib < args.host_soft_stop_gib):
 		raise RuntimeError("host hard floor must be >=3 GiB and strictly below host soft stop")
 	PROCESS_STOP = int(args.process_stop_gib * 1024**3)
 	HOST_HARD_FLOOR = int(args.host_hard_floor_gib * 1024**3)
 	HOST_SOFT_STOP = int(args.host_soft_stop_gib * 1024**3)
 	TRACE_ENABLED = not args.no_allocation_trace
+	ALLOW_STALE_BUILD = args.allow_stale_build
 	output_dir = args.output_dir if args.output_dir.is_absolute() else ROOT / args.output_dir
 	OUT = output_dir.resolve()
 	if not args.execute_a5_diagnostic:
@@ -429,7 +466,7 @@ def main() -> int:
 		raise RuntimeError("gameplay/tooling source is dirty; commit the exact probe before qualification")
 	if subprocess.run(["git", "merge-base", "--is-ancestor", BASELINE, "HEAD"], cwd=ROOT).returncode:
 		raise RuntimeError("pinned baseline is not an ancestor")
-	if (ROOT / "engine/VERSION").read_text().strip() != ENGINE:
+	if pilot.read_engine_version(ROOT / "engine/VERSION") != ENGINE:
 		raise RuntimeError("engine pin mismatch")
 	host = host_memory_status()
 	if not admission_ok(host["available_physical_bytes"], host["commit_available_bytes"]):
@@ -447,7 +484,6 @@ def main() -> int:
 	OUT.mkdir(parents=True)
 	map_dir = OUT / "a5_fixed_tick_map"
 	shutil.copytree(ROOT / "mods/cameo/maps/ai_duel_gate_20260928", map_dir)
-	import ab_campaign_pilot as pilot
 	map_monitor = pilot.install_campaign_monitor(map_dir, 2, cap_tick=CAP_TICK, sample_interval=2000,
 		rules_filename="rules.yaml", seat_names=["BotA", "BotB"])
 	results = []
@@ -479,13 +515,28 @@ def main() -> int:
 		order_verdict = "INCOMPLETE_NO_PAIR_OF_REPLAYS"
 	processes_left = subprocess.run(["powershell.exe", "-NoProfile", "-NonInteractive", "-Command",
 		"@(Get-Process OpenRA -ErrorAction SilentlyContinue).Count"], capture_output=True, text=True)
+	orchestration = {pathlib.Path(m.__file__).name: file_sha256(m.__file__)
+		for m in (sys.modules[__name__], runner, pilot, deployment_guard) if getattr(m, "__file__", None)}
+	tool_dir = pathlib.Path(__file__).resolve().parent
+	overlay = tool_dir != (ROOT / "tools" / "ai").resolve()
+	if overlay:
+		for p in sorted(tool_dir.glob("*.py")):
+			orchestration["overlay:" + p.name] = file_sha256(p)
+	for aux in ("run_ai_match_batch.py", "order_stream_diff.py", "apply_increment_switches.py"):
+		aux_path = ROOT / "tools" / "ai" / aux
+		if aux_path.is_file():
+			orchestration["committed:" + aux] = file_sha256(aux_path)
 	receipt = {"purpose": "A5_FIXED_TICK_PARITY_QUALIFICATION_ONLY_NOT_CAMPAIGN_OUTCOME",
-		"cap_tick": CAP_TICK, "map_monitor": map_monitor,
+		"cap_tick": CAP_TICK, "map_monitor": map_monitor, "render_mode": "headless",
 		"baseline_commit": BASELINE, "source_head": subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip(),
 		"binary_sha256": {str(p.relative_to(ROOT)): file_sha256(p) for p in (
-			ROOT / "engine/bin/OpenRA.exe", ROOT / "engine/bin/OpenRA.Mods.Cameo.dll")},
+			ROOT / "engine/bin/OpenRA.exe", ROOT / "engine/bin/OpenRA.Game.dll",
+			ROOT / "engine/bin/OpenRA.Mods.Cameo.dll") if p.is_file()},
 		"dotnet_counters_sha256": file_sha256(COUNTERS_EXE),
 		"engine_version": ENGINE, "seed": SEED, "pair": results,
+		"process_private_cap_bytes": runner.PRIVATE_LIMIT,
+		"host_emergency_floor_bytes": runner.FREE_RAM_HARD_FLOOR,
+		"orchestration_sha256": orchestration,
 		"order_stream_verdict": order_verdict, "system_openra_process_count": processes_left.stdout.strip(),
 		"a5_diagnostic_passed": len(results) == 2 and all(r["valid_game"] for r in results) and
 			results[0].get("fingerprint_id") == results[1].get("fingerprint_id") and order_verdict in ("IDENTICAL", "IDENTICAL_TAIL_FLUSH"),

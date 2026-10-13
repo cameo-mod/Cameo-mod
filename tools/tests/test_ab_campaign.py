@@ -22,7 +22,7 @@ def manifest():
         "switches": list(ab.SWITCHES),
         "map_strata": [{"name": n, "path": p, "sha256": h} for n, (p, h) in ab.MAPS.items()],
         "pins": {"source_commit": "700bb16483f6d92664153e98d6f2560c312acaab",
-                 "engine_version": "6da7fce14da541180c6baddd6925118fbef65b94"},
+                 "engine_version": "ad061ebf79029da4dcd3a841a9b2540e39cbf968"},
         "world_tick_cap": 45000,
         "wall_timeout_s": 3000,
         "stall_timeout_s": 180,

@@ -79,6 +79,7 @@ effect_classes:
   BU_harvester_logistics: restraint
   BT_expansion_prebuild: restraint
   BP_effective_unit_value: neutral    # learned arsenal weight feed into the unit builder (a3a4); sibling weight feeds AP_tier1_priors / I_derived_unit_weights are neutral
+  BP_squad_desire: restraint           # LEARN-P6 stance provider replaces the squad state machine and can pick Defend/Retreat/Regroup over Attack = a hold (M13: any hold part makes the group a restraint); merge gap from a55954c1
 
 groups:
   # SHIPPED 2026-10-01 as master defaults after the INC-1+2+3 A/B (all 13-3, 81% vs ctrl 12-4, 75%): former groups
