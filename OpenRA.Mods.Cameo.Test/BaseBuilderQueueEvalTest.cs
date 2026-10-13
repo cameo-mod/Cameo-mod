@@ -118,7 +118,7 @@ namespace OpenRA.Mods.Cameo.Test
 			var clock = new CashStarvationClock();
 			clock.Observe(Q, "TANK", true, 125);
 			clock.Observe(P, "PROC", true, 100);
-			var serialized = new MiniYamlNode("CashStarvationClock", "", clock.SaveState()).WriteToString();
+			var serialized = new List<MiniYamlNode> { new("CashStarvationClock", "", clock.SaveState()) }.WriteToString();
 			var restored = new CashStarvationClock();
 			restored.RestoreState(MiniYaml.FromString(serialized, "cash-starvation-clock-test").Single().Value.Nodes);
 
