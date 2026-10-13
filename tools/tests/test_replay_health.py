@@ -317,10 +317,12 @@ class PlayerEventVersionTests(unittest.TestCase):
                 "tick": 10, "seat": "seat_3", "kind": kind, "seq": 1, **extra}
 
     def _stage_row(self, **extra):
-        return self._event(version=2, kind="outpost_stage",
-                           cell="42,17", stage="cover", cover_value=600,
-                           at_risk_value=900, reason="cover_completed",
-                           episode=0, escort_seq=0, **extra)
+        fields = dict(version=2, kind="outpost_stage",
+                      cell="42,17", stage="cover", cover_value=600,
+                      at_risk_value=900, reason="cover_completed",
+                      episode=0, escort_seq=0)
+        fields.update(extra)
+        return self._event(**fields)
 
     def test_v1_rows_still_validate(self):
         temp, logs = self._channel([self._event(), self._event(units=3)])
