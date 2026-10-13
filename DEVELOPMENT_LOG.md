@@ -21356,3 +21356,10 @@ The only mod code that queued a harvest-less dock trip was the unbound slave bra
 next activity at dock completion idles the slave without the fix and keeps it harvesting with it;
 source contracts pin the engine guard and interrupt text (so an engine bump re-opens this) and the
 single guarded `new MoveToDock(` in the slave. Not yet built or run after this addendum.
+
+### 2026-10-13 - BUG-NAXIS-UNBOUND-SLAVE-IDLE: live repro cancelled
+The lead cancelled the base-vs-fixed headless repro after the maintainer confirmed the fix in game. One base-build launch
+(ebea34c82) happened BEFORE Luna Manager's per-match preflight ACK: it is a pre-ACK, unadmitted startup attempt, not an
+admitted match. It exited after 2 s on a renderer init failure (OpenRA.Platforms.Default.dll not yet built) with no ticks,
+deliveries or replay; the fixed build was never launched. No runtime delivery evidence exists from this attempt. Artifacts
+and the full label are in C:\cw\ub-trace\RECEIPT_PRE_ACK_STARTUP_ATTEMPT.md. Runtime fix: c21783291; task stays open until landed.
