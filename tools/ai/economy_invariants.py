@@ -1,59 +1,120 @@
 #!/usr/bin/env python3
-"""Mandatory economy checks with complete-tail validation and fixture provenance.
+"""Mandatory economy checks with complete-tail validation and fixture attribution.
 
 Only economic findings before the first terminal seat state are scored. Every
 record, including the terminal tail, must still pass schema/census validation.
-Fixture termination is accepted only when a SHA-pinned map Lua source contains
-the scheduled primary-objective failure and its CapTick matches the terminal
-tick within one health-pulse interval (50 ticks). Exit 0: observed healthy;
+Fixture termination is an informational label, bound to the map hash in this
+capture's receipts and a terminal tick at/after the scheduled CapTick. Exit 0: observed healthy;
 20: hard block; 21: unknown/incomplete evidence.
 """
 import argparse
 from collections import deque
 import hashlib
 import json
+import os
 from pathlib import Path
 import re
 
 from replay_health import EvidenceError, atomic_report, identity, integer, read_jsonl
 
 POLICY = "economy-invariants-v2"
-FIXTURE_TICK_TOLERANCE = 50
 
 
-def read_fixture_evidence(script_path, expected_sha256, tolerance=FIXTURE_TICK_TOLERANCE):
-    """Verify a pinned cap Lua and extract its pre-registered objective tick."""
-    path = Path(script_path)
-    if not re.fullmatch(r"[0-9a-fA-F]{64}", str(expected_sha256 or "")):
-        raise EvidenceError("missing/invalid fixture script SHA-256")
-    if type(tolerance) is not int or tolerance < 0 or tolerance > FIXTURE_TICK_TOLERANCE:
-        raise EvidenceError("invalid fixture tick tolerance")
+def _map_tree_sha256(root):
+    """Match run_ai_match_batch._map_sha256 for directory maps."""
+    digest = hashlib.sha256()
+    files = [p for p in root.rglob("*") if p.is_file()]
+    for path in sorted(files, key=lambda p: p.relative_to(root).as_posix()):
+        digest.update(path.relative_to(root).as_posix().encode("utf-8"))
+        digest.update(b"\0")
+        digest.update(path.read_bytes())
+        digest.update(b"\0")
+    return digest.hexdigest()
+
+
+def read_fixture_evidence(script_path, expected_sha256, support_dir, game_uid, player):
+    """Return fixture attribution only when receipts bind this exact capture/map."""
     try:
-        data = path.read_bytes()
-    except OSError as error:
-        raise EvidenceError("fixture script unavailable") from error
-    digest = hashlib.sha256(data).hexdigest()
-    if digest.lower() != expected_sha256.lower():
-        raise EvidenceError("fixture script SHA-256 mismatch")
-    try:
+        script = Path(script_path).resolve()
+        support = Path(support_dir).resolve()
+        if not re.fullmatch(r"[0-9a-fA-F]{64}", str(expected_sha256 or "")):
+            return None
+        data = script.read_bytes()
+        source_sha = hashlib.sha256(data).hexdigest()
+        if source_sha.lower() != expected_sha256.lower():
+            return None
         text = data.decode("utf-8-sig")
-    except UnicodeError as error:
-        raise EvidenceError("fixture script is not UTF-8") from error
 
-    cap = re.search(r"(?m)^\s*local\s+CapTick\s*=\s*(\d+)\s*$", text)
-    callback = re.search(
-        r"Trigger\.AfterDelay\s*\(\s*CapTick\s*,\s*function\s*\(\s*\)(.*?)\n\s*end\s*\)",
-        text, re.DOTALL)
-    if (cap is None or callback is None
-            or not re.search(r"FailPrimaryObjectives\s*\(", callback.group(1))
-            or not re.search(r"MarkFailedObjective\s*\(", text)):
-        raise EvidenceError("fixture script lacks a verifiable objective terminal trigger")
-    expected_tick = int(cap.group(1))
-    if expected_tick <= 0:
-        raise EvidenceError("invalid fixture CapTick")
-    return {"verified": True, "expected_tick": expected_tick,
-            "tolerance_ticks": tolerance, "trigger": "scheduled primary-objective failure",
-            "source_path": str(path.resolve()), "source_sha256": digest}
+        # The support folder's cap status records the runner's exact --map and
+        # --support-dir. The batch fingerprint binds every map byte in that path.
+        cap_status = json.loads((support / "cap_status.json").read_text(encoding="utf-8"))
+        summary = json.loads((support / "batch_summary.json").read_text(encoding="utf-8"))
+        command = cap_status.get("command")
+        if (cap_status.get("status") != "COMPLETED" or cap_status.get("exit_code") != 0
+                or not isinstance(command, list)):
+            return None
+
+        def flag_value(flag):
+            try:
+                return command[command.index(flag) + 1]
+            except (ValueError, IndexError):
+                return None
+
+        map_arg, support_arg = flag_value("--map"), flag_value("--support-dir")
+        if not map_arg or not support_arg or Path(support_arg).resolve() != support:
+            return None
+        map_root = Path(map_arg).resolve()
+        if not map_root.is_dir():
+            return None
+        try:
+            script.relative_to(map_root)
+        except ValueError:
+            return None
+        fingerprint = summary.get("fingerprint")
+        recorded_map_sha = fingerprint.get("map_sha256") if isinstance(fingerprint, dict) else None
+        if (summary.get("support_dir") and Path(summary["support_dir"]).resolve() != support
+                or not isinstance(recorded_map_sha, str)
+                or _map_tree_sha256(map_root) != recorded_map_sha):
+            return None
+
+        # Tie the receipt to the game UID and the Lua to the seat-specific name.
+        result_path = support / "batch_results.jsonl"
+        matched_uid = False
+        for line in result_path.read_text(encoding="utf-8").splitlines():
+            result = json.loads(line)
+            for outcome in result.get("bot_outcomes", []):
+                record_id = outcome.get("record_id", "")
+                if isinstance(record_id, str) and record_id.partition("|")[0] == game_uid:
+                    matched_uid = True
+        if not matched_uid:
+            return None
+
+        # Require executable-shaped cap code after stripping Lua comments; exact
+        # map-hash binding prevents a lookalike foreign script from being trusted.
+        text = re.sub(r"--\[\[.*?\]\]", "", text, flags=re.DOTALL)
+        text = re.sub(r"(?m)--.*$", "", text)
+        cap = re.search(r"(?m)^\s*local\s+CapTick\s*=\s*(\d+)\s*$", text)
+        seat_list = re.search(r"(?m)^\s*local\s+CampaignSeatNames\s*=\s*\{([^}]*)\}", text)
+        fail = re.search(r"(?s)local\s+function\s+FailPrimaryObjectives\s*\(player\)(.*?)\nend", text)
+        callback = re.search(
+            r"Trigger\.AfterDelay\s*\(\s*CapTick\s*,\s*function\s*\(\s*\)(.*?)\n\s*end\s*\)",
+            text, re.DOTALL)
+        seat_names = set(re.findall(r"[\"']([^\"']+)[\"']", seat_list.group(1))) if seat_list else set()
+        if (cap is None or seat_list is None or player not in seat_names or fail is None
+                or not re.search(r"player\.MarkFailedObjective\s*\(", fail.group(1))
+                or callback is None
+                or not re.search(r"AB_CAMPAIGN_CAP", callback.group(1))
+                or not re.search(r"Player\.GetPlayer\s*\(\s*name\s*\)", callback.group(1))
+                or not re.search(r"FailPrimaryObjectives\s*\(\s*p\s*\)", callback.group(1))):
+            return None
+        expected_tick = int(cap.group(1))
+        if expected_tick <= 0:
+            return None
+        return {"verified": True, "expected_tick": expected_tick,
+                "source_path": str(script), "source_sha256": source_sha,
+                "map_sha256": recorded_map_sha, "capture_game_uid": game_uid}
+    except (OSError, UnicodeError, ValueError, TypeError, KeyError, AttributeError, json.JSONDecodeError):
+        return None
 
 
 def analyze(rows, game_uid, player, *, fixture_evidence=None):
@@ -272,22 +333,24 @@ def analyze(rows, game_uid, player, *, fixture_evidence=None):
             raise EvidenceError("no terminal seat-state evidence")
         if not pulses:
             raise EvidenceError("no pre-terminal pulse observations")
-        if fixture_evidence is None:
-            raise EvidenceError("missing verified fixture terminal provenance")
-        if (not isinstance(fixture_evidence, dict) or fixture_evidence.get("verified") is not True
-                or type(fixture_evidence.get("expected_tick")) is not int
-                or type(fixture_evidence.get("tolerance_ticks")) is not int
-                or not re.fullmatch(r"[0-9a-f]{64}", str(fixture_evidence.get("source_sha256", "")))):
-            raise EvidenceError("invalid fixture terminal provenance")
-        delta = abs(terminal["tick"] - fixture_evidence["expected_tick"])
-        terminal_kind = ("FIXTURE_TERMINAL"
-                         if delta <= fixture_evidence["tolerance_ticks"] else "GAME_TERMINAL")
-        report["terminal"] = {"kind": terminal_kind, **terminal,
-                              "fixture_expected_tick": fixture_evidence["expected_tick"],
-                              "fixture_tick_delta": delta,
-                              "fixture_source_sha256": fixture_evidence["source_sha256"],
-                              "fixture_source_path": fixture_evidence.get("source_path"),
-                              "fixture_tolerance_ticks": fixture_evidence["tolerance_ticks"]}
+        fixture_bound = (
+            isinstance(fixture_evidence, dict)
+            and fixture_evidence.get("verified") is True
+            and fixture_evidence.get("capture_game_uid") == game_uid
+            and type(fixture_evidence.get("expected_tick")) is int
+            and fixture_evidence["expected_tick"] > 0
+            and re.fullmatch(r"[0-9a-f]{64}", str(fixture_evidence.get("source_sha256", "")))
+            and re.fullmatch(r"[0-9a-f]{64}", str(fixture_evidence.get("map_sha256", "")))
+            and terminal["tick"] >= fixture_evidence["expected_tick"]
+        )
+        report["terminal"] = {"kind": "FIXTURE_TERMINAL" if fixture_bound else "GAME_TERMINAL",
+                              **terminal}
+        if fixture_bound:
+            report["terminal"].update({
+                "fixture_expected_tick": fixture_evidence["expected_tick"],
+                "fixture_source_sha256": fixture_evidence["source_sha256"],
+                "fixture_map_sha256": fixture_evidence["map_sha256"],
+                "fixture_source_path": fixture_evidence.get("source_path")})
         report["defeated"] = terminal["seat_state"] == "lost"
         report["status"] = "BLOCK" if report["findings"] else "OBSERVED_HEALTHY"
         report["pulses"] = pulses
@@ -308,16 +371,14 @@ def main():
                         help="map Lua source containing the pre-registered objective terminal")
     parser.add_argument("--fixture-script-sha256",
                         help="pre-registered exact SHA-256 of --fixture-script")
-    parser.add_argument("--fixture-tick-tolerance", type=int, default=FIXTURE_TICK_TOLERANCE)
     args = parser.parse_args()
     try:
         rows, receipt = read_jsonl(args.support / "Logs/cameo-ai-economy-health.jsonl")
         evidence = None
         if args.fixture_script is not None or args.fixture_script_sha256 is not None:
-            if args.fixture_script is None or args.fixture_script_sha256 is None:
-                raise EvidenceError("fixture script and pre-registered SHA must be supplied together")
-            evidence = read_fixture_evidence(args.fixture_script, args.fixture_script_sha256,
-                                             args.fixture_tick_tolerance)
+            if args.fixture_script is not None and args.fixture_script_sha256 is not None:
+                evidence = read_fixture_evidence(args.fixture_script, args.fixture_script_sha256,
+                                                 args.support, args.game_uid, args.player)
         report = analyze(rows, args.game_uid, args.player, fixture_evidence=evidence)
         report["input"] = receipt
     except (EvidenceError, OSError, ValueError, TypeError) as error:

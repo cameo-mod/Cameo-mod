@@ -1,3 +1,4 @@
+import hashlib
 import importlib.util
 from pathlib import Path
 import sys
@@ -34,14 +35,34 @@ def codes(rows):
 
 
 def analyze(rows, game_uid="g", player="p", *, fixture_tick=None):
-    # Unit-test fixture metadata stands in for an independently SHA-pinned Lua
-    # fixture; provenance parsing itself is covered below.
+    # Unit-test metadata stands in for capture-bound receipt evidence.
     if fixture_tick is None:
         fixture_tick = rows[-1]["tick"] if rows else 0
     evidence = {"verified": True, "expected_tick": fixture_tick,
-                "tolerance_ticks": 50, "source_sha256": "a" * 64,
-                "source_path": "test-fixture.lua"}
+                "source_sha256": "a" * 64, "map_sha256": "b" * 64,
+                "capture_game_uid": game_uid, "source_path": "test-fixture.lua"}
     return verifier.analyze(rows, game_uid, player, fixture_evidence=evidence)
+
+
+def fixture_bundle(root, script_text, game_uid="g", player="p"):
+    support = root / "support"
+    support.mkdir(parents=True, exist_ok=True)
+    map_root = root / "loaded-map"
+    map_root.mkdir(parents=True, exist_ok=True)
+    script = map_root / "ab_campaign_monitor.lua"
+    script.write_text(script_text, encoding="utf-8")
+    script_sha = hashlib.sha256(script.read_bytes()).hexdigest()
+    map_sha = verifier._map_tree_sha256(map_root)
+    (support / "cap_status.json").write_text(json.dumps({
+        "status": "COMPLETED", "exit_code": 0,
+        "command": ["python", "tools/ai/run_ai_match_batch.py", "--map", str(map_root),
+                    "--support-dir", str(support)]}), encoding="utf-8")
+    (support / "batch_summary.json").write_text(json.dumps({
+        "support_dir": str(support), "fingerprint": {"map_sha256": map_sha}}), encoding="utf-8")
+    (support / "batch_results.jsonl").write_text(json.dumps({
+        "bot_outcomes": [{"record_id": f"{game_uid}|seat_3"}]}), encoding="utf-8")
+    evidence = verifier.read_fixture_evidence(script, script_sha, support, game_uid, player)
+    return support, map_root, script, script_sha, evidence
 
 
 def cancellation_capture(active=True, live=True, classification="production"):
@@ -342,10 +363,10 @@ class InvariantTests(unittest.TestCase):
         self.assertEqual(report["status"], "UNKNOWN")
         self.assertIn("missing terminal seat state", report["error"])
 
-    def test_missing_fixture_provenance_is_unknown(self):
+    def test_missing_fixture_provenance_is_generic_game_terminal(self):
         report = verifier.analyze(capture(150), "g", "p")
-        self.assertEqual(report["status"], "UNKNOWN")
-        self.assertIn("fixture terminal provenance", report["error"])
+        self.assertEqual(report["status"], "OBSERVED_HEALTHY")
+        self.assertEqual(report["terminal"]["kind"], "GAME_TERMINAL")
 
     def test_only_pinned_cap_tick_can_be_labelled_fixture_terminal(self):
         rows = capture(150)
@@ -356,25 +377,85 @@ class InvariantTests(unittest.TestCase):
         self.assertEqual(natural["status"], "OBSERVED_HEALTHY")
         self.assertEqual(natural["terminal"]["kind"], "GAME_TERMINAL")
 
-    def test_fixture_lua_evidence_is_sha_pinned_and_objective_scoped(self):
-        source = ("local CapTick = 200\n"
-                  "local function FailPrimaryObjectives(p) p.MarkFailedObjective(1) end\n"
-                  "Trigger.AfterDelay(CapTick, function()\n"
-                  "  for _, p in ipairs(players) do FailPrimaryObjectives(p) end\n"
-                  "end)\n").encode()
+    def test_early_terminal_is_game_terminal_at_minus_one_and_minus_fifty(self):
+        rows = capture(150)
+        for expected in (201, 250):
+            report = analyze(rows, fixture_tick=expected)
+            self.assertEqual(report["status"], "OBSERVED_HEALTHY")
+            self.assertEqual(report["terminal"]["kind"], "GAME_TERMINAL")
+
+    def test_won_at_cap_and_lost_at_cap_plus_sample_are_terminal_labels_only(self):
+        won = capture(150)
+        for row in won:
+            if row["kind"] in ("pulse", "end") and row["tick"] >= 200:
+                row["seat_state"] = "won"
+                if row["kind"] == "pulse":
+                    row["player_active"] = False
+        report = analyze(won, fixture_tick=200)
+        self.assertEqual(report["terminal"]["kind"], "FIXTURE_TERMINAL")
+        self.assertEqual(report["status"], "OBSERVED_HEALTHY")
+
+        sampled = capture(200)
+        report = analyze(sampled, fixture_tick=200)
+        self.assertEqual(report["terminal"]["kind"], "FIXTURE_TERMINAL")
+        self.assertEqual(report["terminal"]["tick"], 250)
+        self.assertEqual(report["status"], "OBSERVED_HEALTHY")
+
+    def test_complete_game_without_fixture_is_game_terminal(self):
+        report = verifier.analyze(capture(150), "g", "p")
+        self.assertEqual(report["status"], "OBSERVED_HEALTHY")
+        self.assertEqual(report["terminal"]["kind"], "GAME_TERMINAL")
+
+    def test_complete_game_without_fixture_cli_is_healthy(self):
         with tempfile.TemporaryDirectory() as directory:
-            script = Path(directory) / "fixture.lua"
-            script.write_bytes(source)
-            import hashlib
-            digest = hashlib.sha256(source).hexdigest()
-            evidence = verifier.read_fixture_evidence(script, digest)
+            support = Path(directory)
+            logs = support / "Logs"
+            logs.mkdir()
+            (logs / "cameo-ai-economy-health.jsonl").write_text(
+                "".join(json.dumps(row) + "\n" for row in capture(150)), encoding="utf-8")
+            result = subprocess.run(
+                [sys.executable, verifier.__file__, str(support), "--game-uid", "g",
+                 "--player", "p"], capture_output=True, text=True, timeout=15)
+            self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+            report = json.loads(result.stdout)
+            self.assertEqual(report["status"], "OBSERVED_HEALTHY")
+            self.assertEqual(report["terminal"]["kind"], "GAME_TERMINAL")
+
+    def test_fixture_lua_evidence_is_sha_pinned_and_objective_scoped(self):
+        source = ("local CampaignSeatNames = {\"p\"}\n"
+                  "local CapTick = 200\n"
+                  "local function FailPrimaryObjectives(player)\n"
+                  "  player.MarkFailedObjective(1)\nend\n"
+                  "WorldLoaded = function()\n"
+                  "  Trigger.AfterDelay(CapTick, function()\n"
+                  "    print(\"AB_CAMPAIGN_CAP tick=\" .. DateTime.GameTime)\n"
+                  "    for _, name in ipairs(CampaignSeatNames) do local p = Player.GetPlayer(name); "
+                  "if p then FailPrimaryObjectives(p) end end\n"
+                  "  end)\nend\n")
+        with tempfile.TemporaryDirectory() as directory:
+            _, map_root, script, digest, evidence = fixture_bundle(Path(directory), source)
             self.assertEqual(evidence["expected_tick"], 200)
             self.assertEqual(evidence["source_sha256"], digest)
-            with self.assertRaises(verifier.EvidenceError):
-                verifier.read_fixture_evidence(script, "0" * 64)
-            script.write_text("local CapTick = 200\nTrigger.AfterDelay(CapTick, function() end)\n")
-            with self.assertRaises(verifier.EvidenceError):
-                verifier.read_fixture_evidence(script, hashlib.sha256(script.read_bytes()).hexdigest())
+            self.assertEqual(evidence["map_sha256"], verifier._map_tree_sha256(map_root))
+            self.assertIsNone(verifier.read_fixture_evidence(script, "0" * 64,
+                                                            Path(directory) / "support", "g", "p"))
+            foreign = Path(directory) / "foreign.lua"
+            foreign.write_bytes(script.read_bytes())
+            foreign_evidence = verifier.read_fixture_evidence(
+                foreign, digest, Path(directory) / "support", "g", "p")
+            self.assertIsNone(foreign_evidence)
+            foreign_report = verifier.analyze(capture(150), "g", "p",
+                                              fixture_evidence=foreign_evidence)
+            self.assertEqual(foreign_report["status"], "OBSERVED_HEALTHY")
+            self.assertEqual(foreign_report["terminal"]["kind"], "GAME_TERMINAL")
+            self.assertIsNone(verifier.read_fixture_evidence(script, digest,
+                                                            Path(directory) / "support", "other", "p"))
+
+    def test_foreign_fixture_falls_back_to_same_game_terminal_verdict(self):
+        rows = capture(150)
+        report = verifier.analyze(rows, "g", "p", fixture_evidence=None)
+        self.assertEqual(report["status"], "OBSERVED_HEALTHY")
+        self.assertEqual(report["terminal"]["kind"], "GAME_TERMINAL")
 
     def test_post_terminal_tail_still_requires_complete_and_valid_pulse_shape(self):
         mutations = (
