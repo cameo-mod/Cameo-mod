@@ -225,6 +225,20 @@ class InvariantTests(unittest.TestCase):
             mutate(rows)
             self.assertEqual(analyze(rows, "g", "p")["status"], "UNKNOWN")
 
+    def test_aggregated_raw_credit_cannot_replace_truncated_or_foreign_health(self):
+        raw = {"schema": 2, "game_uid": "g", "player": "p", "tick": 1500,
+               "seq": 0, "kind": "resource-accepted-tick",
+               "evidence": {"event_count": 270006, "credited_value": 27000600,
+                            "accepted_credit": True, "detail_truncated": True}}
+        self.assertEqual(analyze([raw], "g", "p")["status"], "UNKNOWN")
+        rows = capture()
+        rows.pop()
+        self.assertEqual(analyze(rows, "g", "p")["status"], "UNKNOWN")
+        rows = capture()
+        for row in rows:
+            row["game_uid"] = "foreign"
+        self.assertEqual(analyze(rows, "g", "p")["status"], "UNKNOWN")
+
     def test_missed_scheduled_pulse_gap_is_unknown(self):
         # Producer cadence is one pulse per 50 world ticks (run C: 0/50/../13150).
         # Dropping one scheduled pulse leaves a >50 gap the coverage guard rejects.

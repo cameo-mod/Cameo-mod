@@ -42,6 +42,7 @@ namespace OpenRA.Mods.Cameo.Traits
 		int lastPulse = -1;
 		int queueIndexTick = -1;
 		bool finished;
+		readonly EconomyAcceptedTick accepted = new();
 
 		// Own-queue canonical index, rebuilt at most once per world tick on the first proven
 		// cancellation: one enumeration of world production queues amortizes every cancel in
@@ -73,6 +74,7 @@ namespace OpenRA.Mods.Cameo.Traits
 		{
 			if (state == null || finished)
 				return;
+			FlushAccepted(tick, terminal);
 			observations.Clear();
 			foreach (var pair in self.World.ActorsWithTrait<ProductionQueue>())
 			{
@@ -143,10 +145,17 @@ namespace OpenRA.Mods.Cameo.Traits
 				state.MarkIncomplete();
 		}
 
+		void FlushAccepted(int tick, bool terminal = false)
+		{
+			if (accepted.TryTakeBefore(tick, terminal, out var acceptedTick, out var evidence))
+				WriteRaw("resource-accepted-tick", acceptedTick, evidence);
+		}
+
 		void IBotBuildQueueObserver.OnQueueTransition(in BotQueueTransition transition)
 		{
 			if (state == null || finished)
 				return;
+			FlushAccepted(transition.Tick);
 			WriteRaw("queue-observation", transition.Tick, new
 			{
 				item = transition.ItemId, queue = transition.Queue, producer = transition.ProducerActorId,
@@ -218,8 +227,70 @@ namespace OpenRA.Mods.Cameo.Traits
 		{
 			if (state == null || finished || refinery.Owner != self.Owner)
 				return;
-			WriteRaw("resource-accepted", self.World.WorldTick,
-				AiEconomyHealthSchema.AcceptedResourceEvidence(refinery.ActorID, resourceType, count, value));
+			var tick = self.World.WorldTick;
+			FlushAccepted(tick);
+			if (!accepted.Add(tick, refinery.ActorID, resourceType, count, value))
+				state.MarkIncomplete();
+		}
+	}
+
+	// Record-only rollup: callback rate cannot increase the number of emitted records.
+	// Observe may precede deliveries in a tick, so only advance/terminal drains that tick.
+	internal sealed class EconomyAcceptedTick
+	{
+		internal const int MaximumSamples = 1;
+		internal const int MaximumTypeCharacters = 64;
+		readonly List<object> samples = new(MaximumSamples);
+		int tick = -1;
+		long events, count, value, creditedValue, creditedEvents;
+		bool textTruncated;
+
+		internal bool Add(int atTick, uint refinery, string type, int units, int credited)
+		{
+			if (tick != -1 && tick != atTick)
+				return false;
+			try
+			{
+				// Compute first: an overflow must not publish plausible partial totals.
+				var nextEvents = checked(events + 1);
+				var nextCount = checked(count + units);
+				var nextValue = checked(value + credited);
+				var nextCredit = checked(creditedValue + (AiEconomyHealthState.AcceptedDelivery(credited) ? credited : 0));
+				var nextCreditEvents = checked(creditedEvents + (AiEconomyHealthState.AcceptedDelivery(credited) ? 1 : 0));
+				events = nextEvents;
+				count = nextCount;
+				value = nextValue;
+				creditedValue = nextCredit;
+				creditedEvents = nextCreditEvents;
+				tick = atTick;
+				if (samples.Count < MaximumSamples)
+				{
+					var truncated = type != null && type.Length > MaximumTypeCharacters;
+					textTruncated |= truncated;
+					samples.Add(new { refinery, resource_type = truncated ? type[..MaximumTypeCharacters] : type,
+						resource_type_truncated = truncated, count = units, value = credited,
+						accepted_credit = AiEconomyHealthState.AcceptedDelivery(credited), harvester = (uint?)null });
+				}
+				return true;
+			}
+			catch (OverflowException) { return false; }
+		}
+
+		internal bool TryTakeBefore(int atTick, bool terminal, out int emittedTick, out object evidence)
+		{
+			emittedTick = tick;
+			evidence = null;
+			if (tick == -1 || (!terminal && tick >= atTick))
+				return false;
+			evidence = new { event_count = events, count, value, credited_value = creditedValue,
+				accepted_event_count = creditedEvents, accepted_credit = creditedEvents > 0,
+				harvester = (uint?)null, detail_truncated = textTruncated || events > samples.Count,
+				sample_count = samples.Count, samples = samples.ToArray() };
+			tick = -1;
+			events = count = value = creditedValue = creditedEvents = 0;
+			textTruncated = false;
+			samples.Clear();
+			return true;
 		}
 	}
 	internal readonly record struct EconomyHealthIdentity(int Sequence, int Tick, string Kind,
