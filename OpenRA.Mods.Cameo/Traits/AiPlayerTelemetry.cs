@@ -824,7 +824,7 @@ namespace OpenRA.Mods.Cameo.Traits
 
 			foreach (var actor in world.Actors)
 			{
-				if (!actor.IsInWorld || actor.IsDead || actor.Owner == null)
+				if (!actor.IsInWorld || actor.IsDead || actor.Owner == null || actor.OccupiesSpace == null)
 					continue;
 
 				var seat = Seat(actor.Owner);
