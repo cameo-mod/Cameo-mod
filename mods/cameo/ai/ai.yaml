@@ -5466,7 +5466,7 @@ Player:
 		RequiresCondition: genericbot && tier1_priors
 	# LEARN-FIGHT: frozen threshold rows fitted offline from anonymous engagements.  The existing
 	# EngagementPriors provider remains the sole delivery x armour calibration consumer; this provider
-	# supplies only squad/veto hysteresis thresholds and is absent unless BV_learn_fight is armed.
+	# supplies only squad/veto hysteresis thresholds and is absent unless BR_learn_fight is armed.
 	FightThresholdsBotModule:
 		RequiresCondition: genericbot && fightlearning
 

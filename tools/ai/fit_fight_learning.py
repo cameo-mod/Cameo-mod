@@ -3,7 +3,7 @@
 
 This deliberately has no player identity input.  Rows pool from
 faction__vs__faction to faction, family and any; only cells with the published
-minimum evidence are emitted.  Runtime consumes threshold rows behind BV_learn_fight.
+minimum evidence are emitted.  Runtime consumes threshold rows behind BR_learn_fight.
 Calibration/value rows are provenance for the existing tier-1 engagement-prior fit:
 fit_engagement_priors.py remains the sole delivery×armour correction writer.
 """

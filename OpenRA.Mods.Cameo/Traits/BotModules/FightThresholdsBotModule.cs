@@ -97,7 +97,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 	[TraitLocation(SystemActors.Player)]
 	[Desc("Reads frozen offline-fitted fight thresholds. Missing or sparse scope rows return existing thresholds.",
-		"Only mounted for generic bots by the BV_learn_fight increment; classic remains unchanged.")]
+		"Only mounted for generic bots by the BR_learn_fight increment; classic remains unchanged.")]
 	public class FightThresholdsBotModuleInfo : ConditionalTraitInfo
 	{
 		public readonly string LearnedFile = "ai/learned/fight_learning.yaml";
