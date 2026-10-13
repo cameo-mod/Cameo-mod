@@ -612,7 +612,10 @@ namespace OpenRA.Mods.CA.Traits
 				}
 
 				if (failCount >= baseBuilder.Info.MaximumFailedPlacementAttempts)
+				{
+					cashClock.ResetAll();
 					return;
+				}
 			}
 
 			if (waterState == WaterCheck.NotChecked)
@@ -762,26 +765,35 @@ namespace OpenRA.Mods.CA.Traits
 				// Cash-starvation escape: units draining the bank under the floor every sweep must not
 				// hold construction out forever — after BuildingCashStarvationTicks floor-blocked ticks
 				// the item rides at its own cost (the same exemption the planner wants get).
-				// The clock follows the FLOOR verdict every sweep, whether or not a same-tick queue block also
-				// applies: it starts on the first floor-blocked sweep and ends the first sweep the floor lets go.
+				// The clock counts only ELIGIBLE sweeps — the cash floor is the ONLY veto: no sibling queue took
+				// this tick and no pause / mobile-reserve veto applies (both are side-effect-free queries). It is
+				// keyed by (producer, wanted item), so a different item never inherits elapsed ticks, and every
+				// ineligible sweep ends the run.
+				pauseBuilding ??= player.PlayerActor.TraitsImplementing<IBotRequestPauseBuildingProduction>().ToArray();
+				mobileReserve ??= player.PlayerActor.TraitsImplementing<IBotMobileSpendReserve>().FirstEnabledTraitOrDefault();
+				var reserveFloor = mobileReserve?.MobileSpendFloor ?? 0;
 				var cashNow = playerResources.GetCashAndResources();
 				var isRefinery = baseBuilder.Info.RefineryTypes.Contains(item.Name);
 				var exempt = plannerWant || demandPick.Demand != null;
 				var cost = queue.GetProductionCost(item);
-				cashClock.Observe(queue.Actor.ActorID,
-					BaseBuilderQueueEvalCA.FloorBlocks(cashNow, minCashRequirement, isRefinery, exempt, cost), world.WorldTick);
-				var starved = cashClock.Starved(queue.Actor.ActorID, world.WorldTick, baseBuilder.Info.BuildingCashStarvationTicks);
+				var itemEssential = IsArmyFirstEssential(item);
+				var nonCashVeto = pauseBuilding.Any(p => p.PausesBuilding(item, itemEssential))
+					|| BaseBuilderQueueEvalCA.MobileSpendBlocks(cashNow, cost, reserveFloor, itemEssential);
+				cashClock.Observe(queue.Actor.ActorID, item.Name,
+					BaseBuilderQueueEvalCA.StarvationEligible(
+						BaseBuilderQueueEvalCA.FloorBlocks(cashNow, minCashRequirement, isRefinery, exempt, cost),
+						cashNow >= cost, itemQueuedThisTick, nonCashVeto),
+					world.WorldTick);
+				var starved = cashClock.Starved(queue.Actor.ActorID, item.Name, world.WorldTick, baseBuilder.Info.BuildingCashStarvationTicks);
 				if (BaseBuilderQueueEvalCA.BlockedByCash(cashNow, minCashRequirement, isRefinery, exempt, cost, itemQueuedThisTick, starved))
 					return false;
 
+				// Passed the cash gate: an admission (or a later non-cash veto below) ends the run either way.
 				cashClock.Reset(queue.Actor.ActorID);
 
 				// Cameo (§12.20): the army-first vote - a provider (ArmyFirstBotModule, the one owner) can hold new
 				// non-essential buildings so cash flows to unit production while it needs to. Construction yards,
 				// refineries, power and the first production building are essential and always pass.
-				pauseBuilding ??= player.PlayerActor.TraitsImplementing<IBotRequestPauseBuildingProduction>().ToArray();
-				mobileReserve ??= player.PlayerActor.TraitsImplementing<IBotMobileSpendReserve>().FirstEnabledTraitOrDefault();
-				var reserveFloor = mobileReserve?.MobileSpendFloor ?? 0;
 				if (pauseBuilding.Length > 0 || reserveFloor > 0)
 				{
 					var essential = IsArmyFirstEssential(item);

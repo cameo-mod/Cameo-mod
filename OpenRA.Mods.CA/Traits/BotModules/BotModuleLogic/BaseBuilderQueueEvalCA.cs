@@ -56,6 +56,13 @@ namespace OpenRA.Mods.CA.Traits
 			cash < minCashRequirement && !isRefinery && !(plannerWant && cash >= productionCost);
 
 		/// <summary>
+		/// A sweep counts toward starvation only when the cash floor is the ONLY veto: it blocks, no sibling queue
+		/// already took this tick, and no other (pause / mobile-reserve) veto applies. Pure.
+		/// </summary>
+		public static bool StarvationEligible(bool floorBlocks, bool ownCostAffordable, bool queuedThisTick, bool nonCashVeto) =>
+			floorBlocks && ownCostAffordable && !queuedThisTick && !nonCashVeto;
+
+		/// <summary>
 		/// TF-2: the unit side's mobile-production reservation — optional spend (optional defences
 		/// and crawl links included) may not push cash below the reserved floor; army-first
 		/// essentials ride their own exemption. Pure, for the tests.
@@ -639,44 +646,52 @@ namespace OpenRA.Mods.CA.Traits
 	}
 
 	/// <summary>
-	/// Per-producer lifecycle of the cash-starvation clock. A producer's run starts the first tick the
-	/// cash floor blocks its wanted item and ends — timestamp dropped — the moment the floor stops
-	/// blocking, the producer is busy/held/latched, or it leaves the live set; a later floor block
-	/// therefore always restarts from zero. Pure state, integer ticks, no RNG.
+	/// Per-producer lifecycle of the cash-starvation clock. A run is (producer, wanted item) and counts only
+	/// sweeps that are ELIGIBLE: queue idle, producer available, the cash floor the only veto. Any ineligible
+	/// sweep, a different wanted item, an admission, or a producer leaving the live set drops the run, so a
+	/// later floor block always restarts from zero and no item inherits another's age. Pure state, integer
+	/// ticks, no RNG; transient like the manager's other sweep state (not saved — a resumed game restarts runs).
 	/// </summary>
 	public sealed class CashStarvationClock
 	{
-		readonly Dictionary<uint, int> since = new Dictionary<uint, int>();
+		readonly Dictionary<uint, (string Item, int Since)> runs = new Dictionary<uint, (string Item, int Since)>();
 
-		/// <summary>Feed the floor verdict of this sweep: starts the run on the first blocked tick, ends it otherwise.</summary>
-		public void Observe(uint producer, bool floorBlocks, int now)
+		/// <summary>Feed one sweep: an eligible sweep starts (or continues) the run for this item; anything else ends it.</summary>
+		public void Observe(uint producer, string item, bool eligible, int now)
 		{
-			if (floorBlocks)
-				since.TryAdd(producer, now);
-			else
-				since.Remove(producer);
+			if (!eligible)
+			{
+				runs.Remove(producer);
+				return;
+			}
+
+			if (!runs.TryGetValue(producer, out var run) || run.Item != item)
+				runs[producer] = (item, now);
 		}
 
-		/// <summary>The producer cannot take a new item this sweep (busy, held, relocation-held, latched, nothing wanted).</summary>
-		public void Reset(uint producer) => since.Remove(producer);
+		/// <summary>The producer cannot take a new item this sweep (busy, held, relocation-held, latched, nothing wanted) or just admitted one.</summary>
+		public void Reset(uint producer) => runs.Remove(producer);
+
+		/// <summary>A global placement latch prevents every producer from progressing.</summary>
+		public void ResetAll() => runs.Clear();
 
 		/// <summary>Drop every producer not seen this sweep (disabled or destroyed queues).</summary>
 		public void Retain(ISet<uint> live)
 		{
 			List<uint> gone = null;
-			foreach (var producer in since.Keys)
+			foreach (var producer in runs.Keys)
 				if (!live.Contains(producer))
 					(gone ??= new List<uint>()).Add(producer);
 
 			if (gone != null)
 				foreach (var producer in gone)
-					since.Remove(producer);
+					runs.Remove(producer);
 		}
 
-		public bool Starved(uint producer, int now, int starveTicks) =>
-			since.TryGetValue(producer, out var start) && BaseBuilderQueueEvalCA.CashStarved(start, now, starveTicks);
+		public bool Starved(uint producer, string item, int now, int starveTicks) =>
+			runs.TryGetValue(producer, out var run) && run.Item == item && BaseBuilderQueueEvalCA.CashStarved(run.Since, now, starveTicks);
 
-		public int Tracked => since.Count;
+		public int Tracked => runs.Count;
 	}
 
 	// REPLAY-HEALTH-LOGGER (ACK-2, task 01a12023): record-only queue transitions for the
