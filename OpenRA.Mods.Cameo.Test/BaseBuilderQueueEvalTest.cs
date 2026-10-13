@@ -53,6 +53,189 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(BaseBuilderQueueEvalCA.BlockedByCash(49, 100, false, true, 50, false), Is.True);
 		}
 
+		// Cash-starvation escape: units draining the bank under the building floor cannot hold construction out forever.
+
+		[Test]
+		public void StarvedQueueRidesAtItsOwnCost()
+		{
+			// 625 cash under a 1000 floor: blocked until starved, then admitted at cost 300 but not at cost 700.
+			Assert.That(BaseBuilderQueueEvalCA.BlockedByCash(625, 1000, false, false, 300, false, false), Is.True);
+			Assert.That(BaseBuilderQueueEvalCA.BlockedByCash(625, 1000, false, false, 300, false, true), Is.False);
+			Assert.That(BaseBuilderQueueEvalCA.BlockedByCash(625, 1000, false, false, 700, false, true), Is.True);
+		}
+
+		[Test]
+		public void StarvedEscapeNeverOverridesTheSameTickQueueBlock()
+			=> Assert.That(BaseBuilderQueueEvalCA.BlockedByCash(5000, 1000, false, false, 300, true, true), Is.True);
+
+		[Test]
+		public void CashStarvedNeedsAnUninterruptedRunAtTheThreshold()
+		{
+			Assert.That(BaseBuilderQueueEvalCA.CashStarved(-1, 5000, 300), Is.False, "never blocked");
+			Assert.That(BaseBuilderQueueEvalCA.CashStarved(1000, 1299, 300), Is.False, "one tick short");
+			Assert.That(BaseBuilderQueueEvalCA.CashStarved(1000, 1300, 300), Is.True, "exactly at the threshold");
+			Assert.That(BaseBuilderQueueEvalCA.CashStarved(0, 5000, 0), Is.False, "zero disables the escape");
+			Assert.That(BaseBuilderQueueEvalCA.CashStarved(0, 5000, -1), Is.False, "negative disables the escape");
+		}
+
+		[Test]
+		public void FloorBlocksIsTheFloorTermOfBlockedByCash()
+		{
+			Assert.That(BaseBuilderQueueEvalCA.FloorBlocks(625, 1000, false, false, 300), Is.True);
+			Assert.That(BaseBuilderQueueEvalCA.FloorBlocks(1000, 1000, false, false, 300), Is.False, "at the floor");
+			Assert.That(BaseBuilderQueueEvalCA.FloorBlocks(625, 1000, true, false, 700), Is.False, "refinery rides past");
+			Assert.That(BaseBuilderQueueEvalCA.FloorBlocks(625, 1000, false, true, 300), Is.False, "affordable planner want");
+			Assert.That(BaseBuilderQueueEvalCA.FloorBlocks(625, 1000, false, true, 700), Is.True, "unaffordable planner want");
+		}
+
+		[Test]
+		public void StarvationClockRequiresFloorOnlyVetoAndAffordableItem()
+		{
+			Assert.That(BaseBuilderQueueEvalCA.StarvationEligible(true, true, false, false), Is.True);
+			Assert.That(BaseBuilderQueueEvalCA.StarvationEligible(false, true, false, false), Is.False, "cash recovery or floor exception clears");
+			Assert.That(BaseBuilderQueueEvalCA.StarvationEligible(true, false, false, false), Is.False, "cash below own cost clears");
+			Assert.That(BaseBuilderQueueEvalCA.StarvationEligible(true, true, true, false), Is.False, "same-tick sibling admission clears");
+			Assert.That(BaseBuilderQueueEvalCA.StarvationEligible(true, true, false, true), Is.False, "any non-cash veto clears");
+		}
+
+		// CashStarvationClock lifecycle: an uninterrupted run is keyed by producer and wanted item.
+
+		const uint P = 7;
+		const uint Q = 9;
+
+		[Test]
+		public void ClockDoesNotAdmitAt299AndAdmitsAt300()
+		{
+			var clock = new CashStarvationClock();
+			clock.Observe(P, "PROC", true, 100);
+			Assert.That(clock.Starved(P, "PROC", 399, 300), Is.False);
+			Assert.That(clock.Starved(P, "PROC", 400, 300), Is.True);
+		}
+
+		[Test]
+		public void ClockRoundTripPreservesQualifyingElapsedTicks()
+		{
+			var clock = new CashStarvationClock();
+			clock.Observe(Q, "TANK", true, 125);
+			clock.Observe(P, "PROC", true, 100);
+			var serialized = new List<MiniYamlNode> { new("CashStarvationClock", "", clock.SaveState()) }.WriteToString();
+			var restored = new CashStarvationClock();
+			restored.RestoreState(MiniYaml.FromString(serialized, "cash-starvation-clock-test").Single().Value.Nodes);
+
+			// Resume at tick 300: the original run began at 100, so it reaches the 300-tick boundary at 400,
+			// rather than restarting and delaying admission until tick 600.
+			restored.Observe(P, "PROC", true, 300);
+			Assert.That(restored.Starved(P, "PROC", 399, 300), Is.False);
+			Assert.That(restored.Starved(P, "PROC", 400, 300), Is.True);
+			Assert.That(restored.Starved(Q, "TANK", 424, 300), Is.False);
+			Assert.That(restored.Starved(Q, "TANK", 425, 300), Is.True);
+			Assert.That(restored.Starved(P, "TANK", 400, 300), Is.False, "another item's age is not inherited");
+			Assert.That(restored.Tracked, Is.EqualTo(2));
+		}
+
+		[Test]
+		public void ClockRestartsWhenTheFloorRecoversBetweenBlockedSweeps()
+		{
+			// Sol's sequence: blocked at 100 (cash 625/floor 1000); at 200 another producer took the sweep while
+			// the bank was >= 1000, so the floor no longer blocks; at 400 the bank is 625 again.
+			var clock = new CashStarvationClock();
+			clock.Observe(P, "PROC", true, 100);
+			clock.Observe(P, "PROC", false, 200);
+			clock.Observe(P, "PROC", true, 400);
+			Assert.That(clock.Starved(P, "PROC", 400, 300), Is.False, "the stale tick-100 run must not count");
+			Assert.That(clock.Starved(P, "PROC", 699, 300), Is.False);
+			Assert.That(clock.Starved(P, "PROC", 700, 300), Is.True, "a fresh run from tick 400 starves at 700");
+		}
+
+		[Test]
+		public void ClockResetsWhenTheProducerIsBusyHeldOrHasNothingWanted()
+		{
+			var clock = new CashStarvationClock();
+			clock.Observe(P, "PROC", true, 100);
+			clock.Reset(P);
+			Assert.That(clock.Starved(P, "PROC", 1000, 300), Is.False);
+			Assert.That(clock.Tracked, Is.EqualTo(0));
+
+			// Back to floor-blocked afterwards: restarts at the new tick.
+			clock.Observe(P, "PROC", true, 900);
+			Assert.That(clock.Starved(P, "PROC", 1000, 300), Is.False);
+			Assert.That(clock.Starved(P, "PROC", 1200, 300), Is.True);
+		}
+
+		[Test]
+		public void ClockDropsProducersThatLeftTheLiveSet()
+		{
+			var clock = new CashStarvationClock();
+			clock.Observe(P, "PROC", true, 100);
+			clock.Observe(Q, "PROC", true, 100);
+			clock.Retain(new HashSet<uint> { Q });
+			Assert.That(clock.Starved(P, "PROC", 1000, 300), Is.False, "the disabled producer's run is gone");
+			Assert.That(clock.Starved(Q, "PROC", 1000, 300), Is.True, "the live producer keeps its run");
+			Assert.That(clock.Tracked, Is.EqualTo(1));
+		}
+
+		[Test]
+		public void ClockProducersAreIndependent()
+		{
+			var clock = new CashStarvationClock();
+			clock.Observe(P, "PROC", true, 100);
+			clock.Observe(Q, "PROC", true, 350);
+			Assert.That(clock.Starved(P, "PROC", 400, 300), Is.True);
+			Assert.That(clock.Starved(Q, "PROC", 400, 300), Is.False);
+			clock.Observe(P, "PROC", false, 401);
+			Assert.That(clock.Starved(P, "PROC", 401, 300), Is.False);
+			Assert.That(clock.Starved(Q, "PROC", 650, 300), Is.True);
+		}
+
+		[Test]
+		public void ClockWithAZeroThresholdNeverStarves()
+		{
+			var clock = new CashStarvationClock();
+			clock.Observe(P, "PROC", true, 0);
+			Assert.That(clock.Starved(P, "PROC", 100000, 0), Is.False);
+		}
+
+		[Test]
+		public void ClockClearsWhenWantedItemChanges()
+		{
+			var clock = new CashStarvationClock();
+			clock.Observe(P, "PROC", true, 100);
+			clock.Observe(P, "HARRIER", true, 200);
+			Assert.That(clock.Starved(P, "HARRIER", 499, 300), Is.False);
+			Assert.That(clock.Starved(P, "HARRIER", 500, 300), Is.True);
+			Assert.That(clock.Starved(P, "PROC", 500, 300), Is.False);
+		}
+
+		[TestCase("cash recovery", false, true, false, false)]
+		[TestCase("below item cost", true, false, false, false)]
+		[TestCase("same-tick sibling queue", true, true, true, false)]
+		[TestCase("power/prerequisite/placement veto", true, true, false, true)]
+		[TestCase("reserve or army-first veto", true, true, false, true)]
+		public void AnyVetoClearsTheUninterruptedRun(string reason, bool floorBlocks, bool affordable,
+			bool queuedThisTick, bool nonCashVeto)
+		{
+			var clock = new CashStarvationClock();
+			clock.Observe(P, "PROC", true, 100);
+			clock.Observe(P, "PROC", BaseBuilderQueueEvalCA.StarvationEligible(
+				floorBlocks, affordable, queuedThisTick, nonCashVeto), 200);
+			Assert.That(clock.Starved(P, "PROC", 500, 300), Is.False, reason);
+			clock.Observe(P, "PROC", true, 600);
+			Assert.That(clock.Starved(P, "PROC", 899, 300), Is.False, reason + " must restart the run");
+			Assert.That(clock.Starved(P, "PROC", 900, 300), Is.True, reason + " starts a fresh 300 tick run");
+		}
+
+		[Test]
+		public void ClockClearsOnGlobalPlacementLatchAndAdmission()
+		{
+			var clock = new CashStarvationClock();
+			clock.Observe(P, "PROC", true, 100);
+			clock.ResetAll();
+			Assert.That(clock.Starved(P, "PROC", 1000, 300), Is.False, "global latch clears every producer");
+			clock.Observe(P, "PROC", true, 1100);
+			clock.Reset(P);
+			Assert.That(clock.Starved(P, "PROC", 2000, 300), Is.False, "admission clears this producer");
+		}
+
 		// MobileSpendBlocks (TF-2): optional spend may not dip under the unit side's reserved share.
 
 		[Test]

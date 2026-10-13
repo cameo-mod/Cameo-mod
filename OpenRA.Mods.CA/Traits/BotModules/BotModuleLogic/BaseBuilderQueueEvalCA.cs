@@ -11,6 +11,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.IO;
 using System.Linq;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Mods.Common.Warheads;
@@ -34,8 +35,33 @@ namespace OpenRA.Mods.CA.Traits
 		/// due MCV's prerequisite), which ride at their own cost floor under the law (REF-1 B1/B2).
 		/// </summary>
 		public static bool BlockedByCash(int cash, int minCashRequirement, bool isRefinery,
-			bool plannerWant, int productionCost, bool queuedThisTick) =>
-			queuedThisTick || (cash < minCashRequirement && !isRefinery && !(plannerWant && cash >= productionCost));
+			bool plannerWant, int productionCost, bool queuedThisTick, bool starved = false) =>
+			queuedThisTick || (cash < minCashRequirement && !isRefinery && !((plannerWant || starved) && cash >= productionCost));
+
+		/// <summary>
+		/// Cash-starvation escape: a queue whose wanted item has sat under the cash floor since
+		/// <paramref name="blockedSince"/> (-1 = not blocked) for at least <paramref name="starveTicks"/>
+		/// rides at its own cost, like the planner's wants. Units spending the bank back under the
+		/// floor every sweep would otherwise hold the floor out of reach forever. Pure, integer-only.
+		/// </summary>
+		public static bool CashStarved(int blockedSince, int now, int starveTicks) =>
+			starveTicks > 0 && blockedSince >= 0 && now - blockedSince >= starveTicks;
+
+		/// <summary>
+		/// True when the cash floor itself is what holds a wanted item back — the exact floor term of
+		/// <see cref="BlockedByCash"/> (refineries and the planner's affordable wants ride past it).
+		/// The starvation clock runs only while this holds, so a same-tick queue block or a recovered
+		/// bank never counts toward starvation. Pure.
+		/// </summary>
+		public static bool FloorBlocks(int cash, int minCashRequirement, bool isRefinery, bool plannerWant, int productionCost) =>
+			cash < minCashRequirement && !isRefinery && !(plannerWant && cash >= productionCost);
+
+		/// <summary>
+		/// A sweep counts toward starvation only when the cash floor is the ONLY veto: it blocks, no sibling queue
+		/// already took this tick, and no other (pause / mobile-reserve) veto applies. Pure.
+		/// </summary>
+		public static bool StarvationEligible(bool floorBlocks, bool ownCostAffordable, bool queuedThisTick, bool nonCashVeto) =>
+			floorBlocks && ownCostAffordable && !queuedThisTick && !nonCashVeto;
 
 		/// <summary>
 		/// TF-2: the unit side's mobile-production reservation — optional spend (optional defences
@@ -618,6 +644,80 @@ namespace OpenRA.Mods.CA.Traits
 		/// </summary>
 		public static int ReleaseRefineryReservations(IBotExpansionTargetProvider law, object owner) =>
 			law?.ReleaseRefineryAnchors(owner) ?? 0;
+	}
+
+	/// <summary>
+	/// Per-producer lifecycle of the cash-starvation clock. A run is (producer, wanted item) and counts only
+	/// sweeps that are ELIGIBLE: queue idle, producer available, the cash floor the only veto. Any ineligible
+	/// sweep, a different wanted item, an admission, or a producer leaving the live set drops the run, so a
+	/// later floor block always restarts from zero and no item inherits another's age. Pure state, integer
+	/// ticks, no RNG; runs persist through game-save data (StartTick survives save/load) while all other
+	/// manager sweep state stays transient.
+	/// </summary>
+	public sealed class CashStarvationClock
+	{
+		readonly Dictionary<uint, (string Item, int Since)> runs = new Dictionary<uint, (string Item, int Since)>();
+
+		/// <summary>Save eligible starvation runs in producer order for deterministic game-save data.</summary>
+		public List<MiniYamlNode> SaveState() => runs.OrderBy(kv => kv.Key)
+			.Select(kv => new MiniYamlNode("Run", "", new List<MiniYamlNode>
+			{
+				new("Producer", FieldSaver.FormatValue(kv.Key)),
+				new("Item", FieldSaver.FormatValue(kv.Value.Item)),
+				new("Since", FieldSaver.FormatValue(kv.Value.Since))
+			})).ToList();
+
+		/// <summary>Restore the exact qualifying start tick; a missing run keeps its normal fresh-start behavior.</summary>
+		public void RestoreState(IEnumerable<MiniYamlNode> savedRuns)
+		{
+			runs.Clear();
+			foreach (var savedRun in savedRuns ?? Enumerable.Empty<MiniYamlNode>())
+			{
+				var fields = savedRun.Value.ToDictionary();
+				var producer = FieldLoader.GetValue<uint>("Producer", fields["Producer"].Value);
+				var item = FieldLoader.GetValue<string>("Item", fields["Item"].Value);
+				var since = FieldLoader.GetValue<int>("Since", fields["Since"].Value);
+				if (producer == 0 || string.IsNullOrEmpty(item) || since < 0 || !runs.TryAdd(producer, (item, since)))
+					throw new InvalidDataException("Invalid or duplicate cash-starvation clock save state.");
+			}
+		}
+
+		/// <summary>Feed one sweep: an eligible sweep starts (or continues) the run for this item; anything else ends it.</summary>
+		public void Observe(uint producer, string item, bool eligible, int now)
+		{
+			if (!eligible)
+			{
+				runs.Remove(producer);
+				return;
+			}
+
+			if (!runs.TryGetValue(producer, out var run) || run.Item != item)
+				runs[producer] = (item, now);
+		}
+
+		/// <summary>The producer cannot take a new item this sweep (busy, held, relocation-held, latched, nothing wanted) or just admitted one.</summary>
+		public void Reset(uint producer) => runs.Remove(producer);
+
+		/// <summary>A global placement latch prevents every producer from progressing.</summary>
+		public void ResetAll() => runs.Clear();
+
+		/// <summary>Drop every producer not seen this sweep (disabled or destroyed queues).</summary>
+		public void Retain(ISet<uint> live)
+		{
+			List<uint> gone = null;
+			foreach (var producer in runs.Keys)
+				if (!live.Contains(producer))
+					(gone ??= new List<uint>()).Add(producer);
+
+			if (gone != null)
+				foreach (var producer in gone)
+					runs.Remove(producer);
+		}
+
+		public bool Starved(uint producer, string item, int now, int starveTicks) =>
+			runs.TryGetValue(producer, out var run) && run.Item == item && BaseBuilderQueueEvalCA.CashStarved(run.Since, now, starveTicks);
+
+		public int Tracked => runs.Count;
 	}
 
 	// REPLAY-HEALTH-LOGGER (ACK-2, task 01a12023): record-only queue transitions for the
