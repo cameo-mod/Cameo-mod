@@ -21013,3 +21013,40 @@ ConsumeSeamStart count-once); python 36/36 (27 replay_health + 9
 playtest_stats incl. new schema fixtures, bad-shape fail-closed cases,
 aggregation). No runtime evidence claimed — no game was launched.
 
+
+## 2026-10-12 - AB-POST-MERGE-PIN-PREFLIGHT (task 01a1315f, read-only)
+Inventoried campaign pin surfaces for fresh post-merge A/B. STABLE: BU patch sha, 3/4 tool shas,
+receipt schema, 8 map pins (2 byte-verified), all FIX_SAFETY + pilot switches on wave, engine 4f69
+on master AND wave (ad061ebf79 was devbuild-only swap). STALE: source_commit + PINNED_SOURCE_COMMIT
+(driver code edit, validate() hard-gate), driver_analyzer sha, baseline/treatment ai_payload
+(ai.yaml +82 lines on wave), baseline manifest, binary_sha256 x3 (no bin/ in frozen worktree),
+A5 + map-acceptance receipts (no reuse), wave1_scheduler.TOOL_SHA256 (pins old tool bytes, fails
+closed). Decisions D1-D4 reported to acting lead; fleet doc
+PINCHECK_2026-10-12_ab_postmerge_preflight_devin.md. No launches/builds/queue changes.
+
+## 2026-10-12 - AB-RUNNER-ADMISSION-READINESS (task 01a1315f-5a85, read-only)
+Audited campaign runner + admission stack for the fresh post-merge campaign. All 10 runtime
+controls verified fail-closed in code (execution_gate, RAM floors, private cap, slot counter,
+resume queue + identity-checked orphan kill, watchdogs, immutable receipts, deployment guard,
+tools-only ancestor check, FullMods last-path-wins). 28 runner tests exist. Env now: 15.06 GiB
+free, zero OpenRA processes (PID 6332 closed), python 3.12.10. Ops notes: fresh support_root
+required (queue pinned to manifest sha); same-volume for hardlink clone. Runner READY; blockers
+are upstream gates only. Fleet doc PINCHECK_2026-10-12_ab_runner_admission_devin.md.
+
+## 2026-10-12/13 - Garrison defect census + fix-gate facts (v3 addendum)
+Fleet-wide census: 8 actors carry condition-gated AutoTarget = silent garrison occupants when off
+(naxis_slave/YRSLAV/tkmworker `freed`, yuri_clone, ra2shk.bot, sow_abc, tsprobe, lovebaby).
+Fix gates: AttackGarrisoned.cs:183 binds via TraitOrDefault — a second AutoTarget@x trait THROWS
+(ruled out); pure-yaml fix shape = un-gate trait, freed onto inherited priorities, add
+AutoTargetPriority@GARRISON RequiresCondition:garrisoned (occupants hold `garrisoned` inside via
+Passenger.CargoConditions). naxis_slave garrison arm is RA2Shovel melee. Sent to Sol (task owner)
++ Reviewer; findings doc v3 appended.
+
+## 2026-10-12/13 - Garrison v4: ancestry + confound + ruled-out gates
+dc92c52213 (fire-stations rework) is ancestor of BOTH ad061ebf79 and 4f69df005f — regression
+ships inside the repo-pinned engine line. Verified Reviewer's no-garrison-arm confound:
+skymage/antitankcannon/bmwbike/litt_husk. Ruled out: Enter/Reconcile oscillation (idempotent),
+infantry-arm PauseOnCondition (none exist fleet-wide), AT pause gate. Rifle residue = runtime-
+only; civilian single-trait garrisonable is the decisive bisect venue.
+
+- **2026-10-13 — NAXI-BUNKER-GARRISON static audit closed (v5):** post-Erratum-2 line-level verification of the full fire path for the confirmed case (rifle/panzer, Defend, enabled AT, garrisoned arms): binding (Reconcile/Enter idempotent; Garrisonable provider forwards), arms (garrisoned armaments present), AT binding (single instance, TraitOrDefault), scan gates, WeaponStations null-turret dispatch (L543 flat path, no NRE), Eligible (L318-332), CheckFire/CanFire (Armament.cs:326/306, fresh occupant FireDelay==0 passes), occupant armaments DO tick while garrisoned (trait ITick has no IsInWorld filter; earlier one-burst-cap claim RETRACTED per Sol + source verify), dual-trait order race (pre-existing), replay evidence (0 Attack orders). NO static gate fails — residual definitively runtime (loaded bytes / runtime trait state / test setup). Next: Sol's 48-case fixture pending admission, or maintainer civilian single-trait garrisonable re-test. Findings: fleet/NAXI_BUNKER_GARRISON_trace_devin.md v5.
