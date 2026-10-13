@@ -6,6 +6,18 @@ my lane is (a) this fixture stays the qualification harness for the admitted sho
 matrix, (b) the order-clear route is a required v2 dependency Sol doesn't bundle,
 (c) at review stage compare Sol's narrow approach vs the `2e3e753c2e` variant.
 
+**LATE UPDATE (same day, Devin-only realignment):** role expanded — I now own
+garrison v2 end-to-end. The engine pin `723f50f9b1` already landed v4 body-aim
+(`da34980814` + `723f50f9b1`, TakeCover-only narrowing preserving disabled/paused
+gates and real `AttackTurreted` drivers), so the `01a13143` line is superseded.
+Converged branch: **`devin/garrison-v2-on-pin` @ `d1ef035d38`** on
+`cameo-mod/OpenRA` = pin + `6aeffa4c0e` (the `60b9` content: host-AT fallback,
+`OnResolveAttackOrder`, `LogFireDiagnostics`) + `b616507627` (the order-clear
+route described below) + `d1ef035d38` (`Diag*` → `debug.log` routing from `2e3`;
+its `CanBeDriven`/`Turreted.cs` half deliberately dropped as superseded by v4).
+`99b5abe607`/`devin/01a13143` remains pushed as history. Exact-SHA review
+requested (fleet `REVIEW_REQ_2026-10-13_garrison_v2_on_pin_devin.md`).
+
 - **Engine `99b5abe607` on `devin/01a13143-garrison-occupant-fire`** (pushed):
   `AttackBase.ResolveOrder` gains an `OnNonAttackOrder` hook beside `OnStopOrder`;
   `AttackGarrisoned`'s override drops `RequestedTarget`/`RequestedForce` and
