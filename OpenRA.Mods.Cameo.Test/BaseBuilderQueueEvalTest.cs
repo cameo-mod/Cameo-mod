@@ -113,6 +113,27 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void ClockRoundTripPreservesQualifyingElapsedTicks()
+		{
+			var clock = new CashStarvationClock();
+			clock.Observe(Q, "TANK", true, 125);
+			clock.Observe(P, "PROC", true, 100);
+			var serialized = new MiniYamlNode("CashStarvationClock", "", clock.SaveState()).WriteToString();
+			var restored = new CashStarvationClock();
+			restored.RestoreState(MiniYaml.FromString(serialized, "cash-starvation-clock-test").Single().Value.Nodes);
+
+			// Resume at tick 300: the original run began at 100, so it reaches the 300-tick boundary at 400,
+			// rather than restarting and delaying admission until tick 600.
+			restored.Observe(P, "PROC", true, 300);
+			Assert.That(restored.Starved(P, "PROC", 399, 300), Is.False);
+			Assert.That(restored.Starved(P, "PROC", 400, 300), Is.True);
+			Assert.That(restored.Starved(Q, "TANK", 424, 300), Is.False);
+			Assert.That(restored.Starved(Q, "TANK", 425, 300), Is.True);
+			Assert.That(restored.Starved(P, "TANK", 400, 300), Is.False, "another item's age is not inherited");
+			Assert.That(restored.Tracked, Is.EqualTo(2));
+		}
+
+		[Test]
 		public void ClockRestartsWhenTheFloorRecoversBetweenBlockedSweeps()
 		{
 			// Sol's sequence: blocked at 100 (cash 625/floor 1000); at 200 another producer took the sweep while

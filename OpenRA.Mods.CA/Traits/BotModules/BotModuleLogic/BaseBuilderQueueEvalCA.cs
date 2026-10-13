@@ -11,6 +11,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.IO;
 using System.Linq;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Mods.Common.Warheads;
@@ -655,6 +656,30 @@ namespace OpenRA.Mods.CA.Traits
 	public sealed class CashStarvationClock
 	{
 		readonly Dictionary<uint, (string Item, int Since)> runs = new Dictionary<uint, (string Item, int Since)>();
+
+		/// <summary>Save eligible starvation runs in producer order for deterministic game-save data.</summary>
+		public List<MiniYamlNode> SaveState() => runs.OrderBy(kv => kv.Key)
+			.Select(kv => new MiniYamlNode("Run", "", new List<MiniYamlNode>
+			{
+				new("Producer", FieldSaver.FormatValue(kv.Key)),
+				new("Item", FieldSaver.FormatValue(kv.Value.Item)),
+				new("Since", FieldSaver.FormatValue(kv.Value.Since))
+			})).ToList();
+
+		/// <summary>Restore the exact qualifying start tick; a missing run keeps its normal fresh-start behavior.</summary>
+		public void RestoreState(IEnumerable<MiniYamlNode> savedRuns)
+		{
+			runs.Clear();
+			foreach (var savedRun in savedRuns ?? Enumerable.Empty<MiniYamlNode>())
+			{
+				var fields = savedRun.Value.ToDictionary();
+				var producer = FieldLoader.GetValue<uint>("Producer", fields["Producer"].Value);
+				var item = FieldLoader.GetValue<string>("Item", fields["Item"].Value);
+				var since = FieldLoader.GetValue<int>("Since", fields["Since"].Value);
+				if (producer == 0 || string.IsNullOrEmpty(item) || since < 0 || !runs.TryAdd(producer, (item, since)))
+					throw new InvalidDataException("Invalid or duplicate cash-starvation clock save state.");
+			}
+		}
 
 		/// <summary>Feed one sweep: an eligible sweep starts (or continues) the run for this item; anything else ends it.</summary>
 		public void Observe(uint producer, string item, bool eligible, int now)

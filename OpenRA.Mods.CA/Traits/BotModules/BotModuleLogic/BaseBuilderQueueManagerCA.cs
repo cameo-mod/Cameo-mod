@@ -53,6 +53,9 @@ namespace OpenRA.Mods.CA.Traits
 		// nothing is wanted, or the producer leaves the live set, so the escape only fires for an
 		// uninterrupted run of floor-blocked sweeps (CashStarvationClock). Integer ticks, no RNG.
 		readonly CashStarvationClock cashClock = new CashStarvationClock();
+		public int TrackedCashStarvationRuns => cashClock.Tracked;
+		public List<MiniYamlNode> SaveCashStarvationRuns() => cashClock.SaveState();
+		public void RestoreCashStarvationRuns(IEnumerable<MiniYamlNode> runs) => cashClock.RestoreState(runs);
 		readonly HashSet<uint> sweptProducers = new HashSet<uint>();
 		CPos? baseCenterKeepsFailing = null;
 
