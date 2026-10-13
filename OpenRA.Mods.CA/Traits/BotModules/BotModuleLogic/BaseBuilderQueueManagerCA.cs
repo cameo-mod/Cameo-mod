@@ -719,6 +719,8 @@ namespace OpenRA.Mods.CA.Traits
 					return false;
 				}
 
+				TraceThresholdShadow(queue, item);
+
 				var demandPick = pendingDemandPick;
 
 				// ECON-A-FIX (R5): producer+name exclusivity — an ordinary pick must never duplicate a
@@ -1489,6 +1491,47 @@ namespace OpenRA.Mods.CA.Traits
 			return false;
 		}
 
+		// Record-only economy trace (A/B sentinel triage 2026-10-13): why the NewProductionCashThreshold
+		// override did not run while the bank sat over it. Bounded — the first 8 lines per kind, then every
+		// 25th — written to the "debug" channel; moves no order, RNG or state the sim reads.
+		readonly Dictionary<string, int> econTraceCounts = new Dictionary<string, int>();
+
+		bool EconTraceDue(string kind)
+		{
+			econTraceCounts.TryGetValue(kind, out var n);
+			econTraceCounts[kind] = ++n;
+			return n <= 8 || n % 25 == 0;
+		}
+
+		string EconTraceState() =>
+			$"tick {world.WorldTick} bank {playerResources.GetCashAndResources()} threshold {NewProductionCashThreshold}"
+			+ $" excess {playerPower?.ExcessPower} minExcess {minimumExcessPower} buildings {playerBuildings.Count()}"
+			+ $" plants {playerBuildings.Count(a => baseBuilder.Info.PowerTypes.Contains(a.Info.Name))}"
+			+ $" production {playerBuildings.Count(a => baseBuilder.Info.ProductionTypes.Contains(a.Info.Name))}";
+
+		void TraceLowPowerOverride(ActorInfo power)
+		{
+			if (EconTraceDue("lowpower"))
+				Log.Write("debug", $"AI ({player.ClientIndex}): ECON-TRACE lowpower-override {power.Name} {EconTraceState()}");
+		}
+
+		void TraceThresholdOverride(string outcome, ActorInfo pick)
+		{
+			if (EconTraceDue("threshold-" + outcome))
+				Log.Write("debug", $"AI ({player.ClientIndex}): ECON-TRACE threshold-override {outcome} {pick?.Name ?? "-"} {EconTraceState()}");
+		}
+
+		// The bank is over the threshold yet an earlier priority took the queue: name the pre-emptor.
+		void TraceThresholdShadow(ProductionQueue queue, ActorInfo item)
+		{
+			if (NewProductionCashThreshold <= 0 || playerResources.GetCashAndResources() <= NewProductionCashThreshold
+				|| baseBuilder.Info.ProductionTypes.Contains(item.Name))
+				return;
+
+			if (EconTraceDue("shadow-" + item.Name))
+				Log.Write("debug", $"AI ({player.ClientIndex}): ECON-TRACE threshold-shadowed-by {item.Name} {EconTraceState()}");
+		}
+
 		ActorInfo ChooseBuildingToBuild(ProductionQueue queue)
 		{
 			var buildableThings = queue.BuildableItems();
@@ -1510,6 +1553,7 @@ namespace OpenRA.Mods.CA.Traits
 			if (playerPower != null && playerPower.ExcessPower < minimumExcessPower && power != null && power.TraitInfos<PowerInfo>().Where(i => i.EnabledByDefault).Sum(p => p.Amount) > 0)
 			{
 					AIUtils.BotDebug("{0} decided to build {1}: Priority override (low power)", queue.Actor.Owner, power.Name);
+					TraceLowPowerOverride(power);
 					return power;
 			}
 
@@ -1634,9 +1678,12 @@ namespace OpenRA.Mods.CA.Traits
 					{
 						AIUtils.BotDebug("{0} decided to build {1}: Priority override ({2})", queue.Actor.Owner, pick.Name,
 							pick == production ? "production" : "would be low power");
+						TraceThresholdOverride(pick == production ? "production" : "power-swap", pick);
 						return pick;
 					}
 				}
+
+				TraceThresholdOverride(production == null ? "no-producible" : "type-limit-or-no-pick", production);
 			}
 
 			// Only consider building this if there is enough water inside the base perimeter and there are close enough adjacent buildings

@@ -186,7 +186,9 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Cash-starvation escape: a building queue whose wanted item has been held by the",
 			"BuildingProductionMinCashRequirement floor this many ticks admits it at its own cost instead,",
 			"so unit production draining the bank below the floor cannot starve construction forever.",
-			"0 or less disables the escape (floor only).")]
+			"The item still needs cash >= its own cost; power, prerequisites and placement are unchanged.",
+			"300 ticks (12 s at 25 tps, roughly two building sweeps) ignores the brief dip after a unit buy",
+			"yet ends the observed 1500-tick idle spells quickly. 0 or less disables the escape (floor only).")]
 		public readonly int BuildingCashStarvationTicks = 300;
 
 		[Desc("Only queue construction of a new defense when above this requirement.")]
