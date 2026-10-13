@@ -1,3 +1,43 @@
+# 2026-10-13 — Devin: garrison bisect fixture REV3 + order-clear engine commit (no launch)
+
+*Devin-Developer.* Acting-lead (Devin Coordinator) lane ruling after the maintainer
+appointed Sol to the garrison implementation (`codex/garrison-takecover-fix-20261013`):
+my lane is (a) this fixture stays the qualification harness for the admitted shot
+matrix, (b) the order-clear route is a required v2 dependency Sol doesn't bundle,
+(c) at review stage compare Sol's narrow approach vs the `2e3e753c2e` variant.
+
+- **Engine `99b5abe607` on `devin/01a13143-garrison-occupant-fire`** (pushed):
+  `AttackBase.ResolveOrder` gains an `OnNonAttackOrder` hook beside `OnStopOrder`;
+  `AttackGarrisoned`'s override drops `RequestedTarget`/`RequestedForce` and
+  request-derived `Persistent` residue on non-queued non-attack orders while
+  keeping scan/retaliation opportunities, and arms a release-time flag for
+  queued orders so `Release()` suppresses the persistence handoff instead of
+  leaking a dead command target into autonomy (reviewer F1: Attack→Move on
+  mobile OpenTopped). Flag is armed only while an attack activity is bound,
+  consumed by the next release, reset by any newer non-queued order / Stop /
+  owner change. Also fixes the OpenRA.Test compile break (`RequestedForce`
+  internal, no InternalsVisibleTo → public getter). 5 new regression tests pin
+  the contract. Static only — no build/test/launch (Luna holds serial).
+- **Fixture widened 5→9 cells** for Sol's closure matrix (all new cells verified
+  clear-sand tile `65280` by direct `map.bin` planar decode — header 17B,
+  98×98×3B tile+height plane, then 98×98×2B resource plane):
+  - `c4` `fixture_civ_panzer`: `naxis_panzerfausttrooper` occupants
+    (`garrisoned`/`NaxiShrekCons` 5512, Ground+Water) — AT-weapon arm coverage.
+  - `c5` `fixture_civ_noat`: occupant `AutoTarget: RequiresCondition: never`
+    (present-but-disabled → `occAT=disabled`, host fallback must still fire).
+  - `c6` `fixture_civ_slave`: `naxis_slave` — freed-gated occupant AT (disabled)
+    plus melee `RA2Shovel` (1500) vs ~5-cell target → disabled-AT scan runs,
+    `arms=0`, zero fire control.
+  - `c7` `fixture_civ_empty`: `LoadGarrisoner` teleport-load at t90 exercises the
+    live `Garrisonable.Load` → `INotifyPassengerEntered` → `Enter()` → `bind`
+    path (walk-in `EnterGarrison` has no Lua binding — documented gap).
+- Remaining gaps now documented in-map README: terrain force-attack, non-queued
+  orders (Lua is always `queued=true` — the new order-clear route is pinned by
+  unit tests instead), walk-in boarding.
+- Worktree note: `C:\cameo-engine-wt\devin-garrison` and this fixture worktree
+  were both pruned mid-session by an external cleanup; branches were intact and
+  worktrees were re-created from the pushed/base refs — no work lost.
+
 # 2026-10-13 — Devin: `01a13167` garrison bisect fixture (source-only, no launch)
 
 *Devin-Developer.* Lead re-scoped `GARRISON-PASSENGER-FIRE-FIXTURE-QUALIFICATION` to
