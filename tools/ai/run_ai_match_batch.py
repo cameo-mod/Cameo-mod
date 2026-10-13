@@ -823,6 +823,68 @@ def read_appended_records(log_path: pathlib.Path, before_length: int) -> list[di
     return records
 
 
+def prepare_match_support(support: pathlib.Path, variants_root: pathlib.Path, variant: str,
+                          run: int, repeat: int, attempt: int, batch_id: str) -> pathlib.Path:
+    """Create a new OpenRA SupportDir for exactly one game attempt.
+
+    Engine log producers intentionally use FileMode.CreateNew for canonical
+    telemetry filenames. Giving each game attempt a fresh SupportDir keeps
+    those names collision-free while retaining a batch-level aggregate log.
+    Retries receive distinct leaves too, so failed-attempt evidence is kept.
+    """
+    leaf = support / "games" / batch_id / f"match-{run:04d}-repeat-{repeat:02d}-attempt-{attempt:02d}"
+    if leaf.exists():
+        raise FileExistsError(f"refusing to reuse per-game SupportDir: {leaf}")
+    source_map = variants_root / variant
+    if not source_map.is_dir():
+        raise FileNotFoundError(f"generated map variant is missing: {source_map}")
+    map_dir = leaf / USER_MAP_DIR / variant
+    map_dir.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copytree(source_map, map_dir)
+    (leaf / "Logs").mkdir(parents=True, exist_ok=True)
+    return leaf
+
+
+def economy_health_file_status(support: pathlib.Path) -> tuple[str, str | None]:
+    """Return UNKNOWN for missing/empty expected economy telemetry."""
+    health_path = support / "Logs" / "cameo-ai-economy-health.jsonl"
+    try:
+        if not health_path.is_file():
+            return "UNKNOWN", f"missing expected economy-health file: {health_path}"
+        if health_path.stat().st_size == 0:
+            return "UNKNOWN", f"empty expected economy-health file: {health_path}"
+    except OSError as exc:
+        return "UNKNOWN", f"cannot inspect expected economy-health file {health_path}: {exc}"
+    return "PRESENT", None
+
+
+PER_GAME_LOGS = {
+    "cameo-ai-economy-health.jsonl",
+    "cameo-ai-economy-raw.jsonl",
+    "cameo-ai-mcv-health.jsonl",
+}
+
+
+def promote_unique_match_logs(match_support: pathlib.Path, batch_logs: pathlib.Path) -> None:
+    """Aggregate AI JSONL telemetry except canonical health streams.
+
+    Other fixed-name AI streams are append-oriented and carry game_uid. The
+    three CreateNew health streams remain isolated in each game leaf.
+    """
+    source_logs = match_support / "Logs"
+    for source in source_logs.iterdir():
+        if (not source.is_file() or source.suffix != ".jsonl"
+                or not source.name.startswith("cameo-ai-")
+                or source.name in PER_GAME_LOGS or source.name == MATCH_LOG):
+            continue
+        destination = batch_logs / source.name
+        if destination.exists():
+            with destination.open("ab") as aggregate, source.open("rb") as game_log:
+                shutil.copyfileobj(game_log, aggregate, length=1024 * 1024)
+        else:
+            shutil.copy2(source, destination)
+
+
 SPAWN_INDEX_BY_SLOT = {"Multi0": 0, "Multi1": 1, "Multi2": 2, "Multi3": 3, "BotA": 0, "BotB": 1}
 
 
@@ -837,6 +899,8 @@ def ab_scoreboard(results: list[dict]) -> dict:
     seen_records: set[str] = set()
     board: dict[tuple[str, str], dict] = {}
     for result in results:
+        if result.get("health_status") == "UNKNOWN" or result.get("status") == "UNKNOWN":
+            continue
         for record in result.get("bot_outcomes") or []:
             record_id = str(record.get("record_id") or "")
             if not record_id or record_id in seen_records:
@@ -873,6 +937,8 @@ def team_scoreboard(results: list[dict]) -> dict:
     seen_records: set[str] = set()
     matches: dict[str, list[dict]] = {}
     for result in results:
+        if result.get("health_status") == "UNKNOWN" or result.get("status") == "UNKNOWN":
+            continue
         for record in result.get("bot_outcomes") or []:
             record_id = str(record.get("record_id") or "")
             if not record_id or record_id in seen_records:
@@ -1128,6 +1194,8 @@ def main() -> int:
                              "the A/B acceptance requires both spawns covered")
     parser.add_argument("--time-limit", type=int, default=3, choices=sorted(VALID_TIME_LIMITS))
     parser.add_argument("--support-dir", type=pathlib.Path, default=None)
+    parser.add_argument("--require-economy-health", action="store_true",
+                        help="mark a successful game UNKNOWN if its canonical economy-health JSONL is missing or empty")
     parser.add_argument("--template", type=pathlib.Path, default=TEMPLATE_MAP,
                         help="template map dir (default: the A Nuclear Winter duel fixture)")
     parser.add_argument("--retries", type=int, default=1,
@@ -1272,8 +1340,6 @@ def main() -> int:
         else:
             write_variant(map_source, variants_root / name, {"side_a": v["a"], "side_b": v["b"]}, args.time_limit)
 
-    exceptions_before = {p.name for p in logs_dir.glob("exception-*.log")} if logs_dir.is_dir() else set()
-
     # The fixture locks gamespeed to maximum (1 ms timestep) and scales its minute
     # options so the engine cap equals the insane-era depth (3 min = 180,000 ticks):
     # the engine ends a stalemate and records it. The wall bound allows that
@@ -1284,27 +1350,10 @@ def main() -> int:
 
     results = []
     progress_path = support / "batch_results.jsonl"
+    batch_id = f"{time.time_ns()}-{os.getpid()}"
     drift_aborted = None
     for run, m in enumerate(matchups, 1):
-        before = log_path.stat().st_size if log_path.is_file() else 0
-        launch_args = [
-            f"Game.Mod={mod_id}",
-            "Sound.Device=none",
-            "Engine.EngineDir=..",
-            f"Engine.ModSearchPaths={REPO_ROOT / 'mods'},{engine / 'mods'}",
-            f"Engine.SupportDir={support}",
-            f"Launch.Map={m['variant']}",
-            f"Launch.Benchmark={BENCHMARK_PREFIX}",
-        ]
-        # Opt-in verbose squad/formation telemetry (CAMEO_BOT_DEBUG=1); default
-        # off so support-dir logs stay identical to the reference batches.
-        if os.environ.get("CAMEO_BOT_DEBUG"):
-            launch_args.append("Debug.BotDebug=true")
         render = getattr(args, "render", "fast")
-        if render in ("fast", "headless"):
-            launch_args += ["Graphics.VSync=False", "Graphics.Mode=Windowed", "Graphics.WindowedSize=640,480"]
-        if render == "headless":
-            launch_args.append(f"Game.Platform={HEADLESS_PLATFORM}")
 
         attempt = 0
         drift = None
@@ -1321,19 +1370,40 @@ def main() -> int:
                     break
                 print(f"    fingerprint drift ({', '.join(drift)}) — continuing per --allow-fingerprint-drift",
                       flush=True)
-            exc_before = {p.name for p in logs_dir.glob("exception-*.log")}
+            match_support = prepare_match_support(
+                support, variants_root, m["variant"], run, m["repeat"], attempt, batch_id)
+            match_logs_dir = match_support / "Logs"
+            match_log_path = match_logs_dir / MATCH_LOG
+            launch_args = [
+                f"Game.Mod={mod_id}",
+                "Sound.Device=none",
+                "Engine.EngineDir=..",
+                f"Engine.ModSearchPaths={REPO_ROOT / 'mods'},{engine / 'mods'}",
+                f"Engine.SupportDir={match_support}",
+                f"Launch.Map={m['variant']}",
+                f"Launch.Benchmark={BENCHMARK_PREFIX}",
+            ]
+            # Opt-in verbose squad/formation telemetry (CAMEO_BOT_DEBUG=1); default
+            # off so support-dir logs stay identical to the reference batches.
+            if os.environ.get("CAMEO_BOT_DEBUG"):
+                launch_args.append("Debug.BotDebug=true")
+            if render in ("fast", "headless"):
+                launch_args += ["Graphics.VSync=False", "Graphics.Mode=Windowed", "Graphics.WindowedSize=640,480"]
+            if render == "headless":
+                launch_args.append(f"Game.Platform={HEADLESS_PLATFORM}")
+            exc_before = {p.name for p in match_logs_dir.glob("exception-*.log")}
             print(f"[{run}/{len(matchups)}] {m['variant']} (repeat {m['repeat']}, attempt {attempt}) ...", flush=True)
             started = time.time()
             exit_code, output, status = run_match(
                 executable, engine, launch_args, timeout,
-                stall_log=logs_dir / "debug.log",
+                stall_log=match_logs_dir / "debug.log",
                 stall_timeout=args.stall_timeout,
             )
             elapsed = int(time.time() - started)
-            records = read_appended_records(log_path, before)
-            new_exc = sorted(p.name for p in logs_dir.glob("exception-*.log") if p.name not in exc_before)
+            records = read_appended_records(match_log_path, 0)
+            new_exc = sorted(p.name for p in match_logs_dir.glob("exception-*.log") if p.name not in exc_before)
             if render == "headless":
-                graphics_log = logs_dir / "graphics.log"
+                graphics_log = match_logs_dir / "graphics.log"
                 if HEADLESS_LOG_MARKER not in (graphics_log.read_text(errors="replace") if graphics_log.is_file() else ""):
                     fail(f"--render headless: {graphics_log} has no '{HEADLESS_LOG_MARKER}' line - the engine fell back "
                          "to the Default platform (see the exception in graphics.log); results would not be headless")
@@ -1358,7 +1428,7 @@ def main() -> int:
             # a host-level event drops the loopback socket mid-match, e.g.
             # "An established connection was aborted by the software in your
             # host machine".
-            client_log = logs_dir / "client.log"
+            client_log = match_logs_dir / "client.log"
             if client_log.is_file():
                 tail = client_log.read_text(encoding="utf-8", errors="replace")[-2000:].strip()
                 if tail:
@@ -1390,8 +1460,12 @@ def main() -> int:
         # A no-data run that exhausted its retries is still not a datapoint:
         # count it separately so a deterministic abort is visible in
         # batch_summary.json / run_league instead of reading as clean.
+        economy_health_status, economy_health_error = (
+            economy_health_file_status(match_support) if args.require_economy_health else ("NOT_REQUIRED", None))
         if status == "ok" and not records:
             status = "norecord"
+        if status in ("ok", "norecord") and economy_health_status == "UNKNOWN":
+            status = "UNKNOWN"
 
         outcome = sorted(
             (r.get("player", {}).get("faction"), r.get("player", {}).get("outcome"))
@@ -1400,6 +1474,9 @@ def main() -> int:
         result = {
             "variant": m["variant"],
             "status": status,
+            "health_status": economy_health_status,
+            "economy_health_file": str(match_support / "Logs" / "cameo-ai-economy-health.jsonl"),
+            "support_dir": str(match_support),
             "fingerprint": fingerprint_id(current_fingerprint),
             "exit_code": exit_code,
             "attempts": attempt,
@@ -1431,6 +1508,13 @@ def main() -> int:
         }
         if new_exc:
             result["new_exceptions"] = new_exc
+        if economy_health_error:
+            result["health_error"] = economy_health_error
+        if records:
+            with log_path.open("a", encoding="utf-8") as aggregate_log:
+                for record in records:
+                    aggregate_log.write(json.dumps(record, separators=(",", ":")) + "\n")
+        promote_unique_match_logs(match_support, logs_dir)
         results.append(result)
         # Durable per-match progress: a batch killed mid-run (the batch
         # process itself is as sweepable as the matches) still leaves this
@@ -1441,7 +1525,7 @@ def main() -> int:
         if status != "ok":
             print(f"    OpenRA output tail:\n{output_tail(output)}")
 
-    new_exceptions = sorted(p.name for p in logs_dir.glob("exception-*.log") if p.name not in exceptions_before)
+    new_exceptions = sorted({name for result in results for name in result.get("new_exceptions", [])})
     scoreboard = ab_scoreboard(results)
     team_board = team_scoreboard(results) if args.team_size > 1 else None
     summary = {
@@ -1454,6 +1538,7 @@ def main() -> int:
         "stalled": sum(1 for r in results if r["status"] == "stalled"),
         "died": sum(1 for r in results if r["status"].startswith("exit=")),
         "norecord": sum(1 for r in results if r["status"] == "norecord"),
+        "unknown": sum(1 for r in results if r["status"] == "UNKNOWN"),
         "retried": sum(1 for r in results if r["attempts"] > 1),
         "new_exceptions": new_exceptions,
         "scoreboard": scoreboard,

@@ -295,6 +295,47 @@ class RecordSliceTests(unittest.TestCase):
         finally:
             shutil.rmtree(tmp, ignore_errors=True)
 
+    def test_repeated_games_get_distinct_support_leaves_and_missing_health_is_unknown(self):
+        with tempfile.TemporaryDirectory(prefix="ai_repeat_support_test_") as tmp_dir:
+            tmp = pathlib.Path(tmp_dir)
+            support = tmp / "batch"
+            variants = support / batch.USER_MAP_DIR
+            source_variant = variants / "variant-a"
+            source_variant.mkdir(parents=True)
+            (source_variant / "map.yaml").write_text("MapFormat: 12\n", encoding="utf-8")
+            matchups = batch.build_matchups(["td_gdi"], ["hard"], ["hard"], repeats=2)
+            self.assertEqual(len(matchups), 2)
+            leaves = [
+                batch.prepare_match_support(support, variants, "variant-a", index,
+                                            matchup["repeat"], 1, "test-batch")
+                for index, matchup in enumerate(matchups, 1)
+            ]
+            self.assertNotEqual(leaves[0], leaves[1])
+            self.assertTrue(all((leaf / batch.USER_MAP_DIR / "variant-a" / "map.yaml").is_file()
+                                for leaf in leaves))
+            self.assertEqual(batch.economy_health_file_status(leaves[0])[0], "UNKNOWN")
+            health = leaves[0] / "Logs" / "cameo-ai-economy-health.jsonl"
+            health.touch()
+            self.assertEqual(batch.economy_health_file_status(leaves[0])[0], "UNKNOWN")
+            health.write_text('{"schema":2}\n', encoding="utf-8")
+            self.assertEqual(batch.economy_health_file_status(leaves[0]), ("PRESENT", None))
+
+    def test_batch_promotes_other_ai_streams_but_keeps_fixed_health_per_game(self):
+        with tempfile.TemporaryDirectory(prefix="ai_log_promotion_test_") as tmp_dir:
+            tmp = pathlib.Path(tmp_dir)
+            batch_logs = tmp / "batch" / "Logs"
+            batch_logs.mkdir(parents=True)
+            for name, row in (("g1", "one"), ("g2", "two")):
+                game_logs = tmp / name / "Logs"
+                game_logs.mkdir(parents=True)
+                (game_logs / "cameo-ai-missions.jsonl").write_text(row + "\n", encoding="utf-8")
+                (game_logs / "cameo-ai-economy-health.jsonl").write_text(row + "\n", encoding="utf-8")
+                batch.promote_unique_match_logs(tmp / name, batch_logs)
+            self.assertEqual((batch_logs / "cameo-ai-missions.jsonl").read_text(encoding="utf-8"),
+                             "one\ntwo\n")
+            self.assertFalse((batch_logs / "cameo-ai-economy-health.jsonl").exists())
+            self.assertTrue((tmp / "g1" / "Logs" / "cameo-ai-economy-health.jsonl").is_file())
+
 
 class ScoreboardTests(unittest.TestCase):
     def _record(self, game_uid, slot, bot, outcome, enemy, spawn):
@@ -320,6 +361,12 @@ class ScoreboardTests(unittest.TestCase):
     def test_scoreboard_skips_undecided(self):
         results = [{"bot_outcomes": [self._record("g1", "Multi0", "fransbot", "undecided", "classic", 0)]}]
         self.assertEqual(batch.ab_scoreboard(results), {})
+
+    def test_scoreboard_skips_unknown_economy_health(self):
+        results = [{"status": "UNKNOWN", "health_status": "UNKNOWN", "bot_outcomes": [
+            self._record("g1", "Multi0", "fransbot", "won", "classic", 0)]}]
+        self.assertEqual(batch.ab_scoreboard(results), {})
+        self.assertEqual(batch.team_scoreboard(results), {})
 
 
 
