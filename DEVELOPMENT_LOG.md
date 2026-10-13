@@ -361,6 +361,94 @@ contains the reviewed restack `7ca7e9159` byte-identical — receipt `REVIEW_202
   through pinned `economy_invariants@2a417dc3`); `test_ab_campaign_analyzer_health` 35/35;
   `test_ab_campaign_analyzer` 29/29; `git diff --check` clean. Boot gate DEFERRED — launches held
   for the lead's explicit go under the merge-wave reservation; nothing runtime claimed.
+# 2026-10-12 — Devin: extractor review verdict + deliberate-pin note (branch `devin/human-demo-extract`)
+
+*Devin-Developer.* Devin-Reviewer exact-SHA static review of
+`dbb7bcfa809792ab966af30c6796aa9c4faf729a`: **APPROVE** (receipt
+`Cameo-mod-fleet/REVIEW_2026-10-12_human_demo_extract_devin.md`). Merge-base
+`a28364114`; branch is behind master `ebea34c82` — integrator rebases, no
+mod/engine surface conflicts expected. Three bounded notes, disposition
+below.
+
+- **`wave1_scheduler.TOOL_SHA256['order_stream_diff.py'] = 1e089b45…` is
+  DELIBERATE — do not "fix" it.** The pin targets the post-repair /
+  pre-refactor comparator revision because the frozen wave-1 worktree
+  carries copies of *that* rev and `verify_tools` must keep validating
+  them. Comparator verdicts are byte-identical to the refactored tip via
+  the legacy projection (asserted by test), so the pin is consistent
+  fail-closed design, not staleness. **If a wave worktree copies tools
+  from this branch tip, `verify_tools` fails closed until a deliberate
+  re-pin to `52883a81…`** — that re-pin is a decision for whoever adopts
+  the tip, never a drive-by fix.
+- Deferred (cosmetic, reviewer-flagged non-blocking): `order_trace.py`
+  `break`s on malformed target-type where the comparator raises — a
+  diagnostic-vs-evidence asymmetry, defensible; a clarifying comment would
+  touch a self-pinned tool file, so it waits for a deliberate re-pin.
+  `test_p0_truncated_stream` carries a dead `if False` arm — test-only,
+  no behavioural surface; cleaned on the next substantive test touch.
+- Author evidence as reported: 62/62 focused tests, real-file smoke
+  19,286 orders / 0 unparsed / 62 frozen_actor. Reviewer's pass static
+  per scope — no runtime/campaign authorization implied.
+
+---
+
+# 2026-10-12 — Devin: human-demo P0+P1 offline extractor (branch `devin/human-demo-extract`)
+
+*Devin-Developer.* Coordinator assignment implementing contract rev2 (Boss
+`DESIGN_2026-10-12_human_demo_contract.md` @ `6b636db2…`) stages P0+P1 plus
+`SPEC_2026-10-12_human_demo_extraction.md` §14.2 — request-level only,
+offline only, no runtime consumers.
+
+- **`tools/ai/order_stream_diff.py` — surfacing patch (rides with this
+  review, not silent):** `parse_orders()` refactored onto a new
+  `parse_orders_detail()` that returns rich per-order records (decoded
+  fields + `parse` status + preserved bytes); `parse_orders()` projects the
+  same legacy tuples byte-identical. The one distinguished failure,
+  `unsupported_target` (Target flag set with byte 0/>3 — engine
+  `TargetType` is Invalid0/Actor1/Terrain2/FrozenActor3 and Serialize never
+  flags Invalid), is now surfaced separately from generic `unparsed_tail`,
+  as the contract requires. Comparator verdicts unchanged.
+- **`tools/ai/human_demo_extract.py` (new):** P0 trailer+SyncInfo inventory
+  (`ReplayMetadata.cs` layout: `[i32 -1][i32 1][len-prefixed MiniYaml][i32
+  len][i32 -2]`; trailer's -1 doubles as the stream terminator) and P1
+  `human-demo-orders/1` records with the exact §14.2 field set. Seats are
+  anonymized (sorted ClientIndex → seat 0..N; identity fields live only in
+  the sealed demos file); `requested_item` comes from TargetString only for
+  declared item-bearing orders (SyncInfo blobs and chat text can never
+  leak); `payload_raw` carries undecoded extra-location/extra-data hex;
+  status ladder is request-only (`accepted/completed/... = "unknown"`).
+  Censoring per §8: `after_disconnect_frame` (trailer frame > 0 only — 0 is
+  the engine default), `from_unparsed_byte` (the failed order and every
+  record after it, any client — literal rule), `after_last_sync_frame`
+  (trailerless files). Exclusions: tick-0 deaths, no-human games; status
+  `sealed|partial|excluded`. Tool pins (CRLF checkout SHA-256) for the
+  patched decoder + `tools/audit/miniyaml.py` verify at startup, fail
+  closed — the d500-frozen comparator copies stay barred.
+- **Tests `tools/tests/test_human_demo_extract.py` (+26):** golden
+  synthetic replays covering all three target cases (no-target ok /
+  decoded actor, terrain cell+pos, frozen actor / unsupported tt=0 and
+  tt=9), unparsed-tail censoring incl. a non-seat client's failure,
+  disconnect censoring, trailerless sync-bound censoring, tick-0/no-human
+  exclusion, requested_item allowlist (SyncInfo blob never leaks),
+  seat renumbering, deterministic demo ids, identity-audit and §14.2
+  banned-field sweeps. Legacy-projection equivalence is pinned too.
+- **Self-review hardening (second commit):** three defects found and fixed
+  before reviewer pass — (a) engine-known non-order packets (Ack/Ping/
+  TickScale per `OrderType`) are recognized and skipped instead of falling
+  into the generic unparsed-tail bucket (a benign server packet could have
+  censored a whole stream); (b) malformed known-type packets (wrong-length
+  SYNCHASH/DISCONNECT — fatal in the engine's TryParse*) now flag
+  `unparsed_stream` AND censor the record tail, not just the inventory
+  flag; (c) `target_ref` on `unparsed_tail` records is null unless
+  provable (flags decoded with Target bit clear → `none`) — never a
+  fabricated kind. Non-order anomaly records (`other` kind, failed
+  handshakes) censor the tail but emit no fabricated request record.
+- **Gates:** focused suite 62/62 (26 new + 36 decoder regressions).
+  Real-file smoke on four playtest captures: 19,286 order records, zero
+  unparsed bytes (the 62 `frozen_actor` targets that were UNPARSED tails
+  under the stale decoder now decode), `requested_item` carries real item
+  ids only. Boot-gate N/A — Python tooling only, no engine content; no
+  launches during the campaign reservation either way.
 
 # 2026-10-12 — Devin: M13 manager save/restore adapter (branch `devin/m13-liveness`)
 
@@ -890,6 +978,35 @@ statically; one real residual found and fixed:
   (`MenuPostProcessEffect.PostWorldLoaded`, no new exceptions, no orphan
   process). World-hover absence stays explicitly unresolved per Sol's scope
   note; interactive screenshot/hover-flow acceptance still needs a driven match.
+
+# 2026-10-08 — Devin-Architect: TargetType-enum repair — strict comparator + trace decoder re-pinned
+
+*Devin-Architect.* Sol's multiplayer-human replay audit found the published decoder accepting
+`tt in (0,1)` for target types while the engine enum is `TargetType : byte { Invalid, Actor,
+Terrain, FrozenActor }` (Target.cs:18). Consequence: legitimate `FrozenActor` (tt=3)
+CaptureActor/Attack packets went UNPARSED (Sol: BotsSuck4 23 tails, BotsSuck5 3 tails) and `tt=0`
+silently consumed an 8-byte Actor payload, desyncing the packet parse.
+
+- `order_stream_diff.py` and `order_trace.py` now decode per `Order.Serialize`/`Deserialize`
+  (Order.cs:392-435, 116-176): `tt=1` Actor `u32 actorID + i32 generation`; `tt=2` Terrain (cell
+  or position-list, unchanged); `tt=3` FrozenActor `u32 viewerPlayerActorID + u32 frozenActorID`;
+  `tt=0`/`tt>3` stay fail-closed UNPARSED — `Serialize` only sets the Target flag when the type is
+  not Invalid, so a 0/other byte on the wire is malformed for this engine.
+- Re-pin (coordinated): comparator `88d9be75…` -> `1e089b45d9ea4cf8fa70cf915dbfc8f8e6cc43fea9879019828b3266305ffe9e`,
+  trace `4da5b841…` -> `af14b88696f1600fd61f4c551370da46afbec19c8caa0aa56fd749d1b8f6d9c2` in
+  `wave1_scheduler.TOOL_SHA256` and `FROZEN_SHA256` in `test_order_stream_diff_bounded.py`.
+  The frozen wave-1 worktree copies (`parity-wave1-bd`) must be byte-updated to the repaired revs
+  before the next wave — `verify_tools()` fails closed on the stale pin, by design.
+- Regressions in `test_order_stream_diff.py` (+7): FrozenActor parse + intra-packet alignment +
+  payload diff; Actor parse + generation diff; `tt=0` and `tt=9` fail-closed UNPARSED.
+- Re-verified on the frozen wave-5 set: 6/6 `IDENTICAL_OUTCOME_BOUNDED_TAIL`, identical F_term/
+  M_term boundaries; all 12 captures extract cleanly with zero unparsed under the repaired decoder
+  (1v1 bot streams did not exercise FrozenActor — the defect bit human multiplayer captures).
+- Proof scope note: previous evidence derived under the old decoder treated tt=3 orders as UNPARSED
+  tail bytes; under the repair they compare as canonical ORDER records — strictly stronger.
+- Gates: combined comparator+scheduler suite 85/85. Branch `devin/bot-determinism`; no master push.
+
+---
 
 # 2026-10-08 — Devin-Architect: playtest C1 crash fix — approach annulus capped at MaximumTileSearchRange
 
