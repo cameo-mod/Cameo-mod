@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using OpenRA.Mods.CA.Traits.BotModules;
 using OpenRA.Mods.CA.Traits.BotModules.Squads;
 using OpenRA.Mods.Common;
 using OpenRA.Mods.Common.Activities;
@@ -768,6 +769,7 @@ namespace OpenRA.Mods.CA.Traits
 		IBotMissionOutcomeSink[] missionOutcomeSinks;
 		IBotSiegeAdvisor[] siegeAdvisors;
 		IBotCombatVeto[] combatVetoes;
+		IBotFightThresholds[] fightThresholds;
 		IBotUnitRoles unitRoles;
 
 		// The merged roles provider (§12.4, Cameo assembly) is a genericbot-gated
@@ -1574,6 +1576,7 @@ namespace OpenRA.Mods.CA.Traits
 			missionOutcomeSinks = self.Owner.PlayerActor.TraitsImplementing<IBotMissionOutcomeSink>().ToArray();
 			siegeAdvisors = self.Owner.PlayerActor.TraitsImplementing<IBotSiegeAdvisor>().ToArray();
 			combatVetoes = self.Owner.PlayerActor.TraitsImplementing<IBotCombatVeto>().ToArray();
+			fightThresholds = self.Owner.PlayerActor.TraitsImplementing<IBotFightThresholds>().ToArray();
 			utilityAxesProviders = self.Owner.PlayerActor.TraitsImplementing<IBotUtilityAxes>().ToArray();
 			scaleTargetProviders = self.Owner.PlayerActor.TraitsImplementing<IBotScaleTargets>().ToArray();
 			stealthDoctrines = self.Owner.PlayerActor.TraitsImplementing<IBotStealthDoctrine>().ToArray();
@@ -3366,13 +3369,39 @@ namespace OpenRA.Mods.CA.Traits
 			return BotCombatPredictor.Predict(own, foes, eff).Ratio;
 		}
 
-		int RetreatRatioPct => Math.Max(0, (botLimits?.Info.RetreatRatioPct ?? Info.DefaultRetreatRatioPct) + (InMatchAdaptation?.RetreatRatioDeltaPct ?? 0));
+		// This shared CA assembly cannot determine a lobby-public faction without
+		// depending on Cameo policy. Passing an empty enemy scope keeps random and
+		// unseen opponents at the own/family/global prior instead of reading their
+		// private resolved Faction value. Cameo consumers use BotFactionView.
+		string EnemyFaction(IEnumerable<Actor> enemies) => "";
+
+		int RetreatRatioPct(IEnumerable<Actor> enemies)
+		{
+			var fallback = Math.Max(0, (botLimits?.Info.RetreatRatioPct ?? Info.DefaultRetreatRatioPct) + (InMatchAdaptation?.RetreatRatioDeltaPct ?? 0));
+			var provider = fightThresholds?.FirstEnabledTraitOrDefault();
+			return provider == null ? fallback : provider.RetreatRatioPct(Player.Faction.InternalName, EnemyFaction(enemies), fallback);
+		}
+
+		int EngageMarginPct(IEnumerable<Actor> enemies)
+		{
+			var provider = fightThresholds?.FirstEnabledTraitOrDefault();
+			return provider == null ? Info.EngageMarginPct : provider.EngageMarginPct(Player.Faction.InternalName, EnemyFaction(enemies), Info.EngageMarginPct);
+		}
 
 		internal bool PredictsLoss(SquadCA squad, IEnumerable<Actor> enemies) =>
-			PredictedRatio(squad, enemies) * 100 < RetreatRatioPct;
+			PredictedRatio(squad, enemies) * 100 < RetreatRatioPct(enemies);
 
-		internal bool PredictsWin(SquadCA squad, IEnumerable<Actor> enemies) =>
-			PredictedRatio(squad, enemies) * 100 >= (double)RetreatRatioPct * Info.EngageMarginPct / 100;
+		internal bool PredictsWin(SquadCA squad, IEnumerable<Actor> enemies)
+		{
+			var provider = fightThresholds?.FirstEnabledTraitOrDefault();
+			if (provider != null)
+				return SquadDesireOrders.CanEngage(DesireRatioMilli(squad, enemies), RetreatRatioPct(enemies), EngageMarginPct(enemies));
+
+			// Preserve the legacy floating point predictor and expression exactly for
+			// switch-off order-stream compatibility. The armed learning path above is
+			// integer-only and shares its thresholds with squad-desire.
+			return PredictedRatio(squad, enemies) * 100 >= (double)RetreatRatioPct(enemies) * Info.EngageMarginPct / 100;
+		}
 
 		internal CPos DesireHome => initialBaseCenter;
 		List<Actor> desireEnemies;
@@ -3409,7 +3438,7 @@ namespace OpenRA.Mods.CA.Traits
 		}
 
 		internal bool DesireCanEngage(SquadCA squad, IEnumerable<Actor> enemies) =>
-			SquadDesireOrders.CanEngage(DesireRatioMilli(squad, enemies), RetreatRatioPct, Info.EngageMarginPct);
+			SquadDesireOrders.CanEngage(DesireRatioMilli(squad, enemies), RetreatRatioPct(enemies), EngageMarginPct(enemies));
 
 		// LEARN-P6 (SPEC §11): the scatter normaliser — a member this far from the squad centre
 		// counts as fully scattered (ScatterMilli = mean member distance vs this, clamped to 1000).

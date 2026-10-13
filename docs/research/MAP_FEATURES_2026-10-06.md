@@ -51,7 +51,7 @@ The core vector has roughly 60 values; it is one per bot start in an event, not 
 
 | Policy family | Runtime use of the vector |
 |---|---|
-| Fight: predictor calibration, effective unit value, engage/retreat | EngagementPriors derives a bounded prediction residual from vector features only where the fitted model has evidence. CombatVeto and SquadManager ask the same `IBotMapFeatures` provider for the threshold delta; missing/disabled data leaves current priors and `BotLimits` unchanged. LEARN-FIGHT’s current `BV_learn_fight` threshold provider must therefore add this optional delta after its faction/matchup lookup, clamped to its existing limits. |
+| Fight: predictor calibration, effective unit value, engage/retreat | EngagementPriors derives a bounded prediction residual from vector features only where the fitted model has evidence. CombatVeto and SquadManager ask the same `IBotMapFeatures` provider for the threshold delta; missing/disabled data leaves current priors and `BotLimits` unchanged. LEARN-FIGHT’s current `BR_learn_fight` threshold provider must therefore add this optional delta after its faction/matchup lookup, clamped to its existing limits. |
 | Economy/production | Expansion, harvester, power and build-order consumers pass their current live decision context plus map vector to an additive model; distance-to-resource, field shape, contested share, travel and choke features adjust thresholds, never choose a stored field/cell. |
 | Tactical/placement | TacticalMap, defence, artillery, staging and route consumers score their current legal candidates using map vector plus candidate-local features. They never read an historic coordinate. |
 
