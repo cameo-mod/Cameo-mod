@@ -845,41 +845,48 @@ def prepare_match_support(support: pathlib.Path, variants_root: pathlib.Path, va
     return leaf
 
 
-def planned_economy_seats(variant_map: pathlib.Path, matchup: dict) -> list[tuple[str, str]]:
-    """Derive canonical anonymous match seats from the generated variant map.
+def planned_economy_roster(variant_map: pathlib.Path, matchup: dict) -> list[tuple[str, str, str, str]]:
+    """Return configured combat bots by engine-visible identity, not seat index.
 
-    Match logging numbers every PlayerReference in map order, while economy
-    rows use each bot player's InternalName. Both writers traverse World.Players
-    in that same order, which binds the anonymized seat key to health identity.
+    Player creation groups non-playable map references before lobby slots, so
+    raw YAML order cannot predict seat_N. The match log has bot/faction/home;
+    the economy log has InternalName/bot/faction. Joining each stream to this
+    configured roster avoids guessing engine indexes and excludes inert refs.
     """
     text = variant_map.read_text(encoding="utf-8")
     refs = list(re.finditer(r"(?m)^\tPlayerReference@([^:]+):\s*$", text))
-    seats = []
+    roster = []
     for index, ref in enumerate(refs):
         next_ref = refs[index + 1].start() if index + 1 < len(refs) else len(text)
-        next_key = re.search(r"\n\S", text[ref.end():next_ref])
-        end = ref.end() + next_key.start() if next_key else next_ref
-        block = text[ref.start():end]
+        block = text[ref.start():next_ref]
+        if re.search(r"(?m)^\t\tNonCombatant:\s*True\s*$", block, re.IGNORECASE):
+            continue
         bot = re.search(r"(?m)^\t\tBot:\s*(\S+)\s*$", block)
         if bot:
             faction = re.search(r"(?m)^\t\tFaction:\s*(\S+)\s*$", block)
-            if faction is None:
-                raise ValueError(f"generated bot PlayerReference@{ref.group(1)} has no faction")
-            seats.append((f"seat_{index + 1}", faction.group(1)))
+            name = re.search(r"(?m)^\t\tName:\s*(.+?)\s*$", block)
+            home = re.search(r"(?m)^\t\tHomeLocation:\s*(-?\d+,-?\d+)\s*$", block)
+            if faction is None or home is None:
+                raise ValueError(f"generated bot PlayerReference@{ref.group(1)} lacks faction or HomeLocation")
+            roster.append((name.group(1) if name else ref.group(1), faction.group(1),
+                           bot.group(1), home.group(1)))
 
     if "team_a" in matchup:
-        planned_factions = [seat["faction"] for seat in matchup["team_a"] + matchup["team_b"]]
+        configured = [(seat["bot"], seat["faction"])
+                      for seat in matchup["team_a"] + matchup["team_b"]]
     else:
-        planned_factions = [matchup["side_a"]["faction"], matchup["side_b"]["faction"]]
-    if sorted(faction for _seat, faction in seats) != sorted(planned_factions):
+        configured = [(matchup[side]["bot"], matchup[side]["faction"]) for side in ("side_a", "side_b")]
+    if sorted((bot, faction) for _name, faction, bot, _home in roster) != sorted(configured):
         raise ValueError("generated variant bot seats do not match the planned matchup")
-    return seats
+    if len({(name, home) for name, _faction, _bot, home in roster}) != len(roster):
+        raise ValueError("generated variant has ambiguous bot identity or HomeLocation")
+    return roster
 
 
 def economy_health_file_status(
     support: pathlib.Path,
     match_records: list[dict],
-    expected_seats: list[tuple[str, str]],
+    expected_roster: list[tuple[str, str, str, str]],
 ) -> tuple[str, str | None]:
     """Require complete, per-seat economy evidence for one successful match.
 
@@ -902,7 +909,7 @@ def economy_health_file_status(
         rows, _receipt = read_jsonl(health_path)
         if not rows:
             return "UNKNOWN", f"no economy-health rows: {health_path}"
-        expected_seats_by_uid: dict[str, list[tuple[str, str]]] = {}
+        expected_seats_by_uid: dict[str, list[tuple[str, str, str, str]]] = {}
         record_ids: set[str] = set()
         for record in match_records:
             if not isinstance(record, dict):
@@ -912,22 +919,29 @@ def economy_health_file_status(
             player = record.get("player")
             seat = player.get("seat") if isinstance(player, dict) else None
             faction = player.get("faction") if isinstance(player, dict) else None
+            bot_type = player.get("bot_type") if isinstance(player, dict) else None
+            home = player.get("home") if isinstance(player, dict) else None
             seat_match = re.fullmatch(r"seat_(\d+)", seat) if isinstance(seat, str) else None
             if (not isinstance(record_id, str) or not isinstance(uid, str) or not uid
-                    or record_id.partition("|")[0] != uid or seat_match is None
-                    or not isinstance(faction, str) or not faction):
-                return "UNKNOWN", "match records lack canonical game/seat/faction identity"
+                    or record_id != f"{uid}|{seat}" or seat_match is None
+                    or not isinstance(faction, str) or not faction
+                    or not isinstance(bot_type, str) or not bot_type
+                    or not isinstance(home, str) or not re.fullmatch(r"-?\d+,-?\d+", home)):
+                return "UNKNOWN", "match records lack canonical game/seat/bot/faction/home identity"
             if record_id in record_ids:
                 return "UNKNOWN", "duplicate match record/seat identity"
             record_ids.add(record_id)
-            expected_seats_by_uid.setdefault(uid, []).append((seat, faction))
+            expected_seats_by_uid.setdefault(uid, []).append((bot_type, faction, home, seat))
         if len(expected_seats_by_uid) != 1 or not match_records:
             return "UNKNOWN", "per-game support leaf must contain exactly one match UID"
         game_uid, logged_seats = next(iter(expected_seats_by_uid.items()))
-        if (len(expected_seats) != len({seat for seat, _faction in expected_seats})
-                or len(match_records) != len(expected_seats)
-                or sorted(logged_seats) != sorted(expected_seats)):
-            return "UNKNOWN", "match record seat roster differs from the planned variant roster"
+        logged_ids = [seat for _bot, _faction, _home, seat in logged_seats]
+        if (len(expected_roster) != len({(name, home) for name, _faction, _bot, home in expected_roster})
+                or len(match_records) != len(expected_roster)
+                or len(set(logged_ids)) != len(logged_ids)
+                or sorted((bot, faction, home) for bot, faction, home, _seat in logged_seats)
+                != sorted((bot, faction, home) for _name, faction, bot, home in expected_roster)):
+            return "UNKNOWN", "match record roster differs from the configured variant roster"
         if any(not isinstance(row, dict) or row.get("game_uid") != game_uid for row in rows):
             return "UNKNOWN", "economy-health stream contains malformed or foreign game UID rows"
         players: list[str] = []
@@ -937,13 +951,10 @@ def economy_health_file_status(
             if isinstance(player_name, str) and player_name not in seen_players:
                 seen_players.add(player_name)
                 players.append(player_name)
-        if len(players) != len(expected_seats):
+        if len(players) != len(expected_roster):
             return "UNKNOWN", (f"economy-health seat coverage mismatch: {len(players)} player(s) "
-                                f"for {len(expected_seats)} planned seat(s)")
-        # Both writers traverse world.Players in order. Match rows expose the
-        # anonymized seat_N key; health rows expose InternalName. Their first
-        # row order is the only supported bridge between those identities.
-        actual_factions = []
+                                f"for {len(expected_roster)} configured bot(s)")
+        actual_roster = []
         for player_name in players:
             player_rows = [row for row in rows if row.get("player") == player_name]
             report = analyze_economy(rows, game_uid, player_name)
@@ -953,11 +964,14 @@ def economy_health_file_status(
                 return "UNKNOWN", (f"incomplete economy evidence for a recorded seat ({player_name}): "
                                     f"{report.get('error', 'terminal/integrity validation failed')}")
             factions = {row.get("faction") for row in player_rows}
-            if len(factions) != 1 or not all(isinstance(value, str) and value for value in factions):
-                return "UNKNOWN", f"economy-health faction identity is missing or inconsistent ({player_name})"
-            actual_factions.append(next(iter(factions)))
-        if actual_factions != [faction for _seat, faction in expected_seats]:
-            return "UNKNOWN", "economy-health player order/factions do not match anonymous match seats"
+            bot_types = {row.get("bot_type") for row in player_rows}
+            if (len(factions) != 1 or not all(isinstance(value, str) and value for value in factions)
+                    or len(bot_types) != 1 or not all(isinstance(value, str) and value for value in bot_types)):
+                return "UNKNOWN", f"economy-health player/bot/faction identity is missing or inconsistent ({player_name})"
+            actual_roster.append((player_name, next(iter(factions)), next(iter(bot_types))))
+        planned_health_roster = [(name, faction, bot) for name, faction, bot, _home in expected_roster]
+        if sorted(actual_roster) != sorted(planned_health_roster):
+            return "UNKNOWN", "economy-health player identities differ from the configured variant roster"
     except (OSError, ValueError, TypeError, KeyError, ImportError) as exc:
         return "UNKNOWN", f"cannot inspect expected economy-health file {health_path}: {exc}"
     return "OBSERVED_HEALTHY", None
@@ -1574,9 +1588,9 @@ def main() -> int:
         # batch_summary.json / run_league instead of reading as clean.
         if args.require_economy_health:
             try:
-                expected_health_seats = planned_economy_seats(variants_root / m["variant"] / "map.yaml", m)
+                expected_health_roster = planned_economy_roster(variants_root / m["variant"] / "map.yaml", m)
                 economy_health_status, economy_health_error = economy_health_file_status(
-                    match_support, records, expected_health_seats)
+                    match_support, records, expected_health_roster)
             except (OSError, ValueError, KeyError, TypeError) as exc:
                 economy_health_status, economy_health_error = "UNKNOWN", f"cannot derive planned health seats: {exc}"
         else:

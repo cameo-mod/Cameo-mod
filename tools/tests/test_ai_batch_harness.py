@@ -314,9 +314,10 @@ class RecordSliceTests(unittest.TestCase):
             self.assertNotEqual(leaves[0], leaves[1])
             self.assertTrue(all((leaf / batch.USER_MAP_DIR / "variant-a" / "map.yaml").is_file()
                                 for leaf in leaves))
-            match_records = [{"game_uid": "g", "record_id": "g|seat_1",
-                              "player": {"seat": "seat_1", "faction": "td_gdi"}}]
-            planned = [("seat_1", "td_gdi")]
+            match_records = [{"game_uid": "g", "record_id": "g|seat_3",
+                              "player": {"seat": "seat_3", "faction": "td_gdi", "bot_type": "hard",
+                                         "home": "22,16"}}]
+            planned = [("BotA", "td_gdi", "hard", "22,16")]
             self.assertEqual(batch.economy_health_file_status(leaves[0], match_records, planned)[0], "UNKNOWN")
             health = leaves[0] / "Logs" / "cameo-ai-economy-health.jsonl"
             health.touch()
@@ -330,15 +331,16 @@ class RecordSliceTests(unittest.TestCase):
             logs = support / "Logs"
             logs.mkdir()
             records = [
-                {"game_uid": "g", "record_id": "g|seat_1",
-                 "player": {"seat": "seat_1", "faction": "td_gdi"}},
-                {"game_uid": "g", "record_id": "g|seat_2",
-                 "player": {"seat": "seat_2", "faction": "td_nod"}},
+                {"game_uid": "g", "record_id": "g|seat_3",
+                 "player": {"seat": "seat_3", "faction": "td_gdi", "bot_type": "hard", "home": "22,16"}},
+                {"game_uid": "g", "record_id": "g|seat_4",
+                 "player": {"seat": "seat_4", "faction": "td_nod", "bot_type": "classic", "home": "49,55"}},
             ]
 
             def pulse(player, seq, tick, kind="pulse", terminal=False):
                 return {"schema": 2, "game_uid": "g", "player": player,
                         "map_uid": "map", "faction": "td_gdi" if player == "Multi0" else "td_nod",
+                        "bot_type": "hard" if player == "Multi0" else "classic",
                         "profile": "conventional",
                         "profile_supported": True, "dropped": 0, "kind": kind,
                         "tick": tick, "seq": seq, "queues_complete": True,
@@ -354,12 +356,13 @@ class RecordSliceTests(unittest.TestCase):
                              pulse(player, 2, 100, terminal=True),
                              pulse(player, 3, 100, kind="end", terminal=True)])
             path.write_text("".join(json.dumps(row) + "\n" for row in rows), encoding="utf-8")
-            planned = [("seat_1", "td_gdi"), ("seat_2", "td_nod")]
+            planned = [("Multi0", "td_gdi", "hard", "22,16"),
+                       ("Multi1", "td_nod", "classic", "49,55")]
             self.assertEqual(batch.economy_health_file_status(support, records, planned), ("OBSERVED_HEALTHY", None))
 
             reversed_seats = [row for player in ("Multi1", "Multi0") for row in rows if row["player"] == player]
             path.write_text("".join(json.dumps(row) + "\n" for row in reversed_seats), encoding="utf-8")
-            self.assertEqual(batch.economy_health_file_status(support, records, planned)[0], "UNKNOWN")
+            self.assertEqual(batch.economy_health_file_status(support, records, planned), ("OBSERVED_HEALTHY", None))
 
             path.write_text("".join(json.dumps(row) + "\n" for row in rows[:-1]), encoding="utf-8")
             self.assertEqual(batch.economy_health_file_status(support, records, planned)[0], "UNKNOWN")
@@ -378,19 +381,17 @@ class RecordSliceTests(unittest.TestCase):
                             encoding="utf-8")
             self.assertEqual(batch.economy_health_file_status(support, records[:1], planned)[0], "UNKNOWN")
 
-    def test_planned_health_roster_comes_from_generated_variant_contract(self):
-        with tempfile.TemporaryDirectory(prefix="ai_health_roster_test_") as tmp_dir:
-            map_yaml = pathlib.Path(tmp_dir) / "map.yaml"
-            map_yaml.write_text(
-                "Players:\n"
-                "\tPlayerReference@Neutral:\n\t\tNonCombatant: True\n"
-                "\tPlayerReference@Referee:\n\t\tNonCombatant: True\n"
-                "\tPlayerReference@Multi0:\n\t\tBot: hard\n\t\tFaction: td_gdi\n"
-                "\tPlayerReference@Multi1:\n\t\tBot: classic\n\t\tFaction: td_nod\n"
-                "Actors:\n", encoding="utf-8")
-            matchup = {"side_a": {"faction": "td_gdi"}, "side_b": {"faction": "td_nod"}}
-            self.assertEqual(batch.planned_economy_seats(map_yaml, matchup),
-                             [("seat_3", "td_gdi"), ("seat_4", "td_nod")])
+    def test_planned_roster_uses_real_duel_template_identity_not_raw_player_order(self):
+        # The referee is a Playable: True NonCombatant before the map-side bots.
+        # Map YAML order therefore is not World.Players seat order, but the
+        # configured combat roster remains BotA/B by name + faction + bot + home.
+        matchup = {"side_a": {"faction": "td_gdi", "bot": "hard"},
+                   "side_b": {"faction": "td_nod", "bot": "hard"}}
+        planned = batch.planned_economy_roster(batch.TEMPLATE_MAP / "map.yaml", matchup)
+        self.assertEqual(planned, [
+            ("BotA", "td_gdi", "hard", "22,16"),
+            ("BotB", "td_nod", "hard", "49,55"),
+        ])
 
     def test_optional_economy_health_does_not_change_success_status(self):
         self.assertEqual(batch.apply_economy_health_requirement("ok", "NOT_REQUIRED", False), "ok")
