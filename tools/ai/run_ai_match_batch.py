@@ -845,17 +845,74 @@ def prepare_match_support(support: pathlib.Path, variants_root: pathlib.Path, va
     return leaf
 
 
-def economy_health_file_status(support: pathlib.Path) -> tuple[str, str | None]:
-    """Return UNKNOWN for missing/empty expected economy telemetry."""
+def economy_health_file_status(support: pathlib.Path, match_records: list[dict]) -> tuple[str, str | None]:
+    """Require complete, per-seat economy evidence for one successful match.
+
+    File presence is not evidence completeness: a partial JSONL, a foreign UID,
+    a missing bot seat, or a stream without a valid terminal record must not
+    leave a successful match eligible for scoring.
+    """
     health_path = support / "Logs" / "cameo-ai-economy-health.jsonl"
     try:
         if not health_path.is_file():
             return "UNKNOWN", f"missing expected economy-health file: {health_path}"
-        if health_path.stat().st_size == 0:
+        data = health_path.read_bytes()
+        if not data:
             return "UNKNOWN", f"empty expected economy-health file: {health_path}"
-    except OSError as exc:
+        if not data.endswith(b"\n"):
+            return "UNKNOWN", f"unterminated economy-health JSONL: {health_path}"
+        from replay_health import read_jsonl
+        from economy_invariants import analyze as analyze_economy
+
+        rows, _receipt = read_jsonl(health_path)
+        if not rows:
+            return "UNKNOWN", f"no economy-health rows: {health_path}"
+        expected_factions_by_uid: dict[str, list[str]] = {}
+        record_ids: set[str] = set()
+        for record in match_records:
+            if not isinstance(record, dict):
+                return "UNKNOWN", "invalid match record while validating economy health"
+            record_id = record.get("record_id")
+            uid = record.get("game_uid")
+            player = record.get("player")
+            seat = player.get("seat") if isinstance(player, dict) else None
+            faction = player.get("faction") if isinstance(player, dict) else None
+            if (not isinstance(record_id, str) or not isinstance(uid, str) or not uid
+                    or record_id.partition("|")[0] != uid or not isinstance(seat, str) or not seat
+                    or not isinstance(faction, str) or not faction):
+                return "UNKNOWN", "match records lack canonical game/seat/faction identity"
+            if record_id in record_ids:
+                return "UNKNOWN", "duplicate match record/seat identity"
+            record_ids.add(record_id)
+            expected_factions_by_uid.setdefault(uid, []).append(faction)
+        if len(expected_factions_by_uid) != 1 or not match_records:
+            return "UNKNOWN", "per-game support leaf must contain exactly one match UID"
+        game_uid, expected_factions = next(iter(expected_factions_by_uid.items()))
+        if any(not isinstance(row, dict) or row.get("game_uid") != game_uid for row in rows):
+            return "UNKNOWN", "economy-health stream contains malformed or foreign game UID rows"
+        players = {row.get("player") for row in rows if isinstance(row.get("player"), str)}
+        if len(players) != len(match_records):
+            return "UNKNOWN", (f"economy-health seat coverage mismatch: {len(players)} player(s) "
+                                f"for {len(match_records)} match record(s)")
+        expected_factions = sorted(expected_factions)
+        actual_factions = []
+        for player_name in sorted(players):
+            player_rows = [row for row in rows if row.get("player") == player_name]
+            report = analyze_economy(rows, game_uid, player_name)
+            if report.get("status") == "BLOCK":
+                return "BLOCK", f"economy invariant BLOCK for a recorded seat ({player_name})"
+            if report.get("status") != "OBSERVED_HEALTHY":
+                return "UNKNOWN", (f"incomplete economy evidence for a recorded seat ({player_name}): "
+                                    f"{report.get('error', 'terminal/integrity validation failed')}")
+            factions = {row.get("faction") for row in player_rows}
+            if len(factions) != 1 or not all(isinstance(value, str) and value for value in factions):
+                return "UNKNOWN", f"economy-health faction identity is missing or inconsistent ({player_name})"
+            actual_factions.append(next(iter(factions)))
+        if sorted(actual_factions) != expected_factions:
+            return "UNKNOWN", "economy-health factions do not match recorded match seats"
+    except (OSError, ValueError, TypeError, KeyError, ImportError) as exc:
         return "UNKNOWN", f"cannot inspect expected economy-health file {health_path}: {exc}"
-    return "PRESENT", None
+    return "OBSERVED_HEALTHY", None
 
 
 PER_GAME_LOGS = {
@@ -899,7 +956,7 @@ def ab_scoreboard(results: list[dict]) -> dict:
     seen_records: set[str] = set()
     board: dict[tuple[str, str], dict] = {}
     for result in results:
-        if result.get("health_status") == "UNKNOWN" or result.get("status") == "UNKNOWN":
+        if result.get("health_status") in ("UNKNOWN", "BLOCK") or result.get("status") == "UNKNOWN":
             continue
         for record in result.get("bot_outcomes") or []:
             record_id = str(record.get("record_id") or "")
@@ -937,7 +994,7 @@ def team_scoreboard(results: list[dict]) -> dict:
     seen_records: set[str] = set()
     matches: dict[str, list[dict]] = {}
     for result in results:
-        if result.get("health_status") == "UNKNOWN" or result.get("status") == "UNKNOWN":
+        if result.get("health_status") in ("UNKNOWN", "BLOCK") or result.get("status") == "UNKNOWN":
             continue
         for record in result.get("bot_outcomes") or []:
             record_id = str(record.get("record_id") or "")
@@ -1461,10 +1518,10 @@ def main() -> int:
         # count it separately so a deterministic abort is visible in
         # batch_summary.json / run_league instead of reading as clean.
         economy_health_status, economy_health_error = (
-            economy_health_file_status(match_support) if args.require_economy_health else ("NOT_REQUIRED", None))
+            economy_health_file_status(match_support, records) if args.require_economy_health else ("NOT_REQUIRED", None))
         if status == "ok" and not records:
             status = "norecord"
-        if status in ("ok", "norecord") and economy_health_status == "UNKNOWN":
+        if status in ("ok", "norecord") and economy_health_status != "OBSERVED_HEALTHY":
             status = "UNKNOWN"
 
         outcome = sorted(

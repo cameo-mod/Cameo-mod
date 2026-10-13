@@ -40,8 +40,8 @@ def write_cell(cell_dir: pathlib.Path, rows: list[dict], completed: int = 1,
                 for r in game_rows
             ]
             row = {"name": game, "bot_outcomes": outcomes}
-            if match_status is not None:
-                row.update(status=match_status, health_status=match_status)
+            row.update(status=match_status or "ok",
+                       health_status=match_status or "OBSERVED_HEALTHY")
             fh.write(json.dumps(row) + "\n")
 
 

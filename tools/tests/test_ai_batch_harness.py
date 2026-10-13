@@ -5,6 +5,7 @@ match-log corpus the aggregator learns from, so the pure pieces (matrix,
 map patching, record slicing) get unit tests; the engine launch itself is
 smoke-tested separately with a real match.
 """
+import json
 import pathlib
 import re
 import shutil
@@ -313,12 +314,56 @@ class RecordSliceTests(unittest.TestCase):
             self.assertNotEqual(leaves[0], leaves[1])
             self.assertTrue(all((leaf / batch.USER_MAP_DIR / "variant-a" / "map.yaml").is_file()
                                 for leaf in leaves))
-            self.assertEqual(batch.economy_health_file_status(leaves[0])[0], "UNKNOWN")
+            match_records = [{"game_uid": "g", "record_id": "g|seat_1",
+                              "player": {"seat": "seat_1", "faction": "td_gdi"}}]
+            self.assertEqual(batch.economy_health_file_status(leaves[0], match_records)[0], "UNKNOWN")
             health = leaves[0] / "Logs" / "cameo-ai-economy-health.jsonl"
             health.touch()
-            self.assertEqual(batch.economy_health_file_status(leaves[0])[0], "UNKNOWN")
+            self.assertEqual(batch.economy_health_file_status(leaves[0], match_records)[0], "UNKNOWN")
             health.write_text('{"schema":2}\n', encoding="utf-8")
-            self.assertEqual(batch.economy_health_file_status(leaves[0]), ("PRESENT", None))
+            self.assertEqual(batch.economy_health_file_status(leaves[0], match_records)[0], "UNKNOWN")
+
+    def test_complete_health_evidence_requires_all_seats_and_terminal_rows(self):
+        with tempfile.TemporaryDirectory(prefix="ai_complete_health_test_") as tmp_dir:
+            support = pathlib.Path(tmp_dir)
+            logs = support / "Logs"
+            logs.mkdir()
+            records = [
+                {"game_uid": "g", "record_id": "g|seat_1",
+                 "player": {"seat": "seat_1", "faction": "td_gdi"}},
+                {"game_uid": "g", "record_id": "g|seat_2",
+                 "player": {"seat": "seat_2", "faction": "td_gdi"}},
+            ]
+
+            def pulse(player, seq, tick, kind="pulse", terminal=False):
+                return {"schema": 2, "game_uid": "g", "player": player,
+                        "map_uid": "map", "faction": "td_gdi", "profile": "conventional",
+                        "profile_supported": True, "dropped": 0, "kind": kind,
+                        "tick": tick, "seq": seq, "queues_complete": True,
+                        "player_active": not terminal, "seat_state": "lost" if terminal else "active",
+                        "cash": 5000, "resources": 0, "capacity": 10000,
+                        "net_spent": tick, "gross_spent": None, "gross_spend_complete": False,
+                        "queues": [], **({"complete": True} if kind == "end" else {})}
+
+            path = logs / "cameo-ai-economy-health.jsonl"
+            rows = []
+            for player in ("Multi0", "Multi1"):
+                rows.extend([pulse(player, 0, 0), pulse(player, 1, 50),
+                             pulse(player, 2, 100, terminal=True),
+                             pulse(player, 3, 100, kind="end", terminal=True)])
+            path.write_text("".join(json.dumps(row) + "\n" for row in rows), encoding="utf-8")
+            self.assertEqual(batch.economy_health_file_status(support, records), ("OBSERVED_HEALTHY", None))
+
+            path.write_text("".join(json.dumps(row) + "\n" for row in rows[:-1]), encoding="utf-8")
+            self.assertEqual(batch.economy_health_file_status(support, records)[0], "UNKNOWN")
+
+            path.write_text("".join(json.dumps(row) + "\n" for row in rows) + "{malformed\n",
+                            encoding="utf-8")
+            self.assertEqual(batch.economy_health_file_status(support, records)[0], "UNKNOWN")
+
+            path.write_text("".join(json.dumps(row) + "\n" for row in rows if row["player"] != "Multi1"),
+                            encoding="utf-8")
+            self.assertEqual(batch.economy_health_file_status(support, records)[0], "UNKNOWN")
 
     def test_batch_promotes_other_ai_streams_but_keeps_fixed_health_per_game(self):
         with tempfile.TemporaryDirectory(prefix="ai_log_promotion_test_") as tmp_dir:
@@ -367,6 +412,10 @@ class ScoreboardTests(unittest.TestCase):
             self._record("g1", "Multi0", "fransbot", "won", "classic", 0)]}]
         self.assertEqual(batch.ab_scoreboard(results), {})
         self.assertEqual(batch.team_scoreboard(results), {})
+        blocked = [{"status": "UNKNOWN", "health_status": "BLOCK", "bot_outcomes": [
+            self._record("g2", "Multi0", "fransbot", "won", "classic", 0)]}]
+        self.assertEqual(batch.ab_scoreboard(blocked), {})
+        self.assertEqual(batch.team_scoreboard(blocked), {})
 
 
 

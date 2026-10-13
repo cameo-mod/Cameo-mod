@@ -166,7 +166,7 @@ def merge_cell(cell_dir: pathlib.Path, cell: dict, candidate: str, member: str, 
             if not line.strip():
                 continue
             match = json.loads(line)
-            if match.get("status") == "UNKNOWN" or match.get("health_status") == "UNKNOWN":
+            if match.get("status") == "UNKNOWN" or match.get("health_status") != "OBSERVED_HEALTHY":
                 continue
             for row in match.get("bot_outcomes") or []:
                 if row.get("bot_type") != candidate:
@@ -193,7 +193,7 @@ def merge_cell(cell_dir: pathlib.Path, cell: dict, candidate: str, member: str, 
         if not line.strip():
             continue
         match = json.loads(line)
-        if match.get("status") == "UNKNOWN" or match.get("health_status") == "UNKNOWN":
+        if match.get("status") == "UNKNOWN" or match.get("health_status") != "OBSERVED_HEALTHY":
             continue
         for row in match.get("bot_outcomes") or []:
             if row.get("bot_type") != candidate or (row.get("opponent") or {}).get("bot_type") != member:
