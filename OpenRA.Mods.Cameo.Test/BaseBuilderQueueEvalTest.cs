@@ -53,6 +53,31 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(BaseBuilderQueueEvalCA.BlockedByCash(49, 100, false, true, 50, false), Is.True);
 		}
 
+		// Cash-starvation escape: units draining the bank under the building floor cannot hold construction out forever.
+
+		[Test]
+		public void StarvedQueueRidesAtItsOwnCost()
+		{
+			// 625 cash under a 1000 floor: blocked until starved, then admitted at cost 300 but not at cost 700.
+			Assert.That(BaseBuilderQueueEvalCA.BlockedByCash(625, 1000, false, false, 300, false, false), Is.True);
+			Assert.That(BaseBuilderQueueEvalCA.BlockedByCash(625, 1000, false, false, 300, false, true), Is.False);
+			Assert.That(BaseBuilderQueueEvalCA.BlockedByCash(625, 1000, false, false, 700, false, true), Is.True);
+		}
+
+		[Test]
+		public void StarvedEscapeNeverOverridesTheSameTickQueueBlock()
+			=> Assert.That(BaseBuilderQueueEvalCA.BlockedByCash(5000, 1000, false, false, 300, true, true), Is.True);
+
+		[Test]
+		public void CashStarvedNeedsAnUninterruptedRunAtTheThreshold()
+		{
+			Assert.That(BaseBuilderQueueEvalCA.CashStarved(-1, 5000, 300), Is.False, "never blocked");
+			Assert.That(BaseBuilderQueueEvalCA.CashStarved(1000, 1299, 300), Is.False, "one tick short");
+			Assert.That(BaseBuilderQueueEvalCA.CashStarved(1000, 1300, 300), Is.True, "exactly at the threshold");
+			Assert.That(BaseBuilderQueueEvalCA.CashStarved(0, 5000, 0), Is.False, "zero disables the escape");
+			Assert.That(BaseBuilderQueueEvalCA.CashStarved(0, 5000, -1), Is.False, "negative disables the escape");
+		}
+
 		// MobileSpendBlocks (TF-2): optional spend may not dip under the unit side's reserved share.
 
 		[Test]

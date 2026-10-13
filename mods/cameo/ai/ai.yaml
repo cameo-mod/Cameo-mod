@@ -5135,9 +5135,11 @@ Player:
 		NewProductionCashThreshold: 0
 		# BZ_production_scaling: banked cash held over the difficulty line while every unit queue is busy
 		# (or net income per producer over the line) queues another production building for the
-		# least-provisioned queue type. SwitchCondition-gated — classic keeps today's behaviour. Off
-		# until the increment A/B arms it.
-		UseProductionScaling: false
+		# least-provisioned queue type.
+		# ARMED BY DEFAULT (A/B sentinel triage 2026-10-13, BotA hard banked 19.8k with production
+		# under-used): genericbot-only via SwitchCondition, so classic keeps today's behaviour.
+		SwitchCondition: genericbot
+		UseProductionScaling: true
 		BuildingProductionMinCashRequirement: 1000
 		DefenseProductionMinCashRequirement: 1500
 		BuildingQueues: Building, RABuilding, BuildingAddons

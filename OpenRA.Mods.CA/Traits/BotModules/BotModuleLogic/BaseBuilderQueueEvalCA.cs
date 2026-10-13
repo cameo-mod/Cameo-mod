@@ -34,8 +34,17 @@ namespace OpenRA.Mods.CA.Traits
 		/// due MCV's prerequisite), which ride at their own cost floor under the law (REF-1 B1/B2).
 		/// </summary>
 		public static bool BlockedByCash(int cash, int minCashRequirement, bool isRefinery,
-			bool plannerWant, int productionCost, bool queuedThisTick) =>
-			queuedThisTick || (cash < minCashRequirement && !isRefinery && !(plannerWant && cash >= productionCost));
+			bool plannerWant, int productionCost, bool queuedThisTick, bool starved = false) =>
+			queuedThisTick || (cash < minCashRequirement && !isRefinery && !((plannerWant || starved) && cash >= productionCost));
+
+		/// <summary>
+		/// Cash-starvation escape: a queue whose wanted item has sat under the cash floor since
+		/// <paramref name="blockedSince"/> (-1 = not blocked) for at least <paramref name="starveTicks"/>
+		/// rides at its own cost, like the planner's wants. Units spending the bank back under the
+		/// floor every sweep would otherwise hold the floor out of reach forever. Pure, integer-only.
+		/// </summary>
+		public static bool CashStarved(int blockedSince, int now, int starveTicks) =>
+			starveTicks > 0 && blockedSince >= 0 && now - blockedSince >= starveTicks;
 
 		/// <summary>
 		/// TF-2: the unit side's mobile-production reservation — optional spend (optional defences
