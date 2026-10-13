@@ -148,27 +148,27 @@ class InvariantTests(unittest.TestCase):
             self.assertEqual(report["status"], "OBSERVED_HEALTHY")
             self.assertNotIn("REPEATED_BUILDING_CANCELLATION", codes(rows))
 
-    def test_event_activity_changes_between_pulses(self):
+    def test_event_activity_is_authoritative_and_terminal_stops_later_events(self):
         rows = cancellation_capture()
         events = [r for r in rows if r["kind"] == "cancel"]
         # All pulses remain active: the exact event must stop the retry window.
         events[1]["player_active"] = False
         self.assertNotIn("REPEATED_BUILDING_CANCELLATION", codes(rows))
-        # Conversely, stale inactive pulses cannot hide three live active events
-        # occurring between two samples.
+        # A terminal pulse closes the window: later event records are not
+        # retroactively treated as pre-terminal cancellation defects.
         rows = cancellation_capture()
         for r in rows:
-            if r["kind"] == "pulse":
+            if r["kind"] == "pulse" and r["tick"] >= 50:
                 r["player_active"] = False
                 r["seat_state"] = "lost"
             elif r["kind"] == "end":
                 r["seat_state"] = "lost"
-            elif r["kind"] == "cancel":
-                r["tick"] = {10: 10, 60: 20, 110: 30}[r["tick"]]
         rows.sort(key=lambda r: (r["tick"], r["kind"] == "end"))
         for seq, row in enumerate(rows):
             row["seq"] = seq
-        self.assertIn("REPEATED_BUILDING_CANCELLATION", codes(rows))
+        report = verifier.analyze(rows, "g", "p")
+        self.assertEqual(report["status"], "OBSERVED_HEALTHY")
+        self.assertNotIn("REPEATED_BUILDING_CANCELLATION", codes(rows))
 
     def test_cancel_missing_or_unknown_event_state_is_unknown(self):
         for key in ("player_active", "producer_live", "cancellation_class"):
@@ -183,7 +183,7 @@ class InvariantTests(unittest.TestCase):
 
     def test_missing_truncated_unknown_and_gaps(self):
         self.assertEqual(verifier.analyze([], "g", "p")["status"], "UNKNOWN")
-        for mutate in (lambda rows: rows.pop(2), lambda rows: rows[2].update(dropped=1),
+        for mutate in (lambda rows: rows.pop(2),
                        lambda rows: rows[2].update(profile_supported=False),
                        lambda rows: rows.pop(), lambda rows: rows[2].update(seq=999)):
             rows = capture()
@@ -272,21 +272,28 @@ class InvariantTests(unittest.TestCase):
             self.assertEqual(verifier.analyze(rows, "g", "p")["status"], "UNKNOWN")
 
     def test_defeated_seat_is_explicit_terminal_verdict(self):
-        # The losing seat's collapse tail is complete data, not dropped evidence:
-        # seat_state "lost" on every pulse and the terminal record classifies DEFEATED.
-        for mutate_all in (True, False):
-            rows = capture(1500)
-            tail = rows if mutate_all else rows[20:]
-            for row in tail:
+        # A fixture-forced terminal defeat closes a healthy pre-terminal window.
+        rows = capture(150)
+        rows[-1]["seat_state"] = "lost"
+        report = verifier.analyze(rows, "g", "p")
+        self.assertEqual(report["status"], "OBSERVED_HEALTHY")
+        self.assertTrue(report["defeated"])
+        self.assertEqual(report["terminal"], {"kind": "FIXTURE_TERMINAL", "tick": 150,
+                                               "seat_state": "lost"})
+
+    def test_economy_after_first_terminal_pulse_is_outside_health_window(self):
+        rows = capture(1500, cash=0)
+        for row in rows:
+            if row["tick"] >= 100:
                 row["player_active"] = False
                 row["seat_state"] = "lost"
-            rows[-1]["seat_state"] = "lost"
-            report = verifier.analyze(rows, "g", "p")
-            self.assertEqual(report["status"], "DEFEATED")
-            self.assertTrue(report["defeated"])
+        report = verifier.analyze(rows, "g", "p")
+        self.assertEqual(report["status"], "OBSERVED_HEALTHY")
+        self.assertEqual(report["terminal"]["tick"], 100)
+        self.assertEqual(report["pulses"], 2)
 
     def test_defect_before_defeat_still_blocks(self):
-        # A defect found while the seat was alive stays a defect after defeat.
+        # An in-window finding stays hard failure when defeat ends the window.
         rows = capture(1500, cash=15000)
         rows[-1]["seat_state"] = "lost"
         report = verifier.analyze(rows, "g", "p")
@@ -294,14 +301,19 @@ class InvariantTests(unittest.TestCase):
         self.assertTrue(report["defeated"])
         self.assertIn("FUNDS_ABOVE_BAND", codes(rows))
 
-    def test_defeated_with_real_gap_still_unknown(self):
+    def test_dropped_telemetry_is_hard_block(self):
         rows = capture(1500)
-        for row in rows:
-            row["player_active"] = False
-            row["seat_state"] = "lost"
         rows[10]["dropped"] = 1
-        rows[10]["seat_state"] = "lost"
-        self.assertEqual(verifier.analyze(rows, "g", "p")["status"], "UNKNOWN")
+        report = verifier.analyze(rows, "g", "p")
+        self.assertEqual(report["status"], "BLOCK")
+        self.assertIn("DROPPED_TELEMETRY", [x["code"] for x in report["findings"]])
+
+    def test_missing_terminal_evidence_is_unknown(self):
+        rows = capture(150)
+        rows[-1].pop("seat_state")
+        report = verifier.analyze(rows, "g", "p")
+        self.assertEqual(report["status"], "UNKNOWN")
+        self.assertIn("terminal seat state", report["error"])
 
     def test_legacy_stream_missing_seat_state_is_unknown(self):
         for drop in ("pulses_only", "all"):

@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """Mandatory economy defect checks over complete schema-2 health telemetry.
 
-No game launches or source repairs. Exit 0: observed checks passed (healthy or
-defeated-terminal); 20: defect review hold; 21: unsupported/incomplete evidence.
-A seat reported seat_state "lost" is evaluated through its defeat and marked
-DEFEATED — a terminal verdict, not missing telemetry. Cash thresholds provisional.
+Health findings are evaluated only before the first terminal seat state. The
+fixture's terminal outcome is recorded as FIXTURE_TERMINAL, not as an economy
+defect. Exit 0: pre-terminal checks passed; 20: defect review hold; 21:
+unsupported/incomplete evidence. Cash thresholds provisional.
 """
 import argparse
 from collections import deque
@@ -43,6 +43,7 @@ def analyze(rows, game_uid, player):
     float_diagnostic = False
     ended = False
     defeated = False
+    terminal_event = None
     previous_seat_state = None
     try:
         for row in selected:
@@ -61,10 +62,17 @@ def analyze(rows, game_uid, player):
             if identity_tuple is not None and identity_tuple != key:
                 raise EvidenceError("health identity drift")
             identity_tuple = key
-            if row.get("profile_supported") is not True or integer(row.get("dropped")) != 0:
-                raise EvidenceError("unsupported profile or dropped telemetry")
+            if row.get("profile_supported") is not True:
+                raise EvidenceError("unsupported profile")
+            dropped = integer(row.get("dropped"))
+            if dropped < 0:
+                raise EvidenceError("invalid dropped telemetry count")
+            if dropped > 0:
+                defect("DROPPED_TELEMETRY", tick, {"dropped": dropped})
             kind = row.get("kind")
             if kind == "cancel":
+                if terminal_event is not None:
+                    continue
                 queue = identity(row.get("queue_id"))
                 item = identity(row.get("item"))
                 item_id = identity(row.get("item_id"))
@@ -105,6 +113,9 @@ def analyze(rows, game_uid, player):
                 if defeated and end_state != "lost":
                     raise EvidenceError("terminal seat state disagrees with pulse defeat")
                 defeated = defeated or end_state == "lost"
+                if terminal_event is None and end_state in ("won", "lost"):
+                    terminal_event = {"kind": "FIXTURE_TERMINAL", "tick": tick,
+                                      "seat_state": end_state}
                 ended = True
                 continue
             if kind != "pulse":
@@ -113,11 +124,7 @@ def analyze(rows, game_uid, player):
                 raise EvidenceError("missing capture-start pulse at world tick zero")
             if last_pulse is not None and (tick <= last_pulse or tick - last_pulse > 50):
                 raise EvidenceError("pulse coverage gap/duplicate")
-            last_pulse, pulses = tick, pulses + 1
-            queues = row.get("queues")
-            if not isinstance(queues, list) or row.get("queues_complete") is not True:
-                raise EvidenceError("incomplete building queue census")
-            queue_ids = set()
+            last_pulse = tick
             active = row.get("player_active")
             if type(active) is not bool:
                 raise EvidenceError("missing player active state")
@@ -129,8 +136,22 @@ def analyze(rows, game_uid, player):
             if previous_seat_state not in (None, "active") and seat_state != previous_seat_state:
                 raise EvidenceError("seat state mutated after terminal")
             previous_seat_state = seat_state
+            if terminal_event is None and seat_state in ("won", "lost"):
+                terminal_event = {"kind": "FIXTURE_TERMINAL", "tick": tick,
+                                  "seat_state": seat_state}
             if seat_state == "lost":
                 defeated = True
+            if terminal_event is not None:
+                if not active:
+                    cancel_windows.clear()
+                continue
+
+            pulses += 1
+
+            queues = row.get("queues")
+            if not isinstance(queues, list) or row.get("queues_complete") is not True:
+                raise EvidenceError("incomplete building queue census")
+            queue_ids = set()
             if not active:
                 cancel_windows.clear()
             for queue in queues:
@@ -199,11 +220,14 @@ def analyze(rows, game_uid, player):
             raise EvidenceError("no pulse observations")
         if defeated:
             report["defeated"] = True
-        report["status"] = "BLOCK" if report["findings"] else (
-            "DEFEATED" if defeated else "OBSERVED_HEALTHY")
+        if terminal_event is not None:
+            report["terminal"] = terminal_event
+        report["status"] = "BLOCK" if report["findings"] else "OBSERVED_HEALTHY"
         report["pulses"] = pulses
     except (EvidenceError, TypeError, KeyError) as error:
         report["error"] = str(error)
+        if any(f["code"] == "DROPPED_TELEMETRY" for f in report["findings"]):
+            report["status"] = "BLOCK"
     return report
 
 
@@ -226,8 +250,7 @@ def main():
         except (EvidenceError, OSError, ValueError, TypeError) as error:
             report = {"policy": POLICY, "status": "UNKNOWN", "error": str(error)}
     print(json.dumps(report, allow_nan=False, indent=2))
-    return {"BLOCK": 20, "UNKNOWN": 21, "DEFEATED": 0,
-            "OBSERVED_HEALTHY": 0}.get(report["status"], 0)
+    return {"BLOCK": 20, "UNKNOWN": 21, "OBSERVED_HEALTHY": 0}.get(report["status"], 0)
 
 
 if __name__ == "__main__":
