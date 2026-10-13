@@ -1,3 +1,29 @@
+# 2026-10-13 — Devin: fixture restack + fleet cleanup (no launch)
+
+*Devin-Developer.* Coordination pass after the merge wave:
+
+- **Fixture restacked**: this branch sat on pre-wave `871973f74`; merged
+  `origin/master @ef73abbcb` (ff push — `883fb4aa6`). Sole conflict was this
+  devlog's top-entry union (master entries first). `diff origin/master...HEAD`
+  = fixture payload only (7 files, +604, zero code). REQ re-issued at the new
+  SHA, superseding the `01006c565` REQ.
+- **Defect A settled elsewhere**: Luna selected Sol's `codex/raw-credit-aggregate-
+  20261013 @beaafe859` as sole qualification candidate; my static review
+  APPROVE filed to fleet with three advisories (per-player-tick granularity vs
+  achievable per-(refinery,type); legacy serializer now recorder-unused;
+  `detail_truncated` always-true on multi-increment rows). Coordinator's
+  parallel impl stays parked on `devin/econ-raw-flood-agg @613edbfbf`.
+- **RCA handoff**: the placement-order-never-lands discriminator packet
+  (sell/demolish/transform/cancel vs unproven classes; per-episode
+  classifications) forwarded to Sol — QUEUE-REMOVED-DISCRIMINATOR is Sol's
+  under Luna's Codex-only routing; no Devin implementation on it.
+- **DISK-CLEANUP-1013**: removed learn-restack, devin-human-demo,
+  devin-logger-gates, devin-m13; parked+pushed+removed prodscaling, ab-union,
+  engbump, boss_ab_runtime, tier4 (`park/devin-*-20261013` on origin); `ref1`
+  flagged to coordinator (mid-merge UU + modified sources, ambiguous).
+- Still awaiting: fixture exact-SHA review + Integrator admission for the
+  actual-shot matrix; garrison v2 `d1ef035d38` admission.
+
 # 2026-10-13 — Devin: DEFEATED-SEAT-TAIL-FIX — Resolved-episode `Removed` + `seat_state`, DEFEATED verdict
 
 *Devin-Integrator.* Lead directive after the first master capture (uid
