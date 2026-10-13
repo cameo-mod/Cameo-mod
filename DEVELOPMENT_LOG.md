@@ -1,3 +1,56 @@
+# 2026-10-13 — Devin Coordinator: Route A' MAX_PATH remediation IMPLEMENTED (frozen attempt-3 campaign)
+
+*Devin Coordinator*, acting-lead Route A' ruling implemented in the frozen result-dir drivers.
+Attempt-3 campaign stays stopped; no launch, no dispatch, no registry change, no frozen-runner edit.
+
+- **Provguard `resume_pilot_serial_provguard.py` @ `bb46784b` FROZEN for Sol**
+  (full `bb46784bdec99f433414293758ad813129ba4f156a0d2cfc7f629e493327756e`):
+  canonical queue opened via its single canonical pathname only; path-blocked cells get a
+  durable `alt_claims.json` journal entry (stage `claimed` before the atomic owner-tagged
+  `ResumeQueue.claim`, stage `dispatched` + `child_pid` around the spawn), execute-one runs
+  against a PRIVATE queue under `C:\cameo-wt\ab3alt` (measured 197-char deepest dest vs
+  262 canonical), and exactly one owner-checked `UPDATE ... WHERE status='RUNNING' AND
+  runner_pid=?` transplants the outcome after every gate (terminal status + receipt
+  path/sha + identity + sha-verified matches bridge + fresh PASS provenance event +
+  schema-3 sidecar with bound seat reports). `_validate_alt_terminal` re-runs the audit
+  chain for reconcile adoption; INCOMPLETE*/INCOMPLETE_UNKNOWN adopt as canonical
+  INCOMPLETE (new `blocked` bucket — terminal, no marker, no retry). Startup reconcile
+  adopts verified terminal outcomes, releases proven-no-child claims back to PLANNED,
+  and leaves anything ambiguous RUNNING → classification raises → adjudication.
+- **Retry helper @ `0cdd46eb`** (full `0cdd46eb39c338fabac81b491e68a29ab2070453e7e5903ac53d1999bc057bc2`):
+  `RETRY_PARENT` → `C:\cameo-wt\ab3retry` for ALL FOUR retries — corrected arithmetic:
+  every retry cell exceeds 259 under `cells_retry_once` (243+safe → 264–273); under
+  ab3retry dests are 189–198. Everything else unchanged from Sol-approved `bbd75f4d`
+  (bridge, post-check, markers, once-only roots). Dry-run re-verified: four plans at
+  ab3retry roots, `retry_root_spent:false`, markers + pins intact.
+- **Harness `seatguard_regressions.py` @ `a7cef93c`: 94/94** — Sol's published
+  fixed-scope matrix covered row-for-row: NO dispatched claim auto-releases
+  (recorded-dead + aged + zero evidence → RUNNING); `claimed` releases only with
+  zero contradictory evidence (dir/event/child_pid/alt-RUNNING → RUNNING);
+  validator negatives: stale/2099/wrong-token/absent-token PASS, PASS unchanged
+  since pre-claim snapshot, claim without utc or token, foreign receipt, foreign
+  monitor path, receipt mtime < claim epoch, `cell_blocked`, wrong
+  `checker_commit`, wrong `checker_sha256`.
+- **F1–F3 matrix repair detail:** (1) dispatched = adopt-via-validator-or-RUNNING
+  only — the aged release branch was deleted; (2) BOTH invocation bindings —
+  `_journal_claim` mints `secrets.token_hex(16)` (→ `CAMEO_PROV_TOKEN` env →
+  `provenance_gate/sitecustomize.py` @ `8fff80a7` emits `"token"`) AND snapshots
+  pre-dispatch PASS/INVALID byte shas into the claim — the validator requires
+  token match AND a byte-different event; (3) `checker_sha256` pinned alongside
+  `checker_commit` and `cell_blocked`. Same validator before live transplant
+  and recovery adoption.
+- **Verification:** `ab3alt` empty (hardlink + stray -shm/-wal removed), no
+  `alt_claims.json`, canonical queue byte-identical (33 NATURAL / 4 INCOMPLETE_UNKNOWN /
+  27 PLANNED / 0 RUNNING; content sha `2a136ad9`, file `619ba9f5`, manifest pin intact).
+- **Sol BOUNDED APPROVE received** on the exact four-file set
+  `bb46784b`/`0cdd46eb`/`a7cef93c`/`8fff80a7` — independent immutable-snapshot
+  94/94 PASS, all F1–F3 obligations closed; approved bytes retained frozen.
+- **Sent for review:** exact SHAs to Sol (provguard + retry + harness), doc v4 + test
+  evidence to acting lead. Resume remains gated on fresh
+  reservation + RAM ≥ 9.34 GiB (currently ~0.25 GiB — PID 20788 devin-engbump
+  unittest ~16 GiB belongs to another agent, not mine) + explicit lead go.
+- Doc: `results/pilot-fcb3-master-d500-attempt3-20261011/MAX_PATH_REMEDIATION_2026-10-12.md` (v4).
+
 # 2026-10-13 — Devin: DEFEATED-SEAT-TAIL-FIX — Resolved-episode `Removed` + `seat_state`, DEFEATED verdict
 
 *Devin-Integrator.* Lead directive after the first master capture (uid
