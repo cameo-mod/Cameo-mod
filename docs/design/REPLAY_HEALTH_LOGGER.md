@@ -220,6 +220,16 @@ DevOps admission):
   pendings still never confirm on disappearance.
 - queueSeen gates the Unbuildable rung: a stale watch (queue left observation)
   on a live, owned producer carries no buildability evidence and stays UNKNOWN.
+- The "coincident-unbuildability residual" is named per the static-review
+  ruling (Reviewer 2026-10-13, ACCEPT point-in-time): an item leaving a live,
+  owned, still-observed queue while absent from BuildableItems() classifies
+  Unbuildable even if its true removal path was a coincident unexplained
+  removal on the same tick rather than CancelUnbuildableItems itself. The
+  engine invariant — an in-queue item absent from the buildable set WILL be
+  evicted — makes the mechanism guaranteed-to-fire, and a same-tick set
+  regression would add state without proving which path removed the item.
+  This residual is irreducible mod-side and is the UNKNOWN boundary's
+  documented complement.
 - Still unprovable without an engine-side seam (kept UNKNOWN, documented for
   the admission gate): sold vs killed vs demolished vs transformed producers
   (identical observable state — all Destruction); a transform's successor actor
