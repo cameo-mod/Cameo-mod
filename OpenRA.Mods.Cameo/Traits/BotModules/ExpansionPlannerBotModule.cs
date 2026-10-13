@@ -297,6 +297,12 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		[Desc("FE-1: a building closer than this (cells) to the main base has no usable bearing and is ignored by the separation factor.")]
 		public readonly int MinBearingDistanceCells = 6;
 
+		[Desc("CB_frontier_observe (P3a, DESIGN_2026-10-12_protected_frontier §7.1; switch group CB): run the read-only",
+			"shadow of the protected-frontier stage machine against this planner's observed baseline behaviour and push",
+			"outpost_stage rows (player-event version 2) to the telemetry observer. Records only — changes no flag,",
+			"claim, provider output, order, budget, RNG draw or iteration order; absent observer = allocation-free.")]
+		public readonly bool UseFrontierObservation = false;
+
 		[Desc("Building queues searched for the refinery and the cheapest link building. Empty = the enabled base",
 			"builder's own BuildingQueues (Cameo's classic mode builds from the player-level RABuilding queue).")]
 		public readonly HashSet<string> BuildingQueues = new();
@@ -2265,13 +2271,27 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			var refineryDocks = new List<(CPos[] Cells, BitSet<DockType>[] Types, bool[] Enabled)>();
 			var buildingTiles = new List<CPos>();
 			var guards = new List<(CPos Cell, int Value)>();
-			var defences = Info.UseCrawlSafety ? new List<(CPos Cell, int Value)>() : null;
+
+			// CRAWL-SAFETY reads the armed-building ledger; CB_frontier_observe's shadow COVER stage
+			// measures the same sum. Both are record/list fills only — the consumers stay gated on their
+			// own flags, so widening the collection is behaviour-identical for each flag alone.
+			var defences = Info.UseCrawlSafety || Info.UseFrontierObservation ? new List<(CPos Cell, int Value)>() : null;
+			var producers = Info.UseFrontierObservation ? new List<CPos>() : null;
+			var forwardAssets = Info.UseFrontierObservation ? new List<(uint Id, CPos Cell, int Value)>() : null;
 			var allBuildingCells = new List<CPos>();
 			var yardCells = new List<CPos>();
 			foreach (var a in world.Actors)
 			{
 				if (a.Owner != player || a.IsDead || !a.IsInWorld)
 					continue;
+
+				// CB_frontier_observe: the shadow's watch census + ARM evidence — own in-world buildings
+				// (the pass's own convention: construction state is not distinguished anywhere) and own
+				// non-air-only producers.
+				if (forwardAssets != null && a.Info.HasTraitInfo<BuildingInfo>())
+					forwardAssets.Add((a.ActorID, a.Location, a.Info.TraitInfos<ValuedInfo>().FirstOrDefault()?.Cost ?? 0));
+				if (producers != null && a.Info.TraitInfos<ProductionInfo>().Any(p => p.Produces.Any(t => t != "air")))
+					producers.Add(a.Location);
 
 				// The Refinery trait, from rules (the by-name lists are filled by the role rollout, §2.8).
 				if (a.Info.HasTraitInfo<RefineryInfo>())
@@ -2507,6 +2527,362 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			// high cash trigger first. LastScores is this tick's fresh list, so a freed field is seen immediately.
 			if (Info.DriveMcvRequests)
 				RequestMcv(bot);
+
+			// CB_frontier_observe (P3a): the read-only shadow advances on this pass — a re-plan that returned
+			// early never reached the field evidence, and the shadow's counters simply wait for the next one.
+			if (Info.UseFrontierObservation)
+				UpdateFrontierShadow(lawClaims, refineryCells, defences, producers, forwardAssets);
+		}
+
+		// ----- CB_frontier_observe (P3a): read-only shadow of the protected-frontier stage machine -----
+		// DESIGN_2026-10-12_protected_frontier §2/§6/§7.1. Observation only: the ledger re-reads the
+		// same evidence the pass just computed for its own decisions — it records what the baseline
+		// crawl/refinery law already does and publishes nothing back. No claims, no provider output,
+		// no order/budget/RNG/iteration effects. Every allocation lives behind UseFrontierObservation;
+		// an absent observer resolves once to an empty array and the ledger stays free.
+
+		/// <summary>
+		/// Flat P3a constants — the design's tiered lines arrive with P3b+; the shadow reads the most
+		/// permissive bound of each so observation censors as little as possible. Pure, for the tests.
+		/// </summary>
+		public static class FrontierObserveCA
+		{
+			public const int StageDeadlineTicks = 9000;    // FrontierStageDeadline easy bound (§7); CLAIM/ARM use half
+			public const int MaxActive = 3;                // FrontierMaxActive hard bound
+			public const int CoverMinValue = 450;          // FrontierCoverMinValue easy bound (§7: uncalibrated admission)
+			public const int RadiusCells = 14;             // FrontierRadiusCells flat
+			public const int RecordCap = 32;               // FrontierRecordCap flat (live + retired)
+			public const int WatchCap = 64;                // FrontierWatchCap flat per record
+			public const int LossRingCap = 16;             // FrontierLossRingCap flat
+			public const int FreezeReplans = 12;           // FrontierFreezeReplans flat
+			public const int SoftRetreatReplans = 3;       // FrontierSoftRetreatReplans flat
+			public const int BackoffTicks = 6000;          // FrontierBackoffTicks easy bound
+			public const int MaxBackoffEpisodes = 3;       // FrontierMaxBackoffEpisodes flat
+			public const int ReentryReplans = 4;           // FrontierReentryReplans flat
+			public const int LossesToPark = 2;             // LossesToPark hard bound
+			public const int LossCellRadiusCells = 4;      // LossCellRadiusCells flat
+			public const int ParityResumeMarginPct = 10;   // FrontierParityResumeMarginPct flat
+			public const int MaxStalls = 2;                // §2: two stalls on one field retire it for the match
+
+			/// <summary>§2: CLAIM and ARM run at half the stage deadline; EXTEND and COVER at the full one. Pure, for the tests.</summary>
+			public static int StageDeadline(string stage, int deadlineTicks) =>
+				stage is "claim" or "arm" ? deadlineTicks / 2 : deadlineTicks;
+
+			/// <summary>§6 backoff ladder: the second episode doubles the park, the third and later quadruple it. Pure, for the tests.</summary>
+			public static int BackoffTicksFor(int episode, int backoffTicks) =>
+				backoffTicks * (episode <= 1 ? 1 : episode == 2 ? 2 : 4);
+
+			/// <summary>§2: a stage retires when its immutable entry tick aged past its deadline. Pure, for the tests.</summary>
+			public static bool DeadlineExpired(int entryTick, int now, int deadlineTicks) => now - entryTick >= deadlineTicks;
+
+			/// <summary>
+			/// §2 observed-completion projection: the shadow advances a stage when the baseline pass's own
+			/// evidence resolves it — claim wanted (EXTEND), refinery completed (CLAIM), cover met (COVER),
+			/// producer completed (ARM; its deadline resolves to HOLD by a separate rule, never a stall).
+			/// Pure, for the tests.
+			/// </summary>
+			public static bool StageCompleted(string stage, bool claimWanted, bool refineryClaimed, bool coverMet, bool producerCompleted) =>
+				stage switch
+				{
+					"extend" => claimWanted,
+					"claim" => refineryClaimed,
+					"cover" => coverMet,
+					"arm" => producerCompleted,
+					_ => false,
+				};
+
+			/// <summary>§6 censor labels — a refused admission or a saturated watch emits its reason, never silence. Pure, for the tests.</summary>
+			public static string CensorReason(bool recordCapFull, bool maxActive, bool watchOverflow) =>
+				recordCapFull ? "record_cap_full" : maxActive ? "max_active" : watchOverflow ? "watch_overflow" : null;
+		}
+
+		sealed class FrontierShadowRecord
+		{
+			public string Stage = "extend";
+			public int StageEntryTick;
+			public int Stalls;
+			public int Episodes;
+			public int FreezeReplans;
+			public int SoftReplans;
+			public int ReentryReplans;
+			public int ParkedUntil;
+			public int MissedWatchPass;
+			public int UnknownLosses;
+			public int RebuildsThisEpisode;
+			public bool FieldGone;
+			public bool WatchOverflowEmitted;
+			public readonly Dictionary<uint, CPos> Watched = new();
+			public readonly List<CPos> LostCells = new();
+		}
+
+		IBotFrontierStageObserver[] frontierObservers;
+		IBotFrontierStageObserver[] FrontierObservers =>
+			frontierObservers ??= world.WorldActor.TraitsImplementing<IBotFrontierStageObserver>().ToArray();
+
+		// Lazy, per §7.1: the ledger allocates only under the flag — disarmed is bit-identical
+		// (a single bool read per re-plan).
+		Dictionary<int, FrontierShadowRecord> frontierRecords;
+		HashSet<(int Field, string Reason)> frontierDeclines;
+		Dictionary<uint, CPos> frontierWatchScratch;
+		List<CPos> frontierLostScratch;
+
+		void EmitFrontier(CPos cell, string stage, int cover, int risk, string reason, int episode)
+		{
+			var row = new FrontierStageRow(cell, stage, cover, risk, reason, episode, 0);
+			foreach (var observer in FrontierObservers)
+				observer.FrontierStageChanged(player, world.WorldTick, in row);
+		}
+
+		void EnterFrontier(FrontierShadowRecord rec, CPos cell, string stage, string reason, int cover, int risk)
+		{
+			rec.Stage = stage;
+			rec.StageEntryTick = world.WorldTick;
+			EmitFrontier(cell, stage, cover, risk, reason, rec.Episodes);
+		}
+
+		void RetireFrontier(FrontierShadowRecord rec, CPos cell, string reason, int cover, int risk)
+		{
+			// §2/§6: a stall-class retire counts stalls, not losses; every retire parks the field for the
+			// episode-scaled backoff — unless two stalls landed, the episode cap is hit, or the field is
+			// simply gone (a vanished field can never re-enter, so it abandons straight away).
+			if (reason is "stall" or "freeze_timeout" or "soft_retreat")
+				rec.Stalls++;
+
+			var episodes = rec.Episodes + 1;
+			if (reason != "field_vanished" && rec.Stalls < FrontierObserveCA.MaxStalls && episodes <= FrontierObserveCA.MaxBackoffEpisodes)
+			{
+				rec.Episodes = episodes;
+				rec.RebuildsThisEpisode = 0;
+				rec.LostCells.Clear();
+				rec.ReentryReplans = 0;
+				rec.ParkedUntil = world.WorldTick + FrontierObserveCA.BackoffTicksFor(episodes, FrontierObserveCA.BackoffTicks);
+				EnterFrontier(rec, cell, "backoff", reason, cover, risk);
+			}
+			else
+				EnterFrontier(rec, cell, "abandoned", reason, cover, risk);
+		}
+
+		bool UpdateFrontierWatch(FrontierShadowRecord rec, CPos cell, long radiusSq,
+			List<(uint Id, CPos Cell, int Value)> forwardAssets, int cover, int risk)
+		{
+			// §7.2: a record watches the own buildings inside its radius — ids absent across two
+			// consecutive passes count as `unknown` losses (never `killed`; the V2 cause channel is a
+			// cross-check, not runtime input). Pooled losses inside the loss-cell radius force backoff.
+			frontierWatchScratch.Clear();
+			if (forwardAssets != null)
+				foreach (var a in forwardAssets)
+					if ((a.Cell - cell).LengthSquared <= radiusSq)
+						frontierWatchScratch[a.Id] = a.Cell;
+
+			frontierLostScratch.Clear();
+			foreach (var kv in rec.Watched)
+				if (!frontierWatchScratch.ContainsKey(kv.Key))
+					frontierLostScratch.Add(kv.Value);
+
+			rec.MissedWatchPass = frontierLostScratch.Count > 0 ? rec.MissedWatchPass + 1 : 0;
+			var pooled = false;
+			if (rec.MissedWatchPass >= 2)
+			{
+				rec.MissedWatchPass = 0;
+				rec.UnknownLosses += frontierLostScratch.Count;
+				var lossRadiusSq = (long)FrontierObserveCA.LossCellRadiusCells * FrontierObserveCA.LossCellRadiusCells;
+				foreach (var kv in rec.Watched)
+					if (!frontierWatchScratch.ContainsKey(kv.Key))
+					{
+						if (rec.LostCells.Count < FrontierObserveCA.LossRingCap)
+							rec.LostCells.Add(kv.Value);
+						else if (!rec.WatchOverflowEmitted)
+						{
+							rec.WatchOverflowEmitted = true;
+							EmitFrontier(cell, rec.Stage, cover, risk, "watch_overflow", rec.Episodes);
+						}
+					}
+
+				foreach (var id in rec.Watched.Keys.ToArray())
+					if (!frontierWatchScratch.ContainsKey(id))
+						rec.Watched.Remove(id);
+				pooled = frontierLostScratch.Any(c => frontierLostScratch.Count(o => (o - c).LengthSquared <= lossRadiusSq) >= FrontierObserveCA.LossesToPark);
+			}
+
+			foreach (var kv in frontierWatchScratch)
+			{
+				if (rec.Watched.ContainsKey(kv.Key))
+					continue;
+				if (rec.Watched.Count >= FrontierObserveCA.WatchCap)
+				{
+					if (!rec.WatchOverflowEmitted)
+					{
+						rec.WatchOverflowEmitted = true;
+						EmitFrontier(cell, rec.Stage, cover, risk, "watch_overflow", rec.Episodes);
+					}
+
+					break;
+				}
+
+				rec.Watched[kv.Key] = kv.Value;
+				if (rec.LostCells.Contains(kv.Value))
+					rec.RebuildsThisEpisode++;
+			}
+
+			return pooled;
+		}
+
+		void UpdateFrontierShadow(bool lawClaims, List<CPos> refineryCells,
+			List<(CPos Cell, int Value)> defences, List<CPos> producers, List<(uint Id, CPos Cell, int Value)> forwardAssets)
+		{
+			if (FrontierObservers.Length == 0)
+				return;
+
+			frontierRecords ??= new();
+			frontierDeclines ??= new();
+			frontierWatchScratch ??= new();
+			frontierLostScratch ??= new();
+
+			var tick = world.WorldTick;
+			var radiusSq = (long)FrontierObserveCA.RadiusCells * FrontierObserveCA.RadiusCells;
+			var ratio = player.PlayerActor.TraitOrDefault<MasterAiBotModule>()?.Situation?.CombatRatioPct;
+			var floor = ScalingParityFloor;
+			var frozen = ratio.HasValue && ratio.Value < floor;
+			var resumed = !ratio.HasValue || ratio.Value >= floor + FrontierObserveCA.ParityResumeMarginPct;
+			var soft = ratio.HasValue && ratio.Value < floor / 2;
+			var aimTarget = Target?.Index ?? -1;
+			var aimClaim = wantsRefinery && claimField is FieldScore cf ? cf.Index : -1;
+
+			var live = 0;
+			foreach (var r in frontierRecords.Values)
+				if (r.Stage is not "backoff" and not "abandoned")
+					live++;
+
+			foreach (var kv in initialCenters)
+			{
+				var i = kv.Key;
+				var cell = kv.Value;
+				var aimed = aimTarget == i || aimClaim == i;
+				var claimWanted = aimClaim == i || (lawClaims && wantsRefinery && aimTarget == i);
+				var claimed = Claimed(cell, refineryCells, Info.ClaimRadiusCells);
+				var cover = defences == null ? 0 : defences.Where(d => (d.Cell - cell).LengthSquared <= radiusSq).Sum(d => d.Value);
+				var risk = forwardAssets == null ? 0 : forwardAssets.Where(a => (a.Cell - cell).LengthSquared <= radiusSq).Sum(a => a.Value);
+				var producer = producers != null && producers.Any(p => (p - cell).LengthSquared <= radiusSq);
+				var hasIndice = resourceMap.GetIndice(i) != null;
+
+				if (!frontierRecords.TryGetValue(i, out var rec))
+				{
+					// §5 start evidence is the baseline aim itself — the shadow only records fields the
+					// planner is already driving at; caps decline once per (field, reason) per §6.
+					if (!aimed)
+						continue;
+
+					var decline = FrontierObserveCA.CensorReason(
+						frontierRecords.Count >= FrontierObserveCA.RecordCap,
+						live >= FrontierObserveCA.MaxActive,
+						false);
+					if (decline != null)
+					{
+						if (frontierDeclines.Add((i, decline)))
+							EmitFrontier(cell, "extend", cover, risk, decline, 0);
+						continue;
+					}
+
+					rec = new FrontierShadowRecord { StageEntryTick = tick };
+					frontierRecords[i] = rec;
+					live++;
+					EmitFrontier(cell, "extend", cover, risk, "aimed", 0);
+					continue;
+				}
+
+				switch (rec.Stage)
+				{
+					case "abandoned":
+						break;
+					case "backoff":
+						// §6: re-entry needs the §5 gates (the aim) to hold for FrontierReentryReplans
+						// consecutive re-plans after the park expires; a lost aim resets the count.
+						if (tick >= rec.ParkedUntil)
+						{
+							rec.ReentryReplans = aimed ? rec.ReentryReplans + 1 : 0;
+							if (rec.ReentryReplans >= FrontierObserveCA.ReentryReplans && aimed)
+								EnterFrontier(rec, cell, "extend", "reentry", cover, risk);
+						}
+
+						break;
+					default:
+						if (!hasIndice)
+						{
+							// §2: a field gone from the resource model retires early stages without a
+							// loss; completed assets past CLAIM hold frozen — one transition, then quiet.
+							if (!rec.FieldGone)
+							{
+								rec.FieldGone = true;
+								if (rec.Stage is "extend" or "claim")
+									RetireFrontier(rec, cell, "field_vanished", cover, risk);
+								else
+									EnterFrontier(rec, cell, "hold", "field_vanished", cover, risk);
+							}
+
+							break;
+						}
+
+						// §5/§2: below the parity floor the outpost freezes (a per-re-plan counter that
+						// only resets at floor + margin); below half the floor a soft retreat builds.
+						if (frozen)
+							rec.FreezeReplans++;
+						else if (resumed)
+							rec.FreezeReplans = 0;
+
+						rec.SoftReplans = soft ? rec.SoftReplans + 1 : 0;
+						if (rec.FreezeReplans >= FrontierObserveCA.FreezeReplans)
+						{
+							RetireFrontier(rec, cell, "freeze_timeout", cover, risk);
+							break;
+						}
+
+						if (rec.SoftReplans >= FrontierObserveCA.SoftRetreatReplans)
+						{
+							RetireFrontier(rec, cell, "soft_retreat", cover, risk);
+							break;
+						}
+
+						if (UpdateFrontierWatch(rec, cell, radiusSq, forwardAssets, cover, risk))
+						{
+							RetireFrontier(rec, cell, "losses", cover, risk);
+							break;
+						}
+
+						if (rec.Stage == "hold")
+							break;
+
+						var deadline = FrontierObserveCA.StageDeadline(rec.Stage, FrontierObserveCA.StageDeadlineTicks);
+						if (FrontierObserveCA.DeadlineExpired(rec.StageEntryTick, tick, deadline))
+						{
+							// §2: ARM is optional — its deadline resolves to HOLD, never a stall.
+							if (rec.Stage == "arm")
+								EnterFrontier(rec, cell, "hold", "arm_deadline", cover, risk);
+							else
+								RetireFrontier(rec, cell, "stall", cover, risk);
+							break;
+						}
+
+						if (FrontierObserveCA.StageCompleted(rec.Stage, claimWanted, claimed, cover >= FrontierObserveCA.CoverMinValue, producer))
+						{
+							var next = rec.Stage switch
+							{
+								"extend" => "claim",
+								"claim" => "cover",
+								"cover" => "arm",
+								_ => "hold",
+							};
+							EnterFrontier(rec, cell, next, rec.Stage switch
+							{
+								"extend" => "claim_wanted",
+								"claim" => "refinery_completed",
+								"cover" => "cover_completed",
+								_ => "producer_completed",
+							}, cover, risk);
+						}
+
+						break;
+				}
+			}
 		}
 
 		/// <summary>

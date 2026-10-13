@@ -294,5 +294,79 @@ class HealthTests(unittest.TestCase):
         self.assertNotIn("MISSING_SITUATIONS", [f["code"] for f in seated["findings"]])
 
 
+class PlayerEventVersionTests(unittest.TestCase):
+    """CB_frontier_observe (P3a): cameo-player-event rows dispatch on the row's own
+    version — v1 stays byte-valid, outpost_stage is admitted only at version 2."""
+
+    def _channel(self, rows):
+        import hashlib
+        uid = "g"
+        name = "cameo-ai-players-{}.jsonl".format(
+            hashlib.sha256(uid.encode("utf-8")).hexdigest())
+        temp = tempfile.TemporaryDirectory()
+        logs = Path(temp.name) / "Logs"
+        logs.mkdir()
+        (logs / name).write_text(
+            "\n".join(json.dumps(r) for r in rows) + "\n", encoding="utf-8")
+        return temp, logs
+
+    @staticmethod
+    def _event(version=1, kind="building_placed", **extra):
+        return {"schema": "cameo-player-event", "version": version,
+                "game_uid": "g", "record_id": "g|seat_3|{}|10|1".format(kind),
+                "tick": 10, "seat": "seat_3", "kind": kind, "seq": 1, **extra}
+
+    def _stage_row(self, **extra):
+        return self._event(version=2, kind="outpost_stage",
+                           cell="42,17", stage="cover", cover_value=600,
+                           at_risk_value=900, reason="cover_completed",
+                           episode=0, escort_seq=0, **extra)
+
+    def test_v1_rows_still_validate(self):
+        temp, logs = self._channel([self._event(), self._event(units=3)])
+        with temp:
+            _, metrics = health.players_channel(logs, "g", "seat_3")
+        self.assertEqual(metrics["player_channel_events"], {"building_placed": 2})
+
+    def test_v2_outpost_stage_is_accepted(self):
+        temp, logs = self._channel([self._stage_row()])
+        with temp:
+            _, metrics = health.players_channel(logs, "g", "seat_3")
+        self.assertEqual(metrics["player_channel_events"], {"outpost_stage": 1})
+
+    def test_outpost_stage_rejected_at_version_1(self):
+        # version 1 + the v2-only kind, no v2 fields: the field check passes and the
+        # kind check does the rejecting.
+        row = self._event(version=1, kind="outpost_stage")
+        temp, logs = self._channel([row])
+        with temp:
+            with self.assertRaisesRegex(health.EvidenceError, "unsupported player-event kind"):
+                health.players_channel(logs, "g", "seat_3")
+
+    def test_unknown_field_on_v2_row_rejects(self):
+        temp, logs = self._channel([self._stage_row(future_knob=1)])
+        with temp:
+            with self.assertRaisesRegex(health.EvidenceError, "unsupported player-event v2 field"):
+                health.players_channel(logs, "g", "seat_3")
+
+    def test_v1_row_with_stage_field_rejects(self):
+        temp, logs = self._channel([self._event(stage="cover")])
+        with temp:
+            with self.assertRaisesRegex(health.EvidenceError, "unsupported player-event v1 field"):
+                health.players_channel(logs, "g", "seat_3")
+
+    def test_unknown_kind_on_v2_row_rejects(self):
+        temp, logs = self._channel([self._stage_row(kind="future_event")])
+        with temp:
+            with self.assertRaisesRegex(health.EvidenceError, "unsupported player-event kind"):
+                health.players_channel(logs, "g", "seat_3")
+
+    def test_v2_numeric_fields_must_be_integers(self):
+        temp, logs = self._channel([self._stage_row(cover_value="lots")])
+        with temp:
+            with self.assertRaises(health.EvidenceError):
+                health.players_channel(logs, "g", "seat_3")
+
+
 if __name__ == "__main__":
     unittest.main()

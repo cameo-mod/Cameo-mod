@@ -101,6 +101,62 @@ so the proof could never see them: every refinery-shaped `Placed` request expire
   (per task record — the in-flight logger commits `34af9662d` stay upstream; merge is
   the integrator's). Handed in for exact-SHA review; status + review request filed in
   the fleet folder.
+# 2026-10-13 — Devin: CB_frontier_observe P3a observation-only shadow (branch `devin/01a130f7-p3a-frontier-observe`)
+
+*Devin-Developer.* Boss's P3-FRONTIER-LANE increment P3a (brief
+`Cameo-mod-fleet/BRIEF_2026-10-12_p3a_frontier_observe_devin.md`; design
+`Cameo-mod-fleet/DESIGN_2026-10-12_protected_frontier.md` §2/§5/§6/§7.1/§8), branched off the
+first post-merge-wave master tip `871973f74` (logger wiring on top of wave tip `7b93fb84e`).
+**Observation only — read-only shadow of the protected-frontier stage machine; changes no
+flag/claim/provider output/order/budget/RNG/iteration order. Default-off; no runtime validation
+claimed — no build/test/launch under the standing admission gate.**
+
+- **Contract:** `IBotFrontierStageObserver` + `readonly record struct FrontierStageRow` in
+  `OpenRA.Mods.CA` (assembly may not name the Cameo telemetry trait; the planner must ignore the
+  observer entirely). World-trait impl on `AiPlayerTelemetry` (`OpenRA.Mods.Cameo`), resolved
+  once via `TraitsImplementing` — absent observer ⇒ empty array ⇒ zero ledger allocation.
+- **Shadow ledger (`ExpansionPlannerBotModule`):** `UseFrontierObservation` (default false)
+  hooks the END of `Replan` — the pass that already computed all evidence. Per frozen
+  `initialCenters` field record: extend→claim→cover→arm→hold, with backoff/abandoned retire
+  states driven by field-vanished, stall deadlines (claim/arm at half the 9000 deadline),
+  parity freeze (12 re-plans below `ScalingParityFloor`, hysteresis +10pt resume), soft retreat
+  (3 re-plans below floor/2 — shadow interpretation, flagged in code), and pooled own-building
+  losses (≥2 losses within 4 cells, two consecutive misses). Bounds flat/permissive per §7:
+  MaxActive 3, RecordCap 32, WatchCap 64, LossRing 16, Backoff 6000 (×2/×4 ladder), max 3
+  episodes, re-entry 4 re-plans, 2-stall abandon. Censor declines emit once per (field, reason):
+  `record_cap_full`/`max_active`/`watch_overflow`.
+- **Evidence sources (own-actor, fog-honest only):** the pass's own `refineryCells`,
+  widened `defences` fill (crawl-safety's ledger — consumer stays flag-gated, behaviour
+  identical for either flag alone), and two flag-gated new lists: own `BuildingInfo` actors
+  (ActorID/cell/ValuedInfo cost → watch census + at-risk sum) and own producers with a non-`air`
+  `Produces` (ARM evidence). No new scans; reads the same `world.Actors` own-unit pass.
+- **Telemetry v2:** `BeginEvent` extracted (schema/version/game_uid/record_id/tick/seat/kind/seq)
+  so v1 rows are byte-identical; `EmitStageEvent` emits version-2 `outpost_stage` rows
+  (cell "x,y" invariant — same convention as v1, stage/cover_value/at_risk_value/reason/episode/
+  escort_seq=0). Same per-seat monotone EventSeq + `uid|seat|kind|tick|seq` record ids; observer
+  wrapped in the same try/`Fail` fail-closed path as the production observer.
+- **Validation tooling:** `replay_health.py` + `playtest_stats_from_logs.py` now dispatch on the
+  row's OWN version before field/kind checks — `PLAYER_EVENT_V2_FIELDS`/`PLAYER_EVENT_V2_KINDS`
+  supersets; v1 `outpost_stage` rejected at kind check; unknown v2 fields/kinds fail closed;
+  v2 numeric fields integer-checked. `EVENT_KINDS` union.
+- **Switches:** `CB_frontier_observe` group → `ExpansionPlannerBotModule.UseFrontierObservation:
+  true`; `effect_classes` → `neutral` (moves no behaviour — same class as AI_radar_contacts/
+  BK_squad_order_dedup); budget pin neutral 10→11; `ai.yaml` default-off flag on the genericbot
+  planner instance.
+- **Tests (static-reviewed, NOT RUN — gated):** `FrontierObserveTest.cs` — pure-helper tests
+  (half-deadline stages, backoff ladder, deadline inclusivity, stage-completion contract,
+  censor preference order) + design-constant drift pins (13 constants). `test_replay_health.py`
+  `PlayerEventVersionTests` — 7 cases: v1 still valid, v2 outpost_stage accepted, v1
+  outpost_stage kind-rejected, unknown v2 field, v1 row with v2 field, unknown v2 kind,
+  non-integer numeric field.
+- **Verification state:** static only — `py_compile` clean on all three touched .py files,
+  `git diff --check` clean, brace/paren balance verified, all symbol references resolved against
+  the base. One authoring defect found+fixed in self-review (orphaned XML-doc tail on
+  `LinkBuildingWanted` restored). SDK-glob projects pick up both new .cs files automatically.
+- **Notable context (from `REPORT_2026-10-13_bunker_session_acquisition_sol.md`):** a field
+  replay showed `AiPlayerTelemetry.Fail` NullReferenceException → 0-byte player channel at
+  engine pin 715. Pre-existing, unlocalized, orthogonal to this lane — the v2 path rides the
+  same fail-closed `Fail` semantics; flagging for the telemetry lane.
 
 # 2026-10-13 — Devin: maintainer merge wave `devin/merge-wave-20261013`
 
