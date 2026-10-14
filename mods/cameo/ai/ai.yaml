@@ -32,6 +32,12 @@
 	GrantConditionOnBotOwner@cameogod:
 		Condition: cameogodbot
 		Bots: cameogod
+	# PUSH-1 (bank overflow): scopes the BotOverflowPolicy carrier to exactly the hard profile —
+	# classic shares BotLimits@hard via hardbot, so a separate condition is the only seam that
+	# leaves the A/B control byte-identical (Sol/Luna ruling 2026-10-14).
+	GrantConditionOnBotOwner@bankoverflow:
+		Condition: bank_overflow
+		Bots: hard
 	# ENG-T (#694, DESIGN §22): arms Fransbot's capture-transport service as the genericbot
 	# IBotCaptureTransportProvider. Inert by itself — EngineerBotModule only requests a run when
 	# TransportChance > 0 (default 0). Classic is excluded: the A/B reference stays untouched.
@@ -416,6 +422,15 @@
 		EngineerCompletionIntervalTicks: 200
 		RetreatRatioPct: 100
 		RequiresCondition: cameogodbot
+
+	# PUSH-1 (bank overflow): while the bank sits above OverflowCash the armed base builder
+	# preempts the planner's front/link wants with a production pick (see
+	# BaseBuilderQueueManagerCA's overflow rung). hard only; classic never carries the grant.
+	# 8000 sits below the economy checker's 10000 band ceiling — candidate tuning, the
+	# sentinel evidence judges it.
+	BotOverflowPolicy@bankoverflow:
+		OverflowCash: 8000
+		RequiresCondition: bank_overflow
 
 Player:
 	# AI_ARCHITECTURE.md 2.8 (ruled 2026-09-27: roles on actors). Fills the modules' actor lists from ROLES

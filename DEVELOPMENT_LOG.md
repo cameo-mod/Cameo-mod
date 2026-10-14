@@ -1,3 +1,57 @@
+# 2026-10-14 — Devin: PUSH-1-BEHAVIOR-REPAIR (01a1390f) — hard-only bank-overflow rung
+
+*Devin-Developer.* Sentinel cell-1 halted on a real gate failure (acting-lead
+ruling): hard bot held `FUNDS_ABOVE_BAND` in both side-swapped matches
+(t5400: 11145/cap4200; t9650: 14979/cap16200) while its building queue kept
+choosing planner wants under the legacy `NewProductionCashThreshold: 12000`
+arm. Diagnosis on file
+(`DIAGNOSIS_2026-10-14_push1_bank_hoard_devin.md`,
+`DESIGN_2026-10-14_push1_hard_overflow_devin.md`); Sol approved direction with
+two binding contracts: (1) disabled/absent policy preserves the original
+ladder **and** RNG stream — no draws on decline; (2) `ProductionTypeLimit`
+must count standing + in-flight + variants like the fraction path.
+Branch `devin/01a1390f-push1-overflow` off master `e27277520`.
+Source+tests only; no launch — DevOps admission gate stands.
+
+**Mechanism.** New conditioned trait `BotOverflowPolicy` (`OverflowCash`)
+granted via `bank_overflow` on `Bots: hard` only — classic shares
+`BotLimits@hard` through the `hardbot` tier grant, so the separate condition
+is the only seam that keeps the A/B control byte-identical.
+`BaseBuilderBotModuleCA.RefreshBotLimits` resolves it once per bot (same
+pattern as `BotLimits`) and pushes it to every `BaseBuilderQueueManagerCA`.
+
+**Ladder.** `ChooseBuildingToBuild`'s REF-1 want loop is split: the due
+MCV's prerequisite keeps its slot (progression safety), then the new
+overflow rung sits **above** the front-defence/link-building wants that
+shadowed the legacy threshold rung — still below opening policy, low-power,
+and the refinery law. When armed (`policy enabled && cash > OverflowCash`)
+it enumerates `buildableThings` ∩ `ProductionTypes`, applies the
+`BuildingLimits` admit test and the type cap on
+`standing(name ∪ PlaceBuildingVariants) + BuildingsBeingProduced[name]`,
+then resolves each survivor through `PickOrPower` **before** drawing once
+over the resolved set — an infeasible candidate contributes the power
+fallback (identical to draw-then-substitute), and a set of only
+infeasible candidates resolves empty. Decline of any kind — empty set,
+absent/disabled policy, under-line cash — consumes zero draws and the
+ladder is identical (Sol exact-review fix: the earlier draft drew before
+PickOrPower, leaking one draw on an infeasible decline). Bounded
+record-only `ECON-TRACE overflow` events via the existing `EconTraceDue`
+throttle; the legacy threshold rung below is untouched.
+
+**Tests** (`BaseBuilderQueueEvalTest`, +6): armed predicate incl.
+disabled/zero/negative; type-cap counting (3+1 vs cap 4); decline
+consumes zero draws on empty AND on nonempty-but-infeasible sets
+(`MersenneTwister.TotalCount` + next-draw stream equality); power
+fallback enters the resolved set; commit consumes exactly one.
+167/167 pass; Release build clean.
+
+**Residuals (honest).** `OverflowCash: 8000` is candidate tuning under the
+checker band (high 10000), not a proven cure — sentinel evidence judges.
+Low-power and refinery precedence can still hoard by design; all-at-limit
+or no-producible candidates decline to the original ladder. Classic
+starvation (`NEAR_EMPTY`) is documented and deliberately out of scope —
+classic stays byte-identical as the frozen control.
+
 # 2026-10-13 — Devin: QUEUE-REMOVAL-DISCRIMINATOR (01a13686) — cause-aware `Removed` classes + 24t wire bound
 
 *Devin-Developer.* Campaign blocker B, assigned by Luna on current master
