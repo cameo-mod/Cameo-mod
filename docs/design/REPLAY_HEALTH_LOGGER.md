@@ -243,3 +243,36 @@ DevOps admission):
   pending intent bound to a same-name removal. ep53-class episodes (item
   removed from a live, owned, observed queue while still buildable) remain
   UNKNOWN by construction.
+
+2026-10-14 supported-profiles contract (Devin-Developer; task 01a13916 —
+option (c) of the coordinator's SITUATIONS-INSTRUMENTATION design. Maintainer
+ruling R1 adopted the sole-finding pre-registration; this entry records the
+stream coverage contract the ruling rests on):
+
+- cameo-ai-situations.jsonl is a genericbot-stack stream by design.
+  AiSituationLogWriter.BuildLog serializes MasterAiBotModule.PendingSituations
+  and skips any seat without the module; MasterAiBotModule carries
+  RequiresCondition: genericbot (mods/cameo/ai/ai.yaml), so classic-stack
+  seats deterministically produce no situation rows. replay_health reports
+  that absence as finding MISSING_SITUATIONS with status UNKNOWN — a
+  structural coverage gap, not corruption and not a pass.
+- cameo-ai-placements.jsonl, cameo-ai-matches.jsonl and the per-game
+  cameo-ai-players-<uid>.jsonl enumerate every IsLoggableBot seat
+  (player.IsBot && !NonCombatant; matches additionally covers takeover
+  seats) independent of module stack. MasterAi-sourced optional fields —
+  e.g. expansion telemetry on placement rows — are simply absent on
+  non-genericbot seats; row presence does not certify full field coverage.
+- Any future profile that lacks MasterAiBotModule re-triggers
+  MISSING_SITUATIONS by construction. Extending emission to such profiles
+  was rejected: a real row requires the genericbot brain's PendingSituations
+  producer (i.e. mutating that seat's module stack), and a fabricated or
+  marker-only row would be parsed by downstream tools as real data — worse
+  than absent.
+- Verdict-layer handling lives outside this document: under maintainer
+  ruling R1 (fleet RULINGS_2026-10-14_maintainer.md), a classic-seat
+  replay_health UNKNOWN whose sole finding is MISSING_SITUATIONS is a
+  recorded coverage diagnostic, non-blocking; any other finding on either
+  seat remains blocking. A sole-finding UNKNOWN does not certify the
+  placement/match semantics the checker skipped — the admission gate must
+  independently require match/roster/terminal/integrity and canonical
+  per-seat economy checks to pass.
