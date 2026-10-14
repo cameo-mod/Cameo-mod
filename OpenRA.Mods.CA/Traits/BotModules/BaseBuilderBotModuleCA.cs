@@ -897,8 +897,15 @@ namespace OpenRA.Mods.CA.Traits
 			botLimits = player.PlayerActor.TraitsImplementing<BotLimits>().FirstEnabledTraitOrDefault();
 			refineryLimit = botLimits?.Info.RefineryLimit ?? 0;
 
+			// PUSH-1: the overflow policy carrier is resolved once like BotLimits; the rung re-checks
+			// IsTraitEnabled() each evaluation so a mid-game condition flip disarms correctly.
+			var overflowPolicy = player.PlayerActor.TraitsImplementing<BotOverflowPolicy>().FirstOrDefault();
+
 			foreach (var builder in builders)
+			{
 				builder.SetBotLimits(botLimits);
+				builder.SetOverflowPolicy(overflowPolicy);
+			}
 		}
 
 		void IBotRespondToAttack.RespondToAttack(IBot bot, Actor self, AttackInfo e)

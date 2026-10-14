@@ -9,6 +9,7 @@
  */
 #endregion
 
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -18,6 +19,7 @@ using OpenRA.Mods.CA;
 using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Primitives;
+using OpenRA.Support;
 using OpenRA.Traits;
 
 namespace OpenRA.Mods.Cameo.Test
@@ -2247,6 +2249,109 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(pending.ResolveWhileAwaiting(125, placementProven: neitherLeg, playerEliminated: false),
 				Is.EqualTo(BotQueuePendingResolution.EmitRemoved),
 				"unproven placement still expires Removed -> schema-2 UNKNOWN");
+		}
+
+		// PUSH-1 bank overflow (Sol exact-SHA contracts): the rung arms only on an enabled policy
+		// over its line, the type cap counts standing+variants+in-flight like the fraction path,
+		// and the pick's RNG stream is untouched when the rung is absent or declines.
+
+		[Test]
+		public void OverflowArmsOnlyOnAnEnabledPolicyOverItsLine()
+		{
+			Assert.That(BaseBuilderQueueEvalCA.OverflowArmed(true, 8001, 8000), Is.True);
+			Assert.That(BaseBuilderQueueEvalCA.OverflowArmed(true, 8000, 8000), Is.False,
+				"at the line is not over it");
+			Assert.That(BaseBuilderQueueEvalCA.OverflowArmed(false, 999999, 8000), Is.False,
+				"disabled policy never arms — the classic path stays byte-identical");
+			Assert.That(BaseBuilderQueueEvalCA.OverflowArmed(true, 999999, 0), Is.False,
+				"zero threshold disarms");
+			Assert.That(BaseBuilderQueueEvalCA.OverflowArmed(true, 999999, -1), Is.False,
+				"negative threshold disarms");
+		}
+
+		[Test]
+		public void OverflowTypeCapCountsStandingVariantsAndInFlight()
+		{
+			Assert.That(BaseBuilderQueueEvalCA.OverflowTypeAdmits(3, 1, 4), Is.False,
+				"3 standing-or-variant plus 1 in-flight reaches the cap of 4");
+			Assert.That(BaseBuilderQueueEvalCA.OverflowTypeAdmits(2, 1, 4), Is.True);
+			Assert.That(BaseBuilderQueueEvalCA.OverflowTypeAdmits(4, 0, 4), Is.False);
+			Assert.That(BaseBuilderQueueEvalCA.OverflowTypeAdmits(9, 9, 0), Is.True, "limit 0 is uncapped");
+			Assert.That(BaseBuilderQueueEvalCA.OverflowTypeAdmits(9, 9, -1), Is.True, "negative is uncapped");
+		}
+
+		[Test]
+		public void OverflowDeclineConsumesNoDraw()
+		{
+			var untouched = new MersenneTwister(42);
+			var declined = new MersenneTwister(42);
+			Assert.That(BaseBuilderQueueEvalCA.DrawOverflowPick<object>(Array.Empty<object>(), declined), Is.Null);
+			Assert.That(declined.TotalCount, Is.EqualTo(untouched.TotalCount),
+				"an empty candidate set must consume zero draws — the stream stays identical");
+			Assert.That(declined.Next(), Is.EqualTo(untouched.Next()),
+				"the next draw after a decline matches the un-consumed stream");
+		}
+
+		[Test]
+		public void OverflowCommitConsumesExactlyOneDraw()
+		{
+			var control = new MersenneTwister(42);
+			var committed = new MersenneTwister(42);
+			var pick = BaseBuilderQueueEvalCA.DrawOverflowPick(new[] { new object(), new object() }, committed);
+			Assert.That(pick, Is.Not.Null);
+			Assert.That(committed.TotalCount, Is.EqualTo(control.TotalCount + 1),
+				"a committed pick consumes exactly one draw");
+			control.Next();
+			Assert.That(committed.Next(), Is.EqualTo(control.Next()),
+				"after the consumed draw both streams continue identically");
+		}
+
+		[Test]
+		public void OverflowInfeasibleSetDeclinesBeforeAnyDraw()
+		{
+			// Sol exact-review HOLD fix: candidates resolve through PickOrPower BEFORE the
+			// draw, so a nonempty set of power-infeasible candidates with no fallback
+			// resolves empty — the decline consumes zero draws and the stream is unchanged.
+			var control = new MersenneTwister(7);
+			var rng = new MersenneTwister(7);
+			var resolved = new List<object>();
+			foreach (var candidate in new object[] { new(), new() })
+			{
+				var pick = BaseBuilderQueueEvalCA.PickOrPower(candidate, null, _ => false);
+				if (pick != null)
+					resolved.Add(pick);
+			}
+
+			Assert.That(resolved, Is.Empty, "all candidates infeasible and no power fallback exists");
+			Assert.That(BaseBuilderQueueEvalCA.DrawOverflowPick(resolved, rng), Is.Null);
+			Assert.That(rng.TotalCount, Is.EqualTo(control.TotalCount),
+				"a nonempty-but-infeasible decline consumes zero draws");
+			Assert.That(rng.Next(), Is.EqualTo(control.Next()),
+				"the next draw matches the un-consumed stream — orders downstream stay parity-locked");
+		}
+
+		[Test]
+		public void OverflowPowerFallbackEntersTheResolvedSet()
+		{
+			// An infeasible candidate contributes the power fallback to the draw — the same
+			// outcome draw-then-substitute produced, with the draw still costing exactly one.
+			var powerFallback = new object();
+			var feasible = new object();
+			var resolved = new List<object>();
+			foreach (var candidate in new[] { new object(), feasible })
+			{
+				var pick = BaseBuilderQueueEvalCA.PickOrPower(candidate, powerFallback,
+					c => ReferenceEquals(c, feasible));
+				if (pick != null)
+					resolved.Add(pick);
+			}
+
+			Assert.That(resolved, Is.EquivalentTo(new object[] { powerFallback, feasible }),
+				"infeasible candidate resolves to the power fallback; feasible stays itself");
+
+			var rng = new MersenneTwister(9);
+			Assert.That(BaseBuilderQueueEvalCA.DrawOverflowPick(resolved, rng), Is.Not.Null);
+			Assert.That(rng.TotalCount, Is.EqualTo(1), "a committed resolved pick consumes exactly one draw");
 		}
 	}
 }

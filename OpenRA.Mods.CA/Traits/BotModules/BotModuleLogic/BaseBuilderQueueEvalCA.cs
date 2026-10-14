@@ -16,6 +16,7 @@ using System.Linq;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Mods.Common.Warheads;
 using OpenRA.Primitives;
+using OpenRA.Support;
 using OpenRA.Traits;
 
 namespace OpenRA.Mods.CA.Traits
@@ -164,6 +165,30 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>GetProducibleBuilding's admit test: no limit configured, or standing plus producing under it.</summary>
 		public static bool LimitAdmits(bool hasLimit, int limit, int standing, int producing) =>
 			!hasLimit || standing + producing < limit;
+
+		/// <summary>
+		/// PUSH-1 (bank overflow): the conditioned overflow rung is armed only while a
+		/// BotOverflowPolicy is enabled and the bank exceeds its line — an absent or disabled
+		/// policy leaves the legacy ladder bit-identical and consumes no RNG.
+		/// </summary>
+		public static bool OverflowArmed(bool policyEnabled, int cash, int overflowCash) =>
+			policyEnabled && overflowCash > 0 && cash > overflowCash;
+
+		/// <summary>
+		/// PUSH-1: an overflow candidate survives the production-type cap only while the fraction
+		/// path's count — standing buildings of the name or its PlaceBuildingVariants, plus the
+		/// name's in-flight production — is under the per-type limit. typeLimit &lt;= 0 = uncapped.
+		/// </summary>
+		public static bool OverflowTypeAdmits(int standingOrVariants, int producing, int typeLimit) =>
+			typeLimit <= 0 || !LimitReached(standingOrVariants + producing, typeLimit);
+
+		/// <summary>
+		/// PUSH-1: the overflow pick draws only over a non-empty candidate set — a decline consumes
+		/// zero draws, so an armed rung that cannot convert never shifts the bot's RNG stream.
+		/// </summary>
+		public static T DrawOverflowPick<T>(IReadOnlyList<T> candidates, MersenneTwister rng)
+			where T : class =>
+			candidates.Count == 0 ? null : candidates.RandomOrDefault(rng);
 
 		/// <summary>CB10: a naval structure needs water inside the base perimeter and a nearby buildable edge —
 		/// the area scan stays lazy: it is consulted only when the other clauses demand it.</summary>

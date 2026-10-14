@@ -86,6 +86,10 @@ namespace OpenRA.Mods.CA.Traits
 		int buildingDelayModifier = 100;
 		int buildingIntervalModifier = 100;
 
+		// PUSH-1 (bank overflow): the conditioned policy arming the overflow rung — profiles that
+		// never carry the grant resolve null here and run the legacy ladder bit-identically.
+		BotOverflowPolicy overflowPolicy;
+
 		// Cameo (§12.20): lazy — resolved on first TickQueue, an OR-of-vetoes pause on new building
 		// production. Empty = nothing pauses, upstream-identical.
 		IBotRequestPauseBuildingProduction[] pauseBuilding;
@@ -134,6 +138,11 @@ namespace OpenRA.Mods.CA.Traits
 			productionTypeLimit = botLimits.Info.ProductionTypeLimit;
 			buildingDelayModifier = botLimits.Info.BuildingDelayModifier;
 			buildingIntervalModifier = botLimits.Info.BuildingIntervalModifier;
+		}
+
+		public void SetOverflowPolicy(BotOverflowPolicy policy)
+		{
+			overflowPolicy = policy;
 		}
 
 		// REPLAY-HEALTH-LOGGER (ACK-2, Sol review F1/F3/F5): a registered observer turns the
@@ -1228,6 +1237,44 @@ namespace OpenRA.Mods.CA.Traits
 			return available.RandomOrDefault(BotRng.For(player, nameof(BaseBuilderQueueManagerCA)));
 		}
 
+		// PUSH-1: production types still under their caps for the overflow rung. The type cap counts
+		// standing buildings of the name or its PlaceBuildingVariants plus the name's in-flight
+		// production — the fraction path's semantics; the general BuildingLimits rule keeps its own
+		// standing/producing count (GetProducibleBuilding's admit test). Each survivor is resolved
+		// through PickOrPower BEFORE the draw: an infeasible candidate contributes the power
+		// fallback (identical to draw-then-substitute), and a set of only infeasible candidates
+		// with no fallback resolves empty — a decline that consumes zero draws (Sol review).
+		List<ActorInfo> OverflowProductionCandidates(IEnumerable<ActorInfo> buildableThings, ActorInfo power)
+		{
+			playerBuildings ??= player.PlayerActor.World.Actors
+				.Where(a => a.Owner == player.PlayerActor.Owner && !a.Disposed)
+				.ToArray();
+
+			var candidates = new List<ActorInfo>();
+			foreach (var actor in buildableThings)
+			{
+				var name = actor.Name;
+				if (!baseBuilder.Info.ProductionTypes.Contains(name))
+					continue;
+
+				var producing = baseBuilder.BuildingsBeingProduced.TryGetValue(name, out var beingProduced) ? beingProduced : 0;
+				if (!BaseBuilderQueueEvalCA.LimitAdmits(baseBuilder.TryGetBuildingLimit(name, out var limit), limit,
+						playerBuildings.Count(a => a.Info.Name == name), producing))
+					continue;
+
+				var variants = actor.TraitInfoOrDefault<PlaceBuildingVariantsInfo>()?.Actors ?? [];
+				var standingOrVariants = playerBuildings.Count(a => a.Info.Name == name || variants.Contains(a.Info.Name));
+				if (!BaseBuilderQueueEvalCA.OverflowTypeAdmits(standingOrVariants, producing, ProductionTypeLimit))
+					continue;
+
+				var resolved = BaseBuilderQueueEvalCA.PickOrPower(actor, power, HasSufficientPowerForActor);
+				if (resolved != null)
+					candidates.Add(resolved);
+			}
+
+			return candidates;
+		}
+
 		// BP-2 (§19.15): a rules-derived radar provider — same two-trait check the Cameo planner runs
 		// (the assemblies cannot share the helper; keep the expression identical).
 		static bool IsRadarProvider(ActorInfo info)
@@ -1566,6 +1613,13 @@ namespace OpenRA.Mods.CA.Traits
 				Log.Write("debug", $"AI ({player.ClientIndex}): ECON-TRACE threshold-override {outcome} {pick?.Name ?? "-"} {EconTraceState()}");
 		}
 
+		// PUSH-1: the conditioned overflow rung's outcomes — armed/declined/picked, same bounded writer.
+		void TraceOverflow(string outcome, ActorInfo pick)
+		{
+			if (EconTraceDue("overflow-" + outcome))
+				Log.Write("debug", $"AI ({player.ClientIndex}): ECON-TRACE overflow {outcome} {pick?.Name ?? "-"} {EconTraceState()}");
+		}
+
 		// The bank is over the threshold yet an earlier priority took the queue: name the pre-emptor.
 		void TraceThresholdShadow(ProductionQueue queue, ActorInfo item)
 		{
@@ -1659,25 +1713,62 @@ namespace OpenRA.Mods.CA.Traits
 			// target is out of reach. Only under the refinery law (the provider publishes nulls otherwise), and
 			// only when the wanted building isn't already in production.
 			var law = baseBuilder.RefineryLawProvider();
+
+			ActorInfo PlannerWantPick(string want)
+			{
+				if (want == null || (baseBuilder.BuildingsBeingProduced?.ContainsKey(want) ?? false))
+					return null;
+
+				var pick = GetProducibleBuilding(new HashSet<string> { want }, buildableThings, a => 0);
+				if (pick == null)
+					return null;
+
+				var wantPick = BaseBuilderQueueEvalCA.PickOrPower(pick, power, HasSufficientPowerForActor);
+				if (wantPick != null)
+					AIUtils.BotDebug("{0} decided to build {1}: Priority override ({2})", queue.Actor.Owner, wantPick.Name,
+						wantPick == pick ? "REF-1 planner want" : "planner want would be low power");
+
+				return wantPick;
+			}
+
+			if (law != null)
+			{
+				// The due MCV's prerequisite keeps its slot above the overflow rung: a banked bot
+				// must still be able to reach the next expansion's tech gate.
+				var mcvPick = PlannerWantPick(law.WantedMcvPrerequisite);
+				if (mcvPick != null)
+					return mcvPick;
+			}
+
+			// PUSH-1 (bank overflow): the conditioned policy rung converts a bank over its line into
+			// producer width — above the crawl-link/front-defence wants that shadowed the legacy
+			// threshold rung, below the safety rungs (opening, low power, refinery law, MCV gate).
+			// Candidates are cap-filtered AND power-resolved before a single deterministic draw;
+			// any decline — empty set or policy absent — consumes no RNG.
+			if (BaseBuilderQueueEvalCA.OverflowArmed(overflowPolicy != null && overflowPolicy.IsTraitEnabled(),
+					availableCash, overflowPolicy?.Info.OverflowCash ?? 0))
+			{
+				var pick = BaseBuilderQueueEvalCA.DrawOverflowPick(OverflowProductionCandidates(buildableThings, power),
+					BotRng.For(player, nameof(BaseBuilderQueueManagerCA)));
+				if (pick == null)
+					TraceOverflow("no-candidate", null);
+				else
+				{
+					AIUtils.BotDebug("{0} decided to build {1}: Priority override ({2})", queue.Actor.Owner, pick.Name,
+						pick != power ? "overflow production" : "overflow would be low power");
+					TraceOverflow(pick != power ? "production" : "power-swap", pick);
+					return pick;
+				}
+			}
+
 			if (law != null)
 			{
 				// CRAWL-SAFETY: the front defence rides ahead of the link it precedes.
-				foreach (var want in new[] { law.WantedMcvPrerequisite, law.WantedFrontDefence, law.WantedLinkBuilding })
+				foreach (var want in new[] { law.WantedFrontDefence, law.WantedLinkBuilding })
 				{
-					if (want == null || (baseBuilder.BuildingsBeingProduced?.ContainsKey(want) ?? false))
-						continue;
-
-					var pick = GetProducibleBuilding(new HashSet<string> { want }, buildableThings, a => 0);
-					if (pick == null)
-						continue;
-
-					var wantPick = BaseBuilderQueueEvalCA.PickOrPower(pick, power, HasSufficientPowerForActor);
+					var wantPick = PlannerWantPick(want);
 					if (wantPick != null)
-					{
-						AIUtils.BotDebug("{0} decided to build {1}: Priority override ({2})", queue.Actor.Owner, wantPick.Name,
-							wantPick == pick ? "REF-1 planner want" : "planner want would be low power");
 						return wantPick;
-					}
 				}
 			}
 
