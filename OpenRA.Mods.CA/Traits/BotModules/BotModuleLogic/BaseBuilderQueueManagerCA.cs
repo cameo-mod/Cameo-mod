@@ -295,9 +295,10 @@ namespace OpenRA.Mods.CA.Traits
 		// BuildOnSite lands late or never — and ends Removed + intent reason. A cancel
 		// request can never be proven by disappearance (cleanup is indistinguishable), so it
 		// always resolves Removed + intent reason. The Removed's cause class is resolved
-		// event-locally at the emit tick (Elimination/Destruction/Captured/Unbuildable —
-		// see ResolveRemovalCause); a live-queue removal with no proven cause stays
-		// None = UNKNOWN, schema-2 non-pass.
+		// event-locally at the emit tick (Elimination/Destruction/Captured are proven;
+		// Unbuildable is a diagnostic predicate serialized on the row but never
+		// evidence-admitted — Sol adjudication 2026-10-14; see ResolveRemovalCause); a
+		// live-queue removal with no proven cause latches UNKNOWN, schema-2 non-pass.
 		void ResolveRemovedItem(ProductionQueue queue, BotQueueWatch watch, ProductionItem oldItem, bool queueSeen)
 		{
 			var pending = FindPending(watch, oldItem);
@@ -346,10 +347,14 @@ namespace OpenRA.Mods.CA.Traits
 
 		// QUEUE-REMOVAL-DISCRIMINATOR (01a13686): event-local removal cause — resolved only
 		// from observable state at the emit tick, never from intent or correlation. The
-		// buildable probe is the engine's own eviction predicate: CancelUnbuildableItems
-		// diffs BuildableItems names, so an item absent from its live, owned, still-seen
-		// queue's set left by rules churn (prereq/provider loss). Proven causes observe;
-		// every other live-queue removal stays None = UNKNOWN.
+		// buildable probe still surfaces the engine's own eviction predicate for
+		// diagnosis — CancelUnbuildableItems diffs BuildableItems names — but Sol's
+		// 2026-10-14 adjudication rules it NON-PROBATIVE: the routine is cached-set
+		// gated and prefers migration, so an uninstrumented removal plus prerequisite
+		// loss reads identically. Unbuildable emits as a diagnostic class only; the
+		// evidence seam latches it UNKNOWN like None. Proven mechanism causes
+		// (unconditional ClearQueue paths) observe; every other live-queue removal
+		// stays None = UNKNOWN.
 		BotQueueCancellationClass ResolveRemovalCause(ProductionQueue queue, string itemName, bool live, bool queueSeen)
 		{
 			var owned = queue.Actor.Owner == player;

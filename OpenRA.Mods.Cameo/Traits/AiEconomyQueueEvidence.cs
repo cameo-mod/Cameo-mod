@@ -18,16 +18,20 @@ namespace OpenRA.Mods.Cameo.Traits
 				// A Removed behind the episode's recorded resolution (cancel intent, proven
 				// cancellation, proven placement) is the dequeue of an outcome already on
 				// record, and an event-local proven removal cause — Destruction,
-				// Elimination, Captured (owner changed on a live producer) or
-				// Unbuildable (item absent from its own live queue's BuildableItems,
-				// the engine's own eviction predicate) — is accounted evidence, not
-				// missing data. Only an unresolved Removed with no proven cause is an
+				// Elimination, Captured (owner changed on a live producer; OnOwnerChanged
+				// -> ClearQueue is unconditional) — is accounted evidence, not missing
+				// data. Unbuildable is deliberately NOT admitted (Sol adjudication
+				// 2026-10-14): absence from the observed BuildableItems set is a
+				// diagnostic predicate, not an eviction receipt — CancelUnbuildableItems
+				// is cached-set gated and prefers migration, so an uninstrumented
+				// removal plus prerequisite loss produces the identical observation.
+				// The class still serializes for diagnosis; the unresolved removal
+				// latches UNKNOWN. Only an unresolved Removed with no proven cause is an
 				// unproven disappearance and stays UNKNOWN.
 				return terminalEpisodeResolved
 					|| transition.CancellationClass is BotQueueCancellationClass.Destruction
 						or BotQueueCancellationClass.Elimination
 						or BotQueueCancellationClass.Captured
-						or BotQueueCancellationClass.Unbuildable
 					? EconomyQueueEvidenceKind.Observation
 					: EconomyQueueEvidenceKind.Unknown;
 			if (transition.Kind is not (BotQueueTransitionKind.Placed or BotQueueTransitionKind.Cancelled))
@@ -60,7 +64,10 @@ namespace OpenRA.Mods.Cameo.Traits
 			BotQueueCancellationClass.Destruction => "destruction",
 			BotQueueCancellationClass.Elimination => "elimination",
 			BotQueueCancellationClass.Captured => "captured",
-			BotQueueCancellationClass.Unbuildable => "unbuildable",
+
+			// Unbuildable is diagnostic-only (Sol adjudication 2026-10-14) and can never
+			// enter canonical cancel evidence — a Cancelled row carrying it maps to null
+			// and stays UNKNOWN rather than asserting the unproven eviction.
 			_ => null
 		};
 

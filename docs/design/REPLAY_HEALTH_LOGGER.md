@@ -198,20 +198,21 @@ already contains the reviewed restack 7ca7e9159 byte-identical):
 blocker B; source+tests only, no build/run/push — awaiting exact-SHA review and
 DevOps admission):
 
-- Removed terminals now carry a cause class resolved event-locally at the emit
+- Removed terminals carry a cause class resolved event-locally at the emit
   tick (BaseBuilderQueueEvalCA.RemovalCauseClass, world-free): Elimination (seat
   ended), Destruction (producer dead/disposed — kill, sell, demolish and
   transform all ClearQueue and are not separable mod-side), Captured (producer
-  live but owned by another player — OnOwnerChanged -> ClearQueue), Unbuildable
-  (item absent from its own live, owned, still-observed queue's BuildableItems —
-  the exact set CancelUnbuildableItems diffs to evict; prerequisite/provider
-  churn per the 2026-10-13 placement-order RCA), else None.
-- The evidence classifier treats Destruction/Elimination/Captured/Unbuildable
-  on a Removed as proven cause -> Observation (benign, never MarkIncomplete);
-  a Removed with class None and no resolved episode stays UNKNOWN — fail-closed
-  unchanged. Canonical cancel records (EconomyCancellationEvidence) are
-  untouched: the new classes only ever appear on Removed-kind queue-observation
-  rows, so the pinned economy_invariants.py whitelist needs no change.
+  live but owned by another player — OnOwnerChanged -> ClearQueue is
+  unconditional), Unbuildable (item absent from its own live, owned,
+  still-observed queue's BuildableItems — the exact set CancelUnbuildableItems
+  diffs to evict), else None.
+- The evidence classifier admits Destruction/Elimination/Captured on a Removed
+  as proven cause -> Observation (benign, never MarkIncomplete); a Removed
+  with no resolved episode and any other class — None, or the diagnostic-only
+  Unbuildable — stays UNKNOWN, fail-closed. Canonical cancel records
+  (EconomyCancellationEvidence) are untouched: the classes only ever appear on
+  Removed-kind queue-observation rows, and Unbuildable maps to no canonical
+  string at all, so the pinned economy_invariants.py whitelist needs no change.
 - BotQueuePendingTerminal.MaxInFlightTicks 8 -> 24: the RCA measured
   PlaceBuilding intent->removal wire latency of 12-19 ticks across the
   ra1/m1/m2 sentinel episodes, so every placement pending expired before its
@@ -220,16 +221,20 @@ DevOps admission):
   pendings still never confirm on disappearance.
 - queueSeen gates the Unbuildable rung: a stale watch (queue left observation)
   on a live, owned producer carries no buildability evidence and stays UNKNOWN.
-- The "coincident-unbuildability residual" is named per the static-review
-  ruling (Reviewer 2026-10-13, ACCEPT point-in-time): an item leaving a live,
-  owned, still-observed queue while absent from BuildableItems() classifies
-  Unbuildable even if its true removal path was a coincident unexplained
-  removal on the same tick rather than CancelUnbuildableItems itself. The
-  engine invariant — an in-queue item absent from the buildable set WILL be
-  evicted — makes the mechanism guaranteed-to-fire, and a same-tick set
-  regression would add state without proving which path removed the item.
-  This residual is irreducible mod-side and is the UNKNOWN boundary's
-  documented complement.
+- The "coincident-unbuildability residual" named at the 2026-10-13 review is
+  CLOSED by demotion, not waived. DISCRIMINATOR-REPAIR (01a13908) implements
+  Sol's adjudication (fleet receipt
+  ADJUDICATION_2026-10-14_removed_discriminator_6ccc0fad0_sol.md): absence
+  from the observed buildable set is not a receipt that CancelUnbuildableItems
+  evicted or migrated this item — the routine is cached-set gated
+  (unchanged set returns early) and prefers upgrade replacement, so an
+  uninstrumented removal plus prerequisite loss before the observer samples
+  produces the identical observation. Unbuildable remains serialized on the
+  raw queue-observation row as a diagnostic predicate; the evidence latch
+  classifies it UNKNOWN like None. A future event-local receipt — an
+  engine-side eviction signal, or a same-queue same-tick substitution tying
+  queue/item/episode to the exact upgraded successor — is the only path back
+  to admission.
 - Still unprovable without an engine-side seam (kept UNKNOWN, documented for
   the admission gate): sold vs killed vs demolished vs transformed producers
   (identical observable state — all Destruction); a transform's successor actor

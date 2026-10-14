@@ -1971,8 +1971,11 @@ namespace OpenRA.Mods.Cameo.Test
 				"an owner change outranks the buildable probe — capture explains the removal");
 
 			// Live, owned, still-observed queue whose item is absent from its own
-			// BuildableItems — CancelUnbuildableItems' own predicate — is a proven
-			// rules eviction (prereq/provider churn: dome/warfactory/promo loss).
+			// BuildableItems emits Unbuildable — CancelUnbuildableItems' own
+			// predicate — as a DIAGNOSTIC class (Sol adjudication 2026-10-14): the
+			// engine's eviction is cached-set gated and prefers migration, so
+			// observed absence is not a receipt the routine ran. The evidence seam
+			// classifies it UNKNOWN like None.
 			Assert.That(BaseBuilderQueueEvalCA.RemovalCauseClass(false, true, true, true, false),
 				Is.EqualTo(BotQueueCancellationClass.Unbuildable));
 		}

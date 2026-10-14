@@ -1,3 +1,52 @@
+# 2026-10-14 — Devin: DISCRIMINATOR-REPAIR (01a13908) — `Unbuildable` demoted to diagnostic-only
+
+*Devin-Developer.* Sol adjudication 2026-10-14 (fleet receipt
+`ADJUDICATION_2026-10-14_removed_discriminator_6ccc0fad0_sol.md`) on the
+landed discriminator `6ccc0fad0`: an unresolved `Removed` cannot become proven
+benign solely because its item is absent from the observed buildable set —
+`CancelUnbuildableItems` is cached-set gated (`lastBuildableNames` equality
+returns early) and prefers upgrade migration, so an uninstrumented removal
+plus prerequisite loss produces the identical observation. Required bounded
+correction chosen: retain unbuildability as a diagnostic predicate while
+unresolved removals remain Unknown (no new gameplay behaviour; engine-side or
+same-queue migration receipts remain a possible future upgrade path). Source+
+tests only; no build, run or land — qualification + new pin queue
+post-sentinel under the named executor/reviewer chain.
+
+**Changes (all on `devin/01a13908-discriminator-repair`, base `e27277520`):**
+- `AiEconomyQueueEvidence.Classify`: `Unbuildable` removed from the
+  Removed-kind proven-cause whitelist — an unresolved Removed+Unbuildable now
+  classifies `Unknown` and the recorder's `MarkIncomplete` latch fires, which
+  restores the structural guarantee Sol required (no doc-caveat waiver).
+  `terminalEpisodeResolved` is unchanged — independently resolved episodes
+  keep their classification.
+- `CancellationClass` string map: `unbuildable` mapping removed — a Cancelled
+  row carrying the diagnostic class can never serialize into canonical cancel
+  evidence (defense-in-depth; the pinned `economy_invariants.py` whitelist was
+  already unreachable for it).
+- `RemovalCauseClass` + `ResolveRemovalCause` comments: the rung still emits
+  `Unbuildable` on the raw queue-observation row — that IS the retained
+  diagnostic predicate — but it is documented non-probative; enum member kept
+  (ordinal/serialization stability) and marked diagnostic-only.
+- `Captured` stays proven and is now mechanism-justified in-source:
+  `INotifyOwnerChanged.OnOwnerChanged -> ClearQueue` is unconditional
+  (`ProductionQueue.cs:227-229`), as are kill/sell/transform clears — the
+  mechanism guarantees the removal rather than a sampled state implying it.
+- Tests: `Unbuildable` moved from the proven-cause TestCase set to
+  `UnresolvedRemovedWithoutProvenCauseRemainsUnknown`; added to
+  `RemovedAfterResolvedEpisodeIsBookkeeping` (resolved episodes retain
+  classification per the adjudication); new
+  `UnbuildableRemovalPermanentlyMarksCoverageUnknown` exercises the real
+  recorder latch end-to-end and emits the `removed-unbuildable` CLI fixture;
+  `test_economy_logger_cli.py` gains the matching `UNKNOWN`/21 check.
+- `docs/design/REPLAY_HEALTH_LOGGER.md`: the 2026-10-13
+  coincident-unbuildability residual marked CLOSED by demotion; classifier
+  bullet corrected.
+
+Not run: build/NUnit/pytest (no DevOps admission for this branch yet —
+grant-dependent like the parent discriminator). Exact-SHA review then
+DevOps-admitted test pass, then landing + repin — all post-sentinel.
+
 # 2026-10-13 — Devin: QUEUE-REMOVAL-DISCRIMINATOR (01a13686) — cause-aware `Removed` classes + 24t wire bound
 
 *Devin-Developer.* Campaign blocker B, assigned by Luna on current master
