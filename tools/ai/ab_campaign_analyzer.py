@@ -81,6 +81,19 @@ def load_receipts(paths: list[pathlib.Path]) -> list[dict]:
                 continue
             if not isinstance(data, dict) or "resolved_seats" not in data or "pair_id" not in data:
                 continue  # not a campaign receipt; a directory walk will see other artifacts too
+            # File-level provenance on the receipt FILE: a sentinel-bound
+            # manifest quarantines even an unmarked receipt; malformed or
+            # conflicting provenance is a hard reject. Receipts are
+            # self-describing artifacts — the normal campaign path produces no
+            # manifest, so "no resolvable association" is not a rejection here;
+            # validate_and_tag then applies the embedded-binding checks.
+            import capture_provenance
+            verdict, why = capture_provenance.assess_file(f)
+            if verdict == capture_provenance.SENTINEL:
+                continue
+            if verdict == capture_provenance.REJECT and (
+                    why.startswith("malformed") or "conflicting" in why):
+                raise ValueError(f"corrupt provenance for {f}: {why}")
             data["_path"] = str(f)
             out.append(data)
     return out
@@ -98,6 +111,35 @@ def validate_and_tag(receipt: dict) -> dict:
         receipt["_valid"] = False
         receipt["_invalid_reason"] = str(e)
         return receipt
+    # Capture quarantine (either marker alone rejects): a sentinel-marked
+    # receipt is diagnostic evidence, never poolable.
+    import capture_provenance
+    if capture_provenance.record_marked(receipt):
+        receipt["_valid"] = False
+        receipt["_invalid_reason"] = "sentinel-captured evidence (capture_kind/scoreable marker)"
+        return receipt
+    prov = receipt.get("capture_provenance")
+    if prov is not None:
+        # When the producer embedded its provenance binding, the receipt's own
+        # game_uid must be a bound member and every artifact sha in the binding
+        # must agree with the receipt's artifact table. Anything else is a
+        # mismatched/conflicting association -> reject the game.
+        artifacts = receipt.get("artifacts") or {}
+        prov_artifacts = prov.get("artifacts") if isinstance(prov, dict) else None
+        uid_ok = (isinstance(prov, dict)
+                  and isinstance(prov.get("game_uids"), list)
+                  and receipt.get("game_uid") in prov["game_uids"])
+        sha_ok = True
+        if isinstance(prov_artifacts, dict):
+            for name, declared in prov_artifacts.items():
+                have = (artifacts.get(name) or {}).get("sha256")
+                if isinstance(have, str) and isinstance(declared, str) and have != declared:
+                    sha_ok = False
+                    break
+        if not isinstance(prov, dict) or not uid_ok or not sha_ok or capture_provenance.record_marked(prov):
+            receipt["_valid"] = False
+            receipt["_invalid_reason"] = "capture provenance mismatch"
+            return receipt
     receipt["_valid"] = True
     receipt["_invalid_reason"] = None
     return receipt
@@ -147,10 +189,11 @@ def load_health(paths: list[pathlib.Path]) -> dict[str, Any]:
     return {"games": games, "errors": errors}
 
 
-def expected_health_players(receipt: dict) -> tuple[set[str] | None, str, str]:
-    """Bridge receipt seats to the report namespace (matches JSONL seat_N) by (home cell, faction, bot_type).
-    Returns (players, status, detail): status OK, UNAVAILABLE (no usable bridge: caller falls back to a seat COUNT
-    and marks the game identity-unverified) or SCHEMA_MISMATCH (bridge present but wrong/ambiguous)."""
+def expected_health_seat_map(receipt: dict) -> tuple[dict[str, dict] | None, str, str]:
+    """Full bridge {matches seat name -> receipt seat} — same evidence rules as
+    expected_health_players, keeping the seat objects so verdict-layer policy
+    (e.g. the MISSING_SITUATIONS coverage exception) can attribute a report to
+    its seat's bot_type."""
     art = (receipt.get("artifacts") or {}).get("matches_jsonl") or {}
     path = art.get("path")
     seats = receipt.get("seats")
@@ -171,16 +214,24 @@ def expected_health_players(receipt: dict) -> tuple[set[str] | None, str, str]:
             continue
         if isinstance(row, dict) and row.get("game_uid") == receipt.get("game_uid") and isinstance(row.get("player"), dict):
             rows.append(row["player"])
-    players: set[str] = set()
+    seat_map: dict[str, dict] = {}
     for x in seats:
         hits = [r for r in rows if r.get("home") == x["home_location"] and r.get("faction") == x.get("faction")
                 and r.get("bot_type") == x.get("bot_type") and isinstance(r.get("seat"), str)]
         if len(hits) != 1:
             return None, "SCHEMA_MISMATCH", f"{len(hits)} matches rows for receipt seat at {x['home_location']}"
-        players.add(hits[0]["seat"])
-    if len(players) != len(seats):
+        seat_map[hits[0]["seat"]] = x
+    if len(seat_map) != len(seats):
         return None, "SCHEMA_MISMATCH", "two receipt seats bridge to the same matches seat"
-    return players, "OK", ""
+    return seat_map, "OK", ""
+
+
+def expected_health_players(receipt: dict) -> tuple[set[str] | None, str, str]:
+    """Bridge receipt seats to the report namespace (matches JSONL seat_N) by (home cell, faction, bot_type).
+    Returns (players, status, detail): status OK, UNAVAILABLE (no usable bridge: caller falls back to a seat COUNT
+    and marks the game identity-unverified) or SCHEMA_MISMATCH (bridge present but wrong/ambiguous)."""
+    seat_map, status, detail = expected_health_seat_map(receipt)
+    return (set(seat_map) if seat_map is not None else None), status, detail
 
 
 def family_view(by_player: dict[str, list[dict]] | None, policy: str,
@@ -235,9 +286,37 @@ def health_verdict(by_player: dict[str, list[dict]] | None, expected_seats: int,
     return "HEALTHY", ""
 
 
+def _coverage_only_reports(by_player: dict | None, seat_map: dict | None) -> str | None:
+    """Granted MISSING_SITUATIONS exception (verdict layer only): returns a
+    detail string when every report is either OBSERVED_HEALTHY or a
+    classic-seat UNKNOWN whose sole finding is MISSING_SITUATIONS — with at
+    least one of the latter present. Any co-finding, unattributed seat, other
+    status, or hard-seat occurrence blocks. Checker output is never altered.
+    """
+    import sentinel_policy
+
+    covered: list[str] = []
+    for player, reps in (by_player or {}).items():
+        bot_type = ((seat_map or {}).get(player) or {}).get("bot_type")
+        for rep in reps:
+            if rep.get("status") == HEALTHY:
+                continue
+            if sentinel_policy.missing_situations_coverage(rep, bot_type):
+                covered.append(player)
+            else:
+                return None
+    if not covered:
+        return None
+    return ("coverage-only diagnostic: sole MISSING_SITUATIONS on classic "
+            f"seat(s) {sorted(set(covered))}")
+
+
 # Deterministic precedence when two checker families are armed: an active defect outranks corrupt evidence,
-# which outranks absent or unverifiable evidence.
-VERDICT_ORDER = {"BLOCK": 0, "SCHEMA_MISMATCH": 1, "MISSING": 2, "UNKNOWN": 3, "HEALTHY": 4}
+# which outranks absent or unverifiable evidence. COVERAGE_DIAGNOSTIC labels the granted MISSING_SITUATIONS
+# exception distinctly but stays below every real defect and above only HEALTHY — a co-armed UNKNOWN in the
+# other family must never be masked by it — and it is always excluded, never pooled.
+VERDICT_ORDER = {"BLOCK": 0, "SCHEMA_MISMATCH": 1, "MISSING": 2, "UNKNOWN": 3,
+                 "COVERAGE_DIAGNOSTIC": 4, "HEALTHY": 5}
 
 
 def worst_verdict(a: tuple[str, str], b: tuple[str, str]) -> tuple[str, str]:
@@ -283,17 +362,27 @@ def apply_health_gate(receipts: list[dict], health: dict[str, Any]) -> tuple[lis
             exclude(r, "MARKER", "INCOMPLETE_UNKNOWN host-restart marker: never pooled")
             continue
         uid = r.get("game_uid")
-        expected, bridge, bridge_detail = expected_health_players(r)
+        seat_map, bridge, bridge_detail = expected_health_seat_map(r)
+        expected = set(seat_map) if seat_map is not None else None
         if bridge == "SCHEMA_MISMATCH":
             verdict, detail = bridge, bridge_detail
         else:
             seat_count = len(r.get("resolved_seats") or [])
             verdict, detail = "HEALTHY", ""
             if replay_armed:
+                replay_view = family_view(
+                    games.get(uid) if isinstance(uid, str) else None,
+                    HEALTH_POLICY, {ECON_POLICY} if econ_armed else frozenset())
                 verdict, detail = health_verdict(
-                    family_view(games.get(uid) if isinstance(uid, str) else None,
-                                HEALTH_POLICY, {ECON_POLICY} if econ_armed else frozenset()),
-                    seat_count, expected, policy=HEALTH_POLICY, family="replay_health")
+                    replay_view, seat_count, expected,
+                    policy=HEALTH_POLICY, family="replay_health")
+                # Granted exception: classic-seat UNKNOWN + sole
+                # MISSING_SITUATIONS relabels to a coverage diagnostic
+                # (still excluded, never pooled — raw report kept verbatim).
+                if verdict == "UNKNOWN":
+                    coverage = _coverage_only_reports(replay_view, seat_map)
+                    if coverage:
+                        verdict, detail = "COVERAGE_DIAGNOSTIC", coverage
             if econ_armed:
                 verdict, detail = worst_verdict(
                     (verdict, detail),

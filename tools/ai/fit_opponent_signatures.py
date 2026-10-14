@@ -24,9 +24,14 @@ def cluster_key(seen: dict) -> tuple:
 
 
 def fit(paths: list[Path]) -> dict:
+    import capture_provenance
+
     members = defaultdict(list)
     pairs = defaultdict(int)
     for path in paths:
+        # Learned-output ingest is provenance-gated: sentinel captures never fit.
+        if not capture_provenance.gate_ingest(path):
+            continue
         for line in path.read_text(encoding="utf-8").splitlines():
             if not line.strip():
                 continue

@@ -94,6 +94,8 @@ def read(path):
 
 
 def summaries(paths, timestep=None):
+    import capture_provenance
+
     found = False
     seen = set()
     results = []
@@ -105,6 +107,11 @@ def summaries(paths, timestep=None):
             if resolved in seen:
                 continue
             seen.add(resolved)
+            verdict, why = capture_provenance.assess_file(f)
+            if verdict == capture_provenance.SENTINEL:
+                continue
+            if verdict == capture_provenance.REJECT:
+                raise ValueError(f"unbound provenance for {f}: {why}")
             found = True
             results.extend(read(f))
     counts = {}

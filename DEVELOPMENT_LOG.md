@@ -21781,3 +21781,68 @@ The lead cancelled the base-vs-fixed headless repro after the maintainer confirm
 admitted match. It exited after 2 s on a renderer init failure (OpenRA.Platforms.Default.dll not yet built) with no ticks,
 deliveries or replay; the fixed build was never launched. No runtime delivery evidence exists from this attempt. Artifacts
 and the full label are in C:\cw\ub-trace\RECEIPT_PRE_ACK_STARTUP_ATTEMPT.md. Runtime fix: c21783291; task stays open until landed.
+
+
+### 2026-10-14 - SENTINEL-RUNNER-POLICY: implementation frozen for exact-SHA review (Devin-Developer)
+
+Design chain closed: Sol APPROVE-DESIGN + Luna FORMAL RE-APPROVAL on frozen rev6.1
+(SHA256 7db8794a56c0dd50c28ecf7c5cc71b06ee05d6fc4cc5d5b419c2647ad8c025b1, Sol receipt
+0cc8c5089025cf7126d32609ce2b077327be021ed350a75c89e8328789a5a6cb). Implemented on branch
+devin/01a13a15-sentinel-runner-policy in the staged worktree.
+
+What was built:
+
+- tools/ai/capture_provenance.py (new): provenance sidecars binding artifacts by SHA-256 +
+  complete game-UID membership. write_provenance (batch/leaf manifests), write_promoted_sibling
+  (per-file .capture.json for copied aggregates), assess_file (allow/sentinel/reject),
+  record_marked (either-field predicate), gate_ingest (learner gate). Sol's binding
+  interpretation implemented verbatim: every resolution route requires actual artifact SHA
+  plus complete UID membership; ALL associations are scanned for conflict; ancestry alone,
+  a clean marker-free summary, or bare scoreable:true never proves eligibility; missing proof
+  hard-rejects. A detached bare file is never auto-historical.
+- tools/ai/sentinel_policy.py (new): pure disposition layer. economy_disposition emits
+  blocking / baseline_exempted / clean_diagnostic over collected seat reports (subset-of-pair
+  ruling: planned-roster classic seat, raw BLOCK, non-empty findings all DEFECT severity in
+  {NEAR_EMPTY_FUNDS, FUNDS_BELOW_BAND}, every other seat OBSERVED_HEALTHY, zero structural
+  failures). missing_situations_coverage is the sole home of the granted MISSING_SITUATIONS
+  verdict-layer exception.
+- tools/ai/run_ai_match_batch.py: --sentinel-diagnostic flag; parse-time refusal of any
+  non-conforming values incl. defaults (exactly one faction, --team-size 1, --repeats 1,
+  --retries 0) - refused, never coerced. sentinel_economy_collect() runs the legacy
+  economy_health_file_status checks with no early return: all seats analyzed, ordered
+  structural failures recorded; legacy function untouched and never dispatched in sentinel
+  mode. Results carry capture_kind=sentinel_diagnostic + scoreable=false + health_policy
+  with verbatim seat_reports and structural_failures; batch_summary is marked too.
+  promote_unique_match_logs emits per-file sibling provenance in sentinel mode; MATCH_LOG
+  still never promoted (canonical copy stays in the leaf, bound by the leaf sidecar).
+  Batch-root capture_provenance.json is written in BOTH modes (additive file only).
+- Score sinks gated at ingest: run_league.merge_cell (summary + results + rows),
+  ab_increment (shard_progress, smoke_verified, iter_match_records, shard_fingerprints),
+  ab_summary (records, arm_fingerprints), ab_campaign (_load_jsonl, load_receipts,
+  classify_game embedded-provenance check), aggregate_ai_matches.load_records,
+  insurance_summary.summaries.
+- tools/ai/ab_campaign_analyzer.py: load_receipts quarantines sentinel-bound receipt FILES
+  even when the receipt itself is unmarked; malformed/conflicting provenance raises;
+  manifest-free campaign receipts pass through to validate_and_tag (self-describing
+  artifacts). validate_and_tag rejects either-field markers and mismatches in embedded
+  capture_provenance (UID membership + artifact SHA agreement). expected_health_seat_map
+  extracted so apply_health_gate can attribute reports to seat bot_type; VERDICT_ORDER
+  gains COVERAGE_DIAGNOSTIC at rank 4 (below UNKNOWN, above HEALTHY, always excluded).
+- tools/ai/campaign_runner.py: _cell_capture scans ALL candidate manifests (cell root,
+  game support, campaign support root, nested under Support tree) before receipt creation;
+  marked-vs-clean conflict raises; receipts inherit capture_kind/scoreable/capture_provenance.
+  tools/ai/ab_campaign_receipt.schema.json: optional capture_kind/scoreable/capture_provenance.
+- Learned-artifact producers gated via gate_ingest: fit_opponent_signatures.fit,
+  fit_arsenal_priors.fit (missing-file tolerance preserved), fit_engagement_priors main
+  (same four streams as ai_log_common.load, gated per file), tune_build_order
+  (load_engagement_means, load_engagement_coverage, load_matches_detailed).
+  ai_log_common.load deliberately left ungated - shared by print-only reports.
+- tools/tests/test_sentinel_policy.py + test_capture_provenance.py (new, write-only):
+  dispatch refusals, collector dispositions, scoreboard quarantine, provenance
+  allow/sentinel/reject matrix, SHA mismatch, mixed-UID, detached-file rejection,
+  coverage-diagnostic precedence both directions, learner and aggregation gating.
+
+Status: py_compile clean on all touched files; NO tests, builds, launches, or qualification
+run (not authorized at this stage - DevOps bounded requalification is a later serial gate).
+Next: exact-SHA review (Devin-Reviewer) -> integrator land -> bounded requal ->
+isolated runtime package -> coordinator closeout -> four-faction sentinel sequence.

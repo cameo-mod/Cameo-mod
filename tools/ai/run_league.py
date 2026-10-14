@@ -137,10 +137,21 @@ def merge_cell(cell_dir: pathlib.Path, cell: dict, candidate: str, member: str, 
     early-dead teammate still records "lost"), and the spawn axis is the
     team's sorted member-spawn pair ("0,1").
     """
+    import capture_provenance
+
     data = cell_summary(cell_dir)
     if data is None:
         acc["cells_missing"].append(cell["name"])
         return
+    if capture_provenance.record_marked(data):
+        # Sentinel-marked summary — the entire cell is quarantined evidence.
+        return
+    summary_path = cell_dir / "batch_summary.json"
+    verdict, why = capture_provenance.assess_file(summary_path)
+    if verdict == capture_provenance.SENTINEL:
+        return
+    if verdict == capture_provenance.REJECT:
+        raise ValueError(f"unbound provenance for {summary_path}: {why}")
 
     acc["completed"] += data["completed"]
     acc["stalled"] += data["stalled"]
@@ -156,6 +167,11 @@ def merge_cell(cell_dir: pathlib.Path, cell: dict, candidate: str, member: str, 
     if not results_path.is_file():
         acc["cells_missing"].append(cell["name"] + " (no batch_results.jsonl)")
         return
+    verdict, why = capture_provenance.assess_file(results_path)
+    if verdict == capture_provenance.SENTINEL:
+        return
+    if verdict == capture_provenance.REJECT:
+        raise ValueError(f"unbound provenance for {results_path}: {why}")
 
     if team_size >= 2:
         # One datapoint per match uid: collect the candidate-side rows of each
@@ -166,7 +182,9 @@ def merge_cell(cell_dir: pathlib.Path, cell: dict, candidate: str, member: str, 
             if not line.strip():
                 continue
             match = json.loads(line)
-            if match.get("status") == "UNKNOWN" or match.get("health_status") != "OBSERVED_HEALTHY":
+            if (capture_provenance.record_marked(match)
+                    or match.get("status") == "UNKNOWN"
+                    or match.get("health_status") != "OBSERVED_HEALTHY"):
                 continue
             for row in match.get("bot_outcomes") or []:
                 if row.get("bot_type") != candidate:
@@ -193,7 +211,9 @@ def merge_cell(cell_dir: pathlib.Path, cell: dict, candidate: str, member: str, 
         if not line.strip():
             continue
         match = json.loads(line)
-        if match.get("status") == "UNKNOWN" or match.get("health_status") != "OBSERVED_HEALTHY":
+        if (capture_provenance.record_marked(match)
+                or match.get("status") == "UNKNOWN"
+                or match.get("health_status") != "OBSERVED_HEALTHY"):
             continue
         for row in match.get("bot_outcomes") or []:
             if row.get("bot_type") != candidate or (row.get("opponent") or {}).get("bot_type") != member:
