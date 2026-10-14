@@ -313,7 +313,12 @@ class DispositionTests(unittest.TestCase):
         seats = [self.seat("seat_0", "classic", "BLOCK", ["NEAR_EMPTY_FUNDS"],
                          error="terminal/integrity validation failed"),
                  self.seat("seat_1", "hard", "OBSERVED_HEALTHY")]
-        self.assertEqual(self.policy("BLOCK", seats)["disposition"], "blocking")
+        out = self.policy("BLOCK", seats)
+        self.assertEqual(out["disposition"], "blocking")
+        # Raw status and error survive unchanged in the retained record.
+        self.assertEqual(out["seats"][0]["status"], "BLOCK")
+        self.assertEqual(out["seats"][0]["error"],
+                         "terminal/integrity validation failed")
 
     def test_healthy_co_seat_with_error_blocks(self):
         # Same contract applied capture-wide: an errored OBSERVED_HEALTHY
@@ -339,6 +344,16 @@ class DispositionTests(unittest.TestCase):
         out = self.policy("BLOCK", seats)
         self.assertEqual(out["disposition"], "baseline_exempted")
         self.assertEqual(out["exempt_findings"], ["NEAR_EMPTY_FUNDS"])
+
+    def test_second_classic_with_error_blocks(self):
+        # A second classic seat carrying error cannot hide behind the first
+        # eligible classic BLOCK (Sol regression item 3; F1 symmetry).
+        seats = [self.seat("seat_0", "classic", "BLOCK", ["NEAR_EMPTY_FUNDS"]),
+                 self.seat("seat_1", "classic", "BLOCK", ["FUNDS_BELOW_BAND"],
+                         error="incomplete seat analysis")]
+        out = self.policy("BLOCK", seats, roster=TWO_CLASSIC)
+        self.assertEqual(out["disposition"], "blocking")
+        self.assertEqual(out["seats"][1]["error"], "incomplete seat analysis")
 
 
 class MissingSituationsTests(unittest.TestCase):
