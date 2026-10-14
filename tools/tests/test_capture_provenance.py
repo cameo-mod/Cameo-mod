@@ -1068,5 +1068,252 @@ class SentinelMarkerByteTests(unittest.TestCase):
         self.assertEqual(json.dumps(summary, indent=2), before)
 
 
+class EmbeddedReconciliationTests(unittest.TestCase):
+    """F2 (Sol ruling): receipt.artifacts and embedded capture_provenance are
+    independently sourced declarations that must agree on every consumed
+    artifact's resolved identity + digest, plus UID membership. The shared
+    validator drives validate_and_tag / adjudicate / classify_game alike;
+    byte attestation lives at file ingress via verify_artifact_bytes and
+    expected_health_seat_map — metadata reconciliation never claims bytes.
+    """
+
+    def bound(self, tmp, uid="g-1"):
+        """Receipt declaring one consumed artifact + an embedded binding that
+        covers it (relpath anchored at the cell root)."""
+        log = tmp / "cell" / "Support" / "Logs" / "cameo-ai-matches.jsonl"
+        write_jsonl(log, [match_row(uid=uid),
+                          match_row(uid=uid, seat="seat_1", outcome="lost")])
+        digest = prov.sha256_file(log)
+        receipt = {
+            "game_uid": uid,
+            "artifacts": {
+                "matches_jsonl": {"path": str(log), "sha256": digest,
+                                  "missing_reason": None},
+                # declared-absent artifact: not consumed, must not gate
+                "replay": {"path": None, "sha256": None,
+                           "missing_reason": "not produced"}},
+            "capture_provenance": {
+                "schema": prov.SCHEMA, "capture_kind": "match_batch",
+                "scoreable": True, "game_uids": [uid],
+                "artifacts": {"Support/Logs/cameo-ai-matches.jsonl": digest}},
+        }
+        return receipt, log
+
+    def analyze_verdict(self, receipt):
+        """Sink 1: analyzer.validate_and_tag on its own fixture shape."""
+        import copy
+        from test_ab_campaign_analyzer import receipt as fixture
+        r = fixture(pair_member=0, control_side="A", treatment_side="B",
+                    winner_team="B")
+        r["game_uid"] = receipt["game_uid"]
+        r["artifacts"] = copy.deepcopy(receipt["artifacts"])
+        r["capture_provenance"] = copy.deepcopy(receipt["capture_provenance"])
+        return az.validate_and_tag(r)
+
+    def pilot_verdict(self, receipt):
+        """Sink 2: pilot.adjudicate — real job wiring, in-memory call."""
+        import copy
+        from test_ab_campaign_pilot import manifest
+        m = manifest()
+        job = next(j for j in ab_campaign_pilot.make_jobs(m)
+                   if j["team_size"] == 1 and j["game_in_pair"] == 0)
+        loc = {"Multi0": "22,16", "Multi1": "49,55"}
+        seats = [dict(s, home_location=loc[s["home"]])
+                 for s in job["seat_assignments"]]
+        rows = [{"player": {"home": s["home_location"],
+                            "bot_type": s["bot_type"], "faction": s["faction"],
+                            "outcome": "won" if s["side"] == job["treatment_side"]
+                            else "lost"},
+                 "stats": {"stats_timeline_fields": "tick,earned,spent,banked",
+                           "stats_timeline": [[45000, 90, 40, 50]]}}
+                for s in seats]
+        rec = {"cell_id": job["cell_id"], "manifest_sha256": "a" * 64,
+               "switch": job["switch"], "setup": job["setup"], "map": job["map"],
+               "map_sha256": job["map_sha256"], "seed": job["seed"],
+               "pair": job["pair"], "game_in_pair": job["game_in_pair"],
+               "control_side": job["control_side"],
+               "treatment_side": job["treatment_side"],
+               "arm_bot_types": job["arm_bot_types"], "status": "NATURAL_END",
+               "end_reason": "natural", "seat_proof_source": "generated_map.yaml",
+               "map_yaml_sha256": "b" * 64, "seats": seats,
+               "game_uid": receipt["game_uid"],
+               "artifacts": copy.deepcopy(receipt["artifacts"]),
+               "capture_provenance": copy.deepcopy(receipt["capture_provenance"])}
+        return ab_campaign_pilot.adjudicate(rows, rec, job, "a" * 64)
+
+    def classify_verdict(self, receipt):
+        """Sink 3: ab_campaign.classify_game — direct-library call."""
+        import copy
+        from test_ab_campaign import records as ab_records
+        from test_ab_campaign import receipt as fixture
+        r = fixture()
+        r["game_uid"] = receipt["game_uid"]
+        r["artifacts"] = copy.deepcopy(receipt["artifacts"])
+        r["capture_provenance"] = copy.deepcopy(receipt["capture_provenance"])
+        return ab_campaign.classify_game(ab_records(receipt["game_uid"]), r)
+
+    def assert_all_sinks_reject(self, receipt):
+        tagged = self.analyze_verdict(receipt)
+        self.assertFalse(tagged["_valid"])
+        self.assertIn("capture provenance", tagged["_invalid_reason"])
+        out = self.pilot_verdict(receipt)
+        self.assertEqual(out["verdict"], "INVALID_UNKNOWN")
+        self.assertIn("capture provenance", out["reason"])
+        verdict, why = self.classify_verdict(receipt)
+        self.assertEqual(verdict, "INVALID_UNKNOWN")
+        self.assertIn("capture provenance", why)
+
+    def test_valid_bound_capture_reconciles_at_all_sinks(self):
+        with tempfile.TemporaryDirectory() as td:
+            receipt, _log = self.bound(pathlib.Path(td))
+            ok, _why = prov.reconcile_embedded_provenance(receipt)
+            self.assertTrue(ok)
+            self.assertTrue(self.analyze_verdict(receipt)["_valid"])
+            self.assertEqual(self.pilot_verdict(receipt)["verdict"],
+                             "TREATMENT_WIN")
+            self.assertEqual(self.classify_verdict(receipt)[0],
+                             "TREATMENT_WIN")
+
+    def test_receipt_side_tamper_rejects_everywhere(self):
+        with tempfile.TemporaryDirectory() as td:
+            receipt, _log = self.bound(pathlib.Path(td))
+            receipt["artifacts"]["matches_jsonl"]["sha256"] = "0" * 64
+            ok, why = prov.reconcile_embedded_provenance(receipt)
+            self.assertFalse(ok)
+            self.assertIn("disagrees", why)
+            self.assert_all_sinks_reject(receipt)
+
+    def test_embedded_side_tamper_rejects_everywhere(self):
+        with tempfile.TemporaryDirectory() as td:
+            receipt, _log = self.bound(pathlib.Path(td))
+            rel = next(iter(receipt["capture_provenance"]["artifacts"]))
+            receipt["capture_provenance"]["artifacts"][rel] = "f" * 64
+            ok, _why = prov.reconcile_embedded_provenance(receipt)
+            self.assertFalse(ok)
+            self.assert_all_sinks_reject(receipt)
+
+    def test_missing_binding_entry_rejects_everywhere(self):
+        with tempfile.TemporaryDirectory() as td:
+            receipt, _log = self.bound(pathlib.Path(td))
+            receipt["capture_provenance"]["artifacts"] = {}
+            ok, why = prov.reconcile_embedded_provenance(receipt)
+            self.assertFalse(ok)
+            self.assertIn("absent from embedded binding", why)
+            self.assert_all_sinks_reject(receipt)
+
+    def test_wrong_uid_rejects_everywhere(self):
+        with tempfile.TemporaryDirectory() as td:
+            receipt, _log = self.bound(pathlib.Path(td))
+            receipt["capture_provenance"]["game_uids"] = ["uid-other"]
+            self.assertFalse(prov.reconcile_embedded_provenance(receipt)[0])
+            self.assert_all_sinks_reject(receipt)
+
+    def test_ambiguous_identity_rejects_everywhere(self):
+        with tempfile.TemporaryDirectory() as td:
+            receipt, _log = self.bound(pathlib.Path(td))
+            # Both relpaths suffix-match the declared path — no unique
+            # resolution, fail closed instead of guessing.
+            arts = receipt["capture_provenance"]["artifacts"]
+            arts["Logs/cameo-ai-matches.jsonl"] = arts[
+                "Support/Logs/cameo-ai-matches.jsonl"]
+            ok, why = prov.reconcile_embedded_provenance(receipt)
+            self.assertFalse(ok)
+            self.assertIn("ambiguous", why)
+            self.assert_all_sinks_reject(receipt)
+
+    def test_changed_bytes_reject_at_ingress(self):
+        with tempfile.TemporaryDirectory() as td:
+            receipt, log = self.bound(pathlib.Path(td))
+            log.write_text(log.read_text(encoding="utf-8") + " ",
+                           encoding="utf-8")
+            ok, why = prov.verify_artifact_bytes(receipt, "matches_jsonl", log)
+            self.assertFalse(ok)
+            self.assertIn("differ", why)
+            tagged = self.analyze_verdict(receipt)
+            self.assertTrue(tagged["_valid"],
+                            "metadata tables still agree — bytes alone fail")
+
+    def test_coordinated_tamper_fails_against_real_bytes(self):
+        with tempfile.TemporaryDirectory() as td:
+            receipt, log = self.bound(pathlib.Path(td))
+            forged = "9" * 64
+            receipt["artifacts"]["matches_jsonl"]["sha256"] = forged
+            receipt["capture_provenance"]["artifacts"][
+                "Support/Logs/cameo-ai-matches.jsonl"] = forged
+            ok, _why = prov.reconcile_embedded_provenance(receipt)
+            self.assertTrue(ok, "coordinated metadata rewrite is self-consistent")
+            ok, why = prov.verify_artifact_bytes(receipt, "matches_jsonl", log)
+            self.assertFalse(ok, "both declarations forged — bytes disagree")
+
+    def test_sentinel_marked_embedded_rejects_everywhere(self):
+        with tempfile.TemporaryDirectory() as td:
+            receipt, _log = self.bound(pathlib.Path(td))
+            receipt["capture_provenance"]["scoreable"] = False
+            self.assertFalse(prov.reconcile_embedded_provenance(receipt)[0])
+            self.assert_all_sinks_reject(receipt)
+
+    def test_rejection_emits_no_score_or_verdict_output(self):
+        # A rejected game yields only INVALID_UNKNOWN/_valid:False — never a
+        # win verdict, never a pooled/scored row.
+        with tempfile.TemporaryDirectory() as td:
+            receipt, _log = self.bound(pathlib.Path(td))
+            receipt["capture_provenance"]["game_uids"] = []
+            tagged = self.analyze_verdict(receipt)
+            self.assertFalse(tagged["_valid"])
+            self.assertIsNotNone(tagged["_invalid_reason"])
+            self.assertEqual(self.pilot_verdict(receipt)["verdict"],
+                             "INVALID_UNKNOWN")
+            verdict, _why = self.classify_verdict(receipt)
+            self.assertEqual(verdict, "INVALID_UNKNOWN")
+            self.assertNotIn(verdict, ("TREATMENT_WIN", "CONTROL_WIN",
+                                       "CENSORED_CAP"))
+
+    def test_health_seat_map_verifies_bytes_against_both_declarations(self):
+        # The analyzer's real file-ingress path: bytes matching the receipt
+        # record but not the embedded binding are refused; a coordinated
+        # metadata rewrite fails against live bytes.
+        from test_ab_campaign_analyzer import receipt as fixture
+        with tempfile.TemporaryDirectory() as td:
+            tmp = pathlib.Path(td)
+            receipt, log = self.bound(tmp, uid="uid-hs-1")
+            r = fixture(pair_member=0, control_side="A", treatment_side="B",
+                        winner_team="B")
+            r["game_uid"] = "uid-hs-1"
+            r["seats"][0]["home_location"] = "h0"
+            r["seats"][0]["bot_type"] = "classic"
+            r["seats"][1]["home_location"] = "h1"
+            r["seats"][1]["bot_type"] = "hard"
+            r["artifacts"]["matches_jsonl"] = dict(
+                receipt["artifacts"]["matches_jsonl"])
+            r["capture_provenance"] = receipt["capture_provenance"]
+            write_jsonl(log, [
+                {"game_uid": "uid-hs-1",
+                 "player": {"seat": "seat_0", "home": "h0",
+                            "faction": "td_gdi", "bot_type": "classic"}},
+                {"game_uid": "uid-hs-1",
+                 "player": {"seat": "seat_1", "home": "h1",
+                            "faction": "td_gdi", "bot_type": "hard"}}])
+            digest = prov.sha256_file(log)
+            r["artifacts"]["matches_jsonl"]["sha256"] = digest
+            r["capture_provenance"]["artifacts"][
+                "Support/Logs/cameo-ai-matches.jsonl"] = digest
+            seat_map, status, _detail = az.expected_health_seat_map(r)
+            self.assertEqual(status, "OK")
+            self.assertIsNotNone(seat_map)
+            # bytes drift: both declarations now disagree with the file
+            log.write_text(log.read_text(encoding="utf-8") + "\n",
+                           encoding="utf-8")
+            seat_map, status, detail = az.expected_health_seat_map(r)
+            self.assertEqual(status, "SCHEMA_MISMATCH")
+            self.assertIsNone(seat_map)
+            # coordinated rewrite of both tables still fails against bytes
+            forged = "0" * 64
+            r["artifacts"]["matches_jsonl"]["sha256"] = forged
+            r["capture_provenance"]["artifacts"][
+                "Support/Logs/cameo-ai-matches.jsonl"] = forged
+            _m, status, _d = az.expected_health_seat_map(r)
+            self.assertEqual(status, "SCHEMA_MISMATCH")
+
+
 if __name__ == "__main__":
     unittest.main()

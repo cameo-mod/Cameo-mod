@@ -510,17 +510,12 @@ def adjudicate(records, receipt, job, manifest_sha):
   return {"verdict":"INVALID_UNKNOWN","reason":"sentinel-captured receipt"}
  prov=receipt.get("capture_provenance")
  if prov is not None:
-  artifacts=receipt.get("artifacts") or {}
-  prov_artifacts=prov.get("artifacts") if isinstance(prov,dict) else None
-  uid_ok=(isinstance(prov,dict) and isinstance(prov.get("game_uids"),list) and receipt.get("game_uid") in prov["game_uids"])
-  sha_ok=True
-  if isinstance(prov_artifacts,dict):
-   for name,declared in prov_artifacts.items():
-    have=(artifacts.get(name) or {}).get("sha256")
-    if isinstance(have,str) and isinstance(declared,str) and have!=declared:
-     sha_ok=False;break
-  if not isinstance(prov,dict) or not uid_ok or not sha_ok or capture_provenance.record_marked(prov):
-   return {"verdict":"INVALID_UNKNOWN","reason":"capture provenance mismatch"}
+  # Embedded binding must re-prove UID membership AND reconcile every
+  # consumed artifact record against the binding's declared digests for the
+  # same resolved identity (metadata-only; bytes are attested at ingress).
+  ok,why=capture_provenance.reconcile_embedded_provenance(receipt)
+  if not ok:
+   return {"verdict":"INVALID_UNKNOWN","reason":f"capture provenance mismatch: {why}"}
  if any(capture_provenance.record_marked(r) for r in records):
   return {"verdict":"INVALID_UNKNOWN","reason":"sentinel-captured match records"}
  if any(receipt.get(k)!=job[k] for k in ("switch","setup","map","map_sha256","seed","pair","game_in_pair")):

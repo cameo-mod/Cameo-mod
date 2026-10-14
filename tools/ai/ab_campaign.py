@@ -174,15 +174,19 @@ def classify_game(records, receipt):
         return "INVALID_UNKNOWN", "game_uid/receipt missing"
     prov = receipt.get("capture_provenance")
     if prov is not None:
-        # Embedded binding must re-prove this game's UID membership; a
-        # sentinel-bound or mismatched provenance rejects the game.
+        # Embedded binding must re-prove this game's UID membership (the
+        # records' uid AND the receipt's own) and reconcile every consumed
+        # artifact record against the binding's declared digests for the
+        # same resolved identity; sentinel-marked or mismatched provenance
+        # rejects the game. Metadata-only — bytes are attested at ingress.
         uid = next(iter(uid_set))
         if (not isinstance(prov, dict)
-                or prov.get("capture_kind") == capture_provenance.SENTINEL_KIND
-                or prov.get("scoreable") is False
                 or not isinstance(prov.get("game_uids"), list)
                 or uid not in prov["game_uids"]):
             return "INVALID_UNKNOWN", "capture provenance rejected"
+        ok, why = capture_provenance.reconcile_embedded_provenance(receipt)
+        if not ok:
+            return "INVALID_UNKNOWN", f"capture provenance rejected: {why}"
     seats = receipt.get("seats")
     if not isinstance(seats, list) or not seats:
         return "INVALID_UNKNOWN", "resolved seat proof missing"

@@ -3,6 +3,8 @@ import json
 import pathlib
 import sys
 
+import pytest
+
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1] / "ai"))
 import capture_provenance  # noqa: E402
 import tune_build_order as tbo  # noqa: E402
@@ -522,3 +524,71 @@ def test_spsa_trajectory_is_deterministic_end_to_end():
         return learned["knobs"], learned["spsa_steps"]
 
     assert run() == run()
+
+
+def _gate_batch(root, name="arm_g", marked=None):
+    """Batch dir with the three Logs streams; marked None leaves it unbound
+    (gate rejects), True sentinel-binds (gate skips), False scoreable-binds."""
+    logs = root / name / "Logs"
+    logs.mkdir(parents=True)
+    (logs / "cameo-ai-engagements.jsonl").write_text(
+        json.dumps({"game_uid": "g1", "seat": "seat_0",
+                    "score": {"total_milli": 500}}) + "\n", encoding="utf-8")
+    (logs / "cameo-ai-matches.jsonl").write_text(json.dumps(
+        {"game_uid": "g1", "duration_ticks": 27000, "allies": [],
+         "opponents": [{"faction": "ra1_soviets"}],
+         "player": {"name": "Multi0", "faction": "ra1_allies",
+                    "outcome": "won", "personality": "rush"},
+         "stats": {"kills_cost": 9000, "deaths_cost": 1000}}) + "\n",
+        encoding="utf-8")
+    (logs / "cameo-ai-situations.jsonl").write_text(json.dumps(
+        {"game_uid": "g1", "player": "Multi0", "tick": 100,
+         "own": {"build_order": {"personality": "rush", "opening": "eco",
+                                 **{f"base_{k}": 1000 for k in tbo.KNOBS}}}}) + "\n",
+        encoding="utf-8")
+    if marked is not None:
+        capture_provenance.write_provenance(
+            root / name,
+            capture_kind="sentinel_diagnostic" if marked else "match_batch",
+            scoreable=not marked, game_uids=["g1"])
+    return root / name
+
+
+def test_load_engagement_means_gate_sentinel_skip_unbound_reject(tmp_path):
+    # Gate site: load_engagement_means' per-dir engagements ingest.
+    assert tbo.load_engagement_means([_gate_batch(tmp_path / "s", marked=True)]) == {}
+    with pytest.raises(ValueError):
+        tbo.load_engagement_means([_gate_batch(tmp_path / "u")])
+    means = tbo.load_engagement_means([_gate_batch(tmp_path / "b", marked=False)])
+    assert means[("g1", "seat_0")] == [500.0, 1]
+
+
+def test_load_engagement_coverage_gate_sentinel_skip_unbound_reject(tmp_path):
+    # Gate site: load_engagement_coverage's per-dir engagements ingest.
+    assert tbo.load_engagement_coverage([_gate_batch(tmp_path / "s", marked=True)]) == {}
+    with pytest.raises(ValueError):
+        tbo.load_engagement_coverage([_gate_batch(tmp_path / "u")])
+    census = tbo.load_engagement_coverage([_gate_batch(tmp_path / "b", marked=False)])
+    assert list(census.values()) == [[1, 0, 1]]
+
+
+def test_load_matches_detailed_gate_sentinel_skip_unbound_reject(tmp_path):
+    # Gate site: load_matches_detailed gates matches + situations per dir.
+    rows, cov = tbo.load_matches_detailed([_gate_batch(tmp_path / "s", marked=True)])
+    assert rows == [] and cov == {}
+    with pytest.raises(ValueError):
+        tbo.load_matches_detailed([_gate_batch(tmp_path / "u")])
+    rows, cov = tbo.load_matches_detailed([_gate_batch(tmp_path / "b", marked=False)])
+    assert len(rows) == 1 and rows[0]["opening"] == "eco"
+    assert cov
+
+
+def test_load_matches_detailed_sentinel_situations_alone_skips_dir(tmp_path):
+    # The two-file gate: a bound matches file alongside a sentinel-bound
+    # situations file still skips the whole dir — no partial ingest.
+    d = _gate_batch(tmp_path / "m", marked=False)
+    capture_provenance.write_file_sibling(
+        d / "Logs" / "cameo-ai-situations.jsonl", game_uids=["g1"],
+        capture_kind="sentinel_diagnostic", scoreable=False)
+    rows, cov = tbo.load_matches_detailed([d])
+    assert rows == [] and cov == {}

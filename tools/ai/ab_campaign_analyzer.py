@@ -121,24 +121,15 @@ def validate_and_tag(receipt: dict) -> dict:
     prov = receipt.get("capture_provenance")
     if prov is not None:
         # When the producer embedded its provenance binding, the receipt's own
-        # game_uid must be a bound member and every artifact sha in the binding
-        # must agree with the receipt's artifact table. Anything else is a
-        # mismatched/conflicting association -> reject the game.
-        artifacts = receipt.get("artifacts") or {}
-        prov_artifacts = prov.get("artifacts") if isinstance(prov, dict) else None
-        uid_ok = (isinstance(prov, dict)
-                  and isinstance(prov.get("game_uids"), list)
-                  and receipt.get("game_uid") in prov["game_uids"])
-        sha_ok = True
-        if isinstance(prov_artifacts, dict):
-            for name, declared in prov_artifacts.items():
-                have = (artifacts.get(name) or {}).get("sha256")
-                if isinstance(have, str) and isinstance(declared, str) and have != declared:
-                    sha_ok = False
-                    break
-        if not isinstance(prov, dict) or not uid_ok or not sha_ok or capture_provenance.record_marked(prov):
+        # game_uid must be a bound member and every consumed artifact record
+        # must reconcile against the embedded binding for the same resolved
+        # identity (independent tables, unique path-suffix resolution).
+        # Metadata-only — byte attestation is verify_artifact_bytes() at
+        # ingress. Anything else is a mismatched association -> reject.
+        ok, why = capture_provenance.reconcile_embedded_provenance(receipt)
+        if not ok:
             receipt["_valid"] = False
-            receipt["_invalid_reason"] = "capture provenance mismatch"
+            receipt["_invalid_reason"] = f"capture provenance mismatch: {why}"
             return receipt
     receipt["_valid"] = True
     receipt["_invalid_reason"] = None
@@ -231,6 +222,14 @@ def expected_health_seat_map(receipt: dict) -> tuple[dict[str, dict] | None, str
     expected_sha = art.get("sha256")
     if isinstance(expected_sha, str) and hashlib.sha256(raw).hexdigest() != expected_sha:
         return None, "SCHEMA_MISMATCH", "matches_jsonl sha256 differs from the receipt artifact record"
+    # File ingress: when the receipt carries an embedded binding the bytes
+    # must additionally match ITS declaration for the same identity —
+    # coordinated tamper of both metadata tables still fails against bytes.
+    if receipt.get("capture_provenance") is not None:
+        ok, why = capture_provenance.verify_artifact_bytes(receipt, "matches_jsonl",
+                                                         pathlib.Path(path))
+        if not ok:
+            return None, "SCHEMA_MISMATCH", f"matches_jsonl: {why}"
     rows = []
     for line in raw.decode("utf-8", errors="replace").splitlines():
         try:

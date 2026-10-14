@@ -61,6 +61,9 @@ def mrec(seat, uid=UID, faction="td_nod", bot="classic", home="1,1"):
 PLANNED = [("seat_0", "td_nod", "classic", "1,1"),
            ("seat_1", "td_gdi", "hard", "2,2")]
 
+TWO_CLASSIC = [("seat_0", "td_nod", "classic", "1,1"),
+               ("seat_1", "td_nod", "classic", "2,2")]
+
 
 def write_leaf(rows):
     leaf = pathlib.Path(tempfile.mkdtemp(prefix="sentinel_leaf_"))
@@ -270,6 +273,38 @@ class DispositionTests(unittest.TestCase):
         self.assertEqual(self.policy("BLOCK", seats, roster=roster)["disposition"],
                          "blocking")
 
+    def test_two_eligible_classic_seats_are_baseline_exempted(self):
+        seats = [self.seat("seat_0", "classic", "BLOCK", ["NEAR_EMPTY_FUNDS"]),
+                 self.seat("seat_1", "classic", "BLOCK", ["FUNDS_BELOW_BAND"])]
+        out = self.policy("BLOCK", seats, roster=TWO_CLASSIC)
+        self.assertEqual(out["disposition"], "baseline_exempted")
+        self.assertEqual(out["exempt_findings"],
+                         ["FUNDS_BELOW_BAND", "NEAR_EMPTY_FUNDS"])
+
+    def test_second_classic_warn_finding_blocks(self):
+        # The exempted candidate cannot cover for a second classic seat
+        # whose allowed code carries a non-DEFECT severity.
+        seats = [self.seat("seat_0", "classic", "BLOCK", ["NEAR_EMPTY_FUNDS"]),
+                 self.seat("seat_1", "classic", "BLOCK", ["FUNDS_BELOW_BAND"],
+                           severities=["WARN"])]
+        self.assertEqual(self.policy("BLOCK", seats, roster=TWO_CLASSIC)["disposition"],
+                         "blocking")
+
+    def test_second_classic_non_dict_finding_blocks(self):
+        seats = [self.seat("seat_0", "classic", "BLOCK", ["NEAR_EMPTY_FUNDS"]),
+                 {"player": "seat_1", "status": "BLOCK", "error": None,
+                  "findings": [{"code": "FUNDS_BELOW_BAND", "severity": "DEFECT",
+                                "tick": 1},
+                               "truncated-finding-row"]}]
+        self.assertEqual(self.policy("BLOCK", seats, roster=TWO_CLASSIC)["disposition"],
+                         "blocking")
+
+    def test_second_classic_disallowed_code_blocks(self):
+        seats = [self.seat("seat_0", "classic", "BLOCK", ["NEAR_EMPTY_FUNDS"]),
+                 self.seat("seat_1", "classic", "BLOCK", ["STORAGE_FULL"])]
+        self.assertEqual(self.policy("BLOCK", seats, roster=TWO_CLASSIC)["disposition"],
+                         "blocking")
+
 
 class MissingSituationsTests(unittest.TestCase):
     """Verdict-layer predicate only — checker output is never altered."""
@@ -332,6 +367,13 @@ class DispatchRefusalTests(unittest.TestCase):
     def test_team_size_two_refused(self):
         self.run_main(["--factions", "td_gdi", "--team-size", "2",
                        "--repeats", "1", "--retries", "0"])
+
+    def test_require_economy_health_refused(self):
+        # The combination would silently convert every baseline_exempted
+        # BLOCK to UNKNOWN — refused at parse, never coerced.
+        self.run_main(["--factions", "td_gdi", "--team-size", "1",
+                       "--repeats", "1", "--retries", "0",
+                       "--require-economy-health"])
 
 
 class ScoreboardQuarantineTests(unittest.TestCase):

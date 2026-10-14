@@ -1716,6 +1716,12 @@ def main() -> int:
             sentinel_bad.append(f"--repeats 1 (got {args.repeats})")
         if args.retries != 0:
             sentinel_bad.append(f"--retries 0 (got {args.retries})")
+        if args.require_economy_health:
+            # The sentinel policy owns the health verdict layer: combining the
+            # flag would convert every baseline_exempted BLOCK to UNKNOWN,
+            # silently defeating the granted exemption. Refuse, never coerce.
+            sentinel_bad.append("incompatible with --require-economy-health "
+                                "(the disposition policy already gates health)")
         if sentinel_bad:
             fail("--sentinel-diagnostic requires " + "; ".join(sentinel_bad))
 

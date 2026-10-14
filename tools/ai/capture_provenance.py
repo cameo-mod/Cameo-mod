@@ -426,3 +426,143 @@ def provenance_state(path: pathlib.Path) -> str:
     if why.startswith("malformed") or "conflicting provenance" in why:
         return "corrupt"
     return "absent"
+
+
+_HEX = frozenset("0123456789abcdef")
+
+
+def _is_sha(value) -> bool:
+    return (isinstance(value, str) and len(value) == 64
+            and all(ch in _HEX for ch in value.lower()))
+
+
+def _path_parts(p) -> tuple[str, ...] | None:
+    """Normalized segment tuple for identity matching — both separators,
+    empty and '.' segments dropped. None for non-string/blank input."""
+    if not isinstance(p, str) or not p.strip():
+        return None
+    parts = tuple(seg for seg in p.replace("\\", "/").split("/")
+                  if seg not in ("", "."))
+    return parts or None
+
+
+def _resolve_prov_identity(record_path, prov_artifacts: dict):
+    """Resolve a consumed artifact's declared path to its entry in an
+    embedded binding's {relpath: sha} table.
+
+    A binding key resolves the record only when the key's segments are a
+    suffix of the record path's segments — the relpath is anchored at the
+    manifest's own directory. Exactly one match resolves the identity; zero
+    is a missing entry, more than one is ambiguous — both fail closed, the
+    resolver never guesses."""
+    parts = _path_parts(record_path)
+    if parts is None:
+        return None, f"artifact path {record_path!r} missing/malformed"
+    hits = []
+    for rel in prov_artifacts:
+        rel_parts = _path_parts(rel)
+        if (rel_parts and len(parts) >= len(rel_parts)
+                and parts[len(parts) - len(rel_parts):] == rel_parts):
+            hits.append(rel)
+    if len(hits) == 1:
+        return hits[0], None
+    if not hits:
+        return None, f"artifact path {record_path!r} absent from embedded binding"
+    return None, f"artifact path {record_path!r} resolves ambiguously: {sorted(hits)}"
+
+
+def reconcile_embedded_provenance(receipt: dict) -> tuple[bool, str]:
+    """Metadata-only reconciliation between a receipt's own `artifacts` role
+    table and its embedded `capture_provenance` binding.
+
+    The two are independently sourced declarations: the producer writes
+    `artifacts` as {role: {path, sha256}} records while the capture layer
+    binds the tree as {relpath: sha256}. Every consumed artifact record
+    (path + sha256 both present) must resolve to exactly one binding entry
+    by unique path-suffix identity and declare the same digest; a record
+    whose path and sha256 are both null is a declared-absent artifact
+    (e.g. an unproduced replay), not a consumed one. The receipt's game_uid
+    must be a bound member. Sentinel-marked bindings fail.
+
+    Pure metadata reconciliation — this attests nothing about file bytes.
+    Byte attestation lives at file ingress: assess_file()/gate_ingest()
+    verify bytes against the file-level binding, and
+    verify_artifact_bytes() verifies a consumed artifact against BOTH the
+    receipt declaration and the embedded binding.
+    """
+    prov = receipt.get("capture_provenance") if isinstance(receipt, dict) else None
+    if prov is None:
+        return True, "no embedded provenance"
+    if not isinstance(prov, dict):
+        return False, "embedded capture_provenance is not a mapping"
+    if record_marked(prov):
+        return False, "embedded provenance is sentinel-marked"
+    uids = prov.get("game_uids")
+    if (not isinstance(uids, list)
+            or receipt.get("game_uid") not in uids):
+        return False, "receipt game_uid not bound by embedded provenance"
+    prov_artifacts = prov.get("artifacts")
+    if not isinstance(prov_artifacts, dict):
+        return False, "embedded provenance artifact table missing/malformed"
+    artifacts = receipt.get("artifacts")
+    if artifacts is None:
+        artifacts = {}
+    if not isinstance(artifacts, dict):
+        return False, "receipt artifacts table malformed"
+    for role, record in artifacts.items():
+        if not isinstance(record, dict):
+            return False, f"artifact record for {role!r} malformed"
+        rpath, rsha = record.get("path"), record.get("sha256")
+        if rpath is None and rsha is None:
+            continue  # declared-absent artifact — nothing consumed to bind
+        if not isinstance(rpath, str) or not _is_sha(rsha):
+            return False, f"artifact record for {role!r} malformed"
+        rel, why = _resolve_prov_identity(rpath, prov_artifacts)
+        if rel is None:
+            return False, f"{role}: {why}"
+        declared = prov_artifacts[rel]
+        if not _is_sha(declared):
+            return False, f"{role}: embedded binding entry {rel!r} malformed"
+        if declared != rsha:
+            return False, f"{role}: sha256 disagrees with embedded binding {rel!r}"
+    return True, "receipt artifacts agree with embedded provenance"
+
+
+def verify_artifact_bytes(receipt: dict, role: str,
+                          path: pathlib.Path) -> tuple[bool, str]:
+    """File-ingress byte attestation for one consumed artifact.
+
+    The live bytes of `path` must equal BOTH independently sourced
+    declarations: the receipt's artifact record for `role` and the embedded
+    capture_provenance binding entry for the same resolved identity. A
+    receipt without an embedded binding reduces to the role-table check —
+    but embedded provenance that exists yet cannot cover the artifact fails
+    closed (missing/ambiguous/conflicting entries are never tolerated).
+    """
+    artifacts = receipt.get("artifacts") if isinstance(receipt, dict) else None
+    record = (artifacts or {}).get(role)
+    if not isinstance(record, dict):
+        return False, f"no artifact record for {role!r}"
+    declared_receipt = record.get("sha256")
+    if record.get("path") is None or not _is_sha(declared_receipt):
+        return False, f"artifact {role!r} not bound in the receipt table"
+    f = pathlib.Path(path)
+    if not f.is_file():
+        return False, f"consumed artifact {f} missing"
+    actual = sha256_file(f)
+    if actual != declared_receipt:
+        return False, f"{role} bytes differ from the receipt artifact record"
+    prov = receipt.get("capture_provenance")
+    if prov is not None:
+        prov_artifacts = prov.get("artifacts") if isinstance(prov, dict) else None
+        if not isinstance(prov_artifacts, dict):
+            return False, "embedded provenance artifact table missing/malformed"
+        rel, why = _resolve_prov_identity(record["path"], prov_artifacts)
+        if rel is None:
+            return False, f"{role}: {why}"
+        declared_prov = prov_artifacts[rel]
+        if not _is_sha(declared_prov):
+            return False, f"{role}: embedded binding entry {rel!r} malformed"
+        if actual != declared_prov:
+            return False, f"{role} bytes differ from the embedded provenance binding"
+    return True, f"{role} bytes match every declaration"

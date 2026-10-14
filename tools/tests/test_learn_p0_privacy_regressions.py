@@ -142,3 +142,19 @@ def test_takeover_smoke_accepts_actual_anonymous_seat_after_neutral_slots():
     result={'game_started':True};ev={'exceptions':[],'sync_reports':[]}
     assert takeover_smoke.j_admin_kill(result,ev,[('c1','seat_4',{'trigger':'disconnect'})])[0]
     assert not takeover_smoke.j_admin_kill(result,ev,[('c1','Bravo',{'trigger':'disconnect'})])[0]
+
+
+def test_opponent_signatures_gate_sentinel_skips_unbound_rejects_bound_loads(tmp_path):
+    # fit()'s per-file ingest gate: sentinel captures never cluster, unbound
+    # evidence rejects, bound evidence loads.
+    row=match('seat_4')
+    seen={k:0 for k in signatures.FEATURES};seen.update(faction='td_nod',army_value=800)
+    row['opponent_signatures']=[{'seat':'seat_13','seen':seen,'truth':seen}]
+    quarantined=write(tmp_path/'quarantined.jsonl',[row])
+    capture_provenance.write_file_sibling(quarantined,game_uids=[row['game_uid']],
+                                          capture_kind='sentinel_diagnostic',scoreable=False)
+    assert signatures.fit([quarantined])['clusters']==[]
+    with pytest.raises(ValueError):
+        signatures.fit([write(tmp_path/'unbound.jsonl',[row])])
+    fitted=signatures.fit([bind(write(tmp_path/'bound.jsonl',[row]))])
+    assert fitted['clusters'][0]['faction']=='td_nod'
