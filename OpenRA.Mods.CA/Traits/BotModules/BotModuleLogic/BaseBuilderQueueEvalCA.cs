@@ -610,12 +610,15 @@ namespace OpenRA.Mods.CA.Traits
 		/// tick, never intent or correlation. Elimination trumps all (the seat ended); a
 		/// dead or disposed producer clears its queue on every lifecycle path (kill, sell,
 		/// demolish, transform — INotifyKilled/Selling/BeforeTransform all ClearQueue); a
-		/// live producer owned by someone else was captured (OnOwnerChanged → ClearQueue);
-		/// an item absent from the buildable set of its own live, owned, still-observed
-		/// queue left by rules eviction — the engine diffs exactly that set to evict
-		/// (CancelUnbuildableItems). Anything else stays None = UNKNOWN: queueSeen gates
-		/// the last benign rung because a stale watch on a live, owned queue is not
-		/// buildability evidence.</summary>
+		/// live producer owned by someone else was captured (OnOwnerChanged → ClearQueue
+		/// is unconditional). DISCRIMINATOR-REPAIR (01a13908, Sol adjudication
+		/// 2026-10-14): the buildable-absence rung emits Unbuildable as a DIAGNOSTIC
+		/// predicate only — CancelUnbuildableItems is cached-set gated and prefers
+		/// migration, so observed absence is not a receipt that the engine evicted this
+		/// item (an uninstrumented removal plus prerequisite loss before the next probe
+		/// reads identically). Evidence classifies Unbuildable UNKNOWN like None;
+		/// queueSeen still gates the probe because a stale watch on a live, owned queue
+		/// is not even diagnostic buildability evidence.</summary>
 		public static BotQueueCancellationClass RemovalCauseClass(
 			bool playerEliminated, bool producerLive, bool producerOwned, bool queueSeen, bool itemBuildable)
 		{
@@ -819,8 +822,11 @@ namespace OpenRA.Mods.CA.Traits
 
 		/// <summary>QUEUE-REMOVAL-DISCRIMINATOR (01a13686): the item left a live, owned,
 		/// still-observed queue while absent from that queue's own BuildableItems set —
-		/// the exact set CancelUnbuildableItems diffs to evict. A proven rules eviction
-		/// (prerequisite/provider churn), not an unproven drop.</summary>
+		/// the exact set CancelUnbuildableItems diffs to evict. DISCRIMINATOR-REPAIR
+		/// (01a13908, Sol adjudication 2026-10-14): diagnostic-only, NEVER
+		/// evidence-admitted — the engine's eviction is cached-set gated and prefers
+		/// migration, so absence is not a receipt the routine ran. Serialized on the
+		/// raw row for diagnosis; the capture latches UNKNOWN like None.</summary>
 		Unbuildable
 	}
 

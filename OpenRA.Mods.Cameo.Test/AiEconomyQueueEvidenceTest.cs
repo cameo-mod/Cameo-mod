@@ -29,10 +29,16 @@ namespace OpenRA.Mods.Cameo.Test
 
 		[TestCase(BotQueueCancellationClass.None)]
 		[TestCase(BotQueueCancellationClass.Production)]
+		[TestCase(BotQueueCancellationClass.Unbuildable)]
 		public void UnresolvedRemovedWithoutProvenCauseRemainsUnknown(BotQueueCancellationClass cls)
 		{
 			// An item that vanishes while its proof is still armed — no recorded cancel
-			// intent, no proven placement, no event-local removal cause — is UNKNOWN.
+			// intent, no proven placement, no proven event-local removal cause — is
+			// UNKNOWN. DISCRIMINATOR-REPAIR (01a13908, Sol adjudication 2026-10-14):
+			// Unbuildable sits here too — a coincident unexplained removal plus
+			// unbuildability reads identically to a real CancelUnbuildableItems
+			// eviction (cached-set gate, migration-first), so the diagnostic class
+			// can never pass the latch.
 			var t = Transition(BotQueueTransitionKind.Removed, cls: cls);
 			Assert.That(AiEconomyQueueEvidence.Classify(in t), Is.EqualTo(EconomyQueueEvidenceKind.Unknown));
 			Assert.That(AiEconomyQueueEvidence.Classify(in t, false), Is.EqualTo(EconomyQueueEvidenceKind.Unknown));
@@ -42,14 +48,14 @@ namespace OpenRA.Mods.Cameo.Test
 		[TestCase(BotQueueCancellationClass.Destruction)]
 		[TestCase(BotQueueCancellationClass.Elimination)]
 		[TestCase(BotQueueCancellationClass.Captured)]
-		[TestCase(BotQueueCancellationClass.Unbuildable)]
 		public void RemovedWithProvenEventLocalRemovalCauseObserves(BotQueueCancellationClass cls)
 		{
 			// A collapsing seat's queue items leave with a proven event-local removal
 			// cause — the same evidence standard a Cancelled row carries. The removal is
-			// accounted, not missing data, so the tail stays complete. Captured and
-			// Unbuildable join the proven set: owner change on a live producer and
-			// absence from the queue's own buildable set are both emit-tick facts.
+			// accounted, not missing data, so the tail stays complete. Only the
+			// unconditional mechanism classes admit (kill/sell/transform and capture
+			// ClearQueue unconditionally); Unbuildable is diagnostic-only per Sol
+			// adjudication 2026-10-14.
 			var t = Transition(BotQueueTransitionKind.Removed, cls: cls);
 			Assert.That(AiEconomyQueueEvidence.Classify(in t), Is.EqualTo(EconomyQueueEvidenceKind.Observation));
 			Assert.That(AiEconomyQueueEvidence.Classify(in t, false), Is.EqualTo(EconomyQueueEvidenceKind.Observation));
@@ -71,11 +77,15 @@ namespace OpenRA.Mods.Cameo.Test
 
 		[TestCase(BotQueueCancellationClass.None)]
 		[TestCase(BotQueueCancellationClass.Production)]
+		[TestCase(BotQueueCancellationClass.Unbuildable)]
 		public void RemovedAfterResolvedEpisodeIsBookkeeping(BotQueueCancellationClass cls)
 		{
 			// The t10840 leaf case: a Ready item the module withdrew with recorded
 			// CancelOrdered intent dequeues later as Removed. The outcome is already on
-			// record — the dequeue adds nothing and must not poison the capture.
+			// record — the dequeue adds nothing and must not poison the capture. An
+			// independently resolved episode keeps its classification even when the
+			// dequeued row also carries the diagnostic Unbuildable predicate (Sol
+			// adjudication 2026-10-14: only the UNRESOLVED path demotes).
 			var t = Transition(BotQueueTransitionKind.Removed, cls: cls);
 			Assert.That(AiEconomyQueueEvidence.Classify(in t, true), Is.EqualTo(EconomyQueueEvidenceKind.Observation));
 			Assert.That(AiEconomyQueueEvidence.TryCancellation(in t, "17:Building:Building", out _), Is.False);
@@ -230,6 +240,30 @@ namespace OpenRA.Mods.Cameo.Test
 			state.Observe(1, System.Array.Empty<EconomyQueueObservation>());
 			Assert.That(state.Complete, Is.False);
 			AiEconomyHealthSchemaTest.WriteCliFixture("removed-unknown", new[] {
+				AiEconomyHealthSchema.Pulse(Identity(0, 0, "pulse"), true, true,
+					System.Array.Empty<EconomyQueueSnapshot>(), 5000, 0, 1000, 0),
+				AiEconomyHealthSchema.End(Identity(1, 0, "end"), state.Complete) });
+		}
+
+		[Test]
+		public void UnbuildableRemovalPermanentlyMarksCoverageUnknown()
+		{
+			// DISCRIMINATOR-REPAIR (01a13908, Sol adjudication 2026-10-14) — the
+			// coincident-removal counterexample end-to-end through the real recorder
+			// seam: a Removed row carrying the diagnostic Unbuildable class used to
+			// bypass the latch as auto-Observation. It now classifies Unknown, the
+			// capture marks incomplete, and the consumer sees UNKNOWN forever — the
+			// class still serializes on the raw row for diagnosis.
+			var state = new AiEconomyHealthState();
+			var t = Transition(BotQueueTransitionKind.Removed, cls: BotQueueCancellationClass.Unbuildable);
+			Assert.That(AiEconomyQueueEvidence.Classify(in t), Is.EqualTo(EconomyQueueEvidenceKind.Unknown),
+				"diagnostic-only — never Observation without an independently resolved episode");
+			if (AiEconomyQueueEvidence.Classify(in t) == EconomyQueueEvidenceKind.Unknown)
+				state.MarkIncomplete();
+			state.Observe(0, System.Array.Empty<EconomyQueueObservation>());
+			state.Observe(1, System.Array.Empty<EconomyQueueObservation>());
+			Assert.That(state.Complete, Is.False);
+			AiEconomyHealthSchemaTest.WriteCliFixture("removed-unbuildable", new[] {
 				AiEconomyHealthSchema.Pulse(Identity(0, 0, "pulse"), true, true,
 					System.Array.Empty<EconomyQueueSnapshot>(), 5000, 0, 1000, 0),
 				AiEconomyHealthSchema.End(Identity(1, 0, "end"), state.Complete) });

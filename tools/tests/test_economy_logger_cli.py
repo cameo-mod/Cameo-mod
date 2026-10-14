@@ -76,6 +76,13 @@ class EconomyLoggerCliTest(unittest.TestCase):
     def test_unclassified_removed_coverage_is_unknown(self):
         self.check_fixture("removed-unknown", "UNKNOWN", 21)
 
+    def test_unbuildable_removed_coverage_is_unknown(self):
+        # DISCRIMINATOR-REPAIR (Sol adjudication 2026-10-14): unbuildable is
+        # diagnostic-only — a coincident unexplained removal plus unbuildability
+        # reads identically to a real rules eviction, so the capture latches
+        # UNKNOWN forever.
+        self.check_fixture("removed-unbuildable", "UNKNOWN", 21)
+
     def test_offgrid_terminal_ordering_is_healthy(self):
         report = self.check_fixture("terminal", "OBSERVED_HEALTHY", 0)
         self.assertEqual(report["pulses"], 4)
