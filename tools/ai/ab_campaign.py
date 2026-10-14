@@ -134,6 +134,8 @@ def make_jobs(m: dict[str, Any]):
 
 
 def _load_jsonl(paths):
+    import capture_provenance
+
     rows = []
     total = 0
     for path in paths:
@@ -142,6 +144,11 @@ def _load_jsonl(paths):
         for f in files:
             if not f.is_file():
                 continue
+            verdict, why = capture_provenance.assess_file(f)
+            if verdict == capture_provenance.SENTINEL:
+                continue
+            if verdict == capture_provenance.REJECT:
+                raise ValueError(f"unbound provenance for {f}: {why}")
             total += f.stat().st_size
             if total > MAX_INPUT:
                 raise ValueError("input size cap exceeded")
@@ -158,9 +165,28 @@ def _load_jsonl(paths):
 
 def classify_game(records, receipt):
     """Classify one game only when receipt and seat evidence agree."""
+    import capture_provenance
+
+    if capture_provenance.record_marked(receipt):
+        return "INVALID_UNKNOWN", "sentinel-captured evidence"
     uid_set = {r.get("game_uid") for r in records}
     if len(uid_set) != 1 or None in uid_set or not isinstance(receipt, dict):
         return "INVALID_UNKNOWN", "game_uid/receipt missing"
+    prov = receipt.get("capture_provenance")
+    if prov is not None:
+        # Embedded binding must re-prove this game's UID membership (the
+        # records' uid AND the receipt's own) and reconcile every consumed
+        # artifact record against the binding's declared digests for the
+        # same resolved identity; sentinel-marked or mismatched provenance
+        # rejects the game. Metadata-only — bytes are attested at ingress.
+        uid = next(iter(uid_set))
+        if (not isinstance(prov, dict)
+                or not isinstance(prov.get("game_uids"), list)
+                or uid not in prov["game_uids"]):
+            return "INVALID_UNKNOWN", "capture provenance rejected"
+        ok, why = capture_provenance.reconcile_embedded_provenance(receipt)
+        if not ok:
+            return "INVALID_UNKNOWN", f"capture provenance rejected: {why}"
     seats = receipt.get("seats")
     if not isinstance(seats, list) or not seats:
         return "INVALID_UNKNOWN", "resolved seat proof missing"
@@ -330,12 +356,26 @@ def summarize(rows, receipts):
 
 
 def load_receipts(paths):
+    import capture_provenance
+
     out = {}
     for path in paths:
         p = pathlib.Path(path)
         files = [p] if p.is_file() else sorted(p.rglob("cell_receipt.json"))
         for f in files:
+            verdict, why = capture_provenance.assess_file(f)
+            if verdict == capture_provenance.SENTINEL:
+                continue
+            if verdict == capture_provenance.REJECT:
+                raise ValueError(f"unbound provenance for {f}: {why}")
             r = read_json(f, MAX_LINE)
+            if capture_provenance.record_marked(r):
+                # Keep the receipt so classify_game rejects the game with an
+                # explicit reason rather than "receipt missing".
+                uid = r.get("game_uid")
+                if isinstance(uid, str):
+                    out.setdefault(uid, r)
+                continue
             uid = r.get("game_uid")
             if not isinstance(uid, str) or uid in out:
                 raise ValueError("missing/duplicate receipt game_uid")

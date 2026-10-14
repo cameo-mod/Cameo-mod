@@ -10,6 +10,17 @@ from pathlib import Path
 ROOT = Path(__file__).parents[2]
 AGGREGATOR = ROOT / "tools" / "ai" / "aggregate_ai_matches.py"
 
+sys.path.insert(0, str(ROOT / "tools" / "ai"))
+import capture_provenance  # noqa: E402
+
+
+def bind_file(path):
+    """Scoreable test provenance: unbound fixtures fail closed at gated sinks."""
+    capture_provenance.write_file_sibling(
+        Path(path), game_uids=sorted(capture_provenance.file_game_uids(path)),
+        capture_kind="match_batch", scoreable=True)
+    return path
+
 
 def record(record_id="game|seat_1", outcome="won", duration_ticks=2400, opponents=None):
     return {
@@ -64,6 +75,7 @@ class AggregateAiMatchesTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             log_path = Path(directory) / "matches.jsonl"
             log_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+            bind_file(log_path)
             result = subprocess.run(
                 [
                     sys.executable,
@@ -110,6 +122,7 @@ class AggregateAiMatchesTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             log_path = Path(directory) / "matches.jsonl"
             log_path.write_text(json.dumps(rec) + "\n", encoding="utf-8")
+            bind_file(log_path)
             result = subprocess.run(
                 [sys.executable, str(AGGREGATOR), str(log_path), "--min-samples", "2", "--min-ticks", "2400"],
                 cwd=ROOT,
@@ -135,6 +148,7 @@ class AggregateAiMatchesTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             log_path = Path(directory) / "matches.jsonl"
             log_path.write_text(json.dumps(record()) + "\n", encoding="utf-8")
+            bind_file(log_path)
             result = subprocess.run(
                 [sys.executable, str(AGGREGATOR), str(log_path), "--min-samples", "2", "--min-ticks", "2400"],
                 cwd=ROOT,

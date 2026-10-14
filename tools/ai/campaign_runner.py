@@ -658,6 +658,29 @@ def _file_artifact(path: pathlib.Path | None, missing_reason: str | None = None)
 	return {"path": str(path), "sha256": sha(path), "missing_reason": None}
 
 
+def _bundle_provenance_doc(zipped: dict[str, pathlib.Path], cap_kind: str | None,
+						   cap_prov: dict | None, game_uid: str | None) -> dict | None:
+	"""Derived bundle-internal capture manifest (addendum §E). Binds every
+	zipped artifact by SHA-256 + the cell's game UID, carrying the covering
+	doc's capture kind and scoreable flag — a sentinel-bound cell's bundle
+	stays quarantined even after the zip is detached from the campaign leaf.
+	Provenance-named files never appear in the artifact table (self-ref rule).
+	Returns None when the cell is unbound (normal campaign state)."""
+	if cap_kind is None or not isinstance(cap_prov, dict):
+		return None
+	import capture_provenance
+	return {
+		"schema": capture_provenance.SCHEMA,
+		"capture_kind": cap_kind,
+		"scoreable": bool(cap_prov.get("scoreable")),
+		"game_uids": [game_uid] if isinstance(game_uid, str) else [],
+		"artifacts": {rel: sha(p) for rel, p in sorted(zipped.items())
+					  if not capture_provenance._is_provenance_name(
+						  pathlib.PurePosixPath(rel).name)},
+		"derived_by": "campaign_runner.support_bundle",
+	}
+
+
 def _is_support_artifact(game_root: pathlib.Path, path: pathlib.Path) -> bool:
 	"""Bundle predicate: cell evidence only — never the reproducible FullMods
 	tree (~33k links) and never an earlier support_bundle*.zip (a re-processed
@@ -667,6 +690,70 @@ def _is_support_artifact(game_root: pathlib.Path, path: pathlib.Path) -> bool:
 	except ValueError:
 		return False
 	return "FullMods" not in rel.parts and not path.name.startswith("support_bundle")
+
+
+def _cell_capture(game_root: pathlib.Path, game_support: pathlib.Path,
+				  support_root: pathlib.Path, match_log: pathlib.Path,
+				  game_uid: str | None) -> tuple[str | None, dict | None]:
+	"""Resolve this cell's capture provenance BEFORE the receipt is written.
+
+	Scans every resolvable provenance manifest (cell root, support dir, the
+	campaign support root, and any manifest nested under the cell's Support
+	tree) — never just the nearest. Returns (capture_kind, provenance_doc):
+	capture_kind is the bound kind ("sentinel_diagnostic", "match_batch") or
+	None when no manifest exists (a plain campaign cell never produced by the
+	batch driver); the doc is the bound manifest, embedded into the receipt.
+
+	Fail closed: a malformed manifest, a SHA mismatch on a bound artifact, or
+	two manifests disagreeing about this cell's quarantine state all raise —
+	the receipt is never written. A manifest counts as covering this cell when
+	it lists the game's UID or binds an artifact inside the cell tree.
+	"""
+	import capture_provenance
+
+	candidates = {game_root / capture_provenance.SIDECAR_NAME,
+				  game_support / capture_provenance.SIDECAR_NAME,
+				  support_root / capture_provenance.SIDECAR_NAME}
+	if game_support.is_dir():
+		candidates.update(game_support.rglob(capture_provenance.SIDECAR_NAME))
+	covering: list[tuple[pathlib.Path, dict, bool]] = []  # (path, doc, marked)
+	for manifest_path in sorted(candidates):
+		if not manifest_path.is_file():
+			continue
+		doc = capture_provenance._load_json(manifest_path)
+		if (doc is None or doc.get("capture_kind") not in capture_provenance.KNOWN_KINDS
+				or type(doc.get("scoreable")) is not bool
+				or not isinstance(doc.get("artifacts"), dict)):
+			raise ValueError(f"malformed capture provenance: {manifest_path}")
+		bound_uids = {u for u in (doc.get("game_uids") or []) if isinstance(u, str)}
+		covers = isinstance(game_uid, str) and game_uid in bound_uids
+		for rel, declared in doc["artifacts"].items():
+			if not isinstance(rel, str) or not isinstance(declared, str) or len(declared) != 64:
+				raise ValueError(f"malformed artifact entry in {manifest_path}: {rel!r}")
+			target = (manifest_path.parent / rel).resolve()
+			try:
+				inside_cell = target.is_relative_to(game_root.resolve())
+			except OSError:
+				inside_cell = False
+			if not inside_cell:
+				continue
+			covers = True
+			if target == match_log.resolve() and target.is_file():
+				if sha(target) != declared:
+					raise ValueError(f"capture provenance SHA mismatch for {match_log} in {manifest_path}")
+		if covers:
+			covering.append((manifest_path, doc,
+							 doc["capture_kind"] == capture_provenance.SENTINEL_KIND
+							 or doc["scoreable"] is False))
+	marked = [c for c in covering if c[2]]
+	if marked and len(marked) != len(covering):
+		raise ValueError(f"conflicting capture provenance for cell {game_root}: "
+						 + ", ".join(str(c[0]) for c in covering))
+	if marked:
+		return capture_provenance.SENTINEL_KIND, marked[0][1]
+	if covering:
+		return covering[0][1]["capture_kind"], covering[0][1]
+	return None, None
 
 
 def run_one(manifest: dict, manifest_sha: str, job: dict, *, root: pathlib.Path,
@@ -784,6 +871,11 @@ def run_one(manifest: dict, manifest_sha: str, job: dict, *, root: pathlib.Path,
 		resolved_out.append({"seat_id": seat["home"], "team": seat["side"], "arm": seat["arm"], "bot_type": seat["bot_type"], "faction": seat["faction"], "home": seat["home"], "spawn": seat["spawn"], "proof_source":"generated map.yaml + cameo-ai-matches.jsonl", "outcome": pl.get("outcome", "unknown"), "metrics": metrics})
 	team_obj = {side:{"arm":"control" if side==job["control_side"] else "treatment", "bot_type":job["arm_bot_types"]["control" if side==job["control_side"] else "treatment"], "seat_ids":[s["home"] for s in resolved_out if s["team"]==side]} for side in ("A", "B")}
 	logs.mkdir(exist_ok=True)
+	# Capture quarantine resolution runs BEFORE the bundle is zipped: the
+	# bundle itself must carry the binding (design addendum §E — a detached
+	# support_bundle.zip unzips with its own fail-closed provenance, not a
+	# bare evidence tree that CAT-1 consumers would have to guess at).
+	cap_kind, cap_prov = _cell_capture(game_root, game_support, support_root, match_log, game_uid)
 	# The support bundle is evidence, not a mod-tree backup: FullMods is ~33k
 	# hardlinked files (~1 GiB zipped per cell, 64x redundant) and is fully
 	# reproducible from the manifest pins + cell receipt. Exclude it, and any
@@ -791,8 +883,16 @@ def run_one(manifest: dict, manifest_sha: str, job: dict, *, root: pathlib.Path,
 	artifact_paths = [p for p in game_root.rglob("*") if _is_support_artifact(game_root, p)]
 	bundle = game_root / "support_bundle.zip"
 	with zipfile.ZipFile(bundle, "w", compression=zipfile.ZIP_DEFLATED) as z:
+		zipped: dict[str, pathlib.Path] = {}
 		for file in artifact_paths:
-			if file.is_file() and file != bundle: z.write(file, file.relative_to(game_root))
+			if file.is_file() and file != bundle:
+				arcname = file.relative_to(game_root)
+				z.write(file, arcname)
+				zipped[arcname.as_posix()] = file
+		derived = _bundle_provenance_doc(zipped, cap_kind, cap_prov, game_uid)
+		if derived is not None and "capture_provenance.json" not in zipped:
+			z.writestr("capture_provenance.json",
+					   json.dumps(derived, indent=2, sort_keys=True) + "\n")
 	engine_digest = hashlib.sha256("".join(manifest["binary_sha256"][k] for k in sorted(manifest["binary_sha256"])).encode()).hexdigest()
 	# The receipt carries the internal classification fields verbatim: analyze()
 	# re-adjudicates stored receipts and validate_receipt requires both layers.
@@ -814,6 +914,16 @@ def run_one(manifest: dict, manifest_sha: str, job: dict, *, root: pathlib.Path,
 		"memory":{"process_id":game_pid,"peak_private_bytes":monitor_result["peak_private_bytes"],"limit_private_bytes":PRIVATE_LIMIT,"samples":monitor_result["samples"]},
 		"runtime":{"started_utc":started,"finished_utc":finished,"exit_code":monitor_result["exit_code"],"wall_seconds":monitor_result["wall_seconds"],"stall_seconds":180,"pid_scoped_cleanup":monitor_result["pid_scoped_cleanup"]},
 		"artifacts":{"server_log":_file_artifact(server_log),"driver_log":_file_artifact(driver_log),"matches_jsonl":_file_artifact(match_log),"replay":_file_artifact(next(iter(game_root.rglob("*.orarep")), None)),"map_yaml":_file_artifact(map_yaml),"support_bundle":_file_artifact(bundle)}}
+	# Capture quarantine propagation (resolved before the bundle above): if
+	# this cell's evidence was produced under a capture manifest (sentinel
+	# run, or any bound batch), the receipt inherits the binding —
+	# capture_kind/scoreable markers plus the embedded provenance — before
+	# schema validation. A malformed or conflicting manifest raises in
+	# _cell_capture and neither the bundle nor the receipt is ever written.
+	if cap_kind is not None:
+		receipt["capture_kind"] = cap_kind
+		receipt["scoreable"] = bool(cap_prov["scoreable"])
+		receipt["capture_provenance"] = cap_prov
 	validate_receipt(receipt)
 	receipt_path = support_root / "receipts" / (re.sub(r"[^A-Za-z0-9_.-]", "_", job["cell_id"]) + ".json")
 	atomic_receipt(receipt_path, receipt)

@@ -42,16 +42,22 @@ HEAVY_ARMOR = {"Heavy", "Superheavy"}
 
 
 def record_files(paths: list[pathlib.Path]) -> list[pathlib.Path]:
+    import capture_provenance
     out = []
     for p in paths:
+        candidate = None
         if p.is_file():
-            out.append(p)
+            candidate = p
         elif (p / "Logs" / MATCH_LOG).is_file():
-            out.append(p / "Logs" / MATCH_LOG)
+            candidate = p / "Logs" / MATCH_LOG
         elif (p / MATCH_LOG).is_file():
-            out.append(p / MATCH_LOG)
+            candidate = p / MATCH_LOG
         else:
             sys.exit(f"no {MATCH_LOG} under {p}")
+        # Provenance-gated: sentinel-quarantined evidence is excluded before
+        # any report row; unbound/malformed provenance hard-rejects.
+        if capture_provenance.gate_ingest(candidate):
+            out.append(candidate)
     return out
 
 

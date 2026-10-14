@@ -345,17 +345,26 @@ def shard_progress(shard: Shard, bot_a: str) -> tuple[int, int]:
     """(matches consumed, bot_a wins) from the shard's batch_results.jsonl. Every row
     is one matchup the batch will not revisit — retries collapse into the single row
     the batch appends per matchup, and drift tombstones still burned the slot."""
+    import capture_provenance
+
     played = won = 0
     for d in shard.dirs:
         path = d / BATCH_RESULTS
         if not path.is_file():
             continue
+        verdict, why = capture_provenance.assess_file(path)
+        if verdict == capture_provenance.SENTINEL:
+            continue
+        if verdict == capture_provenance.REJECT:
+            raise ValueError(f"unbound provenance for {path}: {why}")
         for line in path.read_text(encoding="utf-8", errors="replace").splitlines():
             if not line.strip():
                 continue
             try:
                 row = json.loads(line)
             except json.JSONDecodeError:
+                continue
+            if capture_provenance.record_marked(row):
                 continue
             # Only the first `planned` rows count: a relaunched shard can append a whole new batch
             # (2026-10-03: ctrl reached 21 rows for 16 planned), and the early-stop rule compares raw
@@ -479,9 +488,16 @@ def evaluate_early_stop(
 def smoke_verified(support: pathlib.Path) -> tuple[bool, str]:
     """The smoke contract: real match records appended AND a batch fingerprint
     landed — proves the arm's tree/engine/mod pipeline runs end to end."""
+    import capture_provenance
+
     log = support / "Logs" / MATCH_LOG
     records = 0
     if log.is_file():
+        verdict, why = capture_provenance.assess_file(log)
+        if verdict == capture_provenance.SENTINEL:
+            return False, f"sentinel-captured shard is not a smoke datapoint ({log})"
+        if verdict == capture_provenance.REJECT:
+            return False, f"unbound provenance for {log}: {why}"
         records = sum(
             1 for line in log.read_text(encoding="utf-8", errors="replace").splitlines()
             if line.strip())
@@ -490,6 +506,11 @@ def smoke_verified(support: pathlib.Path) -> tuple[bool, str]:
     results = support / BATCH_RESULTS
     fingerprints: set[str] = set()
     if results.is_file():
+        verdict, why = capture_provenance.assess_file(results)
+        if verdict == capture_provenance.SENTINEL:
+            return False, f"sentinel-captured shard is not a smoke datapoint ({results})"
+        if verdict == capture_provenance.REJECT:
+            return False, f"unbound provenance for {results}: {why}"
         for line in results.read_text(encoding="utf-8", errors="replace").splitlines():
             if not line.strip():
                 continue
@@ -497,6 +518,8 @@ def smoke_verified(support: pathlib.Path) -> tuple[bool, str]:
                 row = json.loads(line)
             except json.JSONDecodeError:
                 continue
+            if capture_provenance.record_marked(row):
+                return False, f"sentinel-marked batch row in {results}"
             if row.get("fingerprint"):
                 fingerprints.add(row["fingerprint"])
     if not fingerprints:
@@ -663,8 +686,15 @@ def drive(shards: list[Shard], args: argparse.Namespace,
 # --- readout -------------------------------------------------------------------
 
 def iter_match_records(dirs: list[pathlib.Path]):
+    import capture_provenance
+
     for d in dirs:
         for f in sorted(d.rglob(MATCH_LOG)):
+            verdict, why = capture_provenance.assess_file(f)
+            if verdict == capture_provenance.SENTINEL:
+                continue
+            if verdict == capture_provenance.REJECT:
+                raise ValueError(f"unbound provenance for {f}: {why}")
             for line in f.read_text(encoding="utf-8", errors="replace").splitlines():
                 if not line.strip():
                     continue
@@ -719,17 +749,26 @@ def arm_stats(records) -> dict:
 def shard_fingerprints(shard: Shard) -> list[str]:
     """Distinct fingerprint ids in one shard's batch_results.jsonl — one expected
     per shard (the batch aborts on drift); drift tombstones still count as sightings."""
+    import capture_provenance
+
     fps: set[str] = set()
     for d in shard.dirs:
         path = d / BATCH_RESULTS
         if not path.is_file():
             continue
+        verdict, why = capture_provenance.assess_file(path)
+        if verdict == capture_provenance.SENTINEL:
+            continue
+        if verdict == capture_provenance.REJECT:
+            raise ValueError(f"unbound provenance for {path}: {why}")
         for line in path.read_text(encoding="utf-8", errors="replace").splitlines():
             if not line.strip():
                 continue
             try:
                 row = json.loads(line)
             except json.JSONDecodeError:
+                continue
+            if capture_provenance.record_marked(row):
                 continue
             if row.get("fingerprint"):
                 fps.add(row["fingerprint"])

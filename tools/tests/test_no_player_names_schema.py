@@ -9,7 +9,15 @@ sys.path.insert(0, str(ROOT / "tools" / "audit"))
 sys.path.insert(0, str(ROOT / "tools" / "ai"))
 
 from audit_no_player_names import match_ok, validate_learned, validate_logs
+from capture_provenance import file_game_uids, write_file_sibling
 from fit_opponent_signatures import dump_yaml, fit
+
+
+def bind_file(path):
+    """Scoreable test provenance: unbound fixtures fail closed at gated sinks."""
+    write_file_sibling(Path(path), game_uids=sorted(file_game_uids(path)),
+                       capture_kind="match_batch", scoreable=True)
+    return path
 
 
 def match_record():
@@ -40,7 +48,7 @@ class AnonymousLogSchemaTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as td:
             source = Path(td) / "matches.jsonl"
             source.write_text(json.dumps(match_record()) + "\n", encoding="utf-8")
-            result = fit([source])
+            result = fit([bind_file(source)])
         self.assertEqual(len(result["clusters"]), 1)
         self.assertEqual(result["clusters"][0]["count"], 1)
         self.assertEqual(result["clusters"][0]["faction"], "td_nod")
@@ -50,7 +58,7 @@ class AnonymousLogSchemaTest(unittest.TestCase):
             output = Path(td) / "opponent_signatures.yaml"
             source = Path(td) / "matches.jsonl"
             source.write_text(json.dumps(match_record()) + "\n", encoding="utf-8")
-            output.write_text(dump_yaml(fit([source])), encoding="utf-8")
+            output.write_text(dump_yaml(fit([bind_file(source)])), encoding="utf-8")
             self.assertEqual(validate_learned([output]), [])
 
     def test_log_reader_rejects_unrecognized_record_grammar(self):

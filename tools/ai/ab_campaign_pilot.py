@@ -501,8 +501,23 @@ def preflight_generated_maps(m,root,directory):
 
 def adjudicate(records, receipt, job, manifest_sha):
  """One game -> one verdict; incomplete/cap evidence is never converted to a loss."""
+ import capture_provenance
  if not isinstance(receipt,dict) or receipt.get("cell_id")!=job["cell_id"] or receipt.get("manifest_sha256")!=manifest_sha:
   return {"verdict":"INVALID_UNKNOWN","reason":"cell or manifest pin mismatch"}
+ # Capture quarantine: either marker alone makes the receipt diagnostic-only,
+ # and an embedded binding must re-prove UID membership + artifact agreement.
+ if capture_provenance.record_marked(receipt):
+  return {"verdict":"INVALID_UNKNOWN","reason":"sentinel-captured receipt"}
+ prov=receipt.get("capture_provenance")
+ if prov is not None:
+  # Embedded binding must re-prove UID membership AND reconcile every
+  # consumed artifact record against the binding's declared digests for the
+  # same resolved identity (metadata-only; bytes are attested at ingress).
+  ok,why=capture_provenance.reconcile_embedded_provenance(receipt)
+  if not ok:
+   return {"verdict":"INVALID_UNKNOWN","reason":f"capture provenance mismatch: {why}"}
+ if any(capture_provenance.record_marked(r) for r in records):
+  return {"verdict":"INVALID_UNKNOWN","reason":"sentinel-captured match records"}
  if any(receipt.get(k)!=job[k] for k in ("switch","setup","map","map_sha256","seed","pair","game_in_pair")):
   return {"verdict":"INVALID_UNKNOWN","reason":"receipt disagrees with planned job"}
  status=receipt.get("status")
@@ -667,6 +682,15 @@ def main(argv=None):
    out["dual_arm_runtime_config_preflight"]=materialize_dual_arm_ai(a.repo_root,preflight_root/"dual-arm",SWITCH)
    out["manifest_sha256"]=actual;a.output.parent.mkdir(parents=True,exist_ok=True);a.output.write_text(json.dumps(out,indent=2)+"\n",encoding="utf-8");print(f"NO_LAUNCH games={out['games']} generated_maps={len(out['generated_map_preflight'])} treatment_changes={out['arm_payload_preflight'][1]['changed_fields']} worker_hours={out['worker_hours_estimate_at_8_5m_each']} slot_wall_hours={out['parallel_slot_wall_estimate_hours_at_8_5m_each']} launches=0");return 0
   validate(m,a.repo_root); raw=a.manifest.read_bytes(); actual=hashlib.sha256(raw).hexdigest();require(actual==a.manifest_sha256,"manifest SHA mismatch")
+  import capture_provenance
+  # Ingest gates: a sentinel-bound matches file or receipt bundle is refused
+  # before any readout; corrupt provenance hard-rejects. An unbound receipt
+  # bundle is the normal campaign state — per-receipt markers and embedded
+  # bindings are enforced in adjudicate.
+  require(capture_provenance.gate_ingest(a.matches),f"sentinel-quarantined matches evidence {a.matches}")
+  _v,_why=capture_provenance.assess_file(a.receipts)
+  require(_v!=capture_provenance.SENTINEL,f"sentinel-quarantined receipt bundle {a.receipts}")
+  require(not(_v==capture_provenance.REJECT and (_why.startswith("malformed") or "conflicting" in _why)),f"corrupt provenance for {a.receipts}: {_why}")
   def jsonl(path): return [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
   out=analyze(m,actual,json.loads(a.receipts.read_text(encoding="utf-8")),jsonl(a.matches));a.output.parent.mkdir(parents=True,exist_ok=True);a.output.write_text(json.dumps(out,indent=2)+"\n",encoding="utf-8");print(f"ANALYZED games={len(out['games'])} unplanned_receipts={len(out['unplanned_receipt_cells'])}");return 2 if out["unplanned_receipt_cells"] or out["unplanned_game_uids"] or any(g["verdict"]=="INVALID_UNKNOWN" for g in out["games"]) else 0
  except (OSError,ValueError,KeyError,TypeError) as e: print(f"error: {e}",file=sys.stderr);return 2

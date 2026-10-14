@@ -988,6 +988,132 @@ def apply_economy_health_requirement(status: str, health_status: str, required: 
     return status
 
 
+def sentinel_economy_collect(
+    support: pathlib.Path,
+    match_records: list[dict],
+    expected_roster: list[tuple[str, str, str, str]],
+) -> tuple[str, str | None, list[dict], list[str]]:
+    """Sentinel-mode collector: the economy_health_file_status checks, but no
+    early return — every structural failure is recorded with its
+    evaluation-order position and every seat's analyze_economy report is
+    collected. The legacy function above is untouched and never runs under
+    --sentinel-diagnostic (the call site dispatches).
+
+    Returns (raw_status, first_failure_detail, seat_reports, structural_failures).
+    raw_status: UNKNOWN if any structural failure OR any seat status outside
+    {OBSERVED_HEALTHY, BLOCK}; else BLOCK if any seat BLOCK; else
+    OBSERVED_HEALTHY. BLOCK is produced only by seat-economy BLOCK.
+    """
+    seat_reports: list[dict] = []
+    failures: list[str] = []
+    health_path = support / "Logs" / "cameo-ai-economy-health.jsonl"
+    try:
+        if not health_path.is_file():
+            failures.append(f"integrity: missing expected economy-health file: {health_path}")
+            return "UNKNOWN", failures[0], seat_reports, failures
+        data = health_path.read_bytes()
+        if not data:
+            failures.append(f"integrity: empty expected economy-health file: {health_path}")
+            return "UNKNOWN", failures[0], seat_reports, failures
+        if not data.endswith(b"\n"):
+            failures.append(f"integrity: unterminated economy-health JSONL: {health_path}")
+            return "UNKNOWN", failures[0], seat_reports, failures
+        from replay_health import read_jsonl
+        from economy_invariants import analyze as analyze_economy
+
+        rows, _receipt = read_jsonl(health_path)
+        if not rows:
+            failures.append("integrity: no economy-health rows")
+            return "UNKNOWN", failures[0], seat_reports, failures
+
+        expected_seats_by_uid: dict[str, list[tuple[str, str, str, str]]] = {}
+        record_ids: set[str] = set()
+        for record in match_records:
+            if not isinstance(record, dict):
+                failures.append("identity: invalid match record while validating economy health")
+                continue
+            record_id = record.get("record_id")
+            uid = record.get("game_uid")
+            player = record.get("player")
+            seat = player.get("seat") if isinstance(player, dict) else None
+            faction = player.get("faction") if isinstance(player, dict) else None
+            bot_type = player.get("bot_type") if isinstance(player, dict) else None
+            home = player.get("home") if isinstance(player, dict) else None
+            seat_match = re.fullmatch(r"seat_(\d+)", seat) if isinstance(seat, str) else None
+            if (not isinstance(record_id, str) or not isinstance(uid, str) or not uid
+                    or record_id != f"{uid}|{seat}" or seat_match is None
+                    or not isinstance(faction, str) or not faction
+                    or not isinstance(bot_type, str) or not bot_type
+                    or not isinstance(home, str) or not re.fullmatch(r"-?\d+,-?\d+", home)):
+                failures.append("identity: match records lack canonical game/seat/bot/faction/home identity")
+                continue
+            if record_id in record_ids:
+                failures.append("identity: duplicate match record/seat identity")
+                continue
+            record_ids.add(record_id)
+            expected_seats_by_uid.setdefault(uid, []).append((bot_type, faction, home, seat))
+        game_uid = None
+        logged_seats: list[tuple[str, str, str, str]] = []
+        if len(expected_seats_by_uid) != 1 or not match_records:
+            failures.append("identity: per-game support leaf must contain exactly one match UID")
+        else:
+            game_uid, logged_seats = next(iter(expected_seats_by_uid.items()))
+            logged_ids = [seat for _bot, _faction, _home, seat in logged_seats]
+            if (len(expected_roster) != len({(name, home) for name, _faction, _bot, home in expected_roster})
+                    or len(match_records) != len(expected_roster)
+                    or len(set(logged_ids)) != len(logged_ids)
+                    or sorted((bot, faction, home) for bot, faction, home, _seat in logged_seats)
+                    != sorted((bot, faction, home) for _name, faction, bot, home in expected_roster)):
+                failures.append("roster: match record roster differs from the configured variant roster")
+            if any(not isinstance(row, dict) or row.get("game_uid") != game_uid for row in rows):
+                failures.append("integrity: economy-health stream contains malformed or foreign game UID rows")
+            players: list[str] = []
+            seen_players: set[str] = set()
+            for row in rows:
+                player_name = row.get("player")
+                if isinstance(player_name, str) and player_name not in seen_players:
+                    seen_players.add(player_name)
+                    players.append(player_name)
+            if len(players) != len(expected_roster):
+                failures.append(f"coverage: economy-health seat coverage mismatch: {len(players)} player(s) "
+                                f"for {len(expected_roster)} configured bot(s)")
+            actual_roster = []
+            for player_name in players:
+                player_rows = [row for row in rows if row.get("player") == player_name]
+                report = analyze_economy(rows, game_uid, player_name)
+                seat_reports.append({
+                    "player": player_name,
+                    "status": report.get("status"),
+                    "findings": report.get("findings") or [],
+                    "error": report.get("error"),
+                })
+                # Legacy skips identity checks on a BLOCK seat (early return);
+                # the collector still verifies them for every seat — a BLOCK
+                # seat with consistent identity still feeds the roster check.
+                factions = {row.get("faction") for row in player_rows}
+                bot_types = {row.get("bot_type") for row in player_rows}
+                if (len(factions) != 1 or not all(isinstance(v, str) and v for v in factions)
+                        or len(bot_types) != 1 or not all(isinstance(v, str) and v for v in bot_types)):
+                    failures.append("identity: economy-health player/bot/faction identity is missing "
+                                    f"or inconsistent ({player_name})")
+                else:
+                    actual_roster.append((player_name, next(iter(factions)), next(iter(bot_types))))
+            planned_health_roster = [(name, faction, bot) for name, faction, bot, _home in expected_roster]
+            if sorted(actual_roster) != sorted(planned_health_roster):
+                failures.append("roster: economy-health player identities differ from the configured variant roster")
+    except (OSError, ValueError, TypeError, KeyError, ImportError) as exc:
+        failures.append(f"integrity: cannot inspect expected economy-health file {health_path}: {exc}")
+
+    non_clean = [r for r in seat_reports if r.get("status") not in ("OBSERVED_HEALTHY", "BLOCK")]
+    if failures or non_clean:
+        raw_status = "UNKNOWN"
+    elif any(r.get("status") == "BLOCK" for r in seat_reports):
+        raw_status = "BLOCK"
+    else:
+        raw_status = "OBSERVED_HEALTHY"
+    return raw_status, (failures[0] if failures else None), seat_reports, failures
+
+
 PER_GAME_LOGS = {
     "cameo-ai-economy-health.jsonl",
     "cameo-ai-economy-raw.jsonl",
@@ -995,11 +1121,19 @@ PER_GAME_LOGS = {
 }
 
 
-def promote_unique_match_logs(match_support: pathlib.Path, batch_logs: pathlib.Path) -> None:
+def promote_unique_match_logs(match_support: pathlib.Path, batch_logs: pathlib.Path,
+                              capture_uid: str | None = None) -> None:
     """Aggregate AI JSONL telemetry except canonical health streams.
 
     Other fixed-name AI streams are append-oriented and carry game_uid. The
     three CreateNew health streams remain isolated in each game leaf.
+    MATCH_LOG itself is never promoted (S3): its canonical copy stays in the
+    per-game leaf and its batch copy is bound by the batch-root manifest.
+
+    capture_uid (sentinel mode only): after each aggregate write lands, emit a
+    file-adjacent capture_provenance sibling binding the FINAL destination
+    bytes to this game UID — copied/promoted artifacts must not rebind to
+    their source sidecar.
     """
     source_logs = match_support / "Logs"
     for source in source_logs.iterdir():
@@ -1013,6 +1147,9 @@ def promote_unique_match_logs(match_support: pathlib.Path, batch_logs: pathlib.P
                 shutil.copyfileobj(game_log, aggregate, length=1024 * 1024)
         else:
             shutil.copy2(source, destination)
+        if capture_uid:
+            import capture_provenance
+            capture_provenance.write_promoted_sibling(destination, game_uid=capture_uid)
 
 
 SPAWN_INDEX_BY_SLOT = {"Multi0": 0, "Multi1": 1, "Multi2": 2, "Multi3": 3, "BotA": 0, "BotB": 1}
@@ -1038,10 +1175,13 @@ def ab_scoreboard(results: list[dict]) -> dict:
     record_id) are skipped. Values are {"won", "lost", "spawn"} - the spawn
     axis keeps the A/B honest about start-position asymmetry.
     """
+    import capture_provenance
+
     seen_records: set[str] = set()
     board: dict[tuple[str, str], dict] = {}
     for result in results:
-        if (result.get("health_status") in ("UNKNOWN", "BLOCK")
+        if (capture_provenance.record_marked(result)
+                or result.get("health_status") in ("UNKNOWN", "BLOCK")
                 or result.get("status") == "UNKNOWN"
                 or not runtime_engine_result_valid(result)):
             continue
@@ -1078,10 +1218,13 @@ def team_scoreboard(results: list[dict]) -> dict:
     ab_scoreboard — and the spawn sub-table keys the team's sorted
     member-spawn pair ("0,1").
     """
+    import capture_provenance
+
     seen_records: set[str] = set()
     matches: dict[str, list[dict]] = {}
     for result in results:
-        if (result.get("health_status") in ("UNKNOWN", "BLOCK")
+        if (capture_provenance.record_marked(result)
+                or result.get("health_status") in ("UNKNOWN", "BLOCK")
                 or result.get("status") == "UNKNOWN"
                 or not runtime_engine_result_valid(result)):
             continue
@@ -1302,6 +1445,30 @@ def all_attempt_provenance(results: list[dict]) -> list[dict]:
     return [attempt for result in results for attempt in result.get("runtime_engine_attempts", [])]
 
 
+def stamp_sentinel_result(result: dict, health_policy: dict | None) -> dict:
+    """Score quarantine — either field alone is already enough for a consumer
+    to reject this record; both are always written together. Default mode
+    (health_policy None) is the identity: no marker keys are added."""
+    if health_policy is None:
+        return result
+    result["capture_kind"] = "sentinel_diagnostic"
+    result["scoreable"] = False
+    result["health_policy"] = health_policy
+    return result
+
+
+def stamp_sentinel_summary(summary: dict, sentinel_uids: list[str] | None) -> dict:
+    """Batch-level markers: a sentinel-marked summary quarantines every
+    descendant artifact at ingest even before the manifest is read. Default
+    mode (sentinel_uids None) is the identity."""
+    if sentinel_uids is None:
+        return summary
+    summary["capture_kind"] = "sentinel_diagnostic"
+    summary["scoreable"] = False
+    summary["sentinel_uids"] = sentinel_uids
+    return summary
+
+
 def fingerprint_drift_result(variant: str, fingerprint: dict, drift: dict,
                              attempt: int, runtime_engine_attempts: list[dict]) -> dict:
     """Build a drift result without discarding provenance from earlier retries."""
@@ -1494,6 +1661,12 @@ def main() -> int:
     parser.add_argument("--support-dir", type=pathlib.Path, default=None)
     parser.add_argument("--require-economy-health", action="store_true",
                         help="mark a successful game UNKNOWN if its canonical economy-health JSONL is missing or empty")
+    parser.add_argument("--sentinel-diagnostic", action="store_true",
+                        help="opt-in sentinel diagnostic capture: implies economy-health semantics with the "
+                             "all-seat collector + classic-baseline exemption policy; stamps "
+                             "capture_kind/scoreable markers and capture_provenance sidecars so the output "
+                             "can never enter scoring. Requires exactly one faction, --team-size 1, "
+                             "--repeats 1, --retries 0 — anything else (including defaults) is refused")
     parser.add_argument("--template", type=pathlib.Path, default=TEMPLATE_MAP,
                         help="template map dir (default: the A Nuclear Winter duel fixture)")
     parser.add_argument("--retries", type=int, default=1,
@@ -1530,6 +1703,27 @@ def main() -> int:
         fail("--factions needs at least one faction id")
     if args.repeats < 1:
         fail("--repeats must be >= 1")
+    if args.sentinel_diagnostic:
+        # One faction, one match, one attempt — nothing may combine or retry
+        # into extra games. Non-conforming values (including the argparse
+        # defaults) are refused, never coerced (S6).
+        sentinel_bad = []
+        if len(factions) != 1:
+            sentinel_bad.append(f"exactly one faction (got {args.factions!r})")
+        if args.team_size != 1:
+            sentinel_bad.append(f"--team-size 1 (got {args.team_size})")
+        if args.repeats != 1:
+            sentinel_bad.append(f"--repeats 1 (got {args.repeats})")
+        if args.retries != 0:
+            sentinel_bad.append(f"--retries 0 (got {args.retries})")
+        if args.require_economy_health:
+            # The sentinel policy owns the health verdict layer: combining the
+            # flag would convert every baseline_exempted BLOCK to UNKNOWN,
+            # silently defeating the granted exemption. Refuse, never coerce.
+            sentinel_bad.append("incompatible with --require-economy-health "
+                                "(the disposition policy already gates health)")
+        if sentinel_bad:
+            fail("--sentinel-diagnostic requires " + "; ".join(sentinel_bad))
 
     def parse_team(raw: str, flag: str) -> list[str]:
         bots = [b.strip() for b in raw.split(",") if b.strip()]
@@ -1787,7 +1981,42 @@ def main() -> int:
         # A no-data run that exhausted its retries is still not a datapoint:
         # count it separately so a deterministic abort is visible in
         # batch_summary.json / run_league instead of reading as clean.
-        if args.require_economy_health:
+        sentinel_health_policy = None
+        if args.sentinel_diagnostic:
+            try:
+                expected_health_roster = planned_economy_roster(
+                    variants_root / m["variant"] / "map.yaml", m)
+            except (OSError, ValueError, KeyError, TypeError) as exc:
+                expected_health_roster = []
+                roster_error = f"cannot derive planned health seats: {exc}"
+            else:
+                roster_error = None
+            try:
+                (economy_health_status, economy_health_error,
+                 seat_reports, structural_failures) = sentinel_economy_collect(
+                    match_support, records, expected_health_roster)
+            except (OSError, ValueError, KeyError, TypeError, ImportError) as exc:
+                (economy_health_status, economy_health_error,
+                 seat_reports, structural_failures) = (
+                    "UNKNOWN", f"sentinel collector failed: {exc}", [],
+                    [f"collector exception: {exc}"])
+            if roster_error:
+                structural_failures = [roster_error] + structural_failures
+                economy_health_status = "UNKNOWN"
+                if economy_health_error is None:
+                    economy_health_error = roster_error
+            import sentinel_policy
+            sentinel_health_policy = {
+                "mode": "sentinel_diagnostic",
+                **sentinel_policy.economy_disposition(
+                    economy_health_status, seat_reports, structural_failures,
+                    expected_health_roster),
+                # Raw evidence kept verbatim: per-seat analyze_economy reports
+                # (status/findings/error) and the ordered structural failures.
+                "seat_reports": seat_reports,
+                "structural_failures": structural_failures,
+            }
+        elif args.require_economy_health:
             try:
                 expected_health_roster = planned_economy_roster(variants_root / m["variant"] / "map.yaml", m)
                 economy_health_status, economy_health_error = economy_health_file_status(
@@ -1798,7 +2027,13 @@ def main() -> int:
             economy_health_status, economy_health_error = "NOT_REQUIRED", None
         if status == "ok" and not records:
             status = "norecord"
-        status = apply_economy_health_requirement(status, economy_health_status, args.require_economy_health)
+        # Sentinel blocks through the same required-semantics converter, but
+        # only when the policy disposition is blocking — baseline-exempted and
+        # clean_diagnostic keep status (the raw BLOCK stays in health_status).
+        status = apply_economy_health_requirement(
+            status, economy_health_status,
+            args.require_economy_health
+            or (sentinel_health_policy or {}).get("disposition") == "blocking")
 
         outcome = sorted(
             (r.get("player", {}).get("faction"), r.get("player", {}).get("outcome"))
@@ -1849,11 +2084,29 @@ def main() -> int:
             result["new_exceptions"] = new_exc
         if economy_health_error:
             result["health_error"] = economy_health_error
+        result = stamp_sentinel_result(result, sentinel_health_policy)
         if records:
             with log_path.open("a", encoding="utf-8") as aggregate_log:
                 for record in records:
                     aggregate_log.write(json.dumps(record, separators=(",", ":")) + "\n")
-        promote_unique_match_logs(match_support, logs_dir)
+        sentinel_uids = sorted({
+            str(r.get("game_uid")) for r in records
+            if isinstance(r, dict) and r.get("game_uid")
+        }) if args.sentinel_diagnostic else []
+        promote_unique_match_logs(
+            match_support, logs_dir,
+            capture_uid=sentinel_uids[0] if args.sentinel_diagnostic and len(sentinel_uids) == 1 else None)
+        if args.sentinel_diagnostic:
+            # Per-game quarantine sidecar at the support root binds every
+            # artifact the leaf produced (incl. the canonical MATCH_LOG, which
+            # promotion deliberately skips) to this capture's game UID(s).
+            import capture_provenance
+            capture_provenance.write_provenance(
+                match_support,
+                capture_kind="sentinel_diagnostic",
+                scoreable=False,
+                game_uids=sentinel_uids,
+                extra={"match_label": match_support.name})
         results.append(result)
         # Durable per-match progress: a batch killed mid-run (the batch
         # process itself is as sweepable as the matches) still leaves this
@@ -1919,6 +2172,14 @@ def main() -> int:
     if drift_aborted is not None:
         summary["aborted"] = "fingerprint_drift"
         summary["fingerprint_drift"] = drift_aborted
+    batch_uids = sorted({
+        str(o.get("record_id") or "").rsplit("|", 1)[0]
+        for r in results
+        for o in (r.get("bot_outcomes") or [])
+        if "|" in str(o.get("record_id") or "")
+    })
+    summary = stamp_sentinel_summary(
+        summary, batch_uids if args.sentinel_diagnostic else None)
     (support / "batch_summary.json").write_text(json.dumps(summary, indent=2), encoding="utf-8")
 
     print(
@@ -1951,6 +2212,20 @@ def main() -> int:
             shutil.rmtree(variants_root / name, ignore_errors=True)
 
     round_trip_failed = args.round_trip and run_round_trip(support, summary) != 0
+
+    # Batch-root provenance manifest — written in BOTH modes (Sol binding:
+    # positive binding needs actual artifact SHA + complete UID membership,
+    # ancestry alone never proves eligibility). Additive file only; no
+    # serialized output is touched. Written last so it covers the summary and
+    # round-trip report; variant dirs are already cleaned unless kept.
+    import capture_provenance
+    capture_provenance.write_provenance(
+        support,
+        capture_kind="sentinel_diagnostic" if args.sentinel_diagnostic else "match_batch",
+        scoreable=not args.sentinel_diagnostic,
+        game_uids=batch_uids,
+        extra={"fingerprint_id": batch_fp_id},
+    )
 
     if drift_aborted is not None:
         return 1

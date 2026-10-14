@@ -72,8 +72,17 @@ def fit(batch_dirs: list[pathlib.Path]) -> dict:
     matches = []
 
     for d in batch_dirs:
-        records = read_jsonl(d / "Logs" / "cameo-ai-matches.jsonl")
-        situations = read_jsonl(d / "Logs" / "cameo-ai-situations.jsonl")
+        # Learned-output ingest is provenance-gated: sentinel captures never
+        # fit. Missing files keep read_jsonl's [] tolerance — the gate only
+        # applies to files that exist.
+        import capture_provenance
+        matches_path = d / "Logs" / "cameo-ai-matches.jsonl"
+        situations_path = d / "Logs" / "cameo-ai-situations.jsonl"
+        if (matches_path.is_file() and not capture_provenance.gate_ingest(matches_path)) or (
+                situations_path.is_file() and not capture_provenance.gate_ingest(situations_path)):
+            continue
+        records = read_jsonl(matches_path)
+        situations = read_jsonl(situations_path)
         by_game: dict[str, list[dict]] = {}
         for r in records:
             by_game.setdefault(r.get("game_uid", ""), []).append(r)

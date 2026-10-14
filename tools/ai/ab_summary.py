@@ -40,10 +40,17 @@ def wilson(wins: int, n: int, z: float = 1.96) -> tuple[float, float]:
 
 
 def records(paths: list[str]):
+    import capture_provenance
+
     for arg in paths:
         p = pathlib.Path(arg)
         files = [p] if p.is_file() else list(p.rglob("cameo-ai-matches.jsonl"))
         for f in files:
+            verdict, why = capture_provenance.assess_file(f)
+            if verdict == capture_provenance.SENTINEL:
+                continue
+            if verdict == capture_provenance.REJECT:
+                raise ValueError(f"unbound provenance for {f}: {why}")
             for line in f.read_text(encoding="utf-8").splitlines():
                 if line.strip():
                     yield json.loads(line)
@@ -56,6 +63,8 @@ def arm_fingerprints(paths: list[str]):
     more than one fingerprint is a mixed arm — the batch crossed a mid-run
     change and its matches are not one experiment. `fingerprint_drift`
     tombstones are the abort trail, not data, and don't count as mixing."""
+    import capture_provenance
+
     for arg in paths:
         p = pathlib.Path(arg)
         if p.is_file():
@@ -63,11 +72,18 @@ def arm_fingerprints(paths: list[str]):
         else:
             files = list(p.rglob("batch_results.jsonl"))
         for f in files:
+            verdict, why = capture_provenance.assess_file(f)
+            if verdict == capture_provenance.SENTINEL:
+                continue
+            if verdict == capture_provenance.REJECT:
+                raise ValueError(f"unbound provenance for {f}: {why}")
             arms = collections.defaultdict(lambda: {"results": 0, "drift_only": True})
             for line in f.read_text(encoding="utf-8").splitlines():
                 if not line.strip():
                     continue
                 r = json.loads(line)
+                if capture_provenance.record_marked(r):
+                    continue
                 e = arms[r.get("fingerprint")]
                 e["results"] += 1
                 if r.get("status") != "fingerprint_drift":

@@ -42,15 +42,19 @@ EVENT_KINDS = sorted(health.PLAYER_EVENT_V2_KINDS)
 
 
 def player_files(paths):
+    import capture_provenance
     out = []
     for p in paths:
         if p.is_file() and p.name.startswith("cameo-ai-players-"):
-            out.append(p)
+            if capture_provenance.gate_ingest(p):
+                out.append(p)
             continue
         logs = p / "Logs" if (p / "Logs").is_dir() else p
         found = sorted(logs.glob(PLAYERS_GLOB))
         if found:
-            out.extend(found)
+            # Provenance-gated: sentinel-quarantined channels never print;
+            # unbound/malformed provenance hard-rejects before any output.
+            out.extend(f for f in found if capture_provenance.gate_ingest(f))
         else:
             sys.exit(f"no {PLAYERS_GLOB} under {p}")
     if len(out) > health.MAX_PLAYER_FILES:
@@ -134,11 +138,12 @@ def read_channel(path):
 
 def match_records(support_dirs):
     """seat -> match outcome rows, keyed by game_uid, from cameo-ai-matches.jsonl."""
+    import capture_provenance
     out = collections.defaultdict(dict)
     for p in support_dirs:
         logs = p / "Logs" if (p / "Logs").is_dir() else p
         path = logs / MATCH_LOG
-        if not path.exists():
+        if not path.exists() or not capture_provenance.gate_ingest(path):
             continue
         rows, _ = health.read_jsonl(path)
         for r in rows:

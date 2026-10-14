@@ -6,6 +6,7 @@ import pathlib
 import sys
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1] / "ai"))
+import capture_provenance  # noqa: E402
 import tune_build_order as tbo  # noqa: E402
 
 
@@ -13,6 +14,16 @@ def _mkdir(root, arm):
     logs = root / arm / "Logs"
     logs.mkdir(parents=True)
     return logs
+
+
+def _bind(arm_dir):
+    """Scoreable test provenance: unbound fixtures fail closed at gated sinks."""
+    uids = set()
+    for f in pathlib.Path(arm_dir).rglob("*.jsonl"):
+        uids |= capture_provenance.file_game_uids(f)
+    capture_provenance.write_provenance(
+        pathlib.Path(arm_dir), capture_kind="match_batch", scoreable=True,
+        game_uids=sorted(uids))
 
 
 def _match(uid, name, outcome="won", ticks=27000, personality="rush", faction="td_gdi",
@@ -44,6 +55,7 @@ def _write(logs, matches, situations, engagements):
     (logs / "cameo-ai-matches.jsonl").write_text("\n".join(json.dumps(r) for r in matches), encoding="utf-8")
     (logs / "cameo-ai-situations.jsonl").write_text("\n".join(json.dumps(r) for r in situations), encoding="utf-8")
     (logs / "cameo-ai-engagements.jsonl").write_text("\n".join(json.dumps(r) for r in engagements), encoding="utf-8")
+    _bind(logs.parent)
 
 
 def test_funnel_counts_every_drop_reason_and_scored(tmp_path):

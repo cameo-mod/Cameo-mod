@@ -762,7 +762,19 @@ def main() -> int:
         if prev_path is None and args.write is not None and args.write.exists():
             prev_path = args.write
         prev = load_prev(prev_path)
-    result = fit(c.load(args.dirs), profiles, priors, prev=prev, ledger_hash=ledger_hash)
+    # Learned-output ingest is provenance-gated: sentinel captures never fit.
+    # Same four streams as ai_log_common.load, gated per file (missing files
+    # keep read_jsonl's [] tolerance).
+    import capture_provenance
+    data = {"matches": [], "situations": [], "placements": [], "engagements": []}
+    for d in args.dirs:
+        logs = c.logs_dir(d)
+        for key, name in (("matches", c.MATCH_LOG), ("situations", c.SITUATION_LOG),
+                          ("placements", c.PLACEMENT_LOG), ("engagements", c.ENGAGEMENT_LOG)):
+            p = logs / name
+            if p.is_file() and capture_provenance.gate_ingest(p):
+                data[key] += c.read_jsonl(p)
+    result = fit(data, profiles, priors, prev=prev, ledger_hash=ledger_hash)
     result["meta"] = meta
     result["excluded_tags"] = excluded
     if args.json:

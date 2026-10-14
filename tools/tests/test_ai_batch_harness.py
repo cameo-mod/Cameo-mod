@@ -756,6 +756,14 @@ class ArmFingerprintSummaryTests(unittest.TestCase):
         import io
         sys.path.insert(0, str(ROOT / "tools" / "ai"))
         import ab_summary
+        import capture_provenance
+        # Scoreable test provenance: unbound fixtures fail closed at gated sinks.
+        uids = set()
+        for f in pathlib.Path(td).rglob("*.jsonl"):
+            uids |= capture_provenance.file_game_uids(f)
+        capture_provenance.write_provenance(
+            pathlib.Path(td), capture_kind="match_batch", scoreable=True,
+            game_uids=sorted(uids))
         out = io.StringIO()
         with contextlib.redirect_stdout(out):
             rc = ab_summary.main([td])
