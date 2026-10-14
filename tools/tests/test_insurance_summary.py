@@ -7,7 +7,7 @@ import pathlib
 import tempfile
 import unittest
 
-from tools.ai import ab_summary, insurance_summary as subject
+from tools.ai import ab_summary, capture_provenance, insurance_summary as subject
 
 
 def fixture():
@@ -27,8 +27,18 @@ class InsuranceSummaryTest(unittest.TestCase):
         self.addCleanup(self.tmp.cleanup)
         self.path = pathlib.Path(self.tmp.name) / "cameo-ai-insurance-fixture.jsonl"
 
+    def _bind(self):
+        # Scoreable test provenance: unbound fixtures fail closed at gated sinks.
+        uids = set()
+        for f in pathlib.Path(self.tmp.name).rglob("*.jsonl"):
+            uids |= capture_provenance.file_game_uids(f)
+        capture_provenance.write_provenance(
+            pathlib.Path(self.tmp.name), capture_kind="match_batch",
+            scoreable=True, game_uids=sorted(uids))
+
     def write(self, rows):
         self.path.write_text("".join(json.dumps(r) + "\n" for r in rows), encoding="utf-8")
+        self._bind()
 
     def test_valid_totals_and_each_reason(self):
         for reason in subject.REASONS:
@@ -67,6 +77,7 @@ class InsuranceSummaryTest(unittest.TestCase):
         self.write(fixture())
         duplicate = self.path.with_name("cameo-ai-insurance-copy.jsonl")
         duplicate.write_bytes(self.path.read_bytes())
+        self._bind()
         self.assertTrue(all(r["status"] == "UNKNOWN" for r in subject.summaries([self.tmp.name])))
 
     def test_zero_recorded_is_distinct_from_missing_and_timestep_filters(self):

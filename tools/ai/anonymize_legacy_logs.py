@@ -361,13 +361,13 @@ def migrate(support_dir: Path) -> dict:
             if temp.exists():
                 temp.unlink()
     # Derived SHA-bound provenance for inputs that were positively bound
-    # before the rewrite: the new bytes are rebound to the same game UIDs as a
-    # legacy_import so the rewritten file's CAT-1 association is preserved.
+    # before the rewrite: the new bytes are rebound under their rewritten
+    # game UIDs as a legacy_import so the file's CAT-1 association is preserved.
     for path, info in bound_inputs.items():
         if path in rewritten:
             capture_provenance.write_file_sibling(
                 path,
-                game_uids=info["game_uids"],
+                game_uids=capture_provenance.file_game_uids(path),
                 capture_kind=capture_provenance.LEGACY_KIND,
                 scoreable=True,
                 extra={"derived_from_sha256": info["sha256"],

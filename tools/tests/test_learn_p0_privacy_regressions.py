@@ -9,6 +9,7 @@ ROOT=Path(__file__).resolve().parents[2]
 sys.path[:0]=[str(ROOT/'tools/ai'),str(ROOT/'tools/audit')]
 import audit_no_player_names as audit
 import anonymize_legacy_logs as legacy
+import capture_provenance
 import fit_opponent_signatures as signatures
 import fit_arsenal_priors as arsenal
 import expansion_report as expansion
@@ -21,6 +22,20 @@ def write(path,rows):
     path.parent.mkdir(parents=True,exist_ok=True)
     path.write_text(''.join(json.dumps(r)+'\n' for r in rows),encoding='utf-8')
     return path
+
+
+def bind(path):
+    """Scoreable test provenance: unbound fixtures fail closed at gated sinks."""
+    p=Path(path)
+    if p.is_file():
+        capture_provenance.write_file_sibling(p,game_uids=sorted(capture_provenance.file_game_uids(p)),
+                                            capture_kind='match_batch',scoreable=True)
+        return p
+    uids=set()
+    for f in p.rglob('*.jsonl'):
+        uids|=capture_provenance.file_game_uids(f)
+    capture_provenance.write_provenance(p,capture_kind='match_batch',scoreable=True,game_uids=sorted(uids))
+    return p
 
 
 def match(seat,outcome='won'):
@@ -74,12 +89,12 @@ def test_finding_3_fresh_two_seat_readers_and_hidden_faction_pipeline(tmp_path):
     places=[{'seat':seat,'game_uid':'00000000-0000-0000-0000-000000000001','tick':tick,'actor':'td_gdi_minigunner','category':'refinery','reason':'base'}
             for seat,tick in [('seat_4',100),('seat_13',200)]]
     d=tmp_path/'batch';write(d/'Logs/cameo-ai-matches.jsonl',matches);write(d/'Logs/cameo-ai-situations.jsonl',snaps)
-    fitted=arsenal.fit([d]);assert fitted['matches']==1;assert len(fitted['visibility'][0])==2
+    fitted=arsenal.fit([bind(d)]);assert fitted['matches']==1;assert len(fitted['visibility'][0])==2
     data={'matches':matches,'situations':snaps,'placements':places}
     ex=expansion.build(data)['matches'];assert len(ex)==2;assert [x['first_refinery_tick'] for x in ex]==[200,100]
     bo=build_order.build(data)['matches'];assert len(bo)==2;assert sorted(x['outcome']['win'] for x in bo)==[0,1]
     matches[0]['opponent_signatures']=[{'seat':'seat_13','seen':{'faction':'','army_value':100},'truth':None}]
-    fitted=signatures.fit([write(tmp_path/'match.jsonl',matches)])
+    fitted=signatures.fit([bind(write(tmp_path/'match.jsonl',matches))])
     assert fitted['clusters'][0]['faction']=='unknown'
     output=tmp_path/'opponent_signatures.yaml';output.write_text(signatures.dump_yaml(fitted))
     assert audit.validate_learned([output])==[]
@@ -89,10 +104,10 @@ def test_finding_5_truth_features_change_relabel_and_survive_fit_dump_audit(tmp_
     row=match('seat_4');seen={k:0 for k in signatures.FEATURES};seen.update(faction='',army_value=100)
     truth={k:0 for k in signatures.FEATURES};truth.update(faction='td_nod',army_value=800)
     row['opponent_signatures']=[{'seat':'seat_13','tick':750,'seen':seen,'truth':truth}]
-    path=write(tmp_path/'match.jsonl',[row]);a=signatures.fit([path])
+    path=bind(write(tmp_path/'match.jsonl',[row]));a=signatures.fit([path])
     assert a['relabels'][0]['recognized']!=a['relabels'][0]['actual']
     row['opponent_signatures'][0]['truth']['army_value']=3200
-    b=signatures.fit([write(path,[row])]);assert a!=b
+    b=signatures.fit([bind(write(path,[row]))]);assert a!=b
     out=tmp_path/'opponent_signatures.yaml';out.write_text(signatures.dump_yaml(b))
     assert audit.validate_learned([out])==[]
     out.write_text(signatures.dump_yaml(b).replace('army_value:', 'player_name:'))

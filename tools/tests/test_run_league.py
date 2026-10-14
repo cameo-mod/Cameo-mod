@@ -15,6 +15,16 @@ ROOT = pathlib.Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "tools/ai"))
 
 import run_league
+import capture_provenance
+
+
+def bind_cell(cell_dir: pathlib.Path) -> None:
+    """Scoreable test provenance: unbound fixtures fail closed at gated sinks."""
+    uids = set()
+    for f in cell_dir.rglob("*.jsonl"):
+        uids |= capture_provenance.file_game_uids(f)
+    capture_provenance.write_provenance(
+        cell_dir, capture_kind="match_batch", scoreable=True, game_uids=sorted(uids))
 
 
 def write_cell(cell_dir: pathlib.Path, rows: list[dict], completed: int = 1,
@@ -43,6 +53,7 @@ def write_cell(cell_dir: pathlib.Path, rows: list[dict], completed: int = 1,
             row.update(status=match_status or "ok",
                        health_status=match_status or "OBSERVED_HEALTHY")
             fh.write(json.dumps(row) + "\n")
+    bind_cell(cell_dir)
 
 
 def candidate_won(game, slot, spawn, member, opp_slot, opp_spawn):

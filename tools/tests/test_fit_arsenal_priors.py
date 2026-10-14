@@ -4,7 +4,18 @@ import pathlib
 import sys
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1] / "ai"))
+import capture_provenance  # noqa: E402
 import fit_arsenal_priors as fap  # noqa: E402
+
+
+def _bind(path):
+    """Scoreable test provenance: unbound fixtures fail closed at gated sinks."""
+    p = pathlib.Path(path)
+    uids = set()
+    for f in p.rglob("*.jsonl"):
+        uids |= capture_provenance.file_game_uids(f)
+    capture_provenance.write_provenance(
+        p, capture_kind="match_batch", scoreable=True, game_uids=sorted(uids))
 
 
 def test_small_samples_shrink_toward_an_even_trade():
@@ -27,6 +38,7 @@ def test_one_match_fits_trades_and_elo(tmp_path):
     rows = [rec("hard", "Multi0", "won", [{"type": "tank", "killed_value": 9000, "lost_value": 1000, "created": 3}]),
             rec("classic", "Multi1", "lost", [{"type": "tank", "killed_value": 1000, "lost_value": 9000, "created": 3}])]
     (logs / "cameo-ai-matches.jsonl").write_text("\n".join(json.dumps(r) for r in rows), encoding="utf-8")
+    _bind(tmp_path / "ab_x_1")
     result = fap.fit([tmp_path / "ab_x_1"])
     assert result["matches"] == 1
     assert result["ratings"]["ab_x/hard"] > result["ratings"]["classic"]

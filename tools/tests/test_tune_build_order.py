@@ -4,7 +4,18 @@ import pathlib
 import sys
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1] / "ai"))
+import capture_provenance  # noqa: E402
 import tune_build_order as tbo  # noqa: E402
+
+
+def _bind(arm_dir):
+    """Scoreable test provenance: unbound fixtures fail closed at gated sinks."""
+    uids = set()
+    for f in pathlib.Path(arm_dir).rglob("*.jsonl"):
+        uids |= capture_provenance.file_game_uids(f)
+    capture_provenance.write_provenance(
+        pathlib.Path(arm_dir), capture_kind="match_batch", scoreable=True,
+        game_uids=sorted(uids))
 
 BASE = "bo__rush__ra1_allies__base"
 UP = "bo__rush__ra1_allies__tempo__up100"
@@ -210,6 +221,7 @@ def test_load_matches_reads_logs_groups_by_arm_and_scores(tmp_path):
     (logs / "cameo-ai-situations.jsonl").write_text("\n".join(json.dumps(r) for r in [
         situation("g1", "Multi0", 100, ""), situation("g1", "Multi0", 900, "eco"), situation("g3", "Multi0", 900, "fast_tech")]),
         encoding="utf-8")
+    _bind(tmp_path / "bo__rush__ra1_allies__base_3")
     rows = tbo.load_matches([tmp_path / "bo__rush__ra1_allies__base_3"])
     assert [(r["arm"], r["opening"], round(r["win"])) for r in rows] == [(BASE, "eco", 1), (BASE, "fast_tech", 0)]
     assert rows[0]["knobs"]["tempo"] == 1000 and rows[0]["knobs"]["support"] == 1007
@@ -483,6 +495,7 @@ def test_spsa_composite_objective_and_load_matches_el_join(tmp_path):
     (logs / "cameo-ai-matches.jsonl").write_text(json.dumps(match), encoding="utf-8")
     (logs / "cameo-ai-situations.jsonl").write_text(json.dumps(situation), encoding="utf-8")
     (logs / "cameo-ai-engagements.jsonl").write_text("\n".join(json.dumps(e) for e in engagements), encoding="utf-8")
+    _bind(tmp_path / "bo__rush__ra1_allies__base_1")
     [r] = tbo.load_matches([tmp_path / "bo__rush__ra1_allies__base_1"])
     assert r["el_n"] == 2 and abs(r["el_mean_milli"] - 300) < 1e-9, "skirmish records are excluded"
     assert abs(tbo.composite_score(r) - (r["score"] + tbo.EL_WEIGHT * 0.3)) < 1e-9

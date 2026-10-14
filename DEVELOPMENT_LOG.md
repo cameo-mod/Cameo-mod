@@ -1,3 +1,39 @@
+# 2026-10-14 — Devin: SENTINEL-RUNNER-POLICY (01a13a15) — post-freeze defect repair, fixture binding
+
+*Devin-Developer.* Self-inflicted defect found while preparing the qualification
+handoff for `0407baf8f`: the provenance gates correctly fail closed
+(`gate_ingest`/`assess_file` raise on absent provenance at every hard scoreable
+sink), but the branch touched zero existing test fixtures — ~10 existing test
+modules drove gated sinks on bare tempdir trees and would have failed the
+DevOps pytest stage en masse. HOLD notice filed to Reviewer/Luna
+(`HOLD_2026-10-14_sentinel_audit_0407baf8f_devin.md`); the frozen SHA is
+superseded by this fix commit.
+
+**Production fixes (3 real bugs surfaced by the exercise).**
+`_row_uids` now descends into `bot_outcomes[*].record_id` so a marked
+batch_results row scopes by UID as designed; `assess_file` keeps SENTINEL when a
+quarantine binding's sha drifts (byte drift cannot un-quarantine — fail-safe
+direction), and a file's own marker rows no longer quarantine the file itself
+(row-level skipping is each sink's job); `rebind_artifact` re-derives the
+complete binding — sha AND unioned uid membership — so byte-rewriting
+transforms (anonymizer's `game_uid → legacy-*`) leave docs claiming the new
+uids, and the anonymizer's derived sibling claims post-rewrite uids.
+
+**Test fixture binding.** 10 modules gained a local `bind`/`bind_dir`/
+`bind_file` helper writing `capture_provenance` manifests
+(`match_batch`, `scoreable=True`, uids unioned from `file_game_uids`) over
+fixture trees before gated calls — emulating real captures, which always emit
+manifests. No production gating was weakened. Rebinds placed after fixture
+rewrites (duplicate-copy, fingerprint-drift, signature-truth cases).
+
+**Verified:** `test_capture_provenance` + `test_sentinel_policy` 139/139;
+gated-importer sweep 549 passed / 0 provenance failures. Remaining failure
+(`test_actual_csharp_generated_schema_file`, plus unrelated owned-names/fluent/
+economy-logger items) is pre-existing environmental — worktrees carry no
+`engine/` and those tests guard on `pointer.exists()`. No builds, no games, no
+qualification; serial gates stand.
+
+
 # 2026-10-14 — Devin: PUSH-1-BEHAVIOR-REPAIR (01a1390f) — hard-only bank-overflow rung
 
 *Devin-Developer.* Sentinel cell-1 halted on a real gate failure (acting-lead

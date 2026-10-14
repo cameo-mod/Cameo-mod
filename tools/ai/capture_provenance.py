@@ -137,7 +137,8 @@ def _load_json(path: pathlib.Path):
 
 
 def _row_uids(row) -> set[str]:
-    """game_uid plus the record_id prefix form (`<uid>|<seat>`)."""
+    """game_uid plus record_id prefix forms (`<uid>|<seat>`), including the
+    per-seat carriers nested in a batch_results row's `bot_outcomes`."""
     uids: set[str] = set()
     if not isinstance(row, dict):
         return uids
@@ -147,6 +148,9 @@ def _row_uids(row) -> set[str]:
     rid = row.get("record_id")
     if isinstance(rid, str) and "|" in rid:
         uids.add(rid.rsplit("|", 1)[0])
+    for sub in row.get("bot_outcomes") or []:
+        if isinstance(sub, dict):
+            uids |= _row_uids(sub)
     return uids
 
 
@@ -277,9 +281,13 @@ def assess_file(path: pathlib.Path, game_uids: set[str] | None = None) -> tuple[
             return REJECT, f"malformed provenance record {apath}"
         binding = _assoc_binding(assoc, f, sha, uids)
         if kind == SENTINEL_KIND or scoreable is False:
-            if binding in ("bound", "uid_only"):
+            if binding in ("bound", "uid_only", "sha_mismatch"):
+                # Quarantine persists through byte drift: a sha_mismatch means
+                # this manifest tried to bind the file, so it is in the
+                # capture's scope regardless of what the bytes now are. This
+                # direction is fail-safe — it can only exclude, never score.
                 return SENTINEL, f"{f.name} bound to sentinel capture by {apath}"
-            if binding in ("sha_mismatch", "malformed"):
+            if binding == "malformed":
                 return REJECT, f"conflicting provenance {apath}: {binding}"
             # A sentinel manifest that does not cover this file proves
             # nothing either way; keep scanning for a positive binding.
@@ -299,6 +307,11 @@ def assess_file(path: pathlib.Path, game_uids: set[str] | None = None) -> tuple[
     # Ancestor batch outputs: explicit sentinel markers/sentinel_uids reject
     # immediately; a marker-free summary is not positive binding (Sol).
     for mpath in _marker_summaries(f):
+        if mpath == f:
+            # A file's own marked rows never quarantine the file itself —
+            # row-level skipping is each consuming sink's job. Markers scope
+            # OTHER artifacts under the same directory.
+            continue
         if mpath.name == "batch_summary.json":
             data = _load_json(mpath)
             if data is None:
@@ -349,9 +362,13 @@ def rebind_artifact(path: pathlib.Path) -> list[pathlib.Path]:
     the file's CURRENT bytes — the derived-provenance write for byte-changing
     transforms (CAT-3 refuse-or-rebind). Quarantine docs are never rebound:
     a sentinel binding cannot be laundered through a byte rewrite.
+    The binding is re-derived completely: artifact SHA plus UID membership —
+    a transform that rewrites embedded game_uids (e.g. anonymization) leaves
+    the docs claiming the file's new uids, never the old ones.
     Returns the provenance docs updated."""
     f = pathlib.Path(path)
     new_sha = sha256_file(f)
+    new_uids = file_game_uids(f)
     updated: list[pathlib.Path] = []
     for apath in _association_paths(f):
         assoc = _load_json(apath)
@@ -360,20 +377,28 @@ def rebind_artifact(path: pathlib.Path) -> list[pathlib.Path]:
         if assoc.get("capture_kind") == SENTINEL_KIND or assoc.get("scoreable") is False:
             continue
         changed = False
+        bound = False
         artifacts = assoc.get("artifacts")
         if isinstance(artifacts, dict):
             try:
                 rel = f.relative_to(apath.parent).as_posix()
             except ValueError:
                 rel = None
-            if rel is not None and rel in artifacts and artifacts[rel] != new_sha:
-                artifacts[rel] = new_sha
+            if rel is not None and rel in artifacts:
+                bound = True
+                if artifacts[rel] != new_sha:
+                    artifacts[rel] = new_sha
+                    changed = True
+        if assoc.get("bound_file") == f.name:
+            bound = True
+            if isinstance(assoc.get("sha256"), str) and assoc["sha256"] != new_sha:
+                assoc["sha256"] = new_sha
                 changed = True
-        if (assoc.get("bound_file") == f.name
-                and isinstance(assoc.get("sha256"), str)
-                and assoc["sha256"] != new_sha):
-            assoc["sha256"] = new_sha
-            changed = True
+        if bound and new_uids:
+            have = _assoc_uids(assoc)
+            if not new_uids <= have:
+                assoc["game_uids"] = sorted(have | new_uids)
+                changed = True
         if changed:
             apath.write_text(json.dumps(assoc, indent=2, sort_keys=True) + "\n",
                              encoding="utf-8")
