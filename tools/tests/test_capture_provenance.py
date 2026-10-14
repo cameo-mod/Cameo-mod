@@ -18,13 +18,20 @@ sys.path.insert(0, str(ROOT / "tools/tests"))
 
 import ab_campaign
 import ab_campaign_analyzer as az
+import ab_campaign_pilot
 import ab_increment
 import ab_summary
 import aggregate_ai_matches
+import anonymize_legacy_logs
+import army_mix_report
 import campaign_runner
 import capture_provenance as prov
+import fit_fight_learning
 import insurance_summary
+import playtest_stats_from_logs
+import run_ai_match_batch
 import run_league
+import tune_plan_bandits
 
 UID = "uid-prov-1"
 
@@ -635,6 +642,355 @@ class ReceiptSchemaTests(unittest.TestCase):
             self.assertIn(key, props)
         self.assertNotIn("capture_kind", schema["required"])
         self.assertFalse(schema["additionalProperties"])
+
+
+class ProvenanceStateTests(unittest.TestCase):
+    """provenance_state four-way + write_file_sibling/rebind_artifact (CAT-3)."""
+
+    def test_state_bound(self):
+        support = bound_support()
+        self.assertEqual(
+            prov.provenance_state(support / "Logs" / "cameo-ai-matches.jsonl"),
+            "bound")
+
+    def test_state_sentinel(self):
+        support = bound_support(marked=True)
+        self.assertEqual(
+            prov.provenance_state(support / "Logs" / "cameo-ai-matches.jsonl"),
+            "sentinel")
+
+    def test_state_absent(self):
+        tmp = pathlib.Path(tempfile.mkdtemp(prefix="prov_state_"))
+        f = tmp / "cameo-ai-matches.jsonl"
+        write_jsonl(f, [match_row()])
+        self.assertEqual(prov.provenance_state(f), "absent")
+
+    def test_state_corrupt_on_sha_mismatch(self):
+        support = bound_support()
+        f = support / "Logs" / "cameo-ai-matches.jsonl"
+        f.write_text(f.read_text() + " ", encoding="utf-8")
+        self.assertEqual(prov.provenance_state(f), "corrupt")
+
+    def test_derived_sibling_binds_new_bytes(self):
+        tmp = pathlib.Path(tempfile.mkdtemp(prefix="prov_sib_"))
+        f = tmp / "cameo-ai-matches.jsonl"
+        write_jsonl(f, [match_row()])
+        prov.write_file_sibling(f, game_uids=[UID],
+                                capture_kind=prov.LEGACY_KIND, scoreable=True)
+        verdict, _why = prov.assess_file(f)
+        self.assertEqual(verdict, prov.ALLOW)
+
+    def test_rebind_updates_covering_manifest(self):
+        support = bound_support()
+        f = support / "Logs" / "cameo-ai-matches.jsonl"
+        f.write_text(f.read_text() + " ", encoding="utf-8")
+        verdict, _why = prov.assess_file(f)
+        self.assertEqual(verdict, prov.REJECT)  # stale manifest = conflict
+        updated = prov.rebind_artifact(f)
+        self.assertTrue(updated)
+        verdict, _why = prov.assess_file(f)
+        self.assertEqual(verdict, prov.ALLOW)
+
+    def test_rebind_never_touches_quarantine(self):
+        support = bound_support(marked=True)
+        f = support / "Logs" / "cameo-ai-matches.jsonl"
+        f.write_text(f.read_text() + " ", encoding="utf-8")
+        prov.rebind_artifact(f)
+        verdict, _why = prov.assess_file(f)
+        self.assertEqual(verdict, prov.SENTINEL)
+
+
+def engagement_support(marked=False, uid=UID):
+    """Support dir with Logs/cameo-ai-engagements.jsonl + provenance."""
+    support = pathlib.Path(tempfile.mkdtemp(prefix="prov_eng_"))
+    write_jsonl(support / "Logs" / "cameo-ai-engagements.jsonl",
+                [{"record": "engagement", "schema": "engagement/2",
+                  "game_uid": uid, "seat": "seat_0", "tick": 10}])
+    prov.write_provenance(
+        support,
+        capture_kind="sentinel_diagnostic" if marked else "match_batch",
+        scoreable=not marked, game_uids=[uid])
+    return support
+
+
+class LearnerGateTests(unittest.TestCase):
+    """Learned-artifact ingest is provenance-gated (checklist rows 13-16b)."""
+
+    def test_fit_fight_learning_skips_sentinel(self):
+        support = engagement_support(marked=True)
+        self.assertEqual(list(fit_fight_learning.read_records([support])), [])
+
+    def test_fit_fight_learning_rejects_unbound(self):
+        tmp = pathlib.Path(tempfile.mkdtemp(prefix="prov_ffl_"))
+        write_jsonl(tmp / "Logs" / "cameo-ai-engagements.jsonl",
+                    [{"record": "engagement", "game_uid": UID}])
+        with self.assertRaises(ValueError):
+            list(fit_fight_learning.read_records([tmp]))
+
+    def test_fit_fight_learning_bound_yields(self):
+        support = engagement_support()
+        rows = list(fit_fight_learning.read_records([support]))
+        self.assertEqual(len(rows), 1)
+
+    def test_fit_fight_learning_recursive_gate(self):
+        """A sentinel file nested below an arg dir is still skipped."""
+        root = pathlib.Path(tempfile.mkdtemp(prefix="prov_fflr_"))
+        support = root / "batch_0"
+        (support / "Logs").mkdir(parents=True)
+        write_jsonl(support / "Logs" / "cameo-ai-engagements.jsonl",
+                    [{"record": "engagement", "game_uid": UID}])
+        prov.write_provenance(support, capture_kind="sentinel_diagnostic",
+                              scoreable=False, game_uids=[UID])
+        self.assertEqual(list(fit_fight_learning.read_records([root])), [])
+
+    def test_tune_plan_bandits_skips_sentinel(self):
+        support = engagement_support(marked=True)
+        self.assertEqual(tune_plan_bandits.load_engagement_rows([support]), [])
+
+    def test_tune_plan_bandits_rejects_unbound(self):
+        tmp = pathlib.Path(tempfile.mkdtemp(prefix="prov_tpb_"))
+        write_jsonl(tmp / "Logs" / "cameo-ai-engagements.jsonl",
+                    [{"record": "engagement", "game_uid": UID}])
+        with self.assertRaises(ValueError):
+            tune_plan_bandits.load_engagement_rows([tmp])
+
+    def test_tune_plan_bandits_bound_yields(self):
+        support = engagement_support()
+        self.assertEqual(len(tune_plan_bandits.load_engagement_rows([support])), 1)
+
+
+class ReportGateTests(unittest.TestCase):
+    """CSV/verdict producers gate their telemetry ingest like every CAT-1."""
+
+    def test_player_files_skips_sentinel(self):
+        support = pathlib.Path(tempfile.mkdtemp(prefix="prov_ps_"))
+        write_jsonl(support / "Logs" / "cameo-ai-players-abc.jsonl",
+                    [{"schema": "cameo-player-sample", "version": 1,
+                      "tick": 0, "seat": "seat_0"}])
+        prov.write_provenance(support, capture_kind="sentinel_diagnostic",
+                              scoreable=False, game_uids=[UID])
+        self.assertEqual(playtest_stats_from_logs.player_files([support]), [])
+
+    def test_player_files_rejects_unbound(self):
+        tmp = pathlib.Path(tempfile.mkdtemp(prefix="prov_psb_"))
+        write_jsonl(tmp / "cameo-ai-players-abc.jsonl", [{"schema": "x"}])
+        with self.assertRaises(ValueError):
+            playtest_stats_from_logs.player_files([tmp / "cameo-ai-players-abc.jsonl"])
+
+    def test_player_files_bound_collects(self):
+        support = pathlib.Path(tempfile.mkdtemp(prefix="prov_psok_"))
+        write_jsonl(support / "Logs" / "cameo-ai-players-abc.jsonl",
+                    [{"schema": "cameo-player-sample", "version": 1,
+                      "tick": 0, "seat": "seat_0"}])
+        prov.write_provenance(support, capture_kind="match_batch",
+                              scoreable=True, game_uids=[UID])
+        self.assertEqual(len(playtest_stats_from_logs.player_files([support])), 1)
+
+    def test_match_records_skips_sentinel(self):
+        support = bound_support(marked=True)
+        self.assertEqual(dict(playtest_stats_from_logs.match_records([support])), {})
+
+    def test_army_mix_skips_sentinel(self):
+        support = bound_support(marked=True)
+        self.assertEqual(army_mix_report.record_files([support]), [])
+
+    def test_army_mix_rejects_unbound(self):
+        tmp = pathlib.Path(tempfile.mkdtemp(prefix="prov_amx_"))
+        write_jsonl(tmp / "Logs" / "cameo-ai-matches.jsonl", [match_row()])
+        with self.assertRaises(ValueError):
+            army_mix_report.record_files([tmp])
+
+    def test_army_mix_bound_collects(self):
+        support = bound_support()
+        self.assertEqual(len(army_mix_report.record_files([support])), 1)
+
+
+class PilotGateTests(unittest.TestCase):
+    """adjudicate() is the library-entry quarantine (runner + CLI share it)."""
+
+    def test_marked_receipt_invalid_unknown(self):
+        receipt = {"cell_id": "c1", "manifest_sha256": "m",
+                   "capture_kind": "sentinel_diagnostic"}
+        out = ab_campaign_pilot.adjudicate([], receipt, {"cell_id": "c1"}, "m")
+        self.assertEqual(out["verdict"], "INVALID_UNKNOWN")
+        self.assertIn("sentinel", out["reason"])
+
+    def test_embedded_provenance_uid_mismatch(self):
+        receipt = {"cell_id": "c1", "manifest_sha256": "m",
+                   "game_uid": UID,
+                   "capture_provenance": {"game_uids": ["other-uid"]}}
+        out = ab_campaign_pilot.adjudicate([], receipt, {"cell_id": "c1"}, "m")
+        self.assertEqual(out["verdict"], "INVALID_UNKNOWN")
+        self.assertIn("capture provenance", out["reason"])
+
+    def test_marked_match_record_invalid_unknown(self):
+        receipt = {"cell_id": "c1", "manifest_sha256": "m"}
+        out = ab_campaign_pilot.adjudicate(
+            [{"capture_kind": "sentinel_diagnostic"}], receipt,
+            {"cell_id": "c1"}, "m")
+        self.assertEqual(out["verdict"], "INVALID_UNKNOWN")
+        self.assertIn("sentinel", out["reason"])
+
+
+class AnalyzerLinkedArtifactTests(unittest.TestCase):
+    """Health sidecars and receipt-linked matches_jsonl are gated too."""
+
+    def test_load_health_sentinel_becomes_error_row(self):
+        support = pathlib.Path(tempfile.mkdtemp(prefix="prov_lh_"))
+        (support / "health.json").write_text(json.dumps(
+            {"game_uid": UID, "player": "seat_0", "findings": []}),
+            encoding="utf-8")
+        prov.write_provenance(support, capture_kind="sentinel_diagnostic",
+                              scoreable=False, game_uids=[UID])
+        out = az.load_health([support])
+        self.assertEqual(out["games"], {})
+        self.assertTrue(any("sentinel" in e["reason"] for e in out["errors"]))
+
+    def test_load_health_corrupt_raises(self):
+        support = bound_support()
+        health_file = support / "health.json"
+        health_file.write_text(json.dumps(
+            {"game_uid": UID, "player": "seat_0", "findings": []}),
+            encoding="utf-8")
+        prov.write_provenance(support, capture_kind="match_batch",
+                              scoreable=True, game_uids=[UID])
+        health_file.write_text(health_file.read_text() + " ", encoding="utf-8")
+        with self.assertRaises(ValueError):
+            az.load_health([support])
+
+    def test_seat_map_rejects_sentinel_linked_matches(self):
+        support = bound_support(marked=True)
+        linked = support / "Logs" / "cameo-ai-matches.jsonl"
+        receipt = {"game_uid": UID,
+                   "artifacts": {"matches_jsonl": {"path": str(linked)}},
+                   "seats": [{"home_location": "1,1", "faction": "td_gdi",
+                              "bot_type": "hard"}]}
+        seat_map, status, why = az.expected_health_seat_map(receipt)
+        self.assertIsNone(seat_map)
+        self.assertEqual(status, "SCHEMA_MISMATCH")
+        self.assertIn("sentinel", why)
+
+    def test_seat_map_corrupt_linked_matches_raises(self):
+        support = bound_support()
+        linked = support / "Logs" / "cameo-ai-matches.jsonl"
+        linked.write_text(linked.read_text() + " ", encoding="utf-8")
+        receipt = {"game_uid": UID,
+                   "artifacts": {"matches_jsonl": {"path": str(linked)}},
+                   "seats": [{"home_location": "1,1", "faction": "td_gdi",
+                              "bot_type": "hard"}]}
+        with self.assertRaises(ValueError):
+            az.expected_health_seat_map(receipt)
+
+
+LEGACY_MATCH_ROW = {"schema": 2, "game_uid": "game-x", "record_id": "game-x|Alpha",
+                    "player": {"name": "Alpha", "faction": "td_gdi",
+                               "bot_type": "hard", "home": "2,3"},
+                    "opponents": [{"name": "Bravo", "is_bot": False,
+                                   "faction": "td_nod", "outcome": "lost"}],
+                    "allies": [],
+                    "takeover": {"controller_client": 19}, "stats": {}}
+
+
+class AnonymizeGateTests(unittest.TestCase):
+    """CAT-3: refuse sentinel/marked/corrupt; bound inputs get derived
+    provenance that keeps the rewritten file positively bound."""
+
+    def _legacy_support(self):
+        support = pathlib.Path(tempfile.mkdtemp(prefix="prov_anon_"))
+        write_jsonl(support / "cameo-ai-matches.jsonl", [LEGACY_MATCH_ROW])
+        return support
+
+    def test_refuses_sentinel_input_before_mutation(self):
+        support = self._legacy_support()
+        prov.write_provenance(support, capture_kind="sentinel_diagnostic",
+                              scoreable=False, game_uids=["game-x"])
+        before = (support / "cameo-ai-matches.jsonl").read_bytes()
+        with self.assertRaises(ValueError):
+            anonymize_legacy_logs.migrate(support)
+        self.assertEqual((support / "cameo-ai-matches.jsonl").read_bytes(), before)
+
+    def test_refuses_marker_row_before_mutation(self):
+        support = self._legacy_support()
+        row = dict(LEGACY_MATCH_ROW, capture_kind="sentinel_diagnostic")
+        write_jsonl(support / "cameo-ai-matches.jsonl", [row])
+        before = (support / "cameo-ai-matches.jsonl").read_bytes()
+        with self.assertRaises(ValueError):
+            anonymize_legacy_logs.migrate(support)
+        self.assertEqual((support / "cameo-ai-matches.jsonl").read_bytes(), before)
+
+    def test_refuses_corrupt_provenance(self):
+        support = self._legacy_support()
+        prov.write_provenance(support, capture_kind="match_batch",
+                              scoreable=True, game_uids=["game-x"])
+        f = support / "cameo-ai-matches.jsonl"
+        f.write_text(f.read_text() + " ", encoding="utf-8")
+        with self.assertRaises(ValueError):
+            anonymize_legacy_logs.migrate(support)
+
+    def test_bound_input_rebinds_to_new_bytes(self):
+        support = self._legacy_support()
+        prov.write_provenance(support, capture_kind="match_batch",
+                              scoreable=True, game_uids=["game-x"])
+        result = anonymize_legacy_logs.migrate(support)
+        self.assertEqual(result["files_rewritten"], 1)
+        f = support / "cameo-ai-matches.jsonl"
+        verdict, why = prov.assess_file(f)
+        self.assertEqual(verdict, prov.ALLOW, why)
+
+    def test_unbound_input_stays_unbound(self):
+        support = self._legacy_support()
+        result = anonymize_legacy_logs.migrate(support)
+        self.assertEqual(result["files_rewritten"], 1)
+        verdict, _why = prov.assess_file(support / "cameo-ai-matches.jsonl")
+        self.assertEqual(verdict, prov.REJECT)  # fail-closed downstream
+
+
+class SentinelMarkerByteTests(unittest.TestCase):
+    """Checklist #18 seam: default mode is an exact identity — no marker
+    keys exist in the serialized record/summary, hence byte-identical."""
+
+    def test_default_result_is_identity(self):
+        result = {"variant": "v", "status": "ok", "records": 2}
+        self.assertIs(run_ai_match_batch.stamp_sentinel_result(result, None),
+                      result)
+        self.assertNotIn("capture_kind", result)
+        self.assertNotIn("scoreable", result)
+        self.assertNotIn("health_policy", result)
+
+    def test_default_summary_is_identity(self):
+        summary = {"matches": 1, "ok": 1, "results": []}
+        self.assertIs(run_ai_match_batch.stamp_sentinel_summary(summary, None),
+                      summary)
+        self.assertNotIn("capture_kind", summary)
+        self.assertNotIn("scoreable", summary)
+        self.assertNotIn("sentinel_uids", summary)
+
+    def test_sentinel_result_markers(self):
+        result = run_ai_match_batch.stamp_sentinel_result(
+            {"status": "ok"}, {"disposition": "clean_diagnostic"})
+        self.assertEqual(result["capture_kind"], "sentinel_diagnostic")
+        self.assertFalse(result["scoreable"])
+        self.assertEqual(result["health_policy"]["disposition"],
+                         "clean_diagnostic")
+
+    def test_sentinel_summary_markers(self):
+        summary = run_ai_match_batch.stamp_sentinel_summary({}, [UID])
+        self.assertEqual(summary["capture_kind"], "sentinel_diagnostic")
+        self.assertFalse(summary["scoreable"])
+        self.assertEqual(summary["sentinel_uids"], [UID])
+
+    def test_serialized_bytes_unchanged_default(self):
+        """Fixed-content fixture: the default path serializes byte-identical
+        because no marker keys are introduced by the stamp helpers."""
+        result = {"variant": "v", "status": "ok", "records": 2,
+                  "fingerprint": "fp1", "health_status": "OBSERVED_HEALTHY"}
+        before = json.dumps(result, indent=2, sort_keys=True)
+        run_ai_match_batch.stamp_sentinel_result(result, None)
+        self.assertEqual(json.dumps(result, indent=2, sort_keys=True), before)
+        summary = {"matches": 1, "ok": 1, "results": [dict(result)]}
+        before = json.dumps(summary, indent=2)
+        run_ai_match_batch.stamp_sentinel_summary(summary, None)
+        self.assertEqual(json.dumps(summary, indent=2), before)
 
 
 if __name__ == "__main__":

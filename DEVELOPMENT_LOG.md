@@ -21846,3 +21846,78 @@ Status: py_compile clean on all touched files; NO tests, builds, launches, or qu
 run (not authorized at this stage - DevOps bounded requalification is a later serial gate).
 Next: exact-SHA review (Devin-Reviewer) -> integrator land -> bounded requal ->
 isolated runtime package -> coordinator closeout -> four-faction sentinel sequence.
+
+
+### 2026-10-14 - SENTINEL-RUNNER-POLICY: reader-inventory closure extension (Devin-Developer)
+
+The c5d3ae744 freeze covered 10 of the 18 CAT-1 sinks in the approved reader
+inventory v4 (fleet REVIEW_2026-10-14_reader_inventory_v4_sol.md). The reviewer
+checklist (CHECKLIST_2026-10-14_sentinel_impl_exactsha_devin.md H12) binds the
+implementation to the full inventory, so this extension closes the gap before
+re-freeze.
+
+What was added:
+
+- fit_fight_learning.read_records: per-file provenance gate, recursive-safe
+  (dir args rglob cameo-ai-engagements.jsonl, each gated before parsing).
+- tune_plan_bandits.load_engagement_rows (new): engagement ingest via
+  ai_log_common.logs_dir/ENGAGEMENT_LOG with gate_ingest per file; main() uses
+  it instead of the ungated c.load()["engagements"]. read_jsonl's missing-file
+  [] tolerance preserved.
+- playtest_stats_from_logs: player_files gates direct + glob-collected
+  cameo-ai-players-*.jsonl before CSV output; match_records gates
+  cameo-ai-matches.jsonl before the seat join.
+- army_mix_report.record_files: resolved candidate (file arg, Logs/, or dir)
+  is gated before entering the report file list.
+- ab_campaign_pilot: adjudicate() is the library-entry quarantine shared by
+  campaign_runner and the CLI - marked receipts, marked match records, and
+  embedded capture_provenance that fails UID membership or artifact-SHA
+  agreement all return INVALID_UNKNOWN. CLI analyze gates --matches via
+  gate_ingest and --receipts via assess_file (sentinel refused, corrupt
+  hard-rejects, unbound bundle = normal campaign state, per-receipt checks
+  stay in adjudicate).
+- ab_campaign_analyzer: load_health records sentinel-bound health reports as
+  error rows (never silent skips, never healthy votes) and hard-rejects
+  malformed/conflicting provenance; expected_health_seat_map assesses the
+  receipt-linked artifacts.matches_jsonl.path indirection - sentinel =>
+  SCHEMA_MISMATCH exclusion, corrupt => ValueError.
+- ab_increment.smoke_verified: the match log is assessed before line counting,
+  same verdict handling as the batch_results check that follows it.
+- anonymize_legacy_logs (CAT-3): provenance_state pre-pass plus a
+  record_marked row check refuse sentinel-bound, marker-bearing, and
+  corrupt-provenance inputs before any file is touched. A scoreable-bound
+  input gets derived provenance after the atomic rewrite: a LEGACY_KIND
+  sibling binding the new bytes to the same game UIDs (with
+  derived_from_sha256) plus rebind_artifact(), which updates every covering
+  scoreable doc's artifact SHA - without it the stale ancestor manifest would
+  become a sha_mismatch conflict that outweighs the sibling. Sentinel docs
+  are never rebound (quarantine cannot launder through a byte rewrite).
+  Unbound inputs stay unbound; downstream CAT-1 ingest still fails closed.
+- capture_provenance: write_file_sibling generalizes the promoted-sibling
+  writer (scoreable form reserved for byte-changing transforms);
+  rebind_artifact + provenance_state added per above.
+- run_ai_match_batch: stamp_sentinel_result/stamp_sentinel_summary extracted
+  from the two inline marker sites - pure refactor, default mode is the
+  identity (no marker keys added), giving the byte-identical-default proof a
+  real seam.
+- Deliberate pin refreshes: wave1_scheduler TOOL_SHA256 for
+  tools/ai/run_ai_match_batch.py -> ac1068017e... (same CRLF-bytes convention
+  the old pin used, verified sha256 of the CRLF-normalized blob; the frozen
+  parity worktree copy must be updated post-land, verify_tools fails closed
+  until then). docs/audit/ab_pilot_manifest_candidate.json and
+  tools/tests/fixtures/ab_campaign_pilot_dry_run.json tool_sha256/
+  receipt_schema_sha256 re-derived from live LF-normalized bytes (batch_runner
+  04a3b59e, campaign_runner f5a8ec56, driver_analyzer c6eb831d,
+  switch_applier 9e9f6788 unchanged, schema 986ccd49).
+- test_capture_provenance.py extended (write-only): provenance_state four-way,
+  sibling + rebind (incl. never-rebind-quarantine), learner gates
+  (fit_fight_learning direct + recursive, tune_plan_bandits), report gates
+  (player files direct + dir, match join, army mix), pilot adjudicate
+  quarantine, analyzer health + linked-artifact gates, anonymize refuse-all
+  and bound-rebind paths, and a fixed-content serialized-byte identity test
+  on the stamp helpers (checklist #18 seam).
+
+Status: py_compile clean on all touched files; NO tests, builds, launches,
+or qualification run (not authorized at this stage). Next: re-freeze ->
+exact-SHA review (Devin-Reviewer) -> integrator land -> bounded requal ->
+isolated runtime package -> coordinator closeout -> sentinel sequence.

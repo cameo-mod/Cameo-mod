@@ -35,9 +35,14 @@ class Totals:
 
 
 def read_records(paths: list[pathlib.Path]):
+    import capture_provenance
     for path in paths:
         if path.is_dir():
             yield from read_records(sorted(path.rglob("cameo-ai-engagements.jsonl")))
+            continue
+        # Learned-output ingest is provenance-gated: sentinel captures never
+        # fit; unbound/malformed provenance hard-rejects before any output.
+        if not path.is_file() or not capture_provenance.gate_ingest(path):
             continue
         try:
             with path.open(encoding="utf-8") as stream:

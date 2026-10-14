@@ -184,6 +184,18 @@ def load_health(paths: list[pathlib.Path]) -> dict[str, Any]:
                 continue
             if not isinstance(data.get("game_uid"), str) or ("policy" not in data and "findings" not in data):
                 continue
+            # Capture quarantine: a sentinel-bound health report can never make
+            # a game healthy — recorded as an error row, never a silent skip.
+            # Corrupt provenance is a hard reject; an unbound report is the
+            # normal campaign state (checkers emit no provenance manifests).
+            import capture_provenance
+            verdict, why = capture_provenance.assess_file(f)
+            if verdict == capture_provenance.SENTINEL:
+                errors.append({"path": str(f), "reason": "sentinel-quarantined evidence"})
+                continue
+            if verdict == capture_provenance.REJECT and (
+                    why.startswith("malformed") or "conflicting" in why):
+                raise ValueError(f"corrupt provenance for {f}: {why}")
             player = data.get("player")
             games.setdefault(data["game_uid"], {}).setdefault(player if isinstance(player, str) else "", []).append(data)
     return {"games": games, "errors": errors}
@@ -197,12 +209,25 @@ def expected_health_seat_map(receipt: dict) -> tuple[dict[str, dict] | None, str
     art = (receipt.get("artifacts") or {}).get("matches_jsonl") or {}
     path = art.get("path")
     seats = receipt.get("seats")
-    if not isinstance(path, str) or not path or not isinstance(seats, list) or not seats             or any(not isinstance(x, dict) or not x.get("home_location") for x in seats):
+    if (not isinstance(path, str) or not path or not isinstance(seats, list)
+            or not seats
+            or any(not isinstance(x, dict) or not x.get("home_location") for x in seats)):
         return None, "UNAVAILABLE", "receipt has no matches_jsonl path or seats[].home_location"
     try:
         raw = pathlib.Path(path).read_bytes()
     except OSError as e:
         return None, "UNAVAILABLE", f"matches_jsonl unreadable: {type(e).__name__}"
+    # Linked-artifact quarantine: a sentinel-bound matches file can never
+    # certify a scoreable game — SCHEMA_MISMATCH excludes it. Corrupt
+    # provenance is a hard reject; no resolvable association is the normal
+    # campaign state (the receipt's own artifact table binds the file below).
+    import capture_provenance
+    verdict, why = capture_provenance.assess_file(pathlib.Path(path))
+    if verdict == capture_provenance.SENTINEL:
+        return None, "SCHEMA_MISMATCH", "linked matches_jsonl is sentinel-quarantined"
+    if verdict == capture_provenance.REJECT and (
+            why.startswith("malformed") or "conflicting" in why):
+        raise ValueError(f"corrupt provenance for linked artifact {path}: {why}")
     expected_sha = art.get("sha256")
     if isinstance(expected_sha, str) and hashlib.sha256(raw).hexdigest() != expected_sha:
         return None, "SCHEMA_MISMATCH", "matches_jsonl sha256 differs from the receipt artifact record"

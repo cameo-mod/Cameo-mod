@@ -493,6 +493,11 @@ def smoke_verified(support: pathlib.Path) -> tuple[bool, str]:
     log = support / "Logs" / MATCH_LOG
     records = 0
     if log.is_file():
+        verdict, why = capture_provenance.assess_file(log)
+        if verdict == capture_provenance.SENTINEL:
+            return False, f"sentinel-captured shard is not a smoke datapoint ({log})"
+        if verdict == capture_provenance.REJECT:
+            return False, f"unbound provenance for {log}: {why}"
         records = sum(
             1 for line in log.read_text(encoding="utf-8", errors="replace").splitlines()
             if line.strip())

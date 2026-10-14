@@ -1445,6 +1445,30 @@ def all_attempt_provenance(results: list[dict]) -> list[dict]:
     return [attempt for result in results for attempt in result.get("runtime_engine_attempts", [])]
 
 
+def stamp_sentinel_result(result: dict, health_policy: dict | None) -> dict:
+    """Score quarantine — either field alone is already enough for a consumer
+    to reject this record; both are always written together. Default mode
+    (health_policy None) is the identity: no marker keys are added."""
+    if health_policy is None:
+        return result
+    result["capture_kind"] = "sentinel_diagnostic"
+    result["scoreable"] = False
+    result["health_policy"] = health_policy
+    return result
+
+
+def stamp_sentinel_summary(summary: dict, sentinel_uids: list[str] | None) -> dict:
+    """Batch-level markers: a sentinel-marked summary quarantines every
+    descendant artifact at ingest even before the manifest is read. Default
+    mode (sentinel_uids None) is the identity."""
+    if sentinel_uids is None:
+        return summary
+    summary["capture_kind"] = "sentinel_diagnostic"
+    summary["scoreable"] = False
+    summary["sentinel_uids"] = sentinel_uids
+    return summary
+
+
 def fingerprint_drift_result(variant: str, fingerprint: dict, drift: dict,
                              attempt: int, runtime_engine_attempts: list[dict]) -> dict:
     """Build a drift result without discarding provenance from earlier retries."""
@@ -2054,12 +2078,7 @@ def main() -> int:
             result["new_exceptions"] = new_exc
         if economy_health_error:
             result["health_error"] = economy_health_error
-        if sentinel_health_policy is not None:
-            # Score quarantine — either field alone is already enough for a
-            # consumer to reject this record; both are always written together.
-            result["capture_kind"] = "sentinel_diagnostic"
-            result["scoreable"] = False
-            result["health_policy"] = sentinel_health_policy
+        result = stamp_sentinel_result(result, sentinel_health_policy)
         if records:
             with log_path.open("a", encoding="utf-8") as aggregate_log:
                 for record in records:
@@ -2153,12 +2172,8 @@ def main() -> int:
         for o in (r.get("bot_outcomes") or [])
         if "|" in str(o.get("record_id") or "")
     })
-    if args.sentinel_diagnostic:
-        # Batch-level markers: a sentinel-marked summary quarantines every
-        # descendant artifact at ingest even before the manifest is read.
-        summary["capture_kind"] = "sentinel_diagnostic"
-        summary["scoreable"] = False
-        summary["sentinel_uids"] = batch_uids
+    summary = stamp_sentinel_summary(
+        summary, batch_uids if args.sentinel_diagnostic else None)
     (support / "batch_summary.json").write_text(json.dumps(summary, indent=2), encoding="utf-8")
 
     print(

@@ -91,6 +91,32 @@ def write_provenance(root: pathlib.Path, *, capture_kind: str,
     return out
 
 
+def write_file_sibling(dest: pathlib.Path, *, game_uids, capture_kind: str,
+                       scoreable: bool, extra: dict | None = None) -> pathlib.Path:
+    """File-adjacent provenance for a derived/copy artifact.
+
+    Written next to the destination file as <name>.capture.json. The
+    scoreable form is reserved for transforms that rebind genuinely scoreable
+    evidence to new bytes (e.g. anonymize_legacy_logs); quarantine copies
+    always write scoreable:False.
+    """
+    if capture_kind not in KNOWN_KINDS:
+        raise ValueError(f"unknown capture_kind {capture_kind!r}")
+    doc = {
+        "schema": SCHEMA,
+        "capture_kind": capture_kind,
+        "scoreable": bool(scoreable),
+        "game_uids": sorted(set(str(u) for u in game_uids if u)),
+        "sha256": sha256_file(dest),
+        "bound_file": dest.name,
+    }
+    if extra:
+        doc.update(extra)
+    out = dest.with_name(dest.name + SIBLING_SUFFIX)
+    out.write_text(json.dumps(doc, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    return out
+
+
 def write_promoted_sibling(dest: pathlib.Path, *, game_uid: str,
                            capture_kind: str = SENTINEL_KIND) -> pathlib.Path:
     """File-adjacent provenance for a promoted/copied artifact.
@@ -98,17 +124,8 @@ def write_promoted_sibling(dest: pathlib.Path, *, game_uid: str,
     Written next to the destination file as <name>.capture.json so a copied
     artifact still carries its quarantine binding.
     """
-    doc = {
-        "schema": SCHEMA,
-        "capture_kind": capture_kind,
-        "scoreable": False,
-        "game_uids": [game_uid],
-        "sha256": sha256_file(dest),
-        "bound_file": dest.name,
-    }
-    out = dest.with_name(dest.name + SIBLING_SUFFIX)
-    out.write_text(json.dumps(doc, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-    return out
+    return write_file_sibling(dest, game_uids=[game_uid],
+                              capture_kind=capture_kind, scoreable=False)
 
 
 def _load_json(path: pathlib.Path):
@@ -325,3 +342,62 @@ def gate_ingest(path: pathlib.Path) -> bool:
     if verdict == REJECT:
         raise ValueError(f"unbound provenance for {path}: {why}")
     return True
+
+
+def rebind_artifact(path: pathlib.Path) -> list[pathlib.Path]:
+    """Rewrite every resolvable association doc that binds `path` so it binds
+    the file's CURRENT bytes — the derived-provenance write for byte-changing
+    transforms (CAT-3 refuse-or-rebind). Quarantine docs are never rebound:
+    a sentinel binding cannot be laundered through a byte rewrite.
+    Returns the provenance docs updated."""
+    f = pathlib.Path(path)
+    new_sha = sha256_file(f)
+    updated: list[pathlib.Path] = []
+    for apath in _association_paths(f):
+        assoc = _load_json(apath)
+        if not isinstance(assoc, dict):
+            continue
+        if assoc.get("capture_kind") == SENTINEL_KIND or assoc.get("scoreable") is False:
+            continue
+        changed = False
+        artifacts = assoc.get("artifacts")
+        if isinstance(artifacts, dict):
+            try:
+                rel = f.relative_to(apath.parent).as_posix()
+            except ValueError:
+                rel = None
+            if rel is not None and rel in artifacts and artifacts[rel] != new_sha:
+                artifacts[rel] = new_sha
+                changed = True
+        if (assoc.get("bound_file") == f.name
+                and isinstance(assoc.get("sha256"), str)
+                and assoc["sha256"] != new_sha):
+            assoc["sha256"] = new_sha
+            changed = True
+        if changed:
+            apath.write_text(json.dumps(assoc, indent=2, sort_keys=True) + "\n",
+                             encoding="utf-8")
+            updated.append(apath)
+    return updated
+
+
+def provenance_state(path: pathlib.Path) -> str:
+    """Four-state classification for migration/transform surfaces.
+
+    "bound"    — positively bound scoreable evidence; a transform that changes
+                 the bytes must emit derived provenance or lose the association.
+    "sentinel" — bound to a sentinel capture; transforms must refuse.
+    "corrupt"  — an association exists but is malformed or conflicting;
+                 transforms must refuse (never launder corrupt provenance).
+    "absent"   — no resolvable association at all (the legacy state); a
+                 transform leaves the output unbound, so downstream CAT-1
+                 ingest still fails closed until an operator binds it.
+    """
+    verdict, why = assess_file(path)
+    if verdict == SENTINEL:
+        return "sentinel"
+    if verdict == ALLOW:
+        return "bound"
+    if why.startswith("malformed") or "conflicting provenance" in why:
+        return "corrupt"
+    return "absent"

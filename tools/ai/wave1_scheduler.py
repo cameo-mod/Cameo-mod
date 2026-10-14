@@ -59,7 +59,10 @@ TIME_LIMIT = 1
 # bytes before the next wave — verify_tools() fails closed until then.
 TOOL_SHA256 = {
     "tools/ai/order_stream_diff.py": "1e089b45d9ea4cf8fa70cf915dbfc8f8e6cc43fea9879019828b3266305ffe9e",
-    "tools/ai/run_ai_match_batch.py": "ed3aaed6bf713224d7bdd2664a525cd5b37d560f5173d6b0e26245ac35f35071",
+    # Re-pinned 2026-10-14 for the sentinel-runner-policy landing: the frozen
+    # worktree copy must be byte-updated to the landed runner (same CRLF-byte
+    # convention as the original pin — sha256 of the CRLF-normalized blob).
+    "tools/ai/run_ai_match_batch.py": "ac1068017eb808dfe0eb65f467123a530ba4f10c67e797d3815cb812cc19f772",
     "tools/ai/order_trace.py": "af14b88696f1600fd61f4c551370da46afbec19c8caa0aa56fd749d1b8f6d9c2",
 }
 
