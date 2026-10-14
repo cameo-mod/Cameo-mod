@@ -21921,3 +21921,46 @@ Status: py_compile clean on all touched files; NO tests, builds, launches,
 or qualification run (not authorized at this stage). Next: re-freeze ->
 exact-SHA review (Devin-Reviewer) -> integrator land -> bounded requal ->
 isolated runtime package -> coordinator closeout -> sentinel sequence.
+
+
+### 2026-10-14 - SENTINEL-RUNNER-POLICY: consumer-closure addendum v3 conformance (Devin-Developer)
+
+Consumer-closure addendum v3 (fleet ADDENDUM_2026-10-14_consumer_closure.md,
+SHA B2700B4B6B67F0FB1AEF4FDBD800E6E30785EB7A7C47FDEF5A839BB0693E4D3E; Sol
+receipt 7E5DDA2E..., Luna formal re-approval + IMPLEMENTATION GO) folds the
+approved inventory v4 (0522e9b5...) with four surgical corrections: all 18
+CAT-1 sinks including playtest_stats_from_logs + army_mix_report (CAT-1 per
+Sol), insurance_summary CAT-1 in standalone AND ab_summary-embedded
+interfaces, no blanket shared-reader guard (round_trip_check and shared
+read_jsonl stay usable on sentinel/incomplete evidence), and campaign_runner
+must implement + validate capture_kind/scoreable + UID/artifact-SHA binding
+INTO the support_bundle and cell_receipt - the artifact hash manifest alone
+is not that association.
+
+Conformance state after this commit:
+
+- All 18 CAT-1 sinks gated (c5d3ae744 + 43a51eb6b cover the full table);
+  ai_log_common stays contextual infra (guards at sinks only).
+- insurance_summary.summaries is the single gate serving both its standalone
+  entry and ab_summary's embedded print_insurance_summary alias.
+- round_trip_check + all named CAT-2 readers carry zero provenance code -
+  they still inspect sentinel/incomplete evidence via utility reads.
+- anonymize_legacy_logs CAT-3 refuse-or-rebind as before.
+- NEW this commit - campaign_runner support_bundle propagation: _cell_capture
+  moved before the zip; _bundle_provenance_doc() mints a derived
+  capture_provenance.json INSIDE support_bundle.zip binding every zipped
+  artifact by SHA-256 + the cell game UID with the covering doc's capture
+  kind/scoreable. A sentinel-bound cell's bundle stays quarantined after
+  detaching from the campaign leaf; a scoreable-bound cell's bundle stays
+  positively bound; unbound cells ship no manifest (fail closed). Receipt
+  propagation (capture_kind/scoreable/capture_provenance embedded before
+  validate_receipt) unchanged.
+- campaign_runner tool pin re-derived: b515867a9fb3... (LF-normalized;
+  manifest candidate + dry-run fixture re-pinned, verified live).
+
+Tests (write-only): BundleProvenanceTests - doc shape/self-ref exclusion,
+None-when-unbound, plus end-to-end zip->extract->assess_file checks in both
+directions (sentinel stays SENTINEL, match_batch stays ALLOW).
+
+Status: py_compile clean; no tests/builds/games/qualification run - serial
+gate. Exact-SHA review target supersedes 43a51eb6b.

@@ -633,6 +633,81 @@ class CampaignRunnerTests(unittest.TestCase):
             campaign_runner._cell_capture(cell, support, root, log, UID)
 
 
+class BundleProvenanceTests(unittest.TestCase):
+    """Addendum §E: the support_bundle carries its own fail-closed binding."""
+
+    def _zipped_tree(self):
+        root = pathlib.Path(tempfile.mkdtemp(prefix="prov_bundle_"))
+        f = root / "Logs" / "cameo-ai-matches.jsonl"
+        write_jsonl(f, [match_row()])
+        return {"Logs/cameo-ai-matches.jsonl": f}
+
+    def test_doc_is_none_when_unbound(self):
+        zipped = self._zipped_tree()
+        self.assertIsNone(
+            campaign_runner._bundle_provenance_doc(zipped, None, None, UID))
+
+    def test_doc_binds_zipped_files_not_provenance(self):
+        root = pathlib.Path(tempfile.mkdtemp(prefix="prov_bundle2_"))
+        f = root / "Logs" / "cameo-ai-matches.jsonl"
+        write_jsonl(f, [match_row()])
+        prov_file = root / "capture_provenance.json"
+        prov_file.write_text("{}", encoding="utf-8")
+        zipped = {"Logs/cameo-ai-matches.jsonl": f,
+                  "capture_provenance.json": prov_file}
+        doc = campaign_runner._bundle_provenance_doc(
+            zipped, prov.SENTINEL_KIND, {"scoreable": False}, UID)
+        self.assertEqual(doc["capture_kind"], "sentinel_diagnostic")
+        self.assertFalse(doc["scoreable"])
+        self.assertEqual(doc["game_uids"], [UID])
+        # The manifest never binds itself (self-ref rule).
+        self.assertEqual(list(doc["artifacts"]), ["Logs/cameo-ai-matches.jsonl"])
+        self.assertEqual(doc["artifacts"]["Logs/cameo-ai-matches.jsonl"],
+                         prov.sha256_file(f))
+
+    def test_unzipped_bundle_stays_quarantined(self):
+        import zipfile
+        src = pathlib.Path(tempfile.mkdtemp(prefix="prov_bsrc_"))
+        f = src / "Logs" / "cameo-ai-matches.jsonl"
+        write_jsonl(f, [match_row()])
+        zipped = {"Logs/cameo-ai-matches.jsonl": f}
+        doc = campaign_runner._bundle_provenance_doc(
+            zipped, prov.SENTINEL_KIND, {"scoreable": False}, UID)
+        bundle = src / "support_bundle.zip"
+        with zipfile.ZipFile(bundle, "w") as z:
+            for rel, p in zipped.items():
+                z.write(p, rel)
+            z.writestr("capture_provenance.json",
+                       json.dumps(doc, indent=2, sort_keys=True) + "\n")
+        dest = pathlib.Path(tempfile.mkdtemp(prefix="prov_bdst_"))
+        with zipfile.ZipFile(bundle) as z:
+            z.extractall(dest)
+        verdict, _why = prov.assess_file(
+            dest / "Logs" / "cameo-ai-matches.jsonl")
+        self.assertEqual(verdict, prov.SENTINEL)
+
+    def test_scoreable_bundle_stays_bound(self):
+        import zipfile
+        src = pathlib.Path(tempfile.mkdtemp(prefix="prov_bsrc2_"))
+        f = src / "Logs" / "cameo-ai-matches.jsonl"
+        write_jsonl(f, [match_row()])
+        zipped = {"Logs/cameo-ai-matches.jsonl": f}
+        doc = campaign_runner._bundle_provenance_doc(
+            zipped, "match_batch", {"scoreable": True}, UID)
+        bundle = src / "support_bundle.zip"
+        with zipfile.ZipFile(bundle, "w") as z:
+            for rel, p in zipped.items():
+                z.write(p, rel)
+            z.writestr("capture_provenance.json",
+                       json.dumps(doc, indent=2, sort_keys=True) + "\n")
+        dest = pathlib.Path(tempfile.mkdtemp(prefix="prov_bdst2_"))
+        with zipfile.ZipFile(bundle) as z:
+            z.extractall(dest)
+        verdict, _why = prov.assess_file(
+            dest / "Logs" / "cameo-ai-matches.jsonl")
+        self.assertEqual(verdict, prov.ALLOW)
+
+
 class ReceiptSchemaTests(unittest.TestCase):
     def test_schema_allows_optional_capture_fields(self):
         schema = json.loads(
