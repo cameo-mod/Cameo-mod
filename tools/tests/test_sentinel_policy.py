@@ -178,14 +178,16 @@ class CollectorTests(unittest.TestCase):
 class DispositionTests(unittest.TestCase):
     """sentinel_policy.economy_disposition — maintainer F1 subset ruling."""
 
-    def seat(self, name, bot, status, codes=None, severities=None):
+    def seat(self, name, bot, status, codes=None, severities=None, error=None):
         codes = codes or []
         severities = severities or ["DEFECT"] * len(codes)
-        return {"player": name,
+        seat = {"player": name,
                 "status": status,
                 "findings": [{"code": c, "severity": s, "tick": 1}
-                             for c, s in zip(codes, severities)],
-                "error": None}
+                             for c, s in zip(codes, severities)]}
+        if error is not None:
+            seat["error"] = error
+        return seat
 
     def policy(self, raw, seats, failures=(), roster=None):
         return pol.economy_disposition(raw, seats, list(failures),
@@ -304,6 +306,39 @@ class DispositionTests(unittest.TestCase):
                  self.seat("seat_1", "classic", "BLOCK", ["STORAGE_FULL"])]
         self.assertEqual(self.policy("BLOCK", seats, roster=TWO_CLASSIC)["disposition"],
                          "blocking")
+
+    def test_classic_block_with_error_blocks(self):
+        # R2 completed/no-error: an errored BLOCK report's findings cannot
+        # certify completeness — exemption refuses even on the allowed pair.
+        seats = [self.seat("seat_0", "classic", "BLOCK", ["NEAR_EMPTY_FUNDS"],
+                         error="terminal/integrity validation failed"),
+                 self.seat("seat_1", "hard", "OBSERVED_HEALTHY")]
+        self.assertEqual(self.policy("BLOCK", seats)["disposition"], "blocking")
+
+    def test_healthy_co_seat_with_error_blocks(self):
+        # Same contract applied capture-wide: an errored OBSERVED_HEALTHY
+        # report beside an exemptible classic BLOCK is not a completed seat.
+        seats = [self.seat("seat_0", "classic", "BLOCK", ["NEAR_EMPTY_FUNDS"]),
+                 self.seat("seat_1", "hard", "OBSERVED_HEALTHY",
+                         error="economy stream truncated mid-seat")]
+        self.assertEqual(self.policy("BLOCK", seats)["disposition"], "blocking")
+
+    def test_classic_block_with_falsy_error_blocks(self):
+        # Strict semantics: even a falsy non-null error disqualifies.
+        seats = [self.seat("seat_0", "classic", "BLOCK", ["NEAR_EMPTY_FUNDS"],
+                         error=""),
+                 self.seat("seat_1", "hard", "OBSERVED_HEALTHY")]
+        self.assertEqual(self.policy("BLOCK", seats)["disposition"], "blocking")
+
+    def test_classic_block_with_explicit_none_error_exempted(self):
+        # Written-None is the production shape (the collector always emits
+        # the key) — it must behave identically to an absent key.
+        seat = self.seat("seat_0", "classic", "BLOCK", ["NEAR_EMPTY_FUNDS"])
+        seat["error"] = None
+        seats = [seat, self.seat("seat_1", "hard", "OBSERVED_HEALTHY")]
+        out = self.policy("BLOCK", seats)
+        self.assertEqual(out["disposition"], "baseline_exempted")
+        self.assertEqual(out["exempt_findings"], ["NEAR_EMPTY_FUNDS"])
 
 
 class MissingSituationsTests(unittest.TestCase):

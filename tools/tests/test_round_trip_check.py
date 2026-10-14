@@ -6,6 +6,7 @@ import sys
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "tools/ai"))
 
+import capture_provenance  # noqa: E402
 import round_trip_check  # noqa: E402
 
 
@@ -32,6 +33,11 @@ def make_dir(tmp_path, last_state, end_tick=9):
         {"game_uid": "g1", "record_kind": "attempt", "mission_id": "raid:1", "attempt": 1, "state": last_state, "tick": 9},
         {"game_uid": "g1", "record_kind": "mission", "mission_id": "raid:1", "event": "DORMANT", "tick": end_tick},
     ])
+    # Scoreable test provenance: check() reaches gated sinks (fit(), ab_summary)
+    # through the CAT-2 utility — unbound fixtures fail closed.
+    capture_provenance.write_provenance(
+        tmp_path / "batch", capture_kind="match_batch", scoreable=True,
+        game_uids=["g1"])
     return tmp_path / "batch"
 
 

@@ -5,9 +5,10 @@ Pure functions — no I/O, no engine state. Two axes:
 
 1. Economy-gate disposition (maintainer F1 ruling, subset-of-pair
    CONFIRMED): a sentinel capture is `baseline_exempted` only for a
-   planned-roster-proven classic seat carrying raw BLOCK whose non-empty
-   findings are all severity "DEFECT" with code in {NEAR_EMPTY_FUNDS,
-   FUNDS_BELOW_BAND}; every non-classic seat must be OBSERVED_HEALTHY and
+   planned-roster-proven classic seat carrying raw BLOCK with a completed,
+   error-free report whose non-empty findings are all severity "DEFECT"
+   with code in {NEAR_EMPTY_FUNDS, FUNDS_BELOW_BAND}; every non-classic
+   seat must be OBSERVED_HEALTHY with a completed, error-free report and
    zero structural anomalies are tolerated. All-healthy is a distinct
    `clean_diagnostic` disposition — still scoreable:false.
 
@@ -42,9 +43,15 @@ def seat_planned_bot(player: str, planned_roster) -> str | None:
 
 def _eligible_classic_block(report: dict, planned_bot: str | None) -> bool:
     """One seat is exemptible iff planned-roster classic, raw status exactly
-    BLOCK, non-empty findings, every finding severity DEFECT with code in the
-    allowed pair (one code or both; anything else blocks)."""
+    BLOCK, the report is completed and error-free (R2: an errored report's
+    findings cannot certify completeness), non-empty findings, every
+    finding severity DEFECT with code in the allowed pair (one code or
+    both; anything else blocks)."""
     if planned_bot != CLASSIC_BOT or report.get("status") != "BLOCK":
+        return False
+    # Missing key or None = no error; ANY non-null value (even empty or
+    # malformed) disqualifies — strict per exact-SHA review.
+    if report.get("error") is not None:
         return False
     findings = report.get("findings")
     if not isinstance(findings, list) or not findings:
@@ -78,6 +85,7 @@ def economy_disposition(raw_status: str, seat_reports: list[dict],
             "player": player,
             "bot_type": planned_bot,
             "status": report.get("status"),
+            "error": report.get("error"),
             "finding_codes": [f.get("code") for f in findings if isinstance(f, dict)],
         })
         eligible.append(_eligible_classic_block(report, planned_bot))
@@ -92,11 +100,12 @@ def economy_disposition(raw_status: str, seat_reports: list[dict],
     elif raw_status == HEALTHY:
         disposition = DISPOSITION_CLEAN
     elif raw_status == "BLOCK" and any(eligible) and all(
-            seat["status"] == HEALTHY or ok
+            (seat["status"] == HEALTHY and seat["error"] is None) or ok
             for seat, ok in zip(seats, eligible)):
         # Every non-healthy seat must independently satisfy the strict
         # predicate — extracted finding_codes alone would exempt a classic
-        # BLOCK seat carrying a WARN severity or a non-dict finding row.
+        # BLOCK seat carrying a WARN severity or a non-dict finding row —
+        # and a healthy seat counts only on a completed, error-free report.
         disposition = DISPOSITION_BASELINE_EXEMPTED
     else:
         disposition = DISPOSITION_BLOCKING
