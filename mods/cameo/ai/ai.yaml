@@ -5326,9 +5326,11 @@ Player:
 		# EngineerCompletionIntervalTicks paces completions on the difficulty line.
 		# CapturerInfantryLimitPct lives on the BotLimits difficulty line; 10 is only the
 		# fallback for a ruleset that ships no BotLimits.
-		# BV_m13_liveness arms BankSaturationCash on this shared instance; classic
-		# never carries genericbot, so its switch fields stay inert there.
+		# High-cash production fallback enabled for maintainer playtesting, 2026-10-15.
+		# 1 arms the fallback; BotLimits supplies the per-difficulty cash threshold.
+		# Generic-only: classic retains its existing production rules.
 		SwitchCondition: genericbot
+		BankSaturationCash: 1
 		CapturerInfantryLimitPct: 10
 		CapturerMinimumUnits: 2
 		CapturerAllowanceMax: 4
