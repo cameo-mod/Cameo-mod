@@ -178,15 +178,20 @@ def descendant_scan(work: pathlib.Path) -> dict:
 	"unreadable": [marker names that existed but did not parse],
 	"reused": [names whose live creation FILETIME differs from the
 	spawn-time FILETIME recorded in the marker — positive pid-reuse
-	evidence]}.
+	evidence],
+	"live_filetime": {name: int|None} — DIAGNOSTIC ONLY}.
 	A present-but-unreadable marker is recorded, never silently skipped —
 	an unidentifiable descendant cannot be proven contained or reaped.
-	The marker-recorded FILETIME (captured at spawn while the process was
-	provably the helper's) is authoritative identity; a live query only
-	fills in when the marker lacks one, and a live query that DISAGREES
-	with the marker is recorded as reuse, not trusted."""
+	`creation_filetime` is STRICTLY marker-sourced: it is the spawn-time
+	identity the helper recorded while the child was provably its own.
+	When the marker lacks one the value stays None — the live query result
+	lives ONLY in `live_filetime` for diagnostics and is NEVER substituted
+	into identity (a live query on a bare pid could be a reused process;
+	substituting it would let cleanup revalidate-and-kill a stranger and
+	let resolve_identity certify a false chain edge)."""
 	found: dict[str, int] = {}
 	created: dict[str, int | None] = {}
+	live: dict[str, int | None] = {}
 	unreadable: list[str] = []
 	reused: list[str] = []
 	names = ["parent_marker", "mid_spawn", "grandchild_spawn",
@@ -209,14 +214,14 @@ def descendant_scan(work: pathlib.Path) -> dict:
 			continue
 		found[name] = pid
 		marker_ft = data.get("creation_filetime")
-		if isinstance(marker_ft, int):
-			created[name] = marker_ft
-			live_ft = process_creation_filetime(pid)
-			if live_ft is not None and live_ft != marker_ft:
-				reused.append(name)
-		else:
-			created[name] = process_creation_filetime(pid)
+		created[name] = marker_ft if isinstance(marker_ft, int) else None
+		live_ft = process_creation_filetime(pid)
+		live[name] = live_ft
+		if (isinstance(marker_ft, int) and live_ft is not None
+				and live_ft != marker_ft):
+			reused.append(name)
 	return {"pids": found, "creation_filetime": created,
+			"live_filetime": live,
 			"unreadable": unreadable, "reused": reused}
 
 
@@ -883,9 +888,9 @@ def main() -> int:
 	observer_errors = []
 	finally_errors = []
 	pre_kill_scan = {"pids": {}, "creation_filetime": {},
-					 "unreadable": [], "reused": []}
+					 "live_filetime": {}, "unreadable": [], "reused": []}
 	post_run_scan = {"pids": {}, "creation_filetime": {},
-					 "unreadable": [], "reused": []}
+					 "live_filetime": {}, "unreadable": [], "reused": []}
 	pre_cleanup_alive = {}
 	post_kill_detail = {}
 
@@ -927,6 +932,7 @@ def main() -> int:
 			pre_kill_scan = descendant_scan(work)
 			observe("pre_kill_descendants", pids=pre_kill_scan["pids"],
 					creation_filetime=pre_kill_scan["creation_filetime"],
+					live_filetime=pre_kill_scan["live_filetime"],
 					unreadable=pre_kill_scan["unreadable"],
 					reused=pre_kill_scan["reused"],
 					alive={k: pid_alive(p)
@@ -989,7 +995,8 @@ def main() -> int:
 			finally_errors.append(f"post_run_scan:{error!r}")
 		observe("pre_cleanup_liveness", alive=pre_cleanup_alive,
 				unreadable=post_run_scan["unreadable"],
-				reused=post_run_scan["reused"])
+				reused=post_run_scan["reused"],
+				live_filetime=post_run_scan["live_filetime"])
 		if sentinel_proc is not None:
 			try:
 				sentinel_survived = sentinel_proc.poll() is None
