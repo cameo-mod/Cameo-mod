@@ -26,6 +26,7 @@ import ctypes
 from ctypes import wintypes
 import hashlib
 import json
+import math
 import os
 from pathlib import Path
 import subprocess
@@ -47,6 +48,21 @@ SAMPLE_INTERVAL_SECONDS = 5.0
 MAX_SAMPLE_GAP_SECONDS = 10.0
 MIN_CLEARANCE_SPACING_SECONDS = 5.0
 ROOT_EXIT_DRAIN_SECONDS = 2.0
+# run_capped.py (pinned alongside this supervisor) allows up to 15 seconds for
+# taskkill /T /F and then up to 5 seconds to reap its root after the child cap.
+# The monitor may then need one maximum sampling gap to observe root exit and
+# the bounded root-exit drain before it can begin the separately bounded
+# clearance procedure. A shorter inner cap therefore needs this much deadline
+# headroom; the independent outer run_capped cap still bounds the full monitor,
+# clearance, and receipt path.
+RUN_CAPPED_WINDOWS_TREE_KILL_SECONDS = 15.0
+RUN_CAPPED_WINDOWS_ROOT_REAP_SECONDS = 5.0
+CHILD_TIMEOUT_CLEANUP_HEADROOM_SECONDS = (
+    RUN_CAPPED_WINDOWS_TREE_KILL_SECONDS
+    + RUN_CAPPED_WINDOWS_ROOT_REAP_SECONDS
+    + MAX_SAMPLE_GAP_SECONDS
+    + ROOT_EXIT_DRAIN_SECONDS
+)
 DEFAULT_TIMEOUT_SECONDS = 900.0
 JOB_ID_LIST_CAPACITY = 512
 
@@ -1259,8 +1275,20 @@ class Monitor:
             refusals.append("child argv must declare --timeout <seconds>")
         else:
             try:
-                if float(argv[timeout_at[0] + 1]) != float(self.args.timeout):
-                    refusals.append("child --timeout must equal monitor --timeout")
+                child_timeout = float(argv[timeout_at[0] + 1])
+                monitor_timeout = float(self.args.timeout)
+                if not math.isfinite(child_timeout) or child_timeout <= 0:
+                    refusals.append("child --timeout must be finite and positive")
+                elif not math.isfinite(monitor_timeout) or monitor_timeout <= 0:
+                    refusals.append("monitor --timeout must be finite and positive")
+                elif child_timeout > monitor_timeout:
+                    refusals.append("child --timeout must not exceed monitor --timeout")
+                elif (child_timeout < monitor_timeout
+                      and monitor_timeout - child_timeout
+                      < CHILD_TIMEOUT_CLEANUP_HEADROOM_SECONDS):
+                    refusals.append(
+                        "shorter child --timeout lacks monitor cleanup headroom "
+                        f"({CHILD_TIMEOUT_CLEANUP_HEADROOM_SECONDS:g}s required)")
             except ValueError:
                 refusals.append("child --timeout is not numeric")
         cwd = Path(grant["cwd"])
@@ -1303,6 +1331,21 @@ class Monitor:
                 # never let a tainted run start (design §5 fail-closed).
                 self._stop_owned(f"pre-resume stop: {self.stop_reason}")
             else:
+                # Recheck after containment setup and suspended launch: setup
+                # time must not consume the cleanup reserve that preflight
+                # proved for a shortened child cap. The suspended root has not
+                # executed; a refusal here is safe and remains non-pass.
+                timeout_at = [
+                    i for i, part in enumerate(self.args.child_argv)
+                    if part == "--timeout"]
+                child_timeout = float(
+                    self.args.child_argv[timeout_at[0] + 1])
+                remaining = self.deadline_mono - self.mono()
+                if (child_timeout < float(self.args.timeout)
+                        and remaining < child_timeout
+                        + CHILD_TIMEOUT_CLEANUP_HEADROOM_SECONDS):
+                    raise AdapterError(
+                        "insufficient monitor deadline headroom before child resume")
                 self._resume_root()
                 self.log("info", "contained root resumed",
                          jit_id=self.args.jit_id, stage=self.args.stage)
@@ -1562,6 +1605,8 @@ class Monitor:
                 "max_owned_private_bytes": MAX_OWNED_PRIVATE_BYTES,
                 "sample_interval_seconds": SAMPLE_INTERVAL_SECONDS,
                 "max_sample_gap_seconds": MAX_SAMPLE_GAP_SECONDS,
+                "child_timeout_cleanup_headroom_seconds": (
+                    CHILD_TIMEOUT_CLEANUP_HEADROOM_SECONDS),
                 "timeout_seconds": self.args.timeout,
             },
             "started_utc": self.started_utc,
@@ -1613,8 +1658,8 @@ def main(argv: Sequence[str] | None = None,
         child = child[1:]
     if not child:
         parser.error("a run_capped argv is required after --")
-    if args.timeout <= 0:
-        parser.error("--timeout must be positive")
+    if not math.isfinite(args.timeout) or args.timeout <= 0:
+        parser.error("--timeout must be finite and positive")
     args.child_argv = child
     return Monitor(args, adapter=adapter).run()
 
