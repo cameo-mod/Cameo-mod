@@ -14,6 +14,7 @@ using System.IO;
 using System.Linq;
 using NUnit.Framework;
 using OpenRA.FileSystem;
+using OpenRA.Mods.CA.Traits.BotModules;
 using OpenRA.Mods.Cameo.Traits.BotModules;
 
 namespace OpenRA.Mods.Cameo.Test
@@ -30,7 +31,7 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
-		public void TheFourConfiguredLearnedFilesResolveInsideTheCameoPackage()
+		public void TheConfiguredLearnedFilesResolveInsideTheCameoPackage()
 		{
 			// M9: the committed defaults stay bare (mod-relative); the resolver is what makes them
 			// reachable, so pin every shipped default through it.
@@ -39,7 +40,8 @@ namespace OpenRA.Mods.Cameo.Test
 				new BotLearnedPriorsInfo().PriorsFile,
 				new BuildOrderKnobsBotModuleInfo().LearnedFile,
 				new EngagementPriorsBotModuleInfo().PriorsFile,
-				new PlanBanditBotModuleInfo().LearnedFile
+				new PlanBanditBotModuleInfo().LearnedFile,
+				new FightThresholdsBotModuleInfo().LearnedFile
 			};
 
 			foreach (var file in files)
@@ -67,6 +69,91 @@ namespace OpenRA.Mods.Cameo.Test
 					"the cameo|-prefixed path must resolve through the package's on-disk Contains");
 				using (var stream = fs.Open(LearnedFilePath.Resolve("ai/learned/priors.yaml")))
 					Assert.That(stream, Is.Not.Null);
+			}
+			finally
+			{
+				fs.UnmountAll();
+			}
+		}
+
+		static OpenRA.FileSystem.FileSystem MountPackage(string root)
+		{
+			var fs = new OpenRA.FileSystem.FileSystem("cameo", new Dictionary<string, Manifest>(), Array.Empty<IPackageLoader>());
+			fs.Mount(new Folder(root), "cameo");
+			return fs;
+		}
+
+		[Test]
+		public void FightThresholdsConsumerReadsFittedRowThroughMountedPackage()
+		{
+			// M9 regression: FightThresholdsBotModule passed the bare nested path to Exists/Open,
+			// which can never hit the file index — the learned artifact was invisible at runtime.
+			// Drive the consumer's own Load seam through a real mounted package with a synthetic
+			// artifact carrying >= 150 evidence, and prove the fitted row is consumed.
+			var root = Path.Combine(TestContext.CurrentContext.WorkDirectory, "cameo_fightpkg");
+			var rel = Path.Combine("ai", "learned", "fight_learning.yaml");
+			Directory.CreateDirectory(Path.GetDirectoryName(Path.Combine(root, rel)));
+			File.WriteAllText(Path.Combine(root, rel),
+				"BotFightLearning:\n\tSchema: 1\n\tEvidence@any: 200\n\tEngageMarginPct@any: 137\n\tRetreatRatioPct@any: 42\n");
+
+			var fs = MountPackage(root);
+			try
+			{
+				var info = new FightThresholdsBotModuleInfo();
+				var fitted = FightThresholdsBotModule.Load(fs, info.LearnedFile);
+
+				Assert.That(fitted.TryEngageMarginPct("td_gdi", "td_nod", out var margin), Is.True,
+					"a fitted engage margin must reach the consumer, not just a resolved string");
+				Assert.That(margin, Is.EqualTo(137));
+				Assert.That(fitted.TryRetreatRatioPct("td_gdi", "td_nod", out var ratio), Is.True);
+				Assert.That(ratio, Is.EqualTo(42));
+
+				// Package-qualified override passes the resolver through unchanged.
+				Assert.That(FightThresholdsBotModule.Load(fs, "cameo|" + info.LearnedFile)
+					.TryEngageMarginPct("td_gdi", "td_nod", out var overridden), Is.True);
+				Assert.That(overridden, Is.EqualTo(137));
+
+				// Missing file stays neutral — no fabricated thresholds.
+				Assert.That(FightThresholdsBotModule.Load(fs, "ai/learned/absent.yaml")
+					.TryEngageMarginPct("td_gdi", "td_nod", out _), Is.False);
+			}
+			finally
+			{
+				fs.UnmountAll();
+			}
+		}
+
+		[Test]
+		public void FightThresholdsConsumerKeepsSparseAndMalformedNeutral()
+		{
+			var root = Path.Combine(TestContext.CurrentContext.WorkDirectory, "cameo_fightpkg_ctrl");
+			var dir = Path.Combine(root, "ai", "learned");
+			Directory.CreateDirectory(dir);
+
+			// Sparse: below the 150-sample evidence floor — the row must not be consumed.
+			File.WriteAllText(Path.Combine(dir, "sparse.yaml"),
+				"BotFightLearning:\n\tSchema: 1\n\tEvidence@any: 5\n\tEngageMarginPct@any: 137\n");
+
+			// Malformed: wrong root — parses but is not a valid artifact, so it stays neutral.
+			File.WriteAllText(Path.Combine(dir, "malformed.yaml"),
+				"NotFightLearning:\n\tSchema: 1\n\tEvidence@any: 500\n\tEngageMarginPct@any: 137\n");
+
+			var fs = MountPackage(root);
+			try
+			{
+				var sparse = FightThresholdsBotModule.Load(fs, "ai/learned/sparse.yaml");
+				Assert.That(sparse.TryEngageMarginPct("td_gdi", "td_nod", out _), Is.False,
+					"sub-threshold evidence must remain honestly neutral");
+
+				var malformed = FightThresholdsBotModule.Load(fs, "ai/learned/malformed.yaml");
+				Assert.That(malformed.TryEngageMarginPct("td_gdi", "td_nod", out _), Is.False,
+					"a non-artifact document must not produce thresholds");
+
+				// Off: a constructed module has loaded nothing (and in match the RequiresCondition
+				// gate leaves the trait disabled) — every lookup returns the caller's fallback.
+				var module = new FightThresholdsBotModule(null, new FightThresholdsBotModuleInfo());
+				Assert.That(((IBotFightThresholds)module).EngageMarginPct("td_gdi", "td_nod", 999), Is.EqualTo(999));
+				Assert.That(((IBotFightThresholds)module).RetreatRatioPct("td_gdi", "td_nod", 999), Is.EqualTo(999));
 			}
 			finally
 			{
