@@ -674,6 +674,9 @@ class Monitor:
         self.deadline_mono = self.started_mono + args.timeout
         self.hold_reasons: list[str] = []
         self.stop_reason: str | None = None
+        # Permanent non-pass latch for append-only evidence write failures;
+        # once set it is never cleared, independent of stop_reason strings.
+        self.evidence_failed = False
         self.ledger: dict[str, LedgerEntry] = {}
         self.handles: dict[str, _HANDLE] = {}          # keyed by ledger key, never pid
         self.identity_gaps: list[dict[str, Any]] = []
@@ -725,11 +728,19 @@ class Monitor:
             pass
         print(line, file=sys.stderr if level in ("error", "hold") else sys.stdout, flush=True)
 
-    def _record(self, key: str, record: dict[str, Any]) -> None:
+    def _record(self, key: str, record: dict[str, Any]) -> bool:
+        """Append one evidence record; False on write/fsync failure. A failure
+        latches permanent non-pass state and requests owned cleanup (§5)."""
         try:
             self.writers[key].write(record)
-        except OSError as error:
+        except (OSError, ValueError) as error:
+            if not self.evidence_failed:
+                self.evidence_failed = True
+                self.hold_reasons.append(
+                    f"append-only evidence write failed on {key}: {error}")
             self._trigger_stop(f"receipt-write failure on {key}: {error}")
+            return False
+        return True
 
     # -- ledger ------------------------------------------------------------------
 
@@ -804,14 +815,16 @@ class Monitor:
             return
         if exited:
             entry.exited = True
-            entry.exit_verified = True
             entry.exit_code = code
             if entry.exit_utc is None:
                 entry.exit_utc = utc_now()
-            # persist exit evidence before releasing the handle (design §4)
-            self._record("ledger", {"kind": "member_exit_verified", **entry.to_record()})
-            self.win32.close_handle(handle)
-            self.handles.pop(entry.key(), None)
+            # persist exit evidence BEFORE releasing the handle; if the write
+            # fails the handle is retained and the exit stays unverified (§4).
+            entry.exit_verified = self._record(
+                "ledger", {"kind": "member_exit_verified", **entry.to_record()})
+            if entry.exit_verified:
+                self.win32.close_handle(handle)
+                self.handles.pop(entry.key(), None)
 
     def _on_exit_notification(self, pid: int) -> None:
         entries = self._live_entries_for_pid(pid)
@@ -1065,8 +1078,18 @@ class Monitor:
                 ok = False
         snap["live_ledger_keys"] = live_keys
         snap["identity_gaps"] = len(self.identity_gaps)
-        snap["clear"] = ok and not ids and accounting["ActiveProcesses"] == 0
-        self._record("clearance", snap)
+        # A latched evidence failure can never certify clearance.
+        snap["clear"] = (
+            ok and not ids and accounting["ActiveProcesses"] == 0
+            and not self.evidence_failed)
+        if not self._record("clearance", snap):
+            # Clearance evidence itself is unavailable: the snapshot is not
+            # proven clear regardless of what it computed.
+            snap["clear"] = False
+            snap["evidence_unavailable"] = True
+            self._record("clearance", {
+                "kind": "clearance_record_failed", "index": index,
+                "utc": utc_now()})
         return snap
 
     def _clearance(self, spacing_seconds: float, timeout_seconds: float) -> bool:
@@ -1238,8 +1261,12 @@ class Monitor:
             if refusals:
                 self._finalize_refusal("; ".join(refusals))
                 return EXIT_REFUSAL
-            evidence_dir.mkdir(parents=True, exist_ok=False)
-            self._open_evidence(evidence_dir)
+            try:
+                evidence_dir.mkdir(parents=True, exist_ok=False)
+                self._open_evidence(evidence_dir)
+            except OSError as error:
+                self._finalize_refusal(f"evidence dir unusable: {error}")
+                return EXIT_REFUSAL
             self._create_containment()
             self._event_thread = threading.Thread(
                 target=self._event_loop, daemon=True, name="job-events")
@@ -1388,7 +1415,10 @@ class Monitor:
                 return "ABORTED_RESOURCE"
             if "deadline" in self.stop_reason:
                 return "ABORTED_WALL_CAP"
-        if not cleared or self.hold_reasons or self.identity_gaps:
+        # Any non-null stop_reason, latched evidence failure, uncleared job,
+        # hold reason, or identity gap is non-pass — none qualify as COMPLETED.
+        if (self.evidence_failed or not cleared or self.hold_reasons
+                or self.identity_gaps or self.stop_reason is not None):
             return "HOLD"
         if inner.get("status") == "COMPLETED" and inner.get("exit_code") == 0:
             return "COMPLETED"
@@ -1466,6 +1496,7 @@ class Monitor:
             "disposition": disposition,
             "hold_reasons": self.hold_reasons,
             "stop_reason": self.stop_reason,
+            "evidence_write_failed": self.evidence_failed,
             "identity_gaps": self.identity_gaps,
             "inner": self.inner_status,
             "child_argv": list(self.args.child_argv),
