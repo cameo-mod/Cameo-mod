@@ -23,8 +23,9 @@ are now plain assertions of the FIXED behavior:
   '../../main_git' — gitdir sits at tmp/gitdirs/wt1 and the common gitdir is
   tmp/main_git; '../main_git' wrongly resolved to tmp/gitdirs/main_git and
   would have kept the nodes failing forever on the fixed resolver.
-TestMonitor._resolve_source_commit remains only to synthesize grants for the
-run-level nodes whose fake roots have no gitdir.
+TestMonitor carries no _resolve_source_commit override: grant synthesis in
+make_args exercises the production resolver on this real linked-worktree
+checkout — exactly the layout that refused before c69df80c3.
 """
 
 from __future__ import annotations
@@ -641,6 +642,86 @@ class QualMonitorDeterministicTests(unittest.TestCase):
 		self.assertEqual(code, rqm.EXIT_HOLD)
 		self.assertTrue(monitor.job_terminated)
 
+	def test_d5_member_records_parent_and_creation(self):
+		"""D5 identity completeness: a discovered member must record BOTH its
+		own creation filetime AND defensible parent linkage — parent pid plus
+		the parent's creation filetime, never pid alone."""
+		fake, clock = FakeAdapter(), FakeClock()
+		monitor = prep_state(build(self.tmp, fake, clock), fake, self.tmp)
+		root = fake.spawn_member(
+			(fake.supervisor[0], fake.supervisor[1]), notify=False)
+		root_entry = monitor._register_member(
+			root[0], "launch", fake.process_census(), is_root=True)
+		self.assertIsNotNone(root_entry.creation)
+		self.assertIsNotNone(root_entry.parent)
+		self.assertEqual(root_entry.parent["pid"], fake.supervisor[0])
+		self.assertEqual(root_entry.parent["creation_filetime"],
+						 fake.supervisor[1])
+		self.assertEqual(root_entry.parent["link"], "supervisor")
+		child = fake.spawn_member(root, notify=False)
+		child_entry = monitor._register_member(
+			child[0], "membership_query", fake.process_census())
+		self.assertIsNotNone(child_entry.creation)
+		self.assertEqual(child_entry.creation, child[1])
+		self.assertEqual(child_entry.parent["pid"], root[0])
+		self.assertEqual(child_entry.parent["creation_filetime"], root[1])
+		self.assertEqual(child_entry.parent["link"], "ledger")
+		self.assertEqual(child_entry.linkage, "defended")
+
+	def test_d5_incomplete_membership_query_is_hold(self):
+		"""D5 partial-failure: membership ids succeed but the accounting query
+		fails mid-run — an incomplete query is not silently absorbed."""
+		fake, clock = FakeAdapter(), FakeClock()
+		monitor = build(self.tmp, fake, clock,
+						inner={"status": "COMPLETED", "exit_code": 0})
+		fake.on_launch = monitor.exit_root_on_launch(fake, 0)
+		fake.fail_on["job_accounting"] = True
+		code = monitor.run()
+		self.assertEqual(code, rqm.EXIT_HOLD)
+		self.assertIsNotNone(monitor.stop_reason)
+		self.assertIn("accounting", monitor.stop_reason)
+
+	def test_d5_creation_time_failure_records_identity_gap(self):
+		"""D5 identity-gap path: when the creation-time query fails the member
+		is still ledgered (pid:gap key) with query_error set and an
+		identity_gaps record — never silently dropped, never pid-only."""
+		fake, clock = FakeAdapter(), FakeClock()
+		monitor = prep_state(build(self.tmp, fake, clock), fake, self.tmp)
+		member = fake.spawn_member(
+			(fake.supervisor[0], fake.supervisor[1]), notify=False)
+		fake.fail_on["process_creation_time"] = True
+		entry = monitor._register_member(
+			member[0], "membership_query", fake.process_census())
+		self.assertIsNone(entry.creation)
+		self.assertEqual(entry.key(), f"{member[0]}:gap")
+		self.assertEqual(entry.query_error, "creation-time-unavailable")
+		self.assertTrue(any(
+			g["pid"] == member[0] and "creation-time" in g["reason"]
+			for g in monitor.identity_gaps))
+
+	def test_d5_unresolvable_parent_is_gap_evidence(self):
+		"""D5 parent-evidence failure: a member absent from the census gets
+		parent=None and linkage=unknown plus an identity_gaps record; a member
+		whose parent pid is foreign (not supervisor, never ledgered) is
+		recorded with link=census-unresolved and no creation filetime —
+		evidence, not silent defence."""
+		fake, clock = FakeAdapter(), FakeClock()
+		monitor = prep_state(build(self.tmp, fake, clock), fake, self.tmp)
+		absent = fake.spawn_member(
+			(fake.supervisor[0], fake.supervisor[1]), notify=False)
+		entry = monitor._register_member(absent[0], "membership_query", {})
+		self.assertIsNone(entry.parent)
+		self.assertEqual(entry.linkage, "unknown")
+		self.assertTrue(any(
+			g["pid"] == absent[0] and "parent linkage" in g["reason"]
+			for g in monitor.identity_gaps))
+		orphanish = fake.spawn_member((9_999_999, 1), notify=False)
+		entry2 = monitor._register_member(
+			orphanish[0], "membership_query", fake.process_census())
+		self.assertIsNotNone(entry2.parent)
+		self.assertEqual(entry2.parent["link"], "census-unresolved")
+		self.assertIsNone(entry2.parent["creation_filetime"])
+
 	# ---- D6 sampling deadline ----------------------------------------------------------------
 
 	def test_d6_monotonic_deadline_cap(self):
@@ -665,6 +746,45 @@ class QualMonitorDeterministicTests(unittest.TestCase):
 		code = monitor.run()
 		self.assertIn("sample cadence", monitor.stop_reason or "")
 		self.assertEqual(code, rqm.EXIT_HOLD)
+
+	def test_d6_utc_regression_never_corrupts_ordering(self):
+		"""UTC wall-clock jump: utc fields are evidence-only — every ordering
+		decision derives from monotonic time. A regressed utc_now lands in the
+		records as an auditable anomaly while the run completes and sample
+		ordering stays monotonic."""
+		fake, clock = FakeAdapter(), FakeClock()
+		monitor = build(self.tmp, fake, clock,
+						inner={"status": "COMPLETED", "exit_code": 0})
+		fake.on_launch = monitor.exit_root_on_launch(fake, 0)
+		past = "2000-01-01T00:00:00.000Z"
+		with unittest.mock.patch.object(rqm, "utc_now", return_value=past):
+			code = monitor.run()
+		self.assertEqual(code, rqm.EXIT_COMPLETED)
+		samples = read_jsonl(monitor.evidence["samples"])
+		self.assertGreaterEqual(len(samples), 1)
+		monos = [s["mono"] for s in samples]
+		self.assertEqual(monos, sorted(monos))
+		self.assertTrue(all(s["utc"] == past for s in samples))
+
+	def test_d6_missing_sample_is_auditable_via_gap_evidence(self):
+		"""Precise scope for 'missing sample': there is no per-interval
+		heartbeat counter, so a skipped mid-loop sample is detected only by
+		the MAX_SAMPLE_GAP rule (asserted by the sibling node) and evidenced
+		by the mono gap between surviving records. Asserted here: the samples
+		channel is never empty (pre_resume lands before the loop) and every
+		record carries both mono and utc so gaps are machine-checkable.
+		Anything finer (expected-index sequence) is descoped — not claimed."""
+		fake, clock = FakeAdapter(), FakeClock()
+		monitor = build(self.tmp, fake, clock,
+						inner={"status": "COMPLETED", "exit_code": 0})
+		fake.on_launch = monitor.exit_root_on_launch(fake, 0)
+		code = monitor.run()
+		self.assertEqual(code, rqm.EXIT_COMPLETED)
+		samples = read_jsonl(monitor.evidence["samples"])
+		self.assertGreaterEqual(len(samples), 1)
+		for record in samples:
+			self.assertIn("mono", record)
+			self.assertIn("utc", record)
 
 	# ---- D7 clearance --------------------------------------------------------------------------
 
@@ -702,6 +822,95 @@ class QualMonitorDeterministicTests(unittest.TestCase):
 		self.assertGreaterEqual(
 			clearance[1]["mono"] - clearance[0]["mono"],
 			rqm.MIN_CLEARANCE_SPACING_SECONDS)
+
+	def test_d7_unknown_live_job_member_defeats_clearance(self):
+		"""A job member the ledger never saw must defeat certification —
+		live membership is checked independently of ledger contents."""
+		fake, clock = FakeAdapter(), FakeClock()
+		monitor = prep_state(build(self.tmp, fake, clock), fake, self.tmp)
+		stray = fake.spawn_member(
+			(fake.supervisor[0], fake.supervisor[1]), notify=False)
+		snap = monitor._clearance_snapshot(0)
+		self.assertIn(stray[0], snap["job_membership_ids"])
+		self.assertFalse(snap["clear"])
+
+	def test_d7_count_vs_ledger_is_evidenced_not_auto_held(self):
+		"""Precise scope for 'count mismatch': TotalProcesses legitimately
+		exceeds ledger size whenever a member terminated — including one the
+		ledger never saw. Asserted: the census record carries both counters so
+		the mismatch is machine-checkable, and the clearance decision is driven
+		by live membership (job_process_ids) rather than the cumulative count.
+		The live-member detector is the sibling node above; anything stronger
+		(cross-attributing terminated-but-unledgered members) is descoped —
+		evidenced, not held."""
+		fake, clock = FakeAdapter(), FakeClock()
+		monitor = prep_state(build(self.tmp, fake, clock), fake, self.tmp)
+		tracked = fake.spawn_member(
+			(fake.supervisor[0], fake.supervisor[1]), notify=False)
+		never_ledgered = fake.spawn_member(
+			(fake.supervisor[0], fake.supervisor[1]), notify=False)
+		entry = monitor._register_member(
+			tracked[0], "membership_query", fake.process_census())
+		fake.mark_exited(tracked)
+		monitor._verify_exit(entry)
+		self.assertTrue(entry.exit_verified)
+		fake.terminate_job(9001)
+		snap = monitor._clearance_snapshot(0)
+		self.assertEqual(snap["total_processes"], fake.total_ever)
+		self.assertEqual(snap["active_processes"], 0)
+		self.assertEqual(len(monitor.ledger), 1)
+		self.assertEqual(snap["job_membership_ids"], [])
+		# Descoped claim: an exited never-ledgered member widens the count
+		# without defeating clearance — the record must still expose it.
+		self.assertGreater(snap["total_processes"], len(monitor.ledger))
+
+	def test_d7_api_return_only_termination_is_verified(self):
+		"""Exit verification must not depend on IOCP notification delivery: a
+		member that exits silently is still verified when the exit-state API
+		reports it (clearance/drain path queries handles directly)."""
+		fake, clock = FakeAdapter(), FakeClock()
+		monitor = prep_state(build(self.tmp, fake, clock), fake, self.tmp)
+		key = fake.spawn_member(
+			(fake.supervisor[0], fake.supervisor[1]), notify=False)
+		entry = monitor._register_member(
+			key[0], "membership_query", fake.process_census())
+		fake.mark_exited(key, code=0, notify=False)  # no notification at all
+		monitor._verify_exit(entry)
+		self.assertTrue(entry.exited)
+		self.assertTrue(entry.exit_verified)
+		self.assertEqual(entry.exit_code, 0)
+
+	def test_d7_terminate_api_return_does_not_substitute_verification(self):
+		"""terminate_job returning success does not by itself verify members:
+		a ledgered member the job termination could not reach stays
+		exit-state-live, lands in unverified_exits, and defeats clearance."""
+		fake, clock = FakeAdapter(), FakeClock()
+		monitor = prep_state(build(self.tmp, fake, clock), fake, self.tmp)
+		key = fake.spawn_member(
+			(fake.supervisor[0], fake.supervisor[1]), notify=False)
+		entry = monitor._register_member(
+			key[0], "membership_query", fake.process_census())
+		# Simulate a member terminate_job's API pass could not reach.
+		fake.job_members.remove(key)
+		fake.terminate_job(9001)  # API reports success; member still live
+		snap = monitor._clearance_snapshot(0)
+		self.assertIn(entry.key(), snap["unverified_exits"])
+		self.assertFalse(snap["clear"])
+
+	def test_d7_unowned_census_member_does_not_defeat_clearance(self):
+		"""census-vs-accounting divergence is not itself a defect: a live
+		process outside the job (unowned bystander) appears in process_census
+		but must not defeat clearance — containment is job membership, not
+		host occupancy."""
+		fake, clock = FakeAdapter(), FakeClock()
+		monitor = prep_state(build(self.tmp, fake, clock), fake, self.tmp)
+		bystander = fake.spawn_member(
+			(fake.supervisor[0], fake.supervisor[1]), notify=False)
+		fake.job_members.remove(bystander)  # live, but never in the job
+		snap = monitor._clearance_snapshot(0)
+		self.assertIn(bystander[0], fake.process_census())
+		self.assertEqual(snap["job_membership_ids"], [])
+		self.assertTrue(snap["clear"])
 
 	# ---- D8 receipt/output failure ----------------------------------------------------------------
 

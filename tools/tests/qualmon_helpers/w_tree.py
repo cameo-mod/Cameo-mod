@@ -2,7 +2,13 @@
 
 Parent -> mid -> grandchild, each writing an identity marker. With
 --early-parent-exit the parent exits immediately after spawning mid, leaving
-the grandchild lingering (W3 lingering-child case).
+the grandchild lingering (W3 lingering-child case). With
+--mid-orphans-grandchild the mid script exits right after spawning the
+grandchild instead of waiting for it — the grandchild's ACTUAL CREATOR is
+gone while the grandchild keeps running inside the job. Job membership on
+Windows is assigned at creation and survives creator death (no reparenting),
+so the orphaned grandchild must still register as a job member — that is the
+W3 membership proof this mode exists to exercise.
 
 Used only by w_driver.py under separately admitted JIT stages. Stdlib only;
 subprocesses are children of THIS helper tree, never foreign processes.
@@ -40,6 +46,9 @@ def main() -> int:
 	parser.add_argument("--work-dir", required=True)
 	parser.add_argument("--seconds", type=float, default=8.0)
 	parser.add_argument("--early-parent-exit", action="store_true")
+	parser.add_argument("--mid-orphans-grandchild", action="store_true",
+						help="mid exits immediately after spawning the "
+							 "grandchild (W3 orphaned-member case)")
 	args = parser.parse_args()
 
 	# Bounded args enforced: refuse, never silently clamp.
@@ -55,6 +64,8 @@ def main() -> int:
 
 	# mid is a small wrapper that itself spawns the grandchild
 	mid_script = work / "mid_spawn.py"
+	orphan_tail = "\n" if args.mid_orphans_grandchild else (
+		f"time.sleep({mid_seconds});p.wait()\n")
 	mid_script.write_text(
 		"import subprocess,sys,pathlib,json,os,time\n"
 		f"work=pathlib.Path({str(work)!r})\n"
@@ -64,7 +75,7 @@ def main() -> int:
 		f"'--ready-file', str(work/'grandchild_ready.json')],cwd=str(work))\n"
 		"(work/'grandchild_spawn.json').write_text(json.dumps("
 		"{'pid':p.pid,'ppid':os.getpid()}))\n"
-		f"time.sleep({mid_seconds});p.wait()\n",
+		+ orphan_tail,
 		encoding="utf-8")
 	mid = subprocess.Popen([sys.executable, str(mid_script)], cwd=str(work))
 	(work / "mid_spawn.json").write_text(
