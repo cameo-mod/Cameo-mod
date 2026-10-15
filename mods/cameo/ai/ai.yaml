@@ -4313,6 +4313,8 @@ Player:
 	ExpansionPlannerBotModule:
 		RequiresCondition: genericbot
 		DriveBaseCrawl: true
+		# Enabled for the maintainer's 2026-10-15 combined playtest (BY).
+		UseCrawlSafety: true
 		# EX-2: every field in reach gets a refinery, beyond the base builder's fixed optimum.
 		DriveRefineries: true
 		# EX-3: an MCV founds its base at the best far field (value x safety / distance); the MCV module decides when.
@@ -4344,13 +4346,13 @@ Player:
 		AnchorServeRadiusCells: 10
 		# BZ_production_scaling: up to ScalingMcvMaxExtra extra construction MCVs while windowed income
 		# holds over the difficulty line, a far field is free and army parity admits; also parks MCV
-		# site handouts whose deploy annulus holds no placeable cell (MCV-EXPAND-IDLE H1). Off until
-		# the increment A/B arms it.
-		UseProductionScaling: false
+		# site handouts whose deploy annulus holds no placeable cell (MCV-EXPAND-IDLE H1).
+		# Enabled for the maintainer's 2026-10-15 combined playtest (BZ).
+		UseProductionScaling: true
 		# CB_frontier_observe (P3a, DESIGN_2026-10-12_protected_frontier s7.1): read-only shadow of the
 		# protected-frontier stage machine; emits outpost_stage v2 rows on the player-telemetry channel.
-		# Records only - moves no flag/claim/RNG/order. Off until the increment A/B arms it.
-		UseFrontierObservation: false
+		# Records only - moves no flag/claim/RNG/order. Enabled for the 2026-10-15 playtest (CB).
+		UseFrontierObservation: true
 	# Whole-base defence cover: each defence goes where its range covers the most uncovered base, outer edge and
 	# enemy side first (genericbot only; classic, sharing BaseBuilderBotModuleCA@generic, gets no advisor). Off until Enabled.
 	DefenseCoveragePlanner:
@@ -4482,7 +4484,7 @@ Player:
 		# AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only
 		# orders and the latched leader wait - the per-tick identical Stop/AttackMove
 		# re-issues cancelled every MoveTo (army stutter). Off = the classic order stream.
-		UseFormationHysteresis: false
+		UseFormationHysteresis: true
 		RequiresCondition: genericbot && personality-rush
 		# CA-3 starting mix (§12.5): % of own mobile combat units per role; unlisted roles still produce at
 		# the RoleMixRoleFloorPct floor. Inert until switch group J_rolemix_production arms UseRoleMix.
@@ -4575,7 +4577,7 @@ Player:
 		# AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only
 		# orders and the latched leader wait - the per-tick identical Stop/AttackMove
 		# re-issues cancelled every MoveTo (army stutter). Off = the classic order stream.
-		UseFormationHysteresis: false
+		UseFormationHysteresis: true
 		RequiresCondition: genericbot && personality-turtle
 		# CA-3 starting mix (§12.5): % of own mobile combat units per role; unlisted roles still produce at
 		# the RoleMixRoleFloorPct floor. Inert until switch group J_rolemix_production arms UseRoleMix.
@@ -4667,7 +4669,7 @@ Player:
 		# AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only
 		# orders and the latched leader wait - the per-tick identical Stop/AttackMove
 		# re-issues cancelled every MoveTo (army stutter). Off = the classic order stream.
-		UseFormationHysteresis: false
+		UseFormationHysteresis: true
 		RequiresCondition: genericbot && personality-tech
 		# CA-3 starting mix (§12.5): % of own mobile combat units per role; unlisted roles still produce at
 		# the RoleMixRoleFloorPct floor. Inert until switch group J_rolemix_production arms UseRoleMix.
@@ -4761,7 +4763,7 @@ Player:
 		# AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only
 		# orders and the latched leader wait - the per-tick identical Stop/AttackMove
 		# re-issues cancelled every MoveTo (army stutter). Off = the classic order stream.
-		UseFormationHysteresis: false
+		UseFormationHysteresis: true
 		RequiresCondition: genericbot && personality-expansion
 		# CA-3 starting mix (§12.5): % of own mobile combat units per role; unlisted roles still produce at
 		# the RoleMixRoleFloorPct floor. Inert until switch group J_rolemix_production arms UseRoleMix.
@@ -4854,7 +4856,7 @@ Player:
 		# AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only
 		# orders and the latched leader wait - the per-tick identical Stop/AttackMove
 		# re-issues cancelled every MoveTo (army stutter). Off = the classic order stream.
-		UseFormationHysteresis: false
+		UseFormationHysteresis: true
 		RequiresCondition: genericbot && personality-steamroller
 		# CA-3 starting mix (§12.5): % of own mobile combat units per role; unlisted roles still produce at
 		# the RoleMixRoleFloorPct floor. Inert until switch group J_rolemix_production arms UseRoleMix.
@@ -4945,7 +4947,7 @@ Player:
 		# AR-S (switch group BJ_squad_hysteresis): dead-band formation holds, transition-only
 		# orders and the latched leader wait - the per-tick identical Stop/AttackMove
 		# re-issues cancelled every MoveTo (army stutter). Off = the classic order stream.
-		UseFormationHysteresis: false
+		UseFormationHysteresis: true
 		RequiresCondition: genericbot && personality-guerrilla
 		# CA-3 starting mix (§12.5): % of own mobile combat units per role; unlisted roles still produce at
 		# the RoleMixRoleFloorPct floor. Inert until switch group J_rolemix_production arms UseRoleMix.
@@ -5134,6 +5136,7 @@ Player:
 		EnemyBaseBuildingTypes: td_gdi_constructionyard, td_nod_constructionyard, ra1_allies_constructionyard, ra1_soviets_constructionyard, japan_japaneseconstructionyard, ra2_soviets_constructionyard, ra2_allies_constructionyard, yuri_constructionyard, ts_gdi_constructionyard, ts_nod_constructionyard, forgotten_constructionyard, cabal_constructionyard, terran_commandcenter, protoss_nexus, zerg_hatchery, zerg_lair, zerg_hive, glcommand, chcommand, usacommand, ixian_constructionyard, ordos_constructionyard, ordos_laserturret, ordos_chemturret, wc2_humans_townhall, wc2_orcs_greathall, asianalliance_constructionyard, steelconsortium_consortiumconstructionyard, latinsyndicate_syndicateconstructionyard, naxis_constructionyard, schwarzermond_constructionyard, futuretech_constructionyard, tkm_constructionyard, td_gdi_guardtower, td_gdi_advancedguardtower, td_nod_gunturret, td_nod_laserturret, td_nod_obeliskoflight, ra1_allies_pillbox, ra1_allies_camopillbox, ra1_allies_gunturret, ra1_allies_gapgenerator, ra1_allies_bastionartillerybunker, ra1_soviets_flametower, ra1_soviets_teslacoil, japan_waveforceturret, ra2_allies_pillbox, ra2_allies_prismtower, ra2_allies_grandcannon, ra2_soviets_battlebunker, ra2_soviets_sentrygun, ra2_soviets_flakcannon, ra2_soviets_teslacoil, yuri_gatlingcannon, yuri_tankbunker, asianalliance_sentryflamer, asianalliance_cgpnch, asianalliance_railtower, asianalliance_chaostower, asianalliance_plasmacannon, ixian_machinegunturret, ixian_gunturret, ixian_rocketturret, ixian_stormlasher, steelconsortium_consortiumsentryturret, steelconsortium_quantumcannon, steelconsortium_bfg10000, latinsyndicate_latinsentrygun, latinsyndicate_bunkertower, latinsyndicate_defensebureau, latinsyndicate_smlturret, naxis_rifletower, naxis_flak88, schwarzermond_lasertower, schwarzermond_sturmcannon, futuretech_multiturretsystem, futuretech_frostbiteturret, terran_bunker, zerg_creepcolony, zerg_creepcolony_defense, protoss_photoncannon, wc2_humans_humanscouttower, wc2_humans_sunwell, wc2_orcs_orcwatchtower, tkm_bunker, tkm_tankturretbunker, td_gdi_barracks, td_nod_handofnod, ra1_allies_barracks, ra1_soviets_barracks, ra2_allies_barracks, ra2_soviets_barracks, yuri_barracks, terran_barracks, protoss_gateway, zerg_spawningpool, ts_gdi_barracks, forgotten_barracks, ts_nod_handof, cabal_cyborgfactory, glbarracks, chbarracks, usabarracks, d2k_barracks, ixian_barracks, wc2_humans_barracks, wc2_orcs_barracks, asianalliance_barracks, steelconsortium_steelbarracks, latinsyndicate_combatbarracks, naxis_barracks, schwarzermond_barracks, futuretech_troopgate, td_gdi_weaponsfactory, td_nod_airstrip, ra1_allies_warfactory, ra1_soviets_warfactory, ra1_soviets_largefactory, ra2_allies_warfactory, ra2_soviets_warfactory, yuri_warfactory, terran_weaponsfactory, protoss_roboticsfacility, zerg_hatchery, zerg_lair, zerg_hive, ts_gdi_warfactory, forgotten_warfactory, ts_nod_warfactory, cabal_mechfactory, glweap, chweap, usaweap, ixian_advancedheavyfactory, ixian_starport, wc2_humans_gnomishinventor, wc2_orcs_golbinalchemist, asianalliance_warfactory, steelconsortium_consortiumwarfactory, latinsyndicate_syndicatefactory, naxis_warfactory, schwarzermond_warfactory, futuretech_warpgate, td_gdi_helipad, ts_nod_helipad, ts_nod_helipad, forgotten_helipad, ts_gdi_helipad, td_nod_helipad, ra1_allies_helipad, ra1_soviets_airfield, ra1_soviets_largesovietairfield, japan_japaneseairfield, ra2_allies_airforcecommandhq, ra2_soviets_airfield, ixian_hightechfactory, asianalliance_airforcecommand, latinsyndicate_airstation, naxis_airfield, schwarzermond_airfield, futuretech_launchpad, ordos_heavyfactory, ordos_starport, ordos_lightfactory, ordos_barracks, ordos_barracks, tkm_barracks, tkm_warfactory, tkm_airpad, atreides_constructionyard, corrino_constructionyard, harkonnen_constructionyard, atreides_barracks, corrino_barracks, harkonnen_barracks, atreides_lightfactory, corrino_lightfactory, harkonnen_lightfactory, atreides_heavyfactory, corrino_heavyfactory, harkonnen_heavyfactory, atreides_refinery, corrino_refinery, harkonnen_refinery, atreides_outpost, corrino_outpost, harkonnen_outpost, eden_factory_structure, eden_factory_vehicle, eden_factory_consumer, eden_smelter_common, eden_smelter_rare, plymouth_structure_factory, plymouth_factory_vehicle, plymouth_factory_arachnid, plymouth_smelter_common, plymouth_smelter_rare
 	BaseBuilderBotModuleCA@generic:
 		RequiresCondition: genericbot || classicbot
+		SwitchCondition: genericbot
 		InititalMinimumRefineryCount: 1
 		AdditionalMinimumRefineryCount: 2
 		RefineriesPerBase: 3
@@ -5155,9 +5158,9 @@ Player:
 		NewProductionCashThreshold: 0
 		# BZ_production_scaling: banked cash held over the difficulty line while every unit queue is busy
 		# (or net income per producer over the line) queues another production building for the
-		# least-provisioned queue type. SwitchCondition-gated — classic keeps today's behaviour. Off
-		# until the increment A/B arms it.
-		UseProductionScaling: false
+		# least-provisioned queue type. SwitchCondition-gated — classic keeps today's behaviour.
+		# Enabled for the maintainer's 2026-10-15 combined playtest (BZ).
+		UseProductionScaling: true
 		BuildingProductionMinCashRequirement: 1000
 		DefenseProductionMinCashRequirement: 1500
 		BuildingQueues: Building, RABuilding, BuildingAddons
