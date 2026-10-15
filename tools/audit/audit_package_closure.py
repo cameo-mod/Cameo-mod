@@ -30,6 +30,16 @@ Usage:
         --engine-root <built engine dir> --mod-root <source checkout> ^
         --pkg-root <package dir> --manifest-out <file.json> ^
         --source-commit <40hex> [--created-at <ISO8601>] [--replace]
+    py -3 tools/audit/audit_package_closure.py verify-fixtures ^
+        --manifest <accepted runtime_package_manifest.json> ^
+        [--fixture-id <id>] [--emit-observed <file.json>] [--replace]
+
+verify-fixtures implements the spec §2 fixtures[] invariants + §5.1 contract:
+each declared fixture's approved_root is probed for reparse/junction
+substitution, the directory is enumerated recursively, and the observed
+{path -> sha256,size} set must exactly equal the declared members — extra,
+missing, path-escape, reparse-point, or hash drift = fail (exit 1). Read-only
+unless --emit-observed writes the observed set (atomic tmp->replace).
 """
 
 import argparse
@@ -353,6 +363,130 @@ def verify_package(members, pkg_root: Path):
     }
 
 
+def _is_reparse(p: Path) -> bool:
+    """Symlink or junction probe; is_junction exists on 3.12+, degrade safely."""
+    if p.is_symlink():
+        return True
+    probe = getattr(p, "is_junction", None)
+    return bool(probe and probe())
+
+
+def _member_rel_ok(path: str) -> bool:
+    """fixtures[].members[].path must be a posix relative path, no escapes."""
+    if not path or "\\" in path:
+        return False
+    parts = path.split("/")
+    return all(part not in ("", ".", "..") and ":" not in part for part in parts)
+
+
+def verify_fixture_entry(entry: dict, fixture_id_filter=None):
+    """Verify one fixtures[] entry against its live approved_root.
+
+    Returns a result dict; 'complete' is True only when the observed tree
+    exactly equals the declared member set with matching bytes.
+    """
+    out = {
+        "fixture_id": entry.get("fixture_id"),
+        "approved_root": entry.get("approved_root"),
+        "complete": False,
+        "errors": [],
+        "missing": [],
+        "extra": [],
+        "hash_mismatches": [],
+        "size_mismatches": [],
+        "reparse_violations": [],
+        "declared_path_violations": [],
+        "observed": {},
+    }
+    fid = out["fixture_id"]
+    if fixture_id_filter and fid != fixture_id_filter:
+        return None
+    root_s = entry.get("approved_root") or ""
+    root = Path(root_s)
+    if not root.is_absolute():
+        out["errors"].append(f"{fid}: approved_root not absolute: {root_s!r}")
+        return out
+    if _is_reparse(root):
+        out["errors"].append(f"{fid}: approved_root is a symlink/junction: {root_s!r}")
+        return out
+    norm = os.path.normpath(str(root))
+    if os.path.realpath(norm) != os.path.abspath(norm):
+        out["errors"].append(f"{fid}: approved_root resolves elsewhere (substitution): {root_s!r}")
+        return out
+    if not root.is_dir():
+        out["errors"].append(f"{fid}: approved_root missing or not a dir: {root_s!r}")
+        return out
+
+    declared = entry.get("members") or []
+    expected = {}
+    for m in declared:
+        p = m.get("path") or ""
+        if not _member_rel_ok(p):
+            out["declared_path_violations"].append(p)
+            continue
+        if p in expected:
+            out["declared_path_violations"].append(f"duplicate: {p}")
+            continue
+        expected[p] = m
+
+    observed = {}
+    for p in sorted(root.rglob("*")):
+        rp = rel(p, root)
+        if p.is_dir():
+            if _is_reparse(p):
+                out["reparse_violations"].append(rp)
+            continue
+        if _is_reparse(p):
+            out["reparse_violations"].append(rp)
+            continue
+        observed[rp] = {
+            "sha256": sha256_file(p),
+            "size_bytes": p.stat().st_size,
+        }
+    out["observed"] = observed
+
+    out["missing"] = sorted(set(expected) - set(observed))
+    out["extra"] = sorted(set(observed) - set(expected))
+    for p in sorted(set(expected) & set(observed)):
+        want = expected[p]
+        got = observed[p]
+        if got["sha256"] != want.get("sha256"):
+            out["hash_mismatches"].append(p)
+        if got["size_bytes"] != want.get("size_bytes"):
+            out["size_mismatches"].append(p)
+
+    out["complete"] = not (
+        out["errors"] or out["missing"] or out["extra"]
+        or out["hash_mismatches"] or out["size_mismatches"]
+        or out["reparse_violations"] or out["declared_path_violations"]
+    )
+    return out
+
+
+def verify_fixtures(manifest_path: Path, fixture_id_filter=None):
+    """Verify every fixtures[] entry in an accepted manifest."""
+    data = json.loads(manifest_path.read_text(encoding="utf-8-sig"))
+    entries = data.get("fixtures") or []
+    results = []
+    matched = set()
+    for entry in entries:
+        r = verify_fixture_entry(entry, fixture_id_filter)
+        if r is not None:
+            results.append(r)
+            matched.add(r["fixture_id"])
+    if fixture_id_filter and fixture_id_filter not in matched:
+        raise ClosureError(f"fixture_id not in manifest: {fixture_id_filter}")
+    return {
+        "manifest": str(manifest_path),
+        "fixture_count": len(results),
+        "complete": bool(results) and all(r["complete"] for r in results),
+        "fixtures": [
+            {k: v for k, v in r.items() if k != "observed"} for r in results
+        ],
+        "_observed": {r["fixture_id"]: r["observed"] for r in results},
+    }
+
+
 def emit_report(members, exclusions, verify):
     return {
         "algorithm": ALGORITHM,
@@ -374,15 +508,55 @@ def emit_report(members, exclusions, verify):
 
 def main(argv=None):
     ap = argparse.ArgumentParser(prog="audit_package_closure.py")
-    ap.add_argument("mode", choices=["check", "emit-manifest"], nargs="?", default="check")
-    ap.add_argument("--engine-root", required=True, type=Path)
-    ap.add_argument("--mod-root", required=True, type=Path)
+    ap.add_argument("mode", choices=["check", "emit-manifest", "verify-fixtures"],
+                    nargs="?", default="check")
+    ap.add_argument("--engine-root", type=Path)
+    ap.add_argument("--mod-root", type=Path)
     ap.add_argument("--pkg-root", type=Path)
     ap.add_argument("--manifest-out", type=Path)
+    ap.add_argument("--manifest", type=Path)
+    ap.add_argument("--fixture-id")
+    ap.add_argument("--emit-observed", type=Path)
     ap.add_argument("--source-commit")
     ap.add_argument("--created-at")
     ap.add_argument("--replace", action="store_true")
     args = ap.parse_args(argv)
+
+    if args.mode == "verify-fixtures":
+        if not args.manifest:
+            print("verify-fixtures requires --manifest", file=sys.stderr)
+            return 2
+        try:
+            rep = verify_fixtures(args.manifest, args.fixture_id)
+        except (ClosureError, OSError, json.JSONDecodeError) as e:
+            print(f"FIXTURE-ERROR: {e}", file=sys.stderr)
+            return 2
+        if args.emit_observed:
+            if args.emit_observed.exists() and not args.replace:
+                print(f"refusing overwrite: {args.emit_observed} (use --replace)",
+                      file=sys.stderr)
+                return 2
+            payload = {
+                "manifest": rep["manifest"],
+                "fixtures": [
+                    {"fixture_id": fid, "members": [
+                        {"path": p, **obs} for p, obs in sorted(mems.items())
+                    ]}
+                    for fid, mems in sorted(rep["_observed"].items())
+                ],
+            }
+            tmp = args.emit_observed.with_suffix(".tmp")
+            tmp.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n",
+                           encoding="utf-8", newline="\n")
+            os.replace(tmp, args.emit_observed)
+        rep.pop("_observed", None)
+        print(json.dumps(rep, indent=2, sort_keys=True))
+        return 0 if rep["complete"] else 1
+
+    if not args.engine_root or not args.mod_root:
+        print("check/emit-manifest require --engine-root and --mod-root",
+              file=sys.stderr)
+        return 2
 
     try:
         members, exclusions, loaded = build_source_and_closure(
