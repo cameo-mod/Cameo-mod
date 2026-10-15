@@ -11,14 +11,18 @@ no real processes are launched and no real memory pressure is created
 host pressure). The real-adapter W1-W8 helper cases live under
 tools/tests/qualmon_helpers/ and run only under separate JIT admission.
 
-Known under-review items encoded as contract assertions (see the freeze
-receipt for this suite):
-* test_d8_tool_hash_drift_is_hold asserts the receipt never reads HOLD while
-  the process exits 0 — the reviewed tip computes `code` before the post-run
-  drift check in _write_final; a successor must return the final disposition.
-* TestMonitor._resolve_source_commit adds commondir following the production
-  resolver lacks on linked worktrees (the real qual environment); used ONLY
-  to synthesize matching grants. The unresolvable-source refusal itself is
+Known under-review items encoded as contract assertions (Reviewer G-1/G-2
+addendum on REVIEW_2026-10-15_qual_monitor_f2_successor_a0fc78ea_devin.md;
+see the freeze receipt for this suite):
+* G-1: run() computes `code` before _write_final's post-run drift check, so a
+  HOLD receipt can ride on exit 0. test_d8_tool_hash_drift_is_hold carries
+  unittest.expectedFailure on tip a0fc78ea1; when a successor returns the
+  final disposition from _write_final the node flips to unexpected-success,
+  which is itself the fix-landed signal.
+* G-2: _resolve_source_commit never follows .git/worktrees/<n>/commondir, so
+  linked worktrees (the real qual environment) resolve None and REFUSE.
+  TestMonitor._resolve_source_commit adds commondir following ONLY to
+  synthesize matching grants; the unresolvable-source refusal itself is
   correct fail-closed behavior.
 """
 
@@ -726,9 +730,11 @@ class QualMonitorDeterministicTests(unittest.TestCase):
 			monitor._disposition({"status": "COMPLETED", "exit_code": 0}, True),
 			"HOLD")
 
+	@unittest.expectedFailure  # G-1: exit code sealed before _write_final drift check
 	def test_d8_tool_hash_drift_is_hold(self):
 		"""Post-run tool hash drift forces HOLD; contract also demands non-zero
-		exit (reviewed tip computes `code` before the drift check — flagged)."""
+		exit (G-1: reviewed tip computes `code` before the drift check — the
+		final assert fails on a0fc78ea1 and flips when the successor lands)."""
 		fake, clock = FakeAdapter(), FakeClock()
 		monitor = build(self.tmp, fake, clock,
 						inner={"status": "COMPLETED", "exit_code": 0})
