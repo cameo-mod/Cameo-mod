@@ -2290,7 +2290,9 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				// non-air-only producers.
 				if (forwardAssets != null && a.Info.HasTraitInfo<BuildingInfo>())
 					forwardAssets.Add((a.ActorID, a.Location, a.Info.TraitInfos<ValuedInfo>().FirstOrDefault()?.Cost ?? 0));
-				if (producers != null && a.Info.TraitInfos<ProductionInfo>().Any(p => p.Produces.Any(t => t != "air")))
+				// Support actors may provide Production without occupying a map cell.
+				if (producers != null && a.OccupiesSpace != null
+					&& a.Info.TraitInfos<ProductionInfo>().Any(p => p.Produces.Any(t => t != "air")))
 					producers.Add(a.Location);
 
 				// The Refinery trait, from rules (the by-name lists are filled by the role rollout, §2.8).
