@@ -363,12 +363,25 @@ def verify_package(members, pkg_root: Path):
     }
 
 
+# Windows FILE_ATTRIBUTE_REPARSE_POINT — set on symlinks, junctions, and any
+# other reparse-tagged object (incl. non-symlink placeholder files).
+_REPARSE_POINT_ATTR = 0x400
+
+
 def _is_reparse(p: Path) -> bool:
-    """Symlink or junction probe; is_junction exists on 3.12+, degrade safely."""
-    if p.is_symlink():
-        return True
-    probe = getattr(p, "is_junction", None)
-    return bool(probe and probe())
+    """Reparse-point probe via st_file_attributes (Windows, py>=3.5).
+
+    Path.is_junction needs 3.12+; the attribute probe works on every supported
+    interpreter and additionally catches non-symlink reparse kinds on files.
+    Falls back to is_symlink() on platforms without st_file_attributes.
+    """
+    try:
+        attrs = os.stat(p, follow_symlinks=False).st_file_attributes
+    except (OSError, AttributeError):
+        attrs = None
+    if attrs is not None:
+        return bool(attrs & _REPARSE_POINT_ATTR)
+    return p.is_symlink()
 
 
 def _member_rel_ok(path: str) -> bool:
@@ -467,6 +480,14 @@ def verify_fixtures(manifest_path: Path, fixture_id_filter=None):
     """Verify every fixtures[] entry in an accepted manifest."""
     data = json.loads(manifest_path.read_text(encoding="utf-8-sig"))
     entries = data.get("fixtures") or []
+    # fixture_id uniqueness is a manifest-level invariant (spec §2 :103) —
+    # reject duplicates before any verification, regardless of --fixture-id.
+    seen_ids = set()
+    for entry in entries:
+        fid = entry.get("fixture_id") if isinstance(entry, dict) else None
+        if fid in seen_ids:
+            raise ClosureError(f"duplicate fixture_id in manifest: {fid!r}")
+        seen_ids.add(fid)
     results = []
     matched = set()
     for entry in entries:
