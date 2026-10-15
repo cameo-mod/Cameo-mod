@@ -62,7 +62,10 @@ def helper_argv(case: str, work: pathlib.Path, timeout: float) -> list[str]:
 	if case == "W4_monitor_interruption" or case == "W5_wallcap_contained_tree":
 		return [sys.executable, tree, "--work-dir", str(work), "--seconds", "30"]
 	if case == "W6_owned_private_limit":
-		return [sys.executable, w, "--seconds", "10", "--work-dir", str(work),
+		# ~8.7 GiB committed inside the job: must trip MAX_OWNED_PRIVATE_BYTES.
+		return [sys.executable, str(HELPERS / "w_alloc.py"),
+				"--commit-mb", "8700", "--seconds", "60",
+				"--work-dir", str(work),
 				"--ready-file", str(work / "w6_ready.json")]
 	if case == "W7_host_ram_stop" or case == "W8_unowned_large_process":
 		return [sys.executable, w, "--seconds", "20", "--work-dir", str(work),
@@ -123,12 +126,19 @@ def main() -> int:
 
 	sentinel_proc = None
 	if args.sentinel:
-		# Unowned bystander the monitor must never target (W7/W8).
-		sentinel_proc = subprocess.Popen(
-			[sys.executable, str(HELPERS / "w_wait.py"), "--seconds", "30",
-			 "--work-dir", str(work),
-			 "--ready-file", str(work / "sentinel_ready.json")],
-			cwd=str(work))
+		# Unowned bystander the monitor must never target (W7/W8). W8 uses a
+		# genuinely large committed footprint; W7 uses a light sleeper — real
+		# host-pressure admission for W7 requires an external controlled rig.
+		if args.case == "W8_unowned_large_process":
+			sentinel_argv = [sys.executable, str(HELPERS / "w_alloc.py"),
+							 "--commit-mb", "8700", "--seconds", "30",
+							 "--work-dir", str(work),
+							 "--ready-file", str(work / "sentinel_ready.json")]
+		else:
+			sentinel_argv = [sys.executable, str(HELPERS / "w_wait.py"),
+							 "--seconds", "30", "--work-dir", str(work),
+							 "--ready-file", str(work / "sentinel_ready.json")]
+		sentinel_proc = subprocess.Popen(sentinel_argv, cwd=str(work))
 
 	out_f = open(driver_out / "monitor_stdout.txt", "wb")
 	err_f = open(driver_out / "monitor_stderr.txt", "wb")
