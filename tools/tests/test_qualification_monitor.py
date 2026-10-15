@@ -698,6 +698,10 @@ class QualMonitorDeterministicTests(unittest.TestCase):
 		self.assertTrue(any(
 			g["pid"] == member[0] and "creation-time" in g["reason"]
 			for g in monitor.identity_gaps))
+		# The gap must reach the clearance verdict record — it is one of
+		# the fields that keeps a gapped member from clearing silently.
+		snap = monitor._clearance_snapshot(0)
+		self.assertGreaterEqual(snap["identity_gaps"], 1)
 
 	def test_d5_unresolvable_parent_is_gap_evidence(self):
 		"""D5 parent-evidence failure: a member absent from the census gets
@@ -721,6 +725,8 @@ class QualMonitorDeterministicTests(unittest.TestCase):
 		self.assertIsNotNone(entry2.parent)
 		self.assertEqual(entry2.parent["link"], "census-unresolved")
 		self.assertIsNone(entry2.parent["creation_filetime"])
+		snap = monitor._clearance_snapshot(0)
+		self.assertGreaterEqual(snap["identity_gaps"], 1)
 
 	# ---- D6 sampling deadline ----------------------------------------------------------------
 
@@ -767,19 +773,21 @@ class QualMonitorDeterministicTests(unittest.TestCase):
 		self.assertTrue(all(s["utc"] == past for s in samples))
 
 	def test_d6_missing_sample_is_auditable_via_gap_evidence(self):
-		"""Precise scope for 'missing sample': there is no per-interval
-		heartbeat counter, so a skipped mid-loop sample is detected only by
-		the MAX_SAMPLE_GAP rule (asserted by the sibling node) and evidenced
-		by the mono gap between surviving records. Asserted here: the samples
-		channel is never empty (pre_resume lands before the loop) and every
-		record carries both mono and utc so gaps are machine-checkable.
-		Anything finer (expected-index sequence) is descoped — not claimed."""
+		"""Inject a genuinely missing sample interval: pace_min=12.0 makes
+		the loop's second iteration start >10s after the previous sample —
+		the missing mid-loop sample is caught by the MAX_SAMPLE_GAP stop
+		(EXIT_HOLD, never a pass). The samples that DID land remain
+		auditable: the channel is non-empty and every record carries both
+		mono and utc so the gap is machine-checkable. A finer
+		expected-index sequence is descoped — the gap rule is the only
+		detection channel and it is asserted here."""
 		fake, clock = FakeAdapter(), FakeClock()
 		monitor = build(self.tmp, fake, clock,
-						inner={"status": "COMPLETED", "exit_code": 0})
-		fake.on_launch = monitor.exit_root_on_launch(fake, 0)
+						inner={"status": "COMPLETED", "exit_code": 0},
+						pace_min=12.0)
 		code = monitor.run()
-		self.assertEqual(code, rqm.EXIT_COMPLETED)
+		self.assertEqual(code, rqm.EXIT_HOLD)
+		self.assertIn("sample cadence", monitor.stop_reason or "")
 		samples = read_jsonl(monitor.evidence["samples"])
 		self.assertGreaterEqual(len(samples), 1)
 		for record in samples:
