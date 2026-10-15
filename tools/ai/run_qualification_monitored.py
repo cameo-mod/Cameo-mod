@@ -1163,15 +1163,26 @@ class Monitor:
                     gitdir = (repo_root / gitdir).resolve()
             else:
                 gitdir = gitfile
+            # Linked worktrees keep branch refs and packed-refs in the common
+            # gitdir, not the worktree's own gitdir — follow commondir when
+            # present (without it every linked worktree resolves None).
+            refdir = gitdir
+            commondir_file = gitdir / "commondir"
+            if commondir_file.is_file():
+                common = Path(commondir_file.read_text().strip())
+                refdir = (common if common.is_absolute()
+                          else (gitdir / common).resolve())
             head = (gitdir / "HEAD").read_text().strip()
             if head.startswith("ref:"):
                 ref = head[4:].strip()
-                ref_path = gitdir / ref
+                ref_path = refdir / ref
                 if ref_path.is_file():
                     return ref_path.read_text().strip()
-                for line in (gitdir / "packed-refs").read_text().splitlines():
-                    if not line.startswith("#") and line.endswith(f" {ref}"):
-                        return line.split(" ")[0]
+                packed = refdir / "packed-refs"
+                if packed.is_file():
+                    for line in packed.read_text().splitlines():
+                        if not line.startswith("#") and line.endswith(f" {ref}"):
+                            return line.split(" ")[0]
                 return None
             return head
         except (OSError, IndexError):
@@ -1336,7 +1347,15 @@ class Monitor:
             self._event_stop.set()
             try:
                 if self.evidence_dir is not None:
-                    self._write_final(disposition, grant, repo_root)
+                    # _write_final may downgrade the persisted disposition
+                    # (e.g. post-run tool-hash drift); the exit code must
+                    # derive from that same final state, never the earlier one.
+                    final_disposition = self._write_final(
+                        disposition, grant, repo_root)
+                    if final_disposition != disposition:
+                        disposition = final_disposition
+                        code = self._exit_code_for(
+                            disposition, self.inner_status or {})
             except OSError as error:
                 print(f"receipt-write failure: {error}", file=sys.stderr)
                 code = EXIT_MONITOR_ERROR
@@ -1487,7 +1506,11 @@ class Monitor:
             except OSError:
                 pass
 
-    def _write_final(self, disposition: str, grant: dict[str, Any], repo_root: Path) -> None:
+    def _write_final(self, disposition: str, grant: dict[str, Any],
+                     repo_root: Path) -> str:
+        """Write the atomic receipt and return the FINAL disposition — callers
+        must derive the exit code from the returned value, since post-run
+        checks here (tool-hash drift) can downgrade a computed COMPLETED."""
         for name, path in ((n, Path(n) if os.path.isabs(n) else repo_root / n)
                            for n in self.tool_hashes_pre):
             try:
@@ -1561,6 +1584,7 @@ class Monitor:
                 temporary.unlink()
             except FileNotFoundError:
                 pass
+        return disposition
 
 
 def build_parser() -> argparse.ArgumentParser:
