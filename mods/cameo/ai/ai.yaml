@@ -162,6 +162,12 @@
 	GrantConditionOnBotOwner@radarcontacts:
 		Condition: radar_contacts
 		Bots:
+	# Context feature vectors (task 01a11190, DESIGN_2026-10-15 v2): anonymous map + seen-side opponent
+	# feature rows on their own JSONL channel — provider only, no gameplay consumer, no orders, no RNG.
+	# The arm sets Bots (switch group BX_context_providers); empty by default - inert on master.
+	GrantConditionOnBotOwner@contextfeatures:
+		Condition: context_features
+		Bots:
 	# DIFFICULTY SCALE (DESIGN §19.1, maintainer 2026-09-28): every number below lies on ONE straight line
 	# from easiest to cameogod, in EQUAL steps; an integer that cannot split evenly is the rounded line.
 	# Every field is written in every tier, so no tier silently falls back to a C# default.
@@ -3891,6 +3897,12 @@ Player:
 		RequiresCondition: genericbot && radar_contacts
 		ContactsIntervalTicks: 25
 		TrackGraceTicks: 250
+	# CONTEXT-PROVIDERS (task 01a11190): anonymous map/opponent feature vectors — telemetry only,
+	# own JSONL channel, writer-election append. The opponent half stays inert until the
+	# IAiSeenProfileSource seam lands on AiMatchLogWriter (seam ACK pending).
+	# `genericbot && context_features`: off on master until the increment A/B arms it (switch group BX_context_providers).
+	ContextFeatureProviderBotModule:
+		RequiresCondition: genericbot && context_features
 	# `genericbot && build_order_knobs`: off on master until the increment A/B arms it (switch group AK_build_order_knobs).
 	BuildOrderKnobsBotModule:
 		RequiresCondition: genericbot && build_order_knobs

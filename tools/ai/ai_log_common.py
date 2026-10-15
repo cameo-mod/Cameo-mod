@@ -13,6 +13,7 @@ MATCH_LOG = "cameo-ai-matches.jsonl"
 SITUATION_LOG = "cameo-ai-situations.jsonl"
 PLACEMENT_LOG = "cameo-ai-placements.jsonl"
 ENGAGEMENT_LOG = "cameo-ai-engagements.jsonl"
+CONTEXT_LOG = "cameo-ai-context.jsonl"
 DEFAULT_TIMESTEP_MS = 40
 
 
@@ -37,14 +38,15 @@ def logs_dir(d: pathlib.Path) -> pathlib.Path:
 
 
 def load(dirs: list[pathlib.Path]) -> dict[str, list[dict]]:
-    """All four logs of every dir, concatenated."""
-    out = {"matches": [], "situations": [], "placements": [], "engagements": []}
+    """All five logs of every dir, concatenated."""
+    out = {"matches": [], "situations": [], "placements": [], "engagements": [], "context": []}
     for d in dirs:
         logs = logs_dir(d)
         out["matches"] += read_jsonl(logs / MATCH_LOG)
         out["situations"] += read_jsonl(logs / SITUATION_LOG)
         out["placements"] += read_jsonl(logs / PLACEMENT_LOG)
         out["engagements"] += read_jsonl(logs / ENGAGEMENT_LOG)
+        out["context"] += read_jsonl(logs / CONTEXT_LOG)
     return out
 
 
