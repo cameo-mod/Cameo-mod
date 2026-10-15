@@ -695,6 +695,7 @@ class Monitor:
         self.evidence_dir: Path | None = None
         self.evidence: dict[str, Path] = {}
         self.writers: dict[str, AppendOnlyWriter] = {}
+        self._log_stream = None
         self._notify_queue: list[tuple[int, int]] = []
         self._notify_lock = threading.Lock()
         self._event_stop = threading.Event()
@@ -722,11 +723,25 @@ class Monitor:
         line = json.dumps(
             {"utc": utc_now(), "level": level, "msg": message, **fields}, sort_keys=True)
         try:
-            self._log_stream.write(line + "\n")
-            self._log_stream.flush()
-        except (AttributeError, OSError, ValueError):
-            pass
-        print(line, file=sys.stderr if level in ("error", "hold") else sys.stdout, flush=True)
+            if self._log_stream is not None:
+                self._log_stream.write(line + "\n")
+                self._log_stream.flush()
+        except (OSError, ValueError) as error:
+            # monitor_log.txt is append-only evidence: a failed append latches
+            # permanent non-pass and requests cleanup. Set stop_reason directly —
+            # never _trigger_stop(), which calls log() and would recurse on a
+            # broken stream.
+            if self.stop_reason is None:
+                self.stop_reason = f"monitor_log write/flush failed: {error}"
+            if not self.evidence_failed:
+                self.hold_reasons.append(f"monitor_log write/flush failed: {error}")
+                self.evidence_failed = True
+            self._pace.set()
+        try:
+            print(line, file=sys.stderr if level in ("error", "hold") else sys.stdout,
+                  flush=True)
+        except OSError:
+            pass  # supervisor stdout is captured by the invoker; loss is external
 
     def _record(self, key: str, record: dict[str, Any]) -> bool:
         """Append one evidence record; False on write/fsync failure. A failure
