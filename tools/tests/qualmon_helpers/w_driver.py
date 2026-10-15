@@ -82,6 +82,13 @@ PROCESS_TERMINATE = 0x0001
 STILL_ACTIVE = 259
 ERROR_INVALID_PARAMETER = 87  # OpenProcess on a nonexistent pid
 EXIT_INNER_CAPPED = 5         # run_qualification_monitored exit code
+# Driver cleanup outcomes that leave no possibly-live residue: already
+# dead, terminated by us, or the pid was verifiably reused (our member
+# is dead; the live foreign process is not ours to kill). Anything else
+# — unknown liveness, unverified identity, open/terminate/sentinel
+# errors — leaves possible residue and must gate the case outcome.
+CLEAN_CLEANUP_OUTCOMES = {"already_dead", "terminated",
+						"skipped_creation_mismatch"}
 
 
 def sha256_file(path: pathlib.Path) -> str:
@@ -510,20 +517,39 @@ def evaluate_case(case: str, ctx: dict) -> list:
 						and isinstance(e.get("creation_filetime"), int)
 						for e in ledger) else "fail",
 					f"keys={[e.get('ledger_key') for e in ledger]}"))
-		# Parent-link reconciliation: the grandchild's parent record must
-		# resolve to the ledgered mid process.
+		# Parent-link reconciliation over the WHOLE observed chain: the
+		# grandchild's parent record must resolve to the ledgered mid,
+		# mid's parent must resolve to the ledgered tree root (the w_tree
+		# marker pid), and the tree root's parent must resolve to the
+		# ledgered job root — a broken intermediate link is a containment
+		# gap, not a partial pass.
 		by_pid = {e.get("pid"): e for e in ledger}
 		grand = by_pid.get(descendants.get("grandchild_spawn")) or \
 			by_pid.get(descendants.get("grandchild_ready"))
 		mid = by_pid.get(descendants.get("mid_spawn"))
-		parent_ok = (grand is not None and mid is not None
-					 and (grand.get("parent") or {}).get("pid")
-					 == mid.get("pid")
-					 and (grand.get("parent") or {}).get("link") == "ledger")
+		tree_root = by_pid.get(descendants.get("parent_marker"))
+		ledger_root = next((e for e in ledger if e.get("is_root")), None)
+		grand_link = (grand is not None and mid is not None
+					  and (grand.get("parent") or {}).get("pid")
+					  == mid.get("pid")
+					  and (grand.get("parent") or {}).get("link") == "ledger")
+		mid_link = (mid is not None and tree_root is not None
+					and (mid.get("parent") or {}).get("pid")
+					== tree_root.get("pid")
+					and (mid.get("parent") or {}).get("link") == "ledger")
+		root_link = (tree_root is not None and ledger_root is not None
+					 and (tree_root.get("parent") or {}).get("pid")
+					 == ledger_root.get("pid")
+					 and (tree_root.get("parent") or {}).get("link")
+					 == "ledger")
 		a.append(_a("parent_links_reconciled",
-					"pass" if parent_ok else "fail",
-					f"grand_parent={ (grand or {}).get('parent') } "
-					f"mid_pid={(mid or {}).get('pid')}"))
+					"pass" if grand_link and mid_link and root_link
+					else "fail",
+					f"grand_to_mid={grand_link} "
+					f"mid_to_tree_root={mid_link} "
+					f"tree_root_to_job_root={root_link} "
+					f"mid_parent={(mid or {}).get('parent')} "
+					f"root_parent={(tree_root or {}).get('parent')}"))
 		exits = [(e.get("pid"), e.get("exited"), e.get("exit_verified"))
 				 for e in ledger]
 		a.append(_a("handle_verified_exits",
@@ -567,13 +593,39 @@ def evaluate_case(case: str, ctx: dict) -> list:
 					"pass" if inner.get("status") == "COMPLETED"
 							  and inner.get("exit_code") == 0 else "fail",
 					f"inner={inner}"))
-		# Owned stop terminated the job: the two closing censuses must
-		# show the grandchild gone.
-		membership = [c.get("job_membership_ids") for c in clear_snaps[-2:]]
-		a.append(_a("post_stop_censuses_empty",
-					"pass" if len(clear_snaps) >= 2 and all(
-						not ids for ids in membership) else "fail",
-					f"membership={membership}"))
+		# Owned stop terminated the job: the certified closing censuses
+		# must exist, be clear, carry clean queries, report zero active
+		# processes and empty membership ids, and be spaced >=5s apart —
+		# a missing or incomplete census is a fail, never implicit pass.
+		certified = clear_snaps[-2:] if len(clear_snaps) >= 2 else []
+		cert_monos = [c.get("mono") for c in certified]
+		a.append(_a("post_stop_censuses_clear_empty",
+					"pass" if len(certified) == 2
+							  and all(c.get("clear") is True
+									  for c in certified)
+							  and all(c.get("query_error") is None
+									  for c in certified)
+							  and all(c.get("active_processes") == 0
+									  for c in certified)
+							  and all(not c.get("job_membership_ids")
+									  for c in certified)
+					else "fail",
+					f"certified={len(certified)} "
+					f"clear={[c.get('clear') for c in certified]} "
+					f"query_error="
+					f"{[c.get('query_error') for c in certified]} "
+					f"active="
+					f"{[c.get('active_processes') for c in certified]} "
+					f"membership="
+					f"{[c.get('job_membership_ids') for c in certified]}"))
+		a.append(_a("post_stop_census_spacing",
+					"pass" if len(cert_monos) == 2
+							  and all(isinstance(m, (int, float))
+									  for m in cert_monos)
+							  and cert_monos[1] - cert_monos[0] >= 5.0
+					else "fail",
+					f"monos={cert_monos} — certified pair must be "
+					">=5s apart"))
 	elif case == "W5_breakaway_attempt":
 		br = ctx.get("breakaway_result") or {}
 		a.append(_a("attempt_evidence_recorded",
@@ -599,7 +651,16 @@ def evaluate_case(case: str, ctx: dict) -> list:
 						f"in_job_spawn={br.get('child_in_any_job_at_spawn')} "
 						f"exit={br.get('child_exit_code')} "
 						f"alive={br.get('child_alive_at_helper_exit')}"))
-			in_ledger = child in ledger_pids
+			# Containment is an IDENTITY match — pid AND creation
+			# FILETIME must reconcile to one ledger entry; a bare pid
+			# match could certify a reused pid as "contained", and a
+			# missing filetime can never match (fail closed).
+			child_ft = br.get("child_creation_filetime")
+			in_ledger = isinstance(child, int) \
+				and isinstance(child_ft, int) \
+				and any(e.get("pid") == child
+						and e.get("creation_filetime") == child_ft
+						for e in ledger)
 			escaped = br.get("child_in_any_job_at_spawn") is False
 			alive_now = pid_alive(child)
 			a.append(_a("containment_verdict",
@@ -784,21 +845,31 @@ def main() -> int:
 	driver_error = None
 	mon = None
 	cleanup_log = []
+	observer_errors = []
+	finally_errors = []
 	pre_kill_scan = {"pids": {}, "creation_filetime": {}, "unreadable": []}
 	post_run_scan = {"pids": {}, "creation_filetime": {}, "unreadable": []}
 	pre_cleanup_alive = {}
 	post_kill_detail = {}
 
 	def observe(event: str, **fields) -> None:
-		observer.write(json.dumps(
-			{"utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
-			 "mono": round(time.monotonic() - t0, 3),
-			 "event": event,
-			 "monitor_rc": mon.poll() if mon is not None else None,
-			 "sentinel_alive": (sentinel_proc.poll() is None
-								if sentinel_proc is not None else None),
-			 **fields}) + "\n")
-		observer.flush()
+		# Driver-owned evidence channel. NEVER raises: a write/flush
+		# failure is recorded (and gates the case outcome below) but can
+		# not abort the monitor wait or interrupt the cleanup sequence it
+		# would otherwise precede — observer evidence loss must degrade
+		# the verdict, not the cleanup.
+		try:
+			observer.write(json.dumps(
+				{"utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+				 "mono": round(time.monotonic() - t0, 3),
+				 "event": event,
+				 "monitor_rc": mon.poll() if mon is not None else None,
+				 "sentinel_alive": (sentinel_proc.poll() is None
+									if sentinel_proc is not None else None),
+				 **fields}) + "\n")
+			observer.flush()
+		except Exception as error:
+			observer_errors.append({"event": event, "error": repr(error)})
 
 	out_f = open(driver_out / "monitor_stdout.txt", "wb")
 	err_f = open(driver_out / "monitor_stderr.txt", "wb")
@@ -860,20 +931,37 @@ def main() -> int:
 		except Exception as cleanup_error:
 			driver_error += f"; cleanup: {cleanup_error!r}"
 	finally:
-		out_f.close()
-		err_f.close()
+		# Every phase below is individually guarded: NO raise in the
+		# finally block may interrupt the cleanup that follows it. Each
+		# failure is recorded and gates the case outcome.
+		for capture in (out_f, err_f):
+			try:
+				capture.close()
+			except Exception as error:
+				finally_errors.append(f"capture_close:{error!r}")
 		# Fresh descendant capture + liveness BEFORE any driver-side
 		# terminate — this snapshot is the unmasked "did the monitor stop
 		# its own tree" evidence (driver cleanup must never supply it).
-		post_run_scan = descendant_scan(work)
-		pre_cleanup_alive = {name: pid_alive(pid)
-							 for name, pid in post_run_scan["pids"].items()}
+		try:
+			post_run_scan = descendant_scan(work)
+			pre_cleanup_alive = {name: pid_alive(pid)
+								 for name, pid in
+								 post_run_scan["pids"].items()}
+		except Exception as error:
+			finally_errors.append(f"post_run_scan:{error!r}")
 		observe("pre_cleanup_liveness", alive=pre_cleanup_alive,
 				unreadable=post_run_scan["unreadable"])
 		if sentinel_proc is not None:
-			sentinel_survived = sentinel_proc.poll() is None
+			try:
+				sentinel_survived = sentinel_proc.poll() is None
+			except Exception as error:
+				sentinel_survived = None
+				finally_errors.append(f"sentinel_poll:{error!r}")
 			observe("sentinel_verdict", survived=sentinel_survived)
-			if sentinel_survived:
+			if sentinel_survived is not False:
+				# Unknown survival is treated as possibly-live for
+				# cleanup purposes (bounded helper lifetime caps any
+				# residue) while still failing the W7 verdict below.
 				try:
 					sentinel_proc.terminate()
 					sentinel_proc.wait(timeout=CLEANUP_TERMINATE_TIMEOUT)
@@ -905,7 +993,21 @@ def main() -> int:
 								"creation_filetime": expected_creation,
 								"result": outcome})
 			observe("external_cleanup", name=name, pid=pid, result=outcome)
-		observer.close()
+		try:
+			observer.close()
+		except Exception as error:
+			observer_errors.append({"event": "observer_close",
+									"error": repr(error)})
+
+	# Cleanup outcomes that prove no live residue: the member was already
+	# gone, we terminated it, or the pid was verifiably REUSED by a
+	# different process (our member is dead; the live pid is not ours to
+	# kill). Every other recorded outcome — unknown liveness, unverified
+	# identity, open/terminate errors, sentinel errors — means a possibly
+	# live driver-created process may remain, and must gate the case.
+	cleanup_failures = [entry for entry in cleanup_log
+						if entry.get("result") not in
+						CLEAN_CLEANUP_OUTCOMES]
 
 	# ---- receipt ---------------------------------------------------------------
 
@@ -968,6 +1070,9 @@ def main() -> int:
 			   "sentinel_survived": sentinel_survived,
 			   "driver_error": driver_error,
 			   "cleanup_log": cleanup_log,
+			   "cleanup_failures": cleanup_failures,
+			   "observer_errors": observer_errors,
+			   "finally_errors": finally_errors,
 			   "descendants_observed": ctx["descendants"],
 			   "pre_kill_scan": pre_kill_scan,
 			   "pre_cleanup_alive": pre_cleanup_alive,
@@ -1000,11 +1105,13 @@ def main() -> int:
 	(case_dir / "case_receipt.json").write_text(
 		json.dumps(receipt, indent=2, default=str), encoding="utf-8")
 	print(json.dumps(receipt, indent=2, default=str))
-	# Assertions are gates, not diagnostics: any fail/non-pass row or a
-	# driver-level error makes the case non-zero. 'diagnostic' rows (W6)
-	# never fail a case on their own.
+	# Assertions are gates, not diagnostics: any fail/non-pass row, a
+	# driver-level error, a lost observer event, a guarded finally-phase
+	# error, or a cleanup outcome that may have left a live residue makes
+	# the case non-zero. 'diagnostic' rows (W6) never fail a case alone.
 	failed = [a for a in assertions if a["result"] in ("fail", "non-pass")]
-	return 1 if (failed or driver_error is not None) else 0
+	return 1 if (failed or driver_error is not None or observer_errors
+				 or finally_errors or cleanup_failures) else 0
 
 
 if __name__ == "__main__":
