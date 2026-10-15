@@ -1,14 +1,11 @@
-"""W6/W8 helper: bounded committed-memory allocation held for a fixed window.
+"""W8-adjacent helper: bounded committed-memory allocation held for a window.
 
 Touches every page so private bytes actually register (not just reserved).
-Hard-bounded by --commit-mb (default 64 MiB); anything above ~10 GiB is
-refused outright so a miswritten case cannot starve the host.
-
-Used only by w_driver.py under separately admitted JIT stages:
-  * W6 (owned): run inside the monitored tree, commit ~8.7 GiB -> monitor must
-    stop at MAX_OWNED_PRIVATE_BYTES and clean up the tree.
-  * W8 (unowned): run OUTSIDE the job as the --sentinel process; monitor must
-    never terminate it even while owned work is stopped.
+HARD_CAP_MB = 1 GiB — the coverage matrix's "no 8-GiB allocations" bound makes
+the former ~8.7 GiB owned-pressure case inadmissible; that scenario is
+descoped to a controlled external rig. What remains is a bounded UNOWNED
+bystander for W7/W8 sentinel duty: run OUTSIDE the job so the monitor must
+never terminate it even while owned work is stopped.
 
 Stdlib only; writes a ready marker with pid + committed bytes.
 """
@@ -20,7 +17,7 @@ import pathlib
 import sys
 import time
 
-HARD_CAP_MB = 10 * 1024
+HARD_CAP_MB = 1024  # <=1 GiB: the matrix forbids 8-GiB-scale allocations
 
 
 def main() -> int:
@@ -34,6 +31,8 @@ def main() -> int:
 	commit_mb = int(args.commit_mb)
 	if commit_mb < 1 or commit_mb > HARD_CAP_MB:
 		return 2  # refuse unreasonable sizes — never silently allocate
+	if not 0.0 <= args.seconds <= 90.0:  # sentinel lifetime bound
+		return 2
 
 	blocks = []
 	block = 64 * 1024 * 1024

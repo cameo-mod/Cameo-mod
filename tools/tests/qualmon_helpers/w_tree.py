@@ -32,12 +32,19 @@ def spawn(seconds: float, work: pathlib.Path, name: str) -> subprocess.Popen:
 		cwd=str(work))
 
 
+MAX_SECONDS = 6.0  # grandchild = 1.5x -> <=9s, inside the <=10s work bound
+
+
 def main() -> int:
 	parser = argparse.ArgumentParser()
 	parser.add_argument("--work-dir", required=True)
 	parser.add_argument("--seconds", type=float, default=8.0)
 	parser.add_argument("--early-parent-exit", action="store_true")
 	args = parser.parse_args()
+
+	# Bounded args enforced: refuse, never silently clamp.
+	if not 1.0 <= args.seconds <= MAX_SECONDS:
+		return 2
 
 	work = pathlib.Path(args.work_dir)
 	work.mkdir(parents=True, exist_ok=True)

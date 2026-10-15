@@ -11,22 +11,20 @@ no real processes are launched and no real memory pressure is created
 host pressure). The real-adapter W1-W8 helper cases live under
 tools/tests/qualmon_helpers/ and run only under separate JIT admission.
 
-Known under-review items encoded as contract assertions (Reviewer G-1/G-2
-addendum on REVIEW_2026-10-15_qual_monitor_f2_successor_a0fc78ea_devin.md;
-see the freeze receipt for this suite):
-* G-1: run() computes `code` before _write_final's post-run drift check, so a
-  HOLD receipt can ride on exit 0. test_d8_tool_hash_drift_is_hold carries
-  unittest.expectedFailure on tip a0fc78ea1; when a successor returns the
-  final disposition from _write_final the node flips to unexpected-success,
-  which is itself the fix-landed signal.
-* G-2: _resolve_source_commit never follows .git/worktrees/<n>/commondir, so
-  linked worktrees (the real qual environment) resolve None and REFUSE.
-  TestMonitor._resolve_source_commit adds commondir following ONLY to
-  synthesize matching grants; the unresolvable-source refusal itself is
-  correct fail-closed behavior. test_g2_commondir_* nodes carry
-  unittest.expectedFailure — they assert the FIXED contract on the
-  production resolver and flip to unexpected-success when the successor
-  lands (per Reviewer's prestage note for 01a13e0b-c316).
+G-1/G-2 successor landed: this branch is rebased onto c69df80c3 (source fix
+PASSed Luna's exact-SHA review), so the formerly expected-fail contract nodes
+are now plain assertions of the FIXED behavior:
+* G-1: run() recomputes the exit code from _write_final's returned final
+  disposition — a post-run drift HOLD can no longer ride on exit 0.
+  test_d8_tool_hash_drift_is_hold asserts receipt HOLD + EXIT_HOLD.
+* G-2: _resolve_source_commit follows .git/worktrees/<n>/commondir for both
+  loose refs and packed-refs; test_g2_commondir_* assert the production
+  resolver returns the sha. Fixture note (F-T1): commondir content is
+  '../../main_git' — gitdir sits at tmp/gitdirs/wt1 and the common gitdir is
+  tmp/main_git; '../main_git' wrongly resolved to tmp/gitdirs/main_git and
+  would have kept the nodes failing forever on the fixed resolver.
+TestMonitor._resolve_source_commit remains only to synthesize grants for the
+run-level nodes whose fake roots have no gitdir.
 """
 
 from __future__ import annotations
@@ -325,11 +323,49 @@ class FailingWriter:
 		self.inner.close()
 
 
+class FailingStream:
+	"""Proxies an AppendOnlyWriter's real text stream; named methods raise
+	OSError so D8 can distinguish the write/flush sub-seams (fsync is patched
+	separately at os.fsync)."""
+
+	def __init__(self, stream, fail_on: set) -> None:
+		self._stream = stream
+		self.fail_on = set(fail_on)
+
+	def write(self, data):
+		if "write" in self.fail_on:
+			raise OSError("injected stream write failure")
+		return self._stream.write(data)
+
+	def flush(self):
+		if "flush" in self.fail_on:
+			raise OSError("injected stream flush failure")
+		return self._stream.flush()
+
+	def fileno(self):
+		return self._stream.fileno()
+
+	def close(self):
+		return self._stream.close()
+
+
+class BadPipe:
+	"""stdout/stderr stand-in whose write/flush always raise OSError —
+	exercises the supervisor's wrapped print() path (pipe loss must be
+	contained, never latched as evidence failure)."""
+
+	def write(self, _):
+		raise OSError("injected pipe failure")
+
+	def flush(self):
+		raise OSError("injected pipe failure")
+
+
 class TestMonitor(rqm.Monitor):
 	"""Test seam: scripted inner status (the fake never runs run_capped),
-	writer-failure injection, and a commondir-aware resolver used ONLY to
-	synthesize a matching grant inside a linked-worktree checkout. The
-	production resolver's commondir gap is a separately flagged finding."""
+	writer-failure injection. Grant synthesis uses the production resolver
+	on the real (linked-worktree) test checkout — the pre-c69df80c3 override
+	that masked G-2 was removed when this branch rebased onto the fix."""
 
 	inner_override = None
 	fail_writer_after: dict[str, int] | None = None
@@ -357,35 +393,6 @@ class TestMonitor(rqm.Monitor):
 		super()._open_evidence(evidence_dir)
 		for key, after in (self.fail_writer_after or {}).items():
 			self.writers[key] = FailingWriter(self.writers[key], after)
-
-	def _resolve_source_commit(self, repo_root):
-		"""Test-side resolver that follows worktree commondir so grants can
-		bind inside a linked worktree. Never alters monitor behavior."""
-		try:
-			gitfile = pathlib.Path(repo_root) / ".git"
-			if gitfile.is_file():
-				gitdir = pathlib.Path(gitfile.read_text().split(":", 1)[1].strip())
-				if not gitdir.is_absolute():
-					gitdir = (pathlib.Path(repo_root) / gitdir).resolve()
-			else:
-				gitdir = gitfile
-			commondir = gitdir
-			common = gitdir / "commondir"
-			if common.is_file():
-				commondir = (gitdir / common.read_text().strip()).resolve()
-			head = (gitdir / "HEAD").read_text().strip()
-			if head.startswith("ref:"):
-				ref = head[4:].strip()
-				ref_path = commondir / ref
-				if ref_path.is_file():
-					return ref_path.read_text().strip()
-				for line in (commondir / "packed-refs").read_text().splitlines():
-					if not line.startswith("#") and line.endswith(f" {ref}"):
-						return line.split()[0]
-				return None
-			return head
-		except (OSError, IndexError):
-			return None
 
 
 def make_args(tmp: pathlib.Path, timeout: float = 900.0,
@@ -434,9 +441,10 @@ def build(tmp: pathlib.Path, fake: FakeAdapter, clock: FakeClock,
 	return monitor
 
 
-def prep_state(monitor: TestMonitor, fake: FakeAdapter, tmp: pathlib.Path):
+def prep_state(monitor: TestMonitor, fake: FakeAdapter, tmp: pathlib.Path,
+			   leaf: str = "evidence_method"):
 	"""Method-level state: evidence writers + supervisor identity + job token."""
-	evidence = tmp / "evidence_method"
+	evidence = tmp / leaf
 	evidence.mkdir(exist_ok=True)
 	monitor._open_evidence(evidence)
 	monitor.job = fake.create_job("t")
@@ -733,11 +741,11 @@ class QualMonitorDeterministicTests(unittest.TestCase):
 			monitor._disposition({"status": "COMPLETED", "exit_code": 0}, True),
 			"HOLD")
 
-	@unittest.expectedFailure  # G-1: exit code sealed before _write_final drift check
 	def test_d8_tool_hash_drift_is_hold(self):
-		"""Post-run tool hash drift forces HOLD; contract also demands non-zero
-		exit (G-1: reviewed tip computes `code` before the drift check — the
-		final assert fails on a0fc78ea1 and flips when the successor lands)."""
+		"""Post-run tool hash drift forces HOLD receipt AND non-zero exit.
+		G-1: on a0fc78ea1 `code` was sealed before the drift check; on the
+		c69df80c3 successor _write_final's returned disposition drives the
+		exit code — a HOLD receipt must never ride on exit 0."""
 		fake, clock = FakeAdapter(), FakeClock()
 		monitor = build(self.tmp, fake, clock,
 						inner={"status": "COMPLETED", "exit_code": 0})
@@ -756,10 +764,10 @@ class QualMonitorDeterministicTests(unittest.TestCase):
 			code = monitor.run()
 		receipt = json.loads(
 			(pathlib.Path(monitor.args.evidence_dir) / "monitor_status.json").read_text())
-		self.assertNotEqual(receipt["disposition"], "COMPLETED")
+		self.assertEqual(receipt["disposition"], "HOLD")
 		self.assertTrue(receipt["tool_hash_drift"])
 		# Contract: a HOLD receipt must never ride on exit code 0.
-		self.assertNotEqual(code, rqm.EXIT_COMPLETED)
+		self.assertEqual(code, rqm.EXIT_HOLD)
 
 	def test_d8_exit_evidence_retained_on_write_failure(self):
 		"""Failed exit-evidence write keeps the handle; exit stays unverified."""
@@ -775,6 +783,95 @@ class QualMonitorDeterministicTests(unittest.TestCase):
 		self.assertFalse(entry.exit_verified)
 		self.assertIn(entry.key(), monitor.handles)
 		self.assertTrue(monitor.evidence_failed)
+
+	def test_d8_evidence_fault_matrix(self):
+		"""Luna D8 matrix: write/flush/fsync fault injection across every
+		append-only channel (samples, process ledger, clearance). Every seam
+		must latch evidence_failed, append a hold reason naming the channel,
+		and request owned cleanup via stop_reason."""
+		for key in ("samples", "ledger", "clearance"):
+			for seam in ("write", "flush", "fsync"):
+				with self.subTest(channel=key, seam=seam):
+					fake, clock = FakeAdapter(), FakeClock()
+					monitor = prep_state(build(self.tmp, fake, clock), fake,
+										 self.tmp, leaf=f"ev_{key}_{seam}")
+					writer = monitor.writers[key]
+					record = {"kind": "fault_probe", "channel": key}
+					if seam == "fsync":
+						with unittest.mock.patch.object(
+								rqm.os, "fsync",
+								side_effect=OSError("injected fsync failure")):
+							ok = monitor._record(key, record)
+					else:
+						writer._stream = FailingStream(writer._stream, {seam})
+						ok = monitor._record(key, record)
+					self.assertFalse(ok)
+					self.assertTrue(monitor.evidence_failed)
+					self.assertIsNotNone(monitor.stop_reason)
+					self.assertTrue(
+						any(key in h for h in monitor.hold_reasons),
+						f"hold reason must name channel {key}")
+
+	def test_d8_clearance_write_failure_blocks_certification(self):
+		"""A clearance-writer failure means the snapshot is never proven
+		clear even when the census itself is clean (evidence_unavailable)."""
+		fake, clock = FakeAdapter(), FakeClock()
+		monitor = prep_state(build(self.tmp, fake, clock), fake, self.tmp)
+		monitor.writers["clearance"] = FailingWriter(
+			monitor.writers["clearance"], after=0)
+		snap = monitor._clearance_snapshot(0)
+		self.assertFalse(snap["clear"])
+		self.assertTrue(snap.get("evidence_unavailable"))
+		self.assertTrue(monitor.evidence_failed)
+
+	def test_d8_monitor_log_flush_failure_latches_hold(self):
+		"""monitor_log seam coverage: a write that succeeds but a flush that
+		fails is still an append failure — latch identically to write."""
+		fake, clock = FakeAdapter(), FakeClock()
+		monitor = prep_state(build(self.tmp, fake, clock), fake, self.tmp)
+
+		class FlushOnlyFail:
+			def write(self, line):
+				return None
+			def flush(self):
+				raise OSError("injected log flush failure")
+
+		monitor._log_stream = FlushOnlyFail()
+		monitor.log("info", "flush failure must latch")
+		self.assertTrue(monitor.evidence_failed)
+		self.assertIsNotNone(monitor.stop_reason)
+		self.assertIn("monitor_log", monitor.stop_reason)
+		self.assertTrue(any("monitor_log" in h for h in monitor.hold_reasons))
+
+	def test_d8_stdout_backpressure_is_contained(self):
+		"""Invoker stdout/stderr loss is contained: log() must not raise and
+		must NOT latch evidence_failed — supervisor stdout is not evidence
+		(monitor_log.txt still receives the line)."""
+		fake, clock = FakeAdapter(), FakeClock()
+		monitor = prep_state(build(self.tmp, fake, clock), fake, self.tmp)
+		with unittest.mock.patch.object(sys, "stdout", BadPipe()), \
+			 unittest.mock.patch.object(sys, "stderr", BadPipe()):
+			monitor.log("info", "pipe loss must not crash")
+			monitor.log("error", "stderr pipe loss too")
+		self.assertFalse(monitor.evidence_failed)
+		self.assertIsNone(monitor.stop_reason)
+		content = monitor.evidence["log"].read_text(encoding="utf-8")
+		self.assertIn("pipe loss must not crash", content)
+		self.assertIn("stderr pipe loss too", content)
+
+	def test_d8_partial_evidence_is_retained_not_torn(self):
+		"""Records written before a failure stay durable: the jsonl tail is
+		complete up to the failing record — partial evidence, never torn."""
+		fake, clock = FakeAdapter(), FakeClock()
+		monitor = prep_state(build(self.tmp, fake, clock), fake, self.tmp)
+		monitor.writers["samples"] = FailingWriter(
+			monitor.writers["samples"], after=2)
+		self.assertTrue(monitor._record("samples", {"kind": "r1"}))
+		self.assertTrue(monitor._record("samples", {"kind": "r2"}))
+		self.assertFalse(monitor._record("samples", {"kind": "r3"}))
+		self.assertTrue(monitor.evidence_failed)
+		records = read_jsonl(monitor.evidence["samples"])
+		self.assertEqual([r["kind"] for r in records], ["r1", "r2"])
 
 	# ---- G-2 source-commit resolution (reviewer addendum) --------------------------
 
@@ -800,7 +897,7 @@ class QualMonitorDeterministicTests(unittest.TestCase):
 		common = tmp / "main_git"
 		common.mkdir()
 		(root / ".git").write_text(f"gitdir: {gitdir}\n", encoding="utf-8")
-		(gitdir / "commondir").write_text("../main_git\n", encoding="utf-8")
+		(gitdir / "commondir").write_text("../../main_git\n", encoding="utf-8")
 		if refname is None:
 			(gitdir / "HEAD").write_text(sha + "\n", encoding="utf-8")  # detached
 		else:
@@ -814,17 +911,16 @@ class QualMonitorDeterministicTests(unittest.TestCase):
 				ref_path.write_text(sha + "\n", encoding="utf-8")
 		return root
 
-	@unittest.expectedFailure  # G-2: commondir loose ref not followed on tip
 	def test_g2_commondir_loose_ref_resolution(self):
-		"""Linked worktree, loose ref in commondir: contract resolves the sha."""
+		"""Linked worktree, loose ref in commondir: contract resolves the sha
+		(G-2 fixed on c69df80c3 — production resolver follows commondir)."""
 		sha = "a0fc78ea11b8644e93015110c1255becd899899d"
 		root = self._make_worktree_fixture("refs/heads/qual_monitor", sha)
 		self.assertEqual(self._production_resolver(root), sha)
 
-	@unittest.expectedFailure  # G-2: packed heads live in commondir too
 	def test_g2_commondir_packed_refs_resolution(self):
 		"""Reviewer note: heads are packed — the ref may only exist in
-		commondir/packed-refs, which the production resolver never reads."""
+		commondir/packed-refs; the fixed resolver reads it there (G-2)."""
 		sha = "a0fc78ea11b8644e93015110c1255becd899899d"
 		root = self._make_worktree_fixture("refs/heads/qual_monitor", sha,
 										   packed=True)

@@ -19,6 +19,9 @@ import sys
 import time
 
 
+MAX_SECONDS = 90.0  # sentinel/observer lifetime bound (case work is <=10s)
+
+
 def main() -> int:
 	parser = argparse.ArgumentParser()
 	parser.add_argument("--seconds", type=float, required=True)
@@ -27,6 +30,12 @@ def main() -> int:
 	parser.add_argument("--exit-code", type=int, default=0)
 	parser.add_argument("--work-dir", default=None)
 	args = parser.parse_args()
+
+	# Bounded args enforced: refuse, never silently clamp.
+	if not 0.0 <= args.seconds <= MAX_SECONDS:
+		return 2
+	if not 0 <= args.exit_code <= 255:
+		return 2
 
 	work = pathlib.Path(args.work_dir or os.getcwd())
 	work.mkdir(parents=True, exist_ok=True)

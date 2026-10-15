@@ -21,7 +21,11 @@ def main() -> int:
 	args = parser.parse_args()
 	work = pathlib.Path(args.work_dir)
 	work.mkdir(parents=True, exist_ok=True)
-	count = max(1, min(args.count, 6))  # hard bound
+	# Bounded args enforced: refuse, never silently clamp. <=6 children keeps
+	# the case under the <=8-process bound (6 children + this parent).
+	if not 1 <= args.count <= 6:
+		return 2
+	count = args.count
 	helper = pathlib.Path(__file__).parent / "w_wait.py"
 
 	pids = []

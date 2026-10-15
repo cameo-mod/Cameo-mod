@@ -22,6 +22,8 @@ def main() -> int:
 	parser.add_argument("--work-dir", required=True)
 	parser.add_argument("--seconds", type=float, default=8.0)
 	args = parser.parse_args()
+	if not 0.5 <= args.seconds <= 10.0:  # bounded args enforced
+		return 2
 	work = pathlib.Path(args.work_dir)
 	work.mkdir(parents=True, exist_ok=True)
 
