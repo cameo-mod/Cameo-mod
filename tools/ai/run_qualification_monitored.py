@@ -1287,9 +1287,14 @@ class Monitor:
                 target=self._event_loop, daemon=True, name="job-events")
             self._event_thread.start()
             self._launch_root(list(self.args.child_argv), grant["cwd"])
-            self._resume_root()
-            self.log("info", "contained root resumed",
-                     jit_id=self.args.jit_id, stage=self.args.stage)
+            if self.stop_reason is not None:
+                # e.g. evidence write failed during pre-resume registration:
+                # never let a tainted run start (design §5 fail-closed).
+                self._stop_owned(f"pre-resume stop: {self.stop_reason}")
+            else:
+                self._resume_root()
+                self.log("info", "contained root resumed",
+                         jit_id=self.args.jit_id, stage=self.args.stage)
             self._monitor_loop()
             inner = self._read_inner_status(evidence_dir)
             if self.stop_reason is not None:
