@@ -83,10 +83,11 @@ STILL_ACTIVE = 259
 ERROR_INVALID_PARAMETER = 87  # OpenProcess on a nonexistent pid
 EXIT_INNER_CAPPED = 5         # run_qualification_monitored exit code
 # Driver cleanup outcomes that leave no possibly-live residue: already
-# dead, terminated by us, or the pid was verifiably reused (our member
-# is dead; the live foreign process is not ours to kill). Anything else
-# — unknown liveness, unverified identity, open/terminate/sentinel
-# errors — leaves possible residue and must gate the case outcome.
+# dead, terminated by us, or the pid was verifiably reused (a live query
+# returned a DIFFERENT creation FILETIME — our member is dead and the
+# live foreign process is not ours to kill). Anything else — unknown
+# liveness, unverified identity, a FAILED identity query, open/terminate/
+# sentinel errors — leaves possible residue and must gate the outcome.
 CLEAN_CLEANUP_OUTCOMES = {"already_dead", "terminated",
 						"skipped_creation_mismatch"}
 
@@ -174,12 +175,20 @@ def descendant_scan(work: pathlib.Path) -> dict:
 	HELPERS wrote (their own declared pids) — not monitor evidence.
 
 	Returns {"pids": {name: pid}, "creation_filetime": {name: int|None},
-	"unreadable": [marker names that existed but did not parse]}.
+	"unreadable": [marker names that existed but did not parse],
+	"reused": [names whose live creation FILETIME differs from the
+	spawn-time FILETIME recorded in the marker — positive pid-reuse
+	evidence]}.
 	A present-but-unreadable marker is recorded, never silently skipped —
-	an unidentifiable descendant cannot be proven contained or reaped."""
+	an unidentifiable descendant cannot be proven contained or reaped.
+	The marker-recorded FILETIME (captured at spawn while the process was
+	provably the helper's) is authoritative identity; a live query only
+	fills in when the marker lacks one, and a live query that DISAGREES
+	with the marker is recorded as reuse, not trusted."""
 	found: dict[str, int] = {}
 	created: dict[str, int | None] = {}
 	unreadable: list[str] = []
+	reused: list[str] = []
 	names = ["parent_marker", "mid_spawn", "grandchild_spawn",
 			 "grandchild_ready", "w1_ready", "w1n_ready", "w7_ready",
 			 "w8_ready", "sentinel_ready", "breakaway_child_ready",
@@ -190,17 +199,25 @@ def descendant_scan(work: pathlib.Path) -> dict:
 		if not path.is_file():
 			continue
 		try:
-			pid = json.loads(path.read_text()).get("pid")
+			data = json.loads(path.read_text())
 		except (OSError, json.JSONDecodeError):
 			unreadable.append(name)
 			continue
+		pid = data.get("pid")
 		if not isinstance(pid, int):
 			unreadable.append(name)
 			continue
 		found[name] = pid
-		created[name] = process_creation_filetime(pid)
+		marker_ft = data.get("creation_filetime")
+		if isinstance(marker_ft, int):
+			created[name] = marker_ft
+			live_ft = process_creation_filetime(pid)
+			if live_ft is not None and live_ft != marker_ft:
+				reused.append(name)
+		else:
+			created[name] = process_creation_filetime(pid)
 	return {"pids": found, "creation_filetime": created,
-			"unreadable": unreadable}
+			"unreadable": unreadable, "reused": reused}
 
 
 def descendant_pids(work: pathlib.Path) -> dict[str, int]:
@@ -410,6 +427,33 @@ def evaluate_case(case: str, ctx: dict) -> list:
 	samples = ctx.get("samples") or []
 	sample_kinds = [s.get("kind") for s in samples]
 
+	# Identity-keyed ledger resolution — a bare pid is a reuse alias,
+	# never an identity. A marker resolves to a ledger entry only when
+	# BOTH pid and creation FILETIME match; a marker without a recorded
+	# FILETIME cannot resolve (fail closed).
+	by_identity = {(e.get("pid"), e.get("creation_filetime")): e
+				   for e in ledger}
+	marker_fts = (ctx.get("marker_scan") or {}).get("creation_filetime") or {}
+
+	def resolve_identity(name):
+		pid = (ctx.get("descendants") or {}).get(name)
+		ft = marker_fts.get(name)
+		if not isinstance(pid, int) or not isinstance(ft, int):
+			return None
+		return by_identity.get((pid, ft))
+
+	def _edge(child_entry, parent_entry):
+		"""True when child's parent record reconciles to parent_entry on
+		the (pid, creation FILETIME) pair — the monitor records parent
+		FILETIME, so pid reuse cannot forge a link."""
+		prec = (child_entry or {}).get("parent") or {}
+		return (child_entry is not None and parent_entry is not None
+				and prec.get("link") == "ledger"
+				and prec.get("pid") == parent_entry.get("pid")
+				and isinstance(prec.get("creation_filetime"), int)
+				and prec.get("creation_filetime")
+					== parent_entry.get("creation_filetime"))
+
 	if case == "W4_monitor_interruption":
 		# The monitor is intentionally killed: no final status is written,
 		# so the required outcome is absence + independent post-kill proof —
@@ -517,31 +561,20 @@ def evaluate_case(case: str, ctx: dict) -> list:
 						and isinstance(e.get("creation_filetime"), int)
 						for e in ledger) else "fail",
 					f"keys={[e.get('ledger_key') for e in ledger]}"))
-		# Parent-link reconciliation over the WHOLE observed chain: the
-		# grandchild's parent record must resolve to the ledgered mid,
-		# mid's parent must resolve to the ledgered tree root (the w_tree
-		# marker pid), and the tree root's parent must resolve to the
-		# ledgered job root — a broken intermediate link is a containment
-		# gap, not a partial pass.
-		by_pid = {e.get("pid"): e for e in ledger}
-		grand = by_pid.get(descendants.get("grandchild_spawn")) or \
-			by_pid.get(descendants.get("grandchild_ready"))
-		mid = by_pid.get(descendants.get("mid_spawn"))
-		tree_root = by_pid.get(descendants.get("parent_marker"))
+		# Parent-link reconciliation over the WHOLE observed chain on
+		# (pid, creation FILETIME) identity pairs: the grandchild's parent
+		# record must resolve to the ledgered mid, mid's parent must
+		# resolve to the ledgered tree root (the w_tree marker), and the
+		# tree root's parent must resolve to the ledgered job root —
+		# a broken or pid-only-reused link is a containment gap.
+		grand = resolve_identity("grandchild_spawn") or \
+			resolve_identity("grandchild_ready")
+		mid = resolve_identity("mid_spawn")
+		tree_root = resolve_identity("parent_marker")
 		ledger_root = next((e for e in ledger if e.get("is_root")), None)
-		grand_link = (grand is not None and mid is not None
-					  and (grand.get("parent") or {}).get("pid")
-					  == mid.get("pid")
-					  and (grand.get("parent") or {}).get("link") == "ledger")
-		mid_link = (mid is not None and tree_root is not None
-					and (mid.get("parent") or {}).get("pid")
-					== tree_root.get("pid")
-					and (mid.get("parent") or {}).get("link") == "ledger")
-		root_link = (tree_root is not None and ledger_root is not None
-					 and (tree_root.get("parent") or {}).get("pid")
-					 == ledger_root.get("pid")
-					 and (tree_root.get("parent") or {}).get("link")
-					 == "ledger")
+		grand_link = _edge(grand, mid)
+		mid_link = _edge(mid, tree_root)
+		root_link = _edge(tree_root, ledger_root)
 		a.append(_a("parent_links_reconciled",
 					"pass" if grand_link and mid_link and root_link
 					else "fail",
@@ -565,12 +598,14 @@ def evaluate_case(case: str, ctx: dict) -> list:
 					f"total={last_snap.get('total_processes')} "
 					f"ledger_size={len(ledger)}"))
 	elif case == "W3_early_parent_exit":
-		grand = ctx.get("descendants", {}).get("grandchild_ready") or \
-			ctx.get("descendants", {}).get("grandchild_spawn")
+		grand = resolve_identity("grandchild_spawn") or \
+			resolve_identity("grandchild_ready")
 		a.append(_a("orphaned_grandchild_in_ledger",
-					"pass" if grand in ledger_pids else "fail",
-					f"grandchild_pid={grand} ledger={sorted(ledger_pids)} — "
-					"job membership is creation-time, not reparented"))
+					"pass" if grand is not None else "fail",
+					f"grandchild={ (grand or {}).get('ledger_key') } "
+					f"ledger={sorted(ledger_pids)} — job membership is "
+					"creation-time, not reparented; (pid,FILETIME) "
+					"identity match required"))
 		creators = [ctx["descendants"].get(k) for k in
 					("parent_marker", "mid_spawn")]
 		creators = [p for p in creators if p]
@@ -847,8 +882,10 @@ def main() -> int:
 	cleanup_log = []
 	observer_errors = []
 	finally_errors = []
-	pre_kill_scan = {"pids": {}, "creation_filetime": {}, "unreadable": []}
-	post_run_scan = {"pids": {}, "creation_filetime": {}, "unreadable": []}
+	pre_kill_scan = {"pids": {}, "creation_filetime": {},
+					 "unreadable": [], "reused": []}
+	post_run_scan = {"pids": {}, "creation_filetime": {},
+					 "unreadable": [], "reused": []}
 	pre_cleanup_alive = {}
 	post_kill_detail = {}
 
@@ -891,6 +928,7 @@ def main() -> int:
 			observe("pre_kill_descendants", pids=pre_kill_scan["pids"],
 					creation_filetime=pre_kill_scan["creation_filetime"],
 					unreadable=pre_kill_scan["unreadable"],
+					reused=pre_kill_scan["reused"],
 					alive={k: pid_alive(p)
 						   for k, p in pre_kill_scan["pids"].items()})
 			mon.terminate()  # W4: outer harness kills the supervisor itself
@@ -950,7 +988,8 @@ def main() -> int:
 		except Exception as error:
 			finally_errors.append(f"post_run_scan:{error!r}")
 		observe("pre_cleanup_liveness", alive=pre_cleanup_alive,
-				unreadable=post_run_scan["unreadable"])
+				unreadable=post_run_scan["unreadable"],
+				reused=post_run_scan["reused"])
 		if sentinel_proc is not None:
 			try:
 				sentinel_survived = sentinel_proc.poll() is None
@@ -985,10 +1024,17 @@ def main() -> int:
 				outcome = "liveness_unknown_skipped"
 			elif expected_creation is None:
 				outcome = "creation_unverified_skipped"
-			elif process_creation_filetime(pid) != expected_creation:
-				outcome = "skipped_creation_mismatch"
 			else:
-				outcome = terminate_pid(pid)
+				current = process_creation_filetime(pid)
+				if current is None:
+					# The identity query itself failed on a possibly-live
+					# pid — we cannot prove reuse OR our own member, so
+					# this is residue risk and can never be a clean skip.
+					outcome = "creation_query_failed"
+				elif current != expected_creation:
+					outcome = "skipped_creation_mismatch"
+				else:
+					outcome = terminate_pid(pid)
 			cleanup_log.append({"target": name, "pid": pid,
 								"creation_filetime": expected_creation,
 								"result": outcome})
