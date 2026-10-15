@@ -1,4 +1,4 @@
-﻿"""Regressions for independent LEARN-P0 review findings 2, 3, 5, 7, 8."""
+"""Regressions for independent LEARN-P0 review findings 2, 3, 5, 7, 8."""
 import copy
 import json
 from pathlib import Path
