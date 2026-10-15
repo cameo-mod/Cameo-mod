@@ -23,7 +23,10 @@ see the freeze receipt for this suite):
   linked worktrees (the real qual environment) resolve None and REFUSE.
   TestMonitor._resolve_source_commit adds commondir following ONLY to
   synthesize matching grants; the unresolvable-source refusal itself is
-  correct fail-closed behavior.
+  correct fail-closed behavior. test_g2_commondir_* nodes carry
+  unittest.expectedFailure — they assert the FIXED contract on the
+  production resolver and flip to unexpected-success when the successor
+  lands (per Reviewer's prestage note for 01a13e0b-c316).
 """
 
 from __future__ import annotations
@@ -772,6 +775,78 @@ class QualMonitorDeterministicTests(unittest.TestCase):
 		self.assertFalse(entry.exit_verified)
 		self.assertIn(entry.key(), monitor.handles)
 		self.assertTrue(monitor.evidence_failed)
+
+	# ---- G-2 source-commit resolution (reviewer addendum) --------------------------
+
+	_PROBE_ARGS = argparse.Namespace(jit_id="p", stage=1, grant_input="x",
+									 evidence_dir="e", timeout=900,
+									 child_argv=[])
+
+	def _production_resolver(self, fake_root: pathlib.Path) -> str | None:
+		"""Call the REAL resolver (plain rqm.Monitor), not the TestMonitor
+		override — G-2 nodes must exercise the shipped code path."""
+		return rqm.Monitor(self._PROBE_ARGS, adapter=FakeAdapter(),
+						   monotonic=FakeClock())._resolve_source_commit(fake_root)
+
+	def _make_worktree_fixture(self, refname: str | None, sha: str,
+							   packed: bool = False) -> pathlib.Path:
+		"""Linked-worktree-shaped .git layout: worktree root + gitdir file,
+		gitdir/HEAD, gitdir/commondir -> main gitdir holding refs."""
+		tmp = self.tmp
+		root = tmp / "repo_wt"
+		root.mkdir()
+		gitdir = tmp / "gitdirs" / "wt1"
+		gitdir.mkdir(parents=True)
+		common = tmp / "main_git"
+		common.mkdir()
+		(root / ".git").write_text(f"gitdir: {gitdir}\n", encoding="utf-8")
+		(gitdir / "commondir").write_text("../main_git\n", encoding="utf-8")
+		if refname is None:
+			(gitdir / "HEAD").write_text(sha + "\n", encoding="utf-8")  # detached
+		else:
+			(gitdir / "HEAD").write_text(f"ref: {refname}\n", encoding="utf-8")
+			if packed:
+				(common / "packed-refs").write_text(
+					f"{sha} {refname}\n", encoding="utf-8")
+			else:
+				ref_path = common / refname
+				ref_path.parent.mkdir(parents=True, exist_ok=True)
+				ref_path.write_text(sha + "\n", encoding="utf-8")
+		return root
+
+	@unittest.expectedFailure  # G-2: commondir loose ref not followed on tip
+	def test_g2_commondir_loose_ref_resolution(self):
+		"""Linked worktree, loose ref in commondir: contract resolves the sha."""
+		sha = "a0fc78ea11b8644e93015110c1255becd899899d"
+		root = self._make_worktree_fixture("refs/heads/qual_monitor", sha)
+		self.assertEqual(self._production_resolver(root), sha)
+
+	@unittest.expectedFailure  # G-2: packed heads live in commondir too
+	def test_g2_commondir_packed_refs_resolution(self):
+		"""Reviewer note: heads are packed — the ref may only exist in
+		commondir/packed-refs, which the production resolver never reads."""
+		sha = "a0fc78ea11b8644e93015110c1255becd899899d"
+		root = self._make_worktree_fixture("refs/heads/qual_monitor", sha,
+										   packed=True)
+		self.assertEqual(self._production_resolver(root), sha)
+
+	def test_g2_detached_head_resolves(self):
+		"""Control: detached HEAD in a worktree gitdir resolves on the tip —
+		the only currently-working case per the G-2 addendum."""
+		sha = "a0fc78ea11b8644e93015110c1255becd899899d"
+		root = self._make_worktree_fixture(None, sha)
+		self.assertEqual(self._production_resolver(root), sha)
+
+	def test_g2_main_repo_loose_ref_resolves(self):
+		"""Control: a real .git directory with a loose branch ref resolves."""
+		sha = "a0fc78ea11b8644e93015110c1255becd899899d"
+		root = self.tmp / "repo_main"
+		(root / ".git" / "refs" / "heads").mkdir(parents=True)
+		(root / ".git" / "HEAD").write_text(
+			"ref: refs/heads/master\n", encoding="utf-8")
+		(root / ".git" / "refs" / "heads" / "master").write_text(
+			sha + "\n", encoding="utf-8")
+		self.assertEqual(self._production_resolver(root), sha)
 
 
 if __name__ == "__main__":
