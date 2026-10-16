@@ -1,3 +1,35 @@
+# 2026-10-16 — Devin: P1a successor freeze (2184ec930) — Sol adjudication F0/F2 resolved, 33/33
+
+*Devin-Developer.* Sol's focused disposition on `9d997eb58` returned HOLD for
+findings F0 and F2 (fleet `DISPOSITION_2026-10-16_refinery_9d997eb58_sol.md`)
+with the same seven-file isolated claim retained for the narrow correction.
+Successor `2184ec930` on `devin/01a14054-refinery-p1a` resolves them:
+
+- **F0** — `EvaluatePlacementCancelProtection` no longer returns `Allow`:
+  role membership is a hint, not positive cheap+fast evidence. Protected →
+  `RequireCertificate`; everything else → `Unresolvable`. Evidence params kept
+  for seam compatibility, unused this iteration.
+- **F2** — demand-unwind cancellation now proves identity: engine
+  `CancelProduction` removes the last same-name entry on *every enabled queue*
+  of the producer, so `CancelDemandItem` fails closed (`AmbiguousHold`) unless
+  exactly one same-name entry exists on an enabled queue. New seam
+  `DemandCancelVerdict` → `DemandCancelDisposition` {Absent, AmbiguousHold,
+  ProtectionHold, Issued}; `ExpireExpansionDemand` logs held cancels and does
+  not treat held items as settled (queue sweep re-adopts them).
+- **F1/F5** — `RefineryFallbackScan.MarkDirtyCell` docs now state cell-level
+  marking covers occupancy/resource/terrain reads only (provider-influence and
+  actor-set changes ride the per-poll coherence atom sweep) and record the
+  carried `O(readRadius²)` event-time cost with fail-closed starvation.
+- **Addendum C** — verified compliant without changes: bounded tiers enumerate
+  raw Chebyshev coordinate squares (no `FindTilesInAnnulus`/`MaximumTileSearchRange`
+  clamp); reach is a superset of `ep+A+f−2`; the terminal tier is the whole map.
+
+Validation: `dotnet build OpenRA.Mods.Cameo.Test -c Release` clean (0 warnings,
+0 errors); `dotnet test --filter FullyQualifiedName~RefineryFallbackTest`
+**33/33 pass** including new `DemandCancelDispositionTable` (twin-same-name,
+cross-queue sibling, disabled-queue, protection-hold, issued, recovery).
+No launch, no merge, no push. Source frozen pending reviewer inspection.
+
 # 2026-10-16 — Devin: P1a compile+test fix-forward (a0a343a41) — 32/32 focused tests pass
 
 *Devin-Developer.* Leader-authorized focused-test cycle (focused tests only,
