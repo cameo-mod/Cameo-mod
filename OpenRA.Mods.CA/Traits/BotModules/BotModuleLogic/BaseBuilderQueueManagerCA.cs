@@ -590,6 +590,19 @@ namespace OpenRA.Mods.CA.Traits
 							{
 								foreach (var item in queue.AllQueued().ToArray())
 								{
+									// REF-2 P1a (maintainer no-cancel class, 2026-10-16): a
+									// COMPLETED high-value item is never mass-cancelled — the
+									// latch has no total-domain exhaustion proof for it. It stays
+									// queued and places from the relocated site. (G3 pending Sol:
+									// radar/tech/factory scope; G4 pending: incomplete items —
+									// both keep the old cancel.)
+									if (item.Done && BaseBuilderQueueEvalCA.RetainedHighValueItem(baseBuilder.Info.RefineryTypes, item.Item))
+									{
+										EmitQueueTransition(queue, stuckConyard, item, item.Item, QueueCategoryOf(item.Item),
+											BotQueueTransitionKind.Held, BotQueueTransitionReason.RelocationLatch);
+										continue;
+									}
+
 									// The record resolves on the tick the item actually
 									// leaves the queue (F2); queues outside this manager's
 									// category surface as Removed on their own manager.
@@ -975,6 +988,7 @@ namespace OpenRA.Mods.CA.Traits
 				CPos? advisedDefense = null;
 				var refineryDefers = false;
 				refineryClaimed = false;
+				refineryExhausted = false;
 				refineryHoldReason = BotQueueTransitionReason.NoRefinerySite;
 				lastFrontBackPick = null;
 				frontBackHold = false;
@@ -1064,9 +1078,14 @@ namespace OpenRA.Mods.CA.Traits
 							: BaseBuilderQueueEvalCA.ClassifyPlacement(lawLink, isRefinery, isFragile, hasAttackBase, defenseRoll, organicCrawlRoll);
 					}
 
-					// FIX-RA-REFINERY: decided here so the null-location branch below can tell a
-					// law refinery's "retry later" from an ordinary placement failure.
-					refineryDefers = BaseBuilderQueueEvalCA.RefineryDefers(law != null, type);
+					// FIX-RA-REFINERY / G2 (maintainer ruling 2026-10-16): decided here so the
+					// null-location branch below can tell a refinery's "retry later" from an
+					// ordinary placement failure. A refinery retains WITHOUT the law too — a
+					// law-less refinery has no exhaustion proof available, so it may never take
+					// the saturation cancel; it re-probes generic placement every sweep instead.
+					// (Covers the law claim paths and the classic/demand refinery alike:
+					// classification maps RefineryTypes items to BuildingType.Refinery.)
+					refineryDefers = type == BuildingType.Refinery;
 
 					// REF-1 B1 (crawl-trace §8): under the law a crawl placement with no aim holds — returning
 					// keeps the produced building queued (and spends no failure budget) instead of wasting the
@@ -1105,11 +1124,30 @@ namespace OpenRA.Mods.CA.Traits
 					// through the re-queue loop while no site existed.
 					if (refineryDefers)
 					{
-						// REF-2 P1a (retained-refinery): a completed law-path refinery is NEVER
-						// cancelled for being unplaceable — it holds at the head and every later
-						// sweep re-probes preferred claims then the widened fallback. The reason
-						// distinguishes no-claim-offered, still-scanning and drained-pass holds;
-						// EmitGate emits once per reason transition, no failure budget is spent.
+						// Maintainer ruling 2026-10-16: cancellation is permitted ONLY on a
+						// proven total-domain exhaustion — the tiered fallback enumerated every
+						// cell of the declared domain (provider squares under the distance law,
+						// or the whole map when no base-distance rejection applies) at the
+						// unrestricted tier and found none legal. Same cancel machinery as a
+						// saturation cancel, but never on a budget — only on that proof.
+						if (refineryExhausted)
+						{
+							AIUtils.BotDebug($"{player} cancels {currentBuilding.Item}: refinery domain exhausted at tick {world.WorldTick}");
+							var cancelTarget = queue.AllQueued().LastOrDefault(i => i.Item == currentBuilding.Item) ?? currentBuilding;
+							NotePendingTerminal(queue, cancelTarget, currentBuilding.Item, BotQueueTransitionKind.Cancelled,
+								BotQueueTransitionReason.RefineryDomainExhausted, BotQueueCancellationClass.Production);
+							bot.QueueOrder(Order.CancelProduction(queue.Actor, currentBuilding.Item, 1));
+							EmitQueueTransition(queue, queue.Actor, currentBuilding, currentBuilding.Item, QueueCategoryOf(currentBuilding.Item),
+								BotQueueTransitionKind.Held, BotQueueTransitionReason.RefineryDomainExhausted);
+							return false;
+						}
+
+						// REF-2 P1a (retained-refinery): a completed refinery is NEVER cancelled
+						// for being unplaceable while any tier of the ladder remains — it holds
+						// at the head and every later sweep re-probes preferred claims then the
+						// tiered widened fallback. The reason distinguishes no-claim-offered,
+						// still-scanning and drained-pass holds; EmitGate emits once per reason
+						// transition, no failure budget is spent.
 						AIUtils.BotDebug($"{player} defers {currentBuilding.Item}: {refineryHoldReason} at tick {world.WorldTick}");
 						EmitQueueTransition(queue, queue.Actor, currentBuilding, currentBuilding.Item, type,
 							BotQueueTransitionKind.Held, refineryHoldReason);
@@ -1203,12 +1241,20 @@ namespace OpenRA.Mods.CA.Traits
 		readonly Dictionary<uint, (string Item, int Tick)> queuedAt = new();
 		bool refineryClaimed;
 
-		// REF-2 P1a (retained-refinery): the reason a law-path refinery holds at the head —
+		// REF-2 P1a (retained-refinery): the reason a refinery holds at the head —
 		// NoRefineryClaim (no offer and an empty widened domain), RefineryScanDeferred (the
-		// fallback scan is still materializing under its cell budget) or NoRefinerySite (a
-		// drained pass / failed claims). Set inside ChooseBuildLocation's law branch before
-		// the null-location defer emits it; reset beside refineryClaimed each placement run.
+		// fallback scan is still materializing under its cell budget), NoRefinerySite (a
+		// drained pass / failed claims — also the law-less refinery's generic-retry hold),
+		// or RefineryDomainExhausted (the proven-exhaustion hold preceding the only
+		// permitted cancel). Set inside ChooseBuildLocation's law branch before the
+		// null-location defer emits it; reset beside refineryClaimed each placement run.
 		BotQueueTransitionReason refineryHoldReason = BotQueueTransitionReason.NoRefinerySite;
+
+		// REF-2 P1a (maintainer ruling 2026-10-16): the fallback pass proved total-domain
+		// exhaustion — the unrestricted tier (or an empty domain) enumerated every cell of the
+		// declared domain with no legal site. The ONLY flag under which a completed refinery
+		// may take the cancel path; reset beside refineryClaimed each placement run.
+		bool refineryExhausted;
 		IBotPlacementObserver[] placementObservers;
 
 		// BP-2 (§19.15): the front/back advisor seam. The trait array is cached once; IsActive is
@@ -2495,6 +2541,14 @@ namespace OpenRA.Mods.CA.Traits
 								baseBuilder.RequestedRefineries.Remove(requestRef);
 							return (fallbackSite, fallbackSite, 0);
 						}
+
+						// Maintainer ruling 2026-10-16: the ONLY permitted cancel of a completed
+						// refinery rides this flag — the fallback pass provably enumerated the
+						// total domain (every provider square, or the whole map when no
+						// base-distance rejection applies) at the unrestricted tier and found
+						// no legal cell. Every other verdict keeps the item held and retrying.
+						if (fallback == RefineryFallbackOutcome.Exhausted)
+							refineryExhausted = true;
 
 						if (!claimsOffered && fallback != RefineryFallbackOutcome.Deferred)
 						{

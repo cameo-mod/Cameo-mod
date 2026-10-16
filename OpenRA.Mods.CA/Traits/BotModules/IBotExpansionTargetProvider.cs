@@ -437,11 +437,14 @@ namespace OpenRA.Mods.CA.Traits
 	/// REF-2 P1a (retained-refinery fallback): the widened Stage-2 verdict for a held (producer, item)
 	/// pair. Site = the episode's globally nearest still-legal cell under its declared snapshot, safe to
 	/// commit site-only via <see cref="IBotExpansionTargetProvider.RefinerySiteCommitted"/>; Deferred =
-	/// the bounded enumeration or pick revalidation is still mid-pass (resume next sweep); NoSite = the
-	/// pass drained and every candidate failed pick-time revalidation — a drained-scan verdict, not a
-	/// live-emptiness proof; NoUniverse = the declared reach domain enumerated no cells.
+	/// the bounded enumeration or pick revalidation is still mid-pass or the relaxation ladder advanced
+	/// a tier (resume next sweep); NoSite = the pass drained and every candidate failed pick-time
+	/// revalidation — a drained-scan verdict, not a live-emptiness proof; NoUniverse = the declared reach
+	/// domain enumerated no cells; Exhausted = the proven total-domain exhaustion — a pass at the
+	/// unrestricted relaxation tier (or an empty domain) enumerated every cell of the declared domain
+	/// and found none legal — the ONLY outcome under which the caller may cancel the completed item.
 	/// </summary>
-	public enum RefineryFallbackOutcome { Site, Deferred, NoSite, NoUniverse }
+	public enum RefineryFallbackOutcome { Site, Deferred, NoSite, NoUniverse, Exhausted }
 
 	/// <summary>
 	/// REF-1 B4: the expansion nudge. Under the refinery law the old raw refinery total

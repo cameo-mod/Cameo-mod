@@ -1,3 +1,66 @@
+# 2026-10-16 — Devin: PLAYTEST-AI-STALL (01a14054) — REF-2 P1a amendment successor
+
+*Devin-Developer.* Amended the isolated `devin/01a14054-refinery-p1a` worktree
+(base `a5513de90`) in place per Sol's CE13F2BA amend-disposition and domain
+addendum 66578711, plus the maintainer refinement (held-while-scanning licensed,
+progressive relaxation ladder, cancel only on provable total-domain exhaustion,
+G1/G2 relocation-latch and law-null saturation defects in scope, G3/G4 pending).
+
+**AMEND-A — pre-charged paged phase machine.** `RefineryFallbackScan` was fully
+rewritten: the snapshot now carries enumeration factories, not materialized
+lists. Phases — CollectProviders → CollectRankCells → SortRankCells → Enumerate
+→ Rank → Pick — each charge one budget unit BEFORE one bounded micro-op: one
+actor/cell/comparison-write/copy-back per step. Sorting is a resumable
+bottom-up `PagedMerge` (one charged scratch alloc per pass). Nearest-resource
+ranking is a resumable two-sided scan (one binary-search halving or one
+evaluation per step). The pick is a resumable argmin over the exact global
+(rank, X, Y) order — no selection before ordering is established. Live world
+enumerations restart bounded (8/pass) on `InvalidOperationException`; beyond
+that the pass defers one epoch. `LastPollWork` exposes per-poll charged work.
+
+**AMEND-C + addendum — complete paged domain.** Provider domain is the
+Chebyshev square around each overlapping-GivesBuildableArea provider with reach
+`ProviderCellExtent + rba.Adjacent + FootprintExtent` (a strict superset of the
+`IsCloseEnoughToBase` legal region — covers both Chebyshev and IsCircular
+adjacency since |d|inf ≤ |d|₂); cells are clipped through `Map.Contains` before
+legality. The annulus/`MaximumTileSearchRange-1` path is gone — a radius-49
+disk misses reach corners and large-map cells (both proven by test cases).
+When legality cannot reject on base distance — `distanceToBaseIsImportant`
+false, no `RequiresBuildableArea` (engine early-return at Building.cs), or
+`DeveloperMode.BuildAnywhere` — the domain is the whole streamed map.
+
+**AMEND-B — ∃-dock legality.** `AnyDockClear` folds dock checks lazily: one
+Clear suffices (the law's rule); the prior ALL-clear over-required.
+
+**AMEND-D — ordinal eviction.** `PruneFallbackScans` now breaks ties with
+`StringComparer.Ordinal` on the item after `ProducerId` — the tuple member
+compare routed through culture-sensitive string ordering.
+
+**Relaxation ladder (maintainer 2026-10-16).** `RefineryFallbackTierMaxDist=16`:
+tier t admits candidates within (t+1) cells of a declared resource cell; the
+tier at max is unrestricted (any legal cell, rankless included). A drained
+bounded tier calls `AdvanceTier` — immediate re-pass, no epoch wait.
+`NoSite`-at-unrestricted-tier and `NoUniverse` map to the new
+`RefineryFallbackOutcome.Exhausted`; every earlier verdict keeps the item held.
+
+**G1/G2 — the two cancel defects.** The RelocationLatch mass-cancel now skips
+completed `RetainedHighValueItem`s (refinery class today; G3/G4 pending Sol) —
+it emits Held/RelocationLatch and continues. The null-location branch classifies
+with `type == BuildingType.Refinery` so a law-less refinery also retains (no
+exhaustion proof exists on the classic path); cancellation fires ONLY when
+`refineryExhausted` — set solely from the `Exhausted` verdict — carrying the
+new `RefineryDomainExhausted` reason. `RefineryDefers(bool, BuildingType)`
+keeps its law-scoped signature for callsite/test compatibility.
+
+**Not executed.** Per the amendment grant: focused tests were AUTHORED only
+(`RefineryFallbackTest` — per-poll work accounting, Chebyshev corners and
+beyond-annulus cells, map-edge clipping, overlap dedup, whole-map domain,
+global ordering, pick-time revalidation, tier ladder, rankless-at-unrestricted,
+exhaustion, ∃-dock laziness, restart bounds, budget-equivalence). No build,
+test, boot, qualification, merge or push ran — the standing boot-gate rule
+conflicts with the lane's no-execution grant and is recorded, not waived.
+Awaiting Sol/Reviewer delta review of the frozen successor.
+
 # 2026-10-13 — Devin: P4-CLASSRE-RELAND (01a136a5) — nesting-aware CLASS_RE on current master
 
 *Devin.* Reland of the preserved `devin/t2verify/sweep-p4` dirty-state payload

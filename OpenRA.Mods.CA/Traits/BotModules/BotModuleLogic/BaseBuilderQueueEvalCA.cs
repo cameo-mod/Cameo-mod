@@ -336,6 +336,21 @@ namespace OpenRA.Mods.CA.Traits
 		}
 
 		/// <summary>
+		/// REF-2 P1a AMEND-B: the ∃-dock rule — LawRefineryPlacement accepts a cell when AT LEAST
+		/// ONE dock offset is Clear; a cell fails only when every dock is blocked. The lazy input
+		/// stops evaluating dock checks at the first clear. (The first revision required ALL
+		/// docks clear, which silently narrowed the declared domain on multi-DockHost items.)
+		/// </summary>
+		public static bool AnyDockClear(IEnumerable<DockAccess> checks)
+		{
+			foreach (var c in checks)
+				if (c == DockAccess.Clear)
+					return true;
+
+			return false;
+		}
+
+		/// <summary>
 		/// REF-2 P1a: the hold reason a widened verdict maps to — Deferred stays a scanning hold,
 		/// an empty domain with no preferred claim offered is the claim absence, everything else is
 		/// the drained-scan "no site under this pass" (mixed-time evidence, never an emptiness proof).
@@ -344,6 +359,7 @@ namespace OpenRA.Mods.CA.Traits
 			outcome switch
 			{
 				RefineryFallbackOutcome.Deferred => BotQueueTransitionReason.RefineryScanDeferred,
+				RefineryFallbackOutcome.Exhausted => BotQueueTransitionReason.RefineryDomainExhausted,
 				RefineryFallbackOutcome.NoUniverse when !claimOffered => BotQueueTransitionReason.NoRefineryClaim,
 				_ => BotQueueTransitionReason.NoRefinerySite,
 			};
@@ -369,10 +385,21 @@ namespace OpenRA.Mods.CA.Traits
 		/// being unplaceable (P1a retention: cancellation was the defect — it ate anchors and
 		/// refunds through the re-queue loop). It must not spend the shared failCount budget: a
 		/// siteless field would otherwise saturate the latch and stop every other structure
-		/// placing. Non-refinery and law-less placements keep the ordinary failure path.
+		/// placing. Non-refinery and law-less placements keep the ordinary failure path — the
+		/// G2 no-law retention (maintainer ruling 2026-10-16) is decided at the call site via the
+		/// raw <c>type == BuildingType.Refinery</c> check; this helper stays the law-scoped query.
 		/// </summary>
 		public static bool RefineryDefers(bool lawActive, BuildingType type) =>
 			lawActive && type == BuildingType.Refinery;
+
+		/// <summary>
+		/// REF-2 P1a (maintainer no-cancel class, 2026-10-16): the completed high-value items a
+		/// placement failure may never mass- or saturation-cancel without a proven total-domain
+		/// exhaustion — today the refinery class (the G3 ruling on radar/tech/war-factory scope
+		/// is pending Sol; cheap fast items like power/barracks still cancel as before).
+		/// </summary>
+		public static bool RetainedHighValueItem(IReadOnlyCollection<string> refineryTypes, string item) =>
+			refineryTypes.Contains(item);
 
 		/// <summary>
 		/// FIX-RA-REFINERY: the saturated-placement recovery arm owns a tick whenever the
@@ -861,6 +888,11 @@ namespace OpenRA.Mods.CA.Traits
 		/// <summary>REF-2 P1a: a held law refinery whose widened fallback scan is still
 		/// materializing or revalidating under its cell budget — the scanning hold.</summary>
 		RefineryScanDeferred,
+
+		/// <summary>REF-2 P1a (maintainer ruling 2026-10-16): the fallback pass enumerated the
+		/// total domain at the unrestricted relaxation tier and found no legal cell — the
+		/// proven exhaustion that is the ONLY permitted cancel of a completed refinery.</summary>
+		RefineryDomainExhausted,
 	}
 
 	public enum BotQueueCancellationClass
