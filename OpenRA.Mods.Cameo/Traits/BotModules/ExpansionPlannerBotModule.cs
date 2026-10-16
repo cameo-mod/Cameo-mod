@@ -1105,7 +1105,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			foreach (var a in world.Actors)
 			{
 				yield return new RefineryFallbackScan.CoherenceAtom(
-					1, a.ActorID, (a.Owner.InternalID << 8) | (int)a.Owner.RelationshipWith(player),
+					1, a.ActorID, (a.Owner.ClientIndex << 8) | (int)a.Owner.RelationshipWith(player),
 					(a.IsInWorld ? 1 : 0) | (a.IsDead ? 2 : 0), null);
 
 				var t = 0;

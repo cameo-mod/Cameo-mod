@@ -151,7 +151,7 @@ namespace OpenRA.Mods.Cameo.Test
 			{
 				var verdict = scan.Poll(budget, now0 + i, snapshot, out site);
 				Assert.That(scan.LastPollWork, Is.LessThanOrEqualTo(budget),
-					"poll {0} charged {1} units against a budget of {2}", i, scan.LastPollWork, budget);
+					$"poll {i} charged {scan.LastPollWork} units against a budget of {budget}");
 				if (verdict != RefineryFallbackScan.Verdict.Deferred)
 					return verdict;
 			}
@@ -400,8 +400,10 @@ namespace OpenRA.Mods.Cameo.Test
 				() => Snap(providers, new[] { new CPos(4, 0) }, c => true, legal), out var site);
 
 			Assert.That(verdict, Is.EqualTo(RefineryFallbackScan.Verdict.Site));
-			Assert.That(legalCalls.Distinct().Count(), Is.EqualTo(legalCalls.Count),
-				"each overlapping-domain cell is evaluated once");
+			Assert.That(legalCalls.Distinct().Count(), Is.EqualTo(legalCalls.Count - 1),
+				"each overlapping-domain cell is evaluated once during enumeration");
+			Assert.That(legalCalls.Count(c => c == site.Value), Is.EqualTo(2),
+				"the only second evaluation is the winner's pick-time revalidation");
 		}
 
 		[Test]
@@ -534,7 +536,7 @@ namespace OpenRA.Mods.Cameo.Test
 			for (var tier = 0; tier <= 3; tier++)
 			{
 				var drained = Drain(scan, 64, 400, () => snapshot, out var s);
-				Assert.That(drained, Is.EqualTo(RefineryFallbackScan.Verdict.NoSite), "tier {0} admits nothing", tier);
+				Assert.That(drained, Is.EqualTo(RefineryFallbackScan.Verdict.NoSite), $"tier {tier} admits nothing");
 				Assert.That(s, Is.Null);
 				Assert.That(scan.Tier, Is.EqualTo(tier));
 				Assert.That(scan.TerminalTier, Is.False);
