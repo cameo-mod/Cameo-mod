@@ -732,5 +732,110 @@ namespace OpenRA.Mods.Cameo.Test
 				Assert.That(f.Bot.Orders.Count, Is.EqualTo(2));
 			});
 		}
+
+		// ----------------------------------------------------------------
+		// Dead-FACT demotion → live placement admission (final review: a
+		// retained item must not merely retry-cancel — it must reach a real
+		// legal placement). The dead-FACT callers (SecureProducerFactLost,
+		// RemoteProducerFactLost, ExpansionPlacementFactUnavailable) transfer
+		// the exact item via Track(...).DeadFactDemoted = true; the placement
+		// sweep then consults tracker.IsDeadFactDemoted — the same production
+		// member — to bypass the expansion-only park gate and to pass
+		// deadFactDemoted into ChooseBuildLocation so the no-expansion-FACT
+		// case falls through to ordinary base placement. These fixtures drive
+		// the real caller sequence end-to-end: TryIssue hold -> caller
+		// Track+demote -> ServiceHeldQueueCancels -> admission token
+		// lifecycle -> honest settle when placement consumes the queue item.
+		// ----------------------------------------------------------------
+
+		[Test]
+		public void DeadFactDemotion_CallerHandoff_AdmitsRetainedItemToPlacement()
+		{
+			var f = new Fixture();
+			var item = f.Enqueue();
+			var unrelated = f.Enqueue("other_item");
+			var tracker = new FransPlacementCancelGuard.HeldQueueCancelTracker();
+
+			// Real caller sequence: the first ask goes through the actual
+			// guard — protected under the fail-closed seam -> held -> the
+			// dead-FACT caller hands the exact item to the tracker WITH the
+			// demotion flag, verbatim caller code.
+			var issued = FransPlacementCancelGuard.TryIssue(f.Bot, f.Queue, Item, item, false, out var hold);
+			Assert.That(issued, Is.False);
+			Assert.That(hold, Is.EqualTo(FransPlacementCancelGuard.FransCancelHold.Protected));
+
+			tracker.Track(f.Queue, Item, item, "SecureProducerFactLost", f.World.WorldTick).DeadFactDemoted = true;
+
+			Assert.Multiple(() =>
+			{
+				// The admission token the placement sweep consults: bypasses
+				// the expansion-only park gate and feeds ChooseBuildLocation's
+				// deadFactDemoted flag — the retained item reaches a real
+				// legal placement instead of parking ahead of it.
+				Assert.That(tracker.IsDeadFactDemoted(item), Is.True,
+					"demoted retained item must be admitted to the ordinary placement path");
+				Assert.That(tracker.IsDeadFactDemoted(unrelated), Is.False,
+					"demotion never transfers to an unrelated queued item");
+			});
+		}
+
+		[Test]
+		public void DeadFactDemotion_AdmissionPersistsWhileHeld_SettlesOnPlacementDeparture()
+		{
+			var f = new Fixture();
+			var item = f.Enqueue();
+			var tracker = new FransPlacementCancelGuard.HeldQueueCancelTracker();
+			tracker.Track(f.Queue, Item, item, "RemoteProducerFactLost", f.World.WorldTick).DeadFactDemoted = true;
+
+			// While the cancel intent retries, admission must stay live —
+			// the item is in the placement path every sweep, not parked.
+			FransPlacementCancelGuard.ServiceHeldQueueCancels(f.World, f.Bot, f.Player, tracker, null, null);
+			Assert.Multiple(() =>
+			{
+				Assert.That(tracker.Entries, Has.Count.EqualTo(1));
+				Assert.That(tracker.IsDeadFactDemoted(item), Is.True,
+					"admission persists across serviced re-asks — placement stays reachable");
+				Assert.That(f.Bot.Orders, Is.Empty);
+			});
+
+			// A second teardown path re-tracking the same item dedupes; the
+			// caller re-asserts the flag — admission is idempotent, never
+			// duplicated or lost.
+			var reentry = tracker.Track(f.Queue, Item, item, "RemoteProducerFactLost", f.World.WorldTick);
+			reentry.DeadFactDemoted = true;
+			Assert.That(tracker.Entries, Has.Count.EqualTo(1));
+			Assert.That(tracker.IsDeadFactDemoted(item), Is.True);
+
+			// Placement consumed the queue item — the honest settle. The
+			// entry leaves and the demotion with it: no stale admission can
+			// survive into a later same-name item.
+			f.Items.Remove(item);
+			Set(f.World, "WorldTick", FransPlacementCancelGuard.HeldQueueCancelTracker.DefaultReaskIntervalTicks);
+			FransPlacementCancelGuard.ServiceHeldQueueCancels(f.World, f.Bot, f.Player, tracker, null, null);
+			Assert.Multiple(() =>
+			{
+				Assert.That(tracker.Entries, Is.Empty, "a placed item settles the held entry honestly");
+				Assert.That(tracker.IsDeadFactDemoted(item), Is.False,
+					"demotion is bounded to the item's queue lifetime");
+				Assert.That(f.Bot.Orders, Is.Empty);
+			});
+		}
+
+		[Test]
+		public void DeadFactDemotion_SameNameDifferentItem_IsNotAdmitted()
+		{
+			var f = new Fixture();
+			var demoted = f.Enqueue();
+			var sameNameTail = f.Enqueue();
+			var tracker = new FransPlacementCancelGuard.HeldQueueCancelTracker();
+			tracker.Track(f.Queue, Item, demoted, "ExpansionPlacementFactUnavailable", f.World.WorldTick).DeadFactDemoted = true;
+
+			Assert.Multiple(() =>
+			{
+				Assert.That(tracker.IsDeadFactDemoted(demoted), Is.True);
+				Assert.That(tracker.IsDeadFactDemoted(sameNameTail), Is.False,
+					"exact-item retention: a same-name tail is NOT demoted — demotion cannot widen to an unrelated item");
+			});
+		}
 	}
 }

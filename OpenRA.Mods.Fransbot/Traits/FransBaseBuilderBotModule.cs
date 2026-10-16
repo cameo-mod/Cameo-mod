@@ -2973,7 +2973,7 @@ namespace OpenRA.Mods.Common.Traits
 								// path this same sweep instead of parking ahead of it forever.
 								MarkTrackedCancellationHeld(queue, current, "SecureProducerFactLost", hold);
 								heldQueueCancels.Track(queue, current.Item, current,
-									"SecureProducerFactLost", world.WorldTick);
+									"SecureProducerFactLost", world.WorldTick).DeadFactDemoted = true;
 								secureProductionTargetId = 0;
 								secureProductionItem = null;
 								secureProductionReservation = false;
@@ -3023,7 +3023,7 @@ namespace OpenRA.Mods.Common.Traits
 							// path this same sweep instead of parking ahead of it forever.
 							MarkTrackedCancellationHeld(queue, current, "RemoteProducerFactLost", hold);
 							heldQueueCancels.Track(queue, current.Item, current,
-								"RemoteProducerFactLost", world.WorldTick);
+								"RemoteProducerFactLost", world.WorldTick).DeadFactDemoted = true;
 							remoteProductionFactActorId = 0;
 							remoteProductionItem = null;
 							FransBotLog.BotDebug(world,
@@ -3039,8 +3039,12 @@ namespace OpenRA.Mods.Common.Traits
 					// once the FACT has been absent long enough, cancel the stale completed item.
 					// CanQueueProductionAtCurrentBaseState prevents a new copy from being queued until
 					// a valid expansion FACT exists again.
+					// Demoted held items (lost secure/remote FACT or this gate's own
+					// timeout hold) are admitted past this gate — the reservation
+					// that justified expansion routing is dead, so the retained item
+					// must reach a real legal placement (review: no park-forever).
 					if (!secureProductionReservation && !remoteProductionReservation && baseBuilder.RequiresExpansionProductionPlacement(current.Item) &&
-						!baseBuilder.TryGetExpansionProductionCenter(out _))
+						!baseBuilder.TryGetExpansionProductionCenter(out _) && !heldQueueCancels.IsDeadFactDemoted(current))
 					{
 						if (observedTimingDoneTick >= 0 &&
 							world.WorldTick - observedTimingDoneTick >= baseBuilder.Info.ExpansionPlacementCompletedHoldTimeoutTicks)
@@ -3057,9 +3061,14 @@ namespace OpenRA.Mods.Common.Traits
 							}
 							else if (hold != FransPlacementCancelGuard.FransCancelHold.None)
 							{
+								// Same park-forever class as the dead-FACT transfers:
+								// tracker handoff + demotion so next sweep the item
+								// enters the ordinary base-placement path.
 								MarkTrackedCancellationHeld(queue, current, "ExpansionPlacementFactUnavailable", hold);
+								heldQueueCancels.Track(queue, current.Item, current,
+									"ExpansionPlacementFactUnavailable", world.WorldTick).DeadFactDemoted = true;
 								FransBotLog.BotDebug(world,
-									"{0}: cancellation of expansion-routed completed {1} held by placement-cancel guard ({2}); item stays queued for a later pass.",
+									"{0}: cancellation of expansion-routed completed {1} held by placement-cancel guard ({2}); exact item moved to the held-cancel retry tracker and demoted to ordinary base placement.",
 									player, current.Item, hold);
 							}
 						}
@@ -3180,7 +3189,8 @@ namespace OpenRA.Mods.Common.Traits
 								baseCenterKeepsFailing = baseBuilder.GetBaseCenter();
 							}
 							else
-								(location, baseCenterKeepsFailing, variant) = ChooseBuildLocation(current.Item, true, type);
+								(location, baseCenterKeepsFailing, variant) = ChooseBuildLocation(current.Item, true, type,
+									deadFactDemoted: heldQueueCancels.IsDeadFactDemoted(current));
 						}
 					}
 					if (location == null)
@@ -3683,7 +3693,7 @@ namespace OpenRA.Mods.Common.Traits
 				return playerBuildings.Count(a => a.Info.Name == name || variants.Contains(a.Info.Name)) + (baseBuilder.BuildingsBeingProduced.TryGetValue(name, out var n) ? n : 0);
 			}
 
-			(CPos? Location, CPos? BaseCenter, int Variant) ChooseBuildLocation(string actorType, bool distanceToBaseIsImportant, FransBuildingType type, CPos? localProductionFactCenter = null)
+			(CPos? Location, CPos? BaseCenter, int Variant) ChooseBuildLocation(string actorType, bool distanceToBaseIsImportant, FransBuildingType type, CPos? localProductionFactCenter = null, bool deadFactDemoted = false)
 			{
 				var actorInfo = world.Map.Rules.Actors[actorType];
 				var bi = actorInfo.TraitInfoOrDefault<BuildingInfo>();
@@ -3889,20 +3899,32 @@ namespace OpenRA.Mods.Common.Traits
 				if (type == FransBuildingType.Building && baseBuilder.RequiresExpansionProductionPlacement(actorType))
 				{
 					if (!baseBuilder.TryGetExpansionProductionCenter(out var expansionCenter))
-						return (null, null, 0);
-
-					var expansionTarget = expansionCenter;
-					var expansionWeight = baseBuilder.ProductionDirectionWeight(actorType);
-					if (expansionWeight > 0 && baseBuilder.TryGetEnemyBaseDirectionTarget(out var knownEnemyBase, out _))
-						expansionTarget = knownEnemyBase;
-					var expansionPlacement = FindPos(expansionCenter, expansionTarget,
-						baseBuilder.Info.ExpansionProductionPlacementMinRadius,
-						baseBuilder.Info.ExpansionProductionPlacementMaxRadius, null, expansionWeight);
-					if (expansionPlacement.Location.HasValue)
+					{
+						// A dead-FACT demoted item is exempt from the null return:
+						// its expansion reservation is gone, so it falls through to
+						// the ordinary base placement below — a real legal site is
+						// attempted rather than parking the retained item forever.
+						if (!deadFactDemoted)
+							return (null, null, 0);
 						FransBotLog.BotDebug(world,
-							"{0}: main-base production cap routes {1} to expansion FACT area {2}; placement {3}.",
-							player, actorType, expansionCenter, expansionPlacement.Location.Value);
-					return expansionPlacement;
+							"{0}: dead-FACT demoted {1} has no live expansion FACT; attempting ordinary base placement as the legal fallback.",
+							player, actorType);
+					}
+					else
+					{
+						var expansionTarget = expansionCenter;
+						var expansionWeight = baseBuilder.ProductionDirectionWeight(actorType);
+						if (expansionWeight > 0 && baseBuilder.TryGetEnemyBaseDirectionTarget(out var knownEnemyBase, out _))
+							expansionTarget = knownEnemyBase;
+						var expansionPlacement = FindPos(expansionCenter, expansionTarget,
+							baseBuilder.Info.ExpansionProductionPlacementMinRadius,
+							baseBuilder.Info.ExpansionProductionPlacementMaxRadius, null, expansionWeight);
+						if (expansionPlacement.Location.HasValue)
+							FransBotLog.BotDebug(world,
+								"{0}: main-base production cap routes {1} to expansion FACT area {2}; placement {3}.",
+								player, actorType, expansionCenter, expansionPlacement.Location.Value);
+						return expansionPlacement;
+					}
 				}
 
 				var baseCenter = baseBuilder.GetBaseCenter();
@@ -4108,6 +4130,16 @@ namespace OpenRA.Mods.Common.Traits
 			public int NextReaskTick;
 			public int ReaskCount;
 			public bool HardBlockerLogged;
+
+			/// <summary>
+			/// Set when the held item's expansion reservation died (lost secure/remote
+			/// FACT or the expansion-FACT timeout). A demoted item keeps its cancel
+			/// intent but is admitted to the ordinary base-placement path — the
+			/// expansion-only park gate and ChooseBuildLocation's no-expansion-FACT
+			/// null return both consult this flag. It ends with the entry: placed,
+			/// cancelled, or settled items leave the demotion with the queue.
+			/// </summary>
+			public bool DeadFactDemoted;
 		}
 
 		/// <summary>
@@ -4152,6 +4184,12 @@ namespace OpenRA.Mods.Common.Traits
 				Entries.Add(entry);
 				return entry;
 			}
+
+			/// <summary>True while the exact item is tracked AND marked demoted —
+			/// the admission token the placement sweep consults instead of parking
+			/// the retained item on the expansion-only gate.</summary>
+			public bool IsDeadFactDemoted(ProductionItem item) =>
+				item != null && Entries.Any(e => e.DeadFactDemoted && ReferenceEquals(e.Item, item));
 		}
 
 		/// <summary>
