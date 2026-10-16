@@ -1111,7 +1111,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				var t = 0;
 				foreach (var gba in a.TraitsImplementing<GivesBuildableArea>())
 					yield return new RefineryFallbackScan.CoherenceAtom(
-						2, a.ActorID, t++, gba.IsTraitDisabled ? 1 : 0, gba.Info.AreaTypes);
+						2, a.ActorID, t++, gba.IsTraitDisabled ? 1 : 0, gba.AreaTypes);
 
 				t = 0;
 				foreach (var bp in a.TraitsImplementing<BaseProvider>())

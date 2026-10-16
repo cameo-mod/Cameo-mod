@@ -328,6 +328,11 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 		const int MaxCollectRestarts = 8;
 
+		// Audit F8B7397F §4-iv: the dirty-repair set is capped — a pass whose outstanding
+		// marked indices exceed the bound aborts to Deferred instead of burning unbounded
+		// repair steps under continuous in-domain churn (fail-closed; the epoch re-lists).
+		const int MaxStaleMarks = 4096;
+
 		readonly int relistEpochTicks;
 		Snapshot snapshot;
 		Phase phase;
@@ -357,6 +362,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		readonly HashSet<CPos> legalSet = new();
 		readonly List<CPos> legalCells = new();
 		readonly SortedSet<int> stale = new();
+		bool staleOverflow;
 
 		// Per-poll coherence sweep (terminal tier only): the exact atom sequence collected
 		// in one same-tick pass — scalar flags, per-actor/per-trait state, rank-set content —
@@ -450,8 +456,19 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				for (var dx = -r; dx <= r; dx++)
 				{
 					var idx = snapshot.MapIndex(new CPos(changed.X + dx, changed.Y + dy));
-					if (idx >= 0 && idx < frontier)
-						stale.Add(idx);
+					if (idx < 0 || idx >= frontier)
+						continue;
+
+					// Audit F8B7397F §4-iv: the repair set is capped — past the bound the
+					// pass marks overflow and aborts at the drain gate rather than growing
+					// an unbounded set under continuous in-domain churn (fail-closed).
+					if (stale.Count >= MaxStaleMarks && !stale.Contains(idx))
+					{
+						staleOverflow = true;
+						continue;
+					}
+
+					stale.Add(idx);
 				}
 			}
 		}
@@ -815,7 +832,15 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 
 				// Selective repair: exactly the already-enumerated cells an event dirtied
 				// are re-examined, one index per charged step. New marks may arrive while
-				// repair drains — the phase completes only on an empty set.
+				// repair drains — the phase completes only on an empty set. Audit §4-iv:
+				// the set is capped — overflow or a full set under continuous in-domain
+				// churn aborts the pass instead of spending unbounded repair steps.
+				if (staleOverflow || stale.Count > MaxStaleMarks)
+				{
+					AbortPass(now);
+					return;
+				}
+
 				if (stale.Count > 0)
 				{
 					var idx = stale.Min;
@@ -1077,6 +1102,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			legalSet.Clear();
 			legalCells.Clear();
 			stale.Clear();
+			staleOverflow = false;
 			candidates.Clear();
 			providerEnum = null;
 			rankEnum = null;
