@@ -52,14 +52,25 @@ exhaustion proof exists on the classic path); cancellation fires ONLY when
 new `RefineryDomainExhausted` reason. `RefineryDefers(bool, BuildingType)`
 keeps its law-scoped signature for callsite/test compatibility.
 
+**Post-freeze self-review (two real defects caught before review).**
+`5368bd2bf` + `37b2c9b29` supersede `ef1a8b390`: (1) a zero-budget `Poll` on a
+fresh scan replayed the initial `NoUniverse` placeholder — mapped to `Exhausted`
+it would have permitted a cancel with zero cells enumerated; the replay path
+now requires a real consumed/aborted verdict (`relistAt` set) and the
+placeholder defaults to `Deferred`. (2) `PickResult.Picked` left the phase at
+`Pick` — later polls would drain stale leftover candidates and a replayed
+`Site` carried a null cell; the pick now consumes the pass and `Site` replays
+with its cell. Regression tests authored for both.
+
 **Not executed.** Per the amendment grant: focused tests were AUTHORED only
 (`RefineryFallbackTest` — per-poll work accounting, Chebyshev corners and
 beyond-annulus cells, map-edge clipping, overlap dedup, whole-map domain,
 global ordering, pick-time revalidation, tier ladder, rankless-at-unrestricted,
-exhaustion, ∃-dock laziness, restart bounds, budget-equivalence). No build,
-test, boot, qualification, merge or push ran — the standing boot-gate rule
-conflicts with the lane's no-execution grant and is recorded, not waived.
-Awaiting Sol/Reviewer delta review of the frozen successor.
+exhaustion, ∃-dock laziness, restart bounds, budget-equivalence, verdict-replay
+integrity). No build, test, boot, qualification, merge or push ran — the
+standing boot-gate rule conflicts with the lane's no-execution grant and is
+recorded, not waived. Awaiting Sol/Reviewer delta review of the frozen
+successor `37b2c9b29`.
 
 # 2026-10-13 — Devin: P4-CLASSRE-RELAND (01a136a5) — nesting-aware CLASS_RE on current master
 
