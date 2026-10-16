@@ -1,3 +1,22 @@
+# 2026-10-16 — Devin: P1a E3 fix (39c3de60c) — cancel order must settle the intended instance, 34/34
+
+*Devin-Developer.* Sol's final review of `2184ec930` (HOLD `A966ED70`) accepted
+F0/atoms but found the three manager cancel arms tautological: they computed
+`cancelTarget = queue.LastOrDefault(name)` and `CertificateAuthorizes` compared
+it to a recomputed `LastOrDefault` — always true, so a head-A/tail-B pair would
+settle B while intending A, and enabled sibling queues (which also resolve the
+actor-level order) were ignored.
+
+Fixed in `39c3de60c`: new world-free `BaseBuilderQueueEvalCA.CancelOrderTargetsIntended(sameNameOnEnabledQueues,
+engineResolvesToIntended)`; `CertificateAuthorizes` now counts same-name across
+ALL enabled `ProductionQueue` traits on the actor, resolves the live last, and
+only then re-verifies the exhaustion certificate. All three arms pass
+`currentBuilding` as intent (tautological `cancelTarget` dropped);
+`NotePendingTerminal` binds the intended instance. New fixture
+`CancelOrderTargetsOnlyTheIntendedInstance` covers head-A/tail-B, enabled
+sibling-queue, foreign-sole-entry, and absent cases. Build clean; focused tests
+**34/34**. No launch, no merge/push.
+
 # 2026-10-16 — Devin: P1a successor freeze (2184ec930) — Sol adjudication F0/F2 resolved, 33/33
 
 *Devin-Developer.* Sol's focused disposition on `9d997eb58` returned HOLD for
