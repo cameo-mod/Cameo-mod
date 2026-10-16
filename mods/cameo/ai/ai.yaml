@@ -3898,8 +3898,9 @@ Player:
 		ContactsIntervalTicks: 25
 		TrackGraceTicks: 250
 	# CONTEXT-PROVIDERS (task 01a11190): anonymous map/opponent feature vectors — telemetry only,
-	# own JSONL channel, writer-election append. The opponent half stays inert until the
-	# IAiSeenProfileSource seam lands on AiMatchLogWriter (seam ACK pending).
+	# own JSONL channel, writer-election append. The opponent half reads the fog-honest seen
+	# buffer via the IAiSeenProfileSource seam on AiMatchLogWriter (seam ACK
+	# ACK_2026-10-16_context_opponent_seam_devin.md; write-only telemetry, no consumers).
 	# `genericbot && context_features`: off on master until the increment A/B arms it (switch group BX_context_providers).
 	ContextFeatureProviderBotModule:
 		RequiresCondition: genericbot && context_features
