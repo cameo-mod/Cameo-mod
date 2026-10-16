@@ -86,6 +86,7 @@ effect_classes:
   BZ_production_scaling: capability
   CB_frontier_observe: neutral         # P3a read-only stage-machine shadow; emits outpost_stage v2 rows on TELEMETRY-V2; moves no behaviour (same class as AI_radar_contacts / BK_squad_order_dedup)
   BR_learn_fight: restraint            # learned engage/retreat thresholds can hold attacks (LEARN-FIGHT; renamed from BV_ — the prefix already belongs to BV_m13_liveness)
+  BX_context_providers: neutral        # P4 telemetry-only context vectors; anonymous rows on their own channel — same class as CB_frontier_observe / AI_radar_contacts
 
 groups:
   BV_m13_liveness:
@@ -363,4 +364,7 @@ groups:
       UseFrontierObservation: true
   BR_learn_fight:                    # LEARN-FIGHT rows 1-3: arms frozen offline fight thresholds; genericbot only, classic has no provider
     GrantConditionOnBotOwner@fightlearning:
+      Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla, exploit_expansion, exploit_steamroller, exploit_tech
+  BX_context_providers:              # CONTEXT-PROVIDERS (task 01a11190): arms ContextFeatureProviderBotModule - public-map + seen-side opponent feature vectors, anonymous schema-1 JSONL on cameo-ai-context.jsonl via AiLogFileAppender + writer election. Read-only provider: no orders, no RNG, no gameplay consumer, no own fog reader. Off = module never enabled = bit-identical
+    GrantConditionOnBotOwner@contextfeatures:
       Bots: easiest, veryeasy, easy, medium, hard, veryhard, brutal, challenger, unbeatable, cameogod, exploit_rush, exploit_turtle, exploit_guerrilla, exploit_expansion, exploit_steamroller, exploit_tech
