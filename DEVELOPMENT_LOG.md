@@ -22000,3 +22000,21 @@ directions (sentinel stays SENTINEL, match_batch stays ALLOW).
 
 Status: py_compile clean; no tests/builds/games/qualification run - serial
 gate. Exact-SHA review target supersedes 43a51eb6b.
+
+# 2026-10-17 — Devin-Integrator: CONTEXT-PROVIDERS opponent-seam enable (01a11190 follow-up)
+
+*Devin-Integrator.* Coordinator seam ACK `ACK_2026-10-16_context_opponent_seam_devin.md`
+(SHA-256 `0952890ED94738591805576ABC6269079315C38BAF8DBCB3564C0CE7DAD0FDC4`) unblocked
+the opponent half: `AiMatchLogWriter` now implements `BotModules.IAiSeenProfileSource`
+with the verbatim bound shape — explicit `SeenActorsOf(observer, enemy)` returning
+`signatureMemory.TryGetValue(observer, out var memory) ? memory.Remembered(enemy) : null`.
+Read-only view of the same fog-honest seen buffer `ProfileOf` already consumes; no new
+state/orders/RNG; null on absent memory (no fabricated profile). Stale "ACK pending"
+markers updated in `mods/cameo/ai/ai.yaml` and the interface doc comment.
+Conditions honored: bound 3-line implementation only, no consumer wiring, OFF/ON
+instrumented proof stays admission-gated.
+
+**Verified:** OpenRA.Mods.Cameo + Cameo.Test builds 0 warnings/0 errors; focused
+72/72 PASS (AiMatchLogWriterTest, ContextFeaturesTest, AiLogPrivacyRegressionTest,
+BotFogMemory*); boot-gate PASS (menu reached, 0 new exception logs). Branch
+`devin/01a11190-opponent-seam-enable` off master `c4c716d4b`; landed via --no-ff merge.

@@ -23,9 +23,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 	/// <summary>
 	/// Read-only seam into <see cref="AiMatchLogWriter"/>'s fog-honest seen buffer: the same
 	/// remembered set <see cref="AiMatchLogWriter.ProfileOf"/> already consumes, so this provider
-	/// never builds a second hidden-state reader. Implemented by the writer on the world actor only
-	/// after the seam ACK (DESIGN_2026-10-15_context_providers_wiring_v2); until then the lookup
-	/// returns null and every opponent-side path in this module stays inert.
+	/// never builds a second hidden-state reader. Implemented by the writer on the world actor
+	/// under seam ACK ACK_2026-10-16_context_opponent_seam_devin.md (bound shape, telemetry only,
+	/// no consumers); a world actor without the writer trait still resolves to null and every
+	/// opponent-side path stays inert.
 	/// </summary>
 	internal interface IAiSeenProfileSource
 	{
