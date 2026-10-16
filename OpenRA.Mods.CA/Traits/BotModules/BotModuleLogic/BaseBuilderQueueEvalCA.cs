@@ -443,6 +443,10 @@ namespace OpenRA.Mods.CA.Traits
 		/// certificate cannot establish request identity either. The only provable intent
 		/// is exactly one same-name entry across the producer's queues, located on an
 		/// enabled queue — anything else fails closed. World-free: the caller counts.
+		/// EE3B6358: accepted this iteration as cert-mandatory NAME-CLASS disposal while
+		/// Allow is unreachable — issuance requires a live certificate regardless of the
+		/// verdict (which stays diagnostic-only); if Allow ever returns, the certificate
+		/// requirement stands until an instance-proving mechanism is ratified.
 		/// </summary>
 		public static DemandCancelDisposition DemandCancelVerdict(
 			int sameNameOnProducer, int sameNameOnEnabledQueues,
@@ -454,7 +458,7 @@ namespace OpenRA.Mods.CA.Traits
 			if (sameNameOnProducer != 1 || sameNameOnEnabledQueues != 1)
 				return DemandCancelDisposition.AmbiguousHold;
 
-			if (verdict != PlacementCancelVerdict.Allow && !certificateCurrent)
+			if (!certificateCurrent)
 				return DemandCancelDisposition.ProtectionHold;
 
 			return DemandCancelDisposition.Issued;

@@ -900,6 +900,13 @@ namespace OpenRA.Mods.Cameo.Test
 				BaseBuilderQueueEvalCA.DemandCancelVerdict(1, 1, PlacementCancelVerdict.RequireCertificate, true),
 				Is.EqualTo(DemandCancelDisposition.Issued));
 
+			// EE3B6358: cert-mandatory name-class disposal — even if Allow ever returns,
+			// issuance still requires a live certificate.
+			Assert.That(
+				BaseBuilderQueueEvalCA.DemandCancelVerdict(1, 1, PlacementCancelVerdict.Allow, false),
+				Is.EqualTo(DemandCancelDisposition.ProtectionHold),
+				"Allow never waives the certificate on the demand path");
+
 			// Recovery: after the ambiguous twin resolves elsewhere, the unique
 			// remaining entry certifies and the identical seam call issues.
 			Assert.That(
