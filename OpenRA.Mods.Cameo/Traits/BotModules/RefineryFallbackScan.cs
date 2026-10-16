@@ -266,7 +266,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		int maxRankSq;
 
 		int relistAt = int.MinValue;
-		Verdict waitingVerdict = Verdict.NoUniverse;
+
+		// Placeholder only — reachable solely while relistAt is set (a real consumed or
+		// aborted pass verdict); Deferred is the safe-direction default.
+		Verdict waitingVerdict = Verdict.Deferred;
 
 		public RefineryFallbackScan(int relistEpochTicks)
 		{
@@ -314,7 +317,10 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			if (cellBudget <= 0)
 			{
 				LastPollWork = 0;
-				return phase == Phase.WaitForEpoch ? waitingVerdict : Verdict.Deferred;
+				// A zero-budget poll performs no work — it may only replay a verdict a
+				// completed or aborted pass actually produced (relistAt set), never the
+				// initial placeholder: a fresh scan reports mid-pass, not an empty domain.
+				return phase == Phase.WaitForEpoch && relistAt != int.MinValue ? waitingVerdict : Verdict.Deferred;
 			}
 
 			if (phase == Phase.WaitForEpoch)
