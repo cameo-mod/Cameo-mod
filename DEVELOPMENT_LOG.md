@@ -1,3 +1,75 @@
+# 2026-10-16 — Devin: PLAYTEST-AI-STALL (01a14054) — coherent-current certificate + cancel gating (9d997eb58)
+
+*Devin-Developer.* Implemented Sol's coherent-current certificate choice
+(BF5B8247 option (c)) under decisions 6722A484 + D831BBCB + AAEA45F7 on the
+existing seven-file claim; committed as `9d997eb58` on
+`devin/01a14054-refinery-p1a` (base `a5513de90`). **Not compiled or
+runtime-tested** — no execution authority on this lane; boot-gate SAC-blocked
+(recorded, not claimed). Fleet docs:
+`FREEZE_2026-10-16_refinery_p1a_9d997eb58_devin.md`,
+`RESPONSE_2026-10-16_placement_cancel_protection_api_devin.md`.
+
+**Certificate scan.** The terminal tier is now unconditionally the whole-map
+stream (`Map.AllCells`), the only tier that may certify exhaustion — and only
+on a coherent drain: `legalCells==0 && providers>0 && domainCells>0`.
+Every terminal poll first completes a same-tick coherence sweep over the exact
+atom sequence — scalar flags (distance-law, `BuildAnywhere`, map-radius flags,
+`DeveloperMode.FastBuild`), `coverageVersion`, anchor/field list identity,
+per-actor owner/alliance/in-world/dead plus `GivesBuildableArea` /
+`BaseProvider.Ready()` / `Replaceable` trait atoms, and rank cells. First sweep
+stamps `passAtoms`; every later sweep must equal it pairwise (no hash folds —
+6722A484). `CertificateCurrent()` re-verifies live: issued cert + unchanged
+dirty epoch + pairwise-equal live atom enumeration; a torn enumeration fails
+closed. Dirty events (ActorMap.CellUpdated, IResourceLayer.CellChanged,
+CustomTerrain.CellEntryChanged) bump the epoch and mark already-enumerated
+cells within the declared read radius for paged selective repair; marks that
+arrive after enumeration drain abort the pass to Deferred. `Exhausted` verdict
+keeps the scan alive so the cancel arm can re-verify.
+
+**Ranking corrected** — candidate rank is the minimum Chebyshev distance from
+ANY footprint tile to any declared resource cell (footprint-gap semantics
+80646D1B), never the raw top-left distance; tier bound at `RefineryFallbackTierMaxDist`
+returns `int.MaxValue` (constraint fully removed), else `tier+1`.
+
+**Cancel gating (G1–G4/C1–C5).** Shared seam
+`BaseBuilderQueueEvalCA.EvaluatePlacementCancelProtection` (E1283A6D signature,
+floors accepted-but-unused per D831BBCB) returns `PlacementCancelVerdict`:
+cheap-fast (`PowerTypes ∪ BarracksTypes`) → Allow; protected (`RefineryTypes`)
+→ RequireCertificate; everything else → Unresolvable → hold (absence of
+evidence never reads cheap). All five `Order.CancelProduction` sites gated:
+relocation latch, limit, exhaustion (cert re-verified immediately before
+queueing), saturation (manager), demand expiry (`CancelDemandItem`, law
+re-adopt exemption kept). Protected settles additionally require the engine's
+last-same-name target to `ReferenceEquals` the intended `ProductionItem` (E3 —
+`CancelProduction` removes the LAST same-name entry). Refusals emit
+`Held/ProtectionHold` (new reason). **Correction:** `FragileTypes` is the
+high-value fragile set (tech centers/battlelabs/superweapons) — NOT cheap-fast;
+an earlier draft had it inverted.
+
+**Interface.** `IBotExpansionTargetProvider.RefineryFallbackCertificateCurrent(Actor, string) => false`
+— default fails closed; `ExpansionPlannerBotModule` implements it via the
+scan's `CertificateCurrent()`.
+
+**Divergence recorded (AAEA45F7).** `CustomTerrain` IS evented — it is a
+`CellLayer<byte>` whose indexer fires `CellEntryChanged`; every inspected
+mutator (BuildableTerrainLayer :72/:98, ResourceLayer, GroundLevelBridge,
+ChangesTerrain, CliffBackImpassabilityLayer) writes through it, and
+SmudgeLayer/Locomotor/BuildableTerrainOverlay already subscribe. The scan
+subscribes the same channel — terrain coverage is real, not assumed. Residual
+hazard flagged: `CellLayer.Clear`/`CopyValues` bypass the event (and throw
+with listeners attached); no such call on `CustomTerrain` exists today.
+
+**Tests authored (not executed).** Helpers re-taught for the 12-arg snapshot +
+terminal semantics; cases: cert issue/stale, pairwise atom drift, no-provider
+hold, dirty repair, post-enumerate abort, footprint-gap + XY tie-break,
+`PlacementCancelVerdict` table.
+
+**Open:** compile/test still unexecuted; Integrator 01a14475 can bind the seam
+verbatim; reviewer F1/F2 (7CE00E73 active retry + outcome propagation) are the
+next-round items.
+
+---
+
 # 2026-10-16 — Devin: PLAYTEST-AI-STALL (01a14054) — REF-2 P1a amendment successor
 
 *Devin-Developer.* Amended the isolated `devin/01a14054-refinery-p1a` worktree
