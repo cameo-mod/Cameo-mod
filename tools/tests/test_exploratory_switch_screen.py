@@ -89,6 +89,42 @@ def test_plan_is_24_map_major_cells_with_seed_reuse_and_rotation():
 	})
 
 
+
+def test_planner_record_passes_schema_and_mandatory_validator_for_all_maps():
+	"""Exercise all eight allOf map branches against one complete planner record."""
+	import json
+	from pathlib import Path
+	from jsonschema import Draft202012Validator
+
+	root = Path(__file__).resolve().parents[2]
+	schema = json.loads((root / "tools/ai/exploratory_switch_screen.schema.json").read_text(encoding="utf-8"))
+	record = {
+		"schema": 1,
+		"screen_id": "exploratory-switch-screen-2026-10-16",
+		"purpose": "descriptive-exploratory-screen-only",
+		"candidate_switches": list(CANDIDATES),
+		"common_groups": {"CB_frontier_observe": True},
+		"bank_saturation_cash": 1,
+		"seed_by_map": dict(SEEDS),
+		"cells": plan_cells(),
+		"source_commit": "UNBOUND_AFTER_REFINERY_REPAIR",
+		"engine_version": "UNBOUND_AFTER_PACKAGE_REBUILD",
+		"package_sha256": "UNBOUND",
+		"tool_sha256": {},
+		"map_hashes": {row[0]: row[5] for row in MAPS},
+		"bj_disposition_sha256": BJ_DISPOSITION_SHA256,
+		"caps": "UNBOUND_PENDING_SCREEN_QUALIFICATION",
+		"execution_authorized": False,
+		"runtime_inheritance_resolution": "UNRESOLVED_PRECONDITION",
+		"effective_runtime_config_proven": False,
+	}
+	validator = Draft202012Validator(schema)
+	assert validator.is_valid(record), list(validator.iter_errors(record))
+	assert validate_plan_record(record)
+	assert {row["map_key"] for row in record["cells"]} == {row[0] for row in MAPS}
+	assert len(record["cells"]) == 24
+
+
 def test_mandatory_plan_validator_rejects_inventory_and_cross_field_drift():
 	cells = plan_cells()
 	map_hashes = {row[0]: row[5] for row in MAPS}
