@@ -1,3 +1,20 @@
+# 2026-10-16 — Devin: P1a compile+test fix-forward (a0a343a41) — 32/32 focused tests pass
+
+*Devin-Developer.* Leader-authorized focused-test cycle (focused tests only,
+no launch): copied the pinned engine (`723f50f9b`, matching `mod.config`
+ENGINE_VERSION) into the worktree per `copy_engine.cmd` convention, built
+`OpenRA.Mods.Cameo.Test -c Release` clean, ran
+`dotnet test --filter FullyQualifiedName~RefineryFallbackTest` — **32/32 pass**.
+The cycle caught three defects, fixed in `a0a343a41`: `Player.InternalID` →
+`Player.ClientIndex` (compile error — InternalID does not exist); two NUnit-4
+`Assert.That` params-message overloads replaced with interpolated strings;
+`OverlappingProviderSquaresDeduplicate` assert corrected to account for the
+mandatory pick-time `Legal` revalidation of the winner (domain cells evaluated
+once; the single second call is the winner's revalidation). No launch (no
+DevOps grant), no merge/push. Sol's routed freeze concern (cheap-fast evidence)
+is staged un-applied in fleet `ANALYSIS_2026-10-16_cheapfast_evidence_concern_devin.md`;
+source stays frozen for reviewer consolidated findings.
+
 # 2026-10-16 — Devin: PLAYTEST-AI-STALL (01a14054) — coherent-current certificate + cancel gating (9d997eb58)
 
 *Devin-Developer.* Implemented Sol's coherent-current certificate choice
