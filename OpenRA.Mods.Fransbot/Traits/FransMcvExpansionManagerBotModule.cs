@@ -1860,7 +1860,17 @@ namespace OpenRA.Mods.Common.Traits
 		void AbortExpansionTaskToIdle(IBot bot, string reason, CPos? failedSite = null)
 		{
 			var ownedSite = failedSite ?? targetResourceCenter ?? targetDeployCell;
-			CancelOwnedRoutineExpansionStructureIfQueued(bot, reason);
+			var cancelOutcome = CancelOwnedRoutineExpansionStructureIfQueued(bot, reason);
+			if (cancelOutcome == RoutineQueueCancelOutcome.Held)
+			{
+				// Deliberate exact-item handoff (review F2): teardown proceeds —
+				// deferring the abort would stall the task for as long as the guard
+				// holds — while the still-queued item keeps its ownership record, so a
+				// later routine pass or abort re-asks the guard for the same item.
+				FransBotLog.BotDebug(world,
+					"{0}: expansion-task abort continues while its Building-queue cancel is held ({1}); the exact queued item stays ownership-tracked for a later pass.",
+					player, reason);
+			}
 			AbortFirstExpansionRefineryAttempt(bot, reason, ownedSite);
 			ReturnExpansionTaskToIdle(reason);
 			nextLandExpansionPlanningTick = world.WorldTick;
@@ -2286,7 +2296,10 @@ namespace OpenRA.Mods.Common.Traits
 					"{0}: NAVAL SUPPORT coastal staging FACT was lost before naval access completed; releasing staging ownership and resuming the first-expansion PROC reservation.",
 					player);
 				ResumeFirstExpansionRefineryAfterInfrastructure("the temporary coastal staging FACT was lost");
-				CancelOwnedRoutineExpansionStructureIfQueued(bot, "coastal staging FACT loss");
+				if (CancelOwnedRoutineExpansionStructureIfQueued(bot, "coastal staging FACT loss") == RoutineQueueCancelOutcome.Held)
+					FransBotLog.BotDebug(world,
+						"{0}: coastal staging FACT loss teardown continues while its Building-queue cancel is held; the exact queued item stays ownership-tracked for a later pass.",
+						player);
 				activeConyard = null;
 				coastalStagingNavalNoProgressSinceTick = -1;
 				ReturnExpansionTaskToIdle("temporary coastal staging FACT was lost");
@@ -2302,7 +2315,10 @@ namespace OpenRA.Mods.Common.Traits
 				var completedHoldLost = stage == ExpansionStage.HoldingCompletedOutpost;
 				if (!completedHoldLost && lostField.HasValue)
 					MarkExpansionAreaFailed(lostField.Value, "routine expansion FACT destroyed before outpost completion");
-				CancelOwnedRoutineExpansionStructureIfQueued(bot, "routine expansion FACT loss");
+				if (CancelOwnedRoutineExpansionStructureIfQueued(bot, "routine expansion FACT loss") == RoutineQueueCancelOutcome.Held)
+					FransBotLog.BotDebug(world,
+						"{0}: routine FACT-loss teardown continues while its Building-queue cancel is held; the exact queued item stays ownership-tracked for a later pass.",
+						player);
 				AbortFirstExpansionRefineryAttempt(bot, "routine expansion FACT loss", lostField);
 				FransBotLog.BotDebug(world,
 					completedHoldLost
@@ -11207,12 +11223,18 @@ namespace OpenRA.Mods.Common.Traits
 			routineExpansionStructurePlacementIssuedTick = -1;
 		}
 
-		bool CancelOwnedRoutineExpansionStructureIfQueued(IBot bot, string reason)
+		// Result of attempting the routine-expansion queue handoff cancel. Held means
+		// the placement-cancel guard refused the order: the exact item is still live
+		// AND still carries its routine-expansion ownership record — callers must not
+		// treat that as "cancelled" or "already absent".
+		enum RoutineQueueCancelOutcome { NoOwnership, Settled, Held }
+
+		RoutineQueueCancelOutcome CancelOwnedRoutineExpansionStructureIfQueued(IBot bot, string reason)
 		{
 			if (bot == null || routineExpansionStructureQueueActor == null || string.IsNullOrEmpty(routineExpansionStructureType))
 			{
 				ClearRoutineExpansionStructureOwnership();
-				return false;
+				return RoutineQueueCancelOutcome.NoOwnership;
 			}
 
 			var queueActor = routineExpansionStructureQueueActor;
@@ -11228,21 +11250,24 @@ namespace OpenRA.Mods.Common.Traits
 			}
 
 			var ownedItem = queue?.AllQueued().FirstOrDefault(item => item.Item == buildingType);
-			var cancelled = queue != null && ownedItem != null;
-			if (cancelled)
+			var present = queue != null && ownedItem != null;
+			if (present)
 			{
 				// First-vs-LAST fix + protection gate: release queue ownership only when
 				// the owned FIRST is the engine's LAST target and the cancel actually
-				// issued. On hold the ownership record stays so it is not falsely settled.
+				// issued. On hold the exact-item ownership record is RETAINED and handed
+				// to the caller as the deliberate tracked handoff — a later pass re-asks
+				// the guard through this same function instead of losing the binding.
 				if (!FransPlacementCancelGuard.TryIssue(bot, queue, buildingType, ownedItem,
 						FransPlacementCancelGuard.CancelPermitted(world, queue, buildingType,
 							Info.ProtectedCancelRoleTypes, null),
 						out var hold) && hold != FransPlacementCancelGuard.FransCancelHold.None)
 				{
+					LogBuildingQueueHandoffTransition("CancellationHeldOwnershipRetained", queue, buildingType, $"{reason}/{hold}");
 					FransBotLog.BotDebug(world,
-						"{0}: routine expansion Building-queue handoff cancel of {1} on actor {2} held by placement-cancel guard ({3}); ownership is preserved.",
+						"{0}: routine expansion Building-queue handoff cancel of {1} on actor {2} held by placement-cancel guard ({3}); exact-item ownership is retained for the next pass.",
 						player, buildingType, queueActor.ActorID, hold);
-					return false;
+					return RoutineQueueCancelOutcome.Held;
 				}
 
 				LogBuildingQueueHandoffTransition("CancellationIssued", queue, buildingType, reason);
@@ -11250,9 +11275,9 @@ namespace OpenRA.Mods.Common.Traits
 
 			FransBotLog.BotDebug(world,
 				"{0}: routine expansion releases exact Building-queue ownership for {1} on actor {2} after {3}; owned item {4}. No unrelated queue item is touched.",
-				player, buildingType, queueActor.ActorID, reason, cancelled ? "cancelled" : "already absent");
+				player, buildingType, queueActor.ActorID, reason, present ? "cancelled" : "already absent");
 			ClearRoutineExpansionStructureOwnership();
-			return cancelled;
+			return RoutineQueueCancelOutcome.Settled;
 		}
 
 		void EnsureStructure(IBot bot, string buildingType, string queueCategory, int minRadius, int maxRadius)
@@ -11499,7 +11524,11 @@ namespace OpenRA.Mods.Common.Traits
 
 		void AbortTemporaryExpansion(IBot bot, bool retreatAfterRepack = false, bool refineryPlacementFailure = false)
 		{
-			CancelOwnedRoutineExpansionStructureIfQueued(bot, refineryPlacementFailure ? "refinery placement failure" : "temporary expansion abort");
+			var tempCancelOutcome = CancelOwnedRoutineExpansionStructureIfQueued(bot, refineryPlacementFailure ? "refinery placement failure" : "temporary expansion abort");
+			if (tempCancelOutcome == RoutineQueueCancelOutcome.Held)
+				FransBotLog.BotDebug(world,
+					"{0}: temporary-expansion abort continues while its Building-queue cancel is held; the exact queued item stays ownership-tracked for a later pass.",
+					player);
 			AbortFirstExpansionRefineryAttempt(bot,
 				refineryPlacementFailure ? "refinery placement failure" : retreatAfterRepack ? "FACT RETREAT/repack" : "temporary expansion abort",
 				targetResourceCenter);
@@ -13954,7 +13983,10 @@ namespace OpenRA.Mods.Common.Traits
 
 			// A replacement MCV must never inherit the dead actor's target, transform watchdog,
 			// retreat state, route timers, refinery-recovery state, LST ownership or queue ownership.
-			CancelOwnedRoutineExpansionStructureIfQueued(bot, $"active MCV loss during {context}");
+			if (CancelOwnedRoutineExpansionStructureIfQueued(bot, $"active MCV loss during {context}") == RoutineQueueCancelOutcome.Held)
+				FransBotLog.BotDebug(world,
+					"{0}: active-MCV-loss teardown continues while its Building-queue cancel is held; the exact queued item stays ownership-tracked for a later pass.",
+					player);
 			AbortFirstExpansionRefineryAttempt(bot, $"active MCV loss during {context}", lostField ?? lostDeploy);
 			ResetMcvRetreat();
 			mcvRetreatAfterRepackPending = false;

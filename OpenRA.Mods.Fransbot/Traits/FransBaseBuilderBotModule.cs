@@ -3035,7 +3035,11 @@ namespace OpenRA.Mods.Common.Traits
 						if (pendingAge < confirmationTimeout)
 							return true;
 
-						placementPendingConfirmationRetries++;
+						// Bounded at max (review F1): once the threshold is reached the
+							// counter stays pegged so each later timeout re-asks the guard
+							// exactly once per cycle without unbounded growth/overflow.
+							placementPendingConfirmationRetries = Math.Min(placementPendingConfirmationRetries + 1,
+								baseBuilder.Info.CompletedPlacementConfirmationMaximumRetries);
 							if (placementPendingConfirmationRetries >= baseBuilder.Info.CompletedPlacementConfirmationMaximumRetries)
 							{
 								FransBotLog.BotDebug(world,
@@ -3044,7 +3048,7 @@ namespace OpenRA.Mods.Common.Traits
 								if (FransPlacementCancelGuard.TryIssue(bot, queue, current.Item, current,
 										FransPlacementCancelGuard.CancelPermitted(world, queue, current.Item,
 											baseBuilder.Info.ProtectedCancelRoleTypes, baseBuilder.Info.CheapFastCancelRoleTypes),
-										out var hold))
+										out var hold) || hold == FransPlacementCancelGuard.FransCancelHold.None)
 								{
 									MarkTrackedCancellationIssued(queue, current, "PlacementConfirmationRetriesExhausted");
 									placementPendingItem = null;
@@ -3053,22 +3057,28 @@ namespace OpenRA.Mods.Common.Traits
 									placementPendingConfirmationRetries = 0;
 									lastFailedBuilding = current.Item;
 									baseBuilder.NotifyOpeningBuildingFailed(current.Item);
-								}
-								else if (hold != FransPlacementCancelGuard.FransCancelHold.None)
-								{
-									MarkTrackedCancellationHeld(queue, current, "PlacementConfirmationRetriesExhausted", hold);
-									FransBotLog.BotDebug(world,
-										"{0}: cancellation of stale READY item {1} held by placement-cancel guard ({2}); pending-placement record is preserved.",
-										player, current.Item, hold);
+									if (baseBuilder.Info.NavalProductionTypes.Contains(current.Item))
+									{
+										var retryTicks = Math.Max(1, baseBuilder.Info.StructureProductionResumeDelay);
+										navalPlacementBlockedUntilTick[current.Item] = world.WorldTick + retryTicks;
+										navalPlacementPrecheckRetryTick.Remove(current.Item);
+									}
 									return true;
 								}
-								if (baseBuilder.Info.NavalProductionTypes.Contains(current.Item))
-								{
-									var retryTicks = Math.Max(1, baseBuilder.Info.StructureProductionResumeDelay);
-									navalPlacementBlockedUntilTick[current.Item] = world.WorldTick + retryTicks;
-									navalPlacementPrecheckRetryTick.Remove(current.Item);
-								}
-								return true;
+
+								// Guard held the cancel. Do NOT preserve the pending-placement sweep
+								// record: a preserved placementPendingIssuedTick re-enters
+								// samePendingPlacement on every later sweep and parks the item ahead of
+								// ChooseBuildLocation even after space opens (review F1). Take the
+								// ordinary unconfirmed-attempt retry instead: the confirmation counter
+								// stays attached to this exact queue item (it is only reset when the
+								// item physically disappears or is cancelled), the sweep below retries
+								// placement at a fresh location/BuildingInfluence snapshot, and the
+								// guard is re-asked after the next exhaustion.
+								MarkTrackedCancellationHeld(queue, current, "PlacementConfirmationRetriesExhausted", hold);
+								FransBotLog.BotDebug(world,
+									"{0}: cancellation of stale READY item {1} held by placement-cancel guard ({2}); item stays queued and rejoins the placement retry path.",
+									player, current.Item, hold);
 							}
 
 						// Retry from a fresh location/BuildingInfluence snapshot. The retry counter stays
@@ -3975,8 +3985,13 @@ namespace OpenRA.Mods.Common.Traits
 
 		/// <summary>
 		/// Gathers mounted role-membership and resolved cost/build-time evidence, then asks
-		/// the shared CA policy helper whether this cancel is permitted. Returns true only
+		/// the shared policy seam whether this cancel is permitted. Returns true only
 		/// on PlacementCancelVerdict.Allow; protected and unresolvable both return false.
+		/// Per Sol decision D831BBCB (2026-10-16): the protected-floor Allow comparison is
+		/// NOT ratified this iteration — no caller-side floor reference is computed here;
+		/// the seam stays no-Allow/fail-closed regardless. Only POSITIVE resolved evidence
+		/// is meaningful (E2): engine-resolved GetProductionCost/GetBuildTime values; a
+		/// missing ValuedInfo resolves to 0 and zero/negative is never cheap-fast proof.
 		/// </summary>
 		public static bool CancelPermitted(World world, ProductionQueue queue, string itemName,
 			IReadOnlyCollection<string> protectedRoleTypes, IReadOnlyCollection<string> cheapFastRoleTypes)
@@ -3988,54 +4003,36 @@ namespace OpenRA.Mods.Common.Traits
 			var buildable = info == null ? null : BuildableInfo.GetTraitForQueue(info, queue.Info.Type);
 			int? resolvedCost = info?.TraitInfoOrDefault<ValuedInfo>() == null ? (int?)null : queue.GetProductionCost(info);
 			int? resolvedTicks = info != null && buildable != null ? queue.GetBuildTime(info, buildable) : (int?)null;
-
-			int? floorCost = null;
-			int? floorTicks = null;
-			if (protectedRoleTypes != null)
-			{
-				foreach (var name in protectedRoleTypes)
-				{
-					if (!world.Map.Rules.Actors.TryGetValue(name, out var candidate) || candidate == null)
-						continue;
-					if (candidate.TraitInfoOrDefault<ValuedInfo>() != null)
-					{
-						var cost = queue.GetProductionCost(candidate);
-						floorCost = floorCost.HasValue ? Math.Min(floorCost.Value, cost) : cost;
-					}
-
-					var candidateBuildable = BuildableInfo.GetTraitForQueue(candidate, queue.Info.Type);
-					if (candidateBuildable != null)
-					{
-						var ticks = queue.GetBuildTime(candidate, candidateBuildable);
-						floorTicks = floorTicks.HasValue ? Math.Min(floorTicks.Value, ticks) : ticks;
-					}
-				}
-			}
+			if (resolvedCost <= 0)
+				resolvedCost = null;
+			if (resolvedTicks <= 0)
+				resolvedTicks = null;
 
 			return SharedPolicySeam(info,
 				protectedRoleTypes != null && protectedRoleTypes.Contains(itemName),
 				cheapFastRoleTypes != null && cheapFastRoleTypes.Contains(itemName),
-				resolvedCost, resolvedTicks, floorCost, floorTicks);
+				resolvedCost, resolvedTicks);
 		}
 
 		/// <summary>
 		/// BLOCKED SEAM (recorded dependency — see API_PROPOSAL_2026-10-16_placement_cancel_protection.md
 		/// in the fleet repo and the claim doc): the shared policy helper
 		/// BaseBuilderQueueEvalCA.EvaluatePlacementCancelProtection plus its
-		/// PlacementCancelVerdict enum is Developer-owned inside the live CA claim and the
-		/// signature agreement is still pending (MCP coordination unavailable at write
-		/// time). Frans must not duplicate the classifier, so until the agreed helper lands
-		/// this seam FAILS CLOSED: every Frans placement cancel holds rather than risk a
-		/// protected or unresolvable item. That satisfies the safety law (unknown/default
-		/// protected, no exhaustion-proofed cancels at all); the only cost is deferred
-		/// cheap-fast utility. When the helper lands, this body becomes exactly:
-		///   return BaseBuilderQueueEvalCA.EvaluatePlacementCancelProtection(
-		///       info, isProtectedRole, isCheapFastRole, resolvedCost, resolvedTicks,
-		///       referenceFloorCost, referenceFloorTicks) == PlacementCancelVerdict.Allow;
-		/// The parameter list already matches the proposed signature — no other change.
+		/// PlacementCancelVerdict enum is Developer-owned inside the live CA claim.
+		/// Sol decision D831BBCB declined the floor-comparison Allow criterion for this
+		/// iteration, so the current agreed scope is no-Allow/fail-closed — this seam
+		/// returns false and every Frans placement cancel holds rather than risk a
+		/// protected or unresolvable item. When a reviewed helper signature lands, this
+		/// body becomes the delegation; the evidence gathered in CancelPermitted already
+		/// matches the proposal minus the unratified floor parameters.
+		/// NB (per review 7CE00E73): the TryIssue intended-vs-engine-LAST reference check
+		/// is an enqueue-time check, not dispatch-time identity proof — a same-name item
+		/// appended after this check in the same order batch can still become the engine's
+		/// dispatch target. The guard narrows the unsafe window; it cannot eliminate it
+		/// without a dispatch-time engine contract (outside this lane's scope).
 		/// </summary>
 		static bool SharedPolicySeam(ActorInfo info, bool isProtectedRole, bool isCheapFastRole,
-			int? resolvedCost, int? resolvedTicks, int? referenceFloorCost, int? referenceFloorTicks)
+			int? resolvedCost, int? resolvedTicks)
 		{
 			return false;
 		}

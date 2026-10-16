@@ -297,5 +297,161 @@ namespace OpenRA.Mods.Cameo.Test
 				Assert.That(f.Bot.Orders.Count, Is.EqualTo(1));
 			});
 		}
+
+		// ----------------------------------------------------------------
+		// Retry semantics (review 7CE00E73 finding F1): a held cancel must not
+		// consume or latch queue state — the same exact item is re-askable on
+		// the next sweep after placement conditions change.
+		// ----------------------------------------------------------------
+
+		[Test]
+		public void TryIssue_HeldCancelLeavesQueueUntouchedAndReaskable()
+		{
+			var f = new Fixture();
+			var item = f.Enqueue();
+
+			var firstIssued = FransPlacementCancelGuard.TryIssue(f.Bot, f.Queue, Item, item, false, out var firstHold);
+			Assert.Multiple(() =>
+			{
+				Assert.That(firstIssued, Is.False);
+				Assert.That(firstHold, Is.EqualTo(FransPlacementCancelGuard.FransCancelHold.Protected));
+				Assert.That(f.Bot.Orders, Is.Empty);
+				Assert.That(f.Items.Count, Is.EqualTo(1));
+				Assert.That(f.Items[0], Is.SameAs(item));
+				Assert.That(FransPlacementCancelGuard.EngineCancelTarget(f.Queue, Item), Is.SameAs(item));
+			});
+
+			// Re-ask after "space opened" (a later sweep): identical hold, still
+			// nothing queued as an order, item still live — the guard consumed no
+			// state the first time, so callers may retry placement freely.
+			var secondIssued = FransPlacementCancelGuard.TryIssue(f.Bot, f.Queue, Item, item, false, out var secondHold);
+			Assert.Multiple(() =>
+			{
+				Assert.That(secondIssued, Is.False);
+				Assert.That(secondHold, Is.EqualTo(FransPlacementCancelGuard.FransCancelHold.Protected));
+				Assert.That(f.Bot.Orders, Is.Empty);
+				Assert.That(f.Items.Count, Is.EqualTo(1));
+			});
+		}
+
+		[Test]
+		public void TryIssue_AmbiguityResolvesWhenTailSameNameLeaves()
+		{
+			var f = new Fixture();
+			var reservedFirst = f.Enqueue();
+			var engineLast = f.Enqueue();
+
+			var firstIssued = FransPlacementCancelGuard.TryIssue(f.Bot, f.Queue, Item, reservedFirst, true, out var firstHold);
+			Assert.Multiple(() =>
+			{
+				Assert.That(firstIssued, Is.False);
+				Assert.That(firstHold, Is.EqualTo(FransPlacementCancelGuard.FransCancelHold.AmbiguousTarget));
+				Assert.That(f.Bot.Orders, Is.Empty);
+			});
+
+			// The tail same-name item leaves by other means (placed / externally
+			// cancelled): the reserved FIRST is now the engine target and the
+			// re-asked guard issues on the exact intended item.
+			f.Items.Remove(engineLast);
+
+			var secondIssued = FransPlacementCancelGuard.TryIssue(f.Bot, f.Queue, Item, reservedFirst, true, out var secondHold);
+			Assert.Multiple(() =>
+			{
+				Assert.That(secondIssued, Is.True);
+				Assert.That(secondHold, Is.EqualTo(FransPlacementCancelGuard.FransCancelHold.None));
+				Assert.That(f.Bot.Orders.Count, Is.EqualTo(1));
+				Assert.That(f.Items, Does.Contain(reservedFirst));
+			});
+		}
+
+		// ----------------------------------------------------------------
+		// Caller outcome mapping (review 7CE00E73 finding F2): the Mcv
+		// expansion manager maps (issued, hold) onto its tri-state — absent
+		// engine target settles as "already absent", a nonzero hold must be
+		// propagated as Held (ownership retained), and an issued cancel is the
+		// only outcome that releases the ownership record.
+		// ----------------------------------------------------------------
+
+		[Test]
+		public void CallerOutcome_AbsentSettlesHeldRetainsIssuedSettles()
+		{
+			var f = new Fixture();
+
+			// Already absent: (false, None) -> caller's Settled/NoOwnership path.
+			var absentIssued = FransPlacementCancelGuard.TryIssue(f.Bot, f.Queue, Item, null, true, out var absentHold);
+			Assert.Multiple(() =>
+			{
+				Assert.That(absentIssued, Is.False);
+				Assert.That(absentHold, Is.EqualTo(FransPlacementCancelGuard.FransCancelHold.None));
+			});
+
+			// Present but denied: (false, Protected) -> caller's Held path, item
+			// still live so ownership teardown must not proceed as if cancelled.
+			var item = f.Enqueue();
+			var heldIssued = FransPlacementCancelGuard.TryIssue(f.Bot, f.Queue, Item, item, false, out var heldHold);
+			Assert.Multiple(() =>
+			{
+				Assert.That(heldIssued, Is.False);
+				Assert.That(heldHold, Is.Not.EqualTo(FransPlacementCancelGuard.FransCancelHold.None));
+				Assert.That(f.Items, Does.Contain(item));
+				Assert.That(f.Bot.Orders, Is.Empty);
+			});
+
+			// Present and permitted: (true, None) -> caller's Settled path.
+			var issuedIssued = FransPlacementCancelGuard.TryIssue(f.Bot, f.Queue, Item, item, true, out var issuedHold);
+			Assert.Multiple(() =>
+			{
+				Assert.That(issuedIssued, Is.True);
+				Assert.That(issuedHold, Is.EqualTo(FransPlacementCancelGuard.FransCancelHold.None));
+				Assert.That(f.Bot.Orders.Count, Is.EqualTo(1));
+			});
+		}
+
+		// ----------------------------------------------------------------
+		// CancelPermitted evidence seam (Sol D831BBCB): the seam is
+		// no-Allow/fail-closed this iteration — every classification returns
+		// false — but the positive-evidence contract holds: resolved cost/ticks
+		// come only from engine resolution, unknown/nonpositive evidence is
+		// never cheap-fast proof.
+		// ----------------------------------------------------------------
+
+		[Test]
+		public void CancelPermitted_UnknownItemName_UnresolvedReturnsFalse()
+		{
+			var f = new Fixture();
+			f.Enqueue();
+
+			Assert.That(FransPlacementCancelGuard.CancelPermitted(f.World, f.Queue, "not_a_rule", null, null), Is.False);
+		}
+
+		[Test]
+		public void CancelPermitted_ProtectedRoleMember_ReturnsFalse()
+		{
+			var f = new Fixture();
+			f.Enqueue();
+
+			Assert.That(FransPlacementCancelGuard.CancelPermitted(f.World, f.Queue, Item,
+				new[] { Item }, null), Is.False);
+		}
+
+		[Test]
+		public void CancelPermitted_CheapFastMember_StillFailClosed()
+		{
+			// Even with positive resolved evidence (ValuedInfo 800, resolvable
+			// build time) and cheap-fast role membership, the no-Allow seam holds.
+			var f = new Fixture();
+			f.Enqueue();
+
+			Assert.That(FransPlacementCancelGuard.CancelPermitted(f.World, f.Queue, Item,
+				null, new[] { Item }), Is.False);
+		}
+
+		[Test]
+		public void CancelPermitted_NullQueue_ReturnsFalse()
+		{
+			var f = new Fixture();
+
+			Assert.That(FransPlacementCancelGuard.CancelPermitted(f.World, null, Item, null, null), Is.False);
+		}
 	}
 }
