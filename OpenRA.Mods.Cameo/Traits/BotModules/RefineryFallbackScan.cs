@@ -270,6 +270,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		// Placeholder only — reachable solely while relistAt is set (a real consumed or
 		// aborted pass verdict); Deferred is the safe-direction default.
 		Verdict waitingVerdict = Verdict.Deferred;
+		CPos pickedCell;
 
 		public RefineryFallbackScan(int relistEpochTicks)
 		{
@@ -320,7 +321,13 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				// A zero-budget poll performs no work — it may only replay a verdict a
 				// completed or aborted pass actually produced (relistAt set), never the
 				// initial placeholder: a fresh scan reports mid-pass, not an empty domain.
-				return phase == Phase.WaitForEpoch && relistAt != int.MinValue ? waitingVerdict : Verdict.Deferred;
+				if (phase == Phase.WaitForEpoch && relistAt != int.MinValue)
+				{
+					site = ReplaySite();
+					return waitingVerdict;
+				}
+
+				return Verdict.Deferred;
 			}
 
 			if (phase == Phase.WaitForEpoch)
@@ -328,6 +335,7 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 				if (now < relistAt)
 				{
 					LastPollWork = work;
+					site = ReplaySite();
 					return waitingVerdict;
 				}
 
@@ -375,6 +383,14 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 						switch (PickStep(now, out site))
 						{
 							case PickResult.Picked:
+								// The pick consumes the pass — leaving phase at Pick would let a later
+								// Poll keep draining stale candidates. Site replays idempotently (with
+								// its cell) inside the epoch; a poll past it re-lists fresh.
+								DisposeCursors();
+								waitingVerdict = Verdict.Site;
+								pickedCell = site.Value;
+								relistAt = now + relistEpochTicks;
+								phase = Phase.WaitForEpoch;
 								LastPollWork = work;
 								return Verdict.Site;
 							case PickResult.Drained:
@@ -387,8 +403,17 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			}
 
 			LastPollWork = work;
-			return phase == Phase.WaitForEpoch ? waitingVerdict : Verdict.Deferred;
+			if (phase == Phase.WaitForEpoch)
+			{
+				site = ReplaySite();
+				return waitingVerdict;
+			}
+
+			return Verdict.Deferred;
 		}
+
+		// A replayed Site carries its delivered cell; every other verdict has no payload.
+		CPos? ReplaySite() => waitingVerdict == Verdict.Site ? pickedCell : null;
 
 		enum PickResult { Continue, Picked, Drained }
 

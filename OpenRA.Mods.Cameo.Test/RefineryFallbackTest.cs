@@ -151,6 +151,47 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
+		public void ZeroBudgetPollNeverFabricsAVerdict()
+		{
+			// A fresh scan polled with no budget must not replay the initial verdict
+			// placeholder — PollRefineryFallbackSite maps NoUniverse to Exhausted, and an
+			// unearned Exhausted is a cancel with zero cells scanned. Deferred is honest.
+			var scan = new RefineryFallbackScan(50);
+			var snapshot = Snap(new[] { Prov(0, 0, 2) }, new[] { new CPos(0, 0) }, c => true, c => true);
+
+			Assert.That(scan.Poll(0, 0, () => snapshot, out _), Is.EqualTo(RefineryFallbackScan.Verdict.Deferred),
+				"no work may claim an empty domain");
+			Assert.That(scan.LastPollWork, Is.EqualTo(0));
+
+			// After a real drained pass the same zero-budget poll DOES replay the real verdict.
+			var verdict = Drain(scan, 64, 400, () => snapshot, out _);
+			Assert.That(verdict, Is.EqualTo(RefineryFallbackScan.Verdict.Site));
+			Assert.That(scan.Poll(0, 0, () => snapshot, out _), Is.EqualTo(RefineryFallbackScan.Verdict.Site),
+				"a consumed verdict replays; a fabricated one does not");
+		}
+
+		[Test]
+		public void PickedSiteConsumesThePass()
+		{
+			// A delivered site ends the pass: a later Poll must not drain stale leftover
+			// candidates — it replays Site inside the epoch and re-lists after it.
+			var providers = new[] { Prov(0, 0, 3) };
+			var legal = new HashSet<CPos> { new CPos(1, 0), new CPos(2, 0), new CPos(3, 0) };
+			var ranks = new[] { new CPos(0, 0) };
+			var scan = new RefineryFallbackScan(50);
+			var snapshot = Snap(providers, ranks, c => true, LegalOnly(legal));
+
+			Assert.That(Drain(scan, 64, 400, () => snapshot, out var site), Is.EqualTo(RefineryFallbackScan.Verdict.Site));
+			Assert.That(site, Is.EqualTo(new CPos(1, 0)));
+
+			legal.Remove(new CPos(2, 0));
+			Assert.That(scan.Poll(64, 0, () => snapshot, out var replay), Is.EqualTo(RefineryFallbackScan.Verdict.Site),
+				"the delivered verdict replays inside the epoch — no stale second pick");
+			Assert.That(replay, Is.EqualTo(new CPos(1, 0)));
+			Assert.That(scan.LastPollWork, Is.EqualTo(0));
+		}
+
+		[Test]
 		public void MutatedProviderEnumerationRestartsBoundedly()
 		{
 			// A world mutation tearing the live collection restarts it in place — the pass
