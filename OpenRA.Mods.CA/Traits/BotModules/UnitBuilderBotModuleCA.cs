@@ -147,6 +147,14 @@ namespace OpenRA.Mods.CA.Traits
 			"The reserve holds only while the pool is under this floor.")]
 		public readonly int ReserveArmyFloor = 8;
 
+		[Desc("U1 (production service contract §3): feasible-candidate/fair-producer service —",
+			"capable producer matched before slot, admissible candidates before the pick,",
+			"bounded per-candidate retry (a rejected name leaves the set alone instead of",
+			"excluding every limited name), per-category rotation over stable queue keys,",
+			"and ephemeral in-pass slot/cost reservations. Gated by SwitchCondition;",
+			"default off keeps the legacy path byte-identical.")]
+		public readonly bool FairProducerService = false;
+
 		public override void RulesetLoaded(Ruleset rules, ActorInfo ai)
 		{
 			base.RulesetLoaded(rules, ai);
@@ -237,6 +245,12 @@ namespace OpenRA.Mods.CA.Traits
 		IBotProductionWidth productionWidth;
 		IBotScaleTargets[] scaleTargets;
 		readonly DerivedUnitWeights derivedUnitWeights = new DerivedUnitWeights();
+
+		// U1 (service-contract §3): the switch-gated fair-service arm and its per-category
+		// rotation cursor over stable queue keys ("actorID|queueType") — a visit resumes
+		// AFTER the last examined producer instead of always re-walking the head.
+		bool FairService => switchesActive && Info.FairProducerService;
+		readonly Dictionary<string, string> serviceCursorByCategory = new(StringComparer.Ordinal);
 
 		int CounterWeight => botLimits?.Info.AdaptiveCounterWeight ?? 0;
 
@@ -502,11 +516,25 @@ namespace OpenRA.Mods.CA.Traits
 			{
 				UpdateComposition();
 
-				var buildRequest = queuedBuildRequests.FirstOrDefault();
-				if (buildRequest != null)
+				if (FairService && queuedBuildRequests.Count > 0)
 				{
-					BuildUnit(bot, buildRequest);
-					queuedBuildRequests.Remove(buildRequest);
+					// U1 (service-contract §4): every pending external request is examined
+					// once per visit in request order — an emitted or permanently-invalid
+					// request leaves the list, a temporarily blocked one survives for the
+					// next visit. An impossible head request cannot hide a legal later one,
+					// and a deferred order is never duplicated.
+					foreach (var buildRequest in queuedBuildRequests.ToList())
+						if (BuildUnit(bot, buildRequest) || PermanentlyInvalidBuildRequest(buildRequest))
+							queuedBuildRequests.Remove(buildRequest);
+				}
+				else
+				{
+					var buildRequest = queuedBuildRequests.FirstOrDefault();
+					if (buildRequest != null)
+					{
+						BuildUnit(bot, buildRequest);
+						queuedBuildRequests.Remove(buildRequest);
+					}
 				}
 
 				// §12.14 PL-1: a trailing Steamroller lead relaxes both cash floors
@@ -623,6 +651,16 @@ namespace OpenRA.Mods.CA.Traits
 			// No provider = first free queue only, byte-identical to upstream; classic mounts none.
 			productionWidth ??= player.PlayerActor.TraitsImplementing<IBotProductionWidth>().FirstEnabledTraitOrDefault();
 			var maxQueues = ProductionSaturationCA.QueuesPerCategory(saturated, productionWidth?.MaxQueuesPerCategory ?? 0);
+
+			// U1 (service-contract §3): under the switch the category is served by the fair
+			// path — rotation cursor, capability-matched slots, pre-pick admissibility and
+			// ephemeral reservations. Flag off runs the legacy loop byte-identically.
+			if (FairService)
+			{
+				BuildUnitFairService(bot, category, buildRandom, excludeLimited, saturated, maxQueues);
+				return;
+			}
+
 			var queues = AIUtils.FindQueues(player, category)
 				.Where(q =>
 				{
@@ -681,13 +719,164 @@ namespace OpenRA.Mods.CA.Traits
 			}
 		}
 
+		// U1 (service-contract §3): bounded fair producer service for one category visit.
+		// Queues are visited in stable key order resuming AFTER the last examined producer
+		// (busy producers advance the cursor without consuming an offer); a slot is filled
+		// only from candidates admissible BEFORE the pick — membership, delays, intervals,
+		// limits, capturer cap and aircraft admissibility — so a rejected candidate leaves
+		// the retry set alone rather than excluding every limited name. Emitted orders hold
+		// an ephemeral reservation against the producer's free slots and the pass's bank;
+		// an active composition that yields no admissible unit falls back to the declared
+		// baseline shares once per queue before reverting.
+		void BuildUnitFairService(IBot bot, string category, bool buildRandom, bool excludeLimited, bool saturated, int maxQueues)
+		{
+			var queues = AIUtils.FindQueues(player, category)
+				.OrderBy(q => q.Actor.ActorID)
+				.ThenBy(q => q.Info.Type)
+				.ToList();
+			if (queues.Count == 0)
+				return;
+
+			var keys = queues.Select(QueueServiceKey).ToList();
+			var start = UnitProducerServiceCA.ResumeIndex(keys, serviceCursorByCategory.GetValueOrDefault(category));
+			var offers = UnitProducerServiceCA.OfferBudget(queues.Count, maxQueues);
+			var bank = playerResources.GetCashAndResources();
+			var reservedCash = 0;
+
+			// Player-wide in-pass headroom: emitted orders have not reached AllQueued or the
+			// world census yet, so unit limits and the aircraft cap must count them here or
+			// one unit of headroom would admit several invisible orders.
+			var limitHeadroom = new Dictionary<string, int>(StringComparer.Ordinal);
+			var pendingAircraft = 0;
+			var pendingAirToAir = 0;
+
+			for (var k = 0; k < queues.Count && offers > 0; k++)
+			{
+				var index = (start + k) % queues.Count;
+				var queue = queues[index];
+
+				// The cursor tracks every examined producer — successful or not — but never
+				// a producer the budget stopped us from reaching; that one stays in rotation.
+				serviceCursorByCategory[category] = keys[index];
+
+				var freeSlots = queue is IHasParallelQueueSlots p ? p.AvailableSlots
+					: (queue.AllQueued().Any() ? 0 : 1);
+				if (freeSlots <= 0)
+					continue;
+
+				offers--;
+				var pending = 0;
+				var skip = new HashSet<string>(StringComparer.Ordinal);
+				var shares = GetUnitsToBuildForCategory(queue.Info.Type);
+				var baselineTried = false;
+
+				while (UnitProducerServiceCA.SlotAvailable(freeSlots, pending))
+				{
+					// Saturation lapses mid-fill: stop slotting the moment the bank drops below
+					// the bar. The reserved bank counts — emitted orders are spent cash.
+					if (saturated && !ProductionSaturationCA.Saturated(
+						UnitProducerServiceCA.BankAfterReserved(bank, reservedCash), BankSaturationThreshold))
+						break;
+
+					var unit = buildRandom
+						? ChooseRandomUnitToBuild(queue, excludeLimited, shares, skip)
+						: ChooseUnitToBuild(queue, excludeLimited, saturated, shares, skip);
+
+					// §3.3/P4: an active composition that provides no feasible unit for this
+					// category falls back to the declared baseline shares once — then to the
+					// existing revert path if the baseline is also empty.
+					if (unit == null && !baselineTried &&
+						activeComposition != null && CompositionAppliesToCategory(activeComposition, queue.Info.Type) &&
+						Info.UnitsToBuild != null && Info.UnitsToBuild.Count > 0)
+					{
+						baselineTried = true;
+						shares = Info.UnitsToBuild;
+						AIUtils.BotDebug("AI: {0} composition {1} has no feasible unit for {2}; falling back to baseline shares",
+							player, activeComposition.Id, queue.Info.Type);
+						continue;
+					}
+
+					if (unit == null)
+					{
+						if (activeComposition != null && CompositionAppliesToCategory(activeComposition, queue.Info.Type))
+							RevertToBaselineComposition();
+
+						break;
+					}
+
+					var name = unit.Name;
+					if (!ShouldBuild(name, baselineTried, queue.Info.Type))
+					{
+						skip.Add(name);
+						continue;
+					}
+
+					// In-pass cap headroom: UnitLimits counts only living actors, so an order
+					// emitted seconds ago is invisible to ShouldBuild — track the remaining
+					// room ourselves and spend it per emission.
+					if (Info.UnitLimits != null && Info.UnitLimits.TryGetValue(name, out var unitLimit))
+					{
+						if (!limitHeadroom.TryGetValue(name, out var headroom))
+						{
+							headroom = unitLimit - world.Actors.Count(a => !a.IsDead && a.Owner == player && a.Info.Name == name);
+							limitHeadroom[name] = headroom;
+						}
+
+						if (headroom <= 0)
+						{
+							skip.Add(name);
+							continue;
+						}
+					}
+
+					var isAircraft = unit.HasTraitInfo<AircraftInfo>();
+					var isAirToAir = isAircraft && Info.AirToAirUnits.Contains(name);
+					var aircraftPending = !isAircraft ? 0
+						: Info.MaintainAirSuperiority
+							? (isAirToAir ? pendingAirToAir : pendingAircraft - pendingAirToAir)
+							: pendingAircraft;
+					if (!CanBuildMoreOfAircraft(unit, aircraftPending))
+					{
+						skip.Add(name);
+						continue;
+					}
+
+					var cost = Math.Max(0, queue.GetProductionCost(unit));
+					if (UnitProducerServiceCA.BankAfterReserved(bank, reservedCash) < cost)
+						break;
+
+					SetUnitInterval(name);
+					bot.QueueOrder(Order.StartProduction(queue.Actor, name, 1));
+					NotifyStarted(name, queue.Info.Type);
+					counters.Record(unit);
+					reservedCash += cost;
+					pending++;
+					if (limitHeadroom.ContainsKey(name))
+						limitHeadroom[name]--;
+					if (isAircraft)
+					{
+						pendingAircraft++;
+						if (isAirToAir)
+							pendingAirToAir++;
+					}
+					if (activeComposition != null && CompositionAppliesToCategory(activeComposition, queue.Info.Type))
+						AddToActiveCompositionProducedValue(unit);
+				}
+			}
+		}
+
+		static string QueueServiceKey(ProductionQueue queue) =>
+			$"{queue.Actor.ActorID}|{queue.Info.Type}";
+
 		// In cases where we want to build a specific unit but don't know the queue name (because there's more than one possibility)
-		void BuildUnit(IBot bot, string name)
+		// U1: returns true only when a StartProduction order was emitted — the fair-service
+		// caller keeps a blocked request queued; legacy callers ignore the result.
+		bool BuildUnit(IBot bot, string name)
 		{
 			// Actors[] throws KeyNotFoundException for names absent from the ruleset —
 			// reachable when a queued request survives a save whose version renamed the actor.
 			if (!world.Map.Rules.Actors.TryGetValue(name, out var actorInfo))
-				return;
+				return false;
 
 			// Upstream iterates every Buildable trait — an actor with several (alternate
 			// queue sets) would otherwise have requests routed only through the first.
@@ -697,15 +886,29 @@ namespace OpenRA.Mods.CA.Traits
 				{
 					foreach (var observer in UnitObservers)
 						observer.UnitProductionSkipped(player, world.WorldTick, name, "should_build");
-					return;
+					return false;
 				}
 
 				ProductionQueue queue = null;
-				foreach (var pq in buildableInfo.Queue)
+				if (FairService)
 				{
-					queue = AIUtils.FindQueues(player, pq).FirstOrDefault(q => !q.AllQueued().Any());
-					if (queue != null)
-						break;
+					// U1 (service-contract §4): match capability AND a free slot together —
+					// the legacy first-empty queue can be an incapable producer that hides a
+					// capable later one.
+					queue = buildableInfo.Queue
+						.SelectMany(pq => AIUtils.FindQueues(player, pq))
+						.FirstOrDefault(q =>
+							(q is IHasParallelQueueSlots p ? p.AvailableSlots > 0 : !q.AllQueued().Any()) &&
+							q.BuildableItems().Any(b => b.Name == name));
+				}
+				else
+				{
+					foreach (var pq in buildableInfo.Queue)
+					{
+						queue = AIUtils.FindQueues(player, pq).FirstOrDefault(q => !q.AllQueued().Any());
+						if (queue != null)
+							break;
+					}
 				}
 
 				if (queue != null && queue.BuildableItems().Any(b => b.Name == name))
@@ -714,12 +917,26 @@ namespace OpenRA.Mods.CA.Traits
 					bot.QueueOrder(Order.StartProduction(queue.Actor, name, 1));
 					NotifyStarted(name, queue.Info.Type);
 					AIUtils.BotDebug("AI: {0} decided to build {1} (external request)", queue.Actor.Owner, name);
-					return;
+					return true;
 				}
 			}
 
 			foreach (var observer in UnitObservers)
 				observer.UnitProductionSkipped(player, world.WorldTick, name, "no_queue");
+			return false;
+		}
+
+		// U1: a request that can never be served — the actor is absent from the ruleset, or
+		// none of its Buildable queues is among this module's configured UnitQueues — is
+		// dropped once instead of pinning the pending list. Every other failure is
+		// transient (delays, intervals, limits, a missing free producer) and survives.
+		bool PermanentlyInvalidBuildRequest(string name)
+		{
+			if (!world.Map.Rules.Actors.TryGetValue(name, out var actorInfo))
+				return true;
+
+			return !actorInfo.TraitInfos<BuildableInfo>().Any(b =>
+				b.Queue != null && b.Queue.Any(pq => Info.UnitQueues.Contains(pq)));
 		}
 
 		void SetUnitInterval(string name)
@@ -840,14 +1057,16 @@ namespace OpenRA.Mods.CA.Traits
 			return true;
 		}
 
-		ActorInfo ChooseRandomUnitToBuild(ProductionQueue queue, bool excludeLimited)
+		ActorInfo ChooseRandomUnitToBuild(ProductionQueue queue, bool excludeLimited,
+			Dictionary<string, int> shares = null, HashSet<string> retrySkip = null)
 		{
-			var unitsToBuildShares = GetUnitsToBuildForCategory(queue.Info.Type);
+			var unitsToBuildShares = shares ?? GetUnitsToBuildForCategory(queue.Info.Type);
 			if (unitsToBuildShares == null || unitsToBuildShares.Count == 0)
 				return null;
 
 			var buildableThings = queue.BuildableItems().Where(a => unitsToBuildShares.ContainsKey(a.Name) &&
-				(!excludeLimited || Info.UnitLimits == null || !Info.UnitLimits.ContainsKey(a.Name)));
+				(!excludeLimited || Info.UnitLimits == null || !Info.UnitLimits.ContainsKey(a.Name)) &&
+				(retrySkip == null || !retrySkip.Contains(a.Name)));
 			if (!buildableThings.Any())
 				return null;
 
@@ -855,7 +1074,7 @@ namespace OpenRA.Mods.CA.Traits
 			if (counter != null)
 				return counter;
 
-			var deficit = ChooseRoleDeficit(buildableThings, unitsToBuildShares, excludeLimited);
+			var deficit = ChooseRoleDeficit(buildableThings, unitsToBuildShares, excludeLimited, retrySkip);
 			if (deficit != null)
 				return deficit;
 
@@ -898,22 +1117,24 @@ namespace OpenRA.Mods.CA.Traits
 			return candidates[^1];
 		}
 
-		ActorInfo ChooseUnitToBuild(ProductionQueue queue, bool excludeLimited, bool saturated = false)
+		ActorInfo ChooseUnitToBuild(ProductionQueue queue, bool excludeLimited, bool saturated = false,
+			Dictionary<string, int> shares = null, HashSet<string> retrySkip = null)
 		{
 			var buildableThings = queue.BuildableItems();
 			if (!buildableThings.Any())
 				return null;
 
-			var unitsToBuildShares = GetUnitsToBuildForCategory(queue.Info.Type);
+			var unitsToBuildShares = shares ?? GetUnitsToBuildForCategory(queue.Info.Type);
 			if (unitsToBuildShares == null || unitsToBuildShares.Count == 0)
 				return null;
 
 			var counter = ChooseCounter(buildableThings.Where(b => unitsToBuildShares.ContainsKey(b.Name) &&
-				(!excludeLimited || Info.UnitLimits == null || !Info.UnitLimits.ContainsKey(b.Name))));
+				(!excludeLimited || Info.UnitLimits == null || !Info.UnitLimits.ContainsKey(b.Name)) &&
+				(retrySkip == null || !retrySkip.Contains(b.Name))));
 			if (counter != null)
 				return counter;
 
-			var deficit = ChooseRoleDeficit(buildableThings, unitsToBuildShares, excludeLimited);
+			var deficit = ChooseRoleDeficit(buildableThings, unitsToBuildShares, excludeLimited, retrySkip);
 			if (deficit != null)
 				return deficit;
 
@@ -923,11 +1144,12 @@ namespace OpenRA.Mods.CA.Traits
 				.Select(a => a.Info.Name).ToList();
 
 			foreach (var unit in unitsToBuildShares.OrderBy(kv => kv.Key).Shuffle(BotRng.For(player, nameof(UnitBuilderBotModuleCA))))
-				if (buildableThings.Any(b => b.Name == unit.Key))
-					if (!excludeLimited || Info.UnitLimits == null || !Info.UnitLimits.ContainsKey(unit.Key))
-						if (myUnits.Count(a => a == unit.Key) * 100 < ShareFor(unit.Key, unit.Value) * myUnits.Count)
-							if (CanBuildMoreOfAircraft(world.Map.Rules.Actors[unit.Key]))
-								return world.Map.Rules.Actors[unit.Key];
+				if (retrySkip == null || !retrySkip.Contains(unit.Key))
+					if (buildableThings.Any(b => b.Name == unit.Key))
+						if (!excludeLimited || Info.UnitLimits == null || !Info.UnitLimits.ContainsKey(unit.Key))
+							if (myUnits.Count(a => a == unit.Key) * 100 < ShareFor(unit.Key, unit.Value) * myUnits.Count)
+								if (CanBuildMoreOfAircraft(world.Map.Rules.Actors[unit.Key]))
+									return world.Map.Rules.Actors[unit.Key];
 
 			// BV_m13_liveness: with a saturated bank the share test alone must not idle the queue —
 			// one deterministic (no extra RNG) retry that skips only the proportional-share check.
@@ -937,6 +1159,7 @@ namespace OpenRA.Mods.CA.Traits
 					unitsToBuildShares.OrderBy(kv => kv.Key).Select(kv => kv.Key),
 					name => buildableThings.Any(b => b.Name == name),
 					name => (!excludeLimited || Info.UnitLimits == null || !Info.UnitLimits.ContainsKey(name))
+						&& (retrySkip == null || !retrySkip.Contains(name))
 						&& ShouldBuild(name, false, queue.Info.Type)
 						&& CanBuildMoreOfAircraft(world.Map.Rules.Actors[name]));
 
@@ -960,7 +1183,8 @@ namespace OpenRA.Mods.CA.Traits
 		// does not name get RoleMixRoleFloorPct whenever this queue can serve them.
 		// The provider resolves lazily: BotUnitRoles is a genericbot-gated
 		// ConditionalTrait whose condition settles after Created.
-		ActorInfo ChooseRoleDeficit(IEnumerable<ActorInfo> buildableThings, Dictionary<string, int> unitsToBuildShares, bool excludeLimited)
+		ActorInfo ChooseRoleDeficit(IEnumerable<ActorInfo> buildableThings, Dictionary<string, int> unitsToBuildShares, bool excludeLimited,
+			HashSet<string> retrySkip = null)
 		{
 			var manager = player.PlayerActor.TraitsImplementing<SquadManagerBotModuleCA>().FirstEnabledTraitOrDefault();
 			var mix = manager?.Info.UseRoleMix == true ? manager.Info.RoleMix : null;
@@ -1004,6 +1228,7 @@ namespace OpenRA.Mods.CA.Traits
 				var options = buildableThings.Where(b => members.Contains(b.Name) &&
 					unitsToBuildShares.ContainsKey(b.Name) &&
 					(!excludeLimited || Info.UnitLimits == null || !Info.UnitLimits.ContainsKey(b.Name)) &&
+					(retrySkip == null || !retrySkip.Contains(b.Name)) &&
 					ShouldBuild(b.Name, false) && CanBuildMoreOfAircraft(b)).ToList();
 
 				if (options.Count == 0)
@@ -1239,7 +1464,11 @@ namespace OpenRA.Mods.CA.Traits
 			return CanBuildMoreOfAircraft(actorInfo);
 		}
 
-		bool CanBuildMoreOfAircraft(ActorInfo actorInfo)
+		bool CanBuildMoreOfAircraft(ActorInfo actorInfo) => CanBuildMoreOfAircraft(actorInfo, 0);
+
+		// U1: pendingDelta = same-class aircraft emitted earlier in this decision batch —
+		// an issued StartProduction has not reached AllQueued yet, so it counts here.
+		bool CanBuildMoreOfAircraft(ActorInfo actorInfo, int pendingDelta)
 		{
 			var attackAircraftInfo = actorInfo.TraitInfoOrDefault<AircraftInfo>();
 			if (attackAircraftInfo == null)
@@ -1302,7 +1531,7 @@ namespace OpenRA.Mods.CA.Traits
 					currentCount += queued.Count;
 			}
 
-			return currentCount < limit;
+			return currentCount + pendingDelta < limit;
 		}
 
 		// Names of aircraft sitting in production queues: our own queues, plus allied queues unless `ownOnly`
@@ -1351,6 +1580,15 @@ namespace OpenRA.Mods.CA.Traits
 				new("ReservePaidEssentialCost", FieldSaver.FormatValue(mobileReserve.PaidEssentialCost)),
 				new("CompositionLastUsed", "", compositionLastUsedTickById
 					.Select(kvp => new MiniYamlNode(kvp.Key, FieldSaver.FormatValue(kvp.Value)))
+					.ToList()),
+
+				// U1: per-category fair-service cursor — actorID|queueType of the last examined
+				// producer. A cursor key that no longer matches a live queue resumes at the
+				// stable first key (ResumeIndex), never at an arbitrary position; an actor ID
+				// rebound to a different queue type fails the match the same way.
+				new("ServiceCursors", "", serviceCursorByCategory
+					.OrderBy(kvp => kvp.Key, StringComparer.Ordinal)
+					.Select(kvp => new MiniYamlNode(kvp.Key, kvp.Value))
 					.ToList())
 			}.Concat(counters.SaveNodes()).ToList();
 		}
@@ -1384,6 +1622,14 @@ namespace OpenRA.Mods.CA.Traits
 				compositionLastUsedTickById.Clear();
 				foreach (var n in compositionLastUsedNode.Value.Nodes)
 					compositionLastUsedTickById[n.Key] = FieldLoader.GetValue<int>("CompositionLastUsed", n.Value.Value);
+			}
+
+			var cursorsNode = data.NodeWithKeyOrDefault("ServiceCursors");
+			if (cursorsNode != null)
+			{
+				serviceCursorByCategory.Clear();
+				foreach (var n in cursorsNode.Value.Nodes)
+					serviceCursorByCategory[n.Key] = n.Value.Value;
 			}
 
 			counters.Load(data);
