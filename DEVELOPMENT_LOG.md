@@ -1,3 +1,50 @@
+# 2026-10-17 — Devin: CORE-PRODUCTION-ECONOMY-REPAIRS (01a14504) — U1 fair producer service, first slice
+
+*Devin-Developer.* Controlled claim handoff executed after Reviewer `6576989D`
+confirmed the P1a chain (`ec7354237`) had no blocker. Isolated worktree
+`C:\cameo-wt\devin-econ-u1`, branch `devin/01a14504-u1-fair-service`, base
+`a5513de90` (verified: no commit between base and master `514138b27` touched
+`BotModules/` or the test project — zero fileset conflict). Engine pin
+`723f50f9b`. Fleet claim record:
+`CLAIM_2026-10-17_econ_u1_fair_service_devin.md`.
+
+**Scope.** Finite U1 feasible/fair producer service behind a new
+`FairProducerService` field — default off, `SwitchCondition`-gated; flag off
+keeps the legacy paths byte-identical (same first-free-queue pick, same
+head-pop of external requests, same pick/exclude semantics).
+
+**What the armed path changes.** (1) Producer service rotates over stable
+`actorID|queueType` keys resuming after the last *examined* producer — a
+producer the offer budget never reached stays in rotation, and a destroyed or
+save-rebound cursor key resumes at the documented first key instead of
+starving later producers. (2) A slot fills only from candidates admissible
+before the pick; a rejected name leaves the retry set alone (the legacy
+exclude-everything-limited retry is gone under the flag), and an active
+composition with no feasible unit falls back to the declared baseline shares
+once per queue before reverting — §3.3/P4. (3) Ephemeral in-pass reservations:
+emitted orders count against free slots, the reserved bank (including the
+mid-fill saturation re-check), `UnitLimits` headroom and the aircraft cap —
+live counts cannot see an order until it lands, so one unit of headroom no
+longer admits several invisible orders. (4) External requests: capability and
+a free slot are matched together, every pending request is examined once per
+visit in order, emitted or permanently-invalid requests leave, and blocked
+ones survive — the bounded §4 subset; durable U2 lifecycle state remains out
+of scope.
+
+**Files.** `UnitBuilderBotModuleCA.cs` (+290); new world-free helper
+`BotModuleLogic/UnitProducerServiceCA.cs`; new fixture
+`OpenRA.Mods.Cameo.Test/UnitProducerServiceTest.cs` (8 tests: rotation resume,
+destroyed/rebound cursor, slot/bank reservation, offer budget). Landed as
+`1db49c059`.
+
+**Receipts.** Build `OpenRA.Mods.CA` Release clean (0/0). Focused 8/8;
+adjacent `ProductionSaturationTest|DerivedUnitWeightsTest|
+UnitSpendReservationTest|CapturerLimitTest|BotRngTest|AirLimitsTest` 52/52 —
+60 total. No runtime/launch (no DevOps grant; SAC blocks local binaries), no
+merge/push. P4 remainder (combat-infantry floor/replenishment beyond the
+baseline fallback) and U2 lifecycle are separate increments.
+
+
 # 2026-10-14 — Devin: SENTINEL-RUNNER-POLICY (01a13a15) — post-freeze defect repair, fixture binding
 
 *Devin-Developer.* Self-inflicted defect found while preparing the qualification
