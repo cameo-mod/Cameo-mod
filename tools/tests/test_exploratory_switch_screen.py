@@ -1,16 +1,19 @@
 from __future__ import annotations
 
 import pytest
+from tools.ai import exploratory_switch_screen as screen
 
 from tools.ai.exploratory_switch_screen import (
 	BJ_DISPOSITION_SHA256,
 	CANDIDATES,
 	MAPS,
 	SEEDS,
+	SOURCE_FILE_SHA256,
 	_expected_groups,
 	_condition_implies_genericbot,
+	_file_digests,
 	_validate_source_gates,
-	materialize_in_memory,
+	materialize_in_memory as _pinned_materialize_in_memory,
 	plan_cells,
 	validate_plan_cells,
 	validate_plan_record,
@@ -49,6 +52,13 @@ AI_TEXT = """Player:
 
 def fixture_files(ai_text: str = AI_TEXT) -> dict[str, str]:
 	return {AI_PATH: ai_text, FRANSBOT_PATH: "", FRANSBOT_LISTS_PATH: ""}
+
+
+def materialize_in_memory(source_files, groups, skip, candidate, bj_receipt_sha256):
+	"""Exercise the public API with isolated fixture bytes in focused unit tests."""
+	with pytest.MonkeyPatch.context() as patch:
+		patch.setattr(screen, "SOURCE_FILE_SHA256", _file_digests(source_files))
+		return _pinned_materialize_in_memory(source_files, groups, skip, candidate, bj_receipt_sha256)
 
 
 def test_plan_is_24_map_major_cells_with_seed_reuse_and_rotation():
@@ -104,6 +114,28 @@ def test_mandatory_plan_validator_rejects_inventory_and_cross_field_drift():
 	wrong_seed[0]["seed"] += 1
 	with pytest.raises(ValueError, match="exact ordered 24-cell inventory"):
 		validate_plan_cells(wrong_seed, SEEDS, map_hashes)
+	wrong_map_key = [dict(row) for row in cells]
+	wrong_map_key[0]["map_key"] = "satans_clutch"
+	with pytest.raises(ValueError, match="exact ordered 24-cell inventory"):
+		validate_plan_cells(wrong_map_key, SEEDS, map_hashes)
+	wrong_candidate = [dict(row) for row in cells]
+	wrong_candidate[0]["candidate"] = "BJ_squad_hysteresis"
+	with pytest.raises(ValueError, match="exact ordered 24-cell inventory"):
+		validate_plan_cells(wrong_candidate, SEEDS, map_hashes)
+	wrong_teams = [dict(row) for row in cells]
+	wrong_teams[0]["factions_per_team"] = ["td_nod"]
+	with pytest.raises(ValueError, match="exact ordered 24-cell inventory"):
+		validate_plan_cells(wrong_teams, SEEDS, map_hashes)
+	wrong_sides = [dict(row) for row in cells]
+	wrong_sides[0]["control_side"] = "B"
+	with pytest.raises(ValueError, match="exact ordered 24-cell inventory"):
+		validate_plan_cells(wrong_sides, SEEDS, map_hashes)
+	wrong_rotation = [dict(row) for row in cells]
+	wrong_rotation[0]["candidate_order_on_map"] = list(reversed(wrong_rotation[0]["candidate_order_on_map"]))
+	with pytest.raises(ValueError, match="exact ordered 24-cell inventory"):
+		validate_plan_cells(wrong_rotation, SEEDS, map_hashes)
+	with pytest.raises(ValueError, match="exact ordered 24-cell inventory"):
+		validate_plan_cells(list(reversed(cells)), SEEDS, map_hashes)
 	wrong_type = [dict(row) for row in cells]
 	wrong_type[0]["team_size"] = True
 	with pytest.raises(ValueError, match="exact ordered 24-cell inventory"):
@@ -172,6 +204,21 @@ def test_duplicate_candidate_field_and_changed_generic_gate_are_refused():
 	wrong_gate = AI_TEXT.replace("\t\tSwitchCondition: genericbot", "\t\tSwitchCondition: classicbot", 1)
 	with pytest.raises(ValueError, match="genericbot"):
 		materialize_in_memory(fixture_files(wrong_gate), GROUPS, SKIP, "BZ_production_scaling", BJ_DISPOSITION_SHA256)
+
+
+def test_public_materializer_requires_exact_reviewed_source_hashes():
+	from pathlib import Path
+
+	actual = _file_digests(screen.load_ai_texts(Path(__file__).resolve().parents[2]))
+	assert actual == SOURCE_FILE_SHA256
+	with pytest.raises(ValueError, match="source AI SHA-256 mismatch"):
+		_pinned_materialize_in_memory(fixture_files(), GROUPS, SKIP, "BY_crawl_safety", BJ_DISPOSITION_SHA256)
+
+
+def test_duplicate_root_is_refused_as_structural_ambiguity():
+	ambiguous = AI_TEXT + "\nPlayer:\n\tUnrelatedModule:\n\t\tEnabled: true\n"
+	with pytest.raises(ValueError, match="duplicate YAML key creates structural ambiguity"):
+		materialize_in_memory(fixture_files(ambiguous), GROUPS, SKIP, "BY_crawl_safety", BJ_DISPOSITION_SHA256)
 
 
 def test_requirescondition_gate_uses_implication_not_substring():

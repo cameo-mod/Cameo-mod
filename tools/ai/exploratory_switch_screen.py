@@ -31,6 +31,21 @@ EXPECTED_AI_FILES = frozenset({
 	"mods/cameo/ai/fransbot.yaml",
 	"mods/cameo/ai/fransbot_lists.yaml",
 })
+# Exact reviewed inputs at the post-refinery base. The public materializer
+# refuses caller-supplied alternate bytes; a source change needs a new review
+# and a new pin rather than a self-derived expected digest.
+SOURCE_FILE_SHA256 = {
+	"mods/cameo/ai/ai.yaml": "5aec3fbe81b0d34124af6468b6c169266e4d0762991a0354ee680c73402c183a",
+	"mods/cameo/ai/fransbot.yaml": "c8c006f1e9b85a38bbf6a2ce5825134c32cdfc3cea4251aad83fa42133663013",
+	"mods/cameo/ai/fransbot_lists.yaml": "eb13f031d0594d98f2ca3df2ec427d7b3d785489dc1fea499b102b0685e6f6b6",
+}
+# These shared owner-module conditions are intentionally broader than the
+# generic owner. They are admitted only with the exact pinned source bytes,
+# exact @generic instance, and independent generic-only SwitchCondition.
+EXACT_SHARED_OWNER_GATES = {
+	("mods/cameo/ai/ai.yaml", "BaseBuilderBotModuleCA@generic", "genericbot || classicbot", "genericbot"),
+	("mods/cameo/ai/ai.yaml", "UnitBuilderBotModuleCA@generic", "genericbot || classicbot", "genericbot"),
+}
 SEEDS = {
 	"nuclear_winter": 2026101601,
 	"satans_clutch": 2026101602,
@@ -275,7 +290,11 @@ def _apply_named_instance(text: str, full_key: str, fields: dict[str, str]) -> s
 
 
 def _walk(nodes: list[miniyaml.Node], prefix: tuple[str, ...] = ()):
+	seen = set()
 	for node in nodes:
+		if node.key in seen:
+			raise ValueError(f"duplicate YAML key creates structural ambiguity at {'/'.join(prefix + (node.key,))}")
+		seen.add(node.key)
 		path = prefix + (node.key,)
 		yield path, node
 		yield from _walk(node.children, path)
@@ -331,6 +350,12 @@ def _raw_digest(files: Mapping[str, str]) -> str:
 def _file_digests(files: Mapping[str, str]) -> dict[str, str]:
 	return {filename: hashlib.sha256(content.encode("utf-8")).hexdigest()
 		for filename, content in sorted(files.items())}
+
+
+def _validate_source_identity(source: Mapping[str, str]) -> None:
+	actual = _file_digests(source)
+	if actual != SOURCE_FILE_SHA256:
+		raise ValueError(f"source AI SHA-256 mismatch: expected={SOURCE_FILE_SHA256}, actual={actual}")
 
 
 def _semantic_deltas(control: Mapping[str, str], treatment: Mapping[str, str], groups: dict, candidate: str) -> None:
@@ -454,10 +479,11 @@ def _validate_source_gates(files: Mapping[str, str], groups: dict) -> None:
 	for trait in ("BaseBuilderBotModuleCA", "UnitBuilderBotModuleCA"):
 		for filename, instance in found[trait]:
 			condition = instance.get("RequiresCondition")
-			# These two generic-owner modules have a deliberately shared
-			# RequiresCondition in the current source. SwitchCondition is the
-			# independent generic-only runtime gate for that exact reviewed form.
-			if condition == "genericbot || classicbot" and instance.key.endswith("@generic"):
+			# These reviewed shared-owner forms do not logically imply genericbot.
+			# Public materialization also binds their exact source bytes above; do
+			# not broaden this exception by substring, suffix, or condition alone.
+			exception = (filename, instance.key, condition, instance.get("SwitchCondition"))
+			if exception in EXACT_SHARED_OWNER_GATES:
 				continue
 			if not condition or not _condition_implies_genericbot(condition):
 				raise ValueError(f"source {trait} RequiresCondition must imply genericbot (or use the exact reviewed generic-owner form) at {filename}:{instance.line}")
@@ -558,7 +584,7 @@ def materialize_in_memory(source_files: Mapping[str, str], groups: dict, skip: l
 						bj_receipt_sha256: str) -> ArmPayloads:
 	"""Create control/treatment text in memory and prove the sole intended delta.
 
-	No path is written. Callers receive mappings that this API cannot persist.
+	Only exact independently reviewed source bytes are accepted. No path is written.
 	Inheritance and ruleset resolution are not performed: the returned record
 	keeps runtime_inheritance_resolution=UNRESOLVED_PRECONDITION and
 	effective_runtime_config_proven=False. This is a textual normalization
@@ -568,6 +594,7 @@ def materialize_in_memory(source_files: Mapping[str, str], groups: dict, skip: l
 		raise ValueError("unknown exploratory candidate")
 	_validate_registry(groups, skip, bj_receipt_sha256)
 	source = _validate_source_files(source_files)
+	_validate_source_identity(source)
 	_validate_source_gates(source, groups)
 	control = dict(source)
 	treatment = dict(source)
