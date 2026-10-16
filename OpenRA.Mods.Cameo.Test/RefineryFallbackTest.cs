@@ -913,5 +913,36 @@ namespace OpenRA.Mods.Cameo.Test
 				Is.EqualTo(DemandCancelDisposition.AmbiguousHold),
 				"the only entry on a disabled queue is unreachable by the order");
 		}
+
+		[Test]
+		public void CancelOrderTargetsOnlyTheIntendedInstance()
+		{
+			// A966ED70 (E3): the manager arms intend currentBuilding, not the engine's last —
+			// the gate is CancelOrderTargetsIntended(sameNameOnEnabled, engineResolvesToIntended).
+			Assert.That(
+				BaseBuilderQueueEvalCA.CancelOrderTargetsIntended(1, true),
+				Is.True, "unique enabled entry resolving to the intended instance settles");
+
+			// Head-A/tail-B tautology regression: the live last resolves to B while the
+			// caller intends A — the order must NOT settle B.
+			Assert.That(
+				BaseBuilderQueueEvalCA.CancelOrderTargetsIntended(2, false),
+				Is.False, "head-A/tail-B twin: engine resolves B, intent was A — hold");
+
+			// Enabled sibling-queue sibling: the order dispatches to all enabled queues,
+			// so a second same-name anywhere enabled makes the target ambiguous.
+			Assert.That(
+				BaseBuilderQueueEvalCA.CancelOrderTargetsIntended(2, true),
+				Is.False, "sibling on another enabled queue: one order would eat both");
+
+			// Single enabled entry that is not the intended instance — wrong-object hold.
+			Assert.That(
+				BaseBuilderQueueEvalCA.CancelOrderTargetsIntended(1, false),
+				Is.False, "a foreign sole entry never stands in for the intended instance");
+
+			Assert.That(
+				BaseBuilderQueueEvalCA.CancelOrderTargetsIntended(0, false),
+				Is.False, "nothing to resolve — the order would no-op");
+		}
 	}
 }

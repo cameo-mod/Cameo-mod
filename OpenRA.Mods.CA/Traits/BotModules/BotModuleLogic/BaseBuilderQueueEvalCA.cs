@@ -461,6 +461,19 @@ namespace OpenRA.Mods.CA.Traits
 		}
 
 		/// <summary>
+		/// A966ED70 (E3): an actor-level CancelProduction order dispatches to EVERY enabled
+		/// ProductionQueue trait on the producer and removes the last same-name entry on
+		/// each — so the order provably settles the caller-intended instance only when the
+		/// producer's enabled queues hold exactly one same-name entry AND the live
+		/// last-same-name resolution on the issuing queue is that instance
+		/// (<paramref name="engineResolvesToIntended"/>). A head-A/tail-B same-name pair or
+		/// a sibling entry on another enabled queue fails closed — the order would settle a
+		/// different instance than intended. World-free: the caller counts and resolves.
+		/// </summary>
+		public static bool CancelOrderTargetsIntended(int sameNameOnEnabledQueues, bool engineResolvesToIntended) =>
+			sameNameOnEnabledQueues == 1 && engineResolvesToIntended;
+
+		/// <summary>
 		/// FIX-RA-REFINERY: the saturated-placement recovery arm owns a tick whenever the
 		/// expansion-nudge arm cannot act — no expansion modules, no recorded failing centre,
 		/// or a relocation hold in progress. Gated on module count alone those cases latched

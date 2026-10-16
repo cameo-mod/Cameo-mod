@@ -546,18 +546,24 @@ namespace OpenRA.Mods.CA.Traits
 				null, null, null, null);
 		}
 
-		// 6722A484/BF5B8247(c)/E3: a protected cancel proceeds only when the certificate
-		// re-verifies against the live world at the cancel point AND the engine's resolved
-		// target (the LAST same-name entry) is the identical instance we intend to settle —
-		// a name-collision holds without settlement.
-		bool CertificateAuthorizes(ProductionQueue queue, string itemName, ProductionItem intended, ProductionItem[] snapshot = null)
+		// 6722A484/BF5B8247(c)/A966ED70(E3): a protected cancel proceeds only when the live
+		// queue state proves the order will settle the caller-intended instance AND the
+		// certificate re-verifies against the live world at the cancel point. The order
+		// dispatches to EVERY enabled queue on the producer and removes the LAST same-name
+		// on each, so intent requires a unique same-name entry across enabled queues whose
+		// live resolution is `intended` — a head-A/tail-B pair or enabled sibling-queue
+		// entry holds without settlement.
+		bool CertificateAuthorizes(ProductionQueue queue, string itemName, ProductionItem intended)
 		{
-			var law = baseBuilder.RefineryLawProvider();
-			if (law == null || !law.RefineryFallbackCertificateCurrent(queue.Actor, itemName))
+			var enabledSameName = queue.Actor.TraitsImplementing<ProductionQueue>()
+				.Where(q => q.Enabled)
+				.Sum(q => q.AllQueued().Count(i => i.Item == itemName));
+			var resolved = queue.AllQueued().LastOrDefault(i => i.Item == itemName);
+			if (!BaseBuilderQueueEvalCA.CancelOrderTargetsIntended(enabledSameName, ReferenceEquals(resolved, intended)))
 				return false;
 
-			var target = (snapshot ?? queue.AllQueued().ToArray()).LastOrDefault(i => i.Item == itemName);
-			return ReferenceEquals(target, intended);
+			var law = baseBuilder.RefineryLawProvider();
+			return law != null && law.RefineryFallbackCertificateCurrent(queue.Actor, itemName);
 		}
 
 		// Scale targets (DESIGN 19.10): an enabled provider's production target replaces BotLimits.ProductionTypeLimit
@@ -625,10 +631,10 @@ namespace OpenRA.Mods.CA.Traits
 									// queued unless a live exhaustion certificate authorizes the settle.
 									if (PlacementProtectionVerdict(item.Item) != PlacementCancelVerdict.Allow)
 									{
-										// E3: the engine removes the LAST same-name entry — the
-										// settle may only take the identical instance this pass
-										// intends; a name-collision holds without settlement.
-										if (!CertificateAuthorizes(queue, item.Item, item, latchSnapshot))
+										// A966ED70 (E3): the order resolves the LAST same-name on
+										// every enabled queue — only a unique enabled entry whose
+										// live resolution is this snapshot instance may settle.
+										if (!CertificateAuthorizes(queue, item.Item, item))
 										{
 											EmitQueueTransition(queue, stuckConyard, item, item.Item, QueueCategoryOf(item.Item),
 												BotQueueTransitionKind.Held, BotQueueTransitionReason.ProtectionHold);
@@ -1008,13 +1014,13 @@ namespace OpenRA.Mods.CA.Traits
 						// proven cheap-fast proceeds; protected/unclassifiable items need a
 						// live certificate for the settled instance (E3) or they hold and
 						// keep trying to place.
-						var cancelTarget = queue.AllQueued().LastOrDefault(i => i.Item == currentBuilding.Item) ?? currentBuilding;
 						if (PlacementProtectionVerdict(currentBuilding.Item) == PlacementCancelVerdict.Allow
-							|| CertificateAuthorizes(queue, currentBuilding.Item, cancelTarget))
+							|| CertificateAuthorizes(queue, currentBuilding.Item, currentBuilding))
 						{
-							// CancelProduction removes the LAST same-name item — bind that
-							// instance, not the head, so the removal resolves to this request.
-							NotePendingTerminal(queue, cancelTarget, currentBuilding.Item, BotQueueTransitionKind.Cancelled,
+							// A966ED70 (E3): the order settles currentBuilding only when it is
+							// the unique enabled same-name entry — a head/tail twin or enabled
+							// sibling-queue entry holds instead of settling the wrong instance.
+							NotePendingTerminal(queue, currentBuilding, currentBuilding.Item, BotQueueTransitionKind.Cancelled,
 								BotQueueTransitionReason.LimitReached, BotQueueCancellationClass.Production);
 							bot.QueueOrder(Order.CancelProduction(queue.Actor, currentBuilding.Item, 1));
 						}
@@ -1182,11 +1188,10 @@ namespace OpenRA.Mods.CA.Traits
 							// certificate re-verifies the exact atom sequence against the live
 							// world at the cancel point; any drift (or a no-provider scan that
 							// could never certify) fails closed to the deferred hold.
-							var cancelTarget = queue.AllQueued().LastOrDefault(i => i.Item == currentBuilding.Item) ?? currentBuilding;
-							if (CertificateAuthorizes(queue, currentBuilding.Item, cancelTarget))
+							if (CertificateAuthorizes(queue, currentBuilding.Item, currentBuilding))
 							{
 								AIUtils.BotDebug($"{player} cancels {currentBuilding.Item}: refinery domain exhausted at tick {world.WorldTick}");
-								NotePendingTerminal(queue, cancelTarget, currentBuilding.Item, BotQueueTransitionKind.Cancelled,
+								NotePendingTerminal(queue, currentBuilding, currentBuilding.Item, BotQueueTransitionKind.Cancelled,
 									BotQueueTransitionReason.RefineryDomainExhausted, BotQueueCancellationClass.Production);
 								bot.QueueOrder(Order.CancelProduction(queue.Actor, currentBuilding.Item, 1));
 								EmitQueueTransition(queue, queue.Actor, currentBuilding, currentBuilding.Item, QueueCategoryOf(currentBuilding.Item),
@@ -1221,11 +1226,10 @@ namespace OpenRA.Mods.CA.Traits
 						// proven cheap-fast proceeds; a protected or unclassifiable item needs a
 						// live exhaustion certificate or it holds (the latch snapshot and retry
 						// timer still arm, so recovery probes keep running while it waits).
-						var cancelTarget = queue.AllQueued().LastOrDefault(i => i.Item == currentBuilding.Item) ?? currentBuilding;
 						if (PlacementProtectionVerdict(currentBuilding.Item) == PlacementCancelVerdict.Allow
-							|| CertificateAuthorizes(queue, currentBuilding.Item, cancelTarget))
+							|| CertificateAuthorizes(queue, currentBuilding.Item, currentBuilding))
 						{
-							NotePendingTerminal(queue, cancelTarget, currentBuilding.Item, BotQueueTransitionKind.Cancelled,
+							NotePendingTerminal(queue, currentBuilding, currentBuilding.Item, BotQueueTransitionKind.Cancelled,
 								BotQueueTransitionReason.SaturationLatch, BotQueueCancellationClass.Production);
 							bot.QueueOrder(Order.CancelProduction(queue.Actor, currentBuilding.Item, 1));
 							EmitQueueTransition(queue, queue.Actor, currentBuilding, currentBuilding.Item, QueueCategoryOf(currentBuilding.Item),
