@@ -35,10 +35,13 @@ namespace OpenRA.Mods.Cameo.Test
 	{
 		const string Item = "td_gdi_tiberiumrefinery";
 
-		sealed class RecordingBot : IBot
+		public sealed class RecordingBot : IBot
 		{
 			public readonly List<Order> Orders = [];
+			public void Activate(Player p) { }
 			public void QueueOrder(Order order) => Orders.Add(order);
+			public IBotInfo Info => null;
+			public Player Player => null;
 		}
 
 		public class SpatialIndex : DispatchProxy
@@ -83,6 +86,14 @@ namespace OpenRA.Mods.Cameo.Test
 			{
 				Log.AddChannel("debug", null);
 
+				// The serviced held-cancel tracker logs through FransBotLog.BotDebug ->
+				// AIUtils.BotDebug -> Game.Settings.Debug.BotDebug. Provide real default
+				// settings (missing file -> built-in sections) so the service path can
+				// run inside the bare harness; BotDebug stays false so nothing writes.
+				Game.Settings = new Settings(
+					System.IO.Path.Combine(System.IO.Path.GetTempPath(), "cameo-guard-test-no-such-settings.yaml"),
+					Arguments.Empty);
+
 				World = (World)RuntimeHelpers.GetUninitializedObject(typeof(World));
 				var traitDictType = typeof(World).Assembly.GetType("OpenRA.TraitDictionary");
 				Set(World, "TraitDict", Activator.CreateInstance(traitDictType));
@@ -106,6 +117,12 @@ namespace OpenRA.Mods.Cameo.Test
 					[Item] = new(Item,
 						Info<BuildableInfo>(("Queue", new[] { "Building" }.ToFrozenSet())),
 						Info<ValuedInfo>(("Cost", 800))),
+					["other"] = new("other",
+						Info<BuildableInfo>(("Queue", new[] { "Building" }.ToFrozenSet())),
+						Info<ValuedInfo>(("Cost", 400))),
+					["other_item"] = new("other_item",
+						Info<BuildableInfo>(("Queue", new[] { "Building" }.ToFrozenSet())),
+						Info<ValuedInfo>(("Cost", 400))),
 				};
 
 				var rules = new Ruleset(actors, new Dictionary<string, WeaponInfo>(),
@@ -408,7 +425,7 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		// ----------------------------------------------------------------
-		// CancelPermitted evidence seam (Sol D831BBCB): the seam is
+		// CancelPermitted evidence seam (no-Allow decision per plan 4AD696C8): the seam is
 		// no-Allow/fail-closed this iteration — every classification returns
 		// false — but the positive-evidence contract holds: resolved cost/ticks
 		// come only from engine resolution, unknown/nonpositive evidence is
@@ -452,6 +469,268 @@ namespace OpenRA.Mods.Cameo.Test
 			var f = new Fixture();
 
 			Assert.That(FransPlacementCancelGuard.CancelPermitted(f.World, null, Item, null, null), Is.False);
+		}
+
+		// ----------------------------------------------------------------
+		// Serviced held-cancel tracker (review F2 corrective successor).
+		// Every held caller now transfers the EXACT queue item into a
+		// HeldQueueCancelTracker — the explicit fallback owner — and BotTick
+		// drives ServiceHeldQueueCancels over it every sweep. These fixtures
+		// exercise that real service routine end-to-end: entry retained while
+		// held, re-asked on schedule against the real guard, settled honestly
+		// when the item leaves the queue by other means (the post-placement
+		// outcome), and cleared when its queue actor dies. No imitation of the
+		// transition — this is the production code path the callers take.
+		// ----------------------------------------------------------------
+
+		static FransPlacementCancelGuard.HeldQueueCancelEntry HeldEntry(Fixture f, ProductionItem item, int nextReaskTick = 0)
+		{
+			return new FransPlacementCancelGuard.HeldQueueCancelEntry
+			{
+				Queue = f.Queue,
+				ItemName = item.Item,
+				Item = item,
+				Reason = "TestCallerHandoff",
+				HeldSinceTick = f.World.WorldTick,
+				NextReaskTick = nextReaskTick
+			};
+		}
+
+		[Test]
+		public void ServiceHeldCancels_ProtectedHold_RetainsEntryReschedulesLeavesQueueUntouched()
+		{
+			var f = new Fixture();
+			var item = f.Enqueue();
+			var tracker = new FransPlacementCancelGuard.HeldQueueCancelTracker();
+			var entry = HeldEntry(f, item);
+			tracker.Entries.Add(entry);
+
+			FransPlacementCancelGuard.ServiceHeldQueueCancels(f.World, f.Bot, f.Player, tracker, null, null);
+
+			Assert.Multiple(() =>
+			{
+				Assert.That(tracker.Entries, Has.Count.EqualTo(1), "held entry must survive the sweep — the live retry owner");
+				Assert.That(entry.ReaskCount, Is.EqualTo(1), "a due entry is re-asked against the real guard");
+				Assert.That(entry.NextReaskTick, Is.EqualTo(FransPlacementCancelGuard.HeldQueueCancelTracker.DefaultReaskIntervalTicks));
+				Assert.That(f.Bot.Orders, Is.Empty, "fail-closed seam: no cancel order may be emitted");
+				Assert.That(f.Items, Does.Contain(item), "the exact queue item stays queued");
+				Assert.That(FransPlacementCancelGuard.EngineCancelTarget(f.Queue, Item), Is.SameAs(item));
+			});
+		}
+
+		[Test]
+		public void ServiceHeldCancels_NotYetDue_DoesNotReask()
+		{
+			var f = new Fixture();
+			var item = f.Enqueue();
+			var tracker = new FransPlacementCancelGuard.HeldQueueCancelTracker();
+			var entry = HeldEntry(f, item, nextReaskTick: 1000);
+			tracker.Entries.Add(entry);
+
+			FransPlacementCancelGuard.ServiceHeldQueueCancels(f.World, f.Bot, f.Player, tracker, null, null);
+
+			Assert.Multiple(() =>
+			{
+				Assert.That(tracker.Entries, Has.Count.EqualTo(1));
+				Assert.That(entry.ReaskCount, Is.EqualTo(0), "re-asks are interval-bounded, not every sweep");
+				Assert.That(f.Bot.Orders, Is.Empty);
+				Assert.That(f.Items, Does.Contain(item));
+			});
+		}
+
+		[Test]
+		public void ServiceHeldCancels_ItemLeftQueueByOtherMeans_SettlesHonestly()
+		{
+			var f = new Fixture();
+			var item = f.Enqueue();
+			var tracker = new FransPlacementCancelGuard.HeldQueueCancelTracker();
+			tracker.Entries.Add(HeldEntry(f, item));
+
+			// The retained item left the queue by other means — a PlaceBuilding
+			// order consumed it, or it was cancelled elsewhere. The tracker must
+			// settle the entry WITHOUT recording a cancellation.
+			f.Items.Remove(item);
+
+			FransPlacementCancelGuard.ServiceHeldQueueCancels(f.World, f.Bot, f.Player, tracker, null, null);
+
+			Assert.Multiple(() =>
+			{
+				Assert.That(tracker.Entries, Is.Empty, "a departed item is resolved, not re-asked forever");
+				Assert.That(f.Bot.Orders, Is.Empty, "settling a departed item must not emit a cancel");
+			});
+		}
+
+		[Test]
+		public void ServiceHeldCancels_QueueActorGone_SettlesEntry()
+		{
+			var f = new Fixture();
+			var item = f.Enqueue();
+			var tracker = new FransPlacementCancelGuard.HeldQueueCancelTracker();
+			tracker.Entries.Add(HeldEntry(f, item));
+
+			// Queue actor (the ProductionQueue's host) is gone — a dead producer
+			// must not freeze the entry forever.
+			typeof(Actor).GetProperty("IsInWorld",
+				BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
+				.SetValue(f.PlayerActor, false);
+
+			FransPlacementCancelGuard.ServiceHeldQueueCancels(f.World, f.Bot, f.Player, tracker, null, null);
+
+			Assert.Multiple(() =>
+			{
+				Assert.That(tracker.Entries, Is.Empty, "a dead queue resolves the entry honestly");
+				Assert.That(f.Bot.Orders, Is.Empty);
+			});
+		}
+
+		[Test]
+		public void ServiceHeldCancels_AmbiguityResolves_StillProtectedUnderFailClosedSeam()
+		{
+			var f = new Fixture();
+			var reservedFirst = f.Enqueue();
+			var engineLast = f.Enqueue();
+			var tracker = new FransPlacementCancelGuard.HeldQueueCancelTracker();
+			var entry = HeldEntry(f, reservedFirst);
+			tracker.Entries.Add(entry);
+
+			// Sweep 1: intended FIRST vs engine LAST -> AmbiguousTarget hold.
+			FransPlacementCancelGuard.ServiceHeldQueueCancels(f.World, f.Bot, f.Player, tracker, null, null);
+			Assert.Multiple(() =>
+			{
+				Assert.That(tracker.Entries, Has.Count.EqualTo(1));
+				Assert.That(entry.ReaskCount, Is.EqualTo(1));
+				Assert.That(f.Bot.Orders, Is.Empty);
+			});
+
+			// The tail same-name item leaves by other means; the intended FIRST
+			// is now the unambiguous engine target. The fail-closed seam still
+			// denies the cancel — the service must NOT turn an identity-resolved
+			// retry into an unauthorized issue.
+			f.Items.Remove(engineLast);
+			entry.NextReaskTick = 0;
+
+			FransPlacementCancelGuard.ServiceHeldQueueCancels(f.World, f.Bot, f.Player, tracker, null, null);
+			Assert.Multiple(() =>
+			{
+				Assert.That(tracker.Entries, Has.Count.EqualTo(1));
+				Assert.That(entry.ReaskCount, Is.EqualTo(2));
+				Assert.That(f.Bot.Orders, Is.Empty);
+				Assert.That(f.Items, Does.Contain(reservedFirst));
+			});
+		}
+
+		[Test]
+		public void ServiceHeldCancels_PersistentHold_LogsHardBlockerOnce()
+		{
+			var f = new Fixture();
+			var item = f.Enqueue();
+			var tracker = new FransPlacementCancelGuard.HeldQueueCancelTracker();
+			var entry = HeldEntry(f, item);
+			tracker.Entries.Add(entry);
+
+			var limit = FransPlacementCancelGuard.HeldQueueCancelTracker.HardBlockerReaskLimit;
+			for (var i = 0; i < limit + 2; i++)
+			{
+				Set(f.World, "WorldTick", i * FransPlacementCancelGuard.HeldQueueCancelTracker.DefaultReaskIntervalTicks);
+				FransPlacementCancelGuard.ServiceHeldQueueCancels(f.World, f.Bot, f.Player, tracker, null, null);
+			}
+
+			Assert.Multiple(() =>
+			{
+				Assert.That(tracker.Entries, Has.Count.EqualTo(1), "a persistent hold keeps the entry — it is never dropped");
+				Assert.That(entry.ReaskCount, Is.EqualTo(limit + 2));
+				Assert.That(entry.HardBlockerLogged, Is.True, "the current hard blocker is recorded once");
+				Assert.That(f.Bot.Orders, Is.Empty);
+				Assert.That(f.Items, Does.Contain(item));
+			});
+		}
+
+		[Test]
+		public void ServiceHeldCancels_MultipleEntries_ServicedIndependently()
+		{
+			var f = new Fixture();
+			var first = f.Enqueue();
+			var second = f.Enqueue("other_item");
+			var tracker = new FransPlacementCancelGuard.HeldQueueCancelTracker();
+			var entryFirst = HeldEntry(f, first);
+			var entrySecond = HeldEntry(f, second);
+			tracker.Entries.Add(entryFirst);
+			tracker.Entries.Add(entrySecond);
+
+			// Both retained entries are serviced — the tracker is a list, so a
+			// later handoff cannot overwrite an earlier retained item.
+			FransPlacementCancelGuard.ServiceHeldQueueCancels(f.World, f.Bot, f.Player, tracker, null, null);
+			Assert.Multiple(() =>
+			{
+				Assert.That(tracker.Entries, Has.Count.EqualTo(2));
+				Assert.That(entryFirst.ReaskCount, Is.EqualTo(1));
+				Assert.That(entrySecond.ReaskCount, Is.EqualTo(1));
+			});
+
+			// One leaves the queue; the other keeps retrying on schedule.
+			f.Items.Remove(first);
+			Set(f.World, "WorldTick", FransPlacementCancelGuard.HeldQueueCancelTracker.DefaultReaskIntervalTicks);
+			FransPlacementCancelGuard.ServiceHeldQueueCancels(f.World, f.Bot, f.Player, tracker, null, null);
+			Assert.Multiple(() =>
+			{
+				Assert.That(tracker.Entries, Has.Count.EqualTo(1));
+				Assert.That(tracker.Entries[0], Is.SameAs(entrySecond));
+				Assert.That(entrySecond.ReaskCount, Is.EqualTo(2));
+				Assert.That(f.Bot.Orders, Is.Empty);
+			});
+		}
+
+		[Test]
+		public void Track_SameExactItemTwice_SingleEntry()
+		{
+			var f = new Fixture();
+			var item = f.Enqueue();
+			var tracker = new FransPlacementCancelGuard.HeldQueueCancelTracker();
+
+			// Two teardown paths can hand off the same item in overlapping sweeps;
+			// the tracker must keep exactly one intent per (queue, item).
+			var first = tracker.Track(f.Queue, Item, item, "PathA", f.World.WorldTick);
+			var second = tracker.Track(f.Queue, Item, item, "PathB", f.World.WorldTick);
+			var differentItem = tracker.Track(f.Queue, Item, f.Enqueue(), "PathC", f.World.WorldTick);
+
+			Assert.Multiple(() =>
+			{
+				Assert.That(tracker.Entries, Has.Count.EqualTo(2), "same exact item merges, a different same-name item is its own entry");
+				Assert.That(second, Is.SameAs(first));
+				Assert.That(differentItem, Is.Not.SameAs(first));
+			});
+		}
+
+		[Test]
+		public void TryIssue_SameTickDedupe_SecondAskEmitsNoSecondOrder()
+		{
+			var f = new Fixture();
+			var item = f.Enqueue();
+
+			// Order.CancelProduction removes the LAST same-name entry at dispatch —
+			// a second order for the same queue+name while the first is pending
+			// would cancel the wrong item. The guard suppresses the duplicate ask.
+			var firstIssued = FransPlacementCancelGuard.TryIssue(f.Bot, f.Queue, Item, item, true, out var firstHold);
+			var secondIssued = FransPlacementCancelGuard.TryIssue(f.Bot, f.Queue, Item, item, true, out var secondHold);
+			Assert.Multiple(() =>
+			{
+				Assert.That(firstIssued, Is.True);
+				Assert.That(secondIssued, Is.False, "same-tick re-ask is suppressed");
+				Assert.That(secondHold, Is.EqualTo(FransPlacementCancelGuard.FransCancelHold.None),
+					"suppression reports the honest settle outcome, not a hold");
+				Assert.That(f.Bot.Orders.Count, Is.EqualTo(1), "exactly one order reaches the queue");
+			});
+
+			// Next world tick: a fresh ask may issue again (the pending order has
+			// dispatched by then in the real flow, so this is not a duplicate).
+			Set(f.World, "WorldTick", 1);
+			var thirdIssued = FransPlacementCancelGuard.TryIssue(f.Bot, f.Queue, Item, item, true, out var thirdHold);
+			Assert.Multiple(() =>
+			{
+				Assert.That(thirdIssued, Is.True);
+				Assert.That(thirdHold, Is.EqualTo(FransPlacementCancelGuard.FransCancelHold.None));
+				Assert.That(f.Bot.Orders.Count, Is.EqualTo(2));
+			});
 		}
 	}
 }

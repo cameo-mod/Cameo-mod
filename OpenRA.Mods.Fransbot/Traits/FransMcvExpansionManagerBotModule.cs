@@ -1427,6 +1427,9 @@ namespace OpenRA.Mods.Common.Traits
 		bool routineExpansionStructurePlacementIssued;
 		int routineExpansionStructureOwnershipStartedTick = -1;
 		int routineExpansionStructurePlacementIssuedTick = -1;
+		// Serviced fallback owner for queue cancels the guard held: entries outlive
+		// the task/stage that created them and are retried from BotTick directly.
+		readonly FransPlacementCancelGuard.HeldQueueCancelTracker heldQueueCancels = new();
 		// Dedupe only: this signature is written by logging calls and never read by queue decisions.
 		string lastBuildingQueueHandoffDiagnostic;
 		const int RoutineExpansionStructureOwnershipTimeoutTicks = 150;
@@ -1863,12 +1866,11 @@ namespace OpenRA.Mods.Common.Traits
 			var cancelOutcome = CancelOwnedRoutineExpansionStructureIfQueued(bot, reason);
 			if (cancelOutcome == RoutineQueueCancelOutcome.Held)
 			{
-				// Deliberate exact-item handoff (review F2): teardown proceeds —
-				// deferring the abort would stall the task for as long as the guard
-				// holds — while the still-queued item keeps its ownership record, so a
-				// later routine pass or abort re-asks the guard for the same item.
+				// Deliberate exact-item handoff (review F2): the item transferred to the
+				// serviced held-cancel tracker, which re-asks the guard every interval
+				// regardless of this task's teardown — the abort does not park it.
 				FransBotLog.BotDebug(world,
-					"{0}: expansion-task abort continues while its Building-queue cancel is held ({1}); the exact queued item stays ownership-tracked for a later pass.",
+					"{0}: expansion-task abort continues while its Building-queue cancel is held ({1}); the exact queued item is now owned by the held-cancel retry tracker.",
 					player, reason);
 			}
 			AbortFirstExpansionRefineryAttempt(bot, reason, ownedSite);
@@ -2193,6 +2195,12 @@ namespace OpenRA.Mods.Common.Traits
 				return;
 
 			FlushPendingSynchronizedActions(bot);
+
+			// Service held queue cancels FIRST: entries survive stage/idle transitions
+			// and outlive the task that owned them, so the retry tracker must run on
+			// every sweep regardless of what the expansion stage machine is doing.
+			FransPlacementCancelGuard.ServiceHeldQueueCancels(world, bot, player, heldQueueCancels,
+				Info.ProtectedCancelRoleTypes, null);
 			if (baseBuilderLockToken != Actor.InvalidConditionToken)
 				openingBuildOrderService.DrainExistingProductionForExpansionLock(bot);
 
@@ -2298,7 +2306,7 @@ namespace OpenRA.Mods.Common.Traits
 				ResumeFirstExpansionRefineryAfterInfrastructure("the temporary coastal staging FACT was lost");
 				if (CancelOwnedRoutineExpansionStructureIfQueued(bot, "coastal staging FACT loss") == RoutineQueueCancelOutcome.Held)
 					FransBotLog.BotDebug(world,
-						"{0}: coastal staging FACT loss teardown continues while its Building-queue cancel is held; the exact queued item stays ownership-tracked for a later pass.",
+						"{0}: coastal staging FACT loss teardown continues while its Building-queue cancel is held; the exact queued item is now owned by the held-cancel retry tracker.",
 						player);
 				activeConyard = null;
 				coastalStagingNavalNoProgressSinceTick = -1;
@@ -2317,7 +2325,7 @@ namespace OpenRA.Mods.Common.Traits
 					MarkExpansionAreaFailed(lostField.Value, "routine expansion FACT destroyed before outpost completion");
 				if (CancelOwnedRoutineExpansionStructureIfQueued(bot, "routine expansion FACT loss") == RoutineQueueCancelOutcome.Held)
 					FransBotLog.BotDebug(world,
-						"{0}: routine FACT-loss teardown continues while its Building-queue cancel is held; the exact queued item stays ownership-tracked for a later pass.",
+						"{0}: routine FACT-loss teardown continues while its Building-queue cancel is held; the exact queued item is now owned by the held-cancel retry tracker.",
 						player);
 				AbortFirstExpansionRefineryAttempt(bot, "routine expansion FACT loss", lostField);
 				FransBotLog.BotDebug(world,
@@ -9682,14 +9690,20 @@ namespace OpenRA.Mods.Common.Traits
 					// This exact completed naval item cannot be placed from the current buildable area.
 					// Cancel it so it cannot hostage Building production; the bounded coastal watchdog
 					// will repack/retry another staging cell if no real producer progress follows.
-					if (FransPlacementCancelGuard.TryIssue(bot, queue, current.Item, current,
-							FransPlacementCancelGuard.CancelPermitted(world, queue, current.Item,
-								Info.ProtectedCancelRoleTypes, null),
-							out var hold) || hold == FransPlacementCancelGuard.FransCancelHold.None)
+					var noShoreCancelIssued = FransPlacementCancelGuard.TryIssue(bot, queue, current.Item, current,
+						FransPlacementCancelGuard.CancelPermitted(world, queue, current.Item,
+							Info.ProtectedCancelRoleTypes, null),
+						out var hold);
+					if (noShoreCancelIssued || hold == FransPlacementCancelGuard.FransCancelHold.None)
 					{
 						ResetLandingCraftProducerPlacementWatchdog();
 						ReleaseBaseBuilderLock();
-						FransBotLog.BotDebug(world, "{0}: NAVAL SUPPORT completed naval producer {1} has no legal shoreline placement from the current buildable area; cancelling that exact queue item and counting this pass as no progress.",
+						// Issued vs already-absent settle is labelled honestly (review R1): an
+						// absent engine target left the queue by other means, nothing was cancelled.
+						FransBotLog.BotDebug(world,
+							noShoreCancelIssued
+								? "{0}: NAVAL SUPPORT completed naval producer {1} has no legal shoreline placement from the current buildable area; cancelling that exact queue item and counting this pass as no progress."
+								: "{0}: NAVAL SUPPORT completed naval producer {1} already left the queue or its cancel was already ordered this tick; watchdog reset counts this pass as no progress.",
 							player, current.Item);
 					}
 					else
@@ -9715,14 +9729,19 @@ namespace OpenRA.Mods.Common.Traits
 						FransBotLog.BotDebug(world,
 							"{0}: completed naval producer {1} on Building queue {2} failed physical placement confirmation {3} time(s); cancelling the stale READY item so naval support can replan instead of deadlocking the shared queue.",
 							player, current.Item, queue.Actor.ActorID, landingCraftProducerPlacementRetries);
-						if (FransPlacementCancelGuard.TryIssue(bot, queue, current.Item, current,
-								FransPlacementCancelGuard.CancelPermitted(world, queue, current.Item,
-									Info.ProtectedCancelRoleTypes, null),
-								out var hold) || hold == FransPlacementCancelGuard.FransCancelHold.None)
+						var staleNavalCancelIssued = FransPlacementCancelGuard.TryIssue(bot, queue, current.Item, current,
+							FransPlacementCancelGuard.CancelPermitted(world, queue, current.Item,
+								Info.ProtectedCancelRoleTypes, null),
+							out var hold);
+						if (staleNavalCancelIssued || hold == FransPlacementCancelGuard.FransCancelHold.None)
 						{
 							ResetLandingCraftProducerPlacementWatchdog();
 							InvalidateLandingCraftProducerLocationCache();
 							ReleaseBaseBuilderLock();
+							if (!staleNavalCancelIssued)
+								FransBotLog.BotDebug(world,
+									"{0}: stale READY naval producer {1} already left the queue or its cancel was already ordered this tick; watchdog state settled without a duplicate cancellation record.",
+									player, current.Item);
 						}
 						else
 						{
@@ -10191,21 +10210,26 @@ namespace OpenRA.Mods.Common.Traits
 			// This survives later FACT repacks, task=None/Idle and queue cancellation/rebuilds.
 			var queue = FindReservedFirstExpansionRefineryQueue(refineryType);
 			var reserved = queue?.AllQueued().FirstOrDefault(item => item.Item == refineryType);
+			var reservedCancelHeld = false;
 			if (firstExpansionRefineryReservationActive && queue != null && reserved != null)
 			{
 				// The engine removes the LAST same-name entry; the reservation binds the
 				// FIRST. Issue only when they are the same item, and only when the shared
-				// protection policy permits. On hold, keep every reservation flag so the
-				// reserve is not falsely settled for an item the order never removed.
+				// protection policy permits. On hold the surplus queue item transfers to
+				// the serviced held-cancel retry tracker — the milestone below is still
+				// settled, because a real refinery already exists; the tracker owns the
+				// leftover item's fate instead of blocking the milestone on every sweep.
 				if (!FransPlacementCancelGuard.TryIssue(bot, queue, refineryType, reserved,
 						FransPlacementCancelGuard.CancelPermitted(world, queue, refineryType,
 							Info.ProtectedCancelRoleTypes, null),
 						out var hold) && hold != FransPlacementCancelGuard.FransCancelHold.None)
 				{
+					reservedCancelHeld = true;
+					heldQueueCancels.Track(queue, refineryType, reserved,
+						"FirstExpansionMilestoneSettle", world.WorldTick);
 					FransBotLog.BotDebug(world,
-						"{0}: cancellation of reserved first-expansion refinery {1} held by placement-cancel guard ({2}); reservation state is preserved.",
+						"{0}: cancellation of reserved first-expansion refinery {1} held by placement-cancel guard ({2}); the exact surplus item moved to the held-cancel retry tracker while the milestone settles.",
 						player, refineryType, hold);
-					return;
 				}
 			}
 
@@ -10222,8 +10246,9 @@ namespace OpenRA.Mods.Common.Traits
 			ReleaseBaseBuilderLock();
 
 			FransBotLog.BotDebug(world,
-				"{0}: FIRST EXPANSION historical milestone is permanently satisfied: physical expansion FACT {1} at {2} has refinery {3} at {4}. The protected first-expansion PROC reserve can never reappear even if this FACT later repacks or the expansion task returns to Idle.",
-				player, milestoneFact.ActorID, milestoneFact.Location, milestoneRefinery.ActorID, milestoneRefinery.Location);
+				"{0}: FIRST EXPANSION historical milestone is permanently satisfied: physical expansion FACT {1} at {2} has refinery {3} at {4}. The protected first-expansion PROC reserve can never reappear even if this FACT later repacks or the expansion task returns to Idle. Reserved queue copy {5}.",
+				player, milestoneFact.ActorID, milestoneFact.Location, milestoneRefinery.ActorID, milestoneRefinery.Location,
+				reservedCancelHeld ? "still queued under the held-cancel retry tracker" : reserved != null ? "cancelled" : "already absent");
 		}
 
 		void BeginFirstExpansionRefineryReservation(ProductionQueue queue, string refineryType)
@@ -10368,19 +10393,26 @@ namespace OpenRA.Mods.Common.Traits
 
 			var reserved = queue?.AllQueued().FirstOrDefault(item => item.Item == refineryType);
 			var cancellationQueued = queue != null && reserved != null;
+			var cancellationHeld = false;
 			if (cancellationQueued)
 			{
 				// First-vs-LAST fix + protection gate: the abort only settles when the
 				// reserved item was the engine's actual target and the cancel issued.
+				// On hold the exact item transfers to the serviced held-cancel tracker
+				// (the explicit fallback owner that re-asks the guard every interval),
+				// then the abort continues — an early return here would park the queued
+				// item while teardown below dismantled its bookkeeping anyway.
 				if (!FransPlacementCancelGuard.TryIssue(bot, queue, refineryType, reserved,
 						FransPlacementCancelGuard.CancelPermitted(world, queue, refineryType,
 							Info.ProtectedCancelRoleTypes, null),
 						out var hold) && hold != FransPlacementCancelGuard.FransCancelHold.None)
 				{
+					heldQueueCancels.Track(queue, refineryType, reserved,
+						$"FirstExpansionRefineryAbort/{reason}", world.WorldTick);
+					cancellationHeld = true;
 					FransBotLog.BotDebug(world,
-						"{0}: first-expansion PROC abort {1} held by placement-cancel guard ({2}); attempt state is preserved for a later pass.",
+						"{0}: first-expansion PROC abort {1} held by placement-cancel guard ({2}); the exact reserved item moved to the held-cancel retry tracker while the abort completes.",
 						player, reason, hold);
-					return;
 				}
 			}
 
@@ -10398,7 +10430,7 @@ namespace OpenRA.Mods.Common.Traits
 			FransBotLog.BotDebug(world,
 				"{0}: first-expansion PROC attempt ABORTED with expansion lifetime after {1} at {2}; exact reserved Building-queue item {3}. Retry-hold remains until a new MCV expansion objective is committed.",
 				player, reason, failedSite.HasValue ? failedSite.Value.ToString() : "unknown site",
-				cancellationQueued ? "cancelled" : "was already absent");
+				cancellationHeld ? "is held — now serviced by the retry tracker" : cancellationQueued ? "cancelled" : "was already absent");
 		}
 
 		void ResumeFirstExpansionRefineryAfterInfrastructure(string reason)
@@ -11207,6 +11239,22 @@ namespace OpenRA.Mods.Common.Traits
 
 		void BeginRoutineExpansionStructureOwnership(ProductionQueue queue, string buildingType)
 		{
+			// Overwrite protection: a live single-slot record must never be silently
+			// displaced. Held items no longer occupy this slot (they transferred to the
+			// serviced retry tracker), so any occupied slot here is a live owner; a
+			// displacement is logged as an explicit transition for audit.
+			if (routineExpansionStructureQueueActor != null || routineExpansionStructureType != null)
+			{
+				FransBotLog.BotDebug(world,
+					"{0}: routine expansion ownership DISPLACED — existing record {1} on actor {2} (placementIssued={3}, age {4} WT) is replaced by {5} on actor {6}.",
+					player,
+					routineExpansionStructureType ?? "NONE",
+					routineExpansionStructureQueueActor?.ActorID.ToString() ?? "none",
+					routineExpansionStructurePlacementIssued,
+					routineExpansionStructureOwnershipStartedTick >= 0 ? world.WorldTick - routineExpansionStructureOwnershipStartedTick : -1,
+					buildingType, queue?.Actor.ActorID.ToString() ?? "none");
+			}
+
 			routineExpansionStructureQueueActor = queue?.Actor;
 			routineExpansionStructureType = buildingType;
 			routineExpansionStructurePlacementIssued = false;
@@ -11224,9 +11272,10 @@ namespace OpenRA.Mods.Common.Traits
 		}
 
 		// Result of attempting the routine-expansion queue handoff cancel. Held means
-		// the placement-cancel guard refused the order: the exact item is still live
-		// AND still carries its routine-expansion ownership record — callers must not
-		// treat that as "cancelled" or "already absent".
+		// the placement-cancel guard refused the order and the exact item was handed
+		// to the serviced held-cancel retry tracker — the routine ownership slot is
+		// released only after that transfer, so callers may tear down their task
+		// state but must never treat Held as "cancelled".
 		enum RoutineQueueCancelOutcome { NoOwnership, Settled, Held }
 
 		RoutineQueueCancelOutcome CancelOwnedRoutineExpansionStructureIfQueued(IBot bot, string reason)
@@ -11255,22 +11304,33 @@ namespace OpenRA.Mods.Common.Traits
 			{
 				// First-vs-LAST fix + protection gate: release queue ownership only when
 				// the owned FIRST is the engine's LAST target and the cancel actually
-				// issued. On hold the exact-item ownership record is RETAINED and handed
-				// to the caller as the deliberate tracked handoff — a later pass re-asks
-				// the guard through this same function instead of losing the binding.
-				if (!FransPlacementCancelGuard.TryIssue(bot, queue, buildingType, ownedItem,
-						FransPlacementCancelGuard.CancelPermitted(world, queue, buildingType,
-							Info.ProtectedCancelRoleTypes, null),
-						out var hold) && hold != FransPlacementCancelGuard.FransCancelHold.None)
+				// issued. On hold the EXACT item transfers to the serviced retry tracker
+				// (the explicit fallback owner that re-asks the guard every interval and
+				// settles the entry if the item leaves by other means); only after that
+				// transfer succeeds is the single ownership slot released, so a later
+				// Begin... can never silently displace a retained item.
+				var cancelIssued = FransPlacementCancelGuard.TryIssue(bot, queue, buildingType, ownedItem,
+					FransPlacementCancelGuard.CancelPermitted(world, queue, buildingType,
+						Info.ProtectedCancelRoleTypes, null),
+					out var hold);
+				if (!cancelIssued && hold != FransPlacementCancelGuard.FransCancelHold.None)
 				{
-					LogBuildingQueueHandoffTransition("CancellationHeldOwnershipRetained", queue, buildingType, $"{reason}/{hold}");
+					heldQueueCancels.Track(queue, buildingType, ownedItem,
+						$"RoutineExpansion/{reason}", world.WorldTick);
+					LogBuildingQueueHandoffTransition("CancellationHeldTransferredToRetryTracker", queue, buildingType, $"{reason}/{hold}");
 					FransBotLog.BotDebug(world,
-						"{0}: routine expansion Building-queue handoff cancel of {1} on actor {2} held by placement-cancel guard ({3}); exact-item ownership is retained for the next pass.",
-						player, buildingType, queueActor.ActorID, hold);
+						"{0}: routine expansion Building-queue handoff cancel of {1} on actor {2} held by placement-cancel guard ({3}); exact item transferred to the serviced held-cancel tracker ({4} live entries), routine ownership slot released after the handoff.",
+						player, buildingType, queueActor.ActorID, hold, heldQueueCancels.Entries.Count);
+					ClearRoutineExpansionStructureOwnership();
 					return RoutineQueueCancelOutcome.Held;
 				}
 
-				LogBuildingQueueHandoffTransition("CancellationIssued", queue, buildingType, reason);
+				// Honest settle labeling (review R1): only a real issued order earns the
+				// CancellationIssued transition; an absent target or a same-tick
+				// dedupe-suppressed ask records no cancellation.
+				LogBuildingQueueHandoffTransition(
+					cancelIssued ? "CancellationIssued" : "CancelSettledAbsentOrAlreadyOrdered",
+					queue, buildingType, reason);
 			}
 
 			FransBotLog.BotDebug(world,
@@ -11527,7 +11587,7 @@ namespace OpenRA.Mods.Common.Traits
 			var tempCancelOutcome = CancelOwnedRoutineExpansionStructureIfQueued(bot, refineryPlacementFailure ? "refinery placement failure" : "temporary expansion abort");
 			if (tempCancelOutcome == RoutineQueueCancelOutcome.Held)
 				FransBotLog.BotDebug(world,
-					"{0}: temporary-expansion abort continues while its Building-queue cancel is held; the exact queued item stays ownership-tracked for a later pass.",
+					"{0}: temporary-expansion abort continues while its Building-queue cancel is held; the exact queued item is now owned by the held-cancel retry tracker.",
 					player);
 			AbortFirstExpansionRefineryAttempt(bot,
 				refineryPlacementFailure ? "refinery placement failure" : retreatAfterRepack ? "FACT RETREAT/repack" : "temporary expansion abort",
@@ -13985,7 +14045,7 @@ namespace OpenRA.Mods.Common.Traits
 			// retreat state, route timers, refinery-recovery state, LST ownership or queue ownership.
 			if (CancelOwnedRoutineExpansionStructureIfQueued(bot, $"active MCV loss during {context}") == RoutineQueueCancelOutcome.Held)
 				FransBotLog.BotDebug(world,
-					"{0}: active-MCV-loss teardown continues while its Building-queue cancel is held; the exact queued item stays ownership-tracked for a later pass.",
+					"{0}: active-MCV-loss teardown continues while its Building-queue cancel is held; the exact queued item is now owned by the held-cancel retry tracker.",
 					player);
 			AbortFirstExpansionRefineryAttempt(bot, $"active MCV loss during {context}", lostField ?? lostDeploy);
 			ResetMcvRetreat();
