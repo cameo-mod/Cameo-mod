@@ -1558,6 +1558,19 @@ namespace OpenRA.Mods.CA.Traits
 			if (producer == null || producer.Disposed || producer.IsDead)
 				return;
 
+			// E91BA74C/D831BBCB/6722A484: the demand-unwind cancel gates on the same shared
+			// verdict — a protected or unclassifiable item is never settled without a live
+			// exhaustion certificate; it stays queued and the ordinary sweeps re-adopt it.
+			// (The binding is name-scoped, so the engine's last-same-name resolution IS the
+			// intended target here — E3's ambiguity rule needs no separate instance check.)
+			world.Map.Rules.Actors.TryGetValue(item, out var cancelInfo);
+			if (BaseBuilderQueueEvalCA.EvaluatePlacementCancelProtection(cancelInfo,
+					Info.RefineryTypes.Contains(item),
+					Info.PowerTypes.Contains(item) || Info.BarracksTypes.Contains(item),
+					null, null, null, null) != PlacementCancelVerdict.Allow
+				&& !(RefineryLawProvider()?.RefineryFallbackCertificateCurrent(producer, item) ?? false))
+				return;
+
 			// REPLAY-HEALTH-LOGGER (F4): register the demand cancel so the owning manager's
 			// probe resolves it as Cancelled/DemandCancel instead of an UNKNOWN removal.
 			if (builders != null)

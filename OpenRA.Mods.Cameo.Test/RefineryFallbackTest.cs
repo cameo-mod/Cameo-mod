@@ -20,12 +20,15 @@ using OpenRA.Mods.Cameo.Traits.BotModules;
 namespace OpenRA.Mods.Cameo.Test
 {
 	/// <summary>
-	/// REF-2 P1a (retained-refinery fallback, amended per Sol dispositions CE13F2BA and
-	/// addendum 66578711): the world-free half of the feature — RefineryFallbackScan's
-	/// pre-charged paged phase machine (provider collection, rank-set collection, paged
-	/// sort, square/domain enumeration, resumable ranking, paged ordering, pick), the
-	/// Chebyshev-square domain geometry, the relaxation-tier ladder, the ∃-dock fold, and
-	/// the hold-reason / no-cancel predicates in BaseBuilderQueueEvalCA. Authored only:
+	/// REF-2 P1a (retained-refinery fallback, amended per Sol dispositions CE13F2BA,
+	/// addendum 66578711, certificate per BF5B8247 option (c) and 6722A484 exact-state
+	/// ruling): the world-free half of the feature — RefineryFallbackScan's pre-charged
+	/// paged phase machine (provider collection, rank-set collection, paged sort,
+	/// square/whole-map domain enumeration, resumable footprint-gap ranking, paged
+	/// ordering, pick), the Chebyshev-square domain geometry, the relaxation-tier ladder
+	/// whose terminal tier is the only certifying pass, the coherence sweep's pairwise
+	/// atom proof, the selective dirty-set repair, the ∃-dock fold, and the
+	/// hold-reason / no-cancel predicates in BaseBuilderQueueEvalCA. Authored only:
 	/// the qualification lane runs them (the amendment claim forbids executing tests here).
 	/// </summary>
 	[TestFixture]
@@ -38,45 +41,103 @@ namespace OpenRA.Mods.Cameo.Test
 		static RefineryFallbackScan.Provider? Prov(int x, int y, int reach, uint id = 1) =>
 			new RefineryFallbackScan.Provider(new CPos(x, y), reach, id);
 
+		/// A single-tile footprint keeps the pre-amend topLeft-distance tests meaningful
+		/// under the footprint-gap metric: with one tile the gap IS the topLeft's
+		/// Chebyshev distance to the nearest rank cell.
+		static readonly IReadOnlyList<CVec> OneTile = new[] { new CVec(0, 0) };
+
+		/// Bounded-but-wide tier bound: admits any realistic gap yet stays NON-terminal,
+		/// so the scan enumerates the provider-square domain (the terminal tier's
+		/// unconditional domain is the whole-map stream instead).
+		static int BoundedWide(int tier) => 1000;
+
 		static int Unrestricted(int tier) => int.MaxValue;
 
-		/// The relaxation ladder the shipped snapshot uses: tier t bounds dist² at (t+1)².
-		static int LinearCells(int tier) => tier >= 30 ? int.MaxValue : (tier + 1) * (tier + 1);
+		/// The relaxation ladder the shipped snapshot uses: tier t admits footprint-gap ≤ t+1.
+		static int LinearGap(int tier) => tier >= 30 ? int.MaxValue : tier + 1;
 
-		/// Square-domain snapshot: providers enumerate their own Chebyshev squares.
+		static IEnumerator<RefineryFallbackScan.CoherenceAtom> AtomsOf(IReadOnlyList<RefineryFallbackScan.CoherenceAtom> atoms) =>
+			atoms.GetEnumerator();
+
+		static IReadOnlyList<RefineryFallbackScan.CoherenceAtom> FixedAtoms() =>
+			new[] { new RefineryFallbackScan.CoherenceAtom(0, 0, 42, 0, null) };
+
+		/// Row-major index helpers for a rectangular test map — the same index space the
+		/// shipped FallbackMapIndex declares (terminal enumeration is monotone over it).
+		static (Func<CPos, int>, Func<int, CPos>) IndexFns(int width, int height)
+		{
+			Func<CPos, int> mapIndex = c => c.X >= 0 && c.Y >= 0 && c.X < width && c.Y < height ? c.Y * width + c.X : -1;
+			Func<int, CPos> indexCell = i => new CPos(i % width, i / width);
+			return (mapIndex, indexCell);
+		}
+
+		/// Square-domain snapshot: providers enumerate their own Chebyshev squares on
+		/// bounded tiers; the whole-map stream is supplied anyway so a tier bound that
+		/// reaches int.MaxValue still has its terminal domain.
 		static RefineryFallbackScan.Snapshot Snap(
 			IReadOnlyList<RefineryFallbackScan.Provider?> providers,
 			IReadOnlyList<CPos> rankCells,
 			Func<CPos, bool> inMap,
 			Func<CPos, bool> legal,
-			Func<int, int> tierBoundSq = null)
+			Func<int, int> tierBound = null,
+			IReadOnlyList<CVec> footprint = null,
+			IReadOnlyList<CPos> wholeMap = null,
+			Func<IEnumerator<RefineryFallbackScan.CoherenceAtom>> atoms = null)
 		{
+			var map = wholeMap ?? Array.Empty<CPos>();
+			var w = map.Count > 0 ? map.Max(c => c.X) + 1 : 0;
+			var h = map.Count > 0 ? map.Max(c => c.Y) + 1 : 0;
+			var (mapIndex, indexCell) = IndexFns(w, h);
+			atoms ??= () => AtomsOf(FixedAtoms());
 			return new RefineryFallbackScan.Snapshot(
 				() => providers.GetEnumerator(),
 				() => rankCells.GetEnumerator(),
-				() => Enumerable.Empty<CPos>().GetEnumerator(),
-				false,
-				tierBoundSq ?? Unrestricted,
+				() => map.AsEnumerable().GetEnumerator(),
+				tierBound ?? BoundedWide,
+				footprint ?? OneTile,
+				atoms,
+				atoms,
+				mapIndex,
+				indexCell,
+				2,
 				inMap,
 				legal);
 		}
 
+		/// Whole-map snapshot: the terminal tier's declared domain is the streamed map;
+		/// providers still feed the cert gate (no provider, no certificate — 6722A484).
 		static RefineryFallbackScan.Snapshot WholeMapSnap(
 			IEnumerable<CPos> mapCells,
+			IReadOnlyList<RefineryFallbackScan.Provider?> providers,
 			IReadOnlyList<CPos> rankCells,
 			Func<CPos, bool> legal,
-			Func<int, int> tierBoundSq = null)
+			Func<int, int> tierBound = null,
+			IReadOnlyList<CVec> footprint = null,
+			Func<IEnumerator<RefineryFallbackScan.CoherenceAtom>> atoms = null,
+			int readRadius = 2)
 		{
 			var cells = mapCells.ToList();
+			var w = cells.Max(c => c.X) + 1;
+			var h = cells.Max(c => c.Y) + 1;
+			var (mapIndex, indexCell) = IndexFns(w, h);
+			atoms ??= () => AtomsOf(FixedAtoms());
 			return new RefineryFallbackScan.Snapshot(
-				() => Enumerable.Empty<RefineryFallbackScan.Provider?>().GetEnumerator(),
+				() => providers.GetEnumerator(),
 				() => rankCells.GetEnumerator(),
 				() => cells.GetEnumerator(),
-				true,
-				tierBoundSq ?? Unrestricted,
+				tierBound ?? Unrestricted,
+				footprint ?? OneTile,
+				atoms,
+				atoms,
+				mapIndex,
+				indexCell,
+				readRadius,
 				c => true,
 				legal);
 		}
+
+		static IEnumerable<CPos> RectMap(int width, int height) =>
+			Enumerable.Range(0, width).SelectMany(x => Enumerable.Range(0, height).Select(y => new CPos(x, y)));
 
 		static Func<CPos, bool> LegalOnly(IReadOnlySet<CPos> allowed) => allowed.Contains;
 
@@ -156,8 +217,8 @@ namespace OpenRA.Mods.Cameo.Test
 		public void ZeroBudgetPollNeverFabricsAVerdict()
 		{
 			// A fresh scan polled with no budget must not replay the initial verdict
-			// placeholder — PollRefineryFallbackSite maps NoUniverse to Exhausted, and an
-			// unearned Exhausted is a cancel with zero cells scanned. Deferred is honest.
+			// placeholder — an unearned terminal verdict is a cancel with zero cells
+			// scanned. Deferred is honest.
 			var scan = new RefineryFallbackScan(50);
 			var snapshot = Snap(new[] { Prov(0, 0, 2) }, new[] { new CPos(0, 0) }, c => true, c => true);
 
@@ -210,8 +271,13 @@ namespace OpenRA.Mods.Cameo.Test
 				source,
 				() => new[] { new CPos(0, 0) }.AsEnumerable().GetEnumerator(),
 				() => Enumerable.Empty<CPos>().GetEnumerator(),
-				false,
-				Unrestricted,
+				BoundedWide,
+				OneTile,
+				() => AtomsOf(FixedAtoms()),
+				() => AtomsOf(FixedAtoms()),
+				c => -1,
+				i => CPos.Zero,
+				2,
 				c => true,
 				c => true);
 
@@ -242,8 +308,13 @@ namespace OpenRA.Mods.Cameo.Test
 				() => FlakyProviders(providers, 1),
 				() => new[] { new CPos(0, 0) }.AsEnumerable().GetEnumerator(),
 				() => Enumerable.Empty<CPos>().GetEnumerator(),
-				false,
-				Unrestricted,
+				BoundedWide,
+				OneTile,
+				() => AtomsOf(FixedAtoms()),
+				() => AtomsOf(FixedAtoms()),
+				c => -1,
+				i => CPos.Zero,
+				2,
 				c => true,
 				c => true);
 
@@ -336,25 +407,27 @@ namespace OpenRA.Mods.Cameo.Test
 		[Test]
 		public void WholeMapDomainCoversProviderlessCells()
 		{
-			// No-RBA / distance-flag-false / BuildAnywhere legality: no provider squares,
-			// the domain is the streamed map — a cell far from anything still places.
-			var map = Enumerable.Range(0, 8).SelectMany(x => Enumerable.Range(0, 8).Select(y => new CPos(x, y)));
-			var site_cell = new CPos(7, 7);
-			var legal = new HashSet<CPos> { site_cell };
+			// The terminal tier's unconditional domain is the whole map — a cell far from
+			// every provider still places when the injected legality says legal.
+			var map = RectMap(8, 8);
+			var siteCell = new CPos(7, 7);
+			var legal = new HashSet<CPos> { siteCell };
 			var scan = new RefineryFallbackScan(50);
 
-			var verdict = Drain(scan, 16, 400, () => WholeMapSnap(map, new[] { new CPos(0, 0) }, LegalOnly(legal)), out var site);
+			var verdict = Drain(scan, 16, 400,
+				() => WholeMapSnap(map, new[] { Prov(0, 0, 1) }, new[] { new CPos(0, 0) }, LegalOnly(legal)), out var site);
 			Assert.That(verdict, Is.EqualTo(RefineryFallbackScan.Verdict.Site));
-			Assert.That(site, Is.EqualTo(site_cell));
+			Assert.That(site, Is.EqualTo(siteCell));
 		}
 
-		// ---- ranking / ordering ---------------------------------------------
+		// ---- ranking / ordering (footprint-gap metric, 80646D1B) ------------
 
 		[Test]
 		public void GloballyNearestWinsNotEnumerationOrder()
 		{
-			// Legal cells at dist² 16 / 1 / 25 from the rank cell — the square walk visits
-			// them in coordinate order, the pick must return the nearest regardless.
+			// Legal cells at Chebyshev gap 4 / 1 / 5 from the rank cell (single-tile
+			// footprint — gap equals the topLeft's Chebyshev distance): the square walk
+			// visits them in coordinate order, the pick must return the nearest regardless.
 			var providers = new[] { Prov(4, 0, 5) };
 			var ranks = new[] { new CPos(4, 0) };
 			var legal = new HashSet<CPos> { new CPos(0, 0), new CPos(5, 0), new CPos(9, 0) };
@@ -362,20 +435,59 @@ namespace OpenRA.Mods.Cameo.Test
 
 			var verdict = Drain(scan, 128, 400, () => Snap(providers, ranks, c => true, LegalOnly(legal)), out var site);
 			Assert.That(verdict, Is.EqualTo(RefineryFallbackScan.Verdict.Site));
-			Assert.That(site, Is.EqualTo(new CPos(5, 0)), "dist² 1 beats 16 and 25 under the global order");
+			Assert.That(site, Is.EqualTo(new CPos(5, 0)), "gap 1 beats 4 and 5 under the global order");
 		}
 
 		[Test]
 		public void EqualRankBreaksByCellXY()
 		{
-			var providers = new[] { Prov(5, 5, 6) };
-			var ranks = new[] { new CPos(100, 100) };
-			var legal = new HashSet<CPos> { new CPos(5, 4), new CPos(5, 1), new CPos(1, 9) };
+			// A nearer candidate still rules over the tie pair; the equal-gap tie-break
+			// itself is covered by EqualGapBreaksByCellXY.
+			var providers = new[] { Prov(0, 0, 4) };
+			var ranks = new[] { new CPos(0, 0) };
+			var legal = new HashSet<CPos> { new CPos(3, 0), new CPos(0, 3), new CPos(2, 2) };
 			var scan = new RefineryFallbackScan(50);
 
 			var verdict = Drain(scan, 128, 400, () => Snap(providers, ranks, c => true, LegalOnly(legal)), out var site);
 			Assert.That(verdict, Is.EqualTo(RefineryFallbackScan.Verdict.Site));
-			Assert.That(site, Is.EqualTo(new CPos(1, 9)), "equal rank: lowest X wins, then Y");
+			Assert.That(site, Is.EqualTo(new CPos(2, 2)),
+				"gap 2 wins over the two gap-3 cells — the nearest admissible still rules");
+		}
+
+		[Test]
+		public void EqualGapBreaksByCellXY()
+		{
+			// The tie-break itself: (0,3) and (3,0) sit at identical Chebyshev gap 3 —
+			// the argmin takes the lower X, then the lower Y.
+			var providers = new[] { Prov(0, 0, 4) };
+			var ranks = new[] { new CPos(0, 0) };
+			var legal = new HashSet<CPos> { new CPos(3, 0), new CPos(0, 3) };
+			var scan = new RefineryFallbackScan(50);
+
+			var verdict = Drain(scan, 128, 400, () => Snap(providers, ranks, c => true, LegalOnly(legal)), out var site);
+			Assert.That(verdict, Is.EqualTo(RefineryFallbackScan.Verdict.Site));
+			Assert.That(site, Is.EqualTo(new CPos(0, 3)), "equal rank: lowest X wins, then Y");
+		}
+
+		[Test]
+		public void FootprintGapMeasuresEveryTileNotTheTopLeft()
+		{
+			// 80646D1B: footprint {(0,0),(4,0)} — a candidate whose TOP-LEFT is farther but
+			// whose trailing tile touches the rank cell must beat a topLeft-nearer cell.
+			// A: topLeft (6,0), tiles reach (10,0) = the rank cell itself → gap 0.
+			// B: topLeft (9,0), tiles (9,0)/(13,0) → gap 1. TopLeft distance says B (1 < 4);
+			// the footprint gap says A — the law's flush convention.
+			var providers = new[] { Prov(6, 0, 8) };
+			var ranks = new[] { new CPos(10, 0) };
+			var footprint = new[] { new CVec(0, 0), new CVec(4, 0) };
+			var legal = new HashSet<CPos> { new CPos(6, 0), new CPos(9, 0) };
+			var scan = new RefineryFallbackScan(50);
+
+			var verdict = Drain(scan, 256, 400,
+				() => Snap(providers, ranks, c => true, LegalOnly(legal), footprint: footprint), out var site);
+			Assert.That(verdict, Is.EqualTo(RefineryFallbackScan.Verdict.Site));
+			Assert.That(site, Is.EqualTo(new CPos(6, 0)),
+				"a footprint tile ON the resource cell (gap 0) beats a topLeft-nearer candidate");
 		}
 
 		[Test]
@@ -405,19 +517,19 @@ namespace OpenRA.Mods.Cameo.Test
 				"the cell that went illegal mid-pass loses the pick at revalidation");
 		}
 
-		// ---- relaxation ladder / exhaustion ---------------------------------
+		// ---- relaxation ladder / exhaustion certificate ---------------------
 
 		[Test]
 		public void TierLadderRelaxesToTheSiteTier()
 		{
-			// Legal only at (5,0), dist² 25 from the rank cell: tiers 0..3 (bounds 1,4,9,16)
-			// drain NoSite; tier 4 (bound 25) admits it. The ladder repeats the scan at the
-			// current tier — matching the maintainer's graduated-relaxation ruling.
+			// Legal only at (5,0), Chebyshev gap 5 from the rank cell: tiers 0..3 (bounds
+			// 1..4) drain NoSite; tier 4 (bound 5) admits it. The ladder repeats the scan
+			// at the current tier — matching the maintainer's graduated-relaxation ruling.
 			var providers = new[] { Prov(0, 0, 6) };
 			var legal = new HashSet<CPos> { new CPos(5, 0) };
 			var ranks = new[] { new CPos(0, 0) };
 			var scan = new RefineryFallbackScan(50);
-			var snapshot = Snap(providers, ranks, c => true, LegalOnly(legal), LinearCells);
+			var snapshot = Snap(providers, ranks, c => true, LegalOnly(legal), LinearGap);
 
 			for (var tier = 0; tier <= 3; tier++)
 			{
@@ -425,7 +537,7 @@ namespace OpenRA.Mods.Cameo.Test
 				Assert.That(drained, Is.EqualTo(RefineryFallbackScan.Verdict.NoSite), "tier {0} admits nothing", tier);
 				Assert.That(s, Is.Null);
 				Assert.That(scan.Tier, Is.EqualTo(tier));
-				Assert.That(scan.UnrestrictedTier, Is.False);
+				Assert.That(scan.TerminalTier, Is.False);
 				scan.AdvanceTier();
 			}
 
@@ -436,21 +548,22 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
-		public void RanklessCandidatesAdmitOnlyAtUnrestrictedTier()
+		public void RanklessCandidatesAdmitOnlyAtTerminalTier()
 		{
 			// No declared resource cells at all → every legal cell ranks int.MaxValue.
-			// A bounded tier rejects them; the fully-removed tier admits them —
-			// "place wherever legal" only once the ladder has run out.
-			var providers = new[] { Prov(0, 0, 2) };
+			// A bounded tier rejects them; the fully-removed terminal tier admits them —
+			// "place wherever legal" only once the ladder has run out. The terminal tier's
+			// domain is the whole map, so the site need not sit in a provider square.
+			var map = RectMap(6, 6).ToList();
 			var legal = new HashSet<CPos> { new CPos(1, 0) };
 			var scan = new RefineryFallbackScan(50);
-			var snapshot = Snap(providers, Array.Empty<CPos>(), c => true, LegalOnly(legal),
+			var snapshot = WholeMapSnap(map, new[] { Prov(0, 0, 1) }, Array.Empty<CPos>(), LegalOnly(legal),
 				t => t == 0 ? 4 : int.MaxValue);
 
 			var drained = Drain(scan, 64, 200, () => snapshot, out var s);
 			Assert.That(drained, Is.EqualTo(RefineryFallbackScan.Verdict.NoSite));
 			Assert.That(s, Is.Null);
-			Assert.That(scan.UnrestrictedTier, Is.False);
+			Assert.That(scan.TerminalTier, Is.False);
 
 			scan.AdvanceTier();
 			var verdict = Drain(scan, 64, 200, () => snapshot, out var site);
@@ -459,25 +572,136 @@ namespace OpenRA.Mods.Cameo.Test
 		}
 
 		[Test]
-		public void UnrestrictedDrainIsTheExhaustionProof()
+		public void TerminalDrainIsTheOnlyExhaustionProof()
 		{
-			// Nothing legal anywhere in the domain; tier 0 bounded, tier 1 unrestricted —
-			// only the unrestricted drain may carry UnrestrictedTier (the caller's signal
-			// for the only permitted cancel).
-			var providers = new[] { Prov(0, 0, 3) };
+			// Nothing legal anywhere; tier 0 bounded (provider squares), tier 1 terminal
+			// (whole map). Only the coherent whole-map drain may report Exhausted and only
+			// a still-current certificate survives the cancel arm's live re-verification.
+			var map = RectMap(6, 6).ToList();
+			var atoms = new List<RefineryFallbackScan.CoherenceAtom> { new RefineryFallbackScan.CoherenceAtom(0, 0, 42, 0, null) };
+			Func<IEnumerator<RefineryFallbackScan.CoherenceAtom>> atomsSrc = () => AtomsOf(atoms);
 			var scan = new RefineryFallbackScan(50);
-			var snapshot = Snap(providers, new[] { new CPos(0, 0) }, c => true, c => false,
-				t => t == 0 ? 1 : int.MaxValue);
+			var snapshot = WholeMapSnap(map, new[] { Prov(0, 0, 1) }, new[] { new CPos(0, 0) }, c => false,
+				t => t == 0 ? 1 : int.MaxValue, atoms: atomsSrc);
 
 			var bounded = Drain(scan, 64, 400, () => snapshot, out _);
 			Assert.That(bounded, Is.EqualTo(RefineryFallbackScan.Verdict.NoSite));
-			Assert.That(scan.UnrestrictedTier, Is.False, "a bounded drain is never the exhaustion proof");
+			Assert.That(scan.TerminalTier, Is.False, "a bounded drain is never the exhaustion proof");
+			Assert.That(scan.CertificateCurrent(), Is.False, "no certificate issued on a bounded drain");
 
 			scan.AdvanceTier();
 			var final = Drain(scan, 64, 400, () => snapshot, out _);
-			Assert.That(final, Is.EqualTo(RefineryFallbackScan.Verdict.NoSite));
-			Assert.That(scan.UnrestrictedTier, Is.True,
-				"the unrestricted drain proves total-domain exhaustion — the cancel precondition");
+			Assert.That(final, Is.EqualTo(RefineryFallbackScan.Verdict.Exhausted));
+			Assert.That(scan.TerminalTier, Is.True,
+				"the coherent whole-map drain proves total-domain exhaustion — the cancel precondition");
+			Assert.That(scan.CertificateCurrent(), Is.True,
+				"the certificate stands while the live atom sequence still matches pairwise");
+
+			// A covered event between issue and cancel stales the certificate (dirty epoch).
+			scan.MarkDirtyCell(new CPos(0, 0));
+			Assert.That(scan.CertificateCurrent(), Is.False,
+				"a post-issue dirty event fails the live re-verification closed");
+		}
+
+		[Test]
+		public void AtomDriftFailsCertificateVerification()
+		{
+			// 6722A484 exact state: the certificate's stamped atom list is compared
+			// pairwise against a live re-enumeration — ANY drift fails closed.
+			var map = RectMap(4, 4).ToList();
+			var atoms = new List<RefineryFallbackScan.CoherenceAtom> { new RefineryFallbackScan.CoherenceAtom(0, 0, 42, 0, null) };
+			Func<IEnumerator<RefineryFallbackScan.CoherenceAtom>> atomsSrc = () => AtomsOf(atoms);
+			var scan = new RefineryFallbackScan(50);
+			var snapshot = WholeMapSnap(map, new[] { Prov(0, 0, 1) }, new[] { new CPos(0, 0) }, c => false,
+				atoms: atomsSrc);
+
+			Assert.That(Drain(scan, 64, 400, () => snapshot, out _), Is.EqualTo(RefineryFallbackScan.Verdict.Exhausted));
+			Assert.That(scan.CertificateCurrent(), Is.True);
+
+			atoms.Add(new RefineryFallbackScan.CoherenceAtom(5, 0, 1, 1, null));
+			Assert.That(scan.CertificateCurrent(), Is.False,
+				"an appended live atom is a pairwise length mismatch — no collision surface exists");
+
+			atoms.RemoveAt(atoms.Count - 1);
+			atoms[0] = new RefineryFallbackScan.CoherenceAtom(0, 0, 43, 0, null);
+			Assert.That(scan.CertificateCurrent(), Is.False, "a value drift in one field fails closed");
+		}
+
+		[Test]
+		public void NoProviderTerminalDrainNeverCertifies()
+		{
+			// 6722A484: an empty provider domain is never an exhaustion proof — the
+			// whole-map drain reports the honest drained verdict and no certificate exists.
+			var map = RectMap(4, 4).ToList();
+			var scan = new RefineryFallbackScan(50);
+			var snapshot = WholeMapSnap(map, Array.Empty<RefineryFallbackScan.Provider?>(),
+				new[] { new CPos(0, 0) }, c => false);
+
+			var verdict = Drain(scan, 64, 400, () => snapshot, out _);
+			Assert.That(verdict, Is.EqualTo(RefineryFallbackScan.Verdict.NoSite));
+			Assert.That(scan.TerminalTier, Is.True);
+			Assert.That(scan.CertificateCurrent(), Is.False,
+				"no provider scanned — Held/Deferred semantics, zero cancellation authority");
+		}
+
+		[Test]
+		public void DirtyMarkDuringEnumerateRepairsAndFindsTheCell()
+		{
+			// A covered event dirties an already-enumerated cell; the terminal pass's
+			// selective repair re-evaluates exactly that index before draining — the
+			// now-legal cell joins the candidates and wins the pick.
+			var map = RectMap(6, 6).ToList();
+			var dirtied = new CPos(1, 1);
+			var legal = new HashSet<CPos>();
+			var scan = new RefineryFallbackScan(50);
+			var snapshot = WholeMapSnap(map, new[] { Prov(0, 0, 1) }, new[] { new CPos(1, 1) },
+				c => legal.Contains(c), readRadius: 1);
+
+			// Run a few terminal polls so the enumeration frontier passes the target cell,
+			// then make it legal and mark its index dirty — the repair pass must catch it.
+			var polls = 0;
+			while (polls < 4 && scan.Poll(8, polls, () => snapshot, out _).Equals(RefineryFallbackScan.Verdict.Deferred))
+				polls++;
+
+			legal.Add(dirtied);
+			scan.MarkDirtyCell(dirtied);
+
+			var verdict = Drain(scan, 64, 400, () => snapshot, out var site, polls);
+			Assert.That(verdict, Is.EqualTo(RefineryFallbackScan.Verdict.Site));
+			Assert.That(site, Is.EqualTo(dirtied),
+				"the dirtied already-enumerated cell was re-examined before the pass drained");
+		}
+
+		[Test]
+		public void PostEnumerateDirtyMarkAbortsTheTerminalPass()
+		{
+			// Evidence dirtied after the whole-map drain — while ranking or picking —
+			// cannot be repaired in place: the pass aborts to Deferred and re-lists on a
+			// later epoch; the certificate never issues over mixed-time evidence.
+			var map = RectMap(6, 6).ToList();
+			var legal = new HashSet<CPos> { new CPos(1, 0) };
+			var scan = new RefineryFallbackScan(50);
+			var snapshot = WholeMapSnap(map, new[] { Prov(0, 0, 1) }, new[] { new CPos(0, 0) },
+				LegalOnly(legal), readRadius: 1);
+
+			// Charged-step arithmetic at budget 24: poll 1 = sweep (2) + provider collect
+			// (2) + rank collect (2) + sort (1) + 17 enumerated cells — mid-Enumerate.
+			// Poll 2 = sweep (2) + the remaining 19 cells + drain-check (1) + 2 rank
+			// steps — lands inside Rank. The mark then hits a post-enumerate phase.
+			Assert.That(scan.Poll(24, 0, () => snapshot, out _), Is.EqualTo(RefineryFallbackScan.Verdict.Deferred));
+			Assert.That(scan.Poll(24, 1, () => snapshot, out _), Is.EqualTo(RefineryFallbackScan.Verdict.Deferred));
+
+			scan.MarkDirtyCell(new CPos(0, 0));
+
+			// The abort verdict is Deferred — never Exhausted, never a stale pick.
+			var aborted = scan.Poll(64, 2, () => snapshot, out _);
+			Assert.That(aborted, Is.EqualTo(RefineryFallbackScan.Verdict.Deferred),
+				"post-enumerate evidence churn aborts the pass — mixed-time is never certified");
+			Assert.That(scan.CertificateCurrent(), Is.False);
+
+			var verdict = Drain(scan, 64, 400, () => snapshot, out var site, 500);
+			Assert.That(verdict, Is.EqualTo(RefineryFallbackScan.Verdict.Site));
+			Assert.That(site, Is.EqualTo(new CPos(1, 0)), "the re-listed pass completes cleanly");
 		}
 
 		[Test]
@@ -574,7 +798,7 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(evaluated, Is.EqualTo(1), "the fold never evaluates past the first Clear");
 		}
 
-		// ---- hold-reason / no-cancel predicates ------------------------------
+		// ---- hold-reason / protection predicates -----------------------------
 
 		[Test]
 		public void FallbackHoldReasonDistinguishesVerdicts()
@@ -615,6 +839,27 @@ namespace OpenRA.Mods.Cameo.Test
 				"the law-scoped query is unchanged — G2's no-law retention is decided at the call site");
 			Assert.That(BaseBuilderQueueEvalCA.RefineryDefers(true, BuildingType.Building), Is.False);
 			Assert.That(BaseBuilderQueueEvalCA.RefineryDefers(true, BuildingType.Defense), Is.False);
+		}
+
+		[Test]
+		public void PlacementCancelProtectionIsTheSharedVerdictTable()
+		{
+			// E1283A6D/D831BBCB: proven cheap-fast → Allow; proven protected →
+			// RequireCertificate; anything else → Unresolvable (fails closed). Floors and
+			// resolved cost/ticks are accepted but unused this iteration.
+			Assert.That(
+				BaseBuilderQueueEvalCA.EvaluatePlacementCancelProtection(null, true, true, null, null, null, null),
+				Is.EqualTo(PlacementCancelVerdict.Allow), "cheap-fast wins first");
+			Assert.That(
+				BaseBuilderQueueEvalCA.EvaluatePlacementCancelProtection(null, false, true, 0, -1, null, null),
+				Is.EqualTo(PlacementCancelVerdict.Allow), "a sentinel -1 duration never blocks Allow");
+			Assert.That(
+				BaseBuilderQueueEvalCA.EvaluatePlacementCancelProtection(null, true, false, null, null, null, null),
+				Is.EqualTo(PlacementCancelVerdict.RequireCertificate));
+			Assert.That(
+				BaseBuilderQueueEvalCA.EvaluatePlacementCancelProtection(null, false, false, 500, 40, 600, 50),
+				Is.EqualTo(PlacementCancelVerdict.Unresolvable),
+				"unknown membership is protected — floors stay unused this iteration");
 		}
 	}
 }

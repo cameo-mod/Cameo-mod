@@ -533,6 +533,33 @@ namespace OpenRA.Mods.CA.Traits
 			return BuildingType.Building;
 		}
 
+		// E91BA74C/D831BBCB: mounted role evidence for the shared verdict — RefineryTypes is
+		// the adjudicated protected class; mounted PowerTypes/BarracksTypes is the cheap-fast
+		// class ("cheap fast items like power/barracks" of the pre-seam rule); everything else
+		// is Unresolvable, which every call site here treats as RequireCertificate (fail closed).
+		PlacementCancelVerdict PlacementProtectionVerdict(string itemName)
+		{
+			world.Map.Rules.Actors.TryGetValue(itemName, out var itemInfo);
+			return BaseBuilderQueueEvalCA.EvaluatePlacementCancelProtection(itemInfo,
+				baseBuilder.Info.RefineryTypes.Contains(itemName),
+				baseBuilder.Info.PowerTypes.Contains(itemName) || baseBuilder.Info.BarracksTypes.Contains(itemName),
+				null, null, null, null);
+		}
+
+		// 6722A484/BF5B8247(c)/E3: a protected cancel proceeds only when the certificate
+		// re-verifies against the live world at the cancel point AND the engine's resolved
+		// target (the LAST same-name entry) is the identical instance we intend to settle —
+		// a name-collision holds without settlement.
+		bool CertificateAuthorizes(ProductionQueue queue, string itemName, ProductionItem intended, ProductionItem[] snapshot = null)
+		{
+			var law = baseBuilder.RefineryLawProvider();
+			if (law == null || !law.RefineryFallbackCertificateCurrent(queue.Actor, itemName))
+				return false;
+
+			var target = (snapshot ?? queue.AllQueued().ToArray()).LastOrDefault(i => i.Item == itemName);
+			return ReferenceEquals(target, intended);
+		}
+
 		// Scale targets (DESIGN 19.10): an enabled provider's production target replaces BotLimits.ProductionTypeLimit
 		// (0 stays "no limit" when there are no BotLimits at all).
 		int ProductionTypeLimit => productionTypeLimit > 0 && baseBuilder.TryGetScaleTarget("production", out var scaled)
@@ -588,19 +615,25 @@ namespace OpenRA.Mods.CA.Traits
 							baseBuilder.RelocationHoldConyard = stuckConyard;
 							foreach (var queue in stuckConyard.TraitsImplementing<ProductionQueue>())
 							{
-								foreach (var item in queue.AllQueued().ToArray())
+								var latchSnapshot = queue.AllQueued().ToArray();
+								foreach (var item in latchSnapshot)
 								{
-									// REF-2 P1a (maintainer no-cancel class, 2026-10-16): a
-									// COMPLETED high-value item is never mass-cancelled — the
-									// latch has no total-domain exhaustion proof for it. It stays
-									// queued and places from the relocated site. (G3 pending Sol:
-									// radar/tech/factory scope; G4 pending: incomplete items —
-									// both keep the old cancel.)
-									if (item.Done && BaseBuilderQueueEvalCA.RetainedHighValueItem(baseBuilder.Info.RefineryTypes, item.Item))
+									// E91BA74C/D831BBCB/6722A484: the mass-cancel gates on the shared
+									// protection verdict — a proven cheap-fast member (mounted
+									// PowerTypes/BarracksTypes) cancels as before; a protected or
+									// unclassifiable item — in-progress or completed alike (E1) — stays
+									// queued unless a live exhaustion certificate authorizes the settle.
+									if (PlacementProtectionVerdict(item.Item) != PlacementCancelVerdict.Allow)
 									{
-										EmitQueueTransition(queue, stuckConyard, item, item.Item, QueueCategoryOf(item.Item),
-											BotQueueTransitionKind.Held, BotQueueTransitionReason.RelocationLatch);
-										continue;
+										// E3: the engine removes the LAST same-name entry — the
+										// settle may only take the identical instance this pass
+										// intends; a name-collision holds without settlement.
+										if (!CertificateAuthorizes(queue, item.Item, item, latchSnapshot))
+										{
+											EmitQueueTransition(queue, stuckConyard, item, item.Item, QueueCategoryOf(item.Item),
+												BotQueueTransitionKind.Held, BotQueueTransitionReason.ProtectionHold);
+											continue;
+										}
 									}
 
 									// The record resolves on the tick the item actually
@@ -971,12 +1004,25 @@ namespace OpenRA.Mods.CA.Traits
 					{
 						AIUtils.BotDebug($"{player} has already has enough {currentBuilding.Item}; cancelling production");
 
-						// CancelProduction removes the LAST same-name item — bind that
-						// instance, not the head, so the removal resolves to this request.
+						// E91BA74C/D831BBCB: the limit cancel gates on the shared verdict —
+						// proven cheap-fast proceeds; protected/unclassifiable items need a
+						// live certificate for the settled instance (E3) or they hold and
+						// keep trying to place.
 						var cancelTarget = queue.AllQueued().LastOrDefault(i => i.Item == currentBuilding.Item) ?? currentBuilding;
-						NotePendingTerminal(queue, cancelTarget, currentBuilding.Item, BotQueueTransitionKind.Cancelled,
-							BotQueueTransitionReason.LimitReached, BotQueueCancellationClass.Production);
-						bot.QueueOrder(Order.CancelProduction(queue.Actor, currentBuilding.Item, 1));
+						if (PlacementProtectionVerdict(currentBuilding.Item) == PlacementCancelVerdict.Allow
+							|| CertificateAuthorizes(queue, currentBuilding.Item, cancelTarget))
+						{
+							// CancelProduction removes the LAST same-name item — bind that
+							// instance, not the head, so the removal resolves to this request.
+							NotePendingTerminal(queue, cancelTarget, currentBuilding.Item, BotQueueTransitionKind.Cancelled,
+								BotQueueTransitionReason.LimitReached, BotQueueCancellationClass.Production);
+							bot.QueueOrder(Order.CancelProduction(queue.Actor, currentBuilding.Item, 1));
+						}
+						else
+						{
+							EmitQueueTransition(queue, queue.Actor, currentBuilding, currentBuilding.Item, QueueCategoryOf(currentBuilding.Item),
+								BotQueueTransitionKind.Held, BotQueueTransitionReason.ProtectionHold);
+						}
 					}
 				}
 
@@ -1132,13 +1178,25 @@ namespace OpenRA.Mods.CA.Traits
 						// saturation cancel, but never on a budget — only on that proof.
 						if (refineryExhausted)
 						{
-							AIUtils.BotDebug($"{player} cancels {currentBuilding.Item}: refinery domain exhausted at tick {world.WorldTick}");
+							// BF5B8247(c)/6722A484: the verdict alone is stale evidence — the
+							// certificate re-verifies the exact atom sequence against the live
+							// world at the cancel point; any drift (or a no-provider scan that
+							// could never certify) fails closed to the deferred hold.
 							var cancelTarget = queue.AllQueued().LastOrDefault(i => i.Item == currentBuilding.Item) ?? currentBuilding;
-							NotePendingTerminal(queue, cancelTarget, currentBuilding.Item, BotQueueTransitionKind.Cancelled,
-								BotQueueTransitionReason.RefineryDomainExhausted, BotQueueCancellationClass.Production);
-							bot.QueueOrder(Order.CancelProduction(queue.Actor, currentBuilding.Item, 1));
+							if (CertificateAuthorizes(queue, currentBuilding.Item, cancelTarget))
+							{
+								AIUtils.BotDebug($"{player} cancels {currentBuilding.Item}: refinery domain exhausted at tick {world.WorldTick}");
+								NotePendingTerminal(queue, cancelTarget, currentBuilding.Item, BotQueueTransitionKind.Cancelled,
+									BotQueueTransitionReason.RefineryDomainExhausted, BotQueueCancellationClass.Production);
+								bot.QueueOrder(Order.CancelProduction(queue.Actor, currentBuilding.Item, 1));
+								EmitQueueTransition(queue, queue.Actor, currentBuilding, currentBuilding.Item, QueueCategoryOf(currentBuilding.Item),
+									BotQueueTransitionKind.Held, BotQueueTransitionReason.RefineryDomainExhausted);
+								return false;
+							}
+
+							AIUtils.BotDebug($"{player} holds {currentBuilding.Item}: exhaustion certificate stale at tick {world.WorldTick}");
 							EmitQueueTransition(queue, queue.Actor, currentBuilding, currentBuilding.Item, QueueCategoryOf(currentBuilding.Item),
-								BotQueueTransitionKind.Held, BotQueueTransitionReason.RefineryDomainExhausted);
+								BotQueueTransitionKind.Held, BotQueueTransitionReason.ProtectionHold);
 							return false;
 						}
 
@@ -1158,12 +1216,26 @@ namespace OpenRA.Mods.CA.Traits
 					else if (++failCount >= baseBuilder.Info.MaximumFailedPlacementAttempts)
 					{
 						AIUtils.BotDebug($"{player} has nowhere to place {currentBuilding.Item}");
+
+						// E91BA74C/D831BBCB: the saturation cancel gates on the shared verdict —
+						// proven cheap-fast proceeds; a protected or unclassifiable item needs a
+						// live exhaustion certificate or it holds (the latch snapshot and retry
+						// timer still arm, so recovery probes keep running while it waits).
 						var cancelTarget = queue.AllQueued().LastOrDefault(i => i.Item == currentBuilding.Item) ?? currentBuilding;
-						NotePendingTerminal(queue, cancelTarget, currentBuilding.Item, BotQueueTransitionKind.Cancelled,
-							BotQueueTransitionReason.SaturationLatch, BotQueueCancellationClass.Production);
-						bot.QueueOrder(Order.CancelProduction(queue.Actor, currentBuilding.Item, 1));
-						EmitQueueTransition(queue, queue.Actor, currentBuilding, currentBuilding.Item, QueueCategoryOf(currentBuilding.Item),
-							BotQueueTransitionKind.Held, BotQueueTransitionReason.SaturationLatch);
+						if (PlacementProtectionVerdict(currentBuilding.Item) == PlacementCancelVerdict.Allow
+							|| CertificateAuthorizes(queue, currentBuilding.Item, cancelTarget))
+						{
+							NotePendingTerminal(queue, cancelTarget, currentBuilding.Item, BotQueueTransitionKind.Cancelled,
+								BotQueueTransitionReason.SaturationLatch, BotQueueCancellationClass.Production);
+							bot.QueueOrder(Order.CancelProduction(queue.Actor, currentBuilding.Item, 1));
+							EmitQueueTransition(queue, queue.Actor, currentBuilding, currentBuilding.Item, QueueCategoryOf(currentBuilding.Item),
+								BotQueueTransitionKind.Held, BotQueueTransitionReason.SaturationLatch);
+						}
+						else
+						{
+							EmitQueueTransition(queue, queue.Actor, currentBuilding, currentBuilding.Item, QueueCategoryOf(currentBuilding.Item),
+								BotQueueTransitionKind.Held, BotQueueTransitionReason.ProtectionHold);
+						}
 						lastFailedBuilding = currentBuilding.Item;
 
 						// FIX-RA-REFINERY R1: the latch snapshot is taken at every saturation —

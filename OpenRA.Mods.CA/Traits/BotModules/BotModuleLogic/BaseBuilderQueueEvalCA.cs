@@ -402,6 +402,44 @@ namespace OpenRA.Mods.CA.Traits
 			refineryTypes.Contains(item);
 
 		/// <summary>
+		/// HIGH-VALUE cancel protection (E91BA74C; shared seam per
+		/// API_PROPOSAL_2026-10-16_placement_cancel_protection E1283A6D — the Frans guard lane
+		/// 01a14475 binds this exact signature): adjudicates whether an automatic placement
+		/// cancellation may proceed. The caller supplies EVIDENCE only — this helper owns the
+		/// verdict.
+		///
+		/// Decision table (intermediate guard per Sol D831BBCB — the protected-floor
+		/// comparison is deliberately NOT ratified this iteration, so
+		/// <paramref name="protectedFloorCost"/>/<paramref name="protectedFloorTicks"/> are
+		/// accepted for seam compatibility and intentionally unused; cheap cancellation is
+		/// permitted via proven cheap-fast membership, never via a computed floor):
+		/// - proven cheap-fast role member → Allow (mounted cheap-fast class evidence —
+		///   walls, power, the caller's own mounted cheap-fast set);
+		/// - proven protected-role member → RequireCertificate (cancel only under a live
+		///   domain-exhaustion certificate);
+		/// - anything else → Unresolvable (unknown/unclassified items are protected too —
+		///   absence of evidence never reads as cheap; E2).
+		///
+		/// <paramref name="resolvedCost"/>/<paramref name="resolvedBuildTicks"/> are the
+		/// caller's positively-resolved cost/time for the actual supported queue variant —
+		/// negative BuildDuration is the engine sentinel, not evidence; reserved for the
+		/// ratified floor iteration. Unresolvable and RequireCertificate both require a
+		/// certificate to proceed at CA call sites; the distinction is diagnostic.
+		/// </summary>
+		public static PlacementCancelVerdict EvaluatePlacementCancelProtection(
+			ActorInfo info, bool protectedRoleMember, bool cheapFastRoleMember,
+			int? resolvedCost, int? resolvedBuildTicks, int? protectedFloorCost, int? protectedFloorTicks)
+		{
+			if (cheapFastRoleMember)
+				return PlacementCancelVerdict.Allow;
+
+			if (!protectedRoleMember)
+				return PlacementCancelVerdict.Unresolvable;
+
+			return PlacementCancelVerdict.RequireCertificate;
+		}
+
+		/// <summary>
 		/// FIX-RA-REFINERY: the saturated-placement recovery arm owns a tick whenever the
 		/// expansion-nudge arm cannot act — no expansion modules, no recorded failing centre,
 		/// or a relocation hold in progress. Gated on module count alone those cases latched
@@ -867,6 +905,15 @@ namespace OpenRA.Mods.CA.Traits
 	// - All probe/tracker state is lazy: with no observer trait registered the emit path is
 	//   one null check and nothing is allocated.
 
+	/// <summary>
+	/// HIGH-VALUE cancel protection (E91BA74C / API_PROPOSAL_2026-10-16 E1283A6D): the
+	/// verdict of <c>BaseBuilderQueueEvalCA.EvaluatePlacementCancelProtection</c>. Allow =
+	/// proven cheap-fast, proceed; RequireCertificate = a proven protected item, cancel only
+	/// under a live domain-exhaustion certificate; Unresolvable = the caller could not prove
+	/// a class — fails closed (protected) until a certificate authorizes.
+	/// </summary>
+	public enum PlacementCancelVerdict { Allow, RequireCertificate, Unresolvable }
+
 	public enum BotQueueTransitionKind { Queued, Ready, Placed, Cancelled, Held, Resumed, Removed, PlacementOrdered, CancelOrdered }
 
 	public enum BotQueueTransitionReason
@@ -893,6 +940,11 @@ namespace OpenRA.Mods.CA.Traits
 		/// total domain at the unrestricted relaxation tier and found no legal cell — the
 		/// proven exhaustion that is the ONLY permitted cancel of a completed refinery.</summary>
 		RefineryDomainExhausted,
+
+		/// <summary>E91BA74C/D831BBCB: an automatic cancel was refused by
+		/// <see cref="PlacementCancelVerdict"/> — the item is protected or unclassifiable
+		/// and no live exhaustion certificate authorized the settle. Held, not removed.</summary>
+		ProtectionHold,
 	}
 
 	public enum BotQueueCancellationClass
