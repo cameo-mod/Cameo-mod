@@ -12,6 +12,8 @@ from tools.ai.exploratory_switch_screen import (
 	_validate_source_gates,
 	materialize_in_memory,
 	plan_cells,
+	validate_plan_cells,
+	validate_plan_record,
 )
 
 
@@ -69,6 +71,53 @@ def test_plan_is_24_map_major_cells_with_seed_reuse_and_rotation():
 		assert all(row["runtime_inheritance_resolution"] == "UNRESOLVED_PRECONDITION" for row in rows)
 		assert all(row["effective_runtime_config_proven"] is False for row in rows)
 	assert len({row["seed"] for row in cells}) == 8
+	assert validate_plan_cells(cells, SEEDS, {row[0]: row[5] for row in MAPS})
+	assert validate_plan_record({
+		"cells": cells,
+		"seed_by_map": SEEDS,
+		"map_hashes": {row[0]: row[5] for row in MAPS},
+	})
+
+
+def test_mandatory_plan_validator_rejects_inventory_and_cross_field_drift():
+	cells = plan_cells()
+	map_hashes = {row[0]: row[5] for row in MAPS}
+	with pytest.raises(ValueError, match="exact ordered 24-cell inventory"):
+		validate_plan_cells(cells[:-1], SEEDS, map_hashes)
+	duplicate = list(cells)
+	duplicate[-1] = dict(duplicate[0])
+	with pytest.raises(ValueError, match="exact ordered 24-cell inventory"):
+		validate_plan_cells(duplicate, SEEDS, map_hashes)
+	wrong_path = [dict(row) for row in cells]
+	wrong_path[0]["map_path"] = MAPS[1][4]
+	with pytest.raises(ValueError, match="exact ordered 24-cell inventory"):
+		validate_plan_cells(wrong_path, SEEDS, map_hashes)
+	wrong_digest = [dict(row) for row in cells]
+	wrong_digest[0]["declared_map_sha256"] = "0" * 64
+	with pytest.raises(ValueError, match="exact ordered 24-cell inventory"):
+		validate_plan_cells(wrong_digest, SEEDS, map_hashes)
+	wrong_identity = [dict(row) for row in cells]
+	wrong_identity[0]["cell_id"] = "BZ_production_scaling|nuclear_winter"
+	with pytest.raises(ValueError, match="exact ordered 24-cell inventory"):
+		validate_plan_cells(wrong_identity, SEEDS, map_hashes)
+	wrong_seed = [dict(row) for row in cells]
+	wrong_seed[0]["seed"] += 1
+	with pytest.raises(ValueError, match="exact ordered 24-cell inventory"):
+		validate_plan_cells(wrong_seed, SEEDS, map_hashes)
+	wrong_type = [dict(row) for row in cells]
+	wrong_type[0]["team_size"] = True
+	with pytest.raises(ValueError, match="exact ordered 24-cell inventory"):
+		validate_plan_cells(wrong_type, SEEDS, map_hashes)
+	wrong_map_hashes = dict(map_hashes)
+	wrong_map_hashes["nuclear_winter"] = "0" * 64
+	with pytest.raises(ValueError, match="top-level map_hashes"):
+		validate_plan_cells(cells, SEEDS, wrong_map_hashes)
+	wrong_seed_map = dict(SEEDS)
+	wrong_seed_map["nuclear_winter"] += 1
+	with pytest.raises(ValueError, match="independently bound seed table"):
+		validate_plan_cells(cells, wrong_seed_map, map_hashes)
+	with pytest.raises(ValueError, match="missing map_hashes"):
+		validate_plan_record({"cells": cells, "seed_by_map": SEEDS})
 
 
 @pytest.mark.parametrize("candidate", CANDIDATES)
@@ -182,10 +231,13 @@ def test_plan_and_schema_remain_non_executable_and_unbound():
 	root = Path(__file__).resolve().parents[2]
 	schema = json.loads((root / "tools/ai/exploratory_switch_screen.schema.json").read_text(encoding="utf-8"))
 	assert schema["properties"]["execution_authorized"] == {"const": False}
+	assert "validate_plan_record" in schema["description"]
 	assert schema["properties"]["caps"] == {"const": "UNBOUND_PENDING_SCREEN_QUALIFICATION"}
 	assert schema["properties"]["runtime_inheritance_resolution"] == {"const": "UNRESOLVED_PRECONDITION"}
 	assert schema["properties"]["effective_runtime_config_proven"] == {"const": False}
 	cell_schema = schema["properties"]["cells"]["items"]
 	assert {"map_path", "declared_map_sha256", "treatment_side", "control_side", "team_size", "factions_per_team", "candidate_order_on_map"} <= set(cell_schema["required"])
 	assert len(cell_schema["allOf"]) == 8  # map key binds path/hash/setup/side/order
+	assert cell_schema["uniqueItems"] is True
+	assert "validate_plan_cells" in cell_schema["description"]
 	assert len(plan_cells()) == 24

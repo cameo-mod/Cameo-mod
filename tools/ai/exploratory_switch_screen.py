@@ -79,8 +79,7 @@ class ArmPayloads:
 	effective_runtime_config_proven: bool = False
 
 
-def plan_cells(seed_by_map: Mapping[str, int] = SEEDS) -> list[dict]:
-	"""Return the exact 24 map-major cells; this is not a launch manifest."""
+def _expected_cells(seed_by_map: Mapping[str, int]) -> list[dict]:
 	if set(seed_by_map) != {row[0] for row in MAPS}:
 		raise ValueError("seed map keys must exactly match the eight declared maps")
 	for key, seed in seed_by_map.items():
@@ -111,8 +110,60 @@ def plan_cells(seed_by_map: Mapping[str, int] = SEEDS) -> list[dict]:
 				"runtime_inheritance_resolution": "UNRESOLVED_PRECONDITION",
 				"effective_runtime_config_proven": False,
 			})
-	if len(cells) != 24 or len({row["cell_id"] for row in cells}) != 24:
-		raise AssertionError("internal cell inventory is not exactly 24 unique cells")
+	return cells
+
+
+def validate_plan_cells(cells: list[dict], seed_by_map: Mapping[str, int],
+						map_hashes: Mapping[str, str]) -> bool:
+	"""Mandatory cross-row validator for any record accepted with this schema.
+
+	The JSON Schema cannot express the complete ordered 24-cell relation or
+	join each row's seed to its top-level seed map. This validator compares the
+	whole cell array to the exact generated inventory and refuses any drift.
+	"""
+	if not isinstance(seed_by_map, Mapping) or dict(seed_by_map) != SEEDS:
+		raise ValueError("seed_by_map differs from the independently bound seed table")
+	expected = _expected_cells(seed_by_map)
+	if not _strict_json_equal(cells, expected):
+		raise ValueError("cells differ from the exact ordered 24-cell inventory")
+	expected_hashes = {row[0]: row[5] for row in MAPS}
+	if not isinstance(map_hashes, Mapping) or dict(map_hashes) != expected_hashes:
+		raise ValueError("top-level map_hashes differ from the approved map table")
+	return True
+
+
+def validate_plan_record(record: Mapping) -> bool:
+	"""Mandatory cross-field check after JSON Schema validation.
+
+	Any future consumer of the planning schema must invoke this validator; the
+	schema's item constraints alone cannot prove exact IDs, order, cardinality,
+	or the cell-to-seed/map-table joins.
+	"""
+	if not isinstance(record, Mapping):
+		raise ValueError("planning record must be a mapping")
+	for field in ("cells", "seed_by_map", "map_hashes"):
+		if field not in record:
+			raise ValueError(f"planning record missing {field}")
+	return validate_plan_cells(record["cells"], record["seed_by_map"], record["map_hashes"])
+
+
+def _strict_json_equal(actual, expected) -> bool:
+	"""Compare JSON-shaped values without Python's bool/int equality alias."""
+	if type(actual) is not type(expected):
+		return False
+	if isinstance(expected, dict):
+		return (actual.keys() == expected.keys()
+			and all(_strict_json_equal(actual[key], expected[key]) for key in expected))
+	if isinstance(expected, list):
+		return len(actual) == len(expected) and all(
+			_strict_json_equal(left, right) for left, right in zip(actual, expected))
+	return actual == expected
+
+
+def plan_cells(seed_by_map: Mapping[str, int] = SEEDS) -> list[dict]:
+	"""Return the exact 24 map-major cells; this is not a launch manifest."""
+	cells = _expected_cells(seed_by_map)
+	validate_plan_cells(cells, seed_by_map, {row[0]: row[5] for row in MAPS})
 	return cells
 
 
