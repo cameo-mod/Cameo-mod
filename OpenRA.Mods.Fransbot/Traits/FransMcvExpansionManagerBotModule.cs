@@ -207,6 +207,17 @@ namespace OpenRA.Mods.Common.Traits
 		[Desc("Refinery types that must be built at each ore expansion before the Construction Yard may repack.")]
 		public readonly FrozenSet<string> ExpansionRefineryTypes = FrozenSet<string>.Empty;
 
+		// Mounted role evidence for FransPlacementCancelGuard. Evidence only — the
+		// protected-vs-cheap-fast policy decision lives in the shared CA helper
+		// BaseBuilderQueueEvalCA.EvaluatePlacementCancelProtection (Developer-owned).
+		// This module mounts no cheap-fast building role sets, so every item not in the
+		// protected union below evaluates Unresolvable and holds — fail-closed by design.
+		FrozenSet<string> protectedCancelRoleTypes;
+
+		public IReadOnlyCollection<string> ProtectedCancelRoleTypes => protectedCancelRoleTypes ??=
+			ExpansionRefineryTypes.Union(ConstructionYardTypes).Union(McvFactoryTypes)
+				.Union(LandingCraftProducerTypes).Union(McvTypes).ToFrozenSet();
+
 		[Desc("Production queue category used for expansion refinery construction.")]
 		public readonly string BuildingQueueCategory = "Building";
 
@@ -9655,11 +9666,23 @@ namespace OpenRA.Mods.Common.Traits
 					// This exact completed naval item cannot be placed from the current buildable area.
 					// Cancel it so it cannot hostage Building production; the bounded coastal watchdog
 					// will repack/retry another staging cell if no real producer progress follows.
-					bot.QueueOrder(Order.CancelProduction(queue.Actor, current.Item, 1));
-					ResetLandingCraftProducerPlacementWatchdog();
-					ReleaseBaseBuilderLock();
-					FransBotLog.BotDebug(world, "{0}: NAVAL SUPPORT completed naval producer {1} has no legal shoreline placement from the current buildable area; cancelling that exact queue item and counting this pass as no progress.",
-						player, current.Item);
+					if (FransPlacementCancelGuard.TryIssue(bot, queue, current.Item, current,
+							FransPlacementCancelGuard.CancelPermitted(world, queue, current.Item,
+								Info.ProtectedCancelRoleTypes, null),
+							out var hold) || hold == FransPlacementCancelGuard.FransCancelHold.None)
+					{
+						ResetLandingCraftProducerPlacementWatchdog();
+						ReleaseBaseBuilderLock();
+						FransBotLog.BotDebug(world, "{0}: NAVAL SUPPORT completed naval producer {1} has no legal shoreline placement from the current buildable area; cancelling that exact queue item and counting this pass as no progress.",
+							player, current.Item);
+					}
+					else
+					{
+						ReleaseBaseBuilderLock();
+						FransBotLog.BotDebug(world, "{0}: cancellation of naval producer {1} held by placement-cancel guard ({2}); watchdog state is preserved.",
+							player, current.Item, hold);
+					}
+
 					return false;
 				}
 
@@ -9676,10 +9699,23 @@ namespace OpenRA.Mods.Common.Traits
 						FransBotLog.BotDebug(world,
 							"{0}: completed naval producer {1} on Building queue {2} failed physical placement confirmation {3} time(s); cancelling the stale READY item so naval support can replan instead of deadlocking the shared queue.",
 							player, current.Item, queue.Actor.ActorID, landingCraftProducerPlacementRetries);
-						bot.QueueOrder(Order.CancelProduction(queue.Actor, current.Item, 1));
-						ResetLandingCraftProducerPlacementWatchdog();
-						InvalidateLandingCraftProducerLocationCache();
-						ReleaseBaseBuilderLock();
+						if (FransPlacementCancelGuard.TryIssue(bot, queue, current.Item, current,
+								FransPlacementCancelGuard.CancelPermitted(world, queue, current.Item,
+									Info.ProtectedCancelRoleTypes, null),
+								out var hold) || hold == FransPlacementCancelGuard.FransCancelHold.None)
+						{
+							ResetLandingCraftProducerPlacementWatchdog();
+							InvalidateLandingCraftProducerLocationCache();
+							ReleaseBaseBuilderLock();
+						}
+						else
+						{
+							ReleaseBaseBuilderLock();
+							FransBotLog.BotDebug(world,
+								"{0}: cancellation of stale READY naval producer {1} held by placement-cancel guard ({2}); placement-watchdog state is preserved.",
+								player, current.Item, hold);
+						}
+
 						return false;
 					}
 				}
@@ -10140,7 +10176,22 @@ namespace OpenRA.Mods.Common.Traits
 			var queue = FindReservedFirstExpansionRefineryQueue(refineryType);
 			var reserved = queue?.AllQueued().FirstOrDefault(item => item.Item == refineryType);
 			if (firstExpansionRefineryReservationActive && queue != null && reserved != null)
-				bot.QueueOrder(Order.CancelProduction(queue.Actor, refineryType, 1));
+			{
+				// The engine removes the LAST same-name entry; the reservation binds the
+				// FIRST. Issue only when they are the same item, and only when the shared
+				// protection policy permits. On hold, keep every reservation flag so the
+				// reserve is not falsely settled for an item the order never removed.
+				if (!FransPlacementCancelGuard.TryIssue(bot, queue, refineryType, reserved,
+						FransPlacementCancelGuard.CancelPermitted(world, queue, refineryType,
+							Info.ProtectedCancelRoleTypes, null),
+						out var hold) && hold != FransPlacementCancelGuard.FransCancelHold.None)
+				{
+					FransBotLog.BotDebug(world,
+						"{0}: cancellation of reserved first-expansion refinery {1} held by placement-cancel guard ({2}); reservation state is preserved.",
+						player, refineryType, hold);
+					return;
+				}
+			}
 
 			firstExpansionRefineryReservationActive = false;
 			firstExpansionRefineryReservationCompleted = true;
@@ -10229,7 +10280,22 @@ namespace OpenRA.Mods.Common.Traits
 			var reserved = queue?.AllQueued().FirstOrDefault(item => item.Item == refineryType);
 			var cancelled = queue != null && reserved != null;
 			if (cancelled)
-				bot.QueueOrder(Order.CancelProduction(queue.Actor, refineryType, 1));
+			{
+				// First-vs-LAST fix + protection gate: issue only when the reserved FIRST
+				// is the engine's LAST same-name target and policy permits; otherwise hold
+				// without suspending — the reservation is not released for an item that
+				// was not actually evicted.
+				if (!FransPlacementCancelGuard.TryIssue(bot, queue, refineryType, reserved,
+						FransPlacementCancelGuard.CancelPermitted(world, queue, refineryType,
+							Info.ProtectedCancelRoleTypes, null),
+						out var hold) && hold != FransPlacementCancelGuard.FransCancelHold.None)
+				{
+					FransBotLog.BotDebug(world,
+						"{0}: FIRST EXPANSION PROC SUSPEND for naval infrastructure held by placement-cancel guard ({1}); reservation and lock remain until the guard permits the eviction.",
+						player, hold);
+					return;
+				}
+			}
 
 			// Keep the strategic one-shot requirement, but relinquish all concrete Building-queue
 			// ownership while naval infrastructure is being created. Resume reacquires a fresh
@@ -10287,7 +10353,20 @@ namespace OpenRA.Mods.Common.Traits
 			var reserved = queue?.AllQueued().FirstOrDefault(item => item.Item == refineryType);
 			var cancellationQueued = queue != null && reserved != null;
 			if (cancellationQueued)
-				bot.QueueOrder(Order.CancelProduction(queue.Actor, refineryType, 1));
+			{
+				// First-vs-LAST fix + protection gate: the abort only settles when the
+				// reserved item was the engine's actual target and the cancel issued.
+				if (!FransPlacementCancelGuard.TryIssue(bot, queue, refineryType, reserved,
+						FransPlacementCancelGuard.CancelPermitted(world, queue, refineryType,
+							Info.ProtectedCancelRoleTypes, null),
+						out var hold) && hold != FransPlacementCancelGuard.FransCancelHold.None)
+				{
+					FransBotLog.BotDebug(world,
+						"{0}: first-expansion PROC abort {1} held by placement-cancel guard ({2}); attempt state is preserved for a later pass.",
+						player, reason, hold);
+					return;
+				}
+			}
 
 			firstExpansionRefineryReservationActive = false;
 			firstExpansionRefinerySuspendedForInfrastructure = false;
@@ -11152,8 +11231,21 @@ namespace OpenRA.Mods.Common.Traits
 			var cancelled = queue != null && ownedItem != null;
 			if (cancelled)
 			{
+				// First-vs-LAST fix + protection gate: release queue ownership only when
+				// the owned FIRST is the engine's LAST target and the cancel actually
+				// issued. On hold the ownership record stays so it is not falsely settled.
+				if (!FransPlacementCancelGuard.TryIssue(bot, queue, buildingType, ownedItem,
+						FransPlacementCancelGuard.CancelPermitted(world, queue, buildingType,
+							Info.ProtectedCancelRoleTypes, null),
+						out var hold) && hold != FransPlacementCancelGuard.FransCancelHold.None)
+				{
+					FransBotLog.BotDebug(world,
+						"{0}: routine expansion Building-queue handoff cancel of {1} on actor {2} held by placement-cancel guard ({3}); ownership is preserved.",
+						player, buildingType, queueActor.ActorID, hold);
+					return false;
+				}
+
 				LogBuildingQueueHandoffTransition("CancellationIssued", queue, buildingType, reason);
-				bot.QueueOrder(Order.CancelProduction(queue.Actor, buildingType, 1));
 			}
 
 			FransBotLog.BotDebug(world,

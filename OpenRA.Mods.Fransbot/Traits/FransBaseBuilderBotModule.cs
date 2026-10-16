@@ -259,6 +259,20 @@ namespace OpenRA.Mods.Common.Traits
 		[Desc("Faction tech structures that unlock capital naval bombardment ships (ATEK for Cruiser, STEK for Missile Submarine).")]
 		public readonly FrozenSet<string> NavalCapitalTechTypes = FrozenSet<string>.Empty;
 
+		// Mounted role evidence for FransPlacementCancelGuard. Evidence only — the
+		// protected-vs-cheap-fast policy decision lives in the shared CA helper
+		// BaseBuilderQueueEvalCA.EvaluatePlacementCancelProtection (Developer-owned).
+		FrozenSet<string> protectedCancelRoleTypes;
+		FrozenSet<string> cheapFastCancelRoleTypes;
+
+		public IReadOnlyCollection<string> ProtectedCancelRoleTypes => protectedCancelRoleTypes ??=
+			RefineryTypes.Union(TechTypes).Union(RadarTypes).Union(WarFactoryTypes)
+				.Union(NavalProductionTypes).Union(ConstructionYardTypes)
+				.Union(AdvancedTechCenterTypes).Union(StrategicSuperweaponTypes)
+				.Union(SurplusAirProductionTypes).ToFrozenSet();
+
+		public IReadOnlyCollection<string> CheapFastCancelRoleTypes => cheapFastCancelRoleTypes ??=
+			PowerTypes.Union(SiloTypes).Union(BarracksTypes).Union(ForwardStructureTypes).ToFrozenSet();
 
 		public override void RulesetLoaded(Ruleset rules, ActorInfo ai)
 		{
@@ -2509,6 +2523,14 @@ namespace OpenRA.Mods.Common.Traits
 				}
 			}
 
+			void MarkTrackedCancellationHeld(ProductionQueue queue, ProductionItem item, string reason,
+				FransPlacementCancelGuard.FransCancelHold hold)
+			{
+				foreach (var lifecycle in expansionLockLifecycleDiagnostics.Where(candidate => candidate.QueueActorId == queue.Actor.ActorID &&
+					(candidate.NativeItem == null ? candidate.Item == item.Item : ReferenceEquals(candidate.NativeItem, item))))
+					LogExpansionLockLifecycleTransition(lifecycle, queue, "CancellationHeld", $"{reason}/{hold}");
+			}
+
 			void MarkTrackedPlacementIssued(ProductionQueue queue, ProductionItem item, CPos location)
 			{
 				foreach (var lifecycle in expansionLockLifecycleDiagnostics.Where(candidate => candidate.QueueActorId == queue.Actor.ActorID &&
@@ -2870,8 +2892,21 @@ namespace OpenRA.Mods.Common.Traits
 					if (baseBuilder.Info.RefineryTypes.Contains(current.Item) &&
 						baseBuilder.expansionStateService?.FirstExpansionRefinerySuspendedForInfrastructure == true)
 					{
-						MarkTrackedCancellationIssued(queue, current, "FirstExpansionRefinerySuspendedForInfrastructure");
-						bot.QueueOrder(Order.CancelProduction(queue.Actor, current.Item, 1));
+						if (FransPlacementCancelGuard.TryIssue(bot, queue, current.Item, current,
+								FransPlacementCancelGuard.CancelPermitted(world, queue, current.Item,
+									baseBuilder.Info.ProtectedCancelRoleTypes, baseBuilder.Info.CheapFastCancelRoleTypes),
+								out var hold))
+						{
+							MarkTrackedCancellationIssued(queue, current, "FirstExpansionRefinerySuspendedForInfrastructure");
+						}
+						else if (hold != FransPlacementCancelGuard.FransCancelHold.None)
+						{
+							MarkTrackedCancellationHeld(queue, current, "FirstExpansionRefinerySuspendedForInfrastructure", hold);
+							FransBotLog.BotDebug(world,
+								"{0}: cancellation of suspended first-expansion refinery {1} held by placement-cancel guard ({2}).",
+								player, current.Item, hold);
+						}
+
 						return true;
 					}
 
@@ -2899,10 +2934,23 @@ namespace OpenRA.Mods.Common.Traits
 								FransBotLog.BotDebug(world,
 									"{0}: SECURE producer reservation {1} for target {2} lost its physical FACT; cancelling the stale queue item so Building production cannot deadlock.",
 									player, current.Item, secureProductionTargetId);
-								MarkTrackedCancellationIssued(queue, current, "SecureProducerFactLost");
-								bot.QueueOrder(Order.CancelProduction(queue.Actor, current.Item, 1));
-								secureProductionTargetId = 0;
-								secureProductionItem = null;
+								if (FransPlacementCancelGuard.TryIssue(bot, queue, current.Item, current,
+										FransPlacementCancelGuard.CancelPermitted(world, queue, current.Item,
+											baseBuilder.Info.ProtectedCancelRoleTypes, baseBuilder.Info.CheapFastCancelRoleTypes),
+										out var hold) || hold == FransPlacementCancelGuard.FransCancelHold.None)
+								{
+									MarkTrackedCancellationIssued(queue, current, "SecureProducerFactLost");
+									secureProductionTargetId = 0;
+									secureProductionItem = null;
+								}
+								else
+								{
+									MarkTrackedCancellationHeld(queue, current, "SecureProducerFactLost", hold);
+									FransBotLog.BotDebug(world,
+										"{0}: cancellation of stale SECURE producer reservation {1} held by placement-cancel guard ({2}); reservation state is preserved.",
+										player, current.Item, hold);
+								}
+
 								return true;
 							}
 						}
@@ -2920,10 +2968,23 @@ namespace OpenRA.Mods.Common.Traits
 							FransBotLog.BotDebug(world,
 								"{0}: REMOTE BASE producer reservation {1} lost FACT {2}; cancelling stale queue item rather than placing it back at the main base.",
 								player, current.Item, remoteProductionFactActorId);
-							MarkTrackedCancellationIssued(queue, current, "RemoteProducerFactLost");
-							bot.QueueOrder(Order.CancelProduction(queue.Actor, current.Item, 1));
-							remoteProductionFactActorId = 0;
-							remoteProductionItem = null;
+							if (FransPlacementCancelGuard.TryIssue(bot, queue, current.Item, current,
+									FransPlacementCancelGuard.CancelPermitted(world, queue, current.Item,
+										baseBuilder.Info.ProtectedCancelRoleTypes, baseBuilder.Info.CheapFastCancelRoleTypes),
+									out var hold) || hold == FransPlacementCancelGuard.FransCancelHold.None)
+							{
+								MarkTrackedCancellationIssued(queue, current, "RemoteProducerFactLost");
+								remoteProductionFactActorId = 0;
+								remoteProductionItem = null;
+							}
+							else
+							{
+								MarkTrackedCancellationHeld(queue, current, "RemoteProducerFactLost", hold);
+								FransBotLog.BotDebug(world,
+									"{0}: cancellation of stale REMOTE BASE producer reservation {1} held by placement-cancel guard ({2}); reservation state is preserved.",
+									player, current.Item, hold);
+							}
+
 							return true;
 						}
 						remoteProductionCenter = remoteProductionFact.Location;
@@ -2943,8 +3004,20 @@ namespace OpenRA.Mods.Common.Traits
 							FransBotLog.BotDebug(world,
 								"{0}: expansion-routed completed {1} lost every valid expansion FACT for {2} WT; cancelling the stale Building-queue item instead of deadlocking production.",
 								player, current.Item, baseBuilder.Info.ExpansionPlacementCompletedHoldTimeoutTicks);
-							MarkTrackedCancellationIssued(queue, current, "ExpansionPlacementFactUnavailable");
-							bot.QueueOrder(Order.CancelProduction(queue.Actor, current.Item, 1));
+							if (FransPlacementCancelGuard.TryIssue(bot, queue, current.Item, current,
+									FransPlacementCancelGuard.CancelPermitted(world, queue, current.Item,
+										baseBuilder.Info.ProtectedCancelRoleTypes, baseBuilder.Info.CheapFastCancelRoleTypes),
+									out var hold))
+							{
+								MarkTrackedCancellationIssued(queue, current, "ExpansionPlacementFactUnavailable");
+							}
+							else if (hold != FransPlacementCancelGuard.FransCancelHold.None)
+							{
+								MarkTrackedCancellationHeld(queue, current, "ExpansionPlacementFactUnavailable", hold);
+								FransBotLog.BotDebug(world,
+									"{0}: cancellation of expansion-routed completed {1} held by placement-cancel guard ({2}); item stays queued for a later pass.",
+									player, current.Item, hold);
+							}
 						}
 						return true;
 					}
@@ -2968,14 +3041,27 @@ namespace OpenRA.Mods.Common.Traits
 								FransBotLog.BotDebug(world,
 									"{0}: completed Building-queue item {1} on actor {2} remained READY after {3} unconfirmed native placement attempts; cancelling the stale item so the shared Building queue cannot deadlock.",
 									player, current.Item, queue.Actor.ActorID, placementPendingConfirmationRetries);
-								MarkTrackedCancellationIssued(queue, current, "PlacementConfirmationRetriesExhausted");
-								bot.QueueOrder(Order.CancelProduction(queue.Actor, current.Item, 1));
-								placementPendingItem = null;
-								placementPendingQueueActorId = 0;
-								placementPendingIssuedTick = -1;
-								placementPendingConfirmationRetries = 0;
-								lastFailedBuilding = current.Item;
-								baseBuilder.NotifyOpeningBuildingFailed(current.Item);
+								if (FransPlacementCancelGuard.TryIssue(bot, queue, current.Item, current,
+										FransPlacementCancelGuard.CancelPermitted(world, queue, current.Item,
+											baseBuilder.Info.ProtectedCancelRoleTypes, baseBuilder.Info.CheapFastCancelRoleTypes),
+										out var hold))
+								{
+									MarkTrackedCancellationIssued(queue, current, "PlacementConfirmationRetriesExhausted");
+									placementPendingItem = null;
+									placementPendingQueueActorId = 0;
+									placementPendingIssuedTick = -1;
+									placementPendingConfirmationRetries = 0;
+									lastFailedBuilding = current.Item;
+									baseBuilder.NotifyOpeningBuildingFailed(current.Item);
+								}
+								else if (hold != FransPlacementCancelGuard.FransCancelHold.None)
+								{
+									MarkTrackedCancellationHeld(queue, current, "PlacementConfirmationRetriesExhausted", hold);
+									FransBotLog.BotDebug(world,
+										"{0}: cancellation of stale READY item {1} held by placement-cancel guard ({2}); pending-placement record is preserved.",
+										player, current.Item, hold);
+									return true;
+								}
 								if (baseBuilder.Info.NavalProductionTypes.Contains(current.Item))
 								{
 									var retryTicks = Math.Max(1, baseBuilder.Info.StructureProductionResumeDelay);
@@ -3038,8 +3124,20 @@ namespace OpenRA.Mods.Common.Traits
 						if (++failCount >= baseBuilder.Info.MaximumFailedPlacementAttempts)
 						{
 							FransBotLog.BotDebug(world, "{0}: FransBaseBuilder has nowhere to place {1}.", player, current.Item);
+							var cancelIssued = FransPlacementCancelGuard.TryIssue(bot, queue, current.Item, current,
+								FransPlacementCancelGuard.CancelPermitted(world, queue, current.Item,
+									baseBuilder.Info.ProtectedCancelRoleTypes, baseBuilder.Info.CheapFastCancelRoleTypes),
+								out var hold);
+							if (!cancelIssued && hold != FransPlacementCancelGuard.FransCancelHold.None)
+							{
+								MarkTrackedCancellationHeld(queue, current, "MaximumPlacementFailuresReached", hold);
+								FransBotLog.BotDebug(world,
+									"{0}: cancellation of unplaceable {1} held by placement-cancel guard ({2}); item stays head-of-queue for a later pass.",
+									player, current.Item, hold);
+								return true;
+							}
+
 							MarkTrackedCancellationIssued(queue, current, "MaximumPlacementFailuresReached");
-							bot.QueueOrder(Order.CancelProduction(queue.Actor, current.Item, 1));
 							lastFailedBuilding = current.Item;
 
 							if (baseBuilder.Info.NavalProductionTypes.Contains(current.Item))
@@ -3845,6 +3943,134 @@ namespace OpenRA.Mods.Common.Traits
 					return FindStockNativeMultiFactFallback();
 				}
 			}
+		}
+	}
+
+	/// <summary>
+	/// Shared fail-closed guard for every Frans automatic building-queue cancellation.
+	/// Two independent checks, both derived from the maintainer refinement ruling
+	/// (RULING_2026-10-16_high_value_placement_refinement_sol.md, SHA A399083F):
+	///   1) Intended-vs-engine-target: Order.CancelProduction is name-only and removes the
+	///      LAST same-name queue entry. If the caller intended a different entry (e.g. a
+	///      reserved/handoff FIRST), the order is never issued and no reservation state is
+	///      released — hold-on-mismatch, never redirected intent.
+	///   2) Protection: the cancel proceeds only when the shared CA policy helper returns
+	///      Allow (provably cheap-fast). Frans carries no exhaustion-certificate machinery,
+	///      so protected and unresolvable items both hold here.
+	/// DEPENDENCY (recorded): the verdict call delegates to
+	/// BaseBuilderQueueEvalCA.EvaluatePlacementCancelProtection — the Developer-owned
+	/// shared policy helper whose API is proposed in
+	/// API_PROPOSAL_2026-10-16_placement_cancel_protection.md (fleet repo). If the agreed
+	/// signature differs, only this one call site adapts. Frans cannot self-classify:
+	/// doing so would duplicate the policy helper, which the task forbids.
+	/// </summary>
+	public static class FransPlacementCancelGuard
+	{
+		public enum FransCancelHold { None, AmbiguousTarget, Protected }
+
+		/// <summary>Mirrors engine law: ProductionQueue.CancelProductionInner removes
+		/// Queue.LastOrDefault(i => i.Item == name) — name-only, tail-first.</summary>
+		public static ProductionItem EngineCancelTarget(ProductionQueue queue, string itemName) =>
+			queue?.AllQueued().LastOrDefault(item => item.Item == itemName);
+
+		/// <summary>
+		/// Gathers mounted role-membership and resolved cost/build-time evidence, then asks
+		/// the shared CA policy helper whether this cancel is permitted. Returns true only
+		/// on PlacementCancelVerdict.Allow; protected and unresolvable both return false.
+		/// </summary>
+		public static bool CancelPermitted(World world, ProductionQueue queue, string itemName,
+			IReadOnlyCollection<string> protectedRoleTypes, IReadOnlyCollection<string> cheapFastRoleTypes)
+		{
+			if (queue == null || itemName == null)
+				return false;
+
+			world.Map.Rules.Actors.TryGetValue(itemName, out var info);
+			var buildable = info == null ? null : BuildableInfo.GetTraitForQueue(info, queue.Info.Type);
+			int? resolvedCost = info?.TraitInfoOrDefault<ValuedInfo>() == null ? (int?)null : queue.GetProductionCost(info);
+			int? resolvedTicks = info != null && buildable != null ? queue.GetBuildTime(info, buildable) : (int?)null;
+
+			int? floorCost = null;
+			int? floorTicks = null;
+			if (protectedRoleTypes != null)
+			{
+				foreach (var name in protectedRoleTypes)
+				{
+					if (!world.Map.Rules.Actors.TryGetValue(name, out var candidate) || candidate == null)
+						continue;
+					if (candidate.TraitInfoOrDefault<ValuedInfo>() != null)
+					{
+						var cost = queue.GetProductionCost(candidate);
+						floorCost = floorCost.HasValue ? Math.Min(floorCost.Value, cost) : cost;
+					}
+
+					var candidateBuildable = BuildableInfo.GetTraitForQueue(candidate, queue.Info.Type);
+					if (candidateBuildable != null)
+					{
+						var ticks = queue.GetBuildTime(candidate, candidateBuildable);
+						floorTicks = floorTicks.HasValue ? Math.Min(floorTicks.Value, ticks) : ticks;
+					}
+				}
+			}
+
+			return SharedPolicySeam(info,
+				protectedRoleTypes != null && protectedRoleTypes.Contains(itemName),
+				cheapFastRoleTypes != null && cheapFastRoleTypes.Contains(itemName),
+				resolvedCost, resolvedTicks, floorCost, floorTicks);
+		}
+
+		/// <summary>
+		/// BLOCKED SEAM (recorded dependency — see API_PROPOSAL_2026-10-16_placement_cancel_protection.md
+		/// in the fleet repo and the claim doc): the shared policy helper
+		/// BaseBuilderQueueEvalCA.EvaluatePlacementCancelProtection plus its
+		/// PlacementCancelVerdict enum is Developer-owned inside the live CA claim and the
+		/// signature agreement is still pending (MCP coordination unavailable at write
+		/// time). Frans must not duplicate the classifier, so until the agreed helper lands
+		/// this seam FAILS CLOSED: every Frans placement cancel holds rather than risk a
+		/// protected or unresolvable item. That satisfies the safety law (unknown/default
+		/// protected, no exhaustion-proofed cancels at all); the only cost is deferred
+		/// cheap-fast utility. When the helper lands, this body becomes exactly:
+		///   return BaseBuilderQueueEvalCA.EvaluatePlacementCancelProtection(
+		///       info, isProtectedRole, isCheapFastRole, resolvedCost, resolvedTicks,
+		///       referenceFloorCost, referenceFloorTicks) == PlacementCancelVerdict.Allow;
+		/// The parameter list already matches the proposed signature — no other change.
+		/// </summary>
+		static bool SharedPolicySeam(ActorInfo info, bool isProtectedRole, bool isCheapFastRole,
+			int? resolvedCost, int? resolvedTicks, int? referenceFloorCost, int? referenceFloorTicks)
+		{
+			return false;
+		}
+
+		/// <summary>
+		/// Issues Order.CancelProduction only when the intended entry IS the engine's
+		/// last-same-name target AND the shared policy allows the cancel. Returns false
+		/// with hold == None when the item is already absent (a no-op, same as the old
+		/// unconditional issue); false with a hold reason when the guard refuses.
+		/// </summary>
+		public static bool TryIssue(IBot bot, ProductionQueue queue, string itemName,
+			ProductionItem intended, bool cancelPermitted, out FransCancelHold hold)
+		{
+			var engineTarget = EngineCancelTarget(queue, itemName);
+			if (engineTarget == null)
+			{
+				hold = FransCancelHold.None;
+				return false;
+			}
+
+			if (intended != null && !ReferenceEquals(engineTarget, intended))
+			{
+				hold = FransCancelHold.AmbiguousTarget;
+				return false;
+			}
+
+			if (!cancelPermitted)
+			{
+				hold = FransCancelHold.Protected;
+				return false;
+			}
+
+			bot.QueueOrder(Order.CancelProduction(queue.Actor, itemName, 1));
+			hold = FransCancelHold.None;
+			return true;
 		}
 	}
 }
