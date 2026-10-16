@@ -33,7 +33,9 @@ namespace OpenRA.Mods.Cameo.Test
 	{
 		// ---- helpers -------------------------------------------------------
 
-		static RefineryFallbackScan.Provider Prov(int x, int y, int reach, uint id = 1) =>
+		// Returns Provider? so new[] { Prov(...) } infers Provider?[] — the Snapshot
+		// helpers take IReadOnlyList<Provider?> and there is no covariance over value types.
+		static RefineryFallbackScan.Provider? Prov(int x, int y, int reach, uint id = 1) =>
 			new RefineryFallbackScan.Provider(new CPos(x, y), reach, id);
 
 		static int Unrestricted(int tier) => int.MaxValue;
