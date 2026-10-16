@@ -7,6 +7,7 @@ launch/runtime entry point. Execution requires a separately reviewed adapter.
 from __future__ import annotations
 
 import hashlib
+import itertools
 import json
 import os
 import pathlib
@@ -62,7 +63,7 @@ ROTATIONS = (
 
 @dataclass(frozen=True)
 class ArmPayloads:
-	"""In-memory payload pair; the module intentionally has no persistence API."""
+	"""Raw-YAML normalization pair; this is not effective runtime config proof."""
 
 	control: dict[str, str]
 	treatment: dict[str, str]
@@ -74,6 +75,8 @@ class ArmPayloads:
 	treatment_sha256: str
 	control_semantic_sha256: str
 	treatment_semantic_sha256: str
+	runtime_inheritance_resolution: str = "UNRESOLVED_PRECONDITION"
+	effective_runtime_config_proven: bool = False
 
 
 def plan_cells(seed_by_map: Mapping[str, int] = SEEDS) -> list[dict]:
@@ -105,6 +108,8 @@ def plan_cells(seed_by_map: Mapping[str, int] = SEEDS) -> list[dict]:
 				"actual_seats": None,
 				"caps": None,
 				"execution_authorized": False,
+				"runtime_inheritance_resolution": "UNRESOLVED_PRECONDITION",
+				"effective_runtime_config_proven": False,
 			})
 	if len(cells) != 24 or len({row["cell_id"] for row in cells}) != 24:
 		raise AssertionError("internal cell inventory is not exactly 24 unique cells")
@@ -392,9 +397,110 @@ def _validate_source_gates(files: Mapping[str, str], groups: dict) -> None:
 		for filename, instance in found[trait]:
 			if instance.key == "SquadManagerBotModuleCA@classic":
 				continue
-			condition = instance.get("RequiresCondition") or ""
-			if "genericbot" not in condition or "classicbot" in condition:
-				raise ValueError(f"source {trait} must keep non-classic instances genericbot-only at {filename}:{instance.line}")
+			condition = instance.get("RequiresCondition")
+			if not condition or not _condition_implies_genericbot(condition):
+				raise ValueError(f"source {trait} RequiresCondition must logically imply genericbot at {filename}:{instance.line}")
+	for trait in ("BaseBuilderBotModuleCA", "UnitBuilderBotModuleCA"):
+		for filename, instance in found[trait]:
+			condition = instance.get("RequiresCondition")
+			# These two generic-owner modules have a deliberately shared
+			# RequiresCondition in the current source. SwitchCondition is the
+			# independent generic-only runtime gate for that exact reviewed form.
+			if condition == "genericbot || classicbot" and instance.key.endswith("@generic"):
+				continue
+			if not condition or not _condition_implies_genericbot(condition):
+				raise ValueError(f"source {trait} RequiresCondition must imply genericbot (or use the exact reviewed generic-owner form) at {filename}:{instance.line}")
+
+
+def _parse_condition(expression: str):
+	"""Parse the supported boolean subset; unsupported syntax fails closed."""
+	token_pattern = re.compile(r"\s*(&&|\|\||!|\(|\)|[A-Za-z_][A-Za-z0-9_-]*)")
+	tokens = []
+	position = 0
+	while position < len(expression):
+		match = token_pattern.match(expression, position)
+		if not match:
+			if expression[position:].strip() == "":
+				break
+			raise ValueError("unsupported RequiresCondition syntax")
+		tokens.append(match.group(1))
+		position = match.end()
+	if not tokens:
+		raise ValueError("empty RequiresCondition")
+	index = 0
+
+	def parse_primary():
+		nonlocal index
+		if index >= len(tokens):
+			raise ValueError("incomplete RequiresCondition")
+		token = tokens[index]
+		if token == "!":
+			index += 1
+			return ("not", parse_primary())
+		if token == "(":
+			index += 1
+			node = parse_or()
+			if index >= len(tokens) or tokens[index] != ")":
+				raise ValueError("unclosed RequiresCondition group")
+			index += 1
+			return node
+		if token in {"&&", "||", ")"}:
+			raise ValueError("invalid RequiresCondition token order")
+		index += 1
+		return ("atom", token)
+
+	def parse_and():
+		nonlocal index
+		node = parse_primary()
+		while index < len(tokens) and tokens[index] == "&&":
+			index += 1
+			node = ("and", node, parse_primary())
+		return node
+
+	def parse_or():
+		nonlocal index
+		node = parse_and()
+		while index < len(tokens) and tokens[index] == "||":
+			index += 1
+			node = ("or", node, parse_and())
+		return node
+
+	ast = parse_or()
+	if index != len(tokens):
+		raise ValueError("trailing RequiresCondition tokens")
+	return ast
+
+
+def _condition_implies_genericbot(expression: str) -> bool:
+	try:
+		ast = _parse_condition(expression)
+	except ValueError:
+		return False
+	variables = set()
+	def collect(node):
+		if node[0] == "atom":
+			variables.add(node[1])
+		elif node[0] == "not":
+			collect(node[1])
+		else:
+			collect(node[1]); collect(node[2])
+	collect(ast)
+	if "genericbot" not in variables or len(variables) > 12:
+		return False
+	ordered = sorted(variables)
+	def evaluate(node, values):
+		if node[0] == "atom":
+			return values[node[1]]
+		if node[0] == "not":
+			return not evaluate(node[1], values)
+		if node[0] == "and":
+			return evaluate(node[1], values) and evaluate(node[2], values)
+		return evaluate(node[1], values) or evaluate(node[2], values)
+	for bits in itertools.product((False, True), repeat=len(ordered)):
+		values = dict(zip(ordered, bits))
+		if evaluate(ast, values) and not values["genericbot"]:
+			return False
+	return True
 
 
 def materialize_in_memory(source_files: Mapping[str, str], groups: dict, skip: list[str], candidate: str,
@@ -402,6 +508,10 @@ def materialize_in_memory(source_files: Mapping[str, str], groups: dict, skip: l
 	"""Create control/treatment text in memory and prove the sole intended delta.
 
 	No path is written. Callers receive mappings that this API cannot persist.
+	Inheritance and ruleset resolution are not performed: the returned record
+	keeps runtime_inheritance_resolution=UNRESOLVED_PRECONDITION and
+	effective_runtime_config_proven=False. This is a textual normalization
+	check, never proof of the loaded/effective runtime traits.
 	"""
 	if candidate not in CANDIDATES:
 		raise ValueError("unknown exploratory candidate")

@@ -8,6 +8,8 @@ from tools.ai.exploratory_switch_screen import (
 	MAPS,
 	SEEDS,
 	_expected_groups,
+	_condition_implies_genericbot,
+	_validate_source_gates,
 	materialize_in_memory,
 	plan_cells,
 )
@@ -63,6 +65,9 @@ def test_plan_is_24_map_major_cells_with_seed_reuse_and_rotation():
 		assert {row["seed"] for row in rows} == {SEEDS[map_key]}
 		assert {row["execution_authorized"] for row in rows} == {False}
 		assert all(row["actual_seats"] is None and row["caps"] is None for row in rows)
+		assert all(row["map_path"] == MAPS[map_index][4] and row["declared_map_sha256"] == MAPS[map_index][5] for row in rows)
+		assert all(row["runtime_inheritance_resolution"] == "UNRESOLVED_PRECONDITION" for row in rows)
+		assert all(row["effective_runtime_config_proven"] is False for row in rows)
 	assert len({row["seed"] for row in cells}) == 8
 
 
@@ -120,6 +125,28 @@ def test_duplicate_candidate_field_and_changed_generic_gate_are_refused():
 		materialize_in_memory(fixture_files(wrong_gate), GROUPS, SKIP, "BZ_production_scaling", BJ_DISPOSITION_SHA256)
 
 
+def test_requirescondition_gate_uses_implication_not_substring():
+	assert _condition_implies_genericbot("genericbot")
+	assert _condition_implies_genericbot("genericbot && personality-rush")
+	assert not _condition_implies_genericbot("!genericbot")
+	assert not _condition_implies_genericbot("genericbot || othercondition")
+	assert not _condition_implies_genericbot("xgenericbot")
+	for invalid in ("!genericbot", "genericbot || othercondition"):
+		bad = AI_TEXT.replace("RequiresCondition: genericbot", f"RequiresCondition: {invalid}", 1)
+		with pytest.raises(ValueError, match="logically imply genericbot"):
+			_validate_source_gates(fixture_files(bad), GROUPS)
+	valid = AI_TEXT.replace(
+		"ExpansionPlannerBotModule:\n\t\tRequiresCondition: genericbot",
+		"ExpansionPlannerBotModule:\n\t\tRequiresCondition: genericbot && personality-rush",
+		1,
+	)
+	_validate_source_gates(fixture_files(valid), GROUPS)
+	# The exact shared builder form remains accepted only because the instance
+	# is explicitly named @generic and has SwitchCondition: genericbot.
+	assert "RequiresCondition: genericbot || classicbot" in AI_TEXT
+	assert "SwitchCondition: genericbot" in AI_TEXT
+
+
 def test_treatment_delta_outside_selected_group_is_refused(monkeypatch):
 	from tools.ai import exploratory_switch_screen as screen
 
@@ -156,4 +183,9 @@ def test_plan_and_schema_remain_non_executable_and_unbound():
 	schema = json.loads((root / "tools/ai/exploratory_switch_screen.schema.json").read_text(encoding="utf-8"))
 	assert schema["properties"]["execution_authorized"] == {"const": False}
 	assert schema["properties"]["caps"] == {"const": "UNBOUND_PENDING_SCREEN_QUALIFICATION"}
+	assert schema["properties"]["runtime_inheritance_resolution"] == {"const": "UNRESOLVED_PRECONDITION"}
+	assert schema["properties"]["effective_runtime_config_proven"] == {"const": False}
+	cell_schema = schema["properties"]["cells"]["items"]
+	assert {"map_path", "declared_map_sha256", "treatment_side", "control_side", "team_size", "factions_per_team", "candidate_order_on_map"} <= set(cell_schema["required"])
+	assert len(cell_schema["allOf"]) == 8  # map key binds path/hash/setup/side/order
 	assert len(plan_cells()) == 24

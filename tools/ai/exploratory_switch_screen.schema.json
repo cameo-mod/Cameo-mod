@@ -20,7 +20,9 @@
     "map_hashes",
     "bj_disposition_sha256",
     "caps",
-    "execution_authorized"
+    "execution_authorized",
+    "runtime_inheritance_resolution",
+    "effective_runtime_config_proven"
   ],
   "properties": {
     "schema": { "const": 1 },
@@ -53,7 +55,7 @@
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["cell_id", "candidate", "map_key", "setup", "seed", "treatment_side", "actual_seats", "caps", "execution_authorized"],
+        "required": ["cell_id", "candidate", "map_key", "setup", "team_size", "factions_per_team", "map_path", "declared_map_sha256", "seed", "candidate_order_on_map", "treatment_side", "control_side", "actual_seats", "caps", "execution_authorized", "runtime_inheritance_resolution", "effective_runtime_config_proven"],
         "properties": {
           "cell_id": { "type": "string", "pattern": "^(BY_crawl_safety|BZ_production_scaling|BJ_squad_hysteresis)\\|[a-z0-9_]+$" },
           "candidate": { "enum": ["BY_crawl_safety", "BZ_production_scaling", "BJ_squad_hysteresis"] },
@@ -69,8 +71,20 @@
           "control_side": { "enum": ["A", "B"] },
           "actual_seats": { "const": null },
           "caps": { "const": null },
-          "execution_authorized": { "const": false }
-        }
+          "execution_authorized": { "const": false },
+          "runtime_inheritance_resolution": { "const": "UNRESOLVED_PRECONDITION" },
+          "effective_runtime_config_proven": { "const": false }
+        },
+        "allOf": [
+          { "if": { "properties": { "map_key": { "const": "nuclear_winter" } } }, "then": { "properties": { "setup": { "const": "1v1_nuclear_gdi" }, "team_size": { "const": 1 }, "factions_per_team": { "const": ["td_gdi"] }, "map_path": { "const": "mods/cameo/maps/_ra_a-nuclear-winter.oramap" }, "declared_map_sha256": { "const": "191efefe3043acb2fd504b2e2e5c974a49f6498f8e016c1380159c9f7efc1c4a" }, "candidate_order_on_map": { "const": ["BY_crawl_safety", "BZ_production_scaling", "BJ_squad_hysteresis"] }, "treatment_side": { "const": "B" }, "control_side": { "const": "A" } } } },
+          { "if": { "properties": { "map_key": { "const": "satans_clutch" } } }, "then": { "properties": { "setup": { "const": "1v1_satans_allies" }, "team_size": { "const": 1 }, "factions_per_team": { "const": ["ra1_allies"] }, "map_path": { "const": "mods/cameo/maps/SatansClutch.oramap" }, "declared_map_sha256": { "const": "1bd3bee0bbb38c95015126ba689496c4284c2f4e8f8b6573711a9fdadcbf16cb" }, "candidate_order_on_map": { "const": ["BZ_production_scaling", "BJ_squad_hysteresis", "BY_crawl_safety"] }, "treatment_side": { "const": "A" }, "control_side": { "const": "B" } } } },
+          { "if": { "properties": { "map_key": { "const": "red_spice" } } }, "then": { "properties": { "setup": { "const": "2v2_red_gdi_nod" }, "team_size": { "const": 2 }, "factions_per_team": { "const": ["td_gdi", "td_nod"] }, "map_path": { "const": "mods/cameo/maps/Red_Spice_2v2_BI-4.4.oramap" }, "declared_map_sha256": { "const": "882f865b4e556f93324bbd1abb31397bff30b651489652fa151c031cf02cb65a" }, "candidate_order_on_map": { "const": ["BJ_squad_hysteresis", "BY_crawl_safety", "BZ_production_scaling"] }, "treatment_side": { "const": "B" }, "control_side": { "const": "A" } } } },
+          { "if": { "properties": { "map_key": { "const": "terra_cotta" } } }, "then": { "properties": { "setup": { "const": "2v2_terra_nod_allies" }, "team_size": { "const": 2 }, "factions_per_team": { "const": ["td_nod", "ra1_allies"] }, "map_path": { "const": "mods/cameo/maps/Terracotta-ratls2.oramap" }, "declared_map_sha256": { "const": "c1a66fba029ccde5998fbe57b563f87569425ace82617e42e6e42e3fcc9e740d" }, "candidate_order_on_map": { "const": ["BY_crawl_safety", "BZ_production_scaling", "BJ_squad_hysteresis"] }, "treatment_side": { "const": "A" }, "control_side": { "const": "B" } } } },
+          { "if": { "properties": { "map_key": { "const": "back_to_basics" } } }, "then": { "properties": { "setup": { "const": "3v3_basics_gna" }, "team_size": { "const": 3 }, "factions_per_team": { "const": ["td_gdi", "td_nod", "ra1_allies"] }, "map_path": { "const": "mods/cameo/maps/back-to-basics.oramap" }, "declared_map_sha256": { "const": "ddd071d131895ecb59be66b7d1924b023731c52a04ee01052fa9fc384dd15e6b" }, "candidate_order_on_map": { "const": ["BZ_production_scaling", "BJ_squad_hysteresis", "BY_crawl_safety"] }, "treatment_side": { "const": "B" }, "control_side": { "const": "A" } } } },
+          { "if": { "properties": { "map_key": { "const": "winters_end_rich" } } }, "then": { "properties": { "setup": { "const": "3v3_winter_asg" }, "team_size": { "const": 3 }, "factions_per_team": { "const": ["ra1_allies", "ra1_soviets", "td_gdi"] }, "map_path": { "const": "mods/cameo/maps/winters-end-rich.oramap" }, "declared_map_sha256": { "const": "a29eea3fef3087d5544c428d2d07d59f4430806c0b23db7eeb605dde7013c94e" }, "candidate_order_on_map": { "const": ["BJ_squad_hysteresis", "BY_crawl_safety", "BZ_production_scaling"] }, "treatment_side": { "const": "A" }, "control_side": { "const": "B" } } } },
+          { "if": { "properties": { "map_key": { "const": "great_sahara_2" } } }, "then": { "properties": { "setup": { "const": "4v4_sahara" }, "team_size": { "const": 4 }, "factions_per_team": { "const": ["td_gdi", "td_nod", "ra1_allies", "ra1_soviets"] }, "map_path": { "const": "mods/cameo/maps/Great_Sahara_3.oramap" }, "declared_map_sha256": { "const": "8b5c089c7cd2f8209819afa04436d6fa15849e125823ddc16bf5e996cd280ddc" }, "candidate_order_on_map": { "const": ["BY_crawl_safety", "BZ_production_scaling", "BJ_squad_hysteresis"] }, "treatment_side": { "const": "B" }, "control_side": { "const": "A" } } } },
+          { "if": { "properties": { "map_key": { "const": "ice_cold" } } }, "then": { "properties": { "setup": { "const": "4v4_ice" }, "team_size": { "const": 4 }, "factions_per_team": { "const": ["td_gdi", "td_nod", "ra1_allies", "ra1_soviets"] }, "map_path": { "const": "mods/cameo/maps/ice_cold.oramap" }, "declared_map_sha256": { "const": "e097fcca4fa40f5878b4fb7d965529728dbbd34c2a14b8825e1bec0aea6da98b" }, "candidate_order_on_map": { "const": ["BJ_squad_hysteresis", "BY_crawl_safety", "BZ_production_scaling"] }, "treatment_side": { "const": "A" }, "control_side": { "const": "B" } } } }
+        ]
       }
     },
     "source_commit": { "const": "UNBOUND_AFTER_REFINERY_REPAIR" },
@@ -94,6 +108,8 @@
     },
     "bj_disposition_sha256": { "const": "4feb6f4ef2238da33023da1e12401b89a3a2d40becf36e5acacd7103ddfff681" },
     "caps": { "const": "UNBOUND_PENDING_SCREEN_QUALIFICATION" },
-    "execution_authorized": { "const": false }
+    "execution_authorized": { "const": false },
+    "runtime_inheritance_resolution": { "const": "UNRESOLVED_PRECONDITION" },
+    "effective_runtime_config_proven": { "const": false }
   }
 }
