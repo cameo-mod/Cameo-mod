@@ -119,6 +119,11 @@ namespace OpenRA.Mods.CA.Traits
 			"for StructureProductionResumeDelay before retrying.")]
 		public readonly int MaximumFailedPlacementAttempts = 3;
 
+		[Desc("REF-2 P1a (retained-refinery): preferred anchor offers a law-path refinery tries per",
+			"placement sweep before the widened fallback takes over — each failed offer commits-or-parks,",
+			"so the bound is the only knob on per-sweep claim churn.")]
+		public readonly int RefineryClaimAttemptsPerSweep = 4;
+
 		[Desc("How many randomly chosen cells with resources to check when deciding refinery placement.")]
 		public readonly int MaxResourceCellsToCheck = 3;
 
@@ -1516,9 +1521,13 @@ namespace OpenRA.Mods.CA.Traits
 
 			if (demand.RefineryItem != null)
 			{
+				// REF-2 P1a (retained-refinery): a completed law-path refinery is never cancelled on
+				// expiry — it converts to a normal queued refinery outright, and its own placement
+				// sweeps retry preferred claims then the widened fallback forever. The old extra
+				// clause `law.NextRefineryClaim(null) != null` gated retention on a claim existing
+				// this instant AND silently spent that anchor's offer streak — both dropped.
 				var readopted = law != null
-					&& ItemDone(demand.RefineryProducer, demand.RefineryItem)
-					&& law.NextRefineryClaim(null) != null;
+					&& ItemDone(demand.RefineryProducer, demand.RefineryItem);
 				if (!readopted)
 					CancelDemandItem(bot, demand.RefineryProducer, demand.RefineryItem);
 

@@ -312,6 +312,43 @@ namespace OpenRA.Mods.CA.Traits
 				.Select(kv => topLeft + kv.Key);
 
 		/// <summary>
+		/// REF-2 P1a (promoted from <c>BaseBuilderQueueManagerCA</c> so the widened fallback reuses the
+		/// identical rule): the harvester dock cell must not sit on valuable resources, and needs at
+		/// least one on-map neighbour outside the blocking footprint so the dock stays reachable — a
+		/// refinery walled off the field is useless. The footprint means the impassable cells:
+		/// <see cref="DockBlockingFootprint"/>, not the bib or transit cells.
+		/// </summary>
+		public enum DockAccess { Clear, OnResource, NoExit }
+
+		/// <summary>
+		/// REF-2 P1a: one dock offset's access at <paramref name="topLeft"/> — on-resource first so a
+		/// dock blocked both ways still reports the resource signature for the rejection tally.
+		/// </summary>
+		public static DockAccess CheckDockAccess(World world, IResourceLayer resourceLayer, ActorInfo actorInfo,
+			BuildingInfo bi, CPos topLeft, WVec dockOffset, IReadOnlySet<string> valuable)
+		{
+			var dock = world.Map.CellContaining(world.Map.CenterOfCell(topLeft) + bi.CenterOffset(world) + dockOffset);
+			if (valuable != null && resourceLayer != null && valuable.Contains(resourceLayer.GetResource(dock).Type))
+				return DockAccess.OnResource;
+
+			var footprint = new HashSet<CPos>(DockBlockingFootprint(bi.Footprint, topLeft));
+			return DockHasExit(dock, footprint, world.Map.Contains) ? DockAccess.Clear : DockAccess.NoExit;
+		}
+
+		/// <summary>
+		/// REF-2 P1a: the hold reason a widened verdict maps to — Deferred stays a scanning hold,
+		/// an empty domain with no preferred claim offered is the claim absence, everything else is
+		/// the drained-scan "no site under this pass" (mixed-time evidence, never an emptiness proof).
+		/// </summary>
+		public static BotQueueTransitionReason RefineryFallbackHoldReason(RefineryFallbackOutcome outcome, bool claimOffered) =>
+			outcome switch
+			{
+				RefineryFallbackOutcome.Deferred => BotQueueTransitionReason.RefineryScanDeferred,
+				RefineryFallbackOutcome.NoUniverse when !claimOffered => BotQueueTransitionReason.NoRefineryClaim,
+				_ => BotQueueTransitionReason.NoRefinerySite,
+			};
+
+		/// <summary>
 		/// Deterministic dictionary pick (F-CBL1/F4): lowest tie-break key wins.
 		/// `Dictionary.Keys.First()` order is unspecified and could diverge across runtimes; an
 		/// explicit order keeps every peer's pick identical. Null/empty yields the default.
@@ -327,12 +364,12 @@ namespace OpenRA.Mods.CA.Traits
 			FirstByOrder(requests, a => a.ActorID);
 
 		/// <summary>
-		/// FIX-RA-REFINERY: under the refinery law a refinery that found no legal site defers — the
-		/// produced item is cancelled for the refund and the standing request re-queues it on a
-		/// later sweep (the law's own contract: a failed claim retries later). It must not spend
-		/// the shared failCount budget: a siteless field would otherwise saturate the latch and
-		/// stop every other structure placing. Non-refinery and law-less placements keep the
-		/// ordinary failure path.
+		/// FIX-RA-REFINERY / REF-2 P1a: under the refinery law a produced refinery that found no
+		/// legal site holds — the completed item stays queued and is retried, never cancelled for
+		/// being unplaceable (P1a retention: cancellation was the defect — it ate anchors and
+		/// refunds through the re-queue loop). It must not spend the shared failCount budget: a
+		/// siteless field would otherwise saturate the latch and stop every other structure
+		/// placing. Non-refinery and law-less placements keep the ordinary failure path.
 		/// </summary>
 		public static bool RefineryDefers(bool lawActive, BuildingType type) =>
 			lawActive && type == BuildingType.Refinery;
@@ -805,7 +842,26 @@ namespace OpenRA.Mods.CA.Traits
 
 	public enum BotQueueTransitionKind { Queued, Ready, Placed, Cancelled, Held, Resumed, Removed, PlacementOrdered, CancelOrdered }
 
-	public enum BotQueueTransitionReason { None, LimitReached, NoRefinerySite, SaturationLatch, RelocationLatch, DemandHold, CrawlHold, FrontBackHold, DemandCancel }
+	public enum BotQueueTransitionReason
+	{
+		None,
+		LimitReached,
+		NoRefinerySite,
+		SaturationLatch,
+		RelocationLatch,
+		DemandHold,
+		CrawlHold,
+		FrontBackHold,
+		DemandCancel,
+
+		/// <summary>REF-2 P1a: a held law refinery with no claimable anchor offered AND an empty
+		/// widened reach domain — distinct from <see cref="NoRefinerySite"/> (a drained pass).</summary>
+		NoRefineryClaim,
+
+		/// <summary>REF-2 P1a: a held law refinery whose widened fallback scan is still
+		/// materializing or revalidating under its cell budget — the scanning hold.</summary>
+		RefineryScanDeferred,
+	}
 
 	public enum BotQueueCancellationClass
 	{

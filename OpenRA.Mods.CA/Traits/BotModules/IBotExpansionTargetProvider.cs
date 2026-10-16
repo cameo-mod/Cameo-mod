@@ -408,7 +408,40 @@ namespace OpenRA.Mods.CA.Traits
 		/// committed anchor's hold is cleared by <see cref="RefineryClaimCommitted"/> instead.
 		/// </summary>
 		void ReleaseRefineryAnchor(CPos anchor, object owner) { }
+
+		/// <summary>
+		/// REF-2 P1a (retained-refinery fallback, Sol disposition 5FB81294): poll the per-(producer, item)
+		/// widened-site episode — the Stage-2 fallback that runs after every preferred
+		/// <see cref="NextRefineryClaim"/> offer fails. The provider owns the scan state; each call resumes
+		/// the episode under its frozen pass snapshot and may consume up to the provider's per-sweep cell
+		/// budget. A <see cref="RefineryFallbackOutcome.Site"/> verdict's ordering is globally established
+		/// before it is returned — never an approximate early-pop. Default NoUniverse: the provider offers
+		/// no widened domain.
+		/// </summary>
+		RefineryFallbackOutcome PollRefineryFallbackSite(Actor producer, string item, bool distanceToBaseIsImportant, out CPos? site)
+		{
+			site = null;
+			return RefineryFallbackOutcome.NoUniverse;
+		}
+
+		/// <summary>
+		/// REF-2 P1a: a produced refinery committed at <paramref name="site"/> picked by the widened
+		/// fallback — the provider publishes pending coverage for exactly the anchors that site's serve
+		/// radius covers (the same site-coverage law as <see cref="RefineryClaimCommitted(CPos, CPos)"/>);
+		/// no offered anchor exists, so nothing else is pending-marked or released. Default no-op.
+		/// </summary>
+		void RefinerySiteCommitted(CPos site) { }
 	}
+
+	/// <summary>
+	/// REF-2 P1a (retained-refinery fallback): the widened Stage-2 verdict for a held (producer, item)
+	/// pair. Site = the episode's globally nearest still-legal cell under its declared snapshot, safe to
+	/// commit site-only via <see cref="IBotExpansionTargetProvider.RefinerySiteCommitted"/>; Deferred =
+	/// the bounded enumeration or pick revalidation is still mid-pass (resume next sweep); NoSite = the
+	/// pass drained and every candidate failed pick-time revalidation — a drained-scan verdict, not a
+	/// live-emptiness proof; NoUniverse = the declared reach domain enumerated no cells.
+	/// </summary>
+	public enum RefineryFallbackOutcome { Site, Deferred, NoSite, NoUniverse }
 
 	/// <summary>
 	/// REF-1 B4: the expansion nudge. Under the refinery law the old raw refinery total

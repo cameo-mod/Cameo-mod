@@ -284,6 +284,16 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 			"ever follows a fully-examined candidate set; each cell and each leg consumes budget.")]
 		public readonly int CoveragePatchCellSample = 4;
 
+		[Desc("REF-2 P1a (retained-refinery fallback): cell-units a widened-site episode may consume per",
+			"queue sweep — frontier cells enumerated, provider-disk cells materialized, rank evaluations",
+			"and pick-time revalidations all charge against this bound, so the scan never spikes a tick.")]
+		public readonly int RefineryFallbackScanCellBudget = 2000;
+
+		[Desc("REF-2 P1a: ticks a consumed widened pass waits before re-listing — each re-list",
+			"re-enumerates reach and re-samples occupancy under a fresh declared snapshot, so a",
+			"drained scan retries instead of believing mixed-time evidence forever.")]
+		public readonly int RefineryFallbackRelistEpochTicks = 500;
+
 		[Desc("FE-1: the factor a site/field keeps when its bearing from the main base lies within CrawlSeparationDegrees of",
 			"the crawl target, an own yard or another in-flight MCV site (deprioritised, never forbidden).")]
 		public readonly double MinSeparationFactor = 0.25;
@@ -741,6 +751,16 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		readonly Dictionary<(CPos Dock, CPos Patch, string Locomotor, bool Outbound), RefineryRouteWitness> routeWitnesses = new();
 		readonly Dictionary<(CPos Dock, CPos Patch, string Locomotor, bool Outbound), List<CPos>> routeWitnessPaths = new();
 		readonly Dictionary<CPos, int> anchorOfferStreaks = new();
+
+		// REF-2 P1a (retained-refinery fallback, Sol disposition 5FB81294): one widened-site episode
+		// per held (producer, item) pair — the queue keeps polling it while its completed refinery
+		// waits for a legal cell. Entries are replaced when the item changes, evicted when idle for
+		// eight epochs or beyond the bounded cap, and every poll is cell-budgeted — a scan is memoized
+		// work, never a commitment. The resource layer resolves lazily for the dock check.
+		const int MaxFallbackScans = 16;
+		readonly Dictionary<(uint ProducerId, string Item), RefineryFallbackScan> fallbackScans = new();
+		readonly Dictionary<(uint ProducerId, string Item), int> fallbackScanTicks = new();
+		IResourceLayer resourceLayer;
 		RefineryProbeBudget coverageBudget = new(0, 0, 0);
 		byte[] anchorCoverageVerdict = Array.Empty<byte>();
 		readonly Dictionary<(int Anchor, int Refinery), long> coverageRanks = new();
@@ -884,6 +904,287 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		{
 			if (LawActive)
 				ParkFailedClaim(anchor, world.WorldTick, "placement failed (queue signal)", owner);
+		}
+
+		RefineryFallbackOutcome IBotExpansionTargetProvider.PollRefineryFallbackSite(Actor producer, string item,
+			bool distanceToBaseIsImportant, out CPos? site)
+		{
+			site = null;
+			if (!LawActive || producer == null || producer.IsDead || !producer.IsInWorld)
+				return RefineryFallbackOutcome.NoUniverse;
+
+			if (!world.Map.Rules.Actors.TryGetValue(item, out var actorInfo)
+				|| actorInfo.TraitInfoOrDefault<BuildingInfo>() is not { } bi)
+				return RefineryFallbackOutcome.NoUniverse;
+
+			var now = world.WorldTick;
+			var key = (producer.ActorID, item);
+			if (!fallbackScans.TryGetValue(key, out var scan))
+				fallbackScans[key] = scan = new RefineryFallbackScan(Info.RefineryFallbackRelistEpochTicks);
+
+			fallbackScanTicks[key] = now;
+			PruneFallbackScans(now);
+
+			var verdict = scan.Poll(Info.RefineryFallbackScanCellBudget, now,
+				() => FallbackSnapshot(actorInfo, bi, producer, distanceToBaseIsImportant), out site);
+			return verdict switch
+			{
+				RefineryFallbackScan.Verdict.Site => RefineryFallbackOutcome.Site,
+				RefineryFallbackScan.Verdict.Deferred => RefineryFallbackOutcome.Deferred,
+				RefineryFallbackScan.Verdict.NoUniverse => RefineryFallbackOutcome.NoUniverse,
+				_ => RefineryFallbackOutcome.NoSite,
+			};
+		}
+
+		void IBotExpansionTargetProvider.RefinerySiteCommitted(CPos site)
+		{
+			if (!LawActive)
+				return;
+
+			// REF-2 P1a: the widened commit is site-only — pending-cover exactly the anchors this
+			// site's serve radius reaches (CommitRefineryClaim's coverage loop), atomically. No
+			// offered anchor exists: nothing extra is pending-marked, streak-cleared or released.
+			var until = world.WorldTick + Info.AnchorClaimPendingTicks;
+			var serve = Info.AnchorServeRadiusCells > 0 ? Info.AnchorServeRadiusCells : Info.ClaimRadiusCells;
+			for (var a = 0; a < anchors.Count && a < anchorCoverageVerdict.Length; a++)
+			{
+				if (anchorCoverageVerdict[a] == (byte)RefineryCoverageVerdict.Covered
+					|| !RefineryCoverageOracle.WithinServeRadius(site, anchors[a], serve))
+					continue;
+
+				anchorPendingUntil[anchors[a]] = until;
+				anchorOfferStreaks.Remove(anchors[a]);
+				anchorReservations.Clear(anchors[a]);
+			}
+		}
+
+		// REF-2 P1a: the frozen per-pass inputs — provider disks that define the legal reach domain,
+		// the same predicates an ordinary refinery placement uses, and the declared resource rank set
+		// (the field model's resource cells plus every anchor, sorted by X for the bounded nearest
+		// search). Rebuilt at each epoch so a re-list re-samples occupancy and reach.
+		RefineryFallbackScan.Snapshot FallbackSnapshot(ActorInfo actorInfo, BuildingInfo bi, Actor producer, bool distanceToBaseIsImportant)
+		{
+			var providers = FallbackProviders(actorInfo, bi, producer);
+			var rankCells = BuildFallbackRankCells();
+			var valuable = resourceMap?.Info.ValuableResourceTypes;
+			resourceLayer ??= world.WorldActor.TraitOrDefault<IResourceLayer>();
+			var layer = resourceLayer;
+
+			// Every dock counts (nexus/hatchery/assimilator carry several DockHost traits); no
+			// DockHost falls back to the zero offset — the identical rule LawRefineryPlacement uses.
+			var dockOffsets = actorInfo.TraitInfos<DockHostInfo>().Select(d => d.DockOffset).DefaultIfEmpty(WVec.Zero).ToList();
+			return new RefineryFallbackScan.Snapshot(
+				providers,
+				FallbackDisk,
+				topLeft => FallbackLegal(actorInfo, bi, producer, distanceToBaseIsImportant, dockOffsets, valuable, layer, topLeft),
+				cell => FallbackRank(rankCells, cell));
+		}
+
+		/// <summary>
+		/// REF-2 P1a: the declared reach-domain providers — own (and allied when AllyBuildRadius) actors
+		/// whose GivesBuildableArea covers the item's area types, or its BaseProviders when the item has
+		/// no RequiresBuildableArea but still demands a provider range. A disk's reach covers every cell
+		/// whose footprint could stand adjacent to one of the provider's covered cells — a superset the
+		/// engine predicate then filters exactly. Deterministic order: (X, Y, ActorID). The degenerate
+		/// no-requirement case yields one whole-map disk.
+		/// </summary>
+		List<(CPos Center, int ReachCells)> FallbackProviders(ActorInfo actorInfo, BuildingInfo bi, Actor producer)
+		{
+			var providers = new List<(CPos Center, int ReachCells, uint Id)>();
+			var mapBuildRadius = world.WorldActor.TraitOrDefault<MapBuildRadius>();
+			var allyBuild = mapBuildRadius != null && mapBuildRadius.AllyBuildRadiusEnabled;
+			var rba = actorInfo.TraitInfoOrDefault<RequiresBuildableAreaInfo>();
+			if (rba != null)
+			{
+				var fpExtent = FootprintExtent(bi);
+				foreach (var a in world.ActorsHavingTrait<GivesBuildableArea>())
+				{
+					// Mirror BuildingInfo.AnyGivesBuildableArea verbatim: in-world, own or allied
+					// (under AllyBuildRadius), and the union of its GivesBuildableArea area types
+					// — self-only traits counting only for their own placement — overlaps the
+					// item's required area types. An empty AreaTypes gives nothing (a disabled
+					// trait's AreaTypes reads empty), so it can never qualify.
+					if (!a.IsInWorld)
+						continue;
+
+					if (a.Owner != player && !(allyBuild && a.Owner.RelationshipWith(player) == PlayerRelationship.Ally))
+						continue;
+
+					var overlaps = rba.AreaTypes.Overlaps(a.TraitsImplementing<GivesBuildableArea>()
+						.Where(gba => !gba.Info.OnlyAllowPlacementFromSelf || a == producer)
+						.SelectMany(gba => gba.AreaTypes));
+					if (!overlaps)
+						continue;
+
+					providers.Add((a.Location, ProviderCellExtent(a) + rba.Adjacent + fpExtent, a.ActorID));
+				}
+			}
+			else
+			{
+				// No RequiresBuildableArea — IsCloseEnoughToBase early-returns true, so every
+				// CanPlaceBuilding-legal cell is legal here: the domain is the whole map, one
+				// bounded disk. (The RequiresBaseProvider check never runs without an RBA —
+				// enumerating provider-range disks would miss legal cells.)
+				var center = world.Map.CellContaining(
+					world.Map.ProjectedTopLeft + (world.Map.ProjectedBottomRight - world.Map.ProjectedTopLeft) / 2);
+				providers.Add((center, world.Map.Grid.MaximumTileSearchRange - 1, 0u));
+			}
+
+			return providers
+				.OrderBy(p => p.Center.X).ThenBy(p => p.Center.Y).ThenBy(p => p.Id)
+				.Select(p => (p.Center, p.ReachCells))
+				.ToList();
+		}
+
+		/// <summary>
+		/// REF-2 P1a: one provider's materialized disk, bounded by Map.FindTilesInAnnulus at the
+		/// declared reach and sorted (dist^2, X, Y) — the frontier's deterministic per-provider order.
+		/// </summary>
+		IReadOnlyList<CPos> FallbackDisk(CPos center, int reachCells)
+		{
+			var reach = Math.Min(reachCells, world.Map.Grid.MaximumTileSearchRange - 1);
+			return world.Map.FindTilesInAnnulus(center, 0, reach)
+				.OrderBy(c => (c - center).LengthSquared)
+				.ThenBy(c => c.X)
+				.ThenBy(c => c.Y)
+				.ToArray();
+		}
+
+		/// <summary>
+		/// REF-2 P1a: the full engine-legality predicate — identical to LawRefineryPlacement's chain:
+		/// CanPlaceBuilding, IsCloseEnoughToBase under the same distance flag, then every dock offset
+		/// must give one reachable dock off valuable resources.
+		/// </summary>
+		bool FallbackLegal(ActorInfo actorInfo, BuildingInfo bi, Actor producer, bool distanceToBaseIsImportant,
+			IReadOnlyList<WVec> dockOffsets, IReadOnlySet<string> valuable, IResourceLayer layer, CPos topLeft)
+		{
+			if (!world.CanPlaceBuilding(topLeft, actorInfo, bi, null))
+				return false;
+
+			if (distanceToBaseIsImportant && !bi.IsCloseEnoughToBase(world, player, actorInfo, producer, topLeft))
+				return false;
+
+			foreach (var off in dockOffsets)
+				if (BaseBuilderQueueEvalCA.CheckDockAccess(world, layer, actorInfo, bi, topLeft, off, valuable) != BaseBuilderQueueEvalCA.DockAccess.Clear)
+					return false;
+
+			return true;
+		}
+
+		/// <summary>
+		/// REF-2 P1a: dist^2 to the nearest declared resource cell — a two-sided scan of the
+		/// X-sorted rank set that stops once the X-delta alone can no longer improve the best;
+		/// the evaluation count is returned so the scan charges honest work to the sweep budget.
+		/// </summary>
+		static (int DistSq, int Evals) FallbackRank(IReadOnlyList<CPos> rankCells, CPos cell)
+		{
+			var best = int.MaxValue;
+			var evals = 0;
+			var lo = LowerBoundX(rankCells, cell.X);
+			for (var i = lo; i < rankCells.Count; i++)
+			{
+				var dx = rankCells[i].X - cell.X;
+				var d2 = dx * dx;
+				evals++;
+				if (d2 >= best)
+					break;
+
+				var dy = rankCells[i].Y - cell.Y;
+				best = Math.Min(best, d2 + dy * dy);
+			}
+
+			for (var i = lo - 1; i >= 0; i--)
+			{
+				var dx = cell.X - rankCells[i].X;
+				var d2 = dx * dx;
+				evals++;
+				if (d2 >= best)
+					break;
+
+				var dy = rankCells[i].Y - cell.Y;
+				best = Math.Min(best, d2 + dy * dy);
+			}
+
+			return (best, evals);
+		}
+
+		static int LowerBoundX(IReadOnlyList<CPos> sortedByX, int x)
+		{
+			var lo = 0;
+			var hi = sortedByX.Count;
+			while (lo < hi)
+			{
+				var mid = (lo + hi) >> 1;
+				if (sortedByX[mid].X < x)
+					lo = mid + 1;
+				else
+					hi = mid;
+			}
+
+			return lo;
+		}
+
+		/// <summary>
+		/// REF-2 P1a: the declared rank set — the field model's resource cells plus every anchor
+		/// (a spreaderless field's center is still a resource point), deduped and sorted by X.
+		/// Rebuilt per pass from the current model; never empty while the law holds an anchor.
+		/// </summary>
+		List<CPos> BuildFallbackRankCells()
+		{
+			var set = new HashSet<CPos>(anchors);
+			if (fields != null)
+				foreach (var f in fields)
+					set.UnionWith(f.Cells);
+
+			return set.OrderBy(c => c.X).ThenBy(c => c.Y).ToList();
+		}
+
+		static int FootprintExtent(BuildingInfo bi)
+		{
+			var extent = 1;
+			foreach (var t in bi.Tiles(CPos.Zero))
+				extent = Math.Max(extent, Math.Max(Math.Abs(t.X), Math.Abs(t.Y)) + 1);
+			return extent;
+		}
+
+		static int ProviderCellExtent(Actor a)
+		{
+			// The cells the provider covers: its occupied cells, unioned with its full building
+			// tile set (the influence cells incl. bib) so the reach superset cannot miss a legal cell.
+			var extent = 1;
+			foreach (var ios in a.TraitsImplementing<IOccupySpace>())
+				foreach (var (cell, _) in ios.OccupiedCells())
+					extent = Math.Max(extent, Math.Max(Math.Abs(cell.X - a.Location.X), Math.Abs(cell.Y - a.Location.Y)) + 1);
+
+			if (a.Info.TraitInfoOrDefault<BuildingInfo>() is { } abi)
+				foreach (var t in abi.Tiles(a.Location))
+					extent = Math.Max(extent, Math.Max(Math.Abs(t.X - a.Location.X), Math.Abs(t.Y - a.Location.Y)) + 1);
+
+			return extent;
+		}
+
+		void PruneFallbackScans(int now)
+		{
+			var staleAfter = Info.RefineryFallbackRelistEpochTicks * 8;
+			foreach (var key in fallbackScanTicks.Where(kv => now - kv.Value > staleAfter).Select(kv => kv.Key).ToList())
+			{
+				fallbackScanTicks.Remove(key);
+				fallbackScans.Remove(key);
+			}
+
+			if (fallbackScans.Count <= MaxFallbackScans)
+				return;
+
+			foreach (var key in fallbackScanTicks
+				.OrderBy(kv => kv.Value)
+				.ThenBy(kv => kv.Key)
+				.Take(fallbackScans.Count - MaxFallbackScans)
+				.Select(kv => kv.Key)
+				.ToList())
+			{
+				fallbackScanTicks.Remove(key);
+				fallbackScans.Remove(key);
+			}
 		}
 
 		// ECON-A-FIX (R6): the claim surface's three states, evaluated uniformly for the claim order and

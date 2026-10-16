@@ -975,6 +975,7 @@ namespace OpenRA.Mods.CA.Traits
 				CPos? advisedDefense = null;
 				var refineryDefers = false;
 				refineryClaimed = false;
+				refineryHoldReason = BotQueueTransitionReason.NoRefinerySite;
 				lastFrontBackPick = null;
 				frontBackHold = false;
 				demandAdvisedDefense = false;
@@ -1097,17 +1098,22 @@ namespace OpenRA.Mods.CA.Traits
 
 				if (location == null)
 				{
-					// FIX-RA-REFINERY: under the law a siteless refinery defers — cancelled for its
-					// refund while the standing request re-queues it on a later sweep. Spending
-					// shared failure budget here let one unreachable field saturate the latch and
-					// starve every other structure indefinitely.
+					// FIX-RA-REFINERY: under the law a siteless refinery defers — it must not spend
+					// shared failure budget here, or one unreachable field would saturate the latch
+					// and starve every other structure indefinitely. REF-2 P1a: the defer is now a
+					// hold (the completed item is retained); the old cancel ate anchors and refunds
+					// through the re-queue loop while no site existed.
 					if (refineryDefers)
 					{
-						AIUtils.BotDebug($"{player} defers {currentBuilding.Item}: no legal refinery site this sweep");
-						var cancelTarget = queue.AllQueued().LastOrDefault(i => i.Item == currentBuilding.Item) ?? currentBuilding;
-						NotePendingTerminal(queue, cancelTarget, currentBuilding.Item, BotQueueTransitionKind.Cancelled,
-							BotQueueTransitionReason.NoRefinerySite, BotQueueCancellationClass.Production);
-						bot.QueueOrder(Order.CancelProduction(queue.Actor, currentBuilding.Item, 1));
+						// REF-2 P1a (retained-refinery): a completed law-path refinery is NEVER
+						// cancelled for being unplaceable — it holds at the head and every later
+						// sweep re-probes preferred claims then the widened fallback. The reason
+						// distinguishes no-claim-offered, still-scanning and drained-pass holds;
+						// EmitGate emits once per reason transition, no failure budget is spent.
+						AIUtils.BotDebug($"{player} defers {currentBuilding.Item}: {refineryHoldReason} at tick {world.WorldTick}");
+						EmitQueueTransition(queue, queue.Actor, currentBuilding, currentBuilding.Item, type,
+							BotQueueTransitionKind.Held, refineryHoldReason);
+						return false;
 					}
 
 					// If we just reached the maximum fail count, cache the number of current structures
@@ -1196,6 +1202,13 @@ namespace OpenRA.Mods.CA.Traits
 		// NotifyPlacement only; nothing here feeds a decision.
 		readonly Dictionary<uint, (string Item, int Tick)> queuedAt = new();
 		bool refineryClaimed;
+
+		// REF-2 P1a (retained-refinery): the reason a law-path refinery holds at the head —
+		// NoRefineryClaim (no offer and an empty widened domain), RefineryScanDeferred (the
+		// fallback scan is still materializing under its cell budget) or NoRefinerySite (a
+		// drained pass / failed claims). Set inside ChooseBuildLocation's law branch before
+		// the null-location defer emits it; reset beside refineryClaimed each placement run.
+		BotQueueTransitionReason refineryHoldReason = BotQueueTransitionReason.NoRefinerySite;
 		IBotPlacementObserver[] placementObservers;
 
 		// BP-2 (§19.15): the front/back advisor seam. The trait array is cached once; IsActive is
@@ -2006,17 +2019,8 @@ namespace OpenRA.Mods.CA.Traits
 		// FIX-RA-REFINERY: "the footprint" here means the impassable cells — BuildingInfo.Tiles also
 		// yields the passable '=' bib, which walled the RA proc's dock inside its own footprint and
 		// failed the exit check at every legal site.
-		enum DockAccess { Clear, OnResource, NoExit }
-
-		DockAccess CheckDockAccess(ActorInfo actorInfo, BuildingInfo bi, CPos topLeft, WVec dockOffset, IReadOnlySet<string> valuable)
-		{
-			var dock = world.Map.CellContaining(world.Map.CenterOfCell(topLeft) + bi.CenterOffset(world) + dockOffset);
-			if (valuable != null && resourceLayer != null && valuable.Contains(resourceLayer.GetResource(dock).Type))
-				return DockAccess.OnResource;
-
-			var footprint = new HashSet<CPos>(BaseBuilderQueueEvalCA.DockBlockingFootprint(bi.Footprint, topLeft));
-			return BaseBuilderQueueEvalCA.DockHasExit(dock, footprint, world.Map.Contains) ? DockAccess.Clear : DockAccess.NoExit;
-		}
+		// REF-2 P1a: the check itself is promoted to BaseBuilderQueueEvalCA.CheckDockAccess so the
+		// widened fallback reuses the identical dock rule instead of a diverging copy.
 
 		// REF-1 (§12.24 v2): the placeable cell NEAREST the anchor whose footprint sits flush on the claim's resource
 		// cells — gap 0 (a footprint cell on or 8-adjacent to a resource cell), gap 1 only when no gap-0 cell is
@@ -2079,14 +2083,14 @@ namespace OpenRA.Mods.CA.Traits
 				var dockAllResource = true;
 				foreach (var off in dockOffsets)
 				{
-					var access = CheckDockAccess(actorInfo, bi, cell, off, valuable);
-					if (access == DockAccess.Clear)
+					var access = BaseBuilderQueueEvalCA.CheckDockAccess(world, resourceLayer, actorInfo, bi, cell, off, valuable);
+					if (access == BaseBuilderQueueEvalCA.DockAccess.Clear)
 					{
 						dockOk = true;
 						break;
 					}
 
-					if (access != DockAccess.OnResource)
+					if (access != BaseBuilderQueueEvalCA.DockAccess.OnResource)
 						dockAllResource = false;
 				}
 
@@ -2441,14 +2445,22 @@ namespace OpenRA.Mods.CA.Traits
 						// queue admission — held out of every other claim in between. A lost or stale
 						// hold takes whatever the law offers now; the law's claim order stands either way.
 						RefineryAnchorClaim? claim = null;
+						var claimsOffered = false;
 						if (demand?.ReservedClaim is { } reserved
 							&& law.RefineryAnchorReserved(reserved.Anchor, demand))
 							claim = reserved;
-						else
-							claim = law.NextRefineryClaim(near);
 
-						if (claim is { } c)
+						// REF-2 P1a: the preferred stage is a bounded offer ladder per sweep — each
+						// failed offer commits-or-parks (the park is the only retry bound) and the
+						// next offer in the claim order is tried; parked anchors simply leave the
+						// order until their cooldown ends.
+						for (var attempt = 0; attempt < baseBuilder.Info.RefineryClaimAttemptsPerSweep; attempt++)
 						{
+							claim ??= law.NextRefineryClaim(near);
+							if (claim is not { } c)
+								break;
+
+							claimsOffered = true;
 							var placed = LawRefineryPlacement(actorType, distanceToBaseIsImportant, producer,
 								c.Anchor, c.ResourceCells, law.ExpansionTargetClaimRadius);
 
@@ -2465,14 +2477,33 @@ namespace OpenRA.Mods.CA.Traits
 									baseBuilder.RequestedRefineries.Remove(requestRef);
 								return (placed.Location, c.Anchor, placed.Variant);
 							}
+
+							claim = null;
 						}
-						else
+
+						// REF-2 P1a: preferred offers exhausted — the widened Stage-2 scans the engine's
+						// reach domain under a per-sweep cell budget; a Site verdict carries an
+						// established global (nearest-resource, X, Y) ordering and commits coverage for
+						// exactly the anchors that site's serve radius covers — never an offered anchor.
+						var fallback = law.PollRefineryFallbackSite(producer, actorType, distanceToBaseIsImportant, out var fallbackSite);
+						if (fallback == RefineryFallbackOutcome.Site)
+						{
+							law.RefinerySiteCommitted(fallbackSite.Value);
+							Log.Write("debug", $"AI ({player.ClientIndex}): REF-2 P1a refinery {actorType} at widened site {fallbackSite.Value} at tick {world.WorldTick}");
+							refineryClaimed = true;
+							if (requestRef != null)
+								baseBuilder.RequestedRefineries.Remove(requestRef);
+							return (fallbackSite, fallbackSite, 0);
+						}
+
+						if (!claimsOffered && fallback != RefineryFallbackOutcome.Deferred)
 						{
 							// FIX-RA-REFINERY diagnostics: the other law-null reason — nothing claimed
 							// this sweep. Bounded: one line per failed placement attempt.
 							AIUtils.BotDebug($"{player} law refinery {actorType}: no claim available at tick {world.WorldTick}");
 						}
 
+						refineryHoldReason = BaseBuilderQueueEvalCA.RefineryFallbackHoldReason(fallback, claimsOffered);
 						return (null, null, 0);
 					}
 
