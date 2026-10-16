@@ -1,3 +1,16 @@
+# 2026-10-16 — Devin: P1a cert-mandatory coupling (ec7354237) — EE3B6358 clarification
+
+*Devin-Developer.* Sol's bounded clarification `EE3B6358` (supersedes `A966ED70`
+on the demand leg): the unique-name demand path is accepted this iteration as
+cert-mandatory NAME-CLASS disposal while Allow is unreachable — no provenance
+ledger needed, demand re-adoption confirmed — provided the coupling is
+explicit: if Allow ever returns, the certificate requirement stands until an
+instance-proving mechanism is ratified. `DemandCancelVerdict` now issues only
+with a live certificate (verdict diagnostic-only); fixture pins
+Allow-without-cert → ProtectionHold. Build clean; 34/34 focused. The manager
+E3 correction (`39c3de60c`: LAST-to-LAST tautology + cross-queue gate + real
+caller fixture) remains required and already landed — no scope change.
+
 # 2026-10-16 — Devin: P1a E3 fix (39c3de60c) — cancel order must settle the intended instance, 34/34
 
 *Devin-Developer.* Sol's final review of `2184ec930` (HOLD `A966ED70`) accepted
