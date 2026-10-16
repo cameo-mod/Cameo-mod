@@ -443,6 +443,15 @@ namespace OpenRA.Mods.Cameo.Traits.BotModules
 		/// cannot outlive the event; on a live terminal pass the already-enumerated topLefts
 		/// within the declared read radius mark for selective repair — everything else is
 		/// examined in order anyway or will abort at the next poll's coherence gate.
+		/// F1 (Sol adjudication of 9d997eb58): the halo marks CELL-level reads only —
+		/// occupancy, resource and terrain content within the footprint/dock reach. Actor-set
+		/// and provider-influence changes (a new GivesBuildableArea host entering the map,
+		/// ownership/alliance flips, trait enable/disable) are NOT cell events and are not
+		/// covered by this marking; their coverage dependency is the per-poll coherence
+		/// atom sweep — any such change alters the pairwise atom stream and tears the pass.
+		/// F5 (carried performance note): marking costs O(readRadius²) per covered event
+		/// and continuous in-domain churn can starve a terminal pass — fail-closed by design
+		/// (Deferred/abort, never an unsound certificate), not a responsiveness guarantee.
 		/// </summary>
 		public void MarkDirtyCell(CPos changed)
 		{

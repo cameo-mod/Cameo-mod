@@ -846,15 +846,18 @@ namespace OpenRA.Mods.Cameo.Test
 		[Test]
 		public void PlacementCancelProtectionIsTheSharedVerdictTable()
 		{
-			// E1283A6D/D831BBCB: proven cheap-fast → Allow; proven protected →
-			// RequireCertificate; anything else → Unresolvable (fails closed). Floors and
-			// resolved cost/ticks are accepted but unused this iteration.
+			// Sol adjudication of 9d997eb58, F0: role membership is a hint, not positive
+			// cheap+fast evidence — this iteration carries NO Allow. Protected →
+			// RequireCertificate; everything else (incl. cheap-fast-hinted) → Unresolvable;
+			// all evidence params are seam-compatible but unused.
 			Assert.That(
 				BaseBuilderQueueEvalCA.EvaluatePlacementCancelProtection(null, true, true, null, null, null, null),
-				Is.EqualTo(PlacementCancelVerdict.Allow), "cheap-fast wins first");
+				Is.EqualTo(PlacementCancelVerdict.RequireCertificate),
+				"protected membership still requires a certificate");
 			Assert.That(
 				BaseBuilderQueueEvalCA.EvaluatePlacementCancelProtection(null, false, true, 0, -1, null, null),
-				Is.EqualTo(PlacementCancelVerdict.Allow), "a sentinel -1 duration never blocks Allow");
+				Is.EqualTo(PlacementCancelVerdict.Unresolvable),
+				"cheap-fast membership alone never Allows (F0)");
 			Assert.That(
 				BaseBuilderQueueEvalCA.EvaluatePlacementCancelProtection(null, true, false, null, null, null, null),
 				Is.EqualTo(PlacementCancelVerdict.RequireCertificate));
@@ -862,6 +865,53 @@ namespace OpenRA.Mods.Cameo.Test
 				BaseBuilderQueueEvalCA.EvaluatePlacementCancelProtection(null, false, false, 500, 40, 600, 50),
 				Is.EqualTo(PlacementCancelVerdict.Unresolvable),
 				"unknown membership is protected — floors stay unused this iteration");
+		}
+
+		[Test]
+		public void DemandCancelDispositionTable()
+		{
+			// F2 (Sol adjudication of 9d997eb58): the demand-unwind cancel seam —
+			// BaseBuilderQueueEvalCA.DemandCancelVerdict(sameNameTotal, sameNameOnEnabled,
+			// verdict, cert). Engine CancelProduction removes the last same-name entry on
+			// EVERY enabled queue of the producer, so intent is provable only at count 1.
+			Assert.That(
+				BaseBuilderQueueEvalCA.DemandCancelVerdict(0, 0, PlacementCancelVerdict.Unresolvable, false),
+				Is.EqualTo(DemandCancelDisposition.Absent), "nothing queued — the order would no-op");
+
+			// Twin same-name entries: a certificate cannot establish request identity.
+			Assert.That(
+				BaseBuilderQueueEvalCA.DemandCancelVerdict(2, 2, PlacementCancelVerdict.RequireCertificate, true),
+				Is.EqualTo(DemandCancelDisposition.AmbiguousHold), "twin same-name never settles on a cert alone");
+			Assert.That(
+				BaseBuilderQueueEvalCA.DemandCancelVerdict(2, 1, PlacementCancelVerdict.RequireCertificate, true),
+				Is.EqualTo(DemandCancelDisposition.AmbiguousHold),
+				"a same-name sibling on a second (disabled) queue still proves nothing");
+
+			// Unique entry but no Allow verdict and no live certificate → hold.
+			Assert.That(
+				BaseBuilderQueueEvalCA.DemandCancelVerdict(1, 1, PlacementCancelVerdict.RequireCertificate, false),
+				Is.EqualTo(DemandCancelDisposition.ProtectionHold));
+			Assert.That(
+				BaseBuilderQueueEvalCA.DemandCancelVerdict(1, 1, PlacementCancelVerdict.Unresolvable, false),
+				Is.EqualTo(DemandCancelDisposition.ProtectionHold));
+
+			// Unique + cert + protected verdict → the only issuance path.
+			Assert.That(
+				BaseBuilderQueueEvalCA.DemandCancelVerdict(1, 1, PlacementCancelVerdict.RequireCertificate, true),
+				Is.EqualTo(DemandCancelDisposition.Issued));
+
+			// Recovery: after the ambiguous twin resolves elsewhere, the unique
+			// remaining entry certifies and the identical seam call issues.
+			Assert.That(
+				BaseBuilderQueueEvalCA.DemandCancelVerdict(1, 1, PlacementCancelVerdict.Unresolvable, true),
+				Is.EqualTo(DemandCancelDisposition.Issued),
+				"held-unwind recovery: once unique again, a live certificate settles");
+
+			// A sole entry on a disabled queue is uncancellable-by-order → hold, not absent.
+			Assert.That(
+				BaseBuilderQueueEvalCA.DemandCancelVerdict(1, 0, PlacementCancelVerdict.RequireCertificate, true),
+				Is.EqualTo(DemandCancelDisposition.AmbiguousHold),
+				"the only entry on a disabled queue is unreachable by the order");
 		}
 	}
 }

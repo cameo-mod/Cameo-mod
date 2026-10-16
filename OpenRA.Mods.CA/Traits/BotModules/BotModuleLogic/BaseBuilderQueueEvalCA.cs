@@ -408,35 +408,56 @@ namespace OpenRA.Mods.CA.Traits
 		/// cancellation may proceed. The caller supplies EVIDENCE only — this helper owns the
 		/// verdict.
 		///
-		/// Decision table (intermediate guard per Sol D831BBCB — the protected-floor
-		/// comparison is deliberately NOT ratified this iteration, so
-		/// <paramref name="protectedFloorCost"/>/<paramref name="protectedFloorTicks"/> are
-		/// accepted for seam compatibility and intentionally unused; cheap cancellation is
-		/// permitted via proven cheap-fast membership, never via a computed floor):
-		/// - proven cheap-fast role member → Allow (mounted cheap-fast class evidence —
-		///   walls, power, the caller's own mounted cheap-fast set);
+		/// Decision table (Sol adjudication of 9d997eb58, F0): role membership is a hint,
+		/// not positive cheap+fast evidence — this iteration carries NO Allow verdict.
+		/// Ordinary failure triggers never authorize discarding protected value; a future
+		/// Allow requires a reviewed concrete policy plus positively resolved cost AND
+		/// production-duration evidence with explicit protected-role precedence (category
+		/// OR evidence alone is insufficient). <paramref name="cheapFastRoleMember"/>,
+		/// <paramref name="resolvedCost"/>, <paramref name="resolvedBuildTicks"/> and the
+		/// floor parameters are accepted for seam compatibility and intentionally unused.
 		/// - proven protected-role member → RequireCertificate (cancel only under a live
 		///   domain-exhaustion certificate);
-		/// - anything else → Unresolvable (unknown/unclassified items are protected too —
-		///   absence of evidence never reads as cheap; E2).
-		///
-		/// <paramref name="resolvedCost"/>/<paramref name="resolvedBuildTicks"/> are the
-		/// caller's positively-resolved cost/time for the actual supported queue variant —
-		/// negative BuildDuration is the engine sentinel, not evidence; reserved for the
-		/// ratified floor iteration. Unresolvable and RequireCertificate both require a
-		/// certificate to proceed at CA call sites; the distinction is diagnostic.
+		/// - anything else → Unresolvable (unknown/unclassified/cheap-fast-hinted items all
+		///   hold; absence of proof never reads as cheap).
+		/// Unresolvable and RequireCertificate both require a certificate to proceed at CA
+		/// call sites; the distinction is diagnostic.
 		/// </summary>
 		public static PlacementCancelVerdict EvaluatePlacementCancelProtection(
 			ActorInfo info, bool protectedRoleMember, bool cheapFastRoleMember,
 			int? resolvedCost, int? resolvedBuildTicks, int? protectedFloorCost, int? protectedFloorTicks)
 		{
-			if (cheapFastRoleMember)
-				return PlacementCancelVerdict.Allow;
+			if (protectedRoleMember)
+				return PlacementCancelVerdict.RequireCertificate;
 
-			if (!protectedRoleMember)
-				return PlacementCancelVerdict.Unresolvable;
+			return PlacementCancelVerdict.Unresolvable;
+		}
 
-			return PlacementCancelVerdict.RequireCertificate;
+		/// <summary>
+		/// Sol adjudication of 9d997eb58, F2: a demand binds by NAME only — that does not
+		/// prove the intended <c>ProductionItem</c> instance. Engine law for
+		/// Order.CancelProduction runs on EVERY enabled ProductionQueue trait of the
+		/// producer and removes the LAST same-name entry on each
+		/// (ProductionQueue.CancelProductionInner), so with more than one same-name entry
+		/// the order settles a sibling or removes several items at once; an exhaustion
+		/// certificate cannot establish request identity either. The only provable intent
+		/// is exactly one same-name entry across the producer's queues, located on an
+		/// enabled queue — anything else fails closed. World-free: the caller counts.
+		/// </summary>
+		public static DemandCancelDisposition DemandCancelVerdict(
+			int sameNameOnProducer, int sameNameOnEnabledQueues,
+			PlacementCancelVerdict verdict, bool certificateCurrent)
+		{
+			if (sameNameOnProducer == 0)
+				return DemandCancelDisposition.Absent;
+
+			if (sameNameOnProducer != 1 || sameNameOnEnabledQueues != 1)
+				return DemandCancelDisposition.AmbiguousHold;
+
+			if (verdict != PlacementCancelVerdict.Allow && !certificateCurrent)
+				return DemandCancelDisposition.ProtectionHold;
+
+			return DemandCancelDisposition.Issued;
 		}
 
 		/// <summary>
@@ -908,11 +929,24 @@ namespace OpenRA.Mods.CA.Traits
 	/// <summary>
 	/// HIGH-VALUE cancel protection (E91BA74C / API_PROPOSAL_2026-10-16 E1283A6D): the
 	/// verdict of <c>BaseBuilderQueueEvalCA.EvaluatePlacementCancelProtection</c>. Allow =
-	/// proven cheap-fast, proceed; RequireCertificate = a proven protected item, cancel only
-	/// under a live domain-exhaustion certificate; Unresolvable = the caller could not prove
-	/// a class — fails closed (protected) until a certificate authorizes.
+	/// proceed — unreachable this iteration (Sol adjudication of 9d997eb58, F0: role
+	/// membership is a hint, not positive cheap+fast evidence; no-Allow/fail-closed until a
+	/// ratified policy plus positively resolved cost AND duration evidence exists);
+	/// RequireCertificate = a proven protected item, cancel only under a live
+	/// domain-exhaustion certificate; Unresolvable = the caller could not prove a class —
+	/// fails closed (protected) until a certificate authorizes.
 	/// </summary>
 	public enum PlacementCancelVerdict { Allow, RequireCertificate, Unresolvable }
+
+	/// <summary>
+	/// F2 (Sol adjudication of 9d997eb58): the disposition of a demand-unwind cancel —
+	/// distinguishes held from issued/settled. Absent = nothing same-name queued (the
+	/// order would no-op). AmbiguousHold = same-name entries beyond the bound one (or the
+	/// only one sits on a disabled queue) — name-only intent unprovable, never cancel.
+	/// ProtectionHold = unique intent but no Allow verdict and no live certificate.
+	/// Issued = the order was queued; the queue entry is being settled by the engine.
+	/// </summary>
+	public enum DemandCancelDisposition { Absent, AmbiguousHold, ProtectionHold, Issued }
 
 	public enum BotQueueTransitionKind { Queued, Ready, Placed, Cancelled, Held, Resumed, Removed, PlacementOrdered, CancelOrdered }
 

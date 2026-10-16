@@ -1529,14 +1529,28 @@ namespace OpenRA.Mods.CA.Traits
 				var readopted = law != null
 					&& ItemDone(demand.RefineryProducer, demand.RefineryItem);
 				if (!readopted)
-					CancelDemandItem(bot, demand.RefineryProducer, demand.RefineryItem);
+				{
+					// F2: held is not settled. A held cancel leaves the entry queued — the
+					// demand retires and the queue layer's sweeps own the retained item's
+					// placement retry (its protection gate keeps it queued; the placement
+					// sweeps place it) — the same re-adoption route a readopted refinery
+					// takes. Only Issued/Absent means the queue entry is gone.
+					var disposition = CancelDemandItem(bot, demand.RefineryProducer, demand.RefineryItem);
+					if (disposition is DemandCancelDisposition.AmbiguousHold or DemandCancelDisposition.ProtectionHold)
+						AIUtils.BotDebug("AI ({0}): demand-unwind cancel of {1} on {2} held ({3}); the item stays queued and is re-adopted by the queue layer's placement sweep.",
+							player.ClientIndex, demand.RefineryItem, demand.RefineryProducer, disposition);
+				}
 
 				demand.UnbindRefinery();
 			}
 
 			if (demand.DefenceItem != null)
 			{
-				CancelDemandItem(bot, demand.DefenceProducer, demand.DefenceItem);
+				var disposition = CancelDemandItem(bot, demand.DefenceProducer, demand.DefenceItem);
+				if (disposition is DemandCancelDisposition.AmbiguousHold or DemandCancelDisposition.ProtectionHold)
+					AIUtils.BotDebug("AI ({0}): demand-unwind cancel of {1} on {2} held ({3}); the item stays queued and is re-adopted by the queue layer's placement sweep.",
+						player.ClientIndex, demand.DefenceItem, demand.DefenceProducer, disposition);
+
 				demand.UnbindDefence();
 			}
 
@@ -1553,23 +1567,40 @@ namespace OpenRA.Mods.CA.Traits
 				.Any(q => q.AllQueued().Any(i => i.Item == item && i.Done));
 		}
 
-		void CancelDemandItem(IBot bot, Actor producer, string item)
+		/// <summary>
+		/// F2 (Sol adjudication of 9d997eb58): the demand-unwind cancel is name-bound — the
+		/// intended ProductionItem is provable ONLY when exactly one same-name entry exists
+		/// across the producer's queues on an enabled queue (engine CancelProduction runs on
+		/// every enabled ProductionQueue trait and removes the last same-name entry on each,
+		/// so anything beyond unique either settles a sibling or removes several entries).
+		/// A certificate alone never establishes request identity. Held ≠ settled: a held
+		/// item stays queued and the queue layer's sweeps own its placement retry — the
+		/// same re-adoption route a retained refinery takes when the demand retires.
+		/// </summary>
+		DemandCancelDisposition CancelDemandItem(IBot bot, Actor producer, string item)
 		{
 			if (producer == null || producer.Disposed || producer.IsDead)
-				return;
+				return DemandCancelDisposition.Absent;
 
-			// E91BA74C/D831BBCB/6722A484: the demand-unwind cancel gates on the same shared
-			// verdict — a protected or unclassifiable item is never settled without a live
-			// exhaustion certificate; it stays queued and the ordinary sweeps re-adopt it.
-			// (The binding is name-scoped, so the engine's last-same-name resolution IS the
-			// intended target here — E3's ambiguity rule needs no separate instance check.)
+			var sameName = 0;
+			var onEnabledQueue = 0;
+			foreach (var q in producer.TraitsImplementing<ProductionQueue>())
+			{
+				var n = q.AllQueued().Count(i => i.Item == item);
+				sameName += n;
+				if (q.Enabled)
+					onEnabledQueue += n;
+			}
+
 			world.Map.Rules.Actors.TryGetValue(item, out var cancelInfo);
-			if (BaseBuilderQueueEvalCA.EvaluatePlacementCancelProtection(cancelInfo,
+			var disposition = BaseBuilderQueueEvalCA.DemandCancelVerdict(sameName, onEnabledQueue,
+				BaseBuilderQueueEvalCA.EvaluatePlacementCancelProtection(cancelInfo,
 					Info.RefineryTypes.Contains(item),
 					Info.PowerTypes.Contains(item) || Info.BarracksTypes.Contains(item),
-					null, null, null, null) != PlacementCancelVerdict.Allow
-				&& !(RefineryLawProvider()?.RefineryFallbackCertificateCurrent(producer, item) ?? false))
-				return;
+					null, null, null, null),
+				RefineryLawProvider()?.RefineryFallbackCertificateCurrent(producer, item) ?? false);
+			if (disposition != DemandCancelDisposition.Issued)
+				return disposition;
 
 			// REPLAY-HEALTH-LOGGER (F4): register the demand cancel so the owning manager's
 			// probe resolves it as Cancelled/DemandCancel instead of an UNKNOWN removal.
@@ -1578,6 +1609,7 @@ namespace OpenRA.Mods.CA.Traits
 					b?.NoteExternalCancel(producer, item);
 
 			bot.QueueOrder(Order.CancelProduction(producer, item, 1));
+			return DemandCancelDisposition.Issued;
 		}
 
 		/// <summary>
