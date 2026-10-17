@@ -25,6 +25,27 @@ import sys
 import time
 
 
+_K32 = None
+
+
+def _kernel32():
+	"""kernel32 with explicit prototypes. Untyped ctypes calls pass the
+	GetCurrentProcess() pseudo-handle (-1) as a C int, so GetProcessTimes on
+	it failed and the parent marker recorded creation_filetime null (W2 row 3,
+	parent_links_reconciled). The monitor sets the same prototypes
+	(run_qualification_monitored.py GetProcessTimes / GetCurrentProcess)."""
+	global _K32
+	if _K32 is None:
+		k = ctypes.WinDLL("kernel32", use_last_error=True)
+		k.GetCurrentProcess.argtypes = []
+		k.GetCurrentProcess.restype = wintypes.HANDLE
+		k.GetProcessTimes.argtypes = [wintypes.HANDLE] + [
+			ctypes.POINTER(wintypes.FILETIME)] * 4
+		k.GetProcessTimes.restype = wintypes.BOOL
+		_K32 = k
+	return _K32
+
+
 def _ft_of_handle(handle) -> int | None:
 	"""Creation FILETIME from an open process handle."""
 	if os.name != "nt":
@@ -33,7 +54,7 @@ def _ft_of_handle(handle) -> int | None:
 	exited = wintypes.FILETIME()
 	kernel = wintypes.FILETIME()
 	user = wintypes.FILETIME()
-	if not ctypes.windll.kernel32.GetProcessTimes(
+	if not _kernel32().GetProcessTimes(
 			handle, ctypes.byref(created), ctypes.byref(exited),
 			ctypes.byref(kernel), ctypes.byref(user)):
 		return None
@@ -53,7 +74,7 @@ def own_filetime() -> int | None:
 	"""Creation FILETIME of this process (pseudo-handle, always valid)."""
 	if os.name != "nt":
 		return None
-	return _ft_of_handle(ctypes.windll.kernel32.GetCurrentProcess())
+	return _ft_of_handle(_kernel32().GetCurrentProcess())
 
 
 def marker(work: pathlib.Path, name: str, pid: int, ppid: int,
