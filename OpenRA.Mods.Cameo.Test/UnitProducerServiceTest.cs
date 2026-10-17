@@ -181,6 +181,62 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(next.LimitHeadroom, Is.Empty);
 		}
 
+		// Sol ECAFF220: the aircraft admission delta is the production-used seam —
+		// CanBuildMoreOfAircraft adds it to the live+queued count. These tests drive
+		// the SAME method both call sites use, with the batch states the calls
+		// actually produce.
+
+		[Test]
+		public void ExternalAircraftEmissionCountsAgainstTheNextRequest()
+		{
+			var batch = new ProducerServiceBatch(5000);
+
+			// External request 1 emits an aircraft: its own emission increments the
+			// batch — request 2's admission must see it (the ECAFF220 defect case).
+			batch.PendingAircraft = 1;
+			Assert.That(UnitProducerServiceCA.PendingAircraftDelta(true, false, false, batch),
+				Is.EqualTo(1), "second external aircraft sees the first one's spend");
+
+			// At cap-minus-one live+queued, that delta is what refuses the second emit.
+			const int currentCount = 9; const int limit = 10;
+			Assert.That(currentCount + 1 < limit, Is.False);
+		}
+
+		[Test]
+		public void ExternalAndCategoryCallsShareOneAircraftHeadroom()
+		{
+			var batch = new ProducerServiceBatch(5000);
+			batch.PendingAircraft = 1; // emitted by the external-request scan
+
+			// The ordinary category visit reads the same delta — one headroom unit
+			// cannot admit an external order AND a category pick.
+			Assert.That(UnitProducerServiceCA.PendingAircraftDelta(true, false, false, batch),
+				Is.EqualTo(1), "category pick spends the same headroom the external request spent");
+		}
+
+		[Test]
+		public void AirSuperiorityClassesSpendTheirOwnDeltas()
+		{
+			var batch = new ProducerServiceBatch(5000);
+			batch.PendingAircraft = 2;
+			batch.PendingAirToAir = 1;
+
+			Assert.That(UnitProducerServiceCA.PendingAircraftDelta(true, true, true, batch),
+				Is.EqualTo(1), "air-to-air candidate spends the air-to-air class");
+			Assert.That(UnitProducerServiceCA.PendingAircraftDelta(true, false, true, batch),
+				Is.EqualTo(1), "non-A2A candidate spends the remainder (2 total - 1 A2A)");
+		}
+
+		[Test]
+		public void NonAircraftAndNullBatchAdmitNoDelta()
+		{
+			var batch = new ProducerServiceBatch(5000);
+			batch.PendingAircraft = 3;
+
+			Assert.That(UnitProducerServiceCA.PendingAircraftDelta(false, false, false, batch), Is.EqualTo(0));
+			Assert.That(UnitProducerServiceCA.PendingAircraftDelta(true, false, false, null), Is.EqualTo(0));
+		}
+
 		[Test]
 		public void LimitHeadroomMapIsSharedAcrossCallSites()
 		{

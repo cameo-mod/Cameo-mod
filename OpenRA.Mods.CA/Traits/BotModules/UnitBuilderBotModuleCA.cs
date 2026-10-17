@@ -864,10 +864,11 @@ namespace OpenRA.Mods.CA.Traits
 
 					var isAircraft = unit.HasTraitInfo<AircraftInfo>();
 					var isAirToAir = isAircraft && Info.AirToAirUnits.Contains(name);
-					var aircraftPending = !isAircraft ? 0
-						: Info.MaintainAirSuperiority
-							? (isAirToAir ? batch.PendingAirToAir : batch.PendingAircraft - batch.PendingAirToAir)
-							: batch.PendingAircraft;
+
+					// The shared class-delta seam (ECAFF220): same calculation the external
+					// path uses — one batch, one headroom, one admission rule.
+					var aircraftPending = UnitProducerServiceCA.PendingAircraftDelta(isAircraft, isAirToAir,
+						Info.MaintainAirSuperiority, batch);
 					if (!CanBuildMoreOfAircraft(unit, aircraftPending))
 					{
 						Reject();
@@ -910,6 +911,11 @@ namespace OpenRA.Mods.CA.Traits
 
 		// U1: per-name cap headroom shared across the batch — UnitLimits counts only
 		// living actors; in-pass emissions spend the headroom the census cannot see.
+		// Scope note (Sol ECAFF220): this preserves the legacy owned-alive census
+		// semantics — pre-existing queued items are NOT counted here (the same blind
+		// spot ShouldBuild always had); the map adds only this batch's emissions on
+		// top of that census. A total committed-unit ceiling (live + queued + pending)
+		// is a different cap definition and is NOT claimed by this increment.
 		bool LimitHeadroomAdmits(ProducerServiceBatch batch, string name)
 		{
 			if (batch == null || Info.UnitLimits == null || !Info.UnitLimits.TryGetValue(name, out var limit))
@@ -1017,8 +1023,21 @@ namespace OpenRA.Mods.CA.Traits
 					}
 				}
 
-				if (queue != null && queue.BuildableItems().Any(b => b.Name == name) &&
-					(!FairService || (LimitHeadroomAdmits(batch, name) && CapturerCapAdmitsWithPending(actorInfo, batch))))
+				var admit = queue != null && queue.BuildableItems().Any(b => b.Name == name);
+				if (admit && FairService)
+				{
+					// Sol ECAFF220: the external request must pass the SAME ordinary
+					// aircraft admission BEFORE emit — ShouldBuild does not air-check, so
+					// a capped external aircraft (or two external names sharing one
+					// headroom unit) would otherwise still emit.
+					admit = LimitHeadroomAdmits(batch, name)
+						&& CapturerCapAdmitsWithPending(actorInfo, batch)
+						&& CanBuildMoreOfAircraft(actorInfo, UnitProducerServiceCA.PendingAircraftDelta(
+							actorInfo.HasTraitInfo<AircraftInfo>(), Info.AirToAirUnits.Contains(name),
+							Info.MaintainAirSuperiority, batch));
+				}
+
+				if (admit)
 				{
 					SetUnitInterval(name);
 					bot.QueueOrder(Order.StartProduction(queue.Actor, name, 1));

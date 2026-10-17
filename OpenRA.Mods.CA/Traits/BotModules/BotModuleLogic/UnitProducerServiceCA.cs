@@ -79,6 +79,25 @@ namespace OpenRA.Mods.CA.Traits
 				.OrderByDescending(c => c.Strength / Math.Max(1, c.Cost))
 				.ThenBy(c => c.Name, StringComparer.Ordinal)
 				.Select(c => c.Name);
+
+		/// <summary>
+		/// Sol ECAFF220: the batch class delta fed to the ordinary aircraft admission
+		/// (CanBuildMoreOfAircraft) — the SAME calculation for external requests and
+		/// category picks. Under MaintainAirSuperiority air-to-air and other aircraft
+		/// are counted separately: an air-to-air candidate spends the air-to-air class,
+		/// anything else spends the non-air-to-air remainder. Non-aircraft admit
+		/// unconditionally; a null batch contributes no delta.
+		/// </summary>
+		public static int PendingAircraftDelta(bool isAircraft, bool isAirToAir, bool maintainAirSuperiority, ProducerServiceBatch batch)
+		{
+			if (batch == null || !isAircraft)
+				return 0;
+
+			if (!maintainAirSuperiority)
+				return batch.PendingAircraft;
+
+			return isAirToAir ? batch.PendingAirToAir : batch.PendingAircraft - batch.PendingAirToAir;
+		}
 	}
 
 	/// <summary>
