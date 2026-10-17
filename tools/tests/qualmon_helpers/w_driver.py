@@ -831,7 +831,7 @@ def main() -> int:
 	# grant's tool_sha256 so the monitor hashes them pre/post run; the same
 	# map is emitted in the case receipt for hash binding.
 	helper_hashes = {
-		f"tools/tests/qualmon_helpers/{name}.py": sha256_file(_h(name))
+		f"tools/tests/qualmon_helpers/{name}.py": sha256_file(pathlib.Path(_h(name)))
 		for name in spec["helpers"]}
 	helper_hashes["tools/tests/qualmon_helpers/w_driver.py"] = DRIVER_SHA
 
