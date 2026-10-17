@@ -729,8 +729,16 @@ namespace OpenRA.Mods.CA.Traits
 						// every service visit for a sustained run — drops once instead of
 						// pinning the waiting set and logging each pass (legacy callers
 						// dropped on first failure; this is the bounded fair-service form).
-						if (PermanentlyInvalidBuildRequest(intent.Name) || ++intent.FailedSweeps >= RequestDropFailedSweeps)
+						// The capped drop emits "request_dropped" so a stuck request is
+						// visible in the skip telemetry, not silently removed.
+						if (PermanentlyInvalidBuildRequest(intent.Name))
 							buildIntents.Remove(intent);
+						else if (++intent.FailedSweeps >= RequestDropFailedSweeps)
+						{
+							foreach (var observer in UnitObservers)
+								observer.UnitProductionSkipped(player, world.WorldTick, intent.Name, "request_dropped");
+							buildIntents.Remove(intent);
+						}
 					}
 				}
 				else
