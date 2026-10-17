@@ -1,3 +1,48 @@
+# 2026-10-17 — Devin: P1a HOLD-conformance audit at 666ddd0bd — no source change needed
+
+*Devin-Developer.* The controlling ruling
+(`RULING_2026-10-16_high_value_placement_refinement_sol`, task `01a14054`) held
+`aec00d3b1` on cancellation freshness/completeness and authorized amending the
+same seven-file claim for "a fresh exhaustive certificate or fail-closed hold."
+Static audit of tip `666ddd0bd` finds every residual clause already resolved by
+post-`aec00d3b1` commits — no amendment needed, no build/test/run executed:
+
+- **Mixed-time evidence**: terminal-tier polls re-collect the injected coherence
+  atoms in one same-tick sweep and compare pairwise to the pass-stamped sequence
+  (exact values + reference identity, never a fold); drift aborts to a Deferred
+  epoch re-list. Evented cell inputs mark read-radius topLeft indices in the
+  `stale` set (cap 4096, overflow aborts); marks during Rank/Pick abort; marks
+  during Enumerate are repaired one-per-step and the drain gate refuses to
+  certify while the set is non-empty.
+- **No-provider/NoUniverse never certifies**: `Exhausted` requires
+  `legalCells == 0 && providers.Count > 0 && domainCells > 0`; every other
+  drained state reports NoSite/NoUniverse and fails closed.
+- **No K-epoch shortcut**: `Epochs` is observational only; no attempt-count or
+  epoch-count path authorizes a cancel.
+- **Cancel-time freshness**: `CertificateCurrent()` re-verifies issued-state +
+  `dirtyEpoch` unmoved + `LiveAtoms` pairwise-equal live before any cancel arm
+  proceeds; a stale replay, drift, or covered event fails closed.
+- **Intended instance**: `CertificateAuthorizes` requires a unique enabled
+  same-name entry across all the producer's ProductionQueue traits whose live
+  `LastOrDefault` resolves to the exact `ProductionItem` (39c3de60c/A966ED70).
+- **All automatic cancel paths gated**: relocation mass-cancel (:637),
+  limit-reached (:998 cheap-fast `Allow` or cert), refinery-domain-exhausted
+  (:1172 cert mandatory), saturation-latch (:1210 cheap-fast or cert),
+  demand-unwind (:1561 cert mandatory per ec7354237/EE3B6358).
+- **Domain**: terminal tier enumerates `world.Map.AllCells` unconditionally at
+  `int.MaxValue` bound; provider squares serve bounded tiers only.
+- **Event coverage**: `WireFallbackEvents` = ActorMap.CellUpdated +
+  IResourceLayer.CellChanged + CustomTerrain.CellEntryChanged → `MarkDirtyCell`
+  (unconditional `dirtyEpoch++` so no cert outlives a covered event);
+  actor/trait/flag inputs ride the atom sweep.
+
+Out of scope per the ruling itself: Fransbot-family cancel sites and the
+class-wide G3/G4 cancellation inventory (separate linked source-read task), and
+runtime proof (not claimed). Fleet conformance note
+`REPORT_2026-10-17_p1a_hold_conformance_devin.md` filed; exact-SHA adjudication
+requested of Sonnet `01a12104` with Devin-Reviewer byte-verify. Nothing merges;
+U1/U2/P1a landing holds stand.
+
 # 2026-10-16 — Devin: P1a cert-mandatory coupling (ec7354237) — EE3B6358 clarification
 
 *Devin-Developer.* Sol's bounded clarification `EE3B6358` (supersedes `A966ED70`
