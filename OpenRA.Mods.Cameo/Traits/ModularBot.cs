@@ -61,18 +61,24 @@ namespace OpenRA.Mods.Cameo.Traits
 		public override object Create(ActorInitializer init) { return new ModularBot(this, init); }
 	}
 
-	// U2 (Sol dispositions 0CB8EF18/6919D6E4): the world-free registration seam
-	// behind IBotOrderTracking — bound to the exact Order instance (Order uses
+	// U2 (Sol dispositions 0CB8EF18/6919D6E4/EB513352): the world-free registration
+	// seam behind IBotOrderTracking — bound to the exact Order instance (Order uses
 	// reference equality), refusing grouped orders whose gate rebuild would break
 	// identity. Register BEFORE the FIFO can evict; terminal outcomes deliver once
 	// and remove the registration — no leaks, no observer overwrite.
+	// The accepted first scope is StartProduction only (Sol EB513352): other order
+	// kinds are refused so callers fall back to plain QueueOrder and stay honest
+	// rather than implying broader tracked-order coverage.
 	public sealed class BotOrderDispositionTracker
 	{
+		public const string TrackedOrderString = "StartProduction";
+
 		readonly Dictionary<Order, IBotOrderDisposition> byOrder = new();
 
 		public bool Register(Order order, IBotOrderDisposition observer)
 		{
-			return order != null && observer != null && order.GroupedActors == null && byOrder.TryAdd(order, observer);
+			return order != null && observer != null && order.OrderString == TrackedOrderString &&
+				order.GroupedActors == null && byOrder.TryAdd(order, observer);
 		}
 
 		// Non-terminal routing note — the order stays tracked.

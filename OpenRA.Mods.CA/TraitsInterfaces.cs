@@ -108,10 +108,11 @@ namespace OpenRA.Mods.CA.Traits
 	/// Implemented by a bot that can report the local routing fate of a single
 	/// order. QueueOrderTracked binds the observer to the exact Order instance
 	/// BEFORE the FIFO can evict anything; grouped orders are refused (the gate
-	/// may rebuild them into a different instance, breaking identity). Returns
-	/// false where tracking is impossible — callers fall back to plain
-	/// QueueOrder and keep the intent honestly pending instead of claiming an
-	/// observable disposition.
+	/// may rebuild them into a different instance, breaking identity). The
+	/// supported contract in this slice is StartProduction orders only — other
+	/// order kinds are refused so callers fall back to plain QueueOrder and keep
+	/// the intent honestly pending instead of claiming an observable
+	/// disposition (Sol EB513352).
 	/// </summary>
 	[RequireExplicitImplementation]
 	public interface IBotOrderTracking

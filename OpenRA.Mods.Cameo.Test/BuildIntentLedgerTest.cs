@@ -271,15 +271,16 @@ namespace OpenRA.Mods.Cameo.Test
 		[Test]
 		public void SimulatedEmitSequenceMatchesProductionCallOrder()
 		{
-			// The exact sequence EmitIntentProduction + ModularBot drive: ledger
-			// request → intent emitted → binding → tracker registration →
-			// LocallyQueued (synchronous inside the enqueue) → IssuedToWorld at drain.
+			// The exact sequence EmitIntentProduction + ModularBot drive under
+			// BuildIntentTracking=ON: ledger request → NoteEmitted retain →
+			// binding → tracker registration → LocallyQueued (synchronous inside
+			// the enqueue) → IssuedToWorld at drain.
 			var ledger = new BuildIntentLedger();
 			var bindings = new BuildIntentOrderBindings();
 			var tracker = new BotOrderDispositionTracker();
 			var observer = new RoutedObserver(bindings);
 			var intent = ledger.Request("mcv");
-			intent.State = BuildIntentState.EmittedPending;
+			Assert.That(ledger.NoteEmitted(intent, retainCoverage: true), Is.True);
 			var order = new Order("StartProduction", null, false);
 			bindings.Bind(order, intent);
 			Assert.That(tracker.Register(order, observer), Is.True);
@@ -307,7 +308,7 @@ namespace OpenRA.Mods.Cameo.Test
 			var observer = new RoutedObserver(bindings);
 
 			var intent = ledger.Request("harv");
-			intent.State = BuildIntentState.EmittedPending;
+			Assert.That(ledger.NoteEmitted(intent, retainCoverage: true), Is.True);
 			var order = new Order("StartProduction", null, false);
 			bindings.Bind(order, intent);
 			Assert.That(tracker.Register(order, observer), Is.True);
@@ -323,6 +324,112 @@ namespace OpenRA.Mods.Cameo.Test
 			// A stale terminal on the consumed binding cannot flip it back.
 			tracker.NotifyTerminal(order, BotOrderOutcome.IssuedToWorld);
 			Assert.That(intent.State, Is.EqualTo(BuildIntentState.Waiting));
+		}
+
+		// --- Sol EB513352: the production-used off/on selection and the
+		// successful-emission removal/count boundary ---
+
+		[Test]
+		public void OffModeEmissionConsumesRequestAndDropsCount()
+		{
+			// BuildIntentTracking=OFF: EmitIntentProduction calls NoteEmitted with
+			// retainCoverage=false, then routes a plain QueueOrder — the request is
+			// consumed exactly like the pre-U2 string list, so the count drops and
+			// callers (e.g. the HarvesterBotModuleCA ==0 gate) may re-request.
+			var ledger = new BuildIntentLedger();
+			var intent = ledger.Request("harv");
+			Assert.That(ledger.Count("harv"), Is.EqualTo(1));
+
+			Assert.That(ledger.NoteEmitted(intent, retainCoverage: false), Is.False,
+				"off-mode emission returns false — the caller routes a plain QueueOrder, never the tracked seam");
+			Assert.That(ledger.Count("harv"), Is.EqualTo(0), "emission consumed the request — the legacy boundary");
+			Assert.That(ledger.WaitingNames(), Is.Empty);
+			Assert.That(ledger.PendingNames(), Is.Empty,
+				"nothing pending persists — the off-mode save carries no PendingBuildIntents node");
+		}
+
+		[Test]
+		public void OffModeRequestEmitReRequestCycleMatchesLegacy()
+		{
+			// The harvester-death cycle under OFF: request counted until the
+			// successful emit consumes it, then a fresh request counts anew —
+			// replacement is never suppressed by a consumed emission.
+			var ledger = new BuildIntentLedger();
+			var first = ledger.Request("harv");
+			ledger.NoteEmitted(first, retainCoverage: false);
+			Assert.That(ledger.Count("harv"), Is.EqualTo(0));
+
+			var second = ledger.Request("harv");
+			Assert.That(ledger.Count("harv"), Is.EqualTo(1));
+			Assert.That(second, Is.Not.SameAs(first), "a re-request is a new intent, not a resurrected record");
+		}
+
+		[Test]
+		public void OnModeEmissionRetainsCountedCoverage()
+		{
+			// BuildIntentTracking=ON: NoteEmitted marks EmittedPending and returns
+			// true — the caller routes through QueueOrderTracked and coverage
+			// stays withheld under the slice's explicit liveness limitation.
+			var ledger = new BuildIntentLedger();
+			var intent = ledger.Request("harv");
+
+			Assert.That(ledger.NoteEmitted(intent, retainCoverage: true), Is.True);
+			Assert.That(intent.State, Is.EqualTo(BuildIntentState.EmittedPending));
+			Assert.That(ledger.Count("harv"), Is.EqualTo(1),
+				"the emitted intent still counts once — no duplicate issue while unproven");
+			Assert.That(ledger.HasWaiting, Is.False);
+			Assert.That(ledger.PendingNames(), Is.EqualTo(new[] { "harv" }));
+		}
+
+		[Test]
+		public void ArmedSaveOffLoadUnresolvedNeverEmitsButStillCounts()
+		{
+			// The explicit armed-save -> off-load policy (EB513352): PendingBuildIntents
+			// loads Unresolved in either mode. Under OFF those names keep counting
+			// once — a possibly-reconstructed commitment is never re-requested —
+			// yet they are never Waiting, so no emission path can touch them, and
+			// they are re-saved as PendingBuildIntents rather than migrated into
+			// the legacy Waiting node.
+			var ledger = new BuildIntentLedger();
+			ledger.LoadPending(new[] { "harv" });
+
+			Assert.That(ledger.Count("harv"), Is.EqualTo(1), "withheld coverage survives the mode crossing");
+			Assert.That(ledger.HasWaiting, Is.False, "Unresolved is never Waiting — no silent reissue");
+			Assert.That(ledger.NextWaiting(), Is.Null);
+			Assert.That(ledger.WaitingSnapshot(), Is.Empty);
+			Assert.That(ledger.WaitingNames(), Is.Empty,
+				"the legacy QueuedBuildRequests node stays empty — nothing is silently reissued");
+			Assert.That(ledger.PendingNames(), Is.EqualTo(new[] { "harv" }),
+				"withheld coverage is re-saved across further save cycles");
+		}
+
+		[Test]
+		public void LegacyWaitingNodeLoadThenOffEmitConsumes()
+		{
+			// QueuedBuildRequests migration -> off-mode emit: the legacy node feeds
+			// Waiting names and the first emission consumes them — the round trip
+			// matches the pre-U2 list exactly.
+			var ledger = new BuildIntentLedger();
+			ledger.MigrateWaiting(new[] { "mcv" });
+			var intent = ledger.NextWaiting();
+			Assert.That(intent, Is.Not.Null);
+			ledger.NoteEmitted(intent, retainCoverage: false);
+			Assert.That(ledger.Count("mcv"), Is.EqualTo(0));
+			Assert.That(ledger.Entries, Is.Empty);
+		}
+
+		[Test]
+		public void TrackerRefusesNonStartProductionOrders()
+		{
+			// Sol EB513352 nonblocking bound: the accepted first scope is
+			// StartProduction only — other order kinds are refused at
+			// registration so the caller falls back to plain QueueOrder.
+			var tracker = new BotOrderDispositionTracker();
+			var observer = new RecordingObserver();
+			Assert.That(tracker.Register(new Order("AttackMove", null, false), observer), Is.False);
+			Assert.That(tracker.Register(new Order("Stop", null, false), observer), Is.False);
+			Assert.That(tracker.Register(new Order(BotOrderDispositionTracker.TrackedOrderString, null, false), observer), Is.True,
+				"the tracked kind registers — the refusal is kind-scoped, not blanket");
 		}
 
 		// Routes tracker callbacks through the same bindings object the module uses.

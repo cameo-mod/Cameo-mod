@@ -162,6 +162,18 @@ namespace OpenRA.Mods.CA.Traits
 			"0 = off. Requires FairProducerService.")]
 		public readonly int CombatInfantryFloor = 0;
 
+		[Desc("U2 (service-contract §5, Sol EB513352): retain external-request intents",
+			"through local order disposition — an emitted request keeps counted coverage",
+			"(EmittedPending, Unresolved after a save) instead of being consumed at emit.",
+			"Distinct default-off control from FairProducerService: OFF preserves legacy",
+			"request removal/count/save semantics byte-identically, including under the",
+			"armed fair service. ON keeps the documented liveness limitation: no",
+			"produced/death settlement exists in this slice, so a delivered unit that",
+			"later dies leaves its intent counted and replacement re-request may stay",
+			"suppressed — accepted bound of the experimental slice, not repaired",
+			"recovery. Gated by SwitchCondition.")]
+		public readonly bool BuildIntentTracking = false;
+
 		public override void RulesetLoaded(Ruleset rules, ActorInfo ai)
 		{
 			base.RulesetLoaded(rules, ai);
@@ -180,13 +192,25 @@ namespace OpenRA.Mods.CA.Traits
 		public override object Create(ActorInitializer init) { return new UnitBuilderBotModuleCA(init.Self, this); }
 	}
 
-	// U2 (service-contract §5, Sol dispositions 0CB8EF18/6919D6E4): one external
-	// request is an intent — Waiting until emitted, EmittedPending while its local
-	// routing is unproven (and forever after IssuedToWorld: routing released it,
-	// which is not delivery), Unresolved after a save boundary. Every state counts
-	// once toward RequestedProductionCount so a caller can never duplicate an
-	// in-flight commitment; a replayed StartProduction post-load is exactly why
-	// pending coverage is never released on assumed loss.
+	// U2 (service-contract §5, Sol dispositions 0CB8EF18/6919D6E4/EB513352): one
+	// external request is an intent — Waiting until emitted, EmittedPending while
+	// its local routing is unproven (and forever after IssuedToWorld: routing
+	// released it, which is not delivery), Unresolved after a save boundary. Every
+	// state counts once toward RequestedProductionCount so a caller can never
+	// duplicate an in-flight commitment; a replayed StartProduction post-load is
+	// exactly why pending coverage is never released on assumed loss.
+	//
+	// EB513352 mode split (BuildIntentTracking, distinct from FairProducerService):
+	// OFF — emission consumes the intent outright (legacy request removal), only
+	// Waiting names can exist live, and Unresolved can appear only via an
+	// armed-save -> off-load crossing (coverage stays withheld and counted, never
+	// reissued — the explicit off-load policy; post-armed parity is not claimed).
+	// ON — emission retains coverage as EmittedPending. Liveness limitation kept
+	// explicit: this slice has no produced/death settlement, so a delivered unit
+	// that later dies leaves its intent counted and a replacement re-request can
+	// stay suppressed (the HarvesterBotModuleCA RequestedProductionCount==0 gate).
+	// That bound is accepted for the experimental slice only — it is not repaired
+	// harvester/MCV recovery and not complete U2.
 	public enum BuildIntentState { Waiting, EmittedPending, Unresolved }
 
 	public sealed class BuildIntent
@@ -221,7 +245,28 @@ namespace OpenRA.Mods.CA.Traits
 		public bool HasWaiting => intents.Any(i => i.State == BuildIntentState.Waiting);
 
 		// Coverage counts every state once — withheld rather than risk a duplicate.
+		// Under BuildIntentTracking=OFF only Waiting names can exist live (emit
+		// consumes); Unresolved entries can only arrive via an armed-save load and
+		// keep counting once so off-mode never re-requests an in-flight commitment.
 		public int Count(string name) { return intents.Count(i => i.Name == name); }
+
+		// The production-used off/on selection (Sol EB513352). retainCoverage=false
+		// is the legacy boundary: a successful emission consumes the request —
+		// the intent leaves the ledger and the count drops so callers may
+		// re-request. retainCoverage=true marks EmittedPending: coverage stays
+		// withheld under the armed slice's documented liveness limitation.
+		// Returns true iff the caller should route the order through tracking.
+		public bool NoteEmitted(BuildIntent intent, bool retainCoverage)
+		{
+			if (!retainCoverage)
+			{
+				intents.Remove(intent);
+				return false;
+			}
+
+			intent.State = BuildIntentState.EmittedPending;
+			return true;
+		}
 
 		public BuildIntent Request(string name)
 		{
@@ -313,9 +358,12 @@ namespace OpenRA.Mods.CA.Traits
 		public event Action<int, string> ActiveCompositionChanged;
 		readonly Dictionary<string, int> compositionLastUsedTickById = new Dictionary<string, int>();
 
-		// U2: the intent ledger replaces the bare request-name list — see the type
-		// block above. intentBindings ties an emitted Order instance to its intent
-		// until the local routing disposition arrives.
+		// U2: the intent ledger is the single request store in BOTH modes — see
+		// the type block above. Under BuildIntentTracking=OFF it reproduces the
+		// legacy name list exactly (Waiting names only; a successful emission
+		// consumes the request); under ON it retains emitted coverage.
+		// intentBindings ties an emitted Order instance to its intent until the
+		// local routing disposition arrives — only ever populated while armed.
 		readonly BuildIntentLedger buildIntents = new BuildIntentLedger();
 		readonly BuildIntentOrderBindings intentBindings = new BuildIntentOrderBindings();
 		ActorIndex.OwnerAndNames unitsToBuild;
@@ -367,6 +415,12 @@ namespace OpenRA.Mods.CA.Traits
 		// rotation cursor over stable queue keys ("actorID|queueType") — a visit resumes
 		// AFTER the last examined producer instead of always re-walking the head.
 		bool FairService => switchesActive && Info.FairProducerService;
+
+		// U2 (Sol EB513352): the intent ledger's coverage-retaining semantics arm
+		// only behind their own default-off switch — OFF keeps request removal,
+		// count and save output byte-identical to the pre-U2 module (a successful
+		// emission consumes the request), under either FairService branch.
+		bool IntentTracking => switchesActive && Info.BuildIntentTracking;
 		readonly Dictionary<string, string> serviceCursorByCategory = new(StringComparer.Ordinal);
 
 		int CounterWeight => botLimits?.Info.AdaptiveCounterWeight ?? 0;
@@ -646,9 +700,10 @@ namespace OpenRA.Mods.CA.Traits
 					// request leaves the waiting set, a temporarily blocked one survives
 					// for the next visit. An impossible head request cannot hide a legal
 					// later one, and a deferred order is never duplicated.
-					// U2: an emitted request is not removed — the intent stays in the
-					// ledger as EmittedPending coverage so the requester cannot emit a
-					// second order while the first is unproven.
+					// U2 (EB513352): under BuildIntentTracking=ON an emitted request is not
+					// removed — the intent stays as EmittedPending coverage so the requester
+					// cannot emit a second order while the first is unproven. OFF consumes it
+					// at emit exactly like the pre-U2 request list.
 					foreach (var intent in buildIntents.WaitingSnapshot())
 					{
 						if (BuildUnit(bot, intent, batch))
@@ -662,8 +717,10 @@ namespace OpenRA.Mods.CA.Traits
 					var intent = buildIntents.NextWaiting();
 					if (intent != null)
 					{
-						// Legacy semantics: a failed attempt drops the request; an
-						// emitted one now stays in the ledger as pending coverage (U2).
+						// Legacy semantics in BOTH modes: a failed attempt drops the
+						// request. A successful emission consumes it under
+						// BuildIntentTracking=OFF (pre-U2 boundary) and retains it as
+						// EmittedPending coverage under ON (see EmitIntentProduction).
 						if (!BuildUnit(bot, intent))
 							buildIntents.Remove(intent);
 					}
@@ -1201,16 +1258,25 @@ namespace OpenRA.Mods.CA.Traits
 				b.Queue != null && b.Queue.Any(pq => Info.UnitQueues.Contains(pq)));
 		}
 
-		// U2: the intent goes EmittedPending BEFORE the tracked enqueue so a
+		// U2 (Sol EB513352): BuildIntentTracking=OFF takes the legacy boundary —
+		// NoteEmitted removes the intent and the order routes plainly, so request
+		// removal and RequestedProductionCount behave exactly as the pre-U2 module.
+		// ON marks the intent EmittedPending BEFORE the tracked enqueue so a
 		// synchronous LocallyQueued disposition during QueueOrderTracked already
 		// sees the emitted state. The order→intent binding is registered first and
 		// dropped only when tracking refuses — the fallback is plain QueueOrder:
 		// the order still routes and the intent stays honestly pending instead of
-		// claiming an observable disposition (Sol 0CB8EF18 §1 fallback).
+		// claiming an observable disposition (Sol 0CB8EF18 §1 fallback; retained
+		// coverage under a refused tracking arm is the slice's explicit bound).
 		void EmitIntentProduction(IBot bot, Actor producer, BuildIntent intent)
 		{
 			var order = Order.StartProduction(producer, intent.Name, 1);
-			intent.State = BuildIntentState.EmittedPending;
+			if (!buildIntents.NoteEmitted(intent, IntentTracking))
+			{
+				bot.QueueOrder(order);
+				return;
+			}
+
 			intentBindings.Bind(order, intent);
 			if (!(bot is IBotOrderTracking tracking) || !tracking.QueueOrderTracked(order, this))
 			{
@@ -1878,10 +1944,15 @@ namespace OpenRA.Mods.CA.Traits
 					.Select(kvp => new MiniYamlNode(kvp.Key, kvp.Value))
 					.ToList()));
 
-			// U2 (Sol 6919D6E4): emitted-but-unproven intents persist by NAME so a
-			// loaded game keeps their coverage withheld — a replayed StartProduction
-			// may still deliver, and a re-request would duplicate it. Emitted only
-			// when non-empty: a save with nothing in flight stays byte-identical.
+			// U2 (Sol 6919D6E4/EB513352): emitted-but-unproven intents persist by
+			// NAME so a loaded game keeps their coverage withheld — a replayed
+			// StartProduction may still deliver, and a re-request would duplicate
+			// it. Written whenever non-empty, in either mode: under
+			// BuildIntentTracking=OFF nothing live can leave Waiting (emit
+			// consumes), so only Unresolved names restored from an armed save can
+			// appear — re-emitting keeps that withheld coverage across further
+			// save cycles instead of silently dropping it. A save with nothing
+			// pending adds no node and stays byte-identical.
 			var pendingNames = buildIntents.PendingNames();
 			if (pendingNames.Length > 0)
 				nodes.Add(new MiniYamlNode("PendingBuildIntents", FieldSaver.FormatValue(pendingNames)));
@@ -1906,6 +1977,13 @@ namespace OpenRA.Mods.CA.Traits
 			// U2: anything emitted at save is Unresolved — coverage withheld, never
 			// auto-reissued (Sol 6919D6E4). Order→intent bindings are runtime-only:
 			// replayed orders are new instances and are never identity-matched.
+			// EB513352 armed-save -> off-load policy, made explicit: the node is
+			// honoured in EITHER mode. Under BuildIntentTracking=OFF the restored
+			// Unresolved names keep counting once (Count covers every state) so a
+			// possibly-reconstructed commitment is never re-requested, yet they
+			// are never Waiting — no silent reissue, no post-armed parity claim —
+			// and they are re-saved as PendingBuildIntents rather than migrated
+			// into the legacy Waiting list.
 			var pendingBuildIntentsNode = data.NodeWithKeyOrDefault("PendingBuildIntents");
 			if (pendingBuildIntentsNode != null)
 				buildIntents.LoadPending(FieldLoader.GetValue<string[]>("PendingBuildIntents", pendingBuildIntentsNode.Value.Value));
