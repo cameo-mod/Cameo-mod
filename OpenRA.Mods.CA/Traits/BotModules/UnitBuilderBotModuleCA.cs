@@ -219,6 +219,10 @@ namespace OpenRA.Mods.CA.Traits
 		public BuildIntentState State;
 		public BotOrderOutcome LastDisposition;
 
+		// U1 review F2: consecutive failed service visits while Waiting — a request
+		// that can never be served is dropped at the cap instead of logging forever.
+		public int FailedSweeps;
+
 		public BuildIntent(string name, BuildIntentState state)
 		{
 			Name = name;
@@ -228,12 +232,16 @@ namespace OpenRA.Mods.CA.Traits
 
 		// Record-only: a refusal moves the intent back to Waiting — that order
 		// instance never issues, so retry is legal. LocallyQueued/Deferred/
-		// IssuedToWorld only annotate; the intent stays pending.
+		// IssuedToWorld only annotate; the intent stays pending. The restored
+		// intent gets a fresh failed-sweep budget — it DID emit once.
 		public void NoteDisposition(BotOrderOutcome outcome)
 		{
 			LastDisposition = outcome;
 			if (outcome == BotOrderOutcome.RefusedLocally)
+			{
 				State = BuildIntentState.Waiting;
+				FailedSweeps = 0;
+			}
 		}
 	}
 
@@ -334,6 +342,13 @@ namespace OpenRA.Mods.CA.Traits
 	public class UnitBuilderBotModuleCA : ConditionalTrait<UnitBuilderBotModuleCAInfo>, IBotTick, IBotNotifyIdleBaseUnits, IBotRequestUnitProduction, IGameSaveTraitData, IBotAircraftBuilder, INotifyActorDisposing, IBotUnitProductionGateInfo, IBotMobileSpendReserve, IBotOrderDisposition
 	{
 		public const int FeedbackTime = 30; // ticks; = a bit over 1s. must be >= netlag.
+
+		// U1 review F2: failed service visits after which a Waiting external request drops.
+		// Visits are FeedbackTime-spaced (~30t), so 250 sweeps is ~7500t — far beyond every
+		// transient gate (UnitDelays/UnitIntervals/limits>0/cash/queue-busy all clear in
+		// bounded time); a request still refused then is treated as never-passable, matching
+		// the reviewer's drop-or-cap remedy (legacy dropped on first failure).
+		const int RequestDropFailedSweeps = 250;
 
 		// S1b (maintainer 2026-10-12): the flat capturer-ratio ceiling — a difficulty line may only
 		// go LOWER, never higher. Clamped inside CapturerCapAdmits so the invariant is testable.
@@ -708,7 +723,13 @@ namespace OpenRA.Mods.CA.Traits
 					{
 						if (BuildUnit(bot, intent, batch))
 							continue;
-						if (PermanentlyInvalidBuildRequest(intent.Name))
+
+						// Review F2: a request that can never be served — provably invalid
+						// (unknown actor, no owned queue route, UnitLimits<=0) or refused on
+						// every service visit for a sustained run — drops once instead of
+						// pinning the waiting set and logging each pass (legacy callers
+						// dropped on first failure; this is the bounded fair-service form).
+						if (PermanentlyInvalidBuildRequest(intent.Name) || ++intent.FailedSweeps >= RequestDropFailedSweeps)
 							buildIntents.Remove(intent);
 					}
 				}
@@ -986,7 +1007,10 @@ namespace OpenRA.Mods.CA.Traits
 					// §3.3/P4: an active composition that provides no feasible unit for this
 					// category falls back to the declared baseline shares once — then to the
 					// existing revert path if the baseline is also empty.
-					if (unit == null && !baselineTried &&
+					// Review F1: only a genuinely empty pick may fall back or revert — when
+					// Reject() skipped candidates (skip.Count > 0) the composition still offered
+					// units and they were refused on gates, so we break without touching it.
+					if (unit == null && !baselineTried && skip.Count == 0 &&
 						activeComposition != null && CompositionAppliesToCategory(activeComposition, queue.Info.Type) &&
 						Info.UnitsToBuild != null && Info.UnitsToBuild.Count > 0)
 					{
@@ -999,7 +1023,7 @@ namespace OpenRA.Mods.CA.Traits
 
 					if (unit == null)
 					{
-						if (activeComposition != null && CompositionAppliesToCategory(activeComposition, queue.Info.Type))
+						if (skip.Count == 0 && activeComposition != null && CompositionAppliesToCategory(activeComposition, queue.Info.Type))
 							RevertToBaselineComposition();
 
 						break;
@@ -1252,6 +1276,11 @@ namespace OpenRA.Mods.CA.Traits
 		bool PermanentlyInvalidBuildRequest(string name)
 		{
 			if (!world.Map.Rules.Actors.TryGetValue(name, out var actorInfo))
+				return true;
+
+			// Review F2: a UnitLimits entry <= 0 can never pass ShouldBuild — the
+			// owned count is always >= the cap. Dropping is exact, not a heuristic.
+			if (Info.UnitLimits != null && Info.UnitLimits.TryGetValue(name, out var unitLimit) && unitLimit <= 0)
 				return true;
 
 			return !actorInfo.TraitInfos<BuildableInfo>().Any(b =>
