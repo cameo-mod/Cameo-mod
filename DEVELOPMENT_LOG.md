@@ -1,3 +1,37 @@
+# 2026-10-17 — Devin: CORE-PRODUCTION-ECONOMY-REPAIRS (01a14504) — U2 local disposition seam `645543846`
+
+*Devin-Developer.* First U2 slice under Coordinator fileset claim `01a148b8`,
+stacked on `988e84cb5`: the narrow local order-disposition routing + the
+request-intent ledger — scoped to what Sol `0CB8EF18` accepted and `6919D6E4`
+corrected. NO `DeadLoadLoss`: engine `723f50f9` is an order-reconstruction
+save system (recorded `StartProduction` packets replay before supplementary
+trait data), so uncertain issued intents stay `Unresolved` with coverage
+withheld forever — never released on assumed loss, never re-requested.
+
+**`TraitsInterfaces.cs`** — `BotOrderOutcome` (LocallyQueued/Deferred/
+RefusedLocally/IssuedToWorld; IssuedToWorld is routing release, NOT
+acceptance/insertion/completion), `IBotOrderDisposition` (record-only sink),
+`IBotOrderTracking` (register-before-evict, grouped orders refused).
+
+**`ModularBot.cs`** — `BotOrderDispositionTracker` world-free seam (reference
+identity — `Order` has no `Equals` override; `TryAdd` refuses observer
+overwrite) + the four verified seams: overflow drop → `RefusedLocally`,
+enqueue → `LocallyQueued`, gate refusal → `RefusedLocally`, budget deferral →
+`Deferred`, `world.IssueOrder` → `IssuedToWorld`. Terminal outcomes consume
+the registration. Unregistered traffic byte-identical.
+
+**`UnitBuilderBotModuleCA.cs`** — `queuedBuildRequests` replaced by
+`BuildIntentLedger` (Waiting/EmittedPending/Unresolved — every state counts
+once in `RequestedProductionCount`). Emitted intents keep coverage instead of
+vanishing at emit; `RefusedLocally` returns to Waiting; `PendingBuildIntents`
+save node (only when non-empty) loads everything as `Unresolved`; legacy
+`QueuedBuildRequests` strings migrate into Waiting once. A non-tracking bot
+falls back to plain `QueueOrder` — intent stays honestly pending.
+
+**Receipts.** Release build 0/0; focused+adjacent 89/89 (17 new tests driving
+the used ledger/bindings/tracker objects in production call order — FIFO/gate
+mechanics remain static call-site evidence). No runtime/merge/qualification.
+
 # 2026-10-17 — Devin: CORE-PRODUCTION-ECONOMY-REPAIRS (01a14504) — U1 static PASS `700E3B45`
 
 *Devin-Developer.* Sol issued targeted static PASS `700E3B45` on
