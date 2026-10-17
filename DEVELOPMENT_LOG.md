@@ -1,3 +1,9 @@
+### 2026-10-17 — Devin-Developer: P1a master-identical cancel binding (Sonnet 607743672 item)
+- Sonnet accepted `607743672` statically; lead made its one non-blocking item blocking for default-off identity: the unconditional branches bound `currentBuilding` into `NotePendingTerminal`, but master binds `AllQueued().LastOrDefault(i => i.Item == name) ?? currentBuilding` — same-name twins would emit different telemetry than master.
+- Fix (static only): new eval seam `BaseBuilderQueueEvalCA.CancelBindTarget<T>(queued, itemNameOf, itemName, fallback)` = master's `LastOrDefault ?? fallback` verbatim; used at the limit (~QM:999), exhaustion (~QM:1172) and saturation (~QM:1218) cancel sites. Under a live cert the resolved last IS currentBuilding (unique enabled same-name + resolved==intended) — identical on both paths. Relocation mass-cancel already bound `item` per master (it iterates the enumerable directly); demand path is name-bound via NoteExternalCancel — no divergence.
+- Fixture `CancelBindTargetResolvesTheLastSameNameEntry`: two same-name items bind the tail; no-match falls back to head; single-entry = the cert-equality case.
+- Commit `39f875fa2` (3 files, +60/−6). Sonnet re-review pending.
+
 ### 2026-10-17 — Devin-Developer: P1a default-off defect fix
 - Sonnet 666ddd0bd defect confirmed: `EvaluatePlacementCancelProtection` returned no `Allow`, so the relocation mass-cancel, limit-reached and saturation gates required a certificate for EVERY item — flag or not — and a non-refinery item could never hold one (the scan binds `certTargetName`). Default-off was broken for every class where master cancels unconditionally.
 - Fix (static only, no build/test/run):
