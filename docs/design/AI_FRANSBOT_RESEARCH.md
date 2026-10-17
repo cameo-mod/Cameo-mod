@@ -1,4 +1,5 @@
 # Fransbot research: what Cameo can take, and the phase-6+ handoff
+> **Status banner, 2026-10-17 — dated snapshot, not the queue.** Written 2026-09-26. Port status and numbers below are historical; per-file truth is `HARVEST_LEDGER.md` and the queue is [`AI_MASTER_PLAN.md`](AI_MASTER_PLAN.md) §3.
 
 _Written 2026-09-26 by Claude-Local (coordinator) for **Devin-Cloud (AI lane)** and the maintainer.
 Sources: the maintainer's conversation with fransotto, author of FransBots, on 2026-09-24; the

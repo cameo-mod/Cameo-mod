@@ -1,4 +1,5 @@
 # How to build the best RTS bot — research round 2, measured against the Frankenstein
+> **Status banner, 2026-10-17 — dated snapshot, not the queue.** Written 2026-09-28. Its §0 ranked list is historical; the work queue of record is [`AI_MASTER_PLAN.md`](AI_MASTER_PLAN.md) §3, and the maintained synthesis is [`../AI_ARCHITECTURE_RESEARCH_SYNTHESIS_MASTER_2026-10-06.md`](../AI_ARCHITECTURE_RESEARCH_SYNTHESIS_MASTER_2026-10-06.md). The research itself stays valid; do not move this file (many tools and code comments cite its path).
 
 _Written 2026-09-28 by Claude-Local on a maintainer order: "do a deep research on how to make the
 best RTS game bot, use what we have written down from our last deep research but expand it with
