@@ -1,3 +1,19 @@
+# 2026-10-17 — Devin: CORE-PRODUCTION-ECONOMY-REPAIRS (01a14504) — U1 static PASS `700E3B45`
+
+*Devin-Developer.* Sol issued targeted static PASS `700E3B45` on
+`988e84cb5` (`DISPOSITION_2026-10-17_u1_988e84cb5_sol.md` in the fleet
+drop); Reviewer `ABAA42AC` independently closed the aircraft gate. All Sol
+code-review blockers for the bounded fair-service substage are closed —
+this is source-stage acceptance only: no merge/push, activation, default
+change, games/JIT, or runtime qualification authority was granted.
+
+**Nonblocking notes** (opportunistic, no amendment cycle required): the
+fixture exercises the used `PendingAircraftDelta` seam rather than the
+module's complete external transition, and the cap-minus-one assertion
+uses a constant expression. Residual bounds stand as recorded below —
+owned-alive headroom only, never-armed-save byte identity, ordinals ≠
+capture continuity, `CombatInfantryFloor` unaccepted.
+
 # 2026-10-17 — Devin: CORE-PRODUCTION-ECONOMY-REPAIRS (01a14504) — U1 ECAFF220 successor `988e84cb5`
 
 *Devin-Developer.* Successor fix-forward answering Sol's `ECAFF220` HOLD on
